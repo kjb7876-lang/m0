@@ -5,7 +5,7 @@
   "approved": true,
   "ownerObservedReadOnly": true,
   "proposalOnly": false,
-  "status": "APPROVED_EXISTING_REPOSITORY_UPLOAD_PENDING",
+  "status": "SOURCE_UPLOADED_PAGES_ACTIVATION_REQUIRED",
   "approvalRecordedUTC": "2026-10-16T07:57:48.283567+00:00",
   "approvalScope": [
     "Use existing public repository kjb7876-lang/m0",
@@ -20,8 +20,8 @@
   "relayURL": null,
   "actualFourRemoteNetworksTested": false,
   "browserGPUVerified": false,
-  "blockingStep": "Full verified runtime upload and Pages activation remain pending. Pages Source must be GitHub Actions; the connected tools do not expose that setting. Render service connection also pending.",
-  "continuation": "Use connected GitHub blob/tree/commit/ref tools for the approved m0 upload. Record verified deployment results separately; no passwords or API tokens in chat.",
+  "blockingStep": "Set m0 Settings > Pages > Source to GitHub Actions, then rerun the workflow. Render app connection is still required for the relay service.",
+  "continuation": "No repeat deployment approval is needed. Use the existing workflow after Pages setup. Never request passwords or API tokens in chat.",
   "repositoryURL": "https://github.com/kjb7876-lang/m0",
   "repositoryObservedAccessible": true,
   "repositoryPermissionsObserved": {
@@ -30,5 +30,20 @@
   },
   "targetUpdatedUTC": "2026-10-16T08:15:40.827497+00:00",
   "expectedPagesPath": "/m0/",
-  "deploymentMethod": "GitHub Actions: verified build-input media packs -> actual static _pages/docs -> Pages artifact"
+  "deploymentMethod": "GitHub Actions: verified build-input media packs -> actual static _pages/docs -> Pages artifact",
+  "remoteUploaded": true,
+  "uploadCommitSHA": "fce101f9072a9ef8cab03119d190800ca009ae69",
+  "uploadUTC": "2026-10-16T08:34:37Z",
+  "sourceTreeSHA": "43785775ed9616304924a0d2d6d2176839b1a6ba",
+  "uploadedRepositoryFiles": 283,
+  "workflowRunID": 38874633964,
+  "workflowRunURL": "https://github.com/kjb7876-lang/m0/actions/runs/38874633964",
+  "remoteBuildReconstructionPassed": true,
+  "remoteStaticHTTPPassed": true,
+  "runtimeFilesVerified": 1906,
+  "runtimeBytes": 464764252,
+  "webHTMLSHA256": "8b26b5e6a94a949bc1a94bceaf635b9e5ad4c8c5c4f2898d2dc78330529be38b",
+  "sourceHTMLSHA256": "5728f41c55dabc9a345297bb1ce834464b6dcececf74801f4feb8da4ec8a9602",
+  "pagesConfigurationError": "Configure Pages: GET Pages site returned 404 Not Found",
+  "pagesConfigurationErrorUTC": "2026-10-16T08:36:07Z"
 }
