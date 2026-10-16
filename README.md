@@ -6,7 +6,9 @@
 
 웹 게임: [스토리월드 R62 실행](https://kjb7876-lang.github.io/m0/) · Pages 배포 성공: 2026-10-16 17:46 KST · 게임 소스 `fce101f9072a9ef8cab03119d190800ca009ae69`. 실제 공개 HTML의 SHA-256 일치를 확인했습니다. 브라우저/GPU에서의 플레이 검증은 별도입니다.
 
-멀티 중계는 아직 배포하지 않았습니다. [Render 무료 중계 서버 배포](https://render.com/deploy?repo=https://github.com/kjb7876-lang/m0)에서 로그인한 뒤 Free 서비스 1개를 검토하고 배포합니다. 저장소 루트의 `render.yaml`에 Node 24, 실행 명령, Pages 허용 출처가 입력돼 있습니다. 이 버튼만으로 서버가 이미 생성된 것은 아닙니다. 발급된 공개 `onrender.com` 주소를 확인한 뒤 WSS 연결 검증을 진행합니다.
+멀티 중계는 https://storyworld-r62-relay.onrender.com 에서 공개 HTTPS/WSS 검사를 통과했습니다. 게임에서 `wss://storyworld-r62-relay.onrender.com/ws`를 사용합니다. 방장 포함 4개 공개 연결, 5번째 거절, 공유 상태, 맵 전환, 재접속, 방장 종료 등 11개 자동 검사를 수행했습니다. 실제 4인 기기·서로 다른 네트워크의 게임 플레이는 별도입니다. 이미 서버를 생성했다면 다시 만들 필요가 없습니다.
+
+자신의 별도 서버가 필요한 경우에만 [Render 무료 중계 서버 배포](https://render.com/deploy?repo=https://github.com/kjb7876-lang/m0)에서 로그인한 뒤 Free 서비스 1개를 검토하고 배포합니다. 저장소 루트의 `render.yaml`에 Node 24, 실행 명령, Pages 허용 출처가 입력돼 있습니다. 이 버튼만으로 서버가 이미 생성된 것은 아닙니다. 발급된 공개 `onrender.com` 주소를 확인한 뒤 WSS 연결 검증을 진행합니다.
 
 - [배포·실행·롤백 안내](README_DEPLOY_KO.md)
 - [중계 서버 안내](relay/README_KO.md)
