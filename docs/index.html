@@ -10938,10 +10938,10 @@ window.__STORYWORLD_GENERATED_ASSETS_R62__={"assets/auras-r62/ego-halo.webp":"1f
 (function(){
  'use strict';
  const revision='R62',gameId='storyworld',protocol=1,configKey='storyworld.coop.r62.relay',nicknameKey='storyworld.coop.r62.nickname';
- const reconnectWindow=45000,connectTimeout=70000,maxMessageBytes=524288;
+ const reconnectWindow=45000,connectTimeout=90000,maxMessageBytes=524288;
  const listeners=new Map(),metrics={sent:0,received:0,stale:0,reconnects:0,invalid:0};
  const state={status:'solo',role:null,selfId:null,hostId:null,code:null,players:[],epoch:0,phase:'lobby',regionId:null,paused:false,simReady:false,message:'혼자 플레이 중',error:null};
- let socket=null,sessionToken=null,endpoint='',nickname='',character='hwando',intent=null,generation=0,closing=false,reconnectDeadline=0,reconnectTimer=null,connectTimer=null,attempt=0,simStarted=false,receiveChain=Promise.resolve(),uiView=null,lastLobbyFocus=null,hostMenuPaused=false,lastStoryKey='';
+ let socket=null,sessionToken=null,endpoint='',nickname='',character='hwando',intent=null,retryOptions=null,generation=0,closing=false,reconnectDeadline=0,reconnectTimer=null,connectTimer=null,attempt=0,simStarted=false,receiveChain=Promise.resolve(),uiView=null,lastLobbyFocus=null,hostMenuPaused=false,lastStoryKey='';
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const byId=id=>document.getElementById(id),sim=()=>window.__STORYWORLD_COOP_SIM_R62__,active=()=>state.status!=='solo'&&state.status!=='closed';
  const heroes=()=>typeof HEROES==='object'?HEROES:{hwando:{name:'환도'}};
@@ -11033,15 +11033,16 @@ window.__STORYWORLD_GENERATED_ASSETS_R62__={"assets/auras-r62/ego-halo.webp":"1f
   ws.onclose=()=>{
    clearTimeout(connectTimer);if(token!==generation||closing)return;socket=null;
    if(state.role==='guest'&&sessionToken){state.status='reconnecting';state.paused=true;Promise.resolve(sim()?.receive?.({type:'disconnected',reason:'network'})).catch(()=>{});if(!reconnectDeadline)reconnectDeadline=Date.now()+reconnectWindow;clearTimeout(reconnectTimer);reconnectTimer=setTimeout(retry,Math.min(6000,700*Math.pow(1.5,attempt)));notice('연결이 잠시 끊겼습니다. 최대 45초 동안 재접속합니다.');updateBadge();}
-   else void shutdown(state.role==='host'?'방장 연결이 끊어져 방이 종료되었습니다. 협동 저장으로 새 방을 만들 수 있습니다.':'중계 서버에 접속하지 못했습니다. 서버 주소와 무료 서비스 상태를 확인하세요.',true);
+   else void shutdown(state.role==='host'?'방장 연결이 끊어져 방이 종료되었습니다. 협동 저장으로 새 방을 만들 수 있습니다.':'연결에 실패했습니다. Render 무료 서버가 잠들어 있었다면 깨어나는 데 약 1분 걸릴 수 있습니다. 잠시 기다린 뒤 다시 연결을 누르세요. WSS 주소도 확인하세요.',true);
   };
  }
  async function connect(kind,options={}){
   if(active())throw Error('현재 방을 나간 뒤 새 방에 접속하세요.');
+  if(kind!=='create'&&kind!=='join')throw Error('지원하지 않는 입장 방식입니다.');
   endpoint=validateEndpoint(options.endpoint||window.STORYWORLD_RELAY_URL||stored(configKey)||'wss://storyworld-r62-relay.onrender.com/ws');nickname=String(options.nick||'동행자').normalize('NFKC').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,24)||'동행자';character=Object.hasOwn(heroes(),options.character)?options.character:'hwando';
-  const code=String(options.code||'').trim().toUpperCase().replace(/[\s-]/g,'');if(kind!=='create'&&kind!=='join')throw Error('지원하지 않는 입장 방식입니다.');if(kind==='join'&&!/^[A-Z0-9]{4,10}$/.test(code))throw Error('친구가 알려준 방 코드를 입력하세요.');
+  const code=String(options.code||'').trim().toUpperCase().replace(/[\s-]/g,'');if(kind==='join'&&!/^[A-Z0-9]{4,10}$/.test(code))throw Error('친구가 알려준 방 코드를 입력하세요.');
   if(!sim()?.start)throw Error('협동 기능을 불러오지 못했습니다.');
-  store(configKey,endpoint);store(nicknameKey,nickname);intent={type:kind,code};closing=false;sessionToken=null;simStarted=false;hostMenuPaused=false;lastStoryKey='';receiveChain=Promise.resolve();
+  store(configKey,endpoint);store(nicknameKey,nickname);intent={type:kind,code};retryOptions={kind,endpoint,nick:nickname,character,code};closing=false;sessionToken=null;simStarted=false;hostMenuPaused=false;lastStoryKey='';receiveChain=Promise.resolve();
   Object.assign(state,{status:'connecting',role:null,selfId:null,hostId:null,code:null,players:[],epoch:0,phase:'lobby',regionId:null,paused:true,simReady:false,error:null});
   notice('무료 중계 서버에 연결 중입니다. 첫 접속은 약 1분 걸릴 수 있습니다.');showConnecting();connectSocket(false);return true;
  }
@@ -11050,17 +11051,17 @@ window.__STORYWORLD_GENERATED_ASSETS_R62__={"assets/auras-r62/ego-halo.webp":"1f
   const ws=socket;socket=null;sessionToken=null;intent=null;hostMenuPaused=false;lastStoryKey='';try{if(ws?.readyState===1)ws.send(JSON.stringify({type:'leave'}));ws?.close(1000,'leave');}catch(_){}
   if(simStarted){try{await sim()?.stop?.();}catch(_){message+=' 혼자 하기 복원에 실패했습니다. 기존 저장 파일에서 이어하기를 사용하세요.';}}simStarted=false;
   Object.assign(state,{status:'closed',role:null,selfId:null,hostId:null,code:null,players:[],epoch:0,phase:'lobby',paused:false,simReady:false});closing=false;uiView=null;notice(message);emit('closed',{message});
-  if(show){openPanel('<div class="eyebrow">CO-OP / 연결 종료</div><h2>협동 방에서 나왔습니다</h2><p>'+esc(message)+'</p><div class="actions"><button id="coopClosedSolo62" class="primary">혼자 하기로 돌아가기</button><button id="coopClosedRetry62">다시 연결</button></div>');bind('coopClosedSolo62',solo);bind('coopClosedRetry62',()=>showConnect('join'));}
+  if(show){openPanel('<div class="eyebrow">CO-OP / 연결 종료</div><h2>협동 방에서 나왔습니다</h2><p>'+esc(message)+'</p><div class="actions"><button id="coopClosedSolo62" class="primary">혼자 하기로 돌아가기</button><button id="coopClosedRetry62">다시 연결</button></div>');bind('coopClosedSolo62',solo);bind('coopClosedRetry62',()=>showConnect(retryOptions?.kind||'create',retryOptions||{}));}
  }
  async function solo(){if(active())await shutdown('혼자 하기로 돌아왔습니다.',false);state.status='solo';uiView=null;notice('혼자 플레이 중');if(typeof started!=='undefined'&&started&&player&&player.hp>0&&!storyScene)closePanel(true);else showTitle();}
  function bind(id,fn){const n=byId(id);if(!n)return;n.onclick=()=>{try{if(typeof unlockAudio==='function')unlockAudio();Promise.resolve(fn()).catch(e=>notice(e?.message||'요청을 처리하지 못했습니다.',true));}catch(e){notice(e?.message||'요청을 처리하지 못했습니다.',true);}};}
  function protectForm(){for(const n of document.querySelectorAll('#panel input,#panel select'))for(const type of ['keydown','keyup'])n.addEventListener(type,e=>e.stopPropagation());}
  function fieldLabel(){return'<p class="small muted">최대 4명 · 맵·서사는 방장 기준 · 보상과 패시브는 이 협동 저장에만 기록됩니다.<br>게스트의 혼자 하기 저장은 바뀌지 않습니다. 방장 탭이 멈추거나 서버가 재시작되면 일시 정지 또는 방 종료가 발생할 수 있습니다.</p>';}
- function showConnect(kind='create'){
+ function showConnect(kind='create',prefill={}){
   if(active()){showLobby();return;}uiView='connect';
-  const saved=window.STORYWORLD_RELAY_URL||stored(configKey)||'wss://storyworld-r62-relay.onrender.com/ws',nick=stored(nicknameKey)||'동행자';
-  openPanel('<button id="coopBack62" class="close">돌아가기</button><div class="eyebrow">STORYWORLD / ONLINE CO-OP</div><h2>'+(kind==='create'?'방 만들기':'방 코드로 참가')+'</h2><div class="coopForm62"><label>닉네임<input id="coopNick62" maxlength="24" value="'+esc(nick)+'" autocomplete="nickname"></label><label>영웅<select id="coopHero62">'+Object.entries(heroes()).map(([id,h])=>'<option value="'+esc(id)+'">'+esc(h.name)+'</option>').join('')+'</select></label>'+(kind==='join'?'<label>방 코드<input id="coopCode62" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="친구가 알려준 코드"></label>':'')+'<label>중계 서버 WSS 주소<input id="coopRelay62" type="url" value="'+esc(saved)+'" placeholder="wss://서버이름.onrender.com/ws" spellcheck="false" autocomplete="off"></label></div><p class="small">친구와 같은 게임 주소·R62 빌드·중계 서버를 사용하세요. 무료 Render 서버는 첫 접속에 약 1분 걸릴 수 있습니다.</p><p id="coopNotice62" class="coopNotice62" role="status" aria-live="polite"></p><div class="actions"><button id="coopConnect62" class="primary">'+(kind==='create'?'방 만들기':'참가')+'</button><button id="coopOther62">'+(kind==='create'?'방 코드로 참가':'방 만들기')+'</button></div>'+fieldLabel());
-  bind('coopBack62',solo);bind('coopOther62',()=>showConnect(kind==='create'?'join':'create'));bind('coopConnect62',()=>connect(kind,{endpoint:byId('coopRelay62').value,nick:byId('coopNick62').value,character:byId('coopHero62').value,code:byId('coopCode62')?.value}));protectForm();
+  const saved=prefill.endpoint||window.STORYWORLD_RELAY_URL||stored(configKey)||'wss://storyworld-r62-relay.onrender.com/ws',nick=prefill.nick||stored(nicknameKey)||'동행자';
+  openPanel('<button id="coopBack62" class="close">돌아가기</button><div class="eyebrow">STORYWORLD / ONLINE CO-OP</div><h2>'+(kind==='create'?'방 만들기':'방 코드로 참가')+'</h2><div class="coopForm62"><label>닉네임<input id="coopNick62" maxlength="24" value="'+esc(nick)+'" autocomplete="nickname"></label><label>영웅<select id="coopHero62">'+Object.entries(heroes()).map(([id,h])=>'<option value="'+esc(id)+'" '+(prefill.character===id?'selected':'')+'>'+esc(h.name)+'</option>').join('')+'</select></label>'+(kind==='join'?'<label>방 코드<input id="coopCode62" maxlength="10" value="'+esc(prefill.code||'')+'" autocomplete="off" autocapitalize="characters" placeholder="친구가 알려준 코드"></label>':'')+'<label>중계 서버 WSS 주소<input id="coopRelay62" type="url" value="'+esc(saved)+'" placeholder="wss://서버이름.onrender.com/ws" spellcheck="false" autocomplete="off"></label></div><p class="small">친구와 같은 게임 주소·R62 빌드·중계 서버를 사용하세요. Render 무료 서버가 잠들어 있으면 다시 깨어나는 데 약 1분 걸릴 수 있습니다. 연결 화면에 오류가 뜨면 잠시 기다린 뒤 같은 방 만들기 또는 참가를 다시 누르세요.</p><p id="coopNotice62" class="coopNotice62" role="status" aria-live="polite"></p><div class="actions"><button id="coopConnect62" class="primary">'+(kind==='create'?'방 만들기':'참가')+'</button><button id="coopOther62">'+(kind==='create'?'방 코드로 참가':'방 만들기')+'</button></div>'+fieldLabel());
+  bind('coopBack62',solo);bind('coopOther62',()=>showConnect(kind==='create'?'join': 'create',{...prefill,code:''}));bind('coopConnect62',()=>connect(kind,{endpoint:byId('coopRelay62').value,nick:byId('coopNick62').value,character:byId('coopHero62').value,code:byId('coopCode62')?.value}));protectForm();
  }
  function showConnecting(){uiView='connecting';openPanel('<div class="eyebrow">CO-OP / 연결 중</div><h2>동행할 세계를 연결합니다</h2><p id="coopNotice62" class="coopNotice62" role="status" aria-live="polite">'+esc(state.message)+'</p><div class="actions"><button id="coopCancel62">취소</button></div>'+fieldLabel());bind('coopCancel62',()=>shutdown('연결을 취소했습니다.',true));}
  function lobbyBody(){
