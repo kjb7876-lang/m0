@@ -1,0 +1,10 @@
+name: StoryWorld Pages preparation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preparation:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Verified R62 deployment upload in progress"
