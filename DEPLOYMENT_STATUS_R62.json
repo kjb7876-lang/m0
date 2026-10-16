@@ -1,0 +1,34 @@
+{
+  "owner": "kjb7876-lang",
+  "name": "m0",
+  "visibility": "public",
+  "approved": true,
+  "ownerObservedReadOnly": true,
+  "proposalOnly": false,
+  "status": "APPROVED_EXISTING_REPOSITORY_UPLOAD_PENDING",
+  "approvalRecordedUTC": "2026-10-16T07:57:48.283567+00:00",
+  "approvalScope": [
+    "Use existing public repository kjb7876-lang/m0",
+    "Upload dedicated StoryWorld web/client/relay source",
+    "Publish verified static game from main using GitHub Actions",
+    "Deploy Free Node.js WebSocket relay to Render without paid upgrades or card registration"
+  ],
+  "remotePublished": false,
+  "deploymentSHA": null,
+  "deploymentUTC": null,
+  "gameURL": null,
+  "relayURL": null,
+  "actualFourRemoteNetworksTested": false,
+  "browserGPUVerified": false,
+  "blockingStep": "Full verified runtime upload and Pages activation remain pending. Pages Source must be GitHub Actions; the connected tools do not expose that setting. Render service connection also pending.",
+  "continuation": "Use connected GitHub blob/tree/commit/ref tools for the approved m0 upload. Record verified deployment results separately; no passwords or API tokens in chat.",
+  "repositoryURL": "https://github.com/kjb7876-lang/m0",
+  "repositoryObservedAccessible": true,
+  "repositoryPermissionsObserved": {
+    "admin": true,
+    "push": true
+  },
+  "targetUpdatedUTC": "2026-10-16T08:15:40.827497+00:00",
+  "expectedPagesPath": "/m0/",
+  "deploymentMethod": "GitHub Actions: verified build-input media packs -> actual static _pages/docs -> Pages artifact"
+}

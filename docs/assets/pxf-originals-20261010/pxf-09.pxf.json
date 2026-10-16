@@ -1,0 +1,499 @@
+{
+  "name": "축복의 손길 · 회복",
+  "settings": {
+    "size": 32,
+    "frames": 8,
+    "fps": 20,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Shape",
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.5,
+        "size": {
+          "k": [
+            [
+              0,
+              1.3333333333333333
+            ],
+            [
+              3,
+              8.666666666666666
+            ],
+            [
+              7,
+              12
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 1,
+        "stroke": 0,
+        "falloff": 1,
+        "intensity": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0.55
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.5
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n3",
+      "type": "Tint",
+      "params": {
+        "color": "#f6d38d",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.6
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n4",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.75,
+        "x1": 0.15000000000000002,
+        "y1": 0.65,
+        "x2": 0.28,
+        "y2": 0.3,
+        "x3": 0.5,
+        "y3": 0.22,
+        "width": 0.8666666666666667,
+        "taper": 0.8,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.6,
+        "vM": 1,
+        "vB": 0.3,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n5",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.65
+      },
+      "x": 250,
+      "y": 190
+    },
+    {
+      "id": "n6",
+      "type": "Tint",
+      "params": {
+        "color": "#fff3ce",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.8
+      },
+      "x": 460,
+      "y": 190
+    },
+    {
+      "id": "n7",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.5,
+        "y0": 0.75,
+        "x1": 0.85,
+        "y1": 0.65,
+        "x2": 0.72,
+        "y2": 0.3,
+        "x3": 0.5,
+        "y3": 0.22,
+        "width": 0.8666666666666667,
+        "taper": 0.8,
+        "from": {
+          "k": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "to": {
+          "k": [
+            [
+              0,
+              0.1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              7,
+              1
+            ]
+          ]
+        },
+        "span": true,
+        "vA": 0.6,
+        "vM": 1,
+        "vB": 0.3,
+        "intensity": 1
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n8",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.65
+      },
+      "x": 250,
+      "y": 340
+    },
+    {
+      "id": "n9",
+      "type": "Tint",
+      "params": {
+        "color": "#fff3ce",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.8
+      },
+      "x": 460,
+      "y": 340
+    },
+    {
+      "id": "n10",
+      "type": "Particles",
+      "params": {
+        "count": 8,
+        "seed": 33,
+        "emit": "burst",
+        "start": 0,
+        "span": 1,
+        "life": 0.9,
+        "lifeVar": 0.1,
+        "area": "box",
+        "x": 0.5,
+        "y": 0.5,
+        "aw": 7.333333333333333,
+        "ah": 4.666666666666666,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 50,
+        "speed": 0.7,
+        "speedVar": 0.5,
+        "gravity": 0,
+        "drag": 0.035,
+        "turb": 0,
+        "sizeA": 0.7999999999999999,
+        "sizeB": 0.06666666666666667,
+        "pshape": "diamond",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 1,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0
+      },
+      "x": 40,
+      "y": 490
+    },
+    {
+      "id": "n11",
+      "type": "Glow",
+      "params": {
+        "radius": 1,
+        "strength": 0.65
+      },
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "n12",
+      "type": "Tint",
+      "params": {
+        "color": "#fff8dd",
+        "amount": 1,
+        "bright": 1,
+        "opacity": 0.85
+      },
+      "x": 460,
+      "y": 490
+    },
+    {
+      "id": "n13",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n14",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n15",
+      "type": "Blend",
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n16",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0.15
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 1300,
+      "y": 40
+    },
+    {
+      "id": "n17",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.5
+      },
+      "x": 1510,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n2",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n3",
+      "p": 0
+    },
+    {
+      "f": "n4",
+      "t": "n5",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n6",
+      "p": 0
+    },
+    {
+      "f": "n7",
+      "t": "n8",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n9",
+      "p": 0
+    },
+    {
+      "f": "n10",
+      "t": "n11",
+      "p": 0
+    },
+    {
+      "f": "n11",
+      "t": "n12",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n13",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n13",
+      "p": 1
+    },
+    {
+      "f": "n13",
+      "t": "n14",
+      "p": 0
+    },
+    {
+      "f": "n9",
+      "t": "n14",
+      "p": 1
+    },
+    {
+      "f": "n14",
+      "t": "n15",
+      "p": 0
+    },
+    {
+      "f": "n12",
+      "t": "n15",
+      "p": 1
+    },
+    {
+      "f": "n15",
+      "t": "n16",
+      "p": 0
+    },
+    {
+      "f": "n16",
+      "t": "n17",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "referenceCell": 62,
+    "logicalSize": 64,
+    "blend": "normal",
+    "durationMs": 400,
+    "role": "buff"
+  },
+  "sourceKey": "[\"buff\",\"gold\",[\"#976730\",\"#d1a65c\",\"#f7d78e\",\"#fff0c7\",\"#fffefa\"],4321,30,80,1,360,0,2,0,55,150,1,0,0,false]",
+  "sourceRecipe": {
+    "id": "high-priestess-contact",
+    "label": "축복의 손길 · 회복",
+    "effect": "buff",
+    "palette": "gold",
+    "pxfId": "hero-high-priestess-contact",
+    "colors": [
+      "#976730",
+      "#d1a65c",
+      "#f7d78e",
+      "#fff0c7",
+      "#fffefa"
+    ],
+    "params": {
+      "count": 30,
+      "life": 80,
+      "speed": 1,
+      "spread": 360,
+      "gravity": 0,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 0,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    },
+    "seed": 4321
+  },
+  "provenance": {
+    "purpose": "축복의 손길 · 회복",
+    "direction": "Ivory/gold restoration, transparent annular wave; projection and arrival timing come from combat state."
+  }
+}

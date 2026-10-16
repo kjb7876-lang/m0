@@ -1,0 +1,369 @@
+{
+  "name": "늑대인간 · 혈조 잔흔",
+  "settings": {
+    "size": 64,
+    "frames": 12,
+    "fps": 54.54545454545455,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.13,
+        "y0": 0.55,
+        "x1": 0.34,
+        "y1": 0.61,
+        "x2": 0.66,
+        "y2": 0.5800000000000001,
+        "x3": 0.85,
+        "y3": 0.32,
+        "width": {
+          "k": [
+            [
+              0,
+              2.6
+            ],
+            [
+              3,
+              1.4
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        },
+        "taper": 1,
+        "from": {
+          "a": 0,
+          "b": 1,
+          "e": "in",
+          "t0": 0,
+          "t1": 0.75
+        },
+        "to": 1,
+        "span": true,
+        "vA": 0.06,
+        "vM": 0.9,
+        "vB": 0.18,
+        "intensity": {
+          "a": 0.9,
+          "b": 0.3,
+          "e": "out",
+          "t0": 0,
+          "t1": 1
+        }
+      },
+      "x": 40,
+      "y": 40
+    },
+    {
+      "id": "n2",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.13,
+        "y0": 0.63,
+        "x1": 0.34,
+        "y1": 0.69,
+        "x2": 0.66,
+        "y2": 0.66,
+        "x3": 0.85,
+        "y3": 0.4,
+        "width": {
+          "k": [
+            [
+              0,
+              2.6
+            ],
+            [
+              3,
+              1.4
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        },
+        "taper": 1,
+        "from": {
+          "a": 0,
+          "b": 1,
+          "e": "in",
+          "t0": 0,
+          "t1": 0.75
+        },
+        "to": 1,
+        "span": true,
+        "vA": 0.06,
+        "vM": 0.9,
+        "vB": 0.18,
+        "intensity": {
+          "a": 0.9,
+          "b": 0.3,
+          "e": "out",
+          "t0": 0,
+          "t1": 1
+        }
+      },
+      "x": 40,
+      "y": 190
+    },
+    {
+      "id": "n3",
+      "type": "Stroke",
+      "params": {
+        "x0": 0.13,
+        "y0": 0.71,
+        "x1": 0.34,
+        "y1": 0.7699999999999999,
+        "x2": 0.66,
+        "y2": 0.74,
+        "x3": 0.85,
+        "y3": 0.48000000000000004,
+        "width": {
+          "k": [
+            [
+              0,
+              2.6
+            ],
+            [
+              3,
+              1.4
+            ],
+            [
+              7,
+              0
+            ]
+          ]
+        },
+        "taper": 1,
+        "from": {
+          "a": 0,
+          "b": 1,
+          "e": "in",
+          "t0": 0,
+          "t1": 0.75
+        },
+        "to": 1,
+        "span": true,
+        "vA": 0.06,
+        "vM": 0.9,
+        "vB": 0.18,
+        "intensity": {
+          "a": 0.9,
+          "b": 0.3,
+          "e": "out",
+          "t0": 0,
+          "t1": 1
+        }
+      },
+      "x": 40,
+      "y": 340
+    },
+    {
+      "id": "n4",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 250,
+      "y": 40
+    },
+    {
+      "id": "n5",
+      "type": "Blend",
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      },
+      "x": 460,
+      "y": 40
+    },
+    {
+      "id": "n6",
+      "type": "Palette",
+      "params": {
+        "colors": [
+          "#340d25",
+          "#9b1435",
+          "#ed2447",
+          "#ff746b",
+          "#fff1dc"
+        ],
+        "cutoff": 0.15,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      },
+      "x": 670,
+      "y": 40
+    },
+    {
+      "id": "n7",
+      "type": "Mask",
+      "params": {
+        "mode": "multiply",
+        "strength": 1
+      },
+      "x": 880,
+      "y": 40
+    },
+    {
+      "id": "n8",
+      "type": "Tint",
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0.9
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              4,
+              0.9
+            ],
+            [
+              7,
+              0.4
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ]
+          ]
+        }
+      },
+      "x": 1090,
+      "y": 40
+    },
+    {
+      "id": "n9",
+      "type": "Output",
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.15
+      },
+      "x": 1300,
+      "y": 40
+    }
+  ],
+  "links": [
+    {
+      "f": "n1",
+      "t": "n4",
+      "p": 0
+    },
+    {
+      "f": "n2",
+      "t": "n4",
+      "p": 1
+    },
+    {
+      "f": "n4",
+      "t": "n5",
+      "p": 0
+    },
+    {
+      "f": "n3",
+      "t": "n5",
+      "p": 1
+    },
+    {
+      "f": "n5",
+      "t": "n6",
+      "p": 0
+    },
+    {
+      "f": "n6",
+      "t": "n7",
+      "p": 0
+    },
+    {
+      "f": "n5",
+      "t": "n7",
+      "p": 1
+    },
+    {
+      "f": "n7",
+      "t": "n8",
+      "p": 0
+    },
+    {
+      "f": "n8",
+      "t": "n9",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 112,
+    "blend": "normal",
+    "impactFrame": 0,
+    "durationMs": 220,
+    "role": "slash",
+    "referenceCell": 62
+  },
+  "sourceKey": "[\"slash\",\"ares\",[\"#fff1dc\",\"#ff746b\",\"#ed2447\",\"#9b1435\",\"#340d25\"],92607,12,13.2,3.4,70,0.05,2,0,55,150,1,5,0,false]",
+  "sourceRecipe": {
+    "id": "werewolf-wake",
+    "label": "늑대인간 · 혈조 잔흔",
+    "effect": "slash",
+    "palette": "ares",
+    "pxfId": "hero-werewolf-wake",
+    "colors": [
+      "#fff1dc",
+      "#ff746b",
+      "#ed2447",
+      "#9b1435",
+      "#340d25"
+    ],
+    "params": {
+      "count": 12,
+      "life": 13.2,
+      "speed": 3.4,
+      "spread": 70,
+      "gravity": 0.05,
+      "size": 2,
+      "angle": 0,
+      "pitch": 55,
+      "arc": 150,
+      "dir": 1,
+      "alt": false,
+      "ghosts": 5,
+      "glow": 0,
+      "ring": false,
+      "flash": 0,
+      "hitstop": 0,
+      "shake": 0,
+      "slowmo": 1,
+      "loop": false,
+      "interval": 1.1
+    },
+    "seed": 92607
+  },
+  "provenance": {
+    "author": "Hero Inc procedural VFX",
+    "character": "werewolf-form",
+    "purpose": "늑대인간 · 혈조 잔흔"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "purpose": "Byte-preserving source assets for HAPIL / StoryWorld EGO integration.",
+  "branch": "assets/ego-originals-20261008",
+  "directory": "assets/ego-originals-20261008/",
+  "files": [
+    {
+      "filename": "analysis_output_2_walk_dodge.png",
+      "source_name": "분석 출력 2.png",
+      "role": "walking and dodge atlas",
+      "bytes": 1368283,
+      "sha256": "c29ca613f90f9d0beb43868db0e1f4074d9d2f87492502179eaa639e20bf33ab"
+    },
+    {
+      "filename": "analysis_output_1_attack.png",
+      "source_name": "분석 출력 1.png",
+      "role": "attack atlas",
+      "bytes": 1537843,
+      "sha256": "93d4f9256d1e36b38ad1f44e3f0e0bfc418904c4011bd6b78f5fcf96ab16394b"
+    },
+    {
+      "filename": "916b1ac1-15ea-49dc-b3b0-f91ea1b8ef81.png",
+      "source_name": "916b1ac1-15ea-49dc-b3b0-f91ea1b8ef81.png",
+      "role": "skill reference sheet",
+      "bytes": 3357732,
+      "sha256": "526c4ec202505562204f0fd4614cf4f4c8494bfe4acf2ecd52f30a3e51f31724"
+    },
+    {
+      "filename": "ego_samong_awaken_cutin.png",
+      "source_name": "ego_samong_awaken_cutin.png",
+      "role": "EGO awakening cut-in",
+      "bytes": 3414508,
+      "sha256": "f2b62df647f229d81578ac3ad945517d4797a5b5df1fa4497510a1f19c7c6c8e"
+    }
+  ]
+}

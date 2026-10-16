@@ -1,0 +1,699 @@
+{
+  "format": "pxf.graph@1",
+  "name": "솟구치는 황금 불꽃",
+  "settings": {
+    "size": 64,
+    "frames": 24,
+    "fps": 24,
+    "loop": false
+  },
+  "nodes": [
+    {
+      "id": "flame_main",
+      "type": "Spike",
+      "x": 40,
+      "y": 40,
+      "params": {
+        "x0": 0.5,
+        "y0": 0.79,
+        "x1": {
+          "k": [
+            [
+              0,
+              0.48,
+              "linear"
+            ],
+            [
+              5,
+              0.53,
+              "inout"
+            ],
+            [
+              10,
+              0.46,
+              "inout"
+            ],
+            [
+              16,
+              0.51,
+              "linear"
+            ],
+            [
+              23,
+              0.49,
+              "linear"
+            ]
+          ]
+        },
+        "y1": {
+          "k": [
+            [
+              0,
+              0.75,
+              "in3"
+            ],
+            [
+              3,
+              0.62,
+              "out3"
+            ],
+            [
+              7,
+              0.16,
+              "inout"
+            ],
+            [
+              13,
+              0.23,
+              "out"
+            ],
+            [
+              19,
+              0.36,
+              "linear"
+            ],
+            [
+              23,
+              0.42,
+              "linear"
+            ]
+          ]
+        },
+        "width": {
+          "k": [
+            [
+              0,
+              2,
+              "in"
+            ],
+            [
+              3,
+              8,
+              "out3"
+            ],
+            [
+              7,
+              23,
+              "out"
+            ],
+            [
+              12,
+              18,
+              "in"
+            ],
+            [
+              19,
+              7,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "taper": 1,
+        "grow": 1,
+        "base": 0.92,
+        "tip": 0.28,
+        "facet": 0.12,
+        "ridge": 0.06,
+        "shine": -1,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 0.8,
+        "shineAmp": 0.6
+      }
+    },
+    {
+      "id": "flame_left",
+      "type": "Spike",
+      "x": 40,
+      "y": 250,
+      "params": {
+        "x0": 0.47,
+        "y0": 0.79,
+        "x1": {
+          "k": [
+            [
+              0,
+              0.4,
+              "linear"
+            ],
+            [
+              7,
+              0.29,
+              "inout"
+            ],
+            [
+              13,
+              0.36,
+              "linear"
+            ],
+            [
+              23,
+              0.4,
+              "linear"
+            ]
+          ]
+        },
+        "y1": {
+          "k": [
+            [
+              0,
+              0.77,
+              "linear"
+            ],
+            [
+              3,
+              0.73,
+              "out3"
+            ],
+            [
+              8,
+              0.35,
+              "inout"
+            ],
+            [
+              14,
+              0.43,
+              "linear"
+            ],
+            [
+              23,
+              0.55,
+              "linear"
+            ]
+          ]
+        },
+        "width": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              3,
+              0,
+              "out3"
+            ],
+            [
+              8,
+              15,
+              "out"
+            ],
+            [
+              12,
+              11,
+              "in"
+            ],
+            [
+              18,
+              3,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "taper": 1,
+        "grow": 1,
+        "base": 0.78,
+        "tip": 0.2,
+        "facet": -0.1,
+        "ridge": 0.04,
+        "shine": -1,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 0.85,
+        "shineAmp": 0.6
+      }
+    },
+    {
+      "id": "flame_right",
+      "type": "Spike",
+      "x": 40,
+      "y": 460,
+      "params": {
+        "x0": 0.53,
+        "y0": 0.79,
+        "x1": {
+          "k": [
+            [
+              0,
+              0.59,
+              "linear"
+            ],
+            [
+              6,
+              0.69,
+              "inout"
+            ],
+            [
+              12,
+              0.61,
+              "linear"
+            ],
+            [
+              23,
+              0.57,
+              "linear"
+            ]
+          ]
+        },
+        "y1": {
+          "k": [
+            [
+              0,
+              0.77,
+              "linear"
+            ],
+            [
+              2,
+              0.74,
+              "out3"
+            ],
+            [
+              6,
+              0.43,
+              "inout"
+            ],
+            [
+              12,
+              0.31,
+              "out"
+            ],
+            [
+              18,
+              0.48,
+              "linear"
+            ],
+            [
+              23,
+              0.56,
+              "linear"
+            ]
+          ]
+        },
+        "width": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              2,
+              0,
+              "out3"
+            ],
+            [
+              6,
+              12,
+              "out"
+            ],
+            [
+              11,
+              14,
+              "in"
+            ],
+            [
+              18,
+              4,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "taper": 1,
+        "grow": 1,
+        "base": 0.83,
+        "tip": 0.24,
+        "facet": 0.08,
+        "ridge": 0.04,
+        "shine": -1,
+        "shineW": 0.1,
+        "intensity": 1,
+        "taperPow": 0.9,
+        "shineAmp": 0.6
+      }
+    },
+    {
+      "id": "base_ember",
+      "type": "Shape",
+      "x": 40,
+      "y": 670,
+      "params": {
+        "shape": "circle",
+        "x": 0.5,
+        "y": 0.77,
+        "size": {
+          "k": [
+            [
+              0,
+              1,
+              "in"
+            ],
+            [
+              3,
+              4,
+              "out3"
+            ],
+            [
+              7,
+              10,
+              "out"
+            ],
+            [
+              13,
+              8,
+              "in"
+            ],
+            [
+              20,
+              2,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        },
+        "size2": 0.4,
+        "points": 5,
+        "rot": 0,
+        "aspect": 0.45,
+        "stroke": 0,
+        "falloff": 0.65,
+        "intensity": 0.9
+      }
+    },
+    {
+      "id": "merge_left",
+      "type": "Blend",
+      "x": 270,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "merge_right",
+      "type": "Blend",
+      "x": 480,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "merge_base",
+      "type": "Blend",
+      "x": 690,
+      "y": 40,
+      "params": {
+        "mode": "max",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "flame_palette",
+      "type": "Palette",
+      "x": 900,
+      "y": 40,
+      "params": {
+        "colors": [
+          "#651c23",
+          "#b73520",
+          "#f46b21",
+          "#ffb83e",
+          "#fff0ac"
+        ],
+        "cutoff": 0.05,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "rising_sparks",
+      "type": "Particles",
+      "x": 690,
+      "y": 360,
+      "params": {
+        "count": 12,
+        "seed": 4827,
+        "emit": "stream",
+        "start": 0.21,
+        "span": 0.32,
+        "life": 0.3,
+        "lifeVar": 0.15,
+        "area": "line",
+        "x": 0.5,
+        "y": 0.69,
+        "aw": 14,
+        "ah": 2,
+        "dirMode": "fixed",
+        "angle": -90,
+        "spread": 36,
+        "speed": 0.65,
+        "speedVar": 0.2,
+        "gravity": -0.015,
+        "drag": 0.025,
+        "turb": 0.25,
+        "sizeA": 1.5,
+        "sizeB": 0.5,
+        "pshape": "diamond",
+        "stretch": 1,
+        "fade": "out",
+        "bright": 0.85,
+        "loop": false,
+        "ground": 0,
+        "bounce": 0.35,
+        "brightVar": 0.2
+      }
+    },
+    {
+      "id": "spark_palette",
+      "type": "Palette",
+      "x": 900,
+      "y": 360,
+      "params": {
+        "colors": [
+          "#b73520",
+          "#f46b21",
+          "#ffb83e",
+          "#fff0ac"
+        ],
+        "cutoff": 0.08,
+        "shift": 0,
+        "mode": "bands",
+        "key": "alpha",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "spark_fade",
+      "type": "Tint",
+      "x": 1110,
+      "y": 360,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "linear"
+            ],
+            [
+              4,
+              0,
+              "linear"
+            ],
+            [
+              6,
+              0.9,
+              "linear"
+            ],
+            [
+              13,
+              0.9,
+              "in"
+            ],
+            [
+              22,
+              0,
+              "linear"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "composite",
+      "type": "Blend",
+      "x": 1320,
+      "y": 40,
+      "params": {
+        "mode": "over",
+        "opacity": 1
+      }
+    },
+    {
+      "id": "final_fade",
+      "type": "Tint",
+      "x": 1530,
+      "y": 40,
+      "params": {
+        "color": "#ffffff",
+        "amount": 0,
+        "bright": 1,
+        "opacity": {
+          "k": [
+            [
+              0,
+              0,
+              "in"
+            ],
+            [
+              3,
+              0.65,
+              "out3"
+            ],
+            [
+              7,
+              1,
+              "linear"
+            ],
+            [
+              12,
+              1,
+              "in"
+            ],
+            [
+              18,
+              0.55,
+              "in"
+            ],
+            [
+              23,
+              0,
+              "linear"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "output",
+      "type": "Output",
+      "x": 1740,
+      "y": 40,
+      "params": {
+        "alpha": "soft",
+        "threshold": 0.1
+      }
+    }
+  ],
+  "links": [
+    {
+      "f": "flame_main",
+      "t": "merge_left",
+      "p": 0
+    },
+    {
+      "f": "flame_left",
+      "t": "merge_left",
+      "p": 1
+    },
+    {
+      "f": "merge_left",
+      "t": "merge_right",
+      "p": 0
+    },
+    {
+      "f": "flame_right",
+      "t": "merge_right",
+      "p": 1
+    },
+    {
+      "f": "merge_right",
+      "t": "merge_base",
+      "p": 0
+    },
+    {
+      "f": "base_ember",
+      "t": "merge_base",
+      "p": 1
+    },
+    {
+      "f": "merge_base",
+      "t": "flame_palette",
+      "p": 0
+    },
+    {
+      "f": "rising_sparks",
+      "t": "spark_palette",
+      "p": 0
+    },
+    {
+      "f": "spark_palette",
+      "t": "spark_fade",
+      "p": 0
+    },
+    {
+      "f": "flame_palette",
+      "t": "composite",
+      "p": 0
+    },
+    {
+      "f": "spark_fade",
+      "t": "composite",
+      "p": 1
+    },
+    {
+      "f": "composite",
+      "t": "final_fade",
+      "p": 0
+    },
+    {
+      "f": "final_fade",
+      "t": "output",
+      "p": 0
+    }
+  ],
+  "game": {
+    "style": "hero-pixel-v1",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "logicalSize": 64,
+    "blend": "normal",
+    "referenceCell": 62,
+    "durationMs": 1000,
+    "impactFrame": 7
+  }
+}

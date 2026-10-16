@@ -1,10 +1,53 @@
-name: StoryWorld Pages preparation
+name: StoryWorld R62 Pages
+
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
+
+concurrency:
+  group: storyworld-pages
+  cancel-in-progress: false
+
 jobs:
-  preparation:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: read
     steps:
-      - run: echo "Verified R62 deployment upload in progress"
+      - name: Checkout approved sources
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Reconstruct and verify all runtime bytes
+        run: python3 scripts/unpack-runtime-r62.py --output _pages/docs
+      - name: Check repository subpath and media HTTP responses
+        run: node verify-pages-r62.mjs _pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload only actual static game files
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _pages/docs
+          retention-days: 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified static site
+        id: deployment
+        uses: actions/deploy-pages@v4

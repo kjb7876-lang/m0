@@ -1,0 +1,3178 @@
+{
+  "schema": "storyworld.runtime-build-input.r62/v1",
+  "runtimeManifestSHA256": "fd381694013fc0e6cf38d36cfbb191fd6e2f1f23e81daf8b5cdd098014ca5559",
+  "sourceHTMLSha256": "5728f41c55dabc9a345297bb1ce834464b6dcececf74801f4feb8da4ec8a9602",
+  "webHTMLSha256": "8b26b5e6a94a949bc1a94bceaf635b9e5ad4c8c5c4f2898d2dc78330529be38b",
+  "runtimeFileCount": 1906,
+  "runtimeBytes": 464764252,
+  "raw": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assets/combat-audio/v1/catalog.js",
+      "bytes": 2365,
+      "sha256": "cba0a6e4ba6bf644e9b0cba163cc7e265a090926dd21f717c4fab96b40cfc2cc"
+    },
+    {
+      "path": "assets/ego-originals-20261008/ASSET_MANIFEST.json",
+      "bytes": 1248,
+      "sha256": "80f2af02c7efef0545d6814f61f0d191420c4f3b07ae6b9295649abe4f1aa66b"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-01.pxf.json",
+      "bytes": 5636,
+      "sha256": "9139f78c5352f2ee547acf18dbb62c415525bb820de105a59b4f48b8c94fde5a"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-02.pxf.json",
+      "bytes": 5803,
+      "sha256": "bd06bbc987072482b7e69991c27f39cdb4d103a122781546a2e70b0d02886043"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-03.pxf.json",
+      "bytes": 9396,
+      "sha256": "cdc54ca9fef84567499d401632d5feec667fe0cc0268b92463d995085052662b"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-04.pxf.json",
+      "bytes": 4646,
+      "sha256": "1b8c9a3c6359f010142513ea421a532076d1a2380409bb2a374484617eed379a"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-05.pxf.json",
+      "bytes": 5686,
+      "sha256": "0aa8e97bc79af89f31604015442d1f72ea57f8aee54294020e453fc108618de0"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-06.pxf.json",
+      "bytes": 6956,
+      "sha256": "f6907dd8fdf74c4fbff840e9ce9191d5275aaf7f633969dfefa885939de82c04"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-07.pxf.json",
+      "bytes": 3979,
+      "sha256": "3be215f9c8dc5ffe2f731bec9c2680a683535a8e873f47835e8c716d42c17793"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-08.pxf.json",
+      "bytes": 6310,
+      "sha256": "6d1476ef7bf85170767fa5db77f366ff375eaa6e68ec57508d48c2fc43de11b8"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-09.pxf.json",
+      "bytes": 10325,
+      "sha256": "07685c07b1e1f8aadeec7ce6f421af216eedb5fe24a00384b3041f261d3a7c35"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-10.pxf.json",
+      "bytes": 6696,
+      "sha256": "7eed774ef4981b09d212527675dcf48693fbd71901144e7ab3c8771e21140ed3"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-11.pxf.json",
+      "bytes": 12092,
+      "sha256": "bbf08674ee81376985b0df1ad9bef80dfdc869c222287d49729f68c7d8edab70"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-12.pxf.json",
+      "bytes": 9048,
+      "sha256": "094059d53dd584f3d103c97a0ab3fef664d62a7d918e879944230dfa27e7bcab"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-13.pxf.json",
+      "bytes": 6861,
+      "sha256": "b111c58d07392e55b319684502d56432871367e5e53181ee7ab2acd5f79b8b10"
+    },
+    {
+      "path": "assets/pxf-additional-originals-20261010/extra-14.pxf.json",
+      "bytes": 9086,
+      "sha256": "768b817db207291c103d40d636e5bb3710396d21d6aba3ad51c63cc54fddc88b"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/claw-magic.pxf.json",
+      "bytes": 3279,
+      "sha256": "035ff7c75eeb160a93f837c492f0417f8defb7d7cb0d4450a61fc51efba77c49"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/explosion.pxf.json",
+      "bytes": 5686,
+      "sha256": "0aa8e97bc79af89f31604015442d1f72ea57f8aee54294020e453fc108618de0"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/melee-spark.pxf.json",
+      "bytes": 5854,
+      "sha256": "4ae835cc958d266ae7d207f9c9c4ee455b68d7970882ad5cdae072097ed2472c"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-05.pxf.json",
+      "bytes": 4641,
+      "sha256": "0cd2fc300f42fbbbeed01193985f7304efbc41f9cbfac4b2007d55b95fcdefa6"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-06.pxf.json",
+      "bytes": 4316,
+      "sha256": "c1047824995cf333a7e2879bcbd964776444b0a812d1e1b9b74ab00b9fe76efa"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-07.pxf.json",
+      "bytes": 13300,
+      "sha256": "16476b21dda5874e6ae5df917ca061d03ed7230d57f21140871617ee828ed0de"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-08.pxf.json",
+      "bytes": 19399,
+      "sha256": "da98fd99a81d447bbce20860ca39b920ec71063879975c0ad659a5525270c039"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-09.pxf.json",
+      "bytes": 8407,
+      "sha256": "00b88bfaa01baf38c4dba5ac9a9c4a51aade7b43cc05aea194208b90b8b40847"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-10.pxf.json",
+      "bytes": 43328,
+      "sha256": "060d703651f483665bc41a0295b208b6749d4e0ac14ac5ba243ffab47485042b"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-11.pxf.json",
+      "bytes": 9450,
+      "sha256": "6e976b9aa696d505ef0d5262ae78569829083b4dc451ba6833c2ca79cb187b4a"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-12.pxf.json",
+      "bytes": 16181,
+      "sha256": "c606440d55b29c6eae4921c21b702e02e35f4bf54339fd90391720c97946cf3b"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-13.pxf.json",
+      "bytes": 20857,
+      "sha256": "6669ad1f6e32f421e7c3d48674ec65b2bf3ecafd4d16ebb777746b76d4c8330d"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-14.pxf.json",
+      "bytes": 12251,
+      "sha256": "3e871551a2bcf5ed61a1578114bf0ac2f00b6e42d1ffdc3f6ea4d9c10183c424"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-15.pxf.json",
+      "bytes": 14624,
+      "sha256": "ff1583c9535cea41b80830c21c0b1ea13bedb5449484de98b56743fdf0afa133"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-16.pxf.json",
+      "bytes": 8375,
+      "sha256": "c3b3940ed47e67d0136d006486556e755ca7aeb63522a70752ac8ac924a689b7"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-17.pxf.json",
+      "bytes": 32827,
+      "sha256": "fba8860e7213e632e40433df61f243080ffeb1733b08bfcf51e9aefab40271c2"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-18.pxf.json",
+      "bytes": 9448,
+      "sha256": "5fad721f0b9c4c665ce674ec435e58965661ab40596c02d68664108c8e4866dd"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-19.pxf.json",
+      "bytes": 37206,
+      "sha256": "85cf0af1b3f4ba95acf0af65a3a4980823f0fbd83cb474af62758000035c592a"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-20.pxf.json",
+      "bytes": 14810,
+      "sha256": "91010c58a015179038e5328801b08de8d8c7b476619d8d72c18db6ac47a41268"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-21.pxf.json",
+      "bytes": 15416,
+      "sha256": "036ce24f00ca52eaba90f52ef9861b862578cdbbc37aae8a147fe7a87fe1991e"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-22.pxf.json",
+      "bytes": 22134,
+      "sha256": "d236eb7cc2a84769801c79a0741cc387bec8129c83a587214336303fc3e7f45e"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-23.pxf.json",
+      "bytes": 32935,
+      "sha256": "d2b56cbed987b54fc9381b832960cd6bddd733d986b11a457849284f542a3ac1"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-24.pxf.json",
+      "bytes": 25131,
+      "sha256": "cf6aacf97eafff4059a8add0929a493b7326b7f4e0447ce0a71fe242816c00b7"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-25.pxf.json",
+      "bytes": 25773,
+      "sha256": "ca8513aa5eef42811592b6e33e93fcbeedfa4c475bd14f14e7adcf660c44c8b7"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-26.pxf.json",
+      "bytes": 20033,
+      "sha256": "dda508a46693418b9b7ec67d90bc31cc6c8f83acd7a5e50ce0a8c696485ade6d"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-27.pxf.json",
+      "bytes": 18696,
+      "sha256": "0192e6ab35303ee4fdef4ed91926366c84575aa25af8b35778e039ce02a584b7"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-28.pxf.json",
+      "bytes": 6301,
+      "sha256": "fe456c46c25f4e42162b5fcb1b69d5905cf9b87cdd0c4d03108306ce4d8bbdd7"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-29.pxf.json",
+      "bytes": 16247,
+      "sha256": "de90cf55e490033ee9df0fca76ff1c523513225b61883faddf9dde922ca815f3"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-30.pxf.json",
+      "bytes": 11488,
+      "sha256": "87ba21c82bbc879849a8b0ae704ae8b81afc0998266f88f538d28b0c06b76618"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-31.pxf.json",
+      "bytes": 14485,
+      "sha256": "47bb13b0d26919500670e1910ce6ea42c0051d7b27055846ef64e9e04591c897"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/pxf-32.pxf.json",
+      "bytes": 5500,
+      "sha256": "1634181784bd43472317a0adc1a2b3bdfe5a65cf1c625fd53dfeb5631f070638"
+    },
+    {
+      "path": "assets/pxf-originals-20261010/silver-slash.pxf.json",
+      "bytes": 5500,
+      "sha256": "1634181784bd43472317a0adc1a2b3bdfe5a65cf1c625fd53dfeb5631f070638"
+    },
+    {
+      "path": "assets/rc133/media-catalog.js",
+      "bytes": 15573,
+      "sha256": "f342158a573a2fee2d18a2f8b801ba675b8ae43f9094571e82b12cb183ba2520"
+    },
+    {
+      "path": "assets/story-narration/v1/manifest.json",
+      "bytes": 266465,
+      "sha256": "b8f1c2e9e6883c008b07bc5186f4edb1d2ca8eb7612f29af292d6920150935cc"
+    },
+    {
+      "path": "assets/visual-test/hospital-boss-motion-r53-metadata.json",
+      "bytes": 4594,
+      "sha256": "d86c322381f1dc23af8ecabf0041261295969b7c8a5ea06b706d8b8c6b7de1f4"
+    },
+    {
+      "path": "assets/visual-test/hospital-orderly-motion-r51-metadata.json",
+      "bytes": 2364,
+      "sha256": "a456845a08a6b69470a1bc2dcdd61a84196d727464d127c9498c93c5e0635942"
+    },
+    {
+      "path": "assets/visual-test/hospital-ranged-back-r53-metadata.json",
+      "bytes": 3515,
+      "sha256": "bb3dd4fb6bb845b7974444a7e5441e23384bcefc6d282d36cb51be02619e9fad"
+    },
+    {
+      "path": "assets/visual-test/hospital-ranged-motion-r52-metadata.json",
+      "bytes": 3523,
+      "sha256": "d9959a46856cf448ac39ea806ccd518fdeb3bcdb0be3abdc1d20a26000135e6b"
+    },
+    {
+      "path": "chunks/ep1a08-0-0.json",
+      "bytes": 1147,
+      "sha256": "a7df6b6c37fc6e1846de7edf16debc3de9577baaba16e3d6e9b66687eab1eb6f"
+    },
+    {
+      "path": "chunks/ep1a08-0-1.json",
+      "bytes": 1148,
+      "sha256": "1115a864018b15e69dbccd2e34b1b141e3209c10b367343e436323d1e008bd5a"
+    },
+    {
+      "path": "chunks/ep1a08-0-2.json",
+      "bytes": 1148,
+      "sha256": "08fed114ed818c1f6c8c0411a3e083fc80b5be9eff888d68a189513dce56aa0b"
+    },
+    {
+      "path": "chunks/ep1a08-0-3.json",
+      "bytes": 1148,
+      "sha256": "e928b5321749af5ee0aba30915327dca0239f64bc1cfa6e3225d83f9f48e4c42"
+    },
+    {
+      "path": "chunks/ep1a08-0-4.json",
+      "bytes": 1148,
+      "sha256": "3df88a1dbde611f2d49243f0f1d553d81d15646f52ebefd0a6bbc3b04d778a21"
+    },
+    {
+      "path": "chunks/ep1a08-1-0.json",
+      "bytes": 1148,
+      "sha256": "4321e6f23d2972de1eb7c025260e061f3eddb902461d2ca43801842f59204e70"
+    },
+    {
+      "path": "chunks/ep1a08-1-1.json",
+      "bytes": 1149,
+      "sha256": "a8647f7c76ade4f960af5639cf81b11b8fd904a7169b4d254b5e4312ad3290b6"
+    },
+    {
+      "path": "chunks/ep1a08-1-2.json",
+      "bytes": 1149,
+      "sha256": "8d35175416415a1176d24b1b005751f5d6a275cf4939a02c2aff0c318705cfe5"
+    },
+    {
+      "path": "chunks/ep1a08-1-3.json",
+      "bytes": 1149,
+      "sha256": "02be7119da8c8be8cf3a987a17d23ab62167b08128112e7695ad0ac4a21eb93c"
+    },
+    {
+      "path": "chunks/ep1a08-1-4.json",
+      "bytes": 1149,
+      "sha256": "3b35e4ea379a129d3073af62c32720e58d72aef26cbf9029ee74be5a7a1d286e"
+    },
+    {
+      "path": "chunks/ep1a08-2-0.json",
+      "bytes": 1148,
+      "sha256": "de85e43246044a804232fbd4e1287a224f606b2b34758556d4226a4a6225b588"
+    },
+    {
+      "path": "chunks/ep1a08-2-1.json",
+      "bytes": 1149,
+      "sha256": "ce5224943ca4b3632f9a48f2a95ad91da72618dcd3e31247f7724c7d0997b7db"
+    },
+    {
+      "path": "chunks/ep1a08-2-2.json",
+      "bytes": 1149,
+      "sha256": "bed39915eb0e08089887b09c1208826bca99deb9116da4aee655d60889e63794"
+    },
+    {
+      "path": "chunks/ep1a08-2-3.json",
+      "bytes": 1149,
+      "sha256": "801e9009e6a549d86148a2b93b74b7de834951e8ff1ea508f924a507337039b6"
+    },
+    {
+      "path": "chunks/ep1a08-2-4.json",
+      "bytes": 1149,
+      "sha256": "5970c1936052933c0fba0378c72bf980df0dac663447cf4df44989c187df2960"
+    },
+    {
+      "path": "chunks/ep1a08-3-0.json",
+      "bytes": 1148,
+      "sha256": "7ade2ab2da70fbe9e67f8dc52b98daaf747caa697925d4edd6faddfd24831b33"
+    },
+    {
+      "path": "chunks/ep1a08-3-1.json",
+      "bytes": 1149,
+      "sha256": "f2089bf4a2bafbab8bbee269ae58d1e7e5b2ad5c0df8b4b30c0464f7dfb88eee"
+    },
+    {
+      "path": "chunks/ep1a08-3-2.json",
+      "bytes": 1149,
+      "sha256": "8e012bcce4a1990f355d6154f6e05dfe24a3c910de92365235022816a687868b"
+    },
+    {
+      "path": "chunks/ep1a08-3-3.json",
+      "bytes": 1149,
+      "sha256": "5685cca42a436ae124d22d311152f75f716f98a2e19ec97694b63b6b66907054"
+    },
+    {
+      "path": "chunks/ep1a08-3-4.json",
+      "bytes": 1149,
+      "sha256": "19d3a77f36249684cff9f1d5dbe739838296fc80fc04d496aa1603333245f290"
+    },
+    {
+      "path": "chunks/ep1a08-4-0.json",
+      "bytes": 1148,
+      "sha256": "3208cce9194bec1f7ec099eb8cab687df4af9a4ba8c341959264fe65398b0849"
+    },
+    {
+      "path": "chunks/ep1a08-4-1.json",
+      "bytes": 1149,
+      "sha256": "9bdc21137770f275ba3647a3af11143794a79e3aad91bbd795782c8788c13be5"
+    },
+    {
+      "path": "chunks/ep1a08-4-2.json",
+      "bytes": 1149,
+      "sha256": "ce53dc61024f23a5d68787cf7071eadd46002302738030bb3eec97f7dc635e97"
+    },
+    {
+      "path": "chunks/ep1a08-4-3.json",
+      "bytes": 1149,
+      "sha256": "129ea42d094cf622d9dc0ac10fc7faf61d4f0ea40441fd94b9b1d2d19d0eaa5d"
+    },
+    {
+      "path": "chunks/ep1a08-4-4.json",
+      "bytes": 1149,
+      "sha256": "53b04e7f178f94c4508107200f559943861f5e446d988a446924d64d44bca3ca"
+    },
+    {
+      "path": "chunks/ep1a08-5-0.json",
+      "bytes": 1148,
+      "sha256": "c4a5412a123ece4c8cf0bbbefe0064fff63ad9b7b572acf0d9ce85ada5f8b387"
+    },
+    {
+      "path": "chunks/ep1a08-5-1.json",
+      "bytes": 1149,
+      "sha256": "2c70b6d12d0734db50ed9b10535575c93184e8ae4e1735fe7f29385c9802ede3"
+    },
+    {
+      "path": "chunks/ep1a08-5-2.json",
+      "bytes": 1149,
+      "sha256": "eb22d5688a742d815803a4023d3cfb9add9c229485a0c3bc5271cb6c6545ee0b"
+    },
+    {
+      "path": "chunks/ep1a08-5-3.json",
+      "bytes": 1149,
+      "sha256": "df760aa37b977edefe3c9a997344ec90163413d3cc9207f98c31a41da485afcd"
+    },
+    {
+      "path": "chunks/ep1a08-5-4.json",
+      "bytes": 1149,
+      "sha256": "51861259d2b193979196e13299a2db6aacd3834e4e5c090677493862106eb50d"
+    },
+    {
+      "path": "chunks/ep1a08-6-0.json",
+      "bytes": 1148,
+      "sha256": "cc960dc99186f0e1ae97030d52167b9ac2cd111c58f88c1df02fc0bc7defca94"
+    },
+    {
+      "path": "chunks/ep1a08-6-1.json",
+      "bytes": 1149,
+      "sha256": "8d381407238e447aa351bc9092314d0a031c4718595b27c152be58687c4fb498"
+    },
+    {
+      "path": "chunks/ep1a08-6-2.json",
+      "bytes": 1149,
+      "sha256": "7e203dd1e177711721f1055a956566079cb05570b20a9174fb8ccf6739262243"
+    },
+    {
+      "path": "chunks/ep1a08-6-3.json",
+      "bytes": 1149,
+      "sha256": "e7768a74c6f84f4dea8a32798805e0bb14142656fbcd0badcb28c8b04528ca7c"
+    },
+    {
+      "path": "chunks/ep1a08-6-4.json",
+      "bytes": 1149,
+      "sha256": "cb66527536f101d3074387cebe6ded2e3208b34a19813d5580e5f2c80f6e70b3"
+    },
+    {
+      "path": "chunks/ep1a08-7-0.json",
+      "bytes": 1148,
+      "sha256": "65a33b31f440fd63fc7d5b40153c804a9e7413388bbc22bea486974389df0d45"
+    },
+    {
+      "path": "chunks/ep1a08-7-1.json",
+      "bytes": 1149,
+      "sha256": "f64475a372f37dfdf7e24e2df71e858c64d0784161df12719947aa836dcb4ea0"
+    },
+    {
+      "path": "chunks/ep1a08-7-2.json",
+      "bytes": 1149,
+      "sha256": "fae94a74aa8e11516d41b10791c2cba13f14c22ec369a39a0d9511ebef8a114c"
+    },
+    {
+      "path": "chunks/ep1a08-7-3.json",
+      "bytes": 1149,
+      "sha256": "70c5f009da8dd4af1ade6ab37ab81e9136dcd3b545dc97b716d17f77d8609acf"
+    },
+    {
+      "path": "chunks/ep1a08-7-4.json",
+      "bytes": 1149,
+      "sha256": "c4f4b2fbba86c7415a112b58dda050f62c67c8c943ce49a39154cfe10c907c12"
+    },
+    {
+      "path": "chunks/hub-0-0.json",
+      "bytes": 1176,
+      "sha256": "41d705cefa6473dd1285d491fecfbac9da6c122d4ed03cc85410db844ae7659e"
+    },
+    {
+      "path": "chunks/hub-0-1.json",
+      "bytes": 1177,
+      "sha256": "8c0a88c444fe6d845a337f853396b8824a67167440fd7ba082bf3ed109e8e1be"
+    },
+    {
+      "path": "chunks/hub-0-2.json",
+      "bytes": 1177,
+      "sha256": "79d03c63782c848a968a207b6293e770d96a88c807a411662a7833ab93eb15b2"
+    },
+    {
+      "path": "chunks/hub-0-3.json",
+      "bytes": 1177,
+      "sha256": "16925ced2dc8cbcba24bbc055bbd7a7ee7f1abf7bd3cfc4879b44a9a0f3d7d15"
+    },
+    {
+      "path": "chunks/hub-0-4.json",
+      "bytes": 1177,
+      "sha256": "30f9258fbef55d099c0e89888865bd9bfcf882b1097361b97a9e8d21a52c36ba"
+    },
+    {
+      "path": "chunks/hub-0-5.json",
+      "bytes": 1177,
+      "sha256": "e65f75aef3b43c890b521081bf3fc0907bcaa7bcb9b3a7710b745c7260de6a96"
+    },
+    {
+      "path": "chunks/hub-0-6.json",
+      "bytes": 1177,
+      "sha256": "d8f71916147ec84d94685e4cc5f100f354efbaf3b94b8d7fd4a5d378c4580074"
+    },
+    {
+      "path": "chunks/hub-1-0.json",
+      "bytes": 1177,
+      "sha256": "a66c4e64f3a6f5993b5fa1d7f70756c5e3f4005b9d1f7a8f2448c610e688d668"
+    },
+    {
+      "path": "chunks/hub-1-1.json",
+      "bytes": 1178,
+      "sha256": "e132be3d4a80bfe378d006f6b490cd77d92677230d8496d56658dbaa5baa7698"
+    },
+    {
+      "path": "chunks/hub-1-2.json",
+      "bytes": 1178,
+      "sha256": "d2d59e2c2db3f24c433f325d7d438a7593e3650610e7ff5eedaf7cbe35e9c29c"
+    },
+    {
+      "path": "chunks/hub-1-3.json",
+      "bytes": 1178,
+      "sha256": "73b7e58a018c3119f306286023054d9222f13b8a2822740ea961b2cf225e07ed"
+    },
+    {
+      "path": "chunks/hub-1-4.json",
+      "bytes": 1178,
+      "sha256": "03df29a6f68f81a7719344a0e1f5e3630242e96433aff60eb67519219582e66f"
+    },
+    {
+      "path": "chunks/hub-1-5.json",
+      "bytes": 1178,
+      "sha256": "93aa566f4503a5dfa519134a662c3e582726356ffea81611ef2e6ce1d0bfa79d"
+    },
+    {
+      "path": "chunks/hub-1-6.json",
+      "bytes": 1178,
+      "sha256": "997f69067458ee1c54681c2b23e5235b61bf0dfb117607a37a155fde8ba5fe18"
+    },
+    {
+      "path": "chunks/hub-2-0.json",
+      "bytes": 1177,
+      "sha256": "fb1e0d03f421e7f62961035c94f07790d6208de2451510d911f7349cedf2cfda"
+    },
+    {
+      "path": "chunks/hub-2-1.json",
+      "bytes": 1178,
+      "sha256": "b3cfdf59269037852f17bf251631020372d3345a709250566d5b29763f6168d2"
+    },
+    {
+      "path": "chunks/hub-2-2.json",
+      "bytes": 1178,
+      "sha256": "7983c576ca2125f88b0a79c9b4574f4bca85dfa0d011f784758a98061f4fc35f"
+    },
+    {
+      "path": "chunks/hub-2-3.json",
+      "bytes": 1178,
+      "sha256": "0a0009d6ddbfa47f52faaa09db344f7c7137930b6ce216c90dc7ff43fbdb8de1"
+    },
+    {
+      "path": "chunks/hub-2-4.json",
+      "bytes": 1178,
+      "sha256": "a03e98f095d333930b9eef8c466b55b74f3c664535fc3977b6f36941114ed182"
+    },
+    {
+      "path": "chunks/hub-2-5.json",
+      "bytes": 1178,
+      "sha256": "5f6783cbcb2adcbd0a09a7d529d48e63af385ff84e3cf60a76f962e874f29cb2"
+    },
+    {
+      "path": "chunks/hub-2-6.json",
+      "bytes": 1178,
+      "sha256": "22f84ba5c696d1331cb528ea78453af12c0106bdc3ca6d221407c1baa0f7200e"
+    },
+    {
+      "path": "chunks/hub-3-0.json",
+      "bytes": 1177,
+      "sha256": "038b2a85254831f80d253a48f4c10e2cc99e3e877b3beaf3767e763dad5af84f"
+    },
+    {
+      "path": "chunks/hub-3-1.json",
+      "bytes": 1178,
+      "sha256": "a1c6343abe46612f72ad451af8da965dfbee3cbac2662609b34894c7b73e0bca"
+    },
+    {
+      "path": "chunks/hub-3-2.json",
+      "bytes": 1178,
+      "sha256": "49d8d6e5fe1e80b74dae47267ea7660c3dfb971fa94e895d77b9fcd812fbdfcc"
+    },
+    {
+      "path": "chunks/hub-3-3.json",
+      "bytes": 1178,
+      "sha256": "d6763c8e39bf5093ebaff2449d89abdf10e8a25548631f284e8d7ec73d5c729e"
+    },
+    {
+      "path": "chunks/hub-3-4.json",
+      "bytes": 1178,
+      "sha256": "f1e2c0dea88cc00b2009f04a67599a7c3a8b1866e6cc4a0090d2b6841baacdd1"
+    },
+    {
+      "path": "chunks/hub-3-5.json",
+      "bytes": 1178,
+      "sha256": "bd6b8c0a56a157b371b0b68cb71a9b5e7449992ac0bb4b4c22ac392c42bf126c"
+    },
+    {
+      "path": "chunks/hub-3-6.json",
+      "bytes": 1178,
+      "sha256": "92f91441aca24dafcf4418e0869b0f274cbcb34230482211d16d81ccca2da772"
+    },
+    {
+      "path": "chunks/hub-4-0.json",
+      "bytes": 1177,
+      "sha256": "7c8a89ebbf06b82cb2454e10265a69596eb1c69994dcd366e0a0c47a371268ba"
+    },
+    {
+      "path": "chunks/hub-4-1.json",
+      "bytes": 1178,
+      "sha256": "9733af9a6e9a3ab127675bb5bbc032aa514044c7178dba91902dd707965a64a8"
+    },
+    {
+      "path": "chunks/hub-4-2.json",
+      "bytes": 1178,
+      "sha256": "b2ff32fac3bdaccf8aa40c9cbd15f39f4ea356d4e29a7e0ac8591fc472bfa17f"
+    },
+    {
+      "path": "chunks/hub-4-3.json",
+      "bytes": 1178,
+      "sha256": "2b8777f04a9b5b62f0dd9a41485f701f06704793a39bec99995abe796d277c9b"
+    },
+    {
+      "path": "chunks/hub-4-4.json",
+      "bytes": 1178,
+      "sha256": "c77dc52b59c00abc5d441040b22c936b8647c43058e3051833f6ba7e1316cafd"
+    },
+    {
+      "path": "chunks/hub-4-5.json",
+      "bytes": 1178,
+      "sha256": "5969091dac62204c955549571ca7806b3e7133843497a8f5d0123f8d2cb4f094"
+    },
+    {
+      "path": "chunks/hub-4-6.json",
+      "bytes": 1178,
+      "sha256": "b925a3e918475a183dc2d09011b073400f4b336d8d6d417f62a1d43f6be1ff59"
+    },
+    {
+      "path": "chunks/hub-5-0.json",
+      "bytes": 1177,
+      "sha256": "89fa373d8ec42b3d6155eafb3c99abffa85a9f80825bdb5f0c294f024b5f38b9"
+    },
+    {
+      "path": "chunks/hub-5-1.json",
+      "bytes": 1178,
+      "sha256": "43c9cd981cf389050535a4dbd77a0c7560f2f1592832c2874aa5def9eb7d9b4f"
+    },
+    {
+      "path": "chunks/hub-5-2.json",
+      "bytes": 1178,
+      "sha256": "2bf2edd5195fbc16d021586dd0d28bf40b6471159249cbe72625add68840e16f"
+    },
+    {
+      "path": "chunks/hub-5-3.json",
+      "bytes": 1178,
+      "sha256": "ccd28e1c8d691b50970e9a2d897f72e12f47fa62ae41b6b7e0f90f11c43a302f"
+    },
+    {
+      "path": "chunks/hub-5-4.json",
+      "bytes": 1178,
+      "sha256": "87ec5eb4c3cd2adabc1a83a43ecf951cdb3f087f44d91216e9ee408493aa2cd5"
+    },
+    {
+      "path": "chunks/hub-5-5.json",
+      "bytes": 1178,
+      "sha256": "ce4e68fbe00b4a72d7256e4e96f6c38940f97f9d6ec661da35802b3e217f1bc3"
+    },
+    {
+      "path": "chunks/hub-5-6.json",
+      "bytes": 1178,
+      "sha256": "f94dda66611decfc229953ae0d0bf9981f02a6222b99d49388d4463f59152d86"
+    },
+    {
+      "path": "chunks/hub-6-0.json",
+      "bytes": 1177,
+      "sha256": "612b1ff48de0a8765458dec4b06694ec6108b6095eb7742dd1f4a82f92098e39"
+    },
+    {
+      "path": "chunks/hub-6-1.json",
+      "bytes": 1178,
+      "sha256": "e131de484bd285e877418c42b10e88c3cc89dee9a76aa55ed3e118e328ad79ad"
+    },
+    {
+      "path": "chunks/hub-6-2.json",
+      "bytes": 1178,
+      "sha256": "f5005ec71e2a0533e5bd1afc0375dff9a72ce9b87db8bef366d28e054515352a"
+    },
+    {
+      "path": "chunks/hub-6-3.json",
+      "bytes": 1178,
+      "sha256": "9eb229feae44db5be08797906fd589c1a2a3a21ed1bc2e4e53da652812b0d57f"
+    },
+    {
+      "path": "chunks/hub-6-4.json",
+      "bytes": 1178,
+      "sha256": "16443b0a35270293cb98906b60d47027e4b6ef67f249cb72123c4ef58f7aa9a6"
+    },
+    {
+      "path": "chunks/hub-6-5.json",
+      "bytes": 1178,
+      "sha256": "22692ebe4654585e439cf8ed5dd51bedc1126e1faa440c9142f3d97ed315690f"
+    },
+    {
+      "path": "chunks/hub-6-6.json",
+      "bytes": 1178,
+      "sha256": "777ce5d8653aefbda331962b3250244e252aed9d1a9ced162aeec322025dbad4"
+    },
+    {
+      "path": "chunks/hub-7-0.json",
+      "bytes": 1177,
+      "sha256": "00e1efac4da4ff11800f7e4bc3964ffacd8efa1c7fe8c4e11aa41cacd0ecdef7"
+    },
+    {
+      "path": "chunks/hub-7-1.json",
+      "bytes": 1178,
+      "sha256": "900b677f2b37e7fed115b1e7b42b6f9e1b16ddecda9a016151dbdab27590ce17"
+    },
+    {
+      "path": "chunks/hub-7-2.json",
+      "bytes": 1178,
+      "sha256": "55ec1bf31e102f74019d0b014c548fa4d17308859f87f68bfb7b5fc64b506fba"
+    },
+    {
+      "path": "chunks/hub-7-3.json",
+      "bytes": 1178,
+      "sha256": "b764bb5795fa85e90ecf00ce20223f2293d24afc860770a216540c8c4b7487ea"
+    },
+    {
+      "path": "chunks/hub-7-4.json",
+      "bytes": 1178,
+      "sha256": "75b33ed085d1cd75a032840f11f71ce6faf755547a78387b84b75048be24489a"
+    },
+    {
+      "path": "chunks/hub-7-5.json",
+      "bytes": 1178,
+      "sha256": "73e54f187605afb0e253a3e4e3bf42aceeb70a8daa18a2b82f0eff3526eb7fbc"
+    },
+    {
+      "path": "chunks/hub-7-6.json",
+      "bytes": 1178,
+      "sha256": "43df6d36ed2cbdec126da6fc280d31fb1d7ef69ed1036c633613648fca576a92"
+    },
+    {
+      "path": "data/actor-canvas-map-v31224.js",
+      "bytes": 251700,
+      "sha256": "e267dd8e3fb00e302d97fe66d795a4fe16cca5980e8f2c3552e730eb4c4418cc"
+    },
+    {
+      "path": "data/campaign-r54/canonical-campaign-source-r54.json",
+      "bytes": 2461064,
+      "sha256": "e24ee247ab14c36ee586b31a80c0790b7b592821f65e6ff1a1f713a1267600c8"
+    },
+    {
+      "path": "data/story-rc51.js",
+      "bytes": 281023,
+      "sha256": "a358f8ea6c415d3e975ab682a07105fe671cbdd1d89fc83a430a8a9413221202"
+    },
+    {
+      "path": "data/world-v31217.js",
+      "bytes": 25200,
+      "sha256": "6f66439e104abcdf5ff01b306830f7fbc4e16bfd44d88d28962596910a5991db"
+    },
+    {
+      "path": "dist/phase1.js",
+      "bytes": 522957,
+      "sha256": "a6d423745e0f8f1928c69447c369e0acd4b6185bc3da111f167b1476132805d5"
+    },
+    {
+      "path": "index.html",
+      "bytes": 5886270,
+      "sha256": "8b26b5e6a94a949bc1a94bceaf635b9e5ad4c8c5c4f2898d2dc78330529be38b"
+    },
+    {
+      "path": "vendor/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "vendor/three/build/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "path": "vendor/three/build/three.module.js",
+      "bytes": 662772,
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+    },
+    {
+      "path": "vendor/three/package.json",
+      "bytes": 3672,
+      "sha256": "f9c474a27c920b9435353a6235968f4453436bee0444fac7e5fd289c8fa463de"
+    },
+    {
+      "path": "web-manifest-r62.json",
+      "bytes": 363579,
+      "sha256": "fd381694013fc0e6cf38d36cfbb191fd6e2f1f23e81daf8b5cdd098014ca5559"
+    }
+  ],
+  "archives": [
+    {
+      "path": "build-input/runtime-packs/runtime-001.zip",
+      "bytes": 5241463,
+      "sha256": "0f9fb1efd7144290485d46d2bc5086b0b2bfb2776647ef3c03b6997f0b43882f",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/go_seojin_lurch.png",
+        "assets/vfx/v31330/b02-boss/tear.webp",
+        "audio/rc133/processed/bgm/Folding_Space_1-c535f55c.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-002.zip",
+      "bytes": 5241464,
+      "sha256": "e117d16a3456568997c8b9738f854d8605ea90abc23e946c622bbaf77ba5b5ce",
+      "files": [
+        "assets/actors/v31345/guardians/great-02-atlas.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-guard-left.webp",
+        "audio/rc133/processed/bgm/Clockwork_Ticks_1-4918e942.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-003.zip",
+      "bytes": 5241406,
+      "sha256": "2d7b68a6af36a1f667437c55e98ac3cdc356c301cd784f2fac948a3248590a47",
+      "files": [
+        "assets/actors/v31511/balrog-raised-body.png",
+        "assets/heroes/normalized/actions-consistent/neon-skill-right.webp",
+        "audio/rc133/processed/bgm/Clockwork_Ticks_1_1-ae97c712.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-004.zip",
+      "bytes": 5240743,
+      "sha256": "2f447f9e8131d7337778396ab1754917f224a2bfd6247a4448ac0654bb8d573e",
+      "files": [
+        "assets/pxf-baked-20261010/pxf-06-player-atlas.png",
+        "assets/rc140/story-cycle-motions/mb-murder03.png",
+        "assets/rc15/hando03.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-005.zip",
+      "bytes": 5241370,
+      "sha256": "de2b0340efc14d6392059cbcf1bcd9b7323571e24a698ff996b5dc17ec88a4ab",
+      "files": [
+        "assets/heroes/normalized/actions-v3126/slayer-move-right.webp",
+        "assets/rc140/story-cycle-motions/c104-mid.png",
+        "assets/visual-test/regional-materials-r55.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-006.zip",
+      "bytes": 5241318,
+      "sha256": "8f1d9e15e09992e2db12468e872f5c869307c2b82935b2e52b8389a6ab08fe23",
+      "files": [
+        "assets/rc140/story-cycle-motions/mb-hando01.png",
+        "assets/rc15/hando01.png",
+        "assets/vfx/v31330/b06-boss/tear.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-007.zip",
+      "bytes": 5241434,
+      "sha256": "3029324b94963053779b7a9c3f17adeda116e974ac093d4fb9a9d344507b0784",
+      "files": [
+        "assets/props/v290/corrupted_shrine.webp",
+        "assets/rc15/hando02.png",
+        "assets/vfx/hospital-r45/poison-atlas-r45.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-008.zip",
+      "bytes": 5241252,
+      "sha256": "a91f55e034f6fcbfe6977d0da4c8cc821122cf5487866de0cb79ebb47a832a2b",
+      "files": [
+        "assets/ego-originals-20261008/ego_samong_awaken_cutin.png",
+        "assets/episode1b/generated-v394/lust_heart_marionette.webp",
+        "assets/rc140/story-cycle-motions/mb-hando02.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-009.zip",
+      "bytes": 5241420,
+      "sha256": "a785dc96fd23d9f0edbd47d4487526c628c4d019281e60b5c72a9fbb5965150f",
+      "files": [
+        "assets/pxf-baked-20261010/pxf-05-enemy-atlas.png",
+        "assets/rc138/map-kair02.png",
+        "assets/rc140/story-cycle-motions/mb-ep1a09-atlas.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-010.zip",
+      "bytes": 5241456,
+      "sha256": "093fef28cf01f7f72c26f1fd1f66bf362de5059f41d3d1a8e2ef4d44834434ab",
+      "files": [
+        "assets/boss-actions-20261011/l305-boss-poses.png",
+        "assets/vfx/v31330/mb-ep1b02/tear.webp",
+        "assets/visual-test/hospital-ward-background-atlas.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-011.zip",
+      "bytes": 5241338,
+      "sha256": "c2abb8c0c193fee0994d3887a80f9f74a91a6798b60d2d1209bb89ce37f3f025",
+      "files": [
+        "assets/ego-originals-20261008/916b1ac1-15ea-49dc-b3b0-f91ea1b8ef81.png",
+        "assets/props/v290/silver_seal_pillar.webp",
+        "assets/rc140/story-cycle-motions/c105-mid.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-012.zip",
+      "bytes": 5241412,
+      "sha256": "6481d0fd332ea3fbc644b6a9bb49e10257dda373277d3efc70077b6ca561547a",
+      "files": [
+        "assets/rc138/map-ep1b07.png",
+        "assets/rc91/awakening/gunner.png",
+        "assets/scenery-r59/future-prop3.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-013.zip",
+      "bytes": 5241247,
+      "sha256": "d84799a6b0d40e068d6faec8a1402f68833c987d7415c7c0d49fb20acc3f34aa",
+      "files": [
+        "assets/rc138/map-kair04.png",
+        "assets/vfx/rc86/cult03-heretic-han-idle-v2.png",
+        "assets/vfx/v31323/boss/mb-ep1b06b/ep1b06b_greed_golden_calf_cluster.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-014.zip",
+      "bytes": 5241357,
+      "sha256": "a5822d28de44e6ed38ceb5cf64d025cc18a6748ab0fa60d14eaffd8332ef68f4",
+      "files": [
+        "assets/maps/ep1b_05_asmodai_stage_rc24.png",
+        "assets/pxf-baked-20261010/pxf-28-atlas.png",
+        "assets/rc137/boss-projectiles-source.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-015.zip",
+      "bytes": 5240940,
+      "sha256": "4155d7bae20072e4b2a9fb5ef84937282ff70326c9e65dc4b3568c4b69a4db6a",
+      "files": [
+        "assets/generated-story10-cycle-20261005/ep1a10/ep1a10-hospital-denial-map.png",
+        "assets/pxf-baked-20261010/pxf-06-enemy-atlas.png",
+        "assets/rc91/awakening/hwando.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-016.zip",
+      "bytes": 5241404,
+      "sha256": "fb9f74968a3fdfc5cf5c190b723cf72c02ab3736a3de91c25cd67447c51f9f56",
+      "files": [
+        "assets/rc133/art/star.png",
+        "assets/visual-test/hospital-prop-atlas-oriented.png",
+        "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-017.zip",
+      "bytes": 5241076,
+      "sha256": "7a13ec24326565446a45a849efdda00f4c8df115266873c8fb3595a8b59d18d7",
+      "files": [
+        "assets/last3/Monster_FallenAngelKnight_AttackSide.png",
+        "assets/vfx/energy-core.webp",
+        "assets/visual-test/hospital-floor-material-atlas.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-018.zip",
+      "bytes": 5241089,
+      "sha256": "15203161037b87ae58617c9c17e8aac07be22efab107e826317d48dc24fc27ac",
+      "files": [
+        "assets/boss-actions-20261011/c103-boss-poses.png",
+        "assets/cult-v3123/black_robed_nightmare_demon.webp",
+        "assets/rc138/map-murder02.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-019.zip",
+      "bytes": 5241284,
+      "sha256": "1f2b0498837df2ea810139efe9af8fec6f5e4839d9b874c50e9cd1271daa7023",
+      "files": [
+        "assets/pxf-baked-20261010/pxf-27-enemy-atlas.png",
+        "assets/rc138/map-ep1a08.png",
+        "assets/rc91/awakening/hunter.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-020.zip",
+      "bytes": 5241287,
+      "sha256": "7bf2b77163aca20ca1883ec1d3eba0c657bf3f5ff6caac808e1e9968342e8f31",
+      "files": [
+        "assets/heroes/normalized/directions/hunter-right.webp",
+        "assets/rc91/awakening/lauren.png",
+        "assets/rc91/awakening/seoha.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-021.zip",
+      "bytes": 5241320,
+      "sha256": "d5094d9e1eb1493d62671be6797b6db1caeec8cba0f8e218f7d6f02bd82e5927",
+      "files": [
+        "assets/maps/ep1a_00_demon_tree_garden.png",
+        "assets/maps/ep1a_08_blood_hospital_rc24.png",
+        "assets/vfx/heroes/hunter-a.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-022.zip",
+      "bytes": 5241351,
+      "sha256": "f34ac2b89c7a98088df9a1afd13fe29ed334103d3eb57602afa91b056031bbb0",
+      "files": [
+        "assets/boss-actions-20261011/c102-boss-poses.png",
+        "assets/generated-v31342-rc39/zombie_guardian_knight.png",
+        "assets/u2/generated-v350/u2_cyborg_hound.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-023.zip",
+      "bytes": 5241184,
+      "sha256": "e2d8d39ee8628274f662605f42406916af62f3f2695672eae4aadd91e9b10fd7",
+      "files": [
+        "assets/boss-actions-20261011/dist00-boss-poses.png",
+        "assets/last3/Monster_Wolf.png",
+        "assets/rc133/art/arena.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-024.zip",
+      "bytes": 5240641,
+      "sha256": "c42a154310160ae83ded580958def7c5aedd95d7f83ca7bc111f7f64007e43b3",
+      "files": [
+        "assets/rc26/audio/opening-memory.wav",
+        "assets/rc91/awakening/neon.png",
+        "assets/story-narration/v1/audio/kair09-pre-21da0ee7ceaa92fd81a1faca.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-025.zip",
+      "bytes": 5240874,
+      "sha256": "c9cba7d7775bddcc113ae010b6ce0991f3e62eb0a77779e423533759bd7f3410",
+      "files": [
+        "assets/generated-v31342-rc39/goat_head_demon_mob.png",
+        "assets/pxf-baked-20261010/pxf-28-player-atlas.png",
+        "assets/rc140/story-cycle-motions/c106-mid.png",
+        "assets/scenery-r59/roots.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-026.zip",
+      "bytes": 5240868,
+      "sha256": "0358c6a3b4a35afcbd96577d4f9249d7d453fb2e0beee36794ca6deb12703568",
+      "files": [
+        "assets/rc140/story-cycle-motions/mb-ep1a08-atlas.png",
+        "assets/rc140/story-cycle-motions/mb-ep1a11-atlas-v2.png",
+        "assets/story-narration/v1/audio/kair05-pre-23e7a901584e1d73ce0e92c1.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-027.zip",
+      "bytes": 5240990,
+      "sha256": "995a7510c5ac3db3acc83607d26392b90b14aca9b4748312678aa42047246fc6",
+      "files": [
+        "assets/last3/Monster_FallenAngelKnight_Base.png",
+        "assets/pxf-baked-20261010/pxf-09-atlas.png",
+        "assets/rc135/midboss-motions/sheets/mb-dist01.png",
+        "assets/rc91/awakening/slayer.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-028.zip",
+      "bytes": 5241341,
+      "sha256": "d1fd60981118cf708bb80f8d5c89f81b615d4122e1250e20fdf615f3b42278ca",
+      "files": [
+        "assets/boss-actions-20261011/mb-ep1a07-poses.png",
+        "assets/generated-v31342-rc39/gargoyle_mob.png",
+        "assets/story-narration/v1/audio/kair02-pre-f62d668ce74da0f0147cbdc2.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-029.zip",
+      "bytes": 5240359,
+      "sha256": "9df91b5b67070e08c0fe21764976190d2c7ef6a69f2fecd92c830f1b57913ce1",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_attack.png",
+        "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_charge.png",
+        "assets/pxf-baked-20261010/pxf-05-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-06-atlas.png",
+        "assets/story-narration/v1/audio/ep1b02-post-0a57140e84197e9043592d08.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-030.zip",
+      "bytes": 5240927,
+      "sha256": "bca2d00c6fdcb8e862c4af9f720dd716c327e85877a8dbc004be9d7a498b0722",
+      "files": [
+        "assets/episode1a/demon_tree_root_seraph.png",
+        "assets/rc137/mob-attacks-04.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b01-atlas.png",
+        "assets/vfx/heroes/rian-a.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-031.zip",
+      "bytes": 5241020,
+      "sha256": "100b15d0de70b207a22cdc00baa07a830b1d9dc4b5d26e6f172fa829c5ceea33",
+      "files": [
+        "assets/boss-actions-20261011/mb-kair09-v31231-poses.png",
+        "assets/heroes/normalized/gunner/aim_front.webp",
+        "assets/rc140/story-cycle-motions/mb-ep1b04-atlas.png",
+        "assets/rc140/story-cycle-motions/mb-kair04-v31231.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-032.zip",
+      "bytes": 5240913,
+      "sha256": "585a83fd8300b8804bcf4e665fce2c332e50b3ee8128f8a09ced88eda16805b0",
+      "files": [
+        "assets/rc140/story-cycle-motions/mb-ep1b03-atlas-v2.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b05-atlas.png",
+        "assets/story-narration/v1/audio/last304-pre-e40e4a2bea43d73b8d78eb86.mp3",
+        "assets/vfx/heroes/hunter-e.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-033.zip",
+      "bytes": 5241306,
+      "sha256": "91a0ac4b9fbd15a5058efd615a4e4931b15001053dfe634430d44d9c700546cd",
+      "files": [
+        "assets/hero-authored-v314rc5/slayer-action-atlas.png",
+        "assets/rc140/story-cycle-motions/c101-mid.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b02-atlas.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-034.zip",
+      "bytes": 5240585,
+      "sha256": "f404aee52d47b4d83e56afb491efc589635b1fd62ddfc0965cf4c64871208f69",
+      "files": [
+        "assets/pxf-baked-20261010/melee-spark-enemy-atlas.png",
+        "assets/rc135/midboss-motions/sheets/mb-dist02.png",
+        "assets/rc137/mob-attacks-06.png",
+        "assets/vfx/rc86/cult03-heretic-baek-idle-v2.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-035.zip",
+      "bytes": 5241019,
+      "sha256": "66881e92d2b01ca1fb1cd1436c79b3ac23c56ee166c2705d4331875da7418124",
+      "files": [
+        "assets/generated-v3128/projectiles/pride_cross.webp",
+        "assets/rc140/story-cycle-motions/mb-hando03.png",
+        "assets/rc140/story-cycle-motions/mb-murder01.png",
+        "assets/visual-test/hospital-ranged-motion-r52.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-036.zip",
+      "bytes": 5240984,
+      "sha256": "96c9a2386d186ec5a82335aa993ff98265b51113687988779885f36f31ab2db0",
+      "files": [
+        "assets/heroes/normalized/actions-directional/seoha-attack-left.webp",
+        "assets/rc135/midboss-motions/sheets/mb-dist04.png",
+        "assets/rc91/awakening/michaela.png",
+        "assets/story-narration/v1/audio/ep1a11-pre-450aa4fdec51316e7ab85bcd.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-037.zip",
+      "bytes": 5241012,
+      "sha256": "4b937c86db0822a4cd37c4f468ca5f653e5ea235534f334aa874b42a931f04fa",
+      "files": [
+        "assets/generated-v3125/kair-guardians/guardian_03.webp",
+        "assets/rc140/story-cycle-motions/mb-ep1b06-atlas-v2.png",
+        "assets/visual-test/hospital-boss-motion-r53.png",
+        "assets/visual-test/hospital-ranged-back-r53.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-038.zip",
+      "bytes": 5240834,
+      "sha256": "fd7f14f47237cabea54f0e50555ca0d0d79bcfb90259b565f30e10f0f6ace42d",
+      "files": [
+        "assets/generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png",
+        "assets/generated-v31224/actors-normalized/4a74058f0b58_envy-attack.webp",
+        "assets/rc140/story-cycle-motions/mb-ep1b06b-atlas-v2.png",
+        "assets/rc140/story-cycle-motions/mb-kair01-v31231.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-039.zip",
+      "bytes": 5240410,
+      "sha256": "27d6186f5d1e50960470ce9dfb416301251cddf23aa8e9e7da5ccff1c9bd6b78",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/blue_executor_idle.png",
+        "assets/rc140/story-cycle-motions/u201-mid.png",
+        "assets/story-narration/v1/audio/hando01-pre-fbdd14cc3cf05fae96a105f0.mp3",
+        "assets/story-narration/v1/audio/p-c982278e1986a63afbb7f81e.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-040.zip",
+      "bytes": 5240521,
+      "sha256": "6f60f1e4a9427fcf3fa4bd6a2dba2ea6a365a5e1bd1e7c67a6981a5f33e818d5",
+      "files": [
+        "assets/boss-actions-20261011/c103-mid-poses.png",
+        "assets/maps/generated-v31213/u203_controller_memory_nexus.jpg",
+        "assets/story-narration/v1/audio/u201-post-c6621a51d33730106b25fc82.mp3",
+        "assets/story-narration/v1/audio/u201-pre-c2ebf253f455b2ac465ae945.mp3",
+        "assets/vfx/heroes/hwando-w.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-041.zip",
+      "bytes": 5240829,
+      "sha256": "8ba63c63aae76fbcd44316397b7c6a89d1a2e7a7e44d6d96451ca48e8037960a",
+      "files": [
+        "assets/ego-originals-20261008/analysis_output_1_attack.png",
+        "assets/rc135/midboss-motions/sheets/mb-dist06.png",
+        "assets/story-narration/v1/audio/ep1a11-post-dcfc1f20d8be5668fb49188d.mp3",
+        "assets/story-narration/v1/audio/kair07-pre-8097bb64b698de0ad16bd4c7.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-042.zip",
+      "bytes": 5240426,
+      "sha256": "dd27b3763273859ef288862356dff5ac1dcac4d9bcaf27a5f48b01b23ed28455",
+      "files": [
+        "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+        "assets/heroes/normalized/gunner/aim_back.webp",
+        "assets/story-narration/v1/audio/dist03-pre-98b8fb341f762758245daccb.mp3",
+        "assets/vfx/v31330/dist00-boss/beam_rc25.png",
+        "audio/rc133/processed/bgm/Control_of_Time_1-231007d6.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-043.zip",
+      "bytes": 5240003,
+      "sha256": "15d6eff13b349118bb104db794d4fd50058a7e86a17886d72737cdc2cdddfda5",
+      "files": [
+        "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+        "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-01-atlas.png",
+        "assets/pxf-baked-20261010/pxf-05-atlas.png",
+        "assets/story-narration/v1/audio/dist02-post-1838fbec19fd3d43ab58042c.mp3",
+        "assets/vfx/hospital-r49/medical-impacts-r49.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-044.zip",
+      "bytes": 5240523,
+      "sha256": "8d0340ed5cc77126af5e5e2c08feefc1cc7fae249154fb018c7964e2a23113e9",
+      "files": [
+        "assets/actors/v31345/guardians/great-04-atlas.webp",
+        "assets/actors/v31345/guardians/great-05-atlas.webp",
+        "assets/ego-originals-20261008/analysis_output_2_walk_dodge.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b08.png",
+        "assets/vfx/heroes/lauren-e.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-045.zip",
+      "bytes": 5240433,
+      "sha256": "1921336410ee66017654e257e5ca0f59a47439e06611198e2d95f8e0050c4902",
+      "files": [
+        "assets/rc135/midboss-motions/sheets/mb-dist05.png",
+        "assets/rc140/story-cycle-motions/mb-last302-v31231.png",
+        "assets/rc140/story-cycle-motions/mb-murder02.png",
+        "assets/story-narration/v1/audio/murder01-post-6206cf6b0cff5b9aee7227b9.mp3",
+        "assets/vfx/v31323/boss/mb-ep1a09/ep1a09-injection-burst.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-046.zip",
+      "bytes": 5239715,
+      "sha256": "d7bd42509ecfaae96e4080503c071a73932c669c83f832191aecee4ed7f2d330",
+      "files": [
+        "assets/actors/v31345/guardians/great-01-atlas.webp",
+        "assets/murder/rain_witness.png",
+        "assets/rc135/midboss-motions/sheets/mb-dist03.png",
+        "assets/rc140/story-cycle-motions/u206-mid.png",
+        "audio/rc133/processed/bgm/Near-Silence_Restart-41a49d56.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-047.zip",
+      "bytes": 5240140,
+      "sha256": "f97df80bf09f1227041906276cf8e17c37724df16cd2f2d17a4c2fedda2fc677",
+      "files": [
+        "assets/pxf-additional-baked-20261010/extra-04-atlas.png",
+        "assets/rc137/mob-attacks-08.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b07.png",
+        "assets/rc140/story-cycle-motions/u203-mid.png",
+        "assets/story-narration/v1/audio/dist01-post-bc131c41d9fb7908e5b789d6.mp3",
+        "assets/story-narration/v1/audio/kair03-pre-a32917ed9e171edfe9161059.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-048.zip",
+      "bytes": 5240575,
+      "sha256": "6bf99db02ccf69d0c27d7d59e7429142ac8055c620171060fc886b2cbd0afe16",
+      "files": [
+        "assets/actors/v31345/guardians/great-06-atlas.webp",
+        "assets/rc137/mob-attacks-09.png",
+        "assets/rc140/story-cycle-motions/murder04-mid.png",
+        "assets/rc140/story-cycle-motions/u202-mid.png",
+        "assets/story-narration/v1/audio/dist03-pre-f8875fb45764ee7e7edb2957.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-049.zip",
+      "bytes": 5240103,
+      "sha256": "d92f699565cff3aa3ad9f4967e75166c2b8af4f0d07f54fe4c8106bd85d83c6c",
+      "files": [
+        "assets/actors/v31511/balrog-raised-sword.png",
+        "assets/generated-story10-cycle-20261005/cyclic-murder/go_seojin_idle.png",
+        "assets/pxf-baked-20261010/pxf-27-player-atlas.png",
+        "assets/rc137/mob-attacks-01.png",
+        "assets/story-narration/v1/audio/ep1a09-post-760eab68b6c556a7e7943404.mp3",
+        "assets/story-narration/v1/audio/ep1a09-pre-592630ba4e5a4548acfe052e.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-050.zip",
+      "bytes": 5239836,
+      "sha256": "2cded31fe8bf5179153318e90ec09cb057eb14ebb73557f1eaed74a81f21784c",
+      "files": [
+        "assets/generated-story10-cycle-20261005/ep1a10/a10-o1-white-mask-pursuer-atlas.png",
+        "assets/rc137/mob-attacks-05.png",
+        "assets/rc140/story-cycle-motions/mb-ep1b09.png",
+        "assets/story-narration/v1/audio/ep1a10-post-a4450b5233f8c265349d1788.mp3",
+        "assets/story-narration/v1/audio/kair10-post-9f177b5d9b2142fb449a5a96.mp3",
+        "assets/visual-test/hospital-orderly-motion-r51-v2.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-051.zip",
+      "bytes": 5239720,
+      "sha256": "aa59dd0287c89e8d69c274cd78d539bc0deabdd4e825e3b25c66904e348869eb",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/yoon_haram_lurch.png",
+        "assets/heroes/normalized/directions/michaela-left.webp",
+        "assets/rc140/story-cycle-motions/kair-great-05.png",
+        "assets/scenery-r60/ember.webp",
+        "assets/story-narration/v1/audio/cult03-pre-d547787dc4af7174a8bd82ec.mp3",
+        "assets/story-narration/v1/audio/ep1b02-pre-80de88477b870540accb34d0.mp3",
+        "assets/story-narration/v1/audio/ep1b03-pre-f199595d24812c22bdda1522.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-052.zip",
+      "bytes": 5239586,
+      "sha256": "179eecb5eafd9b9751d053fac2d70344671e5e75d435b5235fae64d3e002f49e",
+      "files": [
+        "assets/pxf-baked-20261010/melee-spark-player-atlas.png",
+        "assets/rc137/mob-attacks-02.png",
+        "assets/rc24/lust-heel.png",
+        "assets/story-narration/v1/audio/ep1b05-pre-d29cbc58afbaff3f6b97c220.mp3",
+        "assets/story-narration/v1/audio/u204-post-080c5a986a14c21c75862dcc.mp3",
+        "assets/story-narration/v1/audio/u206-post-98d8446da42058424db47020.mp3",
+        "assets/v31345/maps/ep1a10.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-053.zip",
+      "bytes": 5239707,
+      "sha256": "602cdfa05eaab154709ea70437dbbdb2afac1c83badc9068ade50d95e611bada",
+      "files": [
+        "assets/heroes/normalized/actions-v3126/hwando-move-front.webp",
+        "assets/maps/u2_02_suppression.jpg",
+        "assets/rc137/mob-attacks-07.png",
+        "assets/story-narration/v1/audio/dist06-post-17bcc5d7fa18072e59ece6d1.mp3",
+        "assets/story-narration/v1/audio/ep1a10-pre-b0ae3a1ad04593f578272a5f.mp3",
+        "assets/story-narration/v1/audio/ep1b09-pre-055dc1e0f726f5b9a8daa72a.mp3",
+        "assets/story-narration/v1/audio/p-9ab3ce937f8b37bb1fa78971.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-054.zip",
+      "bytes": 5239131,
+      "sha256": "5abb3a5a231aa9adede34a44007b8cb6a35dd451b7bbcfae9d23317320252f72",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/jang_minjae_lurch.png",
+        "assets/generated-story10-cycle-20261005/cyclic-murder/yoon_haram_idle.png",
+        "assets/hero_direction337/seoha/n.webp",
+        "assets/maps/u2_03_void_core.jpg",
+        "assets/rc137/mob-attacks-03.png",
+        "assets/story-narration/v1/audio/ep1b08-pre-04b9de39f3a99ab4e84e564c.mp3",
+        "assets/story-narration/v1/audio/u202-post-cbe0673d735b53f31f256653.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-055.zip",
+      "bytes": 5237652,
+      "sha256": "8f2160cc8d114436ed1c3832a1daa260c0a9f1b6b0faf25f9dce7789da5a86e3",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/jang_minjae_idle.png",
+        "assets/generated-v3125/maps/kair_oblivion_cemetery.jpg",
+        "assets/maps/ep1b_06_mammon_vault.jpg",
+        "assets/maps/u2_01_observation.jpg",
+        "assets/story-narration/v1/audio/ep1b03-post-e22855d64419f7fde84dc5c8.mp3",
+        "assets/story-narration/v1/audio/u202-pre-fcbc77a97dfc6017ee46e974.mp3",
+        "assets/visual-test/hospital-medical-tools-r20.png"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-056.zip",
+      "bytes": 5238798,
+      "sha256": "4936b02a8e8b210ae728719dc632c25ea26af191d6eb5d9d3c1d4f6b3fb8c780",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/han_igyeong_lurch.png",
+        "assets/story-narration/v1/audio/ep1a08-pre-f2b56466463f06e11308f385.mp3",
+        "assets/story-narration/v1/audio/ep1b05-post-9efcf5eff6f52c66f80e57ab.mp3",
+        "assets/story-narration/v1/audio/ep1b06-post-3cc29a08afceb5045ac52596.mp3",
+        "assets/story-narration/v1/audio/ep1b07-post-7dbdaf429f5236114e229928.mp3",
+        "assets/story-narration/v1/audio/ep1b08-post-279ba2f2a836376ec6c6ca6a.mp3",
+        "assets/v31345/maps/ep1a09.webp",
+        "assets/v31345/maps/ep1a11.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-057.zip",
+      "bytes": 5238758,
+      "sha256": "71fbd02ab26063bc5b39cfb4b57a43a11f931f5ec61004481b5ca68902f2c50a",
+      "files": [
+        "assets/generated-story10-cycle-20261005/cyclic-murder/han_igyeong_idle.png",
+        "assets/maps/kair_03_collapsed_timeway.jpg",
+        "assets/maps/last3_03_fallen_court.jpg",
+        "assets/rc26/audio/root-memory.wav",
+        "assets/story-narration/v1/audio/ep1b06b-pre-09fd5707aa403fdcf8d05997.mp3",
+        "assets/story-narration/v1/audio/u205-post-9a7fa02f67a4690e8b435b4d.mp3",
+        "assets/u2/generated-v350/u2_memory_orb.webp",
+        "assets/v31345/maps/dist03.webp",
+        "assets/vfx/v31322/control-blades-clean.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-058.zip",
+      "bytes": 5236943,
+      "sha256": "17d6af87869b3055cbcb582f9f8209cca453199d689c83803d44797d33f43ec9",
+      "files": [
+        "assets/last3/Monster_FallenAngelKnight_Guard.png",
+        "assets/story-narration/v1/audio/cult02-pre-c90e7df92ea47339da915bc4.mp3",
+        "assets/story-narration/v1/audio/dist02-pre-9dc7a79088c0dc853625b5c4.mp3",
+        "assets/story-narration/v1/audio/ep1a08-post-6e3e711b6ac4543a3324c7c7.mp3",
+        "assets/story-narration/v1/audio/last303-pre-abf52e7d2b83129b4ff5ab4c.mp3",
+        "assets/story-narration/v1/audio/p-3d68be4aad61109a28f0ba6e.mp3",
+        "assets/v31345/maps/dist02.webp",
+        "assets/v31345/maps/dist04.webp",
+        "assets/v31345/maps/dist06.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-059.zip",
+      "bytes": 5237740,
+      "sha256": "fc8a8f001731217c15821fa89e69e5d6fc53412e76139398772dc139787411b4",
+      "files": [
+        "assets/generated-v3125/maps/kair_time_forest.jpg",
+        "assets/maps/kair_01_academy.jpg",
+        "assets/murder/rooftop_echo.png",
+        "assets/story-narration/v1/audio/dist01-pre-b728e54b731563159aae4902.mp3",
+        "assets/story-narration/v1/audio/ep1b06-pre-ce39b376fcc073e605adf1e4.mp3",
+        "assets/story-narration/v1/audio/kair04-pre-7379c565d9307b815567f558.mp3",
+        "assets/story-narration/v1/audio/last301-pre-e7b9c7a9503ce4813912fcd3.mp3",
+        "assets/story-narration/v1/audio/last304-post-c81462d0d931c4a4239fa08e.mp3",
+        "assets/story-narration/v1/audio/last305-pre-fc89719a681294a3afca9b06.mp3",
+        "assets/vfx/bosses/v3110/ep1b04_poison_pot_tongue_vortex.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-060.zip",
+      "bytes": 5238088,
+      "sha256": "f5a9a9d0afcfb63fca19f150df5afdceadc34c0dfac567b6f230cfbb430e4027",
+      "files": [
+        "assets/generated-v3125/maps/kair_polluted_waterway.jpg",
+        "assets/last3/Monster_FallenAngelKnight_Attack.png",
+        "assets/scenery-r59/clock.webp",
+        "assets/scenery-r60/rose.webp",
+        "assets/story-narration/v1/audio/dist06-pre-d2756903b6437411f5d5ac09.mp3",
+        "assets/story-narration/v1/audio/hando03-pre-a82710b72297e16aa457aa9f.mp3",
+        "assets/story-narration/v1/audio/kair05-post-732b5978760a9a30406caea4.mp3",
+        "assets/story-narration/v1/audio/murder02-post-359015728668c0cbdb2ddead.mp3",
+        "assets/story-narration/v1/audio/p-87b95a3cc395a96cf556612c.mp3",
+        "assets/vfx/bosses/v3102/ep1b09_pride_machine_polarity_field.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-061.zip",
+      "bytes": 5237546,
+      "sha256": "42e478462503d5a6de5a9b5d1b9d035692947a3dca7eed62f76c9592ec0f3182",
+      "files": [
+        "assets/generated-v3125/maps/kair_black_workshop.jpg",
+        "assets/generated-v3125/maps/kair_collapsed_ritual.jpg",
+        "assets/generated-v3125/maps/kair_neuron_gate.jpg",
+        "assets/maps/ep1b_01_solomon_chapel.jpg",
+        "assets/maps/rc53/cult04-final-judgment.jpg",
+        "assets/scenery-r60/village.webp",
+        "assets/story-narration/v1/audio/kair06-post-bf158be7b2fff09be9d96098.mp3",
+        "assets/story-narration/v1/audio/last302-pre-20af1cfeb421e080f86d9940.mp3",
+        "assets/story-narration/v1/audio/p-b330239aba1d474407e04d9c.mp3",
+        "assets/story-narration/v1/audio/p-fd92f3feed32806683267579.mp3",
+        "assets/story-narration/v1/audio/u203-post-7c7b63340c8b2a1a59134c62.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-062.zip",
+      "bytes": 5237270,
+      "sha256": "81ae7e32af24ef548ac7d1cf62efdc14d9466d2746388030e1c905300d744031",
+      "files": [
+        "assets/generated-v3125/maps/fusion_goblin_forest.jpg",
+        "assets/generated-v3125/maps/kair_sealed_corridor.jpg",
+        "assets/maps/generated-v31213/hando03_ego_mirror_throne.jpg",
+        "assets/murder/silent_alarm.png",
+        "assets/pxf-baked-20261010/explosion-atlas.png",
+        "assets/scenery-r59/future.webp",
+        "assets/scenery-r59/gothic.webp",
+        "assets/scenery-r60/snow.webp",
+        "assets/story-narration/v1/audio/ep1b04-post-bdb092ee5f36dd997e6d6231.mp3",
+        "assets/story-narration/v1/audio/hando02-pre-55553de3e9f2f471d513b516.mp3",
+        "assets/story-narration/v1/audio/kair10-pre-67b4d8c2fc4d84c84a762596.mp3",
+        "assets/v31345/maps/dist05.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-063.zip",
+      "bytes": 5237102,
+      "sha256": "360d841be7f6b204b0d03c83dc46f88a4a1946aeb4ff81dd70b60326f9bafa81",
+      "files": [
+        "assets/episode1b/generated-v393/heartlight_stage_director.webp",
+        "assets/generated-v3125/maps/u2_war_loop.jpg",
+        "assets/maps/ep1b_07_hotel_fire.jpg",
+        "assets/maps/last3_01_village.jpg",
+        "assets/scenery-r59/swamp.webp",
+        "assets/scenery-r60/castle.webp",
+        "assets/scenery-r60/time.webp",
+        "assets/story-narration/v1/audio/p-087cfbcd16d14c487edde4e9.mp3",
+        "assets/story-narration/v1/audio/p-4573dd5cc1a3921526e53109.mp3",
+        "assets/story-narration/v1/audio/p-5af5ebc091228aa39244fca9.mp3",
+        "assets/story-narration/v1/audio/p-c063786f0f29563fb8c1d5c3.mp3",
+        "assets/story-narration/v1/audio/p-f67481f65822970f9222a832.mp3",
+        "assets/vfx/generated/v31309/gunner-memory-laser-orb.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-064.zip",
+      "bytes": 5236242,
+      "sha256": "b7efe29f97b6dac963bef25b2246e1856aa39932b3d4ba7f559b4d306ed6c5df",
+      "files": [
+        "assets/generated-v31224/boss-vfx/envy_mirror_shard.webp",
+        "assets/maps/ep1b_03_cracked_glasses.jpg",
+        "assets/maps/generated-v31213/cult02_neural_choir_arena.jpg",
+        "assets/maps/generated-v31213/cult03_triune_ego_extraction_arena.jpg",
+        "assets/maps/generated-v31213/murder03_executor_signal_rooftop.jpg",
+        "assets/story-narration/v1/audio/p-34875a6d939e75bfe592bd99.mp3",
+        "assets/story-narration/v1/audio/p-693ca084ead4c0db989a789a.mp3",
+        "assets/story-narration/v1/audio/p-81222cf922f6c56dc53657ad.mp3",
+        "assets/story-narration/v1/audio/p-8dd85dcfc4763b303f68ace0.mp3",
+        "assets/story-narration/v1/audio/p-98b8f3e046df881021b87985.mp3",
+        "assets/story-narration/v1/audio/p-ab2a3adef02eef950a0f5685.mp3",
+        "assets/story-narration/v1/audio/p-c8ac5d467a53dd95c6107ac4.mp3",
+        "assets/story-narration/v1/audio/p-f9552652ebd8bb1d1ed20ce9.mp3",
+        "assets/story-narration/v1/audio/p-fd802fcd9aa9f369a9ecae43.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-065.zip",
+      "bytes": 5236155,
+      "sha256": "d41dc301d0d5dbce090418a89fa830f1cd1807168b87096dd8c45abdf7527a4c",
+      "files": [
+        "assets/episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+        "assets/generated-v31224/boss-vfx/cult_triune_rose_sigil.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-ultimate-front.webp",
+        "assets/maps/ep1b_04_glutton_kitchen.jpg",
+        "assets/murder/hotel_clerk.png",
+        "assets/story-narration/v1/audio/p-2dcb253df9deae52d0e53e29.mp3",
+        "assets/story-narration/v1/audio/p-3b85cba543cb9b26e6392431.mp3",
+        "assets/story-narration/v1/audio/p-68f583236d8adfe36126f026.mp3",
+        "assets/story-narration/v1/audio/p-9b69d5462a3117d00a02394b.mp3",
+        "assets/story-narration/v1/audio/p-d2c2ac28805efb9613eda88c.mp3",
+        "assets/story-narration/v1/audio/p-d500b0b044ac60b585a270a9.mp3",
+        "assets/story-narration/v1/audio/p-e39273e4368c0069d1c246da.mp3",
+        "assets/story-narration/v1/audio/p-f21f1c9521eef594b19b8a20.mp3",
+        "assets/story-narration/v1/audio/p-f77a7b2adfae159580ccbe9d.mp3",
+        "assets/vfx/v31323/boss/u203-boss/controller-charge-core.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-066.zip",
+      "bytes": 5236187,
+      "sha256": "63b02b3fae21f0e8d044e86c48ffbe9a8d2ea38c9ea2afc56fd58978951fa6f8",
+      "files": [
+        "assets/generated-v31224/boss-vfx/wrath_pride_execution_sigil.webp",
+        "assets/generated-v3125/maps/fusion_neutral_meadow.jpg",
+        "assets/maps/ep1b_02_sloth_house.jpg",
+        "assets/maps/ep1b_08_pride_cathedral.jpg",
+        "assets/maps/ep1b_09_black_sun_core.jpg",
+        "assets/scenery-r59/brain.webp",
+        "assets/story-narration/v1/audio/p-01b89f151860556709f44842.mp3",
+        "assets/story-narration/v1/audio/p-24c822f79315c8ab91475d71.mp3",
+        "assets/story-narration/v1/audio/p-2d9159ea9b7e5de6b4e22d10.mp3",
+        "assets/story-narration/v1/audio/p-a8c97e24056fd1a975120a73.mp3",
+        "assets/story-narration/v1/audio/p-ac38bf7dfea51564d49536da.mp3",
+        "assets/story-narration/v1/audio/p-b930c4444cdc7ed759268a8c.mp3",
+        "assets/story-narration/v1/audio/p-c920c9daffc9281de74d1178.mp3",
+        "assets/story-narration/v1/audio/p-f73c15d76b177499100d6ea1.mp3",
+        "assets/story-narration/v1/audio/u205-pre-afa41a5f764b9c33e8a4965f.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-067.zip",
+      "bytes": 5235522,
+      "sha256": "9a1b4c3780f8e552fdf0fa18f2370815a1ce1b5f6c223aaf3c9050f06a50e85d",
+      "files": [
+        "assets/generated-v31224/boss-vfx/sleepless_gaze_sigil.webp",
+        "assets/maps/rc53/kair03-siren-timeway.webp",
+        "assets/scenery-r60/neural.webp",
+        "assets/story-narration/v1/audio/p-465c4a0697b0ae42bf70d848.mp3",
+        "assets/story-narration/v1/audio/p-4e3cdf2702895665a6efe0f8.mp3",
+        "assets/story-narration/v1/audio/p-64ea3c43fdf54aee3d996616.mp3",
+        "assets/story-narration/v1/audio/p-7335128b0db1ed43f567d5c7.mp3",
+        "assets/story-narration/v1/audio/p-7e46ec3f937ecff2a9548190.mp3",
+        "assets/story-narration/v1/audio/p-8e4df36eb396f0d9b66572c2.mp3",
+        "assets/story-narration/v1/audio/p-9b1bdd2d64ecfef4e2dbd7af.mp3",
+        "assets/story-narration/v1/audio/p-b5f68d892b502d5fd8009d1b.mp3",
+        "assets/story-narration/v1/audio/p-c19925b7d85fde3b69a6fddc.mp3",
+        "assets/story-narration/v1/audio/p-e97a8118bd30b67e4dcc4c49.mp3",
+        "assets/story-narration/v1/audio/p-ff5aaea5fe5f1dd7df92bd6f.mp3",
+        "assets/vfx/bosses/v3110/ep1b03_knife_glass_photo_rain.webp",
+        "assets/vfx/bosses/v3110/ep1b06b_candy_yoyo_spike_burst.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-068.zip",
+      "bytes": 5234584,
+      "sha256": "0add14d42ab883ca0130dd9fc7ffec814522a5e86c13c7982f0c0d8e12b56d26",
+      "files": [
+        "assets/episode1b/generated-v3102/ep1b08_pride_zombie.webp",
+        "assets/generated-v31224/boss-vfx/hando_phantom_reclaim_wave.webp",
+        "assets/story-narration/v1/audio/cult03-post-6aaf5ffa02154df998feed90.mp3",
+        "assets/story-narration/v1/audio/last301-post-f75e970a34d22e3631ca5fba.mp3",
+        "assets/story-narration/v1/audio/last302-post-6d1ccf8114effd9ea2be42a3.mp3",
+        "assets/story-narration/v1/audio/last305-post-0d5c72b96953169782611973.mp3",
+        "assets/story-narration/v1/audio/p-3cbdb1d87100be77f391af86.mp3",
+        "assets/story-narration/v1/audio/p-6516038d71b2fdfe0cfa4770.mp3",
+        "assets/story-narration/v1/audio/p-669ea5236318a7778dad3446.mp3",
+        "assets/story-narration/v1/audio/p-75fa90aee014b5cc128a7df9.mp3",
+        "assets/story-narration/v1/audio/p-80cb8a8cbb3d6461a0f32606.mp3",
+        "assets/story-narration/v1/audio/p-839b2637a9df1713ac1d186c.mp3",
+        "assets/story-narration/v1/audio/p-92f32840ee1006e3f2c3fe18.mp3",
+        "assets/story-narration/v1/audio/p-b7d2c68db0ddaf748e5634c6.mp3",
+        "assets/story-narration/v1/audio/p-d20ff695c9f10873217cedcf.mp3",
+        "assets/story-narration/v1/audio/p-d7384f9b570068c6c564b8b6.mp3",
+        "assets/vfx/generated/v31309/kair-neuron-synapse-orb.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-069.zip",
+      "bytes": 5234362,
+      "sha256": "e17f2129af732dcddb7c2d094124cffc225d66f1e1cc67c2daa108e1f137fe87",
+      "files": [
+        "assets/episode1a/generated-v31342-rc39/goat_head_demon_mob_bloodied.webp",
+        "assets/generated-v31224/boss-vfx/sleepless_six_sword_wave.webp",
+        "assets/generated-v3125/maps/murder_teal_villa.jpg",
+        "assets/scenery-r60/rose-prop4.webp",
+        "assets/story-narration/v1/audio/cult02-post-63023d9a25594dd02233f6dd.mp3",
+        "assets/story-narration/v1/audio/dist04-pre-4b07d959df48fdfd9b549b26.mp3",
+        "assets/story-narration/v1/audio/p-2a3824d4a6c6ce1e0abe3e44.mp3",
+        "assets/story-narration/v1/audio/p-53822085def2e8d5d2139ae9.mp3",
+        "assets/story-narration/v1/audio/p-7950ef327391242c34592c28.mp3",
+        "assets/story-narration/v1/audio/p-82b116f70f17961ba16f3b47.mp3",
+        "assets/story-narration/v1/audio/p-8a6eb8aeb0566f94b3196bcc.mp3",
+        "assets/story-narration/v1/audio/p-9404d2425cf05dd8a54c970e.mp3",
+        "assets/story-narration/v1/audio/p-b552a89ca56d6ddabc7daee4.mp3",
+        "assets/story-narration/v1/audio/p-cc8bc909c3258c64a919d7e2.mp3",
+        "assets/story-narration/v1/audio/p-e6681fcb63d53e140760658e.mp3",
+        "assets/story-narration/v1/audio/p-e82f8894d074b9e159841b5b.mp3",
+        "assets/story-narration/v1/audio/u203-pre-a6aa8f0ad53b26172d465966.mp3",
+        "assets/vfx/generated/v31309/siren-choir-chorus-wave.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-070.zip",
+      "bytes": 5233402,
+      "sha256": "0d1a89a3b7a08be40cc986fc17df1f4583fff1f564734ba18056fc5d2cf85fd8",
+      "files": [
+        "assets/generated-v31224/boss-vfx/gluttony_maw_wave.webp",
+        "assets/story-narration/v1/audio/cult01-post-6f2a4f328e8f16b28a463b87.mp3",
+        "assets/story-narration/v1/audio/cult04-pre-5049638b5121c49058c22f85.mp3",
+        "assets/story-narration/v1/audio/cult06-post-6ef248210e02ae9fa902672f.mp3",
+        "assets/story-narration/v1/audio/dist05-pre-fddbfb9e36160087d3050075.mp3",
+        "assets/story-narration/v1/audio/p-1868ac2c524ba5d9ffb45fb2.mp3",
+        "assets/story-narration/v1/audio/p-5498b89edc6e90ab87dafac3.mp3",
+        "assets/story-narration/v1/audio/p-628adeefdb7f235932d92718.mp3",
+        "assets/story-narration/v1/audio/p-641e47c1b743f95423b2f732.mp3",
+        "assets/story-narration/v1/audio/p-6a3636eff844fc47c1e9a458.mp3",
+        "assets/story-narration/v1/audio/p-6fc07a66ae87454e06418c89.mp3",
+        "assets/story-narration/v1/audio/p-716928f03f15768a942b0024.mp3",
+        "assets/story-narration/v1/audio/p-7abc941cb266488bc65b3711.mp3",
+        "assets/story-narration/v1/audio/p-985f95d3d0693a033c20e4bd.mp3",
+        "assets/story-narration/v1/audio/p-baf73ef7bd1b85a125f9e994.mp3",
+        "assets/story-narration/v1/audio/p-c3b6c0478ac894b645aa47c0.mp3",
+        "assets/story-narration/v1/audio/p-dd05cdc3527d78bacddc6201.mp3",
+        "assets/vfx/generated/v31309/goblin-drum-impact-pulse.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-071.zip",
+      "bytes": 5233057,
+      "sha256": "4b309e708e309160562c641f872e3335f6ce9424e3346311ddc8ee0ad719e4b6",
+      "files": [
+        "assets/episode1a/generated-v31342-rc39/gargoyle_mob_bloodied.webp",
+        "assets/generated-v31224/boss-vfx/lucifer_judgment_sigil.webp",
+        "assets/last3/Monster_FallenAngelKnight_MoveSide.png",
+        "assets/maps/ep1b_06b_mammon_winter_forest_v3110.jpg",
+        "assets/story-narration/v1/audio/kair06-pre-0f3e769c28d264b1242e446a.mp3",
+        "assets/story-narration/v1/audio/p-0801c5b4726554b9be6093b9.mp3",
+        "assets/story-narration/v1/audio/p-0b40d0ea40596167a326efc5.mp3",
+        "assets/story-narration/v1/audio/p-0fde6ec96507d0e0af2252a6.mp3",
+        "assets/story-narration/v1/audio/p-157863d0b3e5d156b777532c.mp3",
+        "assets/story-narration/v1/audio/p-4f99cff3a760980c181d5152.mp3",
+        "assets/story-narration/v1/audio/p-4fba863cf9510bf93e80ac9a.mp3",
+        "assets/story-narration/v1/audio/p-83534535488231e73d0a2ccd.mp3",
+        "assets/story-narration/v1/audio/p-996033d28ceebfbd6d83403a.mp3",
+        "assets/story-narration/v1/audio/p-bcc875690178af1726ad7589.mp3",
+        "assets/story-narration/v1/audio/p-cd87323a146592517ba0d07c.mp3",
+        "assets/story-narration/v1/audio/p-df5dca44b0c3cda6ca324cc5.mp3",
+        "assets/story-narration/v1/audio/p-f4d2162c4d062fd3dd07f649.mp3",
+        "assets/vfx/bosses/v3110/ep1b07_mop_lighter_fire_beasts.webp",
+        "assets/vfx/bosses/v3110/ep1b08_inverted_cross_telekinesis.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-072.zip",
+      "bytes": 5233972,
+      "sha256": "697e95bab799c66214673c45080699910072f22520ea10884588818c98289724",
+      "files": [
+        "assets/cult-v3123/generated-v31342-rc39/earcovered_modern_cultist_bloodied.webp",
+        "assets/generated-v31224/boss-vfx/greed_coin_saw.webp",
+        "assets/maps/rc53/dist00-demon-tree.webp",
+        "assets/maps/rest-v399/rest_kairo_time_garden.jpg",
+        "assets/story-narration/v1/audio/hando02-post-1c0dc62b824019f892691800.mp3",
+        "assets/story-narration/v1/audio/p-040280b38d98f904b53d9277.mp3",
+        "assets/story-narration/v1/audio/p-208c54e58eb3ccae2ba854b1.mp3",
+        "assets/story-narration/v1/audio/p-4ce1d43cccb2791320dbb77b.mp3",
+        "assets/story-narration/v1/audio/p-751d0650b7f7efbed2531bb2.mp3",
+        "assets/story-narration/v1/audio/p-8d4fb757cf9c37cacff78a23.mp3",
+        "assets/story-narration/v1/audio/p-9ac28139644050f037311a48.mp3",
+        "assets/story-narration/v1/audio/p-a2134fbfd484dadcc946d87d.mp3",
+        "assets/story-narration/v1/audio/p-b922e3d8638aa8883ee2812b.mp3",
+        "assets/story-narration/v1/audio/p-d7af9481ea16eb5265a30b98.mp3",
+        "assets/story-narration/v1/audio/p-db1a45a4c5007d4f6463bf25.mp3",
+        "assets/story-narration/v1/audio/p-f2a509e9c1b7e74f9765ef8a.mp3",
+        "assets/vfx/bosses/v3102/ep1b06_greed_money_gold_cluster.webp",
+        "assets/vfx/bosses/v3110/ep1b02_deferred_life_debris.webp",
+        "assets/vfx/bosses/v3110/ep1b06_money_blades_rigged_coin.webp",
+        "assets/vfx/generated/v31309/goblin-flute-sonic-wave.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-073.zip",
+      "bytes": 5233082,
+      "sha256": "2438d60176897809337e378ef1b8faa0113ce1fc42c1d2b297949090b09b7f03",
+      "files": [
+        "assets/cult-v3123/generated-v31342-rc39/blindfold_modern_cultist_bloodied.webp",
+        "assets/generated-v31224/boss-vfx/kair_chrono_crescent.webp",
+        "assets/generated-v31224/boss-vfx/murder_causality_road.webp",
+        "assets/generated-v3125/kair-guardians/guardian_22.webp",
+        "assets/generated-v3128/maps/u2_memory_gate_v3128.jpg",
+        "assets/story-narration/v1/audio/dist05-post-61985f8650b835e581cc7afb.mp3",
+        "assets/story-narration/v1/audio/kair07-post-bfda6cb842fabaeeda8a2a94.mp3",
+        "assets/story-narration/v1/audio/kair08-pre-465a6d044f03ace74f362d7b.mp3",
+        "assets/story-narration/v1/audio/p-02c758422e4b50fcca946f46.mp3",
+        "assets/story-narration/v1/audio/p-0c9dc879ebe3fe3102ed723e.mp3",
+        "assets/story-narration/v1/audio/p-1ceb8d5f2b0d85b3a9c1fbed.mp3",
+        "assets/story-narration/v1/audio/p-2270d110c4ff513bc5705c74.mp3",
+        "assets/story-narration/v1/audio/p-31db1ee5b57f11e170ca3d44.mp3",
+        "assets/story-narration/v1/audio/p-7813490b3b4c1f162f9a342d.mp3",
+        "assets/story-narration/v1/audio/p-8f72f7970cb457d70ec07803.mp3",
+        "assets/story-narration/v1/audio/p-c02db069a8e1743b38ef2cf0.mp3",
+        "assets/story-narration/v1/audio/p-cac042ac3d8e4d2ba625e243.mp3",
+        "assets/story-narration/v1/audio/p-d8d0ce56f409ceca27f611c9.mp3",
+        "assets/story-narration/v1/audio/p-e1e4f3026e620705993b2059.mp3",
+        "assets/story-narration/v1/audio/p-f08e3da9eca905302931bc5d.mp3",
+        "assets/story-narration/v1/audio/p-f4cee95a60623e5cf86a217a.mp3",
+        "assets/story-narration/v1/audio/p-faaa5007ec81305393e96ab2.mp3"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-074.zip",
+      "bytes": 5232304,
+      "sha256": "26900473a5f727787d79af0beb71a0f2db8dd6fda6bdeee0f6a7ca7447872d65",
+      "files": [
+        "assets/dist/skeleton.png",
+        "assets/generated-v31224/boss-vfx/controller_deletion_core.webp",
+        "assets/maps/ep1a_11_false_heaven.jpg",
+        "assets/maps/generated-v31217/ep1a_demon_tree_palace_ruin.webp",
+        "assets/maps/rc56/murder03-rooftop-loop.webp",
+        "assets/maps/village_isometric.jpg",
+        "assets/story-narration/v1/audio/kair04-post-dcefd1bbf8b9127c54a5cbf2.mp3",
+        "assets/story-narration/v1/audio/p-0f2deaf213258a2a68ec2352.mp3",
+        "assets/story-narration/v1/audio/p-26752772804672d743402c99.mp3",
+        "assets/story-narration/v1/audio/p-4526ea80d7fb70c27fb342f5.mp3",
+        "assets/story-narration/v1/audio/p-528fc9801b1d930011410fa0.mp3",
+        "assets/story-narration/v1/audio/p-801da28a45026e93612c141b.mp3",
+        "assets/story-narration/v1/audio/p-9bd41c328a1e8299da9ec693.mp3",
+        "assets/story-narration/v1/audio/p-d09d70e4bd5b1c55f176bbe0.mp3",
+        "assets/story-narration/v1/audio/p-d8016ed09670b106c992517a.mp3",
+        "assets/story-narration/v1/audio/p-d8cac2050b2b1029d8ce020e.mp3",
+        "assets/story-narration/v1/audio/p-de973153e049cb5111b7167d.mp3",
+        "assets/story-narration/v1/audio/p-f80d0751727ebc04c1b06d8a.mp3",
+        "assets/vfx/bosses/v3102/ep1b03_envy_cleaver_glass_cluster.webp",
+        "assets/vfx/bosses/v3102/ep1b04_glutton_kitchen_cluster.webp",
+        "assets/vfx/bosses/v3102/ep1b09_pride_machine_electric_arc.webp",
+        "assets/vfx/bosses/v3110/ep1b05_lipstick_heel_control_strings.webp",
+        "assets/vfx/bosses/v3110/ep1b09_cyber_hounds_learning_limbs.webp",
+        "assets/vfx/heroes/michaela-q.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-075.zip",
+      "bytes": 5230648,
+      "sha256": "7a3daba1c11e2d1fb9727e784c750db37a78b76a879cd9c500c76684ae34bd36",
+      "files": [
+        "assets/dist/cult_mage.png",
+        "assets/dist/ghoul.png",
+        "assets/episode1b/greed_fox_hound.webp",
+        "assets/episode1b/lust_heart_marionette.webp",
+        "assets/generated-v31224/boss-vfx/balrog_chain_whip_wave.webp",
+        "assets/generated-v31224/boss-vfx/balrog_gate_meteor.webp",
+        "assets/hando-v3123/phantom_reclaim_blade.webp",
+        "assets/hando-v3123/silverless_shadow.webp",
+        "assets/kair/skills/dead-time-opening.png",
+        "assets/last3/Monster_Goblin.png",
+        "assets/rc133/art/awake-0.png",
+        "assets/rc133/art/awake-7.png",
+        "assets/scenery-r59/cloud.webp",
+        "assets/story-narration/v1/audio/p-334fa84a203570f3216403d8.mp3",
+        "assets/story-narration/v1/audio/p-33916682537992da9a070f72.mp3",
+        "assets/story-narration/v1/audio/p-3b3834d455cb81ae89269c6b.mp3",
+        "assets/story-narration/v1/audio/p-5478185bb2dcc4ec11b18843.mp3",
+        "assets/story-narration/v1/audio/p-5be9ccf92acfe9d4e206e2b4.mp3",
+        "assets/story-narration/v1/audio/p-7a45e36b1222a228b8294f24.mp3",
+        "assets/story-narration/v1/audio/p-d54fa93b87b334627bc19526.mp3",
+        "assets/story-narration/v1/audio/p-e21c2275bc6cb459b1ec68b0.mp3",
+        "assets/vfx/bosses/v3102/ep1b02_sloth_trash_cluster.webp",
+        "assets/vfx/bosses/v3102/ep1b06b_greed_golden_calf_cluster.webp",
+        "assets/vfx/generated/v31307/hero-impacts/michaela-seraph-spark.webp",
+        "assets/vfx/time-passives/v310/battlefield-time-stop.webp",
+        "assets/vfx/ultimate-crown.webp",
+        "assets/vfx/v31323/boss/mb-kair01-v31231/boss-chrono-time-rupture.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-076.zip",
+      "bytes": 5228296,
+      "sha256": "d401fb1c1d0f9e93160d1154b8b20f24001578d1d0c373afe1aaa3a59276f584",
+      "files": [
+        "assets/auras-r62/haste-ribbons.webp",
+        "assets/cult-v3123/black_ritual_cyborg_boss.webp",
+        "assets/cult-v3123/black_rose_chip_penitent.webp",
+        "assets/cult-v3123/final_pride_cyborg_lord.webp",
+        "assets/cult-v3123/superego_cyborg_cult_leader.webp",
+        "assets/episode1a/generated-v31217/purple_sword_spider_angel.webp",
+        "assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+        "assets/generated-v3128/maps/last3_02_sleepless_gate_v3128.jpg",
+        "assets/hando-v3123/memory_excision_connector.webp",
+        "assets/hando-v3123/return_coordinate_devourer.webp",
+        "assets/hando-v3123/timeless_silver_scout.webp",
+        "assets/kair/skills/time-severance.png",
+        "assets/maps/ep1a_07_void_descent.jpg",
+        "assets/maps/ep1a_10_addiction_city.jpg",
+        "assets/maps/generated-v31212/cult06_mechanical_judgment_arena.jpg",
+        "assets/maps/generated-v31217/fused_nightmare_core.webp",
+        "assets/maps/v3121/cult_03_unity_vat.jpg",
+        "assets/pxf-baked-20261010/pxf-23-atlas.png",
+        "assets/rc133/art/awake-1.png",
+        "assets/rc133/art/awake-2.png",
+        "assets/rc133/art/awake-3.png",
+        "assets/rc133/art/awake-4.png",
+        "assets/rc133/art/awake-5.png",
+        "assets/story-narration/v1/audio/p-e31e04ed03c5caa69c440e23.mp3",
+        "assets/story-narration/v1/audio/p-f511fb8089335c364cfcc5ab.mp3",
+        "assets/u2/drone_laser.png",
+        "assets/vfx/bosses/v3102/ep1b05_lust_heel_lipstick_cluster.webp",
+        "assets/vfx/bosses/v3102/ep1b07_wrath_burning_debris_cluster.webp",
+        "assets/vfx/generated/v31307/hero-impacts/neon-sanctuary-impact.webp",
+        "assets/vfx/generated/v31307/hero-impacts/seoha-time-fracture.webp",
+        "assets/vfx/v31323/boss/b06b-boss/ep1b06b_candy_yoyo_spike_burst.webp",
+        "assets/vfx/v31323/boss/mb-ep1b01/wrath_pride_execution_sigil.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-077.zip",
+      "bytes": 5226103,
+      "sha256": "e6e51befad3f3038a12937de8400f2ad68951491584da143635953b7f2e91fdc",
+      "files": [
+        "assets/auras-r62/ego-halo.webp",
+        "assets/auras-r62/resonance-petals.webp",
+        "assets/boss-vfx-r62/storm-core.webp",
+        "assets/cult-v3123/black_rose_crystal_guardian.webp",
+        "assets/cult-v3123/black_rose_demon_soldier.webp",
+        "assets/cult-v3123/six_legged_cyborg_lord_final.webp",
+        "assets/generated-v31224/actors-normalized/026c53a63f33_Monster_FallenAngelKnight_AttackSide.webp",
+        "assets/generated-v31224/boss-vfx/lucifer_feather_lance.webp",
+        "assets/hando-v3123/ego_theft_connector.webp",
+        "assets/hando-v3123/nameless_sword_trace.webp",
+        "assets/hando-v3123/order_seal_officer.webp",
+        "assets/hero_direction337/gunner/s.webp",
+        "assets/hero_direction337/neon/s.webp",
+        "assets/kair/bosses/command-extractor.png",
+        "assets/kair/enemies/connector.png",
+        "assets/kair/enemies/time-collector.png",
+        "assets/maps/ep1a_09_injection_ward.jpg",
+        "assets/maps/latest-v3122/black_rose_ego_core_prison.jpg",
+        "assets/maps/rc53/dist01-spider-cave.webp",
+        "assets/pxf-baked-20261010/pxf-14-atlas.png",
+        "assets/pxf-baked-20261010/pxf-23-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-23-player-atlas.png",
+        "assets/rc133/art/awake-6.png",
+        "assets/rc133/art/base-0.png",
+        "assets/rc133/art/base-1.png",
+        "assets/rc133/art/base-3.png",
+        "assets/rc133/art/base-7.png",
+        "assets/story-narration/v1/audio/dist03-post-0687a46bb90d63deb10ca53c.mp3",
+        "assets/story-narration/v1/audio/p-c5520c4f7f881ffb1bddad00.mp3",
+        "assets/u2/mdrone_attack.png",
+        "assets/u2/mdrone_idle.png",
+        "assets/vfx/bosses/v3102/ep1b09_pride_machine_debris_cluster.webp",
+        "assets/vfx/generated/v387/boss-chrono-time-rupture.webp",
+        "assets/vfx/time-passives/v310/projectile-stasis.webp",
+        "assets/vfx/v31323/boss/c104-boss/cult_triune_rose_sigil.webp",
+        "assets/vfx/v31323/boss/h103-boss/hando_phantom_reclaim_wave.webp",
+        "assets/vfx/v31323/boss/mb-murder01/boss-causality-reversal.webp",
+        "assets/vfx/v31330/mb-dist03/tear.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-078.zip",
+      "bytes": 5223973,
+      "sha256": "f5493d2fe156a8972aabf94d8b3916ae1ead3f9e7e7e457f897b43001d88e6d9",
+      "files": [
+        "assets/ailments-r61/bind.webp",
+        "assets/ailments-r61/disease.webp",
+        "assets/ailments-r61/weakness.webp",
+        "assets/boss-vfx-r62/ember-heart.webp",
+        "assets/boss-vfx-r62/frost-crystal.webp",
+        "assets/cult-v3123/pride_cyborg_cult_leader.webp",
+        "assets/episode1b/sloth_shell_brute.webp",
+        "assets/generated-v31217/boss-actions/pride_hierophant_idle.webp",
+        "assets/hando-v3123/false_signal_seal_guard.webp",
+        "assets/hero_direction334/gunner/nw.webp",
+        "assets/hero_direction334/michaela/e.webp",
+        "assets/hero_direction334/michaela/ne.webp",
+        "assets/hero_direction334/michaela/nw.webp",
+        "assets/hero_direction334/michaela/se.webp",
+        "assets/hero_direction334/michaela/sw.webp",
+        "assets/hero_direction334/michaela/w.webp",
+        "assets/hero_direction334/seoha/e.webp",
+        "assets/hero_direction334/seoha/ne.webp",
+        "assets/hero_direction334/seoha/nw.webp",
+        "assets/hero_direction334/seoha/se.webp",
+        "assets/hero_direction337/hunter/s.webp",
+        "assets/hero_direction337/lauren/s.webp",
+        "assets/hero_direction337/michaela/s.webp",
+        "assets/hero_direction337/seoha/s.webp",
+        "assets/kair/enemies/desire-tuner.png",
+        "assets/last3/Monster_Slime.png",
+        "assets/maps/latest-v3123/black_rose_chip_injection_altar.jpg",
+        "assets/pxf-baked-20261010/pxf-14-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-14-player-atlas.png",
+        "assets/rc133/art/base-2.png",
+        "assets/rc133/art/base-4.png",
+        "assets/rc133/art/base-5.png",
+        "assets/story-narration/v1/audio/ending-title-d17fc91efd3d079941ca3a53.mp3",
+        "assets/story-narration/v1/audio/p-349c9bdaf4da112a8f28c97b.mp3",
+        "assets/story-narration/v1/audio/p-64be2800ee502b63e0e9426a.mp3",
+        "assets/u2/generated-v350/u2_void_wraith.webp",
+        "assets/vfx/bosses/v3102/ep1b08_pride_cross_undead_cluster.webp",
+        "assets/vfx/generated/v31307/hero-impacts/gunner-memory-impact.webp",
+        "assets/vfx/generated/v31307/hero-impacts/lauren-stigma-puncture.webp",
+        "assets/vfx/heroes/seoha-q.webp",
+        "assets/vfx/v31323/boss/a11-boss/lucifer_judgment_sigil.webp",
+        "assets/vfx/v31323/boss/b08-boss/ep1b08_inverted_cross_telekinesis.webp",
+        "assets/vfx/v31323/boss/l303-boss/sleepless_gaze_sigil.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-079.zip",
+      "bytes": 5221788,
+      "sha256": "fd4798f97af2af7031f3abc1fc4f1c540c4f2e01debc28b978894bdfd70f28da",
+      "files": [
+        "assets/actors/v31356/balrog-rain-complete.webp",
+        "assets/ailments-r61/bleed.webp",
+        "assets/ailments-r61/charm.webp",
+        "assets/ailments-r61/fire.webp",
+        "assets/ailments-r61/frost.webp",
+        "assets/ailments-r61/harvest.webp",
+        "assets/ailments-r61/pollution.webp",
+        "assets/ailments-r61/shock.webp",
+        "assets/auras-r62/samong-mist.webp",
+        "assets/cult-v3123/angry_green_slime.webp",
+        "assets/cult-v3123/green_enemy_slime.webp",
+        "assets/episode1b/generated-v394/blue_executor.webp",
+        "assets/episode1b/wrath_fire_beast.webp",
+        "assets/generated-v31224/actors-normalized/4f26454d8ae2_enemy_void_core.webp",
+        "assets/generated-v31306/projectiles/dist01-purple-web-blade.webp",
+        "assets/hando-v3123/silver_seal_sentinel.webp",
+        "assets/hero_direction334/gunner/e.webp",
+        "assets/hero_direction334/gunner/ne.webp",
+        "assets/hero_direction334/gunner/se.webp",
+        "assets/hero_direction334/gunner/sw.webp",
+        "assets/hero_direction334/gunner/w.webp",
+        "assets/hero_direction334/hunter/e.webp",
+        "assets/hero_direction334/hunter/ne.webp",
+        "assets/hero_direction334/hunter/nw.webp",
+        "assets/hero_direction334/hunter/se.webp",
+        "assets/hero_direction334/hunter/sw.webp",
+        "assets/hero_direction334/hunter/w.webp",
+        "assets/hero_direction334/lauren/ne.webp",
+        "assets/hero_direction334/lauren/se.webp",
+        "assets/hero_direction334/lauren/sw.webp",
+        "assets/hero_direction334/neon/ne.webp",
+        "assets/hero_direction334/seoha/sw.webp",
+        "assets/hero_direction334/seoha/w.webp",
+        "assets/hero_direction338/lauren/s.webp",
+        "assets/kair/bosses/timeless-shadow.png",
+        "assets/kair/generated-v31217/arvelia_delay_archon.webp",
+        "assets/pxf-baked-20261010/pxf-15-atlas.png",
+        "assets/pxf-baked-20261010/pxf-15-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-15-player-atlas.png",
+        "assets/rc133/art/base-6.png",
+        "assets/vfx/generated/v31307/hero-impacts/hunter-petal-impact.webp",
+        "assets/vfx/generated/v315/michaela-seraph-cleansing.webp",
+        "assets/vfx/generated/v387/boss-causality-reversal.webp",
+        "assets/vfx/v31315/spirit-orb.webp",
+        "assets/vfx/v31323/boss/b04-boss/gluttony_maw_wave.webp",
+        "assets/vfx/v31323/boss/b06-boss/greed_coin_saw.webp",
+        "assets/vfx/v31323/boss/b07-boss/ep1b07_mop_lighter_fire_beasts.webp",
+        "assets/vfx/v31323/boss/l301-boss/sleepless_six_sword_wave.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-080.zip",
+      "bytes": 5215611,
+      "sha256": "758caac77f19838598d64872daabcf694255f54a8c6fa681016b47c20e432bc0",
+      "files": [
+        "assets/ailments-r61/corruption.webp",
+        "assets/ailments-r61/dark.webp",
+        "assets/episode1b/black_sun_hound.webp",
+        "assets/episode1b/generated-v394/boss_envy_demon.webp",
+        "assets/episode1b/generated-v394/envy_leviathan.webp",
+        "assets/episode1b/generated-v394/lust_asmodai.webp",
+        "assets/episode1b/generated-v394/wrath_fire_beast.webp",
+        "assets/episode1b/glutton_kitchen_scrap.webp",
+        "assets/episode1b/polar_cyborg_hound.webp",
+        "assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+        "assets/generated-v31224/actors-normalized/570df4477372_rooftop_echo.webp",
+        "assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+        "assets/generated-v31224/actors-normalized/993008dd765e_wrath-attack.webp",
+        "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+        "assets/hero_direction334/lauren/e.webp",
+        "assets/hero_direction334/lauren/nw.webp",
+        "assets/hero_direction334/lauren/w.webp",
+        "assets/hero_direction334/neon/e.webp",
+        "assets/hero_direction334/neon/nw.webp",
+        "assets/hero_direction334/neon/se.webp",
+        "assets/hero_direction334/neon/sw.webp",
+        "assets/hero_direction334/neon/w.webp",
+        "assets/hero_direction337/hunter/n.webp",
+        "assets/hero_direction338/lauren/n.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-dash-right.webp",
+        "assets/heroes/normalized/gunner/run_left_b.webp",
+        "assets/heroes/normalized/gunner/run_right_b.webp",
+        "assets/kair/enemies/resonance-slave.png",
+        "assets/maps/dream_rest_room.jpg",
+        "assets/maps/ep1a_02_horn_swamp.jpg",
+        "assets/maps/ep1a_03_blood_guardian_road.jpg",
+        "assets/maps/ep1a_04_fallen_comrade_crypt.jpg",
+        "assets/maps/ep1a_05_first_circle_road.jpg",
+        "assets/maps/latest-v3123/silver_dream_castle_siege_front.jpg",
+        "assets/props/v3100/memory_archivist_statue.webp",
+        "assets/props/v31307/bootloader-cable-junction.webp",
+        "assets/pxf-additional-baked-20261010/extra-13-atlas.png",
+        "assets/rc134/persona-skills/eclipse.png",
+        "assets/scenery-r60/time-prop4.webp",
+        "assets/story-narration/v1/audio/p-dc33e37f373c35fddc085948.mp3",
+        "assets/u2/generated-v350/u2_blue_wraith.webp",
+        "assets/u2/generated-v350/u2_observer_spider.webp",
+        "assets/u2/generated-v350/u2_reactor_collector.webp",
+        "assets/vfx/blink-afterimage.webp",
+        "assets/vfx/bosses/v393/ep1b-lust-strings.webp",
+        "assets/vfx/bosses/v393/ep1b-pride-seal.webp",
+        "assets/vfx/v31323/boss/b05-boss/ep1b05_lipstick_heel_control_strings.webp",
+        "assets/vfx/v31323/boss/b09-boss/ep1b09_pride_machine_electric_arc.webp",
+        "assets/vfx/v31323/boss/k103-boss/siren-choir-chorus-wave.webp",
+        "assets/vfx/v31323/boss/kair-great-01/kair-neuron-synapse-orb.webp",
+        "assets/vfx/v31323/boss/l305-boss/goblin-flute-sonic-wave.webp",
+        "assets/vfx/v31323/boss/mb-dist03/dist03-blood-oath.webp",
+        "assets/vfx/v31323/boss/mb-ep1a10/ep1a10-pride-shock.webp",
+        "assets/vfx/v31323/boss/mb-ep1b05/ep1b-lust-strings.webp",
+        "assets/vfx/v31323/boss/mb-kair09-v31231/boss-black-sun-eclipse.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-081.zip",
+      "bytes": 5212068,
+      "sha256": "f9319c8a428a8401a3ff49e3b58b9646a5f14485ed2cf666d64855546c67feb5",
+      "files": [
+        "assets/boss-vfx-r62/void-shard.webp",
+        "assets/cult-v3121/c101_black_rose_prior.webp",
+        "assets/cult-v3121/c102_chip_choir.webp",
+        "assets/cult-v3121/c102_synapse_hound.webp",
+        "assets/cult-v3121/c102_unity_seraph.webp",
+        "assets/cult-v3121/c104_revelation_guard.webp",
+        "assets/cult-v3121/c104_white_shepherd.webp",
+        "assets/episode1b/envy_glass_shard.webp",
+        "assets/episode1b/generated-v394/boss_gluttony_demon.webp",
+        "assets/episode1b/generated-v394/boss_lust_demon.webp",
+        "assets/episode1b/generated-v394/boss_pride_demon.webp",
+        "assets/episode1b/generated-v394/glutton_beelzebub.webp",
+        "assets/episode1b/generated-v394/greed_mammon.webp",
+        "assets/episode1b/generated-v394/polar_cyborg_hound.webp",
+        "assets/episode1b/generated-v394/sloth_belphegor.webp",
+        "assets/episode1b/wrath_ash_wolf.webp",
+        "assets/generated-v31224/actors-normalized/0bbc4f6287a0_wrath-rain.webp",
+        "assets/generated-v31224/actors-normalized/0c66fa2bfd51_silent_alarm.webp",
+        "assets/generated-v31224/actors-normalized/57967d1070df_black_ritual_cyborg_boss.webp",
+        "assets/generated-v31224/actors-normalized/6f957d283d31_phantom_reclaim_blade.webp",
+        "assets/generated-v31224/actors-normalized/73d004108259_cycle_attack.webp",
+        "assets/generated-v31224/actors-normalized/85f150dbf0f7_controller_guardian.webp",
+        "assets/generated-v31224/actors-normalized/aca8f8c4bd76_Monster_FallenAngelKnight_Attack.webp",
+        "assets/generated-v31224/actors-normalized/c5f90d9ed1ee_return_coordinate_devourer.webp",
+        "assets/generated-v31224/actors-normalized/c6827b44795a_superego_cyborg_cult_leader.webp",
+        "assets/hero_direction337/gunner/n.webp",
+        "assets/hero_direction337/lauren/n.webp",
+        "assets/hero_direction337/michaela/n.webp",
+        "assets/hero_direction337/neon/n.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-dash-front.webp",
+        "assets/heroes/normalized/gunner/attack_left.webp",
+        "assets/heroes/normalized/gunner/attack_right.webp",
+        "assets/heroes/normalized/gunner/guard_left.webp",
+        "assets/heroes/normalized/gunner/guard_right.webp",
+        "assets/heroes/normalized/gunner/run_left_a.webp",
+        "assets/heroes/normalized/gunner/run_right_a.webp",
+        "assets/maps/ep1a_01_spider_cave.jpg",
+        "assets/props/v3100/infernal_oath_effigy.webp",
+        "assets/scenery-r59/dream-prop2.webp",
+        "assets/scenery-r59/dream-prop3.webp",
+        "assets/scenery-r60/neural-prop1.webp",
+        "assets/scenery-r60/neural-prop2.webp",
+        "assets/scenery-r60/neural-prop3.webp",
+        "assets/scenery-r60/snow-prop1.webp",
+        "assets/scenery-r60/snow-prop4.webp",
+        "assets/scenery-r60/time-prop2.webp",
+        "assets/story-narration/v1/audio/death-title-c0fb883cbc30d27a1801a817.mp3",
+        "assets/story-narration/v1/audio/death-verse2-59e9bb4110551875cf15fd2f.mp3",
+        "assets/u2/generated-v350/u2_resonance_knight.webp",
+        "assets/u2/generated-v350/u2_suppression_knight.webp",
+        "assets/vfx/bosses/v393/dist03-blood-oath.webp",
+        "assets/vfx/bosses/v393/ep1a07-void-maw.webp",
+        "assets/vfx/bosses/v393/ep1a08-restraint-wave.webp",
+        "assets/vfx/bosses/v393/ep1a09-injection-burst.webp",
+        "assets/vfx/bosses/v393/ep1a10-pride-shock.webp",
+        "assets/vfx/bosses/v393/ep1b-sloth-field.webp",
+        "assets/vfx/bosses/v393/ep1b-wrath-fire.webp",
+        "assets/vfx/generated/v315/hwando-ego-phantom-blade.webp",
+        "assets/vfx/generated/v315/seoha-severed-time.webp",
+        "assets/vfx/generated/v315/slayer-blood-rend-cyclone.webp",
+        "assets/vfx/generated/v387/boss-black-sun-eclipse.webp",
+        "assets/vfx/slash-flare.webp",
+        "assets/vfx/v31323/boss/b02-boss/ep1b-sloth-field.webp",
+        "assets/vfx/v31323/boss/b03-boss/envy_mirror_shard.webp",
+        "assets/vfx/v31323/boss/dist06-boss/balrog_chain_whip_wave.webp",
+        "assets/vfx/v31323/boss/mb-dist04/dist04-fallen-cross.webp",
+        "assets/vfx/v31323/boss/mb-ep1a07/ep1a07-void-maw.webp",
+        "assets/vfx/v31323/boss/mb-ep1a08/ep1a08-restraint-wave.webp",
+        "assets/vfx/v31323/boss/mb-ep1b04/ep1b04_glutton_kitchen_cluster.webp",
+        "assets/vfx/v31330/mb-dist03/beam.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-082.zip",
+      "bytes": 5203081,
+      "sha256": "6d40e2e20fe1d3e5f1be0dfc97bb104ad6344cc193b21b4b6a4f83e7a52a2cd0",
+      "files": [
+        "assets/cult-v3121/c101_chip_penitent.webp",
+        "assets/cult-v3121/c101_sermon_drone.webp",
+        "assets/cult-v3121/c102_neural_cantor.webp",
+        "assets/episode1a/corrupted_guardian.webp",
+        "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+        "assets/episode1a/generated-v392/reconstructed_balrog_echo.webp",
+        "assets/episode1b/generated-v392/brainwave_contamination.webp",
+        "assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+        "assets/episode1b/generated-v394/glutton_kitchen_scrap.webp",
+        "assets/episode1b/generated-v394/greed_fox_hound.webp",
+        "assets/episode1b/generated-v394/seal_residual.webp",
+        "assets/episode1b/sloth_moldling.webp",
+        "assets/generated-v31224/actors-normalized/03ed90b12776_pride-cyborg-rain.webp",
+        "assets/generated-v31224/actors-normalized/0cbbddaf7b90_great_06.webp",
+        "assets/generated-v31224/actors-normalized/44fa887e7bcc_arvelia_delay_archon_transition.webp",
+        "assets/generated-v31224/actors-normalized/458e99f2058e_order_seal_officer.webp",
+        "assets/generated-v31224/actors-normalized/543a490d2cf2_controller_transition.webp",
+        "assets/generated-v31224/actors-normalized/66b3a07672a9_great_02.webp",
+        "assets/generated-v31224/actors-normalized/6998402eb8e7_purple_sword_spider_angel.webp",
+        "assets/generated-v31224/actors-normalized/6fa537121597_siren_attack.webp",
+        "assets/generated-v31224/actors-normalized/71ac7f7a5257_lust-hit.webp",
+        "assets/generated-v31224/actors-normalized/723c0a5719a3_envy-rain.webp",
+        "assets/generated-v31224/actors-normalized/7a53842dd5da_lucifer-idle.webp",
+        "assets/generated-v31224/actors-normalized/83e3f3bd00f9_rain_witness.webp",
+        "assets/generated-v31224/actors-normalized/8dea7c288479_purple_sword_spider_angel_attack.webp",
+        "assets/generated-v31224/actors-normalized/90412a2f1bcc_seal_residual.webp",
+        "assets/generated-v31224/actors-normalized/9101cdeb2394_boss_envy_demon.webp",
+        "assets/generated-v31224/actors-normalized/a000c91070d3_final_pride_cyborg_lord.webp",
+        "assets/generated-v31224/actors-normalized/a6f6c2767d0f_ep1a_false_archangel_smiling_mask.webp",
+        "assets/generated-v31224/actors-normalized/a735a92c69d1_wrath-hit.webp",
+        "assets/generated-v31224/actors-normalized/abf4e4f7936a_lucifer-rain.webp",
+        "assets/generated-v31224/actors-normalized/b10b0b0c86f6_lucifer_unmasked.webp",
+        "assets/generated-v31224/actors-normalized/b424e30adf85_lucifer-attack.webp",
+        "assets/generated-v31224/actors-normalized/ba23b5fa3237_great_05.webp",
+        "assets/generated-v31224/actors-normalized/bd5d6438697f_hando_rain.webp",
+        "assets/generated-v31224/actors-normalized/c14d7cb8f6a8_gluttony-hit.webp",
+        "assets/generated-v31224/actors-normalized/eddd27117e3d_lust-rain.webp",
+        "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-dash-back.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp",
+        "assets/maps/ep1a_06_balrog_circle.jpg",
+        "assets/maps/generated-v31215/kair03_siren_chorus_overlay.webp",
+        "assets/maps/kair_02_gatefront.jpg",
+        "assets/props/v31238/evidence-loop-console.webp",
+        "assets/pxf-baked-20261010/pxf-19-atlas.png",
+        "assets/pxf-baked-20261010/pxf-22-atlas.png",
+        "assets/pxf-baked-20261010/pxf-22-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-22-player-atlas.png",
+        "assets/rc134/persona-skills/shield.png",
+        "assets/scenery-r59/dream-prop1.webp",
+        "assets/scenery-r59/dream-prop4.webp",
+        "assets/scenery-r59/future-prop1.webp",
+        "assets/scenery-r59/swamp-prop1.webp",
+        "assets/scenery-r59/swamp-prop2.webp",
+        "assets/scenery-r59/swamp-prop3.webp",
+        "assets/scenery-r59/swamp-prop4.webp",
+        "assets/scenery-r60/castle-prop1.webp",
+        "assets/scenery-r60/castle-prop3.webp",
+        "assets/scenery-r60/neural-prop4.webp",
+        "assets/scenery-r60/rose-prop2.webp",
+        "assets/scenery-r60/snow-prop2.webp",
+        "assets/scenery-r60/snow-prop3.webp",
+        "assets/scenery-r60/time-prop1.webp",
+        "assets/scenery-r60/time-prop3.webp",
+        "assets/scenery-r60/village-prop1.webp",
+        "assets/scenery-r60/village-prop2.webp",
+        "assets/story-narration/v1/audio/death-verse1-234eded73b094df218e9f318.mp3",
+        "assets/story-narration/v1/audio/p-406296b5c6b133af44a387a6.mp3",
+        "assets/story-narration/v1/audio/p-a764bd652b88435ed04e1e1d.mp3",
+        "assets/vfx/bosses/v393/dist04-fallen-cross.webp",
+        "assets/vfx/generated/v300/healing-sigil.webp",
+        "assets/vfx/heroes/slayer-e.webp",
+        "assets/vfx/v31323/boss/a11-cosmic-v31318/lucifer_feather_lance.webp",
+        "assets/vfx/v31323/boss/kair-great-03/projectile-stasis.webp",
+        "assets/vfx/v31323/boss/kair-great-04/chrono_orb.webp",
+        "assets/vfx/v31323/boss/mb-dist06/inferno-meteor.webp",
+        "assets/vfx/v31330/a11-boss/beam.webp",
+        "assets/vfx/v31330/b04-boss/beam.webp",
+        "assets/vfx/v31330/b06-boss/beam.webp",
+        "assets/vfx/v31330/blue-executor/beam.webp",
+        "assets/vfx/v31330/c103-mid/beam.webp",
+        "assets/vfx/v31330/dist06-boss/beam.webp",
+        "assets/vfx/v31330/kair-great-03/beam.webp",
+        "assets/vfx/v31330/l305-boss/beam.webp",
+        "assets/vfx/v31330/mb-ep1a10/beam.webp",
+        "assets/vfx/v31330/mb-ep1a11/beam.webp",
+        "assets/vfx/v31330/mb-ep1b06/beam.webp",
+        "assets/vfx/v31330/mb-ep1b07/beam.webp",
+        "assets/vfx/v31330/mb-hando02/beam.webp",
+        "assets/vfx/v31330/mb-murder01/beam.webp",
+        "assets/vfx/v31330/u202-mid/beam.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-083.zip",
+      "bytes": 5198590,
+      "sha256": "443f208431eaa0e79370fa8f7f471bd6cddfdadaca90d506fa6d3c63e626ad30",
+      "files": [
+        "assets/cult-v3121/c101_black_rose_acolyte.webp",
+        "assets/cult-v3121/c103_ego_surgeon.webp",
+        "assets/cult-v3121/c104_white_deacon.webp",
+        "assets/episode1a/generated-v392/denial_specter.webp",
+        "assets/generated-v31224/actors-normalized/031f3256e738_siren_rain.webp",
+        "assets/generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp",
+        "assets/generated-v31224/actors-normalized/1403a2e59be9_purple_sword_spider_angel_windup.webp",
+        "assets/generated-v31224/actors-normalized/15b6c9fc9552_gluttony-attack.webp",
+        "assets/generated-v31224/actors-normalized/25e907b21cf2_greed-hit.webp",
+        "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/2bb588948301_hotel_clerk.webp",
+        "assets/generated-v31224/actors-normalized/3b31324aa13c_pride-cyborg-hit.webp",
+        "assets/generated-v31224/actors-normalized/792c9e0a61b9_siren_transition.webp",
+        "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+        "assets/generated-v31224/actors-normalized/908a59f003db_great_01.webp",
+        "assets/generated-v31224/actors-normalized/adbd7642c323_sloth-attack.webp",
+        "assets/generated-v31224/actors-normalized/b78f35cef818_six_legged_cyborg_lord_final.webp",
+        "assets/generated-v31224/actors-normalized/bd76fc560725_ep1a_void_memory_devourer.webp",
+        "assets/generated-v31224/actors-normalized/bee76e221b69_balrog-hit.webp",
+        "assets/generated-v31224/actors-normalized/c4c64ee058cc_controller_attack.webp",
+        "assets/generated-v31224/actors-normalized/f8c98bb66e1e_great_04.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-skill-front.webp",
+        "assets/maps/murder_01_crosswalk.jpg",
+        "assets/maps/murder_02_hotel_stair.jpg",
+        "assets/props/v31238/memory-time-anchor.webp",
+        "assets/props/v31238/neural-ego-vat.webp",
+        "assets/pxf-additional-baked-20261010/extra-12-atlas.png",
+        "assets/pxf-baked-20261010/pxf-16-atlas.png",
+        "assets/pxf-baked-20261010/pxf-16-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-16-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-19-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-19-player-atlas.png",
+        "assets/rc133/art/eclipse.png",
+        "assets/rc134/persona-skills/vortex.png",
+        "assets/scenery-r60/castle-prop4.webp",
+        "assets/scenery-r60/rose-prop1.webp",
+        "assets/scenery-r60/rose-prop3.webp",
+        "assets/scenery-r60/village-prop3.webp",
+        "assets/story-narration/v1/audio/dist04-post-beba43909d1083a82808d670.mp3",
+        "assets/story-narration/v1/audio/p-20711e4044afdba6a3e2a849.mp3",
+        "assets/story-narration/v1/audio/p-98921001feb23379f7073527.mp3",
+        "assets/vfx/generated/v302/awakened-iaido-cross.webp",
+        "assets/vfx/generated/v315/neon-sanctuary-lance.webp",
+        "assets/vfx/heroes/lauren-w.webp",
+        "assets/vfx/v31323/boss/mb-ep1b06/greed_coin.webp",
+        "assets/vfx/v31323/boss/mb-last302-v31231/sleepless_soul.webp",
+        "assets/vfx/v31330/a11-cosmic-v31318/beam.webp",
+        "assets/vfx/v31330/b02-boss/beam.webp",
+        "assets/vfx/v31330/b03-boss/beam.webp",
+        "assets/vfx/v31330/b05-boss/beam.webp",
+        "assets/vfx/v31330/b06b-boss/beam.webp",
+        "assets/vfx/v31330/b07-boss/beam.webp",
+        "assets/vfx/v31330/b08-boss/beam.webp",
+        "assets/vfx/v31330/b09-boss/beam.webp",
+        "assets/vfx/v31330/c102-boss/beam.webp",
+        "assets/vfx/v31330/c103-boss/beam.webp",
+        "assets/vfx/v31330/c104-boss/beam.webp",
+        "assets/vfx/v31330/c104-mid/beam.webp",
+        "assets/vfx/v31330/c105-mid/beam.webp",
+        "assets/vfx/v31330/c106-mid/beam.webp",
+        "assets/vfx/v31330/h103-boss/beam.webp",
+        "assets/vfx/v31330/kair-great-01/beam.webp",
+        "assets/vfx/v31330/kair-great-02/beam.webp",
+        "assets/vfx/v31330/kair-great-04/beam.webp",
+        "assets/vfx/v31330/kair-great-05/beam.webp",
+        "assets/vfx/v31330/kair-great-06/beam.webp",
+        "assets/vfx/v31330/l301-boss/beam.webp",
+        "assets/vfx/v31330/l303-boss/beam.webp",
+        "assets/vfx/v31330/mb-dist01/beam.webp",
+        "assets/vfx/v31330/mb-dist02/beam.webp",
+        "assets/vfx/v31330/mb-dist04/beam.webp",
+        "assets/vfx/v31330/mb-dist05/beam.webp",
+        "assets/vfx/v31330/mb-dist06/beam.webp",
+        "assets/vfx/v31330/mb-ep1a07/beam.webp",
+        "assets/vfx/v31330/mb-ep1a08/beam.webp",
+        "assets/vfx/v31330/mb-ep1a09/beam.webp",
+        "assets/vfx/v31330/mb-ep1b01/beam.webp",
+        "assets/vfx/v31330/mb-ep1b02/beam.webp",
+        "assets/vfx/v31330/mb-ep1b03/beam.webp",
+        "assets/vfx/v31330/mb-ep1b04/beam.webp",
+        "assets/vfx/v31330/mb-ep1b06b/beam.webp",
+        "assets/vfx/v31330/mb-ep1b08/beam.webp",
+        "assets/vfx/v31330/mb-ep1b09/beam.webp",
+        "assets/vfx/v31330/mb-hando01/beam.webp",
+        "assets/vfx/v31330/mb-hando03/beam.webp",
+        "assets/vfx/v31330/mb-kair01-v31231/beam.webp",
+        "assets/vfx/v31330/mb-kair04-v31231/beam.webp",
+        "assets/vfx/v31330/mb-kair09-v31231/beam.webp",
+        "assets/vfx/v31330/mb-last302-v31231/beam.webp",
+        "assets/vfx/v31330/mb-murder02/beam.webp",
+        "assets/vfx/v31330/mb-murder03/beam.webp",
+        "assets/vfx/v31330/u201-mid/beam.webp",
+        "assets/vfx/v31330/u203-boss/beam.webp",
+        "assets/vfx/v31330/u203-mid/beam.webp",
+        "assets/vfx/v31330/u204-mid/beam.webp",
+        "assets/vfx/v31330/u205-mid/beam.webp",
+        "assets/vfx/v31330/u206-mid/beam.webp"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-084.zip",
+      "bytes": 5189441,
+      "sha256": "4d7ba1d6f4de81720f21855195e55d780f56d9eb74ce65e9c4f6d9b844c48258",
+      "files": [
+        "assets/cult-v3121/c101_rose_guardian.webp",
+        "assets/episode1a/generated-v392/addiction_ruin_core.webp",
+        "assets/episode1a/generated-v392/falling_comrade_echo.webp",
+        "assets/episode1a/generated-v392/memory_null_vortex.webp",
+        "assets/episode1a/generated-v393/ep1a_false_archangel_smiling_mask.webp",
+        "assets/episode1a/horned_swamp_demon.webp",
+        "assets/episode1b/generated-v393/cracked_comparison_echo.webp",
+        "assets/episode1b/generated-v393/gate72_pride_echo.webp",
+        "assets/episode1b/generated-v394/polar_chairman.webp",
+        "assets/episode1b/generated-v394/sloth_moldling.webp",
+        "assets/episode1b/generated-v394/wrath_satan.webp",
+        "assets/generated-v31224/actors-normalized/01fd677fac4f_gluttony-idle.webp",
+        "assets/generated-v31224/actors-normalized/094c62d396f7_cracked_comparison_echo.webp",
+        "assets/generated-v31224/actors-normalized/12ca1a97fb0a_controller_rain.webp",
+        "assets/generated-v31224/actors-normalized/148c5ac2bb7c_boss_wrath_demon.webp",
+        "assets/generated-v31224/actors-normalized/155e7614a0cb_lucifer-hit.webp",
+        "assets/generated-v31224/actors-normalized/1fc9834a3db7_c101_rose_guardian.webp",
+        "assets/generated-v31224/actors-normalized/20995250d5fa_sloth_shell_sentinel.webp",
+        "assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp",
+        "assets/generated-v31224/actors-normalized/32dfddbbf2cd_molten_vault_sentinel.webp",
+        "assets/generated-v31224/actors-normalized/35526bcfa1c2_bulmyeongwi_rain.webp",
+        "assets/generated-v31224/actors-normalized/42daad5a3557_dist_fallen_comrade_demon_echo.webp",
+        "assets/generated-v31224/actors-normalized/4cfd3f31a03f_envy-hit.webp",
+        "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/5e9f5379c38d_pride_hierophant_attack.webp",
+        "assets/generated-v31224/actors-normalized/620d0d0a3b85_greed-rain.webp",
+        "assets/generated-v31224/actors-normalized/62f51ebe2d08_boss_sloth_demon.webp",
+        "assets/generated-v31224/actors-normalized/64d22297d764_pride-hit.webp",
+        "assets/generated-v31224/actors-normalized/6718d030af34_sloth-rain.webp",
+        "assets/generated-v31224/actors-normalized/6f3b006e5b1d_boss_lust_human.webp",
+        "assets/generated-v31224/actors-normalized/81909f0b3692_ascension_calculation_orb.webp",
+        "assets/generated-v31224/actors-normalized/822930c614eb_arvelia_delay_archon_attack.webp",
+        "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+        "assets/generated-v31224/actors-normalized/947dfea12b7e_discarded_kitchen_overseer.webp",
+        "assets/generated-v31224/actors-normalized/9d29dc496c5a_boss_gluttony_demon.webp",
+        "assets/generated-v31224/actors-normalized/9f29878c4e6b_hando_transition.webp",
+        "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/a25ddd7b00ba_pride-rain.webp",
+        "assets/generated-v31224/actors-normalized/a48ff58711ed_greed-attack.webp",
+        "assets/generated-v31224/actors-normalized/a5b3ff549ec2_arvelia_delay_archon_windup.webp",
+        "assets/generated-v31224/actors-normalized/aa5052f514b2_balrog-attack.webp",
+        "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp",
+        "assets/generated-v31224/actors-normalized/b42dcd0ea03d_gate72_pride_echo.webp",
+        "assets/generated-v31224/actors-normalized/b562fdd5b982_lust-idle.webp",
+        "assets/generated-v31224/actors-normalized/b96a428432e9_pride_hierophant_idle.webp",
+        "assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp",
+        "assets/generated-v31224/actors-normalized/bbebbf19f4e6_balrog_gatekeeper.webp",
+        "assets/generated-v31224/actors-normalized/bc3b043bbed6_lust-attack.webp",
+        "assets/generated-v31224/actors-normalized/be575f229a97_ep1a_craving_injection_watcher.webp",
+        "assets/generated-v31224/actors-normalized/bf725c96d68d_pride_hierophant_transition.webp",
+        "assets/generated-v31224/actors-normalized/c2965b85cb2e_hando_attack.webp",
+        "assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp",
+        "assets/generated-v31224/actors-normalized/cd804c90bfe4_heartlight_stage_director.webp",
+        "assets/generated-v31224/actors-normalized/d86588f05438_envy-idle.webp",
+        "assets/generated-v31224/actors-normalized/d93bb825dd04_purple_sword_spider_angel_transition.webp",
+        "assets/generated-v31224/actors-normalized/d9674d587c91_wrath-idle.webp",
+        "assets/generated-v31224/actors-normalized/de4c1414da0d_bulmyeongwi_transition.webp",
+        "assets/generated-v31224/actors-normalized/df4a6534a6d4_ep1a_pride_ruin_core.webp",
+        "assets/generated-v31224/actors-normalized/eebc30791565_pride-cyborg-attack.webp",
+        "assets/generated-v31224/actors-normalized/f1962e5893b4_sloth-hit.webp",
+        "assets/generated-v31224/actors-normalized/fae708429341_hando_idle.webp",
+        "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+        "assets/generated-v3128/projectiles/chrono_orb.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/neon-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-skill-front.webp",
+        "assets/heroes/normalized/actions-directional/lauren-attack-left.webp",
+        "assets/heroes/normalized/actions-directional/michaela-guard-left.webp",
+        "assets/heroes/normalized/actions-directional/neon-skill-left.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp",
+        "assets/heroes/normalized/gunner/dash_left.webp",
+        "assets/heroes/normalized/gunner/dash_right.webp",
+        "assets/maps/generated-v31215/last303_black_fog_duel_overlay.webp",
+        "assets/props/v31238/hospital-craving-cabinet.webp",
+        "assets/props/v31238/seal-command-pillar.webp",
+        "assets/rc133/art/vortex.png",
+        "assets/scenery-r59/future-prop2.webp",
+        "assets/scenery-r59/future-prop4.webp",
+        "assets/story-narration/v1/audio/p-2e46bc44c2df31f38392f03d.mp3",
+        "assets/story-narration/v1/audio/p-348d0850eaf22bca758493c5.mp3",
+        "assets/story-narration/v1/audio/p-3c1838baca38d06c128c2ce5.mp3",
+        "assets/story-narration/v1/audio/p-d32aa12ec6a3534931466825.mp3",
+        "assets/story-narration/v1/audio/p-ea192571d05f1aa67e517839.mp3",
+        "assets/story-narration/v1/audio/p-f23d6d0eb4506f39f5907f98.mp3",
+        "assets/vfx/generated/v315/lauren-true-name-judgment.webp",
+        "assets/vfx/v31323/boss/mb-dist01/dist01-purple-web-blade.webp",
+        "assets/vfx/v31323/boss/mb-dist05/spirit-orb.webp",
+        "assets/vfx/v31330/c101-mid/beam.webp",
+        "assets/vfx/v31330/k103-boss/beam.webp",
+        "assets/vfx/v31330/mb-ep1b05/beam.webp",
+        "assets/vfx/v31330/murder04-mid/beam.webp",
+        "audio/rc133/processed/enemy-heavy/Dark_fantasy_demon_e__3-1790999939460_1-8510730a.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/time_tick_tack_sound__1-1790999531800-db7f759e.ogg"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-085.zip",
+      "bytes": 5171313,
+      "sha256": "4a1930b636799c14684b713f2a3ad816d846ac14e1493c833148463e21f62238",
+      "files": [
+        "assets/dist/generated-v393/dist_fallen_comrade_demon_echo.webp",
+        "assets/episode1a/generated-v392/corridor_scream_echo.webp",
+        "assets/episode1a/generated-v392/craving_vial_core.webp",
+        "assets/episode1a/generated-v393/ep1a_craving_injection_watcher.webp",
+        "assets/episode1a/generated-v393/ep1a_pride_ruin_core.webp",
+        "assets/episode1a/generated-v393/ep1a_void_memory_devourer.webp",
+        "assets/episode1a/nightmare_spider.webp",
+        "assets/episode1b/generated-v393/ascension_calculation_orb.webp",
+        "assets/episode1b/generated-v393/discarded_kitchen_overseer.webp",
+        "assets/episode1b/generated-v393/hotel_flame_knight.webp",
+        "assets/episode1b/generated-v393/molten_vault_sentinel.webp",
+        "assets/episode1b/generated-v393/sloth_shell_sentinel.webp",
+        "assets/generated-v31224/actors-normalized/13648ce01583_greed-child-rain.webp",
+        "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+        "assets/generated-v31224/actors-normalized/26ef5676eafd_gluttony-rain.webp",
+        "assets/generated-v31224/actors-normalized/28e46dbcc1fb_ep1b07_wrath_janitor_phase0.webp",
+        "assets/generated-v31224/actors-normalized/3aeb0a8a10c3_boss_sloth_human.webp",
+        "assets/generated-v31224/actors-normalized/4d4341de35e5_ep1b02_sloth_man_phase0.webp",
+        "assets/generated-v31224/actors-normalized/5168d3dce2f0_horned_swamp_demon.webp",
+        "assets/generated-v31224/actors-normalized/5a62a1111695_pride-attack.webp",
+        "assets/generated-v31224/actors-normalized/693a5923c4c1_dist_blood_guardian_pursuer.webp",
+        "assets/generated-v31224/actors-normalized/70a396286adb_pride_hierophant_windup.webp",
+        "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+        "assets/generated-v31224/actors-normalized/820420d0c62e_vault_ledger_watcher.webp",
+        "assets/generated-v31224/actors-normalized/8aaae586168d_sloth-idle.webp",
+        "assets/generated-v31224/actors-normalized/9052a5877996_boss_lust_demon.webp",
+        "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+        "assets/generated-v31224/actors-normalized/a873e9e4299b_pride-cyborg-idle.webp",
+        "assets/generated-v31224/actors-normalized/a957ef422344_greed-idle.webp",
+        "assets/generated-v31224/actors-normalized/b30f4a94acb6_hotel_flame_knight.webp",
+        "assets/generated-v31224/actors-normalized/be8d2dfe3789_dist_summoning_black_pillar.webp",
+        "assets/generated-v31224/actors-normalized/c5b71f1b12a8_boss_pride_demon.webp",
+        "assets/generated-v31224/actors-normalized/cfb37917e7c0_dist_dying_messenger_shadow.webp",
+        "assets/generated-v31224/actors-normalized/d8478895fa65_pride-idle.webp",
+        "assets/generated-v31224/actors-normalized/d8a186c29567_boss_greed_demon.webp",
+        "assets/generated-v31224/actors-normalized/e40217032c7a_boss_envy_human.webp",
+        "assets/generated-v31224/actors-normalized/eee59f90ff49_boss_pride_cyborg.webp",
+        "assets/generated-v31224/actors-normalized/f304f6070e48_greed-child-attack.webp",
+        "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+        "assets/generated-v3125/kair-guardians/guardian_26.webp",
+        "assets/generated-v3125/kair-guardians/guardian_38.webp",
+        "assets/generated-v3125/kair-guardians/guardian_39.webp",
+        "assets/generated-v3125/kair-guardians/guardian_43.webp",
+        "assets/generated-v3125/kair-guardians/guardian_46.webp",
+        "assets/generated-v3125/kair-guardians/guardian_49.webp",
+        "assets/generated-v3125/kair-guardians/guardian_50.webp",
+        "assets/generated-v3125/kair-guardians/guardian_51.webp",
+        "assets/generated-v3125/kair-guardians/guardian_53.webp",
+        "assets/generated-v3125/kair-guardians/guardian_54.webp",
+        "assets/generated-v3125/kair-guardians/guardian_55.webp",
+        "assets/generated-v3125/kair-guardians/guardian_56.webp",
+        "assets/generated-v3125/kair-guardians/guardian_60.webp",
+        "assets/generated-v3128/projectiles/causality_prism.webp",
+        "assets/generated-v3128/projectiles/greed_coin.webp",
+        "assets/generated-v3128/projectiles/hospital_syringe.webp",
+        "assets/generated-v3128/projectiles/sleepless_soul.webp",
+        "assets/generated-v3128/projectiles/wrath_beast.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/hwando-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-dash-back.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/neon-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/neon-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/neon-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/neon-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/neon-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/neon-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/neon-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/neon-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/neon-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-guard-back.webp",
+        "assets/heroes/normalized/actions-directional/hunter-attack-left.webp",
+        "assets/heroes/normalized/actions-directional/lauren-attack-right.webp",
+        "assets/heroes/normalized/actions-directional/lauren-skill-left.webp",
+        "assets/heroes/normalized/actions-directional/lauren-skill-right.webp",
+        "assets/heroes/normalized/actions-directional/michaela-attack-left.webp",
+        "assets/heroes/normalized/actions-directional/michaela-guard-right.webp",
+        "assets/heroes/normalized/actions-directional/neon-skill-right.webp",
+        "assets/heroes/normalized/actions-directional/seoha-attack-right.webp",
+        "assets/heroes/normalized/actions-directional/seoha-skill-left.webp",
+        "assets/heroes/normalized/actions-directional/seoha-skill-right.webp",
+        "assets/heroes/normalized/actions-directional/slayer-guard-left.webp",
+        "assets/heroes/normalized/actions-directional/slayer-guard-right.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-ultimate-back.webp",
+        "assets/heroes/normalized/gunner/player_aim.webp",
+        "assets/heroes/normalized/gunner/player_aimup.webp",
+        "assets/heroes/normalized/gunner/player_idle.webp",
+        "assets/heroes/normalized/gunner/player_run1.webp",
+        "assets/heroes/normalized/hwando/sprite_00dafed5c0b6.webp",
+        "assets/heroes/normalized/hwando/sprite_d88b5a7fdacd.webp",
+        "assets/heroes/normalized/hwando/sprite_dc5cd368e747.webp",
+        "assets/props/v290/chrono_engine.webp",
+        "assets/props/v290/shattered_memory_core.webp",
+        "assets/pxf-additional-baked-20261010/extra-08-atlas.png",
+        "assets/pxf-baked-20261010/pxf-08-atlas.png",
+        "assets/pxf-baked-20261010/pxf-08-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-08-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-11-atlas.png",
+        "assets/pxf-baked-20261010/pxf-11-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-11-player-atlas.png",
+        "assets/rc133/art/shield.png",
+        "assets/rc134/persona-skills/clock.png",
+        "assets/rc46/impacts/player-blood.webp",
+        "assets/scenery-r60/castle-prop2.webp",
+        "assets/scenery-r60/village-prop4.webp",
+        "assets/story-narration/v1/audio/p-2d0fdcbe69815a5bfd14a3ea.mp3",
+        "assets/vfx/bosses/v31314/blood-oath-arrow.webp",
+        "assets/vfx/generated/v300/barrier-sigil.webp",
+        "assets/vfx/generated/v300/burst-impact.webp",
+        "assets/vfx/generated/v300/cross-seal.webp",
+        "assets/vfx/generated/v300/time-ring.webp",
+        "assets/vfx/heroes/hwando-r.webp",
+        "assets/vfx/v31323/boss/mb-dist02/mb-dist02.webp",
+        "assets/vfx/v31323/boss/u203-mid/drone_laser.webp",
+        "audio/rc133/processed/enemy-charge/Demonic_laser_chargi__1-1791000143316-07641aed.ogg",
+        "audio/rc133/processed/melee-impact/Short_melee_hit_impa__1-1791000243196_1-0988d8f3.ogg",
+        "audio/rc133/processed/melee-impact/Short_melee_hit_impa__4-1791000252248_1-c3114678.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/time_tick_tack_sound__3-1790999542258-732bf5e2.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/tree_weapon_attack_s__2-1790999357019-d187038c.ogg"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-086.zip",
+      "bytes": 5149452,
+      "sha256": "0bc05a15aa36a44179a73165cb994a664618b9e1d39cf5c9f18d19136dbf856e",
+      "files": [
+        "assets/dist/generated-v393/dist_blood_guardian_pursuer.webp",
+        "assets/dist/generated-v393/dist_dying_messenger_shadow.webp",
+        "assets/episode1a/generated-v393/ep1a_stabilization_supervisor.webp",
+        "assets/episode1a/hallucinated_orderly.webp",
+        "assets/episode1b/generated-v393/polar_pattern_guard.webp",
+        "assets/episode1b/generated-v393/vault_ledger_watcher.webp",
+        "assets/generated-v31224/actors-normalized/486a61b02d36_boss_pride_human.webp",
+        "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+        "assets/generated-v31224/actors-normalized/7634cee34dd4_greed-child-idle.webp",
+        "assets/generated-v31224/actors-normalized/7a7409df6bc9_boss_gluttony_human.webp",
+        "assets/generated-v31224/actors-normalized/7efeeaa5bb8b_ep1b06b_greed_child_phase0.webp",
+        "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+        "assets/generated-v31224/actors-normalized/aea8d7a3eb38_boss_wrath_human.webp",
+        "assets/generated-v31224/actors-normalized/b26396fcc1ea_boss_greed_human.webp",
+        "assets/generated-v31224/actors-normalized/c09e487caec6_greed-child-hit.webp",
+        "assets/generated-v31224/actors-normalized/c386e08b76cf_ep1a_stabilization_supervisor.webp",
+        "assets/generated-v31224/actors-normalized/d8c1c8e59daf_ep1b06_greed_general_manager_phase0.webp",
+        "assets/generated-v31224/actors-normalized/f02422d95ccb_ep1b08_pride_zombie.webp",
+        "assets/generated-v3125/kair-guardians/guardian_01.webp",
+        "assets/generated-v3125/kair-guardians/guardian_02.webp",
+        "assets/generated-v3125/kair-guardians/guardian_04.webp",
+        "assets/generated-v3125/kair-guardians/guardian_05.webp",
+        "assets/generated-v3125/kair-guardians/guardian_06.webp",
+        "assets/generated-v3125/kair-guardians/guardian_07.webp",
+        "assets/generated-v3125/kair-guardians/guardian_08.webp",
+        "assets/generated-v3125/kair-guardians/guardian_09.webp",
+        "assets/generated-v3125/kair-guardians/guardian_10.webp",
+        "assets/generated-v3125/kair-guardians/guardian_11.webp",
+        "assets/generated-v3125/kair-guardians/guardian_12.webp",
+        "assets/generated-v3125/kair-guardians/guardian_13.webp",
+        "assets/generated-v3125/kair-guardians/guardian_14.webp",
+        "assets/generated-v3125/kair-guardians/guardian_15.webp",
+        "assets/generated-v3125/kair-guardians/guardian_16.webp",
+        "assets/generated-v3125/kair-guardians/guardian_17.webp",
+        "assets/generated-v3125/kair-guardians/guardian_18.webp",
+        "assets/generated-v3125/kair-guardians/guardian_19.webp",
+        "assets/generated-v3125/kair-guardians/guardian_20.webp",
+        "assets/generated-v3125/kair-guardians/guardian_21.webp",
+        "assets/generated-v3125/kair-guardians/guardian_23.webp",
+        "assets/generated-v3125/kair-guardians/guardian_24.webp",
+        "assets/generated-v3125/kair-guardians/guardian_25.webp",
+        "assets/generated-v3125/kair-guardians/guardian_27.webp",
+        "assets/generated-v3125/kair-guardians/guardian_28.webp",
+        "assets/generated-v3125/kair-guardians/guardian_29.webp",
+        "assets/generated-v3125/kair-guardians/guardian_30.webp",
+        "assets/generated-v3125/kair-guardians/guardian_31.webp",
+        "assets/generated-v3125/kair-guardians/guardian_32.webp",
+        "assets/generated-v3125/kair-guardians/guardian_33.webp",
+        "assets/generated-v3125/kair-guardians/guardian_34.webp",
+        "assets/generated-v3125/kair-guardians/guardian_35.webp",
+        "assets/generated-v3125/kair-guardians/guardian_36.webp",
+        "assets/generated-v3125/kair-guardians/guardian_37.webp",
+        "assets/generated-v3125/kair-guardians/guardian_40.webp",
+        "assets/generated-v3125/kair-guardians/guardian_41.webp",
+        "assets/generated-v3125/kair-guardians/guardian_42.webp",
+        "assets/generated-v3125/kair-guardians/guardian_44.webp",
+        "assets/generated-v3125/kair-guardians/guardian_45.webp",
+        "assets/generated-v3125/kair-guardians/guardian_47.webp",
+        "assets/generated-v3125/kair-guardians/guardian_48.webp",
+        "assets/generated-v3125/kair-guardians/guardian_52.webp",
+        "assets/generated-v3125/kair-guardians/guardian_57.webp",
+        "assets/generated-v3125/kair-guardians/guardian_58.webp",
+        "assets/generated-v3125/kair-guardians/guardian_59.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-attack-front.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/gunner-skill-front.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-attack-back.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-dash-left.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-guard-front.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-skill-back.webp",
+        "assets/heroes/normalized/actions-consistent/lauren-skill-left.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-guard-back.webp",
+        "assets/heroes/normalized/actions-consistent/michaela-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/neon-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/neon-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-attack-left.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-guard-left.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-skill-left.webp",
+        "assets/heroes/normalized/actions-directional/hunter-attack-right.webp",
+        "assets/heroes/normalized/actions-directional/hunter-dash-left.webp",
+        "assets/heroes/normalized/actions-directional/hunter-dash-right.webp",
+        "assets/heroes/normalized/actions-directional/michaela-attack-right.webp",
+        "assets/heroes/normalized/actions-directional/neon-attack-left.webp",
+        "assets/heroes/normalized/actions-directional/neon-attack-right.webp",
+        "assets/heroes/normalized/actions-directional/slayer-attack-left.webp",
+        "assets/heroes/normalized/actions-directional/slayer-attack-right.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/neon-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/neon-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/neon-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-ultimate-right.webp",
+        "assets/heroes/normalized/directions/ion-front.webp",
+        "assets/heroes/normalized/directions/ion-right.webp",
+        "assets/heroes/normalized/directions/michaela-back.webp",
+        "assets/heroes/normalized/directions/neon-back.webp",
+        "assets/heroes/normalized/directions/neon-front.webp",
+        "assets/heroes/normalized/directions/seoha-back.webp",
+        "assets/heroes/normalized/directions/seoha-front.webp",
+        "assets/heroes/normalized/directions/seoha-left.webp",
+        "assets/heroes/normalized/directions/slayer-back.webp",
+        "assets/heroes/normalized/directions/slayer-front.webp",
+        "assets/heroes/normalized/gunner/player_crouch.webp",
+        "assets/heroes/normalized/gunner/player_roll.webp",
+        "assets/heroes/normalized/gunner/player_run2.webp",
+        "assets/heroes/normalized/hwando/sprite_328062b3e297.webp",
+        "assets/heroes/normalized/hwando/sprite_a823bb5a5666.webp",
+        "assets/heroes/normalized/hwando/sprite_fff09b7f1391.webp",
+        "assets/props/v290/armored_wall.webp",
+        "assets/props/v290/blood_altar.webp",
+        "assets/props/v290/bone_heap.webp",
+        "assets/props/v290/broken_gate.webp",
+        "assets/props/v290/collapsed_pillar.webp",
+        "assets/props/v290/collapsed_stairs.webp",
+        "assets/props/v290/dead_tree.webp",
+        "assets/props/v290/hotel_luggage_cart.webp",
+        "assets/props/v290/moss_boulders.webp",
+        "assets/props/v290/rail_signal.webp",
+        "assets/props/v290/ruined_market.webp",
+        "assets/props/v290/ruined_portal.webp",
+        "assets/props/v290/surveillance_console.webp",
+        "assets/props/v290/time_obelisk.webp",
+        "assets/props/v290/village_well.webp",
+        "assets/pxf-additional-baked-20261010/extra-03-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-07-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-10-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-14-atlas.png",
+        "assets/pxf-baked-20261010/pxf-07-atlas.png",
+        "assets/pxf-baked-20261010/pxf-07-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-07-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-10-atlas.png",
+        "assets/pxf-baked-20261010/pxf-10-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-10-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-24-atlas.png",
+        "assets/pxf-baked-20261010/pxf-24-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-24-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-25-atlas.png",
+        "assets/pxf-baked-20261010/pxf-25-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-25-player-atlas.png",
+        "assets/rc133/art/clock.png",
+        "assets/rc133/art/lance.png",
+        "assets/rc134/persona-skills/eye.png",
+        "assets/rc134/persona-skills/lance.png",
+        "assets/rc134/persona-skills/star.png",
+        "assets/vfx/bosses/v312/mb-dist02.webp",
+        "assets/vfx/generated/v300/glitch-fracture.webp",
+        "assets/vfx/generated/v300/projectile-core.webp",
+        "assets/vfx/generated/v300/slash-impact.webp",
+        "assets/vfx/generated/v300/target-mark.webp",
+        "assets/vfx/heroes/gunner-a.webp",
+        "assets/vfx/heroes/gunner-r.webp",
+        "assets/vfx/heroes/gunner-w.webp",
+        "assets/vfx/heroes/hunter-r.webp",
+        "assets/vfx/heroes/michaela-r.webp",
+        "assets/vfx/heroes/neon-r.webp",
+        "assets/vfx/heroes/neon-w.webp",
+        "assets/vfx/heroes/seoha-r.webp",
+        "assets/vfx/heroes/seoha-w.webp",
+        "assets/vfx/heroes/slayer-r.webp",
+        "assets/vfx/v31323/boss/c103-boss/ion-a.webp",
+        "assets/vfx/v31323/boss/u201-mid/control-lance.webp",
+        "audio/rc133/processed/awakening-phase/Ancient_demon_awaken__1-1791000066648-a8af3a45.ogg",
+        "audio/rc133/processed/awakening-phase/Ancient_demon_awaken__2-1791000075383-dc8d305e.ogg",
+        "audio/rc133/processed/awakening-phase/Ancient_demon_awaken__3-1791000075383-27414fd4.ogg",
+        "audio/rc133/processed/awakening-phase/Ancient_demon_awaken__4-1791000075383-7e636c80.ogg",
+        "audio/rc133/processed/blink/Short_magical_blink___4-1791000353126_1-3a31443e.ogg",
+        "audio/rc133/processed/dodge/Quick_dodge_sound__f__3-1791000315957-859c65d8.ogg",
+        "audio/rc133/processed/dodge/Quick_dodge_sound__f__4-1791000321516-94e7f1be.ogg",
+        "audio/rc133/processed/enemy-charge/Demonic_laser_chargi__4-1791000154420-97cfc34f.ogg",
+        "audio/rc133/processed/enemy-energy/Massive_demonic_ener__1-1791000176874-1c0241f3.ogg",
+        "audio/rc133/processed/enemy-energy/Massive_demonic_ener__2-1791000188083-8a5a3342.ogg",
+        "audio/rc133/processed/enemy-heavy/Dark_demonic_attack___3-1790999830236-5780aca5.ogg",
+        "audio/rc133/processed/enemy-heavy/Powerful_demonic_hea__1-1790999865399-61fe79a2.ogg",
+        "audio/rc133/processed/enemy-heavy/Powerful_demonic_hea__2-1790999865400-a81a6eb5.ogg",
+        "audio/rc133/processed/enemy-rage/Demonic_rage_skill_a__4-1790999904551-aaf8fc57.ogg",
+        "audio/rc133/processed/enemy-roar/demon_roar__4-1790999603479_1-fb23f2a4.ogg",
+        "audio/rc133/processed/enemy-void/Demonic_black_hole_a__1-1791000219272_1-1c57c459.ogg",
+        "audio/rc133/processed/illusion/Demonic_illusion_cre__1-1791000032651_1-b58c3087.ogg",
+        "audio/rc133/processed/melee-impact/Short_melee_hit_impa__3-1791000250226_1-4f574de8.ogg",
+        "audio/rc133/processed/parry/Perfect_parry_sound___2-1791000286664-2defdc93.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/Time_manipulation_aw__1-1791000657816-42a47f20.ogg",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/time_tick_tack_sound__2-1790999537390-d72161ef.ogg"
+      ]
+    },
+    {
+      "path": "build-input/runtime-packs/runtime-087.zip",
+      "bytes": 2322187,
+      "sha256": "1a59568d7a7916472abb07defb4beab310c263755363b5e74dc1728d509bfe73",
+      "files": [
+        "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/hunter-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/neon-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/neon-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/neon-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/seoha-skill-right.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-attack-right.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-dash-right.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-guard-right.webp",
+        "assets/heroes/normalized/actions-consistent/slayer-skill-right.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-ultimate-front.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/gunner-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/hunter-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/hwando-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-ultimate-left.webp",
+        "assets/heroes/normalized/actions-v3126/lauren-ultimate-right.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/michaela-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/neon-hurt-back.webp",
+        "assets/heroes/normalized/actions-v3126/neon-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/neon-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/neon-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/neon-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/neon-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/neon-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/neon-ultimate-back.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+        "assets/heroes/normalized/actions-v3126/seoha-move-right.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-hurt-left.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-hurt-right.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-move-back.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-move-front.webp",
+        "assets/heroes/normalized/actions-v3126/slayer-move-left.webp",
+        "assets/heroes/normalized/directions/hunter-back.webp",
+        "assets/heroes/normalized/directions/hunter-front.webp",
+        "assets/heroes/normalized/directions/hunter-left.webp",
+        "assets/heroes/normalized/directions/lauren-back.webp",
+        "assets/heroes/normalized/directions/lauren-front.webp",
+        "assets/heroes/normalized/directions/lauren-left.webp",
+        "assets/heroes/normalized/directions/lauren-right.webp",
+        "assets/heroes/normalized/directions/michaela-front.webp",
+        "assets/heroes/normalized/directions/michaela-right.webp",
+        "assets/heroes/normalized/directions/neon-left.webp",
+        "assets/heroes/normalized/directions/neon-right.webp",
+        "assets/heroes/normalized/directions/rian-front.webp",
+        "assets/heroes/normalized/directions/rian-right.webp",
+        "assets/heroes/normalized/directions/seoha-right.webp",
+        "assets/heroes/normalized/directions/slayer-left.webp",
+        "assets/heroes/normalized/directions/slayer-right.webp",
+        "assets/heroes/normalized/gunner/run_back_a.webp",
+        "assets/heroes/normalized/gunner/run_back_b.webp",
+        "assets/heroes/normalized/gunner/run_front_a.webp",
+        "assets/heroes/normalized/gunner/run_front_b.webp",
+        "assets/heroes/normalized/hwando/sprite_b0a6b20e97f4.webp",
+        "assets/props/v290/blank_memorial.webp",
+        "assets/props/v290/broken_street_lamp.webp",
+        "assets/props/v290/industrial_barricade.webp",
+        "assets/pxf-additional-baked-20261010/extra-02-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-06-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-09-atlas.png",
+        "assets/pxf-additional-baked-20261010/extra-11-atlas.png",
+        "assets/pxf-baked-20261010/claw-magic-atlas.png",
+        "assets/pxf-baked-20261010/claw-magic-enemy-atlas.png",
+        "assets/pxf-baked-20261010/claw-magic-player-atlas.png",
+        "assets/pxf-baked-20261010/explosion-enemy-atlas.png",
+        "assets/pxf-baked-20261010/explosion-player-atlas.png",
+        "assets/pxf-baked-20261010/melee-spark-atlas.png",
+        "assets/pxf-baked-20261010/pxf-09-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-09-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-12-atlas.png",
+        "assets/pxf-baked-20261010/pxf-12-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-12-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-13-atlas.png",
+        "assets/pxf-baked-20261010/pxf-13-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-13-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-17-atlas.png",
+        "assets/pxf-baked-20261010/pxf-17-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-17-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-18-atlas.png",
+        "assets/pxf-baked-20261010/pxf-18-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-18-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-20-atlas.png",
+        "assets/pxf-baked-20261010/pxf-20-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-20-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-21-atlas.png",
+        "assets/pxf-baked-20261010/pxf-21-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-21-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-26-atlas.png",
+        "assets/pxf-baked-20261010/pxf-26-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-26-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-27-atlas.png",
+        "assets/pxf-baked-20261010/pxf-28-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-29-atlas.png",
+        "assets/pxf-baked-20261010/pxf-29-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-29-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-30-atlas.png",
+        "assets/pxf-baked-20261010/pxf-30-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-30-player-atlas.png",
+        "assets/pxf-baked-20261010/pxf-31-atlas.png",
+        "assets/pxf-baked-20261010/pxf-31-enemy-atlas.png",
+        "assets/pxf-baked-20261010/pxf-31-player-atlas.png",
+        "assets/pxf-baked-20261010/silver-slash-atlas.png",
+        "assets/pxf-baked-20261010/silver-slash-enemy-atlas.png",
+        "assets/pxf-baked-20261010/silver-slash-player-atlas.png",
+        "assets/rc133/art/diamond.png",
+        "assets/rc133/art/eye.png",
+        "assets/rc133/art/small-orb.png",
+        "assets/rc134/persona-skills/diamond.png",
+        "assets/rc134/persona-skills/small-orb.png",
+        "assets/vfx/heroes/gunner-e.webp",
+        "assets/vfx/heroes/gunner-laser-bullet.webp",
+        "assets/vfx/heroes/gunner-q.webp",
+        "assets/vfx/heroes/hunter-q.webp",
+        "assets/vfx/heroes/hunter-w.webp",
+        "assets/vfx/heroes/hwando-a.webp",
+        "assets/vfx/heroes/hwando-e.webp",
+        "assets/vfx/heroes/hwando-q.webp",
+        "assets/vfx/heroes/ion-a.webp",
+        "assets/vfx/heroes/lauren-a.webp",
+        "assets/vfx/heroes/lauren-q.webp",
+        "assets/vfx/heroes/lauren-r.webp",
+        "assets/vfx/heroes/michaela-a.webp",
+        "assets/vfx/heroes/michaela-e.webp",
+        "assets/vfx/heroes/michaela-w.webp",
+        "assets/vfx/heroes/neon-a.webp",
+        "assets/vfx/heroes/neon-e.webp",
+        "assets/vfx/heroes/neon-q.webp",
+        "assets/vfx/heroes/seoha-a.webp",
+        "assets/vfx/heroes/seoha-e.webp",
+        "assets/vfx/heroes/slayer-a.webp",
+        "assets/vfx/heroes/slayer-q.webp",
+        "assets/vfx/heroes/slayer-w.webp",
+        "assets/vfx/v31323/boss/c103-mid/rian-a.webp",
+        "assets/vfx/v31330/a11-boss/tear.webp",
+        "assets/vfx/v31330/a11-cosmic-v31318/tear.webp",
+        "assets/vfx/v31330/b03-boss/tear.webp",
+        "assets/vfx/v31330/b04-boss/tear.webp",
+        "assets/vfx/v31330/b05-boss/tear.webp",
+        "assets/vfx/v31330/b06b-boss/tear.webp",
+        "assets/vfx/v31330/b07-boss/tear.webp",
+        "assets/vfx/v31330/b08-boss/tear.webp",
+        "assets/vfx/v31330/b09-boss/tear.webp",
+        "assets/vfx/v31330/blue-executor/tear.webp",
+        "assets/vfx/v31330/c101-mid/tear.webp",
+        "assets/vfx/v31330/c102-boss/tear.webp",
+        "assets/vfx/v31330/c103-boss/tear.webp",
+        "assets/vfx/v31330/c103-mid/tear.webp",
+        "assets/vfx/v31330/c104-boss/tear.webp",
+        "assets/vfx/v31330/c104-mid/tear.webp",
+        "assets/vfx/v31330/c105-mid/tear.webp",
+        "assets/vfx/v31330/c106-mid/tear.webp",
+        "assets/vfx/v31330/dist06-boss/tear.webp",
+        "assets/vfx/v31330/h103-boss/tear.webp",
+        "assets/vfx/v31330/k103-boss/tear.webp",
+        "assets/vfx/v31330/kair-great-01/tear.webp",
+        "assets/vfx/v31330/kair-great-02/tear.webp",
+        "assets/vfx/v31330/kair-great-03/tear.webp",
+        "assets/vfx/v31330/kair-great-04/tear.webp",
+        "assets/vfx/v31330/kair-great-05/tear.webp",
+        "assets/vfx/v31330/kair-great-06/tear.webp",
+        "assets/vfx/v31330/l301-boss/tear.webp",
+        "assets/vfx/v31330/l303-boss/tear.webp",
+        "assets/vfx/v31330/l305-boss/tear.webp",
+        "assets/vfx/v31330/mb-dist01/tear.webp",
+        "assets/vfx/v31330/mb-dist02/tear.webp",
+        "assets/vfx/v31330/mb-dist04/tear.webp",
+        "assets/vfx/v31330/mb-dist05/tear.webp",
+        "assets/vfx/v31330/mb-dist06/tear.webp",
+        "assets/vfx/v31330/mb-ep1a07/tear.webp",
+        "assets/vfx/v31330/mb-ep1a08/tear.webp",
+        "assets/vfx/v31330/mb-ep1a09/tear.webp",
+        "assets/vfx/v31330/mb-ep1a10/tear.webp",
+        "assets/vfx/v31330/mb-ep1a11/tear.webp",
+        "assets/vfx/v31330/mb-ep1b01/tear.webp",
+        "assets/vfx/v31330/mb-ep1b03/tear.webp",
+        "assets/vfx/v31330/mb-ep1b04/tear.webp",
+        "assets/vfx/v31330/mb-ep1b05/tear.webp",
+        "assets/vfx/v31330/mb-ep1b06/tear.webp",
+        "assets/vfx/v31330/mb-ep1b06b/tear.webp",
+        "assets/vfx/v31330/mb-ep1b07/tear.webp",
+        "assets/vfx/v31330/mb-ep1b08/tear.webp",
+        "assets/vfx/v31330/mb-ep1b09/tear.webp",
+        "assets/vfx/v31330/mb-hando01/tear.webp",
+        "assets/vfx/v31330/mb-hando02/tear.webp",
+        "assets/vfx/v31330/mb-hando03/tear.webp",
+        "assets/vfx/v31330/mb-kair01-v31231/tear.webp",
+        "assets/vfx/v31330/mb-kair04-v31231/tear.webp",
+        "assets/vfx/v31330/mb-kair09-v31231/tear.webp",
+        "assets/vfx/v31330/mb-last302-v31231/tear.webp",
+        "assets/vfx/v31330/mb-murder01/tear.webp",
+        "assets/vfx/v31330/mb-murder02/tear.webp",
+        "assets/vfx/v31330/mb-murder03/tear.webp",
+        "assets/vfx/v31330/murder04-mid/tear.webp",
+        "assets/vfx/v31330/u201-mid/tear.webp",
+        "assets/vfx/v31330/u202-mid/tear.webp",
+        "assets/vfx/v31330/u203-boss/tear.webp",
+        "assets/vfx/v31330/u203-mid/tear.webp",
+        "assets/vfx/v31330/u204-mid/tear.webp",
+        "assets/vfx/v31330/u205-mid/tear.webp",
+        "assets/vfx/v31330/u206-mid/tear.webp",
+        "audio/v31361/contact-kinetic.wav",
+        "delivery/additional-audio13-20261005/processed/sfx-candidate/Short_game_menu_navi__4-1791000546558-2a2600cc.ogg"
+      ]
+    }
+  ],
+  "archiveRole": "Build input only; unpacked verified runtime files are published to Pages. No archives are served by Pages."
+}

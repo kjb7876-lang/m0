@@ -1,0 +1,21 @@
+# Review before deployment. Place at repository root or select this Blueprint file.
+# No service is created by this file alone. User approval is required before upload/deploy.
+services:
+  - type: web
+    name: storyworld-r62-relay
+    runtime: node
+    plan: free
+    rootDir: relay
+    buildCommand: npm ci --ignore-scripts
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: 'off'
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "24"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: ALLOWED_ORIGINS
+        sync: false

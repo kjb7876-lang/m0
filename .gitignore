@@ -1,0 +1,21 @@
+.env
+.env.*
+!.env.example
+!relay/.env.example
+node_modules/
+*.zip
+*.part*
+*.log
+*.tap
+qa/
+backups/
+projection33/
+/PAGES_STATIC_VERIFICATION_R62.json
+/PAGES_BOOT_R62_CPU.json
+
+# Verified public runtime media, consumed only by the Pages build.
+!build-input/runtime-packs/*.zip
+/build-input/upload-plan-r62.json
+/_pages/
+/_site/
+/scripts/__pycache__/
