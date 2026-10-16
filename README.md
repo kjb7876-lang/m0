@@ -4,6 +4,10 @@
 
 사용자가 제공한 공개 저장소 [`kjb7876-lang/m0`](https://github.com/kjb7876-lang/m0)를 배포 대상으로 확정했습니다. 코드 업로드와 Pages 공개 배포 승인을 받았습니다. 실제 공개 URL·배포 커밋·서버 주소는 [배포 상태](DEPLOYMENT_STATUS_R62.json)에 확인된 결과만 기록합니다. 게임 코드·이미지·음원은 공개 다운로드될 수 있습니다.
 
+웹 게임: [스토리월드 R62 실행](https://kjb7876-lang.github.io/m0/) · Pages 배포 성공: 2026-10-16 17:46 KST · 게임 소스 `fce101f9072a9ef8cab03119d190800ca009ae69`. 실제 공개 HTML의 SHA-256 일치를 확인했습니다. 브라우저/GPU에서의 플레이 검증은 별도입니다.
+
+멀티 중계는 아직 배포하지 않았습니다. [Render 무료 중계 서버 배포](https://render.com/deploy?repo=https://github.com/kjb7876-lang/m0)에서 로그인한 뒤 Free 서비스 1개를 검토하고 배포합니다. 저장소 루트의 `render.yaml`에 Node 24, 실행 명령, Pages 허용 출처가 입력돼 있습니다. 이 버튼만으로 서버가 이미 생성된 것은 아닙니다. 발급된 공개 `onrender.com` 주소를 확인한 뒤 WSS 연결 검증을 진행합니다.
+
 - [배포·실행·롤백 안내](README_DEPLOY_KO.md)
 - [중계 서버 안내](relay/README_KO.md)
 - [지역별 지원 및 검증 범위](MAP_SUPPORT_R62_KO.md)
