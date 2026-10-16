@@ -1,10 +1,10 @@
 {
   "schema": "storyworld.runtime-build-input.r62/v1",
-  "runtimeManifestSHA256": "fd381694013fc0e6cf38d36cfbb191fd6e2f1f23e81daf8b5cdd098014ca5559",
+  "runtimeManifestSHA256": "64e2db16b6b9e1fbac24a144bd39fc76c8b162155550f407c00984d8666a825d",
   "sourceHTMLSha256": "5728f41c55dabc9a345297bb1ce834464b6dcececf74801f4feb8da4ec8a9602",
-  "webHTMLSha256": "8b26b5e6a94a949bc1a94bceaf635b9e5ad4c8c5c4f2898d2dc78330529be38b",
+  "webHTMLSha256": "f019e83a3f0f4dc2a4b7a4422235395f7ddff360f6da32f4a6b25e03ed618493",
   "runtimeFileCount": 1906,
-  "runtimeBytes": 464764252,
+  "runtimeBytes": 464764344,
   "raw": [
     {
       "path": ".nojekyll",
@@ -788,8 +788,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5886270,
-      "sha256": "8b26b5e6a94a949bc1a94bceaf635b9e5ad4c8c5c4f2898d2dc78330529be38b"
+      "bytes": 5886362,
+      "sha256": "f019e83a3f0f4dc2a4b7a4422235395f7ddff360f6da32f4a6b25e03ed618493"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -814,7 +814,7 @@
     {
       "path": "web-manifest-r62.json",
       "bytes": 363579,
-      "sha256": "fd381694013fc0e6cf38d36cfbb191fd6e2f1f23e81daf8b5cdd098014ca5559"
+      "sha256": "64e2db16b6b9e1fbac24a144bd39fc76c8b162155550f407c00984d8666a825d"
     }
   ],
   "archives": [

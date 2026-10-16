@@ -11038,7 +11038,7 @@ window.__STORYWORLD_GENERATED_ASSETS_R62__={"assets/auras-r62/ego-halo.webp":"1f
  }
  async function connect(kind,options={}){
   if(active())throw Error('현재 방을 나간 뒤 새 방에 접속하세요.');
-  endpoint=validateEndpoint(options.endpoint||window.STORYWORLD_RELAY_URL||stored(configKey));nickname=String(options.nick||'동행자').normalize('NFKC').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,24)||'동행자';character=Object.hasOwn(heroes(),options.character)?options.character:'hwando';
+  endpoint=validateEndpoint(options.endpoint||window.STORYWORLD_RELAY_URL||stored(configKey)||'wss://storyworld-r62-relay.onrender.com/ws');nickname=String(options.nick||'동행자').normalize('NFKC').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,24)||'동행자';character=Object.hasOwn(heroes(),options.character)?options.character:'hwando';
   const code=String(options.code||'').trim().toUpperCase().replace(/[\s-]/g,'');if(kind!=='create'&&kind!=='join')throw Error('지원하지 않는 입장 방식입니다.');if(kind==='join'&&!/^[A-Z0-9]{4,10}$/.test(code))throw Error('친구가 알려준 방 코드를 입력하세요.');
   if(!sim()?.start)throw Error('협동 기능을 불러오지 못했습니다.');
   store(configKey,endpoint);store(nicknameKey,nickname);intent={type:kind,code};closing=false;sessionToken=null;simStarted=false;hostMenuPaused=false;lastStoryKey='';receiveChain=Promise.resolve();
@@ -11058,7 +11058,7 @@ window.__STORYWORLD_GENERATED_ASSETS_R62__={"assets/auras-r62/ego-halo.webp":"1f
  function fieldLabel(){return'<p class="small muted">최대 4명 · 맵·서사는 방장 기준 · 보상과 패시브는 이 협동 저장에만 기록됩니다.<br>게스트의 혼자 하기 저장은 바뀌지 않습니다. 방장 탭이 멈추거나 서버가 재시작되면 일시 정지 또는 방 종료가 발생할 수 있습니다.</p>';}
  function showConnect(kind='create'){
   if(active()){showLobby();return;}uiView='connect';
-  const saved=window.STORYWORLD_RELAY_URL||stored(configKey),nick=stored(nicknameKey)||'동행자';
+  const saved=window.STORYWORLD_RELAY_URL||stored(configKey)||'wss://storyworld-r62-relay.onrender.com/ws',nick=stored(nicknameKey)||'동행자';
   openPanel('<button id="coopBack62" class="close">돌아가기</button><div class="eyebrow">STORYWORLD / ONLINE CO-OP</div><h2>'+(kind==='create'?'방 만들기':'방 코드로 참가')+'</h2><div class="coopForm62"><label>닉네임<input id="coopNick62" maxlength="24" value="'+esc(nick)+'" autocomplete="nickname"></label><label>영웅<select id="coopHero62">'+Object.entries(heroes()).map(([id,h])=>'<option value="'+esc(id)+'">'+esc(h.name)+'</option>').join('')+'</select></label>'+(kind==='join'?'<label>방 코드<input id="coopCode62" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="친구가 알려준 코드"></label>':'')+'<label>중계 서버 WSS 주소<input id="coopRelay62" type="url" value="'+esc(saved)+'" placeholder="wss://서버이름.onrender.com/ws" spellcheck="false" autocomplete="off"></label></div><p class="small">친구와 같은 게임 주소·R62 빌드·중계 서버를 사용하세요. 무료 Render 서버는 첫 접속에 약 1분 걸릴 수 있습니다.</p><p id="coopNotice62" class="coopNotice62" role="status" aria-live="polite"></p><div class="actions"><button id="coopConnect62" class="primary">'+(kind==='create'?'방 만들기':'참가')+'</button><button id="coopOther62">'+(kind==='create'?'방 코드로 참가':'방 만들기')+'</button></div>'+fieldLabel());
   bind('coopBack62',solo);bind('coopOther62',()=>showConnect(kind==='create'?'join':'create'));bind('coopConnect62',()=>connect(kind,{endpoint:byId('coopRelay62').value,nick:byId('coopNick62').value,character:byId('coopHero62').value,code:byId('coopCode62')?.value}));protectForm();
  }
