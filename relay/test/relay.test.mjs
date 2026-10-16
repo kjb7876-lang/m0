@@ -258,3 +258,12 @@ test('authored skill slots w/e/r reach host once and malformed slots are refused
   }
   guest.send('input',{epoch:1,seq, input:{skillSlot:'r'}}); assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
 });
+
+test('automatic basic and skill flags are strict booleans and forwarded with sequence authority', async t => {
+ const f=await fixture(t),host=await f.create(),guest=await f.join(host);await f.start(host,[guest]);let seq=0;
+ for(const key of ['autoBasic','autoSkill','threadDance']){
+  for(const value of [true,false]){guest.send('input',{epoch:1,seq:++seq,input:{[key]:value}});const got=await host.get('input');assert.equal(got.input[key],value);assert.equal(got.playerId,guest.welcome.selfId);}
+  for(const value of ['true',1,null]){guest.send('input',{epoch:1,seq:seq+1,input:{[key]:value}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
+ }
+ guest.send('input',{epoch:1,seq,input:{autoSkill:true}});assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
+});

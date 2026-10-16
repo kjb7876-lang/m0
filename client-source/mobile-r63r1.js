@@ -1,0 +1,52 @@
+/* Reconstructed from the approved R62 baseline. Presentation and preferences;
+ * native skills/physics stay authoritative. Saved outside campaign progress. */
+(()=>{'use strict';
+ const key='storyworld.mobile.r62.preferences';let prefs={};try{prefs=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}
+ const mobile=()=>matchMedia('(pointer:coarse)').matches;
+ const explicit=k=>typeof prefs[k]==='boolean',basic=()=>explicit('autoBasic')?prefs.autoBasic:true;
+ function persist(k,v){prefs[k]=v;try{localStorage.setItem(key,JSON.stringify(prefs));}catch(e){warn('개인 설정을 저장하지 못했습니다: '+e.message);}}
+ function defaults(){if(!mobile())return;auto=basic();settings.autoSkill=explicit('autoSkill')?prefs.autoSkill:true;}
+ const stage=$('stage'),card=$('heroCard'),cardParent=card.parentNode,cardNext=card.nextSibling;
+ const gear=document.createElement('button');gear.id='mobileSettingsR63';gear.type='button';gear.textContent='⚙';gear.title='설정';gear.setAttribute('aria-label','설정');stage.appendChild(gear);
+ const ailment=document.createElement('div');ailment.id='mobileAilmentR63';ailment.hidden=true;stage.appendChild(ailment);
+ const ring=document.createElement('div');ring.id='mobileMoveR63';ring.innerHTML='<i></i>';stage.appendChild(ring);
+ let drag=null,wasLive=false,disposed=false,audioProfilesAligned=false;const touches=new Set();
+ function clearGesture(){drag=null;touches.clear();joystickVector={x:0,y:0};ring.style.display='none';clearControls();}
+ function clearTransitions(){clearGesture();lastFrame=0;accumulator=0;}
+ function live(){return mobile()&&started&&!!player;}
+ function sync(){if(!audioProfilesAligned&&audioCatalog){audioProfilesAligned=true;try{setupAudio();if(audioUnlocked)warmAudio();}catch(e){audioProfilesAligned=false;logError(e);}}const on=live();document.body.classList.toggle('mobile-live-r63',on);document.body.classList.toggle('mobile-modal-r63',!!modal);document.body.classList.toggle('mobile-boss-r63',on&&!$('bossbar').classList.contains('hidden'));
+  if(on&&card.parentNode!==stage){stage.appendChild(card);card.classList.add('mobile-hud-r63');}
+  else if(!on&&card.parentNode!==cardParent){cardParent.insertBefore(card,cardNext);card.classList.remove('mobile-hud-r63');}
+  let use=false;if(on&&room&&!room.engaged&&!modal&&!loading&&player?.hp>0){try{use=Object.keys(regionById[zone]?.exits||{}).some(d=>distance(player,exitPoint(d))<1.8)||(room.markers||[]).some(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)&&distance(player,m)<1.7);if(room.altar)use=use||distance(player,room.altar)<1.8;}catch(_){} }
+  document.body.classList.toggle('mobile-use-r63',use);
+  const wounds=window.__STORYWORLD_COMBAT_HUD_R51__?.inspect?.();const names=wounds?.status?.map?.(s=>s.name||s.type)||[];ailment.textContent=names.slice(0,3).join(' · ');ailment.hidden=!on||!ailment.textContent;
+  if(on!==wasLive){wasLive=on;resize();clearTransitions();}
+ }
+ function panelWrap(fn){return function(...args){clearGesture();const r=fn.apply(this,args);sync();return r;};}
+ openPanel=panelWrap(openPanel);closePanel=panelWrap(closePanel);
+ gear.addEventListener('pointerdown',e=>{e.stopPropagation();clearGesture();});gear.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();unlockAudio();showSettings();});
+ const originalSettings=showSettings;showSettings=function(...args){const r=originalSettings.apply(this,args);if(!mobile()||$('mobileOptionsR63'))return r;const p=$('panel'),section=document.createElement('section');section.id='mobileOptionsR63';section.className='mobile-options-r63';section.innerHTML='<h3>전투와 이동</h3><label><input id="mobileBasicR63" type="checkbox"> 자동 기본 공격</label><label><input id="mobileSkillsR63" type="checkbox"> 자동 스킬 Q · EGO · W · E · R · 실검무</label><p class="small">탭: 목적지 이동 · 드래그: 이동 · 두 손가락: 회피. 자동 공격은 자동 이동과 별개입니다.</p><div id="mobileActionsR63" class="mobile-actions-r63"></div><div id="mobileToolsR63" class="mobile-tools-r63"></div>';
+  p.appendChild(section);const objective=document.createElement('p');objective.className='small';objective.textContent=[$('questText')?.textContent,$('questDestination')?.textContent,$('questUnlock')?.textContent,$('hint')?.textContent].filter(Boolean).join(' · ');section.prepend(objective);for(const[type,k,value]of [['mobileBasicR63','autoBasic',auto],['mobileSkillsR63','autoSkill',settings.autoSkill!==false]]){const el=$(type);el.checked=value;el.onchange=()=>{persist(k,el.checked);if(k==='autoBasic')auto=el.checked;else settings.autoSkill=el.checked;saveGame(false);};}
+  const actions=[['기본 공격',()=>basicAttack(),$('attackIcon')?.src],['회피',()=>blink(),$('blinkIcon')?.src],['공명',()=>guardStart(),$('guardIcon')?.src],['고유 기술',()=>special(),$('specialIcon')?.src],['EGO',()=>ego(),$('egoIcon')?.src],['실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),$('specialIcon')?.src],...['w','e','r'].map(slot=>[window.__STORYWORLD_WER__?.defs?.[player.hero]?.[slot]?.[0]||slot.toUpperCase(),()=>window.__STORYWORLD_WER__?.cast(slot,false),urlFor('assets/vfx/heroes/'+player.hero+'-'+slot+'.webp')])];
+  for(const[name,fn,src]of actions){const b=document.createElement('button');b.type='button';b.textContent=name;if(src){const im=document.createElement('img');im.src=src;im.alt='';b.prepend(im);}b.onclick=()=>{clearGesture();closePanel(true);unlockAudio();fn();if(name==='공명')setTimeout(()=>guardEnd(),350);};if(name==='공명'){b.title='공명·패링 시작';} $('mobileActionsR63').appendChild(b);}
+  for(const[name,fn]of [['지도',showWorld],['기억·서사',showJournal],['패시브 강화',showUpgrades],['조작 안내',showHelp],['진행 저장',()=>saveGame(true)],['불러오기',()=>loadLocal()],['저장 내보내기',()=>download(JSON.stringify(serializeSave(),null,2),'StoryWorld_Save.json','application/json')],['코드',()=>window.__STORYWORLD_CHEAT777__?.panel()],['협동',()=>{const c=window.__STORYWORLD_COOP_CLIENT_R62__;if(c?.active())c.showMenu();else c?.showConnect('create');}],['전체 메뉴',showMenu]]){const b=document.createElement('button');b.type='button';b.textContent=name;b.onclick=()=>{clearGesture();fn();};$('mobileToolsR63').appendChild(b);}
+  $('settingsClose').onclick=()=>closePanel(true);for(const t of ['pointerdown','pointerup','click','keydown','keyup'])section.addEventListener(t,e=>e.stopPropagation());return r;
+ };
+ const newBase=newGame;newGame=async function(...args){const r=await newBase.apply(this,args);defaults();sync();return r;};
+ const restoreBase=restoreSave;restoreSave=async function(raw,...args){clearTransitions();const r=await restoreBase.call(this,raw,...args);if(mobile()){if(explicit('autoBasic'))auto=prefs.autoBasic;if(explicit('autoSkill'))settings.autoSkill=prefs.autoSkill;else settings.autoSkill=typeof raw?.settings?.autoSkill==='boolean'?raw.settings.autoSkill:true;}sync();return r;};
+ const hud=updateHUD;updateHUD=function(...args){const r=hud.apply(this,args);sync();return r;};
+ const tickBase=tick;tick=function(dt){const before=time,r=tickBase(dt);if(mobile()&&time>before&&!modal&&!loading&&player?.hp>0&&!safeRegion()&&settings.autoSkill===true&&player.specialCD<=0&&!(window.__STORYWORLD_COOP_SIM_R62__?.inspect().mode==='guest'))window.__STORYWORLD_HANDO_FINAL_R49__?.autoSpecial();return r;};
+ // Native pointerdown owns tap-to-path, and is the only tap admission. Drag
+ // takes over movement only after a threshold; it never synthesizes a tap.
+ canvas.addEventListener('pointerdown',e=>{if(!mobile()||e.pointerType==='mouse'||modal||loading||!started||player?.hp<=0)return;touches.add(e.pointerId);if(touches.size>1){e.preventDefault();e.stopImmediatePropagation();clearGesture();unlockAudio();blink();return;}const r=canvas.getBoundingClientRect();drag={id:e.pointerId,x:e.clientX-r.left,y:e.clientY-r.top,moved:false};try{canvas.setPointerCapture(e.pointerId);}catch(_){};},true);
+ canvas.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;if(modal||loading||document.hidden){clearGesture();return;}const b=canvas.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top,dx=x-drag.x,dy=y-drag.y,d=Math.hypot(dx,dy);if(d<14&&!drag.moved)return;drag.moved=true;e.preventDefault();route=[];command=null;guide=false;joystickVector={x:dx/Math.max(32,d),y:dy/Math.max(32,d)};ring.style.display='block';ring.style.left=(drag.x-40)+'px';ring.style.top=(drag.y-40)+'px';ring.firstElementChild.style.transform='translate('+Math.max(-25,Math.min(25,dx))+'px,'+Math.max(-25,Math.min(25,dy))+'px)';},{passive:false});
+ for(const t of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(t,e=>{touches.delete(e.pointerId);if(drag?.id===e.pointerId)clearGesture();});
+ for(const t of ['resize','orientationchange','blur','pagehide'])window.addEventListener(t,clearTransitions);window.visualViewport?.addEventListener('resize',clearTransitions);
+ const unlock=unlockAudio;let observed=null;unlockAudio=function(...args){const p=unlock.apply(this,args);Promise.resolve(p).then(ok=>{if(ok&&audioContext&&observed!==audioContext){observed=audioContext;audioContext.addEventListener('statechange',()=>{if(audioContext?.state!=='running'){audioUnlocked=false;stopEffects();stopVoice();if(musicElement)musicElement.pause();}});}});return p;};
+ function silence(){audioUnlocked=false;stopEffects();stopVoice();if(musicElement)musicElement.pause();}
+ document.addEventListener('visibilitychange',()=>{clearTransitions();if(document.hidden){silence();try{if(audioContext?.state==='running')audioContext.suspend()?.catch(()=>{});}catch(_){};}else musicFail=false;});
+ navigator.mediaDevices?.addEventListener('devicechange',()=>{silence();musicFail=false;});
+ document.addEventListener('change',e=>{if(e.target?.matches?.('[data-volume],input[data-setting]'))saveGame(false);});
+ const sim=window.__STORYWORLD_COOP_SIM_R62__;if(sim){const begin=sim.start;window.__STORYWORLD_COOP_SIM_R62__=Object.freeze({...sim,start:async function(...args){const hadGame=started;const r=await begin.apply(this,args);if(mobile()){if(!hadGame)defaults();else if(typeof settings.autoSkill!=='boolean')settings.autoSkill=explicit('autoSkill')?prefs.autoSkill:true;}sync();return r;}});}
+ window.__STORYWORLD_MOBILE_R63__=Object.freeze({revision:'R63R1',isMobile:mobile,applyDefaults:defaults,clearGesture,sync,preferences:()=>({...prefs}),inspect:()=>({mobile:mobile(),live:live(),autoBasic:auto,autoSkill:settings.autoSkill,dragging:!!drag,disposed,audioProfilesAligned,audioRoles:Object.fromEntries(Object.entries(soundProfiles).map(([k,v])=>[k,v.length]))})});sync();
+})();

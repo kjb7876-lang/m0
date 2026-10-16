@@ -3,7 +3,7 @@ import { randomBytes, createHash, timingSafeEqual } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer, WebSocket } from 'ws';
 
-export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R62', protocol: 1 });
+export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R63R1', protocol: 1 });
 export const CHARACTERS = Object.freeze(['hwando', 'seoha', 'neon', 'michaela', 'lauren', 'hunter', 'slayer', 'gunner']);
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const LIMITS = Object.freeze({ players: 4, rooms: 32, connections: 160, payload: 524288, buffer: 2097152,
@@ -41,7 +41,7 @@ function validProfile(m, partial = false) {
 }
 function validInput(input) {
   if (!record(input)) return false;
-  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact'];
+  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance'];
   if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', ...flags].includes(k))) return false;
   if (input.skillSlot !== undefined && !['w', 'e', 'r'].includes(input.skillSlot)) return false;
   for (const axis of ['moveX', 'moveY']) if (input[axis] !== undefined && !(typeof input[axis] === 'number' && Number.isFinite(input[axis]) && Math.abs(input[axis]) <= 1)) return false;

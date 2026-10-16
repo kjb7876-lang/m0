@@ -1,0 +1,44 @@
+/* Keep combat information above the late-mounted Three canvas. */
+#bossbar,#hint,#toast,#banner{z-index:20}
+#mobileSettingsR63,#mobileMoveR63{display:none}
+.campaign-difficulty-r63{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:14px 0}
+.campaign-difficulty-r63 button{min-height:44px;white-space:normal}
+.campaign-settings-r63{margin-top:10px}
+@media (pointer:coarse) {
+ body.mobile-live-r63 header,body.mobile-live-r63 footer{display:none!important}
+ body.mobile-live-r63 #stage{position:fixed;inset:0;width:100vw;height:100dvh}
+ body.mobile-live-r63 #hint,body.mobile-live-r63 #quest,body.mobile-live-r63 #story-code-button,body.mobile-live-r63 #minipanel,body.mobile-live-r63 #joystick,body.mobile-live-r63 #story-wer-controls,body.mobile-live-r63 #status{display:none!important}
+ #mobileSettingsR63{display:block;position:absolute;z-index:25;right:calc(env(safe-area-inset-right,0px) + 8px);top:calc(env(safe-area-inset-top,0px) + 8px);width:44px;height:44px;padding:0;font-size:22px;touch-action:manipulation}
+ body:not(.mobile-live-r63) #mobileSettingsR63{display:none}
+ body.mobile-live-r63 #quest{top:calc(env(safe-area-inset-top,0px) + 8px);left:calc(env(safe-area-inset-left,0px) + 8px);width:min(42vw,205px);padding:4px 7px;max-height:44px;overflow:hidden;pointer-events:none}
+ body.mobile-live-r63 #quest .eyebrow,body.mobile-live-r63 #questDetails,body.mobile-live-r63 #questToggle,body.mobile-live-r63 #questInlineSummary{display:none!important}
+ body.mobile-live-r63 #quest strong{font-size:10px;line-height:1.3;margin:0}
+ body.mobile-live-r63.mobile-boss-r63 #quest{display:none!important}
+ body.mobile-live-r63 #bossbar{top:calc(env(safe-area-inset-top,0px) + 8px);width:min(55vw,300px);padding:4px 7px}
+ body.mobile-live-r63 #bossTitle{font-size:11px;margin:0 0 3px}
+ body.mobile-live-r63 #bossSpell{font-size:10px;margin:3px 0 0;line-height:1.2}
+ #heroCard.mobile-hud-r63{position:absolute;z-index:15;left:calc(env(safe-area-inset-left,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);width:min(40vw,190px);height:auto;padding:4px 6px;gap:0;border:1px solid #6a7974;border-radius:4px;background:#0a1720d9;pointer-events:none}
+ #heroCard.mobile-hud-r63 #portrait,#heroCard.mobile-hud-r63 #heroName,#heroCard.mobile-hud-r63 #xpText,#heroCard.mobile-hud-r63 .bar.xp{display:none!important}
+ #heroCard.mobile-hud-r63 #hpText,#heroCard.mobile-hud-r63 #resText{font-size:10px;line-height:1.2;margin:1px 0}
+ #heroCard.mobile-hud-r63 .bar{height:4px}
+ #mobileAilmentR63{position:absolute;z-index:15;right:calc(env(safe-area-inset-right,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 62px);max-width:40vw;font-size:11px;padding:3px 6px;background:#171720df;border:1px solid #987b72;pointer-events:none}
+ body.mobile-live-r63 #touchUse{display:none!important;position:absolute;right:calc(env(safe-area-inset-right,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);width:68px;height:44px;font-size:10px;padding:4px;z-index:20}
+ body.mobile-live-r63.mobile-use-r63 #touchUse{display:block!important}
+ body.mobile-live-r63 #hint{bottom:calc(env(safe-area-inset-bottom,0px) + 65px);font-size:10px;padding:3px 6px;max-width:65%}
+ body.mobile-live-r63 #hint:empty,body.mobile-live-r63 #toast:empty{display:none}
+ body.mobile-live-r63 #toast{bottom:calc(env(safe-area-inset-bottom,0px) + 100px);font-size:11px}
+ #mobileMoveR63{position:absolute;z-index:14;width:80px;height:80px;border:1px solid #d0e5d575;border-radius:50%;background:#19333b35;pointer-events:none;display:none}
+ #mobileMoveR63 i{position:absolute;left:27px;top:27px;width:26px;height:26px;border-radius:50%;border:1px solid #d6e9d8aa;background:#adcac850}
+ body.mobile-live-r63 #modal{padding:calc(env(safe-area-inset-top,0px) + 8px) calc(env(safe-area-inset-right,0px) + 8px) calc(env(safe-area-inset-bottom,0px) + 8px) calc(env(safe-area-inset-left,0px) + 8px)}
+ body.mobile-live-r63 #panel{max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 16px);width:min(720px,96vw);padding:14px;overscroll-behavior:contain}
+ body.mobile-live-r63 #coopBadge62{top:calc(env(safe-area-inset-top,0px) + 57px);right:calc(env(safe-area-inset-right,0px) + 8px);font-size:10px;max-width:125px;padding:3px 6px}
+ body.mobile-modal-r63 #coopBadge62{display:none!important}
+ .mobile-options-r63{border-top:1px solid #62716c;margin-top:14px;padding-top:12px}
+ .mobile-options-r63 label{display:block;margin:8px 0;font-size:13px}
+ .mobile-options-r63 input[type=range]{width:100%;min-height:32px}
+ .mobile-actions-r63{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .mobile-actions-r63 button{display:flex;gap:7px;align-items:center;min-height:48px;text-align:left;font-size:12px;padding:6px}
+ .mobile-actions-r63 img{width:32px;height:32px;object-fit:contain}
+ .mobile-tools-r63{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+ .mobile-tools-r63 button{font-size:12px;padding:7px}
+}
