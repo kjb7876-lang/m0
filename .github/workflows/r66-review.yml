@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+          show-progress: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -24,24 +25,25 @@ jobs:
           python3 scripts/unpack-runtime-r62.py --output _pages/docs
           node --test scripts/campaign-balance-r64.cpu.test.mjs
           python3 scripts/apply-r66.py --site _pages/docs
-          node --test scripts/r66.cpu.test.mjs
+          node --test scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs
           node verify-pages-r62.mjs _pages
       - name: Install sandboxed browser
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
           npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
-      - name: Inspect native boss HUD integration
-        run: |
-          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66-hud-diagnostic.mjs
       - name: Browser regression
         run: |
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-regression.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
+      - name: Paired baseline and candidate measurements
+        if: ${{ !cancelled() }}
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-perf.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.perf.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
