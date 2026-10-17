@@ -1,0 +1,125 @@
+{
+  "environment": "local two-page client simulation only; no relay/server/network connection",
+  "hostStart": {
+    "mode": "host",
+    "players": [
+      {
+        "id": "qa-host",
+        "points": 12
+      },
+      {
+        "id": "qa-guest",
+        "points": 20
+      }
+    ],
+    "replicaCount": 6,
+    "replicaHp": [
+      {
+        "maxHp": 6421.5,
+        "factor": 0.25
+      },
+      {
+        "maxHp": 285,
+        "factor": 0.25
+      }
+    ],
+    "snapshotProtocol": {
+      "version": 1,
+      "build": "R62",
+      "epoch": 0
+    },
+    "saveKind": "storyworld-coop",
+    "saveParticipants": [
+      {
+        "id": "qa-host",
+        "points": 12
+      },
+      {
+        "id": "qa-guest",
+        "points": 20
+      }
+    ],
+    "saveSize": 21640,
+    "dropId": "r64:3:drop:qa-coop-1",
+    "hostDropProp": true,
+    "savedDrop": {
+      "id": "r64:3:drop:qa-coop-1",
+      "source": "r64:3:kill:qa-coop-enemy",
+      "x": 12,
+      "y": 12,
+      "amount": 4,
+      "kind": "enemy",
+      "createdAt": 1.100000000000001
+    },
+    "rank": 1
+  },
+  "guestView": {
+    "accepted": true,
+    "hostId": "qa-host",
+    "auraOwners": [
+      "qa-host"
+    ],
+    "replicaCount": 6,
+    "sharedDrop": true,
+    "dropProp": true
+  },
+  "hostLoad": {
+    "ok": true,
+    "mode": "host",
+    "hostPoints": 12,
+    "guestPoints": 20,
+    "hostRank": 1,
+    "guestRank": 0,
+    "replicaHp": [
+      {
+        "maxHp": 6421.5,
+        "factor": 0.25
+      },
+      {
+        "maxHp": 285,
+        "factor": 0.25
+      }
+    ],
+    "dropAfterLoad": [
+      {
+        "id": "r64:3:drop:qa-coop-1",
+        "source": "r64:3:kill:qa-coop-enemy",
+        "x": 12,
+        "y": 12,
+        "amount": 4,
+        "kind": "enemy",
+        "createdAt": 1.100000000000001
+      }
+    ]
+  },
+  "guestAuthority": {
+    "collected": 0,
+    "awarded": false,
+    "points": 20,
+    "before": 20,
+    "drops": 1
+  },
+  "pickup": {
+    "first": 1,
+    "second": 0,
+    "before": 20,
+    "after": 24,
+    "remaining": 0,
+    "claim": true,
+    "ownerClaims": false,
+    "guestClaims": true,
+    "savedDrops": 0,
+    "savedClaims": true
+  },
+  "reloadAfterPickup": {
+    "owner": 12,
+    "guest": 24,
+    "drops": 0,
+    "claims": 1
+  },
+  "guestAfterLoad": {
+    "accepted": true,
+    "epoch": 2
+  },
+  "errors": []
+}

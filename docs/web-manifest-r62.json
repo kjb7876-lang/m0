@@ -1,10 +1,10 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R64_LOCAL_CANDIDATE_NOT_DEPLOYED",
+  "status": "R65_PAGES_CANDIDATE",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e",
-  "webHTMLSha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e",
+  "sourceHTMLSha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6",
+  "webHTMLSha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9513,8 +9513,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5967839,
-      "sha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e"
+      "bytes": 5969287,
+      "sha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,12 +9538,12 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464849582,
+  "totalBytes": 464851030,
   "largest": [
     {
       "path": "index.html",
-      "bytes": 5962638,
-      "sha256": "3c64cc4c6037c3324c4fb759dba54bc2e88c1b315a7a07fb1914f001c6d2c4c7"
+      "bytes": 5969287,
+      "sha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6"
     },
     {
       "path": "audio/rc133/processed/bgm/Folding_Space_1-c535f55c.mp3",
@@ -9659,7 +9659,7 @@
     "proposalOnly": true
   },
   "privateRepositoryDoesNotMakeOrdinaryPagesAssetsPrivate": true,
-  "candidateRevision": "R64",
+  "candidateRevision": "R65",
   "networkBuild": "R63R1",
   "publishedBaselineWebHTMLSha256": "a260ed7b1d62e5574ae35525d58135543878e9c444d6fdaf039367ab01de330e"
 }
