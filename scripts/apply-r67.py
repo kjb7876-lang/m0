@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""R67 presentation-only optimization, applied AFTER the verified R66 overlay.
+"""Apply reviewed R67 renderer changes AFTER the exact R66 build overlay.
 
-Only unlit, planar image commands use one transparent pass. Volumetric meshes,
-normal-mapped props, authored pixels, alpha/depth/blend rules and simulation are
-not changed. Label slots are reused in original painter order and retired as
-soon as unused. Unknown mutable canvases keep their existing refresh behavior.
+Planar unlit sprites use one transparent pass; labels retain painter-ordered DOM
+slots; cubic Canvas paths no longer force thread-dance into the legacy renderer.
+Unknown mutable canvases are still refreshed. No simulation or media edits.
 """
 from __future__ import annotations
 import argparse
@@ -49,17 +48,20 @@ LABEL_METHOD = r'''  label(c){
   }'''
 
 def transform(source: str) -> str:
-    if 'labelCursorR67' in source or 'r67FlatSinglePass' in source:
+    if 'labelCursorR67' in source or 'r67FlatSinglePass' in source or 'drawCubicBezierR67' in source:
         raise RuntimeError('R67 already applied')
-    # Avoid 14 temporary [key,value] arrays and the map array per style snapshot.
+    curves=(ROOT/'client-source/renderer-curves-r67.js').read_text(encoding='utf-8')
+    source=replace_once(source,'class DrawCommands {',curves+'\nclass DrawCommands {')
+    source=replace_once(source,'\n  roundRect(',
+        '\n  bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y){return drawCubicBezierR67.call(this,cp1x,cp1y,cp2x,cp2y,x,y);}\n  roundRect(')
+    # Direct snapshots avoid thirteen pair arrays and the mapped array per call.
     source = replace_once(source,
         'style(){return Object.fromEntries(this.styleKeys.map(k=>[k,this[k]]));}',
         'style(){return{globalAlpha:this.globalAlpha,globalCompositeOperation:this.globalCompositeOperation,fillStyle:this.fillStyle,strokeStyle:this.strokeStyle,filter:this.filter,font:this.font,textAlign:this.textAlign,textBaseline:this.textBaseline,lineWidth:this.lineWidth,lineCap:this.lineCap,lineJoin:this.lineJoin,shadowBlur:this.shadowBlur,shadowColor:this.shadowColor};}')
     source = replace_once(source,
         'save(){this.stack.push({matrix:this.matrix.slice(),clips:this.clips.slice(),style:Object.fromEntries(this.styleKeys.map(k=>[k,this[k]]))});}',
         'save(){this.stack.push({matrix:this.matrix.slice(),clips:this.clips.slice(),style:this.style()});}')
-    # Canvas image commands become planar quads (possibly clipped), not volumes.
-    # Exclude MeshStandardMaterial: normal-mapped hospital props are unchanged.
+    # Images become planar quads, possibly clipped. Exclude normal-mapped props.
     anchor = "    if(this.spatial&&['ground','exits','objective'].includes(command.owner.kind))attachSight24"
     source = replace_once(source, anchor,
         "    if(command.kind==='image'&&material.isMeshBasicMaterial){material.forceSinglePass=true;material.userData.r67FlatSinglePass=true;}\n" + anchor)
@@ -108,7 +110,7 @@ def main() -> None:
         rows[0].update(bytes=len(after),sha256=digest(after))
     manifest['webHTMLSha256']=digest(html)
     manifest['totalBytes']=sum(row['bytes'] for row in manifest['files'])
-    manifest['r67']={'revision':'R67-RENDER-PERF','baselineCommit':BASE_COMMIT,'flatUnlitSpritesSinglePass':True,'retainedTextLabels':True,'directStyleSnapshots':True,'simulationChanged':False,'mediaChanged':False,'resolutionChanged':False,'unknownMutableCanvasesStillRefreshed':True,'changedFiles':list(edits)}
+    manifest['r67']={'revision':'R67-RENDER-PERF','baselineCommit':BASE_COMMIT,'flatUnlitSpritesSinglePass':True,'retainedTextLabels':True,'directStyleSnapshots':True,'cubicBezierPaths':True,'cubicTolerancePhysicalPixels':.125,'simulationChanged':False,'mediaChanged':False,'resolutionChanged':False,'unknownMutableCanvasesStillRefreshed':True,'changedFiles':list(edits)}
     for filename,(_,after) in edits.items():
         (site/filename).write_bytes(after)
     manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
