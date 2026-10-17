@@ -11,7 +11,7 @@ const detailedProfile = process.env.PROFILE_DETAIL !== '0';
 const browser = await chromium.launch({
   headless: true,
   executablePath: '/usr/bin/chromium',
-  args: ['--no-sandbox', '--disable-dev-shm-usage'],
+  args: ['--no-sandbox', '--disable-breakpad', '--disable-crash-reporter'],
 });
 const runs = [];
 const percentile = (values, p) => {
@@ -52,6 +52,7 @@ try {
         enemies: room.enemies.length, props: room.props.length,
         flashlight: window.__STORYWORLD_PRESENTATION_R58__?.inspect(),
         renderer: window.__STORYWORLD_PHASE1__?.inspect?.(),
+        regional55: (() => { const r=window.__STORYWORLD_REGIONAL_R55__?.inspect?.(); return r?{metrics:r.metrics,derivedTextures:r.derivedTextures,derivedTextureBytes:r.derivedTextureBytes,derivedTextureBudget:r.derivedTextureBudget,derivedTextureEntryBudget:r.derivedTextureEntryBudget,cropCachePolicy:r.cropCachePolicy}:null; })(),
         webglRenderer: (() => {
           const gl = window.__STORYWORLD_PHASE1__?.controller?.state?.three?.renderer?.getContext?.();
           if (!gl) return null;
@@ -135,6 +136,7 @@ try {
       effects: effects.length, projectiles: projectiles.length,
       flashlight: window.__STORYWORLD_SIGHT24__?.inspect?.(),
       renderer: window.__STORYWORLD_PHASE1__?.inspect?.(),
+      regional55: (() => { const r=window.__STORYWORLD_REGIONAL_R55__?.inspect?.(); return r?{metrics:r.metrics,derivedTextures:r.derivedTextures,derivedTextureBytes:r.derivedTextureBytes,derivedTextureBudget:r.derivedTextureBudget,derivedTextureEntryBudget:r.derivedTextureEntryBudget,cropCachePolicy:r.cropCachePolicy}:null; })(),
       phases: Object.fromEntries(Object.entries(window.__SW_PERF_PHASES__||{}).map(([name,row]) => [name, {
         calls: row.calls, totalMs: row.totalMs,
         meanMs: row.calls ? row.totalMs / row.calls : 0,
@@ -192,7 +194,7 @@ try {
     },
     runs,
   };
-  const out = path.resolve('qa-r66/profile-live-movement-final-clean.json');
+  const out = path.resolve(process.env.PROFILE_OUT || 'qa-r66/profile-live-movement-final-clean.json');
   await fs.writeFile(out, JSON.stringify(summary, null, 2) + '\n');
   console.log(JSON.stringify(summary, null, 2));
 } finally {

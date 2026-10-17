@@ -1,10 +1,10 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R66_RENDER_PERF_DIAGNOSTICS_CANDIDATE_NOT_DEPLOYED",
+  "status": "R66_FLASHLIGHT_BLACK_MASK_PERF_CANDIDATE_NOT_DEPLOYED",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "f12d25955988c98c624ca7daa8b05f1e4ff45715439cc24a3606a05a850b6556",
-  "webHTMLSha256": "f12d25955988c98c624ca7daa8b05f1e4ff45715439cc24a3606a05a850b6556",
+  "sourceHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc",
+  "webHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9508,13 +9508,13 @@
     },
     {
       "path": "dist/phase1.js",
-      "bytes": 532227,
-      "sha256": "175bf4afc12b85974a32422fbc528456223e51c2250c64da2da45e844260f51e"
+      "bytes": 533486,
+      "sha256": "b1b3a80f862dcc70b0ec2145b9935bcba3194bbefb2e06a13ab15f871cf9b228"
     },
     {
       "path": "index.html",
-      "bytes": 5970830,
-      "sha256": "f12d25955988c98c624ca7daa8b05f1e4ff45715439cc24a3606a05a850b6556"
+      "bytes": 5971432,
+      "sha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,12 +9538,12 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464858082,
+  "totalBytes": 464859943,
   "largest": [
     {
       "path": "index.html",
-      "bytes": 5970941,
-      "sha256": "370390da0f914127c5e1e14cc0d68c126997a8c25ccdcddc59bb82f581ede68c"
+      "bytes": 5971432,
+      "sha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc"
     },
     {
       "path": "audio/rc133/processed/bgm/Folding_Space_1-c535f55c.mp3",
@@ -9659,7 +9659,7 @@
     "proposalOnly": true
   },
   "privateRepositoryDoesNotMakeOrdinaryPagesAssetsPrivate": true,
-  "candidateRevision": "R65",
+  "candidateRevision": "R66",
   "networkBuild": "R63R1",
   "publishedBaselineWebHTMLSha256": "a260ed7b1d62e5574ae35525d58135543878e9c444d6fdaf039367ab01de330e"
 }

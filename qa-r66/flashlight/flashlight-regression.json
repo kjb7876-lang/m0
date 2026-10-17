@@ -1,7 +1,7 @@
 {
   "base": "51490741b5786f59fb3fce2cf36f03343cd3e65c candidate",
   "browser": "Chromium 151.0.7922.173 headless, iPhone UA/touch emulation; not a physical device",
-  "URL": "http://127.0.0.1:4392",
+  "URL": "http://127.0.0.1:8976/",
   "setup": {
     "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
     "viewport": {
@@ -466,8 +466,8 @@
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 37.869787936257666,
-                "y": 35.411455616271624
+                "x": 37.874558059320826,
+                "y": 35.404177333475104
               }
             ]
           ],
@@ -507,16 +507,16 @@
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 57.19229920119968,
-                "y": 42.45940330048738
+                "x": 57.20065957498584,
+                "y": 42.46171901328708
               },
               {
                 "id": "dist00:story-patrol:0:1",
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 58.03064647993786,
-                "y": 43.9306361067662
+                "x": 58.0367779208128,
+                "y": 43.93676118237318
               }
             ]
           ],
@@ -1073,12 +1073,12 @@
         "removed": 209,
         "texturesCreated": 32,
         "texturesDisposed": 25,
-        "geometryComparisons": 6574,
+        "geometryComparisons": 6324,
         "cameraTranslationComparisons": 0,
         "geometryUpdates": 6,
         "cameraTranslationSkips": 0,
         "screenPositionUpdates": 0,
-        "sightCacheHits": 464,
+        "sightCacheHits": 448,
         "styleReplacements": 3,
         "filterUpdates": 0,
         "screenPositionBaselineBytes": 0,
@@ -1233,7 +1233,8 @@
       "defaultApplied": true,
       "desktopTouch": false,
       "sameMaskForCanvasAndThree": true
-    }
+    },
+    "stageClass": true
   },
   "onState": {
     "setting": {
@@ -1280,7 +1281,8 @@
       "radius": 9.405882352941177,
       "rays": 46,
       "serial": 29
-    }
+    },
+    "stageBlack": true
   },
   "offState": {
     "setting": {
@@ -1322,8 +1324,38 @@
     "geometry": {
       "enabled": false,
       "serial": 29
-    }
+    },
+    "stageBlack": false
   },
+  "blackSamples": [
+    {
+      "x": 10,
+      "y": 100,
+      "rgb": [
+        8,
+        10,
+        11
+      ]
+    },
+    {
+      "x": 10,
+      "y": 300,
+      "rgb": [
+        6,
+        8,
+        8
+      ]
+    },
+    {
+      "x": 769,
+      "y": 300,
+      "rgb": [
+        6,
+        8,
+        8
+      ]
+    }
+  ],
   "touchedOn": {
     "light": {
       "flashlight": true,
@@ -1474,16 +1506,116 @@
   "visualDifference": {
     "width": 780,
     "height": 1688,
-    "differentPixels": 887818,
-    "fraction": 0.67430580872524,
-    "meanRgbOn": 20.040198535666544,
-    "meanRgbOff": 45.03788380524163
+    "differentPixels": 929230,
+    "fraction": 0.7057585976424839,
+    "meanRgbOn": 14.47217715801839,
+    "meanRgbOff": 45.037639243326446
   },
   "pageErrorList": [],
   "screenshots": [
     "flashlight-on-mobile-portrait.png",
     "flashlight-off-mobile-portrait.png",
     "flashlight-settings-mobile.png",
-    "flashlight-off-mobile-landscape.png"
-  ]
+    "flashlight-off-mobile-landscape.png",
+    "flashlight-on-desktop-after-toggle.png"
+  ],
+  "desktopToggle": {
+    "before": {
+      "light": {
+        "flashlight": false,
+        "flashlightStatus": "꺼짐 · 전체 시야",
+        "maskEnabled": false,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": false,
+        "settingOrigin": "device-default",
+        "deviceClass": "desktop",
+        "defaultFlashlight": false,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "activeRenderer": "three",
+      "stageBlack": false
+    },
+    "after": {
+      "light": {
+        "flashlight": true,
+        "flashlightStatus": "켜짐 · 주변 시야",
+        "maskEnabled": true,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": true,
+        "settingOrigin": "user-selected",
+        "deviceClass": "desktop",
+        "defaultFlashlight": false,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "sightEnabled": true,
+      "activeRenderer": "three",
+      "stageBlack": true
+    },
+    "outsidePoints": [
+      {
+        "x": 10,
+        "y": 120,
+        "visible": false
+      },
+      {
+        "x": 1300,
+        "y": 120,
+        "visible": false
+      },
+      {
+        "x": 10,
+        "y": 300,
+        "visible": false
+      },
+      {
+        "x": 682,
+        "y": 680,
+        "visible": false
+      }
+    ],
+    "blackSamples": [
+      {
+        "x": 10,
+        "y": 120,
+        "rgb": [
+          7,
+          9,
+          10
+        ]
+      },
+      {
+        "x": 1300,
+        "y": 120,
+        "rgb": [
+          7,
+          9,
+          9
+        ]
+      },
+      {
+        "x": 10,
+        "y": 300,
+        "rgb": [
+          4,
+          6,
+          6
+        ]
+      },
+      {
+        "x": 682,
+        "y": 680,
+        "rgb": [
+          4,
+          5,
+          5
+        ]
+      }
+    ]
+  }
 }

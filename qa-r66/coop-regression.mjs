@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const { chromium } = createRequire(import.meta.url)('playwright');
 const URL = process.env.STORYWORLD_URL || 'http://127.0.0.1:4375/';
-const browser = await chromium.launch({ headless: true, executablePath: '/usr/bin/chromium', args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+const browser = await chromium.launch({ headless: true, executablePath: '/usr/bin/chromium', args: ['--no-sandbox'] });
 const errors = [];
 async function openGame({ enterFirstRegion = true } = {}) {
   const page = await browser.newPage({ viewport: { width: 1365, height: 850 } });

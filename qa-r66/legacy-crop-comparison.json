@@ -1,0 +1,365 @@
+{
+  "schema": "storyworld.legacy-crop-cache-profile-comparison.r66/v1",
+  "baselineCommit": "cb267fa6b54a80235a02dadcc97a45b4110cdc0d",
+  "candidateSourceSHA256": {
+    "index.html": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc",
+    "dist/phase1.js": "b1b3a80f862dcc70b0ec2145b9935bcba3194bbefb2e06a13ab15f871cf9b228"
+  },
+  "conditions": {
+    "browser": "Chromium 151 headless on this Linux execution container; software/emulated rendering, not the user RTX hardware",
+    "renderer": "Legacy Canvas, ?renderer=legacy",
+    "scene": "dist00/STORY normal, 1365x850 CSS px, DPR 1, six actual enemies, same four-direction keyboard movement, flashlight on, no synthetic VFX, audio muted",
+    "warmupMs": 1500,
+    "measurementMs": 6000,
+    "runsPerVersion": 2,
+    "cachePolicyBaseline": "96 crop canvases / 6 MiB byte cap; LRU delete+reinsert on every hit",
+    "cachePolicyCandidate": "1024 crop canvases / same 6 MiB byte cap; stable insertion-order hits, direct fixed-point key without temporary mapped array",
+    "interpretation": "Two-run same-container comparison only; timing is not a physical-PC estimate. JS heap deltas are GC-sensitive and are not used as a memory-improvement claim."
+  },
+  "baselineRuns": [
+    {
+      "run": 0,
+      "frames": {
+        "count": 44,
+        "meanMs": 139.00909090909093,
+        "p50Ms": 133.39999999999964,
+        "p95Ms": 166.60000000000036,
+        "fpsFromMean": 7.193774115492772
+      },
+      "drawCPU": {
+        "calls": 61,
+        "meanMs": 38.62459016334815,
+        "p50Ms": 40.900000005960464,
+        "p95Ms": 54.70000000298023,
+        "maxMs": 63
+      },
+      "cropCacheDelta": {
+        "croppedCacheHits": 9400,
+        "croppedCacheMisses": 4819,
+        "croppedContexts": 4819,
+        "croppedDrawImages": 4819,
+        "croppedEvictions": 4819
+      },
+      "cacheAfter": {
+        "derivedTextures": 96,
+        "derivedTextureBytes": 983552,
+        "derivedTextureBudget": 6291456,
+        "derivedTextureEntryBudget": null
+      },
+      "heap": {
+        "jsHeapStartBytes": 33091800,
+        "jsHeapEndBytes": 40932376,
+        "jsHeapDeltaBytes": 7840576,
+        "sampledAllocationBytes": 33576
+      },
+      "topFunctions": [
+        {
+          "name": "texturedFloor",
+          "selfMs": 178.06999999999996,
+          "line": 5442
+        },
+        {
+          "name": "cropped",
+          "selfMs": 173.38599999999997,
+          "line": 9339
+        },
+        {
+          "name": "explorationBlocked",
+          "selfMs": 170.27499999999992,
+          "line": 381
+        },
+        {
+          "name": "cropped",
+          "selfMs": 127.2619999999999,
+          "line": 9339
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 101.48399999999997,
+          "line": -1
+        },
+        {
+          "name": "(garbage collector)",
+          "selfMs": 99.59699999999998,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 93.423,
+          "line": -1
+        },
+        {
+          "name": "getContext",
+          "selfMs": 89.22500000000001,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 82.80599999999995,
+          "line": -1
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "frames": {
+        "count": 44,
+        "meanMs": 139.7659090909091,
+        "p50Ms": 133.39999999999964,
+        "p95Ms": 150,
+        "fpsFromMean": 7.154820560352537
+      },
+      "drawCPU": {
+        "calls": 64,
+        "meanMs": 40.892187500488944,
+        "p50Ms": 41.5,
+        "p95Ms": 52.80000000447035,
+        "maxMs": 68.79999999701977
+      },
+      "cropCacheDelta": {
+        "croppedCacheHits": 9475,
+        "croppedCacheMisses": 5869,
+        "croppedContexts": 5869,
+        "croppedDrawImages": 5869,
+        "croppedEvictions": 5869
+      },
+      "cacheAfter": {
+        "derivedTextures": 96,
+        "derivedTextureBytes": 982016,
+        "derivedTextureBudget": 6291456,
+        "derivedTextureEntryBudget": null
+      },
+      "heap": {
+        "jsHeapStartBytes": 38772768,
+        "jsHeapEndBytes": 50064424,
+        "jsHeapDeltaBytes": 11291656,
+        "sampledAllocationBytes": 35512
+      },
+      "topFunctions": [
+        {
+          "name": "explorationBlocked",
+          "selfMs": 192.07200000000003,
+          "line": 381
+        },
+        {
+          "name": "cropped",
+          "selfMs": 181.47099999999986,
+          "line": 9339
+        },
+        {
+          "name": "texturedFloor",
+          "selfMs": 170.267,
+          "line": 5442
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 139.078,
+          "line": -1
+        },
+        {
+          "name": "cropped",
+          "selfMs": 138.17299999999997,
+          "line": 9339
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 119.37999999999997,
+          "line": -1
+        },
+        {
+          "name": "(garbage collector)",
+          "selfMs": 104.44699999999996,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 103.29799999999994,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 80.94199999999998,
+          "line": -1
+        }
+      ]
+    }
+  ],
+  "candidateRuns": [
+    {
+      "run": 0,
+      "frames": {
+        "count": 56,
+        "meanMs": 107.73392857142858,
+        "p50Ms": 100,
+        "p95Ms": 116.79999999999927,
+        "fpsFromMean": 9.28212693308581
+      },
+      "drawCPU": {
+        "calls": 72,
+        "meanMs": 19.27361111073858,
+        "p50Ms": 19,
+        "p95Ms": 24.399999998509884,
+        "maxMs": 34.30000000447035
+      },
+      "cropCacheDelta": {
+        "croppedCacheHits": 17102,
+        "croppedCacheMisses": 68,
+        "croppedContexts": 68,
+        "croppedDrawImages": 68,
+        "croppedEvictions": 0
+      },
+      "cacheAfter": {
+        "derivedTextures": 201,
+        "derivedTextureBytes": 1835008,
+        "derivedTextureBudget": 6291456,
+        "derivedTextureEntryBudget": 1024
+      },
+      "heap": {
+        "jsHeapStartBytes": 65425608,
+        "jsHeapEndBytes": 54067812,
+        "jsHeapDeltaBytes": -11357796,
+        "sampledAllocationBytes": 33496
+      },
+      "topFunctions": [
+        {
+          "name": "texturedFloor",
+          "selfMs": 168.13599999999994,
+          "line": 5442
+        },
+        {
+          "name": "explorationBlocked",
+          "selfMs": 160.14499999999995,
+          "line": 381
+        },
+        {
+          "name": "(garbage collector)",
+          "selfMs": 101.92399999999999,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 66.173,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 44.594,
+          "line": -1
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "frames": {
+        "count": 53,
+        "meanMs": 114.4622641509434,
+        "p50Ms": 116.60000000000036,
+        "p95Ms": 133.3000000000011,
+        "fpsFromMean": 8.736503750103024
+      },
+      "drawCPU": {
+        "calls": 72,
+        "meanMs": 21.791666666356225,
+        "p50Ms": 22.19999999552965,
+        "p95Ms": 29.5,
+        "maxMs": 41.399999998509884
+      },
+      "cropCacheDelta": {
+        "croppedCacheHits": 17102,
+        "croppedCacheMisses": 68,
+        "croppedContexts": 68,
+        "croppedDrawImages": 68,
+        "croppedEvictions": 0
+      },
+      "cacheAfter": {
+        "derivedTextures": 201,
+        "derivedTextureBytes": 1835008,
+        "derivedTextureBudget": 6291456,
+        "derivedTextureEntryBudget": 1024
+      },
+      "heap": {
+        "jsHeapStartBytes": 68328268,
+        "jsHeapEndBytes": 67866140,
+        "jsHeapDeltaBytes": -462128,
+        "sampledAllocationBytes": 37624
+      },
+      "topFunctions": [
+        {
+          "name": "texturedFloor",
+          "selfMs": 187.49699999999996,
+          "line": 5442
+        },
+        {
+          "name": "explorationBlocked",
+          "selfMs": 169.35699999999994,
+          "line": 381
+        },
+        {
+          "name": "(garbage collector)",
+          "selfMs": 166.18199999999993,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 55.93000000000001,
+          "line": -1
+        },
+        {
+          "name": "drawImage",
+          "selfMs": 37.873,
+          "line": -1
+        }
+      ]
+    }
+  ],
+  "medianSummary": {
+    "frame_meanMs": {
+      "baselineMedian": 139.38750000000002,
+      "candidateMedian": 111.09809636118598
+    },
+    "draw_meanMs": {
+      "baselineMedian": 39.75838883191855,
+      "candidateMedian": 20.532638888547403
+    },
+    "frame_p50Ms": {
+      "baselineMedian": 133.39999999999964,
+      "candidateMedian": 108.30000000000018
+    },
+    "draw_p50Ms": {
+      "baselineMedian": 41.20000000298023,
+      "candidateMedian": 20.599999997764826
+    },
+    "frame_p95Ms": {
+      "baselineMedian": 158.30000000000018,
+      "candidateMedian": 125.05000000000018
+    },
+    "draw_p95Ms": {
+      "baselineMedian": 53.75000000372529,
+      "candidateMedian": 26.949999999254942
+    },
+    "croppedCacheMisses": {
+      "baselineMedian": 5344.0,
+      "candidateMedian": 68.0
+    },
+    "croppedContexts": {
+      "baselineMedian": 5344.0,
+      "candidateMedian": 68.0
+    },
+    "croppedDrawImages": {
+      "baselineMedian": 5344.0,
+      "candidateMedian": 68.0
+    },
+    "croppedEvictions": {
+      "baselineMedian": 5344.0,
+      "candidateMedian": 0.0
+    },
+    "derivedTextureBytes": {
+      "baselineMedian": 982784.0,
+      "candidateMedian": 1835008.0
+    },
+    "fpsFromMean": {
+      "baselineMedian": 7.1742973379226544,
+      "candidateMedian": 9.009315341594416
+    }
+  }
+}
