@@ -1,10 +1,10 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R64_CANDIDATE_READY",
+  "status": "R64_LOCAL_CANDIDATE_NOT_DEPLOYED",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc",
-  "webHTMLSha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc",
+  "sourceHTMLSha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e",
+  "webHTMLSha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9508,13 +9508,13 @@
     },
     {
       "path": "dist/phase1.js",
-      "bytes": 526565,
-      "sha256": "0fd72acce748b1d4548c38b3f483fbf709a54806cab0f31076f682a8bbd269bc"
+      "bytes": 526718,
+      "sha256": "6210983e2a08429373f6dd17ecabf2a124d71cd95305345e256b9e1a73f8b34f"
     },
     {
       "path": "index.html",
-      "bytes": 5952572,
-      "sha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc"
+      "bytes": 5967839,
+      "sha256": "67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,7 +9538,7 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464834162,
+  "totalBytes": 464849582,
   "largest": [
     {
       "path": "index.html",
@@ -9644,7 +9644,7 @@
     "data/world-v31217.js"
   ],
   "sourceAssetsPruned": "Only known authoring provenance JSON and non-web launch/source tools; all runtime media retained.",
-  "remotePublished": true,
+  "remotePublished": false,
   "deploymentSHA": "3407b7a53c921b8677cf59c8d2fbfa4493149418",
   "deploymentUTC": "2026-10-16T20:39:35Z",
   "gameURL": "https://kjb7876-lang.github.io/m0/",

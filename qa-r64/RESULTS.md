@@ -1,54 +1,75 @@
 # StoryWorld R64 candidate verification
 
 Date: 2026-10-17
-Base: `origin/main` `03675216dc8deae223e7e9f1ba798942d197f048`
-Branch: `work/storyworld-r64-reward-aura-ui`
+Repository: `kjb7876-lang/m0`
+Base: latest checked `origin/main` `03675216dc8deae223e7e9f1ba798942d197f048`
 Live deployment reference: `3407b7a53c921b8677cf59c8d2fbfa4493149418`
+Work branch: `work/storyworld-r64-reward-aura-ui` (local only)
 
-## Difficulty values
+## Difficulty and rewards
 
-Measured R63 starting HP was 25,686 for the `dist00` boss and 1,140 for a common patrol. The live R63 retention factors in code were 0.4 / 0.5 / 0.8. R64 keeps the later requested half-retention targets 0.2 / 0.25 / 0.4. Switching tiers and applying them repeatedly does not compound the values; save restoration returns to the saved tier.
+The measured live R63 factors were 0.40 / 0.50 / 0.80. R64 uses half of those retained-health factors (0.20 / 0.25 / 0.40), as confirmed in the later steering for this task. Values are derived from each actor's stored base HP; repeated tier changes, save restoration, summons, and co-op replicas do not compound scaling.
 
-| Tier | R63 factor | R63 boss / common HP | R64 factor | R64 boss / common HP | Incoming enemy damage | First-clear points |
+| Tier | R63 factor | R63 boss / common HP | R64 factor | R64 boss / common HP | Incoming damage | First-clear points |
 |---|---:|---:|---:|---:|---:|---:|
 | Easy | 0.40 | 10,274.4 / 456 | 0.20 | 5,137.2 / 228 | 0.40× | 1 |
 | Normal | 0.50 | 12,843 / 570 | 0.25 | 6,421.5 / 285 | 1.00× | 3 |
 | Hard | 0.80 | 20,548.8 / 912 | 0.40 | 10,274.4 / 456 | 1.20× | 7 |
 
-The older 0.9 / 1.4 / 2.1 values remain identified as legacy configuration, not the measured live factors. The 1/3/7 first-clear point rewards and duplicate-clear guard remain intact. No new enemy kill-drop reward system was added.
+The legacy 0.90 / 1.40 / 2.10 setup values are not the measured live R63 factors. The first-clear 1/3/7 reward and duplicate-clear guard remain unchanged. Enemy point drops are also implemented: deterministic per-kill rolls, one-tenth minion chance versus the tier boss chance (10% / 50% / 77%), 1–7 points per successful drop, host-authoritative co-op collection, and persisted claim IDs to prevent repeat awards.
 
-## Aura and co-op client behavior
+## Thread Dance aura and motifs
 
-The Thread Dance aura emits no draw commands at rank 0 and six silver/white commands at rank 1. It is hidden when the owner is dead or visual effects are disabled. Existing hit, target, damage, and semi-automatic rules remain unchanged; the existing rank damage formula is still used. Save/load, passive reset, region change, death/revival, and a local host/guest simulation were checked.
+The existing white/silver-thread aura is drawn only for the owning player who has the passive. Regression checks found zero draw commands while unowned and six while owned; it hides on death or when effects are disabled. Save/load, passive reset, region change, death/revival, EGO/resonance display, and owner scoping were checked. No unrelated stat buff was added.
 
-The local two-page simulation created six scaled enemy replicas. It verified 6,421.5 / 285 normal HP on replicas before and after co-op save/load, preserved host/guest ranks, and showed the aura only on the owning host. The R62 snapshot protocol stayed `version: 1, build: R62`. This did not connect to a relay or external network.
+The six separately purchased motifs remain distinct. A rank-one test cast retained three base hits over two targets, split the Tsubame strikes into 18 sub-hits without changing total damage, produced one 35% Fractal chain, and measured the Ichidan final-hit ratio at 1.35. Existing semi-automatic use remains.
 
-## UI verification
+## Co-op checks
 
-Chromium 151 browser regression completed with no page errors. At 1365×888 desktop, the playfield ended at y=736, the notice shelf occupied y=736–774, and the footer began at y=774. At 1280×720, the shelf occupied y=568–606. Mobile portrait 390×844 used y=806–844; landscape 844×390 used y=352–390. The 44×44 settings control and a canvas touch event were checked, alongside settings, resize, orientation change, map change, save/load, and death/revival.
+Chromium ran a local two-page host/guest simulation only; it did not connect to the external relay or network. The R62 snapshot protocol stayed `version: 1, build: R62`. Six enemy replicas retained 6,421.5 boss HP and 285 common HP at Normal. The guest accepted the host's drop snapshot and drew the drop, while direct guest collection/award was rejected. Host authority awarded the nearby guest +4 once; a repeat collection awarded zero. Save/import preserved an unclaimed drop and its claim; reload after collection did not award it again. Aura ownership remained scoped to the player who bought it.
+
+## UI and browser regression
+
+Chromium 151 headless browser regression passed with `pageErrors: []`. Error and compatibility notices occupy `#noticeShelfR63R2` between the game stage and footer, with details available in Settings → Status/Diagnostics.
+
+| View | Viewport | Notice shelf |
+|---|---:|---:|
+| Desktop | 1365×888 | y=736–774; stage ends at 736, footer starts at 774 |
+| Desktop | 1280×720 | y=568–606 |
+| Mobile portrait | 390×844 | y=806–844 |
+| Mobile landscape | 844×390 | y=352–390 |
+
+Settings open/close, size changes, portrait/landscape rotation, safe-area layout, touch settings control, and canvas pointer input were checked. A test stub forced renderer startup failure to exercise the compatibility fallback; this was not a real device incompatibility test.
 
 ## Performance profile
 
-Same scripted scene: fresh browser profile, `dist00` STORY, player at (15,19), six enemies, `room.engaged=true`, 2.5 s warmup, 60 s measurement. Chromium ran with a software/emulated renderer in the execution container; these are not physical-device or GPU results.
+Same scripted `dist00` STORY scene for baseline and candidate: fresh browser contexts, 1365×850 viewport, player at (15,19), six enemies, engaged room, 2.5 s warmup, then three 20 s samples per version in alternating order. Chromium used the container's software/emulated renderer (SwiftShader), not physical hardware or a verified GPU.
 
-| Metric | Base main | R64 final candidate |
-|---|---:|---:|
-| Mean frame interval | 178.99 ms | 198.12 ms |
-| Median | 183.30 ms | 200.00 ms |
-| P95 | 216.60 ms | 249.90 ms |
-| Approx. FPS | 5.59 | 5.05 |
-| Script duration | 5,010 ms | 4,677 ms |
-| End JS heap | 53.07 MB | 50.05 MB |
-| Layout count | 335 | 305 |
+| Metric | Base `origin/main` | R64 candidate | Candidate change |
+|---|---:|---:|---:|
+| Mean frame interval | 175.59 ms | 177.11 ms | +1.51 ms (+0.86%, slower) |
+| Mean p50 frame interval | 177.73 ms | 177.77 ms | +0.03 ms |
+| Mean p95 frame interval | 205.53 ms | 211.07 ms | +5.53 ms (slower) |
+| Mean FPS | 5.70 | 5.65 | -0.05 |
+| Script duration per 20 s run | 1,736.3 ms | 1,803.6 ms | +67.3 ms |
+| Layout count per run | 117 | 117 | unchanged |
+| Mean JS heap delta | +6.10 MB | -3.36 MB | noisy; paired deltas ranged -20.74 to +2.57 MB |
 
-The renderer no longer builds a JSON string signature for every captured draw command; style and geometry comparisons use compact value snapshots and update image filters only when their values change. The signature sample (173 ms in the baseline profile) disappeared, script duration fell by about 6.7%, and end heap was about 3.0 MB lower. Frame interval metrics were worse in this software-renderer run, so this is not a demonstrated end-to-end frame-rate improvement. No effects were removed and resolution was not reduced.
+The targeted collision lookup removed per-call coordinate-string and temporary-array allocations. Sampled self time for `explorationBlocked` fell from 55.96 ms to 47.75 ms across the three sampled runs, but the end-to-end frame result did not improve: paired frame deltas were -3.29, +9.41, and -1.59 ms. Renderer work such as `getParameters`, `getProgram`, and `needsUpdate` remained prominent. This profile does **not** establish a repeatable end-to-end performance gain, so the performance acceptance gate is not met. No effects were removed and render resolution was not reduced.
 
-Profile details: `profile-baseline.json`, `profile-final.json`; browser regression: `candidate-regression.json`; local co-op simulation: `coop-regression.json`.
+## Test separation and deliverables
 
-## Runtime package and remaining verification
+- CPU unit checks: `node --test scripts/campaign-balance-r64.cpu.test.mjs` — 6/6 passed.
+- Browser run: Chromium 151 headless, emulated software renderer; candidate regression passed with no page errors.
+- Co-op run: two local browser pages only; no relay/server/network connection.
+- Physical device and physical GPU checks: not run.
+- Runtime package reconstruction: 1,906 runtime files / 1,908 site files hash-verified; candidate `webHTMLSha256` is `67f5ed153d9a84ed17780e965fff2ec01af919979e0722e440df7f7c6ddeda2e`.
+- No original image/audio assets, story data, hospital geometry, doors, floors, structures, or `projection33` backup were changed. Render configuration and relay deployment were not changed.
 
-`unpack-runtime-r62.py` rebuilt and hash-verified all 1,906 runtime files (1,908 total site files); media assets, hospital geometry, doors, floors, and projection backup files were not edited. Render settings and relay deployment were not changed.
+Five same-candidate screenshots are stored with the regression files: `candidate-point-drop.png`, `candidate-desktop-aura.png`, `candidate-desktop-diagnostics.png`, `candidate-mobile-portrait-flashlight.png`, and `candidate-mobile-landscape-flashlight.png`.
 
-Not tested: physical mobile devices, physical GPU, or external relay/network behavior. The supplied reference image was not available as a local file in this execution environment, so the aura follows the written silver-thread description. Previously reported story voice assignments (54 missing) and dialogue mismatches (35) are unchanged and are not claimed as fixed.
+The reference aura image was not accessible as an attachment in this execution environment; the aura follows the written white/silver-thread description. The earlier 54 missing story voice assignments and 35 dialogue mismatches were not addressed and are not claimed as fixed.
 
-The candidate is local to this branch. It has not been pushed to GitHub, merged into `main`, or publicly redeployed.
+## Publication status
+
+Changes and test artifacts are on the local work branch only. Nothing has been pushed to GitHub, merged into `main`, or redeployed publicly. Because the performance profile failed to show a stable frame-time improvement, publication remains on hold. Local branch SHA and checkpoint are recorded in the handoff.

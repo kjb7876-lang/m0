@@ -10,12 +10,12 @@ const progression = fs.readFileSync(new URL('../client-source/progression-r62.js
 const tierStart = campaign.indexOf('const PRIOR_HP=');
 const tierEnd = campaign.indexOf('\n const roomKey', tierStart);
 const scaleStart = campaign.indexOf(' function scaleEnemy(');
-const scaleEnd = campaign.indexOf('\n function enemySource', scaleStart);
+const scaleEnd = campaign.indexOf('\n const POINT_DROP_BOSS_CHANCE', scaleStart);
 assert.ok(tierStart >= 0 && tierEnd > tierStart && scaleStart >= 0 && scaleEnd > scaleStart, 'runtime tier, scaleEnemy, and applyRoom definitions are present');
 const runtime = {};
 vm.runInNewContext(
   campaign.slice(tierStart, tierEnd) +
-    "\n const COOP_KEY='difficultyR63';function resolveRoomTier(r){return r?.[COOP_KEY]||'normal';}\n" +
+    "\n const COOP_KEY='difficultyR63';function resolveRoomTier(r){return r?.[COOP_KEY]||'normal';}function ensurePointState(){}function syncPointDrops(){}\n" +
     campaign.slice(scaleStart, scaleEnd) +
     '\nthis.api={TIERS,scaleEnemy,applyRoom};',
   runtime,
@@ -75,13 +75,37 @@ test('common, boss, summon, and cooperative replica actors are all rescaled from
   assert.deepEqual(Object.fromEntries(rows.map(enemy => [enemy.id, enemy.maxHp])), values);
 });
 
-test('thread-dance hit and target rules stay capped while ranks unlock presentation motifs only', () => {
+test('thread-dance caps stay unchanged and six separately purchased motifs have distinct effects', () => {
   assert.ok(campaign.includes('hitLimit=()=>Math.min(12,2+maxRank())'));
   assert.ok(campaign.includes('targetLimit=()=>Math.min(8,1+maxRank())'));
   assert.match(campaign, /attackPower\(\)\*\(\.22\+Math\.min\(\.08,skillRank\*\.006\)\)/);
-  for (const motif of ['cross', 'flower', 'fractal', 'claw', 'tsubamegaeshi', 'decisive']) assert.ok(campaign.includes("'" + motif + "'"), 'missing motif: ' + motif);
+  for (const [id, motif] of [['threadCrossR64','cross'],['threadFlowerR64','flower'],['threadFractalR64','fractal'],['threadClawR64','claw'],['threadTsubameR64','tsubamegaeshi'],['threadIchidanR64','decisive']]) {
+    assert.ok(progression.includes("id:'" + id + "'"), 'missing purchasable passive: ' + id);
+    assert.ok(campaign.includes("'" + motif + "'"), 'missing motif effect: ' + motif);
+  }
+  assert.match(campaign, /base\*\.35/,'fractal passive links once to another enemy for its declared fraction');
+  assert.match(campaign, /perHit\/3/,'Tsubame-gaeshi splits the existing hit total across three strikes');
+  assert.match(campaign, /hitIndex===castState\.hitCount-1\?1\.35:1/,'Ichidan applies the requested last-hit increase only');
+  assert.match(campaign, /motifIdsR64=\['threadCrossR64'/,'motifs are selected from owned passive ranks, not core skill ranks');
   assert.match(progression, /window\.__STORYWORLD_CAMPAIGN_R63R1__\?\.drawThreadAura\?\.\(p\)/);
   assert.match(campaign, /rank<=0\|\|!p\|\|p\.hp<=0/);
+});
+
+test('point-drop rates follow tier boss chance and the one-tenth minion rule; each seeded kill roll is stable', () => {
+  const start=campaign.indexOf('const POINT_DROP_BOSS_CHANCE='),end=campaign.indexOf('\n const validPointId',start);
+  assert.ok(start>=0&&end>start,'point drop rate and roll helpers exist');
+  const context={};
+  vm.runInNewContext("const TIERS={easy:1,normal:1,hard:1};const validTier=k=>Object.prototype.hasOwnProperty.call(TIERS,k)?k:'normal';\n"+campaign.slice(start,end)+"\nthis.api={pointDropChance,rollPointDrop};",context);
+  assert.deepEqual(JSON.parse(JSON.stringify(Object.fromEntries(['easy','normal','hard'].map(t=>[t,{boss:context.api.pointDropChance(t,true),minion:context.api.pointDropChance(t,false)}])))),{
+    easy:{boss:.1,minion:.01},normal:{boss:.5,minion:.05},hard:{boss:.77,minion:.077},
+  });
+  const draws=[.1,.999],roll=context.api.rollPointDrop('normal',true,()=>draws.shift());
+  assert.deepEqual(JSON.parse(JSON.stringify(roll)),{success:true,chance:.5,amount:7});
+  const seedStart=campaign.indexOf(' function pointRandom('),seedEnd=campaign.indexOf('\n function recordPointDrop',seedStart);
+  const seeded={};vm.runInNewContext(campaign.slice(seedStart,seedEnd)+'\nthis.api=pointRandom;',seeded);
+  const a=Array.from({length:3},seeded.api('r64:8:kill:enemy-a'));
+  const b=Array.from({length:3},seeded.api('r64:8:kill:enemy-a'));
+  assert.deepEqual(a,b,'a restored kill ID repeats the same chance and amount roll');
 });
 
 test('the map-clear point contract and duplicate-reward guard remain unchanged', () => {

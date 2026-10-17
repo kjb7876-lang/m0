@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 const { chromium } = createRequire(import.meta.url)('playwright');
-const URL = 'http://127.0.0.1:4375/';
+const URL = process.env.STORYWORLD_URL || 'http://127.0.0.1:4375/';
 const browser = await chromium.launch({ headless: true, executablePath: '/usr/bin/chromium', args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 const page = await browser.newPage({ viewport: { width: 1365, height: 850 }, deviceScaleFactor: 1 });
 const errors = [];

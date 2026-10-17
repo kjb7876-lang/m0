@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
-const URL = 'http://127.0.0.1:4375/';
+const URL = process.env.STORYWORLD_URL || 'http://127.0.0.1:4375/';
 const outDir = path.resolve('qa-r64');
 const browser = await chromium.launch({ headless: true, executablePath: '/usr/bin/chromium', args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 const pageErrors = [];
@@ -29,8 +29,11 @@ async function enter(page, tier = 'normal') {
 async function layout(page) {
   return page.evaluate(() => {
     const rect = id => { const e=document.getElementById(id); if(!e)return null; const r=e.getBoundingClientRect(); return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height,display:getComputedStyle(e).display}; };
-    return {viewport:{width:innerWidth,height:innerHeight},stage:rect('stage'),shelf:rect('noticeShelfR63R2'),footer:(()=>{const e=document.querySelector('footer');if(!e)return null;const r=e.getBoundingClientRect();return{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height,display:getComputedStyle(e).display};})(),heroCard:rect('heroCard'),joystick:rect('joystick'),touchUse:rect('touchUse'),gear:rect('mobileSettingsR63'),hint:rect('hint'),toast:rect('toast')};
+    return {viewport:{width:innerWidth,height:innerHeight},stage:rect('stage'),shelf:rect('noticeShelfR63R2'),compatibility:rect('phase1-status'),footer:(()=>{const e=document.querySelector('footer');if(!e)return null;const r=e.getBoundingClientRect();return{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height,display:getComputedStyle(e).display};})(),heroCard:rect('heroCard'),joystick:rect('joystick'),touchUse:rect('touchUse'),gear:rect('mobileSettingsR63'),hint:rect('hint'),toast:rect('toast')};
   });
+}
+async function triggerCompatibilityFallback(page){
+  return page.evaluate(()=>{const controller=window.__STORYWORLD_PHASE1__?.controller;if(!controller)throw Error('Phase1 production controller unavailable');controller.state.requested='three';controller.state.failed=false;controller.state.three={supported:()=>true,render(){throw Error('QA forced renderer start failure');},dispose(){}};controller.draw();return{message:document.getElementById('phase1-status')?.textContent,parent:document.getElementById('phase1-status')?.parentElement?.id,failed:controller.inspect().failed,reason:controller.inspect().reason};});
 }
 const result = { browser:'Chromium 151 headless; emulated software renderer where WebGL is used', scenarios:{} };
 let desktopDefaultSave;
@@ -38,6 +41,16 @@ try {
   const desktop = await pageWith({ viewport:{width:1365,height:888}, deviceScaleFactor:1 });
   const {page: desktopPage, context: desktopContext} = desktop;
   await enter(desktopPage, 'normal');
+  const pointDropVisible=await desktopPage.evaluate(()=>{const c=window.__STORYWORLD_CAMPAIGN_R63R1__,r=room,id=`r64:${room.passivePointEpochR64}:drop:qa-visual-${crypto.randomUUID()}`;r.passivePointDropsR64.push({id,source:`r64:${r.passivePointEpochR64}:kill:qa-visual-enemy`,x:player.x+1,y:player.y,amount:5,kind:'enemy',createdAt:time});r.passivePointRevisionR64++;c.syncPointDrops(r);return{id,prop:r.props.find(p=>p.pointDropIdR64===id),points:player.points};});
+  assert.ok(pointDropVisible.prop&&pointDropVisible.prop.path==='assets/vfx/v31315/spirit-orb.webp');
+  await desktopPage.waitForTimeout(250);
+  await desktopPage.screenshot({path:path.join(outDir,'candidate-point-drop.png')});
+  const pointPickup=await desktopPage.evaluate(({id,before})=>{const c=window.__STORYWORLD_CAMPAIGN_R63R1__,after=player.points,repeat=c.collectPointDrops(),saved=serializeSave();return{before,after,delta:after-before,repeat,dropCount:room.passivePointDropsR64.length,claimed:room.passivePointClaimsR64.includes(id),savedClaim:!!saved.campaignPointDropsR64.rooms['STORY:dist00'].claims.includes(id)};},{id:pointDropVisible.id,before:pointDropVisible.points});
+  assert.deepEqual({delta:pointPickup.delta,repeat:pointPickup.repeat,dropCount:pointPickup.dropCount,claimed:pointPickup.claimed,savedClaim:pointPickup.savedClaim},{delta:5,repeat:0,dropCount:0,claimed:true,savedClaim:true},'proximity auto-pickup awards once and persists room and player claims');
+  const killOnce=await desktopPage.evaluate(()=>{const campaign=window.__STORYWORLD_CAMPAIGN_R63R1__,epoch=room.passivePointEpochR64;let id='';for(let i=0;i<500;i++){const candidate='qa-r64-one-roll-'+i,source='r64:'+epoch+':kill:'+encodeURIComponent(candidate);if(campaign.rollPointForKill('normal',false,source).success){id=candidate;break;}}if(!id)throw Error('could not find a deterministic successful boss roll');const e={id,x:player.x+3,y:player.y,hp:0,maxHp:1,boss:false,deadRecorded:false,difficultyMapR63:'STORY:dist00'};room.enemies.push(e);const source='r64:'+epoch+':kill:'+encodeURIComponent(e.id);killEnemy(e);const first={drops:room.passivePointDropsR64.filter(d=>d.source===source).length,rolls:room.passivePointRollsR64.filter(v=>v===source).length};killEnemy(e);const second={drops:room.passivePointDropsR64.filter(d=>d.source===source).length,rolls:room.passivePointRollsR64.filter(v=>v===source).length};room.enemies.splice(room.enemies.indexOf(e),1);return{first,second,dead:e.deadRecorded};});
+  assert.deepEqual(killOnce.first,{drops:1,rolls:1},'a successful kill roll emits one uniquely identified item');
+  assert.deepEqual(killOnce.second,killOnce.first,'duplicate enemy death processing does not create another reward');
+  assert.equal(killOnce.dead,true);
   const desktopSetup = await desktopPage.evaluate(() => ({
     presentation:window.__STORYWORLD_PRESENTATION_R58__?.inspect?.(),
     tier:window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.(),
@@ -67,6 +80,16 @@ try {
     return {bought,rank,aura,deadAura:livingA,visualsOffAura:disabled,hitLimit:limits.skillHitLimit,targetLimit:limits.skillTargetLimit};
   });
   assert.deepEqual(purchase,{bought:true,rank:1,aura:true,deadAura:false,visualsOffAura:false,hitLimit:3,targetLimit:2});
+  const awakeningAuras=await desktopPage.evaluate(()=>{const p=player,prog=window.__STORYWORLD_PROGRESSION_R62__,ids=()=>window.__STORYWORLD_PHASE1__.captureVisual().filter(c=>c.owner?.id?.startsWith('r62:passive-aura:')).map(c=>c.owner.id),old={ego:p.ego,resonance:p.resonance,visuals:prog.state(p).visuals};prog.state(p).visuals=true;p.ego=1;p.resonance=0;const ego=ids();p.ego=0;p.resonance=30;const resonance=ids();p.resonance=0;const none=ids();p.ego=old.ego;p.resonance=old.resonance;prog.state(p).visuals=old.visuals;return{ego,resonance,none};});
+  assert.deepEqual(awakeningAuras,{ego:['r62:passive-aura:hero:ego'],resonance:['r62:passive-aura:hero:resonance'],none:[]},'EGO and resonance states render their own aura only while active');
+  const motifRuntime=await desktopPage.evaluate(async()=>{const c=window.__STORYWORLD_CAMPAIGN_R63R1__,prog=window.__STORYWORLD_PROGRESSION_R62__,p=player,originalPoints=p.points,originalEnemies=room.enemies,origin={x:p.x,y:p.y},ids=['threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64'],oldOwnerId=p.coopIdR62;p.coopIdR62='qa-thread-motif-owner';p.points+=ids.length;const bought=ids.map(id=>prog.purchase(id,p)),motifs=c.ownedMotifs(p),targets=originalEnemies.slice(0,2).map((e,i)=>({...e,id:'qa-thread-target-'+i,x:origin.x+1+i,y:origin.y,hp:1e7,maxHp:1e7,deadRecorded:false,spawnState:'active',invulnerableUntil:0,graceUntil:0,attack:null,nav:[],tell:0,cd:100}));room.enemies=targets;const captured=[],base=window.hitEnemy;window.hitEnemy=function(e,amount,source){if(source?.ability==='threadDanceR63')captured.push({id:source.eventId,damage:amount,subHit:source.subHit});return base.apply(this,arguments);};const cast=c.cast(true);await new Promise(resolve=>setTimeout(resolve,1200));window.hitEnemy=base;room.enemies=originalEnemies;p.x=origin.x;p.y=origin.y;p.coopIdR62=oldOwnerId;const sub=captured.filter(v=>Number.isInteger(v.subHit)),groups=new Map();for(const v of sub){const key=v.id.replace(/-\d+$/,'');groups.set(key,(groups.get(key)||0)+v.damage);}const sums=[...groups.values()].sort((a,b)=>a-b);return{bought,motifs,cast,last:c.inspect().lastCast,cooldown:c.inspect().activeSkillCooldown,subHits:sub.length,fractalHits:captured.filter(v=>String(v.id).endsWith('-fractal')).length,groupCount:groups.size,totalGroupSums:sums,ichidanRatio:sums.length>1?sums.at(-1)/sums[0]:0};});
+  assert.deepEqual(motifRuntime.bought,[true,true,true,true,true,true]);
+  assert.deepEqual(motifRuntime.motifs,['cross','flower','fractal','claw','tsubamegaeshi','decisive']);
+  assert.equal(motifRuntime.cast,true,JSON.stringify(motifRuntime));
+  assert.equal(motifRuntime.subHits,18,'two targets receive three sub-hits for each of three base hits');
+  assert.equal(motifRuntime.fractalHits,1,'fractal chains to only one additional target per cast');
+  assert.equal(motifRuntime.groupCount,6);
+  assert.ok(Math.abs(motifRuntime.ichidanRatio-1.35)<1e-8,'the last per-target hit carries the explicit 35% increase');
   const auraCommands=await desktopPage.evaluate(()=>window.__STORYWORLD_PHASE1__.captureVisual().filter(c=>c.owner?.id?.startsWith('thread-dance-aura-r63r2:')).length);
   assert.ok(auraCommands>0,'owned passive contributes visible silver-thread aura draw commands');
   await desktopPage.waitForTimeout(300);
@@ -119,7 +142,7 @@ try {
   const resized = await layout(desktopPage);
   assert.ok(resized.stage.bottom <= resized.shelf.top + 1);
   assert.ok(resized.shelf.bottom <= resized.footer.top + 1);
-  result.scenarios.desktop={presentation:desktopSetup.presentation,tier:desktopSetup.tier.tier,enemies:desktopSetup.enemies,factors:desktopSetup.factorChecks,aura:{...purchase,unownedDrawCommands:noAuraCommands,ownedDrawCommands:auraCommands},tierSwitch,saveRestore:afterRestore,mapChange:mapAura,layout:{initial:deskLayout,resized},settingsDiagnostics:diag};
+  result.scenarios.desktop={presentation:desktopSetup.presentation,tier:desktopSetup.tier.tier,enemies:desktopSetup.enemies,factors:desktopSetup.factorChecks,pointDrop:{visible:!!pointDropVisible.prop,pickup:pointPickup,killOnce},aura:{...purchase,egoAndResonance:awakeningAuras,unownedDrawCommands:noAuraCommands,ownedDrawCommands:auraCommands},threadMotifs:motifRuntime,tierSwitch,saveRestore:afterRestore,mapChange:mapAura,layout:{initial:deskLayout,resized},settingsDiagnostics:diag};
   await desktopContext.close();
 
   const none = await pageWith({viewport:{width:1100,height:800},deviceScaleFactor:1});
@@ -143,9 +166,14 @@ try {
   assert.equal(mobileSetup.presentation.flashlight,true);
   assert.equal(mobileSetup.presentation.defaultFlashlight,true);
   await mobilePage.evaluate(() => window.__STORYWORLD_PROGRESSION_R62__.purchase('threadDanceR63',player));
+  const mobileCompatibility=await triggerCompatibilityFallback(mobilePage);
+  assert.equal(mobileCompatibility.message,'현재 기기에서는 호환 화면으로 실행합니다.');
+  assert.equal(mobileCompatibility.parent,'noticeShelfR63R2');
+  assert.equal(mobileCompatibility.failed,true,'the production renderer failure path raises the compatibility notice');
   await mobilePage.waitForTimeout(300);
   const mobileLayout=await layout(mobilePage);
   assert.ok(mobileLayout.stage.bottom <= mobileLayout.shelf.top + 1,'mobile notice strip must sit below the playfield');
+  assert.ok(mobileLayout.compatibility.top>=mobileLayout.stage.bottom-1&&mobileLayout.compatibility.bottom<=mobileLayout.shelf.bottom+1,'the exact compatibility notice must occupy the reserved mobile shelf');
   for(const key of ['heroCard','joystick','touchUse']){const r=mobileLayout[key];if(r&&r.display!=='none'&&r.width>0&&r.height>0)assert.ok(r.bottom<=mobileLayout.shelf.top+1,`${key} must not overlap the mobile notice strip`);}
   await mobilePage.screenshot({path:path.join(outDir,'candidate-mobile-portrait-flashlight.png')});
 
@@ -170,6 +198,7 @@ try {
   assert.equal(landscapeDefault.flashlight,true,'orientation change preserves mobile default');
   const landscapeLayout=await layout(mobilePage);
   assert.ok(landscapeLayout.stage.bottom<=landscapeLayout.shelf.top+1);
+  assert.ok(landscapeLayout.compatibility.top>=landscapeLayout.stage.bottom-1&&landscapeLayout.compatibility.bottom<=landscapeLayout.shelf.bottom+1,'the exact compatibility notice remains in the reserved landscape shelf');
   for(const key of ['heroCard','joystick','touchUse']){const r=landscapeLayout[key];if(r&&r.display!=='none'&&r.width>0&&r.height>0)assert.ok(r.bottom<=landscapeLayout.shelf.top+1,`${key} must not overlap landscape notice strip`);}
   await mobilePage.screenshot({path:path.join(outDir,'candidate-mobile-landscape-flashlight.png')});
 
@@ -227,6 +256,10 @@ try {
   await enter(notice.page,'normal');
   await notice.page.evaluate(() => {toast('상태 안내 확인',5);const f=document.getElementById('fatal');f.style.display='block';f.textContent='QA에서 만든 오류 상세';});
   await notice.page.waitForTimeout(150);
+  const compatibility=await triggerCompatibilityFallback(notice.page);
+  assert.equal(compatibility.message,'현재 기기에서는 호환 화면으로 실행합니다.');
+  assert.equal(compatibility.parent,'noticeShelfR63R2');
+  assert.equal(compatibility.failed,true);
   const errorNotice=await notice.page.evaluate(() => ({shelf:document.getElementById('noticeShelfR63R2').dataset.fatal,text:document.getElementById('fatal').textContent,details:'private campaign closure'}));
   assert.equal(errorNotice.shelf,'1');
   assert.ok(errorNotice.text.includes('설정'));
@@ -235,8 +268,9 @@ try {
   assert.ok(details.includes('QA에서 만든 오류 상세'));
   const noticeLayout=await layout(notice.page);
   assert.ok(noticeLayout.stage.bottom<=noticeLayout.shelf.top+1);
+  assert.ok(noticeLayout.compatibility.top>=noticeLayout.stage.bottom-1&&noticeLayout.compatibility.bottom<=noticeLayout.shelf.bottom+1,'the exact compatibility notice does not overlap the desktop playfield or controls');
   await notice.context.close();
-  result.scenarios.noticeErrors={errorNotice,detailsAccessibleInSettings:true,layout:noticeLayout};
+  result.scenarios.noticeErrors={errorNotice,compatibility,detailsAccessibleInSettings:true,layout:noticeLayout,mobileCompatibility};
   result.pageErrors=pageErrors;
   assert.deepEqual(pageErrors,[],'browser pages have no uncaught errors');
   await fs.writeFile(path.join(outDir,'candidate-regression.json'),JSON.stringify(result,null,2)+'\n');

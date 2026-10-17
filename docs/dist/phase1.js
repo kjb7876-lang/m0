@@ -371,19 +371,20 @@ function legacyExplorationLayout(id,theme='cave',safe=false){
   centralArena:{x:15,y:15,width:13,depth:13},branches:[[4.4,4.4],[25.5,4.4],[4.4,25.5],[25.5,25.5]],
   surface:{id:'original-ground',height:0,multilevelCombat:false}};
 }
+const explorationCellKey=(x,y)=>(x+32768)*65536+(y+32768);
 const explorationIndexes=new WeakMap();
 function explorationIndex(layout){
  let row=explorationIndexes.get(layout);if(row)return row;
- row={floor:layout.floorCells?new Set(layout.floorCells.map(([x,y])=>x+':'+y)):null,walls:new Map()};
- for(const w of layout.walls)for(let y=Math.floor((w.y-w.depth/2-1)/5);y<=Math.floor((w.y+w.depth/2+1)/5);y++)for(let x=Math.floor((w.x-w.width/2-1)/5);x<=Math.floor((w.x+w.width/2+1)/5);x++){const k=x+':'+y;if(!row.walls.has(k))row.walls.set(k,[]);row.walls.get(k).push(w);}
+ row={floor:layout.floorCells?new Set(layout.floorCells.map(([x,y])=>explorationCellKey(x,y))):null,walls:new Map()};
+ for(const w of layout.walls)for(let y=Math.floor((w.y-w.depth/2-1)/5);y<=Math.floor((w.y+w.depth/2+1)/5);y++)for(let x=Math.floor((w.x-w.width/2-1)/5);x<=Math.floor((w.x+w.width/2+1)/5);x++){const k=explorationCellKey(x,y);if(!row.walls.has(k))row.walls.set(k,[]);row.walls.get(k).push(w);}
  explorationIndexes.set(layout,row);return row;
 }
 function explorationBlocked(layout,x,y,radius=.27){
- if(!layout)return false;if(![x,y,radius].every(Number.isFinite)||radius<0)return true;
+ if(!layout)return false;if(!Number.isFinite(x)||!Number.isFinite(y)||!Number.isFinite(radius)||radius<0)return true;
  if(layout.hospitalAnalytic12)return hospitalBlocked12(layout,x,y,radius);
  const index=explorationIndex(layout),b=layout.bounds;if(x-radius<b[0]||y-radius<b[1]||x+radius>b[2]||y+radius>b[3])return true;
- if(index.floor)for(let a=Math.floor(x-radius);a<=Math.floor(x+radius);a++)for(let c=Math.floor(y-radius);c<=Math.floor(y+radius);c++)if(!index.floor.has(a+':'+c)&&Math.hypot(Math.max(a-x,0,x-a-1),Math.max(c-y,0,y-c-1))<radius+1e-8)return true;
- return (index.walls.get(Math.floor(x/5)+':'+Math.floor(y/5))||[]).some(w=>!w.decorative&&Math.hypot(Math.max(Math.abs(x-w.x)-w.width/2,0),Math.max(Math.abs(y-w.y)-w.depth/2,0))<radius);
+ if(index.floor)for(let a=Math.floor(x-radius);a<=Math.floor(x+radius);a++)for(let c=Math.floor(y-radius);c<=Math.floor(y+radius);c++)if(!index.floor.has(explorationCellKey(a,c))&&Math.hypot(Math.max(a-x,0,x-a-1),Math.max(c-y,0,y-c-1))<radius+1e-8)return true;
+ return (index.walls.get(explorationCellKey(Math.floor(x/5),Math.floor(y/5)))||[]).some(w=>!w.decorative&&Math.hypot(Math.max(Math.abs(x-w.x)-w.width/2,0),Math.max(Math.abs(y-w.y)-w.depth/2,0))<radius);
 }
 /* Hospital only: approved text diagram, not an interpretation of unseen pixels.
  * Preserve the native boss coordinate system; lay the maze around it in the

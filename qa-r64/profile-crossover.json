@@ -1,0 +1,789 @@
+{
+  "browser": "Chromium 151.0.7922.173 headless in execution container; software/emulated renderer, not physical device/GPU",
+  "sourceDates": {
+    "base": "origin/main 03675216dc8deae223e7e9f1ba798942d197f048",
+    "candidate": "work/storyworld-r64-reward-aura-ui"
+  },
+  "measurement": {
+    "warmupMs": 2500,
+    "measuredMsPerRun": 20000,
+    "order": [
+      "baseline",
+      "candidate",
+      "candidate",
+      "baseline",
+      "baseline",
+      "candidate"
+    ],
+    "renderer": "software/emulated only; no physical GPU/device claim"
+  },
+  "groups": {
+    "baseline": {
+      "runs": 3,
+      "meanFrameMs": 175.59322641010806,
+      "meanP50Ms": 177.73333333333298,
+      "meanP95Ms": 205.53333333333407,
+      "meanFps": 5.697878462291373,
+      "meanScriptDurationMs": 1736.3313333333333,
+      "meanTaskDurationMs": 20831.409666666663,
+      "meanLayoutCount": 117,
+      "meanHeapDeltaBytes": 6403458.666666667
+    },
+    "candidate": {
+      "runs": 3,
+      "meanFrameMs": 177.10611640292367,
+      "meanP50Ms": 177.76666666666765,
+      "meanP95Ms": 211.06666666666692,
+      "meanFps": 5.647387254947787,
+      "meanScriptDurationMs": 1803.6473333333336,
+      "meanTaskDurationMs": 20893.978666666666,
+      "meanLayoutCount": 117,
+      "meanHeapDeltaBytes": -3519408
+    }
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "baselineRun": 0,
+      "candidateRun": 1,
+      "frameDeltaMs": -3.287892889838332,
+      "p50DeltaMs": -16.499999999994543,
+      "p95DeltaMs": 0,
+      "scriptDeltaMs": -49.930999999999585,
+      "layoutDelta": 2,
+      "heapDeltaBytes": -21751940
+    },
+    {
+      "pair": 2,
+      "baselineRun": 3,
+      "candidateRun": 2,
+      "frameDeltaMs": 9.414679176755413,
+      "p50DeltaMs": 16.599999999998545,
+      "p95DeltaMs": 16.600000000002183,
+      "scriptDeltaMs": 115.37199999999984,
+      "layoutDelta": -3,
+      "heapDeltaBytes": 2692172
+    },
+    {
+      "pair": 3,
+      "baselineRun": 4,
+      "candidateRun": 5,
+      "frameDeltaMs": -1.5881163084702905,
+      "p50DeltaMs": 0,
+      "p95DeltaMs": -3.637978807091713e-12,
+      "scriptDeltaMs": 136.50700000000006,
+      "layoutDelta": 1,
+      "heapDeltaBytes": -10708832
+    }
+  ],
+  "runs": [
+    {
+      "index": 0,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4377/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20015.9,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 113,
+        "meanMs": 177.13185840707965,
+        "p50Ms": 183.1999999999989,
+        "p95Ms": 200,
+        "p99Ms": 233.29999999999927,
+        "fps": 5.645511818104607
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1836.9199999999998,
+        "taskDurationDeltaMs": 20863.785999999996,
+        "layoutCountDelta": 117,
+        "recalcStyleCountDelta": 116,
+        "jsHeapStartBytes": 48521240,
+        "jsHeapEndBytes": 68119076,
+        "jsHeapDeltaBytes": 19597836,
+        "domNodes": 1675
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 18943.872999999996
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 216.08000000000004
+        },
+        {
+          "name": "(garbage collector)",
+          "line": -1,
+          "sampledSelfMs": 107.60100000000001
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 70.89400000000002
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 380,
+          "sampledSelfMs": 61.879000000000005
+        },
+        {
+          "name": "frame",
+          "line": 322,
+          "sampledSelfMs": 58.516
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 57.808000000000014
+        },
+        {
+          "name": "render",
+          "line": 909,
+          "sampledSelfMs": 47.92099999999999
+        },
+        {
+          "name": "getProgramCacheKey",
+          "line": 7702,
+          "sampledSelfMs": 39.586
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5440,
+          "sampledSelfMs": 37.980000000000004
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 1,
+      "label": "candidate",
+      "url": "http://127.0.0.1:4376/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20165.899999999998,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 116,
+        "meanMs": 173.84396551724132,
+        "p50Ms": 166.70000000000437,
+        "p95Ms": 200,
+        "p99Ms": 216.60000000000036,
+        "fps": 5.752284797603878
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1786.9890000000003,
+        "taskDurationDeltaMs": 20966.496,
+        "layoutCountDelta": 119,
+        "recalcStyleCountDelta": 118,
+        "jsHeapStartBytes": 54726340,
+        "jsHeapEndBytes": 52572236,
+        "jsHeapDeltaBytes": -2154104,
+        "domNodes": 1655
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 19138.41100000024
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 256.32599999999996
+        },
+        {
+          "name": "(garbage collector)",
+          "line": -1,
+          "sampledSelfMs": 105.83799999999998
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 93.94099999999999
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 61.67999999999994
+        },
+        {
+          "name": "render",
+          "line": 910,
+          "sampledSelfMs": 52.788
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 381,
+          "sampledSelfMs": 43.834
+        },
+        {
+          "name": "getProgramCacheKey",
+          "line": 7702,
+          "sampledSelfMs": 28.588
+        },
+        {
+          "name": "setup",
+          "line": 1622,
+          "sampledSelfMs": 26.012000000000004
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5442,
+          "sampledSelfMs": 22.541999999999998
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 2,
+      "label": "candidate",
+      "url": "http://127.0.0.1:4376/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20115.799999999996,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 112,
+        "meanMs": 179.60535714285712,
+        "p50Ms": 183.29999999999927,
+        "p95Ms": 216.60000000000218,
+        "p99Ms": 233.3000000000029,
+        "fps": 5.567762654231998
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1821.455,
+        "taskDurationDeltaMs": 20909.763000000003,
+        "layoutCountDelta": 116,
+        "recalcStyleCountDelta": 115,
+        "jsHeapStartBytes": 44572640,
+        "jsHeapEndBytes": 57599036,
+        "jsHeapDeltaBytes": 13026396,
+        "domNodes": 1409
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 19054.41399999999
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 221.40699999999995
+        },
+        {
+          "name": "(garbage collector)",
+          "line": -1,
+          "sampledSelfMs": 132.639
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 83.28299999999997
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 65.54200000000003
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 381,
+          "sampledSelfMs": 62.194
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5442,
+          "sampledSelfMs": 46.84599999999998
+        },
+        {
+          "name": "setup",
+          "line": 1622,
+          "sampledSelfMs": 38.30600000000001
+        },
+        {
+          "name": "sameStructuredValue24",
+          "line": 853,
+          "sampledSelfMs": 28.194
+        },
+        {
+          "name": "getProgramCacheKey",
+          "line": 7702,
+          "sampledSelfMs": 25.068999999999996
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 3,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4377/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20082.5,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 118,
+        "meanMs": 170.1906779661017,
+        "p50Ms": 166.70000000000073,
+        "p95Ms": 200,
+        "p99Ms": 200.09999999999854,
+        "fps": 5.875762479770945
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1706.083,
+        "taskDurationDeltaMs": 20802.667,
+        "layoutCountDelta": 119,
+        "recalcStyleCountDelta": 118,
+        "jsHeapStartBytes": 41472428,
+        "jsHeapEndBytes": 51806652,
+        "jsHeapDeltaBytes": 10334224,
+        "domNodes": 1914
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 19040.795999999427
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 245.92799999999986
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 72.245
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 57.82400000000002
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 380,
+          "sampledSelfMs": 53.03699999999999
+        },
+        {
+          "name": "render",
+          "line": 909,
+          "sampledSelfMs": 43.370999999999995
+        },
+        {
+          "name": "save",
+          "line": 701,
+          "sampledSelfMs": 36.063
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5440,
+          "sampledSelfMs": 35.385000000000005
+        },
+        {
+          "name": "setup",
+          "line": 1622,
+          "sampledSelfMs": 32.10200000000001
+        },
+        {
+          "name": "save",
+          "line": 701,
+          "sampledSelfMs": 27.497999999999998
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 4,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4377/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20099.199999999997,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 112,
+        "meanMs": 179.45714285714283,
+        "p50Ms": 183.29999999999927,
+        "p95Ms": 216.60000000000218,
+        "p99Ms": 216.70000000000073,
+        "fps": 5.572361088998568
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1665.991,
+        "taskDurationDeltaMs": 20827.776,
+        "layoutCountDelta": 115,
+        "recalcStyleCountDelta": 114,
+        "jsHeapStartBytes": 70316724,
+        "jsHeapEndBytes": 59595040,
+        "jsHeapDeltaBytes": -10721684,
+        "domNodes": 1867
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 19141.587000000076
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 202.9819999999999
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 81.75999999999995
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 61.64700000000001
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 380,
+          "sampledSelfMs": 52.97300000000001
+        },
+        {
+          "name": "(garbage collector)",
+          "line": -1,
+          "sampledSelfMs": 40.72800000000001
+        },
+        {
+          "name": "render",
+          "line": 909,
+          "sampledSelfMs": 34.42399999999999
+        },
+        {
+          "name": "setup",
+          "line": 1622,
+          "sampledSelfMs": 30.854000000000003
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5440,
+          "sampledSelfMs": 29.514000000000003
+        },
+        {
+          "name": "getProgramCacheKey",
+          "line": 7702,
+          "sampledSelfMs": 27.097
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 5,
+      "label": "candidate",
+      "url": "http://127.0.0.1:4376/",
+      "scenario": "fresh browser context; New Game; dist00 STORY; player at (15,19); room.engaged=true; six map enemies; 2.5s warmup; paired RAF/CDP sample",
+      "profileMs": 20099.199999999997,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "tier": "normal",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "canvas": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          }
+        ]
+      },
+      "frames": {
+        "count": 113,
+        "meanMs": 177.86902654867254,
+        "p50Ms": 183.29999999999927,
+        "p95Ms": 216.59999999999854,
+        "p99Ms": 233.29999999999927,
+        "fps": 5.622114313007484
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1802.498,
+        "taskDurationDeltaMs": 20805.677,
+        "layoutCountDelta": 116,
+        "recalcStyleCountDelta": 115,
+        "jsHeapStartBytes": 67979588,
+        "jsHeapEndBytes": 46549072,
+        "jsHeapDeltaBytes": -21430516,
+        "domNodes": 2494
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "line": -1,
+          "sampledSelfMs": 18993.358999999866
+        },
+        {
+          "name": "getParameters",
+          "line": 7356,
+          "sampledSelfMs": 233.75899999999984
+        },
+        {
+          "name": "getProgram",
+          "line": 18223,
+          "sampledSelfMs": 81.61400000000002
+        },
+        {
+          "name": "needsUpdate",
+          "line": 1758,
+          "sampledSelfMs": 72.38799999999999
+        },
+        {
+          "name": "texturedFloor",
+          "line": 5442,
+          "sampledSelfMs": 65.00200000000001
+        },
+        {
+          "name": "render",
+          "line": 910,
+          "sampledSelfMs": 62.04
+        },
+        {
+          "name": "(garbage collector)",
+          "line": -1,
+          "sampledSelfMs": 51.284000000000006
+        },
+        {
+          "name": "getProgramCacheKey",
+          "line": 7702,
+          "sampledSelfMs": 41.583999999999996
+        },
+        {
+          "name": "explorationBlocked",
+          "line": 381,
+          "sampledSelfMs": 37.227
+        },
+        {
+          "name": "push",
+          "line": 724,
+          "sampledSelfMs": 35.882000000000005
+        }
+      ],
+      "pageErrors": []
+    }
+  ]
+}
