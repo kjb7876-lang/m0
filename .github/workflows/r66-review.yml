@@ -12,7 +12,7 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
@@ -22,26 +22,62 @@ jobs:
           node-version: '22'
       - name: Reconstruct approved runtime
         run: python3 scripts/unpack-runtime-r62.py --output _pages/docs
-      - name: Inspect exact source integration points
+      - name: Inspect exact EGO and skill integration
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import re
-          root=Path('.')
-          print('SOURCE_FILES',[(str(p),p.stat().st_size) for d in ('client-source','scripts','qa-r64','qa-r65') for p in Path(d).glob('*') if p.is_file()])
           s=Path('docs/index.html').read_text()
-          print('HTML_BYTES',len(s.encode()),'SCRIPT_SOURCES',re.findall(r'<script[^>]*src=[\"\x27]([^\"\x27]+)',s))
-          for term in ('function attackPower','function attack(','function damageEnemy','function updateHUD','function drawHUD','function readyImage','function ego','function tick(','requestAnimationFrame','bossName','bossBar','bossHud','function hitEnemy','function update('):
+          for term in ('let ego151','const ego151','__STORYWORLD_EGO151__=','__STORYWORLD_EGO151__ =','targetCooldowns=new','function cast(manual','bossTitle','threadCrossR64','threadSkill','function frame','function fx(','function loadImage'):
             matches=list(re.finditer(re.escape(term),s))
-            print('\n=== ANCHOR',term,'COUNT',len(matches),'===')
-            for m in matches[:2]: print(s[max(0,m.start()-120):m.start()+3300])
-          c=Path('client-source/campaign-combat-r63r1.js').read_text()
-          for term in ('attackPower','cooldown','cd=','ego','egoTime','threadDance','function tick','function update'):
-            matches=list(re.finditer(re.escape(term),c))
-            print('\n=== CAMPAIGN',term,'COUNT',len(matches),'===')
-            for m in matches[:6]: print(c[max(0,m.start()-180):m.start()+800])
+            print('\n=== NATIVE ANCHOR',term,'COUNT',len(matches),'===')
+            for m in matches[:2]: print(s[max(0,m.start()-100):m.start()+2600])
+          print('SCRIPT_IDS',re.findall(r'<script[^>]*id=[\"\x27]([^\"\x27]+)',s))
+          print('CAMPAIGN_SOURCE_EXACT_EMBED',Path('client-source/campaign-combat-r63r1.js').read_text() in s)
+          print('CAMERA_SOURCE_EXACT_EMBED',Path('client-source/camera-r63r1.js').read_text() in s)
           PY
-      - name: Existing campaign regressions
-        run: node --test scripts/campaign-balance-r64.cpu.test.mjs
-      - name: Existing Pages integrity checks
-        run: node verify-pages-r62.mjs _pages
+      - name: Existing campaign regressions and Pages integrity
+        run: |
+          node --test scripts/campaign-balance-r64.cpu.test.mjs
+          node verify-pages-r62.mjs _pages
+      - name: Install isolated browser test dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Baseline native movement measurement
+        run: |
+          mkdir -p qa-r66
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('qa-r65/profile-live-movement.mjs').read_text()
+          s=s.replace("executablePath: '/usr/bin/chromium',", "chromiumSandbox: true,")
+          s=s.replace("args: ['--no-sandbox', '--disable-dev-shm-usage']", "args: ['--disable-dev-shm-usage']")
+          s=s.replace("'qa-r65/profile-live-movement-51490741.json'", "'qa-r66/baseline.json'")
+          Path('qa-r65/r66-baseline.generated.mjs').write_text(s)
+          PY
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/sw-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          PROFILE_MS=8000 PROFILE_RUNS=2 PROFILE_DETAIL=1 STORYWORLD_URL=http://127.0.0.1:4391/ node qa-r65/r66-baseline.generated.mjs > qa-r66/baseline.stdout.json
+          python3 - <<'PY'
+          import json
+          s=json.load(open('qa-r66/baseline.json'))
+          for r in s['runs']: print('BASELINE',json.dumps({'run':r['index'],'frames':r['frames'],'browser':r['browserMetrics'],'topFunctions':r['topFunctions'],'pageErrors':r['pageErrors']},ensure_ascii=False))
+          PY
+      - name: Apply candidate and run R66 tests when present
+        run: |
+          if [ -f scripts/apply-r66.py ]; then
+            python3 scripts/apply-r66.py --site _pages/docs
+            node verify-pages-r62.mjs _pages
+            node --test scripts/r66.cpu.test.mjs
+            python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/sw-http-candidate.log 2>&1 &
+            SERVER_PID=$!
+            trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+            STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r66-review-results
+          path: qa-r66/
+          retention-days: 7
