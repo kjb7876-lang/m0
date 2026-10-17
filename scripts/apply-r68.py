@@ -14,7 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE_COMMIT = '41f6a0208eade036234eaca5cb1acf7224cd5b67'
 BASE_HTML = '0c17a3a642967955aa143aff69d46289c946bdfddaa95a6eb295647d81c6117a'
-BASE_RENDERER = 'e4bd1064131c8c124adf2146229b2598949f200646f599c19130fb88774fd15'
+# Actual published hash: Pages run 39039785619, deploy job 117417491594,
+# R67_PUBLIC_RELEASE_VERIFIED. The earlier report's renderer hash was stale.
+BASE_RENDERER = '1fea552262a3abb58befd8df79c9b1de01386d318ab738ae8842b36f9cdf907b'
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 def replace_once(s, old, new):
