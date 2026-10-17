@@ -1,0 +1,47 @@
+name: StoryWorld R66 review
+on:
+  push:
+    branches: [chat/storyworld-r66-ego-performance]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: storyworld-r66-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct approved runtime
+        run: python3 scripts/unpack-runtime-r62.py --output _pages/docs
+      - name: Inspect exact source integration points
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          print('SOURCE_FILES',[(str(p),p.stat().st_size) for d in ('client-source','scripts','qa-r64','qa-r65') for p in Path(d).glob('*') if p.is_file()])
+          s=Path('docs/index.html').read_text()
+          print('HTML_BYTES',len(s.encode()),'SCRIPT_SOURCES',re.findall(r'<script[^>]*src=[\"\x27]([^\"\x27]+)',s))
+          for term in ('function attackPower','function attack(','function damageEnemy','function updateHUD','function drawHUD','function readyImage','function ego','function tick(','requestAnimationFrame','bossName','bossBar','bossHud','function hitEnemy','function update('):
+            matches=list(re.finditer(re.escape(term),s))
+            print('\n=== ANCHOR',term,'COUNT',len(matches),'===')
+            for m in matches[:2]: print(s[max(0,m.start()-120):m.start()+3300])
+          c=Path('client-source/campaign-combat-r63r1.js').read_text()
+          for term in ('attackPower','cooldown','cd=','ego','egoTime','threadDance','function tick','function update'):
+            matches=list(re.finditer(re.escape(term),c))
+            print('\n=== CAMPAIGN',term,'COUNT',len(matches),'===')
+            for m in matches[:6]: print(c[max(0,m.start()-180):m.start()+800])
+          PY
+      - name: Existing campaign regressions
+        run: node --test scripts/campaign-balance-r64.cpu.test.mjs
+      - name: Existing Pages integrity checks
+        run: node verify-pages-r62.mjs _pages
