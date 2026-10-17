@@ -1,0 +1,73 @@
+name: StoryWorld R67 renderer verification
+on:
+  push:
+    branches: [work/storyworld-r67-render-perf]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: storyworld-r67-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify-and-profile:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout candidate without persisted credentials
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct matched R66 baseline and R67 candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r66 out/r67
+          python3 scripts/unpack-runtime-r62.py --output _baseline/docs
+          python3 scripts/apply-r66.py --site _baseline/docs
+          cp -a _baseline _pages
+          python3 scripts/apply-r67.py --site _pages/docs | tee out/r67/build.log
+          python3 -m py_compile scripts/apply-r67.py
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/campaign-balance-r64.cpu.test.mjs scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs scripts/r67.cpu.test.mjs | tee out/r67/cpu-tests.log
+          node verify-pages-r62.mjs _pages | tee out/r67/integrity.log
+      - name: Install pinned sandboxed Chromium test environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r67/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r67/dependencies.log 2>&1
+      - name: Compare actual WebGL pixels and run existing game regressions
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r67/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r67.browser.test.mjs | tee out/r67/webgl-test.log
+          node scripts/r66.browser.test.mjs | tee out/r67/game-regression.log
+      - name: Measure movement and EGO stress in alternating 30-second trials
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r67/perf-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r67.perf.mjs | tee out/r67/performance.log
+      - name: Preserve verification evidence even on failure
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r67-render-evidence
+          path: |
+            out/r67/
+            out/r66/
+            _pages/docs/web-manifest-r62.json
+          retention-days: 14
