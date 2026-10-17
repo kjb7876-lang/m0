@@ -1,0 +1,6118 @@
+{
+  "browser": "Chromium 151.0.7922.173 headless; execution-container software renderer; GPU and physical device unverified",
+  "source": {
+    "baseline": "GitHub Pages workflow success for b7890eaee8a13a624cf07e278116731da07938d5",
+    "candidate": null
+  },
+  "measurement": {
+    "mode": "baseline",
+    "order": [
+      "baseline",
+      "baseline",
+      "baseline"
+    ],
+    "warmupMs": 2500,
+    "measuredMsPerRun": 15000,
+    "viewport": {
+      "width": 1365,
+      "height": 850,
+      "dpr": 1
+    },
+    "renderer": "software/emulated; not physical GPU",
+    "sceneFrozen": true,
+    "enemyCount": 6,
+    "effectCount": 6
+  },
+  "runs": [
+    {
+      "index": 0,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4385/",
+      "scenario": "fresh browser context; New Game; dist00 STORY normal; player (15,19); six static enemies; six persistent fixed burst effects; modal pauses simulation while renderer continues; 2.5s warmup",
+      "profileMs": 15016.1,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "effectCount": 6,
+        "quality": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "scene": {
+          "zone": "dist00",
+          "layer": "STORY",
+          "player": {
+            "x": 15,
+            "y": 19,
+            "hero": "hwando"
+          },
+          "tier": "normal",
+          "enemies": [
+            {
+              "id": "dist00:dist00-boss",
+              "x": 24.202247191011242,
+              "y": 22.561797752808992,
+              "hp": 6421.5,
+              "maxHp": 6421.5
+            },
+            {
+              "id": "dist00:story-patrol:0:0",
+              "x": 57.491484866892094,
+              "y": 42.5731135313039,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:1",
+              "x": 58.257265836464185,
+              "y": 44.15750759057483,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:2",
+              "x": 38.105200926019215,
+              "y": 35.219808311579825,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:0",
+              "x": 35.15,
+              "y": 17.45,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:1",
+              "x": 36,
+              "y": 18.9,
+              "hp": 285,
+              "maxHp": 285
+            }
+          ],
+          "effectCount": 6,
+          "effects": [
+            {
+              "type": "burst",
+              "x": 14,
+              "y": 19,
+              "size": 0.7,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.35,
+              "y": 19.25,
+              "size": 0.75,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.7,
+              "y": 19,
+              "size": 0.7999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.05,
+              "y": 19.25,
+              "size": 0.85,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.4,
+              "y": 19,
+              "size": 0.8999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.75,
+              "y": 19.25,
+              "size": 0.95,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            }
+          ],
+          "room": {
+            "engaged": true,
+            "cleared": false
+          },
+          "settings": {
+            "lowFx": false,
+            "reducedMotion": false
+          },
+          "canvases": [
+            {
+              "id": "game",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "mini",
+              "width": 180,
+              "height": 180,
+              "cssWidth": 144,
+              "cssHeight": 144
+            },
+            {
+              "id": "phase1-webgl",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "combat-hud-r51",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 0,
+              "cssHeight": 0
+            }
+          ],
+          "renderer": {
+            "requested": "three",
+            "active": "three",
+            "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+            "failed": false,
+            "disposed": false,
+            "legacyFrames": 0,
+            "events": [],
+            "chunks": {
+              "zone": "STORY:dist00",
+              "active": [
+                "0,0",
+                "1,0",
+                "2,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,0",
+                "3,1",
+                "3,2",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4"
+              ],
+              "states": [
+                {
+                  "key": "0,0",
+                  "status": "active"
+                },
+                {
+                  "key": "1,0",
+                  "status": "active"
+                },
+                {
+                  "key": "2,0",
+                  "status": "active"
+                },
+                {
+                  "key": "0,1",
+                  "status": "active"
+                },
+                {
+                  "key": "1,1",
+                  "status": "active"
+                },
+                {
+                  "key": "2,1",
+                  "status": "active"
+                },
+                {
+                  "key": "0,2",
+                  "status": "active"
+                },
+                {
+                  "key": "1,2",
+                  "status": "active"
+                },
+                {
+                  "key": "2,2",
+                  "status": "active"
+                },
+                {
+                  "key": "3,0",
+                  "status": "active"
+                },
+                {
+                  "key": "3,1",
+                  "status": "active"
+                },
+                {
+                  "key": "3,2",
+                  "status": "active"
+                },
+                {
+                  "key": "0,3",
+                  "status": "active"
+                },
+                {
+                  "key": "1,3",
+                  "status": "active"
+                },
+                {
+                  "key": "2,3",
+                  "status": "active"
+                },
+                {
+                  "key": "3,3",
+                  "status": "active"
+                },
+                {
+                  "key": "0,4",
+                  "status": "active"
+                },
+                {
+                  "key": "1,4",
+                  "status": "active"
+                },
+                {
+                  "key": "2,4",
+                  "status": "active"
+                },
+                {
+                  "key": "3,4",
+                  "status": "active"
+                }
+              ],
+              "saved": [
+                [
+                  "STORY:hub:0,0",
+                  []
+                ],
+                [
+                  "STORY:hub:1,0",
+                  []
+                ],
+                [
+                  "STORY:hub:2,0",
+                  []
+                ],
+                [
+                  "STORY:hub:0,1",
+                  []
+                ],
+                [
+                  "STORY:hub:1,1",
+                  []
+                ],
+                [
+                  "STORY:hub:2,1",
+                  []
+                ],
+                [
+                  "STORY:hub:0,2",
+                  []
+                ],
+                [
+                  "STORY:hub:1,2",
+                  []
+                ],
+                [
+                  "STORY:hub:2,2",
+                  []
+                ],
+                [
+                  "STORY:hub:3,0",
+                  []
+                ],
+                [
+                  "STORY:hub:3,1",
+                  []
+                ],
+                [
+                  "STORY:hub:3,2",
+                  []
+                ],
+                [
+                  "STORY:hub:0,3",
+                  []
+                ],
+                [
+                  "STORY:hub:1,3",
+                  []
+                ],
+                [
+                  "STORY:hub:2,3",
+                  []
+                ],
+                [
+                  "STORY:hub:3,3",
+                  []
+                ],
+                [
+                  "STORY:hub:0,4",
+                  []
+                ],
+                [
+                  "STORY:hub:1,4",
+                  []
+                ],
+                [
+                  "STORY:hub:2,4",
+                  []
+                ],
+                [
+                  "STORY:hub:3,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,2",
+                  [
+                    {
+                      "id": "dist00:dist00-boss",
+                      "hp": 25686,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 24.202247191011242,
+                      "y": 22.561797752808992
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,1",
+                  [
+                    {
+                      "id": "dist00:story-patrol:1:0",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 35.15,
+                      "y": 17.45
+                    },
+                    {
+                      "id": "dist00:story-patrol:1:1",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 36,
+                      "y": 18.9
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,3",
+                  [
+                    {
+                      "id": "dist00:story-patrol:0:2",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "active",
+                      "x": 37.87560810402839,
+                      "y": 35.40475594206105
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:0,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,4",
+                  []
+                ]
+              ],
+              "audit": [
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                },
+                {
+                  "type": "release",
+                  "key": "0,0"
+                },
+                {
+                  "type": "release",
+                  "key": "1,0"
+                },
+                {
+                  "type": "release",
+                  "key": "2,0"
+                },
+                {
+                  "type": "release",
+                  "key": "0,1"
+                },
+                {
+                  "type": "release",
+                  "key": "1,1"
+                },
+                {
+                  "type": "release",
+                  "key": "2,1"
+                },
+                {
+                  "type": "release",
+                  "key": "0,2"
+                },
+                {
+                  "type": "release",
+                  "key": "1,2"
+                },
+                {
+                  "type": "release",
+                  "key": "2,2"
+                },
+                {
+                  "type": "release",
+                  "key": "3,0"
+                },
+                {
+                  "type": "release",
+                  "key": "3,1"
+                },
+                {
+                  "type": "release",
+                  "key": "3,2"
+                },
+                {
+                  "type": "release",
+                  "key": "0,3"
+                },
+                {
+                  "type": "release",
+                  "key": "1,3"
+                },
+                {
+                  "type": "release",
+                  "key": "2,3"
+                },
+                {
+                  "type": "release",
+                  "key": "3,3"
+                },
+                {
+                  "type": "release",
+                  "key": "0,4"
+                },
+                {
+                  "type": "release",
+                  "key": "1,4"
+                },
+                {
+                  "type": "release",
+                  "key": "2,4"
+                },
+                {
+                  "type": "release",
+                  "key": "3,4"
+                },
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                }
+              ]
+            },
+            "metrics": {
+              "samples": 0,
+              "median": null,
+              "p95": null,
+              "p99": null,
+              "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+              "last": null
+            },
+            "commandScene": {
+              "created": 239,
+              "removed": 79,
+              "texturesCreated": 24,
+              "texturesDisposed": 15,
+              "geometryComparisons": 3949,
+              "geometryUpdates": 6,
+              "styleReplacements": 0,
+              "filterUpdates": 0,
+              "meshes": 160,
+              "textures": 9,
+              "labels": 0,
+              "execution": "real Three CPU scene; GPU unverified",
+              "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+              "depthBodies": 7,
+              "lightCasters": 0
+            },
+            "spatial": {
+              "regional55": {
+                "profile": "forest",
+                "arches": 1,
+                "dress": 9,
+                "isolatedMipmaps": true,
+                "staticLighting": true,
+                "collisionChanged": false,
+                "GPUVerified": false
+              },
+              "regionalLightAnchor55": [
+                27,
+                0,
+                18
+              ],
+              "sight24": {
+                "enabled": false,
+                "sharedSingleMask": true,
+                "GPUVerified": false
+              },
+              "normalSurface23": {
+                "built": 0,
+                "refused": 0,
+                "actualFloor": false,
+                "actualWall": false,
+                "GPUVerified": false
+              },
+              "hospitalVisualRevision": "hospital-door-comfort-r35",
+              "hospitalDoorDetails37": false,
+              "hospitalLightAnchor37": null,
+              "wallComfort37": {
+                "normalScale": 0,
+                "emissiveShare": 1,
+                "staticHospitalDirection": true
+              },
+              "wallComfort49": {
+                "isolatedWallMipmaps": false,
+                "mipFilter": "LinearMipmapLinearFilter",
+                "normalLighting": false,
+                "geometryChanged": false,
+                "GPUVerified": false
+              },
+              "hospitalJunctions34": 0,
+              "doorWallCut34": null,
+              "hospitalFloorReady": false,
+              "hospitalRoomsReady": false,
+              "hospitalRoomPieces": 0,
+              "hospitalCutWalls": 0,
+              "defaultDepth": true,
+              "physicalStructures": true,
+              "terrainMeshes": 61,
+              "backdropMeshes": 19,
+              "fogRimMeshes": 0,
+              "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+              "contactShadows": "reduced original ellipses in background pass",
+              "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+              "casterBudget": 0,
+              "casterCount": 0,
+              "shadowMapEnabled": false,
+              "shadowMapSize": 0,
+              "height": {
+                "height": 0,
+                "surfaceId": "original-ground",
+                "presentationOnly": true,
+                "collisionHeightSupported": false
+              },
+              "originalMapReprojectedAsFloor": false,
+              "originalMapBridgeProjectedAsFloor": false,
+              "apronScope30": "native east connectors and hospital south connector; panorama still original",
+              "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+              "bridgeMeshes": 0,
+              "sourcePavingAxesPreserved": true,
+              "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+              "GPUVerified": false,
+              "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+            },
+            "browserAcceptance": false
+          },
+          "visualCommandCount": 216
+        }
+      },
+      "finalScene": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hero": "hwando"
+        },
+        "tier": "normal",
+        "enemies": [
+          {
+            "id": "dist00:dist00-boss",
+            "x": 24.202247191011242,
+            "y": 22.561797752808992,
+            "hp": 6421.5,
+            "maxHp": 6421.5
+          },
+          {
+            "id": "dist00:story-patrol:0:0",
+            "x": 57.491484866892094,
+            "y": 42.5731135313039,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:1",
+            "x": 58.257265836464185,
+            "y": 44.15750759057483,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:2",
+            "x": 38.105200926019215,
+            "y": 35.219808311579825,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:0",
+            "x": 35.15,
+            "y": 17.45,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:1",
+            "x": 36,
+            "y": 18.9,
+            "hp": 285,
+            "maxHp": 285
+          }
+        ],
+        "effectCount": 6,
+        "effects": [
+          {
+            "type": "burst",
+            "x": 14,
+            "y": 19,
+            "size": 0.7,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.35,
+            "y": 19.25,
+            "size": 0.75,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.7,
+            "y": 19,
+            "size": 0.7999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.05,
+            "y": 19.25,
+            "size": 0.85,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.4,
+            "y": 19,
+            "size": 0.8999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.75,
+            "y": 19.25,
+            "size": 0.95,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          }
+        ],
+        "room": {
+          "engaged": true,
+          "cleared": false
+        },
+        "settings": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "canvases": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 0,
+            "cssHeight": 0
+          }
+        ],
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 25686,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 37.87560810402839,
+                    "y": 35.40475594206105
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 24,
+            "median": 6.700000002980232,
+            "p95": 9.400000002235174,
+            "p99": 10.899999998509884,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": {
+              "milliseconds": 6,
+              "drawCalls": 2,
+              "geometries": 196,
+              "textures": 13,
+              "resourceUnits": "counts, not VRAM bytes"
+            }
+          },
+          "commandScene": {
+            "created": 239,
+            "removed": 79,
+            "texturesCreated": 24,
+            "texturesDisposed": 15,
+            "geometryComparisons": 18829,
+            "geometryUpdates": 6,
+            "styleReplacements": 0,
+            "filterUpdates": 0,
+            "meshes": 160,
+            "textures": 9,
+            "labels": 0,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 7,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": false,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "visualCommandCount": 216
+      },
+      "frame": {
+        "count": 86,
+        "meanMs": 174.60581395348837,
+        "p50Ms": 166.79999999999927,
+        "p95Ms": 200,
+        "p99Ms": 216.70000000000073,
+        "fps": 5.727186153528546
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1156.388,
+        "taskDurationDeltaMs": 15716.176000000001,
+        "layoutCountDelta": 87,
+        "recalcStyleCountDelta": 87,
+        "heapStartBytes": 64200680,
+        "heapEndBytes": 63080672,
+        "heapDeltaBytes": -1120008,
+        "domNodes": 2370
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 14578.159999999854
+        },
+        {
+          "name": "getParameters",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7356,
+          "sampledSelfMs": 169.6639999999999
+        },
+        {
+          "name": "getProgram",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 18223,
+          "sampledSelfMs": 57.46000000000002
+        },
+        {
+          "name": "needsUpdate",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 1758,
+          "sampledSelfMs": 43.420000000000016
+        },
+        {
+          "name": "(garbage collector)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 42.99600000000001
+        },
+        {
+          "name": "texturedFloor",
+          "url": "http://127.0.0.1:4385/",
+          "line": 5442,
+          "sampledSelfMs": 32.988
+        },
+        {
+          "name": "render",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 910,
+          "sampledSelfMs": 31.158999999999995
+        },
+        {
+          "name": "getProgramCacheKey",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7702,
+          "sampledSelfMs": 23.695
+        },
+        {
+          "name": "setup",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 1622,
+          "sampledSelfMs": 17.758
+        },
+        {
+          "name": "(idle)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 15.592999999999998
+        },
+        {
+          "name": "drawImage",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 729,
+          "sampledSelfMs": 15.557999999999998
+        },
+        {
+          "name": "bindVertexArray",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 15.251999999999999
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 1,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4385/",
+      "scenario": "fresh browser context; New Game; dist00 STORY normal; player (15,19); six static enemies; six persistent fixed burst effects; modal pauses simulation while renderer continues; 2.5s warmup",
+      "profileMs": 15099.5,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "effectCount": 6,
+        "quality": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "scene": {
+          "zone": "dist00",
+          "layer": "STORY",
+          "player": {
+            "x": 15,
+            "y": 19,
+            "hero": "hwando"
+          },
+          "tier": "normal",
+          "enemies": [
+            {
+              "id": "dist00:dist00-boss",
+              "x": 24.202247191011242,
+              "y": 22.561797752808992,
+              "hp": 6421.5,
+              "maxHp": 6421.5
+            },
+            {
+              "id": "dist00:story-patrol:0:0",
+              "x": 57.49104653025588,
+              "y": 42.57440715697466,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:1",
+              "x": 58.25724714474329,
+              "y": 44.15752622858366,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:2",
+              "x": 38.107790991902434,
+              "y": 35.22257079740301,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:0",
+              "x": 35.15,
+              "y": 17.45,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:1",
+              "x": 36,
+              "y": 18.9,
+              "hp": 285,
+              "maxHp": 285
+            }
+          ],
+          "effectCount": 6,
+          "effects": [
+            {
+              "type": "burst",
+              "x": 14,
+              "y": 19,
+              "size": 0.7,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.35,
+              "y": 19.25,
+              "size": 0.75,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.7,
+              "y": 19,
+              "size": 0.7999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.05,
+              "y": 19.25,
+              "size": 0.85,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.4,
+              "y": 19,
+              "size": 0.8999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.75,
+              "y": 19.25,
+              "size": 0.95,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            }
+          ],
+          "room": {
+            "engaged": true,
+            "cleared": false
+          },
+          "settings": {
+            "lowFx": false,
+            "reducedMotion": false
+          },
+          "canvases": [
+            {
+              "id": "game",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "mini",
+              "width": 180,
+              "height": 180,
+              "cssWidth": 144,
+              "cssHeight": 144
+            },
+            {
+              "id": "phase1-webgl",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "combat-hud-r51",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 0,
+              "cssHeight": 0
+            }
+          ],
+          "renderer": {
+            "requested": "three",
+            "active": "three",
+            "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+            "failed": false,
+            "disposed": false,
+            "legacyFrames": 0,
+            "events": [],
+            "chunks": {
+              "zone": "STORY:dist00",
+              "active": [
+                "0,0",
+                "1,0",
+                "2,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,0",
+                "3,1",
+                "3,2",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4"
+              ],
+              "states": [
+                {
+                  "key": "0,0",
+                  "status": "active"
+                },
+                {
+                  "key": "1,0",
+                  "status": "active"
+                },
+                {
+                  "key": "2,0",
+                  "status": "active"
+                },
+                {
+                  "key": "0,1",
+                  "status": "active"
+                },
+                {
+                  "key": "1,1",
+                  "status": "active"
+                },
+                {
+                  "key": "2,1",
+                  "status": "active"
+                },
+                {
+                  "key": "0,2",
+                  "status": "active"
+                },
+                {
+                  "key": "1,2",
+                  "status": "active"
+                },
+                {
+                  "key": "2,2",
+                  "status": "active"
+                },
+                {
+                  "key": "3,0",
+                  "status": "active"
+                },
+                {
+                  "key": "3,1",
+                  "status": "active"
+                },
+                {
+                  "key": "3,2",
+                  "status": "active"
+                },
+                {
+                  "key": "0,3",
+                  "status": "active"
+                },
+                {
+                  "key": "1,3",
+                  "status": "active"
+                },
+                {
+                  "key": "2,3",
+                  "status": "active"
+                },
+                {
+                  "key": "3,3",
+                  "status": "active"
+                },
+                {
+                  "key": "0,4",
+                  "status": "active"
+                },
+                {
+                  "key": "1,4",
+                  "status": "active"
+                },
+                {
+                  "key": "2,4",
+                  "status": "active"
+                },
+                {
+                  "key": "3,4",
+                  "status": "active"
+                }
+              ],
+              "saved": [
+                [
+                  "STORY:hub:0,0",
+                  []
+                ],
+                [
+                  "STORY:hub:1,0",
+                  []
+                ],
+                [
+                  "STORY:hub:2,0",
+                  []
+                ],
+                [
+                  "STORY:hub:0,1",
+                  []
+                ],
+                [
+                  "STORY:hub:1,1",
+                  []
+                ],
+                [
+                  "STORY:hub:2,1",
+                  []
+                ],
+                [
+                  "STORY:hub:0,2",
+                  []
+                ],
+                [
+                  "STORY:hub:1,2",
+                  []
+                ],
+                [
+                  "STORY:hub:2,2",
+                  []
+                ],
+                [
+                  "STORY:hub:3,0",
+                  []
+                ],
+                [
+                  "STORY:hub:3,1",
+                  []
+                ],
+                [
+                  "STORY:hub:3,2",
+                  []
+                ],
+                [
+                  "STORY:hub:0,3",
+                  []
+                ],
+                [
+                  "STORY:hub:1,3",
+                  []
+                ],
+                [
+                  "STORY:hub:2,3",
+                  []
+                ],
+                [
+                  "STORY:hub:3,3",
+                  []
+                ],
+                [
+                  "STORY:hub:0,4",
+                  []
+                ],
+                [
+                  "STORY:hub:1,4",
+                  []
+                ],
+                [
+                  "STORY:hub:2,4",
+                  []
+                ],
+                [
+                  "STORY:hub:3,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,2",
+                  [
+                    {
+                      "id": "dist00:dist00-boss",
+                      "hp": 25686,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 24.202247191011242,
+                      "y": 22.561797752808992
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,1",
+                  [
+                    {
+                      "id": "dist00:story-patrol:1:0",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 35.15,
+                      "y": 17.45
+                    },
+                    {
+                      "id": "dist00:story-patrol:1:1",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 36,
+                      "y": 18.9
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,3",
+                  [
+                    {
+                      "id": "dist00:story-patrol:0:2",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "active",
+                      "x": 37.87613033710908,
+                      "y": 35.405055608457054
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:0,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,4",
+                  []
+                ]
+              ],
+              "audit": [
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                },
+                {
+                  "type": "release",
+                  "key": "0,0"
+                },
+                {
+                  "type": "release",
+                  "key": "1,0"
+                },
+                {
+                  "type": "release",
+                  "key": "2,0"
+                },
+                {
+                  "type": "release",
+                  "key": "0,1"
+                },
+                {
+                  "type": "release",
+                  "key": "1,1"
+                },
+                {
+                  "type": "release",
+                  "key": "2,1"
+                },
+                {
+                  "type": "release",
+                  "key": "0,2"
+                },
+                {
+                  "type": "release",
+                  "key": "1,2"
+                },
+                {
+                  "type": "release",
+                  "key": "2,2"
+                },
+                {
+                  "type": "release",
+                  "key": "3,0"
+                },
+                {
+                  "type": "release",
+                  "key": "3,1"
+                },
+                {
+                  "type": "release",
+                  "key": "3,2"
+                },
+                {
+                  "type": "release",
+                  "key": "0,3"
+                },
+                {
+                  "type": "release",
+                  "key": "1,3"
+                },
+                {
+                  "type": "release",
+                  "key": "2,3"
+                },
+                {
+                  "type": "release",
+                  "key": "3,3"
+                },
+                {
+                  "type": "release",
+                  "key": "0,4"
+                },
+                {
+                  "type": "release",
+                  "key": "1,4"
+                },
+                {
+                  "type": "release",
+                  "key": "2,4"
+                },
+                {
+                  "type": "release",
+                  "key": "3,4"
+                },
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                }
+              ]
+            },
+            "metrics": {
+              "samples": 0,
+              "median": null,
+              "p95": null,
+              "p99": null,
+              "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+              "last": null
+            },
+            "commandScene": {
+              "created": 239,
+              "removed": 79,
+              "texturesCreated": 24,
+              "texturesDisposed": 15,
+              "geometryComparisons": 3719,
+              "geometryUpdates": 6,
+              "styleReplacements": 0,
+              "filterUpdates": 0,
+              "meshes": 160,
+              "textures": 9,
+              "labels": 0,
+              "execution": "real Three CPU scene; GPU unverified",
+              "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+              "depthBodies": 7,
+              "lightCasters": 0
+            },
+            "spatial": {
+              "regional55": {
+                "profile": "forest",
+                "arches": 1,
+                "dress": 9,
+                "isolatedMipmaps": true,
+                "staticLighting": true,
+                "collisionChanged": false,
+                "GPUVerified": false
+              },
+              "regionalLightAnchor55": [
+                27,
+                0,
+                18
+              ],
+              "sight24": {
+                "enabled": false,
+                "sharedSingleMask": true,
+                "GPUVerified": false
+              },
+              "normalSurface23": {
+                "built": 0,
+                "refused": 0,
+                "actualFloor": false,
+                "actualWall": false,
+                "GPUVerified": false
+              },
+              "hospitalVisualRevision": "hospital-door-comfort-r35",
+              "hospitalDoorDetails37": false,
+              "hospitalLightAnchor37": null,
+              "wallComfort37": {
+                "normalScale": 0,
+                "emissiveShare": 1,
+                "staticHospitalDirection": true
+              },
+              "wallComfort49": {
+                "isolatedWallMipmaps": false,
+                "mipFilter": "LinearMipmapLinearFilter",
+                "normalLighting": false,
+                "geometryChanged": false,
+                "GPUVerified": false
+              },
+              "hospitalJunctions34": 0,
+              "doorWallCut34": null,
+              "hospitalFloorReady": false,
+              "hospitalRoomsReady": false,
+              "hospitalRoomPieces": 0,
+              "hospitalCutWalls": 0,
+              "defaultDepth": true,
+              "physicalStructures": true,
+              "terrainMeshes": 61,
+              "backdropMeshes": 19,
+              "fogRimMeshes": 0,
+              "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+              "contactShadows": "reduced original ellipses in background pass",
+              "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+              "casterBudget": 0,
+              "casterCount": 0,
+              "shadowMapEnabled": false,
+              "shadowMapSize": 0,
+              "height": {
+                "height": 0,
+                "surfaceId": "original-ground",
+                "presentationOnly": true,
+                "collisionHeightSupported": false
+              },
+              "originalMapReprojectedAsFloor": false,
+              "originalMapBridgeProjectedAsFloor": false,
+              "apronScope30": "native east connectors and hospital south connector; panorama still original",
+              "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+              "bridgeMeshes": 0,
+              "sourcePavingAxesPreserved": true,
+              "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+              "GPUVerified": false,
+              "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+            },
+            "browserAcceptance": false
+          },
+          "visualCommandCount": 216
+        }
+      },
+      "finalScene": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hero": "hwando"
+        },
+        "tier": "normal",
+        "enemies": [
+          {
+            "id": "dist00:dist00-boss",
+            "x": 24.202247191011242,
+            "y": 22.561797752808992,
+            "hp": 6421.5,
+            "maxHp": 6421.5
+          },
+          {
+            "id": "dist00:story-patrol:0:0",
+            "x": 57.49104653025588,
+            "y": 42.57440715697466,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:1",
+            "x": 58.25724714474329,
+            "y": 44.15752622858366,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:2",
+            "x": 38.107790991902434,
+            "y": 35.22257079740301,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:0",
+            "x": 35.15,
+            "y": 17.45,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:1",
+            "x": 36,
+            "y": 18.9,
+            "hp": 285,
+            "maxHp": 285
+          }
+        ],
+        "effectCount": 6,
+        "effects": [
+          {
+            "type": "burst",
+            "x": 14,
+            "y": 19,
+            "size": 0.7,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.35,
+            "y": 19.25,
+            "size": 0.75,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.7,
+            "y": 19,
+            "size": 0.7999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.05,
+            "y": 19.25,
+            "size": 0.85,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.4,
+            "y": 19,
+            "size": 0.8999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.75,
+            "y": 19.25,
+            "size": 0.95,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          }
+        ],
+        "room": {
+          "engaged": true,
+          "cleared": false
+        },
+        "settings": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "canvases": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 0,
+            "cssHeight": 0
+          }
+        ],
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 25686,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 37.87613033710908,
+                    "y": 35.405055608457054
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 23,
+            "median": 6.799999997019768,
+            "p95": 8,
+            "p99": 9,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": {
+              "milliseconds": 6,
+              "drawCalls": 2,
+              "geometries": 196,
+              "textures": 13,
+              "resourceUnits": "counts, not VRAM bytes"
+            }
+          },
+          "commandScene": {
+            "created": 239,
+            "removed": 79,
+            "texturesCreated": 24,
+            "texturesDisposed": 15,
+            "geometryComparisons": 18759,
+            "geometryUpdates": 6,
+            "styleReplacements": 0,
+            "filterUpdates": 0,
+            "meshes": 160,
+            "textures": 9,
+            "labels": 0,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 7,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": false,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "visualCommandCount": 216
+      },
+      "frame": {
+        "count": 87,
+        "meanMs": 173.55747126436782,
+        "p50Ms": 166.70000000000073,
+        "p95Ms": 200.09999999999854,
+        "p99Ms": 216.59999999999854,
+        "fps": 5.761780191397066
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1224.506,
+        "taskDurationDeltaMs": 15818.690999999999,
+        "layoutCountDelta": 86,
+        "recalcStyleCountDelta": 86,
+        "heapStartBytes": 68849512,
+        "heapEndBytes": 71932316,
+        "heapDeltaBytes": 3082804,
+        "domNodes": 990
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 14605.367999999795
+        },
+        {
+          "name": "getParameters",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7356,
+          "sampledSelfMs": 162.071
+        },
+        {
+          "name": "render",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 910,
+          "sampledSelfMs": 63.61099999999999
+        },
+        {
+          "name": "getProgram",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 18223,
+          "sampledSelfMs": 54.68100000000001
+        },
+        {
+          "name": "needsUpdate",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 1758,
+          "sampledSelfMs": 47.05399999999999
+        },
+        {
+          "name": "getProgramCacheKey",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7702,
+          "sampledSelfMs": 35.477999999999994
+        },
+        {
+          "name": "(garbage collector)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 34.601
+        },
+        {
+          "name": "WebGLRenderer.renderBufferDirect",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 17232,
+          "sampledSelfMs": 28.156999999999996
+        },
+        {
+          "name": "setup",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 1622,
+          "sampledSelfMs": 25.065
+        },
+        {
+          "name": "refreshUniformsCommon",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 15138,
+          "sampledSelfMs": 25.054000000000002
+        },
+        {
+          "name": "push",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 724,
+          "sampledSelfMs": 22.407000000000004
+        },
+        {
+          "name": "(idle)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 22.379
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "index": 2,
+      "label": "baseline",
+      "url": "http://127.0.0.1:4385/",
+      "scenario": "fresh browser context; New Game; dist00 STORY normal; player (15,19); six static enemies; six persistent fixed burst effects; modal pauses simulation while renderer continues; 2.5s warmup",
+      "profileMs": 15066.100000000002,
+      "setup": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "enemyCount": 6,
+        "player": {
+          "x": 15,
+          "y": 19
+        },
+        "effectCount": 6,
+        "quality": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "scene": {
+          "zone": "dist00",
+          "layer": "STORY",
+          "player": {
+            "x": 15,
+            "y": 19,
+            "hero": "hwando"
+          },
+          "tier": "normal",
+          "enemies": [
+            {
+              "id": "dist00:dist00-boss",
+              "x": 24.202247191011242,
+              "y": 22.561797752808992,
+              "hp": 6421.5,
+              "maxHp": 6421.5
+            },
+            {
+              "id": "dist00:story-patrol:0:0",
+              "x": 57.491484866892094,
+              "y": 42.5731135313039,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:1",
+              "x": 58.257265836464185,
+              "y": 44.15750759057483,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:0:2",
+              "x": 38.105200926019215,
+              "y": 35.219808311579825,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:0",
+              "x": 35.15,
+              "y": 17.45,
+              "hp": 285,
+              "maxHp": 285
+            },
+            {
+              "id": "dist00:story-patrol:1:1",
+              "x": 36,
+              "y": 18.9,
+              "hp": 285,
+              "maxHp": 285
+            }
+          ],
+          "effectCount": 6,
+          "effects": [
+            {
+              "type": "burst",
+              "x": 14,
+              "y": 19,
+              "size": 0.7,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.35,
+              "y": 19.25,
+              "size": 0.75,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 14.7,
+              "y": 19,
+              "size": 0.7999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.05,
+              "y": 19.25,
+              "size": 0.85,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.4,
+              "y": 19,
+              "size": 0.8999999999999999,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            },
+            {
+              "type": "burst",
+              "x": 15.75,
+              "y": 19.25,
+              "size": 0.95,
+              "asset": "assets/vfx/generated/v300/burst-impact.webp"
+            }
+          ],
+          "room": {
+            "engaged": true,
+            "cleared": false
+          },
+          "settings": {
+            "lowFx": false,
+            "reducedMotion": false
+          },
+          "canvases": [
+            {
+              "id": "game",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "mini",
+              "width": 180,
+              "height": 180,
+              "cssWidth": 144,
+              "cssHeight": 144
+            },
+            {
+              "id": "phase1-webgl",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 1365,
+              "cssHeight": 634
+            },
+            {
+              "id": "combat-hud-r51",
+              "width": 1365,
+              "height": 634,
+              "cssWidth": 0,
+              "cssHeight": 0
+            }
+          ],
+          "renderer": {
+            "requested": "three",
+            "active": "three",
+            "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+            "failed": false,
+            "disposed": false,
+            "legacyFrames": 0,
+            "events": [],
+            "chunks": {
+              "zone": "STORY:dist00",
+              "active": [
+                "0,0",
+                "1,0",
+                "2,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,0",
+                "3,1",
+                "3,2",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4"
+              ],
+              "states": [
+                {
+                  "key": "0,0",
+                  "status": "active"
+                },
+                {
+                  "key": "1,0",
+                  "status": "active"
+                },
+                {
+                  "key": "2,0",
+                  "status": "active"
+                },
+                {
+                  "key": "0,1",
+                  "status": "active"
+                },
+                {
+                  "key": "1,1",
+                  "status": "active"
+                },
+                {
+                  "key": "2,1",
+                  "status": "active"
+                },
+                {
+                  "key": "0,2",
+                  "status": "active"
+                },
+                {
+                  "key": "1,2",
+                  "status": "active"
+                },
+                {
+                  "key": "2,2",
+                  "status": "active"
+                },
+                {
+                  "key": "3,0",
+                  "status": "active"
+                },
+                {
+                  "key": "3,1",
+                  "status": "active"
+                },
+                {
+                  "key": "3,2",
+                  "status": "active"
+                },
+                {
+                  "key": "0,3",
+                  "status": "active"
+                },
+                {
+                  "key": "1,3",
+                  "status": "active"
+                },
+                {
+                  "key": "2,3",
+                  "status": "active"
+                },
+                {
+                  "key": "3,3",
+                  "status": "active"
+                },
+                {
+                  "key": "0,4",
+                  "status": "active"
+                },
+                {
+                  "key": "1,4",
+                  "status": "active"
+                },
+                {
+                  "key": "2,4",
+                  "status": "active"
+                },
+                {
+                  "key": "3,4",
+                  "status": "active"
+                }
+              ],
+              "saved": [
+                [
+                  "STORY:hub:0,0",
+                  []
+                ],
+                [
+                  "STORY:hub:1,0",
+                  []
+                ],
+                [
+                  "STORY:hub:2,0",
+                  []
+                ],
+                [
+                  "STORY:hub:0,1",
+                  []
+                ],
+                [
+                  "STORY:hub:1,1",
+                  []
+                ],
+                [
+                  "STORY:hub:2,1",
+                  []
+                ],
+                [
+                  "STORY:hub:0,2",
+                  []
+                ],
+                [
+                  "STORY:hub:1,2",
+                  []
+                ],
+                [
+                  "STORY:hub:2,2",
+                  []
+                ],
+                [
+                  "STORY:hub:3,0",
+                  []
+                ],
+                [
+                  "STORY:hub:3,1",
+                  []
+                ],
+                [
+                  "STORY:hub:3,2",
+                  []
+                ],
+                [
+                  "STORY:hub:0,3",
+                  []
+                ],
+                [
+                  "STORY:hub:1,3",
+                  []
+                ],
+                [
+                  "STORY:hub:2,3",
+                  []
+                ],
+                [
+                  "STORY:hub:3,3",
+                  []
+                ],
+                [
+                  "STORY:hub:0,4",
+                  []
+                ],
+                [
+                  "STORY:hub:1,4",
+                  []
+                ],
+                [
+                  "STORY:hub:2,4",
+                  []
+                ],
+                [
+                  "STORY:hub:3,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,1",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,2",
+                  [
+                    {
+                      "id": "dist00:dist00-boss",
+                      "hp": 25686,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 24.202247191011242,
+                      "y": 22.561797752808992
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,0",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,1",
+                  [
+                    {
+                      "id": "dist00:story-patrol:1:0",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 35.15,
+                      "y": 17.45
+                    },
+                    {
+                      "id": "dist00:story-patrol:1:1",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "hidden",
+                      "x": 36,
+                      "y": 18.9
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:3,2",
+                  []
+                ],
+                [
+                  "STORY:dist00:0,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,3",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,3",
+                  [
+                    {
+                      "id": "dist00:story-patrol:0:2",
+                      "hp": 1140,
+                      "deadRecorded": false,
+                      "spawnState": "active",
+                      "x": 37.87560810402839,
+                      "y": 35.40475594206105
+                    }
+                  ]
+                ],
+                [
+                  "STORY:dist00:0,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:1,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:2,4",
+                  []
+                ],
+                [
+                  "STORY:dist00:3,4",
+                  []
+                ]
+              ],
+              "audit": [
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                },
+                {
+                  "type": "release",
+                  "key": "0,0"
+                },
+                {
+                  "type": "release",
+                  "key": "1,0"
+                },
+                {
+                  "type": "release",
+                  "key": "2,0"
+                },
+                {
+                  "type": "release",
+                  "key": "0,1"
+                },
+                {
+                  "type": "release",
+                  "key": "1,1"
+                },
+                {
+                  "type": "release",
+                  "key": "2,1"
+                },
+                {
+                  "type": "release",
+                  "key": "0,2"
+                },
+                {
+                  "type": "release",
+                  "key": "1,2"
+                },
+                {
+                  "type": "release",
+                  "key": "2,2"
+                },
+                {
+                  "type": "release",
+                  "key": "3,0"
+                },
+                {
+                  "type": "release",
+                  "key": "3,1"
+                },
+                {
+                  "type": "release",
+                  "key": "3,2"
+                },
+                {
+                  "type": "release",
+                  "key": "0,3"
+                },
+                {
+                  "type": "release",
+                  "key": "1,3"
+                },
+                {
+                  "type": "release",
+                  "key": "2,3"
+                },
+                {
+                  "type": "release",
+                  "key": "3,3"
+                },
+                {
+                  "type": "release",
+                  "key": "0,4"
+                },
+                {
+                  "type": "release",
+                  "key": "1,4"
+                },
+                {
+                  "type": "release",
+                  "key": "2,4"
+                },
+                {
+                  "type": "release",
+                  "key": "3,4"
+                },
+                {
+                  "type": "request",
+                  "key": "0,0"
+                },
+                {
+                  "type": "request",
+                  "key": "1,0"
+                },
+                {
+                  "type": "request",
+                  "key": "2,0"
+                },
+                {
+                  "type": "request",
+                  "key": "0,1"
+                },
+                {
+                  "type": "request",
+                  "key": "1,1"
+                },
+                {
+                  "type": "request",
+                  "key": "2,1"
+                },
+                {
+                  "type": "request",
+                  "key": "0,2"
+                },
+                {
+                  "type": "request",
+                  "key": "1,2"
+                },
+                {
+                  "type": "request",
+                  "key": "2,2"
+                },
+                {
+                  "type": "request",
+                  "key": "3,0"
+                },
+                {
+                  "type": "request",
+                  "key": "3,1"
+                },
+                {
+                  "type": "request",
+                  "key": "3,2"
+                },
+                {
+                  "type": "request",
+                  "key": "0,3"
+                },
+                {
+                  "type": "request",
+                  "key": "1,3"
+                },
+                {
+                  "type": "request",
+                  "key": "2,3"
+                },
+                {
+                  "type": "request",
+                  "key": "3,3"
+                },
+                {
+                  "type": "request",
+                  "key": "0,4"
+                },
+                {
+                  "type": "request",
+                  "key": "1,4"
+                },
+                {
+                  "type": "request",
+                  "key": "2,4"
+                },
+                {
+                  "type": "request",
+                  "key": "3,4"
+                },
+                {
+                  "type": "active",
+                  "key": "0,0"
+                },
+                {
+                  "type": "active",
+                  "key": "1,0"
+                },
+                {
+                  "type": "active",
+                  "key": "2,0"
+                },
+                {
+                  "type": "active",
+                  "key": "0,1"
+                },
+                {
+                  "type": "active",
+                  "key": "1,1"
+                },
+                {
+                  "type": "active",
+                  "key": "2,1"
+                },
+                {
+                  "type": "active",
+                  "key": "0,2"
+                },
+                {
+                  "type": "active",
+                  "key": "1,2"
+                },
+                {
+                  "type": "active",
+                  "key": "2,2"
+                },
+                {
+                  "type": "active",
+                  "key": "3,0"
+                },
+                {
+                  "type": "active",
+                  "key": "3,1"
+                },
+                {
+                  "type": "active",
+                  "key": "3,2"
+                },
+                {
+                  "type": "active",
+                  "key": "0,3"
+                },
+                {
+                  "type": "active",
+                  "key": "1,3"
+                },
+                {
+                  "type": "active",
+                  "key": "2,3"
+                },
+                {
+                  "type": "active",
+                  "key": "3,3"
+                },
+                {
+                  "type": "active",
+                  "key": "0,4"
+                },
+                {
+                  "type": "active",
+                  "key": "1,4"
+                },
+                {
+                  "type": "active",
+                  "key": "2,4"
+                },
+                {
+                  "type": "active",
+                  "key": "3,4"
+                }
+              ]
+            },
+            "metrics": {
+              "samples": 0,
+              "median": null,
+              "p95": null,
+              "p99": null,
+              "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+              "last": null
+            },
+            "commandScene": {
+              "created": 239,
+              "removed": 79,
+              "texturesCreated": 24,
+              "texturesDisposed": 15,
+              "geometryComparisons": 3866,
+              "geometryUpdates": 6,
+              "styleReplacements": 0,
+              "filterUpdates": 0,
+              "meshes": 160,
+              "textures": 9,
+              "labels": 0,
+              "execution": "real Three CPU scene; GPU unverified",
+              "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+              "depthBodies": 7,
+              "lightCasters": 0
+            },
+            "spatial": {
+              "regional55": {
+                "profile": "forest",
+                "arches": 1,
+                "dress": 9,
+                "isolatedMipmaps": true,
+                "staticLighting": true,
+                "collisionChanged": false,
+                "GPUVerified": false
+              },
+              "regionalLightAnchor55": [
+                27,
+                0,
+                18
+              ],
+              "sight24": {
+                "enabled": false,
+                "sharedSingleMask": true,
+                "GPUVerified": false
+              },
+              "normalSurface23": {
+                "built": 0,
+                "refused": 0,
+                "actualFloor": false,
+                "actualWall": false,
+                "GPUVerified": false
+              },
+              "hospitalVisualRevision": "hospital-door-comfort-r35",
+              "hospitalDoorDetails37": false,
+              "hospitalLightAnchor37": null,
+              "wallComfort37": {
+                "normalScale": 0,
+                "emissiveShare": 1,
+                "staticHospitalDirection": true
+              },
+              "wallComfort49": {
+                "isolatedWallMipmaps": false,
+                "mipFilter": "LinearMipmapLinearFilter",
+                "normalLighting": false,
+                "geometryChanged": false,
+                "GPUVerified": false
+              },
+              "hospitalJunctions34": 0,
+              "doorWallCut34": null,
+              "hospitalFloorReady": false,
+              "hospitalRoomsReady": false,
+              "hospitalRoomPieces": 0,
+              "hospitalCutWalls": 0,
+              "defaultDepth": true,
+              "physicalStructures": true,
+              "terrainMeshes": 61,
+              "backdropMeshes": 19,
+              "fogRimMeshes": 0,
+              "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+              "contactShadows": "reduced original ellipses in background pass",
+              "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+              "casterBudget": 0,
+              "casterCount": 0,
+              "shadowMapEnabled": false,
+              "shadowMapSize": 0,
+              "height": {
+                "height": 0,
+                "surfaceId": "original-ground",
+                "presentationOnly": true,
+                "collisionHeightSupported": false
+              },
+              "originalMapReprojectedAsFloor": false,
+              "originalMapBridgeProjectedAsFloor": false,
+              "apronScope30": "native east connectors and hospital south connector; panorama still original",
+              "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+              "bridgeMeshes": 0,
+              "sourcePavingAxesPreserved": true,
+              "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+              "GPUVerified": false,
+              "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+            },
+            "browserAcceptance": false
+          },
+          "visualCommandCount": 216
+        }
+      },
+      "finalScene": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hero": "hwando"
+        },
+        "tier": "normal",
+        "enemies": [
+          {
+            "id": "dist00:dist00-boss",
+            "x": 24.202247191011242,
+            "y": 22.561797752808992,
+            "hp": 6421.5,
+            "maxHp": 6421.5
+          },
+          {
+            "id": "dist00:story-patrol:0:0",
+            "x": 57.491484866892094,
+            "y": 42.5731135313039,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:1",
+            "x": 58.257265836464185,
+            "y": 44.15750759057483,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:0:2",
+            "x": 38.105200926019215,
+            "y": 35.219808311579825,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:0",
+            "x": 35.15,
+            "y": 17.45,
+            "hp": 285,
+            "maxHp": 285
+          },
+          {
+            "id": "dist00:story-patrol:1:1",
+            "x": 36,
+            "y": 18.9,
+            "hp": 285,
+            "maxHp": 285
+          }
+        ],
+        "effectCount": 6,
+        "effects": [
+          {
+            "type": "burst",
+            "x": 14,
+            "y": 19,
+            "size": 0.7,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.35,
+            "y": 19.25,
+            "size": 0.75,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 14.7,
+            "y": 19,
+            "size": 0.7999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.05,
+            "y": 19.25,
+            "size": 0.85,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.4,
+            "y": 19,
+            "size": 0.8999999999999999,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          },
+          {
+            "type": "burst",
+            "x": 15.75,
+            "y": 19.25,
+            "size": 0.95,
+            "asset": "assets/vfx/generated/v300/burst-impact.webp"
+          }
+        ],
+        "room": {
+          "engaged": true,
+          "cleared": false
+        },
+        "settings": {
+          "lowFx": false,
+          "reducedMotion": false
+        },
+        "canvases": [
+          {
+            "id": "game",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "mini",
+            "width": 180,
+            "height": 180,
+            "cssWidth": 144,
+            "cssHeight": 144
+          },
+          {
+            "id": "phase1-webgl",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 1365,
+            "cssHeight": 634
+          },
+          {
+            "id": "combat-hud-r51",
+            "width": 1365,
+            "height": 634,
+            "cssWidth": 0,
+            "cssHeight": 0
+          }
+        ],
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 25686,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 37.87560810402839,
+                    "y": 35.40475594206105
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 21,
+            "median": 6.800000000745058,
+            "p95": 9,
+            "p99": 9,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": {
+              "milliseconds": 6.800000000745058,
+              "drawCalls": 2,
+              "geometries": 196,
+              "textures": 13,
+              "resourceUnits": "counts, not VRAM bytes"
+            }
+          },
+          "commandScene": {
+            "created": 239,
+            "removed": 79,
+            "texturesCreated": 24,
+            "texturesDisposed": 15,
+            "geometryComparisons": 18586,
+            "geometryUpdates": 6,
+            "styleReplacements": 0,
+            "filterUpdates": 0,
+            "meshes": 160,
+            "textures": 9,
+            "labels": 0,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 7,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": false,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "visualCommandCount": 216
+      },
+      "frame": {
+        "count": 86,
+        "meanMs": 175.1872093023256,
+        "p50Ms": 166.70000000000073,
+        "p95Ms": 200,
+        "p99Ms": 216.6999999999971,
+        "fps": 5.708179289929045
+      },
+      "metrics": {
+        "scriptDurationDeltaMs": 1160.3790000000001,
+        "taskDurationDeltaMs": 15641.04,
+        "layoutCountDelta": 87,
+        "recalcStyleCountDelta": 87,
+        "heapStartBytes": 56719116,
+        "heapEndBytes": 75410740,
+        "heapDeltaBytes": 18691624,
+        "domNodes": 1552
+      },
+      "topCpuFunctions": [
+        {
+          "name": "(program)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 14631.391999999685
+        },
+        {
+          "name": "getParameters",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7356,
+          "sampledSelfMs": 161.64600000000004
+        },
+        {
+          "name": "getProgram",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 18223,
+          "sampledSelfMs": 58.38600000000001
+        },
+        {
+          "name": "needsUpdate",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 1758,
+          "sampledSelfMs": 48.193000000000005
+        },
+        {
+          "name": "(idle)",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 37.613
+        },
+        {
+          "name": "wallTarget",
+          "url": "http://127.0.0.1:4385/",
+          "line": 8958,
+          "sampledSelfMs": 25.748000000000005
+        },
+        {
+          "name": "render",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 910,
+          "sampledSelfMs": 25.461
+        },
+        {
+          "name": "sameStyleKey24",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 868,
+          "sampledSelfMs": 24.325000000000003
+        },
+        {
+          "name": "texturedFloor",
+          "url": "http://127.0.0.1:4385/",
+          "line": 5442,
+          "sampledSelfMs": 24.320000000000004
+        },
+        {
+          "name": "getProgramCacheKey",
+          "url": "http://127.0.0.1:4385/vendor/three/build/three.module.js",
+          "line": 7702,
+          "sampledSelfMs": 24.031
+        },
+        {
+          "name": "capture",
+          "url": "http://127.0.0.1:4385/dist/phase1.js",
+          "line": 647,
+          "sampledSelfMs": 20.788
+        },
+        {
+          "name": "useProgram",
+          "url": "",
+          "line": -1,
+          "sampledSelfMs": 20.666000000000004
+        }
+      ],
+      "pageErrors": []
+    }
+  ]
+}

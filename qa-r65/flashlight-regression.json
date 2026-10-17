@@ -1,7 +1,7 @@
 {
   "base": "55ef8ec68cbd83ffec268bdda6b8e90f407d9593",
   "browser": "Chromium 151.0.7922.173 headless, iPhone UA/touch emulation; not a physical device",
-  "URL": "http://127.0.0.1:4385/",
+  "URL": "http://127.0.0.1:4386/",
   "setup": {
     "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
     "viewport": {
@@ -466,8 +466,8 @@
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 37.874558059320826,
-                "y": 35.404177333475104
+                "x": 37.87022810093319,
+                "y": 35.41168483448892
               }
             ]
           ],
@@ -507,16 +507,16 @@
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 57.20065957498584,
-                "y": 42.46171901328708
+                "x": 57.19224554710768,
+                "y": 42.459641696273096
               },
               {
                 "id": "dist00:story-patrol:0:1",
                 "hp": 1140,
                 "deadRecorded": false,
                 "spawnState": "active",
-                "x": 58.0367779208128,
-                "y": 43.93676118237318
+                "x": 58.03064773579815,
+                "y": 43.93063485045292
               }
             ]
           ],
@@ -1073,7 +1073,7 @@
         "removed": 209,
         "texturesCreated": 32,
         "texturesDisposed": 25,
-        "geometryComparisons": 6108,
+        "geometryComparisons": 6595,
         "geometryUpdates": 6,
         "styleReplacements": 3,
         "filterUpdates": 0,
@@ -1461,10 +1461,10 @@
   "visualDifference": {
     "width": 780,
     "height": 1688,
-    "differentPixels": 887883,
-    "fraction": 0.6743551768137076,
-    "meanRgbOn": 20.0409367784664,
-    "meanRgbOff": 45.03842660104508
+    "differentPixels": 887835,
+    "fraction": 0.674318720379147,
+    "meanRgbOn": 20.03967143638352,
+    "meanRgbOff": 45.037666079313
   },
   "pageErrorList": [],
   "screenshots": [

@@ -640,15 +640,18 @@ class EventStream {
   emit(type,data){const row={...data,type,serial:++this.serial};this.rows.push(row);if(this.rows.length>this.cap)this.rows.shift();return row;}
   since(serial){return this.rows.filter(row=>row.serial>serial);}
 }
+const EMPTY_RENDER_EVENTS=Object.freeze([]);
 
 // Stable rows copy only render fields. Game entities are not exposed to renderers.
 class RenderBridge {
-  constructor(read){this.read=read;this.events=new EventStream();this.rows=new Map();this.ids=new WeakMap();this.nextId=0;this.frame={entities:[],projectiles:[],effects:[],hazards:[],props:[],events:[],generation:0};this.eventCursor=0;}
+  constructor(read){this.read=read;this.events=new EventStream();this.rows=new Map();this.seen=new Set();this.ids=new WeakMap();this.nextId=0;this.frame={entities:[],projectiles:[],effects:[],hazards:[],props:[],events:EMPTY_RENDER_EVENTS,viewport:{},settings:{},hospitalFocus13:[],generation:0};this.eventCursor=0;}
   id(object,prefix){if(object.id!=null)return prefix+':'+object.id;if(!this.ids.has(object))this.ids.set(object,++this.nextId);return prefix+':'+this.ids.get(object);}
-  capture(){const source=this.read(),f=this.frame;f.generation++;f.zone=source.zone;f.layer=source.layer;f.time=source.time;f.viewport={...source.viewport};f.settings={lowFx:!!source.settings.lowFx,reducedMotion:!!source.settings.reducedMotion};f.map=source.map;f.exploration=source.exploration;f.hero=source.hero;f.paused=source.paused;f.ready=source.ready;f.projection=source.projection;f.hospitalFocus13=(source.hospitalFocus13||[]).filter(p=>Number.isFinite(p?.x)&&Number.isFinite(p?.y)).slice(0,4).map(p=>({x:p.x,y:p.y}));const seen=new Set();
-    for(const type of ['entities','projectiles','effects','hazards','props']){f[type].length=0;for(const item of source[type]||[]){const key=source.zone+':'+source.layer+':'+type+':'+item.id;let row=this.rows.get(key);if(!row){row={};this.rows.set(key,row);}for(const k of Object.keys(row))delete row[k];Object.assign(row,item);seen.add(key);f[type].push(row);}}
+  capture(){const source=this.read(),f=this.frame;f.generation++;f.zone=source.zone;f.layer=source.layer;f.time=source.time;Object.assign(f.viewport,source.viewport);f.settings.lowFx=!!source.settings.lowFx;f.settings.reducedMotion=!!source.settings.reducedMotion;f.map=source.map;f.exploration=source.exploration;f.hero=source.hero;f.paused=source.paused;f.ready=source.ready;f.projection=source.projection;
+    const focus=source.hospitalFocus13||[],out=f.hospitalFocus13;out.length=0;for(let i=0;i<focus.length&&out.length<4;i++){const p=focus[i];if(Number.isFinite(p?.x)&&Number.isFinite(p?.y))out.push({x:p.x,y:p.y});}
+    const seen=this.seen;seen.clear();
+    for(const type of ['entities','projectiles','effects','hazards','props']){f[type].length=0;for(const item of source[type]||[]){const key=source.zone+':'+source.layer+':'+type+':'+item.id;let row=this.rows.get(key);if(!row){row={};this.rows.set(key,row);}for(const k in row)if(Object.hasOwn(row,k)&&!Object.hasOwn(item,k))delete row[k];for(const k in item)if(Object.hasOwn(item,k))row[k]=item[k];seen.add(key);f[type].push(row);}}
     for(const key of this.rows.keys())if(!seen.has(key))this.rows.delete(key);
-    f.events=this.events.since(this.eventCursor);this.eventCursor=this.events.serial;return f;
+    if(this.eventCursor!==this.events.serial){f.events=this.events.since(this.eventCursor);this.eventCursor=this.events.serial;}else f.events=EMPTY_RENDER_EVENTS;return f;
   }
 }
 

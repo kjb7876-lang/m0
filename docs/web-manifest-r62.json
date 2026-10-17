@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R65_PAGES_CANDIDATE",
+  "status": "R65_STAGE2_LOCAL_CANDIDATE_NOT_DEPLOYED",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
   "sourceHTMLSha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6",
@@ -9508,8 +9508,8 @@
     },
     {
       "path": "dist/phase1.js",
-      "bytes": 526718,
-      "sha256": "6210983e2a08429373f6dd17ecabf2a124d71cd95305345e256b9e1a73f8b34f"
+      "bytes": 527105,
+      "sha256": "c7b7a55b0615d92eb4dd2fb0a3d3e08b6d4173249f337af9bbc1a0ed16916e1e"
     },
     {
       "path": "index.html",
@@ -9538,7 +9538,7 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464851030,
+  "totalBytes": 464851417,
   "largest": [
     {
       "path": "index.html",

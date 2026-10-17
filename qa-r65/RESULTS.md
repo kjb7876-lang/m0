@@ -42,4 +42,4 @@ Four matching screenshots are retained beside this report: `flashlight-on-mobile
 
 The ChatGPT Library multi-image upload helper failed its initial hosted-tools listing with a network error before any file upload began. The four image files remain in this repository's QA directory; they were not saved to Library.
 
-This report records local candidate verification. Public publication status and the exact Git candidate SHA are reported separately after the Pages workflow completes.
+Stage 1 was pushed to `main` as `b7890eaee8a13a624cf07e278116731da07938d5`. GitHub Pages workflow [39010498740](https://github.com/kjb7876-lang/m0/actions/runs/39010498740) completed successfully at `2026-10-17T06:37:41Z`. The repository manifest at that commit records the matching HTML SHA above. Direct GET of the Pages URL returned HTTP 403 from this execution environment, so the deployed page bytes could not be independently fetched here.

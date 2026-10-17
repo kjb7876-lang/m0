@@ -39,7 +39,7 @@
         "points": 20
       }
     ],
-    "saveSize": 21640,
+    "saveSize": 21645,
     "dropId": "r64:3:drop:qa-coop-1",
     "hostDropProp": true,
     "savedDrop": {
@@ -49,7 +49,7 @@
       "y": 12,
       "amount": 4,
       "kind": "enemy",
-      "createdAt": 1.100000000000001
+      "createdAt": 1.0666666666666678
     },
     "rank": 1
   },
@@ -88,7 +88,7 @@
         "y": 12,
         "amount": 4,
         "kind": "enemy",
-        "createdAt": 1.100000000000001
+        "createdAt": 1.0666666666666678
       }
     ]
   },
