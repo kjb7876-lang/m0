@@ -9486,10 +9486,10 @@ window.__STORYWORLD_CAMPAIGN_DATA_R54__={"schema":"hapil.canonical-campaign-sour
 })();
 </script>
 <script id="presentation-settings-r58">
-/* R58 sight toggle with platform default selected once; saved or chosen values win. */
+/* R58 sight toggle; keep the existing default while saved or chosen values win. */
 (()=>{'use strict';
  const ua=navigator.userAgent||'',mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1),desktopTouch=/Windows/i.test(ua)&&navigator.maxTouchPoints>0;
- const sightParam=new URL(location.href).searchParams.get('sight'),deviceDefault=mobileDevice,hadInitial=typeof settings.flashlight58==='boolean';
+ const sightParam=new URL(location.href).searchParams.get('sight'),deviceDefault=true,hadInitial=typeof settings.flashlight58==='boolean';
  let settingOrigin=hadInitial?'existing-setting':sightParam!==null?'url-option':'device-default';
  if(!hadInitial)settings.flashlight58=sightParam!==null?sightParam!=='full':deviceDefault;
  const showBase=showSettings;showSettings=function(...args){const result=showBase.apply(this,args),grid=document.querySelector('.settings');if(!grid)return result;
