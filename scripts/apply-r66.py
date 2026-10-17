@@ -27,6 +27,9 @@ def transform(html: str, optimized: bool = True) -> str:
     html = replace_exact(html, '(targetCooldowns.get(actorKey(p))||0)', 'cooldownR66.deadline(p)', 2)
     html = replace_exact(html, '(targetCooldowns.get(actorKey(actorNow()))||0)', 'cooldownR66.deadline(actorNow())')
     html = replace_exact(html, 'targetCooldowns.set(actorKey(p),time+DANCE_CD);', 'cooldownR66.start(p);')
+    # The later HUD already selects an active boss. Match that same selection
+    # for HP so a dormant earlier boss cannot supply another boss's numbers.
+    html = replace_exact(html, "const boss=room.enemies.find(e=>(e.boss||e.midboss)&&e.hp>0);hudNodeR63R2('bossbar')", "const boss=liveEnemies().find(e=>e.boss||e.midboss);hudNodeR63R2('bossbar')")
     html = replace_exact(html, "setHudWidthR63R2('bossHP',clamp(boss.hp/boss.maxHp*100,0,100)+'%');", "setHudWidthR63R2('bossHP',clamp(boss.hp/boss.maxHp*100,0,100)+'%');window.__STORYWORLD_R66__?.updateBossHP(boss);")
     html = replace_exact(html, '타격당 위력은 기존 공식(22% + 단계당 0.6%, 최대 30%)을 따릅니다.', '타격당 위력은 강화된 공격력의 44% + 단계당 1.2%(최대 60%)입니다. 공통 쿨타임은 일반 20초, EGO 상태 4초이며 모든 모티프에 적용됩니다.')
     if optimized:
@@ -37,6 +40,7 @@ def transform(html: str, optimized: bool = True) -> str:
     if '</script' in helper.lower():
         raise RuntimeError('Unsafe inline script terminator')
     html = replace_exact(html, '<script id="campaign-combat-r63r1">', '<script id="review-r66">\n' + helper + '\n</script>\n<script id="campaign-combat-r63r1">')
+    html = replace_exact(html, 'src="./dist/phase1.js"', 'src="./dist/phase1.js?r66=1"')
     if 'targetCooldowns' in html:
         raise RuntimeError('Unconverted cooldown reference')
     return html

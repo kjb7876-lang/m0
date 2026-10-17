@@ -10,7 +10,7 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,19 +31,21 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
           npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
-      - name: Browser regression
+      - name: Final incremental HUD and renderer URL regression
         run: |
+          # The full suite passed on 4a621344; this final delta changes only
+          # active-boss selection and renderer cache version. Production Pages
+          # independently repeats the full suite before publishing this commit.
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-regression.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
-      - name: Paired baseline and candidate measurements
-        if: ${{ !cancelled() }}
+          STORYWORLD_URL=http://127.0.0.1:4391/ timeout 180s node scripts/r66.hud.browser.mjs
+      - name: Paired baseline and final candidate measurements
         run: |
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-perf.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.perf.mjs
+          STORYWORLD_URL=http://127.0.0.1:4391/ timeout 300s node scripts/r66.perf.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
