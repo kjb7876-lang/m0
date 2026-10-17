@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R63R1_RECONSTRUCTED_UNPUBLISHED",
+  "status": "R63R1_PAGES_DEPLOYED_RELAY_SYNC_PENDING",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
   "sourceHTMLSha256": "5728f41c55dabc9a345297bb1ce834464b6dcececf74801f4feb8da4ec8a9602",
@@ -9644,9 +9644,9 @@
     "data/world-v31217.js"
   ],
   "sourceAssetsPruned": "Only known authoring provenance JSON and non-web launch/source tools; all runtime media retained.",
-  "remotePublished": false,
-  "deploymentSHA": "545bdca9ac3da7539663f3e53627e50f9316911d",
-  "deploymentUTC": "2026-10-16T09:15:15Z",
+  "remotePublished": true,
+  "deploymentSHA": "3407b7a53c921b8677cf59c8d2fbfa4493149418",
+  "deploymentUTC": "2026-10-16T20:39:35Z",
   "gameURL": "https://kjb7876-lang.github.io/m0/",
   "actualFourRemoteNetworksTested": false,
   "browserGPUVerified": false,

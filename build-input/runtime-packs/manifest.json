@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.runtime-build-input.r62/v1",
-  "runtimeManifestSHA256": "563f23586a6639687a82626934ad92251710db18659d23d0bf079fbfd9e4a6c3",
+  "runtimeManifestSHA256": "53437fccae6b9fb898e7f99c450d83e80e470f9c555d4768971ab074401a96b9",
   "sourceHTMLSha256": "5728f41c55dabc9a345297bb1ce834464b6dcececf74801f4feb8da4ec8a9602",
   "webHTMLSha256": "1f4c9b20633980714c66f78154375e57e6da3c92e17d20ba40fcf49ed6b6bd7a",
   "runtimeFileCount": 1906,
@@ -813,8 +813,8 @@
     },
     {
       "path": "web-manifest-r62.json",
-      "bytes": 363840,
-      "sha256": "563f23586a6639687a82626934ad92251710db18659d23d0bf079fbfd9e4a6c3"
+      "bytes": 363847,
+      "sha256": "53437fccae6b9fb898e7f99c450d83e80e470f9c555d4768971ab074401a96b9"
     }
   ],
   "archives": [
