@@ -2,8 +2,6 @@ name: StoryWorld R66 review
 on:
   push:
     branches: [chat/storyworld-r66-ego-performance]
-  pull_request:
-    branches: [main]
 permissions:
   contents: read
 concurrency:
@@ -20,47 +18,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct baseline runtime
-        run: |
-          python3 scripts/unpack-runtime-r62.py --output _pages/docs
-          node --test scripts/campaign-balance-r64.cpu.test.mjs
-          node verify-pages-r62.mjs _pages
-      - name: Install browser test dependency
-        run: |
-          npm install --no-save --ignore-scripts playwright@1.56.0
-          npx playwright install --with-deps chromium
-      - name: Measure baseline with sandbox enabled
+      - name: Prepare and validate reviewed candidate
         run: |
           mkdir -p out/r66
-          python3 - <<'PY'
-          from pathlib import Path
-          s=Path('qa-r65/profile-live-movement.mjs').read_text()
-          s=s.replace("executablePath: '/usr/bin/chromium',", "chromiumSandbox: true,")
-          s=s.replace("args: ['--no-sandbox', '--disable-dev-shm-usage']", "args: ['--disable-dev-shm-usage']")
-          s=s.replace("'qa-r65/profile-live-movement-51490741.json'", "'out/r66/baseline.json'")
-          s=s.replace("base: '51490741b5786f59fb3fce2cf36f03343cd3e65c'", "base: '170a60140f6ae10914550a7e254bb320764b0d30'")
-          Path('qa-r65/r66-baseline.generated.mjs').write_text(s)
-          PY
-          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/baseline-http.log 2>&1 &
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          node --test scripts/campaign-balance-r64.cpu.test.mjs
+          python3 scripts/apply-r66.py --site _pages/docs
+          node --test scripts/r66.cpu.test.mjs
+          node verify-pages-r62.mjs _pages
+      - name: Install sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
+      - name: Inspect native boss HUD integration
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          PROFILE_MS=8000 PROFILE_RUNS=2 PROFILE_DETAIL=1 STORYWORLD_URL=http://127.0.0.1:4391/ node qa-r65/r66-baseline.generated.mjs > out/r66/baseline.stdout.json
-          python3 - <<'PY'
-          import json
-          s=json.load(open('out/r66/baseline.json'))
-          for r in s['runs']: print('BASELINE',json.dumps({'run':r['index'],'frames':r['frames'],'browser':r['browserMetrics'],'topFunctions':r['topFunctions'],'pageErrors':r['pageErrors']},ensure_ascii=False))
-          PY
-      - name: Candidate preparation and regression tests
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66-hud-diagnostic.mjs
+      - name: Browser regression
         run: |
-          if [ -f scripts/apply-r66.py ]; then
-            python3 scripts/apply-r66.py --site _pages/docs
-            node verify-pages-r62.mjs _pages
-            node --test scripts/r66.cpu.test.mjs
-            python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/candidate-http.log 2>&1 &
-            SERVER_PID=$!
-            trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-            STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
-          fi
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-regression.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
