@@ -2,7 +2,7 @@
 
 **후보 소스 SHA:** `74e5b53f063d46c78bbd5b2d98acb2f1b7d72616`
 **기준 `origin/main`:** `51490741b5786f59fb3fce2cf36f03343cd3e65c`  
-**상태:** 후보 커밋 로컬 검증 완료, GitHub Pages 배포 대기.
+**상태:** GitHub Pages 배포 완료. Actions run #13 성공.
 
 ## 사용자 PC 보고서 반영
 
@@ -74,6 +74,6 @@ Call tree의 inclusive/total 시간은 호출 계층에서 겹칠 수 있어 합
 
 ## 배포와 다음 진단
 
-이 보고서 작성 시점에는 후보가 로컬 브랜치에 있다. 사용자 요청에 따라 검증·커밋 후 GitHub Pages로 배포한다. Render/중계 서버 설정은 작업 범위에서 제외한다. 공개 Pages 반영 여부와 응답 파일은 push 후 별도로 확인해 기록한다.
+후보 변경은 `74e5b53f063d46c78bbd5b2d98acb2f1b7d72616`에 고정했다. 문서에 SHA를 기록한 `db039378692d7382ac71b30daf52ae9c121da142`를 `main`에 fast-forward로 push했고, [GitHub Pages run #13](https://github.com/kjb7876-lang/m0/actions/runs/39025845620)이 정적 재구성·파일 검증·배포까지 `success`로 끝났다. 공개 게임 주소는 https://kjb7876-lang.github.io/m0/ 이다. 이 실행 환경에서 공개 Pages 본문을 직접 다시 가져오는 요청은 네트워크 프록시의 HTTP 403으로 막혀 HTML 응답 SHA를 별도 대조하지 못했다. GitHub Pages 배포 작업 성공으로 공개 배포 완료를 확인했다. Render/중계 서버 설정은 수정하지 않았다.
 
-실제 PC 원인을 확정하려면 trace 본문을 이 환경에서 읽을 수 있어야 한다. 현재 첨부는 다운로드 경로가 프록시에서 차단돼 분석하지 못했다. 파일을 다시 내보내거나 압축을 풀어 올리면 긴 메인 스레드 작업, WebGL 호출 제출, GPU 대기를 분리해 다음 변경을 결정할 수 있다.
+실제 PC에서 후보 프레임 시간과 GPU 작업을 다시 측정하려면 trace의 빌드 SHA와 구간을 확인하고, 후보 버전으로 같은 장면을 다시 캡처해야 한다. 이번 첨부의 압축 본문은 직접 파싱하지 못했고, 사용자가 전달한 프로파일 화면 수치만 출처와 범위를 명시해 반영했다.

@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R66_FLASHLIGHT_BLACK_MASK_PERF_CANDIDATE_NOT_DEPLOYED",
+  "status": "R66_FLASHLIGHT_BLACK_MASK_PERF_DEPLOYED",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
   "sourceHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc",
@@ -9644,9 +9644,9 @@
     "data/world-v31217.js"
   ],
   "sourceAssetsPruned": "Only known authoring provenance JSON and non-web launch/source tools; all runtime media retained.",
-  "remotePublished": false,
-  "deploymentSHA": "3407b7a53c921b8677cf59c8d2fbfa4493149418",
-  "deploymentUTC": "2026-10-16T20:39:35Z",
+  "remotePublished": true,
+  "deploymentSHA": "db039378692d7382ac71b30daf52ae9c121da142",
+  "deploymentUTC": "2026-10-17T10:43:31Z",
   "gameURL": "https://kjb7876-lang.github.io/m0/",
   "actualFourRemoteNetworksTested": false,
   "browserGPUVerified": false,
