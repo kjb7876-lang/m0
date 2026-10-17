@@ -9486,19 +9486,20 @@ window.__STORYWORLD_CAMPAIGN_DATA_R54__={"schema":"hapil.canonical-campaign-sour
 })();
 </script>
 <script id="presentation-settings-r58">
-/* R58 sight toggle; keep the existing default while saved or chosen values win. */
+/* R58 sight toggle; persist explicit intent separately from per-device defaults. */
 (()=>{'use strict';
  const ua=navigator.userAgent||'',mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1),desktopTouch=/Windows/i.test(ua)&&navigator.maxTouchPoints>0;
  const sightParam=new URL(location.href).searchParams.get('sight'),deviceDefault=mobileDevice,hadInitial=typeof settings.flashlight58==='boolean';
- let settingOrigin=hadInitial?'existing-setting':sightParam!==null?'url-option':'device-default';
+ let flashlightExplicit=sightParam!==null,settingOrigin=hadInitial?'existing-setting':sightParam!==null?'url-option':'device-default';
  if(!hadInitial)settings.flashlight58=sightParam!==null?sightParam!=='full':deviceDefault;
  const showBase=showSettings;showSettings=function(...args){const result=showBase.apply(this,args),grid=document.querySelector('.settings');if(!grid)return result;
   const label=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.id='flashlightModeR58';box.checked=settings.flashlight58!==false;
-  box.onchange=()=>{settings.flashlight58=box.checked;settingOrigin='user-selected';saveGame(false);};label.appendChild(box);const title=document.createElement('span');title.textContent=' 주변만 밝히기 · 손전등 시야';label.appendChild(title);grid.appendChild(label);
+  box.onchange=()=>{settings.flashlight58=box.checked;flashlightExplicit=true;settingOrigin='user-selected';saveGame(false);};label.appendChild(box);const title=document.createElement('span');title.textContent=' 주변만 밝히기 · 손전등 시야';label.appendChild(title);grid.appendChild(label);
   const hint=document.createElement('p');hint.className='small muted';hint.textContent='켜면 플레이어 주변의 시야만 계산하고 표시합니다. 끄면 전체 조명이 켜집니다. 변경은 즉시 적용되고 저장됩니다.';grid.appendChild(hint);return result;
  };
- const restoreBase=restoreSave;restoreSave=async function(raw,...args){const previous=settings.flashlight58,previousOrigin=settingOrigin,saved=typeof raw?.settings?.flashlight58==='boolean';settings.flashlight58=saved?raw.settings.flashlight58:previous;if(saved)settingOrigin='saved-game';try{return await restoreBase.apply(this,[raw,...args]);}catch(error){settings.flashlight58=previous;settingOrigin=previousOrigin;throw error;}};
- window.__STORYWORLD_PRESENTATION_R58__=Object.freeze({get flashlight(){return settings.flashlight58!==false;},setFlashlight(value){settings.flashlight58=!!value;settingOrigin='user-selected';saveGame(false);return settings.flashlight58;},inspect:()=>({flashlight:settings.flashlight58!==false,maskEnabled:window.__STORYWORLD_SIGHT24__?.geometry()?.enabled===true,persistedSetting:'flashlight58',settingOrigin,deviceClass:mobileDevice?'mobile':'desktop',defaultFlashlight:deviceDefault,defaultApplied:!hadInitial&&sightParam===null,desktopTouch,sameMaskForCanvasAndThree:true})});
+ const serializeBase=serializeSave;serializeSave=function(...args){const data=serializeBase.apply(this,args);data.settings={...(data.settings||settings),flashlight58:settings.flashlight58!==false,flashlight58Explicit:flashlightExplicit};return data;};
+ const restoreBase=restoreSave;restoreSave=async function(raw,...args){const previous=settings.flashlight58,previousExplicit=flashlightExplicit,previousOrigin=settingOrigin,saved=typeof raw?.settings?.flashlight58==='boolean',savedExplicit=saved&&raw?.settings?.flashlight58Explicit===true;let nextValue,nextExplicit,nextOrigin;if(savedExplicit){nextValue=raw.settings.flashlight58;nextExplicit=true;nextOrigin='saved-user-selection';}else if(flashlightExplicit){nextValue=previous!==false;nextExplicit=true;nextOrigin=settingOrigin;}else if(sightParam!==null){nextValue=sightParam!=='full';nextExplicit=true;nextOrigin='url-option';}else{nextValue=deviceDefault;nextExplicit=false;nextOrigin='device-default';}try{const result=await restoreBase.apply(this,[raw,...args]);if(result!==false){settings.flashlight58=nextValue;flashlightExplicit=nextExplicit;settingOrigin=nextOrigin;}return result;}catch(error){settings.flashlight58=previous;flashlightExplicit=previousExplicit;settingOrigin=previousOrigin;throw error;}};
+ window.__STORYWORLD_PRESENTATION_R58__=Object.freeze({get flashlight(){return settings.flashlight58!==false;},setFlashlight(value){settings.flashlight58=!!value;flashlightExplicit=true;settingOrigin='user-selected';saveGame(false);return settings.flashlight58;},inspect:()=>({flashlight:settings.flashlight58!==false,maskEnabled:window.__STORYWORLD_SIGHT24__?.geometry()?.enabled===true,persistedSetting:'flashlight58',persistedIntent:'flashlight58Explicit',explicitSelection:flashlightExplicit,settingOrigin,deviceClass:mobileDevice?'mobile':'desktop',defaultFlashlight:deviceDefault,defaultApplied:!hadInitial&&sightParam===null,desktopTouch,sameMaskForCanvasAndThree:true})});
 })();
 </script>
 <script id="status-atlas-r58">
