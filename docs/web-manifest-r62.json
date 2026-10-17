@@ -3,8 +3,8 @@
   "status": "R65_STAGE2_LOCAL_CANDIDATE_NOT_DEPLOYED",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6",
-  "webHTMLSha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6",
+  "sourceHTMLSha256": "370390da0f914127c5e1e14cc0d68c126997a8c25ccdcddc59bb82f581ede68c",
+  "webHTMLSha256": "370390da0f914127c5e1e14cc0d68c126997a8c25ccdcddc59bb82f581ede68c",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9508,13 +9508,13 @@
     },
     {
       "path": "dist/phase1.js",
-      "bytes": 527105,
-      "sha256": "c7b7a55b0615d92eb4dd2fb0a3d3e08b6d4173249f337af9bbc1a0ed16916e1e"
+      "bytes": 530788,
+      "sha256": "38e1f72b602a9d7e61953aee87f640f8bbb4a1957fd09b04face4c6dea9784da"
     },
     {
       "path": "index.html",
-      "bytes": 5969287,
-      "sha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6"
+      "bytes": 5970941,
+      "sha256": "370390da0f914127c5e1e14cc0d68c126997a8c25ccdcddc59bb82f581ede68c"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,12 +9538,12 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464851417,
+  "totalBytes": 464856754,
   "largest": [
     {
       "path": "index.html",
-      "bytes": 5969287,
-      "sha256": "5e6b401ce2ff867d14019661144ed655e9f2a17a3758f8bd8a201b7cb3a855e6"
+      "bytes": 5970941,
+      "sha256": "370390da0f914127c5e1e14cc0d68c126997a8c25ccdcddc59bb82f581ede68c"
     },
     {
       "path": "audio/rc133/processed/bgm/Folding_Space_1-c535f55c.mp3",
