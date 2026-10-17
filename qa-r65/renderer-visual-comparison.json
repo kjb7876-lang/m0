@@ -1,0 +1,76 @@
+{
+  "status": "VISUAL_RENDERER_COMPARISON_CAPTURED",
+  "browser": "151.0.7922.173",
+  "viewport": {
+    "width": 1365,
+    "height": 850,
+    "dpr": 1
+  },
+  "seed": 20261017,
+  "results": [
+    {
+      "mode": "three",
+      "state": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000
+        },
+        "enemies": 6,
+        "props": 15,
+        "time": 7.25,
+        "flashlight": {
+          "flashlight": true,
+          "flashlightStatus": "켜짐 · 주변 시야",
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "desktop",
+          "defaultFlashlight": false,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "renderer": "three"
+      },
+      "pageErrors": [],
+      "screenshot": "/workspace/m0-perf/qa-r65/renderer-quality-three-same-scene.png"
+    },
+    {
+      "mode": "legacy",
+      "state": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000
+        },
+        "enemies": 6,
+        "props": 15,
+        "time": 7.25,
+        "flashlight": {
+          "flashlight": true,
+          "flashlightStatus": "켜짐 · 주변 시야",
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "desktop",
+          "defaultFlashlight": false,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "renderer": "legacy"
+      },
+      "pageErrors": [],
+      "screenshot": "/workspace/m0-perf/qa-r65/renderer-quality-legacy-same-scene.png"
+    }
+  ]
+}

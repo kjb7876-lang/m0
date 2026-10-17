@@ -1,0 +1,185 @@
+{
+  "base": "51490741b5786f59fb3fce2cf36f03343cd3e65c",
+  "browser": "Chromium 151.0.7922.173 headless on execution container; software/emulated rendering; physical GPU and user PC unavailable",
+  "measurement": {
+    "scenario": "dist00/STORY normal, 1365x850 CSS px, DPR 1, new context/new game each run, six actual enemies, flashlight enabled, normal game frame loop, alternating four-direction keyboard movement; no synthetic VFX added; audio muted to keep setup deterministic",
+    "warmupMs": 1500,
+    "measuredMs": 3000,
+    "runs": 1,
+    "caveat": "Headless software timing is not an estimate of physical PC FPS; movement advances through Playwright keyboard events."
+  },
+  "runs": [
+    {
+      "index": 0,
+      "url": "http://127.0.0.1:4392/",
+      "initial": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000
+        },
+        "enemies": 6,
+        "props": 15,
+        "flashlight": {
+          "flashlight": true,
+          "flashlightStatus": "켜짐 · 주변 시야",
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "desktop",
+          "defaultFlashlight": false,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "legacy",
+          "reason": "Software WebGL renderer detected: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "failed": true,
+          "disposed": false,
+          "legacyFrames": 36,
+          "events": [],
+          "chunks": null,
+          "metrics": null,
+          "commandScene": null,
+          "spatial": null,
+          "browserAcceptance": false
+        },
+        "webglRenderer": null,
+        "viewport": {
+          "width": 1365,
+          "height": 850,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 1365,
+          "height": 634
+        }
+      },
+      "movementSteps": 4,
+      "after": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 14.084765530159338,
+          "y": 18.847460921693227,
+          "hp": 26000,
+          "moving": false
+        },
+        "camera": {
+          "x": 14.101730792745926,
+          "y": 18.8644214874071
+        },
+        "enemyPositions": [
+          [
+            "dist00:dist00-boss",
+            24.202247191011242,
+            22.561797752808992,
+            6421.5
+          ],
+          [
+            "dist00:story-patrol:0:0",
+            57.372358681420216,
+            43.09769385713338,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:1",
+            57.64003123427193,
+            43.719618991919205,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:2",
+            38.35196903704867,
+            36.0884740886875,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:0",
+            35.15,
+            17.45,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:1",
+            36,
+            18.9,
+            285
+          ]
+        ],
+        "effects": 0,
+        "projectiles": 0,
+        "flashlight": {
+          "enabled": true,
+          "serial": 32,
+          "radius": 15.290588235294118,
+          "origin": [
+            14.084765530159338,
+            18.847460921693227
+          ],
+          "rays": 129,
+          "cornerCandidates": 119,
+          "cornerBudget": 40,
+          "obstacleSegments": 4,
+          "obstacleBoxes": 333,
+          "obstacleCircles": 0,
+          "raySegments": 1,
+          "rayObstacleBoxes": 41,
+          "rayObstacleCircles": 0,
+          "closedBossRoom": false,
+          "coreVisibilityPolicy": "current position or active/cleared encounter; no saved discovery",
+          "CPUOnlyClaim": true,
+          "GPUVerified": false,
+          "simulationChanged": false,
+          "warningProjectileImpactPreserved": true,
+          "persistedDiscoveryFields": 0
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "legacy",
+          "reason": "Software WebGL renderer detected: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "failed": true,
+          "disposed": false,
+          "legacyFrames": 104,
+          "events": [],
+          "chunks": null,
+          "metrics": null,
+          "commandScene": null,
+          "spatial": null,
+          "browserAcceptance": false
+        },
+        "phases": {}
+      },
+      "frames": {
+        "elapsedMs": 3049.8999999999996,
+        "count": 30,
+        "meanMs": 101.66333333333333,
+        "p50Ms": 100,
+        "p95Ms": 116.69999999999891,
+        "p99Ms": 116.69999999999891,
+        "fpsFromMean": 9.83638807829765,
+        "over33ms": 30,
+        "over50ms": 30
+      },
+      "browserMetrics": {
+        "scriptDurationMs": 821.3580000000001,
+        "taskDurationMs": 3982.6679999999997,
+        "layoutCount": 42,
+        "recalcStyleCount": 53,
+        "jsHeapStartBytes": 50015800,
+        "jsHeapEndBytes": 40708532,
+        "jsHeapDeltaBytes": -9307268,
+        "sampledAllocationBytes": 0
+      },
+      "detailedProfile": false,
+      "topFunctions": [],
+      "pageErrors": []
+    }
+  ]
+}

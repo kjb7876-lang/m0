@@ -1,0 +1,3746 @@
+{
+  "base": "51490741b5786f59fb3fce2cf36f03343cd3e65c",
+  "browser": "Chromium 151.0.7922.173 headless on execution container; software/emulated rendering; physical GPU and user PC unavailable",
+  "measurement": {
+    "scenario": "dist00/STORY normal, 1365x850 CSS px, DPR 1, new context/new game each run, six actual enemies, flashlight enabled, normal game frame loop, alternating four-direction keyboard movement; no synthetic VFX added; audio muted to keep setup deterministic",
+    "warmupMs": 1500,
+    "measuredMs": 3000,
+    "runs": 2,
+    "caveat": "Headless software timing is not an estimate of physical PC FPS; movement advances through Playwright keyboard events."
+  },
+  "runs": [
+    {
+      "index": 0,
+      "url": "http://127.0.0.1:4391/",
+      "initial": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000
+        },
+        "enemies": 6,
+        "props": 15,
+        "flashlight": {
+          "flashlight": true,
+          "flashlightStatus": "켜짐 · 주변 시야",
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "desktop",
+          "defaultFlashlight": false,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 25686,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 37.88542308043485,
+                    "y": 35.411947799651934
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 0,
+            "median": null,
+            "p95": null,
+            "p99": null,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": null
+          },
+          "commandScene": {
+            "created": 239,
+            "removed": 75,
+            "texturesCreated": 24,
+            "texturesDisposed": 14,
+            "geometryComparisons": 1910,
+            "geometryUpdates": 6,
+            "cameraTranslationSkips": 0,
+            "screenPositionUpdates": 0,
+            "sightCacheHits": 0,
+            "styleReplacements": 0,
+            "filterUpdates": 0,
+            "meshes": 164,
+            "textures": 10,
+            "labels": 1,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 8,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": false,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "webglRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "viewport": {
+          "width": 1365,
+          "height": 850,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 1365,
+          "height": 634
+        }
+      },
+      "movementSteps": 4,
+      "after": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 14.084765530159338,
+          "y": 19,
+          "hp": 26000,
+          "moving": false
+        },
+        "camera": {
+          "x": 14.135728132601555,
+          "y": 19.049842947407512
+        },
+        "enemyPositions": [
+          [
+            "dist00:dist00-boss",
+            24.202247191011242,
+            22.561797752808992,
+            6421.5
+          ],
+          [
+            "dist00:story-patrol:0:0",
+            57.80631389551387,
+            43.0493105846915,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:1",
+            58.20297164351565,
+            44.20761179509339,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:2",
+            38.53706925314666,
+            35.754103327703426,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:0",
+            35.15,
+            17.45,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:1",
+            36,
+            18.9,
+            285
+          ]
+        ],
+        "effects": 0,
+        "projectiles": 0,
+        "flashlight": {
+          "enabled": true,
+          "serial": 15,
+          "radius": 15.290588235294118,
+          "origin": [
+            14.084765530159338,
+            19
+          ],
+          "rays": 129,
+          "cornerCandidates": 120,
+          "cornerBudget": 40,
+          "obstacleSegments": 4,
+          "obstacleBoxes": 333,
+          "obstacleCircles": 0,
+          "raySegments": 1,
+          "rayObstacleBoxes": 40,
+          "rayObstacleCircles": 0,
+          "closedBossRoom": false,
+          "coreVisibilityPolicy": "current position or active/cleared encounter; no saved discovery",
+          "CPUOnlyClaim": true,
+          "GPUVerified": false,
+          "simulationChanged": false,
+          "warningProjectileImpactPreserved": true,
+          "persistedDiscoveryFields": 0
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 6421.5,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 38.53194556073259,
+                    "y": 35.71982550615377
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:4,0",
+                []
+              ],
+              [
+                "STORY:dist00:4,1",
+                []
+              ],
+              [
+                "STORY:dist00:4,2",
+                []
+              ],
+              [
+                "STORY:dist00:4,3",
+                []
+              ],
+              [
+                "STORY:dist00:4,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "4,0"
+              },
+              {
+                "type": "request",
+                "key": "4,1"
+              },
+              {
+                "type": "request",
+                "key": "4,2"
+              },
+              {
+                "type": "request",
+                "key": "4,3"
+              },
+              {
+                "type": "request",
+                "key": "4,4"
+              },
+              {
+                "type": "active",
+                "key": "4,0"
+              },
+              {
+                "type": "active",
+                "key": "4,1"
+              },
+              {
+                "type": "active",
+                "key": "4,2"
+              },
+              {
+                "type": "active",
+                "key": "4,3"
+              },
+              {
+                "type": "active",
+                "key": "4,4"
+              },
+              {
+                "type": "release",
+                "key": "4,0"
+              },
+              {
+                "type": "release",
+                "key": "4,1"
+              },
+              {
+                "type": "release",
+                "key": "4,2"
+              },
+              {
+                "type": "release",
+                "key": "4,3"
+              },
+              {
+                "type": "release",
+                "key": "4,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 0,
+            "median": null,
+            "p95": null,
+            "p99": null,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": null
+          },
+          "commandScene": {
+            "created": 564,
+            "removed": 414,
+            "texturesCreated": 33,
+            "texturesDisposed": 26,
+            "geometryComparisons": 5197,
+            "geometryUpdates": 1763,
+            "cameraTranslationSkips": 1173,
+            "screenPositionUpdates": 0,
+            "sightCacheHits": 240,
+            "styleReplacements": 13,
+            "filterUpdates": 0,
+            "meshes": 150,
+            "textures": 7,
+            "labels": 0,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 4,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": true,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "phases": {}
+      },
+      "frames": {
+        "elapsedMs": 3066.6000000000004,
+        "count": 13,
+        "meanMs": 235.89230769230772,
+        "p50Ms": 233.40000000000146,
+        "p95Ms": 266.7000000000007,
+        "p99Ms": 266.7000000000007,
+        "fpsFromMean": 4.239222591795473,
+        "over33ms": 13,
+        "over50ms": 13
+      },
+      "browserMetrics": {
+        "scriptDurationMs": 597.969,
+        "taskDurationMs": 4333.526999999999,
+        "layoutCount": 19,
+        "recalcStyleCount": 20,
+        "jsHeapStartBytes": 70153636,
+        "jsHeapEndBytes": 66077944,
+        "jsHeapDeltaBytes": -4075692,
+        "sampledAllocationBytes": 0
+      },
+      "detailedProfile": false,
+      "topFunctions": [],
+      "pageErrors": []
+    },
+    {
+      "index": 1,
+      "url": "http://127.0.0.1:4391/",
+      "initial": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000
+        },
+        "enemies": 6,
+        "props": 15,
+        "flashlight": {
+          "flashlight": true,
+          "flashlightStatus": "켜짐 · 주변 시야",
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "desktop",
+          "defaultFlashlight": false,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 25686,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 1140,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 37.887581366765225,
+                    "y": 35.41407742651993
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 0,
+            "median": null,
+            "p95": null,
+            "p99": null,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": null
+          },
+          "commandScene": {
+            "created": 239,
+            "removed": 75,
+            "texturesCreated": 24,
+            "texturesDisposed": 14,
+            "geometryComparisons": 1924,
+            "geometryUpdates": 6,
+            "cameraTranslationSkips": 0,
+            "screenPositionUpdates": 0,
+            "sightCacheHits": 0,
+            "styleReplacements": 0,
+            "filterUpdates": 0,
+            "meshes": 164,
+            "textures": 10,
+            "labels": 1,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 8,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": false,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 61,
+            "backdropMeshes": 19,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "webglRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "viewport": {
+          "width": 1365,
+          "height": 850,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 1365,
+          "height": 634
+        }
+      },
+      "movementSteps": 4,
+      "after": {
+        "zone": "dist00",
+        "layer": "STORY",
+        "player": {
+          "x": 15,
+          "y": 19,
+          "hp": 26000,
+          "moving": false
+        },
+        "camera": {
+          "x": 15.050962441271995,
+          "y": 19.049842598434854
+        },
+        "enemyPositions": [
+          [
+            "dist00:dist00-boss",
+            24.202247191011242,
+            22.561797752808992,
+            6421.5
+          ],
+          [
+            "dist00:story-patrol:0:0",
+            57.78601532358012,
+            43.072991373706174,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:1",
+            58.13536897194192,
+            44.153170036108946,
+            285
+          ],
+          [
+            "dist00:story-patrol:0:2",
+            38.539323487824404,
+            35.804839516867816,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:0",
+            35.15,
+            17.45,
+            285
+          ],
+          [
+            "dist00:story-patrol:1:1",
+            36,
+            18.9,
+            285
+          ]
+        ],
+        "effects": 0,
+        "projectiles": 0,
+        "flashlight": {
+          "enabled": true,
+          "serial": 17,
+          "radius": 15.290588235294118,
+          "origin": [
+            15,
+            19
+          ],
+          "rays": 122,
+          "cornerCandidates": 125,
+          "cornerBudget": 40,
+          "obstacleSegments": 4,
+          "obstacleBoxes": 333,
+          "obstacleCircles": 0,
+          "raySegments": 1,
+          "rayObstacleBoxes": 40,
+          "rayObstacleCircles": 0,
+          "closedBossRoom": false,
+          "coreVisibilityPolicy": "current position or active/cleared encounter; no saved discovery",
+          "CPUOnlyClaim": true,
+          "GPUVerified": false,
+          "simulationChanged": false,
+          "warningProjectileImpactPreserved": true,
+          "persistedDiscoveryFields": 0
+        },
+        "renderer": {
+          "requested": "three",
+          "active": "three",
+          "reason": "Full compiled region path / eight heroes and preserved EGO; GPU unverified",
+          "failed": false,
+          "disposed": false,
+          "legacyFrames": 0,
+          "events": [],
+          "chunks": {
+            "zone": "STORY:dist00",
+            "active": [
+              "0,0",
+              "1,0",
+              "2,0",
+              "0,1",
+              "1,1",
+              "2,1",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,0",
+              "3,1",
+              "3,2",
+              "0,3",
+              "1,3",
+              "2,3",
+              "3,3",
+              "0,4",
+              "1,4",
+              "2,4",
+              "3,4",
+              "4,0",
+              "4,1",
+              "4,2",
+              "4,3",
+              "4,4"
+            ],
+            "states": [
+              {
+                "key": "0,0",
+                "status": "active"
+              },
+              {
+                "key": "1,0",
+                "status": "active"
+              },
+              {
+                "key": "2,0",
+                "status": "active"
+              },
+              {
+                "key": "0,1",
+                "status": "active"
+              },
+              {
+                "key": "1,1",
+                "status": "active"
+              },
+              {
+                "key": "2,1",
+                "status": "active"
+              },
+              {
+                "key": "0,2",
+                "status": "active"
+              },
+              {
+                "key": "1,2",
+                "status": "active"
+              },
+              {
+                "key": "2,2",
+                "status": "active"
+              },
+              {
+                "key": "3,0",
+                "status": "active"
+              },
+              {
+                "key": "3,1",
+                "status": "active"
+              },
+              {
+                "key": "3,2",
+                "status": "active"
+              },
+              {
+                "key": "0,3",
+                "status": "active"
+              },
+              {
+                "key": "1,3",
+                "status": "active"
+              },
+              {
+                "key": "2,3",
+                "status": "active"
+              },
+              {
+                "key": "3,3",
+                "status": "active"
+              },
+              {
+                "key": "0,4",
+                "status": "active"
+              },
+              {
+                "key": "1,4",
+                "status": "active"
+              },
+              {
+                "key": "2,4",
+                "status": "active"
+              },
+              {
+                "key": "3,4",
+                "status": "active"
+              },
+              {
+                "key": "4,0",
+                "status": "active"
+              },
+              {
+                "key": "4,1",
+                "status": "active"
+              },
+              {
+                "key": "4,2",
+                "status": "active"
+              },
+              {
+                "key": "4,3",
+                "status": "active"
+              },
+              {
+                "key": "4,4",
+                "status": "active"
+              }
+            ],
+            "saved": [
+              [
+                "STORY:hub:0,0",
+                []
+              ],
+              [
+                "STORY:hub:1,0",
+                []
+              ],
+              [
+                "STORY:hub:2,0",
+                []
+              ],
+              [
+                "STORY:hub:0,1",
+                []
+              ],
+              [
+                "STORY:hub:1,1",
+                []
+              ],
+              [
+                "STORY:hub:2,1",
+                []
+              ],
+              [
+                "STORY:hub:0,2",
+                []
+              ],
+              [
+                "STORY:hub:1,2",
+                []
+              ],
+              [
+                "STORY:hub:2,2",
+                []
+              ],
+              [
+                "STORY:hub:3,0",
+                []
+              ],
+              [
+                "STORY:hub:3,1",
+                []
+              ],
+              [
+                "STORY:hub:3,2",
+                []
+              ],
+              [
+                "STORY:hub:0,3",
+                []
+              ],
+              [
+                "STORY:hub:1,3",
+                []
+              ],
+              [
+                "STORY:hub:2,3",
+                []
+              ],
+              [
+                "STORY:hub:3,3",
+                []
+              ],
+              [
+                "STORY:hub:0,4",
+                []
+              ],
+              [
+                "STORY:hub:1,4",
+                []
+              ],
+              [
+                "STORY:hub:2,4",
+                []
+              ],
+              [
+                "STORY:hub:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:0,0",
+                []
+              ],
+              [
+                "STORY:dist00:1,0",
+                []
+              ],
+              [
+                "STORY:dist00:2,0",
+                []
+              ],
+              [
+                "STORY:dist00:0,1",
+                []
+              ],
+              [
+                "STORY:dist00:1,1",
+                []
+              ],
+              [
+                "STORY:dist00:2,1",
+                []
+              ],
+              [
+                "STORY:dist00:0,2",
+                []
+              ],
+              [
+                "STORY:dist00:1,2",
+                []
+              ],
+              [
+                "STORY:dist00:2,2",
+                [
+                  {
+                    "id": "dist00:dist00-boss",
+                    "hp": 6421.5,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 24.202247191011242,
+                    "y": 22.561797752808992
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,0",
+                []
+              ],
+              [
+                "STORY:dist00:3,1",
+                [
+                  {
+                    "id": "dist00:story-patrol:1:0",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 35.15,
+                    "y": 17.45
+                  },
+                  {
+                    "id": "dist00:story-patrol:1:1",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "hidden",
+                    "x": 36,
+                    "y": 18.9
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:3,2",
+                []
+              ],
+              [
+                "STORY:dist00:0,3",
+                []
+              ],
+              [
+                "STORY:dist00:1,3",
+                []
+              ],
+              [
+                "STORY:dist00:2,3",
+                []
+              ],
+              [
+                "STORY:dist00:3,3",
+                [
+                  {
+                    "id": "dist00:story-patrol:0:2",
+                    "hp": 285,
+                    "deadRecorded": false,
+                    "spawnState": "active",
+                    "x": 38.53678791456449,
+                    "y": 35.752935296575856
+                  }
+                ]
+              ],
+              [
+                "STORY:dist00:0,4",
+                []
+              ],
+              [
+                "STORY:dist00:1,4",
+                []
+              ],
+              [
+                "STORY:dist00:2,4",
+                []
+              ],
+              [
+                "STORY:dist00:3,4",
+                []
+              ],
+              [
+                "STORY:dist00:4,0",
+                []
+              ],
+              [
+                "STORY:dist00:4,1",
+                []
+              ],
+              [
+                "STORY:dist00:4,2",
+                []
+              ],
+              [
+                "STORY:dist00:4,3",
+                []
+              ],
+              [
+                "STORY:dist00:4,4",
+                []
+              ]
+            ],
+            "audit": [
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "release",
+                "key": "0,0"
+              },
+              {
+                "type": "release",
+                "key": "1,0"
+              },
+              {
+                "type": "release",
+                "key": "2,0"
+              },
+              {
+                "type": "release",
+                "key": "0,1"
+              },
+              {
+                "type": "release",
+                "key": "1,1"
+              },
+              {
+                "type": "release",
+                "key": "2,1"
+              },
+              {
+                "type": "release",
+                "key": "0,2"
+              },
+              {
+                "type": "release",
+                "key": "1,2"
+              },
+              {
+                "type": "release",
+                "key": "2,2"
+              },
+              {
+                "type": "release",
+                "key": "3,0"
+              },
+              {
+                "type": "release",
+                "key": "3,1"
+              },
+              {
+                "type": "release",
+                "key": "3,2"
+              },
+              {
+                "type": "release",
+                "key": "0,3"
+              },
+              {
+                "type": "release",
+                "key": "1,3"
+              },
+              {
+                "type": "release",
+                "key": "2,3"
+              },
+              {
+                "type": "release",
+                "key": "3,3"
+              },
+              {
+                "type": "release",
+                "key": "0,4"
+              },
+              {
+                "type": "release",
+                "key": "1,4"
+              },
+              {
+                "type": "release",
+                "key": "2,4"
+              },
+              {
+                "type": "release",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "0,0"
+              },
+              {
+                "type": "request",
+                "key": "1,0"
+              },
+              {
+                "type": "request",
+                "key": "2,0"
+              },
+              {
+                "type": "request",
+                "key": "0,1"
+              },
+              {
+                "type": "request",
+                "key": "1,1"
+              },
+              {
+                "type": "request",
+                "key": "2,1"
+              },
+              {
+                "type": "request",
+                "key": "0,2"
+              },
+              {
+                "type": "request",
+                "key": "1,2"
+              },
+              {
+                "type": "request",
+                "key": "2,2"
+              },
+              {
+                "type": "request",
+                "key": "3,0"
+              },
+              {
+                "type": "request",
+                "key": "3,1"
+              },
+              {
+                "type": "request",
+                "key": "3,2"
+              },
+              {
+                "type": "request",
+                "key": "0,3"
+              },
+              {
+                "type": "request",
+                "key": "1,3"
+              },
+              {
+                "type": "request",
+                "key": "2,3"
+              },
+              {
+                "type": "request",
+                "key": "3,3"
+              },
+              {
+                "type": "request",
+                "key": "0,4"
+              },
+              {
+                "type": "request",
+                "key": "1,4"
+              },
+              {
+                "type": "request",
+                "key": "2,4"
+              },
+              {
+                "type": "request",
+                "key": "3,4"
+              },
+              {
+                "type": "active",
+                "key": "0,0"
+              },
+              {
+                "type": "active",
+                "key": "1,0"
+              },
+              {
+                "type": "active",
+                "key": "2,0"
+              },
+              {
+                "type": "active",
+                "key": "0,1"
+              },
+              {
+                "type": "active",
+                "key": "1,1"
+              },
+              {
+                "type": "active",
+                "key": "2,1"
+              },
+              {
+                "type": "active",
+                "key": "0,2"
+              },
+              {
+                "type": "active",
+                "key": "1,2"
+              },
+              {
+                "type": "active",
+                "key": "2,2"
+              },
+              {
+                "type": "active",
+                "key": "3,0"
+              },
+              {
+                "type": "active",
+                "key": "3,1"
+              },
+              {
+                "type": "active",
+                "key": "3,2"
+              },
+              {
+                "type": "active",
+                "key": "0,3"
+              },
+              {
+                "type": "active",
+                "key": "1,3"
+              },
+              {
+                "type": "active",
+                "key": "2,3"
+              },
+              {
+                "type": "active",
+                "key": "3,3"
+              },
+              {
+                "type": "active",
+                "key": "0,4"
+              },
+              {
+                "type": "active",
+                "key": "1,4"
+              },
+              {
+                "type": "active",
+                "key": "2,4"
+              },
+              {
+                "type": "active",
+                "key": "3,4"
+              },
+              {
+                "type": "request",
+                "key": "4,0"
+              },
+              {
+                "type": "request",
+                "key": "4,1"
+              },
+              {
+                "type": "request",
+                "key": "4,2"
+              },
+              {
+                "type": "request",
+                "key": "4,3"
+              },
+              {
+                "type": "request",
+                "key": "4,4"
+              },
+              {
+                "type": "active",
+                "key": "4,0"
+              },
+              {
+                "type": "active",
+                "key": "4,1"
+              },
+              {
+                "type": "active",
+                "key": "4,2"
+              },
+              {
+                "type": "active",
+                "key": "4,3"
+              },
+              {
+                "type": "active",
+                "key": "4,4"
+              }
+            ]
+          },
+          "metrics": {
+            "samples": 0,
+            "median": null,
+            "p95": null,
+            "p99": null,
+            "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+            "last": null
+          },
+          "commandScene": {
+            "created": 633,
+            "removed": 472,
+            "texturesCreated": 34,
+            "texturesDisposed": 27,
+            "geometryComparisons": 5549,
+            "geometryUpdates": 2101,
+            "cameraTranslationSkips": 1180,
+            "screenPositionUpdates": 0,
+            "sightCacheHits": 270,
+            "styleReplacements": 12,
+            "filterUpdates": 0,
+            "meshes": 161,
+            "textures": 7,
+            "labels": 0,
+            "execution": "real Three CPU scene; GPU unverified",
+            "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+            "depthBodies": 4,
+            "lightCasters": 0
+          },
+          "spatial": {
+            "regional55": {
+              "profile": "forest",
+              "arches": 1,
+              "dress": 9,
+              "isolatedMipmaps": true,
+              "staticLighting": true,
+              "collisionChanged": false,
+              "GPUVerified": false
+            },
+            "regionalLightAnchor55": [
+              27,
+              0,
+              18
+            ],
+            "sight24": {
+              "enabled": true,
+              "sharedSingleMask": true,
+              "GPUVerified": false
+            },
+            "normalSurface23": {
+              "built": 0,
+              "refused": 0,
+              "actualFloor": false,
+              "actualWall": false,
+              "GPUVerified": false
+            },
+            "hospitalVisualRevision": "hospital-door-comfort-r35",
+            "hospitalDoorDetails37": false,
+            "hospitalLightAnchor37": null,
+            "wallComfort37": {
+              "normalScale": 0,
+              "emissiveShare": 1,
+              "staticHospitalDirection": true
+            },
+            "wallComfort49": {
+              "isolatedWallMipmaps": false,
+              "mipFilter": "LinearMipmapLinearFilter",
+              "normalLighting": false,
+              "geometryChanged": false,
+              "GPUVerified": false
+            },
+            "hospitalJunctions34": 0,
+            "doorWallCut34": null,
+            "hospitalFloorReady": false,
+            "hospitalRoomsReady": false,
+            "hospitalRoomPieces": 0,
+            "hospitalCutWalls": 0,
+            "defaultDepth": true,
+            "physicalStructures": true,
+            "terrainMeshes": 107,
+            "backdropMeshes": 24,
+            "fogRimMeshes": 0,
+            "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+            "contactShadows": "reduced original ellipses in background pass",
+            "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+            "casterBudget": 0,
+            "casterCount": 0,
+            "shadowMapEnabled": false,
+            "shadowMapSize": 0,
+            "height": {
+              "height": 0,
+              "surfaceId": "original-ground",
+              "presentationOnly": true,
+              "collisionHeightSupported": false
+            },
+            "originalMapReprojectedAsFloor": false,
+            "originalMapBridgeProjectedAsFloor": false,
+            "apronScope30": "native east connectors and hospital south connector; panorama still original",
+            "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+            "bridgeMeshes": 0,
+            "sourcePavingAxesPreserved": true,
+            "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+            "GPUVerified": false,
+            "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+          },
+          "browserAcceptance": false
+        },
+        "phases": {}
+      },
+      "frames": {
+        "elapsedMs": 3249.8999999999996,
+        "count": 14,
+        "meanMs": 232.13571428571427,
+        "p50Ms": 200,
+        "p95Ms": 300,
+        "p99Ms": 300,
+        "fpsFromMean": 4.30782485614942,
+        "over33ms": 14,
+        "over50ms": 14
+      },
+      "browserMetrics": {
+        "scriptDurationMs": 640.486,
+        "taskDurationMs": 4835.684,
+        "layoutCount": 21,
+        "recalcStyleCount": 22,
+        "jsHeapStartBytes": 48921324,
+        "jsHeapEndBytes": 77129452,
+        "jsHeapDeltaBytes": 28208128,
+        "sampledAllocationBytes": 0
+      },
+      "detailedProfile": false,
+      "topFunctions": [],
+      "pageErrors": []
+    }
+  ]
+}

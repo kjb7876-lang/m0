@@ -1,0 +1,569 @@
+{
+  "status": "LOCAL_CANDIDATE_NOT_DEPLOYED",
+  "base_commit": "51490741b5786f59fb3fce2cf36f03343cd3e65c",
+  "candidate_code_commit": "b48b49666c8556f790c04735a8680646a41782a9",
+  "branch": "work/storyworld-r65-perf-debug-20261017",
+  "user_pc_gpu_report": {
+    "browser": "Microsoft Edge 154.0.4258.37",
+    "os": "Windows 10.0.26200.9550",
+    "gpu": "NVIDIA GeForce RTX 4060 Ti; ACTIVE",
+    "gl_renderer": "ANGLE (NVIDIA GeForce RTX 4060 Ti, Direct3D11)",
+    "hardware_acceleration": {
+      "WebGL": true,
+      "Canvas": true,
+      "Compositing": true,
+      "Rasterization": true
+    },
+    "gpu_process_crashes": 0,
+    "source": "user-provided about:gpu report in ChatGPT Library",
+    "actual_performance_trace_received": true,
+    "actual_performance_trace_read_successfully": false
+  },
+  "container_profile_environment": "Chromium 151.0.7922.173 headless, ANGLE/Vulkan SwiftShader; software rendering, not a physical GPU and not representative of user Edge GPU.",
+  "scenario": "dist00/STORY normal, 1365x850 CSS px, DPR1, six enemies, flashlight on, alternating four-direction keyboard movement; new context/game each run; 1.5s warmup, 3s measurement.",
+  "movement_frame_measurement": {
+    "baseline_runs": [
+      {
+        "file": "qa-r65/profile-live-movement-51490741-three-clean.json",
+        "fps": 4.592071024031836,
+        "p50_ms": 200,
+        "p95_ms": 266.6999999999989,
+        "heap_delta_bytes": 1917176
+      },
+      {
+        "file": "qa-r65/profile-live-movement-three-clean-repeat.json",
+        "fps": 4.239222591795473,
+        "p50_ms": 233.40000000000146,
+        "p95_ms": 266.7000000000007,
+        "heap_delta_bytes": -4075692
+      },
+      {
+        "file": "qa-r65/profile-live-movement-three-clean-repeat.json",
+        "fps": 4.30782485614942,
+        "p50_ms": 200,
+        "p95_ms": 300,
+        "heap_delta_bytes": 28208128
+      }
+    ],
+    "candidate_runs": [
+      {
+        "file": "qa-r66/profile-live-movement-final-clean.json",
+        "fps": 4.736941830354326,
+        "p50_ms": 183.39999999999964,
+        "p95_ms": 266.7000000000007,
+        "heap_delta_bytes": 23906504
+      },
+      {
+        "file": "qa-r66/profile-live-movement-final-clean.json",
+        "fps": 3.7502343896493517,
+        "p50_ms": 233.3000000000011,
+        "p95_ms": 349.89999999999964,
+        "heap_delta_bytes": 12113492
+      },
+      {
+        "file": "qa-r66/profile-live-movement-final-clean.json",
+        "fps": 4.492218835231831,
+        "p50_ms": 200.10000000000036,
+        "p95_ms": 266.7000000000007,
+        "heap_delta_bytes": 28102900
+      }
+    ],
+    "median": {
+      "fps_baseline": 4.3078,
+      "fps_candidate": 4.4922,
+      "fps_change_percent": 4.28,
+      "p50_ms_baseline": 200,
+      "p50_ms_candidate": 200.1,
+      "p95_ms_baseline": 266.7,
+      "p95_ms_candidate": 266.7
+    },
+    "conclusion": "FPS sample distributions overlap; p50/p95 medians unchanged. Do not claim user PC lag resolved."
+  },
+  "instrumented_draw_profile": {
+    "baseline_vs_candidate": [
+      {
+        "label": "baseline",
+        "runs": [
+          {
+            "p50_ms": 74.5,
+            "p95_ms": 123.30000000074506,
+            "mean_ms": 69.62,
+            "page_errors": []
+          },
+          {
+            "p50_ms": 65.69999999925494,
+            "p95_ms": 95.40000000223517,
+            "mean_ms": 59.12400000020862,
+            "page_errors": []
+          },
+          {
+            "p50_ms": 69.30000000074506,
+            "p95_ms": 109.69999999925494,
+            "mean_ms": 62.791999999433756,
+            "page_errors": []
+          }
+        ],
+        "medians": {
+          "p50_ms": 69.3,
+          "p95_ms": 109.7,
+          "mean_ms": 62.792
+        }
+      },
+      {
+        "label": "candidate",
+        "runs": [
+          {
+            "p50_ms": 72.40000000223517,
+            "p95_ms": 103.80000000074506,
+            "mean_ms": 62.74400000005961,
+            "page_errors": []
+          },
+          {
+            "p50_ms": 70.69999999925494,
+            "p95_ms": 103.19999999925494,
+            "mean_ms": 61.927999999523166,
+            "page_errors": []
+          },
+          {
+            "p50_ms": 71.40000000223517,
+            "p95_ms": 99.69999999925494,
+            "mean_ms": 63.93200000062585,
+            "page_errors": []
+          }
+        ],
+        "medians": {
+          "p50_ms": 71.4,
+          "p95_ms": 103.2,
+          "mean_ms": 62.744
+        }
+      }
+    ],
+    "conclusion": "Headless software timing; mean/p50/p95 changes are not consistent enough to claim full draw speedup."
+  },
+  "capture_visual_cpu_only": {
+    "balanced_runs": [
+      {
+        "name": "baseline",
+        "url": "http://127.0.0.1:4391/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 2.528124999953434,
+        "p50Ms": 2.300000000745058,
+        "p95Ms": 3.400000002235174,
+        "minMs": 2,
+        "maxMs": 4.5,
+        "samplesMs": [
+          4.100000001490116,
+          2.300000000745058,
+          2.199999999254942,
+          2.300000000745058,
+          2.699999999254942,
+          3.399999998509884,
+          2.400000002235174,
+          2.5,
+          2.300000000745058,
+          2.599999997764826,
+          2.300000000745058,
+          2.399999998509884,
+          2.199999999254942,
+          3.400000002235174,
+          2.2999999970197678,
+          2.2000000029802322,
+          2.099999997764826,
+          2,
+          2,
+          2.400000002235174,
+          2.300000000745058,
+          2.2999999970197678,
+          2.2000000029802322,
+          2.5,
+          2.099999997764826,
+          2.199999999254942,
+          3.199999999254942,
+          4.5,
+          3,
+          2,
+          2.300000000745058,
+          2.199999999254942
+        ],
+        "pageErrors": []
+      },
+      {
+        "name": "candidate",
+        "url": "http://127.0.0.1:4392/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 2.6750000001629815,
+        "p50Ms": 2.399999998509884,
+        "p95Ms": 3.600000001490116,
+        "minMs": 2.099999997764826,
+        "maxMs": 5.600000001490116,
+        "samplesMs": [
+          3.400000002235174,
+          2.300000000745058,
+          2.600000001490116,
+          2.300000000745058,
+          2.400000002235174,
+          2.199999999254942,
+          4.099999997764826,
+          3,
+          2.5,
+          2.600000001490116,
+          2.100000001490116,
+          2.7999999970197678,
+          5.600000001490116,
+          3.5,
+          2.300000000745058,
+          2.399999998509884,
+          2.199999999254942,
+          2.2000000029802322,
+          2.2999999970197678,
+          2.400000002235174,
+          3.5,
+          2.300000000745058,
+          2.100000001490116,
+          2.199999999254942,
+          2.399999998509884,
+          2.600000001490116,
+          3.600000001490116,
+          2.099999997764826,
+          3,
+          2.300000000745058,
+          2.099999997764826,
+          2.199999999254942
+        ],
+        "pageErrors": []
+      },
+      {
+        "name": "candidate",
+        "url": "http://127.0.0.1:4392/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 2.724999999976717,
+        "p50Ms": 2.599999997764826,
+        "p95Ms": 3.300000000745058,
+        "minMs": 2.099999997764826,
+        "maxMs": 5.099999997764826,
+        "samplesMs": [
+          2.399999998509884,
+          2.5,
+          2.399999998509884,
+          2.699999999254942,
+          2.600000001490116,
+          2.599999997764826,
+          3,
+          2.5,
+          2.2000000029802322,
+          2.099999997764826,
+          2.099999997764826,
+          4.5,
+          2.400000002235174,
+          2.399999998509884,
+          2.800000000745058,
+          2.5,
+          2.300000000745058,
+          2.199999999254942,
+          2.100000001490116,
+          2.5,
+          2.600000001490116,
+          2.800000000745058,
+          2.600000001490116,
+          5.099999997764826,
+          2.900000002235174,
+          3.300000000745058,
+          2.699999999254942,
+          2.399999998509884,
+          2.800000000745058,
+          2.900000002235174,
+          3.099999997764826,
+          3.199999999254942
+        ],
+        "pageErrors": []
+      },
+      {
+        "name": "baseline",
+        "url": "http://127.0.0.1:4391/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 2.362500000046566,
+        "p50Ms": 2.2000000029802322,
+        "p95Ms": 3,
+        "minMs": 2.099999997764826,
+        "maxMs": 3.300000000745058,
+        "samplesMs": [
+          2.199999999254942,
+          2.199999999254942,
+          2.100000001490116,
+          2.199999999254942,
+          2.199999999254942,
+          3.300000000745058,
+          2.699999999254942,
+          2.300000000745058,
+          2.199999999254942,
+          2.199999999254942,
+          2.199999999254942,
+          2.2000000029802322,
+          2.5,
+          2.199999999254942,
+          2.199999999254942,
+          2.5,
+          2.300000000745058,
+          2.5,
+          2.800000000745058,
+          2.399999998509884,
+          2.100000001490116,
+          2.100000001490116,
+          2.199999999254942,
+          2.300000000745058,
+          2.300000000745058,
+          2.2999999970197678,
+          2.300000000745058,
+          2.100000001490116,
+          2.300000000745058,
+          2.099999997764826,
+          3.100000001490116,
+          3
+        ],
+        "pageErrors": []
+      },
+      {
+        "name": "baseline",
+        "url": "http://127.0.0.1:4391/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 4.818750000093132,
+        "p50Ms": 2.600000001490116,
+        "p95Ms": 4.399999998509884,
+        "minMs": 2.100000001490116,
+        "maxMs": 60.900000002235174,
+        "samplesMs": [
+          2.400000002235174,
+          3.5,
+          2.900000002235174,
+          2.599999997764826,
+          2.100000001490116,
+          2.699999999254942,
+          4.399999998509884,
+          3.100000001490116,
+          2.599999997764826,
+          2.5,
+          2.2000000029802322,
+          2.2999999970197678,
+          2.2000000029802322,
+          2.599999997764826,
+          2.100000001490116,
+          2.300000000745058,
+          2.199999999254942,
+          2.199999999254942,
+          2.5,
+          8,
+          4.199999999254942,
+          4,
+          3.800000000745058,
+          4.299999997019768,
+          60.900000002235174,
+          3.300000000745058,
+          2.600000001490116,
+          2.699999999254942,
+          2.699999999254942,
+          2.300000000745058,
+          2.600000001490116,
+          3.399999998509884
+        ],
+        "pageErrors": []
+      },
+      {
+        "name": "candidate",
+        "url": "http://127.0.0.1:4392/",
+        "scenario": "dist00/STORY normal; 1365x850 DPR1; stable player at x15/y19; captureVisual records commands and does not execute Three/WebGL rendering",
+        "iterations": 32,
+        "commandCount": 207,
+        "kindCounts": {
+          "fill": 18,
+          "image": 189
+        },
+        "meanMs": 2.3593749998835847,
+        "p50Ms": 2.2999999970197678,
+        "p95Ms": 3.100000001490116,
+        "minMs": 2,
+        "maxMs": 3.300000000745058,
+        "samplesMs": [
+          2.100000001490116,
+          2.399999998509884,
+          2.399999998509884,
+          2.5,
+          2.600000001490116,
+          2.199999999254942,
+          3.300000000745058,
+          3.300000000745058,
+          2.199999999254942,
+          2.199999999254942,
+          2,
+          2.2999999970197678,
+          2.199999999254942,
+          2,
+          2,
+          2.100000001490116,
+          2.2999999970197678,
+          2.099999997764826,
+          2.400000002235174,
+          2.399999998509884,
+          3.100000001490116,
+          2.199999999254942,
+          2.300000000745058,
+          2.100000001490116,
+          2,
+          2.2000000029802322,
+          2.7999999970197678,
+          2.300000000745058,
+          2.300000000745058,
+          2.300000000745058,
+          2.699999999254942,
+          2.199999999254942
+        ],
+        "pageErrors": []
+      }
+    ],
+    "summary": {
+      "baseline": {
+        "contexts": 3,
+        "commandCountSet": [
+          207
+        ],
+        "medianOfContextP50Ms": 2.300000000745058,
+        "medianOfContextP95Ms": 3.400000002235174,
+        "medianOfContextMeanMs": 2.528124999953434
+      },
+      "candidate": {
+        "contexts": 3,
+        "commandCountSet": [
+          207
+        ],
+        "medianOfContextP50Ms": 2.399999998509884,
+        "medianOfContextP95Ms": 3.300000000745058,
+        "medianOfContextMeanMs": 2.6750000001629815
+      }
+    },
+    "scope": "Calls exposed captureVisual directly; excludes Three/WebGL render."
+  },
+  "render_counters_after_candidate": {
+    "command_meshes": 161,
+    "textures": 7,
+    "geometry_updates_cumulative": 2101,
+    "geometry_comparisons_cumulative": 5514,
+    "camera_translation_comparisons_cumulative": 3275,
+    "note": "Cumulative after page setup/warmup and movement, not per-second counts or measured WebGL draw calls."
+  },
+  "screen_position_attribute_memory": {
+    "baseline_estimated_bytes": 40392,
+    "candidate_observed_bytes": 1200,
+    "change_percent": -97.03,
+    "note": "Scene attribute array estimate only; not total JS/GPU memory."
+  },
+  "cpu_regression": {
+    "status": "passed",
+    "camera_pan_steps": 200000,
+    "recenter_at_step": 100000,
+    "max_coordinate_error_px": 7.324218927351467e-06,
+    "geometry_comparisons": 0,
+    "camera_translation_comparisons": 200000,
+    "zero_filtered_ray_counts_preserved": true
+  },
+  "browser_visual_and_flashlight": {
+    "visual_scenario_results": [
+      {
+        "mode": "three",
+        "errors": [],
+        "screenshot": "/workspace/m0-perf/qa-r66/renderer-quality-three-capture-allocation.png"
+      },
+      {
+        "mode": "legacy",
+        "errors": [],
+        "screenshot": "/workspace/m0-perf/qa-r66/renderer-quality-legacy-capture-allocation.png"
+      }
+    ],
+    "flashlight_visual_difference_fraction": 0.67430580872524,
+    "flashlight_errors": [],
+    "physical_device_test": false
+  },
+  "cooperative_regression": {
+    "status": "passed",
+    "scope": "local two-page client simulation only; no relay/server/network connection",
+    "errors": []
+  },
+  "static_build": {
+    "status": "R62_RUNTIME_RECONSTRUCTION_PASSED",
+    "runtime_files": 1906,
+    "site_files": 1908,
+    "archives": 87,
+    "head_checks": 1906,
+    "audio_range_checks": 276
+  },
+  "deployment": {
+    "main_merged": false,
+    "pushed": false,
+    "pages_redeployed": false,
+    "render_or_relay_changed": false,
+    "public_pages_bytes_verified": false
+  },
+  "screenshots": [
+    {
+      "path": "/workspace/m0-perf/qa-r66/renderer-quality-three-capture-allocation.png",
+      "bytes": 1606083,
+      "sha256": "2dab563227c633401e7d7db6fd917bdb794078cae5e6d1c33956e2bbb3d49bbb"
+    },
+    {
+      "path": "/workspace/m0-perf/qa-r66/renderer-quality-legacy-capture-allocation.png",
+      "bytes": 1831246,
+      "sha256": "ad9b027581de8bf4363e7dc8f6dedd28a7799299f592cf93a4f01c5e90f65d13"
+    },
+    {
+      "path": "/workspace/m0-perf/qa-r66/flashlight/flashlight-on-mobile-portrait.png",
+      "bytes": 1048946,
+      "sha256": "2986dd916adff5f91e81924558bc950093ff87c86930c203e35d4a3398808044"
+    },
+    {
+      "path": "/workspace/m0-perf/qa-r66/flashlight/flashlight-off-mobile-landscape.png",
+      "bytes": 1462692,
+      "sha256": "20f6cce4a61dc51ad6877b1d449557925516927d03a3b42dd06979d901a820e9"
+    },
+    {
+      "path": "/workspace/m0-perf/qa-r66/flashlight/flashlight-settings-mobile.png",
+      "bytes": 435806,
+      "sha256": "31eeb3abba6b741d48664f7e93d80c7e7bd7b1e78c7707914ad78df676ada069"
+    }
+  ],
+  "trace_attachment": {
+    "file_name": "Trace-20261017T184402.json.gz",
+    "reported_size_bytes": 35446091,
+    "downloaded": false,
+    "parse_status": "not_parsed",
+    "blocker": "Network proxy rejected the signed attachment download with HTTP 403 (CONNECT tunnel blocked).",
+    "instruction_handling": "Attachment contents were treated as user-provided data; no embedded instructions were followed."
+  }
+}
