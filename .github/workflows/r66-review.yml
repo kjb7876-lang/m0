@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   review:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
@@ -20,57 +20,43 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct approved runtime
-        run: python3 scripts/unpack-runtime-r62.py --output _pages/docs
-      - name: Inspect exact EGO and skill integration
+      - name: Reconstruct baseline runtime
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          s=Path('docs/index.html').read_text()
-          for term in ('let ego151','const ego151','__STORYWORLD_EGO151__=','__STORYWORLD_EGO151__ =','targetCooldowns=new','function cast(manual','bossTitle','threadCrossR64','threadSkill','function frame','function fx(','function loadImage'):
-            matches=list(re.finditer(re.escape(term),s))
-            print('\n=== NATIVE ANCHOR',term,'COUNT',len(matches),'===')
-            for m in matches[:2]: print(s[max(0,m.start()-100):m.start()+2600])
-          print('SCRIPT_IDS',re.findall(r'<script[^>]*id=[\"\x27]([^\"\x27]+)',s))
-          print('CAMPAIGN_SOURCE_EXACT_EMBED',Path('client-source/campaign-combat-r63r1.js').read_text() in s)
-          print('CAMERA_SOURCE_EXACT_EMBED',Path('client-source/camera-r63r1.js').read_text() in s)
-          PY
-      - name: Existing campaign regressions and Pages integrity
-        run: |
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
           node --test scripts/campaign-balance-r64.cpu.test.mjs
           node verify-pages-r62.mjs _pages
-      - name: Install isolated browser test dependency
+      - name: Install browser test dependency
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Baseline native movement measurement
+      - name: Measure baseline with sandbox enabled
         run: |
-          mkdir -p qa-r66
+          mkdir -p out/r66
           python3 - <<'PY'
           from pathlib import Path
           s=Path('qa-r65/profile-live-movement.mjs').read_text()
           s=s.replace("executablePath: '/usr/bin/chromium',", "chromiumSandbox: true,")
           s=s.replace("args: ['--no-sandbox', '--disable-dev-shm-usage']", "args: ['--disable-dev-shm-usage']")
-          s=s.replace("'qa-r65/profile-live-movement-51490741.json'", "'qa-r66/baseline.json'")
+          s=s.replace("'qa-r65/profile-live-movement-51490741.json'", "'out/r66/baseline.json'")
+          s=s.replace("base: '51490741b5786f59fb3fce2cf36f03343cd3e65c'", "base: '170a60140f6ae10914550a7e254bb320764b0d30'")
           Path('qa-r65/r66-baseline.generated.mjs').write_text(s)
           PY
-          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/sw-http.log 2>&1 &
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/baseline-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          PROFILE_MS=8000 PROFILE_RUNS=2 PROFILE_DETAIL=1 STORYWORLD_URL=http://127.0.0.1:4391/ node qa-r65/r66-baseline.generated.mjs > qa-r66/baseline.stdout.json
+          PROFILE_MS=8000 PROFILE_RUNS=2 PROFILE_DETAIL=1 STORYWORLD_URL=http://127.0.0.1:4391/ node qa-r65/r66-baseline.generated.mjs > out/r66/baseline.stdout.json
           python3 - <<'PY'
           import json
-          s=json.load(open('qa-r66/baseline.json'))
+          s=json.load(open('out/r66/baseline.json'))
           for r in s['runs']: print('BASELINE',json.dumps({'run':r['index'],'frames':r['frames'],'browser':r['browserMetrics'],'topFunctions':r['topFunctions'],'pageErrors':r['pageErrors']},ensure_ascii=False))
           PY
-      - name: Apply candidate and run R66 tests when present
+      - name: Candidate preparation and regression tests
         run: |
           if [ -f scripts/apply-r66.py ]; then
             python3 scripts/apply-r66.py --site _pages/docs
             node verify-pages-r62.mjs _pages
             node --test scripts/r66.cpu.test.mjs
-            python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/sw-http-candidate.log 2>&1 &
+            python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/candidate-http.log 2>&1 &
             SERVER_PID=$!
             trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
             STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
@@ -79,5 +65,5 @@ jobs:
         if: always()
         with:
           name: r66-review-results
-          path: qa-r66/
+          path: out/r66/
           retention-days: 7
