@@ -15,7 +15,7 @@
   {id:'dreamAura',name:'사몽 · 경계의 안개',icon:'dream',text:'사몽각성 지속시간을 점차 연장하고, 푸른 안개와 주변 색감을 부여. 증가량 8 × 단계 / (단계 + 20)초.'},
   {id:'endlessWard',name:'흔들리지 않는 기억',icon:'resonance',text:'추가 피해감소 30 × 단계 / (단계 + 40)%. 다른 보호와 순차 적용.'},
    {id:'endlessResonance',name:'피어나는 공명',icon:'resonance',text:'단계마다 공명 획득 +1%. 고요한 꽃잎 오라.'},
-   {id:'threadDanceR63',name:'실검무 · 은실의 분기',icon:'haste',text:'실검무의 단계마다 발도 타격 횟수와 최대 대상 수가 증가합니다. 습득 시 소유 플레이어에게 은백색 실 오라가 보입니다. 타격은 최대 12회, 대상은 최대 8명까지.'}
+   {id:'threadDanceR63',name:'실검무 · 은실의 분기',icon:'haste',text:'1 포인트마다 단계 +1 · 타격 2→최대 12회 · 대상 1→최대 8명. 타격당 위력은 기존 공식(22% + 단계당 0.6%, 최대 30%)을 따릅니다. 단계 1–6에서 십자·꽃·프랙털·발톱·삼각 3연격·결정타의 은실 효과를 차례로 엽니다. 습득 시 소유 플레이어에게 오라가 보입니다.'}
  ];
  const ids=new Set(defs.map(d=>d.id)),listeners=new Set(),events=[],commitStack=[];let restoring=0,commitDepth=0;
  const note=(kind,detail={})=>{events.push({kind,at:time,...detail});if(events.length>100)events.shift();};

@@ -845,8 +845,38 @@ function sightCommand24(c){
  return true;
 }
 
+// Commands are rebuilt by the 2D capture layer each frame. Comparing their
+// geometry as a JSON string allocated a large temporary string for every
+// command even when none of its values had changed. Keep a compact value
+// snapshot on the retained scene row instead of retaining the whole command
+// (and its owner graph), then compare the serialized fields in place.
+function sameStructuredValue24(a,b){
+ if(Object.is(a,b))return true;
+ if(a===null||b===null||typeof a!=='object'||typeof b!=='object')return false;
+ const aa=Array.isArray(a),ba=Array.isArray(b);if(aa!==ba)return false;
+ if(aa){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(!sameStructuredValue24(a[i],b[i]))return false;return true;}
+ let count=0;for(const key in a)if(Object.prototype.hasOwnProperty.call(a,key)){if(!Object.prototype.hasOwnProperty.call(b,key)||!sameStructuredValue24(a[key],b[key]))return false;count++;}
+ let other=0;for(const key in b)if(Object.prototype.hasOwnProperty.call(b,key))other++;
+ return count===other;
+}
+function snapshotStructuredValue24(value){
+ if(Array.isArray(value))return value.map(snapshotStructuredValue24);
+ if(value&&typeof value==='object'&&(Object.getPrototypeOf(value)===Object.prototype||Object.getPrototypeOf(value)===null)){const out={};for(const key of Object.keys(value))out[key]=snapshotStructuredValue24(value[key]);return out;}
+ return value;
+}
+function styleState24(c){const style={};for(const key in c.style)if(Object.prototype.hasOwnProperty.call(c.style,key)&&key!=='globalAlpha'&&key!=='filter')style[key]=snapshotStructuredValue24(c.style[key]);return{kind:c.kind,propFrame:c.owner.kind==='prop'?c.owner.visualHospitalFrame:null,style};}
+function sameStyleKey24(previous,current){
+ if(!previous||previous.kind!==current.kind||previous.propFrame!==(current.owner.kind==='prop'?current.owner.visualHospitalFrame:null))return false;
+ const a=previous.style,b=current.style;let countA=0,countB=0;
+ for(const key in a)if(Object.prototype.hasOwnProperty.call(a,key)&&key!=='globalAlpha'&&key!=='filter'){
+  countA++;if(!Object.prototype.hasOwnProperty.call(b,key)||key==='globalAlpha'||key==='filter'||!sameStructuredValue24(a[key],b[key]))return false;
+ }
+ for(const key in b)if(Object.prototype.hasOwnProperty.call(b,key)&&key!=='globalAlpha'&&key!=='filter')countB++;
+ return countA===countB;
+}
+
 class CommandScene {
-  constructor(T,{projection,scene=new T.Scene(),camera=new T.OrthographicCamera(),makeCanvas,createLabelRoot,spatial=false}={}){Object.assign(this,{T,projection,scene,camera,makeCanvas,createLabelRoot,spatial});this.rows=new Map();this.textures=new Map();this.labels=[];this.disposed=false;this.stats={created:0,removed:0,texturesCreated:0,texturesDisposed:0};}
+  constructor(T,{projection,scene=new T.Scene(),camera=new T.OrthographicCamera(),makeCanvas,createLabelRoot,spatial=false}={}){Object.assign(this,{T,projection,scene,camera,makeCanvas,createLabelRoot,spatial});this.rows=new Map();this.textures=new Map();this.labels=[];this.disposed=false;this.stats={created:0,removed:0,texturesCreated:0,texturesDisposed:0,geometryComparisons:0,geometryUpdates:0,styleReplacements:0,filterUpdates:0};}
   texture(image,mutable){let r=this.textures.get(image);if(!r){const texture=new this.T.Texture(image);texture.colorSpace=this.T.SRGBColorSpace;texture.needsUpdate=true;r={texture,refs:0};this.textures.set(image,r);this.stats.texturesCreated++;}r.refs++;if(mutable)r.texture.needsUpdate=true;return r.texture;}
   release(image){const r=this.textures.get(image);if(!r)return;if(--r.refs===0){r.texture.dispose();this.textures.delete(image);this.stats.texturesDisposed++;}}
   worldPoint(p,owner){if(owner?.groundAligned){const q=this.projection.screenToWorld(p[0],p[1]);return new this.T.Vector3(q.x,.012,q.y);}const T=this.T,anchor=Number.isFinite(owner?.x)&&Number.isFinite(owner?.y)?{x:owner.x,y:owner.y}:this.projection.screenToWorld(this.projection.width/2,this.projection.height*.52),screen=this.projection.worldToScreen(anchor.x,anchor.y),right=new T.Vector3(1,0,0).applyQuaternion(this.camera.quaternion),up=new T.Vector3(0,1,0).applyQuaternion(this.camera.quaternion);return new T.Vector3(anchor.x,finite(owner?.renderHeight),anchor.y).addScaledVector(right,(p[0]-screen.x)/this.projection.pixelsPerUnit).addScaledVector(up,(screen.y-p[1])/this.projection.pixelsPerUnit);}
@@ -862,7 +892,8 @@ class CommandScene {
     if(g.kind==='radial'&&(args[0]!==args[3]||args[1]!==args[4]))throw Error('Nonconcentric gradient unsupported');const stops=g.stops.map(s=>{const c=cssColor(T,s.color);const rgb=c.color.clone().convertLinearToSRGB();return new T.Vector4(rgb.r,rgb.g,rgb.b,c.alpha);});while(stops.length<12)stops.push(stops.at(-1)?.clone()||new T.Vector4());const offsets=g.stops.map(s=>s.offset);while(offsets.length<12)offsets.push(offsets.at(-1)||0);
     return new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,side:T.DoubleSide,toneMapped:false,uniforms:{gradientInverse:{value:inverse},gradientArgs:{value:new T.Vector4(args[0],args[1],g.kind==='radial'?args[2]:args[2],g.kind==='radial'?args[5]:args[3])},radial:{value:g.kind==='radial'?1:0},colors:{value:stops},offsets:{value:offsets},count:{value:g.stops.length},alpha:{value:1}},vertexShader:'attribute vec2 screenPosition; varying vec2 sourcePixel; void main(){sourcePixel=screenPosition;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'precision highp float; varying vec2 sourcePixel; uniform mat3 gradientInverse; uniform vec4 gradientArgs; uniform float radial; uniform vec4 colors[12]; uniform float offsets[12]; uniform int count; uniform float alpha; void main(){vec2 p=(gradientInverse*vec3(sourcePixel,1.0)).xy;float t; if(radial>0.5)t=(distance(p,gradientArgs.xy)-gradientArgs.z)/max(0.0001,gradientArgs.w-gradientArgs.z);else{vec2 d=gradientArgs.zw-gradientArgs.xy;t=dot(p-gradientArgs.xy,d)/max(0.0001,dot(d,d));}vec4 c=colors[0];for(int i=1;i<12;i++){if(i>=count)break;if(t>=offsets[i])c=colors[i];else if(t>=offsets[i-1]){c=mix(colors[i-1],colors[i],clamp((t-offsets[i-1])/max(0.0001,offsets[i]-offsets[i-1]),0.0,1.0));break;}}gl_FragColor=vec4(c.rgb,c.a*alpha);}' });
   }
-  signature(c){return JSON.stringify([this.projection.width,this.projection.height,this.projection.zoom,this.projection.camX,this.projection.camY,this.projection.tile,c.kind,c.sourceRect,c.imageSize,c.points,c.paths,c.clips,c.owner,c.lineWidth,c.rule]);}
+  geometryChanged(row,c){this.stats.geometryComparisons++;if(!row)return true;const p=row.projection,q=this.projection,a=row.geometryState,o=a?.owner,n=c.owner;if(!p||p.width!==q.width||p.height!==q.height||p.zoom!==q.zoom||p.camX!==q.camX||p.camY!==q.camY||p.tile!==q.tile)return true;return !a||a.kind!==c.kind||a.lineWidth!==c.lineWidth||a.rule!==c.rule||o.kind!==n.kind||o.groundAligned!==n.groundAligned||o.x!==n.x||o.y!==n.y||o.renderHeight!==n.renderHeight||o.visualHospitalFrame!==n.visualHospitalFrame||!sameStructuredValue24(a.sourceRect,c.sourceRect)||!sameStructuredValue24(a.imageSize,c.imageSize)||!sameStructuredValue24(a.points,c.points)||!sameStructuredValue24(a.paths,c.paths)||!sameStructuredValue24(a.clips,c.clips);}
+  keepCommand(row,c){const p=this.projection,o=c.owner;row.geometryState={kind:c.kind,lineWidth:c.lineWidth,rule:c.rule,sourceRect:snapshotStructuredValue24(c.sourceRect),imageSize:snapshotStructuredValue24(c.imageSize),points:snapshotStructuredValue24(c.points),paths:snapshotStructuredValue24(c.paths),clips:snapshotStructuredValue24(c.clips),owner:{kind:o.kind,groundAligned:o.groundAligned,x:o.x,y:o.y,renderHeight:o.renderHeight,visualHospitalFrame:o.visualHospitalFrame}};row.projection={width:p.width,height:p.height,zoom:p.zoom,camX:p.camX,camY:p.camY,tile:p.tile};}
   remove(key){const row=this.rows.get(key);if(!row)return;this.scene.remove(row.mesh);row.mesh.geometry.dispose();row.mesh.material.dispose();row.mesh.customDepthMaterial?.dispose();if(row.image)this.release(row.image);this.rows.delete(key);this.stats.removed++;}
   applySpatialPolicy(row,c,firstBody){
     if(!this.spatial)return;
@@ -884,20 +915,20 @@ class CommandScene {
       const points=c.points||c.paths.flatMap(p=>p.points);
       if(points.length&&!points.every(p=>p.every(Number.isFinite)))throw Error('Nonfinite original draw command');
       if(points.length&&(Math.max(...points.map(p=>p[0]))<0||Math.min(...points.map(p=>p[0]))>this.projection.width||Math.max(...points.map(p=>p[1]))<0||Math.min(...points.map(p=>p[1]))>this.projection.height))continue;
-      const signature=this.signature(c),styleKey=JSON.stringify([c.kind,{...c.style,globalAlpha:undefined,filter:undefined},c.owner.kind==='prop'?c.owner.visualHospitalFrame:null]);let row=this.rows.get(c.key);
-      if(row&&(row.styleKey!==styleKey||row.image!==(c.kind==='image'?c.image:null))){this.remove(c.key);row=null;}
+      let row=this.rows.get(c.key);
+      if(row&&(!sameStyleKey24(row.styleState,c)||row.image!==(c.kind==='image'?c.image:null))){this.stats.styleReplacements++;this.remove(c.key);row=null;}
       if(!row){
         const geometry=this.geometry(c);if(!geometry)continue;let material;
         try{material=this.material(c);}catch(e){geometry.dispose();if(c.kind==='image')this.release(c.image);throw e;}
         if(material.uniforms?.alpha)material.uniforms.alpha.value=c.style.globalAlpha;
-        const mesh=new this.T.Mesh(geometry,material);row={mesh,signature,styleKey,baseOpacity:material.userData.originalOpacity,image:c.kind==='image'?c.image:null};this.rows.set(c.key,row);this.scene.add(mesh);this.stats.created++;
-      }else if(row.signature!==signature){
+        const mesh=new this.T.Mesh(geometry,material);row={mesh,baseOpacity:material.userData.originalOpacity,image:c.kind==='image'?c.image:null,filterSource:snapshotStructuredValue24(c.style.filter),styleState:styleState24(c)};this.keepCommand(row,c);this.rows.set(c.key,row);this.scene.add(mesh);this.stats.created++;
+      }else if(this.geometryChanged(row,c)){
         const geometry=this.geometry(c);if(!geometry){this.remove(c.key);continue;}
         const old=row.mesh.geometry,same=Object.keys(geometry.attributes).every(k=>old.attributes[k]?.array.length===geometry.attributes[k].array.length);
         if(same){for(const k of Object.keys(geometry.attributes)){old.attributes[k].array.set(geometry.attributes[k].array);old.attributes[k].needsUpdate=true;}old.boundingSphere=geometry.boundingSphere;geometry.dispose();}else{old.dispose();row.mesh.geometry=geometry;}
-        row.signature=signature;
+        this.keepCommand(row,c);this.stats.geometryUpdates++;
       }
-      if(c.kind==='image'){const f=filterMatrix(this.T,c.style.filter),live=row.mesh.material.userData.filter;live.m.copy(f.m);live.offset.copy(f.offset);}if(row.mesh.material.uniforms?.alpha)row.mesh.material.uniforms.alpha.value=c.style.globalAlpha*(sightCommand24(c)?1:0);else row.mesh.material.opacity=row.baseOpacity*c.style.globalAlpha*(sightCommand24(c)?1:0);if(c.mutable)row.mesh.material.map.needsUpdate=true;row.mesh.renderOrder=c.order;this.applySpatialPolicy(row,c,firstBody);seen.add(c.key);
+      if(c.kind==='image'&&!sameStructuredValue24(row.filterSource,c.style.filter)){const f=filterMatrix(this.T,c.style.filter),live=row.mesh.material.userData.filter;live.m.copy(f.m);live.offset.copy(f.offset);row.filterSource=snapshotStructuredValue24(c.style.filter);this.stats.filterUpdates++;}if(row.mesh.material.uniforms?.alpha)row.mesh.material.uniforms.alpha.value=c.style.globalAlpha*(sightCommand24(c)?1:0);else row.mesh.material.opacity=row.baseOpacity*c.style.globalAlpha*(sightCommand24(c)?1:0);if(c.mutable)row.mesh.material.map.needsUpdate=true;row.mesh.renderOrder=c.order;this.applySpatialPolicy(row,c,firstBody);seen.add(c.key);
     }
     for(const key of this.rows.keys())if(!seen.has(key))this.remove(key);
   }

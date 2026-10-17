@@ -1,10 +1,10 @@
 {
   "schema": "storyworld.pages-preparation.r62/v1",
-  "status": "R63R2_CANDIDATE_READY",
+  "status": "R64_CANDIDATE_READY",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758",
-  "webHTMLSha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758",
+  "sourceHTMLSha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc",
+  "webHTMLSha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9508,13 +9508,13 @@
     },
     {
       "path": "dist/phase1.js",
-      "bytes": 522957,
-      "sha256": "a6d423745e0f8f1928c69447c369e0acd4b6185bc3da111f167b1476132805d5"
+      "bytes": 526565,
+      "sha256": "0fd72acce748b1d4548c38b3f483fbf709a54806cab0f31076f682a8bbd269bc"
     },
     {
       "path": "index.html",
-      "bytes": 5949027,
-      "sha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758"
+      "bytes": 5952572,
+      "sha256": "5390a3ea7f80e2a94233bb8031b5d69068c7337e66a8937ea3bd136b247ff3bc"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,12 +9538,12 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464827009,
+  "totalBytes": 464834162,
   "largest": [
     {
       "path": "index.html",
-      "bytes": 5948026,
-      "sha256": "fc7f70fdae44d7704a84214d81e589cbc8cd56ae994e6f1295bc42801eeb0d15"
+      "bytes": 5962638,
+      "sha256": "3c64cc4c6037c3324c4fb759dba54bc2e88c1b315a7a07fb1914f001c6d2c4c7"
     },
     {
       "path": "audio/rc133/processed/bgm/Folding_Space_1-c535f55c.mp3",
@@ -9659,7 +9659,7 @@
     "proposalOnly": true
   },
   "privateRepositoryDoesNotMakeOrdinaryPagesAssetsPrivate": true,
-  "candidateRevision": "R63R2",
+  "candidateRevision": "R64",
   "networkBuild": "R63R1",
   "publishedBaselineWebHTMLSha256": "a260ed7b1d62e5574ae35525d58135543878e9c444d6fdaf039367ab01de330e"
 }

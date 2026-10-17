@@ -50,10 +50,12 @@
 #noticeShelfR63R2 #hint,#noticeShelfR63R2 #toast,#noticeShelfR63R2 #fatal{position:relative;inset:auto;left:auto;right:auto;top:auto;bottom:auto;transform:none;max-width:100%;max-height:100%;margin:0;padding:3px 10px;box-sizing:border-box;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;font-size:11px;line-height:1.35;border:0;background:transparent;text-shadow:0 1px 3px #000}
 #noticeShelfR63R2 #hint{color:#cbd5d1;pointer-events:none}
 #noticeShelfR63R2 #toast{color:#f3d6a3;pointer-events:none}
+#phase1-status{display:none;position:relative;inset:auto;left:auto;right:auto;top:auto;bottom:auto;z-index:auto;max-width:100%;max-height:100%;margin:0;padding:3px 10px;box-sizing:border-box;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;color:#eaded1;background:transparent;font:11px/1.35 sans-serif;pointer-events:none}
+#noticeShelfR63R2 #phase1-status{display:block}
 #noticeShelfR63R2 #fatal{color:#fff;font:11px/1.35 sans-serif;white-space:nowrap;pointer-events:auto;cursor:pointer;border-left:2px solid #e29b9e;background:#40252cd9}
 #noticeShelfR63R2[data-fatal="1"] #fatal{display:block!important}
 #noticeShelfR63R2[data-toast="1"] #toast{display:block}
-#noticeShelfR63R2[data-toast="1"] #hint,#noticeShelfR63R2[data-fatal="1"] #hint,#noticeShelfR63R2[data-fatal="1"] #toast{display:none!important}
+#noticeShelfR63R2[data-toast="1"] #hint,#noticeShelfR63R2[data-fatal="1"] #hint,#noticeShelfR63R2[data-fatal="1"] #toast,#noticeShelfR63R2[data-status="1"] #hint{display:none!important}
 #noticeShelfR63R2:not([data-toast="1"]):not([data-fatal="1"]) #hint:empty{display:none}
 #status{display:none!important}
 .status-diagnostics-r63r2{margin-top:16px;padding-top:10px;border-top:1px solid #62716c}

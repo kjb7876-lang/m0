@@ -1,0 +1,307 @@
+{
+  "label": "r64-fixed-structural",
+  "browser": "Chromium 151.0.7922.173 headless in the execution container; software/emulated renderer, not a physical device or GPU test",
+  "scenario": "Fresh browser profile; New Game; locally enter dist00 with restore/noStory test options; player at (15,19), six region enemies, room.engaged=true; 2.5s warmup before sampled interval",
+  "url": "http://127.0.0.1:4375/",
+  "tier": "normal",
+  "entered": true,
+  "setup": {
+    "zone": "dist00",
+    "layer": "STORY",
+    "tier": "normal",
+    "hpMultiplier": 0.25,
+    "sight": {
+      "flashlight": false,
+      "maskEnabled": false,
+      "persistedSetting": "flashlight58",
+      "persistedIntent": "flashlight58Explicit",
+      "explicitSelection": false,
+      "settingOrigin": "device-default",
+      "deviceClass": "desktop",
+      "defaultFlashlight": false,
+      "defaultApplied": true,
+      "desktopTouch": false,
+      "sameMaskForCanvasAndThree": true
+    },
+    "player": {
+      "x": 15,
+      "y": 19,
+      "hp": 260
+    },
+    "room": {
+      "id": "dist00",
+      "engaged": true,
+      "enemyCount": 6,
+      "enemies": [
+        {
+          "id": "dist00:dist00-boss",
+          "hp": 6421.5,
+          "maxHp": 6421.5,
+          "baseHp": 25686,
+          "factor": 0.25
+        },
+        {
+          "id": "dist00:story-patrol:0:0",
+          "hp": 285,
+          "maxHp": 285,
+          "baseHp": 1140,
+          "factor": 0.25
+        },
+        {
+          "id": "dist00:story-patrol:0:1",
+          "hp": 285,
+          "maxHp": 285,
+          "baseHp": 1140,
+          "factor": 0.25
+        },
+        {
+          "id": "dist00:story-patrol:0:2",
+          "hp": 285,
+          "maxHp": 285,
+          "baseHp": 1140,
+          "factor": 0.25
+        },
+        {
+          "id": "dist00:story-patrol:1:0",
+          "hp": 285,
+          "maxHp": 285,
+          "baseHp": 1140,
+          "factor": 0.25
+        },
+        {
+          "id": "dist00:story-patrol:1:1",
+          "hp": 285,
+          "maxHp": 285,
+          "baseHp": 1140,
+          "factor": 0.25
+        }
+      ]
+    },
+    "canvas": [
+      {
+        "id": "game",
+        "width": 1365,
+        "height": 634,
+        "cssWidth": 1365,
+        "cssHeight": 634
+      },
+      {
+        "id": "mini",
+        "width": 180,
+        "height": 180,
+        "cssWidth": 144,
+        "cssHeight": 144
+      },
+      {
+        "id": "phase1-webgl",
+        "width": 1365,
+        "height": 634,
+        "cssWidth": 1365,
+        "cssHeight": 634
+      },
+      {
+        "id": "combat-hud-r51",
+        "width": 1365,
+        "height": 634,
+        "cssWidth": 1365,
+        "cssHeight": 634
+      }
+    ]
+  },
+  "wallMs": 60609,
+  "profileMs": 60000,
+  "frames": {
+    "count": 318,
+    "meanMs": 189.98207547169807,
+    "p50Ms": 183.39999999999782,
+    "p95Ms": 233.29999999999927,
+    "p99Ms": 250,
+    "fps": 5.263654465912873,
+    "jsHeap": {
+      "usedBytes": 67329808,
+      "totalBytes": 120591816,
+      "limitBytes": 4395630592
+    },
+    "dom": {
+      "nodes": 229,
+      "images": 12,
+      "canvases": 4
+    },
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "final": {
+      "playerHp": 260,
+      "enemyHp": [
+        6422,
+        285,
+        285,
+        285,
+        285,
+        285
+      ],
+      "enemyCount": 6
+    }
+  },
+  "performance": {
+    "scriptDurationMs": 4890.0509999999995,
+    "taskDurationMs": 60585.564,
+    "layoutCount": 319,
+    "recalcStyleCount": 318,
+    "jsHeapUsedStartBytes": 55320996,
+    "jsHeapUsedEndBytes": 62206404,
+    "domNodes": 1977,
+    "documents": 1
+  },
+  "topCpuFunctions": [
+    {
+      "name": "(program)",
+      "url": "",
+      "line": -1,
+      "sampledSelfMs": 55424.425
+    },
+    {
+      "name": "getParameters",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 7356,
+      "sampledSelfMs": 645.286
+    },
+    {
+      "name": "getProgram",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 18223,
+      "sampledSelfMs": 239.171
+    },
+    {
+      "name": "explorationBlocked",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 380,
+      "sampledSelfMs": 157.187
+    },
+    {
+      "name": "needsUpdate",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 1758,
+      "sampledSelfMs": 152.875
+    },
+    {
+      "name": "(garbage collector)",
+      "url": "",
+      "line": -1,
+      "sampledSelfMs": 150.698
+    },
+    {
+      "name": "render",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 903,
+      "sampledSelfMs": 149.375
+    },
+    {
+      "name": "getProgramCacheKey",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 7702,
+      "sampledSelfMs": 107.464
+    },
+    {
+      "name": "texturedFloor",
+      "url": "http://127.0.0.1:4375/",
+      "line": 5442,
+      "sampledSelfMs": 106.225
+    },
+    {
+      "name": "setup",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 1622,
+      "sampledSelfMs": 91.891
+    },
+    {
+      "name": "bindVertexArray",
+      "url": "",
+      "line": -1,
+      "sampledSelfMs": 86.36
+    },
+    {
+      "name": "WebGLRenderer.renderBufferDirect",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 17232,
+      "sampledSelfMs": 74.79
+    },
+    {
+      "name": "frame",
+      "url": "http://127.0.0.1:4375/",
+      "line": 324,
+      "sampledSelfMs": 58.18
+    },
+    {
+      "name": "draw",
+      "url": "http://127.0.0.1:4375/",
+      "line": 9707,
+      "sampledSelfMs": 57.817
+    },
+    {
+      "name": "capture",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 646,
+      "sampledSelfMs": 57.694
+    },
+    {
+      "name": "style",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 722,
+      "sampledSelfMs": 56.971
+    },
+    {
+      "name": "setProgram",
+      "url": "http://127.0.0.1:4375/vendor/three/build/three.module.js",
+      "line": 18406,
+      "sampledSelfMs": 55.994
+    },
+    {
+      "name": "push",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 723,
+      "sampledSelfMs": 47.994
+    },
+    {
+      "name": "save",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 701,
+      "sampledSelfMs": 44.112
+    },
+    {
+      "name": "ellipse",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 716,
+      "sampledSelfMs": 43.934
+    },
+    {
+      "name": "groundImage",
+      "url": "http://127.0.0.1:4375/",
+      "line": 5447,
+      "sampledSelfMs": 41.592
+    },
+    {
+      "name": "render",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 1387,
+      "sampledSelfMs": 40.639
+    },
+    {
+      "name": "sameStyleKey24",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 861,
+      "sampledSelfMs": 39.82
+    },
+    {
+      "name": "wallTarget",
+      "url": "http://127.0.0.1:4375/",
+      "line": 8956,
+      "sampledSelfMs": 39.107
+    },
+    {
+      "name": "drawImage",
+      "url": "http://127.0.0.1:4375/dist/phase1.js",
+      "line": 728,
+      "sampledSelfMs": 37.719
+    }
+  ],
+  "pageErrors": []
+}

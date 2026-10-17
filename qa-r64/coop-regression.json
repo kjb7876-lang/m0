@@ -1,0 +1,77 @@
+{
+  "environment": "local two-page client simulation only; no relay/server/network connection",
+  "hostStart": {
+    "mode": "host",
+    "players": [
+      {
+        "id": "qa-host",
+        "points": 12
+      },
+      {
+        "id": "qa-guest",
+        "points": 20
+      }
+    ],
+    "replicaCount": 6,
+    "replicaHp": [
+      {
+        "maxHp": 6421.5,
+        "factor": 0.25
+      },
+      {
+        "maxHp": 285,
+        "factor": 0.25
+      }
+    ],
+    "snapshotProtocol": {
+      "version": 1,
+      "build": "R62",
+      "epoch": 0
+    },
+    "saveKind": "storyworld-coop",
+    "saveParticipants": [
+      {
+        "id": "qa-host",
+        "points": 12
+      },
+      {
+        "id": "qa-guest",
+        "points": 20
+      }
+    ],
+    "saveSize": 20564,
+    "rank": 1
+  },
+  "guestView": {
+    "accepted": true,
+    "hostId": "qa-host",
+    "auraOwners": [
+      "qa-host"
+    ],
+    "replicaCount": 6
+  },
+  "hostLoad": {
+    "ok": true,
+    "mode": "host",
+    "hostPoints": 12,
+    "guestPoints": 20,
+    "hostRank": 1,
+    "guestRank": 0,
+    "replicaHp": [
+      {
+        "maxHp": 6421.5,
+        "factor": 0.25
+      },
+      {
+        "maxHp": 285,
+        "factor": 0.25
+      }
+    ],
+    "epoch": 1
+  },
+  "guestAfterLoad": {
+    "accepted": true,
+    "epoch": 1
+  },
+  "errors": []
+}

@@ -1,0 +1,810 @@
+{
+  "browser": "Chromium 151 headless; emulated software renderer where WebGL is used",
+  "scenarios": {
+    "desktop": {
+      "presentation": {
+        "flashlight": false,
+        "maskEnabled": false,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": false,
+        "settingOrigin": "device-default",
+        "deviceClass": "desktop",
+        "defaultFlashlight": false,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "tier": "normal",
+      "enemies": [
+        {
+          "id": "dist00:dist00-boss",
+          "hp": 6421.5,
+          "maxHp": 6421.5,
+          "factor": 0.25,
+          "base": 25686
+        },
+        {
+          "id": "dist00:story-patrol:0:0",
+          "hp": 285,
+          "maxHp": 285,
+          "factor": 0.25,
+          "base": 1140
+        },
+        {
+          "id": "dist00:story-patrol:0:1",
+          "hp": 285,
+          "maxHp": 285,
+          "factor": 0.25,
+          "base": 1140
+        },
+        {
+          "id": "dist00:story-patrol:0:2",
+          "hp": 285,
+          "maxHp": 285,
+          "factor": 0.25,
+          "base": 1140
+        },
+        {
+          "id": "dist00:story-patrol:1:0",
+          "hp": 285,
+          "maxHp": 285,
+          "factor": 0.25,
+          "base": 1140
+        },
+        {
+          "id": "dist00:story-patrol:1:1",
+          "hp": 285,
+          "maxHp": 285,
+          "factor": 0.25,
+          "base": 1140
+        }
+      ],
+      "factors": {
+        "easy": 4,
+        "normal": 10,
+        "hard": 12,
+        "environment": 10
+      },
+      "aura": {
+        "bought": true,
+        "rank": 1,
+        "aura": true,
+        "deadAura": false,
+        "visualsOffAura": false,
+        "hitLimit": 3,
+        "targetLimit": 2,
+        "unownedDrawCommands": 0,
+        "ownedDrawCommands": 6
+      },
+      "tierSwitch": {
+        "rows": {
+          "easy": {
+            "tier": "easy",
+            "boss": 5137.200000000001,
+            "patrol": 228
+          },
+          "easyRepeated": {
+            "tier": "easy",
+            "boss": 5137.200000000001,
+            "patrol": 228
+          },
+          "hard": {
+            "tier": "hard",
+            "boss": 10274.400000000001,
+            "patrol": 456
+          },
+          "hardRepeated": {
+            "tier": "hard",
+            "boss": 10274.400000000001,
+            "patrol": 456
+          },
+          "normal": {
+            "tier": "normal",
+            "boss": 6421.5,
+            "patrol": 285
+          },
+          "normalRepeated": {
+            "tier": "normal",
+            "boss": 6421.5,
+            "patrol": 285
+          }
+        },
+        "restored": {
+          "tier": "normal",
+          "boss": 6421.5,
+          "patrol": 285
+        }
+      },
+      "saveRestore": {
+        "boss": 6421.5,
+        "patrol": 285,
+        "rank": 1,
+        "aura": true,
+        "factor": 0.25
+      },
+      "mapChange": {
+        "rank": 1,
+        "visible": true
+      },
+      "layout": {
+        "initial": {
+          "viewport": {
+            "width": 1365,
+            "height": 888
+          },
+          "stage": {
+            "left": 0,
+            "top": 64,
+            "right": 1365,
+            "bottom": 736,
+            "width": 1365,
+            "height": 672,
+            "display": "block"
+          },
+          "shelf": {
+            "left": 0,
+            "top": 736,
+            "right": 1365,
+            "bottom": 774,
+            "width": 1365,
+            "height": 38,
+            "display": "flex"
+          },
+          "footer": {
+            "left": 0,
+            "top": 774,
+            "right": 1365,
+            "bottom": 888,
+            "width": 1365,
+            "height": 114,
+            "display": "flex"
+          },
+          "heroCard": {
+            "left": 18,
+            "top": 779,
+            "right": 302,
+            "bottom": 884,
+            "width": 284,
+            "height": 105,
+            "display": "flex"
+          },
+          "joystick": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "touchUse": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "gear": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "hint": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "toast": {
+            "left": 505.296875,
+            "top": 745.078125,
+            "right": 859.6875,
+            "bottom": 765.921875,
+            "width": 354.390625,
+            "height": 20.84375,
+            "display": "block"
+          }
+        },
+        "resized": {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "stage": {
+            "left": 0,
+            "top": 64,
+            "right": 1280,
+            "bottom": 568,
+            "width": 1280,
+            "height": 504,
+            "display": "block"
+          },
+          "shelf": {
+            "left": 0,
+            "top": 568,
+            "right": 1280,
+            "bottom": 606,
+            "width": 1280,
+            "height": 38,
+            "display": "flex"
+          },
+          "footer": {
+            "left": 0,
+            "top": 606,
+            "right": 1280,
+            "bottom": 720,
+            "width": 1280,
+            "height": 114,
+            "display": "flex"
+          },
+          "heroCard": {
+            "left": 18,
+            "top": 611,
+            "right": 302,
+            "bottom": 716,
+            "width": 284,
+            "height": 105,
+            "display": "flex"
+          },
+          "joystick": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "touchUse": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "gear": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "hint": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "toast": {
+            "left": 462.796875,
+            "top": 577.078125,
+            "right": 817.1875,
+            "bottom": 597.921875,
+            "width": 354.390625,
+            "height": 20.84375,
+            "display": "block"
+          }
+        }
+      },
+      "settingsDiagnostics": {
+        "exists": true,
+        "text": "프레임/표시: 2 fps · 0 shots · IMAGE FX\n지역: hub · STORY\n난이도: 노말 · 기본 적 체력 25% · 받는 피해 100%\n실검무: 1단계 · 오라는 소유 플레이어에게만 표시\n협동: off · 공유 빌드 R62\n최근 시스템 오류 없음",
+        "panel": ""
+      }
+    },
+    "windowsTouch": {
+      "flashlight": false,
+      "maskEnabled": false,
+      "persistedSetting": "flashlight58",
+      "persistedIntent": "flashlight58Explicit",
+      "explicitSelection": false,
+      "settingOrigin": "device-default",
+      "deviceClass": "desktop",
+      "defaultFlashlight": false,
+      "defaultApplied": true,
+      "desktopTouch": true,
+      "sameMaskForCanvasAndThree": true
+    },
+    "mobile": {
+      "presentation": {
+        "flashlight": true,
+        "maskEnabled": true,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": false,
+        "settingOrigin": "device-default",
+        "deviceClass": "mobile",
+        "defaultFlashlight": true,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "mobile": {
+        "mobile": true,
+        "live": true,
+        "autoBasic": true,
+        "autoSkill": true,
+        "dragging": false,
+        "disposed": false,
+        "audioProfilesAligned": true,
+        "audioRoles": {
+          "attack": 3,
+          "enemyHit": 3,
+          "special": 2,
+          "blink": 1,
+          "dodge": 2,
+          "parry": 1,
+          "ego": 1,
+          "awake": 4,
+          "clear": 1,
+          "upgrade": 1,
+          "boss": 3,
+          "hurt": 1,
+          "rc141TreeWeapon5": 1,
+          "rc141TimeAwakening5": 1,
+          "rc141KairoTick5": 1,
+          "rc141ResonanceEnergy5": 1,
+          "swMetal": 3,
+          "swHeavy": 4,
+          "swRanged": 2,
+          "swLightning": 2,
+          "swHoly": 1,
+          "swSpace": 2,
+          "swDark": 2,
+          "swEnergy": 2,
+          "swLightningSkill": 2,
+          "swHolySkill": 1,
+          "swHeal": 1,
+          "swShield": 1,
+          "swEnemyEnergy": 2,
+          "swEnemyHeavy": 4,
+          "swEnemyDark": 2
+        }
+      },
+      "layout": {
+        "portrait": {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "stage": {
+            "left": 0,
+            "top": 0,
+            "right": 390,
+            "bottom": 806,
+            "width": 390,
+            "height": 806,
+            "display": "block"
+          },
+          "shelf": {
+            "left": 0,
+            "top": 806,
+            "right": 390,
+            "bottom": 844,
+            "width": 390,
+            "height": 38,
+            "display": "flex"
+          },
+          "footer": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "heroCard": {
+            "left": 8,
+            "top": 766,
+            "right": 164,
+            "bottom": 798,
+            "width": 156,
+            "height": 32,
+            "display": "flex"
+          },
+          "joystick": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "touchUse": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "gear": {
+            "left": 338,
+            "top": 8,
+            "right": 382,
+            "bottom": 52,
+            "width": 44,
+            "height": 44,
+            "display": "block"
+          },
+          "hint": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "toast": {
+            "left": 37,
+            "top": 816.75,
+            "right": 352.984375,
+            "bottom": 834.25,
+            "width": 315.984375,
+            "height": 17.5,
+            "display": "block"
+          }
+        },
+        "landscape": {
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "stage": {
+            "left": 0,
+            "top": 0,
+            "right": 844,
+            "bottom": 352,
+            "width": 844,
+            "height": 352,
+            "display": "block"
+          },
+          "shelf": {
+            "left": 0,
+            "top": 352,
+            "right": 844,
+            "bottom": 390,
+            "width": 844,
+            "height": 38,
+            "display": "flex"
+          },
+          "footer": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "heroCard": {
+            "left": 8,
+            "top": 312,
+            "right": 198,
+            "bottom": 344,
+            "width": 190,
+            "height": 32,
+            "display": "flex"
+          },
+          "joystick": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "touchUse": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "gear": {
+            "left": 792,
+            "top": 8,
+            "right": 836,
+            "bottom": 52,
+            "width": 44,
+            "height": 44,
+            "display": "block"
+          },
+          "hint": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "width": 0,
+            "height": 0,
+            "display": "none"
+          },
+          "toast": {
+            "left": 306.296875,
+            "top": 364.421875,
+            "right": 537.6875,
+            "bottom": 378.5625,
+            "width": 231.390625,
+            "height": 14.140625,
+            "display": "block"
+          }
+        }
+      },
+      "landscapeDefault": {
+        "flashlight": true,
+        "maskEnabled": true,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": false,
+        "settingOrigin": "device-default",
+        "deviceClass": "mobile",
+        "defaultFlashlight": true,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "legacyDesktopDefaultLoad": {
+        "presentation": {
+          "flashlight": true,
+          "maskEnabled": true,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": false,
+          "settingOrigin": "device-default",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "settings": {
+          "sound": true,
+          "music": true,
+          "narration": true,
+          "volume": 0.7,
+          "bgm": 0.25,
+          "voice": 0.8,
+          "lowFx": false,
+          "reducedMotion": false,
+          "flashlight58": true,
+          "autoSkill": true,
+          "voicePreroll": 500,
+          "enemyDirection51": true,
+          "flashlight58Explicit": false
+        },
+        "zone": "dist00"
+      },
+      "selection": {
+        "setting": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "user-selected",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "saved": false,
+        "explicit": true
+      },
+      "lightRestore": {
+        "flashlight": false,
+        "maskEnabled": false,
+        "persistedSetting": "flashlight58",
+        "persistedIntent": "flashlight58Explicit",
+        "explicitSelection": true,
+        "settingOrigin": "saved-user-selection",
+        "deviceClass": "mobile",
+        "defaultFlashlight": true,
+        "defaultApplied": true,
+        "desktopTouch": false,
+        "sameMaskForCanvasAndThree": true
+      },
+      "mobileMap": {
+        "result": true,
+        "zone": "hub",
+        "flashlight": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "saved-user-selection",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        }
+      },
+      "deathReturn": {
+        "hp": 260,
+        "rank": 1,
+        "deadAura": false,
+        "aura": true,
+        "flashlight": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "saved-user-selection",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        }
+      },
+      "mobileCoop": {
+        "before": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "saved-user-selection",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "whileReceiving": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "saved-user-selection",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        },
+        "after": {
+          "flashlight": false,
+          "maskEnabled": false,
+          "persistedSetting": "flashlight58",
+          "persistedIntent": "flashlight58Explicit",
+          "explicitSelection": true,
+          "settingOrigin": "saved-user-selection",
+          "deviceClass": "mobile",
+          "defaultFlashlight": true,
+          "defaultApplied": true,
+          "desktopTouch": false,
+          "sameMaskForCanvasAndThree": true
+        }
+      },
+      "touch": {
+        "settingsGear": true,
+        "canvasPointerDowns": 1
+      }
+    },
+    "noticeErrors": {
+      "errorNotice": {
+        "shelf": "1",
+        "text": "시스템 오류 · 설정의 상태 및 진단에서 상세 내용을 확인하세요.",
+        "details": "private campaign closure"
+      },
+      "detailsAccessibleInSettings": true,
+      "layout": {
+        "viewport": {
+          "width": 1365,
+          "height": 888
+        },
+        "stage": {
+          "left": 0,
+          "top": 64,
+          "right": 1365,
+          "bottom": 736,
+          "width": 1365,
+          "height": 672,
+          "display": "block"
+        },
+        "shelf": {
+          "left": 0,
+          "top": 736,
+          "right": 1365,
+          "bottom": 774,
+          "width": 1365,
+          "height": 38,
+          "display": "flex"
+        },
+        "footer": {
+          "left": 0,
+          "top": 774,
+          "right": 1365,
+          "bottom": 888,
+          "width": 1365,
+          "height": 114,
+          "display": "flex"
+        },
+        "heroCard": {
+          "left": 18,
+          "top": 779,
+          "right": 302,
+          "bottom": 884,
+          "width": 284,
+          "height": 105,
+          "display": "flex"
+        },
+        "joystick": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none"
+        },
+        "touchUse": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none"
+        },
+        "gear": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none"
+        },
+        "hint": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none"
+        },
+        "toast": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none"
+        }
+      }
+    }
+  },
+  "pageErrors": []
+}

@@ -1,8 +1,10 @@
-/* R63R2 candidate: R63R1 campaign ordering with tuned combat and owned 실검무 aura. */
+/* R64 candidate: R63R1 campaign ordering with tuned combat and owned 실검무 aura. */
 (()=>{'use strict';
  const COOP_KEY='difficultyR63',STORE_KEY='hapil.storyworld.campaign-r63.maps.v1';
  const PRIOR_HP=Object.freeze({easy:.9,normal:1.4,hard:2.1});
- const HP_RETAINED=Object.freeze({easy:.4,normal:.5,hard:.8});
+ // The requested final health values halve R63's actual live multipliers
+ // (.4/.5/.8), independently of the older reported .9/1.4/2.1 configuration.
+ const HP_RETAINED=Object.freeze({easy:.2,normal:.25,hard:.4});
  const TIERS=Object.freeze({
   easy:{name:'이지',hp:HP_RETAINED.easy,hpRetained:HP_RETAINED.easy,legacyConfiguredHp:PRIOR_HP.easy,incoming:.4,reward:1},
   normal:{name:'노말',hp:HP_RETAINED.normal,hpRetained:HP_RETAINED.normal,legacyConfiguredHp:PRIOR_HP.normal,incoming:1,reward:3},
@@ -26,7 +28,7 @@
  function hasBeenVisited(id,l){return completed(id,l)||visited.has(layerKey(id,l));}
  function showBlocked(id){const r=regionById[id],next=firstPending();const text=next?'현재 진행은 '+next.title+' 순서입니다. 이전 지역은 설정 또는 쉼터의 지역 지도에서 다시 선택하세요.':'이 장의 서사를 순서대로 이어주세요.';toast(text,3);}
  let enterBase=enterRegion;
- function picker(id,from,options={}){const r=regionById[id],l=options.layer||layer;if(!r)return false;let resolved=false;openPanel('<div class="eyebrow">NEXT NARRATIVE MAP / '+escapeHTML(l)+'</div><h2>'+escapeHTML(r.title)+' · 난이도 선택</h2><p class="small">적용 범위: 일반 몬스터와 보스 체력, 적이 플레이어에게 주는 피해입니다. 이동·공격 판정과 기존 보상 규칙은 유지됩니다.</p><div class="actions campaign-difficulty-r63"><button id="campaignEasyR63" class="primary">이지 · 체력 현재 대비 −60% · 받는 피해 −60% · 첫 클리어 +1점</button><button id="campaignNormalR63">노말 · 체력 현재 대비 −50% · 받는 피해 유지 · 첫 클리어 +3점</button><button id="campaignHardR63">하드 · 체력 현재 대비 −20% · 받는 피해 +20% · 첫 클리어 +7점</button><button id="campaignCancelR63">취소</button></div><p class="small muted">체력 조정은 보스와 일반 몬스터 모두에 적용하며 남은 체력 비율을 보존합니다. 이지/노말/하드 완료 보상 1/3/7 포인트와 중복 지급 방지는 유지됩니다.</p>');
+ function picker(id,from,options={}){const r=regionById[id],l=options.layer||layer;if(!r)return false;let resolved=false;openPanel('<div class="eyebrow">NEXT NARRATIVE MAP / '+escapeHTML(l)+'</div><h2>'+escapeHTML(r.title)+' · 난이도 선택</h2><p class="small">적용 범위: 모든 일반 몬스터·보스·소환 적·협동 복제 적의 기본 체력입니다. R63 실제 배율을 한 번 더 0.5배로 줄였습니다. 적의 플레이어 대상 피해는 요청한 난이도 값이며, 이동·공격 판정과 기존 보상은 유지됩니다.</p><div class="actions campaign-difficulty-r63"><button id="campaignEasyR63" class="primary">이지 · 기본 체력 20% (R63 실제값의 절반) · 받는 피해 40% · 첫 클리어 +1점</button><button id="campaignNormalR63">노말 · 기본 체력 25% (R63 실제값의 절반) · 받는 피해 유지 · 첫 클리어 +3점</button><button id="campaignHardR63">하드 · 기본 체력 40% (R63 실제값의 절반) · 받는 피해 120% · 첫 클리어 +7점</button><button id="campaignCancelR63">취소</button></div><p class="small muted">현재 공개판의 실제 체력 배율은 이지 40% / 노말 50% / 하드 80%입니다. 이 업데이트 뒤에는 기본값 기준 20% / 25% / 40%가 됩니다. 완료 보상 1/3/7 포인트 및 중복 지급 방지는 유지됩니다.</p>');
   const choose=tier=>{if(resolved)return;resolved=true;if(coopMode()==='guest'){toast('다음 지역과 난이도는 방장만 정할 수 있습니다.',2);closePanel(true);return;}setMapMode(id,l,tier);closePanel(true);return enterBase.call(this,id,from,{...options,layer:l,difficultyR63:tier});};
   button('campaignEasyR63',()=>choose('easy'));button('campaignNormalR63',()=>choose('normal'));button('campaignHardR63',()=>choose('hard'));button('campaignCancelR63',()=>closePanel(true));return false;
  }
@@ -53,7 +55,7 @@
   const fraction=Number.isFinite(e.hp)?Math.max(0,Math.min(1,e.hp/Math.max(.0001,e.maxHp))):1;
   e.difficultyBaseHpR63=base;e.difficultyFactorR63=factor;e.maxHp=Math.max(1,base*factor);e.hp=Math.min(e.maxHp,e.maxHp*fraction);return true;
  }
- function applyRoom(r,tier=resolveRoomTier(r)){if(!r)return 0;r[COOP_KEY]=validTier(tier);let n=0;for(const e of r.enemies||[]){if(e.trial||e.cosmicGuardianR63||e.personaBossR63)scaleEnemy(e,r[COOP_KEY]);else if(!e.r61Summoned&&!e.coopReplicaR62)scaleEnemy(e,r[COOP_KEY]);n++;}return n;}
+ function applyRoom(r,tier=resolveRoomTier(r)){if(!r)return 0;r[COOP_KEY]=validTier(tier);let n=0;for(const e of r.enemies||[]){scaleEnemy(e,r[COOP_KEY]);n++;}return n;}
  function enemySource(source){
   const owner=source?.owner??source?.attacker??source?.enemy;
   const ownerId=typeof owner==='string'?owner:owner?.id??source?.ownerId??source?.enemyId;
@@ -66,28 +68,29 @@
  for(const name of ['spawnTrial3','spawnCosmic3'])if(typeof window[name]==='function'){const base=window[name];window[name]=function(...args){const roomBefore=room,old=new Set(roomBefore?.enemies||[]),result=base.apply(this,args);if(room===roomBefore)for(const e of room?.enemies||[])if(!old.has(e)&&(name==='spawnTrial3'||name==='spawnCosmic3')){e[name==='spawnTrial3'?'trial':'cosmicGuardianR63']=true;delete e.difficultyFactorR63;delete e.difficultyBaseHpR63;scaleEnemy(e,resolveRoomTier(room),true);}return result;};}
 
  const serializeBase=serializeSave;serializeSave=function(...args){const data=serializeBase.apply(this,args);if(!inCoop())data.campaignDifficultyR63={version:1,maps:Object.fromEntries(prefs)};const rooms={};for(const[key,r]of Object.entries(world||{})){const rows={};for(const e of r?.enemies||[])if(Number.isFinite(e.difficultyBaseHpR63)&&e.difficultyBaseHpR63>0&&Number.isFinite(e.difficultyFactorR63))rows[e.id]={base:e.difficultyBaseHpR63,factor:e.difficultyFactorR63};if(Object.keys(rows).length)rooms[key]=rows;}data.campaignHpR63={version:1,rooms};return data;};
- const restoreBase=restoreSave;restoreSave=async function(raw,...args){if(!inCoop()&&raw?.campaignDifficultyR63?.version===1){const restored=parseChoices(raw.campaignDifficultyR63);prefs.clear();for(const[k,v]of restored)prefs.set(k,v);savePrefs();}const result=await restoreBase.apply(this,[raw,...args]);if(result!==false){const savedRooms=raw?.campaignHpR63?.version===1?raw.campaignHpR63.rooms:{};for(const[key,r]of Object.entries(world||{})){if(!r?.id)continue;const saved=savedRooms?.[key]||{},tier=resolveRoomTier(r);for(const e of r.enemies||[]){const meta=saved[e.id],fraction=Number.isFinite(e.hp)?Math.max(0,Math.min(1,e.hp/Math.max(.0001,e.maxHp))):1;if(meta&&Number.isFinite(meta.base)&&meta.base>0){e.difficultyBaseHpR63=meta.base;e.difficultyFactorR63=Number.isFinite(meta.factor)&&meta.factor>0?meta.factor:1;e.maxHp=Math.max(1,meta.base*e.difficultyFactorR63);e.hp=Math.min(e.maxHp,e.maxHp*fraction);}else if(Number.isFinite(e.maxHp)&&e.maxHp>0){e.difficultyBaseHpR63=e.maxHp;e.difficultyFactorR63=1;}scaleEnemy(e,tier,true);}applyRoom(r,tier);}}return result;};
+ function restoreLoadedHealth(raw){const savedRooms=raw?.campaignHpR63?.version===1?raw.campaignHpR63.rooms:{};for(const[key,r]of Object.entries(world||{})){if(!r?.id)continue;const saved=savedRooms?.[key]||{},tier=resolveRoomTier(r);for(const e of r.enemies||[]){const meta=saved[e.id],fraction=Number.isFinite(e.hp)?Math.max(0,Math.min(1,e.hp/Math.max(.0001,e.maxHp))):1;if(meta&&Number.isFinite(meta.base)&&meta.base>0){e.difficultyBaseHpR63=meta.base;e.difficultyFactorR63=Number.isFinite(meta.factor)&&meta.factor>0?meta.factor:1;e.maxHp=Math.max(1,meta.base*e.difficultyFactorR63);e.hp=Math.min(e.maxHp,e.maxHp*fraction);}else if(Number.isFinite(e.maxHp)&&e.maxHp>0){e.difficultyBaseHpR63=e.maxHp;e.difficultyFactorR63=1;}scaleEnemy(e,tier,true);}applyRoom(r,tier);}return true;}
+ const restoreBase=restoreSave;restoreSave=async function(raw,...args){if(!inCoop()&&raw?.campaignDifficultyR63?.version===1){const restored=parseChoices(raw.campaignDifficultyR63);prefs.clear();for(const[k,v]of restored)prefs.set(k,v);savePrefs();}const result=await restoreBase.apply(this,[raw,...args]);if(result!==false)restoreLoadedHealth(raw);return result;};
 
  function appendMapButton(container){if(!container||$('campaignMapButtonR63'))return;const b=document.createElement('button');b.id='campaignMapButtonR63';b.type='button';b.textContent='지역 지도 · 이전 기억 이동';container.appendChild(b);b.onclick=()=>showWorld();}
  let fatalDetailR63R2='';
  function installNoticeShelf(){
   const footer=document.querySelector('footer');if(!footer)return null;
-  const hint=$('hint'),toastNode=$('toast'),fatal=$('fatal');
+  const hint=$('hint'),toastNode=$('toast'),fatal=$('fatal'),statusNode=$('phase1-status');
   const shelf=document.createElement('div');shelf.id='noticeShelfR63R2';shelf.setAttribute('aria-label','게임 안내와 알림');shelf.setAttribute('aria-live','polite');
-  for(const node of [hint,toastNode,fatal])if(node)shelf.appendChild(node);
+  for(const node of [hint,toastNode,fatal,statusNode])if(node)shelf.appendChild(node);
   document.body.appendChild(shelf);
   if(fatal){fatal.setAttribute('role','alert');fatal.setAttribute('aria-live','assertive');fatal.tabIndex=0;}
   const summary='시스템 오류 · 설정의 상태 및 진단에서 상세 내용을 확인하세요.';
   const sync=()=>{
    const error=!!fatal&&fatal.style.display!=='none'&&!!fatal.textContent.trim();
-   const toastActive=!!toastNode?.textContent.trim();
-   shelf.dataset.fatal=error?'1':'0';shelf.dataset.toast=toastActive?'1':'0';
+   const toastActive=!!toastNode?.textContent.trim(),statusActive=!!statusNode?.textContent.trim();
+   shelf.dataset.fatal=error?'1':'0';shelf.dataset.toast=toastActive?'1':'0';shelf.dataset.status=statusActive?'1':'0';
    if(error&&fatal.textContent.trim()!==summary){fatalDetailR63R2=fatal.textContent.trim();fatal.textContent=summary;}
    if(fatal&&!fatal.textContent.trim()&&fatal.style.display!=='none')fatal.style.display='none';
   };
   if(typeof MutationObserver==='function'){
    const observer=new MutationObserver(sync);
-   for(const node of [hint,toastNode,fatal])if(node)observer.observe(node,{childList:true,characterData:true,subtree:true,attributes:node===fatal});
+   for(const node of [hint,toastNode,fatal,statusNode])if(node)observer.observe(node,{childList:true,characterData:true,subtree:true,attributes:node===fatal});
    shelf.noticeObserverR63R2=observer;
   }
   fatal?.addEventListener('click',()=>showSettings());
@@ -102,12 +105,12 @@
   const coop=window.__STORYWORLD_COOP_SIM_R62__?.inspect?.();
   const rank=window.__STORYWORLD_PROGRESSION_R62__?.ranks?.('threadDanceR63',actorNow?.()||player)||0;
   const mode=campaign?.tier||mapMode();
-  const summary=document.createElement('p');summary.className='small';summary.textContent='현재 안내: '+($('hint')?.textContent.trim()||'없음');section.appendChild(summary);
+  const summary=document.createElement('p');summary.className='small';summary.textContent='현재 안내: '+($('phase1-status')?.textContent.trim()||$('hint')?.textContent.trim()||'없음');section.appendChild(summary);
   const readout=document.createElement('pre');readout.className='readout';
   readout.textContent=[
    '프레임/표시: '+($('status')?.textContent||'진단 대기'),
    '지역: '+(campaign?.region||zone)+' · '+(campaign?.layer||layer),
-   '난이도: '+TIERS[validTier(mode)].name+' · 적 체력 기준 '+Math.round(TIERS[validTier(mode)].hp*100)+'% · 받는 피해 '+Math.round(TIERS[validTier(mode)].incoming*100)+'%',
+   '난이도: '+TIERS[validTier(mode)].name+' · 기본 적 체력 '+Math.round(TIERS[validTier(mode)].hp*100)+'% · 받는 피해 '+Math.round(TIERS[validTier(mode)].incoming*100)+'%',
    '실검무: '+Number(rank||0)+'단계 · 오라는 소유 플레이어에게만 표시',
    '협동: '+(coop?.mode||'off')+' · 공유 빌드 '+(coop?.build||'R62'),
    fatalDetailR63R2?'최근 시스템 오류:\n'+fatalDetailR63R2:'최근 시스템 오류 없음'
@@ -116,7 +119,7 @@
  const settingsBase=showSettings;showSettings=function(...args){const result=settingsBase.apply(this,args),root=$('panel');if(!root)return result;
   if(!window.__STORYWORLD_MOBILE_R63__?.isMobile()&&!$('campaignAutoSkillR63')){const box=root.querySelector('.settings');if(box){const label=document.createElement('label');label.innerHTML='<input id="campaignAutoSkillR63" type="checkbox"> 반자동 전투에서 Q · EGO · 실검무 자동 사용 (실검무 수동 키: T)';box.appendChild(label);const input=$('campaignAutoSkillR63');input.checked=settings.autoSkill===true;input.onchange=()=>{settings.autoSkill=input.checked;saveGame(false);};}}
   let actions=root.querySelector('.campaign-settings-r63');if(!actions){actions=document.createElement('div');actions.className='actions campaign-settings-r63';root.querySelector('.settings')?.insertAdjacentElement('afterend',actions);if(!root.querySelector('.settings'))root.appendChild(actions);}
-  if(actions&&!$('campaignMapButtonR63'))appendMapButton(actions);const info=root.querySelector('.campaign-difficulty-note-r63')||document.createElement('p');info.className='small campaign-difficulty-note-r63';info.textContent='현재 지도 난이도 · '+TIERS[mapMode()].name+' / 적 체력 기준 '+Math.round(TIERS[mapMode()].hp*100)+'% / 플레이어가 받는 피해 '+Math.round(TIERS[mapMode()].incoming*100)+'%';if(!info.isConnected)actions?.insertAdjacentElement('afterend',info);appendDiagnostics(root);return result;};
+  if(actions&&!$('campaignMapButtonR63'))appendMapButton(actions);const info=root.querySelector('.campaign-difficulty-note-r63')||document.createElement('p');info.className='small campaign-difficulty-note-r63';info.textContent='현재 지도 난이도 · '+TIERS[mapMode()].name+' / 기본 적 체력 '+Math.round(TIERS[mapMode()].hp*100)+'% / 플레이어가 받는 피해 '+Math.round(TIERS[mapMode()].incoming*100)+'%';if(!info.isConnected)actions?.insertAdjacentElement('afterend',info);appendDiagnostics(root);return result;};
  const shelterBase=showSanctuary;showSanctuary=function(...args){const result=shelterBase.apply(this,args),actions=$('panel')?.querySelector('.actions');appendMapButton(actions);return result;};
  const regionInfoBase=showRegionInfo;showRegionInfo=function(id,...args){const result=regionInfoBase.call(this,id,...args),r=regionById[id],actions=$('panel')?.querySelector('.actions');if(!r||!actions||id===zone)return result;const l=layer,open=chapterOpen(r,l),accessible=open&&hasBeenVisited(id,l);if(accessible&&coopMode()!=='guest'){const b=document.createElement('button');b.id='campaignFastTravelR63';b.type='button';b.className='primary';b.textContent='이 지역으로 이동';actions.appendChild(b);b.onclick=()=>enterRegion(id,null,{fastTravelR63:true,layer:l});}return result;};
 
@@ -128,17 +131,18 @@
  function actorKey(p){return String(p?.coopIdR62||p?.id||'local');}
  function validTargets(range=11){return liveEnemies().filter(e=>e&&e.hp>0&&!e.deadRecorded&&distance(actorNow(),e)<=range).sort((a,b)=>distance(actorNow(),a)-distance(actorNow(),b));}
  function available(p=actorNow()){return!!(p&&p.hp>0&&!modal&&!loading&&!safeRegion()&&coopMode()!=='guest'&&time>=(targetCooldowns.get(actorKey(p))||0));}
- function makeEffect(e,p,angle,seq){fx('threadSlashR63',e.x,e.y,{life:.42,size:1.25,threadR63:{from:{x:p.x,y:p.y},to:{x:e.x,y:e.y},angle,seed:seq,playerId:p.coopIdR62||null}});}
+ const threadMotifsR64=['cross','flower','fractal','claw','tsubamegaeshi','decisive'];
+ function makeEffect(e,p,angle,seq,hitIndex,rank){const motif=threadMotifsR64[Math.min(threadMotifsR64.length-1,Math.max(0,rank-1))]||'cross';fx('threadSlashR63',e.x,e.y,{life:.42,size:1.25,threadR63:{from:{x:p.x,y:p.y},to:{x:e.x,y:e.y},angle,seed:seq,hitIndex,motif,playerId:p.coopIdR62||null}});}
  function nearestFree(e,from,seed){const radii=[1.0,1.25,1.5],steps=8,start=((seed%8)+8)%8;for(const radius of radii)for(let i=0;i<steps;i++){const a=(start+i)*Math.PI/4,x=e.x+Math.cos(a)*radius,y=e.y+Math.sin(a)*radius;if(!blocked(x,y,.27)&&distance({x,y},e)<2)return{x,y};}return distance(from,e)<=2&&!blocked(from.x,from.y,.27)?{x:from.x,y:from.y}:null;}
  function withActor(p,fn){const c=window.__STORYWORLD_COOP_SIM_R62__;return c?.withPlayer?c.withPlayer(p,fn):fn();}
- function strike(p,roomAt,target,origin,seq,rank){return withActor(p,()=>{if(room!==roomAt||p.hp<=0||target.hp<=0||target.deadRecorded||!room.enemies.includes(target))return false;const spot=nearestFree(target,origin,seq+rank);if(!spot)return false;
-  const from={x:p.x,y:p.y};p.x=spot.x;p.y=spot.y;p.moving=false;p.direction=facing(target.x-p.x,target.y-p.y);p.attackAngle=Math.atan2(target.y-p.y,target.x-p.x);p.skillAngle=p.attackAngle;p.attackAnim=Math.max(p.attackAnim||0,.21);p.skillAnim=Math.max(p.skillAnim||0,.28);makeEffect(target,{x:from.x,y:from.y,coopIdR62:p.coopIdR62},p.attackAngle,seq);
-  const dist=distance(p,target);if(dist<=2.1){const perHit=attackPower()*(.22+Math.min(.08,rank*.006));const source={kind:'hero-thread-dance-r63',ability:'threadDanceR63',hero:p.hero,playerId:p.coopIdR62||null,eventId:'thread-'+actorKey(p)+'-'+seq+'-'+rank,angle:p.attackAngle};hitEnemy(target,perHit,source);}return true;});}
+ function strike(p,roomAt,target,origin,seq,hitIndex,skillRank){return withActor(p,()=>{if(room!==roomAt||p.hp<=0||target.hp<=0||target.deadRecorded||!room.enemies.includes(target))return false;const spot=nearestFree(target,origin,seq+hitIndex);if(!spot)return false;
+  const from={x:p.x,y:p.y};p.x=spot.x;p.y=spot.y;p.moving=false;p.direction=facing(target.x-p.x,target.y-p.y);p.attackAngle=Math.atan2(target.y-p.y,target.x-p.x);p.skillAngle=p.attackAngle;p.attackAnim=Math.max(p.attackAnim||0,.21);p.skillAnim=Math.max(p.skillAnim||0,.28);makeEffect(target,{x:from.x,y:from.y,coopIdR62:p.coopIdR62},p.attackAngle,seq,hitIndex,skillRank);
+  const dist=distance(p,target);if(dist<=2.1){const perHit=attackPower()*(.22+Math.min(.08,skillRank*.006));const source={kind:'hero-thread-dance-r63',ability:'threadDanceR63',hero:p.hero,playerId:p.coopIdR62||null,eventId:'thread-'+actorKey(p)+'-'+seq+'-'+hitIndex,angle:p.attackAngle};hitEnemy(target,perHit,source);}return true;});}
  function cast(manual=false){const p=actorNow(),c=window.__STORYWORLD_COOP_SIM_R62__;
   if(c?.mode?.()==='guest'){if(!manual||modal||loading){lastCastR63={ok:false,stage:'guest-input-gate',manual,modal,loading};return false;}const local=c.localPlayer?.();if(!local){lastCastR63={ok:false,stage:'guest-player-missing'};return false;}local.pendingInputR62??={};local.pendingInputR62.threadDance=true;lastCastR63={ok:true,stage:'guest-input-queued',manual:true};return true;}
   const gate={mode:coopMode(),hp:Number(p?.hp)||0,modal:!!modal,loading:!!loading,safe:safeRegion(),cooldownReady:time>=(targetCooldowns.get(actorKey(p))||0)};if(!available(p)){lastCastR63={ok:false,stage:'host-gate',...gate};return false;}const enemies=validTargets(11),rank=maxRank();if(!enemies.length){lastCastR63={ok:false,stage:'no-target',...gate,nearby:(room?.enemies||[]).filter(e=>e.hp>0).slice(0,4).map(e=>({id:e.id,distance:distance(p,e),spawnState:e.spawnState}))};return false;}
   const hitCount=hitLimit(),targets=enemies.slice(0,targetLimit()),initial={x:p.x,y:p.y},roomAt=room,seq=Math.floor((time+performance.now()/1000)*1000);targetCooldowns.set(actorKey(p),time+DANCE_CD);p.threadDanceAtR63=time;p.threadDanceRankR63=rank;lastCastR63={ok:true,stage:'host-cast',actor:actorKey(p),rank,targets:targets.length,hits:hitCount};
-  let last=0;targets.forEach((enemy,ti)=>{for(let h=0;h<hitCount;h++){const at=ti*.22+h*.075;last=Math.max(last,at);delay(at,()=>strike(p,roomAt,enemy,initial,seq+ti*32,h),p.coopIdR62||'threadDanceR63');}});
+  let last=0;targets.forEach((enemy,ti)=>{for(let h=0;h<hitCount;h++){const at=ti*.22+h*.075;last=Math.max(last,at);delay(at,()=>strike(p,roomAt,enemy,initial,seq+ti*32,h,rank),p.coopIdR62||'threadDanceR63');}});
   delay(last+.22,()=>withActor(p,()=>{if(room===roomAt&&p.hp>0&&Math.hypot(p.x-initial.x,p.y-initial.y)<5){p.x=initial.x;p.y=initial.y;p.moving=false;}}),p.coopIdR62||'threadDanceR63');
   sound('special');return true;}
  function autoCast(){const p=actorNow();if(!available(p)||!validTargets(11).length)return false;return cast(false);}
@@ -167,6 +171,17 @@
    ctx.beginPath();ctx.moveTo(-size*.65,size*.45);ctx.bezierCurveTo(-size*.43,-size*.78,size*.48,-size*.95,size*.73,size*.34);ctx.stroke();
    ctx.strokeStyle='rgba(255,255,255,.90)';ctx.lineWidth=Math.max(1.6,size*.032);ctx.shadowBlur=3;
    ctx.beginPath();ctx.moveTo(-size*.55,size*.53);ctx.quadraticCurveTo(-size*.03,-size*.30,size*.66,size*.22);ctx.stroke();
+   // Rank-unlocked motifs are original silver-thread silhouettes. They change
+   // only this skill's presentation, never its existing damage or target rules.
+   const motif=e.threadR63.motif||'cross',hitIndex=Math.max(0,Number(e.threadR63.hitIndex)||0),r=size*.28;
+   ctx.strokeStyle='rgba(245,249,255,.92)';ctx.shadowColor='rgba(224,236,251,.76)';ctx.shadowBlur=3;ctx.lineWidth=Math.max(1.4,size*.035);ctx.beginPath();
+   if(motif==='cross'){ctx.moveTo(-r,-r*.65);ctx.lineTo(r,r*.65);ctx.moveTo(r,-r*.65);ctx.lineTo(-r,r*.65);ctx.moveTo(-r*.95,0);ctx.lineTo(r*.95,0);}
+   else if(motif==='flower'){for(let i=0;i<4;i++){ctx.save();ctx.rotate(i*Math.PI/2);ctx.ellipse(0,-r*.48,r*.23,r*.52,0,0,Math.PI*2);ctx.restore();}}
+   else if(motif==='fractal'){ctx.moveTo(-r,0);ctx.lineTo(-r*.35,-r*.48);ctx.lineTo(0,0);ctx.lineTo(r*.35,-r*.48);ctx.lineTo(r,0);ctx.moveTo(-r*.35,-r*.48);ctx.lineTo(-r*.55,-r*.78);ctx.moveTo(r*.35,-r*.48);ctx.lineTo(r*.55,-r*.78);}
+   else if(motif==='claw'){for(let i=-1;i<=1;i++){const y=i*r*.34;ctx.moveTo(-r*.9,y+r*.3);ctx.quadraticCurveTo(-r*.05,y-r*.38,r*.82,y-r*.12);}}
+   else if(motif==='tsubamegaeshi'){const a=[[-r*.66,r*.34],[0,-r*.62],[r*.66,r*.34]],i=hitIndex%3;ctx.moveTo(a[i][0],a[i][1]);ctx.lineTo(a[(i+1)%3][0],a[(i+1)%3][1]);ctx.arc(a[i][0],a[i][1],Math.max(1.5,size*.035),0,Math.PI*2);}
+   else{ctx.lineWidth=Math.max(2.4,size*.075);ctx.moveTo(-r*1.35,r*.72);ctx.quadraticCurveTo(-r*.1,-r*1.15,r*1.4,-r*.72);ctx.moveTo(-r*.95,r*.48);ctx.quadraticCurveTo(0,-r*.78,r*1.08,-r*.34);}
+   ctx.stroke();
    const spark=progress*length*.78;ctx.fillStyle='rgba(255,255,255,.96)';for(let i=0;i<3;i++){const x=-length*.28+((spark+i*size*.37)%(length*.58)),y=-size*.18+Math.sin(progress*7+i*1.7)*size*.12;ctx.beginPath();ctx.arc(x,y,Math.max(1.4,size*.032),0,Math.PI*2);ctx.fill();}ctx.restore();};
   const c=window.__STORYWORLD_COOP_SIM_R62__,id=e.threadR63.playerId,p=c?.players?.().find(p=>p.coopIdR62===id);return p&&c?.withPlayer?c.withPlayer(p,paint):paint();};
 
@@ -175,5 +190,5 @@
   return result;};
  document.addEventListener('keydown',e=>{if(e.code!=='KeyT'||e.repeat||e.target?.matches?.('input,textarea,select,[contenteditable="true"]'))return;e.preventDefault();e.stopImmediatePropagation();cast(true);},true);
 
-  window.__STORYWORLD_CAMPAIGN_R63R1__=Object.freeze({revision:'R63R2-candidate',tiers:TIERS,reward,mode:mapMode,multiplier,choose:setMapMode,reapplyRoom:()=>applyRoom(room,resolveRoomTier(room)),incomingDamageFactor,incomingDamageScale:tier=>TIERS[validTier(tier)].incoming,scaleIncomingDamage:(value,source,tier)=>Number.isFinite(value)?value*incomingDamageFactor(source,tier):value,drawThreadAura,cast,autoCast,inspect:()=>({revision:'R63R2-candidate',region:zone,layer,tier:mapMode(),hpMultiplier:multiplier(),hpRetained:TIERS[mapMode()].hpRetained,incomingDamageMultiplier:TIERS[mapMode()].incoming,reward:reward({regionId:zone,layer}),nextNarrative:firstPending()?.id||null,skillRank:maxRank(),skillHitLimit:hitLimit(),skillTargetLimit:targetLimit(),coopMode:coopMode(),trackedMaps:(inCoop()?coopPrefs: prefs).size,activeSkillCooldown:Math.max(0,(targetCooldowns.get(actorKey(actorNow()))||0)-time),lastCast:lastCastR63,visualCulls:{...visualCullsR63R2},enemyScales:(room?.enemies||[]).filter(e=>Number.isFinite(e.difficultyFactorR63)).map(e=>({id:e.id,base:e.difficultyBaseHpR63,maxHp:e.maxHp,factor:e.difficultyFactorR63}))})});
+  window.__STORYWORLD_CAMPAIGN_R63R1__=Object.freeze({revision:'R64-candidate',tiers:TIERS,reward,mode:mapMode,multiplier,choose:setMapMode,reapplyRoom:()=>applyRoom(room,resolveRoomTier(room)),restoreLoadedHealth,incomingDamageFactor,incomingDamageScale:tier=>TIERS[validTier(tier)].incoming,scaleIncomingDamage:(value,source,tier)=>Number.isFinite(value)?value*incomingDamageFactor(source,tier):value,drawThreadAura,threadMotifs:threadMotifsR64,cast,autoCast,inspect:()=>({revision:'R64-candidate',region:zone,layer,tier:mapMode(),hpMultiplier:multiplier(),hpRetained:TIERS[mapMode()].hpRetained,incomingDamageMultiplier:TIERS[mapMode()].incoming,reward:reward({regionId:zone,layer}),nextNarrative:firstPending()?.id||null,skillRank:maxRank(),skillHitLimit:hitLimit(),skillTargetLimit:targetLimit(),threadMotifs:threadMotifsR64.slice(0,Math.min(threadMotifsR64.length,maxRank())),coopMode:coopMode(),trackedMaps:(inCoop()?coopPrefs: prefs).size,activeSkillCooldown:Math.max(0,(targetCooldowns.get(actorKey(actorNow()))||0)-time),lastCast:lastCastR63,visualCulls:{...visualCullsR63R2},enemyScales:(room?.enemies||[]).filter(e=>Number.isFinite(e.difficultyFactorR63)).map(e=>({id:e.id,boss:!!(e.boss||e.midboss||e.trial||e.cosmic||e.persona||e.r61Summoned||e.coopReplicaR62),base:e.difficultyBaseHpR63,maxHp:e.maxHp,factor:e.difficultyFactorR63}))})});
 })();
