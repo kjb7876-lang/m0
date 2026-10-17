@@ -42,15 +42,34 @@ async function damageCase(baseline){
 async function hudCase(mobile){
  const {context,page,errors}=await openGame({mobile});
  try{
+  // Compare the fixed formatting fixture inside the same JS task: natural
+  // combat can legitimately change HP between two awaited Playwright calls.
   const expected=await page.evaluate(()=>{
    const boss=room.enemies.find(e=>e.boss||e.midboss);boss.spawnState='active';boss.deadRecorded=false;boss.maxHp=6421.5;boss.hp=3210.5;boss.cd=100;room.engaged=true;updateHUD();
-   return{hp:boss.hp,maxHp:boss.maxHp,state:boss.spawnState,listed:liveEnemies().includes(boss),barClass:document.getElementById('bossbar').className};
+   return{hp:boss.hp,maxHp:boss.maxHp,state:boss.spawnState,listed:liveEnemies().includes(boss),barClass:document.getElementById('bossbar').className,text:document.getElementById('bossHPNumbersR66')?.textContent};
   });
   console.log('R66_HUD_ACTIVE_STATE',JSON.stringify(expected));assert.equal(expected.listed,true,'HUD fixture must use an actually active boss');
-  const node=page.locator('#bossHPNumbersR66');await node.waitFor({state:'visible',timeout:10000});const text=await node.textContent();assert.equal(text,'3,211 / 6,422');
+  assert.equal(expected.hp,3210.5);assert.equal(expected.text,'3,211 / 6,422','Fixed-value formatting must be exact');
+  const node=page.locator('#bossHPNumbersR66');await node.waitFor({state:'visible',timeout:10000});
+  const live=await page.evaluate(()=>{
+   const boss=liveEnemies().find(e=>e.boss||e.midboss);
+   if(!boss)throw Error('Active boss disappeared during the bounded HUD fixture');
+   const snapshot=()=>{
+    updateHUD();const n=document.getElementById('bossHPNumbersR66'),f=new Intl.NumberFormat('ko-KR',{maximumFractionDigits:0});
+    return{hp:boss.hp,maxHp:boss.maxHp,text:n?.textContent,expected:f.format(Math.ceil(Math.max(0,Math.min(boss.maxHp,boss.hp))))+' / '+f.format(Math.ceil(boss.maxHp)),fill:parseFloat(document.getElementById('bossHP').style.width)};
+   };
+   const before=snapshot();boss.hp=Math.max(1,boss.hp-17.25);const after=snapshot();return{before,after};
+  });
+  for(const state of [live.before,live.after]){
+   assert.equal(state.text,state.expected,'Displayed HP must equal current native HP in the same task');
+   assert.ok(Math.abs(state.fill-state.hp/state.maxHp*100)<.01,'Numeric HP and filled percentage must agree');
+  }
+  assert.notEqual(live.before.text,live.after.text,'An actual HP change must refresh the displayed number');
+  console.log('R66_HUD_ATOMIC_LIVE',JSON.stringify({mobile,initialHP:expected.hp,...live}));
+  const text=live.after.text;
   const box=await node.boundingBox(),viewport=page.viewportSize();assert.ok(box&&box.width>50&&box.height>=16);assert.ok(box.x>=-1&&box.x+box.width<=viewport.width+1);assert.ok(box.y>=0&&box.y+box.height<=viewport.height);
   await page.evaluate(s=>window.eval(s),helperSource);await page.evaluate(()=>updateHUD());assert.equal(await node.count(),1);
-  await page.screenshot({path:path.join(OUT,mobile?'boss-hp-mobile.png':'boss-hp-desktop.png')});assert.deepEqual(errors,[]);return{mobile,expected,text,box,errors};
+  await page.screenshot({path:path.join(OUT,mobile?'boss-hp-mobile.png':'boss-hp-desktop.png')});assert.deepEqual(errors,[]);return{mobile,expected,live,text,box,errors};
  }finally{await context.close();}
 }
 async function lifecycleCase(){
