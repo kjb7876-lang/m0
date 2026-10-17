@@ -76,4 +76,6 @@ Call tree의 inclusive/total 시간은 호출 계층에서 겹칠 수 있어 합
 
 후보 변경은 `74e5b53f063d46c78bbd5b2d98acb2f1b7d72616`에 고정했다. 문서에 SHA를 기록한 `db039378692d7382ac71b30daf52ae9c121da142`를 `main`에 fast-forward로 push했고, [GitHub Pages run #13](https://github.com/kjb7876-lang/m0/actions/runs/39025845620)이 정적 재구성·파일 검증·배포까지 `success`로 끝났다. 공개 게임 주소는 https://kjb7876-lang.github.io/m0/ 이다. 이 실행 환경에서 공개 Pages 본문을 직접 다시 가져오는 요청은 네트워크 프록시의 HTTP 403으로 막혀 HTML 응답 SHA를 별도 대조하지 못했다. GitHub Pages 배포 작업 성공으로 공개 배포 완료를 확인했다. Render/중계 서버 설정은 수정하지 않았다.
 
+배포 SHA/시간을 매니페스트에 반영한 후속 run #14는 `web-manifest-r62.json`의 정적 빌드 입력에 이전 파일 크기·SHA가 남아 재구성 단계에서 실패했다. 이 파일 행의 크기와 SHA를 실제 파일과 일치시켰고, 그 뒤 로컬 재구성(1,906개 파일)과 정적 HTTP/오디오 범위 검증(2,187개 요청, 실패 0)이 다시 통과했다. 정정 메타데이터를 담은 최신 main 커밋으로 Pages 재배포를 실행했다.
+
 실제 PC에서 후보 프레임 시간과 GPU 작업을 다시 측정하려면 trace의 빌드 SHA와 구간을 확인하고, 후보 버전으로 같은 장면을 다시 캡처해야 한다. 이번 첨부의 압축 본문은 직접 파싱하지 못했고, 사용자가 전달한 프로파일 화면 수치만 출처와 범위를 명시해 반영했다.

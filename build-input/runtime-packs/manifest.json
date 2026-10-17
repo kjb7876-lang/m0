@@ -813,8 +813,8 @@
     },
     {
       "path": "web-manifest-r62.json",
-      "bytes": 363860,
-      "sha256": "74e6d26f60cfa77b31ae36a67e688f77407cceece52714abb290d4319ce8bfeb"
+      "bytes": 363845,
+      "sha256": "02bf3763c9d0fd2694128123a869c0358c6afe8e59deaec358225c1cee21d116"
     }
   ],
   "archives": [
