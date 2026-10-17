@@ -1,0 +1,54 @@
+name: StoryWorld R66 review
+on:
+  push:
+    branches: [chat/storyworld-r66-ego-performance]
+permissions:
+  contents: read
+concurrency:
+  group: storyworld-r66-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare and validate reviewed candidate
+        run: |
+          mkdir -p out/r66
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          node --test scripts/campaign-balance-r64.cpu.test.mjs
+          python3 scripts/apply-r66.py --site _pages/docs
+          node --test scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs
+          node verify-pages-r62.mjs _pages
+      - name: Install sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
+      - name: Final incremental HUD and renderer URL regression
+        run: |
+          # The full suite passed on 4a621344; this final delta changes only
+          # active-boss selection and renderer cache version. Production Pages
+          # independently repeats the full suite before publishing this commit.
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-regression.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ timeout 180s node scripts/r66.hud.browser.mjs
+      - name: Paired baseline and final candidate measurements
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http-perf.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ timeout 300s node scripts/r66.perf.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r66-review-results
+          path: out/r66/
+          retention-days: 7
