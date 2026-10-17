@@ -3,8 +3,8 @@
   "status": "R63R2_CANDIDATE_READY",
   "sourceBuild": "StoryWorld_Story_R62",
   "sourceManifest": "RUNTIME_FILES_R62.json",
-  "sourceHTMLSha256": "fc7f70fdae44d7704a84214d81e589cbc8cd56ae994e6f1295bc42801eeb0d15",
-  "webHTMLSha256": "fc7f70fdae44d7704a84214d81e589cbc8cd56ae994e6f1295bc42801eeb0d15",
+  "sourceHTMLSha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758",
+  "webHTMLSha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758",
   "files": [
     {
       "path": "assets/actors/v31345/guardians/great-01-atlas.webp",
@@ -9513,8 +9513,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 5948026,
-      "sha256": "fc7f70fdae44d7704a84214d81e589cbc8cd56ae994e6f1295bc42801eeb0d15"
+      "bytes": 5949027,
+      "sha256": "7343aa796139920f31d4491c7ed469cf3132c85689e7dcca6ad1d1768393e758"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -9538,7 +9538,7 @@
     }
   ],
   "fileCount": 1906,
-  "totalBytes": 464826008,
+  "totalBytes": 464827009,
   "largest": [
     {
       "path": "index.html",
