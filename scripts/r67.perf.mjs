@@ -21,8 +21,18 @@ try{
    await page.route('**/dist/phase1.js*',r=>r.fulfill({status:200,contentType:'text/javascript',body:sources[kind].js}));
    try{
     await page.goto(url,{waitUntil:'load',timeout:60000});await page.locator('#campaignNew54').click({timeout:60000});await page.waitForFunction(()=>window.eval('started&&booted&&!loading'),null,{timeout:60000});
-    assert.equal(await page.evaluate(()=>enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}})),true);
-    await page.waitForFunction(()=>window.eval('!loading&&!modal'),null,{timeout:30000});
+    // The native New Game callback still settles after the early boot flags.
+    // Match the existing R66 regression harness; never retry a failed entry.
+    await page.waitForTimeout(1000);
+    await page.waitForFunction(()=>window.eval('started&&booted&&!loading&&!!room&&!!player')&&window.__STORYWORLD_PHASE1__?.inspect?.().active==='three',null,{timeout:60000});
+    const entry=await page.evaluate(async()=>{
+     const before={zone,started,booted,loading,modal};auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;player.hp=maxHP()*100;
+     const accepted=await enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}});
+     return{accepted,before,after:{zone,started,booted,loading,modal},warnings:(warnings||[]).slice(-5)};
+    });
+    console.log('R67_MAP_ENTRY',JSON.stringify({scenario,kind,index,...entry}));
+    assert.equal(entry.accepted,true,'Native performance-map entry failed: '+JSON.stringify(entry));
+    await page.waitForFunction(()=>window.eval("zone==='dist00'&&!loading&&!modal"),null,{timeout:30000});
     const setup=await page.evaluate(scenario=>{
      auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;settings.lowFx=false;settings.reducedMotion=false;room.engaged=true;player.hp=maxHP()*100;player.ego=0;command=null;target=null;route=[];window.__STORYWORLD_PRESENTATION_R58__?.setFlashlight(true);
      window.__r67ThreadHits=0;const baseHit=hitEnemy;hitEnemy=function(e,amount,source){if(source?.ability==='threadDanceR63')window.__r67ThreadHits++;return baseHit.apply(this,arguments);};
