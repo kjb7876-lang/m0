@@ -15,13 +15,23 @@ async function openGame({baseline=false,mobile=false}={}){
  if(baseline){await page.route(URL,r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:baselineHTML}));await page.route(new globalThis.URL('dist/phase1.js',URL).href,r=>r.fulfill({status:200,contentType:'text/javascript',body:baselineModule}));}
  try{
   await page.goto(URL,{waitUntil:'load',timeout:60000});await page.waitForTimeout(500);await page.locator('#campaignNew54').click({timeout:60000});
-  await page.waitForFunction(()=>window.eval('started && booted && !loading'),null,{timeout:60000});await page.waitForTimeout(1000);
-  const entered=await page.evaluate(()=>{auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;player.hp=maxHP()*100;return enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}});});
+  // started/!loading can be transiently true while begin() still awaits newGame.
+  // Wait for the native transaction to finish; never force loading or retry entry.
+  await page.waitForFunction(()=>{
+   const profile=window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.();
+   return profile?.busy===false&&profile.stage==='playing'&&!profile.error&&window.eval('started && booted && !loading');
+  },null,{timeout:60000});
+  const entered=await page.evaluate(()=>{
+   const profile=window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.();
+   if(!profile||profile.busy||profile.stage!=='playing'||profile.error||loading)throw Error('Campaign startup transaction is not ready: '+JSON.stringify({profile,loading,zone}));
+   console.info('R66_CAMPAIGN_READY',JSON.stringify({busy:profile.busy,stage:profile.stage,zone,loading}));
+   auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;player.hp=maxHP()*100;return enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}});
+  });
   assert.equal(entered,true,'Native region entry must report success');
   await page.waitForFunction(()=>window.eval("zone==='dist00' && !loading && !modal"),null,{timeout:30000});
   await page.evaluate(()=>{room.engaged=true;player.hp=maxHP()*100;player.ego=0;player.samong=0;});
   return{context,page,errors};
- }catch(e){console.error('R66_BOOT_STATE',await page.evaluate(()=>window.eval('({started,booted,loading,modal,zone,auto,warnings:(warnings||[]).slice(-5)})')).catch(()=>null),errors);await context.close();throw e;}
+ }catch(e){console.error('R66_BOOT_STATE',await page.evaluate(()=>window.eval('({started,booted,loading,modal,zone,auto,profile:window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.(),warnings:(warnings||[]).slice(-5)})')).catch(()=>null),errors);await context.close();throw e;}
 }
 async function damageCase(baseline){
  const {context,page,errors}=await openGame({baseline});
