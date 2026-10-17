@@ -1,0 +1,53 @@
+{
+  "revision": "R67-RENDER-PERF",
+  "selection": "pure-render-optimization-only",
+  "publication": "This file records validation, not a completed deployment. Check PR6 and the Pages release job for publication and public-byte verification.",
+  "baselineCommit": "080ef5a535eb900f9c50900dbc35bf6c81e0ddb4",
+  "verifiedRuntimeCommit": "cb84b268d6f79b50f2ecf23803c2c3ac2d8927d8",
+  "workflowRun": 39035884303,
+  "verificationJob": 117405586253,
+  "artifactId": 12101755930,
+  "htmlSHA256": "0c17a3a642967955aa143aff69d46289c946bdfddaa95a6eb295647d81c6117a",
+  "rendererSHA256": "e4bd1064131c8c124adf2146229b2598949f200646f599c19130fb88774fd15",
+  "environment": {"browser":"Chromium 141.0.7390.37", "renderer":"SwiftShader software", "physicalGPU":false, "physicalMobile":false, "sandbox":true, "viewportCSS":{"width":1365,"height":850}, "deviceScaleFactor":1},
+  "trialDesign": {"observationMs":30000, "order":["baseline","candidate","candidate","baseline"], "trialsPerBuildPerScenario":2, "scenarios":["movement","ego-stress"], "totalTrials":8, "freshContexts":true, "seededInitialization":true, "laterLiveStateExactlyMatched":false},
+  "movement": {
+    "rendererPath":"Three.js for all four trials",
+    "baseline":{"meanFrameMs":496.5942204301075,"frameP50Ms":516.6,"frameP95Ms":550.05,"glDrawCallsPerObservedFrame":458.03225806451616,"drawCpuP95Ms":57.7},
+    "candidate":{"meanFrameMs":486.55806451612904,"frameP50Ms":500.05,"frameP95Ms":516.7,"glDrawCallsPerObservedFrame":323.46774193548384,"drawCpuP95Ms":57.0},
+    "interpretation":"About 29.4% fewer GL calls per observed frame and 2.0% lower mean frame interval in this limited software test. No statistical significance or physical-device improvement claimed. Texture-upload reduction was not established."
+  },
+  "egoStress": {
+    "rendererPath":"Both R66 and selected pure R67 fall back to legacy Canvas before the timed sample",
+    "knownFallback":"ctx.bezierCurveTo is not a function",
+    "eligibleForThreePerformanceClaim":false,
+    "baseline":{"meanFrameMs":226.62102941176472,"frameP50Ms":225.0,"frameP95Ms":249.9},
+    "candidate":{"meanFrameMs":219.6218067226891,"frameP50Ms":216.6,"frameP95Ms":249.9},
+    "interpretation":"P95 did not improve. This does not establish a Three.js EGO optimization or resolve the pre-existing fallback."
+  },
+  "controlledFixtures": {
+    "flatSprites":48,
+    "glDrawCalls":{"before":96,"after":48},
+    "webglPixelComparisonCases":3,
+    "changedPixelChannels":0,
+    "textLabels":24,
+    "textFrames":100,
+    "createdDOMNodes":{"before":2400,"after":24},
+    "unchangedSubsequentFrame":{"newNodes":0,"textWrites":0,"styleWrites":0}
+  },
+  "verification":{"cpuPassed":22,"cpuTotal":22,"runtimeFiles":1906,"audioRangeChecks":276,"existingGameBrowserRegression":"passed","saveRestoreCycles":6,"pageErrors":0},
+  "preserved":{"simulation":true,"damage":true,"cooldowns":true,"story":true,"difficulty":true,"save":true,"mediaBytes":true,"resolution":true,"unknownMutableCanvasRefresh":true},
+  "deferredCubicRepair": {
+    "includedInRelease":false,
+    "branch":"work/storyworld-r67-ego-readiness",
+    "commit":"024e18000233888ae9b97f8242fe8dc2a5eba4da",
+    "rendererSHA256":"4761ea9ed8fe362724130b3fee3d2a2111579ca083ffa6982469b89037556d59",
+    "correctnessRun":39038707377,
+    "performanceRun":39038130687,
+    "performanceJob":117412261605,
+    "egoBaselineLegacyMeanMs":233.6251968503937,
+    "egoCandidateThreeMeanMs":467.18818082437275,
+    "sameRendererComparison":false,
+    "reason":"Correctness passed but software EGO was slower after restoring the Three path. Hardware behavior is unknown. Excluded from this lag-reduction release rather than advertising the repair as a performance improvement."
+  }
+}

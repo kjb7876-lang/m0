@@ -1,4 +1,4 @@
-name: StoryWorld R66 Pages
+name: StoryWorld R67 Pages
 on:
   push:
     branches: [main]
@@ -11,7 +11,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     permissions:
       contents: read
       pages: read
@@ -27,23 +27,35 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct and apply exact reviewed changes
+      - name: Reconstruct exact baseline and apply reviewed renderer changes
+        shell: bash
         run: |
-          mkdir -p out/r66
-          python3 scripts/unpack-runtime-r62.py --output _pages/docs
-          python3 scripts/apply-r66.py --site _pages/docs
-          node --test scripts/campaign-balance-r64.cpu.test.mjs scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs
-          node verify-pages-r62.mjs _pages
-      - name: Install sandboxed browser regression environment
+          set -euo pipefail
+          mkdir -p out/r66 out/r67
+          python3 scripts/unpack-runtime-r62.py --output _baseline/docs
+          python3 scripts/apply-r66.py --site _baseline/docs
+          cp -a _baseline _pages
+          python3 scripts/apply-r67.py --site _pages/docs | tee out/r67/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/campaign-balance-r64.cpu.test.mjs scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs scripts/r67.cpu.test.mjs | tee out/r67/cpu-tests.log
+          node verify-pages-r62.mjs _pages | tee out/r67/integrity.log
+      - name: Install pinned sandboxed browser regression environment
+        shell: bash
         run: |
-          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
-          npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
-      - name: Gate deployment on actual browser regressions
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r67/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r67/dependencies.log 2>&1
+      - name: Gate publication on WebGL pixel equivalence and actual game regressions
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
         run: |
-          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http.log 2>&1 &
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r67/http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
+          node scripts/r67.browser.test.mjs | tee out/r67/webgl-test.log
+          node scripts/r66.browser.test.mjs | tee out/r67/game-regression.log
       - name: Record exact bytes approved for publication
         id: hashes
         run: |
@@ -51,7 +63,7 @@ jobs:
           import hashlib, os
           from pathlib import Path
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:
-            for key, name in [('html_sha','index.html'),('renderer_sha','dist/phase1.js')]:
+            for key,name in [('html_sha','index.html'),('renderer_sha','dist/phase1.js')]:
               sha=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
               print(key,sha)
               f.write(key+'='+sha+'\n')
@@ -59,8 +71,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r66-release-checks
-          path: out/r66/
+          name: r67-release-checks
+          path: |
+            out/r66/
+            out/r67/
+            _pages/docs/web-manifest-r62.json
           retention-days: 14
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -113,5 +128,5 @@ jobs:
               time.sleep(5)
             else:
               raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R66_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('R67_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
