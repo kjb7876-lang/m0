@@ -15,7 +15,19 @@ try{
   try{
    await page.goto(url,{waitUntil:'load',timeout:60000});await page.locator('#campaignNew54').click({timeout:60000});
    await page.waitForFunction(()=>window.eval('started&&booted&&!loading'),null,{timeout:60000});await page.waitForTimeout(1000);
-   assert.equal(await page.evaluate(async()=>{auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;return await enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}});}),true);
+   // The early boot flags precede asynchronous renderer/region initialization.
+   // Match the full performance harness: observe the actually initialized scene
+   // before making exactly one native region-entry request. Do not retry entry,
+   // override a loading lock, skip a failed scene, or alter production timers.
+   await page.waitForFunction(()=>window.eval('started&&booted&&!loading&&!!room&&!!player')&&window.__STORYWORLD_PHASE1__?.inspect?.().active==='three',null,{timeout:60000});
+   const entry=await page.evaluate(async()=>{
+    const before={zone,started,booted,loading,modal,renderer:window.__STORYWORLD_PHASE1__?.inspect?.().active};
+    auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;
+    const accepted=await enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}});
+    return{accepted,before,after:{zone,started,booted,loading,modal,renderer:window.__STORYWORLD_PHASE1__?.inspect?.().active},warnings:(warnings||[]).slice(-5)};
+   });
+   console.log('R67_EGO_MAP_ENTRY',JSON.stringify({kind,...entry}));
+   assert.equal(entry.accepted,true,'Native EGO probe entry failed: '+JSON.stringify(entry));
    await page.waitForFunction(()=>window.eval("zone==='dist00'&&!loading&&!modal"),null,{timeout:60000});
    await page.evaluate(()=>{
     auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;player.hp=maxHP()*100;player.ego=0;command=null;target=null;route=[];room.engaged=true;
@@ -36,7 +48,7 @@ try{
    await page.waitForTimeout(2500);await record('thread-cast-six-motifs');
    await page.evaluate(()=>{auto=true;settings.autoSkill=true;});await page.waitForTimeout(6000);await record('automatic-skills');
    await page.screenshot({path:'out/r67/ego-probe-'+kind+'.png'});
-   report.builds.push({kind,cast,stages,errors});await fs.writeFile('out/r67/ego-probe.json',JSON.stringify(report,null,2)+'\n');
+   report.builds.push({kind,entry,cast,stages,errors});await fs.writeFile('out/r67/ego-probe.json',JSON.stringify(report,null,2)+'\n');
    assert.deepEqual(errors,[]);assert.ok(stages.at(-1).nativeThreadHits>0);
    if(kind==='candidate')for(const row of stages){assert.equal(row.active,'three',JSON.stringify(row));assert.equal(row.failed,false,JSON.stringify(row));}
    else {assert.ok(stages.slice(0,3).every(row=>row.active==='three'));for(const row of stages.slice(3)){assert.equal(row.active,'legacy');assert.match(row.reason,/ctx\.bezierCurveTo is not a function/);}}

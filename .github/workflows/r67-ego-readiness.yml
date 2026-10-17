@@ -1,0 +1,47 @@
+name: StoryWorld R67 isolated EGO readiness verification
+on:
+  push:
+    branches: [work/storyworld-r67-ego-readiness]
+permissions:
+  contents: read
+jobs:
+  verify-ready-ego:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build exactly the same candidate runtime with corrected test readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r67
+          python3 scripts/unpack-runtime-r62.py --output _baseline/docs
+          python3 scripts/apply-r66.py --site _baseline/docs
+          cp -a _baseline _pages
+          python3 scripts/apply-r67.py --site _pages/docs | tee out/r67/build.log
+          node --test scripts/r67.curves.cpu.test.mjs | tee out/r67/curves-cpu.log
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r67/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r67/dependencies.log 2>&1
+      - name: Validate curves and genuine EGO after actual renderer readiness
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r67/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r67.curves.browser.test.mjs | tee out/r67/cubic-raster.log
+          node scripts/r67.ego-probe.mjs | tee out/r67/ego-probe.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r67-ready-ego
+          path: out/r67/
+          retention-days: 14
