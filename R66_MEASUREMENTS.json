@@ -1,0 +1,17 @@
+{
+  "baselineCommit": "170a60140f6ae10914550a7e254bb320764b0d30",
+  "candidateCommit": "304dc4fe3d0778be923f37b82d4d9901c8f2e1f7",
+  "workflowRun": 39029597933,
+  "job": 117387217933,
+  "browser": "Chromium 141.0.7390.37, headless software renderer, sandbox enabled",
+  "scenario": "dist00/STORY normal; 1365x850; DPR1; flashlight enabled; automatic attacks disabled; seeded initialization; real keyboard movement; 8000ms frame observation per trial",
+  "trials": [
+    {"kind":"baseline","index":0,"frameP50Ms":516.6,"frameP95Ms":533.3,"meanFrameMs":495.0764705882352,"drawP50Ms":48.6,"drawP95Ms":67.1,"tickP50Ms":0.4,"tickP95Ms":0.7,"postGCHeapBytes":38046736,"frameCount":17,"longTasks":25,"enemies":6,"props":15,"pageErrors":0},
+    {"kind":"candidate","index":1,"frameP50Ms":516.6,"frameP95Ms":533.3,"meanFrameMs":495.08235294117657,"drawP50Ms":45.6,"drawP95Ms":70.3,"tickP50Ms":0.4,"tickP95Ms":0.8,"postGCHeapBytes":37884224,"frameCount":17,"longTasks":25,"enemies":6,"props":15,"pageErrors":0},
+    {"kind":"candidate","index":2,"frameP50Ms":516.6,"frameP95Ms":550.0,"meanFrameMs":498.0176470588235,"drawP50Ms":47.5,"drawP95Ms":62.1,"tickP50Ms":0.4,"tickP95Ms":0.7,"postGCHeapBytes":37973152,"frameCount":17,"longTasks":25,"enemies":6,"props":15,"pageErrors":0},
+    {"kind":"baseline","index":3,"frameP50Ms":516.6,"frameP95Ms":549.9,"meanFrameMs":499.0,"drawP50Ms":45.1,"drawP95Ms":67.3,"tickP50Ms":0.4,"tickP95Ms":0.7,"postGCHeapBytes":37884320,"frameCount":17,"longTasks":25,"enemies":6,"props":15,"pageErrors":0}
+  ],
+  "vertexAllocationTest":{"vertices":10000,"before":30000,"after":10002,"reductionFraction":0.6666,"coordinateEquivalenceCases":5000},
+  "interpretationKo":"전체 프레임 시간의 유의미한 개선은 이 측정에서 확인되지 않았다. 정점 계산의 임시 벡터 할당 감소는 확인되지만 전체 게임 메모리 66.66% 감소나 FPS 증가를 뜻하지 않는다. 작은 표본·소프트웨어 렌더링 결과를 실제 사용자 PC 및 모바일 FPS로 해석하지 않는다.",
+  "regressionStatusAtThisRun":"CPU 6+10 and 1906-file integrity passed. New browser regression harness failed before gameplay because its URL string shadowed the URL constructor; performance harness completed independently. Corrected in the following commit; this file does not claim the browser regression passed."
+}

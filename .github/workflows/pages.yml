@@ -1,41 +1,74 @@
-name: StoryWorld R62 Pages
-
+name: StoryWorld R66 Pages
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 concurrency:
   group: storyworld-pages
   cancel-in-progress: false
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
     permissions:
       contents: read
       pages: read
+    outputs:
+      html_sha: ${{ steps.hashes.outputs.html_sha }}
+      renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
     steps:
-      - name: Checkout approved sources
+      - name: Checkout reviewed sources
         uses: actions/checkout@v6
         with:
           persist-credentials: false
-      - name: Reconstruct and verify all runtime bytes
-        run: python3 scripts/unpack-runtime-r62.py --output _pages/docs
-      - name: Check repository subpath and media HTTP responses
-        run: node verify-pages-r62.mjs _pages
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct and apply exact reviewed changes
+        run: |
+          mkdir -p out/r66
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          python3 scripts/apply-r66.py --site _pages/docs
+          node --test scripts/campaign-balance-r64.cpu.test.mjs scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs
+          node verify-pages-r62.mjs _pages
+      - name: Install sandboxed browser regression environment
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r66/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r66/dependencies.log 2>&1
+      - name: Gate deployment on actual browser regressions
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r66/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r66.browser.test.mjs
+      - name: Record exact bytes approved for publication
+        id: hashes
+        run: |
+          python3 - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+            for key, name in [('html_sha','index.html'),('renderer_sha','dist/phase1.js')]:
+              sha=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+              print(key,sha)
+              f.write(key+'='+sha+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r66-release-checks
+          path: out/r66/
+          retention-days: 14
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload only actual static game files
+      - name: Upload only verified static game files
         uses: actions/upload-pages-artifact@v4
         with:
           path: _pages/docs
           retention-days: 1
-
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -51,3 +84,34 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public HTML and renderer match approved hashes
+        env:
+          PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
+          HTML_SHA: ${{ needs.build.outputs.html_sha }}
+          RENDERER_SHA: ${{ needs.build.outputs.renderer_sha }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,time,urllib.request
+          base=os.environ['PUBLIC_URL'].rstrip('/')+'/'
+          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA']}
+          rows=[]
+          for name,want in expected.items():
+            for attempt in range(18):
+              url=base+name+'?release='+os.environ['SOURCE_COMMIT']+'&check='+str(attempt)
+              try:
+                request=urllib.request.Request(url,headers={'Cache-Control':'no-cache','User-Agent':'StoryWorld-Release-Verification'})
+                with urllib.request.urlopen(request,timeout=20) as response:
+                  data=response.read()
+                  actual=hashlib.sha256(data).hexdigest()
+                if actual==want:
+                  rows.append({'path':name or 'index.html','sha256':actual,'bytes':len(data),'status':'matched'})
+                  break
+                error='hash mismatch '+actual
+              except Exception as exc:
+                error=str(exc)
+              time.sleep(5)
+            else:
+              raise SystemExit('Public release verification failed for '+name+': '+error)
+          print('R66_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          PY

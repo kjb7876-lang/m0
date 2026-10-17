@@ -12,7 +12,7 @@ const save=()=>fs.writeFile(path.join(OUT,'browser-regression.json'),JSON.string
 async function openGame({baseline=false,mobile=false}={}){
  const context=await browser.newContext({viewport:mobile?{width:844,height:390}:{width:1365,height:850},deviceScaleFactor:1,isMobile:mobile,hasTouch:mobile});
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
- if(baseline){await page.route(URL,r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:baselineHTML}));await page.route(new URL('dist/phase1.js',URL).href,r=>r.fulfill({status:200,contentType:'text/javascript',body:baselineModule}));}
+ if(baseline){await page.route(URL,r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:baselineHTML}));await page.route(new globalThis.URL('dist/phase1.js',URL).href,r=>r.fulfill({status:200,contentType:'text/javascript',body:baselineModule}));}
  try{
   await page.goto(URL,{waitUntil:'load',timeout:60000});await page.waitForTimeout(500);await page.locator('#campaignNew54').click({timeout:60000});
   await page.waitForFunction(()=>window.eval('started && booted && !loading'),null,{timeout:60000});await page.waitForTimeout(1000);
