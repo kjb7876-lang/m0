@@ -1,0 +1,187 @@
+{
+  "schema": "r71-intermediate-browser-evidence/v1",
+  "classification": "intermediate 6/8 preflight; review blockers remain; not approval evidence",
+  "commit": "dff330b89a8e10ee98b610191061e0840394b989",
+  "candidate": {
+    "htmlSha256": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
+    "rendererSha256": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c",
+    "sourceFiles": {
+      "html": "_pages/docs/index.html",
+      "renderer": "_pages/docs/dist/phase1.js"
+    }
+  },
+  "baseline": {
+    "htmlSha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+    "rendererSha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4",
+    "sourceFiles": {
+      "html": "_r70/docs/index.html",
+      "renderer": "_r70/docs/dist/phase1.js"
+    }
+  },
+  "preflight": {
+    "runId": 39108393150,
+    "runUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39108393150",
+    "jobId": 117619084268,
+    "jobUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39108393150/job/117619084268",
+    "conclusion": "failure",
+    "browser": "141.0.7390.37",
+    "sandbox": true,
+    "physicalGPU": false,
+    "physicalMobile": false,
+    "actualRelay": false,
+    "caseSummary": { "attempted": 8, "passed": 6, "failed": 2 },
+    "cases": [
+      { "name": "native-difficulty-confirm-and-first-clear", "status": "passed", "durationMs": 43236 },
+      { "name": "mobile-touch-difficulty-portrait-landscape", "status": "passed", "durationMs": 15104 },
+      { "name": "health-cap-bosses-hit-save-upgrade-respawn", "status": "passed", "durationMs": 340235 },
+      { "name": "bleed-admission-guards-native-hurt", "status": "passed", "durationMs": 16479 },
+      { "name": "native-point-drop-probability-and-amount-boundaries", "status": "passed", "durationMs": 10546 },
+      { "name": "map-material-palettes-and-hospital-geometry", "status": "passed", "durationMs": 83707 },
+      {
+        "name": "native-expanded-point-drop-pickup-and-flashlight",
+        "status": "failed",
+        "durationMs": 32313,
+        "error": "No in-view hospital point behind a nearby wall and inside flashlight radius (scripts/r71.browser.test.mjs:1184:35)",
+        "beaconCapture": {
+          "beaconsCaptured": true,
+          "lastCaptureBeaconCount": 1,
+          "lastCaptureBeaconCommands": 6,
+          "lastCaptureCandidates": 1,
+          "nativeBeaconCount": 0,
+          "runtimeErrors": []
+        },
+        "methodFix": "Replaced unsupported strokeRect with the existing DrawCommands beginPath/rect/stroke primitives; capture now succeeds.",
+        "classification": "Remaining hospital visibility/flashlight target-selection assertion needs QA review."
+      },
+      {
+        "name": "two-page-local-coop-health-rewards-expanded-drops",
+        "status": "failed",
+        "durationMs": 24157,
+        "assertion": "reimporting the same R70 co-op save does not compound boss or clone health",
+        "location": "scripts/r71.browser.test.mjs:1387:12",
+        "comparison": "First import healthBosses included generated dist00:dist00-boss:coop:1 (maxHp 666, canonical 416.625); second import omitted it. The saved R70 replica and R61 clone snapshots remained unchanged. Classification is pending health-agent source review.",
+        "savedNativeCoop": {
+          "sourceMob": {
+            "id": "dist00:story-patrol:0:0",
+            "nativeId": "a11-c1",
+            "ai": "melee",
+            "storyPatrol": true,
+            "hardMaxHp": 1140,
+            "normalMaxHp": 49.5,
+            "normalHp": 49.5,
+            "roomState": {
+              "engaged": false,
+              "cleared": false,
+              "rewardCommitted": false,
+              "encounterStage": "field",
+              "activeEncounter": "",
+              "spawnNonce": 0,
+              "fieldWaveIndex6": 0,
+              "fieldWaves6": [1, 2],
+              "fieldWaveCleared6": false,
+              "defeatedActorIds": [],
+              "kills": 0,
+              "minionKills": 0
+            }
+          },
+          "rosterAtSeed": [
+            {
+              "id": "dist00:dist00-boss",
+              "nativeId": "dist00-boss",
+              "hp": 6666,
+              "maxHp": 6666,
+              "boss": true,
+              "midboss": false,
+              "persona": false,
+              "cosmic": false,
+              "trial": false,
+              "cosmicGuardian": false,
+              "ai": "hybrid",
+              "type": "boss",
+              "coopReplica": false,
+              "spawnState": "hidden",
+              "deadRecorded": false
+            }
+          ]
+        },
+        "expected": {
+          "bossReplicaId": "dist00:dist00-boss:coop:qa-r70-boss",
+          "ordinaryReplicaId": "dist00:story-patrol:0:0:coop:qa-r70-mob",
+          "oldCloneId": "dist00:r61-summon:qa-r70-clone",
+          "fraction": 0.5,
+          "cloneFraction": 0.4,
+          "oldCloneMax": 385.28999999999996
+        },
+        "ownerBefore": {
+          "id": "dist00:dist00-boss",
+          "maxHp": 6666,
+          "canonical": 6421.5,
+          "hpFraction": 1,
+          "factor": 0.25
+        },
+        "mobBefore": { "id": "dist00:story-patrol:0:0", "maxHp": 49.5, "hp": 49.5 },
+        "firstImport": {
+          "owner": { "maxHp": 6666, "canonical": 6421.5, "hpFraction": 1, "factor": 0.25 },
+          "bossReplica": { "maxHp": 6666, "hp": 3333, "hpFraction": 0.5, "canonical": 6421.5, "visible": 6666, "adjusted": true },
+          "ordinaryReplica": { "maxHp": 49.5, "hp": 49.5 },
+          "clone": { "maxHp": 399.96, "hp": 159.984, "hpFraction": 0.4, "ownerMaxHp": 6666, "ownerId": "dist00:dist00-boss", "kind": "clone", "clone": true },
+          "sourceMob": { "maxHp": 49.5, "hp": 49.5 },
+          "cloneMetricRestored": 1,
+          "healthBosses": [
+            { "id": "dist00:dist00-boss", "maxHp": 6666, "canonical": 6421.5 },
+            { "id": "dist00:dist00-boss:coop:1", "maxHp": 666, "canonical": 416.625 },
+            { "id": "dist00:dist00-boss:coop:qa-r70-boss", "maxHp": 6666, "canonical": 6421.5 }
+          ]
+        },
+        "secondImport": {
+          "owner": { "maxHp": 6666, "canonical": 6421.5, "hpFraction": 1, "factor": 0.25 },
+          "bossReplica": { "maxHp": 6666, "hp": 3333, "hpFraction": 0.5, "canonical": 6421.5, "visible": 6666, "adjusted": true },
+          "ordinaryReplica": { "maxHp": 49.5, "hp": 49.5 },
+          "clone": { "maxHp": 399.96, "hp": 159.984, "hpFraction": 0.4, "ownerMaxHp": 6666, "ownerId": "dist00:dist00-boss", "kind": "clone", "clone": true },
+          "sourceMob": { "maxHp": 49.5, "hp": 49.5 },
+          "cloneMetricRestored": 2,
+          "healthBosses": [
+            { "id": "dist00:dist00-boss", "maxHp": 6666, "canonical": 6421.5 },
+            { "id": "dist00:dist00-boss:coop:qa-r70-boss", "maxHp": 6666, "canonical": 6421.5 }
+          ]
+        }
+      }
+    ]
+  },
+  "passedHealthEvidence": {
+    "baselinePlayerMaxHp": 260,
+    "candidatePlayerMaxHp": 777,
+    "dist00Boss": { "baseMaxHp": 25686, "factor": 0.25, "canonicalMaxHp": 6421.5, "visibleMaxHp": 6666, "hp": 6666 },
+    "bossMapsScanned": 28,
+    "bossActorsScanned": 44
+  },
+  "nativeEnemyHit": {
+    "result": "hit",
+    "sourceId": "dist00:story-patrol:0:0",
+    "damage": 6.558387096774195,
+    "playerHpBefore": 700,
+    "playerHpAfter": 694.9041332258065,
+    "prepared": true,
+    "committed": true,
+    "nativeAttackError": null,
+    "homeDistance": 0,
+    "enemyDistance": 0.5499999999999972,
+    "explorationLimit": 7.15,
+    "lineOfSight": true,
+    "nativeCanPrepare": true
+  },
+  "artifacts": {
+    "preflight": {
+      "id": 12129506865,
+      "name": "r71-gameplay-preflight",
+      "url": "https://github.com/kjb7876-lang/m0/actions/runs/39108393150/artifacts/12129506865",
+      "sha256": "4bfbed3cfd30df95e2a62c90b5eb3e4752663521c557d2a35dfe46d12d03b85f",
+      "sizeBytes": 5894285
+    },
+    "pairedProfile": {
+      "id": 12129366904,
+      "url": "https://github.com/kjb7876-lang/m0/actions/runs/39108393150/artifacts/12129366904",
+      "sha256": "c38f78dae692287260891fa627b948b60f19054c0cbf04916cae0565249108f0"
+    }
+  }
+}

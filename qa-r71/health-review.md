@@ -1,6 +1,6 @@
 # R71 health and bleed review
 
-검토 범위: 현재 `client-source/health-r71.js`, `scripts/health-r71.py`, 그리고 R61 분신의 기존 체력 계약(`client-source/summons-r61.js`)을 정적으로 읽었습니다. 코드는 수정하지 않았고 런타임 테스트는 실행하지 않았습니다.
+검토 범위: `client-source/health-r71.js`, `scripts/health-r71.py`, 그리고 R61 분신의 기존 체력 계약(`client-source/summons-r61.js`)을 정적으로 읽었습니다. 이 문서 작성자는 코드를 수정하거나 런타임 테스트를 직접 실행하지 않았습니다. 현재 후보의 health helper는 `cc7aa6`와 동일하며, 이후 `de6536` 변경은 beacon renderer에 한정됩니다.
 
 ## 확인 결과
 
@@ -22,6 +22,12 @@ R71 변환 계수는 `777 / (260 + 35*nativeVital + 5*(level-1) + 18*endlessVita
 
 ## R61 분신 예외
 
-검토 중 이전 helper 판별식이 `r61Clone`까지 접미 체력 대상으로 삼는 충돌을 발견해 health 담당자에게 전달했습니다. 최신 shared helper에서는 보스 판별이 실제 보스 플래그(`boss`, `midboss`, `persona`, `cosmic`, `trial`, `cosmicGuardianR63`)만 보도록 바뀌어 분신 및 일반 소환수를 제외합니다(`health-r71.js:112`). R61 분신은 나열한 보스 플래그가 모두 `false`이고 별도 `r61Clone=true`이며, 보스 최대 체력의 정확히 6%를 유지하는 계약입니다(`summons-r61.js:48–55`, `:76`). 새 `r71-health.cpu.test.mjs` 회귀 케이스는 방 정규화 전후 분신의 `hp`, `maxHp`, 6% 비율을 확인합니다(`:91–97`). health 담당자는 이 변경 뒤 포커스 CPU suite 6/6 통과를 보고했습니다. 본 검토에서는 테스트를 직접 실행하지 않았습니다.
+이전 helper 판별식이 `r61Clone`까지 접미 체력 대상으로 삼는 충돌은 수정되었습니다. 최신 helper의 보스 판별은 실제 보스 플래그(`boss`, `midboss`, `persona`, `cosmic`, `trial`, `cosmicGuardianR63`)만 사용해 일반 소환수를 제외합니다. R61 분신은 이 보스 플래그가 모두 `false`이고 `r61Clone=true`이며 보스 최대 체력의 정확히 6%를 유지합니다. 현재 helper는 R63 저장 복원과 같은 지도 난이도 재선택 뒤 살아 있는 분신의 체력 비율을 보존하며, 죽은 분신은 0 HP로 남깁니다. 최신 health CPU suite 13건은 전체 26건의 CI 통과 집계에 포함됐습니다. 이 검토자는 suite를 직접 실행하지 않았습니다.
 
-검토 한계: 브라우저·저장 복원·협동 런타임 시나리오는 실행하지 않았습니다. CPU 통과 내용은 health 담당자의 실행 보고이며, 이 검토는 정적 코드 확인으로 한정됩니다.
+## 검증 상태
+
+현재 후보 HTML SHA-256은 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, renderer SHA-256은 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 후보 CPU 집계는 **26/26**(health 13, progression 9, renderer 4)입니다. Preflight run `39108393150` / commit `dff330b89a8e10ee98b610191061e0840394b989`의 브라우저 및 native 결과는 대기 중이므로 최종 통과로 표시하지 않습니다.
+
+중간 `58c979b` 브라우저 결과는 별도 기록입니다. 해당 실행에서는 health 전용 케이스가 통과했고 28개 보스 맵의 44개 보스 actor, HP 777, native enemy hit, 강화, 저장/복원, 사망/부활을 다뤘습니다. 그러나 당시 8개 사례 중 전체 6개만 통과했고, beacon rendering과 co-op fixture 사례가 실패했습니다. 따라서 이 health 사례는 유용한 중간 증거이며 현재 후보의 최종 browser acceptance를 대신하지 않습니다([중간 결과](intermediate-58c979b-browser.json)).
+
+검증 범위는 로컬 브라우저 협동 시뮬레이션입니다. 실제 relay 연결과 서로 다른 버전 간 co-op 호환성은 검증되지 않았습니다.

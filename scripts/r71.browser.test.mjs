@@ -1185,14 +1185,15 @@ try {
       window.__STORYWORLD_PRESENTATION_R58__?.setFlashlight(true);
       const sight = window.__STORYWORLD_SIGHT24__, state = sight.mask();
       if (!state.enabled) throw new Error('Flashlight mask failed to enable');
-      const hidden = [];
-      const b = room.exploration.bounds;
-      const geometry = sight.geometry();
+      const hidden = [], b = room.exploration.bounds, geometry = sight.geometry();
       for (let x = Math.max(b[0] + 1, player.x + 1); x < b[2] - 1 && hidden.length < 40; x += .5) {
         for (let y = b[1] + 1; y < b[3] - 1 && hidden.length < 40; y += .5) {
-          if (!blocked(x, y, .2, room) && !window.__STORYWORLD_SIGHT24__?.pointVisible(x, y)) {
+          if (!blocked(x, y, .2, room) && !sight.pointVisible(x, y)) {
             const dx = x - player.x, dy = y - player.y, d = Math.hypot(dx, dy);
-            const rayLimit = d > 0 ? geometry.ray(dx / d, dy / d) : 0;
+            // `geometry().ray` accepts a direction pair as one argument.
+            // Passing two scalars silently returned the unoccluded radius,
+            // which made every behind-wall candidate look fully visible.
+            const rayLimit = d > 0 ? geometry.ray([dx / d, dy / d]) : 0;
             if (d >= geometry.radius - .5 || rayLimit >= d - .1 || d >= rayLimit + 1) continue;
             const q = project(x, y);
             if (q.x >= -36 && q.x <= W + 36 && q.y >= -40 && q.y <= H + 40) hidden.push({x, y, q, distance: d, rayLimit});
@@ -1211,13 +1212,15 @@ try {
       const py = Math.max(0, Math.min(127, Math.round((1 - (player.y - state.origin[1]) / state.span[1]) * 128)));
       const center = ctx.getImageData(px, py, 1, 1).data;
       const corner = ctx.getImageData(0, 0, 1, 1).data;
-      return {enabled: state.enabled, visible: window.__STORYWORLD_SIGHT24__?.pointVisible(player.x, player.y), hidden: window.__STORYWORLD_SIGHT24__?.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled};
+      const phase=window.__STORYWORLD_PHASE1__.inspect();
+      return {enabled: state.enabled, visible: sight.pointVisible(player.x, player.y), hidden: sight.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled,renderer:{active:phase.active,failed:phase.failed}};
     });
     assert.equal(flashlight.enabled, true); assert.equal(flashlight.visible, true); assert.equal(flashlight.hidden, false);
     assert.ok(flashlight.spot.distance < flashlight.spot.rayLimit + 1, 'hidden fixture must be inside flashlight radius but behind an occluding wall');
     assert.ok(flashlight.centerPixel[0] > 180, 'the player remains inside the white flashlight mask');
     assert.ok(flashlight.cornerPixel[0] < 20, 'the outside of the flashlight mask stays black');
     assert.ok(flashlight.hiddenDrop?.id);
+    assert.equal(flashlight.renderer.active,'three');assert.equal(flashlight.renderer.failed,false,'flashlight capture remains on the Three renderer');
     assert.equal(flashlight.beaconOwners.length, 1, 'beacons outside the black flashlight mask must be excluded from the captured frame');
     assert.ok(flashlight.culls > 0, 'a hidden beacon must be culled by visibility geometry');
 
@@ -1226,7 +1229,7 @@ try {
       const actual = room.passivePointDropsR64.find(d => d.id === dropId);
       if (!actual || !room.props.some(p => p.pointDropIdR64 === dropId)) throw new Error('The fixture native drop disappeared before pickup');
       const owner = player, before = owner.points, targetId = actual.id;
-      owner.x = actual.x; owner.y = actual.y; owner.invincible = oldInvincible; auto = oldAuto;
+      owner.x = actual.x; owner.y = actual.y; cam.x = owner.x; cam.y = owner.y; owner.invincible = oldInvincible; auto = oldAuto;
       const first = api.collectPointDrops(), afterFirst = owner.points, second = api.collectPointDrops();
       const save = serializeSave();
       return {id: targetId, amount: actual.amount, before, first, afterFirst, second, afterSecond: owner.points, claimed: room.passivePointClaimsR64.includes(targetId), save: JSON.stringify(save)};
@@ -1352,17 +1355,53 @@ try {
       raw.hostSave.campaignHpR63.rooms[coopKey][oldCloneId]={base:48000,factor:.25};
       const ownerBefore={id:sourceBoss.id,maxHp:sourceBoss.maxHp,canonical:sourceBoss.healthR71CanonicalMaxHp,hpFraction:sourceBoss.hp/sourceBoss.maxHp,factor:sourceBoss.difficultyFactorR63};
       const mobBefore={id:sourceMob.id,maxHp:mobNormalMax,hp:mobNormalHp};
+      const nativeAutoReplicaId=`${sourceBoss.id}:coop:1`,diagnosticIds=new Set([sourceBoss.id,nativeAutoReplicaId,bossReplicaId,ordinaryReplicaId,oldCloneId,sourceMob.id]);
+      const compactActor=row=>row&&({id:row.id,source:row.coopSourceR62||row.source||null,nativeId:row.nativeId||null,hp:row.hp,maxHp:row.maxHp,boss:!!row.boss,midboss:!!row.midboss,persona:!!row.persona,cosmic:!!row.cosmic,trial:!!row.trial,coopReplica:!!row.coopReplicaR62,healthCanonical:row.healthR71CanonicalMaxHp??null,healthVisible:row.healthR71VisibleMaxHp??null,healthAdjusted:row.healthR71Adjusted??null,difficultyBase:row.difficultyBaseHpR63??null,difficultyFactor:row.difficultyFactorR63??null});
+      const compactHealthEvents=()=>health.inspect(player).events.filter(event=>
+        (event.stage==='boss-health-suffixed'||event.kind==='boss-health-suffixed')&&
+        (diagnosticIds.has(event.id)||String(event.id||'').startsWith(`${sourceBoss.id}:coop:`))
+      ).map(event=>({stage:event.stage||event.kind,at:event.at,id:event.id,reason:event.reason,baseMaxHp:event.baseMaxHp,canonicalMaxHp:event.canonicalMaxHp,visibleMaxHp:event.visibleMaxHp,hp:event.hp,hpFraction:event.hpFraction}));
+      let previousRoomRefs=null;
+      const liveRoomIdentity=()=>{
+        const current=room,currentKey=`${layer}:${zone}`,currentWorldRoom=world?.[currentKey],coopWorldRoom=world?.[coopKey];
+        const result={zone,layer,currentKey,roomId:current?.id??null,roomLayer:current?.layer??null,roomMatchesWorldEntry:current===currentWorldRoom,roomMatchesCoopKey:current===coopWorldRoom,enemiesMatchWorldEntry:current?.enemies===currentWorldRoom?.enemies,enemiesMatchCoopKey:current?.enemies===coopWorldRoom?.enemies,worldRoomId:currentWorldRoom?.id??null,worldRoomLayer:currentWorldRoom?.layer??null,coopWorldRoomId:coopWorldRoom?.id??null,coopWorldRoomLayer:coopWorldRoom?.layer??null,worldKeys:Object.keys(world||{}).filter(key=>key===coopKey||key===currentKey),enemyIds:(current?.enemies||[]).filter(row=>diagnosticIds.has(row.id)||row.coopSourceR62===sourceBoss.id||row.coopSourceR62===sourceMob.id).map(row=>row.id).sort()};
+        if(previousRoomRefs)Object.assign(result,{sameRoomAsPrevious:current===previousRoomRefs.room,sameEnemyArrayAsPrevious:current?.enemies===previousRoomRefs.enemies,sameWorldAsPrevious:world===previousRoomRefs.world});
+        previousRoomRefs={room:current,enemies:current?.enemies,world};
+        return result;
+      };
+      const importRows=save=>({
+        coopReplicaIds:(save.coopWorld?.[coopKey]?.replicas||[]).map(row=>row.id).sort(),
+        coopReplicas:(save.coopWorld?.[coopKey]?.replicas||[]).map(compactActor).sort((a,b)=>a.id.localeCompare(b.id)),
+        hostEnemyIds:(save.hostSave?.rooms?.[coopKey]?.enemies||[]).map(row=>row.id).sort(),
+        hostEnemies:(save.hostSave?.rooms?.[coopKey]?.enemies||[]).filter(row=>diagnosticIds.has(row.id)||diagnosticIds.has(row.source)).map(compactActor).sort((a,b)=>a.id.localeCompare(b.id)),
+        campaignHp:Object.fromEntries([...diagnosticIds].filter(id=>save.hostSave?.campaignHpR63?.rooms?.[coopKey]?.[id]).sort().map(id=>[id,{...save.hostSave.campaignHpR63.rooms[coopKey][id]}])),
+      });
+      // Freeze the complete marked R70 input once so each restore exercises an
+      // independent import of identical serialized bytes, not a possibly
+      // mutated object left over from the prior restore.
+      const legacyInput=JSON.stringify(raw);
       const restoreAndRead=async()=>{
-        await c.importSave(raw);const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});auto=false;settings.autoSkill=false;for(const actor of c.players()){actor.invincible=1e6;actor.invReason='QA marked-save fixture';}player.hp=777;
+        const importRaw=JSON.parse(legacyInput),importBefore=importRows(importRaw),identityBefore=liveRoomIdentity(),healthEventsBefore=compactHealthEvents();
+        const insertionTrace=[],nativePush=Array.prototype.push;
+        Array.prototype.push=function(...items){
+          for(const row of items)if(row?.id===nativeAutoReplicaId&&row.coopReplicaR62===true){
+            nativePush.call(insertionTrace,{id:row.id,source:row.coopSourceR62||row.source||null,nativeId:row.nativeId||null,hp:row.hp,maxHp:row.maxHp,healthCanonical:row.healthR71CanonicalMaxHp??null,healthVisible:row.healthR71VisibleMaxHp??null,healthAdjusted:row.healthR71Adjusted??null,difficultyBase:row.difficultyBaseHpR63??null,difficultyFactor:row.difficultyFactorR63??null,targetIsRoomEnemies:this===room?.enemies,targetIsWorldEntryEnemies:this===world?.[`${layer}:${zone}`]?.enemies,targetIsCoopKeyEnemies:this===world?.[coopKey]?.enemies,stack:(new Error('R71 native coop replica insertion trace')).stack?.split('\n').slice(1,9).map(line=>line.trim())||[]});
+          }
+          return Reflect.apply(nativePush,this,items);
+        };
+        try{await c.importSave(importRaw);}finally{Array.prototype.push=nativePush;}
+        const importAfter=importRows(importRaw),identityAfterImport=liveRoomIdentity(),healthEventsAfterImport=compactHealthEvents(),epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});auto=false;settings.autoSkill=false;for(const actor of c.players()){actor.invincible=1e6;actor.invReason='QA marked-save fixture';}player.hp=777;
         const currentRoom=room,owner=currentRoom.enemies.find(e=>e.id===sourceBoss.id),bossReplica=currentRoom.enemies.find(e=>e.id===bossReplicaId),ordinaryReplica=currentRoom.enemies.find(e=>e.id===ordinaryReplicaId),clone=currentRoom.enemies.find(e=>e.id===oldCloneId),mob=currentRoom.enemies.find(e=>e.id===sourceMob.id);
+        const healthInspection=health.inspect(player);
         return{
+          importDiagnostics:{identityBefore,identityAfterImport,identityAfterRead:liveRoomIdentity(),input:importBefore,afterNativeImport:importAfter,rawMutated:JSON.stringify(importRaw)!==legacyInput,roomRows:currentRoom.enemies.filter(e=>diagnosticIds.has(e.id)||e.coopSourceR62===sourceBoss.id||e.coopSourceR62===sourceMob.id).map(compactActor).sort((a,b)=>a.id.localeCompare(b.id)),defeated:[...(currentRoom.coopDefeatedR62||[])],healthEventsBefore,healthEventsAfterImport,healthEventsAfterRead:compactHealthEvents(),nativeAutoReplicaInsertionTrace:insertionTrace},
           owner:owner&&{maxHp:owner.maxHp,canonical:owner.healthR71CanonicalMaxHp,hpFraction:owner.hp/owner.maxHp,factor:owner.difficultyFactorR63},
           bossReplica:bossReplica&&{maxHp:bossReplica.maxHp,hp:bossReplica.hp,hpFraction:bossReplica.hp/bossReplica.maxHp,canonical:bossReplica.healthR71CanonicalMaxHp,visible:bossReplica.healthR71VisibleMaxHp,adjusted:bossReplica.healthR71Adjusted},
           ordinaryReplica:ordinaryReplica&&{maxHp:ordinaryReplica.maxHp,hp:ordinaryReplica.hp},
           clone:clone&&{maxHp:clone.maxHp,hp:clone.hp,hpFraction:clone.hp/clone.maxHp,ownerMaxHp:owner?.maxHp,ownerId:clone.r61Summoned?.owner,kind:clone.r61Summoned?.kind,clone:clone.r61Clone===true},
           sourceMob:mob&&{maxHp:mob.maxHp,hp:mob.hp},
           cloneMetricRestored:summons.inspect().metrics.restored,
-          healthBosses:health.inspect(player).bosses.map(row=>({id:row.id,maxHp:row.visibleMaxHp,canonical:row.canonicalMaxHp})),
+          healthBosses:healthInspection.bosses.map(row=>({id:row.id,maxHp:row.visibleMaxHp,canonical:row.canonicalMaxHp})),
         };
       };
       const first=await restoreAndRead(),second=await restoreAndRead();
@@ -1382,9 +1421,11 @@ try {
       assert.ok(Math.abs(round.clone.hpFraction-legacyReplicaImport.expected.cloneFraction)<1e-12,'restored R61 clone preserves its saved health fraction');
       assert.equal(round.sourceMob.maxHp,legacyReplicaImport.mobBefore.maxHp);assert.equal(round.sourceMob.hp,legacyReplicaImport.mobBefore.hp,'R61 clone health repair leaves the ordinary source mob unchanged');
     }
-    const {cloneMetricRestored:firstCloneRestoreCount,...firstImportHealth}=legacyReplicaImport.first;
-    const {cloneMetricRestored:secondCloneRestoreCount,...secondImportHealth}=legacyReplicaImport.second;
-    assert.deepEqual(secondImportHealth,firstImportHealth,'reimporting the same R70 co-op save does not compound boss or clone health');
+      const {cloneMetricRestored:firstCloneRestoreCount,importDiagnostics:firstImportDiagnostics,...firstImportHealth}=legacyReplicaImport.first;
+      const {cloneMetricRestored:secondCloneRestoreCount,importDiagnostics:secondImportDiagnostics,...secondImportHealth}=legacyReplicaImport.second;
+      const deferredHealthFailures=[];
+      try{assert.deepEqual(secondImportHealth,firstImportHealth,'reimporting the same R70 co-op save does not compound boss or clone health');}
+      catch(error){deferredHealthFailures.push({assertion:'same marked co-op import must preserve the complete boss/clone health roster',message:String(error?.message||error),first:legacyReplicaImport.first,second:legacyReplicaImport.second});console.log('R71_DEFERRED_COOP_HEALTH_COMPARISON',JSON.stringify(deferredHealthFailures[0]));}
     assert.equal(secondCloneRestoreCount,firstCloneRestoreCount+1,'the native summon loader records one additional restored clone per import');
 
     const legacySceneAck = await acknowledgeNativePreScenes(host.page, 'dist00', 'final native co-op legacy import', {requireAcknowledgement: true});
@@ -1653,8 +1694,11 @@ try {
     assert.equal(guestState.mode,'guest');assert.equal(guestState.host,false);assert.equal(guestState.roomId,guestState.currentZone);
     assert.equal(guestState.canApply,false,'guest health presentation is not authoritative');
     report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
+    report.checks[report.checks.length-1].legacyReplicaImport=legacyReplicaImport;
+    report.checks[report.checks.length-1].deferredHealthComparison={failureCount:deferredHealthFailures.length,failures:deferredHealthFailures};
     report.actualRelay = false;
     assertNoPageErrors(host); assertNoPageErrors(guest);
+    assert.equal(deferredHealthFailures.length,0,'identical marked co-op imports must preserve the complete health roster; see import identity/row/event diagnostics');
     await closeGame(host); await closeGame(guest); await closeTrackedContext(context);
   });
 
