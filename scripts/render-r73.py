@@ -11,6 +11,7 @@ def once(source, old, new):
 
 
 def transform(source):
+    source = once(source, 'f.exploration=source.exploration;', 'f.exploration=source.exploration;f.mazeGenerationR73=Number.isSafeInteger(source.mazeGenerationR73)&&source.mazeGenerationR73>=0?source.mazeGenerationR73:0;')
     source = once(source, 'function explorationLayout(id,theme=',
                   (ROOT / 'client-source/maze-rooms-r73.js').read_text() + '\nfunction explorationLayout(id,theme=')
     source = once(source, 'return refineRegionalLayout55({...core,', 'return refineRegionalLayout55(mazeRoomsR73({...core,')

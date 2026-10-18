@@ -4,6 +4,9 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import * as T from '../_pages/docs/vendor/three/build/three.core.js';
 const renderer=fs.readFileSync('_pages/docs/dist/phase1.js','utf8'),context={window:{},console,URL,performance,Float32Array};vm.createContext(context);vm.runInContext(renderer,context);const api=context.window.StoryPhase1;
+test('the actual render bridge carries finite save generations even when the map ID and layout stay the same',()=>{
+ const source={zone:'dist00',layer:'STORY',time:0,settings:{},viewport:{},exploration:{id:'same-layout'},mazeGenerationR73:7},bridge=new api.RenderBridge(()=>source),first=bridge.capture();assert.equal(first.mazeGenerationR73,7);source.mazeGenerationR73=8;assert.equal(bridge.capture(),first);assert.equal(first.mazeGenerationR73,8);assert.equal(first.exploration,source.exploration);for(const invalid of [Infinity,-1,NaN,1.5,undefined]){source.mazeGenerationR73=invalid;assert.equal(bridge.capture().mazeGenerationR73,0);}
+});
 test('save lifecycle wraps the full compiled campaign, including late R72 arrival and golden save hooks',()=>{
  const html=fs.readFileSync('_pages/docs/index.html','utf8'),ids=[...html.matchAll(/<script id="([^"]+)"/g)].map(m=>m[1]);
  let parsed=0;for(const m of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){if(/type=["']application\/json/.test(m[1]))continue;new vm.Script(m[2]);parsed++;}assert.ok(parsed>75);
