@@ -1,4 +1,4 @@
-name: StoryWorld R70 Pages
+name: StoryWorld R71 Pages
 on:
   push:
     branches: [main]
@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 25
+    timeout-minutes: 60
     permissions:
       contents: read
       pages: read
@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/r66 out/r67 out/r68 out/r69 out/r70
+          mkdir -p out/r66 out/r67 out/r68 out/r69 out/r70 out/r71
           python3 scripts/unpack-runtime-r62.py --output _baseline/docs
           python3 scripts/apply-r66.py --site _baseline/docs
           cp -a _baseline _pages
@@ -43,8 +43,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r70/dependencies.log 2>&1
-          npx playwright install --with-deps chromium >> out/r70/dependencies.log 2>&1
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r71/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r71/dependencies.log 2>&1
       - name: Preserve R67 R68 R69 verification and validate exact R70 candidate
         shell: bash
         env:
@@ -74,29 +74,80 @@ jobs:
           node scripts/r70.browser.test.mjs | tee out/r70/webgl.log
           python3 scripts/r69-regression-wait.py
           node scripts/r66.browser.test.mjs | tee out/r70/game-regression.log
-      - name: Require exact R70 runtime measured in PR run 39089788163
-        id: hashes
+      - name: Require exact R70 baseline measured in PR run 39089788163
         run: |
           python3 - <<'PY'
-          import hashlib,os
+          import hashlib
           from pathlib import Path
           expected={'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5','dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4'}
+          for name,want in expected.items():
+              sha=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+              if sha!=want:raise SystemExit('Unreviewed R70 baseline bytes: '+name+': '+sha)
+          PY
+      - name: Profile R70 first, then build and validate R71
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          cp -a _pages _r70
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          R71_PERF_BASELINE_ONLY=1 node scripts/r71.perf.mjs | tee out/r71/baseline-profile.log
+          python3 scripts/apply-r71.py --site _pages/docs | tee out/r71/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71/cpu.log
+          node scripts/r71.audit.mjs | tee out/r71/audit.log
+          node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
+          node scripts/r71.browser.test.mjs | tee out/r71/browser.log
+          mkdir -p out/r71/native
+          node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
+          node scripts/r71.perf.mjs | tee out/r71/performance.log
+      - name: Require exact approved R71 runtime hashes
+        id: hashes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref }}
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          approval=json.loads(Path('scripts/r71-approved-runtime.json').read_text())
+          expected_baseline={
+              'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5',
+              'dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4',
+          }
+          if approval.get('baseline')!=expected_baseline:
+              raise SystemExit('R71 approval file has an unexpected R70 baseline')
+          actual={name:hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+                  for name in ('index.html','dist/phase1.js')}
+          approved=approval.get('approved')
+          status=approval.get('status')
+          if status not in ('approved','pending-review'):
+              raise SystemExit('R71 approval status must be approved or pending-review')
+          if status=='approved':
+              if not isinstance(approved,dict) or actual!=approved:
+                  raise SystemExit('R71 runtime differs from exact approved hashes: '+json.dumps(actual,sort_keys=True))
+          elif os.environ['EVENT_NAME']!='pull_request' and os.environ['REF_NAME']=='refs/heads/main':
+              raise SystemExit('R71 runtime hash pin is not approved; refusing Pages deployment: '+json.dumps(actual,sort_keys=True))
+          else:
+              print('R71_RUNTIME_MEASURED_PENDING_APPROVAL',json.dumps(actual,sort_keys=True))
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:
-              for key,name in [('html_sha','index.html'),('renderer_sha','dist/phase1.js')]:
-                  sha=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
-                  if sha!=expected[name]:raise SystemExit('Unreviewed runtime bytes: '+name+': '+sha)
-                  print(key,sha);f.write(key+'='+sha+'\n')
+              f.write('html_sha='+actual['index.html']+'\n')
+              f.write('renderer_sha='+actual['dist/phase1.js']+'\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r70-release-checks
+          name: r71-release-checks
           path: |
             out/r66/
             out/r67/
             out/r68/
             out/r69/
             out/r70/
+            out/r71/
             _pages/docs/web-manifest-r62.json
           retention-days: 14
       - name: Configure Pages
@@ -124,7 +175,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public HTML and renderer match approved hashes
+      - name: Verify public HTML and renderer match approved R71 hashes
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.build.outputs.html_sha }}

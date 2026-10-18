@@ -34,9 +34,11 @@ const result={
  browser:null,physicalGPU:false,physicalMobile:false,sandbox:true,durationMs:duration,
  profileDurationMs:baselineOnly?profileMs:null,profileMode:'CDP Profiler CPU sampling; profiling runs after timing trials and is not included in timing results',
  viewport:{width:1365,height:850,deviceScaleFactor:1},seed:70018,
+ survivalFixture:{mode:'harness-only',hp:'maxHP()',invincibleSeconds:1000000,reason:'r71-perf-survival-fixture',appliedToBothBuilds:true},
  scenarios:['movement','ego-stress'],order,runs:[],profiles:[],status:'starting',
  caveat:'Headless Chromium software-renderer results are not physical-GPU or mobile-device results. Scenarios share map, seed, viewport, DPR, renderer, effects and initialization; simulation is live, so later frames are not a deterministic replay.'
 };
+result.profileInterpretation='CDP CPU sampling attributes sampled call frames only. `(program)` is unattributed work and is not a GPU timer; it does not measure shader time or physical-GPU time.';
 const reportPath=baselineOnly?`${out}/baseline-performance.json`:`${out}/performance.json`;
 const save=()=>fs.writeFile(reportPath,JSON.stringify(result,null,2)+'\n');
 const stats=v=>{const s=v.slice().sort((a,b)=>a-b),at=p=>s[Math.floor((s.length-1)*p)]??null;return{count:s.length,p50Ms:at(.5),p95Ms:at(.95),p99Ms:at(.99),meanMs:s.length?s.reduce((a,b)=>a+b,0)/s.length:null,maxMs:s.at(-1)??null,over50ms:s.filter(x=>x>50).length};};
@@ -92,7 +94,7 @@ try{
     assert.equal(await page.evaluate(()=>{auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;return enterRegion('dist00',null,{restore:true,noStory:true,difficultyR63:'normal',position:{x:15,y:19}})}),true);
     await page.waitForFunction(()=>window.eval("zone==='dist00'&&!loading&&!modal"),null,{timeout:30000});
     const setup=await page.evaluate(scenario=>{
-     auto=false;settings.autoSkill=false;settings.lowFx=false;settings.reducedMotion=false;settings.sound=false;settings.music=false;room.engaged=true;player.hp=maxHP()*100;player.ego=0;command=null;target=null;route=[];window.__STORYWORLD_PRESENTATION_R58__?.setFlashlight(true);window.__r71Hits=0;window.__r71Motifs=new Set();const hit=hitEnemy;hitEnemy=function(e,value,s){if(s?.ability==='threadDanceR63')window.__r71Hits++;return hit.apply(this,arguments)};const de=drawEffect;drawEffect=function(e,...a){if(e?.threadR63)window.__r71Motifs.add(e.threadR63.motif);return de.call(this,e,...a)};let cast=null;
+     auto=false;settings.autoSkill=false;settings.lowFx=false;settings.reducedMotion=false;settings.sound=false;settings.music=false;room.engaged=true;player.hp=maxHP();player.invincible=1000000;player.invReason='r71-perf-survival-fixture';player.ego=0;command=null;target=null;route=[];window.__STORYWORLD_PRESENTATION_R58__?.setFlashlight(true);window.__r71Hits=0;window.__r71Motifs=new Set();const hit=hitEnemy;hitEnemy=function(e,value,s){if(s?.ability==='threadDanceR63')window.__r71Hits++;return hit.apply(this,arguments)};const de=drawEffect;drawEffect=function(e,...a){if(e?.threadR63)window.__r71Motifs.add(e.threadR63.motif);return de.call(this,e,...a)};let cast=null;
      if(scenario==='ego-stress'){player.points+=200;const prog=window.__STORYWORLD_PROGRESSION_R62__;for(const id of ['threadDanceR63','threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64'])prog.purchase(id,player);prog.state(player).ranks.threadDanceR63=4;player.ego=1000;room.enemies.forEach((e,i)=>{e.x=player.x+2+(i%3)*.6;e.y=player.y+(Math.floor(i/3)-.5)*1.1;e.hp=e.maxHp=1e8;e.difficultyBaseHpR63=1e8/(e.difficultyFactorR63||1);e.spawnState='active';e.deadRecorded=false});cast=window.__STORYWORLD_CAMPAIGN_R63R1__.cast(true);auto=true;settings.autoSkill=true}
      return{zone,enemies:room.enemies.length,props:room.props.length,ego:player.ego,cast,renderer:window.__STORYWORLD_PHASE1__.inspect().active};
     },scenario);
@@ -115,7 +117,8 @@ try{
     if(scenario==='ego-stress'){assert.ok(raw.hits>0);assert.equal(raw.motifs.length,6);}
     const row={scenario,kind,index,setup,activeBefore:before.active,activeAfter:raw.renderer.active,frames:stats(raw.frames),draw:stats(raw.draw),tick:stats(raw.tick),longTasks:stats(raw.long),elapsedMs:raw.elapsedMs,simulationSeconds:raw.time-before.time,hits:raw.hits,motifs:raw.motifs,peakEffects:raw.maxEffects,peakProjectiles:raw.maxProjectiles,objects:raw.objects,memoryBefore:before.memory,memoryAfter:raw.memory,rendererMetricsBefore:before.metrics,rendererMetricsAfter:raw.renderer.metrics,spatialBefore:before.spatial,spatialAfter:raw.renderer.spatial,perFrame:{drawCalls:(raw.gl.draws-before.gl.draws)/raw.frames.length,textureUploads:(raw.gl.uploads-before.gl.uploads)/raw.frames.length,bufferUploads:(raw.gl.buffers-before.gl.buffers)/raw.frames.length},counterDelta:commandDelta(before.counters,raw.renderer.counters),devices:raw.gl.devices,errors};
     result.runs.push(row);await save();console.log('R71_PERF_RUN',JSON.stringify(row));
-    if(index===0)await page.screenshot({path:`${out}/${scenario}-${kind}.png`});
+    const candidateShots=result.runs.filter(r=>r.scenario===scenario&&r.kind==='candidate').length;
+    if(index===0||(kind==='candidate'&&candidateShots===1))await page.screenshot({path:`${out}/${scenario}-${kind}.png`});
     if(baselineOnly&&index===1)await captureCpuProfile(context,page,scenario);
    }finally{await context.close();}
   }

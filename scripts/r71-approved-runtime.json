@@ -1,0 +1,12 @@
+{
+  "status": "pending-review",
+  "baseline": {
+    "index.html": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+    "dist/phase1.js": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+  },
+  "approved": {
+    "index.html": null,
+    "dist/phase1.js": null
+  },
+  "measuredIn": null
+}

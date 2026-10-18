@@ -30,7 +30,7 @@ concurrency:
 jobs:
   baseline:
     runs-on: ubuntu-22.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v6
         with:
@@ -99,8 +99,8 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           node scripts/r71.browser.test.mjs | tee out/r71/browser.log
-          python3 scripts/r69-regression-wait.py
-          node scripts/r66.browser.test.mjs | tee out/r71/game-regression.log
+          mkdir -p out/r71/native
+          node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
           node scripts/r71.perf.mjs | tee out/r71/performance.log
       - uses: actions/upload-artifact@v4
         if: always()

@@ -1,0 +1,120 @@
+{
+  "schema": "storyworld-effect-references/v1",
+  "researchDate": "2026-10-18",
+  "gameBaselineInspected": {
+    "commit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+    "label": "R70",
+    "files": [
+      "docs/index.html",
+      "docs/dist/phase1.js"
+    ]
+  },
+  "sources": [
+    {
+      "id": "baram-magic-guide-7",
+      "url": "https://baram.nexon.com/GameGuide/View/7",
+      "kind": "official Nexon game guide",
+      "confirmedFacts": [
+        "The guide distinguishes immediate-cast spells, target-selected spells, and field-targeted spells.",
+        "The active magic-effects panel shows effect duration and type separately from the cooldown and type of used magic.",
+        "The guide also describes passive effects as applying by learning the magic."
+      ],
+      "associatedOfficialImageUrls": [
+        "https://file.nexon.com/NxFile/download/FileDownloader.aspx?oidFile=5053131235375711537",
+        "https://file.nexon.com/NxFile/download/FileDownloader.aspx?oidFile=4692843187876660784",
+        "https://file.nexon.com/NxFile/download/FileDownloader.aspx?oidFile=5485477113135890801",
+        "https://file.nexon.com/NxFile/download/FileDownloader.aspx?oidFile=4981073568323340074",
+        "https://file.nexon.com/NxFile/download/FileDownloader.aspx?oidFile=5341361555692848721"
+      ],
+      "imagePixelReview": "Not completed; image delivery was inaccessible in the available browser/network tools."
+    },
+    {
+      "id": "baram-item-guide-169",
+      "url": "https://baram.nexon.com/GameGuide/View/169",
+      "kind": "official Nexon game guide",
+      "confirmedFacts": [
+        "The guide says eligible pumpkin rewards are acquired according to chance on monster defeat.",
+        "It says these hunting rewards are automatically obtained into the character inventory when space is available."
+      ]
+    },
+    {
+      "id": "baram-warrior-remaster-138160",
+      "url": "https://baram.nexon.com/Notice/List/343/138160?noticecode=0",
+      "kind": "official Nexon update notice",
+      "confirmedFacts": [
+        "The notice is for the 2022-07-21 classic Warrior job remaster.",
+        "Its text says the reworked Warrior features stronger and faster attacks and simplified buff magic."
+      ],
+      "associatedOfficialAssetUrls": [
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1.jpg",
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1_gif1.gif",
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1_gif2.gif",
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1_gif3.gif",
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1_gif4.gif",
+        "https://lwi.nexon.com/baram/2022/0721_board/BDA8E3F63EFA21B1_gif5.gif"
+      ],
+      "assetPixelReview": "Not completed; official GIF responses were rejected by the browser tool as unsupported image/gif content, and direct CDN access was blocked by the network proxy. No visual description, occlusion estimate, or effect timing is claimed."
+    },
+    {
+      "id": "baram-official-youtube",
+      "url": "https://www.youtube.com/@baram",
+      "kind": "official YouTube link exposed by the Nexon Baram site",
+      "confirmedFacts": [
+        "The Baram Nexon site links to this channel."
+      ],
+      "videoPixelReview": "No individual video frames reviewed; YouTube access was throttled."
+    }
+  ],
+  "storyWorldBaselineFacts": {
+    "sourceCommit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+    "facts": [
+      "The existing effect renderer uses directional slash effects and short hit bursts; current code lifetimes include approximately 0.22 seconds for a base burst, 0.30 seconds for a slash, and 0.42 seconds for the thread slash effect. These are StoryWorld code values, not measurements of Baram effects.",
+      "The existing passive aura is state-driven and drawn before the hero, behind the character. The aura count is capped at two under low-effects settings and four otherwise; its alpha is around 0.42 for the first layer and lower for overlapping layers.",
+      "Current passive point drops use a spirit-orb image, a +N amount label, a 1.35-tile pickup radius, and automatic collection. This is separate from an equipment loot table."
+    ],
+    "codeSources": [
+      "docs/index.html:315",
+      "docs/index.html:10875-10876",
+      "docs/index.html:11382-11386",
+      "docs/dist/phase1.js:607"
+    ]
+  },
+  "storyWorldApplicationPrinciples": [
+    {
+      "principle": "Keep cast targeting, a hit confirmation, and persistent status effects visually distinct.",
+      "basis": "Design inference from the official guide's distinction between cast modes and effect duration/type versus cooldown/type; not a claim about Baram effect appearance."
+    },
+    {
+      "principle": "Anchor brief hit confirmation to the target, retain directional slash alignment, and pace multi-hit cues so each hit remains readable.",
+      "basis": "Recommendation to reuse StoryWorld's existing target-position burst and directional slash renderer; no Baram frame was visually verified."
+    },
+    {
+      "principle": "Represent a buff as a state-driven, low-opacity aura behind the hero, with a layer cap so the character stays legible.",
+      "basis": "Recommendation consistent with StoryWorld's current aura renderer; not a description of Baram's aura."
+    },
+    {
+      "principle": "For rewards, distinguish the reward type and quantity clearly; only emphasize a floor object when the player can interact with it.",
+      "basis": "Design inference; the Baram pumpkin guide describes automatic inventory acquisition, not a visually verified floor-drop marker."
+    },
+    {
+      "principle": "Use original StoryWorld artwork and code; borrow only general presentation principles, never copy or bundle Baram assets."
+    }
+  ],
+  "visualReviewLimitations": {
+    "actualGifPixelsReviewed": false,
+    "officialImagePreviewsReturnedByImageSearch": false,
+    "officialDomainImageSearch": "Two Nexon-domain-restricted image_query attempts returned no results or image previews.",
+    "timingMeasurements": "None. No milliseconds or frame durations were measured from Baram footage.",
+    "appearanceClaims": "None. No lightning, sword-trail, healing, protection-aura, or drop-marker shape or occlusion claim is attributed to Baram visuals.",
+    "accessFailures": [
+      "Official Nexon GIF links returned unsupported image/gif content in the browser tool.",
+      "Direct official image/CDN access was unavailable through the provided network path."
+    ]
+  },
+  "assetHandling": {
+    "downloadedAssets": [],
+    "includedInStoryWorld": [],
+    "otherGameAssetsDownloadedOrBundled": false,
+    "note": "Official asset URLs are recorded only as references. No game asset was copied, downloaded into the repository, or included in the product."
+  }
+}
