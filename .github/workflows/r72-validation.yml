@@ -1,0 +1,52 @@
+name: StoryWorld R72 draft verification
+on:
+  push:
+    branches: [feat/r72-golden-thread]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r72-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct exact released R71 then apply isolated R72
+        run: |
+          set -euo pipefail
+          mkdir -p out/r72
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          for rev in 66 67 68 69 70; do python3 scripts/apply-r$rev.py --site _pages/docs; done
+          cp -a _pages _r70
+          python3 scripts/apply-r71.py --site _pages/docs
+          cp -a _pages _r71
+          python3 scripts/apply-r72.py --site _pages/docs | tee out/r72/build.json
+          node --test scripts/r72.cpu.test.mjs | tee out/r72/cpu.log
+          npm ci --ignore-scripts --prefix relay
+          node --test relay/test/relay.test.mjs | tee out/r72/relay.log
+          node verify-pages-r62.mjs _pages > out/r72/integrity.log
+      - name: Install pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Actual UI and native runtime journeys
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r72/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r72.browser.test.mjs | tee out/r72/browser.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r72-${{ github.sha }}-evidence
+          path: out/r72/
+          retention-days: 14

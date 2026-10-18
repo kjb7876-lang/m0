@@ -41,7 +41,7 @@ function validProfile(m, partial = false) {
 }
 function validInput(input) {
   if (!record(input)) return false;
-  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance'];
+  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance', 'goldenCast', 'goldenSecond'];
   if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', ...flags].includes(k))) return false;
   if (input.skillSlot !== undefined && !['w', 'e', 'r'].includes(input.skillSlot)) return false;
   for (const axis of ['moveX', 'moveY']) if (input[axis] !== undefined && !(typeof input[axis] === 'number' && Number.isFinite(input[axis]) && Math.abs(input[axis]) <= 1)) return false;
@@ -49,6 +49,21 @@ function validInput(input) {
   if (input.target !== undefined && input.target !== null && !string(input.target, 128)) return false;
   if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && input.route[k] >= 0 && input.route[k] <= 100))) return false;
   return safeJSON(input, 64, 3);
+}
+function validGolden(command) {
+  if(!record(command)||command.kind!=='golden'||Object.keys(command).some(k=>!['kind','action'].includes(k))||!record(command.action))return false;
+  const a=command.action,fields={save:['op','id','name','strokes'],rename:['op','id','name'],clone:['op','id'],delete:['op','id'],equip:['op','id'],learn:['op'],upgrade:['op','key'],auto:['op','enabled']}[a.op];
+  if(!fields||Object.keys(a).some(k=>!fields.includes(k)))return false;
+  if(['rename','clone','delete','equip'].includes(a.op)&&!(string(a.id,48)&&/^[A-Za-z0-9_-]+$/.test(a.id)))return false;
+  if(['save','rename'].includes(a.op)&&!(typeof a.name==='string'&&a.name.length<=24&&!/[\x00-\x1f<>]/.test(a.name)))return false;
+  if(a.op==='save'){
+    if(a.id!=null&&!(string(a.id,48)&&/^[A-Za-z0-9_-]+$/.test(a.id)))return false;
+    if(!Array.isArray(a.strokes)||!a.strokes.length||a.strokes.length>12||a.strokes.reduce((n,s)=>n+(Array.isArray(s)?s.length:1000),0)>192)return false;
+    if(!a.strokes.every(s=>Array.isArray(s)&&s.length>=2&&s.every(p=>record(p)&&Object.keys(p).length===2&&['x','y'].every(k=>Number.isFinite(p[k])&&Math.abs(p[k])<=1.001))))return false;
+  }
+  if(a.op==='upgrade'&&!['cooldown','damage','size','speed','slots','equip'].includes(a.key))return false;
+  if(a.op==='auto'&&typeof a.enabled!=='boolean')return false;
+  return safeJSON(command,800,7);
 }
 function validState(state, epoch) {
   if (!record(state) || !safeJSON(state)) return false;
@@ -216,7 +231,7 @@ export function createRelay(options = {}) {
         if (!epochOK()) return;
         if (!take(peer.commandRate)) return fail(peer, 'COMMAND_RATE', 'Command rate exceeded.');
         if (!integer(m.seq) || m.seq <= player.commandSeq) return fail(peer, 'STALE_SEQUENCE', 'Command sequence must increase.');
-        if (!record(m.command) || m.command.kind !== 'upgrade' || !string(m.command.passiveId, 64) || !/^[A-Za-z0-9_-]+$/.test(m.command.passiveId) || Object.keys(m.command).some(k => !['kind','passiveId'].includes(k))) return fail(peer, 'COMMAND_INVALID', 'Invalid passive upgrade command.');
+        if (!validGolden(m.command) && (!record(m.command) || m.command.kind !== 'upgrade' || !string(m.command.passiveId, 64) || !/^[A-Za-z0-9_-]+$/.test(m.command.passiveId) || Object.keys(m.command).some(k => !['kind','passiveId'].includes(k)))) return fail(peer, 'COMMAND_INVALID', 'Invalid upgrade or golden design command.');
         if (!['playing','paused'].includes(room.phase)) return fail(peer, 'SESSION_PAUSED', 'Wait until loading completes before upgrading.');
         player.commandSeq = m.seq; send(room.players.get(room.hostId)?.peer, { type: 'command', playerId: player.id, seq: m.seq, epoch: room.epoch, command: m.command }); return;
       case 'snapshot':
