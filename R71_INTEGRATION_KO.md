@@ -10,7 +10,7 @@
 
 `.github/workflows/pages.yml`은 기존 R66–R70 CPU, WebGL, 매니페스트, 브라우저 회귀 검증과 R66 EGO/thread queue 회귀 단계를 R70 기준에서 그대로 실행합니다. 이 단계가 끝난 뒤 R70 기준으로 이동/EGO 프로파일을 먼저 수집하고, 그 다음에만 R71을 적용합니다. 후보 적용 뒤 렌더러·진행도·헬스 CPU 테스트, R71 소스/매니페스트 감사, 무결성 검사, R71 브라우저 테스트를 실행합니다. `scripts/r71-native.browser.test.mjs`는 원본 R66 native `openGame`, `damageCase`, `hudCase`, `lifecycleCase` 및 호출부를 SHA-256으로 고정해 재사용합니다. R71/R70 간 플레이어 공격력과 실검무 타격의 비율이 각각 1.0인지 확인하고, 3개 고유 이벤트 ID·20초/EGO 4초 쿨다운을 유지합니다. R66의 R62 대비 2배 공격력·4배 타격 배수는 변경 없이 실행되는 기존 R70 게이트가 보장합니다. 보스 HUD fixture는 333/666을 검사하며, 6회 세이브/복원 수명주기는 원본대로 검사합니다. 변경된 R71 HP/세이브 계약은 R71 QA가 맡으므로 구 `runLegacy()` 호출만 정확한 소스 가드 뒤 명시적으로 제외합니다. 그 뒤 같은 조건의 짝지은 R70/R71 성능 측정을 수행합니다. native 로그/증거는 `out/r71/native/`에 업로드합니다. 모든 검증과 해시 승인 단계가 성공해야 Pages 배포가 시작됩니다.
 
-`.github/workflows/r71-validation.yml`의 브랜치 push 및 `workflow_dispatch` 기본 모드는 기준 R70만 만들고, `R71_PERF_BASELINE_ONLY=1` 프로파일을 먼저 실행합니다. 후보 비교 프로파일은 별도의 Pages 검증에서 실행합니다. CI는 Ubuntu 22.04와 Playwright 1.56 Chromium의 샌드박스를 사용하며 샌드박스 플래그를 낮추지 않습니다.
+`.github/workflows/r71-validation.yml`은 브랜치 push에서 정확한 R70 재구성/핀 뒤 R71을 적용해 CPU·감사·무결성·브라우저·native 검증을 빠르게 실행하고 업로드합니다. 자동 push preflight에서는 기준 프로파일과 ABBA 측정을 생략합니다. `workflow_dispatch`의 `baseline`은 R70 기준 프로파일만 실행하고, `candidate`는 기준 및 짝지은 전체 R71 프로파일을 수행합니다. PR 트리거는 Pages workflow와 중복 실행되지 않도록 제거했습니다. 각 preflight 실행은 고유 concurrency group을 사용하며 실행 취소는 하지 않습니다. 배포 Pages workflow의 모든 기존 게이트, profile 및 배포 조건은 그대로 둡니다. CI는 Ubuntu 22.04와 Playwright 1.56 Chromium의 샌드박스를 사용하며 샌드박스 플래그를 낮추지 않습니다.
 
 ## 배포 해시 승인
 

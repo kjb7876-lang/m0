@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {chromium} from 'playwright';
@@ -11,15 +12,23 @@ const APP_URL = new URL(SITE).href;
 const ASSET_ART = 'assets/vfx/v31315/spirit-orb.webp';
 await fs.mkdir(OUT, {recursive: true});
 
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+async function readDocuments(root) {
+  const htmlPath = path.join(root, 'index.html'), rendererPath = path.join(root, 'dist/phase1.js');
+  const [htmlBytes, rendererBytes] = await Promise.all([fs.readFile(htmlPath), fs.readFile(rendererPath)]);
+  return {
+    html: htmlBytes.toString('utf8'),
+    renderer: rendererBytes.toString('utf8'),
+    files: {
+      html: {path: htmlPath, sha256: sha256(htmlBytes)},
+      renderer: {path: rendererPath, sha256: sha256(rendererBytes)},
+    },
+  };
+}
+
 const sources = {
-  baseline: {
-    html: await fs.readFile(path.join(BASE, 'index.html'), 'utf8'),
-    renderer: await fs.readFile(path.join(BASE, 'dist/phase1.js'), 'utf8'),
-  },
-  candidate: {
-    html: await fs.readFile(path.join(CANDIDATE, 'index.html'), 'utf8'),
-    renderer: await fs.readFile(path.join(CANDIDATE, 'dist/phase1.js'), 'utf8'),
-  },
+  baseline: await readDocuments(BASE),
+  candidate: await readDocuments(CANDIDATE),
 };
 
 const launch = {headless: true, chromiumSandbox: true, args: ['--disable-dev-shm-usage']};
@@ -31,6 +40,7 @@ const report = {
   sandbox: true,
   candidateHTML: sources.candidate.html.length,
   baselineHTML: sources.baseline.html.length,
+  sourceFiles: {baseline: sources.baseline.files, candidate: sources.candidate.files},
   physicalGPU: false,
   physicalMobile: false,
   actualRelay: false,
@@ -100,7 +110,8 @@ async function enterRegion(page, id, {layer = 'STORY', tier, position = {x: 15, 
 }
 
 async function selectDifficulty(page, id, tier, {mobile = false, options = {}} = {}) {
-  const before = await page.evaluate(id => mapMode(id, layer), id);
+  const layer = options.layer || 'STORY';
+  const before = await page.evaluate(({id, layer}) => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode(id, layer), {id, layer});
   await page.evaluate(({id, options}) => window.__STORYWORLD_PROGRESSION_R71__.openDifficulty(id, null, {
     restore: true, noStory: true, position: {x: 15, y: 19}, ...options,
   }), {id, options});
@@ -109,15 +120,15 @@ async function selectDifficulty(page, id, tier, {mobile = false, options = {}} =
   const selected = page.locator(`#r71Difficulty${tier[0].toUpperCase()}${tier.slice(1)}`);
   if (mobile) await selected.tap(); else await selected.click();
   assert.equal(await selected.getAttribute('aria-checked'), 'true', `${tier} must be selected in the native dialog`);
-  assert.equal(await page.evaluate(id => mapMode(id, layer), id), before, 'selecting a tier must not apply it before confirmation');
-  return {before};
+  assert.equal(await page.evaluate(({id, layer}) => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode(id, layer), {id, layer}), before, 'selecting a tier must not apply it before confirmation');
+  return {before, layer};
 }
 
-async function confirmDifficulty(page, id, tier, {mobile = false} = {}) {
+async function confirmDifficulty(page, id, tier, {mobile = false, layer = 'STORY'} = {}) {
   const button = page.locator('#r71DifficultyConfirm');
   if (mobile) await button.tap(); else await button.click();
   await page.waitForFunction(({id}) => window.eval(`zone===${JSON.stringify(id)} && !loading && !modal`), {id}, {timeout: 60000});
-  assert.equal(await page.evaluate(id => mapMode(id, layer), id), tier, 'confirmed difficulty must become the native map tier');
+  assert.equal(await page.evaluate(({id, layer}) => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode(id, layer), {id, layer}), tier, 'confirmed difficulty must become the native map tier');
 }
 
 function luminance(rgb) {
@@ -144,16 +155,16 @@ try {
     const game = await openGame();
     const {page} = game;
     await page.evaluate(() => { auto = false; settings.autoSkill = false; });
-    const originalTier = await page.evaluate(() => mapMode('dist00', 'STORY'));
+    const originalTier = await page.evaluate(() => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00', 'STORY'));
     await page.evaluate(() => window.__STORYWORLD_PROGRESSION_R71__.openDifficulty('dist00', null, {
       restore: true, noStory: true, position: {x: 15, y: 19}, layer: 'STORY',
     }));
     await page.locator('#r71DifficultyOptions').waitFor({state: 'visible'});
     await page.locator('#r71DifficultyHard').click();
     assert.equal(await page.locator('#r71DifficultyHard').getAttribute('aria-checked'), 'true');
-    assert.equal(await page.evaluate(() => mapMode('dist00', 'STORY')), originalTier);
+    assert.equal(await page.evaluate(() => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00', 'STORY')), originalTier);
     await page.locator('#r71DifficultyCancel').click();
-    assert.equal(await page.evaluate(() => mapMode('dist00', 'STORY')), originalTier);
+    assert.equal(await page.evaluate(() => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00', 'STORY')), originalTier);
     assert.equal((await page.evaluate(() => window.__STORYWORLD_PROGRESSION_R71__.difficultyState())).transitions, 0);
 
     await selectDifficulty(page, 'dist00', 'easy');
@@ -168,9 +179,9 @@ try {
       const result = await page.evaluate(({id, expected}) => {
         player.points = 0;
         const before = player.points;
-        completeRegion(id);
+        window.completeRegion(id);
         const once = player.points - before;
-        completeRegion(id);
+        window.completeRegion(id);
         return {once, afterRepeat: player.points, state: window.__STORYWORLD_PROGRESSION_R71__.inspect()};
       }, {id, expected});
       assert.equal(result.once, expected, `${id}/${tier} first clear must award ${expected}`);
@@ -247,23 +258,31 @@ try {
     assert.equal(initial.inspect.maxHp, 777);
     assert.equal(initial.inspect.healthR71Applied, true);
 
-    const bossRows = await page.evaluate(() => {
-      const out = [];
-      for (const id of Object.keys(regionById)) {
-        const def = regionById[id];
-        if (!Array.isArray(def.bosses) || !def.bosses.length) continue;
-        const r = getRoom(id, 'STORY');
-        applyRoom(r, mapMode(id, 'STORY'));
-        const actors = (r.enemies || []).filter(e => e.boss || e.midboss || e.persona || e.cosmic || e.trial || e.cosmicGuardianR63);
-        out.push({id, expectedDefinitions: def.bosses.length, actors: actors.map(e => ({
+    const bossMaps = await page.evaluate(() => {
+      return Object.keys(regionById || {}).flatMap(id => {
+        const bosses = regionById[id]?.bosses;
+        return Array.isArray(bosses) && bosses.length > 0 ? [{id, expectedBossCount: bosses.length}] : [];
+      });
+    });
+    const expectedBossTotal = bossMaps.reduce((total, row) => total + row.expectedBossCount, 0);
+    assert.ok(bossMaps.length > 0, 'native region registry must expose maps with authored bosses');
+    assert.ok(expectedBossTotal > 0, 'native region registry must expose at least one authored boss');
+    const bossRows = [];
+    for (const expected of bossMaps) {
+      await enterRegion(page, expected.id, {layer: 'STORY'});
+      const row = await page.evaluate(() => {
+        const actors = (room.enemies || []).filter(e => e.boss || e.midboss || e.persona || e.cosmic || e.trial || e.cosmicGuardianR63);
+        return {id: room.id, actors: actors.map(e => ({
           id: e.id, name: e.name, maxHp: e.maxHp, hp: e.hp,
           canonicalMaxHp: e.healthR71CanonicalMaxHp, visibleMaxHp: e.healthR71VisibleMaxHp,
-        }))});
-      }
-      return out;
-    });
-    const expectedBossMaps = await page.evaluate(() => Object.values(regionById).filter(r => Array.isArray(r.bosses) && r.bosses.length).length);
-    assert.equal(bossRows.length, expectedBossMaps, 'every native boss map must be inspected');
+        }))};
+      });
+      assert.equal(row.id, expected.id, 'native region entry reaches the requested boss map');
+      assert.ok(row.actors.length >= expected.expectedBossCount, `${row.id} must instantiate all source-declared native major actors`);
+      bossRows.push({...row, expectedDefinitions: expected.expectedBossCount});
+    }
+    assert.equal(bossRows.length, bossMaps.length, 'every source-declared native boss map must be entered and inspected');
+    assert.ok(bossRows.reduce((total, row) => total + row.actors.length, 0) >= expectedBossTotal, 'native map entry must instantiate every authored boss definition');
     for (const row of bossRows) {
       assert.ok(row.actors.length >= row.expectedDefinitions, `${row.id} must instantiate all authored boss actors`);
       for (const boss of row.actors) {
@@ -274,6 +293,7 @@ try {
         assert.ok(boss.hp > 0 && boss.hp <= boss.maxHp);
       }
     }
+    await enterRegion(page, 'dist00', {layer: 'STORY'});
 
     const hit = await page.evaluate(() => {
       auto = false;
@@ -551,7 +571,7 @@ try {
       const geometry = sight.geometry();
       for (let x = Math.max(b[0] + 1, player.x + 1); x < b[2] - 1 && hidden.length < 40; x += .5) {
         for (let y = b[1] + 1; y < b[3] - 1 && hidden.length < 40; y += .5) {
-          if (!blocked(x, y, .2, room) && !sight.pointVisible(x, y)) {
+          if (!blocked(x, y, .2, room) && !window.__STORYWORLD_SIGHT24__?.pointVisible(x, y)) {
             const dx = x - player.x, dy = y - player.y, d = Math.hypot(dx, dy);
             const rayLimit = d > 0 ? geometry.ray(dx / d, dy / d) : 0;
             if (d >= geometry.radius - .5 || rayLimit >= d - .1) continue;
@@ -572,7 +592,7 @@ try {
       const py = Math.max(0, Math.min(127, Math.round((1 - (player.y - state.origin[1]) / state.span[1]) * 128)));
       const center = ctx.getImageData(px, py, 1, 1).data;
       const corner = ctx.getImageData(0, 0, 1, 1).data;
-      return {enabled: state.enabled, visible: sight.pointVisible(player.x, player.y), hidden: sight.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled};
+      return {enabled: state.enabled, visible: window.__STORYWORLD_SIGHT24__?.pointVisible(player.x, player.y), hidden: window.__STORYWORLD_SIGHT24__?.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled};
     });
     assert.equal(flashlight.enabled, true); assert.equal(flashlight.visible, true); assert.equal(flashlight.hidden, false);
     assert.ok(flashlight.spot.distance < flashlight.spot.rayLimit + 1, 'hidden fixture must be inside flashlight radius but behind an occluding wall');
@@ -626,7 +646,7 @@ try {
       window.__STORYWORLD_PROGRESSION_R71__.openDifficulty('dist00', null, {restore:true,noStory:true,position:{x:15,y:19},layer:'STORY'});
       document.getElementById('r71DifficultyHard').click();
       document.getElementById('r71DifficultyConfirm').click();
-      return {mode:c.mode(), count:actors.length, actors:actors.map(p=>({id:p.coopIdR62,hp:p.hp,maxHp:window.__STORYWORLD_HEALTH_R71__.inspect(p).player.maxHp,points:p.points,connected:p.connectedR62})), tier:mapMode('dist00','STORY')};
+      return {mode:c.mode(), count:actors.length, actors:actors.map(p=>({id:p.coopIdR62,hp:p.hp,maxHp:window.__STORYWORLD_HEALTH_R71__.inspect(p).player.maxHp,points:p.points,connected:p.connectedR62})), tier:window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00','STORY')};
     });
     await host.page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
     assert.equal(peerResult.mode, 'host'); assert.equal(peerResult.count, 2); assert.equal(peerResult.tier, 'hard');
@@ -634,10 +654,10 @@ try {
     const clear = await host.page.evaluate(() => {
       const c = window.__STORYWORLD_COOP_SIM_R62__, actors = c.players();
       const before = actors.map(p => p.points);
-      completeRegion('dist00');
+      window.completeRegion('dist00');
       const once = actors.map(p => p.points);
       const save = c.exportSave();
-      completeRegion('dist00');
+      window.completeRegion('dist00');
       const repeat = actors.map(p => p.points);
       return {before, once, repeat, savedParticipants:save.participants.map(p=>({id:p.coopIdR62,points:p.points,hp:p.hp})), save};
     });
@@ -688,7 +708,7 @@ try {
       const before={hp:peer.hp,bleed:participant.healthBleedR71,applied:participant.healthR71Applied,points:peer.points};
       await c.importSave(save);const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});
       const restored=c.players().find(p=>p.coopIdR62==='qa-peer'),state=health.inspect(restored),beforeRepeat=restored.points;
-      completeRegion('dist00');
+      window.completeRegion('dist00');
       return{before,restored:{hp:restored.hp,applied:restored.healthR71Applied,bleeding:state.bleeding,status:health.statusRows(restored)},beforeRepeat,afterRepeat:restored.points,mode:c.mode(),epoch};
     });
     assert.equal(saveRoundTrip.before.applied,true,'co-op save includes R71 health marker');
