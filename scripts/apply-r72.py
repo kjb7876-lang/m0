@@ -39,6 +39,7 @@ def transform(html):
     old = "const oldLayer=layer;closePanel(true);layer=nextLayer;try{await enterRegion(id,null);note({kind:'travel',id,layer});return zone===id;}catch(error){layer=oldLayer;throw error;}"
     new = "if(window.__STORYWORLD_COOP_SIM_R62__?.mode()==='guest'){toast('지도 이동은 방장만 확정합니다.',3);return false;}closePanel(true);try{const entered=await enterRegion(id,null,{layer:nextLayer,travel777R72:true});const pending=window.__STORYWORLD_PROGRESSION_R71__?.difficultyState?.().open===true;const ok=entered===true&&zone===id&&layer===nextLayer&&!loading;note({kind:ok?'travel':pending?'travel-pending':'travel-failed',id,layer:nextLayer});if(!ok&&!pending)toast('지역 이동을 완료하지 못했습니다. 목적지와 현재 봉인 상태를 확인하세요.',4);return ok;}catch(error){toast('지역 이동 실패: '+error.message,4);return false;}"
     html = once(html, old, new)
+    html = once(html, "async function go(id,nextLayer=layer){if(!enabled||switching||loading||player.hp<=0||!Object.hasOwn(regionById,id)||!['STORY','DREAM'].includes(nextLayer))return false;", "async function go(id,nextLayer=layer){if(!enabled||switching||loading||player.hp<=0||!Object.hasOwn(regionById,id)||!['STORY','DREAM'].includes(nextLayer)){toast('이동할 수 없습니다. 777 활성화·목적지·세계·로딩·생존 상태를 확인하세요.',4);note({kind:'travel-invalid',id:String(id).slice(0,80)});return false;}")
     # Keep the 777 slot load after the later title-screen controller replaces loadLocal.
     html = once(html, 'active:()=>enabled,activate,leave,go,panel,applyCaps,inspect:', "active:()=>enabled,activate,leave,go,panel,applyCaps,load:async()=>{const text=localStorage.getItem(SLOT);if(!text)throw Error('777 별도 저장이 없습니다.');return restoreSave(JSON.parse(text));},inspect:")
     html = once(html, 'loadLocal=()=>continueRun();', 'loadLocal=()=>window.__STORYWORLD_CHEAT777__?.active()?window.__STORYWORLD_CHEAT777__.load():continueRun();')
@@ -49,6 +50,7 @@ def transform(html):
     end = html.index('</script>', start)
     source = html[start:end]
     source = once(source, "'egoPoseR62'];", "'egoPoseR62','goldenR72','goldenReadyAtR72'];")
+    source = once(source, "'passivePointRevisionR64'];", "'passivePointRevisionR64','r72Entry'];")
     source = once(source, "['level','xp','points','upgrades','progressionR62']", "['level','xp','points','upgrades','progressionR62','goldenR72','goldenReadyAtR72']")
     source = once(source, "'threadDance']", "'threadDance','goldenCast','goldenSecond']", 3)
     source = once(source, 'threadDance:pending.threadDance===true,', 'threadDance:pending.threadDance===true,goldenCast:pending.goldenCast===true,goldenSecond:pending.goldenSecond===true,')
