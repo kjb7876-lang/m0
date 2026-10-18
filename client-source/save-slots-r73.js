@@ -23,7 +23,13 @@
   if(!ready()||busy&&operation!=='new')return false;
   try{const ok=saveBase.call(this,false);if(ok!==true)return false;const raw=read(pending||active);if(!raw||raw.zone!==zone||raw.layer!==layer||raw.saveSlotR73?.transitionComplete!==true)throw Error('저장 후 상태 확인에 실패했습니다.');message=`슬롯 ${pending||active} 저장 완료 · ${summary(raw)}`;note('saved',{slot:pending||active,zone,layer});return true;}catch(e){error(e);return false;}
  };
- const enterBase=enterRegion;enterRegion=async function(...args){transitionDepth++;let result;try{result=await enterBase.apply(this,args);return result;}finally{transitionDepth--;if(transitionDepth===0&&result===true&&!busy&&ready())saveGame(false);}};
+ function enteredCheckpoint(){
+  // Native entry used to save before opening the pre-scene, before later
+  // wrappers finished positioning. Preserve that checkpoint after completion.
+  if(busy||mode()!=='off'||cheat()||transitionDepth||!started||!booted||loading||player?.hp<=0||room?.id!==zone||room?.layer!==layer||room.finalizing||storyScene?.part!=='pre'||blocked(player.x,player.y,.34,room))return false;
+  try{const raw=envelope(serializeSave());raw.saveSlotR73.checkpoint='entered-pre-scene';const text=JSON.stringify(raw);localStorage.setItem(key(),text);if(localStorage.getItem(key())!==text)throw Error('입장 체크포인트 저장 확인 실패');message=`슬롯 ${active} 저장 완료 · ${summary(raw)}`;note('entered-checkpoint',{zone,layer});return true;}catch(e){error(e);return false;}
+ }
+ const enterBase=enterRegion;enterRegion=async function(...args){transitionDepth++;let result;try{result=await enterBase.apply(this,args);return result;}finally{transitionDepth--;if(transitionDepth===0&&result===true&&!busy){if(ready())saveGame(false);else enteredCheckpoint();}}};
  const migratedZone=id=>id==='ep1a07'?'ep1a08':id;
  const restoreBase=restoreSave;restoreSave=async function(raw,...args){transitionDepth++;try{const r=await restoreBase.call(this,raw,...args);if(raw?.version===6&&raw.scope==='hapil.storyworld.depth-full.20261008'&&mode()==='off'&&r!==false&&started&&!loading){safePosition();if(room.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('복원 목적지와 실제 지역이 다릅니다.');}return r;}finally{transitionDepth--;}};
  function locked(){return busy||loading||!booted||transitionDepth>0||mode()!=='off';}

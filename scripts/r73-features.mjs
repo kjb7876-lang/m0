@@ -3,9 +3,9 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {execFileSync,spawnSync} from 'node:child_process';
+import {spawnSync} from 'node:child_process';
 const path='scripts/r72.browser.test.mjs',hash=s=>createHash('sha256').update(s).digest('hex');
-let source=await fs.readFile(path,'utf8');assert.equal(hash(source),hash(execFileSync('git',['show','c011601795a8557e22bd144b7386e08b8c6169dc:'+path])),'preserved R72 assertions must not drift');
+let source=await fs.readFile(path,'utf8');assert.equal(hash(source),'0f028037f2c20c9c9e96f92d675f50af9c0323d819c24f952eb680b895056bfb','preserved c011601 R72 assertions must not drift; pin also works in a shallow CI checkout');
 for(const owner of ['page','touch']){
  const click=`await ${owner}.locator('#campaignNew54').click({timeout:60000});`;
  assert.equal(source.split(click).length-1,1);source=source.replace(click,click+`if(await ${owner}.locator('#slotConfirmR73').count())await ${owner}.locator('#slotConfirmR73').click();`);

@@ -1,0 +1,9 @@
+import fs from 'node:fs/promises';
+export async function browserMemory(browser){
+ const report={platform:process.platform,scope:'This isolated Linux CI Chromium instance only. RSS/PSS/private resident pages are NOT Windows commit, pagefile usage, GPU VRAM, or a measurement of the user PC. Sum RSS can count shared pages more than once.',processes:[],harness:process.memoryUsage()};let session;
+ try{session=await browser.newBrowserCDPSession();const[{processInfo},{targetInfos}]=await Promise.all([session.send('SystemInfo.getProcessInfo'),session.send('Target.getTargets')]);report.workerTargets=targetInfos.filter(t=>/worker/.test(t.type)).map(t=>({type:t.type}));
+  for(const p of processInfo){const row={id:p.id,type:p.type,cpuTime:p.cpuTime};if(process.platform==='linux'&&Number.isInteger(p.id)&&p.id>0){try{const status=await fs.readFile(`/proc/${p.id}/status`,'utf8'),rollup=await fs.readFile(`/proc/${p.id}/smaps_rollup`,'utf8').catch(()=>null),get=(text,key)=>text?Number(text.match(new RegExp('^'+key+':\\s+(\\d+)','m'))?.[1]??NaN):null;row.rssKiB=get(status,'VmRSS');row.virtualAddressKiB=get(status,'VmSize');row.threads=get(status,'Threads');row.pssKiB=get(rollup,'Pss');row.privateResidentKiB=rollup?get(rollup,'Private_Clean')+get(rollup,'Private_Dirty'):null;}catch(e){row.unavailable=e.code||e.message;}}report.processes.push(row);}
+  report.sumRSSKiB=report.processes.reduce((n,p)=>n+(p.rssKiB||0),0);report.sumPSSKiB=report.processes.reduce((n,p)=>n+(p.pssKiB||0),0);
+ }catch(e){report.unavailable=String(e.message);}finally{await session?.detach().catch(()=>{});}return report;
+}
+export async function exitedProcesses(ids){const rows=[];for(const id of ids){try{await fs.access(`/proc/${id}`);rows.push({id,exists:true});}catch(e){rows.push({id,exists:false,error:e.code});}}return{scope:'OS process disappearance after this test browser closes; not a Windows system commit measurement',rows};}

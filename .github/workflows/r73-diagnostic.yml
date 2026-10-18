@@ -11,11 +11,11 @@ concurrency:
 jobs:
   diagnose:
     runs-on: ubuntu-22.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       matrix:
-        script: [r73-ui, r73-diagnose, r73-slots.browser, r73-native, r73-route.browser, r73-features, r73-render.browser]
+        script: [r73-ui, r73-diagnose, r73-slots.browser, r73-native, r73-route.browser, r73-features, r73-render.browser, r73-memory.browser]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -42,6 +42,7 @@ jobs:
       - name: Run independent sandboxed browser scenario
         env:
           R73_COMPARE: '1'
+          R73_ABBA: '1'
           SCENARIO: ${{ matrix.script }}
         run: |
           set -euo pipefail
