@@ -1,5 +1,5 @@
 {
-  "status": "approved",
+  "status": "pending-review",
   "baselineR71": {
     "index.html": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
     "dist/phase1.js": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
@@ -10,14 +10,11 @@
   },
   "approved": {
     "index.html": "9b484eaecc4a4dc2d2e6e5140471c0403f933b1b003f3a46b65db8d2766a8d62",
-    "dist/phase1.js": "f6dbf53310d63d9d50cd637747cb0fa6365781e5ef5bfd7fa237affd01fb82cd"
+    "dist/phase1.js": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
   },
   "evidence": {
-    "validatedCodeSha": "fe26f3e97f88e8e9a22cfae41656f0b1ca625f1e",
-    "pagesRun": "https://github.com/kjb7876-lang/m0/actions/runs/39174030194",
-    "r73BrowserRun": "https://github.com/kjb7876-lang/m0/actions/runs/39174026207",
-    "r72RegressionRun": "https://github.com/kjb7876-lang/m0/actions/runs/39174026272",
+    "validatedCodeSha": "ca2eb1f",
     "htmlSha256": "9b484eaecc4a4dc2d2e6e5140471c0403f933b1b003f3a46b65db8d2766a8d62",
-    "rendererSha256": "f6dbf53310d63d9d50cd637747cb0fa6365781e5ef5bfd7fa237affd01fb82cd"
+    "rendererSha256": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
   }
 }
