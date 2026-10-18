@@ -1684,12 +1684,28 @@ try {
     assert.ok(saveRoundTrip.restored.status.some(row=>row.key==='health-r71-bleed'));
     assert.equal(saveRoundTrip.afterRepeat,saveRoundTrip.beforeRepeat,'imported first-clear state does not award again');
 
-    await host.page.evaluate(()=>{
+    const hospitalEntryRequest=await host.page.evaluate(()=>{
+      const c=window.__STORYWORLD_COOP_SIM_R62__,beforeEpoch=c.inspect().epoch;
       const api=window.__STORYWORLD_PROGRESSION_R71__;
       api.openDifficulty('ep1a08',null,{restore:true,noStory:true,position:{x:27,y:27},layer:'STORY'});
       document.getElementById('r71DifficultyHard').click();document.getElementById('r71DifficultyConfirm').click();
+      return{beforeEpoch,expectedEpoch:beforeEpoch+1};
     });
-    await host.page.waitForFunction(()=>window.eval("zone==='ep1a08' && !loading && !modal"),null,{timeout:60000});
+    await host.page.waitForFunction(expectedEpoch=>{
+      const state=window.__STORYWORLD_COOP_SIM_R62__?.inspect();
+      return state?.epoch===expectedEpoch&&state.zone==='ep1a08'&&state.layer==='STORY'&&
+        !window.eval('loading||modal')&&state.history.some(row=>row.type==='transition'&&row.to==='ep1a08'&&row.requested==='ep1a08'&&row.epoch===expectedEpoch);
+    },hospitalEntryRequest.expectedEpoch,{timeout:60000});
+    await host.page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    const hospitalEntryCompletion=await host.page.evaluate(()=>{
+      const c=window.__STORYWORLD_COOP_SIM_R62__,state=c.inspect(),key=`${state.layer}:${state.zone}`;
+      return{epoch:state.epoch,zone:state.zone,layer:state.layer,paused:state.paused,history:state.history.filter(row=>row.type==='transition').slice(-3),entryTransition:state.history.find(row=>row.type==='transition'&&row.epoch===state.epoch&&row.to==='ep1a08'&&row.requested==='ep1a08'),room:{id:room.id,layer:room.layer,worldMatches:room===world?.[key],enemiesMatchWorld:room.enemies===world?.[key]?.enemies,enemyIds:room.enemies.map(e=>e.id)}};
+    });
+    assert.equal(hospitalEntryCompletion.epoch,hospitalEntryRequest.expectedEpoch);
+    assert.equal(hospitalEntryCompletion.zone,'ep1a08');assert.equal(hospitalEntryCompletion.layer,'STORY');
+    assert.ok(hospitalEntryCompletion.entryTransition,'hospital entry must finish with the native transition record for requested ep1a08');
+    assert.equal(hospitalEntryCompletion.room.id,'ep1a08');assert.equal(hospitalEntryCompletion.room.layer,'STORY');
+    assert.equal(hospitalEntryCompletion.room.worldMatches,true);assert.equal(hospitalEntryCompletion.room.enemiesMatchWorld,true);
     const hospitalDrop=await host.page.evaluate(()=>{
       const c=window.__STORYWORLD_COOP_SIM_R62__,api=window.__STORYWORLD_PROGRESSION_R71__,epoch=c.inspect().epoch;
       c.receive({type:'all_loaded',phase:'running',epoch});const r=room,b=r.exploration?.bounds;
@@ -1720,7 +1736,7 @@ try {
     const guestState=await guest.page.evaluate(()=>({mode:window.__STORYWORLD_COOP_SIM_R62__.mode(),host:window.__STORYWORLD_COOP_SIM_R62__.isHost(),roomId:room.id,currentZone:zone,canApply:window.__STORYWORLD_HEALTH_R71__.inspect(player).authority.canApply}));
     assert.equal(guestState.mode,'guest');assert.equal(guestState.host,false);assert.equal(guestState.roomId,guestState.currentZone);
     assert.equal(guestState.canApply,false,'guest health presentation is not authoritative');
-    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,coopEntryCompletion,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
+    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,coopEntryCompletion,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalEntryRequest,hospitalEntryCompletion,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
     report.checks[report.checks.length-1].legacyReplicaImport=legacyReplicaImport;
     report.checks[report.checks.length-1].deferredHealthComparison={failureCount:deferredHealthFailures.length,failures:deferredHealthFailures};
     report.actualRelay = false;
