@@ -102,9 +102,23 @@ jobs:
           node scripts/r71.audit.mjs | tee out/r71/audit.log
           node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
           node scripts/r71.perf.mjs | tee out/r71/performance.log
-          node scripts/r71.browser.test.mjs | tee out/r71/browser.log
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
           mkdir -p out/r71/native
-          node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
       - name: Require exact approved R71 runtime hashes
         id: hashes
         env:

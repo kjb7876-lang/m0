@@ -93,9 +93,23 @@ jobs:
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/candidate-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          node scripts/r71.browser.test.mjs | tee out/r71/browser.log
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
           mkdir -p out/r71/native
-          node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
       - name: Apply and fully profile R71 candidate after baseline
         if: github.event_name == 'workflow_dispatch' && inputs.profile_mode == 'candidate'
         shell: bash
@@ -111,9 +125,23 @@ jobs:
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/candidate-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          node scripts/r71.browser.test.mjs | tee out/r71/browser.log
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
           mkdir -p out/r71/native
-          node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
           node scripts/r71.perf.mjs | tee out/r71/performance.log
       - uses: actions/upload-artifact@v4
         if: always()

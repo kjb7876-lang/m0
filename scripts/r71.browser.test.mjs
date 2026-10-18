@@ -1194,7 +1194,7 @@ try {
             // Passing two scalars silently returned the unoccluded radius,
             // which made every behind-wall candidate look fully visible.
             const rayLimit = d > 0 ? geometry.ray([dx / d, dy / d]) : 0;
-            if (d >= geometry.radius - .5 || rayLimit >= d - .1 || d >= rayLimit + 1) continue;
+            if (d >= geometry.radius - .5 || d <= rayLimit + .1) continue;
             const q = project(x, y);
             if (q.x >= -36 && q.x <= W + 36 && q.y >= -40 && q.y <= H + 40) hidden.push({x, y, q, distance: d, rayLimit});
           }
@@ -1213,10 +1213,11 @@ try {
       const center = ctx.getImageData(px, py, 1, 1).data;
       const corner = ctx.getImageData(0, 0, 1, 1).data;
       const phase=window.__STORYWORLD_PHASE1__.inspect();
-      return {enabled: state.enabled, visible: sight.pointVisible(player.x, player.y), hidden: sight.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled,renderer:{active:phase.active,failed:phase.failed}};
+      return {enabled: state.enabled, radius:geometry.radius, visible: sight.pointVisible(player.x, player.y), hidden: sight.pointVisible(spot.x, spot.y), centerPixel: [...center], cornerPixel: [...corner], spot, hiddenDrop: fake, beaconOwners, culls: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering?.lastCaptureSightCulled,renderer:{active:phase.active,failed:phase.failed}};
     });
     assert.equal(flashlight.enabled, true); assert.equal(flashlight.visible, true); assert.equal(flashlight.hidden, false);
-    assert.ok(flashlight.spot.distance < flashlight.spot.rayLimit + 1, 'hidden fixture must be inside flashlight radius but behind an occluding wall');
+    assert.ok(flashlight.spot.distance < flashlight.radius - .5, 'hidden fixture remains inside the native flashlight radius');
+    assert.ok(flashlight.spot.distance > flashlight.spot.rayLimit + .1, 'hidden fixture lies beyond the native ray’s first wall occluder');
     assert.ok(flashlight.centerPixel[0] > 180, 'the player remains inside the white flashlight mask');
     assert.ok(flashlight.cornerPixel[0] < 20, 'the outside of the flashlight mask stays black');
     assert.ok(flashlight.hiddenDrop?.id);
@@ -1267,12 +1268,27 @@ try {
       const c = window.__STORYWORLD_COOP_SIM_R62__, actors = c.players();
       const owner = actors.find(p => p.coopIdR62 === 'qa-host'), down = actors.find(p => p.coopIdR62 === 'qa-peer');
       down.hp = 0; down.connectedR62 = true; owner.points = down.points = 0;
+      const entryEpochBefore=c.inspect().epoch;
       window.__STORYWORLD_PROGRESSION_R71__.openDifficulty('dist00', null, {restore:true,noStory:true,position:{x:15,y:19},layer:'STORY'});
       document.getElementById('r71DifficultyHard').click();
       document.getElementById('r71DifficultyConfirm').click();
-      return {mode:c.mode(), count:actors.length, actors:actors.map(p=>({id:p.coopIdR62,hp:p.hp,maxHp:window.__STORYWORLD_HEALTH_R71__.inspect(p).player.maxHp,points:p.points,connected:p.connectedR62})), tier:window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00','STORY')};
+      return {mode:c.mode(),entryEpochBefore,expectedEntryEpoch:entryEpochBefore+1,count:actors.length,actors:actors.map(p=>({id:p.coopIdR62,hp:p.hp,maxHp:window.__STORYWORLD_HEALTH_R71__.inspect(p).player.maxHp,points:p.points,connected:p.connectedR62})),tier:window.__STORYWORLD_CAMPAIGN_R63R1__?.mode('dist00','STORY')};
     });
-    await host.page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
+    await host.page.waitForFunction(expectedEpoch=>{
+      const state=window.__STORYWORLD_COOP_SIM_R62__?.inspect();
+      return state?.epoch===expectedEpoch&&state.zone==='dist00'&&state.layer==='STORY'&&
+        !window.eval('loading||modal')&&state.history.some(row=>row.type==='transition'&&row.to==='dist00'&&row.requested==='dist00'&&row.epoch===expectedEpoch);
+    },peerResult.expectedEntryEpoch,{timeout:60000});
+    await host.page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    const coopEntryCompletion=await host.page.evaluate(()=>{
+      const c=window.__STORYWORLD_COOP_SIM_R62__,state=c.inspect(),key=`${state.layer}:${state.zone}`;
+      return{epoch:state.epoch,zone:state.zone,layer:state.layer,paused:state.paused,history:state.history.filter(row=>row.type==='transition').slice(-3),entryTransition:state.history.find(row=>row.type==='transition'&&row.epoch===state.epoch&&row.to==='dist00'&&row.requested==='dist00'),room:{id:room.id,layer:room.layer,worldMatches:room===world?.[key],enemiesMatchWorld:room.enemies===world?.[key]?.enemies,enemyIds:room.enemies.map(e=>e.id)}};
+    });
+    assert.equal(coopEntryCompletion.epoch,peerResult.expectedEntryEpoch);
+    assert.equal(coopEntryCompletion.zone,'dist00');assert.equal(coopEntryCompletion.layer,'STORY');
+    assert.ok(coopEntryCompletion.entryTransition,'co-op entry must finish with the native transition record for requested dist00');
+    assert.equal(coopEntryCompletion.room.id,'dist00');assert.equal(coopEntryCompletion.room.layer,'STORY');
+    assert.equal(coopEntryCompletion.room.worldMatches,true);assert.equal(coopEntryCompletion.room.enemiesMatchWorld,true);
     assert.equal(peerResult.mode, 'host'); assert.equal(peerResult.count, 2); assert.equal(peerResult.tier, 'hard');
     for (const actor of peerResult.actors) assert.equal(actor.maxHp, 777);
     const nativeDist00Source = await host.page.evaluate(() => {
@@ -1555,20 +1571,14 @@ try {
     // Preserve the live blood visual for the guest transfer. The independent
     // save/import below intentionally tests durable status and clears effects.
     const coopSnapshot=await host.page.evaluate(()=>window.__STORYWORLD_COOP_SIM_R62__.snapshot());
-    const saveRoundTrip = await host.page.evaluate(async () => {
-      const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__,peer=c.players().find(p=>p.coopIdR62==='qa-peer');
+    const saveRoundTripInput = await host.page.evaluate(() => {
+      const c=window.__STORYWORLD_COOP_SIM_R62__,peer=c.players().find(p=>p.coopIdR62==='qa-peer');
       const save=c.exportSave(),participant=save.participants.find(p=>p.coopIdR62==='qa-peer');
       const before={hp:peer.hp,bleed:participant.healthBleedR71,applied:participant.healthR71Applied,points:peer.points};
-      await c.importSave(save);const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});
-      const restored=c.players().find(p=>p.coopIdR62==='qa-peer'),state=health.inspect(restored),beforeRepeat=restored.points;
-      window.completeRegion('dist00');
-      return{before,restored:{hp:restored.hp,applied:restored.healthR71Applied,bleeding:state.bleeding,status:health.statusRows(restored)},beforeRepeat,afterRepeat:restored.points,mode:c.mode(),epoch};
+      return{serialized:JSON.stringify(save),before};
     });
-    assert.equal(saveRoundTrip.before.applied,true,'co-op save includes R71 health marker');
-    assert.equal(saveRoundTrip.before.bleed?.ownerId,firstHit.enemyId,'co-op save includes peer bleed state');
-    assert.equal(saveRoundTrip.restored.applied,true);assert.equal(saveRoundTrip.restored.bleeding.active,true,'co-op import restores peer bleed');
-    assert.ok(saveRoundTrip.restored.status.some(row=>row.key==='health-r71-bleed'));
-    assert.equal(saveRoundTrip.afterRepeat,saveRoundTrip.beforeRepeat,'imported first-clear state does not award again');
+    assert.equal(saveRoundTripInput.before.applied,true,'co-op save includes R71 health marker');
+    assert.equal(saveRoundTripInput.before.bleed?.ownerId,firstHit.enemyId,'co-op save includes peer bleed state');
     const snapPeer=coopSnapshot.players.find(p=>p.coopIdR62==='qa-peer');
     assert.equal(snapPeer.healthR71Applied,true);assert.equal(snapPeer.healthBleedR71?.ownerId,firstHit.enemyId,'host snapshot carries peer bleed state');
 
@@ -1657,6 +1667,23 @@ try {
     assert.equal(deathAndRevive.revived.maxHp,777);assert.equal(deathAndRevive.revived.bleeding.active,false,'revive clears stale bleed');
     assert.equal(deathAndRevive.reviveEvents,1);
 
+    // Import the byte-frozen health save only after the native lethal/revive
+    // pass. A co-op import intentionally reconstructs room state and can
+    // remove a first-clear patrol; the lethal fixture must use the original
+    // live room enemy instead of a reinserted test actor.
+    const saveRoundTrip=await host.page.evaluate(async input=>{
+      const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__;
+      await c.importSave(JSON.parse(input.serialized));const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});
+      const restored=c.players().find(p=>p.coopIdR62==='qa-peer'),state=health.inspect(restored),beforeRepeat=restored.points;
+      window.completeRegion('dist00');
+      return{before:input.before,restored:{hp:restored.hp,applied:restored.healthR71Applied,bleeding:state.bleeding,status:health.statusRows(restored)},beforeRepeat,afterRepeat:restored.points,mode:c.mode(),epoch};
+    },saveRoundTripInput);
+    assert.equal(saveRoundTrip.before.applied,true,'co-op save includes R71 health marker');
+    assert.equal(saveRoundTrip.before.bleed?.ownerId,firstHit.enemyId,'co-op save includes peer bleed state');
+    assert.equal(saveRoundTrip.restored.applied,true);assert.equal(saveRoundTrip.restored.bleeding.active,true,'co-op import restores peer bleed');
+    assert.ok(saveRoundTrip.restored.status.some(row=>row.key==='health-r71-bleed'));
+    assert.equal(saveRoundTrip.afterRepeat,saveRoundTrip.beforeRepeat,'imported first-clear state does not award again');
+
     await host.page.evaluate(()=>{
       const api=window.__STORYWORLD_PROGRESSION_R71__;
       api.openDifficulty('ep1a08',null,{restore:true,noStory:true,position:{x:27,y:27},layer:'STORY'});
@@ -1693,7 +1720,7 @@ try {
     const guestState=await guest.page.evaluate(()=>({mode:window.__STORYWORLD_COOP_SIM_R62__.mode(),host:window.__STORYWORLD_COOP_SIM_R62__.isHost(),roomId:room.id,currentZone:zone,canApply:window.__STORYWORLD_HEALTH_R71__.inspect(player).authority.canApply}));
     assert.equal(guestState.mode,'guest');assert.equal(guestState.host,false);assert.equal(guestState.roomId,guestState.currentZone);
     assert.equal(guestState.canApply,false,'guest health presentation is not authoritative');
-    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
+    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,coopEntryCompletion,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
     report.checks[report.checks.length-1].legacyReplicaImport=legacyReplicaImport;
     report.checks[report.checks.length-1].deferredHealthComparison={failureCount:deferredHealthFailures.length,failures:deferredHealthFailures};
     report.actualRelay = false;
