@@ -45,7 +45,7 @@
   }catch(e){pending=prior;if(old){try{await restoreSave(old);}catch(recovery){message='이전 진행 복원 실패: '+recovery.message;}}active=prior;error(e);return false;
   }finally{pending=null;busy=false;operation=null;}
  }
- function confirm(kind,n){if(locked()){error(Error('로딩이 끝난 뒤 다시 선택하세요.'));return;}if(kind==='load'){void transact(kind,n);return;}
+ function confirm(kind,n){if(locked()){error(Error('로딩이 끝난 뒤 다시 선택하세요.'));return;}if(kind==='load')return transact(kind,n);
   let raw;try{raw=read(n);}catch(e){message='기존 데이터 오류 · 원본 보존: '+e.message;raw={zone:'손상된 저장',layer:'STORY',player:{},progress:{}};}
   openPanel(`<h2>슬롯 ${n} · ${kind==='new'?'처음부터 시작':'진행 저장'}</h2><p>${escapeHTML(summary(raw))}</p><p>${kind==='new'?'이 슬롯에서 새로운 여정을 시작합니다. 기존 진행은 이 슬롯의 이전 진행으로 백업합니다.':'현재 진행으로 이 슬롯을 덮어씁니다.'} 다른 슬롯은 유지됩니다.</p><div class="actions"><button id="slotConfirmR73">슬롯 ${n}에 ${kind==='new'?'새 게임 시작':'저장'}</button><button id="slotCancelR73">취소</button></div>`);
   button('slotConfirmR73',()=>{const b=$('slotConfirmR73');if(b)b.disabled=true;return transact(kind,n);});button('slotCancelR73',panel);
