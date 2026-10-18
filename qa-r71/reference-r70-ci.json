@@ -1,0 +1,749 @@
+{
+  "provenance": {
+    "runId": 39089788163,
+    "source": "GitHub Actions official logs",
+    "workflow": "StoryWorld R70 candidate verification",
+    "candidateRuntime": {
+      "html": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+      "renderer": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+    },
+    "physicalGPU": false,
+    "physicalMobile": false
+  },
+  "comparison": [
+    {
+      "scenario": "movement",
+      "baseline": {
+        "trials": 2,
+        "meanMs": 477.49444444444447,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000025,
+        "drawP95Ms": 49,
+        "bufferUploads": 203.95238095238096,
+        "materialReplacementsPerFrame": 0.7619047619047619
+      },
+      "candidate": {
+        "trials": 2,
+        "meanMs": 475.83984375,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000025,
+        "drawP95Ms": 47.25,
+        "bufferUploads": 203.5548115079365,
+        "materialReplacementsPerFrame": 0.7637648809523809
+      },
+      "meanFrameReductionFraction": 0.003465172660531257,
+      "p95ReductionFraction": 0,
+      "regressionFlag": false
+    },
+    {
+      "scenario": "ego-stress",
+      "baseline": {
+        "trials": 2,
+        "meanMs": 465.10923076923075,
+        "p50Ms": 441.6499999999978,
+        "p95Ms": 600.0499999999993,
+        "drawP95Ms": 84.64999999996508,
+        "bufferUploads": 247.2923076923077,
+        "materialReplacementsPerFrame": 15.26923076923077
+      },
+      "candidate": {
+        "trials": 2,
+        "meanMs": 456.3904454997738,
+        "p50Ms": 433.40000000000146,
+        "p95Ms": 533.2999999999993,
+        "drawP95Ms": 54.600000000034925,
+        "bufferUploads": 250.97014925373134,
+        "materialReplacementsPerFrame": 3.322704658525554
+      },
+      "meanFrameReductionFraction": 0.018745672398367996,
+      "p95ReductionFraction": 0.11124072993917189,
+      "regressionFlag": false
+    }
+  ],
+  "runs": [
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000007,
+        "p99Ms": 533.2000000000044,
+        "meanMs": 478.02222222222224,
+        "maxMs": 533.4000000000015,
+        "over50ms": 63
+      },
+      "draw": {
+        "count": 66,
+        "p50Ms": 38.600000000034925,
+        "p95Ms": 47.90000000002328,
+        "p99Ms": 58,
+        "meanMs": 34.40151515151956,
+        "maxMs": 58.90000000002328,
+        "over50ms": 3
+      },
+      "tick": {
+        "count": 396,
+        "p50Ms": 0.29999999998835847,
+        "p95Ms": 0.6000000000349246,
+        "p99Ms": 1,
+        "meanMs": 0.3532828282830341,
+        "maxMs": 2.7000000000116415,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 503,
+        "p95Ms": 518,
+        "p99Ms": 523,
+        "meanMs": 476.7692307692308,
+        "maxMs": 523,
+        "over50ms": 65
+      },
+      "elapsedMs": 30115.4,
+      "simulationSeconds": 6.60000000000003,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.8412698412698,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.984126984127
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5849,
+        "imageBufferReuseR70": 0,
+        "unchangedUVUploadsSkippedR70": 0,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000007,
+        "p99Ms": 533.2999999999993,
+        "meanMs": 476.7,
+        "maxMs": 533.4000000000015,
+        "over50ms": 63
+      },
+      "draw": {
+        "count": 66,
+        "p50Ms": 38.100000000034925,
+        "p95Ms": 47.90000000002328,
+        "p99Ms": 58.70000000001164,
+        "meanMs": 34.43030303029897,
+        "maxMs": 59.59999999997672,
+        "over50ms": 2
+      },
+      "tick": {
+        "count": 396,
+        "p50Ms": 0.29999999998835847,
+        "p95Ms": 0.7000000000116415,
+        "p99Ms": 0.8000000000465661,
+        "meanMs": 0.36262626262693876,
+        "maxMs": 3.2999999999883585,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 500,
+        "p95Ms": 522,
+        "p99Ms": 527,
+        "meanMs": 475.46153846153845,
+        "maxMs": 527,
+        "over50ms": 65
+      },
+      "elapsedMs": 30032.1,
+      "simulationSeconds": 6.6000000000000245,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.85714285714283,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.015873015873
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5847,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 57,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 64,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000044,
+        "p99Ms": 533.3000000000029,
+        "meanMs": 474.9796875,
+        "maxMs": 533.3000000000029,
+        "over50ms": 64
+      },
+      "draw": {
+        "count": 67,
+        "p50Ms": 39.09999999997672,
+        "p95Ms": 46.59999999997672,
+        "p99Ms": 48.29999999998836,
+        "meanMs": 33.46865671641652,
+        "maxMs": 58.699999999953434,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 402,
+        "p50Ms": 0.29999999998835847,
+        "p95Ms": 0.6000000000349246,
+        "p99Ms": 1,
+        "meanMs": 0.35398009950274817,
+        "maxMs": 4,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 502,
+        "p95Ms": 515,
+        "p99Ms": 530,
+        "meanMs": 475.6,
+        "maxMs": 534,
+        "over50ms": 65
+      },
+      "elapsedMs": 30398.7,
+      "simulationSeconds": 6.700000000000035,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.65625,
+        "textureUploads": 1.46875,
+        "bufferUploads": 204.09375
+      },
+      "counterDelta": {
+        "created": 1221,
+        "removed": 1193,
+        "styleReplacements": 49,
+        "geometryUpdates": 5983,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 60,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000044,
+        "p99Ms": 533.2999999999956,
+        "meanMs": 476.9666666666667,
+        "maxMs": 550,
+        "over50ms": 63
+      },
+      "draw": {
+        "count": 66,
+        "p50Ms": 38.09999999997672,
+        "p95Ms": 50.09999999997672,
+        "p99Ms": 58.5,
+        "meanMs": 34.72424242424313,
+        "maxMs": 73,
+        "over50ms": 5
+      },
+      "tick": {
+        "count": 396,
+        "p50Ms": 0.30000000004656613,
+        "p95Ms": 0.5999999999767169,
+        "p99Ms": 0.8000000000465661,
+        "meanMs": 0.3388888888902412,
+        "maxMs": 3,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 500,
+        "p95Ms": 518,
+        "p99Ms": 530,
+        "meanMs": 475.46153846153845,
+        "maxMs": 548,
+        "over50ms": 65
+      },
+      "elapsedMs": 30048.9,
+      "simulationSeconds": 6.6000000000000245,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.85714285714283,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.9206349206349
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5847,
+        "imageBufferReuseR70": 0,
+        "unchangedUVUploadsSkippedR70": 0,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 65,
+        "p50Ms": 449.90000000000146,
+        "p95Ms": 583.3999999999942,
+        "p99Ms": 649.9000000000015,
+        "meanMs": 466.1353846153846,
+        "maxMs": 666.5999999999985,
+        "over50ms": 65
+      },
+      "draw": {
+        "count": 67,
+        "p50Ms": 24.099999999976717,
+        "p95Ms": 79.5,
+        "p99Ms": 89.09999999997672,
+        "meanMs": 32.82388059700728,
+        "maxMs": 93.40000000002328,
+        "over50ms": 10
+      },
+      "tick": {
+        "count": 402,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.200000000069849,
+        "p99Ms": 15.900000000023283,
+        "meanMs": 1.6034825870654874,
+        "maxMs": 23.900000000023283,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 445,
+        "p95Ms": 583,
+        "p99Ms": 644,
+        "meanMs": 465.5846153846154,
+        "maxMs": 671,
+        "over50ms": 65
+      },
+      "elapsedMs": 30298.8,
+      "simulationSeconds": 6.7000000000000455,
+      "hits": 175,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 3,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 31,
+        "projectiles": 2
+      },
+      "perFrame": {
+        "drawCalls": 433.0923076923077,
+        "textureUploads": 1.1846153846153846,
+        "bufferUploads": 241.98461538461538
+      },
+      "counterDelta": {
+        "created": 1841,
+        "removed": 1968,
+        "styleReplacements": 941,
+        "geometryUpdates": 6326,
+        "imageBufferReuseR70": 0,
+        "unchangedUVUploadsSkippedR70": 0,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 66,
+        "p50Ms": 433.40000000000146,
+        "p95Ms": 533.3000000000029,
+        "p99Ms": 566.6999999999971,
+        "meanMs": 458.81969696969696,
+        "maxMs": 600,
+        "over50ms": 66
+      },
+      "draw": {
+        "count": 68,
+        "p50Ms": 22.70000000006985,
+        "p95Ms": 58.90000000002328,
+        "p99Ms": 86.59999999997672,
+        "meanMs": 30.450000000006504,
+        "maxMs": 92.39999999990687,
+        "over50ms": 9
+      },
+      "tick": {
+        "count": 408,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.599999999976717,
+        "p99Ms": 16.400000000023283,
+        "meanMs": 1.6227941176470018,
+        "maxMs": 23.099999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 66,
+        "p50Ms": 443,
+        "p95Ms": 546,
+        "p99Ms": 565,
+        "meanMs": 457.969696969697,
+        "maxMs": 592,
+        "over50ms": 66
+      },
+      "elapsedMs": 30282.1,
+      "simulationSeconds": 6.800000000000056,
+      "hits": 182,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 133,
+      "peakProjectiles": 4,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 16,
+        "projectiles": 4
+      },
+      "perFrame": {
+        "drawCalls": 436.1515151515151,
+        "textureUploads": 0.8636363636363636,
+        "bufferUploads": 265
+      },
+      "counterDelta": {
+        "created": 1354,
+        "removed": 1428,
+        "styleReplacements": 214,
+        "geometryUpdates": 8306,
+        "imageBufferReuseR70": 829,
+        "unchangedUVUploadsSkippedR70": 779,
+        "solidPaintReuseR70": 711,
+        "imagePaintReuseR70": 136
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 67,
+        "p50Ms": 433.40000000000146,
+        "p95Ms": 533.2999999999956,
+        "p99Ms": 599.9000000000015,
+        "meanMs": 453.96119402985073,
+        "maxMs": 649.9000000000015,
+        "over50ms": 67
+      },
+      "draw": {
+        "count": 69,
+        "p50Ms": 20.400000000023283,
+        "p95Ms": 50.300000000046566,
+        "p99Ms": 72,
+        "meanMs": 27.91739130435356,
+        "maxMs": 100,
+        "over50ms": 5
+      },
+      "tick": {
+        "count": 414,
+        "p50Ms": 0.8000000000465661,
+        "p95Ms": 4.300000000046566,
+        "p99Ms": 12.199999999953434,
+        "meanMs": 1.562801932368837,
+        "maxMs": 22.699999999953434,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 68,
+        "p50Ms": 437,
+        "p95Ms": 532,
+        "p99Ms": 599,
+        "meanMs": 453.45588235294116,
+        "maxMs": 641,
+        "over50ms": 68
+      },
+      "elapsedMs": 30415.399999999998,
+      "simulationSeconds": 6.900000000000061,
+      "hits": 171,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 137,
+      "peakProjectiles": 1,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 22,
+        "projectiles": 0
+      },
+      "perFrame": {
+        "drawCalls": 464.3731343283582,
+        "textureUploads": 0.8208955223880597,
+        "bufferUploads": 236.9402985074627
+      },
+      "counterDelta": {
+        "created": 1200,
+        "removed": 1273,
+        "styleReplacements": 228,
+        "geometryUpdates": 7520,
+        "imageBufferReuseR70": 853,
+        "unchangedUVUploadsSkippedR70": 795,
+        "solidPaintReuseR70": 716,
+        "imagePaintReuseR70": 114
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 65,
+        "p50Ms": 433.3999999999942,
+        "p95Ms": 616.7000000000044,
+        "p99Ms": 633.3000000000029,
+        "meanMs": 464.08307692307693,
+        "maxMs": 683.3000000000029,
+        "over50ms": 65
+      },
+      "draw": {
+        "count": 67,
+        "p50Ms": 23.79999999993015,
+        "p95Ms": 89.79999999993015,
+        "p99Ms": 101.70000000006985,
+        "meanMs": 36.22686567163241,
+        "maxMs": 113.19999999995343,
+        "over50ms": 14
+      },
+      "tick": {
+        "count": 402,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.400000000023283,
+        "p99Ms": 14.300000000046566,
+        "meanMs": 1.4771144278619708,
+        "maxMs": 25.699999999953434,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 436,
+        "p95Ms": 614,
+        "p99Ms": 634,
+        "meanMs": 466.4153846153846,
+        "maxMs": 696,
+        "over50ms": 65
+      },
+      "elapsedMs": 30165.4,
+      "simulationSeconds": 6.700000000000051,
+      "hits": 182,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 2,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 33,
+        "projectiles": 2
+      },
+      "perFrame": {
+        "drawCalls": 480.0615384615385,
+        "textureUploads": 1.7076923076923076,
+        "bufferUploads": 252.6
+      },
+      "counterDelta": {
+        "created": 1982,
+        "removed": 2060,
+        "styleReplacements": 1044,
+        "geometryUpdates": 6565,
+        "imageBufferReuseR70": 0,
+        "unchangedUVUploadsSkippedR70": 0,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    }
+  ]
+}
