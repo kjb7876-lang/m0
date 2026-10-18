@@ -50,7 +50,7 @@
   if(!anchor||!Number.isFinite(anchor.x)||!Number.isFinite(anchor.y)||distance(p,anchor)>12){if(manual)toast('12m 안의 적을 선택하거나 조준점을 지정하세요.',2);return false;}
   const stats=C.stats(s),origin={x:p.x,y:p.y},plan=C.plan(d.strokes,anchor,stats.size,q=>safe(q),clear,origin);
   if(!plan){lastResult=fail('안전한 검무 공간이 없습니다. 자원과 재사용을 소비하지 않았습니다.');if(manual)toast(lastResult.message,3);return false;}
-  const progression=window.__STORYWORLD_PROGRESSION_R62__,rank=progression.ranks('threadDanceR63',p),base=withActor(p,()=>attackPower()*2*(.22+Math.min(.08,rank*.006))*Math.min(12,2+rank)),budget=base*stats.damage;
+  const progression=window.__STORYWORLD_PROGRESSION_R62__,rank=progression.ranks('threadDanceR63',p),base=withActor(p,()=>attackPower()*2*(.22+Math.min(.08,rank*.006))*Math.min(12,2+rank)),budget=Math.min(Number.MAX_SAFE_INTEGER,base*stats.damage);
   const duration=Math.max(.45,Math.min(2,Math.max(.8,plan.length/14))/stats.speed),id='g72-'+(++serial),cooldown=Math.max(6,stats.cooldown*progression.factors(p).cooldown);
   p.goldenReadyAtR72=time+cooldown;const c={id,p,room,layer,origin,path:plan.path,duration,start:time,cursor:0,targets:new Map(),hits:0,budget,name:d.name,scale:plan.scale};casts.set(p,c);route=[];command=null;p.moving=false;
   note('cast',{id,actor:p.coopIdR62||'solo',name:d.name,budget,duration,cooldown,scale:plan.scale,segments:c.path.length});lastResult={ok:true,id};sound('special');return true;

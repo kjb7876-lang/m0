@@ -48,3 +48,7 @@ test('all generated scripts parse; R71 renderer/media and source docs remain exa
  assert.deepEqual(fs.readFileSync('_pages/docs/dist/phase1.js'),fs.readFileSync('_r71/docs/dist/phase1.js'));
  const a=JSON.parse(fs.readFileSync('_r71/docs/web-manifest-r62.json')),b=JSON.parse(fs.readFileSync('_pages/docs/web-manifest-r62.json'));assert.equal(a.files.length,b.files.length);assert.deepEqual(b.files.filter((v,i)=>v.sha256!==a.files[i].sha256).map(v=>v.path),['index.html']);
 });
+
+test('overdraw cannot exceed eight targets or the per-enemy/cast event budget; trails reuse bounded slots',()=>{
+ const x=fixture();x.input=plain(C.normalize(line));vm.runInContext(`var api=window.__STORYWORLD_GOLDEN_R72__;room.enemies=Array.from({length:12},(_,i)=>({id:'enemy-'+i,x:2,y:2,hp:10000,spawnState:'active'}));api.applyCommand(player,{op:'save',name:'limit',strokes:input});api.applyCommand(player,{op:'learn'});api.applyCommand(player,{op:'equip',id:api.state().designs[0].id});api.cast();`,x);for(let i=0;i<180;i++)vm.runInContext('tick(1/60)',x);assert.equal(x.damage.length,64);const targets=new Set(x.damage.map(d=>d.source.eventId.split(':')[1]));assert.equal(targets.size,8);assert.ok([...targets].every(id=>x.damage.filter(d=>d.source.eventId.split(':')[1]===id).length===8));assert.ok(x.effects.length<=16);const pool=new Set(x.effects);vm.runInContext('time=100;api.cast()',x);for(let i=0;i<180;i++)vm.runInContext('tick(1/60)',x);assert.equal(x.effects.length,pool.size);assert.ok(x.effects.every(e=>pool.has(e)));
+});
