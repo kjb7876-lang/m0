@@ -56,6 +56,12 @@ Client `{type:"resync",epoch,lastSeq}` gets the newest retained snapshot; the ho
 
 `{type:"command",epoch,seq,command:{kind:"upgrade",passiveId:"tempo"}}` forwards only to the host with server-assigned `playerId`. The command stream has its own monotonically increasing sequence and a 10/s (20 burst) limit. Only the exact upgrade operation and bounded passive ID are accepted; direct HP, points, level, damage or other mutations are rejected. Host simulation validates the passive ID, available points and upgrade cost, then broadcasts the resulting normal snapshot. Commands work in playing/paused phases so passive menus remain usable, and are refused during loading. Commands from different members cannot impersonate the host.
 
+## R72 golden design extension
+
+The R72 relay source additionally accepts `{type:"command",epoch,seq,command:{kind:"golden",action}}` under the same actor identity, epoch, rate and duplicate protections. Allowed actions are `save`, `rename`, `clone`, `delete`, `learn`, `equip`, `upgrade` and `auto`. Each action has an exact field allowlist. Names are at most24 characters, IDs48, normalized strokes12 and transported points192; the host further normalizes stored designs to96 points and checks learned state, paid capacity and point costs. Clients cannot submit rank totals, points, damage, positions or cooldown mutations as management commands.
+
+Actual casts use optional strict boolean `goldenCast`/`goldenSecond` input flags and an optional finite `{x,y}` `goldenAim` bounded to ±100. The host applies its own range, obstacle, equipment, cooldown and damage checks. These keys are omitted from ordinary R72 input packets, retaining ordinary movement on an older relay. New golden guest actions require this extension to be deployed; this draft does not deploy the public relay. Existing R62 upgrade commands and clients remain supported.
+
 ## Departures and errors
 
 - `{type:"leave"}`: explicit guest departure removes its slot immediately. Host departure closes the room.

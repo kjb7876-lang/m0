@@ -59,6 +59,10 @@ def transform(html):
     source = once(source, "['level','xp','points','upgrades','progressionR62']", "['level','xp','points','upgrades','progressionR62','goldenR72','goldenReadyAtR72']")
     source = once(source, "'threadDance']", "'threadDance','goldenCast','goldenSecond']", 3)
     source = once(source, 'threadDance:pending.threadDance===true,', 'threadDance:pending.threadDance===true,goldenCast:pending.goldenCast===true,goldenSecond:pending.goldenSecond===true,goldenAim:pending.goldenAim,')
+    # Ordinary movement keeps the old relay input shape; extensions are sent
+    # only when the player actually requests the new ability.
+    source = once(source, "if(p)p.pendingInputR62={};return{moveX:", "if(p)p.pendingInputR62={};const out={moveX:")
+    source = once(source, "route:route[0]||undefined};}", "route:route[0]||undefined};if(!out.goldenCast)delete out.goldenCast;if(!out.goldenSecond)delete out.goldenSecond;if(!out.goldenCast&&!out.goldenSecond)delete out.goldenAim;return out;}")
     silver = "if(cmd.threadDance&&!safeRegion())window.__STORYWORLD_CAMPAIGN_R63R1__?.cast(true);"
     source = once(source, silver, silver + "if(cmd.goldenCast||cmd.goldenSecond)window.__STORYWORLD_GOLDEN_R72__?.cast(cmd.goldenSecond?1:0,cmd.goldenAim);", 2)
     source = once(source, "if(!cmd.threadDance)window.__STORYWORLD_CAMPAIGN_R63R1__?.autoCast();", "if(!cmd.goldenCast&&!cmd.goldenSecond)window.__STORYWORLD_GOLDEN_R72__?.autoCast();if(!cmd.threadDance)window.__STORYWORLD_CAMPAIGN_R63R1__?.autoCast();")
