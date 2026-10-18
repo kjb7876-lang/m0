@@ -53,7 +53,8 @@ function validInput(input) {
 }
 function validGolden(command) {
   if(!record(command)||command.kind!=='golden'||Object.keys(command).some(k=>!['kind','action'].includes(k))||!record(command.action))return false;
-  const a=command.action,fields={save:['op','id','name','strokes'],rename:['op','id','name'],clone:['op','id'],delete:['op','id'],equip:['op','id'],learn:['op'],upgrade:['op','key'],auto:['op','enabled']}[a.op];
+  const a=command.action;if(typeof a.op!=='string')return false;
+  const schemas={save:['op','id','name','strokes'],rename:['op','id','name'],clone:['op','id'],delete:['op','id'],equip:['op','id'],learn:['op'],upgrade:['op','key'],auto:['op','enabled']},fields=Object.hasOwn(schemas,a.op)?schemas[a.op]:null;
   if(!fields||Object.keys(a).some(k=>!fields.includes(k)))return false;
   if(['rename','clone','delete','equip'].includes(a.op)&&!(string(a.id,48)&&/^[A-Za-z0-9_-]+$/.test(a.id)))return false;
   if(['save','rename'].includes(a.op)&&!(typeof a.name==='string'&&a.name.length<=24&&!/[\x00-\x1f<>]/.test(a.name)))return false;
