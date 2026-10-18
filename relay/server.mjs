@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { WebSocketServer, WebSocket } from 'ws';
 
 export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R73R1', protocol: 1 });
+export const WORLD_COORD_LIMIT_R73 = 128;
 export const CHARACTERS = Object.freeze(['hwando', 'seoha', 'neon', 'michaela', 'lauren', 'hunter', 'slayer', 'gunner']);
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const LIMITS = Object.freeze({ players: 4, rooms: 32, connections: 160, payload: 524288, buffer: 2097152,
@@ -49,8 +50,8 @@ function validInput(input) {
   for (const axis of ['moveX', 'moveY']) if (input[axis] !== undefined && !(typeof input[axis] === 'number' && Number.isFinite(input[axis]) && Math.abs(input[axis]) <= 1)) return false;
   for (const key of flags) if (input[key] !== undefined && typeof input[key] !== 'boolean') return false;
   if (input.target !== undefined && input.target !== null && !string(input.target, 128)) return false;
-  if(input.goldenAim!==undefined&&!(record(input.goldenAim)&&Object.keys(input.goldenAim).length===2&&['x','y'].every(k=>Number.isFinite(input.goldenAim[k])&&Math.abs(input.goldenAim[k])<=100)))return false;
-  if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && input.route[k] >= 0 && input.route[k] <= 100))) return false;
+  if(input.goldenAim!==undefined&&!(record(input.goldenAim)&&Object.keys(input.goldenAim).length===2&&['x','y'].every(k=>Number.isFinite(input.goldenAim[k])&&Math.abs(input.goldenAim[k])<=WORLD_COORD_LIMIT_R73)))return false;
+  if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && Math.abs(input.route[k]) <= WORLD_COORD_LIMIT_R73))) return false;
   return safeJSON(input, 64, 3);
 }
 function validGolden(command) {

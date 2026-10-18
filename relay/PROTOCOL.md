@@ -82,3 +82,5 @@ R73 transport uses build `R73R1` and rejects older transport builds to prevent p
 Host `start` and `transition` carry `mazeR73: {version:1, seed:0..4294967295}`. Only these two own fields are accepted. Missing metadata selects legacy seed 0. Arbitrary coordinates, geometry and guest seed changes are refused. Epoch, readiness, host-only transition, finite bounds, exact origin, WSS and token rotation checks are preserved.
 
 The accepted seed is attached to transition/welcome and retained for late join and reconnect. A guest applies it before native map loading, including a changed seed for the same map ID. The seed does not grant a map unlock or bypass story progression.
+
+R73 routes and golden aim retain a finite signed `[-128,128]` coordinate envelope. Canonical map bounds range from -28 to 109: dist01 entry is `(103,17)` and hospital floor includes `(-11,34)`. The old 0..100 / +/-100 transport range rejected those legitimate coordinates. The host still checks the current map, path, collision and ability range; numeric finiteness, extra-field rejection, actor identity and epoch checks remain mandatory.

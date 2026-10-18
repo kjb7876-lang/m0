@@ -34,7 +34,7 @@ def transform(source):
     source = once(source, 'const material=renderer.wallMaterial.clone(),trim=renderer.regionalTrimMaterial55.clone();',
                   'const material=cloneSpatialMaterialR73(renderer.wallMaterial),trim=cloneSpatialMaterialR73(renderer.regionalTrimMaterial55);')
     source = once(source, 'window.StoryPhase1=Object.freeze({mapPaletteR71,',
-                  'window.StoryPhase1=Object.freeze({mazeRoomsR73,coalesceMaterialGroupsR73,cloneSpatialMaterialR73,mapPaletteR71,')
+                  'window.StoryPhase1=Object.freeze({WORLD_COORD_LIMIT_R73:128,mazeRoomsR73,coalesceMaterialGroupsR73,cloneSpatialMaterialR73,mapPaletteR71,')
     source = once(source, 'regional55:this.regionalStats55||null,',
                   'mazeR73:this.currentMazeR73||null,mazeGenerationR73:this.mazeGenerationR73,terrainGroupsR73:{before:[...this.wallRows.values()].reduce((n,e)=>n+(e.mesh.userData.groupsR73?.before||e.mesh.geometry.groups.length),0),after:[...this.wallRows.values()].reduce((n,e)=>n+e.mesh.geometry.groups.length,0),indexOrderPreserved:true},wallVisibilityR73:this.occlusionStats54||null,regional55:this.regionalStats55||null,')
     return source

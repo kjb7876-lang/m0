@@ -180,7 +180,7 @@ test('malformed, binary, prototype keys, oversized and deeply nested messages ar
 
 test('input and state finite bounds plus entity caps', async t => {
   const f = await fixture(t), host = await f.create(), guest = await f.join(host); await f.start(host, [guest]);
-  for (const input of [{ moveX: 2 }, { attack: 1 }, { route: { x: -1, y: 2 } }, { damage: 999 }, { target: 'x'.repeat(129) }]) {
+  for (const input of [{ moveX: 2 }, { attack: 1 }, { route: { x: -129, y: 2 } }, { damage: 999 }, { target: 'x'.repeat(129) }]) {
     guest.send('input', { epoch: 1, seq: 1, input }); assert.equal((await guest.get('error')).code, 'INPUT_INVALID');
   }
   for (const state of [{...sampleState(1),enemies:Array.from({length:129},()=>({id:'x'}))}, {...sampleState(1),epoch:0}, {...sampleState(1),version:2}]) {
@@ -285,5 +285,11 @@ test('golden design commands preserve actor authority and reject arbitrary state
  for(const bad of [{...action,hp:100},{op:'upgrade',key:'points'},{...action,strokes:[Array.from({length:193},()=>({x:0,y:0}))]},{...action,strokes:[[{x:0,y:0},{x:2,y:0}]]},{op:'learn',points:0},{op:'__proto__'},{op:'constructor'},{op:{toString:null}}]){guest.send('command',{epoch:1,seq:2,command:{kind:'golden',action:bad}});assert.equal((await guest.get('error')).code,'COMMAND_INVALID');}
  guest.send('command',{epoch:1,seq:1,command:{kind:'golden',action:{op:'learn'}}});assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
  guest.send('input',{epoch:1,seq:1,input:{goldenCast:true,goldenAim:{x:15.5,y:19}}});const aim=await host.get('input');assert.deepEqual(aim.input.goldenAim,{x:15.5,y:19});assert.equal(aim.playerId,guest.welcome.selfId);
- for(const goldenAim of [{x:Infinity,y:0},{x:101,y:0},{x:0,y:0,damage:100},{x:'15',y:0}]){guest.send('input',{epoch:1,seq:2,input:{goldenCast:true,goldenAim}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
+ for(const goldenAim of [{x:Infinity,y:0},{x:129,y:0},{x:-129,y:0},{x:0,y:0,damage:100},{x:'15',y:0}]){guest.send('input',{epoch:1,seq:2,input:{goldenCast:true,goldenAim}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
+});
+
+test('canonical far and signed map coordinates pass without removing finite bounds or actor identity',async t=>{
+ const f=await fixture(t),host=await f.create(),guest=await f.join(host);await f.start(host,[guest]);let seq=0;
+ for(const point of [{x:103,y:17},{x:-11,y:34}]){guest.send('input',{epoch:1,seq:++seq,input:{route:point,goldenCast:true,goldenAim:point}});const m=await host.get('input');assert.deepEqual(m.input.route,point);assert.deepEqual(m.input.goldenAim,point);assert.equal(m.playerId,guest.welcome.selfId);}
+ for(const route of [{x:129,y:0},{x:-129,y:0},{x:NaN,y:0},{x:0,y:0,damage:1}]){guest.send('input',{epoch:1,seq:seq+1,input:{route}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
 });

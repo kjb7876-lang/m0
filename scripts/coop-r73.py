@@ -9,6 +9,9 @@ def transform(html):
     start = html.index('<script id="coop-sim-r62">')
     end = html.index('</script>', start)
     source = html[start:end]
+    for point in ['route', 'goldenAim']:
+        for axis in ['x', 'y']:
+            source = once(source, f'cap(v.{point}.{axis},-100,100)', f'cap(v.{point}.{axis},-128,128)')
     old = "send('transition',{epoch,regionId:zone,layer})"
     source = once(source, old, "send('transition',{epoch,regionId:zone,layer,mazeR73:window.__STORYWORLD_MAZE_R73__.packet(zone,layer)})", 2)
     old = "const wantedLayer=message.layer||pendingSnapshot?.layer||layer||'STORY';if(mode==='guest'&&(zone!==message.regionId||layer!==wantedLayer||!started))"

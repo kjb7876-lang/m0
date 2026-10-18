@@ -7,6 +7,11 @@ const renderer=fs.readFileSync('_pages/docs/dist/phase1.js','utf8'),context={win
 test('the actual render bridge carries finite save generations even when the map ID and layout stay the same',()=>{
  const source={zone:'dist00',layer:'STORY',time:0,settings:{},viewport:{},exploration:{id:'same-layout'},mazeGenerationR73:7},bridge=new api.RenderBridge(()=>source),first=bridge.capture();assert.equal(first.mazeGenerationR73,7);source.mazeGenerationR73=8;assert.equal(bridge.capture(),first);assert.equal(first.mazeGenerationR73,8);assert.equal(first.exploration,source.exploration);for(const invalid of [Infinity,-1,NaN,1.5,undefined]){source.mazeGenerationR73=invalid;assert.equal(bridge.capture().mazeGenerationR73,0);}
 });
+test('the compiled cooperative input normalizer preserves canonical signed and far coordinates within a finite envelope',()=>{
+ const html=fs.readFileSync('_pages/docs/index.html','utf8'),start=html.indexOf('function normalizeInput(value){'),end=html.indexOf('\n function input(',start);assert.ok(start>0&&end>start);const c={num:(v,d=0)=>Number.isFinite(Number(v))?Number(v):d};c.cap=(v,a,b)=>Math.max(a,Math.min(b,c.num(v)));vm.createContext(c);vm.runInContext(html.slice(start,end),c);
+ for(const point of [{x:103,y:17},{x:-11,y:34}]){const out=c.normalizeInput({route:point,goldenCast:true,goldenAim:point});assert.deepEqual({...out.route},point);assert.deepEqual({...out.goldenAim},point);}
+ const large=c.normalizeInput({route:{x:1e6,y:-1e6},goldenAim:{x:1e6,y:-1e6},moveX:7});assert.equal(large.route.x,128);assert.equal(large.route.y,-128);assert.equal(large.goldenAim.x,128);assert.equal(large.moveX,1);assert.equal(c.normalizeInput({goldenAim:{x:NaN,y:1}}).goldenAim,undefined);
+});
 test('save lifecycle wraps the full compiled campaign, including late R72 arrival and golden save hooks',()=>{
  const html=fs.readFileSync('_pages/docs/index.html','utf8'),ids=[...html.matchAll(/<script id="([^"]+)"/g)].map(m=>m[1]);
  let parsed=0;for(const m of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){if(/type=["']application\/json/.test(m[1]))continue;new vm.Script(m[2]);parsed++;}assert.ok(parsed>75);

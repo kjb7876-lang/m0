@@ -5,9 +5,11 @@ import {test} from 'node:test';
 const c={window:{},console,URL,performance,Float32Array};vm.createContext(c);vm.runInContext(fs.readFileSync('_pages/docs/dist/phase1.js','utf8'),c);const A=c.window.StoryPhase1;
 test('seeded ward additions preserve every old floor centre, native structure and story anchor with bounded generation',()=>{
  let added=0;
+ const relayLimit=Number(fs.readFileSync('relay/server.mjs','utf8').match(/export const WORLD_COORD_LIMIT_R73 = (\d+);/)[1]);assert.equal(A.WORLD_COORD_LIMIT_R73,relayLimit);
  for(const[id,art]of Object.entries(A.REGIONAL_TERRAIN_ART)){
   const old=A.explorationLayout(id,art.theme,false,{}),fresh=A.explorationLayout(id,art.theme,false,{seedR73:123456});
-  if(id==='ep1a08'){assert.deepEqual(fresh,old);continue;}
+  assert.ok(fresh.bounds.every(v=>Number.isFinite(v)&&Math.abs(v)<=relayLimit),id+' canonical collision bounds must fit the finite relay envelope');
+  if(id==='ep1a08'){assert.deepEqual(fresh,old);assert.equal(A.explorationBlocked(fresh,-11,34,.31),false,'the signed relay sample is a real hospital floor point');continue;}
   const keys=new Set(fresh.floorCells.map(p=>p.join(':')));for(const[x,y]of old.floorCells){assert.ok(keys.has(x+':'+y),id+' original floor');if(!A.explorationBlocked(old,x+.5,y+.5,.29))assert.equal(A.explorationBlocked(fresh,x+.5,y+.5,.29),false,id+' original walkable centre');}
   for(const key of ['entry','nodes','sourceExits','originalEncounterBounds','bounds'])assert.deepEqual(fresh[key],old[key],id+' '+key);
   assert.deepEqual(fresh.walls.filter(w=>!w.annex),old.walls.filter(w=>!w.annex));
