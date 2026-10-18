@@ -44,7 +44,11 @@ jobs:
           mkdir -p out/r73
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
           SERVER_PID=$!
-          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > out/r73/r71-http.log 2>&1 &
+          BASELINE_PID=$!
+          python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > out/r73/r72-http.log 2>&1 &
+          R72_PID=$!
+          trap 'kill "$SERVER_PID" "$BASELINE_PID" "$R72_PID" 2>/dev/null || true' EXIT
           node "scripts/$SCENARIO.mjs" | tee out/r73/runner.log
       - uses: actions/upload-artifact@v4
         if: always()

@@ -3,21 +3,21 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const out='out/r73',url='http://127.0.0.1:4391/';await fs.mkdir(out,{recursive:true});
+const out='out/r73';await fs.mkdir(out,{recursive:true});
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const report={harnessSHA:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),baselineSHA:'9db96998e37aaed95c37e80fd4649b156837528a',sandbox:true,physicalGPU:false,physicalMobile:false,scope:'diagnostic native map entry with restore/noStory and survival/low-boss-HP fixtures; NOT natural progression',runs:[]};
+const report={harnessSHA:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),baselineSHA:'9db96998e37aaed95c37e80fd4649b156837528a',sandbox:true,physicalGPU:false,physicalMobile:false,scope:'diagnostic native map entry after a labelled trusted unlock-history save fixture, plus survival/low-boss-HP fixtures; NOT natural progression or 777 travel validation',runs:[]};
 const browser=await chromium.launch({headless:true,chromiumSandbox:true,args:['--disable-dev-shm-usage']});report.browser=await browser.version();
 const stats=a=>{a=a.slice().sort((a,b)=>a-b);return{count:a.length,p50:a[Math.floor(a.length*.5)],p95:a[Math.floor(a.length*.95)],max:a.at(-1),over50:a.filter(v=>v>50).length};};
 try{for(const kind of (process.env.R73_COMPARE==='1'?['baseline','candidate']:['baseline'])){
-const dir=kind==='baseline'?'_r71/docs':'_pages/docs',html=await fs.readFile(dir+'/index.html'),renderer=await fs.readFile(dir+'/dist/phase1.js');
+const dir=kind==='baseline'?'_r71/docs':'_pages/docs',url=kind==='baseline'?'http://127.0.0.1:4392/':'http://127.0.0.1:4391/',html=await fs.readFile(dir+'/index.html'),renderer=await fs.readFile(dir+'/dist/phase1.js');
 for(const layerName of ['STORY','DREAM'])for(const flashlight of [false,true]){
  const context=await browser.newContext({viewport:{width:1365,height:850}}),page=await context.newPage(),errors=[],consoleErrors=[];
  const row={kind,layer:layerName,flashlight,htmlSHA256:hash(html),rendererSHA256:hash(renderer),errors,consoleErrors,snapshots:[]};report.runs.push(row);
  page.on('pageerror',e=>errors.push(e.message));page.on('crash',()=>errors.push('PAGE_CRASH'));page.on('console',e=>{if(e.type()==='error')consoleErrors.push(e.text());});
  try{
- await page.route(url,r=>r.fulfill({contentType:'text/html; charset=utf-8',body:html}));await page.route('**/dist/phase1.js*',r=>r.fulfill({contentType:'text/javascript',body:renderer}));
  await page.addInitScript(()=>{let seed=73018;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);window.__r73Lost=0;document.addEventListener('webglcontextlost',()=>window.__r73Lost++,true);});
  await page.goto(url,{timeout:60000});await page.locator('#campaignNew54').click({timeout:60000});if(await page.locator('#slotConfirmR73').count())await page.locator('#slotConfirmR73').click();await page.waitForFunction(()=>{const s=window.__STORYWORLD_STORY_PROFILE_R54__?.inspect();return s?.stage==='playing'&&!s.busy&&started&&!loading;},null,{timeout:60000});
+ row.historyFixture=await page.evaluate(async()=>{const raw=serializeSave(),before=JSON.stringify(raw.progress),order=window.__STORYWORLD4__.campaignOrder().map(r=>r.id),history=order.slice(0,order.indexOf('ep1b09')+1);raw.unlockedRegions={STORY:history,DREAM:history};await restoreSave(raw);if(JSON.stringify(progress)!==before)throw Error('diagnostic history fixture changed progress');return{historyCount:history.length,progressPreserved:true};});
  row.entry=await page.evaluate(async l=>enterRegion('ep1b09',null,{restore:true,noStory:true,layer:l,difficultyR63:'normal'}),layerName);assert.equal(row.entry,true);for(let n=0;n<40&&await page.locator('#storyNext').count();n++){await page.locator('#storyNext').click();await page.waitForTimeout(120);}await page.waitForFunction(()=>zone==='ep1b09'&&!loading&&!modal,null,{timeout:15000});
  row.setup=await page.evaluate(light=>{auto=false;settings.autoSkill=false;settings.sound=false;settings.music=false;player.hp=maxHP();player.invincible=1000000;player.invReason='r73-diagnostic-survival';room.engaged=true;window.__STORYWORLD_PRESENTATION_R58__.setFlashlight(light);const e=room.enemies.find(e=>e.boss);if(!e)throw Error('missing native boss');e.spawnState='active';e.hp=e.maxHp*.25;target=null;route=[];return{boss:e.id,hp:e.hp,maxHp:e.maxHp,player:{x:player.x,y:player.y},difficulty:window.__STORYWORLD_BOSS_FIELDS_R62__.difficulty(e),layout:{walls:room.exploration.walls.length,floor:room.exploration.floorCells.length}};},flashlight);
  await page.waitForTimeout(1500);

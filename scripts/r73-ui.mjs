@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-const out='out/r73',url='http://127.0.0.1:4391/';await fs.mkdir(out,{recursive:true});
+const out='out/r73';await fs.mkdir(out,{recursive:true});
 const report={sha:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sandbox:true,physicalGPU:false,scope:'isolated browser storage; actual buttons, code input, difficulty confirmation and keyboard movement; no internal entry calls or unlock/progress fixtures',runs:[]},browser=await chromium.launch({headless:true,chromiumSandbox:true,args:['--disable-dev-shm-usage']});
 const save=()=>fs.writeFile(`${out}/ui.json`,JSON.stringify(report,null,2));
 async function state(page){return page.evaluate(()=>({zone,layer,loading,modal,started,booted,story:storyScene?.key,profile:window.__STORYWORLD_STORY_PROFILE_R54__.inspect(),cheat:window.__STORYWORLD_CHEAT777__.active(),player:player&&{x:player.x,y:player.y,hp:player.hp},panel:$('panel').innerText.slice(0,1500)}));}
@@ -11,9 +11,8 @@ async function settle(page){await page.waitForFunction(()=>started&&!loading&&wi
 async function move(page){const before=await state(page);for(const key of ['ArrowRight','ArrowUp']){await page.keyboard.down(key);await page.waitForTimeout(350);await page.keyboard.up(key);}const after=await state(page);assert.ok(Math.hypot(after.player.x-before.player.x,after.player.y-before.player.y)>.05,'actual input must move player');return{before,after};}
 async function confirmNew(page){if(await page.locator('#slotConfirmR73').count())await page.locator('#slotConfirmR73').click();}
 try{for(const kind of ['baseline','r72','candidate']){
- const dir={baseline:'_r71/docs',r72:'_r72/docs',candidate:'_pages/docs'}[kind],html=await fs.readFile(dir+'/index.html'),js=await fs.readFile(dir+'/dist/phase1.js'),context=await browser.newContext({viewport:{width:1365,height:850}}),page=await context.newPage(),row={kind,htmlSHA256:createHash('sha256').update(html).digest('hex'),rendererSHA256:createHash('sha256').update(js).digest('hex'),errors:[],cases:[]};report.runs.push(row);page.on('pageerror',e=>row.errors.push(e.message));page.on('crash',()=>row.errors.push('PAGE_CRASH'));
- await page.route(url,r=>r.fulfill({contentType:'text/html; charset=utf-8',body:html}));await page.route('**/dist/phase1.js*',r=>r.fulfill({contentType:'text/javascript',body:js}));
- async function check(name,fn){try{const data=await fn();row.cases.push({name,ok:true,data});}catch(e){row.cases.push({name,ok:false,error:String(e.stack),state:await state(page).catch(()=>null)});await page.screenshot({path:`${out}/ui-${kind}-${name}-failure.png`}).catch(()=>{});}await save();}
+ const dir={baseline:'_r71/docs',r72:'_r72/docs',candidate:'_pages/docs'}[kind],url='http://127.0.0.1:'+{baseline:4392,r72:4393,candidate:4391}[kind]+'/',html=await fs.readFile(dir+'/index.html'),js=await fs.readFile(dir+'/dist/phase1.js'),context=await browser.newContext({viewport:{width:1365,height:850}}),page=await context.newPage(),row={kind,htmlSHA256:createHash('sha256').update(html).digest('hex'),rendererSHA256:createHash('sha256').update(js).digest('hex'),errors:[],failedRequests:[],cases:[]};report.runs.push(row);page.on('pageerror',e=>row.errors.push(e.message));page.on('crash',()=>row.errors.push('PAGE_CRASH'));page.on('requestfailed',r=>row.failedRequests.push({url:r.url(),error:r.failure()}));
+ async function check(name,fn){try{const data=await fn();row.cases.push({name,ok:true,data});}catch(e){row.cases.push({name,ok:false,error:String(e.stack),state:await state(page).catch(()=>null)});await page.screenshot({path:`${out}/ui-${kind}-${name}-failure.png`}).catch(()=>{});}console.log('R73_UI_CASE',JSON.stringify({kind,...row.cases.at(-1)}));await save();}
  try{
  await check('new-empty-storage',async()=>{await page.goto(url,{timeout:60000});await page.locator('#campaignNew54').click({timeout:60000});await confirmNew(page);await settle(page);return move(page);});
  if(!row.cases.at(-1).ok)continue;

@@ -14,7 +14,7 @@
  const cheat=()=>window.__STORYWORLD_CHEAT777__?.active()===true;
  const ready=()=>started&&booted&&player?.hp>0&&!loading&&!storyScene&&!room?.finalizing&&room?.id===zone&&room?.layer===layer&&transitionDepth===0;
  function summary(raw){if(!raw)return'비어 있음';const done=Object.values(raw.progress?.STORY||{}).filter(v=>v===true).length,dream=Object.values(raw.progress?.DREAM||{}).filter(v=>v===true).length,at=raw.saveSlotR73?.savedAt;return`${raw.layer} · ${regionById[raw.zone]?.title||raw.zone} · Lv.${raw.player.level||1} · 기억 ${done} / 사몽 ${dream}${at?' · '+new Date(at).toLocaleString(): ' · 이전 버전 저장'}`;}
- function error(e){message=e?.message||String(e);note('failure',{message});toast(message,5);}
+ function error(e){message=e?.message||String(e);note('failure',{message});const status=$('slotsMessageR73');if(status)status.textContent=message;toast(message,5);}
  function safePosition(){if(!room||!player)throw Error('복원된 지역이 없습니다.');if(!blocked(player.x,player.y,.34,room))return;const cells=room.exploration?.floorCells||[];let best=null,distance=Infinity;for(const[x,y]of cells){const q={x:x+.5,y:y+.5},d=Math.hypot(q.x-player.x,q.y-player.y);if(d<distance&&!blocked(q.x,q.y,.4,room)){best=q;distance=d;}}if(!best)throw Error('해당 지도에서 안전한 복원 위치를 찾지 못했습니다.');player.x=best.x;player.y=best.y;cam={...best};route=[];command=null;note('safe-position',{distance});}
  const serializeBase=serializeSave;serializeSave=function(...args){const raw=serializeBase.apply(this,args);if(!raw.cheat777?.active)raw.saveSlotR73={version:1,slot:pending||active,savedAt:new Date().toISOString(),transitionComplete:room?.id===zone&&room?.layer===layer&&!loading};return raw;};
  const saveBase=saveGame;saveGame=function(notice=true){
