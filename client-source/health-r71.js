@@ -4,7 +4,7 @@
 (()=>{'use strict';
  if(window.__STORYWORLD_HEALTH_R71__)return;
  const R71_MAX_HP=777,R71_BLEED_SECONDS=3,R71_BLOOD_ASSET='assets/vfx/hospital-r49/medical-impacts-r49.png';
- const healthR71Metrics={normalizations:0,legacyFormulaMismatches:0,legacyHeals:0,admittedEnemyHits:0,rejectedHits:0,bloodEffects:0,bossesAdjusted:0,bossesReapplied:0,savesMigrated:0,bleedsCleared:0};
+ const healthR71Metrics={normalizations:0,legacyFormulaMismatches:0,legacyHeals:0,admittedEnemyHits:0,rejectedHits:0,bloodEffects:0,bossesAdjusted:0,bossesReapplied:0,clonesRepaired:0,savesMigrated:0,bleedsCleared:0};
  const healthR71Events=[];
  const healthR71Note=(kind,data={})=>{healthR71Events.push({kind,at:Number.isFinite(time)?time:0,...data});if(healthR71Events.length>128)healthR71Events.shift();};
  const healthR71Clamp=(v,a,b)=>Math.max(a,Math.min(b,Number.isFinite(Number(v))?Number(v):a));
@@ -142,6 +142,32 @@
  function healthR71NormalizeRoom(r,reason='room'){
   let count=0;for(const e of r?.enemies||[])if(normalizeBoss(e,reason))count++;return count;
  }
+ function healthR71NormalizeRestoredClones(rooms=null){
+  let count=0;
+  const targets=rooms==null?new Set([...Object.values(world||{}),room].filter(Boolean)):new Set((Array.isArray(rooms)?rooms:[rooms]).filter(Boolean));
+  for(const r of targets){
+   const actors=Array.isArray(r?.enemies)?r.enemies:[];
+   for(const e of actors){
+    if(e?.r61Clone!==true||e.r61Summoned?.version!==1||e.r61Summoned?.kind!=='clone')continue;
+    const ownerId=e.r61Summoned.owner,owner=typeof ownerId==='string'?actors.find(candidate=>candidate&&candidate!==e&&candidate.id===ownerId):null;
+    if(!owner||!(Number(owner.hp)>0)||owner.deadRecorded===true||!Number.isFinite(owner.maxHp)||owner.maxHp<=0||!Number.isFinite(e.maxHp)||e.maxHp<=0)continue;
+    const dead=e.deadRecorded===true||e.spawnState==='dead'||!(Number(e.hp)>0),oldMax=e.maxHp;
+    const fraction=dead?0:healthR71Clamp(Number(e.hp)/oldMax,0,1),target=Math.max(.0001,owner.maxHp*.06);
+    const tierFactor=TIERS[validTier(resolveRoomTier(r))]?.hp,existingFactor=Number(e.difficultyFactorR63);
+    const factor=Number.isFinite(tierFactor)&&tierFactor>0?tierFactor:Number.isFinite(existingFactor)&&existingFactor>0?existingFactor:1;
+    const oldBase=Number(e.difficultyBaseHpR63),changed=Math.abs(oldMax-target)>.000001||Math.abs(Number(e.hp)-target*fraction)>.000001||!Number.isFinite(oldBase)||Math.abs(oldBase-target/factor)>.01||!Number.isFinite(existingFactor)||Math.abs(existingFactor-factor)>.000001;
+    e.maxHp=target;e.hp=dead?0:target*fraction;e.difficultyFactorR63=factor;e.difficultyBaseHpR63=target/factor;
+    if(dead){e.deadRecorded=true;if(e.spawnState==='active')e.spawnState='dead';}
+    if(changed){count++;healthR71Metrics.clonesRepaired++;healthR71Note('restored-clone-health-repaired',{id:String(e.id||''),ownerId,oldMaxHp:oldMax,newMaxHp:target,hp:e.hp,hpFraction:fraction,factor});}
+   }
+  }
+  return count;
+ }
+ let healthR71RestoringLoadedHealth=0;
+ const healthR71RestoreLoadedHealthBase=typeof restoreLoadedHealth==='function'?restoreLoadedHealth:null;
+ if(healthR71RestoreLoadedHealthBase)restoreLoadedHealth=function(...args){healthR71RestoringLoadedHealth++;let result;try{result=healthR71RestoreLoadedHealthBase.apply(this,args);}finally{healthR71RestoringLoadedHealth--;}healthR71NormalizeRestoredClones();return result;};
+ const healthR71ApplyRoomBase=typeof applyRoom==='function'?applyRoom:null;
+ if(healthR71ApplyRoomBase)applyRoom=function(){const result=healthR71ApplyRoomBase.apply(this,arguments),r=arguments[0];if(!healthR71RestoringLoadedHealth)healthR71NormalizeRestoredClones(r);return result;};
  const healthR71BlockedSource=source=>{
   if(!source||source.friendly===true||source.r52BleedTick===true||source.r53WoundTick===true||source.healthBleedR71Tick===true||source.r71BleedVisualR71===true||source.selfCost===true||source.dot===true||source.damageOverTime===true||source.periodic===true)return true;
   const kind=String(source.kind||source.type||'').toLowerCase();

@@ -98,6 +98,15 @@ def _patch_native_surfaces(html: str) -> str:
         "withPlayer(p,()=>{p.hp=maxHP()*.5;p.invincible=2;",
         "withPlayer(p,()=>{window.__STORYWORLD_HEALTH_R71__?.clearBleeding(p,'revive');p.hp=maxHP()*.5;p.invincible=2;",
     )
+
+    # A co-op save restores its native room first, then recreates replica
+    # enemies from saved maxima. Old replica maxima can overwrite a freshly
+    # suffixed boss, so normalize each room only after all copies are inserted.
+    replica_old = "r.enemies.push(copy);}}}finally{transitionBypass--;}"
+    replica_new = ("r.enemies.push(copy);}"
+                   "window.__STORYWORLD_HEALTH_R71__?.normalizeRoom(r,'coop-save-replicas');"
+                   "}}finally{transitionBypass--;}")
+    html = _replace_once(html, replica_old, replica_new)
     return html
 
 

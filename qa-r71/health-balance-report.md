@@ -48,9 +48,31 @@ If difficulty metadata is consistent, canonical maximum is `difficultyBaseHpR63 
 | Fresh `dist00` boss, R61 then R63 | 6,421.5 (R61 pressure 25,686 × normal .25) | normal ×.25 | 6,666 | 3,210.75 → 3,333 |
 | Persona native phase override | Metadata says 2,000; current max is 1,000 | ×1.0, rebased to 1,000 | 666 | full → full (666) |
 
-The `dist00` row is the corrected fresh-room order. R61's `makeRoom` wrapper first replaces the region-builder health with its campaign-pressure value (25,686 in the deterministic fixture); R63 applies the selected map tier after `enterRegion` returns, producing the 6,421.5 canonical max. R71 now waits for that R63 `scaleEnemy` call before applying the suffix. It no longer normalizes the pre-tier room object, which previously produced a four-times-too-large displayed maximum. The cases above are asserted in `r71-health.cpu.test.mjs`, including repeat normalization and unapply/reapply behavior. R61 summoned clones are excluded: their boss flags are false, and R71 leaves their existing exact `clone.maxHp = owner.maxHp × 0.06` rule intact when a room is normalized.
+The `dist00` row is the corrected fresh-room order. R61's `makeRoom` wrapper first replaces the region-builder health with its campaign-pressure value (25,686 in the deterministic fixture); R63 applies the selected map tier after `enterRegion` returns, producing the 6,421.5 canonical max. R71 now waits for that R63 `scaleEnemy` call before applying the suffix. It no longer normalizes the pre-tier room object, which previously produced a four-times-too-large displayed maximum. The cases above are asserted in `r71-health.cpu.test.mjs`, including repeat normalization and unapply/reapply behavior. R61 summoned clones are excluded from boss suffixes because their boss flags are false. Their independent exact `clone.maxHp = owner.maxHp × 0.06` rule is repaired after saved-health restoration and live difficulty re-selection as described below.
 
-Boss suffix markers do not need a new save sidecar. R63's existing `campaignHpR63` save metadata stores each enemy's canonical difficulty base and factor under its room and enemy ID. On restore, `restoreLoadedHealth(raw)` rehydrates those values, reconstructs `maxHp = base × factor`, and reapplies the resolved room tier through `scaleEnemy`; R71 wraps that scaler and derives the suffix from its resulting canonical value. The base R70 enemy row only stores HP and position, but the R63 metadata is the authoritative boss-health reconstruction path. R62 live snapshots encode/decode enemy properties, including R71's scalar canonical/visible markers. Co-op save import also calls `restoreLoadedHealth` after its base restore. The R71 boss markers therefore need not survive in the native enemy row to prevent compounding.
+
+### R61 clone save and restore
+
+R61's native save restores a clone with `makeUnit(owner, 'clone', ...)`, which starts from the restored owner's current `maxHp` and sets the clone to exactly 6%. The clone is pushed into the room before R63 runs `restoreLoadedHealth(raw)`. R63 then reapplies older `campaignHpR63` base/factor metadata to every room enemy, which can replace the derived clone maximum and leave the clone's R63 metadata unrelated to its owner.
+
+R71 wraps the lexical R63 `restoreLoadedHealth` function. After the native function has restored and scaled every room and owner, R71 repairs only actors marked both `r61Clone === true` and `r61Summoned.kind === 'clone'`. It uses the live owner's post-scale maximum, sets clone max to `owner.maxHp × 0.06`, preserves the clone's current HP fraction, and aligns its existing difficulty base/factor to the restored tier. A dead clone stays at zero HP. The repair skips ordinary minions, clones whose owner is absent or dead, and actors without the native clone markers. Repeating the native restore remains stable; no new save sidecar or gameplay bonus is added.
+
+The same clone repair also wraps native lexical R63 `applyRoom`. After that function scales the complete room to the selected tier, R71 repairs clones in that room so an owner later in the enemy array is already normalized. The helper accepts an optional room list for this path; full restore still performs its all-world final repair after R63 finishes. Room repair is not run from per-frame code.
+
+| Native same-map difficulty change | Owner canonical / visible max | Clone max / HP before | Clone max / HP after | Ordinary minion |
+|---|---:|---:|---:|---:|
+| Normal → hard | 6,421.5 / 6,666 → 10,274.4 / 10,666 | 399.96 / 199.98 (50%) | 639.96 / 319.98 (50%) | 250 / 125 → 400 / 200 |
+| Hard → normal | 10,274.4 / 10,666 → 6,421.5 / 6,666 | 639.96 / 319.98 (50%) | 399.96 / 199.98 (50%) | 400 / 200 → 250 / 125 |
+
+The CPU regression invokes the extracted native R63 `applyRoom`, with the clone listed before its owner. It verifies exact 6% clone max, stable HP fraction, dead-clone HP remaining zero, ordinary-minion tier scaling, and idempotence on repeated hard and normal selection. The browser QA also exercises the actual R71 confirmation UI from a restored co-op room through hard and back to normal.
+
+| Native restore fixture | R63 stale clone metadata result | R71 post-restore result | HP fraction |
+|---|---:|---:|---:|
+| Restored `dist00` boss owner | Canonical 6,421.5 → visible 6,666 | 6,666 | 50% |
+| Clone, stale metadata base 48,000 × .25 | 12,000 max / 6,000 HP | 399.96 max / 199.98 HP | 50% |
+| Dead clone of same owner | Stale max is discarded | 399.96 max / 0 HP | 0% |
+
+The stale base in this table is the explicit CPU regression fixture, not a claimed production save value. It demonstrates that R63's exact native restore runs first and R71 then restores the existing R61 6% contract without reviving or healing a clone. Boss suffix markers still need no new save sidecar: R63's `campaignHpR63` metadata stores canonical difficulty base/factor for actual bosses, and the existing R71 scale wrapper derives the visible suffix after R63 scaling. The base R70 enemy row only stores HP and position. R62 snapshots encode enemy properties, including R71's scalar canonical/visible boss markers; co-op import's R63 restore path also receives the same post-restore clone repair.
 
 ## Bleeding behavior
 
@@ -62,6 +84,6 @@ In co-op, the host remains authoritative for health and admitted-hit status. R71
 
 ## Verification evidence
 
-The refreshed candidate built from `_r70/docs` passed **22/22 CPU tests**: ten health tests, eight progression tests, and four renderer tests. Static package audit passed, and the composed HTML passed **76/76** inline-script syntax checks. Its HTML SHA-256 is `b6241524ba119ed98d954452ea5d9bcfef734dd5a7825067b58a027f3faaf527`; the renderer SHA-256 remains `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. The browser regression is a separate pending CI check.
+The refreshed candidate built from `_r70/docs` passed **25/25 CPU tests**: thirteen health tests, eight progression tests, and four renderer tests. Static package audit passed for 1,906 packaged runtime files, with only `index.html` and `dist/phase1.js` changed; the composed HTML passed **76/76** inline-script syntax checks. Its HTML SHA-256 is `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`; the renderer SHA-256 remains `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. The browser regression is a separate pending CI check.
 
 Relevant source and test fixtures: [health helper](../client-source/health-r71.js), [health CPU tests](../scripts/r71-health.cpu.test.mjs), [progression CPU tests](../scripts/r71-progression.cpu.test.mjs), and [renderer CPU tests](../scripts/r71-render.cpu.test.mjs).

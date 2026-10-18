@@ -7,12 +7,21 @@ import {test} from 'node:test';
 const helper=fs.readFileSync(new URL('../client-source/health-r71.js',import.meta.url),'utf8');
 const campaign=fs.readFileSync(new URL('../client-source/campaign-combat-r63r1.js',import.meta.url),'utf8');
 const r61=fs.readFileSync(new URL('../client-source/scale-melee-r61.js',import.meta.url),'utf8');
+const summonsR61=fs.readFileSync(new URL('../client-source/summons-r61.js',import.meta.url),'utf8');
+const coopSim=fs.readFileSync(new URL('../client-source/coop-sim-r62.js',import.meta.url),'utf8');
 function sourceBlock(source,prefix,label){
  const lines=source.split('\n'),start=lines.findIndex(line=>line.startsWith(prefix));assert.notEqual(start,-1,`${label} source anchor must exist: ${prefix}`);
  let depth=0;for(let i=start;i<lines.length;i++){for(const c of lines[i]){if(c==='{')depth++;else if(c==='}')depth--;}if(depth===0)return lines.slice(start,i+1).join('\n').trim();}
  throw new Error(`Unclosed ${label} source block: ${prefix}`);
 }
 const nativeR63Scale=sourceBlock(campaign,' function scaleEnemy(','R63');
+const nativeR63ResolveTier=sourceBlock(campaign,' function resolveRoomTier(','R63');
+const nativeR63ApplyRoom=sourceBlock(campaign,' function applyRoom(','R63');
+const nativeR63Restore=sourceBlock(campaign,' function restoreLoadedHealth(','R63');
+const nativeReplicaStart=coopSim.indexOf('const copy={...source');
+const nativeReplicaEnd=coopSim.indexOf('r.enemies.push(copy);',nativeReplicaStart);
+assert.ok(nativeReplicaStart>=0&&nativeReplicaEnd>nativeReplicaStart,'R62 replica restore source anchor must exist');
+const nativeReplicaRestore=coopSim.slice(nativeReplicaStart,nativeReplicaEnd+'r.enemies.push(copy);'.length);
 const r61Line=prefix=>r61.split('\n').find(line=>line.startsWith(prefix))?.trim();
 const nativeR61Sources=[
  r61Line(' const finite='),r61Line(' const config='),r61Line(' const metrics='),
@@ -34,7 +43,7 @@ function fixture({coopFacade=false}={}){
  };
  vm.createContext(context);
  const code=`(()=>{'use strict';
-  let activeActor=globalThis.__fixture.player,time=0,zone='arena',layer='STORY',room={id:'arena',layer,enemies:[globalThis.__fixture.enemy]},effects=[];
+  let activeActor=globalThis.__fixture.player,time=0,zone='arena',layer='STORY',room={id:'arena',layer,enemies:[globalThis.__fixture.enemy]},world={},effects=[];
   let mode='off';const regions=[],UPGRADES=[{id:'vital',text:'',max:6}],MAX=100000;
   const playerFacade=new Proxy({}, {get(_t,k){if(k==='__coopFacadeR62')return true;if(k==='toJSON')return()=>activeActor;return activeActor?.[k]},set(_t,k,v){if(activeActor)activeActor[k]=v;return true;}});
   let player=globalThis.__fixture.coopFacade?playerFacade:activeActor;
@@ -44,9 +53,16 @@ function fixture({coopFacade=false}={}){
   window.__STORYWORLD_COOP_SIM_R62__={mode:()=>mode,withPlayer,currentPlayer:()=>activeActor,players:()=>[activeActor,...(globalThis.__fixture.extraActors||[])]};
   function maxHP(){return 260+35*Number(player?.upgrades?.vital||0)+5*(Number(player?.level||1)-1)+18*progressionR62Fixture.ranks('endlessVital',player)}
   function freshPlayer(){return{hero:'hwando',hp:260,level:1,upgrades:{}}}
-  const TIERS=Object.freeze({easy:{hp:.2},normal:{hp:.25},hard:{hp:.4}});
+  const COOP_KEY='difficultyR63',TIERS=Object.freeze({easy:{hp:.2},normal:{hp:.25},hard:{hp:.4}});
   const validTier=k=>Object.prototype.hasOwnProperty.call(TIERS,k)?k:'normal';
+  function mapMode(id=zone,l=layer){return world?.[String(l)+':'+String(id)]?.[COOP_KEY]||'normal'}
+  function ensurePointState(r){return r}
+  function restorePointState(){}
+  function syncPointDrops(){}
   ${nativeR63Scale}
+  ${nativeR63ResolveTier}
+  ${nativeR63ApplyRoom}
+  ${nativeR63Restore}
   ${nativeR61Sources.join('\n  ')}
   function actor3(def,id){return{id,boss:true,maxHp:1000,hp:1000}}
   function makeRoom(id){const boss={id:id+':'+id+'-boss',boss:true,maxHp:12000,hp:12000,damage:18,combatProfile:{spriteRect:{height:1}}},r={id,layer,enemies:[boss]};normalize(boss,r);return r}
@@ -66,7 +82,8 @@ function fixture({coopFacade=false}={}){
   function showDeath(){} function updateHUD(){} function showUpgrades(){}
   const fixture=globalThis.__fixture;
   Object.defineProperties(fixture,{player:{get:()=>activeActor,set:v=>{activeActor=v;if(!globalThis.__fixture.coopFacade)player=v;}},room:{get:()=>room,set:v=>{room=v;}},time:{get:()=>time,set:v=>{time=v;}},mode:{get:()=>mode,set:v=>{mode=v;}},effects:{get:()=>effects}});
-  fixture.facade=playerFacade;fixture.maxHP=()=>maxHP();fixture.hurt=(...args)=>hurt(...args);fixture.drawEffect=e=>drawEffect(e);fixture.scaleEnemy=(...args)=>scaleEnemy(...args);fixture.makeRoom=(...args)=>makeRoom(...args);
+  fixture.setWorld=v=>{world=v};fixture.restoreLoadedHealth=(...args)=>restoreLoadedHealth(...args);
+  fixture.facade=playerFacade;fixture.maxHP=()=>maxHP();fixture.hurt=(...args)=>hurt(...args);fixture.drawEffect=e=>drawEffect(e);fixture.scaleEnemy=(...args)=>scaleEnemy(...args);fixture.applyRoom=(...args)=>applyRoom(...args);fixture.makeRoom=(...args)=>makeRoom(...args);
   fixture.upgradePreview=()=>{showUpgrades();return{vital:UPGRADES.find(u=>u.id==='vital')?.text||'',endless:progressionR62Fixture.defs.find(d=>d.id==='endlessVital')?.text||''}};
   ${helper}
   fixture.api=window.__STORYWORLD_HEALTH_R71__;
@@ -81,6 +98,9 @@ test('health transform is anchored, fail-closed, and patches exact save/coop/sta
  assert.equal(good.status,0,good.stderr);const html=good.stdout;
  assert.equal((html.match(/R71-HEALTH-BLEED/g)||[]).length,2);
  assert.ok(!html.includes("healthR71NormalizeRoom(r,'room-create')"),'room creation must defer boss suffix until R63 applies map tier');
+ assert.ok(html.includes("healthR71NormalizeRestoredClones(r)"),'live R63 applyRoom tier changes must repair derived R61 clone health after scaling every owner');
+ assert.equal((html.match(/normalizeRoom\(r,'coop-save-replicas'\)/g)||[]).length,1);
+ assert.ok(html.indexOf("normalizeRoom(r,'coop-save-replicas')")>html.indexOf('r.enemies.push(copy);'),'co-op replicas must normalize after insertion');
  assert.equal((html.match(/healthR71\?\.onAdmittedHit/g)||[]).length,1);
  assert.ok(html.includes("rows.push(...(window.__STORYWORLD_HEALTH_R71__?.statusRows(player)||[]))"));
  assert.ok(html.includes("const actorPublicKeys=['healthR71Applied','healthBleedR71','hero',"));
@@ -142,6 +162,28 @@ test('room bosses are suffixed only after R63 tier scaling, not during R61 room-
  assert.equal(b.hp/b.maxHp,1);assert.equal(b.healthR71Adjusted,true);
 });
 
+test('native co-op save replica restore reapplies boss suffix after old max overwrite without touching non-boss clones',()=>{
+ const f=fixture(),api=f.api;
+ const nativeCopy=new Function('source','row','r','num','cap','blocked',`${nativeReplicaRestore};return copy;`);
+ const importReplica=(source,row,room)=>{
+  const copy=nativeCopy(source,row,room,(v,d)=>Number.isFinite(Number(v))?Number(v):d,(v,a,b)=>Math.max(a,Math.min(b,Number(v)||0)),()=>false);
+  return copy;
+ };
+ const boss={id:'dist00:dist00-boss',nativeId:'dist00-boss',boss:true,hp:3210.75,maxHp:6421.5,difficultyBaseHpR63:25686,difficultyFactorR63:.25};
+ api.normalizeBoss(boss,'campaign-restored-source');assert.equal(boss.maxHp,6666);assert.equal(boss.hp,3333);
+ const oldBossRow={id:'dist00:dist00-boss:coop:peer',source:boss.id,nativeId:boss.nativeId,maxHp:6421.5,hp:3210.75,damage:10,x:15,y:15,spawnState:'active'};
+ const room={id:'dist00',layer:'STORY',enemies:[boss]},replica=importReplica(boss,oldBossRow,room);
+ assert.equal(replica.maxHp,6421.5);assert.equal(replica.healthR71Adjusted,true);assert.equal(replica.healthR71VisibleMaxHp,6666);
+ api.normalizeRoom(room,'coop-save-replicas');assert.equal(replica.maxHp,6666);assert.equal(replica.hp,3333);assert.equal(replica.hp/replica.maxHp,.5);
+ api.normalizeRoom(room,'repeat-import');assert.equal(replica.maxHp,6666);assert.equal(replica.hp,3333);
+ const secondRoom={id:'dist00',layer:'STORY',enemies:[boss]},second=importReplica(boss,oldBossRow,secondRoom);
+ api.normalizeRoom(secondRoom,'coop-save-replicas');assert.equal(second.maxHp,6666);assert.equal(second.hp,3333);
+ const ordinary={id:'dist00:mob0',nativeId:'mob0',boss:false,midboss:false,persona:false,cosmic:false,trial:false,hp:800,maxHp:1000};
+ const clone={id:'dist00:clone',nativeId:'clone',boss:false,midboss:false,persona:false,cosmic:false,trial:false,r61Clone:true,hp:385.29,maxHp:385.29};
+ const nonBossRoom={id:'dist00',layer:'STORY',enemies:[importReplica(ordinary,{id:'mob:coop:peer',source:ordinary.id,nativeId:ordinary.nativeId,maxHp:800,hp:640,damage:2,x:1,y:1,spawnState:'active'}, {enemies:[]}),importReplica(clone,{id:'clone:coop:peer',source:clone.id,nativeId:clone.nativeId,maxHp:385.29,hp:385.29,damage:2,x:1,y:1,spawnState:'active'}, {enemies:[]})]};
+ api.normalizeRoom(nonBossRoom,'coop-save-replicas');assert.equal(nonBossRoom.enemies[0].maxHp,800);assert.equal(nonBossRoom.enemies[0].hp,640);assert.equal(nonBossRoom.enemies[1].maxHp,385.29);assert.equal(nonBossRoom.enemies[1].hp,385.29);
+});
+
 test('R61 clones keep their exact 6% owner health and are excluded from boss suffix normalization',()=>{
  const f=fixture(),api=f.api,owner={id:'owner-boss',boss:true,hp:12345,maxHp:12345},clone={id:'owner-clone',boss:false,midboss:false,persona:false,cosmic:false,trial:false,r61Summoned:{version:1,owner:'owner-boss',kind:'clone'},r61Clone:true,maxHp:owner.maxHp*.06,hp:owner.maxHp*.06};
  api.normalizeBoss(owner,'owner');assert.equal(owner.maxHp,12666);
@@ -149,6 +191,69 @@ test('R61 clones keep their exact 6% owner health and are excluded from boss suf
  assert.equal(api.normalizeBoss(clone,'clone'),false);
  assert.equal(api.normalizeRoom({enemies:[owner,clone]},'clone-room'),1);
  assert.equal(clone.maxHp,exactCloneHp);assert.equal(clone.hp,exactCloneHp);assert.ok(Math.abs(clone.maxHp/owner.maxHp-.06)<1e-12);
+});
+
+test('native R63 save restore repairs genuine R61 clone health after owner scaling and preserves edge cases',()=>{
+ assert.ok(summonsR61.includes('cloneRatio:.06'),'native R61 clone ratio remains exactly 6%');
+ assert.ok(summonsR61.includes('r61Summoned:{version:1,owner:owner.id,kind}'),'native R61 restore exposes its owner and summon kind');
+ assert.ok(summonsR61.includes("if(kind==='clone'){")&&summonsR61.includes('e.r61Clone=true'),'native R61 restore marks genuine clones');
+ assert.ok(summonsR61.includes('hp:clamp(row.hp/row.maxHp,0,1)*e.maxHp'),'native R61 restore preserves the saved clone HP fraction');
+ assert.ok(summonsR61.includes('r.enemies.push(e);metrics.restored++'),'native R61 restores clones into the room before R63 post-restore normalization');
+ assert.ok(campaign.includes('rows[e.id]={base:e.difficultyBaseHpR63,factor:e.difficultyFactorR63}'),'native R63 saves the stale clone difficulty metadata');
+ const f=fixture(),api=f.api;
+ const owner={id:'dist00-boss',boss:true,hp:3210.75,maxHp:6421.5,difficultyBaseHpR63:25686,difficultyFactorR63:.25};
+ api.normalizeBoss(owner,'saved-owner');assert.equal(owner.maxHp,6666);assert.equal(owner.hp,3333);
+ const clone={id:'dist00:r61-summon:clone',boss:false,hp:owner.maxHp*.06*.5,maxHp:owner.maxHp*.06,
+  r61Clone:true,r61Summoned:{version:1,owner:owner.id,kind:'clone'},deadRecorded:false,spawnState:'active',
+  difficultyBaseHpR63:48000,difficultyFactorR63:.25};
+ const deadClone={id:'dist00:r61-summon:dead',boss:false,hp:0,maxHp:owner.maxHp*.06,
+  r61Clone:true,r61Summoned:{version:1,owner:owner.id,kind:'clone'},deadRecorded:true,spawnState:'dead',
+  difficultyBaseHpR63:44000,difficultyFactorR63:.25};
+ const missingOwner={id:'dist00:r61-summon:orphan',hp:100,maxHp:200,r61Clone:true,
+  r61Summoned:{version:1,owner:'gone',kind:'clone'},difficultyBaseHpR63:800,difficultyFactorR63:.25};
+ const ordinary={id:'dist00:r61-summon:minion',hp:100,maxHp:200,r61Summoned:{version:1,owner:owner.id,kind:'minion'},
+  difficultyBaseHpR63:800,difficultyFactorR63:.25};
+ const room={id:'dist00',layer:'STORY',difficultyR63:'normal',enemies:[owner,clone,deadClone,missingOwner,ordinary]};
+ f.fixture.room=room;f.fixture.setWorld({'STORY:dist00':room});
+ const oldSave={campaignHpR63:{version:1,rooms:{'STORY:dist00':{
+  [owner.id]:{base:25686,factor:.25},[clone.id]:{base:48000,factor:.25},
+  [deadClone.id]:{base:44000,factor:.25},[missingOwner.id]:{base:600,factor:.25},[ordinary.id]:{base:800,factor:.25}
+ }}}};
+ // R63's actual native restore rehydrates campaignHpR63 and scales the whole
+ // room. R71 repairs clone metadata only after that all-room operation ends.
+ f.fixture.restoreLoadedHealth(oldSave);
+ assert.equal(owner.maxHp,6666);assert.equal(owner.hp,3333);
+ assert.ok(Math.abs(clone.maxHp-owner.maxHp*.06)<1e-9);assert.ok(Math.abs(clone.hp/clone.maxHp-.5)<1e-12);
+ assert.ok(Math.abs(clone.difficultyBaseHpR63-clone.maxHp/.25)<1e-9);assert.equal(clone.difficultyFactorR63,.25);
+ assert.equal(deadClone.hp,0);assert.equal(deadClone.deadRecorded,true);assert.equal(deadClone.spawnState,'dead');
+ assert.equal(deadClone.maxHp,owner.maxHp*.06);assert.ok(Math.abs(deadClone.difficultyBaseHpR63-deadClone.maxHp/.25)<1e-9);
+ assert.equal(missingOwner.maxHp,150);assert.equal(missingOwner.hp,75); // no owner in the room: leave its native R63-restored state alone
+ assert.equal(ordinary.maxHp,200);assert.equal(ordinary.hp,100); // minions are not clone-ratio adjusted
+ const first=[owner.maxHp,owner.hp,clone.maxHp,clone.hp,deadClone.maxHp,deadClone.hp,ordinary.maxHp,ordinary.hp];
+ f.fixture.restoreLoadedHealth(oldSave);
+ assert.deepEqual([owner.maxHp,owner.hp,clone.maxHp,clone.hp,deadClone.maxHp,deadClone.hp,ordinary.maxHp,ordinary.hp],first);
+ assert.equal(api.inspect(f.fixture.player).metrics.clonesRepaired,4);
+});
+
+test('native R63 applyRoom tier changes repair R61 clones after all owners and stay idempotent',()=>{
+ assert.ok(nativeR63ApplyRoom.includes('for(const e of r.enemies||[])')&&nativeR63ApplyRoom.includes('scaleEnemy(e,r[COOP_KEY])'),'test executes the native whole-room tier scaler');
+ const f=fixture(),api=f.api;
+ const owner={id:'live-dist00-boss',boss:true,hp:6421.5*.6,maxHp:6421.5,difficultyBaseHpR63:25686,difficultyFactorR63:.25};
+ api.normalizeBoss(owner,'live-normal');assert.equal(owner.maxHp,6666);assert.ok(Math.abs(owner.hp/owner.maxHp-.6)<1e-12);
+ const clone={id:'live-dist00-clone',hp:owner.maxHp*.06*.5,maxHp:owner.maxHp*.06,boss:false,r61Clone:true,r61Summoned:{version:1,owner:owner.id,kind:'clone'},deadRecorded:false,spawnState:'active',difficultyBaseHpR63:owner.maxHp*.06/.25,difficultyFactorR63:.25};
+ const deadClone={id:'live-dist00-dead-clone',hp:0,maxHp:owner.maxHp*.06,boss:false,r61Clone:true,r61Summoned:{version:1,owner:owner.id,kind:'clone'},deadRecorded:true,spawnState:'dead',difficultyBaseHpR63:owner.maxHp*.06/.25,difficultyFactorR63:.25};
+ const minion={id:'live-dist00-minion',hp:125,maxHp:250,boss:false,r61Summoned:{version:1,owner:owner.id,kind:'minion'},difficultyBaseHpR63:1000,difficultyFactorR63:.25};
+ // Put clones before their owner: repair must wait until native applyRoom has scaled the entire roster.
+ const r={id:'dist00',layer:'STORY',difficultyR63:'normal',enemies:[clone,deadClone,minion,owner]};f.fixture.room=r;
+ const snapshot=()=>[owner.maxHp,owner.hp,clone.maxHp,clone.hp,deadClone.maxHp,deadClone.hp,minion.maxHp,minion.hp];
+ f.fixture.applyRoom(r,'hard');
+ assert.equal(owner.maxHp,10666);assert.ok(Math.abs(owner.hp/owner.maxHp-.6)<1e-12);
+ assert.ok(Math.abs(clone.maxHp-owner.maxHp*.06)<1e-9);assert.ok(Math.abs(clone.hp/clone.maxHp-.5)<1e-12);assert.ok(Math.abs(clone.difficultyBaseHpR63-clone.maxHp/.4)<1e-9);assert.equal(clone.difficultyFactorR63,.4);
+ assert.equal(deadClone.hp,0);assert.equal(deadClone.deadRecorded,true);assert.equal(deadClone.maxHp,owner.maxHp*.06);
+ assert.equal(minion.maxHp,400);assert.equal(minion.hp,200);assert.notEqual(minion.maxHp,owner.maxHp*.06);
+ const hard=snapshot();f.fixture.applyRoom(r,'hard');assert.deepEqual(snapshot(),hard);assert.ok(Math.abs(clone.hp/clone.maxHp-.5)<1e-12);
+ f.fixture.applyRoom(r,'normal');assert.equal(owner.maxHp,6666);assert.ok(Math.abs(owner.hp/owner.maxHp-.6)<1e-12);assert.ok(Math.abs(clone.maxHp-owner.maxHp*.06)<1e-9);assert.ok(Math.abs(clone.hp/clone.maxHp-.5)<1e-12);assert.equal(deadClone.hp,0);assert.equal(minion.maxHp,250);assert.equal(minion.hp,125);
+ const normal=snapshot();f.fixture.applyRoom(r,'normal');assert.deepEqual(snapshot(),normal);
 });
 
 test('only admitted enemy HP loss bleeds; dodge, blocked, self, DOT, and guest paths do not',()=>{

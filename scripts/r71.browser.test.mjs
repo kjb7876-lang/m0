@@ -554,31 +554,90 @@ try {
       const originalEnemies = room.enemies, originalEngaged = room.engaged;
       room.engaged = true;
       const p = player;
-      p.hp = 700; p.invincible = 0; p.guard = false; p.parry = 0;
-      const enemy = room.enemies.find(e => e.hp > 0 && !e.boss && !e.midboss && e.type !== 'ranged');
+      p.hp = 700; p.invincible = 0; p.invReason = ''; p.guard = false; p.parry = 0;
+      const fields = window.__STORYWORLD_FIELDS_R61__;
+      const enemy = room.enemies.find(e => e.hp > 0 && !e.boss && !e.midboss && e.type !== 'ranged' && e.ai === 'melee' && !fields?.activeAction?.(e));
       if (!enemy) throw new Error('No native melee enemy is available for a real hit fixture');
       const originalEnemy = {...enemy, aim: enemy.aim && {...enemy.aim}};
+      const motionState = fields?.state?.(enemy), originalMotionNext = motionState?.next;
       room.enemies = [enemy];
-      enemy.x = p.x + .4; enemy.y = p.y; enemy.spawnState = 'active'; enemy.tell = .1;
-      enemy.aim = {x: p.x, y: p.y, angle: Math.PI}; enemy.cd = 20;
+      const originalPlayer = {x: p.x, y: p.y};
+      const gap = .55;
+      let spot = null;
+      for (const radius of [0, .5, 1, 1.5, 2]) {
+        for (let i = 0; i < 16 && !spot; i++) {
+          const angle = i * Math.PI / 8, px = originalPlayer.x + Math.cos(angle) * radius, py = originalPlayer.y + Math.sin(angle) * radius;
+          const ex = px + gap, ey = py;
+          if (!blocked(px, py, .23, room) && !blocked(ex, ey, .29, room) && clearLine({x: ex, y: ey}, {x: px, y: py - .15}, room)) spot = {x: px, y: py, ex, ey};
+        }
+        if (spot) break;
+      }
+      if (spot) { p.x = spot.x; p.y = spot.y; enemy.x = spot.ex; enemy.y = spot.ey; }
+      enemy.spawnState = 'active'; enemy.visible = true; enemy.deadRecorded = false;
+      enemy.rest = 0; enemy.attack = null; enemy.rangedWindup = 0; enemy.cd = 0; enemy.graceUntil = time - 1;
+      enemy.storyAttackUntil5 = 0; enemy.storyPatternCooldownUntil5 = 0; enemy.personaCooldownUntil150 = 0;
+      enemy.invulnerableUntil = 0; enemy.r61Action = null; enemy.r61BusyUntil = 0;
+      if (motionState) motionState.next = time + 120; // isolate the native melee lane from an unrelated R61 field cooldown.
+      if (typeof tickEnemies !== 'function' || !enemy.combatProfile?.attackShape) throw new Error('Native enemy AI or attack geometry is unavailable');
       const base = hurt;
-      let observed = null;
+      const admitted = [];
       hurt = function(value, source) {
         const before = p.hp, result = base.apply(this, arguments), after = p.hp;
-        observed = {result, sourceIsRoomEnemy: source === enemy, before, after};
+        admitted.push({result, sourceId: source?.id || null, sourceIsRoomEnemy: source === enemy, value, before, after, attackId: source?.attack?.id || null});
         return result;
       };
-      try { tickEnemies(.2); } finally {
+      let prepared = null, committed = null, nativeAttackError = null, enemyAtEnd = null, playerAtEnd = null;
+      const enemyAtStart = {
+        ai: enemy.ai, type: enemy.type, tell: enemy.tell, rest: enemy.rest, cd: enemy.cd, graceUntil: enemy.graceUntil,
+        attack: enemy.attack, rangedWindup: enemy.rangedWindup, phase: enemy.phase, phaseAge: enemy.phaseAge,
+        phaseStage: enemy.phaseStage, invulnerableUntil: enemy.invulnerableUntil, r61Action: enemy.r61Action,
+        hp: enemy.hp, maxHp: enemy.maxHp, damage: enemy.damage, attackShape: enemy.combatProfile?.attackShape,
+      };
+      try {
+        if (spot) {
+          tickEnemies(.02);
+          prepared = enemy.attack ? {
+            id: enemy.attack.id, elapsed: enemy.attack.elapsed, committed: enemy.attack.committed,
+            windup: enemy.attack.castWindup150 ?? enemy.attack.shape154?.windup ?? enemy.combatProfile.attackShape.windup,
+            shape: enemy.attack.shape154 || enemy.combatProfile.attackShape,
+            footprint: enemy.attack.footprint154,
+          } : null;
+          if (prepared) {
+            tickEnemies(Math.max(.03, Number(prepared.windup) + .03));
+            committed = {id: enemy.attack?.id || prepared.id, elapsed: enemy.attack?.elapsed ?? null, committed: enemy.attack?.committed === true, lastAttackKind: enemy.lastAttackKind};
+          }
+        }
+      } catch (error) { nativeAttackError = String(error?.stack || error); }
+      finally {
+        enemyAtEnd = {
+          tell: enemy.tell, rest: enemy.rest, cd: enemy.cd, graceUntil: enemy.graceUntil,
+          attack: enemy.attack && {id: enemy.attack.id, elapsed: enemy.attack.elapsed, committed: enemy.attack.committed},
+          rangedWindup: enemy.rangedWindup, phase: enemy.phase, phaseAge: enemy.phaseAge, phaseStage: enemy.phaseStage,
+          invulnerableUntil: enemy.invulnerableUntil, r61Action: enemy.r61Action && {kind: enemy.r61Action.kind, endAt: enemy.r61Action.endAt},
+          hp: enemy.hp, maxHp: enemy.maxHp, damage: enemy.damage,
+        };
+        playerAtEnd = {hp: p.hp, invincible: p.invincible, invReason: p.invReason, guard: p.guard, parry: p.parry, shield: p.shield,
+          attackCD: p.attackCD, position: {x: p.x, y: p.y}};
         hurt = base;
         Object.assign(enemy, originalEnemy);
+        if (motionState && Number.isFinite(originalMotionNext)) motionState.next = originalMotionNext;
         room.enemies = originalEnemies;
         room.engaged = originalEngaged;
       }
       const health = window.__STORYWORLD_HEALTH_R71__;
       const rows = health.statusRows(p);
       const state = health.inspect(p);
-      return {observed, state, rows, visuals: effects.filter(e => e.r71BleedVisualR71 === true).map(e => ({id: e.id, actor: e.r71ActorId, atlas: e.r52Blood === true, life: e.life, age: e.age}))};
+      const native = {
+        observed: admitted.find(row => row.sourceIsRoomEnemy && row.result === 'hit') || admitted.at(-1) || null,
+        admitted, prepared, committed, nativeAttackError, spot, enemyId: enemy.id, enemyAtStart, enemyAtEnd,
+        playerAtEnd, player: {hp: p.hp, invincible: p.invincible, invReason: p.invReason, guard: p.guard, parry: p.parry, shield: p.shield,
+          attackCD: p.attackCD, position: {x: p.x, y: p.y}, distance: spot ? Math.hypot(spot.ex-p.x, spot.ey-p.y) : null},
+        room: {id: room.id, layer: room.layer, engaged: room.engaged, loading, modal},
+        fields: fields?.inspect?.() || null,
+      };
+      return {observed: native.observed, native, state, rows, visuals: effects.filter(e => e.r71BleedVisualR71 === true).map(e => ({id: e.id, actor: e.r71ActorId, atlas: e.r52Blood === true, life: e.life, age: e.age}))};
     });
+    console.log('R71_NATIVE_HIT', JSON.stringify(hit.native));
     assert.ok(hit.observed && hit.observed.sourceIsRoomEnemy && hit.observed.result === 'hit');
     assert.ok(hit.observed.after < hit.observed.before, 'the native enemy attack must actually reduce HP');
     assert.equal(hit.state.player.maxHp, 777);
@@ -1024,28 +1083,146 @@ try {
     assert.deepEqual(clear.repeat, clear.once); assert.equal(clear.savedParticipants.length, 2);
     assert.equal(clear.savedParticipants.find(p=>p.id==='qa-peer').hp, 0, 'the connected peer is downed at the saved first clear');
 
+    const legacyReplicaImport = await host.page.evaluate(async () => {
+      const c=window.__STORYWORLD_COOP_SIM_R62__,campaign=window.__STORYWORLD_CAMPAIGN_R63R1__,health=window.__STORYWORLD_HEALTH_R71__,summons=window.__STORYWORLD_SUMMONS_R61__;
+      campaign.choose('dist00','STORY','normal');campaign.reapplyRoom();
+      const r=room,sourceBoss=r.enemies.find(e=>(e.boss||e.midboss||e.persona||e.cosmic||e.trial)&&!e.coopReplicaR62);
+      const sourceMob=r.enemies.find(e=>e.hp>0&&!e.boss&&!e.midboss&&!e.persona&&!e.cosmic&&!e.trial&&!e.coopReplicaR62&&e.ai==='melee');
+      if(!sourceBoss||!sourceMob)throw new Error('Native dist00 boss and melee source are required for the legacy replica import fixture');
+      if(sourceBoss.healthR71CanonicalMaxHp!==6421.5||sourceBoss.maxHp!==6666)throw new Error('The normal dist00 owner must be 6421.5 canonical / 6666 visible before legacy import');
+      const raw=c.exportSave(),coopKey=Object.keys(raw.coopWorld||{}).find(k=>k===`${r.layer}:${r.id}`),hostRoom=raw.hostSave?.rooms?.[coopKey];
+      if(!coopKey||!hostRoom)throw new Error(`Native coop save is missing ${r.layer}:${r.id} room rows; keys=${Object.keys(raw.hostSave?.rooms||{}).slice(0,8).join(',')}`);
+      const bossSaved=hostRoom.enemies?.find(row=>row.id===sourceBoss.id),mobSaved=hostRoom.enemies?.find(row=>row.id===sourceMob.id);
+      if(!bossSaved||!mobSaved)throw new Error('Native host save omits the source boss or melee control actor');
+      const bossReplicaId=`${sourceBoss.id}:coop:qa-r70-boss`,ordinaryReplicaId=`${sourceMob.id}:coop:qa-r70-mob`;
+      const fraction=.5,cloneFraction=.4,oldCloneMax=6421.5*.06;
+      raw.coopWorld[coopKey].replicas.push({id:bossReplicaId,source:sourceBoss.id,nativeId:sourceBoss.nativeId,
+        maxHp:6421.5,hp:6421.5*fraction,damage:sourceBoss.damage,x:sourceBoss.x,y:sourceBoss.y,spawnState:sourceBoss.spawnState});
+      raw.coopWorld[coopKey].replicas.push({id:ordinaryReplicaId,source:sourceMob.id,nativeId:sourceMob.nativeId,
+        maxHp:sourceMob.maxHp,hp:sourceMob.hp,damage:sourceMob.damage,x:sourceMob.x,y:sourceMob.y,spawnState:sourceMob.spawnState});
+      hostRoom.engaged=true;hostRoom.cleared=false;hostRoom.finalizing=false;bossSaved.spawnState='active';bossSaved.deadRecorded=false;bossSaved.hp=Math.max(1,Number(bossSaved.hp)||sourceBoss.hp);
+      const oldCloneId=`${r.id}:r61-summon:qa-r70-clone`,clonePoint=summons.position({combatProfile:sourceBoss.combatProfile,radius:sourceBoss.radius},sourceBoss,0,[],r);
+      if(!clonePoint)throw new Error('Native R61 safe clone restore point is unavailable for the marked legacy save');
+      raw.hostSave.summonsR61={version:1,serial:990001,rooms:{[coopKey]:{version:1,owners:{[sourceBoss.id]:{used:1,waves:1,nextIn:8}},units:[{
+        id:oldCloneId,owner:sourceBoss.id,kind:'clone',nativeId:sourceBoss.nativeId,maxHp:oldCloneMax,hp:oldCloneMax*cloneFraction,
+        damage:sourceBoss.damage,x:clonePoint.x,y:clonePoint.y,cd:1.2,
+      }]}}};
+      const ownerBefore={id:sourceBoss.id,maxHp:sourceBoss.maxHp,canonical:sourceBoss.healthR71CanonicalMaxHp,hpFraction:sourceBoss.hp/sourceBoss.maxHp,factor:sourceBoss.difficultyFactorR63};
+      const mobBefore={id:sourceMob.id,maxHp:sourceMob.maxHp,hp:sourceMob.hp};
+      const restoreAndRead=async()=>{
+        await c.importSave(raw);const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});auto=false;settings.autoSkill=false;for(const actor of c.players()){actor.invincible=1e6;actor.invReason='QA marked-save fixture';}player.hp=777;
+        const currentRoom=room,owner=currentRoom.enemies.find(e=>e.id===sourceBoss.id),bossReplica=currentRoom.enemies.find(e=>e.id===bossReplicaId),ordinaryReplica=currentRoom.enemies.find(e=>e.id===ordinaryReplicaId),clone=currentRoom.enemies.find(e=>e.id===oldCloneId),mob=currentRoom.enemies.find(e=>e.id===sourceMob.id);
+        return{
+          owner:owner&&{maxHp:owner.maxHp,canonical:owner.healthR71CanonicalMaxHp,hpFraction:owner.hp/owner.maxHp,factor:owner.difficultyFactorR63},
+          bossReplica:bossReplica&&{maxHp:bossReplica.maxHp,hp:bossReplica.hp,hpFraction:bossReplica.hp/bossReplica.maxHp,canonical:bossReplica.healthR71CanonicalMaxHp,visible:bossReplica.healthR71VisibleMaxHp,adjusted:bossReplica.healthR71Adjusted},
+          ordinaryReplica:ordinaryReplica&&{maxHp:ordinaryReplica.maxHp,hp:ordinaryReplica.hp},
+          clone:clone&&{maxHp:clone.maxHp,hp:clone.hp,hpFraction:clone.hp/clone.maxHp,ownerMaxHp:owner?.maxHp,ownerId:clone.r61Summoned?.owner,kind:clone.r61Summoned?.kind,clone:clone.r61Clone===true},
+          sourceMob:mob&&{maxHp:mob.maxHp,hp:mob.hp},
+          cloneMetricRestored:summons.inspect().metrics.restored,
+          healthBosses:health.inspect(player).bosses.map(row=>({id:row.id,maxHp:row.visibleMaxHp,canonical:row.canonicalMaxHp})),
+        };
+      };
+      const first=await restoreAndRead(),second=await restoreAndRead();
+      return {ownerBefore,mobBefore,expected:{bossReplicaId,ordinaryReplicaId,oldCloneId,fraction,cloneFraction,oldCloneMax},first,second};
+    });
+    console.log('R71_LEGACY_BOSS_REPLICA_IMPORT',JSON.stringify(legacyReplicaImport));
+    assert.equal(legacyReplicaImport.ownerBefore.maxHp,6666);assert.equal(legacyReplicaImport.ownerBefore.canonical,6421.5);
+    for(const round of [legacyReplicaImport.first,legacyReplicaImport.second]){
+      assert.equal(round.owner.maxHp,6666);assert.equal(round.owner.canonical,6421.5);
+      assert.equal(round.bossReplica.maxHp,6666);assert.equal(round.bossReplica.hp,3333);assert.equal(round.bossReplica.hpFraction,.5);
+      assert.equal(round.bossReplica.canonical,6421.5);assert.equal(round.bossReplica.visible,6666);assert.equal(round.bossReplica.adjusted,true);
+      assert.equal(round.ordinaryReplica.maxHp,legacyReplicaImport.mobBefore.maxHp);assert.equal(round.ordinaryReplica.hp,legacyReplicaImport.mobBefore.hp,'the ordinary co-op replica retains its saved R70 health');
+      assert.equal(round.clone.ownerId,legacyReplicaImport.ownerBefore.id);assert.equal(round.clone.kind,'clone');assert.equal(round.clone.clone,true);
+      assert.ok(Math.abs(round.clone.maxHp-round.clone.ownerMaxHp*.06)<1e-9,'restored R61 clone remains exactly 6% of its normalized owner');
+      assert.ok(Math.abs(round.clone.hpFraction-legacyReplicaImport.expected.cloneFraction)<1e-12,'restored R61 clone preserves its saved health fraction');
+      assert.equal(round.sourceMob.maxHp,legacyReplicaImport.mobBefore.maxHp);assert.equal(round.sourceMob.hp,legacyReplicaImport.mobBefore.hp,'R61 clone health repair leaves the ordinary source mob unchanged');
+    }
+    const {cloneMetricRestored:firstCloneRestoreCount,...firstImportHealth}=legacyReplicaImport.first;
+    const {cloneMetricRestored:secondCloneRestoreCount,...secondImportHealth}=legacyReplicaImport.second;
+    assert.deepEqual(secondImportHealth,firstImportHealth,'reimporting the same R70 co-op save does not compound boss or clone health');
+    assert.equal(secondCloneRestoreCount,firstCloneRestoreCount+1,'the native summon loader records one additional restored clone per import');
+
+    const openReselect = async tier => {
+      await host.page.evaluate(nextTier => {
+        window.__STORYWORLD_PROGRESSION_R71__.openDifficulty('dist00',null,{restore:true,noStory:true,position:{x:15,y:19},layer:'STORY'});
+        document.getElementById(nextTier==='hard'?'r71DifficultyHard':'r71DifficultyNormal').click();
+        document.getElementById('r71DifficultyConfirm').click();
+      },tier);
+      await host.page.waitForFunction(()=>window.eval("zone==='dist00' && !loading && !modal"),null,{timeout:60000});
+      return host.page.evaluate(({tier,ownerId,cloneId,mobId})=>{
+        const campaign=window.__STORYWORLD_CAMPAIGN_R63R1__,health=window.__STORYWORLD_HEALTH_R71__;
+        const owner=room.enemies.find(e=>e.id===ownerId),clone=room.enemies.find(e=>e.id===cloneId),mob=room.enemies.find(e=>e.id===mobId);
+        return{tier:campaign.mode('dist00','STORY'),owner:owner&&{id:owner.id,maxHp:owner.maxHp,canonical:owner.healthR71CanonicalMaxHp,visible:owner.healthR71VisibleMaxHp,hpFraction:owner.hp/owner.maxHp,factor:owner.difficultyFactorR63},clone:clone&&{maxHp:clone.maxHp,hpFraction:clone.hp/clone.maxHp,ownerId:clone.r61Summoned?.owner,isClone:clone.r61Clone===true},ordinary:mob&&{id:mob.id,maxHp:mob.maxHp,hp:mob.hp,isClone:mob.r61Clone===true,adjusted:mob.healthR71Adjusted===true},authority:health.inspect(player).authority};
+      },{tier,ownerId:legacyReplicaImport.ownerBefore.id,cloneId:legacyReplicaImport.expected.oldCloneId,mobId:legacyReplicaImport.mobBefore.id});
+    };
+    const hardReselect=await openReselect('hard');
+    assert.equal(hardReselect.tier,'hard');assert.ok(hardReselect.owner&&hardReselect.clone&&hardReselect.ordinary);
+    assert.equal(hardReselect.owner.maxHp%1000,666);assert.equal(hardReselect.owner.maxHp,hardReselect.owner.visible);
+    assert.equal(hardReselect.clone.ownerId,legacyReplicaImport.ownerBefore.id);assert.equal(hardReselect.clone.isClone,true);
+    assert.ok(Math.abs(hardReselect.clone.maxHp-hardReselect.owner.maxHp*.06)<1e-9,'same-map hard-tier reselect keeps the native R61 clone at exactly 6% of its owner');
+    assert.ok(Math.abs(hardReselect.clone.hpFraction-legacyReplicaImport.expected.cloneFraction)<1e-12,'same-map hard-tier reselect preserves the clone HP fraction');
+    assert.equal(hardReselect.ordinary.isClone,false);assert.equal(hardReselect.ordinary.adjusted,false,'clone repair does not mark ordinary enemies as boss-normalized');
+    const normalReselect=await openReselect('normal');
+    assert.equal(normalReselect.tier,'normal');assert.equal(normalReselect.owner.maxHp,6666);assert.equal(normalReselect.owner.canonical,6421.5);
+    assert.equal(normalReselect.clone.ownerId,legacyReplicaImport.ownerBefore.id);assert.equal(normalReselect.clone.isClone,true);
+    assert.ok(Math.abs(normalReselect.clone.maxHp-normalReselect.owner.maxHp*.06)<1e-9,'returning to normal keeps the clone ratio stable');
+    assert.ok(Math.abs(normalReselect.clone.hpFraction-legacyReplicaImport.expected.cloneFraction)<1e-12,'returning to normal keeps the clone HP fraction stable');
+    assert.equal(normalReselect.ordinary.isClone,false);assert.equal(normalReselect.ordinary.adjusted,false);
+    console.log('R71_BOSS_CLONE_TIER_RESELECT',JSON.stringify({hardReselect,normalReselect}));
+    await host.page.evaluate(()=>{room.engaged=false;window.__STORYWORLD_SUMMONS_R61__.clear('qa-legacy-import-tier-reselect');for(const actor of window.__STORYWORLD_COOP_SIM_R62__.players()){actor.invincible=0;actor.invReason='';}});
+
     const firstHit = await host.page.evaluate(() => {
       const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__,actors=c.players();
       const owner=actors.find(p=>p.coopIdR62==='qa-host'),peer=actors.find(p=>p.coopIdR62==='qa-peer'),r=room;
-      owner.hp=peer.hp=777;owner.invincible=peer.invincible=0;owner.guard=peer.guard=false;
+      const originalEnemies=r.enemies,originalEngaged=r.engaged,originalDefeated=r.coopDefeatedR62;
+      owner.hp=peer.hp=777;owner.invincible=peer.invincible=0;owner.invReason=peer.invReason='';owner.guard=peer.guard=false;owner.parry=peer.parry=0;
       owner.x=7;owner.y=7;peer.x=18;peer.y=19;
-      const enemy=r.enemies.find(e=>e.hp>0&&!e.boss&&!e.midboss&&e.type!=='ranged'&&!e.coopReplicaR62);
+      const enemy=r.enemies.find(e=>e.hp>0&&!e.boss&&!e.midboss&&!e.persona&&!e.cosmic&&!e.trial&&e.type!=='ranged'&&!e.coopReplicaR62&&e.ai==='melee'&&!window.__STORYWORLD_FIELDS_R61__?.activeAction?.(e));
       if(!enemy)throw new Error('No native melee enemy is available for the coop hit fixture');
-      r.enemies=[enemy];r.engaged=true;enemy.x=peer.x+.6;enemy.y=peer.y;enemy.spawnState='active';enemy.tell=.1;enemy.aim={x:peer.x,y:peer.y,angle:Math.PI};enemy.cd=20;
-      const beforeOwner=owner.hp,beforePeer=peer.hp,rawDamage=enemy.damage;
-      tickEnemies(.2);
-      const state=health.inspect(peer),pressure=window.__STORYWORLD_HOSPITAL_PRESSURE_R54__?.incomingMultiplier(enemy)??1;
+      const originalEnemy={...enemy,aim:enemy.aim&&{...enemy.aim}},fields=window.__STORYWORLD_FIELDS_R61__,motionState=fields?.state?.(enemy),originalMotionNext=motionState?.next;
+      r.enemies=[enemy];r.engaged=true;r.coopDefeatedR62=[...(originalDefeated||[]),enemy.id+':coop:1'];
+      const basePeer={x:peer.x,y:peer.y},gap=.55;let spot=null;
+      for(const radius of [0,.5,1,1.5,2])for(let i=0;i<16&&!spot;i++){
+        const angle=i*Math.PI/8,px=basePeer.x+Math.cos(angle)*radius,py=basePeer.y+Math.sin(angle)*radius,ex=px+gap,ey=py;
+        if(!blocked(px,py,.23,r)&&!blocked(ex,ey,.29,r)&&clearLine({x:ex,y:ey},{x:px,y:py-.15},r))spot={x:px,y:py,ex,ey};
+      }
+      if(spot){peer.x=spot.x;peer.y=spot.y;enemy.x=spot.ex;enemy.y=spot.ey;}
+      enemy.spawnState='active';enemy.visible=true;enemy.deadRecorded=false;
+      enemy.tell=0;enemy.rest=0;enemy.attack=null;enemy.rangedWindup=0;enemy.cd=0;enemy.graceUntil=time-1;
+      enemy.aim={x:peer.x,y:peer.y,angle:Math.atan2(peer.y-.15-enemy.y,peer.x-enemy.x)};
+      enemy.storyAttackUntil5=0;enemy.storyPatternCooldownUntil5=0;enemy.personaCooldownUntil150=0;enemy.invulnerableUntil=0;enemy.r61Action=null;enemy.r61BusyUntil=0;enemy.targetPlayerR62=null;
+      if(motionState)motionState.next=time+120;
+      const beforeOwner=owner.hp,beforePeer=peer.hp,rawDamage=enemy.damage,attackMultiplier=enemy.weapon==='heavy'?1.25:1;
+      const baseHurt=hurt,admitted=[];let prepared=null,committed=null,nativeAttackError=null;
+      hurt=function(value,source){const before=peer.hp,result=baseHurt.apply(this,arguments);admitted.push({value,result,sourceId:source?.id||null,sourceIsRoomEnemy:source===enemy,before,after:peer.hp,attackId:source?.attack?.id||null});return result;};
+      try{
+        if(spot&&clearLine(enemy,peer)){
+          tickEnemies(.02);
+          prepared=enemy.attack?{id:enemy.attack.id,elapsed:enemy.attack.elapsed,windup:enemy.attack.castWindup150??enemy.attack.shape154?.windup??enemy.combatProfile.attackShape.windup,shape:enemy.attack.shape154||enemy.combatProfile.attackShape,footprint:enemy.attack.footprint154}:null;
+          if(prepared){tickEnemies(Math.max(.03,Number(prepared.windup)+.03));committed={id:enemy.attack?.id||prepared.id,elapsed:enemy.attack?.elapsed??null,committed:enemy.attack?.committed===true,lastAttackKind:enemy.lastAttackKind};}
+        }
+      }catch(error){nativeAttackError=String(error?.stack||error);}
+      finally{hurt=baseHurt;}
+      const observed=admitted.find(row=>row.sourceIsRoomEnemy&&row.result==='hit')||null;
+      const pressure=window.__STORYWORLD_HOSPITAL_PRESSURE_R54__?.incomingMultiplier(enemy)??1;
       const difficulty=window.__STORYWORLD_CAMPAIGN_R63R1__?.incomingDamageFactor?.(enemy)??1;
       const ward=window.__STORYWORLD_PROGRESSION_R62__?.ranks?.('ward',peer)||0;
-      const expected=health.normalizeIncoming(rawDamage,peer,enemy)*difficulty*.65*pressure*(1-.06*ward)*.2;
-      const visuals=effects.filter(e=>e.r71BleedVisualR71===true).map(e=>({owner:e.r71ActorId,atlas:e.r52Blood===true,life:e.life,age:e.age}));
+      const expected=health.normalizeIncoming(rawDamage*attackMultiplier,peer,enemy)*difficulty*.65*pressure*(1-.06*ward)*.2;
+      const state=health.inspect(peer),visuals=effects.filter(e=>e.r71BleedVisualR71===true).map(e=>({owner:e.r71ActorId,atlas:e.r52Blood===true,life:e.life,age:e.age}));
       const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(c=>c.owner?.id==='blood-contact-r52'&&c.kind==='image'&&String(c.sourcePath).includes('medical-impacts-r49.png'));
-      const expectedScreen=project(peer.x,peer.y-.15);expectedScreen.y-=actorHeight()*.40;
+      const expectedImpact={x:peer.x,y:peer.y-.15},expectedScreen=project(expectedImpact.x,expectedImpact.y);expectedScreen.y-=actorHeight()*.40;
       const bloodCenters=bloodCommands.map(c=>({x:c.points.reduce((n,p)=>n+p[0],0)/c.points.length,y:c.points.reduce((n,p)=>n+p[1],0)/c.points.length,owner:c.owner}));
       const bleedDraws=health.inspect(peer).bleedVisuals.filter(v=>v.actorId==='qa-peer');
-      enemy.tell=0;enemy.cd=999;
-      return{beforeOwner,afterOwner:owner.hp,beforePeer,afterPeer:peer.hp,rawDamage,expected,enemyId:enemy.id,native:r.enemies.includes(enemy),state,status:health.statusRows(peer),visuals,bloodCenters,bleedDraws,expectedImpact:{x:peer.x,y:peer.y-.15},expectedScreen};
+      const native={observed,admitted,prepared,committed,nativeAttackError,spot,lineOfSight:clearLine(enemy,peer),distance:Math.hypot(enemy.x-peer.x,enemy.y-peer.y),enemy:{id:enemy.id,ai:enemy.ai,weapon:enemy.weapon,type:enemy.type,position:{x:enemy.x,y:enemy.y},hp:enemy.hp,maxHp:enemy.maxHp,tell:enemy.tell,aim:enemy.aim,graceUntil:enemy.graceUntil,rest:enemy.rest,cd:enemy.cd,attack:enemy.attack&&{id:enemy.attack.id,elapsed:enemy.attack.elapsed,committed:enemy.attack.committed},rangedWindup:enemy.rangedWindup,phase:enemy.phase,phaseAge:enemy.phaseAge,phaseStage:enemy.phaseStage,invulnerableUntil:enemy.invulnerableUntil,r61Action:enemy.r61Action,shape:enemy.combatProfile?.attackShape},player:{owner:{hp:owner.hp,x:owner.x,y:owner.y,invincible:owner.invincible,guard:owner.guard,parry:owner.parry},peer:{hp:peer.hp,x:peer.x,y:peer.y,invincible:peer.invincible,invReason:peer.invReason,guard:peer.guard,parry:peer.parry,attackCD:peer.attackCD,shield:peer.shield}},room:{id:r.id,layer:r.layer,engaged:r.engaged,loading,modal},fields:fields?.inspect?.()||null};
+      enemy.tell=0;enemy.cd=999;Object.assign(enemy,originalEnemy);if(motionState&&Number.isFinite(originalMotionNext))motionState.next=originalMotionNext;
+      r.enemies=originalEnemies;r.engaged=originalEngaged;r.coopDefeatedR62=originalDefeated;
+      return{beforeOwner,afterOwner:owner.hp,beforePeer,afterPeer:observed?.after??peer.hp,rawDamage,expected,enemyId:enemy.id,native:r.enemies.includes(enemy),state,status:health.statusRows(peer),visuals,bloodCenters,bleedDraws,expectedImpact,expectedScreen,nativeDiagnostic:native};
     });
+    console.log('R71_NATIVE_COOP_HIT',JSON.stringify(firstHit.nativeDiagnostic));
+    assert.ok(firstHit.nativeDiagnostic.spot&&firstHit.nativeDiagnostic.lineOfSight,'the native hit fixture must use a clear, unblocked attacker/player pair');
+    assert.ok(firstHit.nativeDiagnostic.prepared,'native tickEnemies must prepare a real melee attack before the strike');
+    assert.ok(firstHit.nativeDiagnostic.committed?.committed===true||firstHit.nativeDiagnostic.observed,'native strike must reach the active strike phase');
+    assert.ok(firstHit.nativeDiagnostic.observed?.sourceIsRoomEnemy&&firstHit.nativeDiagnostic.observed.result==='hit','native strike must reach the coop hurt admission path');
     assert.equal(firstHit.native,true);
     assert.equal(firstHit.afterOwner,firstHit.beforeOwner,'host must not receive the peer-targeted native attack');
     assert.ok(firstHit.afterPeer<firstHit.beforePeer&&firstHit.afterPeer>0,'peer takes native damage instead of blanket invulnerability');
@@ -1105,16 +1282,45 @@ try {
     const deathAndRevive=await host.page.evaluate(async enemyId=>{
       const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__,actors=c.players();
       const owner=actors.find(p=>p.coopIdR62==='qa-host'),peer=actors.find(p=>p.coopIdR62==='qa-peer'),r=room;
+      const originalEnemies=r.enemies,originalEngaged=r.engaged,originalDefeated=r.coopDefeatedR62;
       const enemy=r.enemies.find(e=>e.id===enemyId);if(!enemy)throw new Error('Native attacker missing before lethal hit');
-      enemy.id+=':lethal';r.coopDefeatedR62=[...(r.coopDefeatedR62||[]),enemy.id+':coop:1'];r.enemies=[enemy];
-      owner.hp=777;peer.hp=2;owner.invincible=peer.invincible=0;owner.x=8;owner.y=8;peer.x=18;peer.y=19;
-      enemy.x=peer.x+.6;enemy.y=peer.y;enemy.tell=.01;enemy.aim={x:peer.x,y:peer.y,angle:Math.PI};enemy.cd=20;tickEnemies(.02);
+      const originalEnemy={...enemy,aim:enemy.aim&&{...enemy.aim}},fields=window.__STORYWORLD_FIELDS_R61__,motionState=fields?.state?.(enemy),originalMotionNext=motionState?.next;
+      r.coopDefeatedR62=[...(originalDefeated||[]),enemy.id+':coop:1'];r.enemies=[enemy];r.engaged=true;
+      owner.hp=777;peer.hp=2;owner.invincible=peer.invincible=0;owner.invReason=peer.invReason='';owner.guard=peer.guard=false;owner.parry=peer.parry=0;owner.x=8;owner.y=8;peer.x=18;peer.y=19;
+      const basePeer={x:peer.x,y:peer.y},gap=.55;let spot=null;
+      for(const radius of [0,.5,1,1.5,2])for(let i=0;i<16&&!spot;i++){
+        const angle=i*Math.PI/8,px=basePeer.x+Math.cos(angle)*radius,py=basePeer.y+Math.sin(angle)*radius,ex=px+gap,ey=py;
+        if(!blocked(px,py,.23,r)&&!blocked(ex,ey,.29,r)&&clearLine({x:ex,y:ey},{x:px,y:py-.15},r))spot={x:px,y:py,ex,ey};
+      }
+      if(spot){peer.x=spot.x;peer.y=spot.y;enemy.x=spot.ex;enemy.y=spot.ey;}
+      enemy.spawnState='active';enemy.visible=true;enemy.deadRecorded=false;enemy.tell=0;enemy.rest=0;enemy.attack=null;enemy.rangedWindup=0;enemy.cd=0;enemy.graceUntil=time-1;
+      enemy.aim={x:peer.x,y:peer.y,angle:Math.atan2(peer.y-.15-enemy.y,peer.x-enemy.x)};enemy.storyAttackUntil5=0;enemy.storyPatternCooldownUntil5=0;enemy.personaCooldownUntil150=0;enemy.invulnerableUntil=0;enemy.r61Action=null;enemy.r61BusyUntil=0;enemy.targetPlayerR62=null;
+      if(motionState)motionState.next=time+120;
+      const baseHurt=hurt,admitted=[];let prepared=null,committed=null,nativeAttackError=null;
+      hurt=function(value,source){const before=peer.hp,result=baseHurt.apply(this,arguments);admitted.push({value,result,sourceId:source?.id||null,sourceIsRoomEnemy:source===enemy,before,after:peer.hp,attackId:source?.attack?.id||null});return result;};
+      try{
+        if(spot&&clearLine(enemy,peer)){
+          tickEnemies(.02);
+          prepared=enemy.attack?{id:enemy.attack.id,elapsed:enemy.attack.elapsed,windup:enemy.attack.castWindup150??enemy.attack.shape154?.windup??enemy.combatProfile.attackShape.windup,shape:enemy.attack.shape154||enemy.combatProfile.attackShape,footprint:enemy.attack.footprint154}:null;
+          if(prepared){tickEnemies(Math.max(.03,Number(prepared.windup)+.03));committed={id:enemy.attack?.id||prepared.id,elapsed:enemy.attack?.elapsed??null,committed:enemy.attack?.committed===true,lastAttackKind:enemy.lastAttackKind};}
+        }
+      }catch(error){nativeAttackError=String(error?.stack||error);}
+      finally{hurt=baseHurt;}
+      const observed=admitted.find(row=>row.sourceIsRoomEnemy&&row.result==='hit')||null;
       const down={hp:peer.hp,bleeding:health.inspect(peer).bleeding,visuals:effects.filter(e=>e.r71BleedVisualR71&&e.r71ActorId==='qa-peer'&&e.age<e.life).length};
-      if(peer.hp!==0||down.bleeding.active)throw new Error('Lethal enemy contact must down the peer and clear bleed');
-      r.enemies=[];owner.x=peer.x+.3;owner.y=peer.y;owner.pendingInputR62={...(owner.pendingInputR62||{}),interact:true};c.tick(.2);
-      const revived={hp:peer.hp,maxHp:health.inspect(peer).player.maxHp,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer),invincible:peer.invincible};
-      return{down,revived,reviveEvents:c.inspect().history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer').length};
+      let revived=null;
+      if(peer.hp===0){r.enemies=[];owner.x=peer.x+.3;owner.y=peer.y;owner.pendingInputR62={...(owner.pendingInputR62||{}),interact:true};c.tick(.2);revived={hp:peer.hp,maxHp:health.inspect(peer).player.maxHp,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer),invincible:peer.invincible};}
+      const diagnostic={observed,admitted,prepared,committed,nativeAttackError,spot,lineOfSight:clearLine(enemy,peer),distance:Math.hypot(enemy.x-peer.x,enemy.y-peer.y),enemy:{id:enemy.id,ai:enemy.ai,weapon:enemy.weapon,type:enemy.type,damage:enemy.damage,position:{x:enemy.x,y:enemy.y},tell:enemy.tell,aim:enemy.aim,rest:enemy.rest,cd:enemy.cd,graceUntil:enemy.graceUntil,attack:enemy.attack&&{id:enemy.attack.id,elapsed:enemy.attack.elapsed,committed:enemy.attack.committed},rangedWindup:enemy.rangedWindup,phase:enemy.phase,phaseAge:enemy.phaseAge,phaseStage:enemy.phaseStage,invulnerableUntil:enemy.invulnerableUntil,r61Action:enemy.r61Action,shape:enemy.combatProfile?.attackShape},player:{owner:{hp:owner.hp,invincible:owner.invincible},peer:{hp:peer.hp,invincible:peer.invincible,invReason:peer.invReason,guard:peer.guard,parry:peer.parry,attackCD:peer.attackCD}},room:{id:r.id,layer:r.layer,engaged:r.engaged,loading,modal},fields:fields?.inspect?.()||null};
+      Object.assign(enemy,originalEnemy);if(motionState&&Number.isFinite(originalMotionNext))motionState.next=originalMotionNext;
+      r.enemies=originalEnemies;r.engaged=originalEngaged;r.coopDefeatedR62=originalDefeated;
+      return{down,revived,diagnostic,reviveEvents:c.inspect().history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer').length};
     },firstHit.enemyId);
+    console.log('R71_NATIVE_LETHAL_COOP_HIT',JSON.stringify(deathAndRevive.diagnostic));
+    assert.ok(deathAndRevive.diagnostic.spot&&deathAndRevive.diagnostic.lineOfSight,'the lethal fixture must use a clear, unblocked attacker/player pair');
+    assert.ok(deathAndRevive.diagnostic.prepared,'native tickEnemies must prepare the real lethal melee attack');
+    assert.ok(deathAndRevive.diagnostic.observed?.sourceIsRoomEnemy&&deathAndRevive.diagnostic.observed.result==='hit','lethal contact must use the native enemy hurt path');
+    assert.ok(deathAndRevive.diagnostic.observed.after<deathAndRevive.diagnostic.observed.before);
+    assert.ok(deathAndRevive.down.hp===0&&deathAndRevive.revived,'native lethal enemy contact must down the peer before revive');
     assert.equal(deathAndRevive.down.hp,0);assert.equal(deathAndRevive.down.bleeding.active,false,'death clears peer bleed');
     assert.ok(deathAndRevive.down.visuals<=1,'lethal splash is bounded');
     assert.ok(deathAndRevive.revived.hp>0&&deathAndRevive.revived.hp<777,'native coop revive restores partial balanced HP');
