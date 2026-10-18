@@ -1,6 +1,6 @@
 /* Golden custom sword dance. Simulation owns damage; drawing only paints it. */
 (()=>{'use strict';
- const C=StoryGoldenCoreR72,casts=new Map(),trailPools=new WeakMap(),autoRetries=new WeakMap(),events=[];let serial=0,lastResult=null;
+ const C=StoryGoldenCoreR72,casts=new Map(),trailPools=new WeakMap(),events=[];let autoRetries=new WeakMap(),serial=0,lastResult=null;
  const coop=()=>window.__STORYWORLD_COOP_SIM_R62__,guest=()=>coop()?.mode()==='guest';
  const current=()=>coop()?.currentPlayer?.()||player,local=()=>coop()?.localPlayer?.()||player;
  const state=(p=current())=>{if(!p)return C.fresh();return p.goldenR72??=(C.fresh());};
@@ -37,7 +37,7 @@
  const clear=(a,b,r=room)=>clearPath3(a,b,.31,r);
  function returnSafe(c){const p=c.p;if(p.hp<=0||room!==c.room)return;let q=c.origin;if(!safe(q)||!clear({x:p.x,y:p.y},q)){q=null;for(let ring=1;ring<=10&&!q;ring++)for(let i=0;i<16;i++){const a=i*Math.PI/8,v={x:c.origin.x+Math.cos(a)*ring*.22,y:c.origin.y+Math.sin(a)*ring*.22};if(safe(v)&&clear({x:p.x,y:p.y},v)){q=v;break;}}if(!q&&safe(p))q={x:p.x,y:p.y};}if(q){p.x=q.x;p.y=q.y;p.moving=false;}}
  function cancel(p,reason='cancel'){const c=casts.get(p);if(!c)return;casts.delete(p);returnSafe(c);note('cancel',{reason,id:c.id});}
- function cancelAll(reason){for(const p of [...casts.keys()])cancel(p,reason);}
+ function cancelAll(reason){autoRetries=new WeakMap();for(const p of [...casts.keys()])cancel(p,reason);}
  function trail(c,v){
   let pool=trailPools.get(c.p);if(!pool){pool=[];trailPools.set(c.p,pool);}const slot=(c.cursor-1)%(settings.lowFx?8:16),data={a:v.a,b:v.b,stroke:v.stroke,cast:c.id,slot,actor:c.p.coopIdR62||'solo'};let e=pool[slot];
   if(!e){fx('goldenThreadR72',v.b.x,v.b.y,{life:.4,goldenR72:data,asset:null});e=effects.at(-1);if(e?.type==='goldenThreadR72')pool[slot]=e;}else{e.x=v.b.x;e.y=v.b.y;e.age=0;e.life=.4;e.goldenR72=data;if(!effects.includes(e)){if(effects.length>=(settings.lowFx?80:160))effects.shift();effects.push(e);}}
