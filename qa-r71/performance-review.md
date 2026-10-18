@@ -2,7 +2,7 @@
 
 ## Status
 
-No final-candidate paired ABBA result is available yet. The `146b85…` HTML candidate has a real 4× canonical boss-HP scaling regression (25,686 vs R70 6,421.5) and is pre-fix, not approved. The intermediate correction is commit `12ce0b885af82c0a58a1c3c358afa06964301162`, HTML SHA-256 `b6241524ba119ed98d954452ea5d9bcfef734dd5a7825067b58a027f3faaf527`, renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`; its corrected `dist00` boss HP is 6,666 vs R70 6,421.5. This hash completed paired profiling in preflight [39103707954](https://github.com/kjb7876-lang/m0/actions/runs/39103707954) (job `117605021160`) and is documented below. It is still not final: review found legacy R62 boss-replica import and R61 clone-save 6% contract holes, and the parallel native browser validation failed an attack-hit assertion. The fix is underway. Pages run [39103709960](https://github.com/kjb7876-lang/m0/actions/runs/39103709960) is an independent measurement of the same intermediate hash; keep it separate if it completes. A fresh pair is required for the final runtime. Older failed attempts [39102585613](https://github.com/kjb7876-lang/m0/actions/runs/39102585613), [39103014083](https://github.com/kjb7876-lang/m0/actions/runs/39103014083), [39103016351](https://github.com/kjb7876-lang/m0/actions/runs/39103016351), [39102301547](https://github.com/kjb7876-lang/m0/actions/runs/39102301547), [39101458143](https://github.com/kjb7876-lang/m0/actions/runs/39101458143), and [39102582785](https://github.com/kjb7876-lang/m0/actions/runs/39102582785) did not produce final-candidate measurements and are excluded.
+The paired-profile job for the intended final HTML hash completed with matching source hashes. The separate native browser validation in the same preflight failed its attack-hit assertion (`hit.observed=null`), so product approval remains pending; performance data do not override that failure. The `146b85…` HTML candidate has a real 4× canonical boss-HP scaling regression (25,686 vs R70 6,421.5) and is pre-fix, not approved. The intermediate correction is commit `12ce0b885af82c0a58a1c3c358afa06964301162`, HTML SHA-256 `b6241524ba119ed98d954452ea5d9bcfef734dd5a7825067b58a027f3faaf527`, renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`; its corrected `dist00` boss HP is 6,666 vs R70 6,421.5. This hash completed paired profiling in preflight [39103707954](https://github.com/kjb7876-lang/m0/actions/runs/39103707954) (job `117605021160`) and is documented below. It is still not final: review found legacy R62 boss-replica import and R61 clone-save 6% contract holes, and the parallel native browser validation failed an attack-hit assertion. The fix is underway. Pages run [39103709960](https://github.com/kjb7876-lang/m0/actions/runs/39103709960) is an independent measurement of the same intermediate hash; keep it separate if it completes. A fresh pair is required for the final runtime. The final intended candidate is commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, HTML SHA-256 `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`, with unchanged renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Its paired-profile job completed in preflight [39104858004](https://github.com/kjb7876-lang/m0/actions/runs/39104858004) (job `117608395199`); separate Pages run [39104861979](https://github.com/kjb7876-lang/m0/actions/runs/39104861979) is also running (job `117608406693`). Older failed attempts [39102585613](https://github.com/kjb7876-lang/m0/actions/runs/39102585613), [39103014083](https://github.com/kjb7876-lang/m0/actions/runs/39103014083), [39103016351](https://github.com/kjb7876-lang/m0/actions/runs/39103016351), [39102301547](https://github.com/kjb7876-lang/m0/actions/runs/39102301547), [39101458143](https://github.com/kjb7876-lang/m0/actions/runs/39101458143), and [39102582785](https://github.com/kjb7876-lang/m0/actions/runs/39102582785) did not produce final-candidate measurements and are excluded.
 
 No structural renderer optimization is claimed for R71. The renderer/map work in scope changes Three.js map material treatment for zone readability. It does not change map geometry, renderer fallback, resolution, or effects as a performance shortcut.
 
@@ -69,23 +69,31 @@ The `regressionFlag` was false for both scenarios, with its 10% threshold. Frame
 
 ## Final paired R70 vs R71 results
 
-Pending a paired benchmark for the final runtime after the R62 replica-import and R61 clone-save fixes, and review of its `out/r71/performance.json` artifact. Record the final artifact's baseline and candidate hashes, actual browser/device string, per-trial data, and comparison fields here. Keep movement and EGO stress results separate and include draw calls, buffer uploads, and memory/counter deltas where available.
+The final intended runtime, commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, was measured in paired-profile run [39104858004, job 117608395199](https://github.com/kjb7876-lang/m0/actions/runs/39104858004). The tested HTML and renderer SHA-256 values match `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad` and `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Full rows, raw timestamped log lines, RESULT, source hashes, and artifact provenance are in [`performance-final-cc7aa-preflight.json`](performance-final-cc7aa-preflight.json). Artifact 12128615198 is 4,840,502 bytes, SHA-256 `63a7efb7ad6046b96bc096cbf4370e3512921d29f993aedfaa1fec942c470939`. It used Ubuntu 22.04.5, Node 22.23.3, Playwright 1.56.0, headless sandboxed Chromium, viewport 1365×850 at DPR 1, seed 70018, and SwiftShader. The paired job did not log the exact Chromium version. The parallel native browser validation failed at the attack-hit fixture (`hit.observed=null`); QA is reviewing that result separately. Pages run [39104861979](https://github.com/kjb7876-lang/m0/actions/runs/39104861979) is an independent measurement of the same hashes and remains pending; do not pool it with this run.
 
-| Scenario | Measure | R70 baseline mean | R71 candidate mean | Relative change | Notes |
-| --- | --- | ---: | ---: | ---: | --- |
-| Movement | RAF frame interval mean / p95 | pending | pending | pending | two trials per build |
-| Movement | JavaScript draw p95 | pending | pending | pending | not GPU time |
-| Movement | draw calls / buffer uploads per frame | pending | pending | pending | GL call counters |
-| EGO stress | RAF frame interval mean / p95 | pending | pending | pending | six motifs and hit assertion |
-| EGO stress | JavaScript draw p95 | pending | pending | pending | not GPU time |
-| EGO stress | draw calls / buffer uploads per frame | pending | pending | pending | GL call counters |
+Positive percentages below indicate a higher candidate value; a negative percentage indicates a lower value. Each build has two trials per scenario. These are measurements of the tested runtime, not user hardware performance.
 
-### Interpretation
+| Scenario | Measure | R70 baseline | R71 candidate | Candidate vs baseline |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 479.213 ms | 478.817 ms | −0.083% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 516.700 ms | 524.950 ms | +1.597% |
+| Movement | JavaScript draw p95 | 49.900 ms | 50.100 ms | +0.200 ms |
+| Movement | GL draw calls / frame | 331.849 | 331.849 | 0.000% |
+| Movement | GL buffer uploads / frame | 203.024 | 203.024 | 0.000% |
+| Movement | Material replacements / frame | 0.762 | 0.762 | 0.000% |
+| EGO stress | RAF frame interval mean | 445.937 ms | 455.789 ms | +2.209% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 491.700 ms | 508.350 ms | +3.386% |
+| EGO stress | JavaScript draw p95 | 50.750 ms | 58.600 ms | +7.850 ms |
+| EGO stress | GL draw calls / frame | 460.760 | 455.424 | −1.158% |
+| EGO stress | GL buffer uploads / frame | 232.722 | 250.273 | +7.540% |
+| EGO stress | Material replacements / frame | 3.060 | 3.189 | +4.239% |
 
-Pending the paired CI artifact. Any change in these headless SwiftShader measurements is limited to this environment and workload. It is not evidence of physical-GPU timing, mobile performance, or a deterministic per-device improvement.
+`regressionFlag` was false for both scenarios under the harness's 10% mean/p95 threshold. Movement frame mean was 0.083% lower while p95 was 1.597% higher; EGO frame mean and p95 were 2.209% and 3.386% higher. JavaScript draw p95 was higher in both. The measured result is mixed and does not support a general speedup claim.
+
+The used-JS-heap delta from before to after each 30-second sample was 0 bytes for both builds and scenarios; total JS heap size delta was also 0 bytes. Absolute heap sizes differed between independently created trial contexts, so only within-trial deltas are reported. Each EGO trial retained the six expected motifs and registered real hits. The paired job produced no new CDP profile (`profiles: []`). The earlier R70 profile still dominates the source-level assessment: 93.84% and 95.68% of retained top-35 self-sample duration is unattributed `(program)`, while the named JavaScript rows are individually small. No safe structural renderer optimization is evidenced, and this R71 change remains map-material-only.
 
 ## Evidence files
 
 - Baseline measurements and CDP summaries: [`baseline-profile-ci.json`](baseline-profile-ci.json)
 - Harness and current trial/counter definitions: [`../scripts/r71.perf.mjs`](../scripts/r71.perf.mjs)
-- Full ABBA artifact: pending next paired benchmark CI run
+- Final paired-profile data and provenance: [`performance-final-cc7aa-preflight.json`](performance-final-cc7aa-preflight.json)
