@@ -2,7 +2,7 @@
 .env.*
 !.env.example
 !relay/.env.example
-node_modules/
+/node_modules
 *.zip
 *.part*
 *.log
@@ -18,6 +18,14 @@ projection33/
 /build-input/upload-plan-r62.json
 /_pages/
 /_site/
+/out/r71/
+/__pycache__/
+/_baseline/
+/_r66/
+/_r68/
+/_r69/
+/_r70/
+/_r71/
 /scripts/__pycache__/
 
 # Local restoration evidence; private checkpoints are not public site assets.

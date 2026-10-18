@@ -1,0 +1,139 @@
+{
+  "schema": "r71-intermediate-browser-evidence/v1",
+  "classification": "intermediate-pre-fix; not final approval evidence",
+  "commit": "58c979b1e3605ebb61964d1dd65934a96168ddcf",
+  "runtime": {
+    "candidate": {
+      "html": {
+        "path": "_pages/docs/index.html",
+        "sha256": "cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad"
+      },
+      "renderer": {
+        "path": "_pages/docs/dist/phase1.js",
+        "sha256": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+      }
+    },
+    "baseline": {
+      "html": {
+        "path": "_r70/docs/index.html",
+        "sha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5"
+      },
+      "renderer": {
+        "path": "_r70/docs/dist/phase1.js",
+        "sha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+      }
+    }
+  },
+  "preflight": {
+    "runId": 39106756667,
+    "runUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39106756667",
+    "jobId": 117614157150,
+    "jobUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39106756667/job/117614157150",
+    "conclusion": "failure",
+    "failedStep": "Apply and validate R71 gameplay candidate",
+    "browser": "141.0.7390.37",
+    "sandbox": true,
+    "physicalGPU": false,
+    "physicalMobile": false,
+    "actualRelay": false,
+    "localCoopCase": {
+      "attempted": true,
+      "mode": "host",
+      "selfId": "qa-host",
+      "peerId": "qa-peer",
+      "peerHp": 0,
+      "worldSteps": 0
+    },
+    "caseSummary": {
+      "attempted": 8,
+      "passed": 6,
+      "failed": 2
+    },
+    "cases": [
+      { "name": "native-difficulty-confirm-and-first-clear", "status": "passed", "durationMs": 64354 },
+      { "name": "mobile-touch-difficulty-portrait-landscape", "status": "passed", "durationMs": 18241 },
+      { "name": "health-cap-bosses-hit-save-upgrade-respawn", "status": "passed", "durationMs": 438000 },
+      { "name": "bleed-admission-guards-native-hurt", "status": "passed", "durationMs": 21738 },
+      { "name": "native-point-drop-probability-and-amount-boundaries", "status": "passed", "durationMs": 13646 },
+      { "name": "map-material-palettes-and-hospital-geometry", "status": "passed", "durationMs": 109549 },
+      {
+        "name": "native-expanded-point-drop-pickup-and-flashlight",
+        "status": "failed",
+        "durationMs": 35497,
+        "classification": "production DrawCommands API incompatibility",
+        "diagnostic": "TypeError: ctx.strokeRect is not a function; stack: paint -> DrawCommands.scope (phase1.js:734) -> r71DrawPointBeacon -> drawProp -> scripts/r71.browser.test.mjs:1130",
+        "impact": "Beacon capture throws; diagnostics report beaconsCaptured=false, nativeBeaconCount=2, lastCaptureBeaconCount=0, lastCaptureBeaconCommands=0; the pickup/flashlight case does not complete.",
+        "cause": "R71 beacon drawing calls strokeRect, while the shipped DrawCommands scope only supports rect/stroke. Root source inspection confirmed this is a production bug, not a fixture-only failure."
+      },
+      {
+        "name": "two-page-local-coop-health-rewards-expanded-drops",
+        "status": "failed",
+        "durationMs": 24771,
+        "classification": "test fixture source lookup failure",
+        "diagnostic": "Error: Native dist00 boss and melee source are required for the legacy replica import fixture; scripts/r71.browser.test.mjs:1246:49",
+        "observedState": "Candidate remained in dist00 STORY with host qa-host and dead qa-peer (HP 0); fixture aborted before legacy replica import checks."
+      }
+    ]
+  },
+  "passedHealthEvidence": {
+    "baselinePlayerMaxHp": 260,
+    "candidatePlayerMaxHp": 777,
+    "dist00Boss": {
+      "baseMaxHp": 25686,
+      "factor": 0.25,
+      "canonicalMaxHp": 6421.5,
+      "visibleMaxHp": 6666,
+      "hp": 6666
+    },
+    "bossMapsScanned": 28,
+    "bossActorsScanned": 44,
+    "result": "health-cap/boss/hit/save/upgrade/respawn case passed"
+  },
+  "nativeEnemyHit": {
+    "result": "hit",
+    "sourceId": "dist00:story-patrol:0:0",
+    "sourceIsRoomEnemy": true,
+    "attackId": 1,
+    "damage": 6.558387096774195,
+    "playerHpBefore": 700,
+    "playerHpAfter": 694.9041332258065,
+    "prepared": true,
+    "committed": true,
+    "nativeAttackError": null,
+    "admission": {
+      "enemyDistance": 0.5499999999999972,
+      "homeDistance": 0,
+      "explorationLeash": 9,
+      "explorationLimit": 7.15,
+      "aggro": 12,
+      "attackRange": 1.45,
+      "lineOfSight": true,
+      "nativeCanPrepare": true
+    }
+  },
+  "pairedProfile": {
+    "artifactId": 12128469746,
+    "artifactUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39106756667/artifacts/12128469746",
+    "sha256": "483bc006aa3971445ae2d67f6d10e3a87c52df10b8cd69914a36e18077fdd08e",
+    "status": "success; intermediate because renderer production fix is pending",
+    "movementMeanMs": { "baseline": 478.8167, "candidate": 478.0222, "changePercent": -0.166, "regressionFlag": false },
+    "egoMeanMs": { "baseline": 437.1797, "candidate": 451.9716, "changePercent": 3.383, "regressionFlag": false },
+    "note": "A fresh full ABBA is required after the beacon compatibility fix; do not use this profile for final approval."
+  },
+  "preflightArtifact": {
+    "id": 12128972568,
+    "name": "r71-gameplay-preflight",
+    "url": "https://github.com/kjb7876-lang/m0/actions/runs/39106756667/artifacts/12128972568",
+    "sha256": "4603534322fbec720523ba7116baa54bd00096ea26910ab2a1f466bd7385f224",
+    "sizeBytes": 5597704,
+    "files": 16
+  },
+  "pagesRun": {
+    "runId": 39106759668,
+    "runUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39106759668",
+    "buildJobId": 117614167233,
+    "buildJobUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39106759668/job/117614167233",
+    "statusAtCapture": "in_progress",
+    "stepAtCapture": "Profile R70 first, then build and validate R71"
+  }
+}

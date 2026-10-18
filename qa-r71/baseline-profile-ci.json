@@ -1,0 +1,1786 @@
+{
+  "runId": 39098329927,
+  "commit": "0b6ea08a9113bf4af5bf110747a3f48b63bb91fc",
+  "gameBaseline": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+  "environment": "GitHub Actions Ubuntu 22.04, Playwright 1.56 managed Chromium sandboxed, SwiftShader; not physical user GPU",
+  "runs": [
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "p50Ms": 500,
+        "p95Ms": 533.2999999999993,
+        "p99Ms": 549.9000000000015,
+        "meanMs": 478.81587301587297,
+        "maxMs": 550,
+        "over50ms": 63
+      },
+      "draw": {
+        "count": 66,
+        "p50Ms": 38.199999999953434,
+        "p95Ms": 51.29999999993015,
+        "p99Ms": 58.40000000002328,
+        "meanMs": 35.766666666671604,
+        "maxMs": 83.30000000004657,
+        "over50ms": 7
+      },
+      "tick": {
+        "count": 396,
+        "p50Ms": 0.30000000004656613,
+        "p95Ms": 0.6999999999534339,
+        "p99Ms": 1.599999999976717,
+        "meanMs": 0.4565656565663621,
+        "maxMs": 30.099999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 501,
+        "p95Ms": 523,
+        "p99Ms": 542,
+        "meanMs": 477.16923076923075,
+        "maxMs": 545,
+        "over50ms": 65
+      },
+      "elapsedMs": 30165.399999999998,
+      "simulationSeconds": 6.60000000000003,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 331.8412698412698,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.03174603174602
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5849,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 60,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000007,
+        "p99Ms": 533.3000000000029,
+        "meanMs": 478.2873015873016,
+        "maxMs": 549.9000000000015,
+        "over50ms": 63
+      },
+      "draw": {
+        "count": 66,
+        "p50Ms": 38.0999999998603,
+        "p95Ms": 49.300000000046566,
+        "p99Ms": 57.60000000009313,
+        "meanMs": 33.91515151515363,
+        "maxMs": 71.69999999995343,
+        "over50ms": 3
+      },
+      "tick": {
+        "count": 396,
+        "p50Ms": 0.30000000004656613,
+        "p95Ms": 0.6000000000931323,
+        "p99Ms": 0.7000000001862645,
+        "meanMs": 0.3527777777776602,
+        "maxMs": 5.199999999953434,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 65,
+        "p50Ms": 502,
+        "p95Ms": 522,
+        "p99Ms": 530,
+        "meanMs": 477.2769230769231,
+        "maxMs": 544,
+        "over50ms": 65
+      },
+      "elapsedMs": 30132.100000000002,
+      "simulationSeconds": 6.600000000000035,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 331.8888888888889,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5847,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 58,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 67,
+        "p50Ms": 433.3999999999942,
+        "p95Ms": 533.3000000000029,
+        "p99Ms": 583.3000000000029,
+        "meanMs": 451.97313432835824,
+        "maxMs": 583.4000000000015,
+        "over50ms": 67
+      },
+      "draw": {
+        "count": 69,
+        "p50Ms": 21.0999999998603,
+        "p95Ms": 43.60000000009313,
+        "p99Ms": 73.19999999995343,
+        "meanMs": 26.47101449275025,
+        "maxMs": 73.30000000004657,
+        "over50ms": 2
+      },
+      "tick": {
+        "count": 414,
+        "p50Ms": 0.8000000000465661,
+        "p95Ms": 4.2000000001862645,
+        "p99Ms": 11,
+        "meanMs": 1.4285024154592747,
+        "maxMs": 22.5,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 68,
+        "p50Ms": 437,
+        "p95Ms": 523,
+        "p99Ms": 583,
+        "meanMs": 451.38235294117646,
+        "maxMs": 593,
+        "over50ms": 68
+      },
+      "elapsedMs": 30282.2,
+      "simulationSeconds": 6.900000000000061,
+      "hits": 176,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 2,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 20,
+        "projectiles": 1
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 3,
+        "median": 10.699999999953434,
+        "p95": 10.699999999953434,
+        "p99": 10.699999999953434,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 10.699999999953434,
+          "drawCalls": 49,
+          "geometries": 337,
+          "textures": 25,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 487.5074626865672,
+        "textureUploads": 0.746268656716418,
+        "bufferUploads": 215.0597014925373
+      },
+      "counterDelta": {
+        "created": 1112,
+        "removed": 1174,
+        "styleReplacements": 221,
+        "geometryUpdates": 6695,
+        "imageBufferReuseR70": 867,
+        "unchangedUVUploadsSkippedR70": 813,
+        "solidPaintReuseR70": 716,
+        "imagePaintReuseR70": 131
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 67,
+        "p50Ms": 433.40000000000146,
+        "p95Ms": 533.3000000000029,
+        "p99Ms": 550,
+        "meanMs": 451.72238805970153,
+        "maxMs": 599.9000000000015,
+        "over50ms": 67
+      },
+      "draw": {
+        "count": 69,
+        "p50Ms": 19.800000000046566,
+        "p95Ms": 47.89999999990687,
+        "p99Ms": 69.30000000004657,
+        "meanMs": 26.44927536234921,
+        "maxMs": 84.70000000018626,
+        "over50ms": 4
+      },
+      "tick": {
+        "count": 414,
+        "p50Ms": 0.8999999999068677,
+        "p95Ms": 3.2000000001862645,
+        "p99Ms": 13.699999999953434,
+        "meanMs": 1.578743961348383,
+        "maxMs": 23.600000000093132,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 68,
+        "p50Ms": 440,
+        "p95Ms": 529,
+        "p99Ms": 548,
+        "meanMs": 451.61764705882354,
+        "maxMs": 595,
+        "over50ms": 68
+      },
+      "elapsedMs": 30265.4,
+      "simulationSeconds": 6.900000000000061,
+      "hits": 176,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 136,
+      "peakProjectiles": 3,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 14,
+        "projectiles": 2
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 3,
+        "median": 10.5,
+        "p95": 10.5,
+        "p99": 10.5,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 8.599999999860302,
+          "drawCalls": 46,
+          "geometries": 279,
+          "textures": 23,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 429.6865671641791,
+        "textureUploads": 0.7014925373134329,
+        "bufferUploads": 226.71641791044777
+      },
+      "counterDelta": {
+        "created": 1124,
+        "removed": 1233,
+        "styleReplacements": 213,
+        "geometryUpdates": 7210,
+        "imageBufferReuseR70": 768,
+        "unchangedUVUploadsSkippedR70": 713,
+        "solidPaintReuseR70": 707,
+        "imagePaintReuseR70": 126
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    }
+  ],
+  "profiles": [
+    {
+      "scenario": "movement",
+      "durationMs": 15000,
+      "rawProfile": "out/r71/movement-r70.cpuprofile.json",
+      "sampleCount": 13829,
+      "profileDurationMs": 16209.591,
+      "topFunctions": [
+        {
+          "functionName": "(program)",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 14942351,
+          "samples": 12684,
+          "selfSampleMs": 14942.351,
+          "shareOfTopSamples": 0.9384141111256673
+        },
+        {
+          "functionName": "texSubImage2D",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 619823,
+          "samples": 567,
+          "selfSampleMs": 619.823,
+          "shareOfTopSamples": 0.03892631417909032
+        },
+        {
+          "functionName": "geometry",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 941,
+          "column": 11,
+          "selfSampleMicros": 29222,
+          "samples": 27,
+          "selfSampleMs": 29.222,
+          "shareOfTopSamples": 0.0018352090079609461
+        },
+        {
+          "functionName": "explorationBlocked",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 382,
+          "column": 28,
+          "selfSampleMicros": 24326,
+          "samples": 20,
+          "selfSampleMs": 24.326,
+          "shareOfTopSamples": 0.0015277289140941063
+        },
+        {
+          "functionName": "intersectConvex",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 793,
+          "column": 25,
+          "selfSampleMicros": 23921,
+          "samples": 18,
+          "selfSampleMs": 23.921,
+          "shareOfTopSamples": 0.0015022939798587979
+        },
+        {
+          "functionName": "(garbage collector)",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 23644,
+          "samples": 15,
+          "selfSampleMs": 23.644,
+          "shareOfTopSamples": 0.0014848977408879818
+        },
+        {
+          "functionName": "texturedFloor",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 5443,
+          "column": 24,
+          "selfSampleMicros": 18998,
+          "samples": 16,
+          "selfSampleMs": 18.998,
+          "shareOfTopSamples": 0.0011931182237096042
+        },
+        {
+          "functionName": "drawImage",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 764,
+          "column": 12,
+          "selfSampleMicros": 18802,
+          "samples": 16,
+          "selfSampleMs": 18.802,
+          "shareOfTopSamples": 0.00118080897158585
+        },
+        {
+          "functionName": "pathTriangles",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 784,
+          "column": 23,
+          "selfSampleMicros": 17836,
+          "samples": 16,
+          "selfSampleMs": 17.836,
+          "shareOfTopSamples": 0.0011201419432616327
+        },
+        {
+          "functionName": "render",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1094,
+          "column": 9,
+          "selfSampleMicros": 13441,
+          "samples": 10,
+          "selfSampleMs": 13.441,
+          "shareOfTopSamples": 0.0008441258050784708
+        },
+        {
+          "functionName": "needsUpdate",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 1759,
+          "column": 22,
+          "selfSampleMicros": 12289,
+          "samples": 19,
+          "selfSampleMs": 12.289,
+          "shareOfTopSamples": 0.0007717775476980379
+        },
+        {
+          "functionName": "push",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 759,
+          "column": 7,
+          "selfSampleMicros": 11829,
+          "samples": 11,
+          "selfSampleMs": 11.829,
+          "shareOfTopSamples": 0.0007428884865912679
+        },
+        {
+          "functionName": "projectPoint",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 5443,
+          "column": 75,
+          "selfSampleMicros": 11641,
+          "samples": 9,
+          "selfSampleMs": 11.641,
+          "shareOfTopSamples": 0.0007310816529215445
+        },
+        {
+          "functionName": "Float32BufferAttribute",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 17950,
+          "column": 13,
+          "selfSampleMicros": 10977,
+          "samples": 10,
+          "selfSampleMs": 10.977,
+          "shareOfTopSamples": 0.0006893809212369894
+        },
+        {
+          "functionName": "sameStyleKey24",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 926,
+          "column": 24,
+          "selfSampleMicros": 10908,
+          "samples": 11,
+          "selfSampleMs": 10.908,
+          "shareOfTopSamples": 0.0006850475620709739
+        },
+        {
+          "functionName": "contextualWallOcclusion54",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1435,
+          "column": 35,
+          "selfSampleMicros": 9805,
+          "samples": 9,
+          "selfSampleMs": 9.805,
+          "shareOfTopSamples": 0.0006157766177214796
+        },
+        {
+          "functionName": "sameTranslatedScreenValue24",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 905,
+          "column": 37,
+          "selfSampleMicros": 9789,
+          "samples": 9,
+          "selfSampleMs": 9.789,
+          "shareOfTopSamples": 0.000614771780813418
+        },
+        {
+          "functionName": "setProgram",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 18407,
+          "column": 22,
+          "selfSampleMicros": 9028,
+          "samples": 7,
+          "selfSampleMs": 9.028,
+          "shareOfTopSamples": 0.0005669792253737396
+        },
+        {
+          "functionName": "updateMatrixWorld",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 13067,
+          "column": 19,
+          "selfSampleMicros": 8759,
+          "samples": 9,
+          "selfSampleMs": 8.759,
+          "shareOfTopSamples": 0.0005500854048569546
+        },
+        {
+          "functionName": "(anonymous)",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 5443,
+          "column": 525,
+          "selfSampleMicros": 8641,
+          "samples": 8,
+          "selfSampleMs": 8.641,
+          "shareOfTopSamples": 0.0005426747326600005
+        },
+        {
+          "functionName": "worldPoint",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 940,
+          "column": 13,
+          "selfSampleMicros": 7693,
+          "samples": 7,
+          "selfSampleMs": 7.693,
+          "shareOfTopSamples": 0.0004831381458573526
+        },
+        {
+          "functionName": "ellipse",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 721,
+          "column": 10,
+          "selfSampleMicros": 7547,
+          "samples": 7,
+          "selfSampleMs": 7.547,
+          "shareOfTopSamples": 0.0004739690090712908
+        },
+        {
+          "functionName": "ray",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 6638,
+          "column": 13,
+          "selfSampleMicros": 6958,
+          "samples": 4,
+          "selfSampleMs": 6.958,
+          "shareOfTopSamples": 0.0004369784503932743
+        },
+        {
+          "functionName": "WebGLRenderer.renderBufferDirect",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 17233,
+          "column": 38,
+          "selfSampleMicros": 6911,
+          "samples": 6,
+          "selfSampleMs": 6.911,
+          "shareOfTopSamples": 0.00043402674197584346
+        },
+        {
+          "functionName": "getParameters",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 7357,
+          "column": 24,
+          "selfSampleMicros": 5475,
+          "samples": 5,
+          "selfSampleMs": 5.475,
+          "shareOfTopSamples": 0.00034384262947731773
+        },
+        {
+          "functionName": "imageUV",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 795,
+          "column": 17,
+          "selfSampleMicros": 5457,
+          "samples": 5,
+          "selfSampleMs": 5.457,
+          "shareOfTopSamples": 0.00034271218795574847
+        },
+        {
+          "functionName": "generateUUID",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 2317,
+          "column": 22,
+          "selfSampleMicros": 5440,
+          "samples": 4,
+          "selfSampleMs": 5.44,
+          "shareOfTopSamples": 0.00034164454874093306
+        },
+        {
+          "functionName": "geometry",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 6643,
+          "column": 19,
+          "selfSampleMicros": 5428,
+          "samples": 3,
+          "selfSampleMs": 5.428,
+          "shareOfTopSamples": 0.0003408909210598869
+        },
+        {
+          "functionName": "intersectsObject",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 25925,
+          "column": 18,
+          "selfSampleMicros": 5423,
+          "samples": 5,
+          "selfSampleMs": 5.423,
+          "shareOfTopSamples": 0.00034057690952611766
+        },
+        {
+          "functionName": "bufferData",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 5397,
+          "samples": 5,
+          "selfSampleMs": 5.397,
+          "shareOfTopSamples": 0.0003389440495505176
+        },
+        {
+          "functionName": "point",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 715,
+          "column": 8,
+          "selfSampleMicros": 5371,
+          "samples": 5,
+          "selfSampleMs": 5.371,
+          "shareOfTopSamples": 0.0003373111895749176
+        },
+        {
+          "functionName": "record",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 2001,
+          "column": 20,
+          "selfSampleMicros": 5230,
+          "samples": 4,
+          "selfSampleMs": 5.23,
+          "shareOfTopSamples": 0.000328456064322625
+        },
+        {
+          "functionName": "frame",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 325,
+          "column": 45,
+          "selfSampleMicros": 4880,
+          "samples": 4,
+          "selfSampleMs": 4.88,
+          "shareOfTopSamples": 0.0003064752569587782
+        },
+        {
+          "functionName": "(anonymous)",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 768,
+          "column": 259,
+          "selfSampleMicros": 4877,
+          "samples": 4,
+          "selfSampleMs": 4.877,
+          "shareOfTopSamples": 0.00030628685003851664
+        },
+        {
+          "functionName": "triangulateShape",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 34997,
+          "column": 25,
+          "selfSampleMicros": 4865,
+          "samples": 5,
+          "selfSampleMs": 4.865,
+          "shareOfTopSamples": 0.00030553322235747047
+        }
+      ]
+    },
+    {
+      "scenario": "ego-stress",
+      "durationMs": 15000,
+      "rawProfile": "out/r71/ego-stress-r70.cpuprofile.json",
+      "sampleCount": 13047,
+      "profileDurationMs": 15414.822,
+      "topFunctions": [
+        {
+          "functionName": "(program)",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 14224139,
+          "samples": 11981,
+          "selfSampleMs": 14224.139,
+          "shareOfTopSamples": 0.9568160910354796
+        },
+        {
+          "functionName": "explorationBlocked",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 382,
+          "column": 28,
+          "selfSampleMicros": 68459,
+          "samples": 59,
+          "selfSampleMs": 68.459,
+          "shareOfTopSamples": 0.0046050360430390826
+        },
+        {
+          "functionName": "geometry",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 941,
+          "column": 11,
+          "selfSampleMicros": 60953,
+          "samples": 55,
+          "selfSampleMs": 60.953,
+          "shareOfTopSamples": 0.004100129448741016
+        },
+        {
+          "functionName": "texSubImage2D",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 56187,
+          "samples": 49,
+          "selfSampleMs": 56.187,
+          "shareOfTopSamples": 0.0037795346141520757
+        },
+        {
+          "functionName": "(garbage collector)",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 48343,
+          "samples": 30,
+          "selfSampleMs": 48.343,
+          "shareOfTopSamples": 0.003251891751685511
+        },
+        {
+          "functionName": "worldPoint",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 940,
+          "column": 13,
+          "selfSampleMicros": 22507,
+          "samples": 21,
+          "selfSampleMs": 22.507,
+          "shareOfTopSamples": 0.0015139798451727405
+        },
+        {
+          "functionName": "ellipse",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 721,
+          "column": 10,
+          "selfSampleMicros": 21771,
+          "samples": 17,
+          "selfSampleMs": 21.771,
+          "shareOfTopSamples": 0.0014644712849005079
+        },
+        {
+          "functionName": "getParameters",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 7357,
+          "column": 24,
+          "selfSampleMicros": 20103,
+          "samples": 21,
+          "selfSampleMs": 20.103,
+          "shareOfTopSamples": 0.0013522698195009375
+        },
+        {
+          "functionName": "texturedFloor",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 5443,
+          "column": 24,
+          "selfSampleMicros": 19885,
+          "samples": 16,
+          "selfSampleMs": 19.885,
+          "shareOfTopSamples": 0.001337605599202912
+        },
+        {
+          "functionName": "explorationPath",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 592,
+          "column": 25,
+          "selfSampleMicros": 19590,
+          "samples": 18,
+          "selfSampleMs": 19.59,
+          "shareOfTopSamples": 0.0013177618148546668
+        },
+        {
+          "functionName": "render",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1094,
+          "column": 9,
+          "selfSampleMicros": 18571,
+          "samples": 19,
+          "selfSampleMs": 18.571,
+          "shareOfTopSamples": 0.0012492166750212362
+        },
+        {
+          "functionName": "pathTriangles",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 784,
+          "column": 23,
+          "selfSampleMicros": 16789,
+          "samples": 14,
+          "selfSampleMs": 16.789,
+          "shareOfTopSamples": 0.0011293467641447167
+        },
+        {
+          "functionName": "clearPath3",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 1351,
+          "column": 20,
+          "selfSampleMicros": 16674,
+          "samples": 13,
+          "selfSampleMs": 16.674,
+          "shareOfTopSamples": 0.0011216110516021804
+        },
+        {
+          "functionName": "push",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 759,
+          "column": 7,
+          "selfSampleMicros": 16365,
+          "samples": 15,
+          "selfSampleMs": 16.365,
+          "shareOfTopSamples": 0.0011008255283357132
+        },
+        {
+          "functionName": "drawImage",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 764,
+          "column": 12,
+          "selfSampleMicros": 16301,
+          "samples": 15,
+          "selfSampleMs": 16.301,
+          "shareOfTopSamples": 0.0010965204361381277
+        },
+        {
+          "functionName": "ray",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 6638,
+          "column": 13,
+          "selfSampleMicros": 15627,
+          "samples": 13,
+          "selfSampleMs": 15.627,
+          "shareOfTopSamples": 0.0010511824339323062
+        },
+        {
+          "functionName": "needsUpdate",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 1759,
+          "column": 22,
+          "selfSampleMicros": 14271,
+          "samples": 24,
+          "selfSampleMs": 14.271,
+          "shareOfTopSamples": 0.0009599682929959648
+        },
+        {
+          "functionName": "Float32BufferAttribute",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.core.js",
+          "line": 17950,
+          "column": 13,
+          "selfSampleMicros": 13890,
+          "samples": 12,
+          "selfSampleMs": 13.89,
+          "shareOfTopSamples": 0.000934339541007214
+        },
+        {
+          "functionName": "sameTranslatedScreenValue24",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 905,
+          "column": 37,
+          "selfSampleMicros": 13798,
+          "samples": 18,
+          "selfSampleMs": 13.798,
+          "shareOfTopSamples": 0.000928150970973185
+        },
+        {
+          "functionName": "WebGLRenderer.renderBufferDirect",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 17233,
+          "column": 38,
+          "selfSampleMicros": 12984,
+          "samples": 12,
+          "selfSampleMs": 12.984,
+          "shareOfTopSamples": 0.0008733955795851452
+        },
+        {
+          "functionName": "applySpatialPolicy",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1066,
+          "column": 21,
+          "selfSampleMicros": 12820,
+          "samples": 11,
+          "selfSampleMs": 12.82,
+          "shareOfTopSamples": 0.0008623637808288325
+        },
+        {
+          "functionName": "(anonymous)",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 942,
+          "column": 218,
+          "selfSampleMicros": 11790,
+          "samples": 11,
+          "selfSampleMs": 11.79,
+          "shareOfTopSamples": 0.0007930787032739419
+        },
+        {
+          "functionName": "sameStyleKey24",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 926,
+          "column": 24,
+          "selfSampleMicros": 11262,
+          "samples": 9,
+          "selfSampleMs": 11.262,
+          "shareOfTopSamples": 0.0007575616926438621
+        },
+        {
+          "functionName": "restore",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 707,
+          "column": 10,
+          "selfSampleMicros": 10864,
+          "samples": 10,
+          "selfSampleMs": 10.864,
+          "shareOfTopSamples": 0.0007307894005401277
+        },
+        {
+          "functionName": "contextualWallOcclusion54",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1435,
+          "column": 35,
+          "selfSampleMicros": 10854,
+          "samples": 10,
+          "selfSampleMs": 10.854,
+          "shareOfTopSamples": 0.0007301167298842549
+        },
+        {
+          "functionName": "render",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 1582,
+          "column": 9,
+          "selfSampleMicros": 10787,
+          "samples": 9,
+          "selfSampleMs": 10.787,
+          "shareOfTopSamples": 0.0007256098364899076
+        },
+        {
+          "functionName": "getBoundingClientRect",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 9953,
+          "samples": 10,
+          "selfSampleMs": 9.953,
+          "shareOfTopSamples": 0.0006695091037901224
+        },
+        {
+          "functionName": "moveAI3",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 1087,
+          "column": 17,
+          "selfSampleMicros": 9832,
+          "samples": 9,
+          "selfSampleMs": 9.832,
+          "shareOfTopSamples": 0.0006613697888540625
+        },
+        {
+          "functionName": "intersectConvex",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 793,
+          "column": 25,
+          "selfSampleMicros": 9789,
+          "samples": 9,
+          "selfSampleMs": 9.789,
+          "shareOfTopSamples": 0.0006584773050338098
+        },
+        {
+          "functionName": "snapshotStructuredValue24",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 898,
+          "column": 35,
+          "selfSampleMicros": 8966,
+          "samples": 14,
+          "selfSampleMs": 8.966,
+          "shareOfTopSamples": 0.0006031165100554846
+        },
+        {
+          "functionName": "setProgram",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 18407,
+          "column": 22,
+          "selfSampleMicros": 8727,
+          "samples": 8,
+          "selfSampleMs": 8.727,
+          "shareOfTopSamples": 0.0005870396813801265
+        },
+        {
+          "functionName": "refreshUniformsCommon",
+          "sourceURL": "http://127.0.0.1:4391/vendor/three/build/three.module.js",
+          "line": 15139,
+          "column": 32,
+          "selfSampleMicros": 8674,
+          "samples": 8,
+          "selfSampleMs": 8.674,
+          "shareOfTopSamples": 0.0005834745269040011
+        },
+        {
+          "functionName": "bindVertexArray",
+          "sourceURL": "",
+          "line": 0,
+          "column": 0,
+          "selfSampleMicros": 8481,
+          "samples": 8,
+          "selfSampleMs": 8.481,
+          "shareOfTopSamples": 0.0005704919832456574
+        },
+        {
+          "functionName": "capture",
+          "sourceURL": "http://127.0.0.1:4391/dist/phase1.js",
+          "line": 649,
+          "column": 10,
+          "selfSampleMicros": 8089,
+          "samples": 7,
+          "selfSampleMs": 8.089,
+          "shareOfTopSamples": 0.0005441232935354467
+        },
+        {
+          "functionName": "tick",
+          "sourceURL": "http://127.0.0.1:4391/",
+          "line": 305,
+          "column": 14,
+          "selfSampleMicros": 8021,
+          "samples": 6,
+          "selfSampleMs": 8.021,
+          "shareOfTopSamples": 0.0005395491330755122
+        }
+      ]
+    }
+  ]
+}

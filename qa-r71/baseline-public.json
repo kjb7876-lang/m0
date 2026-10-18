@@ -1,0 +1,28 @@
+{
+  "baselineCommit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+  "gameURL": "https://kjb7876-lang.github.io/m0/",
+  "publicVerification": {
+    "method": "GitHub Actions post-deploy actual HTTP byte hash checks",
+    "runId": 39091224043,
+    "runURL": "https://github.com/kjb7876-lang/m0/actions/runs/39091224043",
+    "logUTC": "2026-10-18T02:52:56.8954429Z",
+    "files": [
+      {
+        "path": "index.html",
+        "sha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+        "bytes": 5975598,
+        "status": "matched"
+      },
+      {
+        "path": "dist/phase1.js",
+        "sha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4",
+        "bytes": 544652,
+        "status": "matched"
+      }
+    ]
+  },
+  "localReconstructionMatches": true,
+  "newWorkBranch": "work/storyworld-r71-gameplay-20261018",
+  "priorWorktreeUntouched": "/workspace/m0-perf",
+  "userTimezone": "Asia/Seoul"
+}

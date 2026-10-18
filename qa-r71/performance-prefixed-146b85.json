@@ -1,0 +1,2552 @@
+{
+  "reportKind": "pre-fix diagnostic only",
+  "status": "not final approval evidence",
+  "interpretation": "This run used the pre-fix candidate HTML. A 4x canonical boss-HP scaling regression (R71 25686 vs R70 6421.5) was identified afterward; the corrected final candidate must receive a new paired run.",
+  "provenance": {
+    "repository": "kjb7876-lang/m0",
+    "workflowRunId": 39103014083,
+    "workflowJobId": 117602971044,
+    "commit": "1143fb53291b7686bc52b94fc3a644e968ac1ac2",
+    "artifact": {
+      "name": "r71-paired-profile",
+      "id": 12127662061,
+      "sizeBytes": 4947641,
+      "sha256": "61dd9916f9bd227de9cf96778dc0717af962326add6f5f8e25f40e095125b5b6",
+      "url": "https://github.com/kjb7876-lang/m0/actions/runs/39103014083/artifacts/12127662061"
+    },
+    "baseline": {
+      "gameCommit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+      "htmlSha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+      "rendererSha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+    },
+    "candidate": {
+      "htmlSha256": "146b85c339a687bb563d716a0a9956118d12894387e573f1b8e8905998f87cad",
+      "rendererSha256": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c",
+      "commit": "1143fb53291b7686bc52b94fc3a644e968ac1ac2",
+      "approval": "pre-fix / not approved"
+    }
+  },
+  "environment": {
+    "runnerOS": "Ubuntu 22.04.5 (GitHub Actions ubuntu-22.04)",
+    "runnerImage": "ubuntu-22.04, 20261012.322.1",
+    "node": "v22.23.3",
+    "playwright": "1.56.0",
+    "chromiumVersion": "141.0.7390.37",
+    "browserMode": "headless; chromiumSandbox:true",
+    "rendererDevice": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "physicalGPU": false,
+    "viewport": {
+      "width": 1365,
+      "height": 850,
+      "deviceScaleFactor": 1
+    },
+    "seed": 70018
+  },
+  "result": {
+    "stage": "baseline-vs-candidate",
+    "comparisons": [
+      {
+        "scenario": "movement",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 424.6302816901408,
+          "p50Ms": 449.9500000000007,
+          "p95Ms": 466.7000000000007,
+          "drawP95Ms": 47.09999999997672,
+          "drawCallsPerFrame": 329.9577464788732,
+          "bufferUploadsPerFrame": 205.5211267605634,
+          "materialReplacementsPerFrame": 0.7746478873239436
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 424.5140845070423,
+          "p50Ms": 450,
+          "p95Ms": 466.70000000000255,
+          "drawP95Ms": 47.59999999997672,
+          "drawCallsPerFrame": 329.9366197183099,
+          "bufferUploadsPerFrame": 205.53521126760563,
+          "materialReplacementsPerFrame": 0.7746478873239436
+        },
+        "meanFrameReductionFraction": 0.00027364318586986514,
+        "p95ReductionFraction": -3.9968028886505635e-15,
+        "regressionFlag": false
+      },
+      {
+        "scenario": "ego-stress",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 388.1001068551701,
+          "p50Ms": 383.2999999999993,
+          "p95Ms": 458.29999999999745,
+          "drawP95Ms": 44.20000000006985,
+          "drawCallsPerFrame": 467.1804208449778,
+          "bufferUploadsPerFrame": 248.537152720697,
+          "materialReplacementsPerFrame": 3.5064113102087786
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 392.46123481781376,
+          "p50Ms": 383.3000000000011,
+          "p95Ms": 449.99999999999636,
+          "drawP95Ms": 46.24999999994179,
+          "drawCallsPerFrame": 440.90249662618083,
+          "bufferUploadsPerFrame": 244.65587044534414,
+          "materialReplacementsPerFrame": 3.382422402159244
+        },
+        "meanFrameReductionFraction": -0.011237121262301253,
+        "p95ReductionFraction": 0.01811040802967734,
+        "regressionFlag": false
+      }
+    ],
+    "profiles": []
+  },
+  "runRows": [
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 71,
+        "p50Ms": 449.90000000000146,
+        "p95Ms": 466.7000000000007,
+        "p99Ms": 483.40000000000146,
+        "meanMs": 425.56901408450705,
+        "maxMs": 583.3000000000029,
+        "over50ms": 71
+      },
+      "draw": {
+        "count": 74,
+        "p50Ms": 38.800000000046566,
+        "p95Ms": 47.90000000002328,
+        "p99Ms": 54,
+        "meanMs": 33.971621621620365,
+        "maxMs": 55.5,
+        "over50ms": 4
+      },
+      "tick": {
+        "count": 444,
+        "p50Ms": 0.2999999999301508,
+        "p95Ms": 0.6999999999534339,
+        "p99Ms": 0.9000000000232831,
+        "meanMs": 0.34617117117185287,
+        "maxMs": 4.5,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 71,
+        "p50Ms": 449,
+        "p95Ms": 466,
+        "p99Ms": 478,
+        "meanMs": 424.53521126760563,
+        "maxMs": 576,
+        "over50ms": 71
+      },
+      "elapsedMs": 30215.4,
+      "simulationSeconds": 7.400000000000075,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 9,
+        "median": 37,
+        "p95": 40.29999999993015,
+        "p99": 40.29999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 40.29999999993015,
+          "drawCalls": 1,
+          "geometries": 195,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 329.9577464788732,
+        "textureUploads": 1.4647887323943662,
+        "bufferUploads": 205.5211267605634
+      },
+      "counterDelta": {
+        "created": 1339,
+        "removed": 1338,
+        "styleReplacements": 55,
+        "geometryUpdates": 6702,
+        "imageBufferReuseR70": 73,
+        "unchangedUVUploadsSkippedR70": 65,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 71,
+        "p50Ms": 450,
+        "p95Ms": 466.70000000000437,
+        "p99Ms": 483.29999999999563,
+        "meanMs": 423.6929577464789,
+        "maxMs": 483.29999999999563,
+        "over50ms": 71
+      },
+      "draw": {
+        "count": 74,
+        "p50Ms": 39.699999999953434,
+        "p95Ms": 46.90000000002328,
+        "p99Ms": 49.699999999953434,
+        "meanMs": 34.1121621621738,
+        "maxMs": 57.300000000046566,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 444,
+        "p50Ms": 0.30000000004656613,
+        "p95Ms": 0.6999999999534339,
+        "p99Ms": 1.5,
+        "meanMs": 0.38671171171108243,
+        "maxMs": 8.699999999953434,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 71,
+        "p50Ms": 448,
+        "p95Ms": 464,
+        "p99Ms": 478,
+        "meanMs": 422.7464788732394,
+        "maxMs": 482,
+        "over50ms": 71
+      },
+      "elapsedMs": 30082.2,
+      "simulationSeconds": 7.40000000000007,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 5,
+        "median": 36.800000000046566,
+        "p95": 37.59999999997672,
+        "p99": 37.59999999997672,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 37.59999999997672,
+          "drawCalls": 1,
+          "geometries": 195,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "perFrame": {
+        "drawCalls": 329.9154929577465,
+        "textureUploads": 1.4647887323943662,
+        "bufferUploads": 205.54929577464787
+      },
+      "counterDelta": {
+        "created": 1339,
+        "removed": 1338,
+        "styleReplacements": 55,
+        "geometryUpdates": 6704,
+        "imageBufferReuseR70": 73,
+        "unchangedUVUploadsSkippedR70": 67,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 71,
+        "p50Ms": 450,
+        "p95Ms": 466.7000000000007,
+        "p99Ms": 483.3000000000029,
+        "meanMs": 425.3352112676057,
+        "maxMs": 483.3999999999942,
+        "over50ms": 71
+      },
+      "draw": {
+        "count": 74,
+        "p50Ms": 39.59999999997672,
+        "p95Ms": 48.29999999993015,
+        "p99Ms": 57.300000000046566,
+        "meanMs": 34.227027027021364,
+        "maxMs": 57.699999999953434,
+        "over50ms": 3
+      },
+      "tick": {
+        "count": 444,
+        "p50Ms": 0.30000000004656613,
+        "p95Ms": 0.6999999999534339,
+        "p99Ms": 1,
+        "meanMs": 0.3569819819827686,
+        "maxMs": 3.900000000023283,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 71,
+        "p50Ms": 450,
+        "p95Ms": 470,
+        "p99Ms": 477,
+        "meanMs": 424.2112676056338,
+        "maxMs": 486,
+        "over50ms": 71
+      },
+      "elapsedMs": 30198.800000000003,
+      "simulationSeconds": 7.400000000000075,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 7,
+        "median": 36.199999999953434,
+        "p95": 38.300000000046566,
+        "p99": 38.300000000046566,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 38.300000000046566,
+          "drawCalls": 1,
+          "geometries": 195,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "perFrame": {
+        "drawCalls": 329.9577464788732,
+        "textureUploads": 1.4647887323943662,
+        "bufferUploads": 205.5211267605634
+      },
+      "counterDelta": {
+        "created": 1339,
+        "removed": 1338,
+        "styleReplacements": 55,
+        "geometryUpdates": 6702,
+        "imageBufferReuseR70": 73,
+        "unchangedUVUploadsSkippedR70": 65,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 71,
+        "p50Ms": 450,
+        "p95Ms": 466.7000000000007,
+        "p99Ms": 466.70000000000437,
+        "meanMs": 423.6915492957746,
+        "maxMs": 466.70000000000437,
+        "over50ms": 71
+      },
+      "draw": {
+        "count": 74,
+        "p50Ms": 38.699999999953434,
+        "p95Ms": 46.29999999993015,
+        "p99Ms": 51.699999999953434,
+        "meanMs": 33.80810810811031,
+        "maxMs": 54.20000000006985,
+        "over50ms": 2
+      },
+      "tick": {
+        "count": 444,
+        "p50Ms": 0.2999999999301508,
+        "p95Ms": 0.6000000000931323,
+        "p99Ms": 0.8000000000465661,
+        "meanMs": 0.3250000000006293,
+        "maxMs": 3.599999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 71,
+        "p50Ms": 450,
+        "p95Ms": 463,
+        "p99Ms": 466,
+        "meanMs": 422.98591549295776,
+        "maxMs": 469,
+        "over50ms": 71
+      },
+      "elapsedMs": 30082.1,
+      "simulationSeconds": 7.400000000000075,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 8,
+        "median": 34.90000000002328,
+        "p95": 40.89999999990687,
+        "p99": 40.89999999990687,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 41.09999999997672,
+          "drawCalls": 1,
+          "geometries": 195,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 61,
+        "backdropMeshes": 19,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 329.9577464788732,
+        "textureUploads": 1.4647887323943662,
+        "bufferUploads": 205.5211267605634
+      },
+      "counterDelta": {
+        "created": 1339,
+        "removed": 1338,
+        "styleReplacements": 55,
+        "geometryUpdates": 6702,
+        "imageBufferReuseR70": 73,
+        "unchangedUVUploadsSkippedR70": 65,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 77,
+        "p50Ms": 383.3000000000029,
+        "p95Ms": 483.29999999999563,
+        "p99Ms": 483.3000000000029,
+        "meanMs": 394.35844155844154,
+        "maxMs": 566.7000000000007,
+        "over50ms": 77
+      },
+      "draw": {
+        "count": 79,
+        "p50Ms": 20.900000000023283,
+        "p95Ms": 49.60000000009313,
+        "p99Ms": 63.800000000046566,
+        "meanMs": 25.956962025310265,
+        "maxMs": 83.70000000006985,
+        "over50ms": 4
+      },
+      "tick": {
+        "count": 474,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.799999999930151,
+        "p99Ms": 14.5,
+        "meanMs": 1.4672995780578437,
+        "maxMs": 19.099999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 78,
+        "p50Ms": 385,
+        "p95Ms": 476,
+        "p99Ms": 491,
+        "meanMs": 393.9102564102564,
+        "maxMs": 550,
+        "over50ms": 78
+      },
+      "elapsedMs": 30365.6,
+      "simulationSeconds": 7.9000000000001105,
+      "hits": 209,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 3,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 47,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 148000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 148000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 15,
+        "median": 19.400000000023283,
+        "p95": 24.79999999993015,
+        "p99": 24.79999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 48.09999999997672,
+          "drawCalls": 188,
+          "geometries": 411,
+          "textures": 21,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 449.75324675324674,
+        "textureUploads": 0.8181818181818182,
+        "bufferUploads": 252.93506493506493
+      },
+      "counterDelta": {
+        "created": 1557,
+        "removed": 1535,
+        "styleReplacements": 270,
+        "geometryUpdates": 9200,
+        "imageBufferReuseR70": 901,
+        "unchangedUVUploadsSkippedR70": 865,
+        "solidPaintReuseR70": 851,
+        "imagePaintReuseR70": 158
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 76,
+        "p50Ms": 383.3000000000029,
+        "p95Ms": 466.6999999999971,
+        "p99Ms": 533.3000000000029,
+        "meanMs": 396.4763157894737,
+        "maxMs": 550,
+        "over50ms": 76
+      },
+      "draw": {
+        "count": 78,
+        "p50Ms": 21.5,
+        "p95Ms": 49.199999999953434,
+        "p99Ms": 60.699999999953434,
+        "meanMs": 26.173076923076923,
+        "maxMs": 83,
+        "over50ms": 3
+      },
+      "tick": {
+        "count": 468,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.699999999953434,
+        "p99Ms": 14,
+        "meanMs": 1.440384615384068,
+        "maxMs": 17.699999999953434,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 76,
+        "p50Ms": 384,
+        "p95Ms": 468,
+        "p99Ms": 524,
+        "meanMs": 395.85526315789474,
+        "maxMs": 559,
+        "over50ms": 76
+      },
+      "elapsedMs": 30132.2,
+      "simulationSeconds": 7.8000000000001,
+      "hits": 208,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 2,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 43,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 12,
+        "median": 17.900000000023283,
+        "p95": 27.79999999993015,
+        "p99": 27.79999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 21.699999999953434,
+          "drawCalls": 163,
+          "geometries": 392,
+          "textures": 21,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "perFrame": {
+        "drawCalls": 450.39473684210526,
+        "textureUploads": 0.8421052631578947,
+        "bufferUploads": 250.6578947368421
+      },
+      "counterDelta": {
+        "created": 1518,
+        "removed": 1516,
+        "styleReplacements": 253,
+        "geometryUpdates": 8934,
+        "imageBufferReuseR70": 880,
+        "unchangedUVUploadsSkippedR70": 834,
+        "solidPaintReuseR70": 799,
+        "imagePaintReuseR70": 131
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 78,
+        "p50Ms": 383.2999999999993,
+        "p95Ms": 433.29999999999563,
+        "p99Ms": 483.3999999999942,
+        "meanMs": 388.4461538461539,
+        "maxMs": 516.6000000000022,
+        "over50ms": 78
+      },
+      "draw": {
+        "count": 80,
+        "p50Ms": 19,
+        "p95Ms": 43.29999999993015,
+        "p99Ms": 49.800000000046566,
+        "meanMs": 23.84375000000291,
+        "maxMs": 68.79999999993015,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 480,
+        "p50Ms": 0.9000000000232831,
+        "p95Ms": 3.900000000023283,
+        "p99Ms": 14.400000000023283,
+        "meanMs": 1.5262499999999515,
+        "maxMs": 23.099999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 78,
+        "p50Ms": 381,
+        "p95Ms": 424,
+        "p99Ms": 478,
+        "meanMs": 387.79487179487177,
+        "maxMs": 522,
+        "over50ms": 78
+      },
+      "elapsedMs": 30298.800000000003,
+      "simulationSeconds": 8.000000000000115,
+      "hits": 227,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 2,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 29,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 14,
+        "median": 17.300000000046566,
+        "p95": 31.79999999993015,
+        "p99": 31.79999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 31.79999999993015,
+          "drawCalls": 181,
+          "geometries": 387,
+          "textures": 20,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision",
+        "mapReadabilityR71": {
+          "revision": "regional-material-roles-r71",
+          "theme": "forest",
+          "colors": {
+            "floor": "#c2b48f",
+            "wall": "#747864",
+            "cap": "#b3a581",
+            "edge": "#44483d",
+            "background": "#626b63",
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "luminance": {
+            "floor": 0.46095020507335915,
+            "wall": 0.18066045489407592,
+            "cap": 0.38078951941495587,
+            "edge": 0.06200595003090984,
+            "background": 0.14012912920299392,
+            "hospitalFloor": null,
+            "hospitalWall": null
+          },
+          "contrast": {
+            "floorToWall": 2.215161698644868,
+            "capToWall": 1.867634916495692,
+            "wallToEdge": 2.0593589432563313,
+            "floorToBackground": 2.687385185085639
+          },
+          "sourceAsset": "assets/visual-test/regional-materials-r55.png",
+          "materialsOnly": true,
+          "threeOnly": true,
+          "legacyFallbackPaletteApplied": false,
+          "geometryChanged": false,
+          "assetsChanged": false,
+          "flashlightMaskPreserved": true,
+          "pixelVerified": false,
+          "GPUVerified": false
+        }
+      },
+      "perFrame": {
+        "drawCalls": 431.4102564102564,
+        "textureUploads": 0.6923076923076923,
+        "bufferUploads": 238.65384615384616
+      },
+      "counterDelta": {
+        "created": 1455,
+        "removed": 1438,
+        "styleReplacements": 268,
+        "geometryUpdates": 8704,
+        "imageBufferReuseR70": 893,
+        "unchangedUVUploadsSkippedR70": 841,
+        "solidPaintReuseR70": 868,
+        "imagePaintReuseR70": 124
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 79,
+        "p50Ms": 383.29999999999563,
+        "p95Ms": 433.2999999999993,
+        "p99Ms": 466.59999999999854,
+        "meanMs": 381.8417721518987,
+        "maxMs": 516.7000000000007,
+        "over50ms": 79
+      },
+      "draw": {
+        "count": 81,
+        "p50Ms": 21.099999999976717,
+        "p95Ms": 38.800000000046566,
+        "p99Ms": 51.09999999997672,
+        "meanMs": 24.643209876542922,
+        "maxMs": 65.5,
+        "over50ms": 2
+      },
+      "tick": {
+        "count": 486,
+        "p50Ms": 0.7999999999301508,
+        "p95Ms": 3.599999999976717,
+        "p99Ms": 13.400000000023283,
+        "meanMs": 1.3888888888879307,
+        "maxMs": 24.29999999993015,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 80,
+        "p50Ms": 377,
+        "p95Ms": 428,
+        "p99Ms": 471,
+        "meanMs": 381.45,
+        "maxMs": 519,
+        "over50ms": 80
+      },
+      "elapsedMs": 30165.499999999996,
+      "simulationSeconds": 8.10000000000012,
+      "hits": 244,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 3,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 25,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 148000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 148000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 18,
+        "median": 17.699999999953434,
+        "p95": 24.900000000023283,
+        "p99": 24.900000000023283,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 18.79999999993015,
+          "drawCalls": 167,
+          "geometries": 417,
+          "textures": 20,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "spatialBefore": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "spatialAfter": {
+        "regional55": {
+          "profile": "forest",
+          "arches": 1,
+          "dress": 9,
+          "isolatedMipmaps": true,
+          "staticLighting": true,
+          "collisionChanged": false,
+          "GPUVerified": false
+        },
+        "regionalLightAnchor55": [
+          27,
+          0,
+          18
+        ],
+        "sight24": {
+          "enabled": true,
+          "sharedSingleMask": true,
+          "GPUVerified": false
+        },
+        "normalSurface23": {
+          "built": 0,
+          "refused": 0,
+          "actualFloor": false,
+          "actualWall": false,
+          "GPUVerified": false
+        },
+        "hospitalVisualRevision": "hospital-door-comfort-r35",
+        "hospitalDoorDetails37": false,
+        "hospitalLightAnchor37": null,
+        "wallComfort37": {
+          "normalScale": 0,
+          "emissiveShare": 1,
+          "staticHospitalDirection": true
+        },
+        "wallComfort49": {
+          "isolatedWallMipmaps": false,
+          "mipFilter": "LinearMipmapLinearFilter",
+          "normalLighting": false,
+          "geometryChanged": false,
+          "GPUVerified": false
+        },
+        "hospitalJunctions34": 0,
+        "doorWallCut34": null,
+        "hospitalFloorReady": false,
+        "hospitalRoomsReady": false,
+        "hospitalRoomPieces": 0,
+        "hospitalCutWalls": 0,
+        "defaultDepth": true,
+        "physicalStructures": true,
+        "terrainMeshes": 107,
+        "backdropMeshes": 24,
+        "fogRimMeshes": 0,
+        "regionalBackdropMaterial": "original-region-floor-tile-mild-grade",
+        "contactShadows": "reduced original ellipses in background pass",
+        "lightShadows": "disabled; no depth shadow pass or duplicate receiver",
+        "casterBudget": 0,
+        "casterCount": 0,
+        "shadowMapEnabled": false,
+        "shadowMapSize": 0,
+        "height": {
+          "height": 0,
+          "surfaceId": "original-ground",
+          "presentationOnly": true,
+          "collisionHeightSupported": false
+        },
+        "originalMapReprojectedAsFloor": false,
+        "originalMapBridgeProjectedAsFloor": false,
+        "apronScope30": "native east connectors and hospital south connector; panorama still original",
+        "wallPanelScale30": "shared original maximum wall height; folds split; floor caps",
+        "bridgeMeshes": 0,
+        "sourcePavingAxesPreserved": true,
+        "terrainPatchSource": "assets/visual-test/regional-materials-r55.png",
+        "GPUVerified": false,
+        "collisionStructures": "authored exploration wall AABBs; decorative background rim excluded from collision"
+      },
+      "perFrame": {
+        "drawCalls": 484.60759493670884,
+        "textureUploads": 0.7468354430379747,
+        "bufferUploads": 244.13924050632912
+      },
+      "counterDelta": {
+        "created": 1516,
+        "removed": 1497,
+        "styleReplacements": 277,
+        "geometryUpdates": 9054,
+        "imageBufferReuseR70": 964,
+        "unchangedUVUploadsSkippedR70": 922,
+        "solidPaintReuseR70": 905,
+        "imagePaintReuseR70": 146
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    }
+  ],
+  "rawRunLines": [
+    "2026-10-18T06:10:46.8483432Z R71_PERF_RUN {\"scenario\":\"movement\",\"kind\":\"baseline\",\"index\":0,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":0,\"cast\":null,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":71,\"p50Ms\":449.90000000000146,\"p95Ms\":466.7000000000007,\"p99Ms\":483.40000000000146,\"meanMs\":425.56901408450705,\"maxMs\":583.3000000000029,\"over50ms\":71},\"draw\":{\"count\":74,\"p50Ms\":38.800000000046566,\"p95Ms\":47.90000000002328,\"p99Ms\":54,\"meanMs\":33.971621621620365,\"maxMs\":55.5,\"over50ms\":4},\"tick\":{\"count\":444,\"p50Ms\":0.2999999999301508,\"p95Ms\":0.6999999999534339,\"p99Ms\":0.9000000000232831,\"meanMs\":0.34617117117185287,\"maxMs\":4.5,\"over50ms\":0},\"longTasks\":{\"count\":71,\"p50Ms\":449,\"p95Ms\":466,\"p99Ms\":478,\"meanMs\":424.53521126760563,\"maxMs\":576,\"over50ms\":71},\"elapsedMs\":30215.4,\"simulationSeconds\":7.400000000000075,\"hits\":0,\"motifs\":[],\"peakEffects\":0,\"peakProjectiles\":0,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":0,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"memoryAfter\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":9,\"median\":37,\"p95\":40.29999999993015,\"p99\":40.29999999993015,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":40.29999999993015,\"drawCalls\":1,\"geometries\":195,\"textures\":12,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"perFrame\":{\"drawCalls\":329.9577464788732,\"textureUploads\":1.4647887323943662,\"bufferUploads\":205.5211267605634},\"counterDelta\":{\"created\":1339,\"removed\":1338,\"styleReplacements\":55,\"geometryUpdates\":6702,\"imageBufferReuseR70\":73,\"unchangedUVUploadsSkippedR70\":65,\"solidPaintReuseR70\":0,\"imagePaintReuseR70\":0},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:11:40.8401613Z R71_PERF_RUN {\"scenario\":\"movement\",\"kind\":\"candidate\",\"index\":1,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":0,\"cast\":null,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":71,\"p50Ms\":450,\"p95Ms\":466.70000000000437,\"p99Ms\":483.29999999999563,\"meanMs\":423.6929577464789,\"maxMs\":483.29999999999563,\"over50ms\":71},\"draw\":{\"count\":74,\"p50Ms\":39.699999999953434,\"p95Ms\":46.90000000002328,\"p99Ms\":49.699999999953434,\"meanMs\":34.1121621621738,\"maxMs\":57.300000000046566,\"over50ms\":1},\"tick\":{\"count\":444,\"p50Ms\":0.30000000004656613,\"p95Ms\":0.6999999999534339,\"p99Ms\":1.5,\"meanMs\":0.38671171171108243,\"maxMs\":8.699999999953434,\"over50ms\":0},\"longTasks\":{\"count\":71,\"p50Ms\":448,\"p95Ms\":464,\"p99Ms\":478,\"meanMs\":422.7464788732394,\"maxMs\":482,\"over50ms\":71},\"elapsedMs\":30082.2,\"simulationSeconds\":7.40000000000007,\"hits\":0,\"motifs\":[],\"peakEffects\":0,\"peakProjectiles\":0,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":0,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":97400000,\"totalJSHeapSize\":139000000},\"memoryAfter\":{\"usedJSHeapSize\":97400000,\"totalJSHeapSize\":139000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":5,\"median\":36.800000000046566,\"p95\":37.59999999997672,\"p99\":37.59999999997672,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":37.59999999997672,\"drawCalls\":1,\"geometries\":195,\"textures\":12,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"perFrame\":{\"drawCalls\":329.9154929577465,\"textureUploads\":1.4647887323943662,\"bufferUploads\":205.54929577464787},\"counterDelta\":{\"created\":1339,\"removed\":1338,\"styleReplacements\":55,\"geometryUpdates\":6704,\"imageBufferReuseR70\":73,\"unchangedUVUploadsSkippedR70\":67,\"solidPaintReuseR70\":0,\"imagePaintReuseR70\":0},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:12:35.4364472Z R71_PERF_RUN {\"scenario\":\"movement\",\"kind\":\"candidate\",\"index\":2,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":0,\"cast\":null,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":71,\"p50Ms\":450,\"p95Ms\":466.7000000000007,\"p99Ms\":483.3000000000029,\"meanMs\":425.3352112676057,\"maxMs\":483.3999999999942,\"over50ms\":71},\"draw\":{\"count\":74,\"p50Ms\":39.59999999997672,\"p95Ms\":48.29999999993015,\"p99Ms\":57.300000000046566,\"meanMs\":34.227027027021364,\"maxMs\":57.699999999953434,\"over50ms\":3},\"tick\":{\"count\":444,\"p50Ms\":0.30000000004656613,\"p95Ms\":0.6999999999534339,\"p99Ms\":1,\"meanMs\":0.3569819819827686,\"maxMs\":3.900000000023283,\"over50ms\":0},\"longTasks\":{\"count\":71,\"p50Ms\":450,\"p95Ms\":470,\"p99Ms\":477,\"meanMs\":424.2112676056338,\"maxMs\":486,\"over50ms\":71},\"elapsedMs\":30198.800000000003,\"simulationSeconds\":7.400000000000075,\"hits\":0,\"motifs\":[],\"peakEffects\":0,\"peakProjectiles\":0,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":0,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"memoryAfter\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":7,\"median\":36.199999999953434,\"p95\":38.300000000046566,\"p99\":38.300000000046566,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":38.300000000046566,\"drawCalls\":1,\"geometries\":195,\"textures\":12,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"perFrame\":{\"drawCalls\":329.9577464788732,\"textureUploads\":1.4647887323943662,\"bufferUploads\":205.5211267605634},\"counterDelta\":{\"created\":1339,\"removed\":1338,\"styleReplacements\":55,\"geometryUpdates\":6702,\"imageBufferReuseR70\":73,\"unchangedUVUploadsSkippedR70\":65,\"solidPaintReuseR70\":0,\"imagePaintReuseR70\":0},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:13:27.9427529Z R71_PERF_RUN {\"scenario\":\"movement\",\"kind\":\"baseline\",\"index\":3,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":0,\"cast\":null,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":71,\"p50Ms\":450,\"p95Ms\":466.7000000000007,\"p99Ms\":466.70000000000437,\"meanMs\":423.6915492957746,\"maxMs\":466.70000000000437,\"over50ms\":71},\"draw\":{\"count\":74,\"p50Ms\":38.699999999953434,\"p95Ms\":46.29999999993015,\"p99Ms\":51.699999999953434,\"meanMs\":33.80810810811031,\"maxMs\":54.20000000006985,\"over50ms\":2},\"tick\":{\"count\":444,\"p50Ms\":0.2999999999301508,\"p95Ms\":0.6000000000931323,\"p99Ms\":0.8000000000465661,\"meanMs\":0.3250000000006293,\"maxMs\":3.599999999976717,\"over50ms\":0},\"longTasks\":{\"count\":71,\"p50Ms\":450,\"p95Ms\":463,\"p99Ms\":466,\"meanMs\":422.98591549295776,\"maxMs\":469,\"over50ms\":71},\"elapsedMs\":30082.1,\"simulationSeconds\":7.400000000000075,\"hits\":0,\"motifs\":[],\"peakEffects\":0,\"peakProjectiles\":0,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":0,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":91700000,\"totalJSHeapSize\":139000000},\"memoryAfter\":{\"usedJSHeapSize\":91700000,\"totalJSHeapSize\":139000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":8,\"median\":34.90000000002328,\"p95\":40.89999999990687,\"p99\":40.89999999990687,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":41.09999999997672,\"drawCalls\":1,\"geometries\":195,\"textures\":12,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":61,\"backdropMeshes\":19,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"perFrame\":{\"drawCalls\":329.9577464788732,\"textureUploads\":1.4647887323943662,\"bufferUploads\":205.5211267605634},\"counterDelta\":{\"created\":1339,\"removed\":1338,\"styleReplacements\":55,\"geometryUpdates\":6702,\"imageBufferReuseR70\":73,\"unchangedUVUploadsSkippedR70\":65,\"solidPaintReuseR70\":0,\"imagePaintReuseR70\":0},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:14:21.1210164Z R71_PERF_RUN {\"scenario\":\"ego-stress\",\"kind\":\"baseline\",\"index\":0,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":1000,\"cast\":true,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":77,\"p50Ms\":383.3000000000029,\"p95Ms\":483.29999999999563,\"p99Ms\":483.3000000000029,\"meanMs\":394.35844155844154,\"maxMs\":566.7000000000007,\"over50ms\":77},\"draw\":{\"count\":79,\"p50Ms\":20.900000000023283,\"p95Ms\":49.60000000009313,\"p99Ms\":63.800000000046566,\"meanMs\":25.956962025310265,\"maxMs\":83.70000000006985,\"over50ms\":4},\"tick\":{\"count\":474,\"p50Ms\":0.9000000000232831,\"p95Ms\":3.799999999930151,\"p99Ms\":14.5,\"meanMs\":1.4672995780578437,\"maxMs\":19.099999999976717,\"over50ms\":0},\"longTasks\":{\"count\":78,\"p50Ms\":385,\"p95Ms\":476,\"p99Ms\":491,\"meanMs\":393.9102564102564,\"maxMs\":550,\"over50ms\":78},\"elapsedMs\":30365.6,\"simulationSeconds\":7.9000000000001105,\"hits\":209,\"motifs\":[\"cross\",\"fractal\",\"flower\",\"claw\",\"tsubamegaeshi\",\"decisive\"],\"peakEffects\":138,\"peakProjectiles\":3,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":47,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":91700000,\"totalJSHeapSize\":148000000},\"memoryAfter\":{\"usedJSHeapSize\":91700000,\"totalJSHeapSize\":148000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":15,\"median\":19.400000000023283,\"p95\":24.79999999993015,\"p99\":24.79999999993015,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":48.09999999997672,\"drawCalls\":188,\"geometries\":411,\"textures\":21,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"perFrame\":{\"drawCalls\":449.75324675324674,\"textureUploads\":0.8181818181818182,\"bufferUploads\":252.93506493506493},\"counterDelta\":{\"created\":1557,\"removed\":1535,\"styleReplacements\":270,\"geometryUpdates\":9200,\"imageBufferReuseR70\":901,\"unchangedUVUploadsSkippedR70\":865,\"solidPaintReuseR70\":851,\"imagePaintReuseR70\":158},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:15:16.0546668Z R71_PERF_RUN {\"scenario\":\"ego-stress\",\"kind\":\"candidate\",\"index\":1,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":1000,\"cast\":true,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":76,\"p50Ms\":383.3000000000029,\"p95Ms\":466.6999999999971,\"p99Ms\":533.3000000000029,\"meanMs\":396.4763157894737,\"maxMs\":550,\"over50ms\":76},\"draw\":{\"count\":78,\"p50Ms\":21.5,\"p95Ms\":49.199999999953434,\"p99Ms\":60.699999999953434,\"meanMs\":26.173076923076923,\"maxMs\":83,\"over50ms\":3},\"tick\":{\"count\":468,\"p50Ms\":0.9000000000232831,\"p95Ms\":3.699999999953434,\"p99Ms\":14,\"meanMs\":1.440384615384068,\"maxMs\":17.699999999953434,\"over50ms\":0},\"longTasks\":{\"count\":76,\"p50Ms\":384,\"p95Ms\":468,\"p99Ms\":524,\"meanMs\":395.85526315789474,\"maxMs\":559,\"over50ms\":76},\"elapsedMs\":30132.2,\"simulationSeconds\":7.8000000000001,\"hits\":208,\"motifs\":[\"cross\",\"fractal\",\"flower\",\"claw\",\"tsubamegaeshi\",\"decisive\"],\"peakEffects\":138,\"peakProjectiles\":2,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":43,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":76600000,\"totalJSHeapSize\":131000000},\"memoryAfter\":{\"usedJSHeapSize\":76600000,\"totalJSHeapSize\":131000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":12,\"median\":17.900000000023283,\"p95\":27.79999999993015,\"p99\":27.79999999993015,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":21.699999999953434,\"drawCalls\":163,\"geometries\":392,\"textures\":21,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"perFrame\":{\"drawCalls\":450.39473684210526,\"textureUploads\":0.8421052631578947,\"bufferUploads\":250.6578947368421},\"counterDelta\":{\"created\":1518,\"removed\":1516,\"styleReplacements\":253,\"geometryUpdates\":8934,\"imageBufferReuseR70\":880,\"unchangedUVUploadsSkippedR70\":834,\"solidPaintReuseR70\":799,\"imagePaintReuseR70\":131},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:16:11.4378598Z R71_PERF_RUN {\"scenario\":\"ego-stress\",\"kind\":\"candidate\",\"index\":2,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":1000,\"cast\":true,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":78,\"p50Ms\":383.2999999999993,\"p95Ms\":433.29999999999563,\"p99Ms\":483.3999999999942,\"meanMs\":388.4461538461539,\"maxMs\":516.6000000000022,\"over50ms\":78},\"draw\":{\"count\":80,\"p50Ms\":19,\"p95Ms\":43.29999999993015,\"p99Ms\":49.800000000046566,\"meanMs\":23.84375000000291,\"maxMs\":68.79999999993015,\"over50ms\":1},\"tick\":{\"count\":480,\"p50Ms\":0.9000000000232831,\"p95Ms\":3.900000000023283,\"p99Ms\":14.400000000023283,\"meanMs\":1.5262499999999515,\"maxMs\":23.099999999976717,\"over50ms\":0},\"longTasks\":{\"count\":78,\"p50Ms\":381,\"p95Ms\":424,\"p99Ms\":478,\"meanMs\":387.79487179487177,\"maxMs\":522,\"over50ms\":78},\"elapsedMs\":30298.800000000003,\"simulationSeconds\":8.000000000000115,\"hits\":227,\"motifs\":[\"cross\",\"fractal\",\"flower\",\"claw\",\"tsubamegaeshi\",\"decisive\"],\"peakEffects\":138,\"peakProjectiles\":2,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":29,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"memoryAfter\":{\"usedJSHeapSize\":86400000,\"totalJSHeapSize\":131000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":14,\"median\":17.300000000046566,\"p95\":31.79999999993015,\"p99\":31.79999999993015,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":31.79999999993015,\"drawCalls\":181,\"geometries\":387,\"textures\":20,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\",\"mapReadabilityR71\":{\"revision\":\"regional-material-roles-r71\",\"theme\":\"forest\",\"colors\":{\"floor\":\"#c2b48f\",\"wall\":\"#747864\",\"cap\":\"#b3a581\",\"edge\":\"#44483d\",\"background\":\"#626b63\",\"hospitalFloor\":null,\"hospitalWall\":null},\"luminance\":{\"floor\":0.46095020507335915,\"wall\":0.18066045489407592,\"cap\":0.38078951941495587,\"edge\":0.06200595003090984,\"background\":0.14012912920299392,\"hospitalFloor\":null,\"hospitalWall\":null},\"contrast\":{\"floorToWall\":2.215161698644868,\"capToWall\":1.867634916495692,\"wallToEdge\":2.0593589432563313,\"floorToBackground\":2.687385185085639},\"sourceAsset\":\"assets/visual-test/regional-materials-r55.png\",\"materialsOnly\":true,\"threeOnly\":true,\"legacyFallbackPaletteApplied\":false,\"geometryChanged\":false,\"assetsChanged\":false,\"flashlightMaskPreserved\":true,\"pixelVerified\":false,\"GPUVerified\":false}},\"perFrame\":{\"drawCalls\":431.4102564102564,\"textureUploads\":0.6923076923076923,\"bufferUploads\":238.65384615384616},\"counterDelta\":{\"created\":1455,\"removed\":1438,\"styleReplacements\":268,\"geometryUpdates\":8704,\"imageBufferReuseR70\":893,\"unchangedUVUploadsSkippedR70\":841,\"solidPaintReuseR70\":868,\"imagePaintReuseR70\":124},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}",
+    "2026-10-18T06:17:04.8583153Z R71_PERF_RUN {\"scenario\":\"ego-stress\",\"kind\":\"baseline\",\"index\":3,\"setup\":{\"zone\":\"dist00\",\"enemies\":6,\"props\":15,\"ego\":1000,\"cast\":true,\"renderer\":\"three\"},\"activeBefore\":\"three\",\"activeAfter\":\"three\",\"frames\":{\"count\":79,\"p50Ms\":383.29999999999563,\"p95Ms\":433.2999999999993,\"p99Ms\":466.59999999999854,\"meanMs\":381.8417721518987,\"maxMs\":516.7000000000007,\"over50ms\":79},\"draw\":{\"count\":81,\"p50Ms\":21.099999999976717,\"p95Ms\":38.800000000046566,\"p99Ms\":51.09999999997672,\"meanMs\":24.643209876542922,\"maxMs\":65.5,\"over50ms\":2},\"tick\":{\"count\":486,\"p50Ms\":0.7999999999301508,\"p95Ms\":3.599999999976717,\"p99Ms\":13.400000000023283,\"meanMs\":1.3888888888879307,\"maxMs\":24.29999999993015,\"over50ms\":0},\"longTasks\":{\"count\":80,\"p50Ms\":377,\"p95Ms\":428,\"p99Ms\":471,\"meanMs\":381.45,\"maxMs\":519,\"over50ms\":80},\"elapsedMs\":30165.499999999996,\"simulationSeconds\":8.10000000000012,\"hits\":244,\"motifs\":[\"cross\",\"fractal\",\"flower\",\"claw\",\"tsubamegaeshi\",\"decisive\"],\"peakEffects\":138,\"peakProjectiles\":3,\"objects\":{\"enemies\":6,\"props\":15,\"effects\":25,\"projectiles\":0},\"memoryBefore\":{\"usedJSHeapSize\":97400000,\"totalJSHeapSize\":148000000},\"memoryAfter\":{\"usedJSHeapSize\":97400000,\"totalJSHeapSize\":148000000},\"rendererMetricsBefore\":{\"samples\":0,\"median\":null,\"p95\":null,\"p99\":null,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":null},\"rendererMetricsAfter\":{\"samples\":18,\"median\":17.699999999953434,\"p95\":24.900000000023283,\"p99\":24.900000000023283,\"measurement\":\"CPU JavaScript renderer call duration; NOT GPU time or measured FPS\",\"last\":{\"milliseconds\":18.79999999993015,\"drawCalls\":167,\"geometries\":417,\"textures\":20,\"resourceUnits\":\"counts, not VRAM bytes\"}},\"spatialBefore\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"spatialAfter\":{\"regional55\":{\"profile\":\"forest\",\"arches\":1,\"dress\":9,\"isolatedMipmaps\":true,\"staticLighting\":true,\"collisionChanged\":false,\"GPUVerified\":false},\"regionalLightAnchor55\":[27,0,18],\"sight24\":{\"enabled\":true,\"sharedSingleMask\":true,\"GPUVerified\":false},\"normalSurface23\":{\"built\":0,\"refused\":0,\"actualFloor\":false,\"actualWall\":false,\"GPUVerified\":false},\"hospitalVisualRevision\":\"hospital-door-comfort-r35\",\"hospitalDoorDetails37\":false,\"hospitalLightAnchor37\":null,\"wallComfort37\":{\"normalScale\":0,\"emissiveShare\":1,\"staticHospitalDirection\":true},\"wallComfort49\":{\"isolatedWallMipmaps\":false,\"mipFilter\":\"LinearMipmapLinearFilter\",\"normalLighting\":false,\"geometryChanged\":false,\"GPUVerified\":false},\"hospitalJunctions34\":0,\"doorWallCut34\":null,\"hospitalFloorReady\":false,\"hospitalRoomsReady\":false,\"hospitalRoomPieces\":0,\"hospitalCutWalls\":0,\"defaultDepth\":true,\"physicalStructures\":true,\"terrainMeshes\":107,\"backdropMeshes\":24,\"fogRimMeshes\":0,\"regionalBackdropMaterial\":\"original-region-floor-tile-mild-grade\",\"contactShadows\":\"reduced original ellipses in background pass\",\"lightShadows\":\"disabled; no depth shadow pass or duplicate receiver\",\"casterBudget\":0,\"casterCount\":0,\"shadowMapEnabled\":false,\"shadowMapSize\":0,\"height\":{\"height\":0,\"surfaceId\":\"original-ground\",\"presentationOnly\":true,\"collisionHeightSupported\":false},\"originalMapReprojectedAsFloor\":false,\"originalMapBridgeProjectedAsFloor\":false,\"apronScope30\":\"native east connectors and hospital south connector; panorama still original\",\"wallPanelScale30\":\"shared original maximum wall height; folds split; floor caps\",\"bridgeMeshes\":0,\"sourcePavingAxesPreserved\":true,\"terrainPatchSource\":\"assets/visual-test/regional-materials-r55.png\",\"GPUVerified\":false,\"collisionStructures\":\"authored exploration wall AABBs; decorative background rim excluded from collision\"},\"perFrame\":{\"drawCalls\":484.60759493670884,\"textureUploads\":0.7468354430379747,\"bufferUploads\":244.13924050632912},\"counterDelta\":{\"created\":1516,\"removed\":1497,\"styleReplacements\":277,\"geometryUpdates\":9054,\"imageBufferReuseR70\":964,\"unchangedUVUploadsSkippedR70\":922,\"solidPaintReuseR70\":905,\"imagePaintReuseR70\":146},\"devices\":[\"ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)\"],\"errors\":[]}"
+  ],
+  "rawResultLine": "{\"stage\":\"baseline-vs-candidate\",\"comparisons\":[{\"scenario\":\"movement\",\"baseline\":{\"trials\":2,\"meanMs\":424.6302816901408,\"p50Ms\":449.9500000000007,\"p95Ms\":466.7000000000007,\"drawP95Ms\":47.09999999997672,\"drawCallsPerFrame\":329.9577464788732,\"bufferUploadsPerFrame\":205.5211267605634,\"materialReplacementsPerFrame\":0.7746478873239436},\"candidate\":{\"trials\":2,\"meanMs\":424.5140845070423,\"p50Ms\":450,\"p95Ms\":466.70000000000255,\"drawP95Ms\":47.59999999997672,\"drawCallsPerFrame\":329.9366197183099,\"bufferUploadsPerFrame\":205.53521126760563,\"materialReplacementsPerFrame\":0.7746478873239436},\"meanFrameReductionFraction\":0.00027364318586986514,\"p95ReductionFraction\":-3.9968028886505635e-15,\"regressionFlag\":false},{\"scenario\":\"ego-stress\",\"baseline\":{\"trials\":2,\"meanMs\":388.1001068551701,\"p50Ms\":383.2999999999993,\"p95Ms\":458.29999999999745,\"drawP95Ms\":44.20000000006985,\"drawCallsPerFrame\":467.1804208449778,\"bufferUploadsPerFrame\":248.537152720697,\"materialReplacementsPerFrame\":3.5064113102087786},\"candidate\":{\"trials\":2,\"meanMs\":392.46123481781376,\"p50Ms\":383.3000000000011,\"p95Ms\":449.99999999999636,\"drawP95Ms\":46.24999999994179,\"drawCallsPerFrame\":440.90249662618083,\"bufferUploadsPerFrame\":244.65587044534414,\"materialReplacementsPerFrame\":3.382422402159244},\"meanFrameReductionFraction\":-0.011237121262301253,\"p95ReductionFraction\":0.01811040802967734,\"regressionFlag\":false}],\"profiles\":[]}"
+}

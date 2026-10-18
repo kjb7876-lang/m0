@@ -1,0 +1,29 @@
+{
+  "status": "approved",
+  "baseline": {
+    "index.html": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+    "dist/phase1.js": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+  },
+  "approved": {
+    "index.html": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
+    "dist/phase1.js": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+  },
+  "measuredIn": {
+    "sourceCommit": "d58ffc8691822cfc5bbec9913fb99c32d38a626b",
+    "runtimeUnchangedSince": "dff330b89a8e10ee98b610191061e0840394b989",
+    "preflightRun": "https://github.com/kjb7876-lang/m0/actions/runs/39112456285",
+    "browserCases": {
+      "passed": 8,
+      "total": 8
+    },
+    "cpuTests": {
+      "passed": 26,
+      "total": 26
+    },
+    "nativeExecutedGroups": 4,
+    "evidence": "qa-r71/accepted-d58ffc8-ci.json",
+    "performanceEvidence": "qa-r71/performance-review.md",
+    "performanceConclusion": "No overall additional speedup demonstrated in independent SwiftShader ABBA measurements.",
+    "scope": "Client runtime only. Physical GPU/devices, live relay and mixed-version co-op were not verified."
+  }
+}

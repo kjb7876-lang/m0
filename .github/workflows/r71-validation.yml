@@ -1,0 +1,224 @@
+name: StoryWorld R71 gameplay preflight
+on:
+  push:
+    branches: [work/storyworld-r71-gameplay-20261018]
+    paths:
+      - 'scripts/*r71*'
+      - 'client-source/*r71*'
+      - '.github/workflows/r71-validation.yml'
+  workflow_dispatch:
+    inputs:
+      profile_mode:
+        description: Run the baseline-only profile or the full candidate profile after baseline
+        required: true
+        type: choice
+        default: baseline
+        options:
+          - baseline
+          - candidate
+permissions:
+  contents: read
+concurrency:
+  group: r71-preflight-${{ github.event_name == 'push' && github.sha || github.run_id }}
+  cancel-in-progress: false
+jobs:
+  baseline:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct and pin the published R70 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r71
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          python3 scripts/apply-r66.py --site _pages/docs
+          python3 scripts/apply-r67.py --site _pages/docs
+          python3 scripts/apply-r68.py --site _pages/docs
+          python3 scripts/apply-r69.py --site _pages/docs
+          cp -a _pages _r69
+          python3 scripts/apply-r70.py --site _pages/docs | tee out/r71/r70-build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r70.cpu.test.mjs | tee out/r71/r70-cpu.log
+          node verify-pages-r62.mjs _pages | tee out/r71/r70-integrity.log
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected={
+              'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5',
+              'dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4',
+          }
+          for name,want in expected.items():
+              actual=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+              if actual!=want:raise SystemExit('Unreviewed R70 baseline '+name+': '+actual)
+          PY
+          cp -a _pages _r70
+      - name: Install pinned sandboxed Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r71/baseline-dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r71/baseline-dependencies.log 2>&1
+      - name: Sample R70 movement and EGO scenes before applying R71
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+          R71_PERF_BASELINE_ONLY: '1'
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _r70/docs --bind 127.0.0.1 > out/r71/baseline-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r71.perf.mjs | tee out/r71/baseline-profile.log
+      - name: Apply and validate R71 gameplay candidate
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 scripts/apply-r71.py --site _pages/docs | tee out/r71/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71/cpu.log
+          node scripts/r71.audit.mjs | tee out/r71/audit.log
+          node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/candidate-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
+          mkdir -p out/r71/native
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
+      - name: Apply and fully profile R71 candidate after baseline
+        if: github.event_name == 'workflow_dispatch' && inputs.profile_mode == 'candidate'
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 scripts/apply-r71.py --site _pages/docs | tee out/r71/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71/cpu.log
+          node scripts/r71.audit.mjs | tee out/r71/audit.log
+          node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/candidate-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
+          mkdir -p out/r71/native
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
+          node scripts/r71.perf.mjs | tee out/r71/performance.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r71-gameplay-preflight
+          path: out/r71/
+          retention-days: 14
+
+  paired-profile:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct and pin the published R70 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r71profile
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          python3 scripts/apply-r66.py --site _pages/docs
+          python3 scripts/apply-r67.py --site _pages/docs
+          python3 scripts/apply-r68.py --site _pages/docs
+          python3 scripts/apply-r69.py --site _pages/docs
+          cp -a _pages _r69
+          python3 scripts/apply-r70.py --site _pages/docs | tee out/r71profile/r70-build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r70.cpu.test.mjs | tee out/r71profile/r70-cpu.log
+          node verify-pages-r62.mjs _pages | tee out/r71profile/r70-integrity.log
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected={
+              'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5',
+              'dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4',
+          }
+          for name,want in expected.items():
+              actual=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+              if actual!=want:raise SystemExit('Unreviewed R70 baseline '+name+': '+actual)
+          PY
+          cp -a _pages _r70
+      - name: Install pinned sandboxed Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r71profile/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r71profile/dependencies.log 2>&1
+      - name: Apply R71 and run CPU, audit, and integrity gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/apply-r71.py --site _pages/docs | tee out/r71profile/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71profile/cpu.log
+          node scripts/r71.audit.mjs | tee out/r71profile/audit.log
+          node verify-pages-r62.mjs _pages | tee out/r71profile/integrity.log
+      - name: Run the full paired R70/R71 profile
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71profile/candidate-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r71.perf.mjs | tee out/r71profile/performance.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r71-paired-profile
+          path: |
+            out/r71profile/
+            out/r71/
+          retention-days: 14

@@ -1,0 +1,35 @@
+# R71 health and bleed review
+
+검토 범위: `client-source/health-r71.js`, `scripts/health-r71.py`, 그리고 R61 분신의 기존 체력 계약(`client-source/summons-r61.js`)을 정적으로 읽었습니다. 이 문서 작성자는 코드를 수정하거나 런타임 테스트를 직접 실행하지 않았습니다. 현재 후보의 health helper는 `cc7aa6`와 동일하며, 이후 `de6536` 변경은 beacon renderer에 한정됩니다.
+
+## 확인 결과
+
+- 저장 체력은 R71 마커가 없는 경우 `oldHp / oldMaxHp * 777`로 변환되고, 이미 마커가 있으면 0–777 범위로만 복원됩니다. 계산은 `restoreSavedHp`와 `ensureActor`에 모여 있어 반복 변환을 막는 구조입니다.
+- 고정 회복과 피격 입력은 각각 `777 / legacyMaxHP`를 한 번 곱합니다. 솔로 피격 래퍼는 협동 모드에서 원래 `hurt`를 호출하고 빠지며, 협동 경로는 Python transform이 `hurtOne`의 단일 `base.hurt` 호출 앞에 변환을 넣습니다. 정적 검토상 솔로·협동 모두 같은 한 번의 경로로 보입니다. 퍼센트 회복은 새 `maxHP() === 777`을 기준으로 계산되므로 별도 변환이 필요하지 않습니다.
+- 출혈 소유자는 현재 방의 적 목록에 포함되는 객체 또는 그 적 ID에서 확인하고, 친화·자해·DOT 계열과 같은 소유자 피해를 거릅니다. 승인된 피해가 실제 HP를 깎은 경우에만 상태를 시작하며, 협동 모드에서는 플레이어별 `hurtOne` 뒤에 판정합니다. 정적 읽기에서 다른 명확한 중복 피해·회복 변환 결함은 찾지 못했습니다.
+
+## 수치 확인
+
+R71 변환 계수는 `777 / (260 + 35*nativeVital + 5*(level-1) + 18*endlessVital)`입니다. 아래 피해는 원래 `hurt`의 방어·보호 계수를 적용하기 전 입력값이며, 회복은 30 구 HP 단위의 고정 회복 예시입니다.
+
+| 구 체력 상한 | 예시 | 계수 | 구 피해 10 → 변환 입력 | 구 고정 회복 30 → 변환 회복 |
+| ---: | --- | ---: | ---: | ---: |
+| 260 | 기본 | 2.9885 | 29.8846 | 89.6538 |
+| 295 | 기본 + 활력 1회(35) | 2.6339 | 26.3390 | 79.0169 |
+| 750 | 레벨 99, 추가 활력 없음 | 1.0360 | 10.3600 | 31.0800 |
+
+보스 접미 체력은 `Math.max(0, Math.round((canonical - 666) / 1000)) * 1000 + 666`으로 계산됩니다. 따라서 가능한 값은 666, 1666, 2666…이고 가장 가까운 값으로 반올림하며 최소값은 666입니다. 반올림 경계의 정확한 동률은 JavaScript `Math.round`에 따라 위쪽으로 갑니다.
+
+## R61 분신 예외
+
+이전 helper 판별식이 `r61Clone`까지 접미 체력 대상으로 삼는 충돌은 수정되었습니다. 최신 helper의 보스 판별은 실제 보스 플래그(`boss`, `midboss`, `persona`, `cosmic`, `trial`, `cosmicGuardianR63`)만 사용해 일반 소환수를 제외합니다. R61 분신은 이 보스 플래그가 모두 `false`이고 `r61Clone=true`이며 보스 최대 체력의 정확히 6%를 유지합니다. 현재 helper는 R63 저장 복원과 같은 지도 난이도 재선택 뒤 살아 있는 분신의 체력 비율을 보존하며, 죽은 분신은 0 HP로 남깁니다. 최신 health CPU suite 13건은 전체 26건의 CI 통과 집계에 포함됐습니다. 이 검토자는 suite를 직접 실행하지 않았습니다.
+
+## 검증 상태
+
+현재 후보 HTML SHA-256은 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, renderer SHA-256은 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. Preflight run [39112456285](https://github.com/kjb7876-lang/m0/actions/runs/39112456285), head `d58ffc8691822cfc5bbec9913fb99c32d38a626b`에서는 browser **8/8**, native runner 4개 실제 검증 그룹, CPU **26/26**, audit 1906건 및 integrity 검증이 통과했습니다. Health 브라우저 검사는 28개 보스 맵의 44개 actor, HP 777, 강화, 저장/복원, 사망/부활을 통과했습니다. Co-op 피격에서 peer 체력은 777에서 772.00028로 줄고 host 체력은 그대로였으며, 치명 피격은 2에서 0으로 만든 뒤 host native tick 한 번으로 388.5/777에 부활했습니다. 출혈 상태의 저장 및 guest 전달, 병원 epoch 5/ep1a08 확장 아이템 저장 및 guest 전달, 아이템 1회 픽업, 반복 저장 가져오기에서 boss/clone 체력 안정성도 통과했습니다. 전체 health 비교에서 실패는 0건이고 저장 입력도 변하지 않았습니다.
+
+0cd run [39111040632](https://github.com/kjb7876-lang/m0/actions/runs/39111040632)의 7/8 결과는 fixture가 존재하지 않는 `c.tick`을 호출한 중간 실패였습니다. d58 harness가 native global tick과 병원 진입 대기를 사용해 이를 고쳤고, 위 run에서 전체 browser 검증이 통과했습니다([0cd 중간 artifact](intermediate-0cd0167-browser-native.json)). 해당 CI 통과는 후보 검증 결과이며 배포 또는 별도 승인 완료를 뜻하지 않습니다.
+
+중간 `58c979b` 브라우저 결과는 과거 진단 자료입니다. 해당 health 전용 사례는 통과했지만 당시 beacon rendering과 co-op fixture가 실패했으며, 현재 browser 검증을 대신하지 않습니다([중간 결과](intermediate-58c979b-browser.json)).
+
+검증 범위는 로컬 브라우저 협동 시뮬레이션입니다. 물리 기기 간 협동, 실제 relay 연결, 서로 다른 버전 간 co-op 호환성은 검증되지 않았습니다.
