@@ -55,10 +55,19 @@ def build(site):
     if html.count(old) != 1:
         raise RuntimeError('R73 stable render snapshot anchor drift')
     html = html.replace(old, 'const ready=booted&&started&&!loading&&!!player&&room?.id===zone&&room?.layer===layer,h=ready?heroArtForDraw():null;')
-    fragment = (ROOT / 'client-source/save-slots-r73.js').read_text()
-    if '</script' in fragment.lower() or html.count('</body>') != 1:
-        raise RuntimeError('Unsafe R73 script fragment')
-    html = html.replace('</body>', '<script id="save-slots-r73">\n' + fragment + '\n</script>\n</body>')
+    old = 'if(arrival){let q=null;for(let i=0;i<16;i++)'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 portal arrival anchor drift')
+    html = html.replace(old, 'if(arrival){let q=window.__STORYWORLD_PORTAL_ARRIVAL_R73__?.point(arrival,room);for(let i=0;!q&&i<16;i++)')
+    old = "note('portal-travel',{role:s.role,to:s.destination});return enterRegion"
+    if html.count(old) != 1:
+        raise RuntimeError('R73 physical portal admission anchor drift')
+    html = html.replace(old, "if(distance(player,s.point)>2.6||!clearPath3(player,s.point,.31,room)){toast('문 입구의 안전한 길로 접근하세요.',3);return false;}" + old)
+    for name in ['portal-arrival', 'save-slots']:
+        fragment = (ROOT / ('client-source/' + name + '-r73.js')).read_text()
+        if '</script' in fragment.lower() or html.count('</body>') != 1:
+            raise RuntimeError('Unsafe R73 script fragment')
+        html = html.replace('</body>', '<script id="' + name + '-r73">\n' + fragment + '\n</script>\n</body>')
     if html.count('dist/phase1.js?r71=1') != 1:
         raise RuntimeError('R73 renderer cache anchor drift')
     html = html.replace('dist/phase1.js?r71=1', 'dist/phase1.js?r73=1').encode()

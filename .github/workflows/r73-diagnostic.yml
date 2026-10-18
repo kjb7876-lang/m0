@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script: [r73-ui, r73-diagnose, r73-slots.browser, r73-native]
+        script: [r73-ui, r73-diagnose, r73-slots.browser, r73-native, r73-route.browser]
     steps:
       - uses: actions/checkout@v6
         with:
