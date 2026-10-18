@@ -36,6 +36,9 @@ test('transition or stale map cannot overwrite a slot and 777 remains separate',
 test('completed map entry checkpoints its destination during pre-scene while manual mid-scene saves remain blocked',async()=>{
  const h=harness();assert.equal(h.c.saveGame(false),true);h.c.storyScene={part:'pre'};assert.equal(await h.c.enterRegion('dist00'),true);const saved=JSON.parse(h.data.get(LEGACY+'.slot-r73.1'));assert.equal(saved.zone,'dist00');assert.equal(saved.saveSlotR73.transitionComplete,true);assert.equal(saved.saveSlotR73.checkpoint,'entered-pre-scene');assert.equal(h.c.saveGame(false),false);
 });
+test('a stored position on a visible portal restores to a safe approach without travelling or changing the destination',async()=>{
+ const h=harness({[LEGACY]:JSON.stringify(raw('dist00',4))});h.c.window.__STORYWORLD_ROUTES_R72__={inspect:()=>({portals:[{role:'previous',visible:true,point:{x:2,y:2}}]})};h.c.window.__STORYWORLD_PORTAL_ARRIVAL_R73__={point:()=>({x:4.5,y:2})};assert.equal(await h.api.confirm('load',1),true);assert.equal(h.c.zone,'dist00');assert.equal(h.c.player.x,4.5);assert.equal(h.c.player.y,2);assert.equal(h.api.inspect().audit.some(e=>e.kind==='portal-safe-position'),true);assert.equal(JSON.parse(h.data.get(LEGACY)).player.x,2,'legacy original remains intact');
+});
 test('quota, malformed or rejected slot data cannot claim success or change the active slot',async()=>{
  const h=harness({[LEGACY]:JSON.stringify(raw())});assert.equal(h.c.saveGame(false),true);const one=h.data.get(LEGACY+'.slot-r73.1');h.fail(LEGACY+'.slot-r73.2');assert.equal(await h.new(2),false);assert.equal(h.api.inspect().active,1);assert.equal(h.data.get(LEGACY+'.slot-r73.1'),one);
  h.data.set(LEGACY+'.slot-r73.3','{incomplete');assert.equal(await h.api.confirm('load',3),false);assert.equal(h.api.inspect().active,1);assert.equal(h.data.get(LEGACY+'.slot-r73.3'),'{incomplete');

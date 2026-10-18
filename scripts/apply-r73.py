@@ -71,7 +71,12 @@ def build(site):
         fragment = (ROOT / ('client-source/' + name + '-r73.js')).read_text()
         if '</script' in fragment.lower() or html.count('</body>') != 1:
             raise RuntimeError('Unsafe R73 script fragment')
-        html = html.replace('</body>', '<script id="' + name + '-r73">\n' + fragment + '\n</script>\n</body>')
+        # The pinned document has later R59..R72 scripts after its original
+        # closing body. Lifecycle/save wrappers must capture that entire chain;
+        # inserting before the first </body> saved the pre-arrival coordinates.
+        html += '\n<script id="' + name + '-r73">\n' + fragment + '\n</script>\n'
+    if not html.index('<script id="golden-thread-r72">') < html.index('<script id="portal-arrival-r73">') < html.index('<script id="save-slots-r73">'):
+        raise RuntimeError('R73 lifecycle modules must follow complete R72 chain')
     if html.count('dist/phase1.js?r71=1') != 1:
         raise RuntimeError('R73 renderer cache anchor drift')
     html = html.replace('dist/phase1.js?r71=1', 'dist/phase1.js?r73=1').encode()
