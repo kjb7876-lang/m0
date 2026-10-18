@@ -1605,6 +1605,7 @@ try {
     assert.ok(guestSnapshot.bleedDraws.some(row=>row.drawActorId==='qa-peer'&&row.drawCount>0),'guest capture resolves the received effect owner to qa-peer, not its own player');
     assert.ok(guestSnapshot.bleedDraws.some(row=>row.screen&&Math.hypot(row.screen.x-guestSnapshot.expectedScreen.x,row.screen.y-guestSnapshot.expectedScreen.y)<.01),'guest peer draw screen coordinate agrees with its captured blood image');
 
+    await host.page.bringToFront();
     const deathAndRevive=await host.page.evaluate(async enemyId=>{
       const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__,actors=c.players();
       const owner=actors.find(p=>p.coopIdR62==='qa-host'),peer=actors.find(p=>p.coopIdR62==='qa-peer'),r=room;
@@ -1640,15 +1641,33 @@ try {
       finally{hurt=baseHurt;}
       const observed=admitted.find(row=>row.sourceIsRoomEnemy&&row.result==='hit')||null;
       const down={hp:peer.hp,bleeding:health.inspect(peer).bleeding,visuals:effects.filter(e=>e.r71BleedVisualR71&&e.r71ActorId==='qa-peer'&&e.age<e.life).length};
-      let revived=null;
-      if(peer.hp===0){r.enemies=[];owner.x=peer.x+.3;owner.y=peer.y;owner.pendingInputR62={...(owner.pendingInputR62||{}),interact:true};c.tick(.2);revived={hp:peer.hp,maxHp:health.inspect(peer).player.maxHp,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer),invincible:peer.invincible};}
       const closeRange=window.__STORYWORLD_SCALE_MELEE_R61__?.closeRange?.(enemy)??null,closeDistance=Math.hypot(enemy.x-peer.x,enemy.y-.15-peer.y);
-      const diagnostic={observed,admitted,prepared,committed,nativeAttackError,spot,ownerSpot,lineOfSight:clearLine(enemy,peer),distance:Math.hypot(enemy.x-peer.x,enemy.y-peer.y),admission:{enemyDistance:spot?Math.hypot(spot.ex-peer.x,spot.ey-peer.y):null,homeDistance:Math.hypot(peer.x-(Number.isFinite(enemy.homeX)?enemy.homeX:enemy.x),peer.y-(Number.isFinite(enemy.homeY)?enemy.homeY:enemy.y)),enemyHomeDistance:Math.hypot(enemy.x-(Number.isFinite(enemy.homeX)?enemy.homeX:enemy.x),enemy.y-(Number.isFinite(enemy.homeY)?enemy.homeY:enemy.y)),home:{x:enemy.homeX,y:enemy.homeY},explorationGroup:enemy.explorationGroup||null,explorationLeash:enemy.explorationLeash??null,explorationLimit:7.15,aggro:enemy.combatProfile?.aggro??null,attackRange:enemy.combatProfile?.attackShape?.range??null,nativeCanPrepare,closeRange,closeDistance,closeLine:clearLine(enemy,{x:peer.x,y:peer.y-.15},r)},enemy:{id:enemy.id,ai:enemy.ai,weapon:enemy.weapon,type:enemy.type,damage:enemy.damage,position:{x:enemy.x,y:enemy.y},tell:enemy.tell,aim:enemy.aim,rest:enemy.rest,cd:enemy.cd,graceUntil:enemy.graceUntil,attack:enemy.attack&&{id:enemy.attack.id,elapsed:enemy.attack.elapsed,committed:enemy.attack.committed},rangedWindup:enemy.rangedWindup,phase:enemy.phase,phaseAge:enemy.phaseAge,phaseStage:enemy.phaseStage,invulnerableUntil:enemy.invulnerableUntil,r61Action:enemy.r61Action,shape:enemy.combatProfile?.attackShape},player:{owner:{hp:owner.hp,invincible:owner.invincible},peer:{hp:peer.hp,invincible:peer.invincible,guard:peer.guard,parry:peer.parry,attackCD:peer.attackCD}},room:{id:r.id,layer:r.layer,engaged:r.engaged,loading,modal},fields:fields?.inspect?.()||null};
+      const strikeLineOfSight=clearLine(enemy,peer),strikeDistance=Math.hypot(enemy.x-peer.x,enemy.y-peer.y);
+      const strikeAdmission={enemyDistance:spot?Math.hypot(spot.ex-peer.x,spot.ey-peer.y):null,homeDistance:Math.hypot(peer.x-(Number.isFinite(enemy.homeX)?enemy.homeX:enemy.x),peer.y-(Number.isFinite(enemy.homeY)?enemy.homeY:enemy.y)),enemyHomeDistance:Math.hypot(enemy.x-(Number.isFinite(enemy.homeX)?enemy.homeX:enemy.x),enemy.y-(Number.isFinite(enemy.homeY)?enemy.homeY:enemy.y)),home:{x:enemy.homeX,y:enemy.homeY},explorationGroup:enemy.explorationGroup||null,explorationLeash:enemy.explorationLeash??null,explorationLimit:7.15,aggro:enemy.combatProfile?.aggro??null,attackRange:enemy.combatProfile?.attackShape?.range??null,nativeCanPrepare,closeRange,closeDistance,closeLine:clearLine(enemy,{x:peer.x,y:peer.y-.15},r)};
+      const strikeSnapshot={lineOfSight:strikeLineOfSight,distance:strikeDistance,admission:strikeAdmission,enemy:{id:enemy.id,ai:enemy.ai,weapon:enemy.weapon,type:enemy.type,damage:enemy.damage,position:{x:enemy.x,y:enemy.y},tell:enemy.tell,aim:enemy.aim,rest:enemy.rest,cd:enemy.cd,graceUntil:enemy.graceUntil,attack:enemy.attack&&{id:enemy.attack.id,elapsed:enemy.attack.elapsed,committed:enemy.attack.committed},rangedWindup:enemy.rangedWindup,phase:enemy.phase,phaseAge:enemy.phaseAge,phaseStage:enemy.phaseStage,invulnerableUntil:enemy.invulnerableUntil,r61Action:enemy.r61Action,shape:enemy.combatProfile?.attackShape},player:{owner:{hp:owner.hp,x:owner.x,y:owner.y,invincible:owner.invincible},peer:{hp:peer.hp,x:peer.x,y:peer.y,invincible:peer.invincible,guard:peer.guard,parry:peer.parry,attackCD:peer.attackCD}}};
+      const diagnostic={observed,admitted,prepared,committed,nativeAttackError,spot,ownerSpot,...strikeSnapshot,room:{id:r.id,layer:r.layer,engaged:r.engaged,loading,modal},fields:fields?.inspect?.()||null};
+      let revived=null,nativeReviveTick=null;
+      if(peer.hp===0){
+        r.enemies=[];owner.x=peer.x+.3;owner.y=peer.y;owner.pendingInputR62={...(owner.pendingInputR62||{}),interact:true};
+        const coopState=c.inspect(),beforeTime=time,beforeRevives=coopState.history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer').length;
+        const tickReady={selfId:c.localPlayer()?.coopIdR62,paused:coopState.paused,loading,modal,hidden:document.hidden,started};
+        if(tickReady.selfId!=='qa-host'||tickReady.paused||tickReady.loading||tickReady.modal||tickReady.hidden||!tickReady.started)throw new Error('Native coop tick is not admitted for the revive input: '+JSON.stringify(tickReady));
+        tick(.2);
+        const afterFirstTick=time;
+        // The first host tick consumes pendingInputR62 into the native input
+        // lane. A second empty native tick clears that one-frame interaction.
+        tick(.06);
+        const afterTick=time,reviveRows=c.inspect().history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer');
+        nativeReviveTick={tickReady,beforeTime,afterFirstTick,afterTick,advanced:afterFirstTick>beforeTime,reviveEventsBefore:beforeRevives,reviveEventsAfter:reviveRows.length,reviveRow:reviveRows.at(-1)||null,pendingInputConsumed:owner.pendingInputR62?.interact!==true};
+        revived={hp:peer.hp,maxHp:health.inspect(peer).player.maxHp,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer),invincible:peer.invincible};
+      }
+      const postRevivePositions={owner:{x:owner.x,y:owner.y,hp:owner.hp},peer:{x:peer.x,y:peer.y,hp:peer.hp},room:{id:r.id,layer:r.layer}};
       Object.assign(enemy,originalEnemy);if(motionState&&Number.isFinite(originalMotionNext))motionState.next=originalMotionNext;
       r.enemies=originalEnemies;r.engaged=originalEngaged;r.coopDefeatedR62=originalDefeated;
-      return{down,revived,diagnostic,reviveEvents:c.inspect().history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer').length};
+      return{down,revived,diagnostic,nativeReviveTick,postRevivePositions,reviveEvents:c.inspect().history.filter(row=>row.type==='player-revived'&&row.playerId==='qa-peer').length};
     },firstHit.enemyId);
     console.log('R71_NATIVE_LETHAL_COOP_HIT',JSON.stringify(deathAndRevive.diagnostic));
+    console.log('R71_NATIVE_COOP_REVIVE',JSON.stringify(deathAndRevive.nativeReviveTick));
     assert.ok(deathAndRevive.diagnostic.spot&&deathAndRevive.diagnostic.lineOfSight,'the lethal fixture must use a clear, unblocked attacker/player pair');
     assert.ok(deathAndRevive.diagnostic.spot.homeDistance<=2,'lethal fixture stages the target peer near the enemy’s preserved authored home');
     assert.ok(deathAndRevive.diagnostic.ownerSpot,'lethal fixture keeps the non-target host farther from the native attacker');
@@ -1661,6 +1680,9 @@ try {
     assert.ok(deathAndRevive.diagnostic.observed?.sourceIsRoomEnemy&&deathAndRevive.diagnostic.observed.result==='hit','lethal contact must use the native enemy hurt path');
     assert.ok(deathAndRevive.diagnostic.observed.after<deathAndRevive.diagnostic.observed.before);
     assert.ok(deathAndRevive.down.hp===0&&deathAndRevive.revived,'native lethal enemy contact must down the peer before revive');
+    assert.ok(deathAndRevive.nativeReviveTick.advanced,'the public native host tick advances time before reviving');
+    assert.equal(deathAndRevive.nativeReviveTick.reviveEventsAfter-deathAndRevive.nativeReviveTick.reviveEventsBefore,1,'the native input/tick path emits one peer revive event');
+    assert.equal(deathAndRevive.nativeReviveTick.reviveRow?.playerId,'qa-peer');assert.equal(deathAndRevive.nativeReviveTick.pendingInputConsumed,true);
     assert.equal(deathAndRevive.down.hp,0);assert.equal(deathAndRevive.down.bleeding.active,false,'death clears peer bleed');
     assert.ok(deathAndRevive.down.visuals<=1,'lethal splash is bounded');
     assert.ok(deathAndRevive.revived.hp>0&&deathAndRevive.revived.hp<777,'native coop revive restores partial balanced HP');
