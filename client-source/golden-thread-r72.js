@@ -1,6 +1,6 @@
 /* Golden custom sword dance. Simulation owns damage; drawing only paints it. */
 (()=>{'use strict';
- const C=StoryGoldenCoreR72,casts=new Map(),trailPools=new WeakMap(),events=[];let serial=0,lastResult=null;
+ const C=StoryGoldenCoreR72,casts=new Map(),trailPools=new WeakMap(),autoRetries=new WeakMap(),events=[];let serial=0,lastResult=null;
  const coop=()=>window.__STORYWORLD_COOP_SIM_R62__,guest=()=>coop()?.mode()==='guest';
  const current=()=>coop()?.currentPlayer?.()||player,local=()=>coop()?.localPlayer?.()||player;
  const state=(p=current())=>{if(!p)return C.fresh();return p.goldenR72??=(C.fresh());};
@@ -67,7 +67,7 @@
   }
   if(c.cursor>=c.path.length){casts.delete(p);returnSafe(c);note('finished',{id:c.id,hits:c.hits,targets:c.targets.size});}
  }
- function autoCast(){return state().autoUse&&liveEnemies().some(e=>distance(current(),e)<=10)?cast(0,null,false):false;}
+ function autoCast(){const p=current();if(!p||!state(p).autoUse||time<(autoRetries.get(p)||0)||!liveEnemies().some(e=>distance(p,e)<=10))return false;autoRetries.set(p,time+.4);return cast(0,null,false);}
  const tickBase=tick;tick=function(dt,...a){const before=time,result=tickBase.call(this,dt,...a);if(guest())return result;for(const c of [...casts.values()])withActor(c.p,()=>{if(interrupted(c.p))cancel(c.p,'interrupted');else if(time>before&&!modal&&!loading)step(c);});if(time>before&&!modal&&!loading&&settings.autoSkill===true&&(auto===true||window.__STORYWORLD_MOBILE_R63__?.isMobile()))autoCast();return result;};
  const drawBase=drawEffect;drawEffect=function(e,...a){if(e.type!=='goldenThreadR72'||!e.goldenR72)return drawBase.call(this,e,...a);const g=e.goldenR72,from=project(g.a.x,g.a.y),to=project(g.b.x,g.b.y),paint=()=>{ctx.save();ctx.globalAlpha*=.66*Math.max(0,1-e.age/e.life);ctx.lineCap='round';ctx.lineWidth=Math.max(1,1.9*zoom);ctx.strokeStyle='#e9bc52';ctx.beginPath();ctx.moveTo(from.x,from.y-3*zoom);ctx.lineTo(to.x,to.y-3*zoom);ctx.stroke();ctx.lineWidth=Math.max(.7,.85*zoom);ctx.strokeStyle='#fff1bd';ctx.beginPath();ctx.moveTo(from.x,from.y-3*zoom);ctx.lineTo(to.x,to.y-3*zoom);ctx.stroke();ctx.restore();};if(ctx.scope)return ctx.scope({id:'golden:'+g.actor+':'+g.slot,kind:'effect',x:e.x,y:e.y,alive:false,groundAligned:true},paint);return paint();};
  for(const name of ['enterRegion','restoreSave','newGame']){const base=name==='enterRegion'?enterRegion:name==='restoreSave'?restoreSave:newGame,wrapped=async function(...a){cancelAll(name);return base.apply(this,a);};if(name==='enterRegion')enterRegion=wrapped;else if(name==='restoreSave')restoreSave=wrapped;else newGame=wrapped;}
