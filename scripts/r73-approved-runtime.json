@@ -1,0 +1,13 @@
+{
+  "status": "pending-review",
+  "baselineR71": {
+    "index.html": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
+    "dist/phase1.js": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+  },
+  "baselineR72": {
+    "index.html": "73e0be074333bd46bcee52bbb50f37187f6d19c4aa365deaf49096a0aeb5fc18",
+    "dist/phase1.js": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+  },
+  "approved": null,
+  "evidence": null
+}
