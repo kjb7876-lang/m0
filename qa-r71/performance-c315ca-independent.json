@@ -1,0 +1,593 @@
+{
+  "reportKind": "independent paired R70 vs final R71 measurement",
+  "status": "paired performance sample complete; candidate validation remains separate",
+  "provenance": {
+    "repository": "kjb7876-lang/m0",
+    "workflowRunId": 39105884683,
+    "workflowJobId": 117611505842,
+    "harnessCommit": "c315ca78717726c5199e4d0f61380b1b6d6c655a",
+    "runtimeCommit": "f657557ebeaa536fe668df5d013b198b832b0ba1",
+    "artifact": {
+      "name": "r71-paired-profile",
+      "id": 12128931101,
+      "sha256": "c60e84cf4e8a25f2cd441a903d07f0bbd8a1405f99e6064d10c06d5b4e154dc7"
+    },
+    "baseline": {
+      "gameCommit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+      "htmlSha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+      "rendererSha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+    },
+    "candidate": {
+      "htmlSha256": "cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad",
+      "rendererSha256": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+    }
+  },
+  "environment": {
+    "runnerOS": "Ubuntu 22.04.5 (GitHub Actions ubuntu-22.04)",
+    "playwright": "1.56.0",
+    "chromiumVersion": null,
+    "chromiumVersionNote": "Exact Chromium version is not included in paired-job logs.",
+    "browserMode": "headless; chromiumSandbox:true",
+    "viewport": {
+      "width": 1365,
+      "height": 850,
+      "deviceScaleFactor": 1
+    },
+    "seed": 70018,
+    "rendererDevice": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "physicalGPU": false
+  },
+  "result": {
+    "stage": "baseline-vs-candidate",
+    "comparisons": [
+      {
+        "scenario": "movement",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 478.81746031746036,
+          "p50Ms": 500,
+          "p95Ms": 525.0000000000018,
+          "drawP95Ms": 50.29999999997381,
+          "drawCallsPerFrame": 331.8492063492063,
+          "bufferUploadsPerFrame": 203.02380952380952,
+          "materialReplacementsPerFrame": 0.7619047619047619
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 482.51984126984127,
+          "p50Ms": 500,
+          "p95Ms": 525,
+          "drawP95Ms": 51.40000000002328,
+          "drawCallsPerFrame": 332.5,
+          "bufferUploadsPerFrame": 202.07142857142856,
+          "materialReplacementsPerFrame": 0.7936507936507936
+        },
+        "meanFrameReductionFraction": -0.007732343239793771,
+        "p95ReductionFraction": 3.4416913763379853e-15,
+        "regressionFlag": false
+      },
+      {
+        "scenario": "ego-stress",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 445.93823529411765,
+          "p50Ms": 433.39999999999964,
+          "p95Ms": 491.6499999999978,
+          "drawP95Ms": 44.800000000046566,
+          "drawCallsPerFrame": 427.52941176470586,
+          "bufferUploadsPerFrame": 221.625,
+          "materialReplacementsPerFrame": 2.9926470588235294
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 440.26510017050305,
+          "p50Ms": 433.3000000000029,
+          "p95Ms": 475.0000000000018,
+          "drawP95Ms": 47.5,
+          "drawCallsPerFrame": 481.46131713554985,
+          "bufferUploadsPerFrame": 221.85805626598466,
+          "materialReplacementsPerFrame": 2.897271952259165
+        },
+        "meanFrameReductionFraction": 0.01272179569861931,
+        "p95ReductionFraction": 0.033865554764560324,
+        "regressionFlag": false
+      }
+    ],
+    "profiles": []
+  },
+  "trialRows": [
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 0,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "meanMs": 476.9650793650794,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000044
+      },
+      "draw": {
+        "count": 66,
+        "meanMs": 34.74242424242292,
+        "p95Ms": 49.69999999998254
+      },
+      "tick": {
+        "count": 396,
+        "meanMs": 0.4209595959599928,
+        "p95Ms": 0.6999999999825377
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.8412698412698,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.03174603174602
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5849,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 60,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 1,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "meanMs": 482.78412698412694,
+        "p50Ms": 500,
+        "p95Ms": 516.7000000000044
+      },
+      "draw": {
+        "count": 66,
+        "meanMs": 35.53030303030479,
+        "p95Ms": 50.40000000002328
+      },
+      "tick": {
+        "count": 396,
+        "meanMs": 0.4323232323226738,
+        "p95Ms": 0.6999999999534339
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.8412698412698,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.03174603174602
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5849,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 60,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 2,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "meanMs": 482.2555555555556,
+        "p50Ms": 500,
+        "p95Ms": 533.2999999999956
+      },
+      "draw": {
+        "count": 66,
+        "meanMs": 36.95151515151674,
+        "p95Ms": 52.40000000002328
+      },
+      "tick": {
+        "count": 396,
+        "meanMs": 0.3689393939396291,
+        "p95Ms": 0.7000000000116415
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 333.1587301587302,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 201.11111111111111
+      },
+      "counterDelta": {
+        "created": 1196,
+        "removed": 1161,
+        "styleReplacements": 52,
+        "geometryUpdates": 5787,
+        "imageBufferReuseR70": 63,
+        "unchangedUVUploadsSkippedR70": 55,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 3,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 63,
+        "meanMs": 480.6698412698413,
+        "p50Ms": 500,
+        "p95Ms": 533.2999999999993
+      },
+      "draw": {
+        "count": 66,
+        "meanMs": 34.99848484848432,
+        "p95Ms": 50.899999999965075
+      },
+      "tick": {
+        "count": 396,
+        "meanMs": 0.34393939393971734,
+        "p95Ms": 0.6000000000349246
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 331.85714285714283,
+        "textureUploads": 1.4761904761904763,
+        "bufferUploads": 203.015873015873
+      },
+      "counterDelta": {
+        "created": 1202,
+        "removed": 1176,
+        "styleReplacements": 48,
+        "geometryUpdates": 5847,
+        "imageBufferReuseR70": 66,
+        "unchangedUVUploadsSkippedR70": 57,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 0,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 68,
+        "meanMs": 447.2852941176471,
+        "p50Ms": 433.40000000000146,
+        "p95Ms": 499.90000000000146
+      },
+      "draw": {
+        "count": 70,
+        "meanMs": 25.30714285714535,
+        "p95Ms": 46.90000000002328
+      },
+      "tick": {
+        "count": 420,
+        "meanMs": 1.5271428571426353,
+        "p95Ms": 3.6000000000349246
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 429.30882352941177,
+        "textureUploads": 0.6323529411764706,
+        "bufferUploads": 224.73529411764707
+      },
+      "counterDelta": {
+        "created": 1090,
+        "removed": 1209,
+        "styleReplacements": 209,
+        "geometryUpdates": 7253,
+        "imageBufferReuseR70": 781,
+        "unchangedUVUploadsSkippedR70": 732,
+        "solidPaintReuseR70": 704,
+        "imagePaintReuseR70": 117
+      },
+      "hits": 177,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 3,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 1,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 69,
+        "meanMs": 438.1463768115942,
+        "p50Ms": 433.3000000000029,
+        "p95Ms": 466.7000000000007
+      },
+      "draw": {
+        "count": 71,
+        "meanMs": 25.37605633803325,
+        "p95Ms": 45.90000000002328
+      },
+      "tick": {
+        "count": 426,
+        "meanMs": 1.5633802816898676,
+        "p95Ms": 3.400000000023283
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 475.2608695652174,
+        "textureUploads": 0.6666666666666666,
+        "bufferUploads": 224.30434782608697
+      },
+      "counterDelta": {
+        "created": 1112,
+        "removed": 1201,
+        "styleReplacements": 205,
+        "geometryUpdates": 7372,
+        "imageBufferReuseR70": 804,
+        "unchangedUVUploadsSkippedR70": 768,
+        "solidPaintReuseR70": 723,
+        "imagePaintReuseR70": 127
+      },
+      "hits": 182,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 3,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 2,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 68,
+        "meanMs": 442.3838235294118,
+        "p50Ms": 433.3000000000029,
+        "p95Ms": 483.3000000000029
+      },
+      "draw": {
+        "count": 70,
+        "meanMs": 25.511428571417596,
+        "p95Ms": 49.09999999997672
+      },
+      "tick": {
+        "count": 420,
+        "meanMs": 1.460952380953157,
+        "p95Ms": 4.200000000069849
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 97400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 487.6617647058824,
+        "textureUploads": 0.6470588235294118,
+        "bufferUploads": 219.41176470588235
+      },
+      "counterDelta": {
+        "created": 1038,
+        "removed": 1124,
+        "styleReplacements": 192,
+        "geometryUpdates": 7081,
+        "imageBufferReuseR70": 843,
+        "unchangedUVUploadsSkippedR70": 796,
+        "solidPaintReuseR70": 723,
+        "imagePaintReuseR70": 103
+      },
+      "hits": 176,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 1,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 3,
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 68,
+        "meanMs": 444.5911764705882,
+        "p50Ms": 433.3999999999978,
+        "p95Ms": 483.3999999999942
+      },
+      "draw": {
+        "count": 70,
+        "meanMs": 24.59571428571362,
+        "p95Ms": 42.70000000006985
+      },
+      "tick": {
+        "count": 420,
+        "meanMs": 1.5397619047609623,
+        "p95Ms": 3.6000000000931323
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 86400000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryDelta": {
+        "usedJSHeapSize": 0,
+        "totalJSHeapSize": 0
+      },
+      "perFrame": {
+        "drawCalls": 425.75,
+        "textureUploads": 0.5882352941176471,
+        "bufferUploads": 218.51470588235293
+      },
+      "counterDelta": {
+        "created": 1058,
+        "removed": 1175,
+        "styleReplacements": 198,
+        "geometryUpdates": 7050,
+        "imageBufferReuseR70": 777,
+        "unchangedUVUploadsSkippedR70": 736,
+        "solidPaintReuseR70": 699,
+        "imagePaintReuseR70": 109
+      },
+      "hits": 181,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 139,
+      "peakProjectiles": 3,
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    }
+  ],
+  "rawResultLine": "2026-10-18T07:06:11.9365714Z R71_PERF_RESULT {\"stage\":\"baseline-vs-candidate\",\"comparisons\":[{\"scenario\":\"movement\",\"baseline\":{\"trials\":2,\"meanMs\":478.81746031746036,\"p50Ms\":500,\"p95Ms\":525.0000000000018,\"drawP95Ms\":50.29999999997381,\"drawCallsPerFrame\":331.8492063492063,\"bufferUploadsPerFrame\":203.02380952380952,\"materialReplacementsPerFrame\":0.7619047619047619},\"candidate\":{\"trials\":2,\"meanMs\":482.51984126984127,\"p50Ms\":500,\"p95Ms\":525,\"drawP95Ms\":51.40000000002328,\"drawCallsPerFrame\":332.5,\"bufferUploadsPerFrame\":202.07142857142856,\"materialReplacementsPerFrame\":0.7936507936507936},\"meanFrameReductionFraction\":-0.007732343239793771,\"p95ReductionFraction\":3.4416913763379853e-15,\"regressionFlag\":false},{\"scenario\":\"ego-stress\",\"baseline\":{\"trials\":2,\"meanMs\":445.93823529411765,\"p50Ms\":433.39999999999964,\"p95Ms\":491.6499999999978,\"drawP95Ms\":44.800000000046566,\"drawCallsPerFrame\":427.52941176470586,\"bufferUploadsPerFrame\":221.625,\"materialReplacementsPerFrame\":2.9926470588235294},\"candidate\":{\"trials\":2,\"meanMs\":440.26510017050305,\"p50Ms\":433.3000000000029,\"p95Ms\":475.0000000000018,\"drawP95Ms\":47.5,\"drawCallsPerFrame\":481.46131713554985,\"bufferUploadsPerFrame\":221.85805626598466,\"materialReplacementsPerFrame\":2.897271952259165},\"meanFrameReductionFraction\":0.01272179569861931,\"p95ReductionFraction\":0.033865554764560324,\"regressionFlag\":false}],\"profiles\":[]}"
+}

@@ -46,9 +46,19 @@ const report = {
   actualRelay: false,
   checks: [],
   screenshots: [],
+  caseResults: [],
+  caseFailureDiagnostics: [],
   status: 'running',
 };
 const saveReport = () => fs.writeFile(path.join(OUT, 'browser.json'), JSON.stringify(report, null, 2) + '\n');
+let activeCase = null;
+const closedContexts = new WeakSet();
+
+async function closeTrackedContext(context) {
+  if (!context || closedContexts.has(context)) return;
+  closedContexts.add(context);
+  await context.close();
+}
 
 function seedMath() {
   let seed = 71018;
@@ -66,8 +76,12 @@ async function openGame({variant = 'candidate', mobile = false, viewport, contex
     isMobile: mobile,
     hasTouch: mobile,
   });
+  if (activeCase) activeCase.contexts.add(context);
   const page = await context.newPage();
   const errors = [];
+  if (activeCase) {
+    activeCase.pages.set(page, errors);
+  }
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(seedMath);
   await page.route('**/*', async route => {
@@ -90,8 +104,64 @@ async function openGame({variant = 'candidate', mobile = false, viewport, contex
 }
 
 async function closeGame(game) {
-  if (game?.ownContext) await game.context.close();
-  else await game?.page?.close();
+  if (game?.ownContext) await closeTrackedContext(game.context);
+  else if (game?.page && !game.page.isClosed()) await game.page.close();
+}
+
+async function runCase(name, fn) {
+  const state = {name, contexts: new Set(), pages: new Map()};
+  activeCase = state;
+  const startedAt = Date.now();
+  let failure = null;
+  try { await fn(); } catch (error) { failure = error; }
+
+  if (failure) {
+    const pages = [];
+    let pageIndex = 0;
+    for (const [page, pageErrors] of state.pages) {
+      let runtime = null;
+      try {
+        if (!page.isClosed()) runtime = await page.evaluate(() => {
+          const safe = fn => { try { return fn(); } catch (error) { return {error: String(error)}; } };
+          const panel = document.getElementById('panel'), box = document.getElementById('modal');
+          const profile = safe(() => window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.());
+          const health = safe(() => typeof player === 'undefined' ? null : window.__STORYWORLD_HEALTH_R71__?.inspect?.(player));
+          const progression = safe(() => window.__STORYWORLD_PROGRESSION_R71__?.inspect?.());
+          const coop = safe(() => window.__STORYWORLD_COOP_SIM_R62__?.inspect?.());
+          return {
+            zone: typeof zone === 'undefined' ? null : zone, layer: typeof layer === 'undefined' ? null : layer,
+            room: typeof room === 'undefined' ? null : {id: room?.id, layer: room?.layer, engaged: room?.engaged, cleared: room?.cleared, sceneCheckpoint: room?.sceneCheckpoint || null},
+            loading: typeof loading === 'undefined' ? null : loading, modal: typeof modal === 'undefined' ? null : modal,
+            story: {current: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part}, queued: typeof storyQueue === 'undefined' ? null : storyQueue?.length, readCount: typeof readScenes === 'undefined' ? null : readScenes?.size},
+            panel: panel ? {hidden: box?.classList.contains('hidden'), text: panel.innerText?.slice(0,1200), storyNext: !!document.getElementById('storyNext'), upClose: !!document.getElementById('upClose')} : null,
+            profile, health, progression, coop, events: safe(() => typeof SW3 === 'undefined' ? null : SW3.events.slice(-16)),
+            fatal: document.getElementById('fatal')?.textContent?.slice(0,1200) || null,
+          };
+        });
+      } catch (diagnosticError) { runtime = {diagnosticError: diagnosticError.stack || String(diagnosticError)}; }
+      let screenshot = null, screenshotError = null;
+      try {
+        if (!page.isClosed()) {
+          screenshot = path.join(OUT, `case-failure-${name.replace(/[^a-zA-Z0-9_-]/g, '_')}-${pageIndex}.png`);
+          await page.screenshot({path: screenshot, fullPage: true, timeout: 15000});
+          report.screenshots.push(path.basename(screenshot));
+        }
+      } catch (error) { screenshotError = error.message; screenshot = null; }
+      pages.push({pageIndex, runtimeErrors: [...pageErrors], runtime, screenshot, screenshotError});
+      pageIndex++;
+    }
+    report.caseFailureDiagnostics.push({name, error: failure.stack || String(failure), pages});
+  }
+
+  const cleanupErrors = [];
+  for (const context of state.contexts) {
+    try { await closeTrackedContext(context); } catch (error) { cleanupErrors.push(error.stack || String(error)); }
+  }
+  if (!failure && cleanupErrors.length) failure = new Error(`Case ${name} context cleanup failed: ${cleanupErrors.join('\n')}`);
+  activeCase = null;
+  const result = {name, status: failure ? 'failed' : 'passed', durationMs: Date.now() - startedAt, error: failure ? failure.stack || String(failure) : null, cleanupErrors};
+  report.caseResults.push(result);
+  console.log('R71_CASE', JSON.stringify(result));
 }
 
 async function entryFailure(page, id, layer, phase, entered, error) {
@@ -300,6 +370,85 @@ async function seedTrustedStoryHistory(page, {throughId = null, requireAllBossMa
   return fixture;
 }
 
+async function restoreNativeSave(page, save, label) {
+  assert.ok(save?.zone && save?.layer, `${label}: native save must include its location`);
+  const upgradeClose = page.locator('#upClose');
+  if (await upgradeClose.isVisible().catch(() => false)) await upgradeClose.click();
+  const returned = await page.evaluate(async raw => {
+    const snapshot = () => {
+      const safe = fn => { try { return fn(); } catch (error) { return {error: String(error)}; } };
+      const profile = safe(() => window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.());
+      const health = safe(() => typeof player === 'undefined' ? null : window.__STORYWORLD_HEALTH_R71__?.inspect?.(player));
+      const progression = safe(() => window.__STORYWORLD_PROGRESSION_R71__?.inspect?.());
+      return {
+        zone: typeof zone === 'undefined' ? null : zone,
+        layer: typeof layer === 'undefined' ? null : layer,
+        room: typeof room === 'undefined' ? null : {id: room?.id, layer: room?.layer, engaged: room?.engaged, cleared: room?.cleared},
+        loading: typeof loading === 'undefined' ? null : loading,
+        modal: typeof modal === 'undefined' ? null : modal,
+        scene: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part},
+        queuedScenes: typeof storyQueue === 'undefined' ? null : storyQueue?.length,
+        readSceneCount: typeof readScenes === 'undefined' ? null : readScenes?.size,
+        storyNextVisible: !!document.getElementById('storyNext') && getComputedStyle(document.getElementById('storyNext')).display !== 'none',
+        upgradeCloseVisible: !!document.getElementById('upClose') && getComputedStyle(document.getElementById('upClose')).display !== 'none',
+        profile: profile && {stage: profile.stage, busy: profile.busy, error: profile.error},
+        health: health && health.player,
+        progression: progression && {revision: progression.revision, tier: progression.tier},
+        events: safe(() => typeof SW3 === 'undefined' ? null : SW3.events.slice(-12).map(event => ({at:event.at,type:event.type,zone:event.zone,layer:event.layer,part:event.part,key:event.key,playerId:event.playerId,reason:event.reason}))),
+      };
+    };
+    try {
+      const result = await restoreSave(raw);
+      return {ok: true, result: typeof result === 'boolean' || typeof result === 'string' ? result : null, state: snapshot()};
+    } catch (error) {
+      return {ok: false, error: error?.stack || String(error), state: snapshot()};
+    }
+  }, save);
+  console.log('R71_NATIVE_RESTORE_RETURN', JSON.stringify({label, requested: {zone: save.zone, layer: save.layer}, ...returned}));
+  if (!returned.ok) throw new Error(`${label}: native restoreSave rejected: ${returned.error}`);
+
+  const acknowledged = [];
+  for (let step = 0; step < 32; step++) {
+    const state = await page.evaluate(() => ({
+      zone: typeof zone === 'undefined' ? null : zone,
+      loading: typeof loading === 'undefined' ? null : loading,
+      modal: typeof modal === 'undefined' ? null : modal,
+      scene: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part},
+      nextVisible: !!document.getElementById('storyNext') && getComputedStyle(document.getElementById('storyNext')).display !== 'none',
+    }));
+    if (!state.modal) break;
+    if (state.zone !== save.zone || state.scene?.id !== save.zone || state.scene?.part !== 'pre' || !state.nextVisible) {
+      throw new Error(`${label}: unexpected modal after native restore; only a matching current-map pre-scene may be acknowledged: ${JSON.stringify(state)}`);
+    }
+    acknowledged.push(state.scene.key);
+    await page.locator('#storyNext').click();
+    await page.waitForFunction(({key}) => !modal || storyScene?.key !== key, {key: state.scene.key}, {timeout: 10000});
+  }
+  const finalState = await page.evaluate(() => ({
+    zone: typeof zone === 'undefined' ? null : zone,
+    layer: typeof layer === 'undefined' ? null : layer,
+    room: typeof room === 'undefined' ? null : {id: room?.id, layer: room?.layer, engaged: room?.engaged, cleared: room?.cleared},
+    loading: typeof loading === 'undefined' ? null : loading,
+    modal: typeof modal === 'undefined' ? null : modal,
+    scene: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part},
+    readSceneCount: typeof readScenes === 'undefined' ? null : readScenes?.size,
+    profile: window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.() || null,
+    events: typeof SW3 === 'undefined' ? null : SW3.events.slice(-16).map(event => ({at:event.at,type:event.type,zone:event.zone,layer:event.layer,part:event.part,key:event.key,playerId:event.playerId,reason:event.reason})),
+  }));
+  console.log('R71_NATIVE_RESTORE_FINAL', JSON.stringify({label, requested: {zone: save.zone, layer: save.layer}, acknowledged, state: finalState}));
+  try {
+    await page.waitForFunction(({zone: expectedZone, layer: expectedLayer}) => window.eval(`zone===${JSON.stringify(expectedZone)} && layer===${JSON.stringify(expectedLayer)} && !loading && !modal`),
+      {zone: save.zone, layer: save.layer}, {timeout: 60000});
+  } catch (error) {
+    throw new Error(`${label}: native restore did not settle: ${JSON.stringify(finalState)}\n${error.stack || error}`);
+  }
+  assert.equal(finalState.zone, save.zone, `${label}: native restore returns to the saved map`);
+  assert.equal(finalState.layer, save.layer, `${label}: native restore returns to the saved layer`);
+  assert.equal(finalState.loading, false, `${label}: native restore finishes loading`);
+  assert.equal(finalState.modal, false, `${label}: only expected pre-scenes were acknowledged`);
+  return {returned, acknowledged, finalState};
+}
+
 async function selectDifficulty(page, id, tier, {mobile = false, options = {}} = {}) {
   const layer = options.layer || 'STORY';
   const before = await page.evaluate(({id, layer}) => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode(id, layer), {id, layer});
@@ -342,7 +491,7 @@ function assertNoPageErrors(game) {
 try {
   // The actual native tier picker is used to enter each map. Selection alone
   // must not mutate map state; confirmation applies exactly once.
-  {
+  await runCase('native-difficulty-confirm-and-first-clear', async () => {
     const game = await openGame();
     const {page} = game;
     await page.evaluate(() => { auto = false; settings.autoSkill = false; });
@@ -390,11 +539,11 @@ try {
     report.checks.push({name: 'native-difficulty-confirm-and-first-clear', rewards, dialog: pc});
     assertNoPageErrors(game);
     await closeGame(game);
-  }
+  });
 
   // Exercise real touch input and both mobile orientations on a mobile
   // context. The options and actions must remain inside the visual viewport.
-  {
+  await runCase('mobile-touch-difficulty-portrait-landscape', async () => {
     const mobile = await openGame({mobile: true});
     const {page} = mobile;
     const fits = async () => page.evaluate(() => {
@@ -425,11 +574,11 @@ try {
     report.checks.push({name: 'mobile-touch-difficulty-portrait-landscape', portrait, landscape, state});
     assertNoPageErrors(mobile);
     await closeGame(mobile);
-  }
+  });
 
   // Verify health balance through real enemy hit handling, a native upgrade,
   // R70 save migration, restore and the native return-to-hub respawn route.
-  {
+  await runCase('health-cap-bosses-hit-save-upgrade-respawn', async () => {
     const base = await openGame({variant: 'baseline'});
     await enterRegion(base.page, 'dist00');
     const baselineHealth = await base.page.evaluate(() => ({
@@ -674,6 +823,7 @@ try {
     assert.equal(afterUpgrade.rank, 1, 'native vitality upgrade must be purchased');
     assert.equal(afterUpgrade.max, 777, 'vitality cannot inflate the fixed player max HP');
     assert.equal(afterUpgrade.inspect.maxHp, 777);
+    if (await page.locator('#upClose').isVisible().catch(() => false)) await page.locator('#upClose').click();
 
     const readBossHealth = () => page.evaluate(() => {
       const healthRows = window.__STORYWORLD_HEALTH_R71__.inspect(player).bosses;
@@ -730,24 +880,21 @@ try {
 
     const newSave = await page.evaluate(() => serializeSave());
     assert.equal(newSave.player.healthR71Applied, true, 'new save stores its health normalization marker');
-    await page.evaluate(async save => restoreSave(save), newSave);
-    await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
+    const firstMarkedRestore = await restoreNativeSave(page, newSave, 'first marked-save restore');
     const afterRestore = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     const bossesAfterRestore = await readBossHealth();
     assertBossStateStable(bossesBeforeSave, bossesAfterRestore, 'first marked-save restore');
     assert.equal(afterRestore.max, 777);
     assert.equal(afterRestore.inspect.maxHp, 777);
 
-    await page.evaluate(async save => restoreSave(save), newSave);
-    await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
+    const secondMarkedRestore = await restoreNativeSave(page, newSave, 'second marked-save restore');
     const afterRestoreAgain = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     const bossesAfterRestoreAgain = await readBossHealth();
     assertBossStateStable(bossesBeforeSave, bossesAfterRestoreAgain, 'second marked-save restore');
     assert.equal(afterRestoreAgain.max, 777);
     assert.equal(afterRestoreAgain.inspect.maxHp, 777);
 
-    await page.evaluate(async save => restoreSave(save), oldSave);
-    await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
+    const oldRestore = await restoreNativeSave(page, oldSave, 'R70 old-save migration');
     const afterOldRestore = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     assert.equal(afterOldRestore.max, 777, 'R70 saves normalize into the R71 health cap');
     assert.equal(afterOldRestore.inspect.maxHp, 777);
@@ -758,14 +905,14 @@ try {
     const respawn = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     assert.equal(respawn.max, 777);
     assert.equal(respawn.hp, 777, 'native death-to-hub respawn restores exactly the balanced cap');
-    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', baselineHealth, initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, bossesBeforeSave, bossesAfterRestore, bossesAfterRestoreAgain, afterRestore, afterRestoreAgain, afterOldRestore, respawn});
+    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', baselineHealth, initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, bossesBeforeSave, bossesAfterRestore, bossesAfterRestoreAgain, afterRestore, afterRestoreAgain, afterOldRestore, markedRestoreDiagnostics: [firstMarkedRestore, secondMarkedRestore, oldRestore], respawn});
     assertNoPageErrors(game);
     await closeGame(game);
-  }
+  });
 
   // Guard cases use real native hurt() admission, but their attacker/source
   // semantics deliberately model dodge, self-cost, and existing wound ticks.
-  {
+  await runCase('bleed-admission-guards-native-hurt', async () => {
     const game = await openGame();
     const {page} = game;
     await enterRegion(page, 'dist00');
@@ -796,11 +943,11 @@ try {
     report.checks.push({name: 'bleed-dodge-self-dot-guards', guards});
     assertNoPageErrors(game);
     await closeGame(game);
-  }
+  });
 
   // Run probability boundaries against the actual production roller. Existing
   // tier chance and 1..7 amount rules remain unchanged.
-  {
+  await runCase('native-point-drop-probability-and-amount-boundaries', async () => {
     const game = await openGame();
     const values = await game.page.evaluate(() => {
       const p = window.__STORYWORLD_PROGRESSION_R71__, rows = [];
@@ -826,11 +973,11 @@ try {
     report.checks.push({name: 'production-drop-chance-and-amount-boundaries', values});
     assertNoPageErrors(game);
     await closeGame(game);
-  }
+  });
 
   // Test all authored material palettes plus actual hospital and ordinary map
   // assignment. Compare the unchanged hospital geometry against the R70 game.
-  {
+  await runCase('map-material-palettes-and-hospital-geometry', async () => {
     const paletteGame = await openGame();
     const palettes = await paletteGame.page.evaluate(() => {
       const art = window.StoryPhase1.REGIONAL_TERRAIN_ART;
@@ -904,12 +1051,12 @@ try {
     report.checks.push({name: 'all-map-palettes-and-hospital-geometry', themes: palettes, activeMap, hospitalAdmission: paletteHospitalAdmission, hospital, baselineHospitalAdmission, hospitalBase});
     assertNoPageErrors(paletteGame); assertNoPageErrors(baseline);
     await closeGame(paletteGame); await closeGame(baseline);
-  }
+  });
 
   // A real native enemy kill creates a drop in the expanded hospital wing at
   // world coordinates above 32; the command capture must include icon + label,
   // pickup is one-shot, and its claim survives save/restore.
-  {
+  await runCase('native-expanded-point-drop-pickup-and-flashlight', async () => {
     const game = await openGame();
     const {page} = game;
     const hospitalAdmission = await seedTrustedStoryHistory(page, {throughId: 'ep1a08'});
@@ -1057,12 +1204,12 @@ try {
     report.checks.push({name: 'native-point-drop-capture-pickup-persistence-flashlight', hospitalAdmission, fixture, visual, flashlight, pickup: {...pickup, save: '[serialized JSON omitted]'}, afterReload});
     assertNoPageErrors(game);
     await closeGame(game);
-  }
+  });
 
   // Two browser pages exercise native local coop simulation: host clear and
   // pickup ownership are authoritative; a guest cannot select difficulty or
   // claim drops. This is explicitly not a relay/network integration test.
-  {
+  await runCase('two-page-local-coop-health-rewards-expanded-drops', async () => {
     const context = await browser.newContext({viewport: {width: 1280, height: 800}, deviceScaleFactor: 1});
     const host = await openGame({context});
     const hospitalAdmission = await seedTrustedStoryHistory(host.page, {throughId: 'ep1a08'});
@@ -1432,9 +1579,14 @@ try {
     report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
     report.actualRelay = false;
     assertNoPageErrors(host); assertNoPageErrors(guest);
-    await closeGame(host); await closeGame(guest); await context.close();
-  }
+    await closeGame(host); await closeGame(guest); await closeTrackedContext(context);
+  });
 
+  const passedCases = report.caseResults.filter(row => row.status === 'passed').length;
+  const failedCases = report.caseResults.filter(row => row.status === 'failed').length;
+  report.caseSummary = {attempted: report.caseResults.length, passed: passedCases, failed: failedCases};
+  assert.equal(report.caseResults.length, 8, 'all eight independent browser regression cases must be attempted');
+  if (failedCases) throw new Error(`R71 browser cases failed (${passedCases}/${report.caseResults.length} passed): ${report.caseResults.filter(row => row.status === 'failed').map(row => row.name).join(', ')}`);
   report.status = 'passed';
   report.caveats = [
     'Headless sandboxed Chromium and emulated mobile; not a physical phone, GPU, or relay test.',
