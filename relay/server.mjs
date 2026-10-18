@@ -3,8 +3,7 @@ import { randomBytes, createHash, timingSafeEqual } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer, WebSocket } from 'ws';
 
-export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R73R1', protocol: 1 });
-export const WORLD_COORD_LIMIT_R73 = 128;
+export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R63R1', protocol: 1 });
 export const CHARACTERS = Object.freeze(['hwando', 'seoha', 'neon', 'michaela', 'lauren', 'hunter', 'slayer', 'gunner']);
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const LIMITS = Object.freeze({ players: 4, rooms: 32, connections: 160, payload: 524288, buffer: 2097152,
@@ -13,8 +12,6 @@ const now = () => Date.now();
 const record = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => Number.isSafeInteger(v) && v >= min && v <= max;
 const string = (v, max) => typeof v === 'string' && v.length > 0 && v.length <= max;
-const validMazeR73 = v => v === undefined || record(v) && Object.keys(v).length === 2 &&
-  Object.hasOwn(v, 'version') && Object.hasOwn(v, 'seed') && v.version === 1 && integer(v.seed, 0, 0xffffffff);
 const hash = (v) => createHash('sha256').update(v).digest();
 const token = () => randomBytes(32).toString('base64url');
 function safeJSON(value, maxNodes = 50000, maxDepth = 16) {
@@ -44,31 +41,14 @@ function validProfile(m, partial = false) {
 }
 function validInput(input) {
   if (!record(input)) return false;
-  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance', 'goldenCast', 'goldenSecond'];
-  if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', 'goldenAim', ...flags].includes(k))) return false;
+  const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance'];
+  if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', ...flags].includes(k))) return false;
   if (input.skillSlot !== undefined && !['w', 'e', 'r'].includes(input.skillSlot)) return false;
   for (const axis of ['moveX', 'moveY']) if (input[axis] !== undefined && !(typeof input[axis] === 'number' && Number.isFinite(input[axis]) && Math.abs(input[axis]) <= 1)) return false;
   for (const key of flags) if (input[key] !== undefined && typeof input[key] !== 'boolean') return false;
   if (input.target !== undefined && input.target !== null && !string(input.target, 128)) return false;
-  if(input.goldenAim!==undefined&&!(record(input.goldenAim)&&Object.keys(input.goldenAim).length===2&&['x','y'].every(k=>Number.isFinite(input.goldenAim[k])&&Math.abs(input.goldenAim[k])<=WORLD_COORD_LIMIT_R73)))return false;
-  if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && Math.abs(input.route[k]) <= WORLD_COORD_LIMIT_R73))) return false;
+  if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && input.route[k] >= 0 && input.route[k] <= 100))) return false;
   return safeJSON(input, 64, 3);
-}
-function validGolden(command) {
-  if(!record(command)||command.kind!=='golden'||Object.keys(command).some(k=>!['kind','action'].includes(k))||!record(command.action))return false;
-  const a=command.action;if(typeof a.op!=='string')return false;
-  const schemas={save:['op','id','name','strokes'],rename:['op','id','name'],clone:['op','id'],delete:['op','id'],equip:['op','id'],learn:['op'],upgrade:['op','key'],auto:['op','enabled']},fields=Object.hasOwn(schemas,a.op)?schemas[a.op]:null;
-  if(!fields||Object.keys(a).some(k=>!fields.includes(k)))return false;
-  if(['rename','clone','delete','equip'].includes(a.op)&&!(string(a.id,48)&&/^[A-Za-z0-9_-]+$/.test(a.id)))return false;
-  if(['save','rename'].includes(a.op)&&!(typeof a.name==='string'&&a.name.length<=24&&!/[\x00-\x1f<>]/.test(a.name)))return false;
-  if(a.op==='save'){
-    if(a.id!=null&&!(string(a.id,48)&&/^[A-Za-z0-9_-]+$/.test(a.id)))return false;
-    if(!Array.isArray(a.strokes)||!a.strokes.length||a.strokes.length>12||a.strokes.reduce((n,s)=>n+(Array.isArray(s)?s.length:1000),0)>192)return false;
-    if(!a.strokes.every(s=>Array.isArray(s)&&s.length>=2&&s.every(p=>record(p)&&Object.keys(p).length===2&&['x','y'].every(k=>Number.isFinite(p[k])&&Math.abs(p[k])<=1.001))))return false;
-  }
-  if(a.op==='upgrade'&&!['cooldown','damage','size','speed','slots','equip'].includes(a.key))return false;
-  if(a.op==='auto'&&typeof a.enabled!=='boolean')return false;
-  return safeJSON(command,800,7);
 }
 function validState(state, epoch) {
   if (!record(state) || !safeJSON(state)) return false;
@@ -135,7 +115,7 @@ export function createRelay(options = {}) {
     if (newEpoch) { room.epoch++; room.snapshot = null; }
     room.regionId = regionId; room.layer = layer; room.phase = 'loading'; room.loadStarted = now();
     for (const p of room.players.values()) p.loaded = false;
-    broadcast(room, { type: 'transition', epoch: room.epoch, regionId, layer: room.layer, mazeR73: room.mazeR73 || { version: 1, seed: 0 }, reason });
+    broadcast(room, { type: 'transition', epoch: room.epoch, regionId, layer: room.layer, reason });
     lobby(room);
   }
   function attach(peer, room, player, reconnecting = false) {
@@ -145,7 +125,7 @@ export function createRelay(options = {}) {
     let resumeToken = null;
     if (player.id !== room.hostId) { resumeToken = token(); player.tokenHash = hash(resumeToken); }
     send(peer, { type: 'welcome', ...PROTOCOL, code: room.code, selfId: player.id, hostId: room.hostId,
-      resumeToken, graceMs: limits.graceMs, epoch: room.epoch, phase: room.phase, regionId: room.regionId, layer: room.layer, mazeR73: room.mazeR73 || { version: 1, seed: 0 }, players: roster(room) });
+      resumeToken, graceMs: limits.graceMs, epoch: room.epoch, phase: room.phase, regionId: room.regionId, layer: room.layer, players: roster(room) });
     if (room.phase !== 'lobby') {
       barrier(room, room.regionId, reconnecting ? 'reconnect' : 'late_join');
       if (room.snapshot) send(peer, room.snapshot);
@@ -215,15 +195,11 @@ export function createRelay(options = {}) {
         if (!string(m.regionId, 128) || !/^[A-Za-z0-9_-]+$/.test(m.regionId)) return fail(peer, 'REGION_INVALID', 'A valid starting region is required.');
         if (![...room.players.values()].every(p => p.peer && p.ready)) return fail(peer, 'NOT_READY', 'Every player must be connected and ready.');
         if (m.layer !== undefined && !['STORY','DREAM'].includes(m.layer)) return fail(peer, 'LAYER_INVALID', 'Invalid story layer.');
-        if (!validMazeR73(m.mazeR73)) return fail(peer, 'MAZE_INVALID', 'Invalid host maze seed.');
-        room.mazeR73 = m.mazeR73 ? { version: 1, seed: m.mazeR73.seed } : { version: 1, seed: 0 };
         barrier(room, m.regionId, 'start', true, m.layer || 'STORY'); return;
       case 'transition':
         if (!hostOnly()) return;
         if (!['playing', 'paused'].includes(room.phase) || m.epoch !== room.epoch + 1 || !string(m.regionId, 128) || !/^[A-Za-z0-9_-]+$/.test(m.regionId)) return fail(peer, 'TRANSITION_INVALID', 'Invalid transition, epoch, or room phase.');
         if (m.layer !== undefined && !['STORY','DREAM'].includes(m.layer)) return fail(peer, 'LAYER_INVALID', 'Invalid story layer.');
-        if (!validMazeR73(m.mazeR73)) return fail(peer, 'MAZE_INVALID', 'Invalid host maze seed.');
-        room.mazeR73 = m.mazeR73 ? { version: 1, seed: m.mazeR73.seed } : { version: 1, seed: 0 };
         barrier(room, m.regionId, 'map', true, m.layer || room.layer); return;
       case 'loaded':
         if (!epochOK()) return;
@@ -240,7 +216,7 @@ export function createRelay(options = {}) {
         if (!epochOK()) return;
         if (!take(peer.commandRate)) return fail(peer, 'COMMAND_RATE', 'Command rate exceeded.');
         if (!integer(m.seq) || m.seq <= player.commandSeq) return fail(peer, 'STALE_SEQUENCE', 'Command sequence must increase.');
-        if (!validGolden(m.command) && (!record(m.command) || m.command.kind !== 'upgrade' || !string(m.command.passiveId, 64) || !/^[A-Za-z0-9_-]+$/.test(m.command.passiveId) || Object.keys(m.command).some(k => !['kind','passiveId'].includes(k)))) return fail(peer, 'COMMAND_INVALID', 'Invalid upgrade or golden design command.');
+        if (!record(m.command) || m.command.kind !== 'upgrade' || !string(m.command.passiveId, 64) || !/^[A-Za-z0-9_-]+$/.test(m.command.passiveId) || Object.keys(m.command).some(k => !['kind','passiveId'].includes(k))) return fail(peer, 'COMMAND_INVALID', 'Invalid passive upgrade command.');
         if (!['playing','paused'].includes(room.phase)) return fail(peer, 'SESSION_PAUSED', 'Wait until loading completes before upgrading.');
         player.commandSeq = m.seq; send(room.players.get(room.hostId)?.peer, { type: 'command', playerId: player.id, seq: m.seq, epoch: room.epoch, command: m.command }); return;
       case 'snapshot':

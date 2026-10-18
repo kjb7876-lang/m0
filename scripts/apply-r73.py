@@ -33,7 +33,7 @@ def build(site):
     old = 'const layouts=new Map();const get=id=>{if(!layouts.has(id)){const d=regionById[id];layouts.set(id,api.explorationLayout(id,d?.theme,d?.safe,d?.meta));}return layouts.get(id);};'
     if html.count(old) != 1:
         raise RuntimeError('R73 layout cache anchor drift')
-    html = html.replace(old, "const layouts=new Map();let layoutRunR73=null;const get=(id,l=layer)=>{const run=window.__STORYWORLD_MAZE_R73__?.run()||0;if(layoutRunR73!==run){layouts.clear();layoutRunR73=run;}const seed=window.__STORYWORLD_MAZE_R73__?.seed(id,l)||0,key=id+':'+seed;let value=layouts.get(key);if(value)layouts.delete(key);else{const d=regionById[id];value=api.explorationLayout(id,d?.theme,d?.safe,{...d?.meta,seedR73:seed});}layouts.set(key,value);while(layouts.size>128)layouts.delete(layouts.keys().next().value);return value;};")
+    html = html.replace(old, "const layouts=new Map();let layoutRunR73=null;const get=(id,l=layer)=>{const run=window.__STORYWORLD_MAZE_R73__?.run()||0;if(layoutRunR73!==run){layouts.clear();layoutRunR73=run;}const mode=window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off',seed=mode==='off'?(window.__STORYWORLD_MAZE_R73__?.seed(id,l)||0):0,key=id+':'+seed;let value=layouts.get(key);if(value)layouts.delete(key);else{const d=regionById[id];value=api.explorationLayout(id,d?.theme,d?.safe,{...d?.meta,seedR73:seed});}layouts.set(key,value);while(layouts.size>128)layouts.delete(layouts.keys().next().value);return value;};")
     old = 'r.exploration=get(r.id);'
     if html.count(old) != 1:
         raise RuntimeError('R73 layer-specific layout anchor drift')

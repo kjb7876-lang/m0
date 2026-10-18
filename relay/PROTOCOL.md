@@ -1,15 +1,15 @@
-# StoryWorld R73 relay protocol 1
+# StoryWorld R62 relay protocol 1
 
-This protocol is isolated from Hapil: `gameId: "storyworld"`, `build: "R73R1"`, `protocol: 1` must match exactly. JSON text over `/ws`; query strings are rejected. Use `wss://…/ws` in production. Each room has one authoritative host and at most four total players. The relay never simulates monsters, damage, drops, map rules, RNG, or story decisions.
+This protocol is isolated from Hapil: `gameId: "storyworld"`, `build: "R62"`, `protocol: 1` must match exactly. JSON text over `/ws`; query strings are rejected. Use `wss://…/ws` in production. Each room has one authoritative host and at most four total players. The relay never simulates monsters, damage, drops, map rules, RNG, or story decisions.
 
 ## Entry and room state
 
 Client requests:
 
 ```json
-{"type":"create","gameId":"storyworld","build":"R73R1","protocol":1,"nick":"방장","character":"hwando"}
-{"type":"join","gameId":"storyworld","build":"R73R1","protocol":1,"code":"ABC234","nick":"친구","character":"seoha"}
-{"type":"reconnect","gameId":"storyworld","build":"R73R1","protocol":1,"code":"ABC234","playerId":"server-assigned","token":"in-memory-token"}
+{"type":"create","gameId":"storyworld","build":"R62","protocol":1,"nick":"방장","character":"hwando"}
+{"type":"join","gameId":"storyworld","build":"R62","protocol":1,"code":"ABC234","nick":"친구","character":"seoha"}
+{"type":"reconnect","gameId":"storyworld","build":"R62","protocol":1,"code":"ABC234","playerId":"server-assigned","token":"in-memory-token"}
 ```
 
 Characters: `hwando`, `seoha`, `neon`, `michaela`, `lauren`, `hunter`, `slayer`, `gunner`. Nicknames are 1–24 characters, with no control or HTML delimiter characters. Render nicknames with `textContent`, never HTML.
@@ -56,12 +56,6 @@ Client `{type:"resync",epoch,lastSeq}` gets the newest retained snapshot; the ho
 
 `{type:"command",epoch,seq,command:{kind:"upgrade",passiveId:"tempo"}}` forwards only to the host with server-assigned `playerId`. The command stream has its own monotonically increasing sequence and a 10/s (20 burst) limit. Only the exact upgrade operation and bounded passive ID are accepted; direct HP, points, level, damage or other mutations are rejected. Host simulation validates the passive ID, available points and upgrade cost, then broadcasts the resulting normal snapshot. Commands work in playing/paused phases so passive menus remain usable, and are refused during loading. Commands from different members cannot impersonate the host.
 
-## R72 golden design extension
-
-The R72 relay source additionally accepts `{type:"command",epoch,seq,command:{kind:"golden",action}}` under the same actor identity, epoch, rate and duplicate protections. Allowed actions are `save`, `rename`, `clone`, `delete`, `learn`, `equip`, `upgrade` and `auto`. Each action has an exact field allowlist. Names are at most24 characters, IDs48, normalized strokes12 and transported points192; the host further normalizes stored designs to96 points and checks learned state, paid capacity and point costs. Clients cannot submit rank totals, points, damage, positions or cooldown mutations as management commands.
-
-Actual casts use optional strict boolean `goldenCast`/`goldenSecond` input flags and an optional finite `{x,y}` `goldenAim` bounded to ±100. The host applies its own range, obstacle, equipment, cooldown and damage checks. These keys are omitted from ordinary R72 input packets, retaining ordinary movement on an older relay. New golden guest actions require this extension to be deployed; this draft does not deploy the public relay. Existing R62 upgrade commands and clients remain supported.
-
 ## Departures and errors
 
 - `{type:"leave"}`: explicit guest departure removes its slot immediately. Host departure closes the room.
@@ -74,13 +68,3 @@ Actual casts use optional strict boolean `goldenCast`/`goldenSecond` input flags
 Default 32 rooms, 160 raw connections, 4 seats/room. Per socket: input 40/s (70 burst), snapshot 15/s (20 burst), event 30/s (40 burst), all messages 80/s (160 burst), bytes 2 MiB/s (4 MiB burst); resync 0.5/s (3 burst). Per IP: connection 1/s (30 burst), entry 0.2/s (12 burst). Active connections receive protocol ping every 25 seconds for dead-connection detection only. Compression is disabled; max fragments 64; max buffered chunks 1024; send buffer bounded at 2 MiB. No external keep-alive or sleep circumvention exists.
 
 Production requires an explicit exact HTTPS origin allowlist and TLS or Render's trusted HTTPS proxy header. Origin checks restrict browser callers, not arbitrary custom clients, so they are combined with per-IP/socket limits. This is a trusted-friend room-code service, not an anti-cheat service or account-authenticated game.
-
-## R73 host-owned map seeds
-
-R73 transport uses build `R73R1` and rejects older transport builds to prevent peers from loading different collision geometry. The internal cooperative save/snapshot build remains R62 for version-6 save compatibility; it is a separate contract.
-
-Host `start` and `transition` carry `mazeR73: {version:1, seed:0..4294967295}`. Only these two own fields are accepted. Missing metadata selects legacy seed 0. Arbitrary coordinates, geometry and guest seed changes are refused. Epoch, readiness, host-only transition, finite bounds, exact origin, WSS and token rotation checks are preserved.
-
-The accepted seed is attached to transition/welcome and retained for late join and reconnect. A guest applies it before native map loading, including a changed seed for the same map ID. The seed does not grant a map unlock or bypass story progression.
-
-R73 routes and golden aim retain a finite signed `[-128,128]` coordinate envelope. Canonical map bounds range from -28 to 109: dist01 entry is `(103,17)` and hospital floor includes `(-11,34)`. The old 0..100 / +/-100 transport range rejected those legitimate coordinates. The host still checks the current map, path, collision and ability range; numeric finiteness, extra-field rejection, actor identity and epoch checks remain mandatory.

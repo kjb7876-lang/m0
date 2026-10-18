@@ -1,7 +1,8 @@
 /* Bounded, additive ward rooms. Existing floor, actors, story anchors and
  * native structures are retained; only annex boundary walls may open. */
 function mazeRoomsR73(base,seed,id=base.id){
- if(!Number.isInteger(seed)||seed<1||seed>0xffffffff||!base.mazeFirst||base.hospitalAnalytic12)return base;
+ const coopMode=window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off';
+ if(coopMode!=='off'||!Number.isInteger(seed)||seed<1||seed>0xffffffff||!base.mazeFirst||base.hospitalAnalytic12)return base;
  let random=seed>>>0;const next=()=>{random=(Math.imul(random,1664525)+1013904223)>>>0;return random;},key=(x,y)=>x+':'+y;
  const original=new Set(base.floorCells.map(([x,y])=>key(x,y))),cells=new Set(original),added=new Set(),rooms=[],bounds=base.bounds;
  const candidates=[];for(const[x,y]of base.floorCells)if(x>=33)for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])if(!original.has(key(x+dx,y+dy)))candidates.push({x,y,dx,dy});

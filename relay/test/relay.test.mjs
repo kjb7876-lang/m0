@@ -50,16 +50,6 @@ async function fixture(t, options = {}) {
 const sampleState = (epoch, seq = 1) => ({ version: 1, epoch, seq, zone: 'ep1a09', layer: 'STORY', time: 1,
   players: [{ id: 'hero', x: 15, y: 15, hp: 100 }], enemies: [{ id: 'boss', hp: 6000 }], shots: [], hazards: [], effects: [], room: { cleared: false }, progress: { STORY: {}, DREAM: {} } });
 
-test('host maze seed is strict, epoch-bound and retained through late join and reconnect',async t=>{
- const f=await fixture(t),host=await f.create(),guest=await f.join(host);guest.send('profile',{ready:true});await host.get('lobby',m=>m.players.length===2&&m.players.every(p=>p.ready));
- for(const mazeR73 of [{},{version:1,seed:-1},{version:1,seed:4294967296},{version:2,seed:7},{version:1,seed:7,geometry:[]}]){host.send('start',{regionId:'ep1a09',mazeR73});assert.equal((await host.get('error')).code,'MAZE_INVALID');}
- const first={version:1,seed:42};host.send('start',{regionId:'ep1a09',mazeR73:first});for(const c of [host,guest]){assert.deepEqual((await c.get('transition')).mazeR73,first);c.send('loaded',{epoch:1});}for(const c of [host,guest])await c.get('all_loaded');
- guest.send('transition',{epoch:2,regionId:'ep1b09',mazeR73:{version:1,seed:99}});assert.equal((await guest.get('error')).code,'HOST_ONLY');
- const second={version:1,seed:0xffffffff};host.send('transition',{epoch:2,regionId:'ep1b09',mazeR73:second});for(const c of [host,guest]){const m=await c.get('transition');assert.equal(m.epoch,2);assert.deepEqual(m.mazeR73,second);c.send('loaded',{epoch:2});}for(const c of [host,guest])await c.get('all_loaded');
- const late=await f.join(host,'뒤늦은친구');assert.deepEqual(late.welcome.mazeR73,second);for(const c of [host,guest,late]){assert.deepEqual((await c.get('transition')).mazeR73,second);c.send('loaded',{epoch:2});}for(const c of [host,guest,late])await c.get('all_loaded');
- const saved=late.welcome;await late.close();const resumed=await f.open();resumed.send('reconnect',{...PROTOCOL,code:saved.code,playerId:saved.selfId,token:saved.resumeToken});assert.deepEqual((await resumed.get('welcome')).mazeR73,second);assert.deepEqual((await resumed.get('transition')).mazeR73,second);
-});
-
 test('2 to 4 players, readiness, distinct input identity, shared snapshots and single event relay', async t => {
   const f = await fixture(t), host = await f.create(), g1 = await f.join(host);
   host.send('start', { regionId: 'ep1a09' }); assert.equal((await host.get('error')).code, 'NOT_READY');
@@ -83,7 +73,7 @@ test('fifth player refused; game, protocol and build isolation', async t => {
   await f.join(host); await f.join(host); await f.join(host);
   const fifth = await f.open(); fifth.send('join', { ...PROTOCOL, code: host.welcome.code, nick: '다섯', character: 'neon' });
   assert.equal((await fifth.get('error')).code, 'ROOM_FULL');
-  for (const mismatch of [{ gameId: 'hapil' }, { build: 'R61' }, { build: 'R63R1' }, { protocol: 2 }]) {
+  for (const mismatch of [{ gameId: 'hapil' }, { build: 'R61' }, { protocol: 2 }]) {
     const c = await f.open(); c.send('join', { ...PROTOCOL, ...mismatch, code: host.welcome.code, nick: '다른게임', character: 'neon' });
     assert.equal((await c.get('error')).code, 'VERSION_MISMATCH');
   }
@@ -180,7 +170,7 @@ test('malformed, binary, prototype keys, oversized and deeply nested messages ar
 
 test('input and state finite bounds plus entity caps', async t => {
   const f = await fixture(t), host = await f.create(), guest = await f.join(host); await f.start(host, [guest]);
-  for (const input of [{ moveX: 2 }, { attack: 1 }, { route: { x: -129, y: 2 } }, { damage: 999 }, { target: 'x'.repeat(129) }]) {
+  for (const input of [{ moveX: 2 }, { attack: 1 }, { route: { x: -1, y: 2 } }, { damage: 999 }, { target: 'x'.repeat(129) }]) {
     guest.send('input', { epoch: 1, seq: 1, input }); assert.equal((await guest.get('error')).code, 'INPUT_INVALID');
   }
   for (const state of [{...sampleState(1),enemies:Array.from({length:129},()=>({id:'x'}))}, {...sampleState(1),epoch:0}, {...sampleState(1),version:2}]) {
@@ -271,25 +261,9 @@ test('authored skill slots w/e/r reach host once and malformed slots are refused
 
 test('automatic basic and skill flags are strict booleans and forwarded with sequence authority', async t => {
  const f=await fixture(t),host=await f.create(),guest=await f.join(host);await f.start(host,[guest]);let seq=0;
- for(const key of ['autoBasic','autoSkill','threadDance','goldenCast','goldenSecond']){
+ for(const key of ['autoBasic','autoSkill','threadDance']){
   for(const value of [true,false]){guest.send('input',{epoch:1,seq:++seq,input:{[key]:value}});const got=await host.get('input');assert.equal(got.input[key],value);assert.equal(got.playerId,guest.welcome.selfId);}
   for(const value of ['true',1,null]){guest.send('input',{epoch:1,seq:seq+1,input:{[key]:value}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
  }
  guest.send('input',{epoch:1,seq,input:{autoSkill:true}});assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
-});
-
-test('golden design commands preserve actor authority and reject arbitrary state writes',async t=>{
- const f=await fixture(t),host=await f.create(),guest=await f.join(host);await f.start(host,[guest]);
- const action={op:'save',id:null,name:'황금선',strokes:[[{x:-1,y:0},{x:1,y:0}]]};
- guest.send('command',{epoch:1,seq:1,command:{kind:'golden',action}});const forwarded=await host.get('command');assert.equal(forwarded.playerId,guest.welcome.selfId);assert.deepEqual(forwarded.command.action,action);
- for(const bad of [{...action,hp:100},{op:'upgrade',key:'points'},{...action,strokes:[Array.from({length:193},()=>({x:0,y:0}))]},{...action,strokes:[[{x:0,y:0},{x:2,y:0}]]},{op:'learn',points:0},{op:'__proto__'},{op:'constructor'},{op:{toString:null}}]){guest.send('command',{epoch:1,seq:2,command:{kind:'golden',action:bad}});assert.equal((await guest.get('error')).code,'COMMAND_INVALID');}
- guest.send('command',{epoch:1,seq:1,command:{kind:'golden',action:{op:'learn'}}});assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
- guest.send('input',{epoch:1,seq:1,input:{goldenCast:true,goldenAim:{x:15.5,y:19}}});const aim=await host.get('input');assert.deepEqual(aim.input.goldenAim,{x:15.5,y:19});assert.equal(aim.playerId,guest.welcome.selfId);
- for(const goldenAim of [{x:Infinity,y:0},{x:129,y:0},{x:-129,y:0},{x:0,y:0,damage:100},{x:'15',y:0}]){guest.send('input',{epoch:1,seq:2,input:{goldenCast:true,goldenAim}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
-});
-
-test('canonical far and signed map coordinates pass without removing finite bounds or actor identity',async t=>{
- const f=await fixture(t),host=await f.create(),guest=await f.join(host);await f.start(host,[guest]);let seq=0;
- for(const point of [{x:103,y:17},{x:-11,y:34}]){guest.send('input',{epoch:1,seq:++seq,input:{route:point,goldenCast:true,goldenAim:point}});const m=await host.get('input');assert.deepEqual(m.input.route,point);assert.deepEqual(m.input.goldenAim,point);assert.equal(m.playerId,guest.welcome.selfId);}
- for(const route of [{x:129,y:0},{x:-129,y:0},{x:NaN,y:0},{x:0,y:0,damage:1}]){guest.send('input',{epoch:1,seq:seq+1,input:{route}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
 });
