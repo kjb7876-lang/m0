@@ -1,0 +1,1055 @@
+{
+  "schemaVersion": 1,
+  "reportKind": "Independent preflight ABBA performance evidence for the de6536 R71 runtime",
+  "status": "Paired performance sample completed for the exact de6536 HTML and 54dfe renderer hashes. This is a separate hosted-runner pair and is not pooled with prior measurements.",
+  "provenance": {
+    "repository": "kjb7876-lang/m0",
+    "workflowRunId": 39112456285,
+    "workflowJobId": 117631278108,
+    "runUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39112456285",
+    "jobUrl": "https://github.com/kjb7876-lang/m0/actions/runs/39112456285/job/117631278108",
+    "harnessCommit": "d58ffc8691822cfc5bbec9913fb99c32d38a626b",
+    "runtimeCommit": "dff330b89a8e10ee98b610191061e0840394b989",
+    "workflowEvent": "push",
+    "artifact": {
+      "name": "r71-paired-profile",
+      "id": 12130099660,
+      "sizeBytes": 4802941,
+      "sha256": "b47b50400cf1da09da1ffb84fcd6366ec4e60e795ec13e408583200b8aba9eb3",
+      "createdAt": "2026-10-18T08:48:56Z",
+      "expiresAt": "2026-11-01T09:48:55Z"
+    }
+  },
+  "runtimeHashes": {
+    "baseline": {
+      "gameCommit": "34338945dc47f5bcb8c2ce05b2d7de62d72c7ad5",
+      "htmlSha256": "76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5",
+      "rendererSha256": "b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4"
+    },
+    "candidate": {
+      "htmlSha256": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
+      "rendererSha256": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
+    }
+  },
+  "environment": {
+    "runnerOS": "Ubuntu 22.04.5 (GitHub Actions ubuntu-22.04)",
+    "node": "22.23.3",
+    "playwright": "1.56.0",
+    "chromiumVersion": null,
+    "chromiumVersionNote": "Exact version was not printed by this paired-profile job; no version inferred from another job.",
+    "browserMode": "Headless Chromium; chromiumSandbox:true",
+    "viewport": {
+      "width": 1365,
+      "height": 850,
+      "deviceScaleFactor": 1
+    },
+    "seed": 70018,
+    "rendererDevice": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "physicalGPU": false,
+    "comparability": "Independent GitHub-hosted VM; do not pool with other preflight or Pages runs."
+  },
+  "pairedDesign": {
+    "order": "baseline,candidate,candidate,baseline",
+    "trialsPerBuildPerScenario": 2,
+    "scenarios": [
+      "movement",
+      "ego-stress"
+    ],
+    "durationSecondsPerTrial": 30
+  },
+  "result": {
+    "stage": "baseline-vs-candidate",
+    "comparisons": [
+      {
+        "scenario": "movement",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 264.0973684210527,
+          "p50Ms": 258.35000000000036,
+          "p95Ms": 300.0500000000011,
+          "drawP95Ms": 31.199999999953434,
+          "drawCallsPerFrame": 330.859649122807,
+          "bufferUploadsPerFrame": 203.96491228070175,
+          "materialReplacementsPerFrame": 0.7412280701754386
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 267.0437343358396,
+          "p50Ms": 283.2499999999982,
+          "p95Ms": 300.10000000000036,
+          "drawP95Ms": 32.49999999994179,
+          "drawCallsPerFrame": 330.28046679197996,
+          "bufferUploadsPerFrame": 203.0343045112782,
+          "materialReplacementsPerFrame": 0.6990914786967418
+        },
+        "meanFrameReductionFraction": -0.011156362262911612,
+        "p95ReductionFraction": -0.00016663889351531402,
+        "regressionFlag": false
+      },
+      {
+        "scenario": "ego-stress",
+        "baseline": {
+          "trials": 2,
+          "meanMs": 252.00879410947482,
+          "p50Ms": 249.95000000000073,
+          "p95Ms": 275.00000000000364,
+          "drawP95Ms": 29.699999999953434,
+          "drawCallsPerFrame": 470.38205056960265,
+          "bufferUploadsPerFrame": 247.01910252848012,
+          "materialReplacementsPerFrame": 3.178730202834121
+        },
+        "candidate": {
+          "trials": 2,
+          "meanMs": 253.5102542372881,
+          "p50Ms": 250,
+          "p95Ms": 275.0500000000029,
+          "drawP95Ms": 31.25,
+          "drawCallsPerFrame": 473.77782485875707,
+          "bufferUploadsPerFrame": 251.94456214689268,
+          "materialReplacementsPerFrame": 3.1348870056497176
+        },
+        "meanFrameReductionFraction": -0.005957967193640945,
+        "p95ReductionFraction": -0.00018181818181561837,
+        "regressionFlag": false
+      }
+    ],
+    "profiles": []
+  },
+  "pairedRuns": [
+    {
+      "loggedAtUTC": "2026-10-18T08:43:31.5638",
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 114,
+        "p50Ms": 250,
+        "p95Ms": 300,
+        "p99Ms": 300.09999999999854,
+        "meanMs": 263.2929824561404,
+        "maxMs": 316.6999999999971,
+        "over50ms": 114
+      },
+      "draw": {
+        "count": 117,
+        "p50Ms": 22.099999999976717,
+        "p95Ms": 30.599999999976717,
+        "p99Ms": 34.199999999953434,
+        "meanMs": 20.352991452989862,
+        "maxMs": 63.60000000009313,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 702,
+        "p50Ms": 0.19999999995343387,
+        "p95Ms": 0.5,
+        "p99Ms": 1,
+        "meanMs": 0.2417378917383229,
+        "maxMs": 7.600000000093132,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 114,
+        "p50Ms": 283,
+        "p95Ms": 299,
+        "p99Ms": 302,
+        "meanMs": 263.5175438596491,
+        "maxMs": 306,
+        "over50ms": 114
+      },
+      "elapsedMs": 30015.4,
+      "simulationSeconds": 11.700000000000315,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 64000000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 64000000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 57,
+        "median": 20.300000000046566,
+        "p95": 27,
+        "p99": 27.699999999953434,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 22.099999999976717,
+          "drawCalls": 1,
+          "geometries": 206,
+          "textures": 13,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 330.1929824561403,
+        "textureUploads": 1.3421052631578947,
+        "bufferUploads": 209.6140350877193
+      },
+      "counterDelta": {
+        "created": 2107,
+        "removed": 2090,
+        "styleReplacements": 95,
+        "geometryUpdates": 11262,
+        "imageBufferReuseR70": 145,
+        "unchangedUVUploadsSkippedR70": 128,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:44:17.8351",
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 112,
+        "p50Ms": 283.2000000000007,
+        "p95Ms": 300.1000000000022,
+        "p99Ms": 333.2999999999993,
+        "meanMs": 269.1857142857143,
+        "maxMs": 366.7000000000007,
+        "over50ms": 112
+      },
+      "draw": {
+        "count": 115,
+        "p50Ms": 24.70000000006985,
+        "p95Ms": 32.79999999993015,
+        "p99Ms": 36.300000000046566,
+        "meanMs": 21.077391304346005,
+        "maxMs": 55.800000000046566,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 690,
+        "p50Ms": 0.19999999995343387,
+        "p95Ms": 0.5999999999767169,
+        "p99Ms": 1.1000000000931323,
+        "meanMs": 0.24304347825945233,
+        "maxMs": 9.5,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 114,
+        "p50Ms": 286,
+        "p95Ms": 311,
+        "p99Ms": 332,
+        "meanMs": 268.20175438596493,
+        "maxMs": 360,
+        "over50ms": 114
+      },
+      "elapsedMs": 30148.800000000003,
+      "simulationSeconds": 11.500000000000295,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 148000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 148000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 50,
+        "median": 21.79999999993015,
+        "p95": 26.5,
+        "p99": 28.29999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 8.29999999993015,
+          "drawCalls": 1,
+          "geometries": 209,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 329.9732142857143,
+        "textureUploads": 1.3214285714285714,
+        "bufferUploads": 204.41071428571428
+      },
+      "counterDelta": {
+        "created": 1950,
+        "removed": 1931,
+        "styleReplacements": 78,
+        "geometryUpdates": 10702,
+        "imageBufferReuseR70": 140,
+        "unchangedUVUploadsSkippedR70": 118,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:45:04.2566",
+      "scenario": "movement",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 114,
+        "p50Ms": 283.29999999999563,
+        "p95Ms": 300.09999999999854,
+        "p99Ms": 316.8000000000029,
+        "meanMs": 264.90175438596486,
+        "maxMs": 333.3000000000029,
+        "over50ms": 114
+      },
+      "draw": {
+        "count": 117,
+        "p50Ms": 22.20000000006985,
+        "p95Ms": 32.199999999953434,
+        "p99Ms": 37.300000000046566,
+        "meanMs": 20.117948717951105,
+        "maxMs": 49.20000000006985,
+        "over50ms": 0
+      },
+      "tick": {
+        "count": 702,
+        "p50Ms": 0.19999999995343387,
+        "p95Ms": 0.5999999999767169,
+        "p99Ms": 0.7000000000698492,
+        "meanMs": 0.23062678062764297,
+        "maxMs": 3.099999999976717,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 115,
+        "p50Ms": 286,
+        "p95Ms": 302,
+        "p99Ms": 306,
+        "meanMs": 264.4086956521739,
+        "maxMs": 326,
+        "over50ms": 115
+      },
+      "elapsedMs": 30198.8,
+      "simulationSeconds": 11.7000000000003,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 72200000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 54,
+        "median": 14.099999999976717,
+        "p95": 26.100000000093132,
+        "p99": 27.29999999993015,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 4.099999999976717,
+          "drawCalls": 1,
+          "geometries": 221,
+          "textures": 13,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 330.5877192982456,
+        "textureUploads": 1.3508771929824561,
+        "bufferUploads": 201.6578947368421
+      },
+      "counterDelta": {
+        "created": 2064,
+        "removed": 2031,
+        "styleReplacements": 80,
+        "geometryUpdates": 10703,
+        "imageBufferReuseR70": 143,
+        "unchangedUVUploadsSkippedR70": 125,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:45:49.4747",
+      "scenario": "movement",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 0,
+        "cast": null,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 114,
+        "p50Ms": 266.7000000000007,
+        "p95Ms": 300.1000000000022,
+        "p99Ms": 300.1000000000058,
+        "meanMs": 264.901754385965,
+        "maxMs": 316.70000000000437,
+        "over50ms": 114
+      },
+      "draw": {
+        "count": 117,
+        "p50Ms": 23.399999999906868,
+        "p95Ms": 31.79999999993015,
+        "p99Ms": 35.199999999953434,
+        "meanMs": 20.680341880342677,
+        "maxMs": 49.199999999953434,
+        "over50ms": 0
+      },
+      "tick": {
+        "count": 702,
+        "p50Ms": 0.19999999995343387,
+        "p95Ms": 0.5,
+        "p99Ms": 0.6999999999534339,
+        "meanMs": 0.24544159544066677,
+        "maxMs": 11.5,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 113,
+        "p50Ms": 281,
+        "p95Ms": 303,
+        "p99Ms": 312,
+        "meanMs": 264.3628318584071,
+        "maxMs": 326,
+        "over50ms": 113
+      },
+      "elapsedMs": 30198.800000000003,
+      "simulationSeconds": 11.700000000000305,
+      "hits": 0,
+      "motifs": [],
+      "peakEffects": 0,
+      "peakProjectiles": 0,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 0,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 81400000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 52,
+        "median": 17.29999999993015,
+        "p95": 26.300000000046566,
+        "p99": 28.5,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 23.599999999976717,
+          "drawCalls": 1,
+          "geometries": 214,
+          "textures": 12,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 331.5263157894737,
+        "textureUploads": 1.3508771929824561,
+        "bufferUploads": 198.31578947368422
+      },
+      "counterDelta": {
+        "created": 1981,
+        "removed": 1952,
+        "styleReplacements": 74,
+        "geometryUpdates": 10578,
+        "imageBufferReuseR70": 144,
+        "unchangedUVUploadsSkippedR70": 120,
+        "solidPaintReuseR70": 0,
+        "imagePaintReuseR70": 0
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:46:35.1809",
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 0,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 118,
+        "p50Ms": 250,
+        "p95Ms": 283.3000000000029,
+        "p99Ms": 316.6999999999971,
+        "meanMs": 256.4864406779661,
+        "maxMs": 350,
+        "over50ms": 118
+      },
+      "draw": {
+        "count": 120,
+        "p50Ms": 16,
+        "p95Ms": 30.5,
+        "p99Ms": 37.59999999997672,
+        "meanMs": 18.065833333325767,
+        "maxMs": 52,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 720,
+        "p50Ms": 0.5,
+        "p95Ms": 2.5,
+        "p99Ms": 6.199999999953434,
+        "meanMs": 0.9088888888876278,
+        "maxMs": 12.5,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 118,
+        "p50Ms": 251,
+        "p95Ms": 287,
+        "p99Ms": 316,
+        "meanMs": 255.91525423728814,
+        "maxMs": 351,
+        "over50ms": 118
+      },
+      "elapsedMs": 30265.399999999998,
+      "simulationSeconds": 12.000000000000325,
+      "hits": 328,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 1,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 38,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 58,
+        "median": 10.20000000006985,
+        "p95": 23.099999999976717,
+        "p99": 28,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 18.5,
+          "drawCalls": 188,
+          "geometries": 407,
+          "textures": 23,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 456.8050847457627,
+        "textureUploads": 0.8305084745762712,
+        "bufferUploads": 248.41525423728814
+      },
+      "counterDelta": {
+        "created": 2240,
+        "removed": 2239,
+        "styleReplacements": 372,
+        "geometryUpdates": 13799,
+        "imageBufferReuseR70": 1265,
+        "unchangedUVUploadsSkippedR70": 1193,
+        "solidPaintReuseR70": 1350,
+        "imagePaintReuseR70": 220
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:47:22.5252",
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 1,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 118,
+        "p50Ms": 250,
+        "p95Ms": 283.40000000000146,
+        "p99Ms": 316.7000000000007,
+        "meanMs": 255.78050847457627,
+        "maxMs": 350,
+        "over50ms": 118
+      },
+      "draw": {
+        "count": 120,
+        "p50Ms": 14.900000000023283,
+        "p95Ms": 32.5,
+        "p99Ms": 38.79999999993015,
+        "meanMs": 18.278333333327705,
+        "maxMs": 50.29999999993015,
+        "over50ms": 1
+      },
+      "tick": {
+        "count": 720,
+        "p50Ms": 0.5999999999767169,
+        "p95Ms": 2.700000000069849,
+        "p99Ms": 7.099999999976717,
+        "meanMs": 0.9580555555548118,
+        "maxMs": 16.400000000023283,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 119,
+        "p50Ms": 249,
+        "p95Ms": 289,
+        "p99Ms": 312,
+        "meanMs": 255.05882352941177,
+        "maxMs": 357,
+        "over50ms": 119
+      },
+      "elapsedMs": 30182.100000000002,
+      "simulationSeconds": 12.00000000000032,
+      "hits": 339,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 136,
+      "peakProjectiles": 3,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 39,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 91700000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 63,
+        "median": 12.5,
+        "p95": 25.900000000023283,
+        "p99": 34.10000000009313,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 17.300000000046566,
+          "drawCalls": 188,
+          "geometries": 408,
+          "textures": 22,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 442.83898305084745,
+        "textureUploads": 0.8305084745762712,
+        "bufferUploads": 264.8474576271187
+      },
+      "counterDelta": {
+        "created": 2408,
+        "removed": 2374,
+        "styleReplacements": 376,
+        "geometryUpdates": 14818,
+        "imageBufferReuseR70": 1492,
+        "unchangedUVUploadsSkippedR70": 1412,
+        "solidPaintReuseR70": 1304,
+        "imagePaintReuseR70": 189
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:48:09.5829",
+      "scenario": "ego-stress",
+      "kind": "candidate",
+      "index": 2,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 120,
+        "p50Ms": 250,
+        "p95Ms": 266.70000000000437,
+        "p99Ms": 299.90000000000146,
+        "meanMs": 251.23999999999995,
+        "maxMs": 333.3000000000029,
+        "over50ms": 120
+      },
+      "draw": {
+        "count": 122,
+        "p50Ms": 15.5,
+        "p95Ms": 30,
+        "p99Ms": 34,
+        "meanMs": 17.8778688524531,
+        "maxMs": 38.199999999953434,
+        "over50ms": 0
+      },
+      "tick": {
+        "count": 732,
+        "p50Ms": 0.5999999999767169,
+        "p95Ms": 2.699999999953434,
+        "p99Ms": 7.299999999930151,
+        "meanMs": 0.9245901639341718,
+        "maxMs": 11.20000000006985,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 120,
+        "p50Ms": 248,
+        "p95Ms": 279,
+        "p99Ms": 305,
+        "meanMs": 250.68333333333334,
+        "maxMs": 338,
+        "over50ms": 120
+      },
+      "elapsedMs": 30148.8,
+      "simulationSeconds": 12.200000000000335,
+      "hits": 351,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 1,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 50,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 64000000,
+        "totalJSHeapSize": 131000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 64000000,
+        "totalJSHeapSize": 131000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 59,
+        "median": 10.600000000093132,
+        "p95": 24,
+        "p99": 26.099999999976717,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 30.300000000046566,
+          "drawCalls": 164,
+          "geometries": 420,
+          "textures": 22,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 504.71666666666664,
+        "textureUploads": 0.7166666666666667,
+        "bufferUploads": 239.04166666666666
+      },
+      "counterDelta": {
+        "created": 2095,
+        "removed": 2089,
+        "styleReplacements": 370,
+        "geometryUpdates": 13576,
+        "imageBufferReuseR70": 1452,
+        "unchangedUVUploadsSkippedR70": 1377,
+        "solidPaintReuseR70": 1389,
+        "imagePaintReuseR70": 179
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    },
+    {
+      "loggedAtUTC": "2026-10-18T08:48:55.2352",
+      "scenario": "ego-stress",
+      "kind": "baseline",
+      "index": 3,
+      "setup": {
+        "zone": "dist00",
+        "enemies": 6,
+        "props": 15,
+        "ego": 1000,
+        "cast": true,
+        "renderer": "three"
+      },
+      "activeBefore": "three",
+      "activeAfter": "three",
+      "frames": {
+        "count": 122,
+        "p50Ms": 249.90000000000146,
+        "p95Ms": 266.70000000000437,
+        "p99Ms": 300,
+        "meanMs": 247.5311475409836,
+        "maxMs": 333.40000000000146,
+        "over50ms": 122
+      },
+      "draw": {
+        "count": 124,
+        "p50Ms": 15.399999999906868,
+        "p95Ms": 28.899999999906868,
+        "p99Ms": 34.0999999998603,
+        "meanMs": 17.89435483871456,
+        "maxMs": 35.800000000046566,
+        "over50ms": 0
+      },
+      "tick": {
+        "count": 744,
+        "p50Ms": 0.5,
+        "p95Ms": 2.5,
+        "p99Ms": 7.5,
+        "meanMs": 0.8915322580639529,
+        "maxMs": 12.399999999906868,
+        "over50ms": 0
+      },
+      "longTasks": {
+        "count": 123,
+        "p50Ms": 243,
+        "p95Ms": 265,
+        "p99Ms": 293,
+        "meanMs": 246.83739837398375,
+        "maxMs": 325,
+        "over50ms": 123
+      },
+      "elapsedMs": 30198.8,
+      "simulationSeconds": 12.40000000000034,
+      "hits": 364,
+      "motifs": [
+        "cross",
+        "fractal",
+        "flower",
+        "claw",
+        "tsubamegaeshi",
+        "decisive"
+      ],
+      "peakEffects": 138,
+      "peakProjectiles": 2,
+      "objects": {
+        "enemies": 6,
+        "props": 15,
+        "effects": 19,
+        "projectiles": 0
+      },
+      "memoryBefore": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 139000000
+      },
+      "memoryAfter": {
+        "usedJSHeapSize": 76600000,
+        "totalJSHeapSize": 139000000
+      },
+      "rendererMetricsBefore": {
+        "samples": 0,
+        "median": null,
+        "p95": null,
+        "p99": null,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": null
+      },
+      "rendererMetricsAfter": {
+        "samples": 62,
+        "median": 10.400000000139698,
+        "p95": 23.5,
+        "p99": 24.5,
+        "measurement": "CPU JavaScript renderer call duration; NOT GPU time or measured FPS",
+        "last": {
+          "milliseconds": 16.9000000001397,
+          "drawCalls": 91,
+          "geometries": 365,
+          "textures": 21,
+          "resourceUnits": "counts, not VRAM bytes"
+        }
+      },
+      "perFrame": {
+        "drawCalls": 483.9590163934426,
+        "textureUploads": 0.7295081967213115,
+        "bufferUploads": 245.62295081967213
+      },
+      "counterDelta": {
+        "created": 2284,
+        "removed": 2344,
+        "styleReplacements": 391,
+        "geometryUpdates": 13987,
+        "imageBufferReuseR70": 1418,
+        "unchangedUVUploadsSkippedR70": 1358,
+        "solidPaintReuseR70": 1447,
+        "imagePaintReuseR70": 219
+      },
+      "devices": [
+        "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      ],
+      "errors": []
+    }
+  ],
+  "rawResultLine": "{\"stage\":\"baseline-vs-candidate\",\"comparisons\":[{\"scenario\":\"movement\",\"baseline\":{\"trials\":2,\"meanMs\":264.0973684210527,\"p50Ms\":258.35000000000036,\"p95Ms\":300.0500000000011,\"drawP95Ms\":31.199999999953434,\"drawCallsPerFrame\":330.859649122807,\"bufferUploadsPerFrame\":203.96491228070175,\"materialReplacementsPerFrame\":0.7412280701754386},\"candidate\":{\"trials\":2,\"meanMs\":267.0437343358396,\"p50Ms\":283.2499999999982,\"p95Ms\":300.10000000000036,\"drawP95Ms\":32.49999999994179,\"drawCallsPerFrame\":330.28046679197996,\"bufferUploadsPerFrame\":203.0343045112782,\"materialReplacementsPerFrame\":0.6990914786967418},\"meanFrameReductionFraction\":-0.011156362262911612,\"p95ReductionFraction\":-0.00016663889351531402,\"regressionFlag\":false},{\"scenario\":\"ego-stress\",\"baseline\":{\"trials\":2,\"meanMs\":252.00879410947482,\"p50Ms\":249.95000000000073,\"p95Ms\":275.00000000000364,\"drawP95Ms\":29.699999999953434,\"drawCallsPerFrame\":470.38205056960265,\"bufferUploadsPerFrame\":247.01910252848012,\"materialReplacementsPerFrame\":3.178730202834121},\"candidate\":{\"trials\":2,\"meanMs\":253.5102542372881,\"p50Ms\":250,\"p95Ms\":275.0500000000029,\"drawP95Ms\":31.25,\"drawCallsPerFrame\":473.77782485875707,\"bufferUploadsPerFrame\":251.94456214689268,\"materialReplacementsPerFrame\":3.1348870056497176},\"meanFrameReductionFraction\":-0.005957967193640945,\"p95ReductionFraction\":-0.00018181818181561837,\"regressionFlag\":false}],\"profiles\":[]}",
+  "profileNote": "R71_PERF_RESULT has profiles:[]; this job did not collect a new CDP CPU profile.",
+  "rowScopeNote": "The eight pairedRuns retain timing, draw/tick/long-task, heap, renderer-metric, GL counter, counter-delta, effects/hits/motif, device, and error fields. Repeated spatialBefore/spatialAfter snapshots are omitted; complete rows remain in the linked GitHub job log and artifact."
+}

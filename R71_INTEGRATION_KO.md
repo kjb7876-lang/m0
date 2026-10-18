@@ -16,12 +16,14 @@
 
 ## 배포 해시 승인
 
-`scripts/r71-approved-runtime.json`은 아직 `pending-review`입니다. PR 검증은 후보 HTML/렌더러 해시를 기록해 측정할 수 있지만, `main` Pages 배포는 이 파일에 최종 검토된 두 해시가 `approved` 상태로 입력되어야 통과합니다. 배포 뒤에는 공개 HTML과 `dist/phase1.js`의 실제 응답 해시도 빌드 결과와 비교합니다.
+`scripts/r71-approved-runtime.json`은 [preflight 39112456285](https://github.com/kjb7876-lang/m0/actions/runs/39112456285)의 전체 통과 결과를 검토한 뒤 `approved`로 갱신했습니다. `main` Pages 배포는 고정된 HTML/렌더러 두 해시와 실제 빌드 결과가 일치해야 통과합니다. 배포 뒤에는 공개 HTML과 `dist/phase1.js`의 실제 응답 해시도 빌드 결과와 비교합니다.
 
 ## 통합 체크포인트
 
-최근 로컬 composition은 R61 분신의 저장/복원·같은 맵 난이도 재선택 HP 보정과 포인트 아이템의 DrawCommands 호환성 수정을 포함하며 HTML SHA-256 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 이 값은 미배포 후보 해시이며 승인 핀이 아닙니다. `cc7aa6…` 중간 후보의 8개 독립 브라우저 검사는 6개가 통과했습니다. 실제 captureVisual에서 포인트 테두리의 `strokeRect` 호출이 지원되지 않아 기존 렌더러로 되돌아갈 수 있는 문제를 확인했고, 같은 테두리를 지원되는 `beginPath/rect/stroke`로 변경했습니다. 실제 DrawCommands를 사용하는 CPU 회귀 검사를 추가했습니다. 다른 실패는 클리어 후 협동 검사 장면에서 살아 있는 원본 적을 찾던 조건이었습니다. 중간 증거는 `qa-r71/intermediate-58c979b-browser.json`에 보존합니다.
+최근 로컬 composition은 R61 분신의 저장/복원·같은 맵 난이도 재선택 HP 보정과 포인트 아이템의 DrawCommands 호환성 수정을 포함하며 HTML SHA-256 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 이 값은 d58ffc8 전체 통과 후 위 승인 JSON에 고정했으며 공개 배포는 별도 확인합니다. `cc7aa6…` 중간 후보의 8개 독립 브라우저 검사는 6개가 통과했습니다. 실제 captureVisual에서 포인트 테두리의 `strokeRect` 호출이 지원되지 않아 기존 렌더러로 되돌아갈 수 있는 문제를 확인했고, 같은 테두리를 지원되는 `beginPath/rect/stroke`로 변경했습니다. 실제 DrawCommands를 사용하는 CPU 회귀 검사를 추가했습니다. 다른 실패는 클리어 후 협동 검사 장면에서 살아 있는 원본 적을 찾던 조건이었습니다. 중간 증거는 `qa-r71/intermediate-58c979b-browser.json`에 보존합니다.
 
-최근 로컬 CPU 회귀 모음은 26/26 통과했고, 새 후보의 소스/매니페스트 감사와 렌더러 구문 검사가 통과했습니다. `verify-pages-r62`의 중간 후보 결과는 1,906개 파일 hash/HEAD 검사, 276개 오디오 range 검사, 총 2,187개 요청에서 실패 0건을 보고했습니다. 해당 결과는 새 `de6536…` composition의 CI 재검증을 대신하지 않습니다.
+`0cd0167…` 하네스의 CI 실행 [39111040632](https://github.com/kjb7876-lang/m0/actions/runs/39111040632)는 동일한 `de6536…`/`54dfe…` 런타임에서 CPU 26/26, 소스/매니페스트 감사, 1,906개 파일 hash/HEAD·276개 오디오 range·총 2,187개 요청 무결성 검사를 통과했습니다. 브라우저는 8개 중 7개를 통과했으며, 남은 협동 검사는 실제 API에 없는 검사 코드의 `c.tick` 호출에서 중단됐습니다. 실제 전역 `tick`과 호스트 상호작용 입력을 사용하도록 검사만 보완했고, 병원 전환도 native epoch/완료 기록까지 기다립니다. 첫/두 번째 협동 저장 import의 전체 6개 적 행은 같고 입력 변형은 없었지만, 마지막 hard 비교와 부활 이후 병원 검사는 그 실행에서 완료되지 않았습니다.
 
-남은 검증은 새 `de6536…` 후보를 push한 뒤의 R70/R71 전체 Pages 게이트, R71 브라우저 및 native 회귀, paired-profile/Pages ABBA 측정, 정확한 최종 해시 확인과 승인 JSON 갱신, 승인된 Pages 배포, 공개 HTML/renderer 응답 해시 검증입니다. 로컬 Chromium 샌드박스 실행은 호스트 SUID helper 설정 때문에 막혀 있으며, 샌드박스 플래그를 낮추지 않았습니다. 기존 R66 브라우저 회귀 게이트는 후보 적용 전 R70 단계에서 그대로 유지됩니다.
+같은 실행의 R71 native 검사는 브라우저 실패와 독립적으로 실행되어 통과했습니다. 원본으로 고정한 실검무 타격·EGO 쿨다운, 데스크톱/모바일 보스 HUD, 6회 저장/복원 회귀 결과를 `qa-r71/intermediate-0cd0167-browser-native.json`에 보존합니다. 두 검사를 순차 실행한 뒤 상태를 합산하므로 어느 하나라도 실패하면 전체 단계가 실패합니다. 이 중간 결과는 출시 승인이 아닙니다.
+
+하네스 후보 `d58ffc8691822cfc5bbec9913fb99c32d38a626b`의 [preflight](https://github.com/kjb7876-lang/m0/actions/runs/39112456285)는 CPU 26/26, 브라우저 8/8, 실제 native 4그룹, 감사/무결성 및 독립 성능 측정 모두 통과했습니다. 협동의 실제 피격·사망·부활과 저장/게스트 혈흔, 병원 확장 구역 아이템 전달 및 중복 방지까지 실행됐으며 전체 적 체력 재가져오기 비교 실패는 0입니다. [전체 Pages PR 게이트](https://github.com/kjb7876-lang/m0/actions/runs/39112460418)는 별도 실행으로 추적하고, main에서 모든 기존/신규 게이트와 정확한 승인 해시를 재확인한 뒤 배포합니다. 남은 출시 순서는 main 병합·Pages 배포·공개 HTML/renderer HTTP 응답 검증입니다. 로컬 Chromium 샌드박스 실행은 호스트 SUID helper 설정 때문에 막혀 있으며, 샌드박스 플래그를 낮추지 않았습니다. 기존 R66 브라우저 회귀 게이트는 후보 적용 전 R70 단계에서 그대로 유지됩니다.

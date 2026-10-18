@@ -2,7 +2,7 @@
 
 ## Status
 
-The current measured candidate is commit `dff330b89a8e10ee98b610191061e0840394b989`, HTML SHA-256 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, and unchanged renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Four independent paired ABBA runs measured these exact hashes: preflight [39108393150](https://github.com/kjb7876-lang/m0/actions/runs/39108393150), job `117619084414`; Pages [39108395884](https://github.com/kjb7876-lang/m0/actions/runs/39108395884), job `117619093194`; test-only harness commit 83386e7 preflight [39109696339](https://github.com/kjb7876-lang/m0/actions/runs/39109696339), job `117622971282`; and test-only harness commit 0cd0167 preflight [39111040632](https://github.com/kjb7876-lang/m0/actions/runs/39111040632), job `117627051629`. Results are mixed: the first preflight means were about 0.2% lower, with EGO p95 2.263% higher; Pages movement mean and p95 were 8.392% and 2.669% higher; the 83386e7 pair had movement mean 0.0275% lower with unchanged p95, while EGO mean and p95 were 2.105% and 3.494% higher; and the 0cd0167 pair had both movement and EGO means/p95 slightly higher (0.845%/0.010% and 1.622%/1.728%). Separate hosted-runner baselines vary substantially. Keep all runs separate; they do not support an overall speedup claim. All used SwiftShader, not a physical GPU. The Pages browser suite passed 6/8 cases and failed two expanded-drop/coop cases; behavior approval remains pending.
+The current measured candidate is commit `dff330b89a8e10ee98b610191061e0840394b989`, HTML SHA-256 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, and unchanged renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Six independent paired ABBA runs measured these exact hashes: preflight [39108393150](https://github.com/kjb7876-lang/m0/actions/runs/39108393150), job `117619084414`; Pages [39108395884](https://github.com/kjb7876-lang/m0/actions/runs/39108395884), job `117619093194`; test-only harness commit 83386e7 preflight [39109696339](https://github.com/kjb7876-lang/m0/actions/runs/39109696339), job `117622971282`; test-only harness commit 0cd0167 preflight [39111040632](https://github.com/kjb7876-lang/m0/actions/runs/39111040632), job `117627051629`; d58ffc8 preflight [39112456285](https://github.com/kjb7876-lang/m0/actions/runs/39112456285), job `117631278108`; and 0cd0167 Pages [39111045136](https://github.com/kjb7876-lang/m0/actions/runs/39111045136), job `117627064878`. Results are mixed: the first preflight means were about 0.2% lower, with EGO p95 2.263% higher; initial Pages movement mean/p95 were 8.392%/2.669% higher; 83386e7 movement was effectively flat while EGO was 2.105%/3.494% slower; 0cd0167 preflight was 0.845%/0.010% slower on movement and 1.622%/1.728% slower on EGO; d58ffc8 was 1.116%/0.017% slower on movement and 0.596%/0.018% slower on EGO; and the separate 0cd0167 Pages pair was 0.711% slower on movement but 1.531%/4.540% lower on EGO mean/p95. Separate hosted-runner baselines vary substantially. Keep all runs separate; they do not support an overall speedup claim. All used SwiftShader, not a physical GPU. Behavior approval remains pending.
 
 The superseded `cc7aa…` runtime is commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, HTML SHA-256 `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`, with the same renderer SHA. Four independent paired-profile runs measured those hashes. Subsequent QA found a production rendering defect: the beacon calls `strokeRect`, but `DrawCommands` implements `rect`/`stroke` only. Therefore every `cc7aa…` performance sample below is pre-fix diagnostic evidence, not final acceptance. The replacement `de6536…` runtime has its own paired run above; do not reuse these measurements to judge it.
 
@@ -109,6 +109,48 @@ Paired-profile job [39111040632, job 117627051629](https://github.com/kjb7876-la
 | EGO stress | Material replacements / frame | 2.956 | 3.023 | +2.251% |
 
 Both `regressionFlag` values were false under the harness's 10% threshold. Used and total JS heap deltas were 0 bytes in all eight trials; no JS errors were reported, and EGO stress retained all six expected motifs with real hits. This is a mixed pair, not evidence of a speedup. Its baseline means (476.510 ms movement, 440.518 ms EGO) are close to the separate 83386e7 preflight pair but far above the Pages pair (266.730/247.964 ms) and earlier preflight pair (356.698/332.588 ms). Keep it unpooled. The job returned `profiles: []`, so it did not capture a new CDP CPU profile. The browser was SwiftShader software rendering, not a physical GPU.
+
+## Independent preflight pair: de6536 runtime, test-only d58ffc8 harness
+
+Paired-profile job [39112456285, job 117631278108](https://github.com/kjb7876-lang/m0/actions/runs/39112456285) ran harness commit `d58ffc8691822cfc5bbec9913fb99c32d38a626b` and measured the same candidate HTML `de6536…6646` and renderer `54dfe…725c` hashes. It used pinned R70 inputs, Ubuntu 22.04.5, Node 22.23.3, Playwright 1.56.0, headless sandboxed Chromium, viewport 1365×850 at DPR 1, seed 70018, and SwiftShader. The exact Chromium version was not logged by this job. Eight paired rows, counters, heap data, result, hashes, and artifact provenance are in [`performance-d58ffc8-independent.json`](performance-d58ffc8-independent.json); artifact 12130099660 was 4,802,941 bytes, SHA-256 `b47b50400cf1da09da1ffb84fcd6366ec4e60e795ec13e408583200b8aba9eb3`.
+
+| Scenario | Measure | R70 baseline | R71 candidate | Candidate vs baseline |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 264.097 ms | 267.044 ms | +1.116% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 300.050 ms | 300.100 ms | +0.017% |
+| Movement | JavaScript draw p95 | 31.200 ms | 32.500 ms | +1.300 ms |
+| Movement | GL draw calls / frame | 330.860 | 330.280 | −0.175% |
+| Movement | GL buffer uploads / frame | 203.965 | 203.034 | −0.456% |
+| Movement | Material replacements / frame | 0.741 | 0.699 | −5.687% |
+| EGO stress | RAF frame interval mean | 252.009 ms | 253.510 ms | +0.596% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 275.000 ms | 275.050 ms | +0.018% |
+| EGO stress | JavaScript draw p95 | 29.700 ms | 31.250 ms | +1.550 ms |
+| EGO stress | GL draw calls / frame | 470.382 | 473.778 | +0.722% |
+| EGO stress | GL buffer uploads / frame | 247.019 | 251.945 | +1.994% |
+| EGO stress | Material replacements / frame | 3.179 | 3.135 | −1.379% |
+
+Both `regressionFlag` values were false under the harness's 10% threshold, but mean frame times increased in both scenarios. Heap deltas were 0 bytes in all eight trials; no JS errors were reported and the EGO samples retained the six expected motifs with hits. This is a separate low-latency software-renderer VM from the other pairs; do not pool it. The result does not support an overall speedup claim. The result contained `profiles:[]`; no new CDP CPU profile was collected.
+
+## Independent Pages pair: de6536 runtime, test-only 0cd0167 harness
+
+Pages run [39111045136, job 117627064878](https://github.com/kjb7876-lang/m0/actions/runs/39111045136) ran harness commit `0cd016713f79b3f2818198363fd65acea0734ab1` and measured the same de6536 HTML / 54dfe renderer hashes on a separate hosted runner. It used Ubuntu 22.04.5, Node 22.23.3, Playwright 1.56.0, headless sandboxed Chromium, viewport 1365×850 at DPR 1, seed 70018, and SwiftShader. The paired performance rows do not log the exact Chromium version. Eight timing/counter/heap rows, same-job R70 profile summaries, result, hashes, and artifact provenance are archived in [`performance-0cd0167-pages.json`](performance-0cd0167-pages.json); artifact 12131490200 was 29,352,649 bytes, SHA-256 `a6a4858d7a52dc0d8229274b6b9decefe0b9dcf7264f2709c52d7a5e43f130e3`.
+
+| Scenario | Measure | R70 baseline | R71 candidate | Candidate vs baseline |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 359.510 ms | 362.067 ms | +0.711% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 400.000 ms | 400.000 ms | unchanged |
+| Movement | JavaScript draw p95 | 39.750 ms | 40.500 ms | +0.750 ms |
+| Movement | GL draw calls / frame | 327.976 | 328.042 | +0.020% |
+| Movement | GL buffer uploads / frame | 205.274 | 204.890 | −0.187% |
+| Movement | Material replacements / frame | 0.762 | 0.766 | +0.602% |
+| EGO stress | RAF frame interval mean | 333.795 ms | 328.685 ms | −1.531% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 366.700 ms | 350.050 ms | −4.540% |
+| EGO stress | JavaScript draw p95 | 39.400 ms | 36.550 ms | −2.850 ms |
+| EGO stress | GL draw calls / frame | 436.815 | 458.033 | +4.857% |
+| EGO stress | GL buffer uploads / frame | 255.922 | 246.678 | −3.612% |
+| EGO stress | Material replacements / frame | 3.586 | 4.333 | +20.823% |
+
+Both harness `regressionFlag` values were false. Movement mean increased 0.711% with p95 unchanged; EGO mean and p95 were lower by 1.531% and 4.540%, while draw calls and material replacements rose. The result is mixed; do not claim a speedup. Used and total JS heap deltas were 0 bytes in all eight trials. This Pages pair is independent of the other five VM pairs. No browser-case results are included in this performance archive. All measurements use SwiftShader, not physical-GPU timing.
 
 ## R70 baseline profile evidence
 
@@ -263,3 +305,5 @@ The c315ca Pages browser step did not pass: after `R71_NATIVE_HIT` confirmed a r
 - Independent de6536 Pages pair, browser result, same-job R70 profile summary, and provenance: [`performance-de6536-pages.json`](performance-de6536-pages.json)
 - Independent 83386e7 preflight pair with eight trial rows, counters, heaps, and provenance: [`performance-83386-independent.json`](performance-83386-independent.json)
 - Independent 0cd0167 preflight pair with eight trial rows, counters, heaps, and provenance: [`performance-0cd0167-independent.json`](performance-0cd0167-independent.json)
+- Independent d58ffc8 preflight pair with eight trial rows, counters, heaps, and provenance: [`performance-d58ffc8-independent.json`](performance-d58ffc8-independent.json)
+- Independent 0cd0167 Pages pair with eight trial rows, counters, heaps, and provenance: [`performance-0cd0167-pages.json`](performance-0cd0167-pages.json)

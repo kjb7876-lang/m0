@@ -26,8 +26,10 @@ R71 변환 계수는 `777 / (260 + 35*nativeVital + 5*(level-1) + 18*endlessVita
 
 ## 검증 상태
 
-현재 후보 HTML SHA-256은 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, renderer SHA-256은 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 후보 CPU 집계는 **26/26**(health 13, progression 9, renderer 4)입니다. Preflight run `39108393150` / commit `dff330b89a8e10ee98b610191061e0840394b989`의 브라우저 및 native 결과는 대기 중이므로 최종 통과로 표시하지 않습니다.
+현재 후보 HTML SHA-256은 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, renderer SHA-256은 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. Preflight run [39112456285](https://github.com/kjb7876-lang/m0/actions/runs/39112456285), head `d58ffc8691822cfc5bbec9913fb99c32d38a626b`에서는 browser **8/8**, native runner 4개 실제 검증 그룹, CPU **26/26**, audit 1906건 및 integrity 검증이 통과했습니다. Health 브라우저 검사는 28개 보스 맵의 44개 actor, HP 777, 강화, 저장/복원, 사망/부활을 통과했습니다. Co-op 피격에서 peer 체력은 777에서 772.00028로 줄고 host 체력은 그대로였으며, 치명 피격은 2에서 0으로 만든 뒤 host native tick 한 번으로 388.5/777에 부활했습니다. 출혈 상태의 저장 및 guest 전달, 병원 epoch 5/ep1a08 확장 아이템 저장 및 guest 전달, 아이템 1회 픽업, 반복 저장 가져오기에서 boss/clone 체력 안정성도 통과했습니다. 전체 health 비교에서 실패는 0건이고 저장 입력도 변하지 않았습니다.
 
-중간 `58c979b` 브라우저 결과는 별도 기록입니다. 해당 실행에서는 health 전용 케이스가 통과했고 28개 보스 맵의 44개 보스 actor, HP 777, native enemy hit, 강화, 저장/복원, 사망/부활을 다뤘습니다. 그러나 당시 8개 사례 중 전체 6개만 통과했고, beacon rendering과 co-op fixture 사례가 실패했습니다. 따라서 이 health 사례는 유용한 중간 증거이며 현재 후보의 최종 browser acceptance를 대신하지 않습니다([중간 결과](intermediate-58c979b-browser.json)).
+0cd run [39111040632](https://github.com/kjb7876-lang/m0/actions/runs/39111040632)의 7/8 결과는 fixture가 존재하지 않는 `c.tick`을 호출한 중간 실패였습니다. d58 harness가 native global tick과 병원 진입 대기를 사용해 이를 고쳤고, 위 run에서 전체 browser 검증이 통과했습니다([0cd 중간 artifact](intermediate-0cd0167-browser-native.json)). 해당 CI 통과는 후보 검증 결과이며 배포 또는 별도 승인 완료를 뜻하지 않습니다.
 
-검증 범위는 로컬 브라우저 협동 시뮬레이션입니다. 실제 relay 연결과 서로 다른 버전 간 co-op 호환성은 검증되지 않았습니다.
+중간 `58c979b` 브라우저 결과는 과거 진단 자료입니다. 해당 health 전용 사례는 통과했지만 당시 beacon rendering과 co-op fixture가 실패했으며, 현재 browser 검증을 대신하지 않습니다([중간 결과](intermediate-58c979b-browser.json)).
+
+검증 범위는 로컬 브라우저 협동 시뮬레이션입니다. 물리 기기 간 협동, 실제 relay 연결, 서로 다른 버전 간 co-op 호환성은 검증되지 않았습니다.

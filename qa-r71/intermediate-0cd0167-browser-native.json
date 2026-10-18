@@ -50,11 +50,49 @@
     "id": 39111045136,
     "url": "https://github.com/kjb7876-lang/m0/actions/runs/39111045136",
     "jobId": 117627064878,
-    "status": "in_progress",
-    "conclusion": null,
-    "activeStep": "Profile R70 first, then build and validate R71",
+    "status": "completed",
+    "conclusion": "failure",
+    "activeStep": null,
     "latestStepStart": "2026-10-18T08:25:37Z",
-    "note": "Pages full-gate run was still active when this evidence was captured."
+    "note": "Pages full-gate run was still active when this evidence was captured.",
+    "finishedAt": "2026-10-18T08:48:06Z",
+    "failedStep": "Profile R70 first, then build and validate R71",
+    "candidateBrowserSummary": {
+      "attempted": 8,
+      "passed": 7,
+      "failed": 1,
+      "failedCase": "two-page-local-coop-health-rewards-expanded-drops",
+      "error": "page.evaluate: TypeError: c.tick is not a function at scripts/r71.browser.test.mjs:1608:42",
+      "sameRuntimeHashesAsPreflight": true
+    },
+    "nativeSummary": {
+      "status": "passed",
+      "assertionGroups": 4,
+      "informationalChecks": 1,
+      "groups": [
+        "native-damage-and-ego-cooldown",
+        "boss-hp-desktop",
+        "boss-hp-mobile-landscape",
+        "save-restore-lifecycle"
+      ],
+      "informational": [
+        "legacy-runner-excluded-for-r71-health-contract"
+      ]
+    },
+    "releaseHashCheck": "skipped after validation failure",
+    "pagesDeployment": "skipped",
+    "artifact": {
+      "id": 12131490200,
+      "name": "r71-release-checks",
+      "sizeBytes": 29352649,
+      "sha256": "sha256:a6a4858d7a52dc0d8229274b6b9decefe0b9dcf7264f2709c52d7a5e43f130e3",
+      "url": "https://github.com/kjb7876-lang/m0/actions/runs/39111045136/artifacts/12131490200"
+    },
+    "browserEvidenceReference": {
+      "runId": 39111040632,
+      "jobId": 117627051516,
+      "note": "The same candidate runtime produced the same 7/8 failure; the Page run independently reported the same c.tick TypeError."
+    }
   },
   "runtime": {
     "baseline": {
@@ -337,7 +375,10 @@
       ],
       "browser": "141.0.7390.37",
       "sandbox": true,
-      "physicalGPU": false
+      "physicalGPU": false,
+      "assertionGroupCount": 4,
+      "informationalCheckCount": 1,
+      "checksNote": "4 executable check groups passed; the fifth entry is an informational legacy-runner exclusion notice, not an assertion group."
     }
   },
   "browserResult": {
@@ -784,7 +825,7 @@
             "actors": [
               {
                 "id": "dist00:dist00-boss",
-                "name": "뿌리의 문지기",
+                "name": "\ubfcc\ub9ac\uc758 \ubb38\uc9c0\uae30",
                 "maxHp": 6666,
                 "hp": 6666,
                 "canonicalMaxHp": 6421.5,
@@ -825,7 +866,7 @@
             "actors": [
               {
                 "id": "dist06:mb-dist06",
-                "name": "소환진 검은기둥",
+                "name": "\uc18c\ud658\uc9c4 \uac80\uc740\uae30\ub465",
                 "maxHp": 8666,
                 "hp": 8666,
                 "canonicalMaxHp": 8199.75,
@@ -833,7 +874,7 @@
               },
               {
                 "id": "dist06:dist06-boss",
-                "name": "발록 · 지옥의 문지기",
+                "name": "\ubc1c\ub85d \u00b7 \uc9c0\uc625\uc758 \ubb38\uc9c0\uae30",
                 "maxHp": 8666,
                 "hp": 8666,
                 "canonicalMaxHp": 8199.75,
@@ -874,7 +915,7 @@
             "actors": [
               {
                 "id": "ep1a11:mb-ep1a11",
-                "name": "초천사의 웃는 가면",
+                "name": "\ucd08\ucc9c\uc0ac\uc758 \uc6c3\ub294 \uac00\uba74",
                 "maxHp": 9666,
                 "hp": 9666,
                 "canonicalMaxHp": 9385.25,
@@ -882,7 +923,7 @@
               },
               {
                 "id": "ep1a11:a11-boss",
-                "name": "루시퍼 · 가면 벗은 초천사",
+                "name": "\ub8e8\uc2dc\ud37c \u00b7 \uac00\uba74 \ubc97\uc740 \ucd08\ucc9c\uc0ac",
                 "maxHp": 9666,
                 "hp": 9666,
                 "canonicalMaxHp": 9385.25,
@@ -923,7 +964,7 @@
             "actors": [
               {
                 "id": "ep1b02:mb-ep1b02",
-                "name": "나태의 껍데기 파수",
+                "name": "\ub098\ud0dc\uc758 \uaecd\ub370\uae30 \ud30c\uc218",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10274.25,
@@ -931,7 +972,7 @@
               },
               {
                 "id": "ep1b02:b02-boss",
-                "name": "나태에 잠식된 남자",
+                "name": "\ub098\ud0dc\uc5d0 \uc7a0\uc2dd\ub41c \ub0a8\uc790",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10274.25,
@@ -972,7 +1013,7 @@
             "actors": [
               {
                 "id": "ep1b03:mb-ep1b03",
-                "name": "금이 간 비교잔영",
+                "name": "\uae08\uc774 \uac04 \ube44\uad50\uc794\uc601",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10570.75,
@@ -980,7 +1021,7 @@
               },
               {
                 "id": "ep1b03:b03-boss",
-                "name": "호텔 부매니저 · 레비아탄",
+                "name": "\ud638\ud154 \ubd80\ub9e4\ub2c8\uc800 \u00b7 \ub808\ube44\uc544\ud0c4",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10570.75,
@@ -1021,7 +1062,7 @@
             "actors": [
               {
                 "id": "ep1b04:mb-ep1b04",
-                "name": "폐기주방 감독",
+                "name": "\ud3d0\uae30\uc8fc\ubc29 \uac10\ub3c5",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10867,
@@ -1029,7 +1070,7 @@
               },
               {
                 "id": "ep1b04:b04-boss",
-                "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+                "name": "\ucd5c\uace0\uae09 \ud638\ud154\uc758 \ucd1d\uc8fc\ubc29\uc7a5 \u00b7 \ud0d0\uc2dd\uc758 \uadc0 \ubca0\uc5d8\uc81c\ubd91",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 10867,
@@ -1070,7 +1111,7 @@
             "actors": [
               {
                 "id": "ep1b05:mb-ep1b05",
-                "name": "심장빛 무대감독",
+                "name": "\uc2ec\uc7a5\ube5b \ubb34\ub300\uac10\ub3c5",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 11163.5,
@@ -1078,7 +1119,7 @@
               },
               {
                 "id": "ep1b05:b05-boss",
-                "name": "붉은 하이힐의 서윤",
+                "name": "\ubd89\uc740 \ud558\uc774\ud790\uc758 \uc11c\uc724",
                 "maxHp": 10666,
                 "hp": 10666,
                 "canonicalMaxHp": 11163.5,
@@ -1119,7 +1160,7 @@
             "actors": [
               {
                 "id": "ep1b06:mb-ep1b06",
-                "name": "금고 장부감시자",
+                "name": "\uae08\uace0 \uc7a5\ubd80\uac10\uc2dc\uc790",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 11459.75,
@@ -1127,7 +1168,7 @@
               },
               {
                 "id": "ep1b06:b06-boss",
-                "name": "회장에게 고용된 총지배인 · 맘몬",
+                "name": "\ud68c\uc7a5\uc5d0\uac8c \uace0\uc6a9\ub41c \ucd1d\uc9c0\ubc30\uc778 \u00b7 \ub9d8\ubaac",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 11459.75,
@@ -1168,7 +1209,7 @@
             "actors": [
               {
                 "id": "ep1b06b:mb-ep1b06b",
-                "name": "겨울숲 가시파수",
+                "name": "\uaca8\uc6b8\uc232 \uac00\uc2dc\ud30c\uc218",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 11756.25,
@@ -1176,7 +1217,7 @@
               },
               {
                 "id": "ep1b06b:b06b-boss",
-                "name": "소년이 된 총지배인 · 맘몬",
+                "name": "\uc18c\ub144\uc774 \ub41c \ucd1d\uc9c0\ubc30\uc778 \u00b7 \ub9d8\ubaac",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 11756.25,
@@ -1217,7 +1258,7 @@
             "actors": [
               {
                 "id": "ep1b07:mb-ep1b07",
-                "name": "호텔 화염기사",
+                "name": "\ud638\ud154 \ud654\uc5fc\uae30\uc0ac",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 12052.5,
@@ -1225,7 +1266,7 @@
               },
               {
                 "id": "ep1b07:b07-boss",
-                "name": "불을 지른 청소부 · 사탄",
+                "name": "\ubd88\uc744 \uc9c0\ub978 \uccad\uc18c\ubd80 \u00b7 \uc0ac\ud0c4",
                 "maxHp": 11666,
                 "hp": 11666,
                 "canonicalMaxHp": 12052.5,
@@ -1266,7 +1307,7 @@
             "actors": [
               {
                 "id": "ep1b08:mb-ep1b08",
-                "name": "역십자가 시체경호체",
+                "name": "\uc5ed\uc2ed\uc790\uac00 \uc2dc\uccb4\uacbd\ud638\uccb4",
                 "maxHp": 12666,
                 "hp": 12666,
                 "canonicalMaxHp": 12349,
@@ -1274,7 +1315,7 @@
               },
               {
                 "id": "ep1b08:b08-boss",
-                "name": "백색 정장의 호텔 그룹 회장",
+                "name": "\ubc31\uc0c9 \uc815\uc7a5\uc758 \ud638\ud154 \uadf8\ub8f9 \ud68c\uc7a5",
                 "maxHp": 12666,
                 "hp": 12666,
                 "canonicalMaxHp": 12349,
@@ -1315,7 +1356,7 @@
             "actors": [
               {
                 "id": "ep1b09:mb-ep1b09",
-                "name": "생체부트로더 연산핵",
+                "name": "\uc0dd\uccb4\ubd80\ud2b8\ub85c\ub354 \uc5f0\uc0b0\ud575",
                 "maxHp": 12666,
                 "hp": 12666,
                 "canonicalMaxHp": 12645.25,
@@ -1323,7 +1364,7 @@
               },
               {
                 "id": "ep1b09:b09-boss",
-                "name": "사이보그 회장 · 생체 부트로더",
+                "name": "\uc0ac\uc774\ubcf4\uadf8 \ud68c\uc7a5 \u00b7 \uc0dd\uccb4 \ubd80\ud2b8\ub85c\ub354",
                 "maxHp": 12666,
                 "hp": 12666,
                 "canonicalMaxHp": 12645.25,
@@ -1364,7 +1405,7 @@
             "actors": [
               {
                 "id": "u203:u203-mid",
-                "name": "기억의 문 수호 프레임",
+                "name": "\uae30\uc5b5\uc758 \ubb38 \uc218\ud638 \ud504\ub808\uc784",
                 "maxHp": 14666,
                 "hp": 14666,
                 "canonicalMaxHp": 14720,
@@ -1372,7 +1413,7 @@
               },
               {
                 "id": "u203:u203-boss",
-                "name": "컨트롤러 · 기억의 문",
+                "name": "\ucee8\ud2b8\ub864\ub7ec \u00b7 \uae30\uc5b5\uc758 \ubb38",
                 "maxHp": 14666,
                 "hp": 14666,
                 "canonicalMaxHp": 14720,
@@ -1413,7 +1454,7 @@
             "actors": [
               {
                 "id": "last305:l305-boss",
-                "name": "고블린 추장",
+                "name": "\uace0\ube14\ub9b0 \ucd94\uc7a5",
                 "maxHp": 15666,
                 "hp": 15666,
                 "canonicalMaxHp": 15609,
@@ -1454,7 +1495,7 @@
             "actors": [
               {
                 "id": "last301:l301-boss",
-                "name": "타락천사 기사",
+                "name": "\ud0c0\ub77d\ucc9c\uc0ac \uae30\uc0ac",
                 "maxHp": 15666,
                 "hp": 15666,
                 "canonicalMaxHp": 15905.25,
@@ -1495,7 +1536,7 @@
             "actors": [
               {
                 "id": "last303:l303-boss",
-                "name": "불면귀",
+                "name": "\ubd88\uba74\uadc0",
                 "maxHp": 16666,
                 "hp": 16666,
                 "canonicalMaxHp": 16498,
@@ -1536,7 +1577,7 @@
             "actors": [
               {
                 "id": "kair05:kair-great-01",
-                "name": "대수문장 01",
+                "name": "\ub300\uc218\ubb38\uc7a5 01",
                 "maxHp": 17666,
                 "hp": 17666,
                 "canonicalMaxHp": 17683.5,
@@ -1577,7 +1618,7 @@
             "actors": [
               {
                 "id": "kair06:kair-great-02",
-                "name": "대수문장 02",
+                "name": "\ub300\uc218\ubb38\uc7a5 02",
                 "maxHp": 17666,
                 "hp": 17666,
                 "canonicalMaxHp": 17980,
@@ -1618,7 +1659,7 @@
             "actors": [
               {
                 "id": "kair07:kair-great-04",
-                "name": "대수문장 04",
+                "name": "\ub300\uc218\ubb38\uc7a5 04",
                 "maxHp": 18666,
                 "hp": 18666,
                 "canonicalMaxHp": 18276.25,
@@ -1659,7 +1700,7 @@
             "actors": [
               {
                 "id": "kair09:mb-kair09-v31231",
-                "name": "망각 묘지기 · 삭제된 선택",
+                "name": "\ub9dd\uac01 \ubb18\uc9c0\uae30 \u00b7 \uc0ad\uc81c\ub41c \uc120\ud0dd",
                 "maxHp": 18666,
                 "hp": 18666,
                 "canonicalMaxHp": 18869,
@@ -1700,7 +1741,7 @@
             "actors": [
               {
                 "id": "kair10:kair-great-06",
-                "name": "대수문장 06",
+                "name": "\ub300\uc218\ubb38\uc7a5 06",
                 "maxHp": 18666,
                 "hp": 18666,
                 "canonicalMaxHp": 19165.5,
@@ -1741,7 +1782,7 @@
             "actors": [
               {
                 "id": "kair02:kair-great-03",
-                "name": "아르벨리아, 유예의 수문장",
+                "name": "\uc544\ub974\ubca8\ub9ac\uc544, \uc720\uc608\uc758 \uc218\ubb38\uc7a5",
                 "maxHp": 19666,
                 "hp": 19666,
                 "canonicalMaxHp": 19461.75,
@@ -1782,7 +1823,7 @@
             "actors": [
               {
                 "id": "kair03:k103-boss",
-                "name": "세이렌 모르",
+                "name": "\uc138\uc774\ub80c \ubaa8\ub974",
                 "maxHp": 19666,
                 "hp": 19666,
                 "canonicalMaxHp": 19758.25,
@@ -1823,7 +1864,7 @@
             "actors": [
               {
                 "id": "hando03:mb-hando03",
-                "name": "환수검 모조체",
+                "name": "\ud658\uc218\uac80 \ubaa8\uc870\uccb4",
                 "maxHp": 20666,
                 "hp": 20666,
                 "canonicalMaxHp": 20943.75,
@@ -1831,7 +1872,7 @@
               },
               {
                 "id": "hando03:h103-boss",
-                "name": "EGO 강탈 악몽왕",
+                "name": "EGO \uac15\ud0c8 \uc545\ubabd\uc655",
                 "maxHp": 20666,
                 "hp": 20666,
                 "canonicalMaxHp": 20943.75,
@@ -1872,7 +1913,7 @@
             "actors": [
               {
                 "id": "murder03:mb-murder03",
-                "name": "옥상 인과보관인",
+                "name": "\uc625\uc0c1 \uc778\uacfc\ubcf4\uad00\uc778",
                 "maxHp": 22666,
                 "hp": 22666,
                 "canonicalMaxHp": 22425.5,
@@ -1880,7 +1921,7 @@
               },
               {
                 "id": "murder03:blue-executor",
-                "name": "파란불",
+                "name": "\ud30c\ub780\ubd88",
                 "maxHp": 22666,
                 "hp": 22666,
                 "canonicalMaxHp": 22425.5,
@@ -1921,7 +1962,7 @@
             "actors": [
               {
                 "id": "cult02:c102-boss",
-                "name": "네트워크 합창체",
+                "name": "\ub124\ud2b8\uc6cc\ud06c \ud569\ucc3d\uccb4",
                 "maxHp": 22666,
                 "hp": 22666,
                 "canonicalMaxHp": 23018.25,
@@ -1962,7 +2003,7 @@
             "actors": [
               {
                 "id": "cult03:c103-mid",
-                "name": "이단의목사 한리안",
+                "name": "\uc774\ub2e8\uc758\ubaa9\uc0ac \ud55c\ub9ac\uc548",
                 "maxHp": 23666,
                 "hp": 23666,
                 "canonicalMaxHp": 23907.5,
@@ -1970,7 +2011,7 @@
               },
               {
                 "id": "cult03:c103-boss",
-                "name": "이단의목사 백이온",
+                "name": "\uc774\ub2e8\uc758\ubaa9\uc0ac \ubc31\uc774\uc628",
                 "maxHp": 23666,
                 "hp": 23666,
                 "canonicalMaxHp": 23907.5,
@@ -2011,7 +2052,7 @@
             "actors": [
               {
                 "id": "cult04:c104-mid",
-                "name": "적그리스도 배양좌",
+                "name": "\uc801\uadf8\ub9ac\uc2a4\ub3c4 \ubc30\uc591\uc88c",
                 "maxHp": 24666,
                 "hp": 24666,
                 "canonicalMaxHp": 24203.75,
@@ -2019,7 +2060,7 @@
               },
               {
                 "id": "cult04:c104-boss",
-                "name": "교만의 사이보그 교주",
+                "name": "\uad50\ub9cc\uc758 \uc0ac\uc774\ubcf4\uadf8 \uad50\uc8fc",
                 "maxHp": 24666,
                 "hp": 24666,
                 "canonicalMaxHp": 24203.75,
@@ -2170,7 +2211,7 @@
             "playerAtEnd": {
               "hp": 694.9041332258065,
               "invincible": 0.3,
-              "invReason": "피격 보호",
+              "invReason": "\ud53c\uaca9 \ubcf4\ud638",
               "guard": false,
               "parry": 0,
               "shield": 0,
@@ -2183,7 +2224,7 @@
             "player": {
               "hp": 694.9041332258065,
               "invincible": 0.3,
-              "invReason": "피격 보호",
+              "invReason": "\ud53c\uaca9 \ubcf4\ud638",
               "guard": false,
               "parry": 0,
               "shield": 0,
@@ -4035,8 +4076,8 @@
           "rows": [
             {
               "key": "health-r71-bleed",
-              "icon": "☠",
-              "label": "출혈",
+              "icon": "\u2620",
+              "label": "\ucd9c\ud608",
               "remaining": 3,
               "kind": "debuff",
               "ownerId": "dist00:story-patrol:0:0"
@@ -4310,14 +4351,14 @@
                 "records": 61,
                 "combatRegions": 55,
                 "chapters": [
-                  "제1부 — 마지막 수호자 EGO",
-                  "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                  "제3부 — 통제자의 열일곱 단계",
-                  "제4부 — 환도 자아와 융합몽세",
-                  "제5부 — 카이로노미콘",
-                  "제6부 — 두 사람의 성",
-                  "제7부 — 파란불 아래의 사람들",
-                  "제8부 — 사이비 합일몽세"
+                  "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                  "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                  "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                  "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                  "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                  "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                  "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                  "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
                 ],
                 "campaignOrder": [
                   "hub",
@@ -4661,14 +4702,14 @@
                 "records": 61,
                 "combatRegions": 55,
                 "chapters": [
-                  "제1부 — 마지막 수호자 EGO",
-                  "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                  "제3부 — 통제자의 열일곱 단계",
-                  "제4부 — 환도 자아와 융합몽세",
-                  "제5부 — 카이로노미콘",
-                  "제6부 — 두 사람의 성",
-                  "제7부 — 파란불 아래의 사람들",
-                  "제8부 — 사이비 합일몽세"
+                  "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                  "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                  "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                  "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                  "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                  "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                  "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                  "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
                 ],
                 "campaignOrder": [
                   "hub",
@@ -5019,14 +5060,14 @@
                 "records": 61,
                 "combatRegions": 55,
                 "chapters": [
-                  "제1부 — 마지막 수호자 EGO",
-                  "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                  "제3부 — 통제자의 열일곱 단계",
-                  "제4부 — 환도 자아와 융합몽세",
-                  "제5부 — 카이로노미콘",
-                  "제6부 — 두 사람의 성",
-                  "제7부 — 파란불 아래의 사람들",
-                  "제8부 — 사이비 합일몽세"
+                  "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                  "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                  "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                  "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                  "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                  "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                  "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                  "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
                 ],
                 "campaignOrder": [
                   "hub",
@@ -14879,14 +14920,14 @@
               "records": 61,
               "combatRegions": 55,
               "chapters": [
-                "제1부 — 마지막 수호자 EGO",
-                "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                "제3부 — 통제자의 열일곱 단계",
-                "제4부 — 환도 자아와 융합몽세",
-                "제5부 — 카이로노미콘",
-                "제6부 — 두 사람의 성",
-                "제7부 — 파란불 아래의 사람들",
-                "제8부 — 사이비 합일몽세"
+                "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
               ],
               "campaignOrder": [
                 "hub",
@@ -15189,7 +15230,7 @@
               },
               "panel": {
                 "hidden": true,
-                "text": "MAP DIFFICULTY / STORY악마화 나무의 정원 · 난이도 선택원하는 난이도를 고른 뒤 확인을 눌러 적용하세요. 적 기본 체력과 받는 피해, 첫 클리어 포인트가 표시된 값으로 적용됩니다. 기존 지역의 난이도 변경은 현재 적 체력 비율을 보존합니다.이지기본 적 체력 20% · 받는 피해 40%첫 클리어 +1점노말기본 적 체력 25% · 받는 피해 100%첫 클리어 +3점하드기본 적 체력 40% · 받는 피해 120%첫 클리어 +7점선택됨: 노말 · 첫 클리어 보상 3점노말 난이도로 적용 · 첫 클리어 +3점취소선택은 확인을 누를 때까지 적용되지 않습니다. 첫 클리어 포인트는 난이도에 따라 1 / 3 / 7점이며, 같은 지도 보상은 다시 지급되지 않습니다.",
+                "text": "MAP DIFFICULTY / STORY\uc545\ub9c8\ud654 \ub098\ubb34\uc758 \uc815\uc6d0 \u00b7 \ub09c\uc774\ub3c4 \uc120\ud0dd\uc6d0\ud558\ub294 \ub09c\uc774\ub3c4\ub97c \uace0\ub978 \ub4a4 \ud655\uc778\uc744 \ub20c\ub7ec \uc801\uc6a9\ud558\uc138\uc694. \uc801 \uae30\ubcf8 \uccb4\ub825\uacfc \ubc1b\ub294 \ud53c\ud574, \uccab \ud074\ub9ac\uc5b4 \ud3ec\uc778\ud2b8\uac00 \ud45c\uc2dc\ub41c \uac12\uc73c\ub85c \uc801\uc6a9\ub429\ub2c8\ub2e4. \uae30\uc874 \uc9c0\uc5ed\uc758 \ub09c\uc774\ub3c4 \ubcc0\uacbd\uc740 \ud604\uc7ac \uc801 \uccb4\ub825 \ube44\uc728\uc744 \ubcf4\uc874\ud569\ub2c8\ub2e4.\uc774\uc9c0\uae30\ubcf8 \uc801 \uccb4\ub825 20% \u00b7 \ubc1b\ub294 \ud53c\ud574 40%\uccab \ud074\ub9ac\uc5b4 +1\uc810\ub178\ub9d0\uae30\ubcf8 \uc801 \uccb4\ub825 25% \u00b7 \ubc1b\ub294 \ud53c\ud574 100%\uccab \ud074\ub9ac\uc5b4 +3\uc810\ud558\ub4dc\uae30\ubcf8 \uc801 \uccb4\ub825 40% \u00b7 \ubc1b\ub294 \ud53c\ud574 120%\uccab \ud074\ub9ac\uc5b4 +7\uc810\uc120\ud0dd\ub428: \ub178\ub9d0 \u00b7 \uccab \ud074\ub9ac\uc5b4 \ubcf4\uc0c1 3\uc810\ub178\ub9d0 \ub09c\uc774\ub3c4\ub85c \uc801\uc6a9 \u00b7 \uccab \ud074\ub9ac\uc5b4 +3\uc810\ucde8\uc18c\uc120\ud0dd\uc740 \ud655\uc778\uc744 \ub204\ub97c \ub54c\uae4c\uc9c0 \uc801\uc6a9\ub418\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4. \uccab \ud074\ub9ac\uc5b4 \ud3ec\uc778\ud2b8\ub294 \ub09c\uc774\ub3c4\uc5d0 \ub530\ub77c 1 / 3 / 7\uc810\uc774\uba70, \uac19\uc740 \uc9c0\ub3c4 \ubcf4\uc0c1\uc740 \ub2e4\uc2dc \uc9c0\uae09\ub418\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4.",
                 "storyNext": false,
                 "upClose": false
               },
@@ -15200,14 +15241,14 @@
                 "records": 61,
                 "combatRegions": 55,
                 "chapters": [
-                  "제1부 — 마지막 수호자 EGO",
-                  "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                  "제3부 — 통제자의 열일곱 단계",
-                  "제4부 — 환도 자아와 융합몽세",
-                  "제5부 — 카이로노미콘",
-                  "제6부 — 두 사람의 성",
-                  "제7부 — 파란불 아래의 사람들",
-                  "제8부 — 사이비 합일몽세"
+                  "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                  "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                  "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                  "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                  "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                  "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                  "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                  "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
                 ],
                 "campaignOrder": [
                   "hub",
@@ -17161,7 +17202,7 @@
               },
               "panel": {
                 "hidden": true,
-                "text": "REGION / IMAGE LOADING악마화 나무의 정원지역 그림 80 / 80",
+                "text": "REGION / IMAGE LOADING\uc545\ub9c8\ud654 \ub098\ubb34\uc758 \uc815\uc6d0\uc9c0\uc5ed \uadf8\ub9bc 80 / 80",
                 "storyNext": false,
                 "upClose": false
               },
@@ -17172,14 +17213,14 @@
                 "records": 61,
                 "combatRegions": 55,
                 "chapters": [
-                  "제1부 — 마지막 수호자 EGO",
-                  "제2부 — 일곱 개의 귀와 하이테크 축귀",
-                  "제3부 — 통제자의 열일곱 단계",
-                  "제4부 — 환도 자아와 융합몽세",
-                  "제5부 — 카이로노미콘",
-                  "제6부 — 두 사람의 성",
-                  "제7부 — 파란불 아래의 사람들",
-                  "제8부 — 사이비 합일몽세"
+                  "\uc81c1\ubd80 \u2014 \ub9c8\uc9c0\ub9c9 \uc218\ud638\uc790 EGO",
+                  "\uc81c2\ubd80 \u2014 \uc77c\uacf1 \uac1c\uc758 \uadc0\uc640 \ud558\uc774\ud14c\ud06c \ucd95\uadc0",
+                  "\uc81c3\ubd80 \u2014 \ud1b5\uc81c\uc790\uc758 \uc5f4\uc77c\uacf1 \ub2e8\uacc4",
+                  "\uc81c4\ubd80 \u2014 \ud658\ub3c4 \uc790\uc544\uc640 \uc735\ud569\ubabd\uc138",
+                  "\uc81c5\ubd80 \u2014 \uce74\uc774\ub85c\ub178\ubbf8\ucf58",
+                  "\uc81c6\ubd80 \u2014 \ub450 \uc0ac\ub78c\uc758 \uc131",
+                  "\uc81c7\ubd80 \u2014 \ud30c\ub780\ubd88 \uc544\ub798\uc758 \uc0ac\ub78c\ub4e4",
+                  "\uc81c8\ubd80 \u2014 \uc0ac\uc774\ube44 \ud569\uc77c\ubabd\uc138"
                 ],
                 "campaignOrder": [
                   "hub",
@@ -19308,7 +19349,7 @@
       "playerAtEnd": {
         "hp": 694.9041332258065,
         "invincible": 0.3,
-        "invReason": "피격 보호",
+        "invReason": "\ud53c\uaca9 \ubcf4\ud638",
         "guard": false,
         "parry": 0,
         "shield": 0,
@@ -19321,7 +19362,7 @@
       "player": {
         "hp": 694.9041332258065,
         "invincible": 0.3,
-        "invReason": "피격 보호",
+        "invReason": "\ud53c\uaca9 \ubcf4\ud638",
         "guard": false,
         "parry": 0,
         "shield": 0,
@@ -19830,7 +19871,7 @@
           "x": 26.029657427511975,
           "y": 27.683857383954365,
           "invincible": 0.3,
-          "invReason": "피격 보호",
+          "invReason": "\ud53c\uaca9 \ubcf4\ud638",
           "guard": false,
           "parry": 0,
           "attackCD": 0,
@@ -19933,8 +19974,8 @@
     },
     "rawLogLines": {
       "replicaImport": "2026-10-18T08:33:22.2398672Z R71_LEGACY_BOSS_REPLICA_IMPORT {\"ownerBefore\":{\"id\":\"dist00:dist00-boss\",\"maxHp\":6666,\"canonical\":6421.5,\"hpFraction\":1,\"factor\":0.25},\"mobBefore\":{\"id\":\"dist00:story-patrol:0:0\",\"maxHp\":285,\"hp\":285},\"nativeSource\":{\"id\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"ai\":\"melee\",\"storyPatrol\":true,\"hardMaxHp\":456,\"normalMaxHp\":285,\"normalHp\":285,\"roomState\":{\"engaged\":false,\"cleared\":false,\"rewardCommitted\":false,\"encounterStage\":\"field\",\"activeEncounter\":\"\",\"spawnNonce\":0,\"fieldWaveIndex6\":0,\"fieldWaves6\":[1,2],\"fieldWaveCleared6\":false,\"defeatedActorIds\":[],\"kills\":0,\"minionKills\":0}},\"rosterAtSeed\":[{\"id\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"cosmicGuardian\":false,\"ai\":\"hybrid\",\"type\":\"boss\",\"coopReplica\":false,\"spawnState\":\"hidden\",\"deadRecorded\":false},{\"id\":\"dist00:dist00-boss:coop:1\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"cosmicGuardian\":false,\"ai\":\"hybrid\",\"type\":\"boss\",\"coopReplica\":true,\"spawnState\":\"hidden\",\"deadRecorded\":false}],\"expected\":{\"bossReplicaId\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"ordinaryReplicaId\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"oldCloneId\":\"dist00:r61-summon:qa-r70-clone\",\"fraction\":0.5,\"cloneFraction\":0.4,\"oldCloneMax\":385.28999999999996},\"first\":{\"importDiagnostics\":{\"identityBefore\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\"]},\"identityAfterImport\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:r61-summon:qa-r70-clone\",\"dist00:story-patrol:0:0\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"sameRoomAsPrevious\":false,\"sameEnemyArrayAsPrevious\":false,\"sameWorldAsPrevious\":false},\"identityAfterRead\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:r61-summon:qa-r70-clone\",\"dist00:story-patrol:0:0\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"sameRoomAsPrevious\":true,\"sameEnemyArrayAsPrevious\":true,\"sameWorldAsPrevious\":true},\"input\":{\"coopReplicaIds\":[\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"coopReplicas\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3210.75,\"maxHp\":6421.5,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"hostEnemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:story-patrol:0:0\"],\"hostEnemies\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":456,\"maxHp\":456,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"campaignHp\":{\"dist00:dist00-boss\":{\"base\":25686,\"factor\":0.25},\"dist00:dist00-boss:coop:1\":{\"base\":25686,\"factor\":0.25},\"dist00:r61-summon:qa-r70-clone\":{\"base\":48000,\"factor\":0.25},\"dist00:story-patrol:0:0\":{\"base\":1140,\"factor\":0.4}}},\"afterNativeImport\":{\"coopReplicaIds\":[\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"coopReplicas\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3210.75,\"maxHp\":6421.5,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"hostEnemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:story-patrol:0:0\"],\"hostEnemies\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":456,\"maxHp\":456,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"campaignHp\":{\"dist00:dist00-boss\":{\"base\":25686,\"factor\":0.25},\"dist00:dist00-boss:coop:1\":{\"base\":25686,\"factor\":0.25},\"dist00:r61-summon:qa-r70-clone\":{\"base\":48000,\"factor\":0.25},\"dist00:story-patrol:0:0\":{\"base\":1140,\"factor\":0.4}}},\"rawMutated\":false,\"roomRows\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3333,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:r61-summon:qa-r70-clone\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":159.984,\"maxHp\":399.96,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1599.84,\"difficultyFactor\":0.25},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1140,\"difficultyFactor\":0.25},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1140,\"difficultyFactor\":0.25}],\"defeated\":[],\"healthEventsBefore\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1}],\"healthEventsAfterImport\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5}],\"healthEventsAfterRead\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5}],\"nativeAutoReplicaInsertionTrace\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25,\"targetIsRoomEnemies\":true,\"targetIsWorldEntryEnemies\":true,\"targetIsCoopKeyEnemies\":true,\"stack\":[\"at Array.push (eval at evaluate (:290:30), <anonymous>:80:557)\",\"at Object.importCoopSave [as importSave] (http://127.0.0.1:4391/:11031:1786)\",\"at async restoreAndRead (eval at evaluate (:290:30), <anonymous>:84:13)\",\"at async eval (eval at evaluate (:290:30), <anonymous>:99:19)\",\"at async <anonymous>:316:30\"]}]},\"owner\":{\"maxHp\":6666,\"canonical\":6421.5,\"hpFraction\":1,\"factor\":0.25},\"bossReplica\":{\"maxHp\":6666,\"hp\":3333,\"hpFraction\":0.5,\"canonical\":6421.5,\"visible\":6666,\"adjusted\":true},\"ordinaryReplica\":{\"maxHp\":285,\"hp\":285},\"clone\":{\"maxHp\":399.96,\"hp\":159.984,\"hpFraction\":0.4,\"ownerMaxHp\":6666,\"ownerId\":\"dist00:dist00-boss\",\"kind\":\"clone\",\"clone\":true},\"sourceMob\":{\"maxHp\":285,\"hp\":285},\"cloneMetricRestored\":1,\"healthBosses\":[{\"id\":\"dist00:dist00-boss\",\"maxHp\":6666,\"canonical\":6421.5},{\"id\":\"dist00:dist00-boss:coop:1\",\"maxHp\":6666,\"canonical\":6421.5},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"maxHp\":6666,\"canonical\":6421.5}]},\"second\":{\"importDiagnostics\":{\"identityBefore\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:r61-summon:qa-r70-clone\",\"dist00:story-patrol:0:0\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"sameRoomAsPrevious\":true,\"sameEnemyArrayAsPrevious\":true,\"sameWorldAsPrevious\":true},\"identityAfterImport\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:r61-summon:qa-r70-clone\",\"dist00:story-patrol:0:0\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"sameRoomAsPrevious\":false,\"sameEnemyArrayAsPrevious\":false,\"sameWorldAsPrevious\":false},\"identityAfterRead\":{\"zone\":\"dist00\",\"layer\":\"STORY\",\"currentKey\":\"STORY:dist00\",\"roomId\":\"dist00\",\"roomLayer\":\"STORY\",\"roomMatchesWorldEntry\":true,\"roomMatchesCoopKey\":true,\"enemiesMatchWorldEntry\":true,\"enemiesMatchCoopKey\":true,\"worldRoomId\":\"dist00\",\"worldRoomLayer\":\"STORY\",\"coopWorldRoomId\":\"dist00\",\"coopWorldRoomLayer\":\"STORY\",\"worldKeys\":[\"STORY:dist00\"],\"enemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:r61-summon:qa-r70-clone\",\"dist00:story-patrol:0:0\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"sameRoomAsPrevious\":true,\"sameEnemyArrayAsPrevious\":true,\"sameWorldAsPrevious\":true},\"input\":{\"coopReplicaIds\":[\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"coopReplicas\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3210.75,\"maxHp\":6421.5,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"hostEnemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:story-patrol:0:0\"],\"hostEnemies\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":456,\"maxHp\":456,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"campaignHp\":{\"dist00:dist00-boss\":{\"base\":25686,\"factor\":0.25},\"dist00:dist00-boss:coop:1\":{\"base\":25686,\"factor\":0.25},\"dist00:r61-summon:qa-r70-clone\":{\"base\":48000,\"factor\":0.25},\"dist00:story-patrol:0:0\":{\"base\":1140,\"factor\":0.4}}},\"afterNativeImport\":{\"coopReplicaIds\":[\"dist00:dist00-boss:coop:1\",\"dist00:dist00-boss:coop:qa-r70-boss\",\"dist00:story-patrol:0:0:coop:qa-r70-mob\"],\"coopReplicas\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3210.75,\"maxHp\":6421.5,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"hostEnemyIds\":[\"dist00:dist00-boss\",\"dist00:dist00-boss:coop:1\",\"dist00:story-patrol:0:0\"],\"hostEnemies\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":456,\"maxHp\":456,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":null,\"difficultyFactor\":null}],\"campaignHp\":{\"dist00:dist00-boss\":{\"base\":25686,\"factor\":0.25},\"dist00:dist00-boss:coop:1\":{\"base\":25686,\"factor\":0.25},\"dist00:r61-summon:qa-r70-clone\":{\"base\":48000,\"factor\":0.25},\"dist00:story-patrol:0:0\":{\"base\":1140,\"factor\":0.4}}},\"rawMutated\":false,\"roomRows\":[{\"id\":\"dist00:dist00-boss\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":3333,\"maxHp\":6666,\"boss\":true,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25},{\"id\":\"dist00:r61-summon:qa-r70-clone\",\"source\":null,\"nativeId\":\"dist00-boss\",\"hp\":159.984,\"maxHp\":399.96,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1599.84,\"difficultyFactor\":0.25},{\"id\":\"dist00:story-patrol:0:0\",\"source\":null,\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":false,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1140,\"difficultyFactor\":0.25},{\"id\":\"dist00:story-patrol:0:0:coop:qa-r70-mob\",\"source\":\"dist00:story-patrol:0:0\",\"nativeId\":\"a11-c1\",\"hp\":285,\"maxHp\":285,\"boss\":false,\"midboss\":false,\"persona\":false,\"cosmic\":false,\"trial\":false,\"coopReplica\":true,\"healthCanonical\":null,\"healthVisible\":null,\"healthAdjusted\":null,\"difficultyBase\":1140,\"difficultyFactor\":0.25}],\"defeated\":[],\"healthEventsBefore\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5}],\"healthEventsAfterImport\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5}],\"healthEventsAfterRead\":[{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":0,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":815.76,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":10274.400000000001,\"visibleMaxHp\":10666,\"hp\":10666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:1\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":2039.3999999999999,\"canonicalMaxHp\":509.84999999999997,\"visibleMaxHp\":666,\"hp\":666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":6666,\"canonicalMaxHp\":1666.5,\"visibleMaxHp\":1666,\"hp\":1666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss\",\"reason\":\"difficulty-scale\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":6666,\"hpFraction\":1},{\"stage\":\"boss-health-suffixed\",\"at\":1.4,\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"reason\":\"coop-save-replicas\",\"baseMaxHp\":25686,\"canonicalMaxHp\":6421.5,\"visibleMaxHp\":6666,\"hp\":3333,\"hpFraction\":0.5}],\"nativeAutoReplicaInsertionTrace\":[{\"id\":\"dist00:dist00-boss:coop:1\",\"source\":\"dist00:dist00-boss\",\"nativeId\":\"dist00-boss\",\"hp\":6666,\"maxHp\":6666,\"healthCanonical\":6421.5,\"healthVisible\":6666,\"healthAdjusted\":true,\"difficultyBase\":25686,\"difficultyFactor\":0.25,\"targetIsRoomEnemies\":true,\"targetIsWorldEntryEnemies\":true,\"targetIsCoopKeyEnemies\":true,\"stack\":[\"at Array.push (eval at evaluate (:290:30), <anonymous>:80:557)\",\"at Object.importCoopSave [as importSave] (http://127.0.0.1:4391/:11031:1786)\",\"at async restoreAndRead (eval at evaluate (:290:30), <anonymous>:84:13)\",\"at async eval (eval at evaluate (:290:30), <anonymous>:99:49)\",\"at async <anonymous>:316:30\"]}]},\"owner\":{\"maxHp\":6666,\"canonical\":6421.5,\"hpFraction\":1,\"factor\":0.25},\"bossReplica\":{\"maxHp\":6666,\"hp\":3333,\"hpFraction\":0.5,\"canonical\":6421.5,\"visible\":6666,\"adjusted\":true},\"ordinaryReplica\":{\"maxHp\":285,\"hp\":285},\"clone\":{\"maxHp\":399.96,\"hp\":159.984,\"hpFraction\":0.4,\"ownerMaxHp\":6666,\"ownerId\":\"dist00:dist00-boss\",\"kind\":\"clone\",\"clone\":true},\"sourceMob\":{\"maxHp\":285,\"hp\":285},\"cloneMetricRestored\":2,\"healthBosses\":[{\"id\":\"dist00:dist00-boss\",\"maxHp\":6666,\"canonical\":6421.5},{\"id\":\"dist00:dist00-boss:coop:1\",\"maxHp\":6666,\"canonical\":6421.5},{\"id\":\"dist00:dist00-boss:coop:qa-r70-boss\",\"maxHp\":6666,\"canonical\":6421.5}]}}",
-      "standaloneHit": "2026-10-18T08:29:10.4787180Z R71_NATIVE_HIT {\"observed\":{\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"value\":6.558387096774195,\"before\":700,\"after\":694.9041332258065,\"attackId\":1},\"admitted\":[{\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"value\":6.558387096774195,\"before\":700,\"after\":694.9041332258065,\"attackId\":1}],\"prepared\":{\"id\":1,\"elapsed\":0,\"committed\":false,\"windup\":0.5,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25},\"footprint\":{\"shape\":\"capsule\",\"x\":57.699999999999996,\"y\":42.45,\"originX\":57.699999999999996,\"originY\":42.45,\"angle\":-2.875340604438869,\"radius\":1.45,\"width\":0.25}},\"committed\":{\"id\":1,\"elapsed\":0.53,\"committed\":true,\"lastAttackKind\":\"melee\"},\"nativeAttackError\":null,\"spot\":{\"x\":57.15,\"y\":42.45,\"ex\":57.699999999999996,\"ey\":42.45,\"homeX\":57.15,\"homeY\":42.45,\"homeDistance\":0},\"enemyId\":\"dist00:story-patrol:0:0\",\"enemyAtStart\":{\"ai\":\"melee\",\"type\":\"melee\",\"tell\":0,\"rest\":0,\"cd\":0,\"graceUntil\":57.599999999997955,\"attack\":null,\"rangedWindup\":0,\"phase\":0,\"phaseAge\":3.849999999999991,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"hp\":285,\"maxHp\":285,\"damage\":6.558387096774195,\"attackShape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25}},\"enemyAtEnd\":{\"tell\":0,\"rest\":0,\"cd\":-0.55,\"graceUntil\":57.599999999997955,\"attack\":{\"id\":1,\"elapsed\":0.53,\"committed\":true},\"rangedWindup\":0,\"phase\":0,\"phaseAge\":4.3999999999999915,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"hp\":285,\"maxHp\":285,\"damage\":6.558387096774195},\"admission\":{\"enemyDistance\":0.5499999999999972,\"homeDistance\":0,\"home\":{\"x\":57.15,\"y\":42.45},\"explorationGroup\":\"dist00:patrol:0\",\"explorationLeash\":9,\"explorationLimit\":7.15,\"aggro\":12,\"attackRange\":1.45,\"lineOfSight\":true,\"nativeCanPrepare\":true,\"closeRange\":0.9,\"closeDistance\":0.5700877125495659,\"closeLine\":true},\"playerAtEnd\":{\"hp\":694.9041332258065,\"invincible\":0.3,\"invReason\":\"피격 보호\",\"guard\":false,\"parry\":0,\"shield\":0,\"attackCD\":0,\"position\":{\"x\":57.15,\"y\":42.45}},\"player\":{\"hp\":694.9041332258065,\"invincible\":0.3,\"invReason\":\"피격 보호\",\"guard\":false,\"parry\":0,\"shield\":0,\"attackCD\":0,\"position\":{\"x\":57.15,\"y\":42.45},\"distance\":0.5499999999999972},\"room\":{\"id\":\"dist00\",\"layer\":\"STORY\",\"engaged\":false,\"loading\":false,\"modal\":false},\"fields\":{\"revision\":\"motion-owned-elemental-fields-r61\",\"nativeHospitalPoisonUnmodified\":true,\"nativeSweptShots\":true,\"fieldBudget\":\"four admitted pulses maximum; one finite .72-owner-damage budget\",\"activeFields\":0,\"activeShots\":0,\"metrics\":{\"prepared\":0,\"released\":0,\"echo\":0,\"prop\":0,\"field\":0,\"cancelled\":0,\"refusedArt\":0,\"statuses\":0,\"fieldPulses\":0,\"frames\":0,\"motionDraws\":0,\"clears\":64},\"events\":[{\"kind\":\"clear\",\"reason\":\"newGame\",\"at\":0},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.3},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":1.016666666666668},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.3000000000000003},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":2.0999999999999974},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":2.116666666666664},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":2.2999999999999967},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":2.8999999999999946},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":4.716666666666655},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":4.999999999999988},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":6.916666666666647},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":7.19999999999998},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":9.016666666666694},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":9.300000000000042},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":10.816666666666784},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":11.100000000000131},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":12.616666666666873},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":12.90000000000022},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":14.416666666666963},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":14.70000000000031},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":16.216666666667027},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":16.500000000000345},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":17.91666666666693},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":18.200000000000248},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":19.71666666666683},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":20.000000000000146},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":21.516666666666726},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":21.800000000000043},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":23.316666666666624},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":23.59999999999994},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":25.11666666666652},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":25.39999999999984},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":26.71666666666643},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":26.999999999999748},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":28.516666666666328},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":28.799999999999645},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":30.116666666666237},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":30.399999999999554},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":32.01666666666613},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":32.29999999999945},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":34.21666666666601},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":34.39999999999933},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":36.016666666665905},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":36.29999999999922},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":38.21666666666578},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":38.3999999999991},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":40.11666666666567},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":40.39999999999899},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":42.21666666666555},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":42.49999999999887},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":43.81666666666546},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":44.09999999999878},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":45.716666666665354},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":45.99999999999867},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":47.616666666665246},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":47.89999999999856},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":49.216666666665155},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":49.49999999999847},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":50.91666666666506},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":51.199999999998376},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":56.416666666664746},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":56.69999999999806},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":57.71666666666467},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":57.99999999999799}],\"browser\":false,\"GPU\":false}}",
-      "coopHit": "2026-10-18T08:33:24.5646715Z R71_NATIVE_COOP_HIT {\"observed\":{\"value\":6.558387096774195,\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"before\":777,\"after\":772.0002816555082,\"attackId\":2},\"admitted\":[{\"value\":6.558387096774195,\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"before\":777,\"after\":772.0002816555082,\"attackId\":2}],\"prepared\":{\"id\":2,\"elapsed\":0,\"windup\":0.5,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25},\"footprint\":{\"shape\":\"capsule\",\"x\":26.579657427511975,\"y\":27.683857383954365,\"originX\":26.579657427511975,\"originY\":27.683857383954365,\"angle\":-2.8753406044388705,\"radius\":1.45,\"width\":0.25}},\"committed\":{\"id\":2,\"elapsed\":0.53,\"committed\":true,\"lastAttackKind\":\"melee\"},\"nativeAttackError\":null,\"spot\":{\"x\":26.029657427511975,\"y\":27.683857383954365,\"ex\":26.579657427511975,\"ey\":27.683857383954365,\"homeX\":26.383210818105248,\"homeY\":27.330303993361092,\"homeDistance\":0.49999999999999906},\"ownerSpot\":{\"x\":23.029657427511975,\"y\":27.683857383954365},\"camera\":{\"x\":19.765042339374858,\"y\":24.153264442124154},\"lineOfSight\":true,\"distance\":0.5500000000000007,\"admission\":{\"enemyDistance\":0.5500000000000007,\"homeDistance\":0.49999999999999906,\"enemyHomeDistance\":0.4044641768406677,\"home\":{\"x\":26.383210818105248,\"y\":27.330303993361092},\"explorationGroup\":\"dist00:patrol:0\",\"explorationLeash\":9,\"explorationLimit\":7.15,\"aggro\":12,\"attackRange\":1.45,\"nativeCanPrepare\":true,\"closeRange\":0.9,\"closeDistance\":0.5700877125495694,\"closeLine\":true},\"enemy\":{\"id\":\"dist00:story-patrol:0:0\",\"ai\":\"melee\",\"weapon\":\"blade\",\"type\":\"melee\",\"position\":{\"x\":26.579657427511975,\"y\":27.683857383954365},\"hp\":285,\"maxHp\":285,\"tell\":0,\"aim\":{\"x\":26.029657427511975,\"y\":27.683857383954365,\"angle\":-2.8753406044388705},\"graceUntil\":0.3999999999999999,\"rest\":0,\"cd\":-0.55,\"attack\":{\"id\":2,\"elapsed\":0.53,\"committed\":true},\"rangedWindup\":0,\"phase\":0,\"phaseAge\":0.55,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25}},\"player\":{\"owner\":{\"hp\":777,\"x\":23.029657427511975,\"y\":27.683857383954365,\"invincible\":0,\"guard\":false,\"parry\":0},\"peer\":{\"hp\":772.0002816555082,\"x\":26.029657427511975,\"y\":27.683857383954365,\"invincible\":0.3,\"invReason\":\"피격 보호\",\"guard\":false,\"parry\":0,\"attackCD\":0,\"shield\":0}},\"room\":{\"id\":\"dist00\",\"layer\":\"STORY\",\"engaged\":true,\"loading\":false,\"modal\":false},\"fields\":{\"revision\":\"motion-owned-elemental-fields-r61\",\"nativeHospitalPoisonUnmodified\":true,\"nativeSweptShots\":true,\"fieldBudget\":\"four admitted pulses maximum; one finite .72-owner-damage budget\",\"activeFields\":0,\"activeShots\":0,\"metrics\":{\"prepared\":0,\"released\":0,\"echo\":0,\"prop\":0,\"field\":0,\"cancelled\":0,\"refusedArt\":0,\"statuses\":0,\"fieldPulses\":0,\"frames\":0,\"motionDraws\":0,\"clears\":12},\"events\":[{\"kind\":\"clear\",\"reason\":\"newGame\",\"at\":0},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.3},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":0.7000000000000005},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.9000000000000011},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":1.4}],\"browser\":false,\"GPU\":false}}",
+      "standaloneHit": "2026-10-18T08:29:10.4787180Z R71_NATIVE_HIT {\"observed\":{\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"value\":6.558387096774195,\"before\":700,\"after\":694.9041332258065,\"attackId\":1},\"admitted\":[{\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"value\":6.558387096774195,\"before\":700,\"after\":694.9041332258065,\"attackId\":1}],\"prepared\":{\"id\":1,\"elapsed\":0,\"committed\":false,\"windup\":0.5,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25},\"footprint\":{\"shape\":\"capsule\",\"x\":57.699999999999996,\"y\":42.45,\"originX\":57.699999999999996,\"originY\":42.45,\"angle\":-2.875340604438869,\"radius\":1.45,\"width\":0.25}},\"committed\":{\"id\":1,\"elapsed\":0.53,\"committed\":true,\"lastAttackKind\":\"melee\"},\"nativeAttackError\":null,\"spot\":{\"x\":57.15,\"y\":42.45,\"ex\":57.699999999999996,\"ey\":42.45,\"homeX\":57.15,\"homeY\":42.45,\"homeDistance\":0},\"enemyId\":\"dist00:story-patrol:0:0\",\"enemyAtStart\":{\"ai\":\"melee\",\"type\":\"melee\",\"tell\":0,\"rest\":0,\"cd\":0,\"graceUntil\":57.599999999997955,\"attack\":null,\"rangedWindup\":0,\"phase\":0,\"phaseAge\":3.849999999999991,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"hp\":285,\"maxHp\":285,\"damage\":6.558387096774195,\"attackShape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25}},\"enemyAtEnd\":{\"tell\":0,\"rest\":0,\"cd\":-0.55,\"graceUntil\":57.599999999997955,\"attack\":{\"id\":1,\"elapsed\":0.53,\"committed\":true},\"rangedWindup\":0,\"phase\":0,\"phaseAge\":4.3999999999999915,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"hp\":285,\"maxHp\":285,\"damage\":6.558387096774195},\"admission\":{\"enemyDistance\":0.5499999999999972,\"homeDistance\":0,\"home\":{\"x\":57.15,\"y\":42.45},\"explorationGroup\":\"dist00:patrol:0\",\"explorationLeash\":9,\"explorationLimit\":7.15,\"aggro\":12,\"attackRange\":1.45,\"lineOfSight\":true,\"nativeCanPrepare\":true,\"closeRange\":0.9,\"closeDistance\":0.5700877125495659,\"closeLine\":true},\"playerAtEnd\":{\"hp\":694.9041332258065,\"invincible\":0.3,\"invReason\":\"\ud53c\uaca9 \ubcf4\ud638\",\"guard\":false,\"parry\":0,\"shield\":0,\"attackCD\":0,\"position\":{\"x\":57.15,\"y\":42.45}},\"player\":{\"hp\":694.9041332258065,\"invincible\":0.3,\"invReason\":\"\ud53c\uaca9 \ubcf4\ud638\",\"guard\":false,\"parry\":0,\"shield\":0,\"attackCD\":0,\"position\":{\"x\":57.15,\"y\":42.45},\"distance\":0.5499999999999972},\"room\":{\"id\":\"dist00\",\"layer\":\"STORY\",\"engaged\":false,\"loading\":false,\"modal\":false},\"fields\":{\"revision\":\"motion-owned-elemental-fields-r61\",\"nativeHospitalPoisonUnmodified\":true,\"nativeSweptShots\":true,\"fieldBudget\":\"four admitted pulses maximum; one finite .72-owner-damage budget\",\"activeFields\":0,\"activeShots\":0,\"metrics\":{\"prepared\":0,\"released\":0,\"echo\":0,\"prop\":0,\"field\":0,\"cancelled\":0,\"refusedArt\":0,\"statuses\":0,\"fieldPulses\":0,\"frames\":0,\"motionDraws\":0,\"clears\":64},\"events\":[{\"kind\":\"clear\",\"reason\":\"newGame\",\"at\":0},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.3},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":1.016666666666668},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.3000000000000003},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":2.0999999999999974},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":2.116666666666664},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":2.2999999999999967},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":2.8999999999999946},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":4.716666666666655},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":4.999999999999988},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":6.916666666666647},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":7.19999999999998},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":9.016666666666694},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":9.300000000000042},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":10.816666666666784},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":11.100000000000131},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":12.616666666666873},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":12.90000000000022},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":14.416666666666963},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":14.70000000000031},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":16.216666666667027},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":16.500000000000345},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":17.91666666666693},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":18.200000000000248},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":19.71666666666683},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":20.000000000000146},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":21.516666666666726},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":21.800000000000043},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":23.316666666666624},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":23.59999999999994},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":25.11666666666652},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":25.39999999999984},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":26.71666666666643},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":26.999999999999748},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":28.516666666666328},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":28.799999999999645},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":30.116666666666237},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":30.399999999999554},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":32.01666666666613},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":32.29999999999945},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":34.21666666666601},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":34.39999999999933},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":36.016666666665905},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":36.29999999999922},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":38.21666666666578},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":38.3999999999991},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":40.11666666666567},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":40.39999999999899},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":42.21666666666555},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":42.49999999999887},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":43.81666666666546},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":44.09999999999878},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":45.716666666665354},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":45.99999999999867},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":47.616666666665246},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":47.89999999999856},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":49.216666666665155},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":49.49999999999847},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":50.91666666666506},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":51.199999999998376},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":56.416666666664746},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":56.69999999999806},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":57.71666666666467},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":57.99999999999799}],\"browser\":false,\"GPU\":false}}",
+      "coopHit": "2026-10-18T08:33:24.5646715Z R71_NATIVE_COOP_HIT {\"observed\":{\"value\":6.558387096774195,\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"before\":777,\"after\":772.0002816555082,\"attackId\":2},\"admitted\":[{\"value\":6.558387096774195,\"result\":\"hit\",\"sourceId\":\"dist00:story-patrol:0:0\",\"sourceIsRoomEnemy\":true,\"before\":777,\"after\":772.0002816555082,\"attackId\":2}],\"prepared\":{\"id\":2,\"elapsed\":0,\"windup\":0.5,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25},\"footprint\":{\"shape\":\"capsule\",\"x\":26.579657427511975,\"y\":27.683857383954365,\"originX\":26.579657427511975,\"originY\":27.683857383954365,\"angle\":-2.8753406044388705,\"radius\":1.45,\"width\":0.25}},\"committed\":{\"id\":2,\"elapsed\":0.53,\"committed\":true,\"lastAttackKind\":\"melee\"},\"nativeAttackError\":null,\"spot\":{\"x\":26.029657427511975,\"y\":27.683857383954365,\"ex\":26.579657427511975,\"ey\":27.683857383954365,\"homeX\":26.383210818105248,\"homeY\":27.330303993361092,\"homeDistance\":0.49999999999999906},\"ownerSpot\":{\"x\":23.029657427511975,\"y\":27.683857383954365},\"camera\":{\"x\":19.765042339374858,\"y\":24.153264442124154},\"lineOfSight\":true,\"distance\":0.5500000000000007,\"admission\":{\"enemyDistance\":0.5500000000000007,\"homeDistance\":0.49999999999999906,\"enemyHomeDistance\":0.4044641768406677,\"home\":{\"x\":26.383210818105248,\"y\":27.330303993361092},\"explorationGroup\":\"dist00:patrol:0\",\"explorationLeash\":9,\"explorationLimit\":7.15,\"aggro\":12,\"attackRange\":1.45,\"nativeCanPrepare\":true,\"closeRange\":0.9,\"closeDistance\":0.5700877125495694,\"closeLine\":true},\"enemy\":{\"id\":\"dist00:story-patrol:0:0\",\"ai\":\"melee\",\"weapon\":\"blade\",\"type\":\"melee\",\"position\":{\"x\":26.579657427511975,\"y\":27.683857383954365},\"hp\":285,\"maxHp\":285,\"tell\":0,\"aim\":{\"x\":26.029657427511975,\"y\":27.683857383954365,\"angle\":-2.8753406044388705},\"graceUntil\":0.3999999999999999,\"rest\":0,\"cd\":-0.55,\"attack\":{\"id\":2,\"elapsed\":0.53,\"committed\":true},\"rangedWindup\":0,\"phase\":0,\"phaseAge\":0.55,\"phaseStage\":\"active\",\"invulnerableUntil\":0,\"r61Action\":null,\"shape\":{\"shape\":\"capsule\",\"range\":1.45,\"angle\":1.05,\"windup\":0.5,\"active\":0.13,\"recovery\":0.6624,\"radius\":0.25}},\"player\":{\"owner\":{\"hp\":777,\"x\":23.029657427511975,\"y\":27.683857383954365,\"invincible\":0,\"guard\":false,\"parry\":0},\"peer\":{\"hp\":772.0002816555082,\"x\":26.029657427511975,\"y\":27.683857383954365,\"invincible\":0.3,\"invReason\":\"\ud53c\uaca9 \ubcf4\ud638\",\"guard\":false,\"parry\":0,\"attackCD\":0,\"shield\":0}},\"room\":{\"id\":\"dist00\",\"layer\":\"STORY\",\"engaged\":true,\"loading\":false,\"modal\":false},\"fields\":{\"revision\":\"motion-owned-elemental-fields-r61\",\"nativeHospitalPoisonUnmodified\":true,\"nativeSweptShots\":true,\"fieldBudget\":\"four admitted pulses maximum; one finite .72-owner-damage budget\",\"activeFields\":0,\"activeShots\":0,\"metrics\":{\"prepared\":0,\"released\":0,\"echo\":0,\"prop\":0,\"field\":0,\"cancelled\":0,\"refusedArt\":0,\"statuses\":0,\"fieldPulses\":0,\"frames\":0,\"motionDraws\":0,\"clears\":12},\"events\":[{\"kind\":\"clear\",\"reason\":\"newGame\",\"at\":0},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.3},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":0.7000000000000005},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":0.9000000000000011},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"restoreSave\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"region-entry\",\"at\":1.4},{\"kind\":\"clear\",\"reason\":\"identity\",\"at\":1.4}],\"browser\":false,\"GPU\":false}}",
       "nativeRunnerResult": "2026-10-18T08:36:25.1134538Z R71_NATIVE_BROWSER_RESULT {\"revision\":\"R71-NATIVE-REGRESSION\",\"browser\":\"141.0.7390.37\",\"sandbox\":true,\"physicalGPU\":false,\"physicalMobile\":false,\"checks\":[{\"name\":\"native-damage-and-ego-cooldown\",\"baseline\":{\"power\":72,\"cast\":true,\"cooldown\":20,\"hits\":3,\"damage\":[{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-23056-0\"},{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-23056-1\"},{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-23056-2\"}],\"ego\":null,\"errors\":[]},\"candidate\":{\"power\":72,\"cast\":true,\"cooldown\":20,\"hits\":3,\"damage\":[{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-20797-0\"},{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-20797-1\"},{\"amount\":32.544000000000004,\"id\":\"thread-r66-damage-fixture-20797-2\"}],\"ego\":{\"cast\":true,\"cd\":4,\"transformed\":true},\"errors\":[]},\"comparison\":\"R71/R70; expected power and per-hit damage ratios are 1.0\",\"legacyR66TwoAndFourXCoveredByR70Gate\":true},{\"name\":\"boss-hp-desktop\",\"mobile\":false,\"expected\":{\"hp\":333,\"maxHp\":666,\"state\":\"active\",\"listed\":true,\"barClass\":\"\",\"text\":\"333 / 666\"},\"live\":{\"before\":{\"hp\":333,\"maxHp\":666,\"text\":\"333 / 666\",\"expected\":\"333 / 666\",\"fill\":50},\"after\":{\"hp\":315.75,\"maxHp\":666,\"text\":\"316 / 666\",\"expected\":\"316 / 666\",\"fill\":47.4099}},\"text\":\"316 / 666\",\"box\":{\"x\":493.5,\"y\":117,\"width\":378,\"height\":16},\"errors\":[]},{\"name\":\"boss-hp-mobile-landscape\",\"mobile\":true,\"expected\":{\"hp\":333,\"maxHp\":666,\"state\":\"active\",\"listed\":true,\"barClass\":\"\",\"text\":\"333 / 666\"},\"live\":{\"before\":{\"hp\":333,\"maxHp\":666,\"text\":\"333 / 666\",\"expected\":\"333 / 666\",\"fill\":50},\"after\":{\"hp\":315.75,\"maxHp\":666,\"text\":\"316 / 666\",\"expected\":\"316 / 666\",\"fill\":47.4099}},\"text\":\"316 / 666\",\"box\":{\"x\":281,\"y\":32,\"width\":282,\"height\":16},\"errors\":[]},{\"name\":\"save-restore-lifecycle\",\"cycles\":[{\"cycle\":0,\"usedBytes\":38435576,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"},{\"cycle\":1,\"usedBytes\":38421780,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"},{\"cycle\":2,\"usedBytes\":38769576,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"},{\"cycle\":3,\"usedBytes\":38743064,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"},{\"cycle\":4,\"usedBytes\":38831856,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"},{\"cycle\":5,\"usedBytes\":38878240,\"effects\":0,\"projectiles\":0,\"delayed\":0,\"enemies\":6,\"props\":15,\"booted\":true,\"loading\":false,\"modal\":true,\"zone\":\"dist00\"}],\"errors\":[],\"caveat\":\"Six save/restore cycles with forced GC; bounded investigation, not proof of no long-duration leaks.\"},{\"name\":\"legacy-runner-excluded-for-r71-health-contract\",\"scope\":\"runLegacy remains covered by the unchanged R70 gate; R71 browser QA owns migrated HP and save expectations\"}],\"status\":\"passed\"}"
     }
   },
@@ -22456,7 +22497,7 @@
             "materialReplacementsPerFrame": 0.7619047619047619
           },
           "meanFrameReductionFraction": -0.00845436183939996,
-          "p95ReductionFraction": -0.00009676795045687747,
+          "p95ReductionFraction": -9.676795045687747e-05,
           "regressionFlag": false
         },
         {
@@ -22496,7 +22537,7 @@
         "candidateMeanMs": 480.53809523809525,
         "candidateP95Ms": 516.7500000000036,
         "meanFrameReductionFraction": -0.00845436183939996,
-        "p95ReductionFraction": -0.00009676795045687747,
+        "p95ReductionFraction": -9.676795045687747e-05,
         "regressionFlag": false
       },
       "egoStress": {
