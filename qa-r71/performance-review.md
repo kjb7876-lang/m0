@@ -2,9 +2,9 @@
 
 ## Status
 
-The final intended runtime is commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, HTML SHA-256 `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`, and renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Two independent paired-profile runs measured these exact hashes: preflight [39104858004](https://github.com/kjb7876-lang/m0/actions/runs/39104858004), job `117608395199`, and test-only rerun [39105884683](https://github.com/kjb7876-lang/m0/actions/runs/39105884683), job `117611505842`. Keep their results separate; the independent rerun differs in sign for movement and EGO results, which reinforces the limits of two-trial software-renderer measurements.
+The initially intended runtime is commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, HTML SHA-256 `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`, and renderer SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Four independent paired-profile runs measured these exact hashes. Subsequent QA found a production rendering defect in this HTML: the beacon calls `strokeRect`, but `DrawCommands` implements `rect`/`stroke` only. Therefore every `cc7aa…` performance sample below is pre-fix diagnostic evidence, not final acceptance. A fix changes the HTML hash and requires a fresh paired ABBA measurement.
 
-The initial native browser validation for `f657557` failed its attack-hit fixture (`hit.observed=null`). A test-only adjustment in `c315ca78717726c5199e4d0f61380b1b6d6c655a` made the native hit assertion pass (`player HP 700→694.904`), then the browser test timed out waiting for `dist00` after the first save/restore at `scripts/r71.browser.test.mjs:734`. The production HTML and renderer hashes remain unchanged; behavior approval is still pending. The c315ca Pages run [39105887369](https://github.com/kjb7876-lang/m0/actions/runs/39105887369), job `117611514518`, remains in its combined profiling/build step with no result yet. The older Pages run [39104861979](https://github.com/kjb7876-lang/m0/actions/runs/39104861979) failed on the pre-adjustment attack-hit assertion.
+The initial native browser validation for `f657557` failed its attack-hit fixture (`hit.observed=null`). A test-only adjustment in `c315ca78717726c5199e4d0f61380b1b6d6c655a` made the native hit assertion pass (`player HP 700→694.904`), then the browser test timed out waiting for `dist00` after the first save/restore at `scripts/r71.browser.test.mjs:734`. The c315ca Pages run [39105887369](https://github.com/kjb7876-lang/m0/actions/runs/39105887369), job `117611514518`, completed with that validation failure. A later `58c979b` Pages run reported 6/8 browser checks passing; QA classified the missing `strokeRect` method as a real production defect, with a separate legacy-replica fixture lookup failure. Behavior approval remains pending. The older Pages run [39104861979](https://github.com/kjb7876-lang/m0/actions/runs/39104861979) failed on the pre-adjustment attack-hit assertion.
 
 Earlier candidate history is retained below for diagnostics. The `146b85…` HTML candidate has a real 4× canonical boss-HP scaling regression (25,686 vs R70 6,421.5) and is pre-fix, not approved. Intermediate commit `12ce0b885af82c0a58a1c3c358afa06964301162` used HTML SHA-256 `b6241524ba119ed98d954452ea5d9bcfef734dd5a7825067b58a027f3faaf527`; its corrected `dist00` boss HP was 6,666 vs R70 6,421.5. It is not the final runtime. Older failed attempts [39102585613](https://github.com/kjb7876-lang/m0/actions/runs/39102585613), [39103014083](https://github.com/kjb7876-lang/m0/actions/runs/39103014083), [39103016351](https://github.com/kjb7876-lang/m0/actions/runs/39103016351), [39102301547](https://github.com/kjb7876-lang/m0/actions/runs/39102301547), [39101458143](https://github.com/kjb7876-lang/m0/actions/runs/39101458143), and [39102582785](https://github.com/kjb7876-lang/m0/actions/runs/39102582785) did not produce measurements for the final hashes and are excluded.
 
@@ -71,7 +71,7 @@ Preflight paired-profile run [39103707954, job 117605021160](https://github.com/
 
 The `regressionFlag` was false for both scenarios, with its 10% threshold. Frame means were slightly slower in both scenarios; movement p95 increased 2.03%, while EGO p95 fell 2.18%. These are small two-trial software-renderer differences and do not establish an overall performance gain. This is an intermediate, not-final runtime; do not pool it with the pre-fix diagnostic or the independent Pages run.
 
-## Final paired R70 vs R71 results
+## Initial paired R70 vs R71 results for cc7aa (pre-beacon-fix)
 
 The final intended runtime, commit `f657557ebeaa536fe668df5d013b198b832b0ba1`, was measured in paired-profile run [39104858004, job 117608395199](https://github.com/kjb7876-lang/m0/actions/runs/39104858004). The tested HTML and renderer SHA-256 values match `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad` and `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`. Full rows, raw timestamped log lines, RESULT, source hashes, and artifact provenance are in [`performance-final-cc7aa-preflight.json`](performance-final-cc7aa-preflight.json). Artifact 12128615198 is 4,840,502 bytes, SHA-256 `63a7efb7ad6046b96bc096cbf4370e3512921d29f993aedfaa1fec942c470939`. It used Ubuntu 22.04.5, Node 22.23.3, Playwright 1.56.0, headless sandboxed Chromium, viewport 1365×850 at DPR 1, seed 70018, and SwiftShader. The paired job did not log the exact Chromium version. The parallel native browser validation failed at the attack-hit fixture (`hit.observed=null`); QA is reviewing that result separately. Pages run [39104861979](https://github.com/kjb7876-lang/m0/actions/runs/39104861979) is an independent measurement of the same hashes and remains pending; do not pool it with this run.
 
@@ -119,9 +119,53 @@ The harness `regressionFlag` was false in both scenarios under its 10% threshold
 
 These outcomes differ from the earlier `f657557` paired run: movement mean shifts from 0.083% lower to 0.773% higher, while EGO changes from 2.209% higher to 1.272% lower. Preserve the two runs separately; their differences do not establish a speedup. Both use software rendering, two trials per build, and live simulation.
 
+## More independent runs for cc7aa (diagnostic only)
+
+The paired-profile job [39106756667, job 117614156950](https://github.com/kjb7876-lang/m0/actions/runs/39106756667) ran test-only harness commit `58c979b1e3605ebb61964d1dd65934a96168ddcf` against the exact same `cc7aa…14ad` / `54dfe…725c` runtime hashes. It used the same baseline pins and 1365×850, DPR 1, seed 70018, headless sandboxed Playwright 1.56 Chromium under Ubuntu 22.04.5 with SwiftShader. The exact browser version is not available in the paired-job log. Eight compact trial rows and the full aggregate result are in [`performance-58c979b-independent.json`](performance-58c979b-independent.json); artifact 12128469746 SHA-256 `483bc006aa3971445ae2d67f6d10e3a87c52df10b8cd69914a36e18077fdd08e`.
+
+| Scenario | Measure | R70 baseline | R71 candidate | Candidate vs baseline |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 478.817 ms | 478.022 ms | −0.166% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 516.700 ms | 516.700 ms | unchanged |
+| Movement | JavaScript draw p95 | 52.900 ms | 49.800 ms | −3.100 ms |
+| Movement | GL draw calls / frame | 331.921 | 331.857 | −0.019% |
+| Movement | GL buffer uploads / frame | 202.984 | 203.016 | +0.016% |
+| Movement | Material replacements / frame | 0.762 | 0.762 | unchanged |
+| EGO stress | RAF frame interval mean | 437.180 ms | 451.972 ms | +3.383% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 483.300 ms | 525.000 ms | +8.628% |
+| EGO stress | JavaScript draw p95 | 43.850 ms | 52.150 ms | +8.300 ms |
+| EGO stress | GL draw calls / frame | 474.674 | 434.537 | −8.458% |
+| EGO stress | GL buffer uploads / frame | 218.362 | 242.194 | +10.911% |
+| EGO stress | Material replacements / frame | 2.935 | 3.149 | +7.314% |
+
+Both harness `regressionFlag` values were false under its 10% threshold; EGO candidate mean and p95 were both higher. The result remains mixed and does not support a speedup claim.
+
+The Pages job [39105887369, job 117611514518](https://github.com/kjb7876-lang/m0/actions/runs/39105887369) ran the same cc7aa production hashes using test-only harness commit `c315ca78717726c5199e4d0f61380b1b6d6c655a`. It used Ubuntu 22.04.5, Playwright 1.56.0, sandboxed headless Chromium `141.0.7390.37`, viewport 1365×850 at DPR 1, seed 70018, and SwiftShader. The 8 paired trial summaries, R70 profile top functions, browser result, and provenance are archived in [`performance-c315ca-pages-independent.json`](performance-c315ca-pages-independent.json); artifact 12128028924 SHA-256 `f713391970fa5aa45cd52ca9c8696334d04c6b5789e6805003e1068e04d777d4`.
+
+| Scenario | Measure | R70 baseline | R71 candidate | Candidate vs baseline |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 273.562 ms | 274.650 ms | +0.398% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 333.300 ms | 333.300 ms | unchanged |
+| Movement | JavaScript draw p95 | 38.250 ms | 38.950 ms | +0.700 ms |
+| Movement | GL draw calls / frame | 331.066 | 329.401 | −0.503% |
+| Movement | GL buffer uploads / frame | 201.013 | 194.386 | −3.297% |
+| Movement | Material replacements / frame | 0.615 | 0.639 | +3.878% |
+| EGO stress | RAF frame interval mean | 259.125 ms | 248.181 ms | −4.223% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 308.250 ms | 275.050 ms | −10.771% |
+| EGO stress | JavaScript draw p95 | 35.850 ms | 32.150 ms | −3.700 ms |
+| EGO stress | GL draw calls / frame | 471.659 | 482.522 | +2.303% |
+| EGO stress | GL buffer uploads / frame | 241.352 | 249.678 | +3.449% |
+| EGO stress | Material replacements / frame | 2.940 | 3.231 | +9.895% |
+
+Both `regressionFlag` values were false. This Pages job's baseline movement and EGO means (273.562 ms, 259.125 ms) were much lower than the 58c preflight run's corresponding baselines (478.817 ms, 437.180 ms). Since they are separate hosted software-renderer runners with live simulations, keep all run pairs isolated and avoid pooling their changes. The spread reinforces the timing limits rather than supporting a new speedup claim. Used-heap and total-heap deltas were 0 bytes in all four Pages timing trials; the same-run R70 profile's top sample was unattributed `(program)` at 92.59% of retained top-35 movement self samples and 93.57% for EGO stress.
+
+The c315ca Pages browser step did not pass: after `R71_NATIVE_HIT` confirmed a real hit, it timed out after the first save/restore waiting for `dist00` (`scripts/r71.browser.test.mjs:734`). A subsequent 58c979b browser aggregate reported 6/8 checks; QA found the unsupported `strokeRect` call is a production defect in this measured runtime, so all these profiles and paired timings are pre-fix diagnostics. Retest the changed HTML hash with a fresh full ABBA pair after the rendering fix.
+
 ## Evidence files
 
 - Baseline measurements and CDP summaries: [`baseline-profile-ci.json`](baseline-profile-ci.json)
 - Harness and current trial/counter definitions: [`../scripts/r71.perf.mjs`](../scripts/r71.perf.mjs)
 - Final paired-profile data and provenance: [`performance-final-cc7aa-preflight.json`](performance-final-cc7aa-preflight.json)
 - Independent same-runtime paired rerun with compact exact trial rows: [`performance-c315ca-independent.json`](performance-c315ca-independent.json)
+- Independent `58c979b` paired-profile rows and result: [`performance-58c979b-independent.json`](performance-58c979b-independent.json)
+- c315ca Pages paired result and same-run baseline profile/browser evidence: [`performance-c315ca-pages-independent.json`](performance-c315ca-pages-independent.json)

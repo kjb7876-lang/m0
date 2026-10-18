@@ -449,6 +449,46 @@ async function restoreNativeSave(page, save, label) {
   return {returned, acknowledged, finalState};
 }
 
+async function acknowledgeNativePreScenes(page, expectedZone, label, {requireAcknowledgement = false} = {}) {
+  await page.waitForFunction(({zone: expected}) => window.eval(`zone===${JSON.stringify(expected)} && !loading`),
+    {zone: expectedZone}, {timeout: 60000});
+  const acknowledged = [];
+  for (let step = 0; step < 32; step++) {
+    const state = await page.evaluate(() => ({
+      zone: typeof zone === 'undefined' ? null : zone,
+      loading: typeof loading === 'undefined' ? null : loading,
+      modal: typeof modal === 'undefined' ? null : modal,
+      scene: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part},
+      nextVisible: !!document.getElementById('storyNext') && getComputedStyle(document.getElementById('storyNext')).display !== 'none',
+    }));
+    if (!state.modal) break;
+    if (state.zone !== expectedZone || state.scene?.id !== expectedZone || state.scene?.part !== 'pre' || !state.nextVisible) {
+      throw new Error(`${label}: unexpected modal; only a matching current-map pre-scene may be acknowledged: ${JSON.stringify(state)}`);
+    }
+    acknowledged.push(state.scene.key);
+    await page.locator('#storyNext').click();
+    await page.waitForFunction(({key}) => !modal || storyScene?.key !== key, {key: state.scene.key}, {timeout: 10000});
+  }
+  const finalState = await page.evaluate(() => ({
+    zone: typeof zone === 'undefined' ? null : zone,
+    layer: typeof layer === 'undefined' ? null : layer,
+    room: typeof room === 'undefined' ? null : {id: room?.id, layer: room?.layer, engaged: room?.engaged, cleared: room?.cleared},
+    loading: typeof loading === 'undefined' ? null : loading,
+    modal: typeof modal === 'undefined' ? null : modal,
+    scene: typeof storyScene === 'undefined' ? null : storyScene && {key: storyScene.key, id: storyScene.id, part: storyScene.part},
+    readSceneCount: typeof readScenes === 'undefined' ? null : readScenes?.size,
+    events: typeof SW3 === 'undefined' ? null : SW3.events.slice(-12).map(event => ({at:event.at,type:event.type,zone:event.zone,layer:event.layer,part:event.part,key:event.key})),
+  }));
+  const result = {label, expectedZone, acknowledged, state: finalState};
+  console.log('R71_NATIVE_SCENE_ACK', JSON.stringify(result));
+  assert.equal(finalState.zone, expectedZone, `${label}: acknowledgement stays in the expected map`);
+  assert.equal(finalState.room?.id, expectedZone, `${label}: the expected native room remains active`);
+  assert.equal(finalState.loading, false, `${label}: the imported room is settled`);
+  assert.equal(finalState.modal, false, `${label}: matching native pre-scenes are acknowledged`);
+  if (requireAcknowledgement) assert.ok(acknowledged.length > 0, `${label}: the expected unread native pre-scene must be acknowledged`);
+  return result;
+}
+
 async function selectDifficulty(page, id, tier, {mobile = false, options = {}} = {}) {
   const layer = options.layer || 'STORY';
   const before = await page.evaluate(({id, layer}) => window.__STORYWORLD_CAMPAIGN_R63R1__?.mode(id, layer), {id, layer});
@@ -1130,9 +1170,12 @@ try {
     const visual = await page.evaluate(() => {
       cam.x = player.x; cam.y = player.y;
       const commands = window.__STORYWORLD_PHASE1__.captureVisual();
+      const phase = window.__STORYWORLD_PHASE1__.inspect();
       const rows = commands.filter(c => String(c.owner?.id || '').startsWith('r71:point-drop:'));
-      return {count: rows.length, kinds: rows.map(c => c.kind), images: rows.filter(c => c.kind === 'image').map(c => c.sourcePath), labels: rows.filter(c => c.kind === 'text').map(c => c.text), diagnostics: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering};
+      return {active: phase.active, failed: phase.failed, reason: phase.reason, count: rows.length, kinds: rows.map(c => c.kind), images: rows.filter(c => c.kind === 'image').map(c => c.sourcePath), labels: rows.filter(c => c.kind === 'text').map(c => c.text), diagnostics: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering};
     });
+    assert.equal(visual.active, 'three', 'the real passive-drop item must remain in the Three renderer path');
+    assert.equal(visual.failed, false, 'point beacon capture must not trigger renderer fallback');
     assert.ok(visual.count >= 2 && visual.images.some(path => path?.includes('v31315/spirit-orb.webp')) && visual.labels.includes('+' + fixture.drop.amount), 'Three capture must contain the real point beacon icon and amount label');
     assert.ok(visual.diagnostics?.beaconsCaptured > 0 && visual.diagnostics.lastCaptureBeaconCommands >= 2);
     await page.screenshot({path: path.join(OUT, 'point-drop-desktop.png')});
@@ -1150,7 +1193,7 @@ try {
           if (!blocked(x, y, .2, room) && !window.__STORYWORLD_SIGHT24__?.pointVisible(x, y)) {
             const dx = x - player.x, dy = y - player.y, d = Math.hypot(dx, dy);
             const rayLimit = d > 0 ? geometry.ray(dx / d, dy / d) : 0;
-            if (d >= geometry.radius - .5 || rayLimit >= d - .1) continue;
+            if (d >= geometry.radius - .5 || rayLimit >= d - .1 || d >= rayLimit + 1) continue;
             const q = project(x, y);
             if (q.x >= -36 && q.x <= W + 36 && q.y >= -40 && q.y <= H + 40) hidden.push({x, y, q, distance: d, rayLimit});
           }
@@ -1192,8 +1235,7 @@ try {
     assert.equal(pickup.first, 1); assert.equal(pickup.afterFirst - pickup.before, pickup.amount);
     assert.equal(pickup.second, 0); assert.equal(pickup.afterSecond, pickup.afterFirst); assert.equal(pickup.claimed, true);
     assert.ok(pickup.save.includes(pickup.id), 'new save contains the point-drop claim');
-    await page.evaluate(async raw => restoreSave(JSON.parse(raw)), pickup.save);
-    await page.waitForFunction(() => window.eval("zone==='ep1a08' && !loading && !modal"), null, {timeout: 60000});
+    const claimReload = await restoreNativeSave(page, JSON.parse(pickup.save), 'native expanded point-drop claim reload');
     const afterReload = await page.evaluate(id => {
       const api = window.__STORYWORLD_PROGRESSION_R71__;
       const before = player.points, drops = room.passivePointDropsR64.filter(d => d.id === id).length;
@@ -1201,7 +1243,7 @@ try {
       return {before, after: player.points, drops, claimed: room.passivePointClaimsR64.includes(id), second};
     }, pickup.id);
     assert.equal(afterReload.drops, 0); assert.equal(afterReload.claimed, true); assert.equal(afterReload.second, 0); assert.equal(afterReload.after, afterReload.before);
-    report.checks.push({name: 'native-point-drop-capture-pickup-persistence-flashlight', hospitalAdmission, fixture, visual, flashlight, pickup: {...pickup, save: '[serialized JSON omitted]'}, afterReload});
+    report.checks.push({name: 'native-point-drop-capture-pickup-persistence-flashlight', hospitalAdmission, fixture, visual, flashlight, pickup: {...pickup, save: '[serialized JSON omitted]'}, claimReload:{acknowledged:claimReload.acknowledged,finalState:claimReload.finalState}, afterReload});
     assertNoPageErrors(game);
     await closeGame(game);
   });
@@ -1213,6 +1255,7 @@ try {
     const context = await browser.newContext({viewport: {width: 1280, height: 800}, deviceScaleFactor: 1});
     const host = await openGame({context});
     const hospitalAdmission = await seedTrustedStoryHistory(host.page, {throughId: 'ep1a08'});
+    await host.page.evaluate(() => { auto = false; guide = false; settings.autoSkill = false; });
     await host.page.evaluate(async () => {
       const c = window.__STORYWORLD_COOP_SIM_R62__;
       await c.start({role: 'host', selfId: 'qa-host', members: [{id:'qa-host',nick:'Host',character:'hwando'}, {id:'qa-peer',nick:'Peer',character:'hwando'}]});
@@ -1229,6 +1272,17 @@ try {
     await host.page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
     assert.equal(peerResult.mode, 'host'); assert.equal(peerResult.count, 2); assert.equal(peerResult.tier, 'hard');
     for (const actor of peerResult.actors) assert.equal(actor.maxHp, 777);
+    const nativeDist00Source = await host.page.evaluate(() => {
+      const c=window.__STORYWORLD_COOP_SIM_R62__,r=room,isMajor=e=>!!(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.cosmicGuardianR63);
+      const source=r.enemies.find(e=>e.hp>0&&!e.deadRecorded&&!isMajor(e)&&!e.coopReplicaR62&&e.ai==='melee');
+      const raw=c.exportSave(),key=`${r.layer}:${r.id}`,savedRoom=raw.hostSave?.rooms?.[key],savedEnemy=savedRoom?.enemies?.find(e=>e.id===source?.id),campaignMeta=raw.hostSave?.campaignHpR63?.rooms?.[key]?.[source?.id];
+      if(!source||!savedRoom||!savedEnemy||!campaignMeta)throw new Error('A live native dist00 melee patrol and its serialized health metadata must exist before first clear: '+JSON.stringify({room:{id:r.id,layer:r.layer,cleared:r.cleared,engaged:r.engaged,enemies:r.enemies.length},roster:r.enemies.map(e=>({id:e.id,nativeId:e.nativeId,hp:e.hp,maxHp:e.maxHp,ai:e.ai,storyPatrol:!!e.storyPatrol,boss:isMajor(e),spawnState:e.spawnState})),savedRoom:!!savedRoom,savedEnemy:!!savedEnemy,campaignMeta:!!campaignMeta}));
+      const fields=['engaged','cleared','finalizing','rewardCommitted','encounterStage','activeEncounter','spawnNonce','fieldWaveIndex6','fieldWaves6','fieldWaveCleared6','defeatedActorIds','fieldWaveTotal6','fieldWaveSourceCounts6','kills','minionKills'];
+      return{id:source.id,nativeId:source.nativeId,ai:source.ai,storyPatrol:source.storyPatrol===true,maxHp:source.maxHp,hp:source.hp,damage:source.damage,x:source.x,y:source.y,spawnState:source.spawnState,baseHp:campaignMeta.base,factor:campaignMeta.factor,savedEnemy,roomKey:key,roomState:Object.fromEntries(fields.filter(k=>Object.hasOwn(savedRoom,k)).map(k=>[k,savedRoom[k]])),roster:r.enemies.map(e=>({id:e.id,nativeId:e.nativeId,hp:e.hp,maxHp:e.maxHp,ai:e.ai,storyPatrol:!!e.storyPatrol,boss:isMajor(e),spawnState:e.spawnState}))};
+    });
+    console.log('R71_NATIVE_DIST00_PRE_CLEAR_SOURCE',JSON.stringify(nativeDist00Source));
+    assert.equal(nativeDist00Source.roomKey,'STORY:dist00');
+    assert.equal(nativeDist00Source.ai,'melee');assert.equal(nativeDist00Source.storyPatrol,true);
     const clear = await host.page.evaluate(() => {
       const c = window.__STORYWORLD_COOP_SIM_R62__, actors = c.players();
       const before = actors.map(p => p.points);
@@ -1242,13 +1296,21 @@ try {
     assert.deepEqual(clear.once, [7, 7], 'connected host and downed connected peer both receive the exact 1/3/7 hard-clear reward');
     assert.deepEqual(clear.repeat, clear.once); assert.equal(clear.savedParticipants.length, 2);
     assert.equal(clear.savedParticipants.find(p=>p.id==='qa-peer').hp, 0, 'the connected peer is downed at the saved first clear');
+    const grandfathered = await host.page.evaluate(id => ({
+      room:{id:room.id,layer:room.layer,cleared:room.cleared,fieldWaveIndex6:room.fieldWaveIndex6,fieldWaves6:room.fieldWaves6?.length},
+      present:room.enemies.some(e=>e.id===id),patrols:window.__STORYWORLD_BOSS_PATROLS__?.inspect?.().patrols||[],
+    }),nativeDist00Source.id);
+    assert.equal(grandfathered.present,false,'native first-clear getRoom grandfathering removes the generated patrol roster');
+    assert.equal(grandfathered.patrols.length,0,'the cleared current room has no remaining story patrol actors');
 
-    const legacyReplicaImport = await host.page.evaluate(async () => {
+    const legacyReplicaImport = await host.page.evaluate(async nativeSource => {
       const c=window.__STORYWORLD_COOP_SIM_R62__,campaign=window.__STORYWORLD_CAMPAIGN_R63R1__,health=window.__STORYWORLD_HEALTH_R71__,summons=window.__STORYWORLD_SUMMONS_R61__;
       campaign.choose('dist00','STORY','normal');campaign.reapplyRoom();
-      const r=room,sourceBoss=r.enemies.find(e=>(e.boss||e.midboss||e.persona||e.cosmic||e.trial)&&!e.coopReplicaR62);
-      const sourceMob=r.enemies.find(e=>e.hp>0&&!e.boss&&!e.midboss&&!e.persona&&!e.cosmic&&!e.trial&&!e.coopReplicaR62&&e.ai==='melee');
-      if(!sourceBoss||!sourceMob)throw new Error('Native dist00 boss and melee source are required for the legacy replica import fixture');
+      const r=room,isMajor=e=>!!(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.cosmicGuardianR63);
+      const sourceBoss=r.enemies.find(e=>isMajor(e)&&!e.coopReplicaR62);
+      const sourceMob=nativeSource&&{...nativeSource};
+      const rosterAtSeed=r.enemies.map(e=>({id:e.id,nativeId:e.nativeId,hp:e.hp,maxHp:e.maxHp,boss:!!e.boss,midboss:!!e.midboss,persona:!!e.persona,cosmic:!!e.cosmic,trial:!!e.trial,cosmicGuardian:!!e.cosmicGuardianR63,ai:e.ai,type:e.type,coopReplica:!!e.coopReplicaR62,spawnState:e.spawnState,deadRecorded:!!e.deadRecorded}));
+      if(!sourceBoss||!sourceMob||sourceMob.roomKey!==`${r.layer}:${r.id}`||sourceMob.ai!=='melee'||sourceMob.storyPatrol!==true)throw new Error('Native dist00 boss and pre-clear live melee source are required for the legacy replica import fixture: '+JSON.stringify({room:{id:r.id,layer:r.layer,cleared:r.cleared,engaged:r.engaged,enemies:r.enemies.length},sourceBoss:sourceBoss?.id||null,sourceMob:sourceMob?.id||null,roster:rosterAtSeed}));
       if(sourceBoss.healthR71CanonicalMaxHp!==6421.5||sourceBoss.maxHp!==6666)throw new Error('The normal dist00 owner must be 6421.5 canonical / 6666 visible before legacy import');
       const raw=c.exportSave(),coopKey=Object.keys(raw.coopWorld||{}).find(k=>k===`${r.layer}:${r.id}`),hostRoom=raw.hostSave?.rooms?.[coopKey];
       if(!coopKey||!hostRoom)throw new Error(`Native coop save is missing ${r.layer}:${r.id} room rows; keys=${Object.keys(raw.hostSave?.rooms||{}).slice(0,8).join(',')}`);
@@ -1256,14 +1318,26 @@ try {
       // reward checks legitimately clear dist00; clear only the imported
       // fixture's campaign bit while retaining its claims and other progress.
       raw.hostSave.progress??={};raw.hostSave.progress.STORY??={};raw.hostSave.progress.STORY.dist00=false;
+      // R70's story-patrol getRoom wrapper grandfathers completed maps by
+      // removing their generated patrols. Reinsert the exact native actor row
+      // and encounter-wave snapshot captured before the first clear so this
+      // synthetic legacy save restores an authentic, active dist00 encounter.
+      if(!hostRoom.enemies.some(row=>row.id===sourceMob.id))hostRoom.enemies.push({...sourceMob.savedEnemy});
+      for(const [key,value] of Object.entries(sourceMob.roomState||{}))hostRoom[key]=Array.isArray(value)?[...value]:value;
+      hostRoom.engaged=true;hostRoom.cleared=false;hostRoom.finalizing=false;hostRoom.rewardCommitted=false;hostRoom.encounterStage='field';
+      hostRoom.defeatedActorIds=(hostRoom.defeatedActorIds||[]).filter(id=>id!==sourceMob.id);
+      const sourceMetaRooms=raw.hostSave.campaignHpR63?.rooms;
+      if(!sourceMetaRooms)throw new Error('Native campaign HP save metadata is unavailable for the restored patrol source');
+      sourceMetaRooms[coopKey]??={};sourceMetaRooms[coopKey][sourceMob.id]={base:sourceMob.baseHp,factor:sourceMob.factor};
       const bossSaved=hostRoom.enemies?.find(row=>row.id===sourceBoss.id),mobSaved=hostRoom.enemies?.find(row=>row.id===sourceMob.id);
       if(!bossSaved||!mobSaved)throw new Error('Native host save omits the source boss or melee control actor');
       const bossReplicaId=`${sourceBoss.id}:coop:qa-r70-boss`,ordinaryReplicaId=`${sourceMob.id}:coop:qa-r70-mob`;
       const fraction=.5,cloneFraction=.4,oldCloneMax=6421.5*.06;
       raw.coopWorld[coopKey].replicas.push({id:bossReplicaId,source:sourceBoss.id,nativeId:sourceBoss.nativeId,
         maxHp:6421.5,hp:6421.5*fraction,damage:sourceBoss.damage,x:sourceBoss.x,y:sourceBoss.y,spawnState:sourceBoss.spawnState});
+      const mobFraction=sourceMob.hp/sourceMob.maxHp,mobNormalMax=sourceMob.baseHp*.25,mobNormalHp=mobNormalMax*mobFraction;
       raw.coopWorld[coopKey].replicas.push({id:ordinaryReplicaId,source:sourceMob.id,nativeId:sourceMob.nativeId,
-        maxHp:sourceMob.maxHp,hp:sourceMob.hp,damage:sourceMob.damage,x:sourceMob.x,y:sourceMob.y,spawnState:sourceMob.spawnState});
+        maxHp:mobNormalMax,hp:mobNormalHp,damage:sourceMob.damage,x:sourceMob.x,y:sourceMob.y,spawnState:sourceMob.spawnState});
       hostRoom.engaged=true;hostRoom.cleared=false;hostRoom.finalizing=false;bossSaved.spawnState='active';bossSaved.deadRecorded=false;bossSaved.hp=Math.max(1,Number(bossSaved.hp)||sourceBoss.hp);
       const oldCloneId=`${r.id}:r61-summon:qa-r70-clone`,clonePoint=summons.position({combatProfile:sourceBoss.combatProfile,radius:sourceBoss.radius},sourceBoss,0,[],r);
       if(!clonePoint)throw new Error('Native R61 safe clone restore point is unavailable for the marked legacy save');
@@ -1277,7 +1351,7 @@ try {
       raw.hostSave.campaignHpR63.rooms??={};raw.hostSave.campaignHpR63.rooms[coopKey]??={};
       raw.hostSave.campaignHpR63.rooms[coopKey][oldCloneId]={base:48000,factor:.25};
       const ownerBefore={id:sourceBoss.id,maxHp:sourceBoss.maxHp,canonical:sourceBoss.healthR71CanonicalMaxHp,hpFraction:sourceBoss.hp/sourceBoss.maxHp,factor:sourceBoss.difficultyFactorR63};
-      const mobBefore={id:sourceMob.id,maxHp:sourceMob.maxHp,hp:sourceMob.hp};
+      const mobBefore={id:sourceMob.id,maxHp:mobNormalMax,hp:mobNormalHp};
       const restoreAndRead=async()=>{
         await c.importSave(raw);const epoch=c.inspect().epoch;c.receive({type:'all_loaded',phase:'running',epoch});auto=false;settings.autoSkill=false;for(const actor of c.players()){actor.invincible=1e6;actor.invReason='QA marked-save fixture';}player.hp=777;
         const currentRoom=room,owner=currentRoom.enemies.find(e=>e.id===sourceBoss.id),bossReplica=currentRoom.enemies.find(e=>e.id===bossReplicaId),ordinaryReplica=currentRoom.enemies.find(e=>e.id===ordinaryReplicaId),clone=currentRoom.enemies.find(e=>e.id===oldCloneId),mob=currentRoom.enemies.find(e=>e.id===sourceMob.id);
@@ -1292,8 +1366,8 @@ try {
         };
       };
       const first=await restoreAndRead(),second=await restoreAndRead();
-      return {ownerBefore,mobBefore,expected:{bossReplicaId,ordinaryReplicaId,oldCloneId,fraction,cloneFraction,oldCloneMax},first,second};
-    });
+      return {ownerBefore,mobBefore,nativeSource:{id:sourceMob.id,nativeId:sourceMob.nativeId,ai:sourceMob.ai,storyPatrol:sourceMob.storyPatrol,hardMaxHp:sourceMob.maxHp,normalMaxHp:mobNormalMax,normalHp:mobNormalHp,roomState:sourceMob.roomState},rosterAtSeed,expected:{bossReplicaId,ordinaryReplicaId,oldCloneId,fraction,cloneFraction,oldCloneMax},first,second};
+    },nativeDist00Source);
     console.log('R71_LEGACY_BOSS_REPLICA_IMPORT',JSON.stringify(legacyReplicaImport));
     assert.equal(legacyReplicaImport.ownerBefore.maxHp,6666);assert.equal(legacyReplicaImport.ownerBefore.canonical,6421.5);
     for(const round of [legacyReplicaImport.first,legacyReplicaImport.second]){
@@ -1312,6 +1386,8 @@ try {
     const {cloneMetricRestored:secondCloneRestoreCount,...secondImportHealth}=legacyReplicaImport.second;
     assert.deepEqual(secondImportHealth,firstImportHealth,'reimporting the same R70 co-op save does not compound boss or clone health');
     assert.equal(secondCloneRestoreCount,firstCloneRestoreCount+1,'the native summon loader records one additional restored clone per import');
+
+    const legacySceneAck = await acknowledgeNativePreScenes(host.page, 'dist00', 'final native co-op legacy import', {requireAcknowledgement: true});
 
     const openReselect = async tier => {
       await host.page.evaluate(nextTier => {
@@ -1576,7 +1652,7 @@ try {
     const guestState=await guest.page.evaluate(()=>({mode:window.__STORYWORLD_COOP_SIM_R62__.mode(),host:window.__STORYWORLD_COOP_SIM_R62__.isHost(),roomId:room.id,currentZone:zone,canApply:window.__STORYWORLD_HEALTH_R71__.inspect(player).authority.canApply}));
     assert.equal(guestState.mode,'guest');assert.equal(guestState.host,false);assert.equal(guestState.roomId,guestState.currentZone);
     assert.equal(guestState.canApply,false,'guest health presentation is not authoritative');
-    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
+    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},legacySceneAck,firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
     report.actualRelay = false;
     assertNoPageErrors(host); assertNoPageErrors(guest);
     await closeGame(host); await closeGame(guest); await closeTrackedContext(context);

@@ -5,13 +5,20 @@ import vm from 'node:vm';
 import {test} from 'node:test';
 
 const helper=fs.readFileSync(new URL('../client-source/progression-r71.js',import.meta.url),'utf8');
+const rendererSource=fs.readFileSync(new URL('../docs/dist/phase1.js',import.meta.url),'utf8');
+function loadProductionDrawCommands(){
+ const start=rendererSource.indexOf('const affinePoint='),end=rendererSource.indexOf('\n\n/* Real Three objects',start);
+ assert.ok(start>=0&&end>start,'production DrawCommands source markers must remain present');
+ const source=rendererSource.slice(start,end);
+ return new Function(source+'\nreturn DrawCommands;')();
+}
 
 class FakeDrawCommands{
  constructor(){this.commands=[];this.owner={id:'scene',kind:'scene'};this.stack=[];}
  scope(owner,fn){const old=this.owner;this.owner=owner;try{return fn();}finally{this.owner=old;}}
  push(kind,row={}){this.commands.push({kind,owner:{...this.owner},...row});}
  save(){this.stack.push(1);}restore(){this.stack.pop();}
- translate(){}beginPath(){}moveTo(){}lineTo(){}ellipse(){}
+ translate(){}beginPath(){}moveTo(){}lineTo(){}rect(){}ellipse(){}
  stroke(){this.push('stroke');}fill(){this.push('fill');}
  fillRect(){this.push('fill');}strokeRect(){this.push('stroke');}
  fillText(text){this.push('text',{text:String(text)});}
@@ -34,7 +41,7 @@ function domStub(){
 function fixture(){
  const dom=domStub(),window={},coopPlayers=[];
  const context={window,document:dom.document,dom,console,Math,Number,JSON,Map,Set,WeakSet,Promise,encodeURIComponent,decodeURIComponent,URL,performance:{now:()=>100},
-  ctx:{save(){},restore(){},translate(){},beginPath(){},moveTo(){},lineTo(){},stroke(){},ellipse(){},fill(){},fillRect(){},strokeRect(){},fillText(){},setTransform(){},},
+  ctx:{save(){},restore(){},translate(){},beginPath(){},moveTo(){},lineTo(){},rect(){},stroke(){},ellipse(){},fill(){},fillRect(){},strokeRect(){},fillText(){},setTransform(){},},
   W:800,H:600,zoom:1,shake:0,settings:{reducedMotion:true},
  };
  vm.createContext(context);
@@ -86,7 +93,7 @@ function fixture(){
  function collectPointDrops(){if(!room||coopMode()==='guest'||!Array.isArray(room.passivePointDropsR64)||!room.passivePointDropsR64.length)return 0;ensurePointState(room);const c=window.__STORYWORLD_COOP_SIM_R62__,actors=c?.mode?.()==='host'?c.players().filter(p=>p?.hp>0&&p.connectedR62!==false):[player].filter(p=>p?.hp>0),progression=window.__STORYWORLD_PROGRESSION_R62__;if(!actors.length||!progression?.awardPointDrop)return 0;let count=0,changed=false;for(let i=room.passivePointDropsR64.length-1;i>=0;i--){const d=room.passivePointDropsR64[i];if(!d||room.passivePointClaimsR64.includes(d.id))continue;let owner=null,best=POINT_PICKUP_RANGE;for(const p of actors){const dist=Math.hypot(p.x-d.x,p.y-d.y);if(dist<=best){owner=p;best=dist;}}if(!owner)continue;const duplicate=progression.state?.(owner)?.pointDropClaimsR64?.[d.id]===true;if(!duplicate&&!progression.awardPointDrop(d.amount,d.id,owner))continue;room.passivePointClaimsR64.push(d.id);room.passivePointDropsR64.splice(i,1);room.passivePointRevisionR64++;changed=true;if(!duplicate){count++;withActor(owner,()=>toast('포인트 +'+d.amount,2));}}if(changed){syncPointDrops(room);saveGame(false);}return count;}
  function withActor(p,fn){const old=player;player=p;try{return fn()}finally{player=old;}}
  function blocked(x,y,radius=.27,r=room){const b=r?.exploration?.expanded?r.exploration.bounds:[1,1,N-1,N-1];return x-radius<b[0]||y-radius<b[1]||x+radius>b[2]||y+radius>b[3]||(r?.props||[]).some(p=>p.solid&&Math.hypot(p.x-x,p.y-y)<(p.radius||.5)+radius);}
- const project=(x,y)=>({x:x*20,y:y*20}),sprite=(path,x,y,h)=>{window.__spriteDraws=(window.__spriteDraws||0)+1;if(typeof ctx?.drawImage==='function')ctx.drawImage(path,x,y,h);return true;};
+ const project=(x,y)=>({x:x*20,y:y*20}),sprite=(path,x,y,h)=>{window.__spriteDraws=(window.__spriteDraws||0)+1;if(typeof ctx?.drawImage==='function')ctx.drawImage({width:h,height:h,src:path},x,y,h,h);return true;};
  const TIERS_BOUND=TIERS;
  ${helper}
  const clearRegion=id=>{const key='STORY:'+id;if(clears.has(key))return false;clears.add(key);player.points+=1;if(mode==='host')for(const p of coopPlayers)if(p!==player&&p.connectedR62!==false)p.points+=1;const info={key,mode:'STORY',regionId:id,layer:'STORY'};for(const fn of clearListeners)fn(info);return true;};
@@ -159,4 +166,20 @@ test('point beacons enter DrawCommands under a prop owner and obey the sight mas
  f.context.ctx=new FakeDrawCommands();f.fixture.drawProp(prop);
  let commands=f.context.ctx.commands.filter(c=>c.owner.id==='r71:point-drop:'+drop.id);assert.ok(commands.length>=4,JSON.stringify({commands:f.context.ctx.commands,rendering:api.inspect().pointDrops.rendering,instance:f.context.ctx instanceof FakeDrawCommands}));assert.ok(commands.some(c=>c.kind==='text'&&c.text==='+4'));let diagnostics=api.inspect().pointDrops.rendering;assert.equal(diagnostics.beaconsCaptured,true);assert.equal(diagnostics.lastCaptureBeaconCount,1);assert.ok(diagnostics.lastCaptureBeaconCommands>=commands.length);
  f.context.window.__STORYWORLD_SIGHT24__.pointVisible=()=>false;f.context.ctx=new FakeDrawCommands();f.fixture.drawProp(prop);commands=f.context.ctx.commands.filter(c=>c.owner.id==='r71:point-drop:'+drop.id);assert.equal(commands.length,0);diagnostics=api.inspect().pointDrops.rendering;assert.equal(diagnostics.beaconsCaptured,false);assert.ok(diagnostics.lastCaptureSightCulled>0);
+});
+
+test('point beacon icon, amount, and border use the production DrawCommands API',()=>{
+ const f=fixture(),api=f.api,room=f.fixture.getRoom(),DrawCommands=loadProductionDrawCommands();
+ const drop={id:'r64:16:drop:1',source:'r64:16:kill:mob',x:10,y:10,amount:6,kind:'enemy',createdAt:0};
+ const prop={id:'point:'+drop.id,x:10,y:10,path:'assets/vfx/v31315/spirit-orb.webp',height:30,visible:true,passivePointDropR64:true,pointDropIdR64:drop.id,amountR64:6};
+ room.passivePointEpochR64=16;room.passivePointDropsR64=[drop];room.passivePointClaimsR64=[];room.props=[prop];
+ f.context.window.StoryPhase1={DrawCommands};f.context.window.__STORYWORLD_SIGHT24__={enabled:false,pointVisible:()=>true};
+ const ctx=new DrawCommands();assert.equal(typeof ctx.strokeRect,'undefined','production recorder must not provide the unsupported convenience method');
+ f.context.ctx=ctx;assert.doesNotThrow(()=>f.fixture.drawProp(prop));
+ const commands=ctx.commands.filter(c=>c.owner.id==='r71:point-drop:'+drop.id);
+ assert.ok(commands.some(c=>c.kind==='image'&&c.sourcePath==='assets/vfx/v31315/spirit-orb.webp'),'the registered point icon remains in the production capture');
+ assert.ok(commands.some(c=>c.kind==='text'&&c.text==='+6'),'the pickup amount remains in the production capture');
+ assert.ok(commands.some(c=>c.kind==='stroke'&&c.paths.some(p=>p.closed&&p.points.length===4)),'the amount label retains its closed rectangular border stroke');
+ const diagnostics=api.inspect().pointDrops.rendering;
+ assert.equal(diagnostics.beaconsCaptured,true);assert.equal(diagnostics.lastCaptureBeaconCount,1);assert.ok(diagnostics.lastCaptureBeaconCommands>=commands.length);
 });

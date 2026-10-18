@@ -20,8 +20,8 @@
 
 ## 통합 체크포인트
 
-최근 로컬 composition은 R61 분신의 저장/복원 및 같은 맵 난이도 재선택 HP를 보정한 상태에서 HTML SHA-256 `cc7aa60090dc3b309242be00e2f473dcb5a3f03ea33920a281b5efd6436a14ad`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 이 값은 미배포 로컬 후보 해시이며 승인 핀이 아닙니다. 현재 PR 브랜치에는 아직 이 체크포인트의 최종 검증 결과가 없습니다. 앞선 `b6241524…` 후보는 보스 HP 비교까지 통과했지만 실제 room-enemy 타격 assertion에서 실패했으므로 그 프로파일은 중간 증거로만 보존하고 최종 승인에 사용하지 않습니다.
+최근 로컬 composition은 R61 분신의 저장/복원·같은 맵 난이도 재선택 HP 보정과 포인트 아이템의 DrawCommands 호환성 수정을 포함하며 HTML SHA-256 `de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`입니다. 이 값은 미배포 후보 해시이며 승인 핀이 아닙니다. `cc7aa6…` 중간 후보의 8개 독립 브라우저 검사는 6개가 통과했습니다. 실제 captureVisual에서 포인트 테두리의 `strokeRect` 호출이 지원되지 않아 기존 렌더러로 되돌아갈 수 있는 문제를 확인했고, 같은 테두리를 지원되는 `beginPath/rect/stroke`로 변경했습니다. 실제 DrawCommands를 사용하는 CPU 회귀 검사를 추가했습니다. 다른 실패는 클리어 후 협동 검사 장면에서 살아 있는 원본 적을 찾던 조건이었습니다. 중간 증거는 `qa-r71/intermediate-58c979b-browser.json`에 보존합니다.
 
-최근 health 수정의 로컬 CPU 회귀 모음은 25/25 통과했고, 소스/매니페스트 감사와 76개 executable inline JavaScript 구문 검사가 통과했습니다. `verify-pages-r62`의 이전 후보 결과는 1,906개 파일 hash/HEAD 검사, 276개 오디오 range 검사, 총 2,187개 요청에서 실패 0건을 보고했습니다. 해당 integrity 결과는 현재 `cc7aa6…` composition의 재검증을 대신하지 않습니다.
+최근 로컬 CPU 회귀 모음은 26/26 통과했고, 새 후보의 소스/매니페스트 감사와 렌더러 구문 검사가 통과했습니다. `verify-pages-r62`의 중간 후보 결과는 1,906개 파일 hash/HEAD 검사, 276개 오디오 range 검사, 총 2,187개 요청에서 실패 0건을 보고했습니다. 해당 결과는 새 `de6536…` composition의 CI 재검증을 대신하지 않습니다.
 
-남은 검증은 새 `cc7aa6…` 후보를 push한 뒤의 R70/R71 전체 Pages 게이트, R71 브라우저 및 native 회귀, paired-profile/Pages ABBA 측정, 정확한 최종 해시 확인과 승인 JSON 갱신, 승인된 Pages 배포, 공개 HTML/renderer 응답 해시 검증입니다. 현재 별도 browser/native CI 증거는 없습니다. 로컬 Chromium 샌드박스 실행은 호스트 SUID helper 설정 때문에 막혀 있으며, 샌드박스 플래그를 낮추지 않았습니다. 기존 R66 브라우저 회귀 게이트는 후보 적용 전 R70 단계에서 그대로 유지됩니다.
+남은 검증은 새 `de6536…` 후보를 push한 뒤의 R70/R71 전체 Pages 게이트, R71 브라우저 및 native 회귀, paired-profile/Pages ABBA 측정, 정확한 최종 해시 확인과 승인 JSON 갱신, 승인된 Pages 배포, 공개 HTML/renderer 응답 해시 검증입니다. 로컬 Chromium 샌드박스 실행은 호스트 SUID helper 설정 때문에 막혀 있으며, 샌드박스 플래그를 낮추지 않았습니다. 기존 R66 브라우저 회귀 게이트는 후보 적용 전 R70 단계에서 그대로 유지됩니다.
