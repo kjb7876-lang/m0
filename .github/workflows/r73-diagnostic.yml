@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: r73-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   diagnose:
     runs-on: ubuntu-22.04
@@ -12,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script: [r73-ui, r73-diagnose, r73-slots.browser]
+        script: [r73-ui, r73-diagnose, r73-slots.browser, r73-native]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -25,6 +28,7 @@ jobs:
           set -euo pipefail
           python3 scripts/unpack-runtime-r62.py --output _pages/docs
           for rev in 66 67 68 69 70; do python3 scripts/apply-r$rev.py --site _pages/docs; done
+          cp -a _pages _r70
           python3 scripts/apply-r71.py --site _pages/docs
           cp -a _pages _r71
           python3 scripts/apply-r72.py --site _pages/docs
@@ -54,5 +58,7 @@ jobs:
         if: always()
         with:
           name: r73-${{ matrix.script }}-${{ github.sha }}
-          path: out/r73/
+          path: |
+            out/r73/
+            out/r71/native/
           retention-days: 14
