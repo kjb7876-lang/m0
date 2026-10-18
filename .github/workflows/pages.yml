@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: storyworld-pages-${{ github.event.pull_request.number || 'main' }}
+  group: storyworld-pages-${{ github.event.pull_request && format('pr-{0}-{1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'main' }}
   cancel-in-progress: false
 jobs:
   build:

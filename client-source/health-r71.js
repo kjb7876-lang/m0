@@ -203,7 +203,7 @@
   ensureActor(p,{source:'inspect'});
   const bleed=p?.healthBleedR71,mode=healthR71Authority();
   const actualRoom=(room?.enemies||[]).filter(healthR71Boss).map(e=>({id:e.id,baseMaxHp:e.healthR71CanonicalBaseHp??e.difficultyBaseHpR63??e.maxHp,canonicalMaxHp:e.healthR71CanonicalMaxHp??e.maxHp,visibleMaxHp:e.maxHp,hp:e.hp,adjusted:e.healthR71Adjusted===true,factor:e.difficultyFactorR63||1}));
-  const id=healthR71ActorId(p),activeVisuals=(effects||[]).filter(e=>e?.r71BleedVisualR71&&e.r71ActorId===id&&e.age<e.life).length,visuals=(effects||[]).filter(e=>e?.r71BleedVisualR71&&e.age<e.life).slice(-24).map(e=>({actorId:e.r71ActorId,ownerId:e.r71OwnerId,world:e.r71DrawWorldR71||e.r71ImpactWorldR71||{x:e.x,y:e.y},screen:e.r71DrawScreenR71||null,drawActorId:e.r71DrawActorIdR71||null,drawCount:e.r71DrawCountR71||0})),legacy=legacyMaxHP(p),norm=normalization(p);
+  const id=healthR71ActorId(p),activeVisuals=(effects||[]).filter(e=>e?.r71BleedVisualR71&&e.r71ActorId===id&&e.age<e.life).length,visuals=(effects||[]).filter(e=>e?.r71BleedVisualR71&&e.age<e.life).slice(-24).map(e=>({actorId:e.r71ActorId,ownerId:e.r71OwnerId,world:e.r71DrawWorldR71||e.r71ImpactWorldR71||{x:e.x,y:e.y},screen:e.r71DrawScreenR71||null,drawActorId:e.r71DrawActorIdR71||null,drawCount:e.r71DrawCountR71||0,hiddenReason:e.r71DrawHiddenReasonR71||null})),legacy=legacyMaxHP(p),norm=normalization(p);
   return{revision:'R71-HEALTH-BLEED',player:{hp:Number(p?.hp)||0,maxHp:R71_MAX_HP,legacyMaxHp:legacy,normalization:norm,effectiveLegacyHp:(Number(p?.hp)||0)/Math.max(.00001,norm),effectiveLegacyMaxHp:legacy,effectiveFraction:healthR71Clamp(Number(p?.hp)/R71_MAX_HP,0,1),healthR71Applied:p?.healthR71Applied===true},bleeding:healthR71BleedValid(p)?{active:true,started:bleed.started,until:bleed.until,remaining:Math.max(0,bleed.until-(Number(time)||0)),ownerId:bleed.ownerId,lastHit:bleed.lastHit,roomKey:bleed.roomKey,activeVisuals}: {active:false,started:null,until:null,remaining:0,ownerId:null,lastHit:null,roomKey:null,activeVisuals},bleedVisuals:visuals,bosses:actualRoom,authority:mode,metrics:{...healthR71Metrics},events:healthR71Events.map(e=>({...e})),asset:{path:R71_BLOOD_ASSET,registered:true,cached:!!readyImage(R71_BLOOD_ASSET)?.image},dotAdded:false,browser:false,GPU:false};
  }
  function serializeBleeding(p=player){
@@ -238,9 +238,17 @@
  if(healthR71DrawBase)drawEffect=function(e){
   const receiver=this,callArgs=arguments;
   if(e?.r71BleedVisualR71!==true)return healthR71DrawBase.apply(receiver,callArgs);
-  const actor=e.r71OwnerActorR71,impact=e.r71ImpactWorldR71;
-  if(!actor||!impact||!Number.isFinite(impact.x)||!Number.isFinite(impact.y)||e.r52Cancelled||e.r52Room!==room||Number(time)-Number(e.r52At)<0||Number(time)-Number(e.r52At)>=Number(e.life))return;
-  const coop=healthR71Coop(),scope=()=>{
+  const coop=healthR71Coop(),mode=healthR71Authority().mode,impact=e.r71ImpactWorldR71;
+  let actor=null;
+  if(mode==='off'){
+   const retained=e.r71OwnerActorR71;if(retained&&retained.__coopFacadeR62!==true)actor=retained;
+  }else if(typeof e.r71ActorId==='string'&&e.r71ActorId.length>0&&typeof coop?.players==='function'){
+   try{for(const candidate of coop.players()||[])if(candidate&&candidate.__coopFacadeR62!==true&&candidate.coopIdR62===e.r71ActorId){actor=candidate;break;}}catch(_){actor=null;}
+  }
+  if(!actor){e.r71DrawHiddenReasonR71='owner-unresolved';return;}
+  if(!impact||!Number.isFinite(impact.x)||!Number.isFinite(impact.y)||e.r52Cancelled||e.r52Room!==room||Number(time)-Number(e.r52At)<0||Number(time)-Number(e.r52At)>=Number(e.life))return;
+  delete e.r71DrawHiddenReasonR71;
+  const scope=()=>{
    const oldX=e.x,oldY=e.y,oldOrigin=e.r52Origin,oldPlayer=e.r52Player,oldCoopPlayer=e.coopPlayerR62,world={x:impact.x,y:impact.y};
    try{
     e.x=world.x;e.y=world.y;e.r52Origin={x:Number(actor.x),y:Number(actor.y)};e.r52Player=player;
@@ -249,7 +257,7 @@
     return healthR71DrawBase.apply(receiver,callArgs);
    }finally{e.x=oldX;e.y=oldY;e.r52Origin=oldOrigin;e.r52Player=oldPlayer;if(oldCoopPlayer===undefined)delete e.coopPlayerR62;else e.coopPlayerR62=oldCoopPlayer;}
   };
-  return healthR71Authority().mode!=='off'&&coop?.withPlayer?coop.withPlayer(actor,scope):scope();
+  return mode!=='off'&&coop?.withPlayer?coop.withPlayer(actor,scope):scope();
  };
 
  const healthR71ScaleBase=typeof scaleEnemy==='function'?scaleEnemy:null;

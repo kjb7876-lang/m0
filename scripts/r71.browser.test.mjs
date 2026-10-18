@@ -706,12 +706,22 @@ try {
       await c.start({role:'guest',selfId:'qa-guest',hostId:'qa-host',members:[{id:'qa-host',nick:'Host',character:'hwando'},{id:'qa-peer',nick:'Peer',character:'hwando'},{id:'qa-guest',nick:'Guest',character:'hwando'}]});
       const transitioned=await c.receive({type:'transition',epoch:snap.epoch,regionId:snap.zone,layer:snap.layer});
       c.receive({type:'all_loaded',phase:'running',epoch:snap.epoch});const accepted=c.applySnapshot(snap),peer=c.players().find(p=>p.coopIdR62==='qa-peer'),health=window.__STORYWORLD_HEALTH_R71__;
-      return{transitioned,accepted,peer:{hp:peer.hp,applied:peer.healthR71Applied,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer)},visuals:effects.filter(e=>e.r71BleedVisualR71===true).map(e=>e.r71ActorId)};
+      const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(command=>command.owner?.id==='blood-contact-r52'&&command.kind==='image'&&String(command.sourcePath).includes('player-blood.webp'));
+      const expectedScreen=project(peer.x,peer.y-.15);expectedScreen.y-=actorHeight()*.40;
+      const bloodCenters=bloodCommands.map(command=>({x:command.points.reduce((n,p)=>n+p[0],0)/command.points.length,y:command.points.reduce((n,p)=>n+p[1],0)/command.points.length}));
+      const bleedDraws=health.inspect(peer).bleedVisuals.filter(row=>row.actorId==='qa-peer');
+      return{transitioned,accepted,selfId:'qa-guest',peer:{id:peer.coopIdR62,x:peer.x,y:peer.y,hp:peer.hp,applied:peer.healthR71Applied,bleeding:health.inspect(peer).bleeding,status:health.statusRows(peer)},visuals:effects.filter(e=>e.r71BleedVisualR71===true).map(e=>e.r71ActorId),bleedDraws,bloodCenters,expectedScreen};
     },coopSnapshot);
     assert.equal(guestSnapshot.transitioned,true);assert.equal(guestSnapshot.accepted,true,'guest accepts current host snapshot');
     assert.equal(guestSnapshot.peer.applied,true);assert.equal(guestSnapshot.peer.bleeding.active,true,'bleed survives host→guest snapshot');
     assert.ok(guestSnapshot.peer.status.some(row=>row.key==='health-r71-bleed'));
     assert.ok(guestSnapshot.visuals.includes('qa-peer'),'peer blood imagery is included in guest snapshot');
+    assert.notEqual(guestSnapshot.selfId,guestSnapshot.peer.id,'guest snapshot recipient is not the peer owner');
+    assert.ok(guestSnapshot.bloodCenters.length>0,'guest Three capture draws the received peer blood atlas');
+    assert.ok(guestSnapshot.bloodCenters.some(q=>Math.hypot(q.x-guestSnapshot.expectedScreen.x,q.y-guestSnapshot.expectedScreen.y)<3),'guest captured blood image is positioned at the peer');
+    assert.ok(guestSnapshot.bleedDraws.some(row=>row.world?.x===guestSnapshot.peer.x&&row.world?.y===guestSnapshot.peer.y-.15),'guest diagnostics retain the peer impact world coordinate');
+    assert.ok(guestSnapshot.bleedDraws.some(row=>row.drawActorId==='qa-peer'&&row.drawCount>0),'guest capture resolves the received effect owner to qa-peer, not its own player');
+    assert.ok(guestSnapshot.bleedDraws.some(row=>row.screen&&Math.hypot(row.screen.x-guestSnapshot.expectedScreen.x,row.screen.y-guestSnapshot.expectedScreen.y)<.01),'guest peer draw screen coordinate agrees with its captured blood image');
 
     const deathAndRevive=await host.page.evaluate(async enemyId=>{
       const c=window.__STORYWORLD_COOP_SIM_R62__,health=window.__STORYWORLD_HEALTH_R71__,actors=c.players();

@@ -18,8 +18,8 @@
 
 ## 통합 체크포인트
 
-Health R61 clone 및 협동 혈흔 원점 보정이 포함된 fresh compose에서 HTML SHA-256 `b18b7eb03f8bdef72c4e50ea4ad3fbc98ace3b666a944ca5002a1d1bb26a956b`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`를 측정했습니다. 이 값은 로컬 후보 체크포인트이며 배포 승인 핀이 아닙니다. CI에서 다시 만든 최종 산출물의 해시를 검토한 뒤 승인 JSON에 반영해야 합니다.
+협동 actor identity 및 혈흔 원점 보정을 포함한 fresh compose에서 HTML SHA-256 `d1a7c09e8d23f6cfb714280446d6ab1e1575ca542e5cea196b41d432e72feb3d`, 렌더러 SHA-256 `54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c`를 측정했습니다. 이 값은 로컬 후보 체크포인트이며 배포 승인 핀이 아닙니다. CI에서 다시 만든 최종 산출물의 해시를 검토한 뒤 승인 JSON에 반영해야 합니다.
 
-통과한 로컬 검증: R71 CPU 회귀 19/19, 76개 inline JavaScript 구문 검사, Python 변환기 컴파일, 후보 렌더러와 R71 Node 스크립트 및 health/progression helper 구문 검사, 두 workflow YAML 구문 검사, `git diff --check`, R71 소스/매니페스트 감사. `verify-pages-r62`는 1,906개 파일의 hash/HEAD 검사, 276개 오디오 range 검사, 총 2,187개 요청에서 실패 0건을 보고했습니다. HTML과 렌더러 외 패키지 파일 및 미디어 바이트는 변경되지 않았습니다.
+통과한 로컬 검증: R71 CPU 회귀 20/20, 76개 inline JavaScript 구문 검사, Python 변환기 컴파일, 후보 렌더러와 R71 Node 스크립트 및 health/progression helper 구문 검사, native runner prepare-only/생성 결과 구문 검사, 두 workflow YAML 구문 검사, `git diff --check`, R71 소스/매니페스트 감사. `verify-pages-r62`는 1,906개 파일의 hash/HEAD 검사, 276개 오디오 range 검사, 총 2,187개 요청에서 실패 0건을 보고했습니다. HTML과 렌더러 외 패키지 파일 및 미디어 바이트는 변경되지 않았습니다.
 
 브라우저 검증, 실협동 혈흔 캡처 회귀, native 회귀 runner, R70→R71 짝지은 성능 측정은 샌드박스가 활성화된 Ubuntu 22.04 CI에서 실행해야 합니다. 로컬 Chromium 샌드박스 실행은 호스트 SUID helper 설정 때문에 막혀 있으며, 샌드박스 플래그를 낮추지 않았습니다. 기존 R66 브라우저 회귀 게이트는 후보 적용 전 R70 단계에서 유지됩니다. CI 산출물, 최종 해시 검토, 승인된 Pages 배포 및 공개 응답 검증이 남아 있습니다.

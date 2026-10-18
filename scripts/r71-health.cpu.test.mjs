@@ -123,13 +123,22 @@ test('only admitted enemy HP loss bleeds; dodge, blocked, self, DOT, and guest p
 
 test('R71 coop blood keeps the peer impact point while R52 sees its stable player facade',()=>{
  const f=fixture({coopFacade:true}),api=f.api,host=f.fixture.player,peer={id:'coop-peer',coopIdR62:'peer',hero:'hwando',x:30,y:30.15,hp:700,level:5,upgrades:{vital:2},progressionR62:{ranks:{endlessVital:2}},healthR71Applied:true};
- f.fixture.extraActors.push(peer);f.fixture.mode='host';f.fixture.time=4;api.ensureActor(peer,{source:'peer-fixture'});
+ const other={id:'coop-other',coopIdR62:'other',hero:'hwando',x:50,y:50,hp:700,level:5,upgrades:{},healthR71Applied:true};
+ f.fixture.extraActors.push(peer,other);f.fixture.mode='host';f.fixture.time=4;api.ensureActor(peer,{source:'peer-fixture'});
  const before=peer.hp;peer.hp-=20;assert.equal(api.onAdmittedHit(peer,f.fixture.enemy,before,peer.hp,'hit'),true);
  const effect=f.fixture.effects.at(-1),impact={x:30,y:30};assert.equal(effect.r52Player,f.fixture.facade);assert.equal(effect.r71OwnerActorR71,peer);
+ effect.r71OwnerActorR71=f.fixture.facade; // R62 decode maps any $ref:'player' to this facade, ignoring the ID.
  peer.x=33;peer.y=34;f.fixture.player=host;
  const drawn=f.fixture.drawEffect(effect);assert.equal(drawn.drawn,true);assert.equal(drawn.actorId,'peer');assert.deepEqual(JSON.parse(JSON.stringify(drawn.world)),impact);
  assert.deepEqual(JSON.parse(JSON.stringify(drawn.screen)),{x:600,y:596});
  const visual=api.inspect(peer).bleedVisuals.find(v=>v.actorId==='peer');assert.deepEqual(JSON.parse(JSON.stringify(visual.world)),impact);assert.deepEqual(JSON.parse(JSON.stringify(visual.screen)),{x:600,y:596});assert.equal(visual.drawActorId,'peer');assert.equal(visual.drawCount,1);
+ effect.r71ActorId='missing';assert.equal(f.fixture.drawEffect(effect),undefined);const hidden=api.inspect(peer).bleedVisuals.find(v=>v.ownerId==='enemy-boss');assert.equal(hidden.actorId,'missing');assert.equal(hidden.drawActorId,'peer');assert.equal(hidden.drawCount,1);assert.equal(hidden.hiddenReason,'owner-unresolved');
+});
+
+test('R71 solo blood uses its retained actor and does not require a coop ID',()=>{
+ const f=fixture(),api=f.api,p=f.fixture.player;api.ensureActor(p,{source:'solo-render'});p.x=21;p.y=22;p.hp=700;f.fixture.time=6;
+ assert.equal(api.onAdmittedHit(p,f.fixture.enemy,700,690,'hit'),true);const effect=f.fixture.effects.at(-1),drawn=f.fixture.drawEffect(effect);
+ assert.equal(drawn.drawn,true);assert.equal(drawn.actorId,'local');assert.deepEqual(JSON.parse(JSON.stringify(drawn.world)),{x:21,y:21.85});
 });
 
 test('native hurt wrapper admits one enemy bleed event and lethal hits leave only the short visual',()=>{
