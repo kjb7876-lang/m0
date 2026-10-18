@@ -9,11 +9,11 @@ function harness(initial={}){
  const data=new Map(Object.entries(initial)),handlers=new Map(),panel={innerHTML:'',innerText:'',querySelector:()=>null,querySelectorAll:()=>[],appendChild(){}};
  let failKey=null,cheat=false;
  const c={window:{},SAVE:LEGACY,console,Date,Number,Object,JSON,Map,Set,started:true,booted:false,loading:false,storyScene:null,zone:'hub',layer:'STORY',player:{x:2,y:2,hp:777,level:1},room:{id:'hub',layer:'STORY',finalizing:false,exploration:{floorCells:[[2,2]]}},progress:{STORY:{},DREAM:{}},gold:raw().goldenR72,route:[],command:null,cam:{},regionById:{hub:{title:'거점'},dist00:{title:'나무'}},escapeHTML:s=>String(s),toast(){},openPanel(html){panel.innerHTML=html;},closePanel(){},$:id=>id==='panel'?panel:{disabled:false},button:(id,fn)=>handlers.set(id,fn),blocked:()=>false,document:{createElement:()=>({})},showTitle(){},showMenu(){},localStorage:{getItem:k=>data.get(k)??null,setItem(k,v){if(k===failKey)throw Error('QUOTA');data.set(k,String(v));},removeItem:k=>data.delete(k)}};
- c.serializeSave=()=>({...raw(c.zone,c.player.level),player:clone(c.player),progress:clone(c.progress),goldenR72:clone(c.gold),...(cheat?{cheat777:{active:true}}:{})});
+ c.unlockTag='original';c.serializeSave=()=>({...raw(c.zone,c.player.level),player:clone(c.player),progress:clone(c.progress),goldenR72:clone(c.gold),unlockedRegions:{tag:c.unlockTag},...(cheat?{cheat777:{active:true}}:{})});
  c.saveGame=()=>{try{const value=JSON.stringify(c.serializeSave());c.localStorage.setItem(cheat?LEGACY+'.cheat777':c.window.__STORYWORLD_SAVE_SLOTS_R73__.key(),value);return true;}catch{return false;}};
  c.validateSave=v=>{if(!c.regionById[v.zone]||v.version!==2||v.bad)throw Error('INVALID');return v;};
- c.normalizeSave3=v=>{if(v.version!==6)throw Error('ENVELOPE');return{valid:c.validateSave({...v,version:2}),raw:v};};
- c.restoreSave=async v=>{c.normalizeSave3(v);c.zone=v.zone;c.layer=v.layer;c.player=clone(v.player);c.progress=clone(v.progress);c.gold=clone(v.goldenR72);c.room={...c.room,id:v.zone,layer:v.layer};cheat=v.cheat777?.active===true;};
+ c.normalizeSave3=v=>{if(v.version!==6)throw Error('ENVELOPE');const valid=c.validateSave({...v,version:2});c.unlockTag=v.unlockedRegions?.tag||'original';return{valid,raw:v};};
+ c.restoreSave=async v=>{c.normalizeSave3(v);if(v.lateBad)throw Error('EXTENSION_VALIDATION');c.zone=v.zone;c.layer=v.layer;c.player=clone(v.player);c.progress=clone(v.progress);c.gold=clone(v.goldenR72);c.room={...c.room,id:v.zone,layer:v.layer};cheat=v.cheat777?.active===true;};
  c.enterRegion=async id=>{c.zone=id;c.room={...c.room,id};c.saveGame(false);return true;};
  c.loadLocal=()=>{};
  c.window.__STORYWORLD_COOP_SIM_R62__={mode:()=> 'off'};
@@ -37,5 +37,6 @@ test('quota, malformed or rejected slot data cannot claim success or change the 
  const h=harness({[LEGACY]:JSON.stringify(raw())});assert.equal(h.c.saveGame(false),true);const one=h.data.get(LEGACY+'.slot-r73.1');h.fail(LEGACY+'.slot-r73.2');assert.equal(await h.new(2),false);assert.equal(h.api.inspect().active,1);assert.equal(h.data.get(LEGACY+'.slot-r73.1'),one);
  h.data.set(LEGACY+'.slot-r73.3','{incomplete');assert.equal(await h.api.confirm('load',3),false);assert.equal(h.api.inspect().active,1);assert.equal(h.data.get(LEGACY+'.slot-r73.3'),'{incomplete');
  h.data.set(LEGACY+'.slot-r73.3',JSON.stringify({...raw(),bad:true}));assert.equal(await h.api.confirm('load',3),false);assert.equal(h.api.inspect().active,1);
+ h.data.set(LEGACY+'.slot-r73.3',JSON.stringify({...raw(),lateBad:true,unlockedRegions:{tag:'foreign-slot'}}));assert.equal(await h.api.confirm('load',3),false);assert.equal(h.c.unlockTag,'original','later restore rejection must roll back stateful native unlock normalization');
  h.fail(LEGACY+'.slot-r73.1');assert.equal(h.c.saveGame(false),false);assert.equal(h.data.get(LEGACY+'.slot-r73.1'),one);
 });

@@ -63,6 +63,10 @@ def build(site):
     if html.count(old) != 1:
         raise RuntimeError('R73 physical portal admission anchor drift')
     html = html.replace(old, "if(distance(player,s.point)>2.6||!clearPath3(player,s.point,.31,room)){toast('문 입구의 안전한 길로 접근하세요.',3);return false;}" + old)
+    old = 'if(!started||modal||loading||transitionCD>0||player?.hp<=0)return false;const s=status(d);'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 duplicate portal transition anchor drift')
+    html = html.replace(old, 'if(!started||modal||loading||transitionCD>0||player?.hp<=0||window.__STORYWORLD_SAVE_SLOTS_R73__?.transitioning())return false;const s=status(d);')
     for name in ['portal-arrival', 'save-slots']:
         fragment = (ROOT / ('client-source/' + name + '-r73.js')).read_text()
         if '</script' in fragment.lower() or html.count('</body>') != 1:

@@ -16,17 +16,17 @@
  function summary(raw){if(!raw)return'비어 있음';const done=Object.values(raw.progress?.STORY||{}).filter(v=>v===true).length,dream=Object.values(raw.progress?.DREAM||{}).filter(v=>v===true).length,at=raw.saveSlotR73?.savedAt;return`${raw.layer} · ${regionById[raw.zone]?.title||raw.zone} · Lv.${raw.player.level||1} · 기억 ${done} / 사몽 ${dream}${at?' · '+new Date(at).toLocaleString(): ' · 이전 버전 저장'}`;}
  function error(e){message=e?.message||String(e);note('failure',{message});const status=$('slotsMessageR73');if(status)status.textContent=message;toast(message,5);}
  function safePosition(){if(!room||!player)throw Error('복원된 지역이 없습니다.');if(!blocked(player.x,player.y,.34,room))return;const cells=room.exploration?.floorCells||[];let best=null,distance=Infinity;for(const[x,y]of cells){const q={x:x+.5,y:y+.5},d=Math.hypot(q.x-player.x,q.y-player.y);if(d<distance&&!blocked(q.x,q.y,.4,room)){best=q;distance=d;}}if(!best)throw Error('해당 지도에서 안전한 복원 위치를 찾지 못했습니다.');player.x=best.x;player.y=best.y;cam={...best};route=[];command=null;note('safe-position',{distance});}
- const serializeBase=serializeSave;serializeSave=function(...args){const raw=serializeBase.apply(this,args);if(!raw.cheat777?.active)raw.saveSlotR73={version:1,slot:pending||active,savedAt:new Date().toISOString(),transitionComplete:room?.id===zone&&room?.layer===layer&&!loading};return raw;};
+ const serializeBase=serializeSave;serializeSave=function(...args){const raw=serializeBase.apply(this,args);if(mode()==='off'&&raw.version===6&&raw.scope==='hapil.storyworld.depth-full.20261008'&&!raw.cheat777?.active)raw.saveSlotR73={version:1,slot:pending||active,savedAt:new Date().toISOString(),transitionComplete:room?.id===zone&&room?.layer===layer&&!loading};return raw;};
  const saveBase=saveGame;saveGame=function(notice=true){
-  if(cheat())return saveBase.apply(this,arguments);
+  if(cheat()||mode()!=='off')return saveBase.apply(this,arguments);
   if(notice&&mode()==='off'){confirm('save',active);return false;}
   if(!ready()||busy&&operation!=='new')return false;
   try{const ok=saveBase.call(this,false);if(ok!==true)return false;const raw=read(pending||active);if(!raw||raw.zone!==zone||raw.layer!==layer||raw.saveSlotR73?.transitionComplete!==true)throw Error('저장 후 상태 확인에 실패했습니다.');message=`슬롯 ${pending||active} 저장 완료 · ${summary(raw)}`;note('saved',{slot:pending||active,zone,layer});return true;}catch(e){error(e);return false;}
  };
  const enterBase=enterRegion;enterRegion=async function(...args){transitionDepth++;let result;try{result=await enterBase.apply(this,args);return result;}finally{transitionDepth--;if(transitionDepth===0&&result===true&&!busy&&ready())saveGame(false);}};
  const migratedZone=id=>id==='ep1a07'?'ep1a08':id;
- const restoreBase=restoreSave;restoreSave=async function(raw,...args){transitionDepth++;try{const r=await restoreBase.call(this,raw,...args);if(r!==false&&started&&!loading){safePosition();if(room.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('복원 목적지와 실제 지역이 다릅니다.');}return r;}finally{transitionDepth--;}};
- function locked(){return busy||loading||!booted||mode()!=='off';}
+ const restoreBase=restoreSave;restoreSave=async function(raw,...args){transitionDepth++;try{const r=await restoreBase.call(this,raw,...args);if(raw?.version===6&&raw.scope==='hapil.storyworld.depth-full.20261008'&&mode()==='off'&&r!==false&&started&&!loading){safePosition();if(room.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('복원 목적지와 실제 지역이 다릅니다.');}return r;}finally{transitionDepth--;}};
+ function locked(){return busy||loading||!booted||transitionDepth>0||mode()!=='off';}
  async function transact(kind,n){
   number(n);if(locked()){error(Error('로딩과 협동 세션을 마친 뒤 슬롯을 변경하세요.'));return false;}
   if(kind==='save'){
@@ -35,9 +35,8 @@
   }
   let raw=null,old=null,prior=active,targetBefore=null;busy=true;operation=kind;
   try{
-   targetBefore=localStorage.getItem(slotKey(n));
+   targetBefore=localStorage.getItem(slotKey(n));old=started&&player?serializeSave():null;
    if(kind==='load'){raw=read(n);if(!raw)throw Error('비어 있는 슬롯입니다.');normalizeSave3({...raw,zone:migratedZone(raw.zone)});}
-   old=started&&player?serializeSave():null;
    if(cheat()){const left=await window.__STORYWORLD_CHEAT777__.leave();if(left!==true)throw Error('777 일반 진행 복귀를 완료하지 못했습니다.');}
    pending=n;
    if(kind==='load'){await restoreSave(raw);if(!started||loading||room?.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('슬롯 복원이 완료되지 않았습니다.');}
@@ -58,6 +57,6 @@
  // The canonical title continue button must honor the current slot, including
  // errors, instead of treating a failed restore as a successful UI transition.
  loadLocal=()=>cheat()?window.__STORYWORLD_CHEAT777__.load():transact('load',active);
- window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({key,panel,confirm,read,summary,confirmedNew:()=>busy&&operation==='new',inspect:()=>({active,pending,busy,operation,transitionDepth,message,legacyPreserved:true,audit:[...audit]})});
+ window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({key,panel,confirm,read,summary,transitioning:()=>transitionDepth>0,confirmedNew:()=>busy&&operation==='new',inspect:()=>({active,pending,busy,operation,transitionDepth,message,legacyPreserved:true,audit:[...audit]})});
  migrate();if(booted&&!started)showTitle();
 })();

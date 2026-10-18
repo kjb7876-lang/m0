@@ -4,6 +4,11 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import * as T from '../_pages/docs/vendor/three/build/three.core.js';
 const renderer=fs.readFileSync('_pages/docs/dist/phase1.js','utf8'),context={window:{},console,URL,performance,Float32Array};vm.createContext(context);vm.runInContext(renderer,context);const api=context.window.StoryPhase1;
+test('wall draw ranges merge without reordering any triangle or changing per-triangle material identity',()=>{
+ const layout=api.explorationLayout('ep1b09','ruin',false,{}),art=layout.surface.art,wall=new T.MeshBasicMaterial(),cap=new T.MeshBasicMaterial(),trim=new T.MeshBasicMaterial(),materials=[wall,wall,cap,cap,wall,wall,trim];let before=0,after=0;
+ for(const w of layout.regional55?.visualWalls||layout.walls){const data=api.terrainWallMeshData(w,art),g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(data.positions,3));g.setAttribute('uv',new T.Float32BufferAttribute(data.uv,2));g.setIndex(data.indices);for(const r of data.groups)g.addGroup(r.start,r.count,r.materialIndex);const mesh=new T.Mesh(g,materials),index=g.index,position=g.getAttribute('position'),uv=g.getAttribute('uv'),expand=()=>g.groups.flatMap(r=>Array.from({length:r.count/3},(_,n)=>({start:r.start+n*3,material:materials[r.materialIndex]}))),original=expand();before+=g.groups.length;api.coalesceMaterialGroupsR73(mesh);after+=g.groups.length;assert.equal(g.index,index);assert.equal(g.getAttribute('position'),position);assert.equal(g.getAttribute('uv'),uv);assert.deepEqual(expand(),original);assert.equal(api.coalesceMaterialGroupsR73(mesh),0,'geometry cache reuse is idempotent');g.dispose();}
+ assert.ok(after<=before*.5,JSON.stringify({before,after}));
+});
 test('actual Three clones retain mask hooks and copied userData cannot suppress repair',()=>{
  const state={uniforms:{sightEnabled24:{value:1}}},original=new T.MeshBasicMaterial();api.attachSight24(original,state);
  const naive=original.clone();assert.ok(naive.userData.sight24);assert.ok(!String(naive.onBeforeCompile).includes('sightGround24'));
