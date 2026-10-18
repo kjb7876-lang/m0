@@ -24,7 +24,8 @@
   try{const ok=saveBase.call(this,false);if(ok!==true)return false;const raw=read(pending||active);if(!raw||raw.zone!==zone||raw.layer!==layer||raw.saveSlotR73?.transitionComplete!==true)throw Error('저장 후 상태 확인에 실패했습니다.');message=`슬롯 ${pending||active} 저장 완료 · ${summary(raw)}`;note('saved',{slot:pending||active,zone,layer});return true;}catch(e){error(e);return false;}
  };
  const enterBase=enterRegion;enterRegion=async function(...args){transitionDepth++;let result;try{result=await enterBase.apply(this,args);return result;}finally{transitionDepth--;if(transitionDepth===0&&result===true&&!busy&&ready())saveGame(false);}};
- const restoreBase=restoreSave;restoreSave=async function(raw,...args){transitionDepth++;try{const r=await restoreBase.call(this,raw,...args);if(r!==false&&started&&!loading){safePosition();if(room.id!==raw.zone||layer!==raw.layer)throw Error('복원 목적지와 실제 지역이 다릅니다.');}return r;}finally{transitionDepth--;}};
+ const migratedZone=id=>id==='ep1a07'?'ep1a08':id;
+ const restoreBase=restoreSave;restoreSave=async function(raw,...args){transitionDepth++;try{const r=await restoreBase.call(this,raw,...args);if(r!==false&&started&&!loading){safePosition();if(room.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('복원 목적지와 실제 지역이 다릅니다.');}return r;}finally{transitionDepth--;}};
  function locked(){return busy||loading||!booted||mode()!=='off';}
  async function transact(kind,n){
   number(n);if(locked()){error(Error('로딩과 협동 세션을 마친 뒤 슬롯을 변경하세요.'));return false;}
@@ -32,17 +33,18 @@
    if(n!==active||cheat()||!ready()){error(Error('현재 일반 진행의 활성 슬롯에서만 저장할 수 있습니다.'));return false;}
    const ok=saveGame(false);if(!ok)error(Error('저장하지 못했습니다. 장면·로딩·저장 공간을 확인하세요.'));panel();return ok;
   }
-  let raw=null,old=null,prior=active;busy=true;operation=kind;
+  let raw=null,old=null,prior=active,targetBefore=null;busy=true;operation=kind;
   try{
-   if(kind==='load'){raw=read(n);if(!raw)throw Error('비어 있는 슬롯입니다.');validateSave(raw);}
+   targetBefore=localStorage.getItem(slotKey(n));
+   if(kind==='load'){raw=read(n);if(!raw)throw Error('비어 있는 슬롯입니다.');normalizeSave3({...raw,zone:migratedZone(raw.zone)});}
    old=started&&player?serializeSave():null;
    if(cheat()){const left=await window.__STORYWORLD_CHEAT777__.leave();if(left!==true)throw Error('777 일반 진행 복귀를 완료하지 못했습니다.');}
    pending=n;
-   if(kind==='load'){await restoreSave(raw);if(!started||loading||room?.id!==raw.zone||layer!==raw.layer)throw Error('슬롯 복원이 완료되지 않았습니다.');}
+   if(kind==='load'){await restoreSave(raw);if(!started||loading||room?.id!==migratedZone(raw.zone)||layer!==raw.layer)throw Error('슬롯 복원이 완료되지 않았습니다.');}
    else{const ok=await window.__STORYWORLD_STORY_PROFILE_R54__.begin();if(ok!==true||zone!=='hub'||layer!=='STORY'||!started||loading)throw Error(window.__STORYWORLD_STORY_PROFILE_R54__.inspect().error||'새 여정을 시작하지 못했습니다.');}
    // Persist the active pointer only after the complete new/restore transaction.
    localStorage.setItem(POINTER,String(n));active=n;message=`슬롯 ${n} ${kind==='new'?'새 여정 시작':'불러오기 완료'}`;note(kind,{slot:n,zone,layer});if(!storyScene)closePanel(true);return true;
-  }catch(e){pending=prior;if(old){try{await restoreSave(old);}catch(recovery){message='이전 진행 복원 실패: '+recovery.message;}}active=prior;error(e);return false;
+  }catch(e){if(kind==='new'){try{if(targetBefore===null)localStorage.removeItem(slotKey(n));else localStorage.setItem(slotKey(n),targetBefore);}catch(recovery){note('target-recovery-failed',{message:recovery.message});}}pending=prior;if(old){try{await restoreSave(old);}catch(recovery){message='이전 진행 복원 실패: '+recovery.message;}}active=prior;error(e);return false;
   }finally{pending=null;busy=false;operation=null;}
  }
  function confirm(kind,n){if(locked()){error(Error('로딩이 끝난 뒤 다시 선택하세요.'));return;}if(kind==='load')return transact(kind,n);
@@ -56,6 +58,6 @@
  // The canonical title continue button must honor the current slot, including
  // errors, instead of treating a failed restore as a successful UI transition.
  loadLocal=()=>cheat()?window.__STORYWORLD_CHEAT777__.load():transact('load',active);
- window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({key,panel,confirm,read,summary,inspect:()=>({active,pending,busy,operation,transitionDepth,message,legacyPreserved:true,audit:[...audit]})});
+ window.__STORYWORLD_SAVE_SLOTS_R73__=Object.freeze({key,panel,confirm,read,summary,confirmedNew:()=>busy&&operation==='new',inspect:()=>({active,pending,busy,operation,transitionDepth,message,legacyPreserved:true,audit:[...audit]})});
  migrate();if(booted&&!started)showTitle();
 })();

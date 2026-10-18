@@ -37,10 +37,24 @@ def build(site):
     if html.count(old) != 1:
         raise RuntimeError('R73 new journey transaction anchor drift')
     html = html.replace(old, "holdSave=true;stage='첫 기억")
+    # The current slot confirmation replaces the historical second prompt.
+    # Keep its old save intact until the new journey commits atomically.
+    old = 'if (hasV5Save() && !pendingOverwrite5)'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 legacy overwrite prompt anchor drift')
+    html = html.replace(old, 'if (hasV5Save() && !pendingOverwrite5 && !window.__STORYWORLD_SAVE_SLOTS_R73__?.confirmedNew())')
+    old = 'if (pendingOverwrite5) { try { localStorage.removeItem(normalSaveKeyR73()); }'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 legacy overwrite deletion anchor drift')
+    html = html.replace(old, 'if (pendingOverwrite5 && !window.__STORYWORLD_SAVE_SLOTS_R73__?.confirmedNew()) { try { localStorage.removeItem(normalSaveKeyR73()); }')
     old = "stage='playing';if(!storyScene)closePanel(true);saveGame(false);note('new-campaign'"
     if html.count(old) != 1:
         raise RuntimeError('R73 new journey commit anchor drift')
     html = html.replace(old, "stage='playing';if(!storyScene)closePanel(true);if(!saveGame(false))throw Error('새 여정을 저장하지 못했습니다. 기존 진행은 보존합니다.');note('new-campaign'")
+    old = 'const ready=booted&&!!player&&!!room,h=ready?heroArtForDraw():null;'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 stable render snapshot anchor drift')
+    html = html.replace(old, 'const ready=booted&&started&&!loading&&!!player&&room?.id===zone&&room?.layer===layer,h=ready?heroArtForDraw():null;')
     fragment = (ROOT / 'client-source/save-slots-r73.js').read_text()
     if '</script' in fragment.lower() or html.count('</body>') != 1:
         raise RuntimeError('Unsafe R73 script fragment')
