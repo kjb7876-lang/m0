@@ -3,7 +3,7 @@ import { randomBytes, createHash, timingSafeEqual } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer, WebSocket } from 'ws';
 
-export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R63R1', protocol: 1 });
+export const PROTOCOL = Object.freeze({ gameId: 'storyworld', build: 'R73R1', protocol: 1 });
 export const CHARACTERS = Object.freeze(['hwando', 'seoha', 'neon', 'michaela', 'lauren', 'hunter', 'slayer', 'gunner']);
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const LIMITS = Object.freeze({ players: 4, rooms: 32, connections: 160, payload: 524288, buffer: 2097152,
@@ -12,6 +12,8 @@ const now = () => Date.now();
 const record = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => Number.isSafeInteger(v) && v >= min && v <= max;
 const string = (v, max) => typeof v === 'string' && v.length > 0 && v.length <= max;
+const validMazeR73 = v => v === undefined || record(v) && Object.keys(v).length === 2 &&
+  Object.hasOwn(v, 'version') && Object.hasOwn(v, 'seed') && v.version === 1 && integer(v.seed, 0, 0xffffffff);
 const hash = (v) => createHash('sha256').update(v).digest();
 const token = () => randomBytes(32).toString('base64url');
 function safeJSON(value, maxNodes = 50000, maxDepth = 16) {
@@ -132,7 +134,7 @@ export function createRelay(options = {}) {
     if (newEpoch) { room.epoch++; room.snapshot = null; }
     room.regionId = regionId; room.layer = layer; room.phase = 'loading'; room.loadStarted = now();
     for (const p of room.players.values()) p.loaded = false;
-    broadcast(room, { type: 'transition', epoch: room.epoch, regionId, layer: room.layer, reason });
+    broadcast(room, { type: 'transition', epoch: room.epoch, regionId, layer: room.layer, mazeR73: room.mazeR73 || { version: 1, seed: 0 }, reason });
     lobby(room);
   }
   function attach(peer, room, player, reconnecting = false) {
@@ -142,7 +144,7 @@ export function createRelay(options = {}) {
     let resumeToken = null;
     if (player.id !== room.hostId) { resumeToken = token(); player.tokenHash = hash(resumeToken); }
     send(peer, { type: 'welcome', ...PROTOCOL, code: room.code, selfId: player.id, hostId: room.hostId,
-      resumeToken, graceMs: limits.graceMs, epoch: room.epoch, phase: room.phase, regionId: room.regionId, layer: room.layer, players: roster(room) });
+      resumeToken, graceMs: limits.graceMs, epoch: room.epoch, phase: room.phase, regionId: room.regionId, layer: room.layer, mazeR73: room.mazeR73 || { version: 1, seed: 0 }, players: roster(room) });
     if (room.phase !== 'lobby') {
       barrier(room, room.regionId, reconnecting ? 'reconnect' : 'late_join');
       if (room.snapshot) send(peer, room.snapshot);
@@ -212,11 +214,15 @@ export function createRelay(options = {}) {
         if (!string(m.regionId, 128) || !/^[A-Za-z0-9_-]+$/.test(m.regionId)) return fail(peer, 'REGION_INVALID', 'A valid starting region is required.');
         if (![...room.players.values()].every(p => p.peer && p.ready)) return fail(peer, 'NOT_READY', 'Every player must be connected and ready.');
         if (m.layer !== undefined && !['STORY','DREAM'].includes(m.layer)) return fail(peer, 'LAYER_INVALID', 'Invalid story layer.');
+        if (!validMazeR73(m.mazeR73)) return fail(peer, 'MAZE_INVALID', 'Invalid host maze seed.');
+        room.mazeR73 = m.mazeR73 ? { version: 1, seed: m.mazeR73.seed } : { version: 1, seed: 0 };
         barrier(room, m.regionId, 'start', true, m.layer || 'STORY'); return;
       case 'transition':
         if (!hostOnly()) return;
         if (!['playing', 'paused'].includes(room.phase) || m.epoch !== room.epoch + 1 || !string(m.regionId, 128) || !/^[A-Za-z0-9_-]+$/.test(m.regionId)) return fail(peer, 'TRANSITION_INVALID', 'Invalid transition, epoch, or room phase.');
         if (m.layer !== undefined && !['STORY','DREAM'].includes(m.layer)) return fail(peer, 'LAYER_INVALID', 'Invalid story layer.');
+        if (!validMazeR73(m.mazeR73)) return fail(peer, 'MAZE_INVALID', 'Invalid host maze seed.');
+        room.mazeR73 = m.mazeR73 ? { version: 1, seed: m.mazeR73.seed } : { version: 1, seed: 0 };
         barrier(room, m.regionId, 'map', true, m.layer || room.layer); return;
       case 'loaded':
         if (!epochOK()) return;

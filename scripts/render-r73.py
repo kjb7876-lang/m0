@@ -11,6 +11,12 @@ def once(source, old, new):
 
 
 def transform(source):
+    source = once(source, 'function explorationLayout(id,theme=',
+                  (ROOT / 'client-source/maze-rooms-r73.js').read_text() + '\nfunction explorationLayout(id,theme=')
+    source = once(source, 'return refineRegionalLayout55({...core,', 'return refineRegionalLayout55(mazeRoomsR73({...core,')
+    source = once(source, 'originalPropsRelocated:false},theme,safe);', 'originalPropsRelocated:false},meta.seedR73,id),theme,safe);')
+    source = once(source, "const worldKey=frame.layer+':'+frame.zone;if(this.lastZone!==worldKey){this.clearScene();this.lastZone=worldKey;}",
+                  "const worldKey=frame.layer+':'+frame.zone,epochR73=Number(frame.mazeGenerationR73)||0,resetR73=this.mazeGenerationR73!==epochR73;if(this.lastZone!==worldKey||this.mazeLayoutR73!==frame.exploration||resetR73){this.clearScene();if(resetR73)this.chunks.saved.clear();this.lastZone=worldKey;this.mazeGenerationR73=epochR73;this.mazeLayoutR73=frame.exploration;}this.currentMazeR73=frame.exploration?.mazeR73||null;")
     start = source.index('function contextualWallOcclusion54(renderer,frame){')
     end = source.index('\nclass ThreeRenderer', start)
     source = source[:start] + (ROOT / 'client-source/wall-visibility-r73.js').read_text() + source[end:]
@@ -27,7 +33,7 @@ def transform(source):
     source = once(source, 'const material=renderer.wallMaterial.clone(),trim=renderer.regionalTrimMaterial55.clone();',
                   'const material=cloneSpatialMaterialR73(renderer.wallMaterial),trim=cloneSpatialMaterialR73(renderer.regionalTrimMaterial55);')
     source = once(source, 'window.StoryPhase1=Object.freeze({mapPaletteR71,',
-                  'window.StoryPhase1=Object.freeze({coalesceMaterialGroupsR73,cloneSpatialMaterialR73,mapPaletteR71,')
+                  'window.StoryPhase1=Object.freeze({mazeRoomsR73,coalesceMaterialGroupsR73,cloneSpatialMaterialR73,mapPaletteR71,')
     source = once(source, 'regional55:this.regionalStats55||null,',
-                  'terrainGroupsR73:{before:[...this.wallRows.values()].reduce((n,e)=>n+(e.mesh.userData.groupsR73?.before||e.mesh.geometry.groups.length),0),after:[...this.wallRows.values()].reduce((n,e)=>n+e.mesh.geometry.groups.length,0),indexOrderPreserved:true},wallVisibilityR73:this.occlusionStats54||null,regional55:this.regionalStats55||null,')
+                  'mazeR73:this.currentMazeR73||null,mazeGenerationR73:this.mazeGenerationR73,terrainGroupsR73:{before:[...this.wallRows.values()].reduce((n,e)=>n+(e.mesh.userData.groupsR73?.before||e.mesh.geometry.groups.length),0),after:[...this.wallRows.values()].reduce((n,e)=>n+e.mesh.geometry.groups.length,0),indexOrderPreserved:true},wallVisibilityR73:this.occlusionStats54||null,regional55:this.regionalStats55||null,')
     return source

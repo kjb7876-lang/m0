@@ -1,4 +1,4 @@
-# StoryWorld R62 무료 4인 중계 서버
+# StoryWorld R73 무료 4인 중계 서버
 
 게임은 GitHub Pages, 이 Node.js + ws 서버는 Render Free에 별도로 배포합니다. **이 폴더는 배포 준비물이며 실제 업로드·공개 배포는 하지 않았습니다.** 사용자 승인을 받은 스토리월드 전용 저장소에만 올리고 `hapil1` 및 비공개 projection33 백업과 섞지 않습니다.
 
@@ -56,3 +56,9 @@ GitHub 저장소가 비공개여도 일반 Pages에 게시하는 HTML·JS·이�
 `npm test`는 실제 로컬 WebSocket 연결로 최대 4명, 5번째 거절, 게임/빌드/프로토콜 분리, 방장 권한, 시퀀스/epoch, 로딩 장벽, 늦은 참가, 재접속/토큰 교체, 방장 이탈, 잘못된 메시지·대형 메시지·빈도 제한, 프로덕션 origin/TLS 검사, 서버 종료를 검증합니다. 이 테스트 자체는 게임 맵 지원·GPU 렌더링·서로 다른 네트워크의 원격 플레이를 증명하지 않습니다. 게임 전체 검증표와 공개 배포 결과는 루트 보고서에서 별도로 확인합니다.
 
 공식 참고: [Render Free](https://render.com/docs/free), [Render WebSockets](https://render.com/docs/websocket), [Render Node version](https://render.com/docs/node-version), [ws releases](https://github.com/websockets/ws/releases). 문서 확인 기준 2026-10-16.
+
+## R73 후속 후보 상태
+
+전송 빌드는 R73R1입니다. 구형 클라이언트와 새 시드 지형이 한 방에 섞이지 않도록 버전을 구분합니다. 내부 R62 협동 저장 형식은 보존합니다. 방장만 유한한 uint32 시드를 전달하며 서버는 지형이나 해금 규칙을 직접 만들지 않습니다.
+
+이 저장소는 기존 StoryWorld 서비스의 후속 코드입니다. 새 서비스를 만들지 않았습니다. 기존 공개 /health 읽기는 403으로 차단되어 실제 서비스 버전 및 배포 상태를 확인하지 못했습니다. 코드의 자동 배포 선언을 실제 배포 성공으로 보지 않습니다. 공개 클라이언트/서버의 버전 전환은 기존 서비스 접근과 최종 검증 후 함께 처리해야 합니다.

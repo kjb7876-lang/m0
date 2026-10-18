@@ -11,4 +11,4 @@ cp -a _pages _r72
 node --test scripts/r72.cpu.test.mjs | tee out/r73/r72-cpu.log
 python3 scripts/apply-r73.py --site _pages/docs | tee out/r73/build.json
 node --check _pages/docs/dist/phase1.js
-node --test scripts/r73.cpu.test.mjs scripts/r73-slots.cpu.test.mjs scripts/r73-dom.cpu.test.mjs | tee out/r73/cpu.log
+node --test scripts/r73.cpu.test.mjs scripts/r73-slots.cpu.test.mjs scripts/r73-dom.cpu.test.mjs scripts/r73-maze.cpu.test.mjs | tee out/r73/cpu.log

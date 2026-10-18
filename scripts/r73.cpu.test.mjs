@@ -6,6 +6,7 @@ import * as T from '../_pages/docs/vendor/three/build/three.core.js';
 const renderer=fs.readFileSync('_pages/docs/dist/phase1.js','utf8'),context={window:{},console,URL,performance,Float32Array};vm.createContext(context);vm.runInContext(renderer,context);const api=context.window.StoryPhase1;
 test('save lifecycle wraps the full compiled campaign, including late R72 arrival and golden save hooks',()=>{
  const html=fs.readFileSync('_pages/docs/index.html','utf8'),ids=[...html.matchAll(/<script id="([^"]+)"/g)].map(m=>m[1]);
+ let parsed=0;for(const m of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){if(/type=["']application\/json/.test(m[1]))continue;new vm.Script(m[2]);parsed++;}assert.ok(parsed>75);
  assert.deepEqual(ids.slice(-3),['golden-thread-r72','portal-arrival-r73','save-slots-r73']);
  assert.ok(ids.indexOf('save-slots-r73')>ids.indexOf('coop-sim-r62'));
 });

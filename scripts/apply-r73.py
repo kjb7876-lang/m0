@@ -26,6 +26,30 @@ def build(site):
     if html.count('  function recordDomImages5(root, prefix) {') != 1:
         raise RuntimeError('R73 DOM image evidence anchor drift')
     html = html[:old_start] + (ROOT / 'client-source/dom-image-evidence-r73.js').read_text() + '\n' + html[old_end:]
+    anchor = '<script id="coop-sim-r62">'
+    if html.count(anchor) != 1:
+        raise RuntimeError('R73 seed save capture anchor drift')
+    html = html.replace(anchor, '<script id="maze-state-r73">\n' + (ROOT / 'client-source/maze-state-r73.js').read_text() + '\n</script>\n' + anchor)
+    old = 'const layouts=new Map();const get=id=>{if(!layouts.has(id)){const d=regionById[id];layouts.set(id,api.explorationLayout(id,d?.theme,d?.safe,d?.meta));}return layouts.get(id);};'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 layout cache anchor drift')
+    html = html.replace(old, "const layouts=new Map();let layoutRunR73=null;const get=(id,l=layer)=>{const run=window.__STORYWORLD_MAZE_R73__?.run()||0;if(layoutRunR73!==run){layouts.clear();layoutRunR73=run;}const seed=window.__STORYWORLD_MAZE_R73__?.seed(id,l)||0,key=id+':'+seed;let value=layouts.get(key);if(value)layouts.delete(key);else{const d=regionById[id];value=api.explorationLayout(id,d?.theme,d?.safe,{...d?.meta,seedR73:seed});}layouts.set(key,value);while(layouts.size>128)layouts.delete(layouts.keys().next().value);return value;};")
+    old = 'r.exploration=get(r.id);'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 layer-specific layout anchor drift')
+    html = html.replace(old, 'r.exploration=get(r.id,r.layer);')
+    old = 'hospitalFocus13:window.__STORYWORLD_HOSPITAL13__?.focus()||[],exploration:'
+    if html.count(old) != 1:
+        raise RuntimeError('R73 scene generation snapshot anchor drift')
+    html = html.replace(old, 'mazeGenerationR73:window.__STORYWORLD_MAZE_R73__?.generation()||0,' + old)
+    old = "g.filter=(layer==='DREAM'?'saturate(.62) hue-rotate(12deg) brightness(.88)':'saturate(.83) brightness(.94)')"
+    if html.count(old) != 1:
+        raise RuntimeError('R73 original background grade anchor drift')
+    html = html.replace(old, "g.filter=(layer==='DREAM'?'saturate(.70) hue-rotate(12deg) brightness(.64)':'saturate(.85) brightness(.70)')")
+    spec = importlib.util.spec_from_file_location('coop_r73', ROOT / 'scripts/coop-r73.py')
+    coop = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(coop)
+    html = coop.transform(html)
     # Route only the normal native save and its backup. The immutable legacy
     # key and independently captured 777 SLOT retain their original meanings.
     html = html.replace('localStorage.getItem(SAVE)', 'localStorage.getItem(normalSaveKeyR73())')

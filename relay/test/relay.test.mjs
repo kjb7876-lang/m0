@@ -50,6 +50,16 @@ async function fixture(t, options = {}) {
 const sampleState = (epoch, seq = 1) => ({ version: 1, epoch, seq, zone: 'ep1a09', layer: 'STORY', time: 1,
   players: [{ id: 'hero', x: 15, y: 15, hp: 100 }], enemies: [{ id: 'boss', hp: 6000 }], shots: [], hazards: [], effects: [], room: { cleared: false }, progress: { STORY: {}, DREAM: {} } });
 
+test('host maze seed is strict, epoch-bound and retained through late join and reconnect',async t=>{
+ const f=await fixture(t),host=await f.create(),guest=await f.join(host);guest.send('profile',{ready:true});await host.get('lobby',m=>m.players.length===2&&m.players.every(p=>p.ready));
+ for(const mazeR73 of [{},{version:1,seed:-1},{version:1,seed:4294967296},{version:2,seed:7},{version:1,seed:7,geometry:[]}]){host.send('start',{regionId:'ep1a09',mazeR73});assert.equal((await host.get('error')).code,'MAZE_INVALID');}
+ const first={version:1,seed:42};host.send('start',{regionId:'ep1a09',mazeR73:first});for(const c of [host,guest]){assert.deepEqual((await c.get('transition')).mazeR73,first);c.send('loaded',{epoch:1});}for(const c of [host,guest])await c.get('all_loaded');
+ guest.send('transition',{epoch:2,regionId:'ep1b09',mazeR73:{version:1,seed:99}});assert.equal((await guest.get('error')).code,'HOST_ONLY');
+ const second={version:1,seed:0xffffffff};host.send('transition',{epoch:2,regionId:'ep1b09',mazeR73:second});for(const c of [host,guest]){const m=await c.get('transition');assert.equal(m.epoch,2);assert.deepEqual(m.mazeR73,second);c.send('loaded',{epoch:2});}for(const c of [host,guest])await c.get('all_loaded');
+ const late=await f.join(host,'뒤늦은친구');assert.deepEqual(late.welcome.mazeR73,second);for(const c of [host,guest,late]){assert.deepEqual((await c.get('transition')).mazeR73,second);c.send('loaded',{epoch:2});}for(const c of [host,guest,late])await c.get('all_loaded');
+ const saved=late.welcome;await late.close();const resumed=await f.open();resumed.send('reconnect',{...PROTOCOL,code:saved.code,playerId:saved.selfId,token:saved.resumeToken});assert.deepEqual((await resumed.get('welcome')).mazeR73,second);assert.deepEqual((await resumed.get('transition')).mazeR73,second);
+});
+
 test('2 to 4 players, readiness, distinct input identity, shared snapshots and single event relay', async t => {
   const f = await fixture(t), host = await f.create(), g1 = await f.join(host);
   host.send('start', { regionId: 'ep1a09' }); assert.equal((await host.get('error')).code, 'NOT_READY');
@@ -73,7 +83,7 @@ test('fifth player refused; game, protocol and build isolation', async t => {
   await f.join(host); await f.join(host); await f.join(host);
   const fifth = await f.open(); fifth.send('join', { ...PROTOCOL, code: host.welcome.code, nick: '다섯', character: 'neon' });
   assert.equal((await fifth.get('error')).code, 'ROOM_FULL');
-  for (const mismatch of [{ gameId: 'hapil' }, { build: 'R61' }, { protocol: 2 }]) {
+  for (const mismatch of [{ gameId: 'hapil' }, { build: 'R61' }, { build: 'R63R1' }, { protocol: 2 }]) {
     const c = await f.open(); c.send('join', { ...PROTOCOL, ...mismatch, code: host.welcome.code, nick: '다른게임', character: 'neon' });
     assert.equal((await c.get('error')).code, 'VERSION_MISMATCH');
   }
