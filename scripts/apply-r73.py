@@ -21,6 +21,11 @@ def build(site):
     spec.loader.exec_module(module)
     renderer = module.transform(original['dist/phase1.js'].decode()).encode()
     html = original['index.html'].decode()
+    old_start = html.index('  function recordDomImages5(root, prefix) {')
+    old_end = html.index('  const openPanelBase5 = openPanel;', old_start)
+    if html.count('  function recordDomImages5(root, prefix) {') != 1:
+        raise RuntimeError('R73 DOM image evidence anchor drift')
+    html = html[:old_start] + (ROOT / 'client-source/dom-image-evidence-r73.js').read_text() + '\n' + html[old_end:]
     # Route only the normal native save and its backup. The immutable legacy
     # key and independently captured 777 SLOT retain their original meanings.
     html = html.replace('localStorage.getItem(SAVE)', 'localStorage.getItem(normalSaveKeyR73())')
