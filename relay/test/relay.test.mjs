@@ -274,4 +274,6 @@ test('golden design commands preserve actor authority and reject arbitrary state
  guest.send('command',{epoch:1,seq:1,command:{kind:'golden',action}});const forwarded=await host.get('command');assert.equal(forwarded.playerId,guest.welcome.selfId);assert.deepEqual(forwarded.command.action,action);
  for(const bad of [{...action,hp:100},{op:'upgrade',key:'points'},{...action,strokes:[Array.from({length:193},()=>({x:0,y:0}))]},{...action,strokes:[[{x:0,y:0},{x:2,y:0}]]},{op:'learn',points:0}]){guest.send('command',{epoch:1,seq:2,command:{kind:'golden',action:bad}});assert.equal((await guest.get('error')).code,'COMMAND_INVALID');}
  guest.send('command',{epoch:1,seq:1,command:{kind:'golden',action:{op:'learn'}}});assert.equal((await guest.get('error')).code,'STALE_SEQUENCE');
+ guest.send('input',{epoch:1,seq:1,input:{goldenCast:true,goldenAim:{x:15.5,y:19}}});const aim=await host.get('input');assert.deepEqual(aim.input.goldenAim,{x:15.5,y:19});assert.equal(aim.playerId,guest.welcome.selfId);
+ for(const goldenAim of [{x:Infinity,y:0},{x:101,y:0},{x:0,y:0,damage:100},{x:'15',y:0}]){guest.send('input',{epoch:1,seq:2,input:{goldenCast:true,goldenAim}});assert.equal((await guest.get('error')).code,'INPUT_INVALID');}
 });

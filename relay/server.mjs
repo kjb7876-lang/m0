@@ -42,11 +42,12 @@ function validProfile(m, partial = false) {
 function validInput(input) {
   if (!record(input)) return false;
   const flags = ['attack', 'guard', 'blink', 'special', 'ego', 'interact', 'autoBasic', 'autoSkill', 'threadDance', 'goldenCast', 'goldenSecond'];
-  if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', ...flags].includes(k))) return false;
+  if (!Object.keys(input).every(k => ['moveX', 'moveY', 'target', 'route', 'skillSlot', 'goldenAim', ...flags].includes(k))) return false;
   if (input.skillSlot !== undefined && !['w', 'e', 'r'].includes(input.skillSlot)) return false;
   for (const axis of ['moveX', 'moveY']) if (input[axis] !== undefined && !(typeof input[axis] === 'number' && Number.isFinite(input[axis]) && Math.abs(input[axis]) <= 1)) return false;
   for (const key of flags) if (input[key] !== undefined && typeof input[key] !== 'boolean') return false;
   if (input.target !== undefined && input.target !== null && !string(input.target, 128)) return false;
+  if(input.goldenAim!==undefined&&!(record(input.goldenAim)&&Object.keys(input.goldenAim).length===2&&['x','y'].every(k=>Number.isFinite(input.goldenAim[k])&&Math.abs(input.goldenAim[k])<=100)))return false;
   if (input.route !== undefined && input.route !== null && !(record(input.route) && Object.keys(input.route).every(k => ['x','y'].includes(k)) && ['x','y'].every(k => typeof input.route[k] === 'number' && Number.isFinite(input.route[k]) && input.route[k] >= 0 && input.route[k] <= 100))) return false;
   return safeJSON(input, 64, 3);
 }

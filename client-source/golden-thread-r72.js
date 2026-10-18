@@ -43,10 +43,10 @@
   if(!e){fx('goldenThreadR72',v.b.x,v.b.y,{life:.4,goldenR72:data,asset:null});e=effects.at(-1);if(e?.type==='goldenThreadR72')pool[slot]=e;}else{e.x=v.b.x;e.y=v.b.y;e.age=0;e.life=.4;e.goldenR72=data;if(!effects.includes(e)){if(effects.length>=(settings.lowFx?80:160))effects.shift();effects.push(e);}}
  }
  function cast(index=0,aim=null,manual=true){
-  const p=current();if(guest()){if(!coop().inspect().guestInputReady||modal||loading)return false;p.pendingInputR62??={};p.pendingInputR62[index===1?'goldenSecond':'goldenCast']=true;return true;}
+  const p=current();if(guest()){if(!coop().inspect().guestInputReady||modal||loading)return false;p.pendingInputR62??={};p.pendingInputR62[index===1?'goldenSecond':'goldenCast']=true;if(aim&&Number.isFinite(aim.x)&&Number.isFinite(aim.y))p.pendingInputR62.goldenAim={x:aim.x,y:aim.y};return true;}
   const s=state(p);if(!p||!started||loading||modal||safeRegion()||interrupted(p)||casts.has(p)||time-(p.threadDanceAtR63??-Infinity)<3.5||(p.goldenReadyAtR72||0)>time||!s.learned){if(manual)toast('필살검무의 습득·장착·재사용 상태를 확인하세요.',2);return false;}
   const d=s.designs.find(d=>d.id===s.equipped[index]);if(!d){if(manual)toast('도안을 먼저 장착하세요.',2);return false;}
-  const selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'),near=liveEnemies().filter(e=>distance(p,e)<=12).sort((a,b)=>distance(p,a)-distance(p,b))[0],anchor=selected||aim||near;
+  const selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'),near=liveEnemies().filter(e=>distance(p,e)<=12).sort((a,b)=>distance(p,a)-distance(p,b))[0],anchor=aim||selected||near;
   if(!anchor||!Number.isFinite(anchor.x)||!Number.isFinite(anchor.y)||distance(p,anchor)>12){if(manual)toast('12m 안의 적을 선택하거나 조준점을 지정하세요.',2);return false;}
   const stats=C.stats(s),origin={x:p.x,y:p.y},plan=C.plan(d.strokes,anchor,stats.size,q=>safe(q),clear,origin);
   if(!plan){lastResult=fail('안전한 검무 공간이 없습니다. 자원과 재사용을 소비하지 않았습니다.');if(manual)toast(lastResult.message,3);return false;}
@@ -103,7 +103,7 @@
  }
  const menuBase=showMenu;showMenu=function(...a){const result=menuBase.apply(this,a);if(started&&!storyScene){const actions=$('panel')?.querySelector('.actions');if(actions&&!$('goldOpen')){const b=document.createElement('button');b.id='goldOpen';b.textContent='황금실 필살검무 · 제작·관리';b.onclick=()=>manage();actions.appendChild(b);}}return result;};
  const upgradesBase=showUpgrades;showUpgrades=function(...a){const result=upgradesBase.apply(this,a),actions=$('panel')?.querySelector('.actions');if(actions){const b=document.createElement('button');b.id='goldPassiveOpen';b.textContent='황금실 필살검무';b.onclick=()=>manage();actions.appendChild(b);}return result;};
- let groundAim=null;canvas.addEventListener('contextmenu',e=>{if(started&&!modal&&!loading){e.preventDefault();const r=canvas.getBoundingClientRect();groundAim=unproject(e.clientX-r.left,e.clientY-r.top);}});
+ let groundAim=null;canvas.addEventListener('pointerdown',e=>{if(e.button===0)groundAim=null;});canvas.addEventListener('contextmenu',e=>{if(started&&!modal&&!loading){e.preventDefault();const r=canvas.getBoundingClientRect();groundAim=unproject(e.clientX-r.left,e.clientY-r.top);}});
  document.addEventListener('keydown',e=>{if(e.code!=='KeyG'||e.repeat||e.target?.matches?.('input,textarea,select,[contenteditable="true"]'))return;e.preventDefault();e.stopImmediatePropagation();if(e.altKey)manage();else cast(e.shiftKey?1:0,groundAim);},true);
  const hud=document.createElement('div');hud.id='goldHudR72';hud.style.cssText='position:fixed;right:max(10px,env(safe-area-inset-right));top:80px;z-index:8;display:none;gap:4px;font-size:11px';hud.innerHTML='<button id="goldHudOpen">황금실 제작</button><button id="goldHudCast">G · 발동</button><button id="goldHudSecond">2번 도안</button>';$('stage').appendChild(hud);button('goldHudOpen',()=>manage());button('goldHudCast',()=>cast(0));button('goldHudSecond',()=>cast(1));
  const hudBase=updateHUD;updateHUD=function(...a){const result=hudBase.apply(this,a);hud.style.display=started&&!loading&&!modal?'flex':'none';if(started&&player){const p=local(),s=state(p),cd=Math.max(0,(p.goldenReadyAtR72||0)-time),b=$('goldHudCast');b.textContent=cd>0?'황금실 '+Math.ceil(cd)+'초':'황금실 발동';$('goldHudSecond').style.display=C.stats(s).equip>1?'':'none';}return result;};
