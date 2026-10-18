@@ -21,6 +21,30 @@ def build(site):
     spec.loader.exec_module(module)
     renderer = module.transform(original['dist/phase1.js'].decode()).encode()
     html = original['index.html'].decode()
+    # Route only the normal native save and its backup. The immutable legacy
+    # key and independently captured 777 SLOT retain their original meanings.
+    html = html.replace('localStorage.getItem(SAVE)', 'localStorage.getItem(normalSaveKeyR73())')
+    html = html.replace('localStorage.setItem(SAVE,', 'localStorage.setItem(normalSaveKeyR73(),')
+    html = html.replace('localStorage.removeItem(SAVE)', 'localStorage.removeItem(normalSaveKeyR73())')
+    html = html.replace('localStorage.getItem(backupKey)', 'localStorage.getItem(normalSaveKeyR73("backup"))')
+    html = html.replace('localStorage.setItem(backupKey,', 'localStorage.setItem(normalSaveKeyR73("backup"),')
+    anchor = "const SAVE='hapil.storyworld.canonical-r54.20261016.save',"
+    if html.count(anchor) != 1:
+        raise RuntimeError('R73 normal save anchor drift')
+    html = html.replace(anchor, "function normalSaveKeyR73(kind='save'){return window.__STORYWORLD_SAVE_SLOTS_R73__?.key(kind)||(kind==='backup'?SAVE+'.previous':SAVE);}\n" + anchor)
+    # Keep the old target save until a complete new journey has actually saved.
+    old = "localStorage.removeItem(normalSaveKeyR73());holdSave=true;stage='첫 기억"
+    if html.count(old) != 1:
+        raise RuntimeError('R73 new journey transaction anchor drift')
+    html = html.replace(old, "holdSave=true;stage='첫 기억")
+    old = "stage='playing';if(!storyScene)closePanel(true);saveGame(false);note('new-campaign'"
+    if html.count(old) != 1:
+        raise RuntimeError('R73 new journey commit anchor drift')
+    html = html.replace(old, "stage='playing';if(!storyScene)closePanel(true);if(!saveGame(false))throw Error('새 여정을 저장하지 못했습니다. 기존 진행은 보존합니다.');note('new-campaign'")
+    fragment = (ROOT / 'client-source/save-slots-r73.js').read_text()
+    if '</script' in fragment.lower() or html.count('</body>') != 1:
+        raise RuntimeError('Unsafe R73 script fragment')
+    html = html.replace('</body>', '<script id="save-slots-r73">\n' + fragment + '\n</script>\n</body>')
     if html.count('dist/phase1.js?r71=1') != 1:
         raise RuntimeError('R73 renderer cache anchor drift')
     html = html.replace('dist/phase1.js?r71=1', 'dist/phase1.js?r73=1').encode()
