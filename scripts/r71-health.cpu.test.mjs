@@ -5,12 +5,28 @@ import vm from 'node:vm';
 import {test} from 'node:test';
 
 const helper=fs.readFileSync(new URL('../client-source/health-r71.js',import.meta.url),'utf8');
+const campaign=fs.readFileSync(new URL('../client-source/campaign-combat-r63r1.js',import.meta.url),'utf8');
+const r61=fs.readFileSync(new URL('../client-source/scale-melee-r61.js',import.meta.url),'utf8');
+function sourceBlock(source,prefix,label){
+ const lines=source.split('\n'),start=lines.findIndex(line=>line.startsWith(prefix));assert.notEqual(start,-1,`${label} source anchor must exist: ${prefix}`);
+ let depth=0;for(let i=start;i<lines.length;i++){for(const c of lines[i]){if(c==='{')depth++;else if(c==='}')depth--;}if(depth===0)return lines.slice(start,i+1).join('\n').trim();}
+ throw new Error(`Unclosed ${label} source block: ${prefix}`);
+}
+const nativeR63Scale=sourceBlock(campaign,' function scaleEnemy(','R63');
+const r61Line=prefix=>r61.split('\n').find(line=>line.startsWith(prefix))?.trim();
+const nativeR61Sources=[
+ r61Line(' const finite='),r61Line(' const config='),r61Line(' const metrics='),
+ r61Line(' const major='),r61Line(' function progression('),r61Line(' function pressure('),
+ r61Line(' const hash='),r61Line(' function expectedHeight('),r61Line(' function contract('),
+ sourceBlock(r61,' function normalize(','R61'),
+];
+assert.ok(nativeR61Sources.every(Boolean),'R61 room-health source anchors must exist');
 const sourcePath=new URL('../_r70/docs/index.html',import.meta.url);
 const baseline=fs.readFileSync(sourcePath,'utf8');
 const pyTransform=`import importlib.util,sys\nspec=importlib.util.spec_from_file_location('health_r71','scripts/health-r71.py')\nm=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nsys.stdout.write(m.transform_html(sys.stdin.read()))`;
 
 function fixture({coopFacade=false}={}){
- const window={},effects=[],enemy={id:'enemy-boss',boss:true,x:15,y:14,maxHp:12345,hp:12345,difficultyBaseHpR63:12345,difficultyFactorR63:1};
+ const window={__STORYWORLD_STORY_PROFILE_R54__:{campaignOrder:Array.from({length:63},(_,i)=>i===1?'dist00':`region-${i}`)}},effects=[],enemy={id:'enemy-boss',boss:true,x:15,y:14,maxHp:12345,hp:12345,difficultyBaseHpR63:12345,difficultyFactorR63:1};
  let player={id:'local',hero:'hwando',x:15,y:15,hp:193,level:5,upgrades:{vital:2},progressionR62:{ranks:{endlessVital:2}},healthR71Applied:false,invincible:0};
  let time=0,mode='off',zone='arena',layer='STORY',room={id:zone,layer,enemies:[enemy]};
  const context={window,console,Math,Number,JSON,Map,Set,WeakMap,Promise,
@@ -23,14 +39,17 @@ function fixture({coopFacade=false}={}){
   const playerFacade=new Proxy({}, {get(_t,k){if(k==='__coopFacadeR62')return true;if(k==='toJSON')return()=>activeActor;return activeActor?.[k]},set(_t,k,v){if(activeActor)activeActor[k]=v;return true;}});
   let player=globalThis.__fixture.coopFacade?playerFacade:activeActor;
   const window=globalThis.window,register=()=>({}),ensureImages=()=>Promise.resolve([]),warn=()=>{},readyImage=()=>({image:{}});
-  const progression=window.__STORYWORLD_PROGRESSION_R62__={defs:[{id:'endlessVital',text:'',maxRank:100}],ranks:(id,p=player)=>Number(p?.progressionR62?.ranks?.[id]||0)};
+  const progressionR62Fixture=window.__STORYWORLD_PROGRESSION_R62__={defs:[{id:'endlessVital',text:'',maxRank:100}],ranks:(id,p=player)=>Number(p?.progressionR62?.ranks?.[id]||0)};
   const withPlayer=(p,fn)=>{const oldActor=activeActor,oldPlayer=player;activeActor=p;if(!globalThis.__fixture.coopFacade)player=p;try{return fn()}finally{activeActor=oldActor;player=oldPlayer;}};
   window.__STORYWORLD_COOP_SIM_R62__={mode:()=>mode,withPlayer,currentPlayer:()=>activeActor,players:()=>[activeActor,...(globalThis.__fixture.extraActors||[])]};
-  function maxHP(){return 260+35*Number(player?.upgrades?.vital||0)+5*(Number(player?.level||1)-1)+18*progression.ranks('endlessVital',player)}
+  function maxHP(){return 260+35*Number(player?.upgrades?.vital||0)+5*(Number(player?.level||1)-1)+18*progressionR62Fixture.ranks('endlessVital',player)}
   function freshPlayer(){return{hero:'hwando',hp:260,level:1,upgrades:{}}}
-  function scaleEnemy(e){const factor=Number(e?.difficultyFactorR63)||1,base=Number(e?.difficultyBaseHpR63)||e?.maxHp;if(!e)return false;const f=Number(e.hp)/Number(e.maxHp);e.difficultyBaseHpR63=base;e.maxHp=base*factor;e.hp=e.maxHp*f;return true}
+  const TIERS=Object.freeze({easy:{hp:.2},normal:{hp:.25},hard:{hp:.4}});
+  const validTier=k=>Object.prototype.hasOwnProperty.call(TIERS,k)?k:'normal';
+  ${nativeR63Scale}
+  ${nativeR61Sources.join('\n  ')}
   function actor3(def,id){return{id,boss:true,maxHp:1000,hp:1000}}
-  function makeRoom(id){return{id,layer,enemies:[]}}
+  function makeRoom(id){const boss={id:id+':'+id+'-boss',boss:true,maxHp:12000,hp:12000,damage:18,combatProfile:{spriteRect:{height:1}}},r={id,layer,enemies:[boss]};normalize(boss,r);return r}
   function summon3(){return true}
   function fx(type,x,y,options={}){const e={type,x,y,...options,age:0,life:options.life||.3};if(mode!=='off')e.coopPlayerR62=activeActor?.coopIdR62;effects.push(e);return e}
   function project(x,y){return{x:x*20,y:y*20}}
@@ -47,8 +66,8 @@ function fixture({coopFacade=false}={}){
   function showDeath(){} function updateHUD(){} function showUpgrades(){}
   const fixture=globalThis.__fixture;
   Object.defineProperties(fixture,{player:{get:()=>activeActor,set:v=>{activeActor=v;if(!globalThis.__fixture.coopFacade)player=v;}},room:{get:()=>room,set:v=>{room=v;}},time:{get:()=>time,set:v=>{time=v;}},mode:{get:()=>mode,set:v=>{mode=v;}},effects:{get:()=>effects}});
-  fixture.facade=playerFacade;fixture.maxHP=()=>maxHP();fixture.hurt=(...args)=>hurt(...args);fixture.drawEffect=e=>drawEffect(e);
-  fixture.upgradePreview=()=>{showUpgrades();return{vital:UPGRADES.find(u=>u.id==='vital')?.text||'',endless:progression.defs.find(d=>d.id==='endlessVital')?.text||''}};
+  fixture.facade=playerFacade;fixture.maxHP=()=>maxHP();fixture.hurt=(...args)=>hurt(...args);fixture.drawEffect=e=>drawEffect(e);fixture.scaleEnemy=(...args)=>scaleEnemy(...args);fixture.makeRoom=(...args)=>makeRoom(...args);
+  fixture.upgradePreview=()=>{showUpgrades();return{vital:UPGRADES.find(u=>u.id==='vital')?.text||'',endless:progressionR62Fixture.defs.find(d=>d.id==='endlessVital')?.text||''}};
   ${helper}
   fixture.api=window.__STORYWORLD_HEALTH_R71__;
  })();`;
@@ -61,6 +80,7 @@ test('health transform is anchored, fail-closed, and patches exact save/coop/sta
  const good=spawnSync('python3',['-c',pyTransform],{cwd:process.cwd(),input:baseline,encoding:'utf8',maxBuffer:16*1024*1024});
  assert.equal(good.status,0,good.stderr);const html=good.stdout;
  assert.equal((html.match(/R71-HEALTH-BLEED/g)||[]).length,2);
+ assert.ok(!html.includes("healthR71NormalizeRoom(r,'room-create')"),'room creation must defer boss suffix until R63 applies map tier');
  assert.equal((html.match(/healthR71\?\.onAdmittedHit/g)||[]).length,1);
  assert.ok(html.includes("rows.push(...(window.__STORYWORLD_HEALTH_R71__?.statusRows(player)||[]))"));
  assert.ok(html.includes("const actorPublicKeys=['healthR71Applied','healthBleedR71','hero',"));
@@ -107,6 +127,19 @@ test('boss suffix uses the unrounded canonical health, preserves fraction, and r
  assert.equal(b.maxHp,4666);assert.equal(b.hp,2333);assert.equal(b.difficultyBaseHpR63,12345);
  const explicit={id:'persona',persona:true,hp:1000,maxHp:1000,difficultyBaseHpR63:2000,difficultyFactorR63:1};
  api.normalizeBoss(explicit,'phase-rebase');assert.equal(explicit.maxHp,666);assert.equal(explicit.difficultyBaseHpR63,1000);
+});
+
+test('room bosses are suffixed only after R63 tier scaling, not during R61 room-pressure creation',()=>{
+ const f=fixture(),room=f.fixture.makeRoom('dist00'),b=room.enemies[0];
+ // This is the R61 makeRoom output observed in the fresh dist00 path: its
+ // progression health replaces the region builder's value before R63 applies
+ // the .25 normal tier. R71 must leave it alone at creation time.
+ assert.equal(b.maxHp,25686);assert.equal(b.healthR71Adjusted,undefined);
+ room.difficultyR63='normal';f.fixture.room=room;
+ assert.equal(f.fixture.scaleEnemy(b,'normal'),true);
+ assert.equal(b.difficultyBaseHpR63,25686);assert.equal(b.difficultyFactorR63,.25);
+ assert.equal(b.healthR71CanonicalMaxHp,6421.5);assert.equal(b.maxHp,6666);
+ assert.equal(b.hp/b.maxHp,1);assert.equal(b.healthR71Adjusted,true);
 });
 
 test('R61 clones keep their exact 6% owner health and are excluded from boss suffix normalization',()=>{

@@ -2,7 +2,7 @@
 
 ## Status
 
-The paired R70/R71 ABBA benchmark has not run yet. Pages run [39101458143](https://github.com/kjb7876-lang/m0/actions/runs/39101458143) completed with a browser entry-check failure before the performance step; it predates the performance-step reorder. Its artifact contains baseline profiling and browser evidence only, with no paired ABBA result. The measured comparison below remains pending the next CI run after the QA and preview fixes.
+No final-candidate paired ABBA result is available yet. The `146b85…` HTML candidate has a real 4× canonical boss-HP scaling regression (25,686 vs R70 6,421.5) and is pre-fix, not approved. Any measurements for that hash are diagnostic only; the corrected candidate's new HTML hash needs a fresh paired run. Pre-fix paired-profile attempts were Pages [39102585613](https://github.com/kjb7876-lang/m0/actions/runs/39102585613), preflight job `117602971044` under [39103014083](https://github.com/kjb7876-lang/m0/actions/runs/39103014083), and Pages [39103016351](https://github.com/kjb7876-lang/m0/actions/runs/39103016351). The preflight paired-profile job completed successfully; its diagnostic results are below. Keep other completed runner results separate. Earlier runs [39102301547](https://github.com/kjb7876-lang/m0/actions/runs/39102301547) and [39101458143](https://github.com/kjb7876-lang/m0/actions/runs/39101458143) failed browser entry checks before performance; preflight [39102582785](https://github.com/kjb7876-lang/m0/actions/runs/39102582785) failed the R71 canonical `maxHP` check before paired profiling, and baseline job `117602971239` in preflight `39103014083` failed the R71 canonical HP assertion. These runs are excluded from final-candidate claims.
 
 No structural renderer optimization is claimed for R71. The renderer/map work in scope changes Three.js map material treatment for zone readability. It does not change map geometry, renderer fallback, resolution, or effects as a performance shortcut.
 
@@ -29,9 +29,28 @@ The profile summarizer retains the top 35 call-frame rows and reports each row's
 
 `(program)` is unattributed CPU-profile sampling; it is not a GPU timer and does not measure shader time or physical-GPU time. The dominant unattributed samples, software-renderer environment, and relatively small named JavaScript hotspots do not provide evidence for a safe structural optimization. Accordingly, R71 makes no performance-improvement claim based on the profile.
 
-## Paired R70 vs R71 results
+## Pre-fix diagnostic: paired R70 vs R71
 
-Pending the next paired benchmark run and review of its `out/r71/performance.json` artifact. Record the artifact's baseline and candidate hashes, actual browser/device string, per-trial data, and comparison fields here. Keep movement and EGO stress results separate and include draw calls, buffer uploads, and memory/counter deltas where available.
+The successful push-only paired-profile job [117602971044 in run 39103014083](https://github.com/kjb7876-lang/m0/actions/runs/39103014083) ran commit `1143fb53291b7686bc52b94fc3a644e968ac1ac2` with baseline hashes `76791c…aa5f5` / `b87e0f…a6ebf4` and pre-fix candidate hashes `146b85…7cad` / `54dfe2…25c`. It used Playwright 1.56.0 and Chromium 141.0.7390.37 under Ubuntu 22.04.5 with sandboxing enabled. The detected renderer was SwiftShader software rendering. The artifact contains eight full `R71_PERF_RUN` rows, `R71_PERF_RESULT`, hash and browser metadata, and the raw result lines in [`performance-prefixed-146b85.json`](performance-prefixed-146b85.json); artifact ZIP SHA-256 is `61dd9916f9bd227de9cf96778dc0717af962326add6f5f8e25f40e095125b5b6`.
+
+| Scenario | Measure | R70 baseline | Pre-fix R71 | Relative change |
+| --- | --- | ---: | ---: | ---: |
+| Movement | RAF frame interval mean | 424.630 ms | 424.514 ms | −0.027% |
+| Movement | RAF frame p95 (mean of 2 trial p95s) | 466.700 ms | 466.700 ms | unchanged |
+| Movement | JavaScript draw p95 | 47.100 ms | 47.600 ms | +0.500 ms |
+| Movement | GL draw calls / frame | 329.958 | 329.937 | −0.006% |
+| Movement | GL buffer uploads / frame | 205.521 | 205.535 | +0.007% |
+| EGO stress | RAF frame interval mean | 388.100 ms | 392.461 ms | +1.124% |
+| EGO stress | RAF frame p95 (mean of 2 trial p95s) | 458.300 ms | 450.000 ms | −1.811% |
+| EGO stress | JavaScript draw p95 | 44.200 ms | 46.250 ms | +2.050 ms |
+| EGO stress | GL draw calls / frame | 467.180 | 440.902 | −5.625% |
+| EGO stress | GL buffer uploads / frame | 248.537 | 244.656 | −1.563% |
+
+The harness's `regressionFlag` was false for both scenarios because neither mean nor p95 frame interval regressed by more than its 10% threshold. This is not evidence of a general speedup: movement mean/p95 were effectively unchanged, EGO mean was 1.12% slower, and EGO p95 was 1.81% lower. JavaScript draw p95 rose slightly in both scenarios. The candidate is independently not approved because of the HP scaling regression. These measurements describe only the pre-fix hash in this SwiftShader workload and must not be used to approve the corrected runtime.
+
+## Final paired R70 vs R71 results
+
+Pending the corrected candidate's paired benchmark and review of its `out/r71/performance.json` artifact. Record the final artifact's baseline and candidate hashes, actual browser/device string, per-trial data, and comparison fields here. Keep movement and EGO stress results separate and include draw calls, buffer uploads, and memory/counter deltas where available.
 
 | Scenario | Measure | R70 baseline mean | R71 candidate mean | Relative change | Notes |
 | --- | --- | ---: | ---: | ---: | --- |

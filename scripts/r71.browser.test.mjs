@@ -452,6 +452,16 @@ try {
       const state = health.inspect(p);
       return {max: maxHP(), inspect: state.player, norm: health.normalization(p), bosses: state.bosses};
     });
+    console.log('R71_HEALTH_INITIAL', JSON.stringify({
+      baselineHealth,
+      candidate: {
+        playerMaxHp: initial.max,
+        bosses: initial.bosses.map(row => ({
+          id: row.id, maxHp: row.visibleMaxHp, base: row.baseMaxHp, factor: row.factor,
+          canonicalMaxHp: row.canonicalMaxHp, visibleMaxHp: row.visibleMaxHp,
+        })),
+      },
+    }));
     assert.equal(initial.max, 777, 'native PLAYER maxHP must be exactly 777');
     assert.equal(initial.inspect.maxHp, 777);
     assert.equal(initial.inspect.healthR71Applied, true);
@@ -541,11 +551,13 @@ try {
 
     const hit = await page.evaluate(() => {
       auto = false;
+      const originalEnemies = room.enemies, originalEngaged = room.engaged;
       room.engaged = true;
       const p = player;
       p.hp = 700; p.invincible = 0; p.guard = false; p.parry = 0;
       const enemy = room.enemies.find(e => e.hp > 0 && !e.boss && !e.midboss && e.type !== 'ranged');
       if (!enemy) throw new Error('No native melee enemy is available for a real hit fixture');
+      const originalEnemy = {...enemy, aim: enemy.aim && {...enemy.aim}};
       room.enemies = [enemy];
       enemy.x = p.x + .4; enemy.y = p.y; enemy.spawnState = 'active'; enemy.tell = .1;
       enemy.aim = {x: p.x, y: p.y, angle: Math.PI}; enemy.cd = 20;
@@ -556,7 +568,12 @@ try {
         observed = {result, sourceIsRoomEnemy: source === enemy, before, after};
         return result;
       };
-      try { tickEnemies(.2); } finally { hurt = base; }
+      try { tickEnemies(.2); } finally {
+        hurt = base;
+        Object.assign(enemy, originalEnemy);
+        room.enemies = originalEnemies;
+        room.engaged = originalEngaged;
+      }
       const health = window.__STORYWORLD_HEALTH_R71__;
       const rows = health.statusRows(p);
       const state = health.inspect(p);
@@ -586,13 +603,76 @@ try {
     assert.equal(afterUpgrade.max, 777, 'vitality cannot inflate the fixed player max HP');
     assert.equal(afterUpgrade.inspect.maxHp, 777);
 
+    const readBossHealth = () => page.evaluate(() => {
+      const healthRows = window.__STORYWORLD_HEALTH_R71__.inspect(player).bosses;
+      const actors = room.enemies || [];
+      const bosses = healthRows.map(row => {
+        const actor = actors.find(e => e.id === row.id);
+        return {
+          ...row,
+          maxHp: actor?.maxHp,
+          hp: actor?.hp,
+          hpFraction: actor?.maxHp > 0 ? actor.hp / actor.maxHp : null,
+          difficultyBaseHpR63: actor?.difficultyBaseHpR63,
+          difficultyFactorR63: actor?.difficultyFactorR63,
+          healthR71DifficultyFactor: actor?.healthR71DifficultyFactor,
+        };
+      }).sort((a, b) => String(a.id).localeCompare(String(b.id)));
+      return {engaged: room.engaged === true, tier: window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.().tier, bosses};
+    });
+    const bossesBeforeSave = await readBossHealth();
+    assert.equal(bossesBeforeSave.engaged, false, 'the saved dist00 room is inactive, so its hidden bosses cannot take combat hits');
+    assert.ok(bossesBeforeSave.bosses.length > 0, 'restored native room roster retains bosses before marked save');
+    for (const row of bossesBeforeSave.bosses) {
+      assert.ok(Number.isSafeInteger(row.maxHp) && row.maxHp % 1000 === 666, `${row.id} has an actual integer 666-suffix maximum before save`);
+      assert.ok(Number.isFinite(row.baseMaxHp) && row.baseMaxHp > 0 && Number.isFinite(row.canonicalMaxHp) && row.canonicalMaxHp > 0);
+      assert.ok(Number.isFinite(row.factor) && row.factor > 0 && Number.isFinite(row.difficultyBaseHpR63) && row.difficultyBaseHpR63 > 0);
+      assert.ok(Number.isFinite(row.difficultyFactorR63) && row.difficultyFactorR63 > 0);
+      assert.ok(Number.isFinite(row.healthR71DifficultyFactor) && row.healthR71DifficultyFactor > 0);
+      assert.ok(Number.isFinite(row.hp) && row.hp >= 0 && row.hp <= row.maxHp);
+      assert.ok(Number.isFinite(row.hpFraction) && row.hpFraction >= 0 && row.hpFraction <= 1);
+      assert.equal(row.adjusted, true);
+      assert.equal(row.visibleMaxHp, row.maxHp);
+      assert.equal(row.maxHp, suffixFor(row.canonicalMaxHp));
+    }
+    const assertBossStateStable = (before, after, label) => {
+      assert.equal(after.engaged, before.engaged, `${label}: native room engagement state is retained`);
+      assert.equal(after.tier, before.tier, `${label}: native map difficulty tier is retained`);
+      assert.deepEqual(after.bosses.map(row => row.id), before.bosses.map(row => row.id), `${label}: native boss roster is retained`);
+      const afterById = new Map(after.bosses.map(row => [row.id, row]));
+      for (const row of before.bosses) {
+        const restored = afterById.get(row.id);
+        assert.ok(restored, `${label}: ${row.id} is restored`);
+        for (const field of ['maxHp', 'baseMaxHp', 'canonicalMaxHp', 'visibleMaxHp', 'factor', 'difficultyBaseHpR63', 'difficultyFactorR63', 'healthR71DifficultyFactor']) {
+          assert.equal(restored[field], row[field], `${label}: ${row.id} ${field} is not compounded or changed`);
+        }
+        assert.ok(Number.isFinite(restored.hp) && restored.hp >= 0 && restored.hp <= restored.maxHp, `${label}: ${row.id} HP stays within its maximum`);
+        assert.ok(Number.isFinite(restored.hpFraction) && Math.abs(restored.hpFraction - row.hpFraction) <= 1e-8,
+          `${label}: ${row.id} HP fraction is stable through save restore`);
+        assert.equal(restored.adjusted, true, `${label}: ${row.id} remains health-normalized`);
+        assert.ok(Number.isSafeInteger(restored.maxHp) && restored.maxHp % 1000 === 666, `${label}: ${row.id} visible max HP keeps the integer 666 suffix`);
+        assert.equal(restored.visibleMaxHp, restored.maxHp, `${label}: ${row.id} diagnostic and actual max HP agree`);
+        assert.equal(restored.maxHp, suffixFor(restored.canonicalMaxHp), `${label}: ${row.id} max HP still derives from canonical HP`);
+      }
+    };
+
     const newSave = await page.evaluate(() => serializeSave());
     assert.equal(newSave.player.healthR71Applied, true, 'new save stores its health normalization marker');
     await page.evaluate(async save => restoreSave(save), newSave);
     await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
     const afterRestore = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
+    const bossesAfterRestore = await readBossHealth();
+    assertBossStateStable(bossesBeforeSave, bossesAfterRestore, 'first marked-save restore');
     assert.equal(afterRestore.max, 777);
     assert.equal(afterRestore.inspect.maxHp, 777);
+
+    await page.evaluate(async save => restoreSave(save), newSave);
+    await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
+    const afterRestoreAgain = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
+    const bossesAfterRestoreAgain = await readBossHealth();
+    assertBossStateStable(bossesBeforeSave, bossesAfterRestoreAgain, 'second marked-save restore');
+    assert.equal(afterRestoreAgain.max, 777);
+    assert.equal(afterRestoreAgain.inspect.maxHp, 777);
 
     await page.evaluate(async save => restoreSave(save), oldSave);
     await page.waitForFunction(() => window.eval("zone==='dist00' && !loading && !modal"), null, {timeout: 60000});
@@ -606,7 +686,7 @@ try {
     const respawn = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     assert.equal(respawn.max, 777);
     assert.equal(respawn.hp, 777, 'native death-to-hub respawn restores exactly the balanced cap');
-    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', baselineHealth, initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, afterRestore, afterOldRestore, respawn});
+    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', baselineHealth, initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, bossesBeforeSave, bossesAfterRestore, bossesAfterRestoreAgain, afterRestore, afterRestoreAgain, afterOldRestore, respawn});
     assertNoPageErrors(game);
     await closeGame(game);
   }

@@ -264,8 +264,11 @@
  if(healthR71ScaleBase)scaleEnemy=function(e,...args){if(e?.healthR71Adjusted===true){if(Number(e.maxHp)===Number(e.healthR71VisibleMaxHp))healthR71UnapplyBoss(e);else{e.healthR71Adjusted=false;delete e.healthR71CanonicalBaseHp;delete e.healthR71CanonicalMaxHp;delete e.healthR71VisibleMaxHp;}}const result=healthR71ScaleBase.call(this,e,...args);normalizeBoss(e,'difficulty-scale');return result;};
  const healthR71ActorBase=typeof actor3==='function'?actor3:null;
  if(healthR71ActorBase)actor3=function(...args){const e=healthR71ActorBase.apply(this,args);if(e)normalizeBoss(e,'actor-spawn');return e;};
- const healthR71RoomBase=typeof makeRoom==='function'?makeRoom:null;
- if(healthR71RoomBase)makeRoom=function(...args){const r=healthR71RoomBase.apply(this,args);healthR71NormalizeRoom(r,'room-create');return r;};
+ // Do not suffix bosses during makeRoom: R61's room wrapper can replace the
+ // freshly built maxHp with its campaign-pressure value, while R63 applies
+ // the selected map tier only after enterRegion returns. Suffixing here would
+ // make the later tier scaler treat the premature value as its scaled base.
+ // The wrapped R63 scaleEnemy and actor/spawn hooks normalize after scaling.
  const healthR71SummonBase=typeof summon3==='function'?summon3:null;
  if(healthR71SummonBase)summon3=function(...args){const result=healthR71SummonBase.apply(this,args);healthR71NormalizeRoom(room,'summon');return result;};
  for(const name of ['spawnTrial3','spawnCosmic3','preparePersona3'])if(typeof window[name]==='function'){
