@@ -24,6 +24,9 @@ jobs:
           python3 scripts/apply-r71.py --site _pages/docs
           cp -a _pages _r71
           python3 scripts/apply-r72.py --site _pages/docs
+          cp -a _pages _r72
+          python3 scripts/apply-r73.py --site _pages/docs
+          node --test scripts/r73.cpu.test.mjs
       - name: Install sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
@@ -35,7 +38,15 @@ jobs:
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          node scripts/r73-diagnose.mjs | tee out/r73/diagnostic.log
+          R73_COMPARE=1 node scripts/r73-diagnose.mjs | tee out/r73/diagnostic.log
+      - name: Compare actual new game and 777 button journeys
+        if: ${{ !cancelled() }}
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/ui-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r73-ui.mjs | tee out/r73/ui.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
