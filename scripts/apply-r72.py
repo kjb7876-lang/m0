@@ -43,6 +43,11 @@ def transform(html):
     # Keep the 777 slot load after the later title-screen controller replaces loadLocal.
     html = once(html, 'active:()=>enabled,activate,leave,go,panel,applyCaps,inspect:', "active:()=>enabled,activate,leave,go,panel,applyCaps,load:async()=>{const text=localStorage.getItem(SLOT);if(!text)throw Error('777 별도 저장이 없습니다.');return restoreSave(JSON.parse(text));},inspect:")
     html = once(html, 'loadLocal=()=>continueRun();', 'loadLocal=()=>window.__STORYWORLD_CHEAT777__?.active()?window.__STORYWORLD_CHEAT777__.load():continueRun();')
+    # The early 777 closure predates later progression/save schemas. Take and restore
+    # its normal-return checkpoint through the complete current save chain.
+    html = once(html, 'normalReturn=serializeBase();enabled=true;', 'normalReturn=serializeSave();enabled=true;')
+    html = once(html, 'normalReturn=started&&player?serializeBase():raw.cheat777.normalReturn||null;', 'normalReturn=started&&player?serializeSave():raw.cheat777.normalReturn||null;')
+    html = once(html, 'await restoreBase(copy(backup));normalReturn=null;', 'await restoreSave(copy(backup));normalReturn=null;')
     # Existing silver dance cannot interleave teleports with the golden scheduler.
     html = once(html, 'function cast(manual=false){const p=actorNow(),c=', 'function cast(manual=false){const p=actorNow();if(window.__STORYWORLD_GOLDEN_R72__?.isCasting(p))return false;const c=')
     # Update only the cooperative adapter script, leaving older source snapshots untouched.
