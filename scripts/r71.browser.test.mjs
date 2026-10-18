@@ -432,6 +432,12 @@ try {
   {
     const base = await openGame({variant: 'baseline'});
     await enterRegion(base.page, 'dist00');
+    const baselineHealth = await base.page.evaluate(() => ({
+      max: maxHP(),
+      bosses: (room.enemies || []).filter(e => e.boss || e.midboss || e.persona || e.cosmic || e.trial || e.cosmicGuardianR63)
+        .map(e => ({id: e.id, maxHp: e.maxHp, hp: e.hp})),
+    }));
+    assert.ok(baselineHealth.bosses.length > 0, 'R70 dist00 fixture exposes its native midboss for comparison');
     const oldSave = await base.page.evaluate(() => serializeSave());
     assertNoPageErrors(base);
     await closeGame(base);
@@ -443,11 +449,25 @@ try {
       const health = window.__STORYWORLD_HEALTH_R71__;
       const p = player;
       p.hp = 700;
-      return {max: maxHP(), inspect: health.inspect(p).player, norm: health.normalization(p)};
+      const state = health.inspect(p);
+      return {max: maxHP(), inspect: state.player, norm: health.normalization(p), bosses: state.bosses};
     });
     assert.equal(initial.max, 777, 'native PLAYER maxHP must be exactly 777');
     assert.equal(initial.inspect.maxHp, 777);
     assert.equal(initial.inspect.healthR71Applied, true);
+    assert.ok(initial.bosses.length > 0, 'candidate dist00 fixture exposes its native midboss');
+    const baselineBossById = new Map(baselineHealth.bosses.map(row => [row.id, row]));
+    const suffixFor = canonical => Math.max(0, Math.round((canonical - 666) / 1000)) * 1000 + 666;
+    for (const boss of initial.bosses) {
+      const before = baselineBossById.get(boss.id);
+      assert.ok(before, `R71 dist00 actor ${boss.id} has a matching R70 baseline`);
+      assert.ok(Number.isFinite(boss.canonicalMaxHp) && boss.canonicalMaxHp > 0);
+      assert.ok(Number.isSafeInteger(boss.visibleMaxHp));
+      assert.equal(boss.canonicalMaxHp, before.maxHp, `${boss.id} canonical HP matches the native R70 maximum`);
+      assert.equal(boss.visibleMaxHp % 1000, 666, `${boss.id} candidate midboss max HP ends in 666`);
+      assert.equal(boss.visibleMaxHp, suffixFor(boss.canonicalMaxHp), `${boss.id} visible HP is the suffix transform of its canonical maximum`);
+      assert.equal(boss.visibleMaxHp, suffixFor(before.maxHp), `${boss.id} receives the suffix transform from its R70 max HP`);
+    }
 
     await page.evaluate(() => {
       player.hp = maxHP();
@@ -508,7 +528,11 @@ try {
       for (const boss of row.actors) {
         assert.ok(Number.isSafeInteger(boss.maxHp), `${row.id}/${boss.id} visible boss max HP is integer`);
         assert.equal(boss.maxHp % 1000, 666, `${row.id}/${boss.id} max HP must end with 666`);
-        assert.equal(boss.canonicalMaxHp % 1000, 666, `${row.id}/${boss.id} canonical max HP must end with 666`);
+        assert.ok(Number.isFinite(boss.canonicalMaxHp) && boss.canonicalMaxHp > 0,
+          `${row.id}/${boss.id} canonical max HP must be finite and positive`);
+        const expectedVisibleMaxHp = Math.max(0, Math.round((boss.canonicalMaxHp - 666) / 1000)) * 1000 + 666;
+        assert.equal(boss.maxHp, expectedVisibleMaxHp,
+          `${row.id}/${boss.id} visible max HP must apply the canonical suffix transform`);
         assert.equal(boss.visibleMaxHp, boss.maxHp);
         assert.ok(boss.hp > 0 && boss.hp <= boss.maxHp);
       }
@@ -582,7 +606,7 @@ try {
     const respawn = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     assert.equal(respawn.max, 777);
     assert.equal(respawn.hp, 777, 'native death-to-hub respawn restores exactly the balanced cap');
-    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, afterRestore, afterOldRestore, respawn});
+    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', baselineHealth, initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, afterRestore, afterOldRestore, respawn});
     assertNoPageErrors(game);
     await closeGame(game);
   }
@@ -730,7 +754,7 @@ try {
     await closeGame(paletteGame); await closeGame(baseline);
   }
 
-  // A real native boss kill creates a drop in the expanded hospital wing at
+  // A real native enemy kill creates a drop in the expanded hospital wing at
   // world coordinates above 32; the command capture must include icon + label,
   // pickup is one-shot, and its claim survives save/restore.
   {
@@ -742,6 +766,7 @@ try {
     await confirmDifficulty(page, 'ep1a08', 'hard');
     const fixture = await page.evaluate(() => {
       const api = window.__STORYWORLD_PROGRESSION_R71__, r = room;
+      const progression = window.__STORYWORLD_PROGRESSION_R62__;
       const bounds = r.exploration?.bounds;
       if (!r.exploration?.expanded || !bounds || bounds[2] <= 32 || bounds[3] <= 32) throw new Error('Hospital expanded coordinates are unavailable');
       api.syncPointDrops(r);
@@ -763,12 +788,33 @@ try {
       const isBoss = !!(targetEnemy.boss || targetEnemy.midboss || targetEnemy.persona || targetEnemy.cosmic || targetEnemy.trial || targetEnemy.cosmicGuardianR63);
       const killId = `r64:${r.passivePointEpochR64}:kill:${encodeURIComponent(String(targetEnemy.id || 'enemy')).slice(0,720)}`;
       targetEnemy.x = target.x; targetEnemy.y = target.y; targetEnemy.hp = 1; targetEnemy.maxHp = Math.max(1, targetEnemy.maxHp); targetEnemy.deadRecorded = false; targetEnemy.deadAt = null; targetEnemy.visible = true; targetEnemy.disabled = false; targetEnemy.spawnState = 'active';
-      r.engaged = true; player.x = target.x; player.y = target.y; player.hp = maxHP(); player.invincible = 0;
+      const oldInvincible = player.invincible, oldAuto = auto;
+      player.hp = maxHP(); player.invincible = 1e6; auto = false; r.engaged = true;
+      const wasCleared = progression.state(player).clears?.['STORY:ep1a08'] === true;
       const before = player.points, killed = hitEnemy(targetEnemy, 1);
       api.syncPointDrops(r);
       const drop = r.passivePointDropsR64.find(d => d.source === killId);
       const prop = drop && r.props.find(p => p.passivePointDropR64 && p.pointDropIdR64 === drop.id);
-      return {bounds, target, enemy: {id: targetEnemy.id, isBoss, killed, deadRecorded: targetEnemy.deadRecorded, hp: targetEnemy.hp}, killId, drop, prop, pointsBefore: before, pointsAfterKill: player.points};
+      if (!drop) throw new Error('Native kill did not persist its successful seeded point drop');
+      const playerSpots = [];
+      for (const radius of [2.45, 2.5, 2.55]) for (let i = 0; i < 32; i++) {
+        const angle = i * Math.PI / 16;
+        const spot = {x: drop.x + Math.cos(angle) * radius, y: drop.y + Math.sin(angle) * radius};
+        if (spot.x - .2 < bounds[0] || spot.y - .2 < bounds[1] || spot.x + .2 > bounds[2] || spot.y + .2 > bounds[3]) continue;
+        if (blocked(spot.x, spot.y, .2, r) || !clearLine(spot, drop, r)) continue;
+        playerSpots.push({spot, radius});
+      }
+      const safeView = playerSpots.find(({spot}) => {
+        cam.x = spot.x; cam.y = spot.y;
+        const q = project(drop.x, drop.y);
+        return q.x >= -36 && q.x <= W + 36 && q.y >= -40 && q.y <= H + 40;
+      });
+      if (!safeView) throw new Error('No clear, walkable, in-view player position about 2.5 tiles from the native drop');
+      player.x = safeView.spot.x; player.y = safeView.spot.y; cam.x = player.x; cam.y = player.y;
+      const clearNow = progression.state(player).clears?.['STORY:ep1a08'] === true && !wasCleared;
+      const nativeClearAward = clearNow ? api.inspect().difficultyReward : 0;
+      const pointClaimedAtKill = progression.state(player).pointDropClaimsR64?.[drop.id] === true || r.passivePointClaimsR64.includes(drop.id);
+      return {bounds, target, playerSpot: safeView.spot, playerDropDistance: Math.hypot(player.x - drop.x, player.y - drop.y), clearLine: clearLine(player, drop, r), enemy: {id: targetEnemy.id, isBoss, killed, deadRecorded: targetEnemy.deadRecorded, hp: targetEnemy.hp}, killId, drop, prop, pointsBefore: before, pointsAfterKill: player.points, nativeClearAward, pointClaimedAtKill, oldInvincible, oldAuto};
     });
     assert.ok(fixture.target.x > 32 || fixture.target.y > 32, 'native enemy/drop coordinate must use expanded >32 bounds');
     assert.equal(fixture.enemy.killed, true); assert.equal(fixture.enemy.deadRecorded, true);
@@ -776,9 +822,14 @@ try {
     assert.ok(Number.isSafeInteger(fixture.drop.amount) && fixture.drop.amount >= 1 && fixture.drop.amount <= 7);
     assert.ok(fixture.drop.x > 32 || fixture.drop.y > 32, 'the actual drop must persist in expanded coordinates');
     assert.ok(fixture.prop?.visible && fixture.prop.enabled && fixture.prop.path === ASSET_ART && fixture.prop.amountR64 === fixture.drop.amount);
-    assert.equal(fixture.pointsAfterKill, fixture.pointsBefore, 'drop amount is granted on pickup, not kill');
+    assert.ok(fixture.playerDropDistance >= 2.4 && fixture.playerDropDistance <= 2.6, 'the player stays outside pickup range before the pickup assertion');
+    assert.equal(fixture.clearLine, true, 'the drop remains in clear view from a walkable player position');
+    assert.equal(fixture.pointClaimedAtKill, false, 'the native kill does not claim the drop');
+    assert.equal(fixture.pointsAfterKill - fixture.pointsBefore, fixture.nativeClearAward,
+      'the kill checkpoint includes only a native clear reward, if defeating the boss cleared the map');
 
     const visual = await page.evaluate(() => {
+      cam.x = player.x; cam.y = player.y;
       const commands = window.__STORYWORLD_PHASE1__.captureVisual();
       const rows = commands.filter(c => String(c.owner?.id || '').startsWith('r71:point-drop:'));
       return {count: rows.length, kinds: rows.map(c => c.kind), images: rows.filter(c => c.kind === 'image').map(c => c.sourcePath), labels: rows.filter(c => c.kind === 'text').map(c => c.text), diagnostics: window.__STORYWORLD_PROGRESSION_R71__.inspect().pointDrops.rendering};
@@ -828,16 +879,17 @@ try {
     assert.equal(flashlight.beaconOwners.length, 1, 'beacons outside the black flashlight mask must be excluded from the captured frame');
     assert.ok(flashlight.culls > 0, 'a hidden beacon must be culled by visibility geometry');
 
-    const pickup = await page.evaluate(() => {
-      const api = window.__STORYWORLD_PROGRESSION_R71__, id = room.passivePointDropsR64.find(d => d.source?.includes(encodeURIComponent('r71-hidden-visibility-fixture')) === false)?.id;
-      const actual = room.passivePointDropsR64.find(d => d.id && room.props.some(p => p.pointDropIdR64 === d.id));
-      if (!actual) throw new Error('Visible native drop disappeared before pickup');
+    const pickup = await page.evaluate(({dropId, oldInvincible, oldAuto}) => {
+      const api = window.__STORYWORLD_PROGRESSION_R71__;
+      const actual = room.passivePointDropsR64.find(d => d.id === dropId);
+      if (!actual || !room.props.some(p => p.pointDropIdR64 === dropId)) throw new Error('The fixture native drop disappeared before pickup');
       const owner = player, before = owner.points, targetId = actual.id;
-      owner.x = actual.x; owner.y = actual.y;
+      owner.x = actual.x; owner.y = actual.y; owner.invincible = oldInvincible; auto = oldAuto;
       const first = api.collectPointDrops(), afterFirst = owner.points, second = api.collectPointDrops();
       const save = serializeSave();
       return {id: targetId, amount: actual.amount, before, first, afterFirst, second, afterSecond: owner.points, claimed: room.passivePointClaimsR64.includes(targetId), save: JSON.stringify(save)};
-    });
+    }, {dropId: fixture.drop.id, oldInvincible: fixture.oldInvincible, oldAuto: fixture.oldAuto});
+    assert.equal(pickup.id, fixture.drop.id, 'pickup targets the exact native kill drop');
     assert.equal(pickup.first, 1); assert.equal(pickup.afterFirst - pickup.before, pickup.amount);
     assert.equal(pickup.second, 0); assert.equal(pickup.afterSecond, pickup.afterFirst); assert.equal(pickup.claimed, true);
     assert.ok(pickup.save.includes(pickup.id), 'new save contains the point-drop claim');

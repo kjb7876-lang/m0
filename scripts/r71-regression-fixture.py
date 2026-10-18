@@ -6,6 +6,17 @@ import sys
 
 
 R69_QUEUE_MARKER = "const queueR69=()=>delayed.filter(job=>job.owner==='qa-thread-motif-owner');"
+OLD_STARTUP_WAIT = (
+    "  await page.waitForFunction(() => window.eval('started && !loading'), null, { timeout: 20_000 });\n"
+    "  await page.waitForTimeout(800);"
+)
+NEW_STARTUP_WAIT = (
+    "  await page.waitForFunction(() => {\n"
+    "    const profile = window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.();\n"
+    "    return profile?.busy === false && profile.stage === 'playing' && !profile.error &&\n"
+    "      window.eval('started && booted && !loading && !modal && !!player && !!room');\n"
+    "  }, null, { timeout: 60_000 });"
+)
 OLD_TARGETS = (
     "targets=originalEnemies.slice(0,2).map((e,i)=>({...e,id:'qa-thread-target-'+i,"
     "x:origin.x+1+i,y:origin.y,hp:1e7,maxHp:1e7,deadRecorded:false,"
@@ -28,6 +39,7 @@ ORIGINAL_ASSERTIONS = (
     "assert.ok(Math.abs(motifRuntime.ichidanRatio-1.35)<1e-8,",
 )
 NATIVE_PATH_MARKERS = (
+    "assert.equal(result, true, `dist00 entry failed for ${tier}`);",
     "const cast=c.cast(true);",
     "return base.apply(this,arguments);",
     "while(queueR69().length){",
@@ -56,6 +68,8 @@ def main() -> int:
 
     source = path.read_text(encoding="utf-8")
     check_count(source, R69_QUEUE_MARKER, 1, "R69 owned-queue wait (run r69-regression-wait.py first)")
+    check_count(source, OLD_STARTUP_WAIT, 1, "original R65 campaign startup wait")
+    check_count(source, NEW_STARTUP_WAIT, 0, "already patched campaign startup wait")
     check_count(source, OLD_TARGETS, 1, "original two-target dummy fixture")
     check_count(source, NEW_TARGETS, 0, "already patched dummy fixture")
     for marker in NATIVE_PATH_MARKERS:
@@ -63,15 +77,18 @@ def main() -> int:
     for assertion in ORIGINAL_ASSERTIONS:
         check_count(source, assertion, 1, f"original motif assertion {assertion!r}")
 
-    patched = source.replace(OLD_TARGETS, NEW_TARGETS, 1)
+    patched = source.replace(OLD_STARTUP_WAIT, NEW_STARTUP_WAIT, 1)
+    check_count(patched, OLD_STARTUP_WAIT, 0, "unpatched startup wait after replacement")
+    check_count(patched, NEW_STARTUP_WAIT, 1, "readiness-gated startup wait after replacement")
+    patched = patched.replace(OLD_TARGETS, NEW_TARGETS, 1)
     check_count(patched, OLD_TARGETS, 0, "unpatched dummy fixture after replacement")
     check_count(patched, NEW_TARGETS, 1, "patched dummy fixture after replacement")
     for assertion in ORIGINAL_ASSERTIONS:
         check_count(patched, assertion, 1, f"preserved motif assertion {assertion!r}")
     path.write_text(patched, encoding="utf-8")
     print(
-        "R71_REGRESSION_FIXTURE: patched only the two qa-thread-target dummies; "
-        "native cast, delayed queue, hitEnemy base, and exact motif assertions preserved"
+        "R71_REGRESSION_FIXTURE: patched only the native campaign readiness wait and two qa-thread-target dummies; "
+        "dist00 entry assertion, native cast, delayed queue, hitEnemy base, and exact motif assertions preserved"
     )
     return 0
 
