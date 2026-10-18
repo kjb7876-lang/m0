@@ -14,6 +14,8 @@ def transform(source):
     source = once(source, 'f.exploration=source.exploration;', 'f.exploration=source.exploration;f.mazeGenerationR73=Number.isSafeInteger(source.mazeGenerationR73)&&source.mazeGenerationR73>=0?source.mazeGenerationR73:0;')
     source = once(source, 'function explorationLayout(id,theme=',
                   (ROOT / 'client-source/maze-rooms-r73.js').read_text() + '\nfunction explorationLayout(id,theme=')
+    source = once(source, 'function explorationChunk(layout,x,y){',
+                  (ROOT / 'client-source/maze-path-r73.js').read_text() + '\nfunction explorationChunk(layout,x,y){')
     source = once(source, 'return refineRegionalLayout55({...core,', 'return refineRegionalLayout55(mazeRoomsR73({...core,')
     source = once(source, 'originalPropsRelocated:false},theme,safe);', 'originalPropsRelocated:false},meta.seedR73,id),theme,safe);')
     source = once(source, "const worldKey=frame.layer+':'+frame.zone;if(this.lastZone!==worldKey){this.clearScene();this.lastZone=worldKey;}",
