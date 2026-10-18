@@ -192,6 +192,7 @@ jobs:
       - name: Install pinned sandboxed browser
         if: matrix.script != 'cpu'
         run: |
+          npm ci --ignore-scripts --prefix relay
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
       - name: Run required R73 regression scenario

@@ -16,7 +16,7 @@ def transform(source):
     source = once(source, 'return refineRegionalLayout55({...core,', 'return refineRegionalLayout55(mazeRoomsR73({...core,')
     source = once(source, 'originalPropsRelocated:false},theme,safe);', 'originalPropsRelocated:false},meta.seedR73,id),theme,safe);')
     source = once(source, "const worldKey=frame.layer+':'+frame.zone;if(this.lastZone!==worldKey){this.clearScene();this.lastZone=worldKey;}",
-                  "const worldKey=frame.layer+':'+frame.zone,epochR73=Number(frame.mazeGenerationR73)||0,resetR73=this.mazeGenerationR73!==epochR73;if(this.lastZone!==worldKey||this.mazeLayoutR73!==frame.exploration||resetR73){this.clearScene();if(resetR73)this.chunks.saved.clear();this.lastZone=worldKey;this.mazeGenerationR73=epochR73;this.mazeLayoutR73=frame.exploration;}this.currentMazeR73=frame.exploration?.mazeR73||null;")
+                  "const worldKey=frame.layer+':'+frame.zone,epochR73=Number(frame.mazeGenerationR73)||0,resetR73=this.mazeGenerationR73!==epochR73,replaceTerrainR73=this.lastZone===worldKey&&this.mazeLayoutR73!==frame.exploration;if(this.lastZone!==worldKey||replaceTerrainR73||resetR73){this.clearScene();if(resetR73||replaceTerrainR73)this.chunks.saved.clear();this.lastZone=worldKey;this.mazeGenerationR73=epochR73;this.mazeLayoutR73=frame.exploration;}this.currentMazeR73=frame.exploration?.mazeR73||null;")
     start = source.index('function contextualWallOcclusion54(renderer,frame){')
     end = source.index('\nclass ThreeRenderer', start)
     source = source[:start] + (ROOT / 'client-source/wall-visibility-r73.js').read_text() + source[end:]

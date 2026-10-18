@@ -37,6 +37,7 @@ jobs:
           node --test scripts/r73.cpu.test.mjs scripts/r73-slots.cpu.test.mjs scripts/r73-dom.cpu.test.mjs scripts/r73-maze.cpu.test.mjs
       - name: Install sandboxed Chromium
         run: |
+          npm ci --ignore-scripts --prefix relay
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
       - name: Run independent sandboxed browser scenario

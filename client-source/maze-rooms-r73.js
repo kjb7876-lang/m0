@@ -15,7 +15,7 @@ function mazeRoomsR73(base,seed,id=base.id){
   if(delta.length<15||added.size+delta.length>96||delta.some(([x,y])=>!inside(x,y)))continue;
   // Never cut through a native/core structure. All admitted cells are beyond
   // the unchanged native combat arena and are attached to an existing bay.
-  if(base.walls.some(w=>!w.annex&&!w.decorative&&delta.some(([x,y])=>Math.abs(x+.5-w.x)<w.width/2+.5&&Math.abs(y+.5-w.y)<w.depth/2+.5)))continue;
+  if(base.walls.some(w=>(!w.annex||w.decorative)&&delta.some(([x,y])=>Math.abs(x+.5-w.x)<w.width/2+.5&&Math.abs(y+.5-w.y)<w.depth/2+.5)))continue;
   for(const[x,y]of delta){const k=key(x,y);cells.add(k);added.add(k);}rooms.push({x:x0,y:y0,width,depth,anchor:{x:a.x+.5,y:a.y+.5},door:1+(next()%2)});
  }
  if(!rooms.length)return{...base,mazeR73:{version:1,seed,attempts,rooms:[],addedCells:0,newWalls:0}};
