@@ -239,8 +239,8 @@ async function seedTrustedStoryHistory(page, {throughId = null, requireAllBossMa
     const api = window.__STORYWORLD4__;
     if (!api || api.version !== 4) throw Error('The native version-4 save API is unavailable');
     const raw = api.save();
-    if (raw?.version !== 4 || raw?.scope !== 'hapil-storyworld04' || !raw.progress || !raw.rooms) {
-      throw Error('Native save fixture requires the current version-4 scope and full progress/room data');
+    if (raw?.version !== 6 || raw?.scope !== 'hapil.storyworld.depth-full.20261008' || !raw.progress || !raw.rooms || !raw.unlockedRegions) {
+      throw Error('Trusted-history fixture requires the current native version-6 envelope and full progress/room/unlock data');
     }
     const bossMaps = Object.keys(regionById || {}).filter(id => Array.isArray(regionById[id]?.bosses) && regionById[id].bosses.length > 0);
     const order = api.campaignOrder().map(row => row.id);
@@ -266,7 +266,8 @@ async function seedTrustedStoryHistory(page, {throughId = null, requireAllBossMa
     const progression = api.inspect()?.progression;
     const lockedBossMaps = bossMaps.filter(id => !api.isUnlocked(id, 'STORY'));
     return {
-      nativeVersion: raw.version, nativeScope: raw.scope,
+      apiVersion: api.version, nativeVersion: raw.version, nativeScope: raw.scope,
+      nativeKeys: Object.keys(raw).sort(), restoredNativeKeys: Object.keys(restored).sort(),
       routeIds: order.length, historyCount: history.length, throughId: history.at(-1),
       bossMaps, missingFromTrustedRoute,
       originalLocation,
@@ -279,8 +280,9 @@ async function seedTrustedStoryHistory(page, {throughId = null, requireAllBossMa
       lockedBossMaps, unlockedRegions: progression?.unlockedRegions?.STORY || [],
     };
   }, {throughId, requireAllBossMaps});
-  assert.equal(fixture.nativeVersion, 4);
-  assert.equal(fixture.nativeScope, 'hapil-storyworld04');
+  assert.equal(fixture.apiVersion, 4, 'trusted history is exposed by the native R4 API');
+  assert.equal(fixture.nativeVersion, 6, 'the current serialized save uses the native version-6 envelope');
+  assert.equal(fixture.nativeScope, 'hapil.storyworld.depth-full.20261008');
   assert.ok(fixture.routeIds > 0, 'the native campaign route must be present');
   assert.equal(fixture.originalLocation.layer, 'STORY');
   assert.equal(fixture.zone, fixture.originalLocation.zone, 'native save import retains its actual current map');
@@ -599,6 +601,9 @@ try {
       const dodgeBefore = read(), dodgeResult = hurt(8, enemy), dodgeAfter = read();
       p.invincible = 0;
       const selfBefore = read(), selfResult = hurt(8, {owner: 'hero', friendly: true, selfCost: true}), selfAfter = read();
+      // Native admitted damage grants .30s of hit protection; keep the separate
+      // DoT guard case independent of that intended post-hit window.
+      p.invincible = 0;
       const dotBefore = read(), dotResult = hurt(8, {owner: 'existing-wound', r53WoundTick: true}), dotAfter = read();
       return {dodgeBefore, dodgeResult, dodgeAfter, selfBefore, selfResult, selfAfter, dotBefore, dotResult, dotAfter};
     });
@@ -902,7 +907,7 @@ try {
       const ward=window.__STORYWORLD_PROGRESSION_R62__?.ranks?.('ward',peer)||0;
       const expected=health.normalizeIncoming(rawDamage,peer,enemy)*difficulty*.65*pressure*(1-.06*ward)*.2;
       const visuals=effects.filter(e=>e.r71BleedVisualR71===true).map(e=>({owner:e.r71ActorId,atlas:e.r52Blood===true,life:e.life,age:e.age}));
-      const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(c=>c.owner?.id==='blood-contact-r52'&&c.kind==='image'&&String(c.sourcePath).includes('player-blood.webp'));
+      const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(c=>c.owner?.id==='blood-contact-r52'&&c.kind==='image'&&String(c.sourcePath).includes('medical-impacts-r49.png'));
       const expectedScreen=project(peer.x,peer.y-.15);expectedScreen.y-=actorHeight()*.40;
       const bloodCenters=bloodCommands.map(c=>({x:c.points.reduce((n,p)=>n+p[0],0)/c.points.length,y:c.points.reduce((n,p)=>n+p[1],0)/c.points.length,owner:c.owner}));
       const bleedDraws=health.inspect(peer).bleedVisuals.filter(v=>v.actorId==='qa-peer');
@@ -948,7 +953,7 @@ try {
       await c.start({role:'guest',selfId:'qa-guest',hostId:'qa-host',members:[{id:'qa-host',nick:'Host',character:'hwando'},{id:'qa-peer',nick:'Peer',character:'hwando'},{id:'qa-guest',nick:'Guest',character:'hwando'}]});
       const transitioned=await c.receive({type:'transition',epoch:snap.epoch,regionId:snap.zone,layer:snap.layer});
       c.receive({type:'all_loaded',phase:'running',epoch:snap.epoch});const accepted=c.applySnapshot(snap),peer=c.players().find(p=>p.coopIdR62==='qa-peer'),health=window.__STORYWORLD_HEALTH_R71__;
-      const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(command=>command.owner?.id==='blood-contact-r52'&&command.kind==='image'&&String(command.sourcePath).includes('player-blood.webp'));
+      const commands=window.__STORYWORLD_PHASE1__.captureVisual(),bloodCommands=commands.filter(command=>command.owner?.id==='blood-contact-r52'&&command.kind==='image'&&String(command.sourcePath).includes('medical-impacts-r49.png'));
       const expectedScreen=project(peer.x,peer.y-.15);expectedScreen.y-=actorHeight()*.40;
       const bloodCenters=bloodCommands.map(command=>({x:command.points.reduce((n,p)=>n+p[0],0)/command.points.length,y:command.points.reduce((n,p)=>n+p[1],0)/command.points.length}));
       const bleedDraws=health.inspect(peer).bleedVisuals.filter(row=>row.actorId==='qa-peer');
