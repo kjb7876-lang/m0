@@ -94,19 +94,84 @@ async function closeGame(game) {
   else await game?.page?.close();
 }
 
+async function entryFailure(page, id, layer, phase, entered, error) {
+  let diagnostic;
+  try {
+    diagnostic = await page.evaluate(({id, layer: requestedLayer, phase, entered}) => {
+      const safe = fn => { try { return fn(); } catch (error) { return {error: String(error)}; } };
+      const profile = safe(() => window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.());
+      const fatal = document.getElementById('fatal');
+      const region = typeof regionById === 'undefined' ? null : regionById[id];
+      const health = safe(() => typeof player === 'undefined' ? null : window.__STORYWORLD_HEALTH_R71__?.inspect?.(player));
+      return {
+        phase, requested: {id, layer: requestedLayer}, entered,
+        current: {
+          zone: typeof zone === 'undefined' ? null : zone,
+          layer: typeof layer === 'undefined' ? null : layer,
+          roomId: typeof room === 'undefined' ? null : room?.id,
+          roomLayer: typeof room === 'undefined' ? null : room?.layer,
+          loading: typeof loading === 'undefined' ? null : loading,
+          modal: typeof modal === 'undefined' ? null : modal,
+          hp: typeof player === 'undefined' ? null : player?.hp,
+          maxHp: health?.player?.maxHp ?? null,
+          simulationTime: typeof time === 'undefined' ? null : time,
+          documentHidden: document.hidden,
+        },
+        nativeRegion: region ? {id: region.id, safe: region.safe, bossCount: region.bosses?.length || 0} : null,
+        profile: profile ? {busy: profile.busy, stage: profile.stage, error: profile.error, audit: profile.audit?.slice(-8)} : null,
+        campaign: safe(() => window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.() || null),
+        ego: safe(() => window.__STORYWORLD_EGO151__?.inspect?.() || null),
+        health: health ? {
+          player: health.player,
+          authority: health.authority,
+          bleeding: health.bleeding,
+        } : null,
+        warnings: typeof warnings === 'undefined' ? [] : safe(() => warnings.slice(-12)),
+        runtimeErrors: typeof errors === 'undefined' ? [] : safe(() => errors.slice(-12)),
+        fatal: fatal ? {display: getComputedStyle(fatal).display, text: fatal.textContent?.slice(0, 1200)} : null,
+        retryPanel: document.getElementById('retryRegion')?.parentElement?.textContent?.slice(0, 1200) || null,
+        loadStatus: document.getElementById('loadStatus')?.textContent || null,
+      };
+    }, {id, layer, phase, entered});
+  } catch (diagnosticError) {
+    diagnostic = {phase, requested: {id, layer}, entered, diagnosticError: diagnosticError.message};
+  }
+  const safeId = String(id).replace(/[^a-zA-Z0-9_-]/g, '_');
+  const screenshot = path.join(OUT, `entry-failure-${safeId}-${Date.now()}.png`);
+  try {
+    await page.screenshot({path: screenshot, fullPage: true, timeout: 15000});
+  } catch (screenshotError) {
+    diagnostic.screenshotError = screenshotError.message;
+  }
+  const failure = {requested: {id, layer}, phase, entered, diagnostic, screenshot: diagnostic.screenshotError ? null : screenshot, error: error?.stack || String(error)};
+  report.entryFailures ||= [];
+  report.entryFailures.push(failure);
+  if (failure.screenshot) report.failureScreenshots = [...(report.failureScreenshots || []), failure.screenshot];
+  return new Error(`Native region entry failed: ${JSON.stringify(failure)}`, {cause: error});
+}
+
 async function enterRegion(page, id, {layer = 'STORY', tier, position = {x: 15, y: 19}} = {}) {
-  const entered = await page.evaluate(({id, layer, tier, position}) => {
-    auto = false;
-    guide = false;
-    settings.autoSkill = false;
-    settings.sound = false;
-    settings.music = false;
-    const options = {restore: true, noStory: true, layer, position};
-    if (tier) options.difficultyR63 = tier;
-    return enterRegion(id, null, options);
-  }, {id, layer, tier, position});
-  assert.notEqual(entered, false, `native entry to ${id} must be accepted`);
-  await page.waitForFunction(({id, layer}) => window.eval(`zone===${JSON.stringify(id)} && layer===${JSON.stringify(layer)} && !loading && !modal`), {id, layer}, {timeout: 60000});
+  let entered;
+  try {
+    entered = await page.evaluate(({id, layer, tier, position}) => {
+      auto = false;
+      guide = false;
+      settings.autoSkill = false;
+      settings.sound = false;
+      settings.music = false;
+      const options = {restore: true, noStory: true, layer, position};
+      if (tier) options.difficultyR63 = tier;
+      return enterRegion(id, null, options);
+    }, {id, layer, tier, position});
+  } catch (error) {
+    throw await entryFailure(page, id, layer, 'native-enterRegion-call', entered, error);
+  }
+  if (entered === false) throw await entryFailure(page, id, layer, 'native-enterRegion-rejected', entered, new Error(`native entry to ${id} was rejected`));
+  try {
+    await page.waitForFunction(({id, layer}) => window.eval(`zone===${JSON.stringify(id)} && layer===${JSON.stringify(layer)} && !loading && !modal`), {id, layer}, {timeout: 60000});
+  } catch (error) {
+    throw await entryFailure(page, id, layer, 'native-entry-state-wait', entered, error);
+  }
 }
 
 async function selectDifficulty(page, id, tier, {mobile = false, options = {}} = {}) {
@@ -258,6 +323,13 @@ try {
     assert.equal(initial.inspect.maxHp, 777);
     assert.equal(initial.inspect.healthR71Applied, true);
 
+    await page.evaluate(() => {
+      player.hp = maxHP();
+      player.invincible = 1e6;
+      player.invReason = 'R71 native boss scan';
+      auto = false; guide = false; command = null; route = [];
+      settings.autoSkill = false;
+    });
     const bossMaps = await page.evaluate(() => {
       return Object.keys(regionById || {}).flatMap(id => {
         const bosses = regionById[id]?.bosses;
