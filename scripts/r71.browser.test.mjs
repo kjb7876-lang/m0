@@ -100,11 +100,14 @@ async function entryFailure(page, id, layer, phase, entered, error) {
     diagnostic = await page.evaluate(({id, layer: requestedLayer, phase, entered}) => {
       const safe = fn => { try { return fn(); } catch (error) { return {error: String(error)}; } };
       const profile = safe(() => window.__STORYWORLD_STORY_PROFILE_R54__?.inspect?.());
+      const coop = safe(() => window.__STORYWORLD_COOP_SIM_R62__?.inspect?.());
+      const progression4 = safe(() => window.__STORYWORLD4__?.inspect?.()?.progression);
       const fatal = document.getElementById('fatal');
       const region = typeof regionById === 'undefined' ? null : regionById[id];
       const health = safe(() => typeof player === 'undefined' ? null : window.__STORYWORLD_HEALTH_R71__?.inspect?.(player));
       return {
         phase, requested: {id, layer: requestedLayer}, entered,
+        nativeEntryTrace: window.__R71_NATIVE_ENTRY_TRACE__ || null,
         current: {
           zone: typeof zone === 'undefined' ? null : zone,
           layer: typeof layer === 'undefined' ? null : layer,
@@ -113,10 +116,19 @@ async function entryFailure(page, id, layer, phase, entered, error) {
           loading: typeof loading === 'undefined' ? null : loading,
           modal: typeof modal === 'undefined' ? null : modal,
           hp: typeof player === 'undefined' ? null : player?.hp,
+          position: typeof player === 'undefined' ? null : {x: player?.x, y: player?.y},
+          transitionCD: typeof transitionCD === 'undefined' ? null : transitionCD,
           maxHp: health?.player?.maxHp ?? null,
           simulationTime: typeof time === 'undefined' ? null : time,
           documentHidden: document.hidden,
         },
+        portals: safe(() => window.__STORYWORLD_PORTALS_R61__?.inspect?.() || null),
+        progression4,
+        storyEvents: typeof SW3 === 'undefined' ? null : safe(() => SW3.events.slice(-24).map(event => ({
+          at: event.at, type: event.type, layer: event.layer, zone: event.zone,
+          recoveredTo: event.recoveredTo, unlocked: event.unlocked,
+        }))),
+        coopTransitions: coop?.history?.slice(-16) || null,
         nativeRegion: region ? {id: region.id, safe: region.safe, bossCount: region.bosses?.length || 0} : null,
         profile: profile ? {busy: profile.busy, stage: profile.stage, error: profile.error, audit: profile.audit?.slice(-8)} : null,
         campaign: safe(() => window.__STORYWORLD_CAMPAIGN_R63R1__?.inspect?.() || null),
@@ -150,28 +162,140 @@ async function entryFailure(page, id, layer, phase, entered, error) {
   return new Error(`Native region entry failed: ${JSON.stringify(failure)}`, {cause: error});
 }
 
-async function enterRegion(page, id, {layer = 'STORY', tier, position = {x: 15, y: 19}} = {}) {
-  let entered;
+async function enterRegion(page, id, {layer = 'STORY', tier, position = {x: 15, y: 19}, safeSpawn = false} = {}) {
+  let entryTrace;
   try {
-    entered = await page.evaluate(({id, layer, tier, position}) => {
+    entryTrace = await page.evaluate(async ({id, layer: requestedLayer, tier, position, safeSpawn}) => {
+      const snapshot = phase => {
+        const safe = fn => { try { return fn(); } catch (error) { return {error: String(error)}; } };
+        const portals = safe(() => window.__STORYWORLD_PORTALS_R61__?.inspect?.() || null);
+        const p = typeof player === 'undefined' ? null : player;
+        const points = Array.isArray(portals?.points) ? portals.points.map(row => ({
+          direction: row.direction, destination: row.destination, point: row.point,
+          open: row.status?.open === true, distance: p && row.point ? Math.hypot(p.x - row.point.x, p.y - row.point.y) : null,
+        })) : [];
+        const coop = safe(() => window.__STORYWORLD_COOP_SIM_R62__?.inspect?.());
+        return {
+          phase, at: performance.now(), zone: typeof zone === 'undefined' ? null : zone,
+          layer: typeof layer === 'undefined' ? null : layer,
+          roomId: typeof room === 'undefined' ? null : room?.id,
+          roomLayer: typeof room === 'undefined' ? null : room?.layer,
+          loading: typeof loading === 'undefined' ? null : loading,
+          modal: typeof modal === 'undefined' ? null : modal,
+          player: p ? {x: p.x, y: p.y, hp: p.hp} : null,
+          transitionCD: typeof transitionCD === 'undefined' ? null : transitionCD,
+          portalDistances: points, portals,
+          progression4: safe(() => window.__STORYWORLD4__?.inspect?.()?.progression),
+          storyEvents: typeof SW3 === 'undefined' ? null : safe(() => SW3.events.slice(-12).map(event => ({
+            at: event.at, type: event.type, layer: event.layer, zone: event.zone, recoveredTo: event.recoveredTo,
+          }))),
+          coopHistory: coop?.history?.slice(-8) || null,
+        };
+      };
       auto = false;
       guide = false;
       settings.autoSkill = false;
       settings.sound = false;
       settings.music = false;
-      const options = {restore: true, noStory: true, layer, position};
+      window.__R71_NATIVE_ENTRY_TRACE__ = null;
+      const options = {restore: true, noStory: true, layer: requestedLayer};
+      if (!safeSpawn && position) options.position = position;
       if (tier) options.difficultyR63 = tier;
-      return enterRegion(id, null, options);
-    }, {id, layer, tier, position});
+      const result = await enterRegion(id, safeSpawn ? 'n' : null, options);
+      const afterReturn = snapshot('awaited-enterRegion-return');
+      await new Promise(resolve => requestAnimationFrame(() => resolve()));
+      const nextFrame = snapshot('next-animation-frame');
+      const trace = {requested: {id, layer: requestedLayer, safeSpawn}, result, afterReturn, nextFrame, samples: []};
+      window.__R71_NATIVE_ENTRY_TRACE__ = trace;
+      const startedAt = performance.now();
+      let frame = 0;
+      const observe = () => {
+        if (window.__R71_NATIVE_ENTRY_TRACE__ !== trace || frame >= 180 || performance.now() - startedAt >= 3500) return;
+        if (frame++ % 6 === 0) trace.samples.push(snapshot('post-entry-observation'));
+        requestAnimationFrame(observe);
+      };
+      requestAnimationFrame(observe);
+      return trace;
+    }, {id, layer, tier, position, safeSpawn});
   } catch (error) {
-    throw await entryFailure(page, id, layer, 'native-enterRegion-call', entered, error);
+    throw await entryFailure(page, id, layer, 'native-enterRegion-call', entryTrace, error);
   }
-  if (entered === false) throw await entryFailure(page, id, layer, 'native-enterRegion-rejected', entered, new Error(`native entry to ${id} was rejected`));
+  if (entryTrace?.result === false) throw await entryFailure(page, id, layer, 'native-enterRegion-rejected', entryTrace, new Error(`native entry to ${id} was rejected`));
+  if (entryTrace?.afterReturn?.zone !== id || entryTrace?.afterReturn?.roomId !== id) {
+    throw await entryFailure(page, id, layer, 'native-entry-resolved-to-other-zone', entryTrace, new Error(`native entry to ${id} resolved to ${entryTrace?.afterReturn?.zone}/${entryTrace?.afterReturn?.roomId}`));
+  }
+  if (entryTrace?.nextFrame?.zone !== id || entryTrace?.nextFrame?.roomId !== id) {
+    throw await entryFailure(page, id, layer, 'native-entry-changed-by-next-frame', entryTrace, new Error(`native entry to ${id} changed to ${entryTrace?.nextFrame?.zone}/${entryTrace?.nextFrame?.roomId} on the next frame`));
+  }
   try {
     await page.waitForFunction(({id, layer}) => window.eval(`zone===${JSON.stringify(id)} && layer===${JSON.stringify(layer)} && !loading && !modal`), {id, layer}, {timeout: 60000});
   } catch (error) {
-    throw await entryFailure(page, id, layer, 'native-entry-state-wait', entered, error);
+    throw await entryFailure(page, id, layer, 'native-entry-state-wait', entryTrace, error);
   }
+}
+
+async function seedTrustedStoryHistory(page, {throughId = null, requireAllBossMaps = false} = {}) {
+  const fixture = await page.evaluate(async ({throughId, requireAllBossMaps}) => {
+    const api = window.__STORYWORLD4__;
+    if (!api || api.version !== 4) throw Error('The native version-4 save API is unavailable');
+    const raw = api.save();
+    if (raw?.version !== 4 || raw?.scope !== 'hapil-storyworld04' || !raw.progress || !raw.rooms) {
+      throw Error('Native save fixture requires the current version-4 scope and full progress/room data');
+    }
+    const bossMaps = Object.keys(regionById || {}).filter(id => Array.isArray(regionById[id]?.bosses) && regionById[id].bosses.length > 0);
+    const order = api.campaignOrder().map(row => row.id);
+    const missingFromTrustedRoute = bossMaps.filter(id => !order.includes(id));
+    if (requireAllBossMaps && missingFromTrustedRoute.length) {
+      throw Error('Boss maps absent from native trusted route: ' + missingFromTrustedRoute.join(', '));
+    }
+    const targetIndex = throughId === null ? order.length - 1 : order.indexOf(throughId);
+    if (targetIndex < 0) throw Error(`Requested trusted-history target is not on the native campaign route: ${throughId}`);
+    const history = order.slice(0, targetIndex + 1);
+    const originalProgress = JSON.stringify(raw.progress);
+    const originalRoomKeys = Object.keys(raw.rooms).sort();
+    const originalLocation = {zone: raw.zone, layer: raw.layer, x: raw.player?.x, y: raw.player?.y};
+    if (!originalLocation.zone || !['STORY', 'DREAM'].includes(originalLocation.layer)) {
+      throw Error('Native save must retain its current map and layer for the trusted-history fixture');
+    }
+    raw.unlockedRegions = {
+      ...(raw.unlockedRegions || {}),
+      STORY: [...new Set(['hub', ...history])],
+    };
+    await api.restore(raw);
+    const restored = api.save();
+    const progression = api.inspect()?.progression;
+    const lockedBossMaps = bossMaps.filter(id => !api.isUnlocked(id, 'STORY'));
+    return {
+      nativeVersion: raw.version, nativeScope: raw.scope,
+      routeIds: order.length, historyCount: history.length, throughId: history.at(-1),
+      bossMaps, missingFromTrustedRoute,
+      originalLocation,
+      zone: typeof zone === 'undefined' ? null : zone,
+      roomId: typeof room === 'undefined' ? null : room?.id,
+      layer: typeof layer === 'undefined' ? null : layer,
+      progressPreserved: JSON.stringify(restored.progress) === originalProgress,
+      existingRoomKeysPreserved: originalRoomKeys.every(key => Object.hasOwn(restored.rooms, key)),
+      targetUnlocked: throughId === null || api.isUnlocked(throughId, 'STORY'),
+      lockedBossMaps, unlockedRegions: progression?.unlockedRegions?.STORY || [],
+    };
+  }, {throughId, requireAllBossMaps});
+  assert.equal(fixture.nativeVersion, 4);
+  assert.equal(fixture.nativeScope, 'hapil-storyworld04');
+  assert.ok(fixture.routeIds > 0, 'the native campaign route must be present');
+  assert.equal(fixture.originalLocation.layer, 'STORY');
+  assert.equal(fixture.zone, fixture.originalLocation.zone, 'native save import retains its actual current map');
+  assert.equal(fixture.roomId, fixture.originalLocation.zone);
+  assert.equal(fixture.layer, 'STORY');
+  assert.equal(fixture.progressPreserved, true, 'the trusted-history fixture must preserve actual clear progress');
+  assert.equal(fixture.existingRoomKeysPreserved, true, 'the trusted-history fixture must preserve every previously saved room definition');
+  assert.equal(fixture.targetUnlocked, true, 'the native trusted-history validator must unlock the requested map');
+  if (throughId !== null) assert.equal(fixture.throughId, throughId);
+  if (requireAllBossMaps) {
+    assert.ok(fixture.bossMaps.length > 0, 'the native region registry must expose boss maps before fixture import');
+    assert.deepEqual(fixture.missingFromTrustedRoute, [], 'every authored boss map must belong to the native sequential trusted route');
+    assert.equal(fixture.lockedBossMaps.length, 0, 'the native trusted-history validator must unlock every authored boss map');
+  }
+  return fixture;
 }
 
 async function selectDifficulty(page, id, tier, {mobile = false, options = {}} = {}) {
@@ -330,6 +454,18 @@ try {
       auto = false; guide = false; command = null; route = [];
       settings.autoSkill = false;
     });
+
+    // Import a version-4 native save whose trusted route history covers every
+    // authored campaign map. Only the saved unlock-history list changes.
+    const unlockFixture = await seedTrustedStoryHistory(page, {requireAllBossMaps: true});
+    await page.evaluate(() => {
+      player.hp = maxHP();
+      player.invincible = 1e6;
+      player.invReason = 'R71 native boss scan';
+      auto = false; guide = false; command = null; route = [];
+      settings.autoSkill = false;
+    });
+
     const bossMaps = await page.evaluate(() => {
       return Object.keys(regionById || {}).flatMap(id => {
         const bosses = regionById[id]?.bosses;
@@ -341,15 +477,25 @@ try {
     assert.ok(expectedBossTotal > 0, 'native region registry must expose at least one authored boss');
     const bossRows = [];
     for (const expected of bossMaps) {
-      await enterRegion(page, expected.id, {layer: 'STORY'});
+      const unlocked = await page.evaluate(id => window.__STORYWORLD4__?.isUnlocked(id, 'STORY') === true, expected.id);
+      assert.equal(unlocked, true, `${expected.id} must be admitted by the imported native trusted route before entry`);
+      await enterRegion(page, expected.id, {layer: 'STORY', safeSpawn: true});
       const row = await page.evaluate(() => {
         const actors = (room.enemies || []).filter(e => e.boss || e.midboss || e.persona || e.cosmic || e.trial || e.cosmicGuardianR63);
-        return {id: room.id, actors: actors.map(e => ({
+        const portals = window.__STORYWORLD_PORTALS_R61__?.inspect?.();
+        const portalDistances = (portals?.points || []).map(p => ({
+          direction: p.direction, destination: p.destination, point: p.point, open: p.status?.open === true,
+          distance: Math.hypot(player.x - p.point.x, player.y - p.point.y),
+        }));
+        return {id: room.id, layer: room.layer, position: {x: player.x, y: player.y}, portalDistances, actors: actors.map(e => ({
           id: e.id, name: e.name, maxHp: e.maxHp, hp: e.hp,
           canonicalMaxHp: e.healthR71CanonicalMaxHp, visibleMaxHp: e.healthR71VisibleMaxHp,
         }))};
       });
       assert.equal(row.id, expected.id, 'native region entry reaches the requested boss map');
+      assert.equal(row.layer, 'STORY');
+      assert.ok(row.position.x >= 11.5 && row.position.x <= 20.5 && row.position.y >= 11.5 && row.position.y <= 20.5, `${row.id} uses the native R61 safe spawn region`);
+      assert.ok(row.portalDistances.every(p => p.distance >= 2.1 - 1e-6), `${row.id} spawns clear of every native R61 portal marker`);
       assert.ok(row.actors.length >= expected.expectedBossCount, `${row.id} must instantiate all source-declared native major actors`);
       bossRows.push({...row, expectedDefinitions: expected.expectedBossCount});
     }
@@ -434,7 +580,7 @@ try {
     const respawn = await page.evaluate(() => ({max: maxHP(), hp: player.hp, inspect: window.__STORYWORLD_HEALTH_R71__.inspect(player).player}));
     assert.equal(respawn.max, 777);
     assert.equal(respawn.hp, 777, 'native death-to-hub respawn restores exactly the balanced cap');
-    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', initial, bosses: bossRows, hit, afterUpgrade, afterRestore, afterOldRestore, respawn});
+    report.checks.push({name: 'health-cap-bosses-hit-save-upgrade-respawn', initial, trustedHistoryFixture: unlockFixture, bosses: bossRows, hit, afterUpgrade, afterRestore, afterOldRestore, respawn});
     assertNoPageErrors(game);
     await closeGame(game);
   }
@@ -531,6 +677,7 @@ try {
     assert.equal(activeMap.active, 'three', 'the active-map readability check must exercise the Three renderer');
     assert.ok(activeMap.readability?.threeOnly && activeMap.readability.theme === 'forest' && activeMap.readability.materialsOnly && !activeMap.readability.geometryChanged && activeMap.readability.flashlightMaskPreserved);
     assert.ok(activeMap.readability.contrast.floorToWall >= 1.6 && activeMap.readability.contrast.floorToBackground >= 1.8);
+    const paletteHospitalAdmission = await seedTrustedStoryHistory(paletteGame.page, {throughId: 'ep1a08'});
     await enterRegion(paletteGame.page, 'ep1a08', {position: {x: 27, y: 27}});
     const hospital = await paletteGame.page.evaluate(() => {
       const phase = window.__STORYWORLD_PHASE1__.inspect(), s = phase.spatial;
@@ -547,6 +694,7 @@ try {
       return {active: phase.active, spatial, readability: s?.mapReadabilityR71 || null, native};
     });
     const baseline = await openGame({variant: 'baseline'});
+    const baselineHospitalAdmission = await seedTrustedStoryHistory(baseline.page, {throughId: 'ep1a08'});
     await enterRegion(baseline.page, 'ep1a08', {position: {x: 27, y: 27}});
     const hospitalBase = await baseline.page.evaluate(() => {
       const phase = window.__STORYWORLD_PHASE1__.inspect(), layout = room.exploration, s = phase.spatial;
@@ -572,7 +720,7 @@ try {
     assert.equal(hospital.readability.flashlightMaskPreserved, true);
     await paletteGame.page.screenshot({path: path.join(OUT, 'hospital-desktop.png')});
     report.screenshots.push('hospital-desktop.png');
-    report.checks.push({name: 'all-map-palettes-and-hospital-geometry', themes: palettes, activeMap, hospital, hospitalBase});
+    report.checks.push({name: 'all-map-palettes-and-hospital-geometry', themes: palettes, activeMap, hospitalAdmission: paletteHospitalAdmission, hospital, baselineHospitalAdmission, hospitalBase});
     assertNoPageErrors(paletteGame); assertNoPageErrors(baseline);
     await closeGame(paletteGame); await closeGame(baseline);
   }
@@ -583,6 +731,7 @@ try {
   {
     const game = await openGame();
     const {page} = game;
+    const hospitalAdmission = await seedTrustedStoryHistory(page, {throughId: 'ep1a08'});
     await enterRegion(page, 'ep1a08', {position: {x: 27, y: 27}});
     await selectDifficulty(page, 'ep1a08', 'hard', {options: {position: {x: 27, y: 27}}});
     await confirmDifficulty(page, 'ep1a08', 'hard');
@@ -696,7 +845,7 @@ try {
       return {before, after: player.points, drops, claimed: room.passivePointClaimsR64.includes(id), second};
     }, pickup.id);
     assert.equal(afterReload.drops, 0); assert.equal(afterReload.claimed, true); assert.equal(afterReload.second, 0); assert.equal(afterReload.after, afterReload.before);
-    report.checks.push({name: 'native-point-drop-capture-pickup-persistence-flashlight', fixture, visual, flashlight, pickup: {...pickup, save: '[serialized JSON omitted]'}, afterReload});
+    report.checks.push({name: 'native-point-drop-capture-pickup-persistence-flashlight', hospitalAdmission, fixture, visual, flashlight, pickup: {...pickup, save: '[serialized JSON omitted]'}, afterReload});
     assertNoPageErrors(game);
     await closeGame(game);
   }
@@ -707,6 +856,7 @@ try {
   {
     const context = await browser.newContext({viewport: {width: 1280, height: 800}, deviceScaleFactor: 1});
     const host = await openGame({context});
+    const hospitalAdmission = await seedTrustedStoryHistory(host.page, {throughId: 'ep1a08'});
     await host.page.evaluate(async () => {
       const c = window.__STORYWORLD_COOP_SIM_R62__;
       await c.start({role: 'host', selfId: 'qa-host', members: [{id:'qa-host',nick:'Host',character:'hwando'}, {id:'qa-peer',nick:'Peer',character:'hwando'}]});
@@ -870,7 +1020,7 @@ try {
     const guestState=await guest.page.evaluate(()=>({mode:window.__STORYWORLD_COOP_SIM_R62__.mode(),host:window.__STORYWORLD_COOP_SIM_R62__.isHost(),roomId:room.id,currentZone:zone,canApply:window.__STORYWORLD_HEALTH_R71__.inspect(player).authority.canApply}));
     assert.equal(guestState.mode,'guest');assert.equal(guestState.host,false);assert.equal(guestState.roomId,guestState.currentZone);
     assert.equal(guestState.canApply,false,'guest health presentation is not authoritative');
-    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',host:peerResult,clear:{...clear,save:'[coop save omitted]'},firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
+    report.checks.push({name:'two-page-local-coop-health-rewards-expanded-drops',hospitalAdmission,host:peerResult,clear:{...clear,save:'[coop save omitted]'},firstHit,saveRoundTrip,guestSnapshot:{transitioned:guestSnapshot.transitioned,accepted:guestSnapshot.accepted,peer:guestSnapshot.peer},deathAndRevive,hospitalDrop:{...hospitalDrop,snapshot:'[snapshot omitted]'},guestHospital,guest:guestState});
     report.actualRelay = false;
     assertNoPageErrors(host); assertNoPageErrors(guest);
     await closeGame(host); await closeGame(guest); await context.close();

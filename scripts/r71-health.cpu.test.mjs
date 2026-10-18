@@ -48,6 +48,7 @@ function fixture({coopFacade=false}={}){
   const fixture=globalThis.__fixture;
   Object.defineProperties(fixture,{player:{get:()=>activeActor,set:v=>{activeActor=v;if(!globalThis.__fixture.coopFacade)player=v;}},room:{get:()=>room,set:v=>{room=v;}},time:{get:()=>time,set:v=>{time=v;}},mode:{get:()=>mode,set:v=>{mode=v;}},effects:{get:()=>effects}});
   fixture.facade=playerFacade;fixture.maxHP=()=>maxHP();fixture.hurt=(...args)=>hurt(...args);fixture.drawEffect=e=>drawEffect(e);
+  fixture.upgradePreview=()=>{showUpgrades();return{vital:UPGRADES.find(u=>u.id==='vital')?.text||'',endless:progression.defs.find(d=>d.id==='endlessVital')?.text||''}};
   ${helper}
   fixture.api=window.__STORYWORLD_HEALTH_R71__;
  })();`;
@@ -82,6 +83,19 @@ test('player migration is proportional, idempotent, and leaves max HP at exactly
  assert.equal(api.restoreSavedHp(oldSave,p),193/legacy*777);
  assert.equal(api.restoreSavedHp({player:{hp:111,healthR71Applied:true},healthR71:{version:1,hp:111}},p),111);
  assert.equal(api.inspect(p).player.maxHp,777);assert.equal(api.inspect(p).player.effectiveFraction,hp/777);
+});
+
+test('vitality heal previews use post-purchase legacy maxima at fresh and upgraded ranks',()=>{
+ const f=fixture(),p=f.fixture.player;
+ p.level=1;p.upgrades={vital:0};p.progressionR62.ranks.endlessVital=0;
+ let preview=f.fixture.upgradePreview();
+ assert.match(preview.vital,/11\.9% 감소, 체력 92\.2 회복/);
+ assert.match(preview.endless,/6\.5% 감소, 체력 50\.3 회복/);
+ p.upgrades.vital=1;p.progressionR62.ranks.endlessVital=1;
+ assert.equal(f.api.legacyMaxHP(p),313);
+ preview=f.fixture.upgradePreview();
+ assert.match(preview.vital,/10\.1% 감소, 체력 78\.1 회복/);
+ assert.match(preview.endless,/5\.4% 감소, 체력 42\.3 회복/);
 });
 
 test('boss suffix uses the unrounded canonical health, preserves fraction, and reapplies difficulty without compounding',()=>{

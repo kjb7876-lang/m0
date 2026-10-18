@@ -312,7 +312,7 @@
  const healthR71ShowUpgradeBase=typeof showUpgrades==='function'?showUpgrades:null;
  if(healthR71ShowUpgradeBase)showUpgrades=function(...args){
   const p=healthR71Coop()?.currentPlayer?.()||player,vital=UPGRADES?.find(u=>u.id==='vital'),endless=window.__STORYWORLD_PROGRESSION_R62__?.defs?.find(d=>d.id==='endlessVital');
-  const reduction=nextVitalDamageReduction(p,35)*100,repeat=nextVitalDamageReduction(p,18)*100,heal=35*normalization(p),repeatHeal=18*normalization(p);
+  const legacy=legacyMaxHP(p),reduction=35/(legacy+35)*100,repeat=18/(legacy+18)*100,heal=35*R71_MAX_HP/(legacy+35),repeatHeal=18*R71_MAX_HP/(legacy+18);
   if(vital)vital.text='최대 체력 777 유지. 다음 강화: 받는 피해 약 '+reduction.toFixed(1)+'% 감소, 체력 '+heal.toFixed(1)+' 회복.';
   if(endless)endless.text='최대 체력 777 유지. 다음 단계: 받는 피해 약 '+repeat.toFixed(1)+'% 감소, 체력 '+repeatHeal.toFixed(1)+' 회복.';
   return healthR71ShowUpgradeBase.apply(this,args);

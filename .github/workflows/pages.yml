@@ -73,6 +73,7 @@ jobs:
           node verify-pages-r62.mjs _pages | tee out/r70/integrity.log
           node scripts/r70.browser.test.mjs | tee out/r70/webgl.log
           python3 scripts/r69-regression-wait.py
+          python3 scripts/r71-regression-fixture.py
           node scripts/r66.browser.test.mjs | tee out/r70/game-regression.log
       - name: Require exact R70 baseline measured in PR run 39089788163
         run: |
@@ -100,10 +101,10 @@ jobs:
           node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71/cpu.log
           node scripts/r71.audit.mjs | tee out/r71/audit.log
           node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
+          node scripts/r71.perf.mjs | tee out/r71/performance.log
           node scripts/r71.browser.test.mjs | tee out/r71/browser.log
           mkdir -p out/r71/native
           node scripts/r71-native.browser.test.mjs | tee out/r71/native/runner.log
-          node scripts/r71.perf.mjs | tee out/r71/performance.log
       - name: Require exact approved R71 runtime hashes
         id: hashes
         env:
