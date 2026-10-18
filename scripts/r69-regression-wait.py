@@ -19,6 +19,9 @@ replacement=r'''const queueR69=()=>delayed.filter(job=>job.owner==='qa-thread-mo
   window.hitEnemy=base;'''
 if s.count(needle)!=1:raise RuntimeError('Unexpected native-regression wait source')
 new=s.replace(needle,replacement,1)
+page_marker='  const page = await context.newPage();'
+if new.count(page_marker)!=1:raise RuntimeError('Unexpected regression page setup')
+new=new.replace(page_marker,page_marker+"\n  page.on('console', message => { if(message.text().startsWith('R69_NATIVE_MOTIF_QUEUE')) console.log(message.text()); });",1)
 assertions=["assert.equal(motifRuntime.subHits,18", "assert.equal(motifRuntime.fractalHits,1", "assert.equal(motifRuntime.groupCount,6", "Math.abs(motifRuntime.ichidanRatio-1.35)<1e-8"]
 for a in assertions:
     if s.count(a)!=1 or new.count(a)!=1:raise RuntimeError('Original assertion missing: '+a)
