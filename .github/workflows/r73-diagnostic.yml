@@ -1,0 +1,44 @@
+name: StoryWorld R73 bootloader diagnosis
+on:
+  push:
+    branches: [feat/r72-golden-thread]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct exact baseline
+        run: |
+          set -euo pipefail
+          python3 scripts/unpack-runtime-r62.py --output _pages/docs
+          for rev in 66 67 68 69 70; do python3 scripts/apply-r$rev.py --site _pages/docs; done
+          python3 scripts/apply-r71.py --site _pages/docs
+          cp -a _pages _r71
+          python3 scripts/apply-r72.py --site _pages/docs
+      - name: Install sandboxed Chromium
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Measure original bootloader behavior
+        run: |
+          set -euo pipefail
+          mkdir -p out/r73
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r73-diagnose.mjs | tee out/r73/diagnostic.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r73-diagnostic-${{ github.sha }}
+          path: out/r73/
+          retention-days: 14
