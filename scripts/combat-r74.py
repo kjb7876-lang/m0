@@ -39,6 +39,8 @@ def transform(html):
         s=once(s,'if(e.altKey)manage();else cast(e.shiftKey?1:0,groundAim);',"if(e.altKey)manage('','gold');else cast(e.ctrlKey?2:e.shiftKey?1:0,groundAim);")
         s=once(s,"<button id=\"goldHudSecond\">2번 도안</button>","<button id=\"goldHudSecond\">2번부터</button><button id=\"goldHudThird\">3번부터</button>")
         s=once(s,"button('goldHudOpen',()=>manage());", "button('goldHudOpen',()=>manage('','gold'));button('goldHudThird',()=>cast(2));")
+        s=once(s,"cd=Math.max(0,(p.goldenReadyAtR72||0)-time),b=", "cd=window.__STORYWORLD_DANCES_R74__?.cooldown('gold',p)??Math.max(0,(p.goldenReadyAtR72||0)-time),b=")
+        s=once(s,"b.textContent=cd>0?'황금실 '+Math.ceil(cd)+'초':'황금실 발동';", "b.textContent=window.__STORYWORLD_GOLDEN_R72__?.isCasting(p)?'황금실 연속 중':cd>0?'황금실 '+Math.ceil(cd)+'초':'황금실 연속';")
         s=once(s,"$('goldHudSecond').style.display=C.stats(s).equip>1?'':'none';", "$('goldHudSecond').style.display=C.stats(s).equip>1?'':'none';$('goldHudThird').style.display=C.stats(s).equip>2?'':'none';")
         s=once(s,'{state,stats:p=>C.stats(state(p)),manage,editor,cast,',"{state,stats:p=>C.stats(state(p)),manage:()=>manage('','gold'),manageSilver:()=>manage('','silver'),editor:id=>editor(id,'gold'),cast,")
         # Decorate after all editor previews and management handlers are bound.
@@ -75,6 +77,11 @@ def transform(html):
     html=once(html,'const factor=TIERS[validTier(tier)].hp,oldFactor=',
               "const factor=TIERS[validTier(tier)].hp*(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.cosmicGuardianR63?1:1.66),oldFactor=")
     html=once(html,'const target=healthR71BossSuffix(canonical);','const target=healthR71BossSuffix(canonical)*1.66;')
+    for old,new in [('기본 적 체력 20%','일반 적 기본 체력 33.2%'),('기본 적 체력 25%','일반 적 기본 체력 41.5%'),('기본 적 체력 40%','일반 적 기본 체력 66.4%')]:
+        html=once(html,old,new)
+    html=once(html,'적 기본 체력과 받는 피해, 첫 클리어 포인트가 표시된 값으로 적용됩니다.',
+              '일반 적과 보스 체력은 이전 공개판보다 66% 높습니다. 난이도별 일반 적 기본 체력과 받는 피해, 첫 클리어 포인트가 표시된 값으로 적용됩니다.')
+    html=once(html,'Math.round(TIERS[mapMode()].hp*100)', '(TIERS[mapMode()].hp*166).toFixed(1)')
     html=once(html,"['실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),","[window.__STORYWORLD_DANCES_R74__?.state('silver')?.equipped?.length?'은색실':'기본 실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),")
     html=once(html,"name:'실검무 · 은실의 분기',icon:'haste',text:'","name:'실검무 · 은실의 분기',icon:'haste',text:'기본 실검무 습득 후 은색실 편집기로 직접 그린 궤적을 별도 저장·장착할 수 있습니다. T와 실검무 버튼은 장착한 은색실을 우선 사용하며, 장착 해제 시 기존 기본 동작으로 돌아갑니다. " )
     html=once(html,'if(distance(player,exitPoint(d))<.85){travel(d);break}',
