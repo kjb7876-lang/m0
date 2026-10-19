@@ -3,6 +3,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {isDeepStrictEqual} from 'node:util';
 import {chromium} from 'playwright';
 
 const seed = Number(process.env.R75_OVERNIGHT_SEED || 11);
@@ -27,7 +28,7 @@ const report = {
   physicalDevice: false,
   scope: 'Native UI new game, keyboard movement/attack, normal save/reload/Continue, 777 isolated trial save/reload/resume/leave, and one seed-specific real-map probe. Not full natural campaign completion.',
   checks: [],
-  saveIsolation: {complete: false, comparisons: [], storedComparisons: []},
+  saveIsolation: {complete: false, passed: false, comparisons: [], storedComparisons: []},
   pageErrors: [],
   consoleErrors: [],
 };
@@ -36,8 +37,8 @@ let browser = null;
 let context = null;
 let page;
 
-function check(name, details) {
-  report.checks.push({name, ok: true, details});
+function check(name, details, ok = true) {
+  report.checks.push({name, ok: ok === true, details});
   console.log('R75_OVERNIGHT_CASE', JSON.stringify(report.checks.at(-1)));
 }
 
@@ -80,50 +81,52 @@ async function travel(id) {
   assert.equal(await page.evaluate(() => zone), id);
 }
 
+function isEmptyCastleDefenseState(state) {
+  return isDeepStrictEqual(state, {
+    phase: 'idle', round: 0, remaining: 0, pressure: 0,
+    selected: [], used: [], joined: false, retries: 0, guards: [],
+  });
+}
+
+function normalizeEmptyCastleDefense(save) {
+  const value = save.castleDefenseR75;
+  const removed = [];
+  if (value?.version !== 1 || !value.rooms || Array.isArray(value.rooms) || typeof value.rooms !== 'object') return removed;
+  for (const [key, state] of Object.entries(value.rooms)) {
+    if (['STORY:hando01', 'STORY:hando02'].includes(key) && isEmptyCastleDefenseState(state)) {
+      delete value.rooms[key];
+      removed.push(key);
+    }
+  }
+  return removed;
+}
+
 function stableSave(save) {
-  const player = {...save.player};
-  const resonance = player.resonance;
-  const cooldowns = player.combatCooldownRemaining26 || {};
-  delete player.resonance;
-  delete player.combatCooldownRemaining26;
-  player.upgrades = Object.fromEntries(Object.entries(player.upgrades || {}).filter(([, rank]) => rank !== 0));
-  const settings = {...(save.settings || {})};
+  const persistent = structuredClone(save || {});
+  const player = persistent.player && typeof persistent.player === 'object' ? persistent.player : null;
+  const resonance = player?.resonance;
+  const cooldowns = player?.combatCooldownRemaining26 || {};
+  if (player) {
+    delete player.resonance;
+    delete player.combatCooldownRemaining26;
+    player.upgrades = Object.fromEntries(Object.entries(player.upgrades || {}).filter(([, rank]) => rank !== 0));
+  }
+  const settings = {...(persistent.settings || {})};
   settings.enemyDirection51 = settings.enemyDirection51 !== false;
   settings.voicePreroll = settings.voicePreroll === 0 ? 0 : 500;
-  const rooms = structuredClone(save.rooms || {});
+  persistent.settings = settings;
+  if (persistent.saveSlotR73 && typeof persistent.saveSlotR73 === 'object') delete persistent.saveSlotR73.savedAt;
+
   const spawnNonces = {};
-  for (const [key, room] of Object.entries(rooms)) {
+  persistent.rooms = structuredClone(persistent.rooms || {});
+  for (const [key, room] of Object.entries(persistent.rooms)) {
     if (room && Number.isFinite(Number(room.spawnNonce))) {
       spawnNonces[key] = Number(room.spawnNonce);
       delete room.spawnNonce;
     }
   }
-  return {
-    persistent: {
-      zone: save.zone,
-      layer: save.layer,
-      progress: save.progress,
-      player,
-      visited: save.visited,
-      readScenes: save.readScenes,
-      ending: save.ending,
-      lastHub: save.lastHub,
-      rooms,
-      settings,
-      zoom: save.zoom,
-      auto: save.auto,
-      worldR74: save.worldR74,
-      worldR75: save.worldR75,
-      mazeR73: save.mazeR73,
-      routeEntriesR72: save.routeEntriesR72,
-      narrativeObjectivesR75: save.narrativeObjectivesR75,
-      castleDefenseR75: save.castleDefenseR75,
-      goldenR72: save.goldenR72,
-      dancePolicyR75: save.dancePolicyR75,
-    },
-    dynamic: {resonance, cooldowns},
-    spawnNonces,
-  };
+  const normalizedEmptyDefenseRooms = normalizeEmptyCastleDefense(persistent);
+  return {persistent, dynamic: {resonance, cooldowns}, spawnNonces, normalizedEmptyDefenseRooms};
 }
 
 function canonicalStoredSave(raw) {
@@ -136,12 +139,70 @@ function canonicalStoredSave(raw) {
   settings.enemyDirection51 = settings.enemyDirection51 !== false;
   settings.voicePreroll = settings.voicePreroll === 0 ? 0 : 500;
   value.settings = settings;
+  normalizeEmptyCastleDefense(value);
   return value;
+}
+
+function changedPaths(a, b, path = '$', out = []) {
+  if (isDeepStrictEqual(a, b) || out.length >= 40) return out;
+  if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+    for (const key of [...new Set([...Object.keys(a), ...Object.keys(b)])].sort()) {
+      if (!Object.hasOwn(a, key) || !Object.hasOwn(b, key)) out.push(`${path}.${key}`);
+      else changedPaths(a[key], b[key], `${path}.${key}`, out);
+      if (out.length >= 40) break;
+    }
+  } else out.push(path);
+  return out;
+}
+
+function integritySnapshots(value) {
+  const {persistent: p} = value;
+  const namedBossRewardState = Object.fromEntries(Object.entries(p).filter(([key]) => /boss|reward|loot|drop/i.test(key)));
+  return {
+    progressFlags: {progress: p.progress, visited: p.visited, readScenes: p.readScenes, ending: p.ending, lastHub: p.lastHub},
+    worldAndDoors: {worldR74: p.worldR74, worldR75: p.worldR75, mazeR73: p.mazeR73, routeEntriesR72: p.routeEntriesR72, narrativeObjectivesR75: p.narrativeObjectivesR75},
+    bossesAndRewards: {rooms: p.rooms, player: p.player, goldenR72: p.goldenR72, named: namedBossRewardState},
+  };
+}
+
+function assertSaveComparisonContract() {
+  const baseline = {
+    zone: 'hub', layer: 'STORY', progress: {STORY: {hando01: false}}, visited: [], readScenes: [], ending: null,
+    player: {hero: 'hwando', level: 1, points: 1, gold: 0, upgrades: {}, resonance: 50, combatCooldownRemaining26: {attack: 0, special: 0}},
+    rooms: {}, settings: {enemyDirection51: true, voicePreroll: 500},
+    worldR74: {doors: [{id: 'door-0', open: false}]}, worldR75: {entries: {}},
+    narrativeObjectivesR75: {version: 1, rooms: {'STORY:hando02': {gateMask: 0}}},
+    castleDefenseR75: {version: 1, rooms: {}}, bossRewardsR75: {hando02: {claimed: false}},
+  };
+  const withEmptyDefense = structuredClone(baseline);
+  withEmptyDefense.castleDefenseR75.rooms['STORY:hando02'] = {
+    phase: 'idle', round: 0, remaining: 0, pressure: 0, selected: [], used: [], joined: false, retries: 0, guards: [],
+  };
+  assert.deepEqual(stableSave(baseline).persistent, stableSave(withEmptyDefense).persistent, 'the exact fresh castle-defense state is semantically empty');
+  assert.deepEqual(canonicalStoredSave(JSON.stringify(baseline)), canonicalStoredSave(JSON.stringify(withEmptyDefense)), 'stored-save comparison also ignores only the exact fresh castle-defense state');
+
+  const mutations = [
+    ['progress flag', value => { value.progress.STORY.hando01 = true; }],
+    ['door state', value => { value.worldR74.doors[0].open = true; }],
+    ['boss state', value => { value.rooms['STORY:hando02'] = {bossDefeated: true}; }],
+    ['reward state', value => { value.bossRewardsR75.hando02.claimed = true; }],
+    ['player reward', value => { value.player.gold = 1; }],
+    ['castle-defense progress', value => { value.castleDefenseR75.rooms['STORY:hando02'].round = 1; }],
+    ['noncanonical defense field', value => { value.castleDefenseR75.rooms['STORY:hando02'].extra = true; }],
+  ];
+  for (const [label, mutate] of mutations) {
+    const changed = structuredClone(withEmptyDefense);
+    mutate(changed);
+    assert.notDeepEqual(stableSave(baseline).persistent, stableSave(changed).persistent, label + ' remains strict');
+  }
 }
 
 function assertNormalEquivalent(before, after, restoreCount, labelName) {
   const a = stableSave(before);
   const b = stableSave(after);
+  const beforeIntegrity = integritySnapshots(a);
+  const afterIntegrity = integritySnapshots(b);
+  const integrity = Object.fromEntries(Object.keys(beforeIntegrity).map(key => [key, isDeepStrictEqual(beforeIntegrity[key], afterIntegrity[key])]));
   const row = {
     label: labelName,
     restoreCount,
@@ -151,26 +212,26 @@ function assertNormalEquivalent(before, after, restoreCount, labelName) {
     afterCooldowns: b.dynamic.cooldowns,
     beforeSpawnNonces: a.spawnNonces,
     afterSpawnNonces: b.spawnNonces,
-    persistentEqual: false,
-    dynamicsValid: false,
-    spawnNoncesValid: false,
+    normalizedEmptyDefenseRoomsBefore: a.normalizedEmptyDefenseRooms,
+    normalizedEmptyDefenseRoomsAfter: b.normalizedEmptyDefenseRooms,
+    persistentEqual: isDeepStrictEqual(b.persistent, a.persistent),
+    persistentDifferencePaths: changedPaths(a.persistent, b.persistent),
+    integrity,
+    dynamicsValid: true,
+    spawnNoncesValid: true,
     ok: false,
   };
   report.saveIsolation.comparisons.push(row);
-  assert.deepEqual(b.persistent, a.persistent, labelName + ': persistent normal progress changed');
-  row.persistentEqual = true;
 
   const beforeResonance = Number(a.dynamic.resonance);
   const afterResonance = Number(b.dynamic.resonance);
-  assert.ok(Number.isFinite(beforeResonance) && Number.isFinite(afterResonance), labelName + ': resonance is not finite');
-  assert.ok(afterResonance + 1e-6 >= beforeResonance, labelName + ': normal resonance decreased');
-  assert.ok(afterResonance <= 100 + 1e-6, labelName + ': resonance exceeded its cap');
+  row.dynamicsValid = Number.isFinite(beforeResonance) && Number.isFinite(afterResonance)
+    && afterResonance + 1e-6 >= beforeResonance && afterResonance <= 100 + 1e-6;
   for (const key of ['attack', 'special']) {
     const oldValue = Number(a.dynamic.cooldowns[key] || 0);
     const newValue = Number(b.dynamic.cooldowns[key] || 0);
-    assert.ok(newValue <= oldValue + 1e-6, labelName + ': ' + key + ' cooldown increased');
+    row.dynamicsValid &&= newValue <= oldValue + 1e-6;
   }
-  row.dynamicsValid = true;
 
   const keys = new Set([
     ...Object.keys(a.persistent.rooms),
@@ -182,10 +243,15 @@ function assertNormalEquivalent(before, after, restoreCount, labelName) {
     const oldValue = Number(a.spawnNonces[key] || 0);
     const newValue = Number(b.spawnNonces[key] || 0);
     const expected = oldValue + (Object.hasOwn(a.persistent.rooms, key) ? restoreCount : 0);
-    assert.equal(newValue, expected, labelName + ': unexpected room spawn nonce for ' + key);
+    if (newValue !== expected) row.spawnNoncesValid = false;
   }
-  row.spawnNoncesValid = true;
-  row.ok = true;
+  row.spawnNonceDifferences = [...keys].filter(key => {
+    const oldValue = Number(a.spawnNonces[key] || 0);
+    const newValue = Number(b.spawnNonces[key] || 0);
+    return newValue !== oldValue + (Object.hasOwn(a.persistent.rooms, key) ? restoreCount : 0);
+  });
+  row.ok = row.persistentEqual && Object.values(integrity).every(Boolean) && row.dynamicsValid && row.spawnNoncesValid;
+  if (!row.ok) console.error('R75_OVERNIGHT_SAVE_COMPARISON_FAILURE', JSON.stringify(row));
   return row;
 }
 
@@ -204,18 +270,62 @@ function assertTrialSlot(raw, expectedZone) {
 }
 
 function assertNormalSlotPreserved(beforeRaw, afterRaw, labelName) {
-  assert.ok(typeof beforeRaw === 'string' && typeof afterRaw === 'string', labelName + ': normal save slot is missing');
   const row = {
     label: labelName,
-    beforeSHA256: digest(Buffer.from(beforeRaw)),
-    afterSHA256: digest(Buffer.from(afterRaw)),
+    beforeSHA256: typeof beforeRaw === 'string' ? digest(Buffer.from(beforeRaw)) : null,
+    afterSHA256: typeof afterRaw === 'string' ? digest(Buffer.from(afterRaw)) : null,
     semanticEqual: false,
     ok: false,
   };
   report.saveIsolation.storedComparisons.push(row);
-  assert.deepEqual(canonicalStoredSave(afterRaw), canonicalStoredSave(beforeRaw), labelName + ': persistent normal slot changed during the 777 trial');
-  row.semanticEqual = true;
-  row.ok = true;
+  if (typeof beforeRaw !== 'string' || typeof afterRaw !== 'string') {
+    row.error = 'normal save slot is missing';
+    console.error('R75_OVERNIGHT_SLOT_COMPARISON_FAILURE', JSON.stringify(row));
+    return row;
+  }
+  try {
+    const before = canonicalStoredSave(beforeRaw);
+    const after = canonicalStoredSave(afterRaw);
+    row.semanticEqual = isDeepStrictEqual(after, before);
+    row.differencePaths = changedPaths(before, after);
+    row.ok = row.semanticEqual;
+  } catch (error) {
+    row.error = String(error.stack || error);
+  }
+  if (!row.ok) console.error('R75_OVERNIGHT_SLOT_COMPARISON_FAILURE', JSON.stringify(row));
+  return row;
+}
+
+function assertNormalSlotProgressAfterReturn(beforeRaw, afterRaw, labelName) {
+  const row = {
+    label: labelName,
+    beforeSHA256: typeof beforeRaw === 'string' ? digest(Buffer.from(beforeRaw)) : null,
+    afterSHA256: typeof afterRaw === 'string' ? digest(Buffer.from(afterRaw)) : null,
+    semanticEqual: false,
+    integrity: null,
+    ok: false,
+  };
+  report.saveIsolation.storedComparisons.push(row);
+  if (typeof beforeRaw !== 'string' || typeof afterRaw !== 'string') {
+    row.error = 'normal save slot is missing';
+    console.error('R75_OVERNIGHT_SLOT_COMPARISON_FAILURE', JSON.stringify(row));
+    return row;
+  }
+  try {
+    const before = stableSave(JSON.parse(beforeRaw));
+    const after = stableSave(JSON.parse(afterRaw));
+    const beforeIntegrity = integritySnapshots(before);
+    const afterIntegrity = integritySnapshots(after);
+    row.semanticEqual = isDeepStrictEqual(before.persistent, after.persistent);
+    row.differencePaths = changedPaths(before.persistent, after.persistent);
+    row.normalizedEmptyDefenseRoomsBefore = before.normalizedEmptyDefenseRooms;
+    row.normalizedEmptyDefenseRoomsAfter = after.normalizedEmptyDefenseRooms;
+    row.integrity = Object.fromEntries(Object.keys(beforeIntegrity).map(key => [key, isDeepStrictEqual(beforeIntegrity[key], afterIntegrity[key])]));
+    row.ok = row.semanticEqual && Object.values(row.integrity).every(Boolean);
+  } catch (error) {
+    row.error = String(error.stack || error);
+  }
+  if (!row.ok) console.error('R75_OVERNIGHT_SLOT_COMPARISON_FAILURE', JSON.stringify(row));
   return row;
 }
 
@@ -316,6 +426,7 @@ async function performanceMatrix() {
 
 let failure = null;
 try {
+  assertSaveComparisonContract();
   assert.ok(target, `Unexpected matrix seed ${seed}`);
   report.commit = execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
   report.htmlSHA256 = digest(await fs.readFile('_pages/docs/index.html'));
@@ -410,10 +521,10 @@ try {
   await page.locator('#campaignContinue54').click({timeout: 90000});
   await ready();
   const normalAfterReload = await page.evaluate(() => serializeSave());
-  assertNormalEquivalent(normal, normalAfterReload, 1, 'normal-continue-after-browser-reload');
-  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-normal-continue');
+  const reloadComparison = assertNormalEquivalent(normal, normalAfterReload, 1, 'normal-continue-after-browser-reload');
+  const reloadSlotComparison = assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-normal-continue');
   assert.equal(await page.evaluate(() => window.__STORYWORLD_CHEAT777__.active()), false);
-  check('browser-reload-native-continue-preserves-normal-progress', {zone: normalAfterReload.zone, progress: normalAfterReload.progress, hero: normalAfterReload.player.hero, level: normalAfterReload.player.level});
+  check('browser-reload-native-continue-preserves-normal-progress', {zone: normalAfterReload.zone, progress: normalAfterReload.progress, hero: normalAfterReload.player.hero, level: normalAfterReload.player.level}, reloadComparison.ok && reloadSlotComparison.ok);
 
   await page.locator('#story-code-button').click();
   await page.locator('#codeResumeR75').click();
@@ -422,27 +533,39 @@ try {
   const resumedTrial = await page.evaluate(() => ({zone, active: window.__STORYWORLD_CHEAT777__.active(), save: serializeSave()}));
   assert.equal(resumedTrial.zone, target);
   assert.equal(resumedTrial.active, true);
-  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-resume');
-  check('saved-777-trial-resumes-after-normal-continue', {zone: resumedTrial.zone, active: resumedTrial.active, seed, targetProbe});
+  const resumeSlotComparison = assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-resume');
+  check('saved-777-trial-resumes-after-normal-continue', {zone: resumedTrial.zone, active: resumedTrial.active, seed, targetProbe}, resumeSlotComparison.ok);
 
   assert.equal(await page.evaluate(() => window.__STORYWORLD_CHEAT777__.leave()), true);
   await ready();
   const returned = await page.evaluate(() => serializeSave());
-  assertNormalEquivalent(normalAfterReload, returned, 1, 'leave-777-restores-normal-journey');
-  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-leave');
-  check('native-777-leave-restores-normal-journey', {zone: returned.zone, progress: returned.progress, hero: returned.player.hero, level: returned.player.level, points: returned.player.points});
+  const leaveComparison = assertNormalEquivalent(normalAfterReload, returned, 1, 'leave-777-restores-normal-journey');
+  const leaveSlotComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'normal-slot-after-777-leave');
+  check('native-777-leave-restores-normal-journey', {zone: returned.zone, progress: returned.progress, hero: returned.player.hero, level: returned.player.level, points: returned.player.points}, leaveComparison.ok && leaveSlotComparison.ok);
 
   assert.equal(await page.evaluate(() => saveGame(false)), true);
   await page.reload({waitUntil: 'domcontentloaded'});
   await page.locator('#campaignContinue54').click({timeout: 90000});
   await ready();
   const final = await page.evaluate(() => serializeSave());
-  assertNormalEquivalent(returned, final, 1, 'normal-save-after-777-return-round-trip');
+  const finalComparison = assertNormalEquivalent(returned, final, 1, 'normal-save-after-777-return-round-trip');
+  const finalStoredComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'normal-slot-after-777-return-round-trip');
+  check('normal-save-after-777-return-round-trip', {zone: final.zone, progress: final.progress, hero: final.player.hero, level: final.player.level, points: final.player.points}, finalComparison.ok && finalStoredComparison.ok);
   assert.deepEqual(report.pageErrors, []);
-  report.saveIsolation.complete = true;
-  report.result = 'passed';
+  report.saveIsolation.complete = report.saveIsolation.comparisons.length === 3 && report.saveIsolation.storedComparisons.length === 6;
+  report.saveIsolation.passed = report.saveIsolation.complete
+    && report.saveIsolation.comparisons.every(item => item.ok === true)
+    && report.saveIsolation.storedComparisons.every(item => item.ok === true);
   report.roundTrips = 2;
-  report.normalReturnedSemanticallyEquivalent = true;
+  report.normalReturnedSemanticallyEquivalent = report.saveIsolation.passed;
+  if (!report.saveIsolation.passed) {
+    const failedComparisons = [
+      ...report.saveIsolation.comparisons.filter(item => !item.ok),
+      ...report.saveIsolation.storedComparisons.filter(item => !item.ok),
+    ].map(item => ({label: item.label, persistentDifferencePaths: item.persistentDifferencePaths, differencePaths: item.differencePaths, integrity: item.integrity, dynamicsValid: item.dynamicsValid, spawnNoncesValid: item.spawnNoncesValid}));
+    throw new Error('R75 save comparisons failed after collecting all checkpoints: ' + JSON.stringify(failedComparisons));
+  }
+  report.result = 'passed';
 } catch (error) {
   failure = error;
   report.result = 'failed';

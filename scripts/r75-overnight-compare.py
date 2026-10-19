@@ -19,6 +19,7 @@ EXPECTED_CHECKS = {
     "browser-reload-native-continue-preserves-normal-progress",
     "saved-777-trial-resumes-after-normal-continue",
     "native-777-leave-restores-normal-journey",
+    "normal-save-after-777-return-round-trip",
 }
 
 ROOT.mkdir(parents=True, exist_ok=True)
@@ -53,6 +54,8 @@ def read(label, seed, rep):
     isolation = row.get("saveIsolation") if isinstance(row.get("saveIsolation"), dict) else {}
     if isolation.get("complete") is not True:
         issue(f"{path}: save isolation did not complete")
+    if isolation.get("passed") is not True:
+        issue(f"{path}: save isolation checkpoints did not all pass")
     if not isolation.get("normalSlotKey") or not isolation.get("trialSlotKey") or isolation.get("normalSlotKey") == isolation.get("trialSlotKey"):
         issue(f"{path}: normal and 777 storage keys are not independently verified")
     if not isinstance(isolation.get("trial"), dict) or isolation["trial"].get("active") is not True or isolation["trial"].get("zone") != TARGETS[seed]:
@@ -64,8 +67,8 @@ def read(label, seed, rep):
     if len(comparisons) != 3 or any(not isinstance(item, dict) or item.get("ok") is not True for item in comparisons):
         issue(f"{path}: expected three successful semantic restore comparisons")
     stored = isolation.get("storedComparisons") if isinstance(isolation.get("storedComparisons"), list) else []
-    if len(stored) != 5 or any(not isinstance(item, dict) or item.get("ok") is not True or item.get("semanticEqual") is not True for item in stored):
-        issue(f"{path}: expected five successful normal-slot isolation comparisons")
+    if len(stored) != 6 or any(not isinstance(item, dict) or item.get("ok") is not True or item.get("semanticEqual") is not True for item in stored):
+        issue(f"{path}: expected four 777 isolation snapshots and two post-return progress checks")
     expected_restore_labels = {"normal-continue-after-browser-reload", "leave-777-restores-normal-journey", "normal-save-after-777-return-round-trip"}
     comparison_labels = {item.get("label") for item in comparisons if isinstance(item, dict)}
     if comparison_labels != expected_restore_labels or any(
@@ -74,9 +77,11 @@ def read(label, seed, rep):
         or item.get("dynamicsValid") is not True
         or item.get("spawnNoncesValid") is not True
         or item.get("restoreCount") != 1
+        or not isinstance(item.get("integrity"), dict)
+        or any(item["integrity"].get(key) is not True for key in ("progressFlags", "worldAndDoors", "bossesAndRewards"))
         for item in comparisons
     ):
-        issue(f"{path}: semantic comparison must validate progress, timers, resonance, and exact one-restore room counters")
+        issue(f"{path}: semantic comparison must strictly validate progress flags, doors, bosses/rewards, timers, resonance, and exact one-restore room counters")
     return row
 
 
@@ -131,6 +136,13 @@ def same_json(left, right):
 performance_pairs = []
 environment_keys = ("zone", "layer", "seed", "family", "enemyRoster", "active", "actors", "camera", "player", "renderer", "fixture")
 performance_environment_matches = True
+
+
+def compare_environment_field(differences, field, baseline_value, candidate_value):
+    if not same_json(baseline_value, candidate_value):
+        differences.append({"field": field, "baseline": baseline_value, "candidate": candidate_value})
+
+
 for rep in REPS[11]:
     before = baseline[11][rep]
     after = candidate[11][rep]
@@ -143,22 +155,29 @@ for rep in REPS[11]:
         issue(f"seed 11 rep {rep}: missing performance sample")
         performance_environment_matches = False
         continue
-    pair_ok = perf_a.get("seed") == perf_b.get("seed") == 11
-    pair_ok &= perf_a.get("replicate") == perf_b.get("replicate") == rep
-    pair_ok &= perf_a.get("durationMs") == perf_b.get("durationMs") == 90000
-    pair_ok &= same_json(perf_a.get("viewport"), perf_b.get("viewport"))
-    pair_ok &= all(same_json(perf_a.get("before", {}).get(key), perf_b.get("before", {}).get(key)) for key in environment_keys)
-    sample_a = perf_a.get("sample", {})
-    sample_b = perf_b.get("sample", {})
-    phase_a = {phase.get("name"): phase for phase in sample_a.get("phases", []) if isinstance(phase, dict)}
-    phase_b = {phase.get("name"): phase for phase in sample_b.get("phases", []) if isinstance(phase, dict)}
+    environment_differences = []
+    for field, expected in (("seed", 11), ("replicate", rep), ("durationMs", 90000)):
+        for label, perf in (("baseline", perf_a), ("candidate", perf_b)):
+            if perf.get(field) != expected:
+                environment_differences.append({"field": f"{label}.{field}", "expected": expected, "actual": perf.get(field)})
+    compare_environment_field(environment_differences, "viewport", perf_a.get("viewport"), perf_b.get("viewport"))
+    before_a = perf_a.get("before") if isinstance(perf_a.get("before"), dict) else {}
+    before_b = perf_b.get("before") if isinstance(perf_b.get("before"), dict) else {}
+    for key in environment_keys:
+        compare_environment_field(environment_differences, f"before.{key}", before_a.get(key), before_b.get(key))
+    sample_a = perf_a.get("sample") if isinstance(perf_a.get("sample"), dict) else {}
+    sample_b = perf_b.get("sample") if isinstance(perf_b.get("sample"), dict) else {}
+    phase_a = {phase.get("name"): phase for phase in (sample_a.get("phases") or []) if isinstance(phase, dict)}
+    phase_b = {phase.get("name"): phase for phase in (sample_b.get("phases") or []) if isinstance(phase, dict)}
     if set(phase_a) != set(PERF_PHASES) or set(phase_b) != set(PERF_PHASES):
         issue(f"seed 11 rep {rep}: performance phases are incomplete")
-        pair_ok = False
+        environment_differences.append({"field": "sample.phases", "expected": list(PERF_PHASES), "baseline": sorted(phase_a), "candidate": sorted(phase_b)})
+    pair_ok = not environment_differences
     performance_environment_matches &= bool(pair_ok)
     if not pair_ok:
-        issue(f"seed 11 rep {rep}: baseline/candidate performance environments do not match")
-    performance_pairs.append({"replicate": rep, "environmentMatches": bool(pair_ok), "durationMs": perf_a.get("durationMs"), "viewport": perf_a.get("viewport"), "phases": []})
+        field_names = [item["field"] for item in environment_differences]
+        issue(f"seed 11 rep {rep}: baseline/candidate performance environments do not match at {field_names}")
+    performance_pairs.append({"replicate": rep, "environmentMatches": bool(pair_ok), "environmentDifferences": environment_differences, "durationMs": perf_a.get("durationMs"), "viewport": perf_a.get("viewport"), "phases": []})
     for name in PERF_PHASES:
         if name not in phase_a or name not in phase_b:
             continue
@@ -237,6 +256,12 @@ result = {
 }
 ROOT.mkdir(parents=True, exist_ok=True)
 (ROOT / "comparison.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-print(json.dumps({"result": result["result"], "issues": len(issues), "candidateSHAs": candidate_shas, "performanceEnvironmentMatches": result["performanceEnvironmentMatches"]}, ensure_ascii=False))
+environment_diagnostics = [
+    {"replicate": pair["replicate"], "fields": pair["environmentDifferences"]}
+    for pair in performance_pairs if pair["environmentDifferences"]
+]
+if environment_diagnostics:
+    print("R75_PERFORMANCE_ENVIRONMENT_DIAGNOSTICS " + json.dumps(environment_diagnostics, ensure_ascii=False))
+print(json.dumps({"result": result["result"], "issues": len(issues), "candidateSHAs": candidate_shas, "performanceEnvironmentMatches": result["performanceEnvironmentMatches"], "environmentMismatchPairs": len(environment_diagnostics)}, ensure_ascii=False))
 if issues:
     raise SystemExit(1)
