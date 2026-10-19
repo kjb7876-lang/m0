@@ -1,7 +1,7 @@
 /* Enemy-local slowdown. Player/UI/save time and native awakening admission /
  * duration stay untouched. All additional storm state is transient. */
 (()=>{'use strict';
- let factors=new WeakMap(),rays=[],rayPool=Array(12),serial=0,nextRay=0,trackedRoom=null,trackedActor=null,hadAwakening=false;let ownerCycles=new WeakMap(),cycleSerial=0;const ledgers=new WeakMap(),events=[];
+ let factors=new WeakMap(),rays=[],rayPool=Array(12),serial=0,nextRay=0,trackedRoom=null,trackedActor=null,hadAwakening=false,paintingEnemy=null;let ownerCycles=new WeakMap(),cycleSerial=0;const ledgers=new WeakMap(),events=[];
  const metrics={slowedFrames:0,shiftedFields:0,rays:0,hits:0,maxRays:0,maxRuns:0},limit={rays:12,runs:8,samples:512,hitInterval:.35,hitsPerEnemy:24,radius:.42,nearby:14};
  const coop=()=>window.__STORYWORLD_COOP_SIM_R62__,authority=()=>coop()?.mode?.()!=='guest';
  const actors=()=>coop()?.players?.()||[player],awake=()=>started&&!safeRegion()&&actors().some(p=>p?.hp>0&&p.samong>0);
@@ -32,9 +32,9 @@
  let trackedEpoch=0;
  const moveBase=moveAI3;moveAI3=function(e,goal,dt,...a){return moveBase.call(this,e,goal,dt*(factors.get(e)??1),...a);};
  const tickBase=tick;tick=function(dt,...a){if(trackedRoom!==room||trackedActor!==player){clear('identity');trackedEpoch++;}const before=time;if(started&&!modal&&!loading&&player?.hp>0&&!document.hidden)shiftFrame(dt);const result=tickBase.call(this,dt,...a);if(time>before)storm();return result;};
- const enemyBase=drawEnemy;drawEnemy=function(e,...a){if(!awake()||!live(e))return enemyBase.apply(this,[e,...a]);ctx.save();try{ctx.globalAlpha*=.62;ctx.filter='grayscale(.82) contrast(1.15)';return enemyBase.apply(this,[e,...a]);}finally{ctx.restore();}};
+ const enemyBase=drawEnemy;drawEnemy=function(e,...a){if(!awake()||!live(e))return enemyBase.apply(this,[e,...a]);const prior=paintingEnemy;paintingEnemy=e;ctx.save();try{ctx.globalAlpha*=.62;ctx.filter='grayscale(.82) contrast(1.15)';return enemyBase.apply(this,[e,...a]);}finally{paintingEnemy=prior;ctx.restore();}};
  const drawEffectBase=drawEffect;drawEffect=function(effect,...args){if(effect?.type!=='samongStormR75')return drawEffectBase.apply(this,[effect,...args]);if(!awake())return;let painted=0;const ray=effect.r75Storm;if(ray){const age=time-ray.start,active=age>=.18&&age<=.34,alpha=age<.18?.12:Math.max(0,.42*(1-(age-.18)/.36));for(const run of ray.runs){if(painted++>=(settings.lowFx?24:64))break;const paint=()=>{const p=project(run.a.x,run.a.y),q=project(run.b.x,run.b.y);ctx.save();try{ctx.globalAlpha*=alpha;ctx.strokeStyle=active?'#eff6ee':'#a9c2bd';ctx.lineWidth=Math.max(.7,zoom*(active?1.35:.7));ctx.lineCap='round';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}finally{ctx.restore();}};if(ctx.scope)ctx.scope({id:'r75:storm:'+ray.id+':'+painted,kind:'effect',x:run.b.x,y:run.b.y,groundAligned:true,alive:false},paint);else paint();}}};
  for(const key of ['enterRegion','restoreSave','newGame']){const base=key==='enterRegion'?enterRegion:key==='restoreSave'?restoreSave:newGame,wrapped=async function(...a){clear(key);trackedEpoch++;return base.apply(this,a);};if(key==='enterRegion')enterRegion=wrapped;else if(key==='restoreSave')restoreSave=wrapped;else newGame=wrapped;}
  const deathBase=showDeath;showDeath=function(...a){clear('death');trackedEpoch++;return deathBase.apply(this,a);};
- window.__STORYWORLD_SAMONG_R75__=Object.freeze({active:awake,factor:e=>factors.get(e)??1,shiftFrame,clear,inspect:()=>({active:awake(),rays:rays.length,metrics:{...metrics},limits:{...limit},events:[...events]})});
+ window.__STORYWORLD_SAMONG_R75__=Object.freeze({active:awake,bodyFilter(value){const base=value&&value!=='none'?value:'none';return paintingEnemy&&awake()&&live(paintingEnemy)?(base==='none'?'':base+' ')+'grayscale(.82) contrast(1.15)':base;},factor:e=>factors.get(e)??1,shiftFrame,clear,inspect:()=>({active:awake(),rays:rays.length,metrics:{...metrics},limits:{...limit},events:[...events]})});
 })();

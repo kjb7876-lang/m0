@@ -161,6 +161,10 @@ def transform(html, renderer):
          'if (row.records.length && progressValue?.[layerValue]?.[row.id] !== true && !window.__STORYWORLD_NARRATIVE_R75__?.legacyEligible(row.id,layerValue,progressValue)) break;'),
     ]:
         html = once(html, old, new)
+    html = once(html, "scenes.at(-1).part==='post'?'complete'", "scenes.some(s=>s.part==='post')?'complete'")
+    html = once(html, "else if(cp.action==='personaReady')readyStage3('personaReady','거울의 봉인');});", "else if(cp.action==='personaReady')readyStage3('personaReady','거울의 봉인');});if(room.sceneCheckpoint){room.sceneCheckpoint.action=cp.action;saveGame(false);}")
+    html = once(html, "r?.post&&r.post.includes('合一夢世')", "r?.post&&r['finale.core-preserved']?.includes('合一夢世')")
+    html = once(html, '<title>HAPIL · 합일몽세 — 서사 연결형 월드 05</title>', '<title>StoryWorld · 합일몽세</title>')
     # R54 used to overwrite the selected speaker/body contract after alignment.
     html = once(html, "for(const r of canonicalRecords){r.voiceSource={};for(const part of ['pre','post','firstPost','awakenPre'])r.voiceSource[part]=r[part]||'';}",
                 "for(const r of canonicalRecords)r.voiceSource={...r.voiceSource};")
@@ -189,6 +193,7 @@ def transform(html, renderer):
     if html.count(remote) != 2: raise ValueError('R75 remote interaction anchor drift')
     html = html.replace(remote, 'if(cmd.ego)base.ego();if(cmd.interact)window.__STORYWORLD_OBJECTIVES_R75__?.remoteInteract();if(cmd.threadDance')
     html = once(html, 'const applied=Math.min(e.hp,value);', "if(source?.kind==='narrative-companion-r75'){value=Math.min(value,Number.isFinite(source.supportBudget)?Math.max(0,source.supportBudget):0,Math.max(0,e.hp-e.maxHp*.2));if(value<=0)return false;}const applied=Math.min(e.hp,value);")
+    html = once(html, "targetCtx.filter = options.filter && options.filter !== 'none' ? options.filter : 'none';", "targetCtx.filter = window.__STORYWORLD_SAMONG_R75__?.bodyFilter(options.filter) ?? (options.filter && options.filter !== 'none' ? options.filter : 'none');")
     # Enemy delta clocks and absolute owner deadlines share one local factor.
     start = html.index('tickEnemies=function(dt){\n if(room.encounterStage')
     end = html.index('\n};\nconst v2Blocked3', start) + 3
