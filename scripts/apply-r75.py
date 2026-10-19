@@ -59,6 +59,7 @@ def transform(html, renderer):
     start = html.index('window.__STORYWORLD_CAMPAIGN_DATA_R54__=')
     end = html.index(';\n', start)
     baseline = json.loads(html[start:end].split('=', 1)[1])
+    balance_order = list(baseline['portalOrder'])
     old_profiles = {p['id']: p for p in baseline['profiles']}
     profiles = []
     records = []
@@ -84,7 +85,7 @@ def transform(html, renderer):
                          'canonicalRecord': canonical})
     baseline.update(recordCount=62, combatRecordCount=56, restRecordCount=6, campaignRegionCount=64,
                     portalOrder=runtime['portalOrder'], chapterOrder=chapters, profiles=profiles,
-                    narrativeSource=runtime['source'])
+                    narrativeSource=runtime['source'], balanceOrderR75=balance_order)
     html = html[:start] + 'window.__STORYWORLD_CAMPAIGN_DATA_R54__=' + compact(baseline) + html[end:]
     new_raw = {'version': 'R75', 'sourceSha256': story.SOURCE_SHA, 'sourceFile': runtime['source']['file'],
                'records': records, 'specialTexts': runtime['specialTexts'],
@@ -166,12 +167,16 @@ def transform(html, renderer):
     html = once(html, "r?.post&&r.post.includes('合一夢世')", "r?.post&&r['finale.core-preserved']?.includes('合一夢世')")
     html = once(html, '<title>HAPIL · 합일몽세 — 서사 연결형 월드 05</title>', '<title>StoryWorld · 합일몽세</title>')
     html = once(html, 'bindControls();resize();boot();', "bindControls();resize();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot(),{once:true});else boot();")
+    html = once(html, 'let runSeed=0,entries=Object.create(null),generation=0;const limit=126;', 'let runSeed=0,entries=Object.create(null),generation=0;const limit=128;')
+    html = once(html, 'Object.entries(raw?.routeEntriesR72?.version===1?raw.routeEntriesR72.entries||{}:{}).slice(0,126)', 'Object.entries(raw?.routeEntriesR72?.version===1?raw.routeEntriesR72.entries||{}:{}).slice(0,128)')
     # R54 used to overwrite the selected speaker/body contract after alignment.
     html = once(html, "for(const r of canonicalRecords){r.voiceSource={};for(const part of ['pre','post','firstPost','awakenPre'])r.voiceSource[part]=r[part]||'';}",
                 "for(const r of canonicalRecords)r.voiceSource={...r.voiceSource};")
     # Existing ending/hidden paths are replaced with exact source text.
     html = html.replace('외부의 악을 넘어, 내 욕망의 순수악의가 거울에서 깨어난다.\\n\\n제단의 거울과 마주해 마지막 기억을 잇는다.', runtime['specialTexts']['hidden.persona'])
     html = html.replace('사후의 나 · 히든 결전', '사몽 · 히든 결전')
+    html = once(html, "narrator:'다운로드판 연결 문구 · RC133 대사 기반'", "narrator:'기억의 기록'")
+    html = once(html, "narrator:'다운로드판 연결 문구'};if(!r)", "narrator:'기억의 기록'};if(!r)")
     html = html.replace('다시 잠에 들 시간이에요...!', runtime['specialTexts']['return.sleep'])
     # Admission lives inside captured automatic/manual cast closures, before
     # any queue/cooldown mutation. Filtering also protects secondary strikes.
@@ -188,6 +193,8 @@ def transform(html, renderer):
                           "const allowed=e=>window.__STORYWORLD_DANCE_POLICY_R75__?.target(k,e,p)??true,selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'&&allowed(e)),near=liveEnemies().filter(e=>distance(p,e)<=12&&allowed(e))")
     html = html[:dance_match.start(2)] + dance_fragment + html[dance_match.end(2):]
     html = once(html, 'guide=!guide;auto=true;guideTimer=0;', 'guide=!guide;auto=guide;guideTimer=0;')
+    html = once(html, 'isHost,authoritative,canSimulate:authoritative,players:allPlayers', 'isHost,authoritative,isPaused:()=>paused,canSimulate:authoritative,players:allPlayers')
+    html = once(html, 'if(l.deadAt)return;p.hp=0;window.__STORYWORLD_HEALTH_R71__', "if(l.deadAt)return;p.hp=0;window.__STORYWORLD_SAMONG_R75__?.cancelOwner(p,'death');window.__STORYWORLD_HEALTH_R71__")
     # Optional bounded NPC presentation data travels only in host snapshots.
     html = once(html, "'passivePointRevisionR64'];", "'passivePointRevisionR64','r75NPCs'];")
     remote = 'if(cmd.ego)base.ego();if(cmd.threadDance'
@@ -197,6 +204,10 @@ def transform(html, renderer):
     html = once(html, "targetCtx.filter = options.filter && options.filter !== 'none' ? options.filter : 'none';", "targetCtx.filter = window.__STORYWORLD_SAMONG_R75__?.bodyFilter(options.filter) ?? (options.filter && options.filter !== 'none' ? options.filter : 'none');")
     html = once(html, "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active')].some(p=>box(d,p.x,p.y,.6))", "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active'),...(room.props||[]).filter(p=>p.r75NarrativeNPC||p.r75NPC)].some(p=>box(d,p.x,p.y,.6))")
     html = once(html, 'room.props.filter(q=>q.path&&!q.solid)', 'room.props.filter(q=>q.path&&!q.solid&&!q.r75NarrativeNPC&&!q.r75NPC)')
+    # Combat pressure keeps the original 63-region curve. Adding a narrative
+    # stop must not silently increase existing native damage or field pressure.
+    html = once(html, "function progression(r=room){const order=window.__STORYWORLD_STORY_PROFILE_R54__?.campaignOrder||regions.map(d=>d.id),id=typeof r==='string'?r:r?.id,index=Math.max(0,order.indexOf(id));return clamp(index/Math.max(1,order.length-1),0,1);}",
+                "function progression(r=room){const order=window.__STORYWORLD_CAMPAIGN_DATA_R54__?.balanceOrderR75||window.__STORYWORLD_STORY_PROFILE_R54__?.campaignOrder||regions.map(d=>d.id),rawId=typeof r==='string'?r:r?.id,id=rawId==='ep1a09b'?'ep1a09':rawId,index=Math.max(0,order.indexOf(id));return clamp(index/Math.max(1,order.length-1),0,1);}")
     # Enemy delta clocks and absolute owner deadlines share one local factor.
     start = html.index('tickEnemies=function(dt){\n if(room.encounterStage')
     end = html.index('\n};\nconst v2Blocked3', start) + 3
