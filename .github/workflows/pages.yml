@@ -1,4 +1,4 @@
-name: StoryWorld R71 Pages
+name: StoryWorld R73 Pages with preserved R71 gates
 on:
   push:
     branches: [main]
@@ -8,8 +8,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: storyworld-pages-${{ github.event.pull_request && format('pr-{0}-{1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'main' }}
-  cancel-in-progress: false
+  group: storyworld-pages-${{ github.event.pull_request && format('pr-{0}', github.event.pull_request.number) || 'main' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -165,6 +165,92 @@ jobs:
             out/r71/
             _pages/docs/web-manifest-r62.json
           retention-days: 14
+  candidate:
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        script: [cpu, r73-ui, r73-diagnose, r73-slots.browser, r73-native, r73-route.browser, r73-features, r73-render.browser, r73-memory.browser, r73-maze.browser]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct preserved R71 and R72 then exact R73 candidate
+        run: bash scripts/build-r73-site.sh
+      - name: Preserve relay and static file assertions
+        if: matrix.script == 'cpu'
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --prefix relay
+          node --test relay/test/relay.test.mjs | tee out/r73/relay.log
+          node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
+      - name: Install pinned sandboxed browser
+        if: matrix.script != 'cpu'
+        run: |
+          npm ci --ignore-scripts --prefix relay
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run required R73 regression scenario
+        if: matrix.script != 'cpu'
+        env:
+          SCENARIO: ${{ matrix.script }}
+          R73_COMPARE: '1'
+          R73_ABBA: '1'
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > out/r73/r71-http.log 2>&1 &
+          BASELINE_PID=$!
+          python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > out/r73/r72-http.log 2>&1 &
+          R72_PID=$!
+          trap 'kill "$SERVER_PID" "$BASELINE_PID" "$R72_PID" 2>/dev/null || true' EXIT
+          node "scripts/$SCENARIO.mjs" | tee out/r73/runner.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r73-release-${{ matrix.script }}-${{ github.sha }}
+          path: |
+            out/r73/
+            out/r71/native/
+          retention-days: 14
+  release:
+    needs: [build, candidate]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      html_sha: ${{ steps.hashes.outputs.html_sha }}
+      renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct byte-identical verified release
+        run: bash scripts/build-r73-site.sh
+      - name: Require exact R73 runtime approval
+        id: hashes
+        run: python3 scripts/r73-release-gate.py | tee out/r73/approval.json
+      - name: Verify all release files
+        run: node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r73-release-manifest-${{ github.sha }}
+          path: |
+            out/r73/
+            _pages/docs/web-manifest-r62.json
+          retention-days: 14
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5
@@ -178,7 +264,7 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: build
+    needs: release
     permissions:
       contents: read
       pages: write
@@ -190,11 +276,11 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public HTML and renderer match approved R71 hashes
+      - name: Verify public HTML and renderer match approved R73 hashes
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
-          HTML_SHA: ${{ needs.build.outputs.html_sha }}
-          RENDERER_SHA: ${{ needs.build.outputs.renderer_sha }}
+          HTML_SHA: ${{ needs.release.outputs.html_sha }}
+          RENDERER_SHA: ${{ needs.release.outputs.renderer_sha }}
           SOURCE_COMMIT: ${{ github.sha }}
         run: |
           python3 - <<'PY'
@@ -214,5 +300,5 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R71_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('R73_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
