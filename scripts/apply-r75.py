@@ -1,5 +1,6 @@
 """Apply the new canonical narrative to the exact R74 release, reproducibly."""
 import argparse
+import copy
 import importlib.util
 import json
 import re
@@ -86,6 +87,45 @@ def transform(html, renderer):
                'openingVoice': {'opening': {'paragraphs': runtime['specialTexts']['prologue.pre'].split('\n\n')},
                                 'root': {'paragraphs': runtime['specialTexts']['prologue.post'].split('\n\n')}}}
     portable['text']['data/story-rc51.js'] = 'window.__HAPIL_STORY_DATA_RC51__=' + compact(new_raw) + ';\n'
+    # Add a reviewed derived region to every admission table. Retain all old
+    # rows and image checks; this is an R75 overlay, not an upstream claim.
+    new_meta = next(p['sourceWorld'] for p in profiles if p['id'] == 'ep1a09b')
+    new_meta = {**new_meta, 'order': 10.5, 'tempo': 'memory-reconstruction', 'tier': max(1, new_meta.get('tier', 1))}
+    portable['text']['data/world-v31217.js'] += '\nwindow.__MONGSE_WORLD_V31217__=Object.freeze({...window.__MONGSE_WORLD_V31217__,zones:Object.freeze([...window.__MONGSE_WORLD_V31217__.zones,' + compact(new_meta) + '])});\n'
+    overlay = {'sourceSha256': story.SOURCE_SHA, 'addedRegion': 'ep1a09b', 'borrowedArtRegion': 'dist03', 'namedBosses': 0}
+    roster = portable['mainlineRosterExpectations']
+    new_roster = copy.deepcopy(next(z for z in roster['zones'] if z['id'] == 'dist03'))
+    new_roster.update(id='ep1a09b', name='결전의 날 · 과거 궁전', order=10.5, r75Overlay=overlay)
+    new_roster['sourceActors'] = [r for r in new_roster['sourceActors'] if not r.get('boss') and not r.get('midboss')]
+    plan = new_roster['sourcePlan']
+    plan['plannedActors'] = [r for r in plan['plannedActors'] if not r.get('boss') and not r.get('midboss')]
+    plan['worldBosses'] = []; plan['unplannedWorldBosses'] = []
+    plan['nativeWaveActorCount'] = len([r for r in plan['plannedActors'] if r.get('role') != 'objectiveStructure'])
+    roster['zones'].append(new_roster)
+    roster['r75Overlay'] = overlay
+    roster['sourceScope']['zoneCount'] += 1
+    roster['sourceScope']['combatZoneCount'] += 1
+    roster['sourceScope']['combatZoneIds'].append('ep1a09b')
+    injection = next(z for z in roster['zones'] if z['id'] == 'ep1a09')
+    keep = {'a09-o1', 'a09-v1'}
+    injection['sourceActors'] = [r for r in injection['sourceActors'] if r['id'] in keep]
+    injection['expectedRoster'] = [r for r in injection['expectedRoster'] if r['id'] in keep]
+    injection['sourcePlan']['plannedActors'] = [r for r in injection['sourcePlan']['plannedActors'] if (r.get('nativeId') or r['id']) in keep or r.get('role') == 'objectiveStructure']
+    injection['sourcePlan']['worldBosses'] = []; injection['sourcePlan']['unplannedWorldBosses'] = []
+    injection['sourcePlan']['nativeWaveActorCount'] = sum(r.get('role') != 'objectiveStructure' for r in injection['sourcePlan']['plannedActors'])
+    injection['r75Overlay'] = {'sourceSha256': story.SOURCE_SHA, 'role': 'hospital-only, no palace echo or named boss'}
+    objects = portable['mainlineRegionObjects']
+    new_objects = copy.deepcopy(next(r for r in objects['entries'] if r['id'] == 'dist03'))
+    new_objects.update(id='ep1a09b', name='결전의 날 · 과거 궁전', sourceEnvironmentKey='past-palace-rescue', sourceTopology='palace-rescue-courtyard', r75Overlay=overlay)
+    for obj in new_objects.get('objects', []): obj['id'] = obj['id'].replace('dist03', 'ep1a09b', 1)
+    objects['entries'].append(new_objects); objects['r75Overlay'] = overlay
+    for name in ['mainlineRosterExpectations', 'mainlineRegionObjects']:
+        portable[name]['r75OriginalFixtureSha256'] = portable[name + 'Sha256']
+        portable[name + 'Sha256'] = story.SHA(compact(portable[name]))
+    asset_zone = copy.deepcopy(next(r for r in portable['assetMap']['zones'] if r['id'] == 'dist03'))
+    asset_zone['id'] = 'ep1a09b'; asset_zone['r75Overlay'] = overlay
+    asset_zone['actors'] = [r for r in asset_zone['actors'] if not r.get('boss') and not r.get('midboss')]
+    portable['assetMap']['zones'].append(asset_zone)
     # Old narration files remain archival media, but cannot be selected by R75.
     portable['text']['assets/story-narration/v1/manifest.json'] = compact({
         'schema': 'storyworld.narration-r75/v1', 'sourceSha256': story.SOURCE_SHA,
@@ -95,6 +135,8 @@ def transform(html, renderer):
     html = html[:match.start(2)] + compact(portable) + html[match.end(2):]
     for old, new in [
         ('data.recordCount!==61||data.portalOrder.length!==63', 'data.recordCount!==62||data.portalOrder.length!==64'),
+        ('fixture.zones?.length !== 64', 'fixture.zones?.length !== 65 || fixture.r75Overlay?.sourceSha256 !== "' + story.SOURCE_SHA + '"'),
+        ('objectFixture.entries?.length !== 64', 'objectFixture.entries?.length !== 65 || objectFixture.r75Overlay?.sourceSha256 !== "' + story.SOURCE_SHA + '"'),
         ('recordCount:61,combatRegions:55,restRecords:6,totalRegions:63', 'recordCount:62,combatRegions:56,restRecords:6,totalRegions:64'),
         ('recordCount:61,portalOrder:[...order]', 'recordCount:62,portalOrder:[...order]'),
         ('r.balanceIndexR54=r.balanceIndexR54??r.index', 'r.balanceIndexR54=data.profiles.find(p=>p.id===id)?.balanceIndexR75??r.balanceIndexR54??r.index'),
