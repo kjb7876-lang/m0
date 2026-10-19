@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate partial R75 browser matrices and preserve an auditable comparison."""
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -136,13 +137,107 @@ def same_json(left, right):
 
 
 performance_pairs = []
-environment_keys = ("zone", "layer", "seed", "family", "enemyRoster", "active", "actors", "cameraCell", "playerCell", "renderer", "fixture")
+# Browser AI can advance between paired snapshots. Keep that expected drift
+# bounded while still requiring the same actors, HP, and nearby scene state.
+POSITION_TOLERANCE_MAP_UNITS = 0.75
+environment_keys = ("zone", "layer", "seed", "family", "enemyRoster", "active", "renderer", "fixture")
 performance_environment_matches = True
 
 
 def compare_environment_field(differences, field, baseline_value, candidate_value):
     if not same_json(baseline_value, candidate_value):
         differences.append({"field": field, "baseline": baseline_value, "candidate": candidate_value})
+
+
+def point_distance(left, right):
+    if not isinstance(left, dict) or not isinstance(right, dict):
+        return None
+    coords = (left.get("x"), left.get("y"), right.get("x"), right.get("y"))
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) for value in coords):
+        return None
+    return math.hypot(left["x"] - right["x"], left["y"] - right["y"])
+
+
+def compare_position_field(differences, field, baseline_value, candidate_value):
+    distance = point_distance(baseline_value, candidate_value)
+    if distance is None or distance > POSITION_TOLERANCE_MAP_UNITS:
+        differences.append({
+            "field": field,
+            "baseline": baseline_value,
+            "candidate": candidate_value,
+            "distanceMapUnits": round(distance, 4) if distance is not None else None,
+            "toleranceMapUnits": POSITION_TOLERANCE_MAP_UNITS,
+        })
+
+
+def actor_index(actors):
+    if not isinstance(actors, list):
+        return None
+    indexed = {}
+    for actor in actors:
+        if not isinstance(actor, dict) or actor.get("id") is None:
+            return None
+        key = json.dumps(actor["id"], sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        if key in indexed:
+            return None
+        indexed[key] = actor
+    return indexed
+
+
+def compare_actors(differences, baseline_actors, candidate_actors):
+    baseline_by_id = actor_index(baseline_actors)
+    candidate_by_id = actor_index(candidate_actors)
+    if baseline_by_id is None or candidate_by_id is None:
+        differences.append({"field": "before.actors", "baseline": baseline_actors, "candidate": candidate_actors, "reason": "actor list or identities are malformed/non-unique"})
+        return
+    if baseline_by_id.keys() != candidate_by_id.keys():
+        differences.append({
+            "field": "before.actors.ids",
+            "baseline": sorted(baseline_by_id),
+            "candidate": sorted(candidate_by_id),
+        })
+    for key in sorted(baseline_by_id.keys() & candidate_by_id.keys()):
+        before_actor = baseline_by_id[key]
+        after_actor = candidate_by_id[key]
+        if not same_json(before_actor.get("hp"), after_actor.get("hp")):
+            differences.append({"field": f"before.actors[{before_actor.get('id')}].hp", "baseline": before_actor.get("hp"), "candidate": after_actor.get("hp")})
+        compare_position_field(
+            differences,
+            f"before.actors[{before_actor.get('id')}].position",
+            {"x": before_actor.get("x"), "y": before_actor.get("y")},
+            {"x": after_actor.get("x"), "y": after_actor.get("y")},
+        )
+
+
+def assert_position_comparison_contract():
+    differences = []
+    compare_position_field(differences, "point", {"x": 2.0, "y": 3.0}, {"x": 2.4, "y": 3.2})
+    compare_actors(
+        differences,
+        [{"id": "enemy-1", "hp": 9, "x": 1.0, "y": 2.0}],
+        [{"id": "enemy-1", "hp": 9, "x": 1.3, "y": 2.2}],
+    )
+    assert not differences, f"bounded sub-tolerance drift should pass: {differences}"
+
+    differences = []
+    compare_position_field(differences, "point", {"x": 2.0, "y": 3.0}, {"x": 2.76, "y": 3.0})
+    compare_actors(
+        differences,
+        [{"id": "enemy-1", "hp": 9, "x": 1.0, "y": 2.0}],
+        [{"id": "enemy-1", "hp": 9, "x": 1.76, "y": 2.0}],
+    )
+    assert len(differences) == 2 and all(item.get("distanceMapUnits") == 0.76 for item in differences), f"over-tolerance drift should be reported precisely: {differences}"
+
+    differences = []
+    compare_actors(
+        differences,
+        [{"id": "enemy-1", "hp": 9, "x": 1.0, "y": 2.0}],
+        [{"id": "enemy-1", "hp": 8, "x": 1.0, "y": 2.0}],
+    )
+    assert [item.get("field") for item in differences] == ["before.actors[enemy-1].hp"], f"actor HP must remain exact: {differences}"
+
+
+assert_position_comparison_contract()
 
 
 for rep in REPS[11]:
@@ -167,6 +262,9 @@ for rep in REPS[11]:
     before_b = perf_b.get("before") if isinstance(perf_b.get("before"), dict) else {}
     for key in environment_keys:
         compare_environment_field(environment_differences, f"before.{key}", before_a.get(key), before_b.get(key))
+    compare_actors(environment_differences, before_a.get("actors"), before_b.get("actors"))
+    compare_position_field(environment_differences, "before.camera", before_a.get("camera"), before_b.get("camera"))
+    compare_position_field(environment_differences, "before.player", before_a.get("player"), before_b.get("player"))
     sample_a = perf_a.get("sample") if isinstance(perf_a.get("sample"), dict) else {}
     sample_b = perf_b.get("sample") if isinstance(perf_b.get("sample"), dict) else {}
     phase_a = {phase.get("name"): phase for phase in (sample_a.get("phases") or []) if isinstance(phase, dict)}

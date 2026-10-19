@@ -443,9 +443,15 @@ async function performanceMatrix() {
     guide = false;
     booted = true;
     player.invincible = Math.max(player.invincible || 0, 1e7);
-    const actors = room.enemies.filter(e => e.hp > 0 && e.spawnState === 'active').map(e => ({id: e.id, hp: Math.round(e.hp * 1000) / 1000}));
-    const cell = point => ({x: Math.floor(point.x), y: Math.floor(point.y)});
-    return {zone, layer, seed: room.exploration?.seedR73 ?? null, family: room.exploration?.worldR75?.family || null, enemyRoster: room.enemies.length, active: actors.length, actors, cameraCell: cell(cam), playerCell: cell(player), renderer: window.__STORYWORLD_PHASE1__.controller.inspect().active, fixture: 'native dist02 field at deterministic seed; environment compares actor identity/HP and 1-unit player/camera cells so free-running AI movement does not invalidate a paired sample; player invincibility is an observation fixture; renderer resolution/density unchanged'};
+    const coordinate = value => Math.round(value * 1000) / 1000;
+    const actors = room.enemies.filter(e => e.hp > 0 && e.spawnState === 'active').map(e => ({
+      id: e.id,
+      hp: Math.round(e.hp * 1000) / 1000,
+      x: coordinate(e.x),
+      y: coordinate(e.y),
+    }));
+    const position = point => ({x: coordinate(point.x), y: coordinate(point.y)});
+    return {zone, layer, seed: room.exploration?.seedR73 ?? null, family: room.exploration?.worldR75?.family || null, enemyRoster: room.enemies.length, active: actors.length, actors, camera: position(cam), player: position(player), renderer: window.__STORYWORLD_PHASE1__.controller.inspect().active, fixture: 'native dist02 field at deterministic seed; environment compares stable actor identity/HP and bounds free-running actor, player, and camera position drift to 0.75 map units; player invincibility is an observation fixture; renderer resolution/density unchanged'};
   });
   assert.equal(before.zone, 'dist02');
   assert.equal(before.renderer, 'three');
