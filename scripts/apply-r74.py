@@ -1,6 +1,7 @@
 """Build R74 only over the exact released R73 runtime; retain source media."""
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 
@@ -29,7 +30,11 @@ def build(site):
                 "if(!booted)throw Error('게임 자료를 먼저 불러와 주세요.');window.__STORYWORLD_GOLDEN_R72__?.cancelAll('coop-start');savedSingle=")
     html = once(html, 'if(guest())return result;for(const c of [...casts.values()])',
                 "if(coopActive()){if(casts.size)cancelAll('coop-active');return result;}for(const c of [...casts.values()])")
-    for name in ['interaction-core', 'mobile']:
+    spec = importlib.util.spec_from_file_location('combat_r74', ROOT / 'scripts/combat-r74.py')
+    combat = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(combat)
+    html = combat.transform(html)
+    for name in ['thread-dances', 'interaction-core', 'mobile']:
         fragment = (ROOT / ('client-source/' + name + '-r74.js')).read_text()
         if '</script' in fragment.lower():
             raise RuntimeError('Unsafe R74 fragment')

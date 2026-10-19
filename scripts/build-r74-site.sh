@@ -9,5 +9,5 @@ done
 bash scripts/build-r73-site.sh
 mkdir -p out/r74
 python3 scripts/apply-r74.py --site _pages/docs | tee out/r74/build.json
-node --test scripts/r74.cpu.test.mjs | tee out/r74/cpu.log
+node --test scripts/r74.cpu.test.mjs scripts/r74-dances.cpu.test.mjs scripts/r74-health.cpu.test.mjs | tee out/r74/cpu.log
 node scripts/r74-coop-transition.cpu.cjs | tee out/r74/coop-transition-cpu.log

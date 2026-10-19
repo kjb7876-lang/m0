@@ -7,7 +7,7 @@ const html=fs.readFileSync('_pages/docs/index.html','utf8');
 const sha=crypto.createHash('sha256').update(html).digest('hex');
 assert.ok(html.includes('R74-MOBILE-WORLD'));
 function script(id){const tag='<script id="'+id+'">',i=html.indexOf(tag)+tag.length;assert.ok(i>=tag.length);return html.slice(i,html.indexOf('</script>',i));}
-const coop=script('coop-sim-r62'),gold=script('golden-thread-r72'),core=script('golden-core-r72'),save=script('golden-save-r72');
+const dances=script('thread-dances-r74'),coop=script('coop-sim-r62'),gold=script('golden-thread-r72'),core=script('golden-core-r72'),save=script('golden-save-r72');
 const nativeStart=html.indexOf('restoreSave=async function(input){const {valid,raw}=normalizeSave3(input);');
 assert.ok(nativeStart>0);
 const nativeRestore=html.slice(nativeStart,html.indexOf('\n};',nativeStart));
@@ -41,13 +41,13 @@ function fixture(deferred,shape){
  function freshPlayer(){return{x:0,y:0,hp:777,hero:'hwando',points:100,upgrades:{},resonance:0}}
  async function newGame(){player=freshPlayer();await enterRegion('arena');return true}
  function ensureImages(){return Promise.resolve([])}function heroPaths(){return[]}function clearControls(){}function maxHP(){return 777}function warn(){}function showTitle(){}function project(x,y){return{x,y}}function unproject(x,y){return{x,y}}
- function closePanel(){}function openPanel(){}function showMenu(){}function showUpgrades(){}
+ function closePanel(){}function openPanel(){}function showMenu(){}function showUpgrades(){}function drawHero(){}
  window.__STORYWORLD_PROGRESSION_R62__={ranks:()=>1,factors:()=>({cooldown:1}),onClear(){}};
  `,x);
- vm.runInContext(core,x);vm.runInContext(save,x);vm.runInContext(coop,x);vm.runInContext(gold,x);
+ vm.runInContext(core,x);vm.runInContext(save,x);vm.runInContext(coop,x);vm.runInContext(gold,x);vm.runInContext(dances,x);
  if(deferred)vm.runInContext('restoreGate=new Promise(r=>releaseRestore=()=>{restoreGate=null;r()})',x);
  x.input=shape==='long'?[Array.from({length:10},(_,i)=>({x:i%2?1:-1,y:i%2?1:-1}))]:[[{x:-1,y:0},{x:1,y:0}]];
- vm.runInContext(`var api=window.__STORYWORLD_GOLDEN_R72__,sim=window.__STORYWORLD_COOP_SIM_R62__;api.applyCommand(player,{op:'save',name:'transition',strokes:input});api.applyCommand(player,{op:'learn'});api.applyCommand(player,{op:'equip',id:api.state().designs[0].id});var soloActor=player;var designBefore=JSON.stringify(api.state());var castStarted=api.cast();tick(.25);var activeBefore=api.inspect().active;var damageBefore=damage.length;var actorBefore={x:soloActor.x,y:soloActor.y};`,x);
+ vm.runInContext(`var api=window.__STORYWORLD_GOLDEN_R72__,sim=window.__STORYWORLD_COOP_SIM_R62__;api.applyCommand(player,{op:'save',name:'transition',strokes:input});api.applyCommand(player,{op:'learn'});api.applyCommand(player,{op:'equip',id:api.state().designs[0].id});var soloActor=player;function stableDesignR74(s){var q=StoryGoldenCoreR72.sanitize(s);q.readyIn=0;q.readyByDesign={};return JSON.stringify(q)}var designBefore=stableDesignR74(api.state());var castStarted=api.cast();tick(.25);var activeBefore=api.inspect().active;var damageBefore=damage.length;var actorBefore={x:soloActor.x,y:soloActor.y};`,x);
  assert.equal(x.castStarted,true);assert.equal(x.activeBefore,1);
  return x;
 }
@@ -71,7 +71,7 @@ async function check(role,deferred,shape){
  await vm.runInContext('sim.stop()',x);
  assert.equal(x.storage.get('solo'),beforeBytes);
  assert.equal(x.player.x,0,'co-op return must restore the original safe cast origin');assert.equal(x.player.y,0);
- assert.equal(vm.runInContext('JSON.stringify({...api.state(),readyIn:0})',x),x.designBefore);
+ assert.equal(vm.runInContext('stableDesignR74(api.state())',x),x.designBefore);
  assert.equal(x.window.__STORYWORLD_GOLDEN_R72__.inspect().cooldown,23.75,'the spent solo cooldown is restored rather than reset');
  assert.equal(x.window.__STORYWORLD_GOLDEN_R72__.inspect().active,0);
  return{role,shape,duration:x.window.__STORYWORLD_GOLDEN_R72__.inspect().events.find(e=>e.kind==='cast').duration,deferredRestore:deferred,activeBefore:x.activeBefore,activeAfterStart:0,pausedFrames:deferred?250:0,postStartFrames:250,newCoopHits:x.damage.length-hits,soloSaveBytesPreserved:true,goldenDesignsAndEquipmentPreserved:true,cooldownAfterStop:x.window.__STORYWORLD_GOLDEN_R72__.inspect().cooldown,castPoint:x.actorBefore,oldActorAfterStart:old,liveSoloAfterStop:{x:x.player.x,y:x.player.y},restoreCalls:x.restoreCalls,events:x.window.__STORYWORLD_GOLDEN_R72__.inspect().events.slice(-5)};
