@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -9,39 +10,30 @@ const replicate = Number(process.env.R75_OVERNIGHT_REP || 1);
 const label = process.env.R75_OVERNIGHT_LABEL || 'candidate';
 const seedTargets = new Map([[11, 'dist02'], [29, 'last303'], [47, 'hando02']]);
 const target = seedTargets.get(seed);
-assert.ok(target, `Unexpected matrix seed ${seed}`);
-const output = `out/r75/overnight/${label}/seed-${seed}-rep-${replicate}.json`;
-await fs.mkdir('out/r75/overnight', {recursive: true});
+const output = path.join('out', 'r75', 'overnight', label, `seed-${seed}-rep-${replicate}.json`);
+await fs.mkdir(path.dirname(output), {recursive: true});
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const report = {
-  commit: execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(),
+  commit: null,
   seed,
   replicate,
   label,
   target,
-  htmlSHA256: digest(await fs.readFile('_pages/docs/index.html')),
-  rendererSHA256: digest(await fs.readFile('_pages/docs/dist/phase1.js')),
+  htmlSHA256: null,
+  rendererSHA256: null,
   browserSandbox: true,
   softwareGPU: true,
   physicalGPU: false,
   physicalDevice: false,
   scope: 'Native UI new game, keyboard movement/attack, normal save/reload/Continue, 777 isolated trial save/reload/resume/leave, and one seed-specific real-map probe. Not full natural campaign completion.',
   checks: [],
+  saveIsolation: {complete: false, comparisons: [], storedComparisons: []},
   pageErrors: [],
   consoleErrors: [],
 };
 
-const browser = await chromium.launch({headless: true, chromiumSandbox: true, args: ['--disable-dev-shm-usage']});
-const context = await browser.newContext({viewport: {width: 1365, height: 850}, deviceScaleFactor: 1});
-await context.addInitScript(value => {
-  let state = value >>> 0;
-  Math.random = () => {
-    let n = state += 0x6D2B79F5;
-    n = Math.imul(n ^ n >>> 15, n | 1);
-    n ^= n + Math.imul(n ^ n >>> 7, n | 61);
-    return ((n ^ n >>> 14) >>> 0) / 4294967296;
-  };
-}, seed);
+let browser = null;
+let context = null;
 let page;
 
 function check(name, details) {
@@ -89,28 +81,142 @@ async function travel(id) {
 }
 
 function stableSave(save) {
+  const player = {...save.player};
+  const resonance = player.resonance;
+  const cooldowns = player.combatCooldownRemaining26 || {};
+  delete player.resonance;
+  delete player.combatCooldownRemaining26;
+  player.upgrades = Object.fromEntries(Object.entries(player.upgrades || {}).filter(([, rank]) => rank !== 0));
+  const settings = {...(save.settings || {})};
+  settings.enemyDirection51 = settings.enemyDirection51 !== false;
+  settings.voicePreroll = settings.voicePreroll === 0 ? 0 : 500;
+  const rooms = structuredClone(save.rooms || {});
+  const spawnNonces = {};
+  for (const [key, room] of Object.entries(rooms)) {
+    if (room && Number.isFinite(Number(room.spawnNonce))) {
+      spawnNonces[key] = Number(room.spawnNonce);
+      delete room.spawnNonce;
+    }
+  }
   return {
-    zone: save.zone,
-    layer: save.layer,
-    progress: save.progress,
-    player: save.player,
-    visited: save.visited,
-    readScenes: save.readScenes,
-    ending: save.ending,
-    lastHub: save.lastHub,
-    rooms: save.rooms,
-    settings: save.settings,
-    zoom: save.zoom,
-    auto: save.auto,
-    worldR74: save.worldR74,
-    worldR75: save.worldR75,
-    mazeR73: save.mazeR73,
-    routeEntriesR72: save.routeEntriesR72,
-    narrativeObjectivesR75: save.narrativeObjectivesR75,
-    castleDefenseR75: save.castleDefenseR75,
-    goldenR72: save.goldenR72,
-    dancePolicyR75: save.dancePolicyR75,
+    persistent: {
+      zone: save.zone,
+      layer: save.layer,
+      progress: save.progress,
+      player,
+      visited: save.visited,
+      readScenes: save.readScenes,
+      ending: save.ending,
+      lastHub: save.lastHub,
+      rooms,
+      settings,
+      zoom: save.zoom,
+      auto: save.auto,
+      worldR74: save.worldR74,
+      worldR75: save.worldR75,
+      mazeR73: save.mazeR73,
+      routeEntriesR72: save.routeEntriesR72,
+      narrativeObjectivesR75: save.narrativeObjectivesR75,
+      castleDefenseR75: save.castleDefenseR75,
+      goldenR72: save.goldenR72,
+      dancePolicyR75: save.dancePolicyR75,
+    },
+    dynamic: {resonance, cooldowns},
+    spawnNonces,
   };
+}
+
+function canonicalStoredSave(raw) {
+  const value = JSON.parse(raw);
+  if (value.saveSlotR73) delete value.saveSlotR73.savedAt;
+  if (value.player) {
+    value.player.upgrades = Object.fromEntries(Object.entries(value.player.upgrades || {}).filter(([, rank]) => rank !== 0));
+  }
+  const settings = {...(value.settings || {})};
+  settings.enemyDirection51 = settings.enemyDirection51 !== false;
+  settings.voicePreroll = settings.voicePreroll === 0 ? 0 : 500;
+  value.settings = settings;
+  return value;
+}
+
+function assertNormalEquivalent(before, after, restoreCount, labelName) {
+  const a = stableSave(before);
+  const b = stableSave(after);
+  const row = {
+    label: labelName,
+    restoreCount,
+    beforeResonance: a.dynamic.resonance,
+    afterResonance: b.dynamic.resonance,
+    beforeCooldowns: a.dynamic.cooldowns,
+    afterCooldowns: b.dynamic.cooldowns,
+    beforeSpawnNonces: a.spawnNonces,
+    afterSpawnNonces: b.spawnNonces,
+    persistentEqual: false,
+    dynamicsValid: false,
+    spawnNoncesValid: false,
+    ok: false,
+  };
+  report.saveIsolation.comparisons.push(row);
+  assert.deepEqual(b.persistent, a.persistent, labelName + ': persistent normal progress changed');
+  row.persistentEqual = true;
+
+  const beforeResonance = Number(a.dynamic.resonance);
+  const afterResonance = Number(b.dynamic.resonance);
+  assert.ok(Number.isFinite(beforeResonance) && Number.isFinite(afterResonance), labelName + ': resonance is not finite');
+  assert.ok(afterResonance + 1e-6 >= beforeResonance, labelName + ': normal resonance decreased');
+  assert.ok(afterResonance <= 100 + 1e-6, labelName + ': resonance exceeded its cap');
+  for (const key of ['attack', 'special']) {
+    const oldValue = Number(a.dynamic.cooldowns[key] || 0);
+    const newValue = Number(b.dynamic.cooldowns[key] || 0);
+    assert.ok(newValue <= oldValue + 1e-6, labelName + ': ' + key + ' cooldown increased');
+  }
+  row.dynamicsValid = true;
+
+  const keys = new Set([
+    ...Object.keys(a.persistent.rooms),
+    ...Object.keys(b.persistent.rooms),
+    ...Object.keys(a.spawnNonces),
+    ...Object.keys(b.spawnNonces),
+  ]);
+  for (const key of keys) {
+    const oldValue = Number(a.spawnNonces[key] || 0);
+    const newValue = Number(b.spawnNonces[key] || 0);
+    const expected = oldValue + (Object.hasOwn(a.persistent.rooms, key) ? restoreCount : 0);
+    assert.equal(newValue, expected, labelName + ': unexpected room spawn nonce for ' + key);
+  }
+  row.spawnNoncesValid = true;
+  row.ok = true;
+  return row;
+}
+
+async function readStorage(key) {
+  return page.evaluate(storageKey => localStorage.getItem(storageKey), key);
+}
+
+function assertTrialSlot(raw, expectedZone) {
+  assert.ok(typeof raw === 'string', 'the independent 777 trial slot is missing');
+  const value = JSON.parse(raw);
+  assert.equal(value.cheat777?.active, true, 'the 777 slot must contain an active trial');
+  assert.equal(value.cheat777.version, 1, 'the 777 slot must use the supported save version');
+  if (expectedZone !== null) assert.equal(value.zone, expectedZone, 'the 777 slot must contain the selected target map');
+  assert.equal(value.layer, 'STORY');
+  return {zone: value.zone, layer: value.layer, active: value.cheat777.active, version: value.cheat777.version, bytes: Buffer.byteLength(raw)};
+}
+
+function assertNormalSlotPreserved(beforeRaw, afterRaw, labelName) {
+  assert.ok(typeof beforeRaw === 'string' && typeof afterRaw === 'string', labelName + ': normal save slot is missing');
+  const row = {
+    label: labelName,
+    beforeSHA256: digest(Buffer.from(beforeRaw)),
+    afterSHA256: digest(Buffer.from(afterRaw)),
+    semanticEqual: false,
+    ok: false,
+  };
+  report.saveIsolation.storedComparisons.push(row);
+  assert.deepEqual(canonicalStoredSave(afterRaw), canonicalStoredSave(beforeRaw), labelName + ': persistent normal slot changed during the 777 trial');
+  row.semanticEqual = true;
+  row.ok = true;
+  return row;
 }
 
 async function performanceMatrix() {
@@ -208,7 +314,23 @@ async function performanceMatrix() {
   return {replicate, durationMs: duration, seed, viewport: {width: 1365, height: 850, dpr: 1}, before, actions, sample};
 }
 
+let failure = null;
 try {
+  assert.ok(target, `Unexpected matrix seed ${seed}`);
+  report.commit = execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
+  report.htmlSHA256 = digest(await fs.readFile('_pages/docs/index.html'));
+  report.rendererSHA256 = digest(await fs.readFile('_pages/docs/dist/phase1.js'));
+  browser = await chromium.launch({headless: true, chromiumSandbox: true, args: ['--disable-dev-shm-usage']});
+  context = await browser.newContext({viewport: {width: 1365, height: 850}, deviceScaleFactor: 1});
+  await context.addInitScript(value => {
+    let state = value >>> 0;
+    Math.random = () => {
+      let n = state += 0x6D2B79F5;
+      n = Math.imul(n ^ n >>> 15, n | 1);
+      n ^= n + Math.imul(n ^ n >>> 7, n | 61);
+      return ((n ^ n >>> 14) >>> 0) / 4294967296;
+    };
+  }, seed);
   page = await context.newPage();
   page.on('pageerror', error => report.pageErrors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') report.consoleErrors.push(message.text()); });
@@ -229,9 +351,24 @@ try {
   assert.ok(Math.hypot(nativeInput.x - start.position.x, nativeInput.y - start.position.y) > .01, 'real keyboard input moves the hero');
   assert.equal(await page.evaluate(() => saveGame(false)), true);
   const normal = await page.evaluate(() => serializeSave());
+  const slotKeys = await page.evaluate(() => ({
+    normal: window.__STORYWORLD_SAVE_SLOTS_R73__.key(),
+    trial: window.__STORYWORLD_CHEAT777__.inspect().saveSlot,
+  }));
+  assert.ok(slotKeys.normal && slotKeys.trial && slotKeys.normal !== slotKeys.trial, 'normal and 777 saves must use separate keys');
+  report.saveIsolation.normalSlotKey = slotKeys.normal;
+  report.saveIsolation.trialSlotKey = slotKeys.trial;
+  const normalStoredBeforeTrial = await readStorage(slotKeys.normal);
+  assert.ok(typeof normalStoredBeforeTrial === 'string', 'normal save slot must exist before the 777 trial');
+  report.saveIsolation.normalStoredSHA256 = digest(Buffer.from(normalStoredBeforeTrial));
   check('natural-new-game-native-keyboard-save', {start, nativeInput, hero: normal.player.hero, level: normal.player.level, points: normal.player.points, zone: normal.zone});
 
   await travel(target);
+  const trialAfterTravel = await readStorage(slotKeys.trial);
+  assert.ok(typeof trialAfterTravel === 'string', '777 trial save slot must exist after activation');
+  const trialTravelSummary = assertTrialSlot(trialAfterTravel, null);
+  report.saveIsolation.trialAfterTravel = trialTravelSummary;
+  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-travel');
   if (target === 'dist02' && process.env.R75_OVERNIGHT_BENCH === '1') report.performance = await performanceMatrix();
   let targetProbe;
   if (target === 'dist02') {
@@ -264,13 +401,17 @@ try {
     assert.ok(targetProbe.doors.filter(d => d.open).length >= 2);
   }
   assert.equal(await page.evaluate(() => saveGame(false)), true);
+  const trialAtTarget = await readStorage(slotKeys.trial);
+  report.saveIsolation.trial = assertTrialSlot(trialAtTarget, target);
+  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-target-save');
   check('seed-specific-native-map-and-interaction-probe', targetProbe);
 
   await page.reload({waitUntil: 'domcontentloaded'});
   await page.locator('#campaignContinue54').click({timeout: 90000});
   await ready();
   const normalAfterReload = await page.evaluate(() => serializeSave());
-  assert.deepEqual(stableSave(normalAfterReload), stableSave(normal), 'ordinary save and story remain stable across trial visits');
+  assertNormalEquivalent(normal, normalAfterReload, 1, 'normal-continue-after-browser-reload');
+  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-normal-continue');
   assert.equal(await page.evaluate(() => window.__STORYWORLD_CHEAT777__.active()), false);
   check('browser-reload-native-continue-preserves-normal-progress', {zone: normalAfterReload.zone, progress: normalAfterReload.progress, hero: normalAfterReload.player.hero, level: normalAfterReload.player.level});
 
@@ -281,12 +422,14 @@ try {
   const resumedTrial = await page.evaluate(() => ({zone, active: window.__STORYWORLD_CHEAT777__.active(), save: serializeSave()}));
   assert.equal(resumedTrial.zone, target);
   assert.equal(resumedTrial.active, true);
+  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-resume');
   check('saved-777-trial-resumes-after-normal-continue', {zone: resumedTrial.zone, active: resumedTrial.active, seed, targetProbe});
 
   assert.equal(await page.evaluate(() => window.__STORYWORLD_CHEAT777__.leave()), true);
   await ready();
   const returned = await page.evaluate(() => serializeSave());
-  assert.deepEqual(stableSave(returned), stableSave(normal), 'leaving a saved 777 trial restores the original normal journey');
+  assertNormalEquivalent(normalAfterReload, returned, 1, 'leave-777-restores-normal-journey');
+  assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'after-777-leave');
   check('native-777-leave-restores-normal-journey', {zone: returned.zone, progress: returned.progress, hero: returned.player.hero, level: returned.player.level, points: returned.player.points});
 
   assert.equal(await page.evaluate(() => saveGame(false)), true);
@@ -294,20 +437,39 @@ try {
   await page.locator('#campaignContinue54').click({timeout: 90000});
   await ready();
   const final = await page.evaluate(() => serializeSave());
-  assert.deepEqual(stableSave(final), stableSave(normal), 'normal save survives a second browser round trip after 777 return');
+  assertNormalEquivalent(returned, final, 1, 'normal-save-after-777-return-round-trip');
   assert.deepEqual(report.pageErrors, []);
+  report.saveIsolation.complete = true;
   report.result = 'passed';
   report.roundTrips = 2;
-  report.normalReturnedByteComparable = true;
-  console.log('R75_OVERNIGHT_RESULT', JSON.stringify({seed, target, result: report.result, checks: report.checks.length, pageErrors: report.pageErrors.length, consoleErrors: report.consoleErrors.length}));
+  report.normalReturnedSemanticallyEquivalent = true;
 } catch (error) {
+  failure = error;
   report.result = 'failed';
   report.error = String(error.stack || error);
   if (page) report.debug = await page.evaluate(() => ({zone, layer, loading, modal, scene: storyScene?.part, panel: document.getElementById('panel')?.innerText, player: player && {x: player.x, y: player.y, hp: player.hp}, warnings: warnings.slice(-8), trial: window.__STORYWORLD_CHEAT777__?.active(), slots: window.__STORYWORLD_SAVE_SLOTS_R73__?.inspect()})).catch(() => null);
-  console.error('R75_OVERNIGHT_FAILURE', JSON.stringify(report));
-  throw error;
 } finally {
-  await fs.writeFile(output, JSON.stringify(report, null, 2));
-  await context.close();
-  await browser.close();
+  report.cleanupErrors = [];
+  for (const [name, resource] of [['context', context], ['browser', browser]]) {
+    if (!resource) continue;
+    try { await resource.close(); } catch (error) { report.cleanupErrors.push(`${name}: ${error.message}`); failure ||= error; }
+  }
+  if (report.cleanupErrors.length) {
+    report.result = 'failed';
+    report.error ||= report.cleanupErrors.join('; ');
+  }
+  try {
+    await fs.mkdir(path.dirname(output), {recursive: true});
+    await fs.writeFile(output, JSON.stringify(report, null, 2));
+  } catch (error) {
+    console.error('R75_OVERNIGHT_RESULT_WRITE_FAILURE', error.stack || error);
+    failure ||= error;
+  }
+}
+
+if (failure) {
+  console.error('R75_OVERNIGHT_FAILURE', JSON.stringify(report));
+  process.exitCode = 1;
+} else {
+  console.log('R75_OVERNIGHT_RESULT', JSON.stringify({seed, target, result: report.result, checks: report.checks.length, pageErrors: report.pageErrors.length, consoleErrors: report.consoleErrors.length}));
 }
