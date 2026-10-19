@@ -1,0 +1,42 @@
+name: StoryWorld R75 draft verification
+on:
+  push:
+    branches: [feat/r75-new-narrative]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r75-review-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preserve baseline gates and build exact candidate
+        run: bash scripts/build-r75-site.sh
+      - name: Install the pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Verify compiled source, world, native input and save
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-reference-http.log 2>&1 &
+          REFERENCE_PID=$!
+          trap 'kill "$SERVER_PID" "$REFERENCE_PID" 2>/dev/null || true' EXIT
+          node scripts/r75.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-review-${{ github.sha }}
+          path: out/r75/
+          retention-days: 14
