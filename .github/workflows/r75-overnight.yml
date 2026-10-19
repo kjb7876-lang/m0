@@ -1,0 +1,85 @@
+name: StoryWorld R75 overnight regression and same-runner A/B
+on:
+  push:
+    branches: [feat/r75-overnight-qa]
+permissions:
+  contents: read
+concurrency:
+  group: r75-overnight-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  overnight:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build exact public baseline and candidate with their existing gates
+        run: |
+          git worktree add --detach /tmp/m0-r75-baseline 11975b5ded156750f8f63bdd7df33faaffd634d6
+          test "$(git -C /tmp/m0-r75-baseline rev-parse HEAD)" = 11975b5ded156750f8f63bdd7df33faaffd634d6
+          (cd /tmp/m0-r75-baseline && bash scripts/build-r75-site.sh)
+          bash scripts/build-r75-site.sh
+      - name: Install the pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run the full R75 browser regression against baseline and candidate
+        run: |
+          python3 -m http.server 4391 --directory /tmp/m0-r75-baseline/_pages/docs --bind 127.0.0.1 > /tmp/r75-base-http.log 2>&1 &
+          BASE_PID=$!
+          python3 -m http.server 4392 --directory /tmp/m0-r75-baseline/_r74-reference/docs --bind 127.0.0.1 > /tmp/r75-base-ref-http.log 2>&1 &
+          BASE_REF_PID=$!
+          trap 'kill "$BASE_PID" "$BASE_REF_PID" 2>/dev/null || true' EXIT
+          (cd /tmp/m0-r75-baseline && node "$GITHUB_WORKSPACE/scripts/r75.browser.mjs")
+          mkdir -p out/r75/overnight/baseline
+          cp /tmp/m0-r75-baseline/out/r75/browser.json out/r75/overnight/baseline/full-browser.json
+          cp /tmp/m0-r75-baseline/out/r75/*.png out/r75/overnight/baseline/
+          kill "$BASE_PID" "$BASE_REF_PID" 2>/dev/null || true
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-candidate-http.log 2>&1 &
+          CANDIDATE_PID=$!
+          python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-candidate-ref-http.log 2>&1 &
+          CANDIDATE_REF_PID=$!
+          trap 'kill "$CANDIDATE_PID" "$CANDIDATE_REF_PID" 2>/dev/null || true' EXIT
+          node scripts/r75.browser.mjs
+      - name: Compare seeded save round trips and longer rendering/combat samples
+        run: |
+          python3 -m http.server 4391 --directory /tmp/m0-r75-baseline/_pages/docs --bind 127.0.0.1 > /tmp/r75-base-matrix-http.log 2>&1 &
+          BASE_PID=$!
+          python3 -m http.server 4392 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-candidate-matrix-http.log 2>&1 &
+          CANDIDATE_PID=$!
+          trap 'kill "$BASE_PID" "$CANDIDATE_PID" 2>/dev/null || true' EXIT
+          run_matrix() {
+            checkout="$1"
+            url="$2"
+            label="$3"
+            (
+              cd "$checkout"
+              for seed in 11 29 47; do
+                if [ "$seed" = 11 ]; then
+                  for rep in 1 2 3; do
+                    env R75_OVERNIGHT_SEED="$seed" R75_OVERNIGHT_REP="$rep" R75_OVERNIGHT_LABEL="$label" R75_OVERNIGHT_URL="$url" R75_OVERNIGHT_BENCH=1 R75_OVERNIGHT_SAMPLE_MS=90000 node "$GITHUB_WORKSPACE/scripts/r75-overnight.browser.mjs"
+                  done
+                else
+                  env R75_OVERNIGHT_SEED="$seed" R75_OVERNIGHT_REP=1 R75_OVERNIGHT_LABEL="$label" R75_OVERNIGHT_URL="$url" node "$GITHUB_WORKSPACE/scripts/r75-overnight.browser.mjs"
+                fi
+              done
+            )
+          }
+          run_matrix /tmp/m0-r75-baseline http://127.0.0.1:4391 baseline
+          run_matrix "$GITHUB_WORKSPACE" http://127.0.0.1:4392 candidate
+          mkdir -p out/r75/overnight
+          cp -a /tmp/m0-r75-baseline/out/r75/overnight/baseline out/r75/overnight/
+          python3 scripts/r75-overnight-compare.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-overnight-${{ github.sha }}
+          path: out/r75/
+          retention-days: 14
