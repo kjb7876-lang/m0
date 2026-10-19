@@ -1,0 +1,79 @@
+name: StoryWorld R74 verification
+on:
+  push:
+    branches: [feat/r74-mobile-world]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r74-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  mobile:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [mobile, coop, skills, world, native, slots, route, features, coop-world, ui]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct preserved R73 and candidate if present
+        run: |
+          bash scripts/build-r73-site.sh
+          if test -f scripts/apply-r74.py; then
+            python3 scripts/apply-r74.py --site _pages/docs
+            node --test scripts/r74.cpu.test.mjs scripts/r74-dances.cpu.test.mjs scripts/r74-health.cpu.test.mjs scripts/r74-elements.cpu.test.mjs scripts/r74-world.cpu.test.mjs
+            node scripts/r74-coop-transition.cpu.cjs
+          fi
+      - name: Install pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Reproduce mobile and transition behavior
+        env:
+          R74_CASE: ${{ matrix.scenario }}
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r74-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          if test "$R74_CASE" = native; then
+            node scripts/r74-native.mjs
+          elif test "$R74_CASE" = slots; then
+            node scripts/r73-slots.browser.mjs
+          elif test "$R74_CASE" = route; then
+            node scripts/r73-route.browser.mjs
+          elif test "$R74_CASE" = features; then
+            node scripts/r74-features.mjs
+          elif test "$R74_CASE" = coop-world; then
+            npm ci --ignore-scripts --prefix relay
+            node scripts/r74-coop-world.browser.mjs
+          elif test "$R74_CASE" = world; then
+            node scripts/r74-world.browser.mjs
+          elif test "$R74_CASE" = ui; then
+            python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > /tmp/r74-ui-r71-http.log 2>&1 &
+            R71_PID=$!
+            python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > /tmp/r74-ui-r72-http.log 2>&1 &
+            R72_PID=$!
+            trap 'kill "$SERVER_PID" "$R71_PID" "$R72_PID" 2>/dev/null || true' EXIT
+            node scripts/r74-ui.mjs
+          elif test "$R74_CASE" = skills; then
+            node scripts/r74-dances.browser.mjs
+          else
+            node scripts/r74-mobile.browser.mjs
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r74-${{ matrix.scenario }}-${{ github.sha }}
+          path: |
+            out/r74/
+            out/r73/
+            out/r71/native/
+          retention-days: 14

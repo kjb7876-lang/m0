@@ -1,0 +1,53 @@
+{
+  "status": "approved",
+  "baselineR73": {
+    "index.html": "9b484eaecc4a4dc2d2e6e5140471c0403f933b1b003f3a46b65db8d2766a8d62",
+    "dist/phase1.js": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
+  },
+  "approved": {
+    "index.html": "f4e26c35c9ade6cc44b3935c5d6e461fb9f5fe1ac9a831d1f0ed085dd7e8cddb",
+    "dist/phase1.js": "e9faecbadc4991d2e4cfd8a5ec8555ad331d4a09e6ffc12b7ef9d1ed1e9a09bc"
+  },
+  "approvedAssets": {
+    "assets/r74/materials.png": "bcffb34ccd99a60bc08df78cfecbdd7bec35c44b158e4e7a67541a241b4f33b9",
+    "assets/r74/props.png": "bcac1a6d3633840938a316ee4777f829b0955407c421e1e774563ebed5f7dac0",
+    "assets/r74/monsters.png": "bd653b3ae34fee02f515e4670635e850cf08996b511a50558a107db5dfc19ec9",
+    "assets/r74/effects.png": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4",
+    "assets/r74/outdoor.png": "e1c682b0f14b498664f35bd273fb2a286384e9b8ca5decbf92ef16afb8f945bf"
+  },
+  "evidence": {
+    "validatedPreflightCodeSha": "3dbe15320635672874393eb26cd303e03f739a00",
+    "validatedPreflightRuntime": {
+      "index.html": "cfcd4463205d616fc2a9a8830850bd2ef39a8221bd3ce36d72ff45dd96d05d56",
+      "dist/phase1.js": "e9faecbadc4991d2e4cfd8a5ec8555ad331d4a09e6ffc12b7ef9d1ed1e9a09bc"
+    },
+    "preflightRun": "https://github.com/kjb7876-lang/m0/actions/runs/39201513070",
+    "preflightScenariosPassed": [
+      "mobile",
+      "coop",
+      "skills",
+      "world",
+      "native",
+      "slots",
+      "route",
+      "features",
+      "coop-world"
+    ],
+    "worldScreenshots": "https://github.com/kjb7876-lang/m0/actions/runs/39201513070/artifacts/12163493845",
+    "worldScreenshotCount": 5,
+    "finalCandidateLocalChecks": {
+      "R74CPU": 29,
+      "compiledCoopFixtures": 6,
+      "staticFileHashes": 1911,
+      "audioRangeRequests": 276,
+      "isolatedReleaseGateCases": 6
+    },
+    "finalCandidateChanges": "Bump the renderer cache key; validate connected safe return and gold/silver control transfer around corners without added damage or invulnerability; retain native status imagery outside the four generated element families.",
+    "exactShaValidation": "PR14 and main workflows must pass their exact runtime hash pin and all preserved release/R74 checks before publishing. This pin sets the expected candidate bytes; it does not bypass CI.",
+    "authorization": "Latest user authorization permits normal main merge and Pages only after checks.",
+    "pullRequest": "https://github.com/kjb7876-lang/m0/pull/14",
+    "physicalDevice": false,
+    "physicalGPU": false,
+    "remoteFourPlayers": false
+  }
+}

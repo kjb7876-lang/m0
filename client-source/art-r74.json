@@ -1,0 +1,1245 @@
+{
+  "revision": 1,
+  "provenance": "Original imagegen generation and imagegen margin edits in this task; PNG bytes copied unchanged. Source rectangles only; no bitmap processing.",
+  "decodedRGBABytes": 31450320,
+  "atlases": {
+    "materials": {
+      "path": "assets/r74/materials.png",
+      "sha256": "bcffb34ccd99a60bc08df78cfecbdd7bec35c44b158e4e7a67541a241b4f33b9",
+      "bytes": 3717611,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "sourceFile": "exec-b1d5401f-cd89-49e6-af1a-66c725eefa46.png",
+      "clearAlphaFraction": 0.0,
+      "cells": [],
+      "styles": {
+        "garden": {
+          "floorRect": [
+            8,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            8,
+            322,
+            298,
+            297
+          ],
+          "voidRect": [
+            8,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            8,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "domestic": {
+          "floorRect": [
+            322,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            322,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            322,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            322,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "clinical": {
+          "floorRect": [
+            635,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            635,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            635,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            635,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "forge": {
+          "floorRect": [
+            948,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            948,
+            322,
+            85,
+            291
+          ],
+          "voidRect": [
+            948,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            948,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        }
+      }
+    },
+    "props": {
+      "path": "assets/r74/props.png",
+      "sha256": "bcac1a6d3633840938a316ee4777f829b0955407c421e1e774563ebed5f7dac0",
+      "bytes": 1458482,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sourceFile": "exec-50cd7b35-63c3-4a35-a41d-d68c7d34cbc5.png",
+      "clearAlphaFraction": 0.671372,
+      "cells": [
+        {
+          "key": "oak-closed",
+          "sourceRect": [
+            0,
+            0,
+            258,
+            307
+          ],
+          "pivot": [
+            217,
+            307
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            68,
+            63,
+            258,
+            307
+          ]
+        },
+        {
+          "key": "oak-open",
+          "sourceRect": [
+            258,
+            0,
+            331,
+            307
+          ],
+          "pivot": [
+            288,
+            299
+          ],
+          "visibleHeight": 240,
+          "visibleBounds": [
+            116,
+            59,
+            331,
+            299
+          ]
+        },
+        {
+          "key": "bronze-closed",
+          "sourceRect": [
+            589,
+            0,
+            303,
+            307
+          ],
+          "pivot": [
+            265,
+            307
+          ],
+          "visibleHeight": 243,
+          "visibleBounds": [
+            108,
+            64,
+            303,
+            307
+          ]
+        },
+        {
+          "key": "bronze-open",
+          "sourceRect": [
+            892,
+            0,
+            362,
+            307
+          ],
+          "pivot": [
+            270,
+            301
+          ],
+          "visibleHeight": 236,
+          "visibleBounds": [
+            112,
+            65,
+            308,
+            301
+          ]
+        },
+        {
+          "key": "ash-tree",
+          "sourceRect": [
+            0,
+            307,
+            276,
+            315
+          ],
+          "pivot": [
+            174,
+            309
+          ],
+          "visibleHeight": 255,
+          "visibleBounds": [
+            66,
+            54,
+            276,
+            309
+          ]
+        },
+        {
+          "key": "pine",
+          "sourceRect": [
+            276,
+            307,
+            286,
+            315
+          ],
+          "pivot": [
+            178,
+            310
+          ],
+          "visibleHeight": 262,
+          "visibleBounds": [
+            114,
+            48,
+            285,
+            310
+          ]
+        },
+        {
+          "key": "stump",
+          "sourceRect": [
+            562,
+            307,
+            339,
+            315
+          ],
+          "pivot": [
+            248,
+            314
+          ],
+          "visibleHeight": 225,
+          "visibleBounds": [
+            110,
+            89,
+            338,
+            314
+          ]
+        },
+        {
+          "key": "ferns",
+          "sourceRect": [
+            901,
+            307,
+            353,
+            315
+          ],
+          "pivot": [
+            179,
+            313
+          ],
+          "visibleHeight": 170,
+          "visibleBounds": [
+            84,
+            143,
+            306,
+            313
+          ]
+        },
+        {
+          "key": "cabinet",
+          "sourceRect": [
+            0,
+            622,
+            214,
+            279
+          ],
+          "pivot": [
+            169,
+            272
+          ],
+          "visibleHeight": 234,
+          "visibleBounds": [
+            99,
+            38,
+            214,
+            272
+          ]
+        },
+        {
+          "key": "empty-bed",
+          "sourceRect": [
+            214,
+            622,
+            382,
+            279
+          ],
+          "pivot": [
+            290,
+            279
+          ],
+          "visibleHeight": 220,
+          "visibleBounds": [
+            139,
+            59,
+            382,
+            279
+          ]
+        },
+        {
+          "key": "workbench",
+          "sourceRect": [
+            596,
+            622,
+            308,
+            279
+          ],
+          "pivot": [
+            236,
+            267
+          ],
+          "visibleHeight": 201,
+          "visibleBounds": [
+            91,
+            66,
+            308,
+            267
+          ]
+        },
+        {
+          "key": "crate",
+          "sourceRect": [
+            904,
+            622,
+            350,
+            279
+          ],
+          "pivot": [
+            209,
+            271
+          ],
+          "visibleHeight": 195,
+          "visibleBounds": [
+            94,
+            76,
+            291,
+            271
+          ]
+        },
+        {
+          "key": "well",
+          "sourceRect": [
+            0,
+            901,
+            288,
+            353
+          ],
+          "pivot": [
+            207,
+            287
+          ],
+          "visibleHeight": 238,
+          "visibleBounds": [
+            60,
+            49,
+            288,
+            287
+          ]
+        },
+        {
+          "key": "statue",
+          "sourceRect": [
+            288,
+            901,
+            295,
+            353
+          ],
+          "pivot": [
+            209,
+            290
+          ],
+          "visibleHeight": 254,
+          "visibleBounds": [
+            112,
+            36,
+            295,
+            290
+          ]
+        },
+        {
+          "key": "obelisk",
+          "sourceRect": [
+            583,
+            901,
+            300,
+            353
+          ],
+          "pivot": [
+            218,
+            294
+          ],
+          "visibleHeight": 245,
+          "visibleBounds": [
+            120,
+            49,
+            299,
+            294
+          ]
+        },
+        {
+          "key": "brazier",
+          "sourceRect": [
+            883,
+            901,
+            371,
+            353
+          ],
+          "pivot": [
+            243,
+            272
+          ],
+          "visibleHeight": 186,
+          "visibleBounds": [
+            119,
+            86,
+            307,
+            272
+          ]
+        }
+      ]
+    },
+    "monsters": {
+      "path": "assets/r74/monsters.png",
+      "sha256": "bd653b3ae34fee02f515e4670635e850cf08996b511a50558a107db5dfc19ec9",
+      "bytes": 1912762,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sourceFile": "exec-67734493-9e47-4c3c-8d83-76e81ca03d58.png",
+      "clearAlphaFraction": 0.602244,
+      "cells": [
+        {
+          "key": "root:idle",
+          "sourceRect": [
+            0,
+            0,
+            291,
+            320
+          ],
+          "pivot": [
+            100,
+            319
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            54,
+            75,
+            291,
+            319
+          ]
+        },
+        {
+          "key": "root:windup",
+          "sourceRect": [
+            291,
+            0,
+            309,
+            320
+          ],
+          "pivot": [
+            155,
+            317
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            94,
+            21,
+            309,
+            317
+          ]
+        },
+        {
+          "key": "root:contact",
+          "sourceRect": [
+            600,
+            0,
+            415,
+            320
+          ],
+          "pivot": [
+            128,
+            318
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            69,
+            104,
+            415,
+            318
+          ]
+        },
+        {
+          "key": "root:recover",
+          "sourceRect": [
+            1015,
+            0,
+            239,
+            320
+          ],
+          "pivot": [
+            38,
+            319
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            5,
+            97,
+            229,
+            319
+          ]
+        },
+        {
+          "key": "clock:idle",
+          "sourceRect": [
+            0,
+            320,
+            286,
+            337
+          ],
+          "pivot": [
+            87,
+            325
+          ],
+          "visibleHeight": 226,
+          "visibleBounds": [
+            57,
+            99,
+            286,
+            325
+          ]
+        },
+        {
+          "key": "clock:windup",
+          "sourceRect": [
+            286,
+            320,
+            307,
+            337
+          ],
+          "pivot": [
+            135,
+            325
+          ],
+          "visibleHeight": 226,
+          "visibleBounds": [
+            105,
+            18,
+            307,
+            325
+          ]
+        },
+        {
+          "key": "clock:contact",
+          "sourceRect": [
+            593,
+            320,
+            432,
+            337
+          ],
+          "pivot": [
+            109,
+            325
+          ],
+          "visibleHeight": 226,
+          "visibleBounds": [
+            83,
+            125,
+            432,
+            325
+          ]
+        },
+        {
+          "key": "clock:recover",
+          "sourceRect": [
+            1025,
+            320,
+            229,
+            337
+          ],
+          "pivot": [
+            179,
+            337
+          ],
+          "visibleHeight": 226,
+          "visibleBounds": [
+            10,
+            108,
+            205,
+            337
+          ]
+        },
+        {
+          "key": "ash:idle",
+          "sourceRect": [
+            0,
+            657,
+            285,
+            289
+          ],
+          "pivot": [
+            189,
+            287
+          ],
+          "visibleHeight": 211,
+          "visibleBounds": [
+            37,
+            76,
+            285,
+            287
+          ]
+        },
+        {
+          "key": "ash:windup",
+          "sourceRect": [
+            285,
+            657,
+            341,
+            289
+          ],
+          "pivot": [
+            215,
+            287
+          ],
+          "visibleHeight": 211,
+          "visibleBounds": [
+            106,
+            11,
+            341,
+            287
+          ]
+        },
+        {
+          "key": "ash:contact",
+          "sourceRect": [
+            626,
+            657,
+            362,
+            289
+          ],
+          "pivot": [
+            191,
+            286
+          ],
+          "visibleHeight": 211,
+          "visibleBounds": [
+            44,
+            10,
+            362,
+            286
+          ]
+        },
+        {
+          "key": "ash:recover",
+          "sourceRect": [
+            988,
+            657,
+            266,
+            289
+          ],
+          "pivot": [
+            104,
+            288
+          ],
+          "visibleHeight": 211,
+          "visibleBounds": [
+            6,
+            86,
+            237,
+            288
+          ]
+        },
+        {
+          "key": "glass:idle",
+          "sourceRect": [
+            0,
+            946,
+            257,
+            308
+          ],
+          "pivot": [
+            137,
+            289
+          ],
+          "visibleHeight": 258,
+          "visibleBounds": [
+            25,
+            31,
+            257,
+            289
+          ]
+        },
+        {
+          "key": "glass:windup",
+          "sourceRect": [
+            257,
+            946,
+            375,
+            308
+          ],
+          "pivot": [
+            217,
+            287
+          ],
+          "visibleHeight": 258,
+          "visibleBounds": [
+            100,
+            20,
+            374,
+            287
+          ]
+        },
+        {
+          "key": "glass:contact",
+          "sourceRect": [
+            632,
+            946,
+            396,
+            308
+          ],
+          "pivot": [
+            125,
+            287
+          ],
+          "visibleHeight": 258,
+          "visibleBounds": [
+            42,
+            60,
+            395,
+            287
+          ]
+        },
+        {
+          "key": "glass:recover",
+          "sourceRect": [
+            1028,
+            946,
+            226,
+            308
+          ],
+          "pivot": [
+            66,
+            287
+          ],
+          "visibleHeight": 258,
+          "visibleBounds": [
+            5,
+            38,
+            197,
+            287
+          ]
+        }
+      ]
+    },
+    "effects": {
+      "path": "assets/r74/effects.png",
+      "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4",
+      "bytes": 2167359,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sourceFile": "exec-94255338-470c-4243-abe0-c1ca0b258210.png",
+      "clearAlphaFraction": 0.438476,
+      "cells": [
+        {
+          "key": "fire:warning",
+          "sourceRect": [
+            0,
+            0,
+            303,
+            325
+          ],
+          "pivot": [
+            173,
+            324
+          ],
+          "visibleHeight": 234,
+          "visibleBounds": [
+            44,
+            90,
+            303,
+            324
+          ]
+        },
+        {
+          "key": "fire:impact",
+          "sourceRect": [
+            303,
+            0,
+            293,
+            325
+          ],
+          "pivot": [
+            132,
+            309
+          ],
+          "visibleHeight": 195,
+          "visibleBounds": [
+            62,
+            114,
+            293,
+            309
+          ]
+        },
+        {
+          "key": "fire:residue",
+          "sourceRect": [
+            596,
+            0,
+            289,
+            325
+          ],
+          "pivot": [
+            259,
+            297
+          ],
+          "visibleHeight": 162,
+          "visibleBounds": [
+            72,
+            135,
+            287,
+            297
+          ]
+        },
+        {
+          "key": "fire:fade",
+          "sourceRect": [
+            885,
+            0,
+            369,
+            325
+          ],
+          "pivot": [
+            146,
+            290
+          ],
+          "visibleHeight": 160,
+          "visibleBounds": [
+            88,
+            130,
+            305,
+            290
+          ]
+        },
+        {
+          "key": "frost:warning",
+          "sourceRect": [
+            0,
+            325,
+            309,
+            314
+          ],
+          "pivot": [
+            172,
+            312
+          ],
+          "visibleHeight": 281,
+          "visibleBounds": [
+            36,
+            31,
+            308,
+            312
+          ]
+        },
+        {
+          "key": "frost:impact",
+          "sourceRect": [
+            309,
+            325,
+            304,
+            314
+          ],
+          "pivot": [
+            179,
+            293
+          ],
+          "visibleHeight": 248,
+          "visibleBounds": [
+            46,
+            45,
+            303,
+            293
+          ]
+        },
+        {
+          "key": "frost:residue",
+          "sourceRect": [
+            613,
+            325,
+            291,
+            314
+          ],
+          "pivot": [
+            212,
+            286
+          ],
+          "visibleHeight": 194,
+          "visibleBounds": [
+            61,
+            92,
+            290,
+            286
+          ]
+        },
+        {
+          "key": "frost:fade",
+          "sourceRect": [
+            904,
+            325,
+            350,
+            314
+          ],
+          "pivot": [
+            154,
+            280
+          ],
+          "visibleHeight": 172,
+          "visibleBounds": [
+            71,
+            108,
+            308,
+            280
+          ]
+        },
+        {
+          "key": "corruption:warning",
+          "sourceRect": [
+            0,
+            639,
+            307,
+            287
+          ],
+          "pivot": [
+            172,
+            286
+          ],
+          "visibleHeight": 265,
+          "visibleBounds": [
+            39,
+            21,
+            306,
+            286
+          ]
+        },
+        {
+          "key": "corruption:impact",
+          "sourceRect": [
+            307,
+            639,
+            300,
+            287
+          ],
+          "pivot": [
+            145,
+            269
+          ],
+          "visibleHeight": 244,
+          "visibleBounds": [
+            32,
+            25,
+            300,
+            269
+          ]
+        },
+        {
+          "key": "corruption:residue",
+          "sourceRect": [
+            607,
+            639,
+            314,
+            287
+          ],
+          "pivot": [
+            234,
+            274
+          ],
+          "visibleHeight": 216,
+          "visibleBounds": [
+            42,
+            58,
+            312,
+            274
+          ]
+        },
+        {
+          "key": "corruption:fade",
+          "sourceRect": [
+            921,
+            639,
+            333,
+            287
+          ],
+          "pivot": [
+            202,
+            262
+          ],
+          "visibleHeight": 178,
+          "visibleBounds": [
+            49,
+            84,
+            294,
+            262
+          ]
+        },
+        {
+          "key": "shock:warning",
+          "sourceRect": [
+            0,
+            926,
+            305,
+            328
+          ],
+          "pivot": [
+            173,
+            280
+          ],
+          "visibleHeight": 258,
+          "visibleBounds": [
+            42,
+            22,
+            304,
+            280
+          ]
+        },
+        {
+          "key": "shock:impact",
+          "sourceRect": [
+            305,
+            926,
+            305,
+            328
+          ],
+          "pivot": [
+            237,
+            290
+          ],
+          "visibleHeight": 266,
+          "visibleBounds": [
+            59,
+            24,
+            304,
+            290
+          ]
+        },
+        {
+          "key": "shock:residue",
+          "sourceRect": [
+            610,
+            926,
+            296,
+            328
+          ],
+          "pivot": [
+            239,
+            273
+          ],
+          "visibleHeight": 212,
+          "visibleBounds": [
+            47,
+            61,
+            296,
+            273
+          ]
+        },
+        {
+          "key": "shock:fade",
+          "sourceRect": [
+            906,
+            926,
+            348,
+            328
+          ],
+          "pivot": [
+            187,
+            259
+          ],
+          "visibleHeight": 162,
+          "visibleBounds": [
+            69,
+            97,
+            296,
+            259
+          ]
+        }
+      ]
+    },
+    "outdoor": {
+      "path": "assets/r74/outdoor.png",
+      "sha256": "e1c682b0f14b498664f35bd273fb2a286384e9b8ca5decbf92ef16afb8f945bf",
+      "bytes": 4048779,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "sourceFile": "exec-25f46b22-bd31-4dea-bee8-c4d43c9dae63.png",
+      "clearAlphaFraction": 0.0,
+      "cells": [],
+      "styles": {
+        "snow": {
+          "floorRect": [
+            8,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            8,
+            322,
+            298,
+            297
+          ],
+          "voidRect": [
+            8,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            8,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "ash": {
+          "floorRect": [
+            322,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            322,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            322,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            322,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "swamp": {
+          "floorRect": [
+            635,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            635,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            635,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            635,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "coast": {
+          "floorRect": [
+            948,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            948,
+            322,
+            298,
+            297
+          ],
+          "voidRect": [
+            948,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            948,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        }
+      }
+    }
+  }
+}

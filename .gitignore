@@ -23,6 +23,7 @@ projection33/
 /out/r72-local/
 /out/r73/
 /out/r73-local/
+/out/r74/
 /out/r72-first-*/
 /__pycache__/
 /_baseline/
@@ -31,6 +32,7 @@ projection33/
 /_r69/
 /_r70/
 /_r71/
+/_r72/
 /scripts/__pycache__/
 
 # Local restoration evidence; private checkpoints are not public site assets.
