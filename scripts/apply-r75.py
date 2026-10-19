@@ -118,6 +118,15 @@ def transform(html, renderer):
     injection['sourcePlan']['worldBosses'] = []; injection['sourcePlan']['unplannedWorldBosses'] = []
     injection['sourcePlan']['nativeWaveActorCount'] = sum(r.get('role') != 'objectiveStructure' for r in injection['sourcePlan']['plannedActors'])
     injection['r75Overlay'] = {'sourceSha256': story.SOURCE_SHA, 'role': 'hospital-only, no palace echo or named boss'}
+    # 33 is the knight's six-form duel and forced fall. His native boss
+    # pattern remains; the old field-wave copies must not become three pulls.
+    duel = next(z for z in roster['zones'] if z['id'] == 'last301')
+    for key in ['sourceActors', 'expectedRoster']:
+        duel[key] = [r for r in duel[key] if r.get('boss') or r.get('midboss')]
+    duel['sourcePlan']['plannedActors'] = [r for r in duel['sourcePlan']['plannedActors'] if r.get('boss') or r.get('midboss') or r.get('role') == 'objectiveStructure']
+    duel['sourcePlan']['fieldWaves'] = []
+    duel['sourcePlan']['nativeWaveActorCount'] = 0
+    duel['r75Overlay'] = {'sourceSha256': story.SOURCE_SHA, 'role': 'six-form knight boss pattern; no preparatory ordinary field wave'}
     objects = portable['mainlineRegionObjects']
     new_objects = copy.deepcopy(next(r for r in objects['entries'] if r['id'] == 'dist03'))
     new_objects.update(id='ep1a09b', name='결전의 날 · 과거 궁전', sourceEnvironmentKey='past-palace-rescue', sourceTopology='palace-rescue-courtyard', r75Overlay=overlay)
@@ -173,6 +182,7 @@ def transform(html, renderer):
     dance_fragment = once(dance_match[2], "const selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'),near=liveEnemies().filter(e=>distance(p,e)<=12)",
                           "const allowed=e=>window.__STORYWORLD_DANCE_POLICY_R75__?.target(k,e,p)??true,selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'&&allowed(e)),near=liveEnemies().filter(e=>distance(p,e)<=12&&allowed(e))")
     html = html[:dance_match.start(2)] + dance_fragment + html[dance_match.end(2):]
+    html = once(html, 'guide=!guide;auto=true;guideTimer=0;', 'guide=!guide;auto=guide;guideTimer=0;')
     # Optional bounded NPC presentation data travels only in host snapshots.
     html = once(html, "'passivePointRevisionR64'];", "'passivePointRevisionR64','r75NPCs'];")
     remote = 'if(cmd.ego)base.ego();if(cmd.threadDance'

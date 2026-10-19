@@ -5,7 +5,7 @@
  const events=[],metrics={plans:0,blocked:0,interactions:0,doorReplans:0};
  const mode=()=>window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off',egoVisit=()=>window.__STORYWORLD_EGO151__?.inspect?.()?.isVisit===true;
  const note=(kind,detail={})=>{events.push({kind,at:time,...detail});if(events.length>64)events.shift();};
- function clear(reason){if(route===ownedRoute)route=[];if(command===ownedCommand)command=null;if(target===ownedCommand)target=null;ownedRoute=null;ownedCommand=null;goalKey='';nextPlan=0;lastPosition=null;window.__STORYWORLD_MOBILE_R74__?.cancel('guide-'+reason);note('clear',{reason});}
+ function clear(reason){if(reason==='off')auto=false;if(route===ownedRoute)route=[];if(command===ownedCommand)command=null;if(target===ownedCommand)target=null;ownedRoute=null;ownedCommand=null;goalKey='';nextPlan=0;lastPosition=null;window.__STORYWORLD_MOBILE_R74__?.cancel('guide-'+reason);note('clear',{reason});}
  function currentGoal(){if(!started||!room||!player||player.hp<=0||mode()==='guest')return null;const def=regionById[zone],r75=window.__STORYWORLD_NARRATIVE_R75__?.record(zone),label=r75?.objective||'기억 표식';
   if(!completed(zone)&&storyReady(def)){
    const scripted=window.__STORYWORLD_OBJECTIVES_R75__?.goal();if(scripted)return scripted;
