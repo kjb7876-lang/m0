@@ -2,6 +2,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const crypto=require('node:crypto');
+fs.mkdirSync('out/r74',{recursive:true});
 const html=fs.readFileSync('_pages/docs/index.html','utf8');
 const sha=crypto.createHash('sha256').update(html).digest('hex');
 assert.ok(html.includes('R74-MOBILE-WORLD'));
