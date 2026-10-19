@@ -24,6 +24,8 @@ def transform(html, renderer):
     renderer = once(renderer, 'WORLD_COORD_LIMIT_R73:128,', 'worldLayoutR74,WORLD_COORD_LIMIT_R73:128,')
     html = once(html, "key=id+':'+seed;", "version=mode==='off'?(window.__STORYWORLD_WORLD_R74__?.version(id,l)||0):0,key=id+':'+seed+':'+version;")
     html = once(html, '{...d?.meta,seedR73:seed}', '{...d?.meta,seedR73:seed,worldR74:version}')
+    html = once(html, 'await ensureImages([...def.paths,...bossSkillPaths150(id)', 'await ensureImages([...def.paths,...(window.__STORYWORLD_WORLD_R74__?.assetPaths(id,options.layer||layer)||[]),...bossSkillPaths150(id)')
+    html = once(html, 'const keep=new Set([...regionById[zone].paths,...heroPaths(player.hero)', 'const keep=new Set([...regionById[zone].paths,...(window.__STORYWORLD_WORLD_R74__?.assetPaths(zone,layer)||[]),...heroPaths(player.hero)')
     html = once(html, "frame=(window.__STORYWORLD_STORY_COMBAT_R54__?.extended(room,e)?", "frame=(e.r74Monster?window.__STORYWORLD_PHASE1_ART__?.enemy(e)?.frame:null)||(window.__STORYWORLD_STORY_COMBAT_R54__?.extended(room,e)?")
     html = once(html, 'if(!e)return null;const persona=personaFrame(e);', "if(!e)return null;if(e.r74Monster){const f=window.__STORYWORLD_WORLD_R74__?.atlasFrame('monsters',e.r74Monster+':'+['idle','windup','contact','recover'][index]);if(f)return f;}const persona=personaFrame(e);")
     # Native AI retains the actual attacks, cast admission and collision. Only

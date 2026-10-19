@@ -44,7 +44,7 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           if test "$R74_CASE" = native; then
-            node scripts/r73-native.mjs
+            node scripts/r74-native.mjs
           elif test "$R74_CASE" = slots; then
             node scripts/r73-slots.browser.mjs
           elif test "$R74_CASE" = route; then

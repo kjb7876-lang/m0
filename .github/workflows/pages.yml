@@ -1,4 +1,4 @@
-name: StoryWorld R73 Pages with preserved R71 gates
+name: StoryWorld R74 Pages with preserved release gates
 on:
   push:
     branches: [main]
@@ -219,8 +219,77 @@ jobs:
             out/r73/
             out/r71/native/
           retention-days: 14
+  r74:
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [cpu, mobile, coop, skills, world, native, slots, route, features, coop-world, ui, render, memory]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct R74 over preserved R73 and run all CPU gates
+        run: bash scripts/build-r74-site.sh
+      - name: Check exact R74 candidate release pin
+        run: python3 scripts/r74-release-gate.py | tee out/r74/approval.json
+      - name: Verify complete media and R63R1 relay contracts
+        if: matrix.scenario == 'cpu'
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --prefix relay
+          node --test relay/test/relay.test.mjs | tee out/r74/relay.log
+          node verify-pages-r62.mjs _pages | tee out/r74/integrity.log
+      - name: Install pinned sandboxed browser
+        if: matrix.scenario != 'cpu'
+        run: |
+          npm ci --ignore-scripts --prefix relay
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run R74 browser acceptance and preserved regressions
+        if: matrix.scenario != 'cpu'
+        env:
+          R74_CASE: ${{ matrix.scenario }}
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r74/http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > out/r74/r71-http.log 2>&1 &
+          BASELINE_PID=$!
+          python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > out/r74/r72-http.log 2>&1 &
+          R72_PID=$!
+          trap 'kill "$SERVER_PID" "$BASELINE_PID" "$R72_PID" 2>/dev/null || true' EXIT
+          case "$R74_CASE" in
+            mobile|coop) node scripts/r74-mobile.browser.mjs ;;
+            skills) node scripts/r74-dances.browser.mjs ;;
+            world) node scripts/r74-world.browser.mjs ;;
+            features) node scripts/r74-features.mjs ;;
+            coop-world) node scripts/r74-coop-world.browser.mjs ;;
+            native) node scripts/r74-native.mjs ;;
+            slots) node scripts/r73-slots.browser.mjs ;;
+            route) node scripts/r73-route.browser.mjs ;;
+            ui) node scripts/r73-ui.mjs ;;
+            render) node scripts/r73-render.browser.mjs ;;
+            memory) node scripts/r73-memory.browser.mjs ;;
+            *) exit 1 ;;
+          esac 2>&1 | tee out/r74/browser-runner.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r74-release-${{ matrix.scenario }}-${{ github.sha }}
+          path: |
+            out/r74/
+            out/r73/
+            out/r71/native/
+          retention-days: 14
   release:
-    needs: [build, candidate]
+    needs: [build, candidate, r74]
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     permissions:
@@ -229,6 +298,7 @@ jobs:
     outputs:
       html_sha: ${{ steps.hashes.outputs.html_sha }}
       renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.hashes.outputs.asset_hashes_json }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -236,18 +306,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct byte-identical verified release
-        run: bash scripts/build-r73-site.sh
-      - name: Require exact R73 runtime approval
+      - name: Reconstruct byte-identical verified R74 release
+        run: bash scripts/build-r74-site.sh
+      - name: Require exact R74 runtime and generated image approval
         id: hashes
-        run: python3 scripts/r73-release-gate.py | tee out/r73/approval.json
+        run: python3 scripts/r74-release-gate.py | tee out/r74/approval.json
       - name: Verify all release files
         run: node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r73-release-manifest-${{ github.sha }}
+          name: r74-release-manifest-${{ github.sha }}
           path: |
+            out/r74/
             out/r73/
             _pages/docs/web-manifest-r62.json
           retention-days: 14
@@ -276,17 +347,18 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public HTML and renderer match approved R73 hashes
+      - name: Verify public HTML and renderer match approved R74 hashes
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
           RENDERER_SHA: ${{ needs.release.outputs.renderer_sha }}
           SOURCE_COMMIT: ${{ github.sha }}
+          ASSET_HASHES: ${{ needs.release.outputs.asset_hashes_json }}
         run: |
           python3 - <<'PY'
           import hashlib,json,os,time,urllib.request
           base=os.environ['PUBLIC_URL'].rstrip('/')+'/'
-          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA']};rows=[]
+          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA']};expected.update(json.loads(os.environ['ASSET_HASHES']));rows=[]
           for name,want in expected.items():
               for attempt in range(18):
                   url=base+name+'?release='+os.environ['SOURCE_COMMIT']+'&check='+str(attempt)
@@ -300,5 +372,5 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R73_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('R74_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY

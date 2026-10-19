@@ -1,0 +1,10 @@
+{
+  "status": "pending-review",
+  "baselineR73": {
+    "index.html": "9b484eaecc4a4dc2d2e6e5140471c0403f933b1b003f3a46b65db8d2766a8d62",
+    "dist/phase1.js": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
+  },
+  "approved": null,
+  "approvedAssets": null,
+  "evidence": {}
+}

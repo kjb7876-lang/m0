@@ -2,7 +2,7 @@
  * remain in their original coordinates. Layout input never comes from a save. */
 function worldLayoutR74(base,id,theme,safe,meta={}){
  if(meta.worldR74!==1||!base?.expanded||base.hospitalAnalytic12||window.__STORYWORLD_COOP_SIM_R62__?.mode?.()&&window.__STORYWORLD_COOP_SIM_R62__.mode()!=='off')return base;
- const profile=StoryWorldProfilesR74.profiles[id];if(!profile||safe&&profile.mode!=='indoor')return base;
+ const profile=Object.hasOwn(StoryWorldProfilesR74.profiles,id)?StoryWorldProfilesR74.profiles[id]:null;if(!profile||safe&&profile.mode!=='indoor')return base;
  let seed=(Number(meta.seedR73)||1)>>>0;for(const c of id)seed=Math.imul(seed^c.charCodeAt(0),16777619)>>>0;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;},key=(x,y)=>x+':'+y;
  const indoor=profile.mode==='indoor',cave=profile.mode==='cavern',archetypes={house:[18,16,3.8,3.2,3.2], 'mirror-house':[20,18,4.8,3,3.3],kitchen:[23,17,6.2,3.5,3.7],vault:[20,22,3.7,4.8,3.3],chapel:[21,21,4.5,5.4,3.6],cathedral:[23,21,5.8,6.2,4.1],forge:[24,18,6.3,4.4,4.2],'clock-hall':[24,19,5.2,3.6,3.7],'burned-hotel':[19,22,3.6,4.6,3.4],'hotel-stair':[20,23,4,4.2,3.4],'villa-stair':[22,18,4.4,3.4,3.3],clinic:[20,20,4.1,4.2,3.5],consultation:[18,17,4.2,3.6,3.5],observation:[23,18,5.5,3.7,3.6],machine:[22,22,4.9,4.8,4],'memory-room':[19,21,3.8,4.6,3.4],'harvest-vault':[23,20,5,4.4,3.8]},shape=archetypes[profile.style]||[21,20,4.5,4.2,3.5],width=indoor?shape[4]:cave?4.6:5.6,cells=new Set((base.floorCells||[]).filter(([x])=>x<29).map(([x,y])=>key(x,y))),coreWalls=base.walls.filter(w=>!w.annex),nodes=[],edges=[],roomRows=[];
  const inside=(x,y)=>x>=29&&y>=2&&x<122&&y<78;
