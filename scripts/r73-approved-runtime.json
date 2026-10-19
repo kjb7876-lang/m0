@@ -1,5 +1,5 @@
 {
-  "status": "pending-review",
+  "status": "approved",
   "baselineR71": {
     "index.html": "de6536bca2f3860c7195b39e4f7d1397ff8db7acb1558015f14a95c1b4e16646",
     "dist/phase1.js": "54dfe20af282d237511ef6f4bb6be3fe54880ad61d82928b0114d15f58df725c"
@@ -13,8 +13,11 @@
     "dist/phase1.js": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
   },
   "evidence": {
-    "validatedCodeSha": "ca2eb1f",
+    "validatedCodeSha": "6790a0d5af53639515aa088fff3401e33db8d71d",
     "htmlSha256": "9b484eaecc4a4dc2d2e6e5140471c0403f933b1b003f3a46b65db8d2766a8d62",
-    "rendererSha256": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
+    "rendererSha256": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471",
+    "r72RegressionRun": "https://github.com/kjb7876-lang/m0/actions/runs/39178641878",
+    "r73BrowserRun": "https://github.com/kjb7876-lang/m0/actions/runs/39178641950",
+    "pagesRun": "https://github.com/kjb7876-lang/m0/actions/runs/39178643962"
   }
 }
