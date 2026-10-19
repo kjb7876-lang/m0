@@ -69,6 +69,10 @@ def transform(html, renderer):
                      'title': row['title'], 'chapter': row['chapter'], 'narrator': row['narratorLabel'],
                      'paragraphs': row['body'].split('\n\n'), 'rest': row['rest'], **row['parts']}
         canonical['voiceSource'] = {v['part']: v['text'] for v in voice['scenes'] if v['sceneId'] == row['sceneId']}
+        special_keys = ['prologue.pre', 'prologue.post'] if row['sceneId'] == '01' else ['finale.core-preserved', 'hidden.persona', 'hidden.dual-awakening', 'hidden.desire-return', 'hidden.self-confrontation', 'followup.EGO'] if row['sceneId'] == '61' else []
+        for trigger in special_keys:
+            canonical[trigger] = runtime['specialTexts'][trigger]
+            canonical['voiceSource'][trigger] = runtime['specialTexts'][trigger]
         records.append(canonical)
         profiles.append({**parent, 'id': row['zoneId'], 'sceneId': row['sceneId'], 'index': row['ordinal'],
                          'balanceIndexR75': balances[row['legacyZoneId'] or 'ep1a09'],
@@ -169,6 +173,12 @@ def transform(html, renderer):
     dance_fragment = once(dance_match[2], "const selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'),near=liveEnemies().filter(e=>distance(p,e)<=12)",
                           "const allowed=e=>window.__STORYWORLD_DANCE_POLICY_R75__?.target(k,e,p)??true,selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'&&allowed(e)),near=liveEnemies().filter(e=>distance(p,e)<=12&&allowed(e))")
     html = html[:dance_match.start(2)] + dance_fragment + html[dance_match.end(2):]
+    # Optional bounded NPC presentation data travels only in host snapshots.
+    html = once(html, "'passivePointRevisionR64'];", "'passivePointRevisionR64','r75NPCs'];")
+    remote = 'if(cmd.ego)base.ego();if(cmd.threadDance'
+    if html.count(remote) != 2: raise ValueError('R75 remote interaction anchor drift')
+    html = html.replace(remote, 'if(cmd.ego)base.ego();if(cmd.interact)window.__STORYWORLD_OBJECTIVES_R75__?.remoteInteract();if(cmd.threadDance')
+    html = once(html, 'const applied=Math.min(e.hp,value);', "if(source?.kind==='narrative-companion-r75'){value=Math.min(value,Number.isFinite(source.supportBudget)?Math.max(0,source.supportBudget):0,Math.max(0,e.hp-e.maxHp*.2));if(value<=0)return false;}const applied=Math.min(e.hp,value);")
     # Enemy delta clocks and absolute owner deadlines share one local factor.
     start = html.index('tickEnemies=function(dt){\n if(room.encounterStage')
     end = html.index('\n};\nconst v2Blocked3', start) + 3
@@ -221,6 +231,7 @@ def transform(html, renderer):
     layout = once(layout, "if(meta.worldR74!==1||", "if(meta.worldR75!==1||")
     layout = once(layout, 'for(let y=0;y<3;y++)for(let x=0;x<4;x++)add(38+x*(indoor?shape[0]:21),12+y*(indoor?shape[1]:20),x+y);\n add(Math.min(113,nodes[11].x+10),Math.min(70,nodes[11].y+13),3);',
                   'const plan=worldPlanR75(profile,safe);for(let i=0;i<plan.points.length;i++){const[x,y]=plan.points[i];add(x,y,i);}')
+    layout = once(layout, 'jitter=indoor?0:(random()-.5)*2', 'jitter=0')
     layout = once(layout, 'const link=(a,b)=>', 'const link=(a,b,w=plan.width)=>')
     layout = once(layout, 'edges.push([a,b,width])', 'edges.push([a,b,w])')
     layout = once(layout, 'for(let y=0;y<3;y++)for(let x=0;x<3;x++)link(y*4+x,y*4+x+1);\n for(const[a,b]of[[0,4],[3,7],[4,8],[7,11],[1,5],[5,9],[2,6],[6,10],[11,12]])link(a,b);',
@@ -238,7 +249,7 @@ def transform(html, renderer):
     renderer = once(renderer, 'this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);', 'samongTerrainToneR75(this);this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);')
     html = once(html, 'canUse,use,pursuing,atlasFrame,clean,inspect:', 'canUse,use,isOpen,pursuing,atlasFrame,clean,inspect:')
     html += '\n<script id="story-data-r75">window.__STORYWORLD_STORY_DATA_R75__=' + compact(runtime) + ';window.__STORYWORLD_VOICE_CONTRACT_R75__=' + compact(voice) + ';window.__STORYWORLD_ART_R75__=' + compact(art) + ';</script>\n'
-    for name in ['story', 'dance-policy', 'world', 'doors', 'guide', 'samong']:
+    for name in ['story', 'dance-policy', 'world', 'objectives', 'doors', 'guide', 'samong']:
         fragment = (ROOT / ('client-source/' + name + '-r75.js')).read_text()
         if '</script' in fragment.lower(): raise ValueError('Unsafe R75 script')
         html += '\n<script id="' + name + '-r75">\n' + fragment + '\n</script>\n'

@@ -8,6 +8,7 @@
  function clear(reason){if(route===ownedRoute)route=[];if(command===ownedCommand)command=null;if(target===ownedCommand)target=null;ownedRoute=null;ownedCommand=null;goalKey='';nextPlan=0;lastPosition=null;window.__STORYWORLD_MOBILE_R74__?.cancel('guide-'+reason);note('clear',{reason});}
  function currentGoal(){if(!started||!room||!player||player.hp<=0||mode()==='guest')return null;const def=regionById[zone],r75=window.__STORYWORLD_NARRATIVE_R75__?.record(zone),label=r75?.objective||'기억 표식';
   if(!completed(zone)&&storyReady(def)){
+   const scripted=window.__STORYWORLD_OBJECTIVES_R75__?.goal();if(scripted)return scripted;
    const needField=!def.safe&&!prerequisites3(),active=(room.enemies||[]).filter(e=>e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&(!e.boss&&!e.midboss||room.engaged));
    if(room.engaged||needField){const rows=active.filter(e=>!needField||!e.boss&&!e.midboss).sort((a,b)=>distance(player,a)-distance(player,b));if(rows.length)return{kind:'enemy',id:rows[0].id,point:rows[0],label:needField?'침식된 명령의 봉인 해제':label};if(room.engaged)return{kind:'wait',id:'summoning',label:'소환의 실체화 기다리기'};}
    return{kind:'objective',id:'objective',point:room.objective,reach:2.45,label};

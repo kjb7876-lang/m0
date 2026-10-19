@@ -8,10 +8,10 @@
  const live=e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&room?.enemies?.includes(e);
  const note=(kind,data={})=>{events.push({kind,at:time,...data});if(events.length>64)events.shift();};
  function clear(reason){rays=[];rayPool=Array(12);ownerCycles=new WeakMap();factors=new WeakMap();nextRay=0;hadAwakening=false;trackedRoom=room;trackedActor=player;note('clear',{reason});}
- function shiftFrame(dt){factors=new WeakMap();if(!authority()||!awake()||!(dt>0))return;const shifts=new Map(),seen=new WeakMap();
+ function shiftFrame(dt){factors=new WeakMap();if(!authority()||!started||safeRegion()||!(dt>0))return;const shifts=new Map(),seen=new WeakMap();
   function shift(object,keys,delta){if(!object||typeof object!=='object'||Object.isFrozen(object))return;let done=seen.get(object);if(!done){done=new Set();seen.set(object,done);}for(const key of keys){if(done.has(key)||!Number.isFinite(object[key])||object[key]===0&&!['start','at','preparedAt','warningAt','r52Start'].includes(key))continue;object[key]+=delta;done.add(key);metrics.shiftedFields++;}}
   const times=['start','at','warningAt','releaseAt','impactAt','endAt','preparedAt','releasedAt','r52Start'];
-  for(const e of (room?.enemies||[]).slice(0,96)){if(!live(e))continue;let duration=0;for(const p of actors())if(p?.hp>0&&p.samong>0&&Math.hypot(p.x-e.x,p.y-e.y)<=limit.nearby)duration=Math.max(duration,Math.min(dt,p.samong));if(!duration)continue;const delta=duration*.5;factors.set(e,1-delta/dt);shifts.set(e.id,delta);metrics.slowedFrames++;
+  for(const e of (room?.enemies||[]).slice(0,96)){if(!live(e))continue;let duration=0;for(const p of actors())if(p?.hp>0&&p.samong>0&&Math.hypot(p.x-e.x,p.y-e.y)<=limit.nearby)duration=Math.max(duration,Math.min(dt,p.samong));const delta=Math.max(duration*.5,Math.max(0,Math.min(dt,(e.r75ArveliaSlowUntil||0)-time))*.25);if(!delta)continue;factors.set(e,1-delta/dt);shifts.set(e.id,delta);metrics.slowedFrames++;
    const move=(o,k=times)=>shift(o,k,delta);
    move(e,['storyAttackStart5','storyAttackUntil5','storyPatternCooldownUntil5','personaCooldownUntil150','personaAttackStart150','personaAttackUntil150','redTimeNextAt9','redTimeCastUntil9','redTimeUntil9','r61BusyUntil']);move(e.attack);move(e.r61Action);move(e.storyPreparedCast150);move(e.personaPreparedCast150);
    for(const q of (e.personaPendingShots150||[]).slice(0,128))move(q,['at','releaseAt','impactAt','endAt']);

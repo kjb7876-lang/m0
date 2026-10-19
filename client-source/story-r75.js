@@ -35,7 +35,7 @@
  // Validate even shared co-op cards. A filename or absent hash can never make
  // a legacy recording eligible for a newly selected sentence.
  const voiceBase=playVoice;playVoice=async function(scene,manual=false){
-  stopVoice();const token=voiceGeneration,id=scene.sceneId||records.get(scene.id)?.sceneId,entry=voices.get(id+':'+scene.part)||voices.get(scene.part+':special');
+  stopVoice();const token=voiceGeneration,id=scene.sceneId||records.get(scene.id)?.sceneId,entry=voices.get(id+':'+scene.part)||voices.get((scene.part==='innerReveal'?'hidden.persona':scene.part)+':special');
   const status=text=>{if(token===voiceGeneration&&$('voiceStatus'))$('voiceStatus').textContent=text;};
   if(!entry||voiceManifest?.sourceSha256!==sha){status('새 원문에 대응하는 음성을 준비 중입니다. 텍스트로 계속할 수 있습니다.');return;}
   const row=voiceManifest.scenes?.[entry.key];
