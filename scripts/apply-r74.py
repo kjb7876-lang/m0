@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,12 +35,16 @@ def build(site):
     combat = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(combat)
     html = combat.transform(html)
-    for name in ['thread-dances', 'elements', 'interaction-core', 'mobile']:
+    world_spec = importlib.util.spec_from_file_location('world_r74', ROOT / 'scripts/world-r74.py')
+    world = importlib.util.module_from_spec(world_spec)
+    world_spec.loader.exec_module(world)
+    html, renderer = world.transform(html, original['dist/phase1.js'].decode())
+    for name in ['world', 'thread-dances', 'elements', 'interaction-core', 'mobile']:
         fragment = (ROOT / ('client-source/' + name + '-r74.js')).read_text()
         if '</script' in fragment.lower():
             raise RuntimeError('Unsafe R74 fragment')
         html += '\n<script id="' + name + '-r74">\n' + fragment + '\n</script>\n'
-    result = {'index.html': html.encode(), 'dist/phase1.js': original['dist/phase1.js']}
+    result = {'index.html': html.encode(), 'dist/phase1.js': renderer.encode()}
     manifest_path = site / 'web-manifest-r62.json'
     manifest = json.loads(manifest_path.read_text())
     for name, data in result.items():
@@ -49,8 +54,23 @@ def build(site):
         (site / name).write_bytes(data)
         row.update(sha256=SHA(data), bytes=len(data))
     manifest['webHTMLSha256'] = SHA(result['index.html'])
+    art = json.loads((ROOT / 'client-source/art-r74.json').read_text())
+    for name, descriptor in art['atlases'].items():
+        source = ROOT / 'client-assets/r74' / (name + '.png')
+        data = source.read_bytes()
+        if SHA(data) != descriptor['sha256'] or len(data) != descriptor['bytes']:
+            raise RuntimeError('R74 generated image mismatch: ' + name)
+        if any(r['path'] == descriptor['path'] for r in manifest['files']):
+            raise RuntimeError('R74 generated image would overwrite existing media')
+        target = site / descriptor['path']
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        manifest['files'].append({k: descriptor[k] for k in ['path', 'bytes', 'sha256']})
+    manifest['fileCount'] = len(manifest['files'])
+    manifest['largest'] = sorted(manifest['files'], key=lambda r: r['bytes'], reverse=True)[:len(manifest.get('largest', [])) or 20]
     manifest['totalBytes'] = sum(r['bytes'] for r in manifest['files'])
     manifest['r74'] = {'revision': 'R74-MOBILE-WORLD', 'baselineCommit': 'b9d48ed3d8a4b98965d7bf9d619dd7588a85b6fb', 'originalMediaChanged': False}
+    manifest['r74']['generatedAssets'] = [{k: a[k] for k in ['path', 'bytes', 'sha256', 'width', 'height']} for a in art['atlases'].values()]
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({name: SHA(data) for name, data in result.items()}))
 

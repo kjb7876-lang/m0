@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scenario: [mobile, coop, skills]
+        scenario: [mobile, coop, skills, world]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -29,7 +29,7 @@ jobs:
           bash scripts/build-r73-site.sh
           if test -f scripts/apply-r74.py; then
             python3 scripts/apply-r74.py --site _pages/docs
-            node --test scripts/r74.cpu.test.mjs scripts/r74-dances.cpu.test.mjs scripts/r74-health.cpu.test.mjs scripts/r74-elements.cpu.test.mjs
+            node --test scripts/r74.cpu.test.mjs scripts/r74-dances.cpu.test.mjs scripts/r74-health.cpu.test.mjs scripts/r74-elements.cpu.test.mjs scripts/r74-world.cpu.test.mjs
             node scripts/r74-coop-transition.cpu.cjs
           fi
       - name: Install pinned sandboxed browser
@@ -43,7 +43,9 @@ jobs:
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r74-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          if test "$R74_CASE" = skills; then
+          if test "$R74_CASE" = world; then
+            node scripts/r74-world.browser.mjs
+          elif test "$R74_CASE" = skills; then
             node scripts/r74-dances.browser.mjs
           else
             node scripts/r74-mobile.browser.mjs
