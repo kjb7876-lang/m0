@@ -5,7 +5,7 @@
     "dist/phase1.js": "913ac7a97a4166772cb8885a62d96687b44d5b5b9ff5da1387f096415e67e471"
   },
   "approved": {
-    "index.html": "9217540470623a8fded64773852164106bab948d39735a462ab75839d3cfe9b3",
+    "index.html": "f4e26c35c9ade6cc44b3935c5d6e461fb9f5fe1ac9a831d1f0ed085dd7e8cddb",
     "dist/phase1.js": "e9faecbadc4991d2e4cfd8a5ec8555ad331d4a09e6ffc12b7ef9d1ed1e9a09bc"
   },
   "approvedAssets": {
@@ -36,13 +36,13 @@
     "worldScreenshots": "https://github.com/kjb7876-lang/m0/actions/runs/39201513070/artifacts/12163493845",
     "worldScreenshotCount": 5,
     "finalCandidateLocalChecks": {
-      "R74CPU": 28,
+      "R74CPU": 29,
       "compiledCoopFixtures": 6,
       "staticFileHashes": 1911,
       "audioRangeRequests": 276,
       "isolatedReleaseGateCases": 6
     },
-    "finalCandidateChanges": "Bump the renderer cache key, validate a connected return path around corners, retain native status imagery outside the four generated element families.",
+    "finalCandidateChanges": "Bump the renderer cache key; validate connected safe return and gold/silver control transfer around corners without added damage or invulnerability; retain native status imagery outside the four generated element families.",
     "exactShaValidation": "PR14 and main workflows must pass their exact runtime hash pin and all preserved release/R74 checks before publishing. This pin sets the expected candidate bytes; it does not bypass CI.",
     "authorization": "Latest user authorization permits normal main merge and Pages only after checks.",
     "pullRequest": "https://github.com/kjb7876-lang/m0/pull/14",
