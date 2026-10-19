@@ -103,6 +103,8 @@ function normalizeEmptyCastleDefense(save) {
 
 function stableSave(save) {
   const persistent = structuredClone(save || {});
+  const gameTime = persistent.time;
+  delete persistent.time;
   const player = persistent.player && typeof persistent.player === 'object' ? persistent.player : null;
   const resonance = player?.resonance;
   const cooldowns = player?.combatCooldownRemaining26 || {};
@@ -110,6 +112,23 @@ function stableSave(save) {
     delete player.resonance;
     delete player.combatCooldownRemaining26;
     player.upgrades = Object.fromEntries(Object.entries(player.upgrades || {}).filter(([, rank]) => rank !== 0));
+  }
+  const normalizeZeroRanks = ranks => {
+    if (!ranks || typeof ranks !== 'object' || Array.isArray(ranks)) return;
+    for (const [key, rank] of Object.entries(ranks)) if (rank === 0) delete ranks[key];
+  };
+  normalizeZeroRanks(persistent.progressionR62?.progression?.ranks);
+  normalizeZeroRanks(persistent.player?.progressionR62?.ranks);
+
+  const pointDropState = persistent.campaignPointDropsR64;
+  const pointEpochCounter = Number.isSafeInteger(pointDropState?.epochCounter) ? pointDropState.epochCounter : null;
+  const pointRoomRevisions = {};
+  if (pointDropState?.version === 1 && pointDropState.rooms && typeof pointDropState.rooms === 'object' && !Array.isArray(pointDropState.rooms)) {
+    for (const [key, row] of Object.entries(pointDropState.rooms)) {
+      pointRoomRevisions[key] = Number.isSafeInteger(row?.revision) ? row.revision : null;
+      if (row && typeof row === 'object' && !Array.isArray(row)) delete row.revision;
+    }
+    delete pointDropState.epochCounter;
   }
   const settings = {...(persistent.settings || {})};
   settings.enemyDirection51 = settings.enemyDirection51 !== false;
@@ -126,7 +145,12 @@ function stableSave(save) {
     }
   }
   const normalizedEmptyDefenseRooms = normalizeEmptyCastleDefense(persistent);
-  return {persistent, dynamic: {resonance, cooldowns}, spawnNonces, normalizedEmptyDefenseRooms};
+  return {
+    persistent,
+    dynamic: {resonance, cooldowns, gameTime, pointEpochCounter, pointRoomRevisions},
+    spawnNonces,
+    normalizedEmptyDefenseRooms,
+  };
 }
 
 function canonicalStoredSave(raw) {
@@ -155,6 +179,33 @@ function changedPaths(a, b, path = '$', out = []) {
   return out;
 }
 
+function compareSaveDynamics(before, after, restoreCount) {
+  const gameTimeValid = Number.isFinite(before.dynamic.gameTime)
+    && Number.isFinite(after.dynamic.gameTime)
+    && after.dynamic.gameTime + 1e-6 >= before.dynamic.gameTime;
+  const restoreCountValid = Number.isSafeInteger(restoreCount) && restoreCount >= 0;
+  const pointEpochCounterValid = Number.isSafeInteger(before.dynamic.pointEpochCounter)
+    && Number.isSafeInteger(after.dynamic.pointEpochCounter)
+    && after.dynamic.pointEpochCounter >= before.dynamic.pointEpochCounter;
+  const pointRooms = before.persistent.campaignPointDropsR64?.rooms || {};
+  const pointRoomKeys = new Set([
+    ...Object.keys(before.dynamic.pointRoomRevisions),
+    ...Object.keys(after.dynamic.pointRoomRevisions),
+  ]);
+  const pointRoomRevisionDifferences = [...pointRoomKeys].filter(key => {
+    const oldValue = before.dynamic.pointRoomRevisions[key];
+    const newValue = after.dynamic.pointRoomRevisions[key];
+    const expected = oldValue + (Object.hasOwn(pointRooms, key) ? restoreCount : 0);
+    return !Number.isSafeInteger(oldValue) || !Number.isSafeInteger(newValue) || newValue !== expected;
+  });
+  return {
+    gameTimeValid,
+    pointEpochCounterValid,
+    pointRoomRevisionDifferences,
+    pointDropCountersValid: restoreCountValid && pointEpochCounterValid && pointRoomRevisionDifferences.length === 0,
+  };
+}
+
 function integritySnapshots(value) {
   const {persistent: p} = value;
   const namedBossRewardState = Object.fromEntries(Object.entries(p).filter(([key]) => /boss|reward|loot|drop/i.test(key)));
@@ -173,6 +224,9 @@ function assertSaveComparisonContract() {
     worldR74: {doors: [{id: 'door-0', open: false}]}, worldR75: {entries: {}},
     narrativeObjectivesR75: {version: 1, rooms: {'STORY:hando02': {gateMask: 0}}},
     castleDefenseR75: {version: 1, rooms: {}}, bossRewardsR75: {hando02: {claimed: false}},
+    time: 10,
+    progressionR62: {version: 1, progression: {version: 1, ranks: {}}},
+    campaignPointDropsR64: {version: 1, epochCounter: 2, rooms: {'STORY:hub': {epoch: 1, spawnSeq: 0, revision: 0, drops: [], rolls: [], claims: []}}},
   };
   const withEmptyDefense = structuredClone(baseline);
   withEmptyDefense.castleDefenseR75.rooms['STORY:hando02'] = {
@@ -189,17 +243,48 @@ function assertSaveComparisonContract() {
     ['player reward', value => { value.player.gold = 1; }],
     ['castle-defense progress', value => { value.castleDefenseR75.rooms['STORY:hando02'].round = 1; }],
     ['noncanonical defense field', value => { value.castleDefenseR75.rooms['STORY:hando02'].extra = true; }],
+    ['nonzero progression rank', value => { value.progressionR62.progression.ranks.threadDanceR63 = 1; }],
+    ['claimed point-drop reward', value => { value.campaignPointDropsR64.rooms['STORY:hub'].claims.push('r64:1:drop:test'); }],
   ];
   for (const [label, mutate] of mutations) {
     const changed = structuredClone(withEmptyDefense);
     mutate(changed);
     assert.notDeepEqual(stableSave(baseline).persistent, stableSave(changed).persistent, label + ' remains strict');
   }
+
+  const expectedRestore = structuredClone(baseline);
+  expectedRestore.time = 18;
+  expectedRestore.progressionR62.progression.ranks = {dreamAura: 0, threadDanceR63: 0};
+  expectedRestore.campaignPointDropsR64.epochCounter = 3;
+  expectedRestore.campaignPointDropsR64.rooms['STORY:hub'].revision = 1;
+  const before = stableSave(baseline);
+  const after = stableSave(expectedRestore);
+  assert.deepEqual(after.persistent, before.persistent, 'time, zero-rank defaults, and restore counters are separated from saved progress');
+  assert.ok(compareSaveDynamics(before, after, 1).gameTimeValid, 'game time may advance while the saved journey is restored');
+  assert.ok(compareSaveDynamics(before, after, 1).pointDropCountersValid, 'one restore increments only the exact expected point-drop counters');
+
+  const expectedMultipleRestores = structuredClone(baseline);
+  expectedMultipleRestores.time = 22;
+  expectedMultipleRestores.progressionR62.progression.ranks = {dreamAura: 0, threadDanceR63: 0};
+  expectedMultipleRestores.campaignPointDropsR64.epochCounter = 4;
+  expectedMultipleRestores.campaignPointDropsR64.rooms['STORY:hub'].revision = 2;
+  assert.ok(compareSaveDynamics(before, stableSave(expectedMultipleRestores), 2).pointDropCountersValid, 'post-return storage checks count every expected restore');
+
+  const wrongRevision = stableSave(expectedRestore);
+  wrongRevision.dynamic.pointRoomRevisions['STORY:hub'] += 1;
+  assert.equal(compareSaveDynamics(before, wrongRevision, 1).pointDropCountersValid, false, 'point-drop revisions must match the exact restore count');
+  const wrongTime = stableSave(expectedRestore);
+  wrongTime.dynamic.gameTime = 1;
+  assert.equal(compareSaveDynamics(before, wrongTime, 1).gameTimeValid, false, 'game time cannot move backwards');
+  const wrongEpoch = stableSave(expectedRestore);
+  wrongEpoch.dynamic.pointEpochCounter = 0;
+  assert.equal(compareSaveDynamics(before, wrongEpoch, 1).pointDropCountersValid, false, 'point-drop epoch allocation cannot move backwards');
 }
 
 function assertNormalEquivalent(before, after, restoreCount, labelName) {
   const a = stableSave(before);
   const b = stableSave(after);
+  const saveDynamics = compareSaveDynamics(a, b, restoreCount);
   const beforeIntegrity = integritySnapshots(a);
   const afterIntegrity = integritySnapshots(b);
   const integrity = Object.fromEntries(Object.keys(beforeIntegrity).map(key => [key, isDeepStrictEqual(beforeIntegrity[key], afterIntegrity[key])]));
@@ -212,13 +297,22 @@ function assertNormalEquivalent(before, after, restoreCount, labelName) {
     afterCooldowns: b.dynamic.cooldowns,
     beforeSpawnNonces: a.spawnNonces,
     afterSpawnNonces: b.spawnNonces,
+    beforeGameTime: a.dynamic.gameTime,
+    afterGameTime: b.dynamic.gameTime,
+    beforePointEpochCounter: a.dynamic.pointEpochCounter,
+    afterPointEpochCounter: b.dynamic.pointEpochCounter,
+    beforePointRoomRevisions: a.dynamic.pointRoomRevisions,
+    afterPointRoomRevisions: b.dynamic.pointRoomRevisions,
     normalizedEmptyDefenseRoomsBefore: a.normalizedEmptyDefenseRooms,
     normalizedEmptyDefenseRoomsAfter: b.normalizedEmptyDefenseRooms,
     persistentEqual: isDeepStrictEqual(b.persistent, a.persistent),
     persistentDifferencePaths: changedPaths(a.persistent, b.persistent),
     integrity,
-    dynamicsValid: true,
+    dynamicsValid: saveDynamics.gameTimeValid,
     spawnNoncesValid: true,
+    pointEpochCounterValid: saveDynamics.pointEpochCounterValid,
+    pointRoomRevisionDifferences: saveDynamics.pointRoomRevisionDifferences,
+    pointDropCountersValid: saveDynamics.pointDropCountersValid,
     ok: false,
   };
   report.saveIsolation.comparisons.push(row);
@@ -250,7 +344,8 @@ function assertNormalEquivalent(before, after, restoreCount, labelName) {
     const newValue = Number(b.spawnNonces[key] || 0);
     return newValue !== oldValue + (Object.hasOwn(a.persistent.rooms, key) ? restoreCount : 0);
   });
-  row.ok = row.persistentEqual && Object.values(integrity).every(Boolean) && row.dynamicsValid && row.spawnNoncesValid;
+  row.ok = row.persistentEqual && Object.values(integrity).every(Boolean)
+    && row.dynamicsValid && row.spawnNoncesValid && row.pointDropCountersValid;
   if (!row.ok) console.error('R75_OVERNIGHT_SAVE_COMPARISON_FAILURE', JSON.stringify(row));
   return row;
 }
@@ -296,9 +391,10 @@ function assertNormalSlotPreserved(beforeRaw, afterRaw, labelName) {
   return row;
 }
 
-function assertNormalSlotProgressAfterReturn(beforeRaw, afterRaw, labelName) {
+function assertNormalSlotProgressAfterReturn(beforeRaw, afterRaw, restoreCount, labelName) {
   const row = {
     label: labelName,
+    restoreCount,
     beforeSHA256: typeof beforeRaw === 'string' ? digest(Buffer.from(beforeRaw)) : null,
     afterSHA256: typeof afterRaw === 'string' ? digest(Buffer.from(afterRaw)) : null,
     semanticEqual: false,
@@ -314,14 +410,26 @@ function assertNormalSlotProgressAfterReturn(beforeRaw, afterRaw, labelName) {
   try {
     const before = stableSave(JSON.parse(beforeRaw));
     const after = stableSave(JSON.parse(afterRaw));
+    const saveDynamics = compareSaveDynamics(before, after, restoreCount);
     const beforeIntegrity = integritySnapshots(before);
     const afterIntegrity = integritySnapshots(after);
     row.semanticEqual = isDeepStrictEqual(before.persistent, after.persistent);
     row.differencePaths = changedPaths(before.persistent, after.persistent);
     row.normalizedEmptyDefenseRoomsBefore = before.normalizedEmptyDefenseRooms;
     row.normalizedEmptyDefenseRoomsAfter = after.normalizedEmptyDefenseRooms;
+    row.beforeGameTime = before.dynamic.gameTime;
+    row.afterGameTime = after.dynamic.gameTime;
+    row.beforePointEpochCounter = before.dynamic.pointEpochCounter;
+    row.afterPointEpochCounter = after.dynamic.pointEpochCounter;
+    row.beforePointRoomRevisions = before.dynamic.pointRoomRevisions;
+    row.afterPointRoomRevisions = after.dynamic.pointRoomRevisions;
+    row.dynamicsValid = saveDynamics.gameTimeValid;
+    row.pointEpochCounterValid = saveDynamics.pointEpochCounterValid;
+    row.pointRoomRevisionDifferences = saveDynamics.pointRoomRevisionDifferences;
+    row.pointDropCountersValid = saveDynamics.pointDropCountersValid;
     row.integrity = Object.fromEntries(Object.keys(beforeIntegrity).map(key => [key, isDeepStrictEqual(beforeIntegrity[key], afterIntegrity[key])]));
-    row.ok = row.semanticEqual && Object.values(row.integrity).every(Boolean);
+    row.ok = row.semanticEqual && Object.values(row.integrity).every(Boolean)
+      && row.dynamicsValid && row.pointDropCountersValid;
   } catch (error) {
     row.error = String(error.stack || error);
   }
@@ -335,8 +443,9 @@ async function performanceMatrix() {
     guide = false;
     booted = true;
     player.invincible = Math.max(player.invincible || 0, 1e7);
-    const actors = room.enemies.filter(e => e.hp > 0 && e.spawnState === 'active').map(e => ({id: e.id, x: Math.round(e.x * 1000) / 1000, y: Math.round(e.y * 1000) / 1000, hp: Math.round(e.hp * 1000) / 1000}));
-    return {zone, layer, seed: room.exploration?.seedR73 ?? null, family: room.exploration?.worldR75?.family || null, enemyRoster: room.enemies.length, active: actors.length, actors, camera: {...cam}, player: {x: player.x, y: player.y}, renderer: window.__STORYWORLD_PHASE1__.controller.inspect().active, fixture: 'native dist02 field at deterministic seed; player invincibility is an observation fixture; renderer resolution/density unchanged'};
+    const actors = room.enemies.filter(e => e.hp > 0 && e.spawnState === 'active').map(e => ({id: e.id, hp: Math.round(e.hp * 1000) / 1000}));
+    const cell = point => ({x: Math.floor(point.x), y: Math.floor(point.y)});
+    return {zone, layer, seed: room.exploration?.seedR73 ?? null, family: room.exploration?.worldR75?.family || null, enemyRoster: room.enemies.length, active: actors.length, actors, cameraCell: cell(cam), playerCell: cell(player), renderer: window.__STORYWORLD_PHASE1__.controller.inspect().active, fixture: 'native dist02 field at deterministic seed; environment compares actor identity/HP and 1-unit player/camera cells so free-running AI movement does not invalidate a paired sample; player invincibility is an observation fixture; renderer resolution/density unchanged'};
   });
   assert.equal(before.zone, 'dist02');
   assert.equal(before.renderer, 'three');
@@ -540,7 +649,7 @@ try {
   await ready();
   const returned = await page.evaluate(() => serializeSave());
   const leaveComparison = assertNormalEquivalent(normalAfterReload, returned, 1, 'leave-777-restores-normal-journey');
-  const leaveSlotComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'normal-slot-after-777-leave');
+  const leaveSlotComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 2, 'normal-slot-after-777-leave');
   check('native-777-leave-restores-normal-journey', {zone: returned.zone, progress: returned.progress, hero: returned.player.hero, level: returned.player.level, points: returned.player.points}, leaveComparison.ok && leaveSlotComparison.ok);
 
   assert.equal(await page.evaluate(() => saveGame(false)), true);
@@ -549,7 +658,7 @@ try {
   await ready();
   const final = await page.evaluate(() => serializeSave());
   const finalComparison = assertNormalEquivalent(returned, final, 1, 'normal-save-after-777-return-round-trip');
-  const finalStoredComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'normal-slot-after-777-return-round-trip');
+  const finalStoredComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 3, 'normal-slot-after-777-return-round-trip');
   check('normal-save-after-777-return-round-trip', {zone: final.zone, progress: final.progress, hero: final.player.hero, level: final.player.level, points: final.player.points}, finalComparison.ok && finalStoredComparison.ok);
   assert.deepEqual(report.pageErrors, []);
   report.saveIsolation.complete = report.saveIsolation.comparisons.length === 3 && report.saveIsolation.storedComparisons.length === 6;

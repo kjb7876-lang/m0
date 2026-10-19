@@ -48,7 +48,7 @@ def read(label, seed, rep):
     checks = row.get("checks") if isinstance(row.get("checks"), list) else []
     names = {item.get("name") for item in checks if isinstance(item, dict) and item.get("ok") is True}
     if len(checks) != len(EXPECTED_CHECKS) or names != EXPECTED_CHECKS:
-        issue(f"{path}: expected all five named browser checks; found {sorted(str(x) for x in names)}")
+        issue(f"{path}: expected all six named browser checks; found {sorted(str(x) for x in names)}")
     if row.get("pageErrors") != []:
         issue(f"{path}: page errors are present or the field is missing")
     isolation = row.get("saveIsolation") if isinstance(row.get("saveIsolation"), dict) else {}
@@ -76,6 +76,8 @@ def read(label, seed, rep):
         or item.get("persistentEqual") is not True
         or item.get("dynamicsValid") is not True
         or item.get("spawnNoncesValid") is not True
+        or item.get("pointEpochCounterValid") is not True
+        or item.get("pointDropCountersValid") is not True
         or item.get("restoreCount") != 1
         or not isinstance(item.get("integrity"), dict)
         or any(item["integrity"].get(key) is not True for key in ("progressFlags", "worldAndDoors", "bossesAndRewards"))
@@ -134,7 +136,7 @@ def same_json(left, right):
 
 
 performance_pairs = []
-environment_keys = ("zone", "layer", "seed", "family", "enemyRoster", "active", "actors", "camera", "player", "renderer", "fixture")
+environment_keys = ("zone", "layer", "seed", "family", "enemyRoster", "active", "actors", "cameraCell", "playerCell", "renderer", "fixture")
 performance_environment_matches = True
 
 
