@@ -1,0 +1,42 @@
+name: StoryWorld R74 mobile and save investigation
+on:
+  push:
+    branches: [feat/r74-mobile-world]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: r74-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  mobile:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct preserved R73 and candidate if present
+        run: |
+          bash scripts/build-r73-site.sh
+          if test -f scripts/apply-r74.py; then python3 scripts/apply-r74.py --site _pages/docs; fi
+      - name: Install pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Reproduce mobile and transition behavior
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r74-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r74-mobile.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r74-mobile-${{ github.sha }}
+          path: out/r74/
+          retention-days: 14
