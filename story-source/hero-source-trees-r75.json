@@ -1,0 +1,852 @@
+{
+  "repository": "kjb7876-lang/hapil1",
+  "ref": "59598c41d747819590ca4b0c90cb0cd3b5f3c4b0",
+  "trees": [
+    {
+      "prefix": "assets/heroes",
+      "treeSHA": "e2718cf914cfb311a899bfa1687c26156f37e713",
+      "truncated": false,
+      "files": [
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp",
+          "gitBlob": "11f8f7e31032d0cc02b3be687a6bc540984a0744",
+          "bytes": 34012
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-dash-front.webp",
+          "gitBlob": "95b81bcb6ffaec932880d59f7eb744b0fcd0818e",
+          "bytes": 29466
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-guard-back.webp",
+          "gitBlob": "d86256dccafc706837ad5eb0dd6f3a4fac4a7d64",
+          "bytes": 26958
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-guard-front.webp",
+          "gitBlob": "91461413e43b18b6c7af81ed6edd5387062dd248",
+          "bytes": 28018
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-guard-left.webp",
+          "gitBlob": "e7fd869c34ac5b40d466f510821a8817bd8aea12",
+          "bytes": 25302
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/hunter-guard-right.webp",
+          "gitBlob": "41f91a423a22772ac59ba41976c88c2a45655818",
+          "bytes": 7296
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp",
+          "gitBlob": "bf1e31895dc304fe07f70adaef51dfa0051f1b84",
+          "bytes": 28530
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp",
+          "gitBlob": "4bf010aa8ef8c830383cd7506966d9ab3153ebf4",
+          "bytes": 28232
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/lauren-guard-back.webp",
+          "gitBlob": "b62d335ec2d6edf13b2d01aa1cfceb92b3396fef",
+          "bytes": 24376
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/lauren-guard-front.webp",
+          "gitBlob": "e7e59f9f523255f6cd1746bba74b19ee725a3802",
+          "bytes": 26954
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/michaela-dash-back.webp",
+          "gitBlob": "2bcb0043acc5e15c820f0ae2c671fb682580a5a5",
+          "bytes": 32198
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/michaela-dash-front.webp",
+          "gitBlob": "4e0a38f1e57c97210b9cd4a143b77b442e92c220",
+          "bytes": 29368
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/michaela-guard-back.webp",
+          "gitBlob": "b9671fed7db2dc49284c2154bf30d5669e84d604",
+          "bytes": 27394
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/michaela-guard-front.webp",
+          "gitBlob": "9ad1b262dbb76c00e473227925af5b227587d9aa",
+          "bytes": 28706
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/neon-dash-back.webp",
+          "gitBlob": "0a56e44812a81a329f56f79c5b34a1c3567b51c7",
+          "bytes": 39168
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/neon-dash-front.webp",
+          "gitBlob": "9ddb5d9942cd40bf077d22010731fc9d440ecbac",
+          "bytes": 31690
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/neon-guard-back.webp",
+          "gitBlob": "4e22f6689184affa6eb4f2ced4b8b53804f666ab",
+          "bytes": 31896
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/neon-guard-front.webp",
+          "gitBlob": "77f16d046ada56066497c4e3c267dd8a8b6e4345",
+          "bytes": 29530
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp",
+          "gitBlob": "054bf0dfd2489e0ad9b5d08f387bcaac34ce0ffb",
+          "bytes": 45094
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp",
+          "gitBlob": "5211a9004d7550c1fef872f5a95ac1b4c2f5c779",
+          "bytes": 40550
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/seoha-guard-back.webp",
+          "gitBlob": "481eb22d2df085386871b059a7069334bf1cb714",
+          "bytes": 36786
+        },
+        {
+          "path": "assets/heroes/normalized/actions-consistent/seoha-guard-front.webp",
+          "gitBlob": "28ff9edd4801dbd942c81627de283befb6a8373e",
+          "bytes": 36690
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/hunter-dash-left.webp",
+          "gitBlob": "ac6e5c0eb8cc6909ae3e9e5c52a8c31cd7e12a6d",
+          "bytes": 25346
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/hunter-dash-right.webp",
+          "gitBlob": "2279404878da4fb883715585f3b4480dba059f5f",
+          "bytes": 24196
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/lauren-skill-left.webp",
+          "gitBlob": "34b86d52dcea5240bfafc5ac01cd9cca60f3d695",
+          "bytes": 37430
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/lauren-skill-right.webp",
+          "gitBlob": "982319fdc4520ae5125ca57ab5bbad50fdd09a70",
+          "bytes": 36562
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/michaela-attack-left.webp",
+          "gitBlob": "fad1fbb7d84beb0e91b657e24fd85bf2c30bc07e",
+          "bytes": 28774
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/michaela-attack-right.webp",
+          "gitBlob": "30eb236de7714ce3a0e49c756ce2b68df76c71ba",
+          "bytes": 27080
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/michaela-guard-left.webp",
+          "gitBlob": "21d4dd5c2a29fd6b73ca44c1fac36b1d402713d0",
+          "bytes": 38860
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/michaela-guard-right.webp",
+          "gitBlob": "192503ca7cbb983cb69df894c23954b088699af4",
+          "bytes": 36702
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/neon-skill-left.webp",
+          "gitBlob": "108fc74ffcef8a4494478e5b938d1d9ecc08fa6f",
+          "bytes": 39600
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/neon-skill-right.webp",
+          "gitBlob": "a3f33228b722038fbeaf7c3418e5dfa9950a0251",
+          "bytes": 36466
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/seoha-skill-left.webp",
+          "gitBlob": "ec6d02c2b989a8bbe12c48c3b447507013183759",
+          "bytes": 35502
+        },
+        {
+          "path": "assets/heroes/normalized/actions-directional/seoha-skill-right.webp",
+          "gitBlob": "1f07c4eaa5045855e720e20ee33b97f074aece25",
+          "bytes": 33488
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/gunner-hurt-back.webp",
+          "gitBlob": "73adf24b8dae3309d3536e3b4949cc78ad774586",
+          "bytes": 9730
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp",
+          "gitBlob": "f4d6c7cf46cc6c3f99257d9f58969301607c0cf2",
+          "bytes": 12526
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/gunner-hurt-left.webp",
+          "gitBlob": "af8ea942c07ddb88905bcd3213bce1365278a1ce",
+          "bytes": 12062
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/gunner-hurt-right.webp",
+          "gitBlob": "d05c627f6bb29cb637542056edb57315da3dbf13",
+          "bytes": 12106
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp",
+          "gitBlob": "3ac0dc931cc3dc0c3d393060ce242b0e79ff3035",
+          "bytes": 11320
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp",
+          "gitBlob": "e733f24408d42c3a3f5a081789fac323b3fdc035",
+          "bytes": 12020
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp",
+          "gitBlob": "bfe7fb2ba77bdef5ea258e7c3d1dcf1450caf52e",
+          "bytes": 10980
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp",
+          "gitBlob": "9dc6af1299cf5bbb8319aea8d0cb478f3bd8961c",
+          "bytes": 10830
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-move-back.webp",
+          "gitBlob": "b751c6b945ac5a9c9ec58e76099f6357caa8bacb",
+          "bytes": 9840
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-move-front.webp",
+          "gitBlob": "b2ebd767793a250b9b9a148b4c5930782d97d8c9",
+          "bytes": 9094
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+          "gitBlob": "5425627840cf517a0e5be0a1694028bf37726646",
+          "bytes": 9574
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/hunter-move-right.webp",
+          "gitBlob": "be86657a662e7675dc9830db2e36aa4b5a33ce72",
+          "bytes": 9422
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/lauren-move-back.webp",
+          "gitBlob": "d6ec0c84a30e22744992ff476300d5bbb24a03ac",
+          "bytes": 9318
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/lauren-move-front.webp",
+          "gitBlob": "f3e765ed51627f08bd9a36af966a5d9609f11052",
+          "bytes": 10636
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+          "gitBlob": "12ff118dbaa8aa187cbcfd2e22e6e93203d171a0",
+          "bytes": 26924
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/lauren-move-right.webp",
+          "gitBlob": "74fd59a688f5eeb1c2057a954b5d01f187312060",
+          "bytes": 8514
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-hurt-back.webp",
+          "gitBlob": "ca1112a653c97741196e5939cf5956a5f433e5c8",
+          "bytes": 11446
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-hurt-front.webp",
+          "gitBlob": "6126fe46bdeda315cb6ba7fc16b8acce852d4061",
+          "bytes": 12690
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-hurt-left.webp",
+          "gitBlob": "0d7a27b075566a898d360b0d907226525e18bbcf",
+          "bytes": 9584
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-hurt-right.webp",
+          "gitBlob": "9a2678ad641fbfce58a41c1fce139b4ee15036de",
+          "bytes": 10832
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-move-back.webp",
+          "gitBlob": "ff46fa986e84c88938d31329e6fb2be71da832c3",
+          "bytes": 9998
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-move-front.webp",
+          "gitBlob": "dc18b013903c455333abf4a1294ba15873c29731",
+          "bytes": 10640
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+          "gitBlob": "6811f6cf0ac0bb22184e140a3ebb6726b9e4cf2c",
+          "bytes": 12388
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/michaela-move-right.webp",
+          "gitBlob": "93024a7c292ba3a6780eb8444eb016ab63dbb433",
+          "bytes": 11320
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-hurt-back.webp",
+          "gitBlob": "86e1da5a42832cb5a7dcf07ab8e0d98068bc372d",
+          "bytes": 13658
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-hurt-front.webp",
+          "gitBlob": "5b73c34b0b35615da7f24f6ab68b7f2fc51b1085",
+          "bytes": 15578
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-hurt-left.webp",
+          "gitBlob": "aaa9b5e56ae7c90783921bc8dbd56f4333735b3d",
+          "bytes": 13002
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-hurt-right.webp",
+          "gitBlob": "515a3840e860a67072344e7afa637a54b2cf116d",
+          "bytes": 13792
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-move-back.webp",
+          "gitBlob": "cbc2649983885dde75ec2cd1dbedd2e7c4f54f04",
+          "bytes": 12850
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-move-front.webp",
+          "gitBlob": "30181c57c35ac7139870efaa2e1296954243ad45",
+          "bytes": 15632
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-move-left.webp",
+          "gitBlob": "a590960387202b4e16355c607ae5d7e9ad6186a7",
+          "bytes": 13956
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+          "gitBlob": "49172c0aded72cc13b677cdb797aee809b2cf169",
+          "bytes": 13180
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp",
+          "gitBlob": "3bf4cd7dbcbdb7978c85ee4c59a0eebe078b29ec",
+          "bytes": 45836
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp",
+          "gitBlob": "386a8278eda4fdd10111a10c40ccf9b4d99e2eac",
+          "bytes": 13406
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp",
+          "gitBlob": "fdc5bd5fe7fd2b9b0eceabb590620d85a8d2e387",
+          "bytes": 54194
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp",
+          "gitBlob": "247c273771f6dd2fc71dc38e13495085637ae8bd",
+          "bytes": 11452
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-move-back.webp",
+          "gitBlob": "2f42801972b9409e9e2348c57213c37f7fd113fa",
+          "bytes": 15460
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-move-front.webp",
+          "gitBlob": "085055abc3436cb4acfa9b39f10a58834b1b85e9",
+          "bytes": 15134
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+          "gitBlob": "7c8d59496141b521149c8c8356d854dd3cf8d6d1",
+          "bytes": 14230
+        },
+        {
+          "path": "assets/heroes/normalized/actions-v3126/seoha-move-right.webp",
+          "gitBlob": "0b3af7f0ea8b2fc843d7b3e88cf2c6322f82222f",
+          "bytes": 14420
+        },
+        {
+          "path": "assets/heroes/normalized/directions/hunter-back.webp",
+          "gitBlob": "221f8aaf7341889385ea5caa14e5d81e6efcf0cc",
+          "bytes": 16606
+        },
+        {
+          "path": "assets/heroes/normalized/directions/hunter-front.webp",
+          "gitBlob": "e79529ddfd01e8eb7ccabce4bb6778879b95f54e",
+          "bytes": 16106
+        },
+        {
+          "path": "assets/heroes/normalized/directions/hunter-left.webp",
+          "gitBlob": "fc700b6e8f54336f1602516033c8fd4325a732fa",
+          "bytes": 13476
+        },
+        {
+          "path": "assets/heroes/normalized/directions/hunter-right.webp",
+          "gitBlob": "0157a2e5820095e0cde576525b815e9f1b4a8594",
+          "bytes": 6662
+        },
+        {
+          "path": "assets/heroes/normalized/directions/lauren-back.webp",
+          "gitBlob": "8e2a4a9098fd2c61049589fcd5f1a0b4c76bfbf8",
+          "bytes": 14254
+        },
+        {
+          "path": "assets/heroes/normalized/directions/lauren-front.webp",
+          "gitBlob": "ee2f9cd7c9c417be6f222d067c2c2f086b2dae77",
+          "bytes": 15358
+        },
+        {
+          "path": "assets/heroes/normalized/directions/lauren-left.webp",
+          "gitBlob": "ca7ec85d703c63006217a7f4b97593c8a6e31459",
+          "bytes": 8978
+        },
+        {
+          "path": "assets/heroes/normalized/directions/lauren-right.webp",
+          "gitBlob": "9b10b1f45fac0b8ef883c88a7d8bf9046edc4455",
+          "bytes": 12430
+        },
+        {
+          "path": "assets/heroes/normalized/directions/michaela-back.webp",
+          "gitBlob": "2a8a0bae28842fbe4545c982c5a7b2aaa773694f",
+          "bytes": 16768
+        },
+        {
+          "path": "assets/heroes/normalized/directions/michaela-front.webp",
+          "gitBlob": "ed82f0ef9b6601c7c03d2632751914c58f1004b3",
+          "bytes": 16430
+        },
+        {
+          "path": "assets/heroes/normalized/directions/michaela-left.webp",
+          "gitBlob": "74372a6e96ad710a1fa0c2e078f630aec8888ef4",
+          "bytes": 15330
+        },
+        {
+          "path": "assets/heroes/normalized/directions/michaela-right.webp",
+          "gitBlob": "0f54660edd4cc9027b00ec0a41e60e3cad15a3c8",
+          "bytes": 16000
+        },
+        {
+          "path": "assets/heroes/normalized/directions/neon-back.webp",
+          "gitBlob": "8c33467bf205dce66ef7bd50d1385fec24f061d5",
+          "bytes": 18648
+        },
+        {
+          "path": "assets/heroes/normalized/directions/neon-front.webp",
+          "gitBlob": "f5197cf75dfe72ca7ce5177b598116b3b24bffed",
+          "bytes": 17490
+        },
+        {
+          "path": "assets/heroes/normalized/directions/neon-left.webp",
+          "gitBlob": "0aa8dae6ffada83d1a284c3ed24b9cac1155bdc0",
+          "bytes": 14014
+        },
+        {
+          "path": "assets/heroes/normalized/directions/neon-right.webp",
+          "gitBlob": "3628e4173b6684f9458f00c39a4e026402f9b086",
+          "bytes": 8868
+        },
+        {
+          "path": "assets/heroes/normalized/directions/seoha-back.webp",
+          "gitBlob": "b92e5e2b651c622c406dcd715f856f3b4bedeabd",
+          "bytes": 23566
+        },
+        {
+          "path": "assets/heroes/normalized/directions/seoha-front.webp",
+          "gitBlob": "21bc0fc708d0e41fedc9c41b752cdbb22435f365",
+          "bytes": 23948
+        },
+        {
+          "path": "assets/heroes/normalized/directions/seoha-left.webp",
+          "gitBlob": "417dc16d4136b69a24357f1a336695d1de727de8",
+          "bytes": 18808
+        },
+        {
+          "path": "assets/heroes/normalized/directions/seoha-right.webp",
+          "gitBlob": "59e045235e9bb90246b2af005c39b7e8593c4c77",
+          "bytes": 9074
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/dash_left.webp",
+          "gitBlob": "da95bbe0d6faaec0790f32e6f9f3298bff0e8e43",
+          "bytes": 48370
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/dash_right.webp",
+          "gitBlob": "88070da4634c1feadd689a98c12eda10fc35b98f",
+          "bytes": 48212
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/guard_left.webp",
+          "gitBlob": "c0a26e66d5cd3bce490c38fe1cb98b9fafe2ced7",
+          "bytes": 75278
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/guard_right.webp",
+          "gitBlob": "86e5a641d901e76720ede335b944dbd029339848",
+          "bytes": 75006
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/player_idle.webp",
+          "gitBlob": "b9645c6f37de81b429c379cdc82607b664682a08",
+          "bytes": 29546
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/player_roll.webp",
+          "gitBlob": "3594cf8618afa9ff638b49460c8e4013d2a9aaaa",
+          "bytes": 17928
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_back_a.webp",
+          "gitBlob": "ab1d890f17439df1aba83b11a87e1e5848c09b7f",
+          "bytes": 13172
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_back_b.webp",
+          "gitBlob": "835b00d0e34f09ee647329ea05c5bad92bba6b18",
+          "bytes": 13124
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_front_a.webp",
+          "gitBlob": "3f894a712614bc9665297e66cdcf992b463213ea",
+          "bytes": 15206
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_front_b.webp",
+          "gitBlob": "fb4d77e8a9ec945e95f8b3b0ecf0cfcf0e43c76f",
+          "bytes": 14918
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_left_a.webp",
+          "gitBlob": "462c12db039b43f5e924c0fc8fad1b3447c461f2",
+          "bytes": 80046
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_left_b.webp",
+          "gitBlob": "773cb7238af94d410ba702e70f7115c8dad3ac3f",
+          "bytes": 90136
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_right_a.webp",
+          "gitBlob": "137af4acbb6280a06f3ebf7b2d0d6701527dcd89",
+          "bytes": 79758
+        },
+        {
+          "path": "assets/heroes/normalized/gunner/run_right_b.webp",
+          "gitBlob": "e3fda8272ed32573b118aa2dffb43a725ad1f499",
+          "bytes": 89410
+        }
+      ]
+    },
+    {
+      "prefix": "assets/hero_direction334",
+      "treeSHA": "0f967da8f48054066655c76b3ec887be42d2cfc2",
+      "truncated": false,
+      "files": [
+        {
+          "path": "assets/hero_direction334/gunner/e.webp",
+          "gitBlob": "16ca708b9194ad80031068292d0234dd1b60450a",
+          "bytes": 108762
+        },
+        {
+          "path": "assets/hero_direction334/gunner/ne.webp",
+          "gitBlob": "b41611010f2e430d82c0cec9687167e8681b7b5e",
+          "bytes": 114916
+        },
+        {
+          "path": "assets/hero_direction334/gunner/nw.webp",
+          "gitBlob": "80a78064127502423e328410e305cb4f8fb22cc3",
+          "bytes": 116928
+        },
+        {
+          "path": "assets/hero_direction334/gunner/se.webp",
+          "gitBlob": "ca2feab743677becd4d82331dd48d53f5281549a",
+          "bytes": 103088
+        },
+        {
+          "path": "assets/hero_direction334/gunner/sw.webp",
+          "gitBlob": "1ab0d4cc6ca50d5eacb805ca240793d4c5c97b4b",
+          "bytes": 105990
+        },
+        {
+          "path": "assets/hero_direction334/gunner/w.webp",
+          "gitBlob": "def2cb6b36ad3f81a90e4fba70c50b922c7c8cb0",
+          "bytes": 106712
+        },
+        {
+          "path": "assets/hero_direction334/hunter/e.webp",
+          "gitBlob": "04387b429056003f5d2f45f9fc52facd1b9ce163",
+          "bytes": 110242
+        },
+        {
+          "path": "assets/hero_direction334/hunter/ne.webp",
+          "gitBlob": "19f8d90501edaa94754acd0b65acb9f2609eefed",
+          "bytes": 114124
+        },
+        {
+          "path": "assets/hero_direction334/hunter/nw.webp",
+          "gitBlob": "aee97695486f63c687c7b0bfdbf7466113580a1d",
+          "bytes": 111276
+        },
+        {
+          "path": "assets/hero_direction334/hunter/se.webp",
+          "gitBlob": "dfc0d94bc32c726b0796103dbcacceea91306592",
+          "bytes": 105128
+        },
+        {
+          "path": "assets/hero_direction334/hunter/sw.webp",
+          "gitBlob": "c6dbc569fb2aac0a22ee194b71ab60cb1c1773dc",
+          "bytes": 106166
+        },
+        {
+          "path": "assets/hero_direction334/hunter/w.webp",
+          "gitBlob": "30dd04d631eff0ff1d35e38707d2e125f59cb6df",
+          "bytes": 109960
+        },
+        {
+          "path": "assets/hero_direction334/lauren/e.webp",
+          "gitBlob": "accd8d35f1aab3851fb0554d46a32cb16f685b79",
+          "bytes": 98636
+        },
+        {
+          "path": "assets/hero_direction334/lauren/ne.webp",
+          "gitBlob": "b947fafecf06e69fa4c7970009b8baec8f70722d",
+          "bytes": 105970
+        },
+        {
+          "path": "assets/hero_direction334/lauren/nw.webp",
+          "gitBlob": "989d89fe64b2bb29dcaa2a0cf918ee162559acdc",
+          "bytes": 102772
+        },
+        {
+          "path": "assets/hero_direction334/lauren/se.webp",
+          "gitBlob": "68b614708d302ff5c3e8ca717c364fc2d41dbbd8",
+          "bytes": 109072
+        },
+        {
+          "path": "assets/hero_direction334/lauren/sw.webp",
+          "gitBlob": "67364f24e9f4fc4752be6dd424542e5117a1111d",
+          "bytes": 107632
+        },
+        {
+          "path": "assets/hero_direction334/lauren/w.webp",
+          "gitBlob": "74c9f5c28143c6a52d44723877e0efede3512e94",
+          "bytes": 97924
+        },
+        {
+          "path": "assets/hero_direction334/michaela/e.webp",
+          "gitBlob": "5e4da5564c1cdadda131dc029c6f3e78f3ad2dff",
+          "bytes": 123194
+        },
+        {
+          "path": "assets/hero_direction334/michaela/ne.webp",
+          "gitBlob": "a052f1b3f8f1fc5ae13b6cd5e52a2262b660c272",
+          "bytes": 127974
+        },
+        {
+          "path": "assets/hero_direction334/michaela/nw.webp",
+          "gitBlob": "98c1f1a215e1fafc3cee27d723fa3a327f8240ca",
+          "bytes": 124210
+        },
+        {
+          "path": "assets/hero_direction334/michaela/se.webp",
+          "gitBlob": "04ecc013289628fa9258dd60f59d2a0128b588ae",
+          "bytes": 123278
+        },
+        {
+          "path": "assets/hero_direction334/michaela/sw.webp",
+          "gitBlob": "d8039f6ed50bc0a99c87ac03c6f16eb78d6daa4d",
+          "bytes": 125876
+        },
+        {
+          "path": "assets/hero_direction334/michaela/w.webp",
+          "gitBlob": "a788d38b11389e3a71067f99d723eabbc1debf2d",
+          "bytes": 123010
+        },
+        {
+          "path": "assets/hero_direction334/neon/e.webp",
+          "gitBlob": "543622cc09837e8eebb2d5fd34884f899ce883cd",
+          "bytes": 97868
+        },
+        {
+          "path": "assets/hero_direction334/neon/ne.webp",
+          "gitBlob": "dfba0f42a4bae561d62e223e83303725ef46fa1b",
+          "bytes": 103694
+        },
+        {
+          "path": "assets/hero_direction334/neon/nw.webp",
+          "gitBlob": "148d09848691f9cc392510214e586ad53f271afb",
+          "bytes": 98356
+        },
+        {
+          "path": "assets/hero_direction334/neon/se.webp",
+          "gitBlob": "3640c0d06444c817e6d26ab89544e1a88a2cef33",
+          "bytes": 98290
+        },
+        {
+          "path": "assets/hero_direction334/neon/sw.webp",
+          "gitBlob": "d5d38f47c6ee8f5427f8c3e7de0323a6b8a69b2d",
+          "bytes": 100688
+        },
+        {
+          "path": "assets/hero_direction334/neon/w.webp",
+          "gitBlob": "a7149938a6816f21f640e213586b83255d253480",
+          "bytes": 93538
+        },
+        {
+          "path": "assets/hero_direction334/seoha/e.webp",
+          "gitBlob": "0909b5bb3433737d237d3f2b08ffcc583751734d",
+          "bytes": 122134
+        },
+        {
+          "path": "assets/hero_direction334/seoha/ne.webp",
+          "gitBlob": "fa8ba370e68641a3454ebd037b67eedfff9a50b3",
+          "bytes": 123162
+        },
+        {
+          "path": "assets/hero_direction334/seoha/nw.webp",
+          "gitBlob": "cb9277e70358bdaa3c5973e81b22be0162f01852",
+          "bytes": 118076
+        },
+        {
+          "path": "assets/hero_direction334/seoha/se.webp",
+          "gitBlob": "eacb7f7d27e9c0c2a94c5e4b5dff4f82bed06804",
+          "bytes": 119772
+        },
+        {
+          "path": "assets/hero_direction334/seoha/sw.webp",
+          "gitBlob": "f02828f0aff68a58e89fd2cdf1657a44b81a751a",
+          "bytes": 113250
+        },
+        {
+          "path": "assets/hero_direction334/seoha/w.webp",
+          "gitBlob": "bbe50538856df78fb8d052aefd34c01d8df41f01",
+          "bytes": 114860
+        }
+      ]
+    },
+    {
+      "prefix": "assets/hero_direction337",
+      "treeSHA": "a794f7bd21be2cd9f8710fd95f89524a63cb1615",
+      "truncated": false,
+      "files": [
+        {
+          "path": "assets/hero_direction337/gunner/n.webp",
+          "gitBlob": "9aff4e2130088e1b43070c2244566ac6f302d65e",
+          "bytes": 70104
+        },
+        {
+          "path": "assets/hero_direction337/gunner/s.webp",
+          "gitBlob": "bf04aba4ab10bc52c69a7fa888d9d73b2f50e1a3",
+          "bytes": 133462
+        },
+        {
+          "path": "assets/hero_direction337/hunter/n.webp",
+          "gitBlob": "28f69bec2aa3495c8961b6787ee85c31c1091ef7",
+          "bytes": 101078
+        },
+        {
+          "path": "assets/hero_direction337/hunter/s.webp",
+          "gitBlob": "ce5215a038720fa6593d7f1576498cd921890f28",
+          "bytes": 130608
+        },
+        {
+          "path": "assets/hero_direction337/lauren/n.webp",
+          "gitBlob": "72b3b14e5697771c59cab9775cc1c447dd65372f",
+          "bytes": 80248
+        },
+        {
+          "path": "assets/hero_direction337/lauren/s.webp",
+          "gitBlob": "349364432ac2c16a059a1461737c87c89521eff3",
+          "bytes": 130620
+        },
+        {
+          "path": "assets/hero_direction337/michaela/n.webp",
+          "gitBlob": "9eeec24a099a25d006b65960472340cfbeba754a",
+          "bytes": 72906
+        },
+        {
+          "path": "assets/hero_direction337/michaela/s.webp",
+          "gitBlob": "d3ba0a843e35986d411aecdff8a6ae1011eb1db8",
+          "bytes": 120504
+        },
+        {
+          "path": "assets/hero_direction337/neon/n.webp",
+          "gitBlob": "0ced9eb0c32422a1ec620171370e2eb6d9cba28d",
+          "bytes": 80258
+        },
+        {
+          "path": "assets/hero_direction337/neon/s.webp",
+          "gitBlob": "de6a33f644eb622d114b15ccf7d27b96441eb544",
+          "bytes": 136726
+        },
+        {
+          "path": "assets/hero_direction337/seoha/n.webp",
+          "gitBlob": "78f7416ad6a64fe4dfc63242ca03be5936c66722",
+          "bytes": 96398
+        },
+        {
+          "path": "assets/hero_direction337/seoha/s.webp",
+          "gitBlob": "b3ab92cdaac2f268640804f619432e43f9996d6c",
+          "bytes": 118264
+        }
+      ]
+    },
+    {
+      "prefix": "assets/hero_direction338",
+      "treeSHA": "84e8a4f9958ff87eda64e88fa8abaffd03a20aae",
+      "truncated": false,
+      "files": [
+        {
+          "path": "assets/hero_direction338/lauren/n.webp",
+          "gitBlob": "b135efb253c02eb9f2ecd102b6e215b4590a4baf",
+          "bytes": 102068
+        },
+        {
+          "path": "assets/hero_direction338/lauren/s.webp",
+          "gitBlob": "1b0cc678afda8d9f35e5e33c7ff5d9ec810cd437",
+          "bytes": 102990
+        }
+      ]
+    },
+    {
+      "prefix": "assets/hero-authored-v314rc5",
+      "treeSHA": "4b70a9c4087f90c3917697d0d4bbaf62303d0afc",
+      "truncated": false,
+      "files": [
+        {
+          "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "gitBlob": "97105d2584e2f641cdcf9d7eeddd797602956363",
+          "bytes": 1493857
+        },
+        {
+          "path": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+          "gitBlob": "bedfaa712b66f09e8ebae081f5e4d183b0ec65c1",
+          "bytes": 1504110
+        },
+        {
+          "path": "assets/hero-authored-v314rc5/slayer-action-atlas.png",
+          "gitBlob": "d4f70b3dbbf3a9c3419a75c211ec8f526dc97da1",
+          "bytes": 1358351
+        },
+        {
+          "path": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+          "gitBlob": "1d1058823d5e4768c52575628e3d80e95eb2be1e",
+          "bytes": 1419240
+        }
+      ]
+    }
+  ],
+  "scope": "Only the 162 files selected by preserved R74 native hero routes; tree SHAs identify the read-only source snapshot."
+}

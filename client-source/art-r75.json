@@ -1,0 +1,314 @@
+{
+  "path": "assets/r75/doors.png",
+  "bytes": 1883743,
+  "sha256": "183d35ed47640aa98f8d2800a8b5ebfc756af23c6c64f7aa93c2ea3b4f91b954",
+  "width": 1774,
+  "height": 887,
+  "sourceRectangles": [
+    [
+      100,
+      9,
+      374,
+      413
+    ],
+    [
+      564,
+      22,
+      254,
+      395
+    ],
+    [
+      916,
+      10,
+      422,
+      412
+    ],
+    [
+      1422,
+      22,
+      247,
+      395
+    ],
+    [
+      90,
+      438,
+      393,
+      416
+    ],
+    [
+      559,
+      449,
+      268,
+      396
+    ],
+    [
+      922,
+      442,
+      411,
+      413
+    ],
+    [
+      1424,
+      449,
+      245,
+      397
+    ]
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "leaf": 1,
+      "opening": [
+        201,
+        96,
+        374,
+        418
+      ]
+    },
+    {
+      "frame": 2,
+      "leaf": 3,
+      "opening": [
+        1041,
+        96,
+        1213,
+        418
+      ]
+    },
+    {
+      "frame": 4,
+      "leaf": 5,
+      "opening": [
+        193,
+        515,
+        380,
+        850
+      ]
+    },
+    {
+      "frame": 6,
+      "leaf": 7,
+      "opening": [
+        1041,
+        530,
+        1215,
+        851
+      ]
+    }
+  ],
+  "provenance": "Original imagegen output. PNG bytes unchanged. Independent front-view stone/wood/iron frame and leaf modules; source rectangles only, projected onto world-facing upright planes at runtime. No external artwork used.",
+  "decodedRGBABytes": 6294152,
+  "npcs": {
+    "path": "assets/r75/npcs.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2124137,
+    "sha256": "990d761509aea18c49c01699d8e91b6022d049913934a42e75043721b3dfcf48",
+    "decodedRGBABytes": 6291456,
+    "frames": [
+      {
+        "key": "villager-elder",
+        "sourceRect": [
+          252,
+          15,
+          201,
+          490
+        ],
+        "pivot": [
+          82.04,
+          486
+        ],
+        "visibleHeight": 482
+      },
+      {
+        "key": "villager-woman",
+        "sourceRect": [
+          690,
+          21,
+          183,
+          481
+        ],
+        "pivot": [
+          88.34,
+          477
+        ],
+        "visibleHeight": 473
+      },
+      {
+        "key": "villager-hood",
+        "sourceRect": [
+          1132,
+          13,
+          201,
+          492
+        ],
+        "pivot": [
+          85.89,
+          488
+        ],
+        "visibleHeight": 484
+      },
+      {
+        "key": "lance-owner",
+        "sourceRect": [
+          208,
+          333,
+          286,
+          674
+        ],
+        "pivot": [
+          113.77,
+          670
+        ],
+        "visibleHeight": 490,
+        "clipPolygonPx": [
+          [
+            208,
+            333
+          ],
+          [
+            252,
+            333
+          ],
+          [
+            252,
+            504
+          ],
+          [
+            494,
+            504
+          ],
+          [
+            494,
+            1007
+          ],
+          [
+            208,
+            1007
+          ]
+        ]
+      },
+      {
+        "key": "time-guardian",
+        "sourceRect": [
+          1094,
+          514,
+          289,
+          493
+        ],
+        "pivot": [
+          120.63,
+          489
+        ],
+        "visibleHeight": 485
+      },
+      {
+        "key": "shaman-owner",
+        "path": "assets/r75/shaman-spear.png",
+        "sourceRect": [
+          320,
+          0,
+          630,
+          1254
+        ],
+        "pivot": [
+          355,
+          1215
+        ],
+        "visibleHeight": 1010
+      },
+      {
+        "key": "garrison-lance",
+        "sourceRect": [
+          208,
+          333,
+          286,
+          674
+        ],
+        "pivot": [
+          113.77,
+          670
+        ],
+        "visibleHeight": 490,
+        "clipPolygonPx": [
+          [
+            208,
+            333
+          ],
+          [
+            252,
+            333
+          ],
+          [
+            252,
+            504
+          ],
+          [
+            494,
+            504
+          ],
+          [
+            494,
+            1007
+          ],
+          [
+            208,
+            1007
+          ]
+        ],
+        "clipPolygon": [
+          [
+            0,
+            0
+          ],
+          [
+            36,
+            0
+          ],
+          [
+            36,
+            167
+          ],
+          [
+            286,
+            167
+          ],
+          [
+            286,
+            674
+          ],
+          [
+            0,
+            674
+          ]
+        ]
+      },
+      {
+        "key": "garrison-sword",
+        "sourceRect": [
+          665,
+          500,
+          246,
+          511
+        ],
+        "pivot": [
+          104.9,
+          507
+        ],
+        "visibleHeight": 503
+      }
+    ],
+    "provenance": "Original imagegen NPC atlas. PNG bytes unchanged; crop rectangles and lance-isolation clipping polygon only. Protective civilians, two distinct knight silhouettes and an unbound time guardian. No player avatar replacement.",
+    "extraAtlases": [
+      {
+        "path": "assets/r75/shaman-spear.png",
+        "bytes": 982652,
+        "sha256": "c73c7ed0bb15807d6860cbbd1e03109be4a9c8c3241039cc96466beaf2f12641",
+        "width": 1254,
+        "height": 1254,
+        "decodedRGBABytes": 6290064,
+        "provenance": "Original imagegen spear supporter, reused as an unnamed castle reinforcement. Original PNG bytes unchanged; existing hero identities use the original HAPIL Neon/Lauren sources."
+      }
+    ]
+  }
+}
