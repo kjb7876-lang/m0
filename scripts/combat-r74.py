@@ -82,7 +82,7 @@ def transform(html):
     html=once(html,'적 기본 체력과 받는 피해, 첫 클리어 포인트가 표시된 값으로 적용됩니다.',
               '일반 적과 보스 체력은 이전 공개판보다 66% 높습니다. 난이도별 일반 적 기본 체력과 받는 피해, 첫 클리어 포인트가 표시된 값으로 적용됩니다.')
     html=once(html,'Math.round(TIERS[mapMode()].hp*100)', '(TIERS[mapMode()].hp*166).toFixed(1)')
-    html=once(html,"['실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),","[window.__STORYWORLD_DANCES_R74__?.state('silver')?.equipped?.length?'은색실':'기본 실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),")
+    html=once(html,"['실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),","[window.__STORYWORLD_DANCES_R74__?.state('silver')?.equipped?.length?'은색실':'기본 실검무',()=>window.__STORYWORLD_CAMPAIGN_R63R1__?.cast(true),")
     html=once(html,"name:'실검무 · 은실의 분기',icon:'haste',text:'","name:'실검무 · 은실의 분기',icon:'haste',text:'기본 실검무 습득 후 은색실 편집기로 직접 그린 궤적을 별도 저장·장착할 수 있습니다. T와 실검무 버튼은 장착한 은색실을 우선 사용하며, 장착 해제 시 기존 기본 동작으로 돌아갑니다. " )
     html=once(html,'if(distance(player,exitPoint(d))<.85){travel(d);break}',
               'if(distance(player,exitPoint(d))<.85&&!window.__STORYWORLD_DANCES_R74__?.moving(player)){travel(d);break}')
