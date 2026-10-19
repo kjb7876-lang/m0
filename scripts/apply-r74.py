@@ -23,6 +23,7 @@ def build(site):
     if {name: SHA(data) for name, data in original.items()} != BASE:
         raise RuntimeError('R74 requires the exact released R73 baseline')
     html = original['index.html'].decode()
+    html = once(html, 'src="./dist/phase1.js?r73=1"', 'src="./dist/phase1.js?r74=1"')
     old = "mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1),desktopTouch="
     html = once(html, old, "mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1)||(!/Windows/i.test(ua)&&navigator.maxTouchPoints>0&&matchMedia('(pointer:coarse)').matches),desktopTouch=")
     # Cancel while the original solo room/actor are still current. Capturing
