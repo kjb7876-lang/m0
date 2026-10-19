@@ -102,6 +102,21 @@ jobs:
           compare_status=$?
           if [ "$compare_status" -ne 0 ]; then matrix_status=1; fi
           exit "$matrix_status"
+      - name: Profile function-level game costs and measure profiler overhead
+        id: function_profile
+        if: always() && steps.build_sites.outcome == 'success' && steps.browser_install.outcome == 'success' && steps.full_browser_regression.outcome == 'success' && steps.overnight_matrix.outcome == 'success'
+        run: |
+          node --check scripts/r75-function-profile.browser.mjs
+          node --test scripts/r75-function-profile.cpu.test.mjs
+          python3 -m http.server 4393 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-function-profile-http.log 2>&1 &
+          PROFILE_PID=$!
+          trap 'kill "$PROFILE_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4393/ > /dev/null; then break; fi
+            sleep 0.5
+          done
+          curl --fail --silent http://127.0.0.1:4393/ > /dev/null
+          R75_FUNCTION_PROFILE_URL=http://127.0.0.1:4393/ node scripts/r75-function-profile.browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
