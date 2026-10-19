@@ -25,6 +25,7 @@ def transform(html, renderer):
     html = once(html, "key=id+':'+seed;", "version=mode==='off'?(window.__STORYWORLD_WORLD_R74__?.version(id,l)||0):0,key=id+':'+seed+':'+version;")
     html = once(html, '{...d?.meta,seedR73:seed}', '{...d?.meta,seedR73:seed,worldR74:version}')
     html = once(html, "frame=(window.__STORYWORLD_STORY_COMBAT_R54__?.extended(room,e)?", "frame=(e.r74Monster?window.__STORYWORLD_PHASE1_ART__?.enemy(e)?.frame:null)||(window.__STORYWORLD_STORY_COMBAT_R54__?.extended(room,e)?")
+    html = once(html, 'if(!e)return null;const persona=personaFrame(e);', "if(!e)return null;if(e.r74Monster){const f=window.__STORYWORLD_WORLD_R74__?.atlasFrame('monsters',e.r74Monster+':'+['idle','windup','contact','recover'][index]);if(f)return f;}const persona=personaFrame(e);")
     # Native AI retains the actual attacks, cast admission and collision. Only
     # the bounded alert predicate replaces its short-distance wander gate.
     html = once(html, 'if(d>e.combatProfile.aggro||e.explorationGroup&&(d>7.15||distance(player,{x:e.homeX,y:e.homeY})>e.explorationLeash))', 'if(!(window.__STORYWORLD_WORLD_R74__?.pursuing(e)??false)&&(d>e.combatProfile.aggro||e.explorationGroup&&(d>7.15||distance(player,{x:e.homeX,y:e.homeY})>e.explorationLeash)))')

@@ -1,4 +1,4 @@
-name: StoryWorld R74 mobile and save investigation
+name: StoryWorld R74 verification
 on:
   push:
     branches: [feat/r74-mobile-world]
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scenario: [mobile, coop, skills, world]
+        scenario: [mobile, coop, skills, world, native, slots, route, features, coop-world]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -43,7 +43,18 @@ jobs:
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r74-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          if test "$R74_CASE" = world; then
+          if test "$R74_CASE" = native; then
+            node scripts/r73-native.mjs
+          elif test "$R74_CASE" = slots; then
+            node scripts/r73-slots.browser.mjs
+          elif test "$R74_CASE" = route; then
+            node scripts/r73-route.browser.mjs
+          elif test "$R74_CASE" = features; then
+            node scripts/r74-features.mjs
+          elif test "$R74_CASE" = coop-world; then
+            npm ci --ignore-scripts --prefix relay
+            node scripts/r74-coop-world.browser.mjs
+          elif test "$R74_CASE" = world; then
             node scripts/r74-world.browser.mjs
           elif test "$R74_CASE" = skills; then
             node scripts/r74-dances.browser.mjs
@@ -54,5 +65,8 @@ jobs:
         if: always()
         with:
           name: r74-${{ matrix.scenario }}-${{ github.sha }}
-          path: out/r74/
+          path: |
+            out/r74/
+            out/r73/
+            out/r71/native/
           retention-days: 14

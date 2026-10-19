@@ -1,7 +1,7 @@
 {
   "revision": 1,
   "provenance": "Original imagegen generation and imagegen margin edits in this task; PNG bytes copied unchanged. Source rectangles only; no bitmap processing.",
-  "decodedRGBABytes": 25160256,
+  "decodedRGBABytes": 31450320,
   "atlases": {
     "materials": {
       "path": "assets/r74/materials.png",
@@ -1119,6 +1119,127 @@
           ]
         }
       ]
+    },
+    "outdoor": {
+      "path": "assets/r74/outdoor.png",
+      "sha256": "e1c682b0f14b498664f35bd273fb2a286384e9b8ca5decbf92ef16afb8f945bf",
+      "bytes": 4048779,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "sourceFile": "exec-25f46b22-bd31-4dea-bee8-c4d43c9dae63.png",
+      "clearAlphaFraction": 0.0,
+      "cells": [],
+      "styles": {
+        "snow": {
+          "floorRect": [
+            8,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            8,
+            322,
+            298,
+            297
+          ],
+          "voidRect": [
+            8,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            8,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "ash": {
+          "floorRect": [
+            322,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            322,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            322,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            322,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "swamp": {
+          "floorRect": [
+            635,
+            8,
+            297,
+            298
+          ],
+          "wallRect": [
+            635,
+            322,
+            297,
+            297
+          ],
+          "voidRect": [
+            635,
+            635,
+            297,
+            297
+          ],
+          "alternateFloorRect": [
+            635,
+            948,
+            297,
+            298
+          ],
+          "tileWorld": 4.5
+        },
+        "coast": {
+          "floorRect": [
+            948,
+            8,
+            298,
+            298
+          ],
+          "wallRect": [
+            948,
+            322,
+            298,
+            297
+          ],
+          "voidRect": [
+            948,
+            635,
+            298,
+            297
+          ],
+          "alternateFloorRect": [
+            948,
+            948,
+            298,
+            298
+          ],
+          "tileWorld": 4.5
+        }
+      }
     }
   }
 }
