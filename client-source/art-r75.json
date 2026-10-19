@@ -216,6 +216,86 @@
           1215
         ],
         "visibleHeight": 1010
+      },
+      {
+        "key": "garrison-lance",
+        "sourceRect": [
+          208,
+          333,
+          286,
+          674
+        ],
+        "pivot": [
+          113.77,
+          670
+        ],
+        "visibleHeight": 490,
+        "clipPolygonPx": [
+          [
+            208,
+            333
+          ],
+          [
+            252,
+            333
+          ],
+          [
+            252,
+            504
+          ],
+          [
+            494,
+            504
+          ],
+          [
+            494,
+            1007
+          ],
+          [
+            208,
+            1007
+          ]
+        ],
+        "clipPolygon": [
+          [
+            0,
+            0
+          ],
+          [
+            36,
+            0
+          ],
+          [
+            36,
+            167
+          ],
+          [
+            286,
+            167
+          ],
+          [
+            286,
+            674
+          ],
+          [
+            0,
+            674
+          ]
+        ]
+      },
+      {
+        "key": "garrison-sword",
+        "sourceRect": [
+          665,
+          500,
+          246,
+          511
+        ],
+        "pivot": [
+          104.9,
+          507
+        ],
+        "visibleHeight": 503
       }
     ],
     "provenance": "Original imagegen NPC atlas. PNG bytes unchanged; crop rectangles and lance-isolation clipping polygon only. Protective civilians, two distinct knight silhouettes and an unbound time guardian. No player avatar replacement.",
@@ -227,7 +307,7 @@
         "width": 1254,
         "height": 1254,
         "decodedRGBABytes": 6290064,
-        "provenance": "Original imagegen shaman spear ally. Source PNG bytes unchanged. Source 50 gives both allies spear forms; the old unused sword figure remains archival pixels in the original atlas."
+        "provenance": "Original imagegen spear supporter, reused as an unnamed castle reinforcement. Original PNG bytes unchanged; existing hero identities use the original HAPIL Neon/Lauren sources."
       }
     ]
   }

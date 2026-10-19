@@ -203,8 +203,9 @@ def transform(html, renderer):
     html = html.replace(remote, 'if(cmd.ego)base.ego();if(cmd.interact)window.__STORYWORLD_OBJECTIVES_R75__?.remoteInteract();if(cmd.threadDance')
     html = once(html, 'const applied=Math.min(e.hp,value);', "if(source?.kind==='narrative-companion-r75'){value=Math.min(value,Number.isFinite(source.supportBudget)?Math.max(0,source.supportBudget):0,Math.max(0,e.hp-e.maxHp*.2));if(value<=0)return false;}const applied=Math.min(e.hp,value);")
     html = once(html, "targetCtx.filter = options.filter && options.filter !== 'none' ? options.filter : 'none';", "targetCtx.filter = window.__STORYWORLD_SAMONG_R75__?.bodyFilter(options.filter) ?? (options.filter && options.filter !== 'none' ? options.filter : 'none');")
-    html = once(html, "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active')].some(p=>box(d,p.x,p.y,.6))", "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active'),...(room.props||[]).filter(p=>p.r75NarrativeNPC||p.r75NPC)].some(p=>box(d,p.x,p.y,.6))")
-    html = once(html, 'room.props.filter(q=>q.path&&!q.solid)', 'room.props.filter(q=>q.path&&!q.solid&&!q.r75NarrativeNPC&&!q.r75NPC)')
+    html = once(html, "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active')].some(p=>box(d,p.x,p.y,.6))", "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active'),...(room.props||[]).filter(p=>p.r75NarrativeNPC||p.r75NPC||p.r75FortPerson)].some(p=>box(d,p.x,p.y,.6))")
+    html = once(html, 'room.props.filter(q=>q.path&&!q.solid)', 'room.props.filter(q=>q.path&&!q.solid&&!q.r75NarrativeNPC&&!q.r75NPC&&!q.r75FortPerson)')
+    html = once(html, '  function advanceFieldWave6() {\n', '  function advanceFieldWave6() {\n    if(window.__STORYWORLD_DEFENSE_R75__?.controls(room))return;\n')
     # Combat pressure keeps the original 63-region curve. Adding a narrative
     # stop must not silently increase existing native damage or field pressure.
     html = once(html, "function progression(r=room){const order=window.__STORYWORLD_STORY_PROFILE_R54__?.campaignOrder||regions.map(d=>d.id),id=typeof r==='string'?r:r?.id,index=Math.max(0,order.indexOf(id));return clamp(index/Math.max(1,order.length-1),0,1);}",
@@ -244,6 +245,8 @@ def transform(html, renderer):
     stop = renderer.index(');', at)
     world_profiles = json.loads(renderer[at:stop])
     world_profiles['profiles']['ep1a09b'] = {**world_profiles['profiles']['dist03'], 'style': 'past-palace-rescue', 'sourceEnvironment': 'past-palace-rescue', 'sourceTopology': 'palace-rescue-courtyard'}
+    for map_id, environment in [('hando01','summoned-castle-defense-and-fall'),('hando02','owners-two-gate-awakening'),('hando03','shared-ego-core-reclaim')]:
+        world_profiles['profiles'][map_id]['sourceEnvironment'] = environment
     renderer = renderer[:at] + compact(world_profiles) + renderer[stop:]
     # The HTML also exports this shared profile table; keep it identical so
     # the later client export cannot overwrite the renderer's new map entry.
@@ -260,13 +263,14 @@ def transform(html, renderer):
     layout = (ROOT / 'client-source/world-layout-r74.js').read_text().replace('function worldLayoutR74(', 'function worldLayoutR75(')
     layout = once(layout, "if(meta.worldR74!==1||", "if(meta.worldR75!==1||")
     layout = once(layout, 'for(let y=0;y<3;y++)for(let x=0;x<4;x++)add(38+x*(indoor?shape[0]:21),12+y*(indoor?shape[1]:20),x+y);\n add(Math.min(113,nodes[11].x+10),Math.min(70,nodes[11].y+13),3);',
-                  'const plan=worldPlanR75(profile,safe);for(let i=0;i<plan.points.length;i++){const[x,y]=plan.points[i];add(x,y,i);}')
+                  'const plan=worldPlanR75(profile,safe,id);for(let i=0;i<plan.points.length;i++){const[x,y]=plan.points[i];add(x,y,i);}')
     layout = once(layout, 'jitter=indoor?0:(random()-.5)*2', 'jitter=0')
     layout = once(layout, 'const link=(a,b)=>', 'const link=(a,b,w=plan.width)=>')
     layout = once(layout, 'edges.push([a,b,width])', 'edges.push([a,b,w])')
     layout = once(layout, 'for(let y=0;y<3;y++)for(let x=0;x<3;x++)link(y*4+x,y*4+x+1);\n for(const[a,b]of[[0,4],[3,7],[4,8],[7,11],[1,5],[5,9],[2,6],[6,10],[11,12]])link(a,b);',
                   'for(const[a,b,w]of plan.links)link(a,b,w);')
     layout = once(layout, 'a===0||a===11||b===12', 'a===0||a===nodes.length-2||b===nodes.length-1')
+    layout = once(layout, "if(a===0||a===nodes.length-2||b===nodes.length-1||", "if(plan.defenseGateEdges&&!plan.defenseGateEdges.some(([x,y])=>x===a&&y===b||x===b&&y===a)||a===0||a===nodes.length-2||b===nodes.length-1||")
     layout = once(layout, 'const[a,b]=edges[i],p=nodes[a]', 'const[a,b,edgeWidth]=edges[i],p=nodes[a]')
     layout = once(layout, 'const flank=Math.max(.15,(Math.ceil(width)-gap)/2)', 'const flank=Math.max(.15,(Math.ceil(edgeWidth)+1-gap)/2)')
     layout = once(layout, "worldR74:{version:1,mode:profile.mode", "worldR75:{version:1,family:plan.family,sourceTopology:plan.sourceTopology},worldR74:{version:1,mode:profile.mode")
@@ -279,7 +283,7 @@ def transform(html, renderer):
     renderer = once(renderer, 'this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);', 'samongTerrainToneR75(this);this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);')
     html = once(html, 'canUse,use,pursuing,atlasFrame,clean,inspect:', 'canUse,use,isOpen,pursuing,atlasFrame,clean,inspect:')
     html += '\n<script id="story-data-r75">window.__STORYWORLD_STORY_DATA_R75__=' + compact(runtime) + ';window.__STORYWORLD_VOICE_CONTRACT_R75__=' + compact(voice) + ';window.__STORYWORLD_ART_R75__=' + compact(art) + ';</script>\n'
-    for name in ['story', 'dance-policy', 'world', 'objectives', 'doors', 'guide', 'samong']:
+    for name in ['story', 'save-access', 'dance-policy', 'hero-npc', 'world', 'objectives', 'defense', 'doors', 'guide', 'samong']:
         fragment = (ROOT / ('client-source/' + name + '-r75.js')).read_text()
         if '</script' in fragment.lower(): raise ValueError('Unsafe R75 script')
         html += '\n<script id="' + name + '-r75">\n' + fragment + '\n</script>\n'
