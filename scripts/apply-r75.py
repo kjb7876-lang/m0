@@ -165,6 +165,7 @@ def transform(html, renderer):
     html = once(html, "else if(cp.action==='personaReady')readyStage3('personaReady','거울의 봉인');});", "else if(cp.action==='personaReady')readyStage3('personaReady','거울의 봉인');});if(room.sceneCheckpoint){room.sceneCheckpoint.action=cp.action;saveGame(false);}")
     html = once(html, "r?.post&&r.post.includes('合一夢世')", "r?.post&&r['finale.core-preserved']?.includes('合一夢世')")
     html = once(html, '<title>HAPIL · 합일몽세 — 서사 연결형 월드 05</title>', '<title>StoryWorld · 합일몽세</title>')
+    html = once(html, 'bindControls();resize();boot();', "bindControls();resize();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot(),{once:true});else boot();")
     # R54 used to overwrite the selected speaker/body contract after alignment.
     html = once(html, "for(const r of canonicalRecords){r.voiceSource={};for(const part of ['pre','post','firstPost','awakenPre'])r.voiceSource[part]=r[part]||'';}",
                 "for(const r of canonicalRecords)r.voiceSource={...r.voiceSource};")
@@ -286,7 +287,7 @@ def build(site):
         row.update(bytes=len(value), sha256=story.SHA(value))
     manifest['webHTMLSha256'] = story.SHA(result['index.html'])
     art = json.loads((ROOT / 'client-source/art-r75.json').read_text())
-    for descriptor in [art, art['npcs']]:
+    for descriptor in [art, art['npcs'], *art['npcs'].get('extraAtlases', [])]:
         media = (ROOT / 'client-assets/r75' / Path(descriptor['path']).name).read_bytes()
         if len(media) != descriptor['bytes'] or story.SHA(media) != descriptor['sha256']:
             raise ValueError('R75 original image mismatch')

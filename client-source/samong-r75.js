@@ -4,7 +4,7 @@
  let factors=new WeakMap(),rays=[],rayPool=Array(12),serial=0,nextRay=0,trackedRoom=null,trackedActor=null,hadAwakening=false,paintingEnemy=null;let ownerCycles=new WeakMap(),cycleSerial=0;const ledgers=new WeakMap(),events=[];
  const metrics={slowedFrames:0,shiftedFields:0,rays:0,hits:0,maxRays:0,maxRuns:0},limit={rays:12,runs:8,samples:512,hitInterval:.35,hitsPerEnemy:24,radius:.42,nearby:14};
  const coop=()=>window.__STORYWORLD_COOP_SIM_R62__,authority=()=>coop()?.mode?.()!=='guest';
- const actors=()=>coop()?.players?.()||[player],awake=()=>started&&!safeRegion()&&actors().some(p=>p?.hp>0&&p.samong>0);
+ const actors=()=>{const sim=coop(),rows=sim?.mode?.()!=='off'?sim?.players?.():null;return Array.isArray(rows)&&rows.length?rows:[player];},awake=()=>started&&!safeRegion()&&actors().some(p=>p?.hp>0&&p.samong>0);
  const live=e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&room?.enemies?.includes(e);
  const note=(kind,data={})=>{events.push({kind,at:time,...data});if(events.length>64)events.shift();};
  function clear(reason){rays=[];rayPool=Array(12);ownerCycles=new WeakMap();factors=new WeakMap();nextRay=0;hadAwakening=false;trackedRoom=room;trackedActor=player;note('clear',{reason});}
