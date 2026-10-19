@@ -75,5 +75,9 @@ def transform(html):
     html=once(html,'const factor=TIERS[validTier(tier)].hp,oldFactor=',
               "const factor=TIERS[validTier(tier)].hp*(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.cosmicGuardianR63?1:1.66),oldFactor=")
     html=once(html,'const target=healthR71BossSuffix(canonical);','const target=healthR71BossSuffix(canonical)*1.66;')
+    html=once(html,"['실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),","[window.__STORYWORLD_DANCES_R74__?.state('silver')?.equipped?.length?'은색실':'기본 실검무',()=>window.__STORYWORLD_THREAD_DANCE_R63__?.cast(true),")
+    html=once(html,"name:'실검무 · 은실의 분기',icon:'haste',text:'","name:'실검무 · 은실의 분기',icon:'haste',text:'기본 실검무 습득 후 은색실 편집기로 직접 그린 궤적을 별도 저장·장착할 수 있습니다. T와 실검무 버튼은 장착한 은색실을 우선 사용하며, 장착 해제 시 기존 기본 동작으로 돌아갑니다. " )
+    html=once(html,'if(distance(player,exitPoint(d))<.85){travel(d);break}',
+              'if(distance(player,exitPoint(d))<.85&&!window.__STORYWORLD_DANCES_R74__?.moving(player)){travel(d);break}')
     html=once(html,"window.__STORYWORLD_GOLDEN_R72__?.cancelAll('coop-start');", "window.__STORYWORLD_DANCES_R74__?.cancelAll('coop-start');window.__STORYWORLD_GOLDEN_R72__?.cancelAll('coop-start');")
     return html

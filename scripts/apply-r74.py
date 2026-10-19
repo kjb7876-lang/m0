@@ -34,7 +34,7 @@ def build(site):
     combat = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(combat)
     html = combat.transform(html)
-    for name in ['thread-dances', 'interaction-core', 'mobile']:
+    for name in ['thread-dances', 'elements', 'interaction-core', 'mobile']:
         fragment = (ROOT / ('client-source/' + name + '-r74.js')).read_text()
         if '</script' in fragment.lower():
             raise RuntimeError('Unsafe R74 fragment')
