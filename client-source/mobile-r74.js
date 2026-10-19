@@ -2,12 +2,12 @@
 (()=>{'use strict';
  const C=StoryInteractionCoreR74,coarse=()=>matchMedia('(pointer:coarse)').matches;
  const live=()=>started&&!loading&&!modal&&room&&player?.hp>0;
- let pending=null,press=null,elapsed=0,lastLabel='';const events=[];
+ let pending=null,press=null,elapsed=0,lastLabel='',gestureEpoch=0;const events=[];
  const note=(kind,data={})=>{events.push({kind,zone,layer,at:time,...data});if(events.length>64)events.shift();};
  function rows(){const api=window.__STORYWORLD_ROUTES_R72__,portals=api?.visibleDirections().map(direction=>({direction,...api.status(direction)}))||[];return C.targets(room?.objective,portals,window.__STORYWORLD_WORLD_R74__?.interactions?.()||[]);}
  function clear(p,t){return t.kind==='door'?window.__STORYWORLD_WORLD_R74__?.canUse?.(t,p)===true:clearPath3(p,t.point,.2,room);}
  function nearby(){return live()?C.nearest(rows(),player,clear):null;}
- function cancel(reason){if(pending)note('cancel',{reason,id:pending.id});pending=null;press=null;}
+ function cancel(reason){gestureEpoch++;if(pending)note('cancel',{reason,id:pending.id});pending=null;press=null;}
  function use(t){
   if(!live()||!t||C.distance(player,t.point)>t.reach||!clear(player,t))return false;
   pending=null;route=[];command=null;guide=false;window.__STORYWORLD_MOBILE_R63__?.clearGesture();
@@ -35,7 +35,7 @@
   const hits=rows().filter(t=>C.hit(t,p,project,zoom)).sort((a,b)=>C.distance(p,project(a.point.x,a.point.y))-C.distance(p,project(b.point.x,b.point.y)));
   if(hits.length){press={id:e.pointerId,x:e.clientX,y:e.clientY,target:hits[0]};e.preventDefault();e.stopPropagation();}
  },true);
- canvas.addEventListener('pointerup',e=>{const p=press;press=null;if(!p||p.id!==e.pointerId)return;if(Math.hypot(e.clientX-p.x,e.clientY-p.y)<14&&live()){e.preventDefault();e.stopPropagation();window.__STORYWORLD_MOBILE_R63__?.clearGesture();select(p.target);}},true);
+ canvas.addEventListener('pointerup',e=>{const p=press;press=null;if(!p||p.id!==e.pointerId)return;if(Math.hypot(e.clientX-p.x,e.clientY-p.y)<14&&live()){e.preventDefault();e.stopImmediatePropagation();window.__STORYWORLD_MOBILE_R63__?.clearGesture();try{if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);}catch{}const epoch=++gestureEpoch;requestAnimationFrame(()=>{if(epoch===gestureEpoch&&live())select(p.target);});}},true);
  for(const name of ['pointercancel','lostpointercapture'])canvas.addEventListener(name,()=>{press=null;});
  window.addEventListener('pointerdown',e=>{if(coarse()&&(!e.isPrimary||e.target!==canvas&&!e.target?.closest?.('#touchUse')))cancel('manual-control');},true);
  window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape'].includes(e.code))cancel('manual-key');},true);
