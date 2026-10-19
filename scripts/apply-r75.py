@@ -194,6 +194,8 @@ def transform(html, renderer):
                           "const allowed=e=>window.__STORYWORLD_DANCE_POLICY_R75__?.target(k,e,p)??true,selected=room.enemies.find(e=>e.id===target&&e.hp>0&&e.spawnState==='active'&&allowed(e)),near=liveEnemies().filter(e=>distance(p,e)<=12&&allowed(e))")
     html = html[:dance_match.start(2)] + dance_fragment + html[dance_match.end(2):]
     html = once(html, 'guide=!guide;auto=true;guideTimer=0;', 'guide=!guide;auto=guide;guideTimer=0;')
+    html = once(html, 'if(cheat&&!enabled)normalReturn=started&&player?serializeSave():raw.cheat777.normalReturn||null;', 'if(cheat&&!enabled)normalReturn=window.__STORYWORLD_CHEAT_CHECKPOINT_R75__?.normalReturn()||(started&&player?serializeSave():raw.cheat777.normalReturn||null);')
+    html = once(html, 'const result=await restoreBase.apply(this,arguments);applyCaps();paintBadge();', 'const result=await restoreBase.apply(this,arguments);if(result===false){enabled=previous.enabled;normalReturn=previous.normalReturn;paintBadge();return false;}applyCaps();paintBadge();')
     html = once(html, 'isHost,authoritative,canSimulate:authoritative,players:allPlayers', 'isHost,authoritative,isPaused:()=>paused,canSimulate:authoritative,players:allPlayers')
     html = once(html, 'if(l.deadAt)return;p.hp=0;window.__STORYWORLD_HEALTH_R71__', "if(l.deadAt)return;p.hp=0;window.__STORYWORLD_SAMONG_R75__?.cancelOwner(p,'death');window.__STORYWORLD_HEALTH_R71__")
     # Optional bounded NPC presentation data travels only in host snapshots.
@@ -283,7 +285,7 @@ def transform(html, renderer):
     renderer = once(renderer, 'this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);', 'samongTerrainToneR75(this);this.camera.layers.set(1);this.renderer.render(this.scene,this.camera);')
     html = once(html, 'canUse,use,pursuing,atlasFrame,clean,inspect:', 'canUse,use,isOpen,pursuing,atlasFrame,clean,inspect:')
     html += '\n<script id="story-data-r75">window.__STORYWORLD_STORY_DATA_R75__=' + compact(runtime) + ';window.__STORYWORLD_VOICE_CONTRACT_R75__=' + compact(voice) + ';window.__STORYWORLD_ART_R75__=' + compact(art) + ';</script>\n'
-    for name in ['story', 'save-access', 'dance-policy', 'hero-npc', 'world', 'objectives', 'defense', 'doors', 'guide', 'samong']:
+    for name in ['story', 'save-access', 'dance-policy', 'hero-npc', 'world', 'objectives', 'defense', 'doors', 'guide', 'samong', 'cheat-checkpoint']:
         fragment = (ROOT / ('client-source/' + name + '-r75.js')).read_text()
         if '</script' in fragment.lower(): raise ValueError('Unsafe R75 script')
         html += '\n<script id="' + name + '-r75">\n' + fragment + '\n</script>\n'

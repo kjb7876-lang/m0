@@ -15,6 +15,9 @@ SHA = lambda s: hashlib.sha256(s.encode() if isinstance(s, str) else s).hexdiges
 # shown after its authored objective; this table is not a narrative rewrite.
 CUTS = dict(zip('01 02 03 04 05 06 07 08 09-1 09-2 10 11 13 14 15 16 17 18 19 20 21 22 24 25 26 27 28 29 31 32 33 34 35 37 38 39 40 41 42 43 44 45 46 48 49 50 52 53 54 55 56 57 58 59 60'.split(),
                 [2,2,2,2,1,1,1,2,2,1,3,5,3,3,3,3,3,2,2,3,3,3,4,4,4,2,4,1,2,2,1,2,2,7,2,3,2,2,2,2,2,2,5,2,2,2,4,5,5,2,3,2,3,2,4]))
+# Gate opening and the core victory are outcomes, never pre-battle spoilers.
+CUTS.update({'49': 1, '50': 1})
+
 
 
 def between(source, start, end):
