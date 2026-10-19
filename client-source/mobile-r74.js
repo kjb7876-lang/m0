@@ -11,7 +11,7 @@
  function use(t){
   if(!live()||!t||C.distance(player,t.point)>t.reach||!clear(player,t))return false;
   pending=null;route=[];command=null;guide=false;window.__STORYWORLD_MOBILE_R63__?.clearGesture();
-  note('use',{id:t.id,kind:t.kind});
+  note('use',{id:t.id,targetKind:t.kind});
   if(['door','npc','object'].includes(t.kind))return window.__STORYWORLD_WORLD_R74__?.use?.(t)??false;
   return interact();
  }
