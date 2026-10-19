@@ -195,6 +195,8 @@ def transform(html, renderer):
     html = html.replace(remote, 'if(cmd.ego)base.ego();if(cmd.interact)window.__STORYWORLD_OBJECTIVES_R75__?.remoteInteract();if(cmd.threadDance')
     html = once(html, 'const applied=Math.min(e.hp,value);', "if(source?.kind==='narrative-companion-r75'){value=Math.min(value,Number.isFinite(source.supportBudget)?Math.max(0,source.supportBudget):0,Math.max(0,e.hp-e.maxHp*.2));if(value<=0)return false;}const applied=Math.min(e.hp,value);")
     html = once(html, "targetCtx.filter = options.filter && options.filter !== 'none' ? options.filter : 'none';", "targetCtx.filter = window.__STORYWORLD_SAMONG_R75__?.bodyFilter(options.filter) ?? (options.filter && options.filter !== 'none' ? options.filter : 'none');")
+    html = once(html, "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active')].some(p=>box(d,p.x,p.y,.6))", "[player,...room.enemies.filter(e=>e.hp>0&&e.spawnState==='active'),...(room.props||[]).filter(p=>p.r75NarrativeNPC||p.r75NPC)].some(p=>box(d,p.x,p.y,.6))")
+    html = once(html, 'room.props.filter(q=>q.path&&!q.solid)', 'room.props.filter(q=>q.path&&!q.solid&&!q.r75NarrativeNPC&&!q.r75NPC)')
     # Enemy delta clocks and absolute owner deadlines share one local factor.
     start = html.index('tickEnemies=function(dt){\n if(room.encounterStage')
     end = html.index('\n};\nconst v2Blocked3', start) + 3
