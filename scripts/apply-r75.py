@@ -168,6 +168,7 @@ def transform(html, renderer):
     html = once(html, '<title>HAPIL · 합일몽세 — 서사 연결형 월드 05</title>', '<title>StoryWorld · 합일몽세</title>')
     html = once(html, 'bindControls();resize();boot();', "bindControls();resize();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>boot(),{once:true});else boot();")
     html = once(html, 'let runSeed=0,entries=Object.create(null),generation=0;const limit=126;', 'let runSeed=0,entries=Object.create(null),generation=0;const limit=128;')
+    html = once(html, "const cheatTravelR72=options.travel777R72===true&&", "const cheatTravelR72=(options.travel777R72===true||options.r72Portal==='next'&&window.__STORYWORLD_ROUTES_R72__?.permit(id,'next',l)===true)&&")
     html = once(html, 'Object.entries(raw?.routeEntriesR72?.version===1?raw.routeEntriesR72.entries||{}:{}).slice(0,126)', 'Object.entries(raw?.routeEntriesR72?.version===1?raw.routeEntriesR72.entries||{}:{}).slice(0,128)')
     # R54 used to overwrite the selected speaker/body contract after alignment.
     html = once(html, "for(const r of canonicalRecords){r.voiceSource={};for(const part of ['pre','post','firstPost','awakenPre'])r.voiceSource[part]=r[part]||'';}",
