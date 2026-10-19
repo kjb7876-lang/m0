@@ -1,4 +1,4 @@
-name: StoryWorld R74 Pages with preserved release gates
+name: StoryWorld R75 Pages with preserved release gates
 on:
   push:
     branches: [main]
@@ -288,8 +288,46 @@ jobs:
             out/r73/
             out/r71/native/
           retention-days: 14
+  r75:
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct R75 over preserved R74 and run CPU gates
+        run: bash scripts/build-r75-site.sh
+      - name: Require exact R75 release bytes and test refusal paths
+        run: |
+          python3 scripts/r75-release-gate.test.py
+          python3 scripts/r75-release-gate.py | tee out/r75/approval.json
+          node verify-pages-r62.mjs _pages | tee out/r75/integrity.log
+      - name: Install pinned sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Verify R75 gameplay, missing audio and normal public smoke path
+        run: |
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-reference-http.log 2>&1 &
+          REFERENCE_PID=$!
+          trap 'kill "$SERVER_PID" "$REFERENCE_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r75-public-smoke.browser.mjs
+          node scripts/r75.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-release-review-${{ github.sha }}
+          path: out/r75/
+          retention-days: 14
   release:
-    needs: [build, candidate, r74]
+    needs: [build, candidate, r74, r75]
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     permissions:
@@ -299,6 +337,7 @@ jobs:
       html_sha: ${{ steps.hashes.outputs.html_sha }}
       renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
       asset_hashes_json: ${{ steps.hashes.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.hashes.outputs.manifest_sha }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -306,18 +345,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Reconstruct byte-identical verified R74 release
-        run: bash scripts/build-r74-site.sh
-      - name: Require exact R74 runtime and generated image approval
+      - name: Reconstruct byte-identical verified R75 release
+        run: bash scripts/build-r75-site.sh
+      - name: Require exact R75 runtime and generated image approval
         id: hashes
-        run: python3 scripts/r74-release-gate.py | tee out/r74/approval.json
+        run: python3 scripts/r75-release-gate.py | tee out/r75/approval.json
       - name: Verify all release files
         run: node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r74-release-manifest-${{ github.sha }}
+          name: r75-release-manifest-${{ github.sha }}
           path: |
+            out/r75/
             out/r74/
             out/r73/
             _pages/docs/web-manifest-r62.json
@@ -347,18 +387,19 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public HTML and renderer match approved R74 hashes
+      - name: Verify public R75 runtime, images and commit manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
           RENDERER_SHA: ${{ needs.release.outputs.renderer_sha }}
           SOURCE_COMMIT: ${{ github.sha }}
           ASSET_HASHES: ${{ needs.release.outputs.asset_hashes_json }}
+          MANIFEST_SHA: ${{ needs.release.outputs.manifest_sha }}
         run: |
           python3 - <<'PY'
-          import hashlib,json,os,time,urllib.request
+          import hashlib,json,os,time,urllib.request,urllib.error
           base=os.environ['PUBLIC_URL'].rstrip('/')+'/'
-          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA']};expected.update(json.loads(os.environ['ASSET_HASHES']));rows=[]
+          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA'],'web-manifest-r62.json':os.environ['MANIFEST_SHA']};expected.update(json.loads(os.environ['ASSET_HASHES']));rows=[]
           for name,want in expected.items():
               for attempt in range(18):
                   url=base+name+'?release='+os.environ['SOURCE_COMMIT']+'&check='+str(attempt)
@@ -369,8 +410,32 @@ jobs:
                       if actual==want:
                           rows.append({'path':name or 'index.html','sha256':actual,'bytes':len(data),'status':'matched'});break
                       error='hash mismatch '+actual
+                  except urllib.error.HTTPError as exc:
+                      if exc.code==403:raise SystemExit('Public verification access denied; no retry or alternate route: '+name)
+                      error=str(exc)
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R74_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('R75_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned sandboxed browser for public smoke
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Open actual public Pages and verify normal start, save and missing audio
+        env:
+          STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node scripts/r75-public-smoke.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-public-smoke-${{ github.sha }}
+          path: out/r75/public-smoke.json
+          retention-days: 14
