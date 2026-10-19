@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scenario: [mobile, coop, skills, world, native, slots, route, features, coop-world]
+        scenario: [mobile, coop, skills, world, native, slots, route, features, coop-world, ui]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -56,6 +56,13 @@ jobs:
             node scripts/r74-coop-world.browser.mjs
           elif test "$R74_CASE" = world; then
             node scripts/r74-world.browser.mjs
+          elif test "$R74_CASE" = ui; then
+            python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > /tmp/r74-ui-r71-http.log 2>&1 &
+            R71_PID=$!
+            python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > /tmp/r74-ui-r72-http.log 2>&1 &
+            R72_PID=$!
+            trap 'kill "$SERVER_PID" "$R71_PID" "$R72_PID" 2>/dev/null || true' EXIT
+            node scripts/r74-ui.mjs
           elif test "$R74_CASE" = skills; then
             node scripts/r74-dances.browser.mjs
           else

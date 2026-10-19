@@ -274,7 +274,7 @@ jobs:
             native) node scripts/r74-native.mjs ;;
             slots) node scripts/r73-slots.browser.mjs ;;
             route) node scripts/r73-route.browser.mjs ;;
-            ui) node scripts/r73-ui.mjs ;;
+            ui) node scripts/r74-ui.mjs ;;
             render) node scripts/r73-render.browser.mjs ;;
             memory) node scripts/r73-memory.browser.mjs ;;
             *) exit 1 ;;
