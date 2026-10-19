@@ -268,7 +268,15 @@ function assertSaveComparisonContract() {
   expectedMultipleRestores.progressionR62.progression.ranks = {dreamAura: 0, threadDanceR63: 0};
   expectedMultipleRestores.campaignPointDropsR64.epochCounter = 4;
   expectedMultipleRestores.campaignPointDropsR64.rooms['STORY:hub'].revision = 2;
-  assert.ok(compareSaveDynamics(before, stableSave(expectedMultipleRestores), 2).pointDropCountersValid, 'post-return storage checks count every expected restore');
+  assert.ok(compareSaveDynamics(before, stableSave(expectedMultipleRestores), 2).pointDropCountersValid, 'a stored snapshot records only restores that happened before its last explicit save');
+  assert.equal(compareSaveDynamics(before, stableSave(expectedMultipleRestores), 3).pointDropCountersValid, false, 'a later Continue restore must not be counted in bytes saved before that Continue');
+
+  const normalSlotBeforeTrial = JSON.stringify(baseline);
+  const normalSlotAfterLeave = JSON.stringify(baseline);
+  assert.deepEqual(canonicalStoredSave(normalSlotAfterLeave), canonicalStoredSave(normalSlotBeforeTrial), 'leaving the 777 trial restores the live journey without rewriting the normal slot');
+  const accidentallyRewrittenSlot = structuredClone(baseline);
+  accidentallyRewrittenSlot.campaignPointDropsR64.rooms['STORY:hub'].revision = 1;
+  assert.notDeepEqual(canonicalStoredSave(JSON.stringify(accidentallyRewrittenSlot)), canonicalStoredSave(normalSlotBeforeTrial), 'an unexpected normal-slot rewrite remains visible');
 
   const wrongRevision = stableSave(expectedRestore);
   wrongRevision.dynamic.pointRoomRevisions['STORY:hub'] += 1;
@@ -655,7 +663,7 @@ try {
   await ready();
   const returned = await page.evaluate(() => serializeSave());
   const leaveComparison = assertNormalEquivalent(normalAfterReload, returned, 1, 'leave-777-restores-normal-journey');
-  const leaveSlotComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 2, 'normal-slot-after-777-leave');
+  const leaveSlotComparison = assertNormalSlotPreserved(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 'normal-slot-after-777-leave');
   check('native-777-leave-restores-normal-journey', {zone: returned.zone, progress: returned.progress, hero: returned.player.hero, level: returned.player.level, points: returned.player.points}, leaveComparison.ok && leaveSlotComparison.ok);
 
   assert.equal(await page.evaluate(() => saveGame(false)), true);
@@ -664,7 +672,9 @@ try {
   await ready();
   const final = await page.evaluate(() => serializeSave());
   const finalComparison = assertNormalEquivalent(returned, final, 1, 'normal-save-after-777-return-round-trip');
-  const finalStoredComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 3, 'normal-slot-after-777-return-round-trip');
+  // The slot is written immediately after leaving 777, before this final Continue
+  // restore. The persisted hub revision therefore reflects two restores, not three.
+  const finalStoredComparison = assertNormalSlotProgressAfterReturn(normalStoredBeforeTrial, await readStorage(slotKeys.normal), 2, 'normal-slot-after-777-return-round-trip');
   check('normal-save-after-777-return-round-trip', {zone: final.zone, progress: final.progress, hero: final.player.hero, level: final.player.level, points: final.player.points}, finalComparison.ok && finalStoredComparison.ok);
   assert.deepEqual(report.pageErrors, []);
   report.saveIsolation.complete = report.saveIsolation.comparisons.length === 3 && report.saveIsolation.storedComparisons.length === 6;
