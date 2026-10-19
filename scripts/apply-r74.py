@@ -23,6 +23,12 @@ def build(site):
     html = original['index.html'].decode()
     old = "mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1),desktopTouch="
     html = once(html, old, "mobileDevice=/Android|iPhone|iPod|iPad/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1)||(!/Windows/i.test(ua)&&navigator.maxTouchPoints>0&&matchMedia('(pointer:coarse)').matches),desktopTouch=")
+    # Cancel while the original solo room/actor are still current. Capturing
+    # serializeSave first retained a temporary sword-dance position on return.
+    html = once(html, "if(!booted)throw Error('게임 자료를 먼저 불러와 주세요.');savedSingle=",
+                "if(!booted)throw Error('게임 자료를 먼저 불러와 주세요.');window.__STORYWORLD_GOLDEN_R72__?.cancelAll('coop-start');savedSingle=")
+    html = once(html, 'if(guest())return result;for(const c of [...casts.values()])',
+                "if(coopActive()){if(casts.size)cancelAll('coop-active');return result;}for(const c of [...casts.values()])")
     for name in ['interaction-core', 'mobile']:
         fragment = (ROOT / ('client-source/' + name + '-r74.js')).read_text()
         if '</script' in fragment.lower():

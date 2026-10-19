@@ -30,6 +30,7 @@ jobs:
           if test -f scripts/apply-r74.py; then
             python3 scripts/apply-r74.py --site _pages/docs
             node --test scripts/r74.cpu.test.mjs
+            node scripts/r74-coop-transition.cpu.cjs
           fi
       - name: Install pinned sandboxed browser
         run: |
