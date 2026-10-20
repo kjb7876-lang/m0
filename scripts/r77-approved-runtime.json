@@ -1,9 +1,9 @@
 {
   "schema": "storyworld.r77-runtime-approval/v1",
-  "status": "pending-review",
+  "status": "approved",
   "candidateSource": {
-    "pullRequest": null,
-    "headSha": null,
+    "pullRequest": 21,
+    "headSha": "02d1cd636c671eae712f1a45648fed0c29b8602a",
     "workflowRunId": null
   },
   "baselineR76": {
@@ -11,8 +11,8 @@
     "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
   },
   "approvedR77": {
-    "index.html": null,
-    "dist/phase1.js": null
+    "index.html": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4",
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
   },
   "contract": {
     "rendererCacheKey": "r76=1",
