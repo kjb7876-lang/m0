@@ -312,6 +312,7 @@ jobs:
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
+          python3 scripts/r76-release-gate.test.py
           node --test scripts/r75-world-guide.cpu.test.mjs scripts/r76-slots.cpu.test.mjs scripts/r76-boss-maze.cpu.test.mjs | tee out/r76/cpu.log
           node --test scripts/r76-world-blocked.cpu.test.mjs | tee out/r76/world-blocked-parity.log
           node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
@@ -345,10 +346,10 @@ jobs:
       contents: read
       pages: read
     outputs:
-      html_sha: ${{ steps.hashes.outputs.html_sha }}
-      renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
-      asset_hashes_json: ${{ steps.hashes.outputs.asset_hashes_json }}
-      manifest_sha: ${{ steps.hashes.outputs.manifest_sha }}
+      html_sha: ${{ steps.r76.outputs.html_sha }}
+      renderer_sha: ${{ steps.r76.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.r76.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.r76.outputs.manifest_sha }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -359,16 +360,22 @@ jobs:
       - name: Reconstruct byte-identical verified R75 release
         run: bash scripts/build-r75-site.sh
       - name: Require exact R75 runtime and generated image approval
-        id: hashes
+        id: r75
         run: python3 scripts/r75-release-gate.py | tee out/r75/approval.json
-      - name: Verify all release files
-        run: node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
+      - name: Apply the reviewed R76 overlay to the approved R75 release
+        run: python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
+      - name: Require exact approved R76 runtime and stamp the commit manifest
+        id: r76
+        run: python3 scripts/r76-release-gate.py | tee out/r76/release.json
+      - name: Verify every published file after the R76 overlay
+        run: node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r75-release-manifest-${{ github.sha }}
+          name: r76-release-manifest-${{ github.sha }}
           path: |
             out/r75/
+            out/r76/
             out/r74/
             out/r73/
             _pages/docs/web-manifest-r62.json
@@ -398,7 +405,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public R75 runtime, images and commit manifest
+      - name: Verify public R76 runtime, images and commit manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
@@ -440,13 +447,13 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Open actual public Pages and verify normal start, save and missing audio
+      - name: Open actual public R76 Pages and verify normal start and save compatibility
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
         run: node scripts/r75-public-smoke.browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r75-public-smoke-${{ github.sha }}
+          name: r76-public-smoke-${{ github.sha }}
           path: out/r75/public-smoke.json
           retention-days: 14
