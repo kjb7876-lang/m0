@@ -32,6 +32,33 @@ def optimize_blocked(renderer: str) -> str:
     return once(renderer, BLOCKER_BASELINE, BLOCKER_OPTIMIZED, "R75 blocker distance prefilters")
 
 
+R75_LAYOUT_ENTRY = 'function explorationLayout(id,theme="cave",safe=false,meta={}){const base=baseExplorationLayoutR74(id,theme,safe,meta);return meta.worldR75===1?worldLayoutR75(base,id,theme,safe,meta):worldLayoutR74(base,id,theme,safe,meta);}'
+
+R76_LAYOUT_ENTRY = '''function worldLayoutBossR76(base,id,theme,safe,meta={}){
+ const core=baseExplorationLayoutR74(id,theme,safe,{...meta,worldR74:0,worldR75:0}),generic=worldLayoutR75(base,id,theme,safe,meta),layout=hospitalMazeLayout5(core),profile=StoryWorldProfilesR74.profiles[id],art=generic.surface?.art||REGIONAL_TERRAIN_ART[id];
+ layout.surface={...layout.surface,art};layout.sourceExits=REGIONAL_ROUTE_DATA[id]?.exits||core.sourceExits||null;layout.type='r76-enclosed-boss-core';layout.voidCover={...generic.voidCover,theme:profile?.style||theme};
+ layout.worldR75={version:1,family:'encircled-boss-core',sourceTopology:profile?.sourceTopology||null};
+ layout.worldR74={...generic.worldR74,doors:[],rooms:layout.nodes.map(n=>({id:n.id,x:n.x,y:n.y,width:5,depth:5,purpose:'보스 외곽 미로'})),wallCount:layout.walls.length,floorCount:layout.floorCells.length,nativeCorePreserved:true};
+ layout.r76BossEnclosure=true;layout.mazeFirst=true;return layout;
+}
+function explorationLayout(id,theme="cave",safe=false,meta={}){const base=baseExplorationLayoutR74(id,theme,safe,meta);if(meta.worldR75!==1)return worldLayoutR74(base,id,theme,safe,meta);const coop=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(id==='last301'&&!safe&&(!coop||coop==='off'))return worldLayoutBossR76(base,id,theme,safe,meta);return worldLayoutR75(base,id,theme,safe,meta);}'''
+
+
+def enclose_boss(renderer: str) -> str:
+    return once(renderer, R75_LAYOUT_ENTRY, R76_LAYOUT_ENTRY, "last301 boss core enclosed by themed maze")
+
+
+def extend_boss_bounds(html: str) -> str:
+    html = once(html,
+        "minimum:axis=>zone==='ep1a08'&&room?.exploration?.starts?room.exploration.bounds[axis==='y'?1:0]-1:0",
+        "minimum:axis=>(zone==='ep1a08'&&room?.exploration?.starts||zone==='last301'&&room?.exploration?.r76BossEnclosure)?room.exploration.bounds[axis==='y'?1:0]-1:0",
+        "negative exterior bounds for the enclosed last301 maze")
+    return once(html,
+        "min=zone==='ep1a08'&&room?.exploration?.starts;return!Number.isFinite(x)||!Number.isFinite(y)||x<(min?b[0]:0)||y<(min?b[1]:0)||x>b[2]||y>b[3];",
+        "min=zone==='ep1a08'&&room?.exploration?.starts||zone==='last301'&&room?.exploration?.r76BossEnclosure;return!Number.isFinite(x)||!Number.isFinite(y)||x<(min?b[0]:0)||y<(min?b[1]:0)||x>b[2]||y>b[3];",
+        "projectile bounds for the enclosed last301 maze")
+
+
 def once(source: str, old: str, new: str, label: str) -> str:
     count = source.count(old)
     if count != 1:
@@ -152,8 +179,9 @@ def build(site: Path) -> dict:
     html = edit_script(html, "golden-core-r72", core)
     html = edit_script(html, "thread-dances-r74", dances)
     html = edit_script(html, "golden-thread-r72", ui)
+    html = extend_boss_bounds(html)
     html_bytes = html.encode("utf-8")
-    renderer_bytes = optimize_blocked(baseline_renderer.decode("utf-8")).encode("utf-8")
+    renderer_bytes = enclose_boss(optimize_blocked(baseline_renderer.decode("utf-8"))).encode("utf-8")
     renderer_sha = hashlib.sha256(renderer_bytes).hexdigest()
     output = Path("out/r76")
     output.mkdir(parents=True, exist_ok=True)
@@ -176,6 +204,7 @@ def build(site: Path) -> dict:
         "rendererSha256": renderer_sha,
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
+        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     manifest["fileCount"] = len(manifest["files"])
@@ -191,6 +220,7 @@ def build(site: Path) -> dict:
         "manifestSHA256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
+        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     try:
@@ -207,7 +237,4 @@ if __name__ == "__main__":
     parser.add_argument("--site", type=Path, required=True)
     args = parser.parse_args()
     result = build(args.site)
-    output = Path("out/r76")
-    output.mkdir(parents=True, exist_ok=True)
-    (output / "build.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
