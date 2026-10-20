@@ -1,9 +1,9 @@
 {
   "schema": "storyworld.r77-runtime-approval/v1",
-  "status": "pending-review",
+  "status": "approved",
   "candidateSource": {
-    "pullRequest": null,
-    "headSha": null,
+    "pullRequest": 20,
+    "headSha": "794e158113401a2520ea845eb6cf68ef1d6c6746",
     "workflowRunId": null
   },
   "baselineR76": {
@@ -11,15 +11,23 @@
     "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
   },
   "approvedR77": {
-    "index.html": null,
-    "dist/phase1.js": null
+    "index.html": "a9e40e98877da7dd2dcacf88a93f4d9224b2ad8ca128b5b13f2294e1c27195d4",
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
   },
   "contract": {
     "rendererCacheKey": "r76=1",
     "runtimeChange": "guide-owned next-story travel chooses Normal; readable guide Continue",
     "normalTravelScope": "one-use guide-issued open next-story portal only; existing story admission/guest guards retained",
     "sceneAdvance": {
-      "parts": ["pre", "post", "firstPost", "awakenPre", "prologue.pre", "prologue.post", "body"],
+      "parts": [
+        "pre",
+        "post",
+        "firstPost",
+        "awakenPre",
+        "prologue.pre",
+        "prologue.post",
+        "body"
+      ],
       "minimumDelayMs": 6000,
       "maximumDelayMs": 45000,
       "waitForNarration": true,
