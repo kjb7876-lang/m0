@@ -49,11 +49,11 @@ def core(body: str) -> str:
         "bounded saved-design migration")
     body = once(body,
         "const wanted=[...new Set((Array.isArray(raw.equipped)?raw.equipped:[]).filter(id=>ids.has(id)))].slice(0,s.ranks.equip?3:1),chosen=new Set(wanted);for(const d of all){if(chosen.size>=7)break;chosen.add(d.id);}",
-        "const capacity=channel==='gold'?3+s.ranks.slots:7,wanted=[...new Set((Array.isArray(raw.equipped)?raw.equipped:[]).filter(id=>ids.has(id)))].slice(0,s.ranks.equip?3:1),chosen=new Set(wanted);for(const d of all){if(chosen.size>=capacity)break;chosen.add(d.id);}",
+        "const capacity=channel==='gold'?7+Math.min(5,s.ranks.slots):7,wanted=[...new Set((Array.isArray(raw.equipped)?raw.equipped:[]).filter(id=>ids.has(id)))].slice(0,s.ranks.equip?3:1),chosen=new Set(wanted);for(const d of all){if(chosen.size>=capacity)break;chosen.add(d.id);}",
         "channel-specific capacity migration")
     body = once(body,
         "function stats(s){const r=s.ranks,n=damageLevel(s),damage=n.length>14?1e12:Math.min(1e12,1+.1*Number(n));return{slots:7,",
-        "function stats(s,channel='gold'){const r=s.ranks,n=damageLevel(s),damage=n.length>14?1e12:Math.min(1e12,1+.1*Number(n));return{slots:channel==='gold'?3+clamp(r.slots,0,9):7,",
+        "function stats(s,channel='gold'){const r=s.ranks,n=damageLevel(s),damage=n.length>14?1e12:Math.min(1e12,1+.1*Number(n));return{slots:channel==='gold'?7+clamp(r.slots,0,5):7,",
         "channel-specific runtime stats")
     return body
 
@@ -77,7 +77,7 @@ def dances(body: str) -> str:
         "clone capacity guard")
     body = once(body,
         "const r=cmd.key,caps={cooldown:10,size:10,speed:7,equip:1};if(!s.learned||!['damage',...Object.keys(caps)].includes(r))return fail('강화 항목을 확인하세요.');",
-        "const r=cmd.key,caps={cooldown:10,size:10,speed:7,slots:9,equip:1};if(!s.learned||!['damage',...Object.keys(caps)].includes(r))return fail('강화 항목을 확인하세요.');if(k==='silver'&&r==='slots')return fail('도안 저장칸 강화는 황금실 필살검무에 적용됩니다.');",
+        "const r=cmd.key,caps={cooldown:10,size:10,speed:7,slots:5,equip:1};if(!s.learned||!['damage',...Object.keys(caps)].includes(r))return fail('강화 항목을 확인하세요.');if(k==='silver'&&r==='slots')return fail('도안 저장칸 강화는 황금실 필살검무에 적용됩니다.');",
         "independent slot upgrade")
     body = once(body,
         "p.points-=cost;s.ranks[r]=n;changed=true;",
@@ -108,7 +108,7 @@ def ui(body: str) -> str:
         "gold-only saved slot upgrade")
     body = once(body,
         "도안 7개, 동시장착 해금은 총 7점으로 1→3개. 속도 최대 7단계, 재사용 최소 3초, 피해는 단계 제한 없이 1점씩 강화합니다. 기존 저장칸·초과 속도 투자는 한 번만 포인트로 돌려줍니다.",
-        "황금실 저장칸은 기본 3개에서 단계당 1점으로 최대 12개까지 늘고, 은색실은 7개로 고정됩니다. 동시장착은 별도 강화로 총 7점에 1개에서 3개가 됩니다. 속도 최대 7단계, 재사용 최소 3초, 피해는 1점씩 강화합니다. 기존 초과 속도 투자는 한 번만 포인트로 돌려줍니다.",
+        "황금실 저장칸은 기존 기본 7개에서 단계당 1점으로 최대 12개까지 늘고, 은색실은 7개로 고정됩니다. 동시장착은 별도 강화로 총 7점에 1개에서 3개가 됩니다. 속도 최대 7단계, 재사용 최소 3초, 피해는 1점씩 강화합니다. 기존 초과 속도 투자는 한 번만 포인트로 돌려줍니다.",
         "capacity and cost guidance")
     return body
 
@@ -134,7 +134,7 @@ def build(site: Path) -> dict:
         "baselineR75HtmlSha256": before,
         "htmlSha256": index_row["sha256"],
         "rendererSha256": renderer_sha,
-        "designSlots": {"goldenBase": 3, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
+        "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
     }
     manifest["fileCount"] = len(manifest["files"])
@@ -147,7 +147,7 @@ def build(site: Path) -> dict:
         "htmlSHA256": index_row["sha256"],
         "rendererSHA256": renderer_sha,
         "manifestSHA256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
-        "designSlots": {"goldenBase": 3, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
+        "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
     }
     try:
