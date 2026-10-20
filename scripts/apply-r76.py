@@ -8,6 +8,29 @@ import json
 import subprocess
 from pathlib import Path
 
+R75_HTML_SHA256 = "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57"
+R75_RENDERER_SHA256 = "22a04872281d2fe260d34c4c618f9b608c8afbefe1faf2c759f0ee00d9bf04bb"
+
+BLOCKER_BASELINE = """function explorationBlocked(layout,x,y,radius=.27){
+ if(!layout)return false;if(!Number.isFinite(x)||!Number.isFinite(y)||!Number.isFinite(radius)||radius<0)return true;
+ if(layout.hospitalAnalytic12)return hospitalBlocked12(layout,x,y,radius);
+ const index=explorationIndex(layout),b=layout.bounds;if(x-radius<b[0]||y-radius<b[1]||x+radius>b[2]||y+radius>b[3])return true;
+ if(index.floor)for(let a=Math.floor(x-radius);a<=Math.floor(x+radius);a++)for(let c=Math.floor(y-radius);c<=Math.floor(y+radius);c++)if(!index.floor.has(explorationCellKey(a,c))&&Math.hypot(Math.max(a-x,0,x-a-1),Math.max(c-y,0,y-c-1))<radius+1e-8)return true;
+ return (index.walls.get(explorationCellKey(Math.floor(x/5),Math.floor(y/5)))||[]).some(w=>!w.decorative&&Math.hypot(Math.max(Math.abs(x-w.x)-w.width/2,0),Math.max(Math.abs(y-w.y)-w.depth/2,0))<radius);
+}"""
+
+BLOCKER_OPTIMIZED = """function explorationBlocked(layout,x,y,radius=.27){
+ if(!layout)return false;if(!Number.isFinite(x)||!Number.isFinite(y)||!Number.isFinite(radius)||radius<0)return true;
+ if(layout.hospitalAnalytic12)return hospitalBlocked12(layout,x,y,radius);
+ const index=explorationIndex(layout),b=layout.bounds;if(x-radius<b[0]||y-radius<b[1]||x+radius>b[2]||y+radius>b[3])return true;
+ if(index.floor){const floorRadius=radius+1e-8;for(let a=Math.floor(x-radius);a<=Math.floor(x+radius);a++)for(let c=Math.floor(y-radius);c<=Math.floor(y+radius);c++)if(!index.floor.has(explorationCellKey(a,c))){const dx=Math.max(a-x,0,x-a-1);if(dx>=floorRadius)continue;const dy=Math.max(c-y,0,y-c-1);if(dy<floorRadius&&Math.hypot(dx,dy)<floorRadius)return true;}}
+ const candidates=index.walls.get(explorationCellKey(Math.floor(x/5),Math.floor(y/5)))||[];for(let i=0;i<candidates.length;i++){const w=candidates[i];if(w.decorative)continue;const dx=Math.abs(x-w.x)-w.width/2;if(dx>=radius)continue;const dy=Math.abs(y-w.y)-w.depth/2;if(dy>=radius)continue;if(Math.hypot(Math.max(dx,0),Math.max(dy,0))<radius)return true;}return false;
+}"""
+
+
+def optimize_blocked(renderer: str) -> str:
+    return once(renderer, BLOCKER_BASELINE, BLOCKER_OPTIMIZED, "R75 blocker distance prefilters")
+
 
 def once(source: str, old: str, new: str, label: str) -> str:
     count = source.count(old)
@@ -119,23 +142,41 @@ def build(site: Path) -> dict:
     if 'id="dance-policy-r75"' not in html:
         raise RuntimeError("R76 must follow the exact R75 overlay")
     before = hashlib.sha256(html.encode("utf-8")).hexdigest()
+    if before != R75_HTML_SHA256:
+        raise RuntimeError(f"R76 requires the exact R75 HTML, found {before}")
+    renderer_path = site / "dist" / "phase1.js"
+    baseline_renderer = renderer_path.read_bytes()
+    baseline_renderer_sha = hashlib.sha256(baseline_renderer).hexdigest()
+    if baseline_renderer_sha != R75_RENDERER_SHA256:
+        raise RuntimeError(f"R76 requires the exact R75 renderer, found {baseline_renderer_sha}")
     html = edit_script(html, "golden-core-r72", core)
     html = edit_script(html, "thread-dances-r74", dances)
     html = edit_script(html, "golden-thread-r72", ui)
     html_bytes = html.encode("utf-8")
+    renderer_bytes = optimize_blocked(baseline_renderer.decode("utf-8")).encode("utf-8")
+    renderer_sha = hashlib.sha256(renderer_bytes).hexdigest()
+    output = Path("out/r76")
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "phase1-r75.js").write_bytes(baseline_renderer)
     index.write_bytes(html_bytes)
-    renderer_sha = hashlib.sha256((site / "dist" / "phase1.js").read_bytes()).hexdigest()
+    renderer_path.write_bytes(renderer_bytes)
     manifest_path = site / "web-manifest-r62.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     index_row, = [row for row in manifest["files"] if row["path"] == "index.html"]
+    renderer_row, = [row for row in manifest["files"] if row["path"] == "dist/phase1.js"]
     index_row.update(bytes=len(html_bytes), sha256=hashlib.sha256(html_bytes).hexdigest())
+    if renderer_row["sha256"] != baseline_renderer_sha:
+        raise RuntimeError("R75 manifest renderer lineage drift")
+    renderer_row.update(bytes=len(renderer_bytes), sha256=renderer_sha)
     manifest["webHTMLSha256"] = index_row["sha256"]
     manifest["r76"] = {
         "baselineR75HtmlSha256": before,
+        "baselineR75RendererSha256": baseline_renderer_sha,
         "htmlSha256": index_row["sha256"],
         "rendererSha256": renderer_sha,
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
+        "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     manifest["fileCount"] = len(manifest["files"])
     manifest["totalBytes"] = sum(row["bytes"] for row in manifest["files"])
@@ -144,14 +185,18 @@ def build(site: Path) -> dict:
     out = {
         "status": "R76_GOLDEN_STORAGE_OVERLAY_APPLIED",
         "baselineR75HtmlSHA256": before,
+        "baselineR75RendererSHA256": baseline_renderer_sha,
         "htmlSHA256": index_row["sha256"],
         "rendererSHA256": renderer_sha,
         "manifestSHA256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
+        "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     try:
-        out["headSHA"] = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+        out["headSHA"] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], text=True, stderr=subprocess.DEVNULL
+        ).strip()
     except (OSError, subprocess.CalledProcessError):
         pass
     return out
