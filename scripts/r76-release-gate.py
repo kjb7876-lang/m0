@@ -13,7 +13,7 @@ if APPROVAL.get("schema") != "storyworld.r76-runtime-approval/v1":
     raise SystemExit("Unknown R76 release approval schema")
 if APPROVAL.get("candidateSource", {}).get("pullRequest") != 19:
     raise SystemExit("R76 runtime approval is not tied to PR 19")
-if APPROVAL.get("candidateSource", {}).get("headSha") != "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4":
+if APPROVAL.get("candidateSource", {}).get("headSha") != "4499d479d3e18871e38fe69d6e8b21d62cfbef17":
     raise SystemExit("R76 runtime approval is not tied to the reviewed PR 19 source commit")
 BASELINE = APPROVAL.get("baselineR75")
 EXPECTED_BASELINE = {

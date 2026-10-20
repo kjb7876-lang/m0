@@ -53,7 +53,7 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
         "schema": "storyworld.r76-runtime-approval/v1",
         "candidateSource": {
             "pullRequest": 19,
-            "headSha": "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4",
+            "headSha": "4499d479d3e18871e38fe69d6e8b21d62cfbef17",
             "workflowRunId": None,
         },
         "baselineR75": baseline,
@@ -63,7 +63,7 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
         },
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
-        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "bossLayout": "last301 native boss room is part of the connected regional maze with an interactive approach door and brighter regional landscape; original exits retained",
         "rendererCacheKey": "r76=1",
         "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
     }

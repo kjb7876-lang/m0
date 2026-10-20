@@ -2,7 +2,7 @@
   "schema": "storyworld.r76-runtime-approval/v1",
   "candidateSource": {
     "pullRequest": 19,
-    "headSha": "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4",
+    "headSha": "4499d479d3e18871e38fe69d6e8b21d62cfbef17",
     "workflowRunId": null
   },
   "baselineR75": {
@@ -11,7 +11,7 @@
   },
   "approvedR76": {
     "index.html": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775",
-    "dist/phase1.js": "df78c99a9231c1032c7cc3d119c46438504472d85b8c1ef2aae23d247b5422c8"
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
   },
   "designSlots": {
     "goldenBase": 7,
@@ -24,7 +24,7 @@
     "maximum": 3,
     "unlockCost": 7
   },
-  "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+  "bossLayout": "last301 native boss room is part of the connected regional maze with an interactive approach door and brighter regional landscape; original exits retained",
   "rendererCacheKey": "r76=1",
   "minimapCore": "originalEncounterBounds offset by expanded layout bounds"
 }
