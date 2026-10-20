@@ -117,6 +117,8 @@ async function createObservationWindow(label, profileCpu) {
     deviceScaleFactor: 1,
   });
   const page = await context.newPage();
+  await page.bringToFront();
+  await page.waitForFunction(() => document.visibilityState === 'visible', null, {timeout: 10000});
   const pageErrors = [];
   const consoleErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
@@ -282,7 +284,11 @@ async function createObservationWindow(label, profileCpu) {
           if (first === null) first = timestamp;
           if (previous !== null) intervals.push(timestamp - previous);
           previous = timestamp;
-          if (timestamp - first >= ms) resolve({elapsedMs: timestamp - first, intervals});
+          if (timestamp - first >= ms) resolve({
+            elapsedMs: timestamp - first,
+            intervals,
+            visibilityState: document.visibilityState,
+          });
           else requestAnimationFrame(next);
         }
         requestAnimationFrame(next);
@@ -342,6 +348,7 @@ async function createObservationWindow(label, profileCpu) {
         name: phase,
         durationMs: round(frameSample.elapsedMs),
         frameIntervalsMs: distribution(frameSample.intervals),
+        visibilityState: frameSample.visibilityState,
         actions,
         awakening,
         runtime,
@@ -365,6 +372,23 @@ async function createObservationWindow(label, profileCpu) {
 
 const round = value => Math.round(value * 100) / 100;
 const windows = [];
+const summarizeWindow = window => ({
+  label: window.label,
+  setup: window.setup,
+  phases: window.phases.map(phase => ({
+    name: phase.name,
+    durationMs: phase.durationMs,
+    frameIntervalsMs: phase.frameIntervalsMs,
+    visibilityState: phase.visibilityState,
+    actions: phase.actions,
+    awakening: phase.awakening,
+    runtime: phase.runtime,
+    cpuSampleCount: phase.cpu?.sampleCount ?? null,
+    sampledMainThreadMs: phase.cpu?.sampledMainThreadMs ?? null,
+  })),
+  pageErrors: window.pageErrors,
+  consoleErrors: window.consoleErrors,
+});
 try {
   windows.push(await createObservationWindow('control-before', false));
   const rendererName = windows[0].setup.webgl?.unmaskedRenderer || windows[0].setup.webgl?.renderer || '';
@@ -376,11 +400,15 @@ try {
   report.runner.rendererEvidence = rendererName || null;
   windows.push(await createObservationWindow('cpu-profile', true));
   windows.push(await createObservationWindow('control-after', false));
+  report.windows = windows.map(summarizeWindow);
 
   const [before, profiled, after] = windows;
   for (const window of windows) {
     assert.deepEqual(window.pageErrors, [], window.label + ' page errors');
-    assert.ok(window.phases.every(phase => phase.frameIntervalsMs.count >= 20), window.label + ' frame capture too short');
+    for (const phase of window.phases) {
+      assert.ok(phase.frameIntervalsMs.count >= 20,
+        `${window.label}/${phase.name} captured only ${phase.frameIntervalsMs.count} RAF intervals in ${phase.durationMs}ms (visibility=${phase.visibilityState})`);
+    }
     assert.ok(window.phases.every(phase => phase.runtime.renderer === 'three'), window.label + ' renderer fallback invalidates profile');
   }
 
