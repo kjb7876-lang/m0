@@ -289,7 +289,7 @@ jobs:
             out/r71/native/
           retention-days: 14
   r75:
-    needs: build
+    # Reconstructs its own pinned site; release still requires every job.
     runs-on: ubuntu-22.04
     timeout-minutes: 60
     steps:
