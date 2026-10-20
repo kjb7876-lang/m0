@@ -50,7 +50,7 @@ def edit_script(html: str, script_id: str, transform) -> str:
 
 def campaign(body: str) -> str:
     old = "if(nextStory(id,l)){if(coopMode()==='guest'){toast('다음 지역과 난이도는 방장만 정할 수 있습니다.',2);return false;}return picker.call(this,id,from,options);}"
-    new = "if(nextStory(id,l)){if(coopMode()==='guest'){toast('다음 지역과 난이도는 방장만 정할 수 있습니다.',2);return false;}const guidedNormal=window.__STORYWORLD_GUIDE_R77__?.takeNextNormal(id,l,zone);if(!guidedNormal)return picker.call(this,id,from,options);options={...options,difficultyR63:guidedNormal};}"
+    new = "if(nextStory(id,l)){if(coopMode()==='guest'){toast('다음 지역과 난이도는 방장만 정할 수 있습니다.',2);return false;}const guidedNormal=window.__STORYWORLD_GUIDE_R77__?.takeNextNormal(id,l,zone);if(!guidedNormal)return picker.call(this,id,from,options);setMapMode(id,l,guidedNormal);return enterBase.call(this,id,from,{...options,layer:l,difficultyR63:guidedNormal});}"
     return once(body, old, new, "Normal only after next-story admission and guest check")
 
 
@@ -101,6 +101,9 @@ def build(site: Path) -> dict:
     html = edit_script(html, "campaign-combat-r63r1", campaign)
     html = edit_script(html, "guide-r75", guide)
     html = menu(html)
+    html = once(html, "서사 창의 ‘계속’은 직접 누릅니다.",
+                "길잡이 ON에서는 다음 서사 맵을 노말로 선택하고, 서사와 미완료 쉼터 기록을 읽을 시간을 둔 뒤 계속합니다. 메뉴·분기·사망/재시도·결말은 직접 선택합니다.",
+                "guide help matches automatic Normal and readable continuation")
     overlay = (ROOT / "client-source/guide-r77.js").read_text(encoding="utf-8")
     if "</script" in overlay.lower():
         raise RuntimeError("Unsafe R77 script close tag")

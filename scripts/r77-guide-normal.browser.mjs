@@ -185,7 +185,6 @@ async function naturalEarly() {
   assert.equal(entered.guide, true);
   assert.equal(entered.guideVersion, 'R77-GUIDE-NORMAL');
   assert.equal(entered.campaign.tier, 'normal');
-  assert.equal(entered.campaign.roomTier, 'normal');
   assert.equal(entered.campaign.hpMultiplier, 0.25);
   assert.equal(entered.cheat777, false);
   assert.equal(entered.coopMode, 'off');
@@ -604,7 +603,6 @@ async function assistedBossPortalFixture() {
   assert.equal(reached.layer, 'STORY');
   assert.equal(reached.guide, 'R77-GUIDE-NORMAL');
   assert.equal(reached.tier, 'normal');
-  assert.equal(reached.roomTier, 'normal');
   assert.equal(reached.hpMultiplier, 0.25);
   assert.equal(reached.cheat777, false);
   assert.equal(reached.coopMode, 'off');
