@@ -564,6 +564,29 @@ async function assistedBossPortalFixture() {
         cam = {x: player.x, y: player.y};
         route = [];
         command = null;
+        const nextPlanThrottle = window.__r77AssistedFixture.nextPlanThrottle = {
+          label: 'one-frame nextPlan-throttle simulation',
+          installed: false,
+          pending: true,
+          used: false,
+          restoredImmediately: false,
+          restoredOnCleanup: false
+        };
+        const originalGuideStep = guideStep;
+        const throttledGuideStep = function(...args) {
+          if (nextPlanThrottle.pending) {
+            nextPlanThrottle.pending = false;
+            guideStep = originalGuideStep;
+            nextPlanThrottle.used = true;
+            nextPlanThrottle.restoredImmediately = guideStep === originalGuideStep;
+            return;
+          }
+          return originalGuideStep.apply(this, args);
+        };
+        window.__r77GuideStepThrottleOriginal = originalGuideStep;
+        window.__r77GuideStepThrottleWrapper = throttledGuideStep;
+        guideStep = throttledGuideStep;
+        nextPlanThrottle.installed = guideStep === throttledGuideStep;
         window.__r77AssistedFixture.result = {
           target: targetId,
           destination,
@@ -571,9 +594,17 @@ async function assistedBossPortalFixture() {
           part: 'post',
           sceneCount: scenes.length,
           open: portal.open,
-          portalPositionFixture: true
+          portalPositionFixture: true,
+          nextPlanThrottleFixture: nextPlanThrottle.label,
+          nextPlanThrottleInstalled: nextPlanThrottle.installed
         };
       } catch (error) {
+        const nextPlanThrottle = window.__r77AssistedFixture?.nextPlanThrottle;
+        if (nextPlanThrottle?.pending && guideStep === window.__r77GuideStepThrottleWrapper) {
+          guideStep = window.__r77GuideStepThrottleOriginal;
+          nextPlanThrottle.pending = false;
+          nextPlanThrottle.restoredOnCleanup = guideStep === window.__r77GuideStepThrottleOriginal;
+        }
         window.__r77AssistedFixture.error = String(error?.stack || error);
       }
     });
@@ -665,6 +696,7 @@ async function assistedBossPortalFixture() {
       intent: guideState.events.filter(e =>
         ['normal-intent-armed', 'normal-intent-consumed'].includes(e.kind) && e.from === window.__r77AssistedFixture.result.target
       ),
+      nextPlanThrottle: window.__r77AssistedFixture.nextPlanThrottle || null,
       fixture: window.__r77AssistedFixture.result,
       scene: storyScene ? {key: storyScene.key, part: storyScene.part} : null
     };
@@ -676,8 +708,14 @@ async function assistedBossPortalFixture() {
   assert.equal(reached.hpMultiplier, 0.25);
   assert.equal(reached.cheat777, false);
   assert.equal(reached.coopMode, 'off');
-  assert.ok(reached.intent.some(e => e.kind === 'normal-intent-armed' && e.destination === fixture.next));
+  assert.ok(reached.intent.some(e => e.kind === 'normal-intent-armed' &&
+    e.destination === fixture.next && e.dispatch === 'native-proximity'));
   assert.ok(reached.intent.some(e => e.kind === 'normal-intent-consumed' && e.destination === fixture.next));
+  assert.equal(reached.nextPlanThrottle.label, 'one-frame nextPlan-throttle simulation');
+  assert.equal(reached.nextPlanThrottle.installed, true);
+  assert.equal(reached.nextPlanThrottle.used, true);
+  assert.equal(reached.nextPlanThrottle.restoredImmediately, true);
+  assert.equal(reached.nextPlanThrottle.pending, false);
   await capture(page, '05-fixture-next-portal-normal.png');
   report.assistedBossPortal = {
     ok: true,
@@ -700,6 +738,7 @@ async function assistedBossPortalFixture() {
       entry: fixture.entry,
       nativeAuthoredPostAndCompleteCallback: true,
       portalPositionFixture: true,
+      nextPlanThrottle: reached.nextPlanThrottle,
       enemyHPChanges: false,
       enemyKills: false,
       cheat777: false,
@@ -743,7 +782,22 @@ try {
     fixture: window.__r77AssistedFixture || null
   })).catch(() => null);
 } finally {
-  for (const context of contexts.reverse()) await context.close().catch(() => {});
+  for (const context of contexts.reverse()) {
+    for (const page of context.pages()) {
+      await page.evaluate(() => {
+        const fixture = window.__r77AssistedFixture;
+        const throttle = fixture?.nextPlanThrottle;
+        const original = window.__r77GuideStepThrottleOriginal;
+        if (throttle?.pending && typeof original === 'function' &&
+            guideStep === window.__r77GuideStepThrottleWrapper) {
+          guideStep = original;
+          throttle.pending = false;
+          throttle.restoredOnCleanup = guideStep === original;
+        }
+      }).catch(() => {});
+    }
+    await context.close().catch(() => {});
+  }
   await browser?.close().catch(() => {});
   report.finishedAt = new Date().toISOString();
   const reportPath = out + (publicSmoke ? '/public-browser.json' : '/browser.json');

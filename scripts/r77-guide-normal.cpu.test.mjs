@@ -15,6 +15,11 @@ function script(id) {
 const guideRuntime = script('guide-r77');
 const guideR75 = script('guide-r75');
 const campaign = script('campaign-combat-r63r1');
+const nativePortalLoopStart = html.indexOf('for(const d of Object.keys(regionById[zone].exits))if(distance(player,exitPoint(d))<.85');
+const nativePortalLoopEnd = html.indexOf('if(time-lastSave>18)', nativePortalLoopStart);
+assert.ok(nativePortalLoopStart >= 0 && nativePortalLoopEnd > nativePortalLoopStart,
+  'compiled core tick contains the native portal proximity dispatch');
+const nativePortalLoop = html.slice(nativePortalLoopStart, nativePortalLoopEnd);
 
 function game() {
   const clock = {now: 0, nextId: 1, jobs: new Map()};
@@ -351,6 +356,75 @@ test('compiled guide portal dispatch and campaign admission use the one-use toke
   assert.equal(guestToasts, 1);
   assert.equal(picks, 1, 'guest entry is denied before picker/Normal override');
   assert.equal(box.baseCalls, 2, 'guest cannot bypass canonical host admission');
+});
+
+test('native tick proximity dispatch arms Normal only for live guide travel and cancels rejected travel', async () => {
+  assert.match(nativePortalLoop, /distance\(player,exitPoint\(d\)\)<\.85&&!window\.__STORYWORLD_DANCES_R74__\?\.moving\(player\)/,
+    'the existing native distance and movement guards remain intact');
+  assert.match(nativePortalLoop, /guide===true\?guideR77\?\.armNextNormal\(\{kind:'portal',direction:d,source:'native-proximity'\},zone,layer\):false/,
+    'the exact native travel dispatch arms only while guide is on');
+  assert.match(nativePortalLoop, /resultR77=travel\(d\)/, 'native dispatch still calls canonical travel');
+
+  const run = async ({guide = true, role = 'off', cheat = false, routeRole = 'next', outcome = 'success'} = {}) => {
+    const x = game();
+    const box = x.box;
+    box.guide = guide;
+    box.role = role;
+    box.cheat = cheat;
+    box.player.x = .2;
+    box.player.y = 0;
+    box.__STORYWORLD_ROUTES_R72__.status = direction => ({
+      open: true, role: routeRole, destination: 'next', direction
+    });
+    box.nativeTravelResult = outcome;
+    vm.runInContext(`
+      window.nativeTrips=[];window.nativeTier=null;
+      function distance(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
+      function exitPoint(){return{x:1,y:0};}
+      window.__STORYWORLD_DANCES_R74__={moving:()=>false};
+      function travel(d){
+        window.nativeTrips.push(d);
+        if(window.nativeTravelResult==='reject')return Promise.reject(Error('route rejected before admission'));
+        if(window.nativeTravelResult==='false')return Promise.resolve(false);
+        window.nativeTier=window.__STORYWORLD_GUIDE_R77__?.takeNextNormal('next','STORY','current')||null;
+        return Promise.resolve(true);
+      }
+    `, box);
+    assert.ok(Math.hypot(box.player.x - 1, box.player.y) > .75 &&
+      Math.hypot(box.player.x - 1, box.player.y) < .85,
+    'fixture is inside native .85 proximity but outside R75 guide .75 goal reach');
+    vm.runInContext(nativePortalLoop, box);
+    await x.flush();
+    return {x, box, state: box.__STORYWORLD_GUIDE_R77__.inspect()};
+  };
+
+  const guided = await run();
+  assert.deepEqual(Array.from(guided.box.nativeTrips), ['east']);
+  assert.equal(guided.box.nativeTier, 'normal', 'the native proximity path reaches canonical admission with Normal');
+  assert.ok(guided.state.events.some(event => event.kind === 'normal-intent-armed'));
+  assert.ok(guided.state.events.some(event => event.kind === 'normal-intent-armed' && event.dispatch === 'native-proximity'),
+    'the intent audit identifies the native proximity dispatch');
+  assert.ok(guided.state.events.some(event => event.kind === 'normal-intent-consumed'));
+  assert.equal(guided.state.intent, null);
+
+  for (const row of [
+    {name: 'guide OFF/manual travel', options: {guide: false}},
+    {name: 'guest', options: {role: 'guest', outcome: 'false'}},
+    {name: '777', options: {cheat: true, outcome: 'false'}},
+    {name: 'previous portal', options: {routeRole: 'previous', outcome: 'false'}},
+  ]) {
+    const result = await run(row.options);
+    assert.deepEqual(Array.from(result.box.nativeTrips), ['east'], row.name);
+    assert.equal(result.box.nativeTier, null, row.name);
+    assert.equal(result.state.intent, null, row.name);
+    assert.equal(result.state.events.some(event => event.kind === 'normal-intent-armed'), false, row.name);
+  }
+
+  for (const outcome of ['false', 'reject']) {
+    const result = await run({outcome});
+    assert.ok(result.state.events.some(event => event.kind === 'normal-intent-armed'), outcome);
+    assert.equal(result.state.intent, null, `failed ${outcome} travel cancels its unconsumed intent`);
+  }
 });
 
 test('v3 save keeps guide/auto fields; legacy saves missing guide remain OFF and R77 adds no save fields', () => {

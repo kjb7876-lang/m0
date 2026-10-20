@@ -98,6 +98,12 @@ def build(site: Path) -> dict:
         raise RuntimeError("R77 must follow the R76 manifest overlay")
 
     html = html_bytes.decode("utf-8")
+    html = once(
+        html,
+        "for(const d of Object.keys(regionById[zone].exits))if(distance(player,exitPoint(d))<.85&&!window.__STORYWORLD_DANCES_R74__?.moving(player)){travel(d);break}",
+        "for(const d of Object.keys(regionById[zone].exits))if(distance(player,exitPoint(d))<.85&&!window.__STORYWORLD_DANCES_R74__?.moving(player)){const guideR77=window.__STORYWORLD_GUIDE_R77__,intentR77=guide===true?guideR77?.armNextNormal({kind:'portal',direction:d,source:'native-proximity'},zone,layer):false,resultR77=travel(d);if(intentR77&&resultR77?.then)resultR77.then(ok=>{if(!ok)guideR77.cancelNextNormal(intentR77);},()=>guideR77.cancelNextNormal(intentR77));else if(intentR77&&resultR77===false)guideR77.cancelNextNormal(intentR77);break}",
+        "arm Normal intent at guide-owned native proximity travel dispatch",
+    )
     html = edit_script(html, "campaign-combat-r63r1", campaign)
     html = edit_script(html, "guide-r75", guide)
     html = menu(html)

@@ -26,7 +26,7 @@
   const target=regionById?.[destination];
   if(status?.open!==true||status.role!=='next'||!destination||!target?.records?.length||target.safe===true||regionById?.[from]?.exits?.[goal.direction]!==destination||firstPending(l)?.id!==destination)return false;
   intent={id:++intentSequence,from,destination,layer:l,direction:goal.direction,expires:Date.now()+INTENT_TTL};
-  note('normal-intent-armed',{from,destination,layer:l,direction:goal.direction,at:typeof time==='number'?time:0});
+  note('normal-intent-armed',{from,destination,layer:l,direction:goal.direction,dispatch:goal.source==='native-proximity'?'native-proximity':'guide-goal',at:typeof time==='number'?time:0});
   return intent.id;
  }
  function cancelNextNormal(id){if(intent?.id!==id)return false;cancelIntent();return true;}
