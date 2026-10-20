@@ -52,9 +52,9 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
     approval = {
         "schema": "storyworld.r76-runtime-approval/v1",
         "candidateSource": {
-            "pullRequest": 17,
-            "headSha": "0686105cc595319344d74eb3a6960a42049160f5",
-            "workflowRunId": 39371756571,
+            "pullRequest": 19,
+            "headSha": "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4",
+            "workflowRunId": None,
         },
         "baselineR75": baseline,
         "approvedR76": {

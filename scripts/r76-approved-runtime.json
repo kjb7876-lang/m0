@@ -1,16 +1,16 @@
 {
   "schema": "storyworld.r76-runtime-approval/v1",
   "candidateSource": {
-    "pullRequest": 17,
-    "headSha": "0686105cc595319344d74eb3a6960a42049160f5",
-    "workflowRunId": 39371756571
+    "pullRequest": 19,
+    "headSha": "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4",
+    "workflowRunId": null
   },
   "baselineR75": {
     "index.html": "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57",
     "dist/phase1.js": "22a04872281d2fe260d34c4c618f9b608c8afbefe1faf2c759f0ee00d9bf04bb"
   },
   "approvedR76": {
-    "index.html": "272181e1a32145e6ff47c5c6649a5cdcf042f13456ba8fb84e8cab0c42ac1e2c",
+    "index.html": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775",
     "dist/phase1.js": "df78c99a9231c1032c7cc3d119c46438504472d85b8c1ef2aae23d247b5422c8"
   },
   "designSlots": {
@@ -24,5 +24,7 @@
     "maximum": 3,
     "unlockCost": 7
   },
-  "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained"
+  "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+  "rendererCacheKey": "r76=1",
+  "minimapCore": "originalEncounterBounds offset by expanded layout bounds"
 }

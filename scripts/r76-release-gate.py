@@ -11,10 +11,10 @@ ROOT = Path("_pages/docs")
 APPROVAL = json.loads(Path("scripts/r76-approved-runtime.json").read_text(encoding="utf-8"))
 if APPROVAL.get("schema") != "storyworld.r76-runtime-approval/v1":
     raise SystemExit("Unknown R76 release approval schema")
-if APPROVAL.get("candidateSource", {}).get("pullRequest") != 17:
-    raise SystemExit("R76 runtime approval is not tied to PR 17")
-if APPROVAL.get("candidateSource", {}).get("headSha") != "0686105cc595319344d74eb3a6960a42049160f5":
-    raise SystemExit("R76 runtime approval is not tied to the reviewed PR head")
+if APPROVAL.get("candidateSource", {}).get("pullRequest") != 19:
+    raise SystemExit("R76 runtime approval is not tied to PR 19")
+if APPROVAL.get("candidateSource", {}).get("headSha") != "d8956169a6ba3df7001f9b17e9ab33f1bac59ad4":
+    raise SystemExit("R76 runtime approval is not tied to the reviewed PR 19 source commit")
 BASELINE = APPROVAL.get("baselineR75")
 EXPECTED_BASELINE = {
     "index.html": "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57",
