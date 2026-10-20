@@ -289,14 +289,15 @@ jobs:
             out/r71/native/
           retention-days: 14
   r75:
-    needs: build
+    # Reconstructs its own pinned site; release still requires every job.
     runs-on: ubuntu-22.04
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
           show-progress: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -316,12 +317,32 @@ jobs:
           node --test scripts/r75-world-guide.cpu.test.mjs scripts/r76-slots.cpu.test.mjs scripts/r76-boss-maze.cpu.test.mjs scripts/r76-overlay.cpu.test.mjs | tee out/r76/cpu.log
           node --test scripts/r76-world-blocked.cpu.test.mjs | tee out/r76/world-blocked-parity.log
           node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
-      - name: Install pinned sandboxed browser
+      - name: Pin the exact approved R76 runtime before the R77 guide overlay
+        shell: bash
         run: |
+          set -euo pipefail
+          mkdir -p out/r76
+          python3 scripts/r76-release-gate.py | tee out/r76/release.json
+      - name: Apply and pin the R77 guide-only Normal travel overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
+          python3 scripts/r77-release-gate.test.py | tee out/r77/gate-tests.log
+          node --test scripts/r77-guide-normal.cpu.test.mjs | tee out/r77/cpu.log
+          python3 scripts/r77-release-gate.py | tee out/r77/release.json
+          node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
+      - name: Install pinned sandboxed browser
+        shell: bash
+        run: |
+          set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Verify R75 gameplay, missing audio and normal public smoke path
+      - name: Verify preserved gameplay and R77 guide on final runtime
+        shell: bash
         run: |
+          set -euo pipefail
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-http.log 2>&1 &
           SERVER_PID=$!
           python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-reference-http.log 2>&1 &
@@ -330,6 +351,7 @@ jobs:
           STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r75-public-smoke.browser.mjs
           node scripts/r75.browser.mjs
           R76_SLOT_UPGRADES=1 R74_DANCES_OUT=out/r76 node scripts/r74-dances.browser.mjs
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r77-guide-normal.browser.mjs | tee out/r77/browser.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -337,6 +359,7 @@ jobs:
           path: |
             out/r75/
             out/r76/
+            out/r77/
           retention-days: 14
   release:
     needs: [build, candidate, r74, r75]
@@ -346,14 +369,15 @@ jobs:
       contents: read
       pages: read
     outputs:
-      html_sha: ${{ steps.r76.outputs.html_sha }}
-      renderer_sha: ${{ steps.r76.outputs.renderer_sha }}
-      asset_hashes_json: ${{ steps.r76.outputs.asset_hashes_json }}
-      manifest_sha: ${{ steps.r76.outputs.manifest_sha }}
+      html_sha: ${{ steps.r77.outputs.html_sha }}
+      renderer_sha: ${{ steps.r77.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.r77.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.r77.outputs.manifest_sha }}
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -379,18 +403,32 @@ jobs:
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/r76-release-gate.py | tee out/r76/release.json
-      - name: Verify every published file after the R76 overlay
+      - name: Apply the guide-only R77 overlay to the approved R76 release
         shell: bash
         run: |
           set -euo pipefail
-          node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
+          mkdir -p out/r77
+          python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
+      - name: Require exact approved R77 runtime and stamp the commit manifest
+        id: r77
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          python3 scripts/r77-release-gate.py | tee out/r77/release.json
+      - name: Verify every published file after the R77 overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r76-release-manifest-${{ github.sha }}
+          name: r77-release-manifest-${{ github.sha }}
           path: |
             out/r75/
             out/r76/
+            out/r77/
             out/r74/
             out/r73/
             _pages/docs/web-manifest-r62.json
@@ -420,7 +458,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public R76 runtime, images and commit manifest
+      - name: Verify public R77 runtime, images and commit manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
@@ -449,7 +487,7 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R75_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('R77_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
       - uses: actions/checkout@v6
         with:
@@ -459,16 +497,29 @@ jobs:
         with:
           node-version: '22'
       - name: Install pinned sandboxed browser for public smoke
+        shell: bash
         run: |
+          set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Open actual public R76 Pages and verify normal start and save compatibility
+      - name: Open actual public R77 Pages and verify normal start and save compatibility
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
         run: node scripts/r75-public-smoke.browser.mjs
+      - name: Verify public R77 natural guide and Normal-mode proof
+        shell: bash
+        env:
+          STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
+          R77_PUBLIC_SMOKE: '1'
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          node scripts/r77-guide-normal.browser.mjs | tee out/r77/public-browser.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r76-public-smoke-${{ github.sha }}
-          path: out/r75/public-smoke.json
+          name: r77-public-smoke-${{ github.sha }}
+          path: |
+            out/r75/public-smoke.json
+            out/r77/
           retention-days: 14

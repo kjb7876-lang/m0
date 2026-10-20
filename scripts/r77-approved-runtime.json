@@ -1,0 +1,38 @@
+{
+  "schema": "storyworld.r77-runtime-approval/v1",
+  "status": "approved",
+  "candidateSource": {
+    "pullRequest": 20,
+    "headSha": "564461d2043d40fabd913aea7512ba0842931765",
+    "workflowRunId": null
+  },
+  "baselineR76": {
+    "index.html": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775",
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
+  },
+  "approvedR77": {
+    "index.html": "48f5c7ddfc5d593694314e8f3ca099e09c4679705ce154606430f80ac9e9c09e",
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
+  },
+  "contract": {
+    "rendererCacheKey": "r76=1",
+    "runtimeChange": "guide-owned next-story travel chooses Normal; readable guide Continue",
+    "normalTravelScope": "one-use guide-issued open next-story portal only; existing story admission/guest guards retained",
+    "sceneAdvance": {
+      "parts": [
+        "pre",
+        "post",
+        "firstPost",
+        "awakenPre",
+        "prologue.pre",
+        "prologue.post",
+        "body"
+      ],
+      "minimumDelayMs": 6000,
+      "maximumDelayMs": 45000,
+      "waitForNarration": true,
+      "safeBodyScope": "current unread safe-region narrative only; canonical key; journal/completed replay excluded"
+    },
+    "legacySave": "no schema change; transient token/timer are not serialized"
+  }
+}
