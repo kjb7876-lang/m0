@@ -361,7 +361,10 @@ jobs:
         run: bash scripts/build-r75-site.sh
       - name: Require exact R75 runtime and generated image approval
         id: r75
-        run: python3 scripts/r75-release-gate.py | tee out/r75/approval.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/r75-release-gate.py | tee out/r75/approval.json
       - name: Apply the reviewed R76 overlay to the approved R75 release
         shell: bash
         run: |
@@ -377,7 +380,10 @@ jobs:
           mkdir -p out/r76
           python3 scripts/r76-release-gate.py | tee out/r76/release.json
       - name: Verify every published file after the R76 overlay
-        run: node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
+        shell: bash
+        run: |
+          set -euo pipefail
+          node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
