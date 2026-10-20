@@ -81,6 +81,36 @@ async function ready(page) {
   );
 }
 
+async function enterObservationRegion(page, id) {
+  await page.evaluate(() => {
+    closePanel(true);
+    window.__STORYWORLD_CHEAT777__.panel();
+  });
+  if (await page.locator('#story-code-input').count()) {
+    await page.locator('#story-code-input').fill('777');
+    await page.locator('#codeApply').click();
+  }
+  await page.locator('#codeMap').selectOption(id);
+  await page.locator('#codeLayer').selectOption('STORY');
+  await page.locator('#codeGo').click();
+  await page.waitForFunction(
+    target => document.getElementById('r71DifficultyConfirm') || zone === target && !loading,
+    id,
+    {timeout: 90000},
+  );
+  if (await page.locator('#r71DifficultyConfirm').count()) await page.locator('#r71DifficultyConfirm').click();
+  await page.waitForFunction(
+    target => zone === target
+      && !loading
+      && !window.__STORYWORLD_SAVE_SLOTS_R73__.inspect().busy
+      && !window.__STORYWORLD_SAVE_SLOTS_R73__.inspect().transitionDepth,
+    id,
+    {timeout: 90000},
+  );
+  await ready(page);
+  assert.equal(await page.evaluate(() => zone), id, 'native 777 travel must load the requested observation region');
+}
+
 async function createObservationWindow(label, profileCpu) {
   const context = await browser.newContext({
     viewport: {width: 1365, height: 850},
@@ -172,13 +202,7 @@ async function createObservationWindow(label, profileCpu) {
     await ready(page);
 
     await page.evaluate(() => { window.__r75ProfileDecode.phase = 'region-entry-dist02'; });
-    const entered = await page.evaluate(async () => enterRegion(
-      'dist02',
-      null,
-      {restore: true, noStory: true, difficultyR63: 'normal', position: {x: 15, y: 19}},
-    ));
-    assert.equal(entered, true, 'native dist02 entry must succeed');
-    await ready(page);
+    await enterObservationRegion(page, 'dist02');
 
     const setup = await page.evaluate(() => {
       auto = false;
