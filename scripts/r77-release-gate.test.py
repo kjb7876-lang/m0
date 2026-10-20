@@ -199,11 +199,11 @@ with tempfile.TemporaryDirectory(prefix="r77-gate-tests-") as temporary:
     metadata_root, _, _, _ = fixture(root, "metadata")
     path = metadata_root / "_pages/docs/web-manifest-r62.json"
     manifest = json.loads(path.read_text(encoding="utf-8"))
-    manifest["r77"]["normalTravelScope"] = "arbitrary portal travel"
+    manifest["r77"]["sceneAdvance"]["safeBodyScope"] = "any body or replay"
     path.write_text(json.dumps(manifest), encoding="utf-8")
     mismatch = run_gate(metadata_root, root / "metadata-output.txt")
     assert mismatch.returncode != 0
-    assert "normalTravelScope" in mismatch.stderr
+    assert "sceneAdvance" in mismatch.stderr
 
     baseline_root, _, _, _ = fixture(root, "baseline")
     path = baseline_root / "scripts/r77-approved-runtime.json"

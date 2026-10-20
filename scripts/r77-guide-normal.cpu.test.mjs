@@ -32,10 +32,12 @@ function game() {
     var guide=true,auto=true,started=true,modal=false,loading=false,layer='STORY',zone='current',time=0,transitionCD=0;
     var player={hp:100},storyScene=null,storyQueue=[],advanceCalls=0,voiceGeneration=0,nativeVoiceStarts=0;
     var narrationMode='none',finishNarration=null,openPanelCalls=0,stopped=0,role='off',cheat=false,egoVisit=false;
-    var pendingId='next',regionById={current:{exits:{east:'next'}},next:{exits:{}}};
+    var pendingId='next',currentComplete=false,storyAvailable=true,readScenes=new Set(),regionById={current:{safe:false,records:[{}],exits:{east:'next'}},next:{safe:false,records:[{}],exits:{}}};
     var voiceElement=window.voiceElement;
     function $(id){return id==='storyNext'&&window.__button.isConnected?window.__button:null;}
     function firstPending(){return{id:pendingId};}
+    function completed(id){return id===zone&&currentComplete;}
+    function storyReady(def){return def===regionById[zone]&&storyAvailable&&!currentComplete;}
     function stopVoice(){voiceGeneration++;stopped++;voiceElement.paused=true;voiceElement.ended=true;}
     function playVoice(scene){stopVoice();const token=voiceGeneration;if(narrationMode==='playing')return new Promise(resolve=>{finishNarration=ok=>{if(ok&&token===voiceGeneration){voiceElement.paused=false;voiceElement.ended=false;nativeVoiceStarts++;}resolve(ok);};});if(narrationMode==='blocked')return Promise.resolve(false);return Promise.resolve();}
     function advanceScene(){advanceCalls++;stopVoice();storyScene=storyQueue.shift()||null;modal=!!storyScene;window.__button.isConnected=!!storyScene;if(storyScene&&narrationMode!=='none')playVoice(storyScene);}
@@ -63,8 +65,8 @@ function game() {
     }
     clock.now = end;
   };
-  const show = (part = 'pre', text = 'A short readable scene.', key = '01:' + part) => {
-    box.storyQueue = [{id: 'current', part, text, key}];
+  const show = (part = 'pre', text = 'A short readable scene.', key = '01:' + part, id = 'current') => {
+    box.storyQueue = [{id, part, text, key}];
     box.advanceScene();
   };
   const flush = async () => {await Promise.resolve(); await Promise.resolve();};
@@ -78,7 +80,8 @@ test('R77 manifest pins the compiled guide overlay and leaves the approved rende
   assert.equal(row.htmlSha256, hash(Buffer.from(html)));
   assert.equal(row.rendererCacheKey, 'r76=1');
   assert.equal(row.normalTravelScope, 'one-use guide-issued open next-story portal only; existing story admission/guest guards retained');
-  assert.deepEqual(row.sceneAdvance.parts, ['pre', 'post', 'firstPost', 'awakenPre', 'prologue.pre', 'prologue.post']);
+  assert.deepEqual(row.sceneAdvance.parts, ['pre', 'post', 'firstPost', 'awakenPre', 'prologue.pre', 'prologue.post', 'body']);
+  assert.equal(row.sceneAdvance.safeBodyScope, 'current unread safe-region narrative only; canonical key; journal/completed replay excluded');
   assert.equal(row.sceneAdvance.minimumDelayMs, 6000);
   assert.equal(row.sceneAdvance.maximumDelayMs, 45000);
   assert.equal(row.sceneAdvance.waitForNarration, true);
@@ -109,6 +112,34 @@ test('exact emitted R77 runtime bounds readable Continue to current narrative an
   long.show('post', 'X'.repeat(1000));
   assert.equal(long.box.__STORYWORLD_GUIDE_R77__.inspect().events.at(-1).delayMs, 45000);
   assert.doesNotMatch(guideRuntime, /\bvoiceGeneration\b/, 'R77 narration state cannot overwrite the game voice-generation token');
+});
+
+test('safe-region body Continue is limited to the current unread canonical story scene', () => {
+  const key = 'STORY:current:body:r75';
+  const safe = game();
+  safe.box.regionById.current.safe = true;
+  safe.show('body', 'An unread safe-map record.', key);
+  assert.equal(safe.box.__STORYWORLD_GUIDE_R77__.inspect().scene.scheduled, true);
+  safe.advance(6000);
+  assert.equal(safe.box.advanceCalls, 2);
+
+  const blocked = [
+    {name: 'journal replay', prepare: x => {x.box.regionById.current.safe = true;}, key: 'journal:current:r75', id: 'current'},
+    {name: 'already-read body', prepare: x => {x.box.regionById.current.safe = true; x.box.readScenes.add(key);}, key, id: 'current'},
+    {name: 'completed safe map', prepare: x => {x.box.regionById.current.safe = true; x.box.currentComplete = true;}, key, id: 'current'},
+    {name: 'not current story-ready map', prepare: x => {x.box.regionById.current.safe = true; x.box.storyAvailable = false;}, key, id: 'current'},
+    {name: 'ordinary unsafe-region body', prepare: () => {}, key, id: 'current'},
+    {name: 'wrong-region scene object', prepare: x => {x.box.regionById.current.safe = true;}, key, id: 'other'},
+    {name: 'wrong-region canonical key', prepare: x => {x.box.regionById.current.safe = true;}, key: 'STORY:other:body:r75', id: 'current'},
+    {name: 'noncanonical body key', prepare: x => {x.box.regionById.current.safe = true;}, key: 'STORY:current:body', id: 'current'},
+  ];
+  for (const row of blocked) {
+    const x = game();
+    row.prepare(x);
+    x.show('body', 'This body must remain manual.', row.key, row.id);
+    assert.equal(x.box.__STORYWORLD_GUIDE_R77__.inspect().scene.scheduled, false, row.name);
+    assert.equal(x.clock.jobs.size, 0, row.name);
+  }
 });
 
 test('R77 waits for native narration playback after playVoice resolves, then advances once audio ends', async () => {
@@ -221,6 +252,10 @@ test('one-use Normal intent is scoped to guide authority, next open portal, matc
   x.box.egoVisit = true;
   assert.equal(api.armNextNormal(goal, 'current', 'STORY'), false, 'EGO visit cannot inherit guide Normal');
   x.box.egoVisit = false;
+
+  x.box.regionById.next.safe = true;
+  assert.equal(api.armNextNormal(goal, 'current', 'STORY'), false, 'safe narrative records do not receive Normal picker overrides');
+  x.box.regionById.next.safe = false;
 
   const stale = api.armNextNormal(goal, 'current', 'STORY');
   assert.ok(stale);

@@ -17,10 +17,11 @@ EXPECTED_CONTRACT = {
     "runtimeChange": "guide-owned next-story travel chooses Normal; readable guide Continue",
     "normalTravelScope": "one-use guide-issued open next-story portal only; existing story admission/guest guards retained",
     "sceneAdvance": {
-        "parts": ["pre", "post", "firstPost", "awakenPre", "prologue.pre", "prologue.post"],
+        "parts": ["pre", "post", "firstPost", "awakenPre", "prologue.pre", "prologue.post", "body"],
         "minimumDelayMs": 6000,
         "maximumDelayMs": 45000,
         "waitForNarration": True,
+        "safeBodyScope": "current unread safe-region narrative only; canonical key; journal/completed replay excluded",
     },
     "legacySave": "no schema change; transient token/timer are not serialized",
 }
