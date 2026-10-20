@@ -59,6 +59,25 @@ def extend_boss_bounds(html: str) -> str:
         "projectile bounds for the enclosed last301 maze")
 
 
+def fix_r76_html(html: str) -> str:
+    html = once(html,
+        'src="./dist/phase1.js?r75=1"',
+        'src="./dist/phase1.js?r76=1"',
+        "R76 renderer cache key")
+    html = once(html,
+        "const b=layout.bounds,s=Math.min(180/(b[2]-b[0]),180/(b[3]-b[1])),pos=a=>({x:(a.x-b[0])*s,y:(a.y-b[1])*s});",
+        "const b=layout.bounds,s=Math.min(180/(b[2]-b[0]),180/(b[3]-b[1])),pos=a=>({x:(a.x-b[0])*s,y:(a.y-b[1])*s}),core=layout.originalEncounterBounds||[0,0,28,28],coreX=(core[0]-b[0])*s,coreY=(core[1]-b[1])*s,coreW=(core[2]-core[0])*s,coreH=(core[3]-core[1])*s;",
+        "bounds-relative native core metadata")
+    html = once(html,
+        "else mini.fillRect(0,0,28*s,28*s);",
+        "else mini.fillRect(coreX,coreY,coreW,coreH);",
+        "bounds-relative minimap core floor")
+    return once(html,
+        "mini.drawImage(map.image,0,0,28*s,28*s);",
+        "mini.drawImage(map.image,coreX,coreY,coreW,coreH);",
+        "bounds-relative minimap source image")
+
+
 def once(source: str, old: str, new: str, label: str) -> str:
     count = source.count(old)
     if count != 1:
@@ -180,6 +199,7 @@ def build(site: Path) -> dict:
     html = edit_script(html, "thread-dances-r74", dances)
     html = edit_script(html, "golden-thread-r72", ui)
     html = extend_boss_bounds(html)
+    html = fix_r76_html(html)
     html_bytes = html.encode("utf-8")
     renderer_bytes = enclose_boss(optimize_blocked(baseline_renderer.decode("utf-8"))).encode("utf-8")
     renderer_sha = hashlib.sha256(renderer_bytes).hexdigest()
@@ -205,6 +225,8 @@ def build(site: Path) -> dict:
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
         "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "rendererCacheKey": "r76=1",
+        "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     manifest["fileCount"] = len(manifest["files"])
@@ -221,6 +243,8 @@ def build(site: Path) -> dict:
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
         "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "rendererCacheKey": "r76=1",
+        "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     try:

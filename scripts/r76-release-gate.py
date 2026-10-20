@@ -27,6 +27,8 @@ if not isinstance(EXPECTED, dict) or set(EXPECTED) != {"index.html", "dist/phase
     raise SystemExit("R76 approval must pin exactly the HTML and renderer")
 if not isinstance(APPROVAL.get("designSlots"), dict) or not isinstance(APPROVAL.get("equippedSlots"), dict):
     raise SystemExit("R76 progression approval is incomplete")
+if APPROVAL.get("rendererCacheKey") != "r76=1" or APPROVAL.get("minimapCore") != "originalEncounterBounds offset by expanded layout bounds":
+    raise SystemExit("R76 cache-key or minimap approval is incomplete")
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -56,6 +58,8 @@ if r76.get("designSlots") != APPROVAL["designSlots"] or r76.get("equippedSlots")
     fail("R76 progression limits differ from the approved candidate")
 if r76.get("bossLayout") != APPROVAL["bossLayout"]:
     fail("R76 boss layout differs from the approved candidate")
+if r76.get("rendererCacheKey") != APPROVAL["rendererCacheKey"] or r76.get("minimapCore") != APPROVAL["minimapCore"]:
+    fail("R76 renderer cache or minimap behavior differs from the approved candidate")
 if manifest.get("webHTMLSha256") != actual["index.html"]:
     fail("R76 web HTML hash in the manifest is stale")
 
@@ -105,6 +109,8 @@ manifest["releaseR76"] = {
     "designSlots": APPROVAL["designSlots"],
     "equippedSlots": APPROVAL["equippedSlots"],
     "bossLayout": APPROVAL["bossLayout"],
+    "rendererCacheKey": APPROVAL["rendererCacheKey"],
+    "minimapCore": APPROVAL["minimapCore"],
 }
 manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 manifest_sha = sha256(manifest_path)
