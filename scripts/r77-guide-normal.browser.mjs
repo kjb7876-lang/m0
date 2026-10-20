@@ -475,23 +475,61 @@ async function assistedBossPortalFixture() {
       regionById[row.next]?.safe !== true &&
       Object.values(row.def.exits || {}).includes(row.next)).at(-1);
     if (!chosen) throw Error('No canonical late boss map with authored post and next exit was found');
+    const debug = window.__r77AssistedFixture = {
+      phase: 'canonical-frontier-refresh',
+      error: null,
+      result: null,
+      target: chosen.id,
+      entry: null,
+      unlockCheck: null,
+      canonicalUnlockRefresh: false
+    };
     for (let i = 0; i < chosen.index; i++) progress.STORY[order[i]] = true;
-    if (firstPending('STORY')?.id !== chosen.id) {
-      throw Error('Synthetic prior canonical marks did not make the chosen boss map the actual STORY frontier');
+    serializeSave();
+    const isUnlocked = window.__STORYWORLD4__?.isUnlocked?.(chosen.id, 'STORY') === true;
+    const frontier = firstPending('STORY')?.id || null;
+    debug.canonicalUnlockRefresh = true;
+    debug.unlockCheck = {isUnlocked, frontier, expected: chosen.id};
+    if (!isUnlocked || frontier !== chosen.id) {
+      debug.error = 'Canonical unlock refresh did not expose the chosen map as the STORY frontier';
+      throw Error(debug.error + ': ' + JSON.stringify(debug.unlockCheck));
     }
-    const entered = await enterRegion(chosen.id, null, {
-      restore: true,
-      noStory: true,
-      layer: 'STORY',
-      difficultyR63: 'normal'
-    });
-    if (entered !== true || zone !== chosen.id || loading) throw Error('Native late-map fixture entry failed');
+    let entered;
+    try {
+      entered = await enterRegion(chosen.id, null, {
+        restore: true,
+        noStory: true,
+        layer: 'STORY',
+        difficultyR63: 'normal'
+      });
+    } catch (error) {
+      debug.phase = 'native-map-entry';
+      debug.error = 'Native late-map fixture entry threw';
+      debug.entry = {
+        result: 'throw',
+        message: String(error?.stack || error),
+        zone,
+        layer,
+        loading,
+        frontier: firstPending('STORY')?.id || null
+      };
+      throw Error(debug.error + ': ' + JSON.stringify(debug.entry));
+    }
+    debug.phase = 'native-map-entry';
+    debug.entry = {result: entered, zone, layer, loading, frontier: firstPending('STORY')?.id || null};
+    if (entered !== true || zone !== chosen.id || loading) {
+      debug.error = 'Native late-map fixture entry failed';
+      throw Error(debug.error + ': ' + JSON.stringify(debug.entry));
+    }
     return {
       target: chosen.id,
       index: chosen.index,
       orderLength: order.length,
       next: chosen.next,
       priorProgressMarks: chosen.index,
+      canonicalUnlockRefresh: debug.canonicalUnlockRefresh,
+      unlockCheck: debug.unlockCheck,
+      entry: debug.entry,
       tier: window.__STORYWORLD_CAMPAIGN_R63R1__.inspect().tier,
       enemyHPUntouched: true,
       enemiesKilled: false
@@ -502,7 +540,16 @@ async function assistedBossPortalFixture() {
   const opened = await page.evaluate(targetId => {
     const scenes = nextScenes(regionById[targetId], 'post').filter(scene => !readScenes.has(scene.key));
     if (!scenes.length) throw Error('Fixture target has no unread native post scene');
-    window.__r77AssistedFixture = {error: null, result: null, target: targetId};
+    const priorFixture = window.__r77AssistedFixture;
+    window.__r77AssistedFixture = {
+      error: null,
+      result: null,
+      target: targetId,
+      phase: 'native-post-queue',
+      canonicalUnlockRefresh: priorFixture?.canonicalUnlockRefresh === true,
+      unlockCheck: priorFixture?.unlockCheck || null,
+      entry: priorFixture?.entry || null
+    };
     playScenes(scenes, () => {
       try {
         completeRegion(targetId);
@@ -648,6 +695,9 @@ async function assistedBossPortalFixture() {
     guideOFFReenableSceneFixture: pauseResume,
     fixtureOnly: {
       syntheticPriorCanonicalProgress: fixture.priorProgressMarks,
+      canonicalUnlockRefresh: fixture.canonicalUnlockRefresh,
+      unlockCheck: fixture.unlockCheck,
+      entry: fixture.entry,
       nativeAuthoredPostAndCompleteCallback: true,
       portalPositionFixture: true,
       enemyHPChanges: false,
