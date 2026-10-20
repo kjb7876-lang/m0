@@ -36,9 +36,17 @@ R75_LAYOUT_ENTRY = 'function explorationLayout(id,theme="cave",safe=false,meta={
 
 R76_LAYOUT_ENTRY = '''function worldLayoutBossR76(base,id,theme,safe,meta={}){
  const core=baseExplorationLayoutR74(id,theme,safe,{...meta,worldR74:0,worldR75:0}),generic=worldLayoutR75(base,id,theme,safe,meta),layout=hospitalMazeLayout5(core),profile=StoryWorldProfilesR74.profiles[id],art=generic.surface?.art||REGIONAL_TERRAIN_ART[id];
- layout.surface={...layout.surface,art};layout.sourceExits=REGIONAL_ROUTE_DATA[id]?.exits||core.sourceExits||null;layout.type='r76-enclosed-boss-core';layout.voidCover={...generic.voidCover,theme:profile?.style||theme};
+ const r59Backdrop=art?.r59Backdrop?{...art.r59Backdrop,brightness:.68}:art?.r59Backdrop;
+ layout.surface={...layout.surface,art:{...art,...(r59Backdrop?{r59Backdrop}:{})}};layout.backdropRects=[{x:layout.bounds[0],y:layout.bounds[1],width:layout.bounds[2]-layout.bounds[0],depth:layout.bounds[3]-layout.bounds[1]}];layout.fogRects=[];
+ layout.sourceExits=REGIONAL_ROUTE_DATA[id]?.exits||core.sourceExits||null;layout.type='r76-enclosed-boss-core';layout.voidCover={...generic.voidCover,theme:profile?.style||theme};
  layout.worldR75={version:1,family:'encircled-boss-core',sourceTopology:profile?.sourceTopology||null};
- layout.worldR74={...generic.worldR74,doors:[],rooms:layout.nodes.map(n=>({id:n.id,x:n.x,y:n.y,width:5,depth:5,purpose:'보스 외곽 미로'})),wallCount:layout.walls.length,floorCount:layout.floorCells.length,nativeCorePreserved:true};
+ const cellKey=(x,y)=>x+':'+y,floor=new Set(layout.floorCells.map(([x,y])=>cellKey(x,y))),outer=layout.nodes.map(n=>({id:n.id,x:n.x,y:n.y})),coreId=outer.length,boss={id:coreId,x:15.5,y:15.5,radius:11,shape:'square',bossCoreR76:true};
+ const startCell=n=>{const x=Math.floor(n.x),y=Math.floor(n.y);if(floor.has(cellKey(x,y)))return cellKey(x,y);for(let r=1;r<=3;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++)if(floor.has(cellKey(x+dx,y+dy)))return cellKey(x+dx,y+dy);throw Error('R76 room anchor is not on the generated floor: '+n.id);};
+ const anchors=outer.map(startCell),distances=anchors.map(start=>{const d=new Map([[start,0]]),todo=[start];for(let i=0;i<todo.length;i++){const [x,y]=todo[i].split(':').map(Number),at=d.get(todo[i]);for(const [dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const next=cellKey(x+dx,y+dy);if(floor.has(next)&&!d.has(next)){d.set(next,at+1);todo.push(next);}}}return d;}),connected=new Set([11]),edges=[];
+ while(connected.size<outer.length){let best=null;for(const a of connected)for(let b=0;b<outer.length;b++)if(!connected.has(b)){const d=distances[a].get(anchors[b]);if(d!==undefined&&(!best||d<best.distance||d===best.distance&&(a<best.a||a===best.a&&b<best.b)))best={a,b,distance:d};}if(!best)throw Error('R76 outer maze rooms are disconnected');edges.push([best.a,best.b,3.4]);connected.add(best.b);}
+ const bossDoor={id:'door-0',x:34.5,y:34.5,width:.28,depth:3.4,axis:'x',reach:2.2,closed:true,edge:[coreId,5],r76BossDoor:true};edges.push([coreId,5,3.4]);layout.nodes=[...layout.nodes,boss];layout.edges=edges;layout.bossRoomNodeId=coreId;layout.bossDoorId=bossDoor.id;
+ const rooms=outer.map(n=>({id:n.id,x:n.x,y:n.y,width:5,depth:5,purpose:n.id===5?'보스 진입 회랑':'검은 바다 외곽 미로 '+(n.id+1)}));rooms.push({id:coreId,x:15.5,y:15.5,width:28,depth:28,purpose:'검은 바다 보스 전투실'});
+ layout.worldR74={...generic.worldR74,style:generic.worldR74?.style||profile?.style||'fallen-angel-black-sea',doors:[bossDoor],rooms,corridors:edges.map(([a,b,width])=>({from:a,to:b,width,kind:a===coreId||b===coreId?'boss-approach':'maze'})),wallCount:layout.walls.length,floorCount:layout.floorCells.length,nativeCorePreserved:true};
  layout.r76BossEnclosure=true;layout.mazeFirst=true;return layout;
 }
 function explorationLayout(id,theme="cave",safe=false,meta={}){const base=baseExplorationLayoutR74(id,theme,safe,meta);if(meta.worldR75!==1)return worldLayoutR74(base,id,theme,safe,meta);const coop=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(id==='last301'&&!safe&&(!coop||coop==='off'))return worldLayoutBossR76(base,id,theme,safe,meta);return worldLayoutR75(base,id,theme,safe,meta);}'''
@@ -57,6 +65,25 @@ def extend_boss_bounds(html: str) -> str:
         "min=zone==='ep1a08'&&room?.exploration?.starts;return!Number.isFinite(x)||!Number.isFinite(y)||x<(min?b[0]:0)||y<(min?b[1]:0)||x>b[2]||y>b[3];",
         "min=zone==='ep1a08'&&room?.exploration?.starts||zone==='last301'&&room?.exploration?.r76BossEnclosure;return!Number.isFinite(x)||!Number.isFinite(y)||x<(min?b[0]:0)||y<(min?b[1]:0)||x>b[2]||y>b[3];",
         "projectile bounds for the enclosed last301 maze")
+
+
+def fix_r76_html(html: str) -> str:
+    html = once(html,
+        'src="./dist/phase1.js?r75=1"',
+        'src="./dist/phase1.js?r76=1"',
+        "R76 renderer cache key")
+    html = once(html,
+        "const b=layout.bounds,s=Math.min(180/(b[2]-b[0]),180/(b[3]-b[1])),pos=a=>({x:(a.x-b[0])*s,y:(a.y-b[1])*s});",
+        "const b=layout.bounds,s=Math.min(180/(b[2]-b[0]),180/(b[3]-b[1])),pos=a=>({x:(a.x-b[0])*s,y:(a.y-b[1])*s}),core=layout.originalEncounterBounds||[0,0,28,28],coreX=(core[0]-b[0])*s,coreY=(core[1]-b[1])*s,coreW=(core[2]-core[0])*s,coreH=(core[3]-core[1])*s;",
+        "bounds-relative native core metadata")
+    html = once(html,
+        "else mini.fillRect(0,0,28*s,28*s);",
+        "else mini.fillRect(coreX,coreY,coreW,coreH);",
+        "bounds-relative minimap core floor")
+    return once(html,
+        "mini.drawImage(map.image,0,0,28*s,28*s);",
+        "mini.drawImage(map.image,coreX,coreY,coreW,coreH);",
+        "bounds-relative minimap source image")
 
 
 def once(source: str, old: str, new: str, label: str) -> str:
@@ -180,6 +207,7 @@ def build(site: Path) -> dict:
     html = edit_script(html, "thread-dances-r74", dances)
     html = edit_script(html, "golden-thread-r72", ui)
     html = extend_boss_bounds(html)
+    html = fix_r76_html(html)
     html_bytes = html.encode("utf-8")
     renderer_bytes = enclose_boss(optimize_blocked(baseline_renderer.decode("utf-8"))).encode("utf-8")
     renderer_sha = hashlib.sha256(renderer_bytes).hexdigest()
@@ -204,7 +232,9 @@ def build(site: Path) -> dict:
         "rendererSha256": renderer_sha,
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
-        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "bossLayout": "last301 native boss room is part of the connected regional maze with an interactive approach door and brighter regional landscape; original exits retained",
+        "rendererCacheKey": "r76=1",
+        "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     manifest["fileCount"] = len(manifest["files"])
@@ -220,7 +250,9 @@ def build(site: Path) -> dict:
         "manifestSHA256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
-        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "bossLayout": "last301 native boss room is part of the connected regional maze with an interactive approach door and brighter regional landscape; original exits retained",
+        "rendererCacheKey": "r76=1",
+        "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
         "runtimeChange": "collision-equivalent axis-distance early rejects and indexed wall scan",
     }
     try:

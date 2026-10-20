@@ -52,9 +52,9 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
     approval = {
         "schema": "storyworld.r76-runtime-approval/v1",
         "candidateSource": {
-            "pullRequest": 17,
-            "headSha": "0686105cc595319344d74eb3a6960a42049160f5",
-            "workflowRunId": 39371756571,
+            "pullRequest": 19,
+            "headSha": "4499d479d3e18871e38fe69d6e8b21d62cfbef17",
+            "workflowRunId": None,
         },
         "baselineR75": baseline,
         "approvedR76": {
@@ -63,7 +63,9 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
         },
         "designSlots": {"goldenBase": 7, "pointsPerSlot": 1, "maximum": 12, "silverFixed": 7},
         "equippedSlots": {"base": 1, "maximum": 3, "unlockCost": 7},
-        "bossLayout": "last301 native boss core enclosed by a surrounding maze; original region art and exits retained",
+        "bossLayout": "last301 native boss room is part of the connected regional maze with an interactive approach door and brighter regional landscape; original exits retained",
+        "rendererCacheKey": "r76=1",
+        "minimapCore": "originalEncounterBounds offset by expanded layout bounds",
     }
     (scripts / "r76-approved-runtime.json").write_text(json.dumps(approval), encoding="utf-8")
     (docs / "index.html").write_bytes(html)
@@ -94,6 +96,8 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
             "designSlots": approval["designSlots"],
             "equippedSlots": approval["equippedSlots"],
             "bossLayout": approval["bossLayout"],
+            "rendererCacheKey": approval["rendererCacheKey"],
+            "minimapCore": approval["minimapCore"],
         },
     }
     (docs / "web-manifest-r62.json").write_text(json.dumps(manifest), encoding="utf-8")
@@ -109,6 +113,8 @@ with tempfile.TemporaryDirectory(prefix="r76-release-gate-") as temporary:
     stamped = json.loads((docs / "web-manifest-r62.json").read_text(encoding="utf-8"))
     assert stamped["releaseR76"]["sourceCommit"] == "fixture-source-commit"
     assert stamped["releaseR76"]["candidateSource"] == approval["candidateSource"]
+    assert stamped["releaseR76"]["rendererCacheKey"] == approval["rendererCacheKey"]
+    assert stamped["releaseR76"]["minimapCore"] == approval["minimapCore"]
     assert values["manifest_sha"] == digest((docs / "web-manifest-r62.json").read_bytes())
 
     (docs / "dist" / "phase1.js").write_bytes(b"modified-runtime")
