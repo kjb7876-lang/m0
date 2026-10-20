@@ -59,7 +59,7 @@ async function ready(page) {
     null,
     {timeout: 90000},
   );
-  for (let index = 0; index < 100 && await page.locator('#storyNext').count(); index++) {
+  for (let index = 0; index < 100 && await page.evaluate(() => !!storyScene); index++) {
     await page.locator('#storyNext').click();
     await page.waitForTimeout(20);
   }
