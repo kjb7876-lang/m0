@@ -2,12 +2,12 @@
   "scriptSHA256": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53",
   "filter": null,
   "schema": "m0.hospital.cpu-simulation/v1",
-  "commit": "bcc25e6b7be87212afa6113be1a4d77a60f2309f",
+  "commit": "e5b97cefd0162d78ad49cbed3f0785ded6b474c3",
   "htmlSHA256": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
   "rendererSHA256": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
   "node": "v24.19.0",
   "platform": "linux",
-  "startedAt": "2026-10-21T03:41:12.769Z",
+  "startedAt": "2026-10-21T03:55:22.601Z",
   "method": "CPU Node VM, real compiled layout/collision/path and extracted native progression/restore functions plus real modular route/slot/door/hospital wrappers. Assisted state fixtures; no browser, DOM rendering, GPU, touch or natural game completion.",
   "substitutions": [
     "DOM/panels/buttons: inert objects and handler Map",
@@ -25,7 +25,7 @@
     {
       "name": "seed index coverage/determinism across 4096 seeds and uint32 boundaries",
       "ok": true,
-      "ms": 1.5691830000000095,
+      "ms": 1.529313000000002,
       "detail": {
         "seedNamespace": "hospitalSeed5; NOT seedR73",
         "seedCount": 4101,
@@ -62,7 +62,7 @@
     {
       "name": "all authored hospital starts to objective and reverse via exact analytic collision/path",
       "ok": true,
-      "ms": 26299.914508,
+      "ms": 26445.892764999997,
       "detail": {
         "rows": [
           {
@@ -99,7 +99,7 @@
     {
       "name": "hospital entry seed selection/save namespace roundtrip for all 3 index classes",
       "ok": true,
-      "ms": 47176.050535999995,
+      "ms": 45993.241637,
       "detail": {
         "rows": [
           {
@@ -164,7 +164,7 @@
     {
       "name": "native summon placement around objective retains safe paths and potential retreat",
       "ok": true,
-      "ms": 76.84452300000703,
+      "ms": 82.50856000000203,
       "detail": {
         "rows": [
           {
@@ -446,7 +446,7 @@
     {
       "name": "native ordinary waves block summon; assisted kills advance wave and native midboss transitions",
       "ok": true,
-      "ms": 8162.810415,
+      "ms": 8051.216691000009,
       "detail": {
         "forcedDeaths": true,
         "nativeClockBranches": true,
@@ -487,7 +487,7 @@
     {
       "name": "STORY/DREAM stages and native core restore preserve partial HP/dead IDs without crossing layers",
       "ok": true,
-      "ms": 4230.052490000002,
+      "ms": 3948.999569000007,
       "detail": {
         "restoredMidHp": 4266.1,
         "deadIdCount": 12,
@@ -497,7 +497,7 @@
     {
       "name": "native post checkpoint reload then acknowledgement completes exactly once",
       "ok": true,
-      "ms": 8433.10801499999,
+      "ms": 8340.30974299999,
       "detail": {
         "scope": "native checkpoint/resume code with in-memory scene UI, fixture outer validator"
       }
@@ -505,7 +505,7 @@
     {
       "name": "native R72 portal admission/next/previous roundtrip and guest/battle denial",
       "ok": true,
-      "ms": 12599.32865000001,
+      "ms": 12355.511790999997,
       "detail": {
         "farRequestDenied": true,
         "walkNext": {
@@ -535,7 +535,7 @@
     {
       "name": "actual native hostile damage admits active a08 actors and rejects hidden; staff protection unresolved",
       "ok": true,
-      "ms": 11.12076099999831,
+      "ms": 11.112046999987797,
       "detail": {
         "results": [
           {
@@ -570,7 +570,7 @@
     {
       "name": "three normal slots isolate hospital STORY/DREAM and preserve legacy bytes",
       "ok": true,
-      "ms": 12610.710554000005,
+      "ms": 12260.486208000002,
       "detail": {
         "slotLayers": [
           "STORY",
@@ -585,7 +585,7 @@
     {
       "name": "generated R74/R75 doors stay in ID0..2 for inspected hospital-associated maps; actual door module restore/refusal",
       "ok": true,
-      "ms": 2074.878740999993,
+      "ms": 2008.913228999998,
       "detail": {
         "generatedDoorCounts": {
           "ep1a09": 3,
@@ -600,7 +600,7 @@
     {
       "name": "hospital hidden/summoning/active/bossReady/post/complete snapshot matrix",
       "ok": true,
-      "ms": 30007.792615000013,
+      "ms": 30270.417896,
       "detail": {
         "rows": [
           {
@@ -653,7 +653,7 @@
     {
       "name": "hospital save slot rejects synthetic invalid door metadata without overwriting legacy or rejected slot",
       "ok": true,
-      "ms": 4289.130799999984,
+      "ms": 4154.122605000011,
       "detail": {
         "legacyPreserved": true,
         "rejectedSlotPreserved": true,
@@ -665,7 +665,7 @@
     {
       "name": "all eight generated three-door states preserve objective route after reload/reentry and layer separation",
       "ok": true,
-      "ms": 5785.229309000017,
+      "ms": 5827.624530000001,
       "detail": {
         "rows": [
           {
@@ -735,7 +735,7 @@
     {
       "name": "hospital post manual save is blocked by actual slot readiness guard",
       "ok": true,
-      "ms": 8126.715272000001,
+      "ms": 7887.053679000004,
       "detail": {
         "manualMidSceneSaveBlocked": true,
         "internalSnapshotIsNotManualSlotSave": true,
@@ -745,7 +745,7 @@
     {
       "name": "B1 scope: all other canonical region layouts retain baseline bytes",
       "ok": true,
-      "ms": 72703.77521899997,
+      "ms": 74498.49493799999,
       "detail": {
         "regionCount": 63,
         "ids": [
@@ -820,7 +820,7 @@
     {
       "name": "B1 additive collision preserves sampled old positions, native walls and all anchors",
       "ok": true,
-      "ms": 539.4518320000207,
+      "ms": 538.7813170000154,
       "detail": {
         "sampled": 21025,
         "oldFree": 5936,
@@ -835,7 +835,7 @@
     {
       "name": "B1 ward branches rejoin the native approach with two statically walkable alternatives",
       "ok": true,
-      "ms": 15795.278511000011,
+      "ms": 16324.710543000023,
       "detail": {
         "routes": [
           {
@@ -924,7 +924,7 @@
     {
       "name": "B1 old and new ward positions reload and keep objective routes in both layers",
       "ok": true,
-      "ms": 26166.992834000033,
+      "ms": 28400.381437000004,
       "detail": {
         "rows": [
           {
@@ -1095,7 +1095,7 @@
     {
       "name": "B1 floor polygons, boundary junctions and existing door registration agree without GPU",
       "ok": true,
-      "ms": 6.333443999988958,
+      "ms": 9.032422000018414,
       "detail": {
         "polygonCentroidsChecked": 34,
         "boundariesChecked": 57,
@@ -1124,7 +1124,7 @@
     {
       "name": "B1 merged floor exactly matches sampled baseline plus authored additions",
       "ok": true,
-      "ms": 57.32088199997088,
+      "ms": 57.643987000046764,
       "detail": {
         "probes": 47524,
         "method": "non-boundary grid samples: actual clipped polygon union compared with exact baseline analytic domain union authored room/corridor rectangles; boundary contacts are tested separately",
@@ -1134,7 +1134,7 @@
     {
       "name": "B1 co-op host/guest preserve the published hospital layout; solo prototype only",
       "ok": true,
-      "ms": 81.59940299997106,
+      "ms": 85.83385799999814,
       "detail": {
         "rows": [
           {
@@ -1154,7 +1154,7 @@
     {
       "name": "mode regression counterfactual: prior real connection reuses solo layout in host/guest",
       "ok": true,
-      "ms": 64.69623300002422,
+      "ms": 67.76965400000336,
       "detail": {
         "rows": [
           {
@@ -1173,7 +1173,7 @@
     {
       "name": "mode cache/get/attach warm repeated off-host-off and off-guest-off rebind and reuse native safe arrival",
       "ok": true,
-      "ms": 16106.224966000009,
+      "ms": 16756.775864999974,
       "detail": {
         "rows": [
           {
@@ -1299,7 +1299,7 @@
     {
       "name": "mode native restore attaches current layout and preserves safe save positions across roles and layers",
       "ok": true,
-      "ms": 25548.174600999977,
+      "ms": 27239.695224000025,
       "detail": {
         "rows": [
           {
@@ -1431,7 +1431,7 @@
     {
       "name": "visual plan scope and structure/projection/door/legacy stay locked; HTML only adds test storage/cache",
       "ok": true,
-      "ms": 82.57464300002903,
+      "ms": 79.01169199997094,
       "detail": {
         "HTMLByteEqual": false,
         "HTMLMatchesAfterOnlyTestStorageAndCacheWiring": true,
@@ -1444,7 +1444,7 @@
     {
       "name": "visual actual Three CPU meshes reuse wall texture/mask at wall texel density without floor props",
       "ok": true,
-      "ms": 8.901656000001822,
+      "ms": 10.925967999966815,
       "detail": {
         "rows": [
           {
@@ -1495,7 +1495,7 @@
     {
       "name": "visual palette/material/marker lifecycle restores host and other-region state with bounded resources",
       "ok": true,
-      "ms": 3.349136999982875,
+      "ms": 3.509141999995336,
       "detail": {
         "actualThreeRevision": "186",
         "hostRestoresOriginalColors": true,
@@ -1513,7 +1513,7 @@
     {
       "name": "visual proposed material role contrast is numeric only and original asset bytes remain preserved",
       "ok": true,
-      "ms": 12.166265000007115,
+      "ms": 9.433655000000726,
       "detail": {
         "floorWallMaterialTintRatio": 2.1390159987964976,
         "floorBackgroundMaterialTintRatio": 3.95001972980585,
@@ -1657,7 +1657,7 @@
   "candidateSourceDiffSHA256": "bf26e59ef362884e3130e10d132f79ac34d4fd67d08cd071eb4cb95ffb2f2801",
   "buildEvidence": {
     "reviewedSpatialSourceCommit": "c893f1f5172a33387c01241b4935d42d798ecbd8",
-    "buildSourceCommit": "bcc25e6b7be87212afa6113be1a4d77a60f2309f",
+    "buildSourceCommit": "e5b97cefd0162d78ad49cbed3f0785ded6b474c3",
     "ciSourceCommit": null,
     "sourceTreeDirty": false,
     "baselineCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
@@ -1677,7 +1677,7 @@
     "originalSaveImported": false,
     "GPUVerified": false,
     "approval": "pending final B review",
-    "manifestSHA256": "411ff6db94af2fb7ff2e05e1cfa3e6dfa44068595959f8db01bc0f3ea5d136dc",
+    "manifestSHA256": "9791b74df240de961cce51d6ecb66cdee9ee09a835d3a23cd25282830a942a6b",
     "output": "/workspace/m0-work/out/hospital-b1-clean-candidate/out/hospital-b1/build-connected/site",
     "sourceFiles": {
       "scripts/build-hospital-b1.py": "40465d2de3b72234552b3fe3aca50057cd85999e4d52b2711f0e4d0317c41eaf",
@@ -1744,7 +1744,7 @@
     "originalTexturesReused": true,
     "GPUVerified": false
   },
-  "finishedAt": "2026-10-21T03:46:40.039Z",
+  "finishedAt": "2026-10-21T04:00:54.516Z",
   "passed": 29,
   "failed": 0,
   "ok": true,

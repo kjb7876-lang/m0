@@ -6,7 +6,7 @@
       "ok": true
     },
     {
-      "name": "review-required record refuses actual release",
+      "name": "explicit review-required fixture refuses release regardless of production status",
       "ok": true
     },
     {
@@ -38,6 +38,10 @@
       "ok": true
     },
     {
+      "name": "negative fixture copied from approved input refuses without changing approved source",
+      "ok": true
+    },
+    {
       "name": "a different PR cannot reuse source approval",
       "ok": true
     },
@@ -58,7 +62,7 @@
       "ok": true
     }
   ],
-  "passed": 14,
+  "passed": 15,
   "failed": 0,
   "approvedDataOnlyInDisposableFixtures": true,
   "productionApprovalStatus": "review-required",

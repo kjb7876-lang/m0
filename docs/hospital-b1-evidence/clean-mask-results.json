@@ -1,6 +1,6 @@
 {
   "schema": "m0.mask-resource-audit/v1",
-  "startedAt": "2026-10-21T03:46:40.191Z",
+  "startedAt": "2026-10-21T04:00:54.678Z",
   "node": "v24.19.0",
   "three": "186",
   "rendererSHA256": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
@@ -28,7 +28,7 @@
     {
       "name": "mask: pre-masked source clone and repeated same-state attach remain single",
       "ok": true,
-      "ms": 2.292518000000001,
+      "ms": 3.029533999999998,
       "detail": {
         "counts": {
           "vertexVarying": 1,
@@ -47,7 +47,7 @@
     {
       "name": "mask: actual updateSight24 preserves state/uniform identity across ordinary mask updates",
       "ok": true,
-      "ms": 0.6460380000000043,
+      "ms": 0.6151559999999989,
       "detail": {
         "stateReplaced": false,
         "uniformReferencesRetained": true,
@@ -65,7 +65,7 @@
     {
       "name": "control: generic non-opted-in forced-state path stays unchanged outside hospital fix",
       "ok": true,
-      "ms": 0.6401090000000096,
+      "ms": 0.8023130000000123,
       "detail": {
         "counts": {
           "vertexVarying": 2,
@@ -82,7 +82,7 @@
     {
       "name": "mask FIX: native tone then same-scene option OFF/ON keeps one marker mask and tone",
       "ok": true,
-      "ms": 3.0672099999999887,
+      "ms": 3.1964009999999945,
       "detail": {
         "counts": {
           "vertexVarying": 1,
@@ -100,7 +100,7 @@
     {
       "name": "resources: helper-first release preserves shared textures then native clear/dispose owns them once",
       "ok": true,
-      "ms": 1.0543859999999938,
+      "ms": 1.2900319999999965,
       "detail": {
         "events": {
           "asset-texture:71:cache-owned-original": 1,
@@ -147,7 +147,7 @@
     {
       "name": "resources: native scene-first clear releases marker objects once; fresh state/materials remain single",
       "ok": true,
-      "ms": 1.8754569999999973,
+      "ms": 2.0176900000000018,
       "detail": {
         "events": {
           "asset-texture:93:cache-owned-original": 1,
@@ -223,7 +223,7 @@
     {
       "name": "resources: actual renderer dispose is idempotent and post-dispose helper cleanup does not double-dispose",
       "ok": true,
-      "ms": 1.2151790000000062,
+      "ms": 1.1555549999999926,
       "detail": {
         "events": {
           "asset-texture:136:cache-owned-original": 1,
@@ -271,7 +271,7 @@
     {
       "name": "resources: repeated options/region/host/guest cycles retain no marker instances or shared-texture disposal",
       "ok": true,
-      "ms": 3.986340999999996,
+      "ms": 4.189838000000009,
       "detail": {
         "events": {
           "asset-texture:158:cache-owned-original": 1,
@@ -367,7 +367,7 @@
     {
       "name": "mask FIX: opted hospital source/clone current states rebind existing shaders independently",
       "ok": true,
-      "ms": 0.9799730000000011,
+      "ms": 1.099649999999997,
       "detail": {
         "sourceAndCloneBindingsIndependent": true,
         "preExistingShaderUniformsRebound": true,
@@ -386,7 +386,7 @@
     {
       "name": "mask FIX: original callback effects and R75 tone uniform survive clone/state replacement",
       "ok": true,
-      "ms": 0.8799009999999896,
+      "ms": 1.209116999999992,
       "detail": {
         "counts": {
           "vertexVarying": 1,
@@ -416,7 +416,7 @@
       }
     }
   ],
-  "finishedAt": "2026-10-21T03:46:40.210Z",
+  "finishedAt": "2026-10-21T04:00:54.700Z",
   "passed": 10,
   "failed": 0,
   "protectedAfter": {

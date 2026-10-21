@@ -1,5 +1,8 @@
 # Hospital B1: clean replay for independent review
 
+Historical bcc25e6/297e446 evidence. The later approval-independent test fix and
+new canonical execution are documented in [hospital-b1-fixture-fix-review.md](hospital-b1-fixture-fix-review.md).
+
 Execution source: `bcc25e6b7be87212afa6113be1a4d77a60f2309f`.
 Tree: `ac7df847be0c39afafe4bbdbdf87d85a4019ecd6`.
 The evidence-only successor commit adds these records; it does not change the

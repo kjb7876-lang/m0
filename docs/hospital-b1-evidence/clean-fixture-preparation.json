@@ -1,6 +1,6 @@
 {
   "method": "generated fixtures from exact R77; no old result JSON consumed",
-  "sourceCommit": "bcc25e6b7be87212afa6113be1a4d77a60f2309f",
+  "sourceCommit": "e5b97cefd0162d78ad49cbed3f0785ded6b474c3",
   "sixFilePatchSHA256": "bf26e59ef362884e3130e10d132f79ac34d4fd67d08cd071eb4cb95ffb2f2801",
   "finalHTMLSHA256": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
   "rendererSHA256": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
