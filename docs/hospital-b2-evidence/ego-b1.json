@@ -1,0 +1,1099 @@
+{
+  "htmlPath": "out/hospital-b1/build-connected/site/index.html",
+  "htmlSHA256": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+  "started": "2026-10-21T09:16:03.663Z",
+  "snapshots": [
+    {
+      "restored": {
+        "stage": "field",
+        "player": {
+          "x": 18,
+          "y": 18.5,
+          "hp": 777
+        },
+        "visit": true,
+        "actors": [
+          {
+            "id": "ep1a08:a08-o1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 4,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 6,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w1-r1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 10,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w1-r2",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 12,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 16.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-2",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 18.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1-w2-3",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2-w2-4",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-r1",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 22.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-r2",
+            "hp": 208.164,
+            "maxHp": 208.164,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 24.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:mb-ep1a08",
+            "hp": 6085.5599999999995,
+            "maxHp": 6085.5599999999995,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 17.64044943820225,
+            "y": 16.000000000000004,
+            "blocked": false
+          }
+        ]
+      },
+      "firstTick": {
+        "stage": "field",
+        "player": {
+          "x": 18,
+          "y": 18.5,
+          "hp": 777
+        },
+        "visit": true,
+        "actors": [
+          {
+            "id": "ep1a08:a08-o1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 4,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 6,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w1-r1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 10,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w1-r2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 12,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 16.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 18.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1-w2-3",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2-w2-4",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-r1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 22.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-r2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 24.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:mb-ep1a08",
+            "hp": 33984,
+            "maxHp": 33984,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 17.64044943820225,
+            "y": 16.000000000000004,
+            "blocked": false
+          }
+        ]
+      }
+    },
+    {
+      "restored": {
+        "stage": "field",
+        "player": {
+          "x": 18,
+          "y": 18.5,
+          "hp": 777
+        },
+        "visit": true,
+        "actors": [
+          {
+            "id": "ep1a08:a08-o1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 4,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 6,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w1-r1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 10,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w1-r2",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 12,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 16.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-2",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 18.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1-w2-3",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2-w2-4",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-r1",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 22.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-r2",
+            "hp": 593.4499999999999,
+            "maxHp": 593.4499999999999,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 24.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:mb-ep1a08",
+            "hp": 14385.56,
+            "maxHp": 14385.56,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 17.64044943820225,
+            "y": 16.000000000000004,
+            "blocked": false
+          }
+        ]
+      },
+      "firstTick": {
+        "stage": "field",
+        "player": {
+          "x": 18,
+          "y": 18.5,
+          "hp": 777
+        },
+        "visit": true,
+        "actors": [
+          {
+            "id": "ep1a08:a08-o1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 4,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 6,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 1.420001,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 8,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w1-r1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 10,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w1-r2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "active",
+            "x": 28.579999,
+            "y": 12,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 16.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 18.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-c1-w2-3",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 1.420001,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o2-w2-4",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 20.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-o1-w2-r1",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 22.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:a08-s1-w2-r2",
+            "hp": 1430,
+            "maxHp": 1430,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 28.579999,
+            "y": 24.5,
+            "blocked": false
+          },
+          {
+            "id": "ep1a08:mb-ep1a08",
+            "hp": 33984,
+            "maxHp": 33984,
+            "dead": false,
+            "spawn": "hidden",
+            "x": 17.64044943820225,
+            "y": 16.000000000000004,
+            "blocked": false
+          }
+        ]
+      }
+    }
+  ],
+  "finished": "2026-10-21T09:16:40.840Z",
+  "moduleOrder": [
+    {
+      "id": "hospital-b1-test-storage",
+      "line": 126,
+      "sha256": "8dd0d030c4eca97c995f96f03058d73836df1f4072f6f592f47180f059a62070"
+    },
+    {
+      "id": "inline-2",
+      "line": 144,
+      "sha256": "9e3c08c71aa58c0a14a843d010467aa6449fb4ac27839dfaecc3f16acea1c37a"
+    },
+    {
+      "id": "inline-3",
+      "line": 147,
+      "sha256": "8fb00a8a659930ac9d78b4b2247baa4ba7b9836d79b1634586fb26d7bc54ee70"
+    },
+    {
+      "id": "rc151-orientation-refresh",
+      "line": 5101,
+      "sha256": "36fa1eff15713aab1ec124ef61398d9922d0fa730494b13c81f33d69bc93a963"
+    },
+    {
+      "id": "rc154-footprint",
+      "line": 5104,
+      "sha256": "9c37952ff442a07c5d88b538b62d7006a3d02a0780cad5820d340849bcf867bd"
+    },
+    {
+      "id": "rc151-ego-extension",
+      "line": 5138,
+      "sha256": "d1154eae01188b2dccd124e86a572e87b7dd080e19deae1e3eda4c884fdde6b4"
+    },
+    {
+      "id": "inline-7",
+      "line": 5346,
+      "sha256": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d"
+    },
+    {
+      "id": "hospital-focus-r13",
+      "line": 5347,
+      "sha256": "1d5f36d34fb43d67c4b848aa76659e92edadcaa65d81b64814476549b00187d4"
+    },
+    {
+      "id": "phase1-original-adapter",
+      "line": 5364,
+      "sha256": "b1fd1b3860058faee5b63468616846c04d8940caa212f52de267e13be9075102"
+    },
+    {
+      "id": "hospital-zones-r13",
+      "line": 6454,
+      "sha256": "d7148735361cea1435d5610180bbab26b6880054d9725659d59f097d06523c62"
+    },
+    {
+      "id": "combat-presentation-r7",
+      "line": 6466,
+      "sha256": "5764f6a33ba9ea5adb9d338d0c2462d94262644b6432453ea89e5559b0124d5e"
+    },
+    {
+      "id": "hospital-combat-read-r13",
+      "line": 6516,
+      "sha256": "6705f57fab6930d1b2b7f0c895ae31b71505062b9ae698340b0b1b0e042c4496"
+    },
+    {
+      "id": "hospital-tool-actions-r19",
+      "line": 6532,
+      "sha256": "f1731712e4af37edd4602ac0a1684f91ea5c1426ca642783881fef0d15ec7a34"
+    },
+    {
+      "id": "hospital-boss-presence-r14",
+      "line": 6552,
+      "sha256": "77b714d5ec67692436d03ce2ea522cefd6269fab2732f7a1eb33d89638d5e8da"
+    },
+    {
+      "id": "hospital-medical-r20",
+      "line": 6569,
+      "sha256": "4b9f88d1f36fd27ae53684d7eb06c4181cb9266285a45697f3f2159764097775"
+    },
+    {
+      "id": "r22-targetless-basic-bookkeeping",
+      "line": 6656,
+      "sha256": "aae17298ffd330218fb454629d66336ce6c20e42c6f8ce33bbc6ae721abc91e2"
+    },
+    {
+      "id": "r24-sight-and-readonly-enemy-state",
+      "line": 6660,
+      "sha256": "d2db4b428a9bff5f8dfe8e6e62f471eb0801ef33fe800522b453609349d88af1"
+    },
+    {
+      "id": "r25-original-door-register",
+      "line": 6740,
+      "sha256": "0202534e0f26ecec99eb27961bd268fd6bb2d8de9c7bbae64e10d300c37ef359"
+    },
+    {
+      "id": "r26-noncumulative-combat-balance",
+      "line": 6760,
+      "sha256": "fc617ecbe9c0be909b859f9c8c25d3974cdc826d18a3836da492501a924d1321"
+    },
+    {
+      "id": "r27-capacity-tracking-readonly-draw-contact",
+      "line": 6771,
+      "sha256": "36f6007a37a206b254b69fd3de91a12f96cd68fcb9afc5cd0f0f80cb6c683341"
+    },
+    {
+      "id": "presentation-audio-r35",
+      "line": 6834,
+      "sha256": "54fcb8baf4a7fd19d7c248fdef80852a840d4bac4ed6987ec994b03d4a8932f4"
+    },
+    {
+      "id": "visual-polish-r38",
+      "line": 6945,
+      "sha256": "903378cc84c53b5c08fcdd81ecff9c36f998d03c5fe4218355ce39f9ab6b5ced"
+    },
+    {
+      "id": "visual-polish-r38",
+      "line": 6978,
+      "sha256": "903378cc84c53b5c08fcdd81ecff9c36f998d03c5fe4218355ce39f9ab6b5ced"
+    },
+    {
+      "id": "visual-polish-r39",
+      "line": 7011,
+      "sha256": "b88708cdd91c5aeeb279f6fac531805cb900a1ac3d9c13dfd89f4271536c0da4"
+    },
+    {
+      "id": "visual-polish-r41",
+      "line": 7077,
+      "sha256": "9011318fcceea5e3a9012bef76602373245d0fc92eb33b57e3e75f2c538db404"
+    },
+    {
+      "id": "visual-polish-r42",
+      "line": 7291,
+      "sha256": "4c26065ddb5c853f660786c84cbfe751661b78b756a2fab5337800f3b743f617"
+    },
+    {
+      "id": "visual-polish-r43",
+      "line": 7365,
+      "sha256": "2d7190f7349be7a5d6891988ea3b4134c95feaafc2ad5d15a06907b0e9bafe29"
+    },
+    {
+      "id": "visual-polish-r44",
+      "line": 7452,
+      "sha256": "5d294c1a8a356515a3d7a461a868765323f09286daaee88de690032301eb2513"
+    },
+    {
+      "id": "visual-polish-r45",
+      "line": 7572,
+      "sha256": "61ee722929bc3a63a8ed48cfb4fae02484478a4b3126ef8b9007aa4a4692e053"
+    },
+    {
+      "id": "visual-polish-r46",
+      "line": 7623,
+      "sha256": "c3fe39005c5112f3aa58a7162749497756ca39a9c6f9f39a234b88e722deaf97"
+    },
+    {
+      "id": "visual-polish-r47",
+      "line": 7663,
+      "sha256": "668bef6100ad8df07e19ed49c3da108fff3892747cf0f31a8dfffd32505fca70"
+    },
+    {
+      "id": "visual-polish-r48",
+      "line": 7720,
+      "sha256": "d50ff3abe9644fae5d9655382b12dd4956a51097150de8a16cb9229efd1fa80e"
+    },
+    {
+      "id": "medical-impact-r49",
+      "line": 7831,
+      "sha256": "10c8896a80e6aeb36c5a35bd08337ec74ab4b2d6bf0c56fcf193dedfe1da8eff"
+    },
+    {
+      "id": "hando-final-r49",
+      "line": 7894,
+      "sha256": "63bd8cd5ec1a5b880b40dc38a048f4c98cf2ab561a30ac9f4f56701fae404787"
+    },
+    {
+      "id": "medical-combat-r49",
+      "line": 7995,
+      "sha256": "6bb02850c2976d0c52c59528a49cf6ba05701f076f065dc95548e550a698311b"
+    },
+    {
+      "id": "hospital-spawn-r50",
+      "line": 8040,
+      "sha256": "4834bb5fe83bd3606eab7bf1de92e92a9e2d7300726c1538f5fe79bf3409c5bc"
+    },
+    {
+      "id": "combat-hud-r51",
+      "line": 8088,
+      "sha256": "9670b98e87330e81a1e2f6b87aa59df2df7698c6aa17dcc1ea236708a6a7c03b"
+    },
+    {
+      "id": "orderly-atlas-r51",
+      "line": 8126,
+      "sha256": "eca47bb3d62eeac76bf716a0d4baf6c9716e1ddad825b629a0e630a16fcdd8c0"
+    },
+    {
+      "id": "enemy-motion-r51",
+      "line": 8130,
+      "sha256": "98294c803da4dbe4d7e7e79239163e1a65ab7a8cdd92f6b9de4c5a511511c549"
+    },
+    {
+      "id": "readability-r51",
+      "line": 8192,
+      "sha256": "e9093cac23994cc4d9fea2775fe40f70ee37b28017a3ca3b83e00f9b56309446"
+    },
+    {
+      "id": "hospital-navigation-r52",
+      "line": 8214,
+      "sha256": "aa3f54488678d1b30e448bbb26c9842fd7adefa7bed93614c3954363f178e2b9"
+    },
+    {
+      "id": "blood-health-r52",
+      "line": 8288,
+      "sha256": "ddabcffdda631a82643e43ad6621dc33cb37e2e5fba3396f8af6bc0775c1b387"
+    },
+    {
+      "id": "hospital-charge-r52",
+      "line": 8422,
+      "sha256": "0f4d24b33fd686ceaaa5a44c8ede353836eb3eab02a4b35b54cebb1bd09b05b8"
+    },
+    {
+      "id": "ranged-atlas-r52",
+      "line": 8499,
+      "sha256": "12e997ca29507a15ede18dae07f1f76de82e7372b8fe3d4ff7d0b3742ede3279"
+    },
+    {
+      "id": "hospital-ranged-r52",
+      "line": 8503,
+      "sha256": "849ae9be4fea1540ee7ddc3fb02a9992d05613dcebb58f6e49144a4b9b299298"
+    },
+    {
+      "id": "hospital-wounds-r53",
+      "line": 8546,
+      "sha256": "db5506b052cc18902c8c9779fd70cfe67dec5c35f3e8ca63c22b4fa28b237987"
+    },
+    {
+      "id": "boss-atlas-r53",
+      "line": 8656,
+      "sha256": "d9a90dcdcedd20f3917bfeb9d4788433727908fad70c46e8bed7b00fc1d56ad0"
+    },
+    {
+      "id": "hospital-layout-hud-r53",
+      "line": 8660,
+      "sha256": "f91d5ca1716e51757ce94be38667f8ac82fb9d9e31b006e90c67f51f22ff47e7"
+    },
+    {
+      "id": "ranged-back-atlas-r53",
+      "line": 8749,
+      "sha256": "58011d7f2ff1d3799e5064e38133266d38d8f7b2078d8a5022ed5f803cdd3962"
+    },
+    {
+      "id": "hospital-motion-r53",
+      "line": 8753,
+      "sha256": "66f1ab97c9c2c31fadad7808b2143872a20559e9f57ff6ec4a3e025b8fef7fc0"
+    },
+    {
+      "id": "hospital-boss-r53",
+      "line": 8870,
+      "sha256": "6db73ed58641a5c4f45149ff5b66dd9e8a28ab43c5abdd600d81bdb7daa8a8ff"
+    },
+    {
+      "id": "combat-focus-r54",
+      "line": 8953,
+      "sha256": "34b3761abcedd21ff2218d78df76d2e043b8fefe9fee50e400dd0d9fbcc3bf05"
+    },
+    {
+      "id": "hospital-pressure-r54",
+      "line": 9045,
+      "sha256": "1851d73a4373d23dd145ea3e81ed1ebe718ec36905581168c76bb21a90fb251e"
+    },
+    {
+      "id": "story-campaign-data-r54",
+      "line": 9122,
+      "sha256": "2104f91557f911f8d31c44b556cc53a6160c3dedb1601b19724c744766d324cd"
+    },
+    {
+      "id": "story-campaign-r54",
+      "line": 9127,
+      "sha256": "b2865f7f2950b302bd06002391b4c78d962df782818639ba14155e0cbc169fbd"
+    },
+    {
+      "id": "story-combat-r54",
+      "line": 9198,
+      "sha256": "727e3c8ff8636c253a2e8c8e7319e46aaad22d9d29d98277e7a56512748d00c2"
+    },
+    {
+      "id": "regional-world-r55",
+      "line": 9367,
+      "sha256": "21d8cde903962998be74866d82e4eb13adc8aeef656a4a50130923a034408671"
+    },
+    {
+      "id": "regional-motion-r56",
+      "line": 9448,
+      "sha256": "e333859630c7c8b08fafd6497e071d9a295462615c9001f6e2896af00465ce1c"
+    },
+    {
+      "id": "regional-motion-r57",
+      "line": 9493,
+      "sha256": "5937ad0d27270a410aa5f1d7e5debd88e747c82e4dda35dfa6980a7ae1c673a9"
+    },
+    {
+      "id": "presentation-settings-r58",
+      "line": 9544,
+      "sha256": "e6438af7a3e58646c78e9f242a99be41ba2858fc3fce41cfc5ec599cb49d4c95"
+    },
+    {
+      "id": "status-atlas-r58",
+      "line": 9565,
+      "sha256": "1285dcfa2c115745912b54a4cd0a954125be94ba2ae4ddefd586fd13b6d168b6"
+    },
+    {
+      "id": "regional-combat-r58",
+      "line": 9568,
+      "sha256": "7dba895d158d40709d8225665d5f19c50809f9b44d6a527fc5d0ec835b71d7cd"
+    },
+    {
+      "id": "scenery-assets-r59",
+      "line": 9685,
+      "sha256": "f40ef506b330529b0b727d4779387f5ccfde990cbd240bd5e0bdb512b1b0bcdc"
+    },
+    {
+      "id": "scenery-world-r59",
+      "line": 9686,
+      "sha256": "78287045020abbb940387dde4f58dce5c55495df65ced4eb52ed8000831f095f"
+    },
+    {
+      "id": "portals-r61",
+      "line": 10188,
+      "sha256": "9c565f00e45211f0250b1fa74ac30b55b73f320f8bf1ca06b12c35cc89ad8aff"
+    },
+    {
+      "id": "scale-melee-r61",
+      "line": 10287,
+      "sha256": "898b2b3ce0c81112b16169a7d5d78a65e9910fa796f463449ae1d03e70c3595a"
+    },
+    {
+      "id": "ailment-assets-r61",
+      "line": 10353,
+      "sha256": "e42d57d683e9d38d66294fa910492ad4c5eb222d4f0837c013004036fbc34fb9"
+    },
+    {
+      "id": "combat-fields-r61",
+      "line": 10358,
+      "sha256": "98b582478d227765e2d3ad6e1cf70a9fa2764c08f3f8d915229aed6cbc28daac"
+    },
+    {
+      "id": "generated-assets-r62",
+      "line": 10550,
+      "sha256": "defe884ad913b42d7b5337dbee5d4543616e2754ef262839b536c1c653f48041"
+    },
+    {
+      "id": "boss-fields-r62",
+      "line": 10555,
+      "sha256": "6787323812fe1fe4131ccb769d3c560a2ff8c392d00731aed65822ec82a1e286"
+    },
+    {
+      "id": "summons-r61",
+      "line": 10701,
+      "sha256": "603ee49a639425da9ece50656060220bf8bbb06511cf937fac2c0b9c1ae640fe"
+    },
+    {
+      "id": "progression-r62",
+      "line": 10842,
+      "sha256": "f82b6e1b996606fa9cd41956fb6b99ea9803a2d5402160da9f0ed33c6f3d1bef"
+    },
+    {
+      "id": "golden-core-r72",
+      "line": 10936,
+      "sha256": "b2adac4fc1430c95986b61aa78024633b09c4e20c0f6346e45aba6ea812cdc83"
+    },
+    {
+      "id": "golden-save-r72",
+      "line": 10982,
+      "sha256": "f20626c6e14f6a87fa1df244e9fa41152ff94fc6296f3f8326aa799af2bdf859"
+    },
+    {
+      "id": "routes-r72",
+      "line": 10994,
+      "sha256": "be17438c32323c4363df202e0b7acaefdca85336585e9df8193401851018775a"
+    },
+    {
+      "id": "maze-state-r73",
+      "line": 11034,
+      "sha256": "9073520e07622962b737b8414ad7b2bb3b949ccd751b38ebfcd9fd3411c8ab4e"
+    },
+    {
+      "id": "coop-sim-r62",
+      "line": 11062,
+      "sha256": "bff3775dcadb2c1b36a2af5e1340de5a5f33cda5891e085bb79ef73c75ddb8c7"
+    },
+    {
+      "id": "coop-client-r62",
+      "line": 11219,
+      "sha256": "8fb7fbe7d15da5a0b9ce4698edcbad2fe31e374376e321bc76b85eb09f5beeba"
+    },
+    {
+      "id": "mobile-r63r1",
+      "line": 11396,
+      "sha256": "a06f46e7c1f4b8e2b7c6b0436c67adb391bc5ed1167ed38b1dfd894dcbc0c0d1"
+    },
+    {
+      "id": "camera-r63r1",
+      "line": 11452,
+      "sha256": "7797420078c3dec929be3517ce259618b0d1c3d7fb21b5637860d6ab5c0fb435"
+    },
+    {
+      "id": "review-r66",
+      "line": 11482,
+      "sha256": "60bf5230d7100734ae82c6c327aabd4e3cf1b02b85a44d956fde139c9212b5a6"
+    },
+    {
+      "id": "campaign-combat-r63r1",
+      "line": 11559,
+      "sha256": "a6b98b66f5603f9ea626c0117ba83dbd2962aee9987d0fdacaabf5333dd6a73d"
+    },
+    {
+      "id": "golden-thread-r72",
+      "line": 12288,
+      "sha256": "a014057fda91cb2d949bd9339e1699e5bc27c3a4d7286c1a82a1f25315b6967d"
+    },
+    {
+      "id": "portal-arrival-r73",
+      "line": 12405,
+      "sha256": "038007a3019ec45845acb3914fe7c019a70b77521e843815ca67140555da0d69"
+    },
+    {
+      "id": "save-slots-r73",
+      "line": 12422,
+      "sha256": "aa1785dcbb8c25edc782e4af68505e68c59d20c7ed1973f0851294a2bf80ac80"
+    },
+    {
+      "id": "art-r74",
+      "line": 12495,
+      "sha256": "6a069b5f32c7198933f2d00fd26e165f45b533089109c1df4e79d35a076a266a"
+    },
+    {
+      "id": "world-r74",
+      "line": 12507,
+      "sha256": "73137206d3f8103fe27ace613dbe391d38ffb5de695d22c836db1da84a18bbc4"
+    },
+    {
+      "id": "thread-dances-r74",
+      "line": 12554,
+      "sha256": "ac3a0b5c054aadb29a6f11b3f3fcc7053e6a8358e7e927eac379dd7e69da6046"
+    },
+    {
+      "id": "elements-r74",
+      "line": 12637,
+      "sha256": "9d653695171caa012b0f41660f6a54a5d6654c1eca492f6e271156f632cb9c3e"
+    },
+    {
+      "id": "interaction-core-r74",
+      "line": 12677,
+      "sha256": "7f403492b7025dd4741209cd40b0f851799bb9f220e6c18febb17ad039e873e9"
+    },
+    {
+      "id": "mobile-r74",
+      "line": 12712,
+      "sha256": "005b9ca577502e6fb1d001ba212b79db374250678f8c95f29df7bd78937cd606"
+    },
+    {
+      "id": "story-data-r75",
+      "line": 12764,
+      "sha256": "e1e628a26f13f731d8ebc9a67639d131a5002e6928f9a90d1c90861575bd82db"
+    },
+    {
+      "id": "story-r75",
+      "line": 12766,
+      "sha256": "8551dea8a37b88ff3f5d4b15c89d1da10e45105be23226c0b9341ce9e4627fc9"
+    },
+    {
+      "id": "save-access-r75",
+      "line": 12827,
+      "sha256": "ca9f4171b0368d8f2bb33fb88f2eec6b1f067adcd6001b8bc95f0ad1b90ba322"
+    },
+    {
+      "id": "dance-policy-r75",
+      "line": 12841,
+      "sha256": "dbdc55956f73969e59a39f75bfc1d2eaad35fe195a7361379b6ce5cbe0d0006a"
+    },
+    {
+      "id": "hero-npc-r75",
+      "line": 12863,
+      "sha256": "4544275991c3199f76dec4bddf1cdaecd9af0a87c21ff167033965700de6088c"
+    },
+    {
+      "id": "world-r75",
+      "line": 12879,
+      "sha256": "fb1fb042e9c7f7fc00b39e8e4fbed2d31aa1eefb441e5d64fb018f215d232d56"
+    },
+    {
+      "id": "objectives-r75",
+      "line": 12928,
+      "sha256": "7500ba2ac12810c9cc548b89796acc556b6c9172f1de2b725478b7dd6480eb3b"
+    },
+    {
+      "id": "defense-r75",
+      "line": 12989,
+      "sha256": "6ec56fdccbdc9c8bf02ca594495c4babd10a48122498c54d3c534b77ae24886e"
+    },
+    {
+      "id": "doors-r75",
+      "line": 13049,
+      "sha256": "f125a06f9529b1178cd04871f94cc0584fb62c85c4cd175e84b30ac1798e64ad"
+    },
+    {
+      "id": "guide-r75",
+      "line": 13070,
+      "sha256": "c1b77b98017998605a63eb802dc12dbd58972f74848ec434ef4db7b91c776824"
+    },
+    {
+      "id": "samong-r75",
+      "line": 13116,
+      "sha256": "201bd01dce4b54a104db863c6495e2827e6ee90fab6be376c62782c239386bcd"
+    },
+    {
+      "id": "cheat-checkpoint-r75",
+      "line": 13162,
+      "sha256": "8097346bc794c83658ba30a91b9d751255ace4749a88b74342ba44f4994ffce2"
+    },
+    {
+      "id": "guide-r77",
+      "line": 13174,
+      "sha256": "032b4d4e3c1990ae4a54f710e19aa5f82d24df55f33e18dc8181092ad79bb3b1"
+    }
+  ],
+  "errors": []
+}

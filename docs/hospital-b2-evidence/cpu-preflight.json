@@ -1,0 +1,76 @@
+{
+  "schema": "m0.hospital-b2.fresh-cpu/v1",
+  "sourceCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
+  "executedCommands": [
+    {
+      "name": "structure",
+      "command": [
+        "node",
+        "docs/hospital-b2-evidence/structure.mjs"
+      ],
+      "exitCode": 0,
+      "environmentOverride": {}
+    },
+    {
+      "name": "production-order",
+      "command": [
+        "node",
+        "docs/hospital-b2-evidence/checks.mjs"
+      ],
+      "exitCode": 1,
+      "environmentOverride": {}
+    },
+    {
+      "name": "ego-b1",
+      "command": [
+        "node",
+        "docs/hospital-b2-evidence/ego-control.mjs"
+      ],
+      "exitCode": 0,
+      "environmentOverride": {
+        "CPU_HTML": "out/hospital-b1/build-connected/site/index.html"
+      }
+    },
+    {
+      "name": "ego-b2",
+      "command": [
+        "node",
+        "docs/hospital-b2-evidence/ego-control.mjs"
+      ],
+      "exitCode": 0,
+      "environmentOverride": {}
+    }
+  ],
+  "resultHashes": {
+    "results.json": "b3652b08edfab484f7933cbcb4d80a2dda8b6479eaeb383434011e62f4171bcb",
+    "production-order/results.json": "3f473cda92df592999aa8a91626f5b99d63f9c3a9a2c1aab7d6c612bbbfd20be",
+    "production-order/audit.json": "23951ee74be731ffb70c223fe52d2d086c2e74bfbb36d1e071563287752cd3e5",
+    "production-order/ego-b1.json": "a5df4b3b7c5a3a810798e556556babf274ebeefd34c5604e64929913c5306e9d",
+    "production-order/ego-b2.json": "5830b34442e177d6f626c9d581da462a8ee7af4b375e9c36e453fda3a3078232"
+  },
+  "runtimeHashes": {
+    "index.html": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
+    "dist/phase1.js": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
+  },
+  "structure": {
+    "passed": 30,
+    "failed": 0
+  },
+  "productionOrder": {
+    "passed": 8,
+    "failed": 1,
+    "scripts": 105
+  },
+  "knownFailure": {
+    "name": "EGO visit routeRoom actual hydrate plus final wrappers and first tick",
+    "B1B2ControlMatched": true,
+    "resolved": false,
+    "originalUserFailureConfirmed": false
+  },
+  "acceptedForRestrictedTest": true,
+  "allTestsPassed": false,
+  "originalUserSavesUsed": false,
+  "browser": false,
+  "GPU": false,
+  "finished": "2026-10-21T09:17:12.929148+00:00"
+}

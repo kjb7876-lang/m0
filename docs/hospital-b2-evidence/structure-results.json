@@ -1,0 +1,1578 @@
+{
+  "scriptSHA256": "0f5f488a50c2174ab37e697edb6ad182c3d9828268e502aab2c9a05493575b45",
+  "filter": null,
+  "schema": "m0.hospital.cpu-simulation/v1",
+  "commit": "81fd7f19e183b495817329b85ac0db5490009a33",
+  "htmlSHA256": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
+  "rendererSHA256": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7",
+  "node": "v24.19.0",
+  "platform": "linux",
+  "startedAt": "2026-10-21T09:10:10.747Z",
+  "method": "CPU Node VM, real compiled layout/collision/path and extracted native progression/restore functions plus real modular route/slot/door/hospital wrappers. Assisted state fixtures; no browser, DOM rendering, GPU, touch or natural game completion. B2 structural replacement; new cases below replace incompatible B1 additive/visual expectations.",
+  "substitutions": [
+    "DOM/panels/buttons: inert objects and handler Map",
+    "B2 adds exact compiled runtime adapter and R52 nav; basic cases use already attached layout fixture; mode cases use actual cache/get/attach with selected wrapper order, NOT full HTML order; tick/move/separate base remain inert; no full AI",
+    "input: direct native function calls and collision-validated fixture walking, not keyboard/touch",
+    "region fixtures: real canonical ID/order/chapter/records, synthetic w/e directional exit labels; underlying enterRegion is an admitted fixture, not complete production chapter/asset admission or ordinary arrival placement",
+    "clock: explicit simulation dt; no rAF",
+    "narrative base renderer: in-memory scene queue, manually acknowledged; native checkpoint wrapper retained",
+    "room construction: disposable sourcePlan actors; no full compileWorld, R52/R53 ordinary placement, health/tier normalization or AI execution",
+    "full version6 outer schema/asset/unlock validation: fixture envelope admission; native core restore loop retained, not complete production validator",
+    "audio/effects/XP presentation: no-op or audit counters; native point/progress completion retained",
+    "progress before hospital: explicitly seeded complete in isolated fixture, never natural progression",
+    "forced ordinary/midboss deaths and empty corridor fixtures: explicitly labelled; no combat balance claim"
+  ],
+  "cases": [
+    {
+      "name": "seed index coverage/determinism across 4096 seeds and uint32 boundaries",
+      "ok": true,
+      "ms": 1.1777210000000196,
+      "detail": {
+        "seedNamespace": "hospitalSeed5; NOT seedR73",
+        "seedCount": 4101,
+        "counts": [
+          1509,
+          1291,
+          1301
+        ],
+        "examples": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            49,
+            51,
+            53,
+            55,
+            57
+          ],
+          [
+            48,
+            50,
+            52,
+            54,
+            56
+          ]
+        ]
+      }
+    },
+    {
+      "name": "all authored hospital starts to objective and reverse via exact analytic collision/path",
+      "ok": true,
+      "ms": 2534.35091,
+      "detail": {
+        "rows": [
+          {
+            "startId": "lower-left",
+            "point": {
+              "x": 14,
+              "y": 32
+            },
+            "segments": 5,
+            "pathLength": 19.848891914998394
+          },
+          {
+            "startId": "lower-centre",
+            "point": {
+              "x": 18,
+              "y": 32
+            },
+            "segments": 3,
+            "pathLength": 20.264564982651116
+          },
+          {
+            "startId": "lower-right",
+            "point": {
+              "x": 22,
+              "y": 32
+            },
+            "segments": 4,
+            "pathLength": 22.299204547785084
+          }
+        ],
+        "actorsAndAttackHazardsNotInCollision": true
+      }
+    },
+    {
+      "name": "hospital entry seed selection/save namespace roundtrip for all 3 index classes",
+      "ok": true,
+      "ms": 14393.922405000001,
+      "detail": {
+        "rows": [
+          {
+            "seed": 0,
+            "index": 0,
+            "startId": "lower-left",
+            "finalPosition": {
+              "x": 14.191741247211842,
+              "y": 29.507363786246046
+            }
+          },
+          {
+            "seed": 1,
+            "index": 0,
+            "startId": "lower-left",
+            "finalPosition": {
+              "x": 14.191741247211842,
+              "y": 29.507363786246046
+            }
+          },
+          {
+            "seed": 49,
+            "index": 1,
+            "startId": "lower-centre",
+            "finalPosition": {
+              "x": 17.08900162854872,
+              "y": 29.671893050735616
+            }
+          },
+          {
+            "seed": 51,
+            "index": 1,
+            "startId": "lower-centre",
+            "finalPosition": {
+              "x": 17.08900162854872,
+              "y": 29.671893050735616
+            }
+          },
+          {
+            "seed": 48,
+            "index": 2,
+            "startId": "lower-right",
+            "finalPosition": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "seed": 50,
+            "index": 2,
+            "startId": "lower-right",
+            "finalPosition": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          }
+        ],
+        "priorZone": "dist06 (admitted fixture; not naturally cleared)",
+        "entryWrapperR72OffsetIncluded": true
+      }
+    },
+    {
+      "name": "native summon placement around objective retains safe paths and potential retreat",
+      "ok": true,
+      "ms": 620.4632670000028,
+      "detail": {
+        "rows": [
+          {
+            "approach": 0,
+            "player": {
+              "x": 17.55,
+              "y": 13
+            },
+            "major": {
+              "x": 19.918807716974936,
+              "y": 10.631192283025067
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 1,
+            "player": {
+              "x": 17.355892807903782,
+              "y": 13.975842752530978
+            },
+            "major": {
+              "x": 19.724700524878717,
+              "y": 11.607035035556045
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 2,
+            "player": {
+              "x": 16.803122292025698,
+              "y": 14.803122292025696
+            },
+            "major": {
+              "x": 19.171930009000633,
+              "y": 12.434314575050763
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 3,
+            "player": {
+              "x": 15.97584275253098,
+              "y": 15.355892807903782
+            },
+            "major": {
+              "x": 18.344650469505915,
+              "y": 12.987085090928849
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 4,
+            "player": {
+              "x": 15,
+              "y": 15.55
+            },
+            "major": {
+              "x": 17.368807716974935,
+              "y": 13.181192283025068
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 5,
+            "player": {
+              "x": 14.024157247469022,
+              "y": 15.355892807903782
+            },
+            "major": {
+              "x": 16.392964964443955,
+              "y": 12.987085090928849
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 6,
+            "player": {
+              "x": 13.196877707974304,
+              "y": 14.803122292025696
+            },
+            "major": {
+              "x": 15.565685424949237,
+              "y": 12.434314575050763
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 7,
+            "player": {
+              "x": 12.644107192096218,
+              "y": 13.97584275253098
+            },
+            "major": {
+              "x": 15.012914909071153,
+              "y": 11.607035035556047
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 8,
+            "player": {
+              "x": 12.45,
+              "y": 13
+            },
+            "major": {
+              "x": 14.818807716974934,
+              "y": 10.631192283025067
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 9,
+            "player": {
+              "x": 12.644107192096218,
+              "y": 12.024157247469022
+            },
+            "major": {
+              "x": 15.012914909071153,
+              "y": 9.655349530494089
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 10,
+            "player": {
+              "x": 13.196877707974304,
+              "y": 11.196877707974304
+            },
+            "major": {
+              "x": 15.565685424949237,
+              "y": 8.82806999099937
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 11,
+            "player": {
+              "x": 14.02415724746902,
+              "y": 10.64410719209622
+            },
+            "major": {
+              "x": 16.392964964443955,
+              "y": 8.275299475121287
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 12,
+            "player": {
+              "x": 15,
+              "y": 10.45
+            },
+            "major": {
+              "x": 17.368807716974935,
+              "y": 8.081192283025066
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 13,
+            "player": {
+              "x": 15.97584275253098,
+              "y": 10.64410719209622
+            },
+            "major": {
+              "x": 18.344650469505915,
+              "y": 8.275299475121287
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 14,
+            "player": {
+              "x": 16.803122292025694,
+              "y": 11.196877707974304
+            },
+            "major": {
+              "x": 19.17193000900063,
+              "y": 8.82806999099937
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          },
+          {
+            "approach": 15,
+            "player": {
+              "x": 17.355892807903782,
+              "y": 12.02415724746902
+            },
+            "major": {
+              "x": 19.724700524878717,
+              "y": 9.655349530494087
+            },
+            "relocated": true,
+            "retreatStartIds": [
+              "lower-left",
+              "lower-centre",
+              "lower-right"
+            ]
+          }
+        ],
+        "scope": "static map, controlled major fixture; exact validated approach-to-objective path plus cached exact objective-to-start paths; excludes live AI/attack hazards and dynamic actor separation"
+      }
+    },
+    {
+      "name": "native ordinary waves block summon; assisted kills advance wave and native midboss transitions",
+      "ok": true,
+      "ms": 1026.0180709999986,
+      "detail": {
+        "forcedDeaths": true,
+        "nativeClockBranches": true,
+        "nativeCompletionPoints": 2,
+        "events": [
+          {
+            "kind": "FieldWaveActivated",
+            "zone": "ep1a08",
+            "wave": 2,
+            "index": 2,
+            "total": 2
+          },
+          {
+            "kind": "FieldWavesCleared",
+            "zone": "ep1a08",
+            "waves": 2,
+            "minionKills": 12
+          },
+          {
+            "kind": "SummonRequested",
+            "stage": "midboss",
+            "ids": [
+              "ep1a08:mb-ep1a08"
+            ],
+            "nonce": 1
+          },
+          {
+            "kind": "SummonActivated",
+            "stage": "midboss"
+          },
+          {
+            "kind": "RegionCompleted",
+            "id": "ep1a08"
+          }
+        ]
+      }
+    },
+    {
+      "name": "STORY/DREAM stages and native core restore preserve partial HP/dead IDs without crossing layers",
+      "ok": true,
+      "ms": 1618.6827169999997,
+      "detail": {
+        "restoredMidHp": 4266.1,
+        "deadIdCount": 12,
+        "dreamMidHp": 9339.300000000001
+      }
+    },
+    {
+      "name": "native post checkpoint reload then acknowledgement completes exactly once",
+      "ok": true,
+      "ms": 3304.1513259999992,
+      "detail": {
+        "scope": "native checkpoint/resume code with in-memory scene UI, fixture outer validator"
+      }
+    },
+    {
+      "name": "native R72 portal admission/next/previous roundtrip and guest/battle denial",
+      "ok": true,
+      "ms": 2615.488831999999,
+      "detail": {
+        "farRequestDenied": true,
+        "walkNext": {
+          "segments": 1,
+          "distance": 12.495256420054268
+        },
+        "walkPrevious": {
+          "segments": 1,
+          "distance": 2.5
+        },
+        "nextPoint": {
+          "x": 5.221291866028709,
+          "y": 5.221291866028709
+        },
+        "previousPoint": {
+          "x": 15,
+          "y": 19
+        },
+        "returnedPosition": {
+          "x": 7.1777759519168844,
+          "y": 6.777624099732783
+        },
+        "progressUnchanged": true,
+        "travelUsesNativeRouteWrapperButFixtureUnderlyingEnter": true
+      }
+    },
+    {
+      "name": "actual native hostile damage admits active a08 actors and rejects hidden; staff protection unresolved",
+      "ok": true,
+      "ms": 534.404602999999,
+      "detail": {
+        "results": [
+          {
+            "nativeId": "a08-o1",
+            "kind": "orderly",
+            "activeReceivesNativeDamage": true
+          },
+          {
+            "nativeId": "a08-s1",
+            "kind": "specter",
+            "activeReceivesNativeDamage": true
+          },
+          {
+            "nativeId": "a08-c1",
+            "kind": "corruptedGuardian",
+            "activeReceivesNativeDamage": true
+          },
+          {
+            "nativeId": "a08-o2",
+            "kind": "orderly",
+            "activeReceivesNativeDamage": true
+          },
+          {
+            "nativeId": "mb-ep1a08",
+            "kind": "orderly",
+            "activeReceivesNativeDamage": true
+          }
+        ],
+        "actualMedicalStaffIDContract": "unresolved; no medical staff exemption claimed, no actor reclassification"
+      }
+    },
+    {
+      "name": "three normal slots isolate hospital STORY/DREAM and preserve legacy bytes",
+      "ok": true,
+      "ms": 4425.108459000003,
+      "detail": {
+        "slotLayers": [
+          "STORY",
+          "DREAM",
+          "STORY"
+        ],
+        "legacySHA256": "98e7954703ddc461037a4961b9544d988592f0b1ac36a4726c3f883e163ae555",
+        "legacyPreserved": true,
+        "syntheticSaveOnly": true
+      }
+    },
+    {
+      "name": "generated R74/R75 doors stay in ID0..2 for inspected hospital-associated maps; actual door module restore/refusal",
+      "ok": true,
+      "ms": 2780.8219170000048,
+      "detail": {
+        "generatedDoorCounts": {
+          "ep1a09": 3,
+          "ep1a09b": 2,
+          "ep1a10": 3,
+          "ep1a11": 0
+        },
+        "hospital08Excluded": true,
+        "invalidDoor3": "synthetic negative input, not generated or public bug"
+      }
+    },
+    {
+      "name": "hospital hidden/summoning/active/bossReady/post/complete snapshot matrix",
+      "ok": true,
+      "ms": 12779.013915999996,
+      "detail": {
+        "rows": [
+          {
+            "snapshot": "hidden",
+            "restoredStage": "field",
+            "midHP": 11530,
+            "deadCount": 0,
+            "points": 0
+          },
+          {
+            "snapshot": "summoning",
+            "restoredStage": "summoning",
+            "midHP": 11530,
+            "deadCount": 12,
+            "points": 0
+          },
+          {
+            "snapshot": "active",
+            "restoredStage": "active",
+            "midHP": 4957.9,
+            "deadCount": 12,
+            "points": 0
+          },
+          {
+            "snapshot": "bossReady",
+            "restoredStage": "bossReady",
+            "midHP": null,
+            "deadCount": 13,
+            "points": 0
+          },
+          {
+            "snapshot": "post",
+            "restoredStage": "bossReady",
+            "midHP": null,
+            "deadCount": 13,
+            "points": 0
+          },
+          {
+            "snapshot": "complete",
+            "restoredStage": "complete",
+            "midHP": null,
+            "deadCount": 13,
+            "points": 2
+          }
+        ],
+        "summonClockRestore": "native resets to .9; remaining pre-save delay is not preserved",
+        "assistance": "prior story and source actor fixtures, forced kills, manually acknowledged scene queue"
+      }
+    },
+    {
+      "name": "hospital save slot rejects synthetic invalid door metadata without overwriting legacy or rejected slot",
+      "ok": true,
+      "ms": 2348.6529809999993,
+      "detail": {
+        "legacyPreserved": true,
+        "rejectedSlotPreserved": true,
+        "activeSlotPreserved": true,
+        "quotaPreserved": true,
+        "invalidDoorData": "deliberately injected fixture, not normal generator output"
+      }
+    },
+    {
+      "name": "all eight generated three-door states preserve objective route after reload/reentry and layer separation",
+      "ok": true,
+      "ms": 14038.777132999996,
+      "detail": {
+        "rows": [
+          {
+            "mask": 0,
+            "opened": [],
+            "pathSegments": 8
+          },
+          {
+            "mask": 1,
+            "opened": [
+              "door-0"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 2,
+            "opened": [
+              "door-1"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 3,
+            "opened": [
+              "door-0",
+              "door-1"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 4,
+            "opened": [
+              "door-2"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 5,
+            "opened": [
+              "door-0",
+              "door-2"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 6,
+            "opened": [
+              "door-1",
+              "door-2"
+            ],
+            "pathSegments": 8
+          },
+          {
+            "mask": 7,
+            "opened": [
+              "door-0",
+              "door-1",
+              "door-2"
+            ],
+            "pathSegments": 8
+          }
+        ],
+        "layoutSeedR73": 75,
+        "scope": "actual generated ep1a09 doors; forced admitted map entry for spatial reentry, no natural story travel claim"
+      }
+    },
+    {
+      "name": "hospital post manual save is blocked by actual slot readiness guard",
+      "ok": true,
+      "ms": 1142.8096020000012,
+      "detail": {
+        "manualMidSceneSaveBlocked": true,
+        "internalSnapshotIsNotManualSlotSave": true,
+        "postStateMatrixScope": "internal serializer/restore snapshot; no claim that UI manual save accepts a live story scene"
+      }
+    },
+    {
+      "name": "B2 replaces core with internal rooms and forces a turn before objective",
+      "ok": true,
+      "ms": 792.6165430000037,
+      "detail": {
+        "changedCorePoints": [
+          [
+            18,
+            18.5
+          ],
+          [
+            18,
+            19
+          ],
+          [
+            21,
+            19
+          ]
+        ],
+        "path": [
+          {
+            "x": 13.5,
+            "y": 21.5
+          },
+          {
+            "x": 12.5,
+            "y": 16.5
+          },
+          {
+            "x": 15,
+            "y": 13
+          }
+        ],
+        "rectangles": [
+          [
+            "combat",
+            10,
+            6,
+            26,
+            17
+          ],
+          [
+            "observation",
+            5,
+            6,
+            10,
+            17
+          ],
+          [
+            "preparation",
+            6,
+            20,
+            26,
+            24
+          ],
+          [
+            "inner-west-door",
+            10,
+            16,
+            14,
+            21
+          ],
+          [
+            "inner-east-door",
+            22,
+            16,
+            26,
+            21
+          ],
+          [
+            "foyer",
+            11,
+            28,
+            28,
+            36
+          ],
+          [
+            "spine",
+            14,
+            23,
+            19,
+            30
+          ],
+          [
+            "west-lower",
+            -3,
+            14,
+            4,
+            25
+          ],
+          [
+            "west-upper",
+            -3,
+            2,
+            4,
+            12
+          ],
+          [
+            "west-spine",
+            -1,
+            10,
+            3,
+            29
+          ],
+          [
+            "west-return",
+            -1,
+            26,
+            18,
+            30
+          ],
+          [
+            "west-door",
+            3,
+            13,
+            7,
+            18
+          ],
+          [
+            "east-upper",
+            28,
+            6,
+            36,
+            16
+          ],
+          [
+            "east-lower",
+            28,
+            19,
+            36,
+            28
+          ],
+          [
+            "east-spine",
+            30,
+            2,
+            34,
+            32
+          ],
+          [
+            "east-return",
+            22,
+            27,
+            34,
+            32
+          ],
+          [
+            "east-door",
+            25,
+            10,
+            31,
+            14
+          ],
+          [
+            "north-loop",
+            1,
+            0,
+            33,
+            4
+          ],
+          [
+            "north-door",
+            14,
+            3,
+            18,
+            7
+          ],
+          [
+            "exit-vestibule",
+            3,
+            3,
+            10,
+            10
+          ],
+          [
+            "native-left-approach",
+            6,
+            23,
+            12,
+            28
+          ],
+          [
+            "native-front-approach",
+            22,
+            22,
+            28,
+            28
+          ],
+          [
+            "south-seam",
+            24,
+            28,
+            35,
+            35
+          ]
+        ],
+        "screenVerified": false
+      }
+    },
+    {
+      "name": "B2 union floor cells/polygons and wall thickness share exact definition",
+      "ok": true,
+      "ms": 197.39371499999834,
+      "detail": {
+        "floorCells": 1129,
+        "floorRects": 29,
+        "walls": 74,
+        "wallDepth": 0.24,
+        "method": "real compiled collision and union; no GPU"
+      }
+    },
+    {
+      "name": "B2 every four-unit inner door passes maximum native .55 body plus .14 margin",
+      "ok": true,
+      "ms": 532.3937470000019,
+      "detail": {
+        "rows": [
+          {
+            "name": "west-inner",
+            "a": {
+              "x": 12,
+              "y": 15
+            },
+            "b": {
+              "x": 12,
+              "y": 22
+            },
+            "bodyAndMargin": 0.69
+          },
+          {
+            "name": "east-inner",
+            "a": {
+              "x": 24,
+              "y": 15
+            },
+            "b": {
+              "x": 24,
+              "y": 22
+            },
+            "bodyAndMargin": 0.69
+          },
+          {
+            "name": "north",
+            "a": {
+              "x": 16,
+              "y": 2
+            },
+            "b": {
+              "x": 16,
+              "y": 9
+            },
+            "bodyAndMargin": 0.69
+          },
+          {
+            "name": "west-ward",
+            "a": {
+              "x": 1,
+              "y": 15
+            },
+            "b": {
+              "x": 8,
+              "y": 15
+            },
+            "bodyAndMargin": 0.69
+          },
+          {
+            "name": "upper-exit",
+            "a": {
+              "x": 8,
+              "y": 8
+            },
+            "b": {
+              "x": 12,
+              "y": 8
+            },
+            "bodyAndMargin": 0.69
+          }
+        ],
+        "nominalWidth": 4,
+        "afterWallDepth": 3.76,
+        "centreTravelAtMaxBody": 2.38,
+        "dynamicAIOrAttackHazards": false
+      }
+    },
+    {
+      "name": "B2 original actor positions repair by native nav without identity/HP/wave mutation",
+      "ok": true,
+      "ms": 579.1555329999974,
+      "detail": {
+        "count": 13,
+        "from": [
+          {
+            "id": "ep1a08:a08-o1",
+            "x": 26.1872,
+            "y": 22.4552
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "x": 6.1737,
+            "y": 10.4307
+          }
+        ],
+        "to": [
+          {
+            "id": "ep1a08:a08-o1",
+            "x": 25.309998999999998,
+            "y": 22.690001000000002
+          },
+          {
+            "id": "ep1a08:a08-o2",
+            "x": 6.1737,
+            "y": 10.4307
+          }
+        ],
+        "maxBody": 0.55,
+        "clearance": 0.14
+      }
+    },
+    {
+      "name": "B2 actual R53 placement plan adapts 24 density fixture objects into unchanged four bay IDs",
+      "ok": true,
+      "ms": 551.7602530000004,
+      "detail": {
+        "count": 24,
+        "bodyAndMargin": 0.69,
+        "actualPlanSHA256": "4624aa384d26ef46c841f5055bf5fef906ccd064b3921db2c3ef1b933e77e22d",
+        "groups": [
+          "ep1a08:bay-r53:left-upper",
+          "ep1a08:bay-r53:right-upper",
+          "ep1a08:bay-r53:left-lower",
+          "ep1a08:bay-r53:right-lower"
+        ],
+        "populationIsDeliberateFixture": true
+      }
+    },
+    {
+      "name": "B2 actual native R53 summon position search retains safe body and retreat",
+      "ok": true,
+      "ms": 522.440008000005,
+      "detail": {
+        "rows": [
+          {
+            "index": 0,
+            "point": {
+              "x": 16.502309470191882,
+              "y": 8.753464205287822
+            }
+          },
+          {
+            "index": 1,
+            "point": {
+              "x": 19.497690529808118,
+              "y": 13.246535794712178
+            }
+          }
+        ],
+        "sourceSHA256": "1bf105c1b0c82cb3e71ba14117bd6bf5ae84bb81b30c6ae9982548d0feee24fc",
+        "nativeSearchExecuted": true,
+        "actualUnitConstructionAndLiveAI": false
+      }
+    },
+    {
+      "name": "B2 stage-specific invalid player and route-entry restoration retains native progress",
+      "ok": true,
+      "ms": 4708.913029000003,
+      "detail": {
+        "rows": [
+          {
+            "stage": "field",
+            "position": {
+              "x": 17.08900162854872,
+              "y": 29.671893050735616
+            },
+            "entry": {
+              "x": 18,
+              "y": 32
+            },
+            "schemaChanged": false
+          },
+          {
+            "stage": "active",
+            "position": {
+              "x": 17.5485483107727,
+              "y": 13.50970966215454
+            },
+            "entry": {
+              "x": 18,
+              "y": 32
+            },
+            "schemaChanged": false
+          },
+          {
+            "stage": "complete",
+            "position": {
+              "x": 17.08900162854872,
+              "y": 29.671893050735616
+            },
+            "entry": {
+              "x": 18,
+              "y": 32
+            },
+            "schemaChanged": false
+          }
+        ],
+        "productionValidatorStillFixture": true
+      }
+    },
+    {
+      "name": "B2 simultaneous saved ordinary/dead/major/dynamic entity repair preserves state and references",
+      "ok": true,
+      "ms": 414.3669119999977,
+      "detail": {
+        "count": 4,
+        "actorsAreDiscardableSavedStateFixtures": true,
+        "actualB2RepairAndNativeR52Nearest": true,
+        "fullR53AndR61RestoreWrappersNotExecuted": true
+      }
+    },
+    {
+      "name": "B2 actual warm cache/get/attach repairs both directions including all actors and entries",
+      "ok": true,
+      "ms": 37172.959843000004,
+      "detail": {
+        "rows": [
+          {
+            "mode": "host",
+            "cycle": 0,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 0,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "mode": "host",
+            "cycle": 1,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 1,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "mode": "host",
+            "cycle": 2,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 2,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "mode": "guest",
+            "cycle": 0,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 0,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "mode": "guest",
+            "cycle": 1,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 1,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          },
+          {
+            "mode": "guest",
+            "cycle": 2,
+            "position": {
+              "x": 68.08573783802598,
+              "y": 32.60798021605818
+            }
+          },
+          {
+            "mode": "off",
+            "cycle": 2,
+            "position": {
+              "x": 20.23223304703363,
+              "y": 30.23223304703363
+            }
+          }
+        ],
+        "actualSameVMCacheGetAttach": true,
+        "network": false,
+        "run": 1729,
+        "seed": 0,
+        "versions": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "B2 actual R53 serialized dynamic units restore with player entry and existing enemy HP",
+      "ok": true,
+      "ms": 1009.6439799999935,
+      "detail": {
+        "unitId": "ep1a08:r53-summon:1",
+        "hp": 17.25,
+        "maxHp": 200,
+        "position": {
+          "x": 34.579999,
+          "y": 27.579998999999997
+        },
+        "actualR53SerializerAndRestore": true,
+        "actorConstructorFixture": true,
+        "outerValidatorFixture": true
+      }
+    },
+    {
+      "name": "B2 valid coordinates survive reload in both layers and role snapshots restore safely",
+      "ok": true,
+      "ms": 105395.04167699999,
+      "detail": {
+        "rows": [
+          {
+            "layer": "STORY",
+            "original": {
+              "x": 15,
+              "y": 13
+            }
+          },
+          {
+            "layer": "STORY",
+            "original": {
+              "x": 12,
+              "y": 22
+            }
+          },
+          {
+            "layer": "STORY",
+            "original": {
+              "x": 0.5,
+              "y": 19
+            }
+          },
+          {
+            "layer": "STORY",
+            "original": {
+              "x": 32,
+              "y": 23
+            }
+          },
+          {
+            "layer": "DREAM",
+            "original": {
+              "x": 15,
+              "y": 13
+            }
+          },
+          {
+            "layer": "DREAM",
+            "original": {
+              "x": 12,
+              "y": 22
+            }
+          },
+          {
+            "layer": "DREAM",
+            "original": {
+              "x": 0.5,
+              "y": 19
+            }
+          },
+          {
+            "layer": "DREAM",
+            "original": {
+              "x": 32,
+              "y": 23
+            }
+          }
+        ],
+        "fullVersion6Validator": "fixture envelope only",
+        "realUserSaves": false
+      }
+    },
+    {
+      "name": "B2 native/EGO authored approaches stay body-safe and native EGO gate is not advanced by position",
+      "ok": true,
+      "ms": 777.2046310000005,
+      "detail": {
+        "rows": [
+          {
+            "x": 5.221291866028709,
+            "y": 5.221291866028709,
+            "cue": "붉은 병원 상단 중앙 벽 출입구"
+          },
+          {
+            "x": 8.899521531100477,
+            "y": 24.50956937799043,
+            "cue": "피로 물든 병원 · 원본 좌측 바닥 접근면"
+          },
+          {
+            "x": 24.509569377990427,
+            "y": 8.89952153110048,
+            "cue": "피로 물든 병원 · 원본 우측 바닥 접근면"
+          },
+          {
+            "x": 24.778708133971293,
+            "y": 24.778708133971293,
+            "cue": "피로 물든 병원 · 원본 전면 접근면"
+          }
+        ],
+        "nativeModuleSHA256": "6e1caf1306be4d929015ae7f3be3c6c9ecff4f083e4d216ce7729f81b97eae79",
+        "actualNativeEGOAdmission": true,
+        "fullEGOJournalAndRouteRoomRestore": false
+      }
+    },
+    {
+      "name": "B2 co-op hospital and all nonhospital compiled layouts retain exact baseline bytes",
+      "ok": true,
+      "ms": 57566.07198899999,
+      "detail": {
+        "cooperativeRoles": [
+          "host",
+          "guest"
+        ],
+        "otherRegions": 63,
+        "actualNetwork": false
+      }
+    },
+    {
+      "name": "B2 Three/Legacy/options use same structure and core art is excluded without schema/combat edits",
+      "ok": true,
+      "ms": 12.08143999997992,
+      "detail": {
+        "layoutSHA256": "c99e2dbfc295a383f698378502dedecaaa9cf560426d3738f4ae00f24d2dfab2",
+        "legacyAndThreeActualPixels": false,
+        "GPUCompile": false,
+        "scope": "actual source wiring and runtime layout; no drawn screenshot acceptance"
+      }
+    },
+    {
+      "name": "B2 actual CPU Three floor/wall geometry preserves full new wall panels without old door cuts",
+      "ok": true,
+      "ms": 63.33887400000822,
+      "detail": {
+        "floorVertices": 716,
+        "floorTriangles": 358,
+        "fullWallFaces": 370,
+        "ThreeVersion": "186",
+        "actualDrawCalls": false,
+        "GPUCompile": false
+      }
+    }
+  ],
+  "extracted": [
+    {
+      "name": "compiled-module:routes-r72",
+      "sha256": "414d8eb38e0158dbfc37bbb5a7d928698f5f323cfdd74bb576ba7d11efadf5ce"
+    },
+    {
+      "name": "compiled-module:portal-arrival-r73",
+      "sha256": "038007a3019ec45845acb3914fe7c019a70b77521e843815ca67140555da0d69"
+    },
+    {
+      "name": "compiled-module:save-slots-r73",
+      "sha256": "aa1785dcbb8c25edc782e4af68505e68c59d20c7ed1973f0851294a2bf80ac80"
+    },
+    {
+      "name": "compiled-module:world-r74",
+      "sha256": "73137206d3f8103fe27ace613dbe391d38ffb5de695d22c836db1da84a18bbc4"
+    },
+    {
+      "name": "native-save-write",
+      "line": 1184,
+      "sha256": "35204a6fdaecbdb87ff36cf15f84b1ed805331358d1a142f73b2b1cd813d291b"
+    },
+    {
+      "name": "native-hit-admission",
+      "line": 1055,
+      "sha256": "eedd81ba2f14845b2cc0b91c4e18e0e4a0c5eb69087ce6307973017793529829"
+    },
+    {
+      "name": "native-wave-save-and-restore",
+      "line": 4008,
+      "sha256": "02499f76a024811d8fa4ede1ed07bc2c5b6b194c91893988900d58162664432a"
+    },
+    {
+      "name": "native-role-predicates",
+      "line": 990,
+      "sha256": "cba10fbdaa8cfbae19c255feaf69f729948c6aca75bbf6fdd4bf4db7d22f8e53"
+    },
+    {
+      "name": "native-complete-base",
+      "line": 271,
+      "sha256": "4fc10ff9b765f3f31a24df2dfb9cd729f0eb36c1bf8157492ff6abe49ec3cae4"
+    },
+    {
+      "name": "native-kill",
+      "line": 1057,
+      "sha256": "bd8c04d0827b8650fc3fc109d78d41856af26264d624dcad98dd8461babaf1d3"
+    },
+    {
+      "name": "native-summon",
+      "line": 1064,
+      "sha256": "74ed761af630b65096b59b2ab17c42b20438370edb4c9e5146590d66b9202a75"
+    },
+    {
+      "name": "native-ready-stage",
+      "line": 1082,
+      "sha256": "06652ad61dca3d573b8f392130135d2595af3fca8700d24994357619228b21c8"
+    },
+    {
+      "name": "native-finish",
+      "line": 1087,
+      "sha256": "3e542e2b9d980e3c37b8d927a3f9fdc8cf023a08eb03f51c25173c6e53ef95f5"
+    },
+    {
+      "name": "native-complete-wrapper",
+      "line": 1097,
+      "sha256": "db33aed50fcf35a677fb40e282d4f89d094deece7539db8878c3bfac5c85fafc"
+    },
+    {
+      "name": "native-wave-advance",
+      "line": 3931,
+      "sha256": "2f423a1b38edb548e677e9edc0f07368482358bb62f2c3ba0df76468188dd0a7"
+    },
+    {
+      "name": "native-scene-checkpoint-and-ack",
+      "line": 1170,
+      "sha256": "20a08e835dabd896ae1713fb1d0b1963dec70739d41a688d5ffd26a60e753631"
+    },
+    {
+      "name": "native-room-serialize",
+      "line": 1179,
+      "sha256": "3f8d7401a83860ce3ac15440d1af52c5aab7f884042faa3a577ebf9e89aec26e"
+    },
+    {
+      "name": "native-core-restore",
+      "line": 1187,
+      "sha256": "ce0d17601e819cbbf5fd1b6b6fd777a1edea419c53367ed2804394f830e9050d"
+    },
+    {
+      "name": "native-major-placement",
+      "line": 4915,
+      "sha256": "d4073414931bb6455b4fee4bcd270128b00b6c818dd672e32a7d260aaf4c7c9c"
+    },
+    {
+      "name": "hospital-r5-wrapper",
+      "line": 6234,
+      "sha256": "ad41d3c3a0e81016c3078a7f86918122c40f26a28e9c7bd1e00d53a65315ca5e"
+    },
+    {
+      "name": "hospital-analytic-migration",
+      "line": 6256,
+      "sha256": "8b601638e78a3719a260c974acee3109bd12aa73fe78689533e5a1563a26f729"
+    },
+    {
+      "name": "native-tick-summoning-branch-only",
+      "sha256": "3836cec70025f0908b090f1465de3868a909a93d9e99e07ea3c56a303e98d983"
+    },
+    {
+      "name": "native-hit-admission",
+      "line": 1055,
+      "sha256": "eedd81ba2f14845b2cc0b91c4e18e0e4a0c5eb69087ce6307973017793529829"
+    }
+  ],
+  "errors": [],
+  "branch": "work/hospital-ep1a08-b2",
+  "coreSourceSHA256": "632ab1885cce684db64627db958f3da31f52dc391040e8ed3cb79675be99a35c",
+  "buildEvidence": {
+    "status": "pending independent review",
+    "baselineDeploymentSHA": "62f1e7a44e827bc8937d661f600abb523d131433",
+    "buildSourceCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
+    "sourceTreeDirty": false,
+    "runtimeHashes": {
+      "index.html": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
+      "dist/phase1.js": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
+    },
+    "storagePrefix": "storyworld.hospital-b2.test.v1:",
+    "B1SaveImported": false,
+    "originalSaveImported": false,
+    "saveSchemaChanged": false,
+    "rendererCacheKey": "hospital-b2=1a18337b276c03a8",
+    "GPUVerified": false,
+    "knownLimitation": "EGO route-room HP changes on first tick in both B1 and B2 CPU fixtures; not original user-save verification",
+    "manifestSHA256": "a1081014baef39daa1e1e7807400fcf07162d5366cabfe673d1be9446c3f1f01",
+    "output": "/workspace/m0-work/out/hospital-b2-release-review/out/hospital-b2/site",
+    "sourceHashes": {
+      "scripts/build-hospital-b2.py": "f1ee405ff85d3661fea7a87b43a9a68602c2d25728a198de2085782803a0c92c",
+      "client-source/hospital-core-b2.js": "632ab1885cce684db64627db958f3da31f52dc391040e8ed3cb79675be99a35c",
+      "client-source/hospital-runtime-b2.js": "23168ce5ab7e6ceba8a4cbfe506a3e0800c292ac2cc047b8758080e8d01ad707"
+    }
+  },
+  "finishedAt": "2026-10-21T09:14:45.364Z",
+  "passed": 30,
+  "failed": 0,
+  "supersededB1Cases": [
+    "additive domain/core/old anchors",
+    "old outer ward geometry",
+    "B1 markers/palette visual plan"
+  ]
+}

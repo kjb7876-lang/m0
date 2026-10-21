@@ -13,6 +13,7 @@ SITE = ROOT / 'out/hospital-b1/build-connected/site'
 APPROVAL = ROOT / 'scripts/hospital-b1-approved-runtime.json'
 ALLOWED_AFTER_REVIEW = {'scripts/hospital-b1-approved-runtime.json', 'scripts/r77-approved-runtime.json'}
 EVIDENCE_SOURCE_PATHS = ['.github/workflows/pages.yml', 'client-source/hospital-prototype-b1.js', 'client-source/hospital-visual-b1.js', 'client-source/hospital-sight-fix-b1.js', 'client-source/hospital-test-storage-b1.js', 'scripts/apply-hospital-prototype-b1.py', 'scripts/apply-hospital-visual-b1.py', 'scripts/apply-hospital-sight-fix-b1.py', 'scripts/build-hospital-b1.py', 'scripts/build-hospital-b1-release.sh', 'scripts/prepare-hospital-b1-cpu.py', 'scripts/run-hospital-b1-cpu.py', 'scripts/hospital-b1-release-gate.py', 'scripts/hospital-b1-build.cpu.test.py', 'scripts/hospital-b1-storage.cpu.test.mjs', 'scripts/hospital-b1-release-gate.cpu.test.py', 'scripts/hospital-b1-workflow.cpu.test.py', 'docs/hospital-b1-evidence/hospital-sim.mjs', 'docs/hospital-b1-evidence/audit.mjs']
+EVIDENCE_SOURCE_PATHS += ['client-source/hospital-core-b2.js', 'client-source/hospital-runtime-b2.js', 'scripts/build-hospital-b2.py', 'scripts/run-hospital-b2-cpu.py', 'scripts/hospital-b2-release-gate.py', 'docs/hospital-b2-evidence/runtime.mjs', 'docs/hospital-b2-evidence/checks.mjs', 'docs/hospital-b2-evidence/structure.mjs', 'docs/hospital-b2-evidence/ego-control.mjs', 'docs/hospital-b2-evidence/canonical-summons-b2.json']
 
 
 def sha(data): return hashlib.sha256(data).hexdigest()
