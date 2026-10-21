@@ -1,0 +1,2240 @@
+{
+  "installed": [
+    {
+      "id": "hospital-b1-test-storage",
+      "line": 126,
+      "sha256": "e6fa6983f45b3b13303fb3186e6986d74b18f6ca602d0f3523413b3e70585fe8"
+    },
+    {
+      "id": "inline-2",
+      "line": 144,
+      "sha256": "9e3c08c71aa58c0a14a843d010467aa6449fb4ac27839dfaecc3f16acea1c37a"
+    },
+    {
+      "id": "inline-3",
+      "line": 147,
+      "sha256": "8fb00a8a659930ac9d78b4b2247baa4ba7b9836d79b1634586fb26d7bc54ee70"
+    },
+    {
+      "id": "rc151-orientation-refresh",
+      "line": 5101,
+      "sha256": "36fa1eff15713aab1ec124ef61398d9922d0fa730494b13c81f33d69bc93a963"
+    },
+    {
+      "id": "rc154-footprint",
+      "line": 5104,
+      "sha256": "9c37952ff442a07c5d88b538b62d7006a3d02a0780cad5820d340849bcf867bd"
+    },
+    {
+      "id": "rc151-ego-extension",
+      "line": 5138,
+      "sha256": "d1154eae01188b2dccd124e86a572e87b7dd080e19deae1e3eda4c884fdde6b4"
+    },
+    {
+      "id": "inline-7",
+      "line": 5346,
+      "sha256": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
+    },
+    {
+      "id": "hospital-focus-r13",
+      "line": 5347,
+      "sha256": "1d5f36d34fb43d67c4b848aa76659e92edadcaa65d81b64814476549b00187d4"
+    },
+    {
+      "id": "phase1-original-adapter",
+      "line": 5364,
+      "sha256": "ff1b827c65b95844df76e0566a945fb01f143dcd39bffd294f63f3cc876af5d6"
+    },
+    {
+      "id": "hospital-zones-r13",
+      "line": 6456,
+      "sha256": "d7148735361cea1435d5610180bbab26b6880054d9725659d59f097d06523c62"
+    },
+    {
+      "id": "combat-presentation-r7",
+      "line": 6468,
+      "sha256": "5764f6a33ba9ea5adb9d338d0c2462d94262644b6432453ea89e5559b0124d5e"
+    },
+    {
+      "id": "hospital-combat-read-r13",
+      "line": 6518,
+      "sha256": "6705f57fab6930d1b2b7f0c895ae31b71505062b9ae698340b0b1b0e042c4496"
+    },
+    {
+      "id": "hospital-tool-actions-r19",
+      "line": 6534,
+      "sha256": "f1731712e4af37edd4602ac0a1684f91ea5c1426ca642783881fef0d15ec7a34"
+    },
+    {
+      "id": "hospital-boss-presence-r14",
+      "line": 6554,
+      "sha256": "77b714d5ec67692436d03ce2ea522cefd6269fab2732f7a1eb33d89638d5e8da"
+    },
+    {
+      "id": "hospital-medical-r20",
+      "line": 6571,
+      "sha256": "4b9f88d1f36fd27ae53684d7eb06c4181cb9266285a45697f3f2159764097775"
+    },
+    {
+      "id": "r22-targetless-basic-bookkeeping",
+      "line": 6658,
+      "sha256": "aae17298ffd330218fb454629d66336ce6c20e42c6f8ce33bbc6ae721abc91e2"
+    },
+    {
+      "id": "r24-sight-and-readonly-enemy-state",
+      "line": 6662,
+      "sha256": "d2db4b428a9bff5f8dfe8e6e62f471eb0801ef33fe800522b453609349d88af1"
+    },
+    {
+      "id": "r25-original-door-register",
+      "line": 6742,
+      "sha256": "0202534e0f26ecec99eb27961bd268fd6bb2d8de9c7bbae64e10d300c37ef359"
+    },
+    {
+      "id": "r26-noncumulative-combat-balance",
+      "line": 6762,
+      "sha256": "fc617ecbe9c0be909b859f9c8c25d3974cdc826d18a3836da492501a924d1321"
+    },
+    {
+      "id": "r27-capacity-tracking-readonly-draw-contact",
+      "line": 6773,
+      "sha256": "36f6007a37a206b254b69fd3de91a12f96cd68fcb9afc5cd0f0f80cb6c683341"
+    },
+    {
+      "id": "presentation-audio-r35",
+      "line": 6836,
+      "sha256": "54fcb8baf4a7fd19d7c248fdef80852a840d4bac4ed6987ec994b03d4a8932f4"
+    },
+    {
+      "id": "visual-polish-r38",
+      "line": 6947,
+      "sha256": "903378cc84c53b5c08fcdd81ecff9c36f998d03c5fe4218355ce39f9ab6b5ced"
+    },
+    {
+      "id": "visual-polish-r38",
+      "line": 6980,
+      "sha256": "903378cc84c53b5c08fcdd81ecff9c36f998d03c5fe4218355ce39f9ab6b5ced"
+    },
+    {
+      "id": "visual-polish-r39",
+      "line": 7013,
+      "sha256": "b88708cdd91c5aeeb279f6fac531805cb900a1ac3d9c13dfd89f4271536c0da4"
+    },
+    {
+      "id": "visual-polish-r41",
+      "line": 7079,
+      "sha256": "9011318fcceea5e3a9012bef76602373245d0fc92eb33b57e3e75f2c538db404"
+    },
+    {
+      "id": "visual-polish-r42",
+      "line": 7293,
+      "sha256": "4c26065ddb5c853f660786c84cbfe751661b78b756a2fab5337800f3b743f617"
+    },
+    {
+      "id": "visual-polish-r43",
+      "line": 7367,
+      "sha256": "2d7190f7349be7a5d6891988ea3b4134c95feaafc2ad5d15a06907b0e9bafe29"
+    },
+    {
+      "id": "visual-polish-r44",
+      "line": 7454,
+      "sha256": "5d294c1a8a356515a3d7a461a868765323f09286daaee88de690032301eb2513"
+    },
+    {
+      "id": "visual-polish-r45",
+      "line": 7574,
+      "sha256": "61ee722929bc3a63a8ed48cfb4fae02484478a4b3126ef8b9007aa4a4692e053"
+    },
+    {
+      "id": "visual-polish-r46",
+      "line": 7625,
+      "sha256": "c3fe39005c5112f3aa58a7162749497756ca39a9c6f9f39a234b88e722deaf97"
+    },
+    {
+      "id": "visual-polish-r47",
+      "line": 7665,
+      "sha256": "668bef6100ad8df07e19ed49c3da108fff3892747cf0f31a8dfffd32505fca70"
+    },
+    {
+      "id": "visual-polish-r48",
+      "line": 7722,
+      "sha256": "d50ff3abe9644fae5d9655382b12dd4956a51097150de8a16cb9229efd1fa80e"
+    },
+    {
+      "id": "medical-impact-r49",
+      "line": 7833,
+      "sha256": "10c8896a80e6aeb36c5a35bd08337ec74ab4b2d6bf0c56fcf193dedfe1da8eff"
+    },
+    {
+      "id": "hando-final-r49",
+      "line": 7896,
+      "sha256": "63bd8cd5ec1a5b880b40dc38a048f4c98cf2ab561a30ac9f4f56701fae404787"
+    },
+    {
+      "id": "medical-combat-r49",
+      "line": 7997,
+      "sha256": "6bb02850c2976d0c52c59528a49cf6ba05701f076f065dc95548e550a698311b"
+    },
+    {
+      "id": "hospital-spawn-r50",
+      "line": 8042,
+      "sha256": "4834bb5fe83bd3606eab7bf1de92e92a9e2d7300726c1538f5fe79bf3409c5bc"
+    },
+    {
+      "id": "combat-hud-r51",
+      "line": 8090,
+      "sha256": "9670b98e87330e81a1e2f6b87aa59df2df7698c6aa17dcc1ea236708a6a7c03b"
+    },
+    {
+      "id": "orderly-atlas-r51",
+      "line": 8128,
+      "sha256": "eca47bb3d62eeac76bf716a0d4baf6c9716e1ddad825b629a0e630a16fcdd8c0"
+    },
+    {
+      "id": "enemy-motion-r51",
+      "line": 8132,
+      "sha256": "98294c803da4dbe4d7e7e79239163e1a65ab7a8cdd92f6b9de4c5a511511c549"
+    },
+    {
+      "id": "readability-r51",
+      "line": 8194,
+      "sha256": "e9093cac23994cc4d9fea2775fe40f70ee37b28017a3ca3b83e00f9b56309446"
+    },
+    {
+      "id": "hospital-navigation-r52",
+      "line": 8216,
+      "sha256": "aa3f54488678d1b30e448bbb26c9842fd7adefa7bed93614c3954363f178e2b9"
+    },
+    {
+      "id": "blood-health-r52",
+      "line": 8290,
+      "sha256": "ddabcffdda631a82643e43ad6621dc33cb37e2e5fba3396f8af6bc0775c1b387"
+    },
+    {
+      "id": "hospital-charge-r52",
+      "line": 8424,
+      "sha256": "0f4d24b33fd686ceaaa5a44c8ede353836eb3eab02a4b35b54cebb1bd09b05b8"
+    },
+    {
+      "id": "ranged-atlas-r52",
+      "line": 8501,
+      "sha256": "12e997ca29507a15ede18dae07f1f76de82e7372b8fe3d4ff7d0b3742ede3279"
+    },
+    {
+      "id": "hospital-ranged-r52",
+      "line": 8505,
+      "sha256": "849ae9be4fea1540ee7ddc3fb02a9992d05613dcebb58f6e49144a4b9b299298"
+    },
+    {
+      "id": "hospital-wounds-r53",
+      "line": 8548,
+      "sha256": "db5506b052cc18902c8c9779fd70cfe67dec5c35f3e8ca63c22b4fa28b237987"
+    },
+    {
+      "id": "boss-atlas-r53",
+      "line": 8658,
+      "sha256": "d9a90dcdcedd20f3917bfeb9d4788433727908fad70c46e8bed7b00fc1d56ad0"
+    },
+    {
+      "id": "hospital-layout-hud-r53",
+      "line": 8662,
+      "sha256": "045f35551ee2ee3c14ebc63b805d6f41c1bc784783277cf11f780f552e7fca18"
+    },
+    {
+      "id": "ranged-back-atlas-r53",
+      "line": 8752,
+      "sha256": "58011d7f2ff1d3799e5064e38133266d38d8f7b2078d8a5022ed5f803cdd3962"
+    },
+    {
+      "id": "hospital-motion-r53",
+      "line": 8756,
+      "sha256": "66f1ab97c9c2c31fadad7808b2143872a20559e9f57ff6ec4a3e025b8fef7fc0"
+    },
+    {
+      "id": "hospital-boss-r53",
+      "line": 8873,
+      "sha256": "6db73ed58641a5c4f45149ff5b66dd9e8a28ab43c5abdd600d81bdb7daa8a8ff"
+    },
+    {
+      "id": "combat-focus-r54",
+      "line": 8956,
+      "sha256": "34b3761abcedd21ff2218d78df76d2e043b8fefe9fee50e400dd0d9fbcc3bf05"
+    },
+    {
+      "id": "hospital-pressure-r54",
+      "line": 9048,
+      "sha256": "1851d73a4373d23dd145ea3e81ed1ebe718ec36905581168c76bb21a90fb251e"
+    },
+    {
+      "id": "story-campaign-data-r54",
+      "line": 9125,
+      "sha256": "2104f91557f911f8d31c44b556cc53a6160c3dedb1601b19724c744766d324cd"
+    },
+    {
+      "id": "story-campaign-r54",
+      "line": 9130,
+      "sha256": "b2865f7f2950b302bd06002391b4c78d962df782818639ba14155e0cbc169fbd"
+    },
+    {
+      "id": "story-combat-r54",
+      "line": 9201,
+      "sha256": "727e3c8ff8636c253a2e8c8e7319e46aaad22d9d29d98277e7a56512748d00c2"
+    },
+    {
+      "id": "regional-world-r55",
+      "line": 9370,
+      "sha256": "21d8cde903962998be74866d82e4eb13adc8aeef656a4a50130923a034408671"
+    },
+    {
+      "id": "regional-motion-r56",
+      "line": 9451,
+      "sha256": "e333859630c7c8b08fafd6497e071d9a295462615c9001f6e2896af00465ce1c"
+    },
+    {
+      "id": "regional-motion-r57",
+      "line": 9496,
+      "sha256": "5937ad0d27270a410aa5f1d7e5debd88e747c82e4dda35dfa6980a7ae1c673a9"
+    },
+    {
+      "id": "presentation-settings-r58",
+      "line": 9547,
+      "sha256": "e6438af7a3e58646c78e9f242a99be41ba2858fc3fce41cfc5ec599cb49d4c95"
+    },
+    {
+      "id": "status-atlas-r58",
+      "line": 9568,
+      "sha256": "1285dcfa2c115745912b54a4cd0a954125be94ba2ae4ddefd586fd13b6d168b6"
+    },
+    {
+      "id": "regional-combat-r58",
+      "line": 9571,
+      "sha256": "7dba895d158d40709d8225665d5f19c50809f9b44d6a527fc5d0ec835b71d7cd"
+    },
+    {
+      "id": "hospital-core-b2-runtime",
+      "line": 9685,
+      "sha256": "e01fc89747ea5cd79b8e7f35d9221e16cf52285ea19ba39b54073680c6a9a233"
+    },
+    {
+      "id": "scenery-assets-r59",
+      "line": 9764,
+      "sha256": "f40ef506b330529b0b727d4779387f5ccfde990cbd240bd5e0bdb512b1b0bcdc"
+    },
+    {
+      "id": "scenery-world-r59",
+      "line": 9765,
+      "sha256": "78287045020abbb940387dde4f58dce5c55495df65ced4eb52ed8000831f095f"
+    },
+    {
+      "id": "portals-r61",
+      "line": 10267,
+      "sha256": "9c565f00e45211f0250b1fa74ac30b55b73f320f8bf1ca06b12c35cc89ad8aff"
+    },
+    {
+      "id": "scale-melee-r61",
+      "line": 10366,
+      "sha256": "898b2b3ce0c81112b16169a7d5d78a65e9910fa796f463449ae1d03e70c3595a"
+    },
+    {
+      "id": "ailment-assets-r61",
+      "line": 10432,
+      "sha256": "e42d57d683e9d38d66294fa910492ad4c5eb222d4f0837c013004036fbc34fb9"
+    },
+    {
+      "id": "combat-fields-r61",
+      "line": 10437,
+      "sha256": "98b582478d227765e2d3ad6e1cf70a9fa2764c08f3f8d915229aed6cbc28daac"
+    },
+    {
+      "id": "generated-assets-r62",
+      "line": 10629,
+      "sha256": "defe884ad913b42d7b5337dbee5d4543616e2754ef262839b536c1c653f48041"
+    },
+    {
+      "id": "boss-fields-r62",
+      "line": 10634,
+      "sha256": "6787323812fe1fe4131ccb769d3c560a2ff8c392d00731aed65822ec82a1e286"
+    },
+    {
+      "id": "summons-r61",
+      "line": 10780,
+      "sha256": "603ee49a639425da9ece50656060220bf8bbb06511cf937fac2c0b9c1ae640fe"
+    },
+    {
+      "id": "progression-r62",
+      "line": 10921,
+      "sha256": "f82b6e1b996606fa9cd41956fb6b99ea9803a2d5402160da9f0ed33c6f3d1bef"
+    },
+    {
+      "id": "golden-core-r72",
+      "line": 11015,
+      "sha256": "b2adac4fc1430c95986b61aa78024633b09c4e20c0f6346e45aba6ea812cdc83"
+    },
+    {
+      "id": "golden-save-r72",
+      "line": 11061,
+      "sha256": "f20626c6e14f6a87fa1df244e9fa41152ff94fc6296f3f8326aa799af2bdf859"
+    },
+    {
+      "id": "routes-r72",
+      "line": 11073,
+      "sha256": "414d8eb38e0158dbfc37bbb5a7d928698f5f323cfdd74bb576ba7d11efadf5ce"
+    },
+    {
+      "id": "maze-state-r73",
+      "line": 11113,
+      "sha256": "9073520e07622962b737b8414ad7b2bb3b949ccd751b38ebfcd9fd3411c8ab4e"
+    },
+    {
+      "id": "coop-sim-r62",
+      "line": 11141,
+      "sha256": "bff3775dcadb2c1b36a2af5e1340de5a5f33cda5891e085bb79ef73c75ddb8c7"
+    },
+    {
+      "id": "coop-client-r62",
+      "line": 11298,
+      "sha256": "8fb7fbe7d15da5a0b9ce4698edcbad2fe31e374376e321bc76b85eb09f5beeba"
+    },
+    {
+      "id": "mobile-r63r1",
+      "line": 11475,
+      "sha256": "a06f46e7c1f4b8e2b7c6b0436c67adb391bc5ed1167ed38b1dfd894dcbc0c0d1"
+    },
+    {
+      "id": "camera-r63r1",
+      "line": 11531,
+      "sha256": "7797420078c3dec929be3517ce259618b0d1c3d7fb21b5637860d6ab5c0fb435"
+    },
+    {
+      "id": "review-r66",
+      "line": 11561,
+      "sha256": "60bf5230d7100734ae82c6c327aabd4e3cf1b02b85a44d956fde139c9212b5a6"
+    },
+    {
+      "id": "campaign-combat-r63r1",
+      "line": 11638,
+      "sha256": "a6b98b66f5603f9ea626c0117ba83dbd2962aee9987d0fdacaabf5333dd6a73d"
+    },
+    {
+      "id": "golden-thread-r72",
+      "line": 12367,
+      "sha256": "a014057fda91cb2d949bd9339e1699e5bc27c3a4d7286c1a82a1f25315b6967d"
+    },
+    {
+      "id": "portal-arrival-r73",
+      "line": 12484,
+      "sha256": "038007a3019ec45845acb3914fe7c019a70b77521e843815ca67140555da0d69"
+    },
+    {
+      "id": "save-slots-r73",
+      "line": 12501,
+      "sha256": "aa1785dcbb8c25edc782e4af68505e68c59d20c7ed1973f0851294a2bf80ac80"
+    },
+    {
+      "id": "art-r74",
+      "line": 12574,
+      "sha256": "6a069b5f32c7198933f2d00fd26e165f45b533089109c1df4e79d35a076a266a"
+    },
+    {
+      "id": "world-r74",
+      "line": 12586,
+      "sha256": "73137206d3f8103fe27ace613dbe391d38ffb5de695d22c836db1da84a18bbc4"
+    },
+    {
+      "id": "thread-dances-r74",
+      "line": 12633,
+      "sha256": "ac3a0b5c054aadb29a6f11b3f3fcc7053e6a8358e7e927eac379dd7e69da6046"
+    },
+    {
+      "id": "elements-r74",
+      "line": 12716,
+      "sha256": "9d653695171caa012b0f41660f6a54a5d6654c1eca492f6e271156f632cb9c3e"
+    },
+    {
+      "id": "interaction-core-r74",
+      "line": 12756,
+      "sha256": "7f403492b7025dd4741209cd40b0f851799bb9f220e6c18febb17ad039e873e9"
+    },
+    {
+      "id": "mobile-r74",
+      "line": 12791,
+      "sha256": "005b9ca577502e6fb1d001ba212b79db374250678f8c95f29df7bd78937cd606"
+    },
+    {
+      "id": "story-data-r75",
+      "line": 12843,
+      "sha256": "e1e628a26f13f731d8ebc9a67639d131a5002e6928f9a90d1c90861575bd82db"
+    },
+    {
+      "id": "story-r75",
+      "line": 12845,
+      "sha256": "8551dea8a37b88ff3f5d4b15c89d1da10e45105be23226c0b9341ce9e4627fc9"
+    },
+    {
+      "id": "save-access-r75",
+      "line": 12906,
+      "sha256": "ca9f4171b0368d8f2bb33fb88f2eec6b1f067adcd6001b8bc95f0ad1b90ba322"
+    },
+    {
+      "id": "dance-policy-r75",
+      "line": 12920,
+      "sha256": "dbdc55956f73969e59a39f75bfc1d2eaad35fe195a7361379b6ce5cbe0d0006a"
+    },
+    {
+      "id": "hero-npc-r75",
+      "line": 12942,
+      "sha256": "4544275991c3199f76dec4bddf1cdaecd9af0a87c21ff167033965700de6088c"
+    },
+    {
+      "id": "world-r75",
+      "line": 12958,
+      "sha256": "fb1fb042e9c7f7fc00b39e8e4fbed2d31aa1eefb441e5d64fb018f215d232d56"
+    },
+    {
+      "id": "objectives-r75",
+      "line": 13007,
+      "sha256": "7500ba2ac12810c9cc548b89796acc556b6c9172f1de2b725478b7dd6480eb3b"
+    },
+    {
+      "id": "defense-r75",
+      "line": 13068,
+      "sha256": "6ec56fdccbdc9c8bf02ca594495c4babd10a48122498c54d3c534b77ae24886e"
+    },
+    {
+      "id": "doors-r75",
+      "line": 13128,
+      "sha256": "f125a06f9529b1178cd04871f94cc0584fb62c85c4cd175e84b30ac1798e64ad"
+    },
+    {
+      "id": "guide-r75",
+      "line": 13149,
+      "sha256": "c1b77b98017998605a63eb802dc12dbd58972f74848ec434ef4db7b91c776824"
+    },
+    {
+      "id": "samong-r75",
+      "line": 13195,
+      "sha256": "201bd01dce4b54a104db863c6495e2827e6ee90fab6be376c62782c239386bcd"
+    },
+    {
+      "id": "cheat-checkpoint-r75",
+      "line": 13241,
+      "sha256": "8097346bc794c83658ba30a91b9d751255ace4749a88b74342ba44f4994ffce2"
+    },
+    {
+      "id": "guide-r77",
+      "line": 13253,
+      "sha256": "032b4d4e3c1990ae4a54f710e19aa5f82d24df55f33e18dc8181092ad79bb3b1"
+    }
+  ],
+  "events": [],
+  "localReads": [],
+  "imageRequests": [
+    "./assets/pxf-baked-20261010/claw-magic-atlas.png",
+    "./assets/pxf-baked-20261010/claw-magic-player-atlas.png",
+    "./assets/pxf-baked-20261010/claw-magic-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-player-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-player-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-player-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-enemy-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-01-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-02-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-03-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-04-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-06-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-07-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-08-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-09-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-10-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-11-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-12-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-13-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-14-atlas.png",
+    "./assets/visual-test/hospital-medical-tools-r20.png",
+    "./assets/vfx/hospital-r45/poison-atlas-r45.png",
+    "./assets/vfx/hospital-r49/medical-impacts-r49.png",
+    "./assets/visual-test/hospital-ranged-motion-r52.png",
+    "./assets/visual-test/hospital-boss-motion-r53.png",
+    "./assets/visual-test/hospital-ranged-back-r53.png",
+    "./assets/boss-vfx-r62/void-shard.webp",
+    "./assets/boss-vfx-r62/storm-core.webp",
+    "./assets/boss-vfx-r62/frost-crystal.webp",
+    "./assets/boss-vfx-r62/ember-heart.webp",
+    "./assets/maps/generated-v31217/ep1a_demon_tree_palace_ruin.webp",
+    "./assets/props/v3100/memory_archivist_statue.webp",
+    "./assets/props/v290/blood_altar.webp",
+    "./assets/props/v290/broken_gate.webp",
+    "./assets/props/v290/dead_tree.webp",
+    "./assets/props/v290/collapsed_pillar.webp",
+    "./assets/props/v290/corrupted_shrine.webp",
+    "./assets/props/v290/ruined_portal.webp",
+    "./assets/auras-r62/ego-halo.webp",
+    "./assets/auras-r62/samong-mist.webp",
+    "./assets/auras-r62/haste-ribbons.webp",
+    "./assets/auras-r62/resonance-petals.webp",
+    "./assets/vfx/v31315/spirit-orb.webp",
+    "./assets/r75/doors.png",
+    "./assets/vfx/generated/v300/slash-impact.webp",
+    "./assets/vfx/generated/v300/burst-impact.webp",
+    "./assets/vfx/generated/v300/barrier-sigil.webp",
+    "./assets/vfx/generated/v300/cross-seal.webp",
+    "./assets/vfx/generated/v300/glitch-fracture.webp",
+    "./assets/vfx/generated/v300/healing-sigil.webp",
+    "./assets/vfx/generated/v300/projectile-core.webp",
+    "./assets/vfx/generated/v300/target-mark.webp",
+    "./assets/vfx/generated/v300/time-ring.webp",
+    "./assets/vfx/blink-afterimage.webp",
+    "./assets/vfx/slash-flare.webp",
+    "./assets/vfx/energy-core.webp",
+    "./assets/vfx/ultimate-crown.webp",
+    "./assets/vfx/bosses/v393/ep1b-wrath-fire.webp",
+    "./assets/hero-authored-v314rc5/hwando-action-atlas.png",
+    "./assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+    "./assets/rc91/awakening/hwando.png",
+    "./assets/heroes/normalized/actions-consistent/hwando-guard-front.webp",
+    "./assets/heroes/normalized/directions/seoha-front.webp",
+    "./assets/heroes/normalized/directions/neon-front.webp",
+    "./assets/heroes/normalized/directions/michaela-front.webp",
+    "./assets/heroes/normalized/directions/lauren-front.webp",
+    "./assets/heroes/normalized/directions/hunter-front.webp",
+    "./assets/heroes/normalized/actions-consistent/slayer-guard-front.webp",
+    "./assets/hero_direction337/gunner/s.webp",
+    "./assets/ego-originals-20261008/analysis_output_2_walk_dodge.png",
+    "./assets/ego-originals-20261008/analysis_output_1_attack.png",
+    "./assets/ego-originals-20261008/916b1ac1-15ea-49dc-b3b0-f91ea1b8ef81.png",
+    "./assets/ego-originals-20261008/ego_samong_awaken_cutin.png",
+    "./assets/vfx/generated/v302/awakened-iaido-cross.webp",
+    "./assets/vfx/generated/v315/hwando-ego-phantom-blade.webp",
+    "./assets/vfx/heroes/hwando-a.webp",
+    "./assets/vfx/heroes/hwando-q.webp",
+    "./assets/vfx/heroes/hwando-w.webp",
+    "./assets/vfx/heroes/hwando-e.webp",
+    "./assets/vfx/heroes/hwando-r.webp",
+    "./assets/rc91/awakening/seoha.png",
+    "./assets/rc91/awakening/neon.png",
+    "./assets/rc91/awakening/michaela.png",
+    "./assets/rc91/awakening/lauren.png",
+    "./assets/rc91/awakening/hunter.png",
+    "./assets/rc91/awakening/slayer.png",
+    "./assets/rc91/awakening/gunner.png",
+    "./assets/vfx/generated/v31307/hero-impacts/seoha-time-fracture.webp",
+    "./assets/vfx/generated/v315/seoha-severed-time.webp",
+    "./assets/vfx/generated/v31307/hero-impacts/neon-sanctuary-impact.webp",
+    "./assets/vfx/generated/v315/neon-sanctuary-lance.webp",
+    "./assets/vfx/generated/v31307/hero-impacts/michaela-seraph-spark.webp",
+    "./assets/vfx/generated/v315/michaela-seraph-cleansing.webp",
+    "./assets/vfx/generated/v31307/hero-impacts/lauren-stigma-puncture.webp",
+    "./assets/vfx/generated/v315/lauren-true-name-judgment.webp",
+    "./assets/vfx/generated/v31307/hero-impacts/hunter-petal-impact.webp",
+    "./assets/vfx/heroes/hunter-r.webp",
+    "./assets/vfx/generated/v315/slayer-blood-rend-cyclone.webp",
+    "./assets/vfx/generated/v31307/hero-impacts/gunner-memory-impact.webp",
+    "./assets/vfx/generated/v31309/gunner-memory-laser-orb.webp",
+    "./assets/episode1a/hallucinated_orderly.webp",
+    "./assets/rc137/mob-attacks-01.png",
+    "./assets/episode1a/generated-v392/corridor_scream_echo.webp",
+    "./assets/episode1a/corrupted_guardian.webp",
+    "./assets/rc140/story-cycle-motions/mb-ep1a08-atlas.png",
+    "./assets/generated-v31224/actors-normalized/c386e08b76cf_ep1a_stabilization_supervisor.webp",
+    "./assets/vfx/bosses/v393/ep1a08-restraint-wave.webp",
+    "./assets/vfx/v31323/boss/mb-ep1a08/ep1a08-restraint-wave.webp",
+    "./assets/visual-test/hospital-orderly-motion-r51-v2.png",
+    "./assets/rc46/impacts/player-blood.webp",
+    "./assets/visual-test/hospital-prop-atlas-oriented.png",
+    "./assets/visual-test/hospital-floor-material-atlas.png",
+    "./assets/visual-test/hospital-quiet-material-atlas-r42.png",
+    "./assets/rc138/map-ep1a08.png",
+    "./assets/props/v290/hotel_luggage_cart.webp",
+    "./assets/props/v290/broken_street_lamp.webp",
+    "./assets/ailments-r61/dark.webp",
+    "./assets/ailments-r61/shock.webp",
+    "./assets/ailments-r61/frost.webp",
+    "./assets/ailments-r61/fire.webp",
+    "./assets/ailments-r61/charm.webp",
+    "./assets/ailments-r61/weakness.webp",
+    "./assets/ailments-r61/corruption.webp",
+    "./assets/ailments-r61/bind.webp",
+    "./assets/ailments-r61/harvest.webp",
+    "./assets/ailments-r61/pollution.webp",
+    "./assets/ailments-r61/disease.webp",
+    "./assets/ailments-r61/bleed.webp",
+    "./assets/pxf-baked-20261010/claw-magic-atlas.png",
+    "./assets/pxf-baked-20261010/claw-magic-player-atlas.png",
+    "./assets/pxf-baked-20261010/claw-magic-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-player-atlas.png",
+    "./assets/pxf-baked-20261010/explosion-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-player-atlas.png",
+    "./assets/pxf-baked-20261010/melee-spark-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-player-atlas.png",
+    "./assets/pxf-baked-20261010/silver-slash-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-05-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-06-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-07-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-08-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-09-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-10-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-11-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-12-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-13-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-14-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-15-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-16-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-17-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-18-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-19-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-20-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-21-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-22-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-23-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-24-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-25-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-26-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-27-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-28-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-29-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-30-enemy-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-player-atlas.png",
+    "./assets/pxf-baked-20261010/pxf-31-enemy-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-01-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-02-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-03-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-04-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-06-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-07-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-08-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-09-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-10-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-11-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-12-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-13-atlas.png",
+    "./assets/pxf-additional-baked-20261010/extra-14-atlas.png"
+  ],
+  "timers": [
+    {
+      "id": 1,
+      "ms": 24000
+    },
+    {
+      "id": 2,
+      "ms": 24000
+    },
+    {
+      "id": 3,
+      "ms": 24000
+    },
+    {
+      "id": 4,
+      "ms": 24000
+    },
+    {
+      "id": 5,
+      "ms": 24000
+    },
+    {
+      "id": 6,
+      "ms": 24000
+    },
+    {
+      "id": 7,
+      "ms": 24000
+    },
+    {
+      "id": 8,
+      "ms": 24000
+    },
+    {
+      "id": 9,
+      "ms": 24000
+    },
+    {
+      "id": 10,
+      "ms": 24000
+    },
+    {
+      "id": 11,
+      "ms": 24000
+    },
+    {
+      "id": 12,
+      "ms": 24000
+    },
+    {
+      "id": 13,
+      "ms": 24000
+    },
+    {
+      "id": 14,
+      "ms": 24000
+    },
+    {
+      "id": 15,
+      "ms": 24000
+    },
+    {
+      "id": 16,
+      "ms": 24000
+    },
+    {
+      "id": 17,
+      "ms": 24000
+    },
+    {
+      "id": 18,
+      "ms": 24000
+    },
+    {
+      "id": 19,
+      "ms": 24000
+    },
+    {
+      "id": 20,
+      "ms": 24000
+    },
+    {
+      "id": 21,
+      "ms": 24000
+    },
+    {
+      "id": 22,
+      "ms": 24000
+    },
+    {
+      "id": 23,
+      "ms": 24000
+    },
+    {
+      "id": 24,
+      "ms": 24000
+    },
+    {
+      "id": 25,
+      "ms": 24000
+    },
+    {
+      "id": 26,
+      "ms": 24000
+    },
+    {
+      "id": 27,
+      "ms": 24000
+    },
+    {
+      "id": 28,
+      "ms": 24000
+    },
+    {
+      "id": 29,
+      "ms": 24000
+    },
+    {
+      "id": 30,
+      "ms": 24000
+    },
+    {
+      "id": 31,
+      "ms": 24000
+    },
+    {
+      "id": 32,
+      "ms": 24000
+    },
+    {
+      "id": 33,
+      "ms": 24000
+    },
+    {
+      "id": 34,
+      "ms": 24000
+    },
+    {
+      "id": 35,
+      "ms": 24000
+    },
+    {
+      "id": 36,
+      "ms": 24000
+    },
+    {
+      "id": 37,
+      "ms": 24000
+    },
+    {
+      "id": 38,
+      "ms": 24000
+    },
+    {
+      "id": 39,
+      "ms": 24000
+    },
+    {
+      "id": 40,
+      "ms": 24000
+    },
+    {
+      "id": 41,
+      "ms": 24000
+    },
+    {
+      "id": 42,
+      "ms": 24000
+    },
+    {
+      "id": 43,
+      "ms": 24000
+    },
+    {
+      "id": 44,
+      "ms": 24000
+    },
+    {
+      "id": 45,
+      "ms": 24000
+    },
+    {
+      "id": 46,
+      "ms": 24000
+    },
+    {
+      "id": 47,
+      "ms": 24000
+    },
+    {
+      "id": 48,
+      "ms": 24000
+    },
+    {
+      "id": 49,
+      "ms": 24000
+    },
+    {
+      "id": 50,
+      "ms": 24000
+    },
+    {
+      "id": 51,
+      "ms": 24000
+    },
+    {
+      "id": 52,
+      "ms": 24000
+    },
+    {
+      "id": 53,
+      "ms": 24000
+    },
+    {
+      "id": 54,
+      "ms": 24000
+    },
+    {
+      "id": 55,
+      "ms": 24000
+    },
+    {
+      "id": 56,
+      "ms": 24000
+    },
+    {
+      "id": 57,
+      "ms": 24000
+    },
+    {
+      "id": 58,
+      "ms": 24000
+    },
+    {
+      "id": 59,
+      "ms": 24000
+    },
+    {
+      "id": 60,
+      "ms": 24000
+    },
+    {
+      "id": 61,
+      "ms": 24000
+    },
+    {
+      "id": 62,
+      "ms": 24000
+    },
+    {
+      "id": 63,
+      "ms": 24000
+    },
+    {
+      "id": 64,
+      "ms": 24000
+    },
+    {
+      "id": 65,
+      "ms": 24000
+    },
+    {
+      "id": 66,
+      "ms": 24000
+    },
+    {
+      "id": 67,
+      "ms": 24000
+    },
+    {
+      "id": 68,
+      "ms": 24000
+    },
+    {
+      "id": 69,
+      "ms": 24000
+    },
+    {
+      "id": 70,
+      "ms": 24000
+    },
+    {
+      "id": 71,
+      "ms": 24000
+    },
+    {
+      "id": 72,
+      "ms": 24000
+    },
+    {
+      "id": 73,
+      "ms": 24000
+    },
+    {
+      "id": 74,
+      "ms": 24000
+    },
+    {
+      "id": 75,
+      "ms": 24000
+    },
+    {
+      "id": 76,
+      "ms": 24000
+    },
+    {
+      "id": 77,
+      "ms": 24000
+    },
+    {
+      "id": 78,
+      "ms": 24000
+    },
+    {
+      "id": 79,
+      "ms": 24000
+    },
+    {
+      "id": 80,
+      "ms": 24000
+    },
+    {
+      "id": 81,
+      "ms": 24000
+    },
+    {
+      "id": 82,
+      "ms": 24000
+    },
+    {
+      "id": 83,
+      "ms": 24000
+    },
+    {
+      "id": 84,
+      "ms": 24000
+    },
+    {
+      "id": 85,
+      "ms": 24000
+    },
+    {
+      "id": 86,
+      "ms": 24000
+    },
+    {
+      "id": 87,
+      "ms": 24000
+    },
+    {
+      "id": 88,
+      "ms": 24000
+    },
+    {
+      "id": 89,
+      "ms": 24000
+    },
+    {
+      "id": 90,
+      "ms": 24000
+    },
+    {
+      "id": 91,
+      "ms": 24000
+    },
+    {
+      "id": 92,
+      "ms": 24000
+    },
+    {
+      "id": 93,
+      "ms": 24000
+    },
+    {
+      "id": 94,
+      "ms": 24000
+    },
+    {
+      "id": 95,
+      "ms": 24000
+    },
+    {
+      "id": 96,
+      "ms": 24000
+    },
+    {
+      "id": 97,
+      "ms": 24000
+    },
+    {
+      "id": 98,
+      "ms": 24000
+    },
+    {
+      "id": 99,
+      "ms": 24000
+    },
+    {
+      "id": 100,
+      "ms": 24000
+    },
+    {
+      "id": 101,
+      "ms": 24000
+    },
+    {
+      "id": 102,
+      "ms": 24000
+    },
+    {
+      "id": 103,
+      "ms": 24000
+    },
+    {
+      "id": 104,
+      "ms": 24000
+    },
+    {
+      "id": 105,
+      "ms": 24000
+    },
+    {
+      "id": 106,
+      "ms": 24000
+    },
+    {
+      "id": 107,
+      "ms": 24000
+    },
+    {
+      "id": 108,
+      "ms": 24000
+    },
+    {
+      "id": 109,
+      "ms": 24000
+    },
+    {
+      "id": 110,
+      "ms": 24000
+    },
+    {
+      "id": 111,
+      "ms": 24000
+    },
+    {
+      "id": 112,
+      "ms": 24000
+    },
+    {
+      "id": 113,
+      "ms": 24000
+    },
+    {
+      "id": 114,
+      "ms": 24000
+    },
+    {
+      "id": 115,
+      "ms": 24000
+    },
+    {
+      "id": 116,
+      "ms": 24000
+    },
+    {
+      "id": 117,
+      "ms": 24000
+    },
+    {
+      "id": 118,
+      "ms": 24000
+    },
+    {
+      "id": 119,
+      "ms": 24000
+    },
+    {
+      "id": 120,
+      "ms": 24000
+    },
+    {
+      "id": 121,
+      "ms": 24000
+    },
+    {
+      "id": 122,
+      "ms": 24000
+    },
+    {
+      "id": 123,
+      "ms": 24000
+    },
+    {
+      "id": 124,
+      "ms": 24000
+    },
+    {
+      "id": 125,
+      "ms": 24000
+    },
+    {
+      "id": 126,
+      "ms": 24000
+    },
+    {
+      "id": 127,
+      "ms": 24000
+    },
+    {
+      "id": 128,
+      "ms": 24000
+    },
+    {
+      "id": 129,
+      "ms": 24000
+    },
+    {
+      "id": 130,
+      "ms": 24000
+    },
+    {
+      "id": 131,
+      "ms": 24000
+    },
+    {
+      "id": 132,
+      "ms": 24000
+    },
+    {
+      "id": 133,
+      "ms": 24000
+    },
+    {
+      "id": 134,
+      "ms": 24000
+    },
+    {
+      "id": 135,
+      "ms": 24000
+    },
+    {
+      "id": 136,
+      "ms": 24000
+    },
+    {
+      "id": 137,
+      "ms": 24000
+    },
+    {
+      "id": 138,
+      "ms": 24000
+    },
+    {
+      "id": 139,
+      "ms": 24000
+    },
+    {
+      "id": 140,
+      "ms": 24000
+    },
+    {
+      "id": 141,
+      "ms": 24000
+    },
+    {
+      "id": 142,
+      "ms": 24000
+    },
+    {
+      "id": 143,
+      "ms": 24000
+    },
+    {
+      "id": 144,
+      "ms": 24000
+    },
+    {
+      "id": 145,
+      "ms": 24000
+    },
+    {
+      "id": 146,
+      "ms": 24000
+    },
+    {
+      "id": 147,
+      "ms": 24000
+    },
+    {
+      "id": 148,
+      "ms": 24000
+    },
+    {
+      "id": 149,
+      "ms": 24000
+    },
+    {
+      "id": 150,
+      "ms": 24000
+    },
+    {
+      "id": 151,
+      "ms": 24000
+    },
+    {
+      "id": 152,
+      "ms": 24000
+    },
+    {
+      "id": 153,
+      "ms": 24000
+    },
+    {
+      "id": 154,
+      "ms": 24000
+    },
+    {
+      "id": 155,
+      "ms": 24000
+    },
+    {
+      "id": 156,
+      "ms": 24000
+    },
+    {
+      "id": 157,
+      "ms": 24000
+    },
+    {
+      "id": 158,
+      "ms": 24000
+    },
+    {
+      "id": 159,
+      "ms": 24000
+    },
+    {
+      "id": 160,
+      "ms": 24000
+    },
+    {
+      "id": 161,
+      "ms": 24000
+    },
+    {
+      "id": 162,
+      "ms": 24000
+    },
+    {
+      "id": 163,
+      "ms": 24000
+    },
+    {
+      "id": 164,
+      "ms": 24000
+    },
+    {
+      "id": 165,
+      "ms": 24000
+    },
+    {
+      "id": 166,
+      "ms": 24000
+    },
+    {
+      "id": 167,
+      "ms": 24000
+    },
+    {
+      "id": 168,
+      "ms": 24000
+    },
+    {
+      "id": 169,
+      "ms": 24000
+    },
+    {
+      "id": 170,
+      "ms": 24000
+    },
+    {
+      "id": 171,
+      "ms": 24000
+    },
+    {
+      "id": 172,
+      "ms": 24000
+    },
+    {
+      "id": 173,
+      "ms": 24000
+    },
+    {
+      "id": 174,
+      "ms": 24000
+    },
+    {
+      "id": 175,
+      "ms": 24000
+    },
+    {
+      "id": 176,
+      "ms": 24000
+    },
+    {
+      "id": 177,
+      "ms": 24000
+    },
+    {
+      "id": 178,
+      "ms": 24000
+    },
+    {
+      "id": 179,
+      "ms": 24000
+    },
+    {
+      "id": 180,
+      "ms": 24000
+    },
+    {
+      "id": 181,
+      "ms": 24000
+    },
+    {
+      "id": 182,
+      "ms": 24000
+    },
+    {
+      "id": 183,
+      "ms": 24000
+    },
+    {
+      "id": 184,
+      "ms": 24000
+    },
+    {
+      "id": 185,
+      "ms": 24000
+    },
+    {
+      "id": 186,
+      "ms": 24000
+    },
+    {
+      "id": 187,
+      "ms": "rAF"
+    },
+    {
+      "id": 188,
+      "ms": 24000
+    },
+    {
+      "id": 189,
+      "ms": 24000
+    },
+    {
+      "id": 190,
+      "ms": 24000
+    },
+    {
+      "id": 191,
+      "ms": 24000
+    },
+    {
+      "id": 192,
+      "ms": 24000
+    },
+    {
+      "id": 193,
+      "ms": 24000
+    },
+    {
+      "id": 194,
+      "ms": 24000
+    },
+    {
+      "id": 195,
+      "ms": 24000
+    },
+    {
+      "id": 196,
+      "ms": 24000
+    },
+    {
+      "id": 197,
+      "ms": 24000
+    },
+    {
+      "id": 198,
+      "ms": 24000
+    },
+    {
+      "id": 199,
+      "ms": 24000
+    },
+    {
+      "id": 200,
+      "ms": 24000
+    },
+    {
+      "id": 201,
+      "ms": 24000
+    },
+    {
+      "id": 202,
+      "ms": 24000
+    },
+    {
+      "id": 203,
+      "ms": 24000
+    },
+    {
+      "id": 204,
+      "ms": 24000
+    },
+    {
+      "id": 205,
+      "ms": 24000
+    },
+    {
+      "id": 206,
+      "ms": 24000
+    },
+    {
+      "id": 207,
+      "ms": 24000
+    },
+    {
+      "id": 208,
+      "ms": 24000
+    },
+    {
+      "id": 209,
+      "ms": 24000
+    },
+    {
+      "id": 210,
+      "ms": 24000
+    },
+    {
+      "id": 211,
+      "ms": 24000
+    },
+    {
+      "id": 212,
+      "ms": 24000
+    },
+    {
+      "id": 213,
+      "ms": 24000
+    },
+    {
+      "id": 214,
+      "ms": 24000
+    },
+    {
+      "id": 215,
+      "ms": 24000
+    },
+    {
+      "id": 216,
+      "ms": 2100
+    },
+    {
+      "id": 217,
+      "ms": 2100
+    },
+    {
+      "id": 218,
+      "ms": 2100
+    },
+    {
+      "id": 219,
+      "ms": 2100
+    },
+    {
+      "id": 220,
+      "ms": 2100
+    },
+    {
+      "id": 221,
+      "ms": 2100
+    },
+    {
+      "id": 222,
+      "ms": 2100
+    },
+    {
+      "id": 223,
+      "ms": 2100
+    },
+    {
+      "id": 224,
+      "ms": 2100
+    },
+    {
+      "id": 225,
+      "ms": 2100
+    },
+    {
+      "id": 226,
+      "ms": 2100
+    },
+    {
+      "id": 227,
+      "ms": 2100
+    },
+    {
+      "id": 228,
+      "ms": 2100
+    },
+    {
+      "id": 229,
+      "ms": 2100
+    },
+    {
+      "id": 230,
+      "ms": 2100
+    },
+    {
+      "id": 231,
+      "ms": 2100
+    },
+    {
+      "id": 232,
+      "ms": 2100
+    },
+    {
+      "id": 233,
+      "ms": 2100
+    },
+    {
+      "id": 234,
+      "ms": 2100
+    },
+    {
+      "id": 235,
+      "ms": 2100
+    },
+    {
+      "id": 236,
+      "ms": 2100
+    },
+    {
+      "id": 237,
+      "ms": 2100
+    },
+    {
+      "id": 238,
+      "ms": 2100
+    },
+    {
+      "id": 239,
+      "ms": 24000
+    },
+    {
+      "id": 240,
+      "ms": 24000
+    },
+    {
+      "id": 241,
+      "ms": 24000
+    },
+    {
+      "id": 242,
+      "ms": 24000
+    },
+    {
+      "id": 243,
+      "ms": 24000
+    },
+    {
+      "id": 244,
+      "ms": 24000
+    },
+    {
+      "id": 245,
+      "ms": 24000
+    },
+    {
+      "id": 246,
+      "ms": 24000
+    },
+    {
+      "id": 247,
+      "ms": 24000
+    },
+    {
+      "id": 248,
+      "ms": 24000
+    },
+    {
+      "id": 249,
+      "ms": 24000
+    },
+    {
+      "id": 250,
+      "ms": 24000
+    },
+    {
+      "id": 251,
+      "ms": 24000
+    },
+    {
+      "id": 252,
+      "ms": 24000
+    },
+    {
+      "id": 253,
+      "ms": 24000
+    },
+    {
+      "id": 254,
+      "ms": 24000
+    },
+    {
+      "id": 255,
+      "ms": 24000
+    },
+    {
+      "id": 256,
+      "ms": 24000
+    },
+    {
+      "id": 257,
+      "ms": 24000
+    },
+    {
+      "id": 258,
+      "ms": 24000
+    },
+    {
+      "id": 259,
+      "ms": 24000
+    },
+    {
+      "id": 260,
+      "ms": 24000
+    },
+    {
+      "id": 261,
+      "ms": 24000
+    },
+    {
+      "id": 262,
+      "ms": 24000
+    },
+    {
+      "id": 263,
+      "ms": 24000
+    },
+    {
+      "id": 264,
+      "ms": 24000
+    },
+    {
+      "id": 265,
+      "ms": 24000
+    },
+    {
+      "id": 266,
+      "ms": 24000
+    },
+    {
+      "id": 267,
+      "ms": 24000
+    },
+    {
+      "id": 268,
+      "ms": 24000
+    },
+    {
+      "id": 269,
+      "ms": 24000
+    },
+    {
+      "id": 270,
+      "ms": 24000
+    },
+    {
+      "id": 271,
+      "ms": 24000
+    },
+    {
+      "id": 272,
+      "ms": 24000
+    },
+    {
+      "id": 273,
+      "ms": 24000
+    },
+    {
+      "id": 274,
+      "ms": 24000
+    },
+    {
+      "id": 275,
+      "ms": 24000
+    },
+    {
+      "id": 276,
+      "ms": 24000
+    },
+    {
+      "id": 277,
+      "ms": 24000
+    },
+    {
+      "id": 278,
+      "ms": 24000
+    },
+    {
+      "id": 279,
+      "ms": 24000
+    },
+    {
+      "id": 280,
+      "ms": 24000
+    },
+    {
+      "id": 281,
+      "ms": 24000
+    },
+    {
+      "id": 282,
+      "ms": 24000
+    },
+    {
+      "id": 283,
+      "ms": 24000
+    },
+    {
+      "id": 284,
+      "ms": 24000
+    },
+    {
+      "id": 285,
+      "ms": 24000
+    },
+    {
+      "id": 286,
+      "ms": 24000
+    },
+    {
+      "id": 287,
+      "ms": 24000
+    },
+    {
+      "id": 288,
+      "ms": 24000
+    },
+    {
+      "id": 289,
+      "ms": 24000
+    },
+    {
+      "id": 290,
+      "ms": 24000
+    },
+    {
+      "id": 291,
+      "ms": 24000
+    },
+    {
+      "id": 292,
+      "ms": 24000
+    },
+    {
+      "id": 293,
+      "ms": 24000
+    },
+    {
+      "id": 294,
+      "ms": 24000
+    },
+    {
+      "id": 295,
+      "ms": 24000
+    },
+    {
+      "id": 296,
+      "ms": 24000
+    },
+    {
+      "id": 297,
+      "ms": 24000
+    },
+    {
+      "id": 298,
+      "ms": 24000
+    },
+    {
+      "id": 299,
+      "ms": 24000
+    },
+    {
+      "id": 300,
+      "ms": 24000
+    },
+    {
+      "id": 301,
+      "ms": 24000
+    },
+    {
+      "id": 302,
+      "ms": 24000
+    },
+    {
+      "id": 303,
+      "ms": 24000
+    },
+    {
+      "id": 304,
+      "ms": 24000
+    },
+    {
+      "id": 305,
+      "ms": 24000
+    },
+    {
+      "id": 306,
+      "ms": 24000
+    },
+    {
+      "id": 307,
+      "ms": 24000
+    },
+    {
+      "id": 308,
+      "ms": 24000
+    },
+    {
+      "id": 309,
+      "ms": 24000
+    },
+    {
+      "id": 310,
+      "ms": 24000
+    },
+    {
+      "id": 311,
+      "ms": 24000
+    },
+    {
+      "id": 312,
+      "ms": 24000
+    },
+    {
+      "id": 313,
+      "ms": 24000
+    },
+    {
+      "id": 314,
+      "ms": 24000
+    },
+    {
+      "id": 315,
+      "ms": 24000
+    },
+    {
+      "id": 316,
+      "ms": 24000
+    },
+    {
+      "id": 317,
+      "ms": 24000
+    },
+    {
+      "id": 318,
+      "ms": 24000
+    },
+    {
+      "id": 319,
+      "ms": 24000
+    },
+    {
+      "id": 320,
+      "ms": 24000
+    },
+    {
+      "id": 321,
+      "ms": 24000
+    },
+    {
+      "id": 322,
+      "ms": 24000
+    },
+    {
+      "id": 323,
+      "ms": 24000
+    },
+    {
+      "id": 324,
+      "ms": 24000
+    },
+    {
+      "id": 325,
+      "ms": 24000
+    },
+    {
+      "id": 326,
+      "ms": 24000
+    },
+    {
+      "id": 327,
+      "ms": 24000
+    },
+    {
+      "id": 328,
+      "ms": 24000
+    },
+    {
+      "id": 329,
+      "ms": 24000
+    },
+    {
+      "id": 330,
+      "ms": 24000
+    },
+    {
+      "id": 331,
+      "ms": 24000
+    },
+    {
+      "id": 332,
+      "ms": 24000
+    },
+    {
+      "id": 333,
+      "ms": 24000
+    },
+    {
+      "id": 334,
+      "ms": 24000
+    },
+    {
+      "id": 335,
+      "ms": 24000
+    },
+    {
+      "id": 336,
+      "ms": 24000
+    },
+    {
+      "id": 337,
+      "ms": 24000
+    },
+    {
+      "id": 338,
+      "ms": 24000
+    },
+    {
+      "id": 339,
+      "ms": 24000
+    },
+    {
+      "id": 340,
+      "ms": 24000
+    },
+    {
+      "id": 341,
+      "ms": 24000
+    },
+    {
+      "id": 342,
+      "ms": 24000
+    },
+    {
+      "id": 343,
+      "ms": 24000
+    },
+    {
+      "id": 344,
+      "ms": 24000
+    }
+  ],
+  "errors": [],
+  "substitutions": [
+    "CPU VM, no browser or GPU",
+    "DOM/layout/canvas/audio endpoints are inert presentation stubs",
+    "Image pixel decode stub: existence checked against preserved local files or embedded data, dimensions synthetic",
+    "Timers/rAF recorded, not automatically fired; tick invoked explicitly",
+    "fetch serves existing local files only; no network transport",
+    "localStorage/sessionStorage are fresh in-memory Maps"
+  ]
+}
