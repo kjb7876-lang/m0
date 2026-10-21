@@ -28,7 +28,8 @@ def refuses(fn, text):
 
 verified = gate.validate_artifact(OUT / 'site', approval)
 check('real final B artifact validates independently of release approval', lambda: None)
-check('review-required record refuses actual release', lambda: refuses(lambda: gate.validate_source(approval), 'not approved'))
+pending = copy.deepcopy(approval); pending['status'] = 'review-required'
+check('explicit review-required fixture refuses release regardless of production status', lambda: refuses(lambda: gate.validate_source(pending), 'not approved'))
 bad = copy.deepcopy(approval); bad['expectedRuntime']['index.html'] = '0' * 64
 check('different final HTML refuses artifact', lambda: refuses(lambda: gate.validate_artifact(OUT / 'site', bad), 'runtime differs'))
 badm = copy.deepcopy(m); badm['hospitalB1Test']['buildSourceCommit'] = ''
@@ -55,6 +56,13 @@ with tempfile.TemporaryDirectory(prefix='source-gate-', dir=OUT) as folder:
     record = copy.deepcopy(approval); record['status'] = 'approved'
     record['candidateSource'].update(pullRequest=999, headSha=git('rev-parse', 'HEAD'), evidenceSHA256=gate.sha(evidence.read_bytes()))
     check('disposable full-source/evidence fixture accepts matching PR', lambda: gate.validate_source(record, repo, {'number': 999}))
+    def approved_fixture_negative():
+        before = copy.deepcopy(record)
+        negative = copy.deepcopy(record); negative['status'] = 'review-required'
+        refuses(lambda: gate.validate_source(negative, repo, {'number': 999}), 'not approved')
+        assert record == before and record['status'] == 'approved'
+        gate.validate_source(record, repo, {'number': 999})
+    check('negative fixture copied from approved input refuses without changing approved source', approved_fixture_negative)
     check('a different PR cannot reuse source approval', lambda: refuses(lambda: gate.validate_source(record, repo, {'number': 998}), 'another PR'))
     changed_source.write_text('fixture changed\n')
     check('dirty tracked source refuses approval', lambda: refuses(lambda: gate.validate_source(record, repo), 'Dirty source'))
