@@ -1,0 +1,115 @@
+{
+  "schema": "m0.hospital.clean-cpu-preflight/v1",
+  "sourceCommit": "bcc25e6b7be87212afa6113be1a4d77a60f2309f",
+  "sourceTree": "ac7df847be0c39afafe4bbdbdf87d85a4019ecd6",
+  "startedAt": "2026-10-21T03:41:12.691712+00:00",
+  "finishedAt": "2026-10-21T03:46:43.173308+00:00",
+  "freshResultFiles": true,
+  "executedCommands": [
+    {
+      "command": [
+        "node",
+        "out/hospital-b1/build-connected/hospital-sim.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "node",
+        "out/hospital-b1/build-connected/audit/audit.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-build.cpu.test.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "node",
+        "scripts/hospital-b1-storage.cpu.test.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-release-gate.cpu.test.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-workflow.cpu.test.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "resultHashes": {
+    "out/hospital-b1/build-connected/final-results.json": "e1ec9721bcb5a248a1954cbab29360c4402d6639232ba555253b2f4e6cc367fd",
+    "out/hospital-b1/build-connected/audit/results.json": "f124fb594003bfa8dbf3ac5c8b6ea1cd3c4f102ff1434d65f2a853d5b5c0fadb",
+    "out/hospital-b1/build-connected/build-chain-results.json": "d85b0c48f0f29e34c486c98aa83ef5bf2a1aa03b29da0c3f9c14bb44d6e73613",
+    "out/hospital-b1/build-connected/storage-results.json": "90d9a877a1f950f6621601475684fe751adf6a6988bc626dbe42e89d1c5bf222",
+    "out/hospital-b1/build-connected/release-gate-tests.json": "f13992bd86d4b1ba3dd660a3871ca04779a5b3d9e4aa4f97eef936572de11369",
+    "out/hospital-b1/build-connected/workflow-wiring-results.json": "ef28473a8abe25ead67baf87db6897448abbbe4954aee0f0e27c7a5a4d44be4a"
+  },
+  "summary": {
+    "final-results.json": {
+      "passed": 29,
+      "failed": 0
+    },
+    "audit/results.json": {
+      "passed": 10,
+      "failed": 0
+    },
+    "build-chain-results.json": {
+      "passed": 7,
+      "failed": 0
+    },
+    "storage-results.json": {
+      "passed": 6,
+      "failed": 0
+    },
+    "release-gate-tests.json": {
+      "passed": 14,
+      "failed": 0
+    },
+    "workflow-wiring-results.json": {
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "sourcePathHashes": {
+    ".github/workflows/pages.yml": "11c3aa3d899ca9e7385a54338f785ef34a6415ab084a5548d5acbf6976980518",
+    "client-source/hospital-prototype-b1.js": "57bb9497ce5934485b4a26ad98f94f9d3e173d989444811e45960e7f94e52229",
+    "client-source/hospital-visual-b1.js": "5406f9743eee8548df1eb8ef3816c1ecfebb1e4e83a0f72e8b93b1c1b479b852",
+    "client-source/hospital-sight-fix-b1.js": "85429c2a4af9f1eabc6d59eaebe585b349e8074fd322ba4700023cbf9050e026",
+    "client-source/hospital-test-storage-b1.js": "5c0a10aaba9d14c881ee7b65026c027d591aab3acfeb7bb099c1a7026369dc4a",
+    "scripts/apply-hospital-prototype-b1.py": "0a316e6803c1397a5b13c4ff566032e5048f239df8d21aa99cd899931a05006c",
+    "scripts/apply-hospital-visual-b1.py": "4711cb30900b36a794642adb8730ebffb1ab0547fa795043499cba9be26e533c",
+    "scripts/apply-hospital-sight-fix-b1.py": "e0595f91a815b2c73877f74e5e3626fb731bb4cfac987ca74142faeaf033271a",
+    "scripts/build-hospital-b1.py": "40465d2de3b72234552b3fe3aca50057cd85999e4d52b2711f0e4d0317c41eaf",
+    "scripts/build-hospital-b1-release.sh": "1d9bfe4b3cf272f51623f7ab380be6b821e6abc036ed9103532e3b5d22de2831",
+    "scripts/prepare-hospital-b1-cpu.py": "6964c06b231fc54f74c1688be3d114bef1ed02c969ccf682dc6676d3af0375b6",
+    "scripts/run-hospital-b1-cpu.py": "a4cfd16f9d65cff583f0d7cd9965b478ae56ead96904bcaf45d1bdba2e9412ec",
+    "scripts/hospital-b1-release-gate.py": "9870e6b924f498e59cea72c3c1ca6d00010bda07fcb77cdf4758215da32f6ee9",
+    "scripts/hospital-b1-build.cpu.test.py": "3fe64f191231ee576cdf218d0861aa2935b63315d1c0c6ab0b071c8abf71764e",
+    "scripts/hospital-b1-storage.cpu.test.mjs": "12c0f126035708e303489e20b887fed4b589254d57df4314781acd5e3f47be51",
+    "scripts/hospital-b1-release-gate.cpu.test.py": "a2f428d119e9766e764a8d635eb43e732b199a93de73dcecfed5cb7b43c37ea2",
+    "scripts/hospital-b1-workflow.cpu.test.py": "eca3513f42cfad1a1b05825a55845ea0462414176cd279f36ef4376b99512fa6",
+    "docs/hospital-b1-evidence/hospital-sim.mjs": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53",
+    "docs/hospital-b1-evidence/audit.mjs": "1e66877c35ade1a635bc25a975c52c7d14672156172de7aff7b5b6d85a29199a"
+  },
+  "runtimeHashes": {
+    "index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+    "dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d"
+  },
+  "manifestSHA256BeforeReleaseStamp": "411ff6db94af2fb7ff2e05e1cfa3e6dfa44068595959f8db01bc0f3ea5d136dc",
+  "originalUserSavesUsed": false,
+  "browserExecuted": false,
+  "ok": true
+}

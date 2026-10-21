@@ -1,0 +1,11 @@
+PASS mask: pre-masked source clone and repeated same-state attach remain single
+PASS mask: actual updateSight24 preserves state/uniform identity across ordinary mask updates
+PASS control: generic non-opted-in forced-state path stays unchanged outside hospital fix
+PASS mask FIX: native tone then same-scene option OFF/ON keeps one marker mask and tone
+PASS resources: helper-first release preserves shared textures then native clear/dispose owns them once
+PASS resources: native scene-first clear releases marker objects once; fresh state/materials remain single
+PASS resources: actual renderer dispose is idempotent and post-dispose helper cleanup does not double-dispose
+PASS resources: repeated options/region/host/guest cycles retain no marker instances or shared-texture disposal
+PASS mask FIX: opted hospital source/clone current states rebind existing shaders independently
+PASS mask FIX: original callback effects and R75 tone uniform survive clone/state replacement
+{"passed":10,"failed":0,"findings":[{"id":"GENERIC-CONTROL","classification":"unrelated generic material path intentionally unchanged; not opted into hospital fix","counts":{"vertexVarying":2,"fragmentVarying":2,"maskUniform":2,"maskMultiplication":2,"worldLocal":2}}],"gameInputsUnchanged":true}

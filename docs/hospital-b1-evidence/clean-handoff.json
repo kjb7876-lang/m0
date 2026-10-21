@@ -1,0 +1,41 @@
+{
+  "executionCommit": "bcc25e6b7be87212afa6113be1a4d77a60f2309f",
+  "executionTree": "ac7df847be0c39afafe4bbdbdf87d85a4019ecd6",
+  "cleanTrackedSource": true,
+  "freshBaselineBuild": true,
+  "sixFilePatchSHA256": "bf26e59ef362884e3130e10d132f79ac34d4fd67d08cd071eb4cb95ffb2f2801",
+  "evidenceSHA256": "ed73a5ad50eb0cf799fb8618c85533a31ace0999d8a48ee9c4b4f4877cc85379",
+  "preparationDiagnostics": [
+    "Offline tree reconstruction first required --missing-ok for unrelated partial-clone blobs; no remote protocol was allowed. Exact imported commit hashes/trees were subsequently matched.",
+    "An initial diagnostic artifact at baseline HEAD marked sourceTreeDirty=true and is preserved outside final output; no CPU acceptance was claimed for it.",
+    "Sparse reset omitted tracked docs; an initial runner attempt failed before executing the harness. Missing tracked files were materialized with identical Git bytes and the failed log was preserved. The final whole run was started only after preparation succeeded and git diff HEAD was empty."
+  ],
+  "sourceReviewStatus": "review-required; no actual PR yet; B and R77 pins not changed",
+  "stampStatus": "manifest shown is candidate before approval stamp, not deploy manifest",
+  "limits": [
+    "CPU fixtures; real runtime helpers but inert DOM/input/clock/rendering substitutes; assisted kills and seeded prior progress",
+    "Version6 outer validator fixture; no original user save compatibility",
+    "No browser/GPU/mobile/touch/flashlight/natural campaign/real co-op transport acceptance",
+    "warmFrameNoAllocation in retained harness means stable root/resource counts, not zero JavaScript allocations",
+    "7 mesh / 84 triangles are candidate geometry counts, not measured GPU draw calls or performance"
+  ],
+  "evidenceFiles": {
+    "clean-baseline-results.json": "c5dacbea4f8e535e0c879789d9dc02887dcedb36436562fb97de8c65abef5ff8",
+    "clean-build-chain-results.json": "d85b0c48f0f29e34c486c98aa83ef5bf2a1aa03b29da0c3f9c14bb44d6e73613",
+    "clean-checkout-results.json": "ed73a5ad50eb0cf799fb8618c85533a31ace0999d8a48ee9c4b4f4877cc85379",
+    "clean-command-1.log": "6fed6f1aaa7572ac0d57fb468ede0a6922f953c3a232f181abb71a2117746a0b",
+    "clean-command-2.log": "a9854fbce769338ed8ff95dce4be599980926e07ccb45442298980ea4d95f90d",
+    "clean-command-3.log": "502ab9813617234409f9033c2efe1c20201d51c05fb8cd2a072389ea65949ad4",
+    "clean-command-4.log": "28ec36813b8e83726287c4d6adba79ab85d8ecae045910256e8c8e0acbd9f99f",
+    "clean-command-5.log": "e25cdee968efc55a5e3debb3e85b987345ae1c5f903b0881ca7fe81a0565ebb2",
+    "clean-command-6.log": "342c15ea761216eb6284c8c522d9d86ae8554af6b33f94c75f910b7d7253f78f",
+    "clean-fixture-preparation.json": "83e85387d2c10c6a911c1a4e07c34af0a14a7d725ed962af5dd800434cddb946",
+    "clean-mask-results.json": "f124fb594003bfa8dbf3ac5c8b6ea1cd3c4f102ff1434d65f2a853d5b5c0fadb",
+    "clean-production-gate-refusal.json": "449130ff8b6d679f422f331c9c98c3b48fde0d447581f9be60bbc588b9ddb5ea",
+    "clean-release-gate-results.json": "f13992bd86d4b1ba3dd660a3871ca04779a5b3d9e4aa4f97eef936572de11369",
+    "clean-runtime-results.json": "e1ec9721bcb5a248a1954cbab29360c4402d6639232ba555253b2f4e6cc367fd",
+    "clean-static-results.json": "64cc64d4437173958672e89dbfe922ce033985fcd302ceed08a01e9a08468200",
+    "clean-storage-results.json": "90d9a877a1f950f6621601475684fe751adf6a6988bc626dbe42e89d1c5bf222",
+    "clean-workflow-wiring-results.json": "ef28473a8abe25ead67baf87db6897448abbbe4954aee0f0e27c7a5a4d44be4a"
+  }
+}
