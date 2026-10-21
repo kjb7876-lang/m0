@@ -14,13 +14,13 @@
   "rendererCacheKey": "hospital-b1=a09c0d264510286b",
   "storagePrefix": "storyworld.hospital-b1.test.v1:",
   "candidateSource": {
-    "pullRequest": 22,
-    "headSha": "1d40f07b1a85521f354e03aea777d02cd0d7fbed",
+    "pullRequest": 23,
+    "headSha": "f0e2028a421344354c5ecffbed9996c2bf017e45",
     "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
-    "evidenceSHA256": "0bb8a56f427cbc5d64d0958298225f8edd2dd421b7a1725217c0aa00fa741c14"
+    "evidenceSHA256": "e2b8323ee6e11806e7f1be40b8b069c2f4cc7afc3b1caa19b1da1f593e1650f7"
   },
   "hospitalB2": {
-    "status": "review-required",
+    "status": "approved",
     "expectedRuntime": {
       "index.html": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
       "dist/phase1.js": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
