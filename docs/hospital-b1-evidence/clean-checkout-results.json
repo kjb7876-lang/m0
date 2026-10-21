@@ -1,8 +1,8 @@
 {
   "schema": "m0.hospital-b2.review-composite/v1",
-  "sourcePathHashesCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
+  "sourcePathHashesCommit": "B3 deployment source; exact source commit bound by approval candidateSource",
   "sourcePathHashes": {
-    ".github/workflows/pages.yml": "d396062ff4b26a252f732d7a6a2bd4db0d8b0e6f16e732edefc535c204fd1d2a",
+    ".github/workflows/pages.yml": "490241bdb8abceef97a3e2ab98f9bcce17b0adf76f4e0d743ea9bd66dbec7bf3",
     "client-source/hospital-prototype-b1.js": "57bb9497ce5934485b4a26ad98f94f9d3e173d989444811e45960e7f94e52229",
     "client-source/hospital-visual-b1.js": "5406f9743eee8548df1eb8ef3816c1ecfebb1e4e83a0f72e8b93b1c1b479b852",
     "client-source/hospital-sight-fix-b1.js": "85429c2a4af9f1eabc6d59eaebe585b349e8074fd322ba4700023cbf9050e026",
@@ -14,11 +14,11 @@
     "scripts/build-hospital-b1-release.sh": "1d9bfe4b3cf272f51623f7ab380be6b821e6abc036ed9103532e3b5d22de2831",
     "scripts/prepare-hospital-b1-cpu.py": "6964c06b231fc54f74c1688be3d114bef1ed02c969ccf682dc6676d3af0375b6",
     "scripts/run-hospital-b1-cpu.py": "4529fdad0dedc777cf920b4cd7d08101a238795769a55506607396bf0fda0f9c",
-    "scripts/hospital-b1-release-gate.py": "2193c6d69fbf0e9713939e51cf100f0a1a9a82568ba5d7805b988040c976db46",
+    "scripts/hospital-b1-release-gate.py": "efa5c9c89e67adee8a2dc7c5672bf1061efe2c48379dd19ffd6b52e5aa8a0c36",
     "scripts/hospital-b1-build.cpu.test.py": "3fe64f191231ee576cdf218d0861aa2935b63315d1c0c6ab0b071c8abf71764e",
     "scripts/hospital-b1-storage.cpu.test.mjs": "12c0f126035708e303489e20b887fed4b589254d57df4314781acd5e3f47be51",
     "scripts/hospital-b1-release-gate.cpu.test.py": "26632de3886e49ab5cf0a5f1279f13c9cb4271d804c1d4437b2234121365158a",
-    "scripts/hospital-b1-workflow.cpu.test.py": "da9f2f4a22c69c31cdf57d67beaf50c0943591f01b8fb15158fc1030ec5d2b60",
+    "scripts/hospital-b1-workflow.cpu.test.py": "f69cfd6a804871a3bd0ef76204800962dc3be8ff364721d0f4a3a0da143477ea",
     "docs/hospital-b1-evidence/hospital-sim.mjs": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53",
     "docs/hospital-b1-evidence/audit.mjs": "1e66877c35ade1a635bc25a975c52c7d14672156172de7aff7b5b6d85a29199a",
     "client-source/hospital-core-b2.js": "632ab1885cce684db64627db958f3da31f52dc391040e8ed3cb79675be99a35c",
@@ -30,7 +30,24 @@
     "docs/hospital-b2-evidence/checks.mjs": "fa60c5f81dbca7d534c6d20fe5cbfceccdf6304c765e192774c6f96c6d0c3de7",
     "docs/hospital-b2-evidence/structure.mjs": "0f5f488a50c2174ab37e697edb6ad182c3d9828268e502aab2c9a05493575b45",
     "docs/hospital-b2-evidence/ego-control.mjs": "77f1a8fa3041bc715b98c49b3f0adb64d21a292823a211d73cb95991bf0cb438",
-    "docs/hospital-b2-evidence/canonical-summons-b2.json": "f45ee6bad4fd0076a84ad2b14bc9c0e86a9040ac3b67b06e10dcd184196c95b6"
+    "docs/hospital-b2-evidence/canonical-summons-b2.json": "f45ee6bad4fd0076a84ad2b14bc9c0e86a9040ac3b67b06e10dcd184196c95b6",
+    "client-source/hospital-b3/frame-helper.js": "d0d3cfc2809e0afd151183b0e116493d6a102a505b826ab72b03ab85f4edef59",
+    "client-source/hospital-b3/hospital-core-b3.js": "d971d2613eeebc46cfaf57f80e4288ac0c408fc805d9ae2ca7446281c1a33b61",
+    "client-source/hospital-b3/hospital-runtime-b3.js": "cf9ce597778dce7407cd178c203a983ab011236b62254ac9ad3900101e311667",
+    "client-source/hospital-b3/plan.json": "b22fd7eade4a2a19178a98a0c19886b5ef45505387b7480d8950a3a964d5e3ac",
+    "client-source/hospital-b3/world-r74-hospital-door-adapter.js": "00565ee3c0b1c42c4c6ebc21faadc3d2a7dad3545d3a9f622d96a8fed70df028",
+    "scripts/build-hospital-b3.py": "0ce3cb483e2b1272d788044ad034f0e433d0bda83c27c9f1d170a7179a993973",
+    "scripts/hospital-b3-release-gate.py": "e43a7a2cf5d07b253c83d07482567111705e4fa566921c4d1d2415e6b1be10f7",
+    "docs/hospital-b3-evidence/STABILITY-HANDOFF.md": "e0e8438fb483648899d98a987cf61523bc8c464595e1e4ef617b6b79b28bb4c5",
+    "docs/hospital-b3-evidence/STABILITY-RECEIPT.json": "5317102bc832eabc9ec130c1fdb6de29c202feca10ccfae610410d611f8b3b6d",
+    "docs/hospital-b3-evidence/doors.json": "0b9d764b4b4051681b8236a580efe2805357e3afc908ddc5c4c9baf5095d6899",
+    "docs/hospital-b3-evidence/doors.log": "15a6bb3495dae9f522176e1407f39ce47bd83bc65d44e8a390996aaeb90ad92c",
+    "docs/hospital-b3-evidence/doors.mjs": "d9a43a0143f880907315d504a2bd126011c0e05f70f2fabc5b4001168158a25f",
+    "docs/hospital-b3-evidence/geometry-focus.json": "fbfbaafb5fc06d98fe346adf3d5da415356604f7d2ecc1385f827a486f05617b",
+    "docs/hospital-b3-evidence/geometry-focus.mjs": "431ea897bfffb8722795c72e83814af60ee323c7a9c187b7f50cfe34fb87dc4d",
+    "docs/hospital-b3-evidence/prior-FINAL-RUN.json": "c07d3c839fb689f60ff10c902a0edb401a349f0a5c128129324ccfbe25ea57c5",
+    "docs/hospital-b3-evidence/prior-HANDOFF.md": "5deaf92cf2079bf215fc17d0bdea9bb5be7aef48e128838a535cf723350449dd",
+    "docs/hospital-b3-evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134"
   },
   "sourceCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
   "baselinePreparation": "Preserved exact R77 full input copied into isolated local checkout; fresh R75/R76/R77 CPU chain rebuilt from preserved three R74 files. Full Actions workflow has not run for B2.",
@@ -246,5 +263,26 @@
   "browserExecuted": false,
   "originalUserSavesUsed": false,
   "deployed": false,
-  "finishedUTC": "2026-10-21T09:18:23.160062+00:00"
+  "finishedUTC": "2026-10-21T09:18:23.160062+00:00",
+  "hospitalB3": {
+    "runtimeHashes": {
+      "index.html": "4e9d9dd177a06c5031a8e19cd441060a02c9a4d3dcf71d458ca5b20859ac1aac",
+      "dist/phase1.js": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd"
+    },
+    "focusedResults": {
+      "doorAndRestoreAssertions": {
+        "pass": 10,
+        "fail": 0
+      },
+      "physicalLayoutDoorConfigurations": {
+        "pass": 8,
+        "fail": 0
+      }
+    },
+    "freshManualRerun": false,
+    "allTestsPassed": false,
+    "knownEGOFailure": "prior B2/B3 synthetic HP change unresolved",
+    "originalUserSavesUsed": false,
+    "userScreenReviewPending": true
+  }
 }

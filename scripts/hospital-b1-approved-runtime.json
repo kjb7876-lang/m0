@@ -28,5 +28,15 @@
     "storagePrefix": "storyworld.hospital-b2.test.v1:",
     "rendererCacheKey": "hospital-b2=1a18337b276c03a8",
     "knownEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved"
+  },
+  "hospitalB3": {
+    "status": "review-required",
+    "expectedRuntime": {
+      "index.html": "4e9d9dd177a06c5031a8e19cd441060a02c9a4d3dcf71d458ca5b20859ac1aac",
+      "dist/phase1.js": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd"
+    },
+    "storagePrefix": "storyworld.hospital-b3.test.v1:",
+    "rendererCacheKey": "hospital-b3=1ab57d7d64aa531e",
+    "knownEGOFailure": "B2/B3 synthetic EGO HP changes on first tick; unresolved"
   }
 }

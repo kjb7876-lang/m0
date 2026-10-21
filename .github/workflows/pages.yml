@@ -437,10 +437,17 @@ jobs:
       - name: Execute fresh B2 structure and actual loader-order CPU checks
         run: python3 scripts/run-hospital-b2-cpu.py
       - name: Require independently reviewed B2 bytes and disclosed EGO baseline control
-        id: hospital
+        id: hospitalb2
         run: python3 scripts/hospital-b2-release-gate.py
       - name: Verify complete B2 static artifact after final stamp
         run: node verify-pages-r62.mjs out/hospital-b2-static
+      - name: Compose the exact B3 stability candidate after preserved B2 gates
+        run: python3 scripts/build-hospital-b3.py
+      - name: Require reviewed B3 bytes and retained focused evidence
+        id: hospital
+        run: python3 scripts/hospital-b3-release-gate.py
+      - name: Verify complete B3 static artifact after final stamp
+        run: node verify-pages-r62.mjs out/hospital-b3-static
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -462,6 +469,9 @@ jobs:
             out/hospital-b2/production-order/*.json
             out/hospital-b2/site/web-manifest-r62.json
             out/hospital-b2-static/PAGES_STATIC_VERIFICATION_R62.json
+            out/hospital-b3/*.json
+            out/hospital-b3/site/web-manifest-r62.json
+            out/hospital-b3-static/PAGES_STATIC_VERIFICATION_R62.json
           retention-days: 14
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -470,7 +480,7 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: out/hospital-b2/site
+          path: out/hospital-b3/site
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -488,7 +498,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public hospital B2 runtime, preserved images and stamped manifest
+      - name: Verify public hospital B3 runtime, preserved images and stamped manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
@@ -517,7 +527,7 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('HOSPITAL_B2_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('HOSPITAL_B3_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
       - uses: actions/checkout@v6
         with:

@@ -1,0 +1,11 @@
+PASS Bay-derived combat node references and entry node point to their actual rooms
+PASS Frame projection matches physical 5.76 aperture at 3 zooms, options on/off, scoped/unscoped draw commands
+PASS Exactly 3 existing-schema doors; no R74 extra mobs or AI layout
+PASS All 3 native door interactions update collision, layout reference, wall presentation and persisted state
+PASS Door cannot close on player or living actor; closed leaf returns after clear threshold
+PASS Actual complete restore retains opened doors, valid old coordinates, and reserialized schema
+PASS Actual R74 clean rejects fourth, duplicate and unknown door IDs
+PASS Warm open/close transitions do not duplicate frames or change enemy identity/HP/wave
+PASS Production restore keeps STORY and DREAM door states separate
+PASS Frame projection remains aligned after actual door open/close and complete save reentry
+{"passed":10,"failed":0,"fatal":null}
