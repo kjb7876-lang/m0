@@ -1,0 +1,43 @@
+{
+  "status": "local focused stabilization; review pending; not deployed",
+  "previousCandidate": "out/hospital-b3-candidate",
+  "baselinePublicSHA": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
+  "files": {
+    "source/hospital-core-b3.js": "d971d2613eeebc46cfaf57f80e4288ac0c408fc805d9ae2ca7446281c1a33b61",
+    "source/hospital-runtime-b3.js": "cf9ce597778dce7407cd178c203a983ab011236b62254ac9ad3900101e311667",
+    "source/frame-helper.js": "d0d3cfc2809e0afd151183b0e116493d6a102a505b826ab72b03ab85f4edef59",
+    "build.py": "1267c26692f88d4828ab3c948d2fa811335619c964a2ef180497c14fbd98617a",
+    "source/plan.json": "b22fd7eade4a2a19178a98a0c19886b5ef45505387b7480d8950a3a964d5e3ac",
+    "source/world-r74-hospital-door-adapter.js": "00565ee3c0b1c42c4c6ebc21faadc3d2a7dad3545d3a9f622d96a8fed70df028",
+    "site/index.html": "4e9d9dd177a06c5031a8e19cd441060a02c9a4d3dcf71d458ca5b20859ac1aac",
+    "site/dist/phase1.js": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd",
+    "site/web-manifest-r62.json": "8c5a7f3b2abc83de93395e56971595cbeb671e6453f69da889fcff9dc42b0df4",
+    "evidence/doors.mjs": "d9a43a0143f880907315d504a2bd126011c0e05f70f2fabc5b4001168158a25f",
+    "evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134",
+    "evidence/doors.json": "0b9d764b4b4051681b8236a580efe2805357e3afc908ddc5c4c9baf5095d6899",
+    "evidence/doors.log": "15a6bb3495dae9f522176e1407f39ce47bd83bc65d44e8a390996aaeb90ad92c",
+    "evidence/geometry-focus.mjs": "431ea897bfffb8722795c72e83814af60ee323c7a9c187b7f50cfe34fb87dc4d",
+    "evidence/geometry-focus.json": "fbfbaafb5fc06d98fe346adf3d5da415356604f7d2ecc1385f827a486f05617b",
+    "stability.patch": "c2ee1acb1816cdf319fe58923beeba93701e4f1f8130c3f6c4b6ed95e266af09"
+  },
+  "previousCandidatePreserved": {
+    "source.patch": "5f708f4c36a87a80216734b9cffc20e813b3d2eb08f8b729633c9b33dece8564",
+    "HANDOFF.md": "5deaf92cf2079bf215fc17d0bdea9bb5be7aef48e128838a535cf723350449dd",
+    "site/index.html": "f2e269c26f4814394d88f2e5cb444d0d03d3940b4f1671bf708d7a2e6a6bb992",
+    "site/dist/phase1.js": "a1bfb1846b658032f731475e471db269caea24192c18d3ecff301e7de26524f3"
+  },
+  "focusedResults": {
+    "doorAndRestoreAssertions": {
+      "pass": 10,
+      "fail": 0
+    },
+    "physicalLayoutDoorConfigurations": {
+      "pass": 8,
+      "fail": 0
+    }
+  },
+  "fullRegressionRerun": false,
+  "EGOHP": "prior B2/B3 synthetic failure unresolved; not retested",
+  "screenGPU": false,
+  "storagePrefix": "storyworld.hospital-b3.test.v1:"
+}

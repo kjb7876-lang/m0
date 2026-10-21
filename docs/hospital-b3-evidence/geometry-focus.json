@@ -1,0 +1,116 @@
+{
+  "method": "Actual compiled layout/collision CPU comparison only; 8 door states; no path/play/GPU run",
+  "oldRenderer": "a1bfb1846b658032f731475e471db269caea24192c18d3ecff301e7de26524f3",
+  "candidateRenderer": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd",
+  "passed": 8,
+  "failed": 0,
+  "rows": [
+    {
+      "opened": [],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-0"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-1"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-0",
+        "door-1"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-2"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-0",
+        "door-2"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-1",
+        "door-2"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    },
+    {
+      "opened": [
+        "door-0",
+        "door-1",
+        "door-2"
+      ],
+      "unchangedPhysicalLayout": true,
+      "combatNodes": [
+        36,
+        39,
+        17,
+        19
+      ],
+      "entryNode": 44
+    }
+  ]
+}

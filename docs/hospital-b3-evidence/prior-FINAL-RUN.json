@@ -1,0 +1,77 @@
+{
+  "candidateHashes": {
+    "index.html": "f2e269c26f4814394d88f2e5cb444d0d03d3940b4f1671bf708d7a2e6a6bb992",
+    "dist/phase1.js": "a1bfb1846b658032f731475e471db269caea24192c18d3ecff301e7de26524f3",
+    "web-manifest-r62.json": "fba062c619329a64ec8114d20d2760c1b2b9211a860e1b76364e82c2f5cf0000"
+  },
+  "commands": [
+    {
+      "name": "geometry",
+      "command": [
+        "node",
+        "out/hospital-b3-candidate/evidence/geometry.mjs"
+      ],
+      "env": {},
+      "started": "2026-10-21T12:29:33.868778+00:00",
+      "seconds": 34.139,
+      "exitCode": 0,
+      "logSHA256": "b86bb31d7879c0e3801ab9ba51e480e78273b4e51623d45d8ba6db543259914d",
+      "harnessSHA256": "81ba79cc08777a103ee6a9251fd97676b4a2111095d825f6205609ec4f68f275"
+    },
+    {
+      "name": "broadphase",
+      "command": [
+        "node",
+        "out/hospital-b3-candidate/evidence/broadphase.mjs"
+      ],
+      "env": {},
+      "started": "2026-10-21T12:30:08.013421+00:00",
+      "seconds": 1.117,
+      "exitCode": 0,
+      "logSHA256": "f2c4b99d7c088deda5d0971d1c4e67beeeda437404f254af49596947c36a2361",
+      "harnessSHA256": "f4303bd2d48f6c391c178a798ef4661696f4dbf77d4dff1a76212d9fb0bc13f8"
+    },
+    {
+      "name": "production-order",
+      "command": [
+        "node",
+        "out/hospital-b3-candidate/evidence/checks.mjs"
+      ],
+      "env": {},
+      "started": "2026-10-21T12:30:09.139930+00:00",
+      "seconds": 90.339,
+      "exitCode": 1,
+      "logSHA256": "e2f9258c8686ee300cdbf016228284edfde8a83b0b2e5a23860cb795417f66ed",
+      "harnessSHA256": "73bf931444ff8d6d1b6da0d9c5af2c75d3c5e6e9975930cec2f6b83780d66886"
+    },
+    {
+      "name": "doors",
+      "command": [
+        "node",
+        "out/hospital-b3-candidate/evidence/doors.mjs"
+      ],
+      "env": {},
+      "started": "2026-10-21T12:31:39.491380+00:00",
+      "seconds": 41.322,
+      "exitCode": 0,
+      "logSHA256": "b1f2344ef59d3b77a1ade691d9a1925487f555900cbc9d42efcdd4fd8f0e21f8",
+      "harnessSHA256": "ca9338ee7bd1e115cb3a72c2e604433346866a2ec5b3507462a84018648082e3"
+    },
+    {
+      "name": "progression",
+      "command": [
+        "node",
+        "out/hospital-b3-candidate/evidence/progression.mjs"
+      ],
+      "env": {
+        "SIM_CASE_FILTER": "seed index coverage|native ordinary waves|native post checkpoint|native R72 portal admission|actual native hostile|hospital hidden/summoning|hospital post manual|co-op hospital and all nonhospital|Three/Legacy/options|actual CPU Three floor/wall"
+      },
+      "started": "2026-10-21T12:32:20.821736+00:00",
+      "seconds": 91.394,
+      "exitCode": 0,
+      "logSHA256": "8d3baec05cbbdda0b0b355f7a1d624e6af91c93edf9c94693bff4fc718e443f8",
+      "harnessSHA256": "18b6312e7faaa80e5f989e5ff2ca570fe2fb70158bb62651ebf34a6365fa4274"
+    }
+  ],
+  "knownEGOFailureIsNotSuccess": true
+}
