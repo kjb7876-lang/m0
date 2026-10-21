@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.hospital-b1-runtime-approval/v1",
-  "status": "review-required",
+  "status": "approved",
   "baselineCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
   "baselineR77": {
     "index.html": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4",
@@ -14,9 +14,9 @@
   "rendererCacheKey": "hospital-b1=a09c0d264510286b",
   "storagePrefix": "storyworld.hospital-b1.test.v1:",
   "candidateSource": {
-    "pullRequest": null,
-    "headSha": null,
+    "pullRequest": 22,
+    "headSha": "1d40f07b1a85521f354e03aea777d02cd0d7fbed",
     "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
-    "evidenceSHA256": null
+    "evidenceSHA256": "0bb8a56f427cbc5d64d0958298225f8edd2dd421b7a1725217c0aa00fa741c14"
   }
 }
