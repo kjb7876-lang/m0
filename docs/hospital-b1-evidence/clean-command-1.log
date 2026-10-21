@@ -1,0 +1,30 @@
+PASS seed index coverage/determinism across 4096 seeds and uint32 boundaries
+PASS all authored hospital starts to objective and reverse via exact analytic collision/path
+PASS hospital entry seed selection/save namespace roundtrip for all 3 index classes
+PASS native summon placement around objective retains safe paths and potential retreat
+PASS native ordinary waves block summon; assisted kills advance wave and native midboss transitions
+PASS STORY/DREAM stages and native core restore preserve partial HP/dead IDs without crossing layers
+PASS native post checkpoint reload then acknowledgement completes exactly once
+PASS native R72 portal admission/next/previous roundtrip and guest/battle denial
+PASS actual native hostile damage admits active a08 actors and rejects hidden; staff protection unresolved
+PASS three normal slots isolate hospital STORY/DREAM and preserve legacy bytes
+PASS generated R74/R75 doors stay in ID0..2 for inspected hospital-associated maps; actual door module restore/refusal
+PASS hospital hidden/summoning/active/bossReady/post/complete snapshot matrix
+PASS hospital save slot rejects synthetic invalid door metadata without overwriting legacy or rejected slot
+PASS all eight generated three-door states preserve objective route after reload/reentry and layer separation
+PASS hospital post manual save is blocked by actual slot readiness guard
+PASS B1 scope: all other canonical region layouts retain baseline bytes
+PASS B1 additive collision preserves sampled old positions, native walls and all anchors
+PASS B1 ward branches rejoin the native approach with two statically walkable alternatives
+PASS B1 old and new ward positions reload and keep objective routes in both layers
+PASS B1 floor polygons, boundary junctions and existing door registration agree without GPU
+PASS B1 merged floor exactly matches sampled baseline plus authored additions
+PASS B1 co-op host/guest preserve the published hospital layout; solo prototype only
+PASS mode regression counterfactual: prior real connection reuses solo layout in host/guest
+PASS mode cache/get/attach warm repeated off-host-off and off-guest-off rebind and reuse native safe arrival
+PASS mode native restore attaches current layout and preserves safe save positions across roles and layers
+PASS visual plan scope and structure/projection/door/legacy stay locked; HTML only adds test storage/cache
+PASS visual actual Three CPU meshes reuse wall texture/mask at wall texel density without floor props
+PASS visual palette/material/marker lifecycle restores host and other-region state with bounded resources
+PASS visual proposed material role contrast is numeric only and original asset bytes remain preserved
+{"passed":29,"failed":0,"ok":true}

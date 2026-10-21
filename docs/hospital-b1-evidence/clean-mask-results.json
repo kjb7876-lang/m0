@@ -1,0 +1,434 @@
+{
+  "schema": "m0.mask-resource-audit/v1",
+  "startedAt": "2026-10-21T04:00:54.678Z",
+  "node": "v24.19.0",
+  "three": "186",
+  "rendererSHA256": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
+  "harnessSHA256": "1e66877c35ade1a635bc25a975c52c7d14672156172de7aff7b5b6d85a29199a",
+  "protectedBefore": {
+    "out/hospital-b1/build-connected/site/dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
+    "out/hospital-b1/build-connected/site/index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+    "client-source/hospital-visual-b1.js": "5406f9743eee8548df1eb8ef3816c1ecfebb1e4e83a0f72e8b93b1c1b479b852",
+    "scripts/apply-hospital-visual-b1.py": "4711cb30900b36a794642adb8730ebffb1ab0547fa795043499cba9be26e533c",
+    "client-source/hospital-prototype-b1.js": "57bb9497ce5934485b4a26ad98f94f9d3e173d989444811e45960e7f94e52229",
+    "scripts/apply-hospital-prototype-b1.py": "0a316e6803c1397a5b13c4ff566032e5048f239df8d21aa99cd899931a05006c",
+    "client-source/hospital-sight-fix-b1.js": "85429c2a4af9f1eabc6d59eaebe585b349e8074fd322ba4700023cbf9050e026",
+    "scripts/apply-hospital-sight-fix-b1.py": "e0595f91a815b2c73877f74e5e3626fb731bb4cfac987ca74142faeaf033271a"
+  },
+  "privateHelper": {
+    "method": "verbatim extracted native tone function with fresh private WeakMap in audit closure",
+    "sha256": "588d86a13d73a3f500890d067e84c2e260c7423e694eb66d7f15e9f7e30dd16b"
+  },
+  "substitutions": [
+    "2D canvas methods are no-op counters; no raster pixels",
+    "WebGLRenderer, AssetCache, ChunkManager and CommandScene endpoints are CPU ownership stubs; real ThreeRenderer.clearScene/dispose method bodies execute",
+    "Mode and visual-option accessors are controlled fixtures; real networking, controller rendering and UI are not executed"
+  ],
+  "cases": [
+    {
+      "name": "mask: pre-masked source clone and repeated same-state attach remain single",
+      "ok": true,
+      "ms": 3.029533999999998,
+      "detail": {
+        "counts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "sameHook": true,
+        "mapShared": true,
+        "uniformReferences": "current same state",
+        "reachability": "normal marker clone path before later tone wrapping",
+        "GPUCompiled": false
+      }
+    },
+    {
+      "name": "mask: actual updateSight24 preserves state/uniform identity across ordinary mask updates",
+      "ok": true,
+      "ms": 0.6151559999999989,
+      "detail": {
+        "stateReplaced": false,
+        "uniformReferencesRetained": true,
+        "counts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "reachability": "normal render update",
+        "canvas": "no-op CPU stub"
+      }
+    },
+    {
+      "name": "control: generic non-opted-in forced-state path stays unchanged outside hospital fix",
+      "ok": true,
+      "ms": 0.8023130000000123,
+      "detail": {
+        "counts": {
+          "vertexVarying": 2,
+          "fragmentVarying": 2,
+          "maskUniform": 2,
+          "maskMultiplication": 2,
+          "worldLocal": 2
+        },
+        "lastUniformReferencesNewState": true,
+        "reachability": "assumed direct reuse; not a normal UI/state lifecycle reproduction",
+        "GPUCompiled": false
+      }
+    },
+    {
+      "name": "mask FIX: native tone then same-scene option OFF/ON keeps one marker mask and tone",
+      "ok": true,
+      "ms": 3.1964009999999945,
+      "detail": {
+        "counts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "currentUniformReferences": true,
+        "sequence": "masked source -> actual visual apply -> verbatim native tone -> OFF release -> ON apply -> clone callback",
+        "naturalUIReproduction": false,
+        "GPUCompiled": false
+      }
+    },
+    {
+      "name": "resources: helper-first release preserves shared textures then native clear/dispose owns them once",
+      "ok": true,
+      "ms": 1.2900319999999965,
+      "detail": {
+        "events": {
+          "asset-texture:71:cache-owned-original": 1,
+          "texture:72:scene-owned-shared-wall": 1,
+          "texture:73:scene-owned-mask": 1,
+          "base-material:74:stoneMaterial": 1,
+          "base-material:75:wallMaterial": 1,
+          "base-material:76:backgroundMaterial": 1,
+          "base-material:77:visualWardMaterial": 1,
+          "base-material:78:hospitalWallMaterial": 1,
+          "base-material:79:hospitalDoorDetailMaterial37": 1,
+          "base-material:80:visual-floor-0": 1,
+          "base-material:81:visual-floor-1": 1,
+          "base-geometry:82:wall": 1,
+          "base-geometry:83:floor": 1,
+          "marker-geometry:84:west-observation-marker": 1,
+          "marker-material:85:owned-clone": 1,
+          "marker-geometry:86:west-observation-marker": 1,
+          "marker-material:87:owned-clone": 1,
+          "marker-geometry:88:west-observation-marker": 1,
+          "marker-geometry:89:east-observation-marker": 1,
+          "marker-geometry:90:east-observation-marker": 1,
+          "marker-geometry:91:east-observation-marker": 1,
+          "marker-geometry:92:east-observation-marker": 1
+        },
+        "resources": 0,
+        "sceneChildren": 0,
+        "markerRoots": 0,
+        "calls": {
+          "chunksClear": 2,
+          "commandsClear": 2,
+          "commandsDispose": 1,
+          "assetsClear": 1,
+          "rendererDispose": 1,
+          "lightDispose": 1,
+          "glowDispose": 1,
+          "canvasRemove": 1,
+          "leaseRelease": 1
+        },
+        "markerGeometryCount": 7,
+        "markerMaterialCount": 2
+      }
+    },
+    {
+      "name": "resources: native scene-first clear releases marker objects once; fresh state/materials remain single",
+      "ok": true,
+      "ms": 2.0176900000000018,
+      "detail": {
+        "events": {
+          "asset-texture:93:cache-owned-original": 1,
+          "texture:94:scene-owned-shared-wall": 1,
+          "texture:95:scene-owned-mask": 1,
+          "base-material:96:stoneMaterial": 1,
+          "base-material:97:wallMaterial": 1,
+          "base-material:98:backgroundMaterial": 1,
+          "base-material:99:visualWardMaterial": 1,
+          "base-material:100:hospitalWallMaterial": 1,
+          "base-material:101:hospitalDoorDetailMaterial37": 1,
+          "base-material:102:visual-floor-0": 1,
+          "base-material:103:visual-floor-1": 1,
+          "base-geometry:104:wall": 1,
+          "base-geometry:105:floor": 1,
+          "marker-geometry:106:west-observation-marker": 1,
+          "marker-material:107:owned-clone": 1,
+          "marker-geometry:108:west-observation-marker": 1,
+          "marker-material:109:owned-clone": 1,
+          "marker-geometry:110:west-observation-marker": 1,
+          "marker-geometry:111:east-observation-marker": 1,
+          "marker-geometry:112:east-observation-marker": 1,
+          "marker-geometry:113:east-observation-marker": 1,
+          "marker-geometry:114:east-observation-marker": 1,
+          "texture:115:scene-owned-shared-wall": 1,
+          "texture:116:scene-owned-mask": 1,
+          "base-material:117:stoneMaterial": 1,
+          "base-material:118:wallMaterial": 1,
+          "base-material:119:backgroundMaterial": 1,
+          "base-material:120:visualWardMaterial": 1,
+          "base-material:121:hospitalWallMaterial": 1,
+          "base-material:122:hospitalDoorDetailMaterial37": 1,
+          "base-material:123:visual-floor-0": 1,
+          "base-material:124:visual-floor-1": 1,
+          "base-geometry:125:wall": 1,
+          "base-geometry:126:floor": 1,
+          "marker-geometry:127:west-observation-marker": 1,
+          "marker-material:128:owned-clone": 1,
+          "marker-geometry:129:west-observation-marker": 1,
+          "marker-material:130:owned-clone": 1,
+          "marker-geometry:131:west-observation-marker": 1,
+          "marker-geometry:132:east-observation-marker": 1,
+          "marker-geometry:133:east-observation-marker": 1,
+          "marker-geometry:134:east-observation-marker": 1,
+          "marker-geometry:135:east-observation-marker": 1
+        },
+        "resources": 0,
+        "sceneChildren": 0,
+        "markerRoots": 0,
+        "calls": {
+          "chunksClear": 2,
+          "commandsClear": 2,
+          "commandsDispose": 1,
+          "assetsClear": 1,
+          "rendererDispose": 1,
+          "lightDispose": 1,
+          "glowDispose": 1,
+          "canvasRemove": 1,
+          "leaseRelease": 2
+        },
+        "markerGeometryCount": 14,
+        "markerMaterialCount": 4,
+        "freshStateCounts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "reachability": "native clearScene then reconstructed new scene materials; actual WebGL/loader omitted"
+      }
+    },
+    {
+      "name": "resources: actual renderer dispose is idempotent and post-dispose helper cleanup does not double-dispose",
+      "ok": true,
+      "ms": 1.1555549999999926,
+      "detail": {
+        "events": {
+          "asset-texture:136:cache-owned-original": 1,
+          "texture:137:scene-owned-shared-wall": 1,
+          "texture:138:scene-owned-mask": 1,
+          "base-material:139:stoneMaterial": 1,
+          "base-material:140:wallMaterial": 1,
+          "base-material:141:backgroundMaterial": 1,
+          "base-material:142:visualWardMaterial": 1,
+          "base-material:143:hospitalWallMaterial": 1,
+          "base-material:144:hospitalDoorDetailMaterial37": 1,
+          "base-material:145:visual-floor-0": 1,
+          "base-material:146:visual-floor-1": 1,
+          "base-geometry:147:wall": 1,
+          "base-geometry:148:floor": 1,
+          "marker-geometry:149:west-observation-marker": 1,
+          "marker-material:150:owned-clone": 1,
+          "marker-geometry:151:west-observation-marker": 1,
+          "marker-material:152:owned-clone": 1,
+          "marker-geometry:153:west-observation-marker": 1,
+          "marker-geometry:154:east-observation-marker": 1,
+          "marker-geometry:155:east-observation-marker": 1,
+          "marker-geometry:156:east-observation-marker": 1,
+          "marker-geometry:157:east-observation-marker": 1
+        },
+        "resources": 0,
+        "sceneChildren": 0,
+        "markerRoots": 0,
+        "calls": {
+          "chunksClear": 1,
+          "commandsClear": 1,
+          "commandsDispose": 1,
+          "assetsClear": 1,
+          "rendererDispose": 1,
+          "lightDispose": 1,
+          "glowDispose": 1,
+          "canvasRemove": 1,
+          "leaseRelease": 1
+        },
+        "markerGeometryCount": 7,
+        "markerMaterialCount": 2,
+        "postDisposeHelperCall": "synthetic robustness order; controller normally drops the renderer reference"
+      }
+    },
+    {
+      "name": "resources: repeated options/region/host/guest cycles retain no marker instances or shared-texture disposal",
+      "ok": true,
+      "ms": 4.189838000000009,
+      "detail": {
+        "events": {
+          "asset-texture:158:cache-owned-original": 1,
+          "texture:159:scene-owned-shared-wall": 1,
+          "texture:160:scene-owned-mask": 1,
+          "base-material:161:stoneMaterial": 1,
+          "base-material:162:wallMaterial": 1,
+          "base-material:163:backgroundMaterial": 1,
+          "base-material:164:visualWardMaterial": 1,
+          "base-material:165:hospitalWallMaterial": 1,
+          "base-material:166:hospitalDoorDetailMaterial37": 1,
+          "base-material:167:visual-floor-0": 1,
+          "base-material:168:visual-floor-1": 1,
+          "base-geometry:169:wall": 1,
+          "base-geometry:170:floor": 1,
+          "marker-geometry:171:west-observation-marker": 1,
+          "marker-material:172:owned-clone": 1,
+          "marker-geometry:173:west-observation-marker": 1,
+          "marker-material:174:owned-clone": 1,
+          "marker-geometry:175:west-observation-marker": 1,
+          "marker-geometry:176:east-observation-marker": 1,
+          "marker-geometry:177:east-observation-marker": 1,
+          "marker-geometry:178:east-observation-marker": 1,
+          "marker-geometry:179:east-observation-marker": 1,
+          "marker-geometry:180:west-observation-marker": 1,
+          "marker-material:181:owned-clone": 1,
+          "marker-geometry:182:west-observation-marker": 1,
+          "marker-material:183:owned-clone": 1,
+          "marker-geometry:184:west-observation-marker": 1,
+          "marker-geometry:185:east-observation-marker": 1,
+          "marker-geometry:186:east-observation-marker": 1,
+          "marker-geometry:187:east-observation-marker": 1,
+          "marker-geometry:188:east-observation-marker": 1,
+          "marker-geometry:189:west-observation-marker": 1,
+          "marker-material:190:owned-clone": 1,
+          "marker-geometry:191:west-observation-marker": 1,
+          "marker-material:192:owned-clone": 1,
+          "marker-geometry:193:west-observation-marker": 1,
+          "marker-geometry:194:east-observation-marker": 1,
+          "marker-geometry:195:east-observation-marker": 1,
+          "marker-geometry:196:east-observation-marker": 1,
+          "marker-geometry:197:east-observation-marker": 1,
+          "marker-geometry:198:west-observation-marker": 1,
+          "marker-material:199:owned-clone": 1,
+          "marker-geometry:200:west-observation-marker": 1,
+          "marker-material:201:owned-clone": 1,
+          "marker-geometry:202:west-observation-marker": 1,
+          "marker-geometry:203:east-observation-marker": 1,
+          "marker-geometry:204:east-observation-marker": 1,
+          "marker-geometry:205:east-observation-marker": 1,
+          "marker-geometry:206:east-observation-marker": 1,
+          "marker-geometry:207:west-observation-marker": 1,
+          "marker-material:208:owned-clone": 1,
+          "marker-geometry:209:west-observation-marker": 1,
+          "marker-material:210:owned-clone": 1,
+          "marker-geometry:211:west-observation-marker": 1,
+          "marker-geometry:212:east-observation-marker": 1,
+          "marker-geometry:213:east-observation-marker": 1,
+          "marker-geometry:214:east-observation-marker": 1,
+          "marker-geometry:215:east-observation-marker": 1,
+          "marker-geometry:216:west-observation-marker": 1,
+          "marker-material:217:owned-clone": 1,
+          "marker-geometry:218:west-observation-marker": 1,
+          "marker-material:219:owned-clone": 1,
+          "marker-geometry:220:west-observation-marker": 1,
+          "marker-geometry:221:east-observation-marker": 1,
+          "marker-geometry:222:east-observation-marker": 1,
+          "marker-geometry:223:east-observation-marker": 1,
+          "marker-geometry:224:east-observation-marker": 1
+        },
+        "resources": 0,
+        "sceneChildren": 0,
+        "markerRoots": 0,
+        "calls": {
+          "chunksClear": 1,
+          "commandsClear": 1,
+          "commandsDispose": 1,
+          "assetsClear": 1,
+          "rendererDispose": 1,
+          "lightDispose": 1,
+          "glowDispose": 1,
+          "canvasRemove": 1,
+          "leaseRelease": 1
+        },
+        "markerGeometryCount": 42,
+        "markerMaterialCount": 12,
+        "cycles": 6,
+        "warmCalls": 60,
+        "warmMeaning": "same root/geometry/material/resource counts only, NOT zero JS allocations",
+        "networkOrUIExecuted": false
+      }
+    },
+    {
+      "name": "mask FIX: opted hospital source/clone current states rebind existing shaders independently",
+      "ok": true,
+      "ms": 1.099649999999997,
+      "detail": {
+        "sourceAndCloneBindingsIndependent": true,
+        "preExistingShaderUniformsRebound": true,
+        "repeatedAttach": 30,
+        "counts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "reachability": "state-only reassignment is controlled/forced; normal clear/new-material path tested separately",
+        "GPUCompiled": false
+      }
+    },
+    {
+      "name": "mask FIX: original callback effects and R75 tone uniform survive clone/state replacement",
+      "ok": true,
+      "ms": 1.209116999999992,
+      "detail": {
+        "counts": {
+          "vertexVarying": 1,
+          "fragmentVarying": 1,
+          "maskUniform": 1,
+          "maskMultiplication": 1,
+          "worldLocal": 1
+        },
+        "originalCallbackCalledOncePerShader": true,
+        "toneCodeCount": 1,
+        "toneUniformReferencePreserved": true,
+        "currentMaskUniformReference": true,
+        "GPUCompiled": false
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "GENERIC-CONTROL",
+      "classification": "unrelated generic material path intentionally unchanged; not opted into hospital fix",
+      "counts": {
+        "vertexVarying": 2,
+        "fragmentVarying": 2,
+        "maskUniform": 2,
+        "maskMultiplication": 2,
+        "worldLocal": 2
+      }
+    }
+  ],
+  "finishedAt": "2026-10-21T04:00:54.700Z",
+  "passed": 10,
+  "failed": 0,
+  "protectedAfter": {
+    "out/hospital-b1/build-connected/site/dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
+    "out/hospital-b1/build-connected/site/index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+    "client-source/hospital-visual-b1.js": "5406f9743eee8548df1eb8ef3816c1ecfebb1e4e83a0f72e8b93b1c1b479b852",
+    "scripts/apply-hospital-visual-b1.py": "4711cb30900b36a794642adb8730ebffb1ab0547fa795043499cba9be26e533c",
+    "client-source/hospital-prototype-b1.js": "57bb9497ce5934485b4a26ad98f94f9d3e173d989444811e45960e7f94e52229",
+    "scripts/apply-hospital-prototype-b1.py": "0a316e6803c1397a5b13c4ff566032e5048f239df8d21aa99cd899931a05006c",
+    "client-source/hospital-sight-fix-b1.js": "85429c2a4af9f1eabc6d59eaebe585b349e8074fd322ba4700023cbf9050e026",
+    "scripts/apply-hospital-sight-fix-b1.py": "e0595f91a815b2c73877f74e5e3626fb731bb4cfac987ca74142faeaf033271a"
+  },
+  "gameInputsUnchanged": true,
+  "interpretation": "Hospital scoped fix regression. Generic non-opt-in control intentionally preserves old behavior. CPU callback strings/dispose events only; not GPU/GLSL compilation or VRAM acceptance."
+}

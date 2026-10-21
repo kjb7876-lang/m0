@@ -1,0 +1,32 @@
+{"index.html": "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57", "dist/phase1.js": "22a04872281d2fe260d34c4c618f9b608c8afbefe1faf2c759f0ee00d9bf04bb"}
+{
+  "status": "R77_GUIDE_NORMAL_OVERLAY_APPLIED",
+  "baselineR76HtmlSha256": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775",
+  "baselineR76RendererSha256": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c",
+  "htmlSha256": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4",
+  "rendererSha256": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c",
+  "manifestSha256": "e315a3441722b43a6a353466a9fb54501101dec9b9d922b389b9160e8d542b42",
+  "rendererUnchanged": true,
+  "rendererCacheKey": "r76=1",
+  "scriptId": "guide-r77",
+  "runtimeChange": "guide-owned next-story travel chooses Normal; readable guide Continue",
+  "normalTravelScope": "one-use guide-issued open next-story portal only; existing story admission/guest guards retained",
+  "sceneAdvance": {
+    "parts": [
+      "pre",
+      "post",
+      "firstPost",
+      "awakenPre",
+      "prologue.pre",
+      "prologue.post",
+      "body"
+    ],
+    "safeBodyScope": "current unread safe-region narrative only; canonical key; journal/completed replay excluded",
+    "minimumDelayMs": 6000,
+    "maximumDelayMs": 45000,
+    "waitForNarration": true
+  },
+  "legacySave": "no schema change; transient token/timer are not serialized",
+  "headSHA": "e5b97cefd0162d78ad49cbed3f0785ded6b474c3"
+}
+{"schema": "m0.hospital.build-chain-cpu/v1", "cases": [{"name": "actual R75/R76/R77 overlay builders reproduce preserved runtime hashes from R74 input", "ok": true, "snapshots": {"R75": {"index.html": "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57", "dist/phase1.js": "22a04872281d2fe260d34c4c618f9b608c8afbefe1faf2c759f0ee00d9bf04bb"}, "R76": {"index.html": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775", "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"}, "R77": {"index.html": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4", "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"}}, "method": "R74 runtime/manifest inputs only; original overlay functions; scratch side outputs; no original gate or browser execution"}, {"name": "hospital builder runs after R77 and matches final artifact; renderer not lost", "ok": true, "runtimeHashes": {"index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f", "dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d"}}, {"name": "wrong overlay order rejects without overwriting hospital candidate", "ok": true}, {"name": "composition and cache key are deterministic", "ok": true, "cacheKey": "hospital-b1=a09c0d264510286b"}, {"name": "unapproved baseline refuses build", "ok": true}, {"name": "final full manifest, original assets and size summaries match", "ok": true, "files": 1914}, {"name": "manual release entry keeps all original gates and hospital overlay last", "ok": true, "method": "shell entry order assertion; full release entry not executed"}], "passed": 7, "failed": 0, "originalInputsAndEvidenceUnchanged": true, "browserOrGPU": false}

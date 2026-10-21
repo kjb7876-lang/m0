@@ -1,0 +1,27 @@
+{
+  "status": "PAGES_STATIC_SUBPATH_R62_PASSED",
+  "sourceHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc",
+  "webHTMLSha256": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+  "type": "NODE_STATIC_HTTP_UNDER_REPOSITORY_SUBPATH",
+  "prefix": "/m0/",
+  "hashChecks": 1914,
+  "headChecks": 1914,
+  "audioRangeChecks": 276,
+  "scriptURLs": [
+    "./dist/phase1.js?hospital-b1=a09c0d264510286b"
+  ],
+  "relativeModuleImports": [],
+  "requests": 2195,
+  "failures": [],
+  "wrongCaseRejected": true,
+  "nodeLauncherExcluded": true,
+  "privateBackupExcluded": true,
+  "allFilesBelow100MiB": true,
+  "publishedBytes": 483817283,
+  "browser": false,
+  "GPU": false,
+  "mobile": false,
+  "actualFourRemoteNetworks": false,
+  "remoteGitHubPages": false,
+  "remoteRender": false
+}

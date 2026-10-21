@@ -1,0 +1,65 @@
+{
+  "baselineCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
+  "reviewedSpatialSourceCommit": "c893f1f5172a33387c01241b4935d42d798ecbd8",
+  "candidateSite": "out/hospital-b1/build-connected/site",
+  "runtimeHashes": {
+    "index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+    "dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d",
+    "web-manifest-r62.json": "4c3be326be637d47727f33b6cc728541ea5068bac51f66f12a96edc79f030248"
+  },
+  "sourceHashes": {
+    "client-source/hospital-test-storage-b1.js": "5c0a10aaba9d14c881ee7b65026c027d591aab3acfeb7bb099c1a7026369dc4a",
+    "scripts/build-hospital-b1.py": "eb941de90057c70a2735c715a755b458475c6941d207b8b44aaf20907c1d485e",
+    "scripts/build-hospital-b1-release.sh": "67f19ab3e6186f6ae936baafcd37a4033017af98336c6e2f6af8ba900f56ccff",
+    "scripts/hospital-b1-build.cpu.test.py": "cad9f1136713c3a90759a85c3f86204153f2eae88405724645c5514da700984f",
+    "scripts/hospital-b1-storage.cpu.test.mjs": "12c0f126035708e303489e20b887fed4b589254d57df4314781acd5e3f47be51"
+  },
+  "priorSixSourcesUnchanged": true,
+  "newExecutions": {
+    "final-results.json": {
+      "passed": 29,
+      "failed": 0,
+      "resultSHA256": "84599a145ebf67cbbec3f6987399e46c254ee4018021729d196cecd3d18b9cb5"
+    },
+    "audit/results.json": {
+      "passed": 10,
+      "failed": 0,
+      "resultSHA256": "2d71b7dd70eedc4d216b0090e84b5d864dcb10f7dba203aa5090903120f0c8f3"
+    },
+    "build-chain-results.json": {
+      "passed": 7,
+      "failed": 0,
+      "resultSHA256": "d85b0c48f0f29e34c486c98aa83ef5bf2a1aa03b29da0c3f9c14bb44d6e73613"
+    },
+    "storage-results.json": {
+      "passed": 6,
+      "failed": 0,
+      "resultSHA256": "90d9a877a1f950f6621601475684fe751adf6a6988bc626dbe42e89d1c5bf222"
+    }
+  },
+  "fullRun": {
+    "startedAt": "2026-10-21T02:45:40.171Z",
+    "finishedAt": "2026-10-21T02:51:04.731Z",
+    "scriptSHA256": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53"
+  },
+  "harnessHashes": {
+    "hospital-sim.mjs": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53",
+    "audit/audit.mjs": "1e66877c35ade1a635bc25a975c52c7d14672156172de7aff7b5b6d85a29199a"
+  },
+  "oldCPUResultsPreserved": {
+    "full": "29/29 before cache/storage wiring",
+    "focused": "10/10 prior audit"
+  },
+  "storagePrefix": "storyworld.hospital-b1.test.v1:",
+  "rendererCacheKey": "hospital-b1=a09c0d264510286b",
+  "originalSaveSchemaChanged": false,
+  "originalUserSaveImported": false,
+  "originalUserSaveCompatibilityVerified": false,
+  "PagesWorkflowChanged": false,
+  "originalReleaseGatesChanged": false,
+  "fullReleaseEntryExecuted": false,
+  "publicDeploymentPerformed": false,
+  "CStarted": false,
+  "externalFullBackup": "unconfirmed: official upload helper tools/call failed: network; no final Library ID; exact-title lookup returned no item; no retry",
+  "originalActionsZIPLocalTransfer": "prior download failed; cause unknown; not retried"
+}

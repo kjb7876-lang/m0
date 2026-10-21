@@ -1,0 +1,55 @@
+{
+  "baselineSHA": "f415dfbf783c6290ab99125193d800429799c9f9",
+  "cleanCheckout": true,
+  "actualRebuildAndOriginalGatesExecuted": true,
+  "browserExecuted": false,
+  "gates": {
+    "r75-gate.json": {
+      "sourceCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
+      "runtimeHashes": {
+        "index.html": "971ab5fa455203576e0ec3005557321bc36e56220072d5b0f3078d53cc6d8f57",
+        "dist/phase1.js": "22a04872281d2fe260d34c4c618f9b608c8afbefe1faf2c759f0ee00d9bf04bb"
+      },
+      "generatedAssets": {
+        "assets/r75/doors.png": "183d35ed47640aa98f8d2800a8b5ebfc756af23c6c64f7aa93c2ea3b4f91b954",
+        "assets/r75/npcs.png": "990d761509aea18c49c01699d8e91b6022d049913934a42e75043721b3dfcf48",
+        "assets/r75/shaman-spear.png": "c73c7ed0bb15807d6860cbbd1e03109be4a9c8c3241039cc96466beaf2f12641"
+      },
+      "sourceSha256": "47a09cda7444df1bc2a09063da0748b367029f5c1fdeffb5660c477e6c60bd7a",
+      "status": "approved",
+      "audioApplied": false
+    },
+    "r77-gate.json": {
+      "approvalStatus": "approved",
+      "candidateSource": {
+        "headSha": "02d1cd636c671eae712f1a45648fed0c29b8602a",
+        "pullRequest": 21,
+        "workflowRunId": null
+      },
+      "manifestSHA256": "3dee937a779f73b19e9ef929430f5bdd36f44f2410966ac9ff056f44d5797d09",
+      "runtimeHashes": {
+        "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c",
+        "index.html": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4"
+      },
+      "sourceCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
+      "status": "R77_RELEASE_PIN_PASSED"
+    },
+    "r76-gate.json": {
+      "candidateSource": {
+        "headSha": "4499d479d3e18871e38fe69d6e8b21d62cfbef17",
+        "pullRequest": 19,
+        "workflowRunId": null
+      },
+      "manifestSHA256": "2fdb850699b8d6dc68842434f2ad2513ae75e7960e03800067d09f3c26d86c18",
+      "runtimeHashes": {
+        "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c",
+        "index.html": "f6a0d4d5ff4722c87ef6090e891bee46d5b455c3c9334aeea4535a330c84a775"
+      },
+      "sourceCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
+      "status": "R76_RELEASE_PIN_PASSED"
+    }
+  },
+  "originalBuildLogSHA256": "b0627f72533453628387580184407fd7c70bdb8cd8eac4efd84df2b151519bfb",
+  "rebuildInputSource": "/workspace/m0-work/out/hospital-b1-preflight-baseline",
+  "runtimePreserved": true
+}

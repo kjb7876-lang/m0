@@ -1,0 +1,22 @@
+{
+  "schema": "storyworld.hospital-b1-runtime-approval/v1",
+  "status": "approved",
+  "baselineCommit": "f415dfbf783c6290ab99125193d800429799c9f9",
+  "baselineR77": {
+    "index.html": "b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf131e4c4",
+    "dist/phase1.js": "cc71147117dbbb7fd04d2619c95408ad810804b1c1bb5462afbc09bd93f0502c"
+  },
+  "expectedRuntime": {
+    "index.html": "d2b0ac231ffab8463feb9675c06f21b18f63f1372dc5f1723ef99e8a65643d4f",
+    "dist/phase1.js": "a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d"
+  },
+  "baselineAssetRowsSHA256": "5da87022c51fefd3147aa51666ccdfa95aacec71c17072520103348d8e316581",
+  "rendererCacheKey": "hospital-b1=a09c0d264510286b",
+  "storagePrefix": "storyworld.hospital-b1.test.v1:",
+  "candidateSource": {
+    "pullRequest": 22,
+    "headSha": "1d40f07b1a85521f354e03aea777d02cd0d7fbed",
+    "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
+    "evidenceSHA256": "0bb8a56f427cbc5d64d0958298225f8edd2dd421b7a1725217c0aa00fa741c14"
+  }
+}

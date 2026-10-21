@@ -369,10 +369,10 @@ jobs:
       contents: read
       pages: read
     outputs:
-      html_sha: ${{ steps.r77.outputs.html_sha }}
-      renderer_sha: ${{ steps.r77.outputs.renderer_sha }}
-      asset_hashes_json: ${{ steps.r77.outputs.asset_hashes_json }}
-      manifest_sha: ${{ steps.r77.outputs.manifest_sha }}
+      html_sha: ${{ steps.hospital.outputs.html_sha }}
+      renderer_sha: ${{ steps.hospital.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.hospital.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.hospital.outputs.manifest_sha }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -416,15 +416,26 @@ jobs:
           set -euo pipefail
           mkdir -p out/r77
           python3 scripts/r77-release-gate.py | tee out/r77/release.json
-      - name: Verify every published file after the R77 overlay
+      - name: Preserve verified R77 baseline files before hospital composition
         shell: bash
         run: |
           set -euo pipefail
           node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
+      - name: Compose exact hospital B test artifact after all R77 gates
+        run: python3 scripts/build-hospital-b1.py
+      - name: Prepare deterministic CPU fixtures from this checkout
+        run: python3 scripts/prepare-hospital-b1-cpu.py
+      - name: Execute fresh hospital runtime, storage, source and workflow CPU checks
+        run: python3 scripts/run-hospital-b1-cpu.py
+      - name: Require reviewed full B source and stamp the exact final artifact
+        id: hospital
+        run: python3 scripts/hospital-b1-release-gate.py
+      - name: Verify every final B file under the repository subpath after stamping
+        run: node verify-pages-r62.mjs out/hospital-b1-static
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r77-release-manifest-${{ github.sha }}
+          name: hospital-b1-release-evidence-${{ github.sha }}
           path: |
             out/r75/
             out/r76/
@@ -432,6 +443,11 @@ jobs:
             out/r74/
             out/r73/
             _pages/docs/web-manifest-r62.json
+            out/hospital-b1/build-connected/*.json
+            out/hospital-b1/build-connected/*.log
+            out/hospital-b1/build-connected/audit/*.json
+            out/hospital-b1/build-connected/site/web-manifest-r62.json
+            out/hospital-b1-static/PAGES_STATIC_VERIFICATION_R62.json
           retention-days: 14
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -440,7 +456,7 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: _pages/docs
+          path: out/hospital-b1/build-connected/site
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -458,7 +474,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public R77 runtime, images and commit manifest
+      - name: Verify public hospital B1 runtime, preserved images and stamped manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
@@ -487,7 +503,7 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('R77_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('HOSPITAL_B1_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
       - uses: actions/checkout@v6
         with:
@@ -502,11 +518,11 @@ jobs:
           set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Open actual public R77 Pages and verify normal start and save compatibility
+      - name: Open hospital test Pages and verify normal start and isolated save reload
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
         run: node scripts/r75-public-smoke.browser.mjs
-      - name: Verify public R77 natural guide and Normal-mode proof
+      - name: Preserve R77 natural guide and Normal-mode proof on hospital test Pages
         shell: bash
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}

@@ -1,0 +1,9 @@
+{
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "Final B source review is not approved; refusing release\n",
+  "manifestBefore": "411ff6db94af2fb7ff2e05e1cfa3e6dfa44068595959f8db01bc0f3ea5d136dc",
+  "manifestAfter": "411ff6db94af2fb7ff2e05e1cfa3e6dfa44068595959f8db01bc0f3ea5d136dc",
+  "expectedReviewRequiredRefusal": true,
+  "stampNotWritten": true
+}

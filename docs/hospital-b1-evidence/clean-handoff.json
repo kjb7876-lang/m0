@@ -1,0 +1,102 @@
+{
+  "executionCommit": "e5b97cefd0162d78ad49cbed3f0785ded6b474c3",
+  "executionTree": "e4fe60efa0136be8829243d0f469f9e5e18be17d",
+  "cleanTrackedSource": true,
+  "changedExecutableSourcePathsSince297": [
+    "scripts/hospital-b1-release-gate.cpu.test.py"
+  ],
+  "testSHA256": "26632de3886e49ab5cf0a5f1279f13c9cb4271d804c1d4437b2234121365158a",
+  "evidenceSHA256": "0bb8a56f427cbc5d64d0958298225f8edd2dd421b7a1725217c0aa00fa741c14",
+  "previousEvidenceSHA256": "ed73a5ad50eb0cf799fb8618c85533a31ace0999d8a48ee9c4b4f4877cc85379",
+  "previousEvidenceCommit": "297e446ec3613324993a3557fe0d9a712185c0ed",
+  "previousFullOutputPreservedAt": "/workspace/m0-work/out/hospital-b1-clean-candidate/out/hospital-b1-before-fixture-fix",
+  "freshCPUCommands": [
+    {
+      "command": [
+        "node",
+        "out/hospital-b1/build-connected/hospital-sim.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "node",
+        "out/hospital-b1/build-connected/audit/audit.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-build.cpu.test.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "node",
+        "scripts/hospital-b1-storage.cpu.test.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-release-gate.cpu.test.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/hospital-b1-workflow.cpu.test.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "freshSummary": {
+    "final-results.json": {
+      "passed": 29,
+      "failed": 0
+    },
+    "audit/results.json": {
+      "passed": 10,
+      "failed": 0
+    },
+    "build-chain-results.json": {
+      "passed": 7,
+      "failed": 0
+    },
+    "storage-results.json": {
+      "passed": 6,
+      "failed": 0
+    },
+    "release-gate-tests.json": {
+      "passed": 15,
+      "failed": 0
+    },
+    "workflow-wiring-results.json": {
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "productionApprovalUnchangedSHA256": "64680d68b0715e15a83176eee2b1a63c150a26ddddb80670fd2bae7bc89edb68",
+  "productionApprovalStatus": "review-required",
+  "productionGateCodeChanged": false,
+  "runtimeOrWorkflowChanged": false,
+  "newBrowserOrGPUExecution": false,
+  "baselineRebuildRepeated": false,
+  "staticHTTPRepeated": false,
+  "productionGateCLIRepeated": false,
+  "oldBaselineStaticAndGateRefusalRecords": "retained prior-stage records in 297e446; not new executions",
+  "DriveBackupRepeated": false,
+  "deploymentPerformed": false,
+  "CStarted": false,
+  "limitsUnchanged": [
+    "CPU VM assisted progression, DOM/input/time/rendering substitutes",
+    "Full production version6 outer save validator remains a fixture",
+    "Natural campaign/original user save/browser/GPU/mobile/touch/flashlight/actual co-op transport unverified",
+    "warmFrameNoAllocation means root/resource growth checks, not zero JS allocation",
+    "7 meshes/84 triangles not measured GPU draw calls"
+  ]
+}
