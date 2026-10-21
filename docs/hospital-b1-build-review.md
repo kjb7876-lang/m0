@@ -1,5 +1,8 @@
 # ep1a08 B candidate: build and isolated test saves
 
+This records the 84966f1 stage. For subsequent prepared Pages wiring, full-source
+review gates and clean-checkout replay, see [hospital-b1-pages-review.md](hospital-b1-pages-review.md).
+
 This is a local test candidate review, not a public release or C acceptance.
 Baseline is `f415dfbf783c6290ab99125193d800429799c9f9`. The six spatial/presentation
 sources in `c893f1f5172a33387c01241b4935d42d798ecbd8` remain byte-identical.

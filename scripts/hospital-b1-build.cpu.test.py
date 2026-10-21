@@ -16,7 +16,7 @@ def load(name):
     m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
 builder = load('build-hospital-b1')
 manifest = json.loads((ROOT / '_pages/docs/web-manifest-r62.json').read_text())
-protected = [ROOT / 'out/r76/phase1-r75.js', ROOT / 'out/r77/apply.json', ROOT / '_pages/docs/index.html', ROOT / '_pages/docs/dist/phase1.js']
+protected = [ROOT / p for p in ['_pages/docs/index.html', '_pages/docs/dist/phase1.js', 'scripts/apply-r75.py', 'scripts/apply-r76.py', 'scripts/apply-r77.py', 'scripts/r77-release-gate.py']]
 before = {str(p): sha(p.read_bytes()) for p in protected}
 rows = []
 with tempfile.TemporaryDirectory(prefix='lineage-', dir=OUT) as tmp:
@@ -69,7 +69,7 @@ assert m['largest'] == sorted(m['files'], key=lambda r: r['bytes'], reverse=True
 rows.append({'name': 'final full manifest, original assets and size summaries match', 'ok': True, 'files': len(m['files'])})
 entry = (ROOT / 'scripts/build-hospital-b1-release.sh').read_text()
 commands = [l for l in entry.splitlines() if l and not l.startswith('#') and not l.startswith('set ')]
-assert commands == ['bash scripts/build-r75-site.sh', 'python3 scripts/r75-release-gate.py', 'python3 scripts/apply-r76.py --site _pages/docs', 'python3 scripts/r76-release-gate.py', 'python3 scripts/apply-r77.py --site _pages/docs', 'python3 scripts/r77-release-gate.py', 'python3 scripts/build-hospital-b1.py --baseline _pages/docs --output out/hospital-b1-release/site']
+assert commands == ['bash scripts/build-r75-site.sh', 'python3 scripts/r75-release-gate.py', 'python3 scripts/apply-r76.py --site _pages/docs', 'python3 scripts/r76-release-gate.py', 'python3 scripts/apply-r77.py --site _pages/docs', 'python3 scripts/r77-release-gate.py', 'python3 scripts/build-hospital-b1.py', 'python3 scripts/prepare-hospital-b1-cpu.py', 'python3 scripts/run-hospital-b1-cpu.py', 'python3 scripts/hospital-b1-release-gate.py', 'node verify-pages-r62.mjs out/hospital-b1-static']
 rows.append({'name': 'manual release entry keeps all original gates and hospital overlay last', 'ok': True, 'method': 'shell entry order assertion; full release entry not executed'})
 after = {str(p): sha(p.read_bytes()) for p in protected}; assert before == after
 report = {'schema': 'm0.hospital.build-chain-cpu/v1', 'cases': rows, 'passed': len(rows), 'failed': 0, 'originalInputsAndEvidenceUnchanged': True, 'browserOrGPU': False}

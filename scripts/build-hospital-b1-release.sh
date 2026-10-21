@@ -8,4 +8,8 @@ python3 scripts/apply-r76.py --site _pages/docs
 python3 scripts/r76-release-gate.py
 python3 scripts/apply-r77.py --site _pages/docs
 python3 scripts/r77-release-gate.py
-python3 scripts/build-hospital-b1.py --baseline _pages/docs --output out/hospital-b1-release/site
+python3 scripts/build-hospital-b1.py
+python3 scripts/prepare-hospital-b1-cpu.py
+python3 scripts/run-hospital-b1-cpu.py
+python3 scripts/hospital-b1-release-gate.py
+node verify-pages-r62.mjs out/hospital-b1-static

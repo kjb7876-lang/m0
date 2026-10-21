@@ -9,8 +9,10 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import shutil
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +21,24 @@ BASE = {'index.html': 'b68e0736263049e4cf58b69d5fd1b04c57afbb8a89cf5ffaca482e1bf
 EXPECTED_RENDERER = 'a09c0d264510286b397682d51df7d964543794b3d8b058b534a1cd8f5f7cee1d'
 PRIOR_HTML = '5aa7be827b3c1bf21b227c8caaa63b0e5fb81d22c0a0e4499911748946c00719'
 PREFIX = 'storyworld.hospital-b1.test.v1:'
+
+
+def asset_rows_digest(manifest):
+    rows = [{k: row[k] for k in ['path', 'bytes', 'sha256']} for row in manifest['files'] if row['path'] not in BASE]
+    return sha(json.dumps(sorted(rows, key=lambda r: r['path']), sort_keys=True, separators=(',', ':')).encode())
+
+
+def build_source():
+    head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    if not re.fullmatch('[0-9a-f]{40}', head):
+        raise ValueError('Build checkout commit is not identifiable')
+    ci = os.environ.get('GITHUB_SHA')
+    if ci and ci != head:
+        raise ValueError('CI source stamp differs from actual checkout HEAD')
+    tracked_dirty = subprocess.run(['git', 'diff', '--quiet', 'HEAD'], cwd=ROOT).returncode != 0
+    critical = ['scripts/build-hospital-b1.py', 'client-source/hospital-test-storage-b1.js', '.github/workflows/pages.yml']
+    untracked = subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard', '--', *critical], cwd=ROOT, text=True).strip()
+    return {'buildSourceCommit': head, 'ciSourceCommit': ci, 'sourceTreeDirty': tracked_dirty or bool(untracked)}
 
 
 def sha(data):
@@ -87,7 +107,7 @@ def compose(html, renderer, manifest):
     result['fileCount'] = len(result['files'])
     result['largest'] = sorted(result['files'], key=lambda r: r['bytes'], reverse=True)[:20]
     result.update(status='hospital B1 test candidate; no deployment acceptance', remotePublished=False, deploymentSHA=None, deploymentUTC=None)
-    result['hospitalB1Test'] = {'sourceCommit': 'c893f1f5172a33387c01241b4935d42d798ecbd8', 'baselineCommit': 'f415dfbf783c6290ab99125193d800429799c9f9', 'baselineRuntime': BASE, 'runtimeHashes': {p: sha(v) for p, v in payload.items()}, 'rendererCacheKey': cache, 'storagePrefix': PREFIX, 'storageCallsMapped': count, 'saveSchemaChanged': False, 'originalSaveImported': False, 'GPUVerified': False, 'approval': 'pending final B review'}
+    result['hospitalB1Test'] = {'reviewedSpatialSourceCommit': 'c893f1f5172a33387c01241b4935d42d798ecbd8', **build_source(), 'baselineCommit': 'f415dfbf783c6290ab99125193d800429799c9f9', 'baselineRuntime': BASE, 'baselineAssetRowsSHA256': asset_rows_digest(manifest), 'runtimeHashes': {p: sha(v) for p, v in payload.items()}, 'rendererCacheKey': cache, 'storagePrefix': PREFIX, 'storageCallsMapped': count, 'saveSchemaChanged': False, 'originalSaveImported': False, 'GPUVerified': False, 'approval': 'pending final B review'}
     return payload, result
 
 
