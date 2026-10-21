@@ -25,3 +25,7 @@ Actual-order suite: 8 passed / 1 failed. EGO absolute HP preservation across fir
 Old required B1/R75/R76/R77 tests do not assert this new full-EGO invariant and are not weakened. Restricted B2 test contract requires 30 structural passes, exactly the known case failing in the nine actual-order cases, fresh matching B1/B2 control, safe B2 coordinates. Any extra failure/control difference blocks. Reports keep allTestsPassed=false and knownFailure.resolved=false. Independent review must accept this explicit limitation before deployment; this is not EGO stabilization completion.
 
 User checks: three entries, changed central barrier/side doors, wards/reunion, existing objective/midboss/memory, ep1a09/dist06 travel, field/combat save reload, renderer/options parity. Label any warp/777 assistance. Use normal STORY/DREAM first and disclose EGO limitation. C awaits user play/feedback.
+
+## Rollback
+
+Keep baseline 62f1e7a44e827bc8937d661f600abb523d131433 in ancestry. A normal revert of the later B2 merge must restore its workflow/build/gate/approval records together, then run the original required CI/Pages path to regenerate B1 from retained source/assets. Do not just point Pages at an unstamped old local manifest. Rollback commit/stamp will differ from the old deployment SHA, even when HTML/renderer bytes match B1. Existing private f415 recovery volumes plus repository source history remain available; no new backup upload is claimed here. B2 namespace stays in the user's browser after code rollback and must not be deleted automatically.
