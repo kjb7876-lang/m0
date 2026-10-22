@@ -19,6 +19,7 @@ FILES = (
     "hospital-improvements-a5.js",
     "world-visual-r78.js",
     "world-combat-r78.js",
+    "ego-restore-health-r79.js",
 )
 OLD_LAYOUT = re.compile(
     r'function explorationLayout\(id,theme="cave",safe=false,meta=\{\}\)'
