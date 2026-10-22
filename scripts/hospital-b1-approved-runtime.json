@@ -14,10 +14,10 @@
   "rendererCacheKey": "hospital-b1=a09c0d264510286b",
   "storagePrefix": "storyworld.hospital-b1.test.v1:",
   "candidateSource": {
-    "pullRequest": 23,
-    "headSha": "f0e2028a421344354c5ecffbed9996c2bf017e45",
-    "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
-    "evidenceSHA256": "e2b8323ee6e11806e7f1be40b8b069c2f4cc7afc3b1caa19b1da1f593e1650f7"
+    "pullRequest": 25,
+    "headSha": "cab2cee679c6246fc9bb74dbe2a6cef3f19113c6",
+    "evidenceFile": "docs/hospital-b3-evidence/source-evidence.json",
+    "evidenceSHA256": "d738365f9a3958b9bd30bda01e8f455d772441c7905deaca540c34cc21cec97d"
   },
   "hospitalB2": {
     "status": "approved",
@@ -28,5 +28,34 @@
     "storagePrefix": "storyworld.hospital-b2.test.v1:",
     "rendererCacheKey": "hospital-b2=1a18337b276c03a8",
     "knownEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved"
+  },
+  "hospitalB3": {
+    "status": "approved",
+    "expectedRuntime": {
+      "index.html": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "dist/phase1.js": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3"
+    },
+    "storagePrefix": "storyworld.hospital-b2.test.v1:",
+    "rendererCacheKey": "hospital-b3=976036fb3e3f4de1",
+    "knownEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved",
+    "preservedB2CandidateSource": {
+      "pullRequest": 23,
+      "headSha": "f0e2028a421344354c5ecffbed9996c2bf017e45",
+      "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
+      "evidenceSHA256": "e2b8323ee6e11806e7f1be40b8b069c2f4cc7afc3b1caa19b1da1f593e1650f7"
+    },
+    "independentReview": {
+      "result": "approved for restricted test; source review only",
+      "reviewer": "Luna Max independent read-only reviewer /root/review_pr25_hospital_only",
+      "recordURL": "https://github.com/kjb7876-lang/m0/pull/25#issuecomment-6334249882",
+      "reviewedSourceCommit": "cab2cee679c6246fc9bb74dbe2a6cef3f19113c6",
+      "reviewedTree": "fa9ce4d404303c389b93a308653d50d2b4f9f56d",
+      "evidenceSHA256": "d738365f9a3958b9bd30bda01e8f455d772441c7905deaca540c34cc21cec97d",
+      "sourceBindingsVerified": 39,
+      "blockingSourceFindings": 0,
+      "testsRerunByReviewer": false,
+      "recordedAtUTC": "2026-10-22 06:23:19 UTC",
+      "externalGitHubCodexReview": "Reviewed prior C 7e9e002; two actual findings fixed in A4, full-ledger premise disproved using unchanged validator and focused regression; not claimed as a new bot approval"
+    }
   }
 }

@@ -14,6 +14,7 @@ APPROVAL = ROOT / 'scripts/hospital-b1-approved-runtime.json'
 ALLOWED_AFTER_REVIEW = {'scripts/hospital-b1-approved-runtime.json', 'scripts/r77-approved-runtime.json'}
 EVIDENCE_SOURCE_PATHS = ['.github/workflows/pages.yml', 'client-source/hospital-prototype-b1.js', 'client-source/hospital-visual-b1.js', 'client-source/hospital-sight-fix-b1.js', 'client-source/hospital-test-storage-b1.js', 'scripts/apply-hospital-prototype-b1.py', 'scripts/apply-hospital-visual-b1.py', 'scripts/apply-hospital-sight-fix-b1.py', 'scripts/build-hospital-b1.py', 'scripts/build-hospital-b1-release.sh', 'scripts/prepare-hospital-b1-cpu.py', 'scripts/run-hospital-b1-cpu.py', 'scripts/hospital-b1-release-gate.py', 'scripts/hospital-b1-build.cpu.test.py', 'scripts/hospital-b1-storage.cpu.test.mjs', 'scripts/hospital-b1-release-gate.cpu.test.py', 'scripts/hospital-b1-workflow.cpu.test.py', 'docs/hospital-b1-evidence/hospital-sim.mjs', 'docs/hospital-b1-evidence/audit.mjs']
 EVIDENCE_SOURCE_PATHS += ['client-source/hospital-core-b2.js', 'client-source/hospital-runtime-b2.js', 'scripts/build-hospital-b2.py', 'scripts/run-hospital-b2-cpu.py', 'scripts/hospital-b2-release-gate.py', 'docs/hospital-b2-evidence/runtime.mjs', 'docs/hospital-b2-evidence/checks.mjs', 'docs/hospital-b2-evidence/structure.mjs', 'docs/hospital-b2-evidence/ego-control.mjs', 'docs/hospital-b2-evidence/canonical-summons-b2.json']
+EVIDENCE_SOURCE_PATHS += ['client-source/hospital-b3/frame-helper.js', 'client-source/hospital-b3/hospital-core-b3.js', 'client-source/hospital-b3/plan.json', 'client-source/hospital-b3/room-dressing-plan.json', 'scripts/build-hospital-b3.py', 'scripts/hospital-b3-release-gate.py', 'docs/hospital-b3-evidence/doors.mjs', 'docs/hospital-b3-evidence/props.mjs', 'docs/hospital-b3-evidence/runtime.mjs', 'docs/hospital-b3-evidence/restore-baseline-control.json']
 
 
 def sha(data): return hashlib.sha256(data).hexdigest()
@@ -73,7 +74,7 @@ def validate_source(approval, repo=ROOT, event=None):
     if any(p not in ALLOWED_AFTER_REVIEW for p in changed): fail('Unreviewed changes after B source pin: ' + ', '.join(changed))
     if subprocess.run(['git', 'diff', '--quiet', 'HEAD'], cwd=repo).returncode: fail('Dirty source checkout')
     if event is not None and event.get('number') != pr: fail('B review pin belongs to another PR')
-    if source.get('evidenceFile') != 'docs/hospital-b1-evidence/clean-checkout-results.json': fail('Unexpected review evidence path')
+    if source.get('evidenceFile') not in {'docs/hospital-b1-evidence/clean-checkout-results.json', 'docs/hospital-b3-evidence/source-evidence.json'}: fail('Unexpected review evidence path')
     p = repo / source['evidenceFile']
     if not p.is_file() or sha(p.read_bytes()) != source.get('evidenceSHA256'): fail('Reviewed evidence missing or changed')
     review_evidence = json.loads(p.read_text())

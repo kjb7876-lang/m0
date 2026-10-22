@@ -1,0 +1,293 @@
+{
+  "schema": "m0.hospital-b3.source-evidence/v1",
+  "baselineDeploymentSHA": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
+  "candidateRuntimeHashes": {
+    "index.html": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+    "dist/phase1.js": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3"
+  },
+  "sourcePathHashes": {
+    ".github/workflows/pages.yml": "76d59223342cdff8676f7fba10b9443ad62623289314581c245403f32f708c97",
+    "client-source/hospital-prototype-b1.js": "57bb9497ce5934485b4a26ad98f94f9d3e173d989444811e45960e7f94e52229",
+    "client-source/hospital-visual-b1.js": "5406f9743eee8548df1eb8ef3816c1ecfebb1e4e83a0f72e8b93b1c1b479b852",
+    "client-source/hospital-sight-fix-b1.js": "85429c2a4af9f1eabc6d59eaebe585b349e8074fd322ba4700023cbf9050e026",
+    "client-source/hospital-test-storage-b1.js": "5c0a10aaba9d14c881ee7b65026c027d591aab3acfeb7bb099c1a7026369dc4a",
+    "scripts/apply-hospital-prototype-b1.py": "0a316e6803c1397a5b13c4ff566032e5048f239df8d21aa99cd899931a05006c",
+    "scripts/apply-hospital-visual-b1.py": "4711cb30900b36a794642adb8730ebffb1ab0547fa795043499cba9be26e533c",
+    "scripts/apply-hospital-sight-fix-b1.py": "e0595f91a815b2c73877f74e5e3626fb731bb4cfac987ca74142faeaf033271a",
+    "scripts/build-hospital-b1.py": "40465d2de3b72234552b3fe3aca50057cd85999e4d52b2711f0e4d0317c41eaf",
+    "scripts/build-hospital-b1-release.sh": "1d9bfe4b3cf272f51623f7ab380be6b821e6abc036ed9103532e3b5d22de2831",
+    "scripts/prepare-hospital-b1-cpu.py": "6964c06b231fc54f74c1688be3d114bef1ed02c969ccf682dc6676d3af0375b6",
+    "scripts/run-hospital-b1-cpu.py": "4529fdad0dedc777cf920b4cd7d08101a238795769a55506607396bf0fda0f9c",
+    "scripts/hospital-b1-release-gate.py": "1eb7852984bb5e1c5bf5750988a607bcb9df332fff5a5951d50f7063c4e0ba11",
+    "scripts/hospital-b1-build.cpu.test.py": "3fe64f191231ee576cdf218d0861aa2935b63315d1c0c6ab0b071c8abf71764e",
+    "scripts/hospital-b1-storage.cpu.test.mjs": "12c0f126035708e303489e20b887fed4b589254d57df4314781acd5e3f47be51",
+    "scripts/hospital-b1-release-gate.cpu.test.py": "26632de3886e49ab5cf0a5f1279f13c9cb4271d804c1d4437b2234121365158a",
+    "scripts/hospital-b1-workflow.cpu.test.py": "7cfe7fee24da0e800b98fe04825c10b8c65f664384bdb0b46b833ab6d4f274b6",
+    "docs/hospital-b1-evidence/hospital-sim.mjs": "a6d7cccf56aec4646bad18f24bb8ac992b5fbf964554887353952c6cc06cca53",
+    "docs/hospital-b1-evidence/audit.mjs": "1e66877c35ade1a635bc25a975c52c7d14672156172de7aff7b5b6d85a29199a",
+    "client-source/hospital-core-b2.js": "632ab1885cce684db64627db958f3da31f52dc391040e8ed3cb79675be99a35c",
+    "client-source/hospital-runtime-b2.js": "23168ce5ab7e6ceba8a4cbfe506a3e0800c292ac2cc047b8758080e8d01ad707",
+    "scripts/build-hospital-b2.py": "f1ee405ff85d3661fea7a87b43a9a68602c2d25728a198de2085782803a0c92c",
+    "scripts/run-hospital-b2-cpu.py": "a4df74b67ed6b285104bedd37179119bf5a2cb7dd77c13e6193d296e1582a38c",
+    "scripts/hospital-b2-release-gate.py": "ef89807238c66d8bcbd777bd2e0d25faca76c7c7bacf4714cf01befcbf4ef3a1",
+    "docs/hospital-b2-evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134",
+    "docs/hospital-b2-evidence/checks.mjs": "fa60c5f81dbca7d534c6d20fe5cbfceccdf6304c765e192774c6f96c6d0c3de7",
+    "docs/hospital-b2-evidence/structure.mjs": "0f5f488a50c2174ab37e697edb6ad182c3d9828268e502aab2c9a05493575b45",
+    "docs/hospital-b2-evidence/ego-control.mjs": "77f1a8fa3041bc715b98c49b3f0adb64d21a292823a211d73cb95991bf0cb438",
+    "docs/hospital-b2-evidence/canonical-summons-b2.json": "f45ee6bad4fd0076a84ad2b14bc9c0e86a9040ac3b67b06e10dcd184196c95b6",
+    "client-source/hospital-b3/frame-helper.js": "d0d3cfc2809e0afd151183b0e116493d6a102a505b826ab72b03ab85f4edef59",
+    "client-source/hospital-b3/hospital-core-b3.js": "0bd077f2b157ccaee8ff92dbf375007b172ad535c58814cbd66008b9e67b71fd",
+    "client-source/hospital-b3/plan.json": "b22fd7eade4a2a19178a98a0c19886b5ef45505387b7480d8950a3a964d5e3ac",
+    "client-source/hospital-b3/room-dressing-plan.json": "073933f6b80b51f87c5d8eced7b93c5bba7a10ea0d7642843b86b277df1f5af6",
+    "scripts/build-hospital-b3.py": "4584f074ed5a98196ed1c247142a344419e507b44688434635670dd6e7124990",
+    "scripts/hospital-b3-release-gate.py": "4399127f47608835f516794bb0620ec75dcaa4753abc2c54c6c6d0cb2da8d3c1",
+    "docs/hospital-b3-evidence/doors.mjs": "cf7297d828c50adfb80561013c4ea3ff499c6014967c507583690c2c6be12191",
+    "docs/hospital-b3-evidence/props.mjs": "76504a9aa20c87419685d9b1bb8f405053100e96135d815c63a9dc3f2e32c4d9",
+    "docs/hospital-b3-evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134",
+    "docs/hospital-b3-evidence/restore-baseline-control.json": "b977a8d53a2d4d937c01ec599228df7a0d70831c7ddb13d4ca0504051a46e4e6"
+  },
+  "hospitalB3": {
+    "runtimeHashes": {
+      "index.html": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "dist/phase1.js": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3"
+    },
+    "storagePrefix": "storyworld.hospital-b2.test.v1:",
+    "storageNamespacePreserved": true,
+    "saveSchemaChanged": false,
+    "doorStateStorage": "existing worldR74 v1 entries/opened fields",
+    "furnishingPlanSHA256": "073933f6b80b51f87c5d8eced7b93c5bba7a10ea0d7642843b86b277df1f5af6",
+    "doorAndSaveAssertions": {
+      "passed": 11,
+      "failed": 0,
+      "resultHTMLSHA256": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "method": "Full production HTML installation and real R74 use/interact/clean/restore/serialize; synthetic progress and direct fixture positions, no browser or network."
+    },
+    "furnishingAssertions": {
+      "passed": 9,
+      "failed": 0,
+      "resultHTMLSHA256": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "rendererSHA256": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3",
+      "method": "Actual production HTML loaded in an isolated Node VM; actual projected DrawCommands bounds and pathTo3 paths; door/save tests use synthetic in-memory save only. No browser, raster, GPU, user save, or natural play.",
+      "screenOrGPUVerified": false
+    },
+    "existingEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved; no EGO code changed",
+    "previousA3GateConsistency": {
+      "freshCommand": "CPU_HTML=out/hospital-b3/site/index.html node docs/hospital-b3-evidence/props.mjs",
+      "freshCommandExitCode": 0,
+      "freshPassed": 8,
+      "freshFailed": 0,
+      "freshResultSHA256": "34d5de11c09c27301dd1200bf45371f49ce73c1951448ddbb34e91b6632442de",
+      "beforeGateRejectedFreshEight": true,
+      "chunkCoverageAssertionRetained": true,
+      "gatePredicateAssertions": {
+        "passed": 7,
+        "failed": 0,
+        "acceptedFreshEight": true,
+        "rejectedSevenOrMissingCount": true,
+        "rejectedFailureOrFailedStatus": true,
+        "rejectedOtherHTMLOrRenderer": true
+      },
+      "method": "Executed the actual fresh-furnishing require expression extracted from the release gate AST against the new production-VM result and isolated negative copies. Full approval/release gate remains pending."
+    },
+    "releaseGateConsistency": {
+      "freshDoorsPassed": 11,
+      "freshFurnishingPassed": 9,
+      "failed": 0,
+      "doorResultSHA256": "35de156f730ac68bdd17e82df61a7c352d5ede81bf6c35ad0af2b92e7258f72f",
+      "furnishingResultSHA256": "b7fc4edb2ac432f5726cc58d6a7e3eb1b531e9d6944d9a0f4a0d22ea58d446d4",
+      "gatePredicateAssertions": {
+        "passed": 9,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Fresh furnishing test",
+            "expected": true,
+            "observed": true
+          },
+          {
+            "name": "Fresh door/save test",
+            "expected": true,
+            "observed": true
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh door/save test",
+            "expected": false,
+            "observed": false
+          }
+        ],
+        "method": "Actual require expressions extracted from release-gate AST; full source approval/release gate is not bypassed and remains CI-only."
+      },
+      "fullApprovalGatePendingCI": true
+    },
+    "reviewCorrections": {
+      "terrainApron": {
+        "beforeHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+        "beforeProductionActivationFailed": true,
+        "beforeObservedB3Aprons": 1,
+        "afterCases": [
+          {
+            "b3": false,
+            "enabled": false,
+            "aprons": 1,
+            "added": 1,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": true,
+            "enabled": false,
+            "aprons": 0,
+            "added": 0,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": false,
+            "enabled": true,
+            "aprons": 1,
+            "added": 1,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": true,
+            "enabled": true,
+            "aprons": 0,
+            "added": 0,
+            "currentMazeIsNull": true
+          }
+        ],
+        "activeReference": "mazeLayoutR73 = frame.exploration",
+        "resourceOnlyThreeStubs": true,
+        "GPUVerified": false
+      },
+      "doorApertures": {
+        "source": "StoryPhase1.hospitalCoreLayoutB2(room.exploration, []).hospitalBoundary12[].endpoints",
+        "allThreeClosedDoorLeavesAudited": true,
+        "projectedViolations": 0,
+        "furnishingsUnchanged": 11
+      },
+      "fullValidLedger": {
+        "profiles": 62,
+        "maximumValidKeys": 124,
+        "otherRowsPreserved": 123,
+        "hospitalVersionRemainsZero": true,
+        "existingZeroRegistration": true,
+        "unknown126Rejected": true,
+        "validatorLimitAndSchemaUnchanged": true
+      },
+      "validatorLimitAndSchemaChanged": false,
+      "hospitalEntryRegistration": "ep1a08 zero or absent -> existing entries[key]=1 only to satisfy opened-requires-1; version(ep1a08) stays 0; other 123 records and opened arrays preserved"
+    }
+  },
+  "executionLimitations": [
+    "Tests ran in the permitted local CPU Node VM against the exact candidate HTML.",
+    "DOM, image pixel decoding and timers are stubbed; positions/progress/save are synthetic in-memory fixtures.",
+    "No browser, GPU, natural progression, original user save, mobile device or network co-op test was performed.",
+    "GitHub clean-checkout CI and independent source approval are pending.",
+    "The released candidate adds no duplicate B3 room-entry/tick/save-restore wrapper module; it reuses the already-public B2 runtime and inserts only hospital door-frame presentation and revision markers."
+  ],
+  "hospitalB2": {
+    "schema": "m0.hospital-b2.fresh-cpu/v1",
+    "sourceCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
+    "executedCommands": [
+      {
+        "name": "structure",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/structure.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {}
+      },
+      {
+        "name": "production-order",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/checks.mjs"
+        ],
+        "exitCode": 1,
+        "environmentOverride": {}
+      },
+      {
+        "name": "ego-b1",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/ego-control.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {
+          "CPU_HTML": "out/hospital-b1/build-connected/site/index.html"
+        }
+      },
+      {
+        "name": "ego-b2",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/ego-control.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {}
+      }
+    ],
+    "resultHashes": {
+      "results.json": "b3652b08edfab484f7933cbcb4d80a2dda8b6479eaeb383434011e62f4171bcb",
+      "production-order/results.json": "3f473cda92df592999aa8a91626f5b99d63f9c3a9a2c1aab7d6c612bbbfd20be",
+      "production-order/audit.json": "23951ee74be731ffb70c223fe52d2d086c2e74bfbb36d1e071563287752cd3e5",
+      "production-order/ego-b1.json": "a5df4b3b7c5a3a810798e556556babf274ebeefd34c5604e64929913c5306e9d",
+      "production-order/ego-b2.json": "5830b34442e177d6f626c9d581da462a8ee7af4b375e9c36e453fda3a3078232"
+    },
+    "runtimeHashes": {
+      "index.html": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
+      "dist/phase1.js": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
+    },
+    "structure": {
+      "passed": 30,
+      "failed": 0
+    },
+    "productionOrder": {
+      "passed": 8,
+      "failed": 1,
+      "scripts": 105
+    },
+    "knownFailure": {
+      "name": "EGO visit routeRoom actual hydrate plus final wrappers and first tick",
+      "B1B2ControlMatched": true,
+      "resolved": false,
+      "originalUserFailureConfirmed": false
+    },
+    "acceptedForRestrictedTest": true,
+    "allTestsPassed": false,
+    "originalUserSavesUsed": false,
+    "browser": false,
+    "GPU": false,
+    "finished": "2026-10-21T09:17:12.929148+00:00"
+  }
+}
