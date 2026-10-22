@@ -1,0 +1,112 @@
+{
+  "baselineHTMLSHA256": "4e9d9dd177a06c5031a8e19cd441060a02c9a4d3dcf71d458ca5b20859ac1aac",
+  "testSourceSHA256": "f36a217ddf3234b09beea566610702406bb5eba53c72d0de277bf92e431e8de1",
+  "method": "Production B3 stability HTML in fresh isolated CPU VM; synthetic STORY setup, opening door-1 and door-2 through R74, in-memory serialize/restore copy. No user save, browser, raster, GPU, or natural play.",
+  "restoreResult": true,
+  "actorCountBefore": 13,
+  "actorCountAfter": 13,
+  "identityDeathSpawnPreserved": true,
+  "hpDeltas": [
+    {
+      "id": "ep1a08:a08-o1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-s1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-c1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-o2",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-o1-w1-r1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-s1-w1-r2",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-o1-w2-1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-s1-w2-2",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-c1-w2-3",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-o2-w2-4",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-o1-w2-r1",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:a08-s1-w2-r2",
+      "beforeHp": 1430,
+      "afterHp": 208.164,
+      "beforeMaxHp": 1430,
+      "afterMaxHp": 208.164
+    },
+    {
+      "id": "ep1a08:mb-ep1a08",
+      "beforeHp": 33984,
+      "afterHp": 6085.5599999999995,
+      "beforeMaxHp": 33984,
+      "afterMaxHp": 6085.5599999999995
+    }
+  ],
+  "openedBefore": [
+    "door-1",
+    "door-2"
+  ],
+  "openedAfter": [
+    "door-1",
+    "door-2"
+  ],
+  "openDoorsPreserved": true,
+  "syntheticCopyOnly": true
+}

@@ -1,0 +1,25 @@
+{
+  "revision": "ep1a08-room-dressing-b3-local-v1",
+  "sourceImage": "assets/visual-test/hospital-prop-atlas-oriented.png",
+  "items": [
+    {"id":"observation-gurney","room":"observation","purpose":"observation bay","frame":"gurney","x":2.8,"y":8.8,"height":54,"flipX":false},
+    {"id":"observation-screen","room":"observation","purpose":"privacy screen","frame":"curtain","x":3.0,"y":15.0,"height":84,"flipX":true},
+    {"id":"north-ward-a-gurney","room":"north-ward-a","purpose":"inpatient ward","frame":"gurney","x":33.8,"y":10.6,"height":56,"flipX":true},
+    {"id":"north-ward-a-screen","room":"north-ward-a","purpose":"bedside privacy","frame":"curtain","x":41.5,"y":14.4,"height":90,"flipX":false},
+    {"id":"north-ward-b-chair","room":"north-ward-b","purpose":"transfer waiting space","frame":"wheelchair","x":59.4,"y":11.8,"height":52,"flipX":false},
+    {"id":"preparation-chair","room":"preparation","purpose":"patient preparation","frame":"wheelchair","x":14.2,"y":36.0,"height":50,"flipX":true},
+    {"id":"consult-c-gurney","room":"consult-c","purpose":"observation room transfer bay","frame":"gurney","x":63.6,"y":64.0,"height":54,"flipX":true},
+    {"id":"consult-c-screen","room":"consult-c","purpose":"observation privacy screen","frame":"curtain","x":54.2,"y":64.0,"height":86,"flipX":false},
+    {"id":"consult-d-chair","room":"consult-d","purpose":"quiet consultation alcove","frame":"wheelchair","x":75.2,"y":62.0,"height":48,"flipX":true},
+    {"id":"south-ward-b-gurney","room":"south-ward-b","purpose":"inpatient ward","frame":"gurney","x":33.5,"y":98.2,"height":56,"flipX":false},
+    {"id":"south-ward-c-chair","room":"south-ward-c","purpose":"transfer waiting space","frame":"wheelchair","x":58.2,"y":98.0,"height":52,"flipX":true}
+  ],
+  "contracts": {
+    "presentationOnly": true,
+    "solid": false,
+    "combatRoomDressing": false,
+    "startAndEncounterBayClearance": 6,
+    "objectiveAndPortalsUnchanged": true,
+    "storyAndSaveSchemaUnchanged": true
+  }
+}
