@@ -2,8 +2,8 @@
   "schema": "storyworld.r77-runtime-approval/v1",
   "status": "approved",
   "candidateSource": {
-    "pullRequest": 23,
-    "headSha": "244bb14d1393adb9d25795dd4dffd151f4b2c25b",
+    "pullRequest": 25,
+    "headSha": "9f9ea6deb2a0b0e1e8d12042c5981b0a94dbfa76",
     "workflowRunId": null
   },
   "baselineR76": {
