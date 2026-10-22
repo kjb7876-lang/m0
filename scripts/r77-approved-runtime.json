@@ -3,7 +3,7 @@
   "status": "approved",
   "candidateSource": {
     "pullRequest": 25,
-    "headSha": "9f9ea6deb2a0b0e1e8d12042c5981b0a94dbfa76",
+    "headSha": "72b9055868ea1107e908c2ba274c5c1e0d1a0b77",
     "workflowRunId": null
   },
   "baselineR76": {
