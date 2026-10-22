@@ -57,8 +57,11 @@ def main():
     require(review.get('schema')=='m0.hospital-b3.source-evidence/v1' and reviewed.get('runtimeHashes')==actual,'Reviewed source evidence is for another runtime')
     require(reviewed.get('storagePrefix')==candidate['storagePrefix'] and reviewed.get('storageNamespacePreserved') is True and reviewed.get('saveSchemaChanged') is False,'Reviewed source evidence changes the existing save contract')
     require(reviewed.get('doorAndSaveAssertions')=={'passed':10,'failed':0,'resultHTMLSHA256':actual['index.html'],'method':door_result.get('method')},'Reviewed door/save evidence differs from the fresh exact-candidate result')
-    require(reviewed.get('furnishingAssertions',{}).get('passed')==7 and reviewed.get('furnishingAssertions',{}).get('failed')==0 and reviewed.get('furnishingAssertions',{}).get('resultHTMLSHA256')==actual['index.html'] and reviewed.get('furnishingAssertions',{}).get('rendererSHA256')==actual['dist/phase1.js'],'Reviewed furnishing evidence differs from the fresh exact-candidate result')
+    require(reviewed.get('furnishingAssertions',{}).get('passed')==8 and reviewed.get('furnishingAssertions',{}).get('failed')==0 and reviewed.get('furnishingAssertions',{}).get('resultHTMLSHA256')==actual['index.html'] and reviewed.get('furnishingAssertions',{}).get('rendererSHA256')==actual['dist/phase1.js'],'Reviewed furnishing evidence differs from the fresh exact-candidate result')
+    manifest['releaseHospitalB3']={'status':'source-approved; release gate passed; user play pending','reviewedSourceCommit':source['headSha'],'reviewedPullRequest':source['pullRequest'],'buildSourceCommit':head,'runtimeHashes':actual,'storagePrefix':candidate['storagePrefix'],'saveSchemaChanged':False,'knownEGOFailure':b['knownEGOFailure'],'doorAssertions':{'passed':10,'failed':0},'furnishingAssertions':{'passed':8,'failed':0},'allTestsPassed':False,'userScreenReviewPending':True}
+    candidate['status']='source-approved test candidate; user play pending'
     target=SITE/'web-manifest-r62.json'
+    target.write_text(json.dumps(manifest,ensure_ascii=False,separators=(',',':'))+'\n')
     outputs={'html_sha':actual['index.html'],'renderer_sha':actual['dist/phase1.js'],'manifest_sha':sha(target),'asset_hashes_json':json.dumps(manifest['releaseR75']['generatedAssets'],sort_keys=True,separators=(',',':'))}
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'],'a') as stream:

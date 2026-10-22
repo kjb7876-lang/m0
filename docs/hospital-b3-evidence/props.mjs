@@ -25,8 +25,12 @@ try{
   await run('boot()');
   run(`player=freshPlayer('hwando');started=true;modal=false;storyScene=null;storyQueue=[];storyDone=null;settings.narration=false;settings.sound=false;settings.music=false;auto=false;guide=false;progress={STORY:{},DREAM:{}};for(const id of __STORYWORLD_STORY_PROFILE_R54__.campaignOrder){if(id==='ep1a08')break;progress.STORY[id]=true;}layer='STORY';zone='ep1a08';world={};room=getRoom(zone,layer);player.x=43;player.y=109;`);
   assert.equal(run("room.exploration.hospitalLayoutRevision.startsWith('ep1a08-ward-network-b3-v1')"),true);
+  const grid=json("({bounds:room.exploration.bounds,minX:room.exploration.chunkMinX,minY:room.exploration.chunkMinY,columns:room.exploration.chunkColumns,rows:room.exploration.chunkRows,starts:room.exploration.starts.map(p=>[p.x,p.y])})");
+  const extent=grid.bounds,chunkPoints=[[extent[0],extent[1]],[extent[2],extent[3]],...grid.starts];
+  for(const [x,y] of chunkPoints)assert.ok(Math.floor(x/10)>=grid.minX&&Math.floor(x/10)<grid.minX+grid.columns&&Math.floor(y/10)>=grid.minY&&Math.floor(y/10)<grid.minY+grid.rows,`hospital chunk grid omits (${x},${y})`);
+  pass('production chunk grid covers the full hospital bounds and all three starts',{bounds:extent,columns:grid.columns,rows:grid.rows,startCount:grid.starts.length,chunkSize:10});
   const baseHTML='out/hospital-b2/site/index.html';
-  const oldRenderer='1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd';
+  const oldRenderer='e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180';
   assert.equal(hash(fs.readFileSync(site+'/dist/phase1.js')),oldRenderer);
   assert.equal(hash(fs.readFileSync(site+'/'+plan.sourceImage)),hash(fs.readFileSync('out/hospital-b2/site/'+plan.sourceImage)));
   assert.ok(fs.existsSync(site+'/'+plan.sourceImage));

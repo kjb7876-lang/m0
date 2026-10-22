@@ -2,8 +2,8 @@
   "schema": "m0.hospital-b3.source-evidence/v1",
   "baselineDeploymentSHA": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
   "candidateRuntimeHashes": {
-    "index.html": "3952a8e0e6d9edd09fe5886d0cbc6d2d551b1fa9681bc77ef6fbf9177230d6d2",
-    "dist/phase1.js": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd"
+    "index.html": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+    "dist/phase1.js": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180"
   },
   "sourcePathHashes": {
     ".github/workflows/pages.yml": "76d59223342cdff8676f7fba10b9443ad62623289314581c245403f32f708c97",
@@ -36,20 +36,20 @@
     "docs/hospital-b2-evidence/ego-control.mjs": "77f1a8fa3041bc715b98c49b3f0adb64d21a292823a211d73cb95991bf0cb438",
     "docs/hospital-b2-evidence/canonical-summons-b2.json": "f45ee6bad4fd0076a84ad2b14bc9c0e86a9040ac3b67b06e10dcd184196c95b6",
     "client-source/hospital-b3/frame-helper.js": "d0d3cfc2809e0afd151183b0e116493d6a102a505b826ab72b03ab85f4edef59",
-    "client-source/hospital-b3/hospital-core-b3.js": "d971d2613eeebc46cfaf57f80e4288ac0c408fc805d9ae2ca7446281c1a33b61",
+    "client-source/hospital-b3/hospital-core-b3.js": "0bd077f2b157ccaee8ff92dbf375007b172ad535c58814cbd66008b9e67b71fd",
     "client-source/hospital-b3/plan.json": "b22fd7eade4a2a19178a98a0c19886b5ef45505387b7480d8950a3a964d5e3ac",
     "client-source/hospital-b3/room-dressing-plan.json": "073933f6b80b51f87c5d8eced7b93c5bba7a10ea0d7642843b86b277df1f5af6",
-    "scripts/build-hospital-b3.py": "2e6743fff252ae7541da1ac8932767439d21e6b98e579691986e2e13a88528e9",
-    "scripts/hospital-b3-release-gate.py": "14e6f79e155f93d00ee7efd102819b9c9e8b2bd28201b5e94465c55cf16c4842",
+    "scripts/build-hospital-b3.py": "58a508491bde1f540132dfd8a40ff5a4522ac1d45e97176b665399145d9a0208",
+    "scripts/hospital-b3-release-gate.py": "987434b7830b656ef5d9e875a8540dfb59004da2ab34765891567ea39a2c2757",
     "docs/hospital-b3-evidence/doors.mjs": "d9a43a0143f880907315d504a2bd126011c0e05f70f2fabc5b4001168158a25f",
-    "docs/hospital-b3-evidence/props.mjs": "4ac4a65879efb97586bb6bec39b75f7902f5993a3308f67cec3b44da0e3fd6a1",
+    "docs/hospital-b3-evidence/props.mjs": "81d84bb89a4201d438472d5a9c050b87939692e053b104bfc33f01fc8997eff8",
     "docs/hospital-b3-evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134",
     "docs/hospital-b3-evidence/restore-baseline-control.json": "b977a8d53a2d4d937c01ec599228df7a0d70831c7ddb13d4ca0504051a46e4e6"
   },
   "hospitalB3": {
     "runtimeHashes": {
-      "index.html": "3952a8e0e6d9edd09fe5886d0cbc6d2d551b1fa9681bc77ef6fbf9177230d6d2",
-      "dist/phase1.js": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd"
+      "index.html": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+      "dist/phase1.js": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180"
     },
     "storagePrefix": "storyworld.hospital-b2.test.v1:",
     "storageNamespacePreserved": true,
@@ -59,14 +59,14 @@
     "doorAndSaveAssertions": {
       "passed": 10,
       "failed": 0,
-      "resultHTMLSHA256": "3952a8e0e6d9edd09fe5886d0cbc6d2d551b1fa9681bc77ef6fbf9177230d6d2",
+      "resultHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
       "method": "Full production HTML installation and real R74 use/interact/clean/restore/serialize; synthetic progress and direct fixture positions, no browser or network."
     },
     "furnishingAssertions": {
-      "passed": 7,
+      "passed": 8,
       "failed": 0,
-      "resultHTMLSHA256": "3952a8e0e6d9edd09fe5886d0cbc6d2d551b1fa9681bc77ef6fbf9177230d6d2",
-      "rendererSHA256": "1ab57d7d64aa531e162014f4186573d6a3670d0b19440a288eda8eeada41b0dd",
+      "resultHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+      "rendererSHA256": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180",
       "method": "Actual production HTML loaded in an isolated Node VM; actual projected DrawCommands bounds and pathTo3 paths; door/save tests use synthetic in-memory save only. No browser, raster, GPU, user save, or natural play.",
       "screenOrGPUVerified": false
     },
@@ -78,5 +78,81 @@
     "No browser, GPU, natural progression, original user save, mobile device or network co-op test was performed.",
     "GitHub clean-checkout CI and independent source approval are pending.",
     "The released candidate adds no duplicate B3 room-entry/tick/save-restore wrapper module; it reuses the already-public B2 runtime and inserts only hospital door-frame presentation and revision markers."
-  ]
+  ],
+  "hospitalB2": {
+    "schema": "m0.hospital-b2.fresh-cpu/v1",
+    "sourceCommit": "81fd7f19e183b495817329b85ac0db5490009a33",
+    "executedCommands": [
+      {
+        "name": "structure",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/structure.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {}
+      },
+      {
+        "name": "production-order",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/checks.mjs"
+        ],
+        "exitCode": 1,
+        "environmentOverride": {}
+      },
+      {
+        "name": "ego-b1",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/ego-control.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {
+          "CPU_HTML": "out/hospital-b1/build-connected/site/index.html"
+        }
+      },
+      {
+        "name": "ego-b2",
+        "command": [
+          "node",
+          "docs/hospital-b2-evidence/ego-control.mjs"
+        ],
+        "exitCode": 0,
+        "environmentOverride": {}
+      }
+    ],
+    "resultHashes": {
+      "results.json": "b3652b08edfab484f7933cbcb4d80a2dda8b6479eaeb383434011e62f4171bcb",
+      "production-order/results.json": "3f473cda92df592999aa8a91626f5b99d63f9c3a9a2c1aab7d6c612bbbfd20be",
+      "production-order/audit.json": "23951ee74be731ffb70c223fe52d2d086c2e74bfbb36d1e071563287752cd3e5",
+      "production-order/ego-b1.json": "a5df4b3b7c5a3a810798e556556babf274ebeefd34c5604e64929913c5306e9d",
+      "production-order/ego-b2.json": "5830b34442e177d6f626c9d581da462a8ee7af4b375e9c36e453fda3a3078232"
+    },
+    "runtimeHashes": {
+      "index.html": "83f6b4e4e96333ca34b791ad95ccbacb0fb4f6ae64e89c0dcef81a36dec74af5",
+      "dist/phase1.js": "1a18337b276c03a8663162fadbb38a95f935cbd0a6d6e64572d0852d9de5e7d7"
+    },
+    "structure": {
+      "passed": 30,
+      "failed": 0
+    },
+    "productionOrder": {
+      "passed": 8,
+      "failed": 1,
+      "scripts": 105
+    },
+    "knownFailure": {
+      "name": "EGO visit routeRoom actual hydrate plus final wrappers and first tick",
+      "B1B2ControlMatched": true,
+      "resolved": false,
+      "originalUserFailureConfirmed": false
+    },
+    "acceptedForRestrictedTest": true,
+    "allTestsPassed": false,
+    "originalUserSavesUsed": false,
+    "browser": false,
+    "GPU": false,
+    "finished": "2026-10-21T09:17:12.929148+00:00"
+  }
 }

@@ -39,7 +39,7 @@ function hospitalCoreLayoutB2(core,opened=[]){
   hospitalLayoutRevision:HOSPITAL_CORE_B2.revision+':'+[...opened].sort().join(','),hospitalAnalytic12:true,hospitalBoundary12:walls,
   hospitalVisualWalls12:walls,hospitalPreviousWalls12:core.walls,hospitalWalkArea12:floorCells.length,
   hospitalWalkPolygons12:floors.map(f=>[[f.x,f.y],[f.x+f.width,f.y],[f.x+f.width,f.y+f.depth],[f.x,f.y+f.depth]]),
-  bounds:[0,0,87,113],chunkMinX:0,chunkMinY:0,chunkColumns:8,chunkRows:10,
+  bounds:[0,0,87,113],chunkMinX:0,chunkMinY:0,chunkColumns:9,chunkRows:12,
   walls,floorCells,floorRects:floors,coreFloorRects:[],coreReshaped:true,navigationCellsOnly12:true,
   connectorFloorRects:[],backdropRects:[],fogRects:[],nodes,edges:[],entry,starts,entrance:{...entry},
   gate:{x:31.5,y:31.5},doorUV:{u0:-3,u1:3,v0:50,v1:66},

@@ -19,7 +19,7 @@ core=replace(core,' const nodes=HOSPITAL_CORE_B2.rects.map', ''' // Closed door 
  const nodes=HOSPITAL_CORE_B2.rects.map''')
 core=replace(core,"type:'hospital-core-b2',hospitalCoreB2:HOSPITAL_CORE_B2,","type:'hospital-ward-b3',hospitalCoreB2:HOSPITAL_CORE_B2,hospitalDoorsB3:HOSPITAL_CORE_B2.doors,")
 core=replace(core,'hospitalLayoutRevision:HOSPITAL_CORE_B2.revision,',"hospitalLayoutRevision:HOSPITAL_CORE_B2.revision+':'+[...opened].sort().join(','),")
-core=replace(core,'bounds:[-4,-1,37,37],chunkMinX:-1,chunkMinY:-1,chunkColumns:5,chunkRows:5,','bounds:[0,0,87,113],chunkMinX:0,chunkMinY:0,chunkColumns:8,chunkRows:10,')
+core=replace(core,'bounds:[-4,-1,37,37],chunkMinX:-1,chunkMinY:-1,chunkColumns:5,chunkRows:5,','bounds:[0,0,87,113],chunkMinX:0,chunkMinY:0,chunkColumns:9,chunkRows:12,')
 core=replace(core,'renderEnvelope:{u0:-39,u1:39,v0:-2,v1:74}', 'renderEnvelope:{u0:-112,u1:58,v0:0,v1:200}')
 core=replace(core,"combatRoomNodeIds:[0,1,2,7,8,12,13]", "combatRoomNodeIds:HOSPITAL_CORE_B2.bays.map(p=>HOSPITAL_CORE_B2.rects.findIndex(([,a,b,c,d])=>p.x>=a&&p.x<c&&p.y>=b&&p.y<d))")
 core=replace(core,'node:6,dx:-1,dy:-1',"node:HOSPITAL_CORE_B2.rects.findIndex(r=>r[0]==='entry-hall'),dx:-1,dy:-1")
