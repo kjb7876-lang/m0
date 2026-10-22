@@ -47,18 +47,18 @@ def main():
 
     door_result=json.loads((ROOT/'out/hospital-b3-stability/evidence/doors.json').read_text())
     prop_result=json.loads((ROOT/'out/hospital-b3-stability/evidence/room-dressing.json').read_text())
-    require(door_result.get('candidateHTML')==actual['index.html'] and door_result.get('passed')==10 and door_result.get('failed')==0,'Fresh door/save test did not pass on exact B3 HTML')
+    require(door_result.get('candidateHTML')==actual['index.html'] and door_result.get('passed')==11 and door_result.get('failed')==0,'Fresh door/save test did not pass on exact B3 HTML')
     require(door_result.get('harnessHash')==sha(ROOT/'docs/hospital-b3-evidence/doors.mjs'),'Door test source differs from executed test')
-    require(prop_result.get('candidateHTMLSHA256')==actual['index.html'] and prop_result.get('rendererSHA256')==actual['dist/phase1.js'] and prop_result.get('status')=='passed' and prop_result.get('passCount')==8 and prop_result.get('failCount')==0,'Fresh furnishing test did not pass on exact B3 HTML')
+    require(prop_result.get('candidateHTMLSHA256')==actual['index.html'] and prop_result.get('rendererSHA256')==actual['dist/phase1.js'] and prop_result.get('status')=='passed' and prop_result.get('passCount')==9 and prop_result.get('failCount')==0,'Fresh furnishing test did not pass on exact B3 HTML')
     require(prop_result.get('planSHA256')==candidate.get('roomDressingPlanSHA256') and prop_result.get('testSourceSHA256')==sha(ROOT/'docs/hospital-b3-evidence/props.mjs') and prop_result.get('harnessSourceSHA256')==sha(ROOT/'docs/hospital-b3-evidence/runtime.mjs'),'Furnishing test/plan source differs from executed test')
 
     review=json.loads((ROOT/source['evidenceFile']).read_text())
     reviewed=review.get('hospitalB3',{})
     require(review.get('schema')=='m0.hospital-b3.source-evidence/v1' and reviewed.get('runtimeHashes')==actual,'Reviewed source evidence is for another runtime')
     require(reviewed.get('storagePrefix')==candidate['storagePrefix'] and reviewed.get('storageNamespacePreserved') is True and reviewed.get('saveSchemaChanged') is False,'Reviewed source evidence changes the existing save contract')
-    require(reviewed.get('doorAndSaveAssertions')=={'passed':10,'failed':0,'resultHTMLSHA256':actual['index.html'],'method':door_result.get('method')},'Reviewed door/save evidence differs from the fresh exact-candidate result')
-    require(reviewed.get('furnishingAssertions',{}).get('passed')==8 and reviewed.get('furnishingAssertions',{}).get('failed')==0 and reviewed.get('furnishingAssertions',{}).get('resultHTMLSHA256')==actual['index.html'] and reviewed.get('furnishingAssertions',{}).get('rendererSHA256')==actual['dist/phase1.js'],'Reviewed furnishing evidence differs from the fresh exact-candidate result')
-    manifest['releaseHospitalB3']={'status':'source-approved; release gate passed; user play pending','reviewedSourceCommit':source['headSha'],'reviewedPullRequest':source['pullRequest'],'buildSourceCommit':head,'runtimeHashes':actual,'storagePrefix':candidate['storagePrefix'],'saveSchemaChanged':False,'knownEGOFailure':b['knownEGOFailure'],'doorAssertions':{'passed':10,'failed':0},'furnishingAssertions':{'passed':8,'failed':0},'allTestsPassed':False,'userScreenReviewPending':True}
+    require(reviewed.get('doorAndSaveAssertions')=={'passed':11,'failed':0,'resultHTMLSHA256':actual['index.html'],'method':door_result.get('method')},'Reviewed door/save evidence differs from the fresh exact-candidate result')
+    require(reviewed.get('furnishingAssertions',{}).get('passed')==9 and reviewed.get('furnishingAssertions',{}).get('failed')==0 and reviewed.get('furnishingAssertions',{}).get('resultHTMLSHA256')==actual['index.html'] and reviewed.get('furnishingAssertions',{}).get('rendererSHA256')==actual['dist/phase1.js'],'Reviewed furnishing evidence differs from the fresh exact-candidate result')
+    manifest['releaseHospitalB3']={'status':'source-approved; release gate passed; user play pending','reviewedSourceCommit':source['headSha'],'reviewedPullRequest':source['pullRequest'],'buildSourceCommit':head,'runtimeHashes':actual,'storagePrefix':candidate['storagePrefix'],'saveSchemaChanged':False,'knownEGOFailure':b['knownEGOFailure'],'doorAssertions':{'passed':11,'failed':0},'furnishingAssertions':{'passed':9,'failed':0},'allTestsPassed':False,'userScreenReviewPending':True}
     candidate['status']='source-approved test candidate; user play pending'
     target=SITE/'web-manifest-r62.json'
     target.write_text(json.dumps(manifest,ensure_ascii=False,separators=(',',':'))+'\n')

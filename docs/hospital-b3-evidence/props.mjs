@@ -29,12 +29,30 @@ try{
   const extent=grid.bounds,chunkPoints=[[extent[0],extent[1]],[extent[2],extent[3]],...grid.starts];
   for(const [x,y] of chunkPoints)assert.ok(Math.floor(x/10)>=grid.minX&&Math.floor(x/10)<grid.minX+grid.columns&&Math.floor(y/10)>=grid.minY&&Math.floor(y/10)<grid.minY+grid.rows,`hospital chunk grid omits (${x},${y})`);
   pass('production chunk grid covers the full hospital bounds and all three starts',{bounds:extent,columns:grid.columns,rows:grid.rows,startCount:grid.starts.length,chunkSize:10});
+  // Execute the actual terrain activation method/helper with resource-only Three
+  // stubs. This checks the active exploration reference, not a copied predicate.
+  const apronCases=json(`(()=>{
+    class Geometry{setAttribute(){return this;}setIndex(){return this;}computeVertexNormals(){return this;}}
+    class Attribute{constructor(array,size){this.array=array;this.itemSize=size;}}
+    class Mesh{constructor(geometry,material){this.geometry=geometry;this.material=material;this.userData={};this.layers={set(){}};}}
+    const rows=[],L=room.exploration,art=L.surface.art;
+    for(const enabled of [false,true])for(const b3 of [false,true]){
+      const prior=window.__STORYWORLD_VISUAL_OPTIONS__;window.__STORYWORLD_VISUAL_OPTIONS__={...prior,enabled};
+      try{
+        const added=[],key='apron-test',renderer={spatialBuilt:true,T:{BufferGeometry:Geometry,Float32BufferAttribute:Attribute,Mesh},floorRows:new Map([[key,{}]]),bridgeRows:new Map(),bridgeMaterial:{},backdropRows:new Map(),fogRows:new Map(),wallRows:new Map(),spatialRoot:{add:m=>added.push(m)},currentMazeR73:null,mazeLayoutR73:b3?L:{...L,hospitalDoorsB3:undefined}};
+        StoryPhase1.ThreeRenderer.prototype.activateTerrain.call(renderer,{key,zone:'ep1a08',descriptor:{floor:L.floorRects,terrainArt:art}});
+        rows.push({b3,enabled,aprons:renderer.bridgeRows.size,added:added.length,currentMazeIsNull:renderer.currentMazeR73===null});
+      }finally{window.__STORYWORLD_VISUAL_OPTIONS__=prior;}
+    }return rows;
+  })()`);
+  for(const c of apronCases)assert.equal(c.aprons,c.b3?0:1,JSON.stringify(c));
+  pass('actual Three terrain activation suppresses obsolete B3 apron using active exploration with visual options on/off and preserves legacy apron',{cases:apronCases,ThreeResourcesStubbed:true,GPUCompiled:false});
   const baseHTML='out/hospital-b2/site/index.html';
-  const oldRenderer='e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180';
+  const oldRenderer='976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3';
   assert.equal(hash(fs.readFileSync(site+'/dist/phase1.js')),oldRenderer);
   assert.equal(hash(fs.readFileSync(site+'/'+plan.sourceImage)),hash(fs.readFileSync('out/hospital-b2/site/'+plan.sourceImage)));
   assert.ok(fs.existsSync(site+'/'+plan.sourceImage));
-  pass('candidate reuses the exact B3 runtime, renderer, and existing hospital prop image',{baseHTML,rendererUnchanged:true,sourceImage:plan.sourceImage});
+  pass('candidate reuses the exact B3 runtime, renderer, and existing hospital prop image',{baseHTML,rendererMatchesExpectedCandidate:true,sourceImage:plan.sourceImage});
 
   const rows=json('__STORYWORLD_VISUAL_TEST__.props(room).map(p=>({id:p.id,room:p.roomIdB3,purpose:p.roomFunctionB3,frame:p.visualHospitalFrame,visualHospitalFrame:p.visualHospitalFrame,x:p.x,y:p.y,height:p.height,flipX:p.visualFlipXB3,visualFlipXB3:p.visualFlipXB3,hospitalDressingB3:p.hospitalDressingB3,solid:p.solid,presentationOnly:p.presentationOnly,zone:p.hospitalZone13,hospitalZone13:p.hospitalZone13,path:p.path}))');
   const furnishings=rows.filter(p=>p.id?.startsWith('hospital-dressing-b3:'));
@@ -94,7 +112,11 @@ try{
     {id:'next-portal',...portalPoints.next},{id:'previous-portal',...portalPoints.previous}
   ];
   h.box.reviewCriticals=criticals;
-  const doorLines=doors.map(d=>d.axis==='y'?({id:d.id,a:{x:d.x,y:d.y-d.width/2},b:{x:d.x,y:d.y+d.width/2}}):({id:d.id,a:{x:d.x-d.width/2,y:d.y},b:{x:d.x+d.width/2,y:d.y}}));
+  // Take the aperture from the same closed wall layout that drives production
+  // drawing/collision; axis labels describe passage direction, not leaf direction.
+  const doorLines=json('StoryPhase1.hospitalCoreLayoutB2(room.exploration,[]).hospitalBoundary12.filter(w=>w.hospitalDoorB3).map(w=>({id:w.hospitalDoorB3,a:{x:w.endpoints[0][0],y:w.endpoints[0][1]},b:{x:w.endpoints[1][0],y:w.endpoints[1][1]}}))');
+  assert.equal(doorLines.length,doors.length);
+  for(const d of doors){const line=doorLines.find(l=>l.id===d.id);assert.deepEqual(line,{id:d.id,a:{x:d.x-d.width/2,y:d.y},b:{x:d.x+d.width/2,y:d.y}});}
   h.box.reviewDoorLines=doorLines;
   function rectFromPoints(points){return{minX:Math.min(...points.map(p=>p[0])),maxX:Math.max(...points.map(p=>p[0])),minY:Math.min(...points.map(p=>p[1])),maxY:Math.max(...points.map(p=>p[1]))};}
   function hitsRect(a,b,r,pad){let t0=0,t1=1,dx=b.x-a.x,dy=b.y-a.y;const l=r.minX-pad,rr=r.maxX+pad,t=r.minY-pad,bb=r.maxY+pad;for(const[p,q]of[[-dx,a.x-l],[dx,rr-a.x],[-dy,a.y-t],[dy,bb-a.y]]){if(p===0){if(q<0)return false;continue;}const u=q/p;if(p<0){if(u>t1)return false;if(u>t0)t0=u;}else{if(u<t0)return false;if(u<t1)t1=u;}}return true;}
@@ -120,7 +142,7 @@ try{
     projected.push({id:furnishings[i].id,zoom:z,bounds:Object.fromEntries(Object.entries(box).map(([k,v])=>[k,+v.toFixed(2)])),widthPx:+(box.maxX-box.minX).toFixed(2),heightPx:+(box.maxY-box.minY).toFixed(2),routeHits,criticalHits,doorHits});
   }
   projectionViolations=projected.filter(p=>p.routeHits.length||p.criticalHits.length||p.doorHits.length);
-  report.projectedSpriteAudit={method:'actual production DrawCommands destination corners, full source rectangles (conservative transparent bounds), production pathTo3 route polylines at four zooms; axis-aware door apertures',routeCount:routes.length,routeSteps:Object.fromEntries(routes.map(r=>[r.name,r.points.length-1])),zooms,frames:projected,violations:projectionViolations};
+  report.projectedSpriteAudit={method:'actual production DrawCommands destination corners, full source rectangles (conservative transparent bounds), production pathTo3 route polylines at four zooms; actual production closed-leaf endpoints',routeCount:routes.length,routeSteps:Object.fromEntries(routes.map(r=>[r.name,r.points.length-1])),zooms,frames:projected,violations:projectionViolations};
   h.box.reviewCameraBefore=cameraBefore;h.box.reviewZoomBefore=zoomBefore;
   run('ctx=reviewProjectedCtx;readyImage=reviewProjectedReadyImage;cam=reviewCameraBefore;zoom=reviewZoomBefore;');
 

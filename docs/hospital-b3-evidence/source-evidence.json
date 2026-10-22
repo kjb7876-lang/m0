@@ -2,8 +2,8 @@
   "schema": "m0.hospital-b3.source-evidence/v1",
   "baselineDeploymentSHA": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
   "candidateRuntimeHashes": {
-    "index.html": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
-    "dist/phase1.js": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180"
+    "index.html": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+    "dist/phase1.js": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3"
   },
   "sourcePathHashes": {
     ".github/workflows/pages.yml": "76d59223342cdff8676f7fba10b9443ad62623289314581c245403f32f708c97",
@@ -39,17 +39,17 @@
     "client-source/hospital-b3/hospital-core-b3.js": "0bd077f2b157ccaee8ff92dbf375007b172ad535c58814cbd66008b9e67b71fd",
     "client-source/hospital-b3/plan.json": "b22fd7eade4a2a19178a98a0c19886b5ef45505387b7480d8950a3a964d5e3ac",
     "client-source/hospital-b3/room-dressing-plan.json": "073933f6b80b51f87c5d8eced7b93c5bba7a10ea0d7642843b86b277df1f5af6",
-    "scripts/build-hospital-b3.py": "58a508491bde1f540132dfd8a40ff5a4522ac1d45e97176b665399145d9a0208",
-    "scripts/hospital-b3-release-gate.py": "66c07501e5580cd93baef4686a5510a2da53e52316ff5c6245c720f0ad59e793",
-    "docs/hospital-b3-evidence/doors.mjs": "d9a43a0143f880907315d504a2bd126011c0e05f70f2fabc5b4001168158a25f",
-    "docs/hospital-b3-evidence/props.mjs": "81d84bb89a4201d438472d5a9c050b87939692e053b104bfc33f01fc8997eff8",
+    "scripts/build-hospital-b3.py": "4584f074ed5a98196ed1c247142a344419e507b44688434635670dd6e7124990",
+    "scripts/hospital-b3-release-gate.py": "4399127f47608835f516794bb0620ec75dcaa4753abc2c54c6c6d0cb2da8d3c1",
+    "docs/hospital-b3-evidence/doors.mjs": "cf7297d828c50adfb80561013c4ea3ff499c6014967c507583690c2c6be12191",
+    "docs/hospital-b3-evidence/props.mjs": "76504a9aa20c87419685d9b1bb8f405053100e96135d815c63a9dc3f2e32c4d9",
     "docs/hospital-b3-evidence/runtime.mjs": "b6c38899469c2ba68d3f51585d4eea617ebd0189fee1ceeb37def5d959fb6134",
     "docs/hospital-b3-evidence/restore-baseline-control.json": "b977a8d53a2d4d937c01ec599228df7a0d70831c7ddb13d4ca0504051a46e4e6"
   },
   "hospitalB3": {
     "runtimeHashes": {
-      "index.html": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
-      "dist/phase1.js": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180"
+      "index.html": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "dist/phase1.js": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3"
     },
     "storagePrefix": "storyworld.hospital-b2.test.v1:",
     "storageNamespacePreserved": true,
@@ -57,20 +57,21 @@
     "doorStateStorage": "existing worldR74 v1 entries/opened fields",
     "furnishingPlanSHA256": "073933f6b80b51f87c5d8eced7b93c5bba7a10ea0d7642843b86b277df1f5af6",
     "doorAndSaveAssertions": {
-      "passed": 10,
+      "passed": 11,
       "failed": 0,
-      "resultHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+      "resultHTMLSHA256": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
       "method": "Full production HTML installation and real R74 use/interact/clean/restore/serialize; synthetic progress and direct fixture positions, no browser or network."
     },
     "furnishingAssertions": {
-      "passed": 8,
+      "passed": 9,
       "failed": 0,
-      "resultHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
-      "rendererSHA256": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180",
+      "resultHTMLSHA256": "0d7cefa982219c08a091500ea3b67fdb333831b2f5c4fbb9573dcf121dc57384",
+      "rendererSHA256": "976036fb3e3f4de132ba36ca0d59e013d5a6c34aef88a51ee33bd623db555ee3",
       "method": "Actual production HTML loaded in an isolated Node VM; actual projected DrawCommands bounds and pathTo3 paths; door/save tests use synthetic in-memory save only. No browser, raster, GPU, user save, or natural play.",
       "screenOrGPUVerified": false
     },
-    "releaseGateConsistency": {
+    "existingEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved; no EGO code changed",
+    "previousA3GateConsistency": {
       "freshCommand": "CPU_HTML=out/hospital-b3/site/index.html node docs/hospital-b3-evidence/props.mjs",
       "freshCommandExitCode": 0,
       "freshPassed": 8,
@@ -88,7 +89,123 @@
       },
       "method": "Executed the actual fresh-furnishing require expression extracted from the release gate AST against the new production-VM result and isolated negative copies. Full approval/release gate remains pending."
     },
-    "existingEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved; no EGO code changed"
+    "releaseGateConsistency": {
+      "freshDoorsPassed": 11,
+      "freshFurnishingPassed": 9,
+      "failed": 0,
+      "doorResultSHA256": "35de156f730ac68bdd17e82df61a7c352d5ede81bf6c35ad0af2b92e7258f72f",
+      "furnishingResultSHA256": "b7fc4edb2ac432f5726cc58d6a7e3eb1b531e9d6944d9a0f4a0d22ea58d446d4",
+      "gatePredicateAssertions": {
+        "passed": 9,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Fresh furnishing test",
+            "expected": true,
+            "observed": true
+          },
+          {
+            "name": "Fresh door/save test",
+            "expected": true,
+            "observed": true
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh furnishing test",
+            "expected": false,
+            "observed": false
+          },
+          {
+            "name": "Fresh door/save test",
+            "expected": false,
+            "observed": false
+          }
+        ],
+        "method": "Actual require expressions extracted from release-gate AST; full source approval/release gate is not bypassed and remains CI-only."
+      },
+      "fullApprovalGatePendingCI": true
+    },
+    "reviewCorrections": {
+      "terrainApron": {
+        "beforeHTMLSHA256": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+        "beforeProductionActivationFailed": true,
+        "beforeObservedB3Aprons": 1,
+        "afterCases": [
+          {
+            "b3": false,
+            "enabled": false,
+            "aprons": 1,
+            "added": 1,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": true,
+            "enabled": false,
+            "aprons": 0,
+            "added": 0,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": false,
+            "enabled": true,
+            "aprons": 1,
+            "added": 1,
+            "currentMazeIsNull": true
+          },
+          {
+            "b3": true,
+            "enabled": true,
+            "aprons": 0,
+            "added": 0,
+            "currentMazeIsNull": true
+          }
+        ],
+        "activeReference": "mazeLayoutR73 = frame.exploration",
+        "resourceOnlyThreeStubs": true,
+        "GPUVerified": false
+      },
+      "doorApertures": {
+        "source": "StoryPhase1.hospitalCoreLayoutB2(room.exploration, []).hospitalBoundary12[].endpoints",
+        "allThreeClosedDoorLeavesAudited": true,
+        "projectedViolations": 0,
+        "furnishingsUnchanged": 11
+      },
+      "fullValidLedger": {
+        "profiles": 62,
+        "maximumValidKeys": 124,
+        "otherRowsPreserved": 123,
+        "hospitalVersionRemainsZero": true,
+        "existingZeroRegistration": true,
+        "unknown126Rejected": true,
+        "validatorLimitAndSchemaUnchanged": true
+      },
+      "validatorLimitAndSchemaChanged": false,
+      "hospitalEntryRegistration": "ep1a08 zero or absent -> existing entries[key]=1 only to satisfy opened-requires-1; version(ep1a08) stays 0; other 123 records and opened arrays preserved"
+    }
   },
   "executionLimitations": [
     "Tests ran in the permitted local CPU Node VM against the exact candidate HTML.",
