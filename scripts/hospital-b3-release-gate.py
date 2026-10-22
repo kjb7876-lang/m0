@@ -49,7 +49,7 @@ def main():
     prop_result=json.loads((ROOT/'out/hospital-b3-stability/evidence/room-dressing.json').read_text())
     require(door_result.get('candidateHTML')==actual['index.html'] and door_result.get('passed')==10 and door_result.get('failed')==0,'Fresh door/save test did not pass on exact B3 HTML')
     require(door_result.get('harnessHash')==sha(ROOT/'docs/hospital-b3-evidence/doors.mjs'),'Door test source differs from executed test')
-    require(prop_result.get('candidateHTMLSHA256')==actual['index.html'] and prop_result.get('rendererSHA256')==actual['dist/phase1.js'] and prop_result.get('status')=='passed' and prop_result.get('passCount')==7 and prop_result.get('failCount')==0,'Fresh furnishing test did not pass on exact B3 HTML')
+    require(prop_result.get('candidateHTMLSHA256')==actual['index.html'] and prop_result.get('rendererSHA256')==actual['dist/phase1.js'] and prop_result.get('status')=='passed' and prop_result.get('passCount')==8 and prop_result.get('failCount')==0,'Fresh furnishing test did not pass on exact B3 HTML')
     require(prop_result.get('planSHA256')==candidate.get('roomDressingPlanSHA256') and prop_result.get('testSourceSHA256')==sha(ROOT/'docs/hospital-b3-evidence/props.mjs') and prop_result.get('harnessSourceSHA256')==sha(ROOT/'docs/hospital-b3-evidence/runtime.mjs'),'Furnishing test/plan source differs from executed test')
 
     review=json.loads((ROOT/source['evidenceFile']).read_text())
