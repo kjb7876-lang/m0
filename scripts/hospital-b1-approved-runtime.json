@@ -14,10 +14,10 @@
   "rendererCacheKey": "hospital-b1=a09c0d264510286b",
   "storagePrefix": "storyworld.hospital-b1.test.v1:",
   "candidateSource": {
-    "pullRequest": 23,
-    "headSha": "f0e2028a421344354c5ecffbed9996c2bf017e45",
-    "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
-    "evidenceSHA256": "e2b8323ee6e11806e7f1be40b8b069c2f4cc7afc3b1caa19b1da1f593e1650f7"
+    "pullRequest": 25,
+    "headSha": "80ec9ee737178425c82c639ca15efef047a7b12e",
+    "evidenceFile": "docs/hospital-b3-evidence/source-evidence.json",
+    "evidenceSHA256": "af6370cbaca9e7eb6d6aacc458d115b5ee3a591ebd4a4e083754ee7c9433a3bb"
   },
   "hospitalB2": {
     "status": "approved",
@@ -28,5 +28,34 @@
     "storagePrefix": "storyworld.hospital-b2.test.v1:",
     "rendererCacheKey": "hospital-b2=1a18337b276c03a8",
     "knownEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved"
+  },
+  "hospitalB3": {
+    "status": "approved",
+    "expectedRuntime": {
+      "index.html": "5ca29f72124a18cb0c8930b5ce8e69ffbf1d56544bd59261e42bf74561cde86a",
+      "dist/phase1.js": "e9935242e05668026a7abfd88b2dbcb6867433e7504a447661e8623234a97180"
+    },
+    "storagePrefix": "storyworld.hospital-b2.test.v1:",
+    "rendererCacheKey": "hospital-b3=e9935242e0566802",
+    "knownEGOFailure": "B1/B2 synthetic EGO HP changes on first tick; unresolved",
+    "preservedB2CandidateSource": {
+      "pullRequest": 23,
+      "headSha": "f0e2028a421344354c5ecffbed9996c2bf017e45",
+      "evidenceFile": "docs/hospital-b1-evidence/clean-checkout-results.json",
+      "evidenceSHA256": "e2b8323ee6e11806e7f1be40b8b069c2f4cc7afc3b1caa19b1da1f593e1650f7"
+    },
+    "independentReview": {
+      "result": "approved for restricted test; source review only",
+      "reviewer": "Luna Max independent read-only reviewer /root/review_pr25_hospital_only",
+      "recordURL": "https://github.com/kjb7876-lang/m0/pull/25#issuecomment-6333634339",
+      "reviewedSourceCommit": "80ec9ee737178425c82c639ca15efef047a7b12e",
+      "reviewedTree": "f294c28d8f452df8196488922c2422c96bc1b38b",
+      "evidenceSHA256": "af6370cbaca9e7eb6d6aacc458d115b5ee3a591ebd4a4e083754ee7c9433a3bb",
+      "sourceBindingsVerified": 39,
+      "blockingSourceFindings": 0,
+      "testsRerunByReviewer": false,
+      "recordedAtUTC": "2026-10-22 05:39:09 UTC",
+      "externalGitHubCodexReview": "pending; not claimed as completed"
+    }
   }
 }
