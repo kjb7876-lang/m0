@@ -113,12 +113,16 @@ def validate_workflow(current, original):
         'node verify-pages-r62.mjs out/hospital-r88-static',
         'npm install --no-save --ignore-scripts playwright@1.56.0',
         'npx playwright install --with-deps chromium',
+        'node scripts/r88-guide-interaction.browser.mjs',
         'node scripts/r88-painted.browser.mjs',
         'python3 scripts/hospital-r88-release-gate.py',
         'uses: actions/upload-pages-artifact@v4',
     ]
     positions = [fresh.index(command) for command in order]
     check('R88 build, refusal tests, fresh CPU/subpath/browser evidence and gate precede upload', positions == sorted(positions))
+    check('Fresh candidate guide interaction is checked before painted effects and final approval',
+          fresh.index('node scripts/r88-guide-interaction.browser.mjs') < fresh.index('node scripts/r88-painted.browser.mjs')
+          < fresh.index('python3 scripts/hospital-r88-release-gate.py'))
     check('Local R88 browser points at the exact built site and loopback-only server',
           'STORYWORLD_URL: http://127.0.0.1:4394/' in fresh and
           '--directory out/hospital-r88/site --bind 127.0.0.1' in fresh)
@@ -151,11 +155,12 @@ def validate_workflow(current, original):
               'MANIFEST_SHA: ${{ needs.release.outputs.manifest_sha }}',
               'ASSET_HASHES: ${{ needs.release.outputs.asset_hashes_json }}']))
     public_order = ['node scripts/r75-public-smoke.browser.mjs',
-                    'node scripts/r77-guide-normal.browser.mjs',
+                    'node scripts/r88-guide-interaction.browser.mjs',
                     'node scripts/r88-painted.browser.mjs']
-    check('Both preserved public smokes and the actual R88 painted browser run after deployment',
+    check('Preserved R75 and current explicit-portal guide smoke precede the R88 painted public browser',
           [deploy.index(command) for command in public_order] == sorted(deploy.index(command) for command in public_order)
-          and "R77_PUBLIC_SMOKE: '1'" in deploy)
+          and "R88_PUBLIC_SMOKE: '1'" in deploy
+          and 'node scripts/r77-guide-normal.browser.mjs' not in deploy)
     check('Public R88 and original reports are retained',
           all(path in deploy for path in ['out/r75/public-smoke.json', 'out/r77/', 'out/r88/', 'out/hospital-r88/']))
     check('No sandbox override or synthetic current-source environment value was added',
@@ -187,6 +192,27 @@ def main():
     assert '__STORYWORLD_FINAL42_R88__' in browser and 'r88SourceIndex' in browser, 'New browser must inspect the actual FINAL42 API and command owner'
     assert 'Object.values(data.effects)' in browser and 'all42' in browser, 'All42 supplied effects must be exercised'
     cases.append({'name': 'New FINAL42 browser preserves sandbox and actual42-effect API/owner checks', 'passed': True})
+    guide_browser = (ROOT / 'scripts/r88-guide-interaction.browser.mjs').read_text()
+    assert re.search(r'chromiumSandbox\s*:\s*true\b', guide_browser), 'Current guide browser must preserve the Chromium sandbox'
+    assert '--no-sandbox' not in guide_browser and not re.search(r'chromiumSandbox\s*:\s*false\b', guide_browser)
+    assert 'browser.newContext' in guide_browser and 'freshNativeGame(page)' in guide_browser
+    assert 'softwareGPU: null' in guide_browser and 'GPU identity is not queried' in guide_browser
+    cases.append({'name': 'Current guide browser uses a fresh native UI context and original Chromium sandbox', 'passed': True})
+    assert 'stopped.policy.requiresInteraction, true' in guide_browser
+    assert 'stopped.policy.guideWalks, true' in guide_browser and 'stopped.policy.guideCrossesPortals, false' in guide_browser
+    cases.append({'name': 'Current guide smoke asserts requested automatic walking with explicit portal interaction', 'passed': True})
+    assert 'const idleMs = 3000;' in guide_browser and 'await page.waitForTimeout(idleMs)' in guide_browser
+    assert "idle.zone, 'hub'" in guide_browser and 'idle.policy.waitingForKey, true' in guide_browser
+    cases.append({'name': 'Current guide smoke observes idle portal non-crossing before a real key event', 'passed': True})
+    assert "await page.keyboard.press('KeyE')" in guide_browser
+    assert "page.locator('#r71DifficultyNormal').click" in guide_browser and "page.locator('#r71DifficultyConfirm').click" in guide_browser
+    assert "entered.campaign.tier, 'normal'" in guide_browser and "entered.campaign.roomTier, 'normal'" in guide_browser
+    cases.append({'name': 'Current guide smoke enters through real E and native Normal difficulty controls', 'passed': True})
+    assert 'scene-auto-continue' in guide_browser and 'missingAutoContinue' in guide_browser
+    assert 'fieldProgress.engaged || fieldProgress.movementFromSceneEnd > 0.25' in guide_browser
+    cases.append({'name': 'Current guide smoke preserves readable narrative timers and early field guide progress proof', 'passed': True})
+    assert all(token not in guide_browser for token in ['completeRegion(', 'enterRegion(', 'progress.STORY[', 'player.x =', 'player.y =', 'player.hp =', 'armNextNormal('])
+    cases.append({'name': 'Current guide smoke adds no progression, position, health or automatic-intent fixture', 'passed': True})
     report = {'schema': 'm0.r88-workflow-contract.cpu/v1', 'passed': True,
               'passedChecks': len(cases), 'checks': cases, 'historicalSource': HISTORICAL,
               'sourceCommit': git('rev-parse', 'HEAD').decode().strip(),

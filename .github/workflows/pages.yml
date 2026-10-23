@@ -576,7 +576,7 @@ jobs:
           set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Verify all42 painted assets and native medical/root hooks in the actual R88 browser
+      - name: Verify explicit guide portals then all42 painted assets in the actual R88 browser
         working-directory: r88-current
         shell: bash
         env:
@@ -586,6 +586,7 @@ jobs:
           python3 -m http.server 4394 --directory out/hospital-r88/site --bind 127.0.0.1 > out/hospital-r88/browser-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r88-guide-interaction.browser.mjs
           node scripts/r88-painted.browser.mjs
       - name: Require R88 source approval and all fresh runtime evidence
         id: hospitalr88
@@ -735,15 +736,15 @@ jobs:
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
         run: node scripts/r75-public-smoke.browser.mjs
-      - name: Preserve R77 natural guide and Normal-mode proof on hospital test Pages
+      - name: Verify guide walking explicit E portals and native Normal entry on public Pages
         shell: bash
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
-          R77_PUBLIC_SMOKE: '1'
+          R88_PUBLIC_SMOKE: '1'
         run: |
           set -euo pipefail
-          mkdir -p out/r77
-          node scripts/r77-guide-normal.browser.mjs | tee out/r77/public-browser.log
+          mkdir -p out/r88/guide-interaction
+          node scripts/r88-guide-interaction.browser.mjs | tee out/r88/guide-interaction/public-browser.log
       - name: Verify painted R88 effects on the exact public Pages runtime
         env:
           STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
