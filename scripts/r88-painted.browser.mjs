@@ -208,6 +208,28 @@ try {
   await page.locator('#hospitalDirectStart').click({timeout: 30000});
   await page.waitForFunction(() => started && zone === 'ep1a08' && !loading, null, {timeout: 90000});
   await page.waitForFunction(() => window.__STORYWORLD_PHASE1__.controller.inspect().active === 'three', null, {timeout: 30000});
+  // Direct-start may resolve before the native entry narrative has rendered.
+  // Wait for its real continue control and finish it before controlled damage fixtures.
+  await page.waitForFunction(
+    () => started && zone === 'ep1a08' && !loading && !!document.getElementById('storyNext'),
+    null,
+    {timeout: 30000}
+  );
+  for (let i = 0; i < 80; i++) {
+    const next = page.locator('#storyNext');
+    if (!(await next.count())) break;
+    await next.click({timeout: 10000});
+    await page.waitForFunction(
+      () => !loading && (!modal || !!document.getElementById('storyNext')),
+      null,
+      {timeout: 10000}
+    );
+  }
+  await page.waitForFunction(
+    () => started && zone === 'ep1a08' && !loading && !storyScene && !modal,
+    null,
+    {timeout: 30000}
+  );
   await page.evaluate(async () => {
     for (let i = 0; i < 80 && storyScene; i++) advanceScene();
     if (modal && !storyScene) closePanel(true);
