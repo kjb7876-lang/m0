@@ -1,0 +1,1503 @@
+{
+  "schema": "r81-narrative-progression-cpu/v1",
+  "completedAt": "2026-10-23T08:26:16.785Z",
+  "method": "Native runtime controllers and canonical unlocked save checkpoints in Node VM, assisted actor positions/invulnerability/lethal native hits. No browser/GPU or natural play.",
+  "checks": [
+    {
+      "name": "Native story runtime boots",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "All three castle maps retain two distinct native gate bindings and safe assault anchors",
+      "passed": true,
+      "detail": [
+        {
+          "id": "hando01",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": true,
+          "actors": [
+            {
+              "id": "r75:npc:hando01:lance-owner",
+              "kind": "lance-owner",
+              "door": null,
+              "x": 45,
+              "y": 110
+            },
+            {
+              "id": "r75:npc:hando01:shaman-owner",
+              "kind": "shaman-owner",
+              "door": null,
+              "x": 46.5,
+              "y": 110
+            }
+          ],
+          "ownersBound": false,
+          "allHidden": true
+        },
+        {
+          "id": "hando02",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": true,
+          "actors": [
+            {
+              "id": "r75:npc:hando02:lance-owner",
+              "kind": "lance-owner",
+              "door": "door-0",
+              "x": 17,
+              "y": 106.25
+            },
+            {
+              "id": "r75:npc:hando02:shaman-owner",
+              "kind": "shaman-owner",
+              "door": "door-1",
+              "x": 70,
+              "y": 106.25
+            }
+          ],
+          "ownersBound": true,
+          "allHidden": true
+        },
+        {
+          "id": "hando03",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": false,
+          "actors": [
+            {
+              "id": "r75:npc:hando03:lance-owner",
+              "kind": "lance-owner",
+              "door": "door-0",
+              "x": 17,
+              "y": 106.25
+            },
+            {
+              "id": "r75:npc:hando03:shaman-owner",
+              "kind": "shaman-owner",
+              "door": "door-1",
+              "x": 70,
+              "y": 106.25
+            }
+          ],
+          "ownersBound": true,
+          "allHidden": false
+        }
+      ]
+    },
+    {
+      "name": "Both native two-round defense controllers are active and own initial enemy hiding",
+      "passed": true,
+      "detail": [
+        {
+          "id": "hando01",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": true,
+          "actors": [
+            {
+              "id": "r75:npc:hando01:lance-owner",
+              "kind": "lance-owner",
+              "door": null,
+              "x": 45,
+              "y": 110
+            },
+            {
+              "id": "r75:npc:hando01:shaman-owner",
+              "kind": "shaman-owner",
+              "door": null,
+              "x": 46.5,
+              "y": 110
+            }
+          ],
+          "ownersBound": false,
+          "allHidden": true
+        },
+        {
+          "id": "hando02",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": true,
+          "actors": [
+            {
+              "id": "r75:npc:hando02:lance-owner",
+              "kind": "lance-owner",
+              "door": "door-0",
+              "x": 17,
+              "y": 106.25
+            },
+            {
+              "id": "r75:npc:hando02:shaman-owner",
+              "kind": "shaman-owner",
+              "door": "door-1",
+              "x": 70,
+              "y": 106.25
+            }
+          ],
+          "ownersBound": true,
+          "allHidden": true
+        }
+      ]
+    },
+    {
+      "name": "Both hando02 and hando03 owners bind to actual separate doors",
+      "passed": true,
+      "detail": [
+        {
+          "id": "hando02",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": true,
+          "actors": [
+            {
+              "id": "r75:npc:hando02:lance-owner",
+              "kind": "lance-owner",
+              "door": "door-0",
+              "x": 17,
+              "y": 106.25
+            },
+            {
+              "id": "r75:npc:hando02:shaman-owner",
+              "kind": "shaman-owner",
+              "door": "door-1",
+              "x": 70,
+              "y": 106.25
+            }
+          ],
+          "ownersBound": true,
+          "allHidden": true
+        },
+        {
+          "id": "hando03",
+          "doors": [
+            {
+              "id": "door-0",
+              "x": 17,
+              "y": 105,
+              "edge": [
+                12,
+                18
+              ]
+            },
+            {
+              "id": "door-1",
+              "x": 70,
+              "y": 105,
+              "edge": [
+                15,
+                19
+              ]
+            },
+            {
+              "id": "door-2",
+              "x": 20,
+              "y": 20,
+              "edge": [
+                17,
+                4
+              ]
+            }
+          ],
+          "validDoors": true,
+          "gates": [
+            {
+              "id": "door-0",
+              "outer": {
+                "id": 18,
+                "name": "west-entry",
+                "x": 17,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            },
+            {
+              "id": "door-1",
+              "outer": {
+                "id": 19,
+                "name": "east-entry",
+                "x": 70,
+                "y": 109,
+                "width": 6,
+                "depth": 6,
+                "radius": 3,
+                "shape": "square"
+              }
+            }
+          ],
+          "outerSafe": true,
+          "outerDistinct": true,
+          "controlled": false,
+          "actors": [
+            {
+              "id": "r75:npc:hando03:lance-owner",
+              "kind": "lance-owner",
+              "door": "door-0",
+              "x": 17,
+              "y": 106.25
+            },
+            {
+              "id": "r75:npc:hando03:shaman-owner",
+              "kind": "shaman-owner",
+              "door": "door-1",
+              "x": 70,
+              "y": 106.25
+            }
+          ],
+          "ownersBound": true,
+          "allHidden": false
+        }
+      ]
+    },
+    {
+      "name": "Both owners are reachable and native NPC interaction opens each real door without completing the map",
+      "passed": true,
+      "detail": {
+        "owners": [
+          {
+            "id": "r75:npc:hando02:lance-owner",
+            "door": "door-0",
+            "reachable": true,
+            "unauthorized": false,
+            "used": true,
+            "open": true
+          },
+          {
+            "id": "r75:npc:hando02:shaman-owner",
+            "door": "door-1",
+            "reachable": true,
+            "unauthorized": false,
+            "used": true,
+            "open": true
+          }
+        ],
+        "mask": 3,
+        "completed": false,
+        "opened": [
+          "door-0",
+          "door-1"
+        ]
+      }
+    },
+    {
+      "name": "Native save/restore retains the two owner permissions and door states",
+      "passed": true,
+      "detail": {
+        "mask": 3,
+        "opened": [
+          "door-0",
+          "door-1"
+        ],
+        "controlled": true
+      }
+    },
+    {
+      "name": "Native castle completion exposes the next portal and preserves a guide goal",
+      "passed": true,
+      "detail": {
+        "direction": "e",
+        "status": {
+          "role": "next",
+          "destination": "hando03",
+          "point": {
+            "x": 5,
+            "y": 3.5
+          },
+          "visible": true,
+          "open": true,
+          "reason": "열림"
+        },
+        "goal": {
+          "kind": "portal",
+          "id": "portal:e",
+          "point": {
+            "x": 5,
+            "y": 3.5
+          }
+        },
+        "safe": true
+      }
+    },
+    {
+      "name": "Native hando02 defense runs both assault rounds and joins the garrison before story completion",
+      "passed": true,
+      "detail": {
+        "completed": true,
+        "state": {
+          "phase": "done",
+          "round": 2,
+          "remaining": 0,
+          "pressure": 0,
+          "selected": [
+            "hando02:r75-pack:19",
+            "hando02:r75-pack:29",
+            "hando02:h102-s1-w2-1",
+            "hando02:h102-s1-w2-r1",
+            "hando02:h102-s2",
+            "hando02:h102-s2-w2-4"
+          ],
+          "used": [
+            "hando02:h102-c1",
+            "hando02:h102-c1-w1-r2",
+            "hando02:h102-c1-w2-2",
+            "hando02:h102-c1-w2-r2",
+            "hando02:h102-s1",
+            "hando02:h102-s1-w1-r1",
+            "hando02:r75-pack:19",
+            "hando02:r75-pack:29",
+            "hando02:h102-s1-w2-1",
+            "hando02:h102-s1-w2-r1",
+            "hando02:h102-s2",
+            "hando02:h102-s2-w2-4"
+          ],
+          "joined": true,
+          "retries": 0,
+          "guards": [
+            {
+              "id": "r75:fort:hando02:4",
+              "x": 70,
+              "y": 109
+            },
+            {
+              "id": "r75:fort:hando02:5",
+              "x": 70,
+              "y": 109
+            },
+            {
+              "id": "r75:fort:hando02:6",
+              "x": 70,
+              "y": 109
+            }
+          ]
+        },
+        "events": [
+          {
+            "kind": "warning",
+            "at": 0,
+            "gate": 0,
+            "round": 0,
+            "seconds": 10
+          },
+          {
+            "kind": "start",
+            "at": 0,
+            "zone": "hando02"
+          },
+          {
+            "kind": "assault",
+            "at": 10,
+            "gate": 0,
+            "count": 6,
+            "round": 0
+          },
+          {
+            "kind": "warning",
+            "at": 11.25,
+            "gate": 1,
+            "round": 1,
+            "seconds": 33.51640478290152
+          },
+          {
+            "kind": "garrison-joined",
+            "at": 11.25,
+            "guards": 3
+          },
+          {
+            "kind": "assault",
+            "at": 45,
+            "gate": 1,
+            "count": 6,
+            "round": 1
+          },
+          {
+            "kind": "source-49-gates-held",
+            "at": 46.25,
+            "bossKillReward": false
+          }
+        ],
+        "people": [
+          {
+            "id": "r75:fort:hando02:0",
+            "frame": "villager-elder",
+            "guard": false,
+            "x": 45,
+            "y": 111
+          },
+          {
+            "id": "r75:fort:hando02:1",
+            "frame": "villager-woman",
+            "guard": false,
+            "x": 46.3,
+            "y": 111
+          },
+          {
+            "id": "r75:fort:hando02:2",
+            "frame": "villager-hood",
+            "guard": false,
+            "x": 47.6,
+            "y": 111
+          },
+          {
+            "id": "r75:fort:hando02:3",
+            "frame": "time-guardian",
+            "guard": false,
+            "x": 45,
+            "y": 111.4
+          },
+          {
+            "id": "r75:fort:hando02:4",
+            "frame": "garrison-lance",
+            "guard": true,
+            "x": 70,
+            "y": 109
+          },
+          {
+            "id": "r75:fort:hando02:5",
+            "frame": "garrison-sword",
+            "guard": true,
+            "x": 70,
+            "y": 109
+          },
+          {
+            "id": "r75:fort:hando02:6",
+            "frame": "shaman-owner",
+            "guard": true,
+            "x": 70,
+            "y": 109
+          }
+        ]
+      }
+    },
+    {
+      "name": "The authored last301 duel remains boss-only",
+      "passed": true,
+      "detail": {
+        "bosses": [
+          "l301-boss"
+        ],
+        "ordinary": 0
+      }
+    },
+    {
+      "name": "The last301 native fall preserves the living boss and reads post-story before completion",
+      "passed": true,
+      "detail": {
+        "summoned": true,
+        "before": {
+          "falling": true,
+          "bossAlive": true,
+          "bossHidden": true,
+          "bossRecorded": false,
+          "completed": false,
+          "post": true
+        },
+        "completed": true,
+        "events": [
+          {
+            "kind": "owner-authority",
+            "at": 0,
+            "id": "r75:npc:hando02:lance-owner",
+            "mask": 1
+          },
+          {
+            "kind": "owner-authority",
+            "at": 0,
+            "id": "r75:npc:hando02:shaman-owner",
+            "mask": 3
+          },
+          {
+            "kind": "owner-authority",
+            "at": 0,
+            "id": "r75:npc:hando02:lance-owner",
+            "mask": 3
+          },
+          {
+            "kind": "required-fall",
+            "at": 0.9000000000000002,
+            "bossKillReward": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Residents, guardian and post-castle companions remain protected wall-safe NPCs",
+      "passed": true,
+      "detail": [
+        {
+          "id": "last303",
+          "npcs": [
+            {
+              "id": "r75:npc:last303:villager-elder",
+              "kind": "villager-elder",
+              "solid": false,
+              "safe": true
+            },
+            {
+              "id": "r75:npc:last303:villager-woman",
+              "kind": "villager-woman",
+              "solid": false,
+              "safe": true
+            },
+            {
+              "id": "r75:npc:last303:villager-hood",
+              "kind": "villager-hood",
+              "solid": false,
+              "safe": true
+            }
+          ],
+          "command": [],
+          "overlap": false
+        },
+        {
+          "id": "kair02",
+          "npcs": [
+            {
+              "id": "r75:npc:kair02:time-guardian",
+              "kind": "time-guardian",
+              "solid": false,
+              "safe": true
+            }
+          ],
+          "command": [
+            "kair-great-03"
+          ],
+          "overlap": false
+        },
+        {
+          "id": "kair03",
+          "npcs": [
+            {
+              "id": "r75:npc:kair03:time-guardian",
+              "kind": "time-guardian",
+              "solid": false,
+              "safe": true
+            }
+          ],
+          "command": [],
+          "overlap": false
+        },
+        {
+          "id": "cult01",
+          "npcs": [
+            {
+              "id": "r75:npc:cult01:lance-owner",
+              "kind": "lance-owner",
+              "solid": false,
+              "safe": true
+            },
+            {
+              "id": "r75:npc:cult01:shaman-owner",
+              "kind": "shaman-owner",
+              "solid": false,
+              "safe": true
+            }
+          ],
+          "command": [],
+          "overlap": false
+        },
+        {
+          "id": "cult04",
+          "npcs": [
+            {
+              "id": "r75:npc:cult04:lance-owner",
+              "kind": "lance-owner",
+              "solid": false,
+              "safe": true
+            },
+            {
+              "id": "r75:npc:cult04:shaman-owner",
+              "kind": "shaman-owner",
+              "solid": false,
+              "safe": true
+            }
+          ],
+          "command": [],
+          "overlap": false
+        }
+      ]
+    },
+    {
+      "name": "kair02 keeps its native command-barrier identity",
+      "passed": true
+    }
+  ],
+  "details": {
+    "castle": [
+      {
+        "id": "hando01",
+        "doors": [
+          {
+            "id": "door-0",
+            "x": 17,
+            "y": 105,
+            "edge": [
+              12,
+              18
+            ]
+          },
+          {
+            "id": "door-1",
+            "x": 70,
+            "y": 105,
+            "edge": [
+              15,
+              19
+            ]
+          },
+          {
+            "id": "door-2",
+            "x": 20,
+            "y": 20,
+            "edge": [
+              17,
+              4
+            ]
+          }
+        ],
+        "validDoors": true,
+        "gates": [
+          {
+            "id": "door-0",
+            "outer": {
+              "id": 18,
+              "name": "west-entry",
+              "x": 17,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          },
+          {
+            "id": "door-1",
+            "outer": {
+              "id": 19,
+              "name": "east-entry",
+              "x": 70,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          }
+        ],
+        "outerSafe": true,
+        "outerDistinct": true,
+        "controlled": true,
+        "actors": [
+          {
+            "id": "r75:npc:hando01:lance-owner",
+            "kind": "lance-owner",
+            "door": null,
+            "x": 45,
+            "y": 110
+          },
+          {
+            "id": "r75:npc:hando01:shaman-owner",
+            "kind": "shaman-owner",
+            "door": null,
+            "x": 46.5,
+            "y": 110
+          }
+        ],
+        "ownersBound": false,
+        "allHidden": true
+      },
+      {
+        "id": "hando02",
+        "doors": [
+          {
+            "id": "door-0",
+            "x": 17,
+            "y": 105,
+            "edge": [
+              12,
+              18
+            ]
+          },
+          {
+            "id": "door-1",
+            "x": 70,
+            "y": 105,
+            "edge": [
+              15,
+              19
+            ]
+          },
+          {
+            "id": "door-2",
+            "x": 20,
+            "y": 20,
+            "edge": [
+              17,
+              4
+            ]
+          }
+        ],
+        "validDoors": true,
+        "gates": [
+          {
+            "id": "door-0",
+            "outer": {
+              "id": 18,
+              "name": "west-entry",
+              "x": 17,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          },
+          {
+            "id": "door-1",
+            "outer": {
+              "id": 19,
+              "name": "east-entry",
+              "x": 70,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          }
+        ],
+        "outerSafe": true,
+        "outerDistinct": true,
+        "controlled": true,
+        "actors": [
+          {
+            "id": "r75:npc:hando02:lance-owner",
+            "kind": "lance-owner",
+            "door": "door-0",
+            "x": 17,
+            "y": 106.25
+          },
+          {
+            "id": "r75:npc:hando02:shaman-owner",
+            "kind": "shaman-owner",
+            "door": "door-1",
+            "x": 70,
+            "y": 106.25
+          }
+        ],
+        "ownersBound": true,
+        "allHidden": true
+      },
+      {
+        "id": "hando03",
+        "doors": [
+          {
+            "id": "door-0",
+            "x": 17,
+            "y": 105,
+            "edge": [
+              12,
+              18
+            ]
+          },
+          {
+            "id": "door-1",
+            "x": 70,
+            "y": 105,
+            "edge": [
+              15,
+              19
+            ]
+          },
+          {
+            "id": "door-2",
+            "x": 20,
+            "y": 20,
+            "edge": [
+              17,
+              4
+            ]
+          }
+        ],
+        "validDoors": true,
+        "gates": [
+          {
+            "id": "door-0",
+            "outer": {
+              "id": 18,
+              "name": "west-entry",
+              "x": 17,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          },
+          {
+            "id": "door-1",
+            "outer": {
+              "id": 19,
+              "name": "east-entry",
+              "x": 70,
+              "y": 109,
+              "width": 6,
+              "depth": 6,
+              "radius": 3,
+              "shape": "square"
+            }
+          }
+        ],
+        "outerSafe": true,
+        "outerDistinct": true,
+        "controlled": false,
+        "actors": [
+          {
+            "id": "r75:npc:hando03:lance-owner",
+            "kind": "lance-owner",
+            "door": "door-0",
+            "x": 17,
+            "y": 106.25
+          },
+          {
+            "id": "r75:npc:hando03:shaman-owner",
+            "kind": "shaman-owner",
+            "door": "door-1",
+            "x": 70,
+            "y": 106.25
+          }
+        ],
+        "ownersBound": true,
+        "allHidden": false
+      }
+    ],
+    "ownerUse": {
+      "owners": [
+        {
+          "id": "r75:npc:hando02:lance-owner",
+          "door": "door-0",
+          "reachable": true,
+          "unauthorized": false,
+          "used": true,
+          "open": true
+        },
+        {
+          "id": "r75:npc:hando02:shaman-owner",
+          "door": "door-1",
+          "reachable": true,
+          "unauthorized": false,
+          "used": true,
+          "open": true
+        }
+      ],
+      "mask": 3,
+      "completed": false,
+      "opened": [
+        "door-0",
+        "door-1"
+      ]
+    },
+    "defense": {
+      "completed": true,
+      "state": {
+        "phase": "done",
+        "round": 2,
+        "remaining": 0,
+        "pressure": 0,
+        "selected": [
+          "hando02:r75-pack:19",
+          "hando02:r75-pack:29",
+          "hando02:h102-s1-w2-1",
+          "hando02:h102-s1-w2-r1",
+          "hando02:h102-s2",
+          "hando02:h102-s2-w2-4"
+        ],
+        "used": [
+          "hando02:h102-c1",
+          "hando02:h102-c1-w1-r2",
+          "hando02:h102-c1-w2-2",
+          "hando02:h102-c1-w2-r2",
+          "hando02:h102-s1",
+          "hando02:h102-s1-w1-r1",
+          "hando02:r75-pack:19",
+          "hando02:r75-pack:29",
+          "hando02:h102-s1-w2-1",
+          "hando02:h102-s1-w2-r1",
+          "hando02:h102-s2",
+          "hando02:h102-s2-w2-4"
+        ],
+        "joined": true,
+        "retries": 0,
+        "guards": [
+          {
+            "id": "r75:fort:hando02:4",
+            "x": 70,
+            "y": 109
+          },
+          {
+            "id": "r75:fort:hando02:5",
+            "x": 70,
+            "y": 109
+          },
+          {
+            "id": "r75:fort:hando02:6",
+            "x": 70,
+            "y": 109
+          }
+        ]
+      },
+      "events": [
+        {
+          "kind": "warning",
+          "at": 0,
+          "gate": 0,
+          "round": 0,
+          "seconds": 10
+        },
+        {
+          "kind": "start",
+          "at": 0,
+          "zone": "hando02"
+        },
+        {
+          "kind": "assault",
+          "at": 10,
+          "gate": 0,
+          "count": 6,
+          "round": 0
+        },
+        {
+          "kind": "warning",
+          "at": 11.25,
+          "gate": 1,
+          "round": 1,
+          "seconds": 33.51640478290152
+        },
+        {
+          "kind": "garrison-joined",
+          "at": 11.25,
+          "guards": 3
+        },
+        {
+          "kind": "assault",
+          "at": 45,
+          "gate": 1,
+          "count": 6,
+          "round": 1
+        },
+        {
+          "kind": "source-49-gates-held",
+          "at": 46.25,
+          "bossKillReward": false
+        }
+      ],
+      "people": [
+        {
+          "id": "r75:fort:hando02:0",
+          "frame": "villager-elder",
+          "guard": false,
+          "x": 45,
+          "y": 111
+        },
+        {
+          "id": "r75:fort:hando02:1",
+          "frame": "villager-woman",
+          "guard": false,
+          "x": 46.3,
+          "y": 111
+        },
+        {
+          "id": "r75:fort:hando02:2",
+          "frame": "villager-hood",
+          "guard": false,
+          "x": 47.6,
+          "y": 111
+        },
+        {
+          "id": "r75:fort:hando02:3",
+          "frame": "time-guardian",
+          "guard": false,
+          "x": 45,
+          "y": 111.4
+        },
+        {
+          "id": "r75:fort:hando02:4",
+          "frame": "garrison-lance",
+          "guard": true,
+          "x": 70,
+          "y": 109
+        },
+        {
+          "id": "r75:fort:hando02:5",
+          "frame": "garrison-sword",
+          "guard": true,
+          "x": 70,
+          "y": 109
+        },
+        {
+          "id": "r75:fort:hando02:6",
+          "frame": "shaman-owner",
+          "guard": true,
+          "x": 70,
+          "y": 109
+        }
+      ]
+    },
+    "npcs": [
+      {
+        "id": "last303",
+        "npcs": [
+          {
+            "id": "r75:npc:last303:villager-elder",
+            "kind": "villager-elder",
+            "solid": false,
+            "safe": true
+          },
+          {
+            "id": "r75:npc:last303:villager-woman",
+            "kind": "villager-woman",
+            "solid": false,
+            "safe": true
+          },
+          {
+            "id": "r75:npc:last303:villager-hood",
+            "kind": "villager-hood",
+            "solid": false,
+            "safe": true
+          }
+        ],
+        "command": [],
+        "overlap": false
+      },
+      {
+        "id": "kair02",
+        "npcs": [
+          {
+            "id": "r75:npc:kair02:time-guardian",
+            "kind": "time-guardian",
+            "solid": false,
+            "safe": true
+          }
+        ],
+        "command": [
+          "kair-great-03"
+        ],
+        "overlap": false
+      },
+      {
+        "id": "kair03",
+        "npcs": [
+          {
+            "id": "r75:npc:kair03:time-guardian",
+            "kind": "time-guardian",
+            "solid": false,
+            "safe": true
+          }
+        ],
+        "command": [],
+        "overlap": false
+      },
+      {
+        "id": "cult01",
+        "npcs": [
+          {
+            "id": "r75:npc:cult01:lance-owner",
+            "kind": "lance-owner",
+            "solid": false,
+            "safe": true
+          },
+          {
+            "id": "r75:npc:cult01:shaman-owner",
+            "kind": "shaman-owner",
+            "solid": false,
+            "safe": true
+          }
+        ],
+        "command": [],
+        "overlap": false
+      },
+      {
+        "id": "cult04",
+        "npcs": [
+          {
+            "id": "r75:npc:cult04:lance-owner",
+            "kind": "lance-owner",
+            "solid": false,
+            "safe": true
+          },
+          {
+            "id": "r75:npc:cult04:shaman-owner",
+            "kind": "shaman-owner",
+            "solid": false,
+            "safe": true
+          }
+        ],
+        "command": [],
+        "overlap": false
+      }
+    ]
+  },
+  "passed": 12,
+  "failed": 0,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

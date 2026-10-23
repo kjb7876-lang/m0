@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('fs'),{createHarness}=require('../harness.cjs'),h=createHarness(),A=h.context.StoryPhase1,api=h.context.__STORYWORLD_WORLD_PRESENTATION_R81__,L=A.hospitalCoreLayoutB2({walls:[],surface:{}},[]);
+const views=[];for(const[name,x,y]of[['Lower centre entrance',43,109],['North-east ward',76,9],['Surgeon room',20,12]]){const p={width:1280,height:720,tile:34,zoom:1.12,camX:x,camY:y},after=api.cameraPlan(L,p,{x,y},[]);views.push({name,hero:{x,y},before:p,after:after.projection,beforeCoverage:api.sample(L,p),afterCoverage:after.coverage});}
+fs.writeFileSync('qa/r81/camera-projection.json',JSON.stringify({method:'CPU isometric floor projection, same zoom 1.12; centered camera baseline, not a game screenshot or GPU render.',floorRects:L.floorRects,roofRects:h.context.__STORYWORLD_HOSPITAL_A5__.plan(L).roofRects,bounds:L.bounds,walls:L.walls,views},null,2));

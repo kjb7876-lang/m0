@@ -1,0 +1,164 @@
+{
+  "method": "Actual native cameraTick/settings/draw/projection calls in Node VM, synthetic movement; no browser/GPU/natural-play claim.",
+  "checks": [
+    {
+      "name": "Preserved V5 reproduces large enemy-dependent camera retargeting",
+      "passed": true,
+      "detail": {
+        "distance": 397.88239468466065,
+        "hero": {
+          "x": 20,
+          "y": 12
+        },
+        "a": {
+          "enemy": {
+            "id": "mobile-enemy",
+            "x": 12,
+            "y": 12,
+            "hp": 100,
+            "height": 180
+          },
+          "x": 15.294117647058822,
+          "y": 16.705882352941178,
+          "offset": {
+            "u": -0.28,
+            "v": 0
+          }
+        },
+        "b": {
+          "enemy": {
+            "id": "mobile-enemy",
+            "x": 28,
+            "y": 8,
+            "hp": 100,
+            "height": 180
+          },
+          "x": 24.53781512605042,
+          "y": 16.53781512605042,
+          "offset": {
+            "u": 0,
+            "v": 0.24
+          }
+        }
+      }
+    },
+    {
+      "name": "Stationary hero ignores moving enemies; reducedMotion=false",
+      "passed": true,
+      "detail": {
+        "range": 0,
+        "drawDrift": 0
+      }
+    },
+    {
+      "name": "Stationary hero ignores moving enemies; reducedMotion=true",
+      "passed": true,
+      "detail": {
+        "range": 0,
+        "drawDrift": 0
+      }
+    },
+    {
+      "name": "Walking across old half-cell selection boundaries is smooth and monotonic",
+      "passed": true,
+      "detail": {
+        "reversals": 0,
+        "overshoot": false,
+        "maxStep": 0.02499999999999858,
+        "lag": 0.15447904954189084
+      }
+    },
+    {
+      "name": "User camera range converges without fighting the native controller",
+      "passed": true,
+      "detail": [
+        {
+          "factor": 1.7,
+          "target": 0.7176470588235294,
+          "final": 0.7176470588235294,
+          "reversals": 0
+        },
+        {
+          "factor": 1,
+          "target": 1.22,
+          "final": 1.22,
+          "reversals": 0
+        },
+        {
+          "factor": 2,
+          "target": 0.61,
+          "final": 0.61,
+          "reversals": 0
+        },
+        {
+          "factor": 1.25,
+          "target": 0.976,
+          "final": 0.976,
+          "reversals": 0
+        }
+      ]
+    },
+    {
+      "name": "Direct native settings update shares the same camera owner",
+      "passed": true,
+      "detail": {
+        "delta": 0,
+        "z": 0
+      }
+    },
+    {
+      "name": "Pointer projection round-trips and repeated draws cannot shift the camera",
+      "passed": true,
+      "detail": {
+        "max": 0,
+        "drawDrift": 0
+      }
+    },
+    {
+      "name": "Follow motion stays consistent at30/60/144Hz",
+      "passed": true,
+      "detail": [
+        {
+          "fps": 30,
+          "x": 25.714170413002254,
+          "y": 60
+        },
+        {
+          "fps": 60,
+          "x": 25.691041905621685,
+          "y": 60
+        },
+        {
+          "fps": 144,
+          "x": 25.676974838371827,
+          "y": 60
+        }
+      ]
+    },
+    {
+      "name": "Large teleport recentres once and settles without overshoot",
+      "passed": true,
+      "detail": {
+        "first": {
+          "x": 70,
+          "y": 94
+        },
+        "final": {
+          "x": 70,
+          "y": 94
+        },
+        "hero": {
+          "x": 70,
+          "y": 94
+        }
+      }
+    },
+    {
+      "name": "Camera diagnostics identify stable player follow",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

@@ -1,0 +1,1379 @@
+{
+  "method": "Node VM integrated-site test. Native 777 entry/difficulty, native killEnemy with HP-zero assistance, native story interaction and portal travel. Player placement and invincibility assisted; no browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "maze entry reaches gathering hall but not closed bossroom",
+      "passed": true
+    },
+    {
+      "name": "all type champions",
+      "passed": true,
+      "detail": {
+        "nativeTypes": [
+          "dist02-h1",
+          "dist02-g1",
+          "dist02-m1",
+          "dist02-sp1"
+        ],
+        "champions": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ],
+        "all": [
+          {
+            "id": "dist02:dist02-h1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 18.5,
+            "y": 102.5
+          },
+          {
+            "id": "dist02:dist02-g1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 70.5,
+            "y": 102.5
+          },
+          {
+            "id": "dist02:dist02-m1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 20.5,
+            "y": 96.5
+          },
+          {
+            "id": "dist02:dist02-sp1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 65.5,
+            "y": 96.5
+          },
+          {
+            "id": "dist02:dist02-h1-w1-r1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 18.5,
+            "y": 89.5
+          },
+          {
+            "id": "dist02:dist02-g1-w1-r2",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 68.5,
+            "y": 88.5
+          },
+          {
+            "id": "dist02:dist02-h1-w2-1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 20.85,
+            "y": 35.45
+          },
+          {
+            "id": "dist02:dist02-g1-w2-2",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 20,
+            "y": 36.9
+          },
+          {
+            "id": "dist02:dist02-m1-w2-3",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 50.15,
+            "y": 35.45
+          },
+          {
+            "id": "dist02:dist02-sp1-w2-4",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 21.85,
+            "y": 59.45
+          },
+          {
+            "id": "dist02:dist02-h1-w2-r1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 20.15,
+            "y": 59.45
+          },
+          {
+            "id": "dist02:dist02-g1-w2-r2",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 39.6,
+            "y": 60
+          },
+          {
+            "id": "dist02:mb-dist02",
+            "hp": 11065.56,
+            "maxHp": 11065.56,
+            "x": 16,
+            "y": 10
+          },
+          {
+            "id": "dist02:r74-patrol:0",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 22.5,
+            "y": 85.5
+          },
+          {
+            "id": "dist02:r74-patrol:1",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 62.5,
+            "y": 83.5
+          },
+          {
+            "id": "dist02:r74-patrol:2",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 22.5,
+            "y": 78.5
+          },
+          {
+            "id": "dist02:r74-patrol:3",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 62.5,
+            "y": 73.5
+          },
+          {
+            "id": "dist02:r74-patrol:4",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 22.5,
+            "y": 71.5
+          },
+          {
+            "id": "dist02:r74-patrol:5",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 73.5,
+            "y": 70.5
+          },
+          {
+            "id": "dist02:r75-pack:12",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 24.5,
+            "y": 64.5
+          },
+          {
+            "id": "dist02:r75-pack:13",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 73.5,
+            "y": 64.5
+          },
+          {
+            "id": "dist02:r75-pack:14",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 25.5,
+            "y": 59.5
+          },
+          {
+            "id": "dist02:r75-pack:15",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 76.5,
+            "y": 59.5
+          },
+          {
+            "id": "dist02:r75-pack:16",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 18.5,
+            "y": 59.5
+          },
+          {
+            "id": "dist02:r75-pack:17",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 62.5,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:r75-pack:18",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 16.5,
+            "y": 55.5
+          },
+          {
+            "id": "dist02:r75-pack:19",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 54,
+            "y": 36
+          },
+          {
+            "id": "dist02:r75-pack:20",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 19.5,
+            "y": 50.5
+          },
+          {
+            "id": "dist02:r75-pack:21",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 45,
+            "y": 37
+          },
+          {
+            "id": "dist02:r75-pack:22",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 19.5,
+            "y": 43.5
+          },
+          {
+            "id": "dist02:r75-pack:23",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 75,
+            "y": 36
+          },
+          {
+            "id": "dist02:r75-pack:24",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 18.750852660781558,
+            "y": 101.48040550090793
+          },
+          {
+            "id": "dist02:r75-pack:25",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 71.36686559303583,
+            "y": 101.90751030084006
+          },
+          {
+            "id": "dist02:r75-pack:26",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 21.54107943962605,
+            "y": 96.63657818415805
+          },
+          {
+            "id": "dist02:r75-pack:27",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 66.18470590539792,
+            "y": 97.29603883266661
+          },
+          {
+            "id": "dist02:r75-pack:28",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 18.47937118804775,
+            "y": 90.54979733859324
+          },
+          {
+            "id": "dist02:r75-pack:29",
+            "hp": 505.885,
+            "maxHp": 505.885,
+            "x": 67.78454996936688,
+            "y": 89.26852537607229
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ]
+      }
+    },
+    {
+      "name": "champions exact warm restore",
+      "passed": true,
+      "detail": {
+        "before": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ],
+        "after": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ]
+      }
+    },
+    {
+      "name": "champions exact cold restore",
+      "passed": true,
+      "detail": {
+        "before": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ],
+        "after": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 17,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 70,
+            "y": 94
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31,
+            "x": 21,
+            "y": 63.5
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5
+          }
+        ]
+      }
+    },
+    {
+      "name": "rally preserves survivors hp and safe places",
+      "passed": true,
+      "detail": {
+        "result": true,
+        "old": [
+          {
+            "id": "dist02:dist02-h1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-m1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-sp1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w1-r1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w1-r2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w2-1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w2-2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-m1-w2-3",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-sp1-w2-4",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w2-r1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w2-r2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:0",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:3",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:4",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:5",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:12",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:13",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:14",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:15",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:16",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:17",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:18",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:19",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:20",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:21",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:22",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:23",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:24",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:25",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:26",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:27",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:28",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:29",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999
+          }
+        ],
+        "now": [
+          {
+            "id": "dist02:dist02-h1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-m1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-sp1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w1-r1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w1-r2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w2-1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w2-2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-m1-w2-3",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-sp1-w2-4",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-h1-w2-r1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:dist02-g1-w2-r2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:0",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:1",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:2",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:3",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:4",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r74-patrol:5",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:12",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:13",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:14",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:15",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:16",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:17",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:18",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:19",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:20",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:21",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:22",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:23",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:24",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:25",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:26",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:27",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:28",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:r75-pack:29",
+            "hp": 505.885
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1126.1000099999999
+          }
+        ],
+        "state": {
+          "version": 1,
+          "phase": "rally",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "unsafe": []
+      }
+    },
+    {
+      "name": "fieldclear then native story interaction opens bossdoor",
+      "passed": true,
+      "detail": {
+        "pre": {
+          "version": 1,
+          "phase": "door",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "sceneAtDoor": {
+          "id": "dist02",
+          "part": "pre"
+        },
+        "after": {
+          "version": 1,
+          "phase": "boss",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": true,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "open": true,
+        "modal": false,
+        "scene": false
+      }
+    },
+    {
+      "name": "original majors awaken inside bossroom",
+      "passed": true,
+      "detail": {
+        "stage": "summoning",
+        "majors": [
+          {
+            "id": "dist02:mb-dist02",
+            "state": "summoning",
+            "hp": 45925.56
+          }
+        ]
+      }
+    },
+    {
+      "name": "boss clear exit interaction completes canonical region",
+      "passed": true,
+      "detail": {
+        "pre": {
+          "version": 1,
+          "phase": "exit",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": true,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "after": {
+          "version": 1,
+          "phase": "done",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": true,
+          "exitStoryDone": true,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "complete": true,
+        "cleared": true,
+        "door": true,
+        "error": []
+      }
+    },
+    {
+      "name": "native next portal and new entry return to cleared map",
+      "passed": true,
+      "detail": {
+        "forward": {
+          "to": "dist03",
+          "zone": "dist03",
+          "entered": true
+        },
+        "previous": "dist02",
+        "returned": true,
+        "zone": "dist02",
+        "state": {
+          "version": 1,
+          "phase": "done",
+          "route": 1,
+          "rallied": [
+            "dist02:dist02-h1",
+            "dist02:dist02-g1",
+            "dist02:dist02-m1",
+            "dist02:dist02-sp1",
+            "dist02:dist02-h1-w1-r1",
+            "dist02:dist02-g1-w1-r2",
+            "dist02:dist02-h1-w2-1",
+            "dist02:dist02-g1-w2-2",
+            "dist02:dist02-m1-w2-3",
+            "dist02:dist02-sp1-w2-4",
+            "dist02:dist02-h1-w2-r1",
+            "dist02:dist02-g1-w2-r2",
+            "dist02:r74-patrol:0",
+            "dist02:r74-patrol:1",
+            "dist02:r74-patrol:2",
+            "dist02:r74-patrol:3",
+            "dist02:r74-patrol:4",
+            "dist02:r74-patrol:5",
+            "dist02:r75-pack:12",
+            "dist02:r75-pack:13",
+            "dist02:r75-pack:14",
+            "dist02:r75-pack:15",
+            "dist02:r75-pack:16",
+            "dist02:r75-pack:17",
+            "dist02:r75-pack:18",
+            "dist02:r75-pack:19",
+            "dist02:r75-pack:20",
+            "dist02:r75-pack:21",
+            "dist02:r75-pack:22",
+            "dist02:r75-pack:23",
+            "dist02:r75-pack:24",
+            "dist02:r75-pack:25",
+            "dist02:r75-pack:26",
+            "dist02:r75-pack:27",
+            "dist02:r75-pack:28",
+            "dist02:r75-pack:29",
+            "dist02:ward-champion-r81:dist02-h1",
+            "dist02:ward-champion-r81:dist02-g1",
+            "dist02:ward-champion-r81:dist02-m1",
+            "dist02:ward-champion-r81:dist02-sp1"
+          ],
+          "doorStoryDone": true,
+          "exitStoryDone": true,
+          "champions": [
+            {
+              "id": "dist02:ward-champion-r81:dist02-h1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 17,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-g1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 70,
+              "y": 94,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-m1",
+              "hp": 3035.31,
+              "maxHp": 3035.31,
+              "x": 21,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "dist02:ward-champion-r81:dist02-sp1",
+              "hp": 1126.1000099999999,
+              "maxHp": 3035.31,
+              "x": 59,
+              "y": 63.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "hp": 777,
+        "errors": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,2511 @@
+{
+  "method": "Node syntax, complete manifest SHA256 verification, actual loopback HTTP. No browser/GPU/audio playback or natural input.",
+  "checks": [
+    {
+      "name": "Manifest byte sizes and SHA256 match every listed game file",
+      "passed": true,
+      "details": {
+        "files": 2348,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "All executable HTML script tags parse",
+      "passed": true,
+      "details": {
+        "scripts": 132
+      }
+    },
+    {
+      "name": "All V5 integration runtimes load once in compatibility order",
+      "passed": true,
+      "details": [
+        {
+          "name": "hospital-improvements-a5.js",
+          "count": 1
+        },
+        {
+          "name": "world-visual-r78.js",
+          "count": 1
+        },
+        {
+          "name": "world-combat-v4-compat.js",
+          "count": 1
+        },
+        {
+          "name": "world-combat-r78.js",
+          "count": 1
+        },
+        {
+          "name": "ego-restore-health-r79.js",
+          "count": 1
+        },
+        {
+          "name": "world-assets-r80-data.js",
+          "count": 1
+        },
+        {
+          "name": "world-assets-r80.js",
+          "count": 1
+        },
+        {
+          "name": "world-environment-r81.js",
+          "count": 1
+        },
+        {
+          "name": "world-presentation-r81.js",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "Local HTTP delivers current page, runtime, and all selected assets exactly",
+      "passed": true,
+      "details": [
+        {
+          "path": "index.html",
+          "status": 200,
+          "bytes": 6558695,
+          "sha256Matches": true
+        },
+        {
+          "path": "hero-presentation-r83.js",
+          "status": 200,
+          "bytes": 24807,
+          "sha256Matches": true
+        },
+        {
+          "path": "dist/phase1.js",
+          "status": 200,
+          "bytes": 660281,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-improvements-a5.js",
+          "status": 200,
+          "bytes": 9944,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-direct-test.js",
+          "status": 200,
+          "bytes": 3848,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-pc-test.js",
+          "status": 200,
+          "bytes": 9850,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-layout.js",
+          "status": 200,
+          "bytes": 3860,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-progression.js",
+          "status": 200,
+          "bytes": 22818,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-visuals.js",
+          "status": 200,
+          "bytes": 9263,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-visual-r78.js",
+          "status": 200,
+          "bytes": 6121,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-combat-v4-compat.js",
+          "status": 200,
+          "bytes": 4916,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-combat-r78.js",
+          "status": 200,
+          "bytes": 20563,
+          "sha256Matches": true
+        },
+        {
+          "path": "ego-restore-health-r79.js",
+          "status": 200,
+          "bytes": 1215,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-assets-r80-data.js",
+          "status": 200,
+          "bytes": 145274,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-assets-r80.js",
+          "status": 200,
+          "bytes": 8041,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-environment-r81.js",
+          "status": 200,
+          "bytes": 9699,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-presentation-r81.js",
+          "status": 200,
+          "bytes": 14117,
+          "sha256Matches": true
+        },
+        {
+          "path": "portal-interaction-r83.js",
+          "status": 200,
+          "bytes": 3109,
+          "sha256Matches": true
+        },
+        {
+          "path": "effect-presentation-r83.js",
+          "status": 200,
+          "bytes": 1386,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-doors-r83.js",
+          "status": 200,
+          "bytes": 8322,
+          "sha256Matches": true
+        },
+        {
+          "path": "vfx-selected-data-r83.js",
+          "status": 200,
+          "bytes": 22646,
+          "sha256Matches": true
+        },
+        {
+          "path": "vfx-selected-r83.js",
+          "status": 200,
+          "bytes": 13308,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-settings-r84.js",
+          "status": 200,
+          "bytes": 3381,
+          "sha256Matches": true
+        },
+        {
+          "path": "enemy-presentation-r86.js",
+          "status": 200,
+          "bytes": 6839,
+          "sha256Matches": true
+        },
+        {
+          "path": "painted-vfx-data-r87.js",
+          "status": 200,
+          "bytes": 3052,
+          "sha256Matches": true
+        },
+        {
+          "path": "painted-vfx-r87.js",
+          "status": 200,
+          "bytes": 9905,
+          "sha256Matches": true
+        },
+        {
+          "path": "final42-data-r88.js",
+          "status": 200,
+          "bytes": 152072,
+          "sha256Matches": true
+        },
+        {
+          "path": "final42-runtime-r88.js",
+          "status": 200,
+          "bytes": 20188,
+          "sha256Matches": true
+        },
+        {
+          "path": "final42-hooks-r88.js",
+          "status": 200,
+          "bytes": 16234,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/081/README.md",
+          "status": 200,
+          "bytes": 2062,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/081/animation.json",
+          "status": 200,
+          "bytes": 4672,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/081/atlas.png",
+          "status": 200,
+          "bytes": 1656667,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/090/README.md",
+          "status": 200,
+          "bytes": 2302,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/090/animation.json",
+          "status": 200,
+          "bytes": 5021,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/090/atlas.png",
+          "status": 200,
+          "bytes": 584892,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/091/README.md",
+          "status": 200,
+          "bytes": 2291,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/091/animation.json",
+          "status": 200,
+          "bytes": 5492,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/091/atlas.png",
+          "status": 200,
+          "bytes": 667895,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/092/README.md",
+          "status": 200,
+          "bytes": 2302,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/092/animation.json",
+          "status": 200,
+          "bytes": 5508,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/092/atlas.png",
+          "status": 200,
+          "bytes": 440068,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/093/README.md",
+          "status": 200,
+          "bytes": 2298,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/093/animation.json",
+          "status": 200,
+          "bytes": 5471,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/093/atlas.png",
+          "status": 200,
+          "bytes": 522133,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/094/README.md",
+          "status": 200,
+          "bytes": 1668,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/094/animation.json",
+          "status": 200,
+          "bytes": 5487,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/094/atlas.png",
+          "status": 200,
+          "bytes": 534320,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/095/README.md",
+          "status": 200,
+          "bytes": 1675,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/095/animation.json",
+          "status": 200,
+          "bytes": 5286,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/095/atlas.png",
+          "status": 200,
+          "bytes": 536894,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/096/README.md",
+          "status": 200,
+          "bytes": 1670,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/096/animation.json",
+          "status": 200,
+          "bytes": 6003,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/096/atlas.png",
+          "status": 200,
+          "bytes": 359237,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/097/README.md",
+          "status": 200,
+          "bytes": 1678,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/097/animation.json",
+          "status": 200,
+          "bytes": 5537,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/097/atlas.png",
+          "status": 200,
+          "bytes": 559269,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/098/README.md",
+          "status": 200,
+          "bytes": 2308,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/098/animation.json",
+          "status": 200,
+          "bytes": 5517,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/098/atlas.png",
+          "status": 200,
+          "bytes": 776886,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/099/README.md",
+          "status": 200,
+          "bytes": 3245,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/099/thorn_atlas.png",
+          "status": 200,
+          "bytes": 5857091,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/099/timing.json",
+          "status": 200,
+          "bytes": 6200,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/100/README.md",
+          "status": 200,
+          "bytes": 1681,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/100/animation.json",
+          "status": 200,
+          "bytes": 5286,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/100/atlas.png",
+          "status": 200,
+          "bytes": 530598,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/101/README.md",
+          "status": 200,
+          "bytes": 1681,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/101/animation.json",
+          "status": 200,
+          "bytes": 5063,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/101/atlas.png",
+          "status": 200,
+          "bytes": 445460,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/110/README.md",
+          "status": 200,
+          "bytes": 1989,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/110/animation.json",
+          "status": 200,
+          "bytes": 4662,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/110/atlas.png",
+          "status": 200,
+          "bytes": 1757434,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/111/README.md",
+          "status": 200,
+          "bytes": 1979,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/111/animation.json",
+          "status": 200,
+          "bytes": 4691,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/111/atlas.png",
+          "status": 200,
+          "bytes": 1217299,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/112/README.md",
+          "status": 200,
+          "bytes": 1949,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/112/animation.json",
+          "status": 200,
+          "bytes": 4651,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/112/atlas.png",
+          "status": 200,
+          "bytes": 1364371,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/113/README.md",
+          "status": 200,
+          "bytes": 2190,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/113/animation.json",
+          "status": 200,
+          "bytes": 4684,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/113/atlas.png",
+          "status": 200,
+          "bytes": 1608283,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/114/README.md",
+          "status": 200,
+          "bytes": 2020,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/114/animation.json",
+          "status": 200,
+          "bytes": 4671,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/114/atlas.png",
+          "status": 200,
+          "bytes": 1154417,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/115/README.md",
+          "status": 200,
+          "bytes": 2072,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/115/animation.json",
+          "status": 200,
+          "bytes": 4681,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/115/atlas.png",
+          "status": 200,
+          "bytes": 996185,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/116/README.md",
+          "status": 200,
+          "bytes": 2095,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/116/animation.json",
+          "status": 200,
+          "bytes": 4683,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/116/atlas.png",
+          "status": 200,
+          "bytes": 1494151,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/117/README.md",
+          "status": 200,
+          "bytes": 2042,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/117/animation.json",
+          "status": 200,
+          "bytes": 4673,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/117/atlas.png",
+          "status": 200,
+          "bytes": 1684694,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/130/README.md",
+          "status": 200,
+          "bytes": 1964,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/130/animation.json",
+          "status": 200,
+          "bytes": 4656,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/130/atlas.png",
+          "status": 200,
+          "bytes": 948019,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/131/README.md",
+          "status": 200,
+          "bytes": 2257,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/131/animation.json",
+          "status": 200,
+          "bytes": 4781,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/131/atlas.png",
+          "status": 200,
+          "bytes": 2006616,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/132/README.md",
+          "status": 200,
+          "bytes": 2029,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/132/animation.json",
+          "status": 200,
+          "bytes": 4667,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/132/atlas.png",
+          "status": 200,
+          "bytes": 1323211,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/213/README.md",
+          "status": 200,
+          "bytes": 4345,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/213/poison-impact-atlas-256.png",
+          "status": 200,
+          "bytes": 705154,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/213/poison-impact.animation.json",
+          "status": 200,
+          "bytes": 5293,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/214/README.md",
+          "status": 200,
+          "bytes": 1801,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/214/animation.json",
+          "status": 200,
+          "bytes": 4855,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/214/atlas.png",
+          "status": 200,
+          "bytes": 329521,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/215/README.md",
+          "status": 200,
+          "bytes": 3627,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/215/animation.json",
+          "status": 200,
+          "bytes": 6376,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/215/atlas.png",
+          "status": 200,
+          "bytes": 383925,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/217/README.md",
+          "status": 200,
+          "bytes": 2251,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/217/animation.json",
+          "status": 200,
+          "bytes": 4984,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/217/atlas.png",
+          "status": 200,
+          "bytes": 492573,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/243/README.md",
+          "status": 200,
+          "bytes": 2070,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/243/animation.json",
+          "status": 200,
+          "bytes": 4818,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/243/atlas.png",
+          "status": 200,
+          "bytes": 663859,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/244/README.md",
+          "status": 200,
+          "bytes": 2067,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/244/animation.json",
+          "status": 200,
+          "bytes": 4815,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/244/atlas.png",
+          "status": 200,
+          "bytes": 734744,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/245/README.md",
+          "status": 200,
+          "bytes": 1741,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/245/animation.json",
+          "status": 200,
+          "bytes": 4876,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/245/atlas.png",
+          "status": 200,
+          "bytes": 391355,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/246/README.md",
+          "status": 200,
+          "bytes": 1742,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/246/animation.json",
+          "status": 200,
+          "bytes": 4877,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/246/atlas.png",
+          "status": 200,
+          "bytes": 535374,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/247/README.md",
+          "status": 200,
+          "bytes": 2064,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/247/animation.json",
+          "status": 200,
+          "bytes": 4812,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/247/atlas.png",
+          "status": 200,
+          "bytes": 416811,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/248/README.md",
+          "status": 200,
+          "bytes": 2064,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/248/animation.json",
+          "status": 200,
+          "bytes": 4812,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/248/atlas.png",
+          "status": 200,
+          "bytes": 646607,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/249/README.md",
+          "status": 200,
+          "bytes": 2070,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/249/animation.json",
+          "status": 200,
+          "bytes": 4818,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/249/atlas.png",
+          "status": 200,
+          "bytes": 574825,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/250/README.md",
+          "status": 200,
+          "bytes": 2070,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/250/animation.json",
+          "status": 200,
+          "bytes": 4818,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/250/atlas.png",
+          "status": 200,
+          "bytes": 792997,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/251/README.md",
+          "status": 200,
+          "bytes": 1787,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/251/animation.json",
+          "status": 200,
+          "bytes": 4894,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/251/atlas.png",
+          "status": 200,
+          "bytes": 586849,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/254/README.md",
+          "status": 200,
+          "bytes": 1746,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/254/animation.json",
+          "status": 200,
+          "bytes": 4892,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/254/atlas.png",
+          "status": 200,
+          "bytes": 320613,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/259/README.md",
+          "status": 200,
+          "bytes": 1811,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/259/animation.json",
+          "status": 200,
+          "bytes": 4981,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/259/atlas.png",
+          "status": 200,
+          "bytes": 468549,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/260/README.md",
+          "status": 200,
+          "bytes": 1910,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/260/animation.json",
+          "status": 200,
+          "bytes": 5032,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/260/atlas.png",
+          "status": 200,
+          "bytes": 627584,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/261/README.md",
+          "status": 200,
+          "bytes": 1826,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/261/animation.json",
+          "status": 200,
+          "bytes": 4976,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/261/atlas.png",
+          "status": 200,
+          "bytes": 544732,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/262/README.md",
+          "status": 200,
+          "bytes": 1979,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/262/animation.json",
+          "status": 200,
+          "bytes": 5039,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/final42-r88/effects/262/atlas.png",
+          "status": 200,
+          "bytes": 638867,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/bed.png",
+          "status": 200,
+          "bytes": 168406,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/cabinet.png",
+          "status": 200,
+          "bytes": 206762,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/chair.png",
+          "status": 200,
+          "bytes": 185115,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/iv.png",
+          "status": 200,
+          "bytes": 57631,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/monitor.png",
+          "status": 200,
+          "bytes": 83161,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/provenance.json",
+          "status": 200,
+          "bytes": 5938,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/stool.png",
+          "status": 200,
+          "bytes": 124525,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/stretcher.png",
+          "status": 200,
+          "bytes": 125868,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/bind/README.md",
+          "status": 200,
+          "bytes": 3245,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/bind/thorn_atlas.png",
+          "status": 200,
+          "bytes": 5857091,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/bind/timing.json",
+          "status": 200,
+          "bytes": 6200,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/poison/README.md",
+          "status": 200,
+          "bytes": 4345,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/poison/poison-impact-atlas-256.png",
+          "status": 200,
+          "bytes": 705154,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/poison/poison-impact.animation.json",
+          "status": 200,
+          "bytes": 5293,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/scalpel/README.md",
+          "status": 200,
+          "bytes": 3627,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/scalpel/animation.json",
+          "status": 200,
+          "bytes": 6376,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/painted-vfx-r87/scalpel/atlas.png",
+          "status": 200,
+          "bytes": 383925,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/art/prior_assets/hospital_core/hospital-bed-isometric.png",
+          "status": 200,
+          "bytes": 1431451,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/art/prior_assets/hospital_core/patient-monitor-isometric.png",
+          "status": 200,
+          "bytes": 329964,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/art/prior_assets/hospital_props/hospital_wheelchair.png",
+          "status": 200,
+          "bytes": 1892021,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/dynamic/README-KO.txt",
+          "status": 200,
+          "bytes": 4930,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/dynamic/catalog.js",
+          "status": 200,
+          "bytes": 58522,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/dynamic/catalog.json",
+          "status": 200,
+          "bytes": 58394,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/dynamic/runtime.js",
+          "status": 200,
+          "bytes": 22583,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/refined-r85/world-catalog.json",
+          "status": 200,
+          "bytes": 211304,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/README-quality.txt",
+          "status": 200,
+          "bytes": 1850,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/SHA256SUMS.txt",
+          "status": 200,
+          "bytes": 7636,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/refined-r85/04-kair03-exhausted-sand-tracks.png",
+          "status": 200,
+          "bytes": 441354,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/review/selected-quality-64.json",
+          "status": 200,
+          "bytes": 82884,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+          "status": 200,
+          "bytes": 1269920,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist01_snapped_silk_remnant.png",
+          "status": 200,
+          "bytes": 1472341,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+          "status": 200,
+          "bytes": 1707811,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist01_web_lane_warning_v2.png",
+          "status": 200,
+          "bytes": 966857,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist02_drag_groove_remnant.png",
+          "status": 200,
+          "bytes": 2041194,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist02_horn_charge_warning.png",
+          "status": 200,
+          "bytes": 1597430,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+          "status": 200,
+          "bytes": 1121167,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist02_reed_hand_projectile.png",
+          "status": 200,
+          "bytes": 2034788,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+          "status": 200,
+          "bytes": 1183217,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+          "status": 200,
+          "bytes": 1412180,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+          "status": 200,
+          "bytes": 1252483,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist05_split_stone_impact.png",
+          "status": 200,
+          "bytes": 1905454,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist06_fireball_landing_crown.png",
+          "status": 200,
+          "bytes": 1833043,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist06_molten_cleave_scar.png",
+          "status": 200,
+          "bytes": 420967,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist06_spatial_cleave_warning.png",
+          "status": 200,
+          "bytes": 1598388,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch01/dist06_sword_space_fissure.png",
+          "status": 200,
+          "bytes": 1645699,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_impact.png",
+          "status": 200,
+          "bytes": 1807704,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+          "status": 200,
+          "bytes": 772161,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_remnant.png",
+          "status": 200,
+          "bytes": 1748124,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_warning_v2.png",
+          "status": 200,
+          "bytes": 1582696,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_impact.png",
+          "status": 200,
+          "bytes": 1059505,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+          "status": 200,
+          "bytes": 738102,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_remnant.png",
+          "status": 200,
+          "bytes": 1394459,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_warning.png",
+          "status": 200,
+          "bytes": 536218,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_impact.png",
+          "status": 200,
+          "bytes": 1581574,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+          "status": 200,
+          "bytes": 1666365,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_remnant.png",
+          "status": 200,
+          "bytes": 1896529,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_warning.png",
+          "status": 200,
+          "bytes": 1714539,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_impact.png",
+          "status": 200,
+          "bytes": 530340,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+          "status": 200,
+          "bytes": 722762,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_remnant.png",
+          "status": 200,
+          "bytes": 1057332,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_warning.png",
+          "status": 200,
+          "bytes": 1079134,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/01_bootloader_strike_lanes_v2.png",
+          "status": 200,
+          "bytes": 1566142,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+          "status": 200,
+          "bytes": 551296,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/03_bootloader_copy_interference.png",
+          "status": 200,
+          "bytes": 980578,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/04_bootloader_drained_circuit.png",
+          "status": 200,
+          "bytes": 1607213,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/05_controller_bombardment_grid_v3.png",
+          "status": 200,
+          "bytes": 1271002,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+          "status": 200,
+          "bytes": 580880,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/07_controller_steel_impact.png",
+          "status": 200,
+          "bytes": 1237330,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/08_controller_shell_furrow.png",
+          "status": 200,
+          "bytes": 1855847,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/09_knight_six_lane_warning.png",
+          "status": 200,
+          "bytes": 1287181,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/10_knight_parry_counter.png",
+          "status": 200,
+          "bytes": 599343,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/11_knight_six_contact_cuts.png",
+          "status": 200,
+          "bytes": 1060372,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/12_knight_six_ground_scars.png",
+          "status": 200,
+          "bytes": 682223,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/13_insomnia_gaze_warning.png",
+          "status": 200,
+          "bytes": 1563464,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+          "status": 200,
+          "bytes": 983083,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/15_insomnia_layered_afterimage.png",
+          "status": 200,
+          "bytes": 1623955,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+          "status": 200,
+          "bytes": 1856597,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+          "status": 200,
+          "bytes": 585056,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+          "status": 200,
+          "bytes": 714995,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/03-kair03-cable-hand-shear-impact.png",
+          "status": 200,
+          "bytes": 1068913,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/04-kair03-exhausted-sand-tracks.png",
+          "status": 200,
+          "bytes": 774081,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/05-murder03-three-stop-bars.png",
+          "status": 200,
+          "bytes": 884977,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/06-murder03-bent-rain-shard.png",
+          "status": 200,
+          "bytes": 497084,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/07-murder03-coordinate-impact.png",
+          "status": 200,
+          "bytes": 667314,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/08-murder03-roadlight-residue.png",
+          "status": 200,
+          "bytes": 717759,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+          "status": 200,
+          "bytes": 1173314,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/10-cult03-golden-order-wall.png",
+          "status": 200,
+          "bytes": 926164,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/11-cult03-wall-hit-deflection.png",
+          "status": 200,
+          "bytes": 826792,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/12-cult03-authority-fragments.png",
+          "status": 200,
+          "bytes": 831452,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/13-cult04-spatial-fold-warning.png",
+          "status": 200,
+          "bytes": 561743,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+          "status": 200,
+          "bytes": 489967,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/15-cult04-time-stopped-collision.png",
+          "status": 200,
+          "bytes": 1030518,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/vfx-r83/selected/batch04/16-cult04-resurrection-stitch-arc.png",
+          "status": 200,
+          "bytes": 661103,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/catalog.json",
+          "status": 200,
+          "bytes": 210174,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-000.webp",
+          "status": 200,
+          "bytes": 160674,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-001.webp",
+          "status": 200,
+          "bytes": 245658,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-002.webp",
+          "status": 200,
+          "bytes": 212750,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-003.webp",
+          "status": 200,
+          "bytes": 213566,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-004.webp",
+          "status": 200,
+          "bytes": 205704,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-005.webp",
+          "status": 200,
+          "bytes": 205526,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-006.webp",
+          "status": 200,
+          "bytes": 214984,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-007.webp",
+          "status": 200,
+          "bytes": 165866,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-008.webp",
+          "status": 200,
+          "bytes": 225902,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-009.webp",
+          "status": 200,
+          "bytes": 122398,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-010.webp",
+          "status": 200,
+          "bytes": 204160,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-011.webp",
+          "status": 200,
+          "bytes": 188334,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-012.webp",
+          "status": 200,
+          "bytes": 187926,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-013.webp",
+          "status": 200,
+          "bytes": 170802,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-014.webp",
+          "status": 200,
+          "bytes": 205162,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-015.webp",
+          "status": 200,
+          "bytes": 268746,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-016.webp",
+          "status": 200,
+          "bytes": 178982,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-017.webp",
+          "status": 200,
+          "bytes": 172630,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-018.webp",
+          "status": 200,
+          "bytes": 113034,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-019.webp",
+          "status": 200,
+          "bytes": 117072,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-020.webp",
+          "status": 200,
+          "bytes": 254938,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-021.webp",
+          "status": 200,
+          "bytes": 132268,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-022.webp",
+          "status": 200,
+          "bytes": 246582,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-023.webp",
+          "status": 200,
+          "bytes": 157886,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-024.webp",
+          "status": 200,
+          "bytes": 166964,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-025.webp",
+          "status": 200,
+          "bytes": 216272,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-026.webp",
+          "status": 200,
+          "bytes": 123682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-027.webp",
+          "status": 200,
+          "bytes": 297808,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-028.webp",
+          "status": 200,
+          "bytes": 105172,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-029.webp",
+          "status": 200,
+          "bytes": 311640,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-030.webp",
+          "status": 200,
+          "bytes": 197666,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-031.webp",
+          "status": 200,
+          "bytes": 150384,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-032.webp",
+          "status": 200,
+          "bytes": 220124,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-033.webp",
+          "status": 200,
+          "bytes": 170056,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-034.webp",
+          "status": 200,
+          "bytes": 180506,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-035.webp",
+          "status": 200,
+          "bytes": 216542,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-036.webp",
+          "status": 200,
+          "bytes": 187500,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-037.webp",
+          "status": 200,
+          "bytes": 169598,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-038.webp",
+          "status": 200,
+          "bytes": 217552,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-039.webp",
+          "status": 200,
+          "bytes": 306468,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-040.webp",
+          "status": 200,
+          "bytes": 272816,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-041.webp",
+          "status": 200,
+          "bytes": 202702,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-042.webp",
+          "status": 200,
+          "bytes": 263236,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-043.webp",
+          "status": 200,
+          "bytes": 266818,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-044.webp",
+          "status": 200,
+          "bytes": 135532,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-045.webp",
+          "status": 200,
+          "bytes": 280530,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-046.webp",
+          "status": 200,
+          "bytes": 240256,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-047.webp",
+          "status": 200,
+          "bytes": 267324,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-048.webp",
+          "status": 200,
+          "bytes": 171222,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-049.webp",
+          "status": 200,
+          "bytes": 217450,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-050.webp",
+          "status": 200,
+          "bytes": 146540,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-051.webp",
+          "status": 200,
+          "bytes": 191708,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-052.webp",
+          "status": 200,
+          "bytes": 65608,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-053.webp",
+          "status": 200,
+          "bytes": 122330,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-054.webp",
+          "status": 200,
+          "bytes": 185176,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-055.webp",
+          "status": 200,
+          "bytes": 196636,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-056.webp",
+          "status": 200,
+          "bytes": 160640,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-057.webp",
+          "status": 200,
+          "bytes": 157394,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-058.webp",
+          "status": 200,
+          "bytes": 238686,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-059.webp",
+          "status": 200,
+          "bytes": 180886,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-060.webp",
+          "status": 200,
+          "bytes": 205442,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-061.webp",
+          "status": 200,
+          "bytes": 248102,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-062.webp",
+          "status": 200,
+          "bytes": 283806,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-063.webp",
+          "status": 200,
+          "bytes": 190396,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-064.webp",
+          "status": 200,
+          "bytes": 231392,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-065.webp",
+          "status": 200,
+          "bytes": 198646,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-066.webp",
+          "status": 200,
+          "bytes": 124968,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-067.webp",
+          "status": 200,
+          "bytes": 304740,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-068.webp",
+          "status": 200,
+          "bytes": 222390,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-069.webp",
+          "status": 200,
+          "bytes": 297076,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-070.webp",
+          "status": 200,
+          "bytes": 167828,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-071.webp",
+          "status": 200,
+          "bytes": 243232,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-072.webp",
+          "status": 200,
+          "bytes": 299904,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-073.webp",
+          "status": 200,
+          "bytes": 273264,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-074.webp",
+          "status": 200,
+          "bytes": 249460,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-075.webp",
+          "status": 200,
+          "bytes": 263518,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-076.webp",
+          "status": 200,
+          "bytes": 151198,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-077.webp",
+          "status": 200,
+          "bytes": 82646,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-078.webp",
+          "status": 200,
+          "bytes": 139284,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-079.webp",
+          "status": 200,
+          "bytes": 145974,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-080.webp",
+          "status": 200,
+          "bytes": 103704,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-081.webp",
+          "status": 200,
+          "bytes": 229992,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-082.webp",
+          "status": 200,
+          "bytes": 56672,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-083.webp",
+          "status": 200,
+          "bytes": 88480,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-084.webp",
+          "status": 200,
+          "bytes": 124924,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-085.webp",
+          "status": 200,
+          "bytes": 136182,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-086.webp",
+          "status": 200,
+          "bytes": 122206,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-087.webp",
+          "status": 200,
+          "bytes": 226588,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-088.webp",
+          "status": 200,
+          "bytes": 284504,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-089.webp",
+          "status": 200,
+          "bytes": 150262,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-090.webp",
+          "status": 200,
+          "bytes": 150546,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-091.webp",
+          "status": 200,
+          "bytes": 163908,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-092.webp",
+          "status": 200,
+          "bytes": 214268,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-093.webp",
+          "status": 200,
+          "bytes": 229706,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-094.webp",
+          "status": 200,
+          "bytes": 170034,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-095.webp",
+          "status": 200,
+          "bytes": 150138,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-096.webp",
+          "status": 200,
+          "bytes": 72496,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-097.webp",
+          "status": 200,
+          "bytes": 114146,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-098.webp",
+          "status": 200,
+          "bytes": 142826,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-099.webp",
+          "status": 200,
+          "bytes": 153374,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-100.webp",
+          "status": 200,
+          "bytes": 201214,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-101.webp",
+          "status": 200,
+          "bytes": 202462,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-102.webp",
+          "status": 200,
+          "bytes": 160310,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-103.webp",
+          "status": 200,
+          "bytes": 148912,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-104.webp",
+          "status": 200,
+          "bytes": 90784,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-105.webp",
+          "status": 200,
+          "bytes": 184710,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-106.webp",
+          "status": 200,
+          "bytes": 213306,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-107.webp",
+          "status": 200,
+          "bytes": 171384,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-108.webp",
+          "status": 200,
+          "bytes": 199454,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-109.webp",
+          "status": 200,
+          "bytes": 184372,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-110.webp",
+          "status": 200,
+          "bytes": 117848,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-111.webp",
+          "status": 200,
+          "bytes": 143604,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-112.webp",
+          "status": 200,
+          "bytes": 78828,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-113.webp",
+          "status": 200,
+          "bytes": 310296,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-114.webp",
+          "status": 200,
+          "bytes": 224264,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-115.webp",
+          "status": 200,
+          "bytes": 248496,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-116.webp",
+          "status": 200,
+          "bytes": 332972,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-117.webp",
+          "status": 200,
+          "bytes": 132918,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-118.webp",
+          "status": 200,
+          "bytes": 56854,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-119.webp",
+          "status": 200,
+          "bytes": 210928,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-120.webp",
+          "status": 200,
+          "bytes": 289312,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-121.webp",
+          "status": 200,
+          "bytes": 342430,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-122.webp",
+          "status": 200,
+          "bytes": 262458,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-123.webp",
+          "status": 200,
+          "bytes": 240336,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-124.webp",
+          "status": 200,
+          "bytes": 228200,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-125.webp",
+          "status": 200,
+          "bytes": 114682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-126.webp",
+          "status": 200,
+          "bytes": 133354,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-127.webp",
+          "status": 200,
+          "bytes": 99002,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-128.webp",
+          "status": 200,
+          "bytes": 184724,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-129.webp",
+          "status": 200,
+          "bytes": 150434,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-130.webp",
+          "status": 200,
+          "bytes": 99660,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-131.webp",
+          "status": 200,
+          "bytes": 216386,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-132.webp",
+          "status": 200,
+          "bytes": 77046,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-133.webp",
+          "status": 200,
+          "bytes": 69748,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-134.webp",
+          "status": 200,
+          "bytes": 135068,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-135.webp",
+          "status": 200,
+          "bytes": 143612,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-136.webp",
+          "status": 200,
+          "bytes": 158428,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-137.webp",
+          "status": 200,
+          "bytes": 172210,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-138.webp",
+          "status": 200,
+          "bytes": 65424,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-139.webp",
+          "status": 200,
+          "bytes": 189154,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-140.webp",
+          "status": 200,
+          "bytes": 62940,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-141.webp",
+          "status": 200,
+          "bytes": 67066,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-142.webp",
+          "status": 200,
+          "bytes": 185626,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-143.webp",
+          "status": 200,
+          "bytes": 99682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-144.webp",
+          "status": 200,
+          "bytes": 183364,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-145.webp",
+          "status": 200,
+          "bytes": 123532,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-146.webp",
+          "status": 200,
+          "bytes": 146174,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-147.webp",
+          "status": 200,
+          "bytes": 160706,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-148.webp",
+          "status": 200,
+          "bytes": 254576,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-149.webp",
+          "status": 200,
+          "bytes": 210286,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-150.webp",
+          "status": 200,
+          "bytes": 177508,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-151.webp",
+          "status": 200,
+          "bytes": 160928,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-152.webp",
+          "status": 200,
+          "bytes": 190134,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/refined-r85-r80-142.webp",
+          "status": 200,
+          "bytes": 194544,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/refined-r85-r80-143.webp",
+          "status": 200,
+          "bytes": 109134,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/refined-r85-r80-149.webp",
+          "status": 200,
+          "bytes": 244164,
+          "sha256Matches": true
+        }
+      ]
+    },
+    {
+      "name": "Preserved audio supports HTTP byte range delivery",
+      "passed": true,
+      "details": {
+        "path": "assets/rc26/audio/opening-memory.wav",
+        "status": 206,
+        "contentRange": "bytes 0-63/2623244"
+      }
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

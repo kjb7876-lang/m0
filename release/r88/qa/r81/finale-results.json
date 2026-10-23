@@ -1,0 +1,163 @@
+{
+  "schema": "r81-native-finale-cpu/v1",
+  "completedAt": "2026-10-23T08:26:17.719Z",
+  "method": "Native unlocked checkpoint, native summon/death/finish and scene callbacks in Node VM; assisted field cleanup, invulnerability, boss HP=0, scene advancement. Not natural play or browser/GPU.",
+  "checks": [
+    {
+      "name": "Native runtime boots for the finale regression",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "cult04 keeps the native multi-stage progression owner",
+      "passed": true
+    },
+    {
+      "name": "First boss defeat opens firstPost and awakenPre without completing the finale",
+      "passed": true,
+      "detail": {
+        "mids": {
+          "ok": true,
+          "ids": [
+            "cult04:c104-mid"
+          ],
+          "stage": "bossReady",
+          "finalStage": 0,
+          "active": "midboss",
+          "parts": [],
+          "keys": [],
+          "completed": false
+        },
+        "first": {
+          "ok": true,
+          "ids": [
+            "cult04:c104-boss"
+          ],
+          "stage": "active",
+          "finalStage": 1,
+          "active": "boss",
+          "parts": [
+            "firstPost",
+            "awakenPre"
+          ],
+          "keys": [
+            "STORY:cult04:firstPost",
+            "STORY:cult04:awakenPre"
+          ],
+          "completed": false
+        }
+      }
+    },
+    {
+      "name": "Reading both native scenes enters the Cosmic guardian phase",
+      "passed": true,
+      "detail": {
+        "finalStage": 2,
+        "stage": "cosmicReady",
+        "finalAwakening": true,
+        "completed": false
+      }
+    },
+    {
+      "name": "All six canonical Cosmic guardians advance one native stage each on safe floor",
+      "passed": true,
+      "detail": [
+        {
+          "before": 0,
+          "after": 1,
+          "id": "kair-great-01",
+          "point": {
+            "x": 22.368807716974935,
+            "y": 9.631192283025067
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "id": "kair-great-02",
+          "point": {
+            "x": 22.368807716974935,
+            "y": 9.631192283025067
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 2,
+          "after": 3,
+          "id": "kair-great-03",
+          "point": {
+            "x": 22.368807716974935,
+            "y": 9.631192283025067
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 3,
+          "after": 4,
+          "id": "kair-great-04",
+          "point": {
+            "x": 22.368807716974935,
+            "y": 9.631192283025067
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 4,
+          "after": 5,
+          "id": "kair-great-05",
+          "point": {
+            "x": 22.26274169979695,
+            "y": 9.737258300203049
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 5,
+          "after": 6,
+          "id": "kair-great-06",
+          "point": {
+            "x": 22.368807716974935,
+            "y": 9.631192283025067
+          },
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "name": "Final boss and preserved-core epilogue precede native finale completion",
+      "passed": true,
+      "detail": {
+        "before": {
+          "nativeId": "c104-boss",
+          "stage": "finalBoss",
+          "finalStage": 2
+        },
+        "keys": [
+          "STORY:cult04:post:r75",
+          "STORY:r75:finale.core-preserved"
+        ],
+        "completed": true,
+        "ending": true,
+        "finalStage": 2
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

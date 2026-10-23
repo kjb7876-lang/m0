@@ -1,0 +1,1575 @@
+{
+  "schema": "storyworld-hero-render-metrics-r83",
+  "profiles": {
+    "assets/heroes/normalized/actions-v3126/seoha-move-front.webp": {
+      "sourceRect": [
+        152.999936,
+        162.999808,
+        205.000192,
+        349.000192
+      ],
+      "pivot": [
+        103.00006400000001,
+        349
+      ],
+      "visibleHeight": 339,
+      "crown": 10,
+      "sole": 349,
+      "alphaBounds24": [
+        10,
+        10,
+        195,
+        349
+      ],
+      "sha256": "593a6aa2ace2373381d6649c0af4d77090b14b7ae4b485d2b059c18683edf3ae"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp": {
+      "sourceRect": [
+        155,
+        216,
+        203,
+        296
+      ],
+      "pivot": [
+        101.00025600000004,
+        296
+      ],
+      "visibleHeight": 284,
+      "crown": 12,
+      "sole": 296,
+      "alphaBounds24": [
+        11,
+        12,
+        191,
+        296
+      ],
+      "sha256": "f4e37549b4e0e624de1d4e864c30ebf3c80493db45383caca07d6c8d586780f0"
+    },
+    "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp": {
+      "sourceRect": [
+        156.000256,
+        55.000064,
+        199.000064,
+        439.000064
+      ],
+      "pivot": [
+        99.99974399999999,
+        439
+      ],
+      "visibleHeight": 438,
+      "crown": 1,
+      "sole": 439,
+      "alphaBounds24": [
+        1,
+        1,
+        199,
+        439
+      ],
+      "sha256": "df81cc036222e9ca128e4c00bdfcf3eb18c75204d147015365688bf90d954dfb"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-move-back.webp": {
+      "sourceRect": [
+        153.999872,
+        162.999808,
+        202.999808,
+        349.000192
+      ],
+      "pivot": [
+        102.00012799999999,
+        349
+      ],
+      "visibleHeight": 339,
+      "crown": 10,
+      "sole": 349,
+      "alphaBounds24": [
+        10,
+        10,
+        193,
+        349
+      ],
+      "sha256": "e49167be1ea60b5e1f9c1d00bc137ff31ad5250b41f1d58bed7367ad347c4d3e"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp": {
+      "sourceRect": [
+        125,
+        44,
+        296,
+        461
+      ],
+      "pivot": [
+        147.500224,
+        450
+      ],
+      "visibleHeight": 439,
+      "crown": 11,
+      "sole": 450,
+      "alphaBounds24": [
+        11,
+        11,
+        283,
+        450
+      ],
+      "sha256": "5a7ab5d55a93cc32bfb9980f61343a3d6b1e9fa2ca3308772544c9f6fa25714e"
+    },
+    "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp": {
+      "sourceRect": [
+        153.999872,
+        45.000192,
+        202.999808,
+        463.000064
+      ],
+      "pivot": [
+        102.00012799999999,
+        462
+      ],
+      "visibleHeight": 462,
+      "crown": 0,
+      "sole": 462,
+      "alphaBounds24": [
+        0,
+        0,
+        203,
+        462
+      ],
+      "sha256": "953cd6d1a1adc672aaa3d0a53f9e219ea91827ae5ce45f2f9a49679cfabe38b4"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-move-left.webp": {
+      "sourceRect": [
+        150.000128,
+        166.000128,
+        210.999808,
+        345.999872
+      ],
+      "pivot": [
+        105.99987200000001,
+        346
+      ],
+      "visibleHeight": 336,
+      "crown": 10,
+      "sole": 346,
+      "alphaBounds24": [
+        10,
+        10,
+        201,
+        346
+      ],
+      "sha256": "c921825143f57ab0d7dc1fa43e7749dbd8902e4ab57861e02de1242f2d123319"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp": {
+      "sourceRect": [
+        87,
+        12,
+        339,
+        489
+      ],
+      "pivot": [
+        169.999936,
+        477
+      ],
+      "visibleHeight": 466,
+      "crown": 11,
+      "sole": 477,
+      "alphaBounds24": [
+        12,
+        11,
+        328,
+        477
+      ],
+      "sha256": "a8ea9735f65fecaca81fe05a165232075b08d27554679a6aa93080fe62bf8add"
+    },
+    "assets/heroes/normalized/actions-directional/seoha-skill-left.webp": {
+      "sourceRect": [
+        37.000192,
+        162.999808,
+        390.000128,
+        255.000064
+      ],
+      "pivot": [
+        218.999808,
+        255
+      ],
+      "visibleHeight": 255,
+      "crown": 0,
+      "sole": 255,
+      "alphaBounds24": [
+        0,
+        0,
+        390,
+        255
+      ],
+      "sha256": "24a643ad66c25c9fd0a203e51093f089d415027fb9ecc31d8cee94b9b34567fd"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-move-right.webp": {
+      "sourceRect": [
+        149.000192,
+        166.000128,
+        214.000128,
+        345.999872
+      ],
+      "pivot": [
+        106.999808,
+        346
+      ],
+      "visibleHeight": 336,
+      "crown": 10,
+      "sole": 346,
+      "alphaBounds24": [
+        10,
+        10,
+        204,
+        346
+      ],
+      "sha256": "c44380835c9ceddb04b2d1843c162fab234d9f29f5d2debd4cff8b48ee66e1a2"
+    },
+    "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp": {
+      "sourceRect": [
+        171,
+        178,
+        170,
+        334
+      ],
+      "pivot": [
+        84.50028800000001,
+        334
+      ],
+      "visibleHeight": 322,
+      "crown": 12,
+      "sole": 334,
+      "alphaBounds24": [
+        11,
+        12,
+        158,
+        334
+      ],
+      "sha256": "d9eec2be541b15e8341937ad10793049395134dd5b16541b6790e59b1a49bc4c"
+    },
+    "assets/heroes/normalized/actions-directional/seoha-skill-right.webp": {
+      "sourceRect": [
+        85.000192,
+        162.999808,
+        390.000128,
+        255.000064
+      ],
+      "pivot": [
+        170.999808,
+        255
+      ],
+      "visibleHeight": 255,
+      "crown": 0,
+      "sole": 255,
+      "alphaBounds24": [
+        0,
+        0,
+        390,
+        255
+      ],
+      "sha256": "d4e77a11e200c497cf2279d46b29cf108a2d04c7e6575934dd83dad6bc8d07dc"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-move-front.webp": {
+      "sourceRect": [
+        130.999808,
+        208.0,
+        248.999936,
+        304.0
+      ],
+      "pivot": [
+        125.000192,
+        304
+      ],
+      "visibleHeight": 294,
+      "crown": 10,
+      "sole": 304,
+      "alphaBounds24": [
+        10,
+        10,
+        239,
+        304
+      ],
+      "sha256": "6aa8027f3e93be8ac712577cd9651391914c8772a0ea636cdc946637f8f6497f"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-hurt-front.webp": {
+      "sourceRect": [
+        132,
+        237,
+        248,
+        275
+      ],
+      "pivot": [
+        123.50028800000001,
+        275
+      ],
+      "visibleHeight": 264,
+      "crown": 11,
+      "sole": 275,
+      "alphaBounds24": [
+        11,
+        11,
+        236,
+        275
+      ],
+      "sha256": "bf9f5b4cedadaa8e2654f50342177d6c4e13c2dcf89d53698d5ba025ef9b8a53"
+    },
+    "assets/heroes/normalized/actions-consistent/neon-dash-front.webp": {
+      "sourceRect": [
+        120.999936,
+        55.000064,
+        271.000064,
+        439.000064
+      ],
+      "pivot": [
+        135.000064,
+        439
+      ],
+      "visibleHeight": 439,
+      "crown": 0,
+      "sole": 439,
+      "alphaBounds24": [
+        0,
+        0,
+        271,
+        439
+      ],
+      "sha256": "02dfd36e2543950e28f980b2520a6c8dd58c9af3b7c1650b2cd91c44d9b3e89a"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-move-back.webp": {
+      "sourceRect": [
+        138.999808,
+        216.999936,
+        233.999872,
+        295.000064
+      ],
+      "pivot": [
+        117.000192,
+        295
+      ],
+      "visibleHeight": 285,
+      "crown": 10,
+      "sole": 295,
+      "alphaBounds24": [
+        10,
+        10,
+        224,
+        295
+      ],
+      "sha256": "9ffa0272fbb53241f0b4422860a902fc3b6636a0bf5b35fc5553c2d560573966"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-hurt-back.webp": {
+      "sourceRect": [
+        111,
+        245,
+        289,
+        267
+      ],
+      "pivot": [
+        144.50003200000003,
+        267
+      ],
+      "visibleHeight": 256,
+      "crown": 11,
+      "sole": 267,
+      "alphaBounds24": [
+        12,
+        11,
+        277,
+        267
+      ],
+      "sha256": "fbd1970521b39fd2823df8c8ee5f41a3cdcd2006a7e2ee89440a4c201f20cf8c"
+    },
+    "assets/heroes/normalized/actions-consistent/neon-dash-back.webp": {
+      "sourceRect": [
+        119.000064,
+        45.000192,
+        272.999936,
+        462.000128
+      ],
+      "pivot": [
+        136.999936,
+        462
+      ],
+      "visibleHeight": 462,
+      "crown": 0,
+      "sole": 462,
+      "alphaBounds24": [
+        0,
+        0,
+        273,
+        462
+      ],
+      "sha256": "3d4932c5710042b332339c78e0be07b6eda3031ba675d8ae0dbd00eb79157346"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-move-right.webp": {
+      "sourceRect": [
+        122.999808,
+        226.999808,
+        264.999936,
+        285.000192
+      ],
+      "pivot": [
+        133.000192,
+        285
+      ],
+      "visibleHeight": 275,
+      "crown": 10,
+      "sole": 285,
+      "alphaBounds24": [
+        12,
+        10,
+        254,
+        285
+      ],
+      "sha256": "8a915805956680a5c423c548db41c5da63a347c026bc6038b2cc95053cc30020"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-hurt-right.webp": {
+      "sourceRect": [
+        124,
+        240,
+        265,
+        272
+      ],
+      "pivot": [
+        132.00025600000004,
+        272
+      ],
+      "visibleHeight": 260,
+      "crown": 12,
+      "sole": 272,
+      "alphaBounds24": [
+        11,
+        12,
+        253,
+        272
+      ],
+      "sha256": "6835ce453a9c1e471d246560c31484c26babe7322ec2b632e20c340dcf52049b"
+    },
+    "assets/heroes/normalized/actions-directional/neon-skill-left.webp": {
+      "sourceRect": [
+        35.999744,
+        70.000128,
+        361.999872,
+        352.0
+      ],
+      "pivot": [
+        220.000256,
+        351
+      ],
+      "visibleHeight": 351,
+      "crown": 0,
+      "sole": 351,
+      "alphaBounds24": [
+        0,
+        0,
+        362,
+        351
+      ],
+      "sha256": "01032406404978e1f861750038af82384b6e82afee330eb6a9fdd3e60326dced"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-move-left.webp": {
+      "sourceRect": [
+        117.000192,
+        225.999872,
+        278.000128,
+        286.000128
+      ],
+      "pivot": [
+        138.999808,
+        286
+      ],
+      "visibleHeight": 276,
+      "crown": 10,
+      "sole": 286,
+      "alphaBounds24": [
+        10,
+        10,
+        267,
+        286
+      ],
+      "sha256": "3558a87e550de338265bf914a1d1a25581406e909443fb935eea8dbd158bbdc2"
+    },
+    "assets/heroes/normalized/actions-v3126/neon-hurt-left.webp": {
+      "sourceRect": [
+        125,
+        242,
+        261,
+        270
+      ],
+      "pivot": [
+        130.50003199999998,
+        270
+      ],
+      "visibleHeight": 258,
+      "crown": 12,
+      "sole": 270,
+      "alphaBounds24": [
+        11,
+        12,
+        250,
+        270
+      ],
+      "sha256": "692e9b57c274dec782af98e3df9434734054ba57c9754ef742d58306afab5bf4"
+    },
+    "assets/heroes/normalized/actions-directional/neon-skill-right.webp": {
+      "sourceRect": [
+        113.999872,
+        70.000128,
+        361.999872,
+        352.0
+      ],
+      "pivot": [
+        142.00012800000002,
+        351
+      ],
+      "visibleHeight": 351,
+      "crown": 0,
+      "sole": 351,
+      "alphaBounds24": [
+        0,
+        0,
+        362,
+        351
+      ],
+      "sha256": "4117361398a4ed8b5e864455255e0fefba955f0cf5702e25f62c3fa01e6e4d05"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-move-front.webp": {
+      "sourceRect": [
+        173.000192,
+        185.999872,
+        165.000192,
+        326.000128
+      ],
+      "pivot": [
+        82.999808,
+        326
+      ],
+      "visibleHeight": 316,
+      "crown": 10,
+      "sole": 326,
+      "alphaBounds24": [
+        11,
+        10,
+        155,
+        326
+      ],
+      "sha256": "217dee23378885490e4c9c61e7062d2581830ff962726b6110132e868601498f"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-hurt-front.webp": {
+      "sourceRect": [
+        150,
+        203,
+        212,
+        309
+      ],
+      "pivot": [
+        106.0,
+        309
+      ],
+      "visibleHeight": 296,
+      "crown": 13,
+      "sole": 309,
+      "alphaBounds24": [
+        11,
+        13,
+        201,
+        309
+      ],
+      "sha256": "b1a75d668c489259052b6d585ad7b42739901085300ab2cf653482b337f62aaf"
+    },
+    "assets/heroes/normalized/actions-consistent/michaela-dash-front.webp": {
+      "sourceRect": [
+        172.000256,
+        55.000064,
+        168.0,
+        439.000064
+      ],
+      "pivot": [
+        83.99974399999999,
+        439
+      ],
+      "visibleHeight": 439,
+      "crown": 0,
+      "sole": 439,
+      "alphaBounds24": [
+        0,
+        0,
+        168,
+        439
+      ],
+      "sha256": "e6f8bf2e0fcd4bf8acf209983180fdc4cb4fda915efcb9d8a840f07a9a73fac3"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-move-back.webp": {
+      "sourceRect": [
+        179.999744,
+        186.999808,
+        151.000064,
+        325.000192
+      ],
+      "pivot": [
+        76.00025600000001,
+        325
+      ],
+      "visibleHeight": 315,
+      "crown": 10,
+      "sole": 325,
+      "alphaBounds24": [
+        10,
+        10,
+        140,
+        325
+      ],
+      "sha256": "e3e4cacd3a473c06a805b813a40bfef57528c6ec015153ff08550b5450c95521"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-hurt-back.webp": {
+      "sourceRect": [
+        136,
+        201,
+        238,
+        311
+      ],
+      "pivot": [
+        119.499776,
+        311
+      ],
+      "visibleHeight": 297,
+      "crown": 14,
+      "sole": 311,
+      "alphaBounds24": [
+        12,
+        14,
+        227,
+        311
+      ],
+      "sha256": "9fbd96c7bf6901b1d3ade486859d4559d752dd24cae953980d22037650ac1388"
+    },
+    "assets/heroes/normalized/actions-consistent/michaela-dash-back.webp": {
+      "sourceRect": [
+        176.999936,
+        44.000256,
+        157.000192,
+        464.0
+      ],
+      "pivot": [
+        79.00006400000001,
+        464
+      ],
+      "visibleHeight": 464,
+      "crown": 0,
+      "sole": 464,
+      "alphaBounds24": [
+        0,
+        0,
+        157,
+        464
+      ],
+      "sha256": "78c5ec1fb0cc9a8f1d25ad8ef581b4bfdda1fea3e44c50aafec1d04d59829304"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-move-left.webp": {
+      "sourceRect": [
+        119.000064,
+        189.000192,
+        273.999872,
+        322.999808
+      ],
+      "pivot": [
+        136.999936,
+        323
+      ],
+      "visibleHeight": 312,
+      "crown": 11,
+      "sole": 323,
+      "alphaBounds24": [
+        10,
+        11,
+        264,
+        323
+      ],
+      "sha256": "a7dd4fd0d820b75317de7a3e779ea3afdfedb874adc24d0b16793f1b929a1e4d"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-hurt-left.webp": {
+      "sourceRect": [
+        159,
+        200,
+        194,
+        312
+      ],
+      "pivot": [
+        97.0,
+        312
+      ],
+      "visibleHeight": 299,
+      "crown": 13,
+      "sole": 312,
+      "alphaBounds24": [
+        13,
+        13,
+        182,
+        312
+      ],
+      "sha256": "1bc609323807eb87ec627a9fc88f22cf37f7b4072f523148d5a633097eb9b43f"
+    },
+    "assets/heroes/normalized/actions-directional/michaela-attack-left.webp": {
+      "sourceRect": [
+        83.999744,
+        97.999872,
+        359.000064,
+        316.000256
+      ],
+      "pivot": [
+        172.00025599999998,
+        316
+      ],
+      "visibleHeight": 316,
+      "crown": 0,
+      "sole": 316,
+      "alphaBounds24": [
+        1,
+        0,
+        359,
+        316
+      ],
+      "sha256": "5215eed32c5809edb3910dff9877885ac1a6c18dd486f480f8f9fe8ea4713278"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-move-right.webp": {
+      "sourceRect": [
+        134.000128,
+        195.999744,
+        242.999808,
+        316.000256
+      ],
+      "pivot": [
+        121.99987200000001,
+        316
+      ],
+      "visibleHeight": 306,
+      "crown": 10,
+      "sole": 316,
+      "alphaBounds24": [
+        10,
+        10,
+        232,
+        316
+      ],
+      "sha256": "5159d15cb93f9963e448423fdcc36d5b1636230fb63163f1f323776a8b6da178"
+    },
+    "assets/heroes/normalized/actions-v3126/michaela-hurt-right.webp": {
+      "sourceRect": [
+        158,
+        199,
+        196,
+        313
+      ],
+      "pivot": [
+        98.0,
+        313
+      ],
+      "visibleHeight": 301,
+      "crown": 12,
+      "sole": 313,
+      "alphaBounds24": [
+        11,
+        12,
+        185,
+        313
+      ],
+      "sha256": "e4d49a5c769e2fc86b62aaf4a629c5bf155346ba4e2fcf56108f5c6496884883"
+    },
+    "assets/heroes/normalized/actions-directional/michaela-attack-right.webp": {
+      "sourceRect": [
+        69.000192,
+        97.999872,
+        359.000064,
+        316.000256
+      ],
+      "pivot": [
+        186.999808,
+        316
+      ],
+      "visibleHeight": 316,
+      "crown": 0,
+      "sole": 316,
+      "alphaBounds24": [
+        0,
+        0,
+        358,
+        316
+      ],
+      "sha256": "46ffac8ff287331e5c1c43420a24452433bca30dd148c1f539f7f42d4cc3c8f9"
+    },
+    "assets/heroes/normalized/actions-v3126/lauren-move-front.webp": {
+      "sourceRect": [
+        97.999872,
+        240.0,
+        316.000256,
+        272.0
+      ],
+      "pivot": [
+        158.00012800000002,
+        272
+      ],
+      "visibleHeight": 262,
+      "crown": 10,
+      "sole": 272,
+      "alphaBounds24": [
+        10,
+        10,
+        306,
+        272
+      ],
+      "sha256": "981ebcc498caffb6641aedbed7f76055c8f1b91552f436f023df6cf2917deb0c"
+    },
+    "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp": {
+      "sourceRect": [
+        178.999808,
+        56.0,
+        152.999936,
+        438.000128
+      ],
+      "pivot": [
+        77.000192,
+        438
+      ],
+      "visibleHeight": 438,
+      "crown": 0,
+      "sole": 438,
+      "alphaBounds24": [
+        0,
+        0,
+        153,
+        438
+      ],
+      "sha256": "db169b917fd92da3c8aa17315f200af462f2daedfef483040eec10316382ffed"
+    },
+    "assets/heroes/normalized/actions-v3126/lauren-move-back.webp": {
+      "sourceRect": [
+        115.999744,
+        255.000064,
+        279.000064,
+        256.999936
+      ],
+      "pivot": [
+        140.00025599999998,
+        257
+      ],
+      "visibleHeight": 247,
+      "crown": 10,
+      "sole": 257,
+      "alphaBounds24": [
+        10,
+        10,
+        269,
+        257
+      ],
+      "sha256": "e85c8c262ae1684dfbbd31e79c4aa5239f70a665400891a0c5da1474168836ea"
+    },
+    "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp": {
+      "sourceRect": [
+        176.999936,
+        45.000192,
+        158.000128,
+        463.000064
+      ],
+      "pivot": [
+        79.00006400000001,
+        463
+      ],
+      "visibleHeight": 463,
+      "crown": 0,
+      "sole": 463,
+      "alphaBounds24": [
+        0,
+        0,
+        158,
+        463
+      ],
+      "sha256": "67fc250e8b88ede48aacb2fd6374d1cd4ebd825279af5d48446c05d66b77d358"
+    },
+    "assets/heroes/normalized/actions-v3126/lauren-move-left.webp": {
+      "sourceRect": [
+        46.000128,
+        99.999744,
+        374.000128,
+        321.999872
+      ],
+      "pivot": [
+        209.999872,
+        311
+      ],
+      "visibleHeight": 300,
+      "crown": 11,
+      "sole": 311,
+      "alphaBounds24": [
+        10,
+        11,
+        364,
+        311
+      ],
+      "sha256": "4b9db5c89b1fbe1243196b81d06b48d154d02de1819ccc18f625cca6c807c839"
+    },
+    "assets/heroes/normalized/actions-directional/lauren-skill-left.webp": {
+      "sourceRect": [
+        35.999744,
+        88.999936,
+        390.000128,
+        261.000192
+      ],
+      "pivot": [
+        220.000256,
+        261
+      ],
+      "visibleHeight": 261,
+      "crown": 0,
+      "sole": 261,
+      "alphaBounds24": [
+        0,
+        0,
+        390,
+        261
+      ],
+      "sha256": "831342c06d0f413f132c17601d918ef89d4b3675b7e9f391fe35169e31d4822c"
+    },
+    "assets/heroes/normalized/actions-v3126/lauren-move-right.webp": {
+      "sourceRect": [
+        134.000128,
+        274.999808,
+        242.999808,
+        237.000192
+      ],
+      "pivot": [
+        121.99987200000001,
+        237
+      ],
+      "visibleHeight": 227,
+      "crown": 10,
+      "sole": 237,
+      "alphaBounds24": [
+        10,
+        10,
+        233,
+        237
+      ],
+      "sha256": "46749aea1832bd785439f0057f639cba81653a91441125ddeb7562e3cc576ada"
+    },
+    "assets/heroes/normalized/actions-directional/lauren-skill-right.webp": {
+      "sourceRect": [
+        86.000128,
+        88.999936,
+        390.000128,
+        261.000192
+      ],
+      "pivot": [
+        169.99987199999998,
+        261
+      ],
+      "visibleHeight": 261,
+      "crown": 0,
+      "sole": 261,
+      "alphaBounds24": [
+        0,
+        0,
+        390,
+        261
+      ],
+      "sha256": "a3d57140add8074a4ccf1bd28dba35fe8ed713ccd50916f30e7b18a24d66373a"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-move-front.webp": {
+      "sourceRect": [
+        150.000128,
+        216.0,
+        210.999808,
+        296.0
+      ],
+      "pivot": [
+        105.99987200000001,
+        296
+      ],
+      "visibleHeight": 286,
+      "crown": 10,
+      "sole": 296,
+      "alphaBounds24": [
+        10,
+        10,
+        201,
+        296
+      ],
+      "sha256": "7bb7f51e35816b58517cf020e982133985372723e6eb7adceb716350986557fe"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp": {
+      "sourceRect": [
+        136,
+        198,
+        238,
+        314
+      ],
+      "pivot": [
+        119.499776,
+        314
+      ],
+      "visibleHeight": 303,
+      "crown": 11,
+      "sole": 314,
+      "alphaBounds24": [
+        12,
+        11,
+        227,
+        314
+      ],
+      "sha256": "7f50f6afd8dd78849f996fbb98c9219b4fa12eeb955fe8c1e651310e39dcb4f1"
+    },
+    "assets/heroes/normalized/actions-consistent/hunter-dash-front.webp": {
+      "sourceRect": [
+        166.000128,
+        55.000064,
+        178.999808,
+        439.000064
+      ],
+      "pivot": [
+        89.99987200000001,
+        439
+      ],
+      "visibleHeight": 439,
+      "crown": 0,
+      "sole": 439,
+      "alphaBounds24": [
+        0,
+        0,
+        179,
+        439
+      ],
+      "sha256": "2d9e400678a7efb40098dbb82c214fdae0980faeeadfd3a69f3bc4826ebde229"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-move-back.webp": {
+      "sourceRect": [
+        159.000064,
+        202.999808,
+        193.999872,
+        309.000192
+      ],
+      "pivot": [
+        96.99993599999999,
+        309
+      ],
+      "visibleHeight": 298,
+      "crown": 11,
+      "sole": 309,
+      "alphaBounds24": [
+        10,
+        11,
+        184,
+        309
+      ],
+      "sha256": "e68906c0f18497b7506ea357fdbeb4b09d1e30933e1d846b5fd0cfa68f02df27"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp": {
+      "sourceRect": [
+        143,
+        201,
+        225,
+        311
+      ],
+      "pivot": [
+        112.50003199999998,
+        311
+      ],
+      "visibleHeight": 299,
+      "crown": 12,
+      "sole": 311,
+      "alphaBounds24": [
+        12,
+        12,
+        213,
+        311
+      ],
+      "sha256": "a816cf895d1e12d660afae4286621f8ba8c3d31dc99c6d8183cb6b7d646763dc"
+    },
+    "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp": {
+      "sourceRect": [
+        146.999808,
+        44.000256,
+        217.999872,
+        464.0
+      ],
+      "pivot": [
+        109.000192,
+        464
+      ],
+      "visibleHeight": 463,
+      "crown": 1,
+      "sole": 464,
+      "alphaBounds24": [
+        0,
+        1,
+        218,
+        464
+      ],
+      "sha256": "cd9797ea3acc0ddbe564ed25386a23ae404e9f4dd0db4591e637e34aafdc0ff3"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-move-left.webp": {
+      "sourceRect": [
+        136.999936,
+        224.0,
+        238.000128,
+        288.0
+      ],
+      "pivot": [
+        119.00006400000001,
+        288
+      ],
+      "visibleHeight": 278,
+      "crown": 10,
+      "sole": 288,
+      "alphaBounds24": [
+        10,
+        10,
+        228,
+        288
+      ],
+      "sha256": "78e62c2a9eff6446fe2a4e496357634ad0fd2523581ba53773827536d064b1d7"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp": {
+      "sourceRect": [
+        158,
+        190,
+        195,
+        322
+      ],
+      "pivot": [
+        97.500032,
+        322
+      ],
+      "visibleHeight": 311,
+      "crown": 11,
+      "sole": 322,
+      "alphaBounds24": [
+        12,
+        11,
+        184,
+        322
+      ],
+      "sha256": "6d1cb172ab972deeb29012802c904b8abfc2a1820b47a2626e2cd6b2f504b807"
+    },
+    "assets/heroes/normalized/actions-directional/hunter-dash-left.webp": {
+      "sourceRect": [
+        72.999936,
+        96.999936,
+        402.999808,
+        268.000256
+      ],
+      "pivot": [
+        183.000064,
+        268
+      ],
+      "visibleHeight": 268,
+      "crown": 0,
+      "sole": 268,
+      "alphaBounds24": [
+        0,
+        0,
+        403,
+        268
+      ],
+      "sha256": "061b05fe9eb94a250728f51d751f514b2d7eb2855f317251f0da5fe7883016d0"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-move-right.webp": {
+      "sourceRect": [
+        137.999872,
+        222.000128,
+        236.000256,
+        289.999872
+      ],
+      "pivot": [
+        118.00012799999999,
+        290
+      ],
+      "visibleHeight": 279,
+      "crown": 11,
+      "sole": 290,
+      "alphaBounds24": [
+        10,
+        11,
+        226,
+        290
+      ],
+      "sha256": "537e890fc5af3146701d318e5185ec9de11c700070b618d90da78ec17f0efb5c"
+    },
+    "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp": {
+      "sourceRect": [
+        151,
+        190,
+        209,
+        322
+      ],
+      "pivot": [
+        104.50003199999998,
+        322
+      ],
+      "visibleHeight": 311,
+      "crown": 11,
+      "sole": 322,
+      "alphaBounds24": [
+        12,
+        11,
+        197,
+        322
+      ],
+      "sha256": "8d0f04f0d6a774212e8af1277008f62401937292e81eca8c52156f742aa84a92"
+    },
+    "assets/heroes/normalized/actions-directional/hunter-dash-right.webp": {
+      "sourceRect": [
+        35.999744,
+        96.999936,
+        402.999808,
+        268.000256
+      ],
+      "pivot": [
+        220.000256,
+        268
+      ],
+      "visibleHeight": 268,
+      "crown": 0,
+      "sole": 268,
+      "alphaBounds24": [
+        0,
+        0,
+        403,
+        268
+      ],
+      "sha256": "86061afa63942f4a7d2ad0dd1b30afa6b8f4a9a5d64ca851b6a38fa63fd9640d"
+    },
+    "assets/heroes/normalized/gunner/run_front_a.webp": {
+      "sourceRect": [
+        112.0,
+        86.000128,
+        288.0,
+        339.999744
+      ],
+      "pivot": [
+        144.0,
+        340
+      ],
+      "visibleHeight": 340,
+      "crown": 0,
+      "sole": 340,
+      "alphaBounds24": [
+        0,
+        0,
+        288,
+        340
+      ],
+      "sha256": "85552eb45ddb8da2c8729368a61b1d5f682906a1eeba095d4abf8235b7f7b337"
+    },
+    "assets/heroes/normalized/gunner/run_front_b.webp": {
+      "sourceRect": [
+        118.000128,
+        88.999936,
+        275.999744,
+        333.000192
+      ],
+      "pivot": [
+        137.99987199999998,
+        332
+      ],
+      "visibleHeight": 332,
+      "crown": 0,
+      "sole": 332,
+      "alphaBounds24": [
+        0,
+        0,
+        276,
+        332
+      ],
+      "sha256": "78610d46060eab4d7fce230163c5500ef29a48b6f3887175bd1e3c73a67eb3a4"
+    },
+    "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp": {
+      "sourceRect": [
+        133,
+        265,
+        245,
+        247
+      ],
+      "pivot": [
+        122.50003199999998,
+        247
+      ],
+      "visibleHeight": 235,
+      "crown": 12,
+      "sole": 247,
+      "alphaBounds24": [
+        12,
+        12,
+        234,
+        247
+      ],
+      "sha256": "c0b3bd5aef9a782131f9e1f2873023543dc97498dc8959ec9710f291dbc91474"
+    },
+    "assets/heroes/normalized/gunner/player_roll.webp": {
+      "sourceRect": [
+        168.999936,
+        160.0,
+        184.999936,
+        198.000128
+      ],
+      "pivot": [
+        87.00006400000001,
+        195
+      ],
+      "visibleHeight": 194,
+      "crown": 1,
+      "sole": 195,
+      "alphaBounds24": [
+        1,
+        1,
+        185,
+        195
+      ],
+      "sha256": "6fb9cf16fb55b8ceaad95c919c06fa4e8c0a7b45aaf403196eef2bb8abea9c7a"
+    },
+    "assets/heroes/normalized/gunner/run_back_a.webp": {
+      "sourceRect": [
+        103.000064,
+        79.000064,
+        305.999872,
+        353.999872
+      ],
+      "pivot": [
+        152.999936,
+        354
+      ],
+      "visibleHeight": 354,
+      "crown": 0,
+      "sole": 354,
+      "alphaBounds24": [
+        0,
+        0,
+        306,
+        354
+      ],
+      "sha256": "62ccbe7e4f87c06be87283bedd2449beed97af7cf11119eae05315c2c2cbf5b0"
+    },
+    "assets/heroes/normalized/gunner/run_back_b.webp": {
+      "sourceRect": [
+        120.0,
+        79.000064,
+        271.000064,
+        352.999936
+      ],
+      "pivot": [
+        136.0,
+        353
+      ],
+      "visibleHeight": 353,
+      "crown": 0,
+      "sole": 353,
+      "alphaBounds24": [
+        0,
+        0,
+        271,
+        353
+      ],
+      "sha256": "89aa2d0f244f4d7a43ed4a57fdbb30b1102afbf77477237af1629045c206eb2d"
+    },
+    "assets/heroes/normalized/actions-v3126/gunner-hurt-back.webp": {
+      "sourceRect": [
+        134,
+        267,
+        244,
+        245
+      ],
+      "pivot": [
+        122.0,
+        245
+      ],
+      "visibleHeight": 234,
+      "crown": 11,
+      "sole": 245,
+      "alphaBounds24": [
+        11,
+        11,
+        233,
+        245
+      ],
+      "sha256": "ef0868e90cafbe354c0371e5fb6468ca4dc157a1fec277f13b336ef0f55b3253"
+    },
+    "assets/heroes/normalized/gunner/run_left_a.webp": {
+      "sourceRect": [
+        60.000256,
+        163.999744,
+        328.999936,
+        311.000064
+      ],
+      "pivot": [
+        195.999744,
+        311
+      ],
+      "visibleHeight": 308,
+      "crown": 3,
+      "sole": 311,
+      "alphaBounds24": [
+        5,
+        3,
+        325,
+        311
+      ],
+      "sha256": "7bc73d3cedf82a4694bfa5ec15205409d65052e660a6b34eb7dda014487122ae"
+    },
+    "assets/heroes/normalized/gunner/run_left_b.webp": {
+      "sourceRect": [
+        87.000064,
+        156.000256,
+        342.000128,
+        320.0
+      ],
+      "pivot": [
+        168.999936,
+        320
+      ],
+      "visibleHeight": 320,
+      "crown": 0,
+      "sole": 320,
+      "alphaBounds24": [
+        0,
+        0,
+        342,
+        320
+      ],
+      "sha256": "2989c42549681cce36bfc9548891d002f3f3ab321c0041106989d591610c3aa2"
+    },
+    "assets/heroes/normalized/actions-v3126/gunner-hurt-right.webp": {
+      "sourceRect": [
+        119,
+        263,
+        274,
+        249
+      ],
+      "pivot": [
+        137.0,
+        249
+      ],
+      "visibleHeight": 238,
+      "crown": 11,
+      "sole": 249,
+      "alphaBounds24": [
+        12,
+        11,
+        262,
+        249
+      ],
+      "sha256": "8293501eed742adbd2f23ad8c1cb8822e5229bc867411f40e6a55a90394e7228"
+    },
+    "assets/heroes/normalized/gunner/dash_left.webp": {
+      "sourceRect": [
+        158.000128,
+        160.0,
+        184.999936,
+        198.000128
+      ],
+      "pivot": [
+        97.99987200000001,
+        195
+      ],
+      "visibleHeight": 194,
+      "crown": 1,
+      "sole": 195,
+      "alphaBounds24": [
+        0,
+        1,
+        184,
+        195
+      ],
+      "sha256": "f3a1ddc33a15f6450c23a8563a9caecdfd681d0addf1e853059d448607d4844c"
+    },
+    "assets/heroes/normalized/gunner/run_right_a.webp": {
+      "sourceRect": [
+        122.999808,
+        163.999744,
+        328.999936,
+        311.000064
+      ],
+      "pivot": [
+        133.000192,
+        311
+      ],
+      "visibleHeight": 308,
+      "crown": 3,
+      "sole": 311,
+      "alphaBounds24": [
+        4,
+        3,
+        324,
+        311
+      ],
+      "sha256": "04f247b7543fb68ec52f58e5f83851459063157b5be0b83fa9fc836fe45d2c2a"
+    },
+    "assets/heroes/normalized/gunner/run_right_b.webp": {
+      "sourceRect": [
+        82.999808,
+        156.000256,
+        342.000128,
+        320.0
+      ],
+      "pivot": [
+        173.000192,
+        320
+      ],
+      "visibleHeight": 320,
+      "crown": 0,
+      "sole": 320,
+      "alphaBounds24": [
+        0,
+        0,
+        342,
+        320
+      ],
+      "sha256": "69a785ebd7870185ea73701515155431552d37554242dcb9500c1ae7887d1c73"
+    },
+    "assets/heroes/normalized/actions-v3126/gunner-hurt-left.webp": {
+      "sourceRect": [
+        121,
+        263,
+        268,
+        249
+      ],
+      "pivot": [
+        134.499776,
+        249
+      ],
+      "visibleHeight": 237,
+      "crown": 12,
+      "sole": 249,
+      "alphaBounds24": [
+        12,
+        12,
+        257,
+        249
+      ],
+      "sha256": "c0d84bc100a8596a509147d08b493987bc2a2a8a7f72e41e6cc9fa34a9d39bd7"
+    },
+    "assets/heroes/normalized/gunner/dash_right.webp": {
+      "sourceRect": [
+        168.999936,
+        160.0,
+        184.999936,
+        198.000128
+      ],
+      "pivot": [
+        87.00006400000001,
+        195
+      ],
+      "visibleHeight": 194,
+      "crown": 1,
+      "sole": 195,
+      "alphaBounds24": [
+        1,
+        1,
+        185,
+        195
+      ],
+      "sha256": "6e837543c4bfb7fb2db09a40e35674e003ad44d7043812e4714eff454ab02290"
+    }
+  },
+  "aliases": {
+    "assets/heroes/normalized/gunner/run_front_b.webp": "assets/heroes/normalized/gunner/run_front_a.webp",
+    "assets/heroes/normalized/gunner/run_back_b.webp": "assets/heroes/normalized/gunner/run_back_a.webp",
+    "assets/heroes/normalized/gunner/run_left_b.webp": "assets/heroes/normalized/gunner/run_left_a.webp",
+    "assets/heroes/normalized/gunner/run_right_b.webp": "assets/heroes/normalized/gunner/run_right_a.webp"
+  },
+  "assetPixelsEdited": false,
+  "method": "Original alpha >=24 source bounds plus manual neutral-background review; canonical idle guard bodies retain native barrier, curled gunner roll target44 vs standing66."
+}

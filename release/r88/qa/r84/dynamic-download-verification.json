@@ -1,0 +1,60 @@
+{
+  "parts": [
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART01-of-09.zip",
+      "bytes": 9029154,
+      "sha256": "f03cec261bd002dbc8c131f79e04fe0d5c25b7604039a2072072237684a1c5f2",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART02-of-09.zip",
+      "bytes": 8814524,
+      "sha256": "981c07602b1defe169dda17de458826b031434565bc9a781ff2022d08e5a635e",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART03-of-09.zip",
+      "bytes": 7938913,
+      "sha256": "a75831f41779f164b0d452f4ca639f5bc5e4d185ca8b3f797fae6a26c07946f0",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART04-of-09.zip",
+      "bytes": 8442010,
+      "sha256": "7e34fde96b0f0a94b5759b2459b045bbebbb4724df15f586d6c4527541256910",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART05-of-09.zip",
+      "bytes": 8442020,
+      "sha256": "58f921398863f7d2deff386e58278fe21c959683841c4237ceb04a905462b482",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART06-of-09.zip",
+      "bytes": 9386875,
+      "sha256": "1478584abca0d496c919add3ce1f3ff5f161497b94e7716f21b5d8eec3641be5",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART07-of-09.zip",
+      "bytes": 9162719,
+      "sha256": "d77e0e8b161d8a9d729aefeb5c5bac440e110908de17575251a9bea7e3e598bc",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART08-of-09.zip",
+      "bytes": 9135880,
+      "sha256": "38c3df72cf35442876c42812506b06cbc2cdcb3e5d16570da8924bd3793d088e",
+      "CRC": true
+    },
+    {
+      "file": "StoryWorld-Dynamic-VFX-PART09-of-09.zip",
+      "bytes": 2567274,
+      "sha256": "9c26d69d82525d7cec06a7b25caf1a2fa10a82a9df43a415f493ecb2da503919",
+      "CRC": true
+    }
+  ],
+  "extracted": "/workspace/scratch/e1f4fcf3efa1/assets-dynamic-vfx-20261023/extracted/StoryWorld-Dynamic-VFX",
+  "files": 94
+}

@@ -1,0 +1,2020 @@
+{
+  "schema": "r86-native-enemy-check/v1",
+  "method": "Node VM native room, damage, restore and warning/projectile draw calls; real pinned Three command replay; scripted poses/coordinates. No browser/GPU/natural-play claim.",
+  "checks": [
+    {
+      "name": "Delivered enemy presentation module is loaded",
+      "passed": true
+    },
+    {
+      "name": "All campaign enemy kinds resolve an original image sampled palette",
+      "passed": true,
+      "detail": {
+        "regions": 64,
+        "enemies": 2079
+      }
+    },
+    {
+      "name": "Every newly added field champion has6x attack and retains6x HP/2x size",
+      "passed": true,
+      "detail": {
+        "champions": 123,
+        "bad": []
+      }
+    },
+    {
+      "name": "Repeated normalization leaves original ordinary mobs and original bosses intact",
+      "passed": true
+    },
+    {
+      "name": "Three real save/restore cycles preserve damaged HP and do not multiply6x again",
+      "passed": true,
+      "detail": {
+        "before": {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1317.4589999999998,
+          "maxHp": 3560.7,
+          "damage": 42.64258064516129
+        },
+        "after": {
+          "hp": 1317.4589999999998,
+          "maxHp": 3560.7,
+          "damage": 42.64258064516129
+        }
+      }
+    },
+    {
+      "name": "Easy/normal/hard changes keep champion attack exactly6x current donor",
+      "passed": true
+    },
+    {
+      "name": "V9-style1x saved champion upgrades correctly even after all ordinary donors died",
+      "passed": true,
+      "detail": {
+        "base": 7.107096774193548,
+        "damage": 42.64258064516129,
+        "ordinaryAlive": 0
+      }
+    },
+    {
+      "name": "Same-count trial/persona enemy-array replacement refreshes projectile ownership",
+      "passed": true
+    },
+    {
+      "name": "Native hostile projectiles keep original source, velocity, damage and collision radius",
+      "passed": true,
+      "detail": [
+        {
+          "zone": "dist01",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(196,188,188)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist01/dist01-purple-web-blade.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist02",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(192,190,182)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist02/mb-dist02.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(199,188,187)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist03/dist03-blood-oath.webp",
+          "clips": 2
+        },
+        {
+          "zone": "kair03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(195,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/k103-boss/siren-choir-chorus-wave.webp",
+          "clips": 2
+        },
+        {
+          "zone": "last301",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(193,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/l301-boss/sleepless_six_sword_wave.webp",
+          "clips": 2
+        }
+      ]
+    },
+    {
+      "name": "Actual native hostile bitmap commands carry their original-owner palette",
+      "passed": true,
+      "detail": [
+        {
+          "zone": "dist01",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(196,188,188)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist01/dist01-purple-web-blade.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist02",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(192,190,182)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist02/mb-dist02.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(199,188,187)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist03/dist03-blood-oath.webp",
+          "clips": 2
+        },
+        {
+          "zone": "kair03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(195,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/k103-boss/siren-choir-chorus-wave.webp",
+          "clips": 2
+        },
+        {
+          "zone": "last301",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(193,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/l301-boss/sleepless_six_sword_wave.webp",
+          "clips": 2
+        }
+      ]
+    },
+    {
+      "name": "Actual native boss warning and active shapes share owner color",
+      "passed": true,
+      "detail": [
+        {
+          "zone": "dist01",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(196,188,188)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist01/dist01-purple-web-blade.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist02",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(192,190,182)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist02/mb-dist02.webp",
+          "clips": 2
+        },
+        {
+          "zone": "dist03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(199,188,187)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/mb-dist03/dist03-blood-oath.webp",
+          "clips": 2
+        },
+        {
+          "zone": "kair03",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(195,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/k103-boss/siren-choir-chorus-wave.webp",
+          "clips": 2
+        },
+        {
+          "zone": "last301",
+          "shot": true,
+          "cast": true,
+          "tinted": 5,
+          "color": "rgb(193,189,189)",
+          "coloredPaths": 8,
+          "unchanged": true,
+          "sourceAsset": "assets/vfx/v31323/boss/l301-boss/sleepless_six_sword_wave.webp",
+          "clips": 2
+        }
+      ]
+    },
+    {
+      "name": "Native field warning/active commands replay with identical unchanged gameplay shape",
+      "passed": true,
+      "detail": {
+        "warningCommands": 7,
+        "activeCommands": 7,
+        "before": "{\"id\":\"r86-geometry\",\"type\":\"field\",\"owner\":\"last301:l301-boss\",\"x\":20,\"y\":12,\"radius\":2,\"age\":0,\"warning\":1,\"life\":3,\"asset\":\"assets/vfx/generated/v300/cross-seal.webp\",\"damage\":7,\"footprint154\":{\"shape\":\"donut\",\"x\":20,\"y\":12,\"radius\":2,\"innerRadius\":1,\"angle\":0,\"width\":0.4}}",
+        "after": "{\"id\":\"r86-geometry\",\"type\":\"field\",\"owner\":\"last301:l301-boss\",\"x\":20,\"y\":12,\"radius\":2,\"age\":0,\"warning\":1,\"life\":3,\"asset\":\"assets/vfx/generated/v300/cross-seal.webp\",\"damage\":7,\"footprint154\":{\"shape\":\"donut\",\"x\":20,\"y\":12,\"radius\":2,\"innerRadius\":1,\"angle\":0,\"width\":0.4}}"
+      }
+    },
+    {
+      "name": "Real native enemyShot inherits champion6x exactly once",
+      "passed": true,
+      "detail": {
+        "ordinaryShot": 6.636774193548387,
+        "championShot": 39.82064516129032,
+        "ordinaryInitial": 1.3273548387096774,
+        "championInitial": 7.9641290322580645,
+        "ordinaryDeferred": 5.30941935483871,
+        "championDeferred": 31.856516129032258
+      }
+    },
+    {
+      "name": "Native admitted wound budget keeps6x for initial and all deferred damage",
+      "passed": true,
+      "detail": {
+        "ordinaryShot": 6.636774193548387,
+        "championShot": 39.82064516129032,
+        "ordinaryInitial": 1.3273548387096774,
+        "championInitial": 7.9641290322580645,
+        "ordinaryDeferred": 5.30941935483871,
+        "championDeferred": 31.856516129032258
+      }
+    },
+    {
+      "name": "Dark-body palettes retain readable warning luminance",
+      "passed": true,
+      "detail": [
+        189.7008,
+        189.84759999999997,
+        190.26639999999998,
+        190.2756,
+        189.8504
+      ]
+    },
+    {
+      "name": "Shared immutable tint cache remains bounded",
+      "passed": true,
+      "detail": {
+        "entries": 11,
+        "bytes": 9262112
+      }
+    },
+    {
+      "name": "Real Three replay releases all texture leases after effects leave",
+      "passed": true,
+      "detail": {
+        "created": 74,
+        "removed": 74,
+        "texturesCreated": 21,
+        "texturesDisposed": 21,
+        "geometryComparisons": 53,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 38,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 21,
+        "filterUpdates": 0,
+        "pathPassChecksR68": 76,
+        "solidPaintReuseR70": 32,
+        "pathBufferReuseR86": 15,
+        "pathTypedArrayBytesAvoidedR86": 1800,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 0,
+        "meshes": 0,
+        "textures": 0,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "No native game error is recorded",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "regions": [
+    {
+      "id": "hub",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist00",
+      "enemies": 33,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist01",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist02",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist03",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist04",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist05",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "dist06",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "ep1a08",
+      "enemies": 30,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "nativeId": "a08-o1",
+          "damage": 42.64258064516129,
+          "donorDamage": 7.107096774193549,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "nativeId": "a08-s1",
+          "damage": 42.64258064516129,
+          "donorDamage": 7.107096774193549,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "nativeId": "a08-c1",
+          "damage": 42.64258064516129,
+          "donorDamage": 7.107096774193549,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "nativeId": "a08-o2",
+          "damage": 42.64258064516129,
+          "donorDamage": 7.107096774193549,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1a09",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1a09:ward-champion-r81:a09-o1",
+          "nativeId": "a09-o1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a09:ward-champion-r81:a09-v1",
+          "nativeId": "a09-v1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1a09b",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-s1",
+          "nativeId": "dist03-s1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-c1",
+          "nativeId": "dist03-c1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-g1",
+          "nativeId": "dist03-g1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-sp1",
+          "nativeId": "dist03-sp1",
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1a10",
+      "enemies": 41,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1a10:ward-champion-r81:a10-s1",
+          "nativeId": "a10-s1",
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-o1",
+          "nativeId": "a10-o1",
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-h1",
+          "nativeId": "a10-h1",
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-v1",
+          "nativeId": "a10-v1",
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1a11",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1a11:ward-champion-r81:a11-c1",
+          "nativeId": "a11-c1",
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a11:ward-champion-r81:a11-o1",
+          "nativeId": "a11-o1",
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1a11:ward-champion-r81:a11-d1",
+          "nativeId": "a11-d1",
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "dreamRest",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "ep1b01",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b01:ward-champion-r81:b01-r1",
+          "nativeId": "b01-r1",
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b01:ward-champion-r81:b01-c1",
+          "nativeId": "b01-c1",
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b01:ward-champion-r81:b01-s1",
+          "nativeId": "b01-s1",
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b02",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b02:ward-champion-r81:b02-m1",
+          "nativeId": "b02-m1",
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b02:ward-champion-r81:b02-b1",
+          "nativeId": "b02-b1",
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b02:ward-champion-r81:b02-o1",
+          "nativeId": "b02-o1",
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b03",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b03:ward-champion-r81:b03-g1",
+          "nativeId": "b03-g1",
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b03:ward-champion-r81:b03-c1",
+          "nativeId": "b03-c1",
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b03:ward-champion-r81:b03-g2",
+          "nativeId": "b03-g2",
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b04",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b04:ward-champion-r81:b04-g1",
+          "nativeId": "b04-g1",
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b04:ward-champion-r81:b04-b1",
+          "nativeId": "b04-b1",
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b04:ward-champion-r81:b04-s1",
+          "nativeId": "b04-s1",
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b05",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b05:ward-champion-r81:b05-p1",
+          "nativeId": "b05-p1",
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b05:ward-champion-r81:b05-a1",
+          "nativeId": "b05-a1",
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b05:ward-champion-r81:b05-p2",
+          "nativeId": "b05-p2",
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b06",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f1",
+          "nativeId": "b06-f1",
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-c1",
+          "nativeId": "b06-c1",
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f2",
+          "nativeId": "b06-f2",
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b06b",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-h1",
+          "nativeId": "b06b-h1",
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-f1",
+          "nativeId": "b06b-f1",
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-v1",
+          "nativeId": "b06b-v1",
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b07",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b07:ward-champion-r81:b07-f1",
+          "nativeId": "b07-f1",
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b07:ward-champion-r81:b07-s1",
+          "nativeId": "b07-s1",
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b07:ward-champion-r81:b07-f2",
+          "nativeId": "b07-f2",
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b08",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b08:ward-champion-r81:b08-c1",
+          "nativeId": "b08-c1",
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b08:ward-champion-r81:b08-h1",
+          "nativeId": "b08-h1",
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b08:ward-champion-r81:b08-v1",
+          "nativeId": "b08-v1",
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "ep1b09",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "ep1b09:ward-champion-r81:b09-h1",
+          "nativeId": "b09-h1",
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b09:ward-champion-r81:b09-o1",
+          "nativeId": "b09-o1",
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "ep1b09:ward-champion-r81:b09-c1",
+          "nativeId": "b09-c1",
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "restEp1b",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "u201",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u201:ward-champion-r81:u201-e1",
+          "nativeId": "u201-e1",
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u201:ward-champion-r81:u201-e2",
+          "nativeId": "u201-e2",
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u201:ward-champion-r81:u201-e3",
+          "nativeId": "u201-e3",
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "u202",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u202:ward-champion-r81:u202-e1",
+          "nativeId": "u202-e1",
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u202:ward-champion-r81:u202-e2",
+          "nativeId": "u202-e2",
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u202:ward-champion-r81:u202-e3",
+          "nativeId": "u202-e3",
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "u204",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u204:ward-champion-r81:u204-e1",
+          "nativeId": "u204-e1",
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u204:ward-champion-r81:u204-e2",
+          "nativeId": "u204-e2",
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u204:ward-champion-r81:u204-e3",
+          "nativeId": "u204-e3",
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "u205",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u205:ward-champion-r81:u205-e1",
+          "nativeId": "u205-e1",
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u205:ward-champion-r81:u205-e2",
+          "nativeId": "u205-e2",
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u205:ward-champion-r81:u205-e3",
+          "nativeId": "u205-e3",
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "u206",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u206:ward-champion-r81:u206-e1",
+          "nativeId": "u206-e1",
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u206:ward-champion-r81:u206-e2",
+          "nativeId": "u206-e2",
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u206:ward-champion-r81:u206-e3",
+          "nativeId": "u206-e3",
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "u203",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "u203:ward-champion-r81:u203-e1",
+          "nativeId": "u203-e1",
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u203:ward-champion-r81:u203-e2",
+          "nativeId": "u203-e2",
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "u203:ward-champion-r81:u203-e3",
+          "nativeId": "u203-e3",
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "restU2",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "last304",
+      "enemies": 38,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "last304:ward-champion-r81:l304-e1",
+          "nativeId": "l304-e1",
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "last304:ward-champion-r81:l304-e2",
+          "nativeId": "l304-e2",
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "last304:ward-champion-r81:l304-e3",
+          "nativeId": "l304-e3",
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "last305",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "last305:ward-champion-r81:l305-e1",
+          "nativeId": "l305-e1",
+          "damage": 75.50245161290324,
+          "donorDamage": 12.583741935483873,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "last305:ward-champion-r81:l305-e2",
+          "nativeId": "l305-e2",
+          "damage": 75.50245161290324,
+          "donorDamage": 12.583741935483873,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "last301",
+      "enemies": 1,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "last302",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "last302:ward-champion-r81:l302-e1",
+          "nativeId": "l302-e1",
+          "damage": 76.81935483870967,
+          "donorDamage": 12.803225806451612,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "last302:ward-champion-r81:l302-e3",
+          "nativeId": "l302-e3",
+          "damage": 76.81935483870967,
+          "donorDamage": 12.803225806451612,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "last303",
+      "enemies": 33,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "last303:ward-champion-r81:l302-e1",
+          "nativeId": "l302-e1",
+          "damage": 77.4778064516129,
+          "donorDamage": 12.912967741935486,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "restLast3",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "kair01",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair01:ward-champion-r81:kair-academy-wave-1",
+          "nativeId": "kair-academy-wave-1",
+          "damage": 86.29896774193548,
+          "donorDamage": 14.383161290322581,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair04",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-01",
+          "nativeId": "kair-guardian-01",
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-02",
+          "nativeId": "kair-guardian-02",
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-03",
+          "nativeId": "kair-guardian-03",
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-04",
+          "nativeId": "kair-guardian-04",
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair05",
+      "enemies": 38,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-07",
+          "nativeId": "kair-guardian-07",
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-08",
+          "nativeId": "kair-guardian-08",
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-09",
+          "nativeId": "kair-guardian-09",
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-10",
+          "nativeId": "kair-guardian-10",
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair06",
+      "enemies": 38,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-13",
+          "nativeId": "kair-guardian-13",
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-14",
+          "nativeId": "kair-guardian-14",
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-15",
+          "nativeId": "kair-guardian-15",
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-16",
+          "nativeId": "kair-guardian-16",
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair07",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-19",
+          "nativeId": "kair-guardian-19",
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-20",
+          "nativeId": "kair-guardian-20",
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-21",
+          "nativeId": "kair-guardian-21",
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-22",
+          "nativeId": "kair-guardian-22",
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair08",
+      "enemies": 38,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-25",
+          "nativeId": "kair-guardian-25",
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-26",
+          "nativeId": "kair-guardian-26",
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-27",
+          "nativeId": "kair-guardian-27",
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-28",
+          "nativeId": "kair-guardian-28",
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064,
+          "damageRatio": 5.999999999999999,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair09",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-31",
+          "nativeId": "kair-guardian-31",
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-32",
+          "nativeId": "kair-guardian-32",
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-33",
+          "nativeId": "kair-guardian-33",
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-34",
+          "nativeId": "kair-guardian-34",
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair10",
+      "enemies": 38,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-37",
+          "nativeId": "kair-guardian-37",
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-38",
+          "nativeId": "kair-guardian-38",
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-39",
+          "nativeId": "kair-guardian-39",
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-40",
+          "nativeId": "kair-guardian-40",
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "kair02",
+      "enemies": 35,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "kair03",
+      "enemies": 34,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "restKairo",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "hando01",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "hando02",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "hando03",
+      "enemies": 37,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "restHando",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "murder01",
+      "enemies": 34,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "murder01:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "damage": 114.0061935483871,
+          "donorDamage": 19.001032258064516,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "murder02",
+      "enemies": 35,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "murder02:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "damage": 114.85277419354838,
+          "donorDamage": 19.142129032258065,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "murder04",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "murder04:ward-champion-r81:murder04-e1",
+          "nativeId": "murder04-e1",
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "murder04:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "murder04:ward-champion-r81:murder04-e3",
+          "nativeId": "murder04-e3",
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "murder03",
+      "enemies": 36,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "murder03:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "damage": 116.54593548387098,
+          "donorDamage": 19.424322580645164,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult01",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "cult01:ward-champion-r81:c101-e1",
+          "nativeId": "c101-e1",
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult01:ward-champion-r81:c101-e2",
+          "nativeId": "c101-e2",
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult01:ward-champion-r81:c101-e3",
+          "nativeId": "c101-e3",
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult02",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "cult02:ward-champion-r81:c102-e1",
+          "nativeId": "c102-e1",
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult02:ward-champion-r81:c102-e2",
+          "nativeId": "c102-e2",
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult02:ward-champion-r81:c102-e3",
+          "nativeId": "c102-e3",
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult05",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "cult05:ward-champion-r81:c105-e1",
+          "nativeId": "c105-e1",
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult05:ward-champion-r81:c105-e2",
+          "nativeId": "c105-e2",
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult05:ward-champion-r81:c105-e3",
+          "nativeId": "c105-e3",
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult06",
+      "enemies": 39,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "cult06:ward-champion-r81:c106-e1",
+          "nativeId": "c106-e1",
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult06:ward-champion-r81:c106-e2",
+          "nativeId": "c106-e2",
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult06:ward-champion-r81:c106-e3",
+          "nativeId": "c106-e3",
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684,
+          "damageRatio": 6.000000000000001,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult03",
+      "enemies": 40,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": [
+        {
+          "id": "cult03:ward-champion-r81:c103-e1",
+          "nativeId": "c103-e1",
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult03:ward-champion-r81:c103-e2",
+          "nativeId": "c103-e2",
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        },
+        {
+          "id": "cult03:ward-champion-r81:c103-e3",
+          "nativeId": "c103-e3",
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455,
+          "damageRatio": 6,
+          "hpRatio": 6,
+          "sizeRatio": 2
+        }
+      ]
+    },
+    {
+      "id": "cult04",
+      "enemies": 35,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    },
+    {
+      "id": "village",
+      "enemies": 0,
+      "palettes": true,
+      "ordinaryUnchanged": true,
+      "champions": []
+    }
+  ],
+  "draws": [
+    {
+      "zone": "dist01",
+      "shot": true,
+      "cast": true,
+      "tinted": 5,
+      "color": "rgb(196,188,188)",
+      "coloredPaths": 8,
+      "unchanged": true,
+      "sourceAsset": "assets/vfx/v31323/boss/mb-dist01/dist01-purple-web-blade.webp",
+      "clips": 2
+    },
+    {
+      "zone": "dist02",
+      "shot": true,
+      "cast": true,
+      "tinted": 5,
+      "color": "rgb(192,190,182)",
+      "coloredPaths": 8,
+      "unchanged": true,
+      "sourceAsset": "assets/vfx/v31323/boss/mb-dist02/mb-dist02.webp",
+      "clips": 2
+    },
+    {
+      "zone": "dist03",
+      "shot": true,
+      "cast": true,
+      "tinted": 5,
+      "color": "rgb(199,188,187)",
+      "coloredPaths": 8,
+      "unchanged": true,
+      "sourceAsset": "assets/vfx/v31323/boss/mb-dist03/dist03-blood-oath.webp",
+      "clips": 2
+    },
+    {
+      "zone": "kair03",
+      "shot": true,
+      "cast": true,
+      "tinted": 5,
+      "color": "rgb(195,189,189)",
+      "coloredPaths": 8,
+      "unchanged": true,
+      "sourceAsset": "assets/vfx/v31323/boss/k103-boss/siren-choir-chorus-wave.webp",
+      "clips": 2
+    },
+    {
+      "zone": "last301",
+      "shot": true,
+      "cast": true,
+      "tinted": 5,
+      "color": "rgb(193,189,189)",
+      "coloredPaths": 8,
+      "unchanged": true,
+      "sourceAsset": "assets/vfx/v31323/boss/l301-boss/sleepless_six_sword_wave.webp",
+      "clips": 2
+    }
+  ],
+  "metrics": {
+    "revision": "r86",
+    "championDamageFactor": 6,
+    "championVisibleSizeFactor": 2,
+    "championHealthFactor": 6,
+    "damageAppliedAt": "actor damage only; native projectile, contact and wound budgets inherit once",
+    "medicalArtPreserved": true,
+    "telegraphGeometryChanged": false,
+    "projectilePhysicsChanged": false,
+    "paletteSource": "existing original-body SHA256 samples; white core and danger edge preserved",
+    "paletteCache": "existing shared 32MiB/48-entry bounded cache",
+    "metrics": {
+      "champions": 466,
+      "damageCorrections": 467,
+      "projectiles": 17,
+      "groundImages": 12,
+      "footprints": 12,
+      "paletteMisses": 0
+    },
+    "browserVerified": false,
+    "GPUVerified": false
+  },
+  "passed": true,
+  "completedAt": "2026-10-23T08:28:36.700Z"
+}

@@ -1,0 +1,1782 @@
+{
+  "method": "Read-only Pillow RGBA decode/hash/alpha measurements on shipped static PNGs; source PNGs never edited. Optional128px sheets use artificial dark/neutral backgrounds, not game screenshots.",
+  "asset_root": "/workspace/scratch/e1f4fcf3efa1/hospital-refinement-v12/hospital-three-pc/site/assets/vfx-r83/selected",
+  "checks": [
+    {
+      "name": "Source catalog contains64 unique selected static components",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Selection provenance is48 upgrades and16 retained originals",
+      "passed": true,
+      "detail": {
+        "upgrade": 48,
+        "retained_original": 16
+      }
+    },
+    {
+      "name": "Retained-original hashes preserve source bytes and upgrade hashes differ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shipped asset directory contains exactly the64 documented PNGs",
+      "passed": true,
+      "detail": {
+        "missing": [],
+        "extra": [],
+        "actual_count": 64
+      }
+    },
+    {
+      "name": "Every selected PNG decodes successfully as RGBA",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Shipped PNG SHA256 matches selected-quality catalog",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shipped PNG SHA256 independently matches source SHA256SUMS",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Dimensions and RGBA modes match catalog without uniform-size assumptions",
+      "passed": true,
+      "detail": {
+        "1536x1024": 27,
+        "1254x1254": 16,
+        "1402x1122": 2,
+        "1774x887": 17,
+        "1330x1182": 1,
+        "1341x1173": 1
+      }
+    },
+    {
+      "name": "Encoded byte lengths and decoded RGBA budget match source metadata",
+      "passed": true,
+      "detail": {
+        "encoded_png_bytes": 75068221,
+        "decoded_rgba_bytes": 402675484,
+        "decoded_rgba_MiB": 384.02126693725586,
+        "GPU_memory_measured": false
+      }
+    },
+    {
+      "name": "Alpha extrema and transparent fractions match catalog",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All64 retain true transparency and outermost alpha at most1 of255",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Alpha-above64 shape bounds match source review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Only16 of64 pass strict10percent strong-alpha padding, accurately reported",
+      "passed": true,
+      "detail": {
+        "strict_padding_pass": 16,
+        "minimum_strong_alpha_margin_fraction": 0.015625,
+        "limitation": "48 assets do not have10percent padding. Preserve whole source canvases; no automatic edge trimming."
+      }
+    }
+  ],
+  "passed": true,
+  "assets": [
+    {
+      "file": "selected/batch01/dist01_bone_filament_bolt.png",
+      "sha256": "502deb953207d37441164c919e00cd3ac660bbeb5a1602fc2e6eddef73748ea3",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1269920,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.897637685139974,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        187,
+        89,
+        1479,
+        939
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.037109375,
+      "alpha64_pixel_fraction": 0.06055768330891927
+    },
+    {
+      "file": "selected/batch01/dist01_snapped_silk_remnant.png",
+      "sha256": "c82413c123c1cdee34371cd4290e5cff0d6eb08cc1233bd8ecc70523c3f82090",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1472341,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8835875193277994,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        263,
+        69,
+        1421,
+        965
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0576171875,
+      "alpha64_pixel_fraction": 0.07374763488769531
+    },
+    {
+      "file": "selected/batch01/dist01_violet_claw_contact.png",
+      "sha256": "254efd50e90721bedac103343c64bcbbf918c4490ba855207e68388e9df6083f",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1707811,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7524115244547526,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        221,
+        85,
+        1379,
+        975
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0478515625,
+      "alpha64_pixel_fraction": 0.15880457560221353
+    },
+    {
+      "file": "selected/batch01/dist01_web_lane_warning_v2.png",
+      "sha256": "6748fa6e5cdf720369f2d2e24f0f67aa5de9d850373123a84c73e6195700b143",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 966857,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7435625456275167,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        69,
+        81,
+        1187,
+        1173
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.05342902711323764,
+      "alpha64_pixel_fraction": 0.12312307156175199
+    },
+    {
+      "file": "selected/batch01/dist02_drag_groove_remnant.png",
+      "sha256": "e6ae24fad57ccf5a63bcfec73806f91ac004d0ae08ba74a4921f5d9874b17234",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2041194,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6637598673502604,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        196,
+        34,
+        1374,
+        975
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.033203125,
+      "alpha64_pixel_fraction": 0.2567615509033203
+    },
+    {
+      "file": "selected/batch01/dist02_horn_charge_warning.png",
+      "sha256": "5120445ef7e78969dbad8865a2685249cf17373a35fe83cf11add15dbfdfb6ee",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1597430,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8356736501057943,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        279,
+        31,
+        1257,
+        974
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0302734375,
+      "alpha64_pixel_fraction": 0.13143475850423178
+    },
+    {
+      "file": "selected/batch01/dist02_horn_splash_impact.png",
+      "sha256": "1314a6504969817a64b3f383d47aebcc77158c733d4b411026deb2a5bd687e8a",
+      "mode": "RGBA",
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "bytes": 1121167,
+      "decoded_rgba_bytes": 6292176,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7508995298287906,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        298,
+        42,
+        1184,
+        1037
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0374331550802139,
+      "alpha64_pixel_fraction": 0.2165057048626739
+    },
+    {
+      "file": "selected/batch01/dist02_reed_hand_projectile.png",
+      "sha256": "326bc61e02a00e13e139fb7de75c70759cc0306475c18c977544572092c23f8c",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 2034788,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6805197397867838,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        241,
+        107,
+        1392,
+        910
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.09375,
+      "alpha64_pixel_fraction": 0.2465534210205078
+    },
+    {
+      "file": "selected/batch01/dist05_cooling_whip_scorch.png",
+      "sha256": "026df4c61ac41bb57e51215d420ff4cea7ec9eafd8d0b2327cc6b35090e0e1e6",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1183217,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8631114959716797,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        303,
+        29,
+        1237,
+        1008
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.015625,
+      "alpha64_pixel_fraction": 0.10016377766927083
+    },
+    {
+      "file": "selected/batch01/dist05_ember_whip.png",
+      "sha256": "de9f5014de5489f0454269adef6fa32a51fdaec256e2e7240f7e6bf41cf7deab",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1412180,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8642361958821615,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        158,
+        55,
+        1366,
+        995
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0283203125,
+      "alpha64_pixel_fraction": 0.09898440043131511
+    },
+    {
+      "file": "selected/batch01/dist05_seven_heat_warning.png",
+      "sha256": "c802a09c1d88adb1ff19fabd7b78fae27dd60354ccbce5f89fdfd3c04cb228ba",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1252483,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9147300720214844,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        197,
+        74,
+        1343,
+        931
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.072265625,
+      "alpha64_pixel_fraction": 0.06536229451497395
+    },
+    {
+      "file": "selected/batch01/dist05_split_stone_impact.png",
+      "sha256": "ab057d3698da806594bf565ede061a5b3e735c51c30d95997a0745e9e025d381",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1905454,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6925830841064453,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        260,
+        73,
+        1316,
+        881
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0712890625,
+      "alpha64_pixel_fraction": 0.24682044982910156
+    },
+    {
+      "file": "selected/batch01/dist06_fireball_landing_crown.png",
+      "sha256": "0f1986cb85efd1b5b01ec46dc2fdb54b94ddaf81b30f7f109ee328dfc1df48e2",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1833043,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7544898986816406,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        239,
+        30,
+        1317,
+        944
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.029296875,
+      "alpha64_pixel_fraction": 0.21448262532552084
+    },
+    {
+      "file": "selected/batch01/dist06_molten_cleave_scar.png",
+      "sha256": "4611a5a712aaabc51c8156b19b06adba91336adb734c982a25fe448b6e4e4bb5",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 420967,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.9014062577452848,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        178,
+        202,
+        1689,
+        783
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.047914317925591886,
+      "alpha64_pixel_fraction": 0.08432780142583148
+    },
+    {
+      "file": "selected/batch01/dist06_spatial_cleave_warning.png",
+      "sha256": "10c3b6acc6a68cdd8dba3b8c1349065063bc6169aea264fc7749e9dc0e51a5ab",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1598388,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6790307362874349,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        117,
+        102,
+        1452,
+        913
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0546875,
+      "alpha64_pixel_fraction": 0.11701711018880208
+    },
+    {
+      "file": "selected/batch01/dist06_sword_space_fissure.png",
+      "sha256": "d0af96fa959b1489eddab16c84c1b5c709191024e8612e000d2bf0c271efaf29",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1645699,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7505054473876953,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        82,
+        86,
+        1476,
+        913
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0390625,
+      "alpha64_pixel_fraction": 0.1351496378580729
+    },
+    {
+      "file": "selected/batch02/ep1b03_leviathan_impact.png",
+      "sha256": "cf368d19c6485846c63900b7d77f6daca38ae1ba7811c3b29d5bccaf26478dea",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1807704,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7243111928304037,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        217,
+        76,
+        1392,
+        894
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.07421875,
+      "alpha64_pixel_fraction": 0.19534810384114584
+    },
+    {
+      "file": "selected/batch02/ep1b03_leviathan_projectile.png",
+      "sha256": "635c9dadfbac472a29a38c8ef60aba2234c38bd5428e2c082e9be71210d23f57",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 772161,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8342372411724407,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        153,
+        96,
+        1689,
+        831
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.047914317925591886,
+      "alpha64_pixel_fraction": 0.11161408240538201
+    },
+    {
+      "file": "selected/batch02/ep1b03_leviathan_remnant.png",
+      "sha256": "99eb2fad4da8233dec7cd965d14b29c21c2ebb0522a65b53c8cdc85c30e16e25",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1748124,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7947419484456381,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        195,
+        38,
+        1384,
+        949
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.037109375,
+      "alpha64_pixel_fraction": 0.15478833516438803
+    },
+    {
+      "file": "selected/batch02/ep1b03_leviathan_warning_v2.png",
+      "sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1582696,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8352762858072916,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        82,
+        243,
+        1460,
+        773
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.049479166666666664,
+      "alpha64_pixel_fraction": 0.11286417643229167
+    },
+    {
+      "file": "selected/batch02/ep1b04_beelzebub_impact.png",
+      "sha256": "ea0b6f79a5ea3435ddd76a15b053e16be235c413fc8630f5b18f94b734872012",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1059505,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7590385487989486,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        308,
+        205,
+        1485,
+        703
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1629086809470124,
+      "alpha64_pixel_fraction": 0.18303021598461555
+    },
+    {
+      "file": "selected/batch02/ep1b04_beelzebub_projectile.png",
+      "sha256": "b818cbd615fbbc3255ddde779517844b30a0497a06a4adb0d5f16ff76c95b387",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 738102,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8293412678943883,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        484,
+        172,
+        1435,
+        746
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1589627959413754,
+      "alpha64_pixel_fraction": 0.13543937292903
+    },
+    {
+      "file": "selected/batch02/ep1b04_beelzebub_remnant.png",
+      "sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1394459,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8342507680257162,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        356,
+        204,
+        1165,
+        868
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.15234375,
+      "alpha64_pixel_fraction": 0.09769757588704427
+    },
+    {
+      "file": "selected/batch02/ep1b04_beelzebub_warning.png",
+      "sha256": "1339efdfc97be1177101d34a49fc26774551b847335821a6d0fcb4d09f0cd3a3",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 536218,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8613404951135594,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        327,
+        303,
+        1468,
+        623
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.17249154453213078,
+      "alpha64_pixel_fraction": 0.07259182809693823
+    },
+    {
+      "file": "selected/batch02/ep1b05_asmodeus_impact.png",
+      "sha256": "8fd470b70769db462cca1adea203eb1d59a388c07ef462e647613b947e5de925",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1581574,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7754542032877604,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        69,
+        119,
+        1472,
+        864
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.041666666666666664,
+      "alpha64_pixel_fraction": 0.15560277303059897
+    },
+    {
+      "file": "selected/batch02/ep1b05_asmodeus_projectile.png",
+      "sha256": "352d2e0df09c19e31170e8081d8e8448892cc6299f3781da13c076be17d19da7",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1666365,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7457002003987631,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        239,
+        81,
+        1390,
+        929
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0791015625,
+      "alpha64_pixel_fraction": 0.1831181844075521
+    },
+    {
+      "file": "selected/batch02/ep1b05_asmodeus_remnant.png",
+      "sha256": "679ecbaa48a5955bae35d048f326659c6a967a1595dc2f65be018962ff44c69e",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1896529,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6570987701416016,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        280,
+        47,
+        1257,
+        961
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0458984375,
+      "alpha64_pixel_fraction": 0.19791221618652344
+    },
+    {
+      "file": "selected/batch02/ep1b05_asmodeus_warning.png",
+      "sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1714539,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6756598154703776,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        201,
+        149,
+        1377,
+        908
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.103515625,
+      "alpha64_pixel_fraction": 0.12945429484049478
+    },
+    {
+      "file": "selected/batch02/ep1b08_chairman_impact.png",
+      "sha256": "1b95f5fa7b1e9db60352e504d9c3b7e99a2bc7f516948e58305d72a2edf70b2f",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 530340,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8857485488116589,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        557,
+        81,
+        1167,
+        821
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.07440811724915446,
+      "alpha64_pixel_fraction": 0.08588226023140211
+    },
+    {
+      "file": "selected/batch02/ep1b08_chairman_projectile.png",
+      "sha256": "32ae00ae972f8cee02d19a926a15010d50188182982f702e7de6dd27ab1e6e29",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 722762,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.835330319318631,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        136,
+        84,
+        1699,
+        813
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.042277339346110485,
+      "alpha64_pixel_fraction": 0.12450668493547662
+    },
+    {
+      "file": "selected/batch02/ep1b08_chairman_remnant.png",
+      "sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "mode": "RGBA",
+      "dimensions": [
+        1330,
+        1182
+      ],
+      "bytes": 1057332,
+      "decoded_rgba_bytes": 6288240,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7494319555233261,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        218,
+        59,
+        1156,
+        1140
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.03553299492385787,
+      "alpha64_pixel_fraction": 0.1534534305306413
+    },
+    {
+      "file": "selected/batch02/ep1b08_chairman_warning.png",
+      "sha256": "e96c95b500b57eada8da69ec72d9ce676ba73fe76c0fafe36072ddca4b86419b",
+      "mode": "RGBA",
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "bytes": 1079134,
+      "decoded_rgba_bytes": 6292176,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6938019534100762,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        188,
+        119,
+        1219,
+        1037
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.07575757575757576,
+      "alpha64_pixel_fraction": 0.15310633396141493
+    },
+    {
+      "file": "selected/batch03/01_bootloader_strike_lanes_v2.png",
+      "sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1566142,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.793145497639974,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        424,
+        130,
+        1110,
+        905
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1162109375,
+      "alpha64_pixel_fraction": 0.12526766459147134
+    },
+    {
+      "file": "selected/batch03/02_bootloader_neural_spike.png",
+      "sha256": "0e3ee83e7490be81b7a92b1ebb20181f1b1784541c5ff0cb80c9dd90ecb6ea1c",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 551296,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8831238902397018,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        158,
+        82,
+        1693,
+        842
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.04565952649379933,
+      "alpha64_pixel_fraction": 0.10018442516164211
+    },
+    {
+      "file": "selected/batch03/03_bootloader_copy_interference.png",
+      "sha256": "f793c270d070f9899033fa69dc1e89a65b2be734662a57ac8287fbb2d9bb0e8f",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 980578,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.785215228358006,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        199,
+        67,
+        1650,
+        815
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.06989853438556934,
+      "alpha64_pixel_fraction": 0.16671475363162505
+    },
+    {
+      "file": "selected/batch03/04_bootloader_drained_circuit.png",
+      "sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1607213,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7780920664469401,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        234,
+        86,
+        1341,
+        957
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0654296875,
+      "alpha64_pixel_fraction": 0.09240150451660156
+    },
+    {
+      "file": "selected/batch03/05_controller_bombardment_grid_v3.png",
+      "sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1271002,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9173170725504557,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        339,
+        136,
+        1197,
+        874
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1328125,
+      "alpha64_pixel_fraction": 0.04121526082356771
+    },
+    {
+      "file": "selected/batch03/06_controller_shell_contrail.png",
+      "sha256": "74e1a56056862ebce682089d28beff5f92ccfaabd2062350b6466d47d4340c95",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 580880,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8572217512382924,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        458,
+        50,
+        1641,
+        801
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.05636978579481398,
+      "alpha64_pixel_fraction": 0.11601626398599843
+    },
+    {
+      "file": "selected/batch03/07_controller_steel_impact.png",
+      "sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1237330,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.6494778009809741,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        341,
+        138,
+        1507,
+        770
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1319052987598647,
+      "alpha64_pixel_fraction": 0.1724394326670217
+    },
+    {
+      "file": "selected/batch03/08_controller_shell_furrow.png",
+      "sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1855847,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6854133605957031,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        135,
+        78,
+        1435,
+        946
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.06575520833333333,
+      "alpha64_pixel_fraction": 0.22627766927083334
+    },
+    {
+      "file": "selected/batch03/09_knight_six_lane_warning.png",
+      "sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1287181,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6346930651262054,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        123,
+        41,
+        1133,
+        1207
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.03269537480063796,
+      "alpha64_pixel_fraction": 0.1288476556041401
+    },
+    {
+      "file": "selected/batch03/10_knight_parry_counter.png",
+      "sha256": "075aae75d52fcd2cff42afb4f95a267b7f19b8cfe86862e976470e662bf76e2f",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 599343,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8366343869674581,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        560,
+        44,
+        1314,
+        835
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0496054114994363,
+      "alpha64_pixel_fraction": 0.07607760346429511
+    },
+    {
+      "file": "selected/batch03/11_knight_six_contact_cuts.png",
+      "sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1060372,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7057548022354719,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        316,
+        46,
+        1447,
+        855
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.036076662908680945,
+      "alpha64_pixel_fraction": 0.15607440049112256
+    },
+    {
+      "file": "selected/batch03/12_knight_six_ground_scars.png",
+      "sha256": "2414e843585687853b0b3039d8b632fab3d4067559959d78a37195f800a71bed",
+      "mode": "RGBA",
+      "dimensions": [
+        1341,
+        1173
+      ],
+      "bytes": 682223,
+      "decoded_rgba_bytes": 6291972,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8532015082076017,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        149,
+        23,
+        1186,
+        1149
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0196078431372549,
+      "alpha64_pixel_fraction": 0.09839268197633429
+    },
+    {
+      "file": "selected/batch03/13_insomnia_gaze_warning.png",
+      "sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1563464,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.5157644747060446,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        77,
+        80,
+        1698,
+        826
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.04284103720405862,
+      "alpha64_pixel_fraction": 0.26676635708829405
+    },
+    {
+      "file": "selected/batch03/14_insomnia_split_gaze_ray.png",
+      "sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 983083,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.715352918073793,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        148,
+        128,
+        1647,
+        768
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.07158962795941376,
+      "alpha64_pixel_fraction": 0.1736983790667909
+    },
+    {
+      "file": "selected/batch03/15_insomnia_layered_afterimage.png",
+      "sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 1623955,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5165664890202842,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        146,
+        144,
+        1716,
+        814
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.03269447576099211,
+      "alpha64_pixel_fraction": 0.28706710610102837
+    },
+    {
+      "file": "selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+      "sha256": "8acbb3a54e583a7c31ce3c284df98f88eb20b8b2866cbbabfc88767bc01fe80d",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1856597,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7220853169759115,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        237,
+        34,
+        1380,
+        994
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.029296875,
+      "alpha64_pixel_fraction": 0.18289566040039062
+    },
+    {
+      "file": "selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+      "sha256": "01860b7ee709aa0f7d2dd4f1bbdbbfca388f191db798f7e22086517151ea1fc9",
+      "mode": "RGBA",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "bytes": 585056,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8593291042224592,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        74,
+        248,
+        1703,
+        671
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.040022547914317926,
+      "alpha64_pixel_fraction": 0.10610484144647285
+    },
+    {
+      "file": "selected/batch04/02-kair03-black-sand-needle.png",
+      "sha256": "c57cf051b7429661ece7fd5bb7ade57b8c66bb638c41ae28746db9fd3bc4ff80",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 714995,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8656039111843695,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        217,
+        189,
+        1158,
+        1097
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.07655502392344497,
+      "alpha64_pixel_fraction": 0.09268458953676784
+    },
+    {
+      "file": "selected/batch04/03-kair03-cable-hand-shear-impact.png",
+      "sha256": "1bae1c47f6f5b8e2b5a1e00152d1e9291e49e00fa7feddb0a5d187c6be25d9b2",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1068913,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7628863553693571,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        234,
+        162,
+        1077,
+        1126
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.10207336523125997,
+      "alpha64_pixel_fraction": 0.17046631004072454
+    },
+    {
+      "file": "selected/batch04/04-kair03-exhausted-sand-tracks.png",
+      "sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 774081,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.83421917487644,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        190,
+        262,
+        1108,
+        1046
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.11642743221690591,
+      "alpha64_pixel_fraction": 0.08921753419361075
+    },
+    {
+      "file": "selected/batch04/05-murder03-three-stop-bars.png",
+      "sha256": "57d1507fcd3ca612d52dbe912658da68e5769acaba8d2a7481d6d01fb9a7d835",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 884977,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7356166805298007,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        127,
+        435,
+        1124,
+        938
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.10127591706539076,
+      "alpha64_pixel_fraction": 0.14182113250358025
+    },
+    {
+      "file": "selected/batch04/06-murder03-bent-rain-shard.png",
+      "sha256": "03b47d567718eb5af3de955084c1d4215530cd6d78e3f7645a663717014aa500",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 497084,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8883419946124554,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        228,
+        99,
+        962,
+        1162
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0733652312599681,
+      "alpha64_pixel_fraction": 0.07925515543244076
+    },
+    {
+      "file": "selected/batch04/07-murder03-coordinate-impact.png",
+      "sha256": "0af22ddaf5bb2403c4131d7a860ac3f206c15be8b744e5359601e328b0efcdbf",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 667314,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8417942965286204,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        160,
+        63,
+        1126,
+        1149
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.050239234449760764,
+      "alpha64_pixel_fraction": 0.10825772201999853
+    },
+    {
+      "file": "selected/batch04/08-murder03-roadlight-residue.png",
+      "sha256": "42c5c88abd870de30f19d04879722f92a62ab4873c33f56b7a088b180182379c",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 717759,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.832827774089421,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        168,
+        408,
+        1105,
+        940
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.11881977671451356,
+      "alpha64_pixel_fraction": 0.12248460429019482
+    },
+    {
+      "file": "selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+      "sha256": "97d99ec7863830a6ffadc8a16badab4462a44f6fb321b7bfea29c6dbbacd9193",
+      "mode": "RGBA",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "bytes": 1173314,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9019947052001953,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        427,
+        50,
+        1110,
+        897
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.048828125,
+      "alpha64_pixel_fraction": 0.06093025207519531
+    },
+    {
+      "file": "selected/batch04/10-cult03-golden-order-wall.png",
+      "sha256": "5b5ee969a0aec0f75c7957a83079365e830a0434d7065898a481c20505d3626f",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 926164,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7241967649295779,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        361,
+        50,
+        902,
+        1219
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.027910685805422646,
+      "alpha64_pixel_fraction": 0.2608138804311053
+    },
+    {
+      "file": "selected/batch04/11-cult03-wall-hit-deflection.png",
+      "sha256": "e247e615bf7772506d1f650ba0d785d7a8d8f9bf70bc47d30bb78b57a11fe26c",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 826792,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7944281648008669,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        157,
+        218,
+        1089,
+        1017
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.1251993620414673,
+      "alpha64_pixel_fraction": 0.13882402468400956
+    },
+    {
+      "file": "selected/batch04/12-cult03-authority-fragments.png",
+      "sha256": "6094d7ec88580d75bc75c532ba03a439739d2c02cd176404092bcf4ea527169b",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 831452,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8250447054274805,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        193,
+        211,
+        1110,
+        1043
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.11483253588516747,
+      "alpha64_pixel_fraction": 0.12464165706422065
+    },
+    {
+      "file": "selected/batch04/13-cult04-spatial-fold-warning.png",
+      "sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 561743,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8843935451213215,
+      "outermost_alpha_max": 0,
+      "alpha64_bbox": [
+        322,
+        162,
+        973,
+        1095
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.12679425837320574,
+      "alpha64_pixel_fraction": 0.08551391527971734
+    },
+    {
+      "file": "selected/batch04/14-cult04-neural-command-spear.png",
+      "sha256": "da5bf691eb325b4995655c3671f37a96da289d32543f0baaab90f2cfa9b5b8a5",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 489967,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.9106164897527275,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        170,
+        159,
+        1173,
+        1123
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.0645933014354067,
+      "alpha64_pixel_fraction": 0.06672300949561086
+    },
+    {
+      "file": "selected/batch04/15-cult04-time-stopped-collision.png",
+      "sha256": "92e96bd401fe359227583bc85b3218855bcdaba63439a9eaad117d4b9c66cdca",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1030518,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7835430609291097,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        160,
+        55,
+        1155,
+        1126
+      ],
+      "strict10percent_alpha64_margin_pass": false,
+      "strong_alpha_min_margin_fraction": 0.043859649122807015,
+      "alpha64_pixel_fraction": 0.18122168550272302
+    },
+    {
+      "file": "selected/batch04/16-cult04-resurrection-stitch-arc.png",
+      "sha256": "3755ba039a9695265f6425f09da129675358c04d4b151ad4c9665e5493c359f9",
+      "mode": "RGBA",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 661103,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8655339595908722,
+      "outermost_alpha_max": 1,
+      "alpha64_bbox": [
+        162,
+        289,
+        1128,
+        1015
+      ],
+      "strict10percent_alpha64_margin_pass": true,
+      "strong_alpha_min_margin_fraction": 0.10047846889952153,
+      "alpha64_pixel_fraction": 0.08687479173502845
+    }
+  ],
+  "visual_review": {
+    "contact_sheets_all64_inspected": true,
+    "maximum_thumbnail_dimension": 128,
+    "backgrounds": [
+      "artificial dark RGB24/28/34",
+      "artificial neutral RGB112/119/114"
+    ],
+    "findings": [
+      "Projectile and contact silhouettes generally retain a readable main axis at128px.",
+      "Dark scorch/groove/circuit/gaze residue can disappear on dark terrain; use as subordinate short residue, never the sole warning.",
+      "Warning art is baked stylized perspective and does not establish a precise damage footprint. Keep native analytic warning outlines.",
+      "Golden order wall is an oblique upright wall image, not an orthographic ground footprint.",
+      "Full source canvas keeps glow tips. Some major silhouettes have only1.56percent edge padding; do not tighten crop automatically."
+    ],
+    "limitations": [
+      "Not browser/GPU blending, terrain contrast, animation or natural-play validation.",
+      "384MiB decoded RGBA is a sum of bytes, not measured GPU or browser memory. Load by region and release unused images."
+    ]
+  },
+  "browserVerified": false,
+  "GPUVerified": false
+}

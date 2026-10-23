@@ -1,0 +1,296 @@
+{
+  "schema": "r86-native-777-samong-to-ending/v1",
+  "method": "Native newGame, 777 activation/go, E-key portal, summon3/killEnemy/finishEncounter and actual scene callbacks; assisted positions/invulnerability/HP-zero deaths and field cleanup. A fresh VM restores the exact half-completed final sequence. No fabricated clear flags, browser/GPU or natural play.",
+  "checks": [
+    {
+      "name": "777 is enabled through native activation from a fresh ordinary game",
+      "passed": true
+    },
+    {
+      "name": "Native 777 enters Samong threshold with its uncleared ward gates",
+      "passed": true
+    },
+    {
+      "name": "777 keeps the Samong boss door locked until ordinary enemies and champions are eliminated",
+      "passed": true,
+      "detail": {
+        "before": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "after": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "scene": false,
+        "next": null,
+        "open": false
+      }
+    },
+    {
+      "name": "Samong survivors assemble through the native rally transition",
+      "passed": true,
+      "detail": {
+        "version": 1,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "cult03:c103-e1",
+          "cult03:c103-e2",
+          "cult03:c103-e3",
+          "cult03:c103-e1-w1-r1",
+          "cult03:c103-e2-w1-r2",
+          "cult03:c103-e1-w2-1",
+          "cult03:c103-e2-w2-2",
+          "cult03:c103-e3-w2-3",
+          "cult03:c103-e1-w2-r1",
+          "cult03:c103-e2-w2-r2",
+          "cult03:r74-patrol:0",
+          "cult03:r74-patrol:1",
+          "cult03:r74-patrol:2",
+          "cult03:r74-patrol:3",
+          "cult03:r74-patrol:4",
+          "cult03:r74-patrol:5",
+          "cult03:r75-pack:11",
+          "cult03:r75-pack:12",
+          "cult03:r75-pack:13",
+          "cult03:r75-pack:14",
+          "cult03:r75-pack:15",
+          "cult03:r75-pack:16",
+          "cult03:r75-pack:17",
+          "cult03:r75-pack:18",
+          "cult03:r75-pack:19",
+          "cult03:r75-pack:20",
+          "cult03:r75-pack:21",
+          "cult03:r75-pack:22",
+          "cult03:r75-pack:23",
+          "cult03:r75-pack:24",
+          "cult03:r75-pack:25",
+          "cult03:r75-pack:26",
+          "cult03:r75-pack:27",
+          "cult03:r75-pack:28",
+          "cult03:r75-pack:29",
+          "cult03:ward-champion-r81:c103-e1",
+          "cult03:ward-champion-r81:c103-e2",
+          "cult03:ward-champion-r81:c103-e3"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "E opens the original Samong pre-boss narrative after field clearance",
+      "passed": true,
+      "detail": {
+        "phase": "doorStory",
+        "scene": {
+          "key": "STORY:cult03:pre:r75",
+          "part": "pre"
+        }
+      }
+    },
+    {
+      "name": "Original Samong bosses activate inside their own boss chamber",
+      "passed": true,
+      "detail": {
+        "phase": "boss",
+        "majors": [
+          {
+            "id": "c103-mid",
+            "state": "active",
+            "hp": 158805.56
+          },
+          {
+            "id": "c103-boss",
+            "state": "active",
+            "hp": 158805.56
+          }
+        ]
+      }
+    },
+    {
+      "name": "Samong exit requires E and post-story before completion",
+      "passed": true,
+      "detail": {
+        "phase": "exitStory",
+        "part": "post",
+        "completed": false
+      }
+    },
+    {
+      "name": "Reading the exit story completes the Samong threshold naturally",
+      "passed": true
+    },
+    {
+      "name": "Standing on the final-map portal never auto-transfers",
+      "passed": true
+    },
+    {
+      "name": "A fresh E key enters the native final-map controller without completing it",
+      "passed": true
+    },
+    {
+      "name": "First final boss opens firstPost and awakenPre instead of ending the game",
+      "passed": true,
+      "detail": {
+        "mids": {
+          "ok": true,
+          "ids": [
+            "cult04:c104-mid"
+          ],
+          "finalStage": 0,
+          "parts": [],
+          "completed": false
+        },
+        "first": {
+          "ok": true,
+          "ids": [
+            "cult04:c104-boss"
+          ],
+          "finalStage": 1,
+          "parts": [
+            "firstPost",
+            "awakenPre"
+          ],
+          "completed": false
+        }
+      }
+    },
+    {
+      "name": "Reading the authored awakening enables the Cosmic sequence",
+      "passed": true
+    },
+    {
+      "name": "A fresh VM restores the half-finished finale without replaying or skipping a guardian",
+      "passed": true,
+      "detail": {
+        "before": {
+          "stage": 2,
+          "index": 3,
+          "completed": false,
+          "finalAwakening": true
+        },
+        "after": {
+          "stage": 2,
+          "index": 3,
+          "completed": false,
+          "finalAwakening": true
+        }
+      }
+    },
+    {
+      "name": "All six canonical guardians advance once in order on safe floor after save/restore",
+      "passed": true,
+      "detail": [
+        {
+          "before": 0,
+          "after": 1,
+          "id": "kair-great-01",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "id": "kair-great-02",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 2,
+          "after": 3,
+          "id": "kair-great-03",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 3,
+          "after": 4,
+          "id": "kair-great-04",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 4,
+          "after": 5,
+          "id": "kair-great-05",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        },
+        {
+          "before": 5,
+          "after": 6,
+          "id": "kair-great-06",
+          "safe": true,
+          "stage": "cosmicReady",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "name": "Final boss defeat queues the preserved-core epilogue",
+      "passed": true,
+      "detail": {
+        "before": {
+          "id": "c104-boss",
+          "stage": "finalBoss"
+        },
+        "keys": [
+          "STORY:cult04:post:r75",
+          "STORY:r75:finale.core-preserved"
+        ],
+        "completed": false,
+        "ending": false
+      }
+    },
+    {
+      "name": "Completing the final epilogue sets the native story ending",
+      "passed": true
+    },
+    {
+      "name": "Native restore retains final completion and ending flags",
+      "passed": true
+    },
+    {
+      "name": "The completed finale portal still requires a new E press",
+      "passed": true
+    },
+    {
+      "name": "E reaches the preserved post-ending village on safe floor",
+      "passed": true
+    },
+    {
+      "name": "Village return portal restores the completed finale without resurrecting its bosses",
+      "passed": true
+    },
+    {
+      "name": "Leaving completed 777 returns to the uncompleted ordinary opening checkpoint",
+      "passed": true
+    },
+    {
+      "name": "Finale regression records no runtime errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "details": {},
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "completedAt": "2026-10-23T08:29:09.879Z",
+  "passed": 22,
+  "failed": 0
+}

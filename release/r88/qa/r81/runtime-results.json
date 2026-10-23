@@ -1,0 +1,3368 @@
+{
+  "schema": "r81-native-runtime-contracts/v1",
+  "method": "Native VM boot/getRoom, actual 777 activate/go and native difficulty confirmation, real RenderBridge capture, native serializeSave/restoreSave and assisted previous-portal interaction. DOM/Image/audio/timers and renderer readiness are stubs. NOT browser/GPU, actual image rendering, or natural play.",
+  "checks": [
+    {
+      "name": "Native V5 data boots without VM errors",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "All 55 native combat regions use the common hospital plan after actual makeRoom",
+      "passed": true
+    },
+    {
+      "name": "Every original story record, title and destination identity is unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every original enemy ID, art, boss role, HP, damage and combat profile is unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every source prop retains its ID, art path and solidity",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All spawned native actors fit on actual walkable floor clear of walls",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All 54 ordinary maps retain three packs of ten; last301 keeps its canonical boss-only duel",
+      "passed": true,
+      "detail": [
+        {
+          "id": "last301",
+          "ordinary": 0,
+          "bosses": [
+            {
+              "id": "last301:l301-boss",
+              "nativeId": "l301-boss"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Every new ordinary combat map adds one champion per native type at exactly 2× size and 6× HP/attack",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Narrative dressing is non-solid and avoids collision walls in every combat map",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Native 777 activates from a normal hub save without fabricated clears",
+      "passed": true,
+      "detail": {
+        "ok": true
+      }
+    },
+    {
+      "name": "Native 777 and difficulty UI flow enter dist01 safely",
+      "passed": true,
+      "detail": {
+        "returned": true,
+        "difficulty": {
+          "open": true,
+          "mapId": "dist01",
+          "layer": "STORY",
+          "selected": "normal",
+          "confirmed": null,
+          "cancelled": false,
+          "transitions": 0
+        },
+        "elapsedMs": 1127.2214629999999,
+        "state": {
+          "zone": "dist01",
+          "room": "dist01",
+          "loading": false,
+          "started": true,
+          "modal": false,
+          "player": {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "hp": 777
+          },
+          "blocked": false
+        }
+      }
+    },
+    {
+      "name": "dist01 roof cutaway consumes actual RenderBridge hero entity coordinates",
+      "passed": true,
+      "detail": {
+        "id": "dist01",
+        "heroIdentity": "hwando",
+        "hero": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009
+        },
+        "ready": true,
+        "focus": [
+          {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "focusWidth": 1.12,
+            "focusHeight": 2.7
+          }
+        ],
+        "originalZone": "dist01",
+        "copy": true
+      }
+    },
+    {
+      "name": "dist01 wounded enemies retain exact HP and positions through native 777 restore",
+      "passed": true,
+      "detail": {
+        "exact": true,
+        "beforeCount": 39,
+        "afterCount": 39,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "dist01 last champion remains defeated through native restore",
+      "passed": true,
+      "detail": {
+        "id": "dist01:ward-champion-r81:dist01-s1"
+      }
+    },
+    {
+      "name": "Native 777 and difficulty UI flow enter dist02 safely",
+      "passed": true,
+      "detail": {
+        "returned": true,
+        "difficulty": {
+          "open": true,
+          "mapId": "dist02",
+          "layer": "STORY",
+          "selected": "normal",
+          "confirmed": null,
+          "cancelled": false,
+          "transitions": 1
+        },
+        "elapsedMs": 1262.4365359999993,
+        "state": {
+          "zone": "dist02",
+          "room": "dist02",
+          "loading": false,
+          "started": true,
+          "modal": false,
+          "player": {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "hp": 777
+          },
+          "blocked": false
+        }
+      }
+    },
+    {
+      "name": "dist02 roof cutaway consumes actual RenderBridge hero entity coordinates",
+      "passed": true,
+      "detail": {
+        "id": "dist02",
+        "heroIdentity": "hwando",
+        "hero": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009
+        },
+        "ready": true,
+        "focus": [
+          {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "focusWidth": 1.12,
+            "focusHeight": 2.7
+          }
+        ],
+        "originalZone": "dist02",
+        "copy": true
+      }
+    },
+    {
+      "name": "dist02 wounded enemies retain exact HP and positions through native 777 restore",
+      "passed": true,
+      "detail": {
+        "exact": true,
+        "beforeCount": 41,
+        "afterCount": 41,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "dist02 last champion remains defeated through native restore",
+      "passed": true,
+      "detail": {
+        "id": "dist02:ward-champion-r81:dist02-sp1"
+      }
+    },
+    {
+      "name": "Swamp previous portal has a reachable safe approach toward the visited cave",
+      "passed": true,
+      "detail": {
+        "available": true,
+        "direction": "w",
+        "destination": "dist01",
+        "point": {
+          "x": 43,
+          "y": 109
+        },
+        "approach": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009
+        },
+        "open": true,
+        "distance": 2.5000000000000004,
+        "clear": true
+      }
+    },
+    {
+      "name": "Native previous-portal travel returns from swamp to cave without direct region assignment",
+      "passed": true,
+      "detail": {
+        "traveled": true,
+        "state": {
+          "zone": "dist01",
+          "loading": false,
+          "x": 43,
+          "y": 109
+        }
+      }
+    },
+    {
+      "name": "Leaving 777 restores the separate normal hub checkpoint",
+      "passed": true,
+      "detail": {
+        "left": true,
+        "zone": "hub"
+      }
+    },
+    {
+      "name": "Native error ledger remains clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "maps": [
+    {
+      "id": "dist00",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 33,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "dist00:dist00-boss",
+          "nativeId": "dist00-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "dist00:ward-champion-r81:a11-c1",
+          "nativeId": "a11-c1",
+          "maxHp": 6840,
+          "donorMaxHp": 1140,
+          "scale": 2.938,
+          "donorScale": 1.469,
+          "damage": 39.35032258064517,
+          "donorDamage": 6.558387096774195
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "a11-c1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist01:mb-dist01",
+          "nativeId": "mb-dist01"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist01:ward-champion-r81:dist01-sp1",
+          "nativeId": "dist01-sp1",
+          "maxHp": 7074,
+          "donorMaxHp": 1179,
+          "scale": 3.174,
+          "donorScale": 1.587,
+          "damage": 39.82064516129032,
+          "donorDamage": 6.636774193548387
+        },
+        {
+          "id": "dist01:ward-champion-r81:dist01-sp2",
+          "nativeId": "dist01-sp2",
+          "maxHp": 7074,
+          "donorMaxHp": 1179,
+          "scale": 2.696,
+          "donorScale": 1.348,
+          "damage": 39.82064516129032,
+          "donorDamage": 6.636774193548387
+        },
+        {
+          "id": "dist01:ward-champion-r81:dist01-s1",
+          "nativeId": "dist01-s1",
+          "maxHp": 7074,
+          "donorMaxHp": 1179,
+          "scale": 2.654,
+          "donorScale": 1.327,
+          "damage": 39.82064516129032,
+          "donorDamage": 6.636774193548387
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist01-sp1",
+        "dist01-sp2",
+        "dist01-s1"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist02:mb-dist02",
+          "nativeId": "mb-dist02"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist02:ward-champion-r81:dist02-h1",
+          "nativeId": "dist02-h1",
+          "maxHp": 7314,
+          "donorMaxHp": 1219,
+          "scale": 2.83,
+          "donorScale": 1.415,
+          "damage": 40.29096774193549,
+          "donorDamage": 6.715161290322581
+        },
+        {
+          "id": "dist02:ward-champion-r81:dist02-g1",
+          "nativeId": "dist02-g1",
+          "maxHp": 7314,
+          "donorMaxHp": 1219,
+          "scale": 2.716,
+          "donorScale": 1.358,
+          "damage": 40.29096774193549,
+          "donorDamage": 6.715161290322581
+        },
+        {
+          "id": "dist02:ward-champion-r81:dist02-m1",
+          "nativeId": "dist02-m1",
+          "maxHp": 7314,
+          "donorMaxHp": 1219,
+          "scale": 2.982,
+          "donorScale": 1.491,
+          "damage": 40.29096774193549,
+          "donorDamage": 6.715161290322581
+        },
+        {
+          "id": "dist02:ward-champion-r81:dist02-sp1",
+          "nativeId": "dist02-sp1",
+          "maxHp": 7314,
+          "donorMaxHp": 1219,
+          "scale": 2.906,
+          "donorScale": 1.453,
+          "damage": 40.29096774193549,
+          "donorDamage": 6.715161290322581
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist02-h1",
+        "dist02-g1",
+        "dist02-m1",
+        "dist02-sp1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist03:mb-dist03",
+          "nativeId": "mb-dist03"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist03:ward-champion-r81:dist03-s1",
+          "nativeId": "dist03-s1",
+          "maxHp": 7560,
+          "donorMaxHp": 1260,
+          "scale": 2.672,
+          "donorScale": 1.336,
+          "damage": 40.76129032258065,
+          "donorDamage": 6.7935483870967746
+        },
+        {
+          "id": "dist03:ward-champion-r81:dist03-c1",
+          "nativeId": "dist03-c1",
+          "maxHp": 7560,
+          "donorMaxHp": 1260,
+          "scale": 2.97,
+          "donorScale": 1.485,
+          "damage": 40.76129032258065,
+          "donorDamage": 6.7935483870967746
+        },
+        {
+          "id": "dist03:ward-champion-r81:dist03-g1",
+          "nativeId": "dist03-g1",
+          "maxHp": 7560,
+          "donorMaxHp": 1260,
+          "scale": 3.14,
+          "donorScale": 1.57,
+          "damage": 40.76129032258065,
+          "donorDamage": 6.7935483870967746
+        },
+        {
+          "id": "dist03:ward-champion-r81:dist03-sp1",
+          "nativeId": "dist03-sp1",
+          "maxHp": 7560,
+          "donorMaxHp": 1260,
+          "scale": 3.036,
+          "donorScale": 1.518,
+          "damage": 40.76129032258065,
+          "donorDamage": 6.7935483870967746
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist03-s1",
+        "dist03-c1",
+        "dist03-g1",
+        "dist03-sp1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist04",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist04:mb-dist04",
+          "nativeId": "mb-dist04"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist04:ward-champion-r81:dist04-c1",
+          "nativeId": "dist04-c1",
+          "maxHp": 7812,
+          "donorMaxHp": 1302,
+          "scale": 2.604,
+          "donorScale": 1.302,
+          "damage": 41.23161290322581,
+          "donorDamage": 6.871935483870969
+        },
+        {
+          "id": "dist04:ward-champion-r81:dist04-s1",
+          "nativeId": "dist04-s1",
+          "maxHp": 7812,
+          "donorMaxHp": 1302,
+          "scale": 2.778,
+          "donorScale": 1.389,
+          "damage": 41.23161290322581,
+          "donorDamage": 6.871935483870969
+        },
+        {
+          "id": "dist04:ward-champion-r81:dist04-g1",
+          "nativeId": "dist04-g1",
+          "maxHp": 7812,
+          "donorMaxHp": 1302,
+          "scale": 2.912,
+          "donorScale": 1.456,
+          "damage": 41.23161290322581,
+          "donorDamage": 6.871935483870969
+        },
+        {
+          "id": "dist04:ward-champion-r81:dist04-c2",
+          "nativeId": "dist04-c2",
+          "maxHp": 7812,
+          "donorMaxHp": 1302,
+          "scale": 3.082,
+          "donorScale": 1.541,
+          "damage": 41.23161290322581,
+          "donorDamage": 6.871935483870969
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist04-c1",
+        "dist04-s1",
+        "dist04-g1",
+        "dist04-c2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist05",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "dist05:mb-dist05",
+          "nativeId": "mb-dist05"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist05:ward-champion-r81:dist05-h1",
+          "nativeId": "dist05-h1",
+          "maxHp": 8064,
+          "donorMaxHp": 1344,
+          "scale": 2.654,
+          "donorScale": 1.327,
+          "damage": 41.70193548387097,
+          "donorDamage": 6.950322580645161
+        },
+        {
+          "id": "dist05:ward-champion-r81:dist05-m1",
+          "nativeId": "dist05-m1",
+          "maxHp": 8064,
+          "donorMaxHp": 1344,
+          "scale": 2.7760000000000002,
+          "donorScale": 1.3880000000000001,
+          "damage": 41.70193548387097,
+          "donorDamage": 6.950322580645161
+        },
+        {
+          "id": "dist05:ward-champion-r81:dist05-c1",
+          "nativeId": "dist05-c1",
+          "maxHp": 8064,
+          "donorMaxHp": 1344,
+          "scale": 3.0460000000000003,
+          "donorScale": 1.5230000000000001,
+          "damage": 41.70193548387097,
+          "donorDamage": 6.950322580645161
+        },
+        {
+          "id": "dist05:ward-champion-r81:dist05-s1",
+          "nativeId": "dist05-s1",
+          "maxHp": 8064,
+          "donorMaxHp": 1344,
+          "scale": 2.872,
+          "donorScale": 1.436,
+          "damage": 41.70193548387097,
+          "donorDamage": 6.950322580645161
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist05-h1",
+        "dist05-m1",
+        "dist05-c1",
+        "dist05-s1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "dist06",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "dist06:dist06-boss",
+          "nativeId": "dist06-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "dist06:mb-dist06",
+          "nativeId": "mb-dist06"
+        }
+      ],
+      "champions": [
+        {
+          "id": "dist06:ward-champion-r81:dist06-h1",
+          "nativeId": "dist06-h1",
+          "maxHp": 8322,
+          "donorMaxHp": 1387,
+          "scale": 3.0380000000000003,
+          "donorScale": 1.5190000000000001,
+          "damage": 42.17225806451613,
+          "donorDamage": 7.028709677419355
+        },
+        {
+          "id": "dist06:ward-champion-r81:dist06-m1",
+          "nativeId": "dist06-m1",
+          "maxHp": 8322,
+          "donorMaxHp": 1387,
+          "scale": 2.982,
+          "donorScale": 1.491,
+          "damage": 42.17225806451613,
+          "donorDamage": 7.028709677419355
+        },
+        {
+          "id": "dist06:ward-champion-r81:dist06-c1",
+          "nativeId": "dist06-c1",
+          "maxHp": 8322,
+          "donorMaxHp": 1387,
+          "scale": 2.646,
+          "donorScale": 1.323,
+          "damage": 42.17225806451613,
+          "donorDamage": 7.028709677419355
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist06-h1",
+        "dist06-m1",
+        "dist06-c1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1a09",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "ep1a09:ward-champion-r81:a09-o1",
+          "nativeId": "a09-o1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 2.6,
+          "donorScale": 1.3,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        },
+        {
+          "id": "ep1a09:ward-champion-r81:a09-v1",
+          "nativeId": "a09-v1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 3.076,
+          "donorScale": 1.538,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "a09-o1",
+        "a09-v1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1a10",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "ep1a10:mb-ep1a10",
+          "nativeId": "mb-ep1a10"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1a10:ward-champion-r81:a10-s1",
+          "nativeId": "a10-s1",
+          "maxHp": 9114,
+          "donorMaxHp": 1519,
+          "scale": 3.06,
+          "donorScale": 1.53,
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-o1",
+          "nativeId": "a10-o1",
+          "maxHp": 9114,
+          "donorMaxHp": 1519,
+          "scale": 2.926,
+          "donorScale": 1.463,
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-h1",
+          "nativeId": "a10-h1",
+          "maxHp": 9114,
+          "donorMaxHp": 1519,
+          "scale": 2.716,
+          "donorScale": 1.358,
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937
+        },
+        {
+          "id": "ep1a10:ward-champion-r81:a10-v1",
+          "nativeId": "a10-v1",
+          "maxHp": 9114,
+          "donorMaxHp": 1519,
+          "scale": 3.198,
+          "donorScale": 1.599,
+          "damage": 43.58322580645162,
+          "donorDamage": 7.263870967741937
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "a10-s1",
+        "a10-o1",
+        "a10-h1",
+        "a10-v1"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1a11",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1a11:a11-boss",
+          "nativeId": "a11-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1a11:mb-ep1a11",
+          "nativeId": "mb-ep1a11"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1a11:ward-champion-r81:a11-c1",
+          "nativeId": "a11-c1",
+          "maxHp": 9384,
+          "donorMaxHp": 1564,
+          "scale": 2.938,
+          "donorScale": 1.469,
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295
+        },
+        {
+          "id": "ep1a11:ward-champion-r81:a11-o1",
+          "nativeId": "a11-o1",
+          "maxHp": 9384,
+          "donorMaxHp": 1564,
+          "scale": 2.614,
+          "donorScale": 1.307,
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295
+        },
+        {
+          "id": "ep1a11:ward-champion-r81:a11-d1",
+          "nativeId": "a11-d1",
+          "maxHp": 9384,
+          "donorMaxHp": 1564,
+          "scale": 2.8240000000000003,
+          "donorScale": 1.4120000000000001,
+          "damage": 44.053548387096775,
+          "donorDamage": 7.3422580645161295
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "a11-c1",
+        "a11-o1",
+        "a11-d1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "ep1b01:mb-ep1b01",
+          "nativeId": "mb-ep1b01"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b01:ward-champion-r81:b01-r1",
+          "nativeId": "b01-r1",
+          "maxHp": 9936,
+          "donorMaxHp": 1656,
+          "scale": 3.132,
+          "donorScale": 1.566,
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451
+        },
+        {
+          "id": "ep1b01:ward-champion-r81:b01-c1",
+          "nativeId": "b01-c1",
+          "maxHp": 9936,
+          "donorMaxHp": 1656,
+          "scale": 3.114,
+          "donorScale": 1.557,
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451
+        },
+        {
+          "id": "ep1b01:ward-champion-r81:b01-s1",
+          "nativeId": "b01-s1",
+          "maxHp": 9936,
+          "donorMaxHp": 1656,
+          "scale": 3.084,
+          "donorScale": 1.542,
+          "damage": 50.99341935483871,
+          "donorDamage": 8.498903225806451
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b01-r1",
+        "b01-c1",
+        "b01-s1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b02:b02-boss",
+          "nativeId": "b02-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b02:mb-ep1b02",
+          "nativeId": "mb-ep1b02"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b02:ward-champion-r81:b02-m1",
+          "nativeId": "b02-m1",
+          "maxHp": 10224,
+          "donorMaxHp": 1704,
+          "scale": 3.0300000000000002,
+          "donorScale": 1.5150000000000001,
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871
+        },
+        {
+          "id": "ep1b02:ward-champion-r81:b02-b1",
+          "nativeId": "b02-b1",
+          "maxHp": 10224,
+          "donorMaxHp": 1704,
+          "scale": 3.124,
+          "donorScale": 1.562,
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871
+        },
+        {
+          "id": "ep1b02:ward-champion-r81:b02-o1",
+          "nativeId": "b02-o1",
+          "maxHp": 10224,
+          "donorMaxHp": 1704,
+          "scale": 3.176,
+          "donorScale": 1.588,
+          "damage": 51.52645161290323,
+          "donorDamage": 8.587741935483871
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b02-m1",
+        "b02-b1",
+        "b02-o1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b03:b03-boss",
+          "nativeId": "b03-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b03:mb-ep1b03",
+          "nativeId": "mb-ep1b03"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b03:ward-champion-r81:b03-g1",
+          "nativeId": "b03-g1",
+          "maxHp": 10506,
+          "donorMaxHp": 1751,
+          "scale": 2.716,
+          "donorScale": 1.358,
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291
+        },
+        {
+          "id": "ep1b03:ward-champion-r81:b03-c1",
+          "nativeId": "b03-c1",
+          "maxHp": 10506,
+          "donorMaxHp": 1751,
+          "scale": 2.612,
+          "donorScale": 1.306,
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291
+        },
+        {
+          "id": "ep1b03:ward-champion-r81:b03-g2",
+          "nativeId": "b03-g2",
+          "maxHp": 10506,
+          "donorMaxHp": 1751,
+          "scale": 3.076,
+          "donorScale": 1.538,
+          "damage": 52.059483870967746,
+          "donorDamage": 8.676580645161291
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b03-g1",
+        "b03-c1",
+        "b03-g2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b04",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b04:b04-boss",
+          "nativeId": "b04-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b04:mb-ep1b04",
+          "nativeId": "mb-ep1b04"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b04:ward-champion-r81:b04-g1",
+          "nativeId": "b04-g1",
+          "maxHp": 10800,
+          "donorMaxHp": 1800,
+          "scale": 3.116,
+          "donorScale": 1.558,
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711
+        },
+        {
+          "id": "ep1b04:ward-champion-r81:b04-b1",
+          "nativeId": "b04-b1",
+          "maxHp": 10800,
+          "donorMaxHp": 1800,
+          "scale": 2.774,
+          "donorScale": 1.387,
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711
+        },
+        {
+          "id": "ep1b04:ward-champion-r81:b04-s1",
+          "nativeId": "b04-s1",
+          "maxHp": 10800,
+          "donorMaxHp": 1800,
+          "scale": 2.648,
+          "donorScale": 1.324,
+          "damage": 52.59251612903226,
+          "donorDamage": 8.765419354838711
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b04-g1",
+        "b04-b1",
+        "b04-s1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b05",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b05:b05-boss",
+          "nativeId": "b05-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b05:mb-ep1b05",
+          "nativeId": "mb-ep1b05"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b05:ward-champion-r81:b05-p1",
+          "nativeId": "b05-p1",
+          "maxHp": 11094,
+          "donorMaxHp": 1849,
+          "scale": 3.164,
+          "donorScale": 1.582,
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129
+        },
+        {
+          "id": "ep1b05:ward-champion-r81:b05-a1",
+          "nativeId": "b05-a1",
+          "maxHp": 11094,
+          "donorMaxHp": 1849,
+          "scale": 2.818,
+          "donorScale": 1.409,
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129
+        },
+        {
+          "id": "ep1b05:ward-champion-r81:b05-p2",
+          "nativeId": "b05-p2",
+          "maxHp": 11094,
+          "donorMaxHp": 1849,
+          "scale": 2.8040000000000003,
+          "donorScale": 1.4020000000000001,
+          "damage": 53.12554838709677,
+          "donorDamage": 8.854258064516129
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b05-p1",
+        "b05-a1",
+        "b05-p2"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b06",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b06:b06-boss",
+          "nativeId": "b06-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b06:mb-ep1b06",
+          "nativeId": "mb-ep1b06"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f1",
+          "nativeId": "b06-f1",
+          "maxHp": 11388,
+          "donorMaxHp": 1898,
+          "scale": 3.164,
+          "donorScale": 1.582,
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-c1",
+          "nativeId": "b06-c1",
+          "maxHp": 11388,
+          "donorMaxHp": 1898,
+          "scale": 2.822,
+          "donorScale": 1.411,
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f2",
+          "nativeId": "b06-f2",
+          "maxHp": 11388,
+          "donorMaxHp": 1898,
+          "scale": 2.922,
+          "donorScale": 1.461,
+          "damage": 53.658580645161294,
+          "donorDamage": 8.943096774193549
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b06-f1",
+        "b06-c1",
+        "b06-f2"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b06b",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b06b:b06b-boss",
+          "nativeId": "b06b-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b06b:mb-ep1b06b",
+          "nativeId": "mb-ep1b06b"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-h1",
+          "nativeId": "b06b-h1",
+          "maxHp": 11694,
+          "donorMaxHp": 1949,
+          "scale": 3.192,
+          "donorScale": 1.596,
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969
+        },
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-f1",
+          "nativeId": "b06b-f1",
+          "maxHp": 11694,
+          "donorMaxHp": 1949,
+          "scale": 3.0300000000000002,
+          "donorScale": 1.5150000000000001,
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969
+        },
+        {
+          "id": "ep1b06b:ward-champion-r81:b06b-v1",
+          "nativeId": "b06b-v1",
+          "maxHp": 11694,
+          "donorMaxHp": 1949,
+          "scale": 3.06,
+          "donorScale": 1.53,
+          "damage": 54.19161290322582,
+          "donorDamage": 9.031935483870969
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b06b-h1",
+        "b06b-f1",
+        "b06b-v1"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b07",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b07:b07-boss",
+          "nativeId": "b07-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b07:mb-ep1b07",
+          "nativeId": "mb-ep1b07"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b07:ward-champion-r81:b07-f1",
+          "nativeId": "b07-f1",
+          "maxHp": 12000,
+          "donorMaxHp": 2000,
+          "scale": 2.838,
+          "donorScale": 1.419,
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387
+        },
+        {
+          "id": "ep1b07:ward-champion-r81:b07-s1",
+          "nativeId": "b07-s1",
+          "maxHp": 12000,
+          "donorMaxHp": 2000,
+          "scale": 3.192,
+          "donorScale": 1.596,
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387
+        },
+        {
+          "id": "ep1b07:ward-champion-r81:b07-f2",
+          "nativeId": "b07-f2",
+          "maxHp": 12000,
+          "donorMaxHp": 2000,
+          "scale": 3.08,
+          "donorScale": 1.54,
+          "damage": 54.724645161290326,
+          "donorDamage": 9.120774193548387
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b07-f1",
+        "b07-s1",
+        "b07-f2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b08",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b08:b08-boss",
+          "nativeId": "b08-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b08:mb-ep1b08",
+          "nativeId": "mb-ep1b08"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b08:ward-champion-r81:b08-c1",
+          "nativeId": "b08-c1",
+          "maxHp": 12306,
+          "donorMaxHp": 2051,
+          "scale": 2.646,
+          "donorScale": 1.323,
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805
+        },
+        {
+          "id": "ep1b08:ward-champion-r81:b08-h1",
+          "nativeId": "b08-h1",
+          "maxHp": 12306,
+          "donorMaxHp": 2051,
+          "scale": 2.73,
+          "donorScale": 1.365,
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805
+        },
+        {
+          "id": "ep1b08:ward-champion-r81:b08-v1",
+          "nativeId": "b08-v1",
+          "maxHp": 12306,
+          "donorMaxHp": 2051,
+          "scale": 3.088,
+          "donorScale": 1.544,
+          "damage": 55.257677419354835,
+          "donorDamage": 9.209612903225805
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b08-c1",
+        "b08-h1",
+        "b08-v1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1b09",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "ep1b09:b09-boss",
+          "nativeId": "b09-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "ep1b09:mb-ep1b09",
+          "nativeId": "mb-ep1b09"
+        }
+      ],
+      "champions": [
+        {
+          "id": "ep1b09:ward-champion-r81:b09-h1",
+          "nativeId": "b09-h1",
+          "maxHp": 12618,
+          "donorMaxHp": 2103,
+          "scale": 2.734,
+          "donorScale": 1.367,
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227
+        },
+        {
+          "id": "ep1b09:ward-champion-r81:b09-o1",
+          "nativeId": "b09-o1",
+          "maxHp": 12618,
+          "donorMaxHp": 2103,
+          "scale": 2.8320000000000003,
+          "donorScale": 1.4160000000000001,
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227
+        },
+        {
+          "id": "ep1b09:ward-champion-r81:b09-c1",
+          "nativeId": "b09-c1",
+          "maxHp": 12618,
+          "donorMaxHp": 2103,
+          "scale": 2.8280000000000003,
+          "donorScale": 1.4140000000000001,
+          "damage": 55.79070967741936,
+          "donorDamage": 9.298451612903227
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "b09-h1",
+        "b09-o1",
+        "b09-c1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u201",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u201:u201-mid",
+          "nativeId": "u201-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u201:ward-champion-r81:u201-e1",
+          "nativeId": "u201-e1",
+          "maxHp": 13254,
+          "donorMaxHp": 2209,
+          "scale": 3.0540000000000003,
+          "donorScale": 1.5270000000000001,
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485
+        },
+        {
+          "id": "u201:ward-champion-r81:u201-e2",
+          "nativeId": "u201-e2",
+          "maxHp": 13254,
+          "donorMaxHp": 2209,
+          "scale": 2.694,
+          "donorScale": 1.347,
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485
+        },
+        {
+          "id": "u201:ward-champion-r81:u201-e3",
+          "nativeId": "u201-e3",
+          "maxHp": 13254,
+          "donorMaxHp": 2209,
+          "scale": 2.936,
+          "donorScale": 1.468,
+          "damage": 63.545806451612904,
+          "donorDamage": 10.590967741935485
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u201-e1",
+        "u201-e2",
+        "u201-e3"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u202",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u202:u202-mid",
+          "nativeId": "u202-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u202:ward-champion-r81:u202-e1",
+          "nativeId": "u202-e1",
+          "maxHp": 13578,
+          "donorMaxHp": 2263,
+          "scale": 2.992,
+          "donorScale": 1.496,
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128
+        },
+        {
+          "id": "u202:ward-champion-r81:u202-e2",
+          "nativeId": "u202-e2",
+          "maxHp": 13578,
+          "donorMaxHp": 2263,
+          "scale": 3.116,
+          "donorScale": 1.558,
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128
+        },
+        {
+          "id": "u202:ward-champion-r81:u202-e3",
+          "nativeId": "u202-e3",
+          "maxHp": 13578,
+          "donorMaxHp": 2263,
+          "scale": 2.874,
+          "donorScale": 1.437,
+          "damage": 64.14154838709676,
+          "donorDamage": 10.690258064516128
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u202-e1",
+        "u202-e2",
+        "u202-e3"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u204",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u204:u204-mid",
+          "nativeId": "u204-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u204:ward-champion-r81:u204-e1",
+          "nativeId": "u204-e1",
+          "maxHp": 13908,
+          "donorMaxHp": 2318,
+          "scale": 3.2,
+          "donorScale": 1.6,
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774
+        },
+        {
+          "id": "u204:ward-champion-r81:u204-e2",
+          "nativeId": "u204-e2",
+          "maxHp": 13908,
+          "donorMaxHp": 2318,
+          "scale": 2.958,
+          "donorScale": 1.479,
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774
+        },
+        {
+          "id": "u204:ward-champion-r81:u204-e3",
+          "nativeId": "u204-e3",
+          "maxHp": 13908,
+          "donorMaxHp": 2318,
+          "scale": 2.716,
+          "donorScale": 1.358,
+          "damage": 64.73729032258065,
+          "donorDamage": 10.789548387096774
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u204-e1",
+        "u204-e2",
+        "u204-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u205",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u205:u205-mid",
+          "nativeId": "u205-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u205:ward-champion-r81:u205-e1",
+          "nativeId": "u205-e1",
+          "maxHp": 14238,
+          "donorMaxHp": 2373,
+          "scale": 2.934,
+          "donorScale": 1.467,
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742
+        },
+        {
+          "id": "u205:ward-champion-r81:u205-e2",
+          "nativeId": "u205-e2",
+          "maxHp": 14238,
+          "donorMaxHp": 2373,
+          "scale": 3.176,
+          "donorScale": 1.588,
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742
+        },
+        {
+          "id": "u205:ward-champion-r81:u205-e3",
+          "nativeId": "u205-e3",
+          "maxHp": 14238,
+          "donorMaxHp": 2373,
+          "scale": 2.8160000000000003,
+          "donorScale": 1.4080000000000001,
+          "damage": 65.33303225806452,
+          "donorDamage": 10.88883870967742
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u205-e1",
+        "u205-e2",
+        "u205-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u206",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "u206:u206-mid",
+          "nativeId": "u206-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u206:ward-champion-r81:u206-e1",
+          "nativeId": "u206-e1",
+          "maxHp": 14574,
+          "donorMaxHp": 2429,
+          "scale": 2.976,
+          "donorScale": 1.488,
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064
+        },
+        {
+          "id": "u206:ward-champion-r81:u206-e2",
+          "nativeId": "u206-e2",
+          "maxHp": 14574,
+          "donorMaxHp": 2429,
+          "scale": 3.1,
+          "donorScale": 1.55,
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064
+        },
+        {
+          "id": "u206:ward-champion-r81:u206-e3",
+          "nativeId": "u206-e3",
+          "maxHp": 14574,
+          "donorMaxHp": 2429,
+          "scale": 2.858,
+          "donorScale": 1.429,
+          "damage": 65.92877419354838,
+          "donorDamage": 10.988129032258064
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u206-e1",
+        "u206-e2",
+        "u206-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "u203",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "u203:u203-boss",
+          "nativeId": "u203-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "u203:u203-mid",
+          "nativeId": "u203-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "u203:ward-champion-r81:u203-e1",
+          "nativeId": "u203-e1",
+          "maxHp": 14916,
+          "donorMaxHp": 2486,
+          "scale": 2.858,
+          "donorScale": 1.429,
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871
+        },
+        {
+          "id": "u203:ward-champion-r81:u203-e2",
+          "nativeId": "u203-e2",
+          "maxHp": 14916,
+          "donorMaxHp": 2486,
+          "scale": 2.734,
+          "donorScale": 1.367,
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871
+        },
+        {
+          "id": "u203:ward-champion-r81:u203-e3",
+          "nativeId": "u203-e3",
+          "maxHp": 14916,
+          "donorMaxHp": 2486,
+          "scale": 2.976,
+          "donorScale": 1.488,
+          "damage": 66.52451612903226,
+          "donorDamage": 11.08741935483871
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "u203-e1",
+        "u203-e2",
+        "u203-e3"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "last304",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "last304:ward-champion-r81:l304-e1",
+          "nativeId": "l304-e1",
+          "maxHp": 15600,
+          "donorMaxHp": 2600,
+          "scale": 2.616,
+          "donorScale": 1.308,
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002
+        },
+        {
+          "id": "last304:ward-champion-r81:l304-e2",
+          "nativeId": "l304-e2",
+          "maxHp": 15600,
+          "donorMaxHp": 2600,
+          "scale": 2.74,
+          "donorScale": 1.37,
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002
+        },
+        {
+          "id": "last304:ward-champion-r81:l304-e3",
+          "nativeId": "l304-e3",
+          "maxHp": 15600,
+          "donorMaxHp": 2600,
+          "scale": 3.1,
+          "donorScale": 1.55,
+          "damage": 74.84400000000001,
+          "donorDamage": 12.474000000000002
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "l304-e1",
+        "l304-e2",
+        "l304-e3"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "last305",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "last305:l305-boss",
+          "nativeId": "l305-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "last305:ward-champion-r81:l305-e1",
+          "nativeId": "l305-e1",
+          "maxHp": 15954,
+          "donorMaxHp": 2659,
+          "scale": 2.682,
+          "donorScale": 1.341,
+          "damage": 75.50245161290324,
+          "donorDamage": 12.583741935483873
+        },
+        {
+          "id": "last305:ward-champion-r81:l305-e2",
+          "nativeId": "l305-e2",
+          "maxHp": 15954,
+          "donorMaxHp": 2659,
+          "scale": 3.16,
+          "donorScale": 1.58,
+          "damage": 75.50245161290324,
+          "donorDamage": 12.583741935483873
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "l305-e1",
+        "l305-e2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "last301",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 1,
+      "ordinary": 0,
+      "bosses": [
+        {
+          "id": "last301:l301-boss",
+          "nativeId": "l301-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "last302",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "last302:mb-last302-v31231",
+          "nativeId": "mb-last302-v31231"
+        }
+      ],
+      "champions": [
+        {
+          "id": "last302:ward-champion-r81:l302-e1",
+          "nativeId": "l302-e1",
+          "maxHp": 16668,
+          "donorMaxHp": 2778,
+          "scale": 2.968,
+          "donorScale": 1.484,
+          "damage": 76.81935483870967,
+          "donorDamage": 12.803225806451612
+        },
+        {
+          "id": "last302:ward-champion-r81:l302-e3",
+          "nativeId": "l302-e3",
+          "maxHp": 16668,
+          "donorMaxHp": 2778,
+          "scale": 3.0860000000000003,
+          "donorScale": 1.5430000000000001,
+          "damage": 76.81935483870967,
+          "donorDamage": 12.803225806451612
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "l302-e1",
+        "l302-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "last303",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 32,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "last303:l303-boss",
+          "nativeId": "l303-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "last303:ward-champion-r81:l302-e1",
+          "nativeId": "l302-e1",
+          "maxHp": 17028,
+          "donorMaxHp": 2838,
+          "scale": 2.968,
+          "donorScale": 1.484,
+          "damage": 77.4778064516129,
+          "donorDamage": 12.912967741935486
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "l302-e1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair01:mb-kair01-v31231",
+          "nativeId": "mb-kair01-v31231"
+        }
+      ],
+      "champions": [
+        {
+          "id": "kair01:ward-champion-r81:kair-academy-wave-1",
+          "nativeId": "kair-academy-wave-1",
+          "maxHp": 17760,
+          "donorMaxHp": 2960,
+          "scale": 2.61,
+          "donorScale": 1.305,
+          "damage": 86.29896774193548,
+          "donorDamage": 14.383161290322581
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-academy-wave-1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair04",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair04:mb-kair04-v31231",
+          "nativeId": "mb-kair04-v31231"
+        }
+      ],
+      "champions": [
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-01",
+          "nativeId": "kair-guardian-01",
+          "maxHp": 18132,
+          "donorMaxHp": 3022,
+          "scale": 3.1500000000000004,
+          "donorScale": 1.5750000000000002,
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-02",
+          "nativeId": "kair-guardian-02",
+          "maxHp": 18132,
+          "donorMaxHp": 3022,
+          "scale": 2.79,
+          "donorScale": 1.395,
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-03",
+          "nativeId": "kair-guardian-03",
+          "maxHp": 18132,
+          "donorMaxHp": 3022,
+          "scale": 3.032,
+          "donorScale": 1.516,
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678
+        },
+        {
+          "id": "kair04:ward-champion-r81:kair-guardian-04",
+          "nativeId": "kair-guardian-04",
+          "maxHp": 18132,
+          "donorMaxHp": 3022,
+          "scale": 2.672,
+          "donorScale": 1.336,
+          "damage": 87.02012903225807,
+          "donorDamage": 14.503354838709678
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-01",
+        "kair-guardian-02",
+        "kair-guardian-03",
+        "kair-guardian-04"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair05",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair05:kair-great-01",
+          "nativeId": "kair-great-01"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-07",
+          "nativeId": "kair-guardian-07",
+          "maxHp": 18510,
+          "donorMaxHp": 3085,
+          "scale": 2.7960000000000003,
+          "donorScale": 1.3980000000000001,
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-08",
+          "nativeId": "kair-guardian-08",
+          "maxHp": 18510,
+          "donorMaxHp": 3085,
+          "scale": 3.0380000000000003,
+          "donorScale": 1.5190000000000001,
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-09",
+          "nativeId": "kair-guardian-09",
+          "maxHp": 18510,
+          "donorMaxHp": 3085,
+          "scale": 2.678,
+          "donorScale": 1.339,
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774
+        },
+        {
+          "id": "kair05:ward-champion-r81:kair-guardian-10",
+          "nativeId": "kair-guardian-10",
+          "maxHp": 18510,
+          "donorMaxHp": 3085,
+          "scale": 2.742,
+          "donorScale": 1.371,
+          "damage": 87.74129032258064,
+          "donorDamage": 14.623548387096774
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-07",
+        "kair-guardian-08",
+        "kair-guardian-09",
+        "kair-guardian-10"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair06",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair06:kair-great-02",
+          "nativeId": "kair-great-02"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-13",
+          "nativeId": "kair-guardian-13",
+          "maxHp": 18888,
+          "donorMaxHp": 3148,
+          "scale": 2.618,
+          "donorScale": 1.309,
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-14",
+          "nativeId": "kair-guardian-14",
+          "maxHp": 18888,
+          "donorMaxHp": 3148,
+          "scale": 3.108,
+          "donorScale": 1.554,
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-15",
+          "nativeId": "kair-guardian-15",
+          "maxHp": 18888,
+          "donorMaxHp": 3148,
+          "scale": 2.866,
+          "donorScale": 1.433,
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872
+        },
+        {
+          "id": "kair06:ward-champion-r81:kair-guardian-16",
+          "nativeId": "kair-guardian-16",
+          "maxHp": 18888,
+          "donorMaxHp": 3148,
+          "scale": 2.624,
+          "donorScale": 1.312,
+          "damage": 88.46245161290324,
+          "donorDamage": 14.743741935483872
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-13",
+        "kair-guardian-14",
+        "kair-guardian-15",
+        "kair-guardian-16"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair07",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair07:kair-great-04",
+          "nativeId": "kair-great-04"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-19",
+          "nativeId": "kair-guardian-19",
+          "maxHp": 19272,
+          "donorMaxHp": 3212,
+          "scale": 2.63,
+          "donorScale": 1.315,
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-20",
+          "nativeId": "kair-guardian-20",
+          "maxHp": 19272,
+          "donorMaxHp": 3212,
+          "scale": 2.68,
+          "donorScale": 1.34,
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-21",
+          "nativeId": "kair-guardian-21",
+          "maxHp": 19272,
+          "donorMaxHp": 3212,
+          "scale": 2.922,
+          "donorScale": 1.461,
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097
+        },
+        {
+          "id": "kair07:ward-champion-r81:kair-guardian-22",
+          "nativeId": "kair-guardian-22",
+          "maxHp": 19272,
+          "donorMaxHp": 3212,
+          "scale": 2.798,
+          "donorScale": 1.399,
+          "damage": 89.18361290322582,
+          "donorDamage": 14.86393548387097
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-19",
+        "kair-guardian-20",
+        "kair-guardian-21",
+        "kair-guardian-22"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair08",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "kair08:kair-great-05",
+          "nativeId": "kair-great-05"
+        }
+      ],
+      "champions": [
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-25",
+          "nativeId": "kair-guardian-25",
+          "maxHp": 19662,
+          "donorMaxHp": 3277,
+          "scale": 2.686,
+          "donorScale": 1.343,
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-26",
+          "nativeId": "kair-guardian-26",
+          "maxHp": 19662,
+          "donorMaxHp": 3277,
+          "scale": 3.164,
+          "donorScale": 1.582,
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-27",
+          "nativeId": "kair-guardian-27",
+          "maxHp": 19662,
+          "donorMaxHp": 3277,
+          "scale": 2.8040000000000003,
+          "donorScale": 1.4020000000000001,
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064
+        },
+        {
+          "id": "kair08:ward-champion-r81:kair-guardian-28",
+          "nativeId": "kair-guardian-28",
+          "maxHp": 19662,
+          "donorMaxHp": 3277,
+          "scale": 3.152,
+          "donorScale": 1.576,
+          "damage": 89.90477419354838,
+          "donorDamage": 14.984129032258064
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-25",
+        "kair-guardian-26",
+        "kair-guardian-27",
+        "kair-guardian-28"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair09",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair09:mb-kair09-v31231",
+          "nativeId": "mb-kair09-v31231"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-31",
+          "nativeId": "kair-guardian-31",
+          "maxHp": 20052,
+          "donorMaxHp": 3342,
+          "scale": 2.874,
+          "donorScale": 1.437,
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-32",
+          "nativeId": "kair-guardian-32",
+          "maxHp": 20052,
+          "donorMaxHp": 3342,
+          "scale": 2.998,
+          "donorScale": 1.499,
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-33",
+          "nativeId": "kair-guardian-33",
+          "maxHp": 20052,
+          "donorMaxHp": 3342,
+          "scale": 2.7560000000000002,
+          "donorScale": 1.3780000000000001,
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162
+        },
+        {
+          "id": "kair09:ward-champion-r81:kair-guardian-34",
+          "nativeId": "kair-guardian-34",
+          "maxHp": 20052,
+          "donorMaxHp": 3342,
+          "scale": 2.75,
+          "donorScale": 1.375,
+          "damage": 90.62593548387098,
+          "donorDamage": 15.104322580645162
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-31",
+        "kair-guardian-32",
+        "kair-guardian-33",
+        "kair-guardian-34"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair10",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair10:kair-great-06",
+          "nativeId": "kair-great-06"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-37",
+          "nativeId": "kair-guardian-37",
+          "maxHp": 20448,
+          "donorMaxHp": 3408,
+          "scale": 2.992,
+          "donorScale": 1.496,
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-38",
+          "nativeId": "kair-guardian-38",
+          "maxHp": 20448,
+          "donorMaxHp": 3408,
+          "scale": 2.986,
+          "donorScale": 1.493,
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-39",
+          "nativeId": "kair-guardian-39",
+          "maxHp": 20448,
+          "donorMaxHp": 3408,
+          "scale": 2.744,
+          "donorScale": 1.372,
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258
+        },
+        {
+          "id": "kair10:ward-champion-r81:kair-guardian-40",
+          "nativeId": "kair-guardian-40",
+          "maxHp": 20448,
+          "donorMaxHp": 3408,
+          "scale": 3.12,
+          "donorScale": 1.56,
+          "damage": 91.34709677419355,
+          "donorDamage": 15.224516129032258
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "kair-guardian-37",
+        "kair-guardian-38",
+        "kair-guardian-39",
+        "kair-guardian-40"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair02:kair-great-03",
+          "nativeId": "kair-great-03"
+        }
+      ],
+      "midbosses": [],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "kair-guardian-43",
+        "kair-guardian-44",
+        "kair-guardian-45",
+        "kair-guardian-46"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "kair03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "kair03:k103-boss",
+          "nativeId": "k103-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "kair-academy-wave-1",
+        "kair-academy-wave-2",
+        "kair-academy-wave-3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "hando01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "hando01:mb-hando01",
+          "nativeId": "mb-hando01"
+        }
+      ],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "h101-s1",
+        "h101-t1",
+        "h101-s2"
+      ],
+      "dressingCount": 8,
+      "unsafeDressing": []
+    },
+    {
+      "id": "hando02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "hando02:mb-hando02",
+          "nativeId": "mb-hando02"
+        }
+      ],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "h102-s1",
+        "h102-c1",
+        "h102-t1",
+        "h102-s2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "hando03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "hando03:h103-boss",
+          "nativeId": "h103-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "hando03:mb-hando03",
+          "nativeId": "mb-hando03"
+        }
+      ],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "h103-c1",
+        "h103-s1",
+        "h103-t1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "murder01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 33,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder01:mb-murder01",
+          "nativeId": "mb-murder01"
+        }
+      ],
+      "champions": [
+        {
+          "id": "murder01:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "maxHp": 23748,
+          "donorMaxHp": 3958,
+          "scale": 3.144,
+          "donorScale": 1.572,
+          "damage": 114.0061935483871,
+          "donorDamage": 19.001032258064516
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "murder04-e2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "murder02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 34,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder02:mb-murder02",
+          "nativeId": "mb-murder02"
+        }
+      ],
+      "champions": [
+        {
+          "id": "murder02:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "maxHp": 24174,
+          "donorMaxHp": 4029,
+          "scale": 3.144,
+          "donorScale": 1.572,
+          "damage": 114.85277419354838,
+          "donorDamage": 19.142129032258065
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "murder04-e2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "murder04",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "murder04:murder04-mid",
+          "nativeId": "murder04-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "murder04:ward-champion-r81:murder04-e1",
+          "nativeId": "murder04-e1",
+          "maxHp": 24606,
+          "donorMaxHp": 4101,
+          "scale": 2.7840000000000003,
+          "donorScale": 1.3920000000000001,
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615
+        },
+        {
+          "id": "murder04:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "maxHp": 24606,
+          "donorMaxHp": 4101,
+          "scale": 3.144,
+          "donorScale": 1.572,
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615
+        },
+        {
+          "id": "murder04:ward-champion-r81:murder04-e3",
+          "nativeId": "murder04-e3",
+          "maxHp": 24606,
+          "donorMaxHp": 4101,
+          "scale": 2.902,
+          "donorScale": 1.451,
+          "damage": 115.6993548387097,
+          "donorDamage": 19.283225806451615
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "murder04-e1",
+        "murder04-e2",
+        "murder04-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "murder03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "murder03:blue-executor",
+          "nativeId": "blue-executor"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "murder03:mb-murder03",
+          "nativeId": "mb-murder03"
+        }
+      ],
+      "champions": [
+        {
+          "id": "murder03:ward-champion-r81:murder04-e2",
+          "nativeId": "murder04-e2",
+          "maxHp": 25044,
+          "donorMaxHp": 4174,
+          "scale": 3.144,
+          "donorScale": 1.572,
+          "damage": 116.54593548387098,
+          "donorDamage": 19.424322580645164
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "murder04-e2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult01",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult01:c101-mid",
+          "nativeId": "c101-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "cult01:ward-champion-r81:c101-e1",
+          "nativeId": "c101-e1",
+          "maxHp": 25482,
+          "donorMaxHp": 4247,
+          "scale": 2.8600000000000003,
+          "donorScale": 1.4300000000000002,
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358
+        },
+        {
+          "id": "cult01:ward-champion-r81:c101-e2",
+          "nativeId": "c101-e2",
+          "maxHp": 25482,
+          "donorMaxHp": 4247,
+          "scale": 2.618,
+          "donorScale": 1.309,
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358
+        },
+        {
+          "id": "cult01:ward-champion-r81:c101-e3",
+          "nativeId": "c101-e3",
+          "maxHp": 25482,
+          "donorMaxHp": 4247,
+          "scale": 2.978,
+          "donorScale": 1.489,
+          "damage": 126.08825806451614,
+          "donorDamage": 21.014709677419358
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "c101-e1",
+        "c101-e2",
+        "c101-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult02",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "cult02:c102-boss",
+          "nativeId": "c102-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "cult02:ward-champion-r81:c102-e1",
+          "nativeId": "c102-e1",
+          "maxHp": 25926,
+          "donorMaxHp": 4321,
+          "scale": 2.718,
+          "donorScale": 1.359,
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132
+        },
+        {
+          "id": "cult02:ward-champion-r81:c102-e2",
+          "nativeId": "c102-e2",
+          "maxHp": 25926,
+          "donorMaxHp": 4321,
+          "scale": 3.196,
+          "donorScale": 1.598,
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132
+        },
+        {
+          "id": "cult02:ward-champion-r81:c102-e3",
+          "nativeId": "c102-e3",
+          "maxHp": 25926,
+          "donorMaxHp": 4321,
+          "scale": 2.8360000000000003,
+          "donorScale": 1.4180000000000001,
+          "damage": 126.9975483870968,
+          "donorDamage": 21.166258064516132
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "c102-e1",
+        "c102-e2",
+        "c102-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult05",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult05:c105-mid",
+          "nativeId": "c105-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "cult05:ward-champion-r81:c105-e1",
+          "nativeId": "c105-e1",
+          "maxHp": 26376,
+          "donorMaxHp": 4396,
+          "scale": 2.686,
+          "donorScale": 1.343,
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906
+        },
+        {
+          "id": "cult05:ward-champion-r81:c105-e2",
+          "nativeId": "c105-e2",
+          "maxHp": 26376,
+          "donorMaxHp": 4396,
+          "scale": 3.0460000000000003,
+          "donorScale": 1.5230000000000001,
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906
+        },
+        {
+          "id": "cult05:ward-champion-r81:c105-e3",
+          "nativeId": "c105-e3",
+          "maxHp": 26376,
+          "donorMaxHp": 4396,
+          "scale": 2.8040000000000003,
+          "donorScale": 1.4020000000000001,
+          "damage": 127.90683870967743,
+          "donorDamage": 21.317806451612906
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "c105-e1",
+        "c105-e2",
+        "c105-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult06",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [
+        {
+          "id": "cult06:c106-mid",
+          "nativeId": "c106-mid"
+        }
+      ],
+      "champions": [
+        {
+          "id": "cult06:ward-champion-r81:c106-e1",
+          "nativeId": "c106-e1",
+          "maxHp": 26826,
+          "donorMaxHp": 4471,
+          "scale": 3.176,
+          "donorScale": 1.588,
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684
+        },
+        {
+          "id": "cult06:ward-champion-r81:c106-e2",
+          "nativeId": "c106-e2",
+          "maxHp": 26826,
+          "donorMaxHp": 4471,
+          "scale": 3.052,
+          "donorScale": 1.526,
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684
+        },
+        {
+          "id": "cult06:ward-champion-r81:c106-e3",
+          "nativeId": "c106-e3",
+          "maxHp": 26826,
+          "donorMaxHp": 4471,
+          "scale": 2.692,
+          "donorScale": 1.346,
+          "damage": 128.81612903225812,
+          "donorDamage": 21.469354838709684
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "c106-e1",
+        "c106-e2",
+        "c106-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult03",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 37,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "cult03:c103-mid",
+          "nativeId": "c103-mid"
+        },
+        {
+          "id": "cult03:c103-boss",
+          "nativeId": "c103-boss"
+        }
+      ],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "cult03:ward-champion-r81:c103-e1",
+          "nativeId": "c103-e1",
+          "maxHp": 27282,
+          "donorMaxHp": 4547,
+          "scale": 2.98,
+          "donorScale": 1.49,
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455
+        },
+        {
+          "id": "cult03:ward-champion-r81:c103-e2",
+          "nativeId": "c103-e2",
+          "maxHp": 27282,
+          "donorMaxHp": 4547,
+          "scale": 3.104,
+          "donorScale": 1.552,
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455
+        },
+        {
+          "id": "cult03:ward-champion-r81:c103-e3",
+          "nativeId": "c103-e3",
+          "maxHp": 27282,
+          "donorMaxHp": 4547,
+          "scale": 2.862,
+          "donorScale": 1.431,
+          "damage": 129.72541935483872,
+          "donorDamage": 21.620903225806455
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "c103-e1",
+        "c103-e2",
+        "c103-e3"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "cult04",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 35,
+      "ordinary": 30,
+      "bosses": [
+        {
+          "id": "cult04:c104-boss",
+          "nativeId": "c104-boss"
+        }
+      ],
+      "midbosses": [
+        {
+          "id": "cult04:c104-mid",
+          "nativeId": "c104-mid"
+        }
+      ],
+      "champions": [],
+      "controlled": false,
+      "donorKinds": [
+        "c104-e1",
+        "c104-e2"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    },
+    {
+      "id": "ep1a09b",
+      "worldWard": true,
+      "storySame": true,
+      "graphSame": true,
+      "enemyStatsSame": true,
+      "originalPropsSame": true,
+      "unsafeActors": [],
+      "actorCount": 36,
+      "ordinary": 30,
+      "bosses": [],
+      "midbosses": [],
+      "champions": [
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-s1",
+          "nativeId": "dist03-s1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 2.672,
+          "donorScale": 1.336,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-c1",
+          "nativeId": "dist03-c1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 2.97,
+          "donorScale": 1.485,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-g1",
+          "nativeId": "dist03-g1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 3.14,
+          "donorScale": 1.57,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        },
+        {
+          "id": "ep1a09b:ward-champion-r81:dist03-sp1",
+          "nativeId": "dist03-sp1",
+          "maxHp": 8844,
+          "donorMaxHp": 1474,
+          "scale": 3.036,
+          "donorScale": 1.518,
+          "damage": 43.112903225806456,
+          "donorDamage": 7.185483870967743
+        }
+      ],
+      "controlled": true,
+      "donorKinds": [
+        "dist03-s1",
+        "dist03-c1",
+        "dist03-g1",
+        "dist03-sp1"
+      ],
+      "dressingCount": 12,
+      "unsafeDressing": []
+    }
+  ],
+  "visits": [
+    {
+      "id": "dist01",
+      "entry": {
+        "zone": "dist01",
+        "room": "dist01",
+        "loading": false,
+        "started": true,
+        "modal": false,
+        "player": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009,
+          "hp": 777
+        },
+        "blocked": false
+      },
+      "actualFrame": {
+        "id": "dist01",
+        "heroIdentity": "hwando",
+        "hero": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009
+        },
+        "ready": true,
+        "focus": [
+          {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "focusWidth": 1.12,
+            "focusHeight": 2.7
+          }
+        ],
+        "originalZone": "dist01",
+        "copy": true
+      },
+      "restoreExact": true,
+      "deadChampionRemains": true
+    },
+    {
+      "id": "dist02",
+      "entry": {
+        "zone": "dist02",
+        "room": "dist02",
+        "loading": false,
+        "started": true,
+        "modal": false,
+        "player": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009,
+          "hp": 777
+        },
+        "blocked": false
+      },
+      "actualFrame": {
+        "id": "dist02",
+        "heroIdentity": "hwando",
+        "hero": {
+          "x": 45.41768634315662,
+          "y": 108.3637667518009
+        },
+        "ready": true,
+        "focus": [
+          {
+            "x": 45.41768634315662,
+            "y": 108.3637667518009,
+            "focusWidth": 1.12,
+            "focusHeight": 2.7
+          }
+        ],
+        "originalZone": "dist02",
+        "copy": true
+      },
+      "restoreExact": true,
+      "deadChampionRemains": true
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T08:24:15.145Z",
+  "sourceHashes": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
+    "world-combat-r78.js": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e",
+    "world-assets-r80.js": "2dbaa158e1f1b5060514267c4c2d8ba1541f49f822c7a92e06dcebe2d39cbca0",
+    "world-environment-r81.js": "9c6222b630f806eb37b9650de784a3c1ac88e0f19781235fa12dad172b15b5d6",
+    "world-presentation-r81.js": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
+  },
+  "errors": [],
+  "passed": 22,
+  "failed": 0,
+  "completedAt": "2026-10-23T08:24:32.344Z"
+}

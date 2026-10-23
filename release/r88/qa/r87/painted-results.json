@@ -1,0 +1,444 @@
+{
+  "schema": "r87-painted-atlas-native-integration/v1",
+  "checks": [
+    {
+      "name": "Exactly three painted atlases load while procedural80 remains disabled",
+      "passed": true
+    },
+    {
+      "name": "Three runtime PNGs retain the supplied hashes",
+      "passed": true
+    },
+    {
+      "name": "All56 source frames fit the original atlases with unchanged pivots",
+      "passed": true
+    },
+    {
+      "name": "poison uses all16 painted frames and removes its last frame on completion",
+      "passed": true
+    },
+    {
+      "name": "scalpel uses all16 painted frames and removes its last frame on completion",
+      "passed": true
+    },
+    {
+      "name": "Thorn emerges binds holds and releases without inventing additional frames",
+      "passed": true
+    },
+    {
+      "name": "Hospital loads only its two shared painted textures",
+      "passed": true,
+      "detail": [
+        {
+          "kind": "poison",
+          "state": "ready",
+          "bytes": 4194304
+        },
+        {
+          "kind": "scalpel",
+          "state": "ready",
+          "bytes": 6553600
+        }
+      ]
+    },
+    {
+      "name": "Confirmed native scalpel damage admits one painted impact",
+      "passed": true,
+      "detail": {
+        "result": "hit",
+        "hpLoss": 6.216000000000008,
+        "active": [
+          {
+            "kind": "scalpel",
+            "id": "painted-r87:scalpel:1",
+            "x": 20,
+            "y": 35.85,
+            "start": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Scalpel uses its authored impact frame6 and normal alpha in real Three geometry",
+      "passed": true
+    },
+    {
+      "name": "Painted atlases use linear clamp filtering without mipmaps or additive blending",
+      "passed": true
+    },
+    {
+      "name": "Actual poison impact lifecycle emits once at the committed target",
+      "passed": true,
+      "detail": [
+        {
+          "kind": "poison",
+          "id": "painted-r87:poison:2",
+          "x": 23,
+          "y": 36,
+          "start": 0.25
+        }
+      ]
+    },
+    {
+      "name": "Root region releases hospital textures and loads one shared thorn atlas",
+      "passed": true,
+      "detail": {
+        "metrics": {
+          "loads": 3,
+          "releases": 2,
+          "lateLoads": 0,
+          "draws": 1,
+          "poison": 1,
+          "scalpel": 1,
+          "bind": 0,
+          "binds": 0,
+          "dotAttempts": 0,
+          "dotBudget": 0,
+          "drops": 0
+        },
+        "generation": 4,
+        "active": [],
+        "binding": null,
+        "resident": [
+          {
+            "kind": "bind",
+            "state": "ready",
+            "bytes": 25165824
+          }
+        ],
+        "maxInstances": 8,
+        "newProcedural80Enabled": false,
+        "rootBoss": "dist00-boss",
+        "rootDuration": 2.2,
+        "rootDotBudgetFactor": 0.6,
+        "rootEscape": "native S blink",
+        "singleThornOverlay": true,
+        "seamlessHoldVerified": false,
+        "browserVerified": false,
+        "GPUVerified": false
+      }
+    },
+    {
+      "name": "Dodges and parries cannot apply thorn bind or DOT",
+      "passed": true,
+      "detail": {
+        "a": "invulnerable",
+        "b": "parried",
+        "first": null,
+        "second": null,
+        "hp": 777,
+        "modal": false
+      }
+    },
+    {
+      "name": "Only an admitted root-boss hit binds and blocks ordinary walking",
+      "passed": true,
+      "detail": {
+        "result": "hit",
+        "b": {
+          "owner": "dist00:dist00-boss",
+          "start": 0.25,
+          "until": 2.45,
+          "pulses": 0,
+          "remaining": 5.902548387096775
+        },
+        "before": {
+          "x": 20,
+          "y": 36
+        },
+        "after": {
+          "x": 20,
+          "y": 36
+        },
+        "profile": "{\"feetAnchor\":{\"x\":0,\"y\":0},\"spriteRect\":{\"height\":1.65},\"hurtbox\":{\"type\":\"circle\",\"r\":0.55,\"x\":0,\"y\":0},\"hitbox\":{\"type\":\"circle\",\"r\":0.52,\"x\":0,\"y\":0},\"bodyBlock\":{\"type\":\"circle\",\"r\":0.52},\"attackShape\":{\"shape\":\"circle\",\"range\":1.65,\"angle\":3.141592653589793,\"windup\":0.6,\"active\":0.12,\"recovery\":0.9,\"radius\":1.55},\"shadowRadius\":27,\"aggro\":12,\"preferredRange\":3.6,\"assetGuide\":null,\"weakCore\":null}"
+      }
+    },
+    {
+      "name": "Thorn uses painted frame8 with a fixed feet pivot",
+      "passed": true
+    },
+    {
+      "name": "All8 heroes keep the same feet attachment at three zooms without changing health",
+      "passed": true,
+      "detail": {
+        "rows": [
+          {
+            "hero": "hwando",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "hwando",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "hwando",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "seoha",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "seoha",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "seoha",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "neon",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "neon",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "neon",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "michaela",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "michaela",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "michaela",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "lauren",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "lauren",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "lauren",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "hunter",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "hunter",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "hunter",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "slayer",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "slayer",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "slayer",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "gunner",
+            "zoom": 0.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "gunner",
+            "zoom": 1,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          },
+          {
+            "hero": "gunner",
+            "zoom": 1.5,
+            "error": 0,
+            "frame": 8,
+            "finite": true
+          }
+        ],
+        "hpUnchanged": true
+      }
+    },
+    {
+      "name": "The native S blink escapes and begins release instead of disabling the skill",
+      "passed": true,
+      "detail": {
+        "moved": true,
+        "b": null,
+        "active": [
+          {
+            "kind": "bind",
+            "id": "painted-r87:bind:3",
+            "x": 21.823999999999998,
+            "y": 36,
+            "start": 0.25,
+            "releaseAt": 0.93
+          }
+        ]
+      }
+    },
+    {
+      "name": "Root DOT has exactly four admitted finite pulses with a0.6x total budget",
+      "passed": true,
+      "detail": {
+        "dots": [
+          {
+            "value": 1.4756370967741939,
+            "outcome": "hit",
+            "hpLoss": 0.38366564516127255
+          },
+          {
+            "value": 1.4756370967741939,
+            "outcome": "hit",
+            "hpLoss": 0.38366564516127255
+          },
+          {
+            "value": 1.4756370967741939,
+            "outcome": "hit",
+            "hpLoss": 0.38366564516127255
+          },
+          {
+            "value": 1.4756370967741939,
+            "outcome": "hit",
+            "hpLoss": 0.38366564516127255
+          }
+        ],
+        "frozen": true,
+        "expected": 5.902548387096775,
+        "binding": null
+      }
+    },
+    {
+      "name": "Modal pauses freeze the root status clock",
+      "passed": true
+    },
+    {
+      "name": "Native save restoration clears transient atlas instances and root control state",
+      "passed": true
+    },
+    {
+      "name": "Atlas replay releases Three textures when no longer drawn",
+      "passed": true
+    },
+    {
+      "name": "No native game error was recorded",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Supplied PNG hashes/timing; actual native hurt/defence/movement/blink/tick/restore and DrawCommands replay through pinned Three CPU. Combat positioning and quiet background simulation are scripted.",
+  "metrics": {
+    "metrics": {
+      "loads": 4,
+      "releases": 3,
+      "lateLoads": 0,
+      "draws": 26,
+      "poison": 1,
+      "scalpel": 1,
+      "bind": 2,
+      "binds": 2,
+      "dotAttempts": 4,
+      "dotBudget": 5.902548387096775,
+      "drops": 0
+    },
+    "generation": 7,
+    "active": [],
+    "binding": null,
+    "resident": [
+      {
+        "kind": "bind",
+        "state": "ready",
+        "bytes": 25165824
+      }
+    ],
+    "maxInstances": 8,
+    "newProcedural80Enabled": false,
+    "rootBoss": "dist00-boss",
+    "rootDuration": 2.2,
+    "rootDotBudgetFactor": 0.6,
+    "rootEscape": "native S blink",
+    "singleThornOverlay": true,
+    "seamlessHoldVerified": false,
+    "browserVerified": false,
+    "GPUVerified": false
+  },
+  "passed": true
+}

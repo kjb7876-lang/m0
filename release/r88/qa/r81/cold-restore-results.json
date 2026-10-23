@@ -1,0 +1,120 @@
+{
+  "schema": "r81-cold-native-restore/v1",
+  "method": "Independent fresh Node process, native VM restore of the 777 swamp checkpoint from runtime-contracts.cjs including a wounded champion beyond native serialized actor index40. DOM/Image/audio/timers and renderer readiness are stubs; no browser/GPU or natural play.",
+  "checks": [
+    {
+      "name": "Fresh native VM boots cleanly",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Cold restore enters the same 777 swamp phase on safe floor",
+      "passed": true,
+      "detail": {
+        "zone": "dist02",
+        "phase": "route",
+        "blocked": false
+      }
+    },
+    {
+      "name": "Cold restore preserves every surviving actor coordinate and exact wounded HP",
+      "passed": true,
+      "detail": {
+        "before": 41,
+        "after": 41,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "The fourth swamp champion beyond native index40 restores its partial health",
+      "passed": true,
+      "detail": {
+        "late": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1123.0647,
+            "maxHp": 3035.31
+          }
+        ],
+        "wounded": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1123.0647,
+            "maxHp": 3035.31,
+            "x": 59,
+            "y": 63.5,
+            "champion": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "First native tick does not heal or rescale restored champions",
+      "passed": true,
+      "detail": {
+        "before": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1123.0647,
+            "maxHp": 3035.31
+          }
+        ],
+        "after": [
+          {
+            "id": "dist02:ward-champion-r81:dist02-h1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-g1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-m1",
+            "hp": 3035.31,
+            "maxHp": 3035.31
+          },
+          {
+            "id": "dist02:ward-champion-r81:dist02-sp1",
+            "hp": 1123.0647,
+            "maxHp": 3035.31
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T08:25:21.835Z",
+  "sourceHashes": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
+    "world-combat-r78.js": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e"
+  },
+  "errors": [],
+  "passed": 6,
+  "failed": 0,
+  "completedAt": "2026-10-23T08:25:35.059Z"
+}

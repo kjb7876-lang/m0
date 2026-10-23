@@ -1,0 +1,8 @@
+{
+ "copies":["effect-presentation-r83.js"],
+ "scriptTag":"<script src=\"./effect-presentation-r83.js\"></script>",
+ "substitutions":[
+  {"before":"pxfStage:stage,pxfSize:size,pxfPaletteOwner", "after":"pxfStage:stage,pxfSize:size,pxfEmissionZoomR83:zoom,pxfPaletteOwner"},
+  {"before":"size=e.pxfSize??actorHeight()*scale[e.pxfKey],screenAngle=", "after":"size=window.__STORYWORLD_EFFECT_PRESENTATION_R83__?.size(e,e.pxfSize??actorHeight()*scale[e.pxfKey])??(e.pxfSize??actorHeight()*scale[e.pxfKey]),screenAngle="}
+ ]
+}

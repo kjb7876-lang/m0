@@ -1,0 +1,102 @@
+{
+  "schema": "r85-refined-native-integration/v1",
+  "checks": [
+    {
+      "name": "Current supplied inventory contains318 PNGs with exactly4 replacements and314 retained",
+      "passed": true
+    },
+    {
+      "name": "Each retained source has the exact previous hash and each replacement is a real change",
+      "passed": true
+    },
+    {
+      "name": "Four supplied changed PNGs match current authoritative hashes",
+      "passed": true
+    },
+    {
+      "name": "All254 old story-source hashes and64 old effect PNGs remain preserved",
+      "passed": true
+    },
+    {
+      "name": "Active catalog and sampler are exactly the supplied refinement revision",
+      "passed": true
+    },
+    {
+      "name": "One refined runtime is loaded and no standalone preview loop is loaded",
+      "passed": true
+    },
+    {
+      "name": "Every active raster metadata hash resolves to one of64 supplied current recipes",
+      "passed": true
+    },
+    {
+      "name": "Refined pure sampler adds no network storage timers or dynamic execution",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All3 new hospital runtime images decode and preserve native height settings",
+      "passed": true
+    },
+    {
+      "name": "Refined sand preserves prior visible footprint without cropping or growing accents",
+      "passed": true
+    },
+    {
+      "name": "All11 hospital native prop IDs positions source paths and collision data remain exact",
+      "passed": true
+    },
+    {
+      "name": "Actual native drawProp emits all3 refined art bodies and changes no simulation data",
+      "passed": true,
+      "detail": {
+        "commands": 3
+      }
+    },
+    {
+      "name": "Refined native hospital bodies convert to finite real Three geometry",
+      "passed": true,
+      "detail": {
+        "rows": 3
+      }
+    },
+    {
+      "name": "Supplied refinement semantic regression: Harvest halo and collection motes contract; no outward hit ring",
+      "passed": true
+    },
+    {
+      "name": "Supplied refinement semantic regression: Binding eight links tighten around a stationary lock",
+      "passed": true
+    },
+    {
+      "name": "Supplied refinement semantic regression: Flame tips face up and recycled embers fade in at birth",
+      "passed": true
+    },
+    {
+      "name": "Supplied refinement semantic regression: Harvest grain and woven-thread knot wraps are invisible at seam",
+      "passed": true
+    },
+    {
+      "name": "Supplied refinement semantic regression: Delayed generic particles do not preappear before their own birth",
+      "passed": true
+    },
+    {
+      "name": "Supplied refinement semantic regression: All 80 real recipes have finite bounded continuous activation and deterministic replay",
+      "passed": true
+    },
+    {
+      "name": "Hospital start remains Settings-only and the V9 save namespace is isolated",
+      "passed": true
+    },
+    {
+      "name": "No native runtime errors were recorded in refined hospital replay",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Exact supplied source hashes, decoded source/derivative alpha geometry, supplied semantic tests, actual shipped native hospital draw commands and real pinned Three CPU geometry. Scripted positions and renderer readiness are used.",
+  "passed": true
+}

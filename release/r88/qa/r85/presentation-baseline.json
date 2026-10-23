@@ -1,0 +1,149 @@
+{
+  "props": {
+    "r80-142": {
+      "path": "assets/world-r80/r80-142.webp",
+      "source": "prior_assets/hospital_core/hospital-bed-isometric.png",
+      "sourceSHA256": "5c2a302f4700570b0ae14b0155e9a35c68b58f702bd73f1737ef67b49995a395",
+      "sha256": "4fe7bceda564ed54b4f5a657d5dd7ba92ae19aa6dc9b6b45f66f3dc566aa05ae",
+      "bytes": 185626,
+      "width": 512,
+      "height": 434,
+      "rgbaBytes": 888832,
+      "kind": "prop",
+      "scale": 1.08,
+      "frame": {
+        "sourceRect": [
+          0,
+          0,
+          512,
+          434
+        ],
+        "pivot": [
+          256.0,
+          390.19
+        ],
+        "visibleHeight": 434,
+        "visibleBounds": [
+          0,
+          0,
+          512,
+          434
+        ]
+      },
+      "derivative": {
+        "crop": [
+          216,
+          20,
+          1345,
+          976
+        ],
+        "scale": 0.4534986713906112,
+        "originalPreserved": true,
+        "pivotStatus": "estimated; CPU geometry checked, GPU unverified"
+      }
+    },
+    "r80-143": {
+      "path": "assets/world-r80/r80-143.webp",
+      "source": "prior_assets/hospital_core/patient-monitor-isometric.png",
+      "sourceSHA256": "9b22ba36d22173eae523590d46d9f8c4511ffd48a64e30fc33f1de8fd7e0e42f",
+      "sha256": "c5e3d035a4e4529d4e2806919aecb05162a5f70f4bea1403541dbe5231216493",
+      "bytes": 99682,
+      "width": 236,
+      "height": 512,
+      "rgbaBytes": 483328,
+      "kind": "prop",
+      "scale": 1.15,
+      "frame": {
+        "sourceRect": [
+          0,
+          0,
+          236,
+          512
+        ],
+        "pivot": [
+          118.087,
+          460.8
+        ],
+        "visibleHeight": 512,
+        "visibleBounds": [
+          0,
+          0,
+          236,
+          512
+        ]
+      },
+      "derivative": {
+        "crop": [
+          685,
+          3,
+          1090,
+          881
+        ],
+        "scale": 0.5831435079726651,
+        "originalPreserved": true,
+        "pivotStatus": "estimated; CPU geometry checked, GPU unverified"
+      }
+    },
+    "r80-149": {
+      "path": "assets/world-r80/r80-149.webp",
+      "source": "prior_assets/hospital_props/hospital_wheelchair.png",
+      "sourceSHA256": "ed0eba9c7f686352e2307230d90bfe85ef02aced1c20962e86b11e9fc473fcee",
+      "sha256": "d46a170c129808411812ec2765e770aa02b61f0f1f48ba738fb4faab8edf3abe",
+      "bytes": 210286,
+      "width": 444,
+      "height": 512,
+      "rgbaBytes": 909312,
+      "kind": "prop",
+      "scale": 1.15,
+      "frame": {
+        "sourceRect": [
+          0,
+          0,
+          444,
+          512
+        ],
+        "pivot": [
+          222.094,
+          460.8
+        ],
+        "visibleHeight": 512,
+        "visibleBounds": [
+          0,
+          0,
+          444,
+          512
+        ]
+      },
+      "derivative": {
+        "crop": [
+          382,
+          3,
+          1227,
+          977
+        ],
+        "scale": 0.5256673511293635,
+        "originalPreserved": true,
+        "pivotStatus": "estimated; CPU geometry checked, GPU unverified"
+      }
+    }
+  },
+  "sand": {
+    "key": "04-kair03-exhausted-sand-tracks",
+    "path": "assets/vfx-r83/selected/batch04/04-kair03-exhausted-sand-tracks.png",
+    "sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "decodedBytes": 6290064,
+    "alpha64BBox": [
+      190,
+      262,
+      1108,
+      1046
+    ],
+    "role": "recovery",
+    "selection": "retained_original"
+  },
+  "legacyWorldCatalogSHA256": "3676b16c35006ac81e1629a91b709ab6695e67605212b52011994d78aa772a1d"
+}

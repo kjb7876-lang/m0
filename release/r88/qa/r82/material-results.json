@@ -1,0 +1,69 @@
+{
+  "method": "Pinned Three r186 actual CPU geometry/material/texture ownership, deferred asset lease fixtures; no GPU rendering.",
+  "checks": [
+    {
+      "name": "Brain lease uses the existing supplied asset",
+      "passed": true,
+      "detail": "assets/scenery-r59/brain.webp"
+    },
+    {
+      "name": "Three roof stays at original wall-top height with valid UVs",
+      "passed": true
+    },
+    {
+      "name": "Roof uses the actual wall image with a near-matching tint",
+      "passed": true
+    },
+    {
+      "name": "Brain backdrop is ready, repeated and world-anchored",
+      "passed": true
+    },
+    {
+      "name": "Backdrop never covers a walkable tile",
+      "passed": true
+    },
+    {
+      "name": "Stationary frames reuse one lease, roof texture and backing mesh",
+      "passed": true,
+      "detail": {
+        "loads": 1,
+        "resources": 5
+      }
+    },
+    {
+      "name": "Scrolling replaces geometry without shifting texture phase or leaking old geometry",
+      "passed": true,
+      "detail": {
+        "phaseError": 1.5894571969710114e-7,
+        "disposed": 1
+      }
+    },
+    {
+      "name": "Changing wall source replaces and disposes the roof clone",
+      "passed": true
+    },
+    {
+      "name": "Native scene clear releases new lease and all owned graphics resources",
+      "passed": true,
+      "detail": {
+        "releases": 1
+      }
+    },
+    {
+      "name": "Late backdrop load cannot attach after a scene change",
+      "passed": true
+    },
+    {
+      "name": "Brain lease uses the existing supplied asset",
+      "passed": true,
+      "detail": "assets/scenery-r59/brain.webp"
+    },
+    {
+      "name": "Refuge receives matching wall tops and brain surroundings without hospital collision flags",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

@@ -1,0 +1,2462 @@
+{
+  "schema": "r84-dynamic-event-runtime/v1",
+  "checks": [
+    {
+      "name": "Delivered adapter loads exactly64 original PNG timelines and16 procedural motifs",
+      "passed": true
+    },
+    {
+      "name": "Loaded catalog/runtime bytes are the exact supplied refined revision",
+      "passed": true
+    },
+    {
+      "name": "All64 timelines change deterministically while retaining finite local primitives",
+      "passed": true,
+      "detail": {
+        "changing": 64
+      }
+    },
+    {
+      "name": "Every flying raster remains exactly at its native projectile anchor",
+      "passed": true
+    },
+    {
+      "name": "All16 source regions replay native shots and admitted HP-loss impacts through Three",
+      "passed": true,
+      "detail": [
+        {
+          "id": "dist01",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "dist02",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "impact"
+          ],
+          "commands": 8
+        },
+        {
+          "id": "dist05",
+          "cast": true,
+          "nativeHazard": true,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery",
+            "impact"
+          ],
+          "commands": 32
+        },
+        {
+          "id": "dist06",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "impact"
+          ],
+          "commands": 8
+        },
+        {
+          "id": "ep1b03",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "ep1b04",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "ep1b05",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "ep1b08",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "ep1b09",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "u203",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "last301",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "impact"
+          ],
+          "commands": 8
+        },
+        {
+          "id": "last303",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "kair03",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        },
+        {
+          "id": "murder03",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "impact"
+          ],
+          "commands": 8
+        },
+        {
+          "id": "cult03",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "impact"
+          ],
+          "commands": 8
+        },
+        {
+          "id": "cult04",
+          "cast": false,
+          "nativeHazard": false,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "projectile",
+            "impact"
+          ],
+          "commands": 16
+        }
+      ]
+    },
+    {
+      "name": "Admitted native authored hazard completion supplies warning and recovery",
+      "passed": true,
+      "detail": [
+        {
+          "id": "dist05",
+          "cast": true,
+          "nativeHazard": true,
+          "nativeShot": true,
+          "outcome": "hit",
+          "hpLoss": 0.7770000000000437,
+          "roles": [
+            "warning",
+            "projectile",
+            "recovery",
+            "impact"
+          ],
+          "commands": 32
+        }
+      ]
+    },
+    {
+      "name": "All64 adapter components replay their original PNG plus bounded timeline accents through Three",
+      "passed": true,
+      "detail": {
+        "componentFrames": 64,
+        "scope": "Component paint API only; not64 independent gameplay admissions"
+      }
+    },
+    {
+      "name": "Compact knight parry art is admitted by an actual native parry and never generic cast flight",
+      "passed": true,
+      "detail": {
+        "result": "parried",
+        "commands": 8
+      }
+    },
+    {
+      "name": "Actual active native status draws poison",
+      "passed": true,
+      "detail": {
+        "key": "pollution",
+        "motif": "poison",
+        "commands": 25
+      }
+    },
+    {
+      "name": "Actual active native status draws bleed",
+      "passed": true,
+      "detail": {
+        "key": "bleed",
+        "motif": "bleed",
+        "commands": 22
+      }
+    },
+    {
+      "name": "Actual active native status draws shock",
+      "passed": true,
+      "detail": {
+        "key": "shock",
+        "motif": "shock",
+        "commands": 33
+      }
+    },
+    {
+      "name": "Actual active native status draws freeze",
+      "passed": true,
+      "detail": {
+        "key": "frost",
+        "motif": "freeze",
+        "commands": 38
+      }
+    },
+    {
+      "name": "Actual active native status draws burn",
+      "passed": true,
+      "detail": {
+        "key": "fire",
+        "motif": "burn",
+        "commands": 23
+      }
+    },
+    {
+      "name": "Actual active native status draws charm",
+      "passed": true,
+      "detail": {
+        "key": "charm",
+        "motif": "charm",
+        "commands": 30
+      }
+    },
+    {
+      "name": "Actual active native status draws weakness",
+      "passed": true,
+      "detail": {
+        "key": "weakness",
+        "motif": "weakness",
+        "commands": 28
+      }
+    },
+    {
+      "name": "Actual active native status draws corruption",
+      "passed": true,
+      "detail": {
+        "key": "corruption",
+        "motif": "corruption",
+        "commands": 25
+      }
+    },
+    {
+      "name": "Actual active native status draws binding",
+      "passed": true,
+      "detail": {
+        "key": "bind",
+        "motif": "binding",
+        "commands": 21
+      }
+    },
+    {
+      "name": "Actual active native status draws harvest",
+      "passed": true,
+      "detail": {
+        "key": "harvest",
+        "motif": "harvest",
+        "commands": 24
+      }
+    },
+    {
+      "name": "Actual active native status draws disease",
+      "passed": true,
+      "detail": {
+        "key": "disease",
+        "motif": "disease",
+        "commands": 35
+      }
+    },
+    {
+      "name": "Expired native statuses produce zero procedural badges",
+      "passed": true
+    },
+    {
+      "name": "Native dark curse is not falsely relabeled corruption or disease",
+      "passed": true
+    },
+    {
+      "name": "Native emitted medical shots retain originals and add both bounded tool motifs",
+      "passed": true,
+      "detail": {
+        "commands": 82
+      }
+    },
+    {
+      "name": "A stale native medical epoch draws no R84 tool",
+      "passed": true
+    },
+    {
+      "name": "Repeated capture at paused native time produces an identical animation frame",
+      "passed": true
+    },
+    {
+      "name": "Whole-effect primitive admission respects normal160 frame budget",
+      "passed": true,
+      "detail": {
+        "ownCommands": 140,
+        "used": 140,
+        "limit": 160
+      }
+    },
+    {
+      "name": "Whole-effect primitive admission respects lowFX48 frame budget",
+      "passed": true,
+      "detail": {
+        "ownCommands": 39,
+        "used": 39,
+        "limit": 48
+      }
+    },
+    {
+      "name": "Death cancels all additional procedural drawing",
+      "passed": true
+    },
+    {
+      "name": "Adapter owns no extra images, camera impulses, damage rules or travel triggers",
+      "passed": true,
+      "detail": {
+        "revision": "r84-supplied-dynamic-64-and-procedural-16",
+        "sourceTimelines": 64,
+        "proceduralMotifs": 16,
+        "alternateSVGs": 16,
+        "newFrameSheets": false,
+        "ownedImages": 0,
+        "usesNativeSimulationClock": true,
+        "maxPrimitivesPerFrame": 160,
+        "maxAmbientPrimitivesPerFrame": 48,
+        "usedPrimitives": 0,
+        "ambientPrimitives": 0,
+        "maxSingleEffect": 96,
+        "fullEffectAdmission": true,
+        "sourcePNGBytesPreserved": true,
+        "nativeDamageChanged": false,
+        "nativeTravelChanged": false,
+        "globalCameraEffects": false,
+        "browserVerified": false,
+        "GPUVerified": false,
+        "metrics": {
+          "frames": 100,
+          "draws64": 94,
+          "proceduralDraws": 20,
+          "primitives": 1367,
+          "dropped": 19,
+          "clears": 22,
+          "peakPrimitives": 140,
+          "peakAmbient": 38
+        },
+        "events": [
+          {
+            "kind": "clear",
+            "reason": "restore",
+            "at": 0,
+            "generation": 1
+          },
+          {
+            "kind": "clear",
+            "reason": "travel",
+            "at": 0,
+            "generation": 2
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 0,
+            "generation": 3
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 0,
+            "generation": 4
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_bone_filament_bolt",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:1",
+            "nativeOwner": "dist01:mb-dist01",
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 0,
+            "generation": 4
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_violet_claw_contact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:1",
+            "nativeOwner": "dist01:mb-dist01",
+            "path": "assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 0,
+            "generation": 4
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 0,
+            "generation": 5
+          },
+          {
+            "kind": "draw64",
+            "id": "dist02_horn_splash_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:2",
+            "nativeOwner": "dist02:mb-dist02",
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 0,
+            "generation": 5
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 0,
+            "generation": 6
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_seven_heat_warning",
+            "role": "warning",
+            "eventOwner": "vfx-r83:warning:200000003",
+            "nativeOwner": "dist05:mb-dist05",
+            "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 0.315,
+            "generation": 6
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_ember_whip",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:200000003",
+            "nativeOwner": "dist05:mb-dist05",
+            "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 1.32,
+            "generation": 6
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_cooling_whip_scorch",
+            "role": "recovery",
+            "eventOwner": "vfx-r83:recovery:200000003",
+            "nativeOwner": "dist05:mb-dist05",
+            "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+            "progress": 0.3125000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 6
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_split_stone_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:5",
+            "nativeOwner": "dist05:mb-dist05",
+            "path": "assets/vfx-r83/selected/batch01/dist05_split_stone_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 6
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 7
+          },
+          {
+            "kind": "draw64",
+            "id": "dist06_fireball_landing_crown",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:6",
+            "nativeOwner": "dist06:dist06-boss",
+            "path": "assets/vfx-r83/selected/batch01/dist06_fireball_landing_crown.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 7
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 8
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_projectile",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:5",
+            "nativeOwner": "ep1b03:b03-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 8
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:7",
+            "nativeOwner": "ep1b03:b03-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 8
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 9
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_projectile",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:6",
+            "nativeOwner": "ep1b04:b04-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 9
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:8",
+            "nativeOwner": "ep1b04:b04-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 9
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 10
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_projectile",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:7",
+            "nativeOwner": "ep1b05:b05-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 10
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:9",
+            "nativeOwner": "ep1b05:b05-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 10
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 11
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_projectile",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:8",
+            "nativeOwner": "ep1b08:b08-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 11
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:10",
+            "nativeOwner": "ep1b08:b08-boss",
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 11
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 12
+          },
+          {
+            "kind": "draw64",
+            "id": "02_bootloader_neural_spike",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:9",
+            "nativeOwner": "ep1b09:b09-boss",
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 12
+          },
+          {
+            "kind": "draw64",
+            "id": "03_bootloader_copy_interference",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:11",
+            "nativeOwner": "ep1b09:b09-boss",
+            "path": "assets/vfx-r83/selected/batch03/03_bootloader_copy_interference.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 12
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 13
+          },
+          {
+            "kind": "draw64",
+            "id": "06_controller_shell_contrail",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:10",
+            "nativeOwner": "u203:u203-boss",
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 13
+          },
+          {
+            "kind": "draw64",
+            "id": "07_controller_steel_impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:12",
+            "nativeOwner": "u203:u203-boss",
+            "path": "assets/vfx-r83/selected/batch03/07_controller_steel_impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 13
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 14
+          },
+          {
+            "kind": "draw64",
+            "id": "11_knight_six_contact_cuts",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:13",
+            "nativeOwner": "last301:l301-boss",
+            "path": "assets/vfx-r83/selected/batch03/11_knight_six_contact_cuts.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 14
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 15
+          },
+          {
+            "kind": "draw64",
+            "id": "14_insomnia_split_gaze_ray",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:12",
+            "nativeOwner": "last303:l303-boss",
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 15
+          },
+          {
+            "kind": "draw64",
+            "id": "15_insomnia_layered_afterimage",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:14",
+            "nativeOwner": "last303:l303-boss",
+            "path": "assets/vfx-r83/selected/batch03/15_insomnia_layered_afterimage.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 15
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 16
+          },
+          {
+            "kind": "draw64",
+            "id": "02-kair03-black-sand-needle",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:13",
+            "nativeOwner": "kair03:k103-boss",
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 16
+          },
+          {
+            "kind": "draw64",
+            "id": "03-kair03-cable-hand-shear-impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:15",
+            "nativeOwner": "kair03:k103-boss",
+            "path": "assets/vfx-r83/selected/batch04/03-kair03-cable-hand-shear-impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 16
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 17
+          },
+          {
+            "kind": "draw64",
+            "id": "07-murder03-coordinate-impact",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:16",
+            "nativeOwner": "murder03:blue-executor",
+            "path": "assets/vfx-r83/selected/batch04/07-murder03-coordinate-impact.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 17
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 18
+          },
+          {
+            "kind": "draw64",
+            "id": "11-cult03-wall-hit-deflection",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:17",
+            "nativeOwner": "cult03:c103-mid",
+            "path": "assets/vfx-r83/selected/batch04/11-cult03-wall-hit-deflection.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 18
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "14-cult04-neural-command-spear",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:16",
+            "nativeOwner": "cult04:c104-boss",
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "15-cult04-time-stopped-collision",
+            "role": "impact",
+            "eventOwner": "vfx-r83:impact:18",
+            "nativeOwner": "cult04:c104-boss",
+            "path": "assets/vfx-r83/selected/batch04/15-cult04-time-stopped-collision.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_web_lane_warning_v2",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:dist01_web_lane_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist01_web_lane_warning_v2.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_bone_filament_bolt",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:dist01_bone_filament_bolt",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist01_bone_filament_bolt.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_violet_claw_contact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:dist01_violet_claw_contact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist01_snapped_silk_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:dist01_snapped_silk_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist01_snapped_silk_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist02_horn_charge_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:dist02_horn_charge_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_charge_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist02_reed_hand_projectile",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:dist02_reed_hand_projectile",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist02_reed_hand_projectile.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist02_horn_splash_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:dist02_horn_splash_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist02_drag_groove_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:dist02_drag_groove_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist02_drag_groove_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_seven_heat_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:dist05_seven_heat_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist05_seven_heat_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_ember_whip",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:dist05_ember_whip",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist05_ember_whip.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_split_stone_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:dist05_split_stone_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist05_split_stone_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist05_cooling_whip_scorch",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:dist05_cooling_whip_scorch",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist05_cooling_whip_scorch.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist06_spatial_cleave_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:dist06_spatial_cleave_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist06_spatial_cleave_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist06_sword_space_fissure",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:dist06_sword_space_fissure",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist06_sword_space_fissure.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist06_fireball_landing_crown",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:dist06_fireball_landing_crown",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist06_fireball_landing_crown.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "dist06_molten_cleave_scar",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:dist06_molten_cleave_scar",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch01/dist06_molten_cleave_scar.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_warning_v2",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:ep1b03_leviathan_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_warning_v2.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_projectile",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:ep1b03_leviathan_projectile",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_projectile.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:ep1b03_leviathan_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b03_leviathan_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:ep1b03_leviathan_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b03_leviathan_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:ep1b04_beelzebub_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_projectile",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:ep1b04_beelzebub_projectile",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_projectile.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:ep1b04_beelzebub_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b04_beelzebub_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:ep1b04_beelzebub_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b04_beelzebub_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:ep1b05_asmodeus_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_projectile",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:ep1b05_asmodeus_projectile",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_projectile.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:ep1b05_asmodeus_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b05_asmodeus_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:ep1b05_asmodeus_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b05_asmodeus_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:ep1b08_chairman_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_projectile",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:ep1b08_chairman_projectile",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_projectile.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:ep1b08_chairman_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "ep1b08_chairman_remnant",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:ep1b08_chairman_remnant",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch02/ep1b08_chairman_remnant.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "01_bootloader_strike_lanes_v2",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:01_bootloader_strike_lanes",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/01_bootloader_strike_lanes_v2.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "02_bootloader_neural_spike",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:02_bootloader_neural_spike",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/02_bootloader_neural_spike.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "03_bootloader_copy_interference",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:03_bootloader_copy_interference",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/03_bootloader_copy_interference.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "04_bootloader_drained_circuit",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:04_bootloader_drained_circuit",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/04_bootloader_drained_circuit.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "05_controller_bombardment_grid_v3",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:05_controller_bombardment_grid",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/05_controller_bombardment_grid_v3.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "06_controller_shell_contrail",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:06_controller_shell_contrail",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/06_controller_shell_contrail.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "07_controller_steel_impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:07_controller_steel_impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/07_controller_steel_impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "08_controller_shell_furrow",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:08_controller_shell_furrow",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/08_controller_shell_furrow.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "09_knight_six_lane_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:09_knight_six_lane_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/09_knight_six_lane_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "10_knight_parry_counter",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:10_knight_parry_counter",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/10_knight_parry_counter.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "11_knight_six_contact_cuts",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:11_knight_six_contact_cuts",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/11_knight_six_contact_cuts.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "12_knight_six_ground_scars",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:12_knight_six_ground_scars",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/12_knight_six_ground_scars.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "13_insomnia_gaze_warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:13_insomnia_gaze_warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/13_insomnia_gaze_warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "14_insomnia_split_gaze_ray",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:14_insomnia_split_gaze_ray",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/14_insomnia_split_gaze_ray.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "15_insomnia_layered_afterimage",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:15_insomnia_layered_afterimage",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/15_insomnia_layered_afterimage.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "16_insomnia_withdrawn_claw_lines",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:16_insomnia_withdrawn_claw_lines",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "01-kair03-clock-hand-lane-warning-v2",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:01-kair03-clock-hand-lane-warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "02-kair03-black-sand-needle",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:02-kair03-black-sand-needle",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/02-kair03-black-sand-needle.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "03-kair03-cable-hand-shear-impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:03-kair03-cable-hand-shear-impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/03-kair03-cable-hand-shear-impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "04-kair03-exhausted-sand-tracks",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:04-kair03-exhausted-sand-tracks",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/refined-r85/04-kair03-exhausted-sand-tracks.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "05-murder03-three-stop-bars",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:05-murder03-three-stop-bars",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/05-murder03-three-stop-bars.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "06-murder03-bent-rain-shard",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:06-murder03-bent-rain-shard",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/06-murder03-bent-rain-shard.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "07-murder03-coordinate-impact",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:07-murder03-coordinate-impact",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/07-murder03-coordinate-impact.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "08-murder03-roadlight-residue",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:08-murder03-roadlight-residue",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/08-murder03-roadlight-residue.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "09-cult03-interlocking-wall-warning-v2",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:09-cult03-interlocking-wall-warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "10-cult03-golden-order-wall",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:10-cult03-golden-order-wall",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/10-cult03-golden-order-wall.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "11-cult03-wall-hit-deflection",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:11-cult03-wall-hit-deflection",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/11-cult03-wall-hit-deflection.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "12-cult03-authority-fragments",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:12-cult03-authority-fragments",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/12-cult03-authority-fragments.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "13-cult04-spatial-fold-warning",
+            "role": "warning",
+            "eventOwner": "r84-component-fixture:13-cult04-spatial-fold-warning",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/13-cult04-spatial-fold-warning.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "14-cult04-neural-command-spear",
+            "role": "projectile",
+            "eventOwner": "r84-component-fixture:14-cult04-neural-command-spear",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/14-cult04-neural-command-spear.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "15-cult04-time-stopped-collision",
+            "role": "impact",
+            "eventOwner": "r84-component-fixture:15-cult04-time-stopped-collision",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/15-cult04-time-stopped-collision.png",
+            "progress": 0.35000000000000003,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "draw64",
+            "id": "16-cult04-resurrection-stitch-arc",
+            "role": "recovery",
+            "eventOwner": "r84-component-fixture:16-cult04-resurrection-stitch-arc",
+            "nativeOwner": null,
+            "path": "assets/vfx-r83/selected/batch04/16-cult04-resurrection-stitch-arc.png",
+            "progress": 0.35,
+            "primitives": 8,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 19
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 20
+          },
+          {
+            "kind": "draw64",
+            "id": "10_knight_parry_counter",
+            "role": "projectile",
+            "eventOwner": "vfx-r83:projectile:19",
+            "nativeOwner": "last301:l301-boss",
+            "path": "assets/vfx-r83/selected/batch03/10_knight_parry_counter.png",
+            "progress": 0.3,
+            "primitives": 8,
+            "x": 20,
+            "y": 11.85,
+            "at": 2.0500000000000003,
+            "generation": 20
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-poison",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:pollution",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 25,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-bleed",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:bleed",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 22,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-shock",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:shock",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 33,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-freeze",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:frost",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 38,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-burn",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:fire",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 23,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-charm",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:charm",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 30,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-weakness",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:weakness",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 28,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-corruption",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:corruption",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 25,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-binding",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:bind",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 21,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-harvest",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:harvest",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 24,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-disease",
+            "role": "status-or-portal",
+            "eventOwner": "status:fields-r61:disease",
+            "nativeOwner": "dist01:dist01-sp1",
+            "progress": 0.12,
+            "primitives": 35,
+            "x": 20,
+            "y": 12,
+            "at": 2.0500000000000003,
+            "generation": 21
+          },
+          {
+            "kind": "clear",
+            "reason": "scene",
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-scalpel",
+            "role": "native-event",
+            "eventOwner": "tool:r84-native-tool-0:17",
+            "nativeOwner": "ep1a08:maze-chief-r1",
+            "progress": 0.2,
+            "primitives": 31,
+            "x": 20,
+            "y": 12,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-poison-syringe",
+            "role": "native-event",
+            "eventOwner": "tool:r84-native-tool-1:18",
+            "nativeOwner": "ep1a08:maze-chief-r1",
+            "progress": 0.2,
+            "primitives": 39,
+            "x": 20,
+            "y": 12,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-scalpel",
+            "role": "native-event",
+            "eventOwner": "tool:r84-native-tool-0:17",
+            "nativeOwner": "ep1a08:maze-chief-r1",
+            "progress": 0.2,
+            "primitives": 31,
+            "x": 20,
+            "y": 12,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-scalpel",
+            "role": "native-event",
+            "eventOwner": "tool:r84-native-tool-0:17",
+            "nativeOwner": "ep1a08:maze-chief-r1",
+            "progress": 0.2,
+            "primitives": 31,
+            "x": 20,
+            "y": 12,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-poison-syringe",
+            "role": "native-event",
+            "eventOwner": "tool:budget-0:19",
+            "nativeOwner": "ep1a08:a08-o1",
+            "progress": 0.25,
+            "primitives": 39,
+            "x": 18.5,
+            "y": 102.5,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-scalpel",
+            "role": "native-event",
+            "eventOwner": "tool:budget-1:20",
+            "nativeOwner": "ep1a08:a08-o1",
+            "progress": 0.25,
+            "primitives": 31,
+            "x": 18.5,
+            "y": 102.5,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-poison-syringe",
+            "role": "native-event",
+            "eventOwner": "tool:budget-2:21",
+            "nativeOwner": "ep1a08:a08-o1",
+            "progress": 0.25,
+            "primitives": 39,
+            "x": 18.5,
+            "y": 102.5,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-scalpel",
+            "role": "native-event",
+            "eventOwner": "tool:budget-3:22",
+            "nativeOwner": "ep1a08:a08-o1",
+            "progress": 0.25,
+            "primitives": 31,
+            "x": 18.5,
+            "y": 102.5,
+            "at": 22.05,
+            "generation": 22
+          },
+          {
+            "kind": "draw16",
+            "id": "procedural-poison-syringe",
+            "role": "native-event",
+            "eventOwner": "tool:budget-0:31",
+            "nativeOwner": "ep1a08:a08-o1",
+            "progress": 0.25,
+            "primitives": 39,
+            "x": 18.5,
+            "y": 102.5,
+            "at": 22.05,
+            "generation": 22
+          }
+        ],
+        "aliases": {
+          "pollution": "poison",
+          "poison": "poison",
+          "bleed": "bleed",
+          "shock": "shock",
+          "frost": "freeze",
+          "chill": "freeze",
+          "fire": "burn",
+          "burn": "burn",
+          "charm": "charm",
+          "weakness": "weakness",
+          "corruption": "corruption",
+          "bind": "binding",
+          "harvest": "harvest",
+          "disease": "disease"
+        },
+        "statusRows": []
+      }
+    },
+    {
+      "name": "Native event and Three command replay records no runtime errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "statusBindings": [
+    {
+      "key": "pollution",
+      "motif": "poison",
+      "commands": 25
+    },
+    {
+      "key": "bleed",
+      "motif": "bleed",
+      "commands": 22
+    },
+    {
+      "key": "shock",
+      "motif": "shock",
+      "commands": 33
+    },
+    {
+      "key": "frost",
+      "motif": "freeze",
+      "commands": 38
+    },
+    {
+      "key": "fire",
+      "motif": "burn",
+      "commands": 23
+    },
+    {
+      "key": "charm",
+      "motif": "charm",
+      "commands": 30
+    },
+    {
+      "key": "weakness",
+      "motif": "weakness",
+      "commands": 28
+    },
+    {
+      "key": "corruption",
+      "motif": "corruption",
+      "commands": 25
+    },
+    {
+      "key": "bind",
+      "motif": "binding",
+      "commands": 21
+    },
+    {
+      "key": "harvest",
+      "motif": "harvest",
+      "commands": 24
+    },
+    {
+      "key": "disease",
+      "motif": "disease",
+      "commands": 35
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Delivered native event APIs and draw wrappers in Node VM, exact supplied source hashes, deterministic native clocks and pinned Three CommandScene geometry. Scripted state/position assists are explicit.",
+  "nativeRegions": [
+    {
+      "id": "dist01",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "dist02",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "impact"
+      ],
+      "commands": 8
+    },
+    {
+      "id": "dist05",
+      "cast": true,
+      "nativeHazard": true,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "warning",
+        "projectile",
+        "recovery",
+        "impact"
+      ],
+      "commands": 32
+    },
+    {
+      "id": "dist06",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "impact"
+      ],
+      "commands": 8
+    },
+    {
+      "id": "ep1b03",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "ep1b04",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "ep1b05",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "ep1b08",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "ep1b09",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "u203",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "last301",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "impact"
+      ],
+      "commands": 8
+    },
+    {
+      "id": "last303",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "kair03",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    },
+    {
+      "id": "murder03",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "impact"
+      ],
+      "commands": 8
+    },
+    {
+      "id": "cult03",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "impact"
+      ],
+      "commands": 8
+    },
+    {
+      "id": "cult04",
+      "cast": false,
+      "nativeHazard": false,
+      "nativeShot": true,
+      "outcome": "hit",
+      "hpLoss": 0.7770000000000437,
+      "roles": [
+        "projectile",
+        "impact"
+      ],
+      "commands": 16
+    }
+  ],
+  "metrics": {
+    "frames": 100,
+    "draws64": 94,
+    "proceduralDraws": 20,
+    "primitives": 1367,
+    "dropped": 19,
+    "clears": 22,
+    "peakPrimitives": 140,
+    "peakAmbient": 38
+  },
+  "passed": true
+}

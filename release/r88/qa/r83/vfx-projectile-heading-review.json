@@ -1,0 +1,100 @@
+{
+  "method": "Read-only alpha>64 weighted PCA with sign from visual review, Canvas y-down angle0right. This is source-art calibration, not runtime/GPU/hitbox registration.",
+  "assets": [
+    {
+      "file": "batch01/dist01_bone_filament_bolt.png",
+      "principal_axis_heading_degrees": 147.536,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 145,
+      "eigenvalue_ratio": 69.58,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch01/dist02_reed_hand_projectile.png",
+      "principal_axis_heading_degrees": 359.82,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 32,
+      "eigenvalue_ratio": 2.739,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch02/ep1b03_leviathan_projectile.png",
+      "principal_axis_heading_degrees": 155.573,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 154,
+      "eigenvalue_ratio": 56.672,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch02/ep1b04_beelzebub_projectile.png",
+      "principal_axis_heading_degrees": 151.009,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 153,
+      "eigenvalue_ratio": 11.166,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch02/ep1b05_asmodeus_projectile.png",
+      "principal_axis_heading_degrees": 28.196,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 35,
+      "eigenvalue_ratio": 12.935,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch02/ep1b08_chairman_projectile.png",
+      "principal_axis_heading_degrees": 23.384,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 25,
+      "eigenvalue_ratio": 52.194,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch03/02_bootloader_neural_spike.png",
+      "principal_axis_heading_degrees": 155.366,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 153,
+      "eigenvalue_ratio": 89.117,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch03/06_controller_shell_contrail.png",
+      "principal_axis_heading_degrees": 150.365,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 147,
+      "eigenvalue_ratio": 46.466,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch03/14_insomnia_split_gaze_ray.png",
+      "principal_axis_heading_degrees": 18.252,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 21,
+      "eigenvalue_ratio": 24.214,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch04/02-kair03-black-sand-needle.png",
+      "principal_axis_heading_degrees": 137.28,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 131,
+      "eigenvalue_ratio": 29.993,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    },
+    {
+      "file": "batch04/14-cult04-neural-command-spear.png",
+      "principal_axis_heading_degrees": 136.625,
+      "manually_chosen_sign": true,
+      "manually_estimated_facing_degrees": 137,
+      "eigenvalue_ratio": 89.826,
+      "limitation": "PCA estimates silhouette axis, not authored front or collision direction. Broad hand needs manual facing estimate rather than axis."
+    }
+  ],
+  "do_not_use_as_directional_projectile": [
+    "batch01/dist05_ember_whip.png",
+    "batch01/dist06_sword_space_fissure.png",
+    "batch03/10_knight_parry_counter.png",
+    "batch04/06-murder03-bent-rain-shard.png",
+    "batch04/10-cult03-golden-order-wall.png"
+  ]
+}

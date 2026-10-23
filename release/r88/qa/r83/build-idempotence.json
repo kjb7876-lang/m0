@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "runtimeFiles": 2167,
+  "changedFiles": [],
+  "method": "Two sequential complete builds; all registered runtime files and manifest SHA256 compared."
+}

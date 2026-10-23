@@ -39,3 +39,13 @@ projection33/
 
 # Local restoration evidence; private checkpoints are not public site assets.
 /qa-r63/
+
+# R88 independent immutable runtime inputs and fresh verification outputs.
+!release/r88/runtime-packs/*.zip
+!release/r88/qa/
+!release/r88/qa/**
+/out/hospital-r88/
+/out/hospital-r88-static/
+/out/r88/
+/r88-current/
+/out/hospital-r88*/

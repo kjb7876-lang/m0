@@ -1,0 +1,87 @@
+{
+  "revision": "R85/V9",
+  "downloadedUpdateZIP": {
+    "bytes": 4116662,
+    "sha256": "dd6f41e7d836bdde6cc033d0a6ccabd1ac05509a1a445ae6f1fd6020973c6690"
+  },
+  "pngInventory": 318,
+  "retainedPNGs": 314,
+  "refinedPNGs": 4,
+  "dynamicRecipes": 80,
+  "activeRuntimeVersion": "1.1.0",
+  "hospitalProps": [
+    {
+      "key": "r80-142",
+      "source": "prior_assets/hospital_core/hospital-bed-isometric.png",
+      "path": "assets/world-r80/refined-r85-r80-142.webp",
+      "dimensions": [
+        512,
+        418
+      ],
+      "pivot": [
+        256.0,
+        376.2
+      ],
+      "worldScale": 1.08,
+      "groundAnchorFraction": [
+        0.5,
+        0.8999994075248431
+      ]
+    },
+    {
+      "key": "r80-143",
+      "source": "prior_assets/hospital_core/patient-monitor-isometric.png",
+      "path": "assets/world-r80/refined-r85-r80-143.webp",
+      "dimensions": [
+        265,
+        512
+      ],
+      "pivot": [
+        132.5,
+        460.8
+      ],
+      "worldScale": 1.15,
+      "groundAnchorFraction": [
+        0.5000018614969136,
+        0.9
+      ]
+    },
+    {
+      "key": "r80-149",
+      "source": "prior_assets/hospital_props/hospital_wheelchair.png",
+      "path": "assets/world-r80/refined-r85-r80-149.webp",
+      "dimensions": [
+        461,
+        512
+      ],
+      "pivot": [
+        230.5,
+        460.8
+      ],
+      "worldScale": 1.15,
+      "groundAnchorFraction": [
+        0.4999989737426035,
+        0.9
+      ]
+    }
+  ],
+  "sand": {
+    "path": "assets/vfx-r83/refined-r85/04-kair03-exhausted-sand-tracks.png",
+    "bbox": [
+      333,
+      370,
+      956,
+      926
+    ],
+    "rasterGain": 1.4735152487961476,
+    "sourceSHA256": "0817056d9b612b783a5a62943d6322930e03f3e00843a34286c02b716920d764",
+    "oldVisibleWidth": 918,
+    "newVisibleWidth": 623
+  },
+  "nativePropPlacementChanged": false,
+  "hospitalEntry": "settings-only",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "publicDeploymentChanged": false
+}

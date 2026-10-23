@@ -1,0 +1,15 @@
+const fs=require('fs'),path=require('path');const{createHarness}=require('./harness.cjs');
+(async()=>{const h=createHarness();const results={method:'CPU VM; stub DOM/Image/audio/rAF/timers and renderer-ready spy. Not browser/GPU/natural play.',boot:await h.boot()};await h.start();
+h.run(`for(let i=0;i<20&&storyScene;i++)advanceScene();if(modal&&!storyScene)closePanel(true);`);
+results.start=h.run(`({zone,started,loading,modal,story:storyScene?.key,roomId:room.id,enemies:room.enemies.length,doors:room.exploration.hospitalDoorsB3,errors:[...errors]})`);
+const saved=h.run('serializeSave()');h.context.savedFixture=JSON.parse(JSON.stringify(saved));
+results.before=h.run('room.enemies.map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,x:e.x,y:e.y,state:e.spawnState}))');
+await h.run('restoreSave(savedFixture)');results.after=h.run('room.enemies.map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,x:e.x,y:e.y,state:e.spawnState}))');
+results.normalHPExact=results.before.every(b=>results.after.some(a=>a.id===b.id&&a.hp===b.hp&&a.maxHp===b.maxHp));
+const e=h.run(`(()=>{const d=serializeSave(),ids=__STORYWORLD_EGO151__.routeIds(); const r=d.rooms['STORY:ep1a08'];return {raw:d,index:ids.indexOf('ep1a08'),room:r}})()`);
+e.raw.ego151={...e.raw.ego151,unlocked:true,pending:false,active:true,cutinConsumed:true,originMap:'cult04',originLayer:'DREAM',index:e.index,direction:1,visitSeq:'1',visitId:'ego:1',visitMap:'ep1a08',visitLayer:'STORY',cleared:false,clearCount:'0',lastClearVisit:'0',routeRoom:{...e.room,egoVisitId151:'ego:1',cleared:false}};
+h.context.egoFixture=e.raw;await h.run('restoreSave(egoFixture)');results.egoFirst=h.run('room.enemies.map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,scale:e.egoScale151,base:e.egoBaseHp151}))');
+h.context.egoRoundtrip=JSON.parse(JSON.stringify(h.run('serializeSave()')));await h.run('restoreSave(egoRoundtrip)');results.egoSecond=h.run('room.enemies.map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,scale:e.egoScale151,base:e.egoBaseHp151}))');
+results.egoHPExact=results.egoFirst.every(b=>results.egoSecond.some(a=>a.id===b.id&&a.hp===b.hp&&a.maxHp===b.maxHp));
+results.errors=h.run('[...errors]');results.consoleErrors=h.logs.filter(v=>v[0]==='error');fs.writeFileSync(path.join(__dirname,'baseline-results.json'),JSON.stringify(results,null,2));console.log(JSON.stringify({boot:results.boot,start:results.start,normalHPExact:results.normalHPExact,egoHPExact:results.egoHPExact,egoDiff:results.egoSecond.filter(a=>!results.egoFirst.some(b=>a.id===b.id&&a.hp===b.hp&&a.maxHp===b.maxHp)),errors:results.errors},null,2));
+})().catch(e=>{console.error(e);process.exitCode=1});
