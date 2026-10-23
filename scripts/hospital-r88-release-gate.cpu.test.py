@@ -84,7 +84,9 @@ class RefusalTests(unittest.TestCase):
         return datetime.fromtimestamp(value, timezone.utc).isoformat()
 
     def git(self, *args):
-        return subprocess.check_output(['git', '-c', 'user.name=R88 CPU fixture', '-c', 'user.email=fixture@invalid', *args], cwd=self.root, stderr=subprocess.DEVNULL).decode().strip()
+        # These disposable repositories are removed immediately after each test.
+        # Disable detached auto-maintenance so it cannot race TemporaryDirectory cleanup.
+        return subprocess.check_output(['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', '-c', 'user.name=R88 CPU fixture', '-c', 'user.email=fixture@invalid', *args], cwd=self.root, stderr=subprocess.DEVNULL).decode().strip()
 
     def write_manifest(self):
         (self.site / 'web-manifest-r62.json').write_text(json.dumps(self.manifest))
