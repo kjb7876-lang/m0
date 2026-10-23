@@ -25,7 +25,7 @@ const report = {
   physicalGPU: false,
   physicalDevice: false,
   gpuScope: 'GPU identity is not queried by this input smoke; physicalGPU and physicalDevice are unverified, not observed hardware classifications.',
-  scope: 'Fresh isolated browser context and native UI start. Guide walks to the first portal, stays there without auto-crossing, then a real E key and native Normal difficulty UI enter the first STORY map. Preserves readable narrative auto-Continue and early guide walking proof; no battle completion, forced HP, progress, warp or position fixtures.',
+  scope: 'Fresh isolated browser context and native UI start. Guide walks to the first portal and waits for a real E key; native Normal difficulty UI enters the first STORY ward. Verify its original route phase, deferred boss-door narrative, locked boss door and resumed guide walking. This early smoke does not clear the field, open boss-door narrative or test narrative auto-Continue; no battle completion, forced HP, progress, warp or position fixtures.',
   naturalEarly: null,
   portalInteraction: null,
   naturalBattleVerified: false,
@@ -92,7 +92,7 @@ async function freshNativeGame(page) {
   assert.equal(start.coopMode, 'off');
 
   // Some builds may have a native hub body scene; if present, advance only
-  // those body cards as a player because they are outside R77 auto scope.
+  // those body cards as a player while guidance is still OFF during setup.
   let hubContinues = 0;
   while (await page.evaluate(() => zone === 'hub' && storyScene?.part === 'body')) {
     assert.ok(hubContinues < 8, 'native hub body scene queue should be short');
@@ -236,117 +236,50 @@ async function naturalEarly() {
     automaticCrossing: false,
     noPositionOrProgressFixture: true
   };
-  await page.waitForFunction(
-    () => !!storyScene && ['pre', 'post', 'firstPost', 'awakenPre', 'prologue.pre', 'prologue.post'].includes(storyScene.part) &&
-      window.__STORYWORLD_GUIDE_R77__.inspect().scene.scheduled,
-    null,
-    {timeout: 20000}
-  );
+  // Current wards keep the original pre-boss narrative behind the boss door.
+  // First entry must preserve that native route gate, not open a scene early.
   const entered = await page.evaluate(() => {
-    const guideApi = window.__STORYWORLD_GUIDE_R77__;
-    const guideState = guideApi.inspect();
+    const guideState = window.__STORYWORLD_GUIDE_R77__.inspect();
     const campaign = window.__STORYWORLD_CAMPAIGN_R63R1__.inspect();
-    const routes = window.__STORYWORLD_ROUTES_R72__.inspect();
-    const scene = storyScene;
-    const timer = guideState.events.filter(e => e.kind === 'scene-timer-armed' && e.key === scene.key).at(-1);
-    const armed = guideState.events.find(e => e.kind === 'normal-intent-armed' && e.destination === zone);
-    const consumed = guideState.events.find(e => e.kind === 'normal-intent-consumed' && e.destination === zone);
+    const ward = window.__STORYWORLD_WORLD_COMBAT_R78__;
+    const state = ward.state(room);
+    const doorId = room.exploration?.bossDoorId;
+    const door = room.exploration?.worldR74?.doors?.find(row => row.id === doorId);
     return {
-      zone,
-      layer,
-      hero: player.hero,
-      guide,
+      zone, layer, guide, modal, hero: player.hero,
       guideVersion: guideState.revision,
-      scene: {key: scene.key, part: scene.part, textLength: String(scene.text || '').trim().length},
-      timer,
-      policy: guideApi.policy,
       campaign: {tier: campaign.tier, hpMultiplier: campaign.hpMultiplier, roomTier: room?.difficultyR63},
-      normalIntent: {armed: armed || null, consumed: consumed || null},
+      ward: {present: !!room.exploration?.worldWardR81, controlled: ward.controlled(room), state},
+      bossDoor: door ? {id: door.id, open: window.__STORYWORLD_WORLD_R74__.isOpen(room, door)} : null,
+      scene: storyScene ? {key: storyScene.key, part: storyScene.part} : null,
+      guideSceneScheduled: guideState.scene.scheduled,
+      normalIntent: guideState.intent,
       cheat777: window.__STORYWORLD_CHEAT777__?.active?.() === true,
       coopMode: window.__STORYWORLD_COOP_SIM_R62__?.mode?.() || 'off',
       position: {x: player.x, y: player.y},
-      renderer: window.__STORYWORLD_PHASE1__?.controller?.inspect?.().active || null,
-      routeAudit: routes.events?.slice?.(-8) || []
+      renderer: window.__STORYWORLD_PHASE1__?.controller?.inspect?.().active || null
     };
   });
   assert.equal(entered.zone, expected.destination);
   assert.equal(entered.layer, 'STORY');
   assert.equal(entered.guide, true);
+  assert.equal(entered.modal, false);
   assert.equal(entered.guideVersion, 'R77-GUIDE-NORMAL');
   assert.equal(entered.campaign.tier, 'normal');
   assert.equal(entered.campaign.hpMultiplier, 0.25);
+  assert.equal(entered.campaign.roomTier, 'normal');
   assert.equal(entered.cheat777, false);
   assert.equal(entered.coopMode, 'off');
-  assert.equal(entered.campaign.roomTier, 'normal');
-  assert.equal(entered.normalIntent.armed, null, 'explicit E uses the native difficulty UI, not a synthetic automatic intent');
-  assert.equal(entered.normalIntent.consumed, null);
-  assert.ok(entered.scene.textLength > 0);
-  assert.ok(entered.timer?.delayMs >= entered.policy.minimumDelayMs);
-  assert.ok(entered.timer?.delayMs <= entered.policy.maximumDelayMs);
-  assert.equal(entered.timer.delayMs, Math.max(
-    entered.policy.minimumDelayMs,
-    Math.min(entered.policy.maximumDelayMs, Math.round(entered.scene.textLength * 72))
-  ));
-  await capture(page, '03-natural-first-map-scene.png');
-
-  // No story click occurs here. Wait for the actual scheduled Continue, which
-  // itself waits for voice playback when narration is active.
-  const autoWait = Math.min(70000, entered.timer.delayMs + 22000);
-  await page.waitForFunction(
-    key => window.__STORYWORLD_GUIDE_R77__.inspect().events.some(
-      e => e.kind === 'scene-auto-continue' && e.key === key
-    ),
-    entered.scene.key,
-    {timeout: autoWait}
-  );
-  const continued = await page.evaluate(key => {
-    const state = window.__STORYWORLD_GUIDE_R77__.inspect();
-    return {
-      guideVersion: state.revision,
-      sceneKey: key,
-      autoContinue: state.events.filter(e => e.kind === 'scene-auto-continue' && e.key === key).at(-1) || null,
-      currentScene: storyScene ? {key: storyScene.key, part: storyScene.part} : null,
-      scheduledNext: state.scene.scheduled,
-      guide,
-      zone,
-      tier: window.__STORYWORLD_CAMPAIGN_R63R1__.inspect().tier,
-      narrationEnabled: settings.narration === true,
-      narrationPlaying: state.scene.narrationPlaying
-    };
-  }, entered.scene.key);
-  assert.ok(continued.autoContinue, 'R77 must advance the readable scene without a story-button click');
-  assert.equal(continued.zone, expected.destination);
-  assert.equal(continued.tier, 'normal');
-  assert.equal(continued.guide, true);
-  await page.waitForFunction(
-    destination => zone === destination && layer === 'STORY' && !loading && !storyScene &&
-      modal === false && guide === true && player.hp > 0,
-    expected.destination,
-    {timeout: 180000}
-  );
-  const queue = await page.evaluate(start => {
-    const events = window.__STORYWORLD_GUIDE_R77__.inspect().events.slice(start);
-    const timers = events.filter(e => e.kind === 'scene-timer-armed');
-    const autoContinues = events.filter(e => e.kind === 'scene-auto-continue');
-    const timerKeys = [...new Set(timers.map(e => e.key))];
-    const autoKeys = [...new Set(autoContinues.map(e => e.key))];
-    return {
-      timers,
-      autoContinues,
-      missingAutoContinue: timerKeys.filter(key => !autoKeys.includes(key)),
-      zone,
-      guide,
-      modal,
-      scene: storyScene ? {key: storyScene.key, part: storyScene.part} : null
-    };
-  }, queueEventStart);
-  assert.ok(queue.timers.length > 0, 'the first-map narrative queue must use R77 timers');
-  assert.ok(queue.autoContinues.length > 0, 'the first-map narrative queue must auto-Continue');
-  assert.deepEqual(queue.missingAutoContinue, [], 'every scheduled first-map scene must auto-Continue');
-  assert.equal(queue.zone, expected.destination);
-  assert.equal(queue.guide, true);
-  assert.equal(queue.modal, false);
-  assert.equal(queue.scene, null);
+  assert.equal(entered.ward.present, true);
+  assert.equal(entered.ward.controlled, true);
+  assert.equal(entered.ward.state.phase, 'route');
+  assert.equal(entered.ward.state.doorStoryDone, false);
+  assert.ok(entered.bossDoor, 'first ward must retain its native boss door');
+  assert.equal(entered.bossDoor.open, false, 'field-clear and boss-door interaction still own narrative admission');
+  assert.equal(entered.scene, null, 'the route phase defers pre-boss narrative to its original boss door');
+  assert.equal(entered.guideSceneScheduled, false);
+  assert.equal(entered.normalIntent, null, 'explicit E uses native difficulty selection');
+  await capture(page, '03-natural-first-map-ward.png');
 
   const fieldOrigin = await page.evaluate(() => ({zone, x: player.x, y: player.y}));
   await page.waitForFunction(
@@ -368,22 +301,16 @@ async function naturalEarly() {
   assert.equal(fieldProgress.layer, 'STORY');
   assert.equal(fieldProgress.guide, true);
   assert.ok(fieldProgress.engaged || fieldProgress.movementFromSceneEnd > 0.25);
-  await capture(page, '04-natural-scene-auto-continued.png');
+  await capture(page, '04-natural-ward-guide-walking.png');
   report.naturalEarly = {
     ok: true,
     freshUI: fresh,
     firstCanonicalDestination: expected.destination,
     guideVersion: entered.guideVersion,
     actualNormal: entered.campaign,
-    normalIntent: entered.normalIntent,
-    readableScene: {
-      ...entered.scene,
-      scheduledDelayMs: entered.timer.delayMs,
-      policy: entered.policy,
-      autoContinue: continued.autoContinue,
-      after: continued,
-      completedQueue: queue
-    },
+    nativeWardEntry: entered,
+    narrativeScope: 'Native pre-boss narrative belongs to the original locked boss-door interaction after field clear. This early route smoke leaves that gate intact and does not claim to exercise its narrative timer.',
+    narrativeAutoContinueVerified: false,
     fieldProgress,
     noForcedEnemyHP: true,
     noForcedKills: true,

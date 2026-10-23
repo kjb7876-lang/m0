@@ -208,9 +208,13 @@ def main():
     assert "page.locator('#r71DifficultyNormal').click" in guide_browser and "page.locator('#r71DifficultyConfirm').click" in guide_browser
     assert "entered.campaign.tier, 'normal'" in guide_browser and "entered.campaign.roomTier, 'normal'" in guide_browser
     cases.append({'name': 'Current guide smoke enters through real E and native Normal difficulty controls', 'passed': True})
-    assert 'scene-auto-continue' in guide_browser and 'missingAutoContinue' in guide_browser
+    assert "entered.ward.state.phase, 'route'" in guide_browser and 'entered.ward.controlled, true' in guide_browser
+    assert 'entered.ward.state.doorStoryDone, false' in guide_browser and 'entered.bossDoor.open, false' in guide_browser
+    assert 'entered.scene, null' in guide_browser and 'entered.guideSceneScheduled, false' in guide_browser
+    assert 'narrativeAutoContinueVerified: false' in guide_browser and 'missingAutoContinue' not in guide_browser
+    assert "() => !!storyScene && ['pre'" not in guide_browser, 'First ward entry must not require its deferred boss-door narrative'
     assert 'fieldProgress.engaged || fieldProgress.movementFromSceneEnd > 0.25' in guide_browser
-    cases.append({'name': 'Current guide smoke preserves readable narrative timers and early field guide progress proof', 'passed': True})
+    cases.append({'name': 'Current guide smoke preserves native ward route and boss-door narrative gates with resumed guide walking', 'passed': True})
     assert all(token not in guide_browser for token in ['completeRegion(', 'enterRegion(', 'progress.STORY[', 'player.x =', 'player.y =', 'player.hp =', 'armNextNormal('])
     cases.append({'name': 'Current guide smoke adds no progression, position, health or automatic-intent fixture', 'passed': True})
     report = {'schema': 'm0.r88-workflow-contract.cpu/v1', 'passed': True,
