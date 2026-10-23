@@ -1,0 +1,93 @@
+{
+  "schema": "r81-actual-v4-save-migration/v1",
+  "method": "Preserved V4 native newGame/777/go/serializeSave checkpoint loaded by V5 native restoreSave. CPU VM with DOM/image/audio/timer stubs and renderer readiness spy. No browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "Fixture is an actual old V4 swamp save without an R81 ledger",
+      "passed": true,
+      "detail": {
+        "zone": "dist02",
+        "actors": 37
+      }
+    },
+    {
+      "name": "V5 native runtime boots cleanly",
+      "passed": true
+    },
+    {
+      "name": "Old visited STORY swamp opens in the current hospital structure on safe floor",
+      "passed": true,
+      "detail": {
+        "zone": "dist02",
+        "cells": 8022,
+        "heroBlocked": false,
+        "restoreMs": 453.7750399999986
+      }
+    },
+    {
+      "name": "Every old native enemy keeps exact HP, maximum HP and identity",
+      "passed": true,
+      "detail": {
+        "before": 37,
+        "after": 37,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "Previously visited V4 rooms do not gain new champion encounters",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Old save progress is preserved",
+      "passed": true
+    },
+    {
+      "name": "Every surviving migrated actor fits the new floor without wall overlap",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every living migrated field actor is reachable from the gathering room with the boss door closed",
+      "passed": false,
+      "detail": [
+        {
+          "id": "dist02:dist02-g1-w2-r2",
+          "nativeId": "dist02-g1",
+          "hp": 505.885,
+          "maxHp": 505.885,
+          "spawnState": "active",
+          "x": 15,
+          "y": 11,
+          "major": false,
+          "champion": false,
+          "reachableFromField": false,
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T01:03:42.434Z",
+  "sourceHashes": {
+    "index.html": "712a921cfd13d6202bd460a62004bb9433afdc14f35c9606f64121df52df1b76",
+    "dist/phase1.js": "5438717d6a90afe60c98bb7a1f1662fb3e94b9af85d4da6dd9beace0037ec90f",
+    "world-combat-r78.js": "7981d55d93580b8924b23be557350e80b170bd25301739e59cdba92ae1c616f2"
+  },
+  "v4SourceHashes": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "world-combat-r78.js": "2747c289e67a2eb232ea99b3c918974758cd7a3ed64d6af2c2a9668f74ad2657"
+  },
+  "restoreMs": 453.7750399999986,
+  "passed": 8,
+  "failed": 1,
+  "completedAt": "2026-10-23T01:03:58.835Z"
+}

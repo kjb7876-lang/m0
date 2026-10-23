@@ -1,0 +1,1398 @@
+{
+  "schema": "r83-independent-native-frame-replay/v1",
+  "checks": [
+    {
+      "name": "Real source dimensions are available for the loaded images",
+      "passed": true
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: ep1a08/hwando",
+      "passed": true,
+      "detail": {
+        "id": "ep1a08",
+        "hero": "hwando",
+        "commands": 134,
+        "meshes": 66,
+        "imageCommands": 59,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 20,
+          "camY": 12,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 14,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: ep1a08/seoha",
+      "passed": true,
+      "detail": {
+        "id": "ep1a08",
+        "hero": "seoha",
+        "commands": 134,
+        "meshes": 66,
+        "imageCommands": 59,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 20,
+          "camY": 12,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 14,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist00/neon",
+      "passed": true,
+      "detail": {
+        "id": "dist00",
+        "hero": "neon",
+        "commands": 352,
+        "meshes": 242,
+        "imageCommands": 252,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 20,
+          "camY": 36,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native admitted boss damage creates supplied PNG effect: dist01",
+      "passed": true,
+      "detail": {
+        "before": 777,
+        "after": 770.784,
+        "result": "hit",
+        "selected": 1
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist01/michaela",
+      "passed": true,
+      "detail": {
+        "id": "dist01",
+        "hero": "michaela",
+        "commands": 232,
+        "meshes": 142,
+        "imageCommands": 47,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 20,
+          "camY": 20,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [
+          {
+            "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+            "source": [
+              0,
+              0,
+              1536,
+              1024
+            ],
+            "image": [
+              1536,
+              1024
+            ]
+          }
+        ],
+        "doorPlanes": 9,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Full native frame includes the supplied PNG at its real source dimensions: dist01",
+      "passed": true,
+      "detail": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+          "source": [
+            0,
+            0,
+            1536,
+            1024
+          ],
+          "image": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Native admitted boss damage creates supplied PNG effect: dist02",
+      "passed": true,
+      "detail": {
+        "before": 777,
+        "after": 770.784,
+        "result": "hit",
+        "selected": 1
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist02/lauren",
+      "passed": true,
+      "detail": {
+        "id": "dist02",
+        "hero": "lauren",
+        "commands": 210,
+        "meshes": 85,
+        "imageCommands": 49,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 29,
+          "camY": 90,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [
+          {
+            "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+            "source": [
+              0,
+              0,
+              1402,
+              1122
+            ],
+            "image": [
+              1402,
+              1122
+            ]
+          }
+        ],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Full native frame includes the supplied PNG at its real source dimensions: dist02",
+      "passed": true,
+      "detail": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+          "source": [
+            0,
+            0,
+            1402,
+            1122
+          ],
+          "image": [
+            1402,
+            1122
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: hando02/hunter",
+      "passed": true,
+      "detail": {
+        "id": "hando02",
+        "hero": "hunter",
+        "commands": 199,
+        "meshes": 147,
+        "imageCommands": 137,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 17,
+          "camY": 105,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over",
+          "screen"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: cult05/slayer",
+      "passed": true,
+      "detail": {
+        "id": "cult05",
+        "hero": "slayer",
+        "commands": 302,
+        "meshes": 139,
+        "imageCommands": 159,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 5,
+          "camY": 6,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 10,
+        "operations": [
+          "source-over",
+          "screen"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: hub/gunner",
+      "passed": true,
+      "detail": {
+        "id": "hub",
+        "hero": "gunner",
+        "commands": 261,
+        "meshes": 247,
+        "imageCommands": 140,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 0.8133333333333332,
+          "camX": 15,
+          "camY": 19,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "doorPlanes": 0,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Captured regional doors remain on their physical aperture planes with body depth testing",
+      "passed": true,
+      "detail": {
+        "meshes": 61,
+        "invalid": []
+      }
+    },
+    {
+      "name": "Cross-map command scene clears all owned meshes and textures",
+      "passed": true,
+      "detail": {
+        "before": 247,
+        "after": 0
+      }
+    },
+    {
+      "name": "No native runtime errors were recorded during complete frame capture",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "frames": [
+    {
+      "id": "ep1a08",
+      "hero": "hwando",
+      "commands": 134,
+      "meshes": 66,
+      "imageCommands": 59,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 20,
+        "camY": 12,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 14,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "ep1a08",
+      "hero": "seoha",
+      "commands": 134,
+      "meshes": 66,
+      "imageCommands": 59,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 20,
+        "camY": 12,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 14,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist00",
+      "hero": "neon",
+      "commands": 352,
+      "meshes": 242,
+      "imageCommands": 252,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 20,
+        "camY": 36,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist01",
+      "hero": "michaela",
+      "commands": 232,
+      "meshes": 142,
+      "imageCommands": 47,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 20,
+        "camY": 20,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+          "source": [
+            0,
+            0,
+            1536,
+            1024
+          ],
+          "image": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "doorPlanes": 9,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist02",
+      "hero": "lauren",
+      "commands": 210,
+      "meshes": 85,
+      "imageCommands": 49,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 29,
+        "camY": 90,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+          "source": [
+            0,
+            0,
+            1402,
+            1122
+          ],
+          "image": [
+            1402,
+            1122
+          ]
+        }
+      ],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "hando02",
+      "hero": "hunter",
+      "commands": 199,
+      "meshes": 147,
+      "imageCommands": 137,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 17,
+        "camY": 105,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over",
+        "screen"
+      ]
+    },
+    {
+      "id": "cult05",
+      "hero": "slayer",
+      "commands": 302,
+      "meshes": 139,
+      "imageCommands": 159,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 5,
+        "camY": 6,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 10,
+      "operations": [
+        "source-over",
+        "screen"
+      ]
+    },
+    {
+      "id": "hub",
+      "hero": "gunner",
+      "commands": 261,
+      "meshes": 247,
+      "imageCommands": 140,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 0.8133333333333332,
+        "camX": 15,
+        "camY": 19,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "doorPlanes": 0,
+      "operations": [
+        "source-over"
+      ]
+    }
+  ],
+  "method": "Actual native captureVisual -> pinned Three CommandScene.render, real source image dimensions and CPU geometry/material ownership. Image crop pixels, browser, WebGL/GPU, audio and natural play are unverified.",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "doorPlanes": [
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": -3.973642896208196e-8,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256827,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-left",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-left",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-right",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-right",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-left",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-left",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-right",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-right",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": -3.973642896208196e-8,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256827,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-left",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-left",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-right",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-2",
+      "part": "closed-right",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-left",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-left",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-right",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "ep1a08",
+      "door": "door-0",
+      "part": "closed-right",
+      "vertices": 12,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-2",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256827,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.6783675152597815e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1.0000069936116454,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 9.536743172944276e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0.0000021362304636340923,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": -3.973642896208196e-8,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256827,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 2.2888183615066282e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.6783675152597815e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 2.2888183437430598e-7,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,18 @@
+{
+  "method": "CPU VM comparison with preserved V4. Scoped EGO factory build plus DREAM layout equality; not browser/GPU.",
+  "checks": [
+    {
+      "name": "scoped EGO retains V4 geometry",
+      "passed": true
+    },
+    {
+      "name": "scoped EGO retains V4 canonical actor positions and stats",
+      "passed": true,
+      "mismatch": []
+    },
+    {
+      "name": "DREAM retains V4 geometry",
+      "passed": true
+    }
+  ]
+}

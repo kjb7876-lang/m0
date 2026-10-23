@@ -1,0 +1,349 @@
+{
+  "method": "Native hospital restore, difficulty choice/reapplication, actor scaling and save round trips in Node VM. No browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "easy champions preserve 6x HP/attack, 2x size and 37% damaged HP",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1053.9672,
+          "maxHp": 2848.56,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 1053.9672,
+          "maxHp": 2848.56,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 1053.9672,
+          "maxHp": 2848.56,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 1053.9672,
+          "maxHp": 2848.56,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "normal champions preserve 6x HP/attack, 2x size and 37% damaged HP",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "hard champions preserve 6x HP/attack, 2x size and 37% damaged HP",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 2107.9344,
+          "maxHp": 5697.12,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 2107.9344,
+          "maxHp": 5697.12,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 2107.9344,
+          "maxHp": 5697.12,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 2107.9344,
+          "maxHp": 5697.12,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 5.999999999999999,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "damaged champions exact after save/restore 1",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "damaged champions exact after save/restore 2",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "damaged champions exact after save/restore 3",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o1",
+          "attackSame": true,
+          "name": "중간보스 · 백의 구속자"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-s1",
+          "attackSame": true,
+          "name": "중간보스 · 복도 비명잔영"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-c1",
+          "attackSame": true,
+          "name": "중간보스 · 격리실 감염 의료인"
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 1317.459,
+          "maxHp": 3560.7,
+          "fraction": 0.37000000000000005,
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageScaled": true,
+          "kind": "a08-o2",
+          "attackSame": true,
+          "name": "중간보스 · 안정화 집행체"
+        }
+      ]
+    },
+    {
+      "name": "defeated field champion does not respawn",
+      "passed": true
+    },
+    {
+      "name": "V8 save namespace is isolated from V2 through V7 test stores",
+      "passed": true
+    },
+    {
+      "name": "all 28 field survivors rally without overlapping walls or each other",
+      "passed": true
+    },
+    {
+      "name": "native errors empty",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "completedAt": "2026-10-23T07:38:44.534Z"
+}

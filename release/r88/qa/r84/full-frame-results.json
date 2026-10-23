@@ -1,0 +1,1549 @@
+{
+  "schema": "r84-independent-dynamic-native-frame-replay/v1",
+  "checks": [
+    {
+      "name": "Actual delivered runtime includes the supplied dynamic80 sampler and R84 adapter",
+      "passed": true
+    },
+    {
+      "name": "Real source dimensions are available for the loaded images",
+      "passed": true
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: ep1a08/hwando",
+      "passed": true,
+      "detail": {
+        "id": "ep1a08",
+        "hero": "hwando",
+        "commands": 125,
+        "meshes": 53,
+        "imageCommands": 54,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 20,
+          "camY": 12,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 0,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: ep1a08/seoha",
+      "passed": true,
+      "detail": {
+        "id": "ep1a08",
+        "hero": "seoha",
+        "commands": 125,
+        "meshes": 53,
+        "imageCommands": 54,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 20,
+          "camY": 12,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 0,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist00/neon",
+      "passed": true,
+      "detail": {
+        "id": "dist00",
+        "hero": "neon",
+        "commands": 205,
+        "meshes": 128,
+        "imageCommands": 144,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 20,
+          "camY": 36,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 4,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Native admitted boss damage creates supplied PNG effect: dist01",
+      "passed": true,
+      "detail": {
+        "before": 777,
+        "after": 770.784,
+        "result": "hit",
+        "selected": 1
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist01/michaela",
+      "passed": true,
+      "detail": {
+        "id": "dist01",
+        "hero": "michaela",
+        "commands": 205,
+        "meshes": 124,
+        "imageCommands": 45,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 20,
+          "camY": 20,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [
+          {
+            "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+            "source": [
+              0,
+              0,
+              1536,
+              1024
+            ],
+            "image": [
+              1536,
+              1024
+            ]
+          }
+        ],
+        "dynamic64": [
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist01_violet_claw_contact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          }
+        ],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Full native frame includes the supplied PNG at its real source dimensions: dist01",
+      "passed": true,
+      "detail": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+          "source": [
+            0,
+            0,
+            1536,
+            1024
+          ],
+          "image": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actual native64 PNG uses changing timeline accents and freezes with the simulation: dist01",
+      "passed": true,
+      "detail": {
+        "firstAccents": 7,
+        "nextAccents": 7,
+        "invalid": 0
+      }
+    },
+    {
+      "name": "Native admitted boss damage creates supplied PNG effect: dist02",
+      "passed": true,
+      "detail": {
+        "before": 777,
+        "after": 770.784,
+        "result": "hit",
+        "selected": 1
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: dist02/lauren",
+      "passed": true,
+      "detail": {
+        "id": "dist02",
+        "hero": "lauren",
+        "commands": 182,
+        "meshes": 74,
+        "imageCommands": 45,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 29,
+          "camY": 90,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [
+          {
+            "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+            "source": [
+              0,
+              0,
+              1402,
+              1122
+            ],
+            "image": [
+              1402,
+              1122
+            ]
+          }
+        ],
+        "dynamic64": [
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "stroke"
+          },
+          {
+            "id": "dist02_horn_splash_impact",
+            "progress": 0.37500000000000006,
+            "kind": "fill"
+          }
+        ],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Full native frame includes the supplied PNG at its real source dimensions: dist02",
+      "passed": true,
+      "detail": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+          "source": [
+            0,
+            0,
+            1402,
+            1122
+          ],
+          "image": [
+            1402,
+            1122
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actual native64 PNG uses changing timeline accents and freezes with the simulation: dist02",
+      "passed": true,
+      "detail": {
+        "firstAccents": 7,
+        "nextAccents": 7,
+        "invalid": 0
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: hando02/hunter",
+      "passed": true,
+      "detail": {
+        "id": "hando02",
+        "hero": "hunter",
+        "commands": 133,
+        "meshes": 95,
+        "imageCommands": 84,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 17,
+          "camY": 105,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 5,
+        "operations": [
+          "source-over",
+          "screen"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: cult05/slayer",
+      "passed": true,
+      "detail": {
+        "id": "cult05",
+        "hero": "slayer",
+        "commands": 209,
+        "meshes": 83,
+        "imageCommands": 98,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 5,
+          "camY": 6,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 6,
+        "operations": [
+          "source-over",
+          "screen"
+        ]
+      }
+    },
+    {
+      "name": "Native full frame converts without invalid geometry: hub/gunner",
+      "passed": true,
+      "detail": {
+        "id": "hub",
+        "hero": "gunner",
+        "commands": 206,
+        "meshes": 159,
+        "imageCommands": 121,
+        "outsideSource": 0,
+        "nonfinite": 0,
+        "projection": {
+          "width": 1280,
+          "height": 800,
+          "zoom": 1.22,
+          "camX": 15,
+          "camY": 19,
+          "tile": 34
+        },
+        "screenShake": {
+          "x": 0,
+          "y": 0.3
+        },
+        "selectedPNGs": [],
+        "dynamic64": [],
+        "doorPlanes": 0,
+        "operations": [
+          "source-over"
+        ]
+      }
+    },
+    {
+      "name": "Captured regional doors remain on their physical aperture planes with body depth testing",
+      "passed": true,
+      "detail": {
+        "meshes": 24,
+        "invalid": []
+      }
+    },
+    {
+      "name": "Actual native gold dance admits a trail before dynamic decoration",
+      "passed": true,
+      "detail": {
+        "ok": true,
+        "effects": 13
+      }
+    },
+    {
+      "name": "Actual native silver dance admits a trail before dynamic decoration",
+      "passed": true,
+      "detail": {
+        "ok": true,
+        "effects": 12
+      }
+    },
+    {
+      "name": "Native medical projectile admission retains its scalpel frame",
+      "passed": true,
+      "detail": {
+        "admitted": true,
+        "id": 1,
+        "frame": "scalpel"
+      }
+    },
+    {
+      "name": "Native medical projectile admission retains its syringe frame",
+      "passed": true,
+      "detail": {
+        "admitted": true,
+        "id": 2,
+        "frame": "syringe"
+      }
+    },
+    {
+      "name": "All16 new recipes attach to native admitted cast/status/projectile/portal full frames",
+      "passed": true,
+      "detail": [
+        {
+          "id": "procedural-gold-thread",
+          "label": "native gold dance",
+          "commands": [
+            134,
+            134
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-silver-thread",
+          "label": "native silver dance",
+          "commands": [
+            134,
+            134
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-poison",
+          "label": "native active status pollution",
+          "commands": [
+            26,
+            27
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-bleed",
+          "label": "native active status bleed",
+          "commands": [
+            26,
+            26
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-shock",
+          "label": "native active status shock",
+          "commands": [
+            38,
+            38
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-freeze",
+          "label": "native active status frost",
+          "commands": [
+            40,
+            41
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-burn",
+          "label": "native active status fire",
+          "commands": [
+            24,
+            25
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-charm",
+          "label": "native active status charm",
+          "commands": [
+            30,
+            29
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-weakness",
+          "label": "native active status weakness",
+          "commands": [
+            30,
+            31
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-corruption",
+          "label": "native active status corruption",
+          "commands": [
+            31,
+            32
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-binding",
+          "label": "native active status bind",
+          "commands": [
+            23,
+            23
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-harvest",
+          "label": "native active status harvest",
+          "commands": [
+            28,
+            28
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-disease",
+          "label": "native active status disease",
+          "commands": [
+            37,
+            38
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-scalpel",
+          "label": "native medical scalpel",
+          "commands": [
+            13,
+            17
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-poison-syringe",
+          "label": "native medical syringe",
+          "commands": [
+            21,
+            25
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        },
+        {
+          "id": "procedural-portal",
+          "label": "native open refuge portal",
+          "commands": [
+            30,
+            31
+          ],
+          "temporal": true,
+          "pausedStable": true,
+          "drawOnly": true,
+          "nonfinite": 0
+        }
+      ]
+    },
+    {
+      "name": "Every new native-bound recipe changes over time and remains deterministic while paused",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every dynamic native full-frame replay remains finite and leaves simulation values unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Cancelled medical epochs cannot create a new procedural tool silhouette",
+      "passed": true,
+      "detail": [
+        {
+          "frame": "scalpel",
+          "commands": 0
+        },
+        {
+          "frame": "syringe",
+          "commands": 0
+        }
+      ]
+    },
+    {
+      "name": "Cross-map command scene clears all owned meshes and textures",
+      "passed": true,
+      "detail": {
+        "before": 149,
+        "after": 0
+      }
+    },
+    {
+      "name": "No native runtime errors were recorded during complete frame capture",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "frames": [
+    {
+      "id": "ep1a08",
+      "hero": "hwando",
+      "commands": 125,
+      "meshes": 53,
+      "imageCommands": 54,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 20,
+        "camY": 12,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 0,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "ep1a08",
+      "hero": "seoha",
+      "commands": 125,
+      "meshes": 53,
+      "imageCommands": 54,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 20,
+        "camY": 12,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 0,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist00",
+      "hero": "neon",
+      "commands": 205,
+      "meshes": 128,
+      "imageCommands": 144,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 20,
+        "camY": 36,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 4,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist01",
+      "hero": "michaela",
+      "commands": 205,
+      "meshes": 124,
+      "imageCommands": 45,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 20,
+        "camY": 20,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist01_violet_claw_contact.png",
+          "source": [
+            0,
+            0,
+            1536,
+            1024
+          ],
+          "image": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "dynamic64": [
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist01_violet_claw_contact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        }
+      ],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "dist02",
+      "hero": "lauren",
+      "commands": 182,
+      "meshes": 74,
+      "imageCommands": 45,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 29,
+        "camY": 90,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [
+        {
+          "path": "./assets/vfx-r83/selected/batch01/dist02_horn_splash_impact.png",
+          "source": [
+            0,
+            0,
+            1402,
+            1122
+          ],
+          "image": [
+            1402,
+            1122
+          ]
+        }
+      ],
+      "dynamic64": [
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "stroke"
+        },
+        {
+          "id": "dist02_horn_splash_impact",
+          "progress": 0.37500000000000006,
+          "kind": "fill"
+        }
+      ],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over"
+      ]
+    },
+    {
+      "id": "hando02",
+      "hero": "hunter",
+      "commands": 133,
+      "meshes": 95,
+      "imageCommands": 84,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 17,
+        "camY": 105,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 5,
+      "operations": [
+        "source-over",
+        "screen"
+      ]
+    },
+    {
+      "id": "cult05",
+      "hero": "slayer",
+      "commands": 209,
+      "meshes": 83,
+      "imageCommands": 98,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 5,
+        "camY": 6,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 6,
+      "operations": [
+        "source-over",
+        "screen"
+      ]
+    },
+    {
+      "id": "hub",
+      "hero": "gunner",
+      "commands": 206,
+      "meshes": 159,
+      "imageCommands": 121,
+      "outsideSource": 0,
+      "nonfinite": 0,
+      "projection": {
+        "width": 1280,
+        "height": 800,
+        "zoom": 1.22,
+        "camX": 15,
+        "camY": 19,
+        "tile": 34
+      },
+      "screenShake": {
+        "x": 0,
+        "y": 0.3
+      },
+      "selectedPNGs": [],
+      "dynamic64": [],
+      "doorPlanes": 0,
+      "operations": [
+        "source-over"
+      ]
+    }
+  ],
+  "method": "Actual shipped R84 native-event captureVisual -> pinned Three CommandScene.render, real source image dimensions and CPU geometry/material ownership. Scripted native events, positioning and status setup; image crop pixels, browser, WebGL/GPU, audio and natural play are unverified.",
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "doorPlanes": [
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist00",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.1189116768398543e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist01",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.1189116768398543e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 9.536743246959073e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1.0000069936116454,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "dist02",
+      "door": "door-1",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.1189116768398543e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 9.536743172944276e-7,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 0.9999990463256753,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "hando02",
+      "door": "door-0",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": -1.1189116768398543e-15,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "left-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": -3.973642896208196e-8,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "right-jamb",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 0.9999990463256827,
+      "minHeight": -1.1189116768398543e-15,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "header",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 2.4600000381469727,
+      "maxHeight": 2.700000047683716,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 6,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    },
+    {
+      "region": "cult05",
+      "door": "door-2",
+      "part": "closed-leaf",
+      "vertices": 18,
+      "outside": 0,
+      "maxPlaneError": 0,
+      "minU": 0,
+      "maxU": 1,
+      "minHeight": 0,
+      "maxHeight": 2.4600000381469727,
+      "depthTest": true
+    }
+  ],
+  "dynamicBindings": [
+    {
+      "id": "procedural-gold-thread",
+      "label": "native gold dance",
+      "commands": [
+        134,
+        134
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-silver-thread",
+      "label": "native silver dance",
+      "commands": [
+        134,
+        134
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-poison",
+      "label": "native active status pollution",
+      "commands": [
+        26,
+        27
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-bleed",
+      "label": "native active status bleed",
+      "commands": [
+        26,
+        26
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-shock",
+      "label": "native active status shock",
+      "commands": [
+        38,
+        38
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-freeze",
+      "label": "native active status frost",
+      "commands": [
+        40,
+        41
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-burn",
+      "label": "native active status fire",
+      "commands": [
+        24,
+        25
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-charm",
+      "label": "native active status charm",
+      "commands": [
+        30,
+        29
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-weakness",
+      "label": "native active status weakness",
+      "commands": [
+        30,
+        31
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-corruption",
+      "label": "native active status corruption",
+      "commands": [
+        31,
+        32
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-binding",
+      "label": "native active status bind",
+      "commands": [
+        23,
+        23
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-harvest",
+      "label": "native active status harvest",
+      "commands": [
+        28,
+        28
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-disease",
+      "label": "native active status disease",
+      "commands": [
+        37,
+        38
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-scalpel",
+      "label": "native medical scalpel",
+      "commands": [
+        13,
+        17
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-poison-syringe",
+      "label": "native medical syringe",
+      "commands": [
+        21,
+        25
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    },
+    {
+      "id": "procedural-portal",
+      "label": "native open refuge portal",
+      "commands": [
+        30,
+        31
+      ],
+      "temporal": true,
+      "pausedStable": true,
+      "drawOnly": true,
+      "nonfinite": 0
+    }
+  ],
+  "passed": true
+}

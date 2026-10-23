@@ -1,0 +1,474 @@
+{
+  "schema": "r83-explicit-portals/v1",
+  "method": "Actual native keydown handlers, guideStep, tick, travel admission and story/door controllers in Node VM. Position/progress/HP fixtures and forced HP-zero native killEnemy calls are assisted. No browser/GPU or natural play.",
+  "integrationFixture": false,
+  "checks": [
+    {
+      "name": "Exactly one automatic proximity loop is removed and the patch is idempotent",
+      "passed": true
+    },
+    {
+      "name": "Native refuge starts with a reachable next portal",
+      "passed": true,
+      "detail": {
+        "zone": "hub",
+        "started": true,
+        "loading": false,
+        "modal": false,
+        "points": {
+          "next": {
+            "x": 30,
+            "y": 22
+          },
+          "previous": {
+            "x": 15,
+            "y": 19
+          },
+          "tag": "15:19:false:false:0:",
+          "authored": {
+            "x": 30,
+            "y": 22
+          }
+        }
+      }
+    },
+    {
+      "name": "Standing on the refuge portal for 60 seconds never travels or opens difficulty",
+      "passed": true
+    },
+    {
+      "name": "A real E key event crosses forward through native difficulty and story admission",
+      "passed": true
+    },
+    {
+      "name": "Standing on the previous portal never bounces back to the refuge",
+      "passed": true
+    },
+    {
+      "name": "Held E repeat events do not activate another portal after arrival",
+      "passed": true
+    },
+    {
+      "name": "Releasing and pressing E crosses back through the original previous route",
+      "passed": true
+    },
+    {
+      "name": "Guide still plans an automatic walking path toward the next portal",
+      "passed": true,
+      "detail": {
+        "guide": true,
+        "zone": "hub",
+        "route": 1,
+        "goal": {
+          "kind": "portal",
+          "id": "portal:e",
+          "direction": "e",
+          "point": {
+            "x": 30,
+            "y": 22
+          },
+          "reach": 0.75,
+          "label": "다음 서사 맵으로"
+        }
+      }
+    },
+    {
+      "name": "Guide executes automatic walking along its collision-safe path",
+      "passed": true,
+      "detail": {
+        "moved": 6.471684999999955,
+        "guide": true,
+        "safe": true
+      }
+    },
+    {
+      "name": "Guide stops at the portal, stays enabled, and requires E without arming travel",
+      "passed": true,
+      "detail": {
+        "zone": "hub",
+        "guide": true,
+        "route": 0,
+        "command": null,
+        "policy": {
+          "requiresInteraction": true,
+          "guideWalks": true,
+          "guideCrossesPortals": false,
+          "waitingForKey": true,
+          "events": [
+            {
+              "kind": "guide-waits-for-interaction",
+              "zone": "hub",
+              "layer": "STORY",
+              "direction": "e"
+            }
+          ]
+        },
+        "intent": null,
+        "hint": "포탈 · E를 눌러 이동"
+      }
+    },
+    {
+      "name": "E crosses the portal while preserving the enabled guide state",
+      "passed": true
+    },
+    {
+      "name": "Cave, swamp and completed hospital portals stay idle until E then cross safely",
+      "passed": true,
+      "detail": [
+        {
+          "from": "dist01",
+          "idle": true,
+          "to": "dist02",
+          "changed": true,
+          "safe": true,
+          "beforeKey": {
+            "zone": "dist01",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 0,
+            "canTravel": true,
+            "cleared": true,
+            "phase": "done",
+            "portals": [
+              {
+                "direction": "w",
+                "role": "previous",
+                "destination": "dist00",
+                "point": {
+                  "x": 43,
+                  "y": 109
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              },
+              {
+                "direction": "e",
+                "role": "next",
+                "destination": "dist02",
+                "point": {
+                  "x": 5,
+                  "y": 3.5
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              }
+            ],
+            "hint": "워프 ↗ 14m · 늪지대의 뿔악마 / 길잡이로 이동 가능"
+          },
+          "afterKey": {
+            "zone": "dist02",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 1.2,
+            "toast": ""
+          }
+        },
+        {
+          "from": "dist02",
+          "idle": true,
+          "to": "dist03",
+          "changed": true,
+          "safe": true,
+          "beforeKey": {
+            "zone": "dist02",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 0,
+            "canTravel": true,
+            "cleared": true,
+            "phase": "done",
+            "portals": [
+              {
+                "direction": "w",
+                "role": "previous",
+                "destination": "dist01",
+                "point": {
+                  "x": 43,
+                  "y": 109
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              },
+              {
+                "direction": "s",
+                "role": "next",
+                "destination": "dist03",
+                "point": {
+                  "x": 5,
+                  "y": 3.5
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              }
+            ],
+            "hint": "워프 ↗ 10m · 무너진성 / 길잡이로 이동 가능"
+          },
+          "afterKey": {
+            "zone": "dist03",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 1.2,
+            "toast": ""
+          }
+        },
+        {
+          "from": "ep1a08",
+          "idle": true,
+          "to": "ep1a09",
+          "changed": true,
+          "safe": true,
+          "beforeKey": {
+            "zone": "ep1a08",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 0,
+            "canTravel": true,
+            "cleared": true,
+            "portals": [
+              {
+                "direction": "n",
+                "role": "previous",
+                "destination": "dist06",
+                "point": {
+                  "x": 43,
+                  "y": 109
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              },
+              {
+                "direction": "e",
+                "role": "next",
+                "destination": "ep1a09",
+                "point": {
+                  "x": 5.221291866028709,
+                  "y": 5.221291866028709
+                },
+                "visible": true,
+                "open": true,
+                "reason": "열림"
+              }
+            ],
+            "hint": "다음 포탈 3m · 이전 포탈은 이 맵 시작점"
+          },
+          "afterKey": {
+            "zone": "ep1a09",
+            "modal": false,
+            "loading": false,
+            "transitionCD": 1.2,
+            "toast": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "E at a locked hospital boss door preserves the field-clear requirement",
+      "passed": true,
+      "detail": {
+        "zone": "ep1a08",
+        "phase": "route",
+        "open": false,
+        "next": null,
+        "scene": false
+      }
+    },
+    {
+      "name": "After native field elimination E opens the canonical boss-door story, not a portal",
+      "passed": true,
+      "detail": {
+        "zone": "ep1a08",
+        "phase": "doorStory",
+        "scene": {
+          "key": "STORY:ep1a08:pre:r75",
+          "part": "pre"
+        },
+        "next": null
+      }
+    },
+    {
+      "name": "Finishing the original story opens the native boss door and preserves the boss encounter gate",
+      "passed": true,
+      "detail": {
+        "zone": "ep1a08",
+        "phase": "boss",
+        "open": true,
+        "next": null
+      }
+    },
+    {
+      "name": "Portal navigation adds no serialized progression fields or modifies older test saves",
+      "passed": true,
+      "detail": {
+        "activePrefix": "storyworld.hospital-three-pc.maze.v11:"
+      }
+    },
+    {
+      "name": "Native error ledger remains clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "details": {
+    "maps": [
+      {
+        "from": "dist01",
+        "idle": true,
+        "to": "dist02",
+        "changed": true,
+        "safe": true,
+        "beforeKey": {
+          "zone": "dist01",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 0,
+          "canTravel": true,
+          "cleared": true,
+          "phase": "done",
+          "portals": [
+            {
+              "direction": "w",
+              "role": "previous",
+              "destination": "dist00",
+              "point": {
+                "x": 43,
+                "y": 109
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            },
+            {
+              "direction": "e",
+              "role": "next",
+              "destination": "dist02",
+              "point": {
+                "x": 5,
+                "y": 3.5
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            }
+          ],
+          "hint": "워프 ↗ 14m · 늪지대의 뿔악마 / 길잡이로 이동 가능"
+        },
+        "afterKey": {
+          "zone": "dist02",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 1.2,
+          "toast": ""
+        }
+      },
+      {
+        "from": "dist02",
+        "idle": true,
+        "to": "dist03",
+        "changed": true,
+        "safe": true,
+        "beforeKey": {
+          "zone": "dist02",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 0,
+          "canTravel": true,
+          "cleared": true,
+          "phase": "done",
+          "portals": [
+            {
+              "direction": "w",
+              "role": "previous",
+              "destination": "dist01",
+              "point": {
+                "x": 43,
+                "y": 109
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            },
+            {
+              "direction": "s",
+              "role": "next",
+              "destination": "dist03",
+              "point": {
+                "x": 5,
+                "y": 3.5
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            }
+          ],
+          "hint": "워프 ↗ 10m · 무너진성 / 길잡이로 이동 가능"
+        },
+        "afterKey": {
+          "zone": "dist03",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 1.2,
+          "toast": ""
+        }
+      },
+      {
+        "from": "ep1a08",
+        "idle": true,
+        "to": "ep1a09",
+        "changed": true,
+        "safe": true,
+        "beforeKey": {
+          "zone": "ep1a08",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 0,
+          "canTravel": true,
+          "cleared": true,
+          "portals": [
+            {
+              "direction": "n",
+              "role": "previous",
+              "destination": "dist06",
+              "point": {
+                "x": 43,
+                "y": 109
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            },
+            {
+              "direction": "e",
+              "role": "next",
+              "destination": "ep1a09",
+              "point": {
+                "x": 5.221291866028709,
+                "y": 5.221291866028709
+              },
+              "visible": true,
+              "open": true,
+              "reason": "열림"
+            }
+          ],
+          "hint": "다음 포탈 3m · 이전 포탈은 이 맵 시작점"
+        },
+        "afterKey": {
+          "zone": "ep1a09",
+          "modal": false,
+          "loading": false,
+          "transitionCD": 1.2,
+          "toast": ""
+        }
+      }
+    ]
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "passed": 17,
+  "failed": 0
+}

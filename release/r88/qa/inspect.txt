@@ -1,0 +1,392 @@
+[
+  [
+    '__STORYWORLD_EGO151__',
+    [
+      'source',
+      'art',
+      'crops',
+      'cropPresentation154',
+      'frame154',
+      'feet',
+      'narrative',
+      'traits',
+      'strongestTraitRank',
+      'routeIds',
+      'normalize',
+      'multiplier',
+      'advanceRoute',
+      'inspect',
+      'rules'
+    ]
+  ],
+  [ '__STORYWORLD_HOSPITAL13__', [ 'focus', 'inspect' ] ],
+  [
+    '__STORYWORLD_REGION_ROUTES__',
+    [
+      'source',
+      'principal',
+      'status',
+      'nextEgo',
+      'priorReady',
+      'progressDirection',
+      'activeDirection',
+      'visibleDirections',
+      'revisitAvailable',
+      'selectRevisit',
+      'cancelRevisit',
+      'sourcePixelToWorld'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_R5__',
+    [ 'version', 'startIndex', 'selected', 'clampCamera', 'inspect' ]
+  ],
+  [ '__STORYWORLD_HOSPITAL_ALIGNMENT12__', [ 'inspect' ] ],
+  [
+    '__STORYWORLD_HOSPITAL12__',
+    [ 'concealed', 'stains', 'protectedPolygons', 'inspect' ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_ZONES13__',
+    [ 'props', 'render', 'inspect' ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_COMBAT13__',
+    [ 'phase', 'intro', 'render', 'inspect' ]
+  ],
+  [ '__STORYWORLD_HOSPITAL_TOOLS19__', [ 'inspect' ] ],
+  [ '__STORYWORLD_HOSPITAL_BOSS14__', [ 'inspect' ] ],
+  [
+    '__STORYWORLD_DOOR25__',
+    [
+      'source',
+      'matrices',
+      'draw',
+      'sourcePath',
+      'sourceSHA256',
+      'newCollision',
+      'newImage'
+    ]
+  ],
+  [
+    '__STORYWORLD_DOOR27__',
+    [
+      'overlap',
+      'sourceSHA256',
+      'sourceOpaqueRuns',
+      'originalPixelsUnchanged',
+      'globalPerspectiveSolved'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_SPAWNS_R50__',
+    [ 'revision', 'reconcile', 'inspect' ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_NAV_R52__',
+    [
+      'hospital', 'radius',
+      'isSafe',   'nearest',
+      'clamp',    'reconcile',
+      'safeMove', 'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_CHARGE_R52__',
+    [
+      'tickEnemy',
+      'action',
+      'bodyPose',
+      'applyBodyPose',
+      'hasMotion',
+      'clear',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_RANGED_R52__',
+    [
+      'asset',
+      'clock',
+      'frameFor',
+      'pose',
+      'projectileScale',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_WOUNDS_R53__',
+    [
+      'admit',
+      'lifestealEfficiency',
+      'statusRows',
+      'clear',
+      'sourceOwner',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_LAYOUT_HUD_R53__',
+    [
+      'revision',
+      'healthLayout',
+      'handlesStatuses',
+      'statusLayout',
+      'paintStatuses',
+      'plan',
+      'place',
+      'bays',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_MOTION_R53__',
+    [
+      'asset',      'backAsset',
+      'clock',      'meleeClock',
+      'castClock',  'frameFor',
+      'valid',      'canPhysical',
+      'canPrepare', 'canStrike',
+      'canRelease', 'throwHand',
+      'vialFlight', 'projection',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_BOSS_R53__',
+    [ 'bands', 'band', 'cast', 'summonCue', 'inspect' ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_PRESSURE_R54__',
+    [
+      'sourceOwner',
+      'applies',
+      'incomingMultiplier',
+      'clear',
+      'registerScope',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_HOSPITAL_CORE_B2__',
+    [
+      'repair',
+      'repairActors',
+      'plan',
+      'radius',
+      'playerPoint',
+      'inspect'
+    ]
+  ],
+  [ '__STORYWORLD_HOSPITAL_A5__', [ 'plan', 'enabled', 'inspect' ] ],
+  [
+    '__STORYWORLD_PROGRESSION_R62__',
+    [
+      'revision',        'defs',
+      'art',             'state',
+      'normalizePlayer', 'normalized',
+      'ranks',           'factors',
+      'mapLevel',        'awardClear',
+      'clearInfo',       'purchase',
+      'awardPointDrop',  'exportPlayer',
+      'importPlayer',    'ensureArt',
+      'drawAura',        'showDream',
+      'onClear',         'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_ROUTES_R72__',
+    [
+      'permit',
+      'status',
+      'points',
+      'destination',
+      'visibleDirections',
+      'inspect'
+    ]
+  ],
+  [
+    '__STORYWORLD_PROGRESSION_R71__',
+    [
+      'revision',          'openDifficulty',
+      'difficultyState',   'selectDifficulty',
+      'confirmDifficulty', 'cancelDifficulty',
+      'recordPointDrop',   'syncPointDrops',
+      'collectPointDrops', 'exportPointRoom',
+      'restorePointRoom',  'restorePointState',
+      'pointDropChance',   'rollPointDrop',
+      'rollPointForKill',  'inspect',
+      'unsubscribe'
+    ]
+  ],
+  [ '__STORYWORLD_DOORS_R75__', [ 'plane', 'inspect' ] ],
+  [ '__STORYWORLD_HOSPITAL_PC__', [ 'inspect', 'attach', 'capacity' ] ]
+]
+BASE {
+  room: {
+    keys: [
+      'id',
+      'layer',
+      'props',
+      'enemies',
+      'kills',
+      'engaged',
+      'cleared',
+      'objective',
+      'finalStage',
+      'finalizing',
+      'revision',
+      'defeatedActorIds',
+      'minionKills',
+      'encounterStage',
+      'spawnNonce',
+      'activeEncounter',
+      'summonClock',
+      'trialIndex',
+      'cosmicIndex',
+      'persona',
+      'sceneCheckpoint',
+      'rewardCommitted',
+      'fieldWaves6',
+      'fieldWaveIndex6',
+      'fieldWaveSourceCounts6',
+      'fieldWaveTotal6',
+      'storyRosterIds6',
+      'fieldWaveCleared6',
+      'exploration',
+      'explorationGroups',
+      'r40RosterApplied',
+      'r40Population',
+      'hospitalLayoutR53',
+      'hospitalSeed5',
+      'hospitalStart5',
+      'r72Entry',
+      'difficultyR63',
+      'passivePointEpochR64',
+      'passivePointDropsR64',
+      'passivePointRollsR64',
+      'passivePointClaimsR64',
+      'passivePointRevisionR64',
+      'passivePointSpawnSeqR64',
+      'passivePointRenderedRevisionR64',
+      'hospitalEntranceGuardR50'
+    ],
+    exploration: {
+      version: 'storyworld-exploration-10-clear-connector-1p40',
+      id: 'ep1a08',
+      type: 'hospital-ward-b3',
+      rotation: 2,
+      mirrored: true,
+      bounds: [Array],
+      chunkSize: 10,
+      chunkColumns: 9,
+      chunkRows: 12,
+      walls: [Array],
+      centralArena: [Object],
+      branches: [],
+      surface: [Object],
+      expanded: true,
+      hospitalCoreB2: [Object],
+      hospitalDoorsB3: [Array],
+      hospitalLayoutRevision: 'ep1a08-ward-network-b3-v1:',
+      hospitalAnalytic12: true,
+      hospitalBoundary12: [Array],
+      hospitalVisualWalls12: [Array],
+      hospitalPreviousWalls12: [Array],
+      hospitalWalkArea12: 5710,
+      hospitalWalkPolygons12: [Array],
+      chunkMinX: 0,
+      chunkMinY: 0,
+      floorCells: [Array],
+      floorRects: [Array],
+      coreFloorRects: [],
+      coreReshaped: true,
+      navigationCellsOnly12: true,
+      connectorFloorRects: [],
+      backdropRects: [],
+      fogRects: [],
+      nodes: [Array],
+      edges: [],
+      entry: [Object],
+      starts: [Array],
+      entrance: [Object],
+      gate: [Object],
+      doorUV: [Object],
+      visitRoute: [Array],
+      combatRoomNodeIds: [Array],
+      mazeFirst: true,
+      sourceExits: [Object],
+      routeCycleRank: null,
+      originalEncounterBounds: [Array],
+      originalPropsRelocated: false,
+      renderEnvelope: [Object]
+    },
+    enemies: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ]
+  },
+  ego: {
+    state: {
+      version: 1,
+      unlocked: false,
+      pending: false,
+      active: false,
+      originMap: null,
+      originLayer: null,
+      cutinConsumed: false,
+      index: 0,
+      direction: -1,
+      cycle: '0',
+      visitSeq: '0',
+      visitId: null,
+      visitMap: null,
+      visitLayer: 'DREAM',
+      cleared: false,
+      clearCount: '0',
+      lastClearVisit: '0',
+      combo: 0,
+      targetHits: {},
+      redRemaining: 0,
+      clockCastRemaining: 0,
+      clockActiveRemaining: 0,
+      clockCooldownRemaining: 0
+    },
+    isVisit: false,
+    cutinRemaining: 0,
+    pose: 0,
+    audit: { events: [], draws: [], combat: [], capacity: [] }
+  },
+  save: {
+    version: 1,
+    unlocked: false,
+    pending: false,
+    active: false,
+    originMap: null,
+    originLayer: null,
+    cutinConsumed: false,
+    index: 0,
+    direction: -1,
+    cycle: '0',
+    visitSeq: '0',
+    visitId: null,
+    visitMap: null,
+    visitLayer: 'DREAM',
+    cleared: false,
+    clearCount: '0',
+    lastClearVisit: '0',
+    combo: 0,
+    targetHits: {},
+    redRemaining: 0,
+    clockCastRemaining: 0,
+    clockActiveRemaining: 0,
+    clockCooldownRemaining: 0,
+    routeRoom: null,
+    sourceCommit: '7fc1e66d94e2f1f64688d8cccefecee3de30dbc6'
+  }
+}

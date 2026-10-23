@@ -1,0 +1,25 @@
+{
+  "schema": "storyworld.hospital-r88-runtime-approval/v1",
+  "status": "pending-review",
+  "manifestSHA256": "62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda",
+  "expectedRuntime": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
+  },
+  "fileCount": 2348,
+  "storagePrefix": "storyworld.hospital-three-pc.maze.v11:",
+  "candidateSource": {
+    "pullRequest": null,
+    "headSha": null,
+    "workflowRunId": null,
+    "evidenceFile": "release/r88/qa/r88/final-suite.json",
+    "evidenceSHA256": "e91ebbeade8bd658c86698e41343be6c5015170a7df2288e9da069d16300e3c6"
+  },
+  "runtimeRevision": "R88/V12",
+  "paintedEffectCount": 42,
+  "storedFrames": 680,
+  "historicalApprovalsInherited": false,
+  "browserVerifiedByCPUGate": false,
+  "GPUVerifiedByCPUGate": false,
+  "naturalPlayVerified": false
+}

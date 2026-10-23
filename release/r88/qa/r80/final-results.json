@@ -1,0 +1,176 @@
+{
+  "revision": "R80 / V4",
+  "generatedAt": "2026-10-23T00:15:51.438869+00:00",
+  "method": "Node CPU VM with assisted native checkpoints, actor positioning and scripted combat; native save/restore, Three r186 CPU geometry, byte hashes, local HTTP. No browser/GPU/natural play.",
+  "passed": true,
+  "checksPassed": 137,
+  "checksTotal": 137,
+  "stages": [
+    {
+      "report": "layout-results.json",
+      "passed": 14,
+      "total": 14,
+      "sha256": "d27d95f1432e20d7c8259478a1f75baded565b836c263d05c05fa383225182c8"
+    },
+    {
+      "report": "roof-results.json",
+      "passed": 7,
+      "total": 7,
+      "sha256": "1af372b0e8f2f0326a74fc9892ce2548f922178d64b6932faedf9e6166d5805f"
+    },
+    {
+      "report": "maze-results.json",
+      "passed": 29,
+      "total": 29,
+      "sha256": "08b04808dd8ddf4ca817b7f037ad1e9aa998760fe613320372c17a50e31de546"
+    },
+    {
+      "report": "cold-results.json",
+      "passed": 7,
+      "total": 7,
+      "sha256": "f8dc3f551ff7e970bd88f6c7b9e008da6266f9f2dbf9ae841a74a428fa7d698d"
+    },
+    {
+      "report": "ego-regression-results.json",
+      "passed": 6,
+      "total": 6,
+      "sha256": "0d45681f61033913058055a54232ade1f5f6cebe7794d2649ea2d254388a68b6"
+    },
+    {
+      "report": "champion-results.json",
+      "passed": 10,
+      "total": 10,
+      "sha256": "593986a6a2c5656a56b646aebb8ac127aec07f6474c5ebb1ab04806dfba33ae6"
+    },
+    {
+      "report": "migration-results.json",
+      "passed": 9,
+      "total": 9,
+      "sha256": "7a56f42b680425431f58f36c8eb92ec16a17d40738e2c31d7f4d49a3eb0e3fcd"
+    },
+    {
+      "report": "world-r78-layout-results.json",
+      "passed": 8,
+      "total": 8,
+      "sha256": "4751413c61e5f14a704fa3a038a4d821f30030c964e85cdafb0188874316469e"
+    },
+    {
+      "report": "world-r78-story-spawn-results.json",
+      "passed": 5,
+      "total": 5,
+      "sha256": "14a32810dc37207b7f50d362636415013176b4866cf7631ae4b0ec0f36082884"
+    },
+    {
+      "report": "world-r78-combat-input-results.json",
+      "passed": 9,
+      "total": 9,
+      "sha256": "73932bca0ecd136936a1bc0013e3fa9ec13377314ce110f309baae1bd7f2b267"
+    },
+    {
+      "report": "world-r78-visual-results.json",
+      "passed": 6,
+      "total": 6,
+      "sha256": "4d2be9b69b5ee143b0dbbd96e274ff7a136fc3e449e7c09cebd894876b15e703"
+    },
+    {
+      "report": "package-results.json",
+      "passed": 5,
+      "total": 5,
+      "sha256": "a3cc7784084e1074f0c32e78ba9b479628ebdb513b24d2009406593dd9fd9b88"
+    },
+    {
+      "report": "r80/assets-results.json",
+      "passed": 6,
+      "total": 6,
+      "sha256": "515316dc9c448fa1431a9163eeaa1b9fc182f6035f279f94b33adb94a2c80b96"
+    },
+    {
+      "report": "r80/integration-results.json",
+      "passed": 16,
+      "total": 16,
+      "sha256": "06e66251d01f3b3e87a08128c4e963d070a48916af80ae69e112fd1cd84cb3b0"
+    }
+  ],
+  "nativeFrozenGate": {
+    "method": "Final frozen-source CPU gate. No browser/GPU/natural play.",
+    "passed": true,
+    "sourceUnchangedDuringRun": true,
+    "sourceHashes": {
+      "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+      "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+      "hospital-improvements-a5.js": "9072ccfbba0036e7387d6ce54d417f2cc27a96168ecc21dcccc0be24a4887396",
+      "hospital-maze-layout.js": "b230444aa9744705a7db2ed5f716dc74c91dcd5f7b34802e22841361762d312c",
+      "hospital-maze-progression.js": "e82f50b7ef7464690825d7c09366e9450cef04d4b973403a9fcc9192c7462318",
+      "hospital-maze-visuals.js": "1999652855366463e301d7112036b15288ef2425aa1808bb97557196e28790b9",
+      "ego-restore-health-r79.js": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63",
+      "world-assets-r80-data.js": "6607c24ffa513af0453c9e262d11ebfcbbf9b007e901aaba6e126bf8444e65e4",
+      "world-assets-r80.js": "86629792a8d9b8e149cdcb1327653f9f714cc0912cc13643e9092d3b74328eb9"
+    },
+    "runs": [
+      {
+        "test": "roof-check",
+        "exitCode": 0
+      },
+      {
+        "test": "layout-validation",
+        "exitCode": 0
+      },
+      {
+        "test": "maze-integration",
+        "exitCode": 0
+      },
+      {
+        "test": "migration-check",
+        "exitCode": 0
+      },
+      {
+        "test": "cold-check",
+        "exitCode": 0
+      },
+      {
+        "test": "ego-regression",
+        "exitCode": 0
+      },
+      {
+        "test": "champion-check",
+        "exitCode": 0
+      }
+    ]
+  },
+  "otherRuns": [
+    {
+      "name": "world-r78-layout",
+      "exitCode": 0
+    },
+    {
+      "name": "world-r78-story-spawn",
+      "exitCode": 0
+    },
+    {
+      "name": "world-r78-combat-input",
+      "exitCode": 0
+    },
+    {
+      "name": "world-r78-visual",
+      "exitCode": 0
+    },
+    {
+      "name": "package-check",
+      "exitCode": 0
+    }
+  ],
+  "nativeGateSourceHashesStillMatch": true,
+  "assetSelection": {
+    "new": 141,
+    "prior": 12
+  },
+  "runtimeAssets": 153,
+  "mappedScenes": 62,
+  "combatMazeMaps": 55,
+  "sourcePNGsPreserved": 254,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "WindowsLauncherVerified": false,
+  "remotePublication": "existing review branch only; main, PR, public deployment, gate/pin and security unchanged"
+}

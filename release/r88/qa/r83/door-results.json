@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "Shipped native runtime includes door plane, body capture and source module once",
+      "passed": true
+    },
+    {
+      "name": "Door native integration is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "All55 regional maps render all165native door apertures",
+      "passed": true,
+      "detail": {
+        "maps": 55,
+        "doors": 165
+      }
+    },
+    {
+      "name": "Actual recorded closed leaf corners match physical aperture endpoints and front-surface height",
+      "passed": true,
+      "detail": {
+        "worst": 4.440892098500626e-16,
+        "sixTileDoors": 113,
+        "eightTileDoors": 52
+      }
+    },
+    {
+      "name": "Pinned Three mesh vertices remain just outside the opaque front wall plane",
+      "passed": true,
+      "detail": {
+        "worst": 0.0000021362304687411182
+      }
+    },
+    {
+      "name": "Each door retains both same-wall jambs and a2.7high header",
+      "passed": true
+    },
+    {
+      "name": "Jambs and header multiply the exact same native wall palette",
+      "passed": true
+    },
+    {
+      "name": "Rendering leaves native door data, phase and player health unchanged",
+      "passed": true
+    },
+    {
+      "name": "All door atlas crops remain inside real unchanged source dimensions",
+      "passed": true
+    },
+    {
+      "name": "Native use opens the ordinary door and native collision releases passage",
+      "passed": true,
+      "detail": {
+        "used": true,
+        "before": true,
+        "after": false
+      }
+    },
+    {
+      "name": "Open state removes closed leaf and renders two hinged leaves with same jambs",
+      "passed": true,
+      "detail": [
+        "left-jamb",
+        "right-jamb",
+        "header",
+        "open-left",
+        "open-right"
+      ]
+    },
+    {
+      "name": "Actual opened native door replay has finite Three vertices",
+      "passed": true,
+      "detail": {
+        "meshes": 7,
+        "bad": 0
+      }
+    },
+    {
+      "name": "Architectural recording preserves DPR2, inherited clip and caller transform",
+      "passed": true,
+      "detail": {
+        "same": true,
+        "footY": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Actual native hurt capture leaves doors anchored at floor and wall height",
+      "passed": true,
+      "detail": {
+        "damage": 6.216000000000008,
+        "shake": 0.6,
+        "commands": 7,
+        "maxHeightError": 4.7683715642676816e-8
+      }
+    },
+    {
+      "name": "Actual complete native frame tags every door primitive as a physical body",
+      "passed": true,
+      "detail": {
+        "commands": 7
+      }
+    },
+    {
+      "name": "Hospital B3 door art uses registered physical planes",
+      "passed": true
+    },
+    {
+      "name": "Original door atlas bytes are unchanged from preservedV6",
+      "passed": true
+    },
+    {
+      "name": "Door replay scene releases every geometry and texture",
+      "passed": true,
+      "detail": {
+        "before": 7,
+        "removed": 7
+      }
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

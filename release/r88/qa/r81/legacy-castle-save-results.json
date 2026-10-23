@@ -1,0 +1,135 @@
+{
+  "schema": "r81-actual-v4-castle-save-migration/v1",
+  "method": "Preserved V4 native newGame/777/go/serializeSave checkpoint loaded by V5 native restoreSave. CPU VM with DOM/image/audio/timer stubs and renderer readiness spy. No browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "Fixture is an actual old V4 castle save without an R81 ledger",
+      "passed": true,
+      "detail": {
+        "zone": "hando02",
+        "actors": 37
+      }
+    },
+    {
+      "name": "V5 native runtime boots cleanly",
+      "passed": true
+    },
+    {
+      "name": "Old visited STORY castle opens in the current hospital structure on safe floor",
+      "passed": true,
+      "detail": {
+        "zone": "hando02",
+        "cells": 8022,
+        "heroBlocked": false,
+        "restoreMs": 422.83395200000086
+      }
+    },
+    {
+      "name": "Every old native enemy keeps exact HP, maximum HP and identity",
+      "passed": true,
+      "detail": {
+        "before": 37,
+        "after": 37,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "Previously visited V4 rooms do not gain new champion encounters",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Old save progress is preserved",
+      "passed": true
+    },
+    {
+      "name": "Every surviving migrated actor fits the new floor without wall overlap",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Migrated castle preserves the native two-gate defense controller and initial hidden waves",
+      "passed": true,
+      "detail": {
+        "controlled": true,
+        "state": {
+          "phase": "idle",
+          "round": 0,
+          "remaining": 0,
+          "pressure": 0,
+          "selected": [],
+          "used": [],
+          "joined": false,
+          "retries": 0,
+          "guards": []
+        },
+        "gates": [
+          {
+            "id": "door-0",
+            "safe": true
+          },
+          {
+            "id": "door-1",
+            "safe": true
+          }
+        ],
+        "owners": [
+          {
+            "id": "r75:npc:hando02:lance-owner",
+            "door": "door-0",
+            "bound": true,
+            "safe": true
+          },
+          {
+            "id": "r75:npc:hando02:shaman-owner",
+            "door": "door-1",
+            "bound": true,
+            "safe": true
+          }
+        ],
+        "hidden": true
+      }
+    },
+    {
+      "name": "Both native castle owners bind separate wall-safe gates",
+      "passed": true,
+      "detail": [
+        {
+          "id": "r75:npc:hando02:lance-owner",
+          "door": "door-0",
+          "bound": true,
+          "safe": true
+        },
+        {
+          "id": "r75:npc:hando02:shaman-owner",
+          "door": "door-1",
+          "bound": true,
+          "safe": true
+        }
+      ]
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T07:39:28.032Z",
+  "sourceHashes": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
+    "world-combat-r78.js": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e"
+  },
+  "v4SourceHashes": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "world-combat-r78.js": "2747c289e67a2eb232ea99b3c918974758cd7a3ed64d6af2c2a9668f74ad2657"
+  },
+  "restoreMs": 422.83395200000086,
+  "passed": 10,
+  "failed": 0,
+  "completedAt": "2026-10-23T07:39:42.156Z"
+}

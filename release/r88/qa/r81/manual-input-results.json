@@ -1,0 +1,142 @@
+{
+  "schema": "r81-manual-input-cpu/v1",
+  "method": "Actual native keydown/keyup listeners in Node VM, synthetic events. No browser or natural play.",
+  "checks": [
+    {
+      "name": "A reaches native basic attack; keydown capture no longer remaps it to left",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "A keyup releases the native attack key state",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "J remains a direct PC attack alias with matching keyup; 1 remains native",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "A never adds left movement to the held-key state",
+      "passed": true,
+      "detail": {
+        "a": {
+          "prevented": true,
+          "captured": false
+        },
+        "aCount": 1,
+        "aHeld": true,
+        "aMovesLeft": false,
+        "releasedA": true,
+        "j": {
+          "prevented": true,
+          "captured": true
+        },
+        "jCount": 2,
+        "jHeld": true,
+        "releasedJ": true,
+        "one": {
+          "prevented": true,
+          "captured": false
+        },
+        "oneCount": 3,
+        "hotbar": "",
+        "help": "",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}",
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }"
+      }
+    },
+    {
+      "name": "Player help identifies the A/J/1 basic-attack keys",
+      "passed": true,
+      "detail": {
+        "pc": "e=>{\n  if(editing(e)||!started||modal||loading||storyScene)return;\n  const key=e.key.toLowerCase();\n  // The preserved game owns arrows for movement and A/1 for basic attack.\n  // J is an extra PC alias. Do not map A to left movement here: that capture\n  // used to swallow the native basic-attack binding.\n  if(key==='j'){e.preventDefault();e.stopImmediatePropagation();keys.add('attack');if(!e.repeat)basicAttack(true);}\n }",
+        "native": "ev=>{if(['INPUT','TEXTAREA','SELECT'].includes(ev.target?.tagName)||ev.target?.isContentEditable||ev.target?.closest?.('[contenteditable]'))return;const key=ev.key.toLowerCase();if(storyScene){if(ev.key==='Enter'&&!ev.repeat){ev.preventDefault();advanceScene()}return}if(ev.key==='Escape'){ev.preventDefault();if(loading)return;if(!started)return;if(modal)closePanel();else showMenu();return}if(modal||loading||!started)return;unlockAudio();if(ev.key.startsWith('Arrow')){ev.preventDefault();keys.add(ev.key);return}if(key==='a'||key==='1'){ev.preventDefault();keys.add('attack');if(!ev.repeat)basicAttack(true);return}if(ev.repeat)return;if(key==='s'||key==='2'){ev.preventDefault();blink()}else if(key==='d'||key==='3'){ev.preventDefault();guardStart()}else if(key==='q'||key==='4'){ev.preventDefault();special()}else if(key==='f'||key==='5'){ev.preventDefault();ego()}else if(key==='e'){ev.preventDefault();interact()}else if(ev.code==='Space'){ev.preventDefault();auto=!auto;updateHUD()}else if(key==='m'){ev.preventDefault();showWorld()}else if(key==='p'){ev.preventDefault();showUpgrades()}}"
+      }
+    },
+    {
+      "name": "Hotbar keeps A / J / 1 labels",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

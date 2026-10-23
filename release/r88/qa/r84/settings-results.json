@@ -1,0 +1,122 @@
+{
+  "schema": "r84-hospital-settings-placement/v1",
+  "method": "Actual shipped native settings/action scripts in a Node VM with DOM tree append/detach semantics. Native gameplay/restore uses the existing CPU renderer readiness fixture. No browser, accessibility screen reader or GPU execution.",
+  "checks": [
+    {
+      "name": "Actual delivered scripts include detached native action and one Settings runtime",
+      "passed": true
+    },
+    {
+      "name": "Settings/action integration is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "Start action and test telemetry are absent from the battle DOM before boot",
+      "passed": true
+    },
+    {
+      "name": "Native boot remains successful",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "The native title exposes a generic Settings button while hospital start stays inside Settings",
+      "passed": true
+    },
+    {
+      "name": "Native Settings mounts the original start/status and diagnostics under its panel section",
+      "passed": true
+    },
+    {
+      "name": "Settings action is a native keyboard button with live status association",
+      "passed": true
+    },
+    {
+      "name": "Closing initial Settings returns to the native title and removes hospital controls",
+      "passed": true
+    },
+    {
+      "name": "A failed renderer refuses direct restore and preserves the exact failure reason",
+      "passed": true
+    },
+    {
+      "name": "Settings button uses native hospital restore/admission and retains all three doors",
+      "passed": true
+    },
+    {
+      "name": "Starting hospital returns to combat without any floating test button or diagnostics",
+      "passed": true
+    },
+    {
+      "name": "Settings can be opened again after native start without hiding the action",
+      "passed": true
+    },
+    {
+      "name": "A failed renderer keeps Settings/Menu/Escape reachable while still blocking battle input",
+      "passed": true,
+      "detail": [
+        {
+          "kind": "menu",
+          "blocked": false,
+          "stopped": false
+        },
+        {
+          "kind": "settings",
+          "blocked": false,
+          "stopped": false
+        },
+        {
+          "kind": "escape",
+          "blocked": false,
+          "stopped": false
+        },
+        {
+          "kind": "combat",
+          "blocked": true,
+          "stopped": true
+        }
+      ]
+    },
+    {
+      "name": "Repeated Settings opens preserve one action and one event handler",
+      "passed": true
+    },
+    {
+      "name": "Changing from Settings to another native panel detaches the test controls",
+      "passed": true
+    },
+    {
+      "name": "Closing menus leaves only the native battle HUD in the document",
+      "passed": true
+    },
+    {
+      "name": "A native HUD resume also detaches controls if a caller bypasses closePanel",
+      "passed": true
+    },
+    {
+      "name": "Native normal new game in a fresh session still enters the first safe refuge",
+      "passed": true
+    },
+    {
+      "name": "Settings relocation preserves prior test saves and adds no serialized UI fields",
+      "passed": true
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "passed": true
+}

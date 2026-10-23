@@ -24,7 +24,9 @@ jobs:
       - name: Checkout reviewed sources
         uses: actions/checkout@v6
         with:
+          ref: f81d0d78af5bce04532b948a3cee36aa4fd4d5b8
           persist-credentials: false
+          fetch-depth: 0
           show-progress: false
       - uses: actions/setup-node@v4
         with:
@@ -32,6 +34,8 @@ jobs:
       - name: Reconstruct exact baseline and preserve existing CPU gates
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r66 out/r67 out/r68 out/r69 out/r70 out/r71
           python3 scripts/unpack-runtime-r62.py --output _baseline/docs
@@ -42,6 +46,8 @@ jobs:
       - name: Install pinned sandboxed browser regression environment
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0 > out/r71/dependencies.log 2>&1
           npx playwright install --with-deps chromium >> out/r71/dependencies.log 2>&1
@@ -50,6 +56,8 @@ jobs:
         env:
           STORYWORLD_URL: http://127.0.0.1:4391/
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r70/http.log 2>&1 &
           SERVER_PID=$!
@@ -77,6 +85,8 @@ jobs:
           node scripts/r66.browser.test.mjs | tee out/r70/game-regression.log
       - name: Require exact R70 baseline measured in PR run 39089788163
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
@@ -90,6 +100,8 @@ jobs:
         env:
           STORYWORLD_URL: http://127.0.0.1:4391/
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           cp -a _pages _r70
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/http.log 2>&1 &
@@ -125,6 +137,8 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           REF_NAME: ${{ github.ref }}
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           python3 - <<'PY'
           import hashlib,json,os
           from pathlib import Path
@@ -176,15 +190,22 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: f81d0d78af5bce04532b948a3cee36aa4fd4d5b8
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Reconstruct preserved R71 and R72 then exact R73 candidate
-        run: bash scripts/build-r73-site.sh
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          bash scripts/build-r73-site.sh
       - name: Preserve relay and static file assertions
         if: matrix.script == 'cpu'
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           npm ci --ignore-scripts --prefix relay
           node --test relay/test/relay.test.mjs | tee out/r73/relay.log
@@ -192,6 +213,8 @@ jobs:
       - name: Install pinned sandboxed browser
         if: matrix.script != 'cpu'
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           npm ci --ignore-scripts --prefix relay
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
@@ -202,6 +225,8 @@ jobs:
           R73_COMPARE: '1'
           R73_ABBA: '1'
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
           SERVER_PID=$!
@@ -230,18 +255,28 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: f81d0d78af5bce04532b948a3cee36aa4fd4d5b8
           persist-credentials: false
+          fetch-depth: 0
           show-progress: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Reconstruct R74 over preserved R73 and run all CPU gates
-        run: bash scripts/build-r74-site.sh
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          bash scripts/build-r74-site.sh
       - name: Check exact R74 candidate release pin
-        run: python3 scripts/r74-release-gate.py | tee out/r74/approval.json
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/r74-release-gate.py | tee out/r74/approval.json
       - name: Verify complete media and R63R1 relay contracts
         if: matrix.scenario == 'cpu'
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           npm ci --ignore-scripts --prefix relay
           node --test relay/test/relay.test.mjs | tee out/r74/relay.log
@@ -249,6 +284,8 @@ jobs:
       - name: Install pinned sandboxed browser
         if: matrix.scenario != 'cpu'
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           npm ci --ignore-scripts --prefix relay
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
@@ -257,6 +294,8 @@ jobs:
         env:
           R74_CASE: ${{ matrix.scenario }}
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r74/http.log 2>&1 &
           SERVER_PID=$!
@@ -295,6 +334,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: f81d0d78af5bce04532b948a3cee36aa4fd4d5b8
           persist-credentials: false
           show-progress: false
           fetch-depth: 0
@@ -302,14 +342,21 @@ jobs:
         with:
           node-version: '22'
       - name: Reconstruct R75 over preserved R74 and run CPU gates
-        run: bash scripts/build-r75-site.sh
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          bash scripts/build-r75-site.sh
       - name: Require exact R75 release bytes and test refusal paths
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           python3 scripts/r75-release-gate.test.py
           python3 scripts/r75-release-gate.py | tee out/r75/approval.json
           node verify-pages-r62.mjs _pages | tee out/r75/integrity.log
       - name: Apply R76 golden slots, collision parity, and last301 enclosure after the exact R75 release gate
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
@@ -320,12 +367,16 @@ jobs:
       - name: Pin the exact approved R76 runtime before the R77 guide overlay
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/r76-release-gate.py | tee out/r76/release.json
       - name: Apply and pin the R77 guide-only Normal travel overlay
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r77
           python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
@@ -336,12 +387,16 @@ jobs:
       - name: Install pinned sandboxed browser
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           npm install --no-save --ignore-scripts playwright@1.56.0
           npx playwright install --with-deps chromium
       - name: Verify preserved gameplay and R77 guide on final runtime
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-http.log 2>&1 &
           SERVER_PID=$!
@@ -364,34 +419,42 @@ jobs:
   release:
     needs: [build, candidate, r74, r75]
     runs-on: ubuntu-22.04
-    timeout-minutes: 15
+    timeout-minutes: 60
     permissions:
       contents: read
       pages: read
     outputs:
-      html_sha: ${{ steps.hospital.outputs.html_sha }}
-      renderer_sha: ${{ steps.hospital.outputs.renderer_sha }}
-      asset_hashes_json: ${{ steps.hospital.outputs.asset_hashes_json }}
-      manifest_sha: ${{ steps.hospital.outputs.manifest_sha }}
+      html_sha: ${{ steps.hospitalr88.outputs.html_sha }}
+      renderer_sha: ${{ steps.hospitalr88.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.hospitalr88.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.hospitalr88.outputs.manifest_sha }}
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: f81d0d78af5bce04532b948a3cee36aa4fd4d5b8
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Reconstruct byte-identical verified R75 release
-        run: bash scripts/build-r75-site.sh
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          bash scripts/build-r75-site.sh
       - name: Require exact R75 runtime and generated image approval
         id: r75
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           python3 scripts/r75-release-gate.py | tee out/r75/approval.json
       - name: Apply the reviewed R76 overlay to the approved R75 release
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
@@ -400,12 +463,16 @@ jobs:
         id: r76
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r76
           python3 scripts/r76-release-gate.py | tee out/r76/release.json
       - name: Apply the guide-only R77 overlay to the approved R76 release
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r77
           python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
@@ -413,34 +480,117 @@ jobs:
         id: r77
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           mkdir -p out/r77
           python3 scripts/r77-release-gate.py | tee out/r77/release.json
       - name: Preserve verified R77 baseline files before hospital composition
         shell: bash
         run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
           set -euo pipefail
           node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
       - name: Compose exact hospital B test artifact after all R77 gates
-        run: python3 scripts/build-hospital-b1.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/build-hospital-b1.py
       - name: Prepare deterministic CPU fixtures from this checkout
-        run: python3 scripts/prepare-hospital-b1-cpu.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/prepare-hospital-b1-cpu.py
       - name: Execute fresh hospital runtime, storage, source and workflow CPU checks
-        run: python3 scripts/run-hospital-b1-cpu.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/run-hospital-b1-cpu.py
       - name: Require reviewed full B source and stamp the exact final artifact
         id: hospitalb1
-        run: python3 scripts/hospital-b1-release-gate.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/hospital-b1-release-gate.py
       - name: Verify every final B file under the repository subpath after stamping
-        run: node verify-pages-r62.mjs out/hospital-b1-static
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          node verify-pages-r62.mjs out/hospital-b1-static
       - name: Compose the reviewed B2 centre with its own test namespace
-        run: python3 scripts/build-hospital-b2.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/build-hospital-b2.py
       - name: Execute fresh B2 structure and actual loader-order CPU checks
-        run: python3 scripts/run-hospital-b2-cpu.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/run-hospital-b2-cpu.py
       - name: Require independently reviewed B2 bytes and disclosed EGO baseline control
         id: hospital
-        run: python3 scripts/hospital-b2-release-gate.py
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          python3 scripts/hospital-b2-release-gate.py
       - name: Verify complete B2 static artifact after final stamp
-        run: node verify-pages-r62.mjs out/hospital-b2-static
+        run: |
+          # Historical release proof: run the unchanged gates at their actual pinned checkout.
+          unset GITHUB_SHA GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_REF
+          node verify-pages-r62.mjs out/hospital-b2-static
+      # Historical B1/B2 source and approval files above remain unchanged.
+      # Current release uses the real event context and its own source/runtime pin.
+      - name: Checkout current R88 candidate independently of historical gates
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          path: r88-current
+          persist-credentials: false
+          show-progress: false
+          fetch-depth: 0
+      - name: Build the exact frozen R88 runtime without changing its manifest
+        working-directory: r88-current
+        run: python3 scripts/build-hospital-r88.py
+      - name: Check R88 release refusal paths and unchanged workflow security
+        working-directory: r88-current
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/hospital-r88-release-gate.cpu.test.py
+          python3 scripts/r88-workflow-contract.cpu.test.py
+      - name: Execute the complete fresh R88 CPU regression suite
+        working-directory: r88-current
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install Pillow==11.3.0
+          python3 scripts/run-hospital-r88-cpu.py
+      - name: Verify every exact R88 runtime path below the repository subpath
+        working-directory: r88-current
+        run: node verify-pages-r62.mjs out/hospital-r88-static
+      - name: Install pinned sandboxed browser for the actual R88 candidate
+        working-directory: r88-current
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Verify all42 painted assets and native medical/root hooks in the actual R88 browser
+        working-directory: r88-current
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4394/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4394 --directory out/hospital-r88/site --bind 127.0.0.1 > out/hospital-r88/browser-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r88-painted.browser.mjs
+      - name: Require R88 source approval and all fresh runtime evidence
+        id: hospitalr88
+        working-directory: r88-current
+        run: python3 scripts/hospital-r88-release-gate.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -462,6 +612,9 @@ jobs:
             out/hospital-b2/production-order/*.json
             out/hospital-b2/site/web-manifest-r62.json
             out/hospital-b2-static/PAGES_STATIC_VERIFICATION_R62.json
+            r88-current/out/hospital-r88/
+            r88-current/out/hospital-r88-static/PAGES_STATIC_VERIFICATION_R62.json
+            r88-current/out/r88/
           retention-days: 14
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -470,7 +623,7 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: out/hospital-b2/site
+          path: r88-current/out/hospital-r88/site
           retention-days: 1
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -488,7 +641,7 @@ jobs:
       - name: Deploy verified static site
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify public hospital B2 runtime, preserved images and stamped manifest
+      - name: Verify public R88 runtime, painted atlases and frozen manifest
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
           HTML_SHA: ${{ needs.release.outputs.html_sha }}
@@ -500,7 +653,53 @@ jobs:
           python3 - <<'PY'
           import hashlib,json,os,time,urllib.request,urllib.error
           base=os.environ['PUBLIC_URL'].rstrip('/')+'/'
-          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA'],'web-manifest-r62.json':os.environ['MANIFEST_SHA']};expected.update(json.loads(os.environ['ASSET_HASHES']));rows=[]
+          assets=json.loads(os.environ['ASSET_HASHES'])
+          painted={
+            "assets/final42-r88/effects/081/atlas.png": "ed025216a01f487748cfe44ca5bac2fb9e5a9d467f651b38244f64aff3dcfa52",
+            "assets/final42-r88/effects/090/atlas.png": "ff8c4d753eab30af940855037c9ae09c3befe1da587f777e62efe3446b2f83fb",
+            "assets/final42-r88/effects/091/atlas.png": "bd69fd85fa386e6c4257614fe06e0feeb4bf8a659e758922cf6d83f463df6f70",
+            "assets/final42-r88/effects/092/atlas.png": "0bfbb7adb05e51a9121fe44825f908b5961b739ca868854ccf023a804f3bcfc0",
+            "assets/final42-r88/effects/093/atlas.png": "eed87d6df5aa7508c53887b00403cece05384112d43ecc98d453d01dbf67bfac",
+            "assets/final42-r88/effects/094/atlas.png": "129fd0b5324f6b23cedd0c05e056fa3a5e2c317c7906d01fa584c39bbf8c10d2",
+            "assets/final42-r88/effects/095/atlas.png": "551ece3b64b1630369a8e1a2b561f852b05c1402323434edffa949ac8fb83f19",
+            "assets/final42-r88/effects/096/atlas.png": "ea2db98e2aaf17d1056f5bfd9fe66ea5605d0b7737dc36faf686934858b96db3",
+            "assets/final42-r88/effects/097/atlas.png": "6c8c86944ea25edc9f6ca7b9c5ab753597c7a336879f9cd1638f92a5974b35f0",
+            "assets/final42-r88/effects/098/atlas.png": "59716e431536a9358701e3b4c352593cb906ad3cf448e01749fb73eac4167527",
+            "assets/final42-r88/effects/099/thorn_atlas.png": "19cfdb767b3c45b226a8b787a1dbb209d4c29d4aa4ea46a018a6003eae87e6c6",
+            "assets/final42-r88/effects/100/atlas.png": "df93a927945b7940aacae685bf5219d661cdb50d19ca31ba3e67ef4adf28ca26",
+            "assets/final42-r88/effects/101/atlas.png": "029e2aab69def89cbaf05a765d476c565983db2b835e0e01e340db4b22c05ada",
+            "assets/final42-r88/effects/110/atlas.png": "96edb671ee0e9ee9e8771035bbb98303a3c5cbded86926c559ce0478fea46832",
+            "assets/final42-r88/effects/111/atlas.png": "d9b98df621a1db35c23f8ce873f7b941629be13eb670a7b5bdccc651dfeca457",
+            "assets/final42-r88/effects/112/atlas.png": "f540a81190e80b2d8cf88fc9a721456fe7616b0ae01ddbf514346b399dc7f1db",
+            "assets/final42-r88/effects/113/atlas.png": "adcf3ed73ec7bf2278e2706a28f8d8bf555700368720874f422093de49aad595",
+            "assets/final42-r88/effects/114/atlas.png": "901cce6d81792d5d7dc17259b0311735d866ae409ca54a6ced67bbb1e159bb17",
+            "assets/final42-r88/effects/115/atlas.png": "809e4568c6ceb749ea6940a0ea3d12842a15fc9f145957d66d775c3e17f2c199",
+            "assets/final42-r88/effects/116/atlas.png": "dccaa0cc2a5a87ed9b082da91cae3b2070f2b6faf05553361ea60b3a58597059",
+            "assets/final42-r88/effects/117/atlas.png": "4bc39656227686918cf85bfd3d0b8a4d9bd78a5cc0a27bfc5e5f9ab11767f9d3",
+            "assets/final42-r88/effects/130/atlas.png": "8e2d08b24b6f4ea96b8c6c7a7b4329ed6b343af14896bb604709598e39730ecb",
+            "assets/final42-r88/effects/131/atlas.png": "7f6a19acb32b36e6b56fdc09add28c26a09275730f7b1b5c0919ef7480533a04",
+            "assets/final42-r88/effects/132/atlas.png": "33c17637122e1440a605c6dddbf41e6400a59fbd0929c996e9b765324c79cc49",
+            "assets/final42-r88/effects/213/poison-impact-atlas-256.png": "a9a7a8a30ce72200e25f59d5b62a28a74f897c916f3c6f3e517db60ed830d376",
+            "assets/final42-r88/effects/214/atlas.png": "ce2cb748f32e0e2974e2b6df279a9367a6984067442ae2df14582ffd20d2e1d8",
+            "assets/final42-r88/effects/215/atlas.png": "346c7b644dc9da3d1ece6acca06c06b24e019da73b190c130ba43efd87a9b7f8",
+            "assets/final42-r88/effects/217/atlas.png": "b0dc819aee60a482257d7e56489fb96e865dee0b6b22cc4d418de92e21610022",
+            "assets/final42-r88/effects/243/atlas.png": "f418e1403049a347938175f6c3f2f9b83e1f7ae032c541d1d2d7030b07273d4c",
+            "assets/final42-r88/effects/244/atlas.png": "a9adc1b391bebb676dbc62468c11060efb92d64316412a5fb5f297ade5acef68",
+            "assets/final42-r88/effects/245/atlas.png": "137dcc2e85f5da6caa7bc95b08775bf4415a091a9ac91c88c4f73fd95fa7d0bd",
+            "assets/final42-r88/effects/246/atlas.png": "1ef9838c862112d169815970d47593ddd39e40e392aa6d41207dea06f3aaaf96",
+            "assets/final42-r88/effects/247/atlas.png": "271d3ebf9cd9e35d937cd34900ef4693722967b150a5f03d2c8a254d8660cbb0",
+            "assets/final42-r88/effects/248/atlas.png": "faf8eb894c39b6b9f44a2551315c5461f90cdc663cf303b6b80963d7368a356c",
+            "assets/final42-r88/effects/249/atlas.png": "9798bc08f062d5bcbda04c49cd067c94290d37bd6c05a92a81fd8a5f5ce5950f",
+            "assets/final42-r88/effects/250/atlas.png": "66ca90e9415f877ecf204b9b57062c5687445d45c343943b59c8aba1cd8c2410",
+            "assets/final42-r88/effects/251/atlas.png": "f59667f333e93463a6b26c4d091005302d2923db08d0879b290c7f622ead72de",
+            "assets/final42-r88/effects/254/atlas.png": "30a6b51d13cdcecf64df2cd5d3ad99bd2c1ff7bee40489b170809f877600971f",
+            "assets/final42-r88/effects/259/atlas.png": "e6ff32abedd6eabf3c94fee3fbe4f0dc2fc2c40910cff9931a33b936b0af1d98",
+            "assets/final42-r88/effects/260/atlas.png": "6b5a416feed31ff38d5e31c0c3b54f90e2803b925265ab13faef709ed065bfe5",
+            "assets/final42-r88/effects/261/atlas.png": "018e4e692d201a69730424b4d820e5d58f772b513cd09504b30519761900374a",
+            "assets/final42-r88/effects/262/atlas.png": "507c8c3dd2a0f3615b733e441dcf976c0d8cf88a3a96c572a4408db18a353e2d"
+          }
+          if assets!=painted or len(assets)!=42:raise SystemExit('R88 public asset hash map omitted or changed a supplied painted atlas')
+          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA'],'web-manifest-r62.json':os.environ['MANIFEST_SHA']};expected.update(assets);rows=[]
           for name,want in expected.items():
               for attempt in range(18):
                   url=base+name+'?release='+os.environ['SOURCE_COMMIT']+'&check='+str(attempt)
@@ -517,7 +716,7 @@ jobs:
                   except Exception as exc:error=str(exc)
                   time.sleep(5)
               else:raise SystemExit('Public release verification failed for '+name+': '+error)
-          print('HOSPITAL_B2_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          print('HOSPITAL_R88_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
           PY
       - uses: actions/checkout@v6
         with:
@@ -545,6 +744,10 @@ jobs:
           set -euo pipefail
           mkdir -p out/r77
           node scripts/r77-guide-normal.browser.mjs | tee out/r77/public-browser.log
+      - name: Verify painted R88 effects on the exact public Pages runtime
+        env:
+          STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node scripts/r88-painted.browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -552,4 +755,7 @@ jobs:
           path: |
             out/r75/public-smoke.json
             out/r77/
+            out/r88/
+            out/hospital-r88/
           retention-days: 14
+

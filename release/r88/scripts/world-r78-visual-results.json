@@ -1,0 +1,112 @@
+{
+  "schema": "world-r78-hospital-visual-cpu/v1",
+  "method": "Official local Three r186 BufferGeometry construction; no WebGL, screenshot, browser or GPU.",
+  "checks": [
+    {
+      "name": "The local Three r186 implementation is used",
+      "passed": true,
+      "detail": "186"
+    },
+    {
+      "name": "Surgical room and follow marker use actual BufferGeometry meshes",
+      "passed": true,
+      "detail": {
+        "meshes": 18,
+        "resources": 8,
+        "types": [
+          "surgeon-theatre-outer-ring",
+          "surgeon-theatre-inner-ring",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-bay-corner",
+          "surgeon-operating-table-inlay",
+          "surgeon-operating-table-centre",
+          "surgeon-operating-table-mark",
+          "surgeon-operating-table-mark",
+          "surgeon-theatre-red-axis",
+          "surgeon-follow-focus-outer",
+          "surgeon-follow-focus-inner",
+          "surgeon-follow-focus-axis"
+        ]
+      }
+    },
+    {
+      "name": "All surgical inlay meshes have finite positions within 0.07 world units of the floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Surgeon marker is positioned from the actor and remains presentation only",
+      "passed": true,
+      "detail": {
+        "marker": [
+          18.25,
+          0.02,
+          10.75
+        ]
+      }
+    },
+    {
+      "name": "Operating room centers its table and unobtrusive teal/ivory rings on the native boss floor",
+      "passed": true,
+      "detail": {
+        "revision": "hospital-surgeon-operating-room-r78",
+        "zoneId": "ep1a08",
+        "center": {
+          "x": 20,
+          "z": 12
+        },
+        "rings": [
+          {
+            "inner": 6.52,
+            "outer": 6.68,
+            "color": 7377293,
+            "opacity": 0.34
+          },
+          {
+            "inner": 4.38,
+            "outer": 4.46,
+            "color": 12898499,
+            "opacity": 0.32
+          }
+        ],
+        "table": {
+          "x": 20,
+          "z": 12,
+          "width": 2.2,
+          "depth": 3.6
+        },
+        "marker": {
+          "outer": 1.58,
+          "inner": 1.49,
+          "secondaryOuter": 1.15,
+          "secondaryInner": 1.1
+        },
+        "presentationOnly": true,
+        "collisionChanged": false,
+        "damageChanged": false,
+        "saveChanged": false
+      }
+    },
+    {
+      "name": "PC fine-pointer camera crops more outer roof while leaving map collision untouched",
+      "passed": true,
+      "detail": {
+        "factor": 1.12,
+        "sourceHook": true,
+        "loadedHook": true,
+        "desktopOnly": true,
+        "loadedOnce": true
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "browser": false,
+  "GPU": false
+}

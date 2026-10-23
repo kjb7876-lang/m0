@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "Delivered page loads no supplied dynamic sampler catalog adapter or SVG",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Supplied runtime is not initialized before gameplay",
+      "passed": true
+    },
+    {
+      "name": "Native boot and hospital start work with the supplied dynamic module absent",
+      "passed": true
+    },
+    {
+      "name": "Hospital spider cave and finale frames contain no new procedural package commands",
+      "passed": true,
+      "detail": [
+        {
+          "zone": "ep1a08",
+          "count": 84,
+          "newDynamic": false,
+          "finite": true
+        },
+        {
+          "zone": "dist02",
+          "count": 150,
+          "newDynamic": false,
+          "finite": true
+        },
+        {
+          "zone": "cult04",
+          "count": 275,
+          "newDynamic": false,
+          "finite": true
+        }
+      ]
+    },
+    {
+      "name": "Static64 PNG component adapter remains available without dynamic timelines",
+      "passed": true
+    },
+    {
+      "name": "Existing native combat skills and medical effects remain installed",
+      "passed": true
+    },
+    {
+      "name": "Current manifest records the user-requested dynamic deferral",
+      "passed": true
+    },
+    {
+      "name": "Disabling the package creates no native game errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

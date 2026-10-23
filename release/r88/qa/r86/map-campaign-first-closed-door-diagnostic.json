@@ -1,0 +1,5460 @@
+{
+  "schema": "r86-all-campaign-map-admission/v1",
+  "method": "Native new game and 777 activate/go/difficulty UI across the entire 64-region story campaign; native collision, path and RenderBridge capture. Scripted positions and timers, no browser/GPU or natural-play validation.",
+  "checks": [
+    {
+      "name": "Native runtime boots",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Opening is the canonical safe refuge",
+      "passed": true
+    },
+    {
+      "name": "777 activates from the untouched opening checkpoint",
+      "passed": true,
+      "detail": {
+        "ok": true
+      }
+    },
+    {
+      "name": "All 64 native 777 destinations enter the requested region without loading or modal residue",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every campaign entry places the player on collision-safe floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every campaign capture has one finite hero and finite actor coordinates",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every living enemy clears the static geometry in all 56 combat maps",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Each controlled ward reaches its gathering room while its boss room stays locked before elimination",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Samong regions retain distinct native finale and ward controllers",
+      "passed": true
+    },
+    {
+      "name": "Every region has only valid reciprocal campaign destinations",
+      "passed": true,
+      "detail": [
+        {
+          "id": "hub",
+          "exits": {
+            "e": "dist00"
+          }
+        },
+        {
+          "id": "dist00",
+          "exits": {
+            "w": "hub",
+            "e": "dist01"
+          }
+        },
+        {
+          "id": "dist01",
+          "exits": {
+            "w": "dist00",
+            "e": "dist02"
+          }
+        },
+        {
+          "id": "dist02",
+          "exits": {
+            "w": "dist01",
+            "s": "dist03"
+          }
+        },
+        {
+          "id": "dist03",
+          "exits": {
+            "n": "dist02",
+            "w": "dist04"
+          }
+        },
+        {
+          "id": "dist04",
+          "exits": {
+            "e": "dist03",
+            "w": "dist05"
+          }
+        },
+        {
+          "id": "dist05",
+          "exits": {
+            "e": "dist04",
+            "w": "dist06"
+          }
+        },
+        {
+          "id": "dist06",
+          "exits": {
+            "e": "dist05",
+            "s": "ep1a08"
+          }
+        },
+        {
+          "id": "ep1a08",
+          "exits": {
+            "n": "dist06",
+            "e": "ep1a09"
+          }
+        },
+        {
+          "id": "ep1a09",
+          "exits": {
+            "w": "ep1a08",
+            "e": "ep1a09b"
+          }
+        },
+        {
+          "id": "ep1a09b",
+          "exits": {
+            "w": "ep1a09",
+            "e": "ep1a10"
+          }
+        },
+        {
+          "id": "ep1a10",
+          "exits": {
+            "w": "ep1a09b",
+            "s": "ep1a11"
+          }
+        },
+        {
+          "id": "ep1a11",
+          "exits": {
+            "n": "ep1a10",
+            "w": "dreamRest"
+          }
+        },
+        {
+          "id": "dreamRest",
+          "exits": {
+            "e": "ep1a11",
+            "w": "ep1b01"
+          }
+        },
+        {
+          "id": "ep1b01",
+          "exits": {
+            "e": "dreamRest",
+            "w": "ep1b02"
+          }
+        },
+        {
+          "id": "ep1b02",
+          "exits": {
+            "e": "ep1b01",
+            "s": "ep1b03"
+          }
+        },
+        {
+          "id": "ep1b03",
+          "exits": {
+            "n": "ep1b02",
+            "e": "ep1b04"
+          }
+        },
+        {
+          "id": "ep1b04",
+          "exits": {
+            "w": "ep1b03",
+            "e": "ep1b05"
+          }
+        },
+        {
+          "id": "ep1b05",
+          "exits": {
+            "w": "ep1b04",
+            "e": "ep1b06"
+          }
+        },
+        {
+          "id": "ep1b06",
+          "exits": {
+            "w": "ep1b05",
+            "s": "ep1b06b"
+          }
+        },
+        {
+          "id": "ep1b06b",
+          "exits": {
+            "n": "ep1b06",
+            "w": "ep1b07"
+          }
+        },
+        {
+          "id": "ep1b07",
+          "exits": {
+            "e": "ep1b06b",
+            "w": "ep1b08"
+          }
+        },
+        {
+          "id": "ep1b08",
+          "exits": {
+            "e": "ep1b07",
+            "w": "ep1b09"
+          }
+        },
+        {
+          "id": "ep1b09",
+          "exits": {
+            "e": "ep1b08",
+            "s": "restEp1b"
+          }
+        },
+        {
+          "id": "restEp1b",
+          "exits": {
+            "n": "ep1b09",
+            "e": "u201"
+          }
+        },
+        {
+          "id": "u201",
+          "exits": {
+            "w": "restEp1b",
+            "e": "u202"
+          }
+        },
+        {
+          "id": "u202",
+          "exits": {
+            "w": "u201",
+            "e": "u204"
+          }
+        },
+        {
+          "id": "u204",
+          "exits": {
+            "w": "u202",
+            "s": "u205"
+          }
+        },
+        {
+          "id": "u205",
+          "exits": {
+            "n": "u204",
+            "w": "u206"
+          }
+        },
+        {
+          "id": "u206",
+          "exits": {
+            "e": "u205",
+            "w": "u203"
+          }
+        },
+        {
+          "id": "u203",
+          "exits": {
+            "e": "u206",
+            "w": "restU2"
+          }
+        },
+        {
+          "id": "restU2",
+          "exits": {
+            "e": "u203",
+            "s": "last304"
+          }
+        },
+        {
+          "id": "last304",
+          "exits": {
+            "n": "restU2",
+            "e": "last305"
+          }
+        },
+        {
+          "id": "last305",
+          "exits": {
+            "w": "last304",
+            "e": "last301"
+          }
+        },
+        {
+          "id": "last301",
+          "exits": {
+            "w": "last305",
+            "e": "last302"
+          }
+        },
+        {
+          "id": "last302",
+          "exits": {
+            "w": "last301",
+            "s": "last303"
+          }
+        },
+        {
+          "id": "last303",
+          "exits": {
+            "n": "last302",
+            "w": "restLast3"
+          }
+        },
+        {
+          "id": "restLast3",
+          "exits": {
+            "e": "last303",
+            "w": "kair01"
+          }
+        },
+        {
+          "id": "kair01",
+          "exits": {
+            "e": "restLast3",
+            "w": "kair04"
+          }
+        },
+        {
+          "id": "kair04",
+          "exits": {
+            "e": "kair01",
+            "s": "kair05"
+          }
+        },
+        {
+          "id": "kair05",
+          "exits": {
+            "n": "kair04",
+            "e": "kair06"
+          }
+        },
+        {
+          "id": "kair06",
+          "exits": {
+            "w": "kair05",
+            "e": "kair07"
+          }
+        },
+        {
+          "id": "kair07",
+          "exits": {
+            "w": "kair06",
+            "e": "kair08"
+          }
+        },
+        {
+          "id": "kair08",
+          "exits": {
+            "w": "kair07",
+            "s": "kair09"
+          }
+        },
+        {
+          "id": "kair09",
+          "exits": {
+            "n": "kair08",
+            "w": "kair10"
+          }
+        },
+        {
+          "id": "kair10",
+          "exits": {
+            "e": "kair09",
+            "w": "kair02"
+          }
+        },
+        {
+          "id": "kair02",
+          "exits": {
+            "e": "kair10",
+            "w": "kair03"
+          }
+        },
+        {
+          "id": "kair03",
+          "exits": {
+            "e": "kair02",
+            "s": "restKairo"
+          }
+        },
+        {
+          "id": "restKairo",
+          "exits": {
+            "n": "kair03",
+            "e": "hando01"
+          }
+        },
+        {
+          "id": "hando01",
+          "exits": {
+            "w": "restKairo",
+            "e": "hando02"
+          }
+        },
+        {
+          "id": "hando02",
+          "exits": {
+            "w": "hando01",
+            "e": "hando03"
+          }
+        },
+        {
+          "id": "hando03",
+          "exits": {
+            "w": "hando02",
+            "s": "restHando"
+          }
+        },
+        {
+          "id": "restHando",
+          "exits": {
+            "n": "hando03",
+            "w": "murder01"
+          }
+        },
+        {
+          "id": "murder01",
+          "exits": {
+            "e": "restHando",
+            "w": "murder02"
+          }
+        },
+        {
+          "id": "murder02",
+          "exits": {
+            "e": "murder01",
+            "w": "murder04"
+          }
+        },
+        {
+          "id": "murder04",
+          "exits": {
+            "e": "murder02",
+            "s": "murder03"
+          }
+        },
+        {
+          "id": "murder03",
+          "exits": {
+            "n": "murder04",
+            "e": "cult01"
+          }
+        },
+        {
+          "id": "cult01",
+          "exits": {
+            "w": "murder03",
+            "e": "cult02"
+          }
+        },
+        {
+          "id": "cult02",
+          "exits": {
+            "w": "cult01",
+            "e": "cult05"
+          }
+        },
+        {
+          "id": "cult05",
+          "exits": {
+            "w": "cult02",
+            "s": "cult06"
+          }
+        },
+        {
+          "id": "cult06",
+          "exits": {
+            "n": "cult05",
+            "w": "cult03"
+          }
+        },
+        {
+          "id": "cult03",
+          "exits": {
+            "e": "cult06",
+            "w": "cult04"
+          }
+        },
+        {
+          "id": "cult04",
+          "exits": {
+            "e": "cult03",
+            "w": "village"
+          }
+        },
+        {
+          "id": "village",
+          "exits": {
+            "e": "cult04"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Every walkable cell of the distinct hospital, world-ward and refuge layouts is connected through body-clear edges",
+      "passed": false,
+      "detail": [
+        {
+          "representative": "hub",
+          "floorCells": 864,
+          "walkableCenters": 864,
+          "components": [
+            {
+              "cells": 864,
+              "sample": [
+                2,
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "representative": "dist00",
+          "floorCells": 8022,
+          "walkableCenters": 8022,
+          "components": [
+            {
+              "cells": 8022,
+              "sample": [
+                10,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "representative": "ep1a08",
+          "floorCells": 8022,
+          "walkableCenters": 8022,
+          "components": [
+            {
+              "cells": 7648,
+              "sample": [
+                17,
+                20
+              ]
+            },
+            {
+              "cells": 334,
+              "sample": [
+                10,
+                6
+              ]
+            },
+            {
+              "cells": 40,
+              "sample": [
+                1,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Leaving the 64-region 777 audit restores the exact normal opening progress",
+      "passed": true
+    },
+    {
+      "name": "No native error is recorded across the whole campaign admission audit",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "maps": [
+    {
+      "id": "hub",
+      "title": "마수궁 피난 거점",
+      "safe": true,
+      "type": "r82-refuge-cloister",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 7,
+      "points": {
+        "next": {
+          "x": 30,
+          "y": 22
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:false:false:0:",
+        "authored": {
+          "x": 30,
+          "y": 22
+        }
+      },
+      "routeGraph": {
+        "e": "dist00"
+      },
+      "errorCount": 0,
+      "requested": "hub",
+      "entryResult": true
+    },
+    {
+      "id": "dist00",
+      "title": "악마화 나무의 정원",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:65",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "hub",
+        "e": "dist01"
+      },
+      "errorCount": 0,
+      "requested": "dist00",
+      "entryResult": true
+    },
+    {
+      "id": "dist01",
+      "title": "거미동굴",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:66",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "dist00",
+        "e": "dist02"
+      },
+      "errorCount": 0,
+      "requested": "dist01",
+      "entryResult": true
+    },
+    {
+      "id": "dist02",
+      "title": "늪지대의 뿔악마",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:67",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "dist01",
+        "s": "dist03"
+      },
+      "errorCount": 0,
+      "requested": "dist02",
+      "entryResult": true
+    },
+    {
+      "id": "dist03",
+      "title": "무너진성",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:68",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "dist02",
+        "w": "dist04"
+      },
+      "errorCount": 0,
+      "requested": "dist03",
+      "entryResult": true
+    },
+    {
+      "id": "dist04",
+      "title": "시체들이 되살아난 밤",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:69",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "dist03",
+        "w": "dist05"
+      },
+      "errorCount": 0,
+      "requested": "dist04",
+      "entryResult": true
+    },
+    {
+      "id": "dist05",
+      "title": "일곱 기둥",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:70",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "dist04",
+        "w": "dist06"
+      },
+      "errorCount": 0,
+      "requested": "dist05",
+      "entryResult": true
+    },
+    {
+      "id": "dist06",
+      "title": "추락",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:71",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "dist05",
+        "s": "ep1a08"
+      },
+      "errorCount": 0,
+      "requested": "dist06",
+      "entryResult": true
+    },
+    {
+      "id": "ep1a08",
+      "title": "피로 물든 병원",
+      "safe": false,
+      "type": "hospital-ward-b3",
+      "ward": false,
+      "hospital": true,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 60,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:ep1a08-ward-maze-r2:",
+        "authored": {
+          "x": 5.221291866028709,
+          "y": 5.221291866028709,
+          "cue": "붉은 병원 상단 중앙 벽 출입구",
+          "kind": "door"
+        }
+      },
+      "routeGraph": {
+        "n": "dist06",
+        "e": "ep1a09"
+      },
+      "errorCount": 0,
+      "requested": "ep1a08",
+      "entryResult": true
+    },
+    {
+      "id": "ep1a09",
+      "title": "주사실",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:73",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1a08",
+        "e": "ep1a09b"
+      },
+      "errorCount": 0,
+      "requested": "ep1a09",
+      "entryResult": true
+    },
+    {
+      "id": "ep1a09b",
+      "title": "결전의 날",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:74",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1a09",
+        "e": "ep1a10"
+      },
+      "errorCount": 0,
+      "requested": "ep1a09b",
+      "entryResult": true
+    },
+    {
+      "id": "ep1a10",
+      "title": "환자와 중독의 도시",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:75",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1a09b",
+        "s": "ep1a11"
+      },
+      "errorCount": 0,
+      "requested": "ep1a10",
+      "entryResult": true
+    },
+    {
+      "id": "ep1a11",
+      "title": "천사의 가면과 의목사 후보생",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:76",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "ep1a10",
+        "w": "dreamRest"
+      },
+      "errorCount": 0,
+      "requested": "ep1a11",
+      "entryResult": true
+    },
+    {
+      "id": "dreamRest",
+      "title": "기억해 내지 못하는 사람 〔쉼터〕",
+      "safe": true,
+      "type": "interior-consultation",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 56.5,
+          "y": 27.5,
+          "width": 2.8,
+          "depth": 0.28,
+          "edge": [
+            1,
+            2
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 47.5,
+          "y": 35.5,
+          "width": 0.28,
+          "depth": 2.8,
+          "edge": [
+            2,
+            3
+          ],
+          "axis": "x"
+        }
+      ],
+      "nodeCount": 5,
+      "points": {
+        "next": {
+          "x": 18.3125,
+          "y": 2.687500000000001
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 18.3125,
+          "y": 2.687500000000001,
+          "cue": "별빛 쉼터 우상단 푸른 문 발치",
+          "kind": "door"
+        }
+      },
+      "routeGraph": {
+        "e": "ep1a11",
+        "w": "ep1b01"
+      },
+      "errorCount": 0,
+      "requested": "dreamRest",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b01",
+      "title": "솔로몬의 봉인식",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:78",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "dreamRest",
+        "w": "ep1b02"
+      },
+      "errorCount": 0,
+      "requested": "ep1b01",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b02",
+      "title": "나태의 집",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:79",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "ep1b01",
+        "s": "ep1b03"
+      },
+      "errorCount": 0,
+      "requested": "ep1b02",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b03",
+      "title": "금이 간 안경",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:80",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "ep1b02",
+        "e": "ep1b04"
+      },
+      "errorCount": 0,
+      "requested": "ep1b03",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b04",
+      "title": "탐식의 주방",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:81",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1b03",
+        "e": "ep1b05"
+      },
+      "errorCount": 0,
+      "requested": "ep1b04",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b05",
+      "title": "붉은 하이힐",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:82",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1b04",
+        "e": "ep1b06"
+      },
+      "errorCount": 0,
+      "requested": "ep1b05",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b06",
+      "title": "맘몬의 금고",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:83",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "ep1b05",
+        "s": "ep1b06b"
+      },
+      "errorCount": 0,
+      "requested": "ep1b06",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b06b",
+      "title": "눈보라 속의 소년",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:84",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "ep1b06",
+        "w": "ep1b07"
+      },
+      "errorCount": 0,
+      "requested": "ep1b06b",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b07",
+      "title": "불을 지른 남자",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:85",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "ep1b06b",
+        "w": "ep1b08"
+      },
+      "errorCount": 0,
+      "requested": "ep1b07",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b08",
+      "title": "하늘에 서려는 자",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:86",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "ep1b07",
+        "w": "ep1b09"
+      },
+      "errorCount": 0,
+      "requested": "ep1b08",
+      "entryResult": true
+    },
+    {
+      "id": "ep1b09",
+      "title": "생체 부트로더",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:87",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "ep1b08",
+        "s": "restEp1b"
+      },
+      "errorCount": 0,
+      "requested": "ep1b09",
+      "entryResult": true
+    },
+    {
+      "id": "restEp1b",
+      "title": "사라진 귀환자 〔쉼터〕",
+      "safe": true,
+      "type": "interior-observation",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 56.5,
+          "y": 27.5,
+          "width": 2.8,
+          "depth": 0.28,
+          "edge": [
+            1,
+            2
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 47.5,
+          "y": 35.5,
+          "width": 0.28,
+          "depth": 2.8,
+          "edge": [
+            2,
+            3
+          ],
+          "axis": "x"
+        }
+      ],
+      "nodeCount": 5,
+      "points": {
+        "next": {
+          "x": 8.25,
+          "y": 8.25
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 8.25,
+          "y": 8.25,
+          "cue": "관측 쉼터 상부 원형단 접근로",
+          "kind": "path"
+        }
+      },
+      "routeGraph": {
+        "n": "ep1b09",
+        "e": "u201"
+      },
+      "errorCount": 0,
+      "requested": "restEp1b",
+      "entryResult": true
+    },
+    {
+      "id": "u201",
+      "title": "방어의 군단",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:89",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "restEp1b",
+        "e": "u202"
+      },
+      "errorCount": 0,
+      "requested": "u201",
+      "entryResult": true
+    },
+    {
+      "id": "u202",
+      "title": "잔인한 구원",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:90",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "u201",
+        "e": "u204"
+      },
+      "errorCount": 0,
+      "requested": "u202",
+      "entryResult": true
+    },
+    {
+      "id": "u204",
+      "title": "시스템의 거부권",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:91",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "u202",
+        "s": "u205"
+      },
+      "errorCount": 0,
+      "requested": "u204",
+      "entryResult": true
+    },
+    {
+      "id": "u205",
+      "title": "관리자 권한",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:92",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "u204",
+        "w": "u206"
+      },
+      "errorCount": 0,
+      "requested": "u205",
+      "entryResult": true
+    },
+    {
+      "id": "u206",
+      "title": "중앙 코어 이주실",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:93",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "u205",
+        "w": "u203"
+      },
+      "errorCount": 0,
+      "requested": "u206",
+      "entryResult": true
+    },
+    {
+      "id": "u203",
+      "title": "기억의 문",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:94",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "u206",
+        "w": "restU2"
+      },
+      "errorCount": 0,
+      "requested": "u203",
+      "entryResult": true
+    },
+    {
+      "id": "restU2",
+      "title": "환도 자아의 탄생 〔쉼터〕",
+      "safe": true,
+      "type": "courtyard",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 9,
+      "points": {
+        "next": {
+          "x": 17.02395964691047,
+          "y": 3.215636822194197
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 17.02395964691047,
+          "y": 3.215636822194197,
+          "cue": "융합전초 우상단 붉은 병원 입구",
+          "kind": "door"
+        }
+      },
+      "routeGraph": {
+        "e": "u203",
+        "s": "last304"
+      },
+      "errorCount": 0,
+      "requested": "restU2",
+      "entryResult": true
+    },
+    {
+      "id": "last304",
+      "title": "중립 지역의 재각성",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:96",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "restU2",
+        "e": "last305"
+      },
+      "errorCount": 0,
+      "requested": "last304",
+      "entryResult": true
+    },
+    {
+      "id": "last305",
+      "title": "고블린 두목과 장미 인장",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:97",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "last304",
+        "e": "last301"
+      },
+      "errorCount": 0,
+      "requested": "last305",
+      "entryResult": true
+    },
+    {
+      "id": "last301",
+      "title": "타락천사 기사",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:98",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "last305",
+        "e": "last302"
+      },
+      "errorCount": 0,
+      "requested": "last301",
+      "entryResult": true
+    },
+    {
+      "id": "last302",
+      "title": "잠들지 못하는 마을",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:99",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "last301",
+        "s": "last303"
+      },
+      "errorCount": 0,
+      "requested": "last302",
+      "entryResult": true
+    },
+    {
+      "id": "last303",
+      "title": "한약과 불면귀",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:100",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "last302",
+        "w": "restLast3"
+      },
+      "errorCount": 0,
+      "requested": "last303",
+      "entryResult": true
+    },
+    {
+      "id": "restLast3",
+      "title": "끼어든 시간 〔쉼터〕",
+      "safe": true,
+      "type": "courtyard",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 9,
+      "points": {
+        "next": {
+          "x": 8.5875,
+          "y": 8.5875
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 8.5875,
+          "y": 8.5875,
+          "cue": "관측 원형단 상부 경계길",
+          "kind": "path"
+        }
+      },
+      "routeGraph": {
+        "e": "last303",
+        "w": "kair01"
+      },
+      "errorCount": 0,
+      "requested": "restLast3",
+      "entryResult": true
+    },
+    {
+      "id": "kair01",
+      "title": "최초명령의 세계",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:102",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "restLast3",
+        "w": "kair04"
+      },
+      "errorCount": 0,
+      "requested": "kair01",
+      "entryResult": true
+    },
+    {
+      "id": "kair04",
+      "title": "예순여섯 수문장",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:103",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "kair01",
+        "s": "kair05"
+      },
+      "errorCount": 0,
+      "requested": "kair04",
+      "entryResult": true
+    },
+    {
+      "id": "kair05",
+      "title": "빼앗긴 시간",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:104",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "kair04",
+        "e": "kair06"
+      },
+      "errorCount": 0,
+      "requested": "kair05",
+      "entryResult": true
+    },
+    {
+      "id": "kair06",
+      "title": "닫힌 층의 명령",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:105",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "kair05",
+        "e": "kair07"
+      },
+      "errorCount": 0,
+      "requested": "kair06",
+      "entryResult": true
+    },
+    {
+      "id": "kair07",
+      "title": "검은 공방",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:106",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "kair06",
+        "e": "kair08"
+      },
+      "errorCount": 0,
+      "requested": "kair07",
+      "entryResult": true
+    },
+    {
+      "id": "kair08",
+      "title": "뉴런 게이트 · 노이론 게이트",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:107",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "kair07",
+        "s": "kair09"
+      },
+      "errorCount": 0,
+      "requested": "kair08",
+      "entryResult": true
+    },
+    {
+      "id": "kair09",
+      "title": "망각의 묘지",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:108",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "kair08",
+        "w": "kair10"
+      },
+      "errorCount": 0,
+      "requested": "kair09",
+      "entryResult": true
+    },
+    {
+      "id": "kair10",
+      "title": "붕괴 의식장",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:109",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "kair09",
+        "w": "kair02"
+      },
+      "errorCount": 0,
+      "requested": "kair10",
+      "entryResult": true
+    },
+    {
+      "id": "kair02",
+      "title": "아르벨리아, 유예의 수문장",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:110",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "kair10",
+        "w": "kair03"
+      },
+      "errorCount": 0,
+      "requested": "kair02",
+      "entryResult": true
+    },
+    {
+      "id": "kair03",
+      "title": "세이렌 모르",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:111",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "kair02",
+        "s": "restKairo"
+      },
+      "errorCount": 0,
+      "requested": "kair03",
+      "entryResult": true
+    },
+    {
+      "id": "restKairo",
+      "title": "최초명령 재작성 〔쉼터〕",
+      "safe": true,
+      "type": "courtyard",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 9,
+      "points": {
+        "next": {
+          "x": 17.9375,
+          "y": 2.312500000000001
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 17.9375,
+          "y": 2.312500000000001,
+          "cue": "시간정원 우상단 황금 문 발치",
+          "kind": "door"
+        }
+      },
+      "routeGraph": {
+        "n": "kair03",
+        "e": "hando01"
+      },
+      "errorCount": 0,
+      "requested": "restKairo",
+      "entryResult": true
+    },
+    {
+      "id": "hando01",
+      "title": "성 안에 소환된 의목사",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 17,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            12,
+            18
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 70,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            15,
+            19
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:113",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "restKairo",
+        "e": "hando02"
+      },
+      "errorCount": 0,
+      "requested": "hando01",
+      "entryResult": true
+    },
+    {
+      "id": "hando02",
+      "title": "두 주인의 각성",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 17,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            12,
+            18
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 70,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            15,
+            19
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:114",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "hando01",
+        "e": "hando03"
+      },
+      "errorCount": 0,
+      "requested": "hando02",
+      "entryResult": true
+    },
+    {
+      "id": "hando03",
+      "title": "함께 되찾은 코어",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 17,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            12,
+            18
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 70,
+          "y": 105,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            15,
+            19
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:115",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "hando02",
+        "s": "restHando"
+      },
+      "errorCount": 0,
+      "requested": "hando03",
+      "entryResult": true
+    },
+    {
+      "id": "restHando",
+      "title": "잘못 이어진 기록 〔쉼터〕",
+      "safe": true,
+      "type": "courtyard",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 9,
+      "points": {
+        "next": {
+          "x": 6.9921875,
+          "y": 6.9921875
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:true:false:0:",
+        "authored": {
+          "x": 6.9921875,
+          "y": 6.9921875,
+          "cue": "시간 웜홀 상부 보라 계단",
+          "kind": "path"
+        }
+      },
+      "routeGraph": {
+        "n": "hando03",
+        "w": "murder01"
+      },
+      "errorCount": 0,
+      "requested": "restHando",
+      "entryResult": true
+    },
+    {
+      "id": "murder01",
+      "title": "윤하람",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:117",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "restHando",
+        "w": "murder02"
+      },
+      "errorCount": 0,
+      "requested": "murder01",
+      "entryResult": true
+    },
+    {
+      "id": "murder02",
+      "title": "장민재와 새빛호텔",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:118",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "murder01",
+        "w": "murder04"
+      },
+      "errorCount": 0,
+      "requested": "murder02",
+      "entryResult": true
+    },
+    {
+      "id": "murder04",
+      "title": "고서진과 청록빌라",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:119",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "murder02",
+        "s": "murder03"
+      },
+      "errorCount": 0,
+      "requested": "murder04",
+      "entryResult": true
+    },
+    {
+      "id": "murder03",
+      "title": "옥상의 순환",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:120",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "murder04",
+        "e": "cult01"
+      },
+      "errorCount": 0,
+      "requested": "murder03",
+      "entryResult": true
+    },
+    {
+      "id": "cult01",
+      "title": "하나로 묶인 악몽",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:121",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "murder03",
+        "e": "cult02"
+      },
+      "errorCount": 0,
+      "requested": "cult01",
+      "entryResult": true
+    },
+    {
+      "id": "cult02",
+      "title": "교주가 기다리는 전쟁",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:122",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "cult01",
+        "e": "cult05"
+      },
+      "errorCount": 0,
+      "requested": "cult02",
+      "entryResult": true
+    },
+    {
+      "id": "cult05",
+      "title": "돌아오는 현실의 기억",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:123",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "w": "cult02",
+        "s": "cult06"
+      },
+      "errorCount": 0,
+      "requested": "cult05",
+      "entryResult": true
+    },
+    {
+      "id": "cult06",
+      "title": "처음 세웠던 목표",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:124",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "n": "cult05",
+        "w": "cult03"
+      },
+      "errorCount": 0,
+      "requested": "cult06",
+      "entryResult": true
+    },
+    {
+      "id": "cult03",
+      "title": "사몽의 문턱",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": true,
+      "phase": "route",
+      "routePath": 9,
+      "lockedBossPath": 0,
+      "earlyNext": false,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:125",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "cult06",
+        "w": "cult04"
+      },
+      "errorCount": 0,
+      "requested": "cult03",
+      "entryResult": true
+    },
+    {
+      "id": "cult04",
+      "title": "교주의 사몽",
+      "safe": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [
+        {
+          "id": "door-0",
+          "x": 20,
+          "y": 20,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-1",
+          "x": 29,
+          "y": 90,
+          "width": 6,
+          "depth": 0.24,
+          "edge": [
+            13,
+            10
+          ],
+          "axis": "y"
+        },
+        {
+          "id": "door-2",
+          "x": 5,
+          "y": 6,
+          "width": 8,
+          "depth": 0.24,
+          "edge": [
+            17,
+            4
+          ],
+          "axis": "y"
+        }
+      ],
+      "nodeCount": 20,
+      "points": {
+        "next": null,
+        "previous": {
+          "x": 43,
+          "y": 109
+        },
+        "tag": "43:109:false:false:0:126",
+        "authored": {
+          "x": 5,
+          "y": 3.5
+        }
+      },
+      "routeGraph": {
+        "e": "cult03",
+        "w": "village"
+      },
+      "errorCount": 0,
+      "requested": "cult04",
+      "entryResult": true
+    },
+    {
+      "id": "village",
+      "title": "남겨진 몽세",
+      "safe": true,
+      "type": "courtyard",
+      "ward": false,
+      "hospital": false,
+      "loading": false,
+      "modal": false,
+      "started": true,
+      "heroSafe": true,
+      "frameReady": true,
+      "heroEntities": 1,
+      "finiteActors": true,
+      "unsafeActors": [],
+      "controlled": false,
+      "routePath": null,
+      "lockedBossPath": null,
+      "earlyNext": null,
+      "doors": [],
+      "nodeCount": 9,
+      "points": {
+        "next": {
+          "x": 3.75,
+          "y": 3.75
+        },
+        "previous": {
+          "x": 15,
+          "y": 19
+        },
+        "tag": "15:19:false:false:0:",
+        "authored": {
+          "x": 3.75,
+          "y": 3.75,
+          "cue": "결말 마을 상부 황금 입구",
+          "kind": "door"
+        }
+      },
+      "routeGraph": {
+        "e": "cult04"
+      },
+      "errorCount": 0,
+      "requested": "village",
+      "entryResult": true
+    }
+  ],
+  "geometry": [
+    {
+      "representative": "hub",
+      "floorCells": 864,
+      "walkableCenters": 864,
+      "components": [
+        {
+          "cells": 864,
+          "sample": [
+            2,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "representative": "dist00",
+      "floorCells": 8022,
+      "walkableCenters": 8022,
+      "components": [
+        {
+          "cells": 8022,
+          "sample": [
+            10,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "representative": "ep1a08",
+      "floorCells": 8022,
+      "walkableCenters": 8022,
+      "components": [
+        {
+          "cells": 7648,
+          "sample": [
+            17,
+            20
+          ]
+        },
+        {
+          "cells": 334,
+          "sample": [
+            10,
+            6
+          ]
+        },
+        {
+          "cells": 40,
+          "sample": [
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "completedAt": "2026-10-23T05:25:29.852Z",
+  "passed": 12,
+  "failed": 1
+}

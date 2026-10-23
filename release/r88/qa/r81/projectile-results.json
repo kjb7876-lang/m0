@@ -1,0 +1,1244 @@
+{
+  "schema": "r81-world-projectiles/v1",
+  "method": "Native terrainContact153 analytic sweep and native tickShots with assisted projectile/actor coordinates on actual 777 cave/swamp rooms. Uses native door interactions after assisted kills. CPU VM only; no browser, GPU, natural combat, or sprite assessment.",
+  "checks": [
+    {
+      "name": "dist01 enters through native 777 travel",
+      "passed": true,
+      "detail": {
+        "zone": "dist01"
+      }
+    },
+    {
+      "name": "dist01 native analytic sweep stops both projectile radii at every shared maze baffle",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "dist01 closed boss and exit doors stop swept projectiles",
+      "passed": true,
+      "detail": [
+        {
+          "id": "door-0",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.4500000000000002
+        },
+        {
+          "id": "door-0",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.4249999999999998
+        },
+        {
+          "id": "door-2",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.44999999999999996
+        },
+        {
+          "id": "door-2",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.42500000000000004
+        }
+      ]
+    },
+    {
+      "name": "dist01 native friendly and hostile tickShots both stop at closed doors and baffles",
+      "passed": true,
+      "detail": [
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        }
+      ]
+    },
+    {
+      "name": "dist01 opening the native boss door removes its projectile barrier",
+      "passed": true,
+      "detail": {
+        "phase": "boss",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "dist01 exit interaction opens its real projectile passage after the native boss phase",
+      "passed": true,
+      "detail": {
+        "phase": "done",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "dist02 enters through native 777 travel",
+      "passed": true,
+      "detail": {
+        "zone": "dist02"
+      }
+    },
+    {
+      "name": "dist02 native analytic sweep stops both projectile radii at every shared maze baffle",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "dist02 closed boss and exit doors stop swept projectiles",
+      "passed": true,
+      "detail": [
+        {
+          "id": "door-0",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.4500000000000002
+        },
+        {
+          "id": "door-0",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.4249999999999998
+        },
+        {
+          "id": "door-2",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.44999999999999996
+        },
+        {
+          "id": "door-2",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.42500000000000004
+        }
+      ]
+    },
+    {
+      "name": "dist02 native friendly and hostile tickShots both stop at closed doors and baffles",
+      "passed": true,
+      "detail": [
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        }
+      ]
+    },
+    {
+      "name": "dist02 opening the native boss door removes its projectile barrier",
+      "passed": true,
+      "detail": {
+        "phase": "boss",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "dist02 exit interaction opens its real projectile passage after the native boss phase",
+      "passed": true,
+      "detail": {
+        "phase": "done",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "maps": [
+    {
+      "id": "dist01",
+      "baffles": [
+        {
+          "id": "ward-r81-baffle:observation-bypass-seal",
+          "radius": 0.08,
+          "t": 0.4500000000000002,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:observation-bypass-seal",
+          "radius": 0.18,
+          "t": 0.4249999999999998,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-entry-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-entry-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-entry-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-entry-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-lower-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-lower-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-lower-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-lower-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-middle-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-middle-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-middle-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-middle-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-lower",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-lower",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:centre-shortcut-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:centre-shortcut-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-middle",
+          "radius": 0.08,
+          "t": 0.4500000000000002,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-middle",
+          "radius": 0.18,
+          "t": 0.4249999999999998,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-a-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-a-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-b-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-b-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-c-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-c-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-d-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-d-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-south-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-south-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-north-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-north-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-b-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-b-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-south-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-south-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-north-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-north-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-d-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-d-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        }
+      ],
+      "closed": [
+        {
+          "id": "door-0",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.4500000000000002
+        },
+        {
+          "id": "door-0",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.4249999999999998
+        },
+        {
+          "id": "door-2",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.44999999999999996
+        },
+        {
+          "id": "door-2",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.42500000000000004
+        }
+      ],
+      "blockedShots": [
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        }
+      ],
+      "opened": {
+        "phase": "boss",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      },
+      "exit": {
+        "phase": "done",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "dist02",
+      "baffles": [
+        {
+          "id": "ward-r81-baffle:observation-bypass-seal",
+          "radius": 0.08,
+          "t": 0.4500000000000002,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:observation-bypass-seal",
+          "radius": 0.18,
+          "t": 0.4249999999999998,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-entry-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-entry-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-entry-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-entry-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-lower-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-lower-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-lower-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-lower-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-middle-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:west-middle-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-middle-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:east-middle-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-lower",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-lower",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:centre-shortcut-seal",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:centre-shortcut-seal",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-middle",
+          "radius": 0.08,
+          "t": 0.4500000000000002,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:route-divider-middle",
+          "radius": 0.18,
+          "t": 0.4249999999999998,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-a-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-a-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-b-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-b-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-c-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-c-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-d-baffle",
+          "radius": 0.08,
+          "t": 0.4499999999999993,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:south-d-baffle",
+          "radius": 0.18,
+          "t": 0.42499999999999716,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-south-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-south-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-north-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-a-north-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-b-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-b-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-south-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-south-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-north-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-c-north-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-d-baffle",
+          "radius": 0.08,
+          "t": 0.45000000000000107,
+          "startBlocked": false
+        },
+        {
+          "id": "ward-r81-baffle:consult-d-baffle",
+          "radius": 0.18,
+          "t": 0.4250000000000007,
+          "startBlocked": false
+        }
+      ],
+      "closed": [
+        {
+          "id": "door-0",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.4500000000000002
+        },
+        {
+          "id": "door-0",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.4249999999999998
+        },
+        {
+          "id": "door-2",
+          "radius": 0.08,
+          "open": false,
+          "contact": 0.44999999999999996
+        },
+        {
+          "id": "door-2",
+          "radius": 0.18,
+          "open": false,
+          "contact": 0.42500000000000004
+        }
+      ],
+      "blockedShots": [
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": true,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 20,
+          "y": 19.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.08,
+          "dead": true,
+          "x": 4,
+          "y": 18.8,
+          "endDistance": 2.1999999999999993,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "boss-door",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 20,
+          "y": 19.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        },
+        {
+          "obstacle": "baffle",
+          "friendly": false,
+          "radius": 0.18,
+          "dead": true,
+          "x": 4,
+          "y": 18.7,
+          "endDistance": 2.3000000000000007,
+          "outcome": "terrain",
+          "hpUnchanged": true
+        }
+      ],
+      "opened": {
+        "phase": "boss",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 20,
+            "y": 22,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      },
+      "exit": {
+        "phase": "done",
+        "open": true,
+        "contacts": [
+          null,
+          null
+        ],
+        "shots": [
+          {
+            "friendly": true,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          },
+          {
+            "friendly": false,
+            "radius": 0.18,
+            "dead": false,
+            "x": 5,
+            "y": 8,
+            "endDistance": 0,
+            "hpUnchanged": true
+          }
+        ]
+      }
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T07:39:02.366Z",
+  "sourceHashes": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
+    "world-combat-r78.js": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e"
+  },
+  "errors": [],
+  "passed": 13,
+  "failed": 0,
+  "completedAt": "2026-10-23T07:39:19.914Z"
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "storyworld.pc.hospital-regression-r78/v1",
+  "dateUTC": "2026-10-22",
+  "status": "pass",
+  "passed": 86,
+  "total": 86,
+  "groups": [
+    {
+      "name": "maze",
+      "passed": 29,
+      "total": 29,
+      "evidence": "qa/maze-results.json"
+    },
+    {
+      "name": "cold",
+      "passed": 7,
+      "total": 7,
+      "evidence": "qa/cold-results.json"
+    },
+    {
+      "name": "ego-regression",
+      "passed": 5,
+      "total": 5,
+      "evidence": "qa/ego-regression-results.json"
+    },
+    {
+      "name": "champion",
+      "passed": 10,
+      "total": 10,
+      "evidence": "qa/champion-results.json"
+    },
+    {
+      "name": "migration",
+      "passed": 9,
+      "total": 9,
+      "evidence": "qa/migration-results.json"
+    },
+    {
+      "name": "layout",
+      "passed": 14,
+      "total": 14,
+      "evidence": "qa/layout-results.json"
+    },
+    {
+      "name": "roof",
+      "passed": 7,
+      "total": 7,
+      "evidence": "qa/roof-results.json"
+    },
+    {
+      "name": "package",
+      "passed": 5,
+      "total": 5,
+      "evidence": "qa/package-results.json"
+    }
+  ],
+  "frozenSourceGate": {
+    "method": "Final frozen-source CPU gate. No browser/GPU/natural play.",
+    "passed": true,
+    "sourceUnchangedDuringRun": true,
+    "sourceHashes": {
+      "index.html": "8a9a20077840317ffd9ecb1be468933dd81c69f6cb81e935dc39715d2e172356",
+      "dist/phase1.js": "0b0f62c932f90067e3f2e9d3bf734660dbbb43aeea7df1906928b1194b22691b",
+      "hospital-improvements-a5.js": "9072ccfbba0036e7387d6ce54d417f2cc27a96168ecc21dcccc0be24a4887396",
+      "hospital-maze-layout.js": "b230444aa9744705a7db2ed5f716dc74c91dcd5f7b34802e22841361762d312c",
+      "hospital-maze-progression.js": "e82f50b7ef7464690825d7c09366e9450cef04d4b973403a9fcc9192c7462318",
+      "hospital-maze-visuals.js": "1999652855366463e301d7112036b15288ef2425aa1808bb97557196e28790b9"
+    },
+    "runs": [
+      {
+        "test": "roof-check",
+        "exitCode": 0
+      },
+      {
+        "test": "layout-validation",
+        "exitCode": 0
+      },
+      {
+        "test": "maze-integration",
+        "exitCode": 0
+      },
+      {
+        "test": "migration-check",
+        "exitCode": 0
+      },
+      {
+        "test": "cold-check",
+        "exitCode": 0
+      },
+      {
+        "test": "ego-regression",
+        "exitCode": 0
+      },
+      {
+        "test": "champion-check",
+        "exitCode": 0
+      }
+    ]
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

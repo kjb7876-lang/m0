@@ -1,0 +1,132 @@
+{
+  "schema": "hospital-maze-v2-final-test/v1",
+  "dateKST": "2026-10-22",
+  "status": "local-test-build; actual browser/GPU/natural play unverified",
+  "passed": 85,
+  "total": 85,
+  "groups": [
+    {
+      "name": "maze",
+      "passed": 29,
+      "total": 29,
+      "method": "CPU VM with native gameplay/serialization/validation. Synthetic player positioning, forced HP-zero deaths, invulnerability; DOM/Image/audio/timers and renderer-readiness spy. NOT browser/GPU/natural play.",
+      "evidence": "../qa/maze-results.json",
+      "sha256": "2de08889c4f5ab56f492fbb05a6c355df732fbfa7f70c8d48ff200b631792015"
+    },
+    {
+      "name": "cold",
+      "passed": 7,
+      "total": 7,
+      "method": "Independent new Node process. Native save validation/restoration, native pathfinding and wound tick; synthetic fixtures, renderer readiness spy, disabled enemy AI. NOT browser/GPU/natural play.",
+      "evidence": "../qa/cold-results.json",
+      "sha256": "f8dc3f551ff7e970bd88f6c7b9e008da6266f9f2dbf9ae841a74a428fa7d698d"
+    },
+    {
+      "name": "ego-regression",
+      "passed": 5,
+      "total": 5,
+      "method": "CPU VM with synthetic EGO active visit validated by native restore. DOM, image, audio, renderer readiness stubbed. Not browser/GPU.",
+      "evidence": "../qa/ego-regression-results.json",
+      "sha256": "ed802c2bdb705d3ae873fd5da64bb867f27ddd6fc989e815fa28629abc788480"
+    },
+    {
+      "name": "champion",
+      "passed": 10,
+      "total": 10,
+      "method": "Native hospital restore, difficulty choice/reapplication, actor scaling and save round trips in Node VM. No browser/GPU/natural play.",
+      "evidence": "../qa/champion-results.json",
+      "sha256": "50a6e000f2eabae70761bbcc38163147866bc33721805b58a9505bd76b237a7d"
+    },
+    {
+      "name": "migration",
+      "passed": 9,
+      "total": 9,
+      "method": "Native CPU VM importing actual v1 test checkpoint fixtures into v2, without browser/GPU.",
+      "evidence": "../qa/migration-results.json",
+      "sha256": "7a56f42b680425431f58f36c8eb92ec16a17d40738e2c31d7f4d49a3eb0e3fcd"
+    },
+    {
+      "name": "layout",
+      "passed": 14,
+      "total": 14,
+      "method": "Native layout, A5 masonry plan, native analytical swept wall collision, and grid flood reachability in Node VM. DOM/Image/audio/timers are stubs. boot() and renderer readiness spy were NOT invoked. Not browser input, image rendering, WebGL/GPU or natural-play verification.",
+      "evidence": "../qa/layout-results.json",
+      "sha256": "d27d95f1432e20d7c8259478a1f75baded565b836c263d05c05fa383225182c8"
+    },
+    {
+      "name": "roof",
+      "passed": 7,
+      "total": 7,
+      "method": "Pinned Three r186 BufferGeometry, Group and material objects under Node, without WebGL renderer. Actual GPU/pixel rendering is unverified.",
+      "evidence": "../qa/roof-results.json",
+      "sha256": "1af372b0e8f2f0326a74fc9892ce2548f922178d64b6932faedf9e6166d5805f"
+    },
+    {
+      "name": "package",
+      "passed": 4,
+      "total": 4,
+      "method": "Node syntax, complete manifest SHA256 verification, actual loopback HTTP. No browser/GPU/audio playback or natural input.",
+      "evidence": "../qa/package-results.json",
+      "sha256": "776bae391b1d758ab5383d5660544df48149ae80b3901f7a1236382b7dcd14f5"
+    }
+  ],
+  "frozenSourceGate": "../qa/final-run-results.json",
+  "preservation": {
+    "originalFiles": 1946,
+    "missingOriginalFiles": [],
+    "unchangedOriginalFiles": 1939,
+    "changedOriginalFiles": [
+      {
+        "path": "hospital-three-pc/README-먼저읽기.txt",
+        "originalSHA256": "908e3c273d84d781b6f15b8e2bdb89ffdf5f1605b4931b99f3c8dfb46e495514",
+        "currentSHA256": "136edc823a34a6cab6c07ffe17b291635a2ee0187c99b9c7ba743a93afa55d25"
+      },
+      {
+        "path": "hospital-three-pc/site/dist/phase1.js",
+        "originalSHA256": "ae357ad7fb450dff99cff0c94bd610150693757e6f2c5cb31589209d2913c68c",
+        "currentSHA256": "17457e74e455f2192e6b909786a7ea3648839a2408132a187085e79921502a46"
+      },
+      {
+        "path": "hospital-three-pc/site/hospital-direct-test.js",
+        "originalSHA256": "aefbe1c06dc0950c02c99b61f67b879b3d810e1352c40bffe7edb1a87dc1158c",
+        "currentSHA256": "ad701f8d51954fd76700fa91247319fe9a9bdb5ca76e573dee68bc2d03b9eaec"
+      },
+      {
+        "path": "hospital-three-pc/site/hospital-improvements-a5.js",
+        "originalSHA256": "e01ed3b42c59f81c5b3de0c7eda3ab1e1a06ef851074e82e962834b632c017fe",
+        "currentSHA256": "566368cc35fa62ec4f79b4c152cc7aff7f21f994c5b56225e3a38dd76678225c"
+      },
+      {
+        "path": "hospital-three-pc/site/hospital-pc-test.js",
+        "originalSHA256": "855b5697cf34b670ac2e333e0493d467f57fc3b5c2aed3341577db83a118274a",
+        "currentSHA256": "0998254e684a456a4a7de6f6afce6d5b3f16faf440e537abd70203bdf3fda2ba"
+      },
+      {
+        "path": "hospital-three-pc/site/index.html",
+        "originalSHA256": "d3a42600e95415afd0302f6b5c4fc7ff4d4414cafddaea5c5c2c331c9ec8df85",
+        "currentSHA256": "67cade9364bd11daefc3d3dd2031f5927103cc8ef35a51e4c9438ea6024e3416"
+      },
+      {
+        "path": "hospital-three-pc/site/web-manifest-r62.json",
+        "originalSHA256": "732d92f77d8f6058084ad5dd0d9b6e7ecb5e73722df466b22f05df16594dd1b2",
+        "currentSHA256": "4597fbbd6b1a8370f994fbe95c73d3b7aa0b4ecd4c36c074ec94a353e91860c8"
+      }
+    ],
+    "originalAssetsByteIdentical": 1772,
+    "originalAudioByteIdentical": 276,
+    "embeddedStoryJSONUnchangedFromV1": true,
+    "selectedPNGDecodeAndHashChecks": 7,
+    "selectedAssetsUnchangedFromV1": true,
+    "mapGuideDecoded": true
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "WindowsLauncherExecuted": false,
+  "limits": [
+    "DOM, images, audio, timers and Three readiness are stubbed for gameplay CPU tests. Player teleporting, invulnerability and forced enemy deaths assist progression tests.",
+    "Roof checks instantiate actual pinned Three r186 geometry/materials in Node, without a WebGL renderer. They cannot validate pixels, GPU performance or real-input feel.",
+    "EGO coverage uses an old no-metadata fixture plus three repeated saves; it does not cover every historical schema or visit multiplier.",
+    "V1 save migration covers the actual previous test build rally and boss checkpoints, not every possible user save."
+  ]
+}

@@ -1,0 +1,1017 @@
+{
+  "schema": "storyworld.r88-final42-actual-mapping/v1",
+  "effects": [
+    {
+      "sourceIndex": 81,
+      "runtimeID": "F081",
+      "sourceEffectID": "animated-81-08-reality-overlap-shimmer",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a08",
+          "scene": "08",
+          "title": "피로 물든 병원",
+          "objective": "병원 관찰·길 찾기",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/7"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual pre narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 90,
+      "runtimeID": "F090",
+      "sourceEffectID": "90-dark-contact-bloom",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted dark contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 91,
+      "runtimeID": "F091",
+      "sourceEffectID": "91-corruption-contact-thorns",
+      "canonicalMapping": [
+        {
+          "zone": "last304",
+          "scene": "31",
+          "title": "중립 지역의 재각성",
+          "objective": "탐험·중립 지역 돌파",
+          "narrator": "〈환도의 기억〉",
+          "lore_pointer": "/records/31"
+        },
+        {
+          "zone": "last305",
+          "scene": "32",
+          "title": "고블린 두목과 장미 인장",
+          "objective": "고블린 두목 제압·인장",
+          "narrator": "〈환도의 기억〉",
+          "lore_pointer": "/records/32"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted corruption contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 92,
+      "runtimeID": "F092",
+      "sourceEffectID": "92-harvest-drain-wisp",
+      "canonicalMapping": [
+        {
+          "zone": "last301",
+          "scene": "33",
+          "title": "타락천사 기사",
+          "objective": "여섯 검격·필수 패배·추락",
+          "narrator": "〈환도의 기억〉",
+          "lore_pointer": "/records/33"
+        },
+        {
+          "zone": "last302",
+          "scene": "34",
+          "title": "잠들지 못하는 마을",
+          "objective": "주민 회피·포구 통과",
+          "narrator": "〈환도의 기억〉",
+          "lore_pointer": "/records/34"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted harvest contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 93,
+      "runtimeID": "F093",
+      "sourceEffectID": "93-pollution-contact-spray",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        },
+        {
+          "zone": "dist04",
+          "scene": "05",
+          "title": "시체들이 되살아난 밤",
+          "objective": "동료의 악마화 잔상 전투",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/4"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted pollution/poison contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 94,
+      "runtimeID": "F094",
+      "sourceEffectID": "storyworld-94-embers",
+      "canonicalMapping": [
+        {
+          "zone": "dist05",
+          "scene": "06",
+          "title": "일곱 기둥",
+          "objective": "일곱 기둥 연결 해제",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/5"
+        },
+        {
+          "zone": "last303",
+          "scene": "35",
+          "title": "한약과 불면귀",
+          "objective": "불면귀 핵 봉인",
+          "narrator": "〈환도의 기억〉",
+          "lore_pointer": "/records/35"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted fire/burn contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 95,
+      "runtimeID": "F095",
+      "sourceEffectID": "storyworld-95-frost-shards",
+      "canonicalMapping": [
+        {
+          "zone": "ep1b06",
+          "scene": "18",
+          "title": "맘몬의 금고",
+          "objective": "거래 통제 관문 해제",
+          "narrator": "〈의목사 A의 기억〉",
+          "lore_pointer": "/records/18"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted frost/chill contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 96,
+      "runtimeID": "F096",
+      "sourceEffectID": "storyworld-96-lightning",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a10",
+          "scene": "10",
+          "title": "환자와 중독의 도시",
+          "objective": "갈망의 잔상과 도움 선택",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/10"
+        },
+        {
+          "zone": "ep1b07",
+          "scene": "20",
+          "title": "불을 지른 남자",
+          "objective": "대피 후 분노 봉인",
+          "narrator": "〈의목사 A의 기억〉",
+          "lore_pointer": "/records/20"
+        },
+        {
+          "zone": "kair02",
+          "scene": "45",
+          "title": "아르벨리아, 유예의 수문장",
+          "objective": "변조 명령 실 절단·구출",
+          "narrator": "〈윤서하의 기억〉",
+          "lore_pointer": "/records/45"
+        },
+        {
+          "zone": "kair07",
+          "scene": "41",
+          "title": "검은 공방",
+          "objective": "가능성 보존·동력 명령 절단",
+          "narrator": "〈윤서하의 기억〉",
+          "lore_pointer": "/records/41"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted shock contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 97,
+      "runtimeID": "F097",
+      "sourceEffectID": "storyworld-97-charm-ribbons",
+      "canonicalMapping": [
+        {
+          "zone": "u205",
+          "scene": "27",
+          "title": "관리자 권한",
+          "objective": "출력 흡수·학대 기억 관찰",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/27"
+        },
+        {
+          "zone": "u206",
+          "scene": "28",
+          "title": "중앙 코어 이주실",
+          "objective": "선택권을 지키는 연결 해제",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/28"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted charm contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 98,
+      "runtimeID": "F098",
+      "sourceEffectID": "98-weakness-contact-fracture",
+      "canonicalMapping": [
+        {
+          "zone": "kair05",
+          "scene": "39",
+          "title": "빼앗긴 시간",
+          "objective": "일반 수문장 48 연결",
+          "narrator": "〈윤서하의 기억〉",
+          "lore_pointer": "/records/39"
+        },
+        {
+          "zone": "kair08",
+          "scene": "42",
+          "title": "뉴런 게이트 · 노이론 게이트",
+          "objective": "명령 사이 자율 이동",
+          "narrator": "〈윤서하의 기억〉",
+          "lore_pointer": "/records/42"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted weakness contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 99,
+      "runtimeID": "F099",
+      "sourceEffectID": "StoryWorld Thorn Binding",
+      "canonicalMapping": [
+        {
+          "zone": "u201",
+          "scene": "24",
+          "title": "방어의 군단",
+          "objective": "방어·폭격·선언·구조 단계",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/24"
+        },
+        {
+          "zone": "u202",
+          "scene": "25",
+          "title": "잔인한 구원",
+          "objective": "강요와 경계 인식",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/25"
+        },
+        {
+          "zone": "u203",
+          "scene": "29",
+          "title": "기억의 문",
+          "objective": "반복 명령 연결 절단",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/29"
+        },
+        {
+          "zone": "u204",
+          "scene": "26",
+          "title": "시스템의 거부권",
+          "objective": "기억 보존·회로 거부",
+          "narrator": "〈의목사 B의 기억〉",
+          "lore_pointer": "/records/26"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "R87 native confirmed-root-hit bridge OR actual R61/R58 bind status",
+      "event": "native bind lifecycle",
+      "attachment": "feet; single overlay; root2.2seconds4DOT/S unchanged",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists",
+      "caveat": "No front/back split or seamless hold claim; no infinite contact-only bind slot"
+    },
+    {
+      "sourceIndex": 100,
+      "runtimeID": "F100",
+      "sourceEffectID": "storyworld-100-disease-spores",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a08",
+          "scene": "08",
+          "title": "피로 물든 병원",
+          "objective": "병원 관찰·길 찾기",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/7"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted disease contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 101,
+      "runtimeID": "F101",
+      "sourceEffectID": "storyworld-101-bleed-streaks",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect(contactR61/regionalContactR58/bloodR52) after actual native effect admission",
+      "event": "actual admitted bleed contact",
+      "attachment": "player body; bind uses native active feet attachment",
+      "duplicatePolicy": "original contact draw suppressed only after a real ready replacement handle exists"
+    },
+    {
+      "sourceIndex": 110,
+      "runtimeID": "F110",
+      "sourceEffectID": "animated-110-01-root-seal-severance",
+      "canonicalMapping": [
+        {
+          "zone": "dist00",
+          "scene": "01",
+          "title": "악마화 나무의 정원",
+          "objective": "뿌리 연결 절단",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/0"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual post narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 111,
+      "runtimeID": "F111",
+      "sourceEffectID": "animated-111-02-black-swamp-grasp-ripple",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tickHazards",
+      "event": "existing mb-dist02 hazard reaches its actual impactAt without cancellation",
+      "attachment": "native committed target",
+      "caveat": "Grasp imagery only; no new grab/slow/damage rule"
+    },
+    {
+      "sourceIndex": 112,
+      "runtimeID": "F112",
+      "sourceEffectID": "animated-112-03-black-ash-gust",
+      "canonicalMapping": [
+        {
+          "zone": "dist03",
+          "scene": "04",
+          "title": "무너진성",
+          "objective": "핏빛 추격자 돌파",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/3"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual pre narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 113,
+      "runtimeID": "F113",
+      "sourceEffectID": "animated-113-04-fallen-companion-memory-echo",
+      "canonicalMapping": [
+        {
+          "zone": "dist04",
+          "scene": "05",
+          "title": "시체들이 되살아난 밤",
+          "objective": "동료의 악마화 잔상 전투",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/4"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual pre narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 114,
+      "runtimeID": "F114",
+      "sourceEffectID": "animated-114-05-black-collapse-vortex",
+      "canonicalMapping": [
+        {
+          "zone": "dist06",
+          "scene": "07",
+          "title": "추락",
+          "objective": "발록·소환진·추락 전환",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/6"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual post narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 115,
+      "runtimeID": "F115",
+      "sourceEffectID": "animated-115-06-guardian-memory-erasure-veil",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a09b",
+          "scene": "09-2",
+          "title": "결전의 날",
+          "objective": "과거 봉인 구출 회상",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/9"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual pre narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 116,
+      "runtimeID": "F116",
+      "sourceEffectID": "animated-116-07-craving-afterimage-fragment",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a10",
+          "scene": "10",
+          "title": "환자와 중독의 도시",
+          "objective": "갈망의 잔상과 도움 선택",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/10"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual pre narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 117,
+      "runtimeID": "F117",
+      "sourceEffectID": "animated-117-08-seal-closure-component",
+      "canonicalMapping": [
+        {
+          "zone": "ep1b01",
+          "scene": "13",
+          "title": "솔로몬의 봉인식",
+          "objective": "72 봉인 단계",
+          "narrator": "〈의목사 A의 기억〉",
+          "lore_pointer": "/records/13"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual post narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "No new 72-seal puzzle controller; one closure component at real ep1b01 post-narrative admission."
+    },
+    {
+      "sourceIndex": 130,
+      "runtimeID": "F130",
+      "sourceEffectID": "animated-130-01-violet-web-seal",
+      "canonicalMapping": [
+        {
+          "zone": "dist01",
+          "scene": "02",
+          "title": "거미동굴",
+          "objective": "보라검 천사 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/1"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual post narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Narrative presentation only; no invented interaction/quest controller or fabricated completion"
+    },
+    {
+      "sourceIndex": 131,
+      "runtimeID": "F131",
+      "sourceEffectID": "animated-131-02-pillar-tether-release",
+      "canonicalMapping": [
+        {
+          "zone": "dist05",
+          "scene": "06",
+          "title": "일곱 기둥",
+          "objective": "일곱 기둥 연결 해제",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/5"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual post narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "No independent seven-pillar objective controller exists in this runtime. Play one tether-release component at the actual dist05 post-narrative admission; do not fabricate seven releases or progression."
+    },
+    {
+      "sourceIndex": 132,
+      "runtimeID": "F132",
+      "sourceEffectID": "animated-132-03-memory-unlock-light",
+      "canonicalMapping": [
+        {
+          "zone": "ep1a09",
+          "scene": "09-1",
+          "title": "주사실",
+          "objective": "주사실 기억 상호작용",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/8"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "advanceScene/tick observes a real authored storyScene admission in the current canonical zone",
+      "event": "actual any narrative scene",
+      "attachment": "existing room objective ground point",
+      "caveat": "Existing ep1a09 native memory scene admission; no additional record collectible or interaction condition."
+    },
+    {
+      "sourceIndex": 213,
+      "runtimeID": "F213",
+      "sourceEffectID": "storyworld-hospital-poison-impact-v1",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "R87 tickHazards committed medical poison impact / hurt confirmed physical scalpel HP loss bridge",
+      "event": "actual native poison impact",
+      "attachment": "committed target ground",
+      "duplicatePolicy": "replaces R87 old atlas; no second R88 medical hit/damage handler"
+    },
+    {
+      "sourceIndex": 214,
+      "runtimeID": "F214",
+      "sourceEffectID": "214-poison-syringe-flight",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawProjectile",
+      "event": "actual active medical20 tool/syringe projectile",
+      "attachment": "native projectile position and projected velocity heading; northeast baked heading corrected",
+      "caveat": "No loop restart. Authored flight articulation followed by its last nonblank pose until the native projectile ends; physical collision/radius unchanged."
+    },
+    {
+      "sourceIndex": 215,
+      "runtimeID": "F215",
+      "sourceEffectID": "hospital-scalpel-slash-impact",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "R87 tickHazards committed medical poison impact / hurt confirmed physical scalpel HP loss bridge",
+      "event": "actual confirmed scalpel hit",
+      "attachment": "player body contact",
+      "duplicatePolicy": "replaces R87 old atlas; no second R88 medical hit/damage handler"
+    },
+    {
+      "sourceIndex": 217,
+      "runtimeID": "F217",
+      "sourceEffectID": "217-black-neural-dissipation",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "killEnemy",
+      "event": "first actual native enemy death recorded",
+      "attachment": "dead native actor position",
+      "duplicatePolicy": "replace only matching newly emitted native death burst once real new handle exists"
+    },
+    {
+      "sourceIndex": 243,
+      "runtimeID": "F243",
+      "sourceEffectID": "storyworld-243-electric-aura",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active shock status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 244,
+      "runtimeID": "F244",
+      "sourceEffectID": "storyworld-244-freeze-aura",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active frost/chill status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 245,
+      "runtimeID": "F245",
+      "sourceEffectID": "245-golden-sword-dance",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect observes native goldenThreadR72 / threadSlashR63 admission and pooled reset",
+      "event": "existing gold/silver dance strike",
+      "attachment": "midpoint and projected direction of the native strike segment",
+      "duplicatePolicy": "replace native visual only; damage/targets/resources/cooldowns/stroke design untouched"
+    },
+    {
+      "sourceIndex": 246,
+      "runtimeID": "F246",
+      "sourceEffectID": "246-silver-thread-slash",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawEffect observes native goldenThreadR72 / threadSlashR63 admission and pooled reset",
+      "event": "existing gold/silver dance strike",
+      "attachment": "midpoint and projected direction of the native strike segment",
+      "duplicatePolicy": "replace native visual only; damage/targets/resources/cooldowns/stroke design untouched"
+    },
+    {
+      "sourceIndex": 247,
+      "runtimeID": "F247",
+      "sourceEffectID": "storyworld-247-bleed-aura",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active bleed status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 248,
+      "runtimeID": "F248",
+      "sourceEffectID": "storyworld-248-charm-aura",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active charm status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 249,
+      "runtimeID": "F249",
+      "sourceEffectID": "storyworld-249-disease-cloud",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active disease status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 250,
+      "runtimeID": "F250",
+      "sourceEffectID": "storyworld-250-weakness-aura",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tick/drawHero observes FieldsR61/RegionalR58/HospitalWoundsR53/HealthR71 native status rows",
+      "event": "actual active weakness status and actual expiry",
+      "attachment": "single rear body aura; exact actor reference",
+      "duplicatePolicy": "old status bitmap hidden only while actual ready replacement handle exists; HUD and native status gameplay retained"
+    },
+    {
+      "sourceIndex": 251,
+      "runtimeID": "F251",
+      "sourceEffectID": "251-attack-warning-ring",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "strokeFootprint154 + drawNativeGroundArt154",
+      "event": "only native warning stage under its original warning clock",
+      "attachment": "traceFootprint154 native path; exact clipping incl donut holes and lines/cones/capsules",
+      "duplicatePolicy": "preserve native geometry outline; replace original warning ground image only after new clipped bitmap actually drew",
+      "caveat": "PNG does not define collision radius or extend the warning duration"
+    },
+    {
+      "sourceIndex": 254,
+      "runtimeID": "F254",
+      "sourceEffectID": "254-silver-exit-teleport",
+      "canonicalMapping": [],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "travel",
+      "event": "successful actual native portal transition with changed room",
+      "attachment": "native arrival player position",
+      "caveat": "No proximity auto travel or new teleport skill"
+    },
+    {
+      "sourceIndex": 259,
+      "runtimeID": "F259",
+      "sourceEffectID": "storyworld-259-drag-remnant",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tickHazards",
+      "event": "actual mb-dist02 hazard impact",
+      "attachment": "existing committed target ground",
+      "caveat": "Visual remnant only; no new drag displacement"
+    },
+    {
+      "sourceIndex": 260,
+      "runtimeID": "F260",
+      "sourceEffectID": "storyworld-260-charge-warning",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawHazard",
+      "event": "existing mb-dist02 hazard/caster warning phase",
+      "attachment": "native horn caster body",
+      "caveat": "The asset name says charge but no new charge movement, cast, range or timer is created"
+    },
+    {
+      "sourceIndex": 261,
+      "runtimeID": "F261",
+      "sourceEffectID": "storyworld-261-splash-impact",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "tickHazards",
+      "event": "actual mb-dist02 hazard impact",
+      "attachment": "native committed impact target"
+    },
+    {
+      "sourceIndex": 262,
+      "runtimeID": "F262",
+      "sourceEffectID": "storyworld-262-reed-projectile",
+      "canonicalMapping": [
+        {
+          "zone": "dist02",
+          "scene": "03",
+          "title": "늪지대의 뿔악마",
+          "objective": "뿔악마 봉인",
+          "narrator": "〈EGO의 기억〉",
+          "lore_pointer": "/records/2"
+        }
+      ],
+      "application": "conditional native-event presentation; not a new ability",
+      "damageChanged": false,
+      "rangeChanged": false,
+      "nativeClockChanged": false,
+      "browserVerified": false,
+      "GPUVerified": false,
+      "nativeHook": "drawProjectile",
+      "event": "actual existing projectile owned by mb-dist02",
+      "attachment": "native position and projected velocity",
+      "caveat": "No new projectile. No loop restart; last pose remains visible only during the native projectile lifetime."
+    }
+  ],
+  "mappedEffects": 42,
+  "all42HaveConditionalNativeHooks": true,
+  "independentSevenPillarController": false,
+  "independent72SealController": false,
+  "newAbilities": 0,
+  "nativeDamageChanged": false,
+  "nativeSaveNamespace": "storyworld.hospital-three-pc.maze.v11:",
+  "browserVerified": false,
+  "GPUVerified": false
+}

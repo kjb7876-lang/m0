@@ -1,0 +1,613 @@
+{
+  "checks": [
+    {
+      "name": "Hospital, refuge and every55ward keep authoritative layout, floor and walls untouched",
+      "passed": true,
+      "detail": {
+        "maps": 57
+      }
+    },
+    {
+      "name": "All native roof meshes extend precisely3tiles beyond the envelope",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "hub",
+          "span": [
+            -3,
+            -3,
+            39,
+            37
+          ]
+        },
+        {
+          "id": "dist00",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist04",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist05",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "dist06",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1a09",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1a10",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1a11",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b04",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b05",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b06",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b06b",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b07",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b08",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1b09",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u201",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u202",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u204",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u205",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u206",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "u203",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "last304",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "last305",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "last301",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "last302",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "last303",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair04",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair05",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair06",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair07",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair08",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair09",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair10",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "kair03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "hando01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "hando02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "hando03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "murder01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "murder02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "murder04",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "murder03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult01",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult02",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult05",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult06",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult03",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "cult04",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        },
+        {
+          "id": "ep1a09b",
+          "span": [
+            -3,
+            -3,
+            90,
+            116
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actual Three downward rays find no cap over sampled playable tiles",
+      "passed": true,
+      "detail": {
+        "samples": 4623,
+        "blocked": []
+      }
+    },
+    {
+      "name": "Original door apertures stay free of horizontal roof caps",
+      "passed": true,
+      "detail": {
+        "doors": 168,
+        "blocked": []
+      }
+    },
+    {
+      "name": "Each region has one textured beveled foundation continuous with wall caps",
+      "passed": true
+    },
+    {
+      "name": "Boundary bevel/fascia remains outside play envelope with finite UVs",
+      "passed": true,
+      "detail": {
+        "vertices": 32,
+        "indices": 48
+      }
+    },
+    {
+      "name": "Native focus cutaway is retained through the presentation-only envelope",
+      "passed": true
+    },
+    {
+      "name": "Stationary120frames reuse boundary geometry, textures and materials",
+      "passed": true
+    },
+    {
+      "name": "Boundary inherits a changed wall texture without owning or duplicating it",
+      "passed": true
+    },
+    {
+      "name": "Scene transition disposes perimeter once and clears references",
+      "passed": true
+    },
+    {
+      "name": "DREAM rendering never receives the new presentation envelope",
+      "passed": true
+    },
+    {
+      "name": "Closer battle framing remains a fixed preference multiplier with no enemy drift",
+      "passed": true,
+      "detail": {
+        "start": {
+          "x": 20,
+          "y": 36,
+          "z": 0.8133333333333332
+        },
+        "range": 0,
+        "zoomRange": 0,
+        "factor": 1.22
+      }
+    },
+    {
+      "name": "Closer static framing reduces mean visible exterior at canonical rooms and entries",
+      "passed": true,
+      "detail": {
+        "samples": 132,
+        "before": 0.0814591224747475,
+        "after": 0.07106218434343435
+      }
+    },
+    {
+      "name": "Masonry perimeter leaves only a narrow visible brain exterior at room anchors",
+      "passed": true,
+      "detail": {
+        "before": 0.0814591224747475,
+        "after": 0.03361742424242425,
+        "samples": 132
+      }
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

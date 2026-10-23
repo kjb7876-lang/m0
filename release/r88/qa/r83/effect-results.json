@@ -1,0 +1,4714 @@
+{
+  "schema": "r83-existing-effect-command-replay/v1",
+  "method": "Actual shipped atlas metadata and native drawEffect chain in Node VM, PNG header dimensions, source SHA256, replay through real pinned Three CPU CommandScene. Scripted effect fixtures and a native basic attack; no browser/GPU or natural play.",
+  "checks": [
+    {
+      "name": "Existing 44 atlas records and all 106 base/team PNGs are present",
+      "passed": true,
+      "detail": {
+        "records": 44,
+        "PNGs": 106
+      }
+    },
+    {
+      "name": "Every original PXF source and baked primary PNG retains its declared hash",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Every authored frame/pivot/timeline fits the actual atlas dimensions",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "R83 presentation module is loaded by the delivered index",
+      "passed": true
+    },
+    {
+      "name": "Explicit atlas size tracks current zoom and decorative quads stay below 23% viewport",
+      "passed": true,
+      "detail": {
+        "doubled": 120,
+        "capped": 184,
+        "native": 90,
+        "other": 9000
+      }
+    },
+    {
+      "name": "All 44 atlas types replay first/middle/last frames in both teams and motion modes",
+      "passed": true,
+      "detail": 528
+    },
+    {
+      "name": "Actual atlas commands exercise both source-over and lighter without renderer rejection",
+      "passed": true,
+      "detail": [
+        "source-over",
+        "lighter"
+      ]
+    },
+    {
+      "name": "Ground warning atlas remains on its authored world plane",
+      "passed": true
+    },
+    {
+      "name": "Dead owners and obsolete region epochs cannot leave decorative sprites",
+      "passed": true
+    },
+    {
+      "name": "Replay cleanup returns all effect meshes and texture leases to zero",
+      "passed": true,
+      "detail": {
+        "created": 177,
+        "removed": 177,
+        "texturesCreated": 177,
+        "texturesDisposed": 177,
+        "geometryComparisons": 352,
+        "cameraTranslationComparisons": 0,
+        "geometryUpdates": 352,
+        "cameraTranslationSkips": 0,
+        "screenPositionUpdates": 0,
+        "sightCacheHits": 0,
+        "styleReplacements": 0,
+        "filterUpdates": 0,
+        "screenPositionBaselineBytes": 0,
+        "screenPositionAttributeBytes": 0,
+        "uvAttributeBytes": 0,
+        "meshes": 0,
+        "textures": 0,
+        "labels": 0,
+        "execution": "real Three CPU scene; GPU unverified",
+        "ordering": "Background/world/effect passes; original body art reads depth, small original contact ellipses; dynamic shadow maps disabled",
+        "depthBodies": 0,
+        "lightCasters": 0
+      }
+    },
+    {
+      "name": "Native basic attack emits real supplemental effects from admitted combat",
+      "passed": true,
+      "detail": {
+        "comboBefore": 0,
+        "comboAfter": 1,
+        "before": 0,
+        "after": 2,
+        "effects": [
+          {
+            "type": "slash"
+          },
+          {
+            "type": "burst"
+          },
+          {
+            "type": "e568HeroImpact"
+          },
+          {
+            "type": "pxfSprite",
+            "key": "melee-spark",
+            "zoom": 1,
+            "explicit": 13.328000000000001
+          },
+          {
+            "type": "pxfSprite",
+            "key": "claw-magic",
+            "zoom": 1,
+            "explicit": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual native combat effect commands replay through pinned Three",
+      "passed": true,
+      "detail": {
+        "commands": 2,
+        "meshes": 2
+      }
+    },
+    {
+      "name": "Medical source effects and original combat ownership remain available",
+      "passed": true,
+      "detail": {
+        "revision": "r83",
+        "calls": 534,
+        "viewportClamps": 1,
+        "zoomCorrections": 2,
+        "maxDecorativeQuadFraction": 0.23,
+        "originalAssetsUnchanged": true,
+        "combatChanged": false,
+        "groundFootprintChanged": false,
+        "static64ZIPApplied": true
+      }
+    },
+    {
+      "name": "Effect command replay leaves the native error ledger empty",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "new64": {
+    "source": "Nine user-supplied quality-selected part ZIPs",
+    "applied": true
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "catalogReplay": {
+    "renders": 528,
+    "commands": 528,
+    "blendModes": [
+      "source-over",
+      "lighter"
+    ],
+    "materialTypes": [
+      "MeshBasicMaterial"
+    ],
+    "rows": [
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 22,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 14,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 16,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 31,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 22,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 14,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 16,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 31,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": false,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "lighter"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 22,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 14,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 16,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 31,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "player",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "claw-magic",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "explosion",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 22,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "melee-spark",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "silver-slash",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-05",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 14,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 16,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-15",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 31,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-16",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-17",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-18",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 8,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-19",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 15,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-20",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-21",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 21,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-22",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-23",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-24",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-25",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-26",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-27",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-28",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-29",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-30",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 6,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "pxf-31",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 11,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-01",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 5,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-02",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 9,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-03",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 17,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 4,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-04",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 7,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-06",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-07",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-08",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-09",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-10",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-11",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-12",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 12,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-13",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 23,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 0,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 10,
+        "commands": 1,
+        "blend": "source-over"
+      },
+      {
+        "key": "extra-14",
+        "reducedMotion": true,
+        "side": "enemy",
+        "frame": 19,
+        "commands": 1,
+        "blend": "source-over"
+      }
+    ]
+  },
+  "atlasManifest": [
+    {
+      "key": "claw-magic",
+      "path": "assets/pxf-baked-20261010/claw-magic-atlas.png",
+      "sha256": "e023f11d46e0596fac762aaf2587bc60b14930c4e57bde1e7d9dedea2c05fe08",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "explosion",
+      "path": "assets/pxf-baked-20261010/explosion-atlas.png",
+      "sha256": "7ab50de6fb8bdb825d1536004ff11df3f7c9cc1c6d3938578b62de33496678d9",
+      "frameCount": 23,
+      "blend": "normal"
+    },
+    {
+      "key": "melee-spark",
+      "path": "assets/pxf-baked-20261010/melee-spark-atlas.png",
+      "sha256": "d632c37ff59775a0b6b77034be4d804cd3db21d74d870b5d8cfc2a9bb8f4cd9c",
+      "frameCount": 9,
+      "blend": "normal"
+    },
+    {
+      "key": "silver-slash",
+      "path": "assets/pxf-baked-20261010/silver-slash-atlas.png",
+      "sha256": "c541e8cc34a3ed57beec2cbda4b81bdaeab085cf1b992fdf8a038ca2f137c36c",
+      "frameCount": 9,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-05",
+      "path": "assets/pxf-baked-20261010/pxf-05-atlas.png",
+      "sha256": "92961c85e7aaaad438791d0a990aed89560496ad39ff4286374d6178e31b0c2a",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-06",
+      "path": "assets/pxf-baked-20261010/pxf-06-atlas.png",
+      "sha256": "0b497cbe4e4a36bf3d3d7449caebe0379e327ba637532f2a7cb1d1a184517c02",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-07",
+      "path": "assets/pxf-baked-20261010/pxf-07-atlas.png",
+      "sha256": "b36c26b731b518c63fcac98ac4f59e0677b14db1a2ff71139e197cdde4094966",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-08",
+      "path": "assets/pxf-baked-20261010/pxf-08-atlas.png",
+      "sha256": "2d55491ce4cb19eae01780fbd7839dda8bd1160c0b7ce6a6bfa94cc2870dc3cf",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-09",
+      "path": "assets/pxf-baked-20261010/pxf-09-atlas.png",
+      "sha256": "91e3d2b14b82cb5a85cd93b22bd362a3a6dfd5f3fd4f40790769e9e687db2c21",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-10",
+      "path": "assets/pxf-baked-20261010/pxf-10-atlas.png",
+      "sha256": "f600e4bd763efa9466ef3e8edf9b09fa10a0dc5ac9c8876732b93dbff6a3cd4f",
+      "frameCount": 18,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-11",
+      "path": "assets/pxf-baked-20261010/pxf-11-atlas.png",
+      "sha256": "d0182ea1e852400741bc8899cef2a45ab81f6d03cad512a984f849157d553725",
+      "frameCount": 15,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-12",
+      "path": "assets/pxf-baked-20261010/pxf-12-atlas.png",
+      "sha256": "60c6b1252dc686d729123c8c72da162d9e7880822c73bccfc5dfedecd2f6768a",
+      "frameCount": 9,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-13",
+      "path": "assets/pxf-baked-20261010/pxf-13-atlas.png",
+      "sha256": "cb5c931afbbe411aae70a06a30938b8a8c7eb733a7897a2c31a2a54efcc9f831",
+      "frameCount": 16,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-14",
+      "path": "assets/pxf-baked-20261010/pxf-14-atlas.png",
+      "sha256": "ef3d22d391fe1669451c9efd01b225280af4df2a782b6352901fb2a96ed7de66",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-15",
+      "path": "assets/pxf-baked-20261010/pxf-15-atlas.png",
+      "sha256": "ad1e5d0b4939c443e1cb1771a264c663a47c0e43ce4a9c2c8b7ecf2cae6256fd",
+      "frameCount": 32,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-16",
+      "path": "assets/pxf-baked-20261010/pxf-16-atlas.png",
+      "sha256": "63c682e255b63435f91c02e3f11124af73a8091017ae07d2ae94cca2b42005be",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-17",
+      "path": "assets/pxf-baked-20261010/pxf-17-atlas.png",
+      "sha256": "fd6461a1226bd275f93aea6334b91494568bb12c9d5b6d467e4e13e6c3650ca7",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-18",
+      "path": "assets/pxf-baked-20261010/pxf-18-atlas.png",
+      "sha256": "1559d14843ba91a4c5e24fa8c1f8ce959040cef8d352dfe0be9bc1b90aa07599",
+      "frameCount": 8,
+      "blend": "add"
+    },
+    {
+      "key": "pxf-19",
+      "path": "assets/pxf-baked-20261010/pxf-19-atlas.png",
+      "sha256": "480f7a96659d037c4cbf9a6d11bac73a50b09b7dcfb67b5ca6768d22bb2d1fc9",
+      "frameCount": 16,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-20",
+      "path": "assets/pxf-baked-20261010/pxf-20-atlas.png",
+      "sha256": "c5aeca5a2f1819fafbe7362837169d6f9fe69e1841f7e1f6a03e26cc7c496222",
+      "frameCount": 22,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-21",
+      "path": "assets/pxf-baked-20261010/pxf-21-atlas.png",
+      "sha256": "01eca856f6a4bd16f1ea90a2e4c14537f6aa40a2acb3cdd0742fff57bb3153f5",
+      "frameCount": 22,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-22",
+      "path": "assets/pxf-baked-20261010/pxf-22-atlas.png",
+      "sha256": "15cd4e026d4024bc5ad03b17b454482c7ae236a38c000cb6827c9c914654e066",
+      "frameCount": 20,
+      "blend": "add"
+    },
+    {
+      "key": "pxf-23",
+      "path": "assets/pxf-baked-20261010/pxf-23-atlas.png",
+      "sha256": "37676e735d8cd11a3a2ed2df1e0be8d2dcafcabc1fc55c4c793839979985779d",
+      "frameCount": 24,
+      "blend": "add"
+    },
+    {
+      "key": "pxf-24",
+      "path": "assets/pxf-baked-20261010/pxf-24-atlas.png",
+      "sha256": "78504f83cb741f2e3010002fef1c9034362b7c36bb9bb4e0f5f5968f1b7c370d",
+      "frameCount": 10,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-25",
+      "path": "assets/pxf-baked-20261010/pxf-25-atlas.png",
+      "sha256": "17a4b51f35834684f11396cc3ab0d2009c8ca201229d128715eb91295dc34474",
+      "frameCount": 10,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-26",
+      "path": "assets/pxf-baked-20261010/pxf-26-atlas.png",
+      "sha256": "41bfcdc307df63f33731bdee174f3b4f7ff013b176a31749fdaf804e103f9839",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-27",
+      "path": "assets/pxf-baked-20261010/pxf-27-atlas.png",
+      "sha256": "cc6c389551c57d7598888a7c1a68cb7a0625bdb337037fe192c7fee88cda5e95",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-28",
+      "path": "assets/pxf-baked-20261010/pxf-28-atlas.png",
+      "sha256": "7c4c2e05d187ae0202217bb8c7eadbc5ef3298a04a6a25bc85f35feef0cc0d5e",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-29",
+      "path": "assets/pxf-baked-20261010/pxf-29-atlas.png",
+      "sha256": "95c6ecbf13eed15157dccba4ff5522adb43ff978a87c8be3a11dedd1d5fafefe",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-30",
+      "path": "assets/pxf-baked-20261010/pxf-30-atlas.png",
+      "sha256": "c7e2c20f437ba76f3918b961a35a8ba2e3c1ff00bdb645fd2d03e077843f5f1e",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "pxf-31",
+      "path": "assets/pxf-baked-20261010/pxf-31-atlas.png",
+      "sha256": "4c44790722bc8f4b073b092363b492a0107f3ae9cc48536bc0c7afa416598d9f",
+      "frameCount": 12,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-01",
+      "path": "assets/pxf-additional-baked-20261010/extra-01-atlas.png",
+      "sha256": "ca9db0ac84ee7e3dec1118f78be1097ae354bdf008e43773828ae0c7b17f7f4a",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-02",
+      "path": "assets/pxf-additional-baked-20261010/extra-02-atlas.png",
+      "sha256": "70cb484ab7abc28b92364f5630218e4ea564f0ba1a28291ad9802f52bd0b5564",
+      "frameCount": 10,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-03",
+      "path": "assets/pxf-additional-baked-20261010/extra-03-atlas.png",
+      "sha256": "c66e0e78181b12a3f8db830ce6e2f0ed7f5f54a6a21203ca19ccedb5b4001d89",
+      "frameCount": 18,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-04",
+      "path": "assets/pxf-additional-baked-20261010/extra-04-atlas.png",
+      "sha256": "3857f73d77fd8f72df12d5a7bcba3a42eec3ca52a0bd635f32bdebbfbdabe739",
+      "frameCount": 8,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-06",
+      "path": "assets/pxf-additional-baked-20261010/extra-06-atlas.png",
+      "sha256": "a634f69c971d0cf3a04441cb0eb26b27715ba578df527642e5180d67d473702b",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-07",
+      "path": "assets/pxf-additional-baked-20261010/extra-07-atlas.png",
+      "sha256": "1895c747827499b0a8a63cd6a9847abe5870011f780d5b9e1a3c8e7d4d2236b0",
+      "frameCount": 20,
+      "blend": "add"
+    },
+    {
+      "key": "extra-08",
+      "path": "assets/pxf-additional-baked-20261010/extra-08-atlas.png",
+      "sha256": "62a52ae5c7ef055148c113b190082416eb05517d02bc5038b17db06b2e001ab6",
+      "frameCount": 24,
+      "blend": "add"
+    },
+    {
+      "key": "extra-09",
+      "path": "assets/pxf-additional-baked-20261010/extra-09-atlas.png",
+      "sha256": "25cfe6607cafce3949ba5a57cd6702bb2f2ee340d2ff34086289564c2e42a7cd",
+      "frameCount": 24,
+      "blend": "add"
+    },
+    {
+      "key": "extra-10",
+      "path": "assets/pxf-additional-baked-20261010/extra-10-atlas.png",
+      "sha256": "90ae91acdb58e799d9dc0011bdf03e6a5cfb4380574a2e44e86e10a287849e73",
+      "frameCount": 20,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-11",
+      "path": "assets/pxf-additional-baked-20261010/extra-11-atlas.png",
+      "sha256": "ed69d08e96844575fb38ea251ca9d1d8c011e03628956bd11f3542b3b9b78e55",
+      "frameCount": 24,
+      "blend": "normal"
+    },
+    {
+      "key": "extra-12",
+      "path": "assets/pxf-additional-baked-20261010/extra-12-atlas.png",
+      "sha256": "4ae2b277802a3dfc2fa51588b0f913ceb0377f21e3682518c2211bb9928e850f",
+      "frameCount": 24,
+      "blend": "add"
+    },
+    {
+      "key": "extra-13",
+      "path": "assets/pxf-additional-baked-20261010/extra-13-atlas.png",
+      "sha256": "b617e74bb9be537ab61ba3050b43ef924e6504035a94c3458bc71202d34a6d74",
+      "frameCount": 24,
+      "blend": "add"
+    },
+    {
+      "key": "extra-14",
+      "path": "assets/pxf-additional-baked-20261010/extra-14-atlas.png",
+      "sha256": "cebe0ed769bc9da1deb828e17b4772e13b7bf4c7cea94fab771bea4d2a34b809",
+      "frameCount": 20,
+      "blend": "add"
+    }
+  ],
+  "metrics": {
+    "revision": "r83",
+    "calls": 534,
+    "viewportClamps": 1,
+    "zoomCorrections": 2,
+    "maxDecorativeQuadFraction": 0.23,
+    "originalAssetsUnchanged": true,
+    "combatChanged": false,
+    "groundFootprintChanged": false,
+    "static64ZIPApplied": true
+  },
+  "passed": true
+}

@@ -1,0 +1,6414 @@
+{
+  "method": "CPU isometric floor projection, same zoom 1.12; centered camera baseline, not a game screenshot or GPU render.",
+  "floorRects": [
+    {
+      "x": 1,
+      "y": 1,
+      "width": 8,
+      "depth": 9
+    },
+    {
+      "x": 30,
+      "y": 4,
+      "width": 16,
+      "depth": 6
+    },
+    {
+      "x": 48,
+      "y": 4,
+      "width": 18,
+      "depth": 6
+    },
+    {
+      "x": 68,
+      "y": 4,
+      "width": 16,
+      "depth": 16
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "width": 18,
+      "depth": 4
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "width": 27,
+      "depth": 4
+    },
+    {
+      "x": 30,
+      "y": 10,
+      "width": 36,
+      "depth": 6
+    },
+    {
+      "x": 1,
+      "y": 14,
+      "width": 8,
+      "depth": 4
+    },
+    {
+      "x": 10,
+      "y": 14,
+      "width": 18,
+      "depth": 4
+    },
+    {
+      "x": 30,
+      "y": 16,
+      "width": 16,
+      "depth": 4
+    },
+    {
+      "x": 48,
+      "y": 16,
+      "width": 18,
+      "depth": 4
+    },
+    {
+      "x": 1,
+      "y": 18,
+      "width": 6,
+      "depth": 4
+    },
+    {
+      "x": 17,
+      "y": 18,
+      "width": 6,
+      "depth": 4
+    },
+    {
+      "x": 35,
+      "y": 20,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 52,
+      "y": 20,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 74,
+      "y": 20,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 1,
+      "y": 22,
+      "width": 83,
+      "depth": 2
+    },
+    {
+      "x": 2,
+      "y": 24,
+      "width": 82,
+      "depth": 4
+    },
+    {
+      "x": 2,
+      "y": 28,
+      "width": 6,
+      "depth": 14
+    },
+    {
+      "x": 17,
+      "y": 28,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 74,
+      "y": 28,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 10,
+      "y": 30,
+      "width": 24,
+      "depth": 4
+    },
+    {
+      "x": 38,
+      "y": 30,
+      "width": 26,
+      "depth": 4
+    },
+    {
+      "x": 68,
+      "y": 30,
+      "width": 16,
+      "depth": 4
+    },
+    {
+      "x": 10,
+      "y": 34,
+      "width": 74,
+      "depth": 6
+    },
+    {
+      "x": 10,
+      "y": 40,
+      "width": 24,
+      "depth": 2
+    },
+    {
+      "x": 38,
+      "y": 40,
+      "width": 26,
+      "depth": 2
+    },
+    {
+      "x": 68,
+      "y": 40,
+      "width": 16,
+      "depth": 2
+    },
+    {
+      "x": 2,
+      "y": 42,
+      "width": 84,
+      "depth": 8
+    },
+    {
+      "x": 2,
+      "y": 50,
+      "width": 6,
+      "depth": 18
+    },
+    {
+      "x": 18,
+      "y": 50,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 38,
+      "y": 50,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 52,
+      "y": 50,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 71,
+      "y": 50,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 80,
+      "y": 50,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 10,
+      "y": 52,
+      "width": 22,
+      "depth": 16
+    },
+    {
+      "x": 34,
+      "y": 52,
+      "width": 14,
+      "depth": 16
+    },
+    {
+      "x": 50,
+      "y": 52,
+      "width": 18,
+      "depth": 16
+    },
+    {
+      "x": 70,
+      "y": 52,
+      "width": 16,
+      "depth": 16
+    },
+    {
+      "x": 2,
+      "y": 68,
+      "width": 84,
+      "depth": 6
+    },
+    {
+      "x": 2,
+      "y": 74,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "x": 10,
+      "y": 74,
+      "width": 26,
+      "depth": 6
+    },
+    {
+      "x": 40,
+      "y": 74,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "x": 50,
+      "y": 74,
+      "width": 28,
+      "depth": 6
+    },
+    {
+      "x": 80,
+      "y": 74,
+      "width": 6,
+      "depth": 6
+    },
+    {
+      "x": 2,
+      "y": 80,
+      "width": 84,
+      "depth": 10
+    },
+    {
+      "x": 2,
+      "y": 90,
+      "width": 6,
+      "depth": 16
+    },
+    {
+      "x": 10,
+      "y": 90,
+      "width": 14,
+      "depth": 14
+    },
+    {
+      "x": 26,
+      "y": 90,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 44,
+      "y": 90,
+      "width": 18,
+      "depth": 14
+    },
+    {
+      "x": 64,
+      "y": 90,
+      "width": 14,
+      "depth": 14
+    },
+    {
+      "x": 80,
+      "y": 90,
+      "width": 6,
+      "depth": 16
+    },
+    {
+      "x": 26,
+      "y": 92,
+      "width": 16,
+      "depth": 12
+    },
+    {
+      "x": 14,
+      "y": 104,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 28,
+      "y": 104,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 52,
+      "y": 104,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 67,
+      "y": 104,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 2,
+      "y": 106,
+      "width": 84,
+      "depth": 6
+    }
+  ],
+  "roofRects": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 87,
+      "depth": 1
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "width": 1,
+      "depth": 23
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "width": 78,
+      "depth": 3
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "width": 21,
+      "depth": 2
+    },
+    {
+      "x": 46,
+      "y": 4,
+      "width": 2,
+      "depth": 6
+    },
+    {
+      "x": 66,
+      "y": 4,
+      "width": 2,
+      "depth": 16
+    },
+    {
+      "x": 84,
+      "y": 4,
+      "width": 3,
+      "depth": 16
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "width": 1,
+      "depth": 4
+    },
+    {
+      "x": 28,
+      "y": 6,
+      "width": 2,
+      "depth": 12
+    },
+    {
+      "x": 9,
+      "y": 14,
+      "width": 1,
+      "depth": 4
+    },
+    {
+      "x": 46,
+      "y": 16,
+      "width": 2,
+      "depth": 4
+    },
+    {
+      "x": 7,
+      "y": 18,
+      "width": 10,
+      "depth": 4
+    },
+    {
+      "x": 23,
+      "y": 18,
+      "width": 7,
+      "depth": 2
+    },
+    {
+      "x": 23,
+      "y": 20,
+      "width": 12,
+      "depth": 2
+    },
+    {
+      "x": 41,
+      "y": 20,
+      "width": 11,
+      "depth": 2
+    },
+    {
+      "x": 58,
+      "y": 20,
+      "width": 16,
+      "depth": 2
+    },
+    {
+      "x": 80,
+      "y": 20,
+      "width": 7,
+      "depth": 2
+    },
+    {
+      "x": 84,
+      "y": 22,
+      "width": 3,
+      "depth": 6
+    },
+    {
+      "x": 0,
+      "y": 24,
+      "width": 2,
+      "depth": 88
+    },
+    {
+      "x": 8,
+      "y": 28,
+      "width": 9,
+      "depth": 2
+    },
+    {
+      "x": 23,
+      "y": 28,
+      "width": 51,
+      "depth": 2
+    },
+    {
+      "x": 80,
+      "y": 28,
+      "width": 7,
+      "depth": 2
+    },
+    {
+      "x": 8,
+      "y": 30,
+      "width": 2,
+      "depth": 12
+    },
+    {
+      "x": 34,
+      "y": 30,
+      "width": 4,
+      "depth": 4
+    },
+    {
+      "x": 64,
+      "y": 30,
+      "width": 4,
+      "depth": 4
+    },
+    {
+      "x": 84,
+      "y": 30,
+      "width": 3,
+      "depth": 12
+    },
+    {
+      "x": 34,
+      "y": 40,
+      "width": 4,
+      "depth": 2
+    },
+    {
+      "x": 64,
+      "y": 40,
+      "width": 4,
+      "depth": 2
+    },
+    {
+      "x": 86,
+      "y": 42,
+      "width": 1,
+      "depth": 70
+    },
+    {
+      "x": 8,
+      "y": 50,
+      "width": 10,
+      "depth": 2
+    },
+    {
+      "x": 24,
+      "y": 50,
+      "width": 14,
+      "depth": 2
+    },
+    {
+      "x": 44,
+      "y": 50,
+      "width": 8,
+      "depth": 2
+    },
+    {
+      "x": 58,
+      "y": 50,
+      "width": 13,
+      "depth": 2
+    },
+    {
+      "x": 77,
+      "y": 50,
+      "width": 3,
+      "depth": 2
+    },
+    {
+      "x": 8,
+      "y": 52,
+      "width": 2,
+      "depth": 16
+    },
+    {
+      "x": 32,
+      "y": 52,
+      "width": 2,
+      "depth": 16
+    },
+    {
+      "x": 48,
+      "y": 52,
+      "width": 2,
+      "depth": 16
+    },
+    {
+      "x": 68,
+      "y": 52,
+      "width": 2,
+      "depth": 16
+    },
+    {
+      "x": 8,
+      "y": 74,
+      "width": 2,
+      "depth": 6
+    },
+    {
+      "x": 36,
+      "y": 74,
+      "width": 4,
+      "depth": 6
+    },
+    {
+      "x": 46,
+      "y": 74,
+      "width": 4,
+      "depth": 6
+    },
+    {
+      "x": 78,
+      "y": 74,
+      "width": 2,
+      "depth": 6
+    },
+    {
+      "x": 8,
+      "y": 90,
+      "width": 2,
+      "depth": 14
+    },
+    {
+      "x": 24,
+      "y": 90,
+      "width": 2,
+      "depth": 14
+    },
+    {
+      "x": 32,
+      "y": 90,
+      "width": 12,
+      "depth": 2
+    },
+    {
+      "x": 62,
+      "y": 90,
+      "width": 2,
+      "depth": 14
+    },
+    {
+      "x": 78,
+      "y": 90,
+      "width": 2,
+      "depth": 14
+    },
+    {
+      "x": 42,
+      "y": 92,
+      "width": 2,
+      "depth": 12
+    },
+    {
+      "x": 8,
+      "y": 104,
+      "width": 6,
+      "depth": 2
+    },
+    {
+      "x": 20,
+      "y": 104,
+      "width": 8,
+      "depth": 2
+    },
+    {
+      "x": 34,
+      "y": 104,
+      "width": 18,
+      "depth": 2
+    },
+    {
+      "x": 58,
+      "y": 104,
+      "width": 9,
+      "depth": 2
+    },
+    {
+      "x": 73,
+      "y": 104,
+      "width": 7,
+      "depth": 2
+    },
+    {
+      "x": 0,
+      "y": 112,
+      "width": 87,
+      "depth": 1
+    }
+  ],
+  "bounds": [
+    0,
+    0,
+    87,
+    113
+  ],
+  "walls": [
+    {
+      "id": "hospital-b2-wall:0",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 8,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        5.88,
+        10.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:1",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 16,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          14
+        ],
+        [
+          10,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        13.88,
+        10.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:2",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 36,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          30
+        ],
+        [
+          10,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        29.88,
+        10.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:3",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          52
+        ],
+        [
+          10,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        51.88,
+        10.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:4",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          74
+        ],
+        [
+          10,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        73.88,
+        10.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:5",
+      "hospitalCoreB2": true,
+      "x": 10,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          10,
+          90
+        ],
+        [
+          10,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        89.88,
+        10.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:6",
+      "hospitalCoreB2": true,
+      "x": 19,
+      "y": 6,
+      "width": 18,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          6
+        ],
+        [
+          28,
+          6
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        5.88,
+        28.12,
+        6.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:7",
+      "hospitalCoreB2": true,
+      "x": 28,
+      "y": 12,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          28,
+          6
+        ],
+        [
+          28,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        27.88,
+        5.88,
+        28.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:8",
+      "hospitalCoreB2": true,
+      "x": 28,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          28,
+          104
+        ],
+        [
+          28,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        27.88,
+        103.88,
+        28.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:9",
+      "hospitalCoreB2": true,
+      "x": 8,
+      "y": 18,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          7,
+          18
+        ],
+        [
+          9,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        6.88,
+        17.88,
+        9.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:10",
+      "hospitalCoreB2": true,
+      "x": 13.5,
+      "y": 18,
+      "width": 7,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          18
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        17.88,
+        17.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:11",
+      "hospitalCoreB2": true,
+      "x": 25.5,
+      "y": 18,
+      "width": 5,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          23,
+          18
+        ],
+        [
+          28,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        17.88,
+        28.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:12",
+      "hospitalCoreB2": true,
+      "x": 1,
+      "y": 12.5,
+      "width": 23,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          24
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        0.88,
+        0.88,
+        1.12,
+        24.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:13",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 5.5,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          9,
+          1
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        8.88,
+        0.88,
+        9.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:14",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 16,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          18
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        8.88,
+        13.88,
+        9.12,
+        18.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:15",
+      "hospitalCoreB2": true,
+      "x": 9.5,
+      "y": 10,
+      "width": 1,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        8.88,
+        9.88,
+        10.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:16",
+      "hospitalCoreB2": true,
+      "x": 47,
+      "y": 10,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          46,
+          10
+        ],
+        [
+          48,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        9.88,
+        48.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:17",
+      "hospitalCoreB2": true,
+      "x": 9.5,
+      "y": 14,
+      "width": 1,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          14
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        8.88,
+        13.88,
+        10.12,
+        14.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:18",
+      "hospitalCoreB2": true,
+      "x": 5,
+      "y": 1,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          1,
+          1
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        0.88,
+        0.88,
+        9.12,
+        1.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:19",
+      "hospitalCoreB2": true,
+      "x": 17,
+      "y": 20,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          17,
+          18
+        ],
+        [
+          17,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        16.88,
+        17.88,
+        17.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:20",
+      "hospitalCoreB2": true,
+      "x": 17,
+      "y": 29,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          17,
+          28
+        ],
+        [
+          17,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        16.88,
+        27.88,
+        17.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:21",
+      "hospitalCoreB2": true,
+      "x": 23,
+      "y": 20,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          23,
+          18
+        ],
+        [
+          23,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        17.88,
+        23.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:22",
+      "hospitalCoreB2": true,
+      "x": 23,
+      "y": 29,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          23,
+          28
+        ],
+        [
+          23,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        27.88,
+        23.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:23",
+      "hospitalCoreB2": true,
+      "x": 12,
+      "y": 22,
+      "width": 10,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          7,
+          22
+        ],
+        [
+          17,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        6.88,
+        21.88,
+        17.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:24",
+      "hospitalCoreB2": true,
+      "x": 29,
+      "y": 22,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          23,
+          22
+        ],
+        [
+          35,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        21.88,
+        35.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:25",
+      "hospitalCoreB2": true,
+      "x": 46.5,
+      "y": 22,
+      "width": 11,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          41,
+          22
+        ],
+        [
+          52,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        40.88,
+        21.88,
+        52.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:26",
+      "hospitalCoreB2": true,
+      "x": 66,
+      "y": 22,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          22
+        ],
+        [
+          74,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        21.88,
+        74.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:27",
+      "hospitalCoreB2": true,
+      "x": 82,
+      "y": 22,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          22
+        ],
+        [
+          84,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        21.88,
+        84.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:28",
+      "hospitalCoreB2": true,
+      "x": 84,
+      "y": 12,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          84,
+          4
+        ],
+        [
+          84,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        83.88,
+        3.88,
+        84.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:29",
+      "hospitalCoreB2": true,
+      "x": 84,
+      "y": 25,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          84,
+          22
+        ],
+        [
+          84,
+          28
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        83.88,
+        21.88,
+        84.12,
+        28.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:30",
+      "hospitalCoreB2": true,
+      "x": 84,
+      "y": 36,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          84,
+          30
+        ],
+        [
+          84,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        83.88,
+        29.88,
+        84.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:31",
+      "hospitalCoreB2": true,
+      "x": 2,
+      "y": 68,
+      "width": 88,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          2,
+          24
+        ],
+        [
+          2,
+          112
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1.88,
+        23.88,
+        2.12,
+        112.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:32",
+      "hospitalCoreB2": true,
+      "x": 12.5,
+      "y": 28,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          28
+        ],
+        [
+          17,
+          28
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        27.88,
+        17.12,
+        28.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:33",
+      "hospitalCoreB2": true,
+      "x": 48.5,
+      "y": 28,
+      "width": 51,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          23,
+          28
+        ],
+        [
+          74,
+          28
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        27.88,
+        74.12,
+        28.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:34",
+      "hospitalCoreB2": true,
+      "x": 82,
+      "y": 28,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          28
+        ],
+        [
+          84,
+          28
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        27.88,
+        84.12,
+        28.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:35",
+      "hospitalCoreB2": true,
+      "x": 13.5,
+      "y": 30,
+      "width": 7,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          30
+        ],
+        [
+          17,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        29.88,
+        17.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:36",
+      "hospitalCoreB2": true,
+      "x": 28.5,
+      "y": 30,
+      "width": 11,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          23,
+          30
+        ],
+        [
+          34,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        22.88,
+        29.88,
+        34.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:37",
+      "hospitalCoreB2": true,
+      "x": 51,
+      "y": 30,
+      "width": 26,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          38,
+          30
+        ],
+        [
+          64,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        37.88,
+        29.88,
+        64.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:38",
+      "hospitalCoreB2": true,
+      "x": 71,
+      "y": 30,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          68,
+          30
+        ],
+        [
+          74,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        29.88,
+        74.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:39",
+      "hospitalCoreB2": true,
+      "x": 82,
+      "y": 30,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          30
+        ],
+        [
+          84,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        29.88,
+        84.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:40",
+      "hospitalCoreB2": true,
+      "x": 34,
+      "y": 32,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          34,
+          30
+        ],
+        [
+          34,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        29.88,
+        34.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:41",
+      "hospitalCoreB2": true,
+      "x": 34,
+      "y": 41,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          34,
+          40
+        ],
+        [
+          34,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        39.88,
+        34.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:42",
+      "hospitalCoreB2": true,
+      "x": 34,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          34,
+          52
+        ],
+        [
+          34,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        51.88,
+        34.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:43",
+      "hospitalCoreB2": true,
+      "x": 34,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          34,
+          104
+        ],
+        [
+          34,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        103.88,
+        34.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:44",
+      "hospitalCoreB2": true,
+      "x": 8,
+      "y": 35,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          8,
+          28
+        ],
+        [
+          8,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        27.88,
+        8.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:45",
+      "hospitalCoreB2": true,
+      "x": 8,
+      "y": 59,
+      "width": 18,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          8,
+          50
+        ],
+        [
+          8,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        49.88,
+        8.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:46",
+      "hospitalCoreB2": true,
+      "x": 8,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          8,
+          74
+        ],
+        [
+          8,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        73.88,
+        8.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:47",
+      "hospitalCoreB2": true,
+      "x": 8,
+      "y": 98,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          8,
+          90
+        ],
+        [
+          8,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        89.88,
+        8.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:48",
+      "hospitalCoreB2": true,
+      "x": 86,
+      "y": 77,
+      "width": 70,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          86,
+          42
+        ],
+        [
+          86,
+          112
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        85.88,
+        41.88,
+        86.12,
+        112.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:49",
+      "hospitalCoreB2": true,
+      "x": 80,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          80,
+          20
+        ],
+        [
+          80,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        19.88,
+        80.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:50",
+      "hospitalCoreB2": true,
+      "x": 80,
+      "y": 29,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          80,
+          28
+        ],
+        [
+          80,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        27.88,
+        80.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:51",
+      "hospitalCoreB2": true,
+      "x": 80,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          80,
+          50
+        ],
+        [
+          80,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        49.88,
+        80.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:52",
+      "hospitalCoreB2": true,
+      "x": 80,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          80,
+          74
+        ],
+        [
+          80,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        73.88,
+        80.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:53",
+      "hospitalCoreB2": true,
+      "x": 80,
+      "y": 98,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          80,
+          90
+        ],
+        [
+          80,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        89.88,
+        80.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:54",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 42,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          42
+        ],
+        [
+          10,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        41.88,
+        10.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:55",
+      "hospitalCoreB2": true,
+      "x": 36,
+      "y": 42,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          42
+        ],
+        [
+          38,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        41.88,
+        38.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:56",
+      "hospitalCoreB2": true,
+      "x": 66,
+      "y": 42,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          64,
+          42
+        ],
+        [
+          68,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        41.88,
+        68.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:57",
+      "hospitalCoreB2": true,
+      "x": 85,
+      "y": 42,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          84,
+          42
+        ],
+        [
+          86,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        83.88,
+        41.88,
+        86.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:58",
+      "hospitalCoreB2": true,
+      "x": 13,
+      "y": 50,
+      "width": 10,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          50
+        ],
+        [
+          18,
+          50
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        49.88,
+        18.12,
+        50.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:59",
+      "hospitalCoreB2": true,
+      "x": 31,
+      "y": 50,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          24,
+          50
+        ],
+        [
+          38,
+          50
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        23.88,
+        49.88,
+        38.12,
+        50.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:60",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 50,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          44,
+          50
+        ],
+        [
+          52,
+          50
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        43.88,
+        49.88,
+        52.12,
+        50.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:61",
+      "hospitalCoreB2": true,
+      "x": 64.5,
+      "y": 50,
+      "width": 13,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          50
+        ],
+        [
+          71,
+          50
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        49.88,
+        71.12,
+        50.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:62",
+      "hospitalCoreB2": true,
+      "x": 78.5,
+      "y": 50,
+      "width": 3,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          77,
+          50
+        ],
+        [
+          80,
+          50
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        76.88,
+        49.88,
+        80.12,
+        50.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:63",
+      "hospitalCoreB2": true,
+      "x": 30,
+      "y": 12,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          30,
+          4
+        ],
+        [
+          30,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        29.88,
+        3.88,
+        30.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:64",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 4,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          30,
+          4
+        ],
+        [
+          46,
+          4
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        29.88,
+        3.88,
+        46.12,
+        4.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:65",
+      "hospitalCoreB2": true,
+      "x": 57,
+      "y": 4,
+      "width": 18,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          48,
+          4
+        ],
+        [
+          66,
+          4
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        3.88,
+        66.12,
+        4.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:66",
+      "hospitalCoreB2": true,
+      "x": 76,
+      "y": 4,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          68,
+          4
+        ],
+        [
+          84,
+          4
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        3.88,
+        84.12,
+        4.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:67",
+      "hospitalCoreB2": true,
+      "x": 46,
+      "y": 7,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          46,
+          4
+        ],
+        [
+          46,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        3.88,
+        46.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:68",
+      "hospitalCoreB2": true,
+      "x": 46,
+      "y": 18,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          46,
+          16
+        ],
+        [
+          46,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        15.88,
+        46.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:69",
+      "hospitalCoreB2": true,
+      "x": 46,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          46,
+          74
+        ],
+        [
+          46,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        73.88,
+        46.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:70",
+      "hospitalCoreB2": true,
+      "x": 32.5,
+      "y": 20,
+      "width": 5,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          30,
+          20
+        ],
+        [
+          35,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        29.88,
+        19.88,
+        35.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:71",
+      "hospitalCoreB2": true,
+      "x": 43.5,
+      "y": 20,
+      "width": 5,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          41,
+          20
+        ],
+        [
+          46,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        40.88,
+        19.88,
+        46.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:72",
+      "hospitalCoreB2": true,
+      "x": 50,
+      "y": 20,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          48,
+          20
+        ],
+        [
+          52,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        19.88,
+        52.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:73",
+      "hospitalCoreB2": true,
+      "x": 62,
+      "y": 20,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          20
+        ],
+        [
+          66,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        19.88,
+        66.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:74",
+      "hospitalCoreB2": true,
+      "x": 71,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          68,
+          20
+        ],
+        [
+          74,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        19.88,
+        74.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:75",
+      "hospitalCoreB2": true,
+      "x": 82,
+      "y": 20,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          20
+        ],
+        [
+          84,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        19.88,
+        84.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:76",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 7,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          48,
+          4
+        ],
+        [
+          48,
+          10
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        3.88,
+        48.12,
+        10.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:77",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 18,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          48,
+          16
+        ],
+        [
+          48,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        15.88,
+        48.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:78",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          48,
+          52
+        ],
+        [
+          48,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        51.88,
+        48.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:79",
+      "hospitalCoreB2": true,
+      "x": 66,
+      "y": 12,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          66,
+          4
+        ],
+        [
+          66,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        65.88,
+        3.88,
+        66.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:80",
+      "hospitalCoreB2": true,
+      "x": 35,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          35,
+          20
+        ],
+        [
+          35,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        34.88,
+        19.88,
+        35.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:81",
+      "hospitalCoreB2": true,
+      "x": 41,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          41,
+          20
+        ],
+        [
+          41,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        40.88,
+        19.88,
+        41.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:82",
+      "hospitalCoreB2": true,
+      "x": 52,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          52,
+          20
+        ],
+        [
+          52,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        51.88,
+        19.88,
+        52.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:83",
+      "hospitalCoreB2": true,
+      "x": 52,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          52,
+          50
+        ],
+        [
+          52,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        51.88,
+        49.88,
+        52.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:84",
+      "hospitalCoreB2": true,
+      "x": 52,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          52,
+          104
+        ],
+        [
+          52,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        51.88,
+        103.88,
+        52.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:85",
+      "hospitalCoreB2": true,
+      "x": 58,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          58,
+          20
+        ],
+        [
+          58,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        19.88,
+        58.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:86",
+      "hospitalCoreB2": true,
+      "x": 58,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          58,
+          50
+        ],
+        [
+          58,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        49.88,
+        58.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:87",
+      "hospitalCoreB2": true,
+      "x": 58,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          58,
+          104
+        ],
+        [
+          58,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        103.88,
+        58.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:88",
+      "hospitalCoreB2": true,
+      "x": 47,
+      "y": 16,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          46,
+          16
+        ],
+        [
+          48,
+          16
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        15.88,
+        48.12,
+        16.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:89",
+      "hospitalCoreB2": true,
+      "x": 14,
+      "y": 52,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          52
+        ],
+        [
+          18,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        51.88,
+        18.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:90",
+      "hospitalCoreB2": true,
+      "x": 28,
+      "y": 52,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          24,
+          52
+        ],
+        [
+          32,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        23.88,
+        51.88,
+        32.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:91",
+      "hospitalCoreB2": true,
+      "x": 36,
+      "y": 52,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          52
+        ],
+        [
+          38,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        51.88,
+        38.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:92",
+      "hospitalCoreB2": true,
+      "x": 46,
+      "y": 52,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          44,
+          52
+        ],
+        [
+          48,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        43.88,
+        51.88,
+        48.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:93",
+      "hospitalCoreB2": true,
+      "x": 51,
+      "y": 52,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          50,
+          52
+        ],
+        [
+          52,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        49.88,
+        51.88,
+        52.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:94",
+      "hospitalCoreB2": true,
+      "x": 63,
+      "y": 52,
+      "width": 10,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          52
+        ],
+        [
+          68,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        51.88,
+        68.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:95",
+      "hospitalCoreB2": true,
+      "x": 70.5,
+      "y": 52,
+      "width": 1,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          70,
+          52
+        ],
+        [
+          71,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        69.88,
+        51.88,
+        71.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:96",
+      "hospitalCoreB2": true,
+      "x": 78.5,
+      "y": 52,
+      "width": 3,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          77,
+          52
+        ],
+        [
+          80,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        76.88,
+        51.88,
+        80.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:97",
+      "hospitalCoreB2": true,
+      "x": 32,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          32,
+          52
+        ],
+        [
+          32,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        31.88,
+        51.88,
+        32.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:98",
+      "hospitalCoreB2": true,
+      "x": 32,
+      "y": 91,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          32,
+          90
+        ],
+        [
+          32,
+          92
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        31.88,
+        89.88,
+        32.12,
+        92.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:99",
+      "hospitalCoreB2": true,
+      "x": 50,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          50,
+          52
+        ],
+        [
+          50,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        49.88,
+        51.88,
+        50.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:100",
+      "hospitalCoreB2": true,
+      "x": 50,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          50,
+          74
+        ],
+        [
+          50,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        49.88,
+        73.88,
+        50.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:101",
+      "hospitalCoreB2": true,
+      "x": 68,
+      "y": 12,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          68,
+          4
+        ],
+        [
+          68,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        3.88,
+        68.12,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:102",
+      "hospitalCoreB2": true,
+      "x": 68,
+      "y": 32,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          68,
+          30
+        ],
+        [
+          68,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        29.88,
+        68.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:103",
+      "hospitalCoreB2": true,
+      "x": 68,
+      "y": 41,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          68,
+          40
+        ],
+        [
+          68,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        39.88,
+        68.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:104",
+      "hospitalCoreB2": true,
+      "x": 68,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          68,
+          52
+        ],
+        [
+          68,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        51.88,
+        68.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:105",
+      "hospitalCoreB2": true,
+      "x": 70,
+      "y": 60,
+      "width": 16,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          70,
+          52
+        ],
+        [
+          70,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        69.88,
+        51.88,
+        70.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:106",
+      "hospitalCoreB2": true,
+      "x": 18,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          18,
+          50
+        ],
+        [
+          18,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        17.88,
+        49.88,
+        18.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:107",
+      "hospitalCoreB2": true,
+      "x": 24,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          24,
+          50
+        ],
+        [
+          24,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        23.88,
+        49.88,
+        24.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:108",
+      "hospitalCoreB2": true,
+      "x": 24,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          24,
+          90
+        ],
+        [
+          24,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        23.88,
+        89.88,
+        24.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:109",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 32,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          38,
+          30
+        ],
+        [
+          38,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        37.88,
+        29.88,
+        38.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:110",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 41,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          38,
+          40
+        ],
+        [
+          38,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        37.88,
+        39.88,
+        38.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:111",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          38,
+          50
+        ],
+        [
+          38,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        37.88,
+        49.88,
+        38.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:112",
+      "hospitalCoreB2": true,
+      "x": 44,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          44,
+          50
+        ],
+        [
+          44,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        43.88,
+        49.88,
+        44.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:113",
+      "hospitalCoreB2": true,
+      "x": 44,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          44,
+          90
+        ],
+        [
+          44,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        43.88,
+        89.88,
+        44.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:114",
+      "hospitalCoreB2": true,
+      "x": 71,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          71,
+          50
+        ],
+        [
+          71,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        70.88,
+        49.88,
+        71.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:115",
+      "hospitalCoreB2": true,
+      "x": 77,
+      "y": 51,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          77,
+          50
+        ],
+        [
+          77,
+          52
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        76.88,
+        49.88,
+        77.12,
+        52.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:116",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 68,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          68
+        ],
+        [
+          10,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        67.88,
+        10.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:117",
+      "hospitalCoreB2": true,
+      "x": 33,
+      "y": 68,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          32,
+          68
+        ],
+        [
+          34,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        31.88,
+        67.88,
+        34.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:118",
+      "hospitalCoreB2": true,
+      "x": 49,
+      "y": 68,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          48,
+          68
+        ],
+        [
+          50,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        67.88,
+        50.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:119",
+      "hospitalCoreB2": true,
+      "x": 69,
+      "y": 68,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          68,
+          68
+        ],
+        [
+          70,
+          68
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        67.88,
+        67.88,
+        70.12,
+        68.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:120",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 74,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          74
+        ],
+        [
+          10,
+          74
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        73.88,
+        10.12,
+        74.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:121",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 74,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          36,
+          74
+        ],
+        [
+          40,
+          74
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        35.88,
+        73.88,
+        40.12,
+        74.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:122",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 74,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          46,
+          74
+        ],
+        [
+          50,
+          74
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        73.88,
+        50.12,
+        74.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:123",
+      "hospitalCoreB2": true,
+      "x": 79,
+      "y": 74,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          78,
+          74
+        ],
+        [
+          80,
+          74
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        77.88,
+        73.88,
+        80.12,
+        74.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:124",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 80,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          80
+        ],
+        [
+          10,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        79.88,
+        10.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:125",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 80,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          36,
+          80
+        ],
+        [
+          40,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        35.88,
+        79.88,
+        40.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:126",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 80,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          46,
+          80
+        ],
+        [
+          50,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        45.88,
+        79.88,
+        50.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:127",
+      "hospitalCoreB2": true,
+      "x": 79,
+      "y": 80,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          78,
+          80
+        ],
+        [
+          80,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        77.88,
+        79.88,
+        80.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:128",
+      "hospitalCoreB2": true,
+      "x": 9,
+      "y": 90,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          90
+        ],
+        [
+          10,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        89.88,
+        10.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:129",
+      "hospitalCoreB2": true,
+      "x": 25,
+      "y": 90,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          24,
+          90
+        ],
+        [
+          26,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        23.88,
+        89.88,
+        26.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:130",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 90,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          32,
+          90
+        ],
+        [
+          44,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        31.88,
+        89.88,
+        44.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:131",
+      "hospitalCoreB2": true,
+      "x": 63,
+      "y": 90,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          62,
+          90
+        ],
+        [
+          64,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        61.88,
+        89.88,
+        64.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:132",
+      "hospitalCoreB2": true,
+      "x": 79,
+      "y": 90,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          78,
+          90
+        ],
+        [
+          80,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        77.88,
+        89.88,
+        80.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:133",
+      "hospitalCoreB2": true,
+      "x": 40,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          40,
+          74
+        ],
+        [
+          40,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        39.88,
+        73.88,
+        40.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:134",
+      "hospitalCoreB2": true,
+      "x": 36,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          36,
+          74
+        ],
+        [
+          36,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        35.88,
+        73.88,
+        36.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:135",
+      "hospitalCoreB2": true,
+      "x": 78,
+      "y": 77,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          78,
+          74
+        ],
+        [
+          78,
+          80
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        77.88,
+        73.88,
+        78.12,
+        80.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:136",
+      "hospitalCoreB2": true,
+      "x": 78,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          78,
+          90
+        ],
+        [
+          78,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        77.88,
+        89.88,
+        78.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:137",
+      "hospitalCoreB2": true,
+      "x": 12,
+      "y": 104,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          104
+        ],
+        [
+          14,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        103.88,
+        14.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:138",
+      "hospitalCoreB2": true,
+      "x": 22,
+      "y": 104,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          20,
+          104
+        ],
+        [
+          24,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        19.88,
+        103.88,
+        24.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:139",
+      "hospitalCoreB2": true,
+      "x": 27,
+      "y": 104,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          26,
+          104
+        ],
+        [
+          28,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        25.88,
+        103.88,
+        28.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:140",
+      "hospitalCoreB2": true,
+      "x": 38,
+      "y": 104,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          104
+        ],
+        [
+          42,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        103.88,
+        42.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:141",
+      "hospitalCoreB2": true,
+      "x": 48,
+      "y": 104,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          44,
+          104
+        ],
+        [
+          52,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        43.88,
+        103.88,
+        52.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:142",
+      "hospitalCoreB2": true,
+      "x": 60,
+      "y": 104,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          104
+        ],
+        [
+          62,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        103.88,
+        62.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:143",
+      "hospitalCoreB2": true,
+      "x": 65.5,
+      "y": 104,
+      "width": 3,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          64,
+          104
+        ],
+        [
+          67,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        103.88,
+        67.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:144",
+      "hospitalCoreB2": true,
+      "x": 75.5,
+      "y": 104,
+      "width": 5,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          73,
+          104
+        ],
+        [
+          78,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        72.88,
+        103.88,
+        78.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:145",
+      "hospitalCoreB2": true,
+      "x": 26,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          26,
+          90
+        ],
+        [
+          26,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        25.88,
+        89.88,
+        26.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:146",
+      "hospitalCoreB2": true,
+      "x": 37,
+      "y": 92,
+      "width": 10,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          32,
+          92
+        ],
+        [
+          42,
+          92
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        31.88,
+        91.88,
+        42.12,
+        92.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:147",
+      "hospitalCoreB2": true,
+      "x": 42,
+      "y": 98,
+      "width": 12,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          42,
+          92
+        ],
+        [
+          42,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        41.88,
+        91.88,
+        42.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:148",
+      "hospitalCoreB2": true,
+      "x": 62,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          62,
+          90
+        ],
+        [
+          62,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        61.88,
+        89.88,
+        62.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:149",
+      "hospitalCoreB2": true,
+      "x": 64,
+      "y": 32,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          64,
+          30
+        ],
+        [
+          64,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        29.88,
+        64.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:150",
+      "hospitalCoreB2": true,
+      "x": 64,
+      "y": 41,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          64,
+          40
+        ],
+        [
+          64,
+          42
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        39.88,
+        64.12,
+        42.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:151",
+      "hospitalCoreB2": true,
+      "x": 64,
+      "y": 97,
+      "width": 14,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          64,
+          90
+        ],
+        [
+          64,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        89.88,
+        64.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:152",
+      "hospitalCoreB2": true,
+      "x": 11,
+      "y": 106,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          8,
+          106
+        ],
+        [
+          14,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        7.88,
+        105.88,
+        14.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:153",
+      "hospitalCoreB2": true,
+      "x": 24,
+      "y": 106,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          20,
+          106
+        ],
+        [
+          28,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        19.88,
+        105.88,
+        28.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:154",
+      "hospitalCoreB2": true,
+      "x": 43,
+      "y": 106,
+      "width": 18,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          106
+        ],
+        [
+          52,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        105.88,
+        52.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:155",
+      "hospitalCoreB2": true,
+      "x": 62.5,
+      "y": 106,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          58,
+          106
+        ],
+        [
+          67,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        57.88,
+        105.88,
+        67.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:156",
+      "hospitalCoreB2": true,
+      "x": 76.5,
+      "y": 106,
+      "width": 7,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          73,
+          106
+        ],
+        [
+          80,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        72.88,
+        105.88,
+        80.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:157",
+      "hospitalCoreB2": true,
+      "x": 44,
+      "y": 112,
+      "width": 84,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          2,
+          112
+        ],
+        [
+          86,
+          112
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1.88,
+        111.88,
+        86.12,
+        112.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:158",
+      "hospitalCoreB2": true,
+      "x": 14,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          14,
+          104
+        ],
+        [
+          14,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        13.88,
+        103.88,
+        14.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:159",
+      "hospitalCoreB2": true,
+      "x": 20,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          20,
+          104
+        ],
+        [
+          20,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        19.88,
+        103.88,
+        20.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:160",
+      "hospitalCoreB2": true,
+      "x": 67,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          67,
+          104
+        ],
+        [
+          67,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        66.88,
+        103.88,
+        67.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:161",
+      "hospitalCoreB2": true,
+      "x": 73,
+      "y": 105,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          73,
+          104
+        ],
+        [
+          73,
+          106
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        72.88,
+        103.88,
+        73.12,
+        106.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:162",
+      "hospitalCoreB2": true,
+      "x": 7,
+      "y": 20,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          7,
+          18
+        ],
+        [
+          7,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        6.88,
+        17.88,
+        7.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:163",
+      "hospitalCoreB2": true,
+      "x": 1.5,
+      "y": 24,
+      "width": 1,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          24
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        0.88,
+        23.88,
+        2.12,
+        24.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:164",
+      "hospitalCoreB2": true,
+      "x": 36,
+      "y": 34,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          34
+        ],
+        [
+          38,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        33.88,
+        38.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:165",
+      "hospitalCoreB2": true,
+      "x": 66,
+      "y": 34,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          64,
+          34
+        ],
+        [
+          68,
+          34
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        33.88,
+        68.12,
+        34.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:166",
+      "hospitalCoreB2": true,
+      "x": 36,
+      "y": 40,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          40
+        ],
+        [
+          38,
+          40
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        39.88,
+        38.12,
+        40.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:167",
+      "hospitalCoreB2": true,
+      "x": 66,
+      "y": 40,
+      "width": 4,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          64,
+          40
+        ],
+        [
+          68,
+          40
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        63.88,
+        39.88,
+        68.12,
+        40.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:168",
+      "hospitalCoreB2": true,
+      "x": 74,
+      "y": 21,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          74,
+          20
+        ],
+        [
+          74,
+          22
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        73.88,
+        19.88,
+        74.12,
+        22.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b2-wall:169",
+      "hospitalCoreB2": true,
+      "x": 74,
+      "y": 29,
+      "width": 2,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          74,
+          28
+        ],
+        [
+          74,
+          30
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        73.88,
+        27.88,
+        74.12,
+        30.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:observation-bypass-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 4,
+      "y": 19,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          1,
+          19
+        ],
+        [
+          7,
+          19
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        0.88,
+        18.88,
+        7.12,
+        19.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:west-entry-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 5,
+      "y": 104,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          2,
+          104
+        ],
+        [
+          8,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1.88,
+        103.88,
+        8.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:east-entry-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 83,
+      "y": 104,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          104
+        ],
+        [
+          86,
+          104
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        103.88,
+        86.12,
+        104.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:west-lower-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 5,
+      "y": 79,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          2,
+          79
+        ],
+        [
+          8,
+          79
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1.88,
+        78.88,
+        8.12,
+        79.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:east-lower-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 83,
+      "y": 79,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          79
+        ],
+        [
+          86,
+          79
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        78.88,
+        86.12,
+        79.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:west-middle-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 5,
+      "y": 67,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          2,
+          67
+        ],
+        [
+          8,
+          67
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1.88,
+        66.88,
+        8.12,
+        67.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:east-middle-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 83,
+      "y": 67,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          80,
+          67
+        ],
+        [
+          86,
+          67
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        79.88,
+        66.88,
+        86.12,
+        67.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:route-divider-lower",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 43,
+      "y": 85,
+      "width": 10,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          43,
+          80
+        ],
+        [
+          43,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        42.88,
+        79.88,
+        43.12,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:centre-shortcut-seal",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 43,
+      "y": 75,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          40,
+          75
+        ],
+        [
+          46,
+          75
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        39.88,
+        74.88,
+        46.12,
+        75.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:route-divider-middle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 31,
+      "y": 71,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 1.5707963267948966,
+      "endpoints": [
+        [
+          31,
+          68
+        ],
+        [
+          31,
+          74
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        30.88,
+        67.88,
+        31.12,
+        74.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:south-a-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 14.5,
+      "y": 97,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          97
+        ],
+        [
+          19,
+          97
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        96.88,
+        19.12,
+        97.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:south-b-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 29.5,
+      "y": 97,
+      "width": 7,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          26,
+          97
+        ],
+        [
+          33,
+          97
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        25.88,
+        96.88,
+        33.12,
+        97.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:south-c-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 52.5,
+      "y": 97,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          48,
+          97
+        ],
+        [
+          57,
+          97
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        47.88,
+        96.88,
+        57.12,
+        97.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:south-d-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 72.5,
+      "y": 97,
+      "width": 11,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          67,
+          97
+        ],
+        [
+          78,
+          97
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        66.88,
+        96.88,
+        78.12,
+        97.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-a-south-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 17.5,
+      "y": 61,
+      "width": 15,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          10,
+          61
+        ],
+        [
+          25,
+          61
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        9.88,
+        60.88,
+        25.12,
+        61.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-a-north-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 24.5,
+      "y": 57,
+      "width": 15,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          17,
+          57
+        ],
+        [
+          32,
+          57
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        16.88,
+        56.88,
+        32.12,
+        57.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-b-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 38.5,
+      "y": 61,
+      "width": 9,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          34,
+          61
+        ],
+        [
+          43,
+          61
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        33.88,
+        60.88,
+        43.12,
+        61.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-c-south-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 55.5,
+      "y": 61,
+      "width": 11,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          50,
+          61
+        ],
+        [
+          61,
+          61
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        49.88,
+        60.88,
+        61.12,
+        61.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-c-north-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 62.5,
+      "y": 57,
+      "width": 11,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          57,
+          57
+        ],
+        [
+          68,
+          57
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        56.88,
+        56.88,
+        68.12,
+        57.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-maze:consult-d-baffle",
+      "hospitalCoreB2": true,
+      "hospitalMazeBarrier": true,
+      "x": 72.5,
+      "y": 61,
+      "width": 5,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          70,
+          61
+        ],
+        [
+          75,
+          61
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        69.88,
+        60.88,
+        75.12,
+        61.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b3:door-0",
+      "hospitalCoreB2": true,
+      "hospitalDoorB3": "door-0",
+      "x": 20,
+      "y": 20,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          17,
+          20
+        ],
+        [
+          23,
+          20
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        17,
+        19.88,
+        23,
+        20.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b3:door-1",
+      "hospitalCoreB2": true,
+      "hospitalDoorB3": "door-1",
+      "x": 29,
+      "y": 90,
+      "width": 6,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          26,
+          90
+        ],
+        [
+          32,
+          90
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        26,
+        89.88,
+        32,
+        90.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    },
+    {
+      "id": "hospital-b3:door-2",
+      "hospitalCoreB2": true,
+      "hospitalDoorB3": "door-2",
+      "x": 5,
+      "y": 6,
+      "width": 8,
+      "depth": 0.24,
+      "height": 2.7,
+      "angle": 0,
+      "endpoints": [
+        [
+          1,
+          6
+        ],
+        [
+          9,
+          6
+        ]
+      ],
+      "annex": true,
+      "analyticBoundary12": true,
+      "analyticBounds12": [
+        1,
+        5.88,
+        9,
+        6.12
+      ],
+      "path": "assets/visual-test/hospital-quiet-material-atlas-r42.png"
+    }
+  ],
+  "views": [
+    {
+      "name": "Lower centre entrance",
+      "hero": {
+        "x": 43,
+        "y": 109
+      },
+      "before": {
+        "width": 1280,
+        "height": 720,
+        "tile": 34,
+        "zoom": 1.12,
+        "camX": 43,
+        "camY": 109
+      },
+      "after": {
+        "tile": 34,
+        "width": 1280,
+        "height": 720,
+        "zoom": 1.12,
+        "camX": 43.168067226890756,
+        "camY": 99.75630252100841
+      },
+      "beforeCoverage": {
+        "floor": 0.578125,
+        "inside": 0.7135416666666666,
+        "exterior": 0.28645833333333337,
+        "samples": 384
+      },
+      "afterCoverage": {
+        "floor": 0.8229166666666666,
+        "inside": 0.9713541666666666,
+        "exterior": 0.02864583333333337,
+        "samples": 384
+      }
+    },
+    {
+      "name": "North-east ward",
+      "hero": {
+        "x": 76,
+        "y": 9
+      },
+      "before": {
+        "width": 1280,
+        "height": 720,
+        "tile": 34,
+        "zoom": 1.12,
+        "camX": 76,
+        "camY": 9
+      },
+      "after": {
+        "tile": 34,
+        "width": 1280,
+        "height": 720,
+        "zoom": 1.12,
+        "camX": 73.56302521008404,
+        "camY": 15.974789915966387
+      },
+      "beforeCoverage": {
+        "floor": 0.5390625,
+        "inside": 0.7994791666666666,
+        "exterior": 0.20052083333333337,
+        "samples": 384
+      },
+      "afterCoverage": {
+        "floor": 0.7447916666666666,
+        "inside": 0.9661458333333334,
+        "exterior": 0.03385416666666663,
+        "samples": 384
+      }
+    },
+    {
+      "name": "Surgeon room",
+      "hero": {
+        "x": 20,
+        "y": 12
+      },
+      "before": {
+        "width": 1280,
+        "height": 720,
+        "tile": 34,
+        "zoom": 1.12,
+        "camX": 20,
+        "camY": 12
+      },
+      "after": {
+        "tile": 34,
+        "width": 1280,
+        "height": 720,
+        "zoom": 1.12,
+        "camX": 19.83193277310924,
+        "camY": 21.243697478991596
+      },
+      "beforeCoverage": {
+        "floor": 0.6380208333333334,
+        "inside": 0.9401041666666666,
+        "exterior": 0.05989583333333337,
+        "samples": 384
+      },
+      "afterCoverage": {
+        "floor": 0.8020833333333334,
+        "inside": 1,
+        "exterior": 0,
+        "samples": 384
+      }
+    }
+  ]
+}

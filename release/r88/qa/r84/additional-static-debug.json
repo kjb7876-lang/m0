@@ -1,0 +1,27 @@
+{
+  "schema": "r84-additional-static-debug/v1",
+  "date": "2026-10-23",
+  "frozenSuite": {
+    "passed": true,
+    "checks": 490,
+    "groups": 37,
+    "runtimeUnchanged": true
+  },
+  "javascriptSyntax": {
+    "files": 54,
+    "errors": 0
+  },
+  "htmlStaticReferences": {
+    "count": 25,
+    "missing": 0,
+    "unresolvedExternal": 0
+  },
+  "runtimeManifest": {
+    "registeredFiles": 2194,
+    "indexHashMatchesManifest": true
+  },
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "publicDeploymentChanged": false
+}

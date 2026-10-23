@@ -1,0 +1,481 @@
+{
+  "method": "Actual shipped native heroFrame/drawHero calls in Node VM, 1560 route-clock frame projections and 256 native body draws; original 71 asset hashes and measured alpha geometry. No browser/GPU claim.",
+  "checks": [
+    {
+      "name": "Shipped runtime loads render-only hero module",
+      "passed": true
+    },
+    {
+      "name": "All 71 calibrated original sprite bytes match measured alpha audit",
+      "passed": true
+    },
+    {
+      "name": "Every calibrated crown and sole is finite, inside its actual crop, and preserves source width",
+      "passed": true
+    },
+    {
+      "name": "All eight heroes and all 520 native route clocks return valid render frames",
+      "passed": true,
+      "detail": {
+        "heroes": [
+          "hwando",
+          "seoha",
+          "neon",
+          "michaela",
+          "lauren",
+          "hunter",
+          "slayer",
+          "gunner"
+        ],
+        "routes": 520,
+        "clocks": 3,
+        "frames": 1560
+      }
+    },
+    {
+      "name": "Render calibration never mutates any original combat-facing frame",
+      "passed": true
+    },
+    {
+      "name": "Original authored Hwando and Slayer atlas bodies and scales remain unchanged",
+      "passed": true,
+      "detail": {
+        "frames": 192
+      }
+    },
+    {
+      "name": "Six other heroes guard with their own idle body and native barrier instead of baked huge spells",
+      "passed": true,
+      "detail": {
+        "guardFrames": 96
+      }
+    },
+    {
+      "name": "Five other heroes dash with matching moving bodies and native dash effects",
+      "passed": true,
+      "detail": {
+        "dashFrames": 84
+      }
+    },
+    {
+      "name": "Every presented legacy calibrated body puts the measured sole at the ground anchor",
+      "passed": true,
+      "detail": {
+        "renderFrames": 204,
+        "originalWorstFootGapPx66": 45.506637248234505
+      }
+    },
+    {
+      "name": "Gunner gait never alternates into baked white-outline B art",
+      "passed": true,
+      "detail": {
+        "frames": 36,
+        "aliases": 8
+      }
+    },
+    {
+      "name": "Gunner curled roll has 44px pose height with grounded sole",
+      "passed": true,
+      "detail": {
+        "rollFrames": 12
+      }
+    },
+    {
+      "name": "Actual shipped drawHero renders all eight heroes, eight states and four logical directions",
+      "passed": true,
+      "detail": {
+        "draws": 256,
+        "misses": []
+      }
+    },
+    {
+      "name": "Hero diagnostics confirm render-only corrections ran through actual native drawing",
+      "passed": true,
+      "detail": {
+        "revision": "hero-render-consistency-r83",
+        "renderOnly": true,
+        "bodyTarget": 66,
+        "rollTarget": 44,
+        "physicsChanged": false,
+        "sourcePixelsEdited": false,
+        "portraitsChanged": false,
+        "counts": {
+          "presentations": 416,
+          "calibrated": 272,
+          "guards": 120,
+          "dashes": 104,
+          "gaitAliases": 12,
+          "rolls": 16
+        },
+        "last": {
+          "hero": "gunner",
+          "state": "dash",
+          "direction": "right",
+          "path": "assets/heroes/normalized/gunner/dash_right.webp",
+          "heightScale": 0.6666666666666666,
+          "guardBody": false,
+          "gaitAlias": false,
+          "calibrated": true,
+          "pivot": [
+            87.00006400000001,
+            195
+          ],
+          "visibleHeight": 194
+        }
+      }
+    },
+    {
+      "name": "Actual capture marks every presented hero body for depth and matches snapshot image identity",
+      "passed": true,
+      "detail": [
+        {
+          "hero": "hwando",
+          "state": "move",
+          "expected": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "role": "body"
+            },
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "hwando",
+          "state": "guard",
+          "expected": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "role": "body"
+            },
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "hwando",
+          "state": "dash",
+          "expected": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "role": "body"
+            },
+            {
+              "path": "./assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/hwando-walk-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "seoha",
+          "state": "move",
+          "expected": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "seoha",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/directions/seoha-left.webp",
+          "snapshotPath": "assets/heroes/normalized/directions/seoha-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/directions/seoha-left.webp",
+              "bodyPath": "assets/heroes/normalized/directions/seoha-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "seoha",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/seoha-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "neon",
+          "state": "move",
+          "expected": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "neon",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/directions/neon-left.webp",
+          "snapshotPath": "assets/heroes/normalized/directions/neon-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/directions/neon-left.webp",
+              "bodyPath": "assets/heroes/normalized/directions/neon-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "neon",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/neon-move-right.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "michaela",
+          "state": "move",
+          "expected": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "michaela",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/directions/michaela-left.webp",
+          "snapshotPath": "assets/heroes/normalized/directions/michaela-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/directions/michaela-left.webp",
+              "bodyPath": "assets/heroes/normalized/directions/michaela-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "michaela",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/michaela-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "lauren",
+          "state": "move",
+          "expected": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "lauren",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/directions/lauren-left.webp",
+          "snapshotPath": "assets/heroes/normalized/directions/lauren-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/directions/lauren-left.webp",
+              "bodyPath": "assets/heroes/normalized/directions/lauren-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "lauren",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/lauren-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "hunter",
+          "state": "move",
+          "expected": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "hunter",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/directions/hunter-left.webp",
+          "snapshotPath": "assets/heroes/normalized/directions/hunter-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/directions/hunter-left.webp",
+              "bodyPath": "assets/heroes/normalized/directions/hunter-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "hunter",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+          "snapshotPath": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+              "bodyPath": "assets/heroes/normalized/actions-v3126/hunter-move-left.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "slayer",
+          "state": "move",
+          "expected": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "slayer",
+          "state": "guard",
+          "expected": "assets/hero-authored-v314rc5/slayer-action-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/slayer-action-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/slayer-action-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/slayer-action-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "slayer",
+          "state": "dash",
+          "expected": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+          "snapshotPath": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+          "bodies": [
+            {
+              "path": "./assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+              "bodyPath": "assets/hero-authored-v314rc5/slayer-walk-atlas.png",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "gunner",
+          "state": "move",
+          "expected": "assets/heroes/normalized/gunner/run_left_a.webp",
+          "snapshotPath": "assets/heroes/normalized/gunner/run_left_a.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/gunner/run_left_a.webp",
+              "bodyPath": "assets/heroes/normalized/gunner/run_left_a.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "gunner",
+          "state": "guard",
+          "expected": "assets/heroes/normalized/gunner/player_idle.webp",
+          "snapshotPath": "assets/heroes/normalized/gunner/player_idle.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/gunner/player_idle.webp",
+              "bodyPath": "assets/heroes/normalized/gunner/player_idle.webp",
+              "role": "body"
+            }
+          ]
+        },
+        {
+          "hero": "gunner",
+          "state": "dash",
+          "expected": "assets/heroes/normalized/gunner/dash_left.webp",
+          "snapshotPath": "assets/heroes/normalized/gunner/dash_left.webp",
+          "bodies": [
+            {
+              "path": "./assets/heroes/normalized/gunner/dash_left.webp",
+              "bodyPath": "assets/heroes/normalized/gunner/dash_left.webp",
+              "role": "body"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Coarse-pointer/mobile presentation remains native",
+      "passed": true
+    },
+    {
+      "name": "Cooperative presentation remains native",
+      "passed": true
+    },
+    {
+      "name": "Native gameplay frame catalogue is unchanged after all actual body draws",
+      "passed": true
+    },
+    {
+      "name": "No native error is recorded by hero draw fixtures",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false
+}

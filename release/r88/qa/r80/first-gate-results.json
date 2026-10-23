@@ -1,0 +1,46 @@
+{
+  "method": "Final frozen-source CPU gate. No browser/GPU/natural play.",
+  "passed": false,
+  "sourceUnchangedDuringRun": true,
+  "sourceHashes": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "hospital-improvements-a5.js": "9072ccfbba0036e7387d6ce54d417f2cc27a96168ecc21dcccc0be24a4887396",
+    "hospital-maze-layout.js": "b230444aa9744705a7db2ed5f716dc74c91dcd5f7b34802e22841361762d312c",
+    "hospital-maze-progression.js": "e82f50b7ef7464690825d7c09366e9450cef04d4b973403a9fcc9192c7462318",
+    "hospital-maze-visuals.js": "1999652855366463e301d7112036b15288ef2425aa1808bb97557196e28790b9",
+    "ego-restore-health-r79.js": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63",
+    "world-assets-r80-data.js": "6607c24ffa513af0453c9e262d11ebfcbbf9b007e901aaba6e126bf8444e65e4",
+    "world-assets-r80.js": "86629792a8d9b8e149cdcb1327653f9f714cc0912cc13643e9092d3b74328eb9"
+  },
+  "runs": [
+    {
+      "test": "roof-check",
+      "exitCode": 0
+    },
+    {
+      "test": "layout-validation",
+      "exitCode": 0
+    },
+    {
+      "test": "maze-integration",
+      "exitCode": 0
+    },
+    {
+      "test": "migration-check",
+      "exitCode": 0
+    },
+    {
+      "test": "cold-check",
+      "exitCode": 0
+    },
+    {
+      "test": "ego-regression",
+      "exitCode": 0
+    },
+    {
+      "test": "champion-check",
+      "exitCode": 1
+    }
+  ]
+}

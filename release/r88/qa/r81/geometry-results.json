@@ -1,0 +1,4104 @@
+{
+  "schema": "r81-geometry-contracts/v1",
+  "method": "Actual native layout factories and collision API in Node VM; source-generated static geometry, not browser pixels, WebGL/GPU, or natural play.",
+  "checks": [
+    {
+      "name": "Hospital reference is the current 87 × 113, 8022-cell B2 wide-room maze",
+      "passed": true,
+      "detail": {
+        "bounds": [
+          0,
+          0,
+          87,
+          113
+        ],
+        "cells": 8022,
+        "staticWalls": 190
+      }
+    },
+    {
+      "name": "All 55 combat maps use the actual current hospital floor plan and envelope",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All maps retain every shared boundary/baffle and use rectilinear walls",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Visible tile rectangles exactly match collision floor cells with no holes, overlap or old core floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "No combat map draws the old full-envelope backdrop or fog apron",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "World maps do not enter hospital-specific simulation branches",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All 55 authored maze entrances are wall-safe for the native player body",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Spider cave and swamp reject every sampled non-floor cell",
+      "passed": true,
+      "detail": [
+        {
+          "id": "dist01",
+          "nonFloorLeaks": 0,
+          "entryBlocked": false
+        },
+        {
+          "id": "dist02",
+          "nonFloorLeaks": 0,
+          "entryBlocked": false
+        }
+      ]
+    },
+    {
+      "name": "Safe maps and co-op keep their prior layout dispatch",
+      "passed": true,
+      "detail": {
+        "safeUnchanged": true,
+        "coopUnchanged": true
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "dist00",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 18.69617224880383,
+          "y": 2.511961722488037,
+          "sourceFoot": [
+            1287,
+            348
+          ],
+          "sourceRect": [
+            1216,
+            216,
+            142,
+            132
+          ],
+          "kind": "door",
+          "cue": "악마나무 궁성 우상단 붉은 아치 발치",
+          "direction": "e",
+          "to": "dist01"
+        },
+        "s": {
+          "x": 8.899521531100477,
+          "y": 24.50956937799043,
+          "sourceFoot": [
+            401,
+            518
+          ],
+          "sourceRect": [
+            330,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "악마화 나무의 정원 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "dist05"
+        },
+        "w": {
+          "x": 24.509569377990427,
+          "y": 8.89952153110048,
+          "sourceFoot": [
+            1271,
+            518
+          ],
+          "sourceRect": [
+            1200,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "악마화 나무의 정원 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "hub"
+        }
+      }
+    },
+    {
+      "id": "dist01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 8.114754098360656,
+          "y": 6.904161412358133,
+          "sourceFoot": [
+            825,
+            298
+          ],
+          "sourceRect": [
+            758,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "뼈거미굴 상부 암반 사이 접근로",
+          "direction": "e",
+          "to": "dist02"
+        },
+        "s": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "거미동굴 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "dist04"
+        },
+        "w": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "거미동굴 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "dist00"
+        }
+      }
+    },
+    {
+      "id": "dist02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 8.114754098360656,
+          "y": 6.904161412358133,
+          "sourceFoot": [
+            825,
+            298
+          ],
+          "sourceRect": [
+            758,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "얼굴갈대 늪 상단 어두운 수로",
+          "direction": "s",
+          "to": "dist03"
+        },
+        "w": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "늪지대의 뿔악마 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "dist01"
+        }
+      }
+    },
+    {
+      "id": "dist03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.114754098360656,
+          "y": 6.904161412358133,
+          "sourceFoot": [
+            825,
+            298
+          ],
+          "sourceRect": [
+            758,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "소환도시 상부 성벽 접근로",
+          "direction": "w",
+          "to": "dist04"
+        },
+        "n": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "무너진성 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "dist02"
+        },
+        "s": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "무너진성 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "ep1a10"
+        }
+      }
+    },
+    {
+      "id": "dist04",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.114754098360656,
+          "y": 6.904161412358133,
+          "sourceFoot": [
+            825,
+            298
+          ],
+          "sourceRect": [
+            758,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "몰락수호 교차로 상부 돌회랑",
+          "direction": "w",
+          "to": "dist05"
+        },
+        "e": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "시체들이 되살아난 밤 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "dist03"
+        },
+        "n": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "시체들이 되살아난 밤 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "dist01"
+        },
+        "s": {
+          "x": 25.895334174022697,
+          "y": 25.895334174022697,
+          "sourceFoot": [
+            793,
+            784
+          ],
+          "sourceRect": [
+            726,
+            739,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "시체들이 되살아난 밤 · 원본 전면 접근면",
+          "direction": "s",
+          "to": "ep1a09"
+        }
+      }
+    },
+    {
+      "id": "dist05",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.509457755359395,
+          "y": 7.509457755359395,
+          "sourceFoot": [
+            793,
+            298
+          ],
+          "sourceRect": [
+            726,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "일곱기둥 상부 순례 길목",
+          "direction": "w",
+          "to": "dist06"
+        },
+        "e": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "일곱 기둥 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "dist04"
+        },
+        "n": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "일곱 기둥 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "dist00"
+        },
+        "s": {
+          "x": 25.895334174022697,
+          "y": 25.895334174022697,
+          "sourceFoot": [
+            793,
+            784
+          ],
+          "sourceRect": [
+            726,
+            739,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "일곱 기둥 · 원본 전면 접근면",
+          "direction": "s",
+          "to": "ep1a08"
+        }
+      }
+    },
+    {
+      "id": "dist06",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 27.37074401008827,
+          "y": 27.37074401008827,
+          "sourceFoot": [
+            793,
+            823
+          ],
+          "sourceRect": [
+            726,
+            778,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "발록 용암원 전면 부서진 석교 접근면",
+          "direction": "s",
+          "to": "ep1a07"
+        },
+        "e": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "추락 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "dist05"
+        },
+        "n": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "추락 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "hub"
+        }
+      }
+    },
+    {
+      "id": "ep1a09",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 8.984867591424969,
+          "y": 8.984867591424969,
+          "sourceFoot": [
+            793,
+            337
+          ],
+          "sourceRect": [
+            726,
+            292,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "주사 기억극장 상부 단상 접근면",
+          "direction": "e",
+          "to": "ep1a10"
+        },
+        "n": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "주사실과 결전의 날 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "dist04"
+        },
+        "w": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "주사실과 결전의 날 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "ep1a08"
+        }
+      }
+    },
+    {
+      "id": "ep1a10",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 15.226986128625475,
+          "y": 5.012610340479192,
+          "sourceFoot": [
+            1063,
+            367
+          ],
+          "sourceRect": [
+            996,
+            228,
+            135,
+            139
+          ],
+          "kind": "door",
+          "cue": "부정 병원 우상단 황금 통로 발치",
+          "direction": "s",
+          "to": "ep1a11"
+        },
+        "n": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "환자와 중독의 도시 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "dist03"
+        },
+        "w": {
+          "x": 24.684741488020176,
+          "y": 9.098360655737705,
+          "sourceFoot": [
+            1205,
+            546
+          ],
+          "sourceRect": [
+            1138,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "환자와 중독의 도시 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "ep1a09"
+        }
+      }
+    },
+    {
+      "id": "ep1a11",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.812105926860023,
+          "y": 7.2068095838587665,
+          "sourceFoot": [
+            809,
+            298
+          ],
+          "sourceRect": [
+            742,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "거짓천국 상부 흰 돌기둥 접근로",
+          "direction": "w",
+          "to": "dreamRest"
+        },
+        "n": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "천사의 가면과 의목사 후보생 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1a10"
+        }
+      }
+    },
+    {
+      "id": "ep1b01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.9125,
+          "y": 7.9125,
+          "sourceFoot": [
+            800,
+            261
+          ],
+          "sourceRect": [
+            732,
+            221,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "솔로몬 봉인 상부 예배당 계단",
+          "direction": "w",
+          "to": "ep1b02"
+        },
+        "e": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "솔로몬의 봉인식 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "dreamRest"
+        },
+        "s": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "솔로몬의 봉인식 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "ep1b04"
+        }
+      }
+    },
+    {
+      "id": "ep1b02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 8.850000000000001,
+          "y": 7.649999999999999,
+          "sourceFoot": [
+            832,
+            270
+          ],
+          "sourceRect": [
+            764,
+            230,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "나태 저택 상부 돌 난간 사이",
+          "direction": "s",
+          "to": "ep1b03"
+        },
+        "e": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "나태의 집 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "ep1b01"
+        }
+      }
+    },
+    {
+      "id": "ep1b03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 8.25,
+          "y": 8.25,
+          "sourceFoot": [
+            800,
+            270
+          ],
+          "sourceRect": [
+            732,
+            144,
+            136,
+            126
+          ],
+          "kind": "door",
+          "cue": "깨진 안경 상부 푸른 벽문 발치",
+          "direction": "e",
+          "to": "ep1b04"
+        },
+        "n": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "금이 간 안경 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b02"
+        },
+        "s": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "금이 간 안경 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "ep1b09"
+        }
+      }
+    },
+    {
+      "id": "ep1b04",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.9125,
+          "y": 7.9125,
+          "sourceFoot": [
+            800,
+            261
+          ],
+          "sourceRect": [
+            732,
+            221,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "폭식 주방 상부 보라 통로",
+          "direction": "e",
+          "to": "ep1b05"
+        },
+        "n": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "탐식의 주방 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b01"
+        },
+        "s": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "탐식의 주방 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "ep1b08"
+        },
+        "w": {
+          "x": 24.7875,
+          "y": 24.7875,
+          "sourceFoot": [
+            800,
+            711
+          ],
+          "sourceRect": [
+            732,
+            671,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "탐식의 주방 · 원본 전면 접근면",
+          "direction": "w",
+          "to": "ep1b03"
+        }
+      }
+    },
+    {
+      "id": "ep1b05",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 16.901913875598087,
+          "y": 4.30622009569378,
+          "sourceFoot": [
+            1187,
+            348
+          ],
+          "sourceRect": [
+            1116,
+            306,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "붉은 하이힐 무대 우상단 계단",
+          "direction": "e",
+          "to": "ep1b06"
+        },
+        "n": {
+          "x": 8.899521531100477,
+          "y": 24.50956937799043,
+          "sourceFoot": [
+            401,
+            518
+          ],
+          "sourceRect": [
+            330,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "붉은 하이힐 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "dreamRest"
+        },
+        "s": {
+          "x": 24.509569377990427,
+          "y": 8.89952153110048,
+          "sourceFoot": [
+            1271,
+            518
+          ],
+          "sourceRect": [
+            1200,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "붉은 하이힐 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "ep1b07"
+        },
+        "w": {
+          "x": 24.778708133971293,
+          "y": 24.778708133971293,
+          "sourceFoot": [
+            836,
+            743
+          ],
+          "sourceRect": [
+            765,
+            701,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "붉은 하이힐 · 원본 전면 접근면",
+          "direction": "w",
+          "to": "ep1b04"
+        }
+      }
+    },
+    {
+      "id": "ep1b06",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 16.200000000000003,
+          "y": 3.000000000000001,
+          "sourceFoot": [
+            1152,
+            306
+          ],
+          "sourceRect": [
+            1084,
+            266,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "맘몬 금고 우상단 보석 회랑",
+          "direction": "s",
+          "to": "ep1b06b"
+        },
+        "w": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "맘몬의 금고 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "ep1b05"
+        }
+      }
+    },
+    {
+      "id": "ep1b06b",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.3125,
+          "y": 5.937499999999999,
+          "sourceFoot": [
+            518,
+            174
+          ],
+          "sourceRect": [
+            477,
+            147,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "겨울 기억 숲 상부 눈길",
+          "direction": "w",
+          "to": "ep1b07"
+        },
+        "n": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "눈보라 속의 소년 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b06"
+        }
+      }
+    },
+    {
+      "id": "ep1b07",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 5.544258373205741,
+          "y": 5.544258373205741,
+          "sourceFoot": [
+            836,
+            207
+          ],
+          "sourceRect": [
+            765,
+            75,
+            142,
+            132
+          ],
+          "kind": "door",
+          "cue": "불타는 호텔 상부 중앙 황금 입구",
+          "direction": "w",
+          "to": "ep1b08"
+        },
+        "e": {
+          "x": 8.899521531100477,
+          "y": 24.50956937799043,
+          "sourceFoot": [
+            401,
+            518
+          ],
+          "sourceRect": [
+            330,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "불을 지른 남자 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "ep1b06b"
+        },
+        "n": {
+          "x": 24.509569377990427,
+          "y": 8.89952153110048,
+          "sourceFoot": [
+            1271,
+            518
+          ],
+          "sourceRect": [
+            1200,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "불을 지른 남자 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b05"
+        }
+      }
+    },
+    {
+      "id": "ep1b08",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 12.45,
+          "y": 4.050000000000001,
+          "sourceFoot": [
+            1024,
+            270
+          ],
+          "sourceRect": [
+            956,
+            144,
+            136,
+            126
+          ],
+          "kind": "door",
+          "cue": "교만 성당 우상단 보라 문 계단 아래 바닥",
+          "direction": "w",
+          "to": "ep1b09"
+        },
+        "e": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "하늘에 서려는 자 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "ep1b07"
+        },
+        "n": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "하늘에 서려는 자 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b04"
+        }
+      }
+    },
+    {
+      "id": "ep1b09",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 8.2125,
+          "y": 7.612499999999999,
+          "sourceFoot": [
+            816,
+            261
+          ],
+          "sourceRect": [
+            748,
+            221,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "생체 부트로더 상부 돌계단",
+          "direction": "s",
+          "to": "restEp1b"
+        },
+        "e": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "생체 부트로더 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "ep1b08"
+        },
+        "n": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "생체 부트로더 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "ep1b03"
+        }
+      }
+    },
+    {
+      "id": "u201",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 6.9921875,
+          "y": 6.9921875,
+          "sourceFoot": [
+            768,
+            307
+          ],
+          "sourceRect": [
+            703,
+            261,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "전쟁 순환 상부 검은 황야 길",
+          "direction": "e",
+          "to": "u202"
+        },
+        "s": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "방어의 군단 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "u203"
+        },
+        "w": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "방어의 군단 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "restEp1b"
+        }
+      }
+    },
+    {
+      "id": "u202",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 5.549999999999999,
+          "y": 5.549999999999999,
+          "sourceFoot": [
+            800,
+            198
+          ],
+          "sourceRect": [
+            732,
+            72,
+            136,
+            126
+          ],
+          "kind": "door",
+          "cue": "억압 감옥 상부 중앙 붉은 문 발치",
+          "direction": "e",
+          "to": "u204"
+        },
+        "s": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "잔인한 구원 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "u206"
+        },
+        "w": {
+          "x": 24.4875,
+          "y": 8.887500000000001,
+          "sourceFoot": [
+            1216,
+            495
+          ],
+          "sourceRect": [
+            1148,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "잔인한 구원 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "u201"
+        }
+      }
+    },
+    {
+      "id": "u204",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 8.25,
+          "y": 8.25,
+          "sourceFoot": [
+            800,
+            270
+          ],
+          "sourceRect": [
+            732,
+            230,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "첫기억 관측 상부 원형단 접근로",
+          "direction": "s",
+          "to": "u205"
+        },
+        "w": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "시스템의 거부권 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "u202"
+        }
+      }
+    },
+    {
+      "id": "u205",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 9.2625,
+          "y": 9.2625,
+          "sourceFoot": [
+            800,
+            297
+          ],
+          "sourceRect": [
+            732,
+            257,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "학대 제어실 상부 철난간 접근로",
+          "direction": "w",
+          "to": "u206"
+        },
+        "n": {
+          "x": 8.887500000000001,
+          "y": 24.4875,
+          "sourceFoot": [
+            384,
+            495
+          ],
+          "sourceRect": [
+            316,
+            455,
+            136,
+            40
+          ],
+          "kind": "path",
+          "cue": "관리자 권한 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "u204"
+        }
+      }
+    },
+    {
+      "id": "u206",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.9375,
+          "y": 8.312500000000004,
+          "sourceFoot": [
+            490,
+            198
+          ],
+          "sourceRect": [
+            449,
+            114,
+            82,
+            84
+          ],
+          "kind": "door",
+          "cue": "이주 핵심 상부 보라 문 발치",
+          "direction": "w",
+          "to": "u203"
+        },
+        "e": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "중앙 코어 이주실 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "u205"
+        },
+        "n": {
+          "x": 24.6875,
+          "y": 9.062500000000004,
+          "sourceFoot": [
+            730,
+            330
+          ],
+          "sourceRect": [
+            689,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "중앙 코어 이주실 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "u202"
+        }
+      }
+    },
+    {
+      "id": "u203",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.5,
+          "y": 7.5,
+          "sourceFoot": [
+            800,
+            300
+          ],
+          "sourceRect": [
+            732,
+            160,
+            136,
+            140
+          ],
+          "kind": "door",
+          "cue": "통제자 기억문 상부 푸른 입구",
+          "direction": "w",
+          "to": "restU2"
+        },
+        "e": {
+          "x": 9.075000000000001,
+          "y": 24.675000000000004,
+          "sourceFoot": [
+            384,
+            550
+          ],
+          "sourceRect": [
+            316,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "기억의 문 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "u206"
+        },
+        "n": {
+          "x": 24.675000000000004,
+          "y": 9.075000000000001,
+          "sourceFoot": [
+            1216,
+            550
+          ],
+          "sourceRect": [
+            1148,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "기억의 문 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "u201"
+        }
+      }
+    },
+    {
+      "id": "last304",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 4.609375,
+          "y": 23.828125,
+          "sourceFoot": [
+            276,
+            492
+          ],
+          "sourceRect": [
+            211,
+            446,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "중립초원 좌상단 오래된 길",
+          "direction": "e",
+          "to": "last305"
+        },
+        "n": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "중립 지역의 재각성 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "restU2"
+        }
+      }
+    },
+    {
+      "id": "last305",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 11.11328125,
+          "y": 4.51171875,
+          "sourceFoot": [
+            937,
+            328
+          ],
+          "sourceRect": [
+            872,
+            282,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "피리 숲 상부 보라빛 나무길",
+          "direction": "e",
+          "to": "last301"
+        },
+        "w": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "고블린 두목과 장미 인장 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "last304"
+        }
+      }
+    },
+    {
+      "id": "last301",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 28.49609375,
+          "y": 27.91015625,
+          "sourceFoot": [
+            783,
+            850
+          ],
+          "sourceRect": [
+            718,
+            707,
+            131,
+            143
+          ],
+          "kind": "door",
+          "cue": "몰락천사 재판장 전면 푸른 문",
+          "direction": "e",
+          "to": "last302"
+        },
+        "s": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "타락천사 기사 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "restLast3"
+        },
+        "w": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "타락천사 기사 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "last305"
+        }
+      }
+    },
+    {
+      "id": "last302",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 17.3046875,
+          "y": 2.3046875,
+          "sourceFoot": [
+            1152,
+            379
+          ],
+          "sourceRect": [
+            1087,
+            333,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "항구 마을 우상단 목조 길목",
+          "direction": "s",
+          "to": "last303"
+        },
+        "w": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "잠들지 못하는 마을 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "last301"
+        }
+      }
+    },
+    {
+      "id": "last303",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 17.3125,
+          "y": 2.937499999999999,
+          "sourceFoot": [
+            710,
+            222
+          ],
+          "sourceRect": [
+            669,
+            138,
+            82,
+            84
+          ],
+          "kind": "door",
+          "cue": "불면 결투 우상단 황금 문 발치",
+          "direction": "w",
+          "to": "restLast3"
+        },
+        "n": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "한약과 불면귀 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "last302"
+        }
+      }
+    },
+    {
+      "id": "kair01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 6.9921875,
+          "y": 6.9921875,
+          "sourceFoot": [
+            768,
+            307
+          ],
+          "sourceRect": [
+            703,
+            261,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "첫명령 학원 상부 돌계단",
+          "direction": "w",
+          "to": "kair04"
+        },
+        "e": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "최초명령의 세계 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "restLast3"
+        },
+        "s": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "최초명령의 세계 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "kair06"
+        }
+      }
+    },
+    {
+      "id": "kair04",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 8.235645933014354,
+          "y": 8.235645933014354,
+          "sourceFoot": [
+            836,
+            282
+          ],
+          "sourceRect": [
+            765,
+            240,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "수호 폐허 상부 원형 시계 접근로",
+          "direction": "s",
+          "to": "kair05"
+        },
+        "e": {
+          "x": 8.899521531100477,
+          "y": 24.50956937799043,
+          "sourceFoot": [
+            401,
+            518
+          ],
+          "sourceRect": [
+            330,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "예순여섯 수문장 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "kair01"
+        }
+      }
+    },
+    {
+      "id": "kair05",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 5.292968750000002,
+          "y": 21.50390625,
+          "sourceFoot": [
+            353,
+            471
+          ],
+          "sourceRect": [
+            288,
+            425,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "시간 숲 좌상단 푸른 나무길",
+          "direction": "e",
+          "to": "kair06"
+        },
+        "n": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "빼앗긴 시간 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "kair04"
+        },
+        "s": {
+          "x": 26.6015625,
+          "y": 26.6015625,
+          "sourceFoot": [
+            768,
+            809
+          ],
+          "sourceRect": [
+            703,
+            763,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "빼앗긴 시간 · 원본 전면 접근면",
+          "direction": "s",
+          "to": "kair03"
+        }
+      }
+    },
+    {
+      "id": "kair06",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.597656249999998,
+          "y": 6.386718750000002,
+          "sourceFoot": [
+            799,
+            307
+          ],
+          "sourceRect": [
+            734,
+            261,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "오염 수로 상부 목조 난간길",
+          "direction": "e",
+          "to": "kair07"
+        },
+        "n": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "닫힌 층의 명령 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "kair01"
+        },
+        "s": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "닫힌 층의 명령 · 원본 우측 바닥 접근면",
+          "direction": "s",
+          "to": "kair02"
+        },
+        "w": {
+          "x": 26.6015625,
+          "y": 26.6015625,
+          "sourceFoot": [
+            768,
+            809
+          ],
+          "sourceRect": [
+            703,
+            763,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "닫힌 층의 명령 · 원본 전면 접근면",
+          "direction": "w",
+          "to": "kair05"
+        }
+      }
+    },
+    {
+      "id": "kair07",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 6.9921875,
+          "y": 6.9921875,
+          "sourceFoot": [
+            768,
+            307
+          ],
+          "sourceRect": [
+            703,
+            164,
+            131,
+            143
+          ],
+          "kind": "door",
+          "cue": "검은 작업장 상부 보라 입구",
+          "direction": "e",
+          "to": "kair08"
+        },
+        "s": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "검은 공방 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "kair10"
+        },
+        "w": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "검은 공방 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "kair06"
+        }
+      }
+    },
+    {
+      "id": "kair08",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 17.91015625,
+          "y": 1.6992187500000018,
+          "sourceFoot": [
+            1183,
+            379
+          ],
+          "sourceRect": [
+            1118,
+            236,
+            131,
+            143
+          ],
+          "kind": "door",
+          "cue": "뉴런 경계 우상단 분홍 문 발치",
+          "direction": "s",
+          "to": "kair09"
+        },
+        "w": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "뉴런 게이트 · 노이론 게이트 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "kair07"
+        }
+      }
+    },
+    {
+      "id": "kair09",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 6.6015625,
+          "y": 6.6015625,
+          "sourceFoot": [
+            768,
+            297
+          ],
+          "sourceRect": [
+            703,
+            251,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "망각 묘지 상부 묘비 사이",
+          "direction": "w",
+          "to": "kair10"
+        },
+        "n": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "망각의 묘지 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "kair08"
+        }
+      }
+    },
+    {
+      "id": "kair10",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 19.27734375,
+          "y": 1.8945312500000018,
+          "sourceFoot": [
+            1213,
+            399
+          ],
+          "sourceRect": [
+            1148,
+            353,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "붕괴 의식 우상단 깨진 회랑",
+          "direction": "w",
+          "to": "kair02"
+        },
+        "e": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "붕괴 의식장 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "kair09"
+        },
+        "n": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "붕괴 의식장 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "kair07"
+        }
+      }
+    },
+    {
+      "id": "kair02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.235645933014354,
+          "y": 8.235645933014354,
+          "sourceFoot": [
+            836,
+            282
+          ],
+          "sourceRect": [
+            765,
+            240,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "아르벨리아 상부 시계 회랑",
+          "direction": "w",
+          "to": "kair03"
+        },
+        "e": {
+          "x": 8.899521531100477,
+          "y": 24.50956937799043,
+          "sourceFoot": [
+            401,
+            518
+          ],
+          "sourceRect": [
+            330,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "아르벨리아, 유예의 수문장 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "kair10"
+        },
+        "n": {
+          "x": 24.509569377990427,
+          "y": 8.89952153110048,
+          "sourceFoot": [
+            1271,
+            518
+          ],
+          "sourceRect": [
+            1200,
+            476,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "아르벨리아, 유예의 수문장 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "kair06"
+        }
+      }
+    },
+    {
+      "id": "kair03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 6.9921875,
+          "y": 6.9921875,
+          "sourceFoot": [
+            768,
+            307
+          ],
+          "sourceRect": [
+            703,
+            261,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "사이렌 명령 상부 푸른 회랑",
+          "direction": "s",
+          "to": "restKairo"
+        },
+        "e": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "세이렌 모르 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "kair02"
+        },
+        "n": {
+          "x": 24.78515625,
+          "y": 9.19921875,
+          "sourceFoot": [
+            1167,
+            563
+          ],
+          "sourceRect": [
+            1102,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "세이렌 모르 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "kair05"
+        }
+      }
+    },
+    {
+      "id": "hando01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.509457755359395,
+          "y": 7.509457755359395,
+          "sourceFoot": [
+            793,
+            298
+          ],
+          "sourceRect": [
+            726,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "소환성 상부 성벽 접근면",
+          "direction": "e",
+          "to": "hando02"
+        },
+        "w": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "성 안에 소환된 의목사 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "restKairo"
+        }
+      }
+    },
+    {
+      "id": "hando02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.509457755359395,
+          "y": 7.509457755359395,
+          "sourceFoot": [
+            793,
+            298
+          ],
+          "sourceRect": [
+            726,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "붕괴성 상부 붉은 성벽 접근면",
+          "direction": "e",
+          "to": "hando03"
+        },
+        "w": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "두 주인의 각성 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "hando01"
+        }
+      }
+    },
+    {
+      "id": "hando03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 7.509457755359395,
+          "y": 7.509457755359395,
+          "sourceFoot": [
+            793,
+            298
+          ],
+          "sourceRect": [
+            726,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "권한회수 성 상부 흰 성벽 접근면",
+          "direction": "s",
+          "to": "restHando"
+        },
+        "w": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "함께 되찾은 코어 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "hando02"
+        }
+      }
+    },
+    {
+      "id": "murder01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.509457755359395,
+          "y": 7.509457755359395,
+          "sourceFoot": [
+            793,
+            298
+          ],
+          "sourceRect": [
+            726,
+            253,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "빗길 횡단보도 상부 인도",
+          "direction": "w",
+          "to": "murder02"
+        },
+        "e": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "윤하람 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "restHando"
+        }
+      }
+    },
+    {
+      "id": "murder02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 14.156698564593302,
+          "y": 6.369617224880383,
+          "sourceFoot": [
+            1053,
+            338
+          ],
+          "sourceRect": [
+            982,
+            206,
+            142,
+            132
+          ],
+          "kind": "door",
+          "cue": "새빛호텔 상부 황금 입구 발치",
+          "direction": "w",
+          "to": "murder04"
+        },
+        "e": {
+          "x": 8.881578947368421,
+          "y": 24.491626794258377,
+          "sourceFoot": [
+            401,
+            517
+          ],
+          "sourceRect": [
+            330,
+            475,
+            142,
+            42
+          ],
+          "kind": "path",
+          "cue": "장민재와 새빛호텔 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "murder01"
+        }
+      }
+    },
+    {
+      "id": "murder04",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 18.30078125,
+          "y": 2.0898437500000018,
+          "sourceFoot": [
+            1183,
+            389
+          ],
+          "sourceRect": [
+            1118,
+            343,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "청록빌라 우상단 계단 발치",
+          "direction": "s",
+          "to": "murder03"
+        },
+        "e": {
+          "x": 9.19921875,
+          "y": 24.78515625,
+          "sourceFoot": [
+            369,
+            563
+          ],
+          "sourceRect": [
+            304,
+            517,
+            131,
+            46
+          ],
+          "kind": "path",
+          "cue": "고서진과 청록빌라 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "murder02"
+        }
+      }
+    },
+    {
+      "id": "murder03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 27.74905422446406,
+          "y": 27.74905422446406,
+          "sourceFoot": [
+            793,
+            833
+          ],
+          "sourceRect": [
+            726,
+            788,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "뫼비우스 옥상 전면 원형 계단",
+          "direction": "e",
+          "to": "cult01"
+        },
+        "n": {
+          "x": 9.098360655737705,
+          "y": 24.684741488020176,
+          "sourceFoot": [
+            381,
+            546
+          ],
+          "sourceRect": [
+            314,
+            501,
+            135,
+            45
+          ],
+          "kind": "path",
+          "cue": "옥상의 순환 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "murder04"
+        }
+      }
+    },
+    {
+      "id": "cult01",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.875,
+          "y": 7.875,
+          "sourceFoot": [
+            480,
+            186
+          ],
+          "sourceRect": [
+            439,
+            159,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "검은 장미칩 상부 의식회랑",
+          "direction": "e",
+          "to": "cult02"
+        },
+        "s": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "하나로 묶인 악몽 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "cult04"
+        },
+        "w": {
+          "x": 24.6875,
+          "y": 9.062500000000004,
+          "sourceFoot": [
+            730,
+            330
+          ],
+          "sourceRect": [
+            689,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "하나로 묶인 악몽 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "murder03"
+        }
+      }
+    },
+    {
+      "id": "cult02",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "e": {
+          "x": 7.5,
+          "y": 7.5,
+          "sourceFoot": [
+            800,
+            300
+          ],
+          "sourceRect": [
+            732,
+            255,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "융합 뉴런 상부 적색 신경길",
+          "direction": "e",
+          "to": "cult05"
+        },
+        "s": {
+          "x": 9.075000000000001,
+          "y": 24.675000000000004,
+          "sourceFoot": [
+            384,
+            550
+          ],
+          "sourceRect": [
+            316,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "교주가 기다리는 전쟁 · 원본 좌측 바닥 접근면",
+          "direction": "s",
+          "to": "cult03"
+        },
+        "w": {
+          "x": 24.675000000000004,
+          "y": 9.075000000000001,
+          "sourceFoot": [
+            1216,
+            550
+          ],
+          "sourceRect": [
+            1148,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "교주가 기다리는 전쟁 · 원본 우측 바닥 접근면",
+          "direction": "w",
+          "to": "cult01"
+        }
+      }
+    },
+    {
+      "id": "cult05",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "s": {
+          "x": 7.875,
+          "y": 7.875,
+          "sourceFoot": [
+            480,
+            186
+          ],
+          "sourceRect": [
+            439,
+            159,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "이드 배양장 상부 철제 접근로",
+          "direction": "s",
+          "to": "cult06"
+        },
+        "w": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "돌아오는 현실의 기억 · 원본 좌측 바닥 접근면",
+          "direction": "w",
+          "to": "cult02"
+        }
+      }
+    },
+    {
+      "id": "cult06",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.875,
+          "y": 7.875,
+          "sourceFoot": [
+            480,
+            186
+          ],
+          "sourceRect": [
+            439,
+            159,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "초자아 법정 상부 조형 기둥길",
+          "direction": "w",
+          "to": "cult03"
+        },
+        "n": {
+          "x": 9.062500000000004,
+          "y": 24.6875,
+          "sourceFoot": [
+            230,
+            330
+          ],
+          "sourceRect": [
+            189,
+            303,
+            82,
+            27
+          ],
+          "kind": "path",
+          "cue": "처음 세웠던 목표 · 원본 좌측 바닥 접근면",
+          "direction": "n",
+          "to": "cult05"
+        }
+      }
+    },
+    {
+      "id": "cult03",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 8.775,
+          "y": 6.975,
+          "sourceFoot": [
+            848,
+            310
+          ],
+          "sourceRect": [
+            780,
+            265,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "삼위일체 상부 유기물 회랑",
+          "direction": "w",
+          "to": "cult04"
+        },
+        "e": {
+          "x": 9.075000000000001,
+          "y": 24.675000000000004,
+          "sourceFoot": [
+            384,
+            550
+          ],
+          "sourceRect": [
+            316,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "사몽의 문턱 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "cult06"
+        },
+        "n": {
+          "x": 24.675000000000004,
+          "y": 9.075000000000001,
+          "sourceFoot": [
+            1216,
+            550
+          ],
+          "sourceRect": [
+            1148,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "사몽의 문턱 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "cult02"
+        }
+      }
+    },
+    {
+      "id": "cult04",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": {
+        "w": {
+          "x": 7.124999999999999,
+          "y": 7.124999999999999,
+          "sourceFoot": [
+            800,
+            290
+          ],
+          "sourceRect": [
+            732,
+            245,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "최종심판 상부 붉은 제단 접근로",
+          "direction": "w",
+          "to": "village"
+        },
+        "e": {
+          "x": 9.075000000000001,
+          "y": 24.675000000000004,
+          "sourceFoot": [
+            384,
+            550
+          ],
+          "sourceRect": [
+            316,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "교주의 사몽 · 원본 좌측 바닥 접근면",
+          "direction": "e",
+          "to": "cult03"
+        },
+        "n": {
+          "x": 24.675000000000004,
+          "y": 9.075000000000001,
+          "sourceFoot": [
+            1216,
+            550
+          ],
+          "sourceRect": [
+            1148,
+            505,
+            136,
+            45
+          ],
+          "kind": "path",
+          "cue": "교주의 사몽 · 원본 우측 바닥 접근면",
+          "direction": "n",
+          "to": "cult01"
+        }
+      }
+    },
+    {
+      "id": "ep1a09b",
+      "type": "r81-story-ward-maze",
+      "worldWard": true,
+      "worldR78": true,
+      "notHospitalSimulation": true,
+      "tiles": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "floorIdentical": true,
+      "staticWallsRetained": true,
+      "staticWallCount": 190,
+      "wallCount": 190,
+      "allWallsAxisAligned": true,
+      "backdropCount": 0,
+      "fogCount": 0,
+      "legacyGroundSuppressed": true,
+      "renderedFloorMatchesCollision": true,
+      "entrySafe": true,
+      "sourceExits": null
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T07:38:42.100Z",
+  "passed": 9,
+  "failed": 0,
+  "completedAt": "2026-10-23T07:38:56.230Z"
+}

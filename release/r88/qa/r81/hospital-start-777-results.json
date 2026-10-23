@@ -1,0 +1,576 @@
+{
+  "schema": "r81-hospital-direct-777/v1",
+  "method": "Actual V5 hospitalDirectStart click handler, native 777 activation/go/difficulty selection, runtime RenderBridge frames. CPU VM with DOM/image/audio/timer stubs and renderer readiness spy. No browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "Native boot completes",
+      "passed": true
+    },
+    {
+      "name": "Actual hospital direct-start button enters current test hospital",
+      "passed": true,
+      "detail": {
+        "started": true,
+        "state": {
+          "zone": "ep1a08",
+          "canTravel": true,
+          "phase": "route"
+        }
+      }
+    },
+    {
+      "name": "Hospital checkpoint already resolves cave/swamp to current hospital structure",
+      "passed": true,
+      "detail": [
+        {
+          "id": "dist01",
+          "cleared": false,
+          "completed": true,
+          "type": "r81-story-ward-maze",
+          "ward": true,
+          "r74": true,
+          "r75": true,
+          "version74": 1,
+          "version75": 1,
+          "cells": 8022,
+          "bounds": [
+            0,
+            0,
+            87,
+            113
+          ],
+          "phase": "done",
+          "alive": 36,
+          "unsafe": []
+        },
+        {
+          "id": "dist02",
+          "cleared": false,
+          "completed": true,
+          "type": "r81-story-ward-maze",
+          "ward": true,
+          "r74": true,
+          "r75": true,
+          "version74": 1,
+          "version75": 1,
+          "cells": 8022,
+          "bounds": [
+            0,
+            0,
+            87,
+            113
+          ],
+          "phase": "done",
+          "alive": 37,
+          "unsafe": []
+        }
+      ]
+    },
+    {
+      "name": "777 activates from the actual hospital test checkpoint",
+      "passed": true,
+      "detail": {
+        "ok": true
+      }
+    },
+    {
+      "name": "Hospital-start → native 777 → dist01 uses the improved ward layout",
+      "passed": true,
+      "detail": {
+        "zone": "dist01",
+        "room": "dist01",
+        "loading": false,
+        "cleared": false,
+        "type": "r81-story-ward-maze",
+        "ward": true,
+        "cells": 8022,
+        "bounds": [
+          0,
+          0,
+          87,
+          113
+        ],
+        "hero": "hwando",
+        "heroEntity": {
+          "id": "hero",
+          "hero": true,
+          "x": 45.41768634315662,
+          "y": 108.3637667518009,
+          "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "frame": {
+            "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+            "assetFrame": {
+              "sourceRect": [
+                444,
+                0,
+                443,
+                444
+              ],
+              "pivot": [
+                221.5,
+                428
+              ],
+              "visibleHeight": 380,
+              "bakedFacing": "back",
+              "muzzle": null
+            },
+            "nativeHero5": {
+              "hero": "hwando",
+              "state": "idle",
+              "direction": "back",
+              "sourcePath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "sourceCommit": "73a410daf5267fdf1ad2a9cdbaffd85afc407f09",
+              "sourceGitBlob": "97105d2584e2f641cdcf9d7eeddd797602956363",
+              "renderer": "current-public-main canonical RC5/RC85",
+              "atlasFrame": 1,
+              "atlasSheet": "action",
+              "bodyHeightSourcePixels": 380,
+              "bodyTarget": 66,
+              "zoomAppliedOnce": true,
+              "flip": false,
+              "clip": {
+                "right": 390
+              },
+              "swordTip": null,
+              "nativeAliasCorrection": null,
+              "directionNeutral": false,
+              "originPolicy": "StoryWorldfeet-origin: authored crop-relative foot pivot maps toprojected logicalfeet; no alpha-box centering or generic weapon-width normalization",
+              "pixelCalibrationId": null,
+              "nativeOriginal": null
+            }
+          },
+          "height": 66,
+          "alpha": 1,
+          "alive": true,
+          "flash": false,
+          "shadowRadius": 0.3951479071336589,
+          "state": "idle",
+          "direction": "back",
+          "movementDirection": "back",
+          "sourcePoseSupport": "preserved native source pose"
+        },
+        "safe": true,
+        "phase": "done",
+        "alive": 36,
+        "unsafeActors": [],
+        "environment": {
+          "version": 1,
+          "family": "cave",
+          "nativeProps": 8,
+          "genericProps": 8,
+          "sceneProps": 8,
+          "occupiedRooms": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "elapsedMs": 605.5460780000012
+      }
+    },
+    {
+      "name": "dist01 from hospital 777 has no actors embedded in the new walls",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Hospital-start → native 777 → dist02 uses the improved ward layout",
+      "passed": true,
+      "detail": {
+        "zone": "dist02",
+        "room": "dist02",
+        "loading": false,
+        "cleared": false,
+        "type": "r81-story-ward-maze",
+        "ward": true,
+        "cells": 8022,
+        "bounds": [
+          0,
+          0,
+          87,
+          113
+        ],
+        "hero": "hwando",
+        "heroEntity": {
+          "id": "hero",
+          "hero": true,
+          "x": 45.41768634315662,
+          "y": 108.3637667518009,
+          "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "frame": {
+            "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+            "assetFrame": {
+              "sourceRect": [
+                444,
+                0,
+                443,
+                444
+              ],
+              "pivot": [
+                221.5,
+                428
+              ],
+              "visibleHeight": 380,
+              "bakedFacing": "back",
+              "muzzle": null
+            },
+            "nativeHero5": {
+              "hero": "hwando",
+              "state": "idle",
+              "direction": "back",
+              "sourcePath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+              "sourceCommit": "73a410daf5267fdf1ad2a9cdbaffd85afc407f09",
+              "sourceGitBlob": "97105d2584e2f641cdcf9d7eeddd797602956363",
+              "renderer": "current-public-main canonical RC5/RC85",
+              "atlasFrame": 1,
+              "atlasSheet": "action",
+              "bodyHeightSourcePixels": 380,
+              "bodyTarget": 66,
+              "zoomAppliedOnce": true,
+              "flip": false,
+              "clip": {
+                "right": 390
+              },
+              "swordTip": null,
+              "nativeAliasCorrection": null,
+              "directionNeutral": false,
+              "originPolicy": "StoryWorldfeet-origin: authored crop-relative foot pivot maps toprojected logicalfeet; no alpha-box centering or generic weapon-width normalization",
+              "pixelCalibrationId": null,
+              "nativeOriginal": null
+            }
+          },
+          "height": 66,
+          "alpha": 1,
+          "alive": true,
+          "flash": false,
+          "shadowRadius": 0.3951479071336589,
+          "state": "idle",
+          "direction": "back",
+          "movementDirection": "back",
+          "sourcePoseSupport": "preserved native source pose"
+        },
+        "safe": true,
+        "phase": "done",
+        "alive": 37,
+        "unsafeActors": [],
+        "environment": {
+          "version": 1,
+          "family": "swamp",
+          "nativeProps": 8,
+          "genericProps": 8,
+          "sceneProps": 12,
+          "occupiedRooms": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "elapsedMs": 570.8205500000004
+      }
+    },
+    {
+      "name": "dist02 from hospital 777 has no actors embedded in the new walls",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Native error ledger stays clear",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "steps": [
+    {
+      "zone": "dist01",
+      "room": "dist01",
+      "loading": false,
+      "cleared": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "cells": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "hero": "hwando",
+      "heroEntity": {
+        "id": "hero",
+        "hero": true,
+        "x": 45.41768634315662,
+        "y": 108.3637667518009,
+        "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+        "frame": {
+          "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "assetFrame": {
+            "sourceRect": [
+              444,
+              0,
+              443,
+              444
+            ],
+            "pivot": [
+              221.5,
+              428
+            ],
+            "visibleHeight": 380,
+            "bakedFacing": "back",
+            "muzzle": null
+          },
+          "nativeHero5": {
+            "hero": "hwando",
+            "state": "idle",
+            "direction": "back",
+            "sourcePath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+            "sourceCommit": "73a410daf5267fdf1ad2a9cdbaffd85afc407f09",
+            "sourceGitBlob": "97105d2584e2f641cdcf9d7eeddd797602956363",
+            "renderer": "current-public-main canonical RC5/RC85",
+            "atlasFrame": 1,
+            "atlasSheet": "action",
+            "bodyHeightSourcePixels": 380,
+            "bodyTarget": 66,
+            "zoomAppliedOnce": true,
+            "flip": false,
+            "clip": {
+              "right": 390
+            },
+            "swordTip": null,
+            "nativeAliasCorrection": null,
+            "directionNeutral": false,
+            "originPolicy": "StoryWorldfeet-origin: authored crop-relative foot pivot maps toprojected logicalfeet; no alpha-box centering or generic weapon-width normalization",
+            "pixelCalibrationId": null,
+            "nativeOriginal": null
+          }
+        },
+        "height": 66,
+        "alpha": 1,
+        "alive": true,
+        "flash": false,
+        "shadowRadius": 0.3951479071336589,
+        "state": "idle",
+        "direction": "back",
+        "movementDirection": "back",
+        "sourcePoseSupport": "preserved native source pose"
+      },
+      "safe": true,
+      "phase": "done",
+      "alive": 36,
+      "unsafeActors": [],
+      "environment": {
+        "version": 1,
+        "family": "cave",
+        "nativeProps": 8,
+        "genericProps": 8,
+        "sceneProps": 8,
+        "occupiedRooms": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "elapsedMs": 605.5460780000012
+    },
+    {
+      "zone": "dist02",
+      "room": "dist02",
+      "loading": false,
+      "cleared": false,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "cells": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "hero": "hwando",
+      "heroEntity": {
+        "id": "hero",
+        "hero": true,
+        "x": 45.41768634315662,
+        "y": 108.3637667518009,
+        "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+        "frame": {
+          "path": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+          "assetFrame": {
+            "sourceRect": [
+              444,
+              0,
+              443,
+              444
+            ],
+            "pivot": [
+              221.5,
+              428
+            ],
+            "visibleHeight": 380,
+            "bakedFacing": "back",
+            "muzzle": null
+          },
+          "nativeHero5": {
+            "hero": "hwando",
+            "state": "idle",
+            "direction": "back",
+            "sourcePath": "assets/hero-authored-v314rc5/hwando-action-atlas.png",
+            "sourceCommit": "73a410daf5267fdf1ad2a9cdbaffd85afc407f09",
+            "sourceGitBlob": "97105d2584e2f641cdcf9d7eeddd797602956363",
+            "renderer": "current-public-main canonical RC5/RC85",
+            "atlasFrame": 1,
+            "atlasSheet": "action",
+            "bodyHeightSourcePixels": 380,
+            "bodyTarget": 66,
+            "zoomAppliedOnce": true,
+            "flip": false,
+            "clip": {
+              "right": 390
+            },
+            "swordTip": null,
+            "nativeAliasCorrection": null,
+            "directionNeutral": false,
+            "originPolicy": "StoryWorldfeet-origin: authored crop-relative foot pivot maps toprojected logicalfeet; no alpha-box centering or generic weapon-width normalization",
+            "pixelCalibrationId": null,
+            "nativeOriginal": null
+          }
+        },
+        "height": 66,
+        "alpha": 1,
+        "alive": true,
+        "flash": false,
+        "shadowRadius": 0.3951479071336589,
+        "state": "idle",
+        "direction": "back",
+        "movementDirection": "back",
+        "sourcePoseSupport": "preserved native source pose"
+      },
+      "safe": true,
+      "phase": "done",
+      "alive": 37,
+      "unsafeActors": [],
+      "environment": {
+        "version": 1,
+        "family": "swamp",
+        "nativeProps": 8,
+        "genericProps": 8,
+        "sceneProps": 12,
+        "occupiedRooms": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "elapsedMs": 570.8205500000004
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "generatedAt": "2026-10-23T07:39:20.002Z",
+  "sourceHashes": {
+    "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
+    "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
+    "hospital-direct-test.js": "d1d97fa5d17fa4ef550a97a33bb05d10bd3f541672a60ec748173a6c9adc9452",
+    "world-combat-r78.js": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e"
+  },
+  "before777": [
+    {
+      "id": "dist01",
+      "cleared": false,
+      "completed": true,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "r74": true,
+      "r75": true,
+      "version74": 1,
+      "version75": 1,
+      "cells": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "phase": "done",
+      "alive": 36,
+      "unsafe": []
+    },
+    {
+      "id": "dist02",
+      "cleared": false,
+      "completed": true,
+      "type": "r81-story-ward-maze",
+      "ward": true,
+      "r74": true,
+      "r75": true,
+      "version74": 1,
+      "version75": 1,
+      "cells": 8022,
+      "bounds": [
+        0,
+        0,
+        87,
+        113
+      ],
+      "phase": "done",
+      "alive": 37,
+      "unsafe": []
+    }
+  ],
+  "errors": [],
+  "passed": 9,
+  "failed": 0,
+  "completedAt": "2026-10-23T07:39:35.824Z"
+}

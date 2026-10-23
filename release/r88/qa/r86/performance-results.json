@@ -1,0 +1,229 @@
+{
+  "schema": "r86-retained-vector-buffers/v1",
+  "method": "Pinned Three CPU geometry, original native triangulation parity, counted BufferGeometry/typed-array constructions and scripted native complete-frame replay. Browser/GPU/frame-rate/natural-play unverified.",
+  "checks": [
+    {
+      "name": "Bounded renderer patch is byte-idempotent",
+      "passed": true
+    },
+    {
+      "name": "Delivered renderer has retained path update",
+      "passed": true
+    },
+    {
+      "name": "Native fill/stroke geometry stays Float32-exact across gradients, ground and door planes",
+      "passed": true,
+      "detail": {
+        "comparisons": 320,
+        "retainedUpdates": 320
+      }
+    },
+    {
+      "name": "Clipped paths defer to native geometry without mutating buffers",
+      "passed": true
+    },
+    {
+      "name": "Changed triangle count falls back without partial buffer writes",
+      "passed": true
+    },
+    {
+      "name": "Empty paths retain original removal semantics",
+      "passed": true
+    },
+    {
+      "name": "Unexpected normal/index/attribute topology stays on original path",
+      "passed": true
+    },
+    {
+      "name": "Moving particles preserve complete command/mesh counts",
+      "passed": true,
+      "detail": {
+        "legacy": 40,
+        "retained": 40
+      }
+    },
+    {
+      "name": "Moving-particle final geometry exactly matches the allocation baseline",
+      "passed": true,
+      "detail": {
+        "mismatches": 0
+      }
+    },
+    {
+      "name": "Stable moving vector effects avoid at least95% of transient geometry allocations",
+      "passed": true,
+      "detail": {
+        "frames": 100,
+        "particlesPerFrame": 40,
+        "legacy": {
+          "geometries": 4000,
+          "typedArrays": 8000,
+          "bytes": 480000
+        },
+        "retained": {
+          "geometries": 40,
+          "typedArrays": 80,
+          "bytes": 4800
+        },
+        "geometryReduction": 0.99,
+        "typedArrayByteReduction": 0.99,
+        "cpuElapsedMs": {
+          "legacy": 247.36648499999995,
+          "retained": 241.830696
+        },
+        "warning": "Elapsed times are this Node CPU sample, not GPU frame rate."
+      }
+    },
+    {
+      "name": "Unchanged repeated frames allocate no geometry or typed arrays",
+      "passed": true,
+      "detail": {
+        "geometries": 40,
+        "typedArrays": 80,
+        "bytes": 4800
+      }
+    },
+    {
+      "name": "Scene clear releases all retained meshes and textures",
+      "passed": true
+    },
+    {
+      "name": "Hospital, cave and final boss native frames remain exactly equal to baseline",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08",
+          "frames": 16,
+          "commands": 3504,
+          "vectors": 2800,
+          "mismatches": 0
+        },
+        {
+          "id": "dist01",
+          "frames": 16,
+          "commands": 4976,
+          "vectors": 4160,
+          "mismatches": 0
+        },
+        {
+          "id": "cult04",
+          "frames": 16,
+          "commands": 6992,
+          "vectors": 4080,
+          "mismatches": 0
+        }
+      ]
+    },
+    {
+      "name": "Existing native gold/silver skill frames use retained buffers and allocate less",
+      "passed": true,
+      "detail": {
+        "samples": [
+          {
+            "id": "ep1a08",
+            "frames": 16,
+            "commands": 3504,
+            "vectors": 2800,
+            "mismatches": 0
+          },
+          {
+            "id": "dist01",
+            "frames": 16,
+            "commands": 4976,
+            "vectors": 4160,
+            "mismatches": 0
+          },
+          {
+            "id": "cult04",
+            "frames": 16,
+            "commands": 6992,
+            "vectors": 4080,
+            "mismatches": 0
+          }
+        ],
+        "legacy": {
+          "geometries": 2439,
+          "typedArrays": 4880,
+          "bytes": 7261176
+        },
+        "retained": {
+          "geometries": 622,
+          "typedArrays": 1246,
+          "bytes": 533616
+        },
+        "reuses": 1817
+      }
+    },
+    {
+      "name": "Native map replay leaves no renderer rows/textures after cleanup",
+      "passed": true
+    },
+    {
+      "name": "Native runtime records no errors during replay",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "sourcePatchOnly": false,
+  "stress": {
+    "frames": 100,
+    "particlesPerFrame": 40,
+    "legacy": {
+      "geometries": 4000,
+      "typedArrays": 8000,
+      "bytes": 480000
+    },
+    "retained": {
+      "geometries": 40,
+      "typedArrays": 80,
+      "bytes": 4800
+    },
+    "geometryReduction": 0.99,
+    "typedArrayByteReduction": 0.99,
+    "cpuElapsedMs": {
+      "legacy": 247.36648499999995,
+      "retained": 241.830696
+    },
+    "warning": "Elapsed times are this Node CPU sample, not GPU frame rate."
+  },
+  "nativeReplay": {
+    "samples": [
+      {
+        "id": "ep1a08",
+        "frames": 16,
+        "commands": 3504,
+        "vectors": 2800,
+        "mismatches": 0
+      },
+      {
+        "id": "dist01",
+        "frames": 16,
+        "commands": 4976,
+        "vectors": 4160,
+        "mismatches": 0
+      },
+      {
+        "id": "cult04",
+        "frames": 16,
+        "commands": 6992,
+        "vectors": 4080,
+        "mismatches": 0
+      }
+    ],
+    "legacy": {
+      "geometries": 2439,
+      "typedArrays": 4880,
+      "bytes": 7261176
+    },
+    "retained": {
+      "geometries": 622,
+      "typedArrays": 1246,
+      "bytes": 533616
+    },
+    "reuses": 1817
+  },
+  "passed": true
+}

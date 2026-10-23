@@ -1,0 +1,13 @@
+# R86 campaign and Samong audit
+
+The user’s “사몽” maps are `cult03` (사몽의 문턱) and `cult04` (교주의 사몽). The authored campaign contains 64 regions: 56 combat regions, the opening refuge, six intermediate rest regions, and the post-ending village. The hospital and 55 other combat regions retain their existing controllers; castle defense, the fallen-knight duel, the guardian maps, and `cult04` retain their exceptional native progression owners.
+
+`map-campaign-check.cjs` enters all 64 destinations using native `newGame`, `__STORYWORLD_CHEAT777__.activate/go`, and native difficulty confirmation. It checks safe player and living-enemy positions, finite RenderBridge actor positions, ordinary ward gathering-room access, closed boss-room gates before field elimination, reciprocal authored destinations, full static floor connectivity, and exact normal-progress recovery after leaving 777. The final frozen-suite execution is authoritative for its pass count.
+
+The initial connectivity diagnostic found hospital components of 7648, 334, and 40 cells because the hospital's native boundary array includes its currently closed boss and exit doors. This is intentional gating, not isolated floor. Using the native all-open hospital factory gives one body-clear component of exactly 8022 cells. The static-connectivity fixture was corrected to represent unlocked doors; the live gate checks were retained. The original diagnostic is preserved in `map-campaign-first-closed-door-diagnostic.json`.
+
+`progression-777-finale.cjs` directly exercises the native Samong and final sequence. It begins in an ordinary new game, activates 777, enters `cult03`, verifies premature boss-door refusal, triggers the survivor rally, uses native death processing for assisted field and boss elimination, and opens the original pre/post scenes with actual E key events. Standing on a portal does not transfer. A fresh E press enters `cult04`.
+
+The finale test executes the original first boss, awakening scenes, all six Cosmic guardians, final boss, and preserved-core epilogue. After the third guardian, an exact serialized checkpoint is loaded into a fresh VM, then the remaining guardians and final boss are completed. The completed ending is saved and restored; E then reaches the post-ending village, and its return portal reaches the completed finale without resurrecting its bosses. Leaving 777 restores the original uncompleted opening progress. The development run passed all 22 assertions.
+
+No game runtime/source changes were necessary for these progression checks. This audit uses scripted positioning, invulnerability and HP-zero native death calls. It is CPU/Node verification, not browser rendering, GPU performance, Windows execution, audio playback, or natural gameplay.

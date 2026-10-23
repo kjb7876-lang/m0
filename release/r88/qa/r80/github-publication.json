@@ -1,0 +1,20 @@
+{
+  "repository": "kjb7876-lang/m0",
+  "branch": "work/storyworld-r78-world-maze-20261022",
+  "commit": "a666856ee9cd04b18ca5645edad7df9b91781992",
+  "tree": "5011c49fb6da76d069146d26cc9aa236b4106206",
+  "remoteHashesMatched": 298,
+  "protectedFilesUnchanged": true,
+  "mainObservedSHA": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
+  "mainUpdated": false,
+  "PRUpdated": false,
+  "publicDeploymentChanged": false,
+  "checksPassed": 137,
+  "checksTotal": 137,
+  "browserGPUVerified": false,
+  "naturalPlayVerified": false,
+  "archiveSHA256": "be412890ddf90211d8a885318dd4dce9c12db8e1e1f272b293ef590b08efba41",
+  "archiveBytes": 530508324,
+  "libraryFileId": "libfile_3727ce5d95bc8191a7ad7a551ba5b55d",
+  "libraryVersion": 2
+}

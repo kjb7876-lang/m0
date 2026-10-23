@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('node:url');
+const {createHarness}=require('./r78-harness.cjs');
+(async()=>{
+ const h=createHarness(),T=await import(pathToFileURL(path.join(h.site,'vendor/three/build/three.module.js')).href),api=h.run('window.__STORYWORLD_WORLD_VISUAL_R78__'),checks=[];
+ const check=(name,passed,detail)=>checks.push({name,passed:!!passed,...(detail===undefined?{}:{detail})});
+ const fixture=api.fixture(T),rows=[];fixture.root.updateMatrixWorld(true);fixture.root.traverse(o=>{if(o.isMesh){o.geometry.computeBoundingBox();const p=o.getWorldPosition(new T.Vector3());rows.push({name:o.name,position:{x:p.x,y:p.y,z:p.z},bounds:o.geometry.boundingBox?.toArray?.().map(v=>v.toArray()),presentationOnly:o.userData.presentationOnly,collisionChanged:o.userData.collisionChanged,layers:o.layers.mask,castShadow:o.castShadow,receiveShadow:o.receiveShadow,opacity:o.material?.opacity,depthWrite:o.material?.depthWrite});}});
+ check('The local Three r186 implementation is used',T.REVISION==='186',T.REVISION);
+ check('Surgical room and follow marker use actual BufferGeometry meshes',fixture.room?.isGroup&&fixture.marker?.isGroup&&rows.length>=14&&rows.every(x=>x.presentationOnly&&x.collisionChanged===false&&x.layers===4&&!x.castShadow&&!x.receiveShadow),{meshes:rows.length,resources:fixture.resources.size,types:rows.map(x=>x.name)});
+ check('All surgical inlay meshes have finite positions within 0.07 world units of the floor',rows.every(x=>Object.values(x.position).every(Number.isFinite)&&x.position.y>=.02&&x.position.y<=.07),rows.filter(x=>x.position.y<.02||x.position.y>.07));
+ check('Surgeon marker is positioned from the actor and remains presentation only',Math.abs(fixture.marker.position.x-18.25)<1e-9&&Math.abs(fixture.marker.position.z-10.75)<1e-9&&fixture.marker.children.every(x=>x.userData.presentationOnly),{marker:fixture.marker.position.toArray()});
+ const plan=api.plan;
+ check('Operating room centers its table and unobtrusive teal/ivory rings on the native boss floor',plan.zoneId==='ep1a08'&&plan.center.x===20&&plan.center.z===12&&plan.table.width<3&&plan.table.depth<4&&plan.presentationOnly&&!plan.collisionChanged&&!plan.damageChanged&&!plan.saveChanged,plan);
+ const cameraSource=fs.readFileSync(path.join(h.site,'hospital-improvements-a5.js'),'utf8'),html=fs.readFileSync(path.join(h.site,'index.html'),'utf8'),cameraApi=h.run('window.__STORYWORLD_HOSPITAL_A5__'),camera=cameraApi?.inspect();
+ const loadedOnce=(html.match(/<script src="hospital-improvements-a5\.js"><\/script>/g)||[]).length===1;
+ check('PC fine-pointer camera crops more outer roof while leaving map collision untouched',cameraSource.includes('zoom=before*1.12')&&camera?.pcFinePointerZoomHooked===true&&camera?.pcFinePointerZoomFactor===1.12&&camera?.desktopOnly===true&&loadedOnce,{factor:camera?.pcFinePointerZoomFactor,sourceHook:cameraSource.includes('zoom=before*1.12'),loadedHook:camera?.pcFinePointerZoomHooked,desktopOnly:camera?.desktopOnly,loadedOnce});
+ const report={schema:'world-r78-hospital-visual-cpu/v1',method:'Official local Three r186 BufferGeometry construction; no WebGL, screenshot, browser or GPU.',checks,passed:checks.filter(x=>x.passed).length,failed:checks.filter(x=>!x.passed).length,browser:false,GPU:false};
+ fs.writeFileSync(path.join(__dirname,'world-r78-visual-results.json'),JSON.stringify(report,null,2));
+ console.log(JSON.stringify({passed:report.passed,failed:report.failed,checks},null,2));
+ if(report.failed)process.exitCode=1;
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});
