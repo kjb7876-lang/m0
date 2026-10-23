@@ -1,0 +1,1279 @@
+{
+  "method": "SHA256 of supplied extracted original PNG bytes, independently checked against SHA256SUMS.txt",
+  "total": 254,
+  "new": 170,
+  "prior": 84,
+  "passed": true,
+  "files": [
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/controller_drone_control_tower.png",
+      "sha256": "6fb3f619feba7eed9e3aca523ee6d9f8f2660a7b3db5df9b91682c822cbd086a",
+      "bytes": 1019303
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/controller_external_command_relay.png",
+      "sha256": "21dd8e014b16002211d045fdaadaa822b082c7291c11ae99aeeae9963af71633",
+      "bytes": 656540
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/controller_migration_support_cradle.png",
+      "sha256": "5983918b73a00429a0165908faa7c13a9131a7ad7e978b0d349876d5a05b1cc6",
+      "bytes": 1718519
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/controller_preserved_memory_gate.png",
+      "sha256": "560da3daaa085a23fa23cfd070961d464ce69d932f581afc0cb2c0cf37c90ce8",
+      "bytes": 1674634
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/controller_rising_machine_wall.png",
+      "sha256": "72e95edc4cfafabb2792dccc3f738a3be07dbae203ecf9cf1c0651196d147141",
+      "bytes": 1862300
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/fusion_field_ruin_arch.png",
+      "sha256": "994a989ee6a9acb0d65cbeaf1e7df134e88d337194d9946b820e6804d8b17661",
+      "bytes": 1727469
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/fusion_storm_rampart.png",
+      "sha256": "0b617f0fc46e8cb7a5f964754937cdd9bcdc7ec9bcd8760419639325fbdc8137",
+      "bytes": 1974945
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/harbor_broken_giwa_cluster.png",
+      "sha256": "7cfe97ed0956e4ed8f58c01648cc1912e79d5b6edc3de0c41499ebb21caf996f",
+      "bytes": 1733738
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/harbor_herbal_cup.png",
+      "sha256": "e909b76e1e963a94d411ae16e8bc49de719969e21f11a86ac8979012e1bd9ac8",
+      "bytes": 1295913
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/harbor_jangseung_post.png",
+      "sha256": "64de7e423f8d459037e6267cc6739b48babaeec16a0403c603e3c205a9ae9d1a",
+      "bytes": 857241
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/harbor_red_talisman_fixture.png",
+      "sha256": "9112acd35ede4883c550c6f26194740f4ea57ddd6cebcb41385c9eb7d31c9cc4",
+      "bytes": 1162171
+    },
+    {
+      "path": "new_assets/props-fortress-harbor-batch01/originals/harbor_tiled_house.png",
+      "sha256": "a4651dcae599ba0d8bbcf7f39ae93e62f0cbc9f062072e2793971b0b995ad0c3",
+      "bytes": 2260507
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p01_root_wrapped_palace_arcade.png",
+      "sha256": "6ef3f03f95c57c57cad44b458313ffa9438027c712cbd8cd85073474cee23186",
+      "bytes": 1397227
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p02_bone_web_cave_arch.png",
+      "sha256": "71b63d1cc258d3597b48922fe7e58865ce1d8b209b11b25af178be7ce2ab1c9d",
+      "bytes": 1619940
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p03_black_swamp_face_reed_knot.png",
+      "sha256": "e1da7e30d49aed729ca2633fbfb42b22503bb2a7b5ede411bbb69ee411b1fb0f",
+      "bytes": 1174831
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p04_broken_seal_chain_anchor.png",
+      "sha256": "ad414451125eabe33d887e666f936f2868bbaad80f06a9395fc2f38aa1125722",
+      "bytes": 2053946
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p05_scorched_castle_merlon.png",
+      "sha256": "64a26e161c2f12f701cbadfb2559fb24b12ecd27c67c8a126ed81f1977682abf",
+      "bytes": 1115306
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p06_leaning_grave_marker.png",
+      "sha256": "7c9879343e135e3ce24665e30c132c9b8791526d41a82d1c6dc4de69118c47c0",
+      "bytes": 1660635
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p07_empty_broken_coffin.png",
+      "sha256": "d80342f70b5f4bd0bb4ac4cf69df8b532b9f90fe5f85a3ac2283fe646c9392e3",
+      "bytes": 1908983
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p08_ember_chain_pillar.png",
+      "sha256": "9e3caa5f2106bf5702d66c8bfdc3c05ef256eda77de5fc9e2ea1a7b619580d47",
+      "bytes": 1763721
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p09_extinguished_chain_pillar.png",
+      "sha256": "d5f5e94135a6edc16173f504a2aae5f16609001c81895cacf7a1fc20404696d2",
+      "bytes": 1985952
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p10_summoning_ring_keystone.png",
+      "sha256": "f9ace11dcd5610f19371a3976f2d49b534ef84ad4b2156b59bea01efeccd555d",
+      "bytes": 1662248
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p11_collapsed_palace_column.png",
+      "sha256": "782d7085d8350011011c933451b27b600a2925cfb1f9b494bb4f089205b5ae3a",
+      "bytes": 2028973
+    },
+    {
+      "path": "new_assets/props-part01-batch01/p12_ritual_fire_brazier.png",
+      "sha256": "c2228ae92cd633631f0d599a37d48d4f5120160cf0448d764a3c4e6b0f81a75b",
+      "bytes": 1621370
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b01-seal-pedestal.png",
+      "sha256": "f3565427b24371fad04dd38f259d156f7334fb5d425db1274e3d1809a83fc6b2",
+      "bytes": 1642246
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b02-decayed-sofa.png",
+      "sha256": "1070a980925360f7aa401fd7e4d9d1f193d19c8cfa8599a1e2f939a21d878744",
+      "bytes": 1438685
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b02-refuse-heap.png",
+      "sha256": "1ec86c89e23876c3c529d50303f1520ba2269cebeca73385736bd3915de57998",
+      "bytes": 1213267
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b03-fractured-mirror.png",
+      "sha256": "3e8f35ca6cf9eb576d31e1fce8fbd4806990e14ece890c5f4d3ab6f02bddae76",
+      "bytes": 555520
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b04-warped-kitchen-stove.png",
+      "sha256": "95589495977f1debb43350aebef79a307adc448642f04aef35740c323479be46",
+      "bytes": 1255258
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b05-control-crossbar-stand.png",
+      "sha256": "22a11426d17a5d92b614037c1d535c74402f45ea87796c89b19b858a8f5f550f",
+      "bytes": 470272
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b06-vault-door.png",
+      "sha256": "40e008b4fd75367feeac573cf653fd25e7810050c61886f03ebe3ba3bead5e68",
+      "bytes": 1426665
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b06b-snow-heavy-fir.png",
+      "sha256": "c7c44a1114b0f7cc0092eadfb6be2b2ab28618006fade86db3c0bba25dbe0f29",
+      "bytes": 840657
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b07-burned-firedoor.png",
+      "sha256": "b7f80d6e95647f4faa31674c77172ab0fc1d2c296f5d5503f855900da9f0289e",
+      "bytes": 1095611
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b07-scorched-stair-landing.png",
+      "sha256": "1832b78ffdc4cc300595dde83b241445a573c085309a37837d41c90a88cab16b",
+      "bytes": 932674
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b08-electrode-altar.png",
+      "sha256": "f15c0151272368a41ed61569d94071ef15d8a5dd39cc843dabc2be38947ce35c",
+      "bytes": 2185727
+    },
+    {
+      "path": "new_assets/props-part02-batch01/ep1b09-black-sun-dish.png",
+      "sha256": "4815bfb202ca56d885f8ceec5060e1d0a21e0b7a002c22d3190d6fe7f10419c5",
+      "bytes": 1356924
+    },
+    {
+      "path": "new_assets/props-part05-batch01/01-academy-command-core.png",
+      "sha256": "c41a48122567827fee16b2a64bd1ce5f4556a072b32551f6aabab5cb860e2b65",
+      "bytes": 1495579
+    },
+    {
+      "path": "new_assets/props-part05-batch01/02-layered-guardian-gate-isometric-v2.png",
+      "sha256": "683fa24d967162a3e818950168ca3e4e440ecb48a15b305e6890962476876d0d",
+      "bytes": 1376561
+    },
+    {
+      "path": "new_assets/props-part05-batch01/03-clock-root-tree.png",
+      "sha256": "7adf7859913c7c9982aee1827f4950d637f63e16fde91630b6c9ac6a38fb756d",
+      "bytes": 1487618
+    },
+    {
+      "path": "new_assets/props-part05-batch01/04-overlapping-command-threshold.png",
+      "sha256": "2894fc3af81e2171d1e6c05e3a1b2147d8e7f20f4b81097f83913b60af1941c9",
+      "bytes": 1477019
+    },
+    {
+      "path": "new_assets/props-part05-batch01/05-black-sand-furnace.png",
+      "sha256": "b5dfafa194ec869916ca36d613014c26c3455707132ab8822b1443ca29ba69a5",
+      "bytes": 2007980
+    },
+    {
+      "path": "new_assets/props-part05-batch01/06-possibility-reservoir.png",
+      "sha256": "c1fe1efa581472ae7ab67891fa405d53600a4919a95a0e1a3af76ccccb6c50bb",
+      "bytes": 1987448
+    },
+    {
+      "path": "new_assets/props-part05-batch01/07-neuron-noiron-gate.png",
+      "sha256": "e7380ffa3931e300aa3567e32542c5e5e9627f884251665c05a56120cd5d7562",
+      "bytes": 1666495
+    },
+    {
+      "path": "new_assets/props-part05-batch01/08-clock-fragment-memorial.png",
+      "sha256": "e1c50aee31c3170e383e276d1d4187f4082257128239d2b1bd9461a3ad56159a",
+      "bytes": 2071645
+    },
+    {
+      "path": "new_assets/props-part05-batch01/09-six-command-ring-pedestal.png",
+      "sha256": "8325adef6018058ed6151da432324d62b0d2c162a0273227391f28467d674184",
+      "bytes": 1914130
+    },
+    {
+      "path": "new_assets/props-part05-batch01/10-stopped-pendulum-clock.png",
+      "sha256": "5899b95405829fb7488830a0c7fb67ffa17139739cef013b658b476bd8b6cb85",
+      "bytes": 1166052
+    },
+    {
+      "path": "new_assets/props-part05-batch01/11-production-line-time-press.png",
+      "sha256": "caee66f23550005151f96b1bfe74262767a384dde2bb595969ae3c41ca5f1e0b",
+      "bytes": 2272020
+    },
+    {
+      "path": "new_assets/props-part05-batch01/12-asynchronous-clock-pair.png",
+      "sha256": "b042f8fcf06507ac59270ff1c88e69aee0405d3c577c76626d3fa512dab6a6ab",
+      "bytes": 1636151
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/01-fused-castle-gate-v2.png",
+      "sha256": "784eb2ecdc538edbaa648bbfc36644a40b482ce62ae09350dc160636d23e30ef",
+      "bytes": 1719192
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/02-independent-seal-pedestals.png",
+      "sha256": "9b2606ae6a62cffbc85af343c9515c51148fb6f662de2a7d158688bb132e03fe",
+      "bytes": 1187903
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/03-shared-core-cradle.png",
+      "sha256": "4a34eef278dca5346ac68b906e6de83dba16866f136e0ff086efe79f3b5b2f8f",
+      "bytes": 1826989
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/04-severed-restraint-anchor.png",
+      "sha256": "da46cad0545e2811e00d53990403db68946904b6af0ec37ba041590eef5b3a65",
+      "bytes": 1415117
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/05-redacted-enrollment-ledger.png",
+      "sha256": "8ce31911e8cb06b36319a5605c30706b23eab78b9928ec348f3a1a1014799b9a",
+      "bytes": 1421024
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/06-blue-green-traffic-signal.png",
+      "sha256": "b3f45836eb14ca31657116fc72802cdd90734a449a2d89feec8bd26b97214a04",
+      "bytes": 1397676
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/07-wet-crossing-curb.png",
+      "sha256": "5ec3d7cf9f55734a9f12fdc3edd01456bf4ed0e6f17f203fb082933ab73eac97",
+      "bytes": 1477716
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/08-hotel-access-console.png",
+      "sha256": "a7d0311d9e94b8a2bdaf2009bbda4cd2d65a40efce1af3080f19e733f7e8f3ca",
+      "bytes": 1670107
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/09-wet-hotel-stair-module.png",
+      "sha256": "a8944ed31e9ccb4e5ab9b8af804558bba472ed4a1236061e103a4f1846ea78b5",
+      "bytes": 2266547
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/10-hotel-memory-alarm-box.png",
+      "sha256": "318e64a50bab1f7db273da4b413f4549871ec1530d3495ef0c7aa8a1a0c528f5",
+      "bytes": 646150
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/11-jammed-hotel-fire-door.png",
+      "sha256": "a50a89396d3b299d296b75299049f11e10bf29be12e937b024ddd916e18ea9cb",
+      "bytes": 1520685
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/12-rooftop-vent.png",
+      "sha256": "1a7f857c1ae81ae46a35a3736bfe2f0d520ebf914720f628ee613e2b601c8c2e",
+      "bytes": 2191724
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/13-independent-bronze-seal.png",
+      "sha256": "9d5eeaaa20e1781d6d87cd921c6deb194361cc036f576b28fc279afa5a87fc2e",
+      "bytes": 1369633
+    },
+    {
+      "path": "new_assets/props-part06-07-batch01/14-independent-silver-seal.png",
+      "sha256": "7c9978bdd1a83408a0560e8d3133f6ebb837c01b0fa9ddfa8de97c876c2c0de4",
+      "bytes": 1539592
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult01-black-rose-chip-altar.png",
+      "sha256": "6ee96eb00488dbd1365d4a6b50e710846cb98c9c453abe9ca84ff60785625139",
+      "bytes": 1870366
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult01-electronic-chip-reliquary.png",
+      "sha256": "cbbe3b2deb72457ae5bcc6fcb99741c72bdf180b0e166ec7bfe0bcc563a47aa7",
+      "bytes": 2036281
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult02-collective-ego-connector.png",
+      "sha256": "d354458cc71881ca88589c956f4622cd0337ad4443cd3df4738f26d75ae28010",
+      "bytes": 1284688
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult02-individual-memory-vessels.png",
+      "sha256": "94c2c85c97ba1f02567c181f9de20445aa6ea3ec329a29440d4f5ce405c856ef",
+      "bytes": 1753941
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult03-order-barrier-projector.png",
+      "sha256": "71f599723517e8265c093484e8869177f783eff3f946373bc33efcf5f5c31744",
+      "bytes": 1168803
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult04-disconnected-puppet-line-anchor.png",
+      "sha256": "b101d0b4903e6e432a7f7886614f71d8329d4bcc10805d451055b0b68a4375d2",
+      "bytes": 875438
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult04-preservable-core-pedestal.png",
+      "sha256": "db4bdca05c7dc7b16698516414cf7bfec008166bdc3461e8d6a48a59cc44581d",
+      "bytes": 1889205
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult05-fractured-castle-memory-frame.png",
+      "sha256": "c721495911464f95a5982059e620e270fbeb6778b720d5f0d6c5df588d359aa0",
+      "bytes": 1546215
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult05-layered-reality-record-slab.png",
+      "sha256": "10bbe141d78a232dcf272d947eb1395992da1650be72f30db718ac6c539254bd",
+      "bytes": 1495017
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult06-dual-objective-waymarker.png",
+      "sha256": "ca8d2107e8855eac8946491837a2bf6b4752188cc8de1df5322f82b2cf654b44",
+      "bytes": 1306397
+    },
+    {
+      "path": "new_assets/props-part08-batch01/cult06-separated-self-memory-holders.png",
+      "sha256": "0769b2a8583f2af83661dd0ff3f5f5c394017cc14cc07aa688dfd59029225f2a",
+      "bytes": 1599058
+    },
+    {
+      "path": "new_assets/story-gap-batch01/01-past-seal-reliquary.png",
+      "sha256": "02a492a4c3bc11da4f6ace542db1cb14e371595887d50f14b312a793516f3152",
+      "bytes": 1781617
+    },
+    {
+      "path": "new_assets/story-gap-batch01/02-closed-city-storefront.png",
+      "sha256": "4f1a625c37ddded56842323db62a402dd0c99cc3f6521f396d1f8307c202a303",
+      "bytes": 1544475
+    },
+    {
+      "path": "new_assets/story-gap-batch01/03-detached-angelic-mask.png",
+      "sha256": "d9e7dba2cabb3cbc5b8c7f5da44812fcd6196683e223eecaed0274ad5c17c969",
+      "bytes": 1251037
+    },
+    {
+      "path": "new_assets/story-gap-batch01/04-empty-authority-console.png",
+      "sha256": "d44f9b55614cd9bd20d1edb9e428922c93d97839d2ae8bae56df0ef376984970",
+      "bytes": 1129385
+    },
+    {
+      "path": "new_assets/story-gap-batch01/05-three-water-cups-tray.png",
+      "sha256": "a3c142c99f53b9731f77e7b157f794d89465c5ad08b7049bcf697bff323c7de6",
+      "bytes": 1648037
+    },
+    {
+      "path": "new_assets/story-gap-batch01/06-goblin-flute-rose-seal.png",
+      "sha256": "1e5875ef5fac2dd3fc68d8aa1ebfd58451f174630af6d921b584165c65367573",
+      "bytes": 1654991
+    },
+    {
+      "path": "new_assets/story-gap-batch01/07-displaced-doorway-frame.png",
+      "sha256": "d751562a1c90e0e76a33554205c5704b9ce306ecb63091db730f0402afe80446",
+      "bytes": 591112
+    },
+    {
+      "path": "new_assets/story-gap-batch01/08-reality-overlap-shimmer.png",
+      "sha256": "ed1a8d7c9e65c3c1750dce6de663393d16812bb5beb89ea5a5c217938e29eb63",
+      "bytes": 1418055
+    },
+    {
+      "path": "new_assets/story-gap-batch01/09-quiet-memory-ripple.png",
+      "sha256": "83150556d7702b08882f063faf7c901323d3b3c7c6834d1169949d1d03ce8767",
+      "bytes": 1318370
+    },
+    {
+      "path": "new_assets/story-gap-batch01/10-missing-return-signal-flicker.png",
+      "sha256": "51d5047eb035c4b1378cb4f507c935774579e8e41473ad8d8a67098c38c32c15",
+      "bytes": 1410473
+    },
+    {
+      "path": "new_assets/structure-facing-variants/02-layered-guardian-gate-isometric-opposite-padded.png",
+      "sha256": "713e6a11a51991cef85b1101f7cbd12d1189bdfdce94e7cc9ee68f9feafce17b",
+      "bytes": 649573
+    },
+    {
+      "path": "new_assets/structure-facing-variants/controller_rising_machine_wall-opposite.png",
+      "sha256": "a1e8f10a3c999ca59230ea80a44917cd6b3615e3f4de55077fb68ff2f3133c2a",
+      "bytes": 2108157
+    },
+    {
+      "path": "new_assets/structure-facing-variants/ep1b07-burned-firedoor-opposite.png",
+      "sha256": "adab12cdecc7d35dc7ec46aaa4e9096d4e4263c11ebbb812b1aca7af9e072dad",
+      "bytes": 1329904
+    },
+    {
+      "path": "new_assets/structure-facing-variants/ep1b07-scorched-stair-landing-opposite.png",
+      "sha256": "43ea1ca3234aae7f7e6f9e9732c715c6267b969b4be1390618d470a8e608d9b5",
+      "bytes": 1002375
+    },
+    {
+      "path": "new_assets/structure-facing-variants/harbor_tiled_house-opposite.png",
+      "sha256": "e6849ddd5f5e02a8d786391cbcbed7fa25d107b09bd9e43b1cb7b39525c5e807",
+      "bytes": 2052879
+    },
+    {
+      "path": "new_assets/structure-facing-variants/p01_root_wrapped_palace_arcade-opposite.png",
+      "sha256": "411ea545ef2fe0f91035437d3d991be53139cc0b77940f0c2226225d8c2bce3c",
+      "bytes": 1008404
+    },
+    {
+      "path": "new_assets/vfx-batch01/01-dark-contact-bloom.png",
+      "sha256": "96ddd6069075edc1a0874abc30ca66fa2b3dc17a07de035c40c15a233746ff82",
+      "bytes": 1128766
+    },
+    {
+      "path": "new_assets/vfx-batch01/02-corruption-contact-thorns.png",
+      "sha256": "e939127d0441702d3750aa50d2714e01a5aca1cce57eb99a8fa9534afd279358",
+      "bytes": 1408099
+    },
+    {
+      "path": "new_assets/vfx-batch01/03-harvest-drain-wisp.png",
+      "sha256": "a9f3c76d16e47502cad60b072ab45e1c92da5628bc4738830193cb24f6e96d77",
+      "bytes": 879446
+    },
+    {
+      "path": "new_assets/vfx-batch01/04-pollution-contact-spray.png",
+      "sha256": "52bceed8bf4a05a32a84e9ba78fa0adbc63e3532ad0b1f0414cb422acb9f2b93",
+      "bytes": 674653
+    },
+    {
+      "path": "new_assets/vfx-batch01/05-fire-contact-embers.png",
+      "sha256": "ebb8c3d6fadc3c27454899cec76bdae27dadd0a1c57fe8e203b9617dd327485a",
+      "bytes": 856018
+    },
+    {
+      "path": "new_assets/vfx-batch01/06-frost-contact-shards.png",
+      "sha256": "0d6d5ac64006880e487ddafebfd0012d97adb2a688bcf2c91504e8e2894a5a24",
+      "bytes": 983815
+    },
+    {
+      "path": "new_assets/vfx-batch01/07-shock-contact-fork.png",
+      "sha256": "bf3397ec58384b5216e984780513596b8e936cf3e577a971b3a60d7ef484e6b3",
+      "bytes": 570230
+    },
+    {
+      "path": "new_assets/vfx-batch01/08-charm-contact-ribbons.png",
+      "sha256": "acc8b5ce6929c2cbe4a9fbb477fada70d03fcd03fccb2026d45c3d4608bec374",
+      "bytes": 1134744
+    },
+    {
+      "path": "new_assets/vfx-batch01/09-weakness-contact-fracture.png",
+      "sha256": "809923992bf9978d803eb251c9108b22f2bf70cd6fcca2ddedfedc747c96ee82",
+      "bytes": 815096
+    },
+    {
+      "path": "new_assets/vfx-batch01/10-bind-contact-tendrils.png",
+      "sha256": "29c69f6e561084b8c871c6d4ae295fb61b054cbe43af0d1d10784382a0ede98a",
+      "bytes": 950794
+    },
+    {
+      "path": "new_assets/vfx-batch01/11-disease-contact-spores.png",
+      "sha256": "c08e9b963bf88406b3ee3a88b2ab79d7d103a7d1dbafad046cc6b011401e726d",
+      "bytes": 1326785
+    },
+    {
+      "path": "new_assets/vfx-batch01/12-bleed-contact-streaks-v2.png",
+      "sha256": "f65ec0004ee7994f2790f1a9f6f8547046b83c35d4d67f571bfe66a6b10ba790",
+      "bytes": 494925
+    },
+    {
+      "path": "new_assets/vfx-combat-components/ember_heart_release_candidate.png",
+      "sha256": "27c874f57e39bb2561b8d3403577fe5f634e752c2cc544ab770eace62557578e",
+      "bytes": 1118833
+    },
+    {
+      "path": "new_assets/vfx-combat-components/fallen_knight_single_sword_trail.png",
+      "sha256": "519c8181f2d8df921d661a41c6cfb05cf10748d0f2f3cc70739242a787aeea8f",
+      "bytes": 315188
+    },
+    {
+      "path": "new_assets/vfx-combat-components/frost_crystal_release_candidate.png",
+      "sha256": "91020876446d4be9ce8417fcde4dfb5c4ef903523b52f0ebd9aa666e1ab6d3ca",
+      "bytes": 958093
+    },
+    {
+      "path": "new_assets/vfx-combat-components/mammon_banknote_blade_projectile.png",
+      "sha256": "c6fa7f82c7df48850401c0e0441b3536a3cb9efb776ba0c0cabb90f7ed8b818f",
+      "bytes": 791373
+    },
+    {
+      "path": "new_assets/vfx-combat-components/mammon_controlled_coin_projectile.png",
+      "sha256": "c006f9554954220206710779593d2288fd5f8a8a3670f3a17830ac9dc85fd55e",
+      "bytes": 1835100
+    },
+    {
+      "path": "new_assets/vfx-combat-components/native_projectile_motion_strip.png",
+      "sha256": "16bb95fe29a4a9045e8dcd99a1a4d212b7500a6399bcf4bbf87bfa48a57959b3",
+      "bytes": 207270
+    },
+    {
+      "path": "new_assets/vfx-combat-components/storm_core_release_candidate.png",
+      "sha256": "0f86a321b95c0dd1b584e120f87f7340a40ff909dadcfcd7aab64e1e6f96bc98",
+      "bytes": 1722961
+    },
+    {
+      "path": "new_assets/vfx-combat-components/void_shard_release_candidate.png",
+      "sha256": "cc8049d5f7efdf5119f94eaa5689770b467b9d973ed0907c52484992ce2b7453",
+      "bytes": 580812
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/01-root-seal-severance.png",
+      "sha256": "bfd833dcc2a54c3f6191a8b6457834414a6dd4ffc72d7c0d844d42fa2161ffa7",
+      "bytes": 923653
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/02-black-swamp-grasp-ripple.png",
+      "sha256": "328ffc093246d774cd7a46f097c6c9ff4fa56bc1f87491c9ee967153a092b291",
+      "bytes": 1912043
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/03-black-ash-gust.png",
+      "sha256": "3c1865e70b16632fb72f6b89497faecd30d4d0ab1c142d9d32f69e0f455f03d0",
+      "bytes": 1784059
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/04-fallen-companion-memory-echo.png",
+      "sha256": "31830c943cc88e09fdee397ba3afad52138ba8f1c3e1fd949843162e2fc38d81",
+      "bytes": 1611374
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/05-black-collapse-vortex.png",
+      "sha256": "7ef1438b295b6d4ac91732f360490e7a9dfa2bd01400564eedb152ad192fb327",
+      "bytes": 2149685
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/06-guardian-memory-erasure-veil.png",
+      "sha256": "7c4df2a11d4fc4677edd80deea4a873ac58829e6b56b3a71800b22980a03ff12",
+      "bytes": 1117103
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/07-craving-afterimage-fragment.png",
+      "sha256": "746ae1ce2b47e27ccd62b5bb44288ed01cda9a21079a136550f1bcebb3b8e74f",
+      "bytes": 585508
+    },
+    {
+      "path": "new_assets/vfx-early-gap-batch01/08-seal-closure-component.png",
+      "sha256": "73f84e4768896ecceccfd80221f1efec200c2588c44300ab344c761eb2294c99",
+      "bytes": 853091
+    },
+    {
+      "path": "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png",
+      "sha256": "ebbc6614889f0d06c45dbeeae75e47730eba8fd5469d928769941fe598429a32",
+      "bytes": 1341883
+    },
+    {
+      "path": "new_assets/vfx-ground-batch01/harvest_ground_residue_topdown.png",
+      "sha256": "7ea9cfe681c2087ed0152f86d0dcc31c4ef52e6bf37b655f4811a2afae328080",
+      "bytes": 2137266
+    },
+    {
+      "path": "new_assets/vfx-ground-batch01/pollution_ground_residue_topdown.png",
+      "sha256": "42b17b9de46d6946c7d5b08671c98754eb40522024392de168aacc6834e96195",
+      "bytes": 1258423
+    },
+    {
+      "path": "new_assets/vfx-ground-batch01/weakness_ground_residue_topdown.png",
+      "sha256": "3d4ec9a50e4d0bb11e1022511301118d8519844007adb9d767c3fe0da9bb86f3",
+      "bytes": 1588001
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/ep1b02-stagnation-debris-burst.png",
+      "sha256": "3cbb955adbe9b67c1d273018857b1deea77f78fb24d43ca26f2ba21767fdc6c1",
+      "bytes": 1792318
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/ep1b03-envy-glass-shard-fan.png",
+      "sha256": "00d572e1cac36c7c01d8846c6ed015ac8ebd943c9858ec084a03a454808b2c31",
+      "bytes": 1922163
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/ep1b04-gastric-poison-plume.png",
+      "sha256": "d6ff46f1185d1845cf4739d7450f213f47dfefd295320689e20ecd89033841f9",
+      "bytes": 1862451
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/ep1b06b-blizzard-memory-veil.png",
+      "sha256": "b9d5f503736f014033135bb9f62126894e7a60d99ff52b869c1d184f7730a1d9",
+      "bytes": 1274166
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/ep1b07-rage-flame-seal-strip.png",
+      "sha256": "1ce2a08ea3a19421897c95a3b54bed634c48d89a727c4f209d243d7902df3c22",
+      "bytes": 692518
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/u201-bombardment-loop-shockwave.png",
+      "sha256": "276ebd6f0e7170c24a345f477bbfb7f5b74bebbe586129178aa040a85c1c143d",
+      "bytes": 1149915
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/u202-boundary-reinforcement-grid.png",
+      "sha256": "6f40938291d4709f1c35955695d24bea1c635a384dfb4aa475b4455b6e9017bd",
+      "bytes": 1620347
+    },
+    {
+      "path": "new_assets/vfx-middle-gap-batch01/u205-absorbed-power-ribbon.png",
+      "sha256": "d38cf944b6c907cdf115089d566eaf0011ad719e1dcfbf4d879b4e3816d5b5b4",
+      "bytes": 1338328
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/01-violet-web-seal.png",
+      "sha256": "9fc44cef911b4b23ddba4ef0299990c514314caebc1553196545eeeeeb25b470",
+      "bytes": 1545942
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/02-pillar-tether-release.png",
+      "sha256": "cbcaffcc0e86c5eef1bb0aedc724e6290bb485263cde77f4891d9bd363026f97",
+      "bytes": 1245514
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/03-memory-unlock-light.png",
+      "sha256": "e69170cd826041ff71a844ce14ab6b46e9656f5c244091065707673d1f4c9b5d",
+      "bytes": 993863
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/04-mask-fracture-revelation.png",
+      "sha256": "6731c210f276c19d890a20e7eba18fd617726868f152691adedd2a636be53afb",
+      "bytes": 1035811
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/05-control-thread-cut-v2.png",
+      "sha256": "d6eb59dac1eecd1b021681849c324e2906bdd50b1d51ccecc5ad152d1d459509",
+      "bytes": 370961
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/06-seven-signal-convergence-v2.png",
+      "sha256": "00742938784dfb251641126c7b17850d9918ae66232e1be16d6b75085e572d28",
+      "bytes": 1222580
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/07-biobootloader-overload.png",
+      "sha256": "7cc6b16d77117b452c46abf7528a707b2020f03f4d223cd132ed695dc86885fa",
+      "bytes": 1314668
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/08-system-circuit-refusal.png",
+      "sha256": "091ac45a3a9991d95483a54281409885919c225ca083ce355576a4a9057e4eaa",
+      "bytes": 1160333
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/09-choice-link-disconnect.png",
+      "sha256": "d2372667e7860df561ef9ca872ace64cd0641560b6a90ec80fdd1a3d831143fc",
+      "bytes": 1130981
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/10-rose-seal-spatial-resonance.png",
+      "sha256": "1bcc7cc7060ad5ce86ba97813133aec4a42e8f8548e46b8b1c43d64e89d1ee87",
+      "bytes": 1243797
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/11-dual-will-sword-resonance.png",
+      "sha256": "feff8ddec5cba17d09257e6b0461e8449c8ce390531df8b8d244576b456bdf14",
+      "bytes": 793246
+    },
+    {
+      "path": "new_assets/vfx-narrative-part01-04/12-black-sand-time-intrusion.png",
+      "sha256": "32b4f628467b24983aefb6ea0644a391cd04093a6f3a5545e1d001f3c617eaf2",
+      "bytes": 901209
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/01-time-harvest-severance.png",
+      "sha256": "e3a2bd615794ed495f08558b66fa92c5afcea7d84b2017a70b466bec2853fe45",
+      "bytes": 916600
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/02-command-timing-gap.png",
+      "sha256": "2351dbbd454a4ccec24e8ef9283a12fb476c742beb6d1e8d9bf51c8c412bfa61",
+      "bytes": 1468964
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/03-black-to-gold-sand.png",
+      "sha256": "0d357c8a1444e431e878790c5fbff9bd2ae1ad158dfefe62bfeefa1a586553d9",
+      "bytes": 1229903
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/04-dual-owner-seal-opening.png",
+      "sha256": "c19675cb726c348b0fda11f15ac3eec07813c034387e5a57b2189e550de135cb",
+      "bytes": 1524762
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/05-shared-core-consent-resonance.png",
+      "sha256": "e71684a88e3df173f92967ebe91175d6ef749d0f3d6239cf532162ff7640c305",
+      "bytes": 1742152
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/06-causal-record-mismatch.png",
+      "sha256": "ede44767ad9c449c4848ed7f9c22912e4f4108e8575dc1420889f32a6308f0ff",
+      "bytes": 751002
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/07-rain-signal-reflection.png",
+      "sha256": "adbe5bc411dd078e24774ccf64eab777167e6b96a589c10d3adcc7cfeae935fe",
+      "bytes": 374725
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/08-access-memory-interruption.png",
+      "sha256": "5ec00f19db403fd06603415f587f87c0b4bfdfe989d03da347f2806b787309e8",
+      "bytes": 1259027
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/09-causal-loop-break.png",
+      "sha256": "abf5ac01596e4ea85dff2887e8d4e715f634135a9e957009caf28f27ad9769b5",
+      "bytes": 1377456
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/10-preserved-memory-lights.png",
+      "sha256": "db9e394fd2850b04195f134e88057d349b5ccf5ec2dd6443b20a5fda2feb99da",
+      "bytes": 1328941
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/11-selfhood-purification.png",
+      "sha256": "faa73d0e7bc8d683bab451afc95dab71fe658c509c4d161a0f99228656f18b75",
+      "bytes": 1407529
+    },
+    {
+      "path": "new_assets/vfx-narrative-part05-08/12-command-authority-severance.png",
+      "sha256": "d60e965e744a6188b039f68de1f77d09bdce22a0e6212111063435dc5d4c58a4",
+      "bytes": 1602020
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/01-first-command-contamination-warning.png",
+      "sha256": "cfc26dfc9e35eed8080c2aa2eac889f00a7d07ccc377668a42245d3ccd68f773",
+      "bytes": 1939378
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/02-harvested-possibility-stream.png",
+      "sha256": "e9eef8ab6d1c3fe0ba35af0d3adaf703feb64d037cec05f513f4770240041e67",
+      "bytes": 1688813
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/03-unspent-future-flame.png",
+      "sha256": "2ad3a5e322c768e7b307843ddfbfe45c3e07acc611efbb282ef493efab8be971",
+      "bytes": 1732565
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/04-command-gap-slipstream.png",
+      "sha256": "8e2adb6c3512dced36937eca2a78d8a1ad67b5518a467f2b1c79c7c855fc18d9",
+      "bytes": 1045340
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/05-preserved-clock-shards-rising.png",
+      "sha256": "eefc51681e0f88b3a1b0f2035ce8b349adc765d94394f682f7016fc14ca1cc07",
+      "bytes": 992508
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/06-six-command-ring-release.png",
+      "sha256": "d7e9994a6006721546c41fc3b2db9eeee366cf28b36fffa62c1c22f9f3f075dc",
+      "bytes": 1855478
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/07-corrupted-command-thread-cut.png",
+      "sha256": "5a8fd39a2721d6a4a43bf1be6cefb397600fdbfa94d0101de318353957062af1",
+      "bytes": 1468244
+    },
+    {
+      "path": "new_assets/vfx-time-gap-batch01/08-time-space-compression-aperture.png",
+      "sha256": "79a6344810621a200b6faff8dd5b344f227bc22c542c7663c1e722acc25490ba",
+      "bytes": 1789549
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/01-u206-choice-migration-disconnect.png",
+      "sha256": "a57c445bced515b0dd646baea66d0c4a5e1ce1af0888fb9b718c9c7f1d04b407",
+      "bytes": 776036
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/02-last304-fusion-seam-shimmer.png",
+      "sha256": "1e238db8ffa5adb3e9b1ff9b71560aa5d233acf0209e2cd391b5f91be47be209",
+      "bytes": 1435676
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/03-last302-wet-paper-insomnia-drift.png",
+      "sha256": "daaa0896179fa99cf3ab22bcb490d3207b400713be2222cf77eb3b0ca39f285b",
+      "bytes": 1653398
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/04-restLast3-stopped-time-intrusion.png",
+      "sha256": "4746474f4294eece66d05dbcf9554a19589ad1c49cf11f3cf884a751fc63c37a",
+      "bytes": 1075869
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/05-hando01-gate-defense-ward.png",
+      "sha256": "866f40810b5ae32bff47b9cd541537e15691e96c66d3ce7948fc15d321cadd4a",
+      "bytes": 1370444
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/06-murder04-hotel-alarm-testimony-pulse.png",
+      "sha256": "25aa3c5e4aed89dd7e9bc18e0d70b5cdd2cc1257891e2ae1a79af9bc15fccf71",
+      "bytes": 1156170
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/07-cult01-outer-circuit-severance.png",
+      "sha256": "f6adf5da404bc558a3083dc8f81327a9c3bf377949e72cc67a364ee3b35c3690",
+      "bytes": 1137872
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/08-cult05-reality-memory-return.png",
+      "sha256": "07c9f5b557f84c7ce5858d361fc293c085746875da03e4b187f6a5f09bdb0fc0",
+      "bytes": 1357798
+    },
+    {
+      "path": "new_assets/vfx-world-gap-batch01/09-cult03-gold-inverted-cross-projectile.png",
+      "sha256": "781bc8c174205c8980fae62c305f0c5eb99b33bedf132421eb961fbaae695f05",
+      "bytes": 1065300
+    },
+    {
+      "path": "prior_assets/architecture/boss-arena-floor.png",
+      "sha256": "53ef9dc0489a993e7ea0afc105b7975c0d89608f3f5fc2885c2a4fa75b34b32a",
+      "bytes": 805398
+    },
+    {
+      "path": "prior_assets/architecture/hospital-corridor-floor.png",
+      "sha256": "573a7914925c1b64d354fbb22f979529e19bbd80909c24266d04a75f9ae101af",
+      "bytes": 755466
+    },
+    {
+      "path": "prior_assets/architecture/hospital-roof-cap.png",
+      "sha256": "269de776b7160feb471832a80766dd2281bb3876ceb65a440aad6053a5824605",
+      "bytes": 1913928
+    },
+    {
+      "path": "prior_assets/architecture/hospital-wall-module.png",
+      "sha256": "2fb325f994678139858d6aa55d6f7a5c553ffcedbd6ecb4375050b5b9e0ad1e1",
+      "bytes": 1025458
+    },
+    {
+      "path": "prior_assets/architecture_additions/hospital-corner-post.png",
+      "sha256": "5e15c6d5c5737b9ccdaa7d47c2b7ca27c8946940978aa32e194b9af619150c99",
+      "bytes": 620688
+    },
+    {
+      "path": "prior_assets/architecture_additions/hospital-single-door-closed.png",
+      "sha256": "c305d641ae06d141c27b53faa335481b5883843dca18d6eaca6fe27a1246122f",
+      "bytes": 970348
+    },
+    {
+      "path": "prior_assets/architecture_additions/hospital-single-door-open.png",
+      "sha256": "a0d6736fdf46969dcadde7ada59c7039440b82062904403057f3ea2d78bff2c8",
+      "bytes": 947789
+    },
+    {
+      "path": "prior_assets/architecture_additions/hospital-wall-opposite-axis.png",
+      "sha256": "716ca2daaa0e60c3109b7c2b1cfbf9070a064896a9cda334cfd1c0c046cd0fe0",
+      "bytes": 1006291
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_examination_stool.png",
+      "sha256": "590ad7b2517d44de71f20aaed320b3990ac95a18b6368ae70d4d8a85034622ec",
+      "bytes": 444246
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_iv_pole.png",
+      "sha256": "780a9ec769b7ee24a3aaec649894c2f834ddbe7f724240366917dedada41e5b3",
+      "bytes": 295555
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_linen_trolley.png",
+      "sha256": "9e15b1f38644098694983cceedd0a30f3896dc5b9e646245d330effbc23edbfb",
+      "bytes": 957629
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_oxygen_trolley.png",
+      "sha256": "7eb50729b69b6c1a15890e3a4012b346a1a53eaa0cca484b4fa2281b5f986ee8",
+      "bytes": 463251
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_pedal_bin.png",
+      "sha256": "227b0308612ecd05665ab39397af8e89621842f054ccf5755c5983f2b9283161",
+      "bytes": 722967
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_reception_counter.png",
+      "sha256": "3865ff14c2cdbde85023c90187becde35e4011575d24c47b81ec44df7b9a6383",
+      "bytes": 1263915
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_wall_clock.png",
+      "sha256": "9fde9c75d7a2da2f8adc100c6cfcba6aaf4db675390d8fb33dbbf53ef7ddb46d",
+      "bytes": 1793238
+    },
+    {
+      "path": "prior_assets/hospital_additions/hospital_washbasin.png",
+      "sha256": "1934d00198206c4918cfdfde7cf026d32c934cb33988ef49251d750af65164df",
+      "bytes": 1395846
+    },
+    {
+      "path": "prior_assets/hospital_core/hospital-bed-isometric.png",
+      "sha256": "5c2a302f4700570b0ae14b0155e9a35c68b58f702bd73f1737ef67b49995a395",
+      "bytes": 1981805
+    },
+    {
+      "path": "prior_assets/hospital_core/patient-monitor-isometric.png",
+      "sha256": "9b22ba36d22173eae523590d46d9f8c4511ffd48a64e30fc33f1de8fd7e0e42f",
+      "bytes": 450111
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_bedside_locker.png",
+      "sha256": "aa322405cf5c07314056c6c81c706d45d87c9846b145fb444ec83eeaccf654db",
+      "bytes": 1343423
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_call_button.png",
+      "sha256": "ff488fc0ec783aa9844408d6e34a238f388db73361d5ec9e419cb4cf18876afa",
+      "bytes": 403724
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_file_trolley.png",
+      "sha256": "9dd4459aa0d46213166bf37581aed26826304e762895bbb7c0910a18fd1606c1",
+      "bytes": 880554
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_paper_dispenser.png",
+      "sha256": "63335195e91cae1c644ecfab971ac806b5751c2df979ab99a0cb0d88846dde0f",
+      "bytes": 1078909
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_radiator.png",
+      "sha256": "cda9c57777692df3f6214d2976e2cd58cddabf1efbbcb7fc129a8f47e782f1e4",
+      "bytes": 1671071
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_stretcher.png",
+      "sha256": "e6b16ec38d9b1389ae1fa54bf08ff20e3e3224d37ea98164e325a6300e555368",
+      "bytes": 1141965
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_waiting_bench.png",
+      "sha256": "966dc774c384ba7bc8bec135f7184cb35fd79796e5a047b945f8b1900b82d71b",
+      "bytes": 1011777
+    },
+    {
+      "path": "prior_assets/hospital_details/hospital_window_blind.png",
+      "sha256": "2a4a35f194947b07a3a031eecdf91e06d670208d12613be3016ffbe4e93c1f2b",
+      "bytes": 1150464
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_consultation_chair.png",
+      "sha256": "f14d85aeb12ef16300ef3d8595fb3bf8606ef05d7ab80eb96134c38ddb46c355",
+      "bytes": 699241
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_consultation_table.png",
+      "sha256": "0a1da4620f70b9d614074bcfd60e32077de610ea11178697349e0cd74a7bbe93",
+      "bytes": 537625
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_double_door_open.png",
+      "sha256": "8e7e537d4d2031b17ca5dc82acad8928bc687c56f1e7d43d413c7f7133f7b0e3",
+      "bytes": 1659542
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_fluorescent_fixture.png",
+      "sha256": "5eb51a8c75a6d252c10e6e86fe53422c53b95e64d47bd5fca72910b0d639c6ef",
+      "bytes": 1818495
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_instrument_tray.png",
+      "sha256": "4951f4513a3a7b98e1e8ac5afa145316a8656ffbb83fedf8c041cb8783a71694",
+      "bytes": 1350216
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_medicine_cabinet.png",
+      "sha256": "073b2ac2fa6161b31efeca39c4f16eda2be62d7ab524a62acbd13d43412182f2",
+      "bytes": 2090335
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_privacy_curtain.png",
+      "sha256": "179a8803e7eb7e511aa3a421b098cb62b24c66d646ae5a89f04f299a32e503b6",
+      "bytes": 783865
+    },
+    {
+      "path": "prior_assets/hospital_props/hospital_wheelchair.png",
+      "sha256": "ed0eba9c7f686352e2307230d90bfe85ef02aced1c20962e86b11e9fc473fcee",
+      "bytes": 1838909
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_bandage_box.png",
+      "sha256": "cbb16a7bd02c1a801d1791d26b08036972d9d0582413d2b3530d574b0e72c53e",
+      "bytes": 1125547
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_clipboard.png",
+      "sha256": "4b3df7da924cff6dcf99cb6959d26fe79cab41d4614d9121ee9060277e5dff11",
+      "bytes": 1098531
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_crutch_pair.png",
+      "sha256": "b0965c96becc544e1c9be1286df9d00cf57ce1b23a473cb06b2533893e0732df",
+      "bytes": 402107
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_desk_phone.png",
+      "sha256": "a2c52be9f83e3c6916ff1cd482535e90f234fdb172d2bf93c603ed419b451845",
+      "bytes": 1018816
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_exam_lamp.png",
+      "sha256": "0d2aee4efc43393cd1afe6be1563f2abf51c40efe4b40f680f91f059cd813c8f",
+      "bytes": 365831
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_overbed_meal_table.png",
+      "sha256": "143d32cec057482d7cefff7a497647acd4e97d819e3bdec282fae6f854620945",
+      "bytes": 532179
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_wall_intercom.png",
+      "sha256": "925c6bf51208c8ea27ef1c104e23025cf4e2685005f630fcfa687cc3bb7432b2",
+      "bytes": 835761
+    },
+    {
+      "path": "prior_assets/hospital_small_props/hospital_water_tray.png",
+      "sha256": "0c5cf86419b1a1ef5f97bfb9a2c8aee08240567764289874b7fc0975d89cde23",
+      "bytes": 972158
+    },
+    {
+      "path": "prior_assets/medical_vfx_singleframe/poison-splash-decal.png",
+      "sha256": "9dd6cebb796e18eb3959dbe088b6e83c83aa5ed57fc5594578a29b739583248b",
+      "bytes": 737711
+    },
+    {
+      "path": "prior_assets/medical_vfx_singleframe/poison-syringe-projectile.png",
+      "sha256": "add00777f8a292cdb20e02558e9b3499b2db94a27ef6400d3a158bd62f392b85",
+      "bytes": 1138948
+    },
+    {
+      "path": "prior_assets/medical_vfx_singleframe/scalpel-projectile-trail.png",
+      "sha256": "41b6fb5f5d230a27d4c2b1e399bd2baf0890767a5dc0bf942c5110e05b2d38b0",
+      "bytes": 1120441
+    },
+    {
+      "path": "prior_assets/neural_corruption/black_neural_cable_junction.png",
+      "sha256": "53427ee65725cd9b6642589f2f3321f80040e92cf92a295e45db4f6a9cd6dffb",
+      "bytes": 1921987
+    },
+    {
+      "path": "prior_assets/neural_corruption/black_particle_dissipation_vfx.png",
+      "sha256": "4876751e41b22cf4e7b1e5e11b5a6471b9a40217b058a891a48f9f2156c5344c",
+      "bytes": 1373186
+    },
+    {
+      "path": "prior_assets/neural_corruption/black_root_stone_rubble.png",
+      "sha256": "cd902a82a4ff26b838b8da3d81be3c31dae0321b8624600a2c7bbef9b374f03e",
+      "bytes": 1685387
+    },
+    {
+      "path": "prior_assets/neural_corruption/black_sap_puddle.png",
+      "sha256": "116685614374f9dafe10f275f2397bb8992c3c52e41ed187d3930dbf99f3a23a",
+      "bytes": 640634
+    },
+    {
+      "path": "prior_assets/neural_corruption/dual_waveform_neural_monitor.png",
+      "sha256": "a6948463b6a78dc8bf6bbe4b03a7bcbb139ce0eb6e46ce6aed707b927d6389ae",
+      "bytes": 1436096
+    },
+    {
+      "path": "prior_assets/neural_corruption/empty_neural_connection_capsule.png",
+      "sha256": "f2c03a79f74c417c139a9d4e0f8c5f4038d0b120b9f2afa15e5d11f1a6789d3b",
+      "bytes": 2343211
+    },
+    {
+      "path": "prior_assets/neural_corruption/restrained_examination_bed.png",
+      "sha256": "72c50ad238a4a131ddc7542f79c1c4401f425fb8618d82f3f3a52c561194f1cb",
+      "bytes": 1773727
+    },
+    {
+      "path": "prior_assets/neural_corruption/server_surgery_interface_column.png",
+      "sha256": "caf07f07d525ceee326a8aa656fbc03e26521f45049ebf663a340253c133d6ee",
+      "bytes": 1839719
+    },
+    {
+      "path": "prior_assets/neural_expansion/black_neural_cable_elbow.png",
+      "sha256": "67acebd0e9731525869cca1bc4915ea75a791e63d883d4dd6f2a4896b4307e32",
+      "bytes": 1606259
+    },
+    {
+      "path": "prior_assets/neural_expansion/black_root_corridor_barricade.png",
+      "sha256": "bc7d3c34c7276928ab09a72411dfe005da9887674b884dd479af9a9ac33b675f",
+      "bytes": 1284919
+    },
+    {
+      "path": "prior_assets/neural_expansion/black_root_stone_pillar.png",
+      "sha256": "df44ba0628e31729ba7f2468deeb0c05f25dbe08cb4d94023c8134dd292a4c57",
+      "bytes": 1556004
+    },
+    {
+      "path": "prior_assets/neural_expansion/neural_cable_overhead_bridge.png",
+      "sha256": "63d955d139ff30c99080d464557b0710c7d158afe9df4ba5bfa8aec499a4cb3e",
+      "bytes": 1763828
+    },
+    {
+      "path": "prior_assets/neural_expansion/neural_computation_core.png",
+      "sha256": "f8c8a7dd2d3dd20e37646a2d81d16adea37e2def1f0388340c366a2c5b7c8552",
+      "bytes": 1962771
+    },
+    {
+      "path": "prior_assets/neural_expansion/neural_head_interface_rig.png",
+      "sha256": "04080acdeb62a7c5b8aeee27ff1ec3bc7f2457241f548b48c5e2897a5b895e79",
+      "bytes": 1775109
+    },
+    {
+      "path": "prior_assets/neural_expansion/neural_server_relay_rack.png",
+      "sha256": "e2e8600b034363be70fc59965e5d38848ee08b90d0be016f7ec326c16aeb5cae",
+      "bytes": 1240178
+    },
+    {
+      "path": "prior_assets/neural_expansion/neural_wall_connector_panel.png",
+      "sha256": "ef059548b714463e13072a5c3fac4921f52d1847bf9ee1ec9d68f7bfeb287be3",
+      "bytes": 1550368
+    },
+    {
+      "path": "prior_assets/neural_expansion2/black_neural_cable_spool.png",
+      "sha256": "46bdc6f2bf8d5d7faefa2d9110461d40dbaf36faa5e4fbe6872a023311720223",
+      "bytes": 2116885
+    },
+    {
+      "path": "prior_assets/neural_expansion2/black_root_growth_stump.png",
+      "sha256": "1b88c9b7b45dd99ba88515c33c1f29374245c14919f77bedf85e9622c7501ae2",
+      "bytes": 2081820
+    },
+    {
+      "path": "prior_assets/neural_expansion2/black_root_observation_grille.png",
+      "sha256": "6902a66dd7151516c33513e762702643a0409ff445cc32273ab8c393e52d1094",
+      "bytes": 1889686
+    },
+    {
+      "path": "prior_assets/neural_expansion2/black_root_sealed_corridor_door.png",
+      "sha256": "eff03c99a4b1e2437f6379ac2260b93116d623511689760e98044ab6aa08acaa",
+      "bytes": 2464053
+    },
+    {
+      "path": "prior_assets/neural_expansion2/black_sap_cracked_conduit.png",
+      "sha256": "b286037f02e135df01ae8eb8beb4a5e6e45fbfdd91278bb4a852a14d941dda7d",
+      "bytes": 1969476
+    },
+    {
+      "path": "prior_assets/neural_expansion2/neural_core_cooling_pump.png",
+      "sha256": "8415584f9d9d62cd8c772798a133aed8218ab2cdfe87fcf7a8bf0f5202f5ff88",
+      "bytes": 2316072
+    },
+    {
+      "path": "prior_assets/neural_expansion2/neural_memory_cartridge.png",
+      "sha256": "5594583ed6549b081ee8b3698c42854f573f03c6eae155e57b88a195de572008",
+      "bytes": 1193270
+    },
+    {
+      "path": "prior_assets/neural_expansion2/neural_signal_isolation_unit.png",
+      "sha256": "f07a075bc12b722c52316741773382c70a5417ca08ce2ca4b56a7d2836403444",
+      "bytes": 2131088
+    },
+    {
+      "path": "prior_assets/neural_expansion3/black_root_hanging_sap_cluster.png",
+      "sha256": "57c24e061d6129721fea50d1877bda0c6caa8ba03606bc0085d9647237b51b32",
+      "bytes": 1541496
+    },
+    {
+      "path": "prior_assets/neural_expansion3/neural_emergency_disconnect_lever.png",
+      "sha256": "095c3deeb27f24ab908434fe8f67bfc5a8d88a336f22d702f31ce750d9dffb80",
+      "bytes": 1473824
+    },
+    {
+      "path": "prior_assets/neural_expansion3/neural_induction_transformer.png",
+      "sha256": "dd014c7bccd1fadb2579631b6f33a30e3088bb9b70d2032f707d1dec7c05b1f3",
+      "bytes": 1775173
+    },
+    {
+      "path": "prior_assets/skill_vfx_singleframe/electric-status-aura.png",
+      "sha256": "1d60b52d7f81c7b1cefaadaa60a5149147920e9a0003c405f94a087f6c0e2262",
+      "bytes": 923857
+    },
+    {
+      "path": "prior_assets/skill_vfx_singleframe/freeze-status-aura.png",
+      "sha256": "90fab7c1970da661c459bf3f24ec05a3c451bf1ab18325055fb4ac8cab7eefd1",
+      "bytes": 625396
+    },
+    {
+      "path": "prior_assets/skill_vfx_singleframe/gold-sworddance-slash.png",
+      "sha256": "8fbc3610229a5cec962a7b48f312a1454e91673442ade63b48fc6baca090ab8f",
+      "bytes": 581760
+    },
+    {
+      "path": "prior_assets/skill_vfx_singleframe/silver-thread-slash.png",
+      "sha256": "a6deffb4543f922de06da0da4b3effbeb24ae077d57e0250f0ce1deb05f83e34",
+      "bytes": 1747829
+    },
+    {
+      "path": "prior_assets/status_vfx_additions/bleed-status-aura.png",
+      "sha256": "7a6b78b22abd6df8648c42b699a73d9f4e0b7dfc58c18f6ce094af8de89a0bd7",
+      "bytes": 296064
+    },
+    {
+      "path": "prior_assets/status_vfx_additions/charm-status-aura.png",
+      "sha256": "7a81bbe57aa9ed89459d6a9130376515f504fda42e8347efe27b2693a47a82d0",
+      "bytes": 986556
+    },
+    {
+      "path": "prior_assets/status_vfx_additions/disease-status-cloud.png",
+      "sha256": "40d063862724d2b223bf24085723ab24a1d2325fe3c84f90b273e9243533cc30",
+      "bytes": 802623
+    },
+    {
+      "path": "prior_assets/status_vfx_additions/weakness-status-aura.png",
+      "sha256": "d2416fd5fb383d462dd351c341c652714b8d9c339b37422811ef3045d83bf11f",
+      "bytes": 643777
+    },
+    {
+      "path": "prior_assets/status_vfx_singleframe/attack-warning-ring.png",
+      "sha256": "7da5fcd0f73fc16e9455b49642189d46e90137b6ac25d70179f067a310ca5bcf",
+      "bytes": 204852
+    },
+    {
+      "path": "prior_assets/status_vfx_singleframe/binding-status-aura.png",
+      "sha256": "dad13b355f184111d2f959fc7790c0a9498f323bb4a79629d929ace14db430b1",
+      "bytes": 853317
+    },
+    {
+      "path": "prior_assets/status_vfx_singleframe/burn-status-aura.png",
+      "sha256": "3ee636c33646ac16b40def463a9d102c2c8fa507d57f8b91058e1ca39ad6c7a8",
+      "bytes": 810524
+    },
+    {
+      "path": "prior_assets/status_vfx_singleframe/silver-teleport-marker.png",
+      "sha256": "00db33b328ab1eec15e8990a5571bcb5579f638f52986de3a4da777932bf43ce",
+      "bytes": 1166448
+    }
+  ]
+}

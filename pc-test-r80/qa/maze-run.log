@@ -1,0 +1,249 @@
+native boot PASS {
+  booted: true,
+  bootError: null,
+  errors: [],
+  warnings: [ '저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다.' ],
+  player: true
+}
+native hospital entry PASS 
+24 route enemies + 4 field champions + 2 boss-room majors PASS 30
+one champion per ordinary kind with 2x size and 6x HP PASS [
+  {
+    id: 'ep1a08:maze-elite-r2:a08-o1',
+    native: 'a08-o1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageSame: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-s1',
+    native: 'a08-s1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageSame: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-c1',
+    native: 'a08-c1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageSame: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-o2',
+    native: 'a08-o2',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageSame: true,
+    wallSafe: true
+  }
+]
+original majors stay hidden inside boss room PASS 
+both authored paths walkable with player radius PASS {
+  '1': { waypoints: 29, blocked: [], count: 0 },
+  '2': { waypoints: 23, blocked: [], count: 0 }
+}
+closed door and maze baffle stop projectile sweep PASS { door: true, baffle: true }
+champions keep 2x size and 6x HP after restore PASS 
+route restore phase PASS 
+route restore HP PASS 
+restore preserves route placements PASS 
+route1 selected PASS 
+route1 opposite survivors rally PASS {
+  version: 2,
+  phase: 'rally',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: false,
+  exitStoryDone: false
+}
+rally restore phase PASS 
+rally restore HP PASS 
+rally wipe opens story opportunity PASS {
+  version: 2,
+  phase: 'door',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: false,
+  exitStoryDone: false
+}
+boss door interaction shows canonical story PASS {
+  phase: {
+    version: 2,
+    phase: 'doorStory',
+    route: 1,
+    rallied: [
+      'ep1a08:a08-s1',
+      'ep1a08:a08-o2',
+      'ep1a08:a08-s1-w1-r2',
+      'ep1a08:a08-s1-w2-2',
+      'ep1a08:a08-o2-w2-4',
+      'ep1a08:a08-s1-w2-r2',
+      'ep1a08:maze-patrol-r1:1',
+      'ep1a08:maze-patrol-r1:3',
+      'ep1a08:maze-patrol-r1:5',
+      'ep1a08:maze-patrol-r1:7',
+      'ep1a08:maze-patrol-r1:9',
+      'ep1a08:maze-patrol-r1:11',
+      'ep1a08:maze-elite-r2:a08-s1',
+      'ep1a08:maze-elite-r2:a08-o2'
+    ],
+    doorStoryDone: false,
+    exitStoryDone: false
+  },
+  scenePart: 'pre'
+}
+boss door opens after story PASS 
+open boss door permits projectile sweep PASS 
+final boss starts in boss room PASS [
+  {
+    id: 'ep1a08:mb-ep1a08',
+    hp: 55885.56,
+    maxHp: 55885.56,
+    state: 'active',
+    x: 22.17192903040956,
+    y: 12.449465882042707,
+    boss: false,
+    midboss: true
+  },
+  {
+    id: 'ep1a08:maze-chief-r1',
+    hp: 55885.56,
+    maxHp: 55885.56,
+    state: 'active',
+    x: 23.14065185607162,
+    y: 13.834321691480074,
+    boss: true,
+    midboss: true
+  }
+]
+boss restore phase PASS 
+boss restore HP PASS 
+boss death unlocks exit PASS {
+  version: 2,
+  phase: 'exit',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: true,
+  exitStoryDone: false
+}
+exit story PASS {
+  version: 2,
+  phase: 'exitStory',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: true,
+  exitStoryDone: false
+}
+native next map + difficulty confirmation PASS ep1a09
+native previous portal returns to completed hospital PASS {
+  version: 2,
+  phase: 'done',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: true,
+  exitStoryDone: true
+}
+done restore phase PASS 
+done restore HP PASS 
+route2 symmetry and 14 opposite survivors PASS {
+  version: 2,
+  phase: 'rally',
+  route: 2,
+  rallied: [
+    'ep1a08:a08-o1',
+    'ep1a08:a08-c1',
+    'ep1a08:a08-o1-w1-r1',
+    'ep1a08:a08-o1-w2-1',
+    'ep1a08:a08-c1-w2-3',
+    'ep1a08:a08-o1-w2-r1',
+    'ep1a08:maze-patrol-r1:0',
+    'ep1a08:maze-patrol-r1:2',
+    'ep1a08:maze-patrol-r1:4',
+    'ep1a08:maze-patrol-r1:6',
+    'ep1a08:maze-patrol-r1:8',
+    'ep1a08:maze-patrol-r1:10',
+    'ep1a08:maze-elite-r2:a08-o1',
+    'ep1a08:maze-elite-r2:a08-c1'
+  ],
+  doorStoryDone: false,
+  exitStoryDone: false
+}

@@ -1,0 +1,191 @@
+{
+  "method": "Node CPU VM with 60s synchronous fixture limit, native save/restore and draw commands; actual pinned Three BufferGeometry. Assisted fixtures, no browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "55 optimized maze layouts exactly match baseline floors, walls, entries, nodes, edges, exits and doors",
+      "passed": true,
+      "detail": {
+        "baselineMs": 37965.38577500001,
+        "optimizedMs": 39281.474713,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "Native boot completes without VM errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Scene catalog covers 62 exact canonical region IDs",
+      "passed": true
+    },
+    {
+      "name": "No R80 textures are eagerly decoded at the hub",
+      "passed": true
+    },
+    {
+      "name": "All 61 non-hospital scenes receive bounded peripheral art",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Added props remain non-solid, wall-safe, unique and idempotent",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Presentation props cannot become native scenery-throw projectiles",
+      "passed": true
+    },
+    {
+      "name": "Eight existing hospital prop IDs keep physical data and gain clinical art",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08-prop-1",
+          "sourcePath": "assets/props/v290/hotel_luggage_cart.webp",
+          "art": "prior_assets/hospital_core/hospital-bed-isometric.png"
+        },
+        {
+          "id": "ep1a08-prop-2",
+          "sourcePath": "assets/props/v290/broken_street_lamp.webp",
+          "art": "prior_assets/hospital_core/patient-monitor-isometric.png"
+        },
+        {
+          "id": "ep1a08-prop-3",
+          "sourcePath": "assets/props/v290/collapsed_pillar.webp",
+          "art": "prior_assets/hospital_props/hospital_medicine_cabinet.png"
+        },
+        {
+          "id": "ep1a08-prop-4",
+          "sourcePath": "assets/props/v3100/memory_archivist_statue.webp",
+          "art": "prior_assets/hospital_props/hospital_wheelchair.png"
+        },
+        {
+          "id": "ep1a08-prop-5",
+          "sourcePath": "assets/props/v290/hotel_luggage_cart.webp",
+          "art": "prior_assets/hospital_additions/hospital_iv_pole.png"
+        },
+        {
+          "id": "ep1a08-prop-6",
+          "sourcePath": "assets/props/v290/broken_street_lamp.webp",
+          "art": "prior_assets/hospital_details/hospital_bedside_locker.png"
+        },
+        {
+          "id": "ep1a08-prop-7",
+          "sourcePath": "assets/props/v290/collapsed_pillar.webp",
+          "art": "prior_assets/hospital_props/hospital_consultation_table.png"
+        },
+        {
+          "id": "ep1a08-prop-8",
+          "sourcePath": "assets/props/v3100/memory_archivist_statue.webp",
+          "art": "prior_assets/hospital_props/hospital_instrument_tray.png"
+        }
+      ]
+    },
+    {
+      "name": "Hospital entry decodes only its scene assets",
+      "passed": true,
+      "detail": {
+        "count": 9
+      }
+    },
+    {
+      "name": "Clinical sprites emit bounded native draw commands and offscreen art is culled",
+      "passed": true,
+      "detail": {
+        "count": 1,
+        "after": 1,
+        "owners": [
+          {
+            "id": "r80-prop:ep1a08-prop-1",
+            "kind": "prop",
+            "x": 43,
+            "y": 110,
+            "bodyPath": "assets/world-r80/r80-142.webp",
+            "groundAligned": false,
+            "alive": false,
+            "presentationOnly": true
+          }
+        ],
+        "finite": true
+      }
+    },
+    {
+      "name": "Wounded native actors keep exact HP and maze coordinates through save/restore",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Cross-scene R80 CPU image cache retains only current region assets",
+      "passed": true,
+      "detail": [
+        "assets/world-r80/r80-038.webp",
+        "assets/world-r80/r80-113.webp"
+      ]
+    },
+    {
+      "name": "World roof caps use actual Three r186 geometry with finite wall-top vertices",
+      "passed": true,
+      "detail": {
+        "revision": "186",
+        "vertices": 1516
+      }
+    },
+    {
+      "name": "Roof rebuild disposes prior geometry and retains one shared material",
+      "passed": true,
+      "detail": {
+        "disposed": 1,
+        "meshes": 1,
+        "materials": 1
+      }
+    },
+    {
+      "name": "Roof cap view never changes the authoritative layout or zone",
+      "passed": true,
+      "detail": {
+        "original": true,
+        "copy": true,
+        "zone": "dist00",
+        "focus": 1
+      }
+    },
+    {
+      "name": "Co-op keeps the prior renderer path",
+      "passed": true
+    }
+  ],
+  "generatedAt": "2026-10-23T00:13:10.694Z",
+  "passed": 16,
+  "failed": 0,
+  "metrics": {
+    "revision": "R80",
+    "metrics": {
+      "rooms": 265,
+      "props": 901,
+      "failedPlacements": 0,
+      "draws": 1,
+      "culled": 1,
+      "faded": 1,
+      "evicted": 5,
+      "storyEchoes": 0
+    },
+    "regions": 62,
+    "selectedAssets": 153,
+    "loadedRuntimeImages": [
+      "assets/world-r80/r80-038.webp",
+      "assets/world-r80/r80-113.webp"
+    ],
+    "collisionChanged": false,
+    "saveSchemaChanged": false,
+    "browser": false,
+    "GPU": false
+  },
+  "layoutCPU": {
+    "baselineMs": 37965.38577500001,
+    "optimizedMs": 39281.474713
+  },
+  "errors": [],
+  "completedAt": "2026-10-23T00:15:13.256Z"
+}

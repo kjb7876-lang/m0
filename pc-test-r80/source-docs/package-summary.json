@@ -1,0 +1,12 @@
+{
+  "new_primary_pngs": 170,
+  "new_primary_original_design_pngs": 164,
+  "orientation_or_swing_variant_pngs": 6,
+  "previous_original_pngs": 84,
+  "total_primary_pngs": 254,
+  "new_primary_base_rgba8_bytes_estimate": 1069510008,
+  "prior_base_rgba8_bytes_estimate": 528535976,
+  "new_primary_visual_reviews_complete": 170,
+  "runtime_validated": false,
+  "count_note": "Counts PNG art assets, not independent objects inside compound sprites or animation frames. Orientation variants are not new narrative subjects."
+}

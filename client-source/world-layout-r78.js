@@ -20,16 +20,23 @@ function worldLayoutStoryR78(base,id,theme,safe,meta={}){
  layout.backdropRects=[{x:layout.bounds[0],y:layout.bounds[1],width:layout.bounds[2]-layout.bounds[0],depth:layout.bounds[3]-layout.bounds[1]}];
  layout.fogRects=[];layout.sourceExits=generic.sourceExits||core.sourceExits||null;
  layout.type='r78-story-combat-maze';layout.voidCover={...generic.voidCover,theme:profile.style};layout.worldR75={...generic.worldR75};
- const cell=(x,y)=>x+':'+y,floor=new Set(layout.floorCells.map(([x,y])=>cell(x,y))),outer=layout.nodes.map(n=>({id:n.id,x:n.x,y:n.y}));
- const floorAnchor=n=>{const x=Math.floor(n.x),y=Math.floor(n.y),at=cell(x,y);if(floor.has(at))return at;
-  for(let r=1;r<=4;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){const k=cell(x+dx,y+dy);if(floor.has(k))return k;}
+ // R80: identical integer-cell distances using bounded typed arrays.
+ // Avoid 13 Maps of cell strings per generated map.
+ const [x0,y0,x1,y1]=layout.bounds.map(Math.floor),width=x1-x0,height=y1-y0,size=width*height,
+  floor=new Uint8Array(size),outer=layout.nodes.map(n=>({id:n.id,x:n.x,y:n.y})),index=(x,y)=>(y-y0)*width+x-x0;
+ for(const[x,y]of layout.floorCells)floor[index(x,y)]=1;
+ const floorAnchor=n=>{const x=Math.floor(n.x),y=Math.floor(n.y);if(floor[index(x,y)])return index(x,y);
+  for(let r=1;r<=4;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){const xx=x+dx,yy=y+dy;if(xx>=x0&&xx<x1&&yy>=y0&&yy<y1&&floor[index(xx,yy)])return index(xx,yy);}
   throw Error('R78 room anchor is not on floor: '+id+':'+n.id);
  };
- const distances=outer.map(n=>{const start=floorAnchor(n),d=new Map([[start,0]]),todo=[start];for(let i=0;i<todo.length;i++){
-   const[x,y]=todo[i].split(':').map(Number),next=d.get(todo[i])+1;for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const k=cell(x+dx,y+dy);if(floor.has(k)&&!d.has(k)){d.set(k,next);todo.push(k);}}
-  }return d;});
+ const anchors=outer.map(floorAnchor),queue=new Int32Array(size),distances=anchors.map(start=>{
+  const distance=new Int32Array(size);distance.fill(-1);distance[start]=0;queue[0]=start;let tail=1;
+  for(let head=0;head<tail;head++){const at=queue[head],next=distance[at]+1,col=at%width;
+   for(const n of [col+1<width?at+1:-1,col>0?at-1:-1,at+width<size?at+width:-1,at>=width?at-width:-1])if(n>=0&&floor[n]&&distance[n]<0){distance[n]=next;queue[tail++]=n;}
+  }return distance;
+ });
  const connected=new Set([11]),edges=[];while(connected.size<outer.length){let best=null;for(const a of connected)for(let b=0;b<outer.length;b++)if(!connected.has(b)){
-   const distance=distances[a].get(floorAnchor(outer[b]));if(distance!==undefined&&(!best||distance<best.distance||distance===best.distance&&(a<best.a||a===best.a&&b<best.b)))best={a,b,distance};
+   const distance=distances[a][anchors[b]];if(distance>=0&&(!best||distance<best.distance||distance===best.distance&&(a<best.a||a===best.a&&b<best.b)))best={a,b,distance};
   }if(!best)throw Error('R78 maze rooms disconnected: '+id);edges.push([best.a,best.b,3.4]);connected.add(best.b);
  }
  const bossId=outer.length,boss={id:bossId,x:15.5,y:15.5,radius:11,shape:'square',bossCoreR78:true},door={id:'door-0',x:34.5,y:34.5,width:.28,depth:3.4,axis:'x',reach:2.2,closed:true,edge:[bossId,5],r78BossDoor:true};

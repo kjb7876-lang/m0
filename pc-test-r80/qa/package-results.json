@@ -1,0 +1,1107 @@
+{
+  "method": "Node syntax, complete manifest SHA256 verification, actual loopback HTTP. No browser/GPU/audio playback or natural input.",
+  "checks": [
+    {
+      "name": "Manifest byte sizes and SHA256 match every listed game file",
+      "passed": true,
+      "details": {
+        "files": 2088,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "All executable HTML script tags parse",
+      "passed": true,
+      "details": {
+        "scripts": 116
+      }
+    },
+    {
+      "name": "R78 and R79 runtimes each load once",
+      "passed": true,
+      "details": [
+        {
+          "name": "hospital-improvements-a5.js",
+          "count": 1
+        },
+        {
+          "name": "world-visual-r78.js",
+          "count": 1
+        },
+        {
+          "name": "world-combat-r78.js",
+          "count": 1
+        },
+        {
+          "name": "ego-restore-health-r79.js",
+          "count": 1
+        },
+        {
+          "name": "world-assets-r80-data.js",
+          "count": 1
+        },
+        {
+          "name": "world-assets-r80.js",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "name": "Local HTTP delivers current page, runtime, and all selected assets exactly",
+      "passed": true,
+      "details": [
+        {
+          "path": "index.html",
+          "status": 200,
+          "bytes": 6555868,
+          "sha256Matches": true
+        },
+        {
+          "path": "dist/phase1.js",
+          "status": 200,
+          "bytes": 642549,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-improvements-a5.js",
+          "status": 200,
+          "bytes": 10427,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-visual-r78.js",
+          "status": 200,
+          "bytes": 6121,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-combat-r78.js",
+          "status": 200,
+          "bytes": 4879,
+          "sha256Matches": true
+        },
+        {
+          "path": "ego-restore-health-r79.js",
+          "status": 200,
+          "bytes": 1215,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-assets-r80-data.js",
+          "status": 200,
+          "bytes": 144309,
+          "sha256Matches": true
+        },
+        {
+          "path": "world-assets-r80.js",
+          "status": 200,
+          "bytes": 7779,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-layout.js",
+          "status": 200,
+          "bytes": 3860,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-progression.js",
+          "status": 200,
+          "bytes": 22786,
+          "sha256Matches": true
+        },
+        {
+          "path": "hospital-maze-visuals.js",
+          "status": 200,
+          "bytes": 9263,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/bed.png",
+          "status": 200,
+          "bytes": 168406,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/cabinet.png",
+          "status": 200,
+          "bytes": 206762,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/chair.png",
+          "status": 200,
+          "bytes": 185115,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/iv.png",
+          "status": 200,
+          "bytes": 57631,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/monitor.png",
+          "status": 200,
+          "bytes": 83161,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/provenance.json",
+          "status": 200,
+          "bytes": 5938,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/stool.png",
+          "status": 200,
+          "bytes": 124525,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/hospital-maze/stretcher.png",
+          "status": 200,
+          "bytes": 125868,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/catalog.json",
+          "status": 200,
+          "bytes": 210174,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-000.webp",
+          "status": 200,
+          "bytes": 160674,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-001.webp",
+          "status": 200,
+          "bytes": 245658,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-002.webp",
+          "status": 200,
+          "bytes": 212750,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-003.webp",
+          "status": 200,
+          "bytes": 213566,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-004.webp",
+          "status": 200,
+          "bytes": 205704,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-005.webp",
+          "status": 200,
+          "bytes": 205526,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-006.webp",
+          "status": 200,
+          "bytes": 214984,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-007.webp",
+          "status": 200,
+          "bytes": 165866,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-008.webp",
+          "status": 200,
+          "bytes": 225902,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-009.webp",
+          "status": 200,
+          "bytes": 122398,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-010.webp",
+          "status": 200,
+          "bytes": 204160,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-011.webp",
+          "status": 200,
+          "bytes": 188334,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-012.webp",
+          "status": 200,
+          "bytes": 187926,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-013.webp",
+          "status": 200,
+          "bytes": 170802,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-014.webp",
+          "status": 200,
+          "bytes": 205162,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-015.webp",
+          "status": 200,
+          "bytes": 268746,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-016.webp",
+          "status": 200,
+          "bytes": 178982,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-017.webp",
+          "status": 200,
+          "bytes": 172630,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-018.webp",
+          "status": 200,
+          "bytes": 113034,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-019.webp",
+          "status": 200,
+          "bytes": 117072,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-020.webp",
+          "status": 200,
+          "bytes": 254938,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-021.webp",
+          "status": 200,
+          "bytes": 132268,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-022.webp",
+          "status": 200,
+          "bytes": 246582,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-023.webp",
+          "status": 200,
+          "bytes": 157886,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-024.webp",
+          "status": 200,
+          "bytes": 166964,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-025.webp",
+          "status": 200,
+          "bytes": 216272,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-026.webp",
+          "status": 200,
+          "bytes": 123682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-027.webp",
+          "status": 200,
+          "bytes": 297808,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-028.webp",
+          "status": 200,
+          "bytes": 105172,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-029.webp",
+          "status": 200,
+          "bytes": 311640,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-030.webp",
+          "status": 200,
+          "bytes": 197666,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-031.webp",
+          "status": 200,
+          "bytes": 150384,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-032.webp",
+          "status": 200,
+          "bytes": 220124,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-033.webp",
+          "status": 200,
+          "bytes": 170056,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-034.webp",
+          "status": 200,
+          "bytes": 180506,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-035.webp",
+          "status": 200,
+          "bytes": 216542,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-036.webp",
+          "status": 200,
+          "bytes": 187500,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-037.webp",
+          "status": 200,
+          "bytes": 169598,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-038.webp",
+          "status": 200,
+          "bytes": 217552,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-039.webp",
+          "status": 200,
+          "bytes": 306468,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-040.webp",
+          "status": 200,
+          "bytes": 272816,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-041.webp",
+          "status": 200,
+          "bytes": 202702,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-042.webp",
+          "status": 200,
+          "bytes": 263236,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-043.webp",
+          "status": 200,
+          "bytes": 266818,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-044.webp",
+          "status": 200,
+          "bytes": 135532,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-045.webp",
+          "status": 200,
+          "bytes": 280530,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-046.webp",
+          "status": 200,
+          "bytes": 240256,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-047.webp",
+          "status": 200,
+          "bytes": 267324,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-048.webp",
+          "status": 200,
+          "bytes": 171222,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-049.webp",
+          "status": 200,
+          "bytes": 217450,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-050.webp",
+          "status": 200,
+          "bytes": 146540,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-051.webp",
+          "status": 200,
+          "bytes": 191708,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-052.webp",
+          "status": 200,
+          "bytes": 65608,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-053.webp",
+          "status": 200,
+          "bytes": 122330,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-054.webp",
+          "status": 200,
+          "bytes": 185176,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-055.webp",
+          "status": 200,
+          "bytes": 196636,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-056.webp",
+          "status": 200,
+          "bytes": 160640,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-057.webp",
+          "status": 200,
+          "bytes": 157394,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-058.webp",
+          "status": 200,
+          "bytes": 238686,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-059.webp",
+          "status": 200,
+          "bytes": 180886,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-060.webp",
+          "status": 200,
+          "bytes": 205442,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-061.webp",
+          "status": 200,
+          "bytes": 248102,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-062.webp",
+          "status": 200,
+          "bytes": 283806,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-063.webp",
+          "status": 200,
+          "bytes": 190396,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-064.webp",
+          "status": 200,
+          "bytes": 231392,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-065.webp",
+          "status": 200,
+          "bytes": 198646,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-066.webp",
+          "status": 200,
+          "bytes": 124968,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-067.webp",
+          "status": 200,
+          "bytes": 304740,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-068.webp",
+          "status": 200,
+          "bytes": 222390,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-069.webp",
+          "status": 200,
+          "bytes": 297076,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-070.webp",
+          "status": 200,
+          "bytes": 167828,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-071.webp",
+          "status": 200,
+          "bytes": 243232,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-072.webp",
+          "status": 200,
+          "bytes": 299904,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-073.webp",
+          "status": 200,
+          "bytes": 273264,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-074.webp",
+          "status": 200,
+          "bytes": 249460,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-075.webp",
+          "status": 200,
+          "bytes": 263518,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-076.webp",
+          "status": 200,
+          "bytes": 151198,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-077.webp",
+          "status": 200,
+          "bytes": 82646,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-078.webp",
+          "status": 200,
+          "bytes": 139284,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-079.webp",
+          "status": 200,
+          "bytes": 145974,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-080.webp",
+          "status": 200,
+          "bytes": 103704,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-081.webp",
+          "status": 200,
+          "bytes": 229992,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-082.webp",
+          "status": 200,
+          "bytes": 56672,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-083.webp",
+          "status": 200,
+          "bytes": 88480,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-084.webp",
+          "status": 200,
+          "bytes": 124924,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-085.webp",
+          "status": 200,
+          "bytes": 136182,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-086.webp",
+          "status": 200,
+          "bytes": 122206,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-087.webp",
+          "status": 200,
+          "bytes": 226588,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-088.webp",
+          "status": 200,
+          "bytes": 284504,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-089.webp",
+          "status": 200,
+          "bytes": 150262,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-090.webp",
+          "status": 200,
+          "bytes": 150546,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-091.webp",
+          "status": 200,
+          "bytes": 163908,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-092.webp",
+          "status": 200,
+          "bytes": 214268,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-093.webp",
+          "status": 200,
+          "bytes": 229706,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-094.webp",
+          "status": 200,
+          "bytes": 170034,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-095.webp",
+          "status": 200,
+          "bytes": 150138,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-096.webp",
+          "status": 200,
+          "bytes": 72496,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-097.webp",
+          "status": 200,
+          "bytes": 114146,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-098.webp",
+          "status": 200,
+          "bytes": 142826,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-099.webp",
+          "status": 200,
+          "bytes": 153374,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-100.webp",
+          "status": 200,
+          "bytes": 201214,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-101.webp",
+          "status": 200,
+          "bytes": 202462,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-102.webp",
+          "status": 200,
+          "bytes": 160310,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-103.webp",
+          "status": 200,
+          "bytes": 148912,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-104.webp",
+          "status": 200,
+          "bytes": 90784,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-105.webp",
+          "status": 200,
+          "bytes": 184710,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-106.webp",
+          "status": 200,
+          "bytes": 213306,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-107.webp",
+          "status": 200,
+          "bytes": 171384,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-108.webp",
+          "status": 200,
+          "bytes": 199454,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-109.webp",
+          "status": 200,
+          "bytes": 184372,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-110.webp",
+          "status": 200,
+          "bytes": 117848,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-111.webp",
+          "status": 200,
+          "bytes": 143604,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-112.webp",
+          "status": 200,
+          "bytes": 78828,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-113.webp",
+          "status": 200,
+          "bytes": 310296,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-114.webp",
+          "status": 200,
+          "bytes": 224264,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-115.webp",
+          "status": 200,
+          "bytes": 248496,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-116.webp",
+          "status": 200,
+          "bytes": 332972,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-117.webp",
+          "status": 200,
+          "bytes": 132918,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-118.webp",
+          "status": 200,
+          "bytes": 56854,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-119.webp",
+          "status": 200,
+          "bytes": 210928,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-120.webp",
+          "status": 200,
+          "bytes": 289312,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-121.webp",
+          "status": 200,
+          "bytes": 342430,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-122.webp",
+          "status": 200,
+          "bytes": 262458,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-123.webp",
+          "status": 200,
+          "bytes": 240336,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-124.webp",
+          "status": 200,
+          "bytes": 228200,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-125.webp",
+          "status": 200,
+          "bytes": 114682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-126.webp",
+          "status": 200,
+          "bytes": 133354,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-127.webp",
+          "status": 200,
+          "bytes": 99002,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-128.webp",
+          "status": 200,
+          "bytes": 184724,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-129.webp",
+          "status": 200,
+          "bytes": 150434,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-130.webp",
+          "status": 200,
+          "bytes": 99660,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-131.webp",
+          "status": 200,
+          "bytes": 216386,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-132.webp",
+          "status": 200,
+          "bytes": 77046,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-133.webp",
+          "status": 200,
+          "bytes": 69748,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-134.webp",
+          "status": 200,
+          "bytes": 135068,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-135.webp",
+          "status": 200,
+          "bytes": 143612,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-136.webp",
+          "status": 200,
+          "bytes": 158428,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-137.webp",
+          "status": 200,
+          "bytes": 172210,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-138.webp",
+          "status": 200,
+          "bytes": 65424,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-139.webp",
+          "status": 200,
+          "bytes": 189154,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-140.webp",
+          "status": 200,
+          "bytes": 62940,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-141.webp",
+          "status": 200,
+          "bytes": 67066,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-142.webp",
+          "status": 200,
+          "bytes": 185626,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-143.webp",
+          "status": 200,
+          "bytes": 99682,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-144.webp",
+          "status": 200,
+          "bytes": 183364,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-145.webp",
+          "status": 200,
+          "bytes": 123532,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-146.webp",
+          "status": 200,
+          "bytes": 146174,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-147.webp",
+          "status": 200,
+          "bytes": 160706,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-148.webp",
+          "status": 200,
+          "bytes": 254576,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-149.webp",
+          "status": 200,
+          "bytes": 210286,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-150.webp",
+          "status": 200,
+          "bytes": 177508,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-151.webp",
+          "status": 200,
+          "bytes": 160928,
+          "sha256Matches": true
+        },
+        {
+          "path": "assets/world-r80/r80-152.webp",
+          "status": 200,
+          "bytes": 190134,
+          "sha256Matches": true
+        }
+      ]
+    },
+    {
+      "name": "Preserved audio supports HTTP byte range delivery",
+      "passed": true,
+      "details": {
+        "path": "assets/rc26/audio/opening-memory.wav",
+        "status": 206,
+        "contentRange": "bytes 0-63/2623244"
+      }
+    }
+  ],
+  "passed": true,
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false
+}

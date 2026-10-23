@@ -1,0 +1,613 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "All 55 authored combat regions use R78; hospital and rest zones are excluded",
+      "passed": true,
+      "detail": {
+        "eligible": 55,
+        "generated": 55,
+        "ids": [
+          "dist00",
+          "dist01",
+          "dist02",
+          "dist03",
+          "dist04",
+          "dist05",
+          "dist06",
+          "ep1a09",
+          "ep1a10",
+          "ep1a11",
+          "ep1b01",
+          "ep1b02",
+          "ep1b03",
+          "ep1b04",
+          "ep1b05",
+          "ep1b06",
+          "ep1b06b",
+          "ep1b07",
+          "ep1b08",
+          "ep1b09",
+          "u201",
+          "u202",
+          "u204",
+          "u205",
+          "u206",
+          "u203",
+          "last304",
+          "last305",
+          "last301",
+          "last302",
+          "last303",
+          "kair01",
+          "kair04",
+          "kair05",
+          "kair06",
+          "kair07",
+          "kair08",
+          "kair09",
+          "kair10",
+          "kair02",
+          "kair03",
+          "hando01",
+          "hando02",
+          "hando03",
+          "murder01",
+          "murder02",
+          "murder04",
+          "murder03",
+          "cult01",
+          "cult02",
+          "cult05",
+          "cult06",
+          "cult03",
+          "cult04",
+          "ep1a09b"
+        ]
+      }
+    },
+    {
+      "name": "Every map room graph is connected and every node anchor lands on floor",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "All walkable tiles form one connected combat area",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Regional source exits remain on floor and all original exits are preserved",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Region-specific terrain atlas and story topology remain intact",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Boss chamber and one door metadata remain per combat map",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Hospital and six safe maps retain their existing layout paths",
+      "passed": true,
+      "detail": {
+        "ep1a08": {
+          "r78": false,
+          "type": "hospital-ward-b3"
+        },
+        "dreamRest": {
+          "r78": false,
+          "type": "interior-consultation"
+        },
+        "restEp1b": {
+          "r78": false,
+          "type": "interior-observation"
+        },
+        "restU2": {
+          "r78": false,
+          "type": "fusion-rift-outpost"
+        },
+        "restLast3": {
+          "r78": false,
+          "type": "post-portal-observation"
+        },
+        "restKairo": {
+          "r78": false,
+          "type": "rewritten-first-command-garden"
+        },
+        "restHando": {
+          "r78": false,
+          "type": "blocked-time-wormhole"
+        }
+      }
+    },
+    {
+      "name": "Co-op layouts bypass the solo R78 generator",
+      "passed": true,
+      "detail": {
+        "r78": false,
+        "type": "ruins"
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "dist00",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "dist01",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "dist02",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "dist03",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "dist04",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "dist05",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "dist06",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1a09",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "w"
+      ]
+    },
+    {
+      "id": "ep1a10",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "n",
+        "w"
+      ]
+    },
+    {
+      "id": "ep1a11",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1b01",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "s"
+      ]
+    },
+    {
+      "id": "ep1b02",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e"
+      ]
+    },
+    {
+      "id": "ep1b03",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "ep1b04",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "ep1b05",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "ep1b06",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "ep1b06b",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1b07",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1b08",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1b09",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "u201",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "u202",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "u204",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "u205",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "u206",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "u203",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "last304",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "last305",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "last301",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "last302",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "last303",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "kair01",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "s"
+      ]
+    },
+    {
+      "id": "kair04",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e"
+      ]
+    },
+    {
+      "id": "kair05",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "kair06",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "kair07",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "kair08",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "kair09",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "kair10",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "kair02",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "kair03",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "hando01",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "hando02",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "hando03",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "murder01",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e"
+      ]
+    },
+    {
+      "id": "murder02",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e"
+      ]
+    },
+    {
+      "id": "murder04",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "e"
+      ]
+    },
+    {
+      "id": "murder03",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "cult01",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "cult02",
+      "floor": 3684,
+      "exits": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "cult05",
+      "floor": 3684,
+      "exits": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "cult06",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "n"
+      ]
+    },
+    {
+      "id": "cult03",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "cult04",
+      "floor": 3684,
+      "exits": [
+        "w",
+        "e",
+        "n"
+      ]
+    },
+    {
+      "id": "ep1a09b",
+      "floor": 3684,
+      "exits": []
+    }
+  ]
+}

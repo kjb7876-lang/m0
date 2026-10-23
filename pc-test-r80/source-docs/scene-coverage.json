@@ -1,0 +1,1768 @@
+{
+  "schema_version": "1.0",
+  "source_commit": "f81d0d78af5bce04532b948a3cee36aa4fd4d5b8",
+  "regions": [
+    {
+      "scene_id": "01",
+      "region_id": "dist00",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "악마화 나무의 정원",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p01_root_wrapped_palace_arcade.png",
+        "new_assets/structure-facing-variants/p01_root_wrapped_palace_arcade-opposite.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/01-root-seal-severance.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/01-root-seal-severance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/0",
+        "bodySHA256": "d0a8fc67859c0affd64de2d81d99e37777e329ab3878a0edf2671f0036e803ba"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "02",
+      "region_id": "dist01",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "거미동굴",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p02_bone_web_cave_arch.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/01-violet-web-seal.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/01-violet-web-seal.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/1",
+        "bodySHA256": "87618ce6038f157f7128cd52da4052b1dc75873869feac48a4a223975dffff4e"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "03",
+      "region_id": "dist02",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "늪지대의 뿔악마",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p03_black_swamp_face_reed_knot.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/02-black-swamp-grasp-ripple.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/04-pollution-contact-spray.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/pollution_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/02-black-swamp-grasp-ripple.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/2",
+        "bodySHA256": "e9823735e899825c17475b28711a9984a4296be2b9f8d63c64662da38561a146"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "04",
+      "region_id": "dist03",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "무너진성",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p04_broken_seal_chain_anchor.png",
+        "new_assets/props-part01-batch01/p05_scorched_castle_merlon.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/03-black-ash-gust.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/03-black-ash-gust.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/3",
+        "bodySHA256": "e43d7699cec6335b9736ee62760877dad9e3632bf6c185491cff93308c39315d"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "05",
+      "region_id": "dist04",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "시체들이 되살아난 밤",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p06_leaning_grave_marker.png",
+        "new_assets/props-part01-batch01/p07_empty_broken_coffin.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/04-fallen-companion-memory-echo.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/04-pollution-contact-spray.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/04-fallen-companion-memory-echo.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/4",
+        "bodySHA256": "43add010a88e35c0ba6ea991be145dbd7f1d16ed52be65bb948604e91e57774b"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "06",
+      "region_id": "dist05",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "일곱 기둥",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p08_ember_chain_pillar.png",
+        "new_assets/props-part01-batch01/p09_extinguished_chain_pillar.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/02-pillar-tether-release.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/05-fire-contact-embers.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/02-pillar-tether-release.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/5",
+        "bodySHA256": "9a6afd9592c07da30028af39489e32994d67dcc8026c8f091a63c7e2ea030e6d"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "07",
+      "region_id": "dist06",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "추락",
+      "new_primary_props": [
+        "new_assets/props-part01-batch01/p10_summoning_ring_keystone.png",
+        "new_assets/props-part01-batch01/p11_collapsed_palace_column.png",
+        "new_assets/props-part01-batch01/p12_ritual_fire_brazier.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/05-black-collapse-vortex.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/05-black-collapse-vortex.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/6",
+        "bodySHA256": "ae138b5da7963881ff11c8867aee3791e22609774da0ba46afd3032259af8c0c"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "08",
+      "region_id": "ep1a08",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "피로 물든 병원",
+      "new_primary_props": [],
+      "bespoke_narrative_vfx": [
+        "new_assets/story-gap-batch01/08-reality-overlap-shimmer.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/11-disease-contact-spores.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [
+        "reuse hospital furniture and corridor kit"
+      ],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/story-gap-batch01/08-reality-overlap-shimmer.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/7",
+        "bodySHA256": "e40f730783ab7817f1c056017a32d3a7537fdf381d588e20085500101e529b3e"
+      },
+      "prior_reuse_candidate_files": [
+        "prior_assets/hospital_core/hospital-bed-isometric.png",
+        "prior_assets/hospital_core/patient-monitor-isometric.png",
+        "prior_assets/architecture/hospital-corridor-floor.png",
+        "prior_assets/architecture/hospital-wall-module.png"
+      ]
+    },
+    {
+      "scene_id": "09-1",
+      "region_id": "ep1a09",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "주사실",
+      "new_primary_props": [],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/03-memory-unlock-light.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [
+        "reuse medicine cabinet",
+        "unlabelled memory vial stand"
+      ],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/03-memory-unlock-light.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/8",
+        "bodySHA256": "f8aa6c6546a283ee1c9ee4e73aad14afa1006634d555d59143032ae97611af79"
+      },
+      "prior_reuse_candidate_files": [
+        "prior_assets/hospital_props/hospital_medicine_cabinet.png",
+        "prior_assets/hospital_props/hospital_instrument_tray.png"
+      ]
+    },
+    {
+      "scene_id": "09-2",
+      "region_id": "ep1a09b",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "결전의 날",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/01-past-seal-reliquary.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/06-guardian-memory-erasure-veil.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/06-guardian-memory-erasure-veil.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/9",
+        "bodySHA256": "29fb5a131ec7071399e19557f82c99d274c61abe8e93653a447822345c8d065d"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "10",
+      "region_id": "ep1a10",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "환자와 중독의 도시",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/02-closed-city-storefront.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/07-craving-afterimage-fragment.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/07-shock-contact-fork.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/07-craving-afterimage-fragment.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/10",
+        "bodySHA256": "c3128b73624709d94c05b3da22b500e012f2a8b53fa5c8c8cc8204dbb15bae05"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "11",
+      "region_id": "ep1a11",
+      "chapter": "제1부 — 마지막 수호자 EGO",
+      "title": "천사의 가면과 의목사 후보생",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/03-detached-angelic-mask.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/04-mask-fracture-revelation.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/04-mask-fracture-revelation.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/11",
+        "bodySHA256": "a2d46701ee9d015ff0322b641841029f6f8c0fd82ce143d8f56f9b95c0a1c0d3"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "12",
+      "region_id": "dreamRest",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "기억해 내지 못하는 사람 〔쉼터〕",
+      "new_primary_props": [],
+      "bespoke_narrative_vfx": [
+        "new_assets/story-gap-batch01/09-quiet-memory-ripple.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [
+        "reuse consultation table and water tray"
+      ],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/story-gap-batch01/09-quiet-memory-ripple.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/12",
+        "bodySHA256": "dbf00a3cf4de8e0b3d036daeeff5aec72fb15b9413f112aa386f136ef68f40b7"
+      },
+      "prior_reuse_candidate_files": [
+        "prior_assets/hospital_props/hospital_consultation_table.png",
+        "prior_assets/hospital_props/hospital_consultation_chair.png",
+        "prior_assets/hospital_small_props/hospital_water_tray.png"
+      ]
+    },
+    {
+      "scene_id": "13",
+      "region_id": "ep1b01",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "솔로몬의 봉인식",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b01-seal-pedestal.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-early-gap-batch01/08-seal-closure-component.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-early-gap-batch01/08-seal-closure-component.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/13",
+        "bodySHA256": "31bdcbebc898a6945eee49d82986dccf6ca858e18ee033859804376c18fba577"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "14",
+      "region_id": "ep1b02",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "나태의 집",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b02-refuse-heap.png",
+        "new_assets/props-part02-batch01/ep1b02-decayed-sofa.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/ep1b02-stagnation-debris-burst.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/ep1b02-stagnation-debris-burst.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/14",
+        "bodySHA256": "eea0a0ca4f9976c0ed13b81bdf46a7af2109bd63f532b0cef4c53751e1aadda7"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "15",
+      "region_id": "ep1b03",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "금이 간 안경",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b03-fractured-mirror.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/ep1b03-envy-glass-shard-fan.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/ep1b03-envy-glass-shard-fan.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/15",
+        "bodySHA256": "debeda777f96589a04799036bfb5744244420f23f3c850178b79f73d03da56c6"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "16",
+      "region_id": "ep1b04",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "탐식의 주방",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b04-warped-kitchen-stove.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/ep1b04-gastric-poison-plume.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/pollution_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/ep1b04-gastric-poison-plume.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/16",
+        "bodySHA256": "ada06257f4511b42dbc3cca58b916cecf616027fa584b722e9cb7e8b21b20988"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "17",
+      "region_id": "ep1b05",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "붉은 하이힐",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b05-control-crossbar-stand.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/05-control-thread-cut-v2.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/05-control-thread-cut-v2.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/17",
+        "bodySHA256": "b45b46e228857fee87d6b186ee669c169b81d0ed2b80ebba1e674b3035c85af7"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "18",
+      "region_id": "ep1b06",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "맘몬의 금고",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b06-vault-door.png"
+      ],
+      "bespoke_narrative_vfx": [],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/06-frost-contact-shards.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [
+        "new_assets/vfx-combat-components/mammon_banknote_blade_projectile.png",
+        "new_assets/vfx-combat-components/mammon_controlled_coin_projectile.png"
+      ],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-combat-components/mammon_banknote_blade_projectile.png",
+        "new_assets/vfx-combat-components/mammon_controlled_coin_projectile.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/18",
+        "bodySHA256": "9cefaa5234a43de71a894945c0f0e69bcf1a85d1a5290a50d52070a3155f3f99"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "19",
+      "region_id": "ep1b06b",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "눈보라 속의 소년",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b06b-snow-heavy-fir.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/ep1b06b-blizzard-memory-veil.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/ep1b06b-blizzard-memory-veil.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/19",
+        "bodySHA256": "82b93ae773d3150de79a48c74e36d6dcd8870f16b21c8b2683b30230691e73bf"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "20",
+      "region_id": "ep1b07",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "불을 지른 남자",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b07-scorched-stair-landing.png",
+        "new_assets/props-part02-batch01/ep1b07-burned-firedoor.png",
+        "new_assets/structure-facing-variants/ep1b07-scorched-stair-landing-opposite.png",
+        "new_assets/structure-facing-variants/ep1b07-burned-firedoor-opposite.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/ep1b07-rage-flame-seal-strip.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/07-shock-contact-fork.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/ep1b07-rage-flame-seal-strip.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/20",
+        "bodySHA256": "d937044052d5f37c18bff7a82b2e5107ba077a07525a42ebb1f280c89ea56a97"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "21",
+      "region_id": "ep1b08",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "하늘에 서려는 자",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b08-electrode-altar.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/06-seven-signal-convergence-v2.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/06-seven-signal-convergence-v2.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/21",
+        "bodySHA256": "e69133cd541d6ab7172fde476f6a864884a5f1dee14b4731fe3fa1768de385db"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "22",
+      "region_id": "ep1b09",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "생체 부트로더",
+      "new_primary_props": [
+        "new_assets/props-part02-batch01/ep1b09-black-sun-dish.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/07-biobootloader-overload.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/07-biobootloader-overload.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/22",
+        "bodySHA256": "e07d129844f77b5b80b43e12b4a7d847ff7972943c068785431b5415943f2987"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "23",
+      "region_id": "restEp1b",
+      "chapter": "제2부 — 일곱 개의 귀와 하이테크 축귀",
+      "title": "사라진 귀환자 〔쉼터〕",
+      "new_primary_props": [],
+      "bespoke_narrative_vfx": [
+        "new_assets/story-gap-batch01/10-missing-return-signal-flicker.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [
+        "reuse empty neural capsule and dual waveform monitor"
+      ],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/story-gap-batch01/10-missing-return-signal-flicker.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/23",
+        "bodySHA256": "832222e551307a5a21f03bb99988cf78fefc8de2ab6ba2c47ebfe247241fe949"
+      },
+      "prior_reuse_candidate_files": [
+        "prior_assets/neural_corruption/empty_neural_connection_capsule.png",
+        "prior_assets/neural_corruption/dual_waveform_neural_monitor.png"
+      ]
+    },
+    {
+      "scene_id": "24",
+      "region_id": "u201",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "방어의 군단",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/controller_drone_control_tower.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/u201-bombardment-loop-shockwave.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/10-bind-contact-tendrils.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/u201-bombardment-loop-shockwave.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/24",
+        "bodySHA256": "5db34939bfed5ee9f6cdfbd3e512bc61be99e889a2db4b080b742905b1e137f1"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "25",
+      "region_id": "u202",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "잔인한 구원",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/controller_rising_machine_wall.png",
+        "new_assets/structure-facing-variants/controller_rising_machine_wall-opposite.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/u202-boundary-reinforcement-grid.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/10-bind-contact-tendrils.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/u202-boundary-reinforcement-grid.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/25",
+        "bodySHA256": "2cb3c9acb69ee797f6a0fe7e670a2bd6da101b581244220d65973d95dbdd769a"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "26",
+      "region_id": "u204",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "시스템의 거부권",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/controller_external_command_relay.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/08-system-circuit-refusal.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/10-bind-contact-tendrils.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/08-system-circuit-refusal.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/26",
+        "bodySHA256": "c8b7d26abacafa04296ef6e11ba8f34930d8ac3c653cf836fea0b835b62c94af"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "27",
+      "region_id": "u205",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "관리자 권한",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/04-empty-authority-console.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-middle-gap-batch01/u205-absorbed-power-ribbon.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/08-charm-contact-ribbons.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-middle-gap-batch01/u205-absorbed-power-ribbon.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/27",
+        "bodySHA256": "8824ef74491c25c21169cd9449b69d7d0998a409427a8aebf6c1adb239345f14"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "28",
+      "region_id": "u206",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "중앙 코어 이주실",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/controller_migration_support_cradle.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/01-u206-choice-migration-disconnect.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/08-charm-contact-ribbons.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/01-u206-choice-migration-disconnect.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/28",
+        "bodySHA256": "9c78a4edbc3165fd5c5b875a2dfa211bfb37bb8a909d5af56c77e47c313ebb7d"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "29",
+      "region_id": "u203",
+      "chapter": "제3부 — 통제자의 열일곱 단계",
+      "title": "기억의 문",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/controller_preserved_memory_gate.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/09-choice-link-disconnect.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/10-bind-contact-tendrils.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/bind_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/09-choice-link-disconnect.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/29",
+        "bodySHA256": "cae67be1e4a8089cfdf003dac5a026faf8b9d2e5df11e70d35026b8fc1deb1b3"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "30",
+      "region_id": "restU2",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "환도 자아의 탄생 〔쉼터〕",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/05-three-water-cups-tray.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/11-dual-will-sword-resonance.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/11-dual-will-sword-resonance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/30",
+        "bodySHA256": "4b8bbe60a874a3d71bac9cfcb3e3d762edbb7d715c6436be19db251d61b027d8"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "31",
+      "region_id": "last304",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "중립 지역의 재각성",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/fusion_field_ruin_arch.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/02-last304-fusion-seam-shimmer.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/02-corruption-contact-thorns.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/02-last304-fusion-seam-shimmer.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/31",
+        "bodySHA256": "6d84810d8789d4d8d2e9b8af18e7453773d938520174b98c52021bf0d716c7e9"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "32",
+      "region_id": "last305",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "고블린 두목과 장미 인장",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/06-goblin-flute-rose-seal.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/10-rose-seal-spatial-resonance.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/02-corruption-contact-thorns.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/10-rose-seal-spatial-resonance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/32",
+        "bodySHA256": "70191057f3f593a350e59e54a799b510bb2acf8fdd0ede8dab7c7ef57ebd87c9"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "33",
+      "region_id": "last301",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "타락천사 기사",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/fusion_storm_rampart.png"
+      ],
+      "bespoke_narrative_vfx": [],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/03-harvest-drain-wisp.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [
+        "new_assets/vfx-combat-components/fallen_knight_single_sword_trail.png"
+      ],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-combat-components/fallen_knight_single_sword_trail.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/33",
+        "bodySHA256": "de87e563b08c107af7c092ef62297ac5cbe6e7e56a5c1c9b96c4dc99660f6c19"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "34",
+      "region_id": "last302",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "잠들지 못하는 마을",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/harbor_broken_giwa_cluster.png",
+        "new_assets/props-fortress-harbor-batch01/originals/harbor_jangseung_post.png",
+        "new_assets/props-fortress-harbor-batch01/originals/harbor_tiled_house.png",
+        "new_assets/props-fortress-harbor-batch01/originals/harbor_red_talisman_fixture.png",
+        "new_assets/structure-facing-variants/harbor_tiled_house-opposite.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/03-last302-wet-paper-insomnia-drift.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/03-harvest-drain-wisp.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/03-last302-wet-paper-insomnia-drift.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/34",
+        "bodySHA256": "7adb7e38dc0647ab1cb847ed8bd2576c58487730ae5041742cfe2ff1de2a7671"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "35",
+      "region_id": "last303",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "한약과 불면귀",
+      "new_primary_props": [
+        "new_assets/props-fortress-harbor-batch01/originals/harbor_herbal_cup.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part01-04/12-black-sand-time-intrusion.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/05-fire-contact-embers.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part01-04/12-black-sand-time-intrusion.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/35",
+        "bodySHA256": "a67597e105bbc9f97bc06d8b1b9c1020fd756957464c8e348b604221e8dbff68"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "36",
+      "region_id": "restLast3",
+      "chapter": "제4부 — 환도 자아와 융합몽세",
+      "title": "끼어든 시간 〔쉼터〕",
+      "new_primary_props": [
+        "new_assets/story-gap-batch01/07-displaced-doorway-frame.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/04-restLast3-stopped-time-intrusion.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/04-restLast3-stopped-time-intrusion.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/36",
+        "bodySHA256": "1ae88683a022cc37805e4561b6cf317e55ec8f24b2e4e557a45dbed8971132b0"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "37",
+      "region_id": "kair01",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "최초명령의 세계",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/01-academy-command-core.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/01-first-command-contamination-warning.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/01-first-command-contamination-warning.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/37",
+        "bodySHA256": "c919f36ab56e700b0b4df11b74b0e4d42c993db68448088e12ec871c3aa7fbc6"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "38",
+      "region_id": "kair04",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "예순여섯 수문장",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/02-layered-guardian-gate-isometric-v2.png",
+        "new_assets/structure-facing-variants/02-layered-guardian-gate-isometric-opposite-padded.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/02-harvested-possibility-stream.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/harvest_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/02-harvested-possibility-stream.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/38",
+        "bodySHA256": "0aac93de75d1e5da3987db3c706c341b1fb07ab96066b1d59b17817eb3d68b42"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "39",
+      "region_id": "kair05",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "빼앗긴 시간",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/03-clock-root-tree.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/01-time-harvest-severance.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/09-weakness-contact-fracture.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/harvest_ground_residue_topdown.png",
+        "new_assets/vfx-ground-batch01/weakness_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/01-time-harvest-severance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/39",
+        "bodySHA256": "6781bd3489983449cc9d897d7edbf02a9e1d361a0e0015902f9fa00d4d96f96d"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "40",
+      "region_id": "kair06",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "닫힌 층의 명령",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/04-overlapping-command-threshold.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/02-command-timing-gap.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/weakness_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/02-command-timing-gap.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/40",
+        "bodySHA256": "d39fd81eebd229e9d97dd059d6cf321b2a79dbd92c1832d787c0af7f56193762"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "41",
+      "region_id": "kair07",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "검은 공방",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/05-black-sand-furnace.png",
+        "new_assets/props-part05-batch01/06-possibility-reservoir.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/03-unspent-future-flame.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/07-shock-contact-fork.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/harvest_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/03-unspent-future-flame.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/41",
+        "bodySHA256": "608bf9c518c28e9b1a5f77f0a3d31c56a38a71055bd0c51db9863ef18ab57d25"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "42",
+      "region_id": "kair08",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "뉴런 게이트 · 노이론 게이트",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/07-neuron-noiron-gate.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/04-command-gap-slipstream.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/09-weakness-contact-fracture.png"
+      ],
+      "ground_texture_vfx": [
+        "new_assets/vfx-ground-batch01/weakness_ground_residue_topdown.png"
+      ],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/04-command-gap-slipstream.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/42",
+        "bodySHA256": "766877f656dbb1c9a0db0084f18c0bb83e942de1bbee952cd273ac769eb69e51"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "43",
+      "region_id": "kair09",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "망각의 묘지",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/08-clock-fragment-memorial.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/05-preserved-clock-shards-rising.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/05-preserved-clock-shards-rising.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/43",
+        "bodySHA256": "0bcda8ead29f090e47d2e4c1f7966ebcbb05fb40a6c6726a445f5ae306dd7946"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "44",
+      "region_id": "kair10",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "붕괴 의식장",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/09-six-command-ring-pedestal.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/06-six-command-ring-release.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/06-six-command-ring-release.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/44",
+        "bodySHA256": "100a20d3e8b7c3d4609ec2834cd09d646d40128a0563afe231616a0ea0a66003"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "45",
+      "region_id": "kair02",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "아르벨리아, 유예의 수문장",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/10-stopped-pendulum-clock.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/07-corrupted-command-thread-cut.png"
+      ],
+      "generic_status_vfx": [
+        "new_assets/vfx-batch01/07-shock-contact-fork.png"
+      ],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/07-corrupted-command-thread-cut.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/45",
+        "bodySHA256": "93d01cc9e333008db32e087122eb59031938d5654e5c64bcd705c0cd944bc04a"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "46",
+      "region_id": "kair03",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "세이렌 모르",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/11-production-line-time-press.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-time-gap-batch01/08-time-space-compression-aperture.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-time-gap-batch01/08-time-space-compression-aperture.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/46",
+        "bodySHA256": "0b2e48396ea47457f4baeece431bf57d790097e4d1b643b97428dbff0ecb1d68"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "47",
+      "region_id": "restKairo",
+      "chapter": "제5부 — 카이로노미콘",
+      "title": "최초명령 재작성 〔쉼터〕",
+      "new_primary_props": [
+        "new_assets/props-part05-batch01/12-asynchronous-clock-pair.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/03-black-to-gold-sand.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/03-black-to-gold-sand.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/47",
+        "bodySHA256": "ce1b03624a6cf3960f3e6a624f0020c8935b0c3013121460357e0a84f87f5f22"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "48",
+      "region_id": "hando01",
+      "chapter": "제6부 — 두 사람의 성",
+      "title": "성 안에 소환된 의목사",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/01-fused-castle-gate-v2.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/05-hando01-gate-defense-ward.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/05-hando01-gate-defense-ward.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/48",
+        "bodySHA256": "0d6c6fb96ce2aa57cf2395011bdfc96ea37d554d9b6244de93228499c69fe516"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "49",
+      "region_id": "hando02",
+      "chapter": "제6부 — 두 사람의 성",
+      "title": "두 주인의 각성",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/13-independent-bronze-seal.png",
+        "new_assets/props-part06-07-batch01/14-independent-silver-seal.png",
+        "new_assets/props-part06-07-batch01/02-independent-seal-pedestals.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/04-dual-owner-seal-opening.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/04-dual-owner-seal-opening.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/49",
+        "bodySHA256": "83e305d43c580aa73f550b8131643a8818fe2ead284cfa561c1278fce230c1e2"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "50",
+      "region_id": "hando03",
+      "chapter": "제6부 — 두 사람의 성",
+      "title": "함께 되찾은 코어",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/03-shared-core-cradle.png",
+        "new_assets/props-part06-07-batch01/04-severed-restraint-anchor.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/05-shared-core-consent-resonance.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/05-shared-core-consent-resonance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/50",
+        "bodySHA256": "d470396b8acd30537cbd22bd6a1d2e7631a229f6340f93abba01d946b6faf529"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "51",
+      "region_id": "restHando",
+      "chapter": "제6부 — 두 사람의 성",
+      "title": "잘못 이어진 기록 〔쉼터〕",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/05-redacted-enrollment-ledger.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/06-causal-record-mismatch.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/06-causal-record-mismatch.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/51",
+        "bodySHA256": "fc3b7f6c1d8c1f5d208ca16069e34e62a62ceb209a22f38400a02c4f5cea81b4"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "52",
+      "region_id": "murder01",
+      "chapter": "제7부 — 파란불 아래의 사람들",
+      "title": "윤하람",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/06-blue-green-traffic-signal.png",
+        "new_assets/props-part06-07-batch01/07-wet-crossing-curb.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/07-rain-signal-reflection.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/07-rain-signal-reflection.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/52",
+        "bodySHA256": "64b895212ab78e3f0477981337fcd5436830367c19c6f0755029c867ed82a005"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "53",
+      "region_id": "murder02",
+      "chapter": "제7부 — 파란불 아래의 사람들",
+      "title": "장민재와 새빛호텔",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/08-hotel-access-console.png",
+        "new_assets/props-part06-07-batch01/09-wet-hotel-stair-module.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/08-access-memory-interruption.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/08-access-memory-interruption.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/53",
+        "bodySHA256": "ba837a010ea3642e9a2bdcb6c02ecbc629bf284decbad3b361ab466724523eec"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "54",
+      "region_id": "murder04",
+      "chapter": "제7부 — 파란불 아래의 사람들",
+      "title": "고서진과 청록빌라",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/10-hotel-memory-alarm-box.png",
+        "new_assets/props-part06-07-batch01/11-jammed-hotel-fire-door.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/06-murder04-hotel-alarm-testimony-pulse.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/06-murder04-hotel-alarm-testimony-pulse.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/54",
+        "bodySHA256": "5871ca25eaf0fd57ab3407e7a2963eec97bb6412928f73e3718a760beab6b473"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "55",
+      "region_id": "murder03",
+      "chapter": "제7부 — 파란불 아래의 사람들",
+      "title": "옥상의 순환",
+      "new_primary_props": [
+        "new_assets/props-part06-07-batch01/12-rooftop-vent.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/09-causal-loop-break.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/09-causal-loop-break.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/55",
+        "bodySHA256": "01b521b400f020e4b2858051a07088d2dd61f392dcb0c00d40a88081fccd08ce"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "56",
+      "region_id": "cult01",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "하나로 묶인 악몽",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult01-black-rose-chip-altar.png",
+        "new_assets/props-part08-batch01/cult01-electronic-chip-reliquary.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/07-cult01-outer-circuit-severance.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/07-cult01-outer-circuit-severance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/56",
+        "bodySHA256": "add6c513ccf2fb006cec93e8e1c036a11e80f08d99e7cf4593e9f1930d4388b0"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "57",
+      "region_id": "cult02",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "교주가 기다리는 전쟁",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult02-collective-ego-connector.png",
+        "new_assets/props-part08-batch01/cult02-individual-memory-vessels.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/10-preserved-memory-lights.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/10-preserved-memory-lights.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/57",
+        "bodySHA256": "2f1755a8e7ec43a40e1b958faaca229d870dcb743fb6920e3100c7da707bcdd6"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "58",
+      "region_id": "cult05",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "돌아오는 현실의 기억",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult05-fractured-castle-memory-frame.png",
+        "new_assets/props-part08-batch01/cult05-layered-reality-record-slab.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/08-cult05-reality-memory-return.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/08-cult05-reality-memory-return.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/58",
+        "bodySHA256": "a934008ee8804dc46d2f123d26feca7688dfc075130314aef4ff562afdfc108f"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "59",
+      "region_id": "cult06",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "처음 세웠던 목표",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult06-dual-objective-waymarker.png",
+        "new_assets/props-part08-batch01/cult06-separated-self-memory-holders.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/11-selfhood-purification.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/11-selfhood-purification.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/59",
+        "bodySHA256": "9643752af7acf3997ac3df897d9d2d2778224f541c7b4ef4ba8a9908544e2a97"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "60",
+      "region_id": "cult03",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "사몽의 문턱",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult03-order-barrier-projector.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-world-gap-batch01/09-cult03-gold-inverted-cross-projectile.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-world-gap-batch01/09-cult03-gold-inverted-cross-projectile.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/60",
+        "bodySHA256": "19c9cf6caa3af10cb931dbe9ed153202185df5d40b2f945425cf346f660537d5"
+      },
+      "prior_reuse_candidate_files": []
+    },
+    {
+      "scene_id": "61",
+      "region_id": "cult04",
+      "chapter": "제8부 — 사이비 합일몽세",
+      "title": "교주의 사몽",
+      "new_primary_props": [
+        "new_assets/props-part08-batch01/cult04-disconnected-puppet-line-anchor.png",
+        "new_assets/props-part08-batch01/cult04-preservable-core-pedestal.png"
+      ],
+      "bespoke_narrative_vfx": [
+        "new_assets/vfx-narrative-part05-08/12-command-authority-severance.png"
+      ],
+      "generic_status_vfx": [],
+      "ground_texture_vfx": [],
+      "combat_component_vfx": [],
+      "prior_reuse_proposal": [],
+      "prior_reuse_status": "candidate recommendation only; no actual import/reuse verified",
+      "source_specific_vfx_union": [
+        "new_assets/vfx-narrative-part05-08/12-command-authority-severance.png"
+      ],
+      "source_scene_reference": {
+        "path": "story-source/catalog-r75.json",
+        "jsonPointer": "/records/61",
+        "bodySHA256": "f1080ae06aec22e576d6107fcdc8a731267675f191edd3107dcd3fdc299dc6fe"
+      },
+      "prior_reuse_candidate_files": []
+    }
+  ],
+  "summary": {
+    "primary_asset_counts_by_role": {
+      "new_primary_props": 86,
+      "bespoke_narrative_vfx": 60,
+      "generic_status_vfx": 12,
+      "combat_component_vfx": 8,
+      "ground_texture_vfx": 4
+    },
+    "regions_with_source_specific_vfx_union": 62,
+    "source_specific_vfx_gaps": [],
+    "canonical_regions": 62,
+    "regions_with_new_primary_props": 58,
+    "regions_with_bespoke_narrative_vfx": 60,
+    "prop_gaps": [
+      "ep1a08",
+      "ep1a09",
+      "dreamRest",
+      "restEp1b"
+    ],
+    "prop_gaps_with_prior_reuse_proposal": [
+      "ep1a08",
+      "ep1a09",
+      "dreamRest",
+      "restEp1b"
+    ],
+    "prop_gaps_without_prior_reuse_proposal": [],
+    "bespoke_vfx_gaps": [
+      "ep1b06",
+      "last301"
+    ]
+  },
+  "unknown_regions": [],
+  "note": "Uses completed metadata only. Generic combat statuses do not count as bespoke scene coverage. Source-specific narrative/combat union counts only explicitly mapped scene-specific components, not unmapped general boss/projectile components. New primary prop mapping does not prove sufficient scene kit or actual game import. Prior84 reuse suggestions are not finished reuse or one-to-one verified scene coverage."
+}

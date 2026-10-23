@@ -1,0 +1,3694 @@
+{
+  "method": "CPU VM with native gameplay/serialization/validation. Synthetic player positioning, forced HP-zero deaths, invulnerability; DOM/Image/audio/timers and renderer-readiness spy. NOT browser/GPU/natural play.",
+  "checks": [
+    {
+      "name": "native boot",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "native hospital entry",
+      "passed": true
+    },
+    {
+      "name": "24 route enemies + 4 field champions + 2 boss-room majors",
+      "passed": true,
+      "detail": 30
+    },
+    {
+      "name": "one champion per ordinary kind with 2x size and 6x HP",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "native": "a08-o1",
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageSame": true,
+          "wallSafe": true
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "native": "a08-s1",
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageSame": true,
+          "wallSafe": true
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "native": "a08-c1",
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageSame": true,
+          "wallSafe": true
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "native": "a08-o2",
+          "hpRatio": 6,
+          "sizeRatio": 2,
+          "damageSame": true,
+          "wallSafe": true
+        }
+      ]
+    },
+    {
+      "name": "original majors stay hidden inside boss room",
+      "passed": true
+    },
+    {
+      "name": "both authored paths walkable with player radius",
+      "passed": true,
+      "detail": {
+        "1": {
+          "waypoints": 29,
+          "blocked": [],
+          "count": 0
+        },
+        "2": {
+          "waypoints": 23,
+          "blocked": [],
+          "count": 0
+        }
+      }
+    },
+    {
+      "name": "closed door and maze baffle stop projectile sweep",
+      "passed": true,
+      "detail": {
+        "door": true,
+        "baffle": true
+      }
+    },
+    {
+      "name": "champions keep 2x size and 6x HP after restore",
+      "passed": true
+    },
+    {
+      "name": "route restore phase",
+      "passed": true
+    },
+    {
+      "name": "route restore HP",
+      "passed": true
+    },
+    {
+      "name": "restore preserves route placements",
+      "passed": true
+    },
+    {
+      "name": "route1 selected",
+      "passed": true
+    },
+    {
+      "name": "route1 opposite survivors rally",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "rally restore phase",
+      "passed": true
+    },
+    {
+      "name": "rally restore HP",
+      "passed": true
+    },
+    {
+      "name": "rally wipe opens story opportunity",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "door",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "boss door interaction shows canonical story",
+      "passed": true,
+      "detail": {
+        "phase": {
+          "version": 2,
+          "phase": "doorStory",
+          "route": 1,
+          "rallied": [
+            "ep1a08:a08-s1",
+            "ep1a08:a08-o2",
+            "ep1a08:a08-s1-w1-r2",
+            "ep1a08:a08-s1-w2-2",
+            "ep1a08:a08-o2-w2-4",
+            "ep1a08:a08-s1-w2-r2",
+            "ep1a08:maze-patrol-r1:1",
+            "ep1a08:maze-patrol-r1:3",
+            "ep1a08:maze-patrol-r1:5",
+            "ep1a08:maze-patrol-r1:7",
+            "ep1a08:maze-patrol-r1:9",
+            "ep1a08:maze-patrol-r1:11",
+            "ep1a08:maze-elite-r2:a08-s1",
+            "ep1a08:maze-elite-r2:a08-o2"
+          ],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "scenePart": "pre"
+      }
+    },
+    {
+      "name": "boss door opens after story",
+      "passed": true
+    },
+    {
+      "name": "open boss door permits projectile sweep",
+      "passed": true
+    },
+    {
+      "name": "final boss starts in boss room",
+      "passed": true,
+      "detail": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 22.17192903040956,
+          "y": 12.449465882042707,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 23.14065185607162,
+          "y": 13.834321691480074,
+          "boss": true,
+          "midboss": true
+        }
+      ]
+    },
+    {
+      "name": "boss restore phase",
+      "passed": true
+    },
+    {
+      "name": "boss restore HP",
+      "passed": true
+    },
+    {
+      "name": "boss death unlocks exit",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "exit",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "exit story",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "exitStory",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      }
+    },
+    {
+      "name": "native next map + difficulty confirmation",
+      "passed": true,
+      "detail": "ep1a09"
+    },
+    {
+      "name": "native previous portal returns to completed hospital",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "done",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": true
+      }
+    },
+    {
+      "name": "done restore phase",
+      "passed": true
+    },
+    {
+      "name": "done restore HP",
+      "passed": true
+    },
+    {
+      "name": "route2 symmetry and 14 opposite survivors",
+      "passed": true,
+      "detail": {
+        "version": 2,
+        "phase": "rally",
+        "route": 2,
+        "rallied": [
+          "ep1a08:a08-o1",
+          "ep1a08:a08-c1",
+          "ep1a08:a08-o1-w1-r1",
+          "ep1a08:a08-o1-w2-1",
+          "ep1a08:a08-c1-w2-3",
+          "ep1a08:a08-o1-w2-r1",
+          "ep1a08:maze-patrol-r1:0",
+          "ep1a08:maze-patrol-r1:2",
+          "ep1a08:maze-patrol-r1:4",
+          "ep1a08:maze-patrol-r1:6",
+          "ep1a08:maze-patrol-r1:8",
+          "ep1a08:maze-patrol-r1:10",
+          "ep1a08:maze-elite-r2:a08-o1",
+          "ep1a08:maze-elite-r2:a08-c1"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "name": "start",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "route",
+        "route": null,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 43,
+        "y": 109,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-o1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.5,
+          "y": 102.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 70.5,
+          "y": 102.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 20.5,
+          "y": 96.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 65.5,
+          "y": 96.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w1-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.5,
+          "y": 89.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 68.5,
+          "y": 88.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.5,
+          "y": 85.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.5,
+          "y": 83.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1-w2-3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.5,
+          "y": 78.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.5,
+          "y": 73.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.5,
+          "y": 71.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.5,
+          "y": 70.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:0",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 24.5,
+          "y": 64.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.5,
+          "y": 64.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 25.5,
+          "y": 59.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 76.5,
+          "y": 59.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.5,
+          "y": 59.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.5,
+          "y": 63.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:6",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 16.5,
+          "y": 55.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 54,
+          "y": 36,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:8",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.5,
+          "y": 50.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 45,
+          "y": 37,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:10",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.5,
+          "y": 43.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 75,
+          "y": 36,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 17,
+          "y": 93,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 70,
+          "y": 93,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 20,
+          "y": 63.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 60,
+          "y": 63.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "route-before",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "route",
+        "route": null,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 43,
+        "y": 109,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-o1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.499655782676847,
+          "y": 102.49961023797717,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 70.50048370506401,
+          "y": 102.49980913509738,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 20.50043958991096,
+          "y": 96.49972222183278,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 65.50030490675864,
+          "y": 96.49957877337627,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w1-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49948275319345,
+          "y": 89.50005343913467,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 68.49971030040733,
+          "y": 88.50043182652304,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499724394806975,
+          "y": 85.49955904447211,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49958456373865,
+          "y": 83.49968724975979,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1-w2-3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499772111818867,
+          "y": 78.499532595489,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49962993395053,
+          "y": 73.49963469037922,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.49971056707733,
+          "y": 71.49956799469531,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.4994896260322,
+          "y": 70.50009959122953,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:0",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 24.499486884711505,
+          "y": 64.49991566317108,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.49948271818623,
+          "y": 64.49994690079902,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 25.500178577524768,
+          "y": 59.49951162507472,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 76.50034964503104,
+          "y": 59.49961509955538,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49982875404114,
+          "y": 59.49950900629172,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49980066526231,
+          "y": 63.50048027665189,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:6",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 16.49957413337477,
+          "y": 55.500298391718246,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 53.999493121003624,
+          "y": 35.99988392380505,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:8",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500274831489918,
+          "y": 50.50044143816345,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 45.000386603111096,
+          "y": 37.00034776146205,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:10",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500293429645527,
+          "y": 43.500429300644214,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 74.99950619149189,
+          "y": 35.99983704860443,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 16.99950621871468,
+          "y": 93.00016303386846,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 70.00048110185051,
+          "y": 93.0001973347649,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 20.00039429085996,
+          "y": 63.50033902023207,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 59.99981177251249,
+          "y": 63.500484737468064,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "route-after",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "route",
+        "route": null,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 43,
+        "y": 109,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-o1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.499655782676847,
+          "y": 102.49961023797717,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 70.50048370506401,
+          "y": 102.49980913509738,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 20.50043958991096,
+          "y": 96.49972222183278,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 65.50030490675864,
+          "y": 96.49957877337627,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w1-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49948275319345,
+          "y": 89.50005343913467,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 68.49971030040733,
+          "y": 88.50043182652304,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499724394806975,
+          "y": 85.49955904447211,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49958456373865,
+          "y": 83.49968724975979,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1-w2-3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499772111818867,
+          "y": 78.499532595489,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49962993395053,
+          "y": 73.49963469037922,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.49971056707733,
+          "y": 71.49956799469531,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.4994896260322,
+          "y": 70.50009959122953,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:0",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 24.499486884711505,
+          "y": 64.49991566317108,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.49948271818623,
+          "y": 64.49994690079902,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 25.500178577524768,
+          "y": 59.49951162507472,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 76.50034964503104,
+          "y": 59.49961509955538,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49982875404114,
+          "y": 59.49950900629172,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49980066526231,
+          "y": 63.50048027665189,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:6",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 16.49957413337477,
+          "y": 55.500298391718246,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 53.999493121003624,
+          "y": 35.99988392380505,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:8",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500274831489918,
+          "y": 50.50044143816345,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 45.000386603111096,
+          "y": 37.00034776146205,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:10",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500293429645527,
+          "y": 43.500429300644214,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 74.99950619149189,
+          "y": 35.99983704860443,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 16.99950621871468,
+          "y": 93.00016303386846,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 70.00048110185051,
+          "y": 93.0001973347649,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 20.00039429085996,
+          "y": 63.50033902023207,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 59.99981177251249,
+          "y": 63.500484737468064,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "route1-selected",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "route",
+        "route": 1,
+        "rallied": [],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 18.55295651125409,
+        "y": 102.55996338812805,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-o1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.446699271422755,
+          "y": 102.43964684984911,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 70.50048370506401,
+          "y": 102.49980913509738,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 20.50043958991096,
+          "y": 96.49972222183278,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 65.50030490675864,
+          "y": 96.49957877337627,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w1-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49948275319345,
+          "y": 89.50005343913467,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 68.49971030040733,
+          "y": 88.50043182652304,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499724394806975,
+          "y": 85.49955904447211,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49958456373865,
+          "y": 83.49968724975979,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1-w2-3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.499772111818867,
+          "y": 78.499532595489,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49962993395053,
+          "y": 73.49963469037922,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22.49971056707733,
+          "y": 71.49956799469531,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.4994896260322,
+          "y": 70.50009959122953,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:0",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 24.499486884711505,
+          "y": 64.49991566317108,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 73.49948271818623,
+          "y": 64.49994690079902,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 25.500178577524768,
+          "y": 59.49951162507472,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 76.50034964503104,
+          "y": 59.49961509955538,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18.49982875404114,
+          "y": 59.49950900629172,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 62.49980066526231,
+          "y": 63.50048027665189,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:6",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 16.49957413337477,
+          "y": 55.500298391718246,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 53.999493121003624,
+          "y": 35.99988392380505,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:8",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500274831489918,
+          "y": 50.50044143816345,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 45.000386603111096,
+          "y": 37.00034776146205,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:10",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 19.500293429645527,
+          "y": 43.500429300644214,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 74.99950619149189,
+          "y": 35.99983704860443,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 16.99950621871468,
+          "y": 93.00016303386846,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 70.00048110185051,
+          "y": 93.0001973347649,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 20.00039429085996,
+          "y": 63.50033902023207,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 59.99981177251249,
+          "y": 63.500484737468064,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "route1-rally",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 39,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 30,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 32,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 30,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 32,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "rally-before",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 39,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 30,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 32,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 30,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 32,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "rally-after",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "rally",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 39,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-s1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w1-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o2-w2-4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-s1-w2-r2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 30,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 32,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:5",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:7",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:9",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:11",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-s1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 30,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o2",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 32,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "rally-cleared",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "door",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 39,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-door-story",
+      "zone": "ep1a08",
+      "modal": true,
+      "loading": false,
+      "scene": "STORY:ep1a08:pre:r75",
+      "scenePart": "pre",
+      "phase": {
+        "version": 2,
+        "phase": "doorStory",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 21.5,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-door-open",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 21.5,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-started",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 15,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 22.17192903040956,
+          "y": 12.449465882042707,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 23.14065185607162,
+          "y": 13.834321691480074,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-before",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 15,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 22.17192903040956,
+          "y": 12.449465882042707,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 23.14065185607162,
+          "y": 13.834321691480074,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-after",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 15,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 22.17192903040956,
+          "y": 12.449465882042707,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "state": "active",
+          "x": 23.14065185607162,
+          "y": 13.834321691480074,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "boss-dead",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "exit",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 15,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "exit-story",
+      "zone": "ep1a08",
+      "modal": true,
+      "loading": false,
+      "scene": "STORY:ep1a08:post:r75",
+      "scenePart": "post",
+      "phase": {
+        "version": 2,
+        "phase": "exitStory",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 5,
+        "y": 7.1,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    },
+    {
+      "name": "after-exit-story",
+      "zone": "ep1a08",
+      "modal": true,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "done",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": true
+      },
+      "player": {
+        "x": 5,
+        "y": 7.1,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": true,
+      "progress": true,
+      "errors": []
+    },
+    {
+      "name": "next-map",
+      "zone": "ep1a09",
+      "modal": false,
+      "loading": false,
+      "phase": null,
+      "player": {
+        "x": 48.38627774242257,
+        "y": 51.83498247846995,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a09:a09-o1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 30,
+          "y": 55,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-v1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 29.292127971432848,
+          "y": 55.64847296872902,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-o1-w1-r1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 30.083922518391194,
+          "y": 54.04367525865589,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-v1-w1-r2",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 30.584108688283735,
+          "y": 55.76185106173809,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-o1-w2-1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "hidden",
+          "x": 46,
+          "y": 24.9,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-v1-w2-2",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "hidden",
+          "x": 30.85,
+          "y": 54.45,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-o1-w2-r1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "hidden",
+          "x": 41.65,
+          "y": 41.95,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:a09-v1-w2-r2",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "hidden",
+          "x": 42.5,
+          "y": 43.4,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:0",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 29.054672893944,
+          "y": 54.832797540222074,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:1",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 30.809996762181626,
+          "y": 54.48472798906278,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:2",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 29.62619674915171,
+          "y": 56.39063695106064,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:3",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 29.33626499310876,
+          "y": 53.72208926734803,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:4",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 31.352635429513157,
+          "y": 55.49394067946036,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r74-patrol:5",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 28.225277827518106,
+          "y": 55.732639891420845,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:10",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 42.5,
+          "y": 42.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:11",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 41.79212797143285,
+          "y": 43.14847296872902,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:12",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 42.5839225183912,
+          "y": 41.54367525865589,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:13",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 43.084108688283735,
+          "y": 43.26185106173809,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:14",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 41.554672893944,
+          "y": 42.332797540222074,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:15",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 43.309996762181626,
+          "y": 41.98472798906278,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:16",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 42.12619674915171,
+          "y": 43.89063695106064,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:17",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 41.836264993108756,
+          "y": 41.22208926734803,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:18",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 43.85263542951316,
+          "y": 42.99394067946036,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:19",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 40.725277827518106,
+          "y": 43.232639891420845,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:20",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 46,
+          "y": 24,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:21",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 45.29212797143285,
+          "y": 24.648472968729017,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:22",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 46.0839225183912,
+          "y": 23.043675258655888,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:23",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 46.584108688283735,
+          "y": 24.76185106173809,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:24",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 45.054672893944,
+          "y": 23.83279754022207,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:25",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 46.809996762181626,
+          "y": 23.484727989062787,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:26",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 45.62619674915171,
+          "y": 25.390636951060646,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:27",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 45.336264993108756,
+          "y": 22.722089267348036,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:28",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 47.35263542951316,
+          "y": 24.49394067946036,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a09:r75-pack:29",
+          "hp": 611.7099999999999,
+          "maxHp": 611.7099999999999,
+          "state": "active",
+          "x": 44.225277827518106,
+          "y": 24.732639891420845,
+          "boss": false,
+          "midboss": false
+        }
+      ],
+      "cleared": false,
+      "progress": true,
+      "errors": []
+    },
+    {
+      "name": "returned-hospital",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "done",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": true
+      },
+      "player": {
+        "x": 6.540357815675811,
+        "y": 7.344983232607571,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": true,
+      "progress": true,
+      "errors": []
+    },
+    {
+      "name": "done-before",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "done",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": true
+      },
+      "player": {
+        "x": 6.540357815675811,
+        "y": 7.344983232607571,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": true,
+      "progress": true,
+      "errors": []
+    },
+    {
+      "name": "done-after",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "done",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": true
+      },
+      "player": {
+        "x": 6.540357815675811,
+        "y": 7.344983232607571,
+        "hp": 777
+      },
+      "enemies": [],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": true
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": true
+        }
+      ],
+      "cleared": true,
+      "progress": true,
+      "errors": []
+    },
+    {
+      "name": "route2-rally",
+      "zone": "ep1a08",
+      "modal": false,
+      "loading": false,
+      "phase": {
+        "version": 2,
+        "phase": "rally",
+        "route": 2,
+        "rallied": [
+          "ep1a08:a08-o1",
+          "ep1a08:a08-c1",
+          "ep1a08:a08-o1-w1-r1",
+          "ep1a08:a08-o1-w2-1",
+          "ep1a08:a08-c1-w2-3",
+          "ep1a08:a08-o1-w2-r1",
+          "ep1a08:maze-patrol-r1:0",
+          "ep1a08:maze-patrol-r1:2",
+          "ep1a08:maze-patrol-r1:4",
+          "ep1a08:maze-patrol-r1:6",
+          "ep1a08:maze-patrol-r1:8",
+          "ep1a08:maze-patrol-r1:10",
+          "ep1a08:maze-elite-r2:a08-o1",
+          "ep1a08:maze-elite-r2:a08-c1"
+        ],
+        "doorStoryDone": false,
+        "exitStoryDone": false
+      },
+      "player": {
+        "x": 20,
+        "y": 39,
+        "hp": 777
+      },
+      "enemies": [
+        {
+          "id": "ep1a08:a08-o1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w1-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-c1-w2-3",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:a08-o1-w2-r1",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 30,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 16,
+          "y": 11,
+          "boss": false,
+          "midboss": true
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:0",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 32,
+          "y": 31.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:2",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 12,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:4",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 15,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:6",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 18,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:8",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 22,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-patrol-r1:10",
+          "hp": 593.4499999999999,
+          "maxHp": 593.4499999999999,
+          "state": "active",
+          "x": 26,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-o1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 30,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-elite-r2:a08-c1",
+          "hp": 3560.7,
+          "maxHp": 3560.7,
+          "state": "active",
+          "x": 32,
+          "y": 34.5,
+          "boss": false,
+          "midboss": false
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "hp": 14385.56,
+          "maxHp": 14385.56,
+          "state": "hidden",
+          "x": 24,
+          "y": 13,
+          "boss": true,
+          "midboss": true
+        }
+      ],
+      "doors": [
+        {
+          "id": "door-0",
+          "open": false
+        },
+        {
+          "id": "door-1",
+          "open": false
+        },
+        {
+          "id": "door-2",
+          "open": false
+        }
+      ],
+      "cleared": false,
+      "progress": false,
+      "errors": []
+    }
+  ],
+  "sources": {
+    "index.html": "7f642bd9057c03fb3b9a23050a75f4294927c7a632b1617bf3aab69d118c36f9",
+    "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
+    "hospital-maze-layout.js": "b230444aa9744705a7db2ed5f716dc74c91dcd5f7b34802e22841361762d312c",
+    "hospital-maze-progression.js": "e82f50b7ef7464690825d7c09366e9450cef04d4b973403a9fcc9192c7462318",
+    "hospital-maze-visuals.js": "1999652855366463e301d7112036b15288ef2425aa1808bb97557196e28790b9"
+  },
+  "passed": true,
+  "consoleErrors": []
+}

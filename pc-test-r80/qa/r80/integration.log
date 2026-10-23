@@ -1,0 +1,17 @@
+55 optimized maze layouts exactly match baseline floors, walls, entries, nodes, edges, exits and doors PASS 
+Native boot completes without VM errors PASS 
+Scene catalog covers 62 exact canonical region IDs PASS 
+No R80 textures are eagerly decoded at the hub PASS 
+All 61 non-hospital scenes receive bounded peripheral art PASS 
+Added props remain non-solid, wall-safe, unique and idempotent PASS 
+Presentation props cannot become native scenery-throw projectiles PASS 
+Eight existing hospital prop IDs keep physical data and gain clinical art PASS 
+Hospital entry decodes only its scene assets PASS 
+Clinical sprites emit bounded native draw commands and offscreen art is culled PASS 
+Wounded native actors keep exact HP and maze coordinates through save/restore PASS 
+Cross-scene R80 CPU image cache retains only current region assets PASS 
+World roof caps use actual Three r186 geometry with finite wall-top vertices PASS 
+Roof rebuild disposes prior geometry and retains one shared material PASS 
+Roof cap view never changes the authoritative layout or zone PASS 
+Co-op keeps the prior renderer path PASS 
+{"passed":16,"failed":0,"errors":[]}

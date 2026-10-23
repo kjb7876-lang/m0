@@ -1,0 +1,947 @@
+{
+  "version": 6,
+  "enemyHpScaleE159": 2,
+  "bossHpExtraOct11": 2,
+  "combatHealthR26": 1.65,
+  "combatRhythmR26": 1.18,
+  "scope": "hapil.storyworld.depth-full.20261008",
+  "source": "eb11167b6fc903f00d780eb99e684972a5be6db9",
+  "hero": "hwando",
+  "zone": "ep1a08",
+  "layer": "STORY",
+  "time": 1.2480000000000007,
+  "player": {
+    "hp": 777,
+    "resonance": 100,
+    "level": 1,
+    "xp": 392,
+    "points": 1,
+    "upgrades": {
+      "vital": 0,
+      "power": 0,
+      "ward": 0,
+      "resonance": 0,
+      "blink": 0,
+      "tempo": 0,
+      "special": 0,
+      "hwando:heroMechanic": 0,
+      "seoha:heroMechanic": 0,
+      "neon:heroMechanic": 0,
+      "michaela:heroMechanic": 0,
+      "lauren:heroMechanic": 0,
+      "hunter:heroMechanic": 0,
+      "slayer:heroMechanic": 0,
+      "gunner:heroMechanic": 0,
+      "hwando:heroEcho": 0,
+      "seoha:heroEcho": 0,
+      "neon:heroEcho": 0,
+      "michaela:heroEcho": 0,
+      "lauren:heroEcho": 0,
+      "hunter:heroEcho": 0,
+      "slayer:heroEcho": 0,
+      "gunner:heroEcho": 0,
+      "samongTime": 0,
+      "samongCooldown": 0,
+      "samongPower": 0,
+      "samongGuard": 0
+    },
+    "x": 20,
+    "y": 15,
+    "egoCount": 0,
+    "pending": false,
+    "samongCD": 0,
+    "revived": {},
+    "graze": 0,
+    "lifestealBase9": 0.17,
+    "lifestealSource9": "40315fe53661516865c69576364197375c48fe2d",
+    "lifestealWindow9": [],
+    "healingBlockRemaining9": 0,
+    "nativeSlowRemaining150": 0,
+    "nativeStatus150": null,
+    "combatCooldownRemaining26": {
+      "attack": 0,
+      "special": 0
+    },
+    "healthR71Applied": true
+  },
+  "progress": {
+    "STORY": {
+      "hub": true,
+      "dist00": true,
+      "dist01": true,
+      "dist02": true,
+      "dist03": true,
+      "dist04": true,
+      "dist05": true,
+      "dist06": true
+    },
+    "DREAM": {}
+  },
+  "visited": [
+    "STORY:ep1a08"
+  ],
+  "readScenes": [
+    "STORY:ep1a08:pre:r75"
+  ],
+  "ending": {
+    "STORY": false,
+    "DREAM": false
+  },
+  "lastHub": "hub",
+  "rooms": {
+    "STORY:hub": {
+      "kills": 0,
+      "engaged": false,
+      "cleared": true,
+      "finalStage": 0,
+      "enemies": [],
+      "minionKills": 0,
+      "defeatedActorIds": [],
+      "encounterStage": "fieldReady",
+      "activeEncounter": "",
+      "spawnNonce": 3,
+      "trialIndex": 0,
+      "cosmicIndex": 0,
+      "persona": {
+        "phase": "locked",
+        "clashUsed": false,
+        "completed": false
+      },
+      "sceneCheckpoint": null,
+      "rewardCommitted": true,
+      "fieldWaveIndex6": 0,
+      "fieldWaves6": [],
+      "fieldWaveCleared6": true
+    },
+    "STORY:ep1a08": {
+      "kills": 28,
+      "engaged": true,
+      "cleared": false,
+      "finalStage": 0,
+      "enemies": [
+        {
+          "id": "ep1a08:mb-ep1a08",
+          "nativeId": "mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "combatHealthR26": 1.65,
+          "bossHpExtraOct11": 2,
+          "x": 22.17192903040956,
+          "y": 12.449465882042707,
+          "spawnState": "active",
+          "awakeRemaining": 0,
+          "beat": 0,
+          "phase": 1,
+          "phaseAge": 0,
+          "phaseStage": "active",
+          "invulnerableRemaining9": 0,
+          "storyPatternCooldownRemaining5": 0,
+          "storyPatternBeat5": 0,
+          "midboss": true,
+          "trial": false,
+          "cosmic": false,
+          "persona": false,
+          "definition": {
+            "id": "mb-ep1a08",
+            "name": "백의 안정화 감독",
+            "path": "assets/generated-v31224/actors-normalized/c386e08b76cf_ep1a_stabilization_supervisor.webp",
+            "weapon": "caster",
+            "ai": "hybrid",
+            "scale": 1.1800000000000002
+          },
+          "awakeningShock8": false,
+          "combatPressureVersion": 1,
+          "nativeMeleeTurnPressure": 0,
+          "r61Scale": {
+            "version": 1,
+            "maxHp": 55885.56,
+            "hp": 55885.56,
+            "baseDamage": 9.72,
+            "damage": 10.660645161290322,
+            "preserveHealth": false,
+            "preserveDamage": false
+          }
+        },
+        {
+          "id": "ep1a08:maze-chief-r1",
+          "nativeId": "mb-ep1a08",
+          "hp": 55885.56,
+          "maxHp": 55885.56,
+          "combatHealthR26": 1.65,
+          "bossHpExtraOct11": 2,
+          "x": 23.14065185607162,
+          "y": 13.834321691480074,
+          "spawnState": "active",
+          "awakeRemaining": 0,
+          "beat": 0,
+          "phase": 1,
+          "phaseAge": 0,
+          "phaseStage": "active",
+          "invulnerableRemaining9": 0,
+          "storyPatternCooldownRemaining5": 0,
+          "storyPatternBeat5": 0,
+          "midboss": true,
+          "trial": false,
+          "cosmic": false,
+          "persona": false,
+          "definition": {
+            "id": "mb-ep1a08",
+            "name": "병원 심부의 집도의",
+            "path": "assets/generated-v31224/actors-normalized/c386e08b76cf_ep1a_stabilization_supervisor.webp",
+            "weapon": "caster",
+            "ai": "hybrid",
+            "scale": 1.1800000000000002
+          },
+          "awakeningShock8": false,
+          "combatPressureVersion": 1,
+          "nativeMeleeTurnPressure": 0,
+          "r61Scale": {
+            "version": 1,
+            "maxHp": 55885.56,
+            "hp": 55885.56,
+            "baseDamage": 9.72,
+            "damage": 10.660645161290322,
+            "preserveHealth": false,
+            "preserveDamage": false
+          }
+        }
+      ],
+      "minionKills": 28,
+      "defeatedActorIds": [
+        "ep1a08:a08-o1",
+        "ep1a08:a08-c1",
+        "ep1a08:a08-o1-w1-r1",
+        "ep1a08:a08-o1-w2-1",
+        "ep1a08:a08-c1-w2-3",
+        "ep1a08:a08-o1-w2-r1",
+        "ep1a08:maze-patrol-r1:0",
+        "ep1a08:maze-patrol-r1:2",
+        "ep1a08:maze-patrol-r1:4",
+        "ep1a08:maze-patrol-r1:6",
+        "ep1a08:maze-patrol-r1:8",
+        "ep1a08:maze-patrol-r1:10",
+        "ep1a08:maze-elite-r2:a08-o1",
+        "ep1a08:maze-elite-r2:a08-c1",
+        "ep1a08:a08-s1",
+        "ep1a08:a08-o2",
+        "ep1a08:a08-s1-w1-r2",
+        "ep1a08:a08-s1-w2-2",
+        "ep1a08:a08-o2-w2-4",
+        "ep1a08:a08-s1-w2-r2",
+        "ep1a08:maze-patrol-r1:1",
+        "ep1a08:maze-patrol-r1:3",
+        "ep1a08:maze-patrol-r1:5",
+        "ep1a08:maze-patrol-r1:7",
+        "ep1a08:maze-patrol-r1:9",
+        "ep1a08:maze-patrol-r1:11",
+        "ep1a08:maze-elite-r2:a08-s1",
+        "ep1a08:maze-elite-r2:a08-o2"
+      ],
+      "encounterStage": "active",
+      "activeEncounter": "boss",
+      "spawnNonce": 3,
+      "trialIndex": 0,
+      "cosmicIndex": 0,
+      "persona": {
+        "phase": "locked",
+        "clashUsed": false,
+        "completed": false
+      },
+      "sceneCheckpoint": null,
+      "rewardCommitted": false,
+      "fieldWaveIndex6": 2,
+      "fieldWaves6": [
+        1,
+        2
+      ],
+      "fieldWaveCleared6": true
+    }
+  },
+  "settings": {
+    "sound": true,
+    "music": true,
+    "narration": true,
+    "volume": 0.7,
+    "bgm": 0.25,
+    "voice": 0.8,
+    "lowFx": false,
+    "reducedMotion": false,
+    "flashlight58": false,
+    "autoSkill": true,
+    "voicePreroll": 500,
+    "enemyDirection51": true,
+    "flashlight58Explicit": false
+  },
+  "zoom": 1,
+  "auto": false,
+  "schemaVersion": 6,
+  "dataRevision": "SW5-RC145-20261006",
+  "guide": false,
+  "unlockedRegions": {
+    "STORY": [
+      "hub",
+      "dist00",
+      "dist01",
+      "dist02",
+      "dist03",
+      "dist04",
+      "dist05",
+      "dist06",
+      "ep1a08"
+    ],
+    "DREAM": [
+      "hub",
+      "dist00"
+    ]
+  },
+  "distributionCommit": "076c347b56b75ac9a6265bf91654605b497bcfbc",
+  "imageEquivalenceSha256": "6c34b0a2d08dd55496bb2be211f1d066bb70844737fc39bf89deb67ba7588d99",
+  "ego151": {
+    "version": 1,
+    "unlocked": false,
+    "pending": false,
+    "active": false,
+    "originMap": null,
+    "originLayer": null,
+    "cutinConsumed": false,
+    "index": 0,
+    "direction": -1,
+    "cycle": "0",
+    "visitSeq": "0",
+    "visitId": null,
+    "visitMap": null,
+    "visitLayer": "DREAM",
+    "cleared": false,
+    "clearCount": "0",
+    "lastClearVisit": "0",
+    "combo": 0,
+    "targetHits": {},
+    "redRemaining": 0,
+    "clockCastRemaining": 0,
+    "clockActiveRemaining": 0,
+    "clockCooldownRemaining": 0,
+    "routeRoom": null,
+    "sourceCommit": "7fc1e66d94e2f1f64688d8cccefecee3de30dbc6"
+  },
+  "exploration": {
+    "version": "storyworld-exploration-10-clear-connector-1p40",
+    "optionalAnnex": true,
+    "originalPortals": true,
+    "mazeFirst": true
+  },
+  "explorationHomes": {
+    "STORY:ep1a08": []
+  },
+  "skillFormsSix": {
+    "version": 2,
+    "selections": {}
+  },
+  "storyWER": {
+    "version": 1,
+    "remaining": {}
+  },
+  "hospitalMaze5": {
+    "version": 1,
+    "rooms": {
+      "STORY:ep1a08": {
+        "seed": 2532574899,
+        "startId": "lower-right",
+        "layoutVersion": 6
+      }
+    }
+  },
+  "enemyHpScaleR40": 2,
+  "enemyDensityScaleR40": 0.5,
+  "hospitalBossHpScaleR43": 6,
+  "hospitalMedicalR49Scale": 1,
+  "hospitalSpawnsR50": {
+    "version": 1,
+    "rooms": {
+      "STORY:ep1a08": {
+        "version": 1,
+        "id": "maze-routes-r1",
+        "startId": "lower-centre",
+        "relocated": false
+      }
+    }
+  },
+  "hospitalNavigationR52": {
+    "version": 1,
+    "layout": "hospital-expanded-corridors-r52-v1",
+    "clearance": 0.14
+  },
+  "hospitalHpScaleR52": 2,
+  "hospitalLayoutR53": {
+    "version": 1,
+    "rooms": {
+      "STORY:ep1a08": {
+        "version": 1,
+        "revision": "hospital-layout-and-foot-health-r53",
+        "placedIds": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2"
+        ],
+        "migration": true,
+        "deferredIds": []
+      }
+    }
+  },
+  "hospitalBossR53": {
+    "version": 1,
+    "rooms": {}
+  },
+  "hospitalPressureR54": {
+    "version": 1,
+    "damageMultiplier": 2,
+    "appliedAt": "native hurt admission; actor damage stats unchanged"
+  },
+  "storyCampaignR54": {
+    "revision": "canonical-campaign-r54-v1",
+    "source": "eb11167b6fc903f00d780eb99e684972a5be6db9",
+    "recordCount": 62,
+    "portalOrder": [
+      "hub",
+      "dist00",
+      "dist01",
+      "dist02",
+      "dist03",
+      "dist04",
+      "dist05",
+      "dist06",
+      "ep1a08",
+      "ep1a09",
+      "ep1a09b",
+      "ep1a10",
+      "ep1a11",
+      "dreamRest",
+      "ep1b01",
+      "ep1b02",
+      "ep1b03",
+      "ep1b04",
+      "ep1b05",
+      "ep1b06",
+      "ep1b06b",
+      "ep1b07",
+      "ep1b08",
+      "ep1b09",
+      "restEp1b",
+      "u201",
+      "u202",
+      "u204",
+      "u205",
+      "u206",
+      "u203",
+      "restU2",
+      "last304",
+      "last305",
+      "last301",
+      "last302",
+      "last303",
+      "restLast3",
+      "kair01",
+      "kair04",
+      "kair05",
+      "kair06",
+      "kair07",
+      "kair08",
+      "kair09",
+      "kair10",
+      "kair02",
+      "kair03",
+      "restKairo",
+      "hando01",
+      "hando02",
+      "hando03",
+      "restHando",
+      "murder01",
+      "murder02",
+      "murder04",
+      "murder03",
+      "cult01",
+      "cult02",
+      "cult05",
+      "cult06",
+      "cult03",
+      "cult04",
+      "village"
+    ],
+    "dreamUnlocked": false,
+    "exactSourceCards": true
+  },
+  "scaleMeleeR61": {
+    "version": 1,
+    "revision": "scale-contact-durability-r61-v1"
+  },
+  "summonsR61": {
+    "version": 1,
+    "serial": 0,
+    "rooms": {
+      "STORY:ep1a08": {
+        "version": 1,
+        "owners": {
+          "ep1a08:mb-ep1a08": {
+            "used": 0,
+            "waves": 0,
+            "nextIn": 7.51
+          },
+          "ep1a08:maze-chief-r1": {
+            "used": 0,
+            "waves": 0,
+            "nextIn": 7.26
+          }
+        },
+        "units": []
+      }
+    }
+  },
+  "progressionR62": {
+    "version": 1,
+    "progression": {
+      "version": 1,
+      "ranks": {
+        "endlessPower": 0,
+        "endlessVital": 0,
+        "endlessHaste": 0,
+        "endlessCooldown": 0,
+        "egoAura": 0,
+        "dreamAura": 0,
+        "endlessWard": 0,
+        "endlessResonance": 0,
+        "threadDanceR63": 0,
+        "threadCrossR64": 0,
+        "threadFlowerR64": 0,
+        "threadFractalR64": 0,
+        "threadClawR64": 0,
+        "threadTsubameR64": 0,
+        "threadIchidanR64": 0
+      },
+      "clears": {},
+      "pointDropClaimsR64": {},
+      "egoVisitHigh": "0",
+      "visuals": true,
+      "awarded": 0
+    },
+    "level": 1,
+    "points": 1,
+    "xp": 392,
+    "awakening": {
+      "samong": 0,
+      "samongCD": 0,
+      "ego": 0,
+      "egoCD": 0,
+      "egoCount": 0,
+      "pending": false
+    },
+    "hp": 777,
+    "policy": "one-map-level-and-point; separate-layer-first-clear; each-ego-visit; no-kill-levels"
+  },
+  "goldenR72": {
+    "version": 2,
+    "slotCapacityVersion": 1,
+    "learned": false,
+    "designs": [],
+    "archive": [],
+    "equipped": [],
+    "ranks": {
+      "cooldown": 0,
+      "damage": "0",
+      "size": 0,
+      "speed": 0,
+      "slots": 0,
+      "equip": 0
+    },
+    "autoUse": false,
+    "readyIn": 0,
+    "readyByDesign": {},
+    "legacyCredit": 0
+  },
+  "routeEntriesR72": {
+    "version": 1,
+    "entries": {
+      "STORY:ep1a08": {
+        "x": 5,
+        "y": 109
+      }
+    }
+  },
+  "mazeR73": {
+    "version": 1,
+    "runSeed": 0,
+    "entries": {
+      "STORY:dist00": 0,
+      "STORY:dist01": 0,
+      "STORY:dist02": 0,
+      "STORY:dist03": 0,
+      "STORY:dist04": 0,
+      "STORY:dist05": 0,
+      "STORY:dist06": 0,
+      "STORY:ep1a09": 0,
+      "STORY:ep1a10": 0,
+      "STORY:ep1a11": 0,
+      "STORY:ep1b01": 0,
+      "STORY:ep1b02": 0,
+      "STORY:ep1b03": 0,
+      "STORY:ep1b04": 0,
+      "STORY:ep1b05": 0,
+      "STORY:ep1b06": 0,
+      "STORY:ep1b06b": 0,
+      "STORY:ep1b07": 0,
+      "STORY:ep1b08": 0,
+      "STORY:ep1b09": 0,
+      "STORY:u201": 0,
+      "STORY:u202": 0,
+      "STORY:u203": 0,
+      "STORY:last301": 0,
+      "STORY:last303": 0,
+      "STORY:kair02": 0,
+      "STORY:kair03": 0,
+      "STORY:hando01": 0,
+      "STORY:hando02": 0,
+      "STORY:hando03": 0,
+      "STORY:murder01": 0,
+      "STORY:murder02": 0,
+      "STORY:murder03": 0,
+      "STORY:cult01": 0,
+      "STORY:cult02": 0,
+      "STORY:cult03": 0,
+      "STORY:cult04": 0,
+      "STORY:u204": 0,
+      "STORY:u205": 0,
+      "STORY:u206": 0,
+      "STORY:last305": 0,
+      "STORY:kair05": 0,
+      "STORY:kair06": 0,
+      "STORY:kair07": 0,
+      "STORY:kair08": 0,
+      "STORY:kair10": 0,
+      "STORY:murder04": 0,
+      "STORY:cult05": 0,
+      "STORY:cult06": 0,
+      "DREAM:dist00": 0,
+      "STORY:ep1a09b": 0,
+      "STORY:last304": 0,
+      "STORY:last302": 0,
+      "STORY:kair01": 0,
+      "STORY:kair04": 0,
+      "STORY:kair09": 0
+    }
+  },
+  "campaignDifficultyR63": {
+    "version": 1,
+    "maps": {
+      "STORY:ep1a08": "normal"
+    }
+  },
+  "campaignHpR63": {
+    "version": 1,
+    "rooms": {
+      "STORY:ep1a08": {
+        "ep1a08:mb-ep1a08": {
+          "base": 135936,
+          "factor": 0.25
+        },
+        "ep1a08:maze-chief-r1": {
+          "base": 135936,
+          "factor": 0.25
+        }
+      }
+    }
+  },
+  "campaignPointDropsR64": {
+    "version": 1,
+    "epochCounter": 7,
+    "rooms": {
+      "STORY:hub": {
+        "epoch": 1,
+        "spawnSeq": 0,
+        "revision": 3,
+        "drops": [],
+        "rolls": [],
+        "claims": []
+      },
+      "STORY:ep1a08": {
+        "epoch": 2,
+        "spawnSeq": 2,
+        "revision": 32,
+        "drops": [
+          {
+            "id": "r64:2:drop:1",
+            "source": "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A3",
+            "x": 12,
+            "y": 34.5,
+            "amount": 3,
+            "kind": "enemy",
+            "createdAt": 0.032
+          },
+          {
+            "id": "r64:2:drop:2",
+            "source": "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A9",
+            "x": 22,
+            "y": 34.5,
+            "amount": 1,
+            "kind": "enemy",
+            "createdAt": 0.032
+          }
+        ],
+        "rolls": [
+          "r64:2:kill:ep1a08%3Aa08-o1",
+          "r64:2:kill:ep1a08%3Aa08-c1",
+          "r64:2:kill:ep1a08%3Aa08-o1-w1-r1",
+          "r64:2:kill:ep1a08%3Aa08-o1-w2-1",
+          "r64:2:kill:ep1a08%3Aa08-c1-w2-3",
+          "r64:2:kill:ep1a08%3Aa08-o1-w2-r1",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A0",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A2",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A4",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A6",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A8",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A10",
+          "r64:2:kill:ep1a08%3Amaze-elite-r2%3Aa08-o1",
+          "r64:2:kill:ep1a08%3Amaze-elite-r2%3Aa08-c1",
+          "r64:2:kill:ep1a08%3Aa08-s1",
+          "r64:2:kill:ep1a08%3Aa08-o2",
+          "r64:2:kill:ep1a08%3Aa08-s1-w1-r2",
+          "r64:2:kill:ep1a08%3Aa08-s1-w2-2",
+          "r64:2:kill:ep1a08%3Aa08-o2-w2-4",
+          "r64:2:kill:ep1a08%3Aa08-s1-w2-r2",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A1",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A3",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A5",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A7",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A9",
+          "r64:2:kill:ep1a08%3Amaze-patrol-r1%3A11",
+          "r64:2:kill:ep1a08%3Amaze-elite-r2%3Aa08-s1",
+          "r64:2:kill:ep1a08%3Amaze-elite-r2%3Aa08-o2"
+        ],
+        "claims": []
+      }
+    }
+  },
+  "healthR71": {
+    "version": 1,
+    "maxHP": 777,
+    "hp": 777,
+    "bleed": null
+  },
+  "saveSlotR73": {
+    "version": 1,
+    "slot": 1,
+    "savedAt": "2026-10-22T22:56:04.048Z",
+    "transitionComplete": true
+  },
+  "worldR74": {
+    "version": 1,
+    "entries": {
+      "STORY:dist00": 1,
+      "STORY:dist01": 1,
+      "STORY:dist02": 1,
+      "STORY:dist03": 1,
+      "STORY:dist04": 1,
+      "STORY:dist05": 1,
+      "STORY:dist06": 1,
+      "STORY:ep1a09": 1,
+      "STORY:ep1a10": 1,
+      "STORY:ep1a11": 1,
+      "STORY:ep1b01": 1,
+      "STORY:ep1b02": 1,
+      "STORY:ep1b03": 1,
+      "STORY:ep1b04": 1,
+      "STORY:ep1b05": 1,
+      "STORY:ep1b06": 1,
+      "STORY:ep1b06b": 1,
+      "STORY:ep1b07": 1,
+      "STORY:ep1b08": 1,
+      "STORY:ep1b09": 1,
+      "STORY:u201": 1,
+      "STORY:u202": 1,
+      "STORY:u203": 1,
+      "STORY:last301": 1,
+      "STORY:last303": 1,
+      "STORY:kair02": 1,
+      "STORY:kair03": 1,
+      "STORY:hando01": 1,
+      "STORY:hando02": 1,
+      "STORY:hando03": 1,
+      "STORY:murder01": 1,
+      "STORY:murder02": 1,
+      "STORY:murder03": 1,
+      "STORY:cult01": 1,
+      "STORY:cult02": 1,
+      "STORY:cult03": 1,
+      "STORY:cult04": 1,
+      "STORY:u204": 1,
+      "STORY:u205": 1,
+      "STORY:u206": 1,
+      "STORY:last305": 1,
+      "STORY:kair05": 1,
+      "STORY:kair06": 1,
+      "STORY:kair07": 1,
+      "STORY:kair08": 1,
+      "STORY:kair10": 1,
+      "STORY:murder04": 1,
+      "STORY:cult05": 1,
+      "STORY:cult06": 1,
+      "DREAM:dist00": 1,
+      "STORY:ep1a08": 1,
+      "STORY:ep1a09b": 1,
+      "STORY:dreamRest": 1,
+      "STORY:restEp1b": 1,
+      "STORY:restU2": 1,
+      "STORY:last304": 1,
+      "STORY:last302": 1,
+      "STORY:restLast3": 1,
+      "STORY:kair01": 1,
+      "STORY:kair04": 1,
+      "STORY:kair09": 1,
+      "STORY:restKairo": 1,
+      "STORY:restHando": 1
+    },
+    "opened": {
+      "STORY:ep1a08": [
+        "door-0"
+      ]
+    }
+  },
+  "silverR74": {
+    "version": 2,
+    "slotCapacityVersion": 1,
+    "learned": false,
+    "designs": [],
+    "archive": [],
+    "equipped": [],
+    "ranks": {
+      "cooldown": 0,
+      "damage": "0",
+      "size": 0,
+      "speed": 0,
+      "slots": 0,
+      "equip": 0
+    },
+    "autoUse": false,
+    "readyIn": 0,
+    "readyByDesign": {},
+    "legacyCredit": 0
+  },
+  "narrativeR75": {
+    "version": 1,
+    "sourceSha256": "47a09cda7444df1bc2a09063da0748b367029f5c1fdeffb5660c477e6c60bd7a",
+    "legacyForward": {
+      "STORY": false,
+      "DREAM": false
+    },
+    "sceneId": "08"
+  },
+  "dancePolicyR75": {
+    "version": 1,
+    "gold": false,
+    "native": false,
+    "silver": false
+  },
+  "worldR75": {
+    "version": 1,
+    "entries": {
+      "STORY:dist00": 1,
+      "STORY:dist01": 1,
+      "STORY:dist02": 1,
+      "STORY:dist03": 1,
+      "STORY:dist04": 1,
+      "STORY:dist05": 1,
+      "STORY:dist06": 1,
+      "STORY:ep1a09": 1,
+      "STORY:ep1a10": 1,
+      "STORY:ep1a11": 1,
+      "STORY:ep1b01": 1,
+      "STORY:ep1b02": 1,
+      "STORY:ep1b03": 1,
+      "STORY:ep1b04": 1,
+      "STORY:ep1b05": 1,
+      "STORY:ep1b06": 1,
+      "STORY:ep1b06b": 1,
+      "STORY:ep1b07": 1,
+      "STORY:ep1b08": 1,
+      "STORY:ep1b09": 1,
+      "STORY:u201": 1,
+      "STORY:u202": 1,
+      "STORY:u203": 1,
+      "STORY:last301": 1,
+      "STORY:last303": 1,
+      "STORY:kair02": 1,
+      "STORY:kair03": 1,
+      "STORY:hando01": 1,
+      "STORY:hando02": 1,
+      "STORY:hando03": 1,
+      "STORY:murder01": 1,
+      "STORY:murder02": 1,
+      "STORY:murder03": 1,
+      "STORY:cult01": 1,
+      "STORY:cult02": 1,
+      "STORY:cult03": 1,
+      "STORY:cult04": 1,
+      "STORY:u204": 1,
+      "STORY:u205": 1,
+      "STORY:u206": 1,
+      "STORY:last305": 1,
+      "STORY:kair05": 1,
+      "STORY:kair06": 1,
+      "STORY:kair07": 1,
+      "STORY:kair08": 1,
+      "STORY:kair10": 1,
+      "STORY:murder04": 1,
+      "STORY:cult05": 1,
+      "STORY:cult06": 1,
+      "DREAM:dist00": 1,
+      "STORY:ep1a09b": 1,
+      "STORY:dreamRest": 1,
+      "STORY:restEp1b": 1,
+      "STORY:restU2": 1,
+      "STORY:last304": 1,
+      "STORY:last302": 1,
+      "STORY:restLast3": 1,
+      "STORY:kair01": 1,
+      "STORY:kair04": 1,
+      "STORY:kair09": 1,
+      "STORY:restKairo": 1,
+      "STORY:restHando": 1
+    }
+  },
+  "narrativeObjectivesR75": {
+    "version": 1,
+    "rooms": {}
+  },
+  "castleDefenseR75": {
+    "version": 1,
+    "rooms": {}
+  },
+  "hospitalMazeR1": {
+    "version": 2,
+    "rooms": {
+      "STORY:ep1a08": {
+        "version": 2,
+        "phase": "boss",
+        "route": 1,
+        "rallied": [
+          "ep1a08:a08-s1",
+          "ep1a08:a08-o2",
+          "ep1a08:a08-s1-w1-r2",
+          "ep1a08:a08-s1-w2-2",
+          "ep1a08:a08-o2-w2-4",
+          "ep1a08:a08-s1-w2-r2",
+          "ep1a08:maze-patrol-r1:1",
+          "ep1a08:maze-patrol-r1:3",
+          "ep1a08:maze-patrol-r1:5",
+          "ep1a08:maze-patrol-r1:7",
+          "ep1a08:maze-patrol-r1:9",
+          "ep1a08:maze-patrol-r1:11",
+          "ep1a08:maze-elite-r2:a08-s1",
+          "ep1a08:maze-elite-r2:a08-o2"
+        ],
+        "doorStoryDone": true,
+        "exitStoryDone": false
+      }
+    }
+  }
+}

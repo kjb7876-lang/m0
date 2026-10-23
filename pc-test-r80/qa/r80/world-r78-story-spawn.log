@@ -1,0 +1,475 @@
+{
+  "passed": 5,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Native story data boots without VM errors",
+      "passed": true
+    },
+    {
+      "name": "All 55 native combat maps receive R78; 54 keep all three R75 packs and the canonical last301 duel stays boss-only",
+      "passed": true
+    },
+    {
+      "name": "All story-spawned enemies, midbosses and bosses land on walkable floor",
+      "passed": true
+    },
+    {
+      "name": "Canonical boss and midboss identities remain in their assigned combat rooms",
+      "passed": true
+    },
+    {
+      "name": "R78 processed at least all 55 regions without placement failures",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "rooms": 172,
+    "ordinaryMoved": 5070,
+    "midbossMoved": 119,
+    "bossMoved": 93,
+    "unplaced": 0
+  },
+  "maps": [
+    {
+      "id": "dist00",
+      "enemies": 33,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "demon-tree-palace-garden"
+    },
+    {
+      "id": "dist01",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "bone-web-cavern"
+    },
+    {
+      "id": "dist02",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "face-reed-black-swamp"
+    },
+    {
+      "id": "dist03",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "summoning-city-approach"
+    },
+    {
+      "id": "dist04",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "fallen-guardian-crossing"
+    },
+    {
+      "id": "dist05",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "seven-pillar-pilgrimage"
+    },
+    {
+      "id": "dist06",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "balrog-gate-circle"
+    },
+    {
+      "id": "ep1a09",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 0,
+      "style": "clinic"
+    },
+    {
+      "id": "ep1a10",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "patient-addiction-city"
+    },
+    {
+      "id": "ep1a11",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "clinic-memory"
+    },
+    {
+      "id": "ep1b01",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "chapel"
+    },
+    {
+      "id": "ep1b02",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "house"
+    },
+    {
+      "id": "ep1b03",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "mirror-house"
+    },
+    {
+      "id": "ep1b04",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "kitchen"
+    },
+    {
+      "id": "ep1b05",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "stage"
+    },
+    {
+      "id": "ep1b06",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "vault"
+    },
+    {
+      "id": "ep1b06b",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "mammon-winter-memory"
+    },
+    {
+      "id": "ep1b07",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "burned-hotel"
+    },
+    {
+      "id": "ep1b08",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "cathedral"
+    },
+    {
+      "id": "ep1b09",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "snow-neural"
+    },
+    {
+      "id": "u201",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "controller-war-loop"
+    },
+    {
+      "id": "u202",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "cruel-salvation-prison"
+    },
+    {
+      "id": "u204",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "first-memory-threshold"
+    },
+    {
+      "id": "u205",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "memory-room"
+    },
+    {
+      "id": "u206",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "machine"
+    },
+    {
+      "id": "u203",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "controller-memory-gate"
+    },
+    {
+      "id": "last304",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 0,
+      "style": "fusion-neutral-meadow"
+    },
+    {
+      "id": "last305",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "goblin-flute-forest"
+    },
+    {
+      "id": "last301",
+      "enemies": 1,
+      "ordinary": 0,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "fallen-angel-black-sea"
+    },
+    {
+      "id": "last302",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "sleepless-port-village"
+    },
+    {
+      "id": "last303",
+      "enemies": 32,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "insomnia-black-fog-duel"
+    },
+    {
+      "id": "kair01",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "academy"
+    },
+    {
+      "id": "kair04",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "guardian-ruins"
+    },
+    {
+      "id": "kair05",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "guardian-time-forest"
+    },
+    {
+      "id": "kair06",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "guardian-polluted-waterway"
+    },
+    {
+      "id": "kair07",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "forge"
+    },
+    {
+      "id": "kair08",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "guardian-neuron-gate"
+    },
+    {
+      "id": "kair09",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "guardian-oblivion-cemetery"
+    },
+    {
+      "id": "kair10",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "guardian-collapsed-ritual"
+    },
+    {
+      "id": "kair02",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "clock-hall"
+    },
+    {
+      "id": "kair03",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "siren-command-time-core"
+    },
+    {
+      "id": "hando01",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "castle"
+    },
+    {
+      "id": "hando02",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "castle"
+    },
+    {
+      "id": "hando03",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "mirror-court"
+    },
+    {
+      "id": "murder01",
+      "enemies": 33,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "rain-crosswalk"
+    },
+    {
+      "id": "murder02",
+      "enemies": 34,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "burned-hotel"
+    },
+    {
+      "id": "murder04",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "villa"
+    },
+    {
+      "id": "murder03",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "rooftop-mobius-cycle"
+    },
+    {
+      "id": "cult01",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "neural"
+    },
+    {
+      "id": "cult02",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 0,
+      "style": "neural"
+    },
+    {
+      "id": "cult05",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "organic"
+    },
+    {
+      "id": "cult06",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 1,
+      "style": "judgment"
+    },
+    {
+      "id": "cult03",
+      "enemies": 37,
+      "ordinary": 30,
+      "bosses": 2,
+      "midbosses": 0,
+      "style": "harvest-vault"
+    },
+    {
+      "id": "cult04",
+      "enemies": 35,
+      "ordinary": 30,
+      "bosses": 1,
+      "midbosses": 1,
+      "style": "throne"
+    },
+    {
+      "id": "ep1a09b",
+      "enemies": 36,
+      "ordinary": 30,
+      "bosses": 0,
+      "midbosses": 0,
+      "style": "past-palace-rescue"
+    }
+  ]
+}
