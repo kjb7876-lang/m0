@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.hospital-r88-runtime-approval/v1",
-  "status": "pending-review",
+  "status": "approved",
   "manifestSHA256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
   "expectedRuntime": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
@@ -9,8 +9,8 @@
   "fileCount": 2348,
   "storagePrefix": "storyworld.hospital-three-pc.maze.v11:",
   "candidateSource": {
-    "pullRequest": null,
-    "headSha": null,
+    "pullRequest": 26,
+    "headSha": "7a426a747ce1c63bbe68e9dd67757e3d2afef072",
     "workflowRunId": null,
     "evidenceFile": "release/r88/qa/r88/final-suite.json",
     "evidenceSHA256": "dcb66903b29b47e20a865f8b2457677387e45d713067a3f16cbf07384b6be503"
@@ -43,6 +43,8 @@
     "observedFailedCIRun": 39938699916,
     "failedGateSummary": "2 of 35 refusal-test teardown errors while TemporaryDirectory removed disposable .git repositories",
     "minimalTestFixtureFixReviewedByImplementer": true,
-    "localRefusalSuitePassedAfterFix": 35
+    "localRefusalSuitePassedAfterFix": 35,
+    "localRefusalSuitePassedAfterFixtureFix": 35,
+    "gameRuntimeChangedByFixtureFix": false
   }
 }
