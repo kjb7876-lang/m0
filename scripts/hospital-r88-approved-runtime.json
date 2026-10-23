@@ -1,6 +1,6 @@
 {
   "schema": "storyworld.hospital-r88-runtime-approval/v1",
-  "status": "pending-review",
+  "status": "approved",
   "manifestSHA256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
   "expectedRuntime": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
@@ -9,8 +9,8 @@
   "fileCount": 2348,
   "storagePrefix": "storyworld.hospital-three-pc.maze.v11:",
   "candidateSource": {
-    "pullRequest": null,
-    "headSha": null,
+    "pullRequest": 26,
+    "headSha": "c42a24200e1ba6cb66c6c3420d0f6cb3a2415838",
     "workflowRunId": null,
     "evidenceFile": "release/r88/qa/r88/final-suite.json",
     "evidenceSHA256": "dcb66903b29b47e20a865f8b2457677387e45d713067a3f16cbf07384b6be503"
@@ -21,5 +21,19 @@
   "historicalApprovalsInherited": false,
   "browserVerifiedByCPUGate": false,
   "GPUVerifiedByCPUGate": false,
-  "naturalPlayVerified": false
+  "naturalPlayVerified": false,
+  "approvalBasis": {
+    "authorization": "Explicit deployment/update approval in the current user conversation",
+    "independentSourceReviewCompleted": true,
+    "frozenCPUEvidence": "641/641 across49 groups; complete unchanged runtime",
+    "groundResidueNativeImpactRegression": true,
+    "nativeHookChecksPassed": 30,
+    "gateRefusalsPassed": 35,
+    "workflowSourceChecksPassed": 72,
+    "completedCIRunClaimed": false,
+    "browserVerifiedAtSourceApproval": false,
+    "mergeRequiresPassingCurrentCI": true,
+    "publicUploadRequiresFreshCPUStaticAndBrowser": true,
+    "previousRuntimeApprovalReused": false
+  }
 }
