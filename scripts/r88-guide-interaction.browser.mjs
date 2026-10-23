@@ -224,7 +224,8 @@ async function naturalEarly() {
   await page.locator('#r71DifficultyNormal').click({timeout: 10000});
   await page.locator('#r71DifficultyConfirm').click({timeout: 10000});
   await page.waitForFunction(
-    destination => zone === destination && layer === 'STORY' && !loading,
+    destination => zone === destination && layer === 'STORY' && !loading && !modal &&
+      room?.difficultyR63 === 'normal',
     expected.destination,
     {timeout: 60000}
   );
