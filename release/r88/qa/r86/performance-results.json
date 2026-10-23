@@ -68,8 +68,8 @@
         "geometryReduction": 0.99,
         "typedArrayByteReduction": 0.99,
         "cpuElapsedMs": {
-          "legacy": 247.36648499999995,
-          "retained": 241.830696
+          "legacy": 247.04011100000008,
+          "retained": 209.42802399999994
         },
         "warning": "Elapsed times are this Node CPU sample, not GPU frame rate."
       }
@@ -184,8 +184,8 @@
     "geometryReduction": 0.99,
     "typedArrayByteReduction": 0.99,
     "cpuElapsedMs": {
-      "legacy": 247.36648499999995,
-      "retained": 241.830696
+      "legacy": 247.04011100000008,
+      "retained": 209.42802399999994
     },
     "warning": "Elapsed times are this Node CPU sample, not GPU frame rate."
   },

@@ -59,7 +59,7 @@ class RefusalTests(unittest.TestCase):
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(json.dumps({'checks': [{'name': str(i), 'passed': True} for i in range(count)]}))
             runs.append({'name': name, 'script': script, 'report': report, 'minimumChecks': minimum, 'checks': count, 'passedChecks': count, 'passed': True, 'exitCode': 0, 'signal': None, 'scriptSHA256': gate.sha(self.work / script)})
-        self.report = {'schema': 'r88-final-frozen-suite/v1', 'startedAt': self.iso(self.started + .2), 'completedAt': self.iso(self.started + .8), 'passed': True, 'sourceUnchangedDuringRun': True, 'changedFiles': [], 'groups': 49, 'passedChecks': 640, 'totalChecks': 640, 'sourceHashes': self.snapshot(), 'runs': runs, 'browserVerified': False, 'GPUVerified': False, 'naturalPlayVerified': False}
+        self.report = {'schema': 'r88-final-frozen-suite/v1', 'startedAt': self.iso(self.started + .2), 'completedAt': self.iso(self.started + .8), 'passed': True, 'sourceUnchangedDuringRun': True, 'changedFiles': [], 'groups': 49, 'passedChecks': 641, 'totalChecks': 641, 'sourceHashes': self.snapshot(), 'runs': runs, 'browserVerified': False, 'GPUVerified': False, 'naturalPlayVerified': False}
         evidence = self.root / gate.EVIDENCE_PATH
         evidence.parent.mkdir(parents=True, exist_ok=True)
         evidence.write_text(json.dumps(self.report))
@@ -115,7 +115,7 @@ class RefusalTests(unittest.TestCase):
 
     def test_positive_full_helpers(self):
         self.source_gate()
-        self.assertEqual(self.fresh()['passedChecks'], 640)
+        self.assertEqual(self.fresh()['passedChecks'], 641)
         before = gate.sha(self.site / 'web-manifest-r62.json')
         values = gate.emit_outputs(self.artifact(), self.approval['candidateSource'], self.fresh())
         self.assertEqual(len(json.loads(values['asset_hashes_json'])), 42)
@@ -265,7 +265,7 @@ class RefusalTests(unittest.TestCase):
         self.refuses(self.fresh, 'not freshly written')
 
     def test_incomplete_suite_refuses(self):
-        self.report['passedChecks'] = 639
+        self.report['passedChecks'] = 640
         self.write_report()
         self.refuses(self.fresh, 'Incomplete')
 

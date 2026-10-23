@@ -86,7 +86,7 @@
           "cancelled": false,
           "transitions": 0
         },
-        "elapsedMs": 1411.9187950000014,
+        "elapsedMs": 1127.2214629999999,
         "state": {
           "zone": "dist01",
           "room": "dist01",
@@ -156,7 +156,7 @@
           "cancelled": false,
           "transitions": 1
         },
-        "elapsedMs": 1305.1419830000013,
+        "elapsedMs": 1262.4365359999993,
         "state": {
           "zone": "dist02",
           "room": "dist02",
@@ -3352,7 +3352,7 @@
   "browserVerified": false,
   "GPUVerified": false,
   "naturalPlayVerified": false,
-  "generatedAt": "2026-10-23T07:37:57.850Z",
+  "generatedAt": "2026-10-23T08:24:15.145Z",
   "sourceHashes": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
     "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
@@ -3364,5 +3364,5 @@
   "errors": [],
   "passed": 22,
   "failed": 0,
-  "completedAt": "2026-10-23T07:38:16.616Z"
+  "completedAt": "2026-10-23T08:24:32.344Z"
 }

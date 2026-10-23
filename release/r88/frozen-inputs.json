@@ -3,8 +3,8 @@
   "baselineManifestSHA256": "02bf3763c9d0fd2694128123a869c0358c6afe8e59deaec358225c1cee21d116",
   "originalRuntimeCount": 1906,
   "currentRuntimeCount": 2348,
-  "currentManifestSHA256": "62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda",
-  "sourceCandidate": "R88/V12, 640/640 CPU checks; no browser/GPU/natural-play proof",
+  "currentManifestSHA256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
+  "sourceCandidate": "R88/V12, 641/641 actual CPU checks; browser/GPU/natural play are separate evidence",
   "items": [
     {
       "path": "hospital-refinement-v4/hospital-three-pc/LOCAL-SERVER.cjs",
@@ -26594,9 +26594,9 @@
     },
     {
       "path": "verification/hospital-three-pc/site/final42-hooks-r88.js",
-      "bytes": 16219,
-      "sha256": "3ee3467800d98c706aab11f23e89ecfd1e6735ec1bfc6ad9eb98f52fa5e643e3",
-      "payloadSHA256": "3ee3467800d98c706aab11f23e89ecfd1e6735ec1bfc6ad9eb98f52fa5e643e3"
+      "bytes": 16234,
+      "sha256": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463",
+      "payloadSHA256": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463"
     },
     {
       "path": "verification/hospital-three-pc/site/final42-preview.html",
@@ -26727,8 +26727,8 @@
     {
       "path": "verification/hospital-three-pc/site/web-manifest-r62.json",
       "bytes": 447661,
-      "sha256": "62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda",
-      "payloadSHA256": "62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda"
+      "sha256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
+      "payloadSHA256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f"
     },
     {
       "path": "verification/hospital-three-pc/site/world-assets-r80-data.js",
@@ -26828,9 +26828,9 @@
     },
     {
       "path": "verification/hospital-three-pc/source-patch/README-R88.md",
-      "bytes": 4054,
-      "sha256": "ae21d1118e407cd1e6373a023030b54dfe8e2e44a743a9a61fc350b6f215a2fe",
-      "payloadSHA256": "ae21d1118e407cd1e6373a023030b54dfe8e2e44a743a9a61fc350b6f215a2fe"
+      "bytes": 4208,
+      "sha256": "2fe4035fc947b13af98f0e9972d2ccd46d032b00acd5b750f3c47c39395a4858",
+      "payloadSHA256": "2fe4035fc947b13af98f0e9972d2ccd46d032b00acd5b750f3c47c39395a4858"
     },
     {
       "path": "verification/hospital-three-pc/source-patch/asset-source-docs/ASSET_GUIDE.md",
@@ -32474,9 +32474,9 @@
     },
     {
       "path": "verification/hospital-three-pc/source-patch/client-source/final42-hooks-r88.js",
-      "bytes": 16219,
-      "sha256": "3ee3467800d98c706aab11f23e89ecfd1e6735ec1bfc6ad9eb98f52fa5e643e3",
-      "payloadSHA256": "3ee3467800d98c706aab11f23e89ecfd1e6735ec1bfc6ad9eb98f52fa5e643e3"
+      "bytes": 16234,
+      "sha256": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463",
+      "payloadSHA256": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463"
     },
     {
       "path": "verification/hospital-three-pc/source-patch/client-source/final42-preview.html",
@@ -32798,9 +32798,9 @@
     },
     {
       "path": "verification/hospital-three-pc/source-patch/qa/r88/final42-hooks-check.cjs",
-      "bytes": 12505,
-      "sha256": "35d05c64dc274e9ff211a4b52f8c35bc539aa5dc4d68a2cde3f7cc60d8ef4faf",
-      "payloadSHA256": "35d05c64dc274e9ff211a4b52f8c35bc539aa5dc4d68a2cde3f7cc60d8ef4faf"
+      "bytes": 16216,
+      "sha256": "7474f2a8276e1c6ebe385809e3bbd5084dfe7b9e6da46f19c8842dd2261a4ae7",
+      "payloadSHA256": "7474f2a8276e1c6ebe385809e3bbd5084dfe7b9e6da46f19c8842dd2261a4ae7"
     },
     {
       "path": "verification/hospital-three-pc/source-patch/qa/r88/final42-runtime-check.cjs",
@@ -32811,8 +32811,8 @@
     {
       "path": "verification/hospital-three-pc/source-patch/qa/r88/run-suite.cjs",
       "bytes": 9160,
-      "sha256": "39ec13d8acf25d5201687137c2817ae2d0aed05d00c5b0943c26ec6ca8fda3b2",
-      "payloadSHA256": "39ec13d8acf25d5201687137c2817ae2d0aed05d00c5b0943c26ec6ca8fda3b2"
+      "sha256": "f747897614b16c405e2a84a4153fb9cd84a1e6d04e2875f86e663a6b512adc7c",
+      "payloadSHA256": "f747897614b16c405e2a84a4153fb9cd84a1e6d04e2875f86e663a6b512adc7c"
     },
     {
       "path": "verification/hospital-three-pc/source-patch/scripts/R78-REVIEW.md",
@@ -32979,8 +32979,8 @@
     {
       "path": "verification/hospital-three-pc/source-patch/source-snapshot-r88.json",
       "bytes": 16724,
-      "sha256": "d1d85c794fdf0592db3e8709569cae6559d91dab7396ce376a455856ca9ccf99",
-      "payloadSHA256": "d1d85c794fdf0592db3e8709569cae6559d91dab7396ce376a455856ca9ccf99"
+      "sha256": "535b56a21710c8278b8abb1da5510a6fd3e20a31f65fdd4167912f02bb6a15ac",
+      "payloadSHA256": "535b56a21710c8278b8abb1da5510a6fd3e20a31f65fdd4167912f02bb6a15ac"
     }
   ],
   "packs": [
@@ -33413,6 +33413,11 @@
       "path": "r88-input-086.zip",
       "bytes": 702020,
       "sha256": "2d6ec58780f3e85c3a2d46df02cd936f25fa551de5c866916ed15994b96c2da2"
+    },
+    {
+      "path": "r88-input-087.zip",
+      "bytes": 153182,
+      "sha256": "38621dcbea01b9554f3c1ed24cda1ff2334fd1970d14d81cbc2ce77553c9ed20"
     }
   ],
   "payloads": {
@@ -43669,6 +43674,54 @@
         "bytes": 35825,
         "sha256": "fff3bb7ce567b4f969abe3f0fbadbdba16113307c47539359b950c6ea9a828dd",
         "pack": "r88-input-086.zip"
+      }
+    ],
+    "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463": [
+      {
+        "member": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463.000",
+        "bytes": 16234,
+        "sha256": "17304e3ab9ba3c8221701aea318d3e2fb9cc5255281921f1014bd79ea64fb463",
+        "pack": "r88-input-087.zip"
+      }
+    ],
+    "2fe4035fc947b13af98f0e9972d2ccd46d032b00acd5b750f3c47c39395a4858": [
+      {
+        "member": "2fe4035fc947b13af98f0e9972d2ccd46d032b00acd5b750f3c47c39395a4858.000",
+        "bytes": 4208,
+        "sha256": "2fe4035fc947b13af98f0e9972d2ccd46d032b00acd5b750f3c47c39395a4858",
+        "pack": "r88-input-087.zip"
+      }
+    ],
+    "535b56a21710c8278b8abb1da5510a6fd3e20a31f65fdd4167912f02bb6a15ac": [
+      {
+        "member": "535b56a21710c8278b8abb1da5510a6fd3e20a31f65fdd4167912f02bb6a15ac.000",
+        "bytes": 16724,
+        "sha256": "535b56a21710c8278b8abb1da5510a6fd3e20a31f65fdd4167912f02bb6a15ac",
+        "pack": "r88-input-087.zip"
+      }
+    ],
+    "7474f2a8276e1c6ebe385809e3bbd5084dfe7b9e6da46f19c8842dd2261a4ae7": [
+      {
+        "member": "7474f2a8276e1c6ebe385809e3bbd5084dfe7b9e6da46f19c8842dd2261a4ae7.000",
+        "bytes": 16216,
+        "sha256": "7474f2a8276e1c6ebe385809e3bbd5084dfe7b9e6da46f19c8842dd2261a4ae7",
+        "pack": "r88-input-087.zip"
+      }
+    ],
+    "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f": [
+      {
+        "member": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f.000",
+        "bytes": 447661,
+        "sha256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
+        "pack": "r88-input-087.zip"
+      }
+    ],
+    "f747897614b16c405e2a84a4153fb9cd84a1e6d04e2875f86e663a6b512adc7c": [
+      {
+        "member": "f747897614b16c405e2a84a4153fb9cd84a1e6d04e2875f86e663a6b512adc7c.000",
+        "bytes": 9160,
+        "sha256": "f747897614b16c405e2a84a4153fb9cd84a1e6d04e2875f86e663a6b512adc7c",
+        "pack": "r88-input-087.zip"
       }
     ]
   }

@@ -234,7 +234,7 @@
                 "role": "previous",
                 "destination": "dist06",
                 "point": {
-                  "x": 43,
+                  "x": 5,
                   "y": 109
                 },
                 "visible": true,
@@ -434,7 +434,7 @@
               "role": "previous",
               "destination": "dist06",
               "point": {
-                "x": 43,
+                "x": 5,
                 "y": 109
               },
               "visible": true,

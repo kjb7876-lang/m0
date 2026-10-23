@@ -927,8 +927,10 @@
       "GPUVerified": false,
       "nativeHook": "tickHazards",
       "event": "actual mb-dist02 hazard impact",
-      "attachment": "existing committed target ground",
-      "caveat": "Visual remnant only; no new drag displacement"
+      "attachment": "existing committed target ground, under actors",
+      "caveat": "Visual ground remnant/decal only; no new drag displacement. The groundImage draw path keeps the supplied flat mud groove on the ground plane, not a vertical overlay.",
+      "layer": "ground",
+      "groundAligned": true
     },
     {
       "sourceIndex": 260,

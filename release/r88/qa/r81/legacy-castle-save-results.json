@@ -21,7 +21,7 @@
         "zone": "hando02",
         "cells": 8022,
         "heroBlocked": false,
-        "restoreMs": 422.83395200000086
+        "restoreMs": 341.0868730000002
       }
     },
     {
@@ -117,7 +117,7 @@
   "browserVerified": false,
   "GPUVerified": false,
   "naturalPlayVerified": false,
-  "generatedAt": "2026-10-23T07:39:28.032Z",
+  "generatedAt": "2026-10-23T08:25:38.750Z",
   "sourceHashes": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
     "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
@@ -128,8 +128,8 @@
     "dist/phase1.js": "1e1cd26345345a583e10c5f5056d06750017c50bc150245503b03d7d646326a6",
     "world-combat-r78.js": "2747c289e67a2eb232ea99b3c918974758cd7a3ed64d6af2c2a9668f74ad2657"
   },
-  "restoreMs": 422.83395200000086,
+  "restoreMs": 341.0868730000002,
   "passed": 10,
   "failed": 0,
-  "completedAt": "2026-10-23T07:39:42.156Z"
+  "completedAt": "2026-10-23T08:25:52.149Z"
 }

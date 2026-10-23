@@ -178,7 +178,7 @@
             15
           ]
         },
-        "elapsedMs": 605.5460780000012
+        "elapsedMs": 686.0891429999992
       }
     },
     {
@@ -291,7 +291,7 @@
             15
           ]
         },
-        "elapsedMs": 570.8205500000004
+        "elapsedMs": 611.7731349999995
       }
     },
     {
@@ -408,7 +408,7 @@
           15
         ]
       },
-      "elapsedMs": 605.5460780000012
+      "elapsedMs": 686.0891429999992
     },
     {
       "zone": "dist02",
@@ -512,13 +512,13 @@
           15
         ]
       },
-      "elapsedMs": 570.8205500000004
+      "elapsedMs": 611.7731349999995
     }
   ],
   "browserVerified": false,
   "GPUVerified": false,
   "naturalPlayVerified": false,
-  "generatedAt": "2026-10-23T07:39:20.002Z",
+  "generatedAt": "2026-10-23T08:25:30.797Z",
   "sourceHashes": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
     "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105",
@@ -572,5 +572,5 @@
   "errors": [],
   "passed": 9,
   "failed": 0,
-  "completedAt": "2026-10-23T07:39:35.824Z"
+  "completedAt": "2026-10-23T08:25:46.962Z"
 }

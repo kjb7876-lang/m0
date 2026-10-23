@@ -1985,7 +1985,7 @@
     "version": 1,
     "rooms": {
       "STORY:ep1a08": {
-        "seed": 3125262938,
+        "seed": 525025649,
         "startId": "lower-centre",
         "layoutVersion": 6
       }
@@ -2199,7 +2199,7 @@
     "version": 1,
     "entries": {
       "STORY:ep1a08": {
-        "x": 43,
+        "x": 5,
         "y": 109
       },
       "STORY:ep1a09": {
@@ -2526,7 +2526,7 @@
   "saveSlotR73": {
     "version": 1,
     "slot": 1,
-    "savedAt": "2026-10-23T07:38:17.718Z",
+    "savedAt": "2026-10-23T08:24:32.310Z",
     "transitionComplete": true
   },
   "worldR74": {

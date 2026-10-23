@@ -1,6 +1,6 @@
 {
   "schema": "r81-native-finale-cpu/v1",
-  "completedAt": "2026-10-23T07:40:10.862Z",
+  "completedAt": "2026-10-23T08:26:17.719Z",
   "method": "Native unlocked checkpoint, native summon/death/finish and scene callbacks in Node VM; assisted field cleanup, invulnerability, boss HP=0, scene advancement. Not natural play or browser/GPU.",
   "checks": [
     {

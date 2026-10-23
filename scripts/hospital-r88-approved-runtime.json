@@ -1,7 +1,7 @@
 {
   "schema": "storyworld.hospital-r88-runtime-approval/v1",
-  "status": "approved",
-  "manifestSHA256": "62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda",
+  "status": "pending-review",
+  "manifestSHA256": "bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f",
   "expectedRuntime": {
     "index.html": "a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f",
     "dist/phase1.js": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
@@ -9,11 +9,11 @@
   "fileCount": 2348,
   "storagePrefix": "storyworld.hospital-three-pc.maze.v11:",
   "candidateSource": {
-    "pullRequest": 26,
-    "headSha": "edd8d4e742abaaf201286a3d9d90759cbcf48ae6",
+    "pullRequest": null,
+    "headSha": null,
     "workflowRunId": null,
     "evidenceFile": "release/r88/qa/r88/final-suite.json",
-    "evidenceSHA256": "e91ebbeade8bd658c86698e41343be6c5015170a7df2288e9da069d16300e3c6"
+    "evidenceSHA256": "dcb66903b29b47e20a865f8b2457677387e45d713067a3f16cbf07384b6be503"
   },
   "runtimeRevision": "R88/V12",
   "paintedEffectCount": 42,
@@ -21,18 +21,5 @@
   "historicalApprovalsInherited": false,
   "browserVerifiedByCPUGate": false,
   "GPUVerifiedByCPUGate": false,
-  "naturalPlayVerified": false,
-  "approvalBasis": {
-    "authorization": "Explicit deployment and update approval in the current user conversation",
-    "reviewedSource": "edd8d4e742abaaf201286a3d9d90759cbcf48ae6",
-    "frozenCPUEvidence": "640/640,49 groups, unchanged complete runtime",
-    "independentSourceReviewCompleted": true,
-    "gateRefusalsPassed": 35,
-    "workflowContractChecksPassed": 72,
-    "completedCIRunClaimed": false,
-    "browserVerifiedAtSourceApproval": false,
-    "mergeRequiresPassingCurrentCI": true,
-    "publicUploadRequiresFreshCPUStaticAndBrowser": true,
-    "priorReleaseApprovalReused": false
-  }
+  "naturalPlayVerified": false
 }

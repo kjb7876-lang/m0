@@ -19,7 +19,7 @@ APPROVAL_PATH = 'scripts/hospital-r88-approved-runtime.json'
 EVIDENCE_PATH = 'release/r88/qa/r88/final-suite.json'
 REPORT_PATH = 'out/hospital-r88/verification/qa/r88/final-suite.json'
 PREFIX = 'storyworld.hospital-three-pc.maze.v11:'
-CONTRACT = {'manifestSHA256': '62ececfcef089e58dda8d5fc458f62bb3a228910ba10ec23a0fb0029cf1ebeda',
+CONTRACT = {'manifestSHA256': 'bb513f6e34813006f1480129eb4964e91ce3cddf270a5c30f501f9892e7c3f7f',
  'expectedRuntime': {'index.html': 'a8c4b3d63bcd69b875315f430c55d8db9e1f4ceac3b3152175c9c8a10628122f',
                      'dist/phase1.js': '64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105'},
  'fileCount': 2348,
@@ -40,8 +40,8 @@ EXPECTED_RUNS = {'world-runtime': ['qa/r81/runtime-contracts.cjs', 'qa/r81/runti
  'camera-motion': ['qa/r82/camera-check.cjs', 'qa/r82/camera-results.json', 10],
  'opening-refuge': ['qa/r82/hub-check.cjs', 'qa/r82/hub-results.json', 11],
  'projectile': ['qa/r81/projectile-contracts.cjs', 'qa/r81/projectile-results.json', 13],
- 'environment': ['qa/r81/environment-check.cjs', 'qa/r81/environment-results.json', 17],
  'world-cold': ['qa/r81/cold-restore-contracts.cjs', 'qa/r81/cold-restore-results.json', 6],
+ 'environment': ['qa/r81/environment-check.cjs', 'qa/r81/environment-results.json', 17],
  'hospital-start-777': ['qa/r81/hospital-start-777.cjs', 'qa/r81/hospital-start-777-results.json', 9],
  'legacy-castle-save': ['qa/r81/legacy-castle-save-contracts.cjs',
                         'qa/r81/legacy-castle-save-results.json',
@@ -55,8 +55,8 @@ EXPECTED_RUNS = {'world-runtime': ['qa/r81/runtime-contracts.cjs', 'qa/r81/runti
  'legacy-scope': ['qa/r81/legacy-scope-check.cjs', 'qa/r81/legacy-scope-results.json', 3],
  'world-combat': ['qa/r81/world-combat-check.cjs', 'qa/r81/world-combat-results.json', 9],
  'hero-presentation': ['qa/r83/hero-check.cjs', 'qa/r83/hero-results.json', 18],
- 'portal-interaction': ['qa/r83/portal-check.cjs', 'qa/r83/portal-results.json', 17],
  'world-door-visuals': ['qa/r83/door-check.cjs', 'qa/r83/door-results.json', 18],
+ 'portal-interaction': ['qa/r83/portal-check.cjs', 'qa/r83/portal-results.json', 17],
  'map-perimeter': ['qa/r83/map-check.cjs', 'qa/r83/map-results.json', 14],
  'new-vfx-assets': ['qa/r83/vfx-asset-audit.py', 'qa/r83/vfx-asset-results.json', 13],
  'existing-effects': ['qa/r83/effect-check.cjs', 'qa/r83/effect-results.json', 14],
@@ -64,11 +64,11 @@ EXPECTED_RUNS = {'world-runtime': ['qa/r81/runtime-contracts.cjs', 'qa/r81/runti
  'final42-source-normalization': ['scripts/normalize-final42-r88.py',
                                   'qa/r88/final42-normalization-results.json',
                                   16],
- 'final42-atlas-player': ['qa/r88/final42-runtime-check.cjs', 'qa/r88/final42-runtime-results.json', 39],
  'new-vfx-runtime': ['qa/r83/vfx-runtime-check.cjs', 'qa/r83/vfx-runtime-results.json', 18],
+ 'final42-atlas-player': ['qa/r88/final42-runtime-check.cjs', 'qa/r88/final42-runtime-results.json', 39],
  'painted-frame-pixels': ['qa/r87/atlas-audit.py', 'qa/r87/atlas-results.json', 8],
  'hospital-settings': ['qa/r84/settings-check.cjs', 'qa/r84/settings-results.json', 20],
- 'final42-native-hooks': ['qa/r88/final42-hooks-check.cjs', 'qa/r88/final42-hooks-results.json', 29],
+ 'final42-native-hooks': ['qa/r88/final42-hooks-check.cjs', 'qa/r88/final42-hooks-results.json', 30],
  'refined-static-integration': ['qa/r86/refined-static-check.cjs',
                                 'qa/r86/refined-static-results.json',
                                 15],
@@ -78,8 +78,8 @@ EXPECTED_RUNS = {'world-runtime': ['qa/r81/runtime-contracts.cjs', 'qa/r81/runti
  'camera-default': ['qa/r86/camera-check.cjs', 'qa/r86/camera-results.json', 6],
  'door-front-surface': ['qa/r86/door-check.cjs', 'qa/r86/door-results.json', 12],
  'enemy-facing': ['qa/r86/enemy-facing-check.cjs', 'qa/r86/enemy-facing-results.json', 6],
- 'hero-all-poses': ['qa/r86/hero-integration-check.cjs', 'qa/r86/hero-integration-results.json', 12],
  'enemy-colors-and-champions': ['qa/r86/enemy-check.cjs', 'qa/r86/enemy-results.json', 18],
+ 'hero-all-poses': ['qa/r86/hero-integration-check.cjs', 'qa/r86/hero-integration-results.json', 12],
  'retained-vector-buffers': ['qa/r86/performance-check.cjs', 'qa/r86/performance-results.json', 16],
  'active-asset-usage': ['qa/r86/vfx-usage-check.cjs', 'qa/r86/vfx-usage-results.json', 11],
  'samong-through-ending': ['qa/r86/progression-777-finale.cjs',
@@ -101,8 +101,8 @@ EXPECTED_CHECK_COUNTS = {'world-runtime': 22,
  'camera-motion': 10,
  'opening-refuge': 11,
  'projectile': 13,
- 'environment': 17,
  'world-cold': 6,
+ 'environment': 17,
  'hospital-start-777': 9,
  'legacy-castle-save': 10,
  'legacy-save': 9,
@@ -114,25 +114,25 @@ EXPECTED_CHECK_COUNTS = {'world-runtime': 22,
  'legacy-scope': 3,
  'world-combat': 9,
  'hero-presentation': 18,
- 'portal-interaction': 17,
  'world-door-visuals': 18,
+ 'portal-interaction': 17,
  'map-perimeter': 14,
  'new-vfx-assets': 13,
  'existing-effects': 14,
  'full-frame-render-replay': 16,
  'final42-source-normalization': 16,
- 'final42-atlas-player': 39,
  'new-vfx-runtime': 18,
+ 'final42-atlas-player': 39,
  'painted-frame-pixels': 8,
  'hospital-settings': 20,
- 'final42-native-hooks': 29,
+ 'final42-native-hooks': 30,
  'refined-static-integration': 15,
  'dynamic-package-deferred': 8,
  'camera-default': 6,
  'door-front-surface': 12,
  'enemy-facing': 6,
- 'hero-all-poses': 12,
  'enemy-colors-and-champions': 18,
+ 'hero-all-poses': 12,
  'retained-vector-buffers': 16,
  'active-asset-usage': 11,
  'samong-through-ending': 22,
@@ -278,7 +278,7 @@ def validate_source(approval, repo=ROOT, event=None):
         fail('Source pin and R88 evidence differ')
     evidence = json.loads(reviewed_bytes)
     runs = evidence.get('runs', [])
-    if evidence.get('schema') != 'r88-final-frozen-suite/v1' or evidence.get('passed') is not True or evidence.get('sourceUnchangedDuringRun') is not True or evidence.get('groups') != 49 or evidence.get('passedChecks') != 640 or evidence.get('totalChecks') != 640 or len(runs) != len(EXPECTED_RUNS) or len({r.get('name') for r in runs}) != len(runs):
+    if evidence.get('schema') != 'r88-final-frozen-suite/v1' or evidence.get('passed') is not True or evidence.get('sourceUnchangedDuringRun') is not True or evidence.get('groups') != 49 or evidence.get('passedChecks') != 641 or evidence.get('totalChecks') != 641 or len(runs) != len(EXPECTED_RUNS) or len({r.get('name') for r in runs}) != len(runs):
         fail('Reviewed source evidence is not the complete frozen R88 suite')
     bindings = {}
     for row in runs:
@@ -386,7 +386,7 @@ def validate_preflight(verified, repo=ROOT, now=None):
         fail('CPU report was not freshly written')
     if report.get('schema') != 'r88-final-frozen-suite/v1' or report.get('passed') is not True or report.get('sourceUnchangedDuringRun') is not True or report.get('changedFiles') != []:
         fail('R88 CPU suite failed or runtime changed during verification')
-    if report.get('groups') != 49 or report.get('passedChecks') != 640 or report.get('totalChecks') != 640:
+    if report.get('groups') != 49 or report.get('passedChecks') != 641 or report.get('totalChecks') != 641:
         fail('Incomplete R88 CPU suite')
     if report.get('sourceHashes') != verified['sourceHashes']:
         fail('CPU evidence and staged artifact bytes differ')
@@ -416,7 +416,7 @@ def validate_preflight(verified, repo=ROOT, now=None):
         if result.get('failure') or result.get('integrationFixture') is True or not isinstance(checks, list) or len(checks) != row['checks'] or any(c.get('passed') is not True for c in checks):
             fail('Fresh CPU group result differs: ' + row['name'])
         counted += len(checks)
-    if counted != 640:
+    if counted != 641:
         fail('CPU check total differs')
     return {'reportSHA256': pre['reportSHA256'], 'passedChecks': counted, 'groups': len(runs), 'sourceCommit': pre['sourceCommit']}
 

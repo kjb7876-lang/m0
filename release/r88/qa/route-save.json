@@ -45,8 +45,8 @@
       "samongPower": 0,
       "samongGuard": 0
     },
-    "x": 45.41768634315662,
-    "y": 108.3637667518009,
+    "x": 43,
+    "y": 109,
     "egoCount": 0,
     "pending": false,
     "samongCD": 0,
@@ -1632,8 +1632,8 @@
     "version": 1,
     "rooms": {
       "STORY:ep1a08": {
-        "seed": 769296978,
-        "startId": "lower-centre",
+        "seed": 1222993748,
+        "startId": "lower-left",
         "layoutVersion": 6
       }
     }
@@ -1840,7 +1840,7 @@
     "version": 1,
     "entries": {
       "STORY:ep1a08": {
-        "x": 43,
+        "x": 5,
         "y": 109
       }
     }
@@ -2071,7 +2071,7 @@
   "saveSlotR73": {
     "version": 1,
     "slot": 1,
-    "savedAt": "2026-10-23T07:38:12.551Z",
+    "savedAt": "2026-10-23T08:24:28.535Z",
     "transitionComplete": true
   },
   "worldR74": {

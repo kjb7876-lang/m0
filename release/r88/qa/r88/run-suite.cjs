@@ -40,7 +40,7 @@ const rows=[
  ['hospital-settings','qa/r84/settings-check.cjs','qa/r84/settings-results.json',20],
  ['final42-source-normalization','scripts/normalize-final42-r88.py','qa/r88/final42-normalization-results.json',16,600000],
  ['final42-atlas-player','qa/r88/final42-runtime-check.cjs','qa/r88/final42-runtime-results.json',39,600000],
- ['final42-native-hooks','qa/r88/final42-hooks-check.cjs','qa/r88/final42-hooks-results.json',29,600000],
+ ['final42-native-hooks','qa/r88/final42-hooks-check.cjs','qa/r88/final42-hooks-results.json',30,600000],
  ['painted-frame-pixels','qa/r87/atlas-audit.py','qa/r87/atlas-results.json',8],
  ['refined-static-integration','qa/r86/refined-static-check.cjs','qa/r86/refined-static-results.json',15],
  ['dynamic-package-deferred','qa/r86/dynamic-deferred-check.cjs','qa/r86/dynamic-deferred-results.json',8],
