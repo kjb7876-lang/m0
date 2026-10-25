@@ -2045,6 +2045,8 @@
     "assets/vfx-r83/SHA256SUMS.txt",
     "assets/vfx-r83/review/selected-quality-64.json",
     "assets/world-r80/catalog.json",
+    "audio-r98.js",
+    "combat-r98.js",
     "dist/phase1.js",
     "dynamic-vfx-r84.js",
     "effect-presentation-r83.js",
@@ -2069,6 +2071,7 @@
     "portal-interaction-r83.js",
     "render-compat-r83.js",
     "status-r96.js",
+    "vfx-r98.js",
     "vfx-retro-r89.js",
     "vfx-selected-data-r83.js",
     "vfx-selected-r83.js",
@@ -2088,6 +2091,7 @@
     "world-environment-r81.js",
     "world-layout-r78.js",
     "world-presentation-r81.js",
+    "world-r98.js",
     "world-retro-r89.js",
     "world-visual-r78.js"
   ],
@@ -3164,5 +3168,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "01aa86b34c8c2ac472f762396b105a12e20295a6b321e55e157f37fce8ed87d1"
+  "runtimeManifestSHA256": "8388d2a61219134fb91ad365f96c4318d0458cbc6bffff531dc1937d5f0c7987"
 }

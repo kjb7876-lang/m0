@@ -170,7 +170,7 @@ let booted=false,bootError=null,started=false,modal=true,loading=false,storyScen
 let time=0,uid=0,W=1,H=1,dpr=1,zoom=1,cam={x:15,y:16},room=null,world={},zone='hub',layer='STORY',target=null,command=null,route=[],keys=new Set(),joystickVector={x:0,y:0};
 let player=null,progress={STORY:{},DREAM:{}},visited=new Set(),readScenes=new Set(),ending={STORY:false,DREAM:false},lastHub='hub';
 let projectiles=[],effects=[],hazards=[],delayed=[],transitionCD=0,flash=0,shake=0,toastUntil=0,cutinUntil=0,auto=true,guide=false,guideTimer=0;
-let settings={sound:true,music:true,narration:true,volume:.7,bgm:.25,voice:.8,lowFx:false,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches};
+let settings={sound:true,music:true,narration:true,volume:.7,bgm:.5,voice:.8,lowFx:false,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches};
 let lastHUD=0,lastSave=0,lastWarn=0,lastDefence=0,frames=0,fpsAt=0,fps=0,drawStats={sprites:0,vfx:0,missing:0};
 const HEROES={
  hwando:{name:'환도',type:'blade',power:36,interval:.48,range:3.15,color:'#cf8793',resource:'검의 기세',passive:'세 번째 베기에 정화 검파가 일어난다.',special:'정화 연참'},
@@ -4158,7 +4158,7 @@ window.__STORYWORLD_CAST5__=Object.freeze({prepare:prepareAuthoredCast150,inspec
 /* RC146: body-bound wounds and bounded cached death masks for hostile actors. */
 (function(root){
  'use strict';
- const MAX_CACHE=10,LEVELS=8,MASK_SIDE=192,MAX_OVERLAY_BYTES=12*1024*1024,BUCKETS=[128,192,256,384,512,768,1024];
+ const MAX_CACHE=24,LEVELS=8,MASK_SIDE=192,MAX_OVERLAY_BYTES=12*1024*1024,BUCKETS=[128,192,256,384,512,768,1024];
  const cache=new Map(),scratch=new Map(),overlays=new Map(),layouts=new Map(),metrics={livingFrames:0,deathFrames:0,maskBuilds:0,maskPixelsBuilt:0,framePixelScans:0,evictions:0,resets:0,overlayBuilds:0,overlayHits:0,overlayEvictions:0,boundsExpansions:0,boundsOverflow:0,maskSecurityErrors:0,maskFallbackFrames:0};
  let overlayBytes=0;
  let scene=null,zone=null,lastTime=-Infinity;
@@ -4220,7 +4220,7 @@ window.__STORYWORLD_CAST5__=Object.freeze({prepare:prepareAuthoredCast150,inspec
   ctx.restore();
  }
  function prepareMasks(sprite,size,actor,b){
-  const id=[sprite,Math.round(size),b.span,Math.round(b.anchorX),Math.round(b.anchorY),persona(actor)?'persona':'enemy',actor?.facing??'',actor?.sourceFacing31223??''].join('|');
+  const id=[sprite,Math.round(size),b.span,Math.round(b.anchorX/4),Math.round(b.anchorY/4),persona(actor)?'persona':'enemy',actor?.facing??'',actor?.sourceFacing31223??''].join('|');
   const previous=cache.get(id);if(previous){cache.delete(id);cache.set(id,previous);return previous;}
   const w=MASK_SIDE,h=MASK_SIDE,sourceCanvas=canvas(w,h),sourceCtx=sourceCanvas.getContext('2d');sourceCtx.drawImage(b.canvas,0,0,w,h);
   let source;try{source=sourceCtx.getImageData(0,0,w,h).data;}catch(error){if(error?.name!=='SecurityError')throw error;const failed={id,safe:false,edge:[],masks:[],rims:[]};cache.set(id,failed);if(cache.size>MAX_CACHE){cache.delete(cache.keys().next().value);metrics.evictions++;}metrics.maskSecurityErrors++;return failed;}
@@ -6124,8 +6124,8 @@ const STORY_PXF_DATA=Object.freeze([{"key":"claw-magic","path":"assets/pxf-baked
 /* SFX-only conditioning/mix. Original audio bytes and narration retain
  * their original paths. BGM is controlled by its separate adapter. Original pitch/rate is unchanged. */
 (()=>{'use strict';
- const MAX=4,CACHE_BYTES=12*1024*1024,CACHE_ENTRIES=12,rate=1,busGain=.65,peakLimit=.84;
- const roles=Object.freeze({attack:{gain:.26,cutoff:3400,duration:.65},enemyHit:{gain:.085,cutoff:3000,duration:.45},hurt:{gain:.34,cutoff:2600,duration:.7},special:{gain:.27,cutoff:3800,duration:1.2},blink:{gain:.22,cutoff:3300,duration:.5},dodge:{gain:.22,cutoff:3300,duration:.5},parry:{gain:.25,cutoff:4400,duration:.65},ego:{gain:.24,cutoff:3600,duration:1.1},awake:{gain:.28,cutoff:4000,duration:1.5},clear:{gain:.23,cutoff:3600,duration:1.1},upgrade:{gain:.23,cutoff:3600,duration:1.0},boss:{gain:.28,cutoff:2500,duration:1.7}});
+ const MAX=4,CACHE_BYTES=12*1024*1024,CACHE_ENTRIES=12,rate=1,busGain=.78,peakLimit=.84;
+ const roles=Object.freeze({attack:{gain:.30,cutoff:3400,duration:.65},enemyHit:{gain:.17,cutoff:3000,duration:.45},hurt:{gain:.34,cutoff:2600,duration:.7},special:{gain:.30,cutoff:3800,duration:1.2},blink:{gain:.22,cutoff:3300,duration:.5},dodge:{gain:.22,cutoff:3300,duration:.5},parry:{gain:.25,cutoff:4400,duration:.65},ego:{gain:.24,cutoff:3600,duration:1.1},awake:{gain:.28,cutoff:4000,duration:1.5},clear:{gain:.23,cutoff:3600,duration:1.1},upgrade:{gain:.23,cutoff:3600,duration:1.0},boss:{gain:.32,cutoff:2500,duration:1.7}});
  const aliases={rc141TreeWeapon5:'attack',rc141TimeAwakening5:'awake',rc141KairoTick5:'ego',rc141ResonanceEnergy5:'ego'},roleDef=kind=>roles[aliases[kind]||kind]||roles.special;
  const cache=new Map(),onsets=new WeakMap(),audit=[],stats={conditioned:0,cacheHits:0,cacheBytes:0,evictions:0,played:0,throttled:0,stolen:0,mutedWhileLoading:0,activePeak:0,conditioningFallback:0};let bus=null,busContext=null,generation=0,serial=0;
  const log=r=>{audit.push(r);if(audit.length>128)audit.shift();};
@@ -6180,7 +6180,7 @@ const STORY_PXF_DATA=Object.freeze([{"key":"claw-magic","path":"assets/pxf-baked
  window.__STORYWORLD_AUDIO_VARIETY__=Object.freeze({inspect:()=>({rows:JSON.parse(JSON.stringify(rows)),heroCueMap:{...heroes},audit:[...audit],playbackRate:1,originalRecordingsOnly:true,iceCueAdded:false,directListeningVerified:false})});
 })();
 
-const STORY_BGM_GAINS={"clockwork":0.24346359031251733,"clockworkIntense":0.2170432118756223,"timeControl":0.18005384267143504,"foldingSpace":0.2828766086042986,"nearSilence":0.18491433525969087};
+const STORY_BGM_GAINS={"clockwork":0.536,"clockworkIntense":0.478,"timeControl":0.396,"foldingSpace":0.622,"nearSilence":0.407};/* R98: x2.2, the old mix sat at ~.05 element volume */
 
 /* Five approved local recordings. Two streaming HTMLAudio decks; bounded memory,
  * linear overlap (weight sum1), no transport/network/security workaround. */
@@ -6203,7 +6203,7 @@ const STORY_BGM_GAINS={"clockwork":0.24346359031251733,"clockworkIntense":0.2170
   const key=select();if(!active)begin(key);if(!fade&&active&&active.key!==key)begin(key);if(!active)return;
   if(fade){const f=fade;if(f.to.failed){stop(f.to);active=f.from;active.weight=1;fade=null;}else if(!f.to.el.paused&&!f.to.pending){const u=clamp((now-f.start)/f.duration,0,1);f.from.weight=1-u;f.to.weight=u;if(u>=1){stop(f.from);active=f.to;fade=null;}}else{f.start=now;play(f.to);}}
   if(!fade&&active&&!active.failed){const end=Math.min(finite(active.row.loopEnd,active.el.duration),Number.isFinite(active.el.duration)?active.el.duration:Infinity),overlap=clamp(finite(active.row.crossfade,2.5),.3,3);if(active.el.currentTime>=end-overlap)begin(active.key,true);}
-  const voicePlaying=voiceElement&&!voiceElement.paused||globalThis.speechSynthesis?.speaking,targetDuck=voicePlaying?.20:sfxLive.some(v=>!v.stopping)?.65:1;duck+=(targetDuck-duck)*(1-Math.exp(-dt/(targetDuck<duck?.08:.55)));
+  const voicePlaying=voiceElement&&!voiceElement.paused||globalThis.speechSynthesis?.speaking,targetDuck=voicePlaying?.20:sfxLive.some(v=>!v.stopping)?.8:1;duck+=(targetDuck-duck)*(1-Math.exp(-dt/(targetDuck<duck?.08:.55)));
   let sum=0;for(const d of decks){sum+=d.weight;const gain=STORY_BGM_GAINS[d.key]||0;d.el.volume=clamp(clamp(settings.bgm,0,1)*gain*duck*d.weight,0,1);if(d.weight>0&&d.el.paused)play(d);}stats.peakWeightSum=Math.max(stats.peakWeightSum,sum);musicProfile=active.row;musicElement=active.el;
  };
  const unlockBase=unlockAudio;unlockAudio=function(){blocked=false;return unlockBase.apply(this,arguments);};
@@ -13451,3 +13451,7 @@ function worldArtR74(profile){
 <script src="./assets-r96.js"></script>
 <script src="./status-r96.js"></script>
 <script src="./perf-r97.js"></script>
+<script src="./combat-r98.js"></script>
+<script src="./vfx-r98.js"></script>
+<script src="./world-r98.js"></script>
+<script src="./audio-r98.js"></script>
