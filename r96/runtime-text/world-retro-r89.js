@@ -116,7 +116,9 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
   const mesh=new T.Mesh(new T.PlaneGeometry(2,2),material);mesh.name='r89-retro-light';mesh.frustumCulled=false;mesh.renderOrder=-1000;mesh.layers.set(2);mesh.userData.presentationOnly=true;
   r.r89Light=mesh;return mesh;
  }
- function lightState(r,frame){const spec=LIGHT[prefs.light];if(!spec||sightOn()||!active(frame))return null;
+ function lightState(r,frame){const base=LIGHT[prefs.light];if(!base||sightOn()||!active(frame))return null;
+  // R98: open-air and cavern places reshape the carried light (see world-r98.js).
+  const spec=window.__STORYWORLD_WORLD_R98__?.light?.(frame,base)||base;
   const hero=frame.entities?.find(e=>e.hero&&Number.isFinite(e.x+e.y));if(!hero)return null;
   const p=r.projection,s=p.worldToScreen(hero.x,hero.y),zoom=p.zoom||1,w=p.width,h=p.height,rx=Math.max(w*.36,h*.66),ry=rx*.64;
   return{cx:s.x,cy:s.y-(hero.height||66)*zoom*.35,rx,ry,inner:spec.inner,edge:spec.edge,gain:.97};
@@ -241,7 +243,7 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
  const renderBase=C.render;
  C.render=function(frame){
   let plan=null;
-  try{if(active(frame)&&this.spatialRoot&&this.renderer){wrapGL(this);const T=this.T,u=uniforms(T),fam=FAMILY[family(frame)];
+  try{if(active(frame)&&this.spatialRoot&&this.renderer){wrapGL(this);const T=this.T,u=uniforms(T),fam=window.__STORYWORLD_WORLD_R98__?.grade?.(frame,FAMILY[family(frame)])||FAMILY[family(frame)];
    u.r89Grade.value=prefs.grade?1:0;u.r89Sat.value=fam.sat;u.r89Gain.value=fam.gain;u.r89Tint.value.set(...fam.tint);
    plan={family:family(frame),focus:[],light:null};}}catch(error){stats.errors++;lastError=String(error);}
   this.r89Plan=null;

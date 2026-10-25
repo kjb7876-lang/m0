@@ -89,11 +89,13 @@ body.r93-dock #minipanel{top:0!important;right:0!important;transform:scale(.72);
  const SURFACE={clinical:'stone_tile',stone:'stone_tile',forge:'stone_tile',ash:'stone_tile',swamp:'wet_mud',garden:'wet_mud',cave:'gravel',regional:'gravel',snow:'gravel',coast:'gravel',domestic:'wood',memory:'wood',neural:'wood'};
  function family(){const L=typeof room!=='undefined'?room?.exploration:null;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||(typeof zone!=='undefined'&&zone==='ep1a08'?'clinical':null)||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family||'regional';}
  const audible=()=>typeof settings!=='undefined'&&settings.sound&&settings.volume>0&&typeof audioUnlocked!=='undefined'&&audioUnlocked&&typeof audioContext!=='undefined'&&audioContext&&typeof masterGain!=='undefined'&&masterGain&&!document.hidden&&!(typeof modal!=='undefined'&&modal);
+ const FOOTSTEP_GAIN=.065;
  let lastStep={x:NaN,y:NaN,travel:0,variant:0};
  async function step(){const surface=SURFACE[family()]||'stone_tile',context=audioContext,actor=player,scene=room,at=typeof time==='number'?time:null;let v=1+Math.floor(Math.random()*4);if(v===lastStep.variant)v=v%4+1;lastStep.variant=v;
   const buffer=await audioBuffer(AUDIO+'footstep_'+surface+'_0'+v+'.ogg');if(!buffer||!prefs.footsteps||!audible()||audioContext!==context||player!==actor||room!==scene||at!==null&&time-at>.6)return;
   const src=audioContext.createBufferSource(),g=audioContext.createGain();src.buffer=buffer;src.playbackRate.value=.97+Math.random()*.06;
-  g.gain.value=settings.volume*.16*Math.pow(10,(Math.random()*2-1)/20);src.connect(g);g.connect(masterGain);src.onended=()=>{src.disconnect();g.disconnect();};src.start();stats.steps++;}
+  // R98: footsteps sat above most combat sounds (.16); they are now a quiet bed under them.
+  g.gain.value=settings.volume*FOOTSTEP_GAIN*Math.pow(10,(Math.random()*2-1)/20);src.connect(g);g.connect(masterGain);src.onended=()=>{src.disconnect();g.disconnect();};src.start();stats.steps++;}
  function footsteps(){if(!prefs.footsteps||typeof player==='undefined'||!player||player.hp<=0){lastStep.x=NaN;return;}
   const d=Number.isFinite(lastStep.x)?Math.hypot(player.x-lastStep.x,player.y-lastStep.y):0;lastStep.x=player.x;lastStep.y=player.y;
   // Teleports and region changes are not walking.
@@ -124,5 +126,5 @@ body.r93-dock #minipanel{top:0!important;right:0!important;transform:scale(.72);
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
  apply();
  window.__STORYWORLD_VISUAL_R93_UI__=Object.freeze({prefs:()=>({...prefs}),set,storageKey:KEY,family,
-  inspect:()=>({revision:'R93-ui-audio',prefs:{...prefs},stats:{...stats},loops:Object.keys(loops),lastError,presentationOnly:true,listeningVerified:false})});
+  inspect:()=>({revision:'R93-ui-audio',prefs:{...prefs},stats:{...stats},loops:Object.keys(loops),footstepGain:FOOTSTEP_GAIN,lastError,presentationOnly:true,listeningVerified:false})});
 })();

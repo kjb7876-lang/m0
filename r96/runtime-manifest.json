@@ -13473,6 +13473,11 @@
       "sha256": "c569752920e7bb4f5f77b1575a670528777cf2ab66a129f2244f16ae618da330"
     },
     {
+      "path": "audio-r98.js",
+      "bytes": 1451,
+      "sha256": "9da92b454577141431d9c2999e4677a5ae4171b878228f906fe994f3b59d4192"
+    },
+    {
       "path": "audio/rc133/processed/awakening-phase/Ancient_demon_awaken__1-1791000066648-a8af3a45.ogg",
       "bytes": 25635,
       "sha256": "2f9ca6127d103a947c50955181e0434321918a26181d5a57ed2ee2cc106e9782"
@@ -14098,6 +14103,11 @@
       "sha256": "43df6d36ed2cbdec126da6fc280d31fb1d7ef69ed1036c633613648fca576a92"
     },
     {
+      "path": "combat-r98.js",
+      "bytes": 6694,
+      "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
+    },
+    {
       "path": "data/actor-canvas-map-v31224.js",
       "bytes": 251700,
       "sha256": "e267dd8e3fb00e302d97fe66d795a4fe16cca5980e8f2c3552e730eb4c4418cc"
@@ -14239,8 +14249,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6560736,
-      "sha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3"
+      "bytes": 6560879,
+      "sha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -14293,6 +14303,11 @@
       "sha256": "f9c474a27c920b9435353a6235968f4453436bee0444fac7e5fd289c8fa463de"
     },
     {
+      "path": "vfx-r98.js",
+      "bytes": 24494,
+      "sha256": "9b4b432c884f47502a23ab71811a1cf6324bd231d5b9c1192cdf8beb4804979f"
+    },
+    {
       "path": "vfx-retro-r89.js",
       "bytes": 9444,
       "sha256": "7e86f01271665e1d34a3717d8d9353b0774a99c15045c45936ce9d064bdfb231"
@@ -14339,8 +14354,8 @@
     },
     {
       "path": "visual-r93-ui.js",
-      "bytes": 16267,
-      "sha256": "c2093b69a02ac689466be2f298a0202d38e49c9b0b03c7e36f6f01e5c95e733f"
+      "bytes": 16424,
+      "sha256": "8a0200848ac64328ba9e439ed844c1ff55ef2b8e7cddf0fac9dee1bf22f78501"
     },
     {
       "path": "visual-r93.js",
@@ -14388,9 +14403,14 @@
       "sha256": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
     },
     {
+      "path": "world-r98.js",
+      "bytes": 11765,
+      "sha256": "46d05df313222d6b8d5ecff0b6dbeec297ea2db6de0a1a187d1de5569fec2b5b"
+    },
+    {
       "path": "world-retro-r89.js",
-      "bytes": 32048,
-      "sha256": "434472960e600f50263f482d33e1d2663c6fb366ef0fa252672d8f3f5c868eca"
+      "bytes": 32275,
+      "sha256": "36063c25c709f47bf2d890e01a3144ee39a9c8874ef0d8992c9c34b91508b03c"
     },
     {
       "path": "world-visual-r78.js",
@@ -14398,14 +14418,14 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 2879,
-  "totalBytes": 701506924,
-  "webHTMLSha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3",
+  "fileCount": 2883,
+  "totalBytes": 701551855,
+  "webHTMLSha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f",
   "largest": [
     {
       "path": "index.html",
-      "bytes": 6560736,
-      "sha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3"
+      "bytes": 6560879,
+      "sha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f"
     },
     {
       "path": "assets/final42-r88/effects/099/thorn_atlas.png",
@@ -14919,5 +14939,34 @@
     "saveSchemaChanged": false,
     "grade": "R89 family gain +0.10, carried light rim normal .44->.62 / soft .66->.76, wall cap face .46->.60",
     "performance": "flat transparent DoubleSide materials draw in one pass when every mesh using them faces one way (exact, re-checked on change); adaptive render scale 1/.85/.72 that reverts and locks if it does not help"
+  },
+  "r98": {
+    "revision": "R98",
+    "overlays": [
+      "combat-r98.js",
+      "vfx-r98.js",
+      "world-r98.js",
+      "audio-r98.js"
+    ],
+    "updatedOverlays": [
+      "world-retro-r89.js",
+      "visual-r93-ui.js"
+    ],
+    "indexPatches": [
+      "Insert combat/vfx/world/audio-r98.js after perf-r97.js",
+      "BGM track gains x2.2, default bgm .25->.5, SFX duck .65->.8",
+      "SFX roles attack .26->.30, enemyHit .085->.17, special .27->.30, boss .28->.32, bus .65->.78",
+      "Burn-death mask cache: anchor key quantised to 4px, MAX_CACHE 10->24 (no per-frame getImageData)"
+    ],
+    "presentationOnly": false,
+    "collisionChanged": false,
+    "damageChanged": false,
+    "cooldownsChanged": false,
+    "saveSchemaChanged": false,
+    "audioBytesChanged": false,
+    "combat": "idle actors face their opponent; ordinary melee mobs circle and pace (speed restored each tick)",
+    "vfx": "enemy range previews hidden by default (toggle); procedural charge/impact/cast/release/gather/burst effects by region family and boss palette",
+    "world": "story profile mode decides roof/perimeter/backing visibility, wall height (outdoor/mixed), carried light shape, grade and sky haze",
+    "footsteps": "R93 footstep gain .16->.065"
   }
 }
