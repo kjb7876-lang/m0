@@ -1,0 +1,124 @@
+{
+ "schema": "storyworld.r91.death/v1",
+ "source": "R91-layout-derived death (geometry_candidate_needs_review), processed copy",
+ "frames": 8,
+ "cols": 4,
+ "rows": 2,
+ "cellW": 192,
+ "cellH": 256,
+ "anchorX": 96,
+ "anchorY": 244,
+ "bodyHeightPx": 190,
+ "families": [
+  "human-cultist",
+  "undead",
+  "demon-beast",
+  "machine-cyborg",
+  "specter-echo",
+  "slime-rot",
+  "insect-spider",
+  "crystal-core"
+ ],
+ "items": [
+  {
+   "family": "human-cultist",
+   "path": "assets/r91/death/death-human-cultist.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 157461,
+   "sha256": "3436b0c351bd34ea8f1b30fff9937cda27d7b69e06f328e2142e10f32a3ff676"
+  },
+  {
+   "family": "undead",
+   "path": "assets/r91/death/death-undead.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 211789,
+   "sha256": "7453cb318324ba7fff68e4baf2842c5e73b153cbed2637408576ab9694417b1a"
+  },
+  {
+   "family": "demon-beast",
+   "path": "assets/r91/death/death-demon-beast.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 219159,
+   "sha256": "dafd563fe45cb7b15e454591c5268b68afee2b82b3fa4aa5b5275abca59655db"
+  },
+  {
+   "family": "machine-cyborg",
+   "path": "assets/r91/death/death-machine-cyborg.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 235780,
+   "sha256": "5413d713647c71937c920ab479298e708836bda99f7f67eda953853e3e895e48"
+  },
+  {
+   "family": "specter-echo",
+   "path": "assets/r91/death/death-specter-echo.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 243558,
+   "sha256": "ba09867a5c6363538cf22ff58a09a0b8bbe41568fc7cc4b85a52889285a980c6"
+  },
+  {
+   "family": "slime-rot",
+   "path": "assets/r91/death/death-slime-rot.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 235793,
+   "sha256": "455e57364841350a8f3843e73fefc53e57788504a700a13aac7461759bc5d2f2"
+  },
+  {
+   "family": "insect-spider",
+   "path": "assets/r91/death/death-insect-spider.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 183539,
+   "sha256": "5b158ab3ec16039b276c58e691d455c67c00f25535aa9907a52e407337462ae0"
+  },
+  {
+   "family": "crystal-core",
+   "path": "assets/r91/death/death-crystal-core.png",
+   "w": 768,
+   "h": 512,
+   "bytes": 252893,
+   "sha256": "3a7fdf719f776526d6c7f2d88607cfe88851d8d4e4989b019fd2331c746de467"
+  }
+ ],
+ "sources": [
+  {
+   "file": "death/death_human-cultist.png",
+   "sha256": "e4f76573958ccb0fe1fa27d9e42b33184b735f2dffd0116f475cae09707b998d"
+  },
+  {
+   "file": "death/death_undead.png",
+   "sha256": "6a3d1efef21e8d87fbd31ab0aca984244d84c59d7ddc6228b1878ff4bdce486f"
+  },
+  {
+   "file": "death/death_demon-beast.png",
+   "sha256": "58594d155ab1c259fefcc737776d1b5ed3daa70db5544b8dadd34aa672eb6e06"
+  },
+  {
+   "file": "death/death_machine-cyborg.png",
+   "sha256": "e95065c8eb24b687a59069a643c53ac6ebdf9add6ef8bbe30d0b1b46a410ac0c"
+  },
+  {
+   "file": "death/death_specter-echo.png",
+   "sha256": "4915a6f2f5a797e98b4289c9330745fc83b00270c537ecc3ef50b634e941481c"
+  },
+  {
+   "file": "death/death_slime-rot.png",
+   "sha256": "d0bab0bd6b129fa4da8948e95274ac4297a6f60a28be03c4678de0155f2c4240"
+  },
+  {
+   "file": "death/death_insect-spider.png",
+   "sha256": "be6f14d5a215905ae58feab71507693e0d3a8f8a7319836cc707aa96b69ffe45"
+  },
+  {
+   "file": "death/death_crystal-core.png",
+   "sha256": "5e9c926e495571a23333a235ecd41179f4788ad23ec9869e6418ef8c6daec78b"
+  }
+ ],
+ "fringeTexelsRecoloured": 1181299,
+ "originalsModified": false
+}

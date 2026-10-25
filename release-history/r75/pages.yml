@@ -1,0 +1,555 @@
+name: StoryWorld R75 Pages with preserved release gates
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: storyworld-pages-${{ github.event.pull_request && format('pr-{0}', github.event.pull_request.number) || 'main' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      html_sha: ${{ steps.hashes.outputs.html_sha }}
+      renderer_sha: ${{ steps.hashes.outputs.renderer_sha }}
+    steps:
+      - name: Checkout reviewed sources
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct exact baseline and preserve existing CPU gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r66 out/r67 out/r68 out/r69 out/r70 out/r71
+          python3 scripts/unpack-runtime-r62.py --output _baseline/docs
+          python3 scripts/apply-r66.py --site _baseline/docs
+          cp -a _baseline _pages
+          python3 scripts/apply-r67.py --site _pages/docs | tee out/r67/build.log
+          node --test scripts/campaign-balance-r64.cpu.test.mjs scripts/r66.cpu.test.mjs scripts/r66.render.test.mjs scripts/r67.cpu.test.mjs | tee out/r68/baseline-cpu.log
+      - name: Install pinned sandboxed browser regression environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0 > out/r71/dependencies.log 2>&1
+          npx playwright install --with-deps chromium >> out/r71/dependencies.log 2>&1
+      - name: Preserve R67 R68 R69 verification and validate exact R70 candidate
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r70/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r67.browser.test.mjs | tee out/r68/baseline-webgl.log
+          mv _baseline _r66
+          cp -a _pages _baseline
+          python3 scripts/apply-r68.py --site _pages/docs | tee out/r68/build.log
+          node --test scripts/r68.cpu.test.mjs | tee out/r68/cpu-tests.log
+          node scripts/r68.browser.test.mjs | tee out/r68/webgl-test.log
+          cp -a _pages _r68
+          python3 scripts/apply-r69.py --site _pages/docs | tee out/r69/build.log
+          node --check _pages/docs/dist/phase1.js
+          BASELINE_RENDERER=_r68/docs/dist/phase1.js node --test scripts/r69.cpu.test.mjs | tee out/r69/cpu-tests.log
+          node verify-pages-r62.mjs _pages | tee out/r69/integrity.log
+          node scripts/r69.browser.test.mjs | tee out/r69/browser-tests.log
+          cp -a _pages _r69
+          python3 scripts/apply-r70.py --site _pages/docs | tee out/r70/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r70.cpu.test.mjs | tee out/r70/cpu.log
+          node verify-pages-r62.mjs _pages | tee out/r70/integrity.log
+          node scripts/r70.browser.test.mjs | tee out/r70/webgl.log
+          python3 scripts/r69-regression-wait.py
+          python3 scripts/r71-regression-fixture.py
+          node scripts/r66.browser.test.mjs | tee out/r70/game-regression.log
+      - name: Require exact R70 baseline measured in PR run 39089788163
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected={'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5','dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4'}
+          for name,want in expected.items():
+              sha=hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+              if sha!=want:raise SystemExit('Unreviewed R70 baseline bytes: '+name+': '+sha)
+          PY
+      - name: Profile R70 first, then build and validate R71
+        shell: bash
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4391/
+        run: |
+          set -euo pipefail
+          cp -a _pages _r70
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r71/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          R71_PERF_BASELINE_ONLY=1 node scripts/r71.perf.mjs | tee out/r71/baseline-profile.log
+          python3 scripts/apply-r71.py --site _pages/docs | tee out/r71/build.log
+          node --check _pages/docs/dist/phase1.js
+          node --test scripts/r71-render.cpu.test.mjs scripts/r71-progression.cpu.test.mjs scripts/r71-health.cpu.test.mjs | tee out/r71/cpu.log
+          node scripts/r71.audit.mjs | tee out/r71/audit.log
+          node verify-pages-r62.mjs _pages | tee out/r71/integrity.log
+          node scripts/r71.perf.mjs | tee out/r71/performance.log
+          browser_status=0
+          if node scripts/r71.browser.test.mjs 2>&1 | tee out/r71/browser.log; then
+            browser_status=0
+          else
+            browser_status=$?
+          fi
+          mkdir -p out/r71/native
+          native_status=0
+          if node scripts/r71-native.browser.test.mjs 2>&1 | tee out/r71/native/runner.log; then
+            native_status=0
+          else
+            native_status=$?
+          fi
+          printf 'R71_GATE_STATUS browser=%d native=%d\n' "$browser_status" "$native_status" | tee out/r71/gate-status.log
+          if (( browser_status != 0 || native_status != 0 )); then
+            exit 1
+          fi
+      - name: Require exact approved R71 runtime hashes
+        id: hashes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref }}
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          approval=json.loads(Path('scripts/r71-approved-runtime.json').read_text())
+          expected_baseline={
+              'index.html':'76791c87cf6b3f70d99f35aafc7dacaf3adb389f4be10081c024f8802a9aa5f5',
+              'dist/phase1.js':'b87e0feb34c321d19e557b7d08e63b9f0744f1e28b9e7d6e2ee7ea9ca0a6ebf4',
+          }
+          if approval.get('baseline')!=expected_baseline:
+              raise SystemExit('R71 approval file has an unexpected R70 baseline')
+          actual={name:hashlib.sha256(Path('_pages/docs',name).read_bytes()).hexdigest()
+                  for name in ('index.html','dist/phase1.js')}
+          approved=approval.get('approved')
+          status=approval.get('status')
+          if status not in ('approved','pending-review'):
+              raise SystemExit('R71 approval status must be approved or pending-review')
+          if status=='approved':
+              if not isinstance(approved,dict) or actual!=approved:
+                  raise SystemExit('R71 runtime differs from exact approved hashes: '+json.dumps(actual,sort_keys=True))
+          elif os.environ['EVENT_NAME']!='pull_request' and os.environ['REF_NAME']=='refs/heads/main':
+              raise SystemExit('R71 runtime hash pin is not approved; refusing Pages deployment: '+json.dumps(actual,sort_keys=True))
+          else:
+              print('R71_RUNTIME_MEASURED_PENDING_APPROVAL',json.dumps(actual,sort_keys=True))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('html_sha='+actual['index.html']+'\n')
+              f.write('renderer_sha='+actual['dist/phase1.js']+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r71-release-checks
+          path: |
+            out/r66/
+            out/r67/
+            out/r68/
+            out/r69/
+            out/r70/
+            out/r71/
+            _pages/docs/web-manifest-r62.json
+          retention-days: 14
+  candidate:
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        script: [cpu, r73-ui, r73-diagnose, r73-slots.browser, r73-native, r73-route.browser, r73-features, r73-render.browser, r73-memory.browser, r73-maze.browser]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct preserved R71 and R72 then exact R73 candidate
+        run: bash scripts/build-r73-site.sh
+      - name: Preserve relay and static file assertions
+        if: matrix.script == 'cpu'
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --prefix relay
+          node --test relay/test/relay.test.mjs | tee out/r73/relay.log
+          node verify-pages-r62.mjs _pages | tee out/r73/integrity.log
+      - name: Install pinned sandboxed browser
+        if: matrix.script != 'cpu'
+        run: |
+          npm ci --ignore-scripts --prefix relay
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run required R73 regression scenario
+        if: matrix.script != 'cpu'
+        env:
+          SCENARIO: ${{ matrix.script }}
+          R73_COMPARE: '1'
+          R73_ABBA: '1'
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r73/http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > out/r73/r71-http.log 2>&1 &
+          BASELINE_PID=$!
+          python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > out/r73/r72-http.log 2>&1 &
+          R72_PID=$!
+          trap 'kill "$SERVER_PID" "$BASELINE_PID" "$R72_PID" 2>/dev/null || true' EXIT
+          node "scripts/$SCENARIO.mjs" | tee out/r73/runner.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r73-release-${{ matrix.script }}-${{ github.sha }}
+          path: |
+            out/r73/
+            out/r71/native/
+          retention-days: 14
+  r74:
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [cpu, mobile, coop, skills, world, native, slots, route, features, coop-world, ui, render, memory]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct R74 over preserved R73 and run all CPU gates
+        run: bash scripts/build-r74-site.sh
+      - name: Check exact R74 candidate release pin
+        run: python3 scripts/r74-release-gate.py | tee out/r74/approval.json
+      - name: Verify complete media and R63R1 relay contracts
+        if: matrix.scenario == 'cpu'
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --prefix relay
+          node --test relay/test/relay.test.mjs | tee out/r74/relay.log
+          node verify-pages-r62.mjs _pages | tee out/r74/integrity.log
+      - name: Install pinned sandboxed browser
+        if: matrix.scenario != 'cpu'
+        run: |
+          npm ci --ignore-scripts --prefix relay
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run R74 browser acceptance and preserved regressions
+        if: matrix.scenario != 'cpu'
+        env:
+          R74_CASE: ${{ matrix.scenario }}
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > out/r74/http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r71/docs --bind 127.0.0.1 > out/r74/r71-http.log 2>&1 &
+          BASELINE_PID=$!
+          python3 -m http.server 4393 --directory _r72/docs --bind 127.0.0.1 > out/r74/r72-http.log 2>&1 &
+          R72_PID=$!
+          trap 'kill "$SERVER_PID" "$BASELINE_PID" "$R72_PID" 2>/dev/null || true' EXIT
+          case "$R74_CASE" in
+            mobile|coop) node scripts/r74-mobile.browser.mjs ;;
+            skills) node scripts/r74-dances.browser.mjs ;;
+            world) node scripts/r74-world.browser.mjs ;;
+            features) node scripts/r74-features.mjs ;;
+            coop-world) node scripts/r74-coop-world.browser.mjs ;;
+            native) node scripts/r74-native.mjs ;;
+            slots) node scripts/r73-slots.browser.mjs ;;
+            route) node scripts/r73-route.browser.mjs ;;
+            ui) node scripts/r74-ui.mjs ;;
+            render) node scripts/r73-render.browser.mjs ;;
+            memory) node scripts/r73-memory.browser.mjs ;;
+            *) exit 1 ;;
+          esac 2>&1 | tee out/r74/browser-runner.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r74-release-${{ matrix.scenario }}-${{ github.sha }}
+          path: |
+            out/r74/
+            out/r73/
+            out/r71/native/
+          retention-days: 14
+  r75:
+    # Reconstructs its own pinned site; release still requires every job.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct R75 over preserved R74 and run CPU gates
+        run: bash scripts/build-r75-site.sh
+      - name: Require exact R75 release bytes and test refusal paths
+        run: |
+          python3 scripts/r75-release-gate.test.py
+          python3 scripts/r75-release-gate.py | tee out/r75/approval.json
+          node verify-pages-r62.mjs _pages | tee out/r75/integrity.log
+      - name: Apply R76 golden slots, collision parity, and last301 enclosure after the exact R75 release gate
+        run: |
+          set -euo pipefail
+          mkdir -p out/r76
+          python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
+          python3 scripts/r76-release-gate.test.py
+          node --test scripts/r75-world-guide.cpu.test.mjs scripts/r76-slots.cpu.test.mjs scripts/r76-boss-maze.cpu.test.mjs scripts/r76-overlay.cpu.test.mjs | tee out/r76/cpu.log
+          node --test scripts/r76-world-blocked.cpu.test.mjs | tee out/r76/world-blocked-parity.log
+          node verify-pages-r62.mjs _pages | tee out/r76/integrity.log
+      - name: Pin the exact approved R76 runtime before the R77 guide overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r76
+          python3 scripts/r76-release-gate.py | tee out/r76/release.json
+      - name: Apply and pin the R77 guide-only Normal travel overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
+          python3 scripts/r77-release-gate.test.py | tee out/r77/gate-tests.log
+          node --test scripts/r77-guide-normal.cpu.test.mjs | tee out/r77/cpu.log
+          python3 scripts/r77-release-gate.py | tee out/r77/release.json
+          node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
+      - name: Install pinned sandboxed browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Verify preserved gameplay and R77 guide on final runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-http.log 2>&1 &
+          SERVER_PID=$!
+          python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-reference-http.log 2>&1 &
+          REFERENCE_PID=$!
+          trap 'kill "$SERVER_PID" "$REFERENCE_PID" 2>/dev/null || true' EXIT
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r75-public-smoke.browser.mjs
+          node scripts/r75.browser.mjs
+          R76_SLOT_UPGRADES=1 R74_DANCES_OUT=out/r76 node scripts/r74-dances.browser.mjs
+          STORYWORLD_URL=http://127.0.0.1:4391/ node scripts/r77-guide-normal.browser.mjs | tee out/r77/browser.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-release-review-${{ github.sha }}
+          path: |
+            out/r75/
+            out/r76/
+            out/r77/
+          retention-days: 14
+  release:
+    needs: [build, candidate, r74, r75]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      html_sha: ${{ steps.hospital.outputs.html_sha }}
+      renderer_sha: ${{ steps.hospital.outputs.renderer_sha }}
+      asset_hashes_json: ${{ steps.hospital.outputs.asset_hashes_json }}
+      manifest_sha: ${{ steps.hospital.outputs.manifest_sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct byte-identical verified R75 release
+        run: bash scripts/build-r75-site.sh
+      - name: Require exact R75 runtime and generated image approval
+        id: r75
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/r75-release-gate.py | tee out/r75/approval.json
+      - name: Apply the reviewed R76 overlay to the approved R75 release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r76
+          python3 scripts/apply-r76.py --site _pages/docs | tee out/r76/build.json
+          node --test scripts/r76-overlay.cpu.test.mjs | tee out/r76/overlay-regression.log
+      - name: Require exact approved R76 runtime and stamp the commit manifest
+        id: r76
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r76
+          python3 scripts/r76-release-gate.py | tee out/r76/release.json
+      - name: Apply the guide-only R77 overlay to the approved R76 release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          python3 scripts/apply-r77.py --site _pages/docs | tee out/r77/build.json
+      - name: Require exact approved R77 runtime and stamp the commit manifest
+        id: r77
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          python3 scripts/r77-release-gate.py | tee out/r77/release.json
+      - name: Preserve verified R77 baseline files before hospital composition
+        shell: bash
+        run: |
+          set -euo pipefail
+          node verify-pages-r62.mjs _pages | tee out/r77/integrity.log
+      - name: Compose exact hospital B test artifact after all R77 gates
+        run: python3 scripts/build-hospital-b1.py
+      - name: Prepare deterministic CPU fixtures from this checkout
+        run: python3 scripts/prepare-hospital-b1-cpu.py
+      - name: Execute fresh hospital runtime, storage, source and workflow CPU checks
+        run: python3 scripts/run-hospital-b1-cpu.py
+      - name: Require reviewed full B source and stamp the exact final artifact
+        id: hospitalb1
+        run: python3 scripts/hospital-b1-release-gate.py
+      - name: Verify every final B file under the repository subpath after stamping
+        run: node verify-pages-r62.mjs out/hospital-b1-static
+      - name: Compose the reviewed B2 centre with its own test namespace
+        run: python3 scripts/build-hospital-b2.py
+      - name: Execute fresh B2 structure and actual loader-order CPU checks
+        run: python3 scripts/run-hospital-b2-cpu.py
+      - name: Require independently reviewed B2 bytes and disclosed EGO baseline control
+        id: hospital
+        run: python3 scripts/hospital-b2-release-gate.py
+      - name: Verify complete B2 static artifact after final stamp
+        run: node verify-pages-r62.mjs out/hospital-b2-static
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hospital-b1-release-evidence-${{ github.sha }}
+          path: |
+            out/r75/
+            out/r76/
+            out/r77/
+            out/r74/
+            out/r73/
+            _pages/docs/web-manifest-r62.json
+            out/hospital-b1/build-connected/*.json
+            out/hospital-b1/build-connected/*.log
+            out/hospital-b1/build-connected/audit/*.json
+            out/hospital-b1/build-connected/site/web-manifest-r62.json
+            out/hospital-b1-static/PAGES_STATIC_VERIFICATION_R62.json
+            out/hospital-b2/*.json
+            out/hospital-b2/*.log
+            out/hospital-b2/production-order/*.json
+            out/hospital-b2/site/web-manifest-r62.json
+            out/hospital-b2-static/PAGES_STATIC_VERIFICATION_R62.json
+          retention-days: 14
+      - name: Configure Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
+      - name: Upload only verified static game files
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: out/hospital-b2/site
+          retention-days: 1
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    needs: release
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified static site
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify public hospital B2 runtime, preserved images and stamped manifest
+        env:
+          PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
+          HTML_SHA: ${{ needs.release.outputs.html_sha }}
+          RENDERER_SHA: ${{ needs.release.outputs.renderer_sha }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          ASSET_HASHES: ${{ needs.release.outputs.asset_hashes_json }}
+          MANIFEST_SHA: ${{ needs.release.outputs.manifest_sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,time,urllib.request,urllib.error
+          base=os.environ['PUBLIC_URL'].rstrip('/')+'/'
+          expected={'':os.environ['HTML_SHA'],'dist/phase1.js':os.environ['RENDERER_SHA'],'web-manifest-r62.json':os.environ['MANIFEST_SHA']};expected.update(json.loads(os.environ['ASSET_HASHES']));rows=[]
+          for name,want in expected.items():
+              for attempt in range(18):
+                  url=base+name+'?release='+os.environ['SOURCE_COMMIT']+'&check='+str(attempt)
+                  try:
+                      request=urllib.request.Request(url,headers={'Cache-Control':'no-cache','User-Agent':'StoryWorld-Release-Verification'})
+                      with urllib.request.urlopen(request,timeout=20) as response:data=response.read()
+                      actual=hashlib.sha256(data).hexdigest()
+                      if actual==want:
+                          rows.append({'path':name or 'index.html','sha256':actual,'bytes':len(data),'status':'matched'});break
+                      error='hash mismatch '+actual
+                  except urllib.error.HTTPError as exc:
+                      if exc.code==403:raise SystemExit('Public verification access denied; no retry or alternate route: '+name)
+                      error=str(exc)
+                  except Exception as exc:error=str(exc)
+                  time.sleep(5)
+              else:raise SystemExit('Public release verification failed for '+name+': '+error)
+          print('HOSPITAL_B2_PUBLIC_RELEASE_VERIFIED',json.dumps({'commit':os.environ['SOURCE_COMMIT'],'url':base,'files':rows}))
+          PY
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned sandboxed browser for public smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Open hospital test Pages and verify normal start and isolated save reload
+        env:
+          STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node scripts/r75-public-smoke.browser.mjs
+      - name: Preserve R77 natural guide and Normal-mode proof on hospital test Pages
+        shell: bash
+        env:
+          STORYWORLD_URL: ${{ steps.deployment.outputs.page_url }}
+          R77_PUBLIC_SMOKE: '1'
+        run: |
+          set -euo pipefail
+          mkdir -p out/r77
+          node scripts/r77-guide-normal.browser.mjs | tee out/r77/public-browser.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r77-public-smoke-${{ github.sha }}
+          path: |
+            out/r75/public-smoke.json
+            out/r77/
+          retention-days: 14
