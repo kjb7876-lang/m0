@@ -10,7 +10,7 @@ try{
  const response=await page.goto(process.env.STORYWORLD_URL,{timeout:120000});check('HTTP200',response.status()===200);
  await page.locator('#campaignNew54').click({timeout:120000});
  await page.locator('#slotConfirmR73').click();
- await page.waitForFunction(()=>started&&!loading&&window.__STORYWORLD_STATUS_R96__,null,{timeout:120000});
+ await page.waitForFunction(()=>started&&!loading&&!window.__STORYWORLD_SAVE_SLOTS_R73__.inspect().busy&&window.__STORYWORLD_STATUS_R96__,null,{timeout:120000});
  await page.evaluate(()=>{for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal)closePanel(true);auto=false;guide=false;settings.autoSkill=false;});
  await page.waitForFunction(()=>window.__STORYWORLD_PHASE1__.controller.inspect().active==='three',null,{timeout:120000});
  check('Actual WebGL renderer is active',await page.evaluate(()=>window.__STORYWORLD_PHASE1__.controller.inspect().active==='three'));
@@ -19,10 +19,13 @@ try{
  check('Native keyboard moves player',await page.evaluate(p=>Math.hypot(player.x-p.x,player.y-p.y)>.02,position));
  const saved=await page.evaluate(()=>({ok:saveGame(false),hero:player.hero,zone,progress:JSON.stringify(progress)}));check('Native save succeeds',saved.ok);
  await page.reload();await page.locator('#campaignContinue54').click({timeout:120000});
- await page.waitForFunction(()=>started&&!loading,null,{timeout:120000});
+ await page.waitForFunction(()=>started&&!loading&&!window.__STORYWORLD_SAVE_SLOTS_R73__.inspect().busy,null,{timeout:120000});
  check('Reload/Continue restores journey',await page.evaluate(s=>player.hero===s.hero&&zone===s.zone&&JSON.stringify(progress)===s.progress&&player.hp>0,saved));
  await page.evaluate(()=>{for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal)closePanel(true);guide=false;auto=false;const p=__STORYWORLD_ROUTES_R72__.points().next;if(!p)throw Error('No native next portal');player.x=p.x;player.y=p.y;transitionCD=0;route=[];command=null;});
  await page.waitForTimeout(500);check('Standing on portal does not automatically travel',await page.evaluate(()=>zone==='hub'));
+ report.beforePortal=await page.evaluate(()=>({zone,modal,loading,story:storyScene&&{key:storyScene.key,part:storyScene.part},player:{x:player.x,y:player.y,hp:player.hp},nearby:__STORYWORLD_PORTAL_INTERACTION_R83__.nearby(),points:__STORYWORLD_ROUTES_R72__.points(),transitionCD,focus:document.activeElement?.outerHTML?.slice(0,500),hint:document.getElementById('hint')?.textContent}));
+ check('Positioned fixture is actually beside the native next portal',report.beforePortal.nearby?.role==='next'&&report.beforePortal.nearby.destination==='dist00',report.beforePortal);
+ await page.evaluate(()=>{window.r96KeyEvents=[];window.addEventListener('keydown',e=>r96KeyEvents.push({key:e.key,code:e.code,tag:e.target?.tagName,modal,loading,story:storyScene?.key}),true);});
  await page.keyboard.press('e');
  await page.waitForFunction(()=>__STORYWORLD_PROGRESSION_R71__.difficultyState().open||zone==='dist00');
  await page.evaluate(async()=>{if(__STORYWORLD_PROGRESSION_R71__.difficultyState().open){__STORYWORLD_PROGRESSION_R71__.selectDifficulty('normal');await __STORYWORLD_PROGRESSION_R71__.confirmDifficulty();}for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal&&!storyScene)closePanel(true);});
@@ -47,5 +50,5 @@ try{
  check('Original pool budget holds',state.pool.metrics.highWaterBytes<=67108864&&state.pool.active.length<=16);
  await page.evaluate(()=>{player.hp=0;});await page.waitForFunction(()=>__STORYWORLD_STATUS_R96__.inspect().active.length===0);check('Death clears decorations',true);
  check('No browser script errors',report.errors.length===0,report.errors);report.passed=true;
-}catch(e){report.passed=false;report.failure=String(e.stack);process.exitCode=1;}
+}catch(e){report.passed=false;report.failure=String(e.stack);process.exitCode=1;try{report.failureState=await page.evaluate(()=>({zone,modal,loading,story:storyScene&&{key:storyScene.key,part:storyScene.part},player:{x:player.x,y:player.y,hp:player.hp},nearby:__STORYWORLD_PORTAL_INTERACTION_R83__.nearby(),points:__STORYWORLD_ROUTES_R72__.points(),transitionCD,events:window.r96KeyEvents,hint:document.getElementById('hint')?.textContent,difficulty:__STORYWORLD_PROGRESSION_R71__.difficultyState()}));await page.screenshot({path:'r96/failure.png'});}catch{}}
 finally{await fs.writeFile('r96/browser-results.json',JSON.stringify(report,null,2));await browser.close();console.log(JSON.stringify(report));}
