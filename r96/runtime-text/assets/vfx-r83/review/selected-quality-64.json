@@ -1,0 +1,2369 @@
+{
+  "schema": "storyworld.quality-selected/v1",
+  "count": 64,
+  "upgraded": 48,
+  "retained_original": 16,
+  "generated_candidate_count": 67,
+  "originals_preserved": true,
+  "selected": [
+    {
+      "concept_key": "batch01/dist01_bone_filament_bolt",
+      "file": "selected/batch01/dist01_bone_filament_bolt.png",
+      "source_file": "batch01/dist01_bone_filament_bolt.png",
+      "source_sha256": "685d36c6846451d35e04517efb6814b9f3cb425c169cdae54055ae2c05a0084b",
+      "candidate_source": "batch01/dist01_bone_filament_bolt_q2.png",
+      "sha256": "502deb953207d37441164c919e00cd3ac660bbeb5a1602fc2e6eddef73748ea3",
+      "decision": "upgrade",
+      "comparison": "Sharper projectile core and two tails",
+      "caveats": [
+        "Glow needs engine blending review.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1269920,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.897637685139974,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        187,
+        89,
+        1479,
+        939
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist01_snapped_silk_remnant",
+      "file": "selected/batch01/dist01_snapped_silk_remnant.png",
+      "source_file": "batch01/dist01_snapped_silk_remnant.png",
+      "source_sha256": "e3ceb8d3c456051449aa59b247314105d239136cc2d2565b53b8bc11a6786db3",
+      "candidate_source": "batch01/dist01_snapped_silk_remnant_q2.png",
+      "sha256": "c82413c123c1cdee34371cd4290e5cff0d6eb08cc1233bd8ecc70523c3f82090",
+      "decision": "upgrade",
+      "comparison": "Larger web holes and distinct broken ends",
+      "caveats": [
+        "Still broad web silhouette, not narrow strip.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1472341,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8835875193277994,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        263,
+        69,
+        1421,
+        965
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist01_violet_claw_contact",
+      "file": "selected/batch01/dist01_violet_claw_contact.png",
+      "source_file": "batch01/dist01_violet_claw_contact.png",
+      "source_sha256": "620c8e18ac5988d3ca8ba4a9c217c2cef83ad16e6920c40937f1afd092222943",
+      "candidate_source": "batch01/dist01_violet_claw_contact_q2.png",
+      "sha256": "254efd50e90721bedac103343c64bcbbf918c4490ba855207e68388e9df6083f",
+      "decision": "upgrade",
+      "comparison": "Three clean tapered claw streaks; rubble removed",
+      "caveats": [
+        "Low-opacity pixels approach edge.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1707811,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7524115244547526,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        221,
+        85,
+        1379,
+        975
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist01_web_lane_warning",
+      "file": "selected/batch01/dist01_web_lane_warning_v2.png",
+      "source_file": "batch01/dist01_web_lane_warning_v2.png",
+      "source_sha256": "0980931431bdf707406addf274bcf19c9d62e7e05e4f63cb425ebde84d9073fb",
+      "candidate_source": "batch01/dist01_web_lane_warning_q2.png",
+      "sha256": "6748fa6e5cdf720369f2d2e24f0f67aa5de9d850373123a84c73e6195700b143",
+      "decision": "upgrade",
+      "comparison": "Narrower eight-spoke warning silhouette",
+      "caveats": [
+        "Fine edge noise remains.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 966857,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7435625456275167,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        69,
+        81,
+        1187,
+        1173
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist02_drag_groove_remnant",
+      "file": "selected/batch01/dist02_drag_groove_remnant.png",
+      "source_file": "batch01/dist02_drag_groove_remnant.png",
+      "source_sha256": "fa787dd69653573267f3d9b62150ca7eff7766e62d78fe22576284225990dbc7",
+      "candidate_source": "batch01/dist02_drag_groove_remnant_q3.png",
+      "sha256": "e6ae24fad57ccf5a63bcfec73806f91ac004d0ae08ba74a4921f5d9874b17234",
+      "decision": "upgrade",
+      "comparison": "Standing reeds removed; three flat-readable grooves",
+      "caveats": [
+        "Shaded rim depth remains; strict orthographic projection not certified.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 2041194,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6637598673502604,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        196,
+        34,
+        1374,
+        975
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist02_horn_charge_warning",
+      "file": "selected/batch01/dist02_horn_charge_warning.png",
+      "source_file": "batch01/dist02_horn_charge_warning.png",
+      "source_sha256": "e451a1f31f49bc8fdd65d7eda29f8e5522469e878954ae3518b034cc8877526d",
+      "candidate_source": "batch01/dist02_horn_charge_warning_q2.png",
+      "sha256": "5120445ef7e78969dbad8865a2685249cf17373a35fe83cf11add15dbfdfb6ee",
+      "decision": "upgrade",
+      "comparison": "Sharper horn boundaries and contrast",
+      "caveats": [
+        "Glowing tips near edge.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1597430,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8356736501057943,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        279,
+        31,
+        1257,
+        974
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist02_horn_splash_impact",
+      "file": "selected/batch01/dist02_horn_splash_impact.png",
+      "source_file": "batch01/dist02_horn_splash_impact.png",
+      "source_sha256": "0cea64cfb37a4ff3616637f021f7967295270caf8efdb31771f52a1dd31f63d4",
+      "candidate_source": "batch01/dist02_horn_splash_impact_q2.png",
+      "sha256": "1314a6504969817a64b3f383d47aebcc77158c733d4b411026deb2a5bd687e8a",
+      "decision": "upgrade",
+      "comparison": "Clearer two-lobe horn splash",
+      "caveats": [
+        "Droplet count greater than requested.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "mode": "RGBA",
+      "bytes": 1121167,
+      "decoded_rgba_bytes": 6292176,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7508995298287906,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        298,
+        42,
+        1184,
+        1037
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist02_reed_hand_projectile",
+      "file": "selected/batch01/dist02_reed_hand_projectile.png",
+      "source_file": "batch01/dist02_reed_hand_projectile.png",
+      "source_sha256": "9029aa4a88570b9684b813d6a68deaf25291f2eefa5586042398c61df311dc5e",
+      "candidate_source": "batch01/dist02_reed_hand_projectile_q2.png",
+      "sha256": "326bc61e02a00e13e139fb7de75c70759cc0306475c18c977544572092c23f8c",
+      "decision": "upgrade",
+      "comparison": "Simplified five-finger reed projectile",
+      "caveats": [
+        "Not engine tested.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 2034788,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6805197397867838,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        241,
+        107,
+        1392,
+        910
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist05_cooling_whip_scorch",
+      "file": "selected/batch01/dist05_cooling_whip_scorch.png",
+      "source_file": "batch01/dist05_cooling_whip_scorch.png",
+      "source_sha256": "b5f4ff4a7681b2e6225e8a5dc734cc819c335c20e5402c4c7a652b563fb6a7f4",
+      "candidate_source": "batch01/dist05_cooling_whip_scorch_q2.png",
+      "sha256": "026df4c61ac41bb57e51215d420ff4cea7ec9eafd8d0b2327cc6b35090e0e1e6",
+      "decision": "upgrade",
+      "comparison": "More visible charcoal/remnant contrast",
+      "caveats": [
+        "Loose pebbles and microdetail remain.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1183217,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8631114959716797,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        303,
+        29,
+        1237,
+        1008
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist05_ember_whip",
+      "file": "selected/batch01/dist05_ember_whip.png",
+      "source_file": "batch01/dist05_ember_whip.png",
+      "source_sha256": "28cdcb4231ca45453af5c37b04cd21b11a55c8a5fecfd6bea0e9a5ad37369140",
+      "candidate_source": "batch01/dist05_ember_whip_q2.png",
+      "sha256": "de9f5014de5489f0454269adef6fa32a51fdaec256e2e7240f7e6bf41cf7deab",
+      "decision": "upgrade",
+      "comparison": "Cleaner continuous S whip core, loose rubble removed",
+      "caveats": [
+        "Broad glow and lower tip need integration review.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1412180,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8642361958821615,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        158,
+        55,
+        1366,
+        995
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist05_seven_heat_warning",
+      "file": "selected/batch01/dist05_seven_heat_warning.png",
+      "source_file": "batch01/dist05_seven_heat_warning.png",
+      "source_sha256": "bf45cf9faac0701bbbce42b104cb4c893fbf7aa4331227fdf8efc758da2bd611",
+      "candidate_source": "batch01/dist05_seven_heat_warning_q2.png",
+      "sha256": "c802a09c1d88adb1ff19fabd7b78fae27dd60354ccbce5f89fdfd3c04cb228ba",
+      "decision": "upgrade",
+      "comparison": "Seven disconnected nodes, connecting lightning removed",
+      "caveats": [
+        "Cracks remain detailed; glow needs blending review.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1252483,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9147300720214844,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        197,
+        74,
+        1343,
+        931
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist05_split_stone_impact",
+      "file": "selected/batch01/dist05_split_stone_impact.png",
+      "source_file": "batch01/dist05_split_stone_impact.png",
+      "source_sha256": "4e4c2dac48ba2e2632b139ab989cb3e2e87418b32ab54bd9846d4d660d5606d1",
+      "candidate_source": "batch01/dist05_split_stone_impact_q2.png",
+      "sha256": "ab057d3698da806594bf565ede061a5b3e735c51c30d95997a0745e9e025d381",
+      "decision": "upgrade",
+      "comparison": "Three major stone fragments and five total pieces",
+      "caveats": [
+        "Large effect, not as compact as requested.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1905454,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6925830841064453,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        260,
+        73,
+        1316,
+        881
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist06_fireball_landing_crown",
+      "file": "selected/batch01/dist06_fireball_landing_crown.png",
+      "source_file": "batch01/dist06_fireball_landing_crown.png",
+      "source_sha256": "d97ad071f645bcde47d6f805de37412b4eb5038e7f5f30539987867c6a4348b6",
+      "candidate_source": "batch01/dist06_fireball_landing_crown_q2.png",
+      "sha256": "0f1986cb85efd1b5b01ec46dc2fdb54b94ddaf81b30f7f109ee328dfc1df48e2",
+      "decision": "upgrade",
+      "comparison": "Simplified crown and fewer large droplets",
+      "caveats": [
+        "Six flame tongues not reliably countable; not animation.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1833043,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7544898986816406,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        239,
+        30,
+        1317,
+        944
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist06_molten_cleave_scar",
+      "file": "selected/batch01/dist06_molten_cleave_scar.png",
+      "source_file": "batch01/dist06_molten_cleave_scar.png",
+      "source_sha256": "440b4728a0b9765cc98908d83fd7ddde3b8f9b74119bf339ef344d87ed6b9595",
+      "candidate_source": "batch01/dist06_molten_cleave_scar_q2.png",
+      "sha256": "4611a5a712aaabc51c8156b19b06adba91336adb734c982a25fe448b6e4e4bb5",
+      "decision": "upgrade",
+      "comparison": "Five disconnected crust islands; thorns/debris removed",
+      "caveats": [
+        "Surface remains finely textured.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 420967,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.9014062577452848,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        178,
+        202,
+        1689,
+        783
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist06_spatial_cleave_warning",
+      "file": "selected/batch01/dist06_spatial_cleave_warning.png",
+      "source_file": "batch01/dist06_spatial_cleave_warning.png",
+      "source_sha256": "5a79571798401d5bcbc3d107ebaa1da7215096ea4d7cea69f048a7f34b4fa4df",
+      "candidate_source": "batch01/dist06_spatial_cleave_warning_q2.png",
+      "sha256": "10c3b6acc6a68cdd8dba3b8c1349065063bc6169aea264fc7749e9dc0e51a5ab",
+      "decision": "upgrade",
+      "comparison": "Open rear wedge and simplified center",
+      "caveats": [
+        "Broad glow needs blending review.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1598388,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6790307362874349,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        117,
+        102,
+        1452,
+        913
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch01/dist06_sword_space_fissure",
+      "file": "selected/batch01/dist06_sword_space_fissure.png",
+      "source_file": "batch01/dist06_sword_space_fissure.png",
+      "source_sha256": "d6428be9f676d3edc53fbbca05146fda6c7735b21dcc0c57a3a373496d81e26d",
+      "candidate_source": "batch01/dist06_sword_space_fissure_q2.png",
+      "sha256": "d0af96fa959b1489eddab16c84c1b5c709191024e8612e000d2bf0c271efaf29",
+      "decision": "upgrade",
+      "comparison": "Two separated slits; debris reduced to four large shards",
+      "caveats": [
+        "Some fine cracks remain.",
+        "Static image only; no game, GPU, animation, performance, or real-play verification."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1645699,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7505054473876953,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        82,
+        86,
+        1476,
+        913
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b03_leviathan_impact",
+      "file": "selected/batch02/ep1b03_leviathan_impact.png",
+      "source_file": "batch02/ep1b03_leviathan_impact.png",
+      "source_sha256": "239677ec2e38f4090572853bdee67ccd179c1c649b12ef7331e4b8af0feaf38a",
+      "candidate_source": "batch02/ep1b03_leviathan_impact_quality.png",
+      "sha256": "cf368d19c6485846c63900b7d77f6daca38ae1ba7811c3b29d5bccaf26478dea",
+      "decision": "upgrade",
+      "comparison": "Sharper dominant X and larger clear glass planes; output aspect changed to3:2; billboard, not ground.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1807704,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7243111928304037,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        217,
+        76,
+        1392,
+        894
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b03_leviathan_projectile",
+      "file": "selected/batch02/ep1b03_leviathan_projectile.png",
+      "source_file": "batch02/ep1b03_leviathan_projectile.png",
+      "source_sha256": "1e05df333babd1a2c60370e83f3ce9f23c8b116c0ba220f211188e468d8e5d31",
+      "candidate_source": "batch02/ep1b03_leviathan_projectile_quality.png",
+      "sha256": "635c9dadfbac472a29a38c8ef60aba2234c38bd5428e2c082e9be71210d23f57",
+      "decision": "upgrade",
+      "comparison": "Stronger tip and clearer coherent facets; ornamental coil retained; thin tail margins remain.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 772161,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8342372411724407,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        153,
+        96,
+        1689,
+        831
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b03_leviathan_remnant",
+      "file": "selected/batch02/ep1b03_leviathan_remnant.png",
+      "source_file": "batch02/ep1b03_leviathan_remnant.png",
+      "source_sha256": "f5759b7f73fdba8afba71581a9c733b49f4303d39dfa2bd0dc71bca6df81788b",
+      "candidate_source": "batch02/ep1b03_leviathan_remnant_quality.png",
+      "sha256": "99eb2fad4da8233dec7cd965d14b29c21c2ebb0522a65b53c8cdc85c30e16e25",
+      "decision": "upgrade",
+      "comparison": "Fewer tiny shards and more legible two-cluster structure; top alpha64 margin remains38px, not strict safe-padding pass.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1748124,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7947419484456381,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        195,
+        38,
+        1384,
+        949
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b03_leviathan_warning",
+      "file": "selected/batch02/ep1b03_leviathan_warning_v2.png",
+      "source_file": "batch02/ep1b03_leviathan_warning_v2.png",
+      "source_sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "candidate_source": "original/batch02/ep1b03_leviathan_warning_v2.png",
+      "sha256": "c24c90ab153aec5bed7d5a73c7980a66a6fde8e1c694225d4aa993ef93811adb",
+      "decision": "retained_original",
+      "comparison": "Edited rings become cleaner but less broken and wider/tighter; no unambiguous net gameplay improvement.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1582696,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8352762858072916,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        82,
+        243,
+        1460,
+        773
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b04_beelzebub_impact",
+      "file": "selected/batch02/ep1b04_beelzebub_impact.png",
+      "source_file": "batch02/ep1b04_beelzebub_impact.png",
+      "source_sha256": "db01060e030181d9187e4a41bdc0f3de76893105b45493e503571cacc7c63fd7",
+      "candidate_source": "batch02/ep1b04_beelzebub_impact_quality.png",
+      "sha256": "ea0b6f79a5ea3435ddd76a15b053e16be235c413fc8630f5b18f94b734872012",
+      "decision": "upgrade",
+      "comparison": "More organized contact center and coherent wedge forms with contained visible bounds; oblique billboard, not overhead.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1059505,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7590385487989486,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        308,
+        205,
+        1485,
+        703
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch02/ep1b04_beelzebub_projectile",
+      "file": "selected/batch02/ep1b04_beelzebub_projectile.png",
+      "source_file": "batch02/ep1b04_beelzebub_projectile.png",
+      "source_sha256": "c9af30b39c4980ee688c8b201c74894458630be5c13f3c20ae4c9a1100d4f7b2",
+      "candidate_source": "batch02/ep1b04_beelzebub_projectile_quality.png",
+      "sha256": "b818cbd615fbbc3255ddde779517844b30a0497a06a4adb0d5f16ff76c95b387",
+      "decision": "upgrade",
+      "comparison": "Broad legible cleaver face and concise edge arc; substantial clear padding; tiny texture remains.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 738102,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8293412678943883,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        484,
+        172,
+        1435,
+        746
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch02/ep1b04_beelzebub_remnant",
+      "file": "selected/batch02/ep1b04_beelzebub_remnant.png",
+      "source_file": "batch02/ep1b04_beelzebub_remnant.png",
+      "source_sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "candidate_source": "original/batch02/ep1b04_beelzebub_remnant.png",
+      "sha256": "bd0bb3dc587fef895f48013c517f33d7f1827c9fbae359c22f639a952689b153",
+      "decision": "retained_original",
+      "comparison": "Edit retains foamy microstructure and low bottom margin; no sufficient net readability gain established.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1394459,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8342507680257162,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        356,
+        204,
+        1165,
+        868
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch02/ep1b04_beelzebub_warning",
+      "file": "selected/batch02/ep1b04_beelzebub_warning.png",
+      "source_file": "batch02/ep1b04_beelzebub_warning.png",
+      "source_sha256": "ceb38d634ac9c284a00fd6505eca7e2e46c0feb286f876720bfc4176e9a40e43",
+      "candidate_source": "batch02/ep1b04_beelzebub_warning_quality.png",
+      "sha256": "1339efdfc97be1177101d34a49fc26774551b847335821a6d0fcb4d09f0cd3a3",
+      "decision": "upgrade",
+      "comparison": "Hollow cleaver endpoint better separates warning from solid projectile; two clearly separated rails and good core padding; acid decoration remains.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 536218,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8613404951135594,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        327,
+        303,
+        1468,
+        623
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch02/ep1b05_asmodeus_impact",
+      "file": "selected/batch02/ep1b05_asmodeus_impact.png",
+      "source_file": "batch02/ep1b05_asmodeus_impact.png",
+      "source_sha256": "e74f43015e0cb2245f4a3c62da48e73a7a5b042b4029d1ba23c0dca9122ce8b4",
+      "candidate_source": "batch02/ep1b05_asmodeus_impact_quality.png",
+      "sha256": "8fd470b70769db462cca1adea203eb1d59a388c07ef462e647613b947e5de925",
+      "decision": "upgrade",
+      "comparison": "Cleaner barbed loop and dominant diagonal impact; improved vertical core padding, but side tips still tight. Aspect changed3:2.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1581574,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7754542032877604,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        69,
+        119,
+        1472,
+        864
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b05_asmodeus_projectile",
+      "file": "selected/batch02/ep1b05_asmodeus_projectile.png",
+      "source_file": "batch02/ep1b05_asmodeus_projectile.png",
+      "source_sha256": "ce31428e2431772fdb7c3e228642673bf72af70588ee758fe92afb489e3d36c1",
+      "candidate_source": "batch02/ep1b05_asmodeus_projectile_quality.png",
+      "sha256": "352d2e0df09c19e31170e8081d8e8448892cc6299f3781da13c076be17d19da7",
+      "decision": "upgrade",
+      "comparison": "Larger coherent facets and readable heel/toe; aspect changed3:2; ornamental silhouette remains.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1666365,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7457002003987631,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        239,
+        81,
+        1390,
+        929
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b05_asmodeus_remnant",
+      "file": "selected/batch02/ep1b05_asmodeus_remnant.png",
+      "source_file": "batch02/ep1b05_asmodeus_remnant.png",
+      "source_sha256": "1e74aa5ef2a4b1c116b2b223cb828746454ce0145c14876e8b090a199350a83c",
+      "candidate_source": "batch02/ep1b05_asmodeus_remnant_quality.png",
+      "sha256": "679ecbaa48a5955bae35d048f326659c6a967a1595dc2f65be018962ff44c69e",
+      "decision": "upgrade",
+      "comparison": "Removed hanging jewelry beads; damaged thorn loops better convey dangerous remnants; roses remain and core top margin47px.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1896529,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6570987701416016,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        280,
+        47,
+        1257,
+        961
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b05_asmodeus_warning",
+      "file": "selected/batch02/ep1b05_asmodeus_warning.png",
+      "source_file": "batch02/ep1b05_asmodeus_warning.png",
+      "source_sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "candidate_source": "original/batch02/ep1b05_asmodeus_warning.png",
+      "sha256": "1f40afd97b67d468c6abac86d3c125c435c374a9ed6b86dfc382f65a5a09a581",
+      "decision": "retained_original",
+      "comparison": "Edit looks cleaner but enlarges fan too far toward right and bottom; no clear net padding/readability gain.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1714539,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6756598154703776,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        201,
+        149,
+        1377,
+        908
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch02/ep1b08_chairman_impact",
+      "file": "selected/batch02/ep1b08_chairman_impact.png",
+      "source_file": "batch02/ep1b08_chairman_impact.png",
+      "source_sha256": "a691a3297e0c3990939611c99d8c988b37665fbc08376030937351e15d1cbcb8",
+      "candidate_source": "batch02/ep1b08_chairman_impact_quality.png",
+      "sha256": "1b95f5fa7b1e9db60352e504d9c3b7e99a2bc7f516948e58305d72a2edf70b2f",
+      "decision": "upgrade",
+      "comparison": "Asymmetric broken jaw now visible and original top/bottom crowding reduced; physical clamp aesthetic remains.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 530340,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8857485488116589,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        557,
+        81,
+        1167,
+        821
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b08_chairman_projectile",
+      "file": "selected/batch02/ep1b08_chairman_projectile.png",
+      "source_file": "batch02/ep1b08_chairman_projectile.png",
+      "source_sha256": "89ecc5b32710262a74693258c3253315c9fc11e6132ad73d548aa0ba912653d2",
+      "candidate_source": "batch02/ep1b08_chairman_projectile_quality.png",
+      "sha256": "32ae00ae972f8cee02d19a926a15010d50188182982f702e7de6dd27ab1e6e29",
+      "decision": "upgrade",
+      "comparison": "Rear arc no longer near left canvas edge and three sections clearer; right tip padding remains modest.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 722762,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.835330319318631,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        136,
+        84,
+        1699,
+        813
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b08_chairman_remnant",
+      "file": "selected/batch02/ep1b08_chairman_remnant.png",
+      "source_file": "batch02/ep1b08_chairman_remnant.png",
+      "source_sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "candidate_source": "original/batch02/ep1b08_chairman_remnant.png",
+      "sha256": "b91f9a86ce81bb125fd1c7670b54c6f54207a88de519cf48bc20700c9ba86ae6",
+      "decision": "retained_original",
+      "comparison": "Candidate retains upright relief despite flat-ground instruction; spacing alone does not establish material role improvement.",
+      "caveats": [],
+      "dimensions": [
+        1330,
+        1182
+      ],
+      "mode": "RGBA",
+      "bytes": 1057332,
+      "decoded_rgba_bytes": 6288240,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7494319555233261,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        218,
+        59,
+        1156,
+        1140
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch02/ep1b08_chairman_warning",
+      "file": "selected/batch02/ep1b08_chairman_warning.png",
+      "source_file": "batch02/ep1b08_chairman_warning.png",
+      "source_sha256": "9f4b0b3065542bf0ee72dda614877fc14e7e7270044337bd85fe59d593a45527",
+      "candidate_source": "batch02/ep1b08_chairman_warning_v2_quality.png",
+      "sha256": "e96c95b500b57eada8da69ec72d9ce676ba73fe76c0fafe36072ddca4b86419b",
+      "decision": "upgrade",
+      "comparison": "Second revision removes heavy physical hardware, preserves seven distinct command lanes and improves top/bottom padding. Still zigzag rather than straight. Ground plane placement must be tested.",
+      "caveats": [],
+      "dimensions": [
+        1402,
+        1122
+      ],
+      "mode": "RGBA",
+      "bytes": 1079134,
+      "decoded_rgba_bytes": 6292176,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6938019534100762,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        188,
+        119,
+        1219,
+        1037
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/01_bootloader_strike_lanes",
+      "file": "selected/batch03/01_bootloader_strike_lanes_v2.png",
+      "source_file": "batch03/01_bootloader_strike_lanes_v2.png",
+      "source_sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "candidate_source": "original/batch03/01_bootloader_strike_lanes_v2.png",
+      "sha256": "ad28d4dc526197595098a1eae879ba7246dfb0a854a9b2065eb57f05a3d9d874",
+      "decision": "retained_original",
+      "comparison": "Candidate thicker and larger than selected original; no clear geometry/readability improvement.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1566142,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.793145497639974,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        424,
+        130,
+        1110,
+        905
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch03/02_bootloader_neural_spike",
+      "file": "selected/batch03/02_bootloader_neural_spike.png",
+      "source_file": "batch03/02_bootloader_neural_spike.png",
+      "source_sha256": "7622d4d6c14322a52ac7fe3ed7365e62e48710c32d8837be01cdaab887afd195",
+      "candidate_source": "batch03/02_bootloader_neural_spike_q2.png",
+      "sha256": "0e3ee83e7490be81b7a92b1ebb20181f1b1784541c5ff0cb80c9dd90ecb6ea1c",
+      "decision": "upgrade",
+      "comparison": "Cleaner articulated three-joint silhouette and point; less particulate noise. Direction and identity preserved.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 551296,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8831238902397018,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        158,
+        82,
+        1693,
+        842
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/03_bootloader_copy_interference",
+      "file": "selected/batch03/03_bootloader_copy_interference.png",
+      "source_file": "batch03/03_bootloader_copy_interference.png",
+      "source_sha256": "643651a44a73bb2f3846dbf43963774f5541888c5429fa478b346673790f3a13",
+      "candidate_source": "batch03/03_bootloader_copy_interference_q2.png",
+      "sha256": "f793c270d070f9899033fa69dc1e89a65b2be734662a57ac8287fbb2d9bb0e8f",
+      "decision": "upgrade",
+      "comparison": "Clearer principal cut and subordinate crossing cut; reduced small shards and cleaner negative spaces.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 980578,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.785215228358006,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        199,
+        67,
+        1650,
+        815
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/04_bootloader_drained_circuit",
+      "file": "selected/batch03/04_bootloader_drained_circuit.png",
+      "source_file": "batch03/04_bootloader_drained_circuit.png",
+      "source_sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "candidate_source": "original/batch03/04_bootloader_drained_circuit.png",
+      "sha256": "bfdcd4a9a775b2ccd8239a0445b55b92338ef2caceb41bc2c42098bcd2dbe94d",
+      "decision": "retained_original",
+      "comparison": "Cleaner branches but candidate alpha reaches bottom edge; retain original.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1607213,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7780920664469401,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        234,
+        86,
+        1341,
+        957
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/05_controller_bombardment_grid",
+      "file": "selected/batch03/05_controller_bombardment_grid_v3.png",
+      "source_file": "batch03/05_controller_bombardment_grid_v3.png",
+      "source_sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "candidate_source": "original/batch03/05_controller_bombardment_grid_v3.png",
+      "sha256": "7dacf4028b560a71e46f11ca7fdc3f783e54924222a9dec66c162e6ce997639d",
+      "decision": "retained_original",
+      "comparison": "REJECT: candidate changed required six targeting cells into four; original six-cell geometry retained.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1271002,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9173170725504557,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        339,
+        136,
+        1197,
+        874
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch03/06_controller_shell_contrail",
+      "file": "selected/batch03/06_controller_shell_contrail.png",
+      "source_file": "batch03/06_controller_shell_contrail.png",
+      "source_sha256": "0d6baed0beccb8901baf03b9b0c1a5d5b289a73f2304d96900fd5c6c11d75a63",
+      "candidate_source": "batch03/06_controller_shell_contrail_q2.png",
+      "sha256": "74e1a56056862ebce682089d28beff5f92ccfaabd2062350b6466d47d4340c95",
+      "decision": "upgrade",
+      "comparison": "Narrower coherent smoke taper with separated billows and clearer shell metal. Smoke opacity still requires runtime blending check.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 580880,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8572217512382924,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        458,
+        50,
+        1641,
+        801
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/07_controller_steel_impact",
+      "file": "selected/batch03/07_controller_steel_impact.png",
+      "source_file": "batch03/07_controller_steel_impact.png",
+      "source_sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "candidate_source": "original/batch03/07_controller_steel_impact.png",
+      "sha256": "782341fad811666faffe8dae1d9bb83e73ee0b66edc02abc598f73b9f63ac994",
+      "decision": "retained_original",
+      "comparison": "Candidate increases brightness and alpha reaches bottom edge; no proven improvement.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1237330,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.6494778009809741,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        341,
+        138,
+        1507,
+        770
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch03/08_controller_shell_furrow",
+      "file": "selected/batch03/08_controller_shell_furrow.png",
+      "source_file": "batch03/08_controller_shell_furrow.png",
+      "source_sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "candidate_source": "original/batch03/08_controller_shell_furrow.png",
+      "sha256": "3355303ca6238f760dd36b706595e67f71162b0b00826eca407630af3925a68a",
+      "decision": "retained_original",
+      "comparison": "q3 removes upright splinters and smoke but alpha still touches left border; not select as general upgrade.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1855847,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6854133605957031,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        135,
+        78,
+        1435,
+        946
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/09_knight_six_lane_warning",
+      "file": "selected/batch03/09_knight_six_lane_warning.png",
+      "source_file": "batch03/09_knight_six_lane_warning.png",
+      "source_sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "candidate_source": "original/batch03/09_knight_six_lane_warning.png",
+      "sha256": "f95058af17abc196a72d59bf7d621e473644f67ad4cdf04a769774ab764f3bdd",
+      "decision": "retained_original",
+      "comparison": "Candidate thicker/brighter and alpha reaches left edge; original safer geometry retained.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 1287181,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.6346930651262054,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        123,
+        41,
+        1133,
+        1207
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/10_knight_parry_counter",
+      "file": "selected/batch03/10_knight_parry_counter.png",
+      "source_file": "batch03/10_knight_parry_counter.png",
+      "source_sha256": "d07bdde1234ac2d8fa16bb166c28011c00e9c523562115e52c7ee6d4417c494a",
+      "candidate_source": "batch03/10_knight_parry_counter_q2.png",
+      "sha256": "075aae75d52fcd2cff42afb4f95a267b7f19b8cfe86862e976470e662bf76e2f",
+      "decision": "upgrade",
+      "comparison": "Removed loose metal debris, clearer chevron and three counter sparks. Blue glow remains substantial.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 599343,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.8366343869674581,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        560,
+        44,
+        1314,
+        835
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/11_knight_six_contact_cuts",
+      "file": "selected/batch03/11_knight_six_contact_cuts.png",
+      "source_file": "batch03/11_knight_six_contact_cuts.png",
+      "source_sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "candidate_source": "original/batch03/11_knight_six_contact_cuts.png",
+      "sha256": "aac61cd2b231e66eb5dbd446275d557666a722d490ebd5305dcb87ceef1d3a5e",
+      "decision": "retained_original",
+      "comparison": "Candidate tips reach top and bottom edges; retain original despite cleaner gaps.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1060372,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7057548022354719,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        316,
+        46,
+        1447,
+        855
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/12_knight_six_ground_scars",
+      "file": "selected/batch03/12_knight_six_ground_scars.png",
+      "source_file": "batch03/12_knight_six_ground_scars.png",
+      "source_sha256": "bab94c24b09e47c171590147999a58ce17ba461200766b9ad5ed644fb061b0fd",
+      "candidate_source": "batch03/12_knight_six_ground_scars_q2.png",
+      "sha256": "2414e843585687853b0b3039d8b632fab3d4067559959d78a37195f800a71bed",
+      "decision": "upgrade",
+      "comparison": "Sharper six ground scars with less diffuse skirt and flatter embedded fragments. Geometry clearly separated.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1341,
+        1173
+      ],
+      "mode": "RGBA",
+      "bytes": 682223,
+      "decoded_rgba_bytes": 6291972,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8532015082076017,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        149,
+        23,
+        1186,
+        1149
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/13_insomnia_gaze_warning",
+      "file": "selected/batch03/13_insomnia_gaze_warning.png",
+      "source_file": "batch03/13_insomnia_gaze_warning.png",
+      "source_sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "candidate_source": "original/batch03/13_insomnia_gaze_warning.png",
+      "sha256": "543ae18a7a00a56271f04b7fd86f37c17e566077c4f3c2297a3b89c2283bfe0d",
+      "decision": "retained_original",
+      "comparison": "Candidate opens center but stray alpha reaches canvas edges; retain original pending tighter framing.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1563464,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.5157644747060446,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        77,
+        80,
+        1698,
+        826
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/14_insomnia_split_gaze_ray",
+      "file": "selected/batch03/14_insomnia_split_gaze_ray.png",
+      "source_file": "batch03/14_insomnia_split_gaze_ray.png",
+      "source_sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "candidate_source": "original/batch03/14_insomnia_split_gaze_ray.png",
+      "sha256": "69a3c1146c8900113d45a65af3ddf37e168628ebb65a9eeaa05461cf29a83055",
+      "decision": "retained_original",
+      "comparison": "Twin tips sharper but lower alpha edge contact and stronger glow; retain original.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 983083,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.715352918073793,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        148,
+        128,
+        1647,
+        768
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/15_insomnia_layered_afterimage",
+      "file": "selected/batch03/15_insomnia_layered_afterimage.png",
+      "source_file": "batch03/15_insomnia_layered_afterimage.png",
+      "source_sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "candidate_source": "original/batch03/15_insomnia_layered_afterimage.png",
+      "sha256": "152ca6f1eeba86c30b7b794d0e7383015120d7a6b91d567356dacfbd51f04b3a",
+      "decision": "retained_original",
+      "comparison": "Cleaner separated echoes but leading tip reaches right edge; reject cropped-margin candidate.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 1623955,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5165664890202842,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        146,
+        144,
+        1716,
+        814
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch03/16_insomnia_withdrawn_claw_lines",
+      "file": "selected/batch03/16_insomnia_withdrawn_claw_lines.png",
+      "source_file": "batch03/16_insomnia_withdrawn_claw_lines.png",
+      "source_sha256": "b1c458f7a54237476dd5860157ba749ebc4604136cc291f49b35160d234c1287",
+      "candidate_source": "batch03/16_insomnia_withdrawn_claw_lines_q2.png",
+      "sha256": "8acbb3a54e583a7c31ce3c284df98f88eb20b8b2866cbbabfc88767bc01fe80d",
+      "decision": "upgrade",
+      "comparison": "Three traces more distinct and cleaner taper with less detached rubble. Narrow mist remains; contrast testing required.",
+      "caveats": [
+        "Not engine applied or browser/GPU/mobile validated.",
+        "128px readability is qualitative design assessment, not runtime capture.",
+        "No resizing or raster processing performed."
+      ],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1856597,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7220853169759115,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        237,
+        34,
+        1380,
+        994
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/01-kair03-clock-hand-lane-warning",
+      "file": "selected/batch04/01-kair03-clock-hand-lane-warning-v2.png",
+      "source_file": "batch04/01-kair03-clock-hand-lane-warning-v2.png",
+      "source_sha256": "191051dd9c2b0ad6ad43cef5601b2dad823e9442b8887c28b864d0c623abae9d",
+      "candidate_source": "batch04/01-kair03-clock-hand-lane-warning-v2-quality.png",
+      "sha256": "01860b7ee709aa0f7d2dd4f1bbdbbfca388f191db798f7e22086517151ea1fc9",
+      "decision": "upgrade",
+      "comparison": "Thicker readable gold cores, preserved open lane gaps; tighter margins remain.",
+      "caveats": [],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "bytes": 585056,
+      "decoded_rgba_bytes": 6294152,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8593291042224592,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        74,
+        248,
+        1703,
+        671
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/02-kair03-black-sand-needle",
+      "file": "selected/batch04/02-kair03-black-sand-needle.png",
+      "source_file": "batch04/02-kair03-black-sand-needle.png",
+      "source_sha256": "fbfc40aa18524d4b2ac83e506e6be99406fe834d1a41d005e46451952f80f627",
+      "candidate_source": "batch04/02-kair03-black-sand-needle-quality.png",
+      "sha256": "c57cf051b7429661ece7fd5bb7ade57b8c66bb638c41ae28746db9fd3bc4ff80",
+      "decision": "upgrade",
+      "comparison": "More cohesive black needle and stronger ivory edges; granular wake remains.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 714995,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8656039111843695,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        217,
+        189,
+        1158,
+        1097
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/03-kair03-cable-hand-shear-impact",
+      "file": "selected/batch04/03-kair03-cable-hand-shear-impact.png",
+      "source_file": "batch04/03-kair03-cable-hand-shear-impact.png",
+      "source_sha256": "e8166e8a6438722fd33acc4471af491c578db6aa0bfb500aa8169245f72a140c",
+      "candidate_source": "batch04/03-kair03-cable-hand-shear-impact-quality.png",
+      "sha256": "1bae1c47f6f5b8e2b5a1e00152d1e9291e49e00fa7feddb0a5d187c6be25d9b2",
+      "decision": "upgrade",
+      "comparison": "Cleaner bundled cable and arc with fewer loose particles; broad slash remains.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 1068913,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7628863553693571,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        234,
+        162,
+        1077,
+        1126
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/04-kair03-exhausted-sand-tracks",
+      "file": "selected/batch04/04-kair03-exhausted-sand-tracks.png",
+      "source_file": "batch04/04-kair03-exhausted-sand-tracks.png",
+      "source_sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "candidate_source": "original/batch04/04-kair03-exhausted-sand-tracks.png",
+      "sha256": "aa87d3b75d74233c52a5de879de8d22d14e685787bf1003feb45c49e6b0440d2",
+      "decision": "retained_original",
+      "comparison": "Contrast increased but oblique geometry and microclutter not materially improved; preserve original.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 774081,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.83421917487644,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        190,
+        262,
+        1108,
+        1046
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/05-murder03-three-stop-bars",
+      "file": "selected/batch04/05-murder03-three-stop-bars.png",
+      "source_file": "batch04/05-murder03-three-stop-bars.png",
+      "source_sha256": "3b61493c921ef36448cefa8939868cbeb6b495eb84767c0ac8a2873211099aac",
+      "candidate_source": "batch04/05-murder03-three-stop-bars-quality.png",
+      "sha256": "57d1507fcd3ca612d52dbe912658da68e5769acaba8d2a7481d6d01fb9a7d835",
+      "decision": "upgrade",
+      "comparison": "Narrower separated cyan stop bars with fewer extruding crystals.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 884977,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.7356166805298007,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        127,
+        435,
+        1124,
+        938
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/06-murder03-bent-rain-shard",
+      "file": "selected/batch04/06-murder03-bent-rain-shard.png",
+      "source_file": "batch04/06-murder03-bent-rain-shard.png",
+      "source_sha256": "a632bec9502c0cfc744f1577ced38c13d3aabead5e0b8595cedfd6e0993bb4b2",
+      "candidate_source": "batch04/06-murder03-bent-rain-shard-quality.png",
+      "sha256": "03b47d567718eb5af3de955084c1d4215530cd6d78e3f7645a663717014aa500",
+      "decision": "upgrade",
+      "comparison": "Clean directional shard silhouette and reduced surrounding cloud, three deliberate droplets.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 497084,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8883419946124554,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        228,
+        99,
+        962,
+        1162
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/07-murder03-coordinate-impact",
+      "file": "selected/batch04/07-murder03-coordinate-impact.png",
+      "source_file": "batch04/07-murder03-coordinate-impact.png",
+      "source_sha256": "b7c75f1e6693dab809f6f20dd4bb2da8536ae693c34c9356b33e60e7187093fe",
+      "candidate_source": "batch04/07-murder03-coordinate-impact-quality.png",
+      "sha256": "0af22ddaf5bb2403c4131d7a860ac3f206c15be8b744e5359601e328b0efcdbf",
+      "decision": "upgrade",
+      "comparison": "Three clearer rays and reduced fragment clutter; upper tip padding remains tight.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 667314,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8417942965286204,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        160,
+        63,
+        1126,
+        1149
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/08-murder03-roadlight-residue",
+      "file": "selected/batch04/08-murder03-roadlight-residue.png",
+      "source_file": "batch04/08-murder03-roadlight-residue.png",
+      "source_sha256": "e89e4b14a13c7e1fb875c75a4950e6fc709be4aa6e9725212e9dd816f4d9d07f",
+      "candidate_source": "batch04/08-murder03-roadlight-residue-quality.png",
+      "sha256": "42c5c88abd870de30f19d04879722f92a62ab4873c33f56b7a088b180182379c",
+      "decision": "upgrade",
+      "comparison": "Three separated flat aftermath streaks; removed vertical drips and excess aura.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 717759,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.832827774089421,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        168,
+        408,
+        1105,
+        940
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/09-cult03-interlocking-wall-warning",
+      "file": "selected/batch04/09-cult03-interlocking-wall-warning-v2.png",
+      "source_file": "batch04/09-cult03-interlocking-wall-warning-v2.png",
+      "source_sha256": "fe6964e5c45d2b7855eb1538d423b4532067ccb7ef48b3b9879c2abc274497ee",
+      "candidate_source": "batch04/09-cult03-interlocking-wall-warning-v2-quality.png",
+      "sha256": "97d99ec7863830a6ffadc8a16badab4462a44f6fb321b7bfea29c6dbbacd9193",
+      "decision": "upgrade",
+      "comparison": "Clearer thicker interlocking rails; tighter top margin remains.",
+      "caveats": [],
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 1173314,
+      "decoded_rgba_bytes": 6291456,
+      "alpha_range": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.9019947052001953,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        427,
+        50,
+        1110,
+        897
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/10-cult03-golden-order-wall",
+      "file": "selected/batch04/10-cult03-golden-order-wall.png",
+      "source_file": "batch04/10-cult03-golden-order-wall.png",
+      "source_sha256": "f2753193f07aa93d22bbd15be56703c0698344334828b26b85b260f9149e2769",
+      "candidate_source": "batch04/10-cult03-golden-order-wall-quality.png",
+      "sha256": "5b5ee969a0aec0f75c7957a83079365e830a0434d7065898a481c20505d3626f",
+      "decision": "upgrade",
+      "comparison": "Cleaner translucent wall interior and less fine noise; intact wall silhouette.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 926164,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7241967649295779,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        361,
+        50,
+        902,
+        1219
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/11-cult03-wall-hit-deflection",
+      "file": "selected/batch04/11-cult03-wall-hit-deflection.png",
+      "source_file": "batch04/11-cult03-wall-hit-deflection.png",
+      "source_sha256": "8e02ea81acc32cccf729f257d1bfdff99d1ad1fcb3387ebe66b7fd9f9860404f",
+      "candidate_source": "batch04/11-cult03-wall-hit-deflection-quality.png",
+      "sha256": "e247e615bf7772506d1f650ba0d785d7a8d8f9bf70bc47d30bb78b57a11fe26c",
+      "decision": "upgrade",
+      "comparison": "Fewer larger shards and clearer wall deflection direction.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 826792,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7944281648008669,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        157,
+        218,
+        1089,
+        1017
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/12-cult03-authority-fragments",
+      "file": "selected/batch04/12-cult03-authority-fragments.png",
+      "source_file": "batch04/12-cult03-authority-fragments.png",
+      "source_sha256": "ce2c2ef6ec0e8c9d9dffdf128707d12b61c86db91e6b1dff4f199db1e07b01ff",
+      "candidate_source": "batch04/12-cult03-authority-fragments-quality.png",
+      "sha256": "6094d7ec88580d75bc75c532ba03a439739d2c02cd176404092bcf4ea527169b",
+      "decision": "upgrade",
+      "comparison": "Four isolated authority brackets with readable open center instead of cluttered carpet; ground projection remains stylized.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 831452,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8250447054274805,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        193,
+        211,
+        1110,
+        1043
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/13-cult04-spatial-fold-warning",
+      "file": "selected/batch04/13-cult04-spatial-fold-warning.png",
+      "source_file": "batch04/13-cult04-spatial-fold-warning.png",
+      "source_sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "candidate_source": "original/batch04/13-cult04-spatial-fold-warning.png",
+      "sha256": "2b444bdbcd9398c1cda39be97107225cd0c089ceea3091fe788d966a347d3c9b",
+      "decision": "retained_original",
+      "comparison": "Cleaner gap but tighter extreme tips; improvement not sufficient to replace original.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 561743,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8843935451213215,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        322,
+        162,
+        973,
+        1095
+      ],
+      "outermost_alpha_max": 0,
+      "strict10percent_alpha64_margin_pass": true
+    },
+    {
+      "concept_key": "batch04/14-cult04-neural-command-spear",
+      "file": "selected/batch04/14-cult04-neural-command-spear.png",
+      "source_file": "batch04/14-cult04-neural-command-spear.png",
+      "source_sha256": "edb48189a9c8df14f67480b7e0dedb45c4ddbad5901d43c68d6772e48def2733",
+      "candidate_source": "batch04/14-cult04-neural-command-spear-quality.png",
+      "sha256": "da5bf691eb325b4995655c3671f37a96da289d32543f0baaab90f2cfa9b5b8a5",
+      "decision": "upgrade",
+      "comparison": "Ordered three-node neural spine with fewer tangled loops and clearer directional tip.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 489967,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.9106164897527275,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        170,
+        159,
+        1173,
+        1123
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/15-cult04-time-stopped-collision",
+      "file": "selected/batch04/15-cult04-time-stopped-collision.png",
+      "source_file": "batch04/15-cult04-time-stopped-collision.png",
+      "source_sha256": "0e509dbde0cd34618e6047313187cbc2f84729301d34b28ad19e3c3de10623a5",
+      "candidate_source": "batch04/15-cult04-time-stopped-collision-quality.png",
+      "sha256": "92e96bd401fe359227583bc85b3218855bcdaba63439a9eaad117d4b9c66cdca",
+      "decision": "upgrade",
+      "comparison": "Five distinct suspended shards with open gaps and less debris; fills more canvas.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 1030518,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.7835430609291097,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        160,
+        55,
+        1155,
+        1126
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": false
+    },
+    {
+      "concept_key": "batch04/16-cult04-resurrection-stitch-arc",
+      "file": "selected/batch04/16-cult04-resurrection-stitch-arc.png",
+      "source_file": "batch04/16-cult04-resurrection-stitch-arc.png",
+      "source_sha256": "b25043e478cda596ac85cd3722fe8e8b6853155fbeb6fea7cd8206774b61dbf0",
+      "candidate_source": "batch04/16-cult04-resurrection-stitch-arc-quality.png",
+      "sha256": "3755ba039a9695265f6425f09da129675358c04d4b151ad4c9665e5493c359f9",
+      "decision": "upgrade",
+      "comparison": "Readable stitch rhythm, less broad haze and no floating pebbles.",
+      "caveats": [],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "bytes": 661103,
+      "decoded_rgba_bytes": 6290064,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.8655339595908722,
+      "visual_inspected": true,
+      "small_scale_128px_validation": "not_run",
+      "runtime_validation": "not_run",
+      "animation": "single_static_component",
+      "alpha64_bbox": [
+        162,
+        289,
+        1128,
+        1015
+      ],
+      "outermost_alpha_max": 1,
+      "strict10percent_alpha64_margin_pass": true
+    }
+  ],
+  "independent_visual_review": {
+    "concept_pairs": 26,
+    "images": 52,
+    "scope": "all16 batch04, eight batch01, one each batch02 and batch03",
+    "overrides": 0,
+    "report": "review/independent-review.txt"
+  }
+}

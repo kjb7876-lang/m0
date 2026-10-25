@@ -1,0 +1,287 @@
+{
+  "id": "animated-113-04-fallen-companion-memory-echo",
+  "name": "죽은 동료 기억 잔영",
+  "sourceIndex": 113,
+  "status": "CPU-reviewed integration candidate; no actual game runtime test",
+  "frameCount": 16,
+  "distinctDrawingCount": 16,
+  "canvas": [
+    384,
+    384
+  ],
+  "pivot": {
+    "pixelsTopLeft": [
+      192,
+      192
+    ],
+    "normalizedTopLeft": [
+      0.5,
+      0.5
+    ],
+    "targetTuningRequired": true
+  },
+  "atlas": {
+    "file": "atlas.png",
+    "size": [
+      1536,
+      1536
+    ],
+    "columns": 4,
+    "rows": 4,
+    "trimmed": false,
+    "rotated": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_00.png",
+      "rect": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_01.png",
+      "rect": [
+        384,
+        0,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 2,
+      "file": "frames/frame_02.png",
+      "rect": [
+        768,
+        0,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 3,
+      "file": "frames/frame_03.png",
+      "rect": [
+        1152,
+        0,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 4,
+      "file": "frames/frame_04.png",
+      "rect": [
+        0,
+        384,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 5,
+      "file": "frames/frame_05.png",
+      "rect": [
+        384,
+        384,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 6,
+      "file": "frames/frame_06.png",
+      "rect": [
+        768,
+        384,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 7,
+      "file": "frames/frame_07.png",
+      "rect": [
+        1152,
+        384,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 8,
+      "file": "frames/frame_08.png",
+      "rect": [
+        0,
+        768,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 9,
+      "file": "frames/frame_09.png",
+      "rect": [
+        384,
+        768,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 10,
+      "file": "frames/frame_10.png",
+      "rect": [
+        768,
+        768,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 11,
+      "file": "frames/frame_11.png",
+      "rect": [
+        1152,
+        768,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 12,
+      "file": "frames/frame_12.png",
+      "rect": [
+        0,
+        1152,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 13,
+      "file": "frames/frame_13.png",
+      "rect": [
+        384,
+        1152,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 14,
+      "file": "frames/frame_14.png",
+      "rect": [
+        768,
+        1152,
+        384,
+        384
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 15,
+      "file": "frames/frame_15.png",
+      "rect": [
+        1152,
+        1152,
+        384,
+        384
+      ],
+      "durationMs": 80
+    }
+  ],
+  "clips": {
+    "oneshot": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "durationMs": 1280,
+      "loop": false,
+      "end": "fade to zero on final frame then remove"
+    }
+  },
+  "phases": [
+    {
+      "name": "gather",
+      "frameRange": [
+        0,
+        3
+      ]
+    },
+    {
+      "name": "memory_echo",
+      "frameRange": [
+        4,
+        7
+      ]
+    },
+    {
+      "name": "fracture",
+      "frameRange": [
+        8,
+        11
+      ]
+    },
+    {
+      "name": "dissolve",
+      "frameRange": [
+        12,
+        15
+      ]
+    }
+  ],
+  "alpha": "straight RGBA8",
+  "blend": "normal alpha",
+  "layers": "single overlay; no exact front/back occlusion split",
+  "endpointOpacity": {
+    "firstFrame": [
+      0,
+      1
+    ],
+    "lastFrame": [
+      1,
+      0
+    ]
+  },
+  "filter": "bilinear, clamp, disable mipmaps for initial test",
+  "notes": [
+    "All16 artwork frames are different. Preview encoding repeats frames to match30fps; that is not extra artwork.",
+    "Looping preview is demonstration only; runtime oneshot is not seamless.",
+    "Per-target pivot/scale tuning required. No per-frame auto fitting.",
+    "Low-alpha soft haze may be present; inspect on intended map."
+  ]
+}

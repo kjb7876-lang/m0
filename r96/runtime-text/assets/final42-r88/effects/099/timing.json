@@ -1,0 +1,377 @@
+{
+  "name": "StoryWorld Thorn Binding",
+  "version": "1.0-candidate",
+  "status": "Integration candidate; engine validation required",
+  "canvas": [
+    512,
+    512
+  ],
+  "pivotPixels": [
+    256,
+    440
+  ],
+  "pivotNormalized": [
+    0.5,
+    0.859375
+  ],
+  "pivotCoordinates": "top-left origin; convert Y for bottom-left engines",
+  "alpha": "straight RGBA8",
+  "blend": "normal alpha, NOT additive",
+  "atlas": {
+    "file": "thorn_atlas.png",
+    "size": [
+      2048,
+      3072
+    ],
+    "columns": 4,
+    "rows": 6,
+    "cell": [
+      512,
+      512
+    ],
+    "paddingInsideCell": true,
+    "rotate": false,
+    "trim": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/thorn_00.png",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 1,
+      "file": "frames/thorn_01.png",
+      "rect": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 2,
+      "file": "frames/thorn_02.png",
+      "rect": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 3,
+      "file": "frames/thorn_03.png",
+      "rect": [
+        1536,
+        0,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 4,
+      "file": "frames/thorn_04.png",
+      "rect": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 5,
+      "file": "frames/thorn_05.png",
+      "rect": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 6,
+      "file": "frames/thorn_06.png",
+      "rect": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 7,
+      "file": "frames/thorn_07.png",
+      "rect": [
+        1536,
+        512,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 8,
+      "file": "frames/thorn_08.png",
+      "rect": [
+        0,
+        1024,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 9,
+      "file": "frames/thorn_09.png",
+      "rect": [
+        512,
+        1024,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 10,
+      "file": "frames/thorn_10.png",
+      "rect": [
+        1024,
+        1024,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 11,
+      "file": "frames/thorn_11.png",
+      "rect": [
+        1536,
+        1024,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 12,
+      "file": "frames/thorn_12.png",
+      "rect": [
+        0,
+        1536,
+        512,
+        512
+      ],
+      "durationMs": 120
+    },
+    {
+      "index": 13,
+      "file": "frames/thorn_13.png",
+      "rect": [
+        512,
+        1536,
+        512,
+        512
+      ],
+      "durationMs": 120
+    },
+    {
+      "index": 14,
+      "file": "frames/thorn_14.png",
+      "rect": [
+        1024,
+        1536,
+        512,
+        512
+      ],
+      "durationMs": 120
+    },
+    {
+      "index": 15,
+      "file": "frames/thorn_15.png",
+      "rect": [
+        1536,
+        1536,
+        512,
+        512
+      ],
+      "durationMs": 120
+    },
+    {
+      "index": 16,
+      "file": "frames/thorn_16.png",
+      "rect": [
+        0,
+        2048,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 17,
+      "file": "frames/thorn_17.png",
+      "rect": [
+        512,
+        2048,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 18,
+      "file": "frames/thorn_18.png",
+      "rect": [
+        1024,
+        2048,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 19,
+      "file": "frames/thorn_19.png",
+      "rect": [
+        1536,
+        2048,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 20,
+      "file": "frames/thorn_20.png",
+      "rect": [
+        0,
+        2560,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 21,
+      "file": "frames/thorn_21.png",
+      "rect": [
+        512,
+        2560,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 22,
+      "file": "frames/thorn_22.png",
+      "rect": [
+        1024,
+        2560,
+        512,
+        512
+      ],
+      "durationMs": 80
+    },
+    {
+      "index": 23,
+      "file": "frames/thorn_23.png",
+      "rect": [
+        1536,
+        2560,
+        512,
+        512
+      ],
+      "durationMs": 80
+    }
+  ],
+  "clips": {
+    "emerge": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": false,
+      "next": "bind"
+    },
+    "bind": {
+      "frames": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "loop": false,
+      "next": "hold"
+    },
+    "hold": {
+      "frames": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "loop": true,
+      "exitOn": "status_removed",
+      "seamlessVerified": false
+    },
+    "release": {
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "loop": false,
+      "end": "hide sprite"
+    }
+  },
+  "opacityEnvelope": {
+    "emergeFirstFrame": [
+      0,
+      1
+    ],
+    "releaseLastFrame": [
+      1,
+      0
+    ]
+  },
+  "drawOrder": "single effect overlay above actor; full cage not separated into physical front/back",
+  "integrationHints": {
+    "attachment": "target ground/feet pivot",
+    "scale": "choose one scale for entire lifetime; do not fit each frame independently",
+    "filter": "bilinear, clamp to edge; mipmaps off for initial integration",
+    "holdClock": "delta-time milliseconds, not render-frame count",
+    "releaseOn": "status removal/death/despawn; clean up effect instance",
+    "perTargetTuningRequired": true
+  },
+  "storyUse": [
+    "early forest guardian restraint",
+    "thorn trap around a stationary target",
+    "nature-boss bind telegraph/payoff"
+  ]
+}

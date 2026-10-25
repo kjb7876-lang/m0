@@ -1,0 +1,3798 @@
+{
+ "schema": "storyworld.r91.walk/v1",
+ "source": "R91-layout-derived walk (geometry_candidate_needs_review), processed copy",
+ "frames": 8,
+ "cols": 4,
+ "rows": 2,
+ "heroes": [
+  "hwando",
+  "slayer",
+  "gunner",
+  "hunter",
+  "lauren",
+  "michaela",
+  "neon",
+  "seoha"
+ ],
+ "dirs": [
+  "s",
+  "se",
+  "e",
+  "ne",
+  "n",
+  "nw",
+  "w",
+  "sw"
+ ],
+ "plan": {
+  "hwando": {
+   "s": {
+    "native": true
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "w",
+    "mirror": true
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "native": true
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "slayer": {
+   "s": {
+    "native": true
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "native": true
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "gunner": {
+   "s": {
+    "use": "s",
+    "mirror": false
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "native": true
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "hunter": {
+   "s": {
+    "use": "s",
+    "mirror": false
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "native": true
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "use": "n",
+    "mirror": false
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "native": true
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "lauren": {
+   "s": {
+    "use": "s",
+    "mirror": false
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "use": "n",
+    "mirror": false
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "michaela": {
+   "s": {
+    "use": "s",
+    "mirror": false
+   },
+   "se": {
+    "use": "sw",
+    "mirror": true
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "use": "n",
+    "mirror": false
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "e",
+    "mirror": true
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "neon": {
+   "s": {
+    "native": true
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "use": "n",
+    "mirror": false
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  },
+  "seoha": {
+   "s": {
+    "use": "s",
+    "mirror": false
+   },
+   "se": {
+    "use": "se",
+    "mirror": false
+   },
+   "e": {
+    "use": "e",
+    "mirror": false
+   },
+   "ne": {
+    "use": "ne",
+    "mirror": false
+   },
+   "n": {
+    "use": "n",
+    "mirror": false
+   },
+   "nw": {
+    "use": "nw",
+    "mirror": false
+   },
+   "w": {
+    "use": "w",
+    "mirror": false
+   },
+   "sw": {
+    "use": "sw",
+    "mirror": false
+   }
+  }
+ },
+ "items": [
+  {
+   "hero": "hwando",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-hwando-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 139,
+   "frames": [
+    {
+     "footX": 95,
+     "footY": 219,
+     "top": 80,
+     "body": 139
+    },
+    {
+     "footX": 93,
+     "footY": 223,
+     "top": 82,
+     "body": 141
+    },
+    {
+     "footX": 89,
+     "footY": 217,
+     "top": 78,
+     "body": 139
+    },
+    {
+     "footX": 103,
+     "footY": 225,
+     "top": 84,
+     "body": 141
+    },
+    {
+     "footX": 92,
+     "footY": 230,
+     "top": 94,
+     "body": 136
+    },
+    {
+     "footX": 97,
+     "footY": 230,
+     "top": 94,
+     "body": 136
+    },
+    {
+     "footX": 94,
+     "footY": 229,
+     "top": 91,
+     "body": 138
+    },
+    {
+     "footX": 106,
+     "footY": 236,
+     "top": 99,
+     "body": 137
+    }
+   ],
+   "bytes": 269687,
+   "sha256": "53fd50eab5690a1157666c6ea1f18e4cf3a01de0cf335c5f82e53e1523034ef3"
+  },
+  {
+   "hero": "hwando",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-hwando-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 153,
+   "frames": [
+    {
+     "footX": 90,
+     "footY": 227,
+     "top": 74,
+     "body": 153
+    },
+    {
+     "footX": 89,
+     "footY": 226,
+     "top": 72,
+     "body": 154
+    },
+    {
+     "footX": 93,
+     "footY": 232,
+     "top": 78,
+     "body": 154
+    },
+    {
+     "footX": 95,
+     "footY": 233,
+     "top": 81,
+     "body": 152
+    },
+    {
+     "footX": 91,
+     "footY": 238,
+     "top": 86,
+     "body": 152
+    },
+    {
+     "footX": 93,
+     "footY": 235,
+     "top": 85,
+     "body": 150
+    },
+    {
+     "footX": 87,
+     "footY": 241,
+     "top": 86,
+     "body": 155
+    },
+    {
+     "footX": 93,
+     "footY": 225,
+     "top": 76,
+     "body": 149
+    }
+   ],
+   "bytes": 281598,
+   "sha256": "f92c54666ca7fb487114722084ebc13860d01378ebabdeb4bc3ac7e44d5ffc48"
+  },
+  {
+   "hero": "hwando",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-hwando-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 137,
+   "frames": [
+    {
+     "footX": 101,
+     "footY": 222,
+     "top": 85,
+     "body": 137
+    },
+    {
+     "footX": 93,
+     "footY": 212,
+     "top": 81,
+     "body": 131
+    },
+    {
+     "footX": 98,
+     "footY": 217,
+     "top": 78,
+     "body": 139
+    },
+    {
+     "footX": 97,
+     "footY": 216,
+     "top": 83,
+     "body": 133
+    },
+    {
+     "footX": 96,
+     "footY": 227,
+     "top": 87,
+     "body": 140
+    },
+    {
+     "footX": 98,
+     "footY": 218,
+     "top": 87,
+     "body": 131
+    },
+    {
+     "footX": 97,
+     "footY": 226,
+     "top": 85,
+     "body": 141
+    },
+    {
+     "footX": 102,
+     "footY": 211,
+     "top": 79,
+     "body": 132
+    }
+   ],
+   "bytes": 240972,
+   "sha256": "a119df6f154396b50f96d22f25d32d9d59f91008723aea1be758841be5d9e2ea"
+  },
+  {
+   "hero": "hwando",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-hwando-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 127,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 205,
+     "top": 78,
+     "body": 127
+    },
+    {
+     "footX": 99,
+     "footY": 214,
+     "top": 88,
+     "body": 126
+    },
+    {
+     "footX": 97,
+     "footY": 213,
+     "top": 85,
+     "body": 128
+    },
+    {
+     "footX": 104,
+     "footY": 206,
+     "top": 78,
+     "body": 128
+    },
+    {
+     "footX": 95,
+     "footY": 213,
+     "top": 85,
+     "body": 128
+    },
+    {
+     "footX": 97,
+     "footY": 219,
+     "top": 93,
+     "body": 126
+    },
+    {
+     "footX": 97,
+     "footY": 221,
+     "top": 94,
+     "body": 127
+    },
+    {
+     "footX": 103,
+     "footY": 220,
+     "top": 93,
+     "body": 127
+    }
+   ],
+   "bytes": 228803,
+   "sha256": "51746cf9a1f83a9bc933837e08762f59cc4a77160f431f611176172d52daa69d"
+  },
+  {
+   "hero": "hwando",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-hwando-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 135,
+   "frames": [
+    {
+     "footX": 98,
+     "footY": 221,
+     "top": 86,
+     "body": 135
+    },
+    {
+     "footX": 104,
+     "footY": 219,
+     "top": 85,
+     "body": 134
+    },
+    {
+     "footX": 99,
+     "footY": 220,
+     "top": 85,
+     "body": 135
+    },
+    {
+     "footX": 109,
+     "footY": 215,
+     "top": 83,
+     "body": 132
+    },
+    {
+     "footX": 96,
+     "footY": 229,
+     "top": 93,
+     "body": 136
+    },
+    {
+     "footX": 103,
+     "footY": 221,
+     "top": 86,
+     "body": 135
+    },
+    {
+     "footX": 99,
+     "footY": 230,
+     "top": 96,
+     "body": 134
+    },
+    {
+     "footX": 109,
+     "footY": 228,
+     "top": 87,
+     "body": 141
+    }
+   ],
+   "bytes": 247890,
+   "sha256": "ff50d6c14e596709ef9c657fbe99e4eba6256e587576a06bc05b5f80616f7998"
+  },
+  {
+   "hero": "slayer",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-slayer-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 128,
+   "frames": [
+    {
+     "footX": 92,
+     "footY": 211,
+     "top": 83,
+     "body": 128
+    },
+    {
+     "footX": 99,
+     "footY": 219,
+     "top": 91,
+     "body": 128
+    },
+    {
+     "footX": 89,
+     "footY": 214,
+     "top": 88,
+     "body": 126
+    },
+    {
+     "footX": 107,
+     "footY": 240,
+     "top": 111,
+     "body": 129
+    },
+    {
+     "footX": 98,
+     "footY": 234,
+     "top": 108,
+     "body": 126
+    },
+    {
+     "footX": 97,
+     "footY": 227,
+     "top": 99,
+     "body": 128
+    },
+    {
+     "footX": 96,
+     "footY": 230,
+     "top": 102,
+     "body": 128
+    },
+    {
+     "footX": 104,
+     "footY": 233,
+     "top": 104,
+     "body": 129
+    }
+   ],
+   "bytes": 192645,
+   "sha256": "39d3076f50c15e1722b04a442768d97aba9170c00cf982f10b17a2ada1cd547b"
+  },
+  {
+   "hero": "slayer",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-slayer-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 126,
+   "frames": [
+    {
+     "footX": 103,
+     "footY": 206,
+     "top": 82,
+     "body": 124
+    },
+    {
+     "footX": 94,
+     "footY": 220,
+     "top": 93,
+     "body": 127
+    },
+    {
+     "footX": 93,
+     "footY": 214,
+     "top": 87,
+     "body": 127
+    },
+    {
+     "footX": 105,
+     "footY": 212,
+     "top": 86,
+     "body": 126
+    },
+    {
+     "footX": 101,
+     "footY": 228,
+     "top": 106,
+     "body": 122
+    },
+    {
+     "footX": 103,
+     "footY": 226,
+     "top": 100,
+     "body": 126
+    },
+    {
+     "footX": 91,
+     "footY": 237,
+     "top": 113,
+     "body": 124
+    },
+    {
+     "footX": 102,
+     "footY": 230,
+     "top": 108,
+     "body": 122
+    }
+   ],
+   "bytes": 187410,
+   "sha256": "d9ec6867526cc38c62d15cc9cc1b4710a1941ff2748a667f06c3a1ee0b258ae0"
+  },
+  {
+   "hero": "slayer",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-slayer-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 131,
+   "frames": [
+    {
+     "footX": 92,
+     "footY": 210,
+     "top": 81,
+     "body": 129
+    },
+    {
+     "footX": 90,
+     "footY": 210,
+     "top": 83,
+     "body": 127
+    },
+    {
+     "footX": 87,
+     "footY": 211,
+     "top": 82,
+     "body": 129
+    },
+    {
+     "footX": 93,
+     "footY": 222,
+     "top": 91,
+     "body": 131
+    },
+    {
+     "footX": 90,
+     "footY": 225,
+     "top": 93,
+     "body": 132
+    },
+    {
+     "footX": 92,
+     "footY": 222,
+     "top": 91,
+     "body": 131
+    },
+    {
+     "footX": 92,
+     "footY": 223,
+     "top": 93,
+     "body": 130
+    },
+    {
+     "footX": 94,
+     "footY": 225,
+     "top": 94,
+     "body": 131
+    }
+   ],
+   "bytes": 202587,
+   "sha256": "76dd27d0750c9b808e6f1fc552a686b336afce8d4312eac2d38a4f887488e913"
+  },
+  {
+   "hero": "slayer",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-slayer-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 134,
+   "frames": [
+    {
+     "footX": 79,
+     "footY": 205,
+     "top": 75,
+     "body": 130
+    },
+    {
+     "footX": 94,
+     "footY": 213,
+     "top": 84,
+     "body": 129
+    },
+    {
+     "footX": 88,
+     "footY": 213,
+     "top": 79,
+     "body": 134
+    },
+    {
+     "footX": 98,
+     "footY": 203,
+     "top": 68,
+     "body": 135
+    },
+    {
+     "footX": 79,
+     "footY": 221,
+     "top": 89,
+     "body": 132
+    },
+    {
+     "footX": 85,
+     "footY": 223,
+     "top": 89,
+     "body": 134
+    },
+    {
+     "footX": 80,
+     "footY": 226,
+     "top": 90,
+     "body": 136
+    },
+    {
+     "footX": 98,
+     "footY": 234,
+     "top": 96,
+     "body": 138
+    }
+   ],
+   "bytes": 219581,
+   "sha256": "400b4dbe3e69037f39defacf928b4d632f057d6bedefbce34af5c7d78582b383"
+  },
+  {
+   "hero": "slayer",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-slayer-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 134,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 208,
+     "top": 74,
+     "body": 134
+    },
+    {
+     "footX": 96,
+     "footY": 222,
+     "top": 86,
+     "body": 136
+    },
+    {
+     "footX": 94,
+     "footY": 222,
+     "top": 85,
+     "body": 137
+    },
+    {
+     "footX": 99,
+     "footY": 203,
+     "top": 69,
+     "body": 134
+    },
+    {
+     "footX": 86,
+     "footY": 233,
+     "top": 105,
+     "body": 128
+    },
+    {
+     "footX": 99,
+     "footY": 230,
+     "top": 98,
+     "body": 132
+    },
+    {
+     "footX": 93,
+     "footY": 221,
+     "top": 90,
+     "body": 131
+    },
+    {
+     "footX": 99,
+     "footY": 230,
+     "top": 98,
+     "body": 132
+    }
+   ],
+   "bytes": 209653,
+   "sha256": "f49efac2535ff331b5ae50f502cfbff1040ce3869fde47e1d43c00d72b0437fa"
+  },
+  {
+   "hero": "slayer",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-slayer-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 128,
+   "frames": [
+    {
+     "footX": 97,
+     "footY": 224,
+     "top": 90,
+     "body": 134
+    },
+    {
+     "footX": 97,
+     "footY": 219,
+     "top": 91,
+     "body": 128
+    },
+    {
+     "footX": 97,
+     "footY": 219,
+     "top": 90,
+     "body": 129
+    },
+    {
+     "footX": 100,
+     "footY": 212,
+     "top": 83,
+     "body": 129
+    },
+    {
+     "footX": 92,
+     "footY": 238,
+     "top": 112,
+     "body": 126
+    },
+    {
+     "footX": 94,
+     "footY": 217,
+     "top": 91,
+     "body": 126
+    },
+    {
+     "footX": 98,
+     "footY": 219,
+     "top": 91,
+     "body": 128
+    },
+    {
+     "footX": 98,
+     "footY": 224,
+     "top": 97,
+     "body": 127
+    }
+   ],
+   "bytes": 200279,
+   "sha256": "7bd9926719d5db43b70d6e2a84e9b52455c47c0e7874f45ac8fd7733e3b322ae"
+  },
+  {
+   "hero": "gunner",
+   "dir": "s",
+   "path": "assets/r91/walk/walk-gunner-s.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 157,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 239,
+     "top": 79,
+     "body": 160
+    },
+    {
+     "footX": 93,
+     "footY": 234,
+     "top": 76,
+     "body": 158
+    },
+    {
+     "footX": 91,
+     "footY": 234,
+     "top": 77,
+     "body": 157
+    },
+    {
+     "footX": 96,
+     "footY": 233,
+     "top": 75,
+     "body": 158
+    },
+    {
+     "footX": 101,
+     "footY": 239,
+     "top": 82,
+     "body": 157
+    },
+    {
+     "footX": 98,
+     "footY": 231,
+     "top": 76,
+     "body": 155
+    },
+    {
+     "footX": 96,
+     "footY": 241,
+     "top": 85,
+     "body": 156
+    },
+    {
+     "footX": 98,
+     "footY": 240,
+     "top": 84,
+     "body": 156
+    }
+   ],
+   "bytes": 226313,
+   "sha256": "ab4ddaf363cf0278bed08848670ff713cd472580ed6433e8e1560a5d8b7ba6a4"
+  },
+  {
+   "hero": "gunner",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-gunner-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 142,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 218,
+     "top": 75,
+     "body": 143
+    },
+    {
+     "footX": 95,
+     "footY": 223,
+     "top": 80,
+     "body": 143
+    },
+    {
+     "footX": 101,
+     "footY": 224,
+     "top": 81,
+     "body": 143
+    },
+    {
+     "footX": 98,
+     "footY": 227,
+     "top": 85,
+     "body": 142
+    },
+    {
+     "footX": 93,
+     "footY": 235,
+     "top": 97,
+     "body": 138
+    },
+    {
+     "footX": 93,
+     "footY": 239,
+     "top": 100,
+     "body": 139
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 94,
+     "body": 139
+    },
+    {
+     "footX": 97,
+     "footY": 240,
+     "top": 100,
+     "body": 140
+    }
+   ],
+   "bytes": 201355,
+   "sha256": "f3b38783cc28ebaecdf15a6f9300c795ec2649cc55d6287b120a198e2f1d1a71"
+  },
+  {
+   "hero": "gunner",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-gunner-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 142,
+   "frames": [
+    {
+     "footX": 87,
+     "footY": 214,
+     "top": 71,
+     "body": 143
+    },
+    {
+     "footX": 88,
+     "footY": 224,
+     "top": 80,
+     "body": 144
+    },
+    {
+     "footX": 90,
+     "footY": 221,
+     "top": 79,
+     "body": 142
+    },
+    {
+     "footX": 103,
+     "footY": 218,
+     "top": 77,
+     "body": 141
+    },
+    {
+     "footX": 88,
+     "footY": 223,
+     "top": 88,
+     "body": 135
+    },
+    {
+     "footX": 90,
+     "footY": 236,
+     "top": 94,
+     "body": 142
+    },
+    {
+     "footX": 92,
+     "footY": 233,
+     "top": 95,
+     "body": 138
+    },
+    {
+     "footX": 107,
+     "footY": 228,
+     "top": 86,
+     "body": 142
+    }
+   ],
+   "bytes": 222185,
+   "sha256": "86b69326883ed332509ecc01f46e8d3401dcfe7963500f65d942a17af515ba82"
+  },
+  {
+   "hero": "gunner",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-gunner-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 147,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 221,
+     "top": 73,
+     "body": 148
+    },
+    {
+     "footX": 87,
+     "footY": 220,
+     "top": 75,
+     "body": 145
+    },
+    {
+     "footX": 89,
+     "footY": 226,
+     "top": 78,
+     "body": 148
+    },
+    {
+     "footX": 103,
+     "footY": 218,
+     "top": 74,
+     "body": 144
+    },
+    {
+     "footX": 94,
+     "footY": 240,
+     "top": 94,
+     "body": 146
+    },
+    {
+     "footX": 93,
+     "footY": 231,
+     "top": 87,
+     "body": 144
+    },
+    {
+     "footX": 95,
+     "footY": 241,
+     "top": 94,
+     "body": 147
+    },
+    {
+     "footX": 106,
+     "footY": 241,
+     "top": 92,
+     "body": 149
+    }
+   ],
+   "bytes": 217654,
+   "sha256": "ee7e56eb8593515605a74320db07a2aeb1dee82489555f0892839bdb018530a5"
+  },
+  {
+   "hero": "gunner",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-gunner-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 97,
+     "footY": 214,
+     "top": 58,
+     "body": 156
+    },
+    {
+     "footX": 95,
+     "footY": 228,
+     "top": 75,
+     "body": 153
+    },
+    {
+     "footX": 96,
+     "footY": 216,
+     "top": 60,
+     "body": 156
+    },
+    {
+     "footX": 109,
+     "footY": 227,
+     "top": 72,
+     "body": 155
+    },
+    {
+     "footX": 92,
+     "footY": 226,
+     "top": 72,
+     "body": 154
+    },
+    {
+     "footX": 96,
+     "footY": 222,
+     "top": 72,
+     "body": 150
+    },
+    {
+     "footX": 96,
+     "footY": 227,
+     "top": 74,
+     "body": 153
+    },
+    {
+     "footX": 110,
+     "footY": 228,
+     "top": 72,
+     "body": 156
+    }
+   ],
+   "bytes": 225269,
+   "sha256": "89528df8ecfecfa3f07004c5460a080675b0cca7d854845f486685f90ad0fdbc"
+  },
+  {
+   "hero": "gunner",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-gunner-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 149,
+   "frames": [
+    {
+     "footX": 88,
+     "footY": 216,
+     "top": 65,
+     "body": 151
+    },
+    {
+     "footX": 94,
+     "footY": 219,
+     "top": 68,
+     "body": 151
+    },
+    {
+     "footX": 99,
+     "footY": 229,
+     "top": 81,
+     "body": 148
+    },
+    {
+     "footX": 103,
+     "footY": 229,
+     "top": 79,
+     "body": 150
+    },
+    {
+     "footX": 87,
+     "footY": 237,
+     "top": 89,
+     "body": 148
+    },
+    {
+     "footX": 94,
+     "footY": 241,
+     "top": 92,
+     "body": 149
+    },
+    {
+     "footX": 98,
+     "footY": 241,
+     "top": 92,
+     "body": 149
+    },
+    {
+     "footX": 105,
+     "footY": 237,
+     "top": 88,
+     "body": 149
+    }
+   ],
+   "bytes": 226090,
+   "sha256": "fe0705972987aa319be34a066afb96ac7e295f6dd3bdd4c926358d9e6e4498cf"
+  },
+  {
+   "hero": "gunner",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-gunner-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 149,
+   "frames": [
+    {
+     "footX": 82,
+     "footY": 229,
+     "top": 77,
+     "body": 152
+    },
+    {
+     "footX": 91,
+     "footY": 228,
+     "top": 78,
+     "body": 150
+    },
+    {
+     "footX": 92,
+     "footY": 234,
+     "top": 85,
+     "body": 149
+    },
+    {
+     "footX": 97,
+     "footY": 224,
+     "top": 73,
+     "body": 151
+    },
+    {
+     "footX": 95,
+     "footY": 228,
+     "top": 80,
+     "body": 148
+    },
+    {
+     "footX": 90,
+     "footY": 240,
+     "top": 93,
+     "body": 147
+    },
+    {
+     "footX": 90,
+     "footY": 240,
+     "top": 91,
+     "body": 149
+    },
+    {
+     "footX": 98,
+     "footY": 229,
+     "top": 80,
+     "body": 149
+    }
+   ],
+   "bytes": 222148,
+   "sha256": "1743eb85d670cb027ed96e8f0a7e52a7e1278951ffaabb656462b6f8db5ba2b8"
+  },
+  {
+   "hero": "hunter",
+   "dir": "s",
+   "path": "assets/r91/walk/walk-hunter-s.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 163,
+   "frames": [
+    {
+     "footX": 90,
+     "footY": 231,
+     "top": 68,
+     "body": 163
+    },
+    {
+     "footX": 87,
+     "footY": 232,
+     "top": 69,
+     "body": 163
+    },
+    {
+     "footX": 89,
+     "footY": 231,
+     "top": 68,
+     "body": 163
+    },
+    {
+     "footX": 99,
+     "footY": 233,
+     "top": 72,
+     "body": 161
+    },
+    {
+     "footX": 93,
+     "footY": 230,
+     "top": 70,
+     "body": 160
+    },
+    {
+     "footX": 85,
+     "footY": 232,
+     "top": 69,
+     "body": 163
+    },
+    {
+     "footX": 88,
+     "footY": 238,
+     "top": 78,
+     "body": 160
+    },
+    {
+     "footX": 100,
+     "footY": 238,
+     "top": 78,
+     "body": 160
+    }
+   ],
+   "bytes": 228719,
+   "sha256": "4cc0cb32d117b8c8d5b90c6172ab4f26c42c28e0c2dd393efa7898c278aba581"
+  },
+  {
+   "hero": "hunter",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-hunter-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 86,
+     "footY": 233,
+     "top": 70,
+     "body": 163
+    },
+    {
+     "footX": 96,
+     "footY": 236,
+     "top": 82,
+     "body": 154
+    },
+    {
+     "footX": 100,
+     "footY": 225,
+     "top": 69,
+     "body": 156
+    },
+    {
+     "footX": 106,
+     "footY": 224,
+     "top": 69,
+     "body": 155
+    },
+    {
+     "footX": 91,
+     "footY": 238,
+     "top": 78,
+     "body": 160
+    },
+    {
+     "footX": 101,
+     "footY": 236,
+     "top": 81,
+     "body": 155
+    },
+    {
+     "footX": 97,
+     "footY": 240,
+     "top": 86,
+     "body": 154
+    },
+    {
+     "footX": 111,
+     "footY": 237,
+     "top": 84,
+     "body": 153
+    }
+   ],
+   "bytes": 250643,
+   "sha256": "e12bae28ecd61e0bfe8114729ab43ebbd1c377ae71250603883caa5f0ee640a4"
+  },
+  {
+   "hero": "hunter",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-hunter-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 157,
+   "frames": [
+    {
+     "footX": 83,
+     "footY": 230,
+     "top": 73,
+     "body": 157
+    },
+    {
+     "footX": 99,
+     "footY": 229,
+     "top": 74,
+     "body": 155
+    },
+    {
+     "footX": 91,
+     "footY": 229,
+     "top": 72,
+     "body": 157
+    },
+    {
+     "footX": 100,
+     "footY": 233,
+     "top": 78,
+     "body": 155
+    },
+    {
+     "footX": 82,
+     "footY": 230,
+     "top": 73,
+     "body": 157
+    },
+    {
+     "footX": 97,
+     "footY": 237,
+     "top": 81,
+     "body": 156
+    },
+    {
+     "footX": 90,
+     "footY": 231,
+     "top": 74,
+     "body": 157
+    },
+    {
+     "footX": 101,
+     "footY": 238,
+     "top": 81,
+     "body": 157
+    }
+   ],
+   "bytes": 253807,
+   "sha256": "8c04e241096386e6f34012c72c4944b687cfd30a7a0ce342d273b4134a699c75"
+  },
+  {
+   "hero": "hunter",
+   "dir": "n",
+   "path": "assets/r91/walk/walk-hunter-n.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 158,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 233,
+     "top": 73,
+     "body": 160
+    },
+    {
+     "footX": 102,
+     "footY": 228,
+     "top": 73,
+     "body": 155
+    },
+    {
+     "footX": 99,
+     "footY": 230,
+     "top": 72,
+     "body": 158
+    },
+    {
+     "footX": 107,
+     "footY": 228,
+     "top": 70,
+     "body": 158
+    },
+    {
+     "footX": 89,
+     "footY": 236,
+     "top": 78,
+     "body": 158
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 81,
+     "body": 152
+    },
+    {
+     "footX": 96,
+     "footY": 234,
+     "top": 79,
+     "body": 155
+    },
+    {
+     "footX": 109,
+     "footY": 237,
+     "top": 80,
+     "body": 157
+    }
+   ],
+   "bytes": 231656,
+   "sha256": "d6fc688ff2d94bfbe3c9de0e97c15783178bce291ead3b5954cf901a210ab5e2"
+  },
+  {
+   "hero": "hunter",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-hunter-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 162,
+   "frames": [
+    {
+     "footX": 94,
+     "footY": 227,
+     "top": 65,
+     "body": 162
+    },
+    {
+     "footX": 84,
+     "footY": 240,
+     "top": 78,
+     "body": 162
+    },
+    {
+     "footX": 94,
+     "footY": 225,
+     "top": 64,
+     "body": 161
+    },
+    {
+     "footX": 103,
+     "footY": 240,
+     "top": 78,
+     "body": 162
+    },
+    {
+     "footX": 94,
+     "footY": 239,
+     "top": 79,
+     "body": 160
+    },
+    {
+     "footX": 93,
+     "footY": 239,
+     "top": 78,
+     "body": 161
+    },
+    {
+     "footX": 99,
+     "footY": 232,
+     "top": 71,
+     "body": 161
+    },
+    {
+     "footX": 105,
+     "footY": 241,
+     "top": 79,
+     "body": 162
+    }
+   ],
+   "bytes": 232774,
+   "sha256": "088d2e9902a7f1ab5ebe94e35191d7c6c555161d8ff1d93c2c28e793fe36b5b6"
+  },
+  {
+   "hero": "hunter",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-hunter-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 93,
+     "footY": 224,
+     "top": 67,
+     "body": 157
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 82,
+     "body": 151
+    },
+    {
+     "footX": 99,
+     "footY": 235,
+     "top": 80,
+     "body": 155
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 78,
+     "body": 155
+    },
+    {
+     "footX": 92,
+     "footY": 235,
+     "top": 80,
+     "body": 155
+    },
+    {
+     "footX": 95,
+     "footY": 235,
+     "top": 87,
+     "body": 148
+    },
+    {
+     "footX": 96,
+     "footY": 228,
+     "top": 75,
+     "body": 153
+    },
+    {
+     "footX": 96,
+     "footY": 239,
+     "top": 85,
+     "body": 154
+    }
+   ],
+   "bytes": 235840,
+   "sha256": "aff1f231fc8dfeb10a31e706ab4fef049b1cb5b43e909c7113b0e17312afb878"
+  },
+  {
+   "hero": "lauren",
+   "dir": "s",
+   "path": "assets/r91/walk/walk-lauren-s.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 151,
+   "frames": [
+    {
+     "footX": 93,
+     "footY": 236,
+     "top": 80,
+     "body": 156
+    },
+    {
+     "footX": 97,
+     "footY": 233,
+     "top": 83,
+     "body": 150
+    },
+    {
+     "footX": 93,
+     "footY": 234,
+     "top": 83,
+     "body": 151
+    },
+    {
+     "footX": 101,
+     "footY": 237,
+     "top": 83,
+     "body": 154
+    },
+    {
+     "footX": 94,
+     "footY": 237,
+     "top": 82,
+     "body": 155
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 85,
+     "body": 148
+    },
+    {
+     "footX": 93,
+     "footY": 225,
+     "top": 76,
+     "body": 149
+    },
+    {
+     "footX": 103,
+     "footY": 232,
+     "top": 85,
+     "body": 147
+    }
+   ],
+   "bytes": 216800,
+   "sha256": "d4da08d2db7461d756e8a9241fd3bbfd1601d8789283d7bce355bb701e654ecc"
+  },
+  {
+   "hero": "lauren",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-lauren-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 170,
+   "frames": [
+    {
+     "footX": 86,
+     "footY": 229,
+     "top": 59,
+     "body": 170
+    },
+    {
+     "footX": 99,
+     "footY": 228,
+     "top": 57,
+     "body": 171
+    },
+    {
+     "footX": 96,
+     "footY": 234,
+     "top": 64,
+     "body": 170
+    },
+    {
+     "footX": 104,
+     "footY": 241,
+     "top": 71,
+     "body": 170
+    },
+    {
+     "footX": 90,
+     "footY": 240,
+     "top": 76,
+     "body": 164
+    },
+    {
+     "footX": 95,
+     "footY": 241,
+     "top": 77,
+     "body": 164
+    },
+    {
+     "footX": 103,
+     "footY": 241,
+     "top": 75,
+     "body": 166
+    },
+    {
+     "footX": 107,
+     "footY": 235,
+     "top": 82,
+     "body": 153
+    }
+   ],
+   "bytes": 238902,
+   "sha256": "0fa3a57a98bf4b04f33b2f3a31c99720a7ef8c17810ebe11df992ee6b4d56738"
+  },
+  {
+   "hero": "lauren",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-lauren-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 144,
+   "frames": [
+    {
+     "footX": 94,
+     "footY": 229,
+     "top": 86,
+     "body": 143
+    },
+    {
+     "footX": 95,
+     "footY": 219,
+     "top": 71,
+     "body": 148
+    },
+    {
+     "footX": 95,
+     "footY": 213,
+     "top": 71,
+     "body": 142
+    },
+    {
+     "footX": 106,
+     "footY": 222,
+     "top": 73,
+     "body": 149
+    },
+    {
+     "footX": 95,
+     "footY": 228,
+     "top": 85,
+     "body": 143
+    },
+    {
+     "footX": 103,
+     "footY": 231,
+     "top": 85,
+     "body": 146
+    },
+    {
+     "footX": 97,
+     "footY": 232,
+     "top": 92,
+     "body": 140
+    },
+    {
+     "footX": 107,
+     "footY": 234,
+     "top": 90,
+     "body": 144
+    }
+   ],
+   "bytes": 213356,
+   "sha256": "dae89011c0d91d66fe90db80e29c066f9247192c02748ac032bc10c2a51ba9b5"
+  },
+  {
+   "hero": "lauren",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-lauren-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 93,
+     "footY": 219,
+     "top": 64,
+     "body": 155
+    },
+    {
+     "footX": 102,
+     "footY": 227,
+     "top": 76,
+     "body": 151
+    },
+    {
+     "footX": 93,
+     "footY": 230,
+     "top": 76,
+     "body": 154
+    },
+    {
+     "footX": 104,
+     "footY": 230,
+     "top": 75,
+     "body": 155
+    },
+    {
+     "footX": 98,
+     "footY": 241,
+     "top": 84,
+     "body": 157
+    },
+    {
+     "footX": 97,
+     "footY": 228,
+     "top": 74,
+     "body": 154
+    },
+    {
+     "footX": 95,
+     "footY": 241,
+     "top": 86,
+     "body": 155
+    },
+    {
+     "footX": 93,
+     "footY": 239,
+     "top": 82,
+     "body": 157
+    }
+   ],
+   "bytes": 227690,
+   "sha256": "59f484f847a7f13e1d592c1aa4cbbe5a1307d0d2accf95b5500bf901462a4d40"
+  },
+  {
+   "hero": "lauren",
+   "dir": "n",
+   "path": "assets/r91/walk/walk-lauren-n.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 165,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 232,
+     "top": 66,
+     "body": 166
+    },
+    {
+     "footX": 91,
+     "footY": 240,
+     "top": 74,
+     "body": 166
+    },
+    {
+     "footX": 95,
+     "footY": 238,
+     "top": 73,
+     "body": 165
+    },
+    {
+     "footX": 99,
+     "footY": 240,
+     "top": 74,
+     "body": 166
+    },
+    {
+     "footX": 94,
+     "footY": 240,
+     "top": 75,
+     "body": 165
+    },
+    {
+     "footX": 91,
+     "footY": 239,
+     "top": 75,
+     "body": 164
+    },
+    {
+     "footX": 95,
+     "footY": 240,
+     "top": 75,
+     "body": 165
+    },
+    {
+     "footX": 92,
+     "footY": 238,
+     "top": 76,
+     "body": 162
+    }
+   ],
+   "bytes": 225231,
+   "sha256": "a22fc11fa73fbc4a45a5b78b242702907ccf5c98069003b9fe411b5a2a6aeeb0"
+  },
+  {
+   "hero": "lauren",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-lauren-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 86,
+     "footY": 220,
+     "top": 65,
+     "body": 155
+    },
+    {
+     "footX": 92,
+     "footY": 240,
+     "top": 82,
+     "body": 158
+    },
+    {
+     "footX": 100,
+     "footY": 231,
+     "top": 73,
+     "body": 158
+    },
+    {
+     "footX": 88,
+     "footY": 240,
+     "top": 84,
+     "body": 156
+    },
+    {
+     "footX": 86,
+     "footY": 239,
+     "top": 85,
+     "body": 154
+    },
+    {
+     "footX": 94,
+     "footY": 239,
+     "top": 85,
+     "body": 154
+    },
+    {
+     "footX": 97,
+     "footY": 238,
+     "top": 85,
+     "body": 153
+    },
+    {
+     "footX": 92,
+     "footY": 238,
+     "top": 84,
+     "body": 154
+    }
+   ],
+   "bytes": 236731,
+   "sha256": "db613212305cf17e30d4cd0e63bee5af409539ed2ab09fd2054e9e32ede13cff"
+  },
+  {
+   "hero": "lauren",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-lauren-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 153,
+   "frames": [
+    {
+     "footX": 93,
+     "footY": 218,
+     "top": 63,
+     "body": 155
+    },
+    {
+     "footX": 90,
+     "footY": 241,
+     "top": 88,
+     "body": 153
+    },
+    {
+     "footX": 99,
+     "footY": 237,
+     "top": 79,
+     "body": 158
+    },
+    {
+     "footX": 96,
+     "footY": 224,
+     "top": 70,
+     "body": 154
+    },
+    {
+     "footX": 88,
+     "footY": 240,
+     "top": 88,
+     "body": 152
+    },
+    {
+     "footX": 84,
+     "footY": 234,
+     "top": 84,
+     "body": 150
+    },
+    {
+     "footX": 95,
+     "footY": 240,
+     "top": 87,
+     "body": 153
+    },
+    {
+     "footX": 96,
+     "footY": 240,
+     "top": 87,
+     "body": 153
+    }
+   ],
+   "bytes": 221593,
+   "sha256": "4a0b51b9cbde00a591c560db890a756888ef3a94ee00e0e25ff24fd84508e1d1"
+  },
+  {
+   "hero": "lauren",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-lauren-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 159,
+   "frames": [
+    {
+     "footX": 97,
+     "footY": 240,
+     "top": 77,
+     "body": 163
+    },
+    {
+     "footX": 93,
+     "footY": 232,
+     "top": 75,
+     "body": 157
+    },
+    {
+     "footX": 88,
+     "footY": 236,
+     "top": 77,
+     "body": 159
+    },
+    {
+     "footX": 92,
+     "footY": 239,
+     "top": 76,
+     "body": 163
+    },
+    {
+     "footX": 99,
+     "footY": 239,
+     "top": 80,
+     "body": 159
+    },
+    {
+     "footX": 90,
+     "footY": 237,
+     "top": 79,
+     "body": 158
+    },
+    {
+     "footX": 89,
+     "footY": 241,
+     "top": 83,
+     "body": 158
+    },
+    {
+     "footX": 97,
+     "footY": 237,
+     "top": 79,
+     "body": 158
+    }
+   ],
+   "bytes": 313209,
+   "sha256": "1797346245a91816b3e23f03abf24ba41d77c2d87b12cd5e1b0f36ca6f0aefa5"
+  },
+  {
+   "hero": "michaela",
+   "dir": "s",
+   "path": "assets/r91/walk/walk-michaela-s.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 140,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 228,
+     "top": 87,
+     "body": 141
+    },
+    {
+     "footX": 96,
+     "footY": 230,
+     "top": 92,
+     "body": 138
+    },
+    {
+     "footX": 93,
+     "footY": 230,
+     "top": 92,
+     "body": 138
+    },
+    {
+     "footX": 99,
+     "footY": 224,
+     "top": 89,
+     "body": 135
+    },
+    {
+     "footX": 87,
+     "footY": 239,
+     "top": 97,
+     "body": 142
+    },
+    {
+     "footX": 96,
+     "footY": 236,
+     "top": 96,
+     "body": 140
+    },
+    {
+     "footX": 96,
+     "footY": 236,
+     "top": 96,
+     "body": 140
+    },
+    {
+     "footX": 100,
+     "footY": 241,
+     "top": 98,
+     "body": 143
+    }
+   ],
+   "bytes": 200701,
+   "sha256": "38ef564b2e82de6c56fdab7d08370511091542f62163dd177ef106e8baa64441"
+  },
+  {
+   "hero": "michaela",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-michaela-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 143,
+   "frames": [
+    {
+     "footX": 85,
+     "footY": 210,
+     "top": 67,
+     "body": 143
+    },
+    {
+     "footX": 83,
+     "footY": 229,
+     "top": 93,
+     "body": 136
+    },
+    {
+     "footX": 86,
+     "footY": 226,
+     "top": 82,
+     "body": 144
+    },
+    {
+     "footX": 103,
+     "footY": 231,
+     "top": 86,
+     "body": 145
+    },
+    {
+     "footX": 88,
+     "footY": 229,
+     "top": 87,
+     "body": 142
+    },
+    {
+     "footX": 88,
+     "footY": 238,
+     "top": 103,
+     "body": 135
+    },
+    {
+     "footX": 89,
+     "footY": 238,
+     "top": 97,
+     "body": 141
+    },
+    {
+     "footX": 99,
+     "footY": 228,
+     "top": 84,
+     "body": 144
+    }
+   ],
+   "bytes": 236168,
+   "sha256": "4c35130dd572d63303dde3d4c25bb27f52d2f5e67afb8ce6a5e75ff4d432ed35"
+  },
+  {
+   "hero": "michaela",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-michaela-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 147,
+   "frames": [
+    {
+     "footX": 87,
+     "footY": 238,
+     "top": 85,
+     "body": 153
+    },
+    {
+     "footX": 84,
+     "footY": 233,
+     "top": 90,
+     "body": 143
+    },
+    {
+     "footX": 90,
+     "footY": 235,
+     "top": 87,
+     "body": 148
+    },
+    {
+     "footX": 96,
+     "footY": 229,
+     "top": 83,
+     "body": 146
+    },
+    {
+     "footX": 88,
+     "footY": 238,
+     "top": 90,
+     "body": 148
+    },
+    {
+     "footX": 88,
+     "footY": 237,
+     "top": 90,
+     "body": 147
+    },
+    {
+     "footX": 88,
+     "footY": 236,
+     "top": 91,
+     "body": 145
+    },
+    {
+     "footX": 97,
+     "footY": 238,
+     "top": 96,
+     "body": 142
+    }
+   ],
+   "bytes": 230036,
+   "sha256": "643394a5bddd8823f2789a26d029e61df7bb202d0d21bd5a006dbb6249859d0c"
+  },
+  {
+   "hero": "michaela",
+   "dir": "n",
+   "path": "assets/r91/walk/walk-michaela-n.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 162,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 230,
+     "top": 68,
+     "body": 162
+    },
+    {
+     "footX": 94,
+     "footY": 232,
+     "top": 76,
+     "body": 156
+    },
+    {
+     "footX": 96,
+     "footY": 237,
+     "top": 74,
+     "body": 163
+    },
+    {
+     "footX": 101,
+     "footY": 233,
+     "top": 70,
+     "body": 163
+    },
+    {
+     "footX": 97,
+     "footY": 236,
+     "top": 74,
+     "body": 162
+    },
+    {
+     "footX": 95,
+     "footY": 233,
+     "top": 74,
+     "body": 159
+    },
+    {
+     "footX": 94,
+     "footY": 240,
+     "top": 79,
+     "body": 161
+    },
+    {
+     "footX": 98,
+     "footY": 235,
+     "top": 74,
+     "body": 161
+    }
+   ],
+   "bytes": 170649,
+   "sha256": "90320b3fc2c8cf34e54a9f942e9c3b2f364201cdaf05416364d5112b2c598686"
+  },
+  {
+   "hero": "michaela",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-michaela-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 149,
+   "frames": [
+    {
+     "footX": 101,
+     "footY": 235,
+     "top": 89,
+     "body": 146
+    },
+    {
+     "footX": 96,
+     "footY": 228,
+     "top": 85,
+     "body": 143
+    },
+    {
+     "footX": 101,
+     "footY": 234,
+     "top": 85,
+     "body": 149
+    },
+    {
+     "footX": 103,
+     "footY": 233,
+     "top": 89,
+     "body": 144
+    },
+    {
+     "footX": 101,
+     "footY": 237,
+     "top": 87,
+     "body": 150
+    },
+    {
+     "footX": 96,
+     "footY": 240,
+     "top": 90,
+     "body": 150
+    },
+    {
+     "footX": 97,
+     "footY": 234,
+     "top": 85,
+     "body": 149
+    },
+    {
+     "footX": 106,
+     "footY": 224,
+     "top": 83,
+     "body": 141
+    }
+   ],
+   "bytes": 219816,
+   "sha256": "284f56a20a9cc452431ecffca3560325c0f456bf8b927f9c45a7ea5cc90c39fa"
+  },
+  {
+   "hero": "michaela",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-michaela-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 153,
+   "frames": [
+    {
+     "footX": 100,
+     "footY": 241,
+     "top": 89,
+     "body": 152
+    },
+    {
+     "footX": 104,
+     "footY": 240,
+     "top": 94,
+     "body": 146
+    },
+    {
+     "footX": 103,
+     "footY": 239,
+     "top": 86,
+     "body": 153
+    },
+    {
+     "footX": 111,
+     "footY": 238,
+     "top": 82,
+     "body": 156
+    },
+    {
+     "footX": 103,
+     "footY": 242,
+     "top": 89,
+     "body": 153
+    },
+    {
+     "footX": 108,
+     "footY": 240,
+     "top": 97,
+     "body": 143
+    },
+    {
+     "footX": 103,
+     "footY": 241,
+     "top": 89,
+     "body": 152
+    },
+    {
+     "footX": 112,
+     "footY": 240,
+     "top": 86,
+     "body": 154
+    }
+   ],
+   "bytes": 257967,
+   "sha256": "3e24a97e95674ee5a3b607e2330d279f7b07f76d56071edf64178095bd2833ef"
+  },
+  {
+   "hero": "neon",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-neon-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 142,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 230,
+     "top": 89,
+     "body": 141
+    },
+    {
+     "footX": 98,
+     "footY": 230,
+     "top": 92,
+     "body": 138
+    },
+    {
+     "footX": 95,
+     "footY": 231,
+     "top": 87,
+     "body": 144
+    },
+    {
+     "footX": 109,
+     "footY": 237,
+     "top": 91,
+     "body": 146
+    },
+    {
+     "footX": 94,
+     "footY": 241,
+     "top": 99,
+     "body": 142
+    },
+    {
+     "footX": 97,
+     "footY": 241,
+     "top": 103,
+     "body": 138
+    },
+    {
+     "footX": 97,
+     "footY": 239,
+     "top": 97,
+     "body": 142
+    },
+    {
+     "footX": 111,
+     "footY": 240,
+     "top": 97,
+     "body": 143
+    }
+   ],
+   "bytes": 190134,
+   "sha256": "1c0499322d5727c1fee7face4696492de3d0c0c12447e87955d1fada1c8ce723"
+  },
+  {
+   "hero": "neon",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-neon-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 137,
+   "frames": [
+    {
+     "footX": 102,
+     "footY": 219,
+     "top": 82,
+     "body": 137
+    },
+    {
+     "footX": 98,
+     "footY": 220,
+     "top": 90,
+     "body": 130
+    },
+    {
+     "footX": 97,
+     "footY": 233,
+     "top": 96,
+     "body": 137
+    },
+    {
+     "footX": 100,
+     "footY": 239,
+     "top": 102,
+     "body": 137
+    },
+    {
+     "footX": 101,
+     "footY": 226,
+     "top": 89,
+     "body": 137
+    },
+    {
+     "footX": 99,
+     "footY": 240,
+     "top": 111,
+     "body": 129
+    },
+    {
+     "footX": 98,
+     "footY": 242,
+     "top": 105,
+     "body": 137
+    },
+    {
+     "footX": 94,
+     "footY": 238,
+     "top": 99,
+     "body": 139
+    }
+   ],
+   "bytes": 185977,
+   "sha256": "2c74c1e10bc3d8fcb4d89fafc2e3c4227af76dc1d316aa365a4beea67f694b71"
+  },
+  {
+   "hero": "neon",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-neon-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 130,
+   "frames": [
+    {
+     "footX": 101,
+     "footY": 211,
+     "top": 82,
+     "body": 129
+    },
+    {
+     "footX": 97,
+     "footY": 222,
+     "top": 92,
+     "body": 130
+    },
+    {
+     "footX": 94,
+     "footY": 218,
+     "top": 86,
+     "body": 132
+    },
+    {
+     "footX": 103,
+     "footY": 219,
+     "top": 89,
+     "body": 130
+    },
+    {
+     "footX": 99,
+     "footY": 224,
+     "top": 91,
+     "body": 133
+    },
+    {
+     "footX": 97,
+     "footY": 236,
+     "top": 106,
+     "body": 130
+    },
+    {
+     "footX": 92,
+     "footY": 223,
+     "top": 93,
+     "body": 130
+    },
+    {
+     "footX": 104,
+     "footY": 223,
+     "top": 92,
+     "body": 131
+    }
+   ],
+   "bytes": 182518,
+   "sha256": "2fb81b36de57dacf7d19f13528b43f2567c3cc34b98d206d2a4ed376c9fecc41"
+  },
+  {
+   "hero": "neon",
+   "dir": "n",
+   "path": "assets/r91/walk/walk-neon-n.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 139,
+   "frames": [
+    {
+     "footX": 97,
+     "footY": 222,
+     "top": 85,
+     "body": 137
+    },
+    {
+     "footX": 96,
+     "footY": 220,
+     "top": 82,
+     "body": 138
+    },
+    {
+     "footX": 95,
+     "footY": 227,
+     "top": 88,
+     "body": 139
+    },
+    {
+     "footX": 102,
+     "footY": 221,
+     "top": 87,
+     "body": 134
+    },
+    {
+     "footX": 95,
+     "footY": 237,
+     "top": 99,
+     "body": 138
+    },
+    {
+     "footX": 95,
+     "footY": 240,
+     "top": 101,
+     "body": 139
+    },
+    {
+     "footX": 98,
+     "footY": 240,
+     "top": 101,
+     "body": 139
+    },
+    {
+     "footX": 97,
+     "footY": 230,
+     "top": 90,
+     "body": 140
+    }
+   ],
+   "bytes": 175496,
+   "sha256": "eddfefeae233e30e5505dec0bf705d89630752c6a41ac97a488f1d7cda4457c9"
+  },
+  {
+   "hero": "neon",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-neon-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 132,
+   "frames": [
+    {
+     "footX": 91,
+     "footY": 217,
+     "top": 86,
+     "body": 131
+    },
+    {
+     "footX": 95,
+     "footY": 226,
+     "top": 93,
+     "body": 133
+    },
+    {
+     "footX": 93,
+     "footY": 234,
+     "top": 102,
+     "body": 132
+    },
+    {
+     "footX": 92,
+     "footY": 216,
+     "top": 86,
+     "body": 130
+    },
+    {
+     "footX": 95,
+     "footY": 240,
+     "top": 108,
+     "body": 132
+    },
+    {
+     "footX": 93,
+     "footY": 227,
+     "top": 96,
+     "body": 131
+    },
+    {
+     "footX": 92,
+     "footY": 230,
+     "top": 98,
+     "body": 132
+    },
+    {
+     "footX": 96,
+     "footY": 236,
+     "top": 105,
+     "body": 131
+    }
+   ],
+   "bytes": 185677,
+   "sha256": "7df5a66127d1c1485358a6bf1407fd3be542e41c99a5d6d916bf9b681cc79428"
+  },
+  {
+   "hero": "neon",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-neon-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 138,
+   "frames": [
+    {
+     "footX": 85,
+     "footY": 227,
+     "top": 88,
+     "body": 139
+    },
+    {
+     "footX": 95,
+     "footY": 234,
+     "top": 96,
+     "body": 138
+    },
+    {
+     "footX": 92,
+     "footY": 220,
+     "top": 81,
+     "body": 139
+    },
+    {
+     "footX": 92,
+     "footY": 237,
+     "top": 100,
+     "body": 137
+    },
+    {
+     "footX": 89,
+     "footY": 240,
+     "top": 104,
+     "body": 136
+    },
+    {
+     "footX": 87,
+     "footY": 240,
+     "top": 103,
+     "body": 137
+    },
+    {
+     "footX": 90,
+     "footY": 240,
+     "top": 102,
+     "body": 138
+    },
+    {
+     "footX": 92,
+     "footY": 229,
+     "top": 93,
+     "body": 136
+    }
+   ],
+   "bytes": 190966,
+   "sha256": "cd742ff5d261635973fc1b9e42d7bb846217b38e3810db4a48f4bded59c1b0d9"
+  },
+  {
+   "hero": "neon",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-neon-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 138,
+   "frames": [
+    {
+     "footX": 95,
+     "footY": 209,
+     "top": 73,
+     "body": 136
+    },
+    {
+     "footX": 92,
+     "footY": 218,
+     "top": 89,
+     "body": 129
+    },
+    {
+     "footX": 98,
+     "footY": 222,
+     "top": 85,
+     "body": 137
+    },
+    {
+     "footX": 91,
+     "footY": 242,
+     "top": 104,
+     "body": 138
+    },
+    {
+     "footX": 89,
+     "footY": 240,
+     "top": 100,
+     "body": 140
+    },
+    {
+     "footX": 91,
+     "footY": 242,
+     "top": 107,
+     "body": 135
+    },
+    {
+     "footX": 92,
+     "footY": 241,
+     "top": 102,
+     "body": 139
+    },
+    {
+     "footX": 97,
+     "footY": 236,
+     "top": 95,
+     "body": 141
+    }
+   ],
+   "bytes": 185305,
+   "sha256": "d9b70e73f4d290b2980fead1ee035c647cff7616b6b81676eecc2c66ce9a0793"
+  },
+  {
+   "hero": "seoha",
+   "dir": "s",
+   "path": "assets/r91/walk/walk-seoha-s.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 155,
+   "frames": [
+    {
+     "footX": 95,
+     "footY": 238,
+     "top": 83,
+     "body": 155
+    },
+    {
+     "footX": 94,
+     "footY": 236,
+     "top": 81,
+     "body": 155
+    },
+    {
+     "footX": 98,
+     "footY": 231,
+     "top": 75,
+     "body": 156
+    },
+    {
+     "footX": 102,
+     "footY": 239,
+     "top": 83,
+     "body": 156
+    },
+    {
+     "footX": 100,
+     "footY": 236,
+     "top": 81,
+     "body": 155
+    },
+    {
+     "footX": 94,
+     "footY": 232,
+     "top": 80,
+     "body": 152
+    },
+    {
+     "footX": 97,
+     "footY": 236,
+     "top": 82,
+     "body": 154
+    },
+    {
+     "footX": 92,
+     "footY": 232,
+     "top": 79,
+     "body": 153
+    }
+   ],
+   "bytes": 247400,
+   "sha256": "194f85fb77c6cc71654a5dd9c41b69a4cf558489a4b64d3570acf3b99411da8c"
+  },
+  {
+   "hero": "seoha",
+   "dir": "se",
+   "path": "assets/r91/walk/walk-seoha-se.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 156,
+   "frames": [
+    {
+     "footX": 102,
+     "footY": 241,
+     "top": 85,
+     "body": 156
+    },
+    {
+     "footX": 96,
+     "footY": 238,
+     "top": 83,
+     "body": 155
+    },
+    {
+     "footX": 100,
+     "footY": 236,
+     "top": 78,
+     "body": 158
+    },
+    {
+     "footX": 102,
+     "footY": 224,
+     "top": 66,
+     "body": 158
+    },
+    {
+     "footX": 95,
+     "footY": 231,
+     "top": 75,
+     "body": 156
+    },
+    {
+     "footX": 99,
+     "footY": 240,
+     "top": 87,
+     "body": 153
+    },
+    {
+     "footX": 99,
+     "footY": 241,
+     "top": 88,
+     "body": 153
+    },
+    {
+     "footX": 105,
+     "footY": 240,
+     "top": 83,
+     "body": 157
+    }
+   ],
+   "bytes": 223014,
+   "sha256": "e8e82ce4b10831b18f4375416af06debaaf96c86d42d590254c36c35bdbf9dfa"
+  },
+  {
+   "hero": "seoha",
+   "dir": "e",
+   "path": "assets/r91/walk/walk-seoha-e.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 144,
+   "frames": [
+    {
+     "footX": 95,
+     "footY": 216,
+     "top": 71,
+     "body": 145
+    },
+    {
+     "footX": 98,
+     "footY": 233,
+     "top": 87,
+     "body": 146
+    },
+    {
+     "footX": 100,
+     "footY": 228,
+     "top": 83,
+     "body": 145
+    },
+    {
+     "footX": 101,
+     "footY": 215,
+     "top": 73,
+     "body": 142
+    },
+    {
+     "footX": 86,
+     "footY": 230,
+     "top": 86,
+     "body": 144
+    },
+    {
+     "footX": 94,
+     "footY": 232,
+     "top": 89,
+     "body": 143
+    },
+    {
+     "footX": 96,
+     "footY": 224,
+     "top": 82,
+     "body": 142
+    },
+    {
+     "footX": 106,
+     "footY": 240,
+     "top": 98,
+     "body": 142
+    }
+   ],
+   "bytes": 217198,
+   "sha256": "0b46ed739f986de7a0bafc353fbf43744dafac72a06ffc2110cc4a9c2b23cffd"
+  },
+  {
+   "hero": "seoha",
+   "dir": "ne",
+   "path": "assets/r91/walk/walk-seoha-ne.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 144,
+   "frames": [
+    {
+     "footX": 96,
+     "footY": 214,
+     "top": 70,
+     "body": 144
+    },
+    {
+     "footX": 94,
+     "footY": 218,
+     "top": 74,
+     "body": 144
+    },
+    {
+     "footX": 100,
+     "footY": 222,
+     "top": 79,
+     "body": 143
+    },
+    {
+     "footX": 101,
+     "footY": 224,
+     "top": 83,
+     "body": 141
+    },
+    {
+     "footX": 98,
+     "footY": 239,
+     "top": 96,
+     "body": 143
+    },
+    {
+     "footX": 97,
+     "footY": 239,
+     "top": 95,
+     "body": 144
+    },
+    {
+     "footX": 98,
+     "footY": 239,
+     "top": 93,
+     "body": 146
+    },
+    {
+     "footX": 100,
+     "footY": 235,
+     "top": 90,
+     "body": 145
+    }
+   ],
+   "bytes": 205391,
+   "sha256": "b7ff018e89a391062a8adf5acd9d562bb54ba6043f3214a292c2afa2147eefc6"
+  },
+  {
+   "hero": "seoha",
+   "dir": "n",
+   "path": "assets/r91/walk/walk-seoha-n.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 154,
+   "frames": [
+    {
+     "footX": 101,
+     "footY": 240,
+     "top": 87,
+     "body": 153
+    },
+    {
+     "footX": 92,
+     "footY": 233,
+     "top": 79,
+     "body": 154
+    },
+    {
+     "footX": 94,
+     "footY": 234,
+     "top": 80,
+     "body": 154
+    },
+    {
+     "footX": 96,
+     "footY": 230,
+     "top": 79,
+     "body": 151
+    },
+    {
+     "footX": 98,
+     "footY": 221,
+     "top": 71,
+     "body": 150
+    },
+    {
+     "footX": 96,
+     "footY": 226,
+     "top": 70,
+     "body": 156
+    },
+    {
+     "footX": 93,
+     "footY": 227,
+     "top": 71,
+     "body": 156
+    },
+    {
+     "footX": 98,
+     "footY": 227,
+     "top": 71,
+     "body": 156
+    }
+   ],
+   "bytes": 242901,
+   "sha256": "77555645620ee819739e5f234d902adb9da273342eb0ad24e1d572401d55cde0"
+  },
+  {
+   "hero": "seoha",
+   "dir": "nw",
+   "path": "assets/r91/walk/walk-seoha-nw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 159,
+   "frames": [
+    {
+     "footX": 90,
+     "footY": 228,
+     "top": 69,
+     "body": 159
+    },
+    {
+     "footX": 88,
+     "footY": 234,
+     "top": 77,
+     "body": 157
+    },
+    {
+     "footX": 90,
+     "footY": 237,
+     "top": 77,
+     "body": 160
+    },
+    {
+     "footX": 103,
+     "footY": 238,
+     "top": 83,
+     "body": 155
+    },
+    {
+     "footX": 85,
+     "footY": 239,
+     "top": 80,
+     "body": 159
+    },
+    {
+     "footX": 93,
+     "footY": 238,
+     "top": 85,
+     "body": 153
+    },
+    {
+     "footX": 89,
+     "footY": 239,
+     "top": 83,
+     "body": 156
+    },
+    {
+     "footX": 107,
+     "footY": 233,
+     "top": 73,
+     "body": 160
+    }
+   ],
+   "bytes": 225464,
+   "sha256": "39653ffac6895347f5a67c28f45d4c093e39541261ca8d86b2151a4922b0e029"
+  },
+  {
+   "hero": "seoha",
+   "dir": "w",
+   "path": "assets/r91/walk/walk-seoha-w.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 149,
+   "frames": [
+    {
+     "footX": 93,
+     "footY": 223,
+     "top": 75,
+     "body": 148
+    },
+    {
+     "footX": 94,
+     "footY": 227,
+     "top": 76,
+     "body": 151
+    },
+    {
+     "footX": 93,
+     "footY": 228,
+     "top": 76,
+     "body": 152
+    },
+    {
+     "footX": 99,
+     "footY": 230,
+     "top": 77,
+     "body": 153
+    },
+    {
+     "footX": 88,
+     "footY": 231,
+     "top": 83,
+     "body": 148
+    },
+    {
+     "footX": 92,
+     "footY": 236,
+     "top": 90,
+     "body": 146
+    },
+    {
+     "footX": 92,
+     "footY": 235,
+     "top": 86,
+     "body": 149
+    },
+    {
+     "footX": 101,
+     "footY": 226,
+     "top": 78,
+     "body": 148
+    }
+   ],
+   "bytes": 221096,
+   "sha256": "51f2a5c20b3b0854b0846067623f73fc3c61f9ac20aac042a1a319bc22f006aa"
+  },
+  {
+   "hero": "seoha",
+   "dir": "sw",
+   "path": "assets/r91/walk/walk-seoha-sw.png",
+   "w": 768,
+   "h": 512,
+   "cellW": 192,
+   "cellH": 256,
+   "refBody": 163,
+   "frames": [
+    {
+     "footX": 99,
+     "footY": 232,
+     "top": 69,
+     "body": 163
+    },
+    {
+     "footX": 93,
+     "footY": 239,
+     "top": 79,
+     "body": 160
+    },
+    {
+     "footX": 97,
+     "footY": 239,
+     "top": 75,
+     "body": 164
+    },
+    {
+     "footX": 94,
+     "footY": 239,
+     "top": 75,
+     "body": 164
+    },
+    {
+     "footX": 84,
+     "footY": 240,
+     "top": 80,
+     "body": 160
+    },
+    {
+     "footX": 94,
+     "footY": 241,
+     "top": 80,
+     "body": 161
+    },
+    {
+     "footX": 96,
+     "footY": 238,
+     "top": 75,
+     "body": 163
+    },
+    {
+     "footX": 95,
+     "footY": 238,
+     "top": 76,
+     "body": 162
+    }
+   ],
+   "bytes": 257739,
+   "sha256": "6e7e8aa021b86e49e284caa40e679895e3df2de364a121bab31e29ffcd6f398b"
+  }
+ ],
+ "sources": [
+  {
+   "file": "walk/walk_hwando_se.png",
+   "sha256": "5fceb3a40b59912a5e1f6587d9907899e137c51a812ed75bdc66ef9a82f79d55"
+  },
+  {
+   "file": "walk/walk_hwando_ne.png",
+   "sha256": "a1cb82651fb60eab9cdb7e0970e2cd0832cabb75e19a00309f8c2db4a6ccd182"
+  },
+  {
+   "file": "walk/walk_hwando_nw.png",
+   "sha256": "3b510db850862ec48c3d758cd5a6d24176bbef85f34222f77bb1bbd7b1d392f0"
+  },
+  {
+   "file": "walk/walk_hwando_w.png",
+   "sha256": "92aca2467c5cd6d21064e545fbac86a9ad2e6d41511adfff7a93d855e9b7cd61"
+  },
+  {
+   "file": "walk/walk_hwando_sw.png",
+   "sha256": "dd5d3ea172ce7a9f90834d9a5324a179c3e3fef98065930dca71f6887b9b5f5a"
+  },
+  {
+   "file": "walk/walk_slayer_se.png",
+   "sha256": "d13ff0e9ec14a9e5330af8443cf274d6bb2b6bbf2e71647eb53285374f329541"
+  },
+  {
+   "file": "walk/walk_slayer_e.png",
+   "sha256": "97b1ff0e66048b13a28c1ac38bd49d6e53c9b2a8fe149c8784693ff217b8cfa1"
+  },
+  {
+   "file": "walk/walk_slayer_ne.png",
+   "sha256": "e09eeeb7a09394231495d615119d02217739a891dfa362dce78394eb180a96ff"
+  },
+  {
+   "file": "walk/walk_slayer_nw.png",
+   "sha256": "41aff0a04885dca54e67d8317bca3dc10ae80a3fb445f7da51b5052fa8efb3b1"
+  },
+  {
+   "file": "walk/walk_slayer_w.png",
+   "sha256": "d6af717fbba3b5544a2eed0415641d1e51fa12da65dc81415c2a0f7c73d1f9cf"
+  },
+  {
+   "file": "walk/walk_slayer_sw.png",
+   "sha256": "7919ae273c6a4dddf63d243158fd3d26e7a339f75d6cceacac5375543838a546"
+  },
+  {
+   "file": "walk/walk_gunner_s.png",
+   "sha256": "9fce8fa3aa6b46628f50a5edfb1c918874da6c30638f36517999d8ecc6f54701"
+  },
+  {
+   "file": "walk/walk_gunner_se.png",
+   "sha256": "bbdfc25a52143ce83fd4244d29611b6e090bd02c0593d138e9a2ef1aebbea99e"
+  },
+  {
+   "file": "walk/walk_gunner_e.png",
+   "sha256": "0e64e63bbb5ce89ccd0719efb45b85feb39c3670284f418d7faed81e4ee17f19"
+  },
+  {
+   "file": "walk/walk_gunner_ne.png",
+   "sha256": "b491aff7e9e6343d90cffd607395214f6bf23886a4a268603e5900a294aeb034"
+  },
+  {
+   "file": "walk/walk_gunner_nw.png",
+   "sha256": "b401adb27fb4c6268e39dd34d06619661c26b418e20ec7d924c1f9ddf891f06a"
+  },
+  {
+   "file": "walk/walk_gunner_w.png",
+   "sha256": "179ac626b8832cc4fdec227ea9125e7e9696c4c4475065a6c68dfc3c6adbbf0d"
+  },
+  {
+   "file": "walk/walk_gunner_sw.png",
+   "sha256": "bcd235054faead963f8397ac25a1031e6845b5451563b33d27caaa9c07c7ec13"
+  },
+  {
+   "file": "walk/walk_hunter_s.png",
+   "sha256": "bbd6db800272f8c430c45d619f5ac706820017a881e6da2aaf7af21f6b6fb2ab"
+  },
+  {
+   "file": "walk/walk_hunter_se.png",
+   "sha256": "143fe5e99cf05a28bd8beea9d9e5ed7a006fec4682f4766971f24dad52fda1da"
+  },
+  {
+   "file": "walk/walk_hunter_ne.png",
+   "sha256": "aa7e1194c5b88023fe4a81f1289db42b9d837f356eba8e018fffef9c59def5af"
+  },
+  {
+   "file": "walk/walk_hunter_n.png",
+   "sha256": "70e7ea3432ad31f900dc6e96efc6b8ce3bffea126394588b20532451d5e35af9"
+  },
+  {
+   "file": "walk/walk_hunter_nw.png",
+   "sha256": "5fee6622cb0a1df96891ec35ac2ed716a7c7794f1c458752c31aed6fcb2f5113"
+  },
+  {
+   "file": "walk/walk_hunter_sw.png",
+   "sha256": "5e83d7449e6ab3bedb47d8a59f35c952590a3e5509c0a91d642fabc5904df678"
+  },
+  {
+   "file": "walk/walk_lauren_s.png",
+   "sha256": "40e22a47bfc71cade6c1db1fe4f7ff8b332ddb7ca403e2da29041d54ba280a7b"
+  },
+  {
+   "file": "walk/walk_lauren_se.png",
+   "sha256": "c73e68acc5fbfd145530330190856210d2e2fe25c250c599d8938d4263f7332d"
+  },
+  {
+   "file": "walk/walk_lauren_e.png",
+   "sha256": "1b0c354a81238fab4698688dbec4c3e725a506da82401c8264020b1bdd3515e4"
+  },
+  {
+   "file": "walk/walk_lauren_ne.png",
+   "sha256": "b4e7c69ea65cd32cfed97680d6cc210fef2759d236aa83a051f969991a0d51ac"
+  },
+  {
+   "file": "walk/walk_lauren_n.png",
+   "sha256": "bc403371f35e3b720df5d4b8b6f030ad6c6bbbcbfa8319c6ef0f2c2a27143d1a"
+  },
+  {
+   "file": "walk/walk_lauren_nw.png",
+   "sha256": "d1367e770ab3fc0b138f12d050181f56b88395e87ed5de68d947b407a939e92c"
+  },
+  {
+   "file": "walk/walk_lauren_w.png",
+   "sha256": "20a0541ccdff6dc1fd82a5c022653977d8b1a2d9a070fa912f174b7b3a84b550"
+  },
+  {
+   "file": "walk/walk_lauren_sw.png",
+   "sha256": "2bd1b7facbf6e7accea4bcdce279d57702de8fe5cf7171dcc8f659fed14bd104"
+  },
+  {
+   "file": "walk/walk_michaela_s.png",
+   "sha256": "0be96a5024a43ba2e5af9532df0867ac762b93da0ea0eb5d372dfa4761aaba03"
+  },
+  {
+   "file": "walk/walk_michaela_e.png",
+   "sha256": "68313750b3d716379d95e1ce1a4671803411be84643983d4d1bd3f6f35caed30"
+  },
+  {
+   "file": "walk/walk_michaela_ne.png",
+   "sha256": "7726fba6d5590f16d0a1951758a7022f1dfe0aae3acd274fd3f30511eb0c9bcc"
+  },
+  {
+   "file": "walk/walk_michaela_n.png",
+   "sha256": "a9a1db008e5b30b4c9c740ab32753974287dd85ba9335de8856095bcfea67937"
+  },
+  {
+   "file": "walk/walk_michaela_nw.png",
+   "sha256": "b229b87993d20952bddf6ce464b89791119ced072992aa8f30148862c0f8609e"
+  },
+  {
+   "file": "walk/walk_michaela_sw.png",
+   "sha256": "1feaef7ef17a923875ddedad9e4b385d318e3399cd077b51beb4a875f6d58bbb"
+  },
+  {
+   "file": "walk/walk_neon_se.png",
+   "sha256": "cf4df34cfe9761b760612ac147fe7afd9f65e0c62340c6109f300ba52985f905"
+  },
+  {
+   "file": "walk/walk_neon_e.png",
+   "sha256": "70145c9fc30244e7b048e2db8f8f6fa1fe521cffc8c1848c2bffc4fab754dc44"
+  },
+  {
+   "file": "walk/walk_neon_ne.png",
+   "sha256": "0630a4b26109d6d0e4466c370737703e3f6ec9a94ae1999a23e4c8974b6a20d4"
+  },
+  {
+   "file": "walk/walk_neon_n.png",
+   "sha256": "eb611edd6dd92d54e453587f63c826240a558b9f6ad9814d214a35e441d4e4ee"
+  },
+  {
+   "file": "walk/walk_neon_nw.png",
+   "sha256": "ceef34c9365437832fb6b45296484b530964c886f9cafb12ebe36edef1e8b35f"
+  },
+  {
+   "file": "walk/walk_neon_w.png",
+   "sha256": "ab1e00de976dbbf140d82477a6e1dce42115e18725b99b237ff41032e3bef4b8"
+  },
+  {
+   "file": "walk/walk_neon_sw.png",
+   "sha256": "87287f4239800ec7d606f575368f4472e43a86a9bda301bd688c476fd0f67703"
+  },
+  {
+   "file": "walk/walk_seoha_s.png",
+   "sha256": "abadbfc2cdfcf5fb9321611b95976068181fe88888027a17bbb4576cb3ca22a4"
+  },
+  {
+   "file": "walk/walk_seoha_se.png",
+   "sha256": "8d897f4dfab3b96436a628040b5352aa39b2a52b2d3c506effacf001596aa1c6"
+  },
+  {
+   "file": "walk/walk_seoha_e.png",
+   "sha256": "2ead381a9c61cc2365f5144390863ad9a9ef11978e576c2f444ab8a5cf983777"
+  },
+  {
+   "file": "walk/walk_seoha_ne.png",
+   "sha256": "a7728cbd7f31b8497b5cae8c12b116e89b85c929fe1afe14e3cfc36af15c54fe"
+  },
+  {
+   "file": "walk/walk_seoha_n.png",
+   "sha256": "4ed5000357f4fb0cd49b59e2ad28ad7d5956094a74430ecef1023ef6dcaf8e5f"
+  },
+  {
+   "file": "walk/walk_seoha_nw.png",
+   "sha256": "0216f3a62f1aea6294c9a56e4d7a9b7606d740e7c9e41a3ef05ab804e5705846"
+  },
+  {
+   "file": "walk/walk_seoha_w.png",
+   "sha256": "71a66dc7a9cd0b00c49dca37eab9ea2f7aa0628a21d956b0776b51b9a3e5301c"
+  },
+  {
+   "file": "walk/walk_seoha_sw.png",
+   "sha256": "2122222c0354bbdc3e3f6dbe1035d90e0e1ced1247b998e08e37a9e0a8c88fdd"
+  }
+ ],
+ "fringeTexelsRecoloured": 4992064,
+ "originalsModified": false,
+ "anchorRule": "foot = lowest row with >=12% of the widest row (alpha>128); x = median solid x; refBody = median solid height per sheet"
+}
