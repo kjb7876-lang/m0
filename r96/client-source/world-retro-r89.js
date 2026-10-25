@@ -6,15 +6,18 @@
  if(!A||!C||window.__STORYWORLD_WORLD_RETRO_R89__)return;
  const STORE_KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.r89:')+'r89.presentation';
  const DEFAULTS=Object.freeze({light:'normal',grade:true,dither:true,contact:true});
- const LIGHT=Object.freeze({off:null,soft:{edge:.66,inner:.42},normal:{edge:.44,inner:.36}});
+ // R97: the carried light left ~60% of the frame near black (mean luma 21/255 over
+ // the campaign). Wider pool and lighter rim keep the torch mood but let the maze read.
+ const LIGHT=Object.freeze({off:null,soft:{edge:.76,inner:.46},normal:{edge:.62,inner:.4}});
  // Per-family mood. Gain/saturation unify the dark palette; tints keep each
  // region's own material identity (tile, wet earth, stone, ash...).
+ // R97: every gain +.10 (same relative order between families).
  const FAMILY={
-  clinical:{tint:[.95,1,.97],sat:.7,gain:.86},garden:{tint:[.94,.99,.91],sat:.78,gain:.86},cave:{tint:[.93,.96,1],sat:.75,gain:.84},
-  swamp:{tint:[.9,.98,.84],sat:.78,gain:.82},ash:{tint:[1.02,.94,.89],sat:.74,gain:.84},domestic:{tint:[1,.96,.92],sat:.76,gain:.86},
-  stone:{tint:[.97,.96,.94],sat:.72,gain:.85},forge:{tint:[1.03,.95,.88],sat:.78,gain:.85},snow:{tint:[.95,.99,1.04],sat:.74,gain:.88},
-  coast:{tint:[.92,.98,1.01],sat:.76,gain:.85},memory:{tint:[.97,.93,1.02],sat:.74,gain:.84},neural:{tint:[.91,.98,1],sat:.74,gain:.84},
-  regional:{tint:[.98,.97,.95],sat:.78,gain:.86}
+  clinical:{tint:[.95,1,.97],sat:.7,gain:.96},garden:{tint:[.94,.99,.91],sat:.78,gain:.96},cave:{tint:[.93,.96,1],sat:.75,gain:.94},
+  swamp:{tint:[.9,.98,.84],sat:.78,gain:.92},ash:{tint:[1.02,.94,.89],sat:.74,gain:.94},domestic:{tint:[1,.96,.92],sat:.76,gain:.96},
+  stone:{tint:[.97,.96,.94],sat:.72,gain:.95},forge:{tint:[1.03,.95,.88],sat:.78,gain:.95},snow:{tint:[.95,.99,1.04],sat:.74,gain:.98},
+  coast:{tint:[.92,.98,1.01],sat:.76,gain:.95},memory:{tint:[.97,.93,1.02],sat:.74,gain:.94},neural:{tint:[.91,.98,1],sat:.74,gain:.94},
+  regional:{tint:[.98,.97,.95],sat:.78,gain:.96}
  };
  // Core colour of the carried light per family (multiplier, <=1 per channel).
  const WARM={regional:[1,.95,.87],clinical:[1,.95,.86],garden:[1,.96,.88],cave:[1,.94,.84],swamp:[1,.96,.86],ash:[1,.92,.8],domestic:[1,.94,.84],
@@ -29,7 +32,7 @@
 
  function uniforms(T){if(U)return U;
   U={r89Grade:{value:0},r89Sat:{value:.75},r89Gain:{value:.86},r89Tint:{value:new T.Vector3(1,1,1)},r89Knee:{value:.6},r89Compress:{value:.42},
-   r89Faces:{value:new T.Vector3(.74,.46,1)},r89Grime:{value:.1},r89VoidGain:{value:.4},r89Dither:{value:0},r89FocusCount:{value:0},
+   r89Faces:{value:new T.Vector3(.8,.6,1)},r89Grime:{value:.1},r89VoidGain:{value:.4},r89Dither:{value:0},r89FocusCount:{value:0},
    r89Focus:{value:Array.from({length:MAX_FOCUS},()=>new T.Vector4(-1e4,-1e4,-1e4,0))},r89FocusR:{value:Array.from({length:MAX_FOCUS},()=>new T.Vector2(1,1))}};
   return U;
  }
