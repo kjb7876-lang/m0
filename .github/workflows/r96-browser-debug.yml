@@ -1,0 +1,47 @@
+name: R96 browser diagnosis (no deployment)
+on:
+  push:
+    branches: [codex/r96-browser-debug]
+permissions:
+  contents: read
+concurrency:
+  group: r96-browser-diagnosis
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Restore exact runtime
+        run: python scripts/build-r96.py
+      - name: Install sandboxed browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Diagnose exact browser test with all assertions retained
+        env:
+          STORYWORLD_URL: http://127.0.0.1:4396/m0/
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          ln -s "$PWD/r96/hospital-three-pc/site" out/m0
+          python -m http.server 4396 --bind 127.0.0.1 --directory out > r96/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/r96.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r96-browser-diagnosis-${{ github.run_id }}
+          path: |
+            r96/browser-results.json
+            r96/*.png
+            r96/http.log
+          retention-days: 7
