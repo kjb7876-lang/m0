@@ -33,6 +33,7 @@ try{
  check('Native E portal and difficulty admission arrive safely',await page.evaluate(()=>!blocked(player.x,player.y,.34,room)));
  await page.evaluate(async()=>{for(let i=0;i<80&&storyScene;i++)advanceScene();if(modal)closePanel(true);auto=false;guide=false;settings.autoSkill=false;modal=true;await __STORYWORLD_STATUS_R96__.ready();const e=room.enemies.find(e=>e.hp>0);if(!e)throw Error('No native status owner');e.spawnState='active';e.deadRecorded=false;e.visible=true;e.disabled=false;window.r96Owner=e;if(!__STORYWORLD_FIELDS_R61__.applyStatus('pollution',e)||!__STORYWORLD_FIELDS_R61__.applyStatus('fire',e))throw Error('Native sustain admission rejected');});
  await page.waitForFunction(()=>__STORYWORLD_STATUS_R96__.inspect().active.length===2);
+ await page.evaluate(()=>{time+=.4;});await page.waitForTimeout(100);
  await page.screenshot({path:'r96/status-poison-burn.png'});
  let state=await page.evaluate(()=>({status:__STORYWORLD_STATUS_R96__.inspect(),pool:__STORYWORLD_FINAL42_R88__.inspect()}));
  check('Real PNG decode and draw of both sustain atlases',state.status.metrics.painted>0&&state.status.active.some(r=>r.kind==='poison')&&state.status.active.some(r=>r.kind==='burn'),state);
