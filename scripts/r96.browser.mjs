@@ -39,7 +39,7 @@ try{
  await page.evaluate(()=>{time+=.3;});await page.waitForFunction(()=>__STORYWORLD_STATUS_R96__.inspect().active.length===0);
  check('Early removal completes bounded fade',true);
  await page.evaluate(async()=>{zone='dist00';room=makeRoom(zone,layer);world[layerKey()]=room;__STORYWORLD_WORLD_COMBAT_R78__.placeRoom(room);player.x=20;player.y=36;cam.x=20;cam.y=36;player.hp=maxHP();player.invincible=0;player.shield=0;player.guard=false;storyScene=null;modal=true;effects=[];hazards=[];projectiles=[];});
- await page.waitForTimeout(100);await page.evaluate(async()=>{await __STORYWORLD_STATUS_R96__.ready();const e=room.enemies.find(e=>e.nativeId==='dist00-boss');e.spawnState='active';e.deadRecorded=false;e.hp=e.maxHp;hurt(8,{owner:e.id,vx:1,vy:0});time+=1;});
+ await page.waitForTimeout(100);await page.evaluate(async()=>{await __STORYWORLD_STATUS_R96__.ready();const e=room.enemies.find(e=>e.nativeId==='dist00-boss');e.spawnState='active';e.deadRecorded=false;e.hp=e.maxHp;modal=false;const result=hurt(8,{owner:e.id,vx:1,vy:0});modal=true;if(result!=='hit')throw Error('Native root hit rejected: '+result);time+=1;});
  await page.waitForFunction(()=>__STORYWORLD_STATUS_R96__.inspect().active.some(r=>r.kind==='root'));
  await page.screenshot({path:'r96/root-front-back.png'});
  state=await page.evaluate(()=>({status:__STORYWORLD_STATUS_R96__.inspect(),pool:__STORYWORLD_FINAL42_R88__.inspect()}));
