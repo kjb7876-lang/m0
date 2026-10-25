@@ -14239,8 +14239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6560698,
-      "sha256": "bc2b4244f3035f72b1cb0efdda07b3e7cabfb42f2ad57ac4f1eb29362935dbf0"
+      "bytes": 6560736,
+      "sha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -14251,6 +14251,11 @@
       "path": "painted-vfx-r87.js",
       "bytes": 9905,
       "sha256": "ee1a76a9bbd065224c54131412d2fb42146beeb91f7e7d5b03900a344f360d4a"
+    },
+    {
+      "path": "perf-r97.js",
+      "bytes": 5359,
+      "sha256": "446e18d7e54633bcdc29fa73a32bd5a2a8c2f38c6e29a7036dd0daa026ada90c"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -14384,8 +14389,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 31813,
-      "sha256": "c05745cf702d7fd43043483f6b18955cdafda7b677019ff87d9cb96105e69f39"
+      "bytes": 32048,
+      "sha256": "434472960e600f50263f482d33e1d2663c6fb366ef0fa252672d8f3f5c868eca"
     },
     {
       "path": "world-visual-r78.js",
@@ -14393,14 +14398,14 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 2878,
-  "totalBytes": 701501292,
-  "webHTMLSha256": "bc2b4244f3035f72b1cb0efdda07b3e7cabfb42f2ad57ac4f1eb29362935dbf0",
+  "fileCount": 2879,
+  "totalBytes": 701506924,
+  "webHTMLSha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3",
   "largest": [
     {
       "path": "index.html",
-      "bytes": 6560698,
-      "sha256": "bc2b4244f3035f72b1cb0efdda07b3e7cabfb42f2ad57ac4f1eb29362935dbf0"
+      "bytes": 6560736,
+      "sha256": "d07a0abf070985ce15c38927bc2fae794aef260ad1bfad5504e561ee6361bac3"
     },
     {
       "path": "assets/final42-r88/effects/099/thorn_atlas.png",
@@ -14898,5 +14903,21 @@
     "saveSchemaChanged": false,
     "statusAssets": "R6 poison/burn and paged root",
     "unresolvedHeroRoutesNotReplaced": true
+  },
+  "r97": {
+    "revision": "R97",
+    "overlays": [
+      "world-retro-r89.js",
+      "perf-r97.js"
+    ],
+    "indexPatches": [
+      "Insert perf-r97.js directly after status-r96.js"
+    ],
+    "presentationOnly": true,
+    "collisionChanged": false,
+    "damageChanged": false,
+    "saveSchemaChanged": false,
+    "grade": "R89 family gain +0.10, carried light rim normal .44->.62 / soft .66->.76, wall cap face .46->.60",
+    "performance": "flat transparent DoubleSide materials draw in one pass when every mesh using them faces one way (exact, re-checked on change); adaptive render scale 1/.85/.72 that reverts and locks if it does not help"
   }
 }

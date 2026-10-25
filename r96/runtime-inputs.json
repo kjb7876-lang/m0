@@ -2065,6 +2065,7 @@
     "index.html",
     "painted-vfx-data-r87.js",
     "painted-vfx-r87.js",
+    "perf-r97.js",
     "portal-interaction-r83.js",
     "render-compat-r83.js",
     "status-r96.js",
@@ -3163,5 +3164,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "92cc987853ab2a1c386622eae550512cdd4ecacc76e12f36167bf057246a5706"
+  "runtimeManifestSHA256": "01aa86b34c8c2ac472f762396b105a12e20295a6b321e55e157f37fce8ed87d1"
 }
