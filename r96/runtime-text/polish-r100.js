@@ -96,7 +96,7 @@
  function nearestOf(list){let best=null,d=Infinity;for(const e of list){const k=Math.hypot(e.x-player.x,e.y-player.y);if(k<d){d=k;best=e;}}return best;}
  const fighting=e=>e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&e.visible!==false&&finite(e.x+e.y);
  function wardDoor(id){return room.exploration?.worldR74?.doors?.find(d=>d.id===id)||null;}
- function goal(){const def=regionById?.[zone];if(!def)return null;const alive=(room.enemies||[]).filter(fighting),pt=(p,label,kind)=>p&&finite(p.x+p.y)?{x:p.x,y:p.y,label,kind}:null;
+ function goal(){try{const own=window.__STORYWORLD_NAV_GOAL_R103__?.();if(own&&finite(own.x+own.y))return own;}catch(_){}const def=regionById?.[zone];if(!def)return null;const alive=(room.enemies||[]).filter(fighting),pt=(p,label,kind)=>p&&finite(p.x+p.y)?{x:p.x,y:p.y,label,kind}:null;
   const W=ward(),s=W?.controlled?.(room)?W.state(room):null,g=room.exploration?.worldWardR81;
   if(s&&g){switch(s.phase){
    case'route':return pt(g.gatherAnchor,'중앙 전투실','objective');

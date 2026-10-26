@@ -51,6 +51,8 @@ jobs:
           r=json.load(open('r96/qa/r96/status-native-results.json'))
           assert len(r['checks'])==24 and all(v['passed'] for v in r['checks'])
           PY
+      - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions
+        run: node r96/qa/r103/samong-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
