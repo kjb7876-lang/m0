@@ -1,18 +1,19 @@
-/* R98 enemy skill presentation. The geometric range previews (footprint
+/* R98/R99 enemy skill presentation. The geometric range previews (footprint
  * outlines, direction ticks, the faint pre-hit slash decal) are hidden by
- * default and replaced by procedural effects drawn in code: a charge aura on
- * the caster while it winds up, an impact burst over the real attack footprint
- * when the hit lands, a cast glow and release flash for ranged casts, and a
- * gather/eruption pair for boss patterns and hazards. Colours follow the
- * region family; bosses, midbosses and the persona carry their own palette.
+ * default. R99 draws the enemy side with the painted FINAL42 frame atlases: a
+ * wind-up aura on the caster, a painted contact burst over the real attack
+ * footprint when the hit lands, a cast aura and release burst for ranged
+ * casts, and a gathering motif plus eruption for boss patterns and hazards.
+ * The motif follows the region family; bosses, midbosses and the persona carry
+ * their own. Only a soft ground pool remains in code.
  * Presentation only: attack timing, footprints, hit tests, damage and saves
- * are read, never written. Canonical source; copied by scripts/apply-r98.cjs. */
+ * are read, never written. Canonical source. */
 (()=>{'use strict';
  if(window.__STORYWORLD_VFX_R98__||typeof drawEffect!=='function'||typeof fx!=='function'||typeof tick!=='function'||typeof project!=='function'||typeof groundImage!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r98.vfx';
- const DEFAULTS=Object.freeze({telegraph:false,effects:true}),LABELS={telegraph:'적 공격 범위 미리보기(선)',effects:'적 스킬 이펙트 (R98)'};
+ const DEFAULTS=Object.freeze({telegraph:false,effects:true}),LABELS={telegraph:'적 공격 범위 미리보기(선)',effects:'적 스킬 이펙트 (R99 원화)'};
  let prefs={...DEFAULTS},lastError=null,serial=0;
- const stats={charges:0,impacts:0,casts:0,releases:0,gathers:0,bursts:0,sparks:0,groundDraws:0,airDraws:0,suppressed:0,dropped:0,errors:0};
+ const stats={roots:0,charges:0,impacts:0,casts:0,releases:0,gathers:0,bursts:0,sparks:0,groundDraws:0,airDraws:0,suppressed:0,dropped:0,errors:0};
  try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
  const fail=e=>{stats.errors++;lastError=String(e?.stack||e);};
  function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -37,6 +38,31 @@
  const rgba=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+clamp(a,0,1).toFixed(3)+')';
  function family(){const L=typeof room!=='undefined'?room?.exploration:null;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||(typeof zone!=='undefined'&&zone==='ep1a08'?'clinical':null)||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family||'regional';}
  function themeFor(e){if(e?.persona)return THEMES.persona;if(e?.boss||e?.midboss)return THEMES.boss;return THEMES[family()]||THEMES.regional;}
+
+ // ---- R99 painted layer -------------------------------------------------------
+ // The FINAL42 painted atlases (hand-painted frame animations already shipped
+ // with the game) carry the look; the procedural rings, stars and rays are gone.
+ // Each region family picks a contact burst, a wind-up aura and a gathering
+ // motif. While an atlas is still decoding a soft glow stands in for it.
+ const F42=()=>window.__STORYWORLD_FINAL42_R88__,F42D=()=>window.__STORYWORLD_FINAL42_DATA_R88__?.effects||{};
+ const PAINT={
+  clinical:{hit:'F215',aura:'F243',gather:'F213'},garden:{hit:'F091',aura:'F249',gather:'F110'},cave:{hit:'F098',aura:'F250',gather:'F114'},
+  swamp:{hit:'F261',aura:'F249',gather:'F111'},ash:{hit:'F094',aura:'F247',gather:'F112'},domestic:{hit:'F101',aura:'F247',gather:'F112'},
+  stone:{hit:'F098',aura:'F250',gather:'F112'},forge:{hit:'F094',aura:'F247',gather:'F112'},snow:{hit:'F095',aura:'F244',gather:'F244'},
+  coast:{hit:'F261',aura:'F244',gather:'F111'},memory:{hit:'F097',aura:'F248',gather:'F130'},neural:{hit:'F096',aura:'F243',gather:'F116'},
+  regional:{hit:'F090',aura:'F250',gather:'F114'},boss:{hit:'F090',aura:'F250',gather:'F114',burst:'F117'},persona:{hit:'F217',aura:'F248',gather:'F130',burst:'F115'},
+  hero:{hit:'F246'}
+ };
+ function paintFor(e){const th=e.th;for(const[k,v]of Object.entries(THEMES))if(v===th)return PAINT[k]||PAINT.regional;return PAINT.regional;}
+ const paintStats={drawn:0,fallback:0};
+ // Draw one painted frame. loop=true wraps the clip (auras, gathering); otherwise
+ // the clip is stretched over the effect's own life so it ends with it.
+ function paint(id,x,y,{t=0,life=1,loop=false,scale=1,alpha=1,height,key,lift=0}={}){
+  const api=F42(),spec=F42D()[id];if(!api||!spec||!(alpha>0))return false;const d=spec.duration||1;
+  const age=loop?((time-(key?.at??0))%d+d)%d:clamp(t,0,.999)*d;
+  const ok=api.render(id,{x,y,age,scale,alpha,height,key:'r99:'+(key?.id||id)+(lift?':'+lift:''),sourceId:'r99:'+(key?.id||id)+(lift?':'+lift:'')});
+  ok?paintStats.drawn++:paintStats.fallback++;return ok;}
+ function preload(){const api=F42();if(!api?.ensure)return;const f=family(),set=new Set();for(const k of[f,'boss','hero'])for(const id of Object.values(PAINT[k]||{}))set.add(id);for(const id of set)try{api.ensure(id);}catch(_){}}
 
  // ---- geometry ------------------------------------------------------------
  const unit=()=>TILE*zoom;
@@ -66,92 +92,54 @@
  const budget=()=>lowFx()?.45:1;
 
  // ---- drawing: ground layer -------------------------------------------------
- // Sizes are deliberately generous: the floor glyphs read from the default
- // camera and the air flashes cover the actor, in the Dark Eden / Lineage way.
- function ringAt(x,y,r,color,width){ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,width*zoom);ctx.beginPath();ellipse(x,y,r);ctx.stroke();}
- function star(x,y,r,n,step,rot,color,width){ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,width*zoom);ctx.beginPath();for(let i=0;i<=n;i++){const a=rot+((i*step)%n)*TAU/n,q=P(x+Math.cos(a)*r,y+Math.sin(a)*r);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();}
- function rays(x,y,r0,r1,n,rot,color,width,seed){ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,width*zoom);for(let i=0;i<n;i++){const a=rot+i*TAU/n,len=r1*(.7+.3*rnd(seed,i)),p0=P(x+Math.cos(a)*r0,y+Math.sin(a)*r0),p1=P(x+Math.cos(a)*len,y+Math.sin(a)*len);ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);ctx.stroke();}}
- function drawCharge(e,t){const th=e.th,k=clamp(t,0,1),x=e.x,y=e.y,r=e.radius*1.7*(.7+.3*k),M=e.major;
-  ctx.globalCompositeOperation='lighter';
-  // pool that brightens as the swing is about to land
-  ctx.fillStyle=rgba(th.c,.16+.34*k*k);ctx.beginPath();ellipse(x,y,r*1.25);ctx.fill();
-  ctx.fillStyle=rgba(th.a,.06+.22*k*k);ctx.beginPath();ellipse(x,y,r*.7);ctx.fill();
-  // double rune ring turning against each other, a star glyph between them
-  const spin=time*(M?1.1:1.8)+e.seed;
-  ringAt(x,y,r,rgba(th.a,.45+.5*k),1.8+2.2*k);ringAt(x,y,r*.78,rgba(th.b,.3+.4*k),1.1);
-  star(x,y,r*.78,M?7:5,M?3:2,-spin*1.3,rgba(th.b,.28+.5*k),1.1+.9*k);
-  const n=M?12:8;ctx.strokeStyle=rgba(th.b,.4+.5*k);ctx.lineWidth=Math.max(1,1.5*zoom);
-  for(let i=0;i<n;i++){const a=spin+i*TAU/n,p0=P(x+Math.cos(a)*r*.9,y+Math.sin(a)*r*.9),p1=P(x+Math.cos(a)*r*1.18,y+Math.sin(a)*r*1.18);ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);ctx.stroke();}
-  if(M){ringAt(x,y,r*1.6*(1-.3*k),rgba(th.a,.22+.4*k),1.2);rays(x,y,r*1.05,r*1.5,6,-spin*.7,rgba(th.a,.2+.3*k),1,e.id);}
- }
- function drawImpact(e,t){const th=e.th,g=e.g,k=clamp(t,0,1),fade=1-k,c=centre(g),E=extent(g);
-  ctx.globalCompositeOperation='lighter';
-  // the real footprint flashes once, then shockwaves run out past it
-  ctx.fillStyle=rgba(th.b,.6*fade*fade);ctx.beginPath();footprint(g,1);ctx.fill();
-  ctx.fillStyle=rgba(th.a,.34*fade);ctx.beginPath();footprint(g,1+.3*k);ctx.fill();
-  for(const[m,w,d]of[[1,3.2,0],[.7,1.8,.12],[.45,1.2,.26]]){const kk=clamp((k-d)/(1-d),0,1);if(k<d)continue;ringAt(c.x,c.y,E*(.5+2.2*kk),rgba(th.a,.7*m*(1-kk)),w*(1-kk*.5));}
-  rays(c.x,c.y,E*.2,E*(1.2+1.4*Math.min(1,k*2.5)),e.heavy?11:7,e.seed,rgba(e.heavy?th.c:th.b,(e.heavy?.6:.4)*fade),e.heavy?1.6:1.1,e.id);
-  if(e.major){star(c.x,c.y,E*(.9+1.4*k),7,3,e.seed+k*2,rgba(th.b,.5*fade),1.4);}
-  // lingering scorch / frost / slime stain, in the family's dark tone
-  ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(th.c,.22*fade);ctx.beginPath();footprint(g,.95);ctx.fill();
- }
- function drawGather(e,t){const th=e.th,g=e.g,k=clamp(t,0,1),c=centre(g),R=extent(g),M=e.major;
-  ctx.globalCompositeOperation='lighter';
-  // gathering glow: breathes and tightens, a spiral drawing inward, no hard outline
-  const pulse=.5+.5*Math.sin(time*7+e.seed);
-  ctx.fillStyle=rgba(th.c,.08+.12*k+.05*pulse);ctx.beginPath();footprint(g,1.06);ctx.fill();
-  ctx.fillStyle=rgba(th.a,.06+.22*k*k);ctx.beginPath();footprint(g,.55+.45*k);ctx.fill();
-  ctx.strokeStyle=rgba(th.b,.25+.45*k);ctx.lineWidth=Math.max(1,(1+1.4*k)*zoom);const arms=M?3:2;
-  for(let j=0;j<arms;j++){ctx.beginPath();for(let i=0;i<=22;i++){const u=i/22,a=e.seed+j*TAU/arms-time*2.2+u*TAU*1.1,d=R*(1.6-1.4*u)*(1-.5*k),q=P(c.x+Math.cos(a)*d,c.y+Math.sin(a)*d);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();}
-  const n=M?14:8;ctx.fillStyle=rgba(th.b,.65);
-  for(let i=0;i<n;i++){const a=rnd(e.id,i)*TAU+time*.6,d=R*(1.5-k*1.2)*(.5+.5*rnd(e.id,i+40)),q=P(c.x+Math.cos(a)*d,c.y+Math.sin(a)*d),s=Math.max(1,(1.2+1.4*rnd(e.id,i+80))*zoom);ctx.beginPath();ctx.moveTo(q.x+s,q.y);ctx.arc(q.x,q.y,s,0,TAU);ctx.fill();}
- }
- function drawBurst(e,t){const th=e.th,g=e.g,k=clamp(t,0,1),fade=1-k,c=centre(g),R=extent(g);
-  ctx.globalCompositeOperation='lighter';
-  ctx.fillStyle=rgba(th.b,.75*fade*fade);ctx.beginPath();footprint(g,1);ctx.fill();
-  ctx.fillStyle=rgba(th.a,.4*fade);ctx.beginPath();footprint(g,1+.35*k);ctx.fill();
-  for(const[m,w,d]of[[1,3.6,0],[.75,2.2,.1],[.5,1.4,.22]]){if(k<d)continue;const kk=(k-d)/(1-d);ringAt(c.x,c.y,R*(.4+2.6*kk*m),rgba(th.a,.75*m*(1-kk)),w*(1-kk*.5));}
-  rays(c.x,c.y,R*.25,R*(1.4+1.8*Math.min(1,k*2)),e.major?14:9,e.seed+k*.6,rgba(th.b,.65*fade),e.major?2:1.4,e.id);
-  if(e.major)star(c.x,c.y,R*(1+1.6*k),8,3,e.seed-k*1.5,rgba(th.a,.55*fade),1.6);
-  ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(th.c,.3*fade);ctx.beginPath();footprint(g,.95);ctx.fill();
- }
+ function drawCharge(e,t){const th=e.th,k=clamp(t,0,1),r=e.radius*1.7*(.7+.3*k);
+  // a dim pool that deepens under the caster as the swing is about to land
+  ctx.globalCompositeOperation='lighter';ctx.fillStyle=rgba(th.c,.05+.16*k*k);ctx.beginPath();ellipse(e.x,e.y,r*1.2);ctx.fill();
+  ctx.fillStyle=rgba(th.a,.03+.1*k*k);ctx.beginPath();ellipse(e.x,e.y,r*.6);ctx.fill();}
+ function drawImpact(e,t){const th=e.th,g=e.g,fade=1-clamp(t,0,1);
+  // the struck ground darkens and fades: scorch, frost or slime in the family's tone
+  ctx.globalCompositeOperation='lighter';ctx.fillStyle=rgba(th.a,.14*fade*fade);ctx.beginPath();footprint(g,1);ctx.fill();
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(th.c,.2*fade);ctx.beginPath();footprint(g,.95);ctx.fill();}
+ function drawGather(e,t){const th=e.th,g=e.g,k=clamp(t,0,1),pulse=.5+.5*Math.sin(time*5+e.seed);
+  ctx.globalCompositeOperation='lighter';ctx.fillStyle=rgba(th.c,.05+.1*k+.03*pulse);ctx.beginPath();footprint(g,1.04);ctx.fill();
+  ctx.fillStyle=rgba(th.a,.03+.12*k*k);ctx.beginPath();footprint(g,.5+.5*k);ctx.fill();}
+ function drawBurst(e,t){const th=e.th,g=e.g,fade=1-clamp(t,0,1);
+  ctx.globalCompositeOperation='lighter';ctx.fillStyle=rgba(th.b,.22*fade*fade);ctx.beginPath();footprint(g,1);ctx.fill();
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(th.c,.26*fade);ctx.beginPath();footprint(g,.95);ctx.fill();}
+
+ // Root bind: the soil under the hero darkens and cracks while the thorns hold.
+ function drawRootStain(e,t){const k=e.releasedAt!=null?1-clamp((time-e.releasedAt)/.5,0,1):clamp(age(e)/.25,0,1);if(k<=0)return;
+  const x=player.x,y=player.y;ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle='rgba(34,22,12,'+(.42*k).toFixed(3)+')';ctx.beginPath();ellipse(x,y,.95);ctx.fill();
+  ctx.fillStyle='rgba(18,10,6,'+(.38*k).toFixed(3)+')';ctx.beginPath();ellipse(x,y,.55);ctx.fill();}
 
  // ---- drawing: air layer (billboards over the actors) ----------------------
  function disc(q,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(q.x+r,q.y-h);ctx.arc(q.x,q.y-h,r,0,TAU);ctx.fill();}
- // A column of light rising from the ground: stacked flat ellipses fading up (no gradients in the recorder).
- function pillar(x,y,width,height,color,alpha){const q=P(x,y),n=lowFx()?6:11;for(let i=0;i<n;i++){const u=i/(n-1),w=width*(1-.35*u),a=alpha*(1-u)*(1-u);ctx.fillStyle=rgba(color,a);ctx.beginPath();ctx.ellipse(q.x,q.y-height*u,w,Math.max(1,w*.42),0,0,TAU);ctx.fill();}}
- function motes(x,y,th,n,k,seed,up=true){ctx.fillStyle=rgba(th.b,.85);for(let i=0;i<n;i++){const a=rnd(seed,i)*TAU,d=.5+.8*rnd(seed,i+20),ph=(k*1.6+rnd(seed,i+60))%1,q=P(x+Math.cos(a)*d*(1-ph*.7),y+Math.sin(a)*d*(1-ph*.7)),h=actorHeight()*(up?ph*.95:(1-ph)*.95),s=Math.max(1,(1+1.6*(1-ph))*zoom);ctx.beginPath();ctx.moveTo(q.x+s,q.y-h);ctx.arc(q.x,q.y-h,s,0,TAU);ctx.fill();}}
- function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major;ctx.globalCompositeOperation='lighter';motes(e.x,e.y,e.th,Math.round((M?16:9)*budget()),k,e.id,true);
-  // a glow at chest height that saturates just before release
-  const q=P(e.x,e.y),h=actorHeight()*.55,r=(14+22*k)*zoom*(M?1.6:1);disc(q,h,r,rgba(e.th.a,.14+.34*k*k));disc(q,h,r*.4,rgba(e.th.b,.1+.4*k*k));
-  if(M&&k>.5)pillar(e.x,e.y,r*1.1,actorHeight()*1.5,e.th.a,.22*(k-.5)*2);}
- function sparks(x,y,th,n,k,seed,speed,lift,grav){ctx.strokeStyle=rgba(th.b,.95*(1-k));ctx.lineWidth=Math.max(1,1.8*zoom);ctx.lineCap='round';
-  for(let i=0;i<n;i++){const a=rnd(seed,i)*TAU,sp=speed*(.5+rnd(seed,i+30)),vy=lift*(.4+rnd(seed,i+70)),t0=Math.max(0,k-.1),f=tt=>({x:x+Math.cos(a)*sp*tt,y:y+Math.sin(a)*sp*tt,h:actorHeight()*(vy*tt-grav*tt*tt)}),p0=f(t0),p1=f(k),a0=P(p0.x,p0.y),a1=P(p1.x,p1.y);ctx.beginPath();ctx.moveTo(a0.x,a0.y-p0.h);ctx.lineTo(a1.x,a1.y-p1.h);ctx.stroke();}}
- function drawImpactAir(e,t){const k=clamp(t,0,1),c=centre(e.g),M=e.major;ctx.globalCompositeOperation='lighter';
-  sparks(c.x,c.y,e.th,Math.round((e.heavy?22:15)*budget()),k,e.id,e.heavy?3.2:2.6,e.heavy?1.3:1,1.3);
-  const q=P(c.x,c.y),r=(24+56*k)*zoom*(M?1.5:1);disc(q,actorHeight()*.25,r,rgba(e.th.b,.5*(1-k)*(1-k)));disc(q,actorHeight()*.25,r*.45,rgba(e.th.a,.4*(1-k)));
-  if(e.heavy||M)pillar(c.x,c.y,r*.5,actorHeight()*(M?2.2:1.4),e.th.b,.45*(1-k));}
- function drawCastAir(e,t){const k=clamp(t,0,1),q=P(e.x,e.y),h=actorHeight()*.62,pulse=.5+.5*Math.sin(time*11+e.seed),M=e.major;ctx.globalCompositeOperation='lighter';
-  const r=(11+14*k+4*pulse)*zoom*(M?1.7:1.15);disc(q,h,r,rgba(e.th.a,.3+.4*k));disc(q,h,r*.4,rgba(e.th.b,.6+.4*k));
-  ctx.strokeStyle=rgba(e.th.a,.5);ctx.lineWidth=Math.max(1,1.4*zoom);const n=M?4:3;for(let i=0;i<n;i++){const ph=(k*2+i/n)%1,rr=r*(3-2.1*ph);ctx.globalAlpha*=1-ph;ctx.beginPath();ctx.ellipse(q.x,q.y-h,rr,rr*.55,0,0,TAU);ctx.stroke();ctx.globalAlpha/=1-ph||1;}
-  // orbiting embers around the caster's hands
-  ctx.fillStyle=rgba(e.th.b,.9);const m=M?6:4;for(let i=0;i<m;i++){const a=time*5+i*TAU/m+e.seed,rr=r*1.6,s=Math.max(1,(1.6+1.2*k)*zoom);ctx.beginPath();ctx.moveTo(q.x+Math.cos(a)*rr+s,q.y-h+Math.sin(a)*rr*.45);ctx.arc(q.x+Math.cos(a)*rr,q.y-h+Math.sin(a)*rr*.45,s,0,TAU);ctx.fill();}
-  motes(e.x,e.y,e.th,Math.round((M?9:6)*budget()),k,e.id,false);}
- function drawReleaseAir(e,t){const k=clamp(t,0,1),q=P(e.x,e.y),h=actorHeight()*.62,M=e.major;ctx.globalCompositeOperation='lighter';
-  const r=(16+56*k)*zoom*(M?1.5:1);ctx.strokeStyle=rgba(e.th.a,.8*(1-k));ctx.lineWidth=Math.max(1,(3.4-2.4*k)*zoom);ctx.beginPath();ctx.ellipse(q.x,q.y-h,r,r*.6,0,0,TAU);ctx.stroke();
-  ctx.strokeStyle=rgba(e.th.b,.5*(1-k));ctx.lineWidth=Math.max(1,1.4*zoom);ctx.beginPath();ctx.ellipse(q.x,q.y-h,r*.65,r*.4,0,0,TAU);ctx.stroke();
-  disc(q,h,r*.5,rgba(e.th.b,.6*(1-k)*(1-k)));}
- function drawBurstAir(e,t){const k=clamp(t,0,1),c=centre(e.g),M=e.major;ctx.globalCompositeOperation='lighter';
-  sparks(c.x,c.y,e.th,Math.round((M?34:24)*budget()),k,e.id,3.6,1.8,1.4);
-  // debris: slower, darker chunks that fall back down
-  ctx.fillStyle=rgba(e.th.c,.85*(1-k));const n=Math.round(14*budget());for(let i=0;i<n;i++){const a=rnd(e.id,i+200)*TAU,sp=1.7*(.4+rnd(e.id,i+230)),vy=1*(.5+rnd(e.id,i+260)),q=P(c.x+Math.cos(a)*sp*k,c.y+Math.sin(a)*sp*k),h=actorHeight()*Math.max(0,vy*k-1.6*k*k),s=Math.max(1,(1.4+1.8*rnd(e.id,i+290))*zoom);ctx.beginPath();ctx.moveTo(q.x+s,q.y-h);ctx.arc(q.x,q.y-h,s,0,TAU);ctx.fill();}
-  const q=P(c.x,c.y),r=(30+80*k)*zoom*(M?1.3:1);disc(q,actorHeight()*.3,r,rgba(e.th.b,.6*(1-k)*(1-k)));disc(q,actorHeight()*.3,r*.4,rgba(e.th.a,.5*(1-k)));
-  pillar(c.x,c.y,r*.45,actorHeight()*(M?2.6:1.8),e.th.b,.55*(1-k));}
- function drawSparkAir(e,t){const k=clamp(t,0,1);ctx.globalCompositeOperation='lighter';sparks(e.x,e.y,e.th,Math.round(e.n*budget()),k,e.id,2,1,1.5);}
+ function glow(x,y,h,r,th,a){const q=P(x,y);disc(q,h,r,rgba(th.a,.18*a));disc(q,h,r*.45,rgba(th.b,.22*a));}
+ function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
+  if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.8:1.15,alpha:.25+.7*k}))glow(e.x,e.y,actorHeight()*.5,(14+16*k)*zoom*(M?1.5:1),e.th,.4+.6*k);}
+ function drawImpactAir(e,t){const c=centre(e.g),E=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
+  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1);
+  if(!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);}
+ function drawCastAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
+  if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.6:1,alpha:.35+.6*k}))glow(e.x,e.y,actorHeight()*.62,(11+12*k)*zoom*(M?1.6:1.1),e.th,.5+.5*k);}
+ function drawReleaseAir(e,t){const k=clamp(t,0,1),p=paintFor(e);
+  if(!paint(p.hit,e.x,e.y,{t:k,key:e,scale:e.major?1.5:1,alpha:.9}))glow(e.x,e.y,actorHeight()*.62,(16+30*k)*zoom,e.th,1-k);}
+ function drawGatherAir(e,t){const c=centre(e.g),R=extent(e.g),k=clamp(t,0,1),p=paintFor(e);
+  paint(p.gather,c.x,c.y,{loop:true,key:e,scale:clamp(1+R*.6,1.2,e.major?3.4:2.4),alpha:.3+.6*k});}
+ function drawBurstAir(e,t){const c=centre(e.g),R=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
+  const scale=clamp(1.6+R*.7,1.8,M?3.6:2.6);
+  const a=paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
+  if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
+  if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);}
+ function drawSparkAir(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
 
- const GROUND={charge:drawCharge,impact:drawImpact,gather:drawGather,burst:drawBurst};
- const AIR={charge:drawChargeAir,impact:drawImpactAir,cast:drawCastAir,release:drawReleaseAir,burst:drawBurstAir,spark:drawSparkAir};
- function progress(e){return e.until!=null?clamp((time-e.at)/Math.max(.05,e.until-e.at),0,1):age(e)/e.life;}
+ function drawRootInAir(e,t){paint('F091',player.x,player.y,{t:clamp(t,0,1),key:e,scale:1.25,alpha:.9});}
+ function drawRootOutAir(e,t){paint('F110',e.x,e.y,{t:clamp(t,0,1),key:e,scale:1.35,alpha:1});}
+
+ const GROUND={charge:drawCharge,impact:drawImpact,gather:drawGather,burst:drawBurst,rootStain:drawRootStain};
+ const AIR={charge:drawChargeAir,impact:drawImpactAir,cast:drawCastAir,release:drawReleaseAir,gather:drawGatherAir,burst:drawBurstAir,spark:drawSparkAir,rootIn:drawRootInAir,rootOut:drawRootOutAir};
+ function progress(e){if(e.until===Infinity)return 0;return e.until!=null?clamp((time-e.at)/Math.max(.05,e.until-e.at),0,1):age(e)/e.life;}
  function drawLayer(table,counter){if(!prefs.effects||!list.length||typeof ctx==='undefined'||!ctx)return;
   for(const e of list){const fn=table[e.kind];if(!fn)continue;const t=progress(e);if(t<0||t>1)continue;const o=table===GROUND?groundOwner(e,e.x,e.y):airOwner(e,e.x,e.y);
    ctx.save();try{scope(o,()=>fn(e,t));stats[counter]++;}catch(err){fail(err);}finally{ctx.restore();}}}
@@ -176,7 +164,7 @@
  if(R&&typeof R.render==='function'&&!R.__r98TelegraphFilter){const rb=R.render;R.render=function(frame){try{if(hide()&&Array.isArray(frame?.commands)){let w=0;const cs=frame.commands;for(let i=0;i<cs.length;i++){const c=cs[i];if(c?.owner?.r98Telegraph){stats.dropped++;continue;}cs[w++]=c;}cs.length=w;}}catch(err){fail(err);}return rb.call(this,frame);};R.__r98TelegraphFilter=true;}
 
  // ---- hooks: lifecycle ----------------------------------------------------------
- const seenAttack=new WeakSet(),struck=new WeakSet(),casting=new WeakMap(),seenHazard=new WeakSet();
+ let rootStain=null;const seenAttack=new WeakSet(),struck=new WeakSet(),casting=new WeakMap(),seenHazard=new WeakSet();
  const major=e=>!!(e?.boss||e?.midboss||e?.persona);
  function hazardGeometry(h){try{if(h.storyPattern5)return window.__STORYWORLD_FOOTPRINT154__?.lock?.(h)||null;if(h.type==='beam')return{shape:'capsule',x:h.x,y:h.y,originX:h.x,originY:h.y,angle:h.angle||0,radius:Math.min(12,h.reach||6),width:Math.max(.25,h.width||.35)};if(h.type==='field')return{shape:'circle',x:h.x,y:h.y,radius:h.radius||1};}catch(_){}return null;}
  function observe(dt){
@@ -193,6 +181,11 @@
    const until=h.row150?.releaseAt??(time+Math.max(.1,(h.warning||0)-(h.age||0)));
    add({kind:'gather',g,h,x:g.x,y:g.y,until,th,major:M,seed:hash(h.id||serial)%628/100});stats.gathers++;
   }
+  // root bind (R96 split thorn overlay): thorns burst out of the ground on
+  // admission, the soil stays stained, and the roots snap apart on release.
+  const rooted=!!window.__STORYWORLD_STATUS_R96__?.inspect().active.some(r=>r.kind==='root'&&r.releaseAt==null);
+  if(rooted&&!rootStain){rootStain=add({kind:'rootStain',x:player.x,y:player.y,until:Infinity});add({kind:'rootIn',x:player.x,y:player.y,life:.55});stats.roots++;}
+  else if(!rooted&&rootStain){if(rootStain.releasedAt==null){rootStain.releasedAt=time;rootStain.until=time+.5;add({kind:'rootOut',x:player.x,y:player.y,life:.9});}if(time>rootStain.until)rootStain=null;}
   // follow casters; fire the eruption when a gathering hazard releases
   for(let i=list.length-1;i>=0;i--){const e=list[i];
    if(e.follow){e.x=e.follow.x;e.y=e.follow.y;if(e.kind==='charge'&&e.follow.attack!==e.attack)e.until=Math.min(e.until,time);if(e.kind==='cast'&&!(e.follow.rangedWindup>0))e.until=Math.min(e.until,time);}
@@ -204,8 +197,8 @@
  }
  const tickBase=tick;tick=function(dt){const result=tickBase.call(this,dt);try{if(typeof started!=='undefined'&&started&&!modal&&!loading)observe(dt);}catch(err){fail(err);}return result;};
  // Region changes clear native effects; drop ours too so nothing is drawn in the next room.
- if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...args){const r=await eb.apply(this,args);list.length=0;return r;};}
- if(typeof stopEffects==='function'){const sb=stopEffects;stopEffects=function(...args){list.length=0;return sb.apply(this,args);};}
+ if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...args){const r=await eb.apply(this,args);list.length=0;rootStain=null;try{preload();}catch(err){fail(err);}return r;};}
+ if(typeof stopEffects==='function'){const sb=stopEffects;stopEffects=function(...args){list.length=0;rootStain=null;return sb.apply(this,args);};}
  // Player hits: a small spark burst in the hero's tone on the struck enemy.
  if(typeof hitEnemy==='function'){const hb=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp,result=hb.call(this,e,value,source,...rest);try{if(prefs.effects&&solo()&&e&&Number.isFinite(before)&&e.hp<before&&typeof time==='number'&&!list.some(q=>q.kind==='spark'&&q.target===e&&age(q)<.09)){add({kind:'spark',x:e.x,y:e.y,target:e,life:.34,th:THEMES.hero,n:9});stats.sparks++;}}catch(err){fail(err);}return result;};}
 
@@ -214,5 +207,5 @@
   host.parentNode.insertBefore(s,host.nextSibling);for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r98v-'+k);el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
 
- window.__STORYWORLD_VFX_R98__=Object.freeze({prefs:()=>({...prefs}),set,themes:THEMES,active:()=>list.map(e=>({kind:e.kind,x:e.x,y:e.y,t:progress(e)})),inspect:()=>({revision:'R98-enemy-skill-presentation',prefs:{...prefs},stats:{...stats},active:list.length,lastError,attackTimingChanged:false,footprintsChanged:false,damageChanged:false,savesTouched:false})});
+ window.__STORYWORLD_VFX_R98__=Object.freeze({prefs:()=>({...prefs}),set,themes:THEMES,active:()=>list.map(e=>({kind:e.kind,x:e.x,y:e.y,t:progress(e)})),inspect:()=>({revision:'R99-painted-enemy-skill-presentation',prefs:{...prefs},stats:{...stats},painted:{...paintStats},active:list.length,lastError,attackTimingChanged:false,footprintsChanged:false,damageChanged:false,savesTouched:false})});
 })();
