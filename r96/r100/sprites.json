@@ -1,0 +1,3026 @@
+[
+{
+"i": 0,
+"path": "assets/dist/cult_mage.png",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"수렁 주문사",
+"수렁 주문사 추격대",
+"뿌리 추적자",
+"중간보스 · 수렁 주문사"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist02",
+"dist05",
+"dist06"
+],
+"count": 35
+},
+{
+"i": 1,
+"path": "assets/dist/ghoul.png",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"피냄새 추적자",
+"피냄새 추적자 추격대",
+"뿌리 추적자",
+"중간보스 · 피냄새 추적자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist03",
+"dist04",
+"ep1a09b"
+],
+"count": 21
+},
+{
+"i": 2,
+"path": "assets/dist/skeleton.png",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"거미줄에 묶인 수호병",
+"거미줄에 묶인 수호병 추격대",
+"재 나방",
+"중간보스 · 거미줄에 묶인 수호병"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist01",
+"dist03",
+"dist04",
+"dist05",
+"ep1a09b"
+],
+"count": 54
+},
+{
+"i": 3,
+"path": "assets/episode1a/corrupted_guardian.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"악마화 나무의 침식 근위 1",
+"악마화 나무의 침식 근위 3",
+"악마화 나무의 침식 근위 5",
+"뿌리에 묶인 근위의 기억 1"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist00",
+"dist02",
+"dist03",
+"dist04",
+"dist06",
+"ep1a08"
+],
+"count": 120
+},
+{
+"i": 4,
+"path": "assets/episode1a/generated-v31342-rc39/gargoyle_mob_bloodied.webp",
+"rect": [
+0,
+0,
+1536,
+1024
+],
+"names": [
+"검은기둥 가고일 수호자",
+"검은기둥 가고일 수호자 추격대",
+"뿌리 추적자",
+"중간보스 · 검은기둥 가고일 수호자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist05"
+],
+"count": 7
+},
+{
+"i": 5,
+"path": "assets/episode1a/generated-v31342-rc39/goat_head_demon_mob_bloodied.webp",
+"rect": [
+0,
+0,
+1024,
+1536
+],
+"names": [
+"늪의 염소머리 악마",
+"늪의 염소머리 악마 증원",
+"늪의 염소머리 악마 추격대",
+"늪의 염소머리 악마 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist02"
+],
+"count": 13
+},
+{
+"i": 6,
+"path": "assets/episode1a/generated-v392/addiction_ruin_core.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"중독의 폐허핵",
+"중독의 폐허핵 추격대",
+"뿌리 추적자",
+"중간보스 · 중독의 폐허핵"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a10"
+],
+"count": 7
+},
+{
+"i": 7,
+"path": "assets/episode1a/generated-v392/corridor_scream_echo.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"복도 비명잔영",
+"복도 비명잔영 증원",
+"복도 비명잔영 추격대",
+"복도 비명잔영 후속 증원"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"ep1a08"
+],
+"count": 9
+},
+{
+"i": 8,
+"path": "assets/episode1a/generated-v392/craving_vial_core.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"갈망의 약병핵",
+"갈망의 약병핵 증원",
+"갈망의 약병핵 추격대",
+"갈망의 약병핵 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a09"
+],
+"count": 18
+},
+{
+"i": 9,
+"path": "assets/episode1a/generated-v392/denial_specter.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"부정의 잔영",
+"부정의 잔영 증원",
+"부정의 잔영 추격대",
+"부정의 잔영 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a10"
+],
+"count": 13
+},
+{
+"i": 10,
+"path": "assets/episode1a/generated-v392/ego_corrosion_vessel.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"초자아 잠식체",
+"초자아 잠식체 추격대",
+"뿌리 추적자",
+"중간보스 · 초자아 잠식체"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a11"
+],
+"count": 8
+},
+{
+"i": 11,
+"path": "assets/episode1a/hallucinated_orderly.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"백의 구속자",
+"안정화 집행체",
+"백의 구속자 증원",
+"백의 구속자 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a08",
+"ep1a09",
+"ep1a11"
+],
+"count": 47
+},
+{
+"i": 12,
+"path": "assets/episode1a/horned_swamp_demon.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"소환진 순례악마",
+"소환진 순례악마 증원",
+"소환진 순례악마 추격대",
+"소환진 순례악마 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist05",
+"dist06",
+"ep1a10"
+],
+"count": 35
+},
+{
+"i": 13,
+"path": "assets/episode1a/nightmare_spider.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"망각의 거미",
+"보랏빛 알집지기",
+"망각의 거미 증원",
+"보랏빛 알집지기 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"dist01",
+"dist02",
+"dist03",
+"ep1a09b"
+],
+"count": 51
+},
+{
+"i": 14,
+"path": "assets/episode1b/envy_glass_shard.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"이름 없던 공포",
+"이름 없던 공포 추격대",
+"유리 망령",
+"중간보스 · 이름 없던 공포"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b01",
+"ep1b03"
+],
+"count": 31
+},
+{
+"i": 15,
+"path": "assets/episode1b/generated-v3102/ep1b08_pride_zombie.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"창처럼 날아오는 역십자가",
+"창처럼 날아오는 역십자가 증원",
+"창처럼 날아오는 역십자가 추격대",
+"창처럼 날아오는 역십자가 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b08"
+],
+"count": 15
+},
+{
+"i": 16,
+"path": "assets/episode1b/generated-v31342-rc39/zombie_guardian_knight_bloodied.webp",
+"rect": [
+0,
+0,
+1024,
+1536
+],
+"names": [
+"전극을 두른 좀비 수호기사",
+"전극을 두른 좀비 수호기사 증원",
+"전극을 두른 좀비 수호기사 추격대",
+"전극을 두른 좀비 수호기사 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b08"
+],
+"count": 15
+},
+{
+"i": 17,
+"path": "assets/episode1b/generated-v392/brainwave_contamination.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"검은 실의 외부 신호",
+"검은 실의 외부 신호 증원",
+"검은 실의 외부 신호 추격대",
+"검은 실의 외부 신호 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b01"
+],
+"count": 15
+},
+{
+"i": 18,
+"path": "assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"포구 검은 안개",
+"포구 검은 안개 증원",
+"포구 검은 안개 추격대",
+"포구 검은 안개 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"last302",
+"last303"
+],
+"count": 55
+},
+{
+"i": 19,
+"path": "assets/episode1b/generated-v394/envy_leviathan.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"긴 뱀의 그림자",
+"긴 뱀의 그림자 증원",
+"긴 뱀의 그림자 추격대",
+"긴 뱀의 그림자 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b03"
+],
+"count": 15
+},
+{
+"i": 20,
+"path": "assets/episode1b/generated-v394/glutton_beelzebub.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"살아 있는 거대한 위장",
+"살아 있는 거대한 위장 증원",
+"살아 있는 거대한 위장 추격대",
+"살아 있는 거대한 위장 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b04"
+],
+"count": 15
+},
+{
+"i": 21,
+"path": "assets/episode1b/generated-v394/glutton_kitchen_scrap.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"버려진 최고급 식재료",
+"끓어오르는 검은 소화액",
+"버려진 최고급 식재료 증원",
+"버려진 최고급 식재료 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b04"
+],
+"count": 23
+},
+{
+"i": 22,
+"path": "assets/episode1b/generated-v394/greed_fox_hound.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"칼날이 된 지폐",
+"모든 면이 뒷면인 동전",
+"칼날이 된 지폐 증원",
+"칼날이 된 지폐 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b06",
+"ep1b06b"
+],
+"count": 38
+},
+{
+"i": 23,
+"path": "assets/episode1b/generated-v394/greed_mammon.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"박제된 여우의 악마",
+"박제된 여우의 악마 증원",
+"박제된 여우의 악마 추격대",
+"박제된 여우의 악마 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b06",
+"ep1b06b"
+],
+"count": 30
+},
+{
+"i": 24,
+"path": "assets/episode1b/generated-v394/lust_asmodai.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"붉은 하이힐 칼날",
+"붉은 하이힐 칼날 증원",
+"붉은 하이힐 칼날 추격대",
+"붉은 하이힐 칼날 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b05"
+],
+"count": 15
+},
+{
+"i": 25,
+"path": "assets/episode1b/generated-v394/lust_heart_marionette.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"얼굴 없는 남자의 박수",
+"공중을 가르는 립스틱 탄환",
+"얼굴 없는 남자의 박수 증원",
+"얼굴 없는 남자의 박수 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b05"
+],
+"count": 23
+},
+{
+"i": 26,
+"path": "assets/episode1b/generated-v394/polar_chairman.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"설원 아래의 기계 다리",
+"설원 아래의 기계 다리 추격대",
+"뿌리 추적자",
+"중간보스 · 설원 아래의 기계 다리"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b09"
+],
+"count": 8
+},
+{
+"i": 27,
+"path": "assets/episode1b/generated-v394/polar_cyborg_hound.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"강철 턱의 사이보그 개",
+"강철 턱의 사이보그 개 증원",
+"강철 턱의 사이보그 개 추격대",
+"강철 턱의 사이보그 개 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b09"
+],
+"count": 15
+},
+{
+"i": 28,
+"path": "assets/episode1b/generated-v394/seal_residual.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"일흔두 번째 인장 잔류체",
+"일흔두 번째 인장 잔류체 증원",
+"일흔두 번째 인장 잔류체 추격대",
+"일흔두 번째 인장 잔류체 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b01",
+"ep1b02",
+"ep1b06b",
+"ep1b08",
+"ep1b09"
+],
+"count": 54
+},
+{
+"i": 29,
+"path": "assets/episode1b/generated-v394/sloth_belphegor.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"등에 붙은 쓰레기더미",
+"등에 붙은 쓰레기더미 증원",
+"등에 붙은 쓰레기더미 추격대",
+"등에 붙은 쓰레기더미 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b02"
+],
+"count": 15
+},
+{
+"i": 30,
+"path": "assets/episode1b/generated-v394/sloth_moldling.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"곰팡이와 오물 봉투",
+"곰팡이와 오물 봉투 증원",
+"곰팡이와 오물 봉투 추격대",
+"곰팡이와 오물 봉투 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b02"
+],
+"count": 15
+},
+{
+"i": 31,
+"path": "assets/episode1b/generated-v394/wrath_fire_beast.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"불길 속의 늑대",
+"불길 속의 곰",
+"불길 속의 늑대 증원",
+"불길 속의 늑대 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b07"
+],
+"count": 23
+},
+{
+"i": 32,
+"path": "assets/episode1b/generated-v394/wrath_satan.webp",
+"rect": [
+0,
+0,
+418,
+418
+],
+"names": [
+"불길 속의 용",
+"불길 속의 용 증원",
+"불길 속의 용 추격대",
+"불길 속의 용 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1b07"
+],
+"count": 15
+},
+{
+"i": 33,
+"path": "assets/generated-story10-cycle-20261005/ep1a10/a10-o1-white-mask-pursuer-atlas.png",
+"rect": [
+96,
+0,
+640,
+725
+],
+"names": [
+"오만의 흰 가면",
+"오만의 흰 가면 증원",
+"오만의 흰 가면 추격대",
+"오만의 흰 가면 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"ep1a10"
+],
+"count": 13
+},
+{
+"i": 34,
+"path": "assets/generated-v3125/kair-guardians/guardian_01.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 01",
+"뿌리 추적자",
+"중간보스 · 시간수문장 01"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair04"
+],
+"count": 9
+},
+{
+"i": 35,
+"path": "assets/generated-v3125/kair-guardians/guardian_02.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 02",
+"뿌리 추적자",
+"중간보스 · 시간수문장 02"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair04"
+],
+"count": 9
+},
+{
+"i": 36,
+"path": "assets/generated-v3125/kair-guardians/guardian_03.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 03",
+"뿌리 추적자",
+"중간보스 · 시간수문장 03"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair04"
+],
+"count": 8
+},
+{
+"i": 37,
+"path": "assets/generated-v3125/kair-guardians/guardian_04.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 04",
+"뿌리 추적자",
+"중간보스 · 시간수문장 04"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair04"
+],
+"count": 8
+},
+{
+"i": 38,
+"path": "assets/generated-v3125/kair-guardians/guardian_05.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 05"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair04"
+],
+"count": 1
+},
+{
+"i": 39,
+"path": "assets/generated-v3125/kair-guardians/guardian_06.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 06"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair04"
+],
+"count": 1
+},
+{
+"i": 40,
+"path": "assets/generated-v3125/kair-guardians/guardian_07.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 07",
+"뿌리 추적자",
+"중간보스 · 시간수문장 07"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair05"
+],
+"count": 9
+},
+{
+"i": 41,
+"path": "assets/generated-v3125/kair-guardians/guardian_08.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 08",
+"뿌리 추적자",
+"중간보스 · 시간수문장 08"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair05"
+],
+"count": 9
+},
+{
+"i": 42,
+"path": "assets/generated-v3125/kair-guardians/guardian_09.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 09",
+"뿌리 추적자",
+"중간보스 · 시간수문장 09"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair05"
+],
+"count": 8
+},
+{
+"i": 43,
+"path": "assets/generated-v3125/kair-guardians/guardian_10.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 10",
+"뿌리 추적자",
+"중간보스 · 시간수문장 10"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair05"
+],
+"count": 8
+},
+{
+"i": 44,
+"path": "assets/generated-v3125/kair-guardians/guardian_11.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 11"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair05"
+],
+"count": 1
+},
+{
+"i": 45,
+"path": "assets/generated-v3125/kair-guardians/guardian_12.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 12"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair05"
+],
+"count": 1
+},
+{
+"i": 46,
+"path": "assets/generated-v3125/kair-guardians/guardian_13.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 13",
+"뿌리 추적자",
+"중간보스 · 시간수문장 13"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair06"
+],
+"count": 9
+},
+{
+"i": 47,
+"path": "assets/generated-v3125/kair-guardians/guardian_14.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 14",
+"뿌리 추적자",
+"중간보스 · 시간수문장 14"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair06"
+],
+"count": 9
+},
+{
+"i": 48,
+"path": "assets/generated-v3125/kair-guardians/guardian_15.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 15",
+"뿌리 추적자",
+"중간보스 · 시간수문장 15"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair06"
+],
+"count": 8
+},
+{
+"i": 49,
+"path": "assets/generated-v3125/kair-guardians/guardian_16.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 16",
+"뿌리 추적자",
+"중간보스 · 시간수문장 16"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair06"
+],
+"count": 8
+},
+{
+"i": 50,
+"path": "assets/generated-v3125/kair-guardians/guardian_17.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 17"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair06"
+],
+"count": 1
+},
+{
+"i": 51,
+"path": "assets/generated-v3125/kair-guardians/guardian_18.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 18"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair06"
+],
+"count": 1
+},
+{
+"i": 52,
+"path": "assets/generated-v3125/kair-guardians/guardian_19.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 19",
+"태엽 수집자",
+"중간보스 · 시간수문장 19"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair07"
+],
+"count": 9
+},
+{
+"i": 53,
+"path": "assets/generated-v3125/kair-guardians/guardian_20.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 20",
+"태엽 수집자",
+"중간보스 · 시간수문장 20"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair07"
+],
+"count": 9
+},
+{
+"i": 54,
+"path": "assets/generated-v3125/kair-guardians/guardian_21.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 21",
+"태엽 수집자",
+"중간보스 · 시간수문장 21"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair07"
+],
+"count": 8
+},
+{
+"i": 55,
+"path": "assets/generated-v3125/kair-guardians/guardian_22.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 22",
+"태엽 수집자",
+"중간보스 · 시간수문장 22"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair07"
+],
+"count": 8
+},
+{
+"i": 56,
+"path": "assets/generated-v3125/kair-guardians/guardian_23.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 23"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair07"
+],
+"count": 1
+},
+{
+"i": 57,
+"path": "assets/generated-v3125/kair-guardians/guardian_24.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 24"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair07"
+],
+"count": 1
+},
+{
+"i": 58,
+"path": "assets/generated-v3125/kair-guardians/guardian_25.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 25",
+"뿌리 추적자",
+"중간보스 · 시간수문장 25"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair08"
+],
+"count": 9
+},
+{
+"i": 59,
+"path": "assets/generated-v3125/kair-guardians/guardian_26.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 26",
+"뿌리 추적자",
+"중간보스 · 시간수문장 26"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair08"
+],
+"count": 9
+},
+{
+"i": 60,
+"path": "assets/generated-v3125/kair-guardians/guardian_27.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 27",
+"뿌리 추적자",
+"중간보스 · 시간수문장 27"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair08"
+],
+"count": 8
+},
+{
+"i": 61,
+"path": "assets/generated-v3125/kair-guardians/guardian_28.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 28",
+"뿌리 추적자",
+"중간보스 · 시간수문장 28"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair08"
+],
+"count": 8
+},
+{
+"i": 62,
+"path": "assets/generated-v3125/kair-guardians/guardian_29.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 29"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair08"
+],
+"count": 1
+},
+{
+"i": 63,
+"path": "assets/generated-v3125/kair-guardians/guardian_30.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 30"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair08"
+],
+"count": 1
+},
+{
+"i": 64,
+"path": "assets/generated-v3125/kair-guardians/guardian_31.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 31",
+"뿌리 추적자",
+"중간보스 · 시간수문장 31"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair09"
+],
+"count": 9
+},
+{
+"i": 65,
+"path": "assets/generated-v3125/kair-guardians/guardian_32.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 32",
+"뿌리 추적자",
+"중간보스 · 시간수문장 32"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair09"
+],
+"count": 9
+},
+{
+"i": 66,
+"path": "assets/generated-v3125/kair-guardians/guardian_33.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 33",
+"뿌리 추적자",
+"중간보스 · 시간수문장 33"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair09"
+],
+"count": 8
+},
+{
+"i": 67,
+"path": "assets/generated-v3125/kair-guardians/guardian_34.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 34",
+"뿌리 추적자",
+"중간보스 · 시간수문장 34"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair09"
+],
+"count": 8
+},
+{
+"i": 68,
+"path": "assets/generated-v3125/kair-guardians/guardian_35.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 35"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair09"
+],
+"count": 1
+},
+{
+"i": 69,
+"path": "assets/generated-v3125/kair-guardians/guardian_36.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 36"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair09"
+],
+"count": 1
+},
+{
+"i": 70,
+"path": "assets/generated-v3125/kair-guardians/guardian_37.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 37",
+"뿌리 추적자",
+"중간보스 · 시간수문장 37"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair10"
+],
+"count": 9
+},
+{
+"i": 71,
+"path": "assets/generated-v3125/kair-guardians/guardian_38.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 38",
+"뿌리 추적자",
+"중간보스 · 시간수문장 38"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair10"
+],
+"count": 9
+},
+{
+"i": 72,
+"path": "assets/generated-v3125/kair-guardians/guardian_39.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 39",
+"뿌리 추적자",
+"중간보스 · 시간수문장 39"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair10"
+],
+"count": 8
+},
+{
+"i": 73,
+"path": "assets/generated-v3125/kair-guardians/guardian_40.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 40",
+"뿌리 추적자",
+"중간보스 · 시간수문장 40"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair10"
+],
+"count": 8
+},
+{
+"i": 74,
+"path": "assets/generated-v3125/kair-guardians/guardian_41.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 41"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair10"
+],
+"count": 1
+},
+{
+"i": 75,
+"path": "assets/generated-v3125/kair-guardians/guardian_42.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 42"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair10"
+],
+"count": 1
+},
+{
+"i": 76,
+"path": "assets/generated-v3125/kair-guardians/guardian_43.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 43",
+"태엽 수집자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair02"
+],
+"count": 8
+},
+{
+"i": 77,
+"path": "assets/generated-v3125/kair-guardians/guardian_44.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 44",
+"태엽 수집자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair02"
+],
+"count": 8
+},
+{
+"i": 78,
+"path": "assets/generated-v3125/kair-guardians/guardian_45.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 45",
+"태엽 수집자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair02"
+],
+"count": 7
+},
+{
+"i": 79,
+"path": "assets/generated-v3125/kair-guardians/guardian_46.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 46",
+"태엽 수집자"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair02"
+],
+"count": 7
+},
+{
+"i": 80,
+"path": "assets/generated-v3125/kair-guardians/guardian_47.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 47"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair02"
+],
+"count": 1
+},
+{
+"i": 81,
+"path": "assets/generated-v3125/kair-guardians/guardian_48.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"시간수문장 48"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair02"
+],
+"count": 1
+},
+{
+"i": 82,
+"path": "assets/generated-v3125/kair-guardians/guardian_49.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 49"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair04"
+],
+"count": 1
+},
+{
+"i": 83,
+"path": "assets/generated-v3125/kair-guardians/guardian_50.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 50"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair04"
+],
+"count": 1
+},
+{
+"i": 84,
+"path": "assets/generated-v3125/kair-guardians/guardian_51.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 51"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair05"
+],
+"count": 1
+},
+{
+"i": 85,
+"path": "assets/generated-v3125/kair-guardians/guardian_52.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 52"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair06"
+],
+"count": 1
+},
+{
+"i": 86,
+"path": "assets/generated-v3125/kair-guardians/guardian_53.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 53"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair07"
+],
+"count": 1
+},
+{
+"i": 87,
+"path": "assets/generated-v3125/kair-guardians/guardian_54.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 54"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair07"
+],
+"count": 1
+},
+{
+"i": 88,
+"path": "assets/generated-v3125/kair-guardians/guardian_55.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 55"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair08"
+],
+"count": 1
+},
+{
+"i": 89,
+"path": "assets/generated-v3125/kair-guardians/guardian_56.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 56"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair09"
+],
+"count": 1
+},
+{
+"i": 90,
+"path": "assets/generated-v3125/kair-guardians/guardian_57.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 57"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair09"
+],
+"count": 1
+},
+{
+"i": 91,
+"path": "assets/generated-v3125/kair-guardians/guardian_58.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 58"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair10"
+],
+"count": 1
+},
+{
+"i": 92,
+"path": "assets/generated-v3125/kair-guardians/guardian_59.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 59"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair02"
+],
+"count": 1
+},
+{
+"i": 93,
+"path": "assets/generated-v3125/kair-guardians/guardian_60.webp",
+"rect": [
+0,
+0,
+192,
+192
+],
+"names": [
+"상위수문장 60"
+],
+"boss": false,
+"r74": false,
+"zones": [
+"kair02"
+],
+"count": 1
+},
+{
+"i": 94,
+"path": "assets/kair/enemies/connector.png",
+"rect": [
+0,
+0,
+362,
+362
+],
+"names": [
+"최초명령 훈련파동 2",
+"최초명령 훈련파동 5",
+"시간핵의 명령 파동 3",
+"시간핵의 명령 잔류 3"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair01",
+"kair03"
+],
+"count": 13
+},
+{
+"i": 95,
+"path": "assets/kair/enemies/resonance-slave.png",
+"rect": [
+0,
+0,
+362,
+362
+],
+"names": [
+"최초명령 훈련파동 3",
+"최초명령 훈련파동 6",
+"시간핵의 명령 파동 5",
+"시간핵의 명령 잔류 5"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair01",
+"kair03"
+],
+"count": 13
+},
+{
+"i": 96,
+"path": "assets/kair/enemies/time-collector.png",
+"rect": [
+0,
+0,
+362,
+362
+],
+"names": [
+"최초명령 훈련파동 1",
+"최초명령 훈련파동 4",
+"뿌리 추적자",
+"중간보스 · 최초명령 훈련파동 1"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"kair01",
+"kair03"
+],
+"count": 43
+},
+{
+"i": 97,
+"path": "assets/last3/Monster_Goblin.png",
+"rect": [
+0,
+0,
+341,
+512
+],
+"names": [
+"숲 고블린",
+"피리 고블린",
+"숲 고블린 증원",
+"숲 고블린 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"last305"
+],
+"count": 35
+},
+{
+"i": 98,
+"path": "assets/last3/Monster_Slime.png",
+"rect": [
+0,
+0,
+341,
+512
+],
+"names": [
+"중립초원 슬라임",
+"장미이슬 슬라임",
+"중립초원 슬라임 증원",
+"중립초원 슬라임 추격대"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"last302",
+"last304"
+],
+"count": 35
+},
+{
+"i": 99,
+"path": "assets/last3/Monster_Wolf.png",
+"rect": [
+0,
+0,
+341,
+512
+],
+"names": [
+"중립초원 늑대",
+"중립초원 늑대 증원",
+"중립초원 늑대 추격대",
+"중립초원 늑대 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"last304"
+],
+"count": 15
+},
+{
+"i": 100,
+"path": "assets/u2/generated-v350/u2_blue_wraith.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"첫 기억 청람잔영",
+"첫 기억 청람잔영 증원",
+"첫 기억 청람잔영 추격대",
+"첫 기억 청람잔영 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u203",
+"u204",
+"u206"
+],
+"count": 38
+},
+{
+"i": 101,
+"path": "assets/u2/generated-v350/u2_cyborg_hound.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"폭격기억 사이보그 사냥개",
+"폭격기억 사이보그 사냥개 증원",
+"폭격기억 사이보그 사냥개 추격대",
+"폭격기억 사이보그 사냥개 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u201",
+"u205"
+],
+"count": 30
+},
+{
+"i": 102,
+"path": "assets/u2/generated-v350/u2_memory_orb.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"복종 봉인구",
+"복종 봉인구 증원",
+"복종 봉인구 추격대",
+"복종 봉인구 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u202",
+"u206"
+],
+"count": 30
+},
+{
+"i": 103,
+"path": "assets/u2/generated-v350/u2_observer_spider.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"문턱 관측거미",
+"문턱 관측거미 추격대",
+"뿌리 추적자",
+"중간보스 · 문턱 관측거미"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u204"
+],
+"count": 8
+},
+{
+"i": 104,
+"path": "assets/u2/generated-v350/u2_reactor_collector.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"가짜 자비 수집가",
+"가짜 자비 수집가 증원",
+"가짜 자비 수집가 추격대",
+"가짜 자비 수집가 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u202",
+"u205"
+],
+"count": 23
+},
+{
+"i": 105,
+"path": "assets/u2/generated-v350/u2_resonance_knight.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"참호 공명기사",
+"참호 공명기사 추격대",
+"뿌리 추적자",
+"중간보스 · 참호 공명기사"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u201",
+"u203",
+"u206"
+],
+"count": 31
+},
+{
+"i": 106,
+"path": "assets/u2/generated-v350/u2_suppression_knight.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"감옥 공명기사",
+"감옥 공명기사 추격대",
+"뿌리 추적자",
+"중간보스 · 감옥 공명기사"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u202"
+],
+"count": 8
+},
+{
+"i": 107,
+"path": "assets/u2/generated-v350/u2_void_wraith.webp",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"기억 공백 망령",
+"기억 공백 망령 증원",
+"기억 공백 망령 추격대",
+"기억 공백 망령 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u203",
+"u204",
+"u205"
+],
+"count": 45
+},
+{
+"i": 108,
+"path": "assets/u2/mdrone_idle.png",
+"rect": [
+0,
+0,
+512,
+512
+],
+"names": [
+"전쟁기억 정찰드론",
+"전쟁기억 정찰드론 증원",
+"전쟁기억 정찰드론 추격대",
+"전쟁기억 정찰드론 후속 증원"
+],
+"boss": false,
+"r74": true,
+"zones": [
+"u201"
+],
+"count": 15
+},
+{
+"i": 109,
+"path": "assets/episode1a/demon_tree_root_seraph.png",
+"rect": [],
+"names": [
+"뿌리의 문지기"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist00"
+],
+"count": 1
+},
+{
+"i": 110,
+"path": "assets/episode1b/generated-v394/bulmyeongwi_b.webp",
+"rect": [],
+"names": [
+"검은 안개 심장 · 불면의 기억"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"last302"
+],
+"count": 1
+},
+{
+"i": 111,
+"path": "assets/generated-v31224/actors-normalized/094c62d396f7_cracked_comparison_echo.webp",
+"rect": [],
+"names": [
+"금이 간 비교잔영"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b03"
+],
+"count": 1
+},
+{
+"i": 112,
+"path": "assets/generated-v31224/actors-normalized/0cbbddaf7b90_great_06.webp",
+"rect": [],
+"names": [
+"대수문장 06"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair10"
+],
+"count": 1
+},
+{
+"i": 113,
+"path": "assets/generated-v31224/actors-normalized/1a8ca2c5759b_ep1b03_envy_sister_phase0.webp",
+"rect": [],
+"names": [
+"호텔 부매니저 · 레비아탄"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b03"
+],
+"count": 1
+},
+{
+"i": 114,
+"path": "assets/generated-v31224/actors-normalized/20995250d5fa_sloth_shell_sentinel.webp",
+"rect": [],
+"names": [
+"나태의 껍데기 파수"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b02"
+],
+"count": 1
+},
+{
+"i": 115,
+"path": "assets/generated-v31224/actors-normalized/2456ba9c46b6_ep1b08_pride_chairman_phase0.webp",
+"rect": [],
+"names": [
+"백색 정장의 호텔 그룹 회장"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b08"
+],
+"count": 1
+},
+{
+"i": 116,
+"path": "assets/generated-v31224/actors-normalized/28e46dbcc1fb_ep1b07_wrath_janitor_phase0.webp",
+"rect": [],
+"names": [
+"불을 지른 청소부 · 사탄"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b07"
+],
+"count": 1
+},
+{
+"i": 117,
+"path": "assets/generated-v31224/actors-normalized/32dfddbbf2cd_molten_vault_sentinel.webp",
+"rect": [],
+"names": [
+"겨울숲 가시파수"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b06b"
+],
+"count": 1
+},
+{
+"i": 118,
+"path": "assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+"rect": [],
+"names": [
+"타락천사 기사"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"last301"
+],
+"count": 1
+},
+{
+"i": 119,
+"path": "assets/generated-v31224/actors-normalized/42daad5a3557_dist_fallen_comrade_demon_echo.webp",
+"rect": [],
+"names": [
+"첫 동료의 악마잔영"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist04"
+],
+"count": 1
+},
+{
+"i": 120,
+"path": "assets/generated-v31224/actors-normalized/4d4341de35e5_ep1b02_sloth_man_phase0.webp",
+"rect": [],
+"names": [
+"나태에 잠식된 남자"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b02"
+],
+"count": 1
+},
+{
+"i": 121,
+"path": "assets/generated-v31224/actors-normalized/4f26454d8ae2_enemy_void_core.webp",
+"rect": [],
+"names": [
+"제17단계 중앙이주 코어"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"u206"
+],
+"count": 1
+},
+{
+"i": 122,
+"path": "assets/generated-v31224/actors-normalized/5168d3dce2f0_horned_swamp_demon.webp",
+"rect": [],
+"names": [
+"늪의 뿔악마 군주"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist02"
+],
+"count": 1
+},
+{
+"i": 123,
+"path": "assets/generated-v31224/actors-normalized/66b3a07672a9_great_02.webp",
+"rect": [],
+"names": [
+"대수문장 02"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair06"
+],
+"count": 1
+},
+{
+"i": 124,
+"path": "assets/generated-v31224/actors-normalized/6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp",
+"rect": [],
+"names": [
+"붉은 하이힐의 서윤"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b05"
+],
+"count": 1
+},
+{
+"i": 125,
+"path": "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+"rect": [],
+"names": [
+"불면귀"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"last303"
+],
+"count": 1
+},
+{
+"i": 126,
+"path": "assets/generated-v31224/actors-normalized/693a5923c4c1_dist_blood_guardian_pursuer.webp",
+"rect": [],
+"names": [
+"핏빛 수호로 추격자"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist03"
+],
+"count": 1
+},
+{
+"i": 127,
+"path": "assets/generated-v31224/actors-normalized/6998402eb8e7_purple_sword_spider_angel.webp",
+"rect": [],
+"names": [
+"보라검천사"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist01"
+],
+"count": 1
+},
+{
+"i": 128,
+"path": "assets/generated-v31224/actors-normalized/7a53842dd5da_lucifer-idle.webp",
+"rect": [],
+"names": [
+"루시퍼 · 가면 벗은 초천사"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1a11"
+],
+"count": 1
+},
+{
+"i": 129,
+"path": "assets/generated-v31224/actors-normalized/7efeeaa5bb8b_ep1b06b_greed_child_phase0.webp",
+"rect": [],
+"names": [
+"소년이 된 총지배인 · 맘몬"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b06b"
+],
+"count": 1
+},
+{
+"i": 130,
+"path": "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+"rect": [],
+"names": [
+"발록 · 지옥의 문지기"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist06"
+],
+"count": 1
+},
+{
+"i": 131,
+"path": "assets/generated-v31224/actors-normalized/81909f0b3692_ascension_calculation_orb.webp",
+"rect": [],
+"names": [
+"생체부트로더 연산핵"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b09"
+],
+"count": 1
+},
+{
+"i": 132,
+"path": "assets/generated-v31224/actors-normalized/820420d0c62e_vault_ledger_watcher.webp",
+"rect": [],
+"names": [
+"금고 장부감시자"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b06"
+],
+"count": 1
+},
+{
+"i": 133,
+"path": "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+"rect": [],
+"names": [
+"제4단계 전쟁관리자",
+"제14단계 역전 관리자"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"u201",
+"u205"
+],
+"count": 2
+},
+{
+"i": 134,
+"path": "assets/generated-v31224/actors-normalized/85f150dbf0f7_controller_guardian.webp",
+"rect": [],
+"names": [
+"기억의 문 수호 프레임"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"u203"
+],
+"count": 1
+},
+{
+"i": 135,
+"path": "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+"rect": [],
+"names": [
+"제8단계 자비 교정관",
+"제12단계 기억 검열기"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"u202",
+"u204"
+],
+"count": 2
+},
+{
+"i": 136,
+"path": "assets/generated-v31224/actors-normalized/908a59f003db_great_01.webp",
+"rect": [],
+"names": [
+"대수문장 01"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair05"
+],
+"count": 1
+},
+{
+"i": 137,
+"path": "assets/generated-v31224/actors-normalized/947dfea12b7e_discarded_kitchen_overseer.webp",
+"rect": [],
+"names": [
+"폐기주방 감독"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b04"
+],
+"count": 1
+},
+{
+"i": 138,
+"path": "assets/generated-v31224/actors-normalized/99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp",
+"rect": [],
+"names": [
+"사이보그 회장 · 생체 부트로더"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b09"
+],
+"count": 1
+},
+{
+"i": 139,
+"path": "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+"rect": [],
+"names": [
+"고블린 추장"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"last305"
+],
+"count": 1
+},
+{
+"i": 140,
+"path": "assets/generated-v31224/actors-normalized/a6f6c2767d0f_ep1a_false_archangel_smiling_mask.webp",
+"rect": [],
+"names": [
+"초천사의 웃는 가면"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1a11"
+],
+"count": 1
+},
+{
+"i": 141,
+"path": "assets/generated-v31224/actors-normalized/b19d67bb1973_siren_idle.webp",
+"rect": [],
+"names": [
+"세이렌 모르"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair03"
+],
+"count": 1
+},
+{
+"i": 142,
+"path": "assets/generated-v31224/actors-normalized/b30f4a94acb6_hotel_flame_knight.webp",
+"rect": [],
+"names": [
+"호텔 화염기사"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b07"
+],
+"count": 1
+},
+{
+"i": 143,
+"path": "assets/generated-v31224/actors-normalized/b42dcd0ea03d_gate72_pride_echo.webp",
+"rect": [],
+"names": [
+"교만의 잔향 · 제72문"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b01"
+],
+"count": 1
+},
+{
+"i": 144,
+"path": "assets/generated-v31224/actors-normalized/b9b65cd61430_arvelia_delay_archon.webp",
+"rect": [],
+"names": [
+"아르벨리아를 묶은 변조 명령"
+],
+"boss": true,
+"r74": true,
+"zones": [
+"kair02"
+],
+"count": 1
+},
+{
+"i": 145,
+"path": "assets/generated-v31224/actors-normalized/ba23b5fa3237_great_05.webp",
+"rect": [],
+"names": [
+"대수문장 05"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair08"
+],
+"count": 1
+},
+{
+"i": 146,
+"path": "assets/generated-v31224/actors-normalized/be8d2dfe3789_dist_summoning_black_pillar.webp",
+"rect": [],
+"names": [
+"소환진 검은기둥"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist06"
+],
+"count": 1
+},
+{
+"i": 147,
+"path": "assets/generated-v31224/actors-normalized/c386e08b76cf_ep1a_stabilization_supervisor.webp",
+"rect": [],
+"names": [
+"백의 안정화 감독",
+"병원 심부의 집도의"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1a08"
+],
+"count": 2
+},
+{
+"i": 148,
+"path": "assets/generated-v31224/actors-normalized/c5859bd35492_controller_idle.webp",
+"rect": [],
+"names": [
+"컨트롤러 · 기억의 문"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"u203"
+],
+"count": 1
+},
+{
+"i": 149,
+"path": "assets/generated-v31224/actors-normalized/cd804c90bfe4_heartlight_stage_director.webp",
+"rect": [],
+"names": [
+"심장빛 무대감독"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b05"
+],
+"count": 1
+},
+{
+"i": 150,
+"path": "assets/generated-v31224/actors-normalized/cfb37917e7c0_dist_dying_messenger_shadow.webp",
+"rect": [],
+"names": [
+"숨이 끊긴 전령의 그림자"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"dist05"
+],
+"count": 1
+},
+{
+"i": 151,
+"path": "assets/generated-v31224/actors-normalized/d8c1c8e59daf_ep1b06_greed_general_manager_phase0.webp",
+"rect": [],
+"names": [
+"회장에게 고용된 총지배인 · 맘몬"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b06"
+],
+"count": 1
+},
+{
+"i": 152,
+"path": "assets/generated-v31224/actors-normalized/df4a6534a6d4_ep1a_pride_ruin_core.webp",
+"rect": [],
+"names": [
+"오만의 폐허핵"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1a10"
+],
+"count": 1
+},
+{
+"i": 153,
+"path": "assets/generated-v31224/actors-normalized/f02422d95ccb_ep1b08_pride_zombie.webp",
+"rect": [],
+"names": [
+"역십자가 시체경호체"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b08"
+],
+"count": 1
+},
+{
+"i": 154,
+"path": "assets/generated-v31224/actors-normalized/f8c98bb66e1e_great_04.webp",
+"rect": [],
+"names": [
+"대수문장 04"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair07"
+],
+"count": 1
+},
+{
+"i": 155,
+"path": "assets/generated-v31224/actors-normalized/fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp",
+"rect": [],
+"names": [
+"최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"ep1b04"
+],
+"count": 1
+},
+{
+"i": 156,
+"path": "assets/generated-v3125/kair-guardians/guardian_50.webp",
+"rect": [],
+"names": [
+"휴식 수확관 · 과로의 수문장"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair04"
+],
+"count": 1
+},
+{
+"i": 157,
+"path": "assets/generated-v3125/kair-guardians/guardian_57.webp",
+"rect": [],
+"names": [
+"망각 묘지기 · 삭제된 선택"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair09"
+],
+"count": 1
+},
+{
+"i": 158,
+"path": "assets/kair/enemies/resonance-slave.png",
+"rect": [],
+"names": [
+"최초명령 코어 오염체"
+],
+"boss": true,
+"r74": false,
+"zones": [
+"kair01"
+],
+"count": 1
+}
+]

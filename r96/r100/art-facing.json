@@ -1,0 +1,63 @@
+{
+ "note": "R100 hand classification of the enemy art in /tmp sprite sheets: f = the way the drawn art faces (L/R, F = frontal), fly = winged or floating. Keys are sprite indices of r100/sprites.json.",
+ "L": [
+  3,
+  11,
+  12,
+  16,
+  18,
+  19,
+  20,
+  22,
+  23,
+  33,
+  97,
+  99,
+  101,
+  103
+ ],
+ "R": [
+  0,
+  1,
+  2,
+  5,
+  30,
+  31,
+  58,
+  96
+ ],
+ "fly": [
+  3,
+  4,
+  7,
+  9,
+  10,
+  14,
+  17,
+  18,
+  19,
+  24,
+  25,
+  54,
+  100,
+  102,
+  103,
+  108
+ ],
+ "r74": {
+  "ash": {
+   "f": "R",
+   "fly": 1
+  },
+  "clock": {
+   "f": "R"
+  },
+  "glass": {
+   "f": "R",
+   "fly": 1
+  },
+  "root": {
+   "f": "R"
+  }
+ }
+}

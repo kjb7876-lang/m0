@@ -4,7 +4,7 @@
  const api=window.__STORYWORLD_FINAL42_R88__,data=window.__STORYWORLD_ASSETS_R96__;
  if(!api?.register||!data||window.__STORYWORLD_STATUS_R96__)return;
  for(const spec of Object.values(data))api.register(spec);
- const rows=new Map(),observed=new Map(),metrics={created:0,reapplied:0,cleared:0,painted:0};
+ const rows=new Map(),observed=new Map(),metrics={created:0,reapplied:0,cleared:0,painted:0,ghosted:0},GHOST=.46,VEIL=.8;
  let scene=null,actor=null,last=-Infinity,rebuild=true;
  const enabled=()=>started&&player?.hp>0&&room&&layer==='STORY'&&!settings.lowFx&&
   !(typeof mobile==='function'&&mobile())&&!window.matchMedia?.('(pointer:coarse)').matches&&
@@ -44,11 +44,16 @@
   for(const[k,row]of rows){
    if(!handles.has(row.handle)){rows.delete(k);continue;}
    if(k!=='root'&&side!=='back')continue;
-   const alpha=row.releaseAt==null?1:Math.max(0,1-(time-row.releaseAt)/row.releaseSeconds);
+   const alpha=row.releaseAt==null?1:Math.max(0,1-(time-row.releaseAt)/row.releaseSeconds),base=row.canonical?1:alpha;
    // Root's full canvas is 2x actor height; sustain's crop preserves its
    // 256-canvas scale and foot pivot. Both halves share one age and handle.
-   if(api.render(data[k].id,{entity:player,sourceKey:row.handle,age:row.canonical&&row.releaseAt!=null?time-row.releaseAt:Math.max(0,time-row.start),clip:row.canonical&&row.releaseAt!=null?'release':undefined,frozenFrame:row.frozen&&!row.canonical?{...row.frozen}:null,
-    alpha:row.canonical?1:alpha,height:actorHeight()*(k==='root'?2:96/256*2),part:k==='root'?side:undefined,layer:side==='back'?'beforeActor':'afterActor',anchor:'feet'}))metrics.painted++;
+   const opt={entity:player,sourceKey:row.handle,age:row.canonical&&row.releaseAt!=null?time-row.releaseAt:Math.max(0,time-row.start),clip:row.canonical&&row.releaseAt!=null?'release':undefined,frozenFrame:row.frozen&&!row.canonical?{...row.frozen}:null,
+    alpha:base*(k==='root'?VEIL:1),height:actorHeight()*(k==='root'?2:96/256*2),part:k==='root'?side:undefined,layer:side==='back'?'beforeActor':'afterActor',anchor:'feet'};
+   if(api.render(data[k].id,opt))metrics.painted++;
+   // R100: both halves are a little translucent so the hero shows through the
+   // cage, and the thorns that grow behind the hero are drawn again over the
+   // body, fainter, so the whole bind reads instead of a half hidden by the hero.
+   if(k==='root'&&side==='front'&&api.render(data[k].id,{...opt,frozenFrame:opt.frozenFrame&&{...row.frozen},part:'back',alpha:base*GHOST}))metrics.ghosted++;
   }
  }
  const hero=drawHero;drawHero=function(...args){sync();paint('back');const result=hero.apply(this,args);paint('front');return result;};

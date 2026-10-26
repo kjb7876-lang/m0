@@ -5,7 +5,9 @@
  * footprint when the hit lands, a cast aura and release burst for ranged
  * casts, and a gathering motif plus eruption for boss patterns and hazards.
  * The motif follows the region family; bosses, midbosses and the persona carry
- * their own. Only a soft ground pool remains in code.
+ * their own. Only a soft ground pool remains in code. R100: when the enemy's
+ * art has a measured signature colour (R100 polish), the effects use that
+ * colour's recoloured strips and tinted pools instead of the family motif.
  * Presentation only: attack timing, footprints, hit tests, damage and saves
  * are read, never written. Canonical source. */
 (()=>{'use strict';
@@ -37,7 +39,10 @@
  };
  const rgba=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+clamp(a,0,1).toFixed(3)+')';
  function family(){const L=typeof room!=='undefined'?room?.exploration:null;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||(typeof zone!=='undefined'&&zone==='ep1a08'?'clinical':null)||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family||'regional';}
- function themeFor(e){if(e?.persona)return THEMES.persona;if(e?.boss||e?.midboss)return THEMES.boss;return THEMES[family()]||THEMES.regional;}
+ const POL=()=>window.__STORYWORLD_POLISH_R100__,SIGT={};
+ function sigTheme(name){if(SIGT[name])return SIGT[name];const c=POL()?.sigColours?.[name];if(!c)return null;
+  return SIGT[name]={a:c,b:c.map(v=>Math.round(v+(255-v)*.55)),c:c.map(v=>Math.round(v*.5)),sig:name};}
+ function themeFor(e){const sig=e&&POL()?.colourOf?.(e),st=sig&&sigTheme(sig);if(st)return st;if(e?.persona)return THEMES.persona;if(e?.boss||e?.midboss)return THEMES.boss;return THEMES[family()]||THEMES.regional;}
 
  // ---- R99 painted layer -------------------------------------------------------
  // The FINAL42 painted atlases (hand-painted frame animations already shipped
@@ -53,7 +58,7 @@
   regional:{hit:'F090',aura:'F250',gather:'F114'},boss:{hit:'F090',aura:'F250',gather:'F114',burst:'F117'},persona:{hit:'F217',aura:'F248',gather:'F130',burst:'F115'},
   hero:{hit:'F246'}
  };
- function paintFor(e){const th=e.th;for(const[k,v]of Object.entries(THEMES))if(v===th)return PAINT[k]||PAINT.regional;return PAINT.regional;}
+ function paintFor(e){const th=e.th;if(th?.sig)return e.major?PAINT.boss:PAINT[family()]||PAINT.regional;for(const[k,v]of Object.entries(THEMES))if(v===th)return PAINT[k]||PAINT.regional;return PAINT.regional;}
  const paintStats={drawn:0,fallback:0};
  // Draw one painted frame. loop=true wraps the clip (auras, gathering); otherwise
  // the clip is stretched over the effect's own life so it ends with it.
@@ -62,7 +67,10 @@
   const age=loop?((time-(key?.at??0))%d+d)%d:clamp(t,0,.999)*d;
   const ok=api.render(id,{x,y,age,scale,alpha,height,key:'r99:'+(key?.id||id)+(lift?':'+lift:''),sourceId:'r99:'+(key?.id||id)+(lift?':'+lift:'')});
   ok?paintStats.drawn++:paintStats.fallback++;return ok;}
- function preload(){const api=F42();if(!api?.ensure)return;const f=family(),set=new Set();for(const k of[f,'boss','hero'])for(const id of Object.values(PAINT[k]||{}))set.add(id);for(const id of set)try{api.ensure(id);}catch(_){}const ck=CONTACT_BY[f];if(ck&&typeof addImage==='function')try{addImage(CONTACT[ck].path);}catch(_){}}
+ function preload(){const api=F42();if(!api?.ensure)return;const f=family(),set=new Set();for(const k of[f,'boss','hero'])for(const id of Object.values(PAINT[k]||{}))set.add(id);for(const id of set)try{api.ensure(id);}catch(_){}const ck=CONTACT_BY[f];if(ck&&typeof addImage==='function')try{addImage(CONTACT[ck].path);}catch(_){}preloadSig();}
+ // R100: the signature strips of the colours present in the room (plain
+ // images; the FINAL42 atlas pool is left to region entry).
+ function preloadSig(){if(typeof addImage!=='function'||typeof room==='undefined'||!room)return;const seen=new Set();for(const e of room.enemies||[]){const c=POL()?.colourOf?.(e);if(c&&!seen.has(c)){seen.add(c);for(const k of Object.keys(POL()?.sig||{}))try{addImage(sigPath(k,c),'R100 signature effect');}catch(_){}}}}
 
  // ---- geometry ------------------------------------------------------------
  const unit=()=>TILE*zoom;
@@ -119,26 +127,42 @@
  // strip, played once over the impact and anchored at the contact point.
  const CONTACT={fire:{path:'assets/r99/fx/contact-fire.webp',ay:.56,blend:'lighter'},shock:{path:'assets/r99/fx/contact-shock.webp',ay:.56,blend:'lighter'},splash:{path:'assets/r99/fx/contact-splash.webp',ay:.84,blend:'source-over'}};
  const CONTACT_BY={ash:'fire',forge:'fire',domestic:'fire',neural:'shock',memory:'shock',clinical:'shock',swamp:'splash',coast:'splash'};
- function contactFor(e){for(const[k,v]of Object.entries(THEMES))if(v===e.th)return CONTACT_BY[k]||null;return null;}
+ const CONTACT_BY_SIG={red:'fire',orange:'fire',gold:'fire',cyan:'shock',blue:'shock',violet:'shock',teal:'splash',green:'splash',lime:'splash'};
+ function contactFor(e){if(e.th?.sig)return CONTACT_BY_SIG[e.th.sig]||null;for(const[k,v]of Object.entries(THEMES))if(v===e.th)return CONTACT_BY[k]||null;return null;}
+ // R100 signature strips: 12 frames of a recoloured painted effect in one row.
+ // ay is the anchor height share; flat lays the frame on the ground.
+ const sigPath=(kind,colour)=>'assets/r100/sig-'+kind+'-'+colour+'.webp';
+ function sigStrip(kind,e,x,y,t,size,{alpha=1,ay=.5,lift=0,loop=false,angle=0,flat=false,blend='source-over',glow=0}={}){const th=e.th,spec=POL()?.sig?.[kind];if(!th?.sig||!spec||!(size>0)||!(alpha>0))return false;
+  const path=sigPath(kind,th.sig),row=typeof readyImage==='function'?readyImage(path):null;if(!row?.image){if(typeof addImage==='function')try{addImage(path,'R100 signature effect');}catch(_){}return false;}
+  const n=spec.frames,S=spec.size,i=loop?Math.floor(((time-e.at)*14+(e.seed||0)*3)%n+n)%n:Math.min(n-1,Math.floor(clamp(t,0,.999)*n)),q=P(x,y);
+  ctx.save();try{ctx.translate(q.x,q.y-lift);if(flat)ctx.scale(1,.56);if(angle)ctx.rotate(angle);ctx.globalCompositeOperation=blend;ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);
+   if(glow>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glow;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);}}finally{ctx.restore();}stats.signature=(stats.signature||0)+1;return true;}
+ // screen angle of a world direction, for the slash crescent
+ function screenAngle(a){const o=P(0,0),d=P(Math.cos(a),Math.sin(a));return Math.atan2(d.y-o.y,d.x-o.x);}
  function contact(kind,x,y,t,size,alpha=1){const c=CONTACT[kind];if(!c||!(size>0))return false;const row=typeof readyImage==='function'?readyImage(c.path):null;
   if(!row?.image){if(typeof addImage==='function')try{addImage(c.path);}catch(_){}return false;}
   const i=Math.min(8,Math.floor(clamp(t,0,.999)*9)),q=P(x,y);ctx.save();try{ctx.globalCompositeOperation=c.blend;ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*256,0,256,256,q.x-size/2,q.y-size*c.ay,size,size);}finally{ctx.restore();}stats.contacts++;return true;}
  function glow(x,y,h,r,th,a){const q=P(x,y);disc(q,h,r,rgba(th.a,.18*a));disc(q,h,r*.45,rgba(th.b,.22*a));}
  function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
+  if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.3:1.55),{loop:true,alpha:.3+.65*k,ay:.66,glow:.35*k}))return;
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.8:1.15,alpha:.25+.7*k}))glow(e.x,e.y,actorHeight()*.5,(14+16*k)*zoom*(M?1.5:1),e.th,.4+.6*k);}
  function drawImpactAir(e,t){const c=centre(e.g),E=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
-  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1);
-  if(!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
+  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1),s=e.g?.shape,slash=s==='arc'||s==='cone'||s==='capsule'||s==='line';
+  const sig=slash?sigStrip('slash',e,c.x,c.y,k,actorHeight()*scale*.95,{lift:actorHeight()*.38,angle:screenAngle(e.g.angle||0)+Math.PI,glow:.4*(1-k)}):sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale*.9,{lift:actorHeight()*.3,glow:.45*(1-k)});
+  if(!sig&&!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
   const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}
  function drawCastAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
+  if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.1:1.4),{loop:true,alpha:.4+.55*k,ay:.66,glow:.4*k}))return;
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.6:1,alpha:.35+.6*k}))glow(e.x,e.y,actorHeight()*.62,(11+12*k)*zoom*(M?1.6:1.1),e.th,.5+.5*k);}
  function drawReleaseAir(e,t){const k=clamp(t,0,1),p=paintFor(e);
+  if(sigStrip('hit',e,e.x,e.y,k,actorHeight()*(e.major?1.6:1.1),{lift:actorHeight()*.55,alpha:.95,glow:.5*(1-k)}))return;
   if(!paint(p.hit,e.x,e.y,{t:k,key:e,scale:e.major?1.5:1,alpha:.9}))glow(e.x,e.y,actorHeight()*.62,(16+30*k)*zoom,e.th,1-k);}
  function drawGatherAir(e,t){const c=centre(e.g),R=extent(e.g),k=clamp(t,0,1),p=paintFor(e);
+  if(sigStrip('gather',e,c.x,c.y,k,actorHeight()*clamp(1+R*.6,1.2,e.major?3.4:2.4)*1.1,{loop:true,flat:true,alpha:.35+.6*k,glow:.3*k}))return;
   paint(p.gather,c.x,c.y,{loop:true,key:e,scale:clamp(1+R*.6,1.2,e.major?3.4:2.4),alpha:.3+.6*k});}
  function drawBurstAir(e,t){const c=centre(e.g),R=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
   const scale=clamp(1.6+R*.7,1.8,M?3.6:2.6);
-  const a=paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
+  const a=sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale,{lift:actorHeight()*.25,glow:.55*(1-k)})||paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
   if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
   if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);
   const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}
@@ -193,7 +217,7 @@
   }
   // root bind (R96 split thorn overlay): thorns burst out of the ground on
   // admission, the soil stays stained, and the roots snap apart on release.
-  const rooted=!!window.__STORYWORLD_STATUS_R96__?.inspect().active.some(r=>r.kind==='root'&&r.releaseAt==null);
+  const rooted=!!window.__STORYWORLD_STATUS_R96__?.inspect().active.some(r=>r.kind==='root'&&r.releaseAt==null)||!!POL()?.rooted?.();
   if(rooted&&!rootStain){rootStain=add({kind:'rootStain',x:player.x,y:player.y,until:Infinity});add({kind:'rootIn',x:player.x,y:player.y,life:.55});stats.roots++;}
   else if(!rooted&&rootStain){if(rootStain.releasedAt==null){rootStain.releasedAt=time;rootStain.until=time+.5;add({kind:'rootOut',x:player.x,y:player.y,life:.9});}if(time>rootStain.until)rootStain=null;}
   // follow casters; fire the eruption when a gathering hazard releases
@@ -205,7 +229,8 @@
   }
   if(!effects.includes(SENTINEL)){SENTINEL.age=0;effects.push(SENTINEL);}
  }
- const tickBase=tick;tick=function(dt){const result=tickBase.call(this,dt);try{if(typeof started!=='undefined'&&started&&!modal&&!loading)observe(dt);}catch(err){fail(err);}return result;};
+ let preloadRoom=null;
+ const tickBase=tick;tick=function(dt){const result=tickBase.call(this,dt);try{if(typeof started!=='undefined'&&started&&!modal&&!loading){if(preloadRoom!==room&&room?.enemies?.length){preloadRoom=room;preloadSig();}observe(dt);}}catch(err){fail(err);}return result;};
  // Region changes clear native effects; drop ours too so nothing is drawn in the next room.
  if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...args){const r=await eb.apply(this,args);list.length=0;rootStain=null;try{preload();}catch(err){fail(err);}return r;};}
  if(typeof stopEffects==='function'){const sb=stopEffects;stopEffects=function(...args){list.length=0;rootStain=null;return sb.apply(this,args);};}
