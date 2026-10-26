@@ -91,8 +91,14 @@ function paintCell(p,key,height){const hit=cellOf(key);if(!hit)return false;cons
 const R80API=()=>window.__STORYWORLD_WORLD_ASSETS_R80__;
 const R80DATA=()=>window.__STORYWORLD_ASSETS_R80_DATA__?.assets;
 function r80Key(p){if(p.r80Dressing&&typeof p.r80Art==='string')return p.r80Art;if(typeof p.id==='string'&&/^ep1a08-prop-[1-8]$/.test(p.id)){try{const a=R80API()?.artFor?.(p);if(a?.path)return base(a.path);}catch(e){fail(e);}}return null;}
+// a replacement is painted only where the native chain would draw the prop: not hidden,
+// disabled or destroyed, and not held by an enemy's R61 pick-up-and-throw action
+function admitted(p){if(p.visible===false||p.enabled===false||p.disabled===true||p.destroyed===true)return false;
+ try{const r=typeof room!=='undefined'?room:null,t=typeof time!=='undefined'?time:0;if(p.id&&(r?.enemies||[]).some(e=>{const a=e?.r61Action;return a&&a.room===r&&t<a.endAt&&!a.cancelled&&a.prop?.id===p.id&&t<a.releaseAt+.8;}))return false;}catch(e){fail(e);}
+ return true;}
 const propBase=drawProp;drawProp=function(p,...args){
  if(skip(p)||typeof p!=='object')return propBase.apply(this,arguments);
+ if(!admitted(p))return propBase.apply(this,arguments);
  const undo=[];
  try{const skin=p.r81NativeSkin,path=skin?.path||(!p.r80Dressing&&!p.r74Prop&&!p.r99Tree?p.path:null),name=base(path),obj=objective(p),k=obj?1:jitter(p);
   // 1) story fit: roofed Eastern pieces outside the Eastern scenes
