@@ -8,6 +8,11 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
+      "path": "assets-clean-r99.js",
+      "bytes": 3408,
+      "sha256": "340156de4034dc06971d7ad4951347debfb199d90938cabc1351444faa5132ff"
+    },
+    {
       "path": "assets-r96.js",
       "bytes": 9973,
       "sha256": "43599ed9bfc51cdc4d2f326a99bc93e6f48d5a29efea20209ef29b7bfeaa0aed"
@@ -8653,6 +8658,376 @@
       "sha256": "4b21c40cbf37a9f02827e208cf01f2ec3fff32e1f84e9a1e15c3ef0e6ba61749"
     },
     {
+      "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
+      "bytes": 54936,
+      "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c102_synapse_hound.webp",
+      "bytes": 140794,
+      "sha256": "3d5e57f63af1d802a7bc40fe36517a55e76d7ad7487d9c50b618db01fa7d9d70"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c102_unity_seraph.webp",
+      "bytes": 133264,
+      "sha256": "9d99ef0f98fc16e5c863f8b47bc83591ad4c9d180819f600a5d2a6b7eb826784"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c104_white_deacon.webp",
+      "bytes": 116352,
+      "sha256": "244042de07186c0ef3e7c55411667cf97ce5175ca2a6484af61b4d25cc82c5f7"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c104_white_shepherd.webp",
+      "bytes": 161798,
+      "sha256": "76d1e45d49df6b622f34dfa8b4494abb8a3587fa3b56c84b792bb646a498ed25"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+      "bytes": 94328,
+      "sha256": "a2ece51424165bb73a2fc06a956d1f6d7341ae9d164004a63efb4c36a83603d0"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+      "bytes": 78414,
+      "sha256": "cb2267aabbcac2e93b282200a9057c680a31bc1c22b88b6c2ced032e19dabf3b"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+      "bytes": 76292,
+      "sha256": "0d93edb11ce63097ff4932e5988350ab0d610d951075fbb9b8112c541b7ab479"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+      "bytes": 82146,
+      "sha256": "475cdebbbdf46be9a275619182f691d199c214e3611317d94fd1bcb57073a2b1"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+      "bytes": 66398,
+      "sha256": "bef5522ddbf07839a728d095d6682f732388c8cd74f953fdda58f87680bf0c06"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+      "bytes": 69960,
+      "sha256": "449f05d9bfa2c6e3b9f2c899d2399bcae642c2f50e474b2ec10338cdcca49aff"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+      "bytes": 48990,
+      "sha256": "08a3fe24c29c772f85986988268511dabf7101985e2116469683a1b19875bd55"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+      "bytes": 83374,
+      "sha256": "b4ef3d87ae5b465ac2e2aa16324de095c7e0c5c5578e0966db5343f1cf6a6ffc"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+      "bytes": 124972,
+      "sha256": "c5fd7fd87d7984b5c9c125cc71f5b603b2b7540710b079a7d4d5a2ef198208eb"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+      "bytes": 98708,
+      "sha256": "3ebd15f869166c129708177958f0dbdaeb9d3b98417d9d444520735e34f01666"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+      "bytes": 105768,
+      "sha256": "fdd6b7bccdb26d158f6ea56629d583a6097ea256a727024968e5787770bf70a3"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+      "bytes": 54318,
+      "sha256": "0fb744789934fe29a96c73ca847f79ad1522eeaa0217861b84f04da1664440da"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v3128/projectiles/chrono_orb.webp",
+      "bytes": 300564,
+      "sha256": "e7943f4e8e38187c8bece72b7bef34bb156b25163099b0ada4394b80c9e0c572"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v3128/projectiles/hospital_syringe.webp",
+      "bytes": 68794,
+      "sha256": "10c4b80cb03d53a746bf9980e68d0ae37d090d7bd1980a11fabf589a57a71a35"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/ego_theft_connector.webp",
+      "bytes": 92672,
+      "sha256": "3d4c4778215987a5ef5192d9952e1e6664f01449af6df9cf080f5b02daabb1f2"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/false_signal_seal_guard.webp",
+      "bytes": 79576,
+      "sha256": "87e52d855daf6f76768da06558c23f5b034c06f7e033d5a2f1443a4a77894b80"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp",
+      "bytes": 117674,
+      "sha256": "c468836f7ce57cd86c2562697c0df50c6a6b91e8f38628d793dad62acb59a64c"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/nameless_sword_trace.webp",
+      "bytes": 107682,
+      "sha256": "68360376a61a623de23fb91a6235905df0a246a3403ba6ecbdf5732e287bbc11"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/order_seal_officer.webp",
+      "bytes": 65506,
+      "sha256": "e96bfc6aab057ce9dbc8721a463f796f5cab22c1375d4793eab35af933da5f07"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp",
+      "bytes": 176188,
+      "sha256": "d29eb833b6efdb308815a854de040ed1785fc651de3d81ef73c7effcf74e1611"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp",
+      "bytes": 126840,
+      "sha256": "0ccabd1b207dd8ca4816518b4f91439c546911402bf452e943599d199ee46173"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp",
+      "bytes": 89658,
+      "sha256": "b13700574f316bd8b400c2a8cdb19925d9f57a6896365f8382a54c84841cbf50"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/silverless_shadow.webp",
+      "bytes": 164454,
+      "sha256": "1003a993b11d26329dee146aaa843fa2d15d9406cd5f1180c48875a8b50b4582"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp",
+      "bytes": 111888,
+      "sha256": "552d4230454a56a2e5b0f3b545dd6a7bafdef157f0860bb9463a4dc70759790a"
+    },
+    {
+      "path": "assets/r99/clean/assets/heroes/normalized/gunner/player_roll.webp",
+      "bytes": 208824,
+      "sha256": "c5c71f0b814904e2592465d30565f8b750cbc1cb425ed64651ecf235f19c4136"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_blue_wraith.webp",
+      "bytes": 202682,
+      "sha256": "93ee696806a4aa8ea6aa53def2864f62ddb7dff49b6194908d22dc1378148097"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_cyborg_hound.webp",
+      "bytes": 173822,
+      "sha256": "bb467bd6b6e0225e3c54484156da1d7eddb156f34d248c1c7b5eca7660402009"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp",
+      "bytes": 144350,
+      "sha256": "ece2084e751758154c108b19d701790515c69ef41b31db2919586549565f22a3"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_observer_spider.webp",
+      "bytes": 229632,
+      "sha256": "59d51a99f3943947be4d088f79703480756719e4f2bf6543bea3c71555970e8c"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp",
+      "bytes": 167140,
+      "sha256": "60f6a6cd14fc1d50d866e16f0bd696f87873637abf44f3159499087697b2d489"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_resonance_knight.webp",
+      "bytes": 170792,
+      "sha256": "d391bd487de52b483d0cc64c5ab1cc914018d598427b282b3623a87506dd3e1d"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp",
+      "bytes": 128442,
+      "sha256": "7396f78467ed221c3e535d95e67fb2496e1e035e40781787675e1e3b6116d1b0"
+    },
+    {
+      "path": "assets/r99/clean/assets/u2/generated-v350/u2_void_wraith.webp",
+      "bytes": 200216,
+      "sha256": "789a4d3b18de0a35c621fcb2b7a7c8e3fb0754136aac66364c8d1da0ef698737"
+    },
+    {
+      "path": "assets/r99/fx/contact-fire.webp",
+      "bytes": 103346,
+      "sha256": "d8ce0cb3e66aa2ce998952aecb3b2b7175b8afb8b16549c04da1f8f6031b069b"
+    },
+    {
+      "path": "assets/r99/fx/contact-shock.webp",
+      "bytes": 83488,
+      "sha256": "8458434008282307b39674b5925ec81727ce56a7088f788a5344099ed2e9a05c"
+    },
+    {
+      "path": "assets/r99/fx/contact-splash.webp",
+      "bytes": 90304,
+      "sha256": "52b956ba89f063dd16290ca374876a2c2e82d7923980dcb2cc8a407302fbfdd9"
+    },
+    {
+      "path": "assets/r99/outdoor/ground-cliff.webp",
+      "bytes": 1004910,
+      "sha256": "3c01c0dc2c0d0546ca92c6d95d8a7938f8697a2ff8cd24a4dc6b4a594fb41f62"
+    },
+    {
+      "path": "assets/r99/outdoor/ground-moss.webp",
+      "bytes": 994288,
+      "sha256": "345a8fb265b50e3eb37f3211313052ad753449b7fc129c74760efa129ed41e3d"
+    },
+    {
+      "path": "assets/r99/outdoor/ground-paving.webp",
+      "bytes": 813274,
+      "sha256": "b566db397d83fe994e3644e1f08824569db355389b742fce2c757cc0205dd58a"
+    },
+    {
+      "path": "assets/r99/outdoor/ground-ruin.webp",
+      "bytes": 826302,
+      "sha256": "a1192656b002335dacdf0dbc2fe613f2c0920d94bb596e8c3530cd8c3621641f"
+    },
+    {
+      "path": "assets/r99/outdoor/surround-cliff.webp",
+      "bytes": 496064,
+      "sha256": "692e947d424ec3ac4dc43d0c55c1431a23f04564f92c4fcaa79e1ef01737fd5b"
+    },
+    {
+      "path": "assets/r99/outdoor/surround-moss.webp",
+      "bytes": 495260,
+      "sha256": "4ce50bba2253776c2dfa1272c4ca74f124adda4ae4bc671988c8daf4d88352e6"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-00.webp",
+      "bytes": 81094,
+      "sha256": "6be45765551477b8623efb5e0d5aaaa20ffee5f084bed53c28ba09ce97b1dafb"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-01.webp",
+      "bytes": 81014,
+      "sha256": "850743f75642453c4d15bd658677226221b8c718e5c7689dba7f377a120b6c7e"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-02.webp",
+      "bytes": 80964,
+      "sha256": "eb0bf57352d52c817ef4185147f43a4608e427070adcfed0d65d513ccb18ca4f"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-03.webp",
+      "bytes": 80862,
+      "sha256": "a93b80d3763ef1a534b2ea0d0d814420431b8db0ca766c42eabbc1fd8f88514c"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-04.webp",
+      "bytes": 80928,
+      "sha256": "7f5d2be5923d8e9075f2179109dc14b9ec7464fb3f38ab2411deea8eada3fdee"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-05.webp",
+      "bytes": 80742,
+      "sha256": "7dc17455f322f3badc6859fca0a4ce1b6a20f012c23ac516c24771aa386eff60"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-06.webp",
+      "bytes": 81094,
+      "sha256": "6be45765551477b8623efb5e0d5aaaa20ffee5f084bed53c28ba09ce97b1dafb"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-07.webp",
+      "bytes": 80982,
+      "sha256": "9b327a33fc796980f7d61c7eb714d5788fc94229674641009003e1518ee00c6c"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-08.webp",
+      "bytes": 80900,
+      "sha256": "b1cbe9f953fb2525b48890e4d6e928cc0ef8276807118f44dd4d8fe9c9a7da72"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-09.webp",
+      "bytes": 80922,
+      "sha256": "f040fb460efb3596af5ab38cdd24831f40c785566c08e7072a0a22054cf9c908"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-10.webp",
+      "bytes": 80764,
+      "sha256": "5fcff863db74ca663a382d004d6da72c3398bcdcbfb09ec0c6a4edd563edac99"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-dead-11.webp",
+      "bytes": 80726,
+      "sha256": "1b564de906111e6c1f98f5efdaae569460d6aa2e0215b908a692edc53d977c2c"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-00.webp",
+      "bytes": 104964,
+      "sha256": "3320aa03fe0bd8d6338557f4710ad95ecf516c90b096cf2193cefadb5c03fca9"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-01.webp",
+      "bytes": 104352,
+      "sha256": "69b36c0734eb95fcf2c113d33b74ded43aad9dad6af4494d2ca25f683db70c30"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-02.webp",
+      "bytes": 104514,
+      "sha256": "a1a6710fdf6947fe63fcfab20b30570235be0ad85e6b33a5d4c1606f5203b104"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-03.webp",
+      "bytes": 104638,
+      "sha256": "8574d505c9740934712c543784c28dd989ef43c016ecfa77c4ebfc306b071a14"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-04.webp",
+      "bytes": 104436,
+      "sha256": "481b59ebeb38b78c0ca0546e2f56d2be26948a75f641413e119e415dfbf20ab7"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-05.webp",
+      "bytes": 104382,
+      "sha256": "4bd17edae75762b01bee56f3c75525b79edcd91e337ab79253742adb5251845c"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-06.webp",
+      "bytes": 104964,
+      "sha256": "3320aa03fe0bd8d6338557f4710ad95ecf516c90b096cf2193cefadb5c03fca9"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-07.webp",
+      "bytes": 104320,
+      "sha256": "c447cadfb03b28f8ec8e478a2635f97b07c1bbd3c8c6b15b4588f89046c2f4a7"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-08.webp",
+      "bytes": 104188,
+      "sha256": "82619cfc48f3cd6ced6d184bd286b85e3e1de72624862f5d060065702fe4a10a"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-09.webp",
+      "bytes": 104686,
+      "sha256": "34498ccbfd16075030436deb0ae6789299f2a53291f5ebeeec00929ca4c80e83"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-10.webp",
+      "bytes": 104260,
+      "sha256": "ac3dc48d46359e476f4a7b9ce569e24a141effd7c5e7e64fa3b1badb63277cbf"
+    },
+    {
+      "path": "assets/r99/outdoor/tree-living-11.webp",
+      "bytes": 104534,
+      "sha256": "f040a9def3689954e666c933f5b8556d318d26e9bacc0cdbd74cf71dbe87d018"
+    },
+    {
+      "path": "assets/r99/outdoor/trees.json",
+      "bytes": 175,
+      "sha256": "da81b099c4e4a65613ea50c6537149218e5c6e28d403631745685c78b1f840c3"
+    },
+    {
+      "path": "assets/r99/outdoor/water-canal.webp",
+      "bytes": 106742,
+      "sha256": "85a389d6a7b9d856f7117f8e5b2c378d7e10fccae24e4a51130e17eabb7f8e1b"
+    },
+    {
+      "path": "assets/r99/outdoor/water-swamp.webp",
+      "bytes": 203170,
+      "sha256": "aa94679c924e18ee6b27027a732f4da760a9fdddb86c5c99c409407fd3ba0632"
+    },
+    {
       "path": "assets/rc133/art/arena.webp",
       "bytes": 2409050,
       "sha256": "02798e550e6b070c3f43258f83be23f95273ca3ec1c05a7717091c471b2d9978"
@@ -14249,8 +14624,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6560879,
-      "sha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f"
+      "bytes": 6560972,
+      "sha256": "979a41047f6df4720323460e470fd7bb1bcca1d542231d45a0e31bbd7d37a99b"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -14304,8 +14679,8 @@
     },
     {
       "path": "vfx-r98.js",
-      "bytes": 24494,
-      "sha256": "9b4b432c884f47502a23ab71811a1cf6324bd231d5b9c1192cdf8beb4804979f"
+      "bytes": 23553,
+      "sha256": "ff48b18698227b6d2cee2bc0288dbc76d59d8113e72156b8cf1910b1f3cca740"
     },
     {
       "path": "vfx-retro-r89.js",
@@ -14398,6 +14773,11 @@
       "sha256": "98e18b4935ea3aefe582cf7bbc3d3225d56fb3ae42d20b645b55d4f9361bf208"
     },
     {
+      "path": "world-outdoor-r99.js",
+      "bytes": 13983,
+      "sha256": "01878acfbaeb23308c1bcfd481bda61dc4596a004e89e6cef416c3fa7923e9da"
+    },
+    {
       "path": "world-presentation-r81.js",
       "bytes": 14117,
       "sha256": "dc8a937df213812fe4b171dc130eb743a5b10905e9a565c7ba966ed52692cfc9"
@@ -14418,9 +14798,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 2883,
-  "totalBytes": 701551855,
-  "webHTMLSha256": "c5831e10c06432e98dfc8843ca6c1aefedb56c58f5c6ae117349dcf7cba56f3f",
+  "fileCount": 2959,
+  "totalBytes": 713729159,
+  "webHTMLSha256": "979a41047f6df4720323460e470fd7bb1bcca1d542231d45a0e31bbd7d37a99b",
   "largest": [
     {
       "path": "index.html",

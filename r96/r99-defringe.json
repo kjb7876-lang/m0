@@ -1,0 +1,83 @@
+{
+  "schema": "storyworld.r99-defringe/v1",
+  "note": "Processed copies only; originals stay in the R62 baseline packs.",
+  "files": [
+    {
+      "path": "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
+      "fix": "halo",
+      "sourceSHA256": "0b35d983820e4d90db80cd664b21084ebb509d81ef4bc7c8fd3e4ad5fc001734",
+      "outputSHA256": "449f05d9bfa2c6e3b9f2c899d2399bcae642c2f50e474b2ec10338cdcca49aff",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp",
+      "fix": "halo",
+      "sourceSHA256": "de51faaa3b22720d2b95e2b4019ef619637bea513348bbf7d471f7bf7b675779",
+      "outputSHA256": "bef5522ddbf07839a728d095d6682f732388c8cd74f953fdda58f87680bf0c06",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/838c3c4440d1_u2_suppression_knight.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "5ac837dbdf957d0e9c8ee0894e864b113e6fde457058832bd71e62c09b5c1833",
+      "outputSHA256": "a2ece51424165bb73a2fc06a956d1f6d7341ae9d164004a63efb4c36a83603d0",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "2ad463818404e15b45eabb599b573b369ae12cf1676dfe49d5d5aa9e6f10e216",
+      "outputSHA256": "cb2267aabbcac2e93b282200a9057c680a31bc1c22b88b6c2ced032e19dabf3b",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/53c9ce212489_lust-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "54209810c7eba54e328d835827b4766bef6a62115c4ed9c84745ae54ad2af2d2",
+      "outputSHA256": "0d93edb11ce63097ff4932e5988350ab0d610d951075fbb9b8112c541b7ab479",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/556c32928527_pride_cyborg-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "ef580fbcda6ea6ed695ecdeb9054f64c3ef2a9d569c52763fd7d243fe5c9b300",
+      "outputSHA256": "475cdebbbdf46be9a275619182f691d199c214e3611317d94fd1bcb57073a2b1",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/756dc911bd4f_sloth-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "fbfee03316f0c74cbc987df0b5ee86ccd010d4276e033658725a2c67df31a93a",
+      "outputSHA256": "08a3fe24c29c772f85986988268511dabf7101985e2116469683a1b19875bd55",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/907c3f3e5d5e_greed-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "a2aa8ed8a05a4eedd88cfa7259d2c64c4d15a05bd29867a87f59ef0293e3c875",
+      "outputSHA256": "b4ef3d87ae5b465ac2e2aa16324de095c7e0c5c5578e0966db5343f1cf6a6ffc",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "797b313ca01c1620635e03bfa8444fe228de6d60c1d5081120e091efa85fe9f9",
+      "outputSHA256": "3ebd15f869166c129708177958f0dbdaeb9d3b98417d9d444520735e34f01666",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "95ab3fdf5e53ba45b86e0ae4e4f48309416d35a507bd900d888e8f4894694ca7",
+      "outputSHA256": "fdd6b7bccdb26d158f6ea56629d583a6097ea256a727024968e5787770bf70a3",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/f121229f2277_pride-human-attack.webp"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp",
+      "fix": "matte",
+      "sourceSHA256": "306ca2f6452e5a2218a1d4e70911eb0254d853e11f738795978321f2beff8f9e",
+      "outputSHA256": "0fb744789934fe29a96c73ca847f79ad1522eeaa0217861b84f04da1664440da",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/fbaaf49e0721_greed_child-human-attack.webp"
+    }
+  ]
+}

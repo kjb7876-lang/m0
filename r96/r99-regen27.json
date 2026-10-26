@@ -1,0 +1,168 @@
+{
+  "schema": "storyworld.r99-regen27/v1",
+  "note": "docs-regenerated transparent replacements; originals unchanged, loads redirected by assets-clean-r99.js",
+  "files": [
+    {
+      "path": "assets/cult-v3121/c101_black_rose_prior.webp",
+      "sourceSHA256": "90b78bfed8bba1ae97326a33f586e4af2c200746efce375886164ce90f9a6467",
+      "output": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
+      "outputSHA256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
+    },
+    {
+      "path": "assets/cult-v3121/c102_synapse_hound.webp",
+      "sourceSHA256": "424003948345c63349cce5131184e1c9791b1efe664209154f6a13a58d26ee61",
+      "output": "assets/r99/clean/assets/cult-v3121/c102_synapse_hound.webp",
+      "outputSHA256": "3d5e57f63af1d802a7bc40fe36517a55e76d7ad7487d9c50b618db01fa7d9d70"
+    },
+    {
+      "path": "assets/cult-v3121/c102_unity_seraph.webp",
+      "sourceSHA256": "8ed24d3d350ac23e76184e3a2f6ae2e844cfda037b6d5b1c85af3fbd8e0d4d7c",
+      "output": "assets/r99/clean/assets/cult-v3121/c102_unity_seraph.webp",
+      "outputSHA256": "9d99ef0f98fc16e5c863f8b47bc83591ad4c9d180819f600a5d2a6b7eb826784"
+    },
+    {
+      "path": "assets/cult-v3121/c104_white_deacon.webp",
+      "sourceSHA256": "710d703821296020419b9877d05a47662ed84ea272e519ab132088d0bd75f5a4",
+      "output": "assets/r99/clean/assets/cult-v3121/c104_white_deacon.webp",
+      "outputSHA256": "244042de07186c0ef3e7c55411667cf97ce5175ca2a6484af61b4d25cc82c5f7"
+    },
+    {
+      "path": "assets/cult-v3121/c104_white_shepherd.webp",
+      "sourceSHA256": "efced7b1ae96380456092ad58cd5b8aa844d481fd47e695573faa733e76b7f04",
+      "output": "assets/r99/clean/assets/cult-v3121/c104_white_shepherd.webp",
+      "outputSHA256": "76d1e45d49df6b622f34dfa8b4494abb8a3587fa3b56c84b792bb646a498ed25"
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+      "sourceSHA256": "e020771a5cdd9a444554316b46e0175e4757a281556c1d6948695f19513073bc",
+      "output": "assets/r99/clean/assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+      "outputSHA256": "c5fd7fd87d7984b5c9c125cc71f5b603b2b7540710b079a7d4d5a2ef198208eb"
+    },
+    {
+      "path": "assets/generated-v3128/projectiles/chrono_orb.webp",
+      "sourceSHA256": "0f707510ea94720a9a82bf1f59da525c731be70d4dc683c6caaf3763e00b3d9c",
+      "output": "assets/r99/clean/assets/generated-v3128/projectiles/chrono_orb.webp",
+      "outputSHA256": "e7943f4e8e38187c8bece72b7bef34bb156b25163099b0ada4394b80c9e0c572"
+    },
+    {
+      "path": "assets/generated-v3128/projectiles/hospital_syringe.webp",
+      "sourceSHA256": "262bdf68c1f4177b6b87a9bc6a65fb952f6940b4ad3c046d8bfe5b1ded509b02",
+      "output": "assets/r99/clean/assets/generated-v3128/projectiles/hospital_syringe.webp",
+      "outputSHA256": "10c4b80cb03d53a746bf9980e68d0ae37d090d7bd1980a11fabf589a57a71a35"
+    },
+    {
+      "path": "assets/hando-v3123/ego_theft_connector.webp",
+      "sourceSHA256": "5119c11256d096ac4a9a98974cf4678480146594573e59c16fc86de660b355c6",
+      "output": "assets/r99/clean/assets/hando-v3123/ego_theft_connector.webp",
+      "outputSHA256": "3d4c4778215987a5ef5192d9952e1e6664f01449af6df9cf080f5b02daabb1f2"
+    },
+    {
+      "path": "assets/hando-v3123/false_signal_seal_guard.webp",
+      "sourceSHA256": "bd4adb85d904b17fa8cf0f39f7d8e8cbc2c6f7f005b54c82f1d0d2b047e11f78",
+      "output": "assets/r99/clean/assets/hando-v3123/false_signal_seal_guard.webp",
+      "outputSHA256": "87e52d855daf6f76768da06558c23f5b034c06f7e033d5a2f1443a4a77894b80"
+    },
+    {
+      "path": "assets/hando-v3123/memory_excision_connector.webp",
+      "sourceSHA256": "8e91aa6616863e3e718ad1392ca6bf8c471a040fbe99c79523d1e46c4758be89",
+      "output": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp",
+      "outputSHA256": "c468836f7ce57cd86c2562697c0df50c6a6b91e8f38628d793dad62acb59a64c"
+    },
+    {
+      "path": "assets/hando-v3123/nameless_sword_trace.webp",
+      "sourceSHA256": "40060c953d4a514ecf66ba5535a0e636895495c893988eedf327ef3361b8c773",
+      "output": "assets/r99/clean/assets/hando-v3123/nameless_sword_trace.webp",
+      "outputSHA256": "68360376a61a623de23fb91a6235905df0a246a3403ba6ecbdf5732e287bbc11"
+    },
+    {
+      "path": "assets/hando-v3123/order_seal_officer.webp",
+      "sourceSHA256": "48b00e028da3adb59768e85fa9efc22525cb76708b6792d02142f591001c478c",
+      "output": "assets/r99/clean/assets/hando-v3123/order_seal_officer.webp",
+      "outputSHA256": "e96bfc6aab057ce9dbc8721a463f796f5cab22c1375d4793eab35af933da5f07"
+    },
+    {
+      "path": "assets/hando-v3123/phantom_reclaim_blade.webp",
+      "sourceSHA256": "c67a79587efafab31803f8f8fede5e195ca2d75a3fb1503bce0ae960d8d25136",
+      "output": "assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp",
+      "outputSHA256": "d29eb833b6efdb308815a854de040ed1785fc651de3d81ef73c7effcf74e1611"
+    },
+    {
+      "path": "assets/hando-v3123/return_coordinate_devourer.webp",
+      "sourceSHA256": "6564a8e5f2b8649dc56fabbdc66788e185db82cfa73e26bbc59af7636b7a2e72",
+      "output": "assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp",
+      "outputSHA256": "0ccabd1b207dd8ca4816518b4f91439c546911402bf452e943599d199ee46173"
+    },
+    {
+      "path": "assets/hando-v3123/silver_seal_sentinel.webp",
+      "sourceSHA256": "6a51880e101925964d60cc0821ce72dd7e719cb6a379b69e0c0f83c3edfcb894",
+      "output": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp",
+      "outputSHA256": "b13700574f316bd8b400c2a8cdb19925d9f57a6896365f8382a54c84841cbf50"
+    },
+    {
+      "path": "assets/hando-v3123/silverless_shadow.webp",
+      "sourceSHA256": "759c50538aed6df051ef44d79e7238041bf7d03cb872a97e0927b1aa7b8f4b5b",
+      "output": "assets/r99/clean/assets/hando-v3123/silverless_shadow.webp",
+      "outputSHA256": "1003a993b11d26329dee146aaa843fa2d15d9406cd5f1180c48875a8b50b4582"
+    },
+    {
+      "path": "assets/hando-v3123/timeless_silver_scout.webp",
+      "sourceSHA256": "3d4de6b4887fa1216e7fb20ff4542d52912c1ef68b8ae399d5d40cb29b4be7b9",
+      "output": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp",
+      "outputSHA256": "552d4230454a56a2e5b0f3b545dd6a7bafdef157f0860bb9463a4dc70759790a"
+    },
+    {
+      "path": "assets/heroes/normalized/gunner/player_roll.webp",
+      "sourceSHA256": "6fb9cf16fb55b8ceaad95c919c06fa4e8c0a7b45aaf403196eef2bb8abea9c7a",
+      "output": "assets/r99/clean/assets/heroes/normalized/gunner/player_roll.webp",
+      "outputSHA256": "c5c71f0b814904e2592465d30565f8b750cbc1cb425ed64651ecf235f19c4136"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_blue_wraith.webp",
+      "sourceSHA256": "408cd6e25207cbeefa115eeb8895b0b08e23cd5b456aee7fc4b6d98c100b7d9d",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_blue_wraith.webp",
+      "outputSHA256": "93ee696806a4aa8ea6aa53def2864f62ddb7dff49b6194908d22dc1378148097"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_cyborg_hound.webp",
+      "sourceSHA256": "b3b4582f9931d4e28ef490179b522b2b1d6acbc46bd388e0d919e6daa3867ee2",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_cyborg_hound.webp",
+      "outputSHA256": "bb467bd6b6e0225e3c54484156da1d7eddb156f34d248c1c7b5eca7660402009"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_memory_orb.webp",
+      "sourceSHA256": "e9abb9d31f4d97f2aca3ff12c0600abb8aeb47bcd6f538b208d6ccb7b5d23f51",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp",
+      "outputSHA256": "ece2084e751758154c108b19d701790515c69ef41b31db2919586549565f22a3"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_observer_spider.webp",
+      "sourceSHA256": "a59cce82e14ca9c342bbcfb23a5d0c3cea20788ab26630dae4b3f88bfece49f9",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_observer_spider.webp",
+      "outputSHA256": "59d51a99f3943947be4d088f79703480756719e4f2bf6543bea3c71555970e8c"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_reactor_collector.webp",
+      "sourceSHA256": "5831f44240ce8eb82b03362c6a6e882009162ee4ffceb110d3e73a81793c9955",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp",
+      "outputSHA256": "60f6a6cd14fc1d50d866e16f0bd696f87873637abf44f3159499087697b2d489"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_resonance_knight.webp",
+      "sourceSHA256": "ab55fc3c2cc5f4d6def9c7fb3ceac575bf138bf5d1769b81943be1c02c0dbbfd",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_resonance_knight.webp",
+      "outputSHA256": "d391bd487de52b483d0cc64c5ab1cc914018d598427b282b3623a87506dd3e1d"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_suppression_knight.webp",
+      "sourceSHA256": "7374cc4164e865bb1898f1c916b6b57a349545cab40291cd05aad8711b85aab9",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp",
+      "outputSHA256": "7396f78467ed221c3e535d95e67fb2496e1e035e40781787675e1e3b6116d1b0"
+    },
+    {
+      "path": "assets/u2/generated-v350/u2_void_wraith.webp",
+      "sourceSHA256": "160880b08e5a701fd17341f7ca86754e378ae367e96465c4959eae0b0c706d80",
+      "output": "assets/r99/clean/assets/u2/generated-v350/u2_void_wraith.webp",
+      "outputSHA256": "789a4d3b18de0a35c621fcb2b7a7c8e3fb0754136aac66364c8d1da0ef698737"
+    }
+  ]
+}
