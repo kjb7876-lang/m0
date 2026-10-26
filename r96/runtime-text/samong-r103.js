@@ -165,8 +165,12 @@
    for(const e of r.enemies)if(living(e)&&e.samongR103){e.fadeR103=(e.fadeR103||0)+dt;if(e.fadeR103>1.2){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}}
    r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,r.exploration.samongR103.centre,'미로로 내려가는 문');return;}
+  attackTokens();
   const alive=r.enemies.filter(living).length,cap=caps().survival,need=GOAL-S.kills;if(time<x.spawnAt||alive>=Math.min(cap,need))return;
-  x.spawnAt=time+.45;const batch=Math.min(4,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,hpScale:.42,tag:'s',aggro:60});if(e){e.damage=(e.damage||8)*.7;e.samongSurvival=true;}}}
+  x.spawnAt=time+.45;const batch=Math.min(4,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+ // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
+ function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.15:1.4);e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
+ function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,4-busy)))e.cd=Math.max(e.cd||0,.25+Math.random()*.35);}
  function tickMaze(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
   if(!x.portal)openPortal(r,L.exit,'미로의 출구');
   // Bounded periodic spawns at junctions far from the player, never near the exit or the lamp.
@@ -306,7 +310,7 @@
   // walks toward the stage goal instead.
   if(typeof drawExits==='function'){const exitsBase=drawExits;drawExits=function(...a){if(here())return;return exitsBase.apply(this,a);};}
   if(typeof travel==='function'){const travelBase=travel;travel=function(...a){if(here())return false;return travelBase.apply(this,a);};}
-  if(typeof guideStep==='function'){const guideBase=guideStep;let guideAt=0;guideStep=function(dt,...a){if(!here())return guideBase.call(this,dt,...a);try{if(typeof guide!=='undefined'&&guide&&!modal&&!loading&&player.hp>0&&time>=guideAt){guideAt=time+.6;const g=navGoal();if(g&&Math.hypot(g.x-player.x,g.y-player.y)>1.6){route=findPath(player,g);command=null;}}}catch(e){fail(e);}};}
+  if(typeof guideStep==='function'){const guideBase=guideStep;let guideAt=0;guideStep=function(dt,...a){if(!here())return guideBase.call(this,dt,...a);try{if(typeof guide!=='undefined'&&guide&&!modal&&!loading&&player.hp>0&&time>=guideAt){guideAt=time+.6;const g=navGoal();if(g&&Math.hypot(g.x-player.x,g.y-player.y)>1.6){const w=routeTo(g);if(w.length){route=w;command=null;}}}}catch(e){fail(e);}};}
   const finishBase=finishEncounter;finishEncounter=function(...a){if(here())return;return finishBase.apply(this,a);};
   const completeBase=completeRegion;completeRegion=function(id,...a){if(here())return;return completeBase.apply(this,[id,...a]);};
   const interactBase=interact;interact=function(...a){try{if(here()&&!modal&&!loading&&player.hp>0){const p=nearMine();if(p&&use(p))return;if(distance(player,room.objective)<2.7)return;}}catch(e){fail(e);}return interactBase.apply(this,a);};
@@ -334,8 +338,10 @@
   set('questInlineSummary',(q('questText')?.textContent||'')+' · '+(q('questDestination')?.textContent||''));}
  function inspect(){const r=here()?room:null,x=r?.samongR103;return{revision:REV,resumeNote,state:JSON.parse(JSON.stringify(S)),zone,layer,here:!!r,stage:x?.stage,ep:x?.ep,alive:r?r.enemies.filter(living).length:0,portal:x?.portal||null,bossUp:!!x?.bossUp,boss:x?.boss||null,failures,lastError,donorFail:[...donorFail],layout:r?{bounds:r.exploration.bounds,walls:r.exploration.walls.length,floor:r.exploration.floorCells.length,extra:r.exploration.samongR103}:null};}
  // Test hooks: jump to a stage, add kills (counted through the same kill path), reach a point.
- const test={go:(ep,stage)=>go(ep,stage),kill:(n=1)=>{let k=0;for(const e of [...room.enemies])if(k<n&&living(e)&&e.samongSurvival){e.hp=1;hitEnemy(e,9e9);k++;}return k;},setKills:n=>{S.kills=Math.max(0,Math.min(GOAL,n));},teleport:(x,y)=>{player.x=x;player.y=y;cam={x,y};},near:kind=>room.props.find(p=>p.samongR103===kind)};
+ const test={go:(ep,stage)=>go(ep,stage),kill:(n=1)=>{let k=0;for(const e of [...room.enemies])if(k<n&&living(e)&&e.samongSurvival){e.hp=1;hitEnemy(e,9e9);k++;}return k;},setKills:n=>{S.kills=Math.max(0,Math.min(GOAL,n));},teleport:(x,y)=>{player.x=x;player.y=y;cam={x,y};},near:kind=>room.props.find(p=>p.samongR103===kind),route:()=>{const g=navGoal();return g?routeTo(g):[];}};
  // Compass and 길잡이 point at the stage goal instead of the host region's objective.
+ // A path from the player to g. Hugging a wall can leave the player inside the path clearance, where findPath gives nothing, so start from the nearest open cell centre.
+ function routeTo(g){let r=[];try{r=findPath(player,g)||[];}catch{}if(r.length)return r;const cx=Math.floor(player.x),cy=Math.floor(player.y);let best=null;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const q={x:cx+dx+.5,y:cy+dy+.5};if(blocked(q.x,q.y,.29,room)||!clearPath3(player,q,.2,room))continue;const d=Math.hypot(q.x-player.x,q.y-player.y);if(!best||d<best.d)best={q,d};}if(!best)return[];let rest=[];try{rest=findPath(best.q,g)||[];}catch{}return rest.length||Math.hypot(best.q.x-g.x,best.q.y-g.y)<1.2?[best.q,...rest]:[];}
  function navGoal(){if(!here())return null;const x=room.samongR103,L=room.exploration.samongR103,pt=(p,label,kind)=>p&&Number.isFinite(p.x+p.y)?{x:p.x,y:p.y,label,kind}:null;
   if(x.portal)return pt(x.portal,x.portal.label||'문','exit');
   if(x.stage==='survival'){let best=null,d=1e9;for(const e of room.enemies)if(living(e)){const k=Math.hypot(e.x-player.x,e.y-player.y);if(k<d){d=k;best=e;}}return best?pt(best,'누적 처치 '+S.kills+'/'+GOAL,'enemy'):pt(L.centre,'생존전','objective');}
