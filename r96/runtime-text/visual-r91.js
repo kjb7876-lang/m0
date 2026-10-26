@@ -30,13 +30,15 @@
  // Full-height vertical faces whose outward side looks toward the camera.
  // Winding differs between wall builders (regional walls are reversed), so the
  // outward side is taken from the native walkability query, not the normal sign.
- function faces(r,sources,frame){const T=r.T,v=new T.Vector3(),seen=new Map(),view=new T.Vector3();r.camera.getWorldDirection(view);
+ // R100: outdoor hedge / ruin walls (R98 open scenes, about 1 unit high) take
+ // decor too, scaled to the wall.
+ function faces(r,sources,frame){const T=r.T,v=new T.Vector3(),seen=new Map(),view=new T.Vector3(),open=!!frame.exploration?.r98Scene?.open;r.camera.getWorldDirection(view);
   const solid=(x,z)=>typeof A.explorationBlocked==='function'?!!A.explorationBlocked(frame.exploration,x,z,.05):null;
   for(const mesh of sources){mesh.updateMatrixWorld(true);const P=mesh.geometry.attributes.position,I=mesh.geometry.index;if(!P)continue;
    const at=i=>v.fromBufferAttribute(P,I?I.getX(i):i).applyMatrix4(mesh.matrixWorld).clone();
    for(let i=0,n=I?I.count:P.count;i+2<n;i+=3){const a=at(i),b=at(i+1),c=at(i+2),nrm=b.clone().sub(a).cross(c.clone().sub(a));
     if(nrm.lengthSq()<1e-12)continue;nrm.normalize();if(Math.abs(nrm.y)>.1)continue;
-    const low=[a,b,c].filter(p=>p.y<.05),top=Math.max(a.y,b.y,c.y);if(low.length!==2||top<1.6)continue;
+    const low=[a,b,c].filter(p=>p.y<.05),top=Math.max(a.y,b.y,c.y);if(low.length!==2||top<(open?.7:1.6))continue;
     const[p,q]=low,len=Math.hypot(q.x-p.x,q.z-p.z);if(len<1.1)continue;
     // Sort complete endpoints, not their four scalars: transposed walls
     // such as (3,3.5)-(7,3.5) and (3.5,3)-(3.5,7) are different faces.
@@ -44,6 +46,9 @@
     const mx=(p.x+q.x)/2,mz=(p.z+q.z)/2,front=solid(mx+nrm.x*.35,mz+nrm.z*.35),back=solid(mx-nrm.x*.35,mz-nrm.z*.35);
     let nx=nrm.x,nz=nrm.z;if(front===true&&back===false){nx=-nx;nz=-nz;}else if(front===back&&front!==null){seen.set(key,null);continue;}
     if(-(nx*view.x+nz*view.z)<.25){seen.set(key,null);continue;}
+    // Open-scene walls are thick panels: their inner face also passes the
+    // probe above, so keep only faces with open ground just in front.
+    if(open&&solid(mx+nx*.12,mz+nz*.12)){seen.set(key,null);continue;}
     seen.set(key,{a:p,b:q,len,top,nx,nz});}}
   return[...seen.values()].filter(Boolean);}
  // Doors, portals, interaction marks, objectives and authored props keep a clear wall.
@@ -52,13 +57,14 @@
   for(const p of frame.props||[])add(p,/portal/i.test([p.kind,p.type,p.id].join(' '))?3.6:1.7);
   const rm=typeof room!=='undefined'?room:null;for(const p of rm?.markers||[])add(p,2.6);add(rm?.objective,3);add(rm?.altar,3);add(rm?.r72Entry,4);
   add(L?.entry,3.5);for(const p of L?.starts||[])add(p,3.5);return out;}
- function plan(frame,list,zone){const reg=region(frame),items=index.items.filter(i=>i.region===reg),g=guards(frame),slots=[];
+ const OUTDOOR=/moss|roots|vines|thorn|fungus|streak|seep|torch|lantern|brazier|banner|chains|relief|crack|ribbons|shrine|tapestry|candle|crystal|charm|sigil|ember|shield|beam|lamp|niche|web/;
+ function plan(frame,list,zone){const reg=region(frame),open=!!frame.exploration?.r98Scene?.open,items=open?index.items.filter(i=>OUTDOOR.test(i.id)&&(i.region===reg||/^swamp-(A0|A1|B1)/.test(i.id))):index.items.filter(i=>i.region===reg),g=guards(frame),slots=[];if(!items.length)return[];
   for(const f of list){const n=Math.max(1,Math.floor((f.len-1.2)/2.2)+1);
    for(let k=0;k<n;k++){const t=n===1?.5:(.6+k*(f.len-1.2)/Math.max(1,n-1))/f.len,x=f.a.x+(f.b.x-f.a.x)*t,z=f.a.z+(f.b.z-f.a.z)*t;
     if(g.some(q=>Math.hypot(x-q.x,z-q.y)<q.r))continue;slots.push({f,x,z,room:f.len,seed:hash(zone+':'+x.toFixed(2)+':'+z.toFixed(2))});}}
   stats.slots=slots.length;slots.sort((a,b)=>a.seed-b.seed);const picked=[];
   for(const s of slots){if(picked.length>=LIMIT)break;if(picked.some(p=>Math.hypot(p.x-s.x,p.z-s.z)<SPACING))continue;
-   const item=items[s.seed%items.length],w=item.w*WORLD_PER_PX;if(w>s.room-.3)continue;picked.push({...s,item});}
+   const item=items[s.seed%items.length],k=Math.min(1,(s.f.top-.16)/(item.h*WORLD_PER_PX)),w=item.w*WORLD_PER_PX*k;if(w>s.room-.3)continue;picked.push({...s,item,k});}
   return picked;}
  function texture(r,path){const cache=r.r91Textures||(r.r91Textures=new Map());if(cache.has(path))return cache.get(path);
   const t=new r.T.TextureLoader().load(path,()=>{stats.textures++;},undefined,fail);if(r.T.SRGBColorSpace)t.colorSpace=r.T.SRGBColorSpace;t.anisotropy=1;cache.set(path,t);return t;}
@@ -68,7 +74,8 @@
    fragmentShader:'uniform vec3 tint;uniform float strength;varying vec2 vUv;void main(){float d=length(vUv-.5)*2.;float a=(1.-smoothstep(0.,1.,d));a*=a*strength;gl_FragColor=vec4(tint*a,1.);}'});return r.r91HaloMaterial;}
  // Lit decor positions (game x/y, slightly out from the wall) shared with the
  // R90 local-light pool; unlit decor brightness per region (swamp art is dark).
- let decorLights=[];const TONE={swamp:1.4,cave:1.12},SETTLE=900;
+ // Outdoor decor art is as dark as the hedge stone it hangs on; lift it so it reads.
+ let decorLights=[];const TONE={swamp:1.4,cave:1.12},OPEN_GAIN=2.3,SETTLE=900;
  function dispose(r){for(const o of r.r91Decor||[]){o.parent?.remove(o);o.geometry?.dispose();if(o.userData.ownMaterial)o.material.dispose();}r.r91Decor=null;r.r91DecorSig=null;decorLights=[];}
  function disposeAll(r){dispose(r);for(const t of r.r91Textures?.values()||[])t.dispose();r.r91Textures=null;r.r91HaloMaterial?.dispose();r.r91HaloMaterial=null;}
  function ensure(r,frame){const want=prefs.wallDecor&&active(frame)&&index;
@@ -84,15 +91,18 @@
   if(now-r.r91PendingAt<SETTLE){stats.settleWaits=(stats.settleWaits||0)+1;return;}
   dispose(r);r.r91DecorSig=sig;r.r91DecorZone=zoneKey;if(!sources.length)return;const T=r.T,out=[];let lights=0;
   if(r.r91TexturesRegion!==region(frame)){for(const t of r.r91Textures?.values()||[])t.dispose();r.r91Textures=null;r.r91TexturesRegion=region(frame);}
-  for(const p of plan(frame,faces(r,sources,frame),frame.zone)){const it=p.item,w=it.w*WORLD_PER_PX,h=it.h*WORLD_PER_PX,lit=it.kind==='light'||it.kind==='glow',flat=it.kind==='flat';
-   const cy=Math.min(p.f.top-h/2-.08,Math.max(h/2+.15,flat?1.05:lit?1.55:1.4)),yaw=Math.atan2(p.f.nx,p.f.nz),ox=p.f.nx*.035,oz=p.f.nz*.035;
+  const open=!!frame.exploration?.r98Scene?.open;
+  for(const p of plan(frame,faces(r,sources,frame),frame.zone)){const it=p.item,w=it.w*WORLD_PER_PX*(p.k||1),h=it.h*WORLD_PER_PX*(p.k||1),lit=it.kind==='light'||it.kind==='glow',flat=it.kind==='flat';
+   const cy=p.f.top<1.6?Math.max(h/2+.04,p.f.top-h/2-.06):Math.min(p.f.top-h/2-.08,Math.max(h/2+.15,flat?1.05:lit?1.55:1.4)),yaw=Math.atan2(p.f.nx,p.f.nz),ox=p.f.nx*.035,oz=p.f.nz*.035;
    const m=new T.MeshBasicMaterial({map:texture(r,it.path),transparent:true,alphaTest:.04,depthWrite:false,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-4});
-   if(!lit&&TONE[it.region])m.color.setScalar(TONE[it.region]);
+   if(!lit&&(open||TONE[it.region]))m.color.setScalar(open?OPEN_GAIN:TONE[it.region]);
    if(it.kind==='light')decorLights.push({id:it.id,x:p.x+p.f.nx*.7,y:p.z+p.f.nz*.7});
    const mesh=new T.Mesh(new T.PlaneGeometry(w,h),m);mesh.position.set(p.x+ox,cy,p.z+oz);mesh.rotation.y=yaw;mesh.layers.set(2);
    // Unlit decor is graded/dithered as wall (R89 role by name) and darkened by
    // the carried-light pass; lit decor is drawn after that pass so flames read.
-   mesh.name=lit?'r91-decor-lit:'+it.id:'r91-wall-decor:'+it.id;mesh.renderOrder=lit?-990:-1050;mesh.userData={r91Decor:true,presentationOnly:true,ownMaterial:true,item:it.id};
+   // Open-scene wall faces are graded far darker than ward walls and would
+   // swallow unlit decor, so outdoors it keeps a name the R89 wall grade skips.
+   mesh.name=lit?'r91-decor-lit:'+it.id:(open?'r91-open-decor:':'r91-wall-decor:')+it.id;mesh.renderOrder=lit?-990:-1050;mesh.userData={r91Decor:true,presentationOnly:true,ownMaterial:true,item:it.id};
    r.spatialRoot.add(mesh);out.push(mesh);
    if(it.kind==='light'){const s=Math.max(w,h)*1.9,hm=new T.Mesh(new T.PlaneGeometry(s,s),halo(r));hm.position.set(p.x+ox*1.4,cy+h*.18,p.z+oz*1.4);hm.rotation.y=yaw;hm.layers.set(2);hm.renderOrder=-985;hm.name='r91-decor-halo';hm.userData={r91Decor:true,presentationOnly:true};r.spatialRoot.add(hm);out.push(hm);lights++;}
   }

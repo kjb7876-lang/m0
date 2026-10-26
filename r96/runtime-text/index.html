@@ -6731,7 +6731,7 @@ const MEDICAL_ART20=Object.freeze({"path":"assets/visual-test/hospital-medical-t
  }
  function geometry(){
   if(!enabled||settings.flashlight58===false||!started||loading||!room||room.id!==zone||!player||!Number.isFinite(player.x+player.y))return{enabled:false,serial};
-  const L=room.exploration||{},zoom24=Math.max(.2,zoom||1),radius=Math.max(8,Math.min(18,Math.min(W/(2*TILE*zoom24),H/(TILE*zoom24))*.82)),key=[zone,layer,player.x,player.y,Math.round(radius*20),settings.lowFx,room.engaged,room.cleared,room.encounterStage].join('|');
+  const L=room.exploration||{},zoom24=Math.max(.2,zoom||1),radius=Math.max(8,Math.min(18,(H>W*1.2?Math.max:Math.min)(W/(2*TILE*zoom24),H/(TILE*zoom24))*.82)),key=[zone,layer,player.x,player.y,Math.round(radius*20),settings.lowFx,room.engaged,room.cleared,room.encounterStage].join('|');
   if(prior?.room===room&&prior.layout===L&&prior.key===key)return prior;
   const o=[player.x,player.y],segments=(L.hospitalBoundary12||[]).map(w=>w.endpoints),boxes=(L.walls||[]).filter(w=>(!L.hospitalAnalytic12||!w.annex)&&!w.decorative&&w.width>0&&w.depth>0),b=L.bounds||[1,1,N-1,N-1];segments.push([[b[0],b[1]],[b[2],b[1]]],[[b[2],b[1]],[b[2],b[3]]],[[b[2],b[3]],[b[0],b[3]]],[[b[0],b[3]],[b[0],b[1]]]);
   const core=p=>p[0]>=1&&p[0]<29&&p[1]>=1&&p[1]<29;const concealed=zone==='ep1a08'&&!room.engaged&&!room.cleared&&!core(o);if(concealed)segments.push([[1,1],[29,1]],[[29,1],[29,29]],[[29,29],[1,29]],[[1,29],[1,1]]);
@@ -8144,7 +8144,8 @@ function drawTargetReticle38(x,y,bodyWidth){
  function active(){return !!(started&&booted&&!modal&&!loading&&room&&player&&player.hp>0&&player.visible!==false&&!player.disabled&&!regionById[zone]?.safe);}
  function eligible(e){return !!(e&&e.hp>0&&!e.deadRecorded&&e.visible!==false&&!e.disabled&&e.spawnState==='active'&&finite(e.x)&&finite(e.y)&&(!(e.boss||e.midboss||e.persona)||room.engaged));}
  function head(){const q=project(player.x,player.y),height=actorHeight(),lift=clamp(finite(player.visualLiftPx)?player.visualLiftPx:0,0,height*.65);return{x:q.x,y:q.y-height-lift-11,height,lift,foot:{x:q.x,y:q.y}};}
- function obstacleRects(){const stage=root()?.getBoundingClientRect?.();if(!stage)return[];const out=[];for(const id of ['quest','minipanel','bossbar','hint','joystick','touchUse']){const node=$(id);if(!node||node.classList?.contains('hidden')||node.style?.display==='none')continue;const css=typeof getComputedStyle==='function'?getComputedStyle(node):null;if(css&&(css.display==='none'||css.visibility==='hidden'||Number(css.opacity)===0))continue;const r=node.getBoundingClientRect?.();if(!r||r.width<=0||r.height<=0)continue;out.push({id,left:r.left-stage.left-18,top:r.top-stage.top-18,right:r.right-stage.left+18,bottom:r.bottom-stage.top+18});}return out;}
+ let obstacleCacheR100=null,obstacleAtR100=-1;function obstacleRects(){const now=performance.now();if(obstacleCacheR100&&now-obstacleAtR100<250&&now>=obstacleAtR100)return obstacleCacheR100;obstacleAtR100=now;return obstacleCacheR100=obstacleRectsR51();}
+ function obstacleRectsR51(){const stage=root()?.getBoundingClientRect?.();if(!stage)return[];const out=[];for(const id of ['quest','minipanel','bossbar','hint','joystick','touchUse']){const node=$(id);if(!node||node.classList?.contains('hidden')||node.style?.display==='none')continue;const css=typeof getComputedStyle==='function'?getComputedStyle(node):null;if(css&&(css.display==='none'||css.visibility==='hidden'||Number(css.opacity)===0))continue;const r=node.getBoundingClientRect?.();if(!r||r.width<=0||r.height<=0)continue;out.push({id,left:r.left-stage.left-18,top:r.top-stage.top-18,right:r.right-stage.left+18,bottom:r.bottom-stage.top+18});}return out;}
  const inside=(p,r)=>p.x>=r.left&&p.x<=r.right&&p.y>=r.top&&p.y<=r.bottom;
  function avoid(point,bounds,obstacles){let p={...point};for(let i=0;i<8;i++){const r=obstacles.find(r=>inside(p,r));if(!r)return p;const choices=[{x:r.left-1,y:p.y},{x:r.right+1,y:p.y},{x:p.x,y:r.top-1},{x:p.x,y:r.bottom+1}].map(p=>({x:clamp(p.x,bounds.left,bounds.right),y:clamp(p.y,bounds.top,bounds.bottom)})).filter(p=>!inside(p,r));choices.sort((a,b)=>Math.hypot(a.x-point.x,a.y-point.y)-Math.hypot(b.x-point.x,b.y-point.y));if(!choices.length)return null;p=choices[0];}return obstacles.some(r=>inside(p,r))?null:p;}
  function layoutArrow(origin,target,viewport,obstacles=[]){const margin=30,b={left:margin,right:viewport.width-margin,top:margin,bottom:viewport.height-margin};if(b.right<=b.left||b.bottom<=b.top)return null;const dx=target.x-origin.x,dy=target.y-origin.y,length=Math.hypot(dx,dy);if(length<1)return null;const unit={x:dx/length,y:dy/length},outside=target.x<0||target.x>viewport.width||target.y<0||target.y>viewport.height;
@@ -13456,4 +13457,6 @@ function worldArtR74(profile){
 <script src="./world-r98.js"></script>
 <script src="./world-outdoor-r99.js"></script>
 <script src="./assets-clean-r99.js"></script>
+<script src="./polish-r100-data.js"></script>
+<script src="./polish-r100.js"></script>
 <script src="./audio-r98.js"></script>
