@@ -2229,7 +2229,8 @@
     "assets/r100/sig-slash-teal.webp",
     "assets/r100/sig-slash-violet.webp",
     "polish-r100-data.js",
-    "polish-r100.js"
+    "polish-r100.js",
+    "polish-r101.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3304,5 +3305,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e29299da7341176ff4cc0b68ac95afc85034f45ca9e3e7f016034467f49a3b17"
+  "runtimeManifestSHA256": "9a3da810c5f4851b90e4aae89b455ba1462dd23162e28d236e612a1bd5332ffa"
 }

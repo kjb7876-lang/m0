@@ -92,7 +92,7 @@
 
  // ---- effect store --------------------------------------------------------
  const list=[],MAX=56;
- function add(e){if(list.length>=MAX)list.shift();e.id='r98:'+(++serial);e.at=time;list.push(e);return e;}
+ function add(e){if(list.length>=MAX)list.shift();e.id='r98:'+(++serial);e.at=time;if(e.life&&(e.kind==='impact'||e.kind==='release'||e.kind==='burst'))e.life*=1.3;list.push(e);return e;}
  const age=e=>time-e.at;
  function scope(owner,fn){if(typeof ctx?.scope==='function')return ctx.scope(owner,fn);return fn();}
  const groundOwner=(e,x,y)=>({id:e.id+':g',kind:'hazard',x,y,groundAligned:true,r98:true});
@@ -135,13 +135,16 @@
  function sigStrip(kind,e,x,y,t,size,{alpha=1,ay=.5,lift=0,loop=false,angle=0,flat=false,blend='source-over',glow=0}={}){const th=e.th,spec=POL()?.sig?.[kind];if(!th?.sig||!spec||!(size>0)||!(alpha>0))return false;
   const path=sigPath(kind,th.sig),row=typeof readyImage==='function'?readyImage(path):null;if(!row?.image){if(typeof addImage==='function')try{addImage(path,'R100 signature effect');}catch(_){}return false;}
   const n=spec.frames,S=spec.size,i=loop?Math.floor(((time-e.at)*14+(e.seed||0)*3)%n+n)%n:Math.min(n-1,Math.floor(clamp(t,0,.999)*n)),q=P(x,y);
+  // R101: one-shot clips swell in over the first frames and dissolve over the last
+  // third instead of vanishing on a full-bright frame.
+  if(!loop){const k=clamp(t,0,1);alpha*=k<.08?.55+.45*(k/.08):k>.66?Math.max(0,1-(k-.66)/.34):1;size*=.9+.14*k;if(!(alpha>0))return false;}
   ctx.save();try{ctx.translate(q.x,q.y-lift);if(flat)ctx.scale(1,.56);if(angle)ctx.rotate(angle);ctx.globalCompositeOperation=blend;ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);
    if(glow>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glow;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);}}finally{ctx.restore();}stats.signature=(stats.signature||0)+1;return true;}
  // screen angle of a world direction, for the slash crescent
  function screenAngle(a){const o=P(0,0),d=P(Math.cos(a),Math.sin(a));return Math.atan2(d.y-o.y,d.x-o.x);}
  function contact(kind,x,y,t,size,alpha=1){const c=CONTACT[kind];if(!c||!(size>0))return false;const row=typeof readyImage==='function'?readyImage(c.path):null;
   if(!row?.image){if(typeof addImage==='function')try{addImage(c.path);}catch(_){}return false;}
-  const i=Math.min(8,Math.floor(clamp(t,0,.999)*9)),q=P(x,y);ctx.save();try{ctx.globalCompositeOperation=c.blend;ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*256,0,256,256,q.x-size/2,q.y-size*c.ay,size,size);}finally{ctx.restore();}stats.contacts++;return true;}
+  const i=Math.min(8,Math.floor(clamp(t,0,.999)*9)),q=P(x,y),tail=t>.7?Math.max(0,1-(t-.7)/.3):1;if(!(tail>0))return false;ctx.save();try{ctx.globalCompositeOperation=c.blend;ctx.globalAlpha*=alpha*tail;ctx.drawImage(row.image,i*256,0,256,256,q.x-size/2,q.y-size*c.ay,size,size);}finally{ctx.restore();}stats.contacts++;return true;}
  function glow(x,y,h,r,th,a){const q=P(x,y);disc(q,h,r,rgba(th.a,.18*a));disc(q,h,r*.45,rgba(th.b,.22*a));}
  function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.3:1.55),{loop:true,alpha:.3+.65*k,ay:.66,glow:.35*k}))return;
