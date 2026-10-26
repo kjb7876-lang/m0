@@ -13,7 +13,7 @@
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r98.vfx';
  const DEFAULTS=Object.freeze({telegraph:false,effects:true}),LABELS={telegraph:'적 공격 범위 미리보기(선)',effects:'적 스킬 이펙트 (R99 원화)'};
  let prefs={...DEFAULTS},lastError=null,serial=0;
- const stats={roots:0,charges:0,impacts:0,casts:0,releases:0,gathers:0,bursts:0,sparks:0,groundDraws:0,airDraws:0,suppressed:0,dropped:0,errors:0};
+ const stats={roots:0,charges:0,impacts:0,casts:0,releases:0,gathers:0,bursts:0,sparks:0,contacts:0,groundDraws:0,airDraws:0,suppressed:0,dropped:0,errors:0};
  try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
  const fail=e=>{stats.errors++;lastError=String(e?.stack||e);};
  function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -62,7 +62,7 @@
   const age=loop?((time-(key?.at??0))%d+d)%d:clamp(t,0,.999)*d;
   const ok=api.render(id,{x,y,age,scale,alpha,height,key:'r99:'+(key?.id||id)+(lift?':'+lift:''),sourceId:'r99:'+(key?.id||id)+(lift?':'+lift:'')});
   ok?paintStats.drawn++:paintStats.fallback++;return ok;}
- function preload(){const api=F42();if(!api?.ensure)return;const f=family(),set=new Set();for(const k of[f,'boss','hero'])for(const id of Object.values(PAINT[k]||{}))set.add(id);for(const id of set)try{api.ensure(id);}catch(_){}}
+ function preload(){const api=F42();if(!api?.ensure)return;const f=family(),set=new Set();for(const k of[f,'boss','hero'])for(const id of Object.values(PAINT[k]||{}))set.add(id);for(const id of set)try{api.ensure(id);}catch(_){}const ck=CONTACT_BY[f];if(ck&&typeof addImage==='function')try{addImage(CONTACT[ck].path);}catch(_){}}
 
  // ---- geometry ------------------------------------------------------------
  const unit=()=>TILE*zoom;
@@ -115,12 +115,21 @@
 
  // ---- drawing: air layer (billboards over the actors) ----------------------
  function disc(q,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(q.x+r,q.y-h);ctx.arc(q.x,q.y-h,r,0,TAU);ctx.fill();}
+ // R8 P6 contact clips (fire, shock, splash): the 9 drawn phases in a 256 px
+ // strip, played once over the impact and anchored at the contact point.
+ const CONTACT={fire:{path:'assets/r99/fx/contact-fire.webp',ay:.56,blend:'lighter'},shock:{path:'assets/r99/fx/contact-shock.webp',ay:.56,blend:'lighter'},splash:{path:'assets/r99/fx/contact-splash.webp',ay:.84,blend:'source-over'}};
+ const CONTACT_BY={ash:'fire',forge:'fire',domestic:'fire',neural:'shock',memory:'shock',clinical:'shock',swamp:'splash',coast:'splash'};
+ function contactFor(e){for(const[k,v]of Object.entries(THEMES))if(v===e.th)return CONTACT_BY[k]||null;return null;}
+ function contact(kind,x,y,t,size,alpha=1){const c=CONTACT[kind];if(!c||!(size>0))return false;const row=typeof readyImage==='function'?readyImage(c.path):null;
+  if(!row?.image){if(typeof addImage==='function')try{addImage(c.path);}catch(_){}return false;}
+  const i=Math.min(8,Math.floor(clamp(t,0,.999)*9)),q=P(x,y);ctx.save();try{ctx.globalCompositeOperation=c.blend;ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*256,0,256,256,q.x-size/2,q.y-size*c.ay,size,size);}finally{ctx.restore();}stats.contacts++;return true;}
  function glow(x,y,h,r,th,a){const q=P(x,y);disc(q,h,r,rgba(th.a,.18*a));disc(q,h,r*.45,rgba(th.b,.22*a));}
  function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.8:1.15,alpha:.25+.7*k}))glow(e.x,e.y,actorHeight()*.5,(14+16*k)*zoom*(M?1.5:1),e.th,.4+.6*k);}
  function drawImpactAir(e,t){const c=centre(e.g),E=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
   const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1);
-  if(!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);}
+  if(!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
+  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}
  function drawCastAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.6:1,alpha:.35+.6*k}))glow(e.x,e.y,actorHeight()*.62,(11+12*k)*zoom*(M?1.6:1.1),e.th,.5+.5*k);}
  function drawReleaseAir(e,t){const k=clamp(t,0,1),p=paintFor(e);
@@ -131,7 +140,8 @@
   const scale=clamp(1.6+R*.7,1.8,M?3.6:2.6);
   const a=paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
   if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
-  if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);}
+  if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);
+  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}
  function drawSparkAir(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
 
  function drawRootInAir(e,t){paint('F091',player.x,player.y,{t:clamp(t,0,1),key:e,scale:1.25,alpha:.9});}

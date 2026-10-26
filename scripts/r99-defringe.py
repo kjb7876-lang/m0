@@ -7,8 +7,10 @@
   (swirls, flames, flying furniture) become transparent; highlights ringed by
   light cloth stay.
 Reads the original bytes from the reconstructed site (scripts/build-r96.py),
-checks them against r96/r99-defringe.json, writes lossless WebP replacements
-under r96/runtime-text and registers them with scripts/sync-r99.py."""
+checks them against r96/r99-defringe.json, writes lossless WebP copies to
+r96/runtime-text/assets/r99/clean/<same path> (originals stay byte-identical;
+assets-clean-r99.js loads the copy instead) and registers them with
+scripts/sync-r99.py."""
 import hashlib,io,json,subprocess,sys
 from pathlib import Path
 import numpy as np
@@ -47,13 +49,13 @@ def matte(im,lum_min=222,sat_max=30,std_max=7.0,min_px=12):
 def main():
     spec=json.loads(SPEC.read_text());done=[]
     for row in spec['files']:
-        src=SITE/row['path'];out=R/'runtime-text'/row['path']
-        if out.exists()and sha(out.read_bytes())==row.get('outputSHA256'):done.append(row['path']);continue
+        src=SITE/row['path'];row['output']='assets/r99/clean/'+row['path'];out=R/'runtime-text'/row['output']
+        if out.exists()and sha(out.read_bytes())==row.get('outputSHA256'):done.append(row['output']);continue
         b=src.read_bytes()
         if sha(b)!=row['sourceSHA256']:raise SystemExit('source changed: '+row['path'])
         im=Image.open(io.BytesIO(b)).convert('RGBA');im={'halo':halo,'matte':matte}[row['fix']](im)
         buf=io.BytesIO();im.save(buf,'WEBP',lossless=True,quality=100,method=6,exact=True)
-        out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(buf.getvalue());row['outputSHA256']=sha(buf.getvalue());done.append(row['path'])
+        out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(buf.getvalue());row['outputSHA256']=sha(buf.getvalue());done.append(row['output'])
     SPEC.write_text(json.dumps(spec,ensure_ascii=False,indent=2)+'\n')
     subprocess.run([sys.executable,str(ROOT/'scripts/sync-r99.py'),*done],check=True)
 if __name__=='__main__':main()

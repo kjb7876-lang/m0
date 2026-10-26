@@ -23,6 +23,7 @@ def main(extra):
   row=rows.get(name)
   if row is None:row=rows[name]={'path':name};m['files'].append(row)
   row['bytes']=len(b);row['sha256']=sha(b)
+ if (R/'runtime-text'/'index.html').exists():m['webHTMLSha256']=sha((R/'runtime-text'/'index.html').read_bytes())
  m['files'].sort(key=lambda r:r['path']);m['fileCount']=len(m['files']);m['totalBytes']=sum(r['bytes'] for r in m['files'])
  mb=(json.dumps(m,ensure_ascii=False,indent=2)+'\n').encode()
  (R/'runtime-manifest.json').write_bytes(mb);spec['runtimeManifestSHA256']=sha(mb)
