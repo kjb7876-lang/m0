@@ -15,7 +15,11 @@ def main(extra):
  rows={r['path']:r for r in m['files']}
  for name in list(spec['textPaths'])+[n for n in extra if n not in spec['textPaths']]:
   b=(R/'runtime-text'/name).read_bytes()
-  if name not in spec['textPaths']:spec['textPaths'].append(name);print('added',name)
+  if name not in spec['textPaths']:
+   # a processed replacement for a baseline file moves from basePaths to textPaths
+   if name in spec['basePaths']:spec['basePaths'].remove(name);print('moved from basePaths',name)
+   if name in spec['mediaPaths']:raise SystemExit('media pack file cannot be replaced: '+name)
+   spec['textPaths'].append(name);print('added',name)
   row=rows.get(name)
   if row is None:row=rows[name]={'path':name};m['files'].append(row)
   row['bytes']=len(b);row['sha256']=sha(b)
