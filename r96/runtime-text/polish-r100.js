@@ -86,9 +86,10 @@
   if(!(prefs.flyers&&row?.fly&&e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead'&&!e.boss&&!e.midboss&&!e.persona&&finite(e.x+e.y)))return enemyBase.call(this,e,...args);
   const own=Object.prototype.hasOwnProperty.call(e,'visualLiftPx'),old=e.visualLiftPx,seed=hash(e.id)%628/100,h=actorHeight();
   if(!(finite(old)&&old>0))e.visualLiftPx=h*(.13+.035*Math.sin(time*2.6+seed));
-  const q=project(e.x,e.y),cy=q.y-e.visualLiftPx-h*.55,k=Math.sin(time*(e.moving||e.attack?13:8)+seed);
-  ctx.save();try{ctx.translate(q.x,cy);ctx.scale(1+.075*k,1-.03*k);ctx.translate(-q.x,-cy);stats.flaps++;return enemyBase.call(this,e,...args);}
-  finally{ctx.restore();if(own)e.visualLiftPx=old;else delete e.visualLiftPx;}};
+  // R101: the beat itself moved to the body pose (polish-r101), so the shadow and
+  // health bar no longer wobble with it; only the hover lift stays here.
+  try{stats.flaps++;return enemyBase.call(this,e,...args);}
+  finally{if(own)e.visualLiftPx=old;else delete e.visualLiftPx;}};
 
  // ---- navigation ----------------------------------------------------------------
  const ward=()=>window.__STORYWORLD_WORLD_COMBAT_R78__;
