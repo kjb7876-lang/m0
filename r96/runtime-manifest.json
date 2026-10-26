@@ -9,8 +9,8 @@
     },
     {
       "path": "assets-clean-r99.js",
-      "bytes": 2413,
-      "sha256": "c6feb29c3913f034037c1d24b70746890a7b3363054c03615eeebacba94cc028"
+      "bytes": 3408,
+      "sha256": "340156de4034dc06971d7ad4951347debfb199d90938cabc1351444faa5132ff"
     },
     {
       "path": "assets-r96.js",
@@ -8658,6 +8658,31 @@
       "sha256": "4b21c40cbf37a9f02827e208cf01f2ec3fff32e1f84e9a1e15c3ef0e6ba61749"
     },
     {
+      "path": "assets/r99/clean/assets/cult-v3121/c101_black_rose_prior.webp",
+      "bytes": 54936,
+      "sha256": "9ac511764c7900ba8149b36c6806487b374d157541484eb1b5ec628f820772f0"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c102_synapse_hound.webp",
+      "bytes": 140794,
+      "sha256": "3d5e57f63af1d802a7bc40fe36517a55e76d7ad7487d9c50b618db01fa7d9d70"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c102_unity_seraph.webp",
+      "bytes": 133264,
+      "sha256": "9d99ef0f98fc16e5c863f8b47bc83591ad4c9d180819f600a5d2a6b7eb826784"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c104_white_deacon.webp",
+      "bytes": 116352,
+      "sha256": "244042de07186c0ef3e7c55411667cf97ce5175ca2a6484af61b4d25cc82c5f7"
+    },
+    {
+      "path": "assets/r99/clean/assets/cult-v3121/c104_white_shepherd.webp",
+      "bytes": 161798,
+      "sha256": "76d1e45d49df6b622f34dfa8b4494abb8a3587fa3b56c84b792bb646a498ed25"
+    },
+    {
       "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/27ef01c10a8f_gluttony-human-attack.webp",
       "bytes": 94328,
       "sha256": "a2ece51424165bb73a2fc06a956d1f6d7341ae9d164004a63efb4c36a83603d0"
@@ -8698,6 +8723,11 @@
       "sha256": "b4ef3d87ae5b465ac2e2aa16324de095c7e0c5c5578e0966db5343f1cf6a6ffc"
     },
     {
+      "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/a43f2c5d3855_Monster_GoblinFluteKing.webp",
+      "bytes": 124972,
+      "sha256": "c5fd7fd87d7984b5c9c125cc71f5b603b2b7540710b079a7d4d5a2ef198208eb"
+    },
+    {
       "path": "assets/r99/clean/assets/generated-v31224/actors-normalized/b00c6229c058_wrath-human-attack.webp",
       "bytes": 98708,
       "sha256": "3ebd15f869166c129708177958f0dbdaeb9d3b98417d9d444520735e34f01666"
@@ -8713,44 +8743,109 @@
       "sha256": "0fb744789934fe29a96c73ca847f79ad1522eeaa0217861b84f04da1664440da"
     },
     {
+      "path": "assets/r99/clean/assets/generated-v3128/projectiles/chrono_orb.webp",
+      "bytes": 300564,
+      "sha256": "e7943f4e8e38187c8bece72b7bef34bb156b25163099b0ada4394b80c9e0c572"
+    },
+    {
+      "path": "assets/r99/clean/assets/generated-v3128/projectiles/hospital_syringe.webp",
+      "bytes": 68794,
+      "sha256": "10c4b80cb03d53a746bf9980e68d0ae37d090d7bd1980a11fabf589a57a71a35"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/ego_theft_connector.webp",
+      "bytes": 92672,
+      "sha256": "3d4c4778215987a5ef5192d9952e1e6664f01449af6df9cf080f5b02daabb1f2"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/false_signal_seal_guard.webp",
+      "bytes": 79576,
+      "sha256": "87e52d855daf6f76768da06558c23f5b034c06f7e033d5a2f1443a4a77894b80"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/memory_excision_connector.webp",
+      "bytes": 117674,
+      "sha256": "c468836f7ce57cd86c2562697c0df50c6a6b91e8f38628d793dad62acb59a64c"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/nameless_sword_trace.webp",
+      "bytes": 107682,
+      "sha256": "68360376a61a623de23fb91a6235905df0a246a3403ba6ecbdf5732e287bbc11"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/order_seal_officer.webp",
+      "bytes": 65506,
+      "sha256": "e96bfc6aab057ce9dbc8721a463f796f5cab22c1375d4793eab35af933da5f07"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/phantom_reclaim_blade.webp",
+      "bytes": 176188,
+      "sha256": "d29eb833b6efdb308815a854de040ed1785fc651de3d81ef73c7effcf74e1611"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/return_coordinate_devourer.webp",
+      "bytes": 126840,
+      "sha256": "0ccabd1b207dd8ca4816518b4f91439c546911402bf452e943599d199ee46173"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/silver_seal_sentinel.webp",
+      "bytes": 89658,
+      "sha256": "b13700574f316bd8b400c2a8cdb19925d9f57a6896365f8382a54c84841cbf50"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/silverless_shadow.webp",
+      "bytes": 164454,
+      "sha256": "1003a993b11d26329dee146aaa843fa2d15d9406cd5f1180c48875a8b50b4582"
+    },
+    {
+      "path": "assets/r99/clean/assets/hando-v3123/timeless_silver_scout.webp",
+      "bytes": 111888,
+      "sha256": "552d4230454a56a2e5b0f3b545dd6a7bafdef157f0860bb9463a4dc70759790a"
+    },
+    {
+      "path": "assets/r99/clean/assets/heroes/normalized/gunner/player_roll.webp",
+      "bytes": 208824,
+      "sha256": "c5c71f0b814904e2592465d30565f8b750cbc1cb425ed64651ecf235f19c4136"
+    },
+    {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_blue_wraith.webp",
-      "bytes": 181976,
-      "sha256": "30a6c61abdc58d61963929758b18f3fc9416984438f5d49a65536941f863c741"
+      "bytes": 202682,
+      "sha256": "93ee696806a4aa8ea6aa53def2864f62ddb7dff49b6194908d22dc1378148097"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_cyborg_hound.webp",
-      "bytes": 167608,
-      "sha256": "f0d3f8c15e66e2934ad99657af24f5eb4c7042143c6b092c33b3edaa3da34656"
+      "bytes": 173822,
+      "sha256": "bb467bd6b6e0225e3c54484156da1d7eddb156f34d248c1c7b5eca7660402009"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp",
-      "bytes": 149812,
-      "sha256": "df24837f5812a55e5420532002967552e5c354dc8c1a273ff3ccb5699d264555"
+      "bytes": 144350,
+      "sha256": "ece2084e751758154c108b19d701790515c69ef41b31db2919586549565f22a3"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_observer_spider.webp",
-      "bytes": 199664,
-      "sha256": "1036f01d59f4110f64e71cba14999d8cf5da5c49245c16c81c3638eb39be8da6"
+      "bytes": 229632,
+      "sha256": "59d51a99f3943947be4d088f79703480756719e4f2bf6543bea3c71555970e8c"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp",
-      "bytes": 153854,
-      "sha256": "60e6a36e8c7fd47d832c6a8bba902eb724b8032330f5bb31b423dfcc483e2593"
+      "bytes": 167140,
+      "sha256": "60f6a6cd14fc1d50d866e16f0bd696f87873637abf44f3159499087697b2d489"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_resonance_knight.webp",
-      "bytes": 147488,
-      "sha256": "4519656605a2b130740f04efc63f5d4045ae58200efa4bb0a7730c8e03c2b558"
+      "bytes": 170792,
+      "sha256": "d391bd487de52b483d0cc64c5ab1cc914018d598427b282b3623a87506dd3e1d"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp",
-      "bytes": 120206,
-      "sha256": "3d3971a308c1c97792f14dc0fc5d11a708a26ec9831b86976948d42f4834ae56"
+      "bytes": 128442,
+      "sha256": "7396f78467ed221c3e535d95e67fb2496e1e035e40781787675e1e3b6116d1b0"
     },
     {
       "path": "assets/r99/clean/assets/u2/generated-v350/u2_void_wraith.webp",
-      "bytes": 194542,
-      "sha256": "16d95664b939c2a94aec5065c1654de0315e4e8d3a61d1ccf2060b16e87f1d37"
+      "bytes": 200216,
+      "sha256": "789a4d3b18de0a35c621fcb2b7a7c8e3fb0754136aac66364c8d1da0ef698737"
     },
     {
       "path": "assets/r99/fx/contact-fire.webp",
@@ -14703,8 +14798,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 2940,
-  "totalBytes": 711183802,
+  "fileCount": 2959,
+  "totalBytes": 713729159,
   "webHTMLSha256": "979a41047f6df4720323460e470fd7bb1bcca1d542231d45a0e31bbd7d37a99b",
   "largest": [
     {

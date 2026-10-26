@@ -3,62 +3,6 @@
   "note": "Processed copies only; originals stay in the R62 baseline packs.",
   "files": [
     {
-      "path": "assets/u2/generated-v350/u2_observer_spider.webp",
-      "fix": "halo",
-      "sourceSHA256": "a59cce82e14ca9c342bbcfb23a5d0c3cea20788ab26630dae4b3f88bfece49f9",
-      "outputSHA256": "1036f01d59f4110f64e71cba14999d8cf5da5c49245c16c81c3638eb39be8da6",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_observer_spider.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_blue_wraith.webp",
-      "fix": "halo",
-      "sourceSHA256": "408cd6e25207cbeefa115eeb8895b0b08e23cd5b456aee7fc4b6d98c100b7d9d",
-      "outputSHA256": "30a6c61abdc58d61963929758b18f3fc9416984438f5d49a65536941f863c741",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_blue_wraith.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_memory_orb.webp",
-      "fix": "halo",
-      "sourceSHA256": "e9abb9d31f4d97f2aca3ff12c0600abb8aeb47bcd6f538b208d6ccb7b5d23f51",
-      "outputSHA256": "df24837f5812a55e5420532002967552e5c354dc8c1a273ff3ccb5699d264555",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_memory_orb.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_suppression_knight.webp",
-      "fix": "halo",
-      "sourceSHA256": "7374cc4164e865bb1898f1c916b6b57a349545cab40291cd05aad8711b85aab9",
-      "outputSHA256": "3d3971a308c1c97792f14dc0fc5d11a708a26ec9831b86976948d42f4834ae56",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_suppression_knight.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_cyborg_hound.webp",
-      "fix": "halo",
-      "sourceSHA256": "b3b4582f9931d4e28ef490179b522b2b1d6acbc46bd388e0d919e6daa3867ee2",
-      "outputSHA256": "f0d3f8c15e66e2934ad99657af24f5eb4c7042143c6b092c33b3edaa3da34656",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_cyborg_hound.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_reactor_collector.webp",
-      "fix": "halo",
-      "sourceSHA256": "5831f44240ce8eb82b03362c6a6e882009162ee4ffceb110d3e73a81793c9955",
-      "outputSHA256": "60e6a36e8c7fd47d832c6a8bba902eb724b8032330f5bb31b423dfcc483e2593",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_reactor_collector.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_void_wraith.webp",
-      "fix": "halo",
-      "sourceSHA256": "160880b08e5a701fd17341f7ca86754e378ae367e96465c4959eae0b0c706d80",
-      "outputSHA256": "16d95664b939c2a94aec5065c1654de0315e4e8d3a61d1ccf2060b16e87f1d37",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_void_wraith.webp"
-    },
-    {
-      "path": "assets/u2/generated-v350/u2_resonance_knight.webp",
-      "fix": "halo",
-      "sourceSHA256": "ab55fc3c2cc5f4d6def9c7fb3ceac575bf138bf5d1769b81943be1c02c0dbbfd",
-      "outputSHA256": "4519656605a2b130740f04efc63f5d4045ae58200efa4bb0a7730c8e03c2b558",
-      "output": "assets/r99/clean/assets/u2/generated-v350/u2_resonance_knight.webp"
-    },
-    {
       "path": "assets/generated-v31224/actors-normalized/8e86a4cadfc7_u2_mirror_priest.webp",
       "fix": "halo",
       "sourceSHA256": "0b35d983820e4d90db80cd664b21084ebb509d81ef4bc7c8fd3e4ad5fc001734",
