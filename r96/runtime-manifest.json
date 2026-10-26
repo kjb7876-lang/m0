@@ -14873,6 +14873,11 @@
       "sha256": "f0201ecfd605210a91455ad2ee54091a0b6ba72e57540879330c1f6ccd3675f3"
     },
     {
+      "path": "hero-fx-r102.js",
+      "bytes": 37990,
+      "sha256": "30b5fdc5d014f6c5b122d095441011aef255a4688e45dc8af8dd96b24d109c00"
+    },
+    {
       "path": "hero-presentation-r83.js",
       "bytes": 24807,
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
@@ -14914,8 +14919,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6561377,
-      "sha256": "acbe28f1428dd65836e3d0641c51904fa4936a9476fc873de9c9b88cab0e0e6f"
+      "bytes": 6561459,
+      "sha256": "0d5da857bc0bb217255673dec3b5fb112f6dd75cfb3c4c395db136bead9936ae"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -14944,13 +14949,18 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 45422,
-      "sha256": "ae5463e30889c030cb170e3f73947860907813103c30ea68a1f8eae07532d307"
+      "bytes": 45880,
+      "sha256": "276ff4d542aa78858936426acdabc415a5b3987043aba0aa67018444b97235de"
     },
     {
       "path": "portal-interaction-r83.js",
       "bytes": 3109,
       "sha256": "d38e825b38487de0a19d0b25ed0696da40519f8a9da1d1355087c53a25b3e422"
+    },
+    {
+      "path": "props-r102.js",
+      "bytes": 12475,
+      "sha256": "788040aafa753ce874d976c78cbc54a3c224c5def08c9abd1ad546523ceaf44c"
     },
     {
       "path": "render-compat-r83.js",
@@ -15029,8 +15039,8 @@
     },
     {
       "path": "visual-r92.js",
-      "bytes": 13889,
-      "sha256": "2458da3adc188f7b0bcc2dd60574d530ba4b360798f9e9fb9c2bd84769a26592"
+      "bytes": 14149,
+      "sha256": "26cbccd29ce1b2f3a81c4b7232d69c046ccefc780680c6241503257936d83703"
     },
     {
       "path": "visual-r93-ui.js",
@@ -15103,9 +15113,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3020,
-  "totalBytes": 718274832,
-  "webHTMLSha256": "acbe28f1428dd65836e3d0641c51904fa4936a9476fc873de9c9b88cab0e0e6f",
+  "fileCount": 3022,
+  "totalBytes": 718326097,
+  "webHTMLSha256": "0d5da857bc0bb217255673dec3b5fb112f6dd75cfb3c4c395db136bead9936ae",
   "largest": [
     {
       "path": "index.html",
