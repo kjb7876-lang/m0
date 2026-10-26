@@ -1,7 +1,11 @@
-/* R101 polish — hero signature auras and skill tints, hit feel, mob motion,
+/* R101 polish — hero signature auras, skill hit feel, mob motion,
    guide continuity and co-op start.
    Presentation only for combat: damage, timing, collision and saves are
-   untouched. The guide additions only act while the guide is already on. */
+   untouched. The guide additions only act while the guide is already on.
+   R102: colours come from the R102 hero palette (primary + secondary), basic
+   attacks stay plain (no hit burst, no tint, no chain heat), and the aura grows
+   with the R102 growth tier (learned skills and passives). Skill art recolouring
+   moved to hero-fx-r102.js. */
 (() => {
 'use strict';
 if(window.__STORYWORLD_POLISH_R101__)return;
@@ -11,13 +15,13 @@ const lerp=(a,b,t)=>a+(b-a)*t,smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 function hash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 const rnd=(seed,i)=>{const x=Math.sin(seed*12.9898+i*78.233)*43758.5453;return x-Math.floor(x);};
 let lastError=null;
-const stats={auraDraws:0,hits:0,hurts:0,poses:0,dust:0,tints:0,guideNav:0,guideActs:0,revives:0,relayRetries:0,picks:0,errors:0};
+const stats={auraDraws:0,hits:0,hurts:0,poses:0,dust:0,guideNav:0,guideActs:0,revives:0,relayRetries:0,picks:0,errors:0};
 function fail(err){stats.errors++;lastError=String(err?.message||err);}
 
 // ---- preferences -----------------------------------------------------------------
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r101.polish';
-const DEFAULTS=Object.freeze({aura:true,tint:true,hitfx:true,motion:true,guide:true});
-const LABELS={aura:'영웅 고유색 오라·각성 형태(불꽃·구슬·천사링·날개)',tint:'영웅 스킬 이펙트를 고유색으로 물들이기',hitfx:'타격감 (타격 불꽃·화면 흔들림·피격 경직)',motion:'잡몹 걷기·비행·피격 움직임 (접힘 제거)',guide:'길잡이 자동 진행 (큰 맵 경로·사망 후 복귀·나침반 탭)'};
+const DEFAULTS=Object.freeze({aura:true,hitfx:true,motion:true,guide:true});
+const LABELS={aura:'영웅 고유색 오라 (스킬·패시브를 배울수록 커지고, 각성 때 불꽃·날개)',hitfx:'스킬 타격감 (스킬 적중 불꽃·피격 경직 · 기본공격은 담백하게)',motion:'잡몹 걷기·비행·피격 움직임 (접힘 제거)',guide:'길잡이 자동 진행 (큰 맵 경로·사망 후 복귀·나침반 탭)'};
 const prefs={...DEFAULTS};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
 function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -33,18 +37,23 @@ function screenAngle(a){const o=project(0,0),d=project(Math.cos(a),Math.sin(a));
 
 // ---- hero palettes ---------------------------------------------------------------
 // a: primary, b: secondary, sig: R100 signature strip colour, form: aura shape.
+// The R102 table (hero-fx-r102.js) is the source; this copy is its fallback.
+const SILVER=[226,232,242],GOLD=[255,198,72];
 const HERO_FX={
- hwando:{a:[255,106,74],b:[255,214,122],sig:'red',form:'flame'},
- seoha:{a:[143,216,255],b:[236,250,255],sig:'cyan',form:'orbs'},
- neon:{a:[92,240,255],b:[201,123,255],sig:'cyan',form:'arcs'},
- michaela:{a:[255,224,138],b:[255,246,216],sig:'gold',form:'angel'},
- lauren:{a:[196,140,255],b:[255,154,213],sig:'violet',form:'runes'},
- hunter:{a:[255,178,74],b:[155,229,106],sig:'orange',form:'petals'},
- slayer:{a:[255,59,74],b:[120,14,30],sig:'red',form:'dark'},
- gunner:{a:[95,224,200],b:[255,217,138],sig:'teal',form:'shards'}
+ hwando:{a:[214,222,234],b:GOLD,sig:'pale',sig2:'gold',form:'blade'},
+ seoha:{a:[120,206,255],b:SILVER,sig:'cyan',sig2:'pale',form:'orbs'},
+ neon:{a:[52,236,176],b:SILVER,sig:'teal',sig2:'pale',form:'arcs'},
+ michaela:{a:[255,122,178],b:SILVER,sig:'pink',sig2:'pale',form:'angel'},
+ lauren:{a:[164,98,255],b:SILVER,sig:'violet',sig2:'pale',form:'runes'},
+ hunter:{a:[255,96,40],b:SILVER,sig:'orange',sig2:'pale',form:'petals'},
+ slayer:{a:[222,22,52],b:SILVER,sig:'red',sig2:'pale',form:'dark'},
+ gunner:{a:[70,124,255],b:SILVER,sig:'blue',sig2:'pale',form:'shards'}
 };
-const fxOf=id=>HERO_FX[id]||HERO_FX.hwando;
+const R102=()=>window.__STORYWORLD_HERO_FX_R102__;
+const fxOf=id=>R102()?.PALETTE?.[id]||HERO_FX[id]||R102()?.PALETTE?.hwando||HERO_FX.hwando;
 const heroOf=p=>fxOf(p?.hero);
+// Growth tier 0–4 from R102 (learned skills and passives; EGO +1, 사몽 4).
+function tierOf(p){try{const t=R102()?.tier?.(p);return Number.isFinite(t)?clamp(Math.round(t),0,4):2;}catch(e){fail(e);return 2;}}
 
 // ---- signature strips (R100 recoloured painted effects, 12 frames) ------------------
 const sigPath=(kind,colour)=>'assets/r100/sig-'+kind+'-'+colour+'.webp';
@@ -52,17 +61,17 @@ function sig(kind,colour,x,y,t,size,{alpha=1,angle=0,glow=0,ay=.5,loop=false,see
  const spec=SIGDATA()?.sig?.[kind];if(!spec||!colour||!(size>0)||!(alpha>0)||typeof readyImage!=='function')return false;
  const path=sigPath(kind,colour),row=readyImage(path);if(!row?.image){if(typeof addImage==='function')try{addImage(path,'R101 hero effect');}catch(_){}return false;}
  const n=spec.frames,S=spec.size,i=loop?Math.floor(((time*14+seed*3)%n+n)%n):Math.min(n-1,Math.floor(clamp(t,0,.999)*n));
- ctx.save();try{ctx.translate(x,y);if(flat)ctx.scale(1,.56);if(angle)ctx.rotate(angle);ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);
+ ctx.save();try{ctx.translate(x,y);if(flat)ctx.scale(1,.56);if(angle)ctx.rotate(angle);if(colour==='pale')ctx.filter='grayscale(1) brightness(1.12)';ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=alpha;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);
   if(glow>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glow;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);}}finally{ctx.restore();}
  return true;}
-function preloadHero(id){if(typeof addImage!=='function')return;const F=fxOf(id);for(const k of['hit','slash','aura'])try{addImage(sigPath(k,F.sig),'R101 hero effect');}catch(_){}}
+function preloadHero(id){if(typeof addImage!=='function')return;const F=fxOf(id);for(const[k,c]of[['hit',F.sig],['slash',F.sig],['aura',F.sig],['gather',F.sig],['slash',F.sig2]])if(c)try{addImage(sigPath(k,c),'R101 hero effect');}catch(_){}}
 
 // ---- hero heat: how charged the aura looks ------------------------------------------
+// Grows with the growth tier and while a skill plays; basic attacks add nothing.
 const heroState=new WeakMap();
-function stateOf(p){let s=heroState.get(p);if(!s){s={chain:0,lastAttack:-9,skillAt:-9,egoWas:false,samongWas:false,petals:[],hurtAt:-9,hurtDx:0};heroState.set(p,s);}return s;}
-function heat(p){const s=stateOf(p);let k=.22;const recent=time-s.lastAttack;if(recent<1.4)k+=.12+.05*Math.min(5,s.chain);if(p.skillAnim>0)k+=.3;if(p.ego>0)k+=.38;if(p.samong>0)k+=.5;if(finite(p.resonance)>=30)k+=.08;return clamp(k,0,1.3);}
-if(typeof basicAttack==='function'){const ab=basicAttack;basicAttack=function(...a){const before=player?.attackCD;const r=ab.apply(this,a);try{if(player&&player.attackCD>0&&!(before>0)){const s=stateOf(player);s.chain=time-s.lastAttack<1.3?s.chain+1:1;s.lastAttack=time;}}catch(e){fail(e);}return r;};}
-if(typeof special==='function'){const sb=special;special=function(...a){const before=player?.specialCD;const r=sb.apply(this,a);try{if(player&&player.specialCD>0&&!(before>0)){const s=stateOf(player);s.skillAt=time;if(prefs.aura&&live())add({kind:'skillRing',x:player.x,y:player.y,F:heroOf(player),life:.6,seed:Math.random()*6});}}catch(e){fail(e);}return r;};}
+function stateOf(p){let s=heroState.get(p);if(!s){s={egoWas:false,samongWas:false,petals:[],hurtAt:-9,hurtDx:0};heroState.set(p,s);}return s;}
+const HEAT_BASE=[.05,.1,.16,.22,.28];
+function heat(p,t=tierOf(p)){let k=HEAT_BASE[t]??.16;if(p.skillAnim>0)k+=.12+.06*t;if(p.ego>0)k+=.38;if(p.samong>0)k+=.5;if(finite(p.resonance)>=30)k+=.06;return clamp(k,0,1.3);}
 
 // ---- own effect store, drawn in the effect pass through a sentinel -----------------
 const list=[],MAX=48;let serial=0;
@@ -100,7 +109,7 @@ function halo(x,fy,h,F,k){const y=fy-h*1.08+Math.sin(time*2)*1.5*Z(),rx=h*(.19+.
  ctx.lineWidth=Math.max(1.5,3.5*Z());ctx.strokeStyle=rgba(F.a,.28);ctx.beginPath();ctx.ellipse(x,y,rx*1.12,ry*1.3,0,0,TAU);ctx.stroke();
  ctx.lineWidth=Math.max(1,2*Z());ctx.strokeStyle=rgba(F.b,.85);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.stroke();}
 // Orbs on a tilted orbit about the chest; sin(a)>0 is in front of the body.
-function orbs(p,x,fy,h,F,k,seed,layer){const n=F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0;if(!n)return;
+function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const n=Math.max(0,(F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0)-cut);if(!n)return;
  const rx=h*(.4+.08*k),ry=h*.13,cy=fy-h*.52,spin=time*(1.4+.8*k)+seed;
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;
   const ox=x+Math.cos(a)*rx,oy=cy+depth*ry+Math.sin(time*3+i)*h*.03,sc=.8+.25*depth,col=i%2?F.b:F.a;
@@ -109,6 +118,17 @@ function orbs(p,x,fy,h,F,k,seed,layer){const n=F.form==='orbs'?4:F.form==='runes
   else if(F.form==='shards'){ctx.save();ctx.translate(ox,oy);ctx.rotate(time*.9+i*1.3);const s=6.5*Z()*sc,blink=.55+.45*Math.sin(time*6+i*2);disc(0,0,12*Z()*sc,rgba(F.a,.16*blink));ctx.fillStyle=rgba(F.a,.85*blink);ctx.beginPath();ctx.moveTo(0,-s*1.4);ctx.lineTo(s,.4*s);ctx.lineTo(-s,.4*s);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(F.b,.8*blink);ctx.lineWidth=1;ctx.stroke();ctx.restore();}
   else{for(let j=1;j<=3;j++){const b=a-j*.2,tx=x+Math.cos(b)*rx,ty=cy+Math.sin(b)*ry;disc(tx,ty,(5-j)*Z()*sc,rgba(col,.3/j));}
    disc(ox,oy,13*Z()*sc,rgba(F.a,.14));disc(ox,oy,7*Z()*sc,rgba(F.a,.45));disc(ox,oy,3.4*Z()*sc,rgba(F.b,1));}}}
+// Orbiting sword-light for 환도: silver crescent blades with a gold edge on a tilted
+// orbit; each blade lies along the orbit and leaves two glints behind it.
+function blades(x,fy,h,F,k,seed,layer,n){const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
+ for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;
+  const ox=x+Math.cos(a)*rx,oy=cy+depth*ry,sc=.8+.25*depth,L=h*.2*sc;
+  for(let j=1;j<=2;j++){const b=a-j*.24;disc(x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(3.2-j)*Z()*sc,rgba(F.a,.28/j));}
+  ctx.save();ctx.translate(ox,oy);ctx.rotate(Math.atan2(Math.cos(a)*ry,-Math.sin(a)*rx));
+  disc(0,0,L*.55,rgba(F.a,.1));
+  ctx.fillStyle=rgba(F.a,.62);ctx.beginPath();ctx.moveTo(-L,0);ctx.quadraticCurveTo(0,-L*.34,L,0);ctx.quadraticCurveTo(0,-L*.1,-L,0);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=rgba(F.b,.9);ctx.lineWidth=Math.max(1,1.3*Z());ctx.beginPath();ctx.moveTo(-L*.9,-L*.02);ctx.quadraticCurveTo(0,-L*.36,L,0);ctx.stroke();
+  ctx.restore();}}
 // Circuit arcs for 네온: jittered polylines around the body, re-rolled 18×/s.
 function arcs(x,fy,h,F,k,seed){const n=lowFx()?2:3,frame=Math.floor(time*18),cy=fy-h*.5;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  for(let i=0;i<n;i++){if(rnd(seed+frame,i*3)>.55+.45*k)continue;const a0=rnd(seed+frame,i*7)*TAU,a1=a0+1.2+rnd(seed+frame,i*7+1)*2.2,r=h*(.32+.2*rnd(seed+frame,i*7+2));
@@ -128,50 +148,58 @@ function pillar(x,fy,h,F,t){const k=1-t,w=h*(.22+.1*t),H=h*(1.6+.6*t);ctx.global
  for(const[s,col,al]of[[1,F.a,.18],[.5,F.b,.3]]){ctx.fillStyle=rgba(col,al*k);ctx.beginPath();ctx.moveTo(x-w*s,fy);ctx.lineTo(x-w*s*.45,fy-H);ctx.lineTo(x+w*s*.45,fy-H);ctx.lineTo(x+w*s,fy);ctx.closePath();ctx.fill();}}
 
 function field(x,fy,h,F,k){const cy=fy-h*.5,pulse=1+.04*Math.sin(time*3.1);ctx.globalCompositeOperation='lighter';ctx.save();ctx.translate(x,cy);ctx.scale(pulse,pulse*1.35);disc(0,0,h*.46,rgba(F.a,.05+.08*k));disc(0,0,h*.34,rgba(F.a,.07+.1*k));disc(0,0,h*.2,rgba(F.b,.05+.08*k));ctx.restore();}
-function auraBack(p){const F=heroOf(p),k=heat(p),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100,awake=p.ego>0||p.samong>0;
+// Growth gating: tier 0 a faint ground glow, 1 adds the body field, 2 shows the hero's
+// form faintly with fewer pieces, 3 most of it, 4 (and EGO/사몽) all of it.
+function formLevel(p,t){if(p.ego>0||p.samong>0||t>=4)return{on:true,alpha:1,cut:0};if(t>=3)return{on:true,alpha:.85,cut:1};if(t>=2)return{on:true,alpha:.55,cut:2};return{on:false,alpha:0,cut:9};}
+function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100,awake=p.ego>0||p.samong>0;
  scope({id:'r101:aura-back:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{
-  groundGlow(q,h,F,k);field(q.x,fy,h,F,k);
-  if(F.form==='runes')runeRing(q,h,F,k);
-  if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
-  if(F.form==='angel'||p.samong>0)wings(q.x,fy,h,F,k,seed);
-  orbs(p,q.x,fy,h,F,k,seed,'back');
+  groundGlow(q,h,F,k);if(t>=1||awake)field(q.x,fy,h,F,k);
+  if(L.on){ctx.globalAlpha*=L.alpha;
+   if(F.form==='runes'&&(t>=3||awake))runeRing(q,h,F,Math.max(k,.5+.15*Math.max(0,t-2)));
+   if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
+   if(F.form==='angel'&&(t>=3||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed);
+   if(F.form==='blade')blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
+   orbs(p,q.x,fy,h,F,k,seed,'back',L.cut);}
  }finally{ctx.restore();}});stats.auraDraws++;}
-function auraFront(p){const F=heroOf(p),k=heat(p),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
- scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{
+function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
+ if(!L.on)return;
+ scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{ctx.globalAlpha*=L.alpha;
   if(F.form==='angel'||p.samong>0)halo(q.x,fy,h,F,k);
   if(F.form==='arcs')arcs(q.x,fy,h,F,k,seed);
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);
-  orbs(p,q.x,fy,h,F,k,seed,'front');
+  if(F.form==='blade')blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
+  orbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
  }finally{ctx.restore();}});}
 const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,on=!!(p&&prefs.aura&&p.hp>0&&p.visible!==false&&p.disabled!==true&&finite(p.x+p.y,NaN)===p.x+p.y);
  if(on)try{auraBack(p);}catch(e){fail(e);}const r=heroBase.apply(this,a);if(on)try{auraFront(p);}catch(e){fail(e);}return r;};
 
-// ---- hero skill tints: the native slash/burst/sigil drawn again in the hero's colour ---
-const tints=new Map();
-function tinted(path,F){const key=path+'|'+F.a.join(',');if(tints.has(key))return tints.get(key);const row=typeof readyImage==='function'?readyImage(path):null;if(!row?.image)return null;let cv=null;
- try{const im=row.image,w=im.naturalWidth,h=im.naturalHeight;if(!(w>0&&h>0))return null;cv=document.createElement('canvas');cv.width=w;cv.height=h;const c=cv.getContext?.('2d');if(!c)return null;
-  c.drawImage(im,0,0);c.globalCompositeOperation='multiply';c.fillStyle=rgba(F.a,1);c.fillRect(0,0,w,h);c.globalCompositeOperation='destination-in';c.drawImage(im,0,0);}catch(e){fail(e);cv=null;}
- if(tints.size>=24)tints.delete(tints.keys().next().value);tints.set(key,cv);if(cv)stats.tints++;return cv;}
-const TINTED=new Set(['slash','burst','sigil']);
-const fxBase=fx;fx=function(type,x,y,opt={}){try{if(prefs.tint&&TINTED.has(type)&&typeof e568HeroActionContext!=='undefined'&&e568HeroActionContext?.heroId&&live())opt={...opt,heroIdR101:String(e568HeroActionContext.heroId)};}catch(e){fail(e);}return fxBase.call(this,type,x,y,opt);};
-function drawTint(e){const F=fxOf(e.heroIdR101),cv=tinted(e.asset,F);if(!cv)return;const q=project(e.x,e.y),t=clamp(e.age/e.life,0,1),alpha=Math.sin(Math.PI*Math.min(.999,t))*(e.alpha??1)*.7,unit=TILE*Z();
- ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=alpha;
-  if(e.type==='slash'){const d=project(e.x+Math.cos(e.angle),e.y+Math.sin(e.angle)),a=Math.atan2(d.y-q.y,d.x-q.x),size=e.size*unit*1.15;ctx.translate(q.x+Math.cos(a)*size*.25,q.y-actorHeight()*.3+Math.sin(a)*size*.25);ctx.rotate(a);ctx.drawImage(cv,-size/2,-size*.325,size,size*.65);}
-  else{const size=e.size*unit*(.8+t*.3);ctx.translate(q.x,q.y-(e.type==='burst'?actorHeight()*.3:5));if(e.type==='burst'&&e.angle)ctx.rotate(e.angle);ctx.drawImage(cv,-size/2,-(e.type==='sigil'?size*.31:size/2),size,e.type==='sigil'?size*.62:size);}
- }finally{ctx.restore();}}
-
-// ---- hit feel: hero → enemy -----------------------------------------------------------
-const flinch=new WeakMap();
+// ---- hit feel: hero skill → enemy -------------------------------------------------------
+// Only skill hits (Q, Z/X/C, skill shots, the EGO shock) get the hero-colour burst; a
+// basic attack keeps the plain native spark. The burst grows with the growth tier.
+const flinch=new WeakMap(),lastHitFx=new WeakMap();
 function bodyLift(e){const h=actorHeight(),bodyH=h*finite(e.combatProfile?.spriteRect?.height,1)*finite(e.defScale,1);return bodyH*.45+clamp(finite(e.visualLiftPx),0,h);}
-function onHeroHit(e,heroId,action){const F=fxOf(heroId),s=stateOf(player),skill=action?.kind==='skill',boss=!!(e.boss||e.midboss),h=actorHeight();
+// A source that says what it is decides; the action in progress only speaks for sources
+// that carry nothing (melee calls made inside special()).
+function skillHit(source,action){
+ if(source&&typeof source==='object'){
+  if(source.storyWER)return String(source.sourceHero||player.hero);
+  const sc=source.e568HeroActionContext;if(sc&&typeof sc==='object')return sc.kind==='skill'?String(sc.heroId||player.hero):null;
+  if(typeof source.attackKind9==='string')return source.friendly!==false&&source.attackKind9==='skill'?String(source.sourceHero||player.hero):null;
+  if(source.kind==='awakening-shock'&&source.side==='hero')return String(player.hero);
+  if(source.friendly===false)return null;}
+ return action?.kind==='skill'?String(action.heroId||player.hero):null;}
+function onHeroHit(e,heroId){const last=lastHitFx.get(e);if(last!==undefined&&time>=last&&time-last<.08)return;lastHitFx.set(e,time);
+ const F=fxOf(heroId),t=tierOf(player),boss=!!(e.boss||e.midboss),h=actorHeight();
  let x=e.x,y=e.y;const imp=effects.findLast?.(f=>f.type==='e568HeroImpact'&&f.age===0&&f.targetIdE568===String(e.id));if(imp){x=imp.x;y=imp.y;}
- const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(skill?1.45:s.chain>=3?1.15:1)*(boss?1.25:1),heavy=skill||HEROES?.[heroId]?.type==='heavy'||HEROES?.[heroId]?.type==='blade';
- add({kind:'heroHit',x,y,lift:bodyLift(e),F,sa,size:h*(boss?1.45:1.05)*strength,life:.36+.12*(strength-1),seed:Math.random()*6,heavy,skill});
+ const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(1.12+.1*t)*(boss?1.2:1);
+ add({kind:'heroHit',x,y,lift:bodyLift(e),F,sa,size:h*(boss?1.45:1.05)*strength,life:.34+.12*(strength-1),seed:Math.random()*6,heavy:t>=1,tier:t});
  flinch.set(e,{at:time,dx:Math.cos(sa),dy:Math.sin(sa),k:boss?.35:1});
- if(!reduced()&&typeof shake==='number'){const want=skill?.55:boss?.4:s.chain>=3?.22:0;if(want>shake)shake=want;}
+ if(!reduced()&&typeof shake==='number'){const want=.3+.06*t;if(want>shake)shake=want;}
  stats.hits++;}
-const hitBase=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp,action=(typeof e568HeroActionContext!=='undefined'&&e568HeroActionContext)||source?.e568HeroActionContext||null;const r=hitBase.call(this,e,value,source,...rest);
- try{if(prefs.hitfx&&live()&&e&&Number.isFinite(before)&&e.hp<before){const heroId=String(action?.heroId||(source?.friendly===true||source?.owner==='hero'||source?.kind==='awakening-shock'&&source?.side==='hero'?player.hero:''));if(heroId&&HERO_FX[heroId])onHeroHit(e,heroId,action);}}catch(err){fail(err);}return r;};
+const hitBase=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp;let heroId=null;
+ try{if(prefs.hitfx&&live())heroId=skillHit(source,typeof e568HeroActionContext!=='undefined'?e568HeroActionContext:null);}catch(err){fail(err);}
+ const r=hitBase.call(this,e,value,source,...rest);
+ try{if(heroId&&e&&Number.isFinite(before)&&e.hp<before&&(R102()?.PALETTE?.[heroId]||HERO_FX[heroId]))onHeroHit(e,heroId);}catch(err){fail(err);}return r;};
 
 // ---- hit feel: enemy → hero -----------------------------------------------------------
 let hurtFlash=0,flashEl=null;
@@ -187,30 +215,27 @@ if(R48&&typeof R48.applyBodyPose==='function'){const poseBase=R48.applyBodyPose;
  try{if(hero&&prefs.hitfx&&!reduced()&&live()&&c){const s=heroState.get(player);if(s){const u=(time-s.hurtAt)/.26;if(u>=0&&u<1){const g=Math.sin(Math.PI*u)*(1-u*.5);c.translate(s.hurtDx*5*Z()*g,0);c.rotate(s.hurtDx*.07*g);c.scale(1+.05*g,1-.06*g);}}}}catch(e){fail(e);}return r;}});}
 
 // ---- drawing of own effects ---------------------------------------------------------
-function drawHeroHit(e,t){const q=project(e.x,e.y),y=q.y-e.lift,F=e.F,k=1-t,ease=k*k,s=e.size*(.8+.35*(1-ease));
+function drawHeroHit(e,t){const q=project(e.x,e.y),y=q.y-e.lift,F=e.F,k=1-t,ease=k*k,s=e.size*(.8+.35*(1-ease)),T=e.tier??2;
  sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:.95*fadeOut(t),glow:.45*ease});
+ if(T>=3&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
  if(e.heavy)sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  disc(q.x,y,s*.22*(1-ease*.5),rgba(F.b,.55*ease*ease));
  ctx.lineWidth=Math.max(1.5,3*Z()*k);ctx.strokeStyle=rgba(F.b,.9*ease);ctx.beginPath();ctx.ellipse(q.x,y,s*.4*(.35+.65*(1-ease)),s*.24*(.35+.65*(1-ease)),0,0,TAU);ctx.stroke();
- const n=lowFx()?5:9,reach=e.size/actorHeight();for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.9,len=(14+30*rnd(e.seed,i+9))*Z()*reach,d=len*(.3+1.1*(1-ease));
+ const n=lowFx()?4:5+T,reach=e.size/actorHeight();for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.9,len=(14+30*rnd(e.seed,i+9))*Z()*reach,d=len*(.3+1.1*(1-ease));
   const x0=q.x+Math.cos(a)*d*.5,y0=y+Math.sin(a)*d*.5*.7,x1=q.x+Math.cos(a)*d,y1=y+Math.sin(a)*d*.7;ctx.strokeStyle=rgba(i%2?F.b:F.a,.95*ease);ctx.lineWidth=Math.max(1.2,(3.2-2*t)*Z());ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}
- if(e.skill){ctx.lineWidth=Math.max(1,1.5*Z());ctx.strokeStyle=rgba(F.a,.55*ease);ctx.beginPath();ctx.ellipse(q.x,q.y,s*.7*(1-ease*.5),s*.35*(1-ease*.5),0,0,TAU);ctx.stroke();}}
+ if(T>=2){ctx.lineWidth=Math.max(1,1.5*Z());ctx.strokeStyle=rgba(F.a,.55*ease);ctx.beginPath();ctx.ellipse(q.x,q.y,s*.7*(1-ease*.5),s*.35*(1-ease*.5),0,0,TAU);ctx.stroke();}}
 function drawHeroHurt(e,t){const q=project(e.x,e.y),y=q.y-e.lift,k=1-t,ease=k*k,h=actorHeight(),s=h*1.1;
  sig('hit',e.colour,q.x,y,t,s,{alpha:.85*fadeOut(t),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';const n=lowFx()?3:5;
  for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.4,d=(8+18*rnd(e.seed,i+5))*Z()*(.3+1.1*(1-ease));ctx.strokeStyle=rgba(i%2?[255,120,120]:e.rgb,.85*ease);ctx.lineWidth=Math.max(1,2*Z()*k);ctx.beginPath();ctx.moveTo(q.x+Math.cos(a)*d*.5,y+Math.sin(a)*d*.35);ctx.lineTo(q.x+Math.cos(a)*d,y+Math.sin(a)*d*.7);ctx.stroke();}}
-function drawSkillRing(e,t){const q=project(e.x,e.y),F=e.F,h=actorHeight(),k=1-t;ctx.globalCompositeOperation='lighter';
- ctx.lineWidth=Math.max(1.5,4*Z()*k);ctx.strokeStyle=rgba(F.a,.85*k);ctx.beginPath();ctx.ellipse(q.x,q.y,h*(.3+1.5*smooth(t)),h*(.15+.75*smooth(t)),0,0,TAU);ctx.stroke();
- ctx.lineWidth=Math.max(1,1.5*Z());ctx.strokeStyle=rgba(F.b,.6*k);ctx.beginPath();ctx.ellipse(q.x,q.y,h*(.2+.8*smooth(t)),h*(.1+.4*smooth(t)),0,0,TAU);ctx.stroke();
- sig('aura',F.sig,q.x,q.y-h*.1,t,h*1.7,{alpha:.8*fadeOut(t,.5),ay:.66,glow:.4*k,loop:true,seed:e.seed});}
 function drawPowerUp(e,t){const q=project(e.x,e.y),h=actorHeight(),lift=clamp(finite(player?.visualLiftPx),0,h*.65);pillar(q.x,q.y-lift,h,e.F,t);
  const k=1-t;ctx.globalCompositeOperation='lighter';ctx.lineWidth=Math.max(1,2.5*Z()*k);ctx.strokeStyle=rgba(e.F.b,.75*k);ctx.beginPath();ctx.ellipse(q.x,q.y,h*(.25+1.3*smooth(t)),h*(.12+.65*smooth(t)),0,0,TAU);ctx.stroke();}
 function drawDust(e,t){const q=project(e.x,e.y),k=1-t,h=actorHeight();ctx.globalCompositeOperation='source-over';for(let i=0;i<3;i++){const a=e.seed+i*2.1,d=(3+9*t)*Z()*e.scale,r=(2.2+3.5*t)*Z()*e.scale;ctx.fillStyle=rgba([205,192,168],.3*k*k);ctx.beginPath();ctx.ellipse(q.x+Math.cos(a)*d,q.y+Math.sin(a)*d*.45-t*4*Z(),r,r*.6,0,0,TAU);ctx.fill();}void h;}
-const DRAW={heroHit:drawHeroHit,heroHurt:drawHeroHurt,skillRing:drawSkillRing,powerUp:drawPowerUp,dust:drawDust};
+const DRAW={heroHit:drawHeroHit,heroHurt:drawHeroHurt,powerUp:drawPowerUp,dust:drawDust};
 function drawOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;for(const e of list){const fn=DRAW[e.kind];if(!fn)continue;const t=age(e)/e.life;if(t<0||t>1)continue;
  ctx.save();try{scope({id:e.id,kind:'effect',x:e.x,y:e.y,r101:true},()=>fn(e,t));}catch(err){fail(err);}finally{ctx.restore();}}}
-const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r101-air'){try{drawOwn();}catch(err){fail(err);}return;}const r=effectBase.apply(this,arguments);try{if(e?.heroIdR101&&prefs.tint&&TINTED.has(e.type))drawTint(e);}catch(err){fail(err);}return r;};
+const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r101-air'){try{drawOwn();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
 
 // ---- mob motion: bob, lean, squash and wing beats instead of shear -------------------
 // The native body painter translates to the feet, then asks the pose chain for a
@@ -237,8 +262,10 @@ function motion(e){const s=mobOf(e),dt=clamp(time-s.t,0,.1),major=!!(e.boss||e.m
   if(u<1){const g=smooth(u);lean-=sign*.07*g*amp;sy*=1+.03*g*amp;dx-=sign*2*Z()*g*amp;}else{const g=1-smooth((a.elapsed-windup)/(active+.18));lean+=sign*.14*g*amp;sx*=1+.06*g*amp;sy*=1-.05*g*amp;dx+=sign*5*Z()*g*amp;}}
  else if(e.rangedWindup>0){lean-=sdir*.02;sy*=1+.025*amp;}
  // hit flinch: pushed along the blow, squashed, then settles
- const f=flinch.get(e);let fu=f?(time-f.at)/.22:2;if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);}
- if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*(f?.k??(major?.35:1))*amp,ddx=f?f.dx:(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.12*g;sy*=1-.1*g;lean+=ddx*.06*g;}
+ // (a plain hit only nudges: the native hit timer drives a small push away from the hero)
+ const f=flinch.get(e);let fu=f?(time-f.at)/.22:2,fk=f?.k??1,fdx=f?.dx;
+ if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.15:.4;fdx=player?Math.cos(screenAngle(Math.atan2(e.y-player.y,e.x-player.x))):null;}
+ if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.12*g;sy*=1-.1*g;lean+=ddx*.06*g;}
  return{dx,bob,lean,sx,sy,pivot};}
 const R52=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;
 if(R52&&typeof R52.applyBodyPose==='function'){
@@ -376,5 +403,5 @@ if(typeof showSettings==='function'){const sb=showSettings;showSettings=function
 
 window.__STORYWORLD_POLISH_R101__=Object.freeze({revision:'R101-polish',prefs:()=>({...prefs}),set,palette:id=>({...fxOf(id)}),heat:()=>live()?heat(player):0,motion:e=>e?{...motion(e)}:null,
  effects:()=>list.map(e=>({kind:e.kind,age:age(e),life:e.life})),pickedHero:()=>pickedHero,toggleGuide,
- inspect:()=>({revision:'R101-polish',prefs:{...prefs},stats:{...stats},effects:list.length,tints:tints.size,lastError,relayBuilds:[...RELAY_BUILDS],presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+ inspect:()=>({revision:'R101-polish',prefs:{...prefs},stats:{...stats},effects:list.length,tier:live()?tierOf(player):null,lastError,relayBuilds:[...RELAY_BUILDS],presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();

@@ -37,7 +37,9 @@
   for(const d of g.doors){if(!finite(d))continue;const dx=Math.max(0,Math.abs(p.x-d.x)-(d.width||0)/2),dy=Math.max(0,Math.abs(p.y-d.y)-(d.depth||0)/2);if(Math.hypot(dx,dy)<2.6+radius)return false;}
   return typeof A.explorationBlocked!=='function'||!A.explorationBlocked(r.exploration,p.x,p.y,radius);}
  function build(r){const L=r?.exploration;if(!L?.floorCells?.length||!L.walls?.length||!index)return{decals:[],lights:[]};
-  const reg=region(r),g=guards(r),floors=index.items.filter(i=>i.kind==='floor'&&i.region===reg),lamps=index.items.filter(i=>i.kind==='light'&&i.region===reg);
+  const reg=region(r),g=guards(r),floors=index.items.filter(i=>i.kind==='floor'&&i.region===reg);let lamps=index.items.filter(i=>i.kind==='light'&&i.region===reg);
+  // R102: the lamp kinds follow the region's story (Eastern lamps only in Eastern scenes).
+  try{const pick=window.__STORYWORLD_PROPS_R102__?.lamps?.(zone,reg,index.items,lamps,family(r));if(Array.isArray(pick)&&pick.length)lamps=pick;}catch(e){fail(e);}
   // Standing sprites are not hidden by a wall mass in front of them (camera
   // side, +x+y) and would read as standing on its roof; keep them where the
   // floor in front is open (R93).
