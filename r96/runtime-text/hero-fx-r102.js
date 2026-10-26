@@ -33,7 +33,7 @@ const egoNow=()=>typeof ego151!=='undefined'&&!!ego151?.active;
 // ---- preferences -------------------------------------------------------------------
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r102.herofx';
 const DEFAULTS=Object.freeze({colour:true,flourish:true,turn:true});
-const LABELS={colour:'스킬 이펙트를 영웅 고유색+보조색으로 (환도 실버·골드, 다른 영웅 고유색·실버)',flourish:'패시브·스킬을 배울수록 스킬 시전 연출이 화려해짐 (0~4단계)',turn:'비스듬히 그려진 화살·창·혜성 그림을 공격 방향으로 돌리기'};
+const LABELS={colour:'스킬 이펙트를 영웅 고유색+보조색으로 (환도 실버·골드, 다른 영웅 고유색·실버)',flourish:'패시브·스킬을 배울수록 스킬 시전 연출이 화려해짐 (0~7단계: 고리·모이는 띠·사방·땅·하늘·비·전부)',turn:'비스듬히 그려진 화살·창·혜성 그림을 공격 방향으로 돌리기'};
 const prefs={...DEFAULTS};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof saved?.[k]==='boolean')prefs[k]=saved[k];}catch(_){}
 function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
@@ -59,16 +59,18 @@ const palOf=id=>PALETTE[id]||PALETTE.hwando;
 // Native talents: 고유 기술 숙련 and the two hero-only passives count 1 per rank, the
 // common ones 0.5. R62 endless passives: skill-related 0.5, others 0.3.
 const SKILL_R62=new Set(['endlessPower','endlessCooldown','egoAura','threadDanceR63','threadCrossR64','threadFlowerR64','threadFractalR64','threadClawR64','threadTsubameR64','threadIchidanR64']);
-const STEPS=Object.freeze([1,4,9,16]);
+const STEPS=Object.freeze([1,4,9,16,25,36,49]),TOP=STEPS.length;
 function score(p){let s=0;
  try{if(typeof UPGRADES!=='undefined')for(const u of UPGRADES){if(u.dream)continue;const k=u.hero?p.hero+':'+u.id:u.id,n=finite(p.upgrades?.[k]);if(n>0)s+=n*(u.id==='special'||u.hero?1:.5);}}catch(e){fail(e);}
  try{const R=window.__STORYWORLD_PROGRESSION_R62__;if(Array.isArray(R?.defs)&&typeof R.ranks==='function')for(const d of R.defs){const n=finite(R.ranks(d.id,p));if(n>0)s+=n*(SKILL_R62.has(d.id)?.5:.3);}}catch(e){fail(e);}
+ // R103: 사몽 확률 발동 단계 1씩, 미카엘라의 처방 0.5씩.
+ try{const G=window.__STORYWORLD_GROWTH_R103__?.state?.();if(G){for(const[k,n]of Object.entries(G.procs||{}))if(k.startsWith(p.hero+':'))s+=finite(n);s+=.5*(G.picks?.length||0);}}catch(e){fail(e);}
  return Math.round(s*10)/10;}
 let tc={p:null,hero:null,at:-1e9,score:0,tier:0};
 function info(p=player){if(!p)return{score:0,tier:0,next:STEPS[0]};const now=performance.now();if(!(tc.p===p&&tc.hero===p.hero&&now-tc.at<400&&now>=tc.at)){const s=score(p);let t=0;for(const x of STEPS)if(s>=x)t++;tc={p,hero:p.hero,at:now,score:s,tier:t};}
- return{score:tc.score,tier:tc.tier,next:tc.tier<4?STEPS[tc.tier]:null};}
+ return{score:tc.score,tier:tc.tier,next:tc.tier<TOP?STEPS[tc.tier]:null};}
 // EGO lifts the presentation one tier, 사몽 to the top while it lasts.
-function tier(p=player){if(!p)return 0;const t=info(p).tier;if(finite(p.samong)>0)return 4;if(finite(p.ego)>0||egoNow())return Math.min(4,t+1);return t;}
+function tier(p=player){if(!p)return 0;const t=info(p).tier;if(finite(p.samong)>0)return TOP;if(finite(p.ego)>0||egoNow())return Math.min(TOP,t+1);return t;}
 
 // ---- recoloured / turned copies of native art -----------------------------------------
 const luts=new Map();
@@ -149,7 +151,7 @@ const projectileBase=drawProjectile;drawProjectile=function(p){
  let v=null,crop=null,scaled=null;
  try{const path=p.asset,turn=prefs.turn?TURN[path]||0:0,skill=skillShot(p),hero=skill&&prefs.colour&&!egoNow()?shotHero(p):null,tint=hero&&hero!=='hwando'&&PALETTE[hero]?hero:null;
   if(turn||tint){const row=rowOf(path);if(row){v=variant(path,row,tint,turn);if(v&&turn)crop=v.crop;if(v){if(tint)stats.recolourDraws++;if(turn)stats.turnDraws++;}}}
-  if(skill&&prefs.flourish&&Number.isFinite(p.scale)){const k=[1,1,1.12,1.25,1.4][tier()]||1;if(k>1){scaled=p.scale;p.scale*=k;}}}catch(err){fail(err);v=null;}
+  if(skill&&prefs.flourish&&Number.isFinite(p.scale)){const k=[1,1,1.12,1.25,1.4,1.48,1.56,1.65][tier()]||1;if(k>1){scaled=p.scale;p.scale*=k;}}}catch(err){fail(err);v=null;}
  try{return v?withImage(p.asset,v,crop,()=>projectileBase.apply(this,arguments)):projectileBase.apply(this,arguments);}finally{if(scaled!==null)p.scale=scaled;}};
 const drawFrameBase=draw;draw=function(...a){budget=lowFx()?1:2;return drawFrameBase.apply(this,a);};
 
@@ -260,7 +262,7 @@ const STYLES={
  rune(e,u,q,qt,h,F,t,sa,fade){runeCircle(qt.x,qt.y,h*(.75+.12*t),F,u,fade,t,e.seed);
   if(t>=3)shardsRise(qt.x,qt.y,h,F,u,e.seed);
   if(t>=4)triBeam(qt.x,qt.y,h,F,u);},
- arrows(e,u,q,qt,h,F,t,sa,fade){const n=[3,3,5,7,9][t]||3,cy=q.y-h*.5,len=h*(2.2+.4*t);
+ arrows(e,u,q,qt,h,F,t,sa,fade){const n=[3,3,5,7,9,9,11,11][t]||3,cy=q.y-h*.5,len=h*(2.2+.4*t);
   for(let i=0;i<n;i++){const v=clamp((u-Math.abs(i-(n-1)/2)*.03)/.35,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*(.09+.01*t),head=len*smooth(v),tail=Math.max(0,head-h*(.9+.1*t)),al=fade*(1-v*.7),x1=q.x+Math.cos(ang)*head,y1=cy+Math.sin(ang)*head;
    streak(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,x1,y1,h*.03,rgba(F.a,.85*al));disc(x1,y1,h*.03,rgba(F.b,.9*al));}
   if(t>=2)petalBurst(q.x,q.y-h*.4,h*(.6+.1*t),F,u,e.seed,6+2*t);
@@ -271,12 +273,28 @@ const STYLES={
   if(t>=2)cracks(qt.x,qt.y,h*(.9+.2*t),F,u,e.seed,6+t);
   if(t>=3)xslash(qt.x,qt.y-h*.45,h*(.9+.15*t),sa,F,u,fade);
   if(t>=4){pillar(qt.x,qt.y,h,F,u);shock(qt.x,qt.y,h*(1.6+.3*t),F,clamp(u*1.4-.3,0,1),fade);}},
- pixels(e,u,q,qt,h,F,t,sa,fade){const n=[2,3,3,4,5][t]||3,cy=q.y-h*.55,len=h*(2.4+.4*t);
+ pixels(e,u,q,qt,h,F,t,sa,fade){const n=[2,3,3,4,5,5,6,6][t]||3,cy=q.y-h*.55,len=h*(2.4+.4*t);
   for(let i=0;i<n;i++){const v=clamp((u-i*.06)/.4,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*.05,head=len*smooth(v),tail=Math.max(0,head-h*.8);trailSquares(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,q.x+Math.cos(ang)*head,cy+Math.sin(ang)*head,h,F,fade*(1-v*.6),e.seed+i);}
   if(t>=2)squaresBurst(q.x,q.y-h*.5,h*(.8+.15*t),F,u,e.seed,10+3*t);
   if(t>=3)squareRing(qt.x,qt.y,h*(.8+.1*t),F,u,fade,e.seed);
   if(t>=4)shock(q.x,q.y,h*2.2,F,u,fade);}
 };
+// ---- R103 patterns: 사방에서 날아드는 조각, 땅에서 솟는 가시, 하늘에서 떨어지는 빛, 쏟아지는 비 ----
+// x,y: screen centre; R: radius in px; u: 0..1 progress. Shared by hero casts (tier 3+)
+// and by 사몽 boss patterns (hostile palette).
+function patSides(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ang=i*TAU/n+rnd(seed,i)*.3,d0=R*(1.05+.25*rnd(seed,i+3)),v=smooth(clamp((u-.05*rnd(seed,i+5))/.55,0,1)),d=d0*(1-v),a=fade*(v<1?1:0)*(1-u*.4);if(a<=0)continue;
+ const px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.55,tx=x+Math.cos(ang)*(d+R*.22),ty=y+Math.sin(ang)*(d+R*.22)*.55;streak(tx,ty,px,py,R*.018,rgba(F.a,.7*a));diamond(px,py,R*.03,rgba(i%2?F.b:F.a,.95*a),ang+Math.PI/2);}
+ if(u>.55)shock(x,y,R*.5,F,clamp((u-.55)/.45,0,1),fade);}
+function patGround(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ang=rnd(seed,i)*TAU,d=R*(.15+.8*rnd(seed,i+11)),px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.5,t0=.08*rnd(seed,i+2),v=clamp((u-t0)/.5,0,1),rise=Math.sin(Math.PI*v),H=R*(.32+.25*rnd(seed,i+7))*rise,w=R*.045,a=fade*rise;if(a<=.02)continue;
+ ctx.fillStyle=rgba(F.a,.75*a);ctx.beginPath();ctx.moveTo(px-w,py);ctx.lineTo(px,py-H);ctx.lineTo(px+w,py);ctx.closePath();ctx.fill();ctx.fillStyle=rgba(F.b,.85*a);ctx.beginPath();ctx.moveTo(px-w*.35,py);ctx.lineTo(px,py-H*.85);ctx.lineTo(px+w*.35,py);ctx.closePath();ctx.fill();disc(px,py,w*1.3,rgba(F.a,.35*a));}
+ ring(x,y,R*(.4+.6*smooth(u)),R*(.2+.3*smooth(u)),rgba(F.a,.45*fade*(1-u)),1.4*Z());}
+function patSky(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ox=(rnd(seed,i)-.5)*2*R*.85,oy=(rnd(seed,i+4)-.5)*R*.7,t0=.4*rnd(seed,i+8),v=clamp((u-t0)/.3,0,1),tx=x+ox,ty=y+oy,top=ty-R*1.9;if(v<=0)continue;
+ if(v<1){const hy=lerp(top,ty,smooth(v)),tail=Math.max(top,hy-R*.6);streak(tx+R*.06,tail,tx,hy,R*.03,rgba(F.a,.8*fade));streak(tx+R*.04,tail+R*.2,tx,hy,R*.012,rgba(F.b,.95*fade));}
+ else{const k=clamp((u-t0-.3)/.25,0,1);if(k<1){glow(tx,ty,R*.2*(1+k),F.b,fade*(1-k));ring(tx,ty,R*.25*(.4+k),R*.12*(.4+k),rgba(F.a,.8*fade*(1-k)),1.6*Z());}}}}
+function patRain(x,y,R,F,u,seed,n,fade){const a=fade*Math.sin(Math.PI*clamp(u,0,1));if(a<=0)return;for(let i=0;i<n;i++){const ox=(rnd(seed,i)-.5)*2*R,oy=(rnd(seed,i+6)-.5)*R,ph=(u*2.4+rnd(seed,i+9))%1,px=x+ox-ph*R*.12,py=y+oy-R*1.2*(1-ph);
+ streak(px+R*.05,py-R*.14,px,py,R*.008,rgba(i%3?F.a:F.b,.8*a));if(ph>.86)disc(px,py+R*.02,R*.025,rgba(F.b,.6*a));}
+ ctx.fillStyle=rgba(F.a,.07*a);ctx.beginPath();ctx.ellipse(x,y,R,R*.5,0,0,TAU);ctx.fill();}
+const PATTERNS={sides:patSides,ground:patGround,sky:patSky,rain:patRain};
 function drawCast(e,u){const q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHeight(),F=e.F,t=e.tier,fade=u<.7?1:1-(u-.7)/.3;
  let sa=Math.atan2(qt.y-q.y,qt.x-q.x);if(Math.hypot(qt.x-q.x,qt.y-q.y)<2)sa=screenAngle(e.angle);
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';ctx.lineJoin='round';
@@ -284,13 +302,24 @@ function drawCast(e,u){const q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHei
  if(t>=1){const r=h*(.35+1.1*smooth(u));ring(q.x,q.y,r,r*.5,rgba(F.a,.7*(1-u)),(2+t*.6)*Z());ring(q.x,q.y,r*.72,r*.36,rgba(F.b,.55*(1-u)),1.2*Z());}
  else{const r=h*(.3+.8*smooth(u));ring(q.x,q.y,r,r*.5,rgba(F.a,.5*(1-u)),1.5*Z());}
  if(t>=2&&u<.6)sig('gather',F.sig,q.x,q.y-h*.45,u/.6,h*(1.1+.15*t),{alpha:.75*(1-u/.6)});
- STYLES[e.style]?.(e,u,q,qt,h,F,t,sa,fade);}
+ STYLES[e.style]?.(e,u,q,qt,h,F,t,sa,fade);
+ // 3 사방 → 4 땅 → 5 하늘 → 6 비 → 7 네 가지를 한꺼번에, 더 크게.
+ if(t>=3){const lo=lowFx(),R=h*(1.3+.12*t)*(t>=7?1.25:1),cx=qt.x,cy=qt.y,k=lo?.5:1;
+  patSides(cx,cy-h*.3,R,F,u,e.seed+1,Math.round((6+t)*k),fade);
+  if(t>=4)patGround(cx,cy,R,F,u,e.seed+2,Math.round((5+t)*k),fade);
+  if(t>=5)patSky(cx,cy,R,F,u,e.seed+3,Math.round((3+t)*k),fade);
+  if(t>=6)patRain(cx,cy,R*1.15,F,u,e.seed+4,Math.round((10+3*t)*k),fade);
+  if(t>=7)shock(cx,cy,R*1.6,F,clamp(u*1.3-.2,0,1),fade);}}
+const HOSTILE=Object.freeze({a:[176,44,86],b:[236,214,255]});
+function drawPattern(e,u){const q=project(e.x,e.y),h=actorHeight(),R=h*e.size,fade=u<.75?1:1-(u-.75)/.25,F=e.F||HOSTILE;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';PATTERNS[e.pattern]?.(q.x,q.y,R,F,u,e.seed,lowFx()?Math.ceil(e.n/2):e.n,fade);}
+function pattern(kind,x,y,{hostile=true,size=2.6,life=1.3,hero=null}={}){if(!live()||!PATTERNS[kind]||!Number.isFinite(x+y))return false;const F=hostile?HOSTILE:palOf(hero||player.hero);
+ add({kind:'pattern',pattern:kind,x,y,F,size,n:{sides:14,ground:12,sky:9,rain:34}[kind],life,seed:Math.random()*6.28});stats.patterns=(stats.patterns||0)+1;return true;}
 function drawOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;for(const e of list){const u=age(e)/e.life;if(u<0||u>1)continue;
- ctx.save();try{scope({id:e.id,kind:'effect',x:e.x,y:e.y,r102:true},()=>drawCast(e,u));}catch(err){fail(err);}finally{ctx.restore();}}}
+ ctx.save();try{scope({id:e.id,kind:'effect',x:e.x,y:e.y,r102:true},()=>e.kind==='pattern'?drawPattern(e,u):drawCast(e,u));}catch(err){fail(err);}finally{ctx.restore();}}}
 
 // ---- growth notes: upgrade panels, tier-up toast ----------------------------------------------
 function tierLine(p=player){const i=info(p),F=palOf(p.hero),hero=typeof HEROES!=='undefined'?HEROES[p.hero]?.name||p.hero:p.hero;
- return'스킬 연출 '+i.tier+'/4단계 · '+hero+' '+F.name+'+'+F.name2+' · 성장 '+i.score+(i.next!=null?' → 다음 단계 '+i.next:' (최대)')+' · 고유 기술·고유 패시브 1, 공통 패시브 0.5, 반복 패시브 0.3~0.5씩';}
+ return'스킬 연출 '+i.tier+'/'+TOP+'단계 · '+hero+' '+F.name+'+'+F.name2+' · 성장 '+i.score+(i.next!=null?' → 다음 단계 '+i.next:' (최대)')+' · 고유 기술·고유 패시브 1, 공통 패시브 0.5, 반복 패시브 0.3~0.5씩';}
 function decoratePanel(){const panel=document.getElementById('panel');if(!panel||!live())return;const cards=panel.querySelector('.cards');if(!cards)return;
  let note=document.getElementById('r102TierNote');if(!note){note=document.createElement('p');note.id='r102TierNote';note.className='small';cards.parentNode.insertBefore(note,cards);}note.textContent=tierLine();
  for(const b of cards.querySelectorAll('[data-up],[data-r62-passive]')){const id=b.dataset.up||b.dataset.r62Passive;if(id==='special'||id==='heroMechanic'||id==='heroEcho'||SKILL_R62.has(id))b.classList.add('r102Skill');}}
@@ -298,7 +327,7 @@ if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html
 let seenTier=null,seenKey=null;
 function watchTier(){const p=player,key=p.hero+'|'+(typeof layer!=='undefined'?layer:'');const t=info(p).tier;
  if(seenKey!==key||seenTier===null){seenKey=key;seenTier=t;return;}
- if(t>seenTier){stats.tierUps++;if(typeof toast==='function')toast('스킬 연출 '+t+'/4단계 · 스킬이 더 화려해졌습니다',3.2);const note=document.getElementById('r102TierNote');if(note)note.textContent=tierLine();}
+ if(t>seenTier){stats.tierUps++;if(typeof toast==='function')toast('스킬 연출 '+t+'/'+TOP+'단계 · 스킬이 더 화려해졌습니다',3.2);const note=document.getElementById('r102TierNote');if(note)note.textContent=tierLine();}
  seenTier=t;}
 
 // ---- lifecycle ---------------------------------------------------------------------------------
@@ -322,4 +351,5 @@ if(typeof showSettings==='function'){const sb=showSettings;showSettings=function
 window.__STORYWORLD_HERO_FX_R102__=Object.freeze({revision:'R102-hero-fx',PALETTE,palette:id=>({...palOf(id)}),tier,info:(p=player)=>({...info(p)}),steps:STEPS,prefs:()=>({...prefs}),set,turn:{...TURN},
  effects:()=>list.map(e=>({kind:e.kind,style:e.style,tier:e.tier,age:age(e),life:e.life})),cast,
  inspect:()=>({revision:'R102-hero-fx',prefs:{...prefs},stats:{...stats},variants:variants.size,tier:live()?tier():null,score:live()?info().score:null,effects:list.length,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
+window.__STORYWORLD_HERO_FX_R103__=Object.freeze({revision:'R103-hero-fx-7',tiers:TOP,steps:STEPS,patterns:Object.keys(PATTERNS),pattern,tier,inspect:()=>({tier:live()?tier():null,top:TOP,patterns:stats.patterns||0,effects:list.length,lastError})});
 })();
