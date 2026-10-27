@@ -82,7 +82,10 @@
  // ---- layouts --------------------------------------------------------------------------------
  // Same contract as the native R82 refuge: floor cells + boundary walls + nodes.
  let versionTag=null;
- function surfaceArt(ep){const atlas=StoryArtR74.atlases.materials,style=atlas.styles[ep.style]||atlas.styles.garden;return{path:atlas.path,width:atlas.width,height:atlas.height,sha256:atlas.sha256,floorRect:[...style.floorRect],wallRect:[...style.wallRect],tileWorld:4.5,r55PhysicalUV:true,r74Generated:true,theme:ep.style,r81Environment:ep.style,r81Palette:{floor:ep.tint[1],wall:ep.tint[0],cap:ep.tint[1],edge:0x111114}};}
+ function surfaceArt(ep){const atlas=StoryArtR74.atlases.materials,style=atlas.styles[ep.style]||atlas.styles.garden;return{path:atlas.path,width:atlas.width,height:atlas.height,sha256:atlas.sha256,floorRect:[...style.floorRect],wallRect:[...style.wallRect],tileWorld:4.5,r55PhysicalUV:true,r74Generated:true,theme:ep.style,r81Environment:ep.style,r81Palette:{floor:liftR107(ep.tint[1],.68),wall:liftR107(ep.tint[0],.5),cap:liftR107(ep.tint[1],.42),edge:0x111114}};}
+ // R107: the episode tints were 15-40% grey; multiplied by the floor texture and the dream filter the stages read near black.
+ // Lift toward light grey keeping each episode's hue (story floors sit near 75%).
+ function liftR107(c,k){const r=c>>16&255,g=c>>8&255,b=c&255,f=v=>Math.round(v+(214-v)*k);return f(r)<<16|f(g)<<8|f(b);}
  function build(id,ep,cells,{nodes=[],edges=[],entry,bounds,wallHeight=2.7,extra={}}){
   const key=(x,y)=>x+':'+y,has=(x,y)=>cells.has(key(x,y));
   const floorCells=[...cells].map(k=>k.split(':').map(Number)).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);
@@ -272,25 +275,36 @@
  // direction, so mobile needs no held button and no second hand.
  let overlay=null,lastDir={x:1,y:1},hudAt=0;
  // The maze beam is its own overlay; the player's R24 sight setting is left as it is.
- function forceFlash(on){if(!on)restoreFlash();}
+ function forceFlash(on){if(!on){restoreFlash();return;}
+  // R107: the maze uses the story-mode flashlight (R24 polygon sight, walls block light) so the floor, walls and doors read like story mode with the flashlight on.
+  if(S.flashSaved===null)S.flashSaved=settings.flashlight58!==false;if(settings.flashlight58!==true){settings.flashlight58=true;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.add('flashlight-black-r58');}
  function restoreFlash(){if(S.flashSaved===null)return;const v=S.flashSaved;S.flashSaved=null;if(settings.flashlight58!==v){settings.flashlight58=v;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',v!==false);}
- function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=document.getElementById('stage');if(!stage)return null;overlay=document.createElement('canvas');overlay.id='r103Flashlight';overlay.setAttribute('aria-hidden','true');overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';stage.appendChild(overlay);return overlay;}
+ let beamC=null;function beamR107(c,b,dp){if(!beamC?.isConnected){beamC=document.createElement('canvas');beamC.id='r107Beam';beamC.setAttribute('aria-hidden','true');beamC.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;mix-blend-mode:screen';c.parentElement.appendChild(beamC);}
+ beamC.style.display='block';if(beamC.width!==c.width||beamC.height!==c.height){beamC.width=c.width;beamC.height=c.height;}return beamC;}
+function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=document.getElementById('stage');if(!stage)return null;overlay=document.createElement('canvas');overlay.id='r103Flashlight';overlay.setAttribute('aria-hidden','true');overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';stage.appendChild(overlay);return overlay;}
  function rayLen(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.18)if(blocked(ox+dx*t,oy+dy*t,.02,room))return t;return max;}
- function drawFlash(){const want=here()&&room.samongR103.stage==='maze'&&!modal;const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';return;}c.style.display='block';
+ function drawFlash(){const want=here()&&room.samongR103.stage==='maze'&&!modal;const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
   const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
   const mv={x:(player.moveVX150||0),y:(player.moveVY150||0)};if(Math.hypot(mv.x,mv.y)>.05)lastDir=norm(mv.x,mv.y);else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w&&Math.hypot(player.moveVX150||0,player.moveVY150||0)<=.05&&!lastDir)lastDir=norm(w[0],w[1]);}
   // Standing still with the beam on a wall (or on arrival): turn it toward the longest open line.
   if(Math.hypot(mv.x,mv.y)<=.05&&rayLen(player.x,player.y,Math.atan2(lastDir.y,lastDir.x),3)<2.2){let best=0,ba=0;for(let k=0;k<16;k++){const a=k*Math.PI/8,t=rayLen(player.x,player.y,a,9);if(t>best){best=t;ba=a;}}lastDir={x:Math.cos(ba),y:Math.sin(ba)};}
-  const a0=Math.atan2(lastDir.y,lastDir.x),half=.62,reach=9*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=3,pts=[],o=project(player.x,player.y);
+  const a0=Math.atan2(lastDir.y,lastDir.x),half=.85,reach=10*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=4.5,pts=[],o=project(player.x,player.y);
   for(let k=0;k<=28;k++){const a=a0-half+2*half*k/28,t=rayLen(player.x,player.y,a,reach);pts.push(project(player.x+Math.cos(a)*t,player.y+Math.sin(a)*t));}
-  g.fillStyle='rgba(4,4,8,.62)';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
-  const grad=g.createRadialGradient(o.x,o.y,4,o.x,o.y,reach*TILE*zoom);grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.75,'rgba(0,0,0,.9)');grad.addColorStop(1,'rgba(0,0,0,.25)');
+  // R107: graded ambient instead of a flat 62% black: near walls stay readable, the far maze stays dim.
+  const nat=window.__STORYWORLD_SIGHT24__?.enabled===true,amb=g.createRadialGradient(o.x,o.y,near*TILE*zoom*.5,o.x,o.y,reach*1.6*TILE*zoom);amb.addColorStop(0,nat?'rgba(4,4,8,.08)':'rgba(4,4,8,.22)');amb.addColorStop(1,nat?'rgba(4,4,8,.30)':'rgba(4,4,8,.48)');g.fillStyle=amb;g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
+  const grad=g.createRadialGradient(o.x,o.y,4,o.x,o.y,reach*TILE*zoom);grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.8,'rgba(0,0,0,.95)');grad.addColorStop(1,'rgba(0,0,0,.6)');
   g.fillStyle=grad;g.beginPath();g.moveTo(o.x,o.y);pts.forEach(p=>g.lineTo(p.x,p.y));g.closePath();g.fill();
   const n=g.createRadialGradient(o.x,o.y-20*zoom,2,o.x,o.y-20*zoom,near*TILE*zoom);n.addColorStop(0,'rgba(0,0,0,.95)');n.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=n;g.beginPath();g.arc(o.x,o.y-20*zoom,near*TILE*zoom,0,Math.PI*2);g.fill();
   g.globalCompositeOperation='source-over';
   // Warm tint inside the beam; exits, the lamp and chests keep a faint glow through the dark.
   g.fillStyle='rgba(255,226,170,.06)';g.beginPath();g.moveTo(o.x,o.y);pts.forEach(p=>g.lineTo(p.x,p.y));g.closePath();g.fill();
+  // R107: the dark overlay can only darken. A second canvas in CSS 'screen' blend actually lights the floor inside the beam
+  // and around the feet, like the story-mode flashlight with the floor texture still readable.
+  const bc=beamR107(c,b,dp);if(bc){const k=bc.getContext('2d');k.setTransform(dp,0,0,dp,0,0);k.clearRect(0,0,b.width,b.height);
+   const lg=k.createRadialGradient(o.x,o.y-10*zoom,2,o.x,o.y-10*zoom,reach*TILE*zoom);lg.addColorStop(0,'rgba(255,236,200,.34)');lg.addColorStop(.55,'rgba(255,226,180,.16)');lg.addColorStop(1,'rgba(255,220,170,0)');
+   k.fillStyle=lg;k.beginPath();k.moveTo(o.x,o.y);pts.forEach(p=>k.lineTo(p.x,p.y));k.closePath();k.fill();
+   const ng=k.createRadialGradient(o.x,o.y-16*zoom,2,o.x,o.y-16*zoom,near*TILE*zoom);ng.addColorStop(0,'rgba(255,240,210,.26)');ng.addColorStop(1,'rgba(255,240,210,0)');k.fillStyle=ng;k.beginPath();k.arc(o.x,o.y-16*zoom,near*TILE*zoom,0,Math.PI*2);k.fill();}
   const L=room.exploration.samongR103;for(const [p,col] of [[L.exit,'rgba(170,220,255,.35)'],[L.save,'rgba(255,200,120,.3)'],...L.chests.filter((_,i)=>!(window.__STORYWORLD_GROWTH_R103__?.chestSeen?.(room.samongR103.key+':chest:'+i))).map(q=>[q,'rgba(255,215,120,.22)'])]){if(!p)continue;const q=project(p.x,p.y);const rr=g.createRadialGradient(q.x,q.y-10,1,q.x,q.y-10,26*zoom);rr.addColorStop(0,col);rr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=rr;g.beginPath();g.arc(q.x,q.y-10,26*zoom,0,Math.PI*2);g.fill();}}
 
  // ---- interaction ---------------------------------------------------------------------------

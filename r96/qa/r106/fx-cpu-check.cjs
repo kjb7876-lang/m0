@@ -14,7 +14,10 @@ const bad=[];for(const[name,m]of Object.entries(meta)){const b=fs.readFileSync(p
 check('26 textures exist with the recorded size and hash',Object.keys(meta).length===26&&!bad.length,bad.join(' | '));
 const lib=fs.readFileSync(R('r96/client-source/fx-sprites-r106.js'),'utf8'),table=JSON.parse(lib.match(/const META=Object\.freeze\((\{.*?\})\);/)[1]);
 const diff=Object.entries(meta).filter(([k,m])=>!table[k]||table[k][0]!==m.w||table[k][1]!==m.h||Math.abs(table[k][2][0]-m.pivot[0])>1e-3||Math.abs(table[k][2][1]-m.pivot[1])>1e-3||table[k][3]!==m.frames).map(([k])=>k);
-check('runtime table matches texture metadata',!diff.length&&Object.keys(table).length===26,diff.join(','));
+// R107: the table also carries the painted wing views and iai slash shapes from assets/r107/fx (their own meta.json).
+const meta7=JSON.parse(fs.readFileSync(R('r96/runtime-text/assets/r107/fx/meta.json'),'utf8')).sprites;
+for(const[name,m]of Object.entries(meta7)){const b=fs.readFileSync(R('r96/runtime-text/assets/r107/fx/'+name+'.webp'));if(crypto.createHash('sha256').update(b).digest('hex')!==m.sha256)diff.push(name+' sha');const t=table[name];if(!t||t[0]!==m.w||t[1]!==m.h||Math.abs(t[2][0]-m.pivot[0])>1e-3||Math.abs(t[2][1]-m.pivot[1])>1e-3)diff.push(name);}
+check('runtime table matches texture metadata',!diff.length&&Object.keys(table).length===26+Object.keys(meta7).length,diff.join(','));
 // library: tinting through a lookup, immutable static-tint canvases, graceful miss
 const calls=[];const ctx2d={save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(...a){calls.push(a);},set globalAlpha(v){},get globalAlpha(){return 1;},globalCompositeOperation:'source-over'};
 const img={naturalWidth:4,naturalHeight:4,width:4,height:4};let canvases=0;

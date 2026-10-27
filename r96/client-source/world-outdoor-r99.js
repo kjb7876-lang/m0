@@ -31,7 +31,9 @@
   cave:{ground:'cliff',palette:{floor:0xbcc0cc,wall:0xa6aab8,cap:0x9ca0ae,edge:0x2e333e}},
   ash:{ground:'ruin',surround:'cliff',palette:{floor:0xd8c8be,wall:0xb4a8a4,cap:0xb0a094,edge:0x46383a}},
   coast:{ground:'cliff',palette:{floor:0xd0d6da,wall:0xb4bec6,cap:0xa8b4bc,edge:0x34444e},water:'sea'},
-  snow:null,clinical:null,domestic:null,memory:null,neural:null,
+  // R107: snow family for the 경성 winter night (S-05) and the black-sun snowfield (RA): the ruin paving under a near-white tint reads as snowed stone.
+  snow:{ground:'ruin',surround:'cliff',palette:{floor:0xf2f4f8,wall:0xd8dce2,cap:0xeceff3,edge:0x4a5058}},
+  clinical:null,domestic:null,memory:null,neural:null,
   stone:{ground:'ruin',surround:'cliff',palette:{floor:0xd6d6d2,wall:0xb8bcbe,cap:0xaeb4b8,edge:0x3e444c}},
   forge:{ground:'ruin',surround:'cliff',palette:{floor:0xd2ccc2,wall:0xb0b2b4,cap:0xa8aaac,edge:0x3c4248}}
  };
@@ -96,9 +98,16 @@
  function groundImage(kind){let row=images.get(kind);if(!row){row={image:new Image(),ready:false,waiters:[]};row.image.decoding='async';row.image.onload=()=>{row.ready=true;for(const f of row.waiters.splice(0))try{f(row.image);}catch(e){fail(e);}};row.image.onerror=()=>fail(Error('ground image failed: '+kind));row.image.src=DIR+'ground-'+kind+'.webp';images.set(kind,row);}return row;}
  function cell(r,image,x){const T=r.T,c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.imageSmoothingEnabled=true;if('imageSmoothingQuality'in g)g.imageSmoothingQuality='high';g.drawImage(image,x,0,1024,1024,0,0,512,512);
   const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.generateMipmaps=true;t.minFilter=T.LinearMipmapLinearFilter;t.magFilter=T.LinearFilter;t.wrapS=t.wrapT=T.ClampToEdgeWrapping;t.anisotropy=Math.min(8,r.renderer?.capabilities?.getMaxAnisotropy?.()||1);t.userData.r99Ground=true;r.spatialResources?.add(t);return t;}
+ let hedgeRow=null;
+ function hedgeFace(r,wall){const T=r.T,use=im=>{if(r.disposed||r.wallMaterial!==wall)return;const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.imageSmoothingEnabled=true;g.drawImage(im,0,200,1024,824,0,0,512,512);
+  const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.generateMipmaps=true;t.minFilter=T.LinearMipmapLinearFilter;t.magFilter=T.LinearFilter;t.wrapS=t.wrapT=T.ClampToEdgeWrapping;r.spatialResources?.add(t);wall.map=t;wall.color?.setHex?.(0xdfe4d6);wall.needsUpdate=true;stats.hedges=(stats.hedges||0)+1;};
+  if(!hedgeRow){hedgeRow={image:new Image(),ready:false,waiters:[]};hedgeRow.image.decoding='async';hedgeRow.image.onload=()=>{hedgeRow.ready=true;for(const f of hedgeRow.waiters.splice(0))try{f(hedgeRow.image);}catch(e){fail(e);}};hedgeRow.image.onerror=()=>fail(Error('hedge image failed'));hedgeRow.image.src='assets/r107/world/hedge.webp';}
+  if(hedgeRow.ready)use(hedgeRow.image);else hedgeRow.waiters.push(use);}
  function paintGround(r,art){const spec=art?.r99Ground;if(!spec||!prefs.ground||!art.r55PhysicalUV)return;const stone=r.stoneMaterial,wall=r.wallMaterial,back=art.r59Backdrop?null:r.backgroundMaterial;
   const apply=image=>{if(r.stoneMaterial!==stone||r.disposed)return;const floor=cell(r,image,0),face=cell(r,image,1024);
    for(const m of[stone,back])if(m){m.map=floor;m.needsUpdate=true;}if(wall){wall.map=face;wall.needsUpdate=true;}
+   // R107: palace-garden walls are clipped hedges (ChatGPT-painted hedge face), not rock faces.
+   if(wall&&art.r81Environment==='garden')hedgeFace(r,wall);
    const p=spec.palette;for(const[name,key]of[['stoneMaterial','floor'],['wallMaterial','wall'],['wallCapMaterial61','cap'],['regionalTrimMaterial55','edge']])r[name]?.color?.setHex?.(p[key]);r.r99GroundKind=spec.kind;stats.paints=(stats.paints||0)+1;};
   const row=groundImage(spec.kind);row.ready?apply(row.image):row.waiters.push(apply);}
  const spatialBase=C.createSpatial;

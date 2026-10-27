@@ -38,7 +38,8 @@ function bfs(L,from,to){const key=(x,y)=>x+':'+y,cells=new Set(L.floorCells.map(
  const seen=new Map([[s,0]]),q=[s];while(q.length){const c=q.shift();if(c===t)return seen.get(c);const[x,y]=c.split(':').map(Number);for(const[a,b]of[[x+1,y],[x-1,y],[x,y+1],[x,y-1]]){const k=key(a,b);if(cells.has(k)&&!seen.has(k)){seen.set(k,seen.get(c)+1);q.push(k);}}}return -1;}
 const onFloor=(L,p)=>L.floorCells.some(([x,y])=>x===Math.floor(p.x)&&y===Math.floor(p.y));
 const CELLS=new Set(['oak-closed','oak-open','bronze-closed','bronze-open','ash-tree','pine','stump','ferns','cabinet','empty-bed','workbench','crate','well','statue','obelisk','brazier']);
-const LOOKS=new Set(['garden','swamp','cave','ash','coast','stone','forge']);
+// R107 adds the painted snow family (world-outdoor-r99.js LOOK.snow) for S-05 and RA.
+const LOOKS=new Set(['garden','swamp','cave','ash','coast','stone','forge','snow']);
 let lay=[],layFail=[],dressFail=[],outdoorFail=[],markers=0,props=0,outdoorStages=0,art=0;
 const S=SM.state();
 for(let i=0;i<EP.length;i++)for(const stage of STAGES(i)){

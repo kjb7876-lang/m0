@@ -120,6 +120,7 @@ function orbs0(p,x,fy,h,F,k,seed,layer,cut=0){const n=Math.max(0,(F.form==='orbs
    disc(ox,oy,13*Z()*sc,rgba(F.a,.14));disc(ox,oy,7*Z()*sc,rgba(F.a,.45));disc(ox,oy,3.4*Z()*sc,rgba(F.b,1));}}}
 // Orbiting sword-light for 환도: silver crescent blades with a gold edge on a tilted
 // orbit; each blade lies along the orbit and leaves two glints behind it.
+const BLADE_ORBIT=false;
 function blades0(x,fy,h,F,k,seed,layer,n){const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;
   const ox=x+Math.cos(a)*rx,oy=cy+depth*ry,sc=.8+.25*depth,L=h*.2*sc;
@@ -157,7 +158,21 @@ function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const s=SPR(),w=h*(1.05+.4*
  if(s&&s.draw('flame',mode==='dark'?DARK:F,x,fy,w,H,{frame:fr,alpha:.75*(.4+.6*clamp(k,0,1)),blend:mode==='dark'?'source-over':'lighter'})){s.draw('flame',mode==='dark'?F:s.pal(F.b),x,fy,w*.62,H*.72,{frame:fr+2,alpha:.7*(.4+.6*clamp(k,0,1))});return;}
  flames0(x,fy,h,F,mode,k,seed);}
 // Two feathered wings from the shoulders, folded a little at rest and spread with heat; slow flap.
-function wings(x,fy,h,F,k,seed){const s=SPR();if(!s)return wings0(x,fy,h,F,k,seed);const W=h*(1.25+.55*clamp(k,0,1)),flap=Math.sin(time*2.4+seed)*.1,sy=fy-h*.66;
+// R107: wings follow the hero's facing. Facing the camera (s) → front view behind the body; facing away (n) →
+// back view drawn over the body; east/west → side view (art faces west, mirrored for east). Folded while idle.
+const WING_FOUR={front:'s',back:'n',left:'w',right:'e'};
+function wingSector(p){let d=null;try{d=window.__STORYWORLD_PHASE1_ART__?.hero?.()?.direction;}catch(_){}if(WING_FOUR[d])d=WING_FOUR[d];if(!d||d.length>2)d=p.currentVisualSector||WING_FOUR[p.direction]||'s';return d;}
+const wingHold=new WeakMap();
+function wingView(p){const d=wingSector(p),v=d[0]==='n'?'back':d==='e'||d==='w'?'side':'front',st=wingHold.get(p);
+ if(st&&st.v!==v&&time-st.at<.12)return st;const ns=st&&st.v===v?{...st,flip:d==='e'}:{v,flip:d==='e',at:time};wingHold.set(p,ns);return ns;}
+function wingsView(p,layer,x,fy,h,F,k,seed){const s=SPR(),wv=wingView(p);if(!s)return false;if((wv.v==='back')!==(layer==='front'))return true;
+ const name='wing'+wv.v+(p.moving||p.attackAnim>0||p.skillAnim>0||p.ego>0||p.samong>0?'':'-f');if(!s.ready(name,F))return false;
+ const W=h*(wv.v==='side'?1.15:1.35)*(1+.35*clamp(k,0,1)),flap=Math.sin(time*(p.moving?4:2.4)+seed)*(wv.v==='side'?.08:.05),sy=fy-h*.64+Math.sin(time*2.4+seed)*h*.015;
+ const asp=name.startsWith('wingside')?.78:.74,o={angle:flap*(wv.flip?-1:1),alpha:wv.v==='back'?.82:.9,blend:'source-over',flip:wv.flip};
+ const dx=wv.v==='side'?(wv.flip?-1:1)*h*.06:0;s.draw(name,F,x+dx,sy,W,W*asp,o);
+ if(k>.3)for(let i=0;i<2;i++){const ph=(time*.35+i/2+seed)%1,side=wv.v==='side'?(wv.flip?-1:1):i%2?1:-1;s.draw('feather',F,x+side*h*(.3+.45*ph),sy+h*(.2+.9*ph),h*.07,h*.21,{alpha:.6*Math.sin(Math.PI*ph),angle:Math.sin(time*2+i)*.7});}
+ return true;}
+function wings(x,fy,h,F,k,seed,p){if(p&&wingsView(p,'back',x,fy,h,F,k,seed))return;const s=SPR();if(!s)return wings0(x,fy,h,F,k,seed);const W=h*(1.25+.55*clamp(k,0,1)),flap=Math.sin(time*2.4+seed)*.1,sy=fy-h*.66;
  if(!s.draw('wing',F,x+h*.08,sy,W,W,{angle:-.12-flap,alpha:.92,blend:'source-over'}))return wings0(x,fy,h,F,k,seed);
  s.draw('wing',F,x-h*.08,sy,W,W,{angle:.12+flap,alpha:.92,blend:'source-over',flip:true});
  s.draw('wing',s.pal(F.b),x+h*.08,sy,W,W,{angle:-.12-flap,alpha:.25+.25*clamp(k,0,1)});s.draw('wing',s.pal(F.b),x-h*.08,sy,W,W,{angle:.12+flap,alpha:.25+.25*clamp(k,0,1),flip:true});
@@ -188,17 +203,19 @@ function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),
   if(L.on){ctx.globalAlpha*=L.alpha;
    if(F.form==='runes'&&(t>=3||awake))runeRing(q,h,F,Math.max(k,.5+.15*Math.max(0,t-2)));
    if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
-   if(F.form==='angel'&&(t>=3||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed);
-   if(F.form==='blade')blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
+   if(F.form==='angel'&&(t>=3||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
+   // R107: no idle orbiting crescent blades for 환도 (looked odd); the iai cast carries the sword light now.
+   if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
    orbs(p,q.x,fy,h,F,k,seed,'back',L.cut);}
  }finally{ctx.restore();}});stats.auraDraws++;}
 function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
  if(!L.on)return;
  scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{ctx.globalAlpha*=L.alpha;
+  if(F.form==='angel'&&(t>=3||p.ego>0||p.samong>0)||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
   if(F.form==='angel'||p.samong>0)halo(q.x,fy,h,F,k);
   if(F.form==='arcs')arcs(q.x,fy,h,F,k,seed);
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);
-  if(F.form==='blade')blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
+  if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
   orbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
  }finally{ctx.restore();}});}
 const heroBase=drawHero;drawHero=function(...a){const p=live()?player:null,on=!!(p&&prefs.aura&&p.hp>0&&p.visible!==false&&p.disabled!==true&&finite(p.x+p.y,NaN)===p.x+p.y);

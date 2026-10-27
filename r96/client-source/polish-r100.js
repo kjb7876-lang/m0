@@ -249,7 +249,7 @@
  const sight=window.__STORYWORLD_SIGHT24__;let softCanvas=null,softKey='';
  if(sight?.mask){const desc=Object.getOwnPropertyDescriptors(sight),baseMask=sight.mask;
   desc.mask={enumerable:true,value:function(){const s=baseMask.apply(this,arguments);if(!s?.enabled||!s.canvas||!prefs.touch&&coarse())return s;try{
-   const open=!!room?.exploration?.r98Scene?.open,level=open?.58:.32,key=s.serial+':'+level;
+   const open=!!room?.exploration?.r98Scene?.open,maze=room?.samongR103?.stage==='maze',level=maze?.5:open?.58:.32,key=s.serial+':'+level;
    if(!softCanvas){softCanvas=document.createElement('canvas');softCanvas.width=softCanvas.height=128;}
    if(softKey!==key){const c=softCanvas.getContext('2d');c.globalCompositeOperation='source-over';c.globalAlpha=1;c.fillStyle='#000';c.fillRect(0,0,128,128);
     const v=Math.round(level*255),gr=c.createRadialGradient(64,64,30,64,64,64);gr.addColorStop(0,'rgb('+v+','+v+','+v+')');gr.addColorStop(1,'#000');c.fillStyle=gr;c.fillRect(0,0,128,128);

@@ -2508,7 +2508,22 @@
     "assets/r106/drive/link-pillar.webp",
     "assets/r106/drive/care-record.webp",
     "assets/r106/drive/mannequin-eating-1.webp",
-    "play-r106.js"
+    "play-r106.js",
+    "assets/r107/fx/iai-burst.webp",
+    "assets/r107/fx/iai-cut.webp",
+    "assets/r107/fx/iai-hash.webp",
+    "assets/r107/fx/iai-sheath.webp",
+    "assets/r107/fx/iai-star.webp",
+    "assets/r107/fx/iai-x.webp",
+    "assets/r107/fx/meta.json",
+    "assets/r107/fx/wingback-f.webp",
+    "assets/r107/fx/wingback.webp",
+    "assets/r107/fx/wingfront-f.webp",
+    "assets/r107/fx/wingfront.webp",
+    "assets/r107/fx/wingside-f.webp",
+    "assets/r107/fx/wingside.webp",
+    "assets/r107/world/hedge.webp",
+    "assets/r107/world/meta.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3583,5 +3598,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "103b2139fc65d712f0c689876ca165da7b7a8e84384d4737c30ecc2b9194cae8"
+  "runtimeManifestSHA256": "a03462e217f76b2daf36e4b0f80fa0d1df1352e557ceea5df19a143a81736338"
 }
