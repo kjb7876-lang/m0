@@ -1,0 +1,11 @@
+{
+ "h": 512,
+ "portraits": {
+  "hwando": {
+   "bytes": 36820,
+   "sha256": "93ab0a0749c1a1ed28492d47a02113d7bd3a0ddeec625a3ffb5d3117d7b0f62f"
+  }
+ },
+ "source": "ChatGPT image generation 2026-10-27, reference = the hero illustration already shipped in assets/heroes",
+ "w": 384
+}
