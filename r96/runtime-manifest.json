@@ -9,8 +9,8 @@
     },
     {
       "path": "art-drive-r105.js",
-      "bytes": 8640,
-      "sha256": "9249b5f0080ed3c7238dad493c8665d9f3a3b9b8b394604e49773a6526768ad8"
+      "bytes": 11802,
+      "sha256": "8bf1e81eec54be5b04195c61e16e80d2f8bafc77b798fe7540b8070ffdfee004"
     },
     {
       "path": "assets-clean-r99.js",
@@ -7318,9 +7318,29 @@
       "sha256": "82a0caabaf7baec19a00c0c22766c4efbb281c0b39ad3431cf5a8def4aa1854a"
     },
     {
+      "path": "assets/r105/drive/prop-casing.webp",
+      "bytes": 10400,
+      "sha256": "29d77e65655cb835b3b17a059c2c2999e4bf6b37194fd8f67d6b70477290bc94"
+    },
+    {
+      "path": "assets/r105/drive/prop-cloth.webp",
+      "bytes": 40882,
+      "sha256": "83ab2a2768a91334e4fda4e525669cecf4231479cd7f52893e93ee24172d44ff"
+    },
+    {
+      "path": "assets/r105/drive/prop-doll.webp",
+      "bytes": 30516,
+      "sha256": "cd6fce1a28838442e159c5c7779f72315c3008028eb0e3bac9de5eb0da55d4be"
+    },
+    {
       "path": "assets/r105/drive/prop-gardener.webp",
       "bytes": 23546,
       "sha256": "fc1de79cf03e3165885058f6a55aab74dbf4bcdc8c5248eb5f8a2da252fd17de"
+    },
+    {
+      "path": "assets/r105/drive/prop-glass.webp",
+      "bytes": 35896,
+      "sha256": "215eee8e68ec12a70826cea3b752172e95da43c3439e47a9e787c08aa02121bf"
     },
     {
       "path": "assets/r105/drive/prop-gogh-chair.webp",
@@ -7338,14 +7358,54 @@
       "sha256": "7dba3b09ba6bfc5fd57e9315036b927b4fdbb7b8b332953d2eb3b9ceff852bfb"
     },
     {
+      "path": "assets/r105/drive/prop-ledger.webp",
+      "bytes": 26836,
+      "sha256": "c3d9e8c86d48c0dfeb61ae95c8c3532748a01c02c749ff1787a1124ec34dc64b"
+    },
+    {
       "path": "assets/r105/drive/prop-manet-mirror.webp",
       "bytes": 45662,
       "sha256": "8aea1d9cdeb72dcfa2eedd6b5362108f7602ab05fd16d211035a14736a370e7c"
     },
     {
+      "path": "assets/r105/drive/prop-mask-1.webp",
+      "bytes": 26980,
+      "sha256": "5d692faa18256fd68ba68f786bbff2ccdd57ffece209db88b592249a82778a82"
+    },
+    {
+      "path": "assets/r105/drive/prop-mask-2.webp",
+      "bytes": 31022,
+      "sha256": "982c27bd9b93ae598cb2fa450435011355af966919a98e5792788e177d38e8fe"
+    },
+    {
+      "path": "assets/r105/drive/prop-mask-3.webp",
+      "bytes": 26528,
+      "sha256": "079aa7421e9b4f6fbff821e5bfe3615e21a402164004ee315cf5f914494871de"
+    },
+    {
+      "path": "assets/r105/drive/prop-newspaper-1.webp",
+      "bytes": 58772,
+      "sha256": "d3e6c50510f8630be55788d19b1b0aac88b39f3fca44de0ff5412a7ddf209c51"
+    },
+    {
+      "path": "assets/r105/drive/prop-newspaper-2.webp",
+      "bytes": 53206,
+      "sha256": "d49288e6a82b216d0d34dcb1d77324cefeff812ec6da368075e0a7765474a2f6"
+    },
+    {
+      "path": "assets/r105/drive/prop-newspaper-3.webp",
+      "bytes": 59216,
+      "sha256": "8a8e2f5c3f73d30c656343978b992653c7367cb6ba77820b11f7b3e8cf123bb1"
+    },
+    {
       "path": "assets/r105/drive/prop-picasso-paper.webp",
       "bytes": 47030,
       "sha256": "6f3c8e7c4820f323aa753c9f84c9e75c1f8e6a64b8634e96ba5c6ca2aea6bb86"
+    },
+    {
+      "path": "assets/r105/drive/prop-table.webp",
+      "bytes": 82494,
+      "sha256": "bc6f8a2587bfd41f99fea1536d37319152a0ebf81f404562736d72457c8d058b"
     },
     {
       "path": "assets/r105/drive/prop-teapot-1.webp",
@@ -7361,6 +7421,21 @@
       "path": "assets/r105/drive/prop-teapot-3.webp",
       "bytes": 42654,
       "sha256": "a26bf510ea03f134baca33f33ab0d2ec211c6c1e98649b436502123a11ae015c"
+    },
+    {
+      "path": "assets/r105/drive/prop-window-1.webp",
+      "bytes": 39600,
+      "sha256": "c80d90c0f900c34075e31465f7ec33951398dc2bef47a477ad56d7cb0015844a"
+    },
+    {
+      "path": "assets/r105/drive/prop-window-2.webp",
+      "bytes": 42740,
+      "sha256": "3a31fb56caa2db926aae1f6a89eb0673b43042863f17c6aba5d14f478f2c5f73"
+    },
+    {
+      "path": "assets/r105/drive/prop-window-3.webp",
+      "bytes": 40032,
+      "sha256": "4a264304b2a7a7350726e90366c66fb65ac57e03d58a692779b9126f76fb47ed"
     },
     {
       "path": "assets/r105/props/dist02-hands.webp",
@@ -15924,8 +15999,8 @@
     },
     {
       "path": "fx-boss-r105.js",
-      "bytes": 21855,
-      "sha256": "0dd4d19ae0e3e69af0613ee2fadf943e7a429e54826b1a73a266d07bcd34c9cb"
+      "bytes": 21952,
+      "sha256": "a7ad4b0e167b095ade429941585e145746607922aff233ac6519de280f42511d"
     },
     {
       "path": "growth-r103.js",
@@ -16024,8 +16099,8 @@
     },
     {
       "path": "props-static-r105.js",
-      "bytes": 6320,
-      "sha256": "ea12db623db4c435c7e54596ea6a17bf225a3c431fff4ca9f8ee484c73851767"
+      "bytes": 6482,
+      "sha256": "29c89a776282d09cbe54b6392828bc8fa26596f63c1463697bee5cf72332f490"
     },
     {
       "path": "render-compat-r83.js",
@@ -16193,8 +16268,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3238,
-  "totalBytes": 730827622,
+  "fileCount": 3253,
+  "totalBytes": 731436163,
   "webHTMLSha256": "0d6db807f6f8a43dfe07b9febc397244eddebf6591454e5eeedd23360952bc61",
   "largest": [
     {

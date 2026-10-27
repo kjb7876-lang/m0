@@ -57,6 +57,42 @@
 
 합계 25 파일 1,107,552 바이트. 열쇠 contact/deflect 2장은 변환만 하고 아직 쓰지 않는다(미적용).
 
+## 2b. 둘째 묶음(2026-10-27 04:4x UTC 이후 폴더) — S-05·S-07 소품
+
+안내문 5개(`1zphNUh6…` S07 가면·기억 소품, `1osPu4N8…` S05 신문, `15Kkvusl…` S05/S07 환경, `1gUCwSzH…` 최신 얼굴, `17lIx4kj…` 지현/환도 v1)를 읽고 아래 ZIP을 소유자 계정으로 내려받아 크기·SHA-256을 대조했다(전부 일치, CRC 이상 없음). 각 ZIP은 빈 폴더에 따로 풀었다.
+
+| ZIP | Drive 파일 ID | 크기(B) | SHA-256 | 게임 반영 |
+|---|---|---|---|---|
+| S07-mask-visual-candidate.zip | `1bx6TRyUn1ZrSye25bMkKEhz-XHBYHsAx` | 1,682,016 | `f3c7e8b4c50dcc1e055ccfd7cd7e8eb1647bac92abeda5b679ccf5161826c72f` | ep7 식탁 위 가면(3키: 온전 → 금 → 세 번째 각도, 상승 맵에서 보스 상태 연동) |
+| S07-doll-visual-candidate.zip | `1IG36Kf18ZHkO3t7XoQV1Jb2PVEYD8cJd` | 1,132,877 | `198c9e480df6c4f06fc99fe1a7f2143ad6df73ca834e59c58f2a18d993d46ee4` | ep7 식탁 위 입이 꿰매진 인형 |
+| S07-attendance-visual-candidate.zip | `14uLutGNmFRNq0Rl_w0ZwYS7e_VQsS1pZ` | 1,630,602 | `c0d264c8898e9042a5639710c4fddad389835a39913c7e5069ae1078443e4df1` | ep7 식탁 위 젖은 출석부 |
+| S07-cloth-visual-candidate.zip | `1whGubgRAFe2TeKkPTOF7mTFHE1hfrHRM` | 1,421,710 | `a645b5201eb49b170218f1ca75557d208d7acec35af0e579fec7c0c4c837a92f` | ep7 식탁 위 검게 물든 도복 조각 |
+| S07-glass-visual-candidate.zip | `158Is2bG2T3KL7IUaQoXYgUFB5NSKIZFS` | 1,129,079 | `de1c5ea1b5d1b00937a7b9b0c4f77c0bda9bb0b3507c3a9716afc5515d44b964` | ep7 식탁 위 붉은 입술 자국 잔 |
+| S05-newspaper-candidate.zip | `1q896NwqrVeCZRaV5LZl46P6lwZojOoga` | 2,764,528 | `cc6454e72439fc33507a8e200a8a14923246a40d9e0f9f18035ec6c552a058d9` | ep5 생존·미로·상승 바닥의 신문 3변형(가변 아틀라스 rect로 잘라 724 고정 분할 안 함) |
+| S05-S07-environment-window-candidate.zip | `1P9UtOwnM7lHPc-nDVBI3AojXpfO0FGUE` | 1,706,692 | `55058fb295a3fd8b2c0b05a5729b469978bb1dcb8f21ca56ecab03d9c659f6de` | ep5 상승 맵 창문 3키(꺼짐 → 불빛 → 잔광·연기, 보스 상태 연동) |
+| S05-S07-environment-table-candidate.zip | `11Yvd0QedtVZlnl3wkVMvOfTfaGjfrgLR` | 1,502,895 | `49ff5c9b9f7788833888f70615d9c569a3af8746a5de2011d96c2ca1e8fe1bcd` | ep7 생존·미로·상승의 빈 식탁+의자 하나(여섯 물건 받침) |
+| HAPIL-NeoSeoul-canon-props-v1-regular-001-of004.zip (기존, 안내문 링크 재사용) | `1k4TaVd_4Zy9K0vn5JvSV3oqrn1vGBw0z` | 2,699,662 | `73332a1e8757c31335d72ffc6b62ec26f5e87f537a346d6f9826f2c6fad6e0c7` | `originals/dateless_spent_casing.png`(SHA `95de828f…`)만 ep7 식탁 위 탄피로 사용. 안내문에 ZIP SHA가 없어 내려받은 값만 기록 |
+
+| 파일 | 원본(ZIP 내 경로) · 잘라낸 rect | 원본 SHA-256 | 크기 | 바이트 | SHA-256 | 용도 | 적용 위치 |
+|---|---|---|---|---:|---|---|---|
+| prop-mask-1.webp | mask/mask/storyworld-samong-s07-ordinary-mask-3states-v1.png · rect [0, 0, 724, 724] | `7b51e290be79eff1…` | 305×384 | 26,980 | `5d692faa18256fd6…` | S-07 평범한 가면 3키(온전→금→다른 각도) | ep7 탁자 위·상승 맵 보스 상태 연동 |
+| prop-mask-2.webp | mask/mask/storyworld-samong-s07-ordinary-mask-3states-v1.png · rect [724, 0, 1448, 724] | `7b51e290be79eff1…` | 322×384 | 31,022 | `982c27bd9b93ae59…` | S-07 평범한 가면 3키(온전→금→다른 각도) | ep7 탁자 위·상승 맵 보스 상태 연동 |
+| prop-mask-3.webp | mask/mask/storyworld-samong-s07-ordinary-mask-3states-v1.png · rect [1448, 0, 2172, 724] | `7b51e290be79eff1…` | 384×290 | 26,528 | `079aa7421e9b4f6f…` | S-07 평범한 가면 3키(온전→금→다른 각도) | ep7 탁자 위·상승 맵 보스 상태 연동 |
+| prop-doll.webp | doll/doll/samong-s07-stitched-mouth-doll-static.png | `a732d909f8798f30…` | 259×384 | 30,516 | `cd6fce1a28838442…` | S-07 입이 꿰매진 인형 | ep7 탁자 위 |
+| prop-ledger.webp | attendance/attendance/samong-s07-wet-attendance-ledger-static.png | `00661ecd1ae72708…` | 448×330 | 26,836 | `c3d9e8c86d48c0df…` | S-07 젖은 출석부 | ep7 탁자 위 |
+| prop-cloth.webp | cloth/cloth/samong-s07-memory-cloth.png | `20255931f6b21d49…` | 384×309 | 40,882 | `83ab2a2768a91334…` | S-07 검게 물든 도복 조각 | ep7 탁자 위 |
+| prop-glass.webp | glass/glass/samong-s07-memory-glass.png | `e6c278e903ce41c1…` | 249×320 | 35,896 | `215eee8e68ec12a7…` | S-07 붉은 입술 자국 잔 | ep7 탁자 위 |
+| prop-casing.webp | canon001/originals/dateless_spent_casing.png | `95de828f928f4a1f…` | 256×196 | 10,400 | `29d77e65655cb835…` | 날짜 없는 탄피(기존 ZIP001 재사용) | ep7 탁자 위 |
+| prop-newspaper-1.webp | newspaper/newspaper/storyworld-samong-s05-jihyun-newspaper-3variants-v1.png · rect [0, 0, 829, 724] | `2da3a2d9c140152b…` | 448×408 | 58,772 | `d3e6c50510f8630b…` | S-05 지현 사진이 실린 신문(가변 아틀라스 변형 1) | ep5 생존·미로·상승 바닥 |
+| prop-newspaper-2.webp | newspaper/newspaper/storyworld-samong-s05-jihyun-newspaper-3variants-v1.png · rect [830, 0, 1570, 724] | `2da3a2d9c140152b…` | 435×448 | 53,206 | `d49288e6a82b216d…` | S-05 지현 사진이 실린 신문(가변 아틀라스 변형 2) | ep5 생존·미로·상승 바닥 |
+| prop-newspaper-3.webp | newspaper/newspaper/storyworld-samong-s05-jihyun-newspaper-3variants-v1.png · rect [1571, 0, 2172, 724] | `2da3a2d9c140152b…` | 406×423 | 59,216 | `8a8e2f5c3f73d30c…` | S-05 지현 사진이 실린 신문(가변 아틀라스 변형 3) | ep5 생존·미로·상승 바닥 |
+| prop-window-1.webp | window/s05/window/storyworld-samong-s05-window-light-3keys-v1.png · rect [0, 0, 724, 724] | `7bd64c896f3d69ac…` | 368×512 | 39,600 | `c80d90c0f900c340…` | S-05 관사 창문 불빛 3키(꺼짐→불빛→잔광·연기) | ep5 상승 맵 보스 상태 연동 |
+| prop-window-2.webp | window/s05/window/storyworld-samong-s05-window-light-3keys-v1.png · rect [724, 0, 1448, 724] | `7bd64c896f3d69ac…` | 368×512 | 42,740 | `3a31fb56caa2db92…` | S-05 관사 창문 불빛 3키(꺼짐→불빛→잔광·연기) | ep5 상승 맵 보스 상태 연동 |
+| prop-window-3.webp | window/s05/window/storyworld-samong-s05-window-light-3keys-v1.png · rect [1448, 0, 2172, 724] | `7bd64c896f3d69ac…` | 368×512 | 40,032 | `4a264304b2a7a735…` | S-05 관사 창문 불빛 3키(꺼짐→불빛→잔광·연기) | ep5 상승 맵 보스 상태 연동 |
+| prop-table.webp | table/s07/table/storyworld-samong-s07-empty-table-one-chair-v1.png | `cebc761b95045b0e…` | 640×558 | 82,494 | `bc6f8a2587bfd41f…` | S-07 빈 식탁+손님 의자 하나 | ep7 생존·미로·상승(여섯 물건 받침) |
+
+합계 15 파일 605,120 바이트. 알파 16 미만 가장자리를 잘라내고 최대 384~640px로 줄였을 뿐 색 보정은 하지 않았다. 식탁 위 물건은 영웅(약 66px) 대비 실물보다 조금 크게(10~34px) 두어 화면에서 읽히게 했다. 탁자 위 여섯 자리는 안내문의 배치 제안(`placement-proposals.json`)을 참고한 화면 오프셋이며 슬롯·상호작용·충돌은 없다.
+
 ## 3. 정적 소품 4종 (`assets/r105/props/`, props-static-r105.js)
 
 원천: StoryWorld-static4 ZIP 3개(안내문 `CLAUDE-START-KO.md`, 서사 copy2 SHA `b385a6a5…`). ZIP SHA-256: 01 `fc94526ba311823a630b1d5cac9275ef7fe555393bdc917b57c62d6222254d65`, 02 `49684162aeaab17979d4dded88e367eabd0dbb8c0f70d0804b935a5381f609af`, 03 `a8b31f006db9d30e1431b7d9aa831cd2df92e1dca49ef2ff316043c0b43888b3`.
@@ -77,6 +113,10 @@
 | gothic-seven `environment/wall.png`을 벽 텍스처로 | 미적용(조형물로만 사용) | 벽 타일 파이프라인 교체 범위 밖 |
 | r02-key 명중·튕김 셀 2장 | 변환만, 미적용 | 투사체 명중 프레임·방어 연동 훅이 없음 |
 | 각 ZIP의 qa/provenance 합성 이미지 | 미적용 | 검토용 참고 자료 |
+| 지현 v3 초상 PNG `1A1AAGF6MsbNast0TzZr-GYscuQ4fKuv7` / ZIP `1YzKq-GleC6YMFZ47yLaksIErn9iPaCb2` | 미다운로드·미적용 | 최신 안내문: 사용자 디자인 채택(2026-10-27 03:59)이지만 "게임 적용 승인은 아님". 초상이 들어갈 자리(대화·기록 초상)도 아직 없음 → 사용자 승인 뒤 별도 라운드 |
+| 환도 v4 초상 PNG `1qIfklDvlnmXeKh-MAQ4TKqJV18TvsJ9r` / ZIP `1B1O6JTeVdEPATio4QqhPSuFRX0ceEBik`, 환도 v3·지현 v2 이전 후보, 지현/환도 v1 얼굴 ZIP(`1FNT2Ohq…`·`1awQ5OOv…`) | 미다운로드·미적용 | 안내문에 "환도 최종 사용자 채택은 아직 별개", v2·v3은 이전/거절 후보 |
+| 가면 ZIP의 `mask/atlas-rects.json` 3셀 | 셀 그대로 사용 | 세 번째 포즈·피벗이 달라 연속 재생하지 않고 독립 키로만 씀(안내문 제한) |
+| 신문 ZIP의 724 고정 격자 | 사용 안 함 | 안내문 "고정 724px 분할 금지" → 가변 rect [0,0,829,724]·[830,0,1570,724]·[1571,0,2172,724] 사용 |
 | LIVE-ASSET-INDEX 옛 묶음 5개(body-checkpoint-C5, body-source6-checkpoint, signature-chapter2A-partial18, chapter5 keypose ×2) | 미다운로드 | 보스 키포즈·시그니처 FX는 R104에서 36세트 적용 완료, 나머지는 방향 데이터 없음 |
 | LIVE-ASSET-INDEX 2026-10-26 묶음(initial-five·first-eight·signature·chapter2·B12 등 61 ZIP) | R104에서 36세트 적용 | `assets/r104/bosses/` 그대로 |
 

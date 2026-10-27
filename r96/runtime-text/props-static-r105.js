@@ -17,7 +17,8 @@
  function jitter(seed,x,y){return{x:x+((hash(seed+':'+x+':'+y)%100)/100-.5),y:y+((hash(y+':'+x+':'+seed)%100)/100-.5)};}
  function keep(pts,n,gap,avoid){pts.sort((a,b)=>a.k-b.k);const out=[];for(const p of pts){if(out.length>=n)break;if(avoid.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||4)))continue;if(out.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<gap))continue;out.push(p);}return out;}
  function waterSpots(r,n,seed,avoid){const L=r.exploration,b=L?.bounds;if(!Array.isArray(b))return[];const pts=[];
-  for(let y=b[1]+1;y<b[3]-1;y+=1.5)for(let x=b[0]+1;x<b[2]-1;x+=1.5){const p=jitter(seed,x,y);if(!blockedAt(L,p.x,p.y,.55))continue;let near=0;for(const[dx,dy]of[[1.7,0],[-1.7,0],[0,1.7],[0,-1.7]])if(!blockedAt(L,p.x+dx,p.y+dy,.2))near++;if(near<1||near>2)continue;pts.push({...p,k:hash(seed+':'+p.x.toFixed(2)+p.y.toFixed(2))});}
+  // 물가: 길(비차단) 위이되 1~2방향이 물(차단)인 자리. R81 계약(장식 소품은 차단 칸을 피한다)을 지키면서 물 바로 곁에 선다.
+  for(let y=b[1]+1;y<b[3]-1;y+=1.5)for(let x=b[0]+1;x<b[2]-1;x+=1.5){const p=jitter(seed,x,y);if(blockedAt(L,p.x,p.y,.3))continue;let wet=0;for(const[dx,dy]of[[1.2,0],[-1.2,0],[0,1.2],[0,-1.2]])if(blockedAt(L,p.x+dx,p.y+dy,.2))wet++;if(wet<1||wet>2)continue;pts.push({...p,k:hash(seed+':'+p.x.toFixed(2)+p.y.toFixed(2))});}
   return keep(pts,n,3.6,avoid);}
  function ringSpots(r,n,seed,avoid){const L=r.exploration,c=L?.centralArena&&Number.isFinite(L.centralArena.x)?L.centralArena:(L?.nodes||[]).slice().sort((a,b)=>(b.radius||0)-(a.radius||0))[0]||r.objective;if(!c||!Number.isFinite(c.x+c.y))return[];
   const rad=Math.max(4,Math.min(8.5,(c.radius||8)-1.2)),pts=[];for(let i=0;i<n;i++){const a=i*Math.PI*2/n-Math.PI/2;let q=null;for(let d=rad;d>=2.5&&!q;d-=.7){const x=c.x+Math.cos(a)*d,y=c.y+Math.sin(a)*d;if(!blockedAt(L,x,y,.5))q={x,y,k:i};}if(q)pts.push(q);}

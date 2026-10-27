@@ -55,7 +55,7 @@ const ellipse=(x,y,rx,ry)=>{ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx),Math
 const scope=(o,fn)=>{if(typeof ctx!=='undefined'&&typeof ctx?.scope==='function')return ctx.scope(o,fn);return fn();};
 const clamp01=v=>Math.max(0,Math.min(1,v));
 function drawField(h,P){scope({id:'r105:field:'+h.id,kind:'effect',x:h.x,y:h.y,r105Field:true},()=>fieldBody(h,P));}
-function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom),w=R*2,warn=h.age<h.warning,rem=h.life-h.age,lo=low(),pulse=.5+.5*Math.sin(time*9+h.id),sheet=P.sheet||null;
+function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom),w=R*2,warn=h.age<h.warning,rem=h.life-h.age,lo=low(),sid=Number.isFinite(h.id)?h.id:hash(h.id)%977,pulse=.5+.5*Math.sin(time*9+sid),sheet=P.sheet||null;// 문자열 id(검사 하네스)도 숫자 씨앗으로
  ctx.save();ctx.translate(q.x,q.y-4*zoom);ctx.lineCap='round';
  if(warn){const u=clamp01(h.age/h.warning);
   glow(0,0,R*1.1,R*1.1*.58,[[0,P.a,.26+.2*u],[.6,P.a,.12+.12*u],[1,P.a,0]]);// 바닥 빛
@@ -70,13 +70,13 @@ function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom
   if(t<.34){const k=t/.34;
    ctx.globalCompositeOperation='lighter';glow(0,0,R*(1+1.3*k),R*(1+1.3*k)*.58,[[0,P.b,.9*(1-k)],[.45,P.a,.55*(1-k)],[1,P.a,0]]);// 터지는 빛
    ctx.lineWidth=Math.max(1,3.2*zoom*(1-k));ctx.strokeStyle=rgba(P.b,.9*(1-k));ellipse(0,0,R*(1+1.9*k),R*(1+1.9*k)*.58);ctx.stroke();// 충격 고리
-   if(!lo){ctx.strokeStyle=rgba(P.b,.85*(1-k));ctx.lineWidth=Math.max(1,1.8*zoom);for(let s=0;s<10;s++){const a=s*Math.PI/5+h.id*.7,l=R*(.35+.9*k);ctx.beginPath();ctx.moveTo(Math.cos(a)*R*.2,Math.sin(a)*R*.2*.58);ctx.lineTo(Math.cos(a)*l,Math.sin(a)*l*.58-l*.25);ctx.stroke();}}// 불꽃 조각
+   if(!lo){ctx.strokeStyle=rgba(P.b,.85*(1-k));ctx.lineWidth=Math.max(1,1.8*zoom);for(let s=0;s<10;s++){const a=s*Math.PI/5+sid*.7,l=R*(.35+.9*k);ctx.beginPath();ctx.moveTo(Math.cos(a)*R*.2,Math.sin(a)*R*.2*.58);ctx.lineTo(Math.cos(a)*l,Math.sin(a)*l*.58-l*.25);ctx.stroke();}}// 불꽃 조각
    ctx.globalCompositeOperation='source-over';
-   if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*(1.1+.8*k),{alpha:1-k*.7,angle:h.id%2?.6:-.6});
+   if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*(1.1+.8*k),{alpha:1-k*.7,angle:sid%2?.6:-.6});
    else{drawCell(P.elem,'impact',0,R*.25,w*(1.1+1.1*k),{alpha:1-k});if(sheet)drawImg(DIR+'fx-'+sheet+'-2.webp',0,0,w*1.1*(1+.3*k),{alpha:.7*(1-k*.5),flat:sheet==='dali',blend:'screen'});}
-  }else{const f=clamp01(rem*3),pl=.6+.4*Math.sin(time*5+h.id);
+  }else{const f=clamp01(rem*3),pl=.6+.4*Math.sin(time*5+sid);
    glow(0,0,R,R*.58,[[0,P.a,.3*f*pl],[1,P.a,0]],3);ctx.lineWidth=Math.max(1,1.4*zoom);ctx.strokeStyle=rgba(P.b,.35*f);ellipse(0,0,R*.92,R*.92*.58);ctx.stroke();// 잔류
-   if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*1.6,{alpha:.55*f,angle:h.id%2?.6:-.6});
+   if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*1.6,{alpha:.55*f,angle:sid%2?.6:-.6});
    else if(sheet)drawImg(DIR+'fx-'+sheet+'-3.webp',0,0,w*1.3,{alpha:.75*f,flat:sheet==='dali',blend:'screen'});
    else if(!lo){drawCell(P.elem,'residue',0,R*.2,w*.9,{alpha:.55*f*pl});if(f<1)drawCell(P.elem,'fade',0,R*.2,w*.9,{alpha:.5*(1-f)});}// 소멸
   }}

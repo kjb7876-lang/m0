@@ -84,8 +84,9 @@ check('static plan: 7 pillars for dist03, weeds and hands for dist02',SP.plan.di
 check('R103 still exposes go/test/inspect',typeof SM.go==='function'&&typeof SM.test.go==='function'&&SM.GOAL===666&&SM.episodes.length===16);
 // ---- R105 drive art + boss FX (2026-10-27 batches) ----
 {const DA=sb.__STORYWORLD_DRIVE_ART_R105__,FX=sb.__STORYWORLD_BOSS_FX_R105__;
- check('drive art + boss fx modules load',DA?.revision==='R105-drive-art-1'&&FX?.revision==='R105-boss-fx-1'&&DA.inspect().stats.failures===0&&FX.inspect().stats.failures===0,(DA&&DA.inspect().lastError)||(FX&&FX.inspect().lastError));
+ check('drive art + boss fx modules load',DA?.revision==='R105-drive-art-2'&&FX?.revision==='R105-boss-fx-1'&&DA.inspect().stats.failures===0&&FX.inspect().stats.failures===0,(DA&&DA.inspect().lastError)||(FX&&FX.inspect().lastError));
  const files=new Set();for(const a of Object.values(DA.art))files.add(DA.dir+a.path);for(const A of Object.values(DA.actors))for(const f of Object.values(A))files.add(DA.dir+f);for(const f of DA.teapot)files.add(DA.dir+f);
+ for(const set of Object.values(DA.keyed))for(const f of set)files.add(DA.dir+f);for(const[o]of DA.tableSet)if(o!=='mask')files.add(DA.dir+'prop-'+o+'.webp');
  for(const f of ['fx-thread.webp','fx-ink-hook.webp','fx-keys-flight.webp','fx-dali-1.webp','fx-dali-2.webp','fx-dali-3.webp','fx-monet-1.webp','fx-monet-2.webp','fx-monet-3.webp'])files.add(DA.dir+f);
  const missing=[...files].filter(f=>!fs.existsSync(path.join(ASSET,f)));check('drive art files exist ('+files.size+')',!missing.length,missing.join(','));
  const badPlan=Object.keys(DA.plan).filter(k=>{const[i,st]=k.split(':');return !(SM.episodes[+i])||!['survival','maze','ascent'].includes(st);});check('drive art plan keys valid',!badPlan.length,badPlan.join(','));
@@ -95,6 +96,10 @@ check('R103 still exposes go/test/inspect',typeof SM.go==='function'&&typeof SM.
  const fake={id:'fake',props:[]},deco=Array.from({length:12},(_,k)=>({x:10+k*2,y:20})),n=DA.place(fake,1,'ascent',SM.episodes[1],{deco,dais:{x:10,y:20}});
  const tea=fake.props.find(p=>p.r105Teapot);check('place() dresses S-01 ascent (teapot + gardener)',n===2&&fake.props.length===2&&tea&&Math.hypot(tea.x-10,tea.y-20)>3.5&&fake.props.every(p=>p.solid===false&&p.path.startsWith(DA.dir)),JSON.stringify(fake.props.map(p=>[p.r105Art,p.x,p.y])));
  const stages=[];for(const k of Object.keys(DA.plan)){const[i,st]=k.split(':');const f={id:'f'+k,props:[]};const got=DA.place(f,+i,st,SM.episodes[+i],{deco:Array.from({length:20},(_,q)=>({x:5+q,y:5+(q%3)})),dais:{x:5,y:5}});stages.push([k,got,f.props.length]);}
+ // 둘째 묶음: S-07 탁자 세트(여섯 물건)·상승 맵 가면 키, S-05 상승 맵 창문 키가 단 근처에 놓인다
+ const t7={id:'t7',props:[]};DA.place(t7,7,'ascent',SM.episodes[7],{deco:Array.from({length:8},(_,q)=>({x:30+q*2,y:40})),dais:{x:30,y:40}});const tb=t7.props.find(p=>p.r105Table);
+ const t5={id:'t5',props:[]};DA.place(t5,5,'ascent',SM.episodes[5],{deco:Array.from({length:8},(_,q)=>({x:30+q*2,y:40})),dais:{x:30,y:40}});const win=t5.props.find(p=>p.r105Keyed==='window');
+ check('S-07 table set + keyed mask, S-05 keyed window placed',tb&&tb.r105TableKeyed===true&&tb.solid===false&&DA.tableSet.length===6&&win&&Math.hypot(win.x-30,win.y-40)>3.5&&DA.keyed.window.length===3&&DA.keyed.mask.length===3&&t5.props.length===3,JSON.stringify([t7.props.map(p=>p.r105Art),t5.props.map(p=>[p.r105Art,p.x,p.y])]));
  check('place() fills every planned stage',stages.every(([k,got,len])=>got>0&&got===len&&got===DA.plan[k].reduce((a,[,c])=>a+c,0)),JSON.stringify(stages));}
 // ---- summary ----
 const failed=results.filter(r=>!r.ok);
