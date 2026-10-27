@@ -40,7 +40,8 @@
  // Water tint per surface (multiplies the painted water) and its drift speed.
  const WATER={swamp:{file:'water-swamp',tint:0xb8c4b0,drift:[.006,.0035]},sea:{file:'water-swamp',tint:0x9cb4c8,drift:[.009,.005]},canal:{file:'water-canal',tint:0xc4c4b4,drift:[.012,.002]}};
  const TEXT=p=>[p?.style,p?.sourceEnvironment,p?.sourceTopology].join(' ').toLowerCase();
- function lookOf(id,scene){if(!scene||!(scene.open||scene.mode==='cavern'))return null;
+ function lookOf(id,scene){if(scene?.r105){const base=LOOK[scene.r105.family];return base?{...base,water:scene.r105.water||null,trees:scene.r105.trees||null}:null;}
+  if(!scene||!(scene.open||scene.mode==='cavern'))return null;
   const base=LOOK[scene.family];if(!base)return null;const text=TEXT(globalThis.StoryWorldProfilesR74?.profiles?.[id]);
   let water=base.water||null;if(/canal|waterway/.test(text))water='canal';else if(/swamp|reed/.test(text))water='swamp';else if(/black-sea|sea|port|harbou?r/.test(text))water='sea';
   // Trees: dead in cursed, burnt, drowned and grave ground; living in meadows and forests.
@@ -49,7 +50,8 @@
   return{...base,water,trees};}
 
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
- const eligible=r=>solo()&&r?.layer==='STORY'&&r.id!=='ep1a08'&&!!r.exploration?.r98Scene;
+ // R105: 사몽 단계(DREAM)도 청사진이 실외를 요구하면 바닥 원화와 나무를 받는다.
+ const eligible=r=>solo()&&(r?.layer==='STORY'||r?.exploration?.type==='r103-samong')&&r.id!=='ep1a08'&&!!r.exploration?.r98Scene;
  function hash(s){let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;}
 
  // The floor/wall source rectangles in L.surface.art stay as authored (doors
