@@ -393,6 +393,236 @@
      ]
     ]
    }
+  },
+  {
+   "group": "M137",
+   "ids": [
+    "c104-e1"
+   ],
+   "track": "move",
+   "kind": "walk",
+   "path": "assets/r109/mobs/M137-move.png",
+   "frames": 4,
+   "cell": [
+    125,
+    154
+   ],
+   "pivot": [
+    62.67,
+    153.2
+   ],
+   "visibleHeight": 150,
+   "bytes": 120499,
+   "sha256": "b2f8a19a9d96b48e1e7abd9c8fbea1b507d72c060c64e8ad21e238d7bdc4297b",
+   "use": "막힌 이름들(기계팔 사이보그) · 걷기 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 23,
+     "dy": -1,
+     "ncc": 0.91
+    },
+    {
+     "dx": 2,
+     "dy": 28,
+     "ncc": 0.854
+    },
+    {
+     "dx": 18,
+     "dy": 27,
+     "ncc": 0.869
+    }
+   ],
+   "groundSpreadPx": 16,
+   "source": {
+    "driveZipId": "158J1_OEhHfLjNkl60VjLg7W3Npdi-mEv",
+    "zipSha256": "ad466a26808bdb5f70e8d9f50f5596bb48c65d73819eee5d0b97a71c9bb9a6c6",
+    "png": "assets/M137-move-v1-2x2.png",
+    "pngSha256": "171db700e9f9ec8f6d9ba77bc1b79c1e7fbd89f1b972a632b6e19adc519d28f9",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
+  },
+  {
+   "group": "M119",
+   "ids": [
+    "h102-t1"
+   ],
+   "track": "idle",
+   "kind": "idle",
+   "path": "assets/r109/mobs/M119-idle.png",
+   "frames": 4,
+   "cell": [
+    114,
+    154
+   ],
+   "pivot": [
+    56.75,
+    150.78
+   ],
+   "visibleHeight": 150,
+   "bytes": 128481,
+   "sha256": "e7b6b7acc8e474f18e7c75e56f6a065fa5b12d68c507a050941fe204fa5a27e1",
+   "use": "무명 검흔(향로 든 형상) · 대기 4키(로브라 서 있을 때·이동 때 모두 사용)",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 29,
+     "dy": 0,
+     "ncc": 0.877
+    },
+    {
+     "dx": 0,
+     "dy": 6,
+     "ncc": 0.848
+    },
+    {
+     "dx": 30,
+     "dy": 6,
+     "ncc": 0.842
+    }
+   ],
+   "groundSpreadPx": 20,
+   "source": {
+    "driveZipId": "1bNoi71UAZiANsEWUkKgWeAOTZvZZzHGR",
+    "zipSha256": "f453432693d5d107dde007c305cf94e4cfaf568d73bafa4cf42e8fd8bc63c394",
+    "png": "assets/M119-idle4-raw.png",
+    "pngSha256": "adfaff89c5559a3e9845b7c6a286db51296c1e913265b9d56eff07c6531f81f9",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
+  },
+  {
+   "group": "PAPER",
+   "ids": [],
+   "art": "assets/r105/drive/mob-paper-figure.webp",
+   "track": "move",
+   "kind": "walk",
+   "path": "assets/r109/mobs/PAPER-move.png",
+   "frames": 4,
+   "cell": [
+    107,
+    153
+   ],
+   "pivot": [
+    50.4,
+    152.49
+   ],
+   "visibleHeight": 150,
+   "bytes": 99184,
+   "sha256": "db45c586393f657323f01f06bf65ed04d447175e14a31a4ab5d8f001f1f4a29c",
+   "use": "RF 종이 형상(R105 Drive 대체 그림) · 걷기 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 70,
+     "dy": 2,
+     "ncc": 0.878
+    },
+    {
+     "dx": -1,
+     "dy": 26,
+     "ncc": 0.899
+    },
+    {
+     "dx": 73,
+     "dy": 25,
+     "ncc": 0.846
+    }
+   ],
+   "groundSpreadPx": 10,
+   "source": {
+    "driveZipId": "1LTZFo_SW8LwW6iXG_Y9n5zFgLTh5Aup_",
+    "zipSha256": "e77f9b0b29685818a5b1d24b1c69f23bb6fb996ffa526452ee92a3ca8c982b2f",
+    "png": "assets/R109-paper-figure-move4-candidate.png",
+    "pngSha256": "fb7a3d14da4fffbb4dd6da284710f2b5b0aaa97467719425993e1b5c00a6a10c",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
   }
  ]
 }

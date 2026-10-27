@@ -95,3 +95,9 @@ window.__STORYWORLD_PLAY_R106__=Object.freeze({revision:REV,face:FACE,faceOf,orb
   if(options&&options.r72Portal==='next'&&r&&id!==zone&&r.records?.length&&!r.safe&&typeof completed==='function'&&completed(id,l)&&typeof firstPending==='function'&&firstPending(l)?.id!==id&&!options.fastTravelR63){stats.passes++;return base.call(this,id,from,{...options,fastTravelR63:true,passR107:true});}}catch(_){}
   return base.apply(this,arguments);};
  window.__STORYWORLD_PASS_R107__=Object.freeze({inspect:()=>({revision:'R107-pass',...stats})});})();
+
+/* R110 (사용자 요청 2026-10-27 "전체 디버깅+개선할점찾기 시각적으로"): 1100×720 데스크톱에서 지도 레벨이 두 자리가 되면
+ * 오른쪽 아래 '지역 Lv · 공격 간격 · 재사용' 줄이 두 줄로 넘어가 화면 밖으로 잘렸다. 한 줄로 고정하고 넘치면 글자를 조금 좁힌다. */
+(()=>{'use strict';if(window.__STORYWORLD_HUD_R110__||typeof document==='undefined')return;
+ try{const st=document.createElement('style');st.id='hudR110';st.textContent='#buildText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em;font-size:.94em;display:block;max-width:100%}';(document.head||document.documentElement).appendChild(st);}catch(_){}
+ window.__STORYWORLD_HUD_R110__=Object.freeze({revision:'R110-hud-1'});})();

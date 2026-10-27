@@ -89,7 +89,7 @@ function install(){
   if(!path)return base.apply(this,[e,...a]);const f=frameFor(path);if(!f){load(path);return base.apply(this,[e,...a]);}
   if(major(e)){cur=e;stats.actorDraws++;let r;try{r=base.apply(this,[e,...a]);}finally{cur=null;}try{drawStatic(e,path);}catch(err){fail(err);}return r;}
   const old=e.path,prof=e.profile,hadR74=Object.prototype.hasOwnProperty.call(e,'r74Monster'),r74=e.r74Monster;let shadow=null;
-  try{if(prof&&typeof prof==='object'){shadow=Object.create(prof);const fr={};for(const k of Object.keys(prof.frames||{}))fr[k]=f;for(const k of STATES)fr[k]=f;shadow.frames=fr;}}catch(err){fail(err);shadow=null;}
+  try{if(prof&&typeof prof==='object'){shadow=Object.create(prof);const fr={};for(const k of Object.keys(prof.frames||{}))fr[k]=f;for(const k of STATES)fr[k]=f;try{const mp=window.__STORYWORLD_MOBS_R109__?.artPatch?.(e,path);if(mp)Object.assign(fr,mp);}catch(_){}shadow.frames=fr;}}catch(err){fail(err);shadow=null;}
   e.path=path;if(shadow)e.profile=shadow;if(r74)e.r74Monster=false;stats.actorDraws++;
   try{return base.apply(this,[e,...a]);}finally{e.path=old;if(shadow)e.profile=prof;if(r74){if(hadR74)e.r74Monster=r74;else delete e.r74Monster;}}};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r105Art){if(!readyImage(p.path))load(p.path);else stats.propDraws++;}// 그릴 때 지연 로딩(주전자 상태1 포함)
