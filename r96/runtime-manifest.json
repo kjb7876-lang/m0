@@ -16279,8 +16279,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 19689,
-      "sha256": "f602ad0d2c41ad7b07b4a55155f592c82e6bbc52e1160e7ba92b23b50dbe656a"
+      "bytes": 19904,
+      "sha256": "6b9ea4f36f42d3fbc289db3619af69eff2227ca4935f694166de94cf8d8a5f26"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -16569,7 +16569,7 @@
     }
   ],
   "fileCount": 3313,
-  "totalBytes": 733400854,
+  "totalBytes": 733401069,
   "webHTMLSha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b",
   "largest": [
     {
