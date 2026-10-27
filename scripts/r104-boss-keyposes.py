@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R104: turn the Drive boss key-pose sheets (HAPIL accepted batches, catalogued
+"""R104/R105: turn the Drive boss key-pose sheets (HAPIL accepted batches, catalogued
 from LIVE-ASSET-INDEX rev 10) into trimmed runtime frames.
 
 For every set: crop the four 2x2 cells of the original sheet by source_rect,
@@ -24,7 +24,19 @@ def main(src):
  for batch,sets in cat['body_batches'].items():
   for s in sets:
    rid=s['runtime_boss_id'];sheet=Image.open(src/s['original_sheet']['path']).convert('RGBA')
-   cells=[sheet.crop((x,y,x+w,y+h)) for x,y,w,h in (p['source_rect_xywh'] for p in s['poses'])]
+   cells=[]
+   for p in s['poses']:
+    x,y,w,h=p['source_rect_xywh'];c=sheet.crop((x,y,x+w,y+h))
+    # R105: a bottom row split along a row-wise seam (Chapter7 murder04-mid) — zero the alpha on the neighbour's side of the seam.
+    if p.get('mask_runs'):
+     a=c.getchannel('A').load();left=p.get('mask_side')=='left'
+     for run in p['mask_runs']:
+      for yy in range(run['yStart']-y,run['yEndExclusive']-y):
+       if yy<0 or yy>=c.height:continue
+       sx=run['x']-x
+       rng_=range(max(0,sx),c.width) if left else range(0,min(c.width,sx))
+       for xx in rng_:a[xx,yy]=0
+    cells.append(c)
    # common canvas: pad cells to the largest cell so the four share coordinates
    cw=max(c.width for c in cells);ch=max(c.height for c in cells)
    canv=[]

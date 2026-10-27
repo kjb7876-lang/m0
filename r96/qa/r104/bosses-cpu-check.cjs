@@ -8,7 +8,8 @@ const checks=[];const check=(name,ok,detail='')=>{checks.push({name,passed:!!ok,
 const ctx={window:{},localStorage:{getItem:()=>null,setItem(){}},console};ctx.window=ctx;
 vm.createContext(ctx);vm.runInContext(fs.readFileSync(path.join(SRC,'bosses-r104-data.js'),'utf8'),ctx);
 const DATA=ctx.__STORYWORLD_BOSS_KEYPOSES_R104_DATA__;
-check('36 key-pose sets',Object.keys(DATA).length===36,String(Object.keys(DATA).length));
+check('44 key-pose sets',Object.keys(DATA).length===44,String(Object.keys(DATA).length));
+check('R105 Chapter6/7 ids present',['mb-hando01','mb-hando02','mb-hando03','h103-boss','mb-murder01','mb-murder02','mb-murder03','murder04-mid'].every(id=>DATA[id]&&DATA[id].frames.length===4));
 const webpSize=b=>{// VP8X canvas size, else VP8/VP8L
  const t=b.toString('ascii',12,16);if(t==='VP8X')return[1+b.readUIntLE(24,3),1+b.readUIntLE(27,3)];if(t==='VP8L'){const v=b.readUInt32LE(21);return[1+(v&0x3fff),1+((v>>14)&0x3fff)];}return[b.readUInt16LE(26)&0x3fff,b.readUInt16LE(28)&0x3fff];};
 let missing=[],bad=[];

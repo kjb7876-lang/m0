@@ -55,6 +55,8 @@ jobs:
         run: node r96/qa/r103/samong-cpu-check.cjs
       - name: R104 boss key-pose frames, pivots and draw-only swap
         run: node r96/qa/r104/bosses-cpu-check.cjs
+      - name: R105 narrative blueprints, markers, 777 sections and static props
+        run: node r96/qa/r105/samong-maps-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

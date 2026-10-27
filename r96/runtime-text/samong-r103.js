@@ -4,7 +4,7 @@
  * samong-text-r103.js 의 원문 문단만 보여 줍니다. */
 (()=>{'use strict';
  if(window.__STORYWORLD_SAMONG_R103__)return;
- const REV='R103-samong-1',PREFIX='sm103-',VERSION=1,GOAL=666;
+ const REV='R103-samong-1+R105',PREFIX='sm103-',VERSION=1,GOAL=666;
  const TEXT=()=>window.__STORYWORLD_SAMONG_TEXT_R103__?.sections||{};
  let failures=0,lastError=null;const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,400);};
  const live=()=>typeof started!=='undefined'&&started&&!!player&&!!room;
@@ -128,7 +128,10 @@
   const nodes=landings.map((p,n)=>({id:n,...p,radius:3,shape:'square',width:6,depth:6}));nodes.push({id:nodes.length,...dais,radius:9,shape:'round'});
   return build(id,ep,cells,{nodes,edges:nodes.slice(1).map((n,j)=>[j,j+1,3]),entry:{x:44.5,y:45.5,node:0},bounds:[0,0,49,49],wallHeight:3.4,extra:{kind:'ascent',dais,landings:landings.slice(1,-1)}});}
  const layouts=new Map();
- function layoutFor(i,stage){const id=sid(i,stage),seed=stage==='maze'?(S.ep===i&&S.seed?S.seed:hash(id)):0,k=id+':'+seed;if(!layouts.has(k)){const ep=EP[i];layouts.set(k,stage==='survival'?survivalLayout(i,ep):stage==='maze'?mazeLayout(i,ep,seed):ascentLayout(i,ep));while(layouts.size>12)layouts.delete(layouts.keys().next().value);}return layouts.get(k);}
+ function layoutFor(i,stage){const id=sid(i,stage),seed=stage==='maze'?(S.ep===i&&S.seed?S.seed:hash(id)):0,k=id+':'+seed;if(!layouts.has(k)){const ep=EP[i];let L=null;
+  // R105: 서사 청사진이 있으면 그 지형을 쓴다(없으면 R103 기본 지형).
+  try{L=window.__STORYWORLD_SAMONG_MAPS_R105__?.layoutFor?.(i,stage,ep,seed,{build,sid,rng,hash,survivalLayout,mazeLayout,ascentLayout})||null;}catch(e){fail(e);L=null;}
+  layouts.set(k,L||(stage==='survival'?survivalLayout(i,ep):stage==='maze'?mazeLayout(i,ep,seed):ascentLayout(i,ep)));while(layouts.size>12)layouts.delete(layouts.keys().next().value);}return layouts.get(k);}
 
  // ---- regions ------------------------------------------------------------------------------
  const donorProfiles=new Map(),donorFail=new Set();let makeNative=null;
@@ -145,12 +148,13 @@
   if(p.stage==='maze'){if(x.save)r.props.push(prop('save',x.save,{label:'기억의 등불 · 저장'}));x.chests.forEach((c,n)=>r.props.push(chest(key+':chest:'+n,c)));}
   if(p.stage==='ascent'){// Braziers line the climb so the way up reads at a glance.
    x.landings.forEach((q,n)=>{for(const s of[-1,1])r.props.push(prop('lamp',{x:q.x+s*2.4,y:q.y-s*2.4},{label:''}));});x.landings.forEach((q,n)=>{if(n===1)r.props.push(chest(key+':chest:0',{x:q.x+1.6,y:q.y-1.6}));});}
+  try{window.__STORYWORLD_SAMONG_MAPS_R105__?.dress?.(r,i,stage,ep,{prop,chest,key});}catch(e){fail(e);}
   return r;}
  function chest(id,at){const G=window.__STORYWORLD_GROWTH_R103__;return G?.chestProp?G.chestProp(id,at,{samongR103:'chest',chest:id}):prop('chest',at,{chest:id});}
  function prop(kind,at,extra={}){return{id:'r103:'+kind+':'+Math.round(at.x*10)+':'+Math.round(at.y*10),x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:kind,r74Prop:kind==='chest'?'crate':kind==='save'||kind==='lamp'?'brazier':'obelisk',...extra};}
 
  // ---- spawning ------------------------------------------------------------------------------
- function spawn(row,at,{boss=false,name,hpScale=1,tag='m',aggro=0}={}){const d=donor(row);if(!d)return null;const id='sm103:'+room.samongR103.key+':'+tag+':'+(++S.serial);let e;try{e=actor3(d,id,at.x,at.y,boss,'DREAM',regionById[room.id]);}catch(err){fail(err);return null;}if(!e)return null;
+ function spawn(row,at,{boss=false,name,hpScale=1,tag='m',aggro=0}={}){const d=donor(row);if(!d)return null;const id='sm103:'+room.samongR103.key+':'+tag+':'+(++S.serial);let e;try{e=actor3(d,id,at.x,at.y,boss,'DREAM',regionById[room.id]);}catch(err){fail(err);return null;}if(!e)return null;if(!e.nativeId)e.nativeId=row[1];
   if(name)e.name=name;e.samongR103=room.samongR103.key;e.spawnState='active';e.homeX=at.x;e.homeY=at.y;e.explorationLeash=null;e.graceUntil=time+.6;e.cd=Math.max(.6,e.cd||1);
   if(aggro&&e.combatProfile)e.combatProfile={...e.combatProfile,aggro};
   if(hpScale!==1&&Number.isFinite(e.maxHp)){e.maxHp=Math.max(1,Math.round(e.maxHp*hpScale));e.hp=e.maxHp;}
@@ -293,6 +297,7 @@
   if(p.samongR103==='save'){S.checkpoint={x:p.x+.6,y:p.y+.6};player.hp=Math.max(player.hp,maxHP()*.6);saveGame(false);toast('기억의 등불 · 이 자리에서 다시 시작합니다.',3);showRecords();return true;}
   if(p.samongR103==='chest'){window.__STORYWORLD_GROWTH_R103__?.openChest?.(p);return true;}
   if(p.samongR103==='michaela'){window.__STORYWORLD_GROWTH_R103__?.talkMichaela?.(p);return true;}
+  if(p.samongR103==='record'){try{return window.__STORYWORLD_SAMONG_MAPS_R105__?.use?.(p)===true;}catch(e){fail(e);return false;}}
   return false;}
 
  // ---- hooks ---------------------------------------------------------------------------------
