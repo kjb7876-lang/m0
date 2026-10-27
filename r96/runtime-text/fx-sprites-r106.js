@@ -50,6 +50,18 @@ function tinted(name,F,force=false){const k=name+'#'+F.a.join()+'|'+F.b.join();l
  tints.set(k,c);while(tints.size>MAXT){tints.delete(tints.keys().next().value);stats.evicted++;}return c;}
 const ready=(name,F)=>!!tints.get(name+'#'+F.a.join()+'|'+F.b.join());
 
+// R106 (사용자 요청 "플레이어 모습이 이펙트에 너무 가리지 않도록"): 그림이 영웅 몸통 상자를 덮는 비율만큼
+// 투명하게 그린다. 몸통을 다 덮는 큰 빛은 최대 62%까지 옅어지고, 작은 불꽃·몸 밖 그림은 그대로다.
+const hero={t:-1,x0:0,x1:0,y0:0,y1:0,area:1};let veilOn=true;
+function heroBox(){const t=typeof time==='number'?time:0;if(hero.t===t)return hero.area>1;hero.t=t;hero.area=1;
+ try{if(typeof player==='undefined'||!player||player.visible===false||typeof project!=='function')return false;const q=project(player.x,player.y),H=typeof actorHeight==='function'?actorHeight():64;
+  hero.x0=q.x-H*.3;hero.x1=q.x+H*.3;hero.y0=q.y-H*.95;hero.y1=q.y-H*.05;hero.area=(hero.x1-hero.x0)*(hero.y1-hero.y0);}catch(e){return false;}return hero.area>1;}
+function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
+ const sq=o.squash||1,aw=Math.abs(w),ah=Math.abs(h*sq),ext=o.angle?Math.max(aw,ah):0,bw=ext||aw,bh=ext||ah,
+  cx=x+(o.angle?0:(.5-piv[0])*w),cy=y+(o.angle?0:(.5-piv[1])*h*sq),
+  ix=Math.max(0,Math.min(cx+bw/2,hero.x1)-Math.max(cx-bw/2,hero.x0)),iy=Math.max(0,Math.min(cy+bh/2,hero.y1)-Math.max(cy-bh/2,hero.y0)),
+  f=ix*iy/hero.area;if(!(f>.04))return 1;stats.veiled=(stats.veiled||0)+1;
+ return 1-Math.min(.62,f*((o.blend||'lighter')==='lighter'?.7:.55));}
 // ---- drawing ------------------------------------------------------------------------------
 // Draws sprite `name` with its pivot at (x,y), size w×h px. o: angle (after squash), squash
 // (y scale applied before the rotation, for ground-plane art), flip, alpha, blend, frame, pivot.
@@ -58,8 +70,9 @@ function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)r
  const alpha=o.alpha??1;if(!(alpha>.004))return true;
  const m=META[name];if(!m)return false;const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
  const n=m[3],fr=n>1?((Math.floor(o.frame||0)%n)+n)%n:0,rows=ROWS.has(name),fw=rows?c.width:c.width/n,fh=rows?c.height/n:c.height,sx=rows?0:fr*fw,sy=rows?fr*fh:0,piv=o.pivot||m[2];
+ const veil=o.overHero?1:heroVeil(x,y,w,h,piv,o);
  ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle)ctx.rotate(o.angle);if(o.flip)ctx.scale(-1,1);
-  ctx.globalAlpha*=clamp(alpha,0,1);ctx.globalCompositeOperation=o.blend||'lighter';ctx.drawImage(c,sx,sy,fw,fh,-piv[0]*w,-piv[1]*h,w,h);}
+  ctx.globalAlpha*=clamp(alpha*veil,0,1);ctx.globalCompositeOperation=o.blend||'lighter';ctx.drawImage(c,sx,sy,fw,fh,-piv[0]*w,-piv[1]*h,w,h);}
  catch(e){fail(e);}finally{ctx.restore();}stats.draws++;return true;}
 // A sprite laid along a segment: its x axis from (x0,y0) to (x1,y1), `thick` px across.
 // 'line' has its ends at 25%/75% of the width; other strips span the full width.
@@ -76,6 +89,6 @@ function pump(){let n=lowFx()?1:2;while(queue.length&&n>0){const[name,P]=queue[0
   if(tinted(name,P,true)){stats.warmed++;queue.shift();}else queue.push(queue.shift());n--;}}
 if(typeof tick==='function'){const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(enabled&&queue.length&&!(typeof loading!=='undefined'&&loading))pump();}catch(e){fail(e);}return r;};}
 
-window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),
+window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
  inspect:()=>({revision:'R106-fx-sprites-1',enabled,tints:tints.size,queue:queue.length,...stats,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();

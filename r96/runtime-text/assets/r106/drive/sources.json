@@ -68,5 +68,55 @@
   "source": "R14-thread-door/thread-door-drawing/reverse-r14-thread-door-drawing.png",
   "sourceSha256": "367e7db4d8ede9950c4a2ccd90a3ef1eca3307e752ac2c00b93ef84787548774",
   "use": "R-14 실로 그린 문 그림 · 바닥의 종이"
+ },
+ {
+  "file": "assets/r106/drive/teal-rail.webp",
+  "w": 402,
+  "h": 360,
+  "bytes": 46978,
+  "sha256": "3195c4e5b6625e8d05b76c8e4201ee91176d2dd14987fb645e033248d3b38c36",
+  "source": "r00rail/teal-painted-rail-v2/storyworld-reverse-r00-flat-teal-painted-rail-fragment-v2.png",
+  "sourceSha256": "7e26976fa81e9f783bd58b6e3fa80b3615f35bdaaf7bf6235e9301734630c78a",
+  "use": "R-00 청록 물감 철로 v2 · 바닥 조각(정적)"
+ },
+ {
+  "file": "assets/r106/drive/sunflower-gurney.webp",
+  "w": 412,
+  "h": 420,
+  "bytes": 61550,
+  "sha256": "5142577a9403dc2e62a851953009f3258490daf9fb44fee4951a655a5ed9fb7b",
+  "source": "r02gurney/sunflower-gurney/storyworld-reverse-r02-sunflower-gurney-idle-v1.png",
+  "sourceSha256": "982fa71c23ac25f65752780f28c5f033bf83345b0bb5524c7d19baa7dc8a9774",
+  "use": "R-02 해바라기 이송침상 · 정적 조형물"
+ },
+ {
+  "file": "assets/r106/drive/link-pillar.webp",
+  "w": 495,
+  "h": 480,
+  "bytes": 68876,
+  "sha256": "f33288e021f4c333e2795d2580a44176c501819cfd76142efd0e815641610639",
+  "source": "r13pillar/ending-link-pillar-v2/reverse-r13-ending-link-pillar-v2-web-thread-edit.png",
+  "sourceSha256": "86c6a65c74b60d70daceab9799fe31aaa1a68abe8257edf55a688ac0ace92480",
+  "use": "R-13 결말 연결기둥 v2(조건부) · 정적 조형물"
+ },
+ {
+  "file": "assets/r106/drive/care-record.webp",
+  "w": 462,
+  "h": 320,
+  "bytes": 26776,
+  "sha256": "2ffc60222b424085f288abd543e83e3e7f26b23cb2c880e3a9dde1e47d50f667",
+  "source": "r16record/care-record-spread/reverse-r16-care-record-spread.png",
+  "sourceSha256": "0a86d7b9d1043bd45a93dd4cf669c78cbef68e2deb3b089c4a250efc645fc37b",
+  "use": "R-16 돌봄 기록철 · 바닥에 펼친 기록(이름 UI 없음)"
+ },
+ {
+  "file": "assets/r106/drive/mannequin-eating-1.webp",
+  "w": 202,
+  "h": 375,
+  "bytes": 27810,
+  "sha256": "f4fd69a9c543805360689720f52443c8f0906d0a65d27dcffb10a1a3b81dcfa1",
+  "source": "s04mannequin/mannequin-eating-v2/storyworld-samong-s04-mannequin-eating-6frames-v2.png",
+  "sourceSha256": "b0b0f48e1b679eece9f2641cefe787880c692b8b3683eb38198f261905772770",
+  "use": "S-04 빈 접시 마네킹 · 6칸 후보 중 1번 칸만 정적(동작 미적용)"
  }
 ]

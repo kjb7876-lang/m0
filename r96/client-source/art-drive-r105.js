@@ -20,7 +20,8 @@ const ACTORS={1:{boss:'boss-hostess.webp'},2:{boss:'boss-patroller.webp',mob:'mo
 const ART={gardener:{path:'prop-gardener.webp',height:112},student:{path:'mob-student.webp',height:104},gogh:{path:'prop-gogh-chair.webp',height:140},manet:{path:'prop-manet-mirror.webp',height:140},picasso:{path:'prop-picasso-paper.webp',height:168},gchair:{path:'prop-gothic-chair.webp',height:118},gwall:{path:'prop-gothic-wall.webp',height:156},teapot:{path:'prop-teapot-1.webp',height:92},
  news1:{path:'prop-newspaper-1.webp',height:54},news2:{path:'prop-newspaper-2.webp',height:52},news3:{path:'prop-newspaper-3.webp',height:44},window:{path:'prop-window-1.webp',height:126},table:{path:'prop-table.webp',height:88},
  // R106 드라이브 역행 묶음(R05·R06·R07·R08·R13·R14) — assets/r106/drive, 정적 1장씩(망치만 2키)
- hammer:{path:'assets/r106/drive/hammer-1.webp',height:96},paperKing:{path:'assets/r106/drive/paper-king.webp',height:132},lotus:{path:'assets/r106/drive/lotus.webp',height:104},tableDrawing:{path:'assets/r106/drive/table-drawing.webp',height:34},trumpet:{path:'assets/r106/drive/trumpet.webp',height:92},threadDoor:{path:'assets/r106/drive/thread-door.webp',height:36}};
+ hammer:{path:'assets/r106/drive/hammer-1.webp',height:96},paperKing:{path:'assets/r106/drive/paper-king.webp',height:132},lotus:{path:'assets/r106/drive/lotus.webp',height:104},tableDrawing:{path:'assets/r106/drive/table-drawing.webp',height:34},trumpet:{path:'assets/r106/drive/trumpet.webp',height:92},threadDoor:{path:'assets/r106/drive/thread-door.webp',height:36},
+ tealRail:{path:'assets/r106/drive/teal-rail.webp',height:68},gurney:{path:'assets/r106/drive/sunflower-gurney.webp',height:108},linkPillar:{path:'assets/r106/drive/link-pillar.webp',height:186},careRecord:{path:'assets/r106/drive/care-record.webp',height:52},mannequin:{path:'assets/r106/drive/mannequin-eating-1.webp',height:100}};
 // 탁자 위 여섯 물건: 탁자 윗면 중심 기준 화면 오프셋(px, zoom 1)과 높이(px). 영웅 66px 대비 실물보다 조금 크게(읽히는 크기) 두었다.
 const TABLE_SET=[['ledger',-27,-5,30],['doll',-7,-13,34],['mask',14,-9,34],['casing',-15,7,10],['cloth',7,6,26],['glass',29,2,22]];
 // 보스 상태(대기 → 체력 절반 → 격파)에 비추는 3키 그림. 창문: 꺼짐 → 불빛 → 잔광·연기. 가면: 온전 → 금 → 세 번째 키.
@@ -35,11 +36,17 @@ const PLAN={'1:survival':[['gardener',3]],'1:maze':[['gardener',2]],'1:ascent':[
  '13:survival':[['gchair',3]],'13:maze':[['gchair',2],['gwall',3]],'13:ascent':[['gwall',4],['gchair',1]],
  '5:survival':[['news1',1],['news2',1],['news3',1]],'5:maze':[['news2',2],['news1',1]],'5:ascent':[['window',1],['news3',1],['news1',1]],
  '7:survival':[['table',1]],'7:maze':[['table',1]],'7:ascent':[['table',1]],
- // R106: R-05 망치(재판관 단 옆, 보스 체력 절반 이하에서 저울판이 깨진 상태로), R-06 종이 왕, R-07 감시의 연꽃, R-11 작은 식탁 그림, R-13 빈 소매 나팔, R-14 실로 그린 문
- '10:survival':[['paperKing',1]],'10:maze':[['paperKing',1]],'10:ascent':[['hammer',1],['paperKing',1]],
+ };
+// R106 추가분은 기존 칸 뒤에 덧붙인다(같은 키를 다시 쓰면 R105 배치가 지워지므로 합친다).
+// R-05 망치(재판관 단 옆, 보스 체력 절반 이하에서 저울판이 깨진 상태로), R-06 종이 왕, R-07 감시의 연꽃, R-11 작은 식탁 그림, R-13 빈 소매 나팔, R-14 실로 그린 문,
+// 오후 묶음: R-00 청록 물감 철로·R-02 해바라기 침상(RA), S-04 빈 접시 마네킹(1번 칸 정적), R-13 연결기둥 v2·R-16 돌봄 기록철(RG)
+const PLAN_R106={'10:survival':[['paperKing',1]],'10:maze':[['paperKing',1]],'10:ascent':[['hammer',1],['paperKing',1]],
  '11:survival':[['lotus',4]],'11:maze':[['lotus',3]],'11:ascent':[['lotus',2]],
  '13:maze':[['tableDrawing',1]],'13:ascent':[['tableDrawing',1]],
- '14:survival':[['trumpet',3]],'14:maze':[['threadDoor',1],['trumpet',1]],'14:ascent':[['trumpet',2],['threadDoor',1]]};
+ '14:survival':[['trumpet',3],['linkPillar',1]],'14:maze':[['threadDoor',1],['trumpet',1],['careRecord',1]],'14:ascent':[['trumpet',2],['threadDoor',1],['linkPillar',1],['careRecord',1]],
+ '8:survival':[['tealRail',3],['gurney',1]],'8:maze':[['tealRail',2],['gurney',1]],'8:ascent':[['gurney',1],['tealRail',2]],
+ '4:survival':[['mannequin',3]],'4:maze':[['mannequin',2]],'4:ascent':[['mannequin',2]]};
+for(const [k,v] of Object.entries(PLAN_R106))PLAN[k]=(PLAN[k]||[]).concat(v);
 const TEAPOT=['prop-teapot-1.webp','prop-teapot-2.webp','prop-teapot-3.webp'];
 // 지역 진입 때 releaseImageMemory()가 준비된 그림을 지울 수 있으므로 자체 중복 집합을 두지 않고 imageCache 기준으로 다시 요청한다.
 const load=p=>{try{if(typeof addImage==='function'&&!(typeof imageCache!=='undefined'&&imageCache.has(p)))addImage(p);}catch(e){fail(e);}};
@@ -50,7 +57,7 @@ function place(r,i,stage,ep,{deco=[],dais=null}={}){const plan=PLAN[i+':'+stage]
    if((key==='teapot'||key==='window'||key==='hammer')&&dais){let best=null,bd=1e9;for(const p of deco){const dd=Math.hypot(p.x-dais.x,p.y-dais.y);if(dd<=3.5)continue;const score=dd+((open(r,p.x+1,p.y+1)&&open(r,p.x+1,p.y)&&open(r,p.x,p.y+1))?0:6);if(score<bd){bd=score;best=p;}}at=best;if(at)deco.splice(deco.indexOf(at),1);}// 단 가까이, 카메라 쪽(+x,+y)이 트인 자리 우선(창문이 벽에 반쯤 가리지 않게)
    else{let j=d;for(;j<deco.length;j++){const q=deco[j];if(open(r,q.x+1,q.y+1)&&open(r,q.x+1,q.y)&&open(r,q.x,q.y+1))break;}if(j<deco.length){at=deco[j];deco.splice(j,1);}else at=deco[d++];}// 카메라 쪽(+x,+y)이 트인 자리 우선: 키 큰 원화가 벽 윗면에 가리지 않게
    if(!at)break;
-   const p={id:'r105:art:'+r.id+':'+key+':'+k,path:artPath(art.path),x:at.x,y:at.y,height:art.height*((key==='gwall'||key==='teapot'||key==='window'||key==='table'||key==='hammer'||key==='tableDrawing'||key==='threadDoor')?1:.92+((i*7+k*13)%17)/100),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r105Art:key};
+   const p={id:'r105:art:'+r.id+':'+key+':'+k,path:artPath(art.path),x:at.x,y:at.y,height:art.height*((key==='gwall'||key==='teapot'||key==='window'||key==='table'||key==='hammer'||key==='tableDrawing'||key==='threadDoor'||key==='tealRail'||key==='careRecord')?1:.92+((i*7+k*13)%17)/100),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r105Art:key};
    if(key==='teapot')p.r105Teapot=true;if(key==='window')p.r105Keyed='window';if(key==='hammer')p.r105Keyed='hammer';
    if(key==='table'){p.r105Table=true;p.r105TableKeyed=stage==='ascent';for(const[o]of TABLE_SET)load(DIR+(o==='mask'?KEYED.mask[0]:'prop-'+o+'.webp'));}
    r.props.push(p);load(p.path);n++;}}

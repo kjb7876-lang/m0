@@ -9,8 +9,8 @@
     },
     {
       "path": "art-drive-r105.js",
-      "bytes": 13160,
-      "sha256": "64140573fcba87d12bd4bf9f5b48c06ae35122eae6438019929ffe7e1608c351"
+      "bytes": 14195,
+      "sha256": "83fe0b2ae7190d7bdb51ed485b29d8127a4da22a83fef9f745ee5ce21c415e26"
     },
     {
       "path": "assets-clean-r99.js",
@@ -7458,6 +7458,11 @@
       "sha256": "9418697b710b764bac87a48a79e6c1e78562221fb2ed1560d5b90f741b882e09"
     },
     {
+      "path": "assets/r106/drive/care-record.webp",
+      "bytes": 26776,
+      "sha256": "2ffc60222b424085f288abd543e83e3e7f26b23cb2c880e3a9dde1e47d50f667"
+    },
+    {
       "path": "assets/r106/drive/hammer-1.webp",
       "bytes": 21292,
       "sha256": "f2e40b7c14cf6c9d470600d1795ade969e80ca7b809852331ac2ad6a6ffda309"
@@ -7468,9 +7473,19 @@
       "sha256": "6a2991b18a9d990bd47f08e661b8e5d7447dee0dd28d3340cd512c968a0b2d90"
     },
     {
+      "path": "assets/r106/drive/link-pillar.webp",
+      "bytes": 68876,
+      "sha256": "f33288e021f4c333e2795d2580a44176c501819cfd76142efd0e815641610639"
+    },
+    {
       "path": "assets/r106/drive/lotus.webp",
       "bytes": 49744,
       "sha256": "ca8919fb7d09e07dcfa789dad9db369b5ffac268b03d0c3f91a64e68d6e7b064"
+    },
+    {
+      "path": "assets/r106/drive/mannequin-eating-1.webp",
+      "bytes": 27810,
+      "sha256": "f4fd69a9c543805360689720f52443c8f0906d0a65d27dcffb10a1a3b81dcfa1"
     },
     {
       "path": "assets/r106/drive/paper-king.webp",
@@ -7479,13 +7494,23 @@
     },
     {
       "path": "assets/r106/drive/sources.json",
-      "bytes": 3051,
-      "sha256": "434f4e5de8eda988a61181a379640c474395d71d0d65089443658a181fac4b52"
+      "bytes": 5226,
+      "sha256": "f158d0211874001c34352bbe352f9f2effe357eb413af18baa91dec844648e1f"
+    },
+    {
+      "path": "assets/r106/drive/sunflower-gurney.webp",
+      "bytes": 61550,
+      "sha256": "5142577a9403dc2e62a851953009f3258490daf9fb44fee4951a655a5ed9fb7b"
     },
     {
       "path": "assets/r106/drive/table-drawing.webp",
       "bytes": 30502,
       "sha256": "42aea48f9c0400cc853c42abb9763baa06d1b3b16150ca5fe7f9e76153b050b1"
+    },
+    {
+      "path": "assets/r106/drive/teal-rail.webp",
+      "bytes": 46978,
+      "sha256": "3195c4e5b6625e8d05b76c8e4201ee91176d2dd14987fb645e033248d3b38c36"
     },
     {
       "path": "assets/r106/drive/thread-door.webp",
@@ -16184,8 +16209,8 @@
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 8990,
-      "sha256": "63fede6efe454aa2584d0e815ac504e82d720b3c856cbfa2eaf6a3fba7856b7a"
+      "bytes": 10418,
+      "sha256": "c87531d551d2c0ff91e563d47c0d601eb1452ec38399c4c6b7a6d245d9a00677"
     },
     {
       "path": "growth-r103.js",
@@ -16239,8 +16264,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562026,
-      "sha256": "c1ed13c27415848340f311cb5cd201d5f5fb8737e64b4324fe019c7a97538601"
+      "bytes": 6562065,
+      "sha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16256,6 +16281,11 @@
       "path": "perf-r97.js",
       "bytes": 5359,
       "sha256": "446e18d7e54633bcdc29fa73a32bd5a2a8c2f38c6e29a7036dd0daa026ada90c"
+    },
+    {
+      "path": "play-r106.js",
+      "bytes": 8882,
+      "sha256": "ebb2a423df42a5c0e2c7bb57d9151b7c25ea9a1b584e8a65a31f398a5179c500"
     },
     {
       "path": "polish-r100-data.js",
@@ -16463,9 +16493,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3292,
-  "totalBytes": 732452629,
-  "webHTMLSha256": "c1ed13c27415848340f311cb5cd201d5f5fb8737e64b4324fe019c7a97538601",
+  "fileCount": 3298,
+  "totalBytes": 732698178,
+  "webHTMLSha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b",
   "largest": [
     {
       "path": "index.html",
