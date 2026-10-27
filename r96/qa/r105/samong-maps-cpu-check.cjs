@@ -85,8 +85,9 @@ check('R103 still exposes go/test/inspect',typeof SM.go==='function'&&typeof SM.
 // ---- R105 drive art + boss FX (2026-10-27 batches) ----
 {const DA=sb.__STORYWORLD_DRIVE_ART_R105__,FX=sb.__STORYWORLD_BOSS_FX_R105__;
  check('drive art + boss fx modules load',DA?.revision==='R105-drive-art-2'&&FX?.revision==='R105-boss-fx-1'&&DA.inspect().stats.failures===0&&FX.inspect().stats.failures===0,(DA&&DA.inspect().lastError)||(FX&&FX.inspect().lastError));
- const files=new Set();for(const a of Object.values(DA.art))files.add(DA.dir+a.path);for(const A of Object.values(DA.actors))for(const f of Object.values(A))files.add(DA.dir+f);for(const f of DA.teapot)files.add(DA.dir+f);
- for(const set of Object.values(DA.keyed))for(const f of set)files.add(DA.dir+f);for(const[o]of DA.tableSet)if(o!=='mask')files.add(DA.dir+'prop-'+o+'.webp');
+ const AP=f=>f.startsWith('assets/')?f:DA.dir+f;// R106: 새 드라이브 원화는 assets/r106/drive 전체 경로
+ const files=new Set();for(const a of Object.values(DA.art))files.add(AP(a.path));for(const A of Object.values(DA.actors))for(const f of Object.values(A))files.add(DA.dir+f);for(const f of DA.teapot)files.add(DA.dir+f);
+ for(const set of Object.values(DA.keyed))for(const f of set)files.add(AP(f));for(const[o]of DA.tableSet)if(o!=='mask')files.add(DA.dir+'prop-'+o+'.webp');
  for(const f of ['fx-thread.webp','fx-ink-hook.webp','fx-keys-flight.webp','fx-dali-1.webp','fx-dali-2.webp','fx-dali-3.webp','fx-monet-1.webp','fx-monet-2.webp','fx-monet-3.webp'])files.add(DA.dir+f);
  const missing=[...files].filter(f=>!fs.existsSync(path.join(ASSET,f)));check('drive art files exist ('+files.size+')',!missing.length,missing.join(','));
  const badPlan=Object.keys(DA.plan).filter(k=>{const[i,st]=k.split(':');return !(SM.episodes[+i])||!['survival','maze','ascent'].includes(st);});check('drive art plan keys valid',!badPlan.length,badPlan.join(','));

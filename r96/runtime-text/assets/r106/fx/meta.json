@@ -1,0 +1,318 @@
+{
+ "generator": "scripts/r106-fx-sprites.py",
+ "note": "code-generated textures (not final art); grey luminance + alpha, tinted per hero at runtime",
+ "sprites": {
+  "glow": {
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "soft radial glow",
+   "bytes": 3168,
+   "sha256": "a08107223476bb8f1d725fa7907367005b901c7bdbde941cd4bcff250763018c"
+  },
+  "orb": {
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "bright orb with halo",
+   "bytes": 1272,
+   "sha256": "d1a3f665256ccf1e7dd5609f872b9f3b479c6f6d3079393531aff4bf277a7e65"
+  },
+  "flare": {
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "star flare: impact, holy light",
+   "bytes": 10058,
+   "sha256": "af103a5ab0ff6d8cf9e09f389643de22dbdda8a791f97e13d88cd6561f990ab6"
+  },
+  "ring": {
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "energy shock ring (draw squashed for the ground)",
+   "bytes": 19372,
+   "sha256": "389d916974449ba5f382cf6f8b0365daabda5449f8ffd298038f2751264da6a6"
+  },
+  "halo": {
+   "w": 256,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "halo ring over the head",
+   "bytes": 9038,
+   "sha256": "43fc784adfadc494e13b4593354b91f3c65d156a9cfab6f37dadca42fad0dfb6"
+  },
+  "slashline": {
+   "w": 512,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "straight slash streak, along +x (tail at x=0, head at x=1)",
+   "bytes": 8884,
+   "sha256": "17a8cd9e4c74e88a32bb84471628e165efabb0578529c375b4036ed1d6ae94e7"
+  },
+  "spark": {
+   "w": 128,
+   "h": 32,
+   "pivot": [
+    1,
+    0.5
+   ],
+   "frames": 1,
+   "use": "tapered spark streak, head at +x",
+   "bytes": 832,
+   "sha256": "a1572bf01c0a5a511943a9da59f8c1f2ebed9c8be6d57da6e944f28e548e34bd"
+  },
+  "line": {
+   "w": 64,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "glowing segment, ends at x=.25 and x=.75",
+   "bytes": 420,
+   "sha256": "a7bd654967ef0f54ca40c3cabb9833e3d8ec536d2793e8fc51ce2d78c5027f2e"
+  },
+  "wing": {
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.12771149875507487,
+    0.40459446548917744
+   ],
+   "frames": 1,
+   "use": "feathered right wing seen from behind; pivot = shoulder",
+   "bytes": 78648,
+   "sha256": "e2a78151f459af819822d9aedbe029a65f2023704c8393616ce93d7050cac959"
+  },
+  "feather": {
+   "w": 48,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.95
+   ],
+   "frames": 1,
+   "use": "single falling feather, quill at bottom",
+   "bytes": 4016,
+   "sha256": "f960c6f1a027416cf8cf4072c058ee5d290cfcf3db16b1f401bc338b0b1720f1"
+  },
+  "petal": {
+   "w": 64,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "flower petal",
+   "bytes": 1068,
+   "sha256": "79d664006ef3b92f6a0c687d9eedfc7800be856962ab3c5a5385fc8bc4a68a4b"
+  },
+  "shard": {
+   "w": 96,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.62
+   ],
+   "frames": 1,
+   "use": "crystal shard, point up",
+   "bytes": 3112,
+   "sha256": "45895ab3ad5f9c9af43715341bfdff9255095cd9134646f27f65598cbb0f1f8f"
+  },
+  "pillar": {
+   "w": 128,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.99
+   ],
+   "frames": 1,
+   "use": "column of light rising from the ground",
+   "bytes": 9806,
+   "sha256": "3f4ff5b369f11f9fb5aed924552df65e6f1d74d3f993b06641ea9cba91740cdc"
+  },
+  "cross": {
+   "w": 256,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.3385416666666667
+   ],
+   "frames": 1,
+   "use": "holy cross glyph with bloom",
+   "bytes": 14552,
+   "sha256": "79951d0d6a3a44ab81896a078b16635975601ab5cd01132b442e441bd3e6aa27"
+  },
+  "bolt": {
+   "w": 512,
+   "h": 288,
+   "pivot": [
+    0,
+    0.5
+   ],
+   "frames": 4,
+   "use": "lightning bolts (4 rows), from x=0 to x=1",
+   "bytes": 37026,
+   "sha256": "ab0409a7ed68f3f21c583a707a1ff22cf2f85c1c6a0fca2d45958097ca7d4c4c"
+  },
+  "smoke": {
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "smoke puff",
+   "bytes": 10942,
+   "sha256": "55c2727763f0927f6b51bb44eb59b5da9198c58f644d139e40dcf2c00dfc484e"
+  },
+  "crack": {
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "glowing ground cracks (draw squashed)",
+   "bytes": 17552,
+   "sha256": "925f50971fb1505964721bd2decdcfb0ee6b28a3b2b31b02fe4e0667c3dbda7d"
+  },
+  "pixel": {
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "glowing data square",
+   "bytes": 714,
+   "sha256": "ff04206891d2b22570e217d877ad8c948da5409973df5762a75b8c7976caf604"
+  },
+  "blade": {
+   "w": 256,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "orbiting sword-light crescent, along +x",
+   "bytes": 4594,
+   "sha256": "ee85913312942328798a21ea0e3e96add6cbfe4d19f8485203a0bfd06020fc8c"
+  },
+  "flame": {
+   "w": 768,
+   "h": 288,
+   "pivot": [
+    0.5,
+    0.97
+   ],
+   "frames": 4,
+   "use": "flame sheet, 4 frames side by side, base at bottom",
+   "bytes": 31808,
+   "sha256": "8d616b707fc32455c82bdb4589cfae11cce9927eb78a365b6ac1775799a0fae7"
+  },
+  "spike": {
+   "w": 64,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.99
+   ],
+   "frames": 1,
+   "use": "crystal spike rising from the ground",
+   "bytes": 2152,
+   "sha256": "3b675c1121436832eccb2f896baac759609167c9ee46160e75e7924bd1435d22"
+  },
+  "slash": {
+   "w": 512,
+   "h": 288,
+   "pivot": [
+    0.5,
+    1.0416666666666667
+   ],
+   "frames": 1,
+   "use": "crescent sword arc (150 deg), arc centre at pivot",
+   "bytes": 18016,
+   "sha256": "3829f5b4f6fc2c26b6a4499a8307dd4644294a2b441ffb0af11ef32bf9cf3742"
+  },
+  "slashwide": {
+   "w": 512,
+   "h": 288,
+   "pivot": [
+    0.5,
+    1.0416666666666667
+   ],
+   "frames": 1,
+   "use": "crescent sword arc (220 deg), arc centre at pivot",
+   "bytes": 21578,
+   "sha256": "b1009ff72052f0473444a27725e6a24088ad513f43569f515d2756f33e773da2"
+  },
+  "rune": {
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "rune circle (draw squashed for the ground)",
+   "bytes": 101340,
+   "sha256": "84fb8ed6c3750a349f29e7af7f8151bac90d5b64d326d6f5cb77c70d5392b62d"
+  },
+  "clock": {
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "clock circle (draw squashed for the ground)",
+   "bytes": 100320,
+   "sha256": "d68ec596fbcc091a2fdf0e91c6787f3080a18691d468d1ec75762972fd68486f"
+  },
+  "circuit": {
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "circuit circle (draw squashed for the ground)",
+   "bytes": 98608,
+   "sha256": "c90433158eec639d8ac64b73efc456eb505420f54e2572417d922d83ed523bb5"
+  }
+ }
+}

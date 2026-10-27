@@ -82,11 +82,11 @@ const fadeOut=(t,from=.62)=>t<from?1:Math.max(0,1-(t-from)/(1-from));
 
 // ---- aura primitives -----------------------------------------------------------------
 function disc(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();}
-function groundGlow(q,h,F,k){const r=h*(.4+.22*k);ctx.globalCompositeOperation='lighter';ctx.save();ctx.translate(q.x,q.y);ctx.scale(1,.5);
+function groundGlow0(q,h,F,k){const r=h*(.4+.22*k);ctx.globalCompositeOperation='lighter';ctx.save();ctx.translate(q.x,q.y);ctx.scale(1,.5);
  disc(0,0,r,rgba(F.a,.05+.06*k));disc(0,0,r*.66,rgba(F.a,.06+.07*k));disc(0,0,r*.3,rgba(F.b,.07+.08*k));ctx.restore();}
 // Flame silhouette behind the body: n tongues whose tips flicker. 'dark' (슬레이어)
 // keeps a black-red outer sheet under a blood-red inner flame.
-function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const n=lowFx()?6:9,w=h*(.42+.22*k),H=h*(.8+.9*k),t=time,vis=.4+.6*clamp(k,0,1);
+function flames0(x,fy,h,F,mode,k,seed){if(k<=0)return;const n=lowFx()?6:9,w=h*(.42+.22*k),H=h*(.8+.9*k),t=time,vis=.4+.6*clamp(k,0,1);
  for(let layer=0;layer<2;layer++){const s=layer?.6:1,inner=layer===1;
   ctx.globalCompositeOperation=mode==='dark'&&!inner?'source-over':'lighter';
   const col=mode==='dark'?(inner?F.a:[28,4,10]):(inner?F.b:F.a),alpha=(inner?.62:.5)*vis*(mode==='dark'&&!inner?.9:1);
@@ -98,18 +98,18 @@ function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const n=lowFx()?6:9,w=h*(.4
    ctx.quadraticCurveTo(cx,fy-tip,nx,ny);}
   ctx.closePath();ctx.fill();}}
 // Two feathered wings behind the shoulders; span grows with heat, flap slowly.
-function wings(x,fy,h,F,k,seed){const L=h*(.66+.5*clamp(k,0,1)),flap=Math.sin(time*2.4+seed)*.09,sy=fy-h*.62;
+function wings0(x,fy,h,F,k,seed){const L=h*(.66+.5*clamp(k,0,1)),flap=Math.sin(time*2.4+seed)*.09,sy=fy-h*.62;
  for(const s of[-1,1]){ctx.save();ctx.translate(x+s*h*.1,sy);ctx.rotate(s*flap);
   for(let i=0;i<3;i++){const l=L*(1-.18*i),lift=.72-.24*i,drop=.08+.2*i;
    ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(F.b,.55-.1*i);ctx.beginPath();ctx.moveTo(0,0);
    ctx.quadraticCurveTo(s*l*.45,-l*lift,s*l,-l*(lift-.42));ctx.quadraticCurveTo(s*l*.62,-l*(lift-.42)+l*drop*.6,s*l*.14,l*drop);ctx.closePath();ctx.fill();
    ctx.globalCompositeOperation='lighter';ctx.strokeStyle=rgba(F.a,.35);ctx.lineWidth=Math.max(1,1.2*Z());ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(s*l*.45,-l*lift,s*l,-l*(lift-.42));ctx.stroke();}
   ctx.restore();}}
-function halo(x,fy,h,F,k){const y=fy-h*1.08+Math.sin(time*2)*1.5*Z(),rx=h*(.19+.03*k),ry=rx*.34;ctx.globalCompositeOperation='lighter';
+function halo0(x,fy,h,F,k){const y=fy-h*1.08+Math.sin(time*2)*1.5*Z(),rx=h*(.19+.03*k),ry=rx*.34;ctx.globalCompositeOperation='lighter';
  ctx.lineWidth=Math.max(1.5,3.5*Z());ctx.strokeStyle=rgba(F.a,.28);ctx.beginPath();ctx.ellipse(x,y,rx*1.12,ry*1.3,0,0,TAU);ctx.stroke();
  ctx.lineWidth=Math.max(1,2*Z());ctx.strokeStyle=rgba(F.b,.85);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.stroke();}
 // Orbs on a tilted orbit about the chest; sin(a)>0 is in front of the body.
-function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const n=Math.max(0,(F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0)-cut);if(!n)return;
+function orbs0(p,x,fy,h,F,k,seed,layer,cut=0){const n=Math.max(0,(F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0)-cut);if(!n)return;
  const rx=h*(.4+.08*k),ry=h*.13,cy=fy-h*.52,spin=time*(1.4+.8*k)+seed;
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;
   const ox=x+Math.cos(a)*rx,oy=cy+depth*ry+Math.sin(time*3+i)*h*.03,sc=.8+.25*depth,col=i%2?F.b:F.a;
@@ -120,7 +120,7 @@ function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const n=Math.max(0,(F.form==='orbs'
    disc(ox,oy,13*Z()*sc,rgba(F.a,.14));disc(ox,oy,7*Z()*sc,rgba(F.a,.45));disc(ox,oy,3.4*Z()*sc,rgba(F.b,1));}}}
 // Orbiting sword-light for 환도: silver crescent blades with a gold edge on a tilted
 // orbit; each blade lies along the orbit and leaves two glints behind it.
-function blades(x,fy,h,F,k,seed,layer,n){const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
+function blades0(x,fy,h,F,k,seed,layer,n){const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;
   const ox=x+Math.cos(a)*rx,oy=cy+depth*ry,sc=.8+.25*depth,L=h*.2*sc;
   for(let j=1;j<=2;j++){const b=a-j*.24;disc(x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(3.2-j)*Z()*sc,rgba(F.a,.28/j));}
@@ -130,12 +130,12 @@ function blades(x,fy,h,F,k,seed,layer,n){const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h
   ctx.strokeStyle=rgba(F.b,.9);ctx.lineWidth=Math.max(1,1.3*Z());ctx.beginPath();ctx.moveTo(-L*.9,-L*.02);ctx.quadraticCurveTo(0,-L*.36,L,0);ctx.stroke();
   ctx.restore();}}
 // Circuit arcs for 네온: jittered polylines around the body, re-rolled 18×/s.
-function arcs(x,fy,h,F,k,seed){const n=lowFx()?2:3,frame=Math.floor(time*18),cy=fy-h*.5;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
+function arcs0(x,fy,h,F,k,seed){const n=lowFx()?2:3,frame=Math.floor(time*18),cy=fy-h*.5;ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  for(let i=0;i<n;i++){if(rnd(seed+frame,i*3)>.55+.45*k)continue;const a0=rnd(seed+frame,i*7)*TAU,a1=a0+1.2+rnd(seed+frame,i*7+1)*2.2,r=h*(.32+.2*rnd(seed+frame,i*7+2));
   const pts=[];for(let j=0;j<=5;j++){const u=j/5,a=lerp(a0,a1,u),jit=(rnd(seed+frame,i*11+j)-.5)*h*.1;pts.push([x+Math.cos(a)*(r+jit),cy+Math.sin(a)*r*.45+jit*.6]);}
   for(const[w,col,al]of[[5,F.b,.28],[1.8,F.a,.95]]){ctx.strokeStyle=rgba(col,al);ctx.lineWidth=Math.max(1,w*Z());ctx.beginPath();pts.forEach(([px,py],j)=>j?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.stroke();}}}
 // Magic circle under 라우렌's feet when charged.
-function runeRing(q,h,F,k){if(k<.5)return;const r=h*.42,a=(k-.5)*2;ctx.save();ctx.translate(q.x,q.y);ctx.scale(1,.5);ctx.rotate(time*.6);ctx.globalCompositeOperation='lighter';
+function runeRing0(q,h,F,k){if(k<.5)return;const r=h*.42,a=(k-.5)*2;ctx.save();ctx.translate(q.x,q.y);ctx.scale(1,.5);ctx.rotate(time*.6);ctx.globalCompositeOperation='lighter';
  ctx.strokeStyle=rgba(F.a,.45*a);ctx.lineWidth=Math.max(1,1.5*Z());ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.stroke();ctx.strokeStyle=rgba(F.b,.5*a);for(let i=0;i<8;i++){ctx.beginPath();ctx.arc(0,0,r*.8,i*TAU/8,i*TAU/8+TAU/14);ctx.stroke();}
  for(let i=0;i<6;i++){const t=i*TAU/6;ctx.fillStyle=rgba(F.b,.6*a);ctx.beginPath();ctx.arc(Math.cos(t)*r,Math.sin(t)*r,2.2*Z(),0,TAU);ctx.fill();}ctx.restore();}
 // Falling petals for 헌터: a small per-hero particle list.
@@ -144,10 +144,41 @@ function petals(p,x,fy,h,F,k,seed){const s=stateOf(p),max=lowFx()?6:12,dt=clamp(
  for(let i=s.petals.length-1;i>=0;i--){const q=s.petals[i];q.life+=dt;q.y+=q.vy*dt;q.ph+=dt*3;q.rot+=dt*2;if(q.life>q.max||q.y>0){s.petals.splice(i,1);continue;}
   const alpha=Math.sin(Math.PI*q.life/q.max)*.85,px=x+q.ox+Math.sin(q.ph)*h*.08,py=fy+q.y;ctx.save();ctx.translate(px,py);ctx.rotate(q.rot);ctx.globalCompositeOperation='source-over';ctx.fillStyle=rgba(q.col,alpha);ctx.beginPath();ctx.ellipse(0,0,5.5*Z(),3*Z(),0,0,TAU);ctx.fill();ctx.globalCompositeOperation='lighter';ctx.fillStyle=rgba(F.b,alpha*.35);ctx.beginPath();ctx.ellipse(0,0,8*Z(),5*Z(),0,0,TAU);ctx.fill();ctx.restore();}}
 // Vertical light pillar for EGO/사몽 power-ups, drawn behind the body.
-function pillar(x,fy,h,F,t){const k=1-t,w=h*(.22+.1*t),H=h*(1.6+.6*t);ctx.globalCompositeOperation='lighter';
+function pillar0(x,fy,h,F,t){const k=1-t,w=h*(.22+.1*t),H=h*(1.6+.6*t);ctx.globalCompositeOperation='lighter';
  for(const[s,col,al]of[[1,F.a,.18],[.5,F.b,.3]]){ctx.fillStyle=rgba(col,al*k);ctx.beginPath();ctx.moveTo(x-w*s,fy);ctx.lineTo(x-w*s*.45,fy-H);ctx.lineTo(x+w*s*.45,fy-H);ctx.lineTo(x+w*s,fy);ctx.closePath();ctx.fill();}}
 
-function field(x,fy,h,F,k){const cy=fy-h*.5,pulse=1+.04*Math.sin(time*3.1);ctx.globalCompositeOperation='lighter';ctx.save();ctx.translate(x,cy);ctx.scale(pulse,pulse*1.35);disc(0,0,h*.46,rgba(F.a,.05+.08*k));disc(0,0,h*.34,rgba(F.a,.07+.1*k));disc(0,0,h*.2,rgba(F.b,.05+.08*k));ctx.restore();}
+function field0(x,fy,h,F,k){const cy=fy-h*.5,pulse=1+.04*Math.sin(time*3.1);ctx.globalCompositeOperation='lighter';ctx.save();ctx.translate(x,cy);ctx.scale(pulse,pulse*1.35);disc(0,0,h*.46,rgba(F.a,.05+.08*k));disc(0,0,h*.34,rgba(F.a,.07+.1*k));disc(0,0,h*.2,rgba(F.b,.05+.08*k));ctx.restore();}
+// ---- R106: 날개·후광·오라를 그림 텍스처로 (fx-sprites-r106.js). 텍스처가 없을 때만 위 도형(…0)으로 그립니다.
+const SPR=()=>{const s=window.__STORYWORLD_FX_SPRITES_R106__;return s&&s.on()?s:null;};
+const DARK=Object.freeze({a:Object.freeze([60,8,16]),b:Object.freeze([110,30,42])});
+function groundGlow(q,h,F,k){const s=SPR(),r=h*(.4+.22*k);if(s&&s.draw('glow',F,q.x,q.y,r*2.3,r*1.15,{alpha:.22+.25*k}))return;groundGlow0(q,h,F,k);}
+function field(x,fy,h,F,k){const s=SPR(),pulse=1+.04*Math.sin(time*3.1);if(s&&s.draw('glow',F,x,fy-h*.5,h*1.05*pulse,h*1.4*pulse,{alpha:.18+.3*k}))return;field0(x,fy,h,F,k);}
+function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const s=SPR(),w=h*(1.05+.4*k),H=h*(1.1+1*k),fr=Math.floor(time*12+seed*7);
+ if(s&&s.draw('flame',mode==='dark'?DARK:F,x,fy,w,H,{frame:fr,alpha:.75*(.4+.6*clamp(k,0,1)),blend:mode==='dark'?'source-over':'lighter'})){s.draw('flame',mode==='dark'?F:s.pal(F.b),x,fy,w*.62,H*.72,{frame:fr+2,alpha:.7*(.4+.6*clamp(k,0,1))});return;}
+ flames0(x,fy,h,F,mode,k,seed);}
+// Two feathered wings from the shoulders, folded a little at rest and spread with heat; slow flap.
+function wings(x,fy,h,F,k,seed){const s=SPR();if(!s)return wings0(x,fy,h,F,k,seed);const W=h*(1.25+.55*clamp(k,0,1)),flap=Math.sin(time*2.4+seed)*.1,sy=fy-h*.66;
+ if(!s.draw('wing',F,x+h*.08,sy,W,W,{angle:-.12-flap,alpha:.92,blend:'source-over'}))return wings0(x,fy,h,F,k,seed);
+ s.draw('wing',F,x-h*.08,sy,W,W,{angle:.12+flap,alpha:.92,blend:'source-over',flip:true});
+ s.draw('wing',s.pal(F.b),x+h*.08,sy,W,W,{angle:-.12-flap,alpha:.25+.25*clamp(k,0,1)});s.draw('wing',s.pal(F.b),x-h*.08,sy,W,W,{angle:.12+flap,alpha:.25+.25*clamp(k,0,1),flip:true});
+ if(k>.3)for(let i=0;i<3;i++){const ph=(time*.35+i/3+seed)%1,side=i%2?1:-1;s.draw('feather',F,x+side*h*(.35+.5*ph),sy+h*(.2+.9*ph),h*.07,h*.21,{alpha:.7*Math.sin(Math.PI*ph),angle:Math.sin(time*2+i)*.7});}}
+function halo(x,fy,h,F,k){const s=SPR(),y=fy-h*1.08+Math.sin(time*2)*1.5*Z(),rx=h*(.19+.03*k);if(s&&s.draw('halo',F,x,y,rx*2.35,rx*2.35*96/256,{alpha:.95}))return;halo0(x,fy,h,F,k);}
+function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const s=SPR();if(!s||!s.ready('orb',F)||F.form==='runes'&&!s.ready('rune',F)||F.form==='shards'&&!s.ready('shard',F))return orbs0(p,x,fy,h,F,k,seed,layer,cut);
+ const n=Math.max(0,(F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0)-cut);if(!n)return;const rx=h*(.4+.08*k),ry=h*.13,cy=fy-h*.52,spin=time*(1.4+.8*k)+seed;
+ for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;const ox=x+Math.cos(a)*rx,oy=cy+depth*ry+Math.sin(time*3+i)*h*.03,sc=.8+.25*depth,P=i%2?s.pal(F.b):F;
+  if(F.form==='runes'){s.draw('rune',P,ox,oy,h*.2*sc,h*.2*sc,{angle:time*1.7+i,alpha:.95});s.draw('glow',F,ox,oy,h*.22*sc,h*.22*sc,{alpha:.5});}
+  else if(F.form==='shards'){const blink=.55+.45*Math.sin(time*6+i*2);s.draw('shard',P,ox,oy,h*.075*sc,h*.15*sc,{angle:Math.sin(time*.9+i*1.3)*.4,alpha:.95*blink,pivot:[.5,.5]});s.draw('glow',F,ox,oy,h*.2*sc,h*.2*sc,{alpha:.45*blink});}
+  else{for(let j=1;j<=3;j++){const b=a-j*.2;s.draw('glow',F,x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(10-2*j)*Z()*sc*2,(10-2*j)*Z()*sc*2,{alpha:.5/j});}s.draw('orb',P,ox,oy,22*Z()*sc,22*Z()*sc,{alpha:1});}}}
+function blades(x,fy,h,F,k,seed,layer,n){const s=SPR();if(!s||!s.ready('blade',F))return blades0(x,fy,h,F,k,seed,layer,n);const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;
+ for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;const ox=x+Math.cos(a)*rx,oy=cy+depth*ry,sc=.8+.25*depth,L=h*.46*sc;
+  for(let j=1;j<=2;j++){const b=a-j*.24;s.draw('glow',F,x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(7-2*j)*Z()*sc*2,(7-2*j)*Z()*sc*2,{alpha:.45/j});}
+  s.draw('blade',F,ox,oy,L,L*72/256,{angle:Math.atan2(Math.cos(a)*ry,-Math.sin(a)*rx),alpha:.95});}}
+function arcs(x,fy,h,F,k,seed){const s=SPR();if(!s||!s.ready('bolt',F))return arcs0(x,fy,h,F,k,seed);const n=lowFx()?2:3,frame=Math.floor(time*18),cy=fy-h*.5;
+ for(let i=0;i<n;i++){if(rnd(seed+frame,i*3)>.55+.45*k)continue;const a0=rnd(seed+frame,i*7)*TAU,a1=a0+1.2+rnd(seed+frame,i*7+1)*2.2,r=h*(.32+.2*rnd(seed+frame,i*7+2));
+  s.along('bolt',F,x+Math.cos(a0)*r,cy+Math.sin(a0)*r*.45,x+Math.cos(a1)*r,cy+Math.sin(a1)*r*.45,h*.16,{frame:frame+i,alpha:.95});}}
+function runeRing(q,h,F,k){if(k<.5)return;const s=SPR(),a=(k-.5)*2,r=h*.42;if(s&&s.draw('rune',F,q.x,q.y,2*r/.95,2*r/.95,{squash:.5,angle:time*.6,alpha:.7*a}))return;runeRing0(q,h,F,k);}
+function pillar(x,fy,h,F,t){const s=SPR(),k=1-t;if(s&&s.draw('pillar',F,x,fy,h*(.75+.3*t),h*(1.9+.7*t),{alpha:.8*k}))return;pillar0(x,fy,h,F,t);}
+
 // Growth gating: tier 0 a faint ground glow, 1 adds the body field, 2 shows the hero's
 // form faintly with fewer pieces, 3 most of it, 4 (and EGO/사몽) all of it.
 function formLevel(p,t){if(p.ego>0||p.samong>0||t>=4)return{on:true,alpha:1,cut:0};if(t>=3)return{on:true,alpha:.85,cut:1};if(t>=2)return{on:true,alpha:.55,cut:2};return{on:false,alpha:0,cut:9};}

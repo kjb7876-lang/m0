@@ -27,9 +27,9 @@
    records:[{key:'prelude',at:0,n:3,label:'서문 · 주인 없는 자장가'},{key:'prelude',at:'last',n:2,label:'서문 · 잠든 사람'},{key:'threshold',at:0,n:2,label:'문턱 · 코어 아래로'}]}},
   'S-01':{
    survival:{title:'뿌리 밑동의 광장',shape:'ring',inner:3.5,pillars:0,props:[['stump',6],['obelisk',3],['brazier',4]],
-    records:[{key:'threshold',sub:'뿌리를 쓰러뜨리자',n:2,label:'문턱 · 666의 잔영'}]},
+    records:[{key:'threshold',sub:'뿌리를 무너뜨리자',n:2,label:'문턱 · 666의 잔영'}]},
    maze:{title:'빛이 닿는 만큼 생기는 복도',cols:8,rows:8,straight:.8,braid:.12,rooms:1,props:[['brazier',3],['crate',2]],
-    records:[{key:'threshold',sub:'나는 이곳에서 모든 적을',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
+    records:[{key:'threshold',sub:'모든 적을 없애고 나서 움직일 수는',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
    ascent:{title:'찻잔 속의 집 · 정원과 긴 식탁',style:'domestic',variant:'spiral',props:[['ferns',6],['statue',1],['workbench',6],['well',1],['cabinet',1],['brazier',2]],
     records:[{key:'S-01',at:0,n:3,label:'꿰맨 장미의 집 · 들어서며'},{key:'S-01',sub:'그때 식탁의 안주인이',n:2,label:'식탁의 안주인'},{key:'S-01',at:'last',n:2,label:'종이 울릴 때',prop:'cabinet'}]}},
   'S-02':{
@@ -43,14 +43,14 @@
    survival:{title:'대련장과 관람석',shape:'octagon',radius:19,pillars:0,props:[['statue',4],['crate',8],['brazier',4]],
     records:[{key:'S-03',at:0,n:3,label:'흰 도복의 대련장'},{key:'S-03',at:.3,n:2,label:'관람석의 치료사'}]},
    maze:{title:'시험장 천막 뒤편 · 23년 전 빗속 골목',cols:8,rows:8,straight:.6,braid:.25,rooms:2,outdoor:{family:'stone',trees:null,wall:null},props:[['crate',6],['brazier',4],['stump',2]],
-    records:[{key:'S-03',sub:'나는 손전등을 낮추었다',n:2,label:'천막 뒤편'},{key:'S-03',at:.55,n:2,label:'23년 전의 비 오는 골목'}]},
+    records:[{key:'S-03',sub:'손전등을 낮추자',n:2,label:'천막 뒤편'},{key:'S-03',at:.55,n:2,label:'23년 전의 비 오는 골목'}]},
    ascent:{title:'검은 고리 장치가 있는 천막 뒤',variant:'zigzag',props:[['workbench',2],['statue',2],['brazier',3]],
     records:[{key:'S-03',sub:'빗소리가 잦아들자',n:2,label:'비가 그친 뒤'},{key:'S-03',at:'last',n:2,label:'열여섯',prop:'workbench'}]}},
   'S-04':{
    survival:{title:'감정의 탑 로비',shape:'square',radius:18,pillars:9,props:[['cabinet',2],['statue',4],['brazier',4]],
     records:[{key:'S-04',at:0,n:3,label:'로비 · 하늘과 류찬'}]},
    maze:{title:'열여섯 층의 복도',cols:9,rows:9,straight:.7,braid:.15,rooms:6,props:[['statue',6],['cabinet',4],['workbench',3],['empty-bed',2],['brazier',3]],
-    records:[{key:'S-04',at:.15,n:2,label:'4층 식당 · 규칙을 지키는 마네킹',prop:'statue'},{key:'S-04',at:.3,n:2,label:'2층 경비실 · 멈춘 시계',prop:'cabinet'},{key:'S-04',sub:'나는 도망치는 대신',n:2,label:'무너지는 복도'},{key:'S-04',at:.5,n:2,label:'5층 · 초상화 갤러리',prop:'cabinet'},{key:'S-04',at:.62,n:2,label:'8층 · 기록',prop:'cabinet'},{key:'S-04',at:.72,n:2,label:'12층 · 박수 홀',prop:'statue'}]},
+    records:[{key:'S-04',at:.15,n:2,label:'4층 식당 · 규칙을 지키는 마네킹',prop:'statue'},{key:'S-04',at:.3,n:2,label:'2층 경비실 · 멈춘 시계',prop:'cabinet'},{key:'S-04',sub:'나는 탈출이 아니라 배달을',n:2,label:'무너지는 복도'},{key:'S-04',at:.5,n:2,label:'5층 · 초상화 갤러리',prop:'cabinet'},{key:'S-04',at:.62,n:2,label:'8층 · 기록',prop:'cabinet'},{key:'S-04',at:.72,n:2,label:'12층 · 박수 홀',prop:'statue'}]},
    ascent:{title:'13층에서 16층으로',variant:'spiral',props:[['crate',16],['cabinet',2],['brazier',4]],
     records:[{key:'S-04',sub:'엘리베이터는 4층으로',n:2,label:'엘리베이터'},{key:'S-04',sub:'13층에서 강재헌을',n:3,label:'13층 · 강재헌'},{key:'S-04',at:'last',n:2,label:'열여섯 개의 의자와 거울',prop:'cabinet'}]}},
   'S-05':{
@@ -92,12 +92,12 @@
    survival:{title:'여섯 번 접힌 대련장',shape:'octagon',radius:19,pillars:0,props:[['statue',6],['crate',6],['brazier',4]],
     records:[{key:'R-05',at:0,n:3,label:'흑백의 청색재판'},{key:'R-05',at:.4,n:2,label:'흰 도복과 검은 도복'}]},
    maze:{title:'접히는 재판정',cols:8,rows:8,straight:.6,braid:.2,rooms:3,props:[['statue',4],['cabinet',3],['crate',4],['brazier',3]],
-    records:[{key:'R-05',sub:'재판관의 손이 망치를',n:2,label:'재판관의 망치'},{key:'R-05',sub:'그 순서를 거절하자',n:2,label:'거절'},{key:'R-05',at:'last',n:2,label:'열여섯 금박 의자의 추락'}]},
+    records:[{key:'R-05',sub:'재판관이 망치를 내리칠',n:2,label:'재판관의 망치'},{key:'R-05',sub:'내가 그런 결말을 받아들이지 않자',n:2,label:'거절'},{key:'R-05',at:'last',n:2,label:'열여섯 금박 의자의 추락'}]},
    ascent:{title:'지하에 매달린 꼭대기 층',style:'forge',variant:'spiral',props:[['brazier',8],['crate',16],['obelisk',2],['cabinet',2]],
     records:[{key:'R-06',at:0,n:3,label:'밀랍 샹들리에의 층'},{key:'R-06',at:.45,n:2,label:'맘몬의 금고 · 종이 왕',prop:'obelisk'},{key:'R-06',at:'last',n:2,label:'물이 된 바닥'}]}},
   RD:{
    survival:{title:'늪의 다리 · 붉은 교각',shape:'bridge',radius:20,width:7,outdoor:{family:'swamp',water:'swamp',trees:'dead',wall:.8},props:[['ferns',10],['brazier',6],['stump',2]],
-    records:[{key:'R-07',at:0,n:3,label:'잠들지 못하는 마을의 다리'},{key:'R-07',sub:'처음 걸음을 옮겼을 때에는',n:2,label:'가짜 문과 진짜 길'}]},
+    records:[{key:'R-07',at:0,n:3,label:'잠들지 못하는 마을의 다리'},{key:'R-07',sub:'처음 발을 디뎠을 때에는',n:2,label:'가짜 문과 진짜 길'}]},
    maze:{title:'수련 아래의 불면병동',style:'clinical',cols:9,rows:9,straight:.7,braid:.15,rooms:5,props:[['empty-bed',10],['cabinet',4],['workbench',6],['crate',6],['brazier',3]],
     records:[{key:'R-07',at:.7,n:2,label:'물속 학교의 보건실',prop:'empty-bed'},{key:'R-08',at:0,n:3,label:'잠긴 교실',prop:'workbench'},{key:'R-08',at:'last',n:2,label:'모든 액자가 돌아서다',prop:'crate'}]},
    ascent:{title:'일곱 기둥의 대성당',style:'forge',variant:'straight',props:[['obelisk',7],['brazier',6],['cabinet',2]],
@@ -106,7 +106,7 @@
    survival:{title:'천장을 뚫고 온 열차',shape:'platform',radius:19,width:9,pillars:6,props:[['crate',10],['brazier',6],['statue',2]],
     records:[{key:'R-10',at:0,n:3,label:'밤마다 다른 객차'},{key:'R-10',at:.25,n:2,label:'승전식의 메달 인형',prop:'statue'}]},
    maze:{title:'관람석이 붙은 탈출로',cols:9,rows:7,straight:.9,braid:.15,rooms:3,props:[['crate',8],['statue',4],['brazier',4]],
-    records:[{key:'R-10',sub:'빠른 사람과 느린 사람이',n:2,label:'빠른 사람과 느린 사람'},{key:'R-10',sub:'거기에 관람석이',n:2,label:'관람석'}]},
+    records:[{key:'R-10',sub:'빠른 사람은 느린 사람에게',n:2,label:'빠른 사람과 느린 사람'},{key:'R-10',sub:'천장에는 관람석이',n:2,label:'관람석'}]},
    ascent:{title:'마지막 객차 · 두 사람의 의자',variant:'straight',props:[['brazier',6],['workbench',1],['crate',4]],
     records:[{key:'R-10',sub:'백색 사수는 다시 총을',n:2,label:'백색 사수'},{key:'R-10',at:'last',n:2,label:'설계도만 집어 들다',prop:'workbench'}]}},
   RF:{
@@ -122,7 +122,7 @@
    maze:{title:'여백의 전쟁터',cols:9,rows:9,straight:.5,braid:.3,rooms:4,outdoor:{family:'ash',trees:'dead',wall:1},props:[['obelisk',4],['stump',6],['crate',4],['brazier',4]],
     records:[{key:'R-13',sub:'도겸이 들어 올린 여백이',n:2,label:'들어 올린 여백'},{key:'R-13',at:.55,n:2,label:'그러므로 뒤의 문장'}]},
    ascent:{title:'회전 고리가 있는 기둥',style:'forge',variant:'straight',props:[['obelisk',6],['brazier',6],['cabinet',1]],
-    records:[{key:'R-13',sub:'나팔의 몸통은 빈 소매였고',n:2,label:'빈 소매의 나팔'},{key:'R-14',at:0,n:3,label:'도겸의 휴식 · 일곱 번째 의자',prop:'cabinet'},{key:'R-14',at:'last',n:2,label:'실로 그린 문'}]}},
+    records:[{key:'R-13',sub:'나팔의 몸통은 빈 소매를',n:2,label:'빈 소매의 나팔'},{key:'R-14',at:0,n:3,label:'도겸의 휴식 · 일곱 번째 의자',prop:'cabinet'},{key:'R-14',at:'last',n:2,label:'실로 그린 문'}]}},
   M:{
    survival:{title:'궁전 정원 · 쓰러진 악마 나무',shape:'field',radius:20,pillars:0,outdoor:{family:'garden',trees:'living',wall:1},props:[['stump',3],['crate',6],['ferns',6],['brazier',4]],
     records:[{key:'R-15',at:0,n:3,label:'분리된 세계들'},{key:'R-15',at:.5,n:2,label:'두 사람의 성 · 두드리고 기다리기'},{key:'R-16',at:0,n:3,label:'두 겹의 발자국'},{key:'R-16',at:'last',n:2,label:'열네 개의 조명'},{key:'R-17',at:0,n:3,label:'궁전 정원 · 서명 없는 별',prop:'stump'},{key:'R-17',at:'last',n:3,label:'문턱의 여섯 물건'}]},
@@ -143,39 +143,46 @@
   return SECTIONS;}
 
  // ---- 지형 생성 -------------------------------------------------------------------------------
- function arena(id,ep,bp,api){const S=bp.size||45,cx=Math.floor(S/2),cy=cx,R=bp.radius||20,shape=bp.shape||'circle',cells=new Set(),r=rng(hash(id)),add=(x,y)=>cells.add(K(x,y)),del=(x,y)=>cells.delete(K(x,y));
-  const w=bp.width||(shape==='bridge'?6:9),inner=bp.inner||4,st=bp.street||3.5;
+ // R106: 생존 맵은 뱀서류처럼 넓고 트인 벌판(청사진 크기의 SURVIVAL_SCALE배). 모양(고리·사각·팔각·사거리·다리·승강장·벌판)은 그대로.
+ const SURVIVAL_SCALE=2.6,MAZE_SCALE=1.75;
+ function arena(id,ep,bp,api){const KS=SURVIVAL_SCALE,R=Math.round((bp.radius||20)*KS),S=bp.size||2*R+7,cx=Math.floor(S/2),cy=cx,shape=bp.shape||'circle',cells=new Set(),r=rng(hash(id)),add=(x,y)=>cells.add(K(x,y)),del=(x,y)=>cells.delete(K(x,y));
+  const w=Math.round((bp.width||(shape==='bridge'?6:9))*KS*(shape==='bridge'||shape==='platform'?1.25:.85)),inner=(bp.inner||4)*KS,st=(bp.street||3.5)*KS*.9;
   const inside=(x,y)=>{const dx=x+.5-cx,dy=y+.5-cy,d2=dx*dx+dy*dy,ax=Math.abs(dx),ay=Math.abs(dy);
    if(shape==='ring')return d2<=R*R&&d2>inner*inner;
    if(shape==='square')return ax<=R&&ay<=R;
    if(shape==='octagon')return Math.max(ax,ay)<=R&&ax+ay<=R*1.38;
-   if(shape==='cross'){const o=R*.6;return(ax<=st&&ay<=R)||(ay<=st&&ax<=R)||(Math.abs(ax-o)<=1.4&&ay<=o+1.4)||(Math.abs(ay-o)<=1.4&&ax<=o+1.4)||(Math.abs(ax-o)<=3&&Math.abs(ay-o)<=3);}
+   if(shape==='cross'){const o=R*.6,b=1.4*KS,c=3*KS;return(ax<=st&&ay<=R)||(ay<=st&&ax<=R)||(Math.abs(ax-o)<=b&&ay<=o+b)||(Math.abs(ay-o)<=b&&ax<=o+b)||(Math.abs(ax-o)<=c&&Math.abs(ay-o)<=c);}
    if(shape==='bridge'||shape==='platform')return ay<=w/2&&ax<=R;
    return d2<=R*R;};
   for(let y=1;y<S-1;y++)for(let x=1;x<S-1;x++)if(inside(x,y))add(x,y);
-  if(shape==='bridge'){// 끊어진 경간: 양쪽 가장자리를 번갈아 물어뜯되 가운데 3칸은 늘 남긴다.
-   let n=0;for(let gx=cx-R+5;gx<cx+R-6;gx+=6,n++){const side=n%2?1:-1;for(let k=0;k<Math.floor(w/2)-1;k++){const y=cy+side*(Math.floor(w/2)-k);for(let x=gx;x<gx+3;x++)del(x,y);}}}
-  const pillars=[],np=bp.pillars??(shape==='circle'||shape==='square'||shape==='octagon'?9:0);
-  if(shape==='platform'){for(let k=0;k<np;k++){const px=cx-R+4+Math.round(k*(2*R-8)/Math.max(1,np-1)),py=cy-Math.floor(w/2)+1;pillars.push([px,py]);del(px,py);}}
-  else for(let k=0;k<np;k++){const a=k*2.399963+r()*.4,d=(shape==='square'?9:8)+r()*(R*.4),px=Math.round(cx+Math.cos(a)*d),py=Math.round(cy+Math.sin(a)*d);if(Math.hypot(px-cx,py-(cy+R-8))<5||(shape==='ring'&&Math.hypot(px-cx,py-cy)<inner+3))continue;pillars.push([px,py]);for(let y=py;y<py+2;y++)for(let x=px;x<px+2;x++)del(x,y);}
-  const strip=shape==='bridge'||shape==='platform',entry=strip?{x:cx+R-3+.5,y:cy+.5}:{x:cx+.5,y:cy+R-7.5};
-  const centre=shape==='ring'?{x:cx+.5,y:cy+inner+2}:strip?{x:cx-R+6+.5,y:cy+.5}:{x:cx+.5,y:cy+.5};
+  if(shape==='bridge'){// 끊어진 경간: 양쪽 가장자리를 번갈아 물어뜯되 가운데는 늘 넓게 남긴다.
+   const step=Math.round(6*KS),bite=Math.round(3*KS);let n=0;for(let gx=cx-R+8;gx<cx+R-10;gx+=step,n++){const side=n%2?1:-1;for(let k=0;k<Math.floor(w/2)-3;k++){const y=cy+side*(Math.floor(w/2)-k);for(let x=gx;x<gx+bite;x++)del(x,y);}}}
+  const strip=shape==='bridge'||shape==='platform',entry=strip?{x:cx+R-6+.5,y:cy+.5}:shape==='ring'?{x:cx+.5,y:cy+Math.round((inner+R)/2)+.5}:{x:cx+.5,y:cy+Math.round(R*.22)+.5};
+  const centre=shape==='ring'?{x:cx+.5,y:cy+Math.round(inner)+3}:strip?{x:cx-R+8+.5,y:cy+.5}:{x:cx+.5,y:cy+.5};
+  // 엄폐 기둥·바위: 청사진 수의 몇 배 + 넓이에 맞춘 흩어진 장애물(2~3칸). 시작·중앙·서로 사이는 비운다.
+  const pillars=[],base=bp.pillars??(shape==='circle'||shape==='square'||shape==='octagon'?9:0),np=Math.round(base*KS*1.6)+Math.round(cells.size/260);
+  const clear=(px,py,sz)=>Math.hypot(px-entry.x,py-entry.y)>6&&Math.hypot(px-centre.x,py-centre.y)>7&&!pillars.some(([qx,qy])=>Math.hypot(qx-px,qy-py)<sz+4);
+  if(shape==='platform'){const nps=Math.max(2,Math.round(base*KS));for(let k=0;k<nps;k++){const px=cx-R+8+Math.round(k*(2*R-16)/Math.max(1,nps-1));for(const py of[cy-Math.floor(w/2)+2,cy+Math.floor(w/2)-3])if(clear(px,py,2)){pillars.push([px,py]);for(let y=py;y<py+2;y++)for(let x=px;x<px+2;x++)del(x,y);}}}
+  for(let k=0,tries=0;k<np&&tries<np*8;tries++){const px=Math.floor(cx-R+3+r()*(2*R-6)),py=Math.floor(cy-R+3+r()*(2*R-6)),sz=2+(r()<.35?1:0);
+   let ok=clear(px,py,sz);for(let y=py-1;ok&&y<py+sz+1;y++)for(let x=px-1;ok&&x<px+sz+1;x++)if(!cells.has(K(x,y)))ok=false;if(!ok)continue;
+   pillars.push([px,py]);for(let y=py;y<py+sz;y++)for(let x=px;x<px+sz;x++)del(x,y);k++;}
   for(const p of[entry,centre])for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)add(Math.floor(p.x)+dx,Math.floor(p.y)+dy);
   const nodes=[{id:0,x:entry.x,y:entry.y,radius:3,shape:'round'},{id:1,x:centre.x,y:centre.y,radius:6,shape:'round'}];
-  return api.build(id,ep,cells,{nodes,edges:[[0,1,4]],entry:{...entry,node:0},bounds:[0,0,S,S],wallHeight:bp.outdoor?(bp.outdoor.wall??1):2.7,extra:{kind:'survival',centre,pillars,shape}});}
+  return api.build(id,ep,cells,{nodes,edges:[[0,1,4]],entry:{...entry,node:0},bounds:[0,0,S,S],wallHeight:bp.outdoor?(bp.outdoor.wall??1):2.7,extra:{kind:'survival',centre,pillars,shape,r106Scale:KS}});}
 
- function maze(id,ep,bp,seed,api){const C=bp.cols||8,R=bp.rows||C,SZ=bp.cell||5,CW=bp.cw||3,LW=bp.lw||2,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
+ // R106: 손전등 미로는 훨씬 복잡하게 — 칸 수 MAZE_SCALE배, 곁가지를 더 내고(직선 비율↓) 되돌이 길을 줄여 막다른 길을 늘린다.
+ function maze(id,ep,bp,seed,api){const C=Math.min(18,Math.round((bp.cols||8)*MAZE_SCALE)),R=Math.min(18,Math.round((bp.rows||bp.cols||8)*MAZE_SCALE)),SZ=bp.cell||5,CW=bp.cw||3,LW=bp.lw||2,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
   const nb=(x,y)=>[[x+1,y],[x-1,y],[x,y+1],[x,y-1]].filter(([a,b])=>a>=0&&b>=0&&a<C&&b<R);
   const ek=(a,b)=>a[0]<b[0]||a[1]<b[1]?k(...a)+'|'+k(...b):k(...b)+'|'+k(...a),link=(a,b)=>open.add(ek(a,b)),linked=(a,b)=>open.has(ek(a,b));
-  const start=[0,R-1],seen=new Set([k(...start)]),stack=[start],straight=bp.straight??.5;
+  const start=[0,R-1],seen=new Set([k(...start)]),stack=[start],straight=Math.min(.6,bp.straight??.5)*.75;
   // 성장 나무: straight 만큼 최신 칸을 이어 긴 복도를, 나머지는 임의 칸에서 곁가지를 낸다.
   while(stack.length){const at=r()<straight?stack.length-1:Math.floor(r()*stack.length),c=stack[at],n=nb(...c).filter(p=>!seen.has(k(...p)));if(!n.length){stack.splice(at,1);continue;}const p=n[Math.floor(r()*n.length)];link(c,p);seen.add(k(...p));stack.push(p);}
-  const braid=bp.braid??.18;for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;if(deg===1&&r()<braid){const c=nb(x,y).filter(p=>!linked([x,y],p));if(c.length)link([x,y],c[Math.floor(r()*c.length)]);}}
+  const braid=(bp.braid??.18)*.55;for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;if(deg===1&&r()<braid){const c=nb(x,y).filter(p=>!linked([x,y],p));if(c.length)link([x,y],c[Math.floor(r()*c.length)]);}}
   const dist=new Map([[k(...start),0]]),q=[start],prev=new Map();while(q.length){const c=q.shift();for(const p of nb(...c))if(linked(c,p)&&!dist.has(k(...p))){dist.set(k(...p),dist.get(k(...c))+1);prev.set(k(...p),c);q.push(p);}}
   let exit=start,best=-1;for(const[key,d]of dist){const[a,b]=key.split(',').map(Number);if(d>best&&(a>C/2||b<R/2)){best=d;exit=[a,b];}}
   const path=[];for(let c=exit;c;c=prev.get(k(...c)))path.unshift(c);
   // 방: 시작·출구를 뺀 칸을 벽 한 칸을 남기고 넓힌다(교무실·식당·병동 같은 자리).
-  const roomSet=new Set();{const pool=[];for(let y=0;y<R;y++)for(let x=0;x<C;x++)if(!(x===0&&y===R-1)&&!(x===exit[0]&&y===exit[1]))pool.push([x,y]);pool.sort((a,b)=>(hash(id+':room:'+a)%997)-(hash(id+':room:'+b)%997));for(const c of pool.slice(0,bp.rooms||0))roomSet.add(k(...c));}
+  const roomSet=new Set();{const pool=[];for(let y=0;y<R;y++)for(let x=0;x<C;x++)if(!(x===0&&y===R-1)&&!(x===exit[0]&&y===exit[1]))pool.push([x,y]);pool.sort((a,b)=>(hash(id+':room:'+a)%997)-(hash(id+':room:'+b)%997));for(const c of pool.slice(0,Math.round((bp.rooms||0)*1.6)))roomSet.add(k(...c));}
   const cells=new Set(),add=(x,y)=>cells.add(K(x,y));
   const cell=(x,y)=>{const room=roomSet.has(k(x,y)),n=room?SZ-1:CW;for(let b=0;b<n;b++)for(let a=0;a<n;a++)add(x*SZ+1+a,y*SZ+1+b);};
   const off=Math.floor((CW-LW)/2);
@@ -225,7 +232,7 @@
   const avoid=[{...L.entry,r:3.5},x.exit&&{...x.exit,r:3.5},x.save&&{...x.save,r:3},x.centre&&{...x.centre,r:2.5},x.dais&&{...x.dais,r:10.5},...(x.chests||[]).map(c=>({...c,r:2.2}))].filter(Boolean);
   const recs=[];for(const rec of bp.records||[]){if(rec.objects)rec.objects.forEach((label,n)=>recs.push({...rec,label,objectIndex:n}));else recs.push(rec);}
   const rs=recordSpots(L,stage,avoid);let n=0;for(const rec of recs){const at=rs[Math.min(n,rs.length-1)];n++;if(!at)continue;r.props.push(marker(ep,stage,rec,at,n));avoid.push({...at,r:2.2});}
-  const deco=spots(L,{avoid,gap:2.8,limit:96});let d=0;for(const[cell,count]of bp.props||[])for(let k=0;k<count;k++){const at=deco[d++];if(!at)break;r.props.push({id:'r105:'+cell+':'+d,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r74Prop:cell,r105Prop:cell});}
+  const wide=stage==='survival'?SURVIVAL_SCALE:stage==='maze'?MAZE_SCALE:1,deco=spots(L,{avoid,gap:wide>1?4:2.8,limit:Math.round(96*wide)});let d=0;for(const[cell,count0]of bp.props||[]){const count=Math.round(count0*wide);for(let k=0;k<count;k++){const at=deco[d++];if(!at)break;r.props.push({id:'r105:'+cell+':'+d,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r74Prop:cell,r105Prop:cell});}}
   let a=0;try{a=window.__STORYWORLD_DRIVE_ART_R105__?.place?.(r,i,stage,ep,{deco:deco.slice(d),dais:x.dais})||0;}catch(e){fail(e);}// R105 드라이브 원화 조형물
   r.samongR105={title:bp.title||'',records:recs.length,props:d+a,art:a,outdoor:L.samongR105.outdoor};}
 

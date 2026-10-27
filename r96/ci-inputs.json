@@ -93,15 +93,15 @@
     {
       "path": "r96/ci-packs/inputs-018.bin",
       "bytes": 4194304,
-      "sha256": "4b2a50f86b2493fd29ab91ae7b6253bfcb886b98d757bd7f6471b49afd836c89"
+      "sha256": "380d167de7410bfe3d3dc73e099c8aa6ef9f28cb08f8380ad172809b62eeeb6f"
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 759279,
-      "sha256": "58cd5768e11fea33c4fd89efbf6be4df200cb94fdb9dfec26b4f8711682b7836"
+      "bytes": 759644,
+      "sha256": "f75fb45e089c87548ef01c9ea16b431afd8deac2d9c165b9cf3ec1d6324287fd"
     }
   ],
-  "archiveSHA256": "ffb01dce2a062a9a2622ba205614aa5a0acbd2a9d4872095136259aba3f11d85",
+  "archiveSHA256": "d558cea6e32aef53d0057e075053a71f780aa570a5f72fad106379a6b8e1358f",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5532,8 +5532,8 @@
     },
     {
       "path": "qa/r81/runtime-contracts.cjs",
-      "bytes": 12719,
-      "sha256": "3d6103c8be6386e448137b9cf4c76469684452bd040cd8f824f21d5184bc7e7d"
+      "bytes": 13227,
+      "sha256": "12730bbb0fd8f10cd0d3a9993edaf321ea1f7f6038ab1b6fbd93f12e46003102"
     },
     {
       "path": "qa/r81/runtime-results.json",
