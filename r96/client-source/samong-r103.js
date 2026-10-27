@@ -17,7 +17,7 @@
   {key:'P',title:'주인 없는 자장가',chapter:'제9부 — 사몽',text:['prelude','threshold'],host:'dist05',style:'forge',tint:[0x2b2630,0x4a3d4f],
    boss:{name:'코어 아래의 검은 뿌리',donor:['dist00','dist00-boss'],patterns:['ground','sides']},bossOnly:true},
   {key:'S-01',title:'꿰맨 장미의 집',chapter:'제9부 — 사몽',text:['threshold','S-01'],host:'ep1b05',style:'domestic',tint:[0x3a2c30,0x6b4b52],
-   mobName:'뿌리에서 쏟아진 잔영',mobs:[['dist00','a11-c1'],['last302','l302-e1']],maze:'빛이 닿는 만큼 생기는 복도',
+   mobName:'뿌리에서 쏟아진 잔영',mobs:[['ep1a10','a10-s1'],['last302','l302-e1']],maze:'빛이 닿는 만큼 생기는 복도',
    boss:{name:'봉합부인',donor:['ep1a11','mb-ep1a11'],patterns:['sides','sky']},guard:[['ep1b05','b05-p1']]},
   {key:'S-02',title:'밤의 출석부',chapter:'제9부 — 사몽',text:['S-02'],host:'ep1a09',style:'clinical',tint:[0x283036,0x46535a],
    mobName:'얼굴 없는 학생',mobs:[['ep1a08','a08-s1'],['u204','u204-e2']],maze:'자정 1분 전의 학교 복도',
@@ -175,7 +175,7 @@
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,r.exploration.samongR103.centre,'미로로 내려가는 문');return;}
   attackTokens();
   const alive=r.enemies.filter(living).length,cap=caps().survival,need=GOAL-S.kills;if(time<x.spawnAt||alive>=Math.min(cap,need))return;
-  x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+  x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[S.serial%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
  // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
  function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
  function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,6-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);
@@ -188,7 +188,7 @@
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(time<x.spawnAt||alive.length>=caps().maze)return;x.spawnAt=time+4;
   const sites=r.exploration.nodes.filter(n=>{const d=Math.hypot(n.x-player.x,n.y-player.y);return d>8&&d<22&&Math.hypot(n.x-L.exit.x,n.y-L.exit.y)>4&&(!L.save||Math.hypot(n.x-L.save.x,n.y-L.save.y)>4);});
-  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
+  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[S.serial%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
  function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
    const b=spawn(ep.boss.donor,L.dais,{boss:true,name:ep.boss.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=ep.boss.patterns;x.boss=b.id;}}
