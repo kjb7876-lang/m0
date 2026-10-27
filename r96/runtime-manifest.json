@@ -9,8 +9,8 @@
     },
     {
       "path": "art-drive-r105.js",
-      "bytes": 11802,
-      "sha256": "8bf1e81eec54be5b04195c61e16e80d2f8bafc77b798fe7540b8070ffdfee004"
+      "bytes": 13160,
+      "sha256": "64140573fcba87d12bd4bf9f5b48c06ae35122eae6438019929ffe7e1608c351"
     },
     {
       "path": "assets-clean-r99.js",
@@ -7456,6 +7456,181 @@
       "path": "assets/r105/props/dist03-pillar.webp",
       "bytes": 56060,
       "sha256": "9418697b710b764bac87a48a79e6c1e78562221fb2ed1560d5b90f741b882e09"
+    },
+    {
+      "path": "assets/r106/drive/hammer-1.webp",
+      "bytes": 21292,
+      "sha256": "f2e40b7c14cf6c9d470600d1795ade969e80ca7b809852331ac2ad6a6ffda309"
+    },
+    {
+      "path": "assets/r106/drive/hammer-2.webp",
+      "bytes": 21722,
+      "sha256": "6a2991b18a9d990bd47f08e661b8e5d7447dee0dd28d3340cd512c968a0b2d90"
+    },
+    {
+      "path": "assets/r106/drive/lotus.webp",
+      "bytes": 49744,
+      "sha256": "ca8919fb7d09e07dcfa789dad9db369b5ffac268b03d0c3f91a64e68d6e7b064"
+    },
+    {
+      "path": "assets/r106/drive/paper-king.webp",
+      "bytes": 59984,
+      "sha256": "4420f624dc7a155747fc1844f08a0b40ac786cef4a5beffd1aaf42d7cb22b241"
+    },
+    {
+      "path": "assets/r106/drive/sources.json",
+      "bytes": 3051,
+      "sha256": "434f4e5de8eda988a61181a379640c474395d71d0d65089443658a181fac4b52"
+    },
+    {
+      "path": "assets/r106/drive/table-drawing.webp",
+      "bytes": 30502,
+      "sha256": "42aea48f9c0400cc853c42abb9763baa06d1b3b16150ca5fe7f9e76153b050b1"
+    },
+    {
+      "path": "assets/r106/drive/thread-door.webp",
+      "bytes": 19158,
+      "sha256": "447d7152b3647c61ea36abc2f51321fa7280863f8e30a24ef0b36a5147ca1d93"
+    },
+    {
+      "path": "assets/r106/drive/trumpet.webp",
+      "bytes": 32450,
+      "sha256": "459db47b004c00a3582cf8d1dddd9ccd205da2a82c9f8a83c7bc722eaf277dcc"
+    },
+    {
+      "path": "assets/r106/fx/blade.webp",
+      "bytes": 4594,
+      "sha256": "ee85913312942328798a21ea0e3e96add6cbfe4d19f8485203a0bfd06020fc8c"
+    },
+    {
+      "path": "assets/r106/fx/bolt.webp",
+      "bytes": 37026,
+      "sha256": "ab0409a7ed68f3f21c583a707a1ff22cf2f85c1c6a0fca2d45958097ca7d4c4c"
+    },
+    {
+      "path": "assets/r106/fx/circuit.webp",
+      "bytes": 98608,
+      "sha256": "c90433158eec639d8ac64b73efc456eb505420f54e2572417d922d83ed523bb5"
+    },
+    {
+      "path": "assets/r106/fx/clock.webp",
+      "bytes": 100320,
+      "sha256": "d68ec596fbcc091a2fdf0e91c6787f3080a18691d468d1ec75762972fd68486f"
+    },
+    {
+      "path": "assets/r106/fx/crack.webp",
+      "bytes": 17552,
+      "sha256": "925f50971fb1505964721bd2decdcfb0ee6b28a3b2b31b02fe4e0667c3dbda7d"
+    },
+    {
+      "path": "assets/r106/fx/cross.webp",
+      "bytes": 14552,
+      "sha256": "79951d0d6a3a44ab81896a078b16635975601ab5cd01132b442e441bd3e6aa27"
+    },
+    {
+      "path": "assets/r106/fx/feather.webp",
+      "bytes": 4016,
+      "sha256": "f960c6f1a027416cf8cf4072c058ee5d290cfcf3db16b1f401bc338b0b1720f1"
+    },
+    {
+      "path": "assets/r106/fx/flame.webp",
+      "bytes": 31808,
+      "sha256": "8d616b707fc32455c82bdb4589cfae11cce9927eb78a365b6ac1775799a0fae7"
+    },
+    {
+      "path": "assets/r106/fx/flare.webp",
+      "bytes": 10058,
+      "sha256": "af103a5ab0ff6d8cf9e09f389643de22dbdda8a791f97e13d88cd6561f990ab6"
+    },
+    {
+      "path": "assets/r106/fx/glow.webp",
+      "bytes": 3168,
+      "sha256": "a08107223476bb8f1d725fa7907367005b901c7bdbde941cd4bcff250763018c"
+    },
+    {
+      "path": "assets/r106/fx/halo.webp",
+      "bytes": 9038,
+      "sha256": "43fc784adfadc494e13b4593354b91f3c65d156a9cfab6f37dadca42fad0dfb6"
+    },
+    {
+      "path": "assets/r106/fx/line.webp",
+      "bytes": 420,
+      "sha256": "a7bd654967ef0f54ca40c3cabb9833e3d8ec536d2793e8fc51ce2d78c5027f2e"
+    },
+    {
+      "path": "assets/r106/fx/meta.json",
+      "bytes": 6601,
+      "sha256": "cc1be57217ae4e5306f57d751b0fc42e9febb527cd9af92c5feb56892fcc9eb3"
+    },
+    {
+      "path": "assets/r106/fx/orb.webp",
+      "bytes": 1272,
+      "sha256": "d1a3f665256ccf1e7dd5609f872b9f3b479c6f6d3079393531aff4bf277a7e65"
+    },
+    {
+      "path": "assets/r106/fx/petal.webp",
+      "bytes": 1068,
+      "sha256": "79d664006ef3b92f6a0c687d9eedfc7800be856962ab3c5a5385fc8bc4a68a4b"
+    },
+    {
+      "path": "assets/r106/fx/pillar.webp",
+      "bytes": 9806,
+      "sha256": "3f4ff5b369f11f9fb5aed924552df65e6f1d74d3f993b06641ea9cba91740cdc"
+    },
+    {
+      "path": "assets/r106/fx/pixel.webp",
+      "bytes": 714,
+      "sha256": "ff04206891d2b22570e217d877ad8c948da5409973df5762a75b8c7976caf604"
+    },
+    {
+      "path": "assets/r106/fx/ring.webp",
+      "bytes": 19372,
+      "sha256": "389d916974449ba5f382cf6f8b0365daabda5449f8ffd298038f2751264da6a6"
+    },
+    {
+      "path": "assets/r106/fx/rune.webp",
+      "bytes": 101340,
+      "sha256": "84fb8ed6c3750a349f29e7af7f8151bac90d5b64d326d6f5cb77c70d5392b62d"
+    },
+    {
+      "path": "assets/r106/fx/shard.webp",
+      "bytes": 3112,
+      "sha256": "45895ab3ad5f9c9af43715341bfdff9255095cd9134646f27f65598cbb0f1f8f"
+    },
+    {
+      "path": "assets/r106/fx/slash.webp",
+      "bytes": 18016,
+      "sha256": "3829f5b4f6fc2c26b6a4499a8307dd4644294a2b441ffb0af11ef32bf9cf3742"
+    },
+    {
+      "path": "assets/r106/fx/slashline.webp",
+      "bytes": 8884,
+      "sha256": "17a8cd9e4c74e88a32bb84471628e165efabb0578529c375b4036ed1d6ae94e7"
+    },
+    {
+      "path": "assets/r106/fx/slashwide.webp",
+      "bytes": 21578,
+      "sha256": "b1009ff72052f0473444a27725e6a24088ad513f43569f515d2756f33e773da2"
+    },
+    {
+      "path": "assets/r106/fx/smoke.webp",
+      "bytes": 10942,
+      "sha256": "55c2727763f0927f6b51bb44eb59b5da9198c58f644d139e40dcf2c00dfc484e"
+    },
+    {
+      "path": "assets/r106/fx/spark.webp",
+      "bytes": 832,
+      "sha256": "a1572bf01c0a5a511943a9da59f8c1f2ebed9c8be6d57da6e944f28e548e34bd"
+    },
+    {
+      "path": "assets/r106/fx/spike.webp",
+      "bytes": 2152,
+      "sha256": "3b675c1121436832eccb2f896baac759609167c9ee46160e75e7924bd1435d22"
+    },
+    {
+      "path": "assets/r106/fx/wing.webp",
+      "bytes": 78648,
+      "sha256": "e2a78151f459af819822d9aedbe029a65f2023704c8393616ce93d7050cac959"
     },
     {
       "path": "assets/r74/effects.png",
@@ -16003,14 +16178,24 @@
       "sha256": "a7ad4b0e167b095ade429941585e145746607922aff233ac6519de280f42511d"
     },
     {
+      "path": "fx-d2s-r106.js",
+      "bytes": 17003,
+      "sha256": "31b3ba237457628f7b9e53f8bb10e35f3150feb0578c3796f8e02d4cb27aca44"
+    },
+    {
+      "path": "fx-sprites-r106.js",
+      "bytes": 8990,
+      "sha256": "63fede6efe454aa2584d0e815ac504e82d720b3c856cbfa2eaf6a3fba7856b7a"
+    },
+    {
       "path": "growth-r103.js",
       "bytes": 18943,
       "sha256": "ffc53e9029ccd01aec8abc6c31baa57d18e53742fd89d7ffb7560f2156cdcc14"
     },
     {
       "path": "hero-fx-r102.js",
-      "bytes": 42418,
-      "sha256": "9e95717c92a06ce4f96db710b5143e1154455ad091a07586f3bd72443a022e3b"
+      "bytes": 50379,
+      "sha256": "808fa2d91fe7578721b2a8c845c72c82e8b464e665ab9284e3feca2dfe474a5c"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -16054,8 +16239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6561846,
-      "sha256": "0d6db807f6f8a43dfe07b9febc397244eddebf6591454e5eeedd23360952bc61"
+      "bytes": 6562026,
+      "sha256": "c1ed13c27415848340f311cb5cd201d5f5fb8737e64b4324fe019c7a97538601"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16084,8 +16269,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 45880,
-      "sha256": "276ff4d542aa78858936426acdabc415a5b3987043aba0aa67018444b97235de"
+      "bytes": 50565,
+      "sha256": "8f2d4f2c91806fe7a39dac8e3f9dcebe8c31fd92db843a42ddc6267253bfc3b9"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -16109,23 +16294,33 @@
     },
     {
       "path": "samong-maps-r105.js",
-      "bytes": 41102,
-      "sha256": "a4a6c97e17fb7ba869e5d6a021f9c900de94e684b78c9240596f5d181f04dab8"
+      "bytes": 42621,
+      "sha256": "9b9398eb9217033239976a6105c74feec51c080a6ba7718608b7e5373a533c34"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 56358,
-      "sha256": "3092fa1f0a77fbe5c851b856d0f6393e456a35d5c3e150f8db8cd030b7c8de72"
+      "bytes": 57032,
+      "sha256": "8363e1865a0733a3f6ea6ae37f05dce209fb86de6c31fb15d30e1c2f777ffa28"
     },
     {
       "path": "samong-text-r103.js",
-      "bytes": 185476,
-      "sha256": "b376453a6a2a73b97dd453d8a10762a30ea39984dd866454be673c05fdcce110"
+      "bytes": 189531,
+      "sha256": "a0848ef6b1039bc10b9d9a7666af26f5414327742f223bb1f8647867f39b02c5"
     },
     {
       "path": "status-r96.js",
       "bytes": 5692,
       "sha256": "01ab5961ac4af2100c63dfa51b32847d37cf12ac317b11fa0c9e3cec68ed9882"
+    },
+    {
+      "path": "story-canon-r106-data.js",
+      "bytes": 108995,
+      "sha256": "2828de7a6c635945935596e4b90fb6deee252db0848ee571be52c54feceb3fea"
+    },
+    {
+      "path": "story-canon-r106.js",
+      "bytes": 7646,
+      "sha256": "d02c73aaf228bfcd696ec055a0e5e5f0c922987a6232a65ecb3fe2e1225293c8"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -16268,9 +16463,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3253,
-  "totalBytes": 731436163,
-  "webHTMLSha256": "0d6db807f6f8a43dfe07b9febc397244eddebf6591454e5eeedd23360952bc61",
+  "fileCount": 3292,
+  "totalBytes": 732452629,
+  "webHTMLSha256": "c1ed13c27415848340f311cb5cd201d5f5fb8737e64b4324fe019c7a97538601",
   "largest": [
     {
       "path": "index.html",

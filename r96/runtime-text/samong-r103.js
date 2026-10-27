@@ -163,7 +163,8 @@
  function floorAt(x,y,rad=.45){return!blocked(x,y,rad,room);}
  function ringPoint(c,min,max,tries=24){for(let t=0;t<tries;t++){const a=Math.random()*Math.PI*2,d=min+Math.random()*(max-min),q={x:c.x+Math.cos(a)*d,y:c.y+Math.sin(a)*d};if(floorAt(q.x,q.y))return q;}return null;}
  function caps(){const low=!!settings.lowFx,mobile=matchMedia('(pointer:coarse)').matches;return{survival:low||mobile?36:56,maze:low||mobile?12:18};}
- function tickSurvival(dt){const r=room,x=r.samongR103,ep=EP[x.ep];if(x.portal)return;
+ let R106_DT=0;
+ function tickSurvival(dt){R106_DT=dt;const r=room,x=r.samongR103,ep=EP[x.ep];if(x.portal)return;
   if(S.kills>=GOAL){// Goal reached: no new spawns; the rest scatter and the portal opens.
    if(!x.endAt){x.endAt=time+5;toast('누적 '+GOAL+' 처치 · 새 적이 더 나오지 않습니다. 남은 형상이 흩어지면 문이 열립니다.',4);}
    for(const e of r.enemies)if(living(e)&&e.samongR103){e.fadeR103=(e.fadeR103||0)+dt;if(e.fadeR103>1.2){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}}
@@ -171,10 +172,12 @@
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,r.exploration.samongR103.centre,'미로로 내려가는 문');return;}
   attackTokens();
   const alive=r.enemies.filter(living).length,cap=caps().survival,need=GOAL-S.kills;if(time<x.spawnAt||alive>=Math.min(cap,need))return;
-  x.spawnAt=time+.45;const batch=Math.min(4,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+  x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
  // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
- function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.15:1.4);e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
- function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,4-busy)))e.cd=Math.max(e.cd||0,.25+Math.random()*.35);}
+ function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
+ function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,6-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);
+  // R106: 생존 잡몹 공격 속도 1.6배 — 다음 공격까지의 대기만 줄인다(공격 예고 동작은 그대로).
+  const dt=typeof R106_DT==='number'?R106_DT:0;if(dt>0)for(const e of room.enemies)if(living(e)&&e.samongSurvival&&(e.cd||0)>0&&!(e.attack&&!e.attack.committed))e.cd=Math.max(0,e.cd-dt*.6);}
  function tickMaze(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
   if(!x.portal)openPortal(r,L.exit,'미로의 출구');
   // Bounded periodic spawns at junctions far from the player, never near the exit or the lamp.
@@ -182,7 +185,7 @@
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(time<x.spawnAt||alive.length>=caps().maze)return;x.spawnAt=time+4;
   const sites=r.exploration.nodes.filter(n=>{const d=Math.hypot(n.x-player.x,n.y-player.y);return d>8&&d<22&&Math.hypot(n.x-L.exit.x,n.y-L.exit.y)>4&&(!L.save||Math.hypot(n.x-L.save.x,n.y-L.save.y)>4);});
-  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e)e.damage=(e.damage||8)*.8;}}
+  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
  function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
    const b=spawn(ep.boss.donor,L.dais,{boss:true,name:ep.boss.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=ep.boss.patterns;x.boss=b.id;}}
@@ -213,7 +216,7 @@
   S.ep=ep;S.stage=stage;S.started=true;const def=regionById[EP[ep].host];if(!def)return false;
   const extra=stagePaths(ep,stage),oldPaths=def.paths;def.paths=[...new Set([...oldPaths,...extra])];
   const prev=stageRoom;stageRoom=buildRoom(ep,stage);S.active=true;entering++;let ok=false;
-  const L=stageRoom.exploration,start=position||(stage==='maze'&&S.checkpoint)||L.entry;
+  const L=stageRoom.exploration,onFloor=q=>!!q&&Number.isFinite(q.x)&&Number.isFinite(q.y)&&L.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)),pick=[position,stage==='maze'&&S.checkpoint].find(onFloor),start=pick||L.entry;// R106: 맵 크기가 바뀐 예전 저장 위치는 바닥이 아니면 입구로.
   try{ok=await enterRegion(def.id,null,{layer:'DREAM',position:{x:start.x,y:start.y},noStory:true,restore:true});}finally{entering--;def.paths=oldPaths;}
   if(!ok||room!==stageRoom){stageRoom=prev&&room===prev?prev:null;S.active=!!stageRoom;return false;}
   forceFlash(stage==='maze');intro(EP[ep],stage);saveGame(false);return true;}
@@ -232,21 +235,21 @@
  function scene(ep,key,text,narrator,part){const k='DREAM:sm103:'+ep.key+':'+part+':'+key;return{id:ep.host,record:{title:ep.title,narrator,chapter:ep.chapter},part:'body',text,title:TEXT()[key]?.title||ep.title,narrator:narrator?'〈'+narrator+'〉':'',chapter:ep.chapter,key:k};}
  // [구간 키, 그 문단이 시작하는 원문 문자열(없으면 첫 문단, 'last'는 끝), 문단 수]
  const CUES={
-  P:{a:['prelude',null,4],b:['threshold','코어 아래로 검은 뿌리가',1],z:['threshold','교주가 마지막으로 가둔 곳은',1]},
-  'S-01':{s:['threshold','뿌리를 쓰러뜨리자',1],m:['threshold','나는 이곳에서 모든 적을',1],a:['S-01',null,2],b:['S-01','그때 식탁의 안주인이',2],z:['S-01','실들이 한꺼번에',1]},
+  P:{a:['prelude',null,4],b:['threshold','코어 아래로 검은 뿌리가',1],z:['threshold','교주가 마지막으로 세운 감옥은',1]},
+  'S-01':{s:['threshold','뿌리를 무너뜨리자',1],m:['threshold','모든 적을 없애고 나서 움직일 수는',1],a:['S-01',null,2],b:['S-01','그때 식탁의 안주인이',2],z:['S-01','실들이 한꺼번에',1]},
   'S-02':{s:['S-02',null,2],m:['S-02','복도 끝에서 열쇠가',1],a:['S-02','방송실이 위층에',2],b:['S-02','나는 귀가 확인서를',1],z:['S-02','교문은 열렸지만',1]},
-  'S-03':{s:['S-03',null,1],m:['S-03','나는 손전등을 낮추었다',1],a:['S-03','빗소리가 잦아들자',1],b:['S-03','시험장 뒤편에서는 도복들이',2],z:['S-03','관람석의 의자들이',1]},
-  'S-04':{s:['S-04',null,2],m:['S-04','나는 도망치는 대신',1],a:['S-04','엘리베이터는 4층으로',1],b:['S-04','13층에서 강재헌을',3],z:['S-04','비 속에서 눈을 떴을 때',1]},
+  'S-03':{s:['S-03',null,1],m:['S-03','손전등을 낮추자',1],a:['S-03','빗소리가 잦아들자',1],b:['S-03','시험장 뒤편에서는 도복들이',2],z:['S-03','관람석이 한 자리씩',1]},
+  'S-04':{s:['S-04',null,2],m:['S-04','나는 탈출이 아니라 배달을',1],a:['S-04','엘리베이터는 4층으로',1],b:['S-04','13층에서 강재헌을',3],z:['S-04','비 속에서 눈을 떴을 때',1]},
   'S-05':{s:['S-05',null,2],m:['S-05','처음에는 추위를 피해',1],a:['S-05','신문은 재가 되지 않았다',2],b:['S-05','관사 안에서 다시 불빛이',1],z:['S-05','나는 그 약속에 찍힌',1]},
   'S-06':{s:['NS-01',null,2],m:['NS-05','문을 열자 작은 방이',1],a:['NS-08',null,1],b:['NS-08','한쪽 날개에는',1],z:['NS-10','나는 그 줄을 잘랐다',2]},
   'S-07':{s:['S-07',null,2],m:['S-07','탁자 위에 여섯 물건이',2],a:['S-07','나는 그것들이 전부',1],b:['S-07','나는 페르소나를 베었다',2],z:['S-07','그때 EGO가 각성했다',2]},
   RA:{s:['R-00',null,2],m:['R-02','손전등으로 창문을 비추자',1],a:['R-01',null,2],b:['R-02','나는 순찰자의 길을 막았다',1],z:['R-02','last',2]},
   RB:{s:['R-03',null,2],m:['R-03','초침은 철로에',1],a:['R-04',null,2],b:['R-04','지현을 비추던 은빛 면에',1],z:['R-04','last',2]},
-  RC:{s:['R-05',null,2],m:['R-05','재판관의 손이 망치를',1],a:['R-06',null,2],b:['R-05','그 순서를 거절하자',2],z:['R-06','last',2]},
-  RD:{s:['R-07',null,2],m:['R-07','처음 걸음을 옮겼을 때에는',1],a:['R-08',null,2],b:['R-09','하늘에서 나팔 소리가',2],z:['R-09','last',2]},
-  RE:{s:['R-10',null,2],m:['R-10','빠른 사람과 느린 사람이',1],a:['R-10','거기에 관람석이',1],b:['R-10','백색 사수는 다시 총을',1],z:['R-10','last',2]},
+  RC:{s:['R-05',null,2],m:['R-05','재판관이 망치를 내리칠',1],a:['R-06',null,2],b:['R-05','내가 그런 결말을 받아들이지 않자',2],z:['R-06','last',2]},
+  RD:{s:['R-07',null,2],m:['R-07','처음 발을 디뎠을 때에는',1],a:['R-08',null,2],b:['R-09','하늘에서 나팔 소리가',2],z:['R-09','last',2]},
+  RE:{s:['R-10',null,2],m:['R-10','빠른 사람은 느린 사람에게',1],a:['R-10','천장에는 관람석이',1],b:['R-10','백색 사수는 다시 총을',1],z:['R-10','last',2]},
   RF:{s:['R-11',null,2],m:['R-11','그때 다섯 번째 나팔이',1],a:['R-12',null,2],b:['R-11','스토리텔러는 그렇게',1],z:['R-12','last',2]},
-  RG:{s:['R-13',null,2],m:['R-13','도겸이 들어 올린 여백이',1],a:['R-14',null,2],b:['R-13','나팔의 몸통은 빈 소매였고',1],z:['R-17','last',2]},
+  RG:{s:['R-13',null,2],m:['R-13','도겸이 들어 올린 여백이',1],a:['R-14',null,2],b:['R-13','나팔의 몸통은 빈 소매를',1],z:['R-17','last',2]},
   M:{s:['R-17','last',2],m:['M1','그녀를 향해 다가갈수록',1],a:['M1',null,1],b:['M1','그녀는 모든 문을 혼자',2]}
  };
  function cue(row){if(!row)return[];const[k,sub,n]=row,p=paras(k);if(!p.length)return[];let at=0;if(sub==='last')at=Math.max(0,p.length-n);else if(sub){at=p.findIndex(v=>v.t.startsWith(sub));if(at<0)at=p.findIndex(v=>v.t.includes(sub));if(at<0)return[];}return p.slice(at,at+n).map(v=>({...v,key:k}));}

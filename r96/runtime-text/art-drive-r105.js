@@ -18,11 +18,14 @@ const fail=e=>{stats.failures++;lastError=String(e?.message||e).slice(0,160);};
 const ACTORS={1:{boss:'boss-hostess.webp'},2:{boss:'boss-patroller.webp',mob:'mob-student.webp'},8:{boss:'boss-patroller.webp'},13:{boss:'boss-storyteller.webp',mob:'mob-paper-figure.webp'}};
 // 정적 조형물 그림과 기준 높이(px, 영웅 ≈ 66px 기준의 실물 비례).
 const ART={gardener:{path:'prop-gardener.webp',height:112},student:{path:'mob-student.webp',height:104},gogh:{path:'prop-gogh-chair.webp',height:140},manet:{path:'prop-manet-mirror.webp',height:140},picasso:{path:'prop-picasso-paper.webp',height:168},gchair:{path:'prop-gothic-chair.webp',height:118},gwall:{path:'prop-gothic-wall.webp',height:156},teapot:{path:'prop-teapot-1.webp',height:92},
- news1:{path:'prop-newspaper-1.webp',height:54},news2:{path:'prop-newspaper-2.webp',height:52},news3:{path:'prop-newspaper-3.webp',height:44},window:{path:'prop-window-1.webp',height:126},table:{path:'prop-table.webp',height:88}};
+ news1:{path:'prop-newspaper-1.webp',height:54},news2:{path:'prop-newspaper-2.webp',height:52},news3:{path:'prop-newspaper-3.webp',height:44},window:{path:'prop-window-1.webp',height:126},table:{path:'prop-table.webp',height:88},
+ // R106 드라이브 역행 묶음(R05·R06·R07·R08·R13·R14) — assets/r106/drive, 정적 1장씩(망치만 2키)
+ hammer:{path:'assets/r106/drive/hammer-1.webp',height:96},paperKing:{path:'assets/r106/drive/paper-king.webp',height:132},lotus:{path:'assets/r106/drive/lotus.webp',height:104},tableDrawing:{path:'assets/r106/drive/table-drawing.webp',height:34},trumpet:{path:'assets/r106/drive/trumpet.webp',height:92},threadDoor:{path:'assets/r106/drive/thread-door.webp',height:36}};
 // 탁자 위 여섯 물건: 탁자 윗면 중심 기준 화면 오프셋(px, zoom 1)과 높이(px). 영웅 66px 대비 실물보다 조금 크게(읽히는 크기) 두었다.
 const TABLE_SET=[['ledger',-27,-5,30],['doll',-7,-13,34],['mask',14,-9,34],['casing',-15,7,10],['cloth',7,6,26],['glass',29,2,22]];
 // 보스 상태(대기 → 체력 절반 → 격파)에 비추는 3키 그림. 창문: 꺼짐 → 불빛 → 잔광·연기. 가면: 온전 → 금 → 세 번째 키.
-const KEYED={window:['prop-window-1.webp','prop-window-2.webp','prop-window-3.webp'],mask:['prop-mask-1.webp','prop-mask-2.webp','prop-mask-3.webp']};
+const KEYED={window:['prop-window-1.webp','prop-window-2.webp','prop-window-3.webp'],mask:['prop-mask-1.webp','prop-mask-2.webp','prop-mask-3.webp'],hammer:['assets/r106/drive/hammer-1.webp','assets/r106/drive/hammer-2.webp']};
+const artPath=f=>f.startsWith('assets/')?f:DIR+f;
 // 'ep:stage' → [[그림, 개수]] (서사 구간: S-01 정원사·주전자, S-02 학생, RA R-02 빈 의자, RB R-04 거울, RC R-05 종이면, RF R-11·12 고딕).
 const PLAN={'1:survival':[['gardener',3]],'1:maze':[['gardener',2]],'1:ascent':[['teapot',1],['gardener',1]],
  '2:survival':[['student',4]],'2:maze':[['student',2]],
@@ -31,7 +34,12 @@ const PLAN={'1:survival':[['gardener',3]],'1:maze':[['gardener',2]],'1:ascent':[
  '10:survival':[['picasso',2]],'10:maze':[['picasso',2]],'10:ascent':[['picasso',1]],
  '13:survival':[['gchair',3]],'13:maze':[['gchair',2],['gwall',3]],'13:ascent':[['gwall',4],['gchair',1]],
  '5:survival':[['news1',1],['news2',1],['news3',1]],'5:maze':[['news2',2],['news1',1]],'5:ascent':[['window',1],['news3',1],['news1',1]],
- '7:survival':[['table',1]],'7:maze':[['table',1]],'7:ascent':[['table',1]]};
+ '7:survival':[['table',1]],'7:maze':[['table',1]],'7:ascent':[['table',1]],
+ // R106: R-05 망치(재판관 단 옆, 보스 체력 절반 이하에서 저울판이 깨진 상태로), R-06 종이 왕, R-07 감시의 연꽃, R-11 작은 식탁 그림, R-13 빈 소매 나팔, R-14 실로 그린 문
+ '10:survival':[['paperKing',1]],'10:maze':[['paperKing',1]],'10:ascent':[['hammer',1],['paperKing',1]],
+ '11:survival':[['lotus',4]],'11:maze':[['lotus',3]],'11:ascent':[['lotus',2]],
+ '13:maze':[['tableDrawing',1]],'13:ascent':[['tableDrawing',1]],
+ '14:survival':[['trumpet',3]],'14:maze':[['threadDoor',1],['trumpet',1]],'14:ascent':[['trumpet',2],['threadDoor',1]]};
 const TEAPOT=['prop-teapot-1.webp','prop-teapot-2.webp','prop-teapot-3.webp'];
 // 지역 진입 때 releaseImageMemory()가 준비된 그림을 지울 수 있으므로 자체 중복 집합을 두지 않고 imageCache 기준으로 다시 요청한다.
 const load=p=>{try{if(typeof addImage==='function'&&!(typeof imageCache!=='undefined'&&imageCache.has(p)))addImage(p);}catch(e){fail(e);}};
@@ -39,11 +47,11 @@ const load=p=>{try{if(typeof addImage==='function'&&!(typeof imageCache!=='undef
 const open=(r,x,y)=>{try{return typeof blocked==='function'?!blocked(x,y,.3,r):true;}catch(e){return true;}};
 function place(r,i,stage,ep,{deco=[],dais=null}={}){const plan=PLAN[i+':'+stage];if(!plan||!r?.props)return 0;let n=0,d=0;
  for(const[key,count]of plan){const art=ART[key];if(!art)continue;for(let k=0;k<count;k++){let at=null;
-   if((key==='teapot'||key==='window')&&dais){let best=null,bd=1e9;for(const p of deco){const dd=Math.hypot(p.x-dais.x,p.y-dais.y);if(dd<=3.5)continue;const score=dd+((open(r,p.x+1,p.y+1)&&open(r,p.x+1,p.y)&&open(r,p.x,p.y+1))?0:6);if(score<bd){bd=score;best=p;}}at=best;if(at)deco.splice(deco.indexOf(at),1);}// 단 가까이, 카메라 쪽(+x,+y)이 트인 자리 우선(창문이 벽에 반쯤 가리지 않게)
+   if((key==='teapot'||key==='window'||key==='hammer')&&dais){let best=null,bd=1e9;for(const p of deco){const dd=Math.hypot(p.x-dais.x,p.y-dais.y);if(dd<=3.5)continue;const score=dd+((open(r,p.x+1,p.y+1)&&open(r,p.x+1,p.y)&&open(r,p.x,p.y+1))?0:6);if(score<bd){bd=score;best=p;}}at=best;if(at)deco.splice(deco.indexOf(at),1);}// 단 가까이, 카메라 쪽(+x,+y)이 트인 자리 우선(창문이 벽에 반쯤 가리지 않게)
    else{let j=d;for(;j<deco.length;j++){const q=deco[j];if(open(r,q.x+1,q.y+1)&&open(r,q.x+1,q.y)&&open(r,q.x,q.y+1))break;}if(j<deco.length){at=deco[j];deco.splice(j,1);}else at=deco[d++];}// 카메라 쪽(+x,+y)이 트인 자리 우선: 키 큰 원화가 벽 윗면에 가리지 않게
    if(!at)break;
-   const p={id:'r105:art:'+r.id+':'+key+':'+k,path:DIR+art.path,x:at.x,y:at.y,height:art.height*((key==='gwall'||key==='teapot'||key==='window'||key==='table')?1:.92+((i*7+k*13)%17)/100),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r105Art:key};
-   if(key==='teapot')p.r105Teapot=true;if(key==='window')p.r105Keyed='window';
+   const p={id:'r105:art:'+r.id+':'+key+':'+k,path:artPath(art.path),x:at.x,y:at.y,height:art.height*((key==='gwall'||key==='teapot'||key==='window'||key==='table'||key==='hammer'||key==='tableDrawing'||key==='threadDoor')?1:.92+((i*7+k*13)%17)/100),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r105Art:key};
+   if(key==='teapot')p.r105Teapot=true;if(key==='window')p.r105Keyed='window';if(key==='hammer')p.r105Keyed='hammer';
    if(key==='table'){p.r105Table=true;p.r105TableKeyed=stage==='ascent';for(const[o]of TABLE_SET)load(DIR+(o==='mask'?KEYED.mask[0]:'prop-'+o+'.webp'));}
    r.props.push(p);load(p.path);n++;}}
  stats.props+=n;return n;}
@@ -79,7 +87,7 @@ function install(){
   try{return base.apply(this,[e,...a]);}finally{e.path=old;if(shadow)e.profile=prof;if(r74){if(hadR74)e.r74Monster=r74;else delete e.r74Monster;}}};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r105Art){if(!readyImage(p.path))load(p.path);else stats.propDraws++;}// 그릴 때 지연 로딩(주전자 상태1 포함)
   if(p?.r105Teapot){try{const s=teapotState(),path=DIR+TEAPOT[s];if(p.path!==path){load(path);if(readyImage(path)){p.path=path;stats.teapot++;}}}catch(err){fail(err);}}
-  if(p?.r105Keyed){try{const path=DIR+KEYED[p.r105Keyed][keyState()];if(p.path!==path){load(path);if(readyImage(path)){p.path=path;stats.keyed++;}}}catch(err){fail(err);}}
+  if(p?.r105Keyed){try{const K=KEYED[p.r105Keyed],path=artPath(K[Math.min(K.length-1,keyState())]);if(p.path!==path){load(path);if(readyImage(path)){p.path=path;stats.keyed++;}}}catch(err){fail(err);}}
   const r=base.apply(this,[p,...a]);if(p?.r105Table){try{drawTableSet(p);}catch(err){fail(err);}}return r;};}
 }
 try{install();}catch(e){fail(e);}

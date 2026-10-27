@@ -1,0 +1,72 @@
+[
+ {
+  "file": "assets/r106/drive/hammer-1.webp",
+  "w": 420,
+  "h": 420,
+  "bytes": 21292,
+  "sha256": "f2e40b7c14cf6c9d470600d1795ade969e80ca7b809852331ac2ad6a6ffda309",
+  "source": "R05-judgment-hammer/judgment-hammer/reverse-r05-judgment-hammer-two-key-states.png",
+  "sourceSha256": "0d125b60bd2ea69432f0937d1a7761a510c304f5c70ef7861ded1e333999f584",
+  "use": "R-05 재판관의 망치 · 저울판 온전 (보스 대기·체력 절반 위)"
+ },
+ {
+  "file": "assets/r106/drive/hammer-2.webp",
+  "w": 420,
+  "h": 420,
+  "bytes": 21722,
+  "sha256": "6a2991b18a9d990bd47f08e661b8e5d7447dee0dd28d3340cd512c968a0b2d90",
+  "source": "R05-judgment-hammer/judgment-hammer/reverse-r05-judgment-hammer-two-key-states.png",
+  "sourceSha256": "0d125b60bd2ea69432f0937d1a7761a510c304f5c70ef7861ded1e333999f584",
+  "use": "R-05 재판관의 망치 · 저울판 일부 깨짐 (보스 체력 절반 이하·격파)"
+ },
+ {
+  "file": "assets/r106/drive/paper-king.webp",
+  "w": 293,
+  "h": 512,
+  "bytes": 59984,
+  "sha256": "4420f624dc7a155747fc1844f08a0b40ac786cef4a5beffd1aaf42d7cb22b241",
+  "source": "R06-paper-king/paper-king/storyworld-reverse-r06-paper-king-idle-v1.png",
+  "sourceSha256": "9880e9df1b9dd7ae5a027503ba1a486dd54a02dcd66079b8b8736cd206155f93",
+  "use": "R-06 금고 안쪽의 종이 왕 · 전신 정적 조형물"
+ },
+ {
+  "file": "assets/r106/drive/lotus.webp",
+  "w": 321,
+  "h": 420,
+  "bytes": 49744,
+  "sha256": "ca8919fb7d09e07dcfa789dad9db369b5ffac268b03d0c3f91a64e68d6e7b064",
+  "source": "R07-surveillance-lotus/surveillance-lotus/reverse-r07-surveillance-lotus.png",
+  "sourceSha256": "7133970a58cb0405fb3251dc37f51d5395bb1182ff13958aa4e4805cbc79e7dd",
+  "use": "R-07 감시의 연꽃 · 늪 다리·병동 환경 개체"
+ },
+ {
+  "file": "assets/r106/drive/table-drawing.webp",
+  "w": 431,
+  "h": 320,
+  "bytes": 30502,
+  "sha256": "42aea48f9c0400cc853c42abb9763baa06d1b3b16150ca5fe7f9e76153b050b1",
+  "source": "R08-tactile-table-v2/tactile-table-v2/reverse-r08-tactile-table-drawing-v2-underpaper-emboss.png",
+  "sourceSha256": "f00762994a3075f2b7b0a8c44f4d9d35fcc2a97e8a65430322bf75a58a559de6",
+  "use": "R-11 작은 식탁 그림(종이 밑 실 양각 v2) · 바닥의 작은 종이"
+ },
+ {
+  "file": "assets/r106/drive/trumpet.webp",
+  "w": 488,
+  "h": 420,
+  "bytes": 32450,
+  "sha256": "459db47b004c00a3582cf8d1dddd9ccd205da2a82c9f8a83c7bc722eaf277dcc",
+  "source": "R13-empty-sleeve-trumpet/empty-sleeve-trumpet/storyworld-reverse-r13-empty-sleeve-trumpet-idle-v1.png",
+  "sourceSha256": "ce14570b6e21cb8c4d74b160f8207063e54d8d59efe8aedb828f50ae7a5eb6a4",
+  "use": "R-13 빈 소매 나팔 · 정적 1장"
+ },
+ {
+  "file": "assets/r106/drive/thread-door.webp",
+  "w": 322,
+  "h": 320,
+  "bytes": 19158,
+  "sha256": "447d7152b3647c61ea36abc2f51321fa7280863f8e30a24ef0b36a5147ca1d93",
+  "source": "R14-thread-door/thread-door-drawing/reverse-r14-thread-door-drawing.png",
+  "sourceSha256": "367e7db4d8ede9950c4a2ccd90a3ef1eca3307e752ac2c00b93ef84787548774",
+  "use": "R-14 실로 그린 문 그림 · 바닥의 종이"
+ }
+]
