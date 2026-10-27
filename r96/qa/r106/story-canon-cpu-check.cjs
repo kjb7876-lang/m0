@@ -1,13 +1,13 @@
-// R106 CPU check: the improved canon (합일몽세_여섯빛깔의묵시록_1인칭독백_문장개선본, sha256 369c6a25…) replaces
+// R106/R107 CPU check: the canon (R107: 사용자수정본 최종교정본 01~23 + R106 개선본 24~, sha256 b55996df…) replaces
 // every story text the game shows — story mode (R54 campaign data, R75 scene data, boot-time raw story) and
 // 사몽/역행 sections — and no paragraph of the earlier text survives where the new text has none.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const root=path.resolve(__dirname,'../../..'),R=p=>path.join(root,p);
-const SHA='369c6a252eef1af4de56a72f9aff0d4293e7f1e8020efae98eaab71e33ee66e3';
+const SHA='b55996df21b9d03241db0ae1e49d343412e3915dcaee52016d2cfd4a2204a457';
 let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.log((ok?'PASS ':'FAIL ')+name+(ok||!detail?'':' :: '+detail));};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const canonPath=R('story-source/hapil-canon-r106-improved.txt'),canon=fs.readFileSync(canonPath);
+const canonPath=R('story-source/hapil-canon-r107-merged.txt'),canon=fs.readFileSync(canonPath);
 check('canon file hash is the improved canon',sha(canon)===SHA,sha(canon));
 const canonText=canon.toString('utf8').replace(/\r\n/g,'\n');
 const norm=s=>String(s).replace(/\s+/g,' ').trim();

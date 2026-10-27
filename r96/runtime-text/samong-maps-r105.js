@@ -26,9 +26,9 @@
   P:{ascent:{title:'코어 아래의 뿌리길',variant:'zigzag',props:[['obelisk',4],['stump',5],['brazier',2]],
    records:[{key:'prelude',at:0,n:3,label:'서문 · 주인 없는 자장가'},{key:'prelude',at:'last',n:2,label:'서문 · 잠든 사람'},{key:'threshold',at:0,n:2,label:'문턱 · 코어 아래로'}]}},
   'S-01':{
-   survival:{title:'뿌리 밑동의 광장',shape:'ring',inner:3.5,pillars:0,props:[['stump',6],['obelisk',3],['brazier',4]],
+   survival:{title:'뿌리 밑동의 광장',style:'forge',shape:'ring',inner:3.5,pillars:0,props:[['stump',6],['obelisk',3],['brazier',4]],
     records:[{key:'threshold',sub:'뿌리를 무너뜨리자',n:2,label:'문턱 · 666의 잔영'}]},
-   maze:{title:'빛이 닿는 만큼 생기는 복도',cols:8,rows:8,straight:.8,braid:.12,rooms:1,props:[['brazier',3],['crate',2]],
+   maze:{title:'빛이 닿는 만큼 생기는 복도',style:'forge',cols:8,rows:8,straight:.8,braid:.12,rooms:1,props:[['brazier',3],['crate',2]],
     records:[{key:'threshold',sub:'모든 적을 없애고 나서 움직일 수는',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
    ascent:{title:'찻잔 속의 집 · 정원과 긴 식탁',style:'domestic',variant:'spiral',props:[['ferns',6],['statue',1],['workbench',6],['well',1],['cabinet',1],['brazier',2]],
     records:[{key:'S-01',at:0,n:3,label:'꿰맨 장미의 집 · 들어서며'},{key:'S-01',sub:'그때 식탁의 안주인이',n:2,label:'식탁의 안주인'},{key:'S-01',at:'last',n:2,label:'종이 울릴 때',prop:'cabinet'}]}},
@@ -54,9 +54,9 @@
    ascent:{title:'13층에서 16층으로',variant:'spiral',props:[['crate',16],['cabinet',2],['brazier',4]],
     records:[{key:'S-04',sub:'엘리베이터는 4층으로',n:2,label:'엘리베이터'},{key:'S-04',sub:'13층에서 강재헌을',n:3,label:'13층 · 강재헌'},{key:'S-04',at:'last',n:2,label:'열여섯 개의 의자와 거울',prop:'cabinet'}]}},
   'S-05':{
-   survival:{title:'눈 내리는 돌길 사거리',shape:'cross',radius:19,street:3.5,outdoor:{family:'stone',trees:'dead',wall:null},props:[['brazier',8],['crate',6],['stump',2]],
+   survival:{title:'눈 내리는 돌길 사거리',shape:'cross',radius:19,street:3.5,outdoor:{family:'snow',trees:null,wall:null},props:[['brazier',8],['crate',6],['stump',2]],
     records:[{key:'S-05',at:0,n:3,label:'술집 · 잭앤코크와 전차 불빛'},{key:'S-05',at:.3,n:2,label:'지현'}]},
-   maze:{title:'눈 내리는 골목',cols:9,rows:9,straight:.55,braid:.3,rooms:3,outdoor:{family:'stone',trees:null,wall:null},props:[['crate',8],['brazier',6],['cabinet',2]],
+   maze:{title:'눈 내리는 골목',cols:9,rows:9,straight:.55,braid:.3,rooms:3,outdoor:{family:'snow',trees:null,wall:null},props:[['crate',8],['brazier',6],['cabinet',2]],
     records:[{key:'S-05',sub:'처음에는 추위를 피해',n:2,label:'골목의 추위'},{key:'S-05',at:.55,n:2,label:'사무실 · 보고서',prop:'cabinet'},{key:'S-05',at:.7,n:2,label:'지현의 사진이 실린 신문'}]},
    ascent:{title:'관사 · 불빛이 다시 켜지는 집',variant:'straight',props:[['brazier',6],['cabinet',2],['crate',3]],
     records:[{key:'S-05',sub:'신문은 재가 되지 않았다',n:2,label:'검은 재의 거리'},{key:'S-05',at:'last',n:2,label:'기차 안내 방송',prop:'cabinet'}]}},
@@ -77,7 +77,7 @@
   RA:{
    survival:{title:'어제가 도착하는 승강장',style:'clinical',shape:'platform',radius:19,width:10,pillars:6,props:[['obelisk',6],['workbench',1],['crate',3],['brazier',4]],
     records:[{key:'R-00',at:0,n:3,label:'미술관 · 어제가 도착하는 승강장'},{key:'R-00',at:.5,n:2,label:'눈을 가린 화가'},{key:'R-01',at:0,n:3,label:'도겸의 독백'},{key:'R-01',at:'last',n:2,label:'이젤의 뒷면',prop:'workbench'}]},
-   maze:{title:'검은 태양 아래 설원 · 침대 고랑',cols:9,rows:8,straight:.5,braid:.3,rooms:3,outdoor:{family:'stone',trees:'dead',wall:1},props:[['empty-bed',12],['brazier',3],['crate',2]],
+   maze:{title:'검은 태양 아래 설원 · 침대 고랑',cols:9,rows:8,straight:.5,braid:.3,rooms:3,outdoor:{family:'snow',trees:'dead',wall:1},props:[['empty-bed',12],['brazier',3],['crate',2]],
     records:[{key:'R-02',at:0,n:3,label:'검은 태양 아래의 학교'},{key:'R-02',sub:'손전등으로 창문을 비추자',n:2,label:'창문의 별'},{key:'R-02',at:.6,n:2,label:'31번째 책상 아래의 신발',prop:'crate'}]},
    ascent:{title:'학교와 병원 사이의 이송로',variant:'straight',outdoor:{family:'ash',trees:'dead',wall:1},props:[['empty-bed',6],['brazier',4],['stump',2]],
     records:[{key:'R-02',sub:'나는 순찰자의 길을 막았다',n:2,label:'순찰자의 길'},{key:'R-02',at:'last',n:2,label:'검은 태양의 균열'}]}},

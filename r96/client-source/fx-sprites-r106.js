@@ -9,7 +9,7 @@
 if(window.__STORYWORLD_FX_SPRITES_R106__)return;
 const BASE='assets/r106/fx/';
 // name: [w,h,[pivotX,pivotY],frames]; bolt frames are rows, flame frames are columns.
-const META=Object.freeze({"glow":[128,128,[0.5,0.5],1],"orb":[64,64,[0.5,0.5],1],"flare":[256,256,[0.5,0.5],1],"ring":[256,256,[0.5,0.5],1],"halo":[256,96,[0.5,0.5],1],"slashline":[512,96,[0.5,0.5],1],"spark":[128,32,[1,0.5],1],"line":[64,32,[0.5,0.5],1],"wing":[512,512,[0.1277,0.4046],1],"feather":[48,144,[0.5,0.95],1],"petal":[64,48,[0.5,0.5],1],"shard":[96,192,[0.5,0.62],1],"pillar":[128,512,[0.5,0.99],1],"cross":[256,384,[0.5,0.3385],1],"bolt":[512,288,[0,0.5],4],"smoke":[256,256,[0.5,0.5],1],"crack":[256,256,[0.5,0.5],1],"pixel":[48,48,[0.5,0.5],1],"blade":[256,72,[0.5,0.5],1],"flame":[768,288,[0.5,0.97],4],"spike":[64,192,[0.5,0.99],1],"slash":[512,288,[0.5,1.0417],1],"slashwide":[512,288,[0.5,1.0417],1],"rune":[512,512,[0.5,0.5],1],"clock":[512,512,[0.5,0.5],1],"circuit":[512,512,[0.5,0.5],1]});
+const META=Object.freeze({"iai-cut":[512,67,[0.5,0.5],1],"iai-x":[304,297,[0.5,0.5],1],"iai-star":[290,320,[0.5,0.5],1],"iai-hash":[320,293,[0.5,0.5],1],"iai-burst":[320,249,[0.5,0.5],1],"iai-sheath":[320,96,[0.5,0.5],1],"wingback":[384,298,[0.5,0.4],1],"wingfront":[384,278,[0.5,0.4],1],"wingside":[384,300,[0.18,0.3],1],"wingback-f":[384,295,[0.5,0.4],1],"wingfront-f":[384,299,[0.5,0.4],1],"wingside-f":[384,305,[0.18,0.3],1],"glow":[128,128,[0.5,0.5],1],"orb":[64,64,[0.5,0.5],1],"flare":[256,256,[0.5,0.5],1],"ring":[256,256,[0.5,0.5],1],"halo":[256,96,[0.5,0.5],1],"slashline":[512,96,[0.5,0.5],1],"spark":[128,32,[1,0.5],1],"line":[64,32,[0.5,0.5],1],"wing":[512,512,[0.1277,0.4046],1],"feather":[48,144,[0.5,0.95],1],"petal":[64,48,[0.5,0.5],1],"shard":[96,192,[0.5,0.62],1],"pillar":[128,512,[0.5,0.99],1],"cross":[256,384,[0.5,0.3385],1],"bolt":[512,288,[0,0.5],4],"smoke":[256,256,[0.5,0.5],1],"crack":[256,256,[0.5,0.5],1],"pixel":[48,48,[0.5,0.5],1],"blade":[256,72,[0.5,0.5],1],"flame":[768,288,[0.5,0.97],4],"spike":[64,192,[0.5,0.99],1],"slash":[512,288,[0.5,1.0417],1],"slashwide":[512,288,[0.5,1.0417],1],"rune":[512,512,[0.5,0.5],1],"clock":[512,512,[0.5,0.5],1],"circuit":[512,512,[0.5,0.5],1]});
 const ROWS=new Set(['bolt']);
 const NAMES=Object.freeze(Object.keys(META));
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t,mix=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
@@ -36,7 +36,9 @@ function parseColour(s){if(typeof s!=='string')return null;let v=parsed.get(s);i
 
 // ---- tinted copies ---------------------------------------------------------------------
 const tints=new Map(),MAXT=220;let budgetAt=null,budget=0;
-function source(name){const path=BASE+name+'.webp';if(typeof readyImage!=='function')return null;const row=readyImage(path);if(row?.image)return row.image;
+// R107: painted wing views (ChatGPT sheet, keyed) live under assets/r107/fx.
+const R107=new Set(["wingback", "wingfront", "wingside", "wingback-f", "wingfront-f", "wingside-f", "iai-cut", "iai-x", "iai-star", "iai-hash", "iai-burst", "iai-sheath"]);
+function source(name){const path=(R107.has(name)?'assets/r107/fx/':BASE)+name+'.webp';if(typeof readyImage!=='function')return null;const row=readyImage(path);if(row?.image)return row.image;
  try{if(typeof imageCache!=='undefined'&&!imageCache.has(path)&&typeof addImage==='function')addImage(path,'R106 effect texture');}catch(e){fail(e);}return null;}
 function build(name,F,im){const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;if(!(w>0&&h>0))return null;
  const cv=document.createElement('canvas');cv.width=w;cv.height=h;const g=cv.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(im,0,0);

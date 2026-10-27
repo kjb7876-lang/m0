@@ -7658,6 +7658,81 @@
       "sha256": "e2a78151f459af819822d9aedbe029a65f2023704c8393616ce93d7050cac959"
     },
     {
+      "path": "assets/r107/fx/iai-burst.webp",
+      "bytes": 24408,
+      "sha256": "89e81f475a5ce5cd84dce21c6e3cf387e7b6e02175e7244ebe7fa60c08038fc0"
+    },
+    {
+      "path": "assets/r107/fx/iai-cut.webp",
+      "bytes": 11916,
+      "sha256": "a08869c12d080d5bfa50130b35af88a6bd91fb1e6919f4347c36758a3cee602d"
+    },
+    {
+      "path": "assets/r107/fx/iai-hash.webp",
+      "bytes": 23110,
+      "sha256": "6a3b3aaf2ef8200c2a5643be1062caec57c6df456ebbddc98da1675a3661739c"
+    },
+    {
+      "path": "assets/r107/fx/iai-sheath.webp",
+      "bytes": 9162,
+      "sha256": "f0b5255aa45e9bf88435d021ad332d5385bbd6ae77273b60064a61a9c099f845"
+    },
+    {
+      "path": "assets/r107/fx/iai-star.webp",
+      "bytes": 24870,
+      "sha256": "a7e14c9857575c7f746407271a43f7db21c381f5dc9f716f46a3cd0e15629d69"
+    },
+    {
+      "path": "assets/r107/fx/iai-x.webp",
+      "bytes": 19990,
+      "sha256": "9b771b72fba42316a166de8163f9b5eecd11a7474a743ba9be0d2faacc23e3cf"
+    },
+    {
+      "path": "assets/r107/fx/meta.json",
+      "bytes": 2527,
+      "sha256": "a8a802a87dae8fa836be3ff9edc962442ffc76b7cfb2cd885611eaf3c01b961d"
+    },
+    {
+      "path": "assets/r107/fx/wingback-f.webp",
+      "bytes": 43062,
+      "sha256": "cd4b713eb4f0ebe4e84570eb36c530156e019d88884b12e8619585cc8ae91586"
+    },
+    {
+      "path": "assets/r107/fx/wingback.webp",
+      "bytes": 43760,
+      "sha256": "a93e32baf0a6ff477418c7f454064b2545b133e10f2bb443284e92789517447f"
+    },
+    {
+      "path": "assets/r107/fx/wingfront-f.webp",
+      "bytes": 44196,
+      "sha256": "520d8c7578b864e90c323571debc5bed2423c5af792c04c13b1071cf16d394ec"
+    },
+    {
+      "path": "assets/r107/fx/wingfront.webp",
+      "bytes": 35858,
+      "sha256": "513454f281eaf710f6f7d847910ad552e8a72e761b66a7d18c959bee06a77570"
+    },
+    {
+      "path": "assets/r107/fx/wingside-f.webp",
+      "bytes": 34098,
+      "sha256": "1ba7a7b5261d733ba31553179f3ad3411e9dd9b55c73890090a338feea9cabc1"
+    },
+    {
+      "path": "assets/r107/fx/wingside.webp",
+      "bytes": 42472,
+      "sha256": "4ab4db095ac35f10132ca20c497a17827b632fa2e496b865003d113b8169a371"
+    },
+    {
+      "path": "assets/r107/world/hedge.webp",
+      "bytes": 330396,
+      "sha256": "2bfcfb10c363e91f687f93c9095921f61f481b5b7f6bf4ddaec8096f6009fcda"
+    },
+    {
+      "path": "assets/r107/world/meta.json",
+      "bytes": 285,
+      "sha256": "7d69951644a679d794cd88f719623ac8de33788004dfbd263f5367b836d28a87"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -16204,13 +16279,13 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 17003,
-      "sha256": "31b3ba237457628f7b9e53f8bb10e35f3150feb0578c3796f8e02d4cb27aca44"
+      "bytes": 19689,
+      "sha256": "f602ad0d2c41ad7b07b4a55155f592c82e6bbc52e1160e7ba92b23b50dbe656a"
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 10418,
-      "sha256": "c87531d551d2c0ff91e563d47c0d601eb1452ec38399c4c6b7a6d245d9a00677"
+      "bytes": 11107,
+      "sha256": "6b131a59798e666bafa35f3c5c87741037532cf4e062570a47ea05a7dd6f63f0"
     },
     {
       "path": "growth-r103.js",
@@ -16284,8 +16359,8 @@
     },
     {
       "path": "play-r106.js",
-      "bytes": 8882,
-      "sha256": "ebb2a423df42a5c0e2c7bb57d9151b7c25ea9a1b584e8a65a31f398a5179c500"
+      "bytes": 10119,
+      "sha256": "e5202d6d9ef81a8a6b3e957fc30369a58a350a5df04e4720dc11f23ff391bbe5"
     },
     {
       "path": "polish-r100-data.js",
@@ -16294,13 +16369,13 @@
     },
     {
       "path": "polish-r100.js",
-      "bytes": 35251,
-      "sha256": "3f1327ca969613a4c8267bd3347c49d57a3d7f2cdfe440576997cb1a32d95254"
+      "bytes": 35297,
+      "sha256": "8d6117bb43a1830b26221bf30266b1c0c9548bb2390da8a97ac55f12063abb26"
     },
     {
       "path": "polish-r101.js",
-      "bytes": 50565,
-      "sha256": "8f2d4f2c91806fe7a39dac8e3f9dcebe8c31fd92db843a42ddc6267253bfc3b9"
+      "bytes": 52585,
+      "sha256": "034d2d8eb9ed0a065e502844fb43c0946d39191f228f8c72cb64193ef1d8bc72"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -16324,18 +16399,18 @@
     },
     {
       "path": "samong-maps-r105.js",
-      "bytes": 42621,
-      "sha256": "9b9398eb9217033239976a6105c74feec51c080a6ba7718608b7e5373a533c34"
+      "bytes": 42644,
+      "sha256": "314a332bfc4a77d8a7291924f933cf0e295fb22b53175999bbd9e498634bca07"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 57032,
-      "sha256": "8363e1865a0733a3f6ea6ae37f05dce209fb86de6c31fb15d30e1c2f777ffa28"
+      "bytes": 59653,
+      "sha256": "209240f65fd2e445ed13f7b47b465875042504251b627ddb9602fb774e22cef3"
     },
     {
       "path": "samong-text-r103.js",
-      "bytes": 189531,
-      "sha256": "a0848ef6b1039bc10b9d9a7666af26f5414327742f223bb1f8647867f39b02c5"
+      "bytes": 189572,
+      "sha256": "a0819f2058a4835e94d18cf69ba8320321a9504e0e9b60435e25cb3b2bd0cc65"
     },
     {
       "path": "status-r96.js",
@@ -16344,8 +16419,8 @@
     },
     {
       "path": "story-canon-r106-data.js",
-      "bytes": 108995,
-      "sha256": "2828de7a6c635945935596e4b90fb6deee252db0848ee571be52c54feceb3fea"
+      "bytes": 110777,
+      "sha256": "2ff517627a30b1c702efabccee0511588fb8f9cc9cfa7900837ed230102e268b"
     },
     {
       "path": "story-canon-r106.js",
@@ -16469,8 +16544,8 @@
     },
     {
       "path": "world-outdoor-r99.js",
-      "bytes": 14271,
-      "sha256": "de88b95bf33d96aca5fd1eca27237a2ba78305dc3e69a64aa047a37fb472f704"
+      "bytes": 15692,
+      "sha256": "d73969e9ac51e90599f8f49ca5b475f7ca85741259f0e36c6c833e255af329cf"
     },
     {
       "path": "world-presentation-r81.js",
@@ -16493,8 +16568,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3298,
-  "totalBytes": 732698178,
+  "fileCount": 3313,
+  "totalBytes": 733400854,
   "webHTMLSha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b",
   "largest": [
     {

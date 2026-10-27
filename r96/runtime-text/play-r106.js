@@ -85,3 +85,13 @@ window.__STORYWORLD_PLAY_R106__=Object.freeze({revision:REV,face:FACE,faceOf,orb
  test:{dropOrb:(x,y)=>{orbs.push({x,y,t:0,id:'r106orb-test'+(++stats.orbsDropped)});return orbs.length;}},
  inspect:()=>({revision:REV,...stats,orbs:orbs.length,failures,lastError,saveFormatChanged:false})});
 })();
+
+/* R107: returning to the shelter (death or 쉼터) left the hub's only portal pointing at an already-cleared
+ * region; the order guard refused it ('현재 진행은 … 순서입니다') and the guide looped on the portal forever.
+ * A 'next' portal into a region the player already completed is now a pass-through on the way to the current
+ * memory: same saved difficulty, no first-clear reward (rewards are first-clear only), no new save fields. */
+(()=>{'use strict';if(window.__STORYWORLD_PASS_R107__||typeof enterRegion!=='function')return;const stats={passes:0};
+ const base=enterRegion;enterRegion=async function(id,from=null,options={}){try{const l=options?.layer||(typeof layer!=='undefined'?layer:'STORY'),r=typeof regionById!=='undefined'?regionById[id]:null;
+  if(options&&options.r72Portal==='next'&&r&&id!==zone&&r.records?.length&&!r.safe&&typeof completed==='function'&&completed(id,l)&&typeof firstPending==='function'&&firstPending(l)?.id!==id&&!options.fastTravelR63){stats.passes++;return base.call(this,id,from,{...options,fastTravelR63:true,passR107:true});}}catch(_){}
+  return base.apply(this,arguments);};
+ window.__STORYWORLD_PASS_R107__=Object.freeze({inspect:()=>({revision:'R107-pass',...stats})});})();
