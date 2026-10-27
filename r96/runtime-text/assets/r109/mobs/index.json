@@ -1,0 +1,398 @@
+{
+ "schema": "storyworld.r109.mobs/v1",
+ "note": "Drive 2026-10-27 조건부 4키 후보, 원본 보존·가공 사본. 완성 루프 승인 아님.",
+ "tracks": [
+  {
+   "group": "M002",
+   "ids": [
+    "dist01-sp1",
+    "dist01-sp2",
+    "dist02-sp1",
+    "dist03-sp1"
+   ],
+   "track": "move",
+   "kind": "walk",
+   "path": "assets/r109/mobs/M002-move.png",
+   "frames": 4,
+   "cell": [
+    191,
+    156
+   ],
+   "pivot": [
+    97.63,
+    155.44
+   ],
+   "visibleHeight": 150,
+   "bytes": 178490,
+   "sha256": "5d117398b0037fff838b03b86dd56eb6e42d6d1e3367a833483cc68e19c9314f",
+   "use": "망각의 거미 계열 · 8다리 보행 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 2,
+     "dy": -2,
+     "ncc": 0.646
+    },
+    {
+     "dx": 1,
+     "dy": 68,
+     "ncc": 0.703
+    },
+    {
+     "dx": 11,
+     "dy": 66,
+     "ncc": 0.691
+    }
+   ],
+   "groundSpreadPx": 25,
+   "source": {
+    "driveZipId": "1GLrbTk7hDH_Hdb798p2aVXyzaSoAehhO",
+    "zipSha256": "e228a01476befa1269cc678affbc18175ac33aa6ce498d6ad49bafdbcc29afb0",
+    "png": "assets/storyworld-M002-spider-move4-v1.png",
+    "pngSha256": "48a975caf7bddaaaba9c7bfde58a2c4e46e74c337a029ff68f53f69decdb2fe3",
+    "sourceRects": [
+     [
+      0,
+      0,
+      641,
+      627
+     ],
+     [
+      642,
+      0,
+      612,
+      627
+     ],
+     [
+      0,
+      627,
+      641,
+      627
+     ],
+     [
+      642,
+      627,
+      612,
+      627
+     ]
+    ]
+   }
+  },
+  {
+   "group": "M003",
+   "ids": [
+    "dist02-m1",
+    "dist05-m1",
+    "dist06-m1"
+   ],
+   "track": "move",
+   "kind": "walk",
+   "path": "assets/r109/mobs/M003-move.png",
+   "frames": 4,
+   "cell": [
+    118,
+    156
+   ],
+   "pivot": [
+    57.14,
+    155.41
+   ],
+   "visibleHeight": 150,
+   "bytes": 114325,
+   "sha256": "c8bcefbd5fee9eaebb0c4f8ad6a4f2d83d2db38afeaf2d4ba53eccf672986371",
+   "use": "수렁/검은기둥 주문사 · 걷기 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 29,
+     "dy": -7,
+     "ncc": 0.756
+    },
+    {
+     "dx": -26,
+     "dy": 38,
+     "ncc": 0.808
+    },
+    {
+     "dx": 9,
+     "dy": 35,
+     "ncc": 0.883
+    }
+   ],
+   "groundSpreadPx": 14,
+   "source": {
+    "driveZipId": "1rcN4claKUkumE-lA3ENJBT5Dq9JtKvZI",
+    "zipSha256": "d6261f05b748d0175d4bc2d01acb59c4b8f166adccd8f833e239b2fa2c1e0ed4",
+    "png": "assets/M003-move4-v1-raw.png",
+    "pngSha256": "af7be19b8b9272a9fba9e520bddb4caafd6401432c619392c93d967207797b8a",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
+  },
+  {
+   "group": "M007",
+   "ids": [
+    "dist05-c1"
+   ],
+   "track": "move",
+   "kind": "fly",
+   "path": "assets/r109/mobs/M007-move.png",
+   "frames": 4,
+   "cell": [
+    227,
+    182
+   ],
+   "pivot": [
+    119.78,
+    181.03
+   ],
+   "visibleHeight": 150,
+   "bytes": 168734,
+   "sha256": "0868a9cc990c86e875626009b143cf3fd934e7f6f3f1949e733dba3aa89ae56f",
+   "use": "검은기둥 가고일 수호자 · 날갯짓 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 33,
+     "dy": -19,
+     "ncc": 0.744
+    },
+    {
+     "dx": 16,
+     "dy": 67,
+     "ncc": 0.863
+    },
+    {
+     "dx": 83,
+     "dy": 77,
+     "ncc": 0.723
+    }
+   ],
+   "groundSpreadPx": 5,
+   "source": {
+    "driveZipId": "1SPNxbo45gjE70ssKcgNu1G7wBilB1IHc",
+    "zipSha256": "4a19bd920b9c0800f26eb486eaf0b0f1d53ef3adb668a85825e013dff7ab47f0",
+    "png": "assets/M007-wingbeat4-v1-raw.png",
+    "pngSha256": "c8c35898cfd8268616d5111af30a968c02f65b2f68026239d80e0a7d1f4cd5cb",
+    "sourceRects": [
+     [
+      0,
+      0,
+      651,
+      654
+     ],
+     [
+      651,
+      0,
+      603,
+      654
+     ],
+     [
+      0,
+      654,
+      765,
+      600
+     ],
+     [
+      765,
+      654,
+      489,
+      600
+     ]
+    ]
+   }
+  },
+  {
+   "group": "M008",
+   "ids": [
+    "dist05-h1",
+    "dist06-h1",
+    "a10-h1"
+   ],
+   "track": "move",
+   "kind": "walk",
+   "path": "assets/r109/mobs/M008-move.png",
+   "frames": 4,
+   "cell": [
+    148,
+    158
+   ],
+   "pivot": [
+    74.72,
+    154.21
+   ],
+   "visibleHeight": 150,
+   "bytes": 156399,
+   "sha256": "fa4654af1921aec90ef85afb8cee050b0025c0a1a4d695eb8d57a1051e4afd17",
+   "use": "뿔 달린 늪 악마 계열 · 걷기 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 4,
+     "dy": 0,
+     "ncc": 0.857
+    },
+    {
+     "dx": -4,
+     "dy": 1,
+     "ncc": 0.808
+    },
+    {
+     "dx": 6,
+     "dy": 3,
+     "ncc": 0.84
+    }
+   ],
+   "groundSpreadPx": 31,
+   "source": {
+    "driveZipId": "1Phl1xW8SfNgoxDMKTKxKDf6zgBsoJ7_V",
+    "zipSha256": "02032f227430eff1e79a373151f7859d84aebfcdf2eac799cd2d65e35b2832f3",
+    "png": "assets/M008-move-2x2.png",
+    "pngSha256": "73c9f82c0bd3539f6419ca3da4282630662c1b8186ba97cce610bcda33e70e4d",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
+  },
+  {
+   "group": "M019",
+   "ids": [
+    "b01-c1"
+   ],
+   "track": "move",
+   "kind": "hover",
+   "path": "assets/r109/mobs/M019-move.png",
+   "frames": 4,
+   "cell": [
+    132,
+    153
+   ],
+   "pivot": [
+    64.53,
+    151.83
+   ],
+   "visibleHeight": 150,
+   "bytes": 157279,
+   "sha256": "3eb8f0968bb8fd3fac7cf02d6f49bd1195041e00622605ab39b8b79dff3249c7",
+   "use": "검은 실의 외부 신호(뇌 장치) · 호버 4키",
+   "registration": [
+    {
+     "dx": 0,
+     "dy": 0,
+     "ncc": 1.0
+    },
+    {
+     "dx": 22,
+     "dy": 4,
+     "ncc": 0.559
+    },
+    {
+     "dx": 0,
+     "dy": 19,
+     "ncc": 0.515
+    },
+    {
+     "dx": 16,
+     "dy": 13,
+     "ncc": 0.848
+    }
+   ],
+   "groundSpreadPx": 4,
+   "source": {
+    "driveZipId": "1PN_rwxrv97r6VdeUQyG1PUjttojX9mGm",
+    "zipSha256": "1c09afcefc4ce3b7fe25195091d8acedbf6abf16ecf69eceae2b44e5deff82a4",
+    "png": "assets/storyworld-M019-brain-device-hover4-v1.png",
+    "pngSha256": "1ccec6cbfeef17e39833e94fc192708b8a4d8e4e6e1e77531651b6a7bbeaad26",
+    "sourceRects": [
+     [
+      0,
+      0,
+      627,
+      627
+     ],
+     [
+      627,
+      0,
+      627,
+      627
+     ],
+     [
+      0,
+      627,
+      627,
+      627
+     ],
+     [
+      627,
+      627,
+      627,
+      627
+     ]
+    ]
+   }
+  }
+ ]
+}
