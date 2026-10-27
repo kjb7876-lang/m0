@@ -28,7 +28,7 @@ sb.drawEnemy=function(e){drawn.push({frames:e.profile.frames,lift:e.visualLiftPx
  drawn[drawn.length-1].pose=sb.__STORYWORLD_HOSPITAL_CHARGE_R52__.applyBodyPose(c,false);drawn[drawn.length-1].ops=c.ops;return 'base';};
 vm.createContext(sb);vm.runInContext(fs.readFileSync(path.join(SRC,'mobs-r109.js'),'utf8'),sb,{filename:'mobs-r109.js'});
 const M=sb.__STORYWORLD_MOBS_R109__;
-check('overlay installs',!!M&&M.revision==='R109-mobs-1');
+check('overlay installs',!!M&&/^R1(09|10)-mobs-/.test(M.revision));
 const idle={path:'idle.png',assetFrame:{sourceRect:[0,0,10,10],pivot:[5,10]}};
 const mk=(id,o={})=>({id:'e'+id+Math.random(),nativeId:id,hp:10,x:3,y:0,profile:{frames:{idle,move:idle,attack:idle,windup:idle}},combatProfile:{attackShape:{windup:.4,active:.2}},...o});
 (async()=>{

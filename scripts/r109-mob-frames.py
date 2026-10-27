@@ -23,11 +23,22 @@ GROUPS = [
   '1Phl1xW8SfNgoxDMKTKxKDf6zgBsoJ7_V', '02032f227430eff1e79a373151f7859d84aebfcdf2eac799cd2d65e35b2832f3', '뿔 달린 늪 악마 계열 · 걷기 4키'),
  ('M019', 'M019/assets/storyworld-M019-brain-device-hover4-v1.png', FIX, (.3, .7, .25, .75), 'hover',
   '1PN_rwxrv97r6VdeUQyG1PUjttojX9mGm', '1c09afcefc4ce3b7fe25195091d8acedbf6abf16ecf69eceae2b44e5deff82a4', '검은 실의 외부 신호(뇌 장치) · 호버 4키'),
+ # R110 (Drive 2026-10-27 저녁): M137 이동 4키, M119 대기 4키, R105 종이 형상(Drive 대체 그림) 이동 4키
+ ('M137', 'M137/assets/M137-move-v1-2x2.png', FIX, (.25, .75, .0, .55), 'walk',
+  '158J1_OEhHfLjNkl60VjLg7W3Npdi-mEv', 'ad466a26808bdb5f70e8d9f50f5596bb48c65d73819eee5d0b97a71c9bb9a6c6', '막힌 이름들(기계팔 사이보그) · 걷기 4키'),
+ ('M119', 'M119/assets/M119-idle4-raw.png', FIX, (.25, .75, .0, .55), 'idle',
+  '1bNoi71UAZiANsEWUkKgWeAOTZvZZzHGR', 'f453432693d5d107dde007c305cf94e4cfaf568d73bafa4cf42e8fd8bc63c394', '무명 검흔(향로 든 형상) · 대기 4키(로브라 서 있을 때·이동 때 모두 사용)'),
+ ('PAPER', 'PAPER/assets/R109-paper-figure-move4-candidate.png', FIX, (.2, .8, .0, .5), 'walk',
+  '1LTZFo_SW8LwW6iXG_Y9n5zFgLTh5Aup_', 'e77f9b0b29685818a5b1d24b1c69f23bb6fb996ffa526452ee92a3ca8c982b2f', 'RF 종이 형상(R105 Drive 대체 그림) · 걷기 4키'),
 ]
 TARGET_H, PAD = 150, 3
 # 감사 스냅샷(StoryWorld-monster-action-audit-snapshot-20261027, MONSTER-AUDIT.json)의 그룹별 등록 ID
 IDS = {'M002': ['dist01-sp1', 'dist01-sp2', 'dist02-sp1', 'dist03-sp1'], 'M003': ['dist02-m1', 'dist05-m1', 'dist06-m1'],
-       'M007': ['dist05-c1'], 'M008': ['dist05-h1', 'dist06-h1', 'a10-h1'], 'M019': ['b01-c1']}
+       'M007': ['dist05-c1'], 'M008': ['dist05-h1', 'dist06-h1', 'a10-h1'], 'M019': ['b01-c1'],
+       'M137': ['c104-e1'], 'M119': ['h102-t1'], 'PAPER': []}
+# Drive 대체 그림(art-drive-r105)으로 그려지는 몹은 ID 대신 그 그림 경로로 연결한다.
+ART = {'PAPER': 'assets/r105/drive/mob-paper-figure.webp'}
+TRACK = {'M119': 'idle'}
 
 def bbox(a, t=16):
     ys, xs = np.nonzero(a >= t)
@@ -95,8 +106,8 @@ for gid, png, rects, core, kind, zid, zsha, use in GROUPS:
     ground = float(np.median([b[3] for b in boxes]))
     a0 = al[0][..., 3]; core_cx = float((np.nonzero(a0[tb[1]:tb[3], tb[0]:tb[2]] >= 16)[1].mean()) + tb[0])
     pivot = [round(float((core_cx - ux0) * sc), 2), round(float((ground - uy0) * sc), 2)]
-    name = f'{gid}-move.png'; p = out / name; strip.save(p, optimize=True); b = p.read_bytes()
-    rows.append({'group': gid, 'ids': IDS[gid], 'track': 'move', 'kind': kind, 'path': 'assets/r109/mobs/' + name, 'frames': 4, 'cell': [cw, ch], 'pivot': pivot,
+    name = f'{gid}-{TRACK.get(gid, "move")}.png'; p = out / name; strip.save(p, optimize=True); b = p.read_bytes()
+    rows.append({'group': gid, 'ids': IDS[gid], **({'art': ART[gid]} if gid in ART else {}), 'track': TRACK.get(gid, 'move'), 'kind': kind, 'path': 'assets/r109/mobs/' + name, 'frames': 4, 'cell': [cw, ch], 'pivot': pivot,
                  'visibleHeight': TARGET_H, 'bytes': len(b), 'sha256': sha(b), 'use': use,
                  'registration': [{'dx': int(dx), 'dy': int(dy), 'ncc': round(float(v), 3)} for dx, dy, v in shifts], 'groundSpreadPx': int(max(bottoms) - min(bottoms)),
                  'source': {'driveZipId': zid, 'zipSha256': zsha, 'png': png.split('/', 1)[1], 'pngSha256': sha(raw), 'sourceRects': rects}})

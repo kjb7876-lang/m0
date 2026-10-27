@@ -9,8 +9,8 @@
     },
     {
       "path": "art-drive-r105.js",
-      "bytes": 14195,
-      "sha256": "83fe0b2ae7190d7bdb51ed485b29d8127a4da22a83fef9f745ee5ce21c415e26"
+      "bytes": 14298,
+      "sha256": "058db45e120ad15d4b1ad52b6e1a5cb50d66906cae85ccfbd5e945261166305f"
     },
     {
       "path": "assets-clean-r99.js",
@@ -7758,9 +7758,24 @@
       "sha256": "3eb8f0968bb8fd3fac7cf02d6f49bd1195041e00622605ab39b8b79dff3249c7"
     },
     {
+      "path": "assets/r109/mobs/M119-idle.png",
+      "bytes": 128481,
+      "sha256": "e7b6b7acc8e474f18e7c75e56f6a065fa5b12d68c507a050941fe204fa5a27e1"
+    },
+    {
+      "path": "assets/r109/mobs/M137-move.png",
+      "bytes": 120499,
+      "sha256": "b2f8a19a9d96b48e1e7abd9c8fbea1b507d72c060c64e8ad21e238d7bdc4297b"
+    },
+    {
+      "path": "assets/r109/mobs/PAPER-move.png",
+      "bytes": 99184,
+      "sha256": "db45c586393f657323f01f06bf65ed04d447175e14a31a4ab5d8f001f1f4a29c"
+    },
+    {
       "path": "assets/r109/mobs/index.json",
-      "bytes": 6596,
-      "sha256": "8c9d0efaed23b605df89a51d0094e195557ca6c3e4d66ed85556ee8f436a927e"
+      "bytes": 10470,
+      "sha256": "eec060b07f3f9f7761551f4d25919d78223187844fb58566aa209614a572b415"
     },
     {
       "path": "assets/r74/effects.png",
@@ -16374,8 +16389,8 @@
     },
     {
       "path": "mobs-r109.js",
-      "bytes": 11111,
-      "sha256": "e23e19f9430d8269946f480c0318b94eb81f097111f0bca27d3c38212b882d7b"
+      "bytes": 18303,
+      "sha256": "fe4c37f702ba2472ee7b57669f999b9b88ab110735a14f727430bdf824708be9"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16394,8 +16409,8 @@
     },
     {
       "path": "play-r106.js",
-      "bytes": 10119,
-      "sha256": "e5202d6d9ef81a8a6b3e957fc30369a58a350a5df04e4720dc11f23ff391bbe5"
+      "bytes": 10918,
+      "sha256": "20afb96be0bb600f891f57db59366f5631b20232b9fa84dd547d4901e863363f"
     },
     {
       "path": "polish-r100-data.js",
@@ -16603,8 +16618,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3320,
-  "totalBytes": 734194034,
+  "fileCount": 3323,
+  "totalBytes": 734554166,
   "webHTMLSha256": "da3e801588115b0db77b1500fc20897f6f847832530e7a1f5628a33e58074859",
   "largest": [
     {
