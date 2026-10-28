@@ -2534,7 +2534,8 @@
     "assets/r109/mobs/M137-move.png",
     "assets/r109/mobs/M119-idle.png",
     "assets/r109/mobs/PAPER-move.png",
-    "play-r111.js"
+    "play-r111.js",
+    "mobs-r112.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3609,5 +3610,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a611f82ee4bed7bf51832e0e7f5524e2739b3025a041b1119d73ff7579c4e298"
+  "runtimeManifestSHA256": "fbc71234db80260a5ccfd3bcda6cd8d0d5cb8eafb043ec5e7e4749b1395af48d"
 }

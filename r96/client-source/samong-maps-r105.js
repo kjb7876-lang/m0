@@ -27,9 +27,9 @@
    records:[{key:'prelude',at:0,n:3,label:'서문 · 주인 없는 자장가'},{key:'prelude',at:'last',n:2,label:'서문 · 잠든 사람'},{key:'threshold',at:0,n:2,label:'문턱 · 코어 아래로'}]}},
   'S-01':{
    survival:{title:'뿌리 밑동의 광장',style:'forge',shape:'ring',inner:3.5,pillars:0,props:[['stump',6],['obelisk',3],['brazier',4]],
-    records:[{key:'threshold',sub:'뿌리를 무너뜨리자',n:2,label:'문턱 · 666의 잔영'}]},
+    records:[{key:'threshold',sub:'나는 뿌리를 무너뜨린 뒤',n:2,label:'문턱 · 666의 잔영'}]},
    maze:{title:'빛이 닿는 만큼 생기는 복도',style:'forge',cols:8,rows:8,straight:.8,braid:.12,rooms:1,props:[['brazier',3],['crate',2]],
-    records:[{key:'threshold',sub:'모든 적을 없애고 나서 움직일 수는',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
+    records:[{key:'threshold',sub:'적은 계속 나타나기에',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
    ascent:{title:'찻잔 속의 집 · 정원과 긴 식탁',style:'domestic',variant:'spiral',props:[['ferns',6],['statue',1],['workbench',6],['well',1],['cabinet',1],['brazier',2]],
     records:[{key:'S-01',at:0,n:3,label:'꿰맨 장미의 집 · 들어서며'},{key:'S-01',sub:'그때 식탁의 안주인이',n:2,label:'식탁의 안주인'},{key:'S-01',at:'last',n:2,label:'종이 울릴 때',prop:'cabinet'}]}},
   'S-02':{
