@@ -151,7 +151,7 @@
  function donor([region,nativeId]){const k=region+'|'+nativeId;if(donorProfiles.has(k))return donorProfiles.get(k);let d=null;try{const r=makeNative(region,'DREAM'),e=r.enemies.find(e=>e.nativeId===nativeId)||r.enemies.find(e=>String(e.id).includes(nativeId));d=e?.profile||null;}catch(e){fail(e);}if(!d)donorFail.add(k);donorProfiles.set(k,d);return d;}
  function profilePaths(d){const out=new Set();if(!d)return out;if(d.path)out.add(d.path);for(const f of Object.values(d.frames||{}))if(f?.path)out.add(f.path);for(const f of Object.values(d.actions||{}))if(f?.path)out.add(f.path);return out;}
  // Donor images join the host's preload only while a stage is being entered.
- function stagePaths(i,stage,zid=null){const ep=EP[i],paths=new Set(),z=zoneOf(zid);const rows=z?[...(z.mobs||ep.mobs||[]),...(z.boss?[z.boss.donor]:[]),...(z.patrol?[z.patrol.donor]:[]),...(z.landings?.length?ep.guard||[]:[]),...[z.wander?.mobs,...(z.clues||[]).map(c=>c.mobs)].filter(Boolean).flat()]:stage==='ascent'?[ep.boss.donor,...(ep.guard||[])]:(ep.mobs||[]);for(const row of rows)for(const path of profilePaths(donor(row))){try{register(path,'image','R103 사몽 · '+ep.title);}catch(e){}paths.add(path);}return[...paths];}
+ function stagePaths(i,stage,zid=null){const ep=EP[i],paths=new Set(),z=zoneOf(zid);const rows=z?[...(z.mobs||ep.mobs||[]),...(z.kind==='confront'?[(z.boss||ep.boss).donor]:[]),...(z.lead?[z.lead.donor]:[]),...(z.patrol?[z.patrol.donor]:[]),...(z.landings?.length?ep.guard||[]:[]),...[z.wander?.mobs,...(z.clues||[]).map(c=>c.mobs)].filter(Boolean).flat()]:stage==='ascent'?[ep.boss.donor,...(ep.guard||[])]:(ep.mobs||[]);for(const row of rows)for(const path of profilePaths(donor(row))){try{register(path,'image','R103 사몽 · '+ep.title);}catch(e){}paths.add(path);}return[...paths];}
 
  // ---- rooms -------------------------------------------------------------------------------
  function buildRoom(i,stage,zid=null){const ep=EP[i],id=ep.host,l='DREAM',p={ep:i,stage},template=makeNative(id,l),layout=layoutFor(i,stage,zid),z=zoneOf(zid);
@@ -190,14 +190,15 @@
   x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[S.serial%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
  // R115: 구역 전투 — 구역마다 정한 처치 수·단서·끝의 문. 666 누적은 문턱에만 남는다.
  const nextTitle=z=>{const list=zonesOf(EP.findIndex((e,i)=>zonesOf(i)?.includes(z)))||[],n=list.indexOf(z);return n>=0&&n<list.length-1?'다음 구역 · '+list[n+1].title:'다음 기억으로 향하는 문';};
- const zoneMobs=(z,ep)=>z?.mobs||ep.mobs;
+ const zoneMobs=(z,ep)=>z?.mobs||ep.mobs||EP[1].mobs;
  function tickZoneCombat(dt){R106_DT=dt;const r=room,x=r.samongR103,ep=EP[x.ep],z=zoneOf(x.zone),g=z.goal||{},L=r.exploration.samongR103;
+  if(g.hold&&!x.portal&&player.hp>0)x.holdT=(x.holdT||0)+dt;
   const fin=ZN().done(r,z),again=S.zoneDone.includes(z.id);
   if(fin&&!x.portal){if(!x.endAt){x.endAt=time+(g.reach||again?0:3);if(!again)toast(g.reach?'목표 달성 · 끝의 문이 열립니다.':'목표 달성 · 남은 형상이 흩어지면 문이 열립니다.',3.5);}
    if(!g.reach)for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.fadeR103=(e.fadeR103||0)+dt;if(e.fadeR103>1.2){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}}
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,L.exit,nextTitle(z));}
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
-  if(again||(fin&&!g.reach))return;attackTokens();
+  if(again||(fin&&!g.reach)||z.noMobs)return;attackTokens();
   const alive=r.enemies.filter(living).length,cap=Math.round(caps().survival*.6);if(time<x.spawnAt||alive>=cap)return;
   x.spawnAt=time+.45;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(4,cap-alive);n++){const q=ringPoint(player,8,14);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
  function tickExplore(dt){const r=room,x=r.samongR103,z=zoneOf(x.zone),L=r.exploration.samongR103;if(!x.portal&&ZN().done(r,z))openPortal(r,L.exit,nextTitle(z));r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);}
@@ -309,8 +310,8 @@
  function showRecords(focus=null){const open=EP.filter((e,i)=>i<=S.ep||S.cleared.includes(i));let html='<button id="r103RecClose" class="close">닫기</button><div class="eyebrow">DREAM / 사몽 기록장</div><h2>열린 기억</h2><p class="small">원문 그대로입니다. 전투 중에는 짧게만 보이고, 여기서 전체를 다시 읽을 수 있습니다.</p><div class="actions">';open.forEach((e,i)=>{html+='<button data-r103rec="'+i+'">'+escapeHTML(e.title)+'</button>';});html+='</div><div id="r103RecBody" class="storyText" style="max-height:52vh;overflow:auto"></div>';openPanel(html);button('r103RecClose',()=>closePanel());
   const show=i=>{const e=EP[i],body=document.getElementById('r103RecBody');if(!body)return;body.innerHTML=e.text.map(k=>{const s=TEXT()[k];if(!s)return'';return'<h3>'+escapeHTML(s.title)+'</h3>'+s.blocks.map(b=>(b.narrator?'<p class="small muted">〈'+escapeHTML(b.narrator)+'〉</p>':'')+b.paras.map(t=>'<p>'+escapeHTML(t)+'</p>').join('')).join('');}).join('');body.scrollTop=0;};
   document.querySelectorAll('[data-r103rec]').forEach(b=>b.onclick=()=>show(+b.dataset.r103rec));show(focus??Math.min(S.ep,EP.length-1));}
- function ending(){S.done=true;saveGame(false);const keys=['M2','M3','epilogue'],list=[];for(const k of keys){const s=TEXT()[k];if(!s)continue;for(const b of s.blocks){const t=b.paras.join('\n\n');if(t)list.push({id:room.id,record:{title:s.title,narrator:b.narrator,chapter:'제12부 — 마지막에 남은 사람'},part:'body',text:t,title:s.title,narrator:b.narrator?'〈'+b.narrator+'〉':'',chapter:'제12부 — 마지막에 남은 사람',key:'DREAM:sm103:ending:'+k+':'+list.length});}}
-  playScenes(list,record);}
+ function ending(){S.done=true;saveGame(false);const keys=zonesOf(EP.length-1)?[]:['M2','M3','epilogue'],list=[];for(const k of keys){const s=TEXT()[k];if(!s)continue;for(const b of s.blocks){const t=b.paras.join('\n\n');if(t)list.push({id:room.id,record:{title:s.title,narrator:b.narrator,chapter:'제12부 — 마지막에 남은 사람'},part:'body',text:t,title:s.title,narrator:b.narrator?'〈'+b.narrator+'〉':'',chapter:'제12부 — 마지막에 남은 사람',key:'DREAM:sm103:ending:'+k+':'+list.length});}}
+  if(list.length)playScenes(list,record);else record();}
  function record(){const s=TEXT().record,b=s?.blocks?.[0];// 기록 뒤에 해설이나 정답 장면을 붙이지 않습니다.
   openPanel('<div class="eyebrow">'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'</div><h2>〈'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'〉</h2><div class="storyText r103-record">'+(b?.paras||[]).map(t=>'<p>'+escapeHTML(t)+'</p>').join('')+'</div><div class="actions"><button id="r103End" class="primary">닫기</button></div>');button('r103End',()=>{closePanel(true);leave();});}
  async function leave(){const to=S.returnTo&&regionById[S.returnTo.zone]?S.returnTo:{zone:'hub',layer:'DREAM'};deactivate();await enterRegion(to.zone,null,{layer:to.layer,restore:true});saveGame(false);}
@@ -397,7 +398,7 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  function unlocked(){return window.__STORYWORLD_STORY_PROFILE_R54__?.dreamUnlocked?.()===true||!!window.__STORYWORLD_CHEAT777__?.active?.();}
  function dreamButtons(){const box=document.querySelector('#panel .actions');if(!box||document.getElementById('r103Enter'))return;const b=document.createElement('button');b.id='r103Enter';b.textContent=S.started&&!S.done?'사몽 에피소드 이어가기 · '+EP[S.ep].title:'사몽 에피소드 시작 · 주인 없는 자장가';b.disabled=!unlocked()||!solo();box.appendChild(b);b.onclick=()=>{closePanel(true);start();};const r=document.createElement('button');r.id='r103Records';r.textContent='사몽 기록장';r.disabled=!S.started;box.appendChild(r);r.onclick=()=>showRecords();}
  function menuButton(){const box=document.querySelector('#panel .actions');if(!box||!started||storyScene||document.getElementById('r103Menu'))return;if(!unlocked())return;const b=document.createElement('button');b.id='r103Menu';b.textContent='사몽 에피소드';box.appendChild(b);b.onclick=()=>{closePanel(true);start();};}
- async function start(){if(!unlocked()){toast('STORY 마지막 기억을 마치면 사몽 에피소드가 열립니다.',4);return false;}if(!solo()){toast('사몽 에피소드는 혼자 진행합니다.',3);return false;}if(S.done){S=fresh();}if(S.zone&&zoneOf(S.zone))return go(S.ep,null,{zone:S.zone});if(zonesOf(S.ep))return go(S.ep,S.stage);return go(S.ep,S.ep===0?'ascent':S.stage);}
+ async function start(){if(!unlocked()){toast('STORY 마지막 기억을 마치면 사몽 에피소드가 열립니다.',4);return false;}if(!solo()){toast('사몽 에피소드는 혼자 진행합니다.',3);return false;}if(S.done){S=fresh();}if(S.zone&&zoneOf(S.zone))return go(S.ep,null,{zone:S.zone});if(zonesOf(S.ep))return enterEp(S.ep);return go(S.ep,S.ep===0?'ascent':S.stage);}
  function hud(){const x=room.samongR103,ep=EP[x.ep],q=id=>document.getElementById(id);const set=(id,t)=>{const el=q(id);if(el)el.textContent=t;};
   const z=zoneOf(x.zone);if(z){const h=ZN().hudText(room,z);set('questTitle','사몽 · '+ep.title);set('regionName',z.title);set('regionSub',ep.chapter+' · '+h.sub);set('questText',h.text);set('questDestination',h.dest);set('questUnlock',h.unlock);set('hint',h.text);
    const badge=q('mobileMapR74'),bt='사몽 · '+h.badge;if(badge&&badge.textContent!==bt){badge.textContent=bt;badge.title=bt;}set('questInlineSummary',h.text+' · '+h.dest);return;}
