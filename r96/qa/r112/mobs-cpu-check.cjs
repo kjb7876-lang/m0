@@ -1,6 +1,6 @@
-// R112 CPU check (user 2026-10-28 02:52): 제7부 murder01·02·03 mix the three existing 제7부 mob arts by text cues.
-// Count, ids, hp, damage, waves and spawn state stay as the native rooms built them; bosses, midbosses, ward champions
-// and R74 world monsters are untouched. Also checks the R112 canon swap (제3부~제8부 + 제9부 서문·문턱·S-01).
+// R112 CPU check (user 2026-10-28 02:52): 제7부 murder01·02·03 draw the three existing 제7부 mob arts by text cues.
+// The swap happens only while drawEnemy runs: room data (ids, art path, hp, damage, combat profile, waves) stays exactly
+// as the native rooms built it (R81 contract); bosses, midbosses, ward champions and R74 world monsters are untouched. Also checks the R112 canon swap (제3부~제8부 + 제9부 서문·문턱·S-01).
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const ROOT=path.join(__dirname,'..','..'),SRC=path.join(ROOT,'client-source'),RT=path.join(ROOT,'runtime-text');
@@ -11,7 +11,7 @@ const registered=[];
 const sb={console,Math,JSON,Set,Map,Object,Array,Number,String,Boolean,Error,RegExp,
  localStorage:{getItem:()=>null,setItem(){}},
  regionById:{murder01:{paths:[]},murder02:{paths:[]},murder03:{paths:[]},murder04:{paths:[]}},
- actor3(){},ordinaryActor3:e=>!e.boss&&!e.midboss,register:(p)=>registered.push(p),compileWorld(){},enterRegion:id=>id};
+ drawn:[],drawEnemy(e){sb.drawn.push({id:e.id,nativeId:e.nativeId,path:e.path,name:e.name});},actor3(){},ordinaryActor3:e=>!e.boss&&!e.midboss,register:(p)=>registered.push(p),compileWorld(){},enterRegion:id=>id};
 sb.makeRoom=function(id){
  if(id==='murder04')return{enemies:[donorRow('murder04-e1','assets/murder/silent_alarm.png'),donorRow('murder04-e2','assets/murder/rooftop_echo.png'),donorRow('murder04-e3','assets/episode1b/generated-v394/blue_executor.webp')]};
  const en=[{id:id+':mb',nativeId:'mb-'+id,midboss:true,name:'mid',hp:500}];
@@ -22,19 +22,24 @@ sb.makeRoom=function(id){
 sb.window=sb;
 vm.createContext(sb);vm.runInContext(read('mobs-r112.js'),sb);
 const M=sb.__STORYWORLD_MOBS_R112__;
-check('R112 mob module loaded',!!M&&M.revision==='R112-mobs-1');
+check('R112 mob module loaded',!!M&&M.revision==='R112-mobs-2');
+const snap=e=>JSON.stringify([e.id,e.nativeId,e.path,e.name,e.hp,e.maxHp,e.damage,e.profile,e.fieldWave,e.spawnState,e.x]);
 for(const z of ['murder01','murder02','murder03']){
- const base=sb.makeRoom.call(null,'murder04');void base;
- const r=sb.makeRoom(z,'STORY'),kinds=new Set(r.enemies.filter(e=>/story-patrol/.test(e.id)).map(e=>e.nativeId));
- check(z+' story patrol mixes more than one 제7부 mob',kinds.size>=2,[...kinds]);
- check(z+' only existing 제7부 arts are used',r.enemies.every(e=>/^assets\/murder\/|blue_executor/.test(e.path||'assets/murder/')),r.enemies.map(e=>e.path));
- const pat=r.enemies.filter(e=>/story-patrol/.test(e.id));
- check(z+' count, ids, hp, damage, waves and spawn state unchanged',pat.length===12&&pat.every((e,i)=>e.id===z+':story-patrol:'+i&&e.hp===40+i&&e.damage===5&&e.fieldWave===1+(i%2)&&e.spawnState===(i%2?'hidden':'active')&&e.x===i));
- check(z+' midboss, ward champion and R74 monster untouched',r.enemies[0].nativeId==='mb-'+z&&r.enemies.find(e=>/r74-patrol/.test(e.id)).name==='유리 망령'&&r.enemies.find(e=>/ward-champion/.test(e.id)).nativeId==='murder04-e2');
+ const r=sb.makeRoom(z,'STORY'),before=r.enemies.map(snap);
+ sb.drawn.length=0;for(const e of r.enemies)sb.drawEnemy(e);
+ const pat=sb.drawn.filter(d=>/story-patrol/.test(d.id)),kinds=new Set(pat.map(d=>d.nativeId));
+ check(z+' story patrol draws more than one 제7부 mob',kinds.size>=2,[...kinds]);
+ check(z+' only existing 제7부 arts are drawn',pat.every(d=>/^assets\/murder\/|blue_executor/.test(d.path)),pat.map(d=>d.path));
+ check(z+' borrowed art carries its 제7부 name',pat.filter(d=>d.nativeId!=='murder04-e2').every(d=>/비상벨|출입기록|연결체|공실/.test(d.name)));
+ check(z+' room data identical after drawing (ids, art, hp, damage, waves, spawn state)',r.enemies.map(snap).join()===before.join());
+ check(z+' midboss, ward champion and R74 monster drawn as themselves',sb.drawn.find(d=>/r74-patrol/.test(d.id)).nativeId==='murder04-e2'&&sb.drawn.find(d=>/ward-champion/.test(d.id)).nativeId==='murder04-e2'&&sb.drawn[0].nativeId==='mb-'+z);
  check(z+' donor art registered for preload',sb.regionById[z].paths.includes('assets/murder/silent_alarm.png'));
 }
+const one=sb.makeRoom('murder03','STORY').enemies.find(e=>/story-patrol:4/.test(e.id));
+check('same mob always borrows the same art',JSON.stringify(M.view(one))===JSON.stringify(M.view(one)));
 M.set({mix:false});
-check('preference off keeps the native single-mob room',new Set(sb.makeRoom('murder03','STORY').enemies.filter(e=>/story-patrol/.test(e.id)).map(e=>e.nativeId)).size===1);
+sb.drawn.length=0;for(const e of sb.makeRoom('murder03','STORY').enemies)sb.drawEnemy(e);
+check('preference off draws the native single mob',new Set(sb.drawn.filter(d=>/story-patrol/.test(d.id)).map(d=>d.nativeId)).size===1);
 check('no runtime failures',M.stats().failures===0,M.stats().lastError);
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 check('mobs-r112 loads last, after play-r111',html.indexOf('mobs-r112.js')>html.indexOf('play-r111.js')&&html.indexOf('play-r111.js')>0);
