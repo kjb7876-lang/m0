@@ -86,7 +86,7 @@
  // R107: the episode tints were 15-40% grey; multiplied by the floor texture and the dream filter the stages read near black.
  // Lift toward light grey keeping each episode's hue (story floors sit near 75%).
  function liftR107(c,k){const r=c>>16&255,g=c>>8&255,b=c&255,f=v=>Math.round(v+(214-v)*k);return f(r)<<16|f(g)<<8|f(b);}
- function build(id,ep,cells,{nodes=[],edges=[],entry,bounds,wallHeight=2.7,extra={}}){
+ function build(id,ep,cells,{nodes=[],edges=[],entry,bounds,wallHeight=2.7,corridor=3,extra={}}){
   const key=(x,y)=>x+':'+y,has=(x,y)=>cells.has(key(x,y));
   const floorCells=[...cells].map(k=>k.split(':').map(Number)).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);
   const floorRects=[];{const W=bounds[2],H=bounds[3];let active=new Map();for(let y=0;y<H;y++){const row=new Map();let x=0;while(x<W){if(!has(x,y)){x++;continue;}const s=x;while(has(x,y))x++;const k=s+':'+x,old=active.get(k);if(old&&old.y+old.depth===y){old.depth++;row.set(k,old);}else{const r={x:s,y,width:x-s,depth:1};floorRects.push(r);row.set(k,r);}}active=row;}}
@@ -97,7 +97,7 @@
   return{version:versionTag||'storyworld-exploration-10-clear-connector-1p40',id,type:'r103-samong',rotation:0,mirrored:false,bounds:[...bounds],chunkSize:10,chunkColumns:Math.ceil((bx1-bx0)/10),chunkRows:Math.ceil((by1-by0)/10),walls,centralArena:null,branches:[],
    surface:{id:'original-ground',height:0,multilevelCombat:false,art:surfaceArt(ep)},expanded:true,floorCells,floorRects,nodes,edges,coreFloorRects:[],coreReshaped:true,connectorFloorRects:[],backdropRects:[],fogRects:[],chunkMinX:bx0,chunkMinY:by0,
    entry,entrance:{x:entry.x,y:entry.y},renderEnvelope:{u0:bx0-by1-4,u1:bx1-by0+4,v0:bx0+by0-4,v1:bx1+by1+4},regional55:null,regional59:null,scenery59:null,mazeR73:null,voidCover:{tint:'#0b0a0d',opacity:1},
-   worldR74:{version:1,mode:ep.style==='garden'?'outdoor':'indoor',style:{forge:'forge-machine',clinical:'clinical-ward',domestic:'domestic-hall',garden:'stone-garden'}[ep.style]||'stone-garden',rooms:[],doors:[],corridorWidth:3,seed:0,nativeCorePreserved:true,wallCount:walls.length,floorCount:floorCells.length,samongR103:true},worldR75:null,worldR78:null,worldWardR81:null,refugeR82:null,samongR103:{...extra}};
+   worldR74:{version:1,mode:ep.style==='garden'?'outdoor':'indoor',style:{forge:'forge-machine',clinical:'clinical-ward',domestic:'domestic-hall',garden:'stone-garden'}[ep.style]||'stone-garden',rooms:[],doors:[],corridorWidth:corridor,seed:0,nativeCorePreserved:true,wallCount:walls.length,floorCount:floorCells.length,samongR103:true},worldR75:null,worldR78:null,worldWardR81:null,refugeR82:null,samongR103:{...extra}};
  }
  function survivalLayout(i,ep){const id=sid(i,'survival'),cells=new Set(),r=rng(hash(id)),cx=22,cy=22;
   for(let y=1;y<44;y++)for(let x=1;x<44;x++){const dx=(x+.5-cx)/20,dy=(y+.5-cy)/20;if(dx*dx+dy*dy<=1)cells.add(x+':'+y);}
@@ -105,22 +105,69 @@
   const pillars=[];for(let k=0;k<9;k++){const a=k*2.399963+r()*.4,d=8+r()*8,px=Math.round(cx+Math.cos(a)*d),py=Math.round(cy+Math.sin(a)*d);if(Math.hypot(px-cx,py-(cy+12))<5)continue;pillars.push([px,py]);for(let y=py;y<py+2;y++)for(let x=px;x<px+2;x++)cells.delete(x+':'+y);}
   const nodes=[{id:0,x:cx+.5,y:cy+12.5,radius:3,shape:'round'},{id:1,x:cx+.5,y:cy+.5,radius:6,shape:'round'}];
   return build(id,ep,cells,{nodes,edges:[[0,1,4]],entry:{x:cx+.5,y:cy+12.5,node:0},bounds:[0,0,45,45],extra:{kind:'survival',centre:{x:cx+.5,y:cy+.5},pillars}});}
- function mazeLayout(i,ep,seed){const id=sid(i,'maze'),C=Math.min(11,8+Math.floor(i/4)),R=C,SZ=5,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
-  const nb=(x,y)=>[[x+1,y],[x-1,y],[x,y+1],[x,y-1]].filter(([a,b])=>a>=0&&b>=0&&a<C&&b<R);
-  const seen=new Set([k(0,R-1)]),stack=[[0,R-1]],link=(a,b)=>open.add(a[0]<b[0]||a[1]<b[1]?k(...a)+'|'+k(...b):k(...b)+'|'+k(...a)),linked=(a,b)=>open.has(a[0]<b[0]||a[1]<b[1]?k(...a)+'|'+k(...b):k(...b)+'|'+k(...a));
-  // Growing tree (half newest, half random cell): long corridors mixed with many side branches.
-  while(stack.length){const at=r()<.5?stack.length-1:Math.floor(r()*stack.length),c=stack[at],n=nb(...c).filter(p=>!seen.has(k(...p)));if(!n.length){stack.splice(at,1);continue;}const p=n[Math.floor(r()*n.length)];link(c,p);seen.add(k(...p));stack.push(p);}
-  // Braid about a sixth of the dead ends so the maze has loops and ways back.
-  for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;if(deg===1&&r()<.18){const c=nb(x,y).filter(p=>!linked([x,y],p));if(c.length)link([x,y],c[Math.floor(r()*c.length)]);}}
-  const dist=new Map([[k(0,R-1),0]]),q=[[0,R-1]],prev=new Map();while(q.length){const c=q.shift();for(const p of nb(...c))if(linked(c,p)&&!dist.has(k(...p))){dist.set(k(...p),dist.get(k(...c))+1);prev.set(k(...p),c);q.push(p);}}
-  let exit=[0,R-1],best=-1;for(const[key,d]of dist){const[a,b]=key.split(',').map(Number);if(d>best&&(a>C/2||b<R/2)){best=d;exit=[a,b];}}
-  const path=[];for(let c=exit;c;c=prev.get(k(...c)))path.unshift(c);
-  const cells=new Set(),cell=(x,y)=>{for(let b=0;b<3;b++)for(let a=0;a<3;a++)cells.add((x*SZ+1+a)+':'+(y*SZ+1+b));};
-  for(let y=0;y<R;y++)for(let x=0;x<C;x++){cell(x,y);if(x+1<C&&linked([x,y],[x+1,y]))for(let b=0;b<3;b++)for(let a=0;a<2;a++)cells.add((x*SZ+4+a)+':'+(y*SZ+1+b));if(y+1<R&&linked([x,y],[x,y+1]))for(let b=0;b<2;b++)for(let a=0;a<3;a++)cells.add((x*SZ+1+a)+':'+(y*SZ+4+b));}
-  const centre=([x,y])=>({x:x*SZ+2.5,y:y*SZ+2.5}),nodes=[];for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;nodes.push({id:nodes.length,...centre([x,y]),radius:1.5,shape:'square',width:3,depth:3,cell:[x,y],degree:deg});}
-  const deadEnds=nodes.filter(n=>n.degree===1&&k(...n.cell)!==k(0,R-1)&&k(...n.cell)!==k(...exit));
-  const save=path[Math.floor(path.length/2)],onPath=new Set(path.map(c=>k(...c))),pool=deadEnds.length>=3?deadEnds:[...deadEnds,...nodes.filter(n=>!onPath.has(k(...n.cell))&&!deadEnds.includes(n))],chests=pool.sort((a,b)=>(hash(id+a.id)%997)-(hash(id+b.id)%997)).slice(0,3).map(n=>({x:n.x,y:n.y}));
-  return build(id,ep,cells,{nodes,edges:[],entry:{...centre([0,R-1]),node:(R-1)*C},bounds:[0,0,C*SZ+1,R*SZ+1],extra:{kind:'maze',exit:centre(exit),save:centre(save),pathLength:path.length,cols:C,rows:R,chests,seed}});}
+ // ---- R108: wide-corridor flashlight maze ---------------------------------------------------------------------
+ // One generator for the R103 default maze and every R105 blueprint maze (R105 hands its blueprint values over in `o`).
+ // R107 and before: 3x3 rooms joined by 2-wide links on a 5-tile pitch, ~45 dead ends and almost no loops (a cramped maze).
+ // Now cells sit on a P-tile pitch (default 8). Corridor squares and links are CW wide (default 4), junctions open into
+ // PW-wide plazas, dead ends end in PW-wide chambers, and the start, the lamp, the exit and the blueprint rooms are halls
+ // that fill their whole cell. The tree prefers straight runs; dead ends are joined to a far-away cell (a real way round,
+ // never a tiny ring), one-cell stubs off a junction are pruned, and a few more side routes are opened. One connected floor.
+ function mazeCore(id,ep,o={},seed){
+  const C=o.C,R=o.R,N=C*R,P=(o.pitch||8)&~1,CW=(o.corridor||4)&~1,PW=(o.plaza||6)&~1,M=2,r=rng(seed||hash(id));
+  const X=i=>i%C,Y=i=>(i/C)|0,start=(R-1)*C,straight=o.straight??.6,braid=o.braid??.2,MINLOOP=o.minLoop||6;
+  const around=i=>{const x=X(i),y=Y(i),a=[];if(x+1<C)a.push(i+1);if(x>0)a.push(i-1);if(y+1<R)a.push(i+C);if(y>0)a.push(i-C);return a;};
+  const adj=Array.from({length:N},()=>new Set()),alive=new Uint8Array(N).fill(1),deg=i=>adj[i].size,link=(a,b)=>{adj[a].add(b);adj[b].add(a);},unlink=(a,b)=>{adj[a].delete(b);adj[b].delete(a);};
+  const bfs=s=>{const d=new Int32Array(N).fill(-1),prev=new Int32Array(N).fill(-1),q=[s];d[s]=0;for(let h=0;h<q.length;h++){const c=q[h];for(const n of adj[c])if(d[n]<0){d[n]=d[c]+1;prev[n]=c;q.push(n);}}return{d,prev};};
+  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;},all=()=>Array.from({length:N},(_,i)=>i).filter(i=>alive[i]);
+  const leaves=()=>all().filter(i=>deg(i)===1&&i!==start),edgeCount=()=>all().reduce((s,i)=>s+deg(i),0)/2;
+  // growing tree: mostly the newest cell with the same heading (long straight runs, few turns), sometimes any cell on the stack (side branches).
+  // The exit is the farthest cell (by walking) in the far half of the tree. A tree whose walk to the exit is far off the target length is
+  // grown again (a few tries, then the closest one is kept), so the walk stays near (C+R)*1.12 cells whatever the seed.
+  const T=o.walkCells||Math.round((C+R)*1.12),lo=Math.floor(T*.85),hi=Math.ceil(T*1.2);let D=null,exit=start,snap=null,snapGap=1e9;
+  for(let attempt=0;attempt<10;attempt++){for(let i=0;i<N;i++)adj[i].clear();
+   const newest=Math.min(.85,.34+.3*straight),keep=Math.min(.8,.4+.3*straight),seen=new Uint8Array(N),stack=[[start,0]];seen[start]=1;
+   while(stack.length){const at=r()<newest?stack.length-1:Math.floor(r()*stack.length),[c,dir]=stack[at],free=around(c).filter(n=>!seen[n]);if(!free.length){stack.splice(at,1);continue;}
+    const same=free.find(n=>n-c===dir),p=same!==undefined&&r()<keep?same:free[Math.floor(r()*free.length)];link(c,p);seen[p]=1;stack.push([p,p-c]);}
+   D=bfs(start);let best=-1;exit=start;for(let i=0;i<N;i++){if(D.d[i]<0)continue;if((X(i)>C/2||Y(i)<R/2)&&(D.d[i]>best||D.d[i]===best&&r()<.5)){best=D.d[i];exit=i;}}
+   const gap=best<lo?lo-best:best>hi?best-hi:0;if(gap<snapGap){snapGap=gap;snap={adj:adj.map(s=>new Set(s)),exit};}if(!gap)break;}
+  if(snapGap){for(let i=0;i<N;i++)adj[i]=snap.adj[i];exit=snap.exit;D=bfs(start);}
+  const path=[];for(let c=exit;c>=0;c=D.prev[c])path.unshift(c);
+  // Side routes: a link joins two neighbouring cells that are far apart through the maze (cycle >= MINLOOP+1 cells, never a tiny ring)
+  // and is kept only if the walk to the exit does not get shorter, so opening the maze never shortens the way out.
+  const sideRoute=(a,b)=>{if(adj[a].has(b)||bfs(a).d[b]<MINLOOP)return false;link(a,b);if(Math.abs(D.d[a]-D.d[b])===1||bfs(start).d[exit]>=D.d[exit])return true;unlink(a,b);return false;};
+  // dead ends first: most are joined to a neighbour that way, which turns a stub into a way round
+  // (one-cell stubs off a junction are joined far more often than longer dead-end branches, so what stays is mostly real side branches)
+  const isStub=i=>deg(i)===1&&deg([...adj[i]][0])>=3;
+  for(const i of shuffle(leaves())){if(i===exit||deg(i)!==1||r()>=(isStub(i)?.55+braid*1.2:.1+braid*.8))continue;for(const n of shuffle(around(i)))if(sideRoute(i,n))break;}
+  // then more side routes elsewhere
+  {const want=Math.round(N*(o.loopRate??(.08+braid*.35)));let have=edgeCount()-(N-1);const pairs=[];for(let i=0;i<N;i++){if(X(i)+1<C)pairs.push([i,i+1]);if(i+C<N)pairs.push([i,i+C]);}
+   for(const[a,b]of shuffle(pairs)){if(have>=want)break;if(sideRoute(a,b))have++;}}
+  // prune one-cell stubs off a junction (keep enough dead ends for the chests)
+  {let dead=leaves().filter(i=>i!==exit).length;for(const i of shuffle(leaves())){if(i===exit||!isStub(i))continue;const n=[...adj[i]][0];if(dead>(o.keepDead||5)&&r()<1){unlink(i,n);alive[i]=0;dead--;}}}
+  // cell kinds: junction -> plaza, dead end -> chamber, everything else a plain corridor square; halls never touch each other
+  const kind=new Array(N).fill(null);for(const i of all())kind[i]=deg(i)===1?'chamber':deg(i)>=3&&r()<.85?'plaza':'node';
+  const halls=new Set([start,exit]),cheb=(a,b)=>Math.max(Math.abs(X(a)-X(b)),Math.abs(Y(a)-Y(b))),okHall=i=>alive[i]&&![...halls].some(h=>h!==i&&cheb(h,i)<2);
+  const mid=Math.floor((path.length-1)/2);let lamp=-1;for(let s=0;s<path.length&&lamp<0;s++)for(const idx of s?[mid+s,mid-s]:[mid]){const c=path[idx];if(c!==undefined&&c!==start&&c!==exit&&!halls.has(c)&&okHall(c)){lamp=c;break;}}
+  if(lamp<0)lamp=path[mid];halls.add(lamp);
+  const rooms=[];{const want=Math.max(2,Math.round((o.rooms??2)*1.2)),by=k=>shuffle(all().filter(i=>kind[i]===k&&!halls.has(i)));
+   const spare=Math.max(0,all().filter(i=>kind[i]==='chamber'&&!halls.has(i)).length-4);// the chests keep their chambers
+   for(const i of[...by('chamber').slice(0,spare),...by('plaza'),...by('node')]){if(rooms.length>=want)break;if(okHall(i)){halls.add(i);rooms.push(i);}}}
+  for(const i of halls)kind[i]='hall';
+  // chests wait in dead-end chambers far from the start (fall back to side cells, then any cell)
+  const onPath=new Set(path);let pool=all().filter(i=>kind[i]==='chamber'&&D.d[i]>=5);
+  if(pool.length<3)pool=[...pool,...all().filter(i=>!pool.includes(i)&&!onPath.has(i)&&kind[i]!=='hall'&&D.d[i]>=5)];
+  if(pool.length<3)pool=[...pool,...all().filter(i=>!pool.includes(i)&&!halls.has(i))];
+  const chestCells=pool.sort((a,b)=>(hash(id+a)%997)-(hash(id+b)%997)).slice(0,3);
+  // floor: a square per cell (4 / 6 / 8 wide) and a CW-wide band per link
+  const SZ={node:CW,plaza:PW,chamber:PW,hall:P},cells=new Set(),box=(x0,y0,w,h)=>{for(let b=0;b<h;b++)for(let a=0;a<w;a++)cells.add((x0+a)+':'+(y0+b));},ctr=i=>({x:M+X(i)*P+P/2,y:M+Y(i)*P+P/2});
+  for(const i of all()){const c=ctr(i),s=SZ[kind[i]];box(c.x-s/2,c.y-s/2,s,s);}
+  const links=[];for(const i of all())for(const j of adj[i])if(j>i){const a=ctr(i),b=ctr(j);links.push([X(i),Y(i),X(j),Y(j)]);if(j===i+1)box(a.x,a.y-CW/2,b.x-a.x,CW);else box(a.x-CW/2,a.y,CW,b.y-a.y);}
+  const nodes=[],nodeOf=new Map();for(const i of all()){const c=ctr(i),s=SZ[kind[i]];nodeOf.set(i,nodes.length);nodes.push({id:nodes.length,x:c.x,y:c.y,radius:s/2-.5,shape:'square',width:s,depth:s,cell:[X(i),Y(i)],degree:deg(i),kind:kind[i]});}
+  const pt=i=>({x:ctr(i).x,y:ctr(i).y}),used=all(),deadEnds=used.filter(i=>deg(i)===1&&i!==start&&i!==exit),stubs=deadEnds.filter(i=>deg([...adj[i]][0])>=3).length;
+  return build(id,ep,cells,{nodes,edges:[],entry:{...pt(start),node:nodeOf.get(start)},bounds:[0,0,2*M+C*P,2*M+R*P],wallHeight:o.wallHeight||2.7,corridor:CW,
+   extra:{kind:'maze',exit:pt(exit),save:pt(lamp),pathLength:path.length,cols:C,rows:R,chests:chestCells.map(pt),seed,path:path.map(pt),rooms:rooms.map(i=>({...pt(i),cell:[X(i),Y(i)]})),deadEnds:deadEnds.map(pt),links,
+    corridor:CW,pitch:P,plazaSize:PW,cellsUsed:used.length,halls:halls.size,plazas:used.filter(i=>kind[i]==='plaza').length,chambers:used.filter(i=>kind[i]==='chamber').length,loops:edgeCount()-(used.length-1),stubs}});}
+ function mazeLayout(i,ep,seed){const id=sid(i,'maze'),C=Math.min(11,8+Math.floor(i/4));return mazeCore(id,ep,{C,R:C,straight:.6,braid:.2,rooms:3},seed||hash(id));}
  function ascentLayout(i,ep){const id=sid(i,'ascent'),cells=new Set(),fill=(x0,y0,x1,y1)=>{for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)cells.add(x+':'+y);};
   // The boss dais sits in the native 30-grid (boss volleys clamp to 3..27). The climb
   // starts at the bottom of the screen (large x+y) and zigzags upward toward it.
@@ -133,7 +180,7 @@
  const layouts=new Map();
  function layoutFor(i,stage){const id=sid(i,stage),seed=stage==='maze'?(S.ep===i&&S.seed?S.seed:hash(id)):0,k=id+':'+seed;if(!layouts.has(k)){const ep=EP[i];let L=null;
   // R105: 서사 청사진이 있으면 그 지형을 쓴다(없으면 R103 기본 지형).
-  try{L=window.__STORYWORLD_SAMONG_MAPS_R105__?.layoutFor?.(i,stage,ep,seed,{build,sid,rng,hash,survivalLayout,mazeLayout,ascentLayout})||null;}catch(e){fail(e);L=null;}
+  try{L=window.__STORYWORLD_SAMONG_MAPS_R105__?.layoutFor?.(i,stage,ep,seed,{build,sid,rng,hash,survivalLayout,mazeLayout,mazeCore,ascentLayout})||null;}catch(e){fail(e);L=null;}
   layouts.set(k,L||(stage==='survival'?survivalLayout(i,ep):stage==='maze'?mazeLayout(i,ep,seed):ascentLayout(i,ep)));while(layouts.size>12)layouts.delete(layouts.keys().next().value);}return layouts.get(k);}
 
  // ---- regions ------------------------------------------------------------------------------
@@ -372,5 +419,5 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  const epOf=x=>EP[x.ep];
  window.__STORYWORLD_NAV_GOAL_R103__=navGoal;
  try{install();}catch(e){fail(e);}
- window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&room.samongR103.stage==='maze';}});
+ window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,mazeCore,state:()=>S,get flashlightActive(){return here()&&room.samongR103.stage==='maze';}});
 })();

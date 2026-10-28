@@ -142,7 +142,14 @@
    if(glow>0){ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=glow;ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);}}finally{ctx.restore();}stats.signature=(stats.signature||0)+1;return true;}
  // screen angle of a world direction, for the slash crescent
  function screenAngle(a){const o=P(0,0),d=P(Math.cos(a),Math.sin(a));return Math.atan2(d.y-o.y,d.x-o.x);}
- function contact(kind,x,y,t,size,alpha=1){const c=CONTACT[kind];if(!c||!(size>0))return false;const row=typeof readyImage==='function'?readyImage(c.path):null;
+   // R108 eden: the enemy contact burst (fire / shock / splash) from the painted sheets: fire explosion, lightning ring, poison cloud (swamp) or ripple (coast)
+  const EDEN=()=>{const x=window.__STORYWORLD_EDEN_R108__;return x&&x.clipU&&x.has&&x.on&&x.on()&&!lowFx()?x:null;};
+  const refW={};function visW(name){let r=refW[name];if(r)return r;const D=window.__STORYWORLD_EDEN_DATA_R108__,c=D?.clips?.[name];if(!c)return 200;r=1;for(let f=c.a;f<=c.b;f++){const b=D.box[c.s][f];if(b)r=Math.max(r,b[2]-b[0]);}return refW[name]=r;}
+  function edenContact(kind,e,x,y,t,size,alpha){const E=EDEN();if(!E||!(size>0))return false;
+   const poison=kind==='splash'&&(e.th?.sig?/green|lime/.test(e.th.sig):family()==='swamp'),name=kind==='fire'?'fire.boom':kind==='shock'?'lightning.ring':poison?'poison.grow':'ripple.one',sh=name.split('.')[0];
+   if(!E.has(sh)){E.ensure(sh);return false;}const q=P(x,y),k=clamp(t,0,1),w=size*(kind==='splash'&&!poison?1.15:.95);
+   return E.clipU(name,k,q.x,q.y-(kind==='fire'?size*.12:0),w*256/visW(name),{alpha:alpha*(1-.2*k)})!==false;}
+  function contact(kind,x,y,t,size,alpha=1){const c=CONTACT[kind];if(!c||!(size>0))return false;const row=typeof readyImage==='function'?readyImage(c.path):null;
   if(!row?.image){if(typeof addImage==='function')try{addImage(c.path);}catch(_){}return false;}
   const i=Math.min(8,Math.floor(clamp(t,0,.999)*9)),q=P(x,y),tail=t>.7?Math.max(0,1-(t-.7)/.3):1;if(!(tail>0))return false;ctx.save();try{ctx.globalCompositeOperation=c.blend;ctx.globalAlpha*=alpha*tail;ctx.drawImage(row.image,i*256,0,256,256,q.x-size/2,q.y-size*c.ay,size,size);}finally{ctx.restore();}stats.contacts++;return true;}
  function glow(x,y,h,r,th,a){const q=P(x,y);disc(q,h,r,rgba(th.a,.18*a));disc(q,h,r*.45,rgba(th.b,.22*a));}
@@ -153,7 +160,7 @@
   const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1),s=e.g?.shape,slash=s==='arc'||s==='cone'||s==='capsule'||s==='line';
   const sig=slash?sigStrip('slash',e,c.x,c.y,k,actorHeight()*scale*.95,{lift:actorHeight()*.38,angle:screenAngle(e.g.angle||0)+Math.PI,glow:.4*(1-k)}):sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale*.9,{lift:actorHeight()*.3,glow:.45*(1-k)});
   if(!sig&&!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
-  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}
+  const ck=contactFor(e);if(ck&&!edenContact(ck,e,c.x,c.y,k,actorHeight()*scale*.85,.9))contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}
  function drawCastAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.1:1.4),{loop:true,alpha:.4+.55*k,ay:.66,glow:.4*k}))return;
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.6:1,alpha:.35+.6*k}))glow(e.x,e.y,actorHeight()*.62,(11+12*k)*zoom*(M?1.6:1.1),e.th,.5+.5*k);}
@@ -168,7 +175,7 @@
   const a=sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale,{lift:actorHeight()*.25,glow:.55*(1-k)})||paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
   if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
   if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);
-  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}
+  const ck=contactFor(e);if(ck&&!edenContact(ck,e,c.x,c.y,k,actorHeight()*scale,1))contact(ck,c.x,c.y,k,actorHeight()*scale,1);}
  function drawSparkAir(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
 
  function drawRootInAir(e,t){paint('F091',player.x,player.y,{t:clamp(t,0,1),key:e,scale:1.25,alpha:.9});}
@@ -238,7 +245,14 @@
  if(typeof enterRegion==='function'){const eb=enterRegion;enterRegion=async function(...args){const r=await eb.apply(this,args);list.length=0;rootStain=null;try{preload();}catch(err){fail(err);}return r;};}
  if(typeof stopEffects==='function'){const sb=stopEffects;stopEffects=function(...args){list.length=0;rootStain=null;return sb.apply(this,args);};}
  // Player hits: a small spark burst in the hero's tone on the struck enemy.
- if(typeof hitEnemy==='function'){const hb=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp,result=hb.call(this,e,value,source,...rest);try{if(prefs.effects&&solo()&&e&&Number.isFinite(before)&&e.hp<before&&typeof time==='number'&&!list.some(q=>q.kind==='spark'&&q.target===e&&age(q)<.09)){add({kind:'spark',x:e.x,y:e.y,target:e,life:.34,th:THEMES.hero,n:9});stats.sparks++;}}catch(err){fail(err);}return result;};}
+ if(typeof hitEnemy==='function'){const hb=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp,result=hb.call(this,e,value,source,...rest);try{if(prefs.effects&&solo()&&e&&Number.isFinite(before)&&e.hp<before&&typeof time==='number'&&!list.some(q=>q.kind==='spark'&&q.target===e&&age(q)<.09)){
+   // R108: growth stages. Hero SKILL hits get their painted spark from fx-eden-r108.js. A basic attack stays plain native below tier 2,
+   // from tier 2 up it gets a light painted spark (eden hit sheet when ready, the R99 spark otherwise).
+   const R=window.__STORYWORLD_HERO_FX_R102__,E=window.__STORYWORLD_EDEN_R108__;let skill=null,tier=0;try{skill=R?.skillOf?.(source)||null;tier=R?.tier?.(player)??0;}catch(_){}
+   if(skill&&E?.on?.()){stats.suppressed=(stats.suppressed||0)+1;}
+   else if(!skill&&tier<2){stats.suppressed=(stats.suppressed||0)+1;}
+   else if(!skill&&E?.hitSpark?.(e.x,e.y,'small')){stats.sparks++;}
+   else{add({kind:'spark',x:e.x,y:e.y,target:e,life:.34,th:THEMES.hero,n:9});stats.sparks++;}}}catch(err){fail(err);}return result;};}
 
  function settingsSection(){const host=document.getElementById('retroSettingsR98Combat')||document.getElementById('retroSettingsR93')||document.getElementById('retroSettingsR89');if(!host||document.getElementById('retroSettingsR98Vfx'))return;
   const s=document.createElement('section');s.id='retroSettingsR98Vfx';s.innerHTML='<h3>적 스킬 연출 (R98)</h3><p class="small muted">공격 시점·범위·피해는 그대로이고 보이는 연출만 바뀝니다. 설정은 저장 슬롯과 별도로 보관됩니다.</p>'+Object.keys(DEFAULTS).map(k=>'<label><input type="checkbox" id="r98v-'+k+'"> '+LABELS[k]+'</label> ').join('');

@@ -18,7 +18,9 @@
  function set(patch={}){if(typeof patch.mobMotion==='boolean')prefs.mobMotion=patch.mobMotion;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
  function load(){if(state!=='idle')return;state='loading';
   fetch(INDEX,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('R92 mobs index '+r.status);return r.json();}).then(j=>{index=j;state='ready';}).catch(e=>{state='failed';fail(e);});}
- const groupOf=e=>index&&e?.nativeId?index.groups[index.byId[e.nativeId]]||null:null;
+ // R108: the ids the R7 four-state poses own (mobs-r7-r108.js) never get R92 strips, so one mob never mixes two arts.
+ const r7=e=>{try{return window.__STORYWORLD_MOBS_R7_R108__?.owns?.(e)===true;}catch(_){return false;}};
+ const groupOf=e=>index&&e?.nativeId&&!r7(e)?index.groups[index.byId[e.nativeId]]||null:null;
  // Bosses, midbosses, personas and the authored hospital/R74 art keep their own frames.
  const eligible=e=>!!e&&!e.boss&&!e.midboss&&!e.persona&&!e.r74Monster&&e.hp>0&&e.spawnState!=='dead'&&!(e.hitTimer>0)&&zone!=='ep1a08'&&(typeof layer==='undefined'||layer==='STORY');
  // r3 index: one pivot per track (t.pivot) and N cells; the R92 index had a pivot per cell.

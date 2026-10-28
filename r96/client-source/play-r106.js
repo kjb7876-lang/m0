@@ -38,7 +38,8 @@ function heroLeft(e,hold){let s=side.get(e);if(!s){s={left:null,pend:null,since:
  if(want!==s.left){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=.35||e.attack||e.rangedWindup>0){s.left=want;s.pend=null;}}else s.pend=null;return s.left;}
 const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
 if(motion&&typeof motion.flip==='function')window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motion,flip(e,f,fallback){const out=motion.flip(e,f,fallback);
- try{if(!e||!live()||!(e.hp>0)||f?.r74Monster||f?.r51OrderlyPose||f?.r52RangedPose||f?.r53HospitalPose||f?.r54StoryPose)return out;const art=faceOf(e);if(!art)return out;
+ try{const r7=f?.r7Face==='R'||f?.r7Face==='L'?f.r7Face:null; // R108: R7 pose frames know which way they look (set data), also through the R54 story clock
+  if(!e||!live()||!(e.hp>0)||f?.r74Monster||f?.r51OrderlyPose||f?.r52RangedPose||f?.r53HospitalPose||(f?.r54StoryPose&&!r7))return out;const art=r7||faceOf(e);if(!art)return out;
   const boss=!!(e.boss||e.midboss||e.persona),left=heroLeft(e,boss);if(boss)stats.bossFlips++;else stats.flips++;
   return art==='R'?left:!left;}catch(err){fail(err);}return out;}});
 

@@ -20,6 +20,8 @@ function fail(e){stats.errors++;lastError=String(e?.message||e);}
 const live=()=>typeof started!=='undefined'&&started&&typeof player!=='undefined'&&!!player&&typeof room!=='undefined'&&!!room;
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
 const SP=()=>window.__STORYWORLD_FX_SPRITES_R106__;
+// R108: painted Dark-Eden-style clips (fx-eden-r108.js): pre() paints the archetype or declines (atlas not ready), post() adds layers.
+const EDEN=()=>{const x=window.__STORYWORLD_EDEN_R108__;return x&&x.pre&&x.on&&x.on()?x:null;};
 const R102=()=>window.__STORYWORLD_HERO_FX_R102__;
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r106.d2s';
 let enabled=true;try{if(localStorage.getItem(KEY)==='0')enabled=false;}catch(_){}
@@ -51,7 +53,7 @@ function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?
   // R107: 섬광(*·#)은 가장 가까운 적(없으면 영웅) 위에 — 이펙트는 맞는 쪽에서 터진다.
   const tg=near[0]||null;add({...base,life:.95+.055*n,cuts,fx:tg?{x:tg.x,y:tg.y}:{x:p.x,y:p.y}});}
  else if(kind==='hammer')add({...base,life:1.25+.05*t,n:Math.round((3+Math.ceil(t/2))*Math.max(.67,k))});
- else if(kind==='orb')add({...base,life:1.35,speed:5.2,shards:[],emitAt:0,burst:false});
+ else if(kind==='orb')add({...base,life:EDEN()?1.95:1.35,speed:5.2,shards:[],emitAt:0,burst:false});
  else if(kind==='chain'){const hops=[],seen=new Set();let from={x:p.x,y:p.y};for(let i=0;i<3+t;i++){const e=nearestTo(from.x,from.y,i?5.5:9,seen);if(!e)break;seen.add(e);hops.push({x:e.x,y:e.y,e});from=e;}
   if(!hops.length)hops.push({x:tx,y:ty});add({...base,life:.32+.07*hops.length,hops,bolts:Math.round((2+t)*k)});}
  else if(kind==='fist')add({...base,life:1.15,rays:Math.round((8+2*t)*k)});
@@ -120,7 +122,7 @@ const DRAW={
  // 멀티샷: 부채꼴로 퍼지는 화살, 성장하면 표적에서 이멀레이션 폭발
  multishot(e,u,h){const F=e.F,sp=12;for(let i=0;i<e.n;i++){const ang=e.a+(i-(e.n-1)/2)*.12,d=Math.min(e.range,sp*e.t),q=P(e.x+Math.cos(ang)*d,e.y+Math.sin(ang)*d,h*.5),q0=P(e.x+Math.cos(ang)*Math.max(0,d-1.6),e.y+Math.sin(ang)*Math.max(0,d-1.6),h*.5),a=d>=e.range?Math.max(0,1-(e.t-e.range/sp)/.15):1;
    if(a<=0)continue;A('slashline',F,q0.x,q0.y,q.x,q.y,h*.3,{alpha:.85*a});A('spark',pb(F),q0.x,q0.y,q.x,q.y,h*.14,{alpha:a});S('glow',F,q.x,q.y,h*.4,h*.4,{alpha:a});}
-  if(e.tier>=3){const ti=Math.min(e.range,Math.hypot(e.tx-e.x,e.ty-e.y))/sp,v=(e.t-ti)/.5;if(v>0&&v<1){const q=P(e.tx,e.ty);S('flare',pb(F),q.x,q.y-h*.3,h*3,h*3,{alpha:1-v});S('ring',F,q.x,q.y,h*(1+3.5*v),h*(.5+1.75*v),{alpha:1-v});for(let i=0;i<5;i++){const ang=i*TAU/5+e.seed,qq=P(e.tx+Math.cos(ang)*.8*v,e.ty+Math.sin(ang)*.8*v);S('flame',F,qq.x,qq.y,h*.8,h*1.2,{frame:Math.floor(time*12)+i,alpha:.9*(1-v)});}}}},
+  if(e.tier>=3&&!EDEN()?.has?.('fire')){const ti=Math.min(e.range,Math.hypot(e.tx-e.x,e.ty-e.y))/sp,v=(e.t-ti)/.5;if(v>0&&v<1){const q=P(e.tx,e.ty);S('flare',pb(F),q.x,q.y-h*.3,h*3,h*3,{alpha:1-v});S('ring',F,q.x,q.y,h*(1+3.5*v),h*(.5+1.75*v),{alpha:1-v});for(let i=0;i<5;i++){const ang=i*TAU/5+e.seed,qq=P(e.tx+Math.cos(ang)*.8*v,e.ty+Math.sin(ang)*.8*v);S('flame',F,qq.x,qq.y,h*.8,h*1.2,{frame:Math.floor(time*12)+i,alpha:.9*(1-v)});}}}},
  // 피셔: 겨눈 방향으로 땅이 차례로 갈라지며 불기둥이 솟는다.
  fissure(e,u,h){const F=e.F,fr=Math.floor(time*12);for(let i=0;i<e.n;i++){const t0=i*e.step,v=(e.t-t0)/.9;if(v<0||v>1)continue;const d=1+i*.95,j=(rnd(e.seed,i)-.5)*.9,x=e.x+Math.cos(e.a)*d-Math.sin(e.a)*j,y=e.y+Math.sin(e.a)*d+Math.cos(e.a)*j,q=P(x,y),a=1-smooth((v-.4)/.6),rise=Math.sin(Math.PI*clamp(v*1.6,0,1));
    S('crack',{a:[40,6,12],b:[90,20,30]},q.x,q.y,h*2.3,h*2.3,{squash:.5,angle:e.seed+i,alpha:.75*a,blend:'source-over'});S('crack',F,q.x,q.y,h*2.1,h*2.1,{squash:.5,angle:e.seed+i,alpha:a});
@@ -138,7 +140,7 @@ const DRAW={
 // ---- loop ------------------------------------------------------------------------------------------
 let frozen=false;
 function drawAll(){if(!list.length||typeof ctx==='undefined'||!ctx)return;const h=H();
- for(const e of list){const u=e.t/e.life;if(u<0||u>1)continue;ctx.save();try{const run=()=>DRAW[e.kind]?.(e,u,h,e.dt||0);if(typeof ctx.scope==='function')ctx.scope({id:e.id,kind:'effect',x:e.x,y:e.y,r106:true},run);else run();}catch(err){fail(err);}finally{ctx.restore();}e.dt=0;}}
+ for(const e of list){const u=e.t/e.life;if(u<0||u>1)continue;ctx.save();try{const run=()=>{const ed=EDEN(),dt=e.dt||0;if(!(ed&&ed.pre(e,u,h,dt)))DRAW[e.kind]?.(e,u,h,dt);if(ed)ed.post(e,u,h,dt);};if(typeof ctx.scope==='function')ctx.scope({id:e.id,kind:'effect',x:e.x,y:e.y,r106:true},run);else run();}catch(err){fail(err);}finally{ctx.restore();}e.dt=0;}}
 const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r106-d2s'){try{drawAll();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
 const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(live()&&!(typeof loading!=='undefined'&&loading)){const d=frozen?0:Number.isFinite(dt)?clamp(dt,0,.1):0;for(const e of list){e.t+=d;e.dt=(e.dt||0)+d;}
  for(let i=list.length-1;i>=0;i--)if(list[i].t>list[i].life)list.splice(i,1);

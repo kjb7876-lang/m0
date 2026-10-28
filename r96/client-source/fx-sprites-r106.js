@@ -64,6 +64,10 @@ function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
   ix=Math.max(0,Math.min(cx+bw/2,hero.x1)-Math.max(cx-bw/2,hero.x0)),iy=Math.max(0,Math.min(cy+bh/2,hero.y1)-Math.max(cy-bh/2,hero.y0)),
   f=ix*iy/hero.area;if(!(f>.04))return 1;stats.veiled=(stats.veiled||0)+1;
  return 1-Math.min(.62,f*((o.blend||'lighter')==='lighter'?.7:.55));}
+// R108: the same veil for painted frames (fx-eden-r108.js): centre and size of the visible part of a frame, in px.
+function veilBox(cx,cy,bw,bh,blend){if(!veilOn||!heroBox())return 1;
+ const ix=Math.max(0,Math.min(cx+bw/2,hero.x1)-Math.max(cx-bw/2,hero.x0)),iy=Math.max(0,Math.min(cy+bh/2,hero.y1)-Math.max(cy-bh/2,hero.y0)),f=ix*iy/hero.area;if(!(f>.04))return 1;stats.veiled=(stats.veiled||0)+1;
+ return 1-Math.min(.62,f*((blend||'lighter')==='lighter'?.7:.55));}
 // ---- drawing ------------------------------------------------------------------------------
 // Draws sprite `name` with its pivot at (x,y), size w×h px. o: angle (after squash), squash
 // (y scale applied before the rotation, for ground-plane art), flip, alpha, blend, frame, pivot.
@@ -91,6 +95,6 @@ function pump(){let n=lowFx()?1:2;while(queue.length&&n>0){const[name,P]=queue[0
   if(tinted(name,P,true)){stats.warmed++;queue.shift();}else queue.push(queue.shift());n--;}}
 if(typeof tick==='function'){const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(enabled&&queue.length&&!(typeof loading!=='undefined'&&loading))pump();}catch(e){fail(e);}return r;};}
 
-window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
+window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),veilBox,
  inspect:()=>({revision:'R106-fx-sprites-1',enabled,tints:tints.size,queue:queue.length,...stats,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();

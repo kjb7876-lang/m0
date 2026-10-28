@@ -144,7 +144,7 @@
 
  // ---- 지형 생성 -------------------------------------------------------------------------------
  // R106: 생존 맵은 뱀서류처럼 넓고 트인 벌판(청사진 크기의 SURVIVAL_SCALE배). 모양(고리·사각·팔각·사거리·다리·승강장·벌판)은 그대로.
- const SURVIVAL_SCALE=2.6,MAZE_SCALE=1.75;
+ const SURVIVAL_SCALE=2.6,MAZE_SCALE=1.2,MAZE_MAX=13,MAZE_DECOR=2.4;// R108: 미로 칸 수는 청사진 ×1.2(칸 간격 8타일, 복도 4폭) — R106 의 ×1.75(간격 5, 복도 2폭)는 촘촘했다.
  function arena(id,ep,bp,api){const KS=SURVIVAL_SCALE,R=Math.round((bp.radius||20)*KS),S=bp.size||2*R+7,cx=Math.floor(S/2),cy=cx,shape=bp.shape||'circle',cells=new Set(),r=rng(hash(id)),add=(x,y)=>cells.add(K(x,y)),del=(x,y)=>cells.delete(K(x,y));
   const w=Math.round((bp.width||(shape==='bridge'?6:9))*KS*(shape==='bridge'||shape==='platform'?1.25:.85)),inner=(bp.inner||4)*KS,st=(bp.street||3.5)*KS*.9;
   const inside=(x,y)=>{const dx=x+.5-cx,dy=y+.5-cy,d2=dx*dx+dy*dy,ax=Math.abs(dx),ay=Math.abs(dy);
@@ -170,29 +170,11 @@
   const nodes=[{id:0,x:entry.x,y:entry.y,radius:3,shape:'round'},{id:1,x:centre.x,y:centre.y,radius:6,shape:'round'}];
   return api.build(id,ep,cells,{nodes,edges:[[0,1,4]],entry:{...entry,node:0},bounds:[0,0,S,S],wallHeight:bp.outdoor?(bp.outdoor.wall??1):2.7,extra:{kind:'survival',centre,pillars,shape,r106Scale:KS}});}
 
- // R106: 손전등 미로는 훨씬 복잡하게 — 칸 수 MAZE_SCALE배, 곁가지를 더 내고(직선 비율↓) 되돌이 길을 줄여 막다른 길을 늘린다.
- function maze(id,ep,bp,seed,api){const C=Math.min(18,Math.round((bp.cols||8)*MAZE_SCALE)),R=Math.min(18,Math.round((bp.rows||bp.cols||8)*MAZE_SCALE)),SZ=bp.cell||5,CW=bp.cw||3,LW=bp.lw||2,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
-  const nb=(x,y)=>[[x+1,y],[x-1,y],[x,y+1],[x,y-1]].filter(([a,b])=>a>=0&&b>=0&&a<C&&b<R);
-  const ek=(a,b)=>a[0]<b[0]||a[1]<b[1]?k(...a)+'|'+k(...b):k(...b)+'|'+k(...a),link=(a,b)=>open.add(ek(a,b)),linked=(a,b)=>open.has(ek(a,b));
-  const start=[0,R-1],seen=new Set([k(...start)]),stack=[start],straight=Math.min(.6,bp.straight??.5)*.75;
-  // 성장 나무: straight 만큼 최신 칸을 이어 긴 복도를, 나머지는 임의 칸에서 곁가지를 낸다.
-  while(stack.length){const at=r()<straight?stack.length-1:Math.floor(r()*stack.length),c=stack[at],n=nb(...c).filter(p=>!seen.has(k(...p)));if(!n.length){stack.splice(at,1);continue;}const p=n[Math.floor(r()*n.length)];link(c,p);seen.add(k(...p));stack.push(p);}
-  const braid=(bp.braid??.18)*.55;for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;if(deg===1&&r()<braid){const c=nb(x,y).filter(p=>!linked([x,y],p));if(c.length)link([x,y],c[Math.floor(r()*c.length)]);}}
-  const dist=new Map([[k(...start),0]]),q=[start],prev=new Map();while(q.length){const c=q.shift();for(const p of nb(...c))if(linked(c,p)&&!dist.has(k(...p))){dist.set(k(...p),dist.get(k(...c))+1);prev.set(k(...p),c);q.push(p);}}
-  let exit=start,best=-1;for(const[key,d]of dist){const[a,b]=key.split(',').map(Number);if(d>best&&(a>C/2||b<R/2)){best=d;exit=[a,b];}}
-  const path=[];for(let c=exit;c;c=prev.get(k(...c)))path.unshift(c);
-  // 방: 시작·출구를 뺀 칸을 벽 한 칸을 남기고 넓힌다(교무실·식당·병동 같은 자리).
-  const roomSet=new Set();{const pool=[];for(let y=0;y<R;y++)for(let x=0;x<C;x++)if(!(x===0&&y===R-1)&&!(x===exit[0]&&y===exit[1]))pool.push([x,y]);pool.sort((a,b)=>(hash(id+':room:'+a)%997)-(hash(id+':room:'+b)%997));for(const c of pool.slice(0,Math.round((bp.rooms||0)*1.6)))roomSet.add(k(...c));}
-  const cells=new Set(),add=(x,y)=>cells.add(K(x,y));
-  const cell=(x,y)=>{const room=roomSet.has(k(x,y)),n=room?SZ-1:CW;for(let b=0;b<n;b++)for(let a=0;a<n;a++)add(x*SZ+1+a,y*SZ+1+b);};
-  const off=Math.floor((CW-LW)/2);
-  for(let y=0;y<R;y++)for(let x=0;x<C;x++){cell(x,y);if(x+1<C&&linked([x,y],[x+1,y]))for(let b=0;b<LW;b++)for(let a=x*SZ+1+CW;a<(x+1)*SZ+1;a++)add(a,y*SZ+1+off+b);if(y+1<R&&linked([x,y],[x,y+1]))for(let b=y*SZ+1+CW;b<(y+1)*SZ+1;b++)for(let a=0;a<LW;a++)add(x*SZ+1+off+a,b);}
-  const centre=([x,y])=>({x:x*SZ+1+CW/2,y:y*SZ+1+CW/2}),nodes=[];
-  for(let y=0;y<R;y++)for(let x=0;x<C;x++){const deg=nb(x,y).filter(p=>linked([x,y],p)).length;nodes.push({id:nodes.length,...centre([x,y]),radius:1.5,shape:'square',width:3,depth:3,cell:[x,y],degree:deg});}
-  const deadEnds=nodes.filter(n=>n.degree===1&&k(...n.cell)!==k(...start)&&k(...n.cell)!==k(...exit));
-  const save=path[Math.floor(path.length/2)],onPath=new Set(path.map(c=>k(...c))),pool=deadEnds.length>=3?deadEnds:[...deadEnds,...nodes.filter(n=>!onPath.has(k(...n.cell))&&!deadEnds.includes(n))],chests=pool.sort((a,b)=>(hash(id+a.id)%997)-(hash(id+b.id)%997)).slice(0,3).map(n=>({x:n.x,y:n.y}));
-  const rooms=[...roomSet].map(s=>{const[x,y]=s.split(',').map(Number);return{x:x*SZ+1+(SZ-1)/2,y:y*SZ+1+(SZ-1)/2,cell:[x,y]};});
-  return api.build(id,ep,cells,{nodes,edges:[],entry:{...centre(start),node:(R-1)*C},bounds:[0,0,C*SZ+1,R*SZ+1],wallHeight:bp.outdoor?(bp.outdoor.wall??2.7):2.7,extra:{kind:'maze',exit:centre(exit),save:centre(save),pathLength:path.length,cols:C,rows:R,chests,seed,path:path.map(centre),rooms,deadEnds:deadEnds.map(n=>({x:n.x,y:n.y}))}});}
+ // R108: 손전등 미로는 더 넓고 덜 촘촘하게 — 복도 폭 2→4, 칸 간격 5→8, 교차로는 광장, 막다른 곳은 방, 한 칸짜리 곁가지는 정리하고
+ // 되돌이 길을 늘린다. 생성은 samong-r103.js 의 mazeCore 가 맡고 여기서는 청사진 값(칸 수·직선 비율·되돌이·방 수)만 넘긴다.
+ function maze(id,ep,bp,seed,api){if(typeof api.mazeCore!=='function')return null;
+  const C=Math.min(MAZE_MAX,Math.max(8,Math.round((bp.cols||8)*MAZE_SCALE+.5))),R=Math.min(MAZE_MAX,Math.max(8,Math.round((bp.rows||bp.cols||8)*MAZE_SCALE+.5)));
+  return api.mazeCore(id,ep,{C,R,straight:bp.straight,braid:bp.braid,rooms:bp.rooms,pitch:bp.pitch,corridor:bp.corridor,wallHeight:bp.outdoor?(bp.outdoor.wall??2.7):2.7},seed);}
 
  function ascent(id,ep,bp,api,i){const variant=bp.variant||'zigzag';if(variant==='zigzag')return api.ascentLayout(i,ep);
   const cells=new Set(),add=(x,y)=>cells.add(K(x,y)),fill=(x0,y0,x1,y1)=>{for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)add(x,y);};
@@ -216,23 +198,43 @@
   if(!L)return null;L.samongR105={rev:REV,ep:ep.key,stage,title:bp.title||'',outdoor:bp.outdoor?{...bp.outdoor}:null,style:epx.style};outdoor(L,bp,ep);return L;}
 
  // ---- 소품·기록 표식 배치 -----------------------------------------------------------------------
- function spots(L,{gap=3,avoid=[],edge=true,limit=64}={}){const cells=new Set(L.floorCells.map(([x,y])=>K(x,y))),has=(x,y)=>cells.has(K(x,y)),cand=[],out=[];
-  for(const[x,y]of L.floorCells){const e=!has(x+1,y)||!has(x-1,y)||!has(x,y+1)||!has(x,y-1);if(edge?!e:e)continue;cand.push({x:x+.5,y:y+.5,k:hash(L.id+':'+x+':'+y)});}
-  cand.sort((a,b)=>a.k-b.k);
-  for(const p of cand){if(out.length>=limit)break;if(avoid.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||3)))continue;if(out.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<gap))continue;out.push(p);}return out;}
+ // R108: 소품·표식은 벽에 붙지 않는다. field(): 바닥 타일 중심에서 가장 가까운 비바닥 타일(벽 밖 허공·기둥)까지의 거리 c 와,
+ // 그 타일이 놓인 가로/세로 통로 중 좁은 쪽의 폭 w. 장식은 벽에서 한 칸 띄운 띠(c 1.5~2.7)의 폭 4 이상 통로·방에만 놓는다.
+ const FIELD=new WeakMap();
+ function field(L){let f=FIELD.get(L);if(f)return f;const has=new Set(),c=new Map(),w=new Map(),rr=new Map(),cr=new Map();for(const[x,y]of L.floorCells)has.add(K(x,y));
+  for(const[x,y]of L.floorCells){let d=3.6;for(let b=y-3;b<=y+3&&d>.5;b++)for(let a=x-3;a<=x+3;a++){if(has.has(K(a,b)))continue;const h=Math.hypot(Math.max(a-x-.5,0,x-a-.5),Math.max(b-y-.5,0,y-b-.5));if(h<d)d=h;}c.set(K(x,y),d);
+   if(!rr.has(K(x,y))){let a=x;while(has.has(K(a-1,y)))a--;let e=x;while(has.has(K(e+1,y)))e++;for(let t=a;t<=e;t++)rr.set(K(t,y),e-a+1);}
+   if(!cr.has(K(x,y))){let a=y;while(has.has(K(x,a-1)))a--;let e=y;while(has.has(K(x,e+1)))e++;for(let t=a;t<=e;t++)cr.set(K(x,t),e-a+1);}}
+  for(const[x,y]of L.floorCells)w.set(K(x,y),Math.min(rr.get(K(x,y)),cr.get(K(x,y))));
+  f={has,c,w};FIELD.set(L,f);return f;}
+ // Exact distance from a point to the nearest non-floor tile (0 when the point is not on floor).
+ function wallClear(L,px,py){const F=field(L),x0=Math.floor(px),y0=Math.floor(py);if(!F.has.has(K(x0,y0)))return 0;let d=4;
+  for(let b=y0-4;b<=y0+4;b++)for(let a=x0-4;a<=x0+4;a++){if(F.has.has(K(a,b)))continue;const h=Math.hypot(Math.max(a-px,0,px-a-1),Math.max(b-py,0,py-b-1));if(h<d)d=h;}return d;}
+ // Nearest tile centre whose clearance is at least `min` (the point itself when it already has it).
+ function snapClear(L,p,min=1.9){if(wallClear(L,p.x,p.y)>=min)return p;const F=field(L),x0=Math.floor(p.x),y0=Math.floor(p.y);let best=null,bd=1e9;
+  for(let b=y0-6;b<=y0+6;b++)for(let a=x0-6;a<=x0+6;a++){const k=K(a,b);if(!F.has.has(k)||F.c.get(k)<min)continue;const d=Math.hypot(a+.5-p.x,b+.5-p.y);if(d<bd){bd=d;best={...p,x:a+.5,y:b+.5};}}return best||p;}
+ function spots(L,{gap=3,avoid=[],edge=true,limit=64,lo=1.5,hi=2.7,minRun=4}={}){const F=field(L),tiers=[[],[],[]],out=[];
+  for(const[x,y]of L.floorCells){const k=K(x,y),c=F.c.get(k);if(F.w.get(k)<minRun||c<1)continue;const p={x:x+.5,y:y+.5,k:hash(L.id+':'+x+':'+y)};
+   if(edge){if(c>=lo&&c<=hi)tiers[0].push(p);else if(c>hi)tiers[1].push(p);else tiers[2].push(p);}else if(c>hi)tiers[0].push(p);}
+  for(const t of tiers){t.sort((a,b)=>a.k-b.k);for(const p of t){if(out.length>=limit)break;if(avoid.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||3)))continue;if(out.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<gap))continue;out.push(p);}}return out;}
  const near=(p,list,d)=>list.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||d));
- function recordSpots(L,stage,avoid){const x=L.samongR103,out=[];
-  if(stage==='maze'){for(const q of x.rooms||[])if(!near(q,avoid,3))out.push({x:q.x,y:q.y});const P=x.path||[];for(const f of[.18,.36,.52,.68,.84,.95]){const q=P[Math.min(P.length-1,Math.floor(f*(P.length-1)))];if(q&&!near(q,avoid,3)&&!out.some(o=>Math.hypot(o.x-q.x,o.y-q.y)<3))out.push({x:q.x+1,y:q.y+1});}}
+ function recordSpots(L,stage,avoid){const x=L.samongR103,out=[],apart=(p,d=3)=>!near(p,avoid,3)&&!out.some(o=>Math.hypot(o.x-p.x,o.y-p.y)<d);
+  if(stage==='maze'){// 방(홀)의 한가운데, 이어서 출구로 가는 길의 칸 가운데, 모자라면 남은 광장·막다른 방. 모두 벽에서 2칸 이상 떨어진 칸 중심이다.
+   for(const q of x.rooms||[])if(apart(q))out.push({x:q.x,y:q.y});
+   const P=x.path||[];for(const f of[.18,.36,.52,.68,.84,.95]){const q=P[Math.min(P.length-1,Math.floor(f*(P.length-1)))];if(q&&apart(q))out.push({x:q.x,y:q.y});}
+   for(const n of L.nodes||[])if((n.kind==='plaza'||n.kind==='chamber')&&apart(n))out.push({x:n.x,y:n.y});}
   else if(stage==='ascent'){for(const q of x.landings||[])out.push({x:q.x+2,y:q.y-2});out.push({x:21.5,y:21.5},{x:9.5,y:21.5},{x:21.5,y:9.5},{x:15.5,y:22.5});}
-  else{const e=L.entry,s=spots(L,{gap:4.5,avoid,limit:40}).sort((a,b)=>Math.hypot(a.x-e.x,a.y-e.y)-Math.hypot(b.x-e.x,b.y-e.y));out.push(...s);}
-  return out.length?out:[{x:L.entry.x+1,y:L.entry.y}];}
+  else{const e=L.entry,s=spots(L,{gap:4.5,avoid,limit:40,lo:1.9}).sort((a,b)=>Math.hypot(a.x-e.x,a.y-e.y)-Math.hypot(b.x-e.x,b.y-e.y));out.push(...s);}
+  if(!out.length)out.push({x:L.entry.x+1,y:L.entry.y});return out.map(p=>snapClear(L,p,1.9));}
  function marker(ep,stage,rec,at,n){const label=rec.label||TEXT()[rec.key]?.title||rec.key;return{id:'r105:rec:'+ep.key+':'+stage+':'+n,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:'record',r74Prop:rec.prop||'crate',label,r105Record:{key:rec.key,at:rec.at??0,sub:rec.sub||null,n:rec.n||3,label}};}
  function dress(r,i,stage,ep,api){const L=r.exploration,bp=BP[ep?.key]?.[stage],x=L?.samongR103;if(!bp||!L?.samongR105||!x)return;
   if(L.samongR105.outdoor)delete r.r99Trees;// R99 가 길가에 나무를 심는다.
   const avoid=[{...L.entry,r:3.5},x.exit&&{...x.exit,r:3.5},x.save&&{...x.save,r:3},x.centre&&{...x.centre,r:2.5},x.dais&&{...x.dais,r:10.5},...(x.chests||[]).map(c=>({...c,r:2.2}))].filter(Boolean);
   const recs=[];for(const rec of bp.records||[]){if(rec.objects)rec.objects.forEach((label,n)=>recs.push({...rec,label,objectIndex:n}));else recs.push(rec);}
   const rs=recordSpots(L,stage,avoid);let n=0;for(const rec of recs){const at=rs[Math.min(n,rs.length-1)];n++;if(!at)continue;r.props.push(marker(ep,stage,rec,at,n));avoid.push({...at,r:2.2});}
-  const wide=stage==='survival'?SURVIVAL_SCALE:stage==='maze'?MAZE_SCALE:1,deco=spots(L,{avoid,gap:wide>1?4:2.8,limit:Math.round(96*wide)});let d=0;for(const[cell,count0]of bp.props||[]){const count=Math.round(count0*wide);for(let k=0;k<count;k++){const at=deco[d++];if(!at)break;r.props.push({id:'r105:'+cell+':'+d,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r74Prop:cell,r105Prop:cell});}}
+  const wide=stage==='survival'?SURVIVAL_SCALE:stage==='maze'?MAZE_DECOR:1,deco=spots(L,{avoid,gap:wide>1?4:2.8,limit:Math.round(96*wide)});// R108: 벽에서 떨어진 자리는 적다 — 서사 원화(드라이브 계획)가 쓸 자리를 먼저 남겨 두고 일반 소품은 나머지에만 놓는다.
+  let reserve=0;try{reserve=(window.__STORYWORLD_DRIVE_ART_R105__?.plan?.[i+':'+stage]||[]).reduce((n,[,c])=>n+c,0);}catch(e){}
+  let d=0;for(const[cell,count0]of bp.props||[]){const count=Math.round(count0*wide);for(let k=0;k<count;k++){if(d>=deco.length-reserve)break;const at=deco[d++];if(!at)break;r.props.push({id:'r105:'+cell+':'+d,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r74Prop:cell,r105Prop:cell});}}
   let a=0;try{a=window.__STORYWORLD_DRIVE_ART_R105__?.place?.(r,i,stage,ep,{deco:deco.slice(d),dais:x.dais})||0;}catch(e){fail(e);}// R105 드라이브 원화 조형물
   r.samongR105={title:bp.title||'',records:recs.length,props:d+a,art:a,outdoor:L.samongR105.outdoor};}
 

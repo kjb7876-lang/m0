@@ -206,10 +206,12 @@
   b.addEventListener('pointerdown',press);for(const t of['pointerup','click','touchstart','touchend'])b.addEventListener(t,e=>{e.stopPropagation();if(t!=='touchstart')e.preventDefault();},{passive:false});
   }
  function mount(){const s=stage();if(!s)return false;for(const el of[vignette,particles,compass,touch])if(el.parentNode!==s)s.appendChild(el);return true;}
- let hudAt=0,lastAngle=null,lastLabel='',lastDist='';
+ let hudAt=0,lastAngle=null,lastLabel='',lastDist='',lastFlicker=1;
  function updateHud(){if(!mount())return;const showNav=nav.visible&&!modal&&!storyScene;compass.style.display=showNav?'flex':'none';
   if(showNav){const deg=Math.round(nav.angle*180/Math.PI);if(deg!==lastAngle){needle.style.transform='rotate('+deg+'deg)';lastAngle=deg;}
    const label=nav.goal.label,dist=nav.meters+'m';if(label!==lastLabel){compassLabel.textContent=label;lastLabel=label;}if(dist!==lastDist){compassDist.textContent=dist;lastDist=dist;}}
+  // R108: torch flicker on the vignette every frame (reducedMotion and weather "off" give 1)
+  const fo=wxApi()?.flickerOpacity?.()??1;if(Math.abs(fo-lastFlicker)>.004){lastFlicker=fo;vignette.style.opacity=fo.toFixed(3);}
   const now=performance.now();if(now-hudAt<120)return;hudAt=now;
   const touchOn=prefs.touch&&coarse()&&live()&&player.hp>0&&!(typeof safeRegion==='function'&&safeRegion());touch.classList.toggle('on',touchOn);
   if(touchOn)for(const{b,img,cd:shade,action:a}of buttons){const src=$id(a[3])?.src||'';if(src&&img.getAttribute('src')!==src)img.setAttribute('src',src);const cd=Number(player[a[4]])||0;b.classList.toggle('cd',cd>.05);const t=cd>.05?Math.ceil(cd)+'':'';if(shade.textContent!==t)shade.textContent=t;}
@@ -224,17 +226,24 @@
   cave:{c:[[190,200,230]],n:20,fall:5,size:[1,2],kind:'dust'},regional:{c:[[230,214,170]],n:22,fall:4,size:[1,2.2],kind:'dust'}};
  const motes=[];let moteFamily=null,lastOrigin=null,lastT=0;
  function family(){const L=room?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family||'regional';}
- function ambience(){const want=prefs.ambience&&live()&&!modal&&layer==='STORY';particles.style.display=want?'block':'none';if(!want){motes.length=0;moteFamily=null;return;}
-  const fam=family(),spec=MOTES[fam]||MOTES.regional,cw=Math.max(1,Math.round(W)),ch=Math.max(1,Math.round(H));if(particles.width!==cw)particles.width=cw;if(particles.height!==ch)particles.height=ch;
-  const n=Math.round(spec.n*(coarse()?.6:1)*(lowFx()?.6:1));if(moteFamily!==fam){motes.length=0;moteFamily=fam;}
+ // R108: weather-r108.js steers these motes through window.__STORYWORLD_WEATHER_R108__:
+ //  ambience(fam)  -> {scale, skip, still, wind}: thin out (rain) or drop (its own snow replaces the snow motes), freeze (dead calm), drift (wind px/s)
+ //  dreamAmbience() -> {family}: a DREAM stage whose table row wants the family motes (the stages never had any before)
+ //  flickerOpacity() -> torch flicker multiplier for the vignette
+ const wxApi=()=>window.__STORYWORLD_WEATHER_R108__||null;
+ function ambience(){const dream=layer==='DREAM'?wxApi()?.dreamAmbience?.()||null:null,want=prefs.ambience&&live()&&!modal&&(layer==='STORY'||!!dream);particles.style.display=want?'block':'none';if(!want){motes.length=0;moteFamily=null;return;}
+  const fam=dream?.family||family(),wx=wxApi()?.ambience?.(fam)||null;if(wx?.skip){motes.length=0;moteFamily=null;particles.style.display='none';return;}
+  const spec=MOTES[fam]||MOTES.regional,cw=Math.max(1,Math.round(W)),ch=Math.max(1,Math.round(H));if(particles.width!==cw)particles.width=cw;if(particles.height!==ch)particles.height=ch;
+  const n=Math.round(spec.n*(coarse()?.6:1)*(lowFx()?.6:1)*(wx?.scale??1));if(moteFamily!==fam){motes.length=0;moteFamily=fam;}
   while(motes.length<n)motes.push({x:Math.random()*cw,y:Math.random()*ch,z:.5+Math.random()*.8,p:Math.random()*TAU,c:spec.c[motes.length%spec.c.length],s:spec.size[0]+Math.random()*(spec.size[1]-spec.size[0])});
   const o=project(0,0),now=performance.now(),dt=clamp((now-lastT)/1000,0,.05);lastT=now;const dx=lastOrigin?o.x-lastOrigin.x:0,dy=lastOrigin?o.y-lastOrigin.y:0;lastOrigin=o;
+  const go=wx?.still?0:1,wind=wx?.wind||0,turn=go?time*1.3:0;
   const c=particles.getContext('2d');c.clearRect(0,0,cw,ch);c.globalCompositeOperation=spec.kind==='ember'||spec.kind==='glow'?'lighter':'source-over';
-  for(const m of motes){m.x+=dx*m.z+Math.sin(time*.7+m.p)*8*dt*m.z;m.y+=dy*m.z+spec.fall*dt*m.z;m.p+=dt;
+  for(let i=0;i<n;i++){const m=motes[i];m.x+=dx*m.z+(Math.sin(time*.7+m.p)*8*dt*m.z+wind*dt*m.z)*go;m.y+=dy*m.z+spec.fall*dt*m.z*go;m.p+=dt*go;
    if(m.x<-10)m.x+=cw+20;else if(m.x>cw+10)m.x-=cw+20;if(m.y<-10)m.y+=ch+20;else if(m.y>ch+10)m.y-=ch+20;
    const tw=spec.kind==='ember'||spec.kind==='glow'?.45+.55*Math.abs(Math.sin(time*2.3+m.p*3)):.75,a=(.32+.4*m.z)*tw;
    c.fillStyle='rgba('+m.c[0]+','+m.c[1]+','+m.c[2]+','+a.toFixed(3)+')';
-   if(spec.kind==='leaf'){c.save();c.translate(m.x,m.y);c.rotate(time*1.3+m.p*4);c.fillRect(-m.s,-m.s*.45,m.s*2,m.s*.9);c.restore();}
+   if(spec.kind==='leaf'){c.save();c.translate(m.x,m.y);c.rotate(turn+m.p*4);c.fillRect(-m.s,-m.s*.45,m.s*2,m.s*.9);c.restore();}
    else{c.beginPath();c.arc(m.x,m.y,m.s*m.z,0,TAU);c.fill();}}
   stats.particles++;}
 

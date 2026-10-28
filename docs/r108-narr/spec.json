@@ -1,0 +1,4409 @@
+{
+ "revision": "R108-NARR-spec-1",
+ "source": "story-source/hapil-canon-r107-merged.txt (R107 merged canon, 3066 lines)",
+ "method": "read samong-r103.js EP / samong-maps-r105.js BP / art-drive-r105.js ACTORS+PLAN, probed the R107 build at 127.0.0.1:49418 with QA.stage (test-aid: 777 + invincibility), contact sheets of all existing actor art (S/narr/work/*.png)",
+ "hybridThrowerAudit": {
+  "rule": "When samong-r103.js spawn() borrows a donor through actor3(d,id,x,y,false,'DREAM',hostRegion), the actor's ai comes out 'hybrid' for every donor whose weapon profile is blade / heavy / caster / polearm, and 'melee' only for weapon 'claw' (plus the 5 native 'ranged' ids). Probe: 186 non-boss donors -> 160 hybrid, 21 melee, 5 ranged. 'hybrid' enemies call ranged3() -> enemyShot() -> makeShot(asset VFX.bolt) whenever clearLine(e,player): the light-blue bolt the owner saw. tickSurvival's swarm() (samong-r103.js:227) overwrites ai='melee', so survival is safe; tickMaze (:238) and the ascent guards (:239-240) do NOT, so melee-looking sprites throw bolts in the maze and on the climb.",
+  "meleeSafeWhenBorrowed": [
+   "dist01-sp1",
+   "dist01-sp2",
+   "dist02-sp1",
+   "dist03-sp1",
+   "dist02-g1",
+   "dist03-g1",
+   "dist04-g1",
+   "b02-m1",
+   "b04-g1",
+   "b04-s1",
+   "b06-f1",
+   "b06-f2",
+   "b06b-f1",
+   "b07-f1",
+   "l304-e1",
+   "l304-e2",
+   "l304-e3",
+   "l302-e3",
+   "c101-e3",
+   "c105-e1",
+   "c103-e3"
+  ],
+  "nativeRanged": [
+   "dist02-m1",
+   "dist05-m1",
+   "dist06-m1",
+   "u201-e1",
+   "u204-e3"
+  ],
+  "hybridThrowersCurrentlyBorrowedForMeleeLookingRoles": [
+   {
+    "id": "a11-c1",
+    "art": "episode1a/corrupted_guardian.webp (winged purple-sword skeletal knight)",
+    "eps": [
+     "S-01 mob",
+     "M guard"
+    ],
+    "ownRegionAi": "melee",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "dist04-c1",
+    "art": "corrupted_guardian.webp",
+    "eps": [
+     "S-03 mob",
+     "S-03 guard"
+    ],
+    "ownRegionAi": "melee",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "dist04-s1",
+    "art": "dist/skeleton.png",
+    "eps": [
+     "S-03 mob"
+    ],
+    "ownRegionAi": "melee",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "l302-e1",
+    "art": "bulmyeongwi_b.webp (black mist)",
+    "eps": [
+     "S-01 mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "a08-s1",
+    "art": "corridor_scream_echo.webp -> drawn as drive mob-student.webp",
+    "eps": [
+     "S-02 mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "u204-e2",
+    "art": "u2_void_wraith.webp -> drawn as mob-student.webp in S-02",
+    "eps": [
+     "S-02 mob",
+     "S-02 guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "a10-o1",
+    "art": "hallucinated_orderly.webp",
+    "eps": [
+     "S-04 mob",
+     "S-04 guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "murder04-e2",
+    "art": "murder/rooftop_echo.png -> drawn as mob-paper-figure.webp in RF",
+    "eps": [
+     "S-05 mob",
+     "RF mob",
+     "RF guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "u201-e2",
+    "art": "u2_cyborg_hound.webp",
+    "eps": [
+     "S-06 mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "b09-h1",
+    "art": "polar_cyborg_hound.webp",
+    "eps": [
+     "S-06 guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "h103-t1",
+    "art": "silverless_shadow.webp",
+    "eps": [
+     "S-07 mob",
+     "S-07 guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "h102-t1",
+    "art": "nameless_sword_trace.webp",
+    "eps": [
+     "S-07 mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "c106-e1",
+    "art": "superego_cyborg_cult_leader.webp (pink winged angel)",
+    "eps": [
+     "RA mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "murder04-e1",
+    "art": "murder/silent_alarm.png",
+    "eps": [
+     "RA mob",
+     "RA guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "kair-academy-wave-1",
+    "art": "kair/enemies/time-collector.png",
+    "eps": [
+     "RB mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "kair-guardian-01",
+    "art": "kair-guardians/guardian_01.webp",
+    "eps": [
+     "RB mob",
+     "M mob"
+    ],
+    "ownRegionAi": "melee",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "b05-p1",
+    "art": "lust_heart_marionette.webp",
+    "eps": [
+     "S-01 guard",
+     "RC mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "b03-g1",
+    "art": "envy_glass_shard.webp",
+    "eps": [
+     "RC mob",
+     "RC guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "b03-g2",
+    "art": "envy_glass_shard.webp",
+    "eps": [
+     "RF mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "c102-e1",
+    "art": "black_robed_nightmare_demon.webp",
+    "eps": [
+     "RD mob",
+     "RD guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "c105-e2",
+    "art": "black_rose_demon_soldier.webp",
+    "eps": [
+     "RD mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "u202-e2",
+    "art": "u2_memory_orb.webp",
+    "eps": [
+     "RE mob",
+     "RE guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "c104-e1",
+    "art": "pride_cyborg_cult_leader.webp (white suit, spider legs)",
+    "eps": [
+     "RG mob",
+     "RG guard"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "c103-e1",
+    "art": "black_rose_chip_penitent.webp (kneeling chained man)",
+    "eps": [
+     "RG mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   },
+   {
+    "id": "u201-e3",
+    "art": "u2_resonance_knight.webp",
+    "eps": [
+     "M mob"
+    ],
+    "ownRegionAi": "hybrid",
+    "spawnAi": "hybrid"
+   }
+  ],
+  "fix": "samong-r103.js spawn() (line 207): after actor3, apply a per-row override, e.g. EP rows become ['dist00','a11-c1',{ai:'melee'}] or the row's donor profile .ai when it is 'melee'; set e.ai='melee', e.rangedWindup=0 so maze/ascent copies never shoot. Allowed throwers keep 'hybrid' but should get a projectile asset/tint per episode (fx-boss-r105.js PAL already keys colours by nativeId; add a mob entry so VFX.bolt is tinted with EP.tint[1] instead of light blue). This is a presentation-level fix: hit shapes and damage numbers are unchanged, only the melee/ranged decision for borrowed copies, which the lead must confirm as fair."
+ },
+ "mobRotationBug": {
+  "where": "samong-r103.js:225 (survival batch) and :238 (maze): ep.mobs[(S.serial+n)%ep.mobs.length]",
+  "bug": "spawn() does ++S.serial once per spawn while the loop index n also rises by one, so (S.serial+n) keeps the same parity across a batch, and a 6-spawn batch leaves S.serial's parity unchanged: only ONE of the two mob rows ever appears in a run (observed test-aid: S-03 survival 56/56 dist04-c1, 0 skeleton; S-01 maze 18/18 a11-c1; S-04 only a10-o1; S-05 only b07-f1; S-06 only drones; RA only c106-e1).",
+  "fix": "index by a spawn counter that does not advance with n, e.g. ep.mobs[(x.spawnCount++)%ep.mobs.length], or ep.mobs[n%ep.mobs.length] per batch. Spawn counts and caps are unchanged (same number of enemies), only the row choice."
+ },
+ "verdictTable": [
+  {
+   "ep": "P",
+   "stage": "ascent",
+   "verdict": "FITS",
+   "reason": "root-seraph boss = 검은 뿌리; key poses exist"
+  },
+  {
+   "ep": "S-01",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "the text's 666 '잔영/형상' are shapes pressed flat under black roots; a purple-sword fallen-angel knight is chapter-1 demon-tree art and reads as a different world"
+  },
+  {
+   "ep": "S-01",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "stalkers 'born behind you' should be faceless root-shades; a knight sprite that lobs cyan bolts contradicts both text and sprite"
+  },
+  {
+   "ep": "S-01",
+   "stage": "ascent",
+   "verdict": "PARTIAL",
+   "reason": "봉합부인 art and teapot/gardener props fit; the guards are a lust-chapter marionette with a red heart and they cast bolts"
+  },
+  {
+   "ep": "S-02",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "look is right (faceless student in dark uniform) but it is one static frame (no walk/hit/attack) and the donor is a caster that throws cyan bolts in maze/ascent"
+  },
+  {
+   "ep": "S-02",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "same as survival; a maze stalker should be the student (melee) — good — but it currently casts"
+  },
+  {
+   "ep": "S-02",
+   "stage": "ascent",
+   "verdict": "FITS",
+   "reason": "patroller art and key projectiles match 1006/1010/2040"
+  },
+  {
+   "ep": "S-03",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "the text's fighters are humans in white dobok turning black; demon knights/skeletons belong to the castle chapter"
+  },
+  {
+   "ep": "S-03",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "same actor problem; the alley should hold 조직원 silhouettes / dobok challengers"
+  },
+  {
+   "ep": "S-03",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "boss should be a faceless mechanism of black rings and chains, not a cyborg lord"
+  },
+  {
+   "ep": "S-04",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "white humanoid is close but a hospital orderly with a syringe is chapter-1 art; the text's mob is a jointed mannequin with plate and spoon"
+  },
+  {
+   "ep": "S-04",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "same"
+  },
+  {
+   "ep": "S-04",
+   "stage": "ascent",
+   "verdict": "PARTIAL",
+   "reason": "a man in a suit is right; the specific white-suit hotel chairman is another chapter's villain — acceptable if renamed (already named 강재헌)"
+  },
+  {
+   "ep": "S-05",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "flaming wolves on a snowing street have no basis; the mob is named '찢긴 호외의 잔향' (torn newspaper remnants)"
+  },
+  {
+   "ep": "S-05",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "same"
+  },
+  {
+   "ep": "S-05",
+   "stage": "ascent",
+   "verdict": "PARTIAL",
+   "reason": "seal-ring boss reads as '교주의 인장' acceptably; fire-beast guards are tolerable here only because the house burns — a burning uniformed figure fits better"
+  },
+  {
+   "ep": "S-06",
+   "stage": "survival",
+   "verdict": "FITS",
+   "reason": "machine legion = drones + cyborg hounds; the drone is a visible shooter so projectiles are legitimate (recolour bolt to teal 0x4b5866)"
+  },
+  {
+   "ep": "S-06",
+   "stage": "maze",
+   "verdict": "FITS",
+   "reason": "drones/gun barrels aiming match 1630"
+  },
+  {
+   "ep": "S-06",
+   "stage": "ascent",
+   "verdict": "MISMATCH (boss)",
+   "reason": "reusing the story's Lucifer for 미명천사 confuses two beings; text gives a precise different design"
+  },
+  {
+   "ep": "S-07",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "text has no swarm here except the hero's own shadow; hooded shades are an acceptable minimal reading of '여섯 물건의 그림자' but they cast cyan bolts"
+  },
+  {
+   "ep": "S-07",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "as above"
+  },
+  {
+   "ep": "S-07",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "Persona must be 환도's double in 환도's clothes with a plain mask (keyed mask props already crack with boss hp)"
+  },
+  {
+   "ep": "RA",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "'붉은 교정 표시' are hundreds of insect-like red proofreading marks; a pink angel is the cult finale's art"
+  },
+  {
+   "ep": "RA",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "maze stalkers should be weightless patient-gown shapes with heavy name tags"
+  },
+  {
+   "ep": "RA",
+   "stage": "ascent",
+   "verdict": "PARTIAL",
+   "reason": "patroller boss fits; guards wrong; outdoor family is 'ash' though the text keeps us on the snowfield"
+  },
+  {
+   "ep": "RB",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "time-themed hooded collector is an acceptable reading of '도착하지 못한 발자국', but the text's marching enemies are the Controller's fallen legion (u2 knights)"
+  },
+  {
+   "ep": "RB",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "kitchen guests in uniform + apron are specific"
+  },
+  {
+   "ep": "RB",
+   "stage": "ascent",
+   "verdict": "PARTIAL",
+   "reason": "총지배인 appears only in a mirror; the active antagonist of R-04 is the 백색의 손님 — keep GM (he is canon) but add the white guest as the climb's elite"
+  },
+  {
+   "ep": "RC",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "abstract crystal orbs for '관람석의 시선' are tolerable; the judged crowd should be the S-03 dobok challengers (white = innocent, black = guilty)"
+  },
+  {
+   "ep": "RC",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "paper blades flying are the text's attack"
+  },
+  {
+   "ep": "RC",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "the judge wears 환도's face; and this ascent is R-06 whose antagonist is the 종이 왕 (paper king prop exists but is static)"
+  },
+  {
+   "ep": "RD",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "red-robed cult demons are the finale's art; the text's attackers are watching lotuses that spit eyelid shards and roots"
+  },
+  {
+   "ep": "RD",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "ward stalkers: sleepless villagers are victims, so use the eye-lotus and root only"
+  },
+  {
+   "ep": "RD",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "the first trumpet is an unseen sound that becomes a sleeve-shaped horn; the pink angel is the cult boss"
+  },
+  {
+   "ep": "RE",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "drones as leftover war machines are plausible in a Neo-Seoul train, but the text's crowd is uniformed medal dolls"
+  },
+  {
+   "ep": "RE",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "as above"
+  },
+  {
+   "ep": "RE",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "백색 사수 is 기억사수's double in a white coat with a rifle"
+  },
+  {
+   "ep": "RF",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "look matches 2595 exactly; but one static frame and a caster donor (bolts)"
+  },
+  {
+   "ep": "RF",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "as above"
+  },
+  {
+   "ep": "RF",
+   "stage": "ascent",
+   "verdict": "FITS (art) / PARTIAL (static)",
+   "reason": "storyteller art matches 2555; needs key poses"
+  },
+  {
+   "ep": "RG",
+   "stage": "survival",
+   "verdict": "MISMATCH",
+   "reason": "white-suit spider cyborgs are the cult finale; '막힌 이름들' are names trapped in the trumpets"
+  },
+  {
+   "ep": "RG",
+   "stage": "maze",
+   "verdict": "MISMATCH",
+   "reason": "as above"
+  },
+  {
+   "ep": "RG",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "the seventh trumpet = a giant empty-sleeve horn with name tags, bound to the ring pillar"
+  },
+  {
+   "ep": "M",
+   "stage": "survival",
+   "verdict": "PARTIAL",
+   "reason": "'성벽과 시곗바늘의 잔해' = clock guardians + steel legion + black roots; the mix is right but only the clock guardian ever spawns"
+  },
+  {
+   "ep": "M",
+   "stage": "maze",
+   "verdict": "PARTIAL",
+   "reason": "as above"
+  },
+  {
+   "ep": "M",
+   "stage": "ascent",
+   "verdict": "MISMATCH",
+   "reason": "미카엘라 is the psychiatrist in a white coat (hero art exists: assets/heroes/normalized/directions/michaela-*.webp); Arvelia is another character. Text: the hero cuts the knot/barrier, not her"
+  }
+ ],
+ "verdictCounts": {
+  "FITS": 5,
+  "MISMATCH": 21,
+  "PARTIAL": 20
+ },
+ "episodes": [
+  {
+   "index": 0,
+   "key": "P",
+   "title": "주인 없는 자장가",
+   "host": "dist05",
+   "tint": [
+    2827824,
+    4865359
+   ],
+   "stages": [
+    {
+     "stage": "ascent",
+     "blueprintTitle": "코어 아래의 뿌리길",
+     "textSays": [
+      {
+       "quote": "코어 아래로 검은 뿌리가 내려가 있었다",
+       "line": 930
+      },
+      {
+       "quote": "뿌리를 무너뜨리자 그 아래 눌려 있던 형상들이 쏟아졌다",
+       "line": 932
+      }
+     ],
+     "place": "beneath the core; black roots (underground)",
+     "light": "none (core glow); text silent",
+     "weatherText": "text silent (underground)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist00",
+        "dist00-boss",
+        "뿌리의 문지기 / demon_tree_root_seraph.png + R104 key poses dist00-boss-p1..p4"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "FITS",
+     "reason": "root-seraph boss = 검은 뿌리; key poses exist",
+     "mobPlan": [
+      {
+       "current": "[dist00,dist00-boss]",
+       "recommended": "keep",
+       "how": "no change",
+       "newMobId": "",
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "keep indoor forge; darken wall cap toward 0x2b2630 and add a few root props (ash-tree/stump already in BP) — text silent on weather"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "코어 아래의 검은 뿌리",
+    "current": "dist00/dist00-boss",
+    "verdict": "FITS"
+   },
+   "notes": [],
+   "screenshots": []
+  },
+  {
+   "index": 1,
+   "key": "S-01",
+   "title": "꿰맨 장미의 집",
+   "host": "ep1b05",
+   "tint": [
+    3812400,
+    7031634
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "뿌리 밑동의 광장",
+     "textSays": [
+      {
+       "quote": "뿌리를 무너뜨리자 그 아래 눌려 있던 형상들이 쏟아졌다",
+       "line": 932
+      },
+      {
+       "quote": "육백예순여섯 번째 잔영을 쓰러뜨린 뒤에야 바닥에 문이",
+       "line": 932
+      }
+     ],
+     "place": "plaza at the root stump below the core",
+     "light": "none / text silent",
+     "weatherText": "text silent (underground)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist00",
+        "a11-c1",
+        "악마화 나무의 침식 근위 1 / corrupted_guardian.webp = winged skeletal knight with purple sword (R7 group V569a6e24f595)"
+       ],
+       [
+        "last302",
+        "l302-e1",
+        "포구 검은 안개 / bulmyeongwi_b.webp black mist, caster"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "parity bug: only a11-c1 appears (test-aid 24/24)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "the text's 666 '잔영/형상' are shapes pressed flat under black roots; a purple-sword fallen-angel knight is chapter-1 demon-tree art and reads as a different world",
+     "mobPlan": [
+      {
+       "current": "[dist00,a11-c1]",
+       "recommended": "GENERATE s01-root-shade",
+       "how": "replace",
+       "newMobId": "s01-root-shade",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "[last302,l302-e1]",
+       "recommended": "keep as 1-in-4 ranged minority only if its bolt is recoloured to the rose/black tint; otherwise replace with s01-root-shade",
+       "how": "augment",
+       "newMobId": null,
+       "attackProfileShouldBe": "hybrid (visible mist caster, bolt tint 0x6b4b52)"
+      }
+     ],
+     "mapCorrections": [
+      "survival ring: keep forge style but tint floor toward dark rose-brown 0x3a2c30, roots (stump/obelisk) ok",
+      "no weather (underground)"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "빛이 닿는 만큼 생기는 복도",
+     "textSays": [
+      {
+       "quote": "손전등을 켜고 내려가자 빛이 닿는 만큼 복도가 생겨났다",
+       "line": 932
+      },
+      {
+       "quote": "뒤에서는 새로운 발소리가 거듭 태어났다",
+       "line": 932
+      },
+      {
+       "quote": "입이 꿰매진 인형, 젖은 출석부, 검게 물든 도복 조각",
+       "line": 936
+      }
+     ],
+     "place": "corridors that exist only where the light falls; stairs with six objects at the end",
+     "light": "flashlight only",
+     "weatherText": "text silent",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist00",
+        "a11-c1",
+        "same purple-sword knight, spawnAi=hybrid -> throws light-blue VFX.bolt (owner complaint)"
+       ],
+       [
+        "last302",
+        "l302-e1",
+        "black mist caster"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only a11-c1 (test-aid 18/18)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "stalkers 'born behind you' should be faceless root-shades; a knight sprite that lobs cyan bolts contradicts both text and sprite",
+     "mobPlan": [
+      {
+       "current": "[dist00,a11-c1]",
+       "recommended": "GENERATE s01-root-shade (stalker variant: same sheet, slower, spawns behind the player)",
+       "how": "replace",
+       "newMobId": "s01-root-shade",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "[last302,l302-e1]",
+       "recommended": "drop from the maze (ranged attacks through flashlight darkness are unreadable)",
+       "how": "remove",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "keep R107 flashlight; six-object stair markers already exist (objects list in BP)",
+      "corridor walls: forge -> domestic wall texture with rose-stitch tint 0x6b4b52 so it reads as the house's underside"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "찻잔 속의 집 · 정원과 긴 식탁",
+     "textSays": [
+      {
+       "quote": "집은 찻잔 안에 들어 있었다",
+       "line": 947
+      },
+      {
+       "quote": "둥근 벽을 따라 금이 간 꽃무늬가 이어졌고… 발밑의 흑백 타일은 따뜻했다",
+       "line": 949
+      },
+      {
+       "quote": "정원사는 얼굴이 없는 인형이었다",
+       "line": 951
+      },
+      {
+       "quote": "작은 구두를 신은 주민들이 양손을 무릎에 얹고 앉아 있었다",
+       "line": 953
+      },
+      {
+       "quote": "옷에 장식처럼 달린 리본이 벽 속까지 이어져 있었다",
+       "line": 957
+      },
+      {
+       "quote": "수백 개의 앞치마를 이어 만든 치마… 목 위에는… 장미 다발",
+       "line": 965
+      }
+     ],
+     "place": "a house inside a teacup: round cracked floral walls, warm black-and-white tiles, garden, long table, teapot with the knot",
+     "light": "warm interior, shadow of the cup handle across the sky",
+     "weatherText": "none (indoor)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b05",
+        "b05-p1",
+        "guard: 얼굴 없는 남자의 박수 / lust_heart_marionette.webp (red heart marionette, caster)"
+       ],
+       [
+        "ep1a11",
+        "mb-ep1a11",
+        "boss drawn as drive boss-hostess.webp (봉합부인) static; teapot 3-key prop; gardener prop"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "봉합부인 art and teapot/gardener props fit; the guards are a lust-chapter marionette with a red heart and they cast bolts",
+     "mobPlan": [
+      {
+       "current": "[ep1b05,b05-p1] guard",
+       "recommended": "GENERATE s01-ribbon-resident",
+       "how": "replace",
+       "newMobId": "s01-ribbon-resident",
+       "attackProfileShouldBe": "melee (slow grab; never throws)"
+      },
+      {
+       "current": "boss mb-ep1a11 -> boss-hostess.webp",
+       "recommended": "keep art; GENERATE 4 key poses for 봉합부인 (scissors open / snip toward screen bottom / aprons flare / recover) so the static image animates",
+       "how": "augment",
+       "newMobId": "s01-hostess-keyposes",
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "floor: checkerboard black/white tile texture (BP style 'domestic' -> add r105 palette floor 0xe8e2d8/0x2a2224 checker if the lead has a tile asset; else tint)",
+      "walls: cracked floral porcelain (round) — reuse domestic wall with tint 0x6b4b52",
+      "props: keep ferns (roses), workbench row as the long table, well=teapot stand, cabinet=반짇고리; add 2-3 small chairs (gothic-chair drive prop) along the table"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "봉합부인",
+    "current": "ep1a11/mb-ep1a11 drawn as assets/r105/drive/boss-hostess.webp (static)",
+    "verdict": "FITS (art) / PARTIAL (no key poses)"
+   },
+   "notes": [
+    "First worked example (owner feedback): the '해골 보라검 천사' is a11-c1 corrupted_guardian borrowed from dist00; in the maze its ai is 'hybrid' (see hybrid audit) so it throws VFX.bolt. Fix = (1) replace the actor with s01-root-shade, (2) force ai 'melee' for melee-looking borrowed copies, (3) parity bug makes it the only mob that ever appears."
+   ],
+   "screenshots": [
+    "S/shots/narr/ep01-S01-survival-baseline.jpg",
+    "S/shots/narr/ep01-S01-maze-purple-knight-hybrid.jpg"
+   ]
+  },
+  {
+   "index": 2,
+   "key": "S-02",
+   "title": "밤의 출석부",
+   "host": "ep1a09",
+   "tint": [
+    2633782,
+    4608858
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "자정 1분 전의 운동장",
+     "textSays": [
+      {
+       "quote": "학교 시계는 자정에서 일 분이 모자랐다",
+       "line": 1000
+      },
+      {
+       "quote": "어둠 속에서 학생들이 일어섰다. 얼굴은 없었고, 교복 안에는 구겨진 확인서만",
+       "line": 1032
+      }
+     ],
+     "place": "school yard / gate at 23:59",
+     "light": "night, fluorescent lights going out one by one (1032)",
+     "weatherText": "text silent; wet indoor shoes (1000) -> damp night",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1a08",
+        "a08-s1",
+        "corridor_scream_echo -> drawn as drive mob-student.webp (static single image)"
+       ],
+       [
+        "u204",
+        "u204-e2",
+        "void wraith -> also drawn as mob-student.webp"
+       ]
+      ],
+      "drawnAs": "assets/r105/drive/mob-student.webp",
+      "parityNote": "only a08-s1 row (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "look is right (faceless student in dark uniform) but it is one static frame (no walk/hit/attack) and the donor is a caster that throws cyan bolts in maze/ascent",
+     "mobPlan": [
+      {
+       "current": "[ep1a08,a08-s1] + [u204,u204-e2]",
+       "recommended": "GENERATE s02-faceless-student 2x2 sheet (reuse mob-student.webp as the design reference) and drive it as a 4-state actor",
+       "how": "augment",
+       "newMobId": "s02-faceless-student",
+       "attackProfileShouldBe": "melee (shove / paper slap)"
+      }
+     ],
+     "mapCorrections": [
+      "outdoor stone + dead trees ok; night palette darker (floor 0x46535a is fine), add wet sheen if the weather worker has puddles",
+      "statue props -> keep; add 2 goal-post / gate obelisks near entry (text: 교문)"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "자정 1분 전의 학교 복도",
+     "textSays": [
+      {
+       "quote": "모퉁이에서 나온 순찰자의 그림자가 벽을 가득 메웠다. 불빛이 닿으면 그가 가까워졌고",
+       "line": 1006
+      },
+      {
+       "quote": "모든 칠판에 내가 쓴 문장이 동시에 적히고",
+       "line": 1022
+      }
+     ],
+     "place": "school corridors: 교무실, 음악실, 자료실, 보건실",
+     "light": "flashlight; patroller drawn to light",
+     "weatherText": "none (indoor)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1a08",
+        "a08-s1",
+        "student (static)"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "same as survival; a maze stalker should be the student (melee) — good — but it currently casts",
+     "mobPlan": [
+      {
+       "current": "[ep1a08,a08-s1]",
+       "recommended": "s02-faceless-student sheet, melee",
+       "how": "augment",
+       "newMobId": "s02-faceless-student",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "clinical corridor ok; record markers already cover 교무실/음악실/자료실/보건실",
+      "optional: chalk-line decals on walls (text 1022) if a decal path exists"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "방송실로 오르는 계단",
+     "textSays": [
+      {
+       "quote": "마지막 계단에 이르자 순찰자가 앞을 막았다",
+       "line": 1042
+      },
+      {
+       "quote": "순찰자의 얼굴에 처음으로 금이 갔다",
+       "line": 1050
+      }
+     ],
+     "place": "stairs to the broadcast room",
+     "light": "dim",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u204",
+        "u204-e2",
+        "guards drawn as student"
+       ],
+       [
+        "ep1a08",
+        "mb-ep1a08",
+        "boss drawn as drive boss-patroller.webp (flat face, keys); key fx fx-keys-*"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "FITS",
+     "reason": "patroller art and key projectiles match 1006/1010/2040",
+     "mobPlan": [
+      {
+       "current": "boss",
+       "recommended": "keep; GENERATE 4 key poses for 순찰자 (key-ring swing) optional",
+       "how": "augment",
+       "newMobId": "s02-patroller-keyposes",
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "keep"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "순찰자",
+    "current": "ep1a08/mb-ep1a08 drawn as assets/r105/drive/boss-patroller.webp",
+    "verdict": "FITS"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep02-S02-survival.jpg"
+   ]
+  },
+  {
+   "index": 3,
+   "key": "S-03",
+   "title": "흑과 백 — 끝나지 않는 시험",
+   "host": "dist04",
+   "tint": [
+    3092271,
+    6974058
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "대련장과 관람석",
+     "textSays": [
+      {
+       "quote": "문 너머에서 흰 도복들이 쓰러지고 있었다",
+       "line": 1073
+      },
+      {
+       "quote": "어깨에서 시작된 검정이 가슴과 팔다리로 번졌다",
+       "line": 1075
+      },
+      {
+       "quote": "기절한 도전자를 다시 일으켜 세우고, 멎은 싸움의 다음 동작을 재촉하는 장치",
+       "line": 1217
+      }
+     ],
+     "place": "octagonal sparring hall with stands, healers at the edge",
+     "light": "hall lights, 'more than half the ceiling lights out' (1171)",
+     "weatherText": "none (indoor); rain only in the 23-years-ago memory",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist04",
+        "dist04-c1",
+        "되살아난 방패동료 / corrupted_guardian.webp winged purple knight"
+       ],
+       [
+        "dist04",
+        "dist04-s1",
+        "이름 잃은 전우 / dist/skeleton.png"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only dist04-c1 (test-aid 54-56/56)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "the text's fighters are humans in white dobok turning black; demon knights/skeletons belong to the castle chapter",
+     "mobPlan": [
+      {
+       "current": "[dist04,dist04-c1]",
+       "recommended": "GENERATE s03-dobok-challenger (variant A: chest black)",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger",
+       "attackProfileShouldBe": "melee (fist/kick)"
+      },
+      {
+       "current": "[dist04,dist04-s1]",
+       "recommended": "GENERATE s03-dobok-challenger (variant B: nearly all black, dragged by a black ring at the neck)",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger-b",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "octagon ok; palette strictly black/white/grey (tint ok); statues -> referee stand; crates -> stacked mats; half the braziers unlit (text 1171)"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "시험장 천막 뒤편 · 23년 전 빗속 골목",
+     "textSays": [
+      {
+       "quote": "초토화 작전이 벌어진 밤, 우리는 빗속에서 마주쳤다",
+       "line": 1189
+      },
+      {
+       "quote": "내가 젖은 아스팔트 위에 한쪽 무릎을 꿇었을 때",
+       "line": 1191
+      }
+     ],
+     "place": "behind the tents, then the rainy alley of 23 years ago",
+     "light": "night, rain",
+     "weatherText": "RAIN (text explicit)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist04",
+        "dist04-c1",
+        "purple knight, hybrid -> bolts"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "same actor problem; the alley should hold 조직원 silhouettes / dobok challengers",
+     "mobPlan": [
+      {
+       "current": "[dist04,dist04-c1]",
+       "recommended": "s03-dobok-challenger + optional s03-gang-silhouette",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "weather: RAIN in this maze (currently none) — outdoor stone, no trees, wet paving",
+      "add a broken-glasses marker (text 1209) near the exit"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "검은 고리 장치가 있는 천막 뒤",
+     "textSays": [
+      {
+       "quote": "천막 안쪽에 검은 고리가 숨어 있었다",
+       "line": 1217
+      },
+      {
+       "quote": "환도의 칼날이 고리 사이로 들어갔다",
+       "line": 1225
+      }
+     ],
+     "place": "behind the tent; a device of black rings",
+     "light": "dim tent light",
+     "weatherText": "rain fading (1213)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist04",
+        "dist04-c1",
+        "guards"
+       ],
+       [
+        "cult06",
+        "c106-mid",
+        "boss 기계재판 집행핵 / final_pride_cyborg_lord.webp (armoured cyborg lord, pink glow)"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "boss should be a faceless mechanism of black rings and chains, not a cyborg lord",
+     "mobPlan": [
+      {
+       "current": "boss [cult06,c106-mid]",
+       "recommended": "GENERATE s03-black-ring-device (large, 4 key poses)",
+       "how": "replace",
+       "newMobId": "s03-black-ring-device",
+       "attackProfileShouldBe": "boss patterns ground/sky unchanged"
+      },
+      {
+       "current": "guards",
+       "recommended": "s03-dobok-challenger-b",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger-b",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "zigzag ascent ok; add tent-cloth banners if a cloth prop exists (text 천막) — else statues"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "검은 고리",
+    "current": "cult06/c106-mid (final_pride_cyborg_lord)",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep03-S03-survival.jpg",
+    "S/shots/narr/ep03-S03-maze.jpg"
+   ]
+  },
+  {
+   "index": 4,
+   "key": "S-04",
+   "title": "감정의 탑 — 아직 따뜻한 배달",
+   "host": "ep1b08",
+   "tint": [
+    2764602,
+    5331566
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "감정의 탑 로비",
+     "textSays": [
+      {
+       "quote": "비가 내리고 있었다",
+       "line": 1240
+      },
+      {
+       "quote": "창문 없는 탑이 서 있었다. 열여섯 층짜리",
+       "line": 1240
+      },
+      {
+       "quote": "규칙을 어기지 않는 마네킹들이 앉아 있었다. 그들은 빈 접시에 수저를 움직였고",
+       "line": 1254
+      }
+     ],
+     "place": "windowless 16-storey tower lobby",
+     "light": "indoor lamps",
+     "weatherText": "rain outside (1240); indoor",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1a10",
+        "a10-o1",
+        "오만의 흰 가면 / hallucinated_orderly.webp (white-masked orderly with syringe)"
+       ],
+       [
+        "ep1b06",
+        "b06-f1",
+        "greed fox hound"
+       ]
+      ],
+      "drawnAs": "drive mannequin-eating-1.webp static props placed",
+      "parityNote": "only a10-o1 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "white humanoid is close but a hospital orderly with a syringe is chapter-1 art; the text's mob is a jointed mannequin with plate and spoon",
+     "mobPlan": [
+      {
+       "current": "[ep1a10,a10-o1]",
+       "recommended": "GENERATE s04-rule-mannequin (design ref: assets/r106/drive/mannequin-eating-1.webp)",
+       "how": "replace",
+       "newMobId": "s04-rule-mannequin",
+       "attackProfileShouldBe": "melee (plate/spoon swing)"
+      },
+      {
+       "current": "[ep1b06,b06-f1]",
+       "recommended": "remove (fox hound has no textual basis)",
+       "how": "remove",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "clinical lobby ok; add rain audio/ambience only at entry (indoor otherwise)"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "열여섯 층의 복도",
+     "textSays": [
+      {
+       "quote": "지연이 지키는 식당에는… 마네킹들이",
+       "line": 1254
+      },
+      {
+       "quote": "무너지는 복도를 누구보다 빠르게 달렸다",
+       "line": 1266
+      },
+      {
+       "quote": "검은 빗물이 맑아졌다",
+       "line": 1272
+      }
+     ],
+     "place": "floor-by-floor rooms (식당, 경비실, 서고, 갤러리, 기록실)",
+     "light": "indoor",
+     "weatherText": "black rainwater on the 8th floor (1272)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1a10",
+        "a10-o1",
+        "orderly caster"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "same",
+     "mobPlan": [
+      {
+       "current": "[ep1a10,a10-o1]",
+       "recommended": "s04-rule-mannequin",
+       "how": "replace",
+       "newMobId": "s04-rule-mannequin",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "keep room markers; optional dark-water puddle decal in the 8층 room"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "13층에서 16층으로",
+     "textSays": [
+      {
+       "quote": "13층에서 강재헌을 만났다",
+       "line": 1284
+      },
+      {
+       "quote": "그는 내가 오래 들여다보던 결혼 사진 속 남자였다. 탑의 후원자",
+       "line": 1286
+      },
+      {
+       "quote": "16층에는 열여섯 개의 의자가",
+       "line": 1308
+      }
+     ],
+     "place": "13F to 16F, sixteen chairs, mirror",
+     "light": "indoor; 15F fire burning emotions (1298)",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1a10",
+        "a10-o1",
+        "guards"
+       ],
+       [
+        "ep1b08",
+        "b08-boss",
+        "백색 정장의 호텔 그룹 회장 / boss_pride_human + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "a man in a suit is right; the specific white-suit hotel chairman is another chapter's villain — acceptable if renamed (already named 강재헌)",
+     "mobPlan": [
+      {
+       "current": "boss",
+       "recommended": "keep (acceptable); optional recolour to a dark grey suit via tint if the renderer allows",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "s04-rule-mannequin",
+       "how": "replace",
+       "newMobId": "s04-rule-mannequin",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "spiral ok; 16 crates = chairs (gothic-chair drive prop would read better); add a mirror prop (manet mirror) at the dais"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "강재헌",
+    "current": "ep1b08/b08-boss",
+    "verdict": "PARTIAL (acceptable)"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep04-S04-survival.jpg",
+    "S/shots/narr/ep04-S04-maze.jpg"
+   ]
+  },
+  {
+   "index": 5,
+   "key": "S-05",
+   "title": "경성의 밤",
+   "host": "last302",
+   "tint": [
+    2894378,
+    6182226
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "눈 내리는 돌길 사거리",
+     "textSays": [
+      {
+       "quote": "눈이 내리고 있었다",
+       "line": 1401
+      },
+      {
+       "quote": "눈은 계속 내렸다",
+       "line": 1413
+      },
+      {
+       "quote": "머리 위를 날리는 것은 눈이 아니라 잘게 찢긴 호외였다",
+       "line": 1465
+      },
+      {
+       "quote": "술집에는 일본 장교들이 드나들었다",
+       "line": 1351
+      }
+     ],
+     "place": "1930s-40s 경성 stone crossroads outside the bar, tram lights",
+     "light": "gas/tram lights, bar window",
+     "weatherText": "SNOW (explicit)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b07",
+        "b07-f1",
+        "불길 속의 늑대 / wrath_fire_beast.webp (flaming wolf)"
+       ],
+       [
+        "murder04",
+        "murder04-e2",
+        "rooftop_echo"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only b07-f1 (parity)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "flaming wolves on a snowing street have no basis; the mob is named '찢긴 호외의 잔향' (torn newspaper remnants)",
+     "mobPlan": [
+      {
+       "current": "[ep1b07,b07-f1]",
+       "recommended": "GENERATE s05-newsprint-wraith",
+       "how": "replace",
+       "newMobId": "s05-newsprint-wraith",
+       "attackProfileShouldBe": "melee (paper-edge swipe)"
+      },
+      {
+       "current": "[murder04,murder04-e2]",
+       "recommended": "GENERATE s05-officer-shade (Japanese-army junior officer silhouette, 1940s)",
+       "how": "replace",
+       "newMobId": "s05-officer-shade",
+       "attackProfileShouldBe": "melee (sabre)"
+      }
+     ],
+     "mapCorrections": [
+      "snow family ok (R107); add falling snow (weather worker) and warm window glow from the bar; dead trees -> none (text: tram line, street lamps) keep braziers as lamps"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "눈 내리는 골목",
+     "textSays": [
+      {
+       "quote": "구두굽 소리가 나면 달려갔다",
+       "line": 1411
+      },
+      {
+       "quote": "그녀가 서 있던 자리의 발자국은 눈에 덮이고",
+       "line": 1415
+      }
+     ],
+     "place": "snowy alleys near the office",
+     "light": "dark, snow",
+     "weatherText": "SNOW",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b07",
+        "b07-f1",
+        "flaming wolf"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "same",
+     "mobPlan": [
+      {
+       "current": "[ep1b07,b07-f1]",
+       "recommended": "s05-officer-shade (stalker) + s05-newsprint-wraith",
+       "how": "replace",
+       "newMobId": "s05-officer-shade",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "snow + high walls ok; footprint decals fading (optional)"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "관사 · 불빛이 다시 켜지는 집",
+     "textSays": [
+      {
+       "quote": "그날 밤, 나는 일본군 관사에 불을 놓았다",
+       "line": 1445
+      },
+      {
+       "quote": "관사 안에서 다시 불빛이 피어났다",
+       "line": 1467
+      },
+      {
+       "quote": "나는 그 약속에 찍힌 교주의 인장을 지웠다",
+       "line": 1469
+      }
+     ],
+     "place": "burnt officers' quarters, lights re-igniting",
+     "light": "fire glow from windows (keyed window prop exists)",
+     "weatherText": "ash/paper flakes instead of snow (1465)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b07",
+        "b07-f1",
+        "guards (fire wolves)"
+       ],
+       [
+        "ep1b01",
+        "mb-ep1b01",
+        "교만의 잔향·제72문 / gate72_pride_echo (seal rings) + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "seal-ring boss reads as '교주의 인장' acceptably; fire-beast guards are tolerable here only because the house burns — a burning uniformed figure fits better",
+     "mobPlan": [
+      {
+       "current": "guards [ep1b07,b07-f1]",
+       "recommended": "GENERATE s05-burning-officer (or reuse b07-f1 as a 1-in-3 ember beast)",
+       "how": "replace",
+       "newMobId": "s05-burning-officer",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "boss",
+       "recommended": "keep",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "straight ascent ok; switch flakes to grey ash/paper; window keyed prop stays"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "교주의 인장",
+    "current": "ep1b01/mb-ep1b01 (gate72 pride echo)",
+    "verdict": "PARTIAL (acceptable)"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep05-S05-survival.jpg"
+   ]
+  },
+  {
+   "index": 6,
+   "key": "S-06",
+   "title": "네오 서울 — 아직 오지 않은 종말",
+   "host": "u201",
+   "tint": [
+    2501683,
+    4937830
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "만조 요새의 끊어진 다리",
+     "textSays": [
+      {
+       "quote": "한강에는 물보다 많은 전선이 흘렀다. 교각을 타고 올라온 기계들",
+       "line": 1490
+      },
+      {
+       "quote": "여의도 상공에는 뒤집힌 전함들이 떠 있었다. 전함의 탐조등이",
+       "line": 1490
+      },
+      {
+       "quote": "뒤집힌 전함 아래로 포문들이 꽃처럼 벌어졌다",
+       "line": 1508
+      }
+     ],
+     "place": "2189 Seoul, broken bridge over black water, inverted warships above",
+     "light": "searchlights sweeping, teal memory-bullet glow",
+     "weatherText": "rain (1523 '서울의 빗물'); black water",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u201",
+        "u201-e1",
+        "전쟁기억 정찰드론 / mdrone_idle.png (gun drone, native ranged)"
+       ],
+       [
+        "u201",
+        "u201-e2",
+        "폭격기억 사이보그 사냥개 / u2_cyborg_hound.webp"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only drones (parity)"
+     },
+     "verdict": "FITS",
+     "reason": "machine legion = drones + cyborg hounds; the drone is a visible shooter so projectiles are legitimate (recolour bolt to teal 0x4b5866)",
+     "mobPlan": [
+      {
+       "current": "[u201,u201-e1]+[u201,u201-e2]",
+       "recommended": "keep both; fix parity so hounds appear",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "drone ranged / hound melee"
+      }
+     ],
+     "mapCorrections": [
+      "coast + sea water ok; add RAIN + searchlight sweeps (weather worker); braziers -> obelisk lamps; red warning ripple decal before volleys (text 1508) optional"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "도시의 밑면 · 작은 방",
+     "textSays": [
+      {
+       "quote": "방 안에서는 미래의 무기 냄새가 나지 않았다. 젖은 흙과 먼지",
+       "line": 1626
+      },
+      {
+       "quote": "아이가 손으로 귀를 가리는 각도에 맞추어 모든 포신이 나를 겨누었다",
+       "line": 1630
+      }
+     ],
+     "place": "underside of the city, hideout hospital, the child's small room with three calendars",
+     "light": "flashlight; flashes through the window",
+     "weatherText": "indoor; wet earth",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u201",
+        "u201-e1",
+        "drones"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "FITS",
+     "reason": "drones/gun barrels aiming match 1630",
+     "mobPlan": [
+      {
+       "current": "rows",
+       "recommended": "keep; add s06-delay-warden as rare elite (optional)",
+       "how": "augment",
+       "newMobId": "s06-delay-warden",
+       "attackProfileShouldBe": "melee (clock-hand blade)"
+      }
+     ],
+     "mapCorrections": [
+      "forge ok; the small-room marker exists (workbench/cabinets)"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "통제실 · 열일곱 개의 고리",
+     "textSays": [
+      {
+       "quote": "그녀의 등 뒤로 열일곱 개의 고리가 돌고 있었다",
+       "line": 1601
+      },
+      {
+       "quote": "한쪽 날개에는 서울의 창문들이, 다른 쪽에는 바다 위의 가로등들이 달려 있었다… 얼굴이 있어야 할 자리에는 잠든 사람의 눈꺼풀",
+       "line": 1741
+      },
+      {
+       "quote": "두 번째 날갯짓에 달이 갈라졌다… 거대한 눈",
+       "line": 1749
+      }
+     ],
+     "place": "control room above the city; seventeen rotating rings",
+     "light": "suspended raindrops reflecting cities (1595); split moon eye",
+     "weatherText": "rain stopped, drops hanging in the air (1593-1595)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b09",
+        "b09-h1",
+        "guard 강철 턱의 사이보그 개 / polar_cyborg_hound"
+       ],
+       [
+        "ep1a11",
+        "a11-boss",
+        "루시퍼 · 가면 벗은 초천사 / lucifer_unmasked + R104 lucifer key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH (boss)",
+     "reason": "reusing the story's Lucifer for 미명천사 confuses two beings; text gives a precise different design",
+     "mobPlan": [
+      {
+       "current": "boss [ep1a11,a11-boss]",
+       "recommended": "GENERATE s06-dawn-angel (4 key poses)",
+       "how": "replace",
+       "newMobId": "s06-dawn-angel",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "keep hounds",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "spiral ok; weather: suspended droplets (particles that do not fall) + searchlight; 17 ring obelisks already in BP"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "미명천사",
+    "current": "ep1a11/a11-boss (Lucifer)",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep06-S06-survival.jpg"
+   ]
+  },
+  {
+   "index": 7,
+   "key": "S-07",
+   "title": "페르소나 — 내 얼굴을 쓴 자",
+   "host": "cult03",
+   "tint": [
+    2958384,
+    6048355
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "손님 자리 하나뿐인 식탁",
+     "textSays": [
+      {
+       "quote": "식탁이 놓여 있었다… 손님 자리가 하나뿐이었다",
+       "line": 1846
+      },
+      {
+       "quote": "그는 내 옷을 입고 내 칼을 옆에 놓은 채",
+       "line": 1848
+      },
+      {
+       "quote": "탁자 위에 여섯 물건이 놓여 있었다",
+       "line": 1854
+      }
+     ],
+     "place": "a table with one guest seat; six objects",
+     "light": "dim domestic",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "hando03",
+        "h103-t1",
+        "백은 없는 그림자 / silverless_shadow.webp (hooded shade with lantern)"
+       ],
+       [
+        "hando02",
+        "h102-t1",
+        "무명 검흔"
+       ]
+      ],
+      "drawnAs": "drive prop-table + six objects + keyed mask",
+      "parityNote": "only h103-t1 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "text has no swarm here except the hero's own shadow; hooded shades are an acceptable minimal reading of '여섯 물건의 그림자' but they cast cyan bolts",
+     "mobPlan": [
+      {
+       "current": "[hando03,h103-t1]",
+       "recommended": "keep as melee shade (force ai melee) or GENERATE s07-object-shadow (six silhouettes: doll/ledger/dobok/receipt/glass/casing shadows)",
+       "how": "augment",
+       "newMobId": "s07-object-shadow",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "[hando02,h102-t1]",
+       "recommended": "remove (grey robed judge with scales has no basis)",
+       "how": "remove",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "domestic ring ok; one candle light at the table; purple tint fine"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "식탁 뒤의 복도",
+     "textSays": [
+      {
+       "quote": "가면이 갈라지자 아래에서 더 깨끗한 가면이 드러났다",
+       "line": 1872
+      }
+     ],
+     "place": "corridor behind the table",
+     "light": "flashlight",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "hando03",
+        "h103-t1",
+        "shade"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "as above",
+     "mobPlan": [
+      {
+       "current": "[hando03,h103-t1]",
+       "recommended": "melee shade",
+       "how": "augment",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "keep"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "거울상 앞의 단",
+     "textSays": [
+      {
+       "quote": "나는 페르소나를 베었다",
+       "line": 1870
+      },
+      {
+       "quote": "페르소나는 내 얼굴로 울고 있었다",
+       "line": 1888
+      },
+      {
+       "quote": "그때 EGO가 각성했다",
+       "line": 1898
+      }
+     ],
+     "place": "dais before the mirror image",
+     "light": "dim",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "hando03",
+        "h103-boss",
+        "EGO 강탈 악몽왕 / hando_idle (skeletal spider-limbed king) + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "Persona must be 환도's double in 환도's clothes with a plain mask (keyed mask props already crack with boss hp)",
+     "mobPlan": [
+      {
+       "current": "boss [hando03,h103-boss]",
+       "recommended": "GENERATE s07-persona-hwando (4 key poses; base on assets/heroes/normalized/hwando directions)",
+       "how": "replace",
+       "newMobId": "s07-persona-hwando",
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "straight ok; mirror statue -> manet-mirror prop; keep keyed mask on table"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "페르소나",
+    "current": "hando03/h103-boss",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep07-S07-survival.jpg"
+   ]
+  },
+  {
+   "index": 8,
+   "key": "RA",
+   "title": "어제가 도착하는 미술관",
+   "host": "ep1a10",
+   "tint": [
+    2502700,
+    5071192
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "어제가 도착하는 승강장",
+     "textSays": [
+      {
+       "quote": "승강장에는 이미 내린 사람들의 젖은 발자국이 남아 있었다",
+       "line": 1918
+      },
+      {
+       "quote": "철로가 물감으로 그려져 있었다… 아직 마르지 않은 청록색 선",
+       "line": 1934
+      },
+      {
+       "quote": "깨진 종 안에서 붉은 교정 표시들이 벌레처럼 기어 나왔다. 수백 개의 표시",
+       "line": 1956
+      }
+     ],
+     "place": "station platform / gallery, teal painted rails, blind painter 도겸",
+     "light": "gallery light",
+     "weatherText": "wet footprints; indoor",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult06",
+        "c106-e1",
+        "SUPER EGO 판결인장 / superego_cyborg_cult_leader.webp (pink glowing winged angel)"
+       ],
+       [
+        "murder04",
+        "murder04-e1",
+        "공실 표기 잔재 / silent_alarm.png"
+       ]
+      ],
+      "drawnAs": "teal-rail + gogh chair + sunflower gurney props",
+      "parityNote": "only c106-e1 (parity)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "'붉은 교정 표시' are hundreds of insect-like red proofreading marks; a pink angel is the cult finale's art",
+     "mobPlan": [
+      {
+       "current": "[cult06,c106-e1]",
+       "recommended": "GENERATE ra-proofmark-bug (small swarm)",
+       "how": "replace",
+       "newMobId": "ra-proofmark-bug",
+       "attackProfileShouldBe": "melee (bite)"
+      },
+      {
+       "current": "[murder04,murder04-e1]",
+       "recommended": "remove",
+       "how": "remove",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "clinical platform ok; floor tint toward gallery grey-green; obelisks = platform pillars fine"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "검은 태양 아래 설원 · 침대 고랑",
+     "textSays": [
+      {
+       "quote": "검은 태양 아래에 학교가 서 있었다",
+       "line": 2024
+      },
+      {
+       "quote": "눈밭에는 병원의 침대가 밭이랑처럼 늘어서 있었다. 침상마다… 해바라기",
+       "line": 2026
+      },
+      {
+       "quote": "환자복을 입힌 형상들은… 흰 천 아래의 몸은 점점 가벼워졌고, 명찰만 무거워졌다",
+       "line": 2034
+      },
+      {
+       "quote": "열쇠들이 눈발을 가르며 날아왔다",
+       "line": 2040
+      }
+     ],
+     "place": "snowfield under a black sun, rows of hospital beds with sunflowers",
+     "light": "black sun, stars turning in windows",
+     "weatherText": "SNOW (눈발 2040)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult06",
+        "c106-e1",
+        "pink angel"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "maze stalkers should be weightless patient-gown shapes with heavy name tags",
+     "mobPlan": [
+      {
+       "current": "[cult06,c106-e1]",
+       "recommended": "GENERATE ra-nameless-patient",
+       "how": "replace",
+       "newMobId": "ra-nameless-patient",
+       "attackProfileShouldBe": "melee (grab)"
+      }
+     ],
+     "mapCorrections": [
+      "snow family + dead trees + empty beds ok; add snowfall and a black-sun sky disc (weather/sky worker); sunflower gurney prop exists — place 3-4 more"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "학교와 병원 사이의 이송로",
+     "textSays": [
+      {
+       "quote": "나는 순찰자의 길을 막았다",
+       "line": 2040
+      },
+      {
+       "quote": "검은 태양의 가장자리에서 작은 금이 났다. 그 틈으로 노란 물감이",
+       "line": 2072
+      }
+     ],
+     "place": "transfer road between school and hospital across the snowfield",
+     "light": "black sun with yellow crack",
+     "weatherText": "SNOW",
+     "currentSpawn": {
+      "rows": [
+       [
+        "murder04",
+        "murder04-e1",
+        "guards silent_alarm"
+       ],
+       [
+        "murder02",
+        "mb-murder02",
+        "boss drawn as boss-patroller.webp"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "patroller boss fits; guards wrong; outdoor family is 'ash' though the text keeps us on the snowfield",
+     "mobPlan": [
+      {
+       "current": "guards",
+       "recommended": "ra-nameless-patient",
+       "how": "replace",
+       "newMobId": "ra-nameless-patient",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "boss",
+       "recommended": "keep",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "BP RA.ascent.outdoor.family 'ash' -> 'snow' (samong-maps-r105.js RA ascent); snowfall; yellow crack glow near the dais"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "순찰자",
+    "current": "murder02/mb-murder02 drawn as boss-patroller.webp",
+    "verdict": "FITS"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep08-RA-survival.jpg"
+   ]
+  },
+  {
+   "index": 9,
+   "key": "RB",
+   "title": "두 개의 의자와 세 잔의 물",
+   "host": "ep1b06",
+   "tint": [
+    3156266,
+    6968658
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "대기실 · 두 의자와 세 잔",
+     "textSays": [
+      {
+       "quote": "초침은 철로에 매달린 혀가 되었고, 분침 끝에서는 사람의 발자국이 떨어졌다",
+       "line": 2083
+      },
+      {
+       "quote": "다른 컵을 건드리자 통제자의 군단이 성벽 밖을 행진했다… 이미 쓰러진 방어의 형상들",
+       "line": 2089
+      }
+     ],
+     "place": "waiting room with two chairs and three cups, melted clock",
+     "light": "dim",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "kair01",
+        "kair-academy-wave-1",
+        "최초명령 훈련파동 1 / time-collector.png (hooded man, lantern, sickle)"
+       ],
+       [
+        "kair04",
+        "kair-guardian-01",
+        "시간수문장 01 / guardian_01.webp"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only kair-academy-wave-1 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "time-themed hooded collector is an acceptable reading of '도착하지 못한 발자국', but the text's marching enemies are the Controller's fallen legion (u2 knights)",
+     "mobPlan": [
+      {
+       "current": "[kair04,kair-guardian-01]",
+       "recommended": "swap to [u202,u202-e3] 감옥 공명기사 (u2_suppression_knight) or [u201,u201-e3] 참호 공명기사 — melee override required",
+       "how": "replace",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "[kair01,kair-academy-wave-1]",
+       "recommended": "keep (visible caster; tint bolt 0x6a5552)",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "hybrid ok"
+      }
+     ],
+     "mapCorrections": [
+      "domestic square ok; three cups = well props; two chairs (gothic-chair drive prop) at centre; melted-clock decal optional"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "녹아내린 승강장 · 호텔 주방",
+     "textSays": [
+      {
+       "quote": "손님들은 군복 위에 식사용 앞치마를 두르고 있었다",
+       "line": 2146
+      },
+      {
+       "quote": "총주방장이 쓰던 칼이 천장에서 떨어졌다",
+       "line": 2148
+      },
+      {
+       "quote": "잔 위에 쌓인 눈은 이미 불타고 있었다",
+       "line": 2139
+      }
+     ],
+     "place": "outside 경성 bar, inside the hotel kitchen",
+     "light": "kitchen fire, burning snow",
+     "weatherText": "burning snowflakes (embers)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "kair01",
+        "kair-academy-wave-1",
+        "time collector"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "kitchen guests in uniform + apron are specific",
+     "mobPlan": [
+      {
+       "current": "[kair01,kair-academy-wave-1]",
+       "recommended": "GENERATE rb-apron-officer",
+       "how": "replace",
+       "newMobId": "rb-apron-officer",
+       "attackProfileShouldBe": "melee (plate / cleaver)"
+      }
+     ],
+     "mapCorrections": [
+      "workbench = kitchen counters ok; ember particles (orange) instead of snow; add falling-knife hazard decal optional"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "호텔 계단 · 7층 방화문",
+     "textSays": [
+      {
+       "quote": "식탁 끝에서 백색의 손님이 일어났다. 얼굴 대신 특진을 알리는 신문이 붙어 있었다",
+       "line": 2180
+      },
+      {
+       "quote": "다른 거울에서는 총지배인이 서윤의 등을 붙들었고",
+       "line": 2176
+      }
+     ],
+     "place": "hotel stairs, 7F fire door, mirrors",
+     "light": "fire behind the door",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b06",
+        "b06-f1",
+        "guards greed fox hound"
+       ],
+       [
+        "ep1b06",
+        "b06-boss",
+        "총지배인 · 맘몬 / boss_greed_human + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "총지배인 appears only in a mirror; the active antagonist of R-04 is the 백색의 손님 — keep GM (he is canon) but add the white guest as the climb's elite",
+     "mobPlan": [
+      {
+       "current": "guards [ep1b06,b06-f1]",
+       "recommended": "GENERATE rb-white-guest as elite guard + rb-apron-officer",
+       "how": "replace",
+       "newMobId": "rb-white-guest",
+       "attackProfileShouldBe": "melee (medal volley optional, visible thrower)"
+      },
+      {
+       "current": "boss",
+       "recommended": "keep",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": null
+      }
+     ],
+     "mapCorrections": [
+      "spiral ok; fire-door glow at the top landing; mirror props (manet) x2"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "총지배인",
+    "current": "ep1b06/b06-boss",
+    "verdict": "PARTIAL (canon character; acceptable)"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep09-RB-survival.jpg"
+   ]
+  },
+  {
+   "index": 10,
+   "key": "RC",
+   "title": "흑백의 청색재판",
+   "host": "ep1b03",
+   "tint": [
+    2501171,
+    5331051
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "여섯 번 접힌 대련장",
+     "textSays": [
+      {
+       "quote": "대련장은 여섯 방향으로 접혀 있었다",
+       "line": 2201
+      },
+      {
+       "quote": "흰옷을 입은 사람들은… 무죄였다. 옷이 검게 물든 사람들은… 유죄였다",
+       "line": 2205
+      },
+      {
+       "quote": "푸른 빛이 공간의 틈을 채웠다",
+       "line": 2209
+      }
+     ],
+     "place": "the sparring hall folded six ways; verdict papers growing",
+     "light": "blue light in the seams",
+     "weatherText": "none (rain enters in the maze)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b03",
+        "b03-g1",
+        "찢어진 사진의 망령 / envy_glass_shard.webp (spiky crystal orb)"
+       ],
+       [
+        "ep1b05",
+        "b05-p1",
+        "heart marionette"
+       ]
+      ],
+      "drawnAs": "picasso paper + paper-king props",
+      "parityNote": "only b03-g1 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "abstract crystal orbs for '관람석의 시선' are tolerable; the judged crowd should be the S-03 dobok challengers (white = innocent, black = guilty)",
+     "mobPlan": [
+      {
+       "current": "[ep1b03,b03-g1]",
+       "recommended": "keep as the 'gaze' (visible caster, tint bolt blue 0x51586b)",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "hybrid ok"
+      },
+      {
+       "current": "[ep1b05,b05-p1]",
+       "recommended": "s03-dobok-challenger A/B (reuse)",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "octagon ok; blue tint stronger (text 청색); statues = fold lines fine"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "접히는 재판정",
+     "textSays": [
+      {
+       "quote": "스물세 해 전의 비가 대련장으로 들어왔다",
+       "line": 2227
+      },
+      {
+       "quote": "나는 한시우가 보지 못하는 왼쪽으로 날아드는 종이칼을 막았다",
+       "line": 2241
+      }
+     ],
+     "place": "folding courtroom",
+     "light": "blue",
+     "weatherText": "RAIN (text explicit, inside the hall)",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b03",
+        "b03-g1",
+        "crystal orb"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "paper blades flying are the text's attack",
+     "mobPlan": [
+      {
+       "current": "[ep1b03,b03-g1]",
+       "recommended": "GENERATE rc-verdict-paperblade (ranged, visible paper-dart projectile) — or keep orb",
+       "how": "augment",
+       "newMobId": "rc-verdict-paperblade",
+       "attackProfileShouldBe": "ranged with its own projectile sprite"
+      }
+     ],
+     "mapCorrections": [
+      "RAIN indoors (weather worker: allow indoor rain flag for this stage)"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "지하에 매달린 꼭대기 층",
+     "textSays": [
+      {
+       "quote": "재판관이 몸을 일으켰다. 그 얼굴은 나를 닮아 있었다",
+       "line": 2235
+      },
+      {
+       "quote": "금고 안쪽에서 종이 왕이 일어났다. 왕관에는 능력의 이름들이",
+       "line": 2294
+      },
+      {
+       "quote": "밀랍 속에는 박수를 치다 멈춘 손들이 갇혀 있었다",
+       "line": 2262
+      }
+     ],
+     "place": "the tower's top floor hanging underground; wax chandeliers; sixteen gilded chairs; Mammon's vault",
+     "light": "candle wax, gold leaf",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "ep1b03",
+        "b03-g1",
+        "guards"
+       ],
+       [
+        "ep1b03",
+        "mb-ep1b03",
+        "재판관 / cracked_comparison_echo (cracked crystal woman) + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "the judge wears 환도's face; and this ascent is R-06 whose antagonist is the 종이 왕 (paper king prop exists but is static)",
+     "mobPlan": [
+      {
+       "current": "boss [ep1b03,mb-ep1b03]",
+       "recommended": "GENERATE rc-judge-mirrorface (4 key poses, gavel = hammer-1/2 drive prop) OR move the judge to the maze record and make rc-paper-king the ascent boss",
+       "how": "replace",
+       "newMobId": "rc-judge-mirrorface",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "s03-dobok-challenger-b",
+       "how": "replace",
+       "newMobId": "s03-dobok-challenger-b",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "forge spiral -> gold/wax palette (tint 0x6b5a3a cap); 16 crates -> gilded chairs; chandelier braziers; paper-king prop near the vault obelisk (exists)"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "재판관",
+    "current": "ep1b03/mb-ep1b03",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep10-RC-survival.jpg"
+   ]
+  },
+  {
+   "index": 11,
+   "key": "RD",
+   "title": "첫 번째 나팔 — 서로의 결말을 먹는 도시",
+   "host": "cult02",
+   "tint": [
+    2763317,
+    5592430
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "늪의 다리 · 붉은 교각",
+     "textSays": [
+      {
+       "quote": "늪 위에 다리가 놓여 있었다. 처음 발을 디뎠을 때에는 붉은 교각이었지만",
+       "line": 2317
+      },
+      {
+       "quote": "난간에 매달린 수련은 속에서부터 빛을 냈다",
+       "line": 2319
+      },
+      {
+       "quote": "감시의 연꽃들이 일제히 벌어졌다. 꽃 속에서 눈꺼풀 모양의 창들이 쏟아졌다",
+       "line": 2355
+      },
+      {
+       "quote": "다리 밑에서 뿌리가 솟았다",
+       "line": 2361
+      }
+     ],
+     "place": "red bridge over the swamp, glowing lotuses, sleepless village",
+     "light": "lotus glow from within; night",
+     "weatherText": "swamp water; text silent on rain",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult02",
+        "c102-e1",
+        "신경 케이블 포식체 / black_robed_nightmare_demon.webp (red-robed demon mage)"
+       ],
+       [
+        "cult05",
+        "c105-e2",
+        "black rose demon soldier"
+       ]
+      ],
+      "drawnAs": "lotus props (static)",
+      "parityNote": "only c102-e1 (parity); test-aid showed 0 enemies alive at capture time (spawn ring found no floor on the narrow bridge for a few seconds)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "red-robed cult demons are the finale's art; the text's attackers are watching lotuses that spit eyelid shards and roots",
+     "mobPlan": [
+      {
+       "current": "[cult02,c102-e1]",
+       "recommended": "GENERATE rd-watch-lotus (ranged, visible petal-shard projectile)",
+       "how": "replace",
+       "newMobId": "rd-watch-lotus",
+       "attackProfileShouldBe": "ranged (own projectile sprite)"
+      },
+      {
+       "current": "[cult05,c105-e2]",
+       "recommended": "GENERATE rd-swamp-root (melee, rises from the water edge)",
+       "how": "replace",
+       "newMobId": "rd-swamp-root",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "swamp + water ok; bridge railing tint red (0x6a2f2f) for the 붉은 교각; lotus glow lights (point lights or sprite glow) — weather: mist over water"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "수련 아래의 불면병동",
+     "textSays": [
+      {
+       "quote": "물 아래의 학교 보건실이 드러났다",
+       "line": 2365
+      },
+      {
+       "quote": "책상에는 여섯 권의 책이 놓여 있었다",
+       "line": 2384
+      }
+     ],
+     "place": "sleepless ward under the lilies, then the locked classroom",
+     "light": "flashlight; water light",
+     "weatherText": "wet",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult02",
+        "c102-e1",
+        "demon mage"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "ward stalkers: sleepless villagers are victims, so use the eye-lotus and root only",
+     "mobPlan": [
+      {
+       "current": "[cult02,c102-e1]",
+       "recommended": "rd-watch-lotus (stationary turret variant) + rd-swamp-root",
+       "how": "replace",
+       "newMobId": "rd-watch-lotus",
+       "attackProfileShouldBe": "ranged/melee"
+      }
+     ],
+     "mapCorrections": [
+      "clinical ok; wet-floor sheen; lotus props along the path"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "일곱 기둥의 대성당",
+     "textSays": [
+      {
+       "quote": "하늘에서 나팔 소리가 났다. 악기는 보이지 않았다",
+       "line": 2443
+      },
+      {
+       "quote": "발록의 일곱 기둥이 솟아올라 열여섯 층을 떠받쳤다. 기둥마다 서른한 개의 이름표",
+       "line": 2467
+      },
+      {
+       "quote": "제단 위에는 신의 형상 대신 빈 원고지가",
+       "line": 2469
+      }
+     ],
+     "place": "cathedral-like gallery with seven pillars, blank manuscript altar",
+     "light": "high windows",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult02",
+        "c102-e1",
+        "guards"
+       ],
+       [
+        "cult02",
+        "c102-boss",
+        "네트워크 합창체 / superego cyborg cult leader (pink winged angel)"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "the first trumpet is an unseen sound that becomes a sleeve-shaped horn; the pink angel is the cult boss",
+     "mobPlan": [
+      {
+       "current": "boss [cult02,c102-boss]",
+       "recommended": "GENERATE rd-first-trumpet (4 key poses; design from assets/r106/drive/trumpet.webp)",
+       "how": "replace",
+       "newMobId": "rd-first-trumpet",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "rd-swamp-root",
+       "how": "replace",
+       "newMobId": "rd-swamp-root",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "straight forge ok; 7 obelisks = pillars exist; altar cabinet -> blank paper on a table (table-drawing prop)"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "첫 번째 나팔",
+    "current": "cult02/c102-boss",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep11-RD-survival.jpg"
+   ]
+  },
+  {
+   "index": 12,
+   "key": "RE",
+   "title": "네 번째 나팔 — 백색 사수의 승전식",
+   "host": "u202",
+   "tint": [
+    3027510,
+    6976379
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "천장을 뚫고 온 열차",
+     "textSays": [
+      {
+       "quote": "열차가 천장을 뚫고 들어왔다. 객차마다 다른 밤이 실려 있었다",
+       "line": 2492
+      },
+      {
+       "quote": "그는 흰 외투를 입고 플랫폼 위에 서 있었다… 승리한 날짜만 금실로",
+       "line": 2498
+      },
+      {
+       "quote": "제복을 입은 인형들이 훈장을 꺼냈다",
+       "line": 2510
+      }
+     ],
+     "place": "train through the ceiling; platform; victory ceremony",
+     "light": "chandeliers (2532)",
+     "weatherText": "none; wet hotel stairs in a carriage",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u201",
+        "u201-e1",
+        "drone"
+       ],
+       [
+        "u202",
+        "u202-e2",
+        "복종 봉인구 / u2_memory_orb"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only drones (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "drones as leftover war machines are plausible in a Neo-Seoul train, but the text's crowd is uniformed medal dolls",
+     "mobPlan": [
+      {
+       "current": "[u202,u202-e2]",
+       "recommended": "GENERATE re-medal-doll",
+       "how": "replace",
+       "newMobId": "re-medal-doll",
+       "attackProfileShouldBe": "melee (medal pin jab)"
+      },
+      {
+       "current": "[u201,u201-e1]",
+       "recommended": "keep drones as 1-in-3 ranged",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "ranged"
+      }
+     ],
+     "mapCorrections": [
+      "platform ok; chandelier light props at the ceiling line; crates = luggage ok; statues = medal dolls (static) fine"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "관람석이 붙은 탈출로",
+     "textSays": [
+      {
+       "quote": "빠른 사람은 느린 사람에게 걸음을 맞췄다",
+       "line": 2526
+      },
+      {
+       "quote": "천장에는 관람석이 붙어 있었다",
+       "line": 2530
+      }
+     ],
+     "place": "escape route with stands on the ceiling",
+     "light": "chandelier",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u201",
+        "u201-e1",
+        "drones"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "as above",
+     "mobPlan": [
+      {
+       "current": "rows",
+       "recommended": "re-medal-doll + drones",
+       "how": "augment",
+       "newMobId": "re-medal-doll",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "keep"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "마지막 객차 · 두 사람의 의자",
+     "textSays": [
+      {
+       "quote": "조준경 안에서 나와 같은 얼굴을 한 사수가 먼저 방아쇠를 당겼다",
+       "line": 2498
+      },
+      {
+       "quote": "나는 샹들리에를 쏘았다",
+       "line": 2532
+      },
+      {
+       "quote": "빈 외투가 바닥으로 무너졌다",
+       "line": 2538
+      }
+     ],
+     "place": "last carriage, bench with two unpainted faces, house plan",
+     "light": "chandelier falls -> shadow",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "u202",
+        "u202-e2",
+        "guards memory orb"
+       ],
+       [
+        "u201",
+        "u201-mid",
+        "제4단계 전쟁관리자 / u2_suppression_knight (dark armoured knight) + R104 key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "백색 사수 is 기억사수's double in a white coat with a rifle",
+     "mobPlan": [
+      {
+       "current": "boss [u201,u201-mid]",
+       "recommended": "GENERATE re-white-marksman (4 key poses; base on assets/heroes/normalized/gunner)",
+       "how": "replace",
+       "newMobId": "re-white-marksman",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "re-medal-doll",
+       "how": "replace",
+       "newMobId": "re-medal-doll",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "straight ok; bench + table-drawing prop at the dais; chandelier prop that darkens after boss hp<50% (keyed like window)"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "백색 사수",
+    "current": "u201/u201-mid",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep12-RE-survival.jpg"
+   ]
+  },
+  {
+   "index": 13,
+   "key": "RF",
+   "title": "다섯 번째 나팔 — 선생님의 빈 얼굴",
+   "host": "cult05",
+   "tint": [
+    2959910,
+    6643024
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "표지가 쌓인 미술관 홀",
+     "textSays": [
+      {
+       "quote": "팔을 지탱한 몸에는 표지가 겹겹이 매달려 있었고, 얼굴이 있어야 할 자리에서는 종이 한 장이 펄럭였다",
+       "line": 2555
+      },
+      {
+       "quote": "글자마다 낚싯바늘이 달려 있었다",
+       "line": 2569
+      },
+      {
+       "quote": "이름을 끝까지 쓰지 못한 아이들이 쏟아졌다. 머리와 팔이 따로 움직이는 종이 형상들이었다",
+       "line": 2595
+      }
+     ],
+     "place": "gallery hall stacked with book covers",
+     "light": "lamp light",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "murder04",
+        "murder04-e2",
+        "rooftop_echo -> drawn as drive mob-paper-figure.webp (static)"
+       ],
+       [
+        "ep1b03",
+        "b03-g2",
+        "glass shard -> also drawn as paper figure"
+       ]
+      ],
+      "drawnAs": "assets/r105/drive/mob-paper-figure.webp",
+      "parityNote": "only murder04-e2 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "look matches 2595 exactly; but one static frame and a caster donor (bolts)",
+     "mobPlan": [
+      {
+       "current": "[murder04,murder04-e2]+[ep1b03,b03-g2]",
+       "recommended": "GENERATE rf-paper-child 2x2 sheet (design = mob-paper-figure.webp) with detached head/arm offsets in HIT",
+       "how": "augment",
+       "newMobId": "rf-paper-child",
+       "attackProfileShouldBe": "melee (paper-edge cut, 2596)"
+      }
+     ],
+     "mapCorrections": [
+      "domestic square ok; cabinets = book stacks ok; gothic chairs/walls exist"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "책의 등 안쪽",
+     "textSays": [
+      {
+       "quote": "그때 다섯 번째 나팔이 울렸다. 책등이 입처럼 벌어지며",
+       "line": 2595
+      }
+     ],
+     "place": "inside the book spine",
+     "light": "dim",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "murder04",
+        "murder04-e2",
+        "paper figure"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "as above",
+     "mobPlan": [
+      {
+       "current": "row",
+       "recommended": "rf-paper-child",
+       "how": "augment",
+       "newMobId": "rf-paper-child",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "keep; gothic-wall props"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "작은 탁자가 있는 자리",
+     "textSays": [
+      {
+       "quote": "스토리텔러는 그렇게 자기 얼굴을 만들고 있었다",
+       "line": 2561
+      },
+      {
+       "quote": "도겸이 바닥에 앉았다. 작은 식탁 그림을 두 무릎 위에",
+       "line": 2601
+      }
+     ],
+     "place": "the small table",
+     "light": "lamp",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "murder04",
+        "murder04-e2",
+        "guards"
+       ],
+       [
+        "cult03",
+        "c103-boss",
+        "이단의목사 백이온 -> drawn as drive boss-storyteller.webp (book-spine body) static"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "FITS (art) / PARTIAL (static)",
+     "reason": "storyteller art matches 2555; needs key poses",
+     "mobPlan": [
+      {
+       "current": "boss",
+       "recommended": "keep art; GENERATE rf-storyteller-keyposes (needle rain / page-face)",
+       "how": "augment",
+       "newMobId": "rf-storyteller-keyposes",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "rf-paper-child",
+       "how": "augment",
+       "newMobId": "rf-paper-child",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "spiral ok; table-drawing prop exists; add 'chair with cushion' trap marker (2591) optional"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "스토리텔러",
+    "current": "cult03/c103-boss drawn as boss-storyteller.webp",
+    "verdict": "FITS (art), no key poses"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep13-RF-survival.jpg"
+   ]
+  },
+  {
+   "index": 14,
+   "key": "RG",
+   "title": "일곱 번째 나팔 — 여백의 전쟁",
+   "host": "cult06",
+   "tint": [
+    2761776,
+    5917286
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "무너진 미술관 벽 · 일곱 기둥",
+     "textSays": [
+      {
+       "quote": "거미동굴의 뼈가 철로를 받쳤고, 경성의 전깃줄에는 카이로의 초침이 매달렸다. 검은 태양 아래에서는 장미로 이루어진 건물들",
+       "line": 2661
+      },
+      {
+       "quote": "하늘에는 일곱 개의 나팔이 떠 있었다. 나팔의 몸통은 빈 소매를 닮았다",
+       "line": 2663
+      },
+      {
+       "quote": "스토리텔러의 바늘들이 흰 여백을 향해 떨어졌다",
+       "line": 2669
+      }
+     ],
+     "place": "collapsed gallery wall; overlapping worlds under a black sun; seven trumpets in the sky",
+     "light": "black sun",
+     "weatherText": "falling needles / paper; text silent on rain",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult04",
+        "c104-e1",
+        "소환좌 칩 수호체 / pride_cyborg_cult_leader.webp (white suit, spider legs, pink)"
+       ],
+       [
+        "cult03",
+        "c103-e1",
+        "EGO 구속 연결자 (kneeling chained man)"
+       ]
+      ],
+      "drawnAs": "trumpet + link-pillar props",
+      "parityNote": "only c104-e1 (parity)"
+     },
+     "verdict": "MISMATCH",
+     "reason": "white-suit spider cyborgs are the cult finale; '막힌 이름들' are names trapped in the trumpets",
+     "mobPlan": [
+      {
+       "current": "[cult04,c104-e1]",
+       "recommended": "GENERATE rg-blocked-name",
+       "how": "replace",
+       "newMobId": "rg-blocked-name",
+       "attackProfileShouldBe": "melee"
+      },
+      {
+       "current": "[cult03,c103-e1]",
+       "recommended": "ra-proofmark-bug swarm (reuse) ",
+       "how": "replace",
+       "newMobId": "ra-proofmark-bug",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "ash field + dead trees ok; black-sun sky; falling paper/needle flakes; trumpet props exist (3) — hang 7 if the sky layer allows"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "여백의 전쟁터",
+     "textSays": [
+      {
+       "quote": "거미줄 같은 선들이 장부와 문, 잔과 도복을 한데 묶고 있었다",
+       "line": 2675
+      }
+     ],
+     "place": "the white margin battlefield",
+     "light": "black sun",
+     "weatherText": "paper flakes",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult04",
+        "c104-e1",
+        "spider cyborg"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "as above",
+     "mobPlan": [
+      {
+       "current": "row",
+       "recommended": "rg-blocked-name + ra-proofmark-bug",
+       "how": "replace",
+       "newMobId": "rg-blocked-name",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "ash ok; thread-door prop exists; whiten the floor tint toward 0x8a8488 (여백)"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "회전 고리가 있는 기둥",
+     "textSays": [
+      {
+       "quote": "탄환이 기둥의 회전 고리를 멈춰 세웠다",
+       "line": 2675
+      },
+      {
+       "quote": "일곱 번째 나팔은 끝까지 울리지 못했다",
+       "line": 2715
+      },
+      {
+       "quote": "스토리텔러의 얼굴에서 종이가 떨어졌다",
+       "line": 2717
+      }
+     ],
+     "place": "pillar with rotating rings",
+     "light": "forge",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "cult04",
+        "c104-e1",
+        "guards"
+       ],
+       [
+        "cult04",
+        "c104-mid",
+        "적그리스도 배양좌 / six_legged_cyborg_lord_final.webp (white suit cyborg)"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "the seventh trumpet = a giant empty-sleeve horn with name tags, bound to the ring pillar",
+     "mobPlan": [
+      {
+       "current": "boss [cult04,c104-mid]",
+       "recommended": "GENERATE rg-seventh-trumpet (4 key poses)",
+       "how": "replace",
+       "newMobId": "rg-seventh-trumpet",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards",
+       "recommended": "rg-blocked-name",
+       "how": "replace",
+       "newMobId": "rg-blocked-name",
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "straight forge ok; link-pillar prop at the dais (exists) + rotating ring fx (fx-boss worker)"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "일곱 번째 나팔",
+    "current": "cult04/c104-mid",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep14-RG-survival.jpg"
+   ]
+  },
+  {
+   "index": 15,
+   "key": "M",
+   "title": "마지막에 남은 사람",
+   "host": "kair05",
+   "tint": [
+    2894896,
+    6775918
+   ],
+   "stages": [
+    {
+     "stage": "survival",
+     "blueprintTitle": "궁전 정원 · 쓰러진 악마 나무",
+     "textSays": [
+      {
+       "quote": "악마화 나무는 베어진 채 남아 있었다. 가지가 사라진 자리에는 별이 걸려 있었고",
+       "line": 2869
+      },
+      {
+       "quote": "성벽이 상담실 안으로 밀려왔고, 시곗바늘이 문틈을 가로질렀다. 검은 뿌리와 강철 군단의 잔해",
+       "line": 2912
+      }
+     ],
+     "place": "palace garden, felled demon tree, stars in the branches; then the counselling room",
+     "light": "starlight; night",
+     "weatherText": "clear night (stars); text silent on rain",
+     "currentSpawn": {
+      "rows": [
+       [
+        "kair04",
+        "kair-guardian-01",
+        "시간수문장 01 / guardian_01.webp (blue crystal clock guardian)"
+       ],
+       [
+        "u201",
+        "u201-e3",
+        "참호 공명기사 / u2_resonance_knight"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": "only kair-guardian-01 (parity)"
+     },
+     "verdict": "PARTIAL",
+     "reason": "'성벽과 시곗바늘의 잔해' = clock guardians + steel legion + black roots; the mix is right but only the clock guardian ever spawns",
+     "mobPlan": [
+      {
+       "current": "[kair04,kair-guardian-01]",
+       "recommended": "keep (clock hands)",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee (override)"
+      },
+      {
+       "current": "[u201,u201-e3]",
+       "recommended": "keep (steel legion) + add [dist00,a11-c1] as root remnant (fix parity so all three rotate)",
+       "how": "augment",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "garden + living trees ok; night sky with stars; stump = felled demon tree (exists); six-object markers exist"
+     ]
+    },
+    {
+     "stage": "maze",
+     "blueprintTitle": "상담실로 밀려온 성벽",
+     "textSays": [
+      {
+       "quote": "그녀를 향해 다가갈수록 길은 좁아졌다",
+       "line": 2914
+      },
+      {
+       "quote": "방벽이 무너질 때마다 미카엘라는 나보다 등 뒤의 세계들을 먼저 돌아보았다",
+       "line": 2916
+      }
+     ],
+     "place": "counselling room invaded by castle walls",
+     "light": "lamp",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "kair04",
+        "kair-guardian-01",
+        "clock guardian"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "PARTIAL",
+     "reason": "as above",
+     "mobPlan": [
+      {
+       "current": "rows",
+       "recommended": "clock guardian + resonance knight + root remnant (rotation)",
+       "how": "augment",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "domestic ok; obelisks = wall fragments; clock-hand decals optional"
+     ]
+    },
+    {
+     "stage": "ascent",
+     "blueprintTitle": "상담실",
+     "textSays": [
+      {
+       "quote": "방 한가운데 미카엘라가 서 있었다. 그녀는 기억 속의 흰 가운을 입고 있었다",
+       "line": 2891
+      },
+      {
+       "quote": "마지막 연결이 드러나자… 문에서 손을 떼지 못하도록 손목까지 묶어 놓은 매듭이었다",
+       "line": 2940
+      },
+      {
+       "quote": "나는 그 매듭을 베었다",
+       "line": 2942
+      }
+     ],
+     "place": "old counselling room with empty frames",
+     "light": "white light through the last door",
+     "weatherText": "none",
+     "currentSpawn": {
+      "rows": [
+       [
+        "dist00",
+        "a11-c1",
+        "guards purple knight"
+       ],
+       [
+        "kair02",
+        "kair-great-03",
+        "아르벨리아를 묶은 변조 명령 / arvelia_delay_archon (white-haired blue archon) + key poses"
+       ]
+      ],
+      "drawnAs": null,
+      "parityNote": null
+     },
+     "verdict": "MISMATCH",
+     "reason": "미카엘라 is the psychiatrist in a white coat (hero art exists: assets/heroes/normalized/directions/michaela-*.webp); Arvelia is another character. Text: the hero cuts the knot/barrier, not her",
+     "mobPlan": [
+      {
+       "current": "boss [kair02,kair-great-03]",
+       "recommended": "GENERATE m-michaela-knot (4 key poses: Michaela in white coat with hands spread toward doors; the hittable 'body' is the wall/clock/root barrier knot in front of her — presentation only)",
+       "how": "replace",
+       "newMobId": "m-michaela-knot",
+       "attackProfileShouldBe": null
+      },
+      {
+       "current": "guards [dist00,a11-c1]",
+       "recommended": "root remnant is fine here (2912 '검은 뿌리') but melee override",
+       "how": "keep",
+       "newMobId": null,
+       "attackProfileShouldBe": "melee"
+      }
+     ],
+     "mapCorrections": [
+      "straight ok; empty-frame props (cabinet -> picture frames if a frame asset exists); white light at the far door"
+     ]
+    }
+   ],
+   "boss": {
+    "name": "미카엘라",
+    "current": "kair02/kair-great-03 (Arvelia)",
+    "verdict": "MISMATCH"
+   },
+   "notes": [],
+   "screenshots": [
+    "S/shots/narr/ep15-M-survival.jpg"
+   ]
+  }
+ ],
+ "mobs": [
+  {
+   "id": "s01-root-shade",
+   "koreanName": "뿌리 밑 잔영",
+   "narrativeEvidence": [
+    {
+     "quote": "뿌리를 무너뜨리자 그 아래 눌려 있던 형상들이 쏟아졌다",
+     "line": 932
+    },
+    {
+     "quote": "뒤에서는 새로운 발소리가 거듭 태어났다",
+     "line": 932
+    }
+   ],
+   "role": "swarm filler (survival) / maze stalker",
+   "sizeClass": "human (slightly shorter, 0.9x)",
+   "stages": [
+    "S-01 survival",
+    "S-01 maze"
+   ],
+   "replacesOrAugments": "replaces [dist00,a11-c1] and [last302,l302-e1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A faceless human-shaped shade that was pressed flat under black tree roots and is only now peeling up from the floor: smooth featureless head with a single horizontal stitched seam where the mouth would be, body of compacted dark soot and dried rose petals, thin black root fibres trailing from the ankles and wrists back toward the ground, shoulders slightly folded as if still crushed, dull rose-brown (#6b4b52) and charcoal (#2a2024) palette with one faint dusty-pink petal accent, no weapon, bare hands with long soot fingers dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "shuffling forward dragging root fibres, torso leaning",
+    "idle": "stands slightly caved in, head tilted listening",
+    "hit": "flattens sideways like paper, fibres whip",
+    "attack": "lunges both hands forward in a short clawing grab toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s01-ribbon-resident",
+   "koreanName": "리본에 묶인 주민",
+   "narrativeEvidence": [
+    {
+     "quote": "작은 구두를 신은 주민들이 양손을 무릎에 얹고 앉아 있었다",
+     "line": 953
+    },
+    {
+     "quote": "옷깃에는 이름 대신 착함과 감사와 순종을 뜻하는 말들이 수놓여",
+     "line": 953
+    },
+    {
+     "quote": "옷에 장식처럼 달린 리본이 벽 속까지 이어져 있었다",
+     "line": 957
+    }
+   ],
+   "role": "ascent escort/guard (slow)",
+   "sizeClass": "human",
+   "stages": [
+    "S-01 ascent"
+   ],
+   "replacesOrAugments": "replaces guard [ep1b05,b05-p1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A porcelain-faced house resident in an old-fashioned high-collared dress with a wide embroidered collar (abstract embroidery, no readable letters), tiny lacquered shoes, hands held stiffly at the knees, a long satin ribbon bow on the back whose tails stretch away behind the figure as if tied into a wall, fixed sewn-on smile, holding an empty teacup; palette cream, dusty rose, dark brown with a deep red ribbon accent dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "small mincing steps, ribbon tails taut behind",
+    "idle": "sits-then-stands posture, cup raised in a drinking mime",
+    "hit": "head snaps, smile seam splits",
+    "attack": "swings the empty cup and saucer in a short arc toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "s01-hostess-keyposes",
+   "koreanName": "봉합부인 (키포즈 4장)",
+   "narrativeEvidence": [
+    {
+     "quote": "수백 개의 앞치마를 이어 만든 치마… 허리에는 가위와 찻숟가락이 매달렸고… 장미 다발",
+     "line": 965
+    },
+    {
+     "quote": "봉합부인이 가위를 벌렸다",
+     "line": 975
+    }
+   ],
+   "role": "boss key poses",
+   "sizeClass": "large",
+   "stages": [
+    "S-01 ascent"
+   ],
+   "replacesOrAugments": "augments assets/r105/drive/boss-hostess.webp (static)",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "Use the existing boss-hostess design exactly (rose-bouquet head with many tiny smiles, skirt of hundreds of stitched aprons, scissors and tea spoons at the waist). Four key poses: scissors raised and opening, scissors snipping downward toward the screen bottom, aprons flaring outward in follow-through, settling with scissors lowered dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "anticipation / strike-down / follow-through / recovery, pivot at the hem centre like assets/r104/bosses"
+   },
+   "priority": 2
+  },
+  {
+   "id": "s02-faceless-student",
+   "koreanName": "얼굴 없는 학생",
+   "narrativeEvidence": [
+    {
+     "quote": "어둠 속에서 학생들이 일어섰다. 얼굴은 없었고, 교복 안에는 구겨진 확인서만 들어 있었다",
+     "line": 1032
+    }
+   ],
+   "role": "swarm filler / maze stalker / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "S-02 survival",
+    "S-02 maze",
+    "S-02 ascent"
+   ],
+   "replacesOrAugments": "augments assets/r105/drive/mob-student.webp (same design, now 4 poses); replaces [ep1a08,a08-s1] and [u204,u204-e2]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The existing faceless student exactly: dark navy school uniform, blank smooth face, crumpled paper stuffed inside the open collar and sleeves, wet indoor slippers; slight translucency at the hem dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "slow determined walk, arms straight down",
+    "idle": "stands facing slightly away, paper rustling",
+    "hit": "folds at the waist, paper bursts from the collar",
+    "attack": "two-handed shove / paper slap toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s03-dobok-challenger",
+   "koreanName": "검게 물든 도전자 (A)",
+   "narrativeEvidence": [
+    {
+     "quote": "데미지 컨트롤 슈트는 처음에는 흰색이었다… 치명상에 가까워질수록 검게 변하는 도복",
+     "line": 1091
+    },
+    {
+     "quote": "낡은 운동화에 여러 번 기운 도복을 입고, 허리에는 흰 띠를",
+     "line": 1093
+    },
+    {
+     "quote": "기절한 도전자를 다시 일으켜 세우고",
+     "line": 1217
+    }
+   ],
+   "role": "swarm filler / maze stalker",
+   "sizeClass": "human",
+   "stages": [
+    "S-03 survival",
+    "S-03 maze",
+    "RC survival (white = innocent)"
+   ],
+   "replacesOrAugments": "replaces [dist04,dist04-c1]; reused in RC for [ep1b05,b05-p1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [
+    "RC"
+   ],
+   "imagePrompt": "A young martial-arts examinee in a white dobok whose chest and one shoulder have turned ink-black as if soaked from inside, white belt, worn canvas sneakers, bandaged knuckles, face downcast and shadowed (no visible features), posture of someone being pulled upright by invisible strings, thin black ring faintly visible at the back of the neck; palette white, grey, ink black, no colour accent except a faint grey-blue dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "stiff marionette walk, heels dragging",
+    "idle": "fighting stance held too long, slight tremble",
+    "hit": "black spreads down one arm, knees buckle",
+    "attack": "straight punch then front kick toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s03-dobok-challenger-b",
+   "koreanName": "검게 물든 도전자 (B · 치명)",
+   "narrativeEvidence": [
+    {
+     "quote": "온몸이 검게 변했다면 실제 전투에서는 죽음에 이르렀을 가능성이",
+     "line": 1091
+    },
+    {
+     "quote": "쓰러진 사람은 또 맞아야 했다. 도복이 흰색으로 돌아올 때마다 상처도 처음부터",
+     "line": 1221
+    }
+   ],
+   "role": "elite / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "S-03 ascent",
+    "S-03 survival (elite)",
+    "RC ascent guard"
+   ],
+   "replacesOrAugments": "replaces [dist04,dist04-s1] and S-03 guards",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "Same examinee design but the dobok is black from neck to ankles with only the white belt bright, head hanging, a heavier black iron ring clamped around the neck with a short chain rising upward out of frame, feet barely touching the ground dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "dragged forward by the chain, toes scraping",
+    "idle": "hangs slack, swaying",
+    "hit": "chain yanks the body back upright",
+    "attack": "wide hooking punch with the whole body swung by the chain, toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "s03-black-ring-device",
+   "koreanName": "검은 고리",
+   "narrativeEvidence": [
+    {
+     "quote": "천막 안쪽에 검은 고리가 숨어 있었다. 기절한 도전자를 다시 일으켜 세우고, 멎은 싸움의 다음 동작을 재촉하는 장치",
+     "line": 1217
+    },
+    {
+     "quote": "환도의 칼날이 고리 사이로 들어갔다",
+     "line": 1225
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "large",
+   "stages": [
+    "S-03 ascent"
+   ],
+   "replacesOrAugments": "replaces boss [cult06,c106-mid]",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A faceless mechanism: three to five concentric black iron rings of different sizes standing upright like a gyroscope, each ring hung with short chains ending in neck collars and torn strips of white and black dobok cloth, a tent-canvas shroud draped over the top, oily black metal with dull brass pivots, a faint white glow at the centre where the rings cross; no eyes, no mouth dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "rings tilt back and chains lift (anticipation) / rings slam forward toward the screen bottom (strike) / chains lash outward (follow-through) / rings settle and resume slow spin (recovery)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s04-rule-mannequin",
+   "koreanName": "규칙을 어기지 않는 마네킹",
+   "narrativeEvidence": [
+    {
+     "quote": "지연이 지키는 식당에는 규칙을 어기지 않는 마네킹들이 앉아 있었다. 그들은 빈 접시에 수저를 움직였고",
+     "line": 1254
+    }
+   ],
+   "role": "swarm filler / maze stalker / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "S-04 survival",
+    "S-04 maze",
+    "S-04 ascent"
+   ],
+   "replacesOrAugments": "replaces [ep1a10,a10-o1]; design ref assets/r106/drive/mannequin-eating-1.webp",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [
+    "RE (re-medal-doll uses the same base body)"
+   ],
+   "imagePrompt": "A jointed artist's mannequin of pale varnished wood standing upright, ball joints visible, blank egg head, holding an empty white porcelain plate in one hand and a spoon in the other, a napkin tucked at the neck, slightly chipped and dusty; palette warm beige wood, white plate, dark grey joints dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "stiff knee-locked walk, plate kept level",
+    "idle": "spoon lifts to the mouth-less face and returns to the empty plate, repeating",
+    "hit": "a joint pops, head tilts 90 degrees",
+    "attack": "backhand swing with the plate edge toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s05-newsprint-wraith",
+   "koreanName": "찢긴 호외의 잔향",
+   "narrativeEvidence": [
+    {
+     "quote": "머리 위를 날리는 것은 눈이 아니라 잘게 찢긴 호외였다. 종이마다 지현의 사진이 반복되어 있었다",
+     "line": 1465
+    }
+   ],
+   "role": "swarm filler",
+   "sizeClass": "human (light, 0.95x)",
+   "stages": [
+    "S-05 survival",
+    "S-05 maze"
+   ],
+   "replacesOrAugments": "replaces [ep1b07,b07-f1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A hollow human silhouette formed by hundreds of torn newspaper strips swirling in a snow wind, vaguely a figure in a long coat, no face, the strips show only abstract halftone grey (no readable text, no recognisable portrait), one strip carries a single red lipstick-mark accent; palette newsprint grey, ash black, snow white, red accent dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "drifts forward, strips trailing like a scarf",
+    "idle": "strips slowly circulate",
+    "hit": "bursts apart then reforms smaller",
+    "attack": "whips a sheaf of paper edges forward like a blade toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s05-officer-shade",
+   "koreanName": "군복의 그림자",
+   "narrativeEvidence": [
+    {
+     "quote": "나는 창씨개명한 조선인이었고 일본군의 말단 장교였다",
+     "line": 1355
+    },
+    {
+     "quote": "상관이 들어왔다… 군복의 천이 신문에 스쳐 바스락거렸다",
+     "line": 1423
+    },
+    {
+     "quote": "축하받는 사람과 시체가 된 사람 사이에서 종이 한 장이",
+     "line": 1441
+    }
+   ],
+   "role": "maze stalker / swarm minority",
+   "sizeClass": "human",
+   "stages": [
+    "S-05 maze",
+    "S-05 survival (1-in-3)"
+   ],
+   "replacesOrAugments": "replaces [murder04,murder04-e2]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A 1940s junior army officer rendered as a dark silhouette: long greatcoat, peaked cap pulled low so no face shows, sabre at the hip, snow on the shoulders, the whole figure half dissolved into drifting snow at the edges; insignia blurred into plain dark patches (no real emblems), palette slate grey, black, snow white, no bright colour dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "measured march, one hand on the sabre",
+    "idle": "stands at ease, snow gathering",
+    "hit": "cap flies off revealing only darkness, staggers",
+    "attack": "draws and cuts diagonally downward toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "s05-burning-officer",
+   "koreanName": "불 속의 군복",
+   "narrativeEvidence": [
+    {
+     "quote": "그날 밤, 나는 일본군 관사에 불을 놓았다. 그리고 나오지 않았다",
+     "line": 1445
+    },
+    {
+     "quote": "관사 안에서 다시 불빛이 피어났다",
+     "line": 1467
+    }
+   ],
+   "role": "ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "S-05 ascent"
+   ],
+   "replacesOrAugments": "replaces guards [ep1b07,b07-f1] (keep b07-f1 optionally as 1-in-3)",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The same officer silhouette engulfed from the knees up in slow orange embers and black smoke, coat edges curling, no visible face, carrying nothing, arms slightly out; palette charcoal with ember orange accent only dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "slow heavy walk trailing smoke",
+    "idle": "stands in the fire, embers rising",
+    "hit": "flares bright then slumps",
+    "attack": "embraces forward with both burning arms toward the screen bottom"
+   },
+   "priority": 3
+  },
+  {
+   "id": "s06-dawn-angel",
+   "koreanName": "미명천사",
+   "narrativeEvidence": [
+    {
+     "quote": "한쪽 날개에는 서울의 창문들이, 다른 쪽에는 바다 위의 가로등들이 달려 있었다. 몸의 아래로 철로가 길게 풀렸고, 얼굴이 있어야 할 자리에는 잠든 사람의 눈꺼풀이 겹쳐 있었다",
+     "line": 1741
+    },
+    {
+     "quote": "그 안에는 검은 우주 대신 거대한 눈이 있었다",
+     "line": 1751
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "large (2x boss)",
+   "stages": [
+    "S-06 ascent"
+   ],
+   "replacesOrAugments": "replaces boss [ep1a11,a11-boss]",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A towering angelic silhouette made of city debris: the left wing is a fan of lit apartment windows and concrete slabs, the right wing a fan of curved harbour street-lamps on thin poles, from the hips down a tangle of railway rails and overhead cables trails to the ground, the head is a smooth oval covered in overlapping closed human eyelids, two human hands are the only intact flesh; palette black steel, teal (#2fb3a8) window light, pale lamp white, no gold dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "wings draw back and lamps brighten (anticipation) / both wings sweep down toward the screen bottom (strike) / windows shatter outward in a ring (follow-through) / wings half-fold, eyelids twitch (recovery)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "s06-delay-warden",
+   "koreanName": "유예관",
+   "narrativeEvidence": [
+    {
+     "quote": "검은 외투를 두른 인간형 병기가 나타났다… 외투 안에는 수많은 시계가 거꾸로 달려 있었다",
+     "line": 1568
+    }
+   ],
+   "role": "rare elite (maze)",
+   "sizeClass": "human",
+   "stages": [
+    "S-06 maze (optional)"
+   ],
+   "replacesOrAugments": "augments S-06 maze roster",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A man in a long black coat lined inside with dozens of small clock faces that run backwards, left wrist in a worn leather brace, a mechanic's tool satchel, face shadowed under a hood; palette black, brass clock faces, one purple gleam dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "calm stride, coat open showing clocks",
+    "idle": "adjusts the left wrist brace",
+    "hit": "clocks spill from the coat",
+    "attack": "flings the coat open and sweeps a clock-hand blade toward the screen bottom"
+   },
+   "priority": 4
+  },
+  {
+   "id": "s07-object-shadow",
+   "koreanName": "여섯 물건의 그림자",
+   "narrativeEvidence": [
+    {
+     "quote": "탁자 위에 여섯 물건이 놓여 있었다. 인형, 출석부, 도복 조각, 영수증, 술잔, 날짜가 없는 탄피",
+     "line": 1854
+    },
+    {
+     "quote": "그림자가 발밑으로 돌아왔다",
+     "line": 1890
+    }
+   ],
+   "role": "swarm filler / maze stalker",
+   "sizeClass": "human (flat, 0.9x)",
+   "stages": [
+    "S-07 survival",
+    "S-07 maze"
+   ],
+   "replacesOrAugments": "augments/replaces [hando03,h103-t1]; remove [hando02,h102-t1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A standing shadow of a person made of layered dark purple-grey smoke, carrying one oversized shadow-object fused into its chest (six variants may be one sheet with the doll variant; the others are optional): a rag doll, a wet ledger, a torn dobok strip, a receipt, a glass with a red lip mark, a bullet casing; no face; palette deep violet (#5c4a63) and black with the single object in muted grey dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "glides, feet dissolving",
+    "idle": "holds the object out as an offering",
+    "hit": "tears open at the chest",
+    "attack": "swings the object downward toward the screen bottom"
+   },
+   "priority": 3
+  },
+  {
+   "id": "s07-persona-hwando",
+   "koreanName": "페르소나",
+   "narrativeEvidence": [
+    {
+     "quote": "그는 내 옷을 입고 내 칼을 옆에 놓은 채, 내가 걸어오기를 기다리고 있었다",
+     "line": 1848
+    },
+    {
+     "quote": "가면은 너무 평범해서 처음에는 알아보지 못했다",
+     "line": 1850
+    },
+    {
+     "quote": "가면이 갈라지자 아래에서 더 깨끗한 가면이 드러났다",
+     "line": 1872
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "human (boss scale 1.65x)",
+   "stages": [
+    "S-07 ascent"
+   ],
+   "replacesOrAugments": "replaces boss [hando03,h103-boss]; base body on the 환도 hero sprites (assets/heroes/normalized/hwando/*)",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "An exact double of the hero 환도 (same coat, same curved sword 환도, same hair) wearing a plain smooth white porcelain mask with a neutral kind expression (match assets/r105/drive/prop-mask-1.webp), standing too still; palette identical to the hero but 10% desaturated, a thin white halo-line around the mask dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "mask tilts and sword drawn low (anticipation) / mirrored iai cut toward the screen bottom (strike) / mask cracks, second cleaner mask beneath (follow-through, reuse prop-mask-2 look) / lowers the sword, face weeping behind the mask (recovery)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "ra-proofmark-bug",
+   "koreanName": "붉은 교정 표시",
+   "narrativeEvidence": [
+    {
+     "quote": "깨진 종 안에서 붉은 교정 표시들이 벌레처럼 기어 나왔다. 수백 개의 표시가 그림 가장자리에 들러붙더니",
+     "line": 1956
+    },
+    {
+     "quote": "금박 안쪽에서 교정 표시가 발견되었다",
+     "line": 2306
+    }
+   ],
+   "role": "small swarm filler",
+   "sizeClass": "small (0.5x, ground-hugging)",
+   "stages": [
+    "RA survival",
+    "RG survival",
+    "RG maze",
+    "RF (optional)"
+   ],
+   "replacesOrAugments": "replaces [cult06,c106-e1] (RA) and [cult03,c103-e1] (RG)",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [
+    "RA",
+    "RG"
+   ],
+   "imagePrompt": "A palm-sized insect whose body is a tangle of red proofreading marks: a strike-through line as the spine, a circled loop as the abdomen, caret and bracket shapes as six ink legs, no eyes, wet red ink dripping from the tips; palette red ink (#b4232a) on nothing else, slight paper-white underside dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "scuttles fast, legs scratching",
+    "idle": "legs twitch, ink pools",
+    "hit": "smears into a red streak",
+    "attack": "leaps a short hop and bites toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "ra-nameless-patient",
+   "koreanName": "이름 없는 환자복 형상",
+   "narrativeEvidence": [
+    {
+     "quote": "환자복을 입힌 형상들은 입원 기록에 이름이 없다는 이유로 치료를 받지 못했다… 흰 천 아래의 몸은 점점 가벼워졌고, 명찰만 무거워졌다",
+     "line": 2034
+    }
+   ],
+   "role": "maze stalker / ascent guard",
+   "sizeClass": "human (light)",
+   "stages": [
+    "RA maze",
+    "RA ascent"
+   ],
+   "replacesOrAugments": "replaces [cult06,c106-e1] (maze) and [murder04,murder04-e1] (guards)",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A hospital patient shape under a thin white sheet-gown that floats as if almost empty, bare feet not touching the snow, a single huge blank metal name tag hanging from the neck on a cord and dragging it forward, no face under the hood of the sheet; snow dust on the shoulders; palette hospital white, pale blue shadows, iron-grey tag dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "pulled forward by the heavy tag, leaning",
+    "idle": "sways, tag swinging",
+    "hit": "sheet collapses inward, tag clangs",
+    "attack": "swings the heavy name tag like a flail toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "rb-apron-officer",
+   "koreanName": "앞치마를 두른 군복 손님",
+   "narrativeEvidence": [
+    {
+     "quote": "손님들은 군복 위에 식사용 앞치마를 두르고 있었다… 빈 접시 바닥에는 저마다 다른 사람의 주소가 새겨져",
+     "line": 2146
+    }
+   ],
+   "role": "maze stalker / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "RB maze",
+    "RB ascent"
+   ],
+   "replacesOrAugments": "replaces [kair01,kair-academy-wave-1] in the maze; shares base with s05-officer-shade",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The 1940s officer silhouette (see s05-officer-shade) seated-then-standing with a white dining apron tied over the greatcoat, a satin ribbon on the back like the S-01 residents, holding an empty plate up with both hands as if showing its underside, a kitchen cleaver tucked in the apron string; palette slate grey, apron white, dark red ribbon dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "formal steps, plate held out",
+    "idle": "turns the plate over",
+    "hit": "plate drops and shatters",
+    "attack": "draws the cleaver and chops downward toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "rb-white-guest",
+   "koreanName": "백색의 손님",
+   "narrativeEvidence": [
+    {
+     "quote": "식탁 끝에서 백색의 손님이 일어났다. 얼굴 대신 특진을 알리는 신문이 붙어 있었다. 그가 박수를 치자 여러 계급장이 접시 위에서 튀었다",
+     "line": 2180
+    }
+   ],
+   "role": "elite guard (ascent)",
+   "sizeClass": "human (1.2x)",
+   "stages": [
+    "RB ascent"
+   ],
+   "replacesOrAugments": "replaces guards [ep1b06,b06-f1]",
+   "kind": "mob",
+   "attackProfile": "ranged",
+   "projectile": "gold badge sparks (small, warm), only if the lead wants a thrower; otherwise melee clap",
+   "sharedWith": [],
+   "imagePrompt": "A tall figure in an all-white dress uniform with a white apron, a folded newspaper page pasted flat where the face should be (blank halftone grey, no readable text), white gloves held apart mid-clap, several rank badges floating around the hands; palette white, cream, newsprint grey, one gold badge accent dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "parade step",
+    "idle": "slow clapping",
+    "hit": "newspaper face tears at a corner",
+    "attack": "claps hard and a fan of rank badges bursts toward the screen bottom (visible small gold projectiles if ranged, else the clap shockwave)"
+   },
+   "priority": 3
+  },
+  {
+   "id": "rc-verdict-paperblade",
+   "koreanName": "판결문 종이칼",
+   "narrativeEvidence": [
+    {
+     "quote": "판결문이 돋아났다",
+     "line": 2203
+    },
+    {
+     "quote": "나는 한시우가 보지 못하는 왼쪽으로 날아드는 종이칼을 막았다",
+     "line": 2241
+    }
+   ],
+   "role": "ranged minority (maze)",
+   "sizeClass": "small (floating)",
+   "stages": [
+    "RC maze",
+    "RC survival (minority)"
+   ],
+   "replacesOrAugments": "augments [ep1b03,b03-g1]",
+   "kind": "mob",
+   "attackProfile": "ranged",
+   "projectile": "paper dart, white with blue edge, radius .2, no light-blue bolt",
+   "sharedWith": [],
+   "imagePrompt": "A single sheet of judgement paper folded into a long blade, hovering edge-on at chest height, faint blue light along the edge, ink-black seal mark in one corner (abstract), paper trembling; palette white paper, blue (#51586b) glow, black seal dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "hovers forward in short darts",
+    "idle": "rotates slowly edge-on",
+    "hit": "crumples",
+    "attack": "snaps flat and launches itself as a paper dart toward the screen bottom (projectile sprite = the same sheet, blue edge)"
+   },
+   "priority": 3
+  },
+  {
+   "id": "rc-judge-mirrorface",
+   "koreanName": "재판관",
+   "narrativeEvidence": [
+    {
+     "quote": "재판관이 몸을 일으켰다. 그 얼굴은 나를 닮아 있었다… 관람석의 거울이 내가 품은 확신을 비추어 재판관의 얼굴로 빚고",
+     "line": 2235
+    },
+    {
+     "quote": "손잡이에는 고통을 선악으로 환산하는 눈금이 새겨져 있었다",
+     "line": 2245
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "large",
+   "stages": [
+    "RC ascent (or move to RC maze end; see map notes)"
+   ],
+   "replacesOrAugments": "replaces boss [ep1b03,mb-ep1b03]; gavel = assets/r106/drive/hammer-1/2.webp",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A judge in heavy black and white robes with a tall collar, the face is a flat oval mirror that reflects the viewer (render as a polished silver oval with a faint hero-like silhouette, no detailed face), one hand holds the graduated wooden gavel (match hammer-1.webp), the other a scale-plate; behind the shoulders a half-ring of small spectator mirrors; palette black robe, white trim, blue (#51586b) rim light, silver face dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "gavel raised high (anticipation) / gavel slams toward the screen bottom, floor fold-lines flash (strike) / mirrors behind rotate (follow-through) / gavel rests, scale plate tips (recovery)"
+   },
+   "priority": 2
+  },
+  {
+   "id": "rd-watch-lotus",
+   "koreanName": "감시의 연꽃",
+   "narrativeEvidence": [
+    {
+     "quote": "감시의 연꽃들이 일제히 벌어졌다. 꽃 속에서 눈꺼풀 모양의 창들이 쏟아졌다",
+     "line": 2355
+    },
+    {
+     "quote": "난간에 매달린 수련은 속에서부터 빛을 냈다",
+     "line": 2319
+    }
+   ],
+   "role": "ranged swarm (visible caster)",
+   "sizeClass": "small-medium (0.8x)",
+   "stages": [
+    "RD survival",
+    "RD maze"
+   ],
+   "replacesOrAugments": "replaces [cult02,c102-e1]; design ref assets/r106/drive/lotus.webp",
+   "kind": "mob",
+   "attackProfile": "ranged",
+   "projectile": "eyelid-shaped pale shard, pink-teal, radius .18",
+   "sharedWith": [],
+   "imagePrompt": "A water lily the size of a child, glowing from inside pale pink-white, standing on a knot of wet brown roots that act as legs, the inner petals part to show a single closed human eyelid that opens when it attacks; palette lotus white-pink with teal glow, dark swamp-brown roots dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "roots crawl, petals closed",
+    "idle": "glows and breathes, eyelid closed",
+    "hit": "petals wilt, glow dims",
+    "attack": "petals snap open, eyelid opens and spits three thin eyelid-shaped shards toward the screen bottom (projectile sprite = pale pink eyelid shard, NOT the cyan bolt)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "rd-swamp-root",
+   "koreanName": "다리 밑의 뿌리",
+   "narrativeEvidence": [
+    {
+     "quote": "다리 밑에서 뿌리가 솟았다",
+     "line": 2361
+    },
+    {
+     "quote": "수련… 그 끝이 닿은 방에는",
+     "line": 2361
+    }
+   ],
+   "role": "melee filler / ascent guard",
+   "sizeClass": "human (1.1x)",
+   "stages": [
+    "RD survival",
+    "RD maze",
+    "RD ascent"
+   ],
+   "replacesOrAugments": "replaces [cult05,c105-e2] and RD guards",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A column of wet black swamp roots that has pulled itself into a rough humanoid, dripping, a lily pad stuck to one shoulder, no head only a split in the root bundle, long root-arms; palette swamp black-brown, wet highlights, one teal glint of lotus light dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "lurches, roots re-knitting each step",
+    "idle": "drips, sways",
+    "hit": "splits apart, water sprays",
+    "attack": "both root arms slam down toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "rd-first-trumpet",
+   "koreanName": "첫 번째 나팔",
+   "narrativeEvidence": [
+    {
+     "quote": "하늘에서 나팔 소리가 났다. 악기는 보이지 않았다. 학교 종과 병원 경보, 열차 안내음과 호텔 화재벨이 한 소리로",
+     "line": 2443
+    },
+    {
+     "quote": "나팔의 몸통은 빈 소매를 닮았다. 입술을 대는 자리마다 사람의 이름이 걸려 있었다",
+     "line": 2665
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "large (hovering)",
+   "stages": [
+    "RD ascent"
+   ],
+   "replacesOrAugments": "replaces boss [cult02,c102-boss]; design ref assets/r106/drive/trumpet.webp",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A huge horn whose body is a hollow grey cloth sleeve, bell made of a cracked school bell fused with a hospital alarm dome, mouthpiece ringed with blank hanging name tags on threads, hovering upright with no player, faint shockwave rings at the bell; palette grey cloth, tarnished brass, red alarm glass accent dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "sleeve inflates and tags rise (anticipation) / bell tilts down and blasts a visible sound ring toward the screen bottom (strike) / sleeve whips (follow-through) / deflates (recovery)"
+   },
+   "priority": 2
+  },
+  {
+   "id": "re-medal-doll",
+   "koreanName": "제복을 입은 인형",
+   "narrativeEvidence": [
+    {
+     "quote": "제복을 입은 인형들이 훈장을 꺼냈다. 사람의 이름을 눌러 얇은 금속으로 만든 훈장",
+     "line": 2510
+    }
+   ],
+   "role": "swarm filler / maze / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "RE survival",
+    "RE maze",
+    "RE ascent"
+   ],
+   "replacesOrAugments": "replaces [u202,u202-e2]; same jointed body as s04-rule-mannequin",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The pale wooden jointed mannequin (see s04-rule-mannequin) dressed in a white parade uniform with gold braid, a tray of blank thin metal medals in one hand, pinning one to its own chest with the other, blank egg head; palette white uniform, gold braid, beige wood joints dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "parade step, tray level",
+    "idle": "pins a medal, salutes",
+    "hit": "medals scatter",
+    "attack": "jabs the long medal pin forward toward the screen bottom"
+   },
+   "priority": 2
+  },
+  {
+   "id": "re-white-marksman",
+   "koreanName": "백색 사수",
+   "narrativeEvidence": [
+    {
+     "quote": "조준경 안에서 나와 같은 얼굴을 한 사수가 먼저 방아쇠를 당겼다. 그는 흰 외투를 입고… 승리한 날짜만 금실로 수놓아져",
+     "line": 2498
+    },
+    {
+     "quote": "나는 그가 가진 빈 약실을 보았다",
+     "line": 2514
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "human (boss scale)",
+   "stages": [
+    "RE ascent"
+   ],
+   "replacesOrAugments": "replaces boss [u201,u201-mid]; base body on the hero gunner sprites (assets/heroes/normalized/gunner/*)",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "An exact double of the hero 기억사수/gunner in a long white military greatcoat, sleeves embroidered with gold thread patterns (abstract, no digits), a long rifle with a teal scope glow, face identical to the hero but expressionless, standing on a platform edge; palette white coat, gold thread, dark rifle, teal scope accent dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "rifle raised to the eye (anticipation) / muzzle flash toward the screen bottom, coat flaring (strike) / bolt cycles, spent casing ejects (follow-through) / lowers the rifle, dates on the sleeve peel off (recovery)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "rf-paper-child",
+   "koreanName": "종이 형상",
+   "narrativeEvidence": [
+    {
+     "quote": "이름을 끝까지 쓰지 못한 아이들이 쏟아졌다. 머리와 팔이 따로 움직이는 종이 형상들이었다",
+     "line": 2595
+    },
+    {
+     "quote": "종이 모서리가 내 발목을 스쳤다",
+     "line": 2596
+    }
+   ],
+   "role": "swarm filler / maze stalker / ascent guard",
+   "sizeClass": "small-human (0.8x)",
+   "stages": [
+    "RF survival",
+    "RF maze",
+    "RF ascent"
+   ],
+   "replacesOrAugments": "augments assets/r105/drive/mob-paper-figure.webp (same design, 4 poses); replaces [murder04,murder04-e2] and [ep1b03,b03-g2]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The existing folded-paper child figure exactly (cream paper, origami-like limbs, blank torn face), but with the head and one arm attached by a visible gap so they can move separately dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "hops, head lagging behind the body",
+    "idle": "head turns independently",
+    "hit": "head and arm fly apart then snap back",
+    "attack": "arm swings a sharp paper edge low toward the screen bottom (ankle height)"
+   },
+   "priority": 1
+  },
+  {
+   "id": "rf-storyteller-keyposes",
+   "koreanName": "스토리텔러 (키포즈 4장)",
+   "narrativeEvidence": [
+    {
+     "quote": "표지가 겹겹이 매달려 있었고, 얼굴이 있어야 할 자리에서는 종이 한 장이 펄럭였다",
+     "line": 2555
+    },
+    {
+     "quote": "글자마다 낚싯바늘이 달려 있었다",
+     "line": 2569
+    }
+   ],
+   "role": "boss key poses",
+   "sizeClass": "large",
+   "stages": [
+    "RF ascent"
+   ],
+   "replacesOrAugments": "augments assets/r105/drive/boss-storyteller.webp",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "Use the existing boss-storyteller design exactly (book-spine body, blank page face). Four key poses: raises an arm trailing ink hooks, slams the arm down toward the screen bottom with hooks fanning, pages burst from the body, settles with the page face folding dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "anticipation / strike-down / follow-through / recovery"
+   },
+   "priority": 2
+  },
+  {
+   "id": "rg-blocked-name",
+   "koreanName": "막힌 이름",
+   "narrativeEvidence": [
+    {
+     "quote": "마지막 나팔이 울리면 그 이름들은 하나의 긴 문장으로 불려 나갈 터였다. 누구도 제 이름이 불리는 곳에서 멈추거나 대답할 수 없는",
+     "line": 2665
+    },
+    {
+     "quote": "거미줄 같은 선들이 장부와 문, 잔과 도복을 한데 묶고 있었다",
+     "line": 2675
+    }
+   ],
+   "role": "swarm filler / maze stalker / ascent guard",
+   "sizeClass": "human",
+   "stages": [
+    "RG survival",
+    "RG maze",
+    "RG ascent"
+   ],
+   "replacesOrAugments": "replaces [cult04,c104-e1]",
+   "kind": "mob",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A human figure built entirely from overlapping blank paper name tags and strips bound tightly with red thread, the mouth area wrapped shut with thread, one arm reaching out with a tag held like an offering, thread lines trailing off the back toward the sky; palette paper cream, red thread (#b4232a), ink grey dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "walk": "strains forward against the trailing threads",
+    "idle": "tags flutter, mouth-thread tightens",
+    "hit": "tags scatter, threads snap",
+    "attack": "swings the bound arm as a club toward the screen bottom"
+   },
+   "priority": 1
+  },
+  {
+   "id": "rg-seventh-trumpet",
+   "koreanName": "일곱 번째 나팔",
+   "narrativeEvidence": [
+    {
+     "quote": "하늘에는 일곱 개의 나팔이 떠 있었다. 나팔의 몸통은 빈 소매를 닮았다",
+     "line": 2663
+    },
+    {
+     "quote": "탄환이 기둥의 회전 고리를 멈춰 세웠다",
+     "line": 2675
+    },
+    {
+     "quote": "일곱 번째 나팔은 끝까지 울리지 못했다",
+     "line": 2715
+    }
+   ],
+   "role": "boss",
+   "sizeClass": "large",
+   "stages": [
+    "RG ascent"
+   ],
+   "replacesOrAugments": "replaces boss [cult04,c104-mid]; pillar = assets/r106/drive/link-pillar.webp",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "The largest sleeve-horn (see rd-first-trumpet) lashed by red threads to a stone pillar with a rotating iron ring, the bell pointing down at the ground, hundreds of blank name tags hanging from the mouthpiece and threads, pages of six different 'worlds' (a doll, a ledger, a dobok strip, a receipt, a glass, a casing — tiny, in silhouette) caught in the threads; palette grey cloth, iron, red thread, parchment dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "ring spins up and threads tighten (anticipation) / bell drops and blasts a ring toward the screen bottom (strike) / tags whirl outward (follow-through) / ring slows, horn sags (recovery)"
+   },
+   "priority": 2
+  },
+  {
+   "id": "m-michaela-knot",
+   "koreanName": "미카엘라 (방벽의 매듭)",
+   "narrativeEvidence": [
+    {
+     "quote": "방 한가운데 미카엘라가 서 있었다. 그녀는 기억 속의 흰 가운을 입고 있었다",
+     "line": 2891
+    },
+    {
+     "quote": "검은 뿌리와 강철 군단의 잔해가 그녀의 몸을 감싸며 방벽을 이루었다",
+     "line": 2912
+    },
+    {
+     "quote": "문에서 손을 떼지 못하도록 손목까지 묶어 놓은 매듭이었다",
+     "line": 2940
+    }
+   ],
+   "role": "final boss (presentation: the hittable form is the barrier knot in front of her)",
+   "sizeClass": "large",
+   "stages": [
+    "M ascent"
+   ],
+   "replacesOrAugments": "replaces boss [kair02,kair-great-03]; base face/hair on assets/heroes/normalized/directions/michaela-*.webp but in a plain white doctor's coat, not armour",
+   "kind": "boss",
+   "attackProfile": "melee",
+   "projectile": null,
+   "sharedWith": [],
+   "imagePrompt": "A psychiatrist in a plain white doctor's coat (dark hair tied back, matching the michaela hero face), standing with both arms spread wide toward doors behind her, wrists bound by a black knotted cord that runs to the doors; in front of her a swirling barrier made of castle-wall stones, giant clock hands, black tree roots and broken steel-legion armour forms the actual 'boss body'; palette white coat, warm skin, black cord, stone grey, brass clock hands, no weapon dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point. Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+   "poseNotes": {
+    "keyposes": "barrier gathers and clock hands rise (anticipation) / stones and roots crash toward the screen bottom while she turns to look back at the doors (strike) / barrier scatters (follow-through) / she lowers her arms slightly, knot visible (recovery). She never strikes with her own body."
+   },
+   "priority": 1
+  }
+ ],
+ "mapCorrections": [
+  {
+   "ep": "S-01",
+   "file": "samong-maps-r105.js BP['S-01']",
+   "changes": [
+    "ascent: checker black/white floor tint, porcelain-crack wall tint 0x6b4b52, 2-3 gothic chairs along the workbench table",
+    "maze: domestic wall texture instead of forge"
+   ]
+  },
+  {
+   "ep": "S-02",
+   "file": "BP['S-02']",
+   "changes": [
+    "survival: wet-night sheen; keep stone/dead trees",
+    "maze: chalk-line decals optional"
+   ]
+  },
+  {
+   "ep": "S-03",
+   "file": "BP['S-03']",
+   "changes": [
+    "maze: weather RAIN (outdoor stone, 23-years-ago alley)",
+    "survival: half the braziers unlit; strict grey palette",
+    "ascent: tent cloth props if available"
+   ]
+  },
+  {
+   "ep": "S-04",
+   "file": "BP['S-04']",
+   "changes": [
+    "indoor; rain ambience at entry only",
+    "ascent: 16 crates -> gothic chairs, mirror prop at the dais"
+   ]
+  },
+  {
+   "ep": "S-05",
+   "file": "BP['S-05']",
+   "changes": [
+    "survival+maze: SNOWFALL (snow family exists since R107)",
+    "ascent: grey ash/paper flakes + window fire glow (keyed window prop exists)"
+   ]
+  },
+  {
+   "ep": "S-06",
+   "file": "BP['S-06']",
+   "changes": [
+    "survival: RAIN + searchlight sweeps over the coast/sea",
+    "ascent: suspended raindrops (non-falling sparkle), 17 ring obelisks"
+   ]
+  },
+  {
+   "ep": "S-07",
+   "file": "BP['S-07']",
+   "changes": [
+    "single candle light at the table; purple tint ok; manet-mirror as the 거울상"
+   ]
+  },
+  {
+   "ep": "RA",
+   "file": "BP['RA']",
+   "changes": [
+    "ascent outdoor.family 'ash' -> 'snow' (text stays on the snowfield)",
+    "maze+ascent: SNOWFALL + black-sun disc; 3-4 more sunflower gurneys"
+   ]
+  },
+  {
+   "ep": "RB",
+   "file": "BP['RB']",
+   "changes": [
+    "maze+ascent: burning-snow ember particles (orange) instead of plain snow; fire-door glow at top landing",
+    "survival: two gothic chairs + three cups (well) at centre"
+   ]
+  },
+  {
+   "ep": "RC",
+   "file": "BP['RC']",
+   "changes": [
+    "maze: RAIN indoors (text explicit)",
+    "ascent: gold/wax palette, gilded chairs, chandelier braziers; consider 종이 왕 as the ascent antagonist"
+   ]
+  },
+  {
+   "ep": "RD",
+   "file": "BP['RD']",
+   "changes": [
+    "survival: red-tinted bridge railing, lotus glow, water mist",
+    "maze: wet floor sheen"
+   ]
+  },
+  {
+   "ep": "RE",
+   "file": "BP['RE']",
+   "changes": [
+    "chandelier light props; keyed chandelier that darkens at boss hp<50%"
+   ]
+  },
+  {
+   "ep": "RF",
+   "file": "BP['RF']",
+   "changes": [
+    "keep; chair-with-cushion trap marker optional"
+   ]
+  },
+  {
+   "ep": "RG",
+   "file": "BP['RG']",
+   "changes": [
+    "survival+maze: black-sun sky, falling paper/needle flakes; maze floor whitened toward 0x8a8488 (여백)",
+    "ascent: rotating ring fx at the link-pillar"
+   ]
+  },
+  {
+   "ep": "M",
+   "file": "BP['M']",
+   "changes": [
+    "survival: starry night sky over the garden",
+    "ascent: empty picture frames, white light at the far door"
+   ]
+  }
+ ],
+ "imageStyle": "dark-fantasy painted character art, matching the StoryWorld R7 pose pack (r7-out/poses): full body, 3/4 view facing screen-left, isometric ARPG scale, soft rim light, muted desaturated palette with one accent colour, transparent background, no text, no logos, no watermark, feet on a flat ground contact point",
+ "sheetFormat": "Deliver as a 2x2 pose sheet on one transparent PNG (each cell 512x512, same scale and same ground line in every cell): top-left WALK (mid-stride), top-right IDLE (weight on both feet, slight sway), bottom-left HIT (recoil, head back, limbs loosened), bottom-right ATTACK (the strike described below, aimed toward the screen-bottom/front). Same character, same costume and colours in all four cells. Bosses: 4 key poses instead (anticipation, strike toward screen bottom, follow-through, recovery) like assets/r104/bosses/*-p1..p4.",
+ "unverified": [
+  "GPU/phone/natural play not verified (headless-free but background tab, test-aid only)",
+  "the light-blue bolt was inferred from ai='hybrid' + ranged3/enemyShot(VFX.bolt); no shot was captured in the 9 s window because the maze walls blocked clearLine — the owner's report confirms it in play",
+  "boss key-pose pivots must be measured after generation"
+ ]
+}

@@ -1,5 +1,5 @@
-// R106 CPU check: 사몽 survival arenas are wide open fields (뱀서류, D2 Survivors 참고) and flashlight mazes are far
-// more complex than R105, every layout stays reachable, and survival mobs are faster. Stub environment as R105.
+// R106 CPU check: 사몽 survival arenas are wide open fields (뱀서류, D2 Survivors 참고), every layout stays reachable, and survival
+// mobs are faster. R106 also made the flashlight mazes denser; R108 widened them again (see the maze pins below). Stub environment as R105.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const SRC=path.join(__dirname,'..','..','client-source');
@@ -23,9 +23,12 @@ for(let i=1;i<EP.length;i++){const L=SM.layoutFor(i,'maze'),x=L.samongR103,r=rea
 const minFloor=Math.min(...surv.map(s=>s.floor)),minSpan=Math.min(...surv.map(s=>s.span));
 check('survival arenas are wide fields (min floor '+minFloor+' cells, min span '+minSpan+')',minFloor>=1800&&minSpan>=90,JSON.stringify(surv.slice(0,4)));
 check('survival arenas keep cover obstacles (bridges: broken spans)',surv.every(s=>s.pillars>=6||s.shape==='bridge'),JSON.stringify(surv.filter(s=>s.pillars<6)));
-const minCells=Math.min(...mazes.map(m=>m.cells)),minDead=Math.min(...mazes.map(m=>m.dead));
-check('flashlight mazes are larger (min '+minCells+' rooms, ≥144)',minCells>=144,JSON.stringify(mazes.slice(0,4)));
-check('flashlight mazes have many dead ends (min '+minDead+')',minDead>=10,JSON.stringify(mazes.map(m=>m.dead)));
+// R108: the R106 pins (>=144 rooms, >=10 dead ends) measured density, and density is what made the maze feel cramped. The maze is now a
+// coarser grid (8-tile cells, 8x8..11x11) with 4-wide corridors, plazas, dead-end rooms and more loops. What must not shrink is the playable
+// area and the dead-end rooms the three chests need; width, openness, walking distance and placement clearance are pinned in r108/maze-cpu-check.cjs.
+const minMazeFloor=Math.min(...mazes.map(m=>m.floor)),minDead=Math.min(...mazes.map(m=>m.dead));
+check('flashlight mazes stay large (min '+minMazeFloor+' floor tiles, ≥2600; R107 had 1885-3420 on 144-256 smaller rooms)',minMazeFloor>=2600,JSON.stringify(mazes.slice(0,4)));
+check('flashlight mazes keep dead-end rooms for the chests (min '+minDead+', ≥3)',minDead>=3,JSON.stringify(mazes.map(m=>m.dead)));
 check('every survival centre and maze exit reachable from the entry',!fails.length,fails.slice(0,5).join(' | '));
 const src=fs.readFileSync(path.join(SRC,'samong-r103.js'),'utf8');
 check('survival mobs move faster (×1.9, elite ×1.5) and attack sooner',/e\.speed=\(e\.speed\|\|1\)\*\(elite\?1\.5:1\.9\)/.test(src)&&/e\.cd=Math\.max\(0,e\.cd-dt\*\.6\)/.test(src)&&/x\.spawnAt=time\+\.3;const batch=Math\.min\(6/.test(src));

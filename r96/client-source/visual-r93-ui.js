@@ -120,9 +120,14 @@ body.r93-dock #minipanel{top:0!important;right:0!important;transform:scale(.72);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)ambienceOff();});
 
  // ---- settings -----------------------------------------------------------
+ // R108: the HUD switches and the two sound switches are separate sections, so the
+ // settings UI can file them under different headings. Control ids (r93-*) are unchanged.
+ const SOUND_KEYS=['footsteps','ambience'];
  function settingsSection(){const host=document.getElementById('retroSettingsR92Boss')||document.getElementById('retroSettingsR92Mobs')||document.getElementById('retroSettingsR92');if(!host||document.getElementById('retroSettingsR93'))return;
-  const s=document.createElement('section');s.id='retroSettingsR93';s.innerHTML='<h3>HUD·소리 (R93)</h3><p class="small muted">표시와 소리만 바뀌며 저장 슬롯과 별도로 보관됩니다.</p>'+Object.keys(DEFAULTS).map(k=>'<label><input type="checkbox" id="r93-'+k+'"> '+LABELS[k]+'</label> ').join('');
-  host.parentNode.insertBefore(s,host.nextSibling);for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r93-'+k);el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
+  const make=(id,title,note,keys)=>{const s=document.createElement('section');s.id=id;s.innerHTML='<h3>'+title+'</h3><p class="small muted">'+note+'</p>'+keys.map(k=>'<label><input type="checkbox" id="r93-'+k+'"> '+LABELS[k]+'</label> ').join('');return s;};
+  const hud=make('retroSettingsR93','HUD','표시만 바뀌며 저장 슬롯과 별도로 보관됩니다.',Object.keys(DEFAULTS).filter(k=>!SOUND_KEYS.includes(k))),snd=make('retroSettingsR93Sound','발소리·환경음','소리만 바뀌며 저장 슬롯과 별도로 보관됩니다.',SOUND_KEYS);
+  host.parentNode.insertBefore(hud,host.nextSibling);hud.parentNode.insertBefore(snd,hud.nextSibling);
+  for(const s of[hud,snd])for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r93-'+k);if(!el)continue;el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
  apply();
  window.__STORYWORLD_VISUAL_R93_UI__=Object.freeze({prefs:()=>({...prefs}),set,storageKey:KEY,family,

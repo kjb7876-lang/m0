@@ -49,13 +49,34 @@ function drawCell(fam,phase,x,y,h,{alpha=1,delta=0,blend='screen'}={}){const r=c
 function img(path){const row=readyImage(path);if(row)return row.image;if(!(typeof imageCache!=='undefined'&&imageCache.has(path))){try{addImage(path);}catch(e){fail(e);}}return null;}// 메모리 정리 뒤에도 다시 요청
 function drawImg(path,x,y,h,{alpha=1,angle=0,blend='source-over',flat=false}={}){const im=img(path);if(!im)return false;const w=h*im.naturalWidth/im.naturalHeight;ctx.save();ctx.globalAlpha*=Math.max(0,Math.min(1,alpha));ctx.globalCompositeOperation=blend;ctx.translate(x,y);if(angle)ctx.rotate(angle);if(flat)ctx.scale(1,.58);ctx.drawImage(im,-w/2,-h/2,w,h);ctx.restore();return true;}
 const ellipse=(x,y,rx,ry)=>{ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,Math.PI*2);};
+// ---- R108 eden: painted sheets (fire, ice, poison, lightning, earth) for boss fields and meteors; absolute screen coordinates ----
+const ELEMSHEET={fire:'fire',frost:'ice',corruption:'poison',shock:'lightning'};
+const EDEN=()=>{const x=window.__STORYWORLD_EDEN_R108__;return x&&x.clipU&&x.has&&x.on&&x.on()&&!low()?x:null;};
+const refW={};function visW(name){let r=refW[name];if(r)return r;const D=window.__STORYWORLD_EDEN_DATA_R108__,c=D?.clips?.[name];if(!c)return 200;r=1;for(let f=c.a;f<=c.b;f++){const b=D.box[c.s][f];if(b)r=Math.max(r,b[2]-b[0]);}return refW[name]=r;}
+// plays clip `name` at progress u with visible width w px, pivot at screen (x,y); false while its atlas is still loading
+function eclip(name,u,x,y,w,o){const E=EDEN();if(!E)return false;const sh=name.split('.')[0];if(!E.has(sh)){E.ensure(sh);return false;}return E.clipU(name,u,x,y,w*256/visW(name),o||{})!==false;}
+function paintedElem(elem){const E=EDEN();if(!E||!ELEMSHEET[elem])return false;if(E.has(ELEMSHEET[elem]))return true;E.ensure(ELEMSHEET[elem]);return false;}
+function strike(x,y,L,a){const E=EDEN();if(E&&E.has('lightning'))E.frame('lightning',Math.floor(time*24)%8,x,y-L,256*L/226,{pivot:[.5,.04],alpha:a});}
+// boss field: footprint width on screen = 2*sqrt2*radius*TILE*zoom (the real circle), painted from the element's sheet
+function paintField(elem,stage,k,R,x,y,f,pl){const w=R*2.83;
+ if(stage==='hit'){const a=1-k*.15;
+  if(elem==='fire')return eclip('fire.boom',k,x,y-R*.25,w*(1+.3*k),{alpha:a});
+  if(elem==='frost')return eclip('ice.rise',k,x,y+R*.1,w*.8*(.85+.3*k),{alpha:a});
+  if(elem==='corruption')return eclip('poison.grow',k,x,y-R*.1,w*.95*(.7+.4*k),{alpha:a*.95});
+  if(elem==='shock'){const ok=eclip('lightning.ring',k,x,y,w*(.9+.3*k),{alpha:a});if(k<.75)strike(x,y,Math.max(H*.5,R*2.4),1-k/.75);return ok;}}
+ else{
+  if(elem==='fire')return eclip('earth.settle',.25+.2*pl,x,y,w*.8,{alpha:.55*f*pl,squash:.85});
+  if(elem==='frost')return f<1?eclip('ice.shatter',1-f,x,y,w*.8,{alpha:.8}):eclip('ice.rise',.999,x,y+R*.1,w*.78,{alpha:.55*pl});
+  if(elem==='corruption')return f<1?eclip('poison.fade',1-f,x,y,w*.95,{alpha:.8}):eclip('poison.cloud',.32+.3*pl,x,y,w*.9,{alpha:.5*f});
+  if(elem==='shock')return eclip('lightning.ring',.5+.3*pl,x,y,w,{alpha:.45*f*pl});}
+ return false;}
 // ---- 장판: 준비·예고 → 명중 → 잔류 → 소멸 ----
 // three 렌더는 'hazard' 소유 도형을 바닥면(groundAligned)으로 옮겨 그려 보이지 않는다. R102 영웅 이펙트처럼
 // 'effect' 소유로 기록하면 도형·이미지가 모두 제 색으로 보인다(기록기가 없는 Legacy 캔버스에서는 그대로 그린다).
 const scope=(o,fn)=>{if(typeof ctx!=='undefined'&&typeof ctx?.scope==='function')return ctx.scope(o,fn);return fn();};
 const clamp01=v=>Math.max(0,Math.min(1,v));
 function drawField(h,P){scope({id:'r105:field:'+h.id,kind:'effect',x:h.x,y:h.y,r105Field:true},()=>fieldBody(h,P));}
-function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom),w=R*2,warn=h.age<h.warning,rem=h.life-h.age,lo=low(),sid=Number.isFinite(h.id)?h.id:hash(h.id)%977,pulse=.5+.5*Math.sin(time*9+sid),sheet=P.sheet||null;// 문자열 id(검사 하네스)도 숫자 씨앗으로
+function fieldBody(h,P){let post=null;const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom),w=R*2,warn=h.age<h.warning,rem=h.life-h.age,lo=low(),sid=Number.isFinite(h.id)?h.id:hash(h.id)%977,pulse=.5+.5*Math.sin(time*9+sid),sheet=P.sheet||null;// 문자열 id(검사 하네스)도 숫자 씨앗으로
  ctx.save();ctx.translate(q.x,q.y-4*zoom);ctx.lineCap='round';
  if(warn){const u=clamp01(h.age/h.warning);
   glow(0,0,R*1.1,R*1.1*.58,[[0,P.a,.26+.2*u],[.6,P.a,.12+.12*u],[1,P.a,0]]);// 바닥 빛
@@ -73,14 +94,14 @@ function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom
    if(!lo){ctx.strokeStyle=rgba(P.b,.85*(1-k));ctx.lineWidth=Math.max(1,1.8*zoom);for(let s=0;s<10;s++){const a=s*Math.PI/5+sid*.7,l=R*(.35+.9*k);ctx.beginPath();ctx.moveTo(Math.cos(a)*R*.2,Math.sin(a)*R*.2*.58);ctx.lineTo(Math.cos(a)*l,Math.sin(a)*l*.58-l*.25);ctx.stroke();}}// 불꽃 조각
    ctx.globalCompositeOperation='source-over';
    if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*(1.1+.8*k),{alpha:1-k*.7,angle:sid%2?.6:-.6});
-   else{drawCell(P.elem,'impact',0,R*.25,w*(1.1+1.1*k),{alpha:1-k});if(sheet)drawImg(DIR+'fx-'+sheet+'-2.webp',0,0,w*1.1*(1+.3*k),{alpha:.7*(1-k*.5),flat:sheet==='dali',blend:'screen'});}
+   else{if(paintedElem(P.elem))post=['hit',k];else drawCell(P.elem,'impact',0,R*.25,w*(1.1+1.1*k),{alpha:1-k});if(sheet)drawImg(DIR+'fx-'+sheet+'-2.webp',0,0,w*1.1*(1+.3*k),{alpha:.7*(1-k*.5),flat:sheet==='dali',blend:'screen'});}
   }else{const f=clamp01(rem*3),pl=.6+.4*Math.sin(time*5+sid);
    glow(0,0,R,R*.58,[[0,P.a,.3*f*pl],[1,P.a,0]],3);ctx.lineWidth=Math.max(1,1.4*zoom);ctx.strokeStyle=rgba(P.b,.35*f);ellipse(0,0,R*.92,R*.92*.58);ctx.stroke();// 잔류
    if(P.style==='thread')drawImg(DIR+'fx-ink-hook.webp',0,-R*.25,w*1.6,{alpha:.55*f,angle:sid%2?.6:-.6});
    else if(sheet)drawImg(DIR+'fx-'+sheet+'-3.webp',0,0,w*1.3,{alpha:.75*f,flat:sheet==='dali',blend:'screen'});
-   else if(!lo){drawCell(P.elem,'residue',0,R*.2,w*.9,{alpha:.55*f*pl});if(f<1)drawCell(P.elem,'fade',0,R*.2,w*.9,{alpha:.5*(1-f)});}// 소멸
+   else if(!lo){if(paintedElem(P.elem))post=['res',f,pl];else{drawCell(P.elem,'residue',0,R*.2,w*.9,{alpha:.55*f*pl});if(f<1)drawCell(P.elem,'fade',0,R*.2,w*.9,{alpha:.5*(1-f)});}}// 소멸
   }}
- ctx.restore();stats.fields++;}
+ ctx.restore();if(post){try{post[0]==='hit'?paintField(P.elem,'hit',post[1],R,q.x,q.y-4*zoom):paintField(P.elem,'res',0,R,q.x,q.y-4*zoom,post[1],post[2]);}catch(e){fail(e);}}stats.fields++;}
 // ---- 광역기: 운석·불덩이가 날아온 뒤 넓게 터진다 ----
 const seen=new Set(),pending=new Map(),meteors=[];let lastRoom=null,mid=0;
 function scan(){if(typeof hazards==='undefined'||!Array.isArray(hazards))return;if(room!==lastRoom){lastRoom=room;seen.clear();meteors.length=0;owners.clear();}
@@ -98,7 +119,8 @@ function flight(m,k,lo){const P=m.P,to=project(m.cx,m.cy),base=Math.max(26,Math.
  const ang=Math.atan2(to.y-y,to.x-x);
  if(P.style==='thread'){drawImg(DIR+'fx-thread.webp',x,y,sz*2.6,{alpha:.55+.45*k,angle:time*2.2+m.seed});ctx.globalCompositeOperation='lighter';ctx.strokeStyle=rgba(P.b,.5);ctx.lineWidth=Math.max(1,1.2*zoom);for(let s=0;s<6;s++){const a=s*Math.PI/3+time*2.2+m.seed;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a)*sz*2.4,y+Math.sin(a)*sz*2.4);ctx.stroke();}ctx.globalCompositeOperation='source-over';return;}
  ctx.globalCompositeOperation='lighter';
- const n=lo?3:7;for(let s=1;s<=n;s++){const f=s/n,tx=x-Math.cos(ang)*sz*1.4*f*(1+s*.25),ty=y-Math.sin(ang)*sz*1.4*f*(1+s*.25),r=Math.max(2,sz*(.9-.7*f));glow(tx,ty,r,r,[[0,P.b,.5*(1-f)],[.5,P.a,.35*(1-f)],[1,P.a,0]],3);}
+ if(P.elem==='fire'&&P.style!=='thread'&&paintedElem('fire')){const E=EDEN();if(E){E.frame('fire',Math.floor(time*20)%8,x,y,sz*3.6*256/visW('fire.fly'),{pivot:[.8,.49],angle:ang,alpha:.95,noVeil:true});ctx.globalCompositeOperation='source-over';return;}}
+  const n=lo?3:7;for(let s=1;s<=n;s++){const f=s/n,tx=x-Math.cos(ang)*sz*1.4*f*(1+s*.25),ty=y-Math.sin(ang)*sz*1.4*f*(1+s*.25),r=Math.max(2,sz*(.9-.7*f));glow(tx,ty,r,r,[[0,P.b,.5*(1-f)],[.5,P.a,.35*(1-f)],[1,P.a,0]],3);}
  glow(x,y,sz,sz,[[0,[255,255,255],.95],[.3,P.b,.95],[.7,P.a,.75],[1,P.a,0]],5);
  if(P.style==='meteor'){ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(28,18,24,.92)';ctx.beginPath();ctx.arc(x,y,sz*.5,0,Math.PI*2);ctx.fill();ctx.strokeStyle=rgba(P.b,.8);ctx.lineWidth=Math.max(1,2*zoom);ctx.beginPath();ctx.arc(x,y,sz*.5,ang+2.2,ang+4.2);ctx.stroke();ctx.globalCompositeOperation='lighter';}
  else if(P.style==='comet'){ctx.strokeStyle=rgba(P.b,.8);ctx.lineWidth=Math.max(1,1.5*zoom);for(let s=0;s<5;s++){const a=ang+Math.PI+(s-2)*.22;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a)*sz*(2.2+s*.3),y+Math.sin(a)*sz*(2.2+s*.3));ctx.stroke();}}
@@ -120,7 +142,13 @@ function drawMeteors(){if(!meteors.length)return;const lo=low();
  for(let i=meteors.length-1;i>=0;i--){const m=meteors[i],k=(time-m.t0)/m.dur;
   if(k<1){scope({id:'r105:meteor:'+m.id,kind:'effect',x:m.cx,y:m.cy,r105Meteor:true},()=>{ctx.save();flight(m,k,lo);ctx.restore();});continue;}
   if(!m.landed){m.landed=true;m.tl=time;stats.bursts++;try{if(typeof shake!=='undefined')shake=Math.max(shake,lo?.45:1.1);if(typeof flash!=='undefined')flash=Math.max(flash,.18);}catch(e){}}
-  const kb=(time-m.tl)/.95;if(kb>=1){meteors.splice(i,1);continue;}scope({id:'r105:burst:'+m.id,kind:'effect',x:m.cx,y:m.cy,r105Meteor:true},()=>{ctx.save();burst(m,kb,lo);ctx.restore();});}}
+  const kb=(time-m.tl)/.95;if(kb>=1){meteors.splice(i,1);continue;}scope({id:'r105:burst:'+m.id,kind:'effect',x:m.cx,y:m.cy,r105Meteor:true},()=>{ctx.save();burst(m,kb,lo);ctx.restore();paintBurst(m,kb);});}}
+// R108 eden: the meteor impact from the element's painted sheet (fire explosion, ice crown, poison cloud, lightning ring)
+function paintBurst(m,kb){try{const P=m.P;if(P.style==='thread'||!paintedElem(P.elem))return;const q=project(m.cx,m.cy),Rx=m.ext*TILE*zoom*1.15,w=Rx*2*1.05,a=1-kb*.25;
+ if(P.elem==='fire')eclip('fire.boom',kb,q.x,q.y-Rx*.12,w*.9,{alpha:a});
+ else if(P.elem==='frost'){if(kb<.45)eclip('ice.rise',kb/.45,q.x,q.y+Rx*.06,w*.75,{alpha:a});else eclip('ice.shatter',(kb-.45)/.55,q.x,q.y+Rx*.06,w*.8,{alpha:a});}
+ else if(P.elem==='corruption')eclip(kb<.5?'poison.grow':'poison.fade',kb<.5?kb/.5:(kb-.5)/.5,q.x,q.y-Rx*.05,w*.85,{alpha:a});
+ else if(P.elem==='shock'){eclip('lightning.ring',kb,q.x,q.y,w*.95,{alpha:a});if(kb<.5)strike(q.x,q.y,Math.max(H*.6,Rx*1.6),1-kb/.5);}}catch(e){fail(e);}}
 // ---- 보스 패턴 예고 연출(사방·땅·하늘·비): R103이 부르던 영웅 이펙트의 붉은 고정색 대신 보스 색으로 그린다 ----
 const pats=[];
 function bossPattern(kind,x,y,P){if(!Number.isFinite(x+y))return false;pats.push({id:++mid,kind,x,y,P,t0:time,life:kind==='rain'?1.6:1.3,seed:Math.random()*6.28,n:{sides:14,ground:12,sky:9,rain:30}[kind]||12});stats.patterns++;return true;}

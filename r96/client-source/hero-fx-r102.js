@@ -388,7 +388,7 @@ function settingsSection(){const host=document.getElementById('retroSettingsR101
  const line=s.querySelector('#r102TierSettings');if(line&&live())line.textContent=tierLine();}
 if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...a){const r=sb.apply(this,a);try{settingsSection();}catch(e){fail(e);}return r;};}
 
-window.__STORYWORLD_HERO_FX_R102__=Object.freeze({revision:'R102-hero-fx',PALETTE,palette:id=>({...palOf(id)}),tier,info:(p=player)=>({...info(p)}),steps:STEPS,prefs:()=>({...prefs}),set,turn:{...TURN},
+window.__STORYWORLD_HERO_FX_R102__=Object.freeze({revision:'R102-hero-fx',PALETTE,skillOf:src=>{try{const h=live()?skillSourceHero(src,typeof e568HeroActionContext!=='undefined'?e568HeroActionContext:null):null;return h&&PALETTE[h]?h:null;}catch(_){return null;}},palette:id=>({...palOf(id)}),tier,info:(p=player)=>({...info(p)}),steps:STEPS,prefs:()=>({...prefs}),set,turn:{...TURN},
  effects:()=>list.map(e=>({kind:e.kind,style:e.style,tier:e.tier,age:age(e),life:e.life})),cast,
  inspect:()=>({revision:'R102-hero-fx',prefs:{...prefs},stats:{...stats},variants:variants.size,tier:live()?tier():null,score:live()?info().score:null,effects:list.length,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 window.__STORYWORLD_HERO_FX_R103__=Object.freeze({revision:'R103-hero-fx-7',tiers:TOP,steps:STEPS,patterns:Object.keys(PATTERNS),pattern,tier,inspect:()=>({tier:live()?tier():null,top:TOP,patterns:stats.patterns||0,effects:list.length,lastError})});

@@ -241,13 +241,16 @@ function onHeroHit(e,heroId){const last=lastHitFx.get(e);if(last!==undefined&&ti
  let x=e.x,y=e.y;const imp=effects.findLast?.(f=>f.type==='e568HeroImpact'&&f.age===0&&f.targetIdE568===String(e.id));if(imp){x=imp.x;y=imp.y;}
  const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(1.12+.1*t)*(boss?1.2:1);
  add({kind:'heroHit',x,y,lift:bodyLift(e),F,sa,size:h*(boss?1.45:1.05)*strength,life:.34+.12*(strength-1),seed:Math.random()*6,heavy:t>=1,tier:t});
- flinch.set(e,{at:time,dx:Math.cos(sa),dy:Math.sin(sa),k:boss?.35:1});
+ // the recoil itself (any hit, not only skills) is registered by noteHit in the hit wrapper below
  if(!reduced()&&typeof shake==='number'){const want=.3+.06*t;if(want>shake)shake=want;}
  stats.hits++;}
 const hitBase=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp;let heroId=null;
  try{if(prefs.hitfx&&live())heroId=skillHit(source,typeof e568HeroActionContext!=='undefined'?e568HeroActionContext:null);}catch(err){fail(err);}
  const r=hitBase.call(this,e,value,source,...rest);
- try{if(heroId&&e&&Number.isFinite(before)&&e.hp<before&&(R102()?.PALETTE?.[heroId]||HERO_FX[heroId]))onHeroHit(e,heroId);}catch(err){fail(err);}return r;};
+ try{if(e&&Number.isFinite(before)&&e.hp<before){
+   // R108: every hero hit shoves the mob back along the blow (skill hits a little harder)
+   if(e.hp>0&&prefs.motion&&live())noteHit(e,before-e.hp,!!heroId);
+   if(heroId&&(R102()?.PALETTE?.[heroId]||HERO_FX[heroId]))onHeroHit(e,heroId);}}catch(err){fail(err);}return r;};
 
 // ---- hit feel: enemy → hero -----------------------------------------------------------
 let hurtFlash=0,flashEl=null;
@@ -285,44 +288,107 @@ function drawOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;for(co
  ctx.save();try{scope({id:e.id,kind:'effect',x:e.x,y:e.y,r101:true},()=>fn(e,t));}catch(err){fail(err);}finally{ctx.restore();}}}
 const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r101-air'){try{drawOwn();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
 
-// ---- mob motion: bob, lean, squash and wing beats instead of shear -------------------
-// The native body painter translates to the feet, then asks the pose chain for a
-// transform. R52 (the chain's head) is swapped for a copy whose pose is ours.
+// ---- mob motion (R108): solid sprites, Diablo-2 style ------------------------------------
+// Draw-only. The native body painter translates to the feet, then asks the pose chain for a
+// transform; R52 (the chain's head) is swapped for a copy whose pose is ours. The pose is worked
+// out once per drawEnemy (scopePose) so the R108 shadow can follow it. hp, timers, AI, hit tests
+// and positions are only read. mobs-r108.js supplies the level (strength) and the swarm LOD.
+// Rules (owner feedback "꿀렁" on painted sprites): the picture is never stretched or squashed at
+// rest; idle is at most a 1% vertical bob, flyers one slow hover, walking a stride-locked bob with a
+// small lean; only the attack thrust and the hit recoil may scale the body, by 4% at most and for
+// less than 0.2 s (half of that for bosses / midbosses). Life comes from movement, facing, attacks and
+// recoil, not from deforming the picture.
 const mobState=new WeakMap();
-let scopeEnemy=null;
-function mobOf(e){let s=mobState.get(e);if(!s){s={x:e.x,y:e.y,t:time,phase:0,spd:0,vx:0,vy:0,gait:0,dustAt:-9,land:false};mobState.set(e,s);}return s;}
+let scopeEnemy=null,scopePose=null;
+const R108=()=>window.__STORYWORLD_MOBS_R108__;
+// 0 off, .55 light, 1 default (R108 settings section); 1 while R108 is absent.
+function mobStrength(){try{const m=R108(),v=m&&typeof m.strength==='function'?m.strength():1;return Number.isFinite(v)?clamp(v,0,1):1;}catch(_){return 1;}}
+// 0 skip (off screen), 1 cheap (far mob inside a swarm), 2 full.
+function mobLod(e){try{const m=R108(),v=m&&typeof m.lodOf==='function'?m.lodOf(e):2;return v===0||v===1?v:2;}catch(_){return 2;}}
+function mobOf(e){let s=mobState.get(e);if(!s){const h=hash(e.id);
+ s={x:e.x,y:e.y,t:time,vx:0,vy:0,spd:0,dist:0,phase:0,step:0,walk:0,jx:0,jy:0,dustAt:-9,seed:(h%628)/100,r1:((h>>>8)%1000)/1000,r2:((h>>>18)%1000)/1000,pose:{dx:0,dy:0,bob:0,lean:0,sx:1,sy:1,pivot:0}};mobState.set(e,s);}return s;}
 function isFlyer(e){try{return !!POL()?.artOf?.(e)?.fly||finite(e.visualLiftPx)>0;}catch(_){return finite(e.visualLiftPx)>0;}}
 function bodyPx(e){return actorHeight()*finite(e.combatProfile?.spriteRect?.height,1)*finite(e.defScale,1);}
 function onScreen(e){const q=project(e.x,e.y);return q.x>-80&&q.x<W+80&&q.y>-120&&q.y<H+80;}
-function motion(e){const s=mobOf(e),dt=clamp(time-s.t,0,.1),major=!!(e.boss||e.midboss||e.persona),amp=(major?.45:1)*(lowFx()?.7:1),h=bodyPx(e);
- if(dt>0){const vx=(e.x-s.x)/dt,vy=(e.y-s.y)/dt;s.vx=lerp(s.vx,vx,.4);s.vy=lerp(s.vy,vy,.4);s.spd=lerp(s.spd,Math.hypot(vx,vy),.35);s.x=e.x;s.y=e.y;s.t=time;}
- const moving=!!e.moving||s.spd>.35,fly=isFlyer(e),seed=hash(e.id)%628/100;
- let dx=0,bob=0,lean=0,sx=1,sy=1,pivot=0;
- // screen-horizontal travel direction (iso: screen x grows with x-y)
- const sdir=clamp((s.vx-s.vy)/2.5,-1,1);
- if(fly){bob=Math.sin(time*2.6+seed)*h*.025*amp;const beat=Math.sin(time*(moving?12:7.5)+seed);sy=1+.045*beat*amp;sx=1-.018*beat*amp;lean=sdir*.1*amp;pivot=h*.55;}
- else if(moving){if(dt>0)s.phase+=dt*(6.5+s.spd*4.2)*(major?.75:1);const g=Math.sin(s.phase);bob=Math.abs(g)*h*.05*amp;lean=sdir*.055*amp+g*.028*amp;sy=1+.035*Math.cos(2*s.phase)*amp;sx=1-(sy-1)*.6;
-  const landing=Math.abs(s.gait)>.3&&Math.abs(g)<=.3;s.gait=g;if(landing&&s.spd>1&&time-s.dustAt>.25&&!lowFx()&&list.length<MAX-6&&onScreen(e)){s.dustAt=time;add({kind:'dust',x:e.x,y:e.y,life:.38,seed:Math.random()*6,scale:clamp(h/actorHeight(),.6,1.6)});stats.dust++;}}
- else{if(dt>0)s.phase+=(Math.round(s.phase/Math.PI)*Math.PI-s.phase)*Math.min(1,dt*10);s.gait=0;sy=1+.012*Math.sin(time*2.2+seed)*amp;}
- // attack: rear back through the windup, lunge through the active window (rotation, not shear)
- const a=e.attack;if(a&&Number.isFinite(a.elapsed)){const shape=a.shape154||e.combatProfile?.attackShape||{},windup=Math.max(.05,a.castWindup150??shape.windup??.3),active=Math.max(.05,shape.active??.15),u=a.elapsed/windup;
-  const ang=Number.isFinite(a.angle)?a.angle:Math.atan2((player?.y??e.y)-e.y,(player?.x??e.x)-e.x),sign=Math.cos(screenAngle(ang));
-  if(u<1){const g=smooth(u);lean-=sign*.07*g*amp;sy*=1+.03*g*amp;dx-=sign*2*Z()*g*amp;}else{const g=1-smooth((a.elapsed-windup)/(active+.18));lean+=sign*.14*g*amp;sx*=1+.06*g*amp;sy*=1-.05*g*amp;dx+=sign*5*Z()*g*amp;}}
- else if(e.rangedWindup>0){lean-=sdir*.02;sy*=1+.025*amp;}
- // hit flinch: pushed along the blow, squashed, then settles
- // (a plain hit only nudges: the native hit timer drives a small push away from the hero)
- const f=flinch.get(e);let fu=f?(time-f.at)/.22:2,fk=f?.k??1,fdx=f?.dx;
- if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.15:.4;fdx=player?Math.cos(screenAngle(Math.atan2(e.y-player.y,e.x-player.x))):null;}
- if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.12*g;sy*=1-.1*g;lean+=ddx*.06*g;}
- return{dx,bob,lean,sx,sy,pivot};}
+// world direction -> unit vector on screen (iso: screen x grows with x-y, screen y with (x+y)/2)
+function screenVec(ax,ay){const sx=ax-ay,sy=(ax+ay)*.5,L=Math.hypot(sx,sy)||1;return[sx/L,sy/L];}
+const easeOut3=t=>{t=clamp(t,0,1);return 1-(1-t)*(1-t)*(1-t);};
+// Motion caps (fractions of body height / radians / scale). Exported through inspect for the CPU check.
+const MOTION_CAPS=Object.freeze({idleBob:.01,idleHz:.5,idleLean:.01,hoverAmp:.015,hoverHz:1,walkBob:.03,walkLean:.05,actScale:.04,actScaleMajor:.02,hitSeconds:.18});
+// Any hero hit makes the mob recoil away from the hero; the push grows with the share of its
+// health the blow took, skill hits add a little. Bosses barely move (a silly shove otherwise).
+function noteHit(e,dmg,skill){if(!e||!player||!(dmg>0))return;const major=!!(e.boss||e.midboss||e.persona);if(major&&!skill)return;
+ const prev=flinch.get(e);if(prev&&time-prev.at<.07)return;
+ const frac=dmg/Math.max(1,finite(e.maxHp,1)),k=clamp(.55+Math.sqrt(Math.max(0,frac))*2.1+(skill?.25:0),.55,1.7)*(major?.3:1);
+ const v=screenVec(e.x-player.x,e.y-player.y);flinch.set(e,{at:time,dx:v[0],dy:v[1],k});stats.recoils=(stats.recoils||0)+1;}
+function motion(e){const s=mobOf(e),P=s.pose;P.dx=0;P.dy=0;P.bob=0;P.lean=0;P.sx=1;P.sy=1;P.pivot=0;
+ const str=mobStrength(),lod=mobLod(e);if(!(str>0)||lod===0)return P;
+ const major=!!(e.boss||e.midboss||e.persona),amp=str*(major?.5:1)*(lowFx()?.8:1),h=bodyPx(e),C=MOTION_CAPS;
+ // the world velocity is measured from real movement; a one-frame jump (push-back, separation,
+ // teleport) slides the picture to the new spot instead of popping or faking a sprint.
+ let el=time-s.t;if(!(el>=0)||el>.35){s.x=e.x;s.y=e.y;s.t=time;s.vx=s.vy=s.spd=s.dist=0;s.jx=s.jy=0;el=0;}
+ const dt=clamp(el,0,.1);
+ if(dt>0){const ddx=e.x-s.x,ddy=e.y-s.y,dist=Math.hypot(ddx,ddy),vmax=(finite(e.speed,2.2)+2.2)*dt*1.7+.02;
+  if(dist>vmax){if(dist<1.4){const a=project(s.x,s.y),b=project(e.x,e.y);s.jx=clamp(s.jx+a.x-b.x,-44,44);s.jy=clamp(s.jy+a.y-b.y,-30,30);}s.dist=0;}
+  else{s.vx=lerp(s.vx,ddx/dt,.45);s.vy=lerp(s.vy,ddy/dt,.45);s.spd=lerp(s.spd,Math.hypot(s.vx,s.vy),.45);s.dist=dist;}
+  s.x=e.x;s.y=e.y;s.t=time;const k=Math.exp(-dt*11);s.jx*=k;s.jy*=k;}
+ const fly=isFlyer(e),seed=s.seed;
+ const sdir=clamp((s.vx-s.vy)/2.4,-1,1),target=clamp((s.spd-.25)/1.1,0,1);
+ if(dt>0)s.walk=lerp(s.walk,target,1-Math.exp(-dt*(target>s.walk?14:8)));
+ const w=s.walk;
+ // walk cycle: one footfall per stride of real travel (bigger bodies take longer strides); the
+ // feet settle on the nearest footfall when the mob stops.
+ if(dt>0&&!fly){
+  if(s.dist>0&&s.spd>.25){const stride=.56*clamp(h/Math.max(1,actorHeight()),.7,1.9)*(.88+.24*s.r1);s.phase+=Math.min(s.dist*Math.PI/stride,dt*5.4*Math.PI);}
+  else s.phase+=(Math.round(s.phase/Math.PI)*Math.PI-s.phase)*Math.min(1,dt*9);
+  const step=Math.floor(s.phase/Math.PI+1e-4);
+  if(step!==s.step){s.step=step;
+   if(w>.6&&s.spd>1.1&&time-s.dustAt>.26&&lod===2&&!lowFx()&&list.length<MAX-6&&onScreen(e)){s.dustAt=time;add({kind:'dust',x:e.x,y:e.y,life:.38,seed:Math.random()*6,scale:clamp(h/actorHeight(),.6,1.6)});stats.dust++;}}}
+ if(fly){
+  // one slow hover: a single vertical sine, ~1 Hz, <=1.5% of the body; nothing else at rest
+  P.bob=Math.sin(time*TAU*C.hoverHz*(.9+.2*s.r1)+seed)*h*C.hoverAmp*amp;
+  P.lean+=sdir*C.walkLean*amp*w;}
+ else{
+  if(w>.02){const g=Math.sin(s.phase);
+   // stride bob (<=3% h) and a small lean into the travel (<=0.05 rad); the picture is never stretched
+   P.bob+=Math.abs(g)*h*C.walkBob*w*amp;P.lean+=clamp(sdir*.035+g*.012,-C.walkLean,C.walkLean)*w*amp;}
+  // idle: at most a 1% vertical bob at ~0.5 Hz (own phase per mob) and a barely visible lean
+  const iw=1-w;
+  if(iw>.02&&lod===2){const rate=C.idleHz*(.9+.2*s.r2);
+   P.bob+=(.5+.5*Math.sin(time*TAU*rate+seed*3.1))*h*C.idleBob*amp*iw;
+   P.lean+=Math.sin(time*.6*(.8+.4*s.r1)+seed*7)*C.idleLean*amp*iw;}}
+ // attack: gather through the windup (lean back, slight crouch), thrust toward the target through
+ // the active window, settle through the recovery (offset in drawing only; the foot stays put).
+ // Scale is capped at 4% (2% for bosses) and only during the short thrust.
+ const a=e.attack,smax=major?C.actScaleMajor:C.actScale;
+ if(a&&Number.isFinite(a.elapsed)){
+  const shape=a.shape154||e.combatProfile?.attackShape||{},windup=Math.max(.05,a.castWindup150??shape.windup??.3),active=Math.max(.05,shape.active??.15),rec=Math.max(.12,shape.recovery??.3),
+   ang=Number.isFinite(a.angle)?a.angle:Math.atan2((player?.y??e.y)-e.y,(player?.x??e.x)-e.x),v=screenVec(Math.cos(ang),Math.sin(ang)),ux=v[0],uy=v[1],
+   heavy=e.weapon==='heavy',caster=e.weapon==='caster',reach=(caster?0:heavy?.15:.24)*h*amp;
+  if(a.elapsed<windup){const g=smooth(a.elapsed/windup);
+   P.sy*=1-smax*g*amp;P.lean-=ux*.12*g*amp;P.dx-=ux*h*.05*g*amp;P.dy-=uy*h*.025*g*amp;if(caster)P.bob+=h*.03*g*amp;}
+  else{const t=a.elapsed-windup,thrust=easeOut3(t/(active*.7+.03)),back=smooth((t-active*.6)/(rec*.8+.1)),d=thrust*(1-back),sq=t<C.hitSeconds?d*(1-t/C.hitSeconds):0;
+   P.dx+=ux*reach*d;P.dy+=uy*reach*d;P.lean+=ux*.16*d*amp;P.sx*=1+smax*sq*amp;P.sy*=1-smax*sq*amp;}}
+ else if(e.rangedWindup>0){const av=Number.isFinite(e.rangedAim)?screenVec(Math.cos(e.rangedAim),Math.sin(e.rangedAim)):[sdir||1,0];
+  P.lean-=av[0]*.06*amp;P.dx-=av[0]*h*.03*amp;}
+ // hit: shoved away from the hero along the blow with a short (<0.2 s) 4% squash, then settles
+ // (the native hit timer alone only nudges, for hits that never reached the wrapper below)
+ const f=flinch.get(e);let fu=f?(time-f.at)/C.hitSeconds:2,fk=f?.k??1,fx=f?.dx??0,fy=f?.dy??0;
+ if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.12:.35;if(player){const v=screenVec(e.x-player.x,e.y-player.y);fx=v[0];fy=v[1];}else{fx=sdir||1;fy=0;}}
+ if(fu>=0&&fu<1){const g=Math.sin(Math.PI*Math.pow(fu,.6))*(1-fu*.35)*amp,mag=h*(.06+.07*Math.min(1.7,fk)),sq=smax*Math.min(1,fk)*Math.sin(Math.PI*fu)*amp;
+  P.dx+=fx*mag*g;P.dy+=fy*mag*g*.8;P.sx*=1+sq;P.sy*=1-sq;P.lean+=fx*.08*g;}
+ P.dx=clamp(P.dx+s.jx,-h*.7,h*.7);P.dy=clamp(P.dy+s.jy,-h*.5,h*.5);P.lean=clamp(P.lean,-.3,.3);P.sx=clamp(P.sx,1-smax,1+smax);P.sy=clamp(P.sy,1-smax,1+smax);
+ return P;}
 const R52=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;
 if(R52&&typeof R52.applyBodyPose==='function'){
  window.__STORYWORLD_HOSPITAL_CHARGE_R52__=Object.freeze({...R52,
   applyBodyPose(c,hero=false){const e=scopeEnemy;if(hero||!e||!prefs.motion||reduced()||!c||!(e.hp>0)||e.spawnState==='dead')return R52.applyBodyPose(c,hero);
-   try{const m=motion(e);stats.poses++;c.translate(m.dx,-m.bob);if(m.pivot){c.translate(0,-m.pivot);}if(m.lean)c.rotate(m.lean);if(m.sx!==1||m.sy!==1)c.scale(m.sx,m.sy);if(m.pivot){c.translate(0,m.pivot);}return{shear:0,scaleY:m.sy,phase:'r101',angle:0};}
+   try{const m=scopePose||motion(e);stats.poses++;c.translate(m.dx,m.dy-m.bob);if(m.pivot){c.translate(0,-m.pivot);}if(m.lean)c.rotate(m.lean);if(m.sx!==1||m.sy!==1)c.scale(m.sx,m.sy);if(m.pivot){c.translate(0,m.pivot);}return{shear:0,scaleY:m.sy,phase:'r101',angle:0};}
    catch(err){fail(err);return R52.applyBodyPose(c,hero);}},
-  hasMotion(e){try{if(prefs.motion&&!reduced()&&e&&e.hp>0){if(e.moving||e.attack||e.rangedWindup>0||e.hitTimer>0||isFlyer(e))return true;const f=flinch.get(e);if(f&&time-f.at<.3)return true;const s=mobState.get(e);if(s&&s.spd>.35)return true;}}catch(err){fail(err);}return typeof R52.hasMotion==='function'?R52.hasMotion(e):false;}});}
-const enemyBase=drawEnemy;drawEnemy=function(e,...a){const prev=scopeEnemy;scopeEnemy=e;try{return enemyBase.call(this,e,...a);}finally{scopeEnemy=prev;}};
+  hasMotion(e){try{if(prefs.motion&&!reduced()&&e&&e.hp>0&&e.spawnState==='active'&&mobStrength()>0&&mobLod(e)>0)return true;}catch(err){fail(err);}return typeof R52.hasMotion==='function'?R52.hasMotion(e):false;}});}
+const enemyBase=drawEnemy;drawEnemy=function(e,...a){const prev=scopeEnemy,prevPose=scopePose;scopeEnemy=e;scopePose=null;
+ try{if(prefs.motion&&!reduced()&&e&&e.hp>0&&e.spawnState==='active'&&live())scopePose=motion(e);}catch(err){fail(err);scopePose=null;}
+ try{return enemyBase.call(this,e,...a);}finally{scopeEnemy=prev;scopePose=prevPose;}};
 
 // ---- guide continuity ------------------------------------------------------------------
 // 1) big maps: when the native planner finds nothing while the guide is on, the R100 grid A*
@@ -450,6 +516,8 @@ function settingsSection(){const host=document.getElementById('retroSettingsR100
 if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...a){const r=sb.apply(this,a);try{settingsSection();}catch(e){fail(e);}return r;};}
 
 window.__STORYWORLD_POLISH_R101__=Object.freeze({revision:'R101-polish',prefs:()=>({...prefs}),set,palette:id=>({...fxOf(id)}),heat:()=>live()?heat(player):0,motion:e=>e?{...motion(e)}:null,
+ // R108: the pose worked out for the mob being drawn right now (null outside a mob draw) and a hit note for tests
+ poseNow:()=>scopePose,noteHit:(e,dmg,skill=false)=>{noteHit(e,dmg,skill);return !!flinch.get(e);},
  effects:()=>list.map(e=>({kind:e.kind,age:age(e),life:e.life})),pickedHero:()=>pickedHero,toggleGuide,
  inspect:()=>({revision:'R101-polish',prefs:{...prefs},stats:{...stats},effects:list.length,tier:live()?tierOf(player):null,lastError,relayBuilds:[...RELAY_BUILDS],presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
