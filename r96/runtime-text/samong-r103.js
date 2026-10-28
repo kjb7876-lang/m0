@@ -238,8 +238,8 @@
  function scene(ep,key,text,narrator,part){const k='DREAM:sm103:'+ep.key+':'+part+':'+key;return{id:ep.host,record:{title:ep.title,narrator,chapter:ep.chapter},part:'body',text,title:TEXT()[key]?.title||ep.title,narrator:narrator?'〈'+narrator+'〉':'',chapter:ep.chapter,key:k};}
  // [구간 키, 그 문단이 시작하는 원문 문자열(없으면 첫 문단, 'last'는 끝), 문단 수]
  const CUES={
-  P:{a:['prelude',null,4],b:['threshold','코어 아래로 검은 뿌리가',1],z:['threshold','교주가 마지막으로 세운 감옥은',1]},
-  'S-01':{s:['threshold','뿌리를 무너뜨리자',1],m:['threshold','모든 적을 없애고 나서 움직일 수는',1],a:['S-01',null,2],b:['S-01','그때 식탁의 안주인이',2],z:['S-01','실들이 한꺼번에',1]},
+  P:{a:['prelude',null,4],b:['threshold','나는 코어 아래로 뻗은 검은 뿌리',1],z:['threshold','교주는 굳이 감시하지 않더라도',1]},
+  'S-01':{s:['threshold','나는 뿌리를 무너뜨린 뒤',1],m:['threshold','적은 계속 나타나기에',1],a:['S-01',null,2],b:['S-01','그때 식탁의 안주인이',2],z:['S-01','실들이 한꺼번에',1]},
   'S-02':{s:['S-02',null,2],m:['S-02','복도 끝에서 열쇠가',1],a:['S-02','방송실이 위층에',2],b:['S-02','나는 귀가 확인서를',1],z:['S-02','교문은 열렸지만',1]},
   'S-03':{s:['S-03',null,1],m:['S-03','손전등을 낮추자',1],a:['S-03','빗소리가 잦아들자',1],b:['S-03','시험장 뒤편에서는 도복들이',2],z:['S-03','관람석이 한 자리씩',1]},
   'S-04':{s:['S-04',null,2],m:['S-04','나는 탈출이 아니라 배달을',1],a:['S-04','엘리베이터는 4층으로',1],b:['S-04','13층에서 강재헌을',3],z:['S-04','비 속에서 눈을 떴을 때',1]},
