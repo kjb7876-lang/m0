@@ -16,7 +16,7 @@
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r108.mobtune';
  const prefs={steadyFacing:true,championLimits:true};
  try{Object.assign(prefs,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(_){}
- const stats={flipAsked:0,flipHeld:0,flipTurns:0,dirHeld:0,championsTuned:0,aiHeld:0,shotsCleaned:0,hazardsCleaned:0,charges:0,chargeHits:0};
+ const stats={attackFlips:0,boltsTinted:0,flipAsked:0,flipHeld:0,flipTurns:0,dirHeld:0,championsTuned:0,aiHeld:0,shotsCleaned:0,hazardsCleaned:0,charges:0,chargeHits:0};
  let lastError=null;const fail=e=>{lastError=String(e?.stack||e).slice(0,300);};
  const T=()=>typeof time==='number'?time:0;
  const busyAttack=e=>!!e&&(!!e.attack||e.rangedWindup>0||!!e.r61Action||!!charge.get(e)?.phase);
@@ -34,9 +34,19 @@
   if(t-s.since>=hold&&(fast||t-s.last>=MIN_GAP)){s.cur=want;s.pend=null;s.last=t;return want;}
   return s.cur;}
  const flipState=new WeakMap(),dirState=new WeakMap();
+ // Shared attack sheets (rc137 mob-attacks-01..04, 4x4 cells) carry no facing data, so the story pose
+ // assumed every cell faces right, and the R100 'face the hero' layer then mirrored them by the idle
+ // art's facing: a left-swinging cell (the purple winged skeleton, sheet 01 cell 3) struck away from the
+ // hero. Which way each cell's blow travels (looked up by eye, 2026-10-28): L / R, '.' = front/symmetric.
+ const ATTACK_FACE={'mob-attacks-01':'L.RLL...R..L....','mob-attacks-02':'R..RLLRR.RRRLLLR','mob-attacks-03':'RR.LR..RL..R.LLR','mob-attacks-04':'LL...RL..L.RR.RL'};
+ function attackFlip(e,f){if(!f||!f.r54StoryPose)return null;const m=/(mob-attacks-0[1-4])\.png$/.exec(String(f.path||''));if(!m)return null;
+  const r=f.assetFrame?.sourceRect||f.sourceRect;if(!r)return null;const cell=Math.round(r[1]/313.5)*4+Math.round(r[0]/313.5),face=ATTACK_FACE[m[1]][cell];if(face!=='L'&&face!=='R')return null;
+  const a=Number.isFinite(f.r54Angle)?f.r54Angle:Number.isFinite(e.attack?.angle)?e.attack.angle:Math.atan2(player.y-e.y,player.x-e.x),sx=Math.cos(a)-Math.sin(a);// screen x of the blow
+  return face==='L'?sx>0:sx<0;}
  const motion=window.__STORYWORLD_ENEMY_MOTION_R51__;
  if(motion&&typeof motion.flip==='function'){const base=motion.flip;
   window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motion,flip(e,f,fallback){const out=base.call(this,e,f,fallback);
+   try{const fixed=attackFlip(e,f);if(fixed!==null){stats.attackFlips++;return fixed;}}catch(err){fail(err);}
    try{if(!prefs.steadyFacing||!e||!(e.hp>0)||typeof out!=='boolean')return out;stats.flipAsked++;
     const v=settle(flipState,e,out);if(v!==out)stats.flipHeld++;else if(flipState.get(e).last===T())stats.flipTurns++;return v;}catch(err){fail(err);}return out;}});}
  const drawBase=drawEnemy;
@@ -49,9 +59,22 @@
  // ---- 2. ward champions: illusion, prop throw, charge, melee — no bolts, no statuses ----------
  const ownerOf=id=>room?.enemies?.find(e=>e.id===id)||null;
  const shotBase=makeShot;
- makeShot=function(x,y,angle,speed,damage,opts,...rest){
-  try{if(prefs.championLimits&&opts&&opts.r58Affliction&&champion(ownerOf(opts.owner))){const o={...opts};delete o.r58Affliction;stats.shotsCleaned++;return shotBase.call(this,x,y,angle,speed,damage,o,...rest);}}catch(err){fail(err);}
-  return shotBase.apply(this,arguments);};
+ makeShot=function(x,y,angle,speed,damage,opts,...rest){let shot;
+  try{if(prefs.championLimits&&opts&&opts.r58Affliction&&champion(ownerOf(opts.owner))){const o={...opts};delete o.r58Affliction;stats.shotsCleaned++;shot=shotBase.call(this,x,y,angle,speed,damage,o,...rest);}}catch(err){fail(err);}
+  if(shot===undefined)shot=shotBase.apply(this,arguments);
+  try{tintShot(shot);}catch(err){fail(err);}return shot;};
+ // 3. Ordinary mobs all threw the same light-blue core (VFX.bolt). It now takes the mob's signature
+ //    colour (R100 colourOf: violet, red, gold, ...). Tinted copies are made once per colour.
+ const TINT={blue:[90,150,255],cyan:[90,230,255],dark:[120,70,150],gold:[255,200,80],lime:[170,255,90],magenta:[255,80,220],orange:[255,140,50],pale:[235,235,245],pink:[255,130,190],purple:[170,90,255],red:[255,70,60],teal:[60,220,190],violet:[190,110,255]};
+ const tinted=new Map();
+ function tintPath(base,colour){const key='r108tint/'+colour+'/'+String(base).split('/').pop();if(tinted.has(key))return tinted.get(key);
+  const row=typeof readyImage==='function'?readyImage(base):null;if(!row?.image)return null;const im=row.image,w=im.naturalWidth||im.width,h=im.naturalHeight||im.height;if(!w||!h)return null;
+  const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d'),[R,G,B]=TINT[colour];
+  g.drawImage(im,0,0);g.globalCompositeOperation='source-atop';g.fillStyle='rgba('+R+','+G+','+B+',.82)';g.fillRect(0,0,w,h);
+  g.globalCompositeOperation='lighter';g.globalAlpha=.28;g.drawImage(im,0,0);// keep a bright core
+  c.__storyworldStaticTint={immutable:true,key};imageCache.set(key,{...row,image:c,ready:true,path:key});tinted.set(key,key);return key;}
+ function tintShot(shot){if(!shot||shot.friendly||typeof VFX==='undefined'||shot.asset!==VFX.bolt)return;const o=ownerOf(shot.owner);if(!o||o.boss||o.persona)return;
+  const colour=window.__STORYWORLD_POLISH_R100__?.colourOf?.(o);if(!colour||!TINT[colour]||colour==='blue'||colour==='cyan')return;const k=tintPath(shot.asset,colour);if(k){shot.asset=k;stats.boltsTinted++;}}
  // Statuses ride on the hit: R58 reads source.r58Affliction (or derives one from the owner) and
  // R61 reads source.r61Tag. For a champion's hit both get a key no status table knows, so the hit
  // lands with its normal damage and no bind/poison/bleed/... is admitted; the source is restored.

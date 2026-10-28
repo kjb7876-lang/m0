@@ -171,7 +171,8 @@
   return api.build(id,ep,cells,{nodes,edges:[[0,1,4]],entry:{...entry,node:0},bounds:[0,0,S,S],wallHeight:bp.outdoor?(bp.outdoor.wall??1):2.7,extra:{kind:'survival',centre,pillars,shape,r106Scale:KS}});}
 
  // R106: 손전등 미로는 훨씬 복잡하게 — 칸 수 MAZE_SCALE배, 곁가지를 더 내고(직선 비율↓) 되돌이 길을 줄여 막다른 길을 늘린다.
- function maze(id,ep,bp,seed,api){const C=Math.min(18,Math.round((bp.cols||8)*MAZE_SCALE)),R=Math.min(18,Math.round((bp.rows||bp.cols||8)*MAZE_SCALE)),SZ=bp.cell||5,CW=bp.cw||3,LW=bp.lw||2,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
+ function maze(id,ep,bp,seed,api){// R108: 3칸 방·2칸 연결로는 너무 답답했다 → 5칸 방·4칸 연결(7칸 격자), 칸 수는 줄여 전체 크기는 비슷하게.
+  const C=Math.min(13,Math.round((bp.cols||8)*MAZE_SCALE*.72)),R=Math.min(13,Math.round((bp.rows||bp.cols||8)*MAZE_SCALE*.72)),SZ=(bp.cell||5)+2,CW=(bp.cw||3)+2,LW=(bp.lw||2)+2,r=rng(seed||hash(id)),open=new Set(),k=(a,b)=>a+','+b;
   const nb=(x,y)=>[[x+1,y],[x-1,y],[x,y+1],[x,y-1]].filter(([a,b])=>a>=0&&b>=0&&a<C&&b<R);
   const ek=(a,b)=>a[0]<b[0]||a[1]<b[1]?k(...a)+'|'+k(...b):k(...b)+'|'+k(...a),link=(a,b)=>open.add(ek(a,b)),linked=(a,b)=>open.has(ek(a,b));
   const start=[0,R-1],seen=new Set([k(...start)]),stack=[start],straight=Math.min(.6,bp.straight??.5)*.75;
@@ -192,19 +193,25 @@
   const deadEnds=nodes.filter(n=>n.degree===1&&k(...n.cell)!==k(...start)&&k(...n.cell)!==k(...exit));
   const save=path[Math.floor(path.length/2)],onPath=new Set(path.map(c=>k(...c))),pool=deadEnds.length>=3?deadEnds:[...deadEnds,...nodes.filter(n=>!onPath.has(k(...n.cell))&&!deadEnds.includes(n))],chests=pool.sort((a,b)=>(hash(id+a.id)%997)-(hash(id+b.id)%997)).slice(0,3).map(n=>({x:n.x,y:n.y}));
   const rooms=[...roomSet].map(s=>{const[x,y]=s.split(',').map(Number);return{x:x*SZ+1+(SZ-1)/2,y:y*SZ+1+(SZ-1)/2,cell:[x,y]};});
-  return api.build(id,ep,cells,{nodes,edges:[],entry:{...centre(start),node:(R-1)*C},bounds:[0,0,C*SZ+1,R*SZ+1],wallHeight:bp.outdoor?(bp.outdoor.wall??2.7):2.7,extra:{kind:'maze',exit:centre(exit),save:centre(save),pathLength:path.length,cols:C,rows:R,chests,seed,path:path.map(centre),rooms,deadEnds:deadEnds.map(n=>({x:n.x,y:n.y}))}});}
+  const ML=api.build(id,ep,cells,{nodes,edges:[],entry:{...centre(start),node:(R-1)*C},bounds:[0,0,C*SZ+1,R*SZ+1],wallHeight:bp.outdoor?(bp.outdoor.wall??2.7):2.7,extra:{kind:'maze',exit:centre(exit),save:centre(save),pathLength:path.length,cols:C,rows:R,chests,seed,path:path.map(centre),rooms,deadEnds:deadEnds.map(n=>({x:n.x,y:n.y}))}});ML.backdropRects=backdropAround(cells,Math.max(C,R)*SZ+1,3);return ML;}
 
- function ascent(id,ep,bp,api,i){const variant=bp.variant||'zigzag';if(variant==='zigzag')return api.ascentLayout(i,ep);
+ function ascent(id,ep,bp,api,i){const variant=bp.variant||'zigzag';
   const cells=new Set(),add=(x,y)=>cells.add(K(x,y)),fill=(x0,y0,x1,y1)=>{for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)add(x,y);};
   // 보스 단은 원래 30격자 안(보스 탄막이 3..27 로 잠긴다). 입구는 화면 아래(x+y 큰 쪽)에서 위로 오른다.
-  const dais={x:15,y:15};for(let y=6;y<25;y++)for(let x=6;x<25;x++)if(Math.hypot(x+.5-15,y+.5-15)<9.4)add(x,y);
-  const V={straight:[[44,44],[37,37],[30,30]],spiral:[[44,44],[42,31],[31,42],[33,24],[23,33],[27,21]],bridge:[[45,24],[37,24],[29,24]]}[variant]||[[44,44],[37,37],[30,30]];
+  const dais={x:15,y:15};for(let y=5;y<26;y++)for(let x=5;x<26;x++)if(Math.hypot(x+.5-15,y+.5-15)<10.2)add(x,y);
+  // R108: 오르막이 3칸 통로·6칸 층계참이라 답답했다 → 통로 5칸, 층계참 8칸, 담은 낮게, 바깥은 어둡게 깐 배경 지형.
+  const V={zigzag:[[44,44],[36,44],[36,36],[28,36],[28,28],[28,22],[22,22]],straight:[[44,44],[37,37],[30,30]],spiral:[[44,44],[42,31],[31,42],[33,24],[23,33],[27,21]],bridge:[[45,24],[37,24],[29,24]]}[variant]||[[44,44],[37,37],[30,30]];
   const brush=(x,y,w)=>{const h=Math.floor(w/2);for(let b=-h;b<=h;b++)for(let a=-h;a<=h;a++)add(Math.round(x)+a,Math.round(y)+b);};
   const seg=(a,b,w)=>{const n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])*2));for(let t=0;t<=n;t++)brush(a[0]+(b[0]-a[0])*t/n,a[1]+(b[1]-a[1])*t/n,w);};
-  const landings=[];for(let n=0;n<V.length;n++){const[x,y]=V[n];fill(x-3,y-3,x+3,y+3);landings.push({x:x+.5,y:y+.5});if(n>0)seg(V[n-1],V[n],3);}
-  seg(V[V.length-1],[15,15],3);
-  const nodes=landings.map((p,n)=>({id:n,...p,radius:3,shape:'square',width:6,depth:6}));nodes.push({id:nodes.length,...dais,radius:9,shape:'round'});
-  const e=landings[0];return api.build(id,ep,cells,{nodes,edges:nodes.slice(1).map((n,j)=>[j,j+1,3]),entry:{x:e.x,y:e.y+1,node:0},bounds:[0,0,49,49],wallHeight:bp.outdoor?(bp.outdoor.wall??1):3.4,extra:{kind:'ascent',dais,landings:landings.slice(1),variant}});}
+  const landings=[];for(let n=0;n<V.length;n++){const[x,y]=V[n];fill(x-4,y-4,x+5,y+5);landings.push({x:x+.5,y:y+.5});if(n>0)seg(V[n-1],V[n],5);}
+  seg(V[V.length-1],[15,15],5);
+  for(const k of[...cells]){const[x,y]=k.split(':').map(Number);if(x<1||y<1||x>47||y>47)cells.delete(k);}
+  const nodes=landings.map((p,n)=>({id:n,...p,radius:4,shape:'square',width:8,depth:8}));nodes.push({id:nodes.length,...dais,radius:10,shape:'round'});
+  const e=landings[0],L=api.build(id,ep,cells,{nodes,edges:nodes.slice(1).map((n,j)=>[j,j+1,5]),entry:{x:e.x,y:e.y+1,node:0},bounds:[0,0,49,49],wallHeight:bp.outdoor?(bp.outdoor.wall??1):2.1,extra:{kind:'ascent',dais,landings:landings.slice(1),variant}});
+  L.backdropRects=backdropAround(cells,49,8);return L;}
+ // 바닥 둘레 r칸 안의 빈 칸을 가로줄 사각형으로 묶는다(걷지 못하는 배경 지형; 엔진이 어둡게 그린다).
+ function backdropAround(cells,size,r){const near=new Set();for(const k of cells){const[x,y]=k.split(':').map(Number);for(let b=-r;b<=r;b++)for(let a=-r;a<=r;a++){if(a*a+b*b>r*r+1)continue;const X=x+a,Y=y+b;if(X<0||Y<0||X>=size||Y>=size)continue;const q=X+':'+Y;if(!cells.has(q))near.add(q);}}
+  const out=[];for(let y=0;y<size;y++){let x=0;while(x<size){if(!near.has(x+':'+y)){x++;continue;}const s=x;while(near.has(x+':'+y))x++;out.push({x:s,y,width:x-s,depth:1});}}return out;}
 
  // 실외: R74 모드·낮은 담·R98 장면 표식. R99 가 바닥 원화와 나무를, 이 모듈이 물결 면을 맡는다.
  function outdoor(L,bp,ep){const o=bp.outdoor;if(!o)return;if(L.worldR74)L.worldR74.mode='outdoor';const wall=o.wall??null;if(wall!=null)for(const w of L.walls||[]){if(!Number.isFinite(w.height))continue;w.r98BaseHeight=w.height;w.height=wall;}
@@ -217,7 +224,12 @@
 
  // ---- 소품·기록 표식 배치 -----------------------------------------------------------------------
  function spots(L,{gap=3,avoid=[],edge=true,limit=64}={}){const cells=new Set(L.floorCells.map(([x,y])=>K(x,y))),has=(x,y)=>cells.has(K(x,y)),cand=[],out=[];
-  for(const[x,y]of L.floorCells){const e=!has(x+1,y)||!has(x-1,y)||!has(x,y+1)||!has(x,y-1);if(edge?!e:e)continue;cand.push({x:x+.5,y:y+.5,k:hash(L.id+':'+x+':'+y)});}
+  // R108: 벽에 붙은 칸(1)에 세우면 높은 조형물이 벽을 뚫고 보였다. 벽까지 거리(8방향, 벽 옆 칸=1)를 재서
+  // 벽 쪽 장식은 한 칸 띄운 칸(2), 안쪽 장식은 3 이상에만 세운다. 좁은 곳은 2 이상으로 물러선다.
+  const dist=new Map(),q=[];for(const[x,y]of L.floorCells){let open=false;for(let b=-1;b<=1&&!open;b++)for(let a=-1;a<=1;a++)if((a||b)&&!has(x+a,y+b)){open=true;break;}if(open){dist.set(K(x,y),1);q.push([x,y]);}}
+  for(let h=0;h<q.length;h++){const[x,y]=q[h],d=dist.get(K(x,y));for(let b=-1;b<=1;b++)for(let a=-1;a<=1;a++){const k=K(x+a,y+b);if(has(x+a,y+b)&&!dist.has(k)){dist.set(k,d+1);q.push([x+a,y+b]);}}}
+  const want=d=>edge?d===2:d>=3;let pick=L.floorCells.filter(([x,y])=>want(dist.get(K(x,y))||0));if(pick.length<limit/4)pick=L.floorCells.filter(([x,y])=>(dist.get(K(x,y))||0)>=2);
+  for(const[x,y]of pick)cand.push({x:x+.5,y:y+.5,k:hash(L.id+':'+x+':'+y)});
   cand.sort((a,b)=>a.k-b.k);
   for(const p of cand){if(out.length>=limit)break;if(avoid.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||3)))continue;if(out.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<gap))continue;out.push(p);}return out;}
  const near=(p,list,d)=>list.some(q=>q&&Math.hypot(q.x-p.x,q.y-p.y)<(q.r||d));
@@ -234,7 +246,16 @@
   const rs=recordSpots(L,stage,avoid);let n=0;for(const rec of recs){const at=rs[Math.min(n,rs.length-1)];n++;if(!at)continue;r.props.push(marker(ep,stage,rec,at,n));avoid.push({...at,r:2.2});}
   const wide=stage==='survival'?SURVIVAL_SCALE:stage==='maze'?MAZE_SCALE:1,deco=spots(L,{avoid,gap:wide>1?4:2.8,limit:Math.round(96*wide)});let d=0;for(const[cell,count0]of bp.props||[]){const count=Math.round(count0*wide);for(let k=0;k<count;k++){const at=deco[d++];if(!at)break;r.props.push({id:'r105:'+cell+':'+d,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r74Prop:cell,r105Prop:cell});}}
   let a=0;try{a=window.__STORYWORLD_DRIVE_ART_R105__?.place?.(r,i,stage,ep,{deco:deco.slice(d),dais:x.dais})||0;}catch(e){fail(e);}// R105 드라이브 원화 조형물
-  r.samongR105={title:bp.title||'',records:recs.length,props:d+a,art:a,outdoor:L.samongR105.outdoor};}
+  const moved=tidy(r,L);
+  r.samongR105={title:bp.title||'',records:recs.length,props:d+a,art:a,outdoor:L.samongR105.outdoor,tidied:moved};}
+ // R108: 조형물끼리 겹치지 않게. 고정물(화로·상자·기록·포털·등불)은 그대로 두고, 장식(r105Prop·r105Art)이
+ // 다른 조형물과 1.6칸 안이면 비어 있는 자리(벽에서 한 칸 띄운 칸)로 옮기고, 자리가 없으면 뺀다.
+ function tidy(r,L){const MIN=1.6,deco=p=>!!(p&&(p.r105Prop||p.r105Art)),kept=r.props.filter(p=>!deco(p)),out=[...kept],moved={moved:0,dropped:0};
+  const clash=(p,list)=>list.some(q=>q!==p&&Math.hypot(q.x-p.x,q.y-p.y)<MIN);
+  for(const p of r.props.filter(deco)){if(!clash(p,out)){out.push(p);continue;}
+   const free=spots(L,{avoid:out.map(q=>({x:q.x,y:q.y,r:MIN+.6})),gap:2.4,limit:24});const at=free.find(s=>!clash(s,out));
+   if(at){p.x=at.x;p.y=at.y;out.push(p);moved.moved++;}else moved.dropped++;}
+  r.props=out;return moved;}
 
  // ---- 기록 표식 읽기 (원문 문단만, 해설 없음) -----------------------------------------------------
  let S5={version:VERSION,read:[]};const clean=v=>({version:VERSION,read:Array.isArray(v?.read)?v.read.filter(x=>typeof x==='string').slice(-256):[]});

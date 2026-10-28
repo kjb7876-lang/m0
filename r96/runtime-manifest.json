@@ -16223,6 +16223,11 @@
       "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
     },
     {
+      "path": "crates-r108.js",
+      "bytes": 6410,
+      "sha256": "2dfac2f88e3716054020986b1edff60502207ca7d3b3f12acd01b384a6daad0b"
+    },
+    {
       "path": "data/actor-canvas-map-v31224.js",
       "bytes": 251700,
       "sha256": "e267dd8e3fb00e302d97fe66d795a4fe16cca5980e8f2c3552e730eb4c4418cc"
@@ -16394,13 +16399,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562188,
-      "sha256": "d9fc380d28fb3fed2837d5a20efa21d6f1f7dcc9e7d6858199e1d7ef05fac775"
+      "bytes": 6562228,
+      "sha256": "e9ca089b62aa3a8d14e22604209024d3748d0ac6e4d06ab2874317bbdd831c1e"
     },
     {
       "path": "mobs-tune-r108.js",
-      "bytes": 8836,
-      "sha256": "55fe16363e3e4d744cc6b0ef1bba9933b6c140443ebf2d385d8eb736ca509cd4"
+      "bytes": 11855,
+      "sha256": "d3631051d9af23f744e06e4c9f341cbf6de44a864454f4cace710bb03a80acf7"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16434,8 +16439,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 52585,
-      "sha256": "034d2d8eb9ed0a065e502844fb43c0946d39191f228f8c72cb64193ef1d8bc72"
+      "bytes": 52653,
+      "sha256": "135fb658d40f757b7b79ddf332e39398683f0fc0f0a98ea83797486262453d26"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -16459,13 +16464,13 @@
     },
     {
       "path": "samong-maps-r105.js",
-      "bytes": 42644,
-      "sha256": "314a332bfc4a77d8a7291924f933cf0e295fb22b53175999bbd9e498634bca07"
+      "bytes": 45460,
+      "sha256": "b1e00d8002c92ade4dc6b774e2a8ed76654a2094110ef6c445fc0a4730a43020"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 59653,
-      "sha256": "209240f65fd2e445ed13f7b47b465875042504251b627ddb9602fb774e22cef3"
+      "bytes": 59921,
+      "sha256": "4e7e922f4a92f681e5bdff87903cb7c63e826cb6889a0e06b2754dafead1c62e"
     },
     {
       "path": "samong-text-r103.js",
@@ -16628,9 +16633,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3325,
-  "totalBytes": 733745431,
-  "webHTMLSha256": "d9fc380d28fb3fed2837d5a20efa21d6f1f7dcc9e7d6858199e1d7ef05fac775",
+  "fileCount": 3326,
+  "totalBytes": 733758052,
+  "webHTMLSha256": "e9ca089b62aa3a8d14e22604209024d3748d0ac6e4d06ab2874317bbdd831c1e",
   "largest": [
     {
       "path": "index.html",

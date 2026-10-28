@@ -285,7 +285,10 @@ function drawOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;for(co
  ctx.save();try{scope({id:e.id,kind:'effect',x:e.x,y:e.y,r101:true},()=>fn(e,t));}catch(err){fail(err);}finally{ctx.restore();}}}
 const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r101-air'){try{drawOwn();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
 
-// ---- mob motion: bob, lean, squash and wing beats instead of shear -------------------
+// ---- mob motion: bob, lean and offsets instead of shear --------------------------------
+// R108: painted sprites must not look like jelly (owner: "꿀렁"). No idle breathing, no wing-beat or
+// stride stretch; flyers only hover slowly, walkers bob with the step; attacks and hits move and lean
+// the body and allow at most a brief 3% scale.
 // The native body painter translates to the feet, then asks the pose chain for a
 // transform. R52 (the chain's head) is swapped for a copy whose pose is ours.
 const mobState=new WeakMap();
@@ -300,20 +303,20 @@ function motion(e){const s=mobOf(e),dt=clamp(time-s.t,0,.1),major=!!(e.boss||e.m
  let dx=0,bob=0,lean=0,sx=1,sy=1,pivot=0;
  // screen-horizontal travel direction (iso: screen x grows with x-y)
  const sdir=clamp((s.vx-s.vy)/2.5,-1,1);
- if(fly){bob=Math.sin(time*2.6+seed)*h*.025*amp;const beat=Math.sin(time*(moving?12:7.5)+seed);sy=1+.045*beat*amp;sx=1-.018*beat*amp;lean=sdir*.1*amp;pivot=h*.55;}
- else if(moving){if(dt>0)s.phase+=dt*(6.5+s.spd*4.2)*(major?.75:1);const g=Math.sin(s.phase);bob=Math.abs(g)*h*.05*amp;lean=sdir*.055*amp+g*.028*amp;sy=1+.035*Math.cos(2*s.phase)*amp;sx=1-(sy-1)*.6;
+ if(fly){bob=Math.sin(time*1.6+seed)*h*.012*amp;lean=sdir*.05*amp*(moving?1:0);pivot=h*.55;}
+ else if(moving){if(dt>0)s.phase+=dt*(6.5+s.spd*4.2)*(major?.75:1);const g=Math.sin(s.phase);bob=Math.abs(g)*h*.03*amp;lean=sdir*.04*amp+g*.012*amp;
   const landing=Math.abs(s.gait)>.3&&Math.abs(g)<=.3;s.gait=g;if(landing&&s.spd>1&&time-s.dustAt>.25&&!lowFx()&&list.length<MAX-6&&onScreen(e)){s.dustAt=time;add({kind:'dust',x:e.x,y:e.y,life:.38,seed:Math.random()*6,scale:clamp(h/actorHeight(),.6,1.6)});stats.dust++;}}
- else{if(dt>0)s.phase+=(Math.round(s.phase/Math.PI)*Math.PI-s.phase)*Math.min(1,dt*10);s.gait=0;sy=1+.012*Math.sin(time*2.2+seed)*amp;}
+ else{if(dt>0)s.phase+=(Math.round(s.phase/Math.PI)*Math.PI-s.phase)*Math.min(1,dt*10);s.gait=0;}
  // attack: rear back through the windup, lunge through the active window (rotation, not shear)
  const a=e.attack;if(a&&Number.isFinite(a.elapsed)){const shape=a.shape154||e.combatProfile?.attackShape||{},windup=Math.max(.05,a.castWindup150??shape.windup??.3),active=Math.max(.05,shape.active??.15),u=a.elapsed/windup;
   const ang=Number.isFinite(a.angle)?a.angle:Math.atan2((player?.y??e.y)-e.y,(player?.x??e.x)-e.x),sign=Math.cos(screenAngle(ang));
-  if(u<1){const g=smooth(u);lean-=sign*.07*g*amp;sy*=1+.03*g*amp;dx-=sign*2*Z()*g*amp;}else{const g=1-smooth((a.elapsed-windup)/(active+.18));lean+=sign*.14*g*amp;sx*=1+.06*g*amp;sy*=1-.05*g*amp;dx+=sign*5*Z()*g*amp;}}
- else if(e.rangedWindup>0){lean-=sdir*.02;sy*=1+.025*amp;}
+  if(u<1){const g=smooth(u);lean-=sign*.05*g*amp;dx-=sign*2*Z()*g*amp;}else{const g=1-smooth((a.elapsed-windup)/(active+.18));lean+=sign*.09*g*amp;sx*=1+.03*g*amp;sy*=1-.03*g*amp;dx+=sign*5*Z()*g*amp;}}
+ else if(e.rangedWindup>0){lean-=sdir*.02;}
  // hit flinch: pushed along the blow, squashed, then settles
  // (a plain hit only nudges: the native hit timer drives a small push away from the hero)
  const f=flinch.get(e);let fu=f?(time-f.at)/.22:2,fk=f?.k??1,fdx=f?.dx;
  if(!(fu>=0&&fu<1)&&e.hitTimer>0){fu=1-clamp(e.hitTimer/.14,0,1);fk=major?.15:.4;fdx=player?Math.cos(screenAngle(Math.atan2(e.y-player.y,e.x-player.x))):null;}
- if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.12*g;sy*=1-.1*g;lean+=ddx*.06*g;}
+ if(fu>=0&&fu<1){const g=Math.sin(Math.PI*fu)*(1-fu*.4)*fk*amp,ddx=fdx??(sdir||1);dx+=ddx*7*Z()*g;sx*=1+.03*g;sy*=1-.03*g;lean+=ddx*.05*g;}
  return{dx,bob,lean,sx,sy,pivot};}
 const R52=window.__STORYWORLD_HOSPITAL_CHARGE_R52__;
 if(R52&&typeof R52.applyBodyPose==='function'){

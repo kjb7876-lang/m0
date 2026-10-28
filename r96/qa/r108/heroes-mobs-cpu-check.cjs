@@ -51,4 +51,15 @@ flipOut=false;t=10.2;M.flip(mob,{});t=10.45;const b1=M.flip(mob,{});t=10.52;cons
 check('lasting flip is taken after the hold',b1===true&&b2===false);
 sb.drawEnemy(mob);mob.direction='right';t=11;sb.drawEnemy(mob);
 check('drawn direction is held for a moment and the real one restored',drawn.at(-1)==='left'&&mob.direction==='right');
+// ---- crates: box -> orb -> points (once per id), attack-sheet facing table, bolt tint
+const cs=fs.readFileSync(R('r96/client-source/crates-r108.js'),'utf8');
+check('crates-r108.js runtime copy identical and loaded before audio-r98.js',fs.readFileSync(R('r96/runtime-text/crates-r108.js'),'utf8')===cs&&/crates-r108\.js"><\/script>[\s\S]*audio-r98\.js"><\/script>/.test(html));
+check('crate ids fit the native point-claim id rule',/'r64:r108crate:'\+raw\.replace\(\/\[\^A-Za-z0-9\._:-\]\/g,'_'\)\.slice\(0,200\)/.test(cs)&&/^r64:[A-Za-z0-9._:-]{1,220}$/.test('r64:r108crate:'+'sm103-0-ascent:DREAM:r105:rec:P:ascent:1'));
+check('points only through awardPointDrop (no direct point writes), amount 1..7',cs.includes('awardPointDrop?.(amount,id,player)')&&!/player\.points\s*[+]?=/.test(cs)&&cs.includes('1+hashOf(idOf(p))%7'));
+check('native chests, doors, NPCs and R64 orbs are not boxes',/samongR103==='chest'/.test(cs)&&/passivePointDropR64/.test(cs)&&/r74Door/.test(cs)&&/r75NPC/.test(cs));
+const face=JSON.parse(src.match(/const ATTACK_FACE=(\{[^}]*\})/)[1].replace(/'/g,'"'));
+check('attack-sheet facing table: four sheets of 16 cells (L/R/.)',Object.keys(face).length===4&&Object.values(face).every(s=>/^[LR.]{16}$/.test(s))&&face['mob-attacks-01'][3]==='L');
+check('signature-colour bolt tint keeps blue/cyan mobs and bosses as they were',src.includes("colour==='blue'||colour==='cyan'")&&src.includes('if(!o||o.boss||o.persona)return;')&&src.includes('__storyworldStaticTint={immutable:true,key}'));
+const p101=fs.readFileSync(R('r96/client-source/polish-r101.js'),'utf8');
+check('R101 mob motion has no idle breathing or wing-beat stretch',!p101.includes('sy=1+.045*beat')&&!p101.includes('sy=1+.012*Math.sin(time*2.2')&&!p101.includes('sy=1+.035*Math.cos(2*s.phase)'));
 console.log((failed?'FAIL ':'PASS ')+(n-failed)+'/'+n+' r108 hero/mob checks');process.exit(failed?1:0);

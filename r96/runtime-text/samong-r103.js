@@ -158,6 +158,8 @@
 
  // ---- spawning ------------------------------------------------------------------------------
  function spawn(row,at,{boss=false,name,hpScale=1,tag='m',aggro=0}={}){const d=donor(row);if(!d)return null;const id='sm103:'+room.samongR103.key+':'+tag+':'+(++S.serial);let e;try{e=actor3(d,id,at.x,at.y,boss,'DREAM',regionById[room.id]);}catch(err){fail(err);return null;}if(!e)return null;if(!e.nativeId)e.nativeId=row[1];
+  // R108: a borrowed sword/axe/claw/spear figure fights hand to hand here; only casters keep the thrown bolt
+  if(!boss&&e.ai==='hybrid'&&e.weapon!=='caster')e.ai='melee';
   if(name)e.name=name;e.samongR103=room.samongR103.key;e.spawnState='active';e.homeX=at.x;e.homeY=at.y;e.explorationLeash=null;e.graceUntil=time+.6;e.cd=Math.max(.6,e.cd||1);
   if(aggro&&e.combatProfile)e.combatProfile={...e.combatProfile,aggro};
   if(hpScale!==1&&Number.isFinite(e.maxHp)){e.maxHp=Math.max(1,Math.round(e.maxHp*hpScale));e.hp=e.maxHp;}
@@ -175,7 +177,7 @@
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,r.exploration.samongR103.centre,'미로로 내려가는 문');return;}
   attackTokens();
   const alive=r.enemies.filter(living).length,cap=caps().survival,need=GOAL-S.kills;if(time<x.spawnAt||alive>=Math.min(cap,need))return;
-  x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+  x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive),base=x.mobTurn=(x.mobTurn||0)+batch;for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[(base+n)%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
  // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
  function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
  function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,6-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);
@@ -188,7 +190,7 @@
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(time<x.spawnAt||alive.length>=caps().maze)return;x.spawnAt=time+4;
   const sites=r.exploration.nodes.filter(n=>{const d=Math.hypot(n.x-player.x,n.y-player.y);return d>8&&d<22&&Math.hypot(n.x-L.exit.x,n.y-L.exit.y)>4&&(!L.save||Math.hypot(n.x-L.save.x,n.y-L.save.y)>4);});
-  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[(S.serial+n)%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
+  const base=room.samongR103.mobTurn=(room.samongR103.mobTurn||0)+2;for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[(base+n)%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
  function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
    const b=spawn(ep.boss.donor,L.dais,{boss:true,name:ep.boss.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=ep.boss.patterns;x.boss=b.id;}}
@@ -289,10 +291,10 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
   const mv={x:(player.moveVX150||0),y:(player.moveVY150||0)};if(Math.hypot(mv.x,mv.y)>.05)lastDir=norm(mv.x,mv.y);else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w&&Math.hypot(player.moveVX150||0,player.moveVY150||0)<=.05&&!lastDir)lastDir=norm(w[0],w[1]);}
   // Standing still with the beam on a wall (or on arrival): turn it toward the longest open line.
   if(Math.hypot(mv.x,mv.y)<=.05&&rayLen(player.x,player.y,Math.atan2(lastDir.y,lastDir.x),3)<2.2){let best=0,ba=0;for(let k=0;k<16;k++){const a=k*Math.PI/8,t=rayLen(player.x,player.y,a,9);if(t>best){best=t;ba=a;}}lastDir={x:Math.cos(ba),y:Math.sin(ba)};}
-  const a0=Math.atan2(lastDir.y,lastDir.x),half=.85,reach=10*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=4.5,pts=[],o=project(player.x,player.y);
+  const a0=Math.atan2(lastDir.y,lastDir.x),half=1.05,reach=12*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=5.5,pts=[],o=project(player.x,player.y);
   for(let k=0;k<=28;k++){const a=a0-half+2*half*k/28,t=rayLen(player.x,player.y,a,reach);pts.push(project(player.x+Math.cos(a)*t,player.y+Math.sin(a)*t));}
   // R107: graded ambient instead of a flat 62% black: near walls stay readable, the far maze stays dim.
-  const nat=window.__STORYWORLD_SIGHT24__?.enabled===true,amb=g.createRadialGradient(o.x,o.y,near*TILE*zoom*.5,o.x,o.y,reach*1.6*TILE*zoom);amb.addColorStop(0,nat?'rgba(4,4,8,.08)':'rgba(4,4,8,.22)');amb.addColorStop(1,nat?'rgba(4,4,8,.30)':'rgba(4,4,8,.48)');g.fillStyle=amb;g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
+  const nat=window.__STORYWORLD_SIGHT24__?.enabled===true,amb=g.createRadialGradient(o.x,o.y,near*TILE*zoom*.5,o.x,o.y,reach*1.6*TILE*zoom);amb.addColorStop(0,nat?'rgba(4,4,8,.08)':'rgba(4,4,8,.22)');amb.addColorStop(1,nat?'rgba(4,4,8,.26)':'rgba(4,4,8,.40)');g.fillStyle=amb;g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
   const grad=g.createRadialGradient(o.x,o.y,4,o.x,o.y,reach*TILE*zoom);grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.8,'rgba(0,0,0,.95)');grad.addColorStop(1,'rgba(0,0,0,.6)');
   g.fillStyle=grad;g.beginPath();g.moveTo(o.x,o.y);pts.forEach(p=>g.lineTo(p.x,p.y));g.closePath();g.fill();
   const n=g.createRadialGradient(o.x,o.y-20*zoom,2,o.x,o.y-20*zoom,near*TILE*zoom);n.addColorStop(0,'rgba(0,0,0,.95)');n.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=n;g.beginPath();g.arc(o.x,o.y-20*zoom,near*TILE*zoom,0,Math.PI*2);g.fill();

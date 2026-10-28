@@ -24,7 +24,9 @@ const minFloor=Math.min(...surv.map(s=>s.floor)),minSpan=Math.min(...surv.map(s=
 check('survival arenas are wide fields (min floor '+minFloor+' cells, min span '+minSpan+')',minFloor>=1800&&minSpan>=90,JSON.stringify(surv.slice(0,4)));
 check('survival arenas keep cover obstacles (bridges: broken spans)',surv.every(s=>s.pillars>=6||s.shape==='bridge'),JSON.stringify(surv.filter(s=>s.pillars<6)));
 const minCells=Math.min(...mazes.map(m=>m.cells)),minDead=Math.min(...mazes.map(m=>m.dead));
-check('flashlight mazes are larger (min '+minCells+' rooms, ≥144)',minCells>=144,JSON.stringify(mazes.slice(0,4)));
+// R108: the owner found the R106 mazes too dense; cells became 5 wide with 4-wide links on a 7-tile grid, fewer cells, more floor.
+const minFloorM=Math.min(...mazes.map(m=>m.floor));
+check('flashlight mazes are roomy (min '+minCells+' cells ≥81, min floor '+minFloorM+' ≥2500)',minCells>=81&&minFloorM>=2500,JSON.stringify(mazes.slice(0,4)));
 check('flashlight mazes have many dead ends (min '+minDead+')',minDead>=10,JSON.stringify(mazes.map(m=>m.dead)));
 check('every survival centre and maze exit reachable from the entry',!fails.length,fails.slice(0,5).join(' | '));
 const src=fs.readFileSync(path.join(SRC,'samong-r103.js'),'utf8');
