@@ -53,7 +53,7 @@ const R102=()=>window.__STORYWORLD_HERO_FX_R102__;
 const fxOf=id=>R102()?.PALETTE?.[id]||HERO_FX[id]||R102()?.PALETTE?.hwando||HERO_FX.hwando;
 const heroOf=p=>fxOf(p?.hero);
 // Growth tier 0–4 from R102 (learned skills and passives; EGO +1, 사몽 4).
-function tierOf(p){try{const t=R102()?.tier?.(p);return Number.isFinite(t)?clamp(Math.round(t),0,4):2;}catch(e){fail(e);return 2;}}
+function tierOf(p){try{const t=R102()?.tier?.(p);return Number.isFinite(t)?clamp(Math.round(t),0,7):2;}catch(e){fail(e);return 2;}}
 
 // ---- signature strips (R100 recoloured painted effects, 12 frames) ------------------
 const sigPath=(kind,colour)=>'assets/r100/sig-'+kind+'-'+colour+'.webp';
@@ -70,8 +70,9 @@ function preloadHero(id){if(typeof addImage!=='function')return;const F=fxOf(id)
 // Grows with the growth tier and while a skill plays; basic attacks add nothing.
 const heroState=new WeakMap();
 function stateOf(p){let s=heroState.get(p);if(!s){s={egoWas:false,samongWas:false,petals:[],hurtAt:-9,hurtDx:0};heroState.set(p,s);}return s;}
-const HEAT_BASE=[.05,.1,.16,.22,.28];
-function heat(p,t=tierOf(p)){let k=HEAT_BASE[t]??.16;if(p.skillAnim>0)k+=.12+.06*t;if(p.ego>0)k+=.38;if(p.samong>0)k+=.5;if(finite(p.resonance)>=30)k+=.06;return clamp(k,0,1.3);}
+// R111: 7단계(0=성장 전, 1~7)마다 한 칸씩 진해진다.
+const HEAT_BASE=[.05,.08,.12,.16,.2,.24,.28,.32];
+function heat(p,t=tierOf(p)){let k=HEAT_BASE[t]??.16;if(p.skillAnim>0)k+=.12+.035*t;if(p.ego>0)k+=.38;if(p.samong>0)k+=.5;if(finite(p.resonance)>=30)k+=.06;return clamp(k,0,1.3);}
 
 // ---- own effect store, drawn in the effect pass through a sentinel -----------------
 const list=[],MAX=48;let serial=0;
@@ -196,24 +197,27 @@ function pillar(x,fy,h,F,t){const s=SPR(),k=1-t;if(s&&s.draw('pillar',F,x,fy,h*(
 
 // Growth gating: tier 0 a faint ground glow, 1 adds the body field, 2 shows the hero's
 // form faintly with fewer pieces, 3 most of it, 4 (and EGO/사몽) all of it.
-function formLevel(p,t){if(p.ego>0||p.samong>0||t>=4)return{on:true,alpha:1,cut:0};if(t>=3)return{on:true,alpha:.85,cut:1};if(t>=2)return{on:true,alpha:.55,cut:2};return{on:false,alpha:0,cut:9};}
+// R111: 7단계 — 2 희미하게 일부, 3·4·5·6 조금씩 더 보이고, 7(과 EGO/사몽) 전부.
+const FORM7=[null,null,{alpha:.4,cut:3},{alpha:.55,cut:2},{alpha:.7,cut:2},{alpha:.8,cut:1},{alpha:.9,cut:1},{alpha:1,cut:0}];
+function formLevel(p,t){if(p.ego>0||p.samong>0)return{on:true,alpha:1,cut:0};const f=FORM7[clamp(t,0,7)];return f?{on:true,...f}:{on:false,alpha:0,cut:9};}
 function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100,awake=p.ego>0||p.samong>0;
  scope({id:'r101:aura-back:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{
   groundGlow(q,h,F,k);if(t>=1||awake)field(q.x,fy,h,F,k);
   if(L.on){ctx.globalAlpha*=L.alpha;
-   if(F.form==='runes'&&(t>=3||awake))runeRing(q,h,F,Math.max(k,.5+.15*Math.max(0,t-2)));
+   if(F.form==='runes'&&(t>=4||awake))runeRing(q,h,F,Math.max(k,.5+.08*Math.max(0,t-3)));
    if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
-   if(F.form==='angel'&&(t>=3||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
+   if(F.form==='angel'&&(t>=5||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
    // R107: no idle orbiting crescent blades for 환도 (looked odd); the iai cast carries the sword light now.
    if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
+   if(F.form==='arcs'){const S4=SPR();if(S4)S4.draw('circuit',F,q.x,q.y,h*(1+.06*t),h*(1+.06*t),{squash:.5,angle:time*.5,alpha:.18+.08*t+(awake?.2:0)});}
    orbs(p,q.x,fy,h,F,k,seed,'back',L.cut);}
  }finally{ctx.restore();}});stats.auraDraws++;}
 function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
  if(!L.on)return;
  scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{ctx.globalAlpha*=L.alpha;
-  if(F.form==='angel'&&(t>=3||p.ego>0||p.samong>0)||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
+  if(F.form==='angel'&&(t>=5||p.ego>0||p.samong>0)||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
   if(F.form==='angel'||p.samong>0)halo(q.x,fy,h,F,k);
-  if(F.form==='arcs')arcs(q.x,fy,h,F,k,seed);
+  // R111: 네온의 가는 번개 실선(실오라)은 뺐다. 대신 발밑 회로 문양이 단계에 따라 진해진다(뒤쪽 그리기).
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);
   if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'front',4-L.cut);
   orbs(p,q.x,fy,h,F,k,seed,'front',L.cut);
@@ -239,10 +243,10 @@ function skillHit(source,action){
 function onHeroHit(e,heroId){const last=lastHitFx.get(e);if(last!==undefined&&time>=last&&time-last<.08)return;lastHitFx.set(e,time);
  const F=fxOf(heroId),t=tierOf(player),boss=!!(e.boss||e.midboss),h=actorHeight();
  let x=e.x,y=e.y;const imp=effects.findLast?.(f=>f.type==='e568HeroImpact'&&f.age===0&&f.targetIdE568===String(e.id));if(imp){x=imp.x;y=imp.y;}
- const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(1.12+.1*t)*(boss?1.2:1);
+ const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(1.12+.06*t)*(boss?1.2:1);
  add({kind:'heroHit',x,y,lift:bodyLift(e),F,sa,size:h*(boss?1.45:1.05)*strength,life:.34+.12*(strength-1),seed:Math.random()*6,heavy:t>=1,tier:t});
  flinch.set(e,{at:time,dx:Math.cos(sa),dy:Math.sin(sa),k:boss?.35:1});
- if(!reduced()&&typeof shake==='number'){const want=.3+.06*t;if(want>shake)shake=want;}
+ if(!reduced()&&typeof shake==='number'){const want=.3+.035*t;if(want>shake)shake=want;}
  stats.hits++;}
 const hitBase=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?.hp;let heroId=null;
  try{if(prefs.hitfx&&live())heroId=skillHit(source,typeof e568HeroActionContext!=='undefined'?e568HeroActionContext:null);}catch(err){fail(err);}
@@ -263,22 +267,24 @@ if(R48&&typeof R48.applyBodyPose==='function'){const poseBase=R48.applyBodyPose;
  try{if(hero&&prefs.hitfx&&!reduced()&&live()&&c){const s=heroState.get(player);if(s){const u=(time-s.hurtAt)/.26;if(u>=0&&u<1){const g=Math.sin(Math.PI*u)*(1-u*.5);c.translate(s.hurtDx*5*Z()*g,0);c.rotate(s.hurtDx*.07*g);c.scale(1+.05*g,1-.06*g);}}}}catch(e){fail(e);}return r;}});}
 
 // ---- drawing of own effects ---------------------------------------------------------
-function drawHeroHit(e,t){const q=project(e.x,e.y),y=q.y-e.lift,F=e.F,k=1-t,ease=k*k,s=e.size*(.8+.35*(1-ease)),T=e.tier??2;
- sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:.95*fadeOut(t),glow:.45*ease});
- if(T>=3&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
+// R111: 적중 섬광도 7단계 — 성장 전(0단계)엔 작은 불티만, 단계가 오를수록 커지고 진해진다(흰 섬광이 화면을 덮지 않게).
+function drawHeroHit(e,t){const q=project(e.x,e.y),y=q.y-e.lift,F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7));
+ if(T>=1)sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:(.35+.05*clamp(T,0,7))*fadeOut(t),glow:(.08+.03*clamp(T,0,7))*ease});
+ if(T>=4&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
  if(e.heavy)sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  disc(q.x,y,s*.22*(1-ease*.5),rgba(F.b,.55*ease*ease));
- ctx.lineWidth=Math.max(1.5,3*Z()*k);ctx.strokeStyle=rgba(F.b,.9*ease);ctx.beginPath();ctx.ellipse(q.x,y,s*.4*(.35+.65*(1-ease)),s*.24*(.35+.65*(1-ease)),0,0,TAU);ctx.stroke();
+ // R111: 가는 실선 고리(실오라)는 뺐다 — 그림 텍스처 고리로 대신.
+ {const S1=SPR();if(S1)S1.draw('ring',F,q.x,y,s*.9*(.35+.65*(1-ease)),s*.54*(.35+.65*(1-ease)),{alpha:.7*ease});}
  const n=lowFx()?4:5+T,reach=e.size/actorHeight();for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.9,len=(14+30*rnd(e.seed,i+9))*Z()*reach,d=len*(.3+1.1*(1-ease));
   const x0=q.x+Math.cos(a)*d*.5,y0=y+Math.sin(a)*d*.5*.7,x1=q.x+Math.cos(a)*d,y1=y+Math.sin(a)*d*.7;ctx.strokeStyle=rgba(i%2?F.b:F.a,.95*ease);ctx.lineWidth=Math.max(1.2,(3.2-2*t)*Z());ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}
- if(T>=2){ctx.lineWidth=Math.max(1,1.5*Z());ctx.strokeStyle=rgba(F.a,.55*ease);ctx.beginPath();ctx.ellipse(q.x,q.y,s*.7*(1-ease*.5),s*.35*(1-ease*.5),0,0,TAU);ctx.stroke();}}
+ if(T>=2){const S2=SPR();if(S2)S2.draw('ring',F,q.x,q.y,s*1.5*(1-ease*.5),s*.75*(1-ease*.5),{alpha:.5*ease});}}
 function drawHeroHurt(e,t){const q=project(e.x,e.y),y=q.y-e.lift,k=1-t,ease=k*k,h=actorHeight(),s=h*1.1;
  sig('hit',e.colour,q.x,y,t,s,{alpha:.85*fadeOut(t),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';const n=lowFx()?3:5;
  for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.4,d=(8+18*rnd(e.seed,i+5))*Z()*(.3+1.1*(1-ease));ctx.strokeStyle=rgba(i%2?[255,120,120]:e.rgb,.85*ease);ctx.lineWidth=Math.max(1,2*Z()*k);ctx.beginPath();ctx.moveTo(q.x+Math.cos(a)*d*.5,y+Math.sin(a)*d*.35);ctx.lineTo(q.x+Math.cos(a)*d,y+Math.sin(a)*d*.7);ctx.stroke();}}
 function drawPowerUp(e,t){const q=project(e.x,e.y),h=actorHeight(),lift=clamp(finite(player?.visualLiftPx),0,h*.65);pillar(q.x,q.y-lift,h,e.F,t);
- const k=1-t;ctx.globalCompositeOperation='lighter';ctx.lineWidth=Math.max(1,2.5*Z()*k);ctx.strokeStyle=rgba(e.F.b,.75*k);ctx.beginPath();ctx.ellipse(q.x,q.y,h*(.25+1.3*smooth(t)),h*(.12+.65*smooth(t)),0,0,TAU);ctx.stroke();}
+ const k=1-t,S3=SPR();if(S3)S3.draw('ring',e.F,q.x,q.y,h*(.6+2.8*smooth(t)),h*(.3+1.4*smooth(t)),{alpha:.8*k});}
 function drawDust(e,t){const q=project(e.x,e.y),k=1-t,h=actorHeight();ctx.globalCompositeOperation='source-over';for(let i=0;i<3;i++){const a=e.seed+i*2.1,d=(3+9*t)*Z()*e.scale,r=(2.2+3.5*t)*Z()*e.scale;ctx.fillStyle=rgba([205,192,168],.3*k*k);ctx.beginPath();ctx.ellipse(q.x+Math.cos(a)*d,q.y+Math.sin(a)*d*.45-t*4*Z(),r,r*.6,0,0,TAU);ctx.fill();}void h;}
 const DRAW={heroHit:drawHeroHit,heroHurt:drawHeroHurt,powerUp:drawPowerUp,dust:drawDust};
 function drawOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;for(const e of list){const fn=DRAW[e.kind];if(!fn)continue;const t=age(e)/e.life;if(t<0||t>1)continue;

@@ -16324,8 +16324,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 19904,
-      "sha256": "6b9ea4f36f42d3fbc289db3619af69eff2227ca4935f694166de94cf8d8a5f26"
+      "bytes": 20436,
+      "sha256": "8f17aed81a83b83c76317f773d34326f2ffb2e4da76d720836bd3d38e879cb92"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -16339,8 +16339,8 @@
     },
     {
       "path": "hero-fx-r102.js",
-      "bytes": 50379,
-      "sha256": "808fa2d91fe7578721b2a8c845c72c82e8b464e665ab9284e3feca2dfe474a5c"
+      "bytes": 50503,
+      "sha256": "7092ba37aba7891f95706441624c5e0aac5d9a524db5beba5f91da4dd18c8bc4"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -16384,13 +16384,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562104,
-      "sha256": "da3e801588115b0db77b1500fc20897f6f847832530e7a1f5628a33e58074859"
+      "bytes": 6562143,
+      "sha256": "56d6816d2670ec7c070a2eee5895f4fd1f28ae7570dca3411ca82ccf02a05fea"
     },
     {
       "path": "mobs-r109.js",
-      "bytes": 18303,
-      "sha256": "fe4c37f702ba2472ee7b57669f999b9b88ab110735a14f727430bdf824708be9"
+      "bytes": 22264,
+      "sha256": "4ceb46f83f5019f0dd157cbd1c2e13e3937c2902535146af313e3bded96fa24e"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16413,6 +16413,11 @@
       "sha256": "20afb96be0bb600f891f57db59366f5631b20232b9fa84dd547d4901e863363f"
     },
     {
+      "path": "play-r111.js",
+      "bytes": 42979,
+      "sha256": "bdb1d8706b610b2ba2e69939fd4d9bdb9bcb2a658bde54292ed8152e921e3ed3"
+    },
+    {
       "path": "polish-r100-data.js",
       "bytes": 14269,
       "sha256": "4e48fba98a18b1ffd645743bbb890e6609116222b284d5cc4ab0a60a79a85610"
@@ -16424,8 +16429,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 52585,
-      "sha256": "034d2d8eb9ed0a065e502844fb43c0946d39191f228f8c72cb64193ef1d8bc72"
+      "bytes": 53199,
+      "sha256": "106af1b6681a4d69f30ebe6e51e7d599c369b7deddebad0d6ec5c7ff51263917"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -16499,8 +16504,8 @@
     },
     {
       "path": "vfx-r98.js",
-      "bytes": 27643,
-      "sha256": "daf0b04210ca35b3695808c7136411fe166b3381d2fad71669202ed64706d142"
+      "bytes": 29140,
+      "sha256": "855015f11c1c7828b41a6d41934cf7c745853e092491e94ba8776c7099857acd"
     },
     {
       "path": "vfx-retro-r89.js",
@@ -16618,9 +16623,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3323,
-  "totalBytes": 734554166,
-  "webHTMLSha256": "da3e801588115b0db77b1500fc20897f6f847832530e7a1f5628a33e58074859",
+  "fileCount": 3324,
+  "totalBytes": 734603912,
+  "webHTMLSha256": "56d6816d2670ec7c070a2eee5895f4fd1f28ae7570dca3411ca82ccf02a05fea",
   "largest": [
     {
       "path": "index.html",

@@ -89,6 +89,14 @@
   ellipse(g.x,g.y,r);}
  function centre(g){if(!g)return null;const s=g.shape;if(s==='arc'||s==='cone'||s==='capsule'||s==='line'){const ox=Number.isFinite(g.originX)?g.originX:g.x,oy=Number.isFinite(g.originY)?g.originY:g.y,r=(g.radius||.5)*.55,a=g.angle||0;return{x:ox+Math.cos(a)*r,y:oy+Math.sin(a)*r};}return{x:g.x,y:g.y};}
  function extent(g){if(!g)return .6;return Math.max(.3,(g.radius||.5)*(g.shape==='circle'?1:.7));}
+ // R111 (사용자 2026-10-28 "직사각형 예고면 3~4개의 이펙트가 일렬로, 예고 범위에 맞게 채워"): 길쭉한 범위(capsule·line)는
+ // 길이를 따라 3~5칸, 십자(cross)는 네 팔과 가운데에 이펙트를 나눠 그린다. 칸마다 조금씩 늦게 터져 앞으로 밀려 나가는 느낌을 준다.
+ function spots(g){if(!g)return[{x:0,y:0,ext:.6,d:0}];const s=g.shape,r=g.radius||.5;
+  if((s==='capsule'||s==='line')&&r>=1.6){const ox=Number.isFinite(g.originX)?g.originX:g.x,oy=Number.isFinite(g.originY)?g.originY:g.y,a=g.angle||0,n=Math.max(3,Math.min(5,Math.round(r/1.25))),seg=r/n,w=Math.max(.3,g.width||.35);
+   return Array.from({length:n},(_,i)=>({x:ox+Math.cos(a)*seg*(i+.5),y:oy+Math.sin(a)*seg*(i+.5),ext:Math.max(.45,Math.min(seg*.75,w*1.6+.25)),d:i*.07}));}
+  if(s==='cross'&&r>=1.2){const out=[{x:g.x,y:g.y,ext:Math.max(.5,(g.width||.4)*1.6),d:0}];for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])for(const f of[.45,.85])out.push({x:g.x+dx*r*f,y:g.y+dy*r*f,ext:Math.max(.45,(g.width||.4)*1.4),d:f*.12});return out;}
+  const c=centre(g);return[{x:c.x,y:c.y,ext:extent(g),d:0}];}
+ const lagged=(k,d)=>clamp((k-d)/Math.max(.4,1-d),0,1);
 
  // ---- effect store --------------------------------------------------------
  const list=[],MAX=56;
@@ -149,26 +157,29 @@
  function drawChargeAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.3:1.55),{loop:true,alpha:.3+.65*k,ay:.66,glow:.35*k}))return;
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.8:1.15,alpha:.25+.7*k}))glow(e.x,e.y,actorHeight()*.5,(14+16*k)*zoom*(M?1.5:1),e.th,.4+.6*k);}
- function drawImpactAir(e,t){const c=centre(e.g),E=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
-  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1),s=e.g?.shape,slash=s==='arc'||s==='cone'||s==='capsule'||s==='line';
+ function drawImpactAir(e,t){const M=e.major,p=paintFor(e),k0=clamp(t,0,1),sp=spots(e.g),many=sp.length>1;
+  for(const o of sp){const k=lagged(k0,o.d);if(k<=0||k>=1&&many)continue;const E=many?o.ext:extent(e.g),c=o;
+  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1)*(many?.9:1),s=e.g?.shape,slash=s==='arc'||s==='cone'||s==='capsule'||s==='line';
   const sig=slash?sigStrip('slash',e,c.x,c.y,k,actorHeight()*scale*.95,{lift:actorHeight()*.38,angle:screenAngle(e.g.angle||0)+Math.PI,glow:.4*(1-k)}):sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale*.9,{lift:actorHeight()*.3,glow:.45*(1-k)});
   if(!sig&&!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
-  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}
+  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}}
  function drawCastAir(e,t){const k=clamp(t,0,1),M=e.major,p=paintFor(e);
   if(sigStrip('aura',e,e.x,e.y,k,actorHeight()*(M?2.1:1.4),{loop:true,alpha:.4+.55*k,ay:.66,glow:.4*k}))return;
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.6:1,alpha:.35+.6*k}))glow(e.x,e.y,actorHeight()*.62,(11+12*k)*zoom*(M?1.6:1.1),e.th,.5+.5*k);}
  function drawReleaseAir(e,t){const k=clamp(t,0,1),p=paintFor(e);
   if(sigStrip('hit',e,e.x,e.y,k,actorHeight()*(e.major?1.6:1.1),{lift:actorHeight()*.55,alpha:.95,glow:.5*(1-k)}))return;
   if(!paint(p.hit,e.x,e.y,{t:k,key:e,scale:e.major?1.5:1,alpha:.9}))glow(e.x,e.y,actorHeight()*.62,(16+30*k)*zoom,e.th,1-k);}
- function drawGatherAir(e,t){const c=centre(e.g),R=extent(e.g),k=clamp(t,0,1),p=paintFor(e);
-  if(sigStrip('gather',e,c.x,c.y,k,actorHeight()*clamp(1+R*.6,1.2,e.major?3.4:2.4)*1.1,{loop:true,flat:true,alpha:.35+.6*k,glow:.3*k}))return;
-  paint(p.gather,c.x,c.y,{loop:true,key:e,scale:clamp(1+R*.6,1.2,e.major?3.4:2.4),alpha:.3+.6*k});}
- function drawBurstAir(e,t){const c=centre(e.g),R=extent(e.g),M=e.major,p=paintFor(e),k=clamp(t,0,1);
-  const scale=clamp(1.6+R*.7,1.8,M?3.6:2.6);
+ function drawGatherAir(e,t){const k=clamp(t,0,1),p=paintFor(e),sp=spots(e.g),many=sp.length>1;
+  for(const o of sp){const R=many?o.ext:extent(e.g);
+  if(sigStrip('gather',e,o.x,o.y,k,actorHeight()*clamp(1+R*.6,1.2,e.major?3.4:2.4)*1.1,{loop:true,flat:true,alpha:.35+.6*k,glow:.3*k}))continue;
+  paint(p.gather,o.x,o.y,{loop:true,key:e,scale:clamp(1+R*.6,1.2,e.major?3.4:2.4),alpha:.3+.6*k});}}
+ function drawBurstAir(e,t){const M=e.major,p=paintFor(e),k0=clamp(t,0,1),sp=spots(e.g),many=sp.length>1;
+  for(const o of sp){const k=lagged(k0,o.d);if(k<=0||k>=1&&many)continue;const R=many?o.ext:extent(e.g),c=o;
+  const scale=clamp(1.6+R*.7,1.8,M?3.6:2.6)*(many?.85:1);
   const a=sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale,{lift:actorHeight()*.25,glow:.55*(1-k)})||paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1});
   if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
   if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);
-  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}
+  const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}}
  function drawSparkAir(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
 
  function drawRootInAir(e,t){paint('F091',player.x,player.y,{t:clamp(t,0,1),key:e,scale:1.25,alpha:.9});}

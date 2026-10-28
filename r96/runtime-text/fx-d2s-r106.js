@@ -41,22 +41,25 @@ function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?
  const t=clamp(R102()?.tier?.(player)??0,0,7),lo=lowFx(),k=lo?.5:1,p={x:player.x,y:player.y},a=Number.isFinite(angle)?angle:0,seed=Math.random()*100;
  let tx=target?.x,ty=target?.y;if(!Number.isFinite(tx)||!Number.isFinite(ty)){tx=p.x+Math.cos(a)*4;ty=p.y+Math.sin(a)*4;}
  const base={kind,hero,F,tier:t,slot,x:p.x,y:p.y,tx,ty,a:Math.atan2(ty-p.y,tx-p.x),seed,k};
- if(kind==='iai'){const n=clamp(Math.round((6+Math.floor(t/3))*Math.max(.67,k)),4,8),near=enemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<6.5).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)),cuts=[];
-  // R107 츠바메가에시: 앞 셋은 * 모양(60° 간격으로 교차), 뒤 넷은 # 모양(두 방향 평행선 두 쌍). 가까운 적이 있으면 그 자리를 벤다.
+ if(kind==='iai'){
+  // R111 (사용자 2026-10-28 "*# 검술 이펙트는 초반엔 안 나오고 스킬 레벨업하면, 적 쪽에서 한 번에 여러 번 광역으로. 초반엔 단순 일자만"):
+  // R111 (00:24 "모든 이펙트 단계화는 7단계"): 성장 단계 t마다 한 칸씩 달라진다. 0 일자 한 줄 · 1 일자 두 적 · 2 * 한 적 · 3 * 세 적
+  // · 4 *# 세 적 · 5 *# 다섯 적 · 6 *#+세로 다섯 적 두 번 · 7 *#+세로 일곱 적 두 번. 베기와 섬광은 모두 적 자리에서 나온다(적이 없으면 겨눈 방향 앞).
+  const near=enemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<6.5).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y)),cuts=[],marks=[];
   const PAT=[[0,0],[Math.PI/3,0],[2*Math.PI/3,0],[Math.PI/4,.38],[Math.PI/4,-.38],[3*Math.PI/4,.38],[3*Math.PI/4,-.38],[Math.PI/2,0]];
-  // 적이 없으면 영웅 둘레(반경 1.5)를 돌아가며 벤다 — 영웅 몸을 가리지 않도록 중심을 비켜 둔다.
-  for(let i=0;i<n;i++){const e=near.length&&i<near.length*2?near[i%near.length]:null,ring=a+i*2.39996,[ang0,off]=PAT[i],ang=ang0+a,
-   cx=e?e.x:p.x+Math.cos(ring)*1.5,cy=e?e.y:p.y+Math.sin(ring)*1.5,len=1.45+.08*t;
-   cuts.push({cx:cx-Math.sin(ang)*off,cy:cy+Math.cos(ang)*off,ang,len,t0:.09+i*.055});}
-  // R107: 섬광(*·#)은 가장 가까운 적(없으면 영웅) 위에 — 이펙트는 맞는 쪽에서 터진다.
-  const tg=near[0]||null;add({...base,life:.95+.055*n,cuts,fx:tg?{x:tg.x,y:tg.y}:{x:p.x,y:p.y}});}
- else if(kind==='hammer')add({...base,life:1.25+.05*t,n:Math.round((3+Math.ceil(t/2))*Math.max(.67,k))});
+  const stage=t<=1?0:t<=3?1:t<=5?2:3,per=[1,1,3,3,7,7,8,8][t],targets=[1,2,1,3,3,5,5,7][t],waves=t>=6?2:1,cap=lo?14:40;
+  const spots=near.length?near.slice(0,targets).map(e=>({x:e.x,y:e.y})):[{x:p.x+Math.cos(a)*1.6,y:p.y+Math.sin(a)*1.6}];
+  for(let w=0;w<waves;w++)spots.forEach((sp,si)=>{for(let i=0;i<per&&cuts.length<cap;i++){const [ang0,off]=PAT[i],ang=(per===1?a:ang0+a)+w*.35,len=(per===1?1.25:1.45)+.08*t;
+   cuts.push({cx:sp.x-Math.sin(ang)*off,cy:sp.y+Math.cos(ang)*off,ang,len,t0:.09+w*.42+si*.05+i*.055,first:i===0});}
+   if(per>=3)marks.push({x:sp.x,y:sp.y,star:.09+w*.42+si*.05+2*.055+.05,hash:per>=7?.09+w*.42+si*.05+(per-1)*.055+.08:null});});
+  add({...base,life:.75+.055*per+(waves-1)*.42+.05*spots.length,cuts,marks,stage,fx:spots[0]});}
+ else if(kind==='hammer')add({...base,life:1.25+.05*t,n:Math.round((3+t)*Math.max(.67,k))});
  else if(kind==='orb')add({...base,life:1.35,speed:5.2,shards:[],emitAt:0,burst:false});
  else if(kind==='chain'){const hops=[],seen=new Set();let from={x:p.x,y:p.y};for(let i=0;i<3+t;i++){const e=nearestTo(from.x,from.y,i?5.5:9,seen);if(!e)break;seen.add(e);hops.push({x:e.x,y:e.y,e});from=e;}
   if(!hops.length)hops.push({x:tx,y:ty});add({...base,life:.32+.07*hops.length,hops,bolts:Math.round((2+t)*k)});}
  else if(kind==='fist')add({...base,life:1.15,rays:Math.round((8+2*t)*k)});
  else if(kind==='meteor'){const e=nearestTo(p.x,p.y,10);add({...base,tx:e?e.x:tx,ty:e?e.y:ty,life:2.1+.15*t,fall:.55});}
- else if(kind==='multishot')add({...base,life:1.0,n:[3,5,5,7,9,9,11,13][t],range:7.5+.3*t});
+ else if(kind==='multishot')add({...base,life:1.0,n:[3,4,5,6,7,9,11,13][t],range:7.5+.3*t});
  else if(kind==='fissure')add({...base,life:1.5,n:Math.round((5+t)*Math.max(.6,k)),step:.075});
  else if(kind==='nova')add({...base,life:.9,bolts:Math.round((8+2*t)*k)});
  stats.casts++;}
@@ -74,13 +77,13 @@ const DRAW={
   if(T<.1)S('glow',G,hc.x+h*.18,hc.y+h*.05,h*(.35+2.4*T),h*(.2+1.2*T),{alpha:.25+.7*(1-T/.1)});
   for(const cut of cs){const v=(T-cut.t0)/.5;if(v<0||v>1)continue;const grow=smooth(v/.1),dx=Math.cos(cut.ang)*cut.len,dy=Math.sin(cut.ang)*cut.len,
     a0=P(cut.cx-dx*grow,cut.cy-dy*grow,h*.42),a1=P(cut.cx+dx*grow,cut.cy+dy*grow,h*.42),fade=v<.3?1:Math.pow(1-(v-.3)/.7,1.3);
-   A('iai-cut',G,a0.x,a0.y,a1.x,a1.y,h*(.75-.3*v),{alpha:fade,overHero:v<.12});A('slashline',F,a0.x,a0.y,a1.x,a1.y,h*(.16-.06*v),{alpha:.8*fade,overHero:v<.12});
+   A('iai-cut',G,a0.x,a0.y,a1.x,a1.y,h*((e.stage??3)?.75-.3*v:.42-.18*v),{alpha:fade,overHero:v<.12});A('slashline',F,a0.x,a0.y,a1.x,a1.y,h*(.16-.06*v),{alpha:.8*fade,overHero:v<.12});
    const g0=P(cut.cx-dx*.85,cut.cy-dy*.85),g1=P(cut.cx+dx*.85,cut.cy+dy*.85);A('line',F,g0.x,g0.y,g1.x,g1.y,h*.05,{alpha:.4*fade});
-   if(v<.3){const m=P(cut.cx,cut.cy,h*.42),k=1-v/.3;S('iai-burst',G,m.x,m.y,h*1.15*(1-.4*v),h*.9*(1-.4*v),{angle:cut.ang,alpha:k});}}
-  // * (세 번째 베기 직후) 와 # (마지막 베기 직후) 섬광: 그림 모양 그대로 영웅 둘레에 남는다.
-  const star=cs.length>2?cs[2].t0+.05:9,ws=(T-star)/.4;if(ws>0&&ws<1)S('iai-star',G,c.x,c.y,h*2.3,h*2.5,{alpha:(1-ws)*(1-ws),angle:e.a*.2,overHero:true});
-  const last=cs.length?cs[cs.length-1].t0+.08:.4,wh=(T-last)/.45,gq=P(o.x,o.y,h*.1);if(wh>0&&wh<1)S('iai-hash',G,gq.x,gq.y,h*2.8,h*2.56,{squash:.62,angle:.785,alpha:1-wh*wh,overHero:true});
-  const ws2=(T-last-.14)/.35;if(ws2>0&&ws2<1)S('iai-sheath',G,c.x,c.y,h*(2.4+1.6*ws2),h*.72,{alpha:1-ws2,overHero:true});},
+   if(v<.3&&(e.stage??3)>=1&&cut.first!==false){const m=P(cut.cx,cut.cy,h*.42),k=1-v/.3;S('iai-burst',G,m.x,m.y,h*1.15*(1-.4*v),h*.9*(1-.4*v),{angle:cut.ang,alpha:k});}}
+  // * 와 # 섬광은 베인 적 자리마다(R111: 성장 단계가 오른 뒤에만). 납도 섬광은 마지막 베기 뒤 한 번.
+  for(const m of e.marks||[]){const mc=P(m.x,m.y,h*.45),ws=(T-m.star)/.4;if(ws>0&&ws<1)S('iai-star',G,mc.x,mc.y,h*1.6,h*1.75,{alpha:.75*(1-ws)*(1-ws),angle:e.a*.2});
+   if(m.hash!=null){const wh=(T-m.hash)/.45,gq=P(m.x,m.y,h*.1);if(wh>0&&wh<1)S('iai-hash',G,gq.x,gq.y,h*2.1,h*1.95,{squash:.62,angle:.785,alpha:.8*(1-wh*wh)});}}
+  const last=cs.length?cs[cs.length-1].t0+.08:.4,ws2=(T-last-.14)/.35;if((e.stage??3)>=2&&ws2>0&&ws2<1)S('iai-sheath',G,c.x,c.y,h*(2.4+1.6*ws2),h*.72,{alpha:1-ws2,overHero:true});},
  hammer(e,u,h){const F=e.F,fade=1-smooth((u-.75)/.25),c=P(e.x,e.y,h*.35);
   if(u<.35)S('slashwide',F,c.x,c.y+h*.25,h*3.2,h*1.8,{squash:.55,angle:e.seed+u*14,alpha:(1-u/.35)*.9});
   for(let i=0;i<e.n;i++){const ph=i*TAU/e.n+e.seed,ang=ph+u*9.5,r=.5+3.1*smooth(u)*(.9+.1*Math.sin(i)),q=P(e.x+Math.cos(ang)*r,e.y+Math.sin(ang)*r,h*.45);
