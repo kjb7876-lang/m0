@@ -279,43 +279,44 @@ function sig(kind,colour,x,y,u,size,{alpha=1,angle=0,ay=.5}={}){const spec=sigDa
  const path='assets/r100/sig-'+kind+'-'+colour+'.webp',row=readyImage(path);if(!row?.image){if(typeof addImage==='function')try{addImage(path,'R102 hero effect');}catch(_){}return;}
  const n=spec.frames,S=spec.size,i=Math.min(n-1,Math.floor(clamp(u,0,.999)*n));ctx.save();try{ctx.translate(x,y);if(angle)ctx.rotate(angle);if(colour==='pale')ctx.filter='grayscale(1) brightness(1.12)';ctx.globalAlpha*=alpha;ctx.globalCompositeOperation='lighter';ctx.drawImage(row.image,i*S,0,S,S,-size/2,-size*ay,size,size);}finally{ctx.restore();}}
 
+// R111: 7단계 — 2·4·6단계에서 새 겹이 열리고, 그 사이 단계는 개수·크기가 한 칸씩 자란다.
 const STYLES={
- blade(e,u,q,qt,h,F,t,sa,fade){const cy=q.y-h*.42,n=1+Math.min(4,t),reach=h*(1.05+.18*t);
+ blade(e,u,q,qt,h,F,t,sa,fade){const cy=q.y-h*.42,n=1+Math.min(6,t),reach=h*(1.05+.18*t);
   for(let i=0;i<n;i++){const v=clamp((u-i*.07)/.55,0,1);if(v<=0||v>=1)continue;crescent(q.x,cy,reach*(.55+.6*smooth(v)),sa+(i?(i%2?.35:-.35):0),1.5+.25*t,h*(.12+.02*t)*(1-v*.5),F,(1-v)*fade*(1-.08*i));}
   if(t>=2){sig('slash',F.sig2,q.x+Math.cos(sa)*reach*.7,cy+Math.sin(sa)*reach*.45,u,h*(1.2+.2*t),{alpha:.8*fade,angle:sa});sparks(q.x+Math.cos(sa)*reach*.8,cy+Math.sin(sa)*reach*.5,sa,1.4,6+2*t,h*.6,F.b,fade*(1-u),e.seed,u);}
-  if(t>=3)xslash(qt.x,qt.y-h*.45,h*(.8+.15*t),sa,F,u,fade);
-  if(t>=4)pillar(qt.x,qt.y,h,F,u);},
+  if(t>=4)xslash(qt.x,qt.y-h*.45,h*(.8+.15*t),sa,F,u,fade);
+  if(t>=6)pillar(qt.x,qt.y,h,F,u);},
  beam(e,u,q,qt,h,F,t,sa,fade){const cy=q.y-h*.5,len=h*(2.6+.5*t),w=h*(.05+.012*t),v=smooth(u/.25),x1=q.x+Math.cos(sa)*len*v,y1=cy+Math.sin(sa)*len*v,a=fade*(1-u*.6);
   streak(q.x,cy,x1,y1,w*2.4,rgba(F.a,.35*a));streak(q.x,cy,x1,y1,w,rgba(F.b,.9*a));
   if(t>=2)for(let i=0;i<4+2*t;i++){const k=rnd(e.seed,i),drift=(rnd(e.seed,i+20)-.5)*h*.6*smooth(u);diamond(lerp(q.x,x1,k)-Math.sin(sa)*drift,lerp(cy,y1,k)+Math.cos(sa)*drift,h*.04,rgba(i%2?F.b:F.a,.9*a),time*3+i);}
-  if(t>=3){clockRing(q.x,q.y,h*.85,F,u,fade);for(const s of[-1,1])streak(q.x,cy,q.x+Math.cos(sa+s*.07)*len*v*.85,cy+Math.sin(sa+s*.07)*len*v*.85,w*.9,rgba(F.a,.45*a));}
-  if(t>=4)shatter(qt.x,qt.y-h*.4,h,F,u,e.seed);},
+  if(t>=4){clockRing(q.x,q.y,h*.85,F,u,fade);for(const s of[-1,1])streak(q.x,cy,q.x+Math.cos(sa+s*.07)*len*v*.85,cy+Math.sin(sa+s*.07)*len*v*.85,w*.9,rgba(F.a,.45*a));}
+  if(t>=6)shatter(qt.x,qt.y-h*.4,h,F,u,e.seed);},
  bolt(e,u,q,qt,h,F,t,sa,fade){const from={x:q.x,y:q.y-h*.55},to={x:qt.x,y:qt.y-h*.45};lightning(from,to,F,fade*(1-u*.5),e.seed,h,t>=2?2:0);glow(to.x,to.y,h*(.3+.06*t),F.a,fade*(1-u));
-  if(t>=3)circuit(q.x,q.y,h,F,u,fade,e.seed);
-  if(t>=4&&e.extra)for(const x of e.extra){const p=project(x.x,x.y);lightning(to,{x:p.x,y:p.y-h*.45},F,fade*(1-u)*.8,e.seed+3,h,0);}},
+  if(t>=4)circuit(q.x,q.y,h,F,u,fade,e.seed);
+  if(t>=6&&e.extra)for(const x of e.extra){const p=project(x.x,x.y);lightning(to,{x:p.x,y:p.y-h*.45},F,fade*(1-u)*.8,e.seed+3,h,0);}},
  holy(e,u,q,qt,h,F,t,sa,fade){crossGlyph(q.x,q.y-h*1.3,h*(.35+.08*t),F,u,fade);
   if(t>=2)rays(q.x,q.y-h*.5,h*(1+.25*t),F,u,fade,8+2*t);
-  if(t>=3)wingFlash(q.x,q.y-h*.62,h*(.9+.15*t),F,u,fade);
-  if(t>=4)pillar(q.x,q.y,h,F,u);},
+  if(t>=4)wingFlash(q.x,q.y-h*.62,h*(.9+.15*t),F,u,fade);
+  if(t>=6)pillar(q.x,q.y,h,F,u);},
  rune(e,u,q,qt,h,F,t,sa,fade){runeCircle(qt.x,qt.y,h*(.75+.12*t),F,u,fade,t,e.seed);
-  if(t>=3)shardsRise(qt.x,qt.y,h,F,u,e.seed);
-  if(t>=4)triBeam(qt.x,qt.y,h,F,u);},
+  if(t>=4)shardsRise(qt.x,qt.y,h,F,u,e.seed);
+  if(t>=6)triBeam(qt.x,qt.y,h,F,u);},
  arrows(e,u,q,qt,h,F,t,sa,fade){const n=[3,3,5,7,9,9,11,11][t]||3,cy=q.y-h*.5,len=h*(2.2+.4*t);
   for(let i=0;i<n;i++){const v=clamp((u-Math.abs(i-(n-1)/2)*.03)/.35,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*(.09+.01*t),head=len*smooth(v),tail=Math.max(0,head-h*(.9+.1*t)),al=fade*(1-v*.7),x1=q.x+Math.cos(ang)*head,y1=cy+Math.sin(ang)*head;
    streak(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,x1,y1,h*.03,rgba(F.a,.85*al));disc(x1,y1,h*.03,rgba(F.b,.9*al));}
   if(t>=2)petalBurst(q.x,q.y-h*.4,h*(.6+.1*t),F,u,e.seed,6+2*t);
-  if(t>=3)petalBurst(qt.x,qt.y-h*.4,h*(.8+.1*t),F,u,e.seed+5,8+2*t);
-  if(t>=4)petalRing(q.x,q.y,h,F,u,e.seed);},
+  if(t>=4)petalBurst(qt.x,qt.y-h*.4,h*(.8+.1*t),F,u,e.seed+5,8+2*t);
+  if(t>=6)petalRing(q.x,q.y,h,F,u,e.seed);},
  smash(e,u,q,qt,h,F,t,sa,fade){shock(qt.x,qt.y,h*(1+.25*t),F,u,fade);
   if(t>=1)smoke(qt.x,qt.y,h,u,e.seed);
   if(t>=2)cracks(qt.x,qt.y,h*(.9+.2*t),F,u,e.seed,6+t);
-  if(t>=3)xslash(qt.x,qt.y-h*.45,h*(.9+.15*t),sa,F,u,fade);
-  if(t>=4){pillar(qt.x,qt.y,h,F,u);shock(qt.x,qt.y,h*(1.6+.3*t),F,clamp(u*1.4-.3,0,1),fade);}},
+  if(t>=4)xslash(qt.x,qt.y-h*.45,h*(.9+.15*t),sa,F,u,fade);
+  if(t>=6){pillar(qt.x,qt.y,h,F,u);shock(qt.x,qt.y,h*(1.6+.3*t),F,clamp(u*1.4-.3,0,1),fade);}},
  pixels(e,u,q,qt,h,F,t,sa,fade){const n=[2,3,3,4,5,5,6,6][t]||3,cy=q.y-h*.55,len=h*(2.4+.4*t);
   for(let i=0;i<n;i++){const v=clamp((u-i*.06)/.4,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*.05,head=len*smooth(v),tail=Math.max(0,head-h*.8);trailSquares(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,q.x+Math.cos(ang)*head,cy+Math.sin(ang)*head,h,F,fade*(1-v*.6),e.seed+i);}
   if(t>=2)squaresBurst(q.x,q.y-h*.5,h*(.8+.15*t),F,u,e.seed,10+3*t);
-  if(t>=3)squareRing(qt.x,qt.y,h*(.8+.1*t),F,u,fade,e.seed);
-  if(t>=4)shock(q.x,q.y,h*2.2,F,u,fade);}
+  if(t>=4)squareRing(qt.x,qt.y,h*(.8+.1*t),F,u,fade,e.seed);
+  if(t>=6)shock(q.x,q.y,h*2.2,F,u,fade);}
 };
 // ---- R103 patterns: 사방에서 날아드는 조각, 땅에서 솟는 가시, 하늘에서 떨어지는 빛, 쏟아지는 비 ----
 // x,y: screen centre; R: radius in px; u: 0..1 progress. Shared by hero casts (tier 3+)
