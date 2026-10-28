@@ -10,14 +10,16 @@
  *    - 날개·부유 몹은 서 있을 때도 날갯짓·호버 그림을 천천히 돌린다.
  * R110: Drive 저녁 묶음 M137(사이보그 이동 4장)·M119(향로 사제 대기 4장, 서 있을 때·움직일 때 모두)·종이 인형 이동 4장(art-drive-r105의
  *   Drive 그림 한 장 경로에 artPatch로 끼움: 걸을 때만 갈아 끼우고 서 있을 때·공격 때는 원래 그림)을 더한다.
+ * R116: Drive 2026-10-28 적용본 맞음·회복 4장 29종·대기 4장 11종(assets/r116/mobs, scripts/r116-mob-frames.py)을 더한다.
+ *   맞으면 맞음 4장을 한 번 돌고, 걷는 몹이 서 있으면 대기 4장을 천천히 돌린다. 이동·공격 그림과 맞음 판정·시간은 그대로.
  * 공격 시간·판정·AI·저장 형식은 읽기만 하고 바꾸지 않는다(그림만 바뀜). 병원(ep1a08) 전용 자세와 R74 세계 괴물 그림은 건드리지 않는다. */
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBS_R109__||typeof drawEnemy!=='function')return;
-const REV='R110-mobs-2',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json';
+const REV='R116-mobs-3',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json',R116='./assets/r116/mobs/index.json';
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r109.mobs';
-const FPS={walk:6.5,fly:8,hover:4},IDLE_FPS={fly:3.2,hover:2.6,idle:3.4},FOLLOW=.22,HOVER=.012;
-let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true},state='idle',r92=null,r109=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
-const stats={draws:0,move:0,idle:0,windup:0,attack:0,follow:0,calmPoses:0,hover:0,missingImage:0,preloads:0,artMove:0,seeThrough:0,stripFlips:0,labelsHidden:0};
+const FPS={walk:6.5,fly:8,hover:4},IDLE_FPS={fly:3.2,hover:2.6,idle:3.4},FOLLOW=.22,HOVER=.012,HIT_DUR=.36;
+let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true},state='idle',r92=null,r109=null,r116=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
+const stats={draws:0,move:0,idle:0,windup:0,attack:0,follow:0,calmPoses:0,hover:0,missingImage:0,preloads:0,artMove:0,seeThrough:0,stripFlips:0,labelsHidden:0,hit:0,standIdle:0};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,300);};
 const finite=Number.isFinite,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=v=>{v=clamp(v,0,1);return v*v*(3-2*v);};
@@ -37,10 +39,14 @@ function build(){table.clear();artRows.clear();
   // R110: Drive 그림 하나로 그려지던 몹(art 경로)은 그 그림 경로로 찾는다.
   if(t.art){artRows.set(String(t.art).replace(/^\.\//,''),{gid:t.group,move:tr==='move'?t:null,idle:tr==='idle'?t:null,attack:null,kind:t.kind||'walk',src:'R110-art'});continue;}
   for(const id of t.ids||[]){const row=table.get(id)||{gid:t.group,move:null,idle:null,attack:null,kind:'walk',src:'R109'};
-  table.set(id,{...row,gid:t.group,...(tr==='move'?{move:t,kind:t.kind||'walk'}:{idle:t}),src:row.src==='R92'?'R92+R109':'R109'});}}}
+  table.set(id,{...row,gid:t.group,...(tr==='move'?{move:t,kind:t.kind||'walk'}:{idle:t}),src:row.src==='R92'?'R92+R109':'R109'});}}
+ // R116: Drive 2026-10-28 적용본 맞음·회복 4장(hit)·대기 4장(idle)을 기존 이동·공격 줄 위에 더한다(이동·공격은 그대로).
+ if(r116)for(const t of r116.tracks||[]){const tr=t.track;if(tr!=='hit'&&tr!=='idle')continue;
+  for(const id of t.ids||[]){const row=table.get(id)||{gid:t.group,move:null,idle:null,attack:null,kind:'walk',src:'R116'};
+   table.set(id,{...row,[tr]:t,src:row.src==='R116'?'R116':row.src+'+R116'});}}}
 function load(){if(state!=='idle')return;state='loading';
  const get=u=>fetch(u,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(u+' '+r.status);return r.json();});
- Promise.allSettled([get(R92),get(R109)]).then(([a,b])=>{if(a.status==='fulfilled')r92=a.value;else fail(a.reason);if(b.status==='fulfilled')r109=b.value;else fail(b.reason);
+ Promise.allSettled([get(R92),get(R109),get(R116)]).then(([a,b,c])=>{if(a.status==='fulfilled')r92=a.value;else fail(a.reason);if(b.status==='fulfilled')r109=b.value;else fail(b.reason);if(c.status==='fulfilled')r116=c.value;else fail(c.reason);
   build();state=table.size?'ready':'failed';}).catch(e=>{state='failed';fail(e);});}
 const rowOf=e=>e?.nativeId?table.get(e.nativeId)||null:null;
 const cell=t=>t.frames||t.pivots?.length||4;
@@ -49,7 +55,7 @@ function frame(t,i,facing){const k=t.path+':'+i+':'+(facing||'');let f=cache.get
  f=Object.freeze({path:t.path,r92Mob:true,r109Mob:true,assetFrame:Object.freeze({sourceRect:[i*cw,0,cw,ch],pivot:[px,py],visibleHeight:t.visibleHeight||150,...(facing?{bakedFacing:facing}:{})})});cache.set(k,f);return f;}
 const ready=t=>!!t&&typeof readyImage==='function'&&!!readyImage(t.path);
 const art=e=>{try{return window.__STORYWORLD_DRIVE_ART_R105__?.artFor?.(e)||null;}catch(_){return null;}};
-const eligible=e=>!!e&&!major(e)&&!e.r74Monster&&e.hp>0&&e.spawnState!=='dead'&&!(e.hitTimer>0)&&typeof zone!=='undefined'&&zone!=='ep1a08'&&!art(e);
+const eligible=e=>!!e&&!major(e)&&!e.r74Monster&&e.hp>0&&e.spawnState!=='dead'&&(!(e.hitTimer>0)||!!rowOf(e)?.hit)&&typeof zone!=='undefined'&&zone!=='ep1a08'&&!art(e);
 const flies=(e,row)=>row.kind==='fly'||row.kind==='hover'||winged(e);
 
 const artRowOf=e=>{const p=art(e);return p?artRows.get(String(p).replace(/^\.\//,''))||null:null;};
@@ -61,7 +67,13 @@ function artPatch(e,path){if(state!=='ready'||!prefs.frames||!e||major(e)||!(e.h
  const n=cell(M),i=Math.floor(now()*FPS.walk+(hash(e.id)%n))%n,f=frame(M,i,null);stats.move++;stats.artMove++;return{move:f,idle:f};}
 
 // 원래 drawEnemy의 상태 선택(이동·준비·공격)을 그대로 따라 그 순간의 칸을 빌려준다.
+const hitAt=new WeakMap();
 function patchFor(e){const row=rowOf(e);if(!row)return null;const F=e.profile?.frames||{},out={},face=F.idle?.assetFrame?.bakedFacing;
+ // R116 맞음: 맞은 순간부터 0.36초 동안 맞음·회복 4장을 한 번 돌고 마지막 장에 머문다(공격 중에는 공격 그림이 먼저).
+ const H=row.hit;if(H&&e.hitTimer>0&&!e.attack){if(!ready(H)){stats.missingImage++;return null;}
+  let k=hitAt.get(e);if(!k||!(now()>=k.at)||now()-k.at>HIT_DUR+.25||e.hitTimer>k.ht+1e-4){k={at:now(),ht:e.hitTimer};hitAt.set(e,k);}k.ht=e.hitTimer;
+  const f=frame(H,Math.min(3,Math.floor((now()-k.at)/HIT_DUR*4)),F.idle?.assetFrame?.bakedFacing||face);out.idle=out.move=out.windup=f;stats.hit++;return out;}
+ if(e.hitTimer>0&&!(e.attack&&row.attack))return null;
  const A=row.attack;
  if(e.attack&&A){if(!ready(A)){stats.missingImage++;return null;}
   const shape=e.attack.shape154||e.combatProfile?.attackShape||{},wind=Number(e.attack.castWindup150??shape.windup)||0,act=Number(shape.active)||0,t=Number(e.attack.elapsed)||0;
@@ -74,7 +86,11 @@ function patchFor(e){const row=rowOf(e);if(!row)return null;const F=e.profile?.f
  if(!row.move&&row.idle){const I=row.idle;if(!ready(I)){stats.missingImage++;return null;}
   const n=cell(I),i=Math.floor(now()*IDLE_FPS.idle+(hash(e.id)%n))%n,f=frame(I,i,F.idle?.assetFrame?.bakedFacing||face);out.idle=out.move=f;stats.idle++;return out;}
  const M=row.move;if(!M)return null;
- const fly=flies(e,row),moving=!!e.moving;if(!moving&&!fly)return null;
+ const fly=flies(e,row),moving=!!e.moving;
+ // R116: 걷는 몹이 서 있을 때 대기 4장이 있으면 천천히 돌린다(없으면 원래 한 장).
+ if(!moving&&!fly&&row.idle){const I=row.idle;if(!ready(I)){stats.missingImage++;return null;}
+  const n=cell(I),f=frame(I,Math.floor(now()*IDLE_FPS.idle+(hash(e.id)%n))%n,F.idle?.assetFrame?.bakedFacing||face);out.idle=out.move=f;stats.idle++;stats.standIdle++;return out;}
+ if(!moving&&!fly)return null;
  if(!ready(M)){stats.missingImage++;return null;}
  const n=cell(M),kind=fly?(row.kind==='hover'?'hover':'fly'):'walk',fps=moving?(FPS[kind]||FPS.walk):(IDLE_FPS[kind]||IDLE_FPS.fly);
  const i=Math.floor(now()*fps+(hash(e.id)%n))%n,f=frame(M,i,F.move?.assetFrame?.bakedFacing||face);
@@ -82,7 +98,7 @@ function patchFor(e){const row=rowOf(e);if(!row)return null;const F=e.profile?.f
 
 // 지역에 들어가면 원래 이미지 캐시가 비워지므로 필요한 스트립을 다시 요청한다.
 function preload(){const t=performance.now();if(typeof addImage!=='function'||typeof readyImage!=='function')return;if(preloadZone===zone&&t-preloadAt<2000)return;preloadAt=t;preloadZone=zone;
- const want=new Set();for(const e of room?.enemies||[]){const r=rowOf(e)||artRowOf(e);if(r){for(const t of [r.move,r.attack,r.idle])if(t)want.add(t.path);}}
+ const want=new Set();for(const e of room?.enemies||[]){const r=rowOf(e)||artRowOf(e);if(r){for(const t of [r.move,r.attack,r.idle,r.hit])if(t)want.add(t.path);}}
  for(const p of want)if(!readyImage(p)){addImage(p,'R109 mob cross-frame motion');stats.preloads++;}}
 
 // ---- calm body pose (꿀렁임 제거) --------------------------------------------------------------
@@ -109,7 +125,7 @@ if(chain&&typeof chain.applyBodyPose==='function')window.__STORYWORLD_HOSPITAL_C
 // R111(2026-10-28 "이미지 방향성 전수조사"): rc137 공격 묶음 9장 133칸을 눈으로 다시 보고, 무기·공격 방향이 한쪽으로 분명한 칸을 모두 적었다.
 // 'L' = 원본이 오른쪽을 보는 칸(영웅이 왼쪽이면 뒤집음), 'R' = 원본이 왼쪽을 보는 칸. 정면·좌우 대칭인 칸은 원래 판정 그대로 둔다.
 const STRIP_FACE={'M004-attack':'L','assets/rc137/mob-attacks-01.png#627,0':'L','assets/rc137/mob-attacks-01.png#940,0':'L','assets/rc137/mob-attacks-01.png#0,313':'L','assets/rc137/mob-attacks-01.png#0,627':'L','assets/rc137/mob-attacks-01.png#0,0':'R','assets/rc137/mob-attacks-01.png#940,313':'R','assets/rc137/mob-attacks-01.png#940,627':'R','assets/rc137/mob-attacks-02.png#0,0':'L','assets/rc137/mob-attacks-02.png#940,0':'L','assets/rc137/mob-attacks-02.png#0,313':'L','assets/rc137/mob-attacks-02.png#313,313':'L','assets/rc137/mob-attacks-02.png#627,313':'L','assets/rc137/mob-attacks-02.png#940,313':'L','assets/rc137/mob-attacks-02.png#313,627':'L','assets/rc137/mob-attacks-02.png#627,627':'L','assets/rc137/mob-attacks-02.png#940,627':'L','assets/rc137/mob-attacks-02.png#313,940':'L','assets/rc137/mob-attacks-02.png#940,940':'L','assets/rc137/mob-attacks-02.png#0,940':'R','assets/rc137/mob-attacks-02.png#627,940':'R','assets/rc137/mob-attacks-03.png#0,0':'L','assets/rc137/mob-attacks-03.png#313,0':'L','assets/rc137/mob-attacks-03.png#0,313':'L','assets/rc137/mob-attacks-03.png#940,313':'L','assets/rc137/mob-attacks-03.png#313,940':'L','assets/rc137/mob-attacks-03.png#940,0':'R','assets/rc137/mob-attacks-03.png#0,627':'R','assets/rc137/mob-attacks-03.png#940,627':'R','assets/rc137/mob-attacks-03.png#627,940':'R','assets/rc137/mob-attacks-04.png#313,313':'L','assets/rc137/mob-attacks-04.png#627,627':'L','assets/rc137/mob-attacks-04.png#0,940':'L','assets/rc137/mob-attacks-04.png#313,940':'L','assets/rc137/mob-attacks-04.png#627,940':'L','assets/rc137/mob-attacks-04.png#627,0':'R','assets/rc137/mob-attacks-04.png#627,313':'R','assets/rc137/mob-attacks-04.png#0,627':'R','assets/rc137/mob-attacks-04.png#313,627':'R','assets/rc137/mob-attacks-04.png#940,627':'R','assets/rc137/mob-attacks-05.png#0,0':'L','assets/rc137/mob-attacks-05.png#313,313':'L','assets/rc137/mob-attacks-05.png#627,313':'L','assets/rc137/mob-attacks-05.png#313,627':'L','assets/rc137/mob-attacks-05.png#0,940':'L','assets/rc137/mob-attacks-05.png#313,940':'L','assets/rc137/mob-attacks-06.png#0,313':'L','assets/rc137/mob-attacks-06.png#313,313':'L','assets/rc137/mob-attacks-06.png#940,313':'L','assets/rc137/mob-attacks-06.png#0,627':'L','assets/rc137/mob-attacks-06.png#313,627':'L','assets/rc137/mob-attacks-06.png#940,627':'L','assets/rc137/mob-attacks-06.png#313,940':'L','assets/rc137/mob-attacks-06.png#313,0':'R','assets/rc137/mob-attacks-06.png#940,0':'R','assets/rc137/mob-attacks-06.png#627,313':'R','assets/rc137/mob-attacks-06.png#0,940':'R','assets/rc137/mob-attacks-06.png#627,940':'R','assets/rc137/mob-attacks-06.png#940,940':'R','assets/rc137/mob-attacks-07.png#0,0':'L','assets/rc137/mob-attacks-07.png#940,0':'L','assets/rc137/mob-attacks-07.png#0,313':'L','assets/rc137/mob-attacks-07.png#940,313':'L','assets/rc137/mob-attacks-07.png#627,627':'L','assets/rc137/mob-attacks-07.png#0,940':'L','assets/rc137/mob-attacks-07.png#627,940':'L','assets/rc137/mob-attacks-07.png#940,940':'L','assets/rc137/mob-attacks-07.png#0,627':'R','assets/rc137/mob-attacks-08.png#0,0':'L','assets/rc137/mob-attacks-08.png#627,0':'L','assets/rc137/mob-attacks-08.png#940,0':'L','assets/rc137/mob-attacks-08.png#0,313':'L','assets/rc137/mob-attacks-08.png#313,313':'L','assets/rc137/mob-attacks-08.png#627,313':'L','assets/rc137/mob-attacks-08.png#313,627':'L','assets/rc137/mob-attacks-08.png#627,627':'L','assets/rc137/mob-attacks-08.png#0,940':'L','assets/rc137/mob-attacks-08.png#0,627':'R','assets/rc137/mob-attacks-09.png#0,0':'L','assets/rc137/mob-attacks-09.png#0,418':'L','assets/rc137/mob-attacks-09.png#418,418':'L','assets/rc137/mob-attacks-09.png#0,836':'L'}; // 거짓천국 근위천사(a11-c1)·악마화 나무의 침식 근위(dist00 순찰) 등 M004 계열
-const stripKey=f=>{const p=String(f?.path||'').replace(/^\.\//,''),m=/\/(M\d+|PAPER)-(attack|move|idle)\.png$/.exec(p);if(m)return m[1]+'-'+m[2];const r=f?.assetFrame?.sourceRect;return r?p+'#'+r[0]+','+r[1]:null;};
+const stripKey=f=>{const p=String(f?.path||'').replace(/^\.\//,''),m=/\/(M\d+|PAPER)-(attack|move|idle|hit)\.png$/.exec(p);if(m)return m[1]+'-'+m[2];const r=f?.assetFrame?.sourceRect;return r?p+'#'+r[0]+','+r[1]:null;};
 const motionR51=window.__STORYWORLD_ENEMY_MOTION_R51__;
 if(motionR51&&typeof motionR51.flip==='function')window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...motionR51,flip(e,f,fallback){
  try{if(f&&e&&!major(e)&&(e.attack||e.rangedWindup>0)&&typeof player!=='undefined'&&player){const art=STRIP_FACE[stripKey(f)];if(art){const du=(player.x-player.y)-(e.x-e.y),left=du<0;stats.stripFlips++;return art==='L'?left:!left;}}}catch(err){fail(err);}
@@ -152,10 +168,10 @@ drawEnemy=function(e,...args){const prevScope=scoped;scoped=e;let patch=null,pro
  finally{if(unmute){try{unmute();}catch(_){}}if(ga!==null)ctx.globalAlpha=ga;if(prof)e.profile=prof;if(lift){if(lift.own)e.visualLiftPx=lift.old;else delete e.visualLiftPx;}scoped=prevScope;}};
 
 window.__STORYWORLD_MOBS_R109__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,storageKey:KEY,
- trackFor:e=>{const r=rowOf(e)||artRowOf(e);return r?{group:r.gid,src:r.src,kind:r.kind,idle:r.idle?{path:r.idle.path,frames:cell(r.idle)}:null,move:r.move?{path:r.move.path,frames:cell(r.move)}:null,attack:r.attack?{path:r.attack.path,frames:cell(r.attack)}:null}:null;},
+ trackFor:e=>{const r=rowOf(e)||artRowOf(e);return r?{group:r.gid,src:r.src,kind:r.kind,idle:r.idle?{path:r.idle.path,frames:cell(r.idle)}:null,move:r.move?{path:r.move.path,frames:cell(r.move)}:null,attack:r.attack?{path:r.attack.path,frames:cell(r.attack)}:null,hit:r.hit?{path:r.hit.path,frames:cell(r.hit)}:null}:null;},
  artPatch:(e,path)=>{try{return artPatch(e,path);}catch(err){fail(err);return null;}},
  seeAlpha:e=>{try{return seeAlpha(e);}catch(err){fail(err);return 1;}},
  patchFor:e=>{try{return state==='ready'&&eligible(e)?patchFor(e):null;}catch(err){fail(err);return null;}},
- coverage:()=>{const es=(room?.enemies||[]).filter(e=>!major(e));return{zone,layer:typeof layer==='undefined'?null:layer,enemies:es.length,mapped:es.filter(e=>rowOf(e)).length,withMove:es.filter(e=>rowOf(e)?.move).length,withAttack:es.filter(e=>rowOf(e)?.attack).length,driveStatic:es.filter(e=>art(e)).length};},
- inspect:()=>({revision:REV,state,ids:table.size,artRows:artRows.size,r109Groups:(r109?.tracks||[]).map(t=>t.group),prefs:{...prefs},stats:{...stats},failures,lastError,presentationOnly:true,gameplayChanged:false,saveSlotsChanged:false})});
+ coverage:()=>{const es=(room?.enemies||[]).filter(e=>!major(e));return{zone,layer:typeof layer==='undefined'?null:layer,enemies:es.length,mapped:es.filter(e=>rowOf(e)).length,withMove:es.filter(e=>rowOf(e)?.move).length,withAttack:es.filter(e=>rowOf(e)?.attack).length,withHit:es.filter(e=>rowOf(e)?.hit).length,withIdle:es.filter(e=>rowOf(e)?.idle).length,driveStatic:es.filter(e=>art(e)).length};},
+ inspect:()=>({revision:REV,state,ids:table.size,artRows:artRows.size,r109Groups:(r109?.tracks||[]).map(t=>t.group),r116Tracks:(r116?.tracks||[]).length,prefs:{...prefs},stats:{...stats},failures,lastError,presentationOnly:true,gameplayChanged:false,saveSlotsChanged:false})});
 })();

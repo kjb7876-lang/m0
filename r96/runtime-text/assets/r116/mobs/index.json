@@ -1,0 +1,2514 @@
+{
+ "schema": "storyworld.r109.mobs/v1",
+ "revision": "R116",
+ "note": "Drive 2026-10-28 적용본(게임 반영 전) 맞음·대기 4키. 원본 보존·가공 사본.",
+ "tracks": [
+  {
+   "group": "M001",
+   "ids": [
+    "dist01-s1",
+    "dist03-s1",
+    "dist04-s1",
+    "dist05-s1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M001-hit.png",
+   "frames": 4,
+   "cell": [
+    136,
+    153
+   ],
+   "pivot": [
+    74.11,
+    152.31
+   ],
+   "visibleHeight": 150,
+   "bytes": 141513,
+   "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71",
+   "use": "거미줄에 묶인 수호병 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2165050,
+      "sha256": "5287e34cfffe90b2125fb57b55401b6a0650bc1557cc45203e8f755af849d736"
+     },
+     {
+      "name": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2176796,
+      "sha256": "d2e41fee59988fa07d713bd94a8b4a6dcf8cb35f8b9b9c86483b07baddaa0eae"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M001-hit-K1-padded.png",
+      "sha256": "f815a5632c4acffbc19b3ed3c436741d77848fa1ce1a1e3b47aec2ae0cd5e90d"
+     },
+     {
+      "zip": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M001-hit-K2-padded.png",
+      "sha256": "a38adcfbefb2890b17d810e819b42b2f5c9c929761777a30147d9a4793f431db"
+     },
+     {
+      "zip": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M001-hit-K3-padded.png",
+      "sha256": "9fba86d9eda55eb585f88b807c47912a408e5fd1de60d7111f4076f3d61dddeb"
+     },
+     {
+      "zip": "StoryWorld-M001-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M001-hit-K4-padded.png",
+      "sha256": "36d2e395ebdca333d5c9a1ac370c6b37243ac99721460c7f1f1bc1d1611867d8"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M003",
+   "ids": [
+    "dist02-m1",
+    "dist05-m1",
+    "dist06-m1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M003-hit.png",
+   "frames": 4,
+   "cell": [
+    123,
+    154
+   ],
+   "pivot": [
+    65.38,
+    153.63
+   ],
+   "visibleHeight": 150,
+   "bytes": 120945,
+   "sha256": "b17d15a682879d9fdd426fe0ccf21400f9e32b070eedc39a008aa64fad6d377f",
+   "use": "수렁 주문사 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1608572,
+      "sha256": "985a16a707245ae838c3c562871609c9c20b44bb0d8d6385e1cbf382b4ec8686"
+     },
+     {
+      "name": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1606643,
+      "sha256": "a78c008475cce6a69b16f773887651101c8920886e20ed1d5485d859f9b8418c"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-hit-K1-padded.png",
+      "sha256": "299cec854cfc5198d03c4b925b88484576acb0c860b1312f8fcd1e263e438130"
+     },
+     {
+      "zip": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-hit-K2-padded.png",
+      "sha256": "f1409b18515de3eb2d77ec150a48a54d23cdbe2242622aa02249815f61c75b66"
+     },
+     {
+      "zip": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-hit-K3-padded.png",
+      "sha256": "e307fbdb6038eac275f173f8ae8a7d677d6e808692d7d2386dc978e965596f6d"
+     },
+     {
+      "zip": "StoryWorld-M003-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-hit-K4-padded.png",
+      "sha256": "df614856efe4df82f346a5b60e34aff71c40c7e4206bfdd809646897c62f3dd4"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M003",
+   "ids": [
+    "dist02-m1",
+    "dist05-m1",
+    "dist06-m1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M003-idle.png",
+   "frames": 4,
+   "cell": [
+    119,
+    152
+   ],
+   "pivot": [
+    62.53,
+    151.32
+   ],
+   "visibleHeight": 150,
+   "bytes": 113205,
+   "sha256": "226fa3e3df59983fe0b5d1363688d2f9c29bfeb34d443a495239d031a9a8b8dd",
+   "use": "수렁 주문사 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M003-idle4-asset-ready-20261028-PART01.zip",
+      "bytes": 1575839,
+      "sha256": "a99ad34db8cfac2b776909468d30813880198e30d9fd788ec99246750f6e4825"
+     },
+     {
+      "name": "StoryWorld-M003-idle4-asset-ready-20261028-PART02.zip",
+      "bytes": 1624031,
+      "sha256": "4ce5b34139a9b9a0ddaf4fa57a043e91c2c625ff7430b164adddb51ba3851c80"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M003-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-idle-K1-padded.png",
+      "sha256": "b0346e3a67cf9e5fd3e95a44660b8acf5eaefa05b9d1f831006717f9ad36f3d3"
+     },
+     {
+      "zip": "StoryWorld-M003-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-idle-K2-padded.png",
+      "sha256": "dfefd283de20a3a4fb2b706ca2d7a46135710c94de4b4ac5a5e9cadcdd4b7f50"
+     },
+     {
+      "zip": "StoryWorld-M003-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-idle-K3-padded.png",
+      "sha256": "526a7357adf925db7e0ba0ac8f70470cb5170846f32262041b11b3823b114641"
+     },
+     {
+      "zip": "StoryWorld-M003-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M003-idle-K4-padded.png",
+      "sha256": "ebfb6073527a689d4624e0243c4f4f111930adab8701c6346dc8f401ea4b0908"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M005",
+   "ids": [
+    "dist02-h1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M005-hit.png",
+   "frames": 4,
+   "cell": [
+    104,
+    153
+   ],
+   "pivot": [
+    58.64,
+    150.91
+   ],
+   "visibleHeight": 150,
+   "bytes": 104171,
+   "sha256": "8d81fa6a41a9b334efc87e27449d26cc307e7322f3ad014dfe3e2f0549a668e2",
+   "use": "늪의 염소머리 악마 · 맞음·회복 4키",
+   "groundSpreadPx": 17,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M005-hit4-ASSET-READY-part01-of04.zip",
+      "bytes": 2936410,
+      "sha256": "6052ff1fc1ff7dc5d8ae2ac658d377ecec19cd5eaba3d4e721ec50f15b27f8ae"
+     },
+     {
+      "name": "StoryWorld-M005-hit4-ASSET-READY-part02-of04.zip",
+      "bytes": 2718956,
+      "sha256": "a91298c1422f2ac150faee6d97fa5d07d50d1ad19be780b1165e95eea1a41462"
+     },
+     {
+      "name": "StoryWorld-M005-hit4-ASSET-READY-part03-of04.zip",
+      "bytes": 2838837,
+      "sha256": "162e1eae3dd2f05e5aab8ee6132ddc56a51e1b2c3e662222be0d4c1a11565cf7"
+     },
+     {
+      "name": "StoryWorld-M005-hit4-ASSET-READY-part04-of04.zip",
+      "bytes": 2992951,
+      "sha256": "e485e900ef09a259377a96716f81ec739a03290d515cb0a3e5777497f26096ea"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M005-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M005-hit-K1.png",
+      "sha256": "dac90e8b79dd436fc544c32c41b5e391d97e605ff0739c31571058c254ed9537"
+     },
+     {
+      "zip": "StoryWorld-M005-hit4-ASSET-READY-part04-of04.zip",
+      "png": "candidate/frames/M005-hit-K2.png",
+      "sha256": "ced32d9de67b4c44e5f797f16e806cd66c1a54e767939c789cb21ccc45f65721"
+     },
+     {
+      "zip": "StoryWorld-M005-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M005-hit-K3.png",
+      "sha256": "15fdcd1299ac36898c3d4650c4ca483838c8c43dec604be2d72dbdbd78c74d9c"
+     },
+     {
+      "zip": "StoryWorld-M005-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M005-hit-K4.png",
+      "sha256": "5535cdb42565a9f8a57b563df6cfae8b2aaf3b308c9dfc2552960382afb5fad6"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M006",
+   "ids": [
+    "dist03-g1",
+    "dist04-g1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M006-hit.png",
+   "frames": 4,
+   "cell": [
+    129,
+    152
+   ],
+   "pivot": [
+    71.66,
+    151.13
+   ],
+   "visibleHeight": 150,
+   "bytes": 106952,
+   "sha256": "39594b1050abc2609383b6df70817b59fa408f9a00b3176ced988b54c0d19c89",
+   "use": "피냄새 추적자 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1448226,
+      "sha256": "6de51a56ec0fdccef39296fc221c1a470f54c0af6052e0310df4371f3a43fdeb"
+     },
+     {
+      "name": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1383146,
+      "sha256": "bfaae7c592aef95762934e6a19b9d1df7740fde7c1ee172cc58ec353086aa6c0"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M006-hit-K1-padded.png",
+      "sha256": "2d836df9e150b3f426a16fbc139976afad2f296556d7584968e040718de82490"
+     },
+     {
+      "zip": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M006-hit-K2-padded.png",
+      "sha256": "91fe760160f7d35ced84769ff64ad6f159a956c306a822d1b0755fc91b5851da"
+     },
+     {
+      "zip": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M006-hit-K3-padded.png",
+      "sha256": "a8444373cf96a9ef4bbc9aa315852737947ec968760d1c2a42c2737ae0c3f157"
+     },
+     {
+      "zip": "StoryWorld-M006-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M006-hit-K4-padded.png",
+      "sha256": "aae63cff92560de46eae312fdcab3da53f33fbb9b5e616218d00f86d0bdfed8e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M007",
+   "ids": [
+    "dist05-c1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M007-hit.png",
+   "frames": 4,
+   "cell": [
+    240,
+    157
+   ],
+   "pivot": [
+    127.89,
+    152.92
+   ],
+   "visibleHeight": 150,
+   "bytes": 205595,
+   "sha256": "e4e1df79f1b8bc5303c1c8192860f44f4dcea7ca69c9b68c0a3862f5b89617b1",
+   "use": "검은기둥 가고일 수호자 · 맞음·회복 4키",
+   "groundSpreadPx": 21,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M007-hit4-ASSET-READY-part01-of05.zip",
+      "bytes": 2954471,
+      "sha256": "972a5ad59340b3619878a6eaf671a0d39096ab2c5a9c9f3ba87332e9ab22a536"
+     },
+     {
+      "name": "StoryWorld-M007-hit4-ASSET-READY-part02-of05.zip",
+      "bytes": 2943633,
+      "sha256": "fccaa0419a932412ba91c627cb30dc630b77ab28936aaa636dde520f5db06d2b"
+     },
+     {
+      "name": "StoryWorld-M007-hit4-ASSET-READY-part03-of05.zip",
+      "bytes": 2825964,
+      "sha256": "608efc4e72599aff08091964612d6c1d0d5fb564bc8417f35825d8e53eecab20"
+     },
+     {
+      "name": "StoryWorld-M007-hit4-ASSET-READY-part04-of05.zip",
+      "bytes": 2742595,
+      "sha256": "94142ec20298d92ffc15e0b3da9696ca26d1366c3a70d69e2ca1cc90a5883d47"
+     },
+     {
+      "name": "StoryWorld-M007-hit4-ASSET-READY-part05-of05.zip",
+      "bytes": 2656528,
+      "sha256": "b169a6dee07d8856af3f152fa24bfa2eff438cebaa6856a784f823e9979fe9e7"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M007-hit4-ASSET-READY-part03-of05.zip",
+      "png": "candidate/frames/M007-hit-K1.png",
+      "sha256": "3710f684b9bb2894068d6898f18c7ec1f6c62f012d642509a3a919db1500b18e"
+     },
+     {
+      "zip": "StoryWorld-M007-hit4-ASSET-READY-part03-of05.zip",
+      "png": "candidate/frames/M007-hit-K2.png",
+      "sha256": "5ff31c087145ebff9fcf830d2236475ab45170a30e309f6c71d662d450d78a4e"
+     },
+     {
+      "zip": "StoryWorld-M007-hit4-ASSET-READY-part03-of05.zip",
+      "png": "candidate/frames/M007-hit-K3.png",
+      "sha256": "b9715d98e1fc2eff6075fce9824806f4ec1bf4d1bb6792df5d0a41c815bcf92b"
+     },
+     {
+      "zip": "StoryWorld-M007-hit4-ASSET-READY-part03-of05.zip",
+      "png": "candidate/frames/M007-hit-K4.png",
+      "sha256": "492aa55a018b8b909aebc5dc6433e40aa6428ec5f6492eb2821bae9a3d0ded14"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M008",
+   "ids": [
+    "dist05-h1",
+    "dist06-h1",
+    "a10-h1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M008-hit.png",
+   "frames": 4,
+   "cell": [
+    146,
+    157
+   ],
+   "pivot": [
+    84.88,
+    155.97
+   ],
+   "visibleHeight": 150,
+   "bytes": 150220,
+   "sha256": "809e77b062a10fe13e527996224adc5c127974df07d9b719ca89363d1b559c74",
+   "use": "소환진 순례악마 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART01.zip",
+      "bytes": 1921511,
+      "sha256": "0b266897e9681851b086963b0819aedd30b74586d643ac8f982b639155332ad7"
+     },
+     {
+      "name": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART02.zip",
+      "bytes": 1810811,
+      "sha256": "2336c30990b5424a18a24a87d0501908a97af9ad46990201280cd4f129dab7a2"
+     },
+     {
+      "name": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART03.zip",
+      "bytes": 2411817,
+      "sha256": "ca776ed0969c9bec6bc8073a954aa86de59b922d76f92a4cd7236ab6f24b9fd7"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART03.zip",
+      "png": "frames/M008-hit-K1-padded.png",
+      "sha256": "c4f46eb34aa79c63fc9f5de555d527b0b33686ae7354fe4bddf184947bcad00d"
+     },
+     {
+      "zip": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART03.zip",
+      "png": "frames/M008-hit-K2-padded.png",
+      "sha256": "88f71537544f86439455469cf95190d719e503deec1213edc4c1a44463403352"
+     },
+     {
+      "zip": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART03.zip",
+      "png": "frames/M008-hit-K3-padded.png",
+      "sha256": "ff51f84f1bb70b78747bc7440e7e79779f4a79ac56ae2e38784e6d4ee5bc5947"
+     },
+     {
+      "zip": "StoryWorld-M008-hit-recovery4-horn-corrected-20261028-PART03.zip",
+      "png": "frames/M008-hit-K4-padded.png",
+      "sha256": "5f59132decbef0750496a2f322a3df49915ae43dadddcc90eced321ac4e12ef7"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M008",
+   "ids": [
+    "dist05-h1",
+    "dist06-h1",
+    "a10-h1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M008-idle.png",
+   "frames": 4,
+   "cell": [
+    137,
+    153
+   ],
+   "pivot": [
+    77.96,
+    152.35
+   ],
+   "visibleHeight": 150,
+   "bytes": 145838,
+   "sha256": "81460606f303836d31cd71673f1e25ea64c015270b07a54cb0dc737708e63a33",
+   "use": "소환진 순례악마 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M008-idle4-asset-ready-20261028-PART01.zip",
+      "bytes": 1984795,
+      "sha256": "cb2a3c1d52f92b073ec7398836233f7c9698358af91dfc5b4264097fc91b7609"
+     },
+     {
+      "name": "StoryWorld-M008-idle4-asset-ready-20261028-PART02.zip",
+      "bytes": 2143605,
+      "sha256": "c6cef206a220e2146c4df637ef3299c346fabdc047f851d1ced6c91462f1a146"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M008-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M008-idle-K1-padded.png",
+      "sha256": "74885e5f9892922badec4c0d7856fccaada8988d61633164b9722d502d57a4bb"
+     },
+     {
+      "zip": "StoryWorld-M008-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M008-idle-K2-padded.png",
+      "sha256": "81d1d8e3dbce766a86b3be3b054661dc9e5bbaafb8bcf8a086b04f82e38d9558"
+     },
+     {
+      "zip": "StoryWorld-M008-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M008-idle-K3-padded.png",
+      "sha256": "4333aaa43aecde9847ad4eaed951e4f11837358bfd30faa4626aaecee507006f"
+     },
+     {
+      "zip": "StoryWorld-M008-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M008-idle-K4-padded.png",
+      "sha256": "c804fc3197037b6997ee34c302abe261794e6d438ad8f39162a6ff542d275578"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M013",
+   "ids": [
+    "a09-v1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M013-hit.png",
+   "frames": 4,
+   "cell": [
+    120,
+    161
+   ],
+   "pivot": [
+    64.79,
+    152.85
+   ],
+   "visibleHeight": 150,
+   "bytes": 132567,
+   "sha256": "7008f76989baf36f30fbec83377708efd725f83f84894cfd4b1d13a75a6584b2",
+   "use": "갈망의 약병핵 · 맞음·회복 4키",
+   "groundSpreadPx": 38,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1601297,
+      "sha256": "55c17bc3bfecd8f7b47c008915c8a924a68879864fb86ea01c15c494439df316"
+     },
+     {
+      "name": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1850427,
+      "sha256": "81803164cbfd1b55f4adf0015525b2b0d3cb7811cc18f456c3e9a41fb619f18b"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M013-hit-K1-padded.png",
+      "sha256": "435a4e3f1ec2e6633800ee11c5073f1087fd4c5f5c638909a4eff82bf7495899"
+     },
+     {
+      "zip": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M013-hit-K2-padded.png",
+      "sha256": "b4566576470db5bf3c56baa1d72269ac6466aa341be647559b01a57f9761f178"
+     },
+     {
+      "zip": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M013-hit-K3-padded.png",
+      "sha256": "1abf5c917471f23fe7f35b2344cbd295cb0dacedcefc981c975e0bf8f1412cdb"
+     },
+     {
+      "zip": "StoryWorld-M013-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M013-hit-K4-padded.png",
+      "sha256": "d7eb143403fde0731c54e8638271542235b8bf1a12a8a3389e694800f2a2047c"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M018",
+   "ids": [
+    "b01-s1",
+    "b03-g1",
+    "b03-g2"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M018-hit.png",
+   "frames": 4,
+   "cell": [
+    145,
+    154
+   ],
+   "pivot": [
+    76.78,
+    151.49
+   ],
+   "visibleHeight": 150,
+   "bytes": 146621,
+   "sha256": "708eb9710b03566f28b08a539352ac2a4c1316dfc885e0e1c045538c3c16db77",
+   "use": "이름 없던 공포 · 맞음·회복 4키",
+   "groundSpreadPx": 24,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1570293,
+      "sha256": "14084cc601c052cb621d351d11b7314d24b9a05458707350c9bef7a90848fa02"
+     },
+     {
+      "name": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1692690,
+      "sha256": "ca86f853b4e151d78756198dc165cd972f918810b0efcb7abd94824569fe0f99"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M018-hit-K1-padded.png",
+      "sha256": "8acf4103b520435e59510cadf817752cfa340506bf7498ae2e1b60b2defc3090"
+     },
+     {
+      "zip": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M018-hit-K2-padded.png",
+      "sha256": "efe10218665d09dc5d1b8ee0bebea8f463442f6fa2e3b66581ba2d3a3d97430f"
+     },
+     {
+      "zip": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M018-hit-K3-padded.png",
+      "sha256": "ecb670f062fbadffdd75a323a267b3e740301eef16318548227139d7d55f1e44"
+     },
+     {
+      "zip": "StoryWorld-M018-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M018-hit-K4-padded.png",
+      "sha256": "3f5c432c1c941f4aff092dbceaa861de37ba8e66e2ab9b54ef4e38e4c8112e99"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M021",
+   "ids": [
+    "b02-b1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M021-hit.png",
+   "frames": 4,
+   "cell": [
+    182,
+    153
+   ],
+   "pivot": [
+    83.0,
+    151.85
+   ],
+   "visibleHeight": 150,
+   "bytes": 194639,
+   "sha256": "d84136f295022d47db73dc2de25d1be402acbab890f4ab09ed7e840f455bb017",
+   "use": "등에 붙은 쓰레기더미 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2437642,
+      "sha256": "9b955113b108a0625b959c46502bcf004bcd43931f0512794a3bf4a7045d3b57"
+     },
+     {
+      "name": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2780297,
+      "sha256": "cfde73f6143c914295184e4cc2d5087afb103623de3562f9ab975606cf3c6bef"
+     },
+     {
+      "name": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART03.zip",
+      "bytes": 601857,
+      "sha256": "faa90ba9ce059e63f1504b7794c77c744242686f994b65750f62a4d027bfc463"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M021-hit-K1-padded.png",
+      "sha256": "3c73edcee9e628d2042a4f6542f167bdbd587161d24728448e634b41903edafb"
+     },
+     {
+      "zip": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M021-hit-K2-padded.png",
+      "sha256": "6e276ae2a915c8285b92939c9c72b47c9f6a42a4cf579a2f19388989bf14b5be"
+     },
+     {
+      "zip": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M021-hit-K3-padded.png",
+      "sha256": "7212c93a80bfcfd1c0e959921a1b51e72bbb80c29843aa6cd6f6dae28c079c3e"
+     },
+     {
+      "zip": "StoryWorld-M021-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M021-hit-K4-padded.png",
+      "sha256": "de2f430aa4e902189cd27b19f72da20c5081ea88e72f70b70b9e6cd2adcc63a0"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M022",
+   "ids": [
+    "b02-m1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M022-hit.png",
+   "frames": 4,
+   "cell": [
+    266,
+    155
+   ],
+   "pivot": [
+    149.56,
+    153.48
+   ],
+   "visibleHeight": 150,
+   "bytes": 262018,
+   "sha256": "9b509f6d2fbaa17db9e188519870b20cc3a38d3e866d225ab9c7c51b8cfed088",
+   "use": "곰팡이와 오물 봉투 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2254630,
+      "sha256": "50a9fa87ded582d0d17d1bf15144b3e9c648e635c3a7350a836b93e5c1fabf0a"
+     },
+     {
+      "name": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2564461,
+      "sha256": "fafd33aa1ab4268399b4a8b6fcd17763a3e8e8464bdfeed154685d431970e035"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-hit-K1-padded.png",
+      "sha256": "82ff260fb3875bb0d9ed4cd8d6e2b005461c89e60acf6ca1df67befd9e449708"
+     },
+     {
+      "zip": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-hit-K2-padded.png",
+      "sha256": "0b592df2d6c4e29a382cbabcadae50d72db147331d450311cdd7639c78445e82"
+     },
+     {
+      "zip": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-hit-K3-padded.png",
+      "sha256": "183eae108e7b109e558396a786ad7fa6b57d59a19f277b5b709d81d1231a1e60"
+     },
+     {
+      "zip": "StoryWorld-M022-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-hit-K4-padded.png",
+      "sha256": "01a0103b6ada9826aa3ea01974a7ac4acb19c9bed61b312e198b6837edaa4fa2"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M022",
+   "ids": [
+    "b02-m1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M022-idle.png",
+   "frames": 4,
+   "cell": [
+    239,
+    156
+   ],
+   "pivot": [
+    132.24,
+    154.42
+   ],
+   "visibleHeight": 150,
+   "bytes": 241808,
+   "sha256": "690adc4b5682c9d5636d5c6d3256daae0f5b011ed332572fb54b19d623cecaf0",
+   "use": "곰팡이와 오물 봉투 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M022-idle4-asset-ready-20261028-PART01.zip",
+      "bytes": 1346635,
+      "sha256": "8236750ac43957fb9cbf0a2ce918e9662f4d709a83fec314587cb315ee1fcb3d"
+     },
+     {
+      "name": "StoryWorld-M022-idle4-asset-ready-20261028-PART02.zip",
+      "bytes": 1537938,
+      "sha256": "e4167f8b81a2eee69f3beedc250dbf1d96d4d936943c909d24c8a191a471ad8f"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M022-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-idle-K1-padded.png",
+      "sha256": "ead2360cbd3515e0b78cf844b1bf7286dba51b9c9b3c579a6f514eac5e8da7b9"
+     },
+     {
+      "zip": "StoryWorld-M022-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-idle-K2-padded.png",
+      "sha256": "b71db2821f932a99c7f5913f725decb75f99e318ef3dd9be07866a5fbeeffd4e"
+     },
+     {
+      "zip": "StoryWorld-M022-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-idle-K3-padded.png",
+      "sha256": "1b97e5315aa3200b72fc587dcc8a7d59833143a0eab6963ae79ed3d0ecefd01a"
+     },
+     {
+      "zip": "StoryWorld-M022-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M022-idle-K4-padded.png",
+      "sha256": "7fd41a53fa5fd181a69dcc18865f159e8e4f60245452b821f55fce637f5ad862"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M024",
+   "ids": [
+    "b04-b1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M024-hit.png",
+   "frames": 4,
+   "cell": [
+    198,
+    158
+   ],
+   "pivot": [
+    100.83,
+    157.29
+   ],
+   "visibleHeight": 150,
+   "bytes": 209841,
+   "sha256": "a5f4c79c0761640a45a70c7b5d53d8643ff6da29dd12cce4b705950be08a2663",
+   "use": "살아 있는 거대한 위장 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2381974,
+      "sha256": "6447851fccf90abf523a17e5bf66cb6f639cb70d2eda7a27f551ff00ab90bb12"
+     },
+     {
+      "name": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2711775,
+      "sha256": "911a5090dc45fd5eac23a54f1fd73457edcf5639e902eef8f814a04ee08bf74c"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M024-hit-K1-padded.png",
+      "sha256": "c504c230c5281682d99d980525013edff15fa5c486a1dddffa29b5468da5b366"
+     },
+     {
+      "zip": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M024-hit-K2-padded.png",
+      "sha256": "f9b9785d44e4d28dd42b96b63446671ffd2af0f87ee206cb8d5221908c9e12ed"
+     },
+     {
+      "zip": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M024-hit-K3-padded.png",
+      "sha256": "85c037991c5894fef8d6af04af42480c2e0b96c46b565dcb0232aa3a5df5dbe6"
+     },
+     {
+      "zip": "StoryWorld-M024-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M024-hit-K4-padded.png",
+      "sha256": "d9c536b067d1b62d2dddf9c11f6dbe3e3490a66c09cf1fac899219b53d0a3851"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M025",
+   "ids": [
+    "b04-g1",
+    "b04-s1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M025-hit.png",
+   "frames": 4,
+   "cell": [
+    174,
+    154
+   ],
+   "pivot": [
+    88.34,
+    153.59
+   ],
+   "visibleHeight": 150,
+   "bytes": 192672,
+   "sha256": "52b444384fb2828500b491d993cb7a06539076c77d75a89686e111bebbf4e140",
+   "use": "버려진 최고급 식재료 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2007697,
+      "sha256": "a950e1d2d23726c6245d816dbca1ace6053d87a90cb11b5657ab9309263a58fd"
+     },
+     {
+      "name": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2269364,
+      "sha256": "12304b91b97bf17e6b74459f35e2839def043f06d3d9cb55d9cfccb806eee05c"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M025-hit-K1-padded.png",
+      "sha256": "8dc21280b475bbc6a8247631f24c9510b2f45db407810e1ffd09dfd797305a84"
+     },
+     {
+      "zip": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M025-hit-K2-padded.png",
+      "sha256": "4f0a4baa3177ba4afcafd9adf008873cbb91c770b32190ce856fd1ccd3239bb2"
+     },
+     {
+      "zip": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M025-hit-K3-padded.png",
+      "sha256": "0d2da48af436379124eb68f22be91dd108e387743815dec05cd799b26d3952cc"
+     },
+     {
+      "zip": "StoryWorld-M025-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M025-hit-K4-padded.png",
+      "sha256": "b0dee20c25b8736d0ceca1d381dc689d11c7319a0e1dc5b6d61f222b1162448d"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M032",
+   "ids": [
+    "b08-h1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M032-hit.png",
+   "frames": 4,
+   "cell": [
+    103,
+    152
+   ],
+   "pivot": [
+    50.45,
+    151.19
+   ],
+   "visibleHeight": 150,
+   "bytes": 97308,
+   "sha256": "50c56f47f5a86aadaeead7bee69971a2e934a34934671ad5b9cbb8e23b6aa03f",
+   "use": "창처럼 날아오는 역십자가 · 맞음·회복 4키",
+   "groundSpreadPx": 2,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M032-hit4-ASSET-READY-part01-of02.zip",
+      "bytes": 2999414,
+      "sha256": "15d469528d27585484fce678b79f4f09583201f6b52ba5a439cb9ed3cb98af35"
+     },
+     {
+      "name": "StoryWorld-M032-hit4-ASSET-READY-part02-of02.zip",
+      "bytes": 2132086,
+      "sha256": "205ba71bc16d9ce1d5140d8550fae92032058b4dff669bf3358b17d7cb715baa"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M032-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-hit-K1.png",
+      "sha256": "a19ec4f1929f388b74e9a842b6c6e107f44b33434e18e4d2a53c75115d8f083d"
+     },
+     {
+      "zip": "StoryWorld-M032-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-hit-K2.png",
+      "sha256": "96d28665fd7b63b946afd560dc46aef3a07f898d2d2b6c6726d1fd5db69a2d92"
+     },
+     {
+      "zip": "StoryWorld-M032-hit4-ASSET-READY-part01-of02.zip",
+      "png": "candidate/frames/M032-hit-K3.png",
+      "sha256": "459bd3e9d525a2342557b6e37d00ac5b1ca8d46563f4c6c225a52bfcc1606aaa"
+     },
+     {
+      "zip": "StoryWorld-M032-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-hit-K4.png",
+      "sha256": "6bea9ab95c3819dd1130f10dcf8065be8115ec0169dd5808e241952a4c1dadd1"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M032",
+   "ids": [
+    "b08-h1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M032-idle.png",
+   "frames": 4,
+   "cell": [
+    94,
+    152
+   ],
+   "pivot": [
+    41.49,
+    151.32
+   ],
+   "visibleHeight": 150,
+   "bytes": 95727,
+   "sha256": "f255b6e6e5da308f35c85cdff23416acc02e51dd3f5505b3b56992938152a592",
+   "use": "창처럼 날아오는 역십자가 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M032-idle4-ASSET-READY-part01-of02.zip",
+      "bytes": 2979887,
+      "sha256": "0e16bf990d242d7f58f4b16e3f8cfc0e449fef89366a07497657abb7f77ae004"
+     },
+     {
+      "name": "StoryWorld-M032-idle4-ASSET-READY-part02-of02.zip",
+      "bytes": 2142815,
+      "sha256": "4eb31c0d0c9602a9d39b1668513679f8596e1dcf4e19d08ecceddc6fdf8310ce"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M032-idle4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-idle-K1.png",
+      "sha256": "02436325caad6e39d88e463f10786f1b5646cb38ef94afc2ece4bc140d829f9c"
+     },
+     {
+      "zip": "StoryWorld-M032-idle4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-idle-K2.png",
+      "sha256": "396dbf326ecda1a6c4f6c58e18dc621c07875035887d0308e9f8cd866afe34ed"
+     },
+     {
+      "zip": "StoryWorld-M032-idle4-ASSET-READY-part01-of02.zip",
+      "png": "candidate/frames/M032-idle-K3.png",
+      "sha256": "006f522ad9b5f3073fb490f87727e2f7abf5a03e100a0c68e452c4db1a450ef4"
+     },
+     {
+      "zip": "StoryWorld-M032-idle4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M032-idle-K4.png",
+      "sha256": "66d833b92f311c7d75ead8ebc6e39ebf1821a4b381c92416de8f48f67b5c7cf5"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M033",
+   "ids": [
+    "b08-c1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M033-hit.png",
+   "frames": 4,
+   "cell": [
+    106,
+    154
+   ],
+   "pivot": [
+    53.98,
+    152.29
+   ],
+   "visibleHeight": 150,
+   "bytes": 112551,
+   "sha256": "b680b278ad12aa522d7061b12216f5b2df30f46f93d8bc6f55ca680f929ea8f1",
+   "use": "전극을 두른 좀비 수호기사 · 맞음·회복 4키",
+   "groundSpreadPx": 7,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M033-hit4-ASSET-READY-part01-of04.zip",
+      "bytes": 2967781,
+      "sha256": "5c3ac7092aeb29919d286d1502964e9c7ef4f91ef74c879f1c6c71ecd86e4cec"
+     },
+     {
+      "name": "StoryWorld-M033-hit4-ASSET-READY-part02-of04.zip",
+      "bytes": 2895945,
+      "sha256": "1fb6c0d481d85782ff7b32a9d1cd3b7b7ec0764d4c3efde126fe53d328254227"
+     },
+     {
+      "name": "StoryWorld-M033-hit4-ASSET-READY-part03-of04.zip",
+      "bytes": 2332193,
+      "sha256": "1b470647ef10a97c48cf57117809e16e1e69293869c4841ce95982e31f84bad5"
+     },
+     {
+      "name": "StoryWorld-M033-hit4-ASSET-READY-part04-of04.zip",
+      "bytes": 1515157,
+      "sha256": "1262598c33fa34261cace3dfe1359e7b01f3a134d04175d0e89c96a0bc30f431"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M033-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M033-hit-K1.png",
+      "sha256": "acbbe204636c4fc333984de01bd5039a76919f7dda3cf1d19eb8696e9c90ec99"
+     },
+     {
+      "zip": "StoryWorld-M033-hit4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M033-hit-K2.png",
+      "sha256": "5ee89d79c80f1516c0ebbda160bc45b91448c4b906ccd31747aadd28d86aaa79"
+     },
+     {
+      "zip": "StoryWorld-M033-hit4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M033-hit-K3.png",
+      "sha256": "9539f36efc61f4f48ffc9ea38fb3b1bf66ec005c60d966c5552278290259674c"
+     },
+     {
+      "zip": "StoryWorld-M033-hit4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M033-hit-K4.png",
+      "sha256": "f5ba9c409896a163842ba911e9cc3d46b8403180ce3f0a167eca2eff6c99c349"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M037",
+   "ids": [
+    "u201-e3",
+    "u203-e3",
+    "u206-e2"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M037-hit.png",
+   "frames": 4,
+   "cell": [
+    139,
+    153
+   ],
+   "pivot": [
+    67.71,
+    151.99
+   ],
+   "visibleHeight": 150,
+   "bytes": 153378,
+   "sha256": "e89b307a96e98234c9fc59263f3514476b5f1d685530e7d30d181fec720652ca",
+   "use": "참호 공명기사 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1903719,
+      "sha256": "57c36ccb428d162a825e93c849f79ee77cb85bd937aeb7cb67c27f2167d229fc"
+     },
+     {
+      "name": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2062219,
+      "sha256": "2a0f8a4ab97af5b481db15943ad02382ae40b230788fa2f62e6d1ae2c3257ce2"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-hit-K1-padded.png",
+      "sha256": "2abf778ffbe28e8d283b2263ef252ca3e8f49104a26fbbd4703bf89e4aa7bab4"
+     },
+     {
+      "zip": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-hit-K2-padded.png",
+      "sha256": "9f2f5e017ef24a63d99e15960bd9887bbbecbe508bd6cd087b06ba0ffa4c2662"
+     },
+     {
+      "zip": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-hit-K3-padded.png",
+      "sha256": "80af1ba298642484bb4abb4980deff9bdd780367b2d8fe838a6b25b5df5e9824"
+     },
+     {
+      "zip": "StoryWorld-M037-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-hit-K4-padded.png",
+      "sha256": "68e40c93220132da7bb605aaed994c9e51c7e4448338606e36366cea9ee7e212"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M037",
+   "ids": [
+    "u201-e3",
+    "u203-e3",
+    "u206-e2"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M037-idle.png",
+   "frames": 4,
+   "cell": [
+    137,
+    152
+   ],
+   "pivot": [
+    68.35,
+    151.33
+   ],
+   "visibleHeight": 150,
+   "bytes": 152003,
+   "sha256": "630b3e8cb5107eef98f08059f84a2edb1e98a14bd60e8f352b5246a5bbe9ca75",
+   "use": "참호 공명기사 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M037-idle4-asset-ready-20261028-PART01.zip",
+      "bytes": 1800151,
+      "sha256": "ce2b245be7793803355e86a04f93b9e40e611cf53e5eb43ba18b5b0089f2e084"
+     },
+     {
+      "name": "StoryWorld-M037-idle4-asset-ready-20261028-PART02.zip",
+      "bytes": 1962045,
+      "sha256": "3e35578cc98fe578604ab90c646debfa082ea2f0cbd902a12dcbfb9b82b4050f"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M037-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-idle-K1-padded.png",
+      "sha256": "af3ca28d150577e1d39c56e6dd4c037446c225d495c0c1bba6a09076777a896e"
+     },
+     {
+      "zip": "StoryWorld-M037-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-idle-K2-padded.png",
+      "sha256": "8ceffac24a77778855b1c96f2907056910f08413d1f22e6dc48ed903508637b6"
+     },
+     {
+      "zip": "StoryWorld-M037-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-idle-K3-padded.png",
+      "sha256": "b8ddf356bad9578bfc2b2731b8f3703881f2476f7d15a77810e1e520bfdcc852"
+     },
+     {
+      "zip": "StoryWorld-M037-idle4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M037-idle-K4-padded.png",
+      "sha256": "d52266a650fae42877c59afe93be8f71cfd0097197c04c8ad6a8acb82786684d"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M038",
+   "ids": [
+    "u201-e1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M038-hit.png",
+   "frames": 4,
+   "cell": [
+    208,
+    154
+   ],
+   "pivot": [
+    103.05,
+    152.02
+   ],
+   "visibleHeight": 150,
+   "bytes": 155277,
+   "sha256": "73656065b93e0df21275819671f6812e0451c9456e8e537c8db13effaba5d88e",
+   "use": "전쟁기억 정찰드론 · 맞음·회복 4키",
+   "groundSpreadPx": 7,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M038-hit-recovery4-asset-ready-20261028.zip",
+      "bytes": 2704552,
+      "sha256": "8714474812cf34629020c34be0e22ced00ccd720ddfc5f8e3e8afdd0774e5a25"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M038-hit-recovery4-asset-ready-20261028.zip",
+      "png": "frames/M038-hit-K1-padded.png",
+      "sha256": "47cec764c9b42aa8fccc722bc5585b2668d55efc3858d7ed62b7ef08b92a6160"
+     },
+     {
+      "zip": "StoryWorld-M038-hit-recovery4-asset-ready-20261028.zip",
+      "png": "frames/M038-hit-K2-padded.png",
+      "sha256": "9eccecc635fcc3efdb6e20fb513982b18d5563c65a78ee6b154474f14183a0ff"
+     },
+     {
+      "zip": "StoryWorld-M038-hit-recovery4-asset-ready-20261028.zip",
+      "png": "frames/M038-hit-K3-padded.png",
+      "sha256": "f8dad6335b287219d8f6c2283a9528660e6d80ff61a5d8664cfc3b041cf5b3fc"
+     },
+     {
+      "zip": "StoryWorld-M038-hit-recovery4-asset-ready-20261028.zip",
+      "png": "frames/M038-hit-K4-padded.png",
+      "sha256": "e715b5acee06ac1f6edf2bbe3917b3db7e6ae110614751c6fc0884993dd4bcfa"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M040",
+   "ids": [
+    "u202-e1",
+    "u205-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M040-hit.png",
+   "frames": 4,
+   "cell": [
+    151,
+    154
+   ],
+   "pivot": [
+    73.78,
+    153.27
+   ],
+   "visibleHeight": 150,
+   "bytes": 155954,
+   "sha256": "c6961649b80f98e9f7933f128163634935e23c25a4340d126f49a049b6de0fe8",
+   "use": "가짜 자비 수집가 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2137672,
+      "sha256": "983738a1250952dc78a0b34394aff4b210e5f8c838a196d27dda91d0e978780f"
+     },
+     {
+      "name": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2273575,
+      "sha256": "714affb66ab3800ea5d1bade55a309cea6ab551e3f3626262163ff07126614e7"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M040-hit-K1-padded.png",
+      "sha256": "4b6bac29180a12c169422a9024add176304646beb65b24dbaedd5d4b2c47f8ac"
+     },
+     {
+      "zip": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M040-hit-K2-padded.png",
+      "sha256": "be3c730cb676c0e7c924becf4764bf927b009c3401d2e96b52412acb7d80a139"
+     },
+     {
+      "zip": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M040-hit-K3-padded.png",
+      "sha256": "228dc4c97ae5143318022439edf544541899c554d91708d29a62aaf093d4b732"
+     },
+     {
+      "zip": "StoryWorld-M040-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M040-hit-K4-padded.png",
+      "sha256": "5e9e291afb301ac4ca573fa2a6af8cdbb306840cbe51069801ff34324946c12f"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M041",
+   "ids": [
+    "u202-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M041-hit.png",
+   "frames": 4,
+   "cell": [
+    137,
+    153
+   ],
+   "pivot": [
+    68.28,
+    151.87
+   ],
+   "visibleHeight": 150,
+   "bytes": 123055,
+   "sha256": "f22a9727c30780d7ccadb91efbac81819c8c0ee617c081f0951e6b6250886a69",
+   "use": "감옥 공명기사 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1804108,
+      "sha256": "2e5f7714896dde98f15361bdc0619037cefceb51847d3c8b83d2ffc05f8f9aa3"
+     },
+     {
+      "name": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1923319,
+      "sha256": "d2ca874628d27370a98b1f342917cbaac6df3bfd6bfcc3caf0ac281a5a59695b"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M041-hit-K1-padded.png",
+      "sha256": "9e94fedb8282d4e6bfe348d68379869d10f9931c25e28836756e7c2a40ec5c88"
+     },
+     {
+      "zip": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M041-hit-K2-padded.png",
+      "sha256": "d47ddb8221d967b6a4ddc10a47fe20ebf1ffb56be6beefec2babe93d58607ab8"
+     },
+     {
+      "zip": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M041-hit-K3-padded.png",
+      "sha256": "b5d55353b8ef6868b8ece66919dd884374bea0088e33f4143c33f3c224331ef6"
+     },
+     {
+      "zip": "StoryWorld-M041-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M041-hit-K4-padded.png",
+      "sha256": "b4c4f82fda0c3eed9622abb87ae4e2acd99a944dd66af321ed02eb4cc72a418f"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M042",
+   "ids": [
+    "u203-e1",
+    "u204-e1",
+    "u206-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M042-hit.png",
+   "frames": 4,
+   "cell": [
+    155,
+    155
+   ],
+   "pivot": [
+    81.35,
+    151.81
+   ],
+   "visibleHeight": 150,
+   "bytes": 177470,
+   "sha256": "b666cbfc3545590fecc3cd48d573aa8658ac73e3efa63f3d81959679220329b4",
+   "use": "이동문 청람잔영 · 맞음·회복 4키",
+   "groundSpreadPx": 14,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2011457,
+      "sha256": "4c7fa7736ba78a7b6f99bc953d9506b654f945e7e737be89daab8a8cb3a7c001"
+     },
+     {
+      "name": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2110765,
+      "sha256": "e401e48338e906e06676728c62d8cc32e358ee02193679b77504625c351ce853"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M042-hit-K1-padded.png",
+      "sha256": "a08c79631ab033913db62ba26f2eedad8dbd60d533980223bc52a4dc3141f522"
+     },
+     {
+      "zip": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M042-hit-K2-padded.png",
+      "sha256": "0536cab1dbac26a0f0f75e976f2ae63bbe74e87a657d8369f51fe38a7dc6c948"
+     },
+     {
+      "zip": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M042-hit-K3-padded.png",
+      "sha256": "2444f5fcf33a8fe10e507ba4717a616a3ee542764575af87904eb5287704cbf1"
+     },
+     {
+      "zip": "StoryWorld-M042-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M042-hit-K4-padded.png",
+      "sha256": "c8fae532fe1304e5206b272742c37c139590acdcbcc83936bcf21c1a3db362fd"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M051",
+   "ids": [
+    "l302-e1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M051-hit.png",
+   "frames": 4,
+   "cell": [
+    114,
+    158
+   ],
+   "pivot": [
+    46.45,
+    157.36
+   ],
+   "visibleHeight": 150,
+   "bytes": 128373,
+   "sha256": "8e21bd7dfec4335fbab8111c44ccd979369c520639d9ab4aa10a3a675ec89c35",
+   "use": "포구 검은 안개 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M051-hit4-ASSET-READY-part01-of02.zip",
+      "bytes": 2988160,
+      "sha256": "062d760df8b1e9adeb62226b6d89417155058f43a0b7177f6861c6d8cd8871fb"
+     },
+     {
+      "name": "StoryWorld-M051-hit4-ASSET-READY-part02-of02.zip",
+      "bytes": 1723179,
+      "sha256": "4f697c3a8937d8e90d1c6eeb551bd0325562c5fecdcb9e7453af7fef0f03b8c6"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M051-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M051-hit-K1.png",
+      "sha256": "7d0adcebc7acbe3a7ba6965ee8e916d9474e36435b49dc64568117a4e31ed3f9"
+     },
+     {
+      "zip": "StoryWorld-M051-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M051-hit-K2.png",
+      "sha256": "6c082593ef42bd4f34db83ed02f78f05678b715e70e29c83b9cdefed64203a87"
+     },
+     {
+      "zip": "StoryWorld-M051-hit4-ASSET-READY-part01-of02.zip",
+      "png": "candidate/frames/M051-hit-K3.png",
+      "sha256": "7739cd2444074d4c6979aadd07b4a8fda66551d6a6ce0225e2c6ce3604927a71"
+     },
+     {
+      "zip": "StoryWorld-M051-hit4-ASSET-READY-part01-of02.zip",
+      "png": "candidate/frames/M051-hit-K4.png",
+      "sha256": "14e3e042ec6f558c02674977e167fe5be1e5b40e324333408b11fe5e21641a76"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M053",
+   "ids": [
+    "kair-academy-wave-3",
+    "kair-academy-wave-6"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M053-hit.png",
+   "frames": 4,
+   "cell": [
+    149,
+    163
+   ],
+   "pivot": [
+    73.88,
+    161.99
+   ],
+   "visibleHeight": 150,
+   "bytes": 166726,
+   "sha256": "3dc9ae5af8e1bd061196c81d768e70bf70b8b598e29405fe371b9b536cc63e1c",
+   "use": "최초명령 훈련파동 3 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M053-hit4-purple-corrected-20261028-PART01.zip",
+      "bytes": 1957833,
+      "sha256": "5c1d5775207d78e1137a0f5028518759a41a18bf04453c5bbc59332a6e6f7e62"
+     },
+     {
+      "name": "StoryWorld-M053-hit4-purple-corrected-20261028-PART02.zip",
+      "bytes": 1779318,
+      "sha256": "909c0641414bce067b97ce3d9782ddc2e19081dbf3d3dc5f7c048e311ed80edf"
+     },
+     {
+      "name": "StoryWorld-M053-hit4-purple-corrected-20261028-PART03.zip",
+      "bytes": 2604590,
+      "sha256": "362b4bd0c4d1ad8c46d3866741d6f7d5f45f68c80a6f0b98c2517217020ecce2"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M053-hit4-purple-corrected-20261028-PART03.zip",
+      "png": "frames/M053-hit-K1-padded.png",
+      "sha256": "48a3c5fe71864cceba82513b46e7edb641c8bdb452c1f6e9230552c1fa3aed01"
+     },
+     {
+      "zip": "StoryWorld-M053-hit4-purple-corrected-20261028-PART03.zip",
+      "png": "frames/M053-hit-K2-padded.png",
+      "sha256": "4b43a9303c0482ab282c27f9e5f615c0fac1a30762464da79bb724021dedc522"
+     },
+     {
+      "zip": "StoryWorld-M053-hit4-purple-corrected-20261028-PART03.zip",
+      "png": "frames/M053-hit-K3-padded.png",
+      "sha256": "1fbf43f4dec53af61ac70a7553c2789181895d19b85763bc9273997ddd95009a"
+     },
+     {
+      "zip": "StoryWorld-M053-hit4-purple-corrected-20261028-PART03.zip",
+      "png": "frames/M053-hit-K4-padded.png",
+      "sha256": "8142524ee1afad2949d2f3d671d34ef42ee1bb67d8e9f03dbe5f352aef0af966"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M054",
+   "ids": [
+    "kair-academy-wave-1",
+    "kair-academy-wave-4"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M054-hit.png",
+   "frames": 4,
+   "cell": [
+    158,
+    154
+   ],
+   "pivot": [
+    92.43,
+    153.45
+   ],
+   "visibleHeight": 150,
+   "bytes": 168959,
+   "sha256": "0cb5b3de6360158b290add8d577d2706a95306a03f9edd03a91341cc7335b02c",
+   "use": "최초명령 훈련파동 1 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M054-hit4-eye-corrected-20261028-PART01.zip",
+      "bytes": 1895487,
+      "sha256": "0dfdbfa51c2ddcd5107171c68ddfafb4fe7d7c2513c671e545ac544be4b2617b"
+     },
+     {
+      "name": "StoryWorld-M054-hit4-eye-corrected-20261028-PART02.zip",
+      "bytes": 1718785,
+      "sha256": "b6fd5af763162099875b2bb0165126f15e4fbd637173abc7a63b434afa345aa8"
+     },
+     {
+      "name": "StoryWorld-M054-hit4-eye-corrected-20261028-PART03.zip",
+      "bytes": 2283747,
+      "sha256": "dd7523293420494d25059c15647fec146493c62e4a560765218f66a8c9cdac50"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M054-hit4-eye-corrected-20261028-PART03.zip",
+      "png": "frames/M054-hit-K1-padded.png",
+      "sha256": "575e6feb1c4d991590314e5d2d5f1c3f2654a1819baf5a8074d346f5acfcccb8"
+     },
+     {
+      "zip": "StoryWorld-M054-hit4-eye-corrected-20261028-PART03.zip",
+      "png": "frames/M054-hit-K2-padded.png",
+      "sha256": "086b7f7262015c9b97775bc5f51053ca15519a1ffec1d87656c67eada6ae9474"
+     },
+     {
+      "zip": "StoryWorld-M054-hit4-eye-corrected-20261028-PART03.zip",
+      "png": "frames/M054-hit-K3-padded.png",
+      "sha256": "d670f20d86df39aa3b7c3b7fa4d6bb8d7abada63310c889924593042f108cacf"
+     },
+     {
+      "zip": "StoryWorld-M054-hit4-eye-corrected-20261028-PART03.zip",
+      "png": "frames/M054-hit-K4-padded.png",
+      "sha256": "812dd7f5c9455ac2fba565655ae41b7f668fa03545984e69a24654a9019c97cb"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M054",
+   "ids": [
+    "kair-academy-wave-1",
+    "kair-academy-wave-4"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M054-idle.png",
+   "frames": 4,
+   "cell": [
+    143,
+    154
+   ],
+   "pivot": [
+    73.19,
+    153.18
+   ],
+   "visibleHeight": 150,
+   "bytes": 167413,
+   "sha256": "1c31e9fe8a713c2260f59050a1becf6db794e1597743c2d8ae05ac6052a46f59",
+   "use": "최초명령 훈련파동 1 · 대기 4키",
+   "groundSpreadPx": 2,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M054-idle4-ASSET-READY-part01-of04.zip",
+      "bytes": 2999416,
+      "sha256": "eec1e7e7e99f15f46da0ae943f8201b2e49c58fb8250acd1edd690892f78a3bd"
+     },
+     {
+      "name": "StoryWorld-M054-idle4-ASSET-READY-part02-of04.zip",
+      "bytes": 2674527,
+      "sha256": "8ad7ba01717071403b4b37f566c017ebc7d0151829255b58be2d5235352a9f9e"
+     },
+     {
+      "name": "StoryWorld-M054-idle4-ASSET-READY-part03-of04.zip",
+      "bytes": 2682156,
+      "sha256": "2df7325892ad2eec372bfd75aaed7b8bc148ba36378e44c3e0dc151e37ed2220"
+     },
+     {
+      "name": "StoryWorld-M054-idle4-ASSET-READY-part04-of04.zip",
+      "bytes": 527635,
+      "sha256": "2c78d051e4df1bc9bd5f49e912ce4385cde8368750686b28c838fd96d9057c6d"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M054-idle4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M054-idle-K1.png",
+      "sha256": "40b59fc703774f7350682b589d9a09860375334d1656da66e96825aeed938d2e"
+     },
+     {
+      "zip": "StoryWorld-M054-idle4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/M054-idle-K2.png",
+      "sha256": "99aa0eda02d5911f9d74464f41b5f9bad11a1e8cbf1b363b1214ee54d4fe3f3a"
+     },
+     {
+      "zip": "StoryWorld-M054-idle4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M054-idle-K3.png",
+      "sha256": "2d4e416791b40bc7537d853f2ac5663875bd33b182c8a76155e576be92e29037"
+     },
+     {
+      "zip": "StoryWorld-M054-idle4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M054-idle-K4.png",
+      "sha256": "1c3a79a0500c90d16e67798aed0f703aa55372d65b0e86e49c1586bf82a8d09f"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M057",
+   "ids": [
+    "kair-guardian-03"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M057-idle.png",
+   "frames": 4,
+   "cell": [
+    130,
+    152
+   ],
+   "pivot": [
+    65.93,
+    151.07
+   ],
+   "visibleHeight": 150,
+   "bytes": 155105,
+   "sha256": "281f0fc26fdafe4623e37a1afee2d1a5e263e237e996f70fc3ff39bfa94b20e0",
+   "use": "시간수문장 03 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M057-idle4-ASSET-READY-part01-of03.zip",
+      "bytes": 2845133,
+      "sha256": "403259a8950d5c93ad4bdeab1d90af5d743a9b9061ebbd9371aefea914b60adb"
+     },
+     {
+      "name": "StoryWorld-M057-idle4-ASSET-READY-part02-of03.zip",
+      "bytes": 2729893,
+      "sha256": "78b3efdada1d8fcde6fd928c3ed1ebdfe1da6881cfb2fab603c66bf1df713af5"
+     },
+     {
+      "name": "StoryWorld-M057-idle4-ASSET-READY-part03-of03.zip",
+      "bytes": 1326262,
+      "sha256": "c16a8c02d7c4a1f5955cc5bee5f7537b984e2f8c979cea7a11f7858c87ffca9f"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M057-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M057-idle-K1.png",
+      "sha256": "ef946e7f7e9c377d1c0ca8eeb1825f403c358754488118ff9fffdd0dcdd8b9fd"
+     },
+     {
+      "zip": "StoryWorld-M057-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M057-idle-K2.png",
+      "sha256": "48ebf33192d66a8c4b553472dd7679a4f58e0123354c1251dfd8138a0f797313"
+     },
+     {
+      "zip": "StoryWorld-M057-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M057-idle-K3.png",
+      "sha256": "32658e7c6f958643b3aa10595ce24de6c8ea6cb61d9d518334ef8cb40595c9d1"
+     },
+     {
+      "zip": "StoryWorld-M057-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M057-idle-K4.png",
+      "sha256": "f460c6e16f048c71e564f542342117e2737afc66bb87c03daee62c7f29614733"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M120",
+   "ids": [
+    "h102-s2"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M120-hit.png",
+   "frames": 4,
+   "cell": [
+    134,
+    154
+   ],
+   "pivot": [
+    66.19,
+    153.53
+   ],
+   "visibleHeight": 150,
+   "bytes": 153513,
+   "sha256": "d0137e96ccd1830d950619c0538b641c42c4c5d914e40383cbe9445df8d7b02a",
+   "use": "코어 운반 집행자 · 맞음·회복 4키",
+   "groundSpreadPx": 1,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M120-hit4-ASSET-READY-part01-of03.zip",
+      "bytes": 2935856,
+      "sha256": "2bdae3dbb0bddd658741b6dd7f924371eb6bf0366be3b2b1c1e856986b09faa2"
+     },
+     {
+      "name": "StoryWorld-M120-hit4-ASSET-READY-part02-of03.zip",
+      "bytes": 2962408,
+      "sha256": "483258024eaa426a0e694d07fe60008e3bde3bb038313801ecbc537fc673b6cc"
+     },
+     {
+      "name": "StoryWorld-M120-hit4-ASSET-READY-part03-of03.zip",
+      "bytes": 1247269,
+      "sha256": "75eaff56b6de70bb121a7a42c6d46cace3bb1af9feebaaf836ddba51b7312870"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M120-hit4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M120-hit-K1.png",
+      "sha256": "3f9f60bacd0b96cd22b2348f6d4996cfe2526485b6bba34058a16fecf0e753d8"
+     },
+     {
+      "zip": "StoryWorld-M120-hit4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M120-hit-K2.png",
+      "sha256": "3bd16c8e1cfd77d86b6840882a9e0d7c00c2f26948d020343e3ed3c51b9f663c"
+     },
+     {
+      "zip": "StoryWorld-M120-hit4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M120-hit-K3.png",
+      "sha256": "5e460880e3ff72325bcb664aadaa10ea7482c7fb405a8f1e550077f5850da315"
+     },
+     {
+      "zip": "StoryWorld-M120-hit4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M120-hit-K4.png",
+      "sha256": "33b7be12ecdec437cbe6280ac59bcd47e9ac2051da66a7e588b5cb56313a504a"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M125",
+   "ids": [
+    "murder04-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M125-hit.png",
+   "frames": 4,
+   "cell": [
+    156,
+    155
+   ],
+   "pivot": [
+    94.18,
+    153.73
+   ],
+   "visibleHeight": 150,
+   "bytes": 136813,
+   "sha256": "4c21f319a7f999f68c3c850dbfebe2705bbe1d9b559251dd57ffaf9ce4267d71",
+   "use": "은폐기록 연결체 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M125-hit4-ASSET-READY-part01-of03.zip",
+      "bytes": 2969754,
+      "sha256": "3f8b29096c29ba6109dc170409cce6a3b559e49977aa3268c1635bd3cef7451c"
+     },
+     {
+      "name": "StoryWorld-M125-hit4-ASSET-READY-part02-of03.zip",
+      "bytes": 2932334,
+      "sha256": "918363d72769640486b9414b6ff01136559600d0944190f401490c3101d8feb9"
+     },
+     {
+      "name": "StoryWorld-M125-hit4-ASSET-READY-part03-of03.zip",
+      "bytes": 775849,
+      "sha256": "e40ee305f9656690259d3974e829c10a459268bac16fcfd8c64200f11506a6ef"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M125-hit4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M125-hit-K1.png",
+      "sha256": "74d2fb8c3385989a3dc897a15db937911f6b9157fd3989b0d0db20f02a800d8d"
+     },
+     {
+      "zip": "StoryWorld-M125-hit4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M125-hit-K2.png",
+      "sha256": "513dfd7636eca8a98d5334badaa3ac4d0e3364ccc33daa8ecbe46c335582a903"
+     },
+     {
+      "zip": "StoryWorld-M125-hit4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M125-hit-K3.png",
+      "sha256": "d928623f9618115dfe88e3ef8f755692e41b9721c691c9a704908945fae4aa01"
+     },
+     {
+      "zip": "StoryWorld-M125-hit4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M125-hit-K4.png",
+      "sha256": "9936dbc14b1d798f4411c52d9be2233e8fa9534c3acf36871cb8311a86d68190"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M125",
+   "ids": [
+    "murder04-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M125-idle.png",
+   "frames": 4,
+   "cell": [
+    135,
+    152
+   ],
+   "pivot": [
+    85.35,
+    150.76
+   ],
+   "visibleHeight": 150,
+   "bytes": 125099,
+   "sha256": "626d562647f202e6934d9466df41a7ae32854c08ece951862da4bac538b0ef02",
+   "use": "은폐기록 연결체 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M125-idle4-ASSET-READY-part01-of03.zip",
+      "bytes": 2999647,
+      "sha256": "c8d1dbbb042b6c532e10f669cc259d2beab86252cf704fcd0c5de1337deec1d0"
+     },
+     {
+      "name": "StoryWorld-M125-idle4-ASSET-READY-part02-of03.zip",
+      "bytes": 2999806,
+      "sha256": "b7300d1d309c634d9eec9b18e42afc608319ece41a494b3666c4a42ec6d71bcb"
+     },
+     {
+      "name": "StoryWorld-M125-idle4-ASSET-READY-part03-of03.zip",
+      "bytes": 1050260,
+      "sha256": "7cb86ae92c926e45896297bc8d3adc5959a1c98d2fb5c944c7c7395a010de1cb"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M125-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M125-idle-K1.png",
+      "sha256": "1fa78087160f8561c85d17787e25674d7835c79fb197a1dbedfaf4b5eaa61d6c"
+     },
+     {
+      "zip": "StoryWorld-M125-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M125-idle-K2.png",
+      "sha256": "079d4894afd8e38cec8168b69ceddda223e154fe530992b36640e98e3ad75dd2"
+     },
+     {
+      "zip": "StoryWorld-M125-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M125-idle-K3.png",
+      "sha256": "29375e487be675b85520a889cc2cbf3c03137d06ca6f67fa496cf4daa51ffc72"
+     },
+     {
+      "zip": "StoryWorld-M125-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M125-idle-K4.png",
+      "sha256": "fc5d725072a8176848a2461f25a0d5d7d43de5ea38ac07adc657829e8477099d"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M127",
+   "ids": [
+    "murder04-e1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M127-hit.png",
+   "frames": 4,
+   "cell": [
+    114,
+    154
+   ],
+   "pivot": [
+    58.71,
+    151.08
+   ],
+   "visibleHeight": 150,
+   "bytes": 117221,
+   "sha256": "bd4fcae3ee918a567ddf023222a24ae38d50a664caf817d51bee8bc15d3bc8d6",
+   "use": "공실 표기 잔재 · 맞음·회복 4키",
+   "groundSpreadPx": 26,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M127-hit4-ASSET-READY-part01-of04.zip",
+      "bytes": 2949715,
+      "sha256": "14f504c687e3b51470c233410a796b49c9e247bebedd491ec2d80c05b7955432"
+     },
+     {
+      "name": "StoryWorld-M127-hit4-ASSET-READY-part02-of04.zip",
+      "bytes": 2686562,
+      "sha256": "76ffce1d0fa56afaa43b9c869307e5f63f0b618783a989de46ffc7e787b4147c"
+     },
+     {
+      "name": "StoryWorld-M127-hit4-ASSET-READY-part03-of04.zip",
+      "bytes": 2730951,
+      "sha256": "37082bdff4f3ee5a2736a0dab7022d3b8e0c9039eb21821892746fc6f123f192"
+     },
+     {
+      "name": "StoryWorld-M127-hit4-ASSET-READY-part04-of04.zip",
+      "bytes": 2961679,
+      "sha256": "b6c20c5ace627e66fced5528a8c50c47a7a282dc1d3f15fe114daa6941685e97"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M127-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M127-hit-K1.png",
+      "sha256": "20e53456ebc3414db88b754a53243ff9bae5c68ae6a15bfb477f6db30a286bf7"
+     },
+     {
+      "zip": "StoryWorld-M127-hit4-ASSET-READY-part04-of04.zip",
+      "png": "candidate/frames/M127-hit-K2.png",
+      "sha256": "b418dc7761dc3695309602e8b444429c328ab1ffdefc059394c6422f93855c27"
+     },
+     {
+      "zip": "StoryWorld-M127-hit4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/M127-hit-K3.png",
+      "sha256": "ba698813072c5e313217f14f96df2cca248bd5f3e049e40919b5ba0ced42f275"
+     },
+     {
+      "zip": "StoryWorld-M127-hit4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M127-hit-K4.png",
+      "sha256": "f259deed32d5fe780a82a25417dfa296925de74122056b32729861394712635e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M127",
+   "ids": [
+    "murder04-e1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M127-idle.png",
+   "frames": 4,
+   "cell": [
+    131,
+    154
+   ],
+   "pivot": [
+    63.91,
+    152.35
+   ],
+   "visibleHeight": 150,
+   "bytes": 135484,
+   "sha256": "1cdb876bdfe933275c2b9a43e7b863da1d1ff88615a121e14092441ae40dc123",
+   "use": "공실 표기 잔재 · 대기 4키",
+   "groundSpreadPx": 4,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M127-idle4-ASSET-READY-part01-of03.zip",
+      "bytes": 2832299,
+      "sha256": "5809e22cadcf12d45bb7681eec63161de54ed3aff4350b8364b8821a88ca6efd"
+     },
+     {
+      "name": "StoryWorld-M127-idle4-ASSET-READY-part02-of03.zip",
+      "bytes": 2583876,
+      "sha256": "bd32b8ffb0e16b49a4137c7066c6f3c0717d3e7d315de2152004eaf522ce9feb"
+     },
+     {
+      "name": "StoryWorld-M127-idle4-ASSET-READY-part03-of03.zip",
+      "bytes": 2124124,
+      "sha256": "b2553592712cbab3a8b4d06bd7ca86706cf31cd6fa431eccf4fe2723e0b52996"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M127-idle4-ASSET-READY-part03-of03.zip",
+      "png": "candidate/frames/M127-idle-K1.png",
+      "sha256": "dc431365e0ebd64cbb28396f082fbddec8bc97985f9b746d16ef31d2d81734b9"
+     },
+     {
+      "zip": "StoryWorld-M127-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M127-idle-K2.png",
+      "sha256": "c6f02bad34d5f1e00f86956746e81cf58349b64a8bae75d462b34bc3175af796"
+     },
+     {
+      "zip": "StoryWorld-M127-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M127-idle-K3.png",
+      "sha256": "2e3c966dd5185f3b3752bc9996ef1370f16b6a130aa33201bfbda81326ea2da3"
+     },
+     {
+      "zip": "StoryWorld-M127-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M127-idle-K4.png",
+      "sha256": "8bdad05b51e62e6bdda52ab629030a3fa166400fb4e618fa9d96e7b1282efe56"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M128",
+   "ids": [
+    "c101-e1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M128-hit.png",
+   "frames": 4,
+   "cell": [
+    125,
+    154
+   ],
+   "pivot": [
+    67.88,
+    152.78
+   ],
+   "visibleHeight": 150,
+   "bytes": 112525,
+   "sha256": "4c3899f03e4bff8676a6c81fda5445286ecf9680b66721cdfd040564871dd375",
+   "use": "흑장미 눈가린 신도 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 1948612,
+      "sha256": "d2a0df56aff8e0eb29bd615aac991800392a6b6b54a6e9da046338194db8fa73"
+     },
+     {
+      "name": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 1881629,
+      "sha256": "71dfa1de294705b036b2ea1f4c7091978bd6e90f7140e3fa759b16ffa057af4d"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M128-hit-K1-padded.png",
+      "sha256": "08b73080599499415a4be3c2b98d0c23f96b9bd3bfb3f973f23265422589dd58"
+     },
+     {
+      "zip": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M128-hit-K2-padded.png",
+      "sha256": "f92aab7397e3d01d0dcde5c652bbb02bb3adf07793c684f4231eace40dea2926"
+     },
+     {
+      "zip": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M128-hit-K3-padded.png",
+      "sha256": "f3bf9bc639ff173c7d70a3503ec934bd25cb27feb0857d12e711ab656bbaca38"
+     },
+     {
+      "zip": "StoryWorld-M128-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M128-hit-K4-padded.png",
+      "sha256": "07cf59aae6845a8c051924ade54e7dcac6710fa0515f30511b7c1089e76afb75"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M129",
+   "ids": [
+    "c101-e2"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M129-hit.png",
+   "frames": 4,
+   "cell": [
+    78,
+    152
+   ],
+   "pivot": [
+    41.53,
+    151.32
+   ],
+   "visibleHeight": 150,
+   "bytes": 80560,
+   "sha256": "349ae43168b95ce15f82fda00dd6c1177de621b543ccdc60580a0b97f6fda18f",
+   "use": "흑장미 귀막은 신도 · 맞음·회복 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART01.zip",
+      "bytes": 2486774,
+      "sha256": "3febd1f1dbe5dadca8231b0e98d957764effb1ed7065d0961132a976f25ee02c"
+     },
+     {
+      "name": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "bytes": 2613076,
+      "sha256": "64f19bd1845758d63eb5a30f59635f6c86767d305fa37fd19df06af178defa73"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M129-hit-K1-padded.png",
+      "sha256": "cb4e22d8ffe7713f3ef4a4c7da015529e10ac1c962ac9be8e5747798d68c998b"
+     },
+     {
+      "zip": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M129-hit-K2-padded.png",
+      "sha256": "bfb1df8567607636bd20e2a48e0e51dcd352d51651084221defc765a8546d638"
+     },
+     {
+      "zip": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M129-hit-K3-padded.png",
+      "sha256": "42cc1fb1541011bb9f97417d60a95f7497c72a90d8f29f389b74c11444ca3a75"
+     },
+     {
+      "zip": "StoryWorld-M129-hit-recovery4-asset-ready-20261028-PART02.zip",
+      "png": "frames/M129-hit-K4-padded.png",
+      "sha256": "43bb33f8bf4ceaa47bcbfe6c9e18e8d62b5bc9b54100999f911e75af7f6b84ca"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M130",
+   "ids": [
+    "c101-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M130-hit.png",
+   "frames": 4,
+   "cell": [
+    235,
+    173
+   ],
+   "pivot": [
+    114.86,
+    171.6
+   ],
+   "visibleHeight": 150,
+   "bytes": 235176,
+   "sha256": "aafb379d4b7a494f2588976978fb8f58c3566f15b56f271d922baf00b349d90d",
+   "use": "세뇌 신호 점액체 · 맞음·회복 4키",
+   "groundSpreadPx": 1,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M130-hit4-ASSET-READY-part01-of02.zip",
+      "bytes": 2980151,
+      "sha256": "10d962ac5bac8f54f6e9a42b8b7e986bf8495c73fa0a06eed18f9b98e120a423"
+     },
+     {
+      "name": "StoryWorld-M130-hit4-ASSET-READY-part02-of02.zip",
+      "bytes": 2544697,
+      "sha256": "2f81a35dd350bb81fc240f4d3943efac7766e200e93a0af4eb41ed3fd3e4949f"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M130-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M130-hit-K1.png",
+      "sha256": "a82195482ec7f4f709708e67252faef1974fd38aacc5d384b84f7debd01dbc3e"
+     },
+     {
+      "zip": "StoryWorld-M130-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M130-hit-K2.png",
+      "sha256": "c4669496c3b4f0f8d5e9fdbd24836f92de219f3ed7dfee1fc0a45b13b8c62643"
+     },
+     {
+      "zip": "StoryWorld-M130-hit4-ASSET-READY-part02-of02.zip",
+      "png": "candidate/frames/M130-hit-K3.png",
+      "sha256": "f5ead75d26ace715c1902185ffe3ab2a214992b0a857b7fc97d6abc1809582ed"
+     },
+     {
+      "zip": "StoryWorld-M130-hit4-ASSET-READY-part01-of02.zip",
+      "png": "candidate/frames/M130-hit-K4.png",
+      "sha256": "f73d767782d87f37e9901ea8d0b4ee051165c9c103df7e76e4134a595b655dfd"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M130",
+   "ids": [
+    "c101-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M130-idle.png",
+   "frames": 4,
+   "cell": [
+    236,
+    156
+   ],
+   "pivot": [
+    117.57,
+    154.02
+   ],
+   "visibleHeight": 150,
+   "bytes": 252780,
+   "sha256": "2087f234107821d20475877b3ed51480d93f67d0e65a92d151606ef2f139b6f0",
+   "use": "세뇌 신호 점액체 · 대기 4키",
+   "groundSpreadPx": 2,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M130-idle4-ASSET-READY-part01-of03.zip",
+      "bytes": 2996046,
+      "sha256": "4df85d484ce02cbf958cca332e4475ae34af9ff77409fd2f3946501754dcff9a"
+     },
+     {
+      "name": "StoryWorld-M130-idle4-ASSET-READY-part02-of03.zip",
+      "bytes": 2683838,
+      "sha256": "49141e27afce2d696468c9084257fbd34aca74b904b93aa540f9c439e95bd081"
+     },
+     {
+      "name": "StoryWorld-M130-idle4-ASSET-READY-part03-of03.zip",
+      "bytes": 733770,
+      "sha256": "5775670800c9ee52630ea99a3a40fa956d9f3a0d499733d70b9cc043309405a0"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M130-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M130-idle-K1.png",
+      "sha256": "43cb3f1212c67e7cc8a86eb7a45dda0004fc0b4abf2ba454e2f329d8d97d8511"
+     },
+     {
+      "zip": "StoryWorld-M130-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M130-idle-K2.png",
+      "sha256": "bb52fde1f8e33ea7cf96f78e5e67d9aec2c99a1a7c7da06fe219c2d4877e7216"
+     },
+     {
+      "zip": "StoryWorld-M130-idle4-ASSET-READY-part01-of03.zip",
+      "png": "candidate/frames/M130-idle-K3.png",
+      "sha256": "4c07a7f7bf3fde966e06bd8fb0d5341e300b1c148630f9218b1768e0601d8753"
+     },
+     {
+      "zip": "StoryWorld-M130-idle4-ASSET-READY-part02-of03.zip",
+      "png": "candidate/frames/M130-idle-K4.png",
+      "sha256": "c16d56167cb520175e49b583e044a11ab6f603e23520cd12f12cef06f5cc9f1e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M131",
+   "ids": [
+    "c102-e3",
+    "c103-e3"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M131-hit.png",
+   "frames": 4,
+   "cell": [
+    280,
+    158
+   ],
+   "pivot": [
+    139.33,
+    156.4
+   ],
+   "visibleHeight": 150,
+   "bytes": 299934,
+   "sha256": "d09217e1e09a8f4b9f6551adb1e6b6c6e002704bcfe78944ab3b7cbba827255c",
+   "use": "과열 시냅스 점액체 · 맞음·회복 4키",
+   "groundSpreadPx": 3,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M131-hit4-ASSET-READY-part01-of04.zip",
+      "bytes": 2973637,
+      "sha256": "e556ad0096ec86afddbf00fa7925f9c80ec37e1f0342f15b1e470e07e35571a8"
+     },
+     {
+      "name": "StoryWorld-M131-hit4-ASSET-READY-part02-of04.zip",
+      "bytes": 2998726,
+      "sha256": "1fc72cbc74febfd5f100de7f33b414ee5003634c9161554c01648824766c7167"
+     },
+     {
+      "name": "StoryWorld-M131-hit4-ASSET-READY-part03-of04.zip",
+      "bytes": 2969578,
+      "sha256": "ccf96cc026ffebbbbe7ac43d42458bf9debb7aae28a6b191cd9724f7ac4f5688"
+     },
+     {
+      "name": "StoryWorld-M131-hit4-ASSET-READY-part04-of04.zip",
+      "bytes": 781591,
+      "sha256": "1dc08f59a611f87587fc34200a41eae879973a7c95f07b74f8a1300e6eee108c"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M131-hit4-ASSET-READY-part01-of04.zip",
+      "png": "candidate/frames/M131-hit-K1.png",
+      "sha256": "1864e4ca9a1c51934a2969fef5a8f40ea1b7618c338ecee14baa1aa5892425b9"
+     },
+     {
+      "zip": "StoryWorld-M131-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M131-hit-K2.png",
+      "sha256": "ee851685e6318739995a16c2a8141d3779368c8e51641bd5f9c0eb9997c2b1de"
+     },
+     {
+      "zip": "StoryWorld-M131-hit4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M131-hit-K3.png",
+      "sha256": "b5772b3d0d2d4e849ec19633a2084cd24329ee29faf80abe0d6727e7028ffc69"
+     },
+     {
+      "zip": "StoryWorld-M131-hit4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M131-hit-K4.png",
+      "sha256": "d72b5c24613a8dcfe3616d9cabc06445234dce1dfe48a32cc71f4c68eb288247"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M131",
+   "ids": [
+    "c102-e3",
+    "c103-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M131-idle.png",
+   "frames": 4,
+   "cell": [
+    261,
+    155
+   ],
+   "pivot": [
+    129.22,
+    154.04
+   ],
+   "visibleHeight": 150,
+   "bytes": 286193,
+   "sha256": "96cff4a3ccb9f4cfe2cc6eead01a4a4eca2110b5559f6f6fcf0334e290bea4e2",
+   "use": "과열 시냅스 점액체 · 대기 4키",
+   "groundSpreadPx": 4,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M131-idle4-ASSET-READY-part01-of04.zip",
+      "bytes": 2693428,
+      "sha256": "aead2c5199f1ec16547efa87744595322301557e9fe764bd902eb0104d662281"
+     },
+     {
+      "name": "StoryWorld-M131-idle4-ASSET-READY-part02-of04.zip",
+      "bytes": 2998660,
+      "sha256": "fec48a7672b8dcf613ccaf5450ba5c8704b0237678f90b4b6b7cb704d2c2d72c"
+     },
+     {
+      "name": "StoryWorld-M131-idle4-ASSET-READY-part03-of04.zip",
+      "bytes": 2454694,
+      "sha256": "8c1beadb8cb4d3e16899d3fc2caae6da5a417f57e15e7d43b9a01d2e61dfb45b"
+     },
+     {
+      "name": "StoryWorld-M131-idle4-ASSET-READY-part04-of04.zip",
+      "bytes": 1762427,
+      "sha256": "109dd08659b29abb07a576a2e30b45ef0b21f2a4d8de06409a3ff9675dea6981"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M131-idle4-ASSET-READY-part02-of04.zip",
+      "png": "candidate/frames/M131-idle-K1.png",
+      "sha256": "4197878373a6644c9f222b905fbe5506cf4cfef22f0f08e9b769e2a890669d81"
+     },
+     {
+      "zip": "StoryWorld-M131-idle4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M131-idle-K2.png",
+      "sha256": "38ffe5ce4e371943438fb4e3f342b3e69634893ad259785f3c28eb75ab8790d0"
+     },
+     {
+      "zip": "StoryWorld-M131-idle4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M131-idle-K3.png",
+      "sha256": "5f3694a0fb12bc72ce877c4f5fc035f8553468da59ddf27bde601250525b118c"
+     },
+     {
+      "zip": "StoryWorld-M131-idle4-ASSET-READY-part03-of04.zip",
+      "png": "candidate/frames/M131-idle-K4.png",
+      "sha256": "acb160ab3fc3f0f5a05b399ad2d43b7096e6c561b1637a826220a2f718b00bc6"
+     }
+    ]
+   }
+  }
+ ]
+}

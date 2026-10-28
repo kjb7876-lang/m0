@@ -11,6 +11,8 @@
  * 성장 단계(R102 0~7)에 따라 수(튀는 횟수·조각·화살·분출)가 늘어납니다. 보이는 것만 바뀌며
  * 피해·판정·저장은 그대로입니다. 기본공격은 건드리지 않습니다. */
 (()=>{'use strict';
+// R116: painted Dark-Eden-style clips (fx-eden-r108.js): pre() paints the archetype or declines (atlas not ready), post() adds layers.
+const EDEN=()=>{const x=window.__STORYWORLD_EDEN_R108__;return x&&x.pre&&x.on&&x.on()?x:null;};
 if(window.__STORYWORLD_D2S_R106__)return;
 if(typeof drawEffect!=='function'||typeof special!=='function'||typeof tick!=='function'||typeof project!=='function'||typeof fx!=='function')return;
 const TAU=Math.PI*2,clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t,smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
@@ -54,7 +56,7 @@ function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?
    if(per>=3)marks.push({x:sp.x,y:sp.y,star:.09+w*.42+si*.05+2*.055+.05,hash:per>=7?.09+w*.42+si*.05+(per-1)*.055+.08:null});});
   add({...base,life:.75+.055*per+(waves-1)*.42+.05*spots.length,cuts,marks,stage,fx:spots[0]});}
  else if(kind==='hammer')add({...base,life:1.25+.05*t,n:Math.round((3+t)*Math.max(.67,k))});
- else if(kind==='orb')add({...base,life:1.35,speed:5.2,shards:[],emitAt:0,burst:false});
+ else if(kind==='orb')add({...base,life:EDEN()?1.95:1.35,speed:5.2,shards:[],emitAt:0,burst:false});
  else if(kind==='chain'){const hops=[],seen=new Set();let from={x:p.x,y:p.y};for(let i=0;i<3+t;i++){const e=nearestTo(from.x,from.y,i?5.5:9,seen);if(!e)break;seen.add(e);hops.push({x:e.x,y:e.y,e});from=e;}
   if(!hops.length)hops.push({x:tx,y:ty});add({...base,life:.32+.07*hops.length,hops,bolts:Math.round((2+t)*k)});}
  else if(kind==='fist')add({...base,life:1.15,rays:Math.round((8+2*t)*k)});
@@ -141,7 +143,7 @@ const DRAW={
 // ---- loop ------------------------------------------------------------------------------------------
 let frozen=false;
 function drawAll(){if(!list.length||typeof ctx==='undefined'||!ctx)return;const h=H();
- for(const e of list){const u=e.t/e.life;if(u<0||u>1)continue;ctx.save();try{const run=()=>DRAW[e.kind]?.(e,u,h,e.dt||0);if(typeof ctx.scope==='function')ctx.scope({id:e.id,kind:'effect',x:e.x,y:e.y,r106:true},run);else run();}catch(err){fail(err);}finally{ctx.restore();}e.dt=0;}}
+ for(const e of list){const u=e.t/e.life;if(u<0||u>1)continue;ctx.save();try{const run=()=>{const ed=EDEN(),dt=e.dt||0;if(!(ed&&ed.pre(e,u,h,dt)))DRAW[e.kind]?.(e,u,h,dt);if(ed)ed.post(e,u,h,dt);};if(typeof ctx.scope==='function')ctx.scope({id:e.id,kind:'effect',x:e.x,y:e.y,r106:true},run);else run();}catch(err){fail(err);}finally{ctx.restore();}e.dt=0;}}
 const effectBase=drawEffect;drawEffect=function(e){if(e&&e.type==='r106-d2s'){try{drawAll();}catch(err){fail(err);}return;}return effectBase.apply(this,arguments);};
 const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(live()&&!(typeof loading!=='undefined'&&loading)){const d=frozen?0:Number.isFinite(dt)?clamp(dt,0,.1):0;for(const e of list){e.t+=d;e.dt=(e.dt||0)+d;}
  for(let i=list.length-1;i>=0;i--)if(list[i].t>list[i].life)list.splice(i,1);

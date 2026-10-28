@@ -141,19 +141,24 @@
   if(z.patrol?.sleep){const cand=(T.clueRooms||out.rooms.map((_,i)=>i)).slice(0,z.patrol.count||6);out.patrol={...z.patrol,routes:cand.map(k=>{const R=out.rooms[k],c=[R.x+R.w/2,R.y+R.h/2];return[c,[c[0]+.6,c[1]]];})};}
   return out;}
  // ---- 배치: 방·복도 → 바닥 칸, 문, 벽 높이 ---------------------------------------------------------
- const WALL={hall:3.9,room:3.3,corridor:3,stair:3.6,yard:1.4,street:4.4},DOOR=2.7;
+ // R116: 벽을 낮춰(문 2.2칸 기준) 사몽 구역이 덜 갇혀 보이게 한다. 미로가 아닌 구역은 통로·연결을 한 칸 넓힌다.
+ const WALL={hall:3.1,room:2.8,corridor:2.7,stair:3,yard:1.4,street:2.9},DOOR=2.2;
+ const wide=(z,R)=>z.kind!=='maze'&&R.kind==='corridor';
  function carve(z){const cells=new Set(),owner=new Map(),add=(x,y,ri)=>{const k=K(x,y);cells.add(k);if(ri!=null&&!owner.has(k))owner.set(k,ri);};
-  z.rooms.forEach((R,ri)=>{const cx=R.x+R.w/2,cy=R.y+R.h/2;for(let y=R.y;y<R.y+R.h;y++)for(let x=R.x;x<R.x+R.w;x++){if(R.shape==='disc'&&Math.hypot((x+.5-cx)/(R.w/2),(y+.5-cy)/(R.h/2))>1)continue;add(x,y,ri);}});
+  z.rooms.forEach((R,ri)=>{const cx=R.x+R.w/2,cy=R.y+R.h/2,RW=R.w+(wide(z,R)&&R.w<=3?1:0),RH=R.h+(wide(z,R)&&R.h<=3?1:0);for(let y=R.y;y<R.y+RH;y++)for(let x=R.x;x<R.x+RW;x++){if(R.shape==='disc'&&Math.hypot((x+.5-cx)/(R.w/2),(y+.5-cy)/(R.h/2))>1)continue;add(x,y,ri);}});
   const inRoom=(x,y)=>z.rooms.findIndex(R=>R.kind!=='corridor'&&x>=R.x&&x<R.x+R.w&&y>=R.y&&y<R.y+R.h);
   const doors=[],centre=R=>[Math.floor(R.x+R.w/2),Math.floor(R.y+R.h/2)];
-  for(const[a,b,w=3,via='hv']of z.links||[]){const[ax,ay]=centre(z.rooms[a]),[bx,by]=centre(z.rooms[b]),pts=[],sx=Math.sign(bx-ax),sy=Math.sign(by-ay);
+  for(const[a,b,w0=3,via='hv']of z.links||[]){const w=z.kind==='maze'?w0:Math.max(w0+1,4);const[ax,ay]=centre(z.rooms[a]),[bx,by]=centre(z.rooms[b]),pts=[],sx=Math.sign(bx-ax),sy=Math.sign(by-ay);
    if(via==='hv'){for(let x=ax;x!==bx;x+=sx)pts.push([x,ay]);for(let y=ay;y!==by+sy||!sy;y+=sy){pts.push([bx,y]);if(!sy)break;}}
    else{for(let y=ay;y!==by;y+=sy)pts.push([ax,y]);for(let x=ax;x!==bx+sx||!sx;x+=sx){pts.push([x,by]);if(!sx)break;}}
    const lo=Math.floor((w-1)/2),hi=w-1-lo;for(const[x,y]of pts)for(let dy=-lo;dy<=hi;dy++)for(let dx=-lo;dx<=hi;dx++)add(x+dx,y+dy,null);
    let prev=inRoom(...pts[0]);for(let i=1;i<pts.length;i++){const cur=inRoom(...pts[i]);if(cur!==prev){const[x0,y0]=pts[i-1],[x1,y1]=pts[i],h=x0!==x1;doors.push({x:h?Math.max(x0,x1):x0+.5,y:h?y0+.5:Math.max(y0,y1),axis:h?'v':'h',lo:-lo,hi:hi+1,room:prev>=0?prev:cur});}prev=cur;}}
   for(const c of z.cuts||[])for(let y=c.y;y<c.y+c.h;y++)for(let x=c.x;x<c.x+c.w;x++){cells.delete(K(x,y));owner.delete(K(x,y));}
   let W=0,H=0;for(const k of cells){const[x,y]=k.split(':').map(Number);W=Math.max(W,x+1);H=Math.max(H,y+1);}
-  return{cells,owner,doors,bounds:[0,0,W+3,H+3]};}
+  return{cells,owner,doors,bounds:[0,0,W+9,H+9]};}
+ // R116: 바닥 둘레 8칸 안의 빈 칸을 배경 지형으로 채운다(걷지 못함). 예전에는 주변이 새까맣게 비었다.
+ function backdropAround(cells,W,H,r){const near=new Set();for(const k of cells){const[x,y]=k.split(':').map(Number);for(let b=-r;b<=r;b++)for(let a=-r;a<=r;a++){if(a*a+b*b>r*r+1)continue;const X=x+a,Y=y+b;if(X<0||Y<0||X>=W||Y>=H)continue;const q=K(X,Y);if(!cells.has(q))near.add(q);}}
+  const out=[];for(let y=0;y<H;y++){let x=0;while(x<W){if(!near.has(K(x,y))){x++;continue;}const s0=x;while(x<W&&near.has(K(x,y)))x++;out.push({x:s0,y,width:x-s0,depth:1});}}return out;}
  const roomH=(z,ri)=>{const R=z.rooms[ri];return R?(R.wall||WALL[R.kind]||3.2):WALL.corridor;};
  function heights(L,z,owner,doors){// 벽마다 맞닿은 방의 높이 + 작은 변화, 문 옆 기둥(문틀)은 문보다 높게.
   for(const w of L.walls||[]){const h=w.width>w.depth,side=h?[[w.x,w.y-.5],[w.x,w.y+.5]]:[[w.x-.5,w.y],[w.x+.5,w.y]];let ri=null;for(const[sx,sy]of side){const o=owner.get(K(Math.floor(sx),Math.floor(sy)));if(o!=null){ri=o;break;}}
@@ -172,6 +177,7 @@
    dais:z.dais?{...z.dais}:null,landings:(z.landings||[]).map(c=>({...c})),patrol:z.patrol?z.patrol.routes.map(r=>r.map(([x,y])=>({x,y}))):null,path:[]};
   const L=api.build(z.id,epx,cells,{nodes,edges,entry:{...z.entry,node:0},bounds,wallHeight:WALL.room,extra});
   L.samongR115={rev:REV,zone:z.id,title:z.title,kind:z.kind,jambs:heights(L,z,owner,doors),doors:doors.length};
+  L.backdropRects=backdropAround(cells,bounds[2],bounds[3],8);L.samongR115.backdrop=L.backdropRects.length;
   if(L.worldR74){L.worldR74.rooms=extra.rooms;L.worldR74.doors=extra.doors;}
   if(z.dark)L.samongR115.dark=true;
   if(z.outdoor){const o=z.outdoor;if(L.worldR74)L.worldR74.mode='outdoor';L.r98Scene={id:ep.host,mode:'outdoor',style:o.family,open:true,wall:null,family:o.family,applied:true,version:1,r105:{family:o.family,water:o.water||null,trees:o.trees||null}};
