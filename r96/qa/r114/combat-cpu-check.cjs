@@ -122,6 +122,7 @@ const foe=(id,x,y,o={})=>Object.assign({id,x,y,hp:500,maxHp:500,damage:10,spawnS
 {const s=read('play-r113.js');check('hero faces the enemy it is shooting (target), not just the nearest one',/const aimed=typeof target!=='undefined'/.test(s)&&/const foe=aimed\|\|nearestFoe\(9\)/.test(s));}
 {const s=read('combat-r114.js');check('stray old-set hero frames are swapped for the current set in the same direction',/OLD_ART=\/heroes\\\/normalized\\\/directions/.test(s)&&/function unifyHero\(/.test(s));
  check('hero body height is fitted to the hwando body (0.85–1.15×, from the foot)',/const BODY=\.98/.test(s)&&/:clamp\(k,\.85,1\.15\)/.test(s));
+ check('legacy hero frames are swapped only after the R91/R93 overlay set drew this hero, and the swapped body keeps its depth role',/OVERLAY_ART=\/r91/.test(s)&&/!overlayHeroes\.has\(player\.hero\)\)return/.test(s)&&/best\.owner\.bodyPath=L\.sourcePath/.test(s));
  check('swapped/static hero art and gunner art get the wide fit (0.6–1.7×), walk/idle strips are fitted too',/WIDE_FIT=\/hero_direction33\[478\]/.test(s)&&/clamp\(k,\.6,1\.7\)/.test(s)&&/r114Swap:true/.test(s)&&/HERO_ART=.*r91\\\/walk/.test(s)&&/gunner\\\/\(\?:player_idle\|run_\)/.test(s));
  check('heroes without a walk atlas get a step bob/tilt while moving',/function walkHero\(/.test(s));}
 
