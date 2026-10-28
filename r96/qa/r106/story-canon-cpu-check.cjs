@@ -49,8 +49,12 @@ check('multi-narrator zones split into segments ('+multi.length+')',multi.length
 // 사몽/역행 text module
 const sctx={window:{}};vm.createContext(sctx);vm.runInContext(fs.readFileSync(R('r96/client-source/samong-text-r103.js'),'utf8'),sctx);
 const ST=sctx.window.__STORYWORLD_SAMONG_TEXT_R103__;
-check('사몽 text module built from the canon',ST?.sha256===SHA&&Object.keys(ST.sections).length===42,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);
-const sbad=[];let scount=0;for(const[k,s]of Object.entries(ST.sections))for(const b of s.blocks)for(const p of b.paras){scount++;if(!canonNorm.includes(norm(p)))sbad.push(k+':'+p.slice(0,24));}
+// R115: 사몽~진료기록은 전편총집본(sha256 4db94112…)으로 만든다. 스토리 모드는 위 canon 그대로다.
+const SAMONG_SHA='4db94112c8b2e8852e5cb988ac79686e57021328eb9364635a2d96af8f15b623',samongCanon=fs.readFileSync(R('story-source/hapil-canon-r115-collected.txt'));
+check('사몽 canon file hash is the 총집본',sha(samongCanon)===SAMONG_SHA,sha(samongCanon));
+const samongNorm=norm(samongCanon.toString('utf8').replace(/\r\n/g,'\n'));
+check('사몽 text module built from the 총집본',ST?.sha256===SAMONG_SHA&&Object.keys(ST.sections).length===42,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);
+const sbad=[];let scount=0;for(const[k,s]of Object.entries(ST.sections))for(const b of s.blocks)for(const p of b.paras){scount++;if(!samongNorm.includes(norm(p)))sbad.push(k+':'+p.slice(0,24));}
 // R114 문체수정본은 문단을 합쳐 984→631문단이 되었다(42구간 모두 채워짐).
 check('every 사몽 paragraph ('+scount+') is verbatim canon text',!sbad.length&&scount>600,sbad.slice(0,3).join(' | '));
 // anchors used by 사몽 cues and map records exist in the new text

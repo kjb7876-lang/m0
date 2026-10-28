@@ -4,7 +4,7 @@
  * samong-text-r103.js 의 원문 문단만 보여 줍니다. */
 (()=>{'use strict';
  if(window.__STORYWORLD_SAMONG_R103__)return;
- const REV='R103-samong-1+R105',PREFIX='sm103-',VERSION=1,GOAL=666;
+ const REV='R103-samong-1+R105+R115',PREFIX='sm103-',VERSION=1,GOAL=666;
  const TEXT=()=>window.__STORYWORLD_SAMONG_TEXT_R103__?.sections||{};
  let failures=0,lastError=null;const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,400);};
  const live=()=>typeof started!=='undefined'&&started&&!!player&&!!room;
@@ -67,13 +67,23 @@
  // A stage borrows a neutral host region id (art, theme, scene backdrop) but owns a separate
  // room object that is never stored in world[] or in the native save.
  const sid=(i,s)=>PREFIX+i+'-'+s;
+ // R115: 장마다 여러 구역(samong-zones-r115.js). 구역이 있는 장은 생존→미로→상승 대신 구역 순서를 따른다.
+ const ZN=()=>window.__STORYWORLD_SAMONG_ZONES_R115__||null;
+ const zonesOf=i=>ZN()?.chapter?.(EP[i]?.key)||null;
+ const zoneOf=id=>id?ZN()?.zone?.(id)||null:null;
+ const epOfZone=id=>EP.findIndex((e,i)=>zonesOf(i)?.some(z=>z.id===id));
  let stageRoom=null,entering=0;
  const here=()=>live()&&!!stageRoom&&room===stageRoom&&zone===stageRoom.id&&layer==='DREAM';
 
  // ---- state --------------------------------------------------------------------------------
- const fresh=()=>({version:VERSION,active:false,ep:0,stage:'ascent',kills:0,serial:0,counted:[],seed:0,checkpoint:null,cleared:[],read:[],chests:[],started:false,done:false,returnTo:null,flashSaved:null,deaths:0});
+ const fresh=()=>({version:VERSION,active:false,ep:0,stage:'ascent',kills:0,serial:0,counted:[],seed:0,checkpoint:null,cleared:[],read:[],chests:[],started:false,done:false,returnTo:null,flashSaved:null,deaths:0,zone:null,zoneDone:[],zoneRead:[],zoneSolve:{}});
  let S=fresh();
- function clean(v){if(!v||v.version!==VERSION)return fresh();const s=fresh();s.ep=Math.max(0,Math.min(EP.length-1,Math.floor(Number(v.ep)||0)));s.stage=STAGES.includes(v.stage)?v.stage:'ascent';if(s.ep===0)s.stage='ascent';s.kills=Math.max(0,Math.min(GOAL,Math.floor(Number(v.kills)||0)));s.serial=Math.max(0,Math.floor(Number(v.serial)||0));s.counted=Array.isArray(v.counted)?v.counted.filter(x=>typeof x==='string').slice(-160):[];s.seed=(Number(v.seed)>>>0)||0;s.checkpoint=v.checkpoint&&Number.isFinite(v.checkpoint.x)&&Number.isFinite(v.checkpoint.y)?{x:+v.checkpoint.x,y:+v.checkpoint.y}:null;s.cleared=Array.isArray(v.cleared)?v.cleared.filter(Number.isInteger).slice(0,64):[];s.read=Array.isArray(v.read)?v.read.filter(x=>typeof x==='string').slice(0,256):[];s.chests=Array.isArray(v.chests)?v.chests.filter(x=>typeof x==='string').slice(-512):[];s.started=v.started===true;s.active=v.active===true;s.done=v.done===true;s.returnTo=v.returnTo&&typeof v.returnTo.zone==='string'?{zone:v.returnTo.zone,layer:v.returnTo.layer==='STORY'?'STORY':'DREAM'}:null;s.flashSaved=typeof v.flashSaved==='boolean'?v.flashSaved:null;s.deaths=Math.max(0,Math.floor(Number(v.deaths)||0));return s;}
+ function clean(v){if(!v||v.version!==VERSION)return fresh();const s=fresh();s.ep=Math.max(0,Math.min(EP.length-1,Math.floor(Number(v.ep)||0)));s.stage=STAGES.includes(v.stage)||v.stage==='explore'?v.stage:'ascent';if(s.ep===0)s.stage='ascent';s.kills=Math.max(0,Math.min(GOAL,Math.floor(Number(v.kills)||0)));s.serial=Math.max(0,Math.floor(Number(v.serial)||0));s.counted=Array.isArray(v.counted)?v.counted.filter(x=>typeof x==='string').slice(-160):[];s.seed=(Number(v.seed)>>>0)||0;s.checkpoint=v.checkpoint&&Number.isFinite(v.checkpoint.x)&&Number.isFinite(v.checkpoint.y)?{x:+v.checkpoint.x,y:+v.checkpoint.y}:null;s.cleared=Array.isArray(v.cleared)?v.cleared.filter(Number.isInteger).slice(0,64):[];s.read=Array.isArray(v.read)?v.read.filter(x=>typeof x==='string').slice(0,256):[];s.chests=Array.isArray(v.chests)?v.chests.filter(x=>typeof x==='string').slice(-512):[];s.started=v.started===true;s.active=v.active===true;s.done=v.done===true;s.returnTo=v.returnTo&&typeof v.returnTo.zone==='string'?{zone:v.returnTo.zone,layer:v.returnTo.layer==='STORY'?'STORY':'DREAM'}:null;s.flashSaved=typeof v.flashSaved==='boolean'?v.flashSaved:null;s.deaths=Math.max(0,Math.floor(Number(v.deaths)||0));
+  // R115: 구역 진행. 구역이 생긴 장의 예전 저장(생존·미로·상승)은 지우지 않고 그 장의 구역으로 옮긴다.
+  s.zone=typeof v.zone==='string'?v.zone:null;s.zoneDone=Array.isArray(v.zoneDone)?v.zoneDone.filter(x=>typeof x==='string').slice(-256):[];s.zoneRead=Array.isArray(v.zoneRead)?v.zoneRead.filter(x=>typeof x==='string').slice(-512):[];
+  try{s.zoneSolve=v.zoneSolve&&typeof v.zoneSolve==='object'?JSON.parse(JSON.stringify(v.zoneSolve)):{};}catch{s.zoneSolve={};}
+  const zl=zonesOf(s.ep);if(zl){if(!zl.some(z=>z.id===s.zone)){const m=ZN().migrate(EP[s.ep].key,s.stage);if(s.zone!==m){s.zone=m;s.kills=0;s.checkpoint=null;s.migratedR115=v.stage||true;}}s.stage=ZN().stageOf(zoneOf(s.zone));}else{const e=epOfZone(s.zone);if(e<0)s.zone=null;else{s.ep=e;s.stage=ZN().stageOf(zoneOf(s.zone));}}
+  return s;}
 
  // ---- seeded random -------------------------------------------------------------------------
  function rng(seed){let a=seed>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
@@ -131,7 +141,7 @@
   const nodes=landings.map((p,n)=>({id:n,...p,radius:3,shape:'square',width:6,depth:6}));nodes.push({id:nodes.length,...dais,radius:9,shape:'round'});
   return build(id,ep,cells,{nodes,edges:nodes.slice(1).map((n,j)=>[j,j+1,3]),entry:{x:44.5,y:45.5,node:0},bounds:[0,0,49,49],wallHeight:3.4,extra:{kind:'ascent',dais,landings:landings.slice(1,-1)}});}
  const layouts=new Map();
- function layoutFor(i,stage){const id=sid(i,stage),seed=stage==='maze'?(S.ep===i&&S.seed?S.seed:hash(id)):0,k=id+':'+seed;if(!layouts.has(k)){const ep=EP[i];let L=null;
+ function layoutFor(i,stage,zid=null){const z=zoneOf(zid);if(z){if(!layouts.has(z.id)){layouts.set(z.id,ZN().layout(z,EP[i],{build,rng,hash}));while(layouts.size>6)layouts.delete(layouts.keys().next().value);}return layouts.get(z.id);}const id=sid(i,stage),seed=stage==='maze'?(S.ep===i&&S.seed?S.seed:hash(id)):0,k=id+':'+seed;if(!layouts.has(k)){const ep=EP[i];let L=null;
   // R105: 서사 청사진이 있으면 그 지형을 쓴다(없으면 R103 기본 지형).
   try{L=window.__STORYWORLD_SAMONG_MAPS_R105__?.layoutFor?.(i,stage,ep,seed,{build,sid,rng,hash,survivalLayout,mazeLayout,ascentLayout})||null;}catch(e){fail(e);L=null;}
   layouts.set(k,L||(stage==='survival'?survivalLayout(i,ep):stage==='maze'?mazeLayout(i,ep,seed):ascentLayout(i,ep)));while(layouts.size>12)layouts.delete(layouts.keys().next().value);}return layouts.get(k);}
@@ -141,17 +151,19 @@
  function donor([region,nativeId]){const k=region+'|'+nativeId;if(donorProfiles.has(k))return donorProfiles.get(k);let d=null;try{const r=makeNative(region,'DREAM'),e=r.enemies.find(e=>e.nativeId===nativeId)||r.enemies.find(e=>String(e.id).includes(nativeId));d=e?.profile||null;}catch(e){fail(e);}if(!d)donorFail.add(k);donorProfiles.set(k,d);return d;}
  function profilePaths(d){const out=new Set();if(!d)return out;if(d.path)out.add(d.path);for(const f of Object.values(d.frames||{}))if(f?.path)out.add(f.path);for(const f of Object.values(d.actions||{}))if(f?.path)out.add(f.path);return out;}
  // Donor images join the host's preload only while a stage is being entered.
- function stagePaths(i,stage){const ep=EP[i],paths=new Set();const rows=stage==='ascent'?[ep.boss.donor,...(ep.guard||[])]:(ep.mobs||[]);for(const row of rows)for(const path of profilePaths(donor(row))){try{register(path,'image','R103 사몽 · '+ep.title);}catch(e){}paths.add(path);}return[...paths];}
+ function stagePaths(i,stage,zid=null){const ep=EP[i],paths=new Set(),z=zoneOf(zid);const rows=z?[...(z.mobs||ep.mobs||[]),...(z.boss?[z.boss.donor]:[]),...(z.patrol?[z.patrol.donor]:[]),...(z.landings?.length?ep.guard||[]:[]),...[z.wander?.mobs,...(z.clues||[]).map(c=>c.mobs)].filter(Boolean).flat()]:stage==='ascent'?[ep.boss.donor,...(ep.guard||[])]:(ep.mobs||[]);for(const row of rows)for(const path of profilePaths(donor(row))){try{register(path,'image','R103 사몽 · '+ep.title);}catch(e){}paths.add(path);}return[...paths];}
 
  // ---- rooms -------------------------------------------------------------------------------
- function buildRoom(i,stage){const ep=EP[i],id=ep.host,l='DREAM',p={ep:i,stage},template=makeNative(id,l),layout=layoutFor(i,stage);
-  const r={...template,id,layer:l,props:[],enemies:[],kills:0,engaged:false,cleared:false,finalizing:false,encounterStage:'samongR103',activeEncounter:null,fieldWaves6:[],fieldWaveIndex6:0,fieldWaveTotal6:0,fieldWaveCleared6:true,storyRosterIds6:[],defeatedActorIds:new Set(),exploration:layout,explorationGroups:[],worldR74:1,r75Decorated:true,worldCombatR78:true,worldEnvironmentR81:true,r99Trees:true,r40RosterApplied:true,persona:{...(template.persona||{}),phase:'none'},samongR103:{ep:p.ep,stage:p.stage,portal:null,spawnAt:0,alive:0,bossUp:false,born:0}};
+ function buildRoom(i,stage,zid=null){const ep=EP[i],id=ep.host,l='DREAM',p={ep:i,stage},template=makeNative(id,l),layout=layoutFor(i,stage,zid),z=zoneOf(zid);
+  const r={...template,id,layer:l,props:[],enemies:[],kills:0,engaged:false,cleared:false,finalizing:false,encounterStage:'samongR103',activeEncounter:null,fieldWaves6:[],fieldWaveIndex6:0,fieldWaveTotal6:0,fieldWaveCleared6:true,storyRosterIds6:[],defeatedActorIds:new Set(),exploration:layout,explorationGroups:[],worldR74:1,r75Decorated:true,worldCombatR78:true,worldEnvironmentR81:true,r99Trees:true,r40RosterApplied:true,persona:{...(template.persona||{}),phase:'none'},samongR103:{ep:p.ep,stage:p.stage,zone:z?z.id:null,portal:null,spawnAt:0,alive:0,bossUp:false,born:0}};
   const x=layout.samongR103;r.objective={x:(x.exit||x.centre||x.dais||layout.entry).x,y:(x.exit||x.centre||x.dais||layout.entry).y,path:regionById[ep.host]?.objectiveArt||template.objective?.path};
-  const key=sid(i,stage);r.samongR103.key=key;
+  const key=z?z.id:sid(i,stage);r.samongR103.key=key;
   if(p.stage==='maze'){if(x.save)r.props.push(prop('save',x.save,{label:'기억의 등불 · 저장'}));x.chests.forEach((c,n)=>r.props.push(chest(key+':chest:'+n,c)));}
   if(p.stage==='ascent'){// Braziers line the climb so the way up reads at a glance.
    x.landings.forEach((q,n)=>{for(const s of[-1,1])r.props.push(prop('lamp',{x:q.x+s*2.4,y:q.y-s*2.4},{label:''}));});x.landings.forEach((q,n)=>{if(n===1)r.props.push(chest(key+':chest:0',{x:q.x+1.6,y:q.y-1.6}));});}
-  try{window.__STORYWORLD_SAMONG_MAPS_R105__?.dress?.(r,i,stage,ep,{prop,chest,key});}catch(e){fail(e);}
+  if(z){try{ZN().dress(r,z,{prop,chest,key});}catch(e){fail(e);}const list=zonesOf(i),n=list.indexOf(z),e0=layout.entry;// 이전 구역으로 돌아가는 문(첫 구역에는 없다).
+   if(n>0){const at=[[1.6,0],[0,1.6],[-1.6,0],[0,-1.6]].map(([dx,dy])=>({x:e0.x+dx,y:e0.y+dy})).find(q=>layout.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)))||e0;r.props.push(prop('back',at,{label:'이전 구역 · '+list[n-1].title,r74Prop:'obelisk'}));}}
+  else try{window.__STORYWORLD_SAMONG_MAPS_R105__?.dress?.(r,i,stage,ep,{prop,chest,key});}catch(e){fail(e);}
   return r;}
  function chest(id,at){const G=window.__STORYWORLD_GROWTH_R103__;return G?.chestProp?G.chestProp(id,at,{samongR103:'chest',chest:id}):prop('chest',at,{chest:id});}
  function prop(kind,at,extra={}){return{id:'r103:'+kind+':'+Math.round(at.x*10)+':'+Math.round(at.y*10),x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:kind,r74Prop:kind==='chest'?'crate':kind==='save'||kind==='lamp'?'brazier':'obelisk',...extra};}
@@ -176,26 +188,45 @@
   attackTokens();
   const alive=r.enemies.filter(living).length,cap=caps().survival,need=GOAL-S.kills;if(time<x.spawnAt||alive>=Math.min(cap,need))return;
   x.spawnAt=time+.3;const batch=Math.min(6,cap-alive,need-alive);for(let n=0;n<batch;n++){const q=ringPoint(player,9,15);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(ep.mobs[S.serial%ep.mobs.length],q,{name:ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+ // R115: 구역 전투 — 구역마다 정한 처치 수·단서·끝의 문. 666 누적은 문턱에만 남는다.
+ const nextTitle=z=>{const list=zonesOf(EP.findIndex((e,i)=>zonesOf(i)?.includes(z)))||[],n=list.indexOf(z);return n>=0&&n<list.length-1?'다음 구역 · '+list[n+1].title:'다음 기억으로 향하는 문';};
+ const zoneMobs=(z,ep)=>z?.mobs||ep.mobs;
+ function tickZoneCombat(dt){R106_DT=dt;const r=room,x=r.samongR103,ep=EP[x.ep],z=zoneOf(x.zone),g=z.goal||{},L=r.exploration.samongR103;
+  const fin=ZN().done(r,z),again=S.zoneDone.includes(z.id);
+  if(fin&&!x.portal){if(!x.endAt){x.endAt=time+(g.reach||again?0:3);if(!again)toast(g.reach?'목표 달성 · 끝의 문이 열립니다.':'목표 달성 · 남은 형상이 흩어지면 문이 열립니다.',3.5);}
+   if(!g.reach)for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.fadeR103=(e.fadeR103||0)+dt;if(e.fadeR103>1.2){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}}
+   if(time>=x.endAt||!r.enemies.some(living))openPortal(r,L.exit,nextTitle(z));}
+  r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
+  if(again||(fin&&!g.reach))return;attackTokens();
+  const alive=r.enemies.filter(living).length,cap=Math.round(caps().survival*.6);if(time<x.spawnAt||alive>=cap)return;
+  x.spawnAt=time+.45;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(4,cap-alive);n++){const q=ringPoint(player,8,14);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+ function tickExplore(dt){const r=room,x=r.samongR103,z=zoneOf(x.zone),L=r.exploration.samongR103;if(!x.portal&&ZN().done(r,z))openPortal(r,L.exit,nextTitle(z));r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);}
+ const zapi={spawn:(row,at,o)=>spawn(row,at,o),sight:(a,b)=>clearPath3(a,b,.2,room),boss:()=>room.enemies.find(e=>e.id===room.samongR103.boss)||null,
+  record:p=>{try{return window.__STORYWORLD_SAMONG_MAPS_R105__?.use?.(p)===true;}catch(e){fail(e);return false;}},
+  burst:(n,mobs,name,at)=>{const ep=EP[room.samongR103.ep],list=mobs||ep.mobs;for(let k=0;k<n;k++){const q=ringPoint(at,3,6);if(!q)continue;const e=spawn(list[(S.serial+k)%list.length],q,{name:name||ep.mobName,hpScale:.6,tag:'c',aggro:12});if(e)e.damage=(e.damage||8)*.7;}},
+  wander:cfg=>{const r=room,x=r.samongR103,ep=EP[x.ep];if(!x.wanderAt){x.wanderAt=time+cfg.every;return;}const alive=r.enemies.filter(e=>living(e)&&!e.samongPatrolR115).length;if(time<x.wanderAt||alive>=cfg.cap)return;x.wanderAt=time+cfg.every;const q=ringPoint(player,9,16);if(!q)return;const list=cfg.mobs||ep.mobs,e=spawn(list[S.serial%list.length],q,{name:cfg.mobName||ep.mobName,hpScale:.6,tag:'w',aggro:7});if(e)e.damage=(e.damage||8)*.7;},
+  addProp:p=>room.props.push(p),removeProp:p=>{room.props=room.props.filter(q=>q!==p);},clear:()=>{if(here()&&!room.samongR103.portal)stageCleared(room);}};
  // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
  function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
  function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,6-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);
   // R106: 생존 잡몹 공격 속도 1.6배 — 다음 공격까지의 대기만 줄인다(공격 예고 동작은 그대로).
   const dt=typeof R106_DT==='number'?R106_DT:0;if(dt>0)for(const e of room.enemies)if(living(e)&&e.samongSurvival&&(e.cd||0)>0&&!(e.attack&&!e.attack.committed))e.cd=Math.max(0,e.cd-dt*.6);}
- function tickMaze(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
-  if(!x.portal)openPortal(r,L.exit,'미로의 출구');
+ function tickMaze(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103,zm=zoneOf(x.zone);
+  if(!x.portal)openPortal(r,L.exit,zm?nextTitle(zm):'미로의 출구');
   // Bounded periodic spawns at junctions far from the player, never near the exit or the lamp.
-  const alive=r.enemies.filter(living);for(const e of alive){for(const safe of [L.exit,L.save]){if(safe&&Math.hypot(e.x-safe.x,e.y-safe.y)<3.2){const a=Math.atan2(e.y-safe.y,e.x-safe.x),q={x:safe.x+Math.cos(a)*3.3,y:safe.y+Math.sin(a)*3.3};if(floorAt(q.x,q.y,.3)){e.x=q.x;e.y=q.y;}else{e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.samongR103Silent=true;}}}}
+  const alive=r.enemies.filter(living);for(const e of alive){if(e.samongPatrolR115)continue;for(const safe of [L.exit,L.save]){if(safe&&Math.hypot(e.x-safe.x,e.y-safe.y)<3.2){const a=Math.atan2(e.y-safe.y,e.x-safe.x),q={x:safe.x+Math.cos(a)*3.3,y:safe.y+Math.sin(a)*3.3};if(floorAt(q.x,q.y,.3)){e.x=q.x;e.y=q.y;}else{e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.samongR103Silent=true;}}}}
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
-  if(time<x.spawnAt||alive.length>=caps().maze)return;x.spawnAt=time+4;
+  if(time<x.spawnAt||alive.filter(e=>!e.samongPatrolR115).length>=(zm?.mobCap??caps().maze))return;x.spawnAt=time+(zm?.mobEvery??4);
   const sites=r.exploration.nodes.filter(n=>{const d=Math.hypot(n.x-player.x,n.y-player.y);return d>8&&d<22&&Math.hypot(n.x-L.exit.x,n.y-L.exit.y)>4&&(!L.save||Math.hypot(n.x-L.save.x,n.y-L.save.y)>4);});
-  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const e=spawn(ep.mobs[S.serial%ep.mobs.length],s,{name:ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
- function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103;
+  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const ml=zoneMobs(zm,ep),e=spawn(ml[S.serial%ml.length],s,{name:zm?.mobName||ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
+ function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103,z=zoneOf(x.zone),bd=z?.boss||ep.boss;
+  if(z&&S.zoneDone.includes(z.id)){if(!x.portal)openPortal(r,L.dais,nextTitle(z));return;}
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
-   const b=spawn(ep.boss.donor,L.dais,{boss:true,name:ep.boss.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=ep.boss.patterns;x.boss=b.id;}}
+   const b=spawn(bd.donor,L.dais,{boss:true,name:bd.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=bd.patterns;x.boss=b.id;}}
   const b=r.enemies.find(e=>e.id===x.boss);
-  if(!x.bossUp&&b&&Math.hypot(player.x-L.dais.x,player.y-L.dais.y)<10.5){x.bossUp=true;r.engaged=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';player.invincible=Math.max(player.invincible,.8);player.invReason='전투 진입';try{sound('boss');}catch(e){}const sc=scenes(ep,'boss');if(sc.length)playScenes(sc,()=>banner103(ep.boss.name,'보스'));else banner103(ep.boss.name,'보스');}
+  if(!x.bossUp&&b&&Math.hypot(player.x-L.dais.x,player.y-L.dais.y)<10.5){x.bossUp=true;r.engaged=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';player.invincible=Math.max(player.invincible,.8);player.invReason='전투 진입';try{sound('boss');}catch(e){}const sc=z?zoneScenes(z,[z.bossCue].filter(Boolean),'boss'):scenes(ep,'boss');if(sc.length)playScenes(sc,()=>banner103(bd.name,z?.solve?'대면':'보스'));else banner103(bd.name,z?.solve?'대면':'보스');}
   if(x.bossUp&&b&&b.hp>0)bossPatterns(b,dt);
-  if(x.bossUp&&(!b||b.hp<=0||b.deadRecorded)&&!x.portal){r.engaged=false;stageCleared(r);}}
+  if(x.bossUp&&(!b||b.hp<=0||b.deadRecorded)&&!x.portal&&!z?.solve){r.engaged=false;stageCleared(r);}}
  // Four readable pattern families (예고 표시 → 판정). Damage scales from the actor's own value.
  function bossPatterns(b,dt){const x=room.samongR103;x.patAt=x.patAt||time+3;if(time<x.patAt||!b.patternsR103?.length)return;const list=b.patternsR103,kind=list[(x.patN=(x.patN||0)+1)%list.length],dmg=(b.damage||20)*.55;x.patAt=time+(kind==='rain'?5.5:4.2);
   const field=(px,py,radius,warning,life,asset)=>{if(blocked(px,py,.1,room))return;hazards.push({id:++uid,type:'field',owner:b.id,x:px,y:py,radius,age:0,warning,life:warning+life,asset,damage:dmg,lastHit:-99,samongPattern:kind});};
@@ -207,27 +238,42 @@
 
  // ---- portals, stage flow -------------------------------------------------------------------
  function openPortal(r,at,label){const x=r.samongR103;if(x.portal)return;x.portal={x:at.x,y:at.y,label,at:time};r.objective={...r.objective,x:at.x,y:at.y};r.props.push(prop('portal',at,{label}));try{fx('sigil',at.x,at.y,{asset:VFX.cross,size:3,life:1.2});sound('clear');}catch(e){}toast(josa(label,'이','가')+' 열렸습니다. 가까이에서 E를 누르세요.',4);saveGame(false);}
- function stageCleared(r){const x=r.samongR103,ep=EP[x.ep];if(!S.cleared.includes(x.ep))S.cleared.push(x.ep);
+ function stageCleared(r){const x=r.samongR103,ep=EP[x.ep],z=zoneOf(x.zone);r.engaged=false;
+  if(z){if(!S.zoneDone.includes(z.id))S.zoneDone.push(z.id);const list=zonesOf(x.ep),last=list.indexOf(z)===list.length-1;if(last&&!S.cleared.includes(x.ep))S.cleared.push(x.ep);
+   const after=()=>{if(last&&ep.boss.final){ending();return;}const L=r.exploration.samongR103;openPortal(r,L.dais||L.exit,nextTitle(z));};const sc=zoneScenes(z,z.after||[],'after');if(sc.length)playScenes(sc,after);else after();saveGame(false);return;}
+  if(!S.cleared.includes(x.ep))S.cleared.push(x.ep);
   const after=()=>{if(ep.boss.final){ending();return;}openPortal(r,r.exploration.samongR103.dais,'다음 기억으로 향하는 문');};
   const sc=scenes(ep,'after');if(sc.length)playScenes(sc,after);else after();}
- function next(){const x=room.samongR103;let ep=x.ep,stage=x.stage;
+ function next(){const x=room.samongR103;let ep=x.ep,stage=x.stage;const z=zoneOf(x.zone);
+  if(z){// 구역 안의 문은 같은 장의 다음 구역으로, 마지막 구역의 문만 다음 장으로 간다.
+   const list=zonesOf(x.ep),n=list.indexOf(z);if(!S.zoneDone.includes(z.id))S.zoneDone.push(z.id);
+   const step=()=>{if(n<list.length-1){go(x.ep,null,{zone:list[n+1].id});return;}if(!S.cleared.includes(x.ep))S.cleared.push(x.ep);if(x.ep+1>=EP.length){ending();return;}enterEp(x.ep+1);};
+   const sc=z.kind!=='confront'?zoneScenes(z,z.after||[],'after'):[];if(sc.length)playScenes(sc,step);else step();return;}
   if(stage==='ascent'){ep=ep+1;stage='survival';}else if(stage==='survival')stage='maze';else stage='ascent';
-  if(ep>=EP.length){ending();return;}go(ep,stage);}
- async function go(ep,stage,{restore=false,position=null}={}){if(entering)return false;if(stage==='maze'&&!(S.ep===ep&&S.stage==='maze'&&S.seed))S.seed=hash(sid(ep,'maze')+':'+Date.now()+':'+Math.random());
-  if(stage!=='maze')S.checkpoint=null;if(stage==='survival'&&!(S.ep===ep&&S.stage==='survival'))S.kills=0;
+  if(ep>=EP.length){ending();return;}if(stage==='survival'&&zonesOf(ep)){enterEp(ep);return;}go(ep,stage);}
+ function enterEp(i){const zl=zonesOf(i);return zl?go(i,null,{zone:zl[0].id}):go(i,'survival');}
+ function back(){const x=room.samongR103,z=zoneOf(x.zone);if(!z)return false;const list=zonesOf(x.ep),n=list.indexOf(z);if(n<1)return false;const prev=list[n-1],L=layoutFor(x.ep,null,prev.id),q=L.samongR103.exit||L.samongR103.dais||L.entry;go(x.ep,null,{zone:prev.id,position:{x:q.x,y:q.y}});return true;}
+ // 구역 원문: 처음 한 번만 보여 준다(읽은 표시는 samongR103.zoneRead).
+ function zoneScenes(z,list,tag){const flag=z.id+':'+tag;if(!list.length||S.zoneRead.includes(flag))return[];S.zoneRead.push(flag);return ZN().scenesFor(list,z,tag);}
+ async function go(ep,stage,{restore=false,position=null,zone:zid=null}={}){if(entering)return false;
+  let z=zoneOf(zid);if(z&&!zonesOf(ep)?.includes(z))z=null;if(!z&&zonesOf(ep))z=zoneOf(ZN().migrate(EP[ep].key,stage));// 구역이 있는 장은 언제나 구역으로 들어간다.
+  if(z){stage=ZN().stageOf(z);if(S.zone!==z.id||S.ep!==ep){S.kills=0;S.checkpoint=null;}S.zone=z.id;}
+  else{S.zone=null;if(stage==='maze'&&!(S.ep===ep&&S.stage==='maze'&&S.seed))S.seed=hash(sid(ep,'maze')+':'+Date.now()+':'+Math.random());
+  if(stage!=='maze')S.checkpoint=null;if(stage==='survival'&&!(S.ep===ep&&S.stage==='survival'))S.kills=0;}
   if(!S.active&&!stageRoom&&zone&&regionById[zone])S.returnTo={zone:regionById[zone].safe?zone:'hub',layer};
   S.ep=ep;S.stage=stage;S.started=true;const def=regionById[EP[ep].host];if(!def)return false;
-  const extra=stagePaths(ep,stage),oldPaths=def.paths;def.paths=[...new Set([...oldPaths,...extra])];
-  const prev=stageRoom;stageRoom=buildRoom(ep,stage);S.active=true;entering++;let ok=false;
-  const L=stageRoom.exploration,onFloor=q=>!!q&&Number.isFinite(q.x)&&Number.isFinite(q.y)&&L.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)),pick=[position,stage==='maze'&&S.checkpoint].find(onFloor),start=pick||L.entry;// R106: 맵 크기가 바뀐 예전 저장 위치는 바닥이 아니면 입구로.
+  const extra=stagePaths(ep,stage,z?.id),oldPaths=def.paths;def.paths=[...new Set([...oldPaths,...extra])];
+  const prev=stageRoom;stageRoom=buildRoom(ep,stage,z?.id);S.active=true;entering++;let ok=false;
+  const L=stageRoom.exploration,onFloor=q=>!!q&&Number.isFinite(q.x)&&Number.isFinite(q.y)&&L.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)),pick=[position,(stage==='maze'||z)&&S.checkpoint].find(onFloor),start=pick||L.entry;// R106: 맵 크기가 바뀐 예전 저장 위치는 바닥이 아니면 입구로.
   try{ok=await enterRegion(def.id,null,{layer:'DREAM',position:{x:start.x,y:start.y},noStory:true,restore:true});}finally{entering--;def.paths=oldPaths;}
   if(!ok||room!==stageRoom){stageRoom=prev&&room===prev?prev:null;S.active=!!stageRoom;return false;}
-  forceFlash(stage==='maze');intro(EP[ep],stage);saveGame(false);return true;}
+  forceFlash(stage==='maze'||!!z?.dark);if(z)zoneIntro(z);else intro(EP[ep],stage);saveGame(false);return true;}
+ function zoneIntro(z){const list=zonesOf(S.ep),n=list.indexOf(z)+1,sub=({explore:'탐색',maze:'손전등 미로',combat:'전투',confront:'대면'})[z.kind]+' · 구역 '+n+'/'+list.length,sc=zoneScenes(z,z.cue||[],'cue');if(sc.length&&!modal)playScenes(sc,()=>banner103(z.title,sub));else banner103(z.title,sub);}
  // After a load the native restore may still be entering the host map; wait for it, then
  // re-enter the stage at its start (the maze at the last lamp).
  let resumeNote=null;
- async function resumeStage(){const want={ep:S.ep,stage:S.stage};resumeNote={at:'wait',want};for(let i=0;i<150&&(loading||entering);i++)await new Promise(r=>setTimeout(r,100));if(S.active||S.ep!==want.ep||S.stage!==want.stage||layer!=='DREAM'){resumeNote={at:'skip',active:S.active,ep:S.ep,stage:S.stage,layer};return false;}resumeNote={at:'go',want};
-  for(let t=0;t<3;t++){if(await go(want.ep,want.stage,{restore:true})){resumeNote={at:'done',want,try:t};return true;}resumeNote={at:'retry',t,entering,loading};await new Promise(r=>setTimeout(r,400));}return false;}
+ async function resumeStage(){const want={ep:S.ep,stage:S.stage,zone:S.zone};resumeNote={at:'wait',want};for(let i=0;i<150&&(loading||entering);i++)await new Promise(r=>setTimeout(r,100));if(S.active||S.ep!==want.ep||S.stage!==want.stage||layer!=='DREAM'){resumeNote={at:'skip',active:S.active,ep:S.ep,stage:S.stage,layer};return false;}resumeNote={at:'go',want};
+  for(let t=0;t<3;t++){if(await go(want.ep,want.stage,{restore:true,zone:want.zone})){resumeNote={at:'done',want,try:t};return true;}resumeNote={at:'retry',t,entering,loading};await new Promise(r=>setTimeout(r,400));}return false;}
  function intro(ep,stage){const sc=scenes(ep,stage);if(sc.length&&!modal)playScenes(sc,()=>banner103(ep.title,stageLabel(stage)));else banner103(ep.title,stageLabel(stage));}
  const stageLabel=s=>s==='survival'?'생존 · 누적 '+GOAL+' 처치':s==='maze'?'손전등 미로 · 출구 찾기':'상승 · 위쪽의 보스';
  function banner103(title,sub){try{const el=document.getElementById('cutin')||null;toast(title+(sub?'\n'+sub:''),3.4);}catch(e){fail(e);}}
@@ -238,22 +284,22 @@
  function scene(ep,key,text,narrator,part){const k='DREAM:sm103:'+ep.key+':'+part+':'+key;return{id:ep.host,record:{title:ep.title,narrator,chapter:ep.chapter},part:'body',text,title:TEXT()[key]?.title||ep.title,narrator:narrator?'〈'+narrator+'〉':'',chapter:ep.chapter,key:k};}
  // [구간 키, 그 문단이 시작하는 원문 문자열(없으면 첫 문단, 'last'는 끝), 문단 수]
  const CUES={
-  P:{a:['prelude',null,4],b:['threshold','나는 코어 아래로 뻗은 검은 뿌리',1],z:['threshold','교주는 굳이 감시하지 않더라도',1]},
-  'S-01':{s:['threshold','나는 뿌리를 무너뜨린 뒤',1],m:['threshold','적은 계속 나타나기에',1],a:['S-01',null,2],b:['S-01','그때 식탁의 안주인이',2],z:['S-01','실들이 한꺼번에',1]},
-  'S-02':{s:['S-02',null,2],m:['S-02','복도 끝에서 열쇠가',1],a:['S-02','방송실은 위층에',2],b:['S-02','나는 귀가 확인서를',1],z:['S-02','교문이 열렸지만',1]},
-  'S-03':{s:['S-03',null,1],m:['S-03','손전등을 낮추자',1],a:['S-03','시험장의 관람석에 서 있었다',1],b:['S-03','시험장 뒤편에서 도복들이',2],z:['S-03','관람석이 한 자리씩',1]},
-  'S-04':{s:['S-04',null,2],m:['S-04','탈출이 아니라 배달을 완료하려고',1],a:['S-04','엘리베이터가 멈춘 곳은 4층',1],b:['S-04','13층에서 강재헌을',3],z:['S-04','비 속에서 눈을 떴을 때',1]},
-  'S-05':{s:['S-05',null,2],m:['S-05','처음에는 추위를 피하려고',1],a:['S-05','신문은 재가 되지 않고',2],b:['S-05','관사 안에서 다시 불이',1],z:['S-05','나는 그 약속 위에 찍힌',1]},
-  'S-06':{s:['NS-01',null,2],m:['NS-05','문을 열자 작은 방이',1],a:['NS-08',null,1],b:['NS-08','한쪽 날개에는',1],z:['NS-10','나는 그 선을 따라 칼을 내려',2]},
-  'S-07':{s:['S-07',null,2],m:['S-07','탁자 위에는 내가 가져온 물건',2],a:['S-07','나는 그것들이 모두',1],b:['S-07','칼을 들어 페르소나를 베었다',2],z:['S-07','그러자 EGO가 각성하기',2]},
-  RA:{s:['R-00',null,2],m:['R-02','손전등을 들어 창문을 비추자',1],a:['R-01',null,2],b:['R-02','내가 순찰자의 앞을 가로막자',1],z:['R-02','last',2]},
-  RB:{s:['R-03',null,2],m:['R-03','초침은 혀처럼',1],a:['R-04',null,2],b:['R-04','지현을 비추던 은빛 면에',1],z:['R-04','last',2]},
-  RC:{s:['R-05',null,2],m:['R-05','재판관이 망치를 내리칠',1],a:['R-06',null,2],b:['R-05','내가 그 결말을 받아들이지 않자',2],z:['R-06','last',2]},
-  RD:{s:['R-07',null,2],m:['R-07','처음 발을 디뎠을 때에는',1],a:['R-08',null,2],b:['R-09','하늘 어딘가에서 나팔 소리가',2],z:['R-09','last',2]},
-  RE:{s:['R-10',null,2],m:['R-10','느린 사람에게 걸음을 맞췄다',1],a:['R-10','관람석이 붙어 있다는',1],b:['R-10','백색 사수는 이미 다시 총을',1],z:['R-10','last',2]},
-  RF:{s:['R-11',null,2],m:['R-11','다섯 번째 나팔이 울렸다',1],a:['R-12',null,2],b:['R-11','스토리텔러는 그렇게',1],z:['R-12','last',2]},
-  RG:{s:['R-13',null,2],m:['R-13','도겸이 들어 올린 여백이',1],a:['R-14',null,2],b:['R-13','빈 소매처럼 생긴 나팔',1],z:['R-17','last',2]},
-  M:{s:['R-17','last',2],m:['M1','미카엘라를 향해 한 걸음 다가갈',1],a:['M1',null,1],b:['M1','미카엘라는 모든 문을 혼자',2]}
+  P:{a:['prelude',null,4],b:['threshold','나는 코어 아래로',1],z:['threshold','문만 열면 끝날 줄',1]},
+  'S-01':{s:['threshold','그 뿌리를 무너뜨리',1],m:['threshold','나는 뒤돌아 가까운',1],a:['S-01',null,2],b:['S-01','식탁 너머에서 가위',2],z:['S-01','식탁과 벽을 잇던',1]},
+  'S-02':{s:['S-02',null,2],m:['S-02','열쇠가 부딪치는 소',1],a:['S-02','방송실은 위층에',2],b:['S-02','방송실은 위층에 있',1],z:['S-02','교문이 열렸지만',1]},
+  'S-03':{s:['S-03',null,1],m:['S-03','손전등을 아래로 내',1],a:['S-03','빗소리가 잦아든 뒤',1],b:['S-03','관람석 뒤편의 도복',2],z:['S-03','관람석이 비었다.',1]},
+  'S-04':{s:['S-04',null,2],m:['S-04','나는 막힌 벽 앞에',1],a:['S-04','엘리베이터가 멈춘 곳은 4층',1],b:['S-04','13층에서 강재헌의',3],z:['S-04','눈을 뜨자 얼굴에',1]},
+  'S-05':{s:['S-05',null,2],m:['S-05','추워서 가까운 곳으',1],a:['S-05','남자의 기억에서 빠',2],b:['S-05','무너진 관사 쪽에서',1],z:['S-05','나는 약속에 찍힌',1]},
+  'S-06':{s:['NS-01',null,2],m:['NS-05','문 안쪽은 작은 방',1],a:['NS-08',null,1],b:['NS-08','한쪽 날개에는',1],z:['NS-10','나는 그 선을 눌러',2]},
+  'S-07':{s:['S-07',null,2],m:['S-07','탁자 위로 인형과',2],a:['S-07','이것은 다른 사람들',1],b:['S-07','나는 페르소나를 베',2],z:['S-07','칼 안에서 첫째의',2]},
+  RA:{s:['R-00',null,2],m:['R-02','학교 창 안쪽에서',1],a:['R-01',null,2],b:['R-02','날아오는 열쇠를 피',1],z:['R-02','last',2]},
+  RB:{s:['R-03',null,2],m:['R-03','학교 시계에서 흘러',1],a:['R-04',null,2],b:['R-04','거울에서 지현의 얼',1],z:['R-04','last',2]},
+  RC:{s:['R-05',null,2],m:['R-05','나는 단상으로 올라',1],a:['R-06',null,2],b:['R-05','재판관이 자리에서',2],z:['R-06','last',2]},
+  RD:{s:['R-07',null,2],m:['R-07','처음 발을 디뎠을 때에는',1],a:['R-08',null,2],b:['R-09','나팔이 울려 하늘을',2],z:['R-09','last',2]},
+  RE:{s:['R-10',null,2],m:['R-10','앞서 달리던 사람이',1],a:['R-10','사수가 자세를 고칠',1],b:['R-10','백색 사수는 이미',1],z:['R-10','last',2]},
+  RF:{s:['R-11',null,2],m:['R-11','도겸이 발을 멈췄다',1],a:['R-12',null,2],b:['R-11','스토리텔러는 그런',1],z:['R-12','last',2]},
+  RG:{s:['R-13',null,2],m:['R-13','도겸이 남긴 여백이',1],a:['R-14',null,2],b:['R-13','하늘에는 나팔 일곱',1],z:['R-17','last',2]},
+  M:{s:['R-17','last',2],m:['M1','그녀에게 한 발 가',1],a:['M1',null,1],b:['M1','모든 문이 그녀의',2]}
  };
  function cue(row){if(!row)return[];const[k,sub,n]=row,p=paras(k);if(!p.length)return[];let at=0;if(sub==='last')at=Math.max(0,p.length-n);else if(sub){at=p.findIndex(v=>v.t.startsWith(sub));if(at<0)at=p.findIndex(v=>v.t.includes(sub));if(at<0)return[];}return p.slice(at,at+n).map(v=>({...v,key:k}));}
  // stage → cue: survival 's', maze 'm', ascent 'a' (도착), boss 'b' (등장), after 'z' (처치 뒤).
@@ -283,7 +329,7 @@
  beamC.style.display='block';if(beamC.width!==c.width||beamC.height!==c.height){beamC.width=c.width;beamC.height=c.height;}return beamC;}
 function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=document.getElementById('stage');if(!stage)return null;overlay=document.createElement('canvas');overlay.id='r103Flashlight';overlay.setAttribute('aria-hidden','true');overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';stage.appendChild(overlay);return overlay;}
  function rayLen(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.18)if(blocked(ox+dx*t,oy+dy*t,.02,room))return t;return max;}
- function drawFlash(){const want=here()&&room.samongR103.stage==='maze'&&!modal;const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
+ function drawFlash(){const want=here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark)&&!modal;const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
   const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
   const mv={x:(player.moveVX150||0),y:(player.moveVY150||0)};if(Math.hypot(mv.x,mv.y)>.05)lastDir=norm(mv.x,mv.y);else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w&&Math.hypot(player.moveVX150||0,player.moveVY150||0)<=.05&&!lastDir)lastDir=norm(w[0],w[1]);}
@@ -310,6 +356,8 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  // ---- interaction ---------------------------------------------------------------------------
  function nearMine(){if(!here())return null;let best=null,bd=1e9;for(const p of room.props){if(!p.samongR103)continue;const d=Math.hypot(p.x-player.x,p.y-player.y),reach=p.samongR103==='portal'?2.6:1.9;if(d<reach&&d<bd){best=p;bd=d;}}return best;}
  function use(p){const x=room.samongR103;
+  if(p.samongR103==='back'){restoreFlash();return back();}
+  if(p.r115Clue||p.r115Stmt!=null||p.r115Book){try{return ZN()?.use?.(p,zapi)===true;}catch(e){fail(e);return false;}}
   if(p.samongR103==='portal'){if(!x.portal)return false;restoreFlash();next();return true;}
   if(p.samongR103==='save'){S.checkpoint={x:p.x+.6,y:p.y+.6};player.hp=Math.max(player.hp,maxHP()*.6);saveGame(false);toast('기억의 등불 · 이 자리에서 다시 시작합니다.',3);showRecords();return true;}
   if(p.samongR103==='chest'){window.__STORYWORLD_GROWTH_R103__?.openChest?.(p);return true;}
@@ -325,9 +373,9 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
   const EX=window.__STORYWORLD_EXPLORATION__;if(EX&&typeof EX.layout==='function'){const own={};for(const k of Object.keys(EX))own[k]=EX[k];own.layout=function(id,...a){if(stageRoom&&S.active&&id===stageRoom.id&&typeof layer!=='undefined'&&layer==='DREAM')return stageRoom.exploration;return EX.layout.call(EX,id,...a);};own.samongR103=true;try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);}}
   const getBase=getRoom;getRoom=function(id=zone,l=layer){if(stageRoom&&S.active&&id===stageRoom.id&&l==='DREAM')return stageRoom;return getBase.apply(this,arguments);};
   const enterBase=enterRegion;enterRegion=async function(...a){if(!entering&&S.active)deactivate();return enterBase.apply(this,a);};
-  const tickBase=tick;tick=function(dt){const r=tickBase.apply(this,arguments);try{if(here()&&!modal&&!loading&&player.hp>0){const st=room.samongR103.stage;if(st==='survival')tickSurvival(dt);else if(st==='maze')tickMaze(dt);else tickAscent(dt);if(time-(hudAt||0)>.5){hudAt=time;hud();}}}catch(e){fail(e);}return r;};
+  const tickBase=tick;tick=function(dt){const r=tickBase.apply(this,arguments);try{if(here()&&!modal&&!loading&&player.hp>0){const st=room.samongR103.stage,zt=zoneOf(room.samongR103.zone);if(st==='survival')(zt?tickZoneCombat:tickSurvival)(dt);else if(st==='maze')tickMaze(dt);else if(st==='explore')tickExplore(dt);else tickAscent(dt);if(zt)ZN().tick(room,zt,dt,zapi);if(time-(hudAt||0)>.5){hudAt=time;hud();}}}catch(e){fail(e);}return r;};
   const drawBase=draw;draw=function(...a){const r=drawBase.apply(this,a);try{drawFlash();}catch(e){fail(e);}return r;};
-  const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;const r=killBase.apply(this,[e,...a]);try{if(first&&e?.deadRecorded&&e.samongSurvival&&here()&&room.samongR103.stage==='survival'&&!e.samongR103Silent&&!S.counted.includes(e.id)&&S.kills<GOAL){S.kills++;S.counted.push(e.id);if(S.counted.length>160)S.counted.shift();if(S.kills%111===0||S.kills===GOAL)saveGame(false);}}catch(err){fail(err);}return r;};
+  const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;const r=killBase.apply(this,[e,...a]);try{if(first&&e?.deadRecorded&&e.samongSurvival&&here()&&room.samongR103.stage==='survival'&&!e.samongR103Silent&&!S.counted.includes(e.id)&&S.kills<(zoneOf(room.samongR103.zone)?(zoneOf(room.samongR103.zone).goal?.kills||0):GOAL)){S.kills++;S.counted.push(e.id);if(S.counted.length>160)S.counted.shift();if(S.kills%111===0||S.kills===GOAL)saveGame(false);}}catch(err){fail(err);}return r;};
   // The host region's native warps stay out of a stage: no markers, no travel, and 길잡이
   // walks toward the stage goal instead.
   if(typeof drawExits==='function'){const exitsBase=drawExits;drawExits=function(...a){if(here())return;return exitsBase.apply(this,a);};}
@@ -337,7 +385,7 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
   const completeBase=completeRegion;completeRegion=function(id,...a){if(here())return;return completeBase.apply(this,[id,...a]);};
   const interactBase=interact;interact=function(...a){try{if(here()&&!modal&&!loading&&player.hp>0){const p=nearMine();if(p&&use(p))return;if(distance(player,room.objective)<2.7)return;}}catch(e){fail(e);}return interactBase.apply(this,a);};
   const hudBase=updateHUD;updateHUD=function(...a){const r=hudBase.apply(this,a);try{if(here())hud();}catch(e){fail(e);}return r;};
-  const deathBase=showDeath;showDeath=function(...a){if(!here())return deathBase.apply(this,a);S.deaths++;clearControls();stopVoice();stopEffects();const x=room.samongR103;openPanel('<div class="eyebrow">DREAM / 사몽</div><h2>기억은 남아 있습니다</h2><p>'+(x.stage==='survival'?'누적 처치 '+S.kills+' / '+GOAL+'는 그대로 이어집니다.':x.stage==='maze'?'마지막으로 켠 등불 앞에서 다시 시작합니다.':'층계의 아래에서 다시 오릅니다.')+'</p><div class="actions"><button id="r103Retry" class="primary">이 단계 다시 시작</button><button id="r103Home">쉼터로 돌아가기</button></div>');button('r103Retry',()=>{player.hp=maxHP();closePanel(true);go(x.ep,x.stage);});button('r103Home',()=>{player.hp=maxHP();closePanel(true);leave();});};
+  const deathBase=showDeath;showDeath=function(...a){if(!here())return deathBase.apply(this,a);S.deaths++;clearControls();stopVoice();stopEffects();const x=room.samongR103;openPanel('<div class="eyebrow">DREAM / 사몽</div><h2>기억은 남아 있습니다</h2><p>'+(x.zone?'이 구역의 입구(미로는 마지막 등불)에서 다시 시작합니다. 읽은 단서와 처치 수는 그대로입니다.':x.stage==='survival'?'누적 처치 '+S.kills+' / '+GOAL+'는 그대로 이어집니다.':x.stage==='maze'?'마지막으로 켠 등불 앞에서 다시 시작합니다.':'층계의 아래에서 다시 오릅니다.')+'</p><div class="actions"><button id="r103Retry" class="primary">이 단계 다시 시작</button><button id="r103Home">쉼터로 돌아가기</button></div>');button('r103Retry',()=>{player.hp=maxHP();closePanel(true);go(x.ep,x.stage,{zone:x.zone});});button('r103Home',()=>{player.hp=maxHP();closePanel(true);leave();});};
   const saveBase=serializeSave;serializeSave=function(...a){const d=saveBase.apply(this,a);try{d.samongR103=JSON.parse(JSON.stringify(S));if(S.active&&stageRoom){// The native save sees the host room it would restore; the stage restarts from its own field.
     const k='DREAM:'+stageRoom.id;if(d.rooms&&world[k]===undefined)delete d.rooms[k];}if(S.flashSaved!==null&&d.settings)d.settings.flashlight58=S.flashSaved;}catch(e){fail(e);}return d;};
   const restoreBase=restoreSave;restoreSave=async function(raw,...a){const prior=S,priorRoom=stageRoom;S=clean(raw?.samongR103);const resume=S.active;S.active=false;stageRoom=null;layouts.clear();try{const r=await restoreBase.call(this,raw,...a);if(r===false){S=prior;stageRoom=priorRoom;return r;}resumeNote={at:'restored',resume,layer};if(resume&&layer==='DREAM')resumeStage();return r;}catch(e){S=prior;stageRoom=priorRoom;throw e;}};
@@ -349,8 +397,10 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  function unlocked(){return window.__STORYWORLD_STORY_PROFILE_R54__?.dreamUnlocked?.()===true||!!window.__STORYWORLD_CHEAT777__?.active?.();}
  function dreamButtons(){const box=document.querySelector('#panel .actions');if(!box||document.getElementById('r103Enter'))return;const b=document.createElement('button');b.id='r103Enter';b.textContent=S.started&&!S.done?'사몽 에피소드 이어가기 · '+EP[S.ep].title:'사몽 에피소드 시작 · 주인 없는 자장가';b.disabled=!unlocked()||!solo();box.appendChild(b);b.onclick=()=>{closePanel(true);start();};const r=document.createElement('button');r.id='r103Records';r.textContent='사몽 기록장';r.disabled=!S.started;box.appendChild(r);r.onclick=()=>showRecords();}
  function menuButton(){const box=document.querySelector('#panel .actions');if(!box||!started||storyScene||document.getElementById('r103Menu'))return;if(!unlocked())return;const b=document.createElement('button');b.id='r103Menu';b.textContent='사몽 에피소드';box.appendChild(b);b.onclick=()=>{closePanel(true);start();};}
- async function start(){if(!unlocked()){toast('STORY 마지막 기억을 마치면 사몽 에피소드가 열립니다.',4);return false;}if(!solo()){toast('사몽 에피소드는 혼자 진행합니다.',3);return false;}if(S.done){S=fresh();}return go(S.ep,S.ep===0?'ascent':S.stage);}
+ async function start(){if(!unlocked()){toast('STORY 마지막 기억을 마치면 사몽 에피소드가 열립니다.',4);return false;}if(!solo()){toast('사몽 에피소드는 혼자 진행합니다.',3);return false;}if(S.done){S=fresh();}if(S.zone&&zoneOf(S.zone))return go(S.ep,null,{zone:S.zone});if(zonesOf(S.ep))return go(S.ep,S.stage);return go(S.ep,S.ep===0?'ascent':S.stage);}
  function hud(){const x=room.samongR103,ep=EP[x.ep],q=id=>document.getElementById(id);const set=(id,t)=>{const el=q(id);if(el)el.textContent=t;};
+  const z=zoneOf(x.zone);if(z){const h=ZN().hudText(room,z);set('questTitle','사몽 · '+ep.title);set('regionName',z.title);set('regionSub',ep.chapter+' · '+h.sub);set('questText',h.text);set('questDestination',h.dest);set('questUnlock',h.unlock);set('hint',h.text);
+   const badge=q('mobileMapR74'),bt='사몽 · '+h.badge;if(badge&&badge.textContent!==bt){badge.textContent=bt;badge.title=bt;}set('questInlineSummary',h.text+' · '+h.dest);return;}
   set('questTitle','사몽 · '+ep.title);set('regionName',ep.title);set('regionSub',ep.chapter+' · '+(x.stage==='survival'?'생존':x.stage==='maze'?'손전등 미로':'상승'));
   if(x.stage==='survival'){set('questText',x.portal?'문이 열렸습니다. 가운데의 문에서 E':'누적 처치 '+S.kills+' / '+GOAL+' · 동시 출현은 제한됩니다.');set('questDestination','생존전 · '+(ep.mobName||''));set('questUnlock',S.kills>=GOAL?'목표 달성 · 새 적이 나오지 않습니다':'666 누적 처치 후 미로의 문');}
   else if(x.stage==='maze'){set('questText','손전등이 비추는 쪽으로 출구를 찾으세요. 적은 계속 나타납니다.');set('questDestination','미로 · '+(ep.maze||''));set('questUnlock','출구에 닿으면 상승 구간으로 · 등불에서 저장');}
@@ -358,7 +408,7 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
   set('hint',x.stage==='survival'?(x.portal?'가운데의 문 · E':'누적 '+S.kills+' / '+GOAL):x.stage==='maze'?'손전등은 움직이는 쪽을 비춥니다 · 등불에서 저장':(x.portal?'문 · E':'위쪽으로'));
   const badge=q('mobileMapR74'),bt='사몽 · '+ep.title+' · '+(x.stage==='survival'?'생존':x.stage==='maze'?'미로':'상승');if(badge&&badge.textContent!==bt){badge.textContent=bt;badge.title=bt;}
   set('questInlineSummary',(q('questText')?.textContent||'')+' · '+(q('questDestination')?.textContent||''));}
- function inspect(){const r=here()?room:null,x=r?.samongR103;return{revision:REV,resumeNote,state:JSON.parse(JSON.stringify(S)),zone,layer,here:!!r,stage:x?.stage,ep:x?.ep,alive:r?r.enemies.filter(living).length:0,portal:x?.portal||null,bossUp:!!x?.bossUp,boss:x?.boss||null,failures,lastError,donorFail:[...donorFail],layout:r?{bounds:r.exploration.bounds,walls:r.exploration.walls.length,floor:r.exploration.floorCells.length,extra:r.exploration.samongR103}:null};}
+ function inspect(){const r=here()?room:null,x=r?.samongR103;return{revision:REV,resumeNote,state:JSON.parse(JSON.stringify(S)),zone,layer,here:!!r,stage:x?.stage,ep:x?.ep,samongZone:x?.zone||null,alive:r?r.enemies.filter(living).length:0,portal:x?.portal||null,bossUp:!!x?.bossUp,boss:x?.boss||null,failures,lastError,donorFail:[...donorFail],layout:r?{bounds:r.exploration.bounds,walls:r.exploration.walls.length,floor:r.exploration.floorCells.length,extra:r.exploration.samongR103}:null};}
  // Test hooks: jump to a stage, add kills (counted through the same kill path), reach a point.
  const test={go:(ep,stage)=>go(ep,stage),kill:(n=1)=>{let k=0;for(const e of [...room.enemies])if(k<n&&living(e)&&e.samongSurvival){e.hp=1;hitEnemy(e,9e9);k++;}return k;},setKills:n=>{S.kills=Math.max(0,Math.min(GOAL,n));},teleport:(x,y)=>{player.x=x;player.y=y;cam={x,y};},near:kind=>room.props.find(p=>p.samongR103===kind),route:()=>{const g=navGoal();return g?routeTo(g):[];}};
  // Compass and 길잡이 point at the stage goal instead of the host region's objective.
@@ -366,11 +416,13 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
  function routeTo(g){let r=[];try{r=findPath(player,g)||[];}catch{}if(r.length)return r;const cx=Math.floor(player.x),cy=Math.floor(player.y);let best=null;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const q={x:cx+dx+.5,y:cy+dy+.5};if(blocked(q.x,q.y,.29,room)||!clearPath3(player,q,.2,room))continue;const d=Math.hypot(q.x-player.x,q.y-player.y);if(!best||d<best.d)best={q,d};}if(!best)return[];let rest=[];try{rest=findPath(best.q,g)||[];}catch{}return rest.length||Math.hypot(best.q.x-g.x,best.q.y-g.y)<1.2?[best.q,...rest]:[];}
  function navGoal(){if(!here())return null;const x=room.samongR103,L=room.exploration.samongR103,pt=(p,label,kind)=>p&&Number.isFinite(p.x+p.y)?{x:p.x,y:p.y,label,kind}:null;
   if(x.portal)return pt(x.portal,x.portal.label||'문','exit');
+  const z=zoneOf(x.zone);if(z){const g=ZN().navGoal(room,z);if(g)return g;if(x.stage==='explore')return pt(L.exit,z.title+' · 출구','objective');
+   if(x.stage==='survival'){if(z.goal?.reach&&S.kills>=(z.goal.kills||0))return pt(L.exit,z.title+' · 끝의 문','objective');let best=null,d=1e9;for(const e of room.enemies)if(living(e)){const k=Math.hypot(e.x-player.x,e.y-player.y);if(k<d){d=k;best=e;}}return best?pt(best,'처치 '+S.kills+'/'+(z.goal?.kills||0),'enemy'):pt(L.exit,z.title,'objective');}}
   if(x.stage==='survival'){let best=null,d=1e9;for(const e of room.enemies)if(living(e)){const k=Math.hypot(e.x-player.x,e.y-player.y);if(k<d){d=k;best=e;}}return best?pt(best,'누적 처치 '+S.kills+'/'+GOAL,'enemy'):pt(L.centre,'생존전','objective');}
   if(x.stage==='maze')return pt(L.exit,'미로 출구','objective');
-  const b=room.enemies.find(e=>e.id===x.boss);return x.bossUp&&b&&b.hp>0?pt(b,epOf(x).boss.name,'boss'):pt(L.dais,'위쪽의 보스','objective');}
+  const b=room.enemies.find(e=>e.id===x.boss),bn=(z?.boss||epOf(x).boss).name;return x.bossUp&&b&&b.hp>0?pt(b,bn,'boss'):pt(L.dais,z?.solve?'위쪽의 '+bn:'위쪽의 보스','objective');}
  const epOf=x=>EP[x.ep];
  window.__STORYWORLD_NAV_GOAL_R103__=navGoal;
  try{install();}catch(e){fail(e);}
- window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&room.samongR103.stage==='maze';}});
+ window.__STORYWORLD_SAMONG_R103__=Object.freeze({revision:REV,GOAL,episodes:EP,stages:STAGES,here,start,go,next,showRecords,ending,inspect,test,layoutFor,mazeLayout,state:()=>S,get flashlightActive(){return here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark);},goZone:id=>{const i=epOfZone(id);return i<0?Promise.resolve(false):go(i,null,{zone:id});},zones:()=>({current:here()?room.samongR103.zone:null,state:{zone:S.zone,done:[...S.zoneDone],read:S.zoneRead.length}})});
 })();
