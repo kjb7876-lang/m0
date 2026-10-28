@@ -244,7 +244,7 @@ function onHeroHit(e,heroId){const last=lastHitFx.get(e);if(last!==undefined&&ti
  const F=fxOf(heroId),t=tierOf(player),boss=!!(e.boss||e.midboss),h=actorHeight();
  let x=e.x,y=e.y;const imp=effects.findLast?.(f=>f.type==='e568HeroImpact'&&f.age===0&&f.targetIdE568===String(e.id));if(imp){x=imp.x;y=imp.y;}
  const ang=Math.atan2(e.y-player.y,e.x-player.x),sa=screenAngle(ang),strength=(1.12+.06*t)*(boss?1.2:1);
- add({kind:'heroHit',x,y,lift:bodyLift(e),F,sa,size:h*(boss?1.45:1.05)*strength,life:.34+.12*(strength-1),seed:Math.random()*6,heavy:t>=1,tier:t});
+ add({kind:'heroHit',x,y,lift:bodyLift(e),tgt:e,F,sa,size:h*(boss?1.45:1.05)*strength,life:.34+.12*(strength-1),seed:Math.random()*6,heavy:t>=1,tier:t});
  flinch.set(e,{at:time,dx:Math.cos(sa),dy:Math.sin(sa),k:boss?.35:1});
  if(!reduced()&&typeof shake==='number'){const want=.3+.035*t;if(want>shake)shake=want;}
  stats.hits++;}
@@ -268,7 +268,8 @@ if(R48&&typeof R48.applyBodyPose==='function'){const poseBase=R48.applyBodyPose;
 
 // ---- drawing of own effects ---------------------------------------------------------
 // R111: 적중 섬광도 7단계 — 성장 전(0단계)엔 작은 불티만, 단계가 오를수록 커지고 진해진다(흰 섬광이 화면을 덮지 않게).
-function drawHeroHit(e,t){const q=project(e.x,e.y),y=q.y-e.lift,F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7));
+function drawHeroHit(e,t){let q=project(e.x,e.y),y=q.y-e.lift;const vc115=e.tgt&&window.__STORYWORLD_PLAY_R115__?.centreOf?.(e.tgt);if(vc115){q={x:vc115.cx,y:q.y};y=vc115.cy;}// R115: 그림의 실제 중심
+ const F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7));
  if(T>=1)sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:(.35+.05*clamp(T,0,7))*fadeOut(t),glow:(.08+.03*clamp(T,0,7))*ease});
  if(T>=4&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
  if(e.heavy)sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});

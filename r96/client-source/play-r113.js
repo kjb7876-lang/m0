@@ -62,12 +62,12 @@ function enemyFace(e){const du=(player.x-player.y)-(e.x-e.y);let s=enemySide.get
  if(Math.abs(du)<.45)return s.dir;
  if(want!==s.dir){if(s.pend!==want){s.pend=want;s.since=t;}if(t-s.since>=.22||e.attack&&!s.attackSeen){s.dir=want;s.pend=null;}}else s.pend=null;
  s.attackSeen=!!e.attack;return s.dir;}
-const inFight=e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<10;
+const inFight=e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<(major(e)?22:10);// R115: 넓어진 보스방에서도 보스는 영웅을 본다
 const hero={dir:null,pend:null,since:0,fightAt:-99};
 function heroFace(){const t=now();const swinging=finite(player.attackAnim)>0||finite(player.skillAnim)>0||(typeof keys!=='undefined'&&keys.has?.('attack'));
  // R114: 공격 중이면 가장 가까운 적이 아니라 지금 노리는 적(target)을 본다(옆의 다른 몹을 보면서 반대쪽을 쏘던 문제).
  const aimed=typeof target!=='undefined'&&target!=null?(room?.enemies||[]).find(e=>e&&e.id===target&&liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<11):null;
- const foe=aimed||nearestFoe(9);if(!foe)return null;if(swinging||(typeof auto!=='undefined'&&auto)||dancing())hero.fightAt=t;
+ const foe=aimed||nearestFoe(9)||(room?.enemies||[]).find(e=>major(e)&&liveFoe(e)&&room.engaged!==false&&Math.hypot(e.x-player.x,e.y-player.y)<18)||null;if(!foe)return null;if(swinging||(typeof auto!=='undefined'&&auto)||dancing())hero.fightAt=t;
  // R114: 적이 6칸 안에 있으면 이동 중에도 머리·눈(몸 방향)이 적을 향한다(사용자 요청 2026-10-28 05:34).
  if(t-hero.fightAt>1.4&&Math.hypot(foe.x-player.x,foe.y-player.y)>6)return null;
  if(typeof facing!=='function')return null;const want=facing(foe.x-player.x,foe.y-player.y);
@@ -158,15 +158,19 @@ function wallSpot(owner,bh,dpr){const id=String(owner.id||'');if(spots.has(id))r
 function groundScope(rec,owner,start){const cmds=rec.commands;if(!cmds||cmds.length<=start)return;let body=null,bh=0;
  for(let i=start;i<cmds.length;i++){const c=cmds[i];if(c.kind!=='image'||c.owner?.id!==owner.id||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;body=c;}}
  if(!body||bh<6||Math.abs(body.points[1][1]-body.points[0][1])>1||FIXED_ID.test(String(owner.id||'')))return;
- const p=propById(owner.id),dpr=rec.dpr||1;let shift=0,mx=0,my=0;
+ const p=propById(owner.id),dpr=rec.dpr||1;let shift=0,mx=0,my=0,sink=null;
  if(prefs.ground){const sp=wallSpot(owner,bh,dpr);if(sp){const a=project(owner.x,owner.y),b=project(sp.x,sp.y),pa=rec.point(a.x,a.y),pb=rec.point(b.x,b.y);mx=pb[0]-pa[0];my=pb[1]-pa[1];}}
  const fp=prefs.ground?footprintOf(body.image,body.sourceRect,p?.r99Tree?'r99tree:'+p.r99Tree.kind:null):null;let foot=null;// R114: 흔들리는 나무 12장은 같은 밑동을 쓴다
  if(fp){const q=project(owner.x,owner.y),lift=p?clamp(finite(p.visualLiftPx),0,bh/dpr*.7):0,gy=rec.point(q.x,q.y-lift)[1],P=body.points,vis=P[0][1]+(P[3][1]-P[0][1])*fp.f,d=gy-vis;
   if(d>.5&&d<bh*.4){shift=d;stats.grounded++;stats.groundPx+=d/dpr;}
-  foot={x:P[0][0]+(P[1][0]-P[0][0])*fp.cx+mx,y:vis+shift+my,w:Math.abs(P[1][0]-P[0][0])*fp.w};}
+  foot={x:P[0][0]+(P[1][0]-P[0][0])*fp.cx+mx,y:vis+shift+my,w:Math.abs(P[1][0]-P[0][0])*fp.w};
+  // R115: 밑동을 땅에 조금 묻는다 — 그림을 아래로 내리고 땅선 아래는 잘라 낸다(조형물·나무).
+  let k115=0;try{k115=finite(window.__STORYWORLD_PLAY_R115__?.sinkOf?.(owner,p),0);}catch(_){}
+  if(k115>0){const s=(vis-P[0][1])*k115,H=P[3][1]-P[0][1];if(s>.5&&H>4){const keep=(vis-P[0][1]-s)/H;if(keep>.3&&keep<1)sink={s,keep,ground:vis+shift};stats.sunk=(stats.sunk||0)+1;}}}
  const w=wob.get(owner.id);let dx=0;if(w){const age=now()-w.t;if(age>.9)wob.delete(owner.id);else dx=Math.sin(age*34+w.seed)*w.amp*3.2*dpr*Math.exp(-age*4.5);}
  for(let i=start;i<cmds.length;i++){const c=cmds[i];if(c.owner?.id!==owner.id)continue;
-  if(c.kind==='image'&&c.points){const isBody=c.image===body.image;if(!isBody&&!mx&&!my)continue;for(let k=0;k<c.points.length;k++){const top=k<2,wx=isBody?(top?dx:dx*.15):0;c.points[k]=[c.points[k][0]+wx+mx,c.points[k][1]+(isBody?shift:0)+my];}}
+  if(c.kind==='image'&&c.points){const isBody=c.image===body.image;if(!isBody&&!mx&&!my)continue;for(let k=0;k<c.points.length;k++){const top=k<2,wx=isBody?(top?dx:dx*.15):0;c.points[k]=[c.points[k][0]+wx+mx,(isBody&&sink&&c===body&&!top?sink.ground:c.points[k][1]+(isBody?shift+(sink&&c===body?sink.s:0):0))+my];}
+   if(sink&&c===body&&Array.isArray(c.sourceRect)){const r=c.sourceRect;c.sourceRect=[r[0],r[1],r[2],r[3]*sink.keep];}}
   else if(c.kind==='fill'&&Array.isArray(c.paths)&&foot)shadowTo(c,foot);}}
 // 그림자 타원을 그림의 실제 밑동 가운데로 옮기고, 너비를 밑동 너비에 맞춘다(원래 너비의 0.55~1.25배).
 function shadowTo(c,foot){if(Array.isArray(c.r114Anchor)){shadowAnchored(c,foot);return;}let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const path of c.paths)for(const q of path.points||[]){if(q[0]<x0)x0=q[0];if(q[0]>x1)x1=q[0];if(q[1]<y0)y0=q[1];if(q[1]>y1)y1=q[1];}

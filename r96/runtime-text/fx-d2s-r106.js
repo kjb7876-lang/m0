@@ -67,7 +67,7 @@ function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?
 // ---- drawing helpers ----------------------------------------------------------------------------------
 function S(name,F,x,y,w,h,o){const s=SP();if(!s)return false;const ok=s.draw(name,F,x,y,w,h,o);if(ok)stats.draws++;else stats.skipped++;return ok;}
 function A(name,F,x0,y0,x1,y1,th,o){const s=SP();return!!s&&s.along(name,F,x0,y0,x1,y1,th,o);}
-const P=(x,y,z=0)=>{const q=project(x,y);return{x:q.x,y:q.y-z};};
+const P=(x,y,z=0)=>{if(z>0){const v=window.__STORYWORLD_PLAY_R115__?.place?.(x,y,z);if(v)return v;}const q=project(x,y);return{x:q.x,y:q.y-z};};// R115: 적 발밑을 겨눈 점은 그 적 그림의 실제 높이에 맞춘다
 const pb=F=>SP()?.pal?.(F.b)||F;
 
 const DRAW={

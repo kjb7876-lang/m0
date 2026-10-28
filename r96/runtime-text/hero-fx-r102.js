@@ -336,7 +336,7 @@ function patRain(x,y,R,F,u,seed,n,fade){const a=fade*Math.sin(Math.PI*clamp(u,0,
  streak(px+R*.05,py-R*.14,px,py,R*.008,rgba(i%3?F.a:F.b,.8*a));if(ph>.86)disc(px,py+R*.02,R*.025,rgba(F.b,.6*a));}
  ctx.fillStyle=rgba(F.a,.07*a);ctx.beginPath();ctx.ellipse(x,y,R,R*.5,0,0,TAU);ctx.fill();}
 const PATTERNS={sides:patSides,ground:patGround,sky:patSky,rain:patRain};
-function drawCast(e,u){const q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHeight(),F=e.F,t=e.tier,fade=u<.7?1:1-(u-.7)/.3;
+function drawCast(e,u){let q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHeight(),F=e.F,t=e.tier,fade=u<.7?1:1-(u-.7)/.3;
  let sa=Math.atan2(qt.y-q.y,qt.x-q.x);if(Math.hypot(qt.x-q.x,qt.y-q.y)<2)sa=screenAngle(e.angle);
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';ctx.lineJoin='round';
  // tier 0: one thin ring in the primary colour; from tier 1 a double ring (primary + secondary)
@@ -344,7 +344,9 @@ function drawCast(e,u){const q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHei
  else{const r=h*(.3+.8*smooth(u));ring(q.x,q.y,r,r*.5,rgba(F.a,.5*(1-u)),1.5*Z());}
  if(t>=2&&u<.6)sig('gather',F.sig,q.x,q.y-h*.45,u/.6,h*(1.1+.15*t),{alpha:.75*(1-u/.6)});
  // R106: D2 Survivors식 연출(fx-d2s-r106.js)이 켜져 있으면 여기서는 발밑 고리만 그린다.
- if(window.__STORYWORLD_D2S_R106__?.on?.())return;
+ // R115: 사용자 요청("하나만 적용하지 말고 상황 따라 병용") — D2S 연출이 켜져 있어도, 적이 몰린 곳·높은 단계·번갈아 고른 시전에서는
+ //       처음 쓰던 바닥이 변하는 연출(땅 가시·사방·하늘·비)을 함께 그린다. 겹칠 때는 조금 옅게.
+ if(window.__STORYWORLD_D2S_R106__?.on?.()){if(e.r115Mix==null){let n=0;try{for(const f of room.enemies||[])if(f.hp>0&&Math.hypot(f.x-e.tx,f.y-e.ty)<5)n++;}catch(_){}e.r115Mix=!lowFx()&&(n>=3||t>=5||((e.seed*1000)|0)%3===0);}if(!e.r115Mix)return;fade*=.78;}
  STYLES[e.style]?.(e,u,q,qt,h,F,t,sa,fade);
  // 3 사방 → 4 땅 → 5 하늘 → 6 비 → 7 네 가지를 한꺼번에, 더 크게.
  if(t>=3){const lo=lowFx(),R=h*(1.3+.12*t)*(t>=7?1.25:1),cx=qt.x,cy=qt.y,k=lo?.5:1;
