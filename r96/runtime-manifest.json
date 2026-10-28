@@ -7733,6 +7733,51 @@
       "sha256": "7d69951644a679d794cd88f719623ac8de33788004dfbd263f5367b836d28a87"
     },
     {
+      "path": "assets/r108/heroes/gunner.webp",
+      "bytes": 45102,
+      "sha256": "ab9cd5d08f48799e1dcc1e2df34daf381c43ce55c7a06d7b6fe1ba186ee1b871"
+    },
+    {
+      "path": "assets/r108/heroes/hunter.webp",
+      "bytes": 33590,
+      "sha256": "c046def048ee4139b3afc1e8c51361b40417b1ea42548393e6a4b14dcc85d25e"
+    },
+    {
+      "path": "assets/r108/heroes/hwando.webp",
+      "bytes": 36820,
+      "sha256": "93ab0a0749c1a1ed28492d47a02113d7bd3a0ddeec625a3ffb5d3117d7b0f62f"
+    },
+    {
+      "path": "assets/r108/heroes/lauren.webp",
+      "bytes": 41616,
+      "sha256": "fcddb9a5b7d57d153ce791de93decc84506d3d9d1cb9e02e1ba2eec965ce58ba"
+    },
+    {
+      "path": "assets/r108/heroes/meta.json",
+      "bytes": 1142,
+      "sha256": "93c22d78b9c1c5d47da8f291c72dbd1efd014c00346bdca866f75e9e5f14da89"
+    },
+    {
+      "path": "assets/r108/heroes/michaela.webp",
+      "bytes": 37210,
+      "sha256": "2b5f1485cfb8353cd374185629c1749509cd40ddb246562566688108c18c23b2"
+    },
+    {
+      "path": "assets/r108/heroes/neon.webp",
+      "bytes": 35218,
+      "sha256": "8bf756d8d806430454e94f1dd5e7f3c9b9203465445cd74d46b09dfe11bad88c"
+    },
+    {
+      "path": "assets/r108/heroes/seoha.webp",
+      "bytes": 45254,
+      "sha256": "3a293d6f6f07f759fd2cf7728519725f89eae82a95721ed6ca94f9d47c5d8bbe"
+    },
+    {
+      "path": "assets/r108/heroes/slayer.webp",
+      "bytes": 49086,
+      "sha256": "a65f9fa7ef9bfee4e2c5a56d4703e5a1ded5725ee158b85d42c64b5d691d675e"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -15528,6 +15573,11 @@
       "sha256": "c569752920e7bb4f5f77b1575a670528777cf2ab66a129f2244f16ae618da330"
     },
     {
+      "path": "audio-r108.js",
+      "bytes": 5979,
+      "sha256": "445c10c2d4a2b751ec34f0362585b6d6e6092ef3a12720fc7b9654bea63dda4b"
+    },
+    {
       "path": "audio-r98.js",
       "bytes": 1451,
       "sha256": "9da92b454577141431d9c2999e4677a5ae4171b878228f906fe994f3b59d4192"
@@ -16303,6 +16353,11 @@
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
     },
     {
+      "path": "heroes-r108.js",
+      "bytes": 4386,
+      "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
+    },
+    {
       "path": "hospital-direct-test.js",
       "bytes": 3848,
       "sha256": "d1d97fa5d17fa4ef550a97a33bb05d10bd3f541672a60ec748173a6c9adc9452"
@@ -16339,8 +16394,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562065,
-      "sha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b"
+      "bytes": 6562188,
+      "sha256": "d9fc380d28fb3fed2837d5a20efa21d6f1f7dcc9e7d6858199e1d7ef05fac775"
+    },
+    {
+      "path": "mobs-tune-r108.js",
+      "bytes": 8836,
+      "sha256": "55fe16363e3e4d744cc6b0ef1bba9933b6c140443ebf2d385d8eb736ca509cd4"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -16568,9 +16628,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3313,
-  "totalBytes": 733401069,
-  "webHTMLSha256": "da86c36043d0f331425776dd4217e3463f088cb8e108ab15379ca2f5a157c49b",
+  "fileCount": 3325,
+  "totalBytes": 733745431,
+  "webHTMLSha256": "d9fc380d28fb3fed2837d5a20efa21d6f1f7dcc9e7d6858199e1d7ef05fac775",
   "largest": [
     {
       "path": "index.html",

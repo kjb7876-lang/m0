@@ -1,9 +1,37 @@
 {
  "h": 512,
  "portraits": {
+  "gunner": {
+   "bytes": 45102,
+   "sha256": "ab9cd5d08f48799e1dcc1e2df34daf381c43ce55c7a06d7b6fe1ba186ee1b871"
+  },
+  "hunter": {
+   "bytes": 33590,
+   "sha256": "c046def048ee4139b3afc1e8c51361b40417b1ea42548393e6a4b14dcc85d25e"
+  },
   "hwando": {
    "bytes": 36820,
    "sha256": "93ab0a0749c1a1ed28492d47a02113d7bd3a0ddeec625a3ffb5d3117d7b0f62f"
+  },
+  "lauren": {
+   "bytes": 41616,
+   "sha256": "fcddb9a5b7d57d153ce791de93decc84506d3d9d1cb9e02e1ba2eec965ce58ba"
+  },
+  "michaela": {
+   "bytes": 37210,
+   "sha256": "2b5f1485cfb8353cd374185629c1749509cd40ddb246562566688108c18c23b2"
+  },
+  "neon": {
+   "bytes": 35218,
+   "sha256": "8bf756d8d806430454e94f1dd5e7f3c9b9203465445cd74d46b09dfe11bad88c"
+  },
+  "seoha": {
+   "bytes": 45254,
+   "sha256": "3a293d6f6f07f759fd2cf7728519725f89eae82a95721ed6ca94f9d47c5d8bbe"
+  },
+  "slayer": {
+   "bytes": 49086,
+   "sha256": "a65f9fa7ef9bfee4e2c5a56d4703e5a1ded5725ee158b85d42c64b5d691d675e"
   }
  },
  "source": "ChatGPT image generation 2026-10-27, reference = the hero illustration already shipped in assets/heroes",
