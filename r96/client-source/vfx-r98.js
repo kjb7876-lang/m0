@@ -180,7 +180,8 @@
   if(M&&p.burst)paint(p.burst,c.x,c.y,{t:k,key:e,scale:scale*.9,alpha:.85,lift:1});
   if(!a)glow(c.x,c.y,actorHeight()*.3,(30+60*k)*zoom,e.th,1-k);
   const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale,1);}}
- function drawSparkAir(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
+ function drawSparkAir(e,t){const vc=e.target&&window.__STORYWORLD_PLAY_R115__?.centreOf?.(e.target);if(vc&&typeof ctx?.translate==='function'){const q=project(e.x,e.y);ctx.save();try{ctx.translate(vc.cx-q.x,vc.cy-(q.y-actorHeight()*.5));return drawSpark0(e,t);}finally{ctx.restore();}}return drawSpark0(e,t);}
+ function drawSpark0(e,t){const k=clamp(t,0,1);if(!paint(PAINT.hero.hit,e.x,e.y,{t:k,key:e,scale:.95,alpha:.95}))glow(e.x,e.y,actorHeight()*.5,(10+16*k)*zoom,e.th,1-k);}
 
  function drawRootInAir(e,t){paint('F091',player.x,player.y,{t:clamp(t,0,1),key:e,scale:1.25,alpha:.9});}
  function drawRootOutAir(e,t){paint('F110',e.x,e.y,{t:clamp(t,0,1),key:e,scale:1.35,alpha:1});}

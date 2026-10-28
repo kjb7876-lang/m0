@@ -2540,7 +2540,10 @@
     "palette-r114-data.js",
     "weapons-r114-data.js",
     "combat-r114.js",
-    "cinema-r114.js"
+    "cinema-r114.js",
+    "samong-zones-r115.js",
+    "samong-zones-r115-data.js",
+    "play-r115.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3615,5 +3618,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "94b4840c485b04d3a18f0a4c264faca5a1217e3e9e177240a3b202bfd18ff4f1"
+  "runtimeManifestSHA256": "ba56aa84337a9588947105bb8bafa0c307b94e26d4a2a6987cd0f114e94120dd"
 }

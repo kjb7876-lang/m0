@@ -18,7 +18,8 @@ check('goal is 666',SM.GOAL===666);
 const need=['prelude','threshold','S-01','S-02','S-03','S-04','S-05','NS-01','NS-10','S-07','M1','M2','M3','epilogue','record'];
 check('narrative sections present',need.every(k=>TX.sections[k]?.blocks?.length),need.filter(k=>!TX.sections[k]).join(','));
 const rec=TX.sections.record?.blocks?.[0]?.paras||[];
-check('record is the two original lines',rec.length===2&&rec[0]==='환자는 아직도 나를 딸로 여기는 것 같다.'&&rec[1]==='아직 치료가 더 필요하다.');
+// R115: 진료기록은 총집본의 경과기록(25문단) 원문 그대로다.
+check('record is the original clinical note',rec.length===25&&rec[0]==='정신건강의학과 경과기록'&&rec[24]==='해당 믿음에 대한 병식 제한적. 경과 관찰 및 치료 지속 필요.');
 for(const ep of SM.episodes)check('episode text keys exist · '+ep.key,ep.text.every(k=>TX.sections[k]),ep.text.filter(k=>!TX.sections[k]).join(','));
 // ---- maze ----
 function bfs(L,from,to){const key=(x,y)=>x+':'+y,cells=new Set(L.floorCells.map(([x,y])=>key(x,y)));const s=key(Math.floor(from.x),Math.floor(from.y)),t=key(Math.floor(to.x),Math.floor(to.y));if(!cells.has(s)||!cells.has(t))return -1;

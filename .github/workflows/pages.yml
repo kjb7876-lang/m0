@@ -77,6 +77,10 @@ jobs:
         run: node r96/qa/r113/play-cpu-check.cjs
       - name: R114 combat and cinema CPU check
         run: node r96/qa/r114/combat-cpu-check.cjs
+      - name: R115 samong zones CPU check (108 zones, text coverage, layouts, save migration)
+        run: node r96/qa/r115/zones-cpu-check.cjs
+      - name: R115 play CPU check (hit centre, boss aim, assist, spacing, props, light, 사몽선, skill book)
+        run: node r96/qa/r115/play-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
