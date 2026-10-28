@@ -12,7 +12,7 @@ sb.window=sb;vm.createContext(sb);
 for(const f of ['samong-text-r103.js','samong-zones-r115-data.js','samong-zones-r115.js','samong-r103.js'])vm.runInContext(fs.readFileSync(path.join(SRC,f),'utf8'),sb,{filename:f});
 const SM=sb.__STORYWORLD_SAMONG_R103__,Z=sb.__STORYWORLD_SAMONG_ZONES_R115__,TX=sb.__STORYWORLD_SAMONG_TEXT_R103__;
 check('modules load',SM&&Z&&TX);
-check('text is the 총집본',TX.sha256==='4db94112c8b2e8852e5cb988ac79686e57021328eb9364635a2d96af8f15b623');
+check('text is the R116 문체·맞춤법 개선본',TX.sha256==='ccb0bd26d2e16eb5586171ba0e197a5d0aaf76986a56f15a705f29305b6870ef');
 const chapters=Object.entries(Z.chapters);
 check('S-02 pilot has 8 zones',Z.chapter('S-02')?.length===8);
 check('108 zones over 사몽·역행·엔딩 (설계안 표)',chapters.reduce((n,[,l])=>n+l.length,0)===108&&SM.episodes.every(e=>Z.chapter(e.key)?.length),chapters.map(([k,l])=>k+':'+l.length).join(' '));
@@ -65,9 +65,10 @@ for(const[k,l]of chapters){const ei=SM.episodes.findIndex(e=>e.key===k);for(cons
  if(x.patrol){const bad=[];for(const r of x.patrol)for(let i=0;i<r.length;i++){const a=r[i],b=r[(i+1)%r.length],n=Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/.5);for(let t=0;t<=n;t++){const p={x:a.x+(b.x-a.x)*t/n,y:a.y+(b.y-a.y)*t/n};if(!on(p)){bad.push(p.x+','+p.y);break;}}}check(z.id+' patrol routes stay on the floor',!bad.length,bad.join(' '));}
  if(z.kind==='confront')check(z.id+' dais inside the native 30-grid (boss volleys clamp to 3..27)',x.dais&&x.dais.x>6&&x.dais.x<24&&x.dais.y>6&&x.dais.y<24);
  const hs=L.walls.filter(w=>!w.r115Jamb).map(w=>w.height),jam=L.walls.filter(w=>w.r115Jamb);
- check(z.id+' wall heights vary and indoor walls stand above the 2.7 door',new Set(hs).size>=4&&L.walls.filter(w=>!w.r115Jamb&&w.r115?.base>2).every(w=>w.height>=3),[...new Set(hs)].join(','));
+ check(z.id+' wall heights vary and indoor walls stand above the 2.2 door (R116 lower walls)',new Set(hs).size>=4&&L.walls.filter(w=>!w.r115Jamb&&w.r115?.base>2).every(w=>w.height>=2.5),[...new Set(hs)].join(','));
+ check(z.id+' backdrop terrain fills the ring around the floor and never covers a floor cell',L.backdropRects?.length>0&&!L.backdropRects.some(b=>L.floorCells.some(([x,y])=>y===b.y&&x>=b.x&&x<b.x+b.width)),String(L.backdropRects?.length));
  if(L.samongR115.doors)check(z.id+' doors have two jambs taller than the door (outdoor: none)',(z.outdoor?jam.length===0:jam.length===2*L.samongR115.doors)&&jam.every(w=>w.height>2.7));
- check(z.id+' size stays mobile-friendly (≤ 60×60, ≤ 1200 floor cells)',L.bounds[2]<=60&&L.bounds[3]<=60&&L.floorCells.length<=1200,L.bounds+' '+L.floorCells.length);}}
+ check(z.id+' size stays mobile-friendly (≤ 66×66 with the backdrop ring, ≤ 1400 floor cells)',L.bounds[2]<=66&&L.bounds[3]<=66&&L.floorCells.length<=1400,L.bounds+' '+L.floorCells.length);}}
 // ---- R103 흐름 ----
 const r103=fs.readFileSync(path.join(SRC,'samong-r103.js'),'utf8');
 check('save keeps zone fields and migrates old stages into the chapter zones',/s\.zone=typeof v\.zone==='string'/.test(r103)&&/ZN\(\)\.migrate\(EP\[s\.ep\]\.key,s\.stage\)/.test(r103)&&/zone:null,zoneDone:\[\],zoneRead:\[\],zoneSolve:\{\}/.test(r103));

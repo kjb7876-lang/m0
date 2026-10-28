@@ -114,6 +114,9 @@ def main():
     P=lambda s:[x for x in (s or '').split('\n\n') if x.strip()]
     zones=OrderedDict();report=[]
     for zid,z in st['zones'].items():
+        # R116: 문단 하나에 줄바꿈으로만 이어 둔 구역(예: 개선본 dist05)은 전투 전/후로 나눌 수 있게 줄 단위로 편다(문장은 그대로).
+        if sum(len(b['paras']) for b in z['blocks'])<2:
+            for b in z['blocks']: b['paras']=[x for p in b['paras'] for x in p.split('\n') if x.strip()]
         flat=[(bi,p) for bi,b in enumerate(z['blocks']) for p in b['paras']]
         cp=[p for _,p in flat]
         if zid=='ep1a09':
