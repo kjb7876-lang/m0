@@ -219,7 +219,7 @@
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(time<x.spawnAt||alive.filter(e=>!e.samongPatrolR115).length>=(zm?.mobCap??caps().maze))return;x.spawnAt=time+(zm?.mobEvery??4);
   const sites=r.exploration.nodes.filter(n=>{const d=Math.hypot(n.x-player.x,n.y-player.y);return d>8&&d<22&&Math.hypot(n.x-L.exit.x,n.y-L.exit.y)>4&&(!L.save||Math.hypot(n.x-L.save.x,n.y-L.save.y)>4);});
-  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const ml=zoneMobs(zm,ep),e=spawn(ml[S.serial%ml.length],s,{name:zm?.mobName||ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
+  for(let n=0;n<2&&sites.length;n++){const s=sites.splice(Math.floor(Math.random()*sites.length),1)[0];const ml=zoneMobs(zm,ep),e=spawn(zm?ml[S.serial%ml.length]:ep.mobs[S.serial%ep.mobs.length],s,{name:zm?.mobName||ep.mobName,hpScale:.6,tag:'z',aggro:9.5});if(e){e.damage=(e.damage||8)*.8;e.speed=(e.speed||1)*1.25;}}}
  function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103,z=zoneOf(x.zone),bd=z?.boss||ep.boss;
   if(z&&S.zoneDone.includes(z.id)){if(!x.portal)openPortal(r,L.dais,nextTitle(z));return;}
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
@@ -265,7 +265,7 @@
   S.ep=ep;S.stage=stage;S.started=true;const def=regionById[EP[ep].host];if(!def)return false;
   const extra=stagePaths(ep,stage,z?.id),oldPaths=def.paths;def.paths=[...new Set([...oldPaths,...extra])];
   const prev=stageRoom;stageRoom=buildRoom(ep,stage,z?.id);S.active=true;entering++;let ok=false;
-  const L=stageRoom.exploration,onFloor=q=>!!q&&Number.isFinite(q.x)&&Number.isFinite(q.y)&&L.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)),pick=[position,(stage==='maze'||z)&&S.checkpoint].find(onFloor),start=pick||L.entry;// R106: 맵 크기가 바뀐 예전 저장 위치는 바닥이 아니면 입구로.
+  const L=stageRoom.exploration,onFloor=q=>!!q&&Number.isFinite(q.x)&&Number.isFinite(q.y)&&L.floorCells.some(([cx,cy])=>cx===Math.floor(q.x)&&cy===Math.floor(q.y)),pick=[position,stage==='maze'&&S.checkpoint].find(onFloor)||(z&&onFloor(S.checkpoint)?S.checkpoint:null),start=pick||L.entry;// R106: 맵 크기가 바뀐 예전 저장 위치는 바닥이 아니면 입구로.
   try{ok=await enterRegion(def.id,null,{layer:'DREAM',position:{x:start.x,y:start.y},noStory:true,restore:true});}finally{entering--;def.paths=oldPaths;}
   if(!ok||room!==stageRoom){stageRoom=prev&&room===prev?prev:null;S.active=!!stageRoom;return false;}
   forceFlash(stage==='maze'||!!z?.dark);if(z)zoneIntro(z);else intro(EP[ep],stage);saveGame(false);return true;}
