@@ -8,7 +8,7 @@ const r92=JSON.parse(fs.readFileSync(path.join(RT,'assets/r92/mobs/index.json'),
 const r109=JSON.parse(fs.readFileSync(path.join(RT,'assets/r109/mobs/index.json'),'utf8'));
 const r116=JSON.parse(fs.readFileSync(path.join(RT,'assets/r116/mobs/index.json'),'utf8'));
 const pngSize=b=>[b.readUInt32BE(16),b.readUInt32BE(20)];
-check('40 Drive tracks (29 hit, 11 idle)',r116.tracks.length===40&&r116.tracks.filter(t=>t.track==='hit').length===29&&r116.tracks.filter(t=>t.track==='idle').length===11);
+check('41 Drive tracks (29 hit, 12 idle)',r116.tracks.length===41&&r116.tracks.filter(t=>t.track==='hit').length===29&&r116.tracks.filter(t=>t.track==='idle').length===12);
 let bad=[];for(const t of r116.tracks){const p=path.join(RT,t.path),b=fs.existsSync(p)?fs.readFileSync(p):null;
  if(!b||crypto.createHash('sha256').update(b).digest('hex')!==t.sha256)bad.push(t.group+t.track+':sha');
  else{const [w,h]=pngSize(b);if(w!==t.cell[0]*4||h!==t.cell[1]||t.frames!==4)bad.push(t.group+t.track+':size');}
@@ -30,7 +30,7 @@ const still={path:'still.png',assetFrame:{sourceRect:[0,0,10,10],pivot:[5,10]}};
 const mk=(id,o={})=>({id:'e'+id+Math.random(),nativeId:id,hp:10,x:3,y:0,profile:{frames:{idle:still,move:still,attack:still,windup:still}},combatProfile:{attackShape:{windup:.4,active:.2}},...o});
 const cellOf=f=>f.assetFrame.sourceRect[0]/(f.assetFrame.sourceRect[2]||1);
 (async()=>{sb.drawEnemy(mk('x'));await new Promise(r=>setTimeout(r,20));
- check('three indexes load',M.inspect().state==='ready'&&M.inspect().r116Tracks===40,JSON.stringify(M.inspect()));
+ check('three indexes load',M.inspect().state==='ready'&&M.inspect().r116Tracks===41,JSON.stringify(M.inspect()));
  for(const t of [...r109.tracks,...r116.tracks])imgs.add(t.path);for(const g of Object.values(r92.groups||{}))for(const t of Object.values(g.tracks||{}))if(t?.path)imgs.add(t.path);
  const tr=M.trackFor(mk('dist05-m1'));check('M003 mage keeps its move/attack and gains hit + idle',!!tr?.move&&!!tr?.attack&&tr.hit?.path.endsWith('M003-hit.png')&&tr.idle?.path.endsWith('M003-idle.png'),JSON.stringify(tr));
  // hit: four cells once across 0.36 s, then hold the last cell
