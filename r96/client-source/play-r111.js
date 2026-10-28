@@ -128,13 +128,15 @@ const PH=()=>window.StoryPhase1;
 const blockedAt=(L,x,y,s)=>{const a=PH();return typeof a?.explorationBlocked==='function'?a.explorationBlocked(L,x,y,s):false;};
 const SPECIAL=p=>!!(p.door||p.portal||p.interact||p.objective||p.chest||p.npc||p.locked||p.r103Chest||p.kind==='door'||p.kind==='portal'||p.kind==='chest');
 function wallNear(L,x,y,c,tall){if(blockedAt(L,x,y,c))return true;if(tall){for(const[dx,dy]of[[.9,.9],[.9,0],[0,.9]])if(blockedAt(L,x+dx,y+dy,.2))return true;}return false;}
-function spaceProps(r){if(!prefs.props||!r||r.r111Spaced||!Array.isArray(r.props)||!r.exploration?.floorCells?.length)return;const L=r.exploration;r.r111Spaced=true;
+const spaced=new WeakSet();
+function spaceProps(r){if(!prefs.props||!r||spaced.has(r)||!Array.isArray(r.props)||!r.exploration?.floorCells?.length)return;const L=r.exploration;spaced.add(r);
  const keepOut=[L.entry,r.objective].filter(q=>q&&Number.isFinite(q.x+q.y));
  for(const p of r.props){if(!p||p.solid!==false&&!p.r80PresentationOnly&&!p.r81PresentationOnly||SPECIAL(p)||!Number.isFinite(p.x+p.y))continue;stats.propsChecked++;
   const tall=finite(p.height,60)>=95,c=tall?.85:.65;if(!wallNear(L,p.x,p.y,c,tall))continue;let best=null;
   for(let d=.35;d<=2.1&&!best;d+=.35)for(let k=0;k<12;k++){const a=k*TAU/12+(hash(p.id||p.path)%12)*.05,x=p.x+Math.cos(a)*d,y=p.y+Math.sin(a)*d;
    if(wallNear(L,x,y,c,tall))continue;if(keepOut.some(q=>Math.hypot(q.x-x,q.y-y)<1.6))continue;if(r.props.some(o=>o!==p&&o&&Number.isFinite(o.x+o.y)&&Math.hypot(o.x-x,o.y-y)<.9))continue;best={x,y};break;}
-  if(best){p.r111From={x:p.x,y:p.y};p.x=best.x;p.y=best.y;stats.propsMoved++;}}}
+  // 원본 배치 자료(위치·충돌)는 그대로 두고, 그릴 때만 옮긴 자리를 쓴다(숨은 속성이라 저장·비교 자료에 안 섞인다).
+  if(best){try{Object.defineProperty(p,'r111To',{value:best,configurable:true});stats.propsMoved++;}catch(_){}}}}
 // 그림 밑동: 가운데 띠(가로 35%)에서 불투명 픽셀이 처음으로 충분히 모이는 가장 아래 줄. 뿌리·천 자락이 아래로 흘러도
 // 몸통이 땅에 닿는 높이를 찾는다. 한 그림당 한 번, 작은 CPU 캔버스로 잰다.
 const feet=new Map();let footBudget=0,footCanvas=null;
@@ -304,7 +306,8 @@ function install(){
   if(e&&e.type==='samongStormR75'&&samongOn()){let ok=false;try{ok=samongLine(e);}catch(err){fail(err);}if(ok)return;}
   if(prefs.threadArt&&e&&e.type==='threadSlashR63'&&e.threadR63&&SPR()){let mine=false;try{scope({id:'r111:thread-slash:'+(e.threadR63.seed??'')+':'+(e.threadR63.hitIndex??''),kind:'effect',x:e.x,y:e.y},()=>{ctx.save();try{mine=threadSlash(e);}finally{ctx.restore();}});}catch(err){fail(err);}
    if(mine)return withoutStrokes(()=>effectBase.call(this,e,...a));}return effectBase.call(this,e,...a);};
- if(typeof drawProp==='function'&&typeof sprite==='function'){const propBase=drawProp;drawProp=function(p,...a){if(!prefs.props||!p||typeof readyImage!=='function')return propBase.call(this,p,...a);
+ if(typeof drawProp==='function'&&typeof sprite==='function'){const propBase=drawProp;drawProp=function(p,...a){const to=prefs.props&&p?.r111To;if(!to)return propDraw.call(this,p,...a);const ox=p.x,oy=p.y;p.x=to.x;p.y=to.y;try{return propDraw.call(this,p,...a);}finally{p.x=ox;p.y=oy;}};
+   const propDraw=function(p,...a){if(!prefs.props||!p||typeof readyImage!=='function')return propBase.call(this,p,...a);
    const row=readyImage(p.path);if(!row)return propBase.call(this,p,...a);const f=footOf(p.path,row);if(!(f<.97))return propBase.call(this,p,...a);
    const shift=Math.min(.22,1-f)*finite(p.height,60)*Z(),spriteBase=sprite;
    sprite=function(path,x,y,...b){return spriteBase.call(this,path,x,path===p.path?y+shift:y,...b);};stats.footShifts++;
