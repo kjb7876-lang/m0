@@ -75,6 +75,8 @@ jobs:
         run: node r96/qa/r112/mobs-cpu-check.cjs
       - name: R113 play CPU check (ranged no blink, combat facing, prop grounding, thrown pops, physics, foot dust)
         run: node r96/qa/r113/play-cpu-check.cjs
+      - name: R114 combat and cinema CPU check
+        run: node r96/qa/r114/combat-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

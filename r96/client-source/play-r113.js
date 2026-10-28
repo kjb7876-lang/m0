@@ -65,7 +65,11 @@ function enemyFace(e){const du=(player.x-player.y)-(e.x-e.y);let s=enemySide.get
 const inFight=e=>liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<10;
 const hero={dir:null,pend:null,since:0,fightAt:-99};
 function heroFace(){const t=now();const swinging=finite(player.attackAnim)>0||finite(player.skillAnim)>0||(typeof keys!=='undefined'&&keys.has?.('attack'));
- const foe=nearestFoe(9);if(!foe)return null;if(swinging||(typeof auto!=='undefined'&&auto)||dancing())hero.fightAt=t;if(t-hero.fightAt>1.4)return null;
+ // R114: 공격 중이면 가장 가까운 적이 아니라 지금 노리는 적(target)을 본다(옆의 다른 몹을 보면서 반대쪽을 쏘던 문제).
+ const aimed=typeof target!=='undefined'&&target!=null?(room?.enemies||[]).find(e=>e&&e.id===target&&liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<11):null;
+ const foe=aimed||nearestFoe(9);if(!foe)return null;if(swinging||(typeof auto!=='undefined'&&auto)||dancing())hero.fightAt=t;
+ // R114: 적이 6칸 안에 있으면 이동 중에도 머리·눈(몸 방향)이 적을 향한다(사용자 요청 2026-10-28 05:34).
+ if(t-hero.fightAt>1.4&&Math.hypot(foe.x-player.x,foe.y-player.y)>6)return null;
  if(typeof facing!=='function')return null;const want=facing(foe.x-player.x,foe.y-player.y);
  if(!hero.dir||t-hero.since>3){hero.dir=want;hero.pend=null;hero.since=t;return want;}
  if(want!==hero.dir){if(hero.pend!==want){hero.pend=want;hero.since=t;}if(t-hero.since>=.22){hero.dir=want;hero.pend=null;hero.since=t;}}else{hero.pend=null;hero.since=t;}
@@ -121,14 +125,16 @@ const lastShot=new Map();
 function watchShots(){if(typeof projectiles==='undefined')return;const seen=new Set();
  for(const b of projectiles){if(!objectShot(b))continue;seen.add(b);
   if(!b.dead&&prefs.thrown&&b.age>.08&&blockedAt(b.x,b.y,.06)){b.dead=true;stats.wallStops++;}
-  if(b.dead&&!b.r113Popped){b.r113Popped=true;const big=b.r61Shot?.kind==='prop';popAt(b.x,b.y,big);stats.thrownPops++;}
+  if(b.dead&&!b.r113Popped){b.r113Popped=true;const big=b.r61Shot?.kind==='prop';popAt(b.x,b.y,big,b.r114Col||undefined);onPop(b,b.x,b.y);stats.thrownPops++;}
   else if(!b.dead)lastShot.set(b,{x:b.x,y:b.y,big:b.r61Shot?.kind==='prop'});}
- for(const [b,s] of lastShot)if(!seen.has(b)){lastShot.delete(b);if(!b.r113Popped&&prefs.thrown){b.r113Popped=true;popAt(s.x,s.y,s.big);stats.thrownPops++;}}}
+ for(const [b,s] of lastShot)if(!seen.has(b)){lastShot.delete(b);if(!b.r113Popped&&prefs.thrown){b.r113Popped=true;popAt(s.x,s.y,s.big,b.r114Col||undefined);onPop(b,s.x,s.y);stats.thrownPops++;}}}
+// R114: 던진 물체마다 주인 고유색(b.r114Col)으로 터지고, 큰 물체·무기는 b.r114OnPop으로 폭발을 더한다.
+function onPop(b,x,y){if(typeof b.r114OnPop==='function')try{b.r114OnPop(x,y);}catch(e){fail(e);}}
 
 // ---- ③ 조형물 접지(three 기록기) -------------------------------------------------------------------
 const bottoms=new Map();let scanBudget=0,scanCanvas=null;
 // 그림 발자국: 아래에서부터 불투명 픽셀이 충분한 첫 줄(f, 0~1)과 그 근처 줄들의 가로 범위(가운데 cx·너비 w, 0~1).
-function footprintOf(image,sr){const key=(image.src||image.__r113id||(image.__r113id='c'+Math.random()))+'#'+sr.join(',');if(bottoms.has(key))return bottoms.get(key);if(scanBudget<=0)return null;scanBudget--;let out=null;
+function footprintOf(image,sr,fixed){const key=fixed||(image.src||image.__r113id||(image.__r113id='c'+Math.random()))+'#'+sr.join(',');if(bottoms.has(key))return bottoms.get(key);if(scanBudget<=0)return null;scanBudget--;let out=null;
  try{const[sx,sy,sw,sh]=sr;if(sw>3&&sh>3){const W=64,H=Math.max(8,Math.min(192,Math.round(64*sh/sw)));scanCanvas??=document.createElement('canvas');scanCanvas.width=W;scanCanvas.height=H;
   const c=scanCanvas.getContext('2d',{willReadFrequently:true});c.clearRect(0,0,W,H);c.drawImage(image,sx,sy,sw,sh,0,0,W,H);const d=c.getImageData(0,0,W,H).data,need=Math.max(2,Math.round(W*.05));let fy=-1;
   for(let y=H-1;y>=Math.floor(H*.35);y--){let n=0;for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>90)n++;if(n>=need){fy=y;break;}}
@@ -154,7 +160,7 @@ function groundScope(rec,owner,start){const cmds=rec.commands;if(!cmds||cmds.len
  if(!body||bh<6||Math.abs(body.points[1][1]-body.points[0][1])>1||FIXED_ID.test(String(owner.id||'')))return;
  const p=propById(owner.id),dpr=rec.dpr||1;let shift=0,mx=0,my=0;
  if(prefs.ground){const sp=wallSpot(owner,bh,dpr);if(sp){const a=project(owner.x,owner.y),b=project(sp.x,sp.y),pa=rec.point(a.x,a.y),pb=rec.point(b.x,b.y);mx=pb[0]-pa[0];my=pb[1]-pa[1];}}
- const fp=prefs.ground?footprintOf(body.image,body.sourceRect):null;let foot=null;
+ const fp=prefs.ground?footprintOf(body.image,body.sourceRect,p?.r99Tree?'r99tree:'+p.r99Tree.kind:null):null;let foot=null;// R114: 흔들리는 나무 12장은 같은 밑동을 쓴다
  if(fp){const q=project(owner.x,owner.y),lift=p?clamp(finite(p.visualLiftPx),0,bh/dpr*.7):0,gy=rec.point(q.x,q.y-lift)[1],P=body.points,vis=P[0][1]+(P[3][1]-P[0][1])*fp.f,d=gy-vis;
   if(d>.5&&d<bh*.4){shift=d;stats.grounded++;stats.groundPx+=d/dpr;}
   foot={x:P[0][0]+(P[1][0]-P[0][0])*fp.cx+mx,y:vis+shift+my,w:Math.abs(P[1][0]-P[0][0])*fp.w};}
@@ -163,9 +169,12 @@ function groundScope(rec,owner,start){const cmds=rec.commands;if(!cmds||cmds.len
   if(c.kind==='image'&&c.points){const isBody=c.image===body.image;if(!isBody&&!mx&&!my)continue;for(let k=0;k<c.points.length;k++){const top=k<2,wx=isBody?(top?dx:dx*.15):0;c.points[k]=[c.points[k][0]+wx+mx,c.points[k][1]+(isBody?shift:0)+my];}}
   else if(c.kind==='fill'&&Array.isArray(c.paths)&&foot)shadowTo(c,foot);}}
 // 그림자 타원을 그림의 실제 밑동 가운데로 옮기고, 너비를 밑동 너비에 맞춘다(원래 너비의 0.55~1.25배).
-function shadowTo(c,foot){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const path of c.paths)for(const q of path.points||[]){if(q[0]<x0)x0=q[0];if(q[0]>x1)x1=q[0];if(q[1]<y0)y0=q[1];if(q[1]>y1)y1=q[1];}
+function shadowTo(c,foot){if(Array.isArray(c.r114Anchor)){shadowAnchored(c,foot);return;}let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const path of c.paths)for(const q of path.points||[]){if(q[0]<x0)x0=q[0];if(q[0]>x1)x1=q[0];if(q[1]<y0)y0=q[1];if(q[1]>y1)y1=q[1];}
  if(!(x1>x0)||y1-y0>(x1-x0)*.9)return;const cx=(x0+x1)/2,cy=(y0+y1)/2,sx=clamp(foot.w*1.1/(x1-x0),.55,1.25),ty=foot.y-(y1-y0)*.12;
  for(const path of c.paths)if(path.points)path.points=path.points.map(q=>[foot.x+(q[0]-cx)*sx,ty+(q[1]-cy)*Math.min(1,.4+sx*.6)]);stats.shadowsMoved++;}
+// R114: 빛 방향 그림자(cinema-r114.js)는 발밑 기준점(r114Anchor)을 달고 온다. 가운데로 다시 모으지 않고 기준점을 밑동으로 옮긴다.
+function shadowAnchored(c,foot){const[ax,ay]=c.r114Anchor,sx=clamp(foot.w*1.1/Math.max(1,c.r114W||foot.w*1.1),.55,1.25),dx=foot.x-ax,dy=foot.y-ay;
+ for(const path of c.paths)if(path.points)path.points=path.points.map(q=>[foot.x+(q[0]-ax)*sx,ay+dy+(q[1]-ay)*Math.min(1,.4+sx*.6)]);c.r114Anchor=[foot.x,foot.y];stats.shadowsMoved++;}
 function installGround(){const DC=window.StoryPhase1?.DrawCommands;if(!DC?.prototype||DC.prototype.__r113)return false;const base=DC.prototype.scope;
  DC.prototype.scope=function(owner,fn){if(owner?.kind!=='prop'||!live()||!(prefs.ground||wob.size))return base.call(this,owner,fn);const start=this.commands?.length||0;try{return base.call(this,owner,fn);}finally{try{groundScope(this,owner,start);}catch(e){fail(e);}}};
  Object.defineProperty(DC.prototype,'__r113',{value:true});return true;}
