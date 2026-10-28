@@ -1,13 +1,13 @@
-// R106/R107/R112 CPU check: the canon (R112: 사용자수정본 최종교정본 01~23 + 제3부~제8부 맞춤법·띄어쓰기 교정본 24~61 + 제9부 서문·문턱·S-01 맞춤법 교정본 + R106 개선본 S-02~, sha256 a74263b6…) replaces
+// R106/R107/R112/R114 CPU check: the canon (R114: R112 합본의 제9부 서문·S-01까지 + 사몽이후 문체수정본 S-02~, sha256 e81e61fd…; R112: 사용자수정본 최종교정본 01~23 + 제3부~제8부 맞춤법·띄어쓰기 교정본 24~61 + 제9부 서문·문턱·S-01 맞춤법 교정본 + R106 개선본 S-02~, sha256 a74263b6…) replaces
 // every story text the game shows — story mode (R54 campaign data, R75 scene data, boot-time raw story) and
 // 사몽/역행 sections — and no paragraph of the earlier text survives where the new text has none.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const root=path.resolve(__dirname,'../../..'),R=p=>path.join(root,p);
-const SHA='a74263b6de4a3c6ba8bda7e4cb0eb4bd315f586e8a3496ebde03c6a941bfe08a';
+const SHA='e81e61fdf1381d41bc07eee63cb9f38e696778db4bc27e58e3d77569e18ed93b';
 let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.log((ok?'PASS ':'FAIL ')+name+(ok||!detail?'':' :: '+detail));};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const canonPath=R('story-source/hapil-canon-r112-merged.txt'),canon=fs.readFileSync(canonPath);
+const canonPath=R('story-source/hapil-canon-r114-merged.txt'),canon=fs.readFileSync(canonPath);
 check('canon file hash is the improved canon',sha(canon)===SHA,sha(canon));
 const canonText=canon.toString('utf8').replace(/\r\n/g,'\n');
 const norm=s=>String(s).replace(/\s+/g,' ').trim();
@@ -51,10 +51,11 @@ const sctx={window:{}};vm.createContext(sctx);vm.runInContext(fs.readFileSync(R(
 const ST=sctx.window.__STORYWORLD_SAMONG_TEXT_R103__;
 check('사몽 text module built from the canon',ST?.sha256===SHA&&Object.keys(ST.sections).length===42,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);
 const sbad=[];let scount=0;for(const[k,s]of Object.entries(ST.sections))for(const b of s.blocks)for(const p of b.paras){scount++;if(!canonNorm.includes(norm(p)))sbad.push(k+':'+p.slice(0,24));}
-check('every 사몽 paragraph ('+scount+') is verbatim canon text',!sbad.length&&scount>900,sbad.slice(0,3).join(' | '));
+// R114 문체수정본은 문단을 합쳐 984→631문단이 되었다(42구간 모두 채워짐).
+check('every 사몽 paragraph ('+scount+') is verbatim canon text',!sbad.length&&scount>600,sbad.slice(0,3).join(' | '));
 // anchors used by 사몽 cues and map records exist in the new text
 const src=fs.readFileSync(R('r96/client-source/samong-r103.js'),'utf8')+fs.readFileSync(R('r96/client-source/samong-maps-r105.js'),'utf8');
 const miss=[];for(const m of src.matchAll(/\[\s*'([A-Z]{1,2}-?\d{0,2}|threshold|prelude|M\d)'\s*,\s*'([^']{4,})'/g)){const s=ST.sections[m[1]];if(!s||m[2]==='last'||ST.sections[m[2]])continue;if(!s.blocks.some(b=>b.paras.some(p=>p.includes(m[2]))))miss.push(m[1]+':'+m[2]);}
 for(const m of src.matchAll(/key:'([^']+)',sub:'([^']+)'/g)){const s=ST.sections[m[1]];if(s&&!s.blocks.some(b=>b.paras.some(p=>p.includes(m[2]))))miss.push(m[1]+':'+m[2]);}
-check('사몽 cue and record anchors exist in the new text',!miss.length,miss.slice(0,4).join(' | '));
+check('사몽 cue and record anchors exist in the new text',!miss.length,miss.join(' | '));
 console.log(JSON.stringify({checks:n,failed}));process.exitCode=failed?1:0;

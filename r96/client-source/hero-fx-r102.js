@@ -79,7 +79,9 @@ function lut(F){const key=F.a.join()+'|'+F.b.join();let L=luts.get(key);if(L)ret
  for(let i=0;i<256;i++){const l=i/255;let j=1;while(j<stops.length-1&&l>stops[j][0])j++;const[a0,c0]=stops[j-1],[a1,c1]=stops[j],c=mix(c0,c1,clamp((l-a0)/Math.max(1e-6,a1-a0),0,1));L[i*3]=c[0];L[i*3+1]=c[1];L[i*3+2]=c[2];}
  luts.set(key,L);return L;}
 // Painted pointing down-left (about 140°) or slightly up; turned to point along +x.
-const TURN=Object.freeze({'assets/vfx/heroes/hunter-a.webp':-140,'assets/vfx/heroes/hunter-q.webp':-140,'assets/vfx/heroes/gunner-a.webp':-141,'assets/vfx/heroes/michaela-a.webp':-144,'assets/vfx/heroes/lauren-a.webp':-144,'assets/vfx/heroes/hunter-e.webp':26});
+const TURN=Object.freeze({'assets/vfx/heroes/hunter-a.webp':-140,'assets/vfx/heroes/hunter-q.webp':-140,'assets/vfx/heroes/gunner-a.webp':-141,'assets/vfx/heroes/michaela-a.webp':-144,'assets/vfx/heroes/lauren-a.webp':-144,'assets/vfx/heroes/hunter-e.webp':26,
+ // R114: 악몽 사냥꾼·검사 기본공격 붉은 초승달은 그림에서 볼록한 앞날이 왼쪽(180°)을 향한다. 날아가는 방향으로 앞날이 오게 뒤집는다.
+ 'assets/vfx/heroes/slayer-a.webp':180});
 const RECOLOUR=new Set(['slash','burst','sigil','link','e568HeroImpact','storySourceSkill']);
 const variants=new Map(),MAXV=28;let budget=1;
 function tightCrop(px,w,h){let x0=w,y0=h,x1=-1,y1=-1;for(let y=0;y<h;y++){const r=y*w*4;for(let x=0;x<w;x++)if(px[r+x*4+3]>18){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}}

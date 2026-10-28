@@ -308,7 +308,7 @@ function install(){
    if(mine)return withoutStrokes(()=>effectBase.call(this,e,...a));}return effectBase.call(this,e,...a);};
  if(typeof drawProp==='function'&&typeof sprite==='function'){const propBase=drawProp;drawProp=function(p,...a){const to=prefs.props&&p?.r111To;if(!to)return propDraw.call(this,p,...a);const ox=p.x,oy=p.y;p.x=to.x;p.y=to.y;try{return propDraw.call(this,p,...a);}finally{p.x=ox;p.y=oy;}};
    const propDraw=function(p,...a){if(!prefs.props||!p||typeof readyImage!=='function')return propBase.call(this,p,...a);
-   const row=readyImage(p.path);if(!row)return propBase.call(this,p,...a);const f=footOf(p.path,row);if(!(f<.97))return propBase.call(this,p,...a);
+   const row=readyImage(p.path);if(!row)return propBase.call(this,p,...a);const f=footOf(p.r99Tree?'r99tree:'+p.r99Tree.kind:p.path,row);// R114: 흔들리는 나무 12장은 한 번 잰 밑동을 같이 쓴다(장마다 따로 재면 2~3px씩 들썩였다)if(!(f<.97))return propBase.call(this,p,...a);
    const shift=Math.min(.22,1-f)*finite(p.height,60)*Z(),spriteBase=sprite;
    sprite=function(path,x,y,...b){return spriteBase.call(this,path,x,path===p.path?y+shift:y,...b);};stats.footShifts++;
    try{return propBase.call(this,p,...a);}finally{sprite=spriteBase;}};}
