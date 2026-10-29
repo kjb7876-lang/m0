@@ -17034,8 +17034,8 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 30401,
-      "sha256": "ffed4b38f3434707d211db816f252a75b9ac969486a5ff388dd84b1418e00d39"
+      "bytes": 30497,
+      "sha256": "3ee8d0db1dd8bfd6824eb556ea6144089a883d6f6b1db13e73d6315cc4fe6242"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -17099,8 +17099,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562914,
-      "sha256": "92279ab25ed575bbd5b4bce6d5fdd23d96c43b0f4f0cb12971722c299af77c8f"
+      "bytes": 6562953,
+      "sha256": "bdc1f1a3bc0eb8762d30d7a574b216e00629cb397e2abe7740c4c1d3597468b1"
     },
     {
       "path": "mobs-r109.js",
@@ -17133,6 +17133,11 @@
       "sha256": "2359958ca49956c52dc6e1668b83dac90363103ee8d3985ccfccf6c6956c1db3"
     },
     {
+      "path": "perf-r119.js",
+      "bytes": 5083,
+      "sha256": "01fa7f97376866e7f82ef526416d6ebc9c0f25d2e8c626fe5035e71597cb77a4"
+    },
+    {
       "path": "perf-r97.js",
       "bytes": 5359,
       "sha256": "446e18d7e54633bcdc29fa73a32bd5a2a8c2f38c6e29a7036dd0daa026ada90c"
@@ -17144,8 +17149,8 @@
     },
     {
       "path": "play-r111.js",
-      "bytes": 43566,
-      "sha256": "cc9082d8090de1850bba01cc2a4860050d6ad0811114ec4cd1e45d3ff44e8ce9"
+      "bytes": 43643,
+      "sha256": "091a086bd5ee153f745c06064108e5a7432e2b6fea583062d6b90c6a14fec62d"
     },
     {
       "path": "play-r113.js",
@@ -17388,9 +17393,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3477,
-  "totalBytes": 758780038,
-  "webHTMLSha256": "92279ab25ed575bbd5b4bce6d5fdd23d96c43b0f4f0cb12971722c299af77c8f",
+  "fileCount": 3478,
+  "totalBytes": 758785333,
+  "webHTMLSha256": "bdc1f1a3bc0eb8762d30d7a574b216e00629cb397e2abe7740c4c1d3597468b1",
   "largest": [
     {
       "path": "index.html",

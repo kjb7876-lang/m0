@@ -71,17 +71,17 @@ function palOf(p){const P=R102()?.PALETTE?.[p?.hero]||R102()?.PALETTE?.hwando;re
 const egoState=new WeakMap();
 function heroFoot(p){const q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65);return{x:q.x,y:q.y-lift,h};}
 function egoBack(p,S,F,I){const {x,y,h}=heroFoot(p),lo=lowFx(),st=egoState.get(p),age=st?time-st.at:9,burst=clamp(1-age/.7,0,1),swell=1+.35*burst,fr=Math.floor(time*14);
- S.draw('glow',F,x,y,h*2.6*swell,h*1.1*swell,{alpha:.45+.3*burst,squash:.5});// 발밑 빛
+ S.draw('glow',F,x,y,h*2.6*swell,h*1.1*swell,{alpha:.3+.25*burst,squash:.5});// 발밑 빛 (R119: 영웅 몸이 하얗게 날아가지 않게 오라 밝기를 낮춤)
  S.draw('ring',I,x,y,h*(1.6+.3*Math.sin(time*7))*swell,h*(.8+.15*Math.sin(time*7))*swell,{alpha:.45});
- S.draw('flame',F,x,y+h*.06,h*1.55*swell,h*2.25*swell,{frame:fr,alpha:.78});// 바깥 불꽃
- S.draw('flame',I,x,y+h*.04,h*1.0*swell,h*1.75*swell,{frame:fr+2,alpha:.7});// 안쪽 밝은 불꽃
+ S.draw('flame',F,x,y+h*.06,h*1.55*swell,h*2.25*swell,{frame:fr,alpha:.55});// 바깥 불꽃
+ S.draw('flame',I,x,y+h*.04,h*1.0*swell,h*1.75*swell,{frame:fr+2,alpha:.36});// 안쪽 밝은 불꽃
  const n=lo?7:12;for(let i=0;i<n;i++){const a=i*TAU/n+time*.8,depth=Math.sin(a);if(depth>0)continue;const fl=.7+.3*Math.sin(time*(11+i)+i*2.1),
   sx=x+Math.cos(a)*h*.34,sy=y+depth*h*.1-h*.04;S.draw('spike',i%3?F:I,sx,sy,h*.16,h*(1+.7*rnd(i,3))*fl*swell,{angle:Math.cos(a)*.38,alpha:.85});}
- S.draw('glow',I,x,y-h*.52,h*1.1,h*1.5,{alpha:.24+.12*Math.sin(time*9)});}
+ S.draw('glow',I,x,y-h*.52,h*1.1,h*1.5,{alpha:.09+.05*Math.sin(time*9)});}
 function egoFront(p,S,F,I){const {x,y,h}=heroFoot(p),lo=lowFx(),fr=Math.floor(time*14);
  const n=lo?7:12;for(let i=0;i<n;i++){const a=i*TAU/n+time*.8,depth=Math.sin(a);if(depth<=0)continue;const fl=.7+.3*Math.sin(time*(11+i)+i*2.1),
   sx=x+Math.cos(a)*h*.36,sy=y+depth*h*.1;S.draw('spike',i%3?F:I,sx,sy,h*.14,h*(.75+.5*rnd(i,3))*fl,{angle:Math.cos(a)*.38,alpha:.42,overHero:true});}
- S.draw('flame',F,x,y+h*.05,h*1.25,h*1.7,{frame:fr+1,alpha:.22,overHero:true});
+ S.draw('flame',F,x,y+h*.05,h*1.25,h*1.7,{frame:fr+1,alpha:.11,overHero:true});
  // 솟는 불티
  const m=lo?5:10;for(let i=0;i<m;i++){const ph=(time*(.9+.5*rnd(i,1))+rnd(i,2))%1,px=x+(rnd(i,4)-.5)*h*.9,py=y-h*(.1+1.6*ph);S.draw('spark',i%2?I:F,px,py,h*.32,h*.07,{angle:-Math.PI/2,alpha:Math.sin(Math.PI*ph)*.9,overHero:true});}
  // 번개(짧게 번쩍)
