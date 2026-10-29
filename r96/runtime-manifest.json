@@ -8673,6 +8673,31 @@
       "sha256": "21f623c27c45d0e5c2d42afbc2c01dd347890fd0cbefc0e95fa8504f73fea0e2"
     },
     {
+      "path": "assets/r121/walk/walk-gunner-e.png",
+      "bytes": 296934,
+      "sha256": "99da990318b0a28faedcaebb69ab058d9f1bd13bdc43909e0acaefe47153ed5c"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-n.png",
+      "bytes": 231578,
+      "sha256": "f09eb7c6936fd180d713aba078025bba35efa60f30c38a643c52ba0ea1c6f6c5"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-ne.png",
+      "bytes": 240799,
+      "sha256": "5fc2eba46f552ba84956f8a173cad3a5cf0e25a6c0bd55d4e0d26aff8f7abc30"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-s.png",
+      "bytes": 266770,
+      "sha256": "ed7e52d485c92f5f027c815941733b597a182eff973643f1f45d0f9e525d6b98"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-se.png",
+      "bytes": 280468,
+      "sha256": "236a5e4749d9598207dde510a4353a3ba0b897f4ed60ae4f8b5866a8ea10b8ea"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -17504,8 +17529,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 18516,
-      "sha256": "01fe9d20adaa8ce12bb371386f494611ebd4b2692241353cbba50c2243cfdf63"
+      "bytes": 19573,
+      "sha256": "f48e5a039468b74af3244c143228e0ac09b7a593428f60f0ec479aeea1bf4fd3"
     },
     {
       "path": "visual-r90-world.js",
@@ -17618,8 +17643,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3523,
-  "totalBytes": 762875713,
+  "fileCount": 3528,
+  "totalBytes": 764193319,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

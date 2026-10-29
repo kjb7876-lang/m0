@@ -2733,7 +2733,12 @@
     "assets/r121/heroes/gunner/run_left_a.webp",
     "assets/r121/heroes/gunner/run_left_b.webp",
     "assets/r121/heroes/gunner/run_right_a.webp",
-    "assets/r121/heroes/gunner/run_right_b.webp"
+    "assets/r121/heroes/gunner/run_right_b.webp",
+    "assets/r121/walk/walk-gunner-e.png",
+    "assets/r121/walk/walk-gunner-n.png",
+    "assets/r121/walk/walk-gunner-ne.png",
+    "assets/r121/walk/walk-gunner-s.png",
+    "assets/r121/walk/walk-gunner-se.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3808,5 +3813,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "54905f703688d0a68333c81b6b2fd949f7d994071b857b160d4f3095947b25d1"
+  "runtimeManifestSHA256": "1d72a285ca783a6d0b5f81e62df5ffbd2c1e6f92b88864e3dfba3fe6b7399ce3"
 }

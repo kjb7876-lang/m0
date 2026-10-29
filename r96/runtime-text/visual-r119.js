@@ -75,9 +75,13 @@
  const WALK_DIR='assets/r91/walk/',walkPlan={},walkBox=new Map(),walkMissing=new Set(),walkLoading=new Set(),walkState={d:0,x:null,y:null,dir:'s'};
  try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
- function sheetFor(hero,dir){if(dir==='n'){const ab=Math.floor(walkState.d*3.2)%2?'b':'a',p='assets/heroes/normalized/'+hero+'/run_back_'+ab+'.webp';if(!walkMissing.has(p))return{path:p,mirror:false,single:true};}/* R121: 위쪽 걷기 묶음이 없어 정면 위로 갈 때 뒷모습 달리기 2장 */const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
+ // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
+ const OWN_WALK={gunner:{s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]}};
+ const preloadWalk=()=>{try{if(typeof ensureImages==='function'&&typeof player==='object'&&player?.hero&&OWN_WALK[player.hero]){const ps=[...new Set(Object.values(OWN_WALK[player.hero]).map(v=>'assets/r121/walk/walk-'+player.hero+'-'+v[0]+'.png'))];if(ps.some(p=>!walkLoading.has(p))){ps.forEach(p=>walkLoading.add(p));Promise.resolve(ensureImages(ps)).catch(()=>ps.forEach(p=>walkMissing.add(p)));}}}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
+ function sheetFor(hero,dir){const own=OWN_WALK[hero]?.[dir];if(own){const p='assets/r121/walk/walk-'+hero+'-'+own[0]+'.png';if(!walkMissing.has(p))return{path:p,mirror:!!own[1],cols:4,rows:1,frames:4};}
+  if(dir==='n'){const ab=Math.floor(walkState.d*3.2)%2?'b':'a',p='assets/heroes/normalized/'+hero+'/run_back_'+ab+'.webp';if(!walkMissing.has(p))return{path:p,mirror:false,single:true};}/* R121: 위쪽 걷기 묶음이 없어 정면 위로 갈 때 뒷모습 달리기 2장 */const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
   for(const d of [dir,...(NEAR[dir]||[])]){const s=tryDir(d);if(s&&!walkMissing.has(s.path))return s;}return null;}
- function cellBox(row,path,i){const k=path+'|'+i;if(walkBox.has(k))return walkBox.get(k);const im=row.image,W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,one=i<0,cw=one?W:W/4,ch=one?H:H/2,sx=one?0:(i%4)*cw,sy=one?0:Math.floor(i/4)*ch;
+ function cellBox(row,path,i,cols=4,rows=2){const k=path+'|'+i;if(walkBox.has(k))return walkBox.get(k);const im=row.image,W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,one=i<0,cw=one?W:W/cols,ch=one?H:H/rows,sx=one?0:(i%cols)*cw,sy=one?0:Math.floor(i/cols)*ch;
   let box=[sx,sy,cw,ch];try{const c=document.createElement('canvas');c.width=Math.ceil(cw);c.height=Math.ceil(ch);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,cw,ch,0,0,cw,ch);const d=g.getImageData(0,0,c.width,c.height).data;
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(cw,x1-x0+3),Math.min(ch,y1-y0+3)];}catch(_){}walkBox.set(k,box);return box;}
@@ -92,13 +96,14 @@
      if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),ang=Math.atan2(q1.y-q0.y,q1.x-q0.x);walkState.dir=DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}}
    walkState.x=player.x;walkState.y=player.y;
    const busy=player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
+   preloadWalk();
    if(!player.moving){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
    if(busy)return r;
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
    if(!row){if(!walkLoading.has(sh.path)&&typeof ensureImages==='function'){walkLoading.add(sh.path);Promise.resolve(ensureImages([sh.path])).catch(()=>walkMissing.add(sh.path));}return r;}
    let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
-   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*5)%8,box=cellBox(row,sh.path,frame),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
+   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=sh.mirror?-1:1;
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
     points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
