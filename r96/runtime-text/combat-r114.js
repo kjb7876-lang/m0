@@ -221,12 +221,12 @@ function bodyFrac(image,rect){let m=bodyCache.get(image);if(!m){m=new Map();body
  let out=null;try{const[sx,sy,sw,sh]=rect,H=64,W=Math.max(8,Math.round(64*sw/sh)),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(image,sx,sy,sw,sh,0,0,W,H);
   const d=g.getImageData(0,0,W,H).data,rows=[];for(let y=0;y<H;y++){let n=0;for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>100)n++;rows.push(n);}const mx=Math.max(...rows);if(mx>0){const th=mx*.12;let a=-1,b=-1;for(let y=0;y<H;y++)if(rows[y]>=th){if(a<0)a=y;b=y;}out=(b-a+1)/H;}
   c.width=c.height=1;}catch(_){out=null;}m.set(key,out);stats.bodyScans++;return out;}
-const HERO_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/walk-|r93\/idle\/idle-/;
+const HERO_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/walk-|r93\/idle\/idle-|r119\/heroes\/|r121\/heroes\//; // R121: R119 뒷모습·R121 정리본도 영웅 그림으로 본다
 // 같은 영웅인데 공격 첫 장면 등 한두 프레임만 예전 그림 묶음(normalized/directions, gunner/player_idle)이 끼어들어
 // 옷·체형이 다른 인물이 깜박였다. 같은 영웅·같은 방향으로 마지막에 그린 지금 묶음(hero_direction334/337/338) 그림으로 바꾼다.
 // 이동 중에 쓰던 actions-v3126 '달리기' 그림도 다른 화풍(창을 내지르는 돌진 자세 등)이라 네온·라우렌이 걸을 때 딴사람처럼 보였다.
 // 이동 그림도 지금 묶음의 같은 방향 그림으로 바꾸고, 걸음은 아래 walkHero가 몸을 흔들어 표현한다.
-const OLD_ART=/heroes\/normalized\/directions\/|heroes\/normalized\/gunner\/(?:player_idle|run_)|heroes\/normalized\/actions-v3126\/[a-z]+-move-/,NEW_ART=/hero_direction33[478]\/|r91\/walk\/walk-|r93\/idle\/idle-|hero-authored-/,STATIC_ART=/hero_direction33[478]\//;
+const OLD_ART=/heroes\/normalized\/directions\/|heroes\/normalized\/gunner\/(?:player_idle|run_)|r121\/heroes\/gunner\/(?:player_idle|run_)|heroes\/normalized\/actions-v3126\/[a-z]+-move-/,NEW_ART=/hero_direction33[478]\/|r119\/heroes\/[a-z]+-n\.|r91\/walk\/walk-|r93\/idle\/idle-|hero-authored-/,STATIC_ART=/hero_direction33[478]\/|r119\/heroes\/[a-z]+-n\./;
 const DIR_FILE={left:'w',right:'e',front:'s',back:'n'};
 function setPath(hero,dir){const f=DIR_FILE[dir];if(!f)return null;if(f==='e'||f==='w')return'assets/hero_direction334/'+hero+'/'+f+'.webp';return(hero==='lauren'?'assets/hero_direction338/':'assets/hero_direction337/')+hero+'/'+f+'.webp';}
 // R91 걷기·R93 서 있기 그림이 이 영웅에게 실제로 그려진 뒤에만 바꾼다. 그 묶음이 없으면(색인을 못 받은 환경 등)
@@ -237,14 +237,14 @@ const heroLast=new Map();
 function unifyHero(rec,start){let best=null,bh=0;for(let i=start;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
  if(!best)return;const key=player.hero+'|'+player.direction+'|'+(player.moving?'m':'s'),path=String(best.sourcePath||'');
  if(OVERLAY_ART.test(path))overlayHeroes.add(player.hero);
- if(NEW_ART.test(path)){const P=best.points;heroSize.set(player.hero,{w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});heroLast.set(key,{image:best.image,sourcePath:best.sourcePath,immutableTint:best.immutableTint,sourceRect:best.sourceRect.slice(),imageSize:best.imageSize.slice(),w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});return;}
+ if(NEW_ART.test(path)){const P=best.points;if(/r91\/walk\//.test(path))return;/* R121: 걷기 묶음 한 칸(여백 포함 칸 전체)을 기억해 멈춘 뒤에 크게 다시 쓰던 것을 막는다 */heroSize.set(player.hero,{w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});heroLast.set(key,{image:best.image,sourcePath:best.sourcePath,immutableTint:best.immutableTint,sourceRect:best.sourceRect.slice(),imageSize:best.imageSize.slice(),w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});return;}
  if(!OLD_ART.test(path)||!overlayHeroes.has(player.hero))return;let L=heroLast.get(key);
  if(!L)L=heroLast.get(player.hero+'|'+player.direction+'|'+(player.moving?'s':'m'));
  if(!L){const sp=setPath(player.hero,player.direction),row=sp&&typeof readyImage==='function'?readyImage(sp):null,sz=heroSize.get(player.hero)||{w:bh,h:bh};if(!row){if(sp&&typeof addImage==='function')try{addImage(sp);}catch(_){}return;}
   const iw=row.image.naturalWidth||512,ih=row.image.naturalHeight||512;L={image:row.image,sourcePath:sp,immutableTint:null,sourceRect:[0,0,iw,ih],imageSize:[iw,ih],w:Math.abs(sz.h)*iw/ih,h:Math.abs(sz.h)};heroLast.set(key,L);}const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]);
  Object.assign(best,{image:L.image,sourcePath:L.sourcePath,immutableTint:L.immutableTint,sourceRect:L.sourceRect.slice(),imageSize:L.imageSize.slice(),points:[[fx-L.w/2,fy-L.h],[fx+L.w/2,fy-L.h],[fx+L.w/2,fy],[fx-L.w/2,fy]],r114Swap:true});if(best.owner&&best.owner.bodyPath)best.owner.bodyPath=L.sourcePath;stats.heroSwaps++;}
 // 지금 묶음 정지 그림과 기억사수 전용 그림(normalized/gunner)은 여백이 커서 좁은 보정으로는 다른 영웅보다 작거나 컸다.
-const WIDE_FIT=/hero_direction33[478]\/|heroes\/normalized\/gunner\//;
+const WIDE_FIT=/hero_direction33[478]\/|heroes\/normalized\/gunner\/|r119\/heroes\/|r121\/heroes\//;
 const fitByArt={};
 function fitHero(rec,start){try{unifyHero(rec,start);}catch(e){fail(e);}if(!Array.isArray(rec?.commands)||typeof actorHeight!=='function')return;let best=null,bh=0;
  for(let i=start;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!HERO_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
