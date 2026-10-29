@@ -8488,6 +8488,26 @@
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
     },
     {
+      "path": "assets/r119/heroes/hunter-n.webp",
+      "bytes": 35986,
+      "sha256": "fe72b72d8d38af5e1eead0a3a7e99817680a96ef3bfffe6f9fc5dd552eb3e649"
+    },
+    {
+      "path": "assets/r119/heroes/michaela-n.webp",
+      "bytes": 39634,
+      "sha256": "10c8d279ced2c8c795a638e2010c4d4831a52fcdc21af5319f54aa26e1033faa"
+    },
+    {
+      "path": "assets/r119/heroes/neon-n.webp",
+      "bytes": 47976,
+      "sha256": "edef165823ae98ba136d7ef7a1b067174bc8a75ab8a459cbb19ea112fdde8c9f"
+    },
+    {
+      "path": "assets/r119/heroes/seoha-n.webp",
+      "bytes": 42900,
+      "sha256": "9580349067d6c3d9ce54cd692199d50e1c0d5b8826333790f602bafdf917dde5"
+    },
+    {
       "path": "assets/r119/mobs/a11c1-attack.png",
       "bytes": 189997,
       "sha256": "8e6341ff4e7e92583786bf7964fa0f35b8d6c4e7100e7c9788bc1b06ec7d19f2"
@@ -17324,8 +17344,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 5501,
-      "sha256": "e15f233a41ee16217021b47e10f1dfe6021c85f6a66cb1372532944600e37dc1"
+      "bytes": 5717,
+      "sha256": "f679a736ea3492f8a91e5e2f089ed37959edd047c0d55189cc4c28f615479f36"
     },
     {
       "path": "visual-r90-world.js",
@@ -17438,8 +17458,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3487,
-  "totalBytes": 760066759,
+  "fileCount": 3491,
+  "totalBytes": 760233471,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

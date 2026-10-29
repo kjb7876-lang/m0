@@ -18,7 +18,7 @@
  // 2) 영웅 그림 일관성: 기억사수의 북쪽(위를 볼 때·위로 겨눌 때) 그림만 가늘고 작은 다른 화풍이라 7방향과 어긋났다.
  //    같은 화풍·같은 키·같은 발 위치로 다시 그린 뒷모습(ChatGPT 2026-10-29, 원본 앞모습·대각선 그림을 참조)으로 바꿔 보낸다.
  //    원본 파일은 그대로 두고 이미지 주소만 바꾼다(캐시 키·그림 크기 512·발밑 피벗 동일).
- const SWAP=Object.freeze({'assets/hero_direction337/gunner/n.webp':'assets/r119/heroes/gunner-n.webp'});
+ const SWAP=Object.freeze(Object.fromEntries(['gunner','seoha','neon','michaela','hunter'].map(h=>['assets/hero_direction337/'+h+'/n.webp','assets/r119/heroes/'+h+'-n.webp'])));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
  //    원래 그림이 캐시에 정상으로 올라온 뒤에 새 그림을 따로 받아, 다 받아지면 같은 캐시 칸의 그림만 바꾼다(실패하면 원래 그림 유지).
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
