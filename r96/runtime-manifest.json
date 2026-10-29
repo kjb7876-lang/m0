@@ -8308,6 +8308,81 @@
       "sha256": "8aa7194697512b1fd43d594840c24af3d24aefac2c36120969d743e28560cb11"
     },
     {
+      "path": "assets/r118/clean/assets/visual-test/hospital-boss-motion-r53.png",
+      "bytes": 1049216,
+      "sha256": "73575940823b274dbd5d0d8425fa899b316294d0493fed5fd3a54a2937d1f320"
+    },
+    {
+      "path": "assets/r118/clean/assets/visual-test/hospital-medical-tools-r20.png",
+      "bytes": 701658,
+      "sha256": "fb24e5f90c94bf808473686ad6dc890829e0f424b6de6dc7592ecfd3eaaa62bb"
+    },
+    {
+      "path": "assets/r118/clean/assets/visual-test/hospital-orderly-motion-r51-v2.png",
+      "bytes": 838455,
+      "sha256": "499a99dacf4cbe12f946aaebbaf533fbaddfdaefca7622f8d63e074fc4f9ecea"
+    },
+    {
+      "path": "assets/r118/clean/assets/visual-test/hospital-ranged-back-r53.png",
+      "bytes": 1479197,
+      "sha256": "4eed3cf6398776c64419c767241fefad627e7e287238716ad55c4f2fc1b51a53"
+    },
+    {
+      "path": "assets/r118/clean/assets/visual-test/hospital-ranged-motion-r52.png",
+      "bytes": 1521955,
+      "sha256": "abec6384dc79cb83c9a2e2d285069e4b240846042b0298fa21e16473328cc6d5"
+    },
+    {
+      "path": "assets/r118/clean/index.json",
+      "bytes": 1769,
+      "sha256": "aa090e139ab8f135430bdbae0b0f48c65608fe019cc1af27ce2545688dda79ae"
+    },
+    {
+      "path": "assets/r118/drive/glutton-core.png",
+      "bytes": 35969,
+      "sha256": "54a3e068f076f9ce96834afb6db0e7383a96d58d31314e64834fe107dad151c2"
+    },
+    {
+      "path": "assets/r118/drive/horn-cleaver.png",
+      "bytes": 22778,
+      "sha256": "536a7d76fa78e2ac56eb337104e4b0f85f8780cb5d77b463a127c5c8ed30c846"
+    },
+    {
+      "path": "assets/r118/drive/index.json",
+      "bytes": 3922,
+      "sha256": "d5e27da9693c83549e7af5d32743cdc95214e5806bb9089976ce0338baff0969"
+    },
+    {
+      "path": "assets/r118/drive/lucifer-shard.png",
+      "bytes": 57488,
+      "sha256": "e10b719600589115eff61e78366f2fc2dfd5210977fa8e13444fd9fc3f73dcc3"
+    },
+    {
+      "path": "assets/r118/drive/mask-feather.png",
+      "bytes": 21809,
+      "sha256": "eaefc817a88cae18bcd0c078d91ace9ec625ee5a13346ca0c51550a8e36fce64"
+    },
+    {
+      "path": "assets/r118/drive/violet-sword.png",
+      "bytes": 12272,
+      "sha256": "d139ea05aac3f09b1f8189e794d77b691ffe5cbf0b05578484e29af3bccf66fa"
+    },
+    {
+      "path": "assets/r118/drive/wrath-bear-manifest.png",
+      "bytes": 157877,
+      "sha256": "f764effe6494318e8de99a33fc0f578f1b1ae86831ab5fddd5e5cc28d02e85e3"
+    },
+    {
+      "path": "assets/r118/drive/wrath-dragon-manifest.png",
+      "bytes": 148820,
+      "sha256": "1b1943a2273aada91f09d47dc9fd882b1d3bb12be3c645c40daddfa44e4b2439"
+    },
+    {
+      "path": "assets/r118/drive/wrath-wolf-manifest.png",
+      "bytes": 116617,
+      "sha256": "f09498c6f8db7dd273afa1f3cf8e08bf3aa0bdb72255144b9880747c6e5de3bb"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -16758,6 +16833,11 @@
       "sha256": "8309bfaa6cd73f9b88d45d939996275e3ca4a025f016719e388f41e28e625219"
     },
     {
+      "path": "combat-r118.js",
+      "bytes": 24162,
+      "sha256": "a2837294b5758158274653b04ff56e721d4c012bd32b604b2a468744fdc62a48"
+    },
+    {
       "path": "combat-r98.js",
       "bytes": 6694,
       "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
@@ -16949,8 +17029,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562827,
-      "sha256": "1ed1320fbdd6899fa9cca50539b1168e103bc8a7db6cd8cfb7501dcb0b1a6788"
+      "bytes": 6562868,
+      "sha256": "2f1ceb58342812c50b35546f15d4680681e5f2a2641f4a103eb0fc99d65f00bd"
     },
     {
       "path": "mobs-r109.js",
@@ -17184,8 +17264,8 @@
     },
     {
       "path": "world-combat-r78.js",
-      "bytes": 20563,
-      "sha256": "32ff705b38b214ae563e1bcb3136677bf780a2e1c10d4ede668d9071ca7bfa8e"
+      "bytes": 20833,
+      "sha256": "8802b48d0be23275e93a47965bb786fbef95743e85531f75cea969e923693a70"
     },
     {
       "path": "world-combat-v4-compat.js",
@@ -17233,9 +17313,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3446,
-  "totalBytes": 746076415,
-  "webHTMLSha256": "1ed1320fbdd6899fa9cca50539b1168e103bc8a7db6cd8cfb7501dcb0b1a6788",
+  "fileCount": 3462,
+  "totalBytes": 752270690,
+  "webHTMLSha256": "2f1ceb58342812c50b35546f15d4680681e5f2a2641f4a103eb0fc99d65f00bd",
   "largest": [
     {
       "path": "index.html",

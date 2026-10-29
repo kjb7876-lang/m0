@@ -8,7 +8,9 @@
  const alive=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead',major=e=>!!e&&(e.boss||e.midboss)&&!e.wardChampionR81;
  const coreRadius=e=>Math.max(.2,Number(e?.combatProfile?.bodyBlock?.r)||Number(e?.radius)||.3);
  const eligible=r=>mode()==='off'&&r?.layer==='STORY'&&!!r.exploration?.worldWardR81&&!r.egoVisitId151;
- const controlled=r=>eligible(r)&&!SPECIAL.has(r.id)&&!(regionById[r.id]?.records||[]).some(v=>v.firstPost&&v.awakenPre)&&!['trial','cosmic','persona','finalBoss'].includes(r.activeEncounter),field=e=>alive(e)&&!major(e)&&!e.persona&&!e.trial&&!e.cosmic&&!e.r61Summoned&&!e.r61Clone;
+ // R118: 충돌 검사마다 기록 목록을 다시 훑던 부분을 지역별로 한 번만 계산한다(한 틱 1,500회 넘게 불림).
+ const plainRegion=new Map(),plain=id=>{let v=plainRegion.get(id);if(v===undefined){v=!SPECIAL.has(id)&&!(regionById[id]?.records||[]).some(v=>v.firstPost&&v.awakenPre);plainRegion.set(id,v);}return v;};
+ const controlled=r=>eligible(r)&&plain(r.id)&&!['trial','cosmic','persona','finalBoss'].includes(r.activeEncounter),field=e=>alive(e)&&!major(e)&&!e.persona&&!e.trial&&!e.cosmic&&!e.r61Summoned&&!e.r61Clone;
  const note=(kind,data={})=>{events.push({kind,at:typeof time==='number'?time:0,...data});if(events.length>80)events.shift();};
  const phases=['route','rally','door','doorStory','boss','exit','exitStory','done'];let pending=null,restoring=0,doorIntent=false;
  function clean(v){

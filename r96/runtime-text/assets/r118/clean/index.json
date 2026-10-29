@@ -1,0 +1,46 @@
+{
+ "schema": "storyworld.r118.clean/v1",
+ "rule": "alpha<16 -> fully transparent; originals unchanged",
+ "files": [
+  {
+   "path": "assets/visual-test/hospital-boss-motion-r53.png",
+   "sourceSha256": "91bebcb908f53fc2e2e6e975afac60b8a50ff93da1750605da6955739dc9fdc6",
+   "sourceBytes": 1544178,
+   "cleanSha256": "73575940823b274dbd5d0d8425fa899b316294d0493fed5fd3a54a2937d1f320",
+   "cleanBytes": 1049216,
+   "faintPixelsCleared": 276924
+  },
+  {
+   "path": "assets/visual-test/hospital-orderly-motion-r51-v2.png",
+   "sourceSha256": "0b79ddea7c8bfd15945533ecaabed78e0cbbdf8939cb0966b689e152ef954ca9",
+   "sourceBytes": 1005262,
+   "cleanSha256": "499a99dacf4cbe12f946aaebbaf533fbaddfdaefca7622f8d63e074fc4f9ecea",
+   "cleanBytes": 838455,
+   "faintPixelsCleared": 50279
+  },
+  {
+   "path": "assets/visual-test/hospital-ranged-back-r53.png",
+   "sourceSha256": "9ad9b1c3bce12997131a117d8582f675f75231483e074ab7953b365bc54557f2",
+   "sourceBytes": 1835722,
+   "cleanSha256": "4eed3cf6398776c64419c767241fefad627e7e287238716ad55c4f2fc1b51a53",
+   "cleanBytes": 1479197,
+   "faintPixelsCleared": 126859
+  },
+  {
+   "path": "assets/visual-test/hospital-ranged-motion-r52.png",
+   "sourceSha256": "4d17ce060ea4b7363518059859a39b72630ae5299f47e3d0919a47fa95ccd5ce",
+   "sourceBytes": 1915735,
+   "cleanSha256": "abec6384dc79cb83c9a2e2d285069e4b240846042b0298fa21e16473328cc6d5",
+   "cleanBytes": 1521955,
+   "faintPixelsCleared": 132423
+  },
+  {
+   "path": "assets/visual-test/hospital-medical-tools-r20.png",
+   "sourceSha256": "b9b6b62668cb0063b388ef4c2368285a7c7582c35f4098c1011825c0fb6da0af",
+   "sourceBytes": 832009,
+   "cleanSha256": "fb24e5f90c94bf808473686ad6dc890829e0f424b6de6dc7592ecfd3eaaa62bb",
+   "cleanBytes": 701658,
+   "faintPixelsCleared": 57815
+  }
+ ]
+}
