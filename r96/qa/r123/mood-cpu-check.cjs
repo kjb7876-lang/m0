@@ -74,6 +74,7 @@ check('every themed zone gets floor marks',noDecal.length===0,noDecal.join(','))
 check('zones with a prop list get at least one prop',noDeco.length<=2,noDeco.join(','));
 check('windows and endless-corridor frames hang on a back wall (sheared to the wall face)',faceless.length<=3,faceless.join(','));
 const t3=rooms['sz115-S04-3'].st;check('tower: floor number painted on the floor (seven-segment 4F) + floor sign + lift at the exit',t3.decals.some(d=>d.g==='stencil')&&t3.deco.some(d=>d.kind==='sign'&&d.floor===4)&&!!t3.lift);
+check('tower: stairs up against a back wall near the entry (most tower zones)',tower.filter(id=>rooms[id].st.deco.some(d=>d.kind==='stairs'&&d.dir)).length>=10,tower.filter(id=>!rooms[id].st.deco.some(d=>d.kind==='stairs')).join(','));
 const t10=rooms['sz115-S04-10'];const R10=Z.zone('sz115-S04-10').rooms;
 check('tower: each storey of a multi-floor zone reads its own floor',R10.length===3&&[0,1,2].every(i=>M.floorAt(t10.st.theme,R10[i].x+R10[i].w/2,R10[i].y+R10[i].h/2)===10+i));
 check('school zones: dead/dim/flickering corridor lamps and door shadows',['sz115-S02-1','sz115-S02-3'].every(id=>rooms[id].st.lamps.length>0&&rooms[id].st.lamps.some(l=>l.mode==='dead'))&&ids.filter(i=>i.startsWith('sz115-S02-')).some(id=>rooms[id].st.ghosts.length>0));
