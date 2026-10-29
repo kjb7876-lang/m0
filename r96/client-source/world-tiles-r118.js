@@ -33,6 +33,7 @@
   last304:{file:'meadow',floor:0xe8ecdc},                      // 중립 지역의 재각성 (젖은 풀밭)
   'sz115-S01-1':{file:'rosehouse',floor:0xf0e8dc,wall:0xece4d8}, // S-01 찻잔 안의 집 (흑백 타일·금 간 꽃무늬 벽)
   'sz115-S03-1':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-2':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-3':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, // S-03 대련장
+  'sz115-S03-5':{file:'asphalt',floor:0xffffff},                // S-03 스물세 해 전 빗속 (젖은 금 간 아스팔트, R120)
   'sz115-S05-1':{file:'gyeongseong',floor:0xf0e6e0,wall:0xece0dc}     // S-05 전차 지나는 술집
  };
  // S-02 밤의 출석부 school: wood floor only (the catalog wall is a non-tileable plaster-over-panel design).

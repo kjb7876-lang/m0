@@ -8433,6 +8433,11 @@
       "sha256": "f09498c6f8db7dd273afa1f3cf8e08bf3aa0bdb72255144b9880747c6e5de3bb"
     },
     {
+      "path": "assets/r118/tiles/asphalt.webp",
+      "bytes": 441466,
+      "sha256": "18e46c7b843ff3537d24a7e47945b626dd541c0c7891f6a6d5fb0e0e03bd0c33"
+    },
+    {
       "path": "assets/r118/tiles/cabin.webp",
       "bytes": 780646,
       "sha256": "14805333e61990b9170da558a3cb71cc0a17ca29d810be40715dd49a517dad26"
@@ -8459,8 +8464,8 @@
     },
     {
       "path": "assets/r118/tiles/index.json",
-      "bytes": 6920,
-      "sha256": "128416f834ab8607a85fb6143535b375a0a98e10d380127c22d9ab9aa9b9e823"
+      "bytes": 7704,
+      "sha256": "c154a9fdd6814d1ba3112ee2079ec44975783f1f4be216d789c8aec675f3b529"
     },
     {
       "path": "assets/r118/tiles/kitchen.webp",
@@ -17489,8 +17494,8 @@
     },
     {
       "path": "world-tiles-r118.js",
-      "bytes": 8442,
-      "sha256": "e35d26e6ee48ffe19784b6b9e3ddfe991b3f5c273a73b0f3dabb7256817ebac2"
+      "bytes": 8575,
+      "sha256": "476114d9e13afe0b320242b4cca144f55f6cf8113ac9f2cf2a17f21d54812913"
     },
     {
       "path": "world-visual-r78.js",
@@ -17498,8 +17503,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3499,
-  "totalBytes": 760997539,
+  "fileCount": 3500,
+  "totalBytes": 761439922,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {
