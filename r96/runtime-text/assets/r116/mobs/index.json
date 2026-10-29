@@ -820,6 +820,70 @@
    }
   },
   {
+   "group": "M023",
+   "ids": [
+    "b03-c1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M023-idle.png",
+   "frames": 4,
+   "cell": [
+    147,
+    158
+   ],
+   "pivot": [
+    66.84,
+    157.02
+   ],
+   "visibleHeight": 150,
+   "bytes": 155406,
+   "sha256": "491a78c576c5aa0f6b9e48ec0d2bcc6b2b2b31134e00bf8cea67e3bc1ed849be",
+   "use": "긴 뱀의 그림자 · 대기 4키",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M023-idle4-asset-ready-20261028-PART01.zip",
+      "bytes": 2434494,
+      "sha256": "401202201e31af2537b6c4722e3186886102c109f42433de83a9ba316fcb1065"
+     },
+     {
+      "name": "StoryWorld-M023-idle4-asset-ready-20261028-PART02.zip",
+      "bytes": 2399141,
+      "sha256": "6808a72897e268a24400625ff253fc751a1f54bc7ea348fd9c79191d19e61da0"
+     },
+     {
+      "name": "StoryWorld-M023-idle4-asset-ready-20261028-PART03.zip",
+      "bytes": 2148633,
+      "sha256": "10e92a712d2d4e22856929b1dae79ec00eddf910813f0caf2f3a9fac52449f6d"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M023-idle4-asset-ready-20261028-PART03.zip",
+      "png": "frames/M023-idle-K1-padded.png",
+      "sha256": "8af5d9507ba79ac4ec8b8f6f88e608f1f0fbac3c20a916cdf9c9ea392738f770"
+     },
+     {
+      "zip": "StoryWorld-M023-idle4-asset-ready-20261028-PART03.zip",
+      "png": "frames/M023-idle-K2-padded.png",
+      "sha256": "476c9d3cd68405e2b11029b9021aa9200b174100dfcecbbfc506be19a01018f3"
+     },
+     {
+      "zip": "StoryWorld-M023-idle4-asset-ready-20261028-PART03.zip",
+      "png": "frames/M023-idle-K3-padded.png",
+      "sha256": "24292dd49276c9433071c4216e171b53adada6c3745196b5bf1e3b98480701f7"
+     },
+     {
+      "zip": "StoryWorld-M023-idle4-asset-ready-20261028-PART03.zip",
+      "png": "frames/M023-idle-K4-padded.png",
+      "sha256": "cccd91871b8c11557b13321ea6d4a0bfeabf49793f9a45484d412c6dcc3d9d05"
+     }
+    ]
+   }
+  },
+  {
    "group": "M024",
    "ids": [
     "b04-b1"

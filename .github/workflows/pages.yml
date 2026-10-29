@@ -87,8 +87,10 @@ jobs:
         run: node r96/qa/r108/audio-cpu-check.cjs
       - name: R116 Dark Eden skill FX with growth tiers
         run: node r96/qa/r116/eden-cpu-check.cjs
-      - name: R116 Drive mob hit/idle 4-key strips (29 hit, 11 idle)
+      - name: R116 Drive mob hit/idle 4-key strips (29 hit, 12 idle)
         run: node r96/qa/r116/mobs-hit-idle-cpu-check.cjs
+      - name: R117 scene props (Drive one-shot 4-key props in samong zones)
+        run: node r96/qa/r117/scene-props-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
