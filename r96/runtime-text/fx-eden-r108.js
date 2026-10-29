@@ -148,9 +148,9 @@ function drawOwn(e,h){
  if(e.kind==='vortex'){const q=P(e.x,e.y),F=e.F,tint=F?{a:F.a,b:F.b}:null,al=e.mode==='all'?.9:.7,y=q.y+h*.04,fade=1-smooth((e.t-e.life*.75)/(e.life*.25));
   const nm=e.mode==='all'?'smoke.all':'smoke.mid',sz=h*(e.mode==='all'?2.6:2.3);
   if(!clip(nm,e.t,q.x,y,sz,{alpha:al*fade,tint})&&tint)clip(nm,e.t,q.x,y,sz,{alpha:al*fade*.8});return;}
- if(e.kind==='egoRing'){const q=P(e.x,e.y),F=e.F,u=e.t/e.life,tint=F?{a:F.a,b:F.b}:null,sz=h*(5.6+2.2*smooth(u)),al=1-smooth((u-.55)/.45);
+ if(e.kind==='egoRing'){const q=P(e.x,e.y),F=e.F,u=e.t/e.life,tint=F?{a:F.a,b:F.b}:null,sz=h*(4.2+1.6*smooth(u)),al=.75*(1-smooth((u-.55)/.45));// R119: 각성 고리·성광이 영웅과 주변을 하얗게 덮었다 → 작고 옅게
   if(!clip('nova.all',e.t,q.x,q.y+h*.02,sz,{alpha:al,tint,squash:1,noVeil:true})&&tint)clip('nova.all',e.t,q.x,q.y+h*.02,sz,{alpha:al*.8,noVeil:true});
-  const v=clamp(e.t/.5,0,1);clip('holy.burst',e.t*.9,q.x,q.y,h*(2.6+1.2*v),{alpha:.85*(1-smooth((u-.4)/.5))});
+  const v=clamp(e.t/.5,0,1);clip('holy.burst',e.t*.9,q.x,q.y,h*(1.7+.7*v),{alpha:.42*(1-smooth((u-.4)/.5))});
   if(!reduced()&&u<.35){const f=SP();if(f){f.draw('flare',pb(F||{a:[255,255,255],b:[255,255,255]}),q.x,q.y-h*.55,h*(2.2+2.4*u),h*(2.2+2.4*u),{alpha:(1-u/.35)*.8,angle:u*3,overHero:false});}}return;}
 }
 function drawAllOwn(){if(!list.length||typeof ctx==='undefined'||!ctx)return;const h=Hh();

@@ -24,12 +24,20 @@ const lowFx=()=>!!(typeof settings!=='undefined'&&settings.lowFx);
 const reduced=()=>!!(typeof settings!=='undefined'&&settings.reducedMotion);
 
 // ---- ① 빛 방향 그림자 ------------------------------------------------------------------------------
-const MOON=(()=>{const x=1,y=.42,l=Math.hypot(x,y);return{x:x/l,y:y/l};})(); // 달빛이 왼쪽 위에서 → 그림자는 오른쪽 아래로
+// R119(사용자 2026-10-29 "게임 안에 별도의 태양 — 시간대에 따라 그림자 위치가 조금씩"): 해가 게임 시간 10분에 한 바퀴(하루) 돈다.
+// 빛은 화면 앞쪽(카메라 쪽)에서 비춘다. 아침에는 그림자가 왼쪽 뒤로 길게(1.5배), 한낮엔 바로 뒤로 짧게(0.75배), 저녁엔 오른쪽 뒤로 길게 눕는다. 밤은 달빛(오른쪽 뒤).
+// 프레임마다 한 번만 계산한다(그림 수·명령 수는 그대로).
+const DAY=600,MOON0=(()=>{const x=1,y=-.42,l=Math.hypot(x,y);return{x:x/l,y:y/l};})();// 그림자는 물체 뒤(화면 위쪽)로 눕는다: 앞으로 눕으면 나무 밑동이 떠 보였다
+const MOON={x:MOON0.x,y:MOON0.y,len:1,at:-1,phase:0};
+function sunTick(){const t=typeof time==='number'?time:0;if(MOON.at===t)return MOON;MOON.at=t;const u=((t/DAY)%1+1)%1;MOON.phase=u;
+ if(u>.75){MOON.x=MOON0.x;MOON.y=MOON0.y;MOON.len=1;return MOON;}// 밤: 달빛
+ const s=u/.75,ang=(-.18+1.36*s)*Math.PI*.5+Math.PI*.12,x=Math.cos(Math.PI-ang*1.2),y=-.42;const l=Math.hypot(x,y)||1;
+ MOON.x=x/l;MOON.y=y/l;MOON.len=.75+.75*Math.abs(Math.cos(Math.PI*s));return MOON;}
 let heroScreen=null,heroScreenAt=-1;
 function heroPoint(){const t=typeof time==='number'?time:0;if(heroScreenAt===t&&heroScreen)return heroScreen;heroScreenAt=t;heroScreen=null;
  if(live()&&prefs.lightPool&&prefs.horror!=='off'&&typeof project==='function')try{const q=project(player.x,player.y);heroScreen={x:q.x,y:q.y};}catch(_){}return heroScreen;}
-function castDir(x,y){const h=heroPoint(),z=typeof zoom==='number'?zoom:1,T=typeof TILE==='number'?TILE:34,R=6*T*z;
- if(!h)return{...MOON,k:0};const dx=x-h.x,dy=(y-h.y)*1.6,d=Math.hypot(dx,dy);if(d<T*z*.35||d>R)return{...MOON,k:0};
+function castDir(x,y){sunTick();const h=heroPoint(),z=typeof zoom==='number'?zoom:1,T=typeof TILE==='number'?TILE:34,R=6*T*z;
+ if(!h)return{x:MOON.x,y:MOON.y,k:0};const dx=x-h.x,dy=(y-h.y)*1.6,d=Math.hypot(dx,dy);if(d<T*z*.35||d>R)return{x:MOON.x,y:MOON.y,k:0};
  const w=Math.sqrt(clamp(1.25*(1-d/R),0,1))*.95,ux=dx/d,uy=dy/d,vx=MOON.x*(1-w)+ux*w,vy=MOON.y*(1-w)+uy*w,l=Math.hypot(vx,vy)||1;return{x:vx/l,y:vy/l,k:w};}
 function tag(anchorX,anchorY){if(typeof ctx==='undefined'||!Array.isArray(ctx.commands)||typeof ctx.point!=='function')return;const c=ctx.commands[ctx.commands.length-1];if(c&&c.kind==='fill'&&!c.r114Anchor)c.r114Anchor=ctx.point(anchorX,anchorY);}
 const baseShadow=shadow;
@@ -37,7 +45,7 @@ shadow=function(x,y,radius=18,opt={}){
  if(!prefs.shadows||typeof ctx==='undefined'||!Number.isFinite(x+y))return baseShadow.apply(this,arguments);
  try{const o=opt||{},alpha=clamp(finite(o.alpha,1),0,1),lift=clamp(finite(o.lift),0,1),compact=lowFx()||!!(typeof coarsePointerQueryR63R2!=='undefined'&&coarsePointerQueryR63R2?.matches),
   rx=Math.max(compact?5:6,finite(radius,18)*.78*clamp(finite(o.scale,1),.45,2.4)*(1+lift*.08)),ry=Math.max(2,rx*(compact?.2:.3)*(1-lift*.25)),op=alpha*(compact?.8:1)*(1-lift*.55);
-  if(op<=.01)return;const d=castDir(x,y),ang=Math.atan2(d.y,d.x),len=rx*(1.55+.5*d.k)*(1-lift*.5),dark=prefs.horror==='off'?1:prefs.horror==='low'?1.1:prefs.horror==='mid'?1.2:1.3;
+  if(op<=.01)return;const d=castDir(x,y),ang=Math.atan2(d.y,d.x),len=rx*(1.55+.5*d.k)*(1-lift*.5)*(d.k>0?1:MOON.len),dark=prefs.horror==='off'?1:prefs.horror==='low'?1.1:prefs.horror==='mid'?1.2:1.3;
   ctx.save();try{ctx.globalAlpha*=op;
    // 긴 그림자: 발밑에서 빛 반대쪽으로 눕는다(가까울수록 진하게).
    ctx.fillStyle='rgba(4,4,8,'+(.16*dark).toFixed(3)+')';ctx.beginPath();ctx.ellipse(x+d.x*len*.62,y+d.y*len*.62*.55,len*.78,ry*1.05,ang*.55,0,TAU);ctx.fill();tag(x,y);

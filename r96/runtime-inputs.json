@@ -2687,7 +2687,25 @@
     "assets/r118/tiles/meadow.webp",
     "assets/r118/tiles/rosehouse.webp",
     "assets/r118/tiles/school.webp",
-    "assets/r118/tiles/sparring.webp"
+    "assets/r118/tiles/sparring.webp",
+    "perf-r119.js",
+    "visual-r119.js",
+    "assets/r119/heroes/gunner-n.webp",
+    "assets/r116/mobs/M005-idle.png",
+    "assets/r116/mobs/M011-hit.png",
+    "assets/r116/mobs/M041-idle.png",
+    "assets/r116/mobs/M045-hit.png",
+    "assets/r116/mobs/M046-hit.png",
+    "assets/r116/mobs/M069-hit.png",
+    "assets/r119/mobs/a11c1-attack.png",
+    "assets/r119/heroes/seoha-n.webp",
+    "assets/r119/heroes/neon-n.webp",
+    "assets/r119/heroes/michaela-n.webp",
+    "assets/r119/heroes/hunter-n.webp",
+    "assets/r104/bosses/c104-boss-p1.webp",
+    "assets/r104/bosses/c104-boss-p2.webp",
+    "assets/r104/bosses/c104-boss-p3.webp",
+    "assets/r104/bosses/c104-boss-p4.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3762,5 +3780,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "5f9369fe8c0802631cf2ef659537460d6500d8205f69daca8767d9a5b02c4ac5"
+  "runtimeManifestSHA256": "6de305928814ecdcc3267a62b09a78ac4fa3032d6fafd5e878ea34d12a5812a1"
 }

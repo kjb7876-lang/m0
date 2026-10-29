@@ -1,7 +1,7 @@
 {
  "schema": "storyworld.r109.mobs/v1",
- "revision": "R116",
- "note": "Drive 2026-10-28 적용본(게임 반영 전) 맞음·대기 4키. 원본 보존·가공 사본.",
+ "revision": "R116+R119",
+ "note": "Drive 2026-10-28 적용본(게임 반영 전) 맞음·대기 4키. 원본 보존·가공 사본. R119: Drive 2026-10-29 맞음·대기 4키 6종 추가.",
  "tracks": [
   {
    "group": "M001",
@@ -2570,6 +2570,355 @@
       "zip": "StoryWorld-M131-idle4-ASSET-READY-part03-of04.zip",
       "png": "candidate/frames/M131-idle-K4.png",
       "sha256": "acb160ab3fc3f0f5a05b399ad2d43b7096e6c561b1637a826220a2f718b00bc6"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M005",
+   "ids": [
+    "dist02-h1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M005-idle.png",
+   "frames": 4,
+   "cell": [
+    116,
+    153
+   ],
+   "pivot": [
+    55.8,
+    152.39
+   ],
+   "visibleHeight": 150,
+   "bytes": 123413,
+   "sha256": "a9bb3adeb62fdbd51e5613394339ec58fee91cdf3a547921ce73218f6b5a91d1",
+   "use": "늪의 염소머리 악마 · 대기 4키 (R119)",
+   "groundSpreadPx": 1,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M005-idle4-20261029-PART01.zip",
+      "bytes": 2657602,
+      "sha256": "8330292dbf71e00e5e5d4e716220fe36527e0fd956060cc7e66745409696053d"
+     },
+     {
+      "name": "StoryWorld-M005-idle4-20261029-PART02.zip",
+      "bytes": 2704071,
+      "sha256": "7f3d0663c9ee51eb97a8a9ac8e8d0e7f19a018ded004f58752d0305992f3bc0f"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M005-idle4-20261029-PART01.zip",
+      "png": "StoryWorld-M005-idle4-20261029-PART01/registered/idle_01.png",
+      "sha256": "b52e2b47ace12bb10817ad04e1d43c61d582cf829dbe8dc698e2557cbe169f32"
+     },
+     {
+      "zip": "StoryWorld-M005-idle4-20261029-PART01.zip",
+      "png": "StoryWorld-M005-idle4-20261029-PART01/registered/idle_02.png",
+      "sha256": "85df7eeb6caeca3e5df315a69b4066f46b32f154860f2b81b16b7ff83812c384"
+     },
+     {
+      "zip": "StoryWorld-M005-idle4-20261029-PART02.zip",
+      "png": "StoryWorld-M005-idle4-20261029-PART02/registered/idle_03.png",
+      "sha256": "de6d394b44518bae99fc9cf5a8fae0045084d20a96e8fab809ce820e25c46d8f"
+     },
+     {
+      "zip": "StoryWorld-M005-idle4-20261029-PART02.zip",
+      "png": "StoryWorld-M005-idle4-20261029-PART02/registered/idle_04.png",
+      "sha256": "22871dd806664ae9cb1b448916fdc3f0e67dcc0915c7124643530a0adc5583f0"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M011",
+   "ids": [
+    "a08-s1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M011-hit.png",
+   "frames": 4,
+   "cell": [
+    123,
+    157
+   ],
+   "pivot": [
+    60.04,
+    155.73
+   ],
+   "visibleHeight": 150,
+   "bytes": 127495,
+   "sha256": "5d970e124d3b624d54e3a5dd6e2a5cc20e43a69675ae04ff6d94f701c609ad66",
+   "use": "복도 비명잔영 · 맞음·회복 4키 (R119)",
+   "groundSpreadPx": 1,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M011-hit4-20261029-PART01.zip",
+      "bytes": 2794140,
+      "sha256": "01c466a09da90c88abaaa6638caffbff5e26bdfdb6d84116e393f6f3fd3e9e17"
+     },
+     {
+      "name": "StoryWorld-M011-hit4-20261029-PART02.zip",
+      "bytes": 2204979,
+      "sha256": "3705429deaf2abf165cab462a80bcb6d4121c96dfad56c109e4518a781990525"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M011-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M011-hit4-20261029-PART01/registered/idle_01.png",
+      "sha256": "bf24de5712cef726742a3e76c1faa06740d450027541484fabc55860a70c1798"
+     },
+     {
+      "zip": "StoryWorld-M011-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M011-hit4-20261029-PART01/registered/idle_02.png",
+      "sha256": "9660252404b60ae9533fd32040ddf8ceb266376d6c4f98c69a08641272759d2d"
+     },
+     {
+      "zip": "StoryWorld-M011-hit4-20261029-PART02.zip",
+      "png": "StoryWorld-M011-hit4-20261029-PART02/registered/idle_03.png",
+      "sha256": "aa14ecdaac066de21124ae98c36a1506e89b961ce02499b21a386ab683bf18d9"
+     },
+     {
+      "zip": "StoryWorld-M011-hit4-20261029-PART02.zip",
+      "png": "StoryWorld-M011-hit4-20261029-PART02/registered/idle_04.png",
+      "sha256": "75fe2a3d4f1706481e09db7341dc69242184439ad1c5c5b21b27e4e980980da7"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M041",
+   "ids": [
+    "u202-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M041-idle.png",
+   "frames": 4,
+   "cell": [
+    137,
+    154
+   ],
+   "pivot": [
+    82.23,
+    152.89
+   ],
+   "visibleHeight": 150,
+   "bytes": 116898,
+   "sha256": "ced38de11130e9365e9206331d0d6be8ed2542db6b0a3530794921d58d2f972d",
+   "use": "감옥 공명기사 · 대기 4키 (R119)",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M041-remake-idle4v2-20261029-PART01.zip",
+      "bytes": 2528677,
+      "sha256": "374d2b203a54274776f4cadc74e63a7b5b8858b64d353dd5c9be79438621c4a7"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M041-remake-idle4v2-20261029-PART01.zip",
+      "png": "StoryWorld-M041-remake-idle4v2-20261029-PART01/registered/idle_01.png",
+      "sha256": "125564191dd179c6e24725ddb1616b59bbeb4814a5a6d416315f4016b236df59"
+     },
+     {
+      "zip": "StoryWorld-M041-remake-idle4v2-20261029-PART01.zip",
+      "png": "StoryWorld-M041-remake-idle4v2-20261029-PART01/registered/idle_02.png",
+      "sha256": "e2096a843d4be11f13e7a3d11dfb1a545f819aa277b0f00e2c1ecc52c3ac7911"
+     },
+     {
+      "zip": "StoryWorld-M041-remake-idle4v2-20261029-PART01.zip",
+      "png": "StoryWorld-M041-remake-idle4v2-20261029-PART01/registered/idle_03.png",
+      "sha256": "38a0d2c729928b27bc0b5269c9ad254cea7a7c5e68877fe17f9eecfe136b146f"
+     },
+     {
+      "zip": "StoryWorld-M041-remake-idle4v2-20261029-PART01.zip",
+      "png": "StoryWorld-M041-remake-idle4v2-20261029-PART01/registered/idle_04.png",
+      "sha256": "794ce0081817b050abb1c36491b72ca7a90fc50a1672d20c5c42ef90c0f6d033"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M045",
+   "ids": [
+    "l304-e1"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M045-hit.png",
+   "frames": 4,
+   "cell": [
+    381,
+    158
+   ],
+   "pivot": [
+    191.1,
+    156.89
+   ],
+   "visibleHeight": 150,
+   "bytes": 274096,
+   "sha256": "8954c70de740bf799f417a7afe35f9485b027fde6250768ddbe804340e6ebe4a",
+   "use": "귀비탕 공명 안개핵 · 맞음·회복 4키 (R119)",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M045-hit4-20261029-PART01.zip",
+      "bytes": 2343949,
+      "sha256": "1ef625ec334703dfe6fbc050f180770a0105e8f5fcc9813a27d8717a26dbe2a3"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M045-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M045-hit4-20261029-PART01/crops/M045-hit-K1.png",
+      "sha256": "25dbcaa8cf1094c081f50dbda0c1bb8e221c21f7040b130c5457da16da0bffa1"
+     },
+     {
+      "zip": "StoryWorld-M045-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M045-hit4-20261029-PART01/crops/M045-hit-K2.png",
+      "sha256": "f765fb09ce417950d118fdd61d2c7dd01ab1bcab042f332a9735d859722b4185"
+     },
+     {
+      "zip": "StoryWorld-M045-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M045-hit4-20261029-PART01/crops/M045-hit-K3.png",
+      "sha256": "a2064d135ca4d29b56c98822b56d2947f59a174d1af09a2743d6c320bbbf9d23"
+     },
+     {
+      "zip": "StoryWorld-M045-hit4-20261029-PART01.zip",
+      "png": "StoryWorld-M045-hit4-20261029-PART01/crops/M045-hit-K4.png",
+      "sha256": "7bf27909fa82cf97e5cfefc64f07320f5c519658399e57e953727c9a56b79e87"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M046",
+   "ids": [
+    "l304-e2"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M046-hit.png",
+   "frames": 4,
+   "cell": [
+    202,
+    155
+   ],
+   "pivot": [
+    111.56,
+    153.69
+   ],
+   "visibleHeight": 150,
+   "bytes": 201720,
+   "sha256": "637789e9028bcb6d49d348ef72f721a74c98797fa0ae513af78febd9207ef344",
+   "use": "잠들지 못한 검은 영혼 · 맞음·회복 4키 (R119)",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M046-hit4-v1-20261029-PART01.zip",
+      "bytes": 2636826,
+      "sha256": "b4d2eb652c10ba38c001588a163d6a79ee5db29ad4df60760c3582f777c098b4"
+     },
+     {
+      "name": "StoryWorld-M046-hit4-v1-20261029-PART02.zip",
+      "bytes": 633466,
+      "sha256": "945ef932867b7ee891b0853cc1c6bca762ee44ac480bc12d4b27ceb3c636b56c"
+     },
+     {
+      "name": "StoryWorld-M046-hit4-v1-20261029-PART03.zip",
+      "bytes": 2520219,
+      "sha256": "6a66bf4849642f520f77c1f92b842dc64eceb06bfbce57203477d06c6e8d84f5"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M046-hit4-v1-20261029-PART01.zip",
+      "png": "StoryWorld-M046-hit4-v1-20261029-PART01/crops/M046-hit-K1-exact.png",
+      "sha256": "43a8900e0f2d17173095583b2c33492557d028f3225dd18fc3bb775196282762"
+     },
+     {
+      "zip": "StoryWorld-M046-hit4-v1-20261029-PART01.zip",
+      "png": "StoryWorld-M046-hit4-v1-20261029-PART01/crops/M046-hit-K2-exact.png",
+      "sha256": "b8952bb765a0e67dd5c1646daba2593900b2eecaa630a2a42b19aa7df4013ef9"
+     },
+     {
+      "zip": "StoryWorld-M046-hit4-v1-20261029-PART01.zip",
+      "png": "StoryWorld-M046-hit4-v1-20261029-PART01/crops/M046-hit-K3-exact.png",
+      "sha256": "04c1159d06e5cb7e5b53737361742201608f3123ca9d66ff5d790472438589aa"
+     },
+     {
+      "zip": "StoryWorld-M046-hit4-v1-20261029-PART02.zip",
+      "png": "StoryWorld-M046-hit4-v1-20261029-PART02/crops/M046-hit-K4-exact.png",
+      "sha256": "35a1eb7232e7adbcdea3ebf0b7e3f5ef3d34ee2f03707490e1a330b358ed16b1"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M069",
+   "ids": [
+    "kair-elite-51"
+   ],
+   "track": "hit",
+   "kind": "walk",
+   "path": "assets/r116/mobs/M069-hit.png",
+   "frames": 4,
+   "cell": [
+    163,
+    165
+   ],
+   "pivot": [
+    85.11,
+    163.49
+   ],
+   "visibleHeight": 150,
+   "bytes": 191400,
+   "sha256": "dd5f8cda25357d0e992162932e4f50655450832c7e52dc06faecc247e2732013",
+   "use": "상위수문장 51 · 맞음·회복 4키 (R119)",
+   "groundSpreadPx": 0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M069-hit4v3-20261029-PART01.zip",
+      "bytes": 2654302,
+      "sha256": "bb4618134e88cb592e04773889b047b77fc3fe8a04fcc1d430530d0457186b14"
+     },
+     {
+      "name": "StoryWorld-M069-hit4v3-20261029-PART02.zip",
+      "bytes": 1483335,
+      "sha256": "0a04f1d39c1cd2ca3d118df8c595fdb53d133ed4676689082e77d768b1825a65"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M069-hit4v3-20261029-PART01.zip",
+      "png": "StoryWorld-M069-hit4v3-20261029-PART01/registered/idle_01.png",
+      "sha256": "9ae0d61dff50bc6e2b14791f26f4271da5ec9c21bb292400c259e2d3b9d2fbaf"
+     },
+     {
+      "zip": "StoryWorld-M069-hit4v3-20261029-PART01.zip",
+      "png": "StoryWorld-M069-hit4v3-20261029-PART01/registered/idle_02.png",
+      "sha256": "5e8057bcb871a1ea4ee659c6d5c8bf472f3dfe88ace23c58613b8e83d32ab5a2"
+     },
+     {
+      "zip": "StoryWorld-M069-hit4v3-20261029-PART01.zip",
+      "png": "StoryWorld-M069-hit4v3-20261029-PART01/registered/idle_03.png",
+      "sha256": "77c401fbdb054e62c297dae4188ed17fbbe81d8ee8a01755a1a4c3dfc4390333"
+     },
+     {
+      "zip": "StoryWorld-M069-hit4v3-20261029-PART01.zip",
+      "png": "StoryWorld-M069-hit4v3-20261029-PART01/registered/idle_04.png",
+      "sha256": "67c3e108226809a2470c7c0bc62119c0727da8e243b3ccb4e86f0ba4b0fc335e"
      }
     ]
    }
