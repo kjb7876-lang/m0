@@ -8674,8 +8674,8 @@
     },
     {
       "path": "assets/r121/walk/walk-gunner-e.png",
-      "bytes": 296934,
-      "sha256": "99da990318b0a28faedcaebb69ab058d9f1bd13bdc43909e0acaefe47153ed5c"
+      "bytes": 289585,
+      "sha256": "318d51353a9c2100f3b01680e8864beadc8fd9ff4099424e7f95e314e4977742"
     },
     {
       "path": "assets/r121/walk/walk-gunner-n.png",
@@ -17644,7 +17644,7 @@
     }
   ],
   "fileCount": 3528,
-  "totalBytes": 764193319,
+  "totalBytes": 764185970,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {
