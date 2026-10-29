@@ -98,6 +98,8 @@
   const D=THEMES[T.key];
   // 조형물
   const decoList=[...(D.deco||[])];if(T.key==='tower'&&X.exit&&T.z?.kind!=='confront')st.lift={x:X.exit.x,y:X.exit.y};
+  if(T.key==='tower'&&L?.entry){let best=null,bk=1e9;for(const q of pool){if(!q.wall)continue;const de=Math.hypot(q.x-L.entry.x,q.y-L.entry.y);if(de<3.4||de>9)continue;if(keep.some(p=>Math.hypot(p.x-q.x,p.y-q.y)<Math.min(p.r,2.4)&&!(p.x===L.entry.x&&p.y===L.entry.y)))continue;if(blockedAt(q.x,q.y,.12))continue;if(de<bk){bk=de;best=q;}}
+   if(best){used.push(best);const d={id:'r123:'+T.zone+':stairs',kind:'stairs',x:best.x,y:best.y,seed:3};if(!has(best.a,best.b-1)){d.y=best.b+.15;d.dir=[0,-1];d.perp=[1,0];}else{d.x=best.a+.15;d.dir=[-1,0];d.perp=[0,1];}st.deco.push(d);}}// 아래층에서 올라온 계단
   for(const[kind,n,where]of decoList)for(let i=0;i<n;i++){const q=spot(where==='wall',kind==='tree'?5:3.2)||(where==='wall'?spot(false,3.2):null);if(!q)continue;
    const d={id:'r123:'+T.zone+':'+kind+':'+i,kind,x:q.x,y:q.y,seed:hash(T.zone+kind+i),tilt:T.key==='rose'&&where!=='wall'?(R()*2-1)*.2:0};
    if(where==='wall'&&q.wall){if(!has(q.a,q.b-1)){d.y=q.b+.12;d.face='x';}else{d.x=q.a+.12;d.face='y';}}// 뒷벽에 붙이고 벽면 기울기에 맞춰 그린다
@@ -222,6 +224,12 @@
    g.fillStyle='rgba(255,255,255,.06)';g.beginPath();g.moveTo(q.x-w/2,y0-h*.2);g.lineTo(q.x-w/2+w*.35,y0-h);g.lineTo(q.x-w/2+w*.5,y0-h);g.lineTo(q.x-w/2,y0-h*.05);g.closePath();g.fill();},
   sign(g,q,u,t,d){const w=u*.9,h=u*.5,y0=q.y-u*1.1;g.fillStyle='#2a2622';g.fillRect(q.x-u*.04,y0,u*.08,u*1.1);g.fillStyle='#14120f';g.fillRect(q.x-w/2,y0-h,w,h);g.strokeStyle='#8a7a5a';g.lineWidth=1.5;g.beginPath();g.rect(q.x-w/2+2,y0-h+2,w-4,h-4);g.stroke();
    g.fillStyle='#e8dcc0';g.font='bold '+Math.round(u*.34)+'px serif';g.textAlign='center';g.textBaseline='middle';g.fillText(d.floor==='G'?'G':d.floor+'F',q.x,y0-h/2);},
+  stairs(g,q,u,t,d){const[dx,dy]=d.dir||[0,-1],[px,py]=d.perp||[1,0],W=.75,step=.32,hp=u*.42,bx=d.x-dx*1.6,by=d.y-dy*1.6;
+   // 벽 쪽으로 오르는 다섯 칸: 영웅 쪽(앞)이 낮고 벽 쪽이 높다. 세계 좌표로 그려 바닥과 맞고, 뒤 칸부터 그린다.
+   for(let k=4;k>=0;k--){const s0=k*step,s1=s0+step,hh=(k+1)*hp,a=P(bx+dx*s0-px*W,by+dy*s0-py*W),b=P(bx+dx*s0+px*W,by+dy*s0+py*W),c=P(bx+dx*s1+px*W,by+dy*s1+py*W),e=P(bx+dx*s1-px*W,by+dy*s1-py*W);
+    g.fillStyle='#2a2522';g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.lineTo(b.x,b.y-hh);g.lineTo(a.x,a.y-hh);g.closePath();g.fill();
+    g.fillStyle='#5a524a';g.beginPath();g.moveTo(a.x,a.y-hh);g.lineTo(b.x,b.y-hh);g.lineTo(c.x,c.y-hh);g.lineTo(e.x,e.y-hh);g.closePath();g.fill();
+    g.strokeStyle='rgba(226,180,56,.35)';g.lineWidth=Math.max(1,u*.03);g.beginPath();g.moveTo(a.x,a.y-hh);g.lineTo(b.x,b.y-hh);g.stroke();}},
   lift(g,q,u,t,d){const w=u*1.3,h=u*2.1;g.fillStyle='#262a2e';g.fillRect(q.x-w/2-u*.12,q.y-h-u*.3,w+u*.24,h+u*.3);const open=.08+.04*Math.sin(t*2);
    g.fillStyle='#4a5056';g.fillRect(q.x-w/2,q.y-h,w*(.5-open),h);g.fillRect(q.x+w*open,q.y-h,w*(.5-open),h);const gr=g.createLinearGradient(q.x-w*open,0,q.x+w*open,0);gr.addColorStop(0,'rgba(255,230,170,.1)');gr.addColorStop(.5,'rgba(255,230,170,.75)');gr.addColorStop(1,'rgba(255,230,170,.1)');g.fillStyle=gr;g.fillRect(q.x-w*open,q.y-h,w*open*2,h);
    g.fillStyle='#0b0c0e';g.fillRect(q.x-w*.3,q.y-h-u*.28,w*.6,u*.22);g.fillStyle='rgba(255,120,60,.95)';g.font='bold '+Math.round(u*.18)+'px monospace';g.textAlign='center';g.textBaseline='middle';
@@ -276,10 +284,10 @@
   willow(g,q,u,t,d){const H=u*3;g.fillStyle='#3a3a2a';g.fillRect(q.x-u*.12,q.y-H*.6,u*.24,H*.6);const C=['rgba(150,180,140,.55)','rgba(170,150,210,.5)','rgba(120,160,170,.5)','rgba(220,200,160,.45)'];
    for(let k=0;k<4;k++){g.fillStyle=C[k];g.beginPath();for(let i=k;i<28;i+=4){const a=(i*2.39+d.seed)%TAU,rr=u*(.35+((i*37)%10)/10*1.0),x=q.x+Math.cos(a)*rr,y=q.y-H*.72+Math.sin(a)*rr*.55+i*u*.03+Math.sin(t*.8+i)*1.5;g.moveTo(x+u*.16,y);g.ellipse(x,y,u*.16,u*.08,(i%3-1)*.4,0,TAU);}g.fill();}}// 모네식 둥근 붓점
  };
- const SCALE={clock:1.6,stone:1.35,sunflower:1.45,cypress:1.3,shard:1.45,bottle:1.35,willow:1.45,easel:1.35,canvas:1.35,monolith:1.25,pylon:1.25,gear:1.2,goldpillar:1.2,endless:1.2,frame:1.2,window:1.15,locker:1.1};
+ const SCALE={stairs:1,clock:1.6,stone:1.35,sunflower:1.45,cypress:1.3,shard:1.45,bottle:1.35,willow:1.45,easel:1.35,canvas:1.35,monolith:1.25,pylon:1.25,gear:1.2,goldpillar:1.2,endless:1.2,frame:1.2,window:1.15,locker:1.1};
  function drawDeco(p){const d=p.r123Deco,fn=DRAW[d.kind];if(!fn||!prefs.deco||!prefs.mood)return;const q=P(p.x,p.y);if(!onScreen(q,200))return;const u=U(),t=now(),g=ctx;
   const hp=P(player.x,player.y),occ=q.y>hp.y-3&&q.y-u*2.4<hp.y-12&&Math.abs(q.x-hp.x)<u*1.1;
-  g.save();try{if(typeof shadow==='function'&&!['frame','window','sign','endless','stone','lift'].includes(d.kind))shadow(q.x,q.y,u*.55,{alpha:.7});
+  g.save();try{if(typeof shadow==='function'&&!['frame','window','sign','endless','stone','lift','stairs'].includes(d.kind))shadow(q.x,q.y,u*.55,{alpha:.7});
    if(occ)g.globalAlpha*=.38;if(d.tilt){g.translate(q.x,q.y);g.rotate(d.tilt);g.translate(-q.x,-q.y);}
    if(d.face){g.translate(q.x,q.y);g.transform(1,d.face==='x'?.5:-.5,0,1,0,0);g.translate(-q.x,-q.y);}
    fn(g,q,u*(SCALE[d.kind]||1),t,d);stats.drawnDeco++;}catch(e){fail(e);}finally{g.restore();}}
@@ -356,11 +364,11 @@
  // ---- 들어설 때 표시(층·연도) -----------------------------------------------------------------------------
  function bannerEl(){let el=typeof document!=='undefined'?document.getElementById('moodBannerR123'):null;if(el)return el;const s=stageEl();if(!s)return null;el=document.createElement('div');el.id='moodBannerR123';el.setAttribute('aria-live','polite');
   el.style.cssText='position:absolute;left:50%;top:16%;transform:translateX(-50%);z-index:7;pointer-events:none;text-align:center;opacity:0;transition:opacity .5s ease;font-family:serif;color:#eadfc6;text-shadow:0 2px 8px #000,0 0 2px #000';s.appendChild(el);return el;}
- function showBanner(b){const el=bannerEl();if(!el)return;stats.banners++;const id=++bannerSerial;
+ function showBanner(b){const el=bannerEl();if(!el)return;stats.banners++;const id=++bannerSerial;const narrow=(stageEl()?.clientWidth||1280)<720,BIG=narrow?40:64,BIG2=narrow?36:58;el.style.top=narrow?'12%':'16%';
   if(b.kind==='tower'){const lit=b.floor==='G'?0:+b.floor;let gauge='<div style="display:flex;gap:3px;justify-content:center;margin-top:8px">';for(let i=1;i<=16;i++)gauge+='<i style="display:block;width:9px;height:'+(6+i*.6).toFixed(1)+'px;align-self:flex-end;background:'+(i===lit?'#e8c070':i<lit?'rgba(232,192,112,.38)':'rgba(255,255,255,.12)')+'"></i>';gauge+='</div>';
-   el.innerHTML='<div data-b="big" style="font-size:64px;letter-spacing:.08em;font-weight:bold;line-height:1">'+(b.from!=null&&b.from!==b.floor?esc(lab(b.from)):esc(lab(b.floor)))+'</div><div style="font-size:15px;letter-spacing:.2em;margin-top:6px">감정의 탑 · '+esc(b.sub)+'</div>'+gauge;
+   el.innerHTML='<div data-b="big" style="font-size:'+BIG+'px;letter-spacing:.08em;font-weight:bold;line-height:1">'+(b.from!=null&&b.from!==b.floor?esc(lab(b.from)):esc(lab(b.floor)))+'</div><div style="font-size:15px;letter-spacing:.2em;margin-top:6px">감정의 탑 · '+esc(b.sub)+'</div>'+gauge;
    if(b.from!=null&&b.from!==b.floor&&b.from!=='G'&&b.floor!=='G'){const a=+b.from,z=+b.floor,step=a<z?1:-1;let v=a;const big=el.querySelector('[data-b="big"]');const tm=setInterval(()=>{if(id!==bannerSerial){clearInterval(tm);return;}v+=step;big.textContent=v+'F';if(v===z)clearInterval(tm);},Math.max(70,900/Math.max(1,Math.abs(z-a))));}}
-  else if(b.kind==='era'){const col=b.era==='data'?'#6dffb0':b.era==='forest'?'#ffd590':'#ff9a6a';el.innerHTML='<div data-b="big" style="font-family:monospace;font-size:58px;letter-spacing:.14em;color:'+col+';text-shadow:0 0 12px '+col+',0 2px 6px #000">----</div><div style="font-size:15px;letter-spacing:.18em;margin-top:6px">네오 서울 · '+esc(b.label)+'</div>';
+  else if(b.kind==='era'){const col=b.era==='data'?'#6dffb0':b.era==='forest'?'#ffd590':'#ff9a6a';el.innerHTML='<div data-b="big" style="font-family:monospace;font-size:'+BIG2+'px;letter-spacing:.14em;color:'+col+';text-shadow:0 0 12px '+col+',0 2px 6px #000">----</div><div style="font-size:15px;letter-spacing:.18em;margin-top:6px">네오 서울 · '+esc(b.label)+'</div>';
    const big=el.querySelector('[data-b="big"]'),target=b.year||'연도 없음';let n=0;const tm=setInterval(()=>{if(id!==bannerSerial){clearInterval(tm);return;}n++;if(n<14){big.textContent=Array.from({length:4},()=>String(Math.floor(Math.random()*10))).join('');}else{big.textContent=b.year?target+'년':target;clearInterval(tm);}},60);}
   el.style.opacity='1';clearTimeout(showBanner.tm);showBanner.tm=setTimeout(()=>{if(id===bannerSerial)el.style.opacity='0';},3600);}
  let bannerSerial=0;const lab=f=>f==='G'?'G':f+'F';const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
