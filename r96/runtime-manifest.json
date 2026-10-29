@@ -8464,8 +8464,8 @@
     },
     {
       "path": "assets/r118/tiles/index.json",
-      "bytes": 7704,
-      "sha256": "c154a9fdd6814d1ba3112ee2079ec44975783f1f4be216d789c8aec675f3b529"
+      "bytes": 8699,
+      "sha256": "c0c2ffd17468cfec0afad61e41293f207e4f81e38d4173081f3666ebf67a80ab"
     },
     {
       "path": "assets/r118/tiles/kitchen.webp",
@@ -8481,6 +8481,16 @@
       "path": "assets/r118/tiles/rosehouse.webp",
       "bytes": 479354,
       "sha256": "f0d81c0e66830844620e0e66a0240f0381251a722549c5cc81d4429f0c10cea8"
+    },
+    {
+      "path": "assets/r118/tiles/sandblack.webp",
+      "bytes": 390486,
+      "sha256": "c773e5cbd2f5c4c8c09dee1b19ca1472afa98150a3fd6861b83861d62cab20df"
+    },
+    {
+      "path": "assets/r118/tiles/sandgold.webp",
+      "bytes": 494468,
+      "sha256": "7e079ffa0806d70efd391fe7f335fddf2ccd3582e91d9f867f0aa58eb0bd5d37"
     },
     {
       "path": "assets/r118/tiles/school.webp",
@@ -17494,8 +17504,8 @@
     },
     {
       "path": "world-tiles-r118.js",
-      "bytes": 8575,
-      "sha256": "476114d9e13afe0b320242b4cca144f55f6cf8113ac9f2cf2a17f21d54812913"
+      "bytes": 8907,
+      "sha256": "22fa6b34f0d9722fd7b4cd89cf4bdfcfd963571f9dd2c1c5e472c367cad1e426"
     },
     {
       "path": "world-visual-r78.js",
@@ -17503,8 +17513,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3500,
-  "totalBytes": 761439922,
+  "fileCount": 3502,
+  "totalBytes": 762326203,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

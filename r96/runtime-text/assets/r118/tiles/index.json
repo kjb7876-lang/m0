@@ -305,6 +305,45 @@
    "bytes": 441466,
    "sha256": "18e46c7b843ff3537d24a7e47945b626dd541c0c7891f6a6d5fb0e0e03bd0c33",
    "added": "R120"
+  },
+  "sandblack": {
+   "family": "TIME-SAND-black",
+   "regions": [
+    "kair10",
+    "kair03"
+   ],
+   "floor": {
+    "source": "exec-51092cd6-e427-4197-adf0-4bf4451b46de.png",
+    "decodedRgbSha256": "6f5d170f1867d0b9e678bc78f36d2dcfaba91b1d20d2acdd14f50653d1c92b70",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "sandblack.webp",
+   "bytes": 390486,
+   "sha256": "c773e5cbd2f5c4c8c09dee1b19ca1472afa98150a3fd6861b83861d62cab20df",
+   "added": "R120"
+  },
+  "sandgold": {
+   "family": "TIME-SAND-gold",
+   "regions": [
+    "restKairo"
+   ],
+   "floor": {
+    "source": "exec-20002d84-8aac-411e-b65f-7a2be6093b9a.png",
+    "decodedRgbSha256": "e61cd4b49bca4e2c3045a32008d0047cd3377337dc702ba7300f90b9af9d799f",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "wall": null,
+   "file": "sandgold.webp",
+   "bytes": 494468,
+   "sha256": "7e079ffa0806d70efd391fe7f335fddf2ccd3582e91d9f867f0aa58eb0bd5d37",
+   "added": "R120"
   }
  }
 }

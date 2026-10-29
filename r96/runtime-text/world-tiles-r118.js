@@ -30,6 +30,8 @@
   ep1b06b:{file:'cabin',floor:0xf2eae2,wall:0xf2eae2},         // 눈보라 속의 소년
   ep1b09:{file:'snow',floor:0xffffff},                         // 생체 부트로더
   kair07:{file:'workshop',floor:0xece4dc,wall:0xe4dcd4},       // 검은 공방
+  kair03:{file:'sandblack',floor:0xffffff},kair10:{file:'sandblack',floor:0xffffff}, // 세이렌 모르·붕괴 의식장: 발을 덮는 검은 모래 (R120)
+  restKairo:{file:'sandgold',floor:0xd2c8bc},                  // 최초명령 재작성: 풀려난 시간의 금빛 모래, 효과와 겹치지 않게 살짝 낮춤 (R120)
   last304:{file:'meadow',floor:0xe8ecdc},                      // 중립 지역의 재각성 (젖은 풀밭)
   'sz115-S01-1':{file:'rosehouse',floor:0xf0e8dc,wall:0xece4d8}, // S-01 찻잔 안의 집 (흑백 타일·금 간 꽃무늬 벽)
   'sz115-S03-1':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-2':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, 'sz115-S03-3':{file:'sparring',floor:0xe4e8f0,wall:0xe6e8e6}, // S-03 대련장
