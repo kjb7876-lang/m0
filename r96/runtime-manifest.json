@@ -8678,6 +8678,11 @@
       "sha256": "0926812e8087921255155047da629414abf48741d4b3ec8e922c855018461a15"
     },
     {
+      "path": "assets/r121/walk/walk-gunner-e8.png",
+      "bytes": 578821,
+      "sha256": "c8dd24832073e9b3d532064fa770e2ee4cb244d31b85b967f77f14fb17fb744a"
+    },
+    {
       "path": "assets/r121/walk/walk-gunner-n.png",
       "bytes": 231578,
       "sha256": "f09eb7c6936fd180d713aba078025bba35efa60f30c38a643c52ba0ea1c6f6c5"
@@ -17529,8 +17534,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 19573,
-      "sha256": "f48e5a039468b74af3244c143228e0ac09b7a593428f60f0ec479aeea1bf4fd3"
+      "bytes": 20055,
+      "sha256": "bb6d8f55f2dcd13f1b21f86e024d313c938ef585b0c9e74d55bedcaec44ea26e"
     },
     {
       "path": "visual-r90-world.js",
@@ -17643,8 +17648,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3528,
-  "totalBytes": 764186730,
+  "fileCount": 3529,
+  "totalBytes": 764766033,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

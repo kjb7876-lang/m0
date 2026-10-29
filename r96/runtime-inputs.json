@@ -2738,7 +2738,8 @@
     "assets/r121/walk/walk-gunner-n.png",
     "assets/r121/walk/walk-gunner-ne.png",
     "assets/r121/walk/walk-gunner-s.png",
-    "assets/r121/walk/walk-gunner-se.png"
+    "assets/r121/walk/walk-gunner-se.png",
+    "assets/r121/walk/walk-gunner-e8.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3813,5 +3814,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e7723b51880cba6d7b85320b10f703d33729237011508dbcfa4abdd8af679f76"
+  "runtimeManifestSHA256": "7a36e5677be8360a0f8a296853751602f72465233bf97989e6d900b11c76b2eb"
 }

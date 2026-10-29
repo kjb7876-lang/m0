@@ -76,9 +76,9 @@
  try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
  // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
- const OWN_WALK={gunner:{s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]}};
+ const OWN_WALK={gunner:{s:['s',0],se:['se',0],e:['e8',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e8',1],nw:['ne',1]}};// 옆(e8)은 무거운 보병 행군 원리로 다시 그린 8프레임(2줄)
  const preloadWalk=()=>{try{if(typeof ensureImages==='function'&&typeof player==='object'&&player?.hero&&OWN_WALK[player.hero]){const ps=[...new Set(Object.values(OWN_WALK[player.hero]).map(v=>'assets/r121/walk/walk-'+player.hero+'-'+v[0]+'.png'))];if(ps.some(p=>!walkLoading.has(p))){ps.forEach(p=>walkLoading.add(p));Promise.resolve(ensureImages(ps)).catch(()=>ps.forEach(p=>walkMissing.add(p)));}}}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
- function sheetFor(hero,dir){const own=OWN_WALK[hero]?.[dir];if(own){const p='assets/r121/walk/walk-'+hero+'-'+own[0]+'.png';if(!walkMissing.has(p))return{path:p,mirror:!!own[1],cols:4,rows:1,frames:4};}
+ function sheetFor(hero,dir){const own=OWN_WALK[hero]?.[dir];if(own){const p='assets/r121/walk/walk-'+hero+'-'+own[0]+'.png';if(!walkMissing.has(p))return own[0].endsWith('8')?{path:p,mirror:!!own[1],cols:4,rows:2,frames:8,own8:true}:{path:p,mirror:!!own[1],cols:4,rows:1,frames:4};}
   if(dir==='n'){const ab=Math.floor(walkState.d*3.2)%2?'b':'a',p='assets/heroes/normalized/'+hero+'/run_back_'+ab+'.webp';if(!walkMissing.has(p))return{path:p,mirror:false,single:true};}/* R121: 위쪽 걷기 묶음이 없어 정면 위로 갈 때 뒷모습 달리기 2장 */const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
   for(const d of [dir,...(NEAR[dir]||[])]){const s=tryDir(d);if(s&&!walkMissing.has(s.path))return s;}return null;}
  function cellBox(row,path,i,cols=4,rows=2){const k=path+'|'+i;if(walkBox.has(k))return walkBox.get(k);const im=row.image,W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,one=i<0,cw=one?W:W/cols,ch=one?H:H/rows,sx=one?0:(i%cols)*cw,sy=one?0:Math.floor(i/cols)*ch;
@@ -103,8 +103,10 @@
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
    if(!row){if(!walkLoading.has(sh.path)&&typeof ensureImages==='function'){walkLoading.add(sh.path);Promise.resolve(ensureImages([sh.path])).catch(()=>walkMissing.add(sh.path));}return r;}
    let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
-   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
-   const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=sh.mirror?-1:1;
+   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
+   // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.
+   const n=sh.frames||8,ph=(n===8?[0,-1,1,.4,0,-1,1,.4][frame]:[0,1,0,1][frame])??0,bob=(ph>0?.025*ph:.015*ph)*want;
+   const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1])-bob,f=sh.mirror?-1:1;
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
     points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
   return r;};}
