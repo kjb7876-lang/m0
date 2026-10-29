@@ -2712,7 +2712,28 @@
     "assets/r120/cult/cult-leader-drive-fold-v17.webp",
     "assets/r118/tiles/asphalt.webp",
     "assets/r118/tiles/sandblack.webp",
-    "assets/r118/tiles/sandgold.webp"
+    "assets/r118/tiles/sandgold.webp",
+    "assets/r121/heroes/gunner/aim_back.webp",
+    "assets/r121/heroes/gunner/aim_front.webp",
+    "assets/r121/heroes/gunner/attack_left.webp",
+    "assets/r121/heroes/gunner/attack_right.webp",
+    "assets/r121/heroes/gunner/guard_left.webp",
+    "assets/r121/heroes/gunner/guard_right.webp",
+    "assets/r121/heroes/gunner/index.json",
+    "assets/r121/heroes/gunner/player_aim.webp",
+    "assets/r121/heroes/gunner/player_aimup.webp",
+    "assets/r121/heroes/gunner/player_crouch.webp",
+    "assets/r121/heroes/gunner/player_idle.webp",
+    "assets/r121/heroes/gunner/player_run1.webp",
+    "assets/r121/heroes/gunner/player_run2.webp",
+    "assets/r121/heroes/gunner/run_back_a.webp",
+    "assets/r121/heroes/gunner/run_back_b.webp",
+    "assets/r121/heroes/gunner/run_front_a.webp",
+    "assets/r121/heroes/gunner/run_front_b.webp",
+    "assets/r121/heroes/gunner/run_left_a.webp",
+    "assets/r121/heroes/gunner/run_left_b.webp",
+    "assets/r121/heroes/gunner/run_right_a.webp",
+    "assets/r121/heroes/gunner/run_right_b.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3787,5 +3808,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3508410ac45aea4a6f5fd743e442b262ccd33854b452106ec034dd1606a61a08"
+  "runtimeManifestSHA256": "4f1a337c7c7539402f8ce75116a97e9658cbb214af5e306fb76391b60d852703"
 }

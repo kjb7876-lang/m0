@@ -256,7 +256,9 @@ const hitBase=hitEnemy;hitEnemy=function(e,value,source,...rest){const before=e?
 // ---- hit feel: enemy → hero -----------------------------------------------------------
 let hurtFlash=0,flashEl=null;
 function ownerOf(source){if(!source||!room?.enemies)return null;return room.enemies.find(e=>e===source||e.id===source.owner||e.id===source.ownerId||e===source.owner)||null;}
-function onHeroHurt(source){const owner=ownerOf(source),colour=POL()?.colourOf?.(owner)||'red',rgb=SIGDATA()?.sigColours?.[colour]||[235,52,52],h=actorHeight();
+function onHeroHurt(source){const owner=ownerOf(source);let colour=POL()?.colourOf?.(owner)||'red',rgb=SIGDATA()?.sigColours?.[colour]||[235,52,52];const h=actorHeight();
+ // R120: 옅은·흰 고유색(pale 등, 채도 낮음)은 더하기 합성에서 흰 빛으로 타 버려 맞은 느낌이 안 났다 -> 붉은 피 색으로 바꾼다.
+ if(Math.max(...rgb)-Math.min(...rgb)<70||Math.min(...rgb)>150){colour='red';rgb=SIGDATA()?.sigColours?.red||[235,52,52];}
  const from=owner||(Number.isFinite(source?.x)?source:null),ang=from?Math.atan2(player.y-from.y,player.x-from.x):Math.random()*TAU,sa=screenAngle(ang);
  add({kind:'heroHurt',x:player.x,y:player.y,lift:h*.5,colour,rgb,sa,life:.42,seed:Math.random()*6});
  const s=stateOf(player);s.hurtAt=time;s.hurtDx=Math.cos(sa);hurtFlash=1;stats.hurts++;}

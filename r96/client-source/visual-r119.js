@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -18,12 +18,14 @@
  // 2) 영웅 그림 일관성: 기억사수의 북쪽(위를 볼 때·위로 겨눌 때) 그림만 가늘고 작은 다른 화풍이라 7방향과 어긋났다.
  //    같은 화풍·같은 키·같은 발 위치로 다시 그린 뒷모습(ChatGPT 2026-10-29, 원본 앞모습·대각선 그림을 참조)으로 바꿔 보낸다.
  //    원본 파일은 그대로 두고 이미지 주소만 바꾼다(캐시 키·그림 크기 512·발밑 피벗 동일).
- const SWAP=Object.freeze(Object.fromEntries(['gunner','seoha','neon','michaela','hunter'].map(h=>['assets/hero_direction337/'+h+'/n.webp','assets/r119/heroes/'+h+'-n.webp'])));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
+ const SWAP=Object.freeze(Object.fromEntries(['gunner','seoha','neon','michaela','hunter'].map(h=>['assets/hero_direction337/'+h+'/n.webp','assets/r119/heroes/'+h+'-n.webp']).concat(
+  // R121: 기억사수 동작 프레임 중 흰 스티커 테두리·검은 번짐이 있는 세대를 정리한 사본(scripts/r121-gunner-clean.py)으로 바꿔 8방향 그림과 화풍을 맞춘다.
+  ['aim_back','aim_front','attack_left','attack_right','guard_left','guard_right','player_aim','player_aimup','player_crouch','player_idle','player_run1','player_run2','run_back_a','run_back_b','run_front_a','run_front_b','run_left_a','run_left_b','run_right_a','run_right_b'].map(n=>['assets/heroes/normalized/gunner/'+n+'.webp','assets/r121/heroes/gunner/'+n+'.webp']))));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
  //    원래 그림이 캐시에 정상으로 올라온 뒤에 새 그림을 따로 받아, 다 받아지면 같은 캐시 칸의 그림만 바꾼다(실패하면 원래 그림 유지).
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
   try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=SWAP[k];
-    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
+    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;if(typeof imageCrop==='function'){r.r119Crop=r.crop;r.crop=imageCrop(im);}/* R121: 게임이 처음 그림으로 재 둔 내용 상자(crop)를 새 그림으로 다시 잰다 — 안 하면 바깥이 잘린다 */swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
   return row;};}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
  //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
@@ -38,6 +40,65 @@
      const [cw,ch]=ANGEL.cell,f={...frame,path:ANGEL.path,assetFrame:{...frame.assetFrame,sourceRect:[i*cw,0,cw,ch],pivot:[...ANGEL.pivot],visibleHeight:ANGEL.visibleHeight,bakedFacing:'right'}};
      stats.angel=(stats.angel||0)+1;const res=frameBase.call(this,ANGEL.path,f,x,y,height,opt,...rest);if(res!==false)return res;}}}catch(_){}
   return frameBase.apply(this,arguments);};}
- function set(p={}){if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
- window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),lastError,collisionChanged:false})});
+ // 4) (R121 철회) 그림을 불러온 뒤 키를 맞춰 다시 그려 넣던 보정은 뺐다: 이 게임은 원본 그림 기준의 자르기 상자로 영웅을 그려서
+ //    다시 그린 그림의 바깥이 잘렸다. 키 맞추기는 R114 fitHero(몸 비율 실측)가 하고, R119·R121 교체 그림도 거기서 알아보게 했다.
+ const fitState=new Map();function fitHero(){}
+ // 5) 영웅이 맞을 때 흰 빛 대신 피 (사용자 2026-10-29 "피격 시 왜 하얀빛, 상대 색이나 붉은 피 튀기는 느낌으로"):
+ //    한 번 맞을 때 주황 충돌 그림(burst-impact) 10~20장이 더하기 합성으로 겹쳐 하얗게 타 버렸다. 영웅 몸에 생긴
+ //    이 충돌 그림들은 그리지 않고, 맞은 순간 하나만 어두운 붉은 피 튀김(때린 적의 고유색을 조금 섞음)을 보통 합성으로 그린다.
+ //    피해량·판정·적에게 생기는 이펙트는 그대로. 설정 heroBlood.
+ const HURT_TYPES=new Set(['bloodR52','regionalContactR58','contactR61','burst','e568HeroImpact']),blood={at:-9,rgb:[150,16,22],seed:0,sa:0};
+ const onHero=f=>typeof player==='object'&&player&&Number.isFinite(f?.x)&&Math.hypot(f.x-player.x,f.y-player.y)<.45&&(f.r52Player||f.type!=='e568HeroImpact')&&typeof time==='number'&&time-blood.at<.6;
+ if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,source,...rest){const before=player?.hp;const r=hurtBase.call(this,damage,source,...rest);
+  try{if(prefs.heroBlood&&Number.isFinite(before)&&player.hp<before){const owner=(room?.enemies||[]).find(e=>e===source||e.id===source?.owner||e.id===source?.ownerId||e===source?.owner)||null;
+   const c=window.__STORYWORLD_POLISH_R100__?.colourOf?.(owner),rgb=c&&window.__STORYWORLD_POLISH_R100_DATA__?.sigColours?.[c];
+   blood.rgb=Array.isArray(rgb)?[Math.round(130+rgb[0]*.25),Math.round(rgb[1]*.22+8),Math.round(rgb[2]*.22+12)]:[150,16,22];
+   const from=owner||(Number.isFinite(source?.x)?source:null);blood.sa=from?Math.atan2(player.y-from.y,player.x-from.x):Math.random()*6.28;if(time-blood.at>.12){blood.at=time;blood.seed=Math.random()*99;}}}catch(_){}return r;};}
+ function drawBlood(){if(typeof ctx==='undefined'||typeof project!=='function')return;const t=(time-blood.at)/.45;if(!(t>=0&&t<1))return;
+  const q=project(player.x,player.y),z=(typeof Z==='function'?Z():1),lift=46*z,k=1-t,[r,g,b]=blood.rgb,rnd=i=>{const s=Math.sin(blood.seed+i*12.9898)*43758.5453;return s-Math.floor(s);};
+  ctx.save();ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle=`rgba(${r},${g},${b},${.32*k*k})`;ctx.beginPath();ctx.ellipse(q.x,q.y-lift,16*z*(.6+.6*t),12*z*(.6+.6*t),0,0,6.283);ctx.fill();
+  for(let i=0;i<9;i++){const a=Math.atan2(Math.sin(blood.sa)*.6,Math.cos(blood.sa))+(rnd(i)-.5)*2.2,d=(10+30*rnd(i+20))*z*(.25+.9*Math.sqrt(t)),fall=22*z*t*t*rnd(i+40),rr=(1.6+2.8*rnd(i+60))*z*(1-.45*t);
+   ctx.fillStyle=`rgba(${Math.min(255,r+30*rnd(i))},${g},${b},${.9*k})`;ctx.beginPath();ctx.ellipse(q.x+Math.cos(a)*d,q.y-lift+Math.sin(a)*d*.7+fall,rr*1.5,rr,a,0,6.283);ctx.fill();}
+  ctx.restore();stats.bloods=(stats.bloods||0)+1;}
+ if(typeof drawEffect==='function'){const drawBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.heroBlood&&HURT_TYPES.has(f?.type)&&onHero(f)){if(!blood.drawnAt||blood.drawnAt!==time){blood.drawnAt=time;drawBlood();}return;}}catch(_){}return drawBase.call(this,f,...a);};}
+ // 7) 노말 초반 피해 완화 (사용자 2026-10-29 "노말인데 첫 정원 엘리트 무리에게 금방 쓰러짐"): 노말에서만 영웅 레벨이 낮을 때
+ //    받는 피해를 줄인다. Lv1 65% -> 레벨마다 +7% -> Lv6부터 원래대로 100%. 이지·하드, Lv6 이상은 그대로. 설정 earlyGrace.
+ const graceOf=()=>{try{const co=window.__STORYWORLD_COOP_SIM_R62__;if(co?.mode&&co.mode()!=='off')return 1;/* 협동에서는 피해가 여러 영웅에게 나뉘므로 적용하지 않음(Codex 리뷰) */const C=window.__STORYWORLD_CAMPAIGN_R63R1__,m=typeof C?.mode==='function'?C.mode():C?.mode;if(m!=='normal')return 1;
+  const lv=Number(player?.level)||1;return Math.min(1,.65+.07*Math.max(0,lv-1));}catch(_){return 1;}};
+ if(typeof hurt==='function'){const hurtGrace=hurt;hurt=function(damage,...rest){let d=damage;try{if(prefs.earlyGrace&&Number.isFinite(d)&&d>0){const g=graceOf();if(g<1){d=d*g;stats.graced=(stats.graced||0)+1;}}}catch(_){}return hurtGrace.call(this,d,...rest);};}
+ // 8) 걷기 동작 (사용자 2026-10-29 "왼·오·위·아래로 움직일 때 잘린 그림만 나오고 동작이 이어지지 않고 한 그림으로 진행"):
+ //    R114가 이동 중 그림을 '마지막에 그린 한 장'(걷기 묶음의 한 칸이나 정지 그림)으로 바꿔 두어, 걸음이 멈춘 한 장으로 보이고
+ //    방향마다 키가 59~104px로 달랐다. 영웅을 다 그린 뒤(기록된 그리기 명령) 이동 중이고 공격·스킬·맞음·대시·방어가 아니면,
+ //    화면에서 실제 움직이는 방향(8방향)의 R91 걷기 묶음(4x2, 8프레임)을 걸은 거리에 맞춰 차례로 끼운다.
+ //    칸마다 실제 몸 테두리로 잘라 키를 actorHeight x 0.98(R114 서 있기 기준)로 맞추고 발밑은 그대로. 그림이 없는 방향은 가까운 방향/좌우반전.
+ const WALK_DIR='assets/r91/walk/',walkPlan={},walkBox=new Map(),walkMissing=new Set(),walkLoading=new Set(),walkState={d:0,x:null,y:null,dir:'s'};
+ try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
+ const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
+ function sheetFor(hero,dir){const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
+  for(const d of [dir,...(NEAR[dir]||[])]){const s=tryDir(d);if(s&&!walkMissing.has(s.path))return s;}return null;}
+ function cellBox(row,path,i){const k=path+'|'+i;if(walkBox.has(k))return walkBox.get(k);const im=row.image,W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,cw=W/4,ch=H/2,sx=(i%4)*cw,sy=Math.floor(i/4)*ch;
+  let box=[sx,sy,cw,ch];try{const c=document.createElement('canvas');c.width=Math.ceil(cw);c.height=Math.ceil(ch);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,cw,ch,0,0,cw,ch);const d=g.getImageData(0,0,c.width,c.height).data;
+   let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
+   if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(cw,x1-x0+3),Math.min(ch,y1-y0+3)];}catch(_){}walkBox.set(k,box);return box;}
+ if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
+  try{if(!prefs.walkCycle||st<0||!player)return r;let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
+     if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),ang=Math.atan2(q1.y-q0.y,q1.x-q0.x);walkState.dir=DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}}
+   walkState.x=player.x;walkState.y=player.y;
+   if(!player.moving||player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)return r;
+   const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
+   if(!row){if(!walkLoading.has(sh.path)&&typeof ensureImages==='function'){walkLoading.add(sh.path);Promise.resolve(ensureImages([sh.path])).catch(()=>walkMissing.add(sh.path));}return r;}
+   let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
+   if(!best)return r;const frame=Math.floor(walkState.d*5)%8,box=cellBox(row,sh.path,frame),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*.98,w=want*box[2]/box[3];
+   const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=sh.mirror?-1:1;
+   Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
+    points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
+  return r;};}
+ // 6) Esc로 메뉴·설정 창 닫기 (사용자 2026-10-29): 열린 창(openPanel)의 '계속/닫기'(.close) 단추를 대신 누른다.
+ //    입력칸에 글을 쓰는 중이거나 열린 창이 없으면 원래 Esc 동작 그대로.
+ if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
+  const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
+  ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
+ function set(p={}){if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),lastError,collisionChanged:false})});
 })();
