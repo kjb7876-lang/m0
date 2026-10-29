@@ -121,6 +121,6 @@ const foe=(id,x,y,o={})=>({id,x,y,hp:100,maxHp:100,spawnState:'active',radius:.3
 
  check('no runtime errors',C.inspect().stats.errors===0,C.inspect().stats.lastError);
  const html=fs.readFileSync(path.join(RT,'index.html'),'utf8'),ver=fs.readFileSync(path.join(ROOT,'..','scripts','verify-r96-public.py'),'utf8');
- check('runtime copy matches source, loaded last in index.html, in the public verify list',fs.readFileSync(path.join(RT,'combat-r118.js'),'utf8')===code&&/combat-r118\.js"><\/script>\s*$/.test(html)&&ver.includes("'combat-r118.js'")&&ver.includes("'assets/r118/'"));
+ check('runtime copy matches source, loaded right before world-tiles-r118 (the last script) in index.html, in the public verify list',fs.readFileSync(path.join(RT,'combat-r118.js'),'utf8')===code&&/combat-r118\.js"><\/script>\s*<script src="\.\/world-tiles-r118\.js"><\/script>\s*$/.test(html)&&ver.includes("'combat-r118.js'")&&ver.includes("'assets/r118/'"));
  const r78=fs.readFileSync(path.join(SRC,'world-combat-r78.js'),'utf8');check('R78 region check cached per region',r78.includes('plainRegion')&&fs.readFileSync(path.join(RT,'world-combat-r78.js'),'utf8')===r78);
  console.log(`\n${n-failed}/${n} passed`);process.exit(failed?1:0);})().catch(e=>{console.log('FAIL crashed',e);process.exit(1);});
