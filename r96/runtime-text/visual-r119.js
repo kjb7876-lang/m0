@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:true,heroBlood:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -23,7 +23,7 @@
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
   try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=SWAP[k];
-    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
+    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;fitState.delete(k);fitHero(k,r);}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
   return row;};}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
  //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
@@ -38,6 +38,41 @@
      const [cw,ch]=ANGEL.cell,f={...frame,path:ANGEL.path,assetFrame:{...frame.assetFrame,sourceRect:[i*cw,0,cw,ch],pivot:[...ANGEL.pivot],visibleHeight:ANGEL.visibleHeight,bakedFacing:'right'}};
      stats.angel=(stats.angel||0)+1;const res=frameBase.call(this,ANGEL.path,f,x,y,height,opt,...rest);if(res!==false)return res;}}}catch(_){}
   return frameBase.apply(this,arguments);};}
- function set(p={}){if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
- window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),lastError,collisionChanged:false})});
+ // 4) 영웅 키 맞추기 (사용자 2026-10-29 "기억사수 크기 이상"): 영웅 그림은 여러 세대가 섞여 512 칸 안의 실제 키가
+ //    위·아래 서기 94%, 옆·대각선 70~85%, 달리기 61%로 달라서 멈추거나 방향을 틀 때마다 몸이 커졌다 작아졌다.
+ //    그림이 캐시에 올라오면 발밑 줄은 그대로 두고 보이는 키가 FIT(74%)이 되게 같은 크기 칸에 다시 그려 넣는다.
+ //    구르기·대시·웅크리기(원래 낮은 자세)와 무기·이펙트 그림은 건드리지 않는다. 설정 heroFit.
+ const FIT=.74,FIT_RE=/^assets\/(?:hero_direction33\d\/[a-z]+\/[a-z]+|heroes\/normalized\/[a-z]+\/(?!.*(?:roll|dash|crouch))[a-z_0-9]+|r119\/heroes\/[a-z]+-n)\.webp$/,fitState=new Map();
+ function fitHero(k,row){const im=row.image;if(fitState.has(k)||!im||!(im.naturalWidth||im.width))return;fitState.set(k,'measuring');
+  try{const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);
+   const d=g.getImageData(0,0,W,H).data;let top=H,foot=-1,x0=W,x1=-1;for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>16){if(y<top)top=y;if(y>foot)foot=y;if(x<x0)x0=x;if(x>x1)x1=x;}
+   if(foot<0){fitState.set(k,'empty');return;}const s=FIT*H/(foot-top+1);if(Math.abs(s-1)<.04){fitState.set(k,'kept');return;}
+   const cx=(x0+x1)/2,o=document.createElement('canvas');o.width=W;o.height=H;const q=o.getContext('2d');q.imageSmoothingQuality='high';q.translate(cx,foot);q.scale(s,s);q.drawImage(im,-cx,-foot);
+   o.toBlob(b=>{if(!b)return;const n=new Image();n.decoding='async';n.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroFit&&r.image===im){r.r119Unfit=im;r.image=n;fitState.set(k,'fit '+s.toFixed(2));stats.fits=(stats.fits||0)+1;}};n.src=URL.createObjectURL(b);});
+  }catch(e){fitState.set(k,'error');lastError=String(e?.message||e);}}
+ if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyFit=readyImage;readyImage=function(path){const row=readyFit.apply(this,arguments);
+  try{if(prefs.heroFit&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,'');if(FIT_RE.test(k)){const im=row.image;
+    if(im.complete&&im.naturalWidth)fitHero(k,row);else if(!fitState.has(k))im.addEventListener?.('load',()=>fitHero(k,imageCache.get(k)||row),{once:true});}}}catch(_){}
+  return row;};}
+ // 5) 영웅이 맞을 때 흰 빛 대신 피 (사용자 2026-10-29 "피격 시 왜 하얀빛, 상대 색이나 붉은 피 튀기는 느낌으로"):
+ //    한 번 맞을 때 주황 충돌 그림(burst-impact) 10~20장이 더하기 합성으로 겹쳐 하얗게 타 버렸다. 영웅 몸에 생긴
+ //    이 충돌 그림들은 그리지 않고, 맞은 순간 하나만 어두운 붉은 피 튀김(때린 적의 고유색을 조금 섞음)을 보통 합성으로 그린다.
+ //    피해량·판정·적에게 생기는 이펙트는 그대로. 설정 heroBlood.
+ const HURT_TYPES=new Set(['bloodR52','regionalContactR58','contactR61','burst','e568HeroImpact']),blood={at:-9,rgb:[150,16,22],seed:0,sa:0};
+ const onHero=f=>typeof player==='object'&&player&&Number.isFinite(f?.x)&&Math.hypot(f.x-player.x,f.y-player.y)<.45&&(f.r52Player||f.type!=='e568HeroImpact')&&typeof time==='number'&&time-blood.at<.6;
+ if(typeof hurt==='function'){const hurtBase=hurt;hurt=function(damage,source,...rest){const before=player?.hp;const r=hurtBase.call(this,damage,source,...rest);
+  try{if(prefs.heroBlood&&Number.isFinite(before)&&player.hp<before){const owner=(room?.enemies||[]).find(e=>e===source||e.id===source?.owner||e.id===source?.ownerId||e===source?.owner)||null;
+   const c=window.__STORYWORLD_POLISH_R100__?.colourOf?.(owner),rgb=c&&window.__STORYWORLD_POLISH_R100_DATA__?.sigColours?.[c];
+   blood.rgb=Array.isArray(rgb)?[Math.round(130+rgb[0]*.25),Math.round(rgb[1]*.22+8),Math.round(rgb[2]*.22+12)]:[150,16,22];
+   const from=owner||(Number.isFinite(source?.x)?source:null);blood.sa=from?Math.atan2(player.y-from.y,player.x-from.x):Math.random()*6.28;if(time-blood.at>.12){blood.at=time;blood.seed=Math.random()*99;}}}catch(_){}return r;};}
+ function drawBlood(){if(typeof ctx==='undefined'||typeof project!=='function')return;const t=(time-blood.at)/.45;if(!(t>=0&&t<1))return;
+  const q=project(player.x,player.y),z=(typeof Z==='function'?Z():1),lift=46*z,k=1-t,[r,g,b]=blood.rgb,rnd=i=>{const s=Math.sin(blood.seed+i*12.9898)*43758.5453;return s-Math.floor(s);};
+  ctx.save();ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle=`rgba(${r},${g},${b},${.32*k*k})`;ctx.beginPath();ctx.ellipse(q.x,q.y-lift,16*z*(.6+.6*t),12*z*(.6+.6*t),0,0,6.283);ctx.fill();
+  for(let i=0;i<9;i++){const a=Math.atan2(Math.sin(blood.sa)*.6,Math.cos(blood.sa))+(rnd(i)-.5)*2.2,d=(10+30*rnd(i+20))*z*(.25+.9*Math.sqrt(t)),fall=22*z*t*t*rnd(i+40),rr=(1.6+2.8*rnd(i+60))*z*(1-.45*t);
+   ctx.fillStyle=`rgba(${Math.min(255,r+30*rnd(i))},${g},${b},${.9*k})`;ctx.beginPath();ctx.ellipse(q.x+Math.cos(a)*d,q.y-lift+Math.sin(a)*d*.7+fall,rr*1.5,rr,a,0,6.283);ctx.fill();}
+  ctx.restore();stats.bloods=(stats.bloods||0)+1;}
+ if(typeof drawEffect==='function'){const drawBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.heroBlood&&HURT_TYPES.has(f?.type)&&onHero(f)){if(!blood.drawnAt||blood.drawnAt!==time){blood.drawnAt=time;drawBlood();}return;}}catch(_){}return drawBase.call(this,f,...a);};}
+ function set(p={}){if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),fit:FIT,lastError,collisionChanged:false})});
 })();
