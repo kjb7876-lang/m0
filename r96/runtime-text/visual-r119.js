@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -25,6 +25,19 @@
   try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=SWAP[k];
     if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
   return row;};}
- function set(p={}){if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
+ //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
+ //    ChatGPT 2026-10-29, 대기 그림 참조, 오른쪽을 봄)으로 그 칸만 바꿔 그린다. 좌우 판단(R110 표 'L' = 오른쪽을 보는 그림)은 그대로.
+ const ANGEL={path:'assets/r119/mobs/a11c1-attack.png',cell:[183,161],pivot:[79.89,160.05],visibleHeight:150};
+ let angelLoad=null;
+ if(typeof drawAssetFrame3==='function'){const frameBase=drawAssetFrame3;drawAssetFrame3=function(path,frame,x,y,height,opt,...rest){
+  try{const r=frame?.assetFrame?.sourceRect;if(prefs.angelArt&&r&&r[0]===940&&r[1]===0&&/rc137\/mob-attacks-01\.png$/.test(String(path))){
+    const row=typeof readyImage==='function'?readyImage(ANGEL.path):null;
+    if(!row){if(!angelLoad&&typeof ensureImages==='function'){angelLoad=Promise.resolve(ensureImages([ANGEL.path])).catch(()=>{});}}
+    else{const k=Number.isFinite(frame.r54Frame)?frame.r54Frame:2,i=k<=1?0:k===2?1:(frame.r54Phase==='recovery'&&(typeof time==='number'?time:0)%0.5>.25?3:2);
+     const [cw,ch]=ANGEL.cell,f={...frame,path:ANGEL.path,assetFrame:{...frame.assetFrame,sourceRect:[i*cw,0,cw,ch],pivot:[...ANGEL.pivot],visibleHeight:ANGEL.visibleHeight,bakedFacing:'right'}};
+     stats.angel=(stats.angel||0)+1;const res=frameBase.call(this,ANGEL.path,f,x,y,height,opt,...rest);if(res!==false)return res;}}}catch(_){}
+  return frameBase.apply(this,arguments);};}
+ function set(p={}){if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
  window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),lastError,collisionChanged:false})});
 })();

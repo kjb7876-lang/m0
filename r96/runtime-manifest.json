@@ -8488,6 +8488,11 @@
       "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
     },
     {
+      "path": "assets/r119/mobs/a11c1-attack.png",
+      "bytes": 189997,
+      "sha256": "8e6341ff4e7e92583786bf7964fa0f35b8d6c4e7100e7c9788bc1b06ec7d19f2"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -17319,8 +17324,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 3749,
-      "sha256": "6cf7ddbdd800154ae3f74b0a15086159b71c5bb5f44ffa6317abfa3343f416f4"
+      "bytes": 5501,
+      "sha256": "e15f233a41ee16217021b47e10f1dfe6021c85f6a66cb1372532944600e37dc1"
     },
     {
       "path": "visual-r90-world.js",
@@ -17433,8 +17438,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3486,
-  "totalBytes": 759875010,
+  "fileCount": 3487,
+  "totalBytes": 760066759,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {
