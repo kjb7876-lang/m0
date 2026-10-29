@@ -131,7 +131,10 @@ const foe=(id,x,y,o={})=>Object.assign({id,x,y,hp:500,maxHp:500,damage:10,spawnS
  rec.scope({id:'prop:p',kind:'prop'},()=>sb.shadow(300,300,20,{}));
  const fills=rec.commands.filter(c=>c.kind==='fill');check('shadow = 3 fills (long cast ×2 + contact)',fills.length===3,fills.length);
  check('every shadow fill carries its foot anchor for R113 grounding',fills.every(c=>Array.isArray(c.r114Anchor)&&c.r114Anchor[0]===300));
- const far=K.castDir(2000,2000);check('far from the hero light the shadow falls away from the moon (right-down)',far.x>.8&&far.y>0&&far.k===0,far);
+ // R119: a sun turns once per 600 s of game time; at night (last quarter) the R114 moon still rules.
+ sb.time=480;const far=K.castDir(2000,2000);check('at night, far from the hero light the shadow falls behind the object, to the right (moon)',far.x>.8&&far.y<0&&far.k===0,far);
+ sb.time=10;const morn=K.castDir(2000,2000);sb.time=225;const noon=K.castDir(2000,2000);sb.time=440;const eve=K.castDir(2000,2000);
+ check('R119 sun: shadows fall behind objects (up-screen) — morning left-back, noon straight back, evening right-back',morn.x<-.5&&morn.y<0&&Math.abs(noon.x)<.6&&noon.y<-.7&&eve.x>.5&&eve.y<0,{morn,noon,eve});
  const h=sb.project(sb.player.x,sb.player.y),left=K.castDir(h.x-120,h.y);check('near the hero light shadows fall away from the hero',left.x<0&&left.k>0,left);
  check('native round shadow is no longer called',sb.shadowCalls===0,sb.shadowCalls);
  K.set({shadows:false});sb.shadow(1,1,10,{});check('turning the option off restores the native shadow',sb.shadowCalls===1);}

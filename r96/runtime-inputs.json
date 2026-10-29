@@ -2689,7 +2689,14 @@
     "assets/r118/tiles/school.webp",
     "assets/r118/tiles/sparring.webp",
     "perf-r119.js",
-    "visual-r119.js"
+    "visual-r119.js",
+    "assets/r119/heroes/gunner-n.webp",
+    "assets/r116/mobs/M005-idle.png",
+    "assets/r116/mobs/M011-hit.png",
+    "assets/r116/mobs/M041-idle.png",
+    "assets/r116/mobs/M045-hit.png",
+    "assets/r116/mobs/M046-hit.png",
+    "assets/r116/mobs/M069-hit.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3764,5 +3771,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bf8452b5f32cbea030d88904e5be0867b12613c51131735ad71da29f1f49068a"
+  "runtimeManifestSHA256": "148c45c33b647b98fa5b1263ea2242231271bd05e6f483c246c2808ecdbd1296"
 }

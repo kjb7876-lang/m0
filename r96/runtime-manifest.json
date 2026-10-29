@@ -7908,6 +7908,11 @@
       "sha256": "8d81fa6a41a9b334efc87e27449d26cc307e7322f3ad014dfe3e2f0549a668e2"
     },
     {
+      "path": "assets/r116/mobs/M005-idle.png",
+      "bytes": 123413,
+      "sha256": "a9bb3adeb62fdbd51e5613394339ec58fee91cdf3a547921ce73218f6b5a91d1"
+    },
+    {
       "path": "assets/r116/mobs/M006-hit.png",
       "bytes": 106952,
       "sha256": "39594b1050abc2609383b6df70817b59fa408f9a00b3176ced988b54c0d19c89"
@@ -7926,6 +7931,11 @@
       "path": "assets/r116/mobs/M008-idle.png",
       "bytes": 145838,
       "sha256": "81460606f303836d31cd71673f1e25ea64c015270b07a54cb0dc737708e63a33"
+    },
+    {
+      "path": "assets/r116/mobs/M011-hit.png",
+      "bytes": 127495,
+      "sha256": "5d970e124d3b624d54e3a5dd6e2a5cc20e43a69675ae04ff6d94f701c609ad66"
     },
     {
       "path": "assets/r116/mobs/M013-hit.png",
@@ -8008,9 +8018,24 @@
       "sha256": "f22a9727c30780d7ccadb91efbac81819c8c0ee617c081f0951e6b6250886a69"
     },
     {
+      "path": "assets/r116/mobs/M041-idle.png",
+      "bytes": 116898,
+      "sha256": "ced38de11130e9365e9206331d0d6be8ed2542db6b0a3530794921d58d2f972d"
+    },
+    {
       "path": "assets/r116/mobs/M042-hit.png",
       "bytes": 177470,
       "sha256": "b666cbfc3545590fecc3cd48d573aa8658ac73e3efa63f3d81959679220329b4"
+    },
+    {
+      "path": "assets/r116/mobs/M045-hit.png",
+      "bytes": 274096,
+      "sha256": "8954c70de740bf799f417a7afe35f9485b027fde6250768ddbe804340e6ebe4a"
+    },
+    {
+      "path": "assets/r116/mobs/M046-hit.png",
+      "bytes": 201720,
+      "sha256": "637789e9028bcb6d49d348ef72f721a74c98797fa0ae513af78febd9207ef344"
     },
     {
       "path": "assets/r116/mobs/M051-hit.png",
@@ -8036,6 +8061,11 @@
       "path": "assets/r116/mobs/M057-idle.png",
       "bytes": 155105,
       "sha256": "281f0fc26fdafe4623e37a1afee2d1a5e263e237e996f70fc3ff39bfa94b20e0"
+    },
+    {
+      "path": "assets/r116/mobs/M069-hit.png",
+      "bytes": 191400,
+      "sha256": "dd5f8cda25357d0e992162932e4f50655450832c7e52dc06faecc247e2732013"
     },
     {
       "path": "assets/r116/mobs/M120-hit.png",
@@ -8094,8 +8124,8 @@
     },
     {
       "path": "assets/r116/mobs/index.json",
-      "bytes": 77792,
-      "sha256": "8b94a985b3d24a5bcdcc3237626ed2738e5ecc2c2cf47fb3c7df838d94374607"
+      "bytes": 91556,
+      "sha256": "a31767889788e7a29568e3c7aa31cfbf99ad3b8dbc378bc4a7e074aaa6493e4b"
     },
     {
       "path": "assets/r117/scene/ep-cup-k1.png",
@@ -8451,6 +8481,11 @@
       "path": "assets/r118/tiles/workshop.webp",
       "bytes": 809932,
       "sha256": "23055900f7e6b9a26df18ff4141104dacc53bc62835ba05e72512eb418d7fe63"
+    },
+    {
+      "path": "assets/r119/heroes/gunner-n.webp",
+      "bytes": 35746,
+      "sha256": "1887e03e6fb23d2befc1cbb30f5b11d0984ca7fba0575a25a39a504490a0c867"
     },
     {
       "path": "assets/r74/effects.png",
@@ -16894,8 +16929,8 @@
     },
     {
       "path": "cinema-r114.js",
-      "bytes": 18230,
-      "sha256": "8ce3159dd29cb0b46c3ecf33f078368ecd96102cc0051531ddda4aadfa9d26e7"
+      "bytes": 19281,
+      "sha256": "50c5822f76a00c41c8998e296ec2248f8b90f6bd35ceef9ebc1195258020cd02"
     },
     {
       "path": "combat-r114.js",
@@ -17284,8 +17319,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 2153,
-      "sha256": "65c12749643bb5e8a76a7337c07ab64bf63f98ddb309a81a7bbc544c94b5ad71"
+      "bytes": 3749,
+      "sha256": "6cf7ddbdd800154ae3f74b0a15086159b71c5bb5f44ffa6317abfa3343f416f4"
     },
     {
       "path": "visual-r90-world.js",
@@ -17398,8 +17433,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3479,
-  "totalBytes": 758787831,
+  "fileCount": 3486,
+  "totalBytes": 759875010,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {
