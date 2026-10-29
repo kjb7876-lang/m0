@@ -74,7 +74,7 @@ function grainURL(){if(grainCanvas)return grainCanvas;const c=document.createEle
 const part=n=>layer?.querySelector('[data-c="'+n+'"]');
 function applyGrade(force=false){const G=GRADE[prefs.horror];const key=prefs.horror+'|'+prefs.grain+'|'+prefs.lightPool+'|'+lowFx();if(!force&&key===lastGradeKey)return;lastGradeKey=key;
  // R123: 다크 판타지 톤(dark-r123.js)이 있으면 녹·피 쪽 색을 필터 끝에 덧붙인다(호러 끔이어도 그 톤만은 따로 끌 수 있다).
- let dk='';try{dk=window.__STORYWORLD_DARK_R123__?.filter?.()||'';}catch(_){}
+ let dk='';try{dk=(window.__STORYWORLD_DARK_R123__?.filter?.()||'')+(window.__STORYWORLD_MOOD_R123__?.filter?.()||'');}catch(_){}// R124: 사몽 구역 분위기 필터(흑과 백)도
  for(const c of worldCanvases())c.style.filter=G?G.filter+dk:dk.trim();
  if(!layer)layer=makeLayer();if(!layer)return;layer.style.display=G?'block':'none';if(!G)return;
  part('vig').style.background='radial-gradient(ellipse 75% 70% at 50% 48%,rgba(0,0,0,0) 46%,rgba(4,2,8,'+G.vig+') 100%)';

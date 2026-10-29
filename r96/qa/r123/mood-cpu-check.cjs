@@ -46,7 +46,7 @@ check('years come from the canon titles: NS-01 2189 · NS-02 2174 · NS-03 2189 
 const eras=ns.map(id=>T[id].key);let switches=0;for(let i=1;i<eras.length;i++)if(eras[i]!==eras[i-1])switches++;
 check('three eras (기계 폐허 · 데이터 · 빛의 숲) alternate across the 17 zones',['machine','data','forest'].every(e=>eras.includes(e))&&switches>=6,eras.join(' '));
 // ---- 장미의 집 · 학교 · 호러 만화 · 화가 ----
-check('S-01 → rose (뒤틀린 동화), S-02 8 zones → school, S-03/S-05/M → manga',ids.filter(i=>i.startsWith('sz115-S01-')).every(i=>T[i].key==='rose')&&ids.filter(i=>i.startsWith('sz115-S02-')).length===8&&ids.filter(i=>i.startsWith('sz115-S02-')).every(i=>T[i].key==='school')&&ids.filter(i=>/^sz115-(S03|S05|M)-/.test(i)).every(i=>T[i].key==='manga'));
+check('S-01 → rose (뒤틀린 동화), S-02 8 zones → school, S-03 → ink(흑과 백), S-05 → gyeong(경성의 밤), M → manga',ids.filter(i=>i.startsWith('sz115-S01-')).every(i=>T[i].key==='rose')&&ids.filter(i=>i.startsWith('sz115-S02-')).length===8&&ids.filter(i=>i.startsWith('sz115-S02-')).every(i=>T[i].key==='school')&&ids.filter(i=>/^sz115-S03-/.test(i)).every(i=>T[i].key==='ink')&&ids.filter(i=>/^sz115-S05-/.test(i)).every(i=>T[i].key==='gyeong')&&ids.filter(i=>/^sz115-M-/.test(i)).every(i=>T[i].key==='manga'));
 const painterOf=sec=>T[ids.find(id=>T[id]?.sec===sec&&T[id].painter)]?.key;
 check('six painters by canon chapter: R-02 고흐 · R-03 달리 · R-04 마네 · R-05 피카소 · R-06 클림트 · R-07 모네',painterOf('R-02')==='gogh'&&painterOf('R-03')==='dali'&&painterOf('R-04')==='manet'&&painterOf('R-05')==='picasso'&&painterOf('R-06')==='klimt'&&painterOf('R-07')==='monet');
 const P6=['gogh','dali','manet','picasso','klimt','monet'];
@@ -54,7 +54,9 @@ check('the six painter looks differ in colour, floor brushwork and props',new Se
 check('surreal motifs present (녹는 시계 · 떠 있는 돌 · 끝없는 회랑)',['clock','stone','endless'].every(k=>Object.values(M.themes).some(t=>t.deco.some(d=>d[0]===k)))&&['clock','stone','endless'].every(k=>typeof M.draw[k]==='function'));
 const rg=ids.filter(id=>/^sz115-R[A-G]-/.test(id));
 check('every 화가 zone (RA~RG, 40) gets a painter or surreal look',rg.length===40&&rg.every(id=>T[id]?.painter&&M.themes[T[id].key]),rg.filter(id=>!T[id]).join(','));
-check('zones outside the brief keep their look (P 문턱, S-07 페르소나)',ids.filter(i=>/^sz115-(P|S07)-/.test(i)).every(i=>T[i]===null));
+check('R124: 문턱(P) → root (코어 아래 검은 뿌리), 페르소나(S-07) → persona (가면·손님 의자 하나)',ids.filter(i=>/^sz115-P-/.test(i)).every(i=>T[i]?.key==='root')&&ids.filter(i=>/^sz115-S07-/.test(i)).every(i=>T[i]?.key==='persona'));
+check('R124: 흑과 백은 R114 필터 사슬에 흑백을 붙이고(투명한 바깥은 물들지 않게), 경성은 함박눈, 페르소나는 벽 가면·거울·의자',/grayscale/.test(M.themes.ink.filter)&&!M.themes.ink.tint&&M.themes.gyeong.parts.some(p=>p[0]==='snow')&&['mask','mirror','chair'].every(k=>M.themes.persona.deco.some(d=>d[0]===k))&&['tendril','lantern','inkpost'].every(k=>typeof M.draw[k]==='function'));
+check('every one of the 108 zones now has a mood',ids.length===108&&ids.every(i=>T[i]),ids.filter(i=>!T[i]).join(','));
 // ---- 실제 배치 위에 짓기 ----
 const epOf=id=>SM.episodes.findIndex(e=>Z.chapter(e.key)?.some(z=>z.id===id));
 const rooms={};let badDeco=[],noDecal=[],noDeco=[],faceless=[];
@@ -68,7 +70,7 @@ for(const id of ids){if(!T[id])continue;const L=SM.layoutFor(epOf(id),null,id);c
   if(['window','endless'].includes(d.kind)&&!d.face)faceless.push(id+':'+d.kind);}
  for(let i=0;i<st.deco.length;i++)for(let j=i+1;j<st.deco.length;j++)if(Math.hypot(st.deco[i].x-st.deco[j].x,st.deco[i].y-st.deco[j].y)<2.9)badDeco.push(id+':overlap');}
 const built=Object.keys(rooms).length;
-check('builds on every themed zone layout ('+built+')',built>=95&&badDeco.filter(x=>x.endsWith('nostate')).length===0);
+check('builds on every themed zone layout ('+built+')',built===108&&badDeco.filter(x=>x.endsWith('nostate')).length===0);
 check('props stand on floor cells, ≥3 tiles from entry/exit and apart from each other',badDeco.length===0,badDeco.slice(0,8).join(' '));
 check('every themed zone gets floor marks',noDecal.length===0,noDecal.join(','));
 check('zones with a prop list get at least one prop',noDeco.length<=2,noDeco.join(','));
