@@ -93,10 +93,16 @@
   try{const [sx,sy,sw,sh]=rect,s=Math.min(1,160/Math.max(sw,sh)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(sw*s));c.height=Math.max(1,Math.round(sh*s));const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,c.width,c.height);
    const d=g.getImageData(0,0,c.width,c.height).data;let y0=c.height,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(y<y0)y0=y;if(y>y1)y1=y;}if(y1>=y0)f=(y1-y0+1)/c.height;}catch(_){}m.set(k,f);return f;}
  // 서 있을 때 실제 몸 키(그린 높이 x 몸 비율)를 actorHeight 비율로 기억해 걸을 때 같은 키로 그린다(사용자: 멈추면 커짐, 서 있는 크기가 자연스러움).
- const standRatio={v:null};
+ const standRatio={v:null},tightMemo=new WeakMap();
+ function tightBox(im,rect){let m=tightMemo.get(im);if(!m){m=new Map();tightMemo.set(im,m);}const k=rect.map(Math.round).join(',');if(m.has(k))return m.get(k);let box=rect.slice();
+  try{const [sx,sy,sw,sh]=rect,c=document.createElement('canvas');c.width=Math.ceil(sw);c.height=Math.ceil(sh);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,sw,sh);const d=g.getImageData(0,0,c.width,c.height).data;
+   let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
+   if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(sw,x1-x0+3),Math.min(sh,y1-y0+3)];}catch(_){}m.set(k,box);return box;}
  if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
   try{if(!prefs.walkCycle||st<0||!player)return r;let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
-     if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),ang=Math.atan2(q1.y-q0.y,q1.x-q0.x);walkState.dir=DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}}
+     if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),sx=(walkState.sx||0)*.7+(q1.x-q0.x)*.3,sy=(walkState.sy||0)*.7+(q1.y-q0.y)*.3;walkState.sx=sx;walkState.sy=sy;const cand=DIR8[((Math.round(Math.atan2(sy,sx)/(Math.PI/4))%8)+8)%8];
+      // 길잡이 경로와 직접 조작이 겹치면 한 장면씩 방향이 튀어 그림이 좌우로 뒤집혔다(사용자): 화면 이동을 부드럽게 모으고, 새 방향이 3장면 이어질 때만 바꾼다.
+      if(cand===walkState.dir)walkState.pend=0;else if(cand===walkState.pendDir){if(++walkState.pend>=3){walkState.dir=cand;walkState.pend=0;}}else{walkState.pendDir=cand;walkState.pend=1;}}}}
    walkState.x=player.x;walkState.y=player.y;
    const busy=player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
    // 이동 중 기본 사격·방어(반자동은 걸으면서 계속 쏜다)에는 걷기를 이어 간다 — 걷기 그림도 총을 앞으로 든 자세라 정지 그림이 미끄러지던 것보다 자연스럽다.
@@ -105,6 +111,9 @@
    // 반자동 비켜서기·물러나기·길잡이처럼 '이동 중' 표시 없이 위치만 옮기는 경우도 걷기로 본다(사용자: 반자동 켜고 움직이면 동작 없이 이동).
    const movingNow=player.moving||((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15);
    if(!movingNow){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
+     // 멈춘 직후에도 R91 걷기 칸(여백 포함 칸 전체)이 한두 장면 그려져 몸이 갑자기 커졌다(사용자: 네온 이동 후 멈춤이 이상) — 몸 테두리로 잘라 서 있기 키로 그린다.
+     if(sb&&/r91\/walk\//.test(String(sb.sourcePath||''))&&!sb.r121Walk&&sb.sourceRect){const im=sb.image,b=tightBox(im,sb.sourceRect),P=sb.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=P[1][0]<P[0][0]?-1:1,want=actorHeight()*(standRatio.v||.98),w=want*b[2]/b[3];
+      Object.assign(sb,{sourceRect:b,points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walkStops=(stats.walkStops||0)+1;return r;}
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
    if(busyMove)return r;
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
