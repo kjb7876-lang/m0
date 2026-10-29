@@ -7913,6 +7913,11 @@
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
     },
     {
+      "path": "assets/r116/mobs/M001-idle.png",
+      "bytes": 129997,
+      "sha256": "67a82d80e62a44ec226783888f65db6dcb939a852ae1f4ab5ae2bbb60d9e77d8"
+    },
+    {
       "path": "assets/r116/mobs/M003-hit.png",
       "bytes": 120945,
       "sha256": "b17d15a682879d9fdd426fe0ccf21400f9e32b070eedc39a008aa64fad6d377f"
@@ -7963,9 +7968,24 @@
       "sha256": "7008f76989baf36f30fbec83377708efd725f83f84894cfd4b1d13a75a6584b2"
     },
     {
+      "path": "assets/r116/mobs/M016-hit.png",
+      "bytes": 151816,
+      "sha256": "b2b202df931890b92441cda154eb692f598f534e4e628a0fcfcf26be913ab1b9"
+    },
+    {
       "path": "assets/r116/mobs/M018-hit.png",
       "bytes": 146621,
       "sha256": "708eb9710b03566f28b08a539352ac2a4c1316dfc885e0e1c045538c3c16db77"
+    },
+    {
+      "path": "assets/r116/mobs/M019-hit.png",
+      "bytes": 141190,
+      "sha256": "665b5ee951f1a5e37d1ab8ceab6dc6f977586e2db1fe7244142e902a7898fcfa"
+    },
+    {
+      "path": "assets/r116/mobs/M020-hit.png",
+      "bytes": 222903,
+      "sha256": "707866adef1567aadeb1b9b3acf82aff0ad89700bb64102413010812def96a0b"
     },
     {
       "path": "assets/r116/mobs/M021-hit.png",
@@ -8063,6 +8083,11 @@
       "sha256": "8e21bd7dfec4335fbab8111c44ccd979369c520639d9ab4aa10a3a675ec89c35"
     },
     {
+      "path": "assets/r116/mobs/M052-hit.png",
+      "bytes": 226820,
+      "sha256": "96be86ae95f9bad047d828bc5c456356da545f016f76ecb59fcfd68e34bf121d"
+    },
+    {
       "path": "assets/r116/mobs/M053-hit.png",
       "bytes": 166726,
       "sha256": "3dc9ae5af8e1bd061196c81d768e70bf70b8b598e29405fe371b9b536cc63e1c"
@@ -8078,14 +8103,44 @@
       "sha256": "1c31e9fe8a713c2260f59050a1becf6db794e1597743c2d8ae05ac6052a46f59"
     },
     {
+      "path": "assets/r116/mobs/M057-hit.png",
+      "bytes": 193865,
+      "sha256": "3960cae1cf7125335e4d453e532c18cbd9a0a15584a81be6336299667920cff7"
+    },
+    {
       "path": "assets/r116/mobs/M057-idle.png",
       "bytes": 155105,
       "sha256": "281f0fc26fdafe4623e37a1afee2d1a5e263e237e996f70fc3ff39bfa94b20e0"
     },
     {
+      "path": "assets/r116/mobs/M063-hit.png",
+      "bytes": 156817,
+      "sha256": "ecb210389f4673ad03493723307d6daee662398d381c23897e814399b4477ba6"
+    },
+    {
+      "path": "assets/r116/mobs/M064-hit.png",
+      "bytes": 123433,
+      "sha256": "5f0f9791cbcb935ec3d32f2b44fd8c055c88a6dcabeb2844aa5e0df5141c317c"
+    },
+    {
       "path": "assets/r116/mobs/M069-hit.png",
       "bytes": 191400,
       "sha256": "dd5f8cda25357d0e992162932e4f50655450832c7e52dc06faecc247e2732013"
+    },
+    {
+      "path": "assets/r116/mobs/M072-hit.png",
+      "bytes": 187197,
+      "sha256": "289932dbea373a43469e533f58e8eee55bce583be8ee959d46d7c3a60a20294c"
+    },
+    {
+      "path": "assets/r116/mobs/M074-hit.png",
+      "bytes": 141588,
+      "sha256": "abf47183b2745ba85484d9d0339933b6fb0a655767800d252fb1c9e3dd12d49c"
+    },
+    {
+      "path": "assets/r116/mobs/M078-hit.png",
+      "bytes": 177566,
+      "sha256": "091b6b296a76421c4d300ed011fa788ae570c002f6b86f4613e650d84f493e13"
     },
     {
       "path": "assets/r116/mobs/M120-hit.png",
@@ -8123,6 +8178,11 @@
       "sha256": "349ae43168b95ce15f82fda00dd6c1177de621b543ccdc60580a0b97f6fda18f"
     },
     {
+      "path": "assets/r116/mobs/M129-idle.png",
+      "bytes": 82439,
+      "sha256": "635921f8a230d5533026073f86800e20d0ae01a53be79b02c695f36edaf8eaa1"
+    },
+    {
       "path": "assets/r116/mobs/M130-hit.png",
       "bytes": 235176,
       "sha256": "aafb379d4b7a494f2588976978fb8f58c3566f15b56f271d922baf00b349d90d"
@@ -8144,8 +8204,8 @@
     },
     {
       "path": "assets/r116/mobs/index.json",
-      "bytes": 91556,
-      "sha256": "a31767889788e7a29568e3c7aa31cfbf99ad3b8dbc378bc4a7e074aaa6493e4b"
+      "bytes": 115316,
+      "sha256": "0c1587c35af25dbd7a2c9c4a09318c47af48412a127b05ad1e98a98298391df7"
     },
     {
       "path": "assets/r117/scene/ep-cup-k1.png",
@@ -17658,8 +17718,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3531,
-  "totalBytes": 765439463,
+  "fileCount": 3543,
+  "totalBytes": 767398854,
   "webHTMLSha256": "8693f15f85246145488a6fe580617bac9a485ecd397bf03332afcbef5caf77e1",
   "largest": [
     {

@@ -2741,7 +2741,19 @@
     "assets/r121/walk/walk-gunner-se.png",
     "assets/r121/walk/walk-gunner-e8.png",
     "assets/r121/walk/walk-gunner-e6.png",
-    "story-reader-r122.js"
+    "story-reader-r122.js",
+    "assets/r116/mobs/M001-idle.png",
+    "assets/r116/mobs/M016-hit.png",
+    "assets/r116/mobs/M019-hit.png",
+    "assets/r116/mobs/M020-hit.png",
+    "assets/r116/mobs/M052-hit.png",
+    "assets/r116/mobs/M057-hit.png",
+    "assets/r116/mobs/M063-hit.png",
+    "assets/r116/mobs/M064-hit.png",
+    "assets/r116/mobs/M072-hit.png",
+    "assets/r116/mobs/M074-hit.png",
+    "assets/r116/mobs/M078-hit.png",
+    "assets/r116/mobs/M129-idle.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3816,5 +3828,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "98426fccdf4828eea16d5cdb25d41674a42c39410382bd69dd31684490384d37"
+  "runtimeManifestSHA256": "a759dd397417cdb889e145e3ac4d2919dacdb83ab02c2f3fe203f2e2b16552d5"
 }
