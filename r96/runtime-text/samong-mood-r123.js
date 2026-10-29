@@ -230,7 +230,7 @@
    for(let i=0;i<5;i++){const y1=q.y-H*i/5,y2=q.y-H*(i+1)/5,k1=1-.75*i/5,k2=1-.75*(i+1)/5;g.moveTo(q.x-b*k1,y1);g.lineTo(q.x+b*k2,y2);g.moveTo(q.x+b*k1,y1);g.lineTo(q.x-b*k2,y2);}g.stroke();
    g.strokeStyle='#4a2e20';g.beginPath();g.moveTo(q.x+b*.25,q.y-H*.82);g.lineTo(q.x+b*1.2,q.y-H*.7);g.lineTo(q.x+b*1.5,q.y-H*.45);g.stroke();
    const on=Math.sin(t*3+d.seed)>.2;if(on){g.fillStyle='rgba(255,40,30,.95)';g.beginPath();g.arc(q.x-b*.25,q.y-H,u*.08,0,TAU);g.fill();g.fillStyle='rgba(255,40,30,.18)';g.beginPath();g.arc(q.x-b*.25,q.y-H,u*.4,0,TAU);g.fill();}},
-  gear(g,q,u,t,d){const R=u*1.1,cx=q.x,cy=q.y-R*.55;g.fillStyle='#5a3a26';g.beginPath();const n=12;for(let i=0;i<n*2;i++){const a=i/(n*2)*TAU+t*.05,rr=i&1?R*.84:R;g.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.95);}g.closePath();g.fill();
+  gear(g,q,u,t,d){const R=u*1.1,cx=q.x,cy=q.y-R*.55;g.fillStyle='#7a4a2c';g.beginPath();const n=12;for(let i=0;i<n*2;i++){const a=i/(n*2)*TAU+t*.05,rr=i&1?R*.84:R;g.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.95);}g.closePath();g.fill();g.strokeStyle='rgba(230,150,90,.35)';g.lineWidth=Math.max(1,u*.04);g.stroke();
    g.fillStyle='#2a1a12';g.beginPath();g.arc(cx,cy,R*.32,0,TAU);g.fill();g.fillStyle='rgba(0,0,0,.45)';g.fillRect(cx-R*1.1,q.y-R*.05,R*2.2,R*.5);},
   beacon(g,q,u,t,d){g.fillStyle='#2a2c30';g.fillRect(q.x-u*.12,q.y-u*1.6,u*.24,u*1.6);const a=.5+.5*Math.sin(t*5+d.seed);g.fillStyle='rgba(255,50,30,'+(.4+.6*a).toFixed(2)+')';g.beginPath();g.arc(q.x,q.y-u*1.7,u*.13,0,TAU);g.fill();
    const gr=g.createRadialGradient(q.x,q.y,0,q.x,q.y,u*1.6);gr.addColorStop(0,'rgba(255,40,20,'+(.16*a).toFixed(3)+')');gr.addColorStop(1,'rgba(255,40,20,0)');g.fillStyle=gr;g.beginPath();g.ellipse(q.x,q.y,u*1.6*1.4,u*.8*1.4,0,0,TAU);g.fill();},
@@ -274,7 +274,7 @@
   goldpillar(g,q,u,t,d){const w=u*.6,H=u*3;g.fillStyle='#3a2a0a';g.fillRect(q.x-w,q.y-H,w*2,H);for(let r=0;r<10;r++)for(let c=0;c<4;c++){const k=(d.seed+r*7+c*13)%9;g.fillStyle=k<5?'#d8a830':k<7?'#f0d070':'#7a1e20';g.fillRect(q.x-w+c*w*.5+2,q.y-H+r*H/10+2,w*.5-4,H/10-4);}
    g.strokeStyle='rgba(255,220,120,.7)';g.lineWidth=1.5;g.beginPath();for(let i=0;i<3;i++){const cy=q.y-H*(.2+.3*i);g.arc(q.x,cy,w*.4,0,TAU*.85);}g.stroke();const gl=.12+.08*Math.sin(t*2+d.seed);g.fillStyle='rgba(255,220,120,'+gl.toFixed(3)+')';g.fillRect(q.x-w*1.4,q.y-H,w*2.8,H);},
   willow(g,q,u,t,d){const H=u*3;g.fillStyle='#3a3a2a';g.fillRect(q.x-u*.12,q.y-H*.6,u*.24,H*.6);const C=['rgba(150,180,140,.55)','rgba(170,150,210,.5)','rgba(120,160,170,.5)','rgba(220,200,160,.45)'];
-   for(let i=0;i<22;i++){const a=(i*2.39+d.seed)%TAU,rr=u*(.4+((i*37)%10)/10*.9),x=q.x+Math.cos(a)*rr,y=q.y-H*.75+Math.sin(a)*rr*.6+Math.sin(t+i)*2;g.fillStyle=C[i%4];g.fillRect(x-u*.14,y-u*.05,u*.28,u*.12);}}
+   for(let k=0;k<4;k++){g.fillStyle=C[k];g.beginPath();for(let i=k;i<28;i+=4){const a=(i*2.39+d.seed)%TAU,rr=u*(.35+((i*37)%10)/10*1.0),x=q.x+Math.cos(a)*rr,y=q.y-H*.72+Math.sin(a)*rr*.55+i*u*.03+Math.sin(t*.8+i)*1.5;g.moveTo(x+u*.16,y);g.ellipse(x,y,u*.16,u*.08,(i%3-1)*.4,0,TAU);}g.fill();}}// 모네식 둥근 붓점
  };
  const SCALE={clock:1.6,stone:1.35,sunflower:1.45,cypress:1.3,shard:1.45,bottle:1.35,willow:1.45,easel:1.35,canvas:1.35,monolith:1.25,pylon:1.25,gear:1.2,goldpillar:1.2,endless:1.2,frame:1.2,window:1.15,locker:1.1};
  function drawDeco(p){const d=p.r123Deco,fn=DRAW[d.kind];if(!fn||!prefs.deco||!prefs.mood)return;const q=P(p.x,p.y);if(!onScreen(q,200))return;const u=U(),t=now(),g=ctx;
