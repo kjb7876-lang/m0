@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:true,heroBlood:true,earlyGrace:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:true,heroBlood:true,earlyGrace:true,walkCycle:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -80,11 +80,22 @@
  const graceOf=()=>{try{const C=window.__STORYWORLD_CAMPAIGN_R63R1__,m=typeof C?.mode==='function'?C.mode():C?.mode;if(m!=='normal')return 1;
   const lv=Number(player?.level)||1;return Math.min(1,.65+.07*Math.max(0,lv-1));}catch(_){return 1;}};
  if(typeof hurt==='function'){const hurtGrace=hurt;hurt=function(damage,...rest){let d=damage;try{if(prefs.earlyGrace&&Number.isFinite(d)&&d>0){const g=graceOf();if(g<1){d=d*g;stats.graced=(stats.graced||0)+1;}}}catch(_){}return hurtGrace.call(this,d,...rest);};}
+ // 8) 걷기 동작 (사용자 2026-10-29 "걷기 동작도 안 해"): 이동 중에도 8방향 '서 있는' 그림 한 장만 보여 미끄러지듯 움직였다.
+ //    이동 중이고 공격·스킬·맞음·대시가 아니면 그 방향의 달리기 2프레임(heroes/normalized/<영웅>/run_<방향>_a/b)을 번갈아 보여 준다.
+ //    오른쪽 계열(e·ne·se)=run_right, 왼쪽 계열=run_left, n=run_back, s=run_front. 그림이 없는 영웅은 원래대로. 설정 walkCycle.
+ const RUN_SIDE={e:'right',ne:'right',se:'right',w:'left',nw:'left',sw:'left',n:'back',s:'front'},runMissing=new Set(),runLoading=new Set();
+ function runFrame(pose){const m=/^assets\/hero_direction33\d\/([a-z]+)\/(n|ne|e|se|s|sw|w|nw)\.webp$/.exec(typeof cleanPath==='function'?cleanPath(String(pose)):String(pose));if(!m)return null;
+  const side=RUN_SIDE[m[2]],ab=Math.floor((typeof time==='number'?time:0)*7)%2?'b':'a',path='assets/heroes/normalized/'+m[1]+'/run_'+side+'_'+ab+'.webp';if(runMissing.has(path))return null;
+  if(typeof readyImage==='function'&&readyImage(path))return path;
+  if(!runLoading.has(path)&&typeof ensureImages==='function'){runLoading.add(path);Promise.resolve(ensureImages([path])).catch(()=>runMissing.add(path));}return null;}
+ if(typeof heroPose==='function'){const poseBase=heroPose;heroPose=function(...args){const pose=poseBase.apply(this,args);
+  try{if(prefs.walkCycle&&typeof pose==='string'&&player?.moving&&!(player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){const r=runFrame(pose);if(r){stats.walk=(stats.walk||0)+1;return r;}}}catch(_){}
+  return pose;};}
  // 6) Esc로 메뉴·설정 창 닫기 (사용자 2026-10-29): 열린 창(openPanel)의 '계속/닫기'(.close) 단추를 대신 누른다.
  //    입력칸에 글을 쓰는 중이거나 열린 창이 없으면 원래 Esc 동작 그대로.
  if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
   const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
   ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
- function set(p={}){if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ function set(p={}){if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
  window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),fit:FIT,lastError,collisionChanged:false})});
 })();
