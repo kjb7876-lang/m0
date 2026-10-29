@@ -31,11 +31,13 @@ if sys.argv[1] == '--replace':
     cell = Image.new('RGBA', (cw, ch), (0, 0, 0, 0)); cell.alpha_composite(piece, (int(round(rcx - cx)), int(rys.max() + 1 - piece.height)))
     out_img = strip.copy(); out_img.paste(Image.new('RGBA', (cw, ch), (0, 0, 0, 0)), (idx * cw, 0)); out_img.alpha_composite(cell, (idx * cw, 0))
     out_img.save(sys.argv[2], optimize=True); print('replaced frame', idx, 'scale', round(k, 3)); sys.exit(0)
-if sys.argv[1] == '--grid8':  # R121: 8프레임(2줄 x 4칸) 옆 걷기 -> 4x2 스트립. 줄은 가운데 빈 띠로 나누고 각 줄은 아래와 같은 방식으로 몸 4개를 찾는다.
+if sys.argv[1] in ('--grid8', '--grid12'):  # R121: 8프레임(2줄 x 4칸) 옆 걷기 -> 4x2 스트립. 줄은 가운데 빈 띠로 나누고 각 줄은 아래와 같은 방식으로 몸 4개를 찾는다.
     src = sys.argv[2]; a, alpha = key_out(src); solid = alpha > 0; H0 = a.shape[0]
-    rowsum = solid.sum(1); mid = int(np.argmin(rowsum[int(H0 * .35):int(H0 * .65)])) + int(H0 * .35)
-    frames = []; rgba = np.dstack([a, alpha]).clip(0, 255).astype(np.uint8)
-    for ya, yb in ((0, mid), (mid, H0)):
+    nrows = 3 if sys.argv[1] == '--grid12' else 2; rowsum = solid.sum(1); cuts = [0]
+    for k in range(1, nrows):  # 줄 경계: k/nrows 근처에서 가장 비어 있는 가로줄
+        c0, c1 = int(H0 * (k / nrows - .12)), int(H0 * (k / nrows + .12)); cuts.append(int(np.argmin(rowsum[c0:c1])) + c0)
+    cuts.append(H0); frames = []; rgba = np.dstack([a, alpha]).clip(0, 255).astype(np.uint8)
+    for ya, yb in zip(cuts[:-1], cuts[1:]):
         sub = solid[ya:yb]; cols = sub.any(0); runs = []; x = 0; W = sub.shape[1]
         while x < W:
             if cols[x]:
@@ -56,10 +58,10 @@ if sys.argv[1] == '--grid8':  # R121: 8프레임(2줄 x 4칸) 옆 걷기 -> 4x2 
             cx = float(np.nonzero(solid[y0:y0 + int((y1 - y0) * .45), x0:x1])[1].mean()) + x0
             frames.append((x0, x1, y0, y1, cx))
     Hm = max(f[3] - f[2] for f in frames); half = int(max(max(f[4] - f[0], f[1] - f[4]) for f in frames)) + 8; cw, ch = 2 * half, Hm + 16
-    strip = Image.new('RGBA', (cw * 4, ch * 2), (0, 0, 0, 0))
+    strip = Image.new('RGBA', (cw * 4, ch * nrows), (0, 0, 0, 0))
     for i, (x0, x1, y0, y1, cx) in enumerate(frames):
         piece = Image.fromarray(rgba[y0:y1, x0:x1]); strip.alpha_composite(piece, ((i % 4) * cw + int(round(half - (cx - x0))), (i // 4) * ch + ch - 8 - (y1 - y0)))
-    strip.save(sys.argv[3], optimize=True); print('grid8', cw, ch); sys.exit(0)
+    strip.save(sys.argv[3], optimize=True); print('grid', nrows, cw, ch); sys.exit(0)
 raw, d, out = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3]); out.mkdir(parents=True, exist_ok=True)
 a = np.asarray(Image.open(raw).convert('RGB')).astype(np.float32)
 r, g, b = a[..., 0], a[..., 1], a[..., 2]
