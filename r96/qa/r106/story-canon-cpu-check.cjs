@@ -4,10 +4,10 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const root=path.resolve(__dirname,'../../..'),R=p=>path.join(root,p);
-const SHA='ccb0bd26d2e16eb5586171ba0e197a5d0aaf76986a56f15a705f29305b6870ef';// R116: 전편 총집본 문체·맞춤법 개선본(스토리 모드·사몽 모두)
+const SHA='390e9e357529a66038d4ffdf77e9b7555183574bac2822ff4b2ba29dff0b296d';// R122: 서사 최종검수본(2026-10-29, 7개 파일 통합 — 스토리 모드·사몽·에필로그 모두)
 let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.log((ok?'PASS ':'FAIL ')+name+(ok||!detail?'':' :: '+detail));};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const canonPath=R('story-source/hapil-canon-r116-revised.txt'),canon=fs.readFileSync(canonPath);
+const canonPath=R('story-source/hapil-canon-r122-final.txt'),canon=fs.readFileSync(canonPath);
 check('canon file hash is the improved canon',sha(canon)===SHA,sha(canon));
 const canonText=canon.toString('utf8').replace(/\r\n/g,'\n');
 const norm=s=>String(s).replace(/\s+/g,' ').trim();
@@ -50,7 +50,7 @@ check('multi-narrator zones split into segments ('+multi.length+')',multi.length
 const sctx={window:{}};vm.createContext(sctx);vm.runInContext(fs.readFileSync(R('r96/client-source/samong-text-r103.js'),'utf8'),sctx);
 const ST=sctx.window.__STORYWORLD_SAMONG_TEXT_R103__;
 // R115: 사몽~진료기록은 전편총집본(sha256 4db94112…)으로 만든다. 스토리 모드는 위 canon 그대로다.
-const SAMONG_SHA=SHA,samongCanon=fs.readFileSync(R('story-source/hapil-canon-r116-revised.txt'));
+const SAMONG_SHA=SHA,samongCanon=fs.readFileSync(R('story-source/hapil-canon-r122-final.txt'));
 check('사몽 canon file hash is the 총집본',sha(samongCanon)===SAMONG_SHA,sha(samongCanon));
 const samongNorm=norm(samongCanon.toString('utf8').replace(/\r\n/g,'\n'));
 check('사몽 text module built from the 총집본',ST?.sha256===SAMONG_SHA&&Object.keys(ST.sections).length===42,ST?.sha256+' '+Object.keys(ST?.sections||{}).length);

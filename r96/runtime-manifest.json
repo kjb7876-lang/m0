@@ -7913,6 +7913,11 @@
       "sha256": "35cffa3fe6d6c22cdb75e06e1cca55a673f06c10afa28087d749082c40c77b71"
     },
     {
+      "path": "assets/r116/mobs/M001-idle.png",
+      "bytes": 129997,
+      "sha256": "67a82d80e62a44ec226783888f65db6dcb939a852ae1f4ab5ae2bbb60d9e77d8"
+    },
+    {
       "path": "assets/r116/mobs/M003-hit.png",
       "bytes": 120945,
       "sha256": "b17d15a682879d9fdd426fe0ccf21400f9e32b070eedc39a008aa64fad6d377f"
@@ -7963,9 +7968,24 @@
       "sha256": "7008f76989baf36f30fbec83377708efd725f83f84894cfd4b1d13a75a6584b2"
     },
     {
+      "path": "assets/r116/mobs/M016-hit.png",
+      "bytes": 151816,
+      "sha256": "b2b202df931890b92441cda154eb692f598f534e4e628a0fcfcf26be913ab1b9"
+    },
+    {
       "path": "assets/r116/mobs/M018-hit.png",
       "bytes": 146621,
       "sha256": "708eb9710b03566f28b08a539352ac2a4c1316dfc885e0e1c045538c3c16db77"
+    },
+    {
+      "path": "assets/r116/mobs/M019-hit.png",
+      "bytes": 141190,
+      "sha256": "665b5ee951f1a5e37d1ab8ceab6dc6f977586e2db1fe7244142e902a7898fcfa"
+    },
+    {
+      "path": "assets/r116/mobs/M020-hit.png",
+      "bytes": 222903,
+      "sha256": "707866adef1567aadeb1b9b3acf82aff0ad89700bb64102413010812def96a0b"
     },
     {
       "path": "assets/r116/mobs/M021-hit.png",
@@ -8063,6 +8083,11 @@
       "sha256": "8e21bd7dfec4335fbab8111c44ccd979369c520639d9ab4aa10a3a675ec89c35"
     },
     {
+      "path": "assets/r116/mobs/M052-hit.png",
+      "bytes": 226820,
+      "sha256": "96be86ae95f9bad047d828bc5c456356da545f016f76ecb59fcfd68e34bf121d"
+    },
+    {
       "path": "assets/r116/mobs/M053-hit.png",
       "bytes": 166726,
       "sha256": "3dc9ae5af8e1bd061196c81d768e70bf70b8b598e29405fe371b9b536cc63e1c"
@@ -8078,14 +8103,44 @@
       "sha256": "1c31e9fe8a713c2260f59050a1becf6db794e1597743c2d8ae05ac6052a46f59"
     },
     {
+      "path": "assets/r116/mobs/M057-hit.png",
+      "bytes": 193865,
+      "sha256": "3960cae1cf7125335e4d453e532c18cbd9a0a15584a81be6336299667920cff7"
+    },
+    {
       "path": "assets/r116/mobs/M057-idle.png",
       "bytes": 155105,
       "sha256": "281f0fc26fdafe4623e37a1afee2d1a5e263e237e996f70fc3ff39bfa94b20e0"
     },
     {
+      "path": "assets/r116/mobs/M063-hit.png",
+      "bytes": 156817,
+      "sha256": "ecb210389f4673ad03493723307d6daee662398d381c23897e814399b4477ba6"
+    },
+    {
+      "path": "assets/r116/mobs/M064-hit.png",
+      "bytes": 123433,
+      "sha256": "5f0f9791cbcb935ec3d32f2b44fd8c055c88a6dcabeb2844aa5e0df5141c317c"
+    },
+    {
       "path": "assets/r116/mobs/M069-hit.png",
       "bytes": 191400,
       "sha256": "dd5f8cda25357d0e992162932e4f50655450832c7e52dc06faecc247e2732013"
+    },
+    {
+      "path": "assets/r116/mobs/M072-hit.png",
+      "bytes": 187197,
+      "sha256": "289932dbea373a43469e533f58e8eee55bce583be8ee959d46d7c3a60a20294c"
+    },
+    {
+      "path": "assets/r116/mobs/M074-hit.png",
+      "bytes": 141588,
+      "sha256": "abf47183b2745ba85484d9d0339933b6fb0a655767800d252fb1c9e3dd12d49c"
+    },
+    {
+      "path": "assets/r116/mobs/M078-hit.png",
+      "bytes": 177566,
+      "sha256": "091b6b296a76421c4d300ed011fa788ae570c002f6b86f4613e650d84f493e13"
     },
     {
       "path": "assets/r116/mobs/M120-hit.png",
@@ -8123,6 +8178,11 @@
       "sha256": "349ae43168b95ce15f82fda00dd6c1177de621b543ccdc60580a0b97f6fda18f"
     },
     {
+      "path": "assets/r116/mobs/M129-idle.png",
+      "bytes": 82439,
+      "sha256": "635921f8a230d5533026073f86800e20d0ae01a53be79b02c695f36edaf8eaa1"
+    },
+    {
       "path": "assets/r116/mobs/M130-hit.png",
       "bytes": 235176,
       "sha256": "aafb379d4b7a494f2588976978fb8f58c3566f15b56f271d922baf00b349d90d"
@@ -8144,8 +8204,8 @@
     },
     {
       "path": "assets/r116/mobs/index.json",
-      "bytes": 91556,
-      "sha256": "a31767889788e7a29568e3c7aa31cfbf99ad3b8dbc378bc4a7e074aaa6493e4b"
+      "bytes": 115316,
+      "sha256": "0c1587c35af25dbd7a2c9c4a09318c47af48412a127b05ad1e98a98298391df7"
     },
     {
       "path": "assets/r117/scene/ep-cup-k1.png",
@@ -8566,6 +8626,146 @@
       "path": "assets/r120/cult/cult-leader-drive-stitch-v17.webp",
       "bytes": 90032,
       "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/aim_back.webp",
+      "bytes": 15720,
+      "sha256": "152c241d7a45672f52c13cf31bd51eea8c5e0154f2c1d835feb1fc38bff179ab"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/aim_front.webp",
+      "bytes": 14990,
+      "sha256": "eb0f6a951421cdf67979791860c4d64796a5ebf32b55c156d5e2bb21eb624959"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/attack_left.webp",
+      "bytes": 35014,
+      "sha256": "69960f7769ac5c018142dd4d15f7d5b7a0899ccabf214b1704a9e49c320240dd"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/attack_right.webp",
+      "bytes": 33590,
+      "sha256": "050bd8c84b4a1625a98a3bc1aed8d45fdb76584775d9fae2e7cd4cb6bfaf415e"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/guard_left.webp",
+      "bytes": 30410,
+      "sha256": "0238e28f8ab01a4a4bc72a77c5ead6f3ea0cd0fa77de8997b6afe0e93a32619a"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/guard_right.webp",
+      "bytes": 29080,
+      "sha256": "cd26d88940a0346b92dea410603ff42aea8238698e137007d4b62ffbc1455021"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/index.json",
+      "bytes": 7161,
+      "sha256": "c754f1b4b3f500a0493a895b149900ae2e3c6e651547f2a26554bdec3fb5cb82"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_aim.webp",
+      "bytes": 33328,
+      "sha256": "af6965ce9a1fb6fe68ba6a3897cb0cd321e55c453e647e8d5d778f1e76ee507e"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_aimup.webp",
+      "bytes": 36390,
+      "sha256": "86db409de02a87f869ef203756ac04afe8708bdbc098585a03cf449377a7efda"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_crouch.webp",
+      "bytes": 29046,
+      "sha256": "f865c203c23f4c380f9590668f452581a1db136b691a90cda87bd5080f9473d8"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_idle.webp",
+      "bytes": 33294,
+      "sha256": "560e59e7bc157bc9afdbdd492757f26615ce6665211a08662d6a541ff46a04be"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_run1.webp",
+      "bytes": 32796,
+      "sha256": "5bdf79d0a77e9b13e23247c5f4f13723b584e73651e266276479d7cef1ce9a05"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_run2.webp",
+      "bytes": 24266,
+      "sha256": "8589a52597fe52c7cb33ba5db3af4ec05646a1a8e4419896eea4ad23f11d28a9"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_back_a.webp",
+      "bytes": 14936,
+      "sha256": "6b63e10bbc479ed415ee3915876f55ca182273c843c5d04868424255c644a421"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_back_b.webp",
+      "bytes": 14088,
+      "sha256": "d90e6c2bb36055236b970d715278382b8c09993848f2cd385cab078f09a1aea2"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_front_a.webp",
+      "bytes": 16610,
+      "sha256": "f5fd6c2299110cfb8f8c2e6eb09ffa25d95f3172741f8a7e27be310ab1a1a25f"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_front_b.webp",
+      "bytes": 17046,
+      "sha256": "69b4c3759e7f9e062908c412ad975faccd7555c594685aae09a81b01699b3085"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_left_a.webp",
+      "bytes": 34028,
+      "sha256": "1bf1b992d69a94cb6536d5181ef9868e9326a8b485b600ba870feb3981235e81"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_left_b.webp",
+      "bytes": 26784,
+      "sha256": "9288740f28d3ec8b3ddfb3d4e6314da90af3c4d381c40f256ca538f9dc982e83"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_right_a.webp",
+      "bytes": 32898,
+      "sha256": "5cb83a940fabbc3e4cf1becf40f8dfa9afb32e2c0de767a395bd9771c7ddf6cb"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_right_b.webp",
+      "bytes": 24266,
+      "sha256": "21f623c27c45d0e5c2d42afbc2c01dd347890fd0cbefc0e95fa8504f73fea0e2"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-e.png",
+      "bytes": 290345,
+      "sha256": "0926812e8087921255155047da629414abf48741d4b3ec8e922c855018461a15"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-e6.png",
+      "bytes": 381478,
+      "sha256": "c35f08256bca3e98dd70c3db1997bd8e004d0490af96109380f961b86d5590d5"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-e8.png",
+      "bytes": 536410,
+      "sha256": "6f066bf8b0187e94c50eef6dda935a6869294b0a82a8b4c08729c11b2e9c1068"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-n.png",
+      "bytes": 231578,
+      "sha256": "f09eb7c6936fd180d713aba078025bba35efa60f30c38a643c52ba0ea1c6f6c5"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-ne.png",
+      "bytes": 240799,
+      "sha256": "5fc2eba46f552ba84956f8a173cad3a5cf0e25a6c0bd55d4e0d26aff8f7abc30"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-s.png",
+      "bytes": 266770,
+      "sha256": "ed7e52d485c92f5f027c815941733b597a182eff973643f1f45d0f9e525d6b98"
+    },
+    {
+      "path": "assets/r121/walk/walk-gunner-se.png",
+      "bytes": 280468,
+      "sha256": "236a5e4749d9598207dde510a4353a3ba0b897f4ed60ae4f8b5866a8ea10b8ea"
     },
     {
       "path": "assets/r74/effects.png",
@@ -17014,8 +17214,8 @@
     },
     {
       "path": "combat-r114.js",
-      "bytes": 36731,
-      "sha256": "8309bfaa6cd73f9b88d45d939996275e3ca4a025f016719e388f41e28e625219"
+      "bytes": 37508,
+      "sha256": "0185d49e47004353fb7130ea53db9747266bcdce34d2c4f089d8926a15a296a5"
     },
     {
       "path": "combat-r118.js",
@@ -17214,8 +17414,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562993,
-      "sha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e"
+      "bytes": 6576520,
+      "sha256": "8693f15f85246145488a6fe580617bac9a485ecd397bf03332afcbef5caf77e1"
     },
     {
       "path": "mobs-r109.js",
@@ -17289,8 +17489,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 53356,
-      "sha256": "51322e9ceaa76e39f1fee81bb9508c7390c44920e4ee085697dd0c2e3b590c4b"
+      "bytes": 54275,
+      "sha256": "9056325904e3b35363754e817707450aeef3b8f4c0c162206eddcaf17c861e11"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -17314,28 +17514,28 @@
     },
     {
       "path": "samong-maps-r105.js",
-      "bytes": 42489,
-      "sha256": "5561b1bce967cc571502a9bf3a5b2c217f840600b782be946343a6f33471e7ef"
+      "bytes": 43001,
+      "sha256": "96036a1e3090b83053cf16c295f1bec04145680bbdbed45540a062b60eade902"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 69653,
-      "sha256": "51efbbdc283bd619b6c30cf6aa0e29fcb0d21a77bd505e270ce5916cc703c86f"
+      "bytes": 70089,
+      "sha256": "94c1d2317225fa879ecd2bef8b0bffb8139741ca504df93730d5744d409df543"
     },
     {
       "path": "samong-text-r103.js",
-      "bytes": 227158,
-      "sha256": "b276b37acf385451ef3c34727804646a2e255e0413958571839e68a65c6ae972"
+      "bytes": 499803,
+      "sha256": "9b1a36dcb6eb5066cb857c35787513b3eeb2aeb105487de335278ce0e615cecc"
     },
     {
       "path": "samong-zones-r115-data.js",
-      "bytes": 67711,
-      "sha256": "fd09b86a48b28ae5b22d5c79ecdc340ed2af2d51a3a95efa513445c3ab1b26fb"
+      "bytes": 72743,
+      "sha256": "ef68253e6c613b51148322f966c2bed37efc0eb051e1b66245fd9142fb4318ee"
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 39104,
-      "sha256": "f14e41b20e082aaf330b8ad3f1c493da7ca67da74c67064974a3605f52b0cd9b"
+      "bytes": 40438,
+      "sha256": "3ffcb036ab27d3911b3fb498f5be7853282eb01fe897f42f3a55b9461bf20aa1"
     },
     {
       "path": "scene-props-r117.js",
@@ -17349,13 +17549,18 @@
     },
     {
       "path": "story-canon-r106-data.js",
-      "bytes": 145625,
-      "sha256": "e2d61189310a7f7a84750c55aca8c04d11c56f9c70158da109333315ab03787b"
+      "bytes": 173914,
+      "sha256": "7f3afcb1f0e7802b7b2a9a19a0f8e378fdd054c180eec633489278dbf2b66ceb"
     },
     {
       "path": "story-canon-r106.js",
       "bytes": 7646,
       "sha256": "d02c73aaf228bfcd696ec055a0e5e5f0c922987a6232a65ecb3fe2e1225293c8"
+    },
+    {
+      "path": "story-reader-r122.js",
+      "bytes": 5020,
+      "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -17379,8 +17584,8 @@
     },
     {
       "path": "vfx-r98.js",
-      "bytes": 29449,
-      "sha256": "b5dc986c379dfb9d61f0b260e746a110e131ff1fe594034492af09f21a0b0109"
+      "bytes": 29877,
+      "sha256": "286ced5e0ef9ee90353655ae6d52e1ad37aa28011b4562e437ad190de06edc8a"
     },
     {
       "path": "vfx-retro-r89.js",
@@ -17399,8 +17604,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 5717,
-      "sha256": "f679a736ea3492f8a91e5e2f089ed37959edd047c0d55189cc4c28f615479f36"
+      "bytes": 26469,
+      "sha256": "27b09d5b19bae71a214045e11abe9311b845e1f8674cc64ac69605e2e42c5cd3"
     },
     {
       "path": "visual-r90-world.js",
@@ -17513,9 +17718,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3502,
-  "totalBytes": 762326203,
-  "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
+  "fileCount": 3543,
+  "totalBytes": 767398854,
+  "webHTMLSha256": "8693f15f85246145488a6fe580617bac9a485ecd397bf03332afcbef5caf77e1",
   "largest": [
     {
       "path": "index.html",

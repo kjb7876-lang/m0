@@ -159,7 +159,7 @@
   if(!paint(p.aura,e.x,e.y,{loop:true,key:e,scale:M?1.8:1.15,alpha:.25+.7*k}))glow(e.x,e.y,actorHeight()*.5,(14+16*k)*zoom*(M?1.5:1),e.th,.4+.6*k);}
  function drawImpactAir(e,t){const M=e.major,p=paintFor(e),k0=clamp(t,0,1),sp=spots(e.g),many=sp.length>1;
   for(const o of sp){const k=lagged(k0,o.d);if(k<=0||k>=1&&many)continue;const E=many?o.ext:extent(e.g),c=o;
-  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1)*(many?.9:1),s=e.g?.shape,slash=s==='arc'||s==='cone'||s==='capsule'||s==='line';
+  const scale=clamp(1.3+E*.6,1.4,M?3.2:2.2)*(e.heavy?1.15:1)*(many?.9:1),s=e.g?.shape,slash=false&&(s==='arc'||s==='cone'||s==='capsule'||s==='line');// R121: 적 베기형 공격의 사선(/) 표식이 영웅 위에 겹쳐 기억사수 적중처럼 보였다(사용자) — 둥근 타격 표식으로 통일
   const sig=slash?sigStrip('slash',e,c.x,c.y,k,actorHeight()*scale*.95,{lift:actorHeight()*.38,angle:screenAngle(e.g.angle||0)+Math.PI,glow:.4*(1-k)}):sigStrip('hit',e,c.x,c.y,k,actorHeight()*scale*.9,{lift:actorHeight()*.3,glow:.45*(1-k)});
   if(!sig&&!paint(p.hit,c.x,c.y,{t:k,key:e,scale,alpha:1}))glow(c.x,c.y,actorHeight()*.3,(24+40*k)*zoom,e.th,1-k);
   const ck=contactFor(e);if(ck)contact(ck,c.x,c.y,k,actorHeight()*scale*.85,.9);}}

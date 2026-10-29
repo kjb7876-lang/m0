@@ -12,7 +12,7 @@ sb.window=sb;vm.createContext(sb);
 for(const f of ['samong-text-r103.js','samong-zones-r115-data.js','samong-zones-r115.js','samong-r103.js'])vm.runInContext(fs.readFileSync(path.join(SRC,f),'utf8'),sb,{filename:f});
 const SM=sb.__STORYWORLD_SAMONG_R103__,Z=sb.__STORYWORLD_SAMONG_ZONES_R115__,TX=sb.__STORYWORLD_SAMONG_TEXT_R103__;
 check('modules load',SM&&Z&&TX);
-check('text is the R116 문체·맞춤법 개선본',TX.sha256==='ccb0bd26d2e16eb5586171ba0e197a5d0aaf76986a56f15a705f29305b6870ef');
+check('text is the R122 서사 최종검수본',TX.sha256==='390e9e357529a66038d4ffdf77e9b7555183574bac2822ff4b2ba29dff0b296d');
 const chapters=Object.entries(Z.chapters);
 check('S-02 pilot has 8 zones',Z.chapter('S-02')?.length===8);
 check('108 zones over 사몽·역행·엔딩 (설계안 표)',chapters.reduce((n,[,l])=>n+l.length,0)===108&&SM.episodes.every(e=>Z.chapter(e.key)?.length),chapters.map(([k,l])=>k+':'+l.length).join(' '));

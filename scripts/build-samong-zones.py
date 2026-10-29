@@ -23,7 +23,7 @@ def anchor(sec, i):
         first = next(j for j, p in enumerate(ps) if p.startswith(sub))
         if first == i:
             return sub
-    raise SystemExit(f'고유 앞부분 없음: {sec}#{i}')
+    return t  # R122: 더 긴 앞 문단의 앞부분과 똑같은 짧은 문단(예: ‘도겸’.)은 고유 앞부분이 없다 — 위치 번호 i 로 찾는다
 
 def label(t, lim=18):
     t = re.sub(r'\s+', ' ', t.strip().strip('"“”'))
@@ -36,7 +36,7 @@ def label(t, lim=18):
 
 def ref(sec, a, b=None, lab=None):
     b = a if b is None else b
-    r = {'key': sec, 'sub': anchor(sec, a), 'n': b - a + 1}
+    r = {'key': sec, 'sub': anchor(sec, a), 'i': a, 'n': b - a + 1}
     if lab is not False: r['label'] = lab or label(SEC[sec][a])
     return r
 
@@ -62,9 +62,27 @@ EP_STYLE = {'P': 'forge', 'S-01': 'domestic', 'S-03': 'garden', 'S-04': 'clinica
             'RA': 'clinical', 'RB': 'domestic', 'RC': 'garden', 'RD': 'forge', 'RE': 'forge', 'RF': 'domestic', 'RG': 'forge', 'M': 'domestic'}
 DEF_TPL = {'explore': 'rooms', 'maze': 'grid', 'combat': 'arena', 'confront': 'dais'}
 
+# R122: 최종검수본(2026-10-29)으로 원문을 바꾸면서 장마다 문단 수가 달라졌다. 아래 SPEC 의 문단 번호는 이전 원문(문단 수 OLD_N) 기준으로
+# 정해 둔 것이라, 같은 장 안에서 새 문단 수에 비례해 옮긴다(서사 골격은 같고 문장만 늘거나 줄었으므로 구역이 맡는 대목은 그대로 따라간다).
+OLD_N = {"prelude": 4, "threshold": 10, "S-01": 19, "S-02": 25, "S-03": 53, "S-04": 37, "S-05": 45, "S-06": 0, "NS-01": 14, "NS-02": 9, "NS-03": 10, "NS-04": 9, "NS-05": 12, "NS-06": 10, "NS-07": 8, "NS-08": 11, "NS-09": 9, "NS-10": 7, "S-07": 19, "R-00": 15, "R-01": 18, "R-02": 16, "R-03": 19, "R-04": 19, "R-05": 16, "R-06": 15, "R-07": 19, "R-08": 15, "R-09": 12, "R-10": 16, "R-11": 16, "R-12": 16, "R-13": 17, "R-14": 12, "R-15": 13, "R-16": 10, "R-17": 9, "M1": 12, "M2": 13, "M3": 7, "epilogue": 16, "record": 25}
+def remap(sec, a, b):
+    no, nn = OLD_N.get(sec), len(SEC[sec])
+    if not no or no == nn: return (sec, a, b)
+    na = round(a * nn / no); nb = round((b + 1) * nn / no) - 1
+    return (sec, na, max(na, nb))
+
 def Z(t, kind, seg, **o):
     """seg: (sec, a, b) 또는 그 목록. o: tpl, p, out(실외 계열), dark, kills, hold, noMobs, hz, boss, conf, ref, wander, mobs."""
-    return {'title': t, 'kind': kind, 'seg': seg if isinstance(seg, list) else [seg], **o}
+    segs = seg if isinstance(seg, list) else [seg]
+    if 'conf' in o:  # 대면 구역의 세부 문단(cue·bossCue·steps·after)도 같은 비율로 옮긴다
+        sec = segs[0][0]; c = dict(o['conf'])
+        rr = lambda r: remap(sec, r[0], r[1])[1:]
+        for k in ('cue', 'steps'):
+            if k in c: c[k] = [rr(r) for r in c[k]]
+        for k in ('bossCue', 'after'):
+            if k in c and c[k] is not None: c[k] = rr(c[k])
+        o = {**o, 'conf': c}
+    return {'title': t, 'kind': kind, 'seg': [remap(*s) for s in segs], **o}
 
 ROOT = ['dist00', 'dist00-boss']
 SPEC = {
