@@ -8568,6 +8568,111 @@
       "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
     },
     {
+      "path": "assets/r121/heroes/gunner/aim_back.webp",
+      "bytes": 15720,
+      "sha256": "152c241d7a45672f52c13cf31bd51eea8c5e0154f2c1d835feb1fc38bff179ab"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/aim_front.webp",
+      "bytes": 14990,
+      "sha256": "eb0f6a951421cdf67979791860c4d64796a5ebf32b55c156d5e2bb21eb624959"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/attack_left.webp",
+      "bytes": 35014,
+      "sha256": "69960f7769ac5c018142dd4d15f7d5b7a0899ccabf214b1704a9e49c320240dd"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/attack_right.webp",
+      "bytes": 33590,
+      "sha256": "050bd8c84b4a1625a98a3bc1aed8d45fdb76584775d9fae2e7cd4cb6bfaf415e"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/guard_left.webp",
+      "bytes": 30410,
+      "sha256": "0238e28f8ab01a4a4bc72a77c5ead6f3ea0cd0fa77de8997b6afe0e93a32619a"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/guard_right.webp",
+      "bytes": 29080,
+      "sha256": "cd26d88940a0346b92dea410603ff42aea8238698e137007d4b62ffbc1455021"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/index.json",
+      "bytes": 7161,
+      "sha256": "c754f1b4b3f500a0493a895b149900ae2e3c6e651547f2a26554bdec3fb5cb82"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_aim.webp",
+      "bytes": 33328,
+      "sha256": "af6965ce9a1fb6fe68ba6a3897cb0cd321e55c453e647e8d5d778f1e76ee507e"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_aimup.webp",
+      "bytes": 36390,
+      "sha256": "86db409de02a87f869ef203756ac04afe8708bdbc098585a03cf449377a7efda"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_crouch.webp",
+      "bytes": 29046,
+      "sha256": "f865c203c23f4c380f9590668f452581a1db136b691a90cda87bd5080f9473d8"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_idle.webp",
+      "bytes": 33294,
+      "sha256": "560e59e7bc157bc9afdbdd492757f26615ce6665211a08662d6a541ff46a04be"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_run1.webp",
+      "bytes": 32796,
+      "sha256": "5bdf79d0a77e9b13e23247c5f4f13723b584e73651e266276479d7cef1ce9a05"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/player_run2.webp",
+      "bytes": 24266,
+      "sha256": "8589a52597fe52c7cb33ba5db3af4ec05646a1a8e4419896eea4ad23f11d28a9"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_back_a.webp",
+      "bytes": 14936,
+      "sha256": "6b63e10bbc479ed415ee3915876f55ca182273c843c5d04868424255c644a421"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_back_b.webp",
+      "bytes": 14088,
+      "sha256": "d90e6c2bb36055236b970d715278382b8c09993848f2cd385cab078f09a1aea2"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_front_a.webp",
+      "bytes": 16610,
+      "sha256": "f5fd6c2299110cfb8f8c2e6eb09ffa25d95f3172741f8a7e27be310ab1a1a25f"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_front_b.webp",
+      "bytes": 17046,
+      "sha256": "69b4c3759e7f9e062908c412ad975faccd7555c594685aae09a81b01699b3085"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_left_a.webp",
+      "bytes": 34028,
+      "sha256": "1bf1b992d69a94cb6536d5181ef9868e9326a8b485b600ba870feb3981235e81"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_left_b.webp",
+      "bytes": 26784,
+      "sha256": "9288740f28d3ec8b3ddfb3d4e6314da90af3c4d381c40f256ca538f9dc982e83"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_right_a.webp",
+      "bytes": 32898,
+      "sha256": "5cb83a940fabbc3e4cf1becf40f8dfa9afb32e2c0de767a395bd9771c7ddf6cb"
+    },
+    {
+      "path": "assets/r121/heroes/gunner/run_right_b.webp",
+      "bytes": 24266,
+      "sha256": "21f623c27c45d0e5c2d42afbc2c01dd347890fd0cbefc0e95fa8504f73fea0e2"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -17399,8 +17504,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 11424,
-      "sha256": "205538d0ac16e42d01a1f9e11c83e7099c51155ffbcd2429062d37ddcbf3cc53"
+      "bytes": 13705,
+      "sha256": "9fa66adc1ca7ca52eae7b33b15b49273bf54db3ebabc63e9231cb782ec1374f4"
     },
     {
       "path": "visual-r90-world.js",
@@ -17513,8 +17618,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3502,
-  "totalBytes": 762332214,
+  "fileCount": 3523,
+  "totalBytes": 762870236,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

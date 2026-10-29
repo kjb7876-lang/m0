@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:true,heroBlood:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:true,heroBlood:true,earlyGrace:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -18,7 +18,9 @@
  // 2) 영웅 그림 일관성: 기억사수의 북쪽(위를 볼 때·위로 겨눌 때) 그림만 가늘고 작은 다른 화풍이라 7방향과 어긋났다.
  //    같은 화풍·같은 키·같은 발 위치로 다시 그린 뒷모습(ChatGPT 2026-10-29, 원본 앞모습·대각선 그림을 참조)으로 바꿔 보낸다.
  //    원본 파일은 그대로 두고 이미지 주소만 바꾼다(캐시 키·그림 크기 512·발밑 피벗 동일).
- const SWAP=Object.freeze(Object.fromEntries(['gunner','seoha','neon','michaela','hunter'].map(h=>['assets/hero_direction337/'+h+'/n.webp','assets/r119/heroes/'+h+'-n.webp'])));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
+ const SWAP=Object.freeze(Object.fromEntries(['gunner','seoha','neon','michaela','hunter'].map(h=>['assets/hero_direction337/'+h+'/n.webp','assets/r119/heroes/'+h+'-n.webp']).concat(
+  // R121: 기억사수 동작 프레임 중 흰 스티커 테두리·검은 번짐이 있는 세대를 정리한 사본(scripts/r121-gunner-clean.py)으로 바꿔 8방향 그림과 화풍을 맞춘다.
+  ['aim_back','aim_front','attack_left','attack_right','guard_left','guard_right','player_aim','player_aimup','player_crouch','player_idle','player_run1','player_run2','run_back_a','run_back_b','run_front_a','run_front_b','run_left_a','run_left_b','run_right_a','run_right_b'].map(n=>['assets/heroes/normalized/gunner/'+n+'.webp','assets/r121/heroes/gunner/'+n+'.webp']))));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
  //    원래 그림이 캐시에 정상으로 올라온 뒤에 새 그림을 따로 받아, 다 받아지면 같은 캐시 칸의 그림만 바꾼다(실패하면 원래 그림 유지).
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
@@ -42,7 +44,7 @@
  //    위·아래 서기 94%, 옆·대각선 70~85%, 달리기 61%로 달라서 멈추거나 방향을 틀 때마다 몸이 커졌다 작아졌다.
  //    그림이 캐시에 올라오면 발밑 줄은 그대로 두고 보이는 키가 FIT(74%)이 되게 같은 크기 칸에 다시 그려 넣는다.
  //    구르기·대시·웅크리기(원래 낮은 자세)와 무기·이펙트 그림은 건드리지 않는다. 설정 heroFit.
- const FIT=.74,FIT_RE=/^assets\/(?:hero_direction33\d\/[a-z]+\/[a-z]+|heroes\/normalized\/[a-z]+\/(?!.*(?:roll|dash|crouch))[a-z_0-9]+|r119\/heroes\/[a-z]+-n)\.webp$/,fitState=new Map();
+ const FIT=.74,FIT_RE=/^assets\/(?:hero_direction33\d\/[a-z]+\/[a-z]+|heroes\/normalized\/[a-z]+\/(?!.*(?:roll|dash|crouch))[a-z_0-9]+|heroes\/normalized\/actions-v3126\/[a-z]+-(?:hurt|move)-[a-z]+|r119\/heroes\/[a-z]+-n)\.webp$/,fitState=new Map();
  function fitHero(k,row){const im=row.image;if(fitState.has(k)||!im||!(im.naturalWidth||im.width))return;fitState.set(k,'measuring');
   try{const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);
    const d=g.getImageData(0,0,W,H).data;let top=H,foot=-1,x0=W,x1=-1;for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>16){if(y<top)top=y;if(y>foot)foot=y;if(x<x0)x0=x;if(x>x1)x1=x;}
@@ -73,6 +75,16 @@
    ctx.fillStyle=`rgba(${Math.min(255,r+30*rnd(i))},${g},${b},${.9*k})`;ctx.beginPath();ctx.ellipse(q.x+Math.cos(a)*d,q.y-lift+Math.sin(a)*d*.7+fall,rr*1.5,rr,a,0,6.283);ctx.fill();}
   ctx.restore();stats.bloods=(stats.bloods||0)+1;}
  if(typeof drawEffect==='function'){const drawBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.heroBlood&&HURT_TYPES.has(f?.type)&&onHero(f)){if(!blood.drawnAt||blood.drawnAt!==time){blood.drawnAt=time;drawBlood();}return;}}catch(_){}return drawBase.call(this,f,...a);};}
- function set(p={}){if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ // 7) 노말 초반 피해 완화 (사용자 2026-10-29 "노말인데 첫 정원 엘리트 무리에게 금방 쓰러짐"): 노말에서만 영웅 레벨이 낮을 때
+ //    받는 피해를 줄인다. Lv1 65% -> 레벨마다 +7% -> Lv6부터 원래대로 100%. 이지·하드, Lv6 이상은 그대로. 설정 earlyGrace.
+ const graceOf=()=>{try{const C=window.__STORYWORLD_CAMPAIGN_R63R1__,m=typeof C?.mode==='function'?C.mode():C?.mode;if(m!=='normal')return 1;
+  const lv=Number(player?.level)||1;return Math.min(1,.65+.07*Math.max(0,lv-1));}catch(_){return 1;}};
+ if(typeof hurt==='function'){const hurtGrace=hurt;hurt=function(damage,...rest){let d=damage;try{if(prefs.earlyGrace&&Number.isFinite(d)&&d>0){const g=graceOf();if(g<1){d=d*g;stats.graced=(stats.graced||0)+1;}}}catch(_){}return hurtGrace.call(this,d,...rest);};}
+ // 6) Esc로 메뉴·설정 창 닫기 (사용자 2026-10-29): 열린 창(openPanel)의 '계속/닫기'(.close) 단추를 대신 누른다.
+ //    입력칸에 글을 쓰는 중이거나 열린 창이 없으면 원래 Esc 동작 그대로.
+ if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
+  const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
+  ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
+ function set(p={}){if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
  window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),fit:FIT,lastError,collisionChanged:false})});
 })();
