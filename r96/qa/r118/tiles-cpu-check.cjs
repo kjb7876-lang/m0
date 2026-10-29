@@ -12,7 +12,7 @@ function webpSize(b){if(b.toString('latin1',0,4)!=='RIFF'||b.toString('latin1',8
 // ---- 자산 ---------------------------------------------------------------------------------------------
 const dir=path.join(RT,'assets/r118/tiles'),idx=JSON.parse(fs.readFileSync(path.join(dir,'index.json'),'utf8'));
 const looks=Object.entries(idx.looks);
-check('13 looks, one 2048x1024 WebP each, recorded sha/bytes, no hospital look',looks.length===13&&!idx.looks.hospital&&looks.every(([k,v])=>{const b=fs.readFileSync(path.join(dir,v.file));const sz=webpSize(b);return v.file===k+'.webp'&&sha(b)===v.sha256&&b.length===v.bytes&&sz&&sz[0]===2048&&sz[1]===1024;}));
+check('16 looks (R120: +asphalt, sandblack, sandgold), one 2048x1024 WebP each, recorded sha/bytes, no hospital look',looks.length===16&&!idx.looks.hospital&&looks.every(([k,v])=>{const b=fs.readFileSync(path.join(dir,v.file));const sz=webpSize(b);return v.file===k+'.webp'&&sha(b)===v.sha256&&b.length===v.bytes&&sz&&sz[0]===2048&&sz[1]===1024;}));
 check('every painted half has a decoded-RGB hash from a 1254² original and a Drive family',looks.every(([k,v])=>v.family&&(v.floor||v.wall)&&[v.floor,v.wall].filter(Boolean).every(h=>/^[0-9a-f]{64}$/.test(h.decodedRgbSha256)&&h.size.join('x')==='1254x1254')));
 const files=fs.readdirSync(dir).filter(f=>f.endsWith('.webp')).sort();
 check('no stray image in the tiles folder',files.join()===looks.map(([k])=>k+'.webp').sort().join());
