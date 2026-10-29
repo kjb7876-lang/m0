@@ -17354,8 +17354,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6562993,
-      "sha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e"
+      "bytes": 6576520,
+      "sha256": "8693f15f85246145488a6fe580617bac9a485ecd397bf03332afcbef5caf77e1"
     },
     {
       "path": "mobs-r109.js",
@@ -17474,8 +17474,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 39588,
-      "sha256": "3ee7d36fb2fea452d28fedd51d36005335e03cecf5ec1f9df1ed7d0d17ec9bfe"
+      "bytes": 40438,
+      "sha256": "3ffcb036ab27d3911b3fb498f5be7853282eb01fe897f42f3a55b9461bf20aa1"
     },
     {
       "path": "scene-props-r117.js",
@@ -17496,6 +17496,11 @@
       "path": "story-canon-r106.js",
       "bytes": 7646,
       "sha256": "d02c73aaf228bfcd696ec055a0e5e5f0c922987a6232a65ecb3fe2e1225293c8"
+    },
+    {
+      "path": "story-reader-r122.js",
+      "bytes": 5020,
+      "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -17653,9 +17658,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3530,
-  "totalBytes": 765420066,
-  "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
+  "fileCount": 3531,
+  "totalBytes": 765439463,
+  "webHTMLSha256": "8693f15f85246145488a6fe580617bac9a485ecd397bf03332afcbef5caf77e1",
   "largest": [
     {
       "path": "index.html",

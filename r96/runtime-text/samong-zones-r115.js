@@ -219,6 +219,10 @@
   return false;}
  function use(p,api){const z=zone(room?.samongR103?.zone);if(!z)return false;
   if(p.r115Clue){const i=(z.clues||[]).findIndex((c,n)=>clueId(z,n)===p.r115Clue),c=z.clues[i];if(!c)return false;
+   // R122: 단서마다 걸어 다니며 한 토막씩 읽던 것을 줄인다(사용자 "여기 갔다 저기 갔다 번잡") — 처음 만진 단서에서 이 구역의 아직 안 읽은 단서를
+   //       순서대로 한 읽기창(쪽 넘김)으로 이어 보여 주고 모두 읽음으로 남긴다. 몹이 나오는 단서는 처음 만진 단서의 것만 나온다.
+   if(window.__STORYWORLD_READER_R122__?.prefs?.().on!==false&&!read(p.r115Clue)){const todo=(z.clues||[]).map((cl,n)=>({cl,n,id:clueId(z,n)})).filter(o=>!read(o.id));
+    if(todo.length>1){const sc=scenesFor(todo.map(o=>o.cl),z,'all');todo.forEach(o=>mark(o.id));play(sc,()=>{if(cluesDone(z))say('단서를 모두 확인했습니다 · 다음 문이 열립니다.',3);});if(c.spawn)api.burst(c.spawn,c.mobs,c.mobName,p);try{saveGame(false);}catch(e){}return true;}}
    if(c.after!=null&&!read(clueId(z,c.after))){say('먼저 '+z.clues[c.after].label+' 쪽을 살펴보세요.',3);return true;}
    const first=!read(p.r115Clue);mark(p.r115Clue);const ok=api.record(p);if(first){if(c.spawn)api.burst(c.spawn,c.mobs,c.mobName,p);if(cluesDone(z))say('단서를 모두 확인했습니다 · 다음 문이 열립니다.',3);}try{saveGame(false);}catch(e){}return ok!==false;}
   if(p.r115Stmt!=null){const s=solveOf(z);if(z.solve.hold&&!s.held){say('먼저 버티세요 · '+Math.ceil(z.solve.hold-(s.holdT||0))+'초',3);return true;}if(p.r115Stmt>s.stmt){say('진술은 차례대로 적습니다 · '+z.solve.statements[s.stmt].label,3);return true;}
