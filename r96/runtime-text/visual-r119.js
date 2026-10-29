@@ -55,7 +55,7 @@
    blood.rgb=Array.isArray(rgb)?[Math.round(130+rgb[0]*.25),Math.round(rgb[1]*.22+8),Math.round(rgb[2]*.22+12)]:[150,16,22];
    const from=owner||(Number.isFinite(source?.x)?source:null);blood.sa=from?Math.atan2(player.y-from.y,player.x-from.x):Math.random()*6.28;if(time-blood.at>.12){blood.at=time;blood.seed=Math.random()*99;}}}catch(_){}return r;};}
  function drawBlood(){if(typeof ctx==='undefined'||typeof project!=='function')return;const t=(time-blood.at)/.45;if(!(t>=0&&t<1))return;
-  const q=project(player.x,player.y),z=(typeof Z==='function'?Z():1),lift=46*z,k=1-t,[r,g,b]=blood.rgb,rnd=i=>{const s=Math.sin(blood.seed+i*12.9898)*43758.5453;return s-Math.floor(s);};
+  const q=project(player.x,player.y),z=(typeof zoom==='number'&&zoom>0?zoom:1),lift=46*z,k=1-t,[r,g,b]=blood.rgb,rnd=i=>{const s=Math.sin(blood.seed+i*12.9898)*43758.5453;return s-Math.floor(s);};
   ctx.save();ctx.globalCompositeOperation='source-over';
   ctx.fillStyle=`rgba(${r},${g},${b},${.32*k*k})`;ctx.beginPath();ctx.ellipse(q.x,q.y-lift,16*z*(.6+.6*t),12*z*(.6+.6*t),0,0,6.283);ctx.fill();
   for(let i=0;i<9;i++){const a=Math.atan2(Math.sin(blood.sa)*.6,Math.cos(blood.sa))+(rnd(i)-.5)*2.2,d=(10+30*rnd(i+20))*z*(.25+.9*Math.sqrt(t)),fall=22*z*t*t*rnd(i+40),rr=(1.6+2.8*rnd(i+60))*z*(1-.45*t);
@@ -102,7 +102,7 @@
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(sw,x1-x0+3),Math.min(sh,y1-y0+3)];}catch(_){}m.set(k,box);return box;}
  if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
-  try{if(!prefs.walkCycle||st<0||!player)return r;let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
+  try{if(!prefs.walkCycle||st<0||!player)return r;const co=window.__STORYWORLD_COOP_SIM_R62__;if(co?.mode&&co.mode()!=='off')return r;/* 협동에서는 한 번에 여러 영웅을 그려 다른 영웅 그림을 바꿀 수 있어 건너뜀(Codex 리뷰) */let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
      if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),sx=(walkState.sx||0)*.7+(q1.x-q0.x)*.3,sy=(walkState.sy||0)*.7+(q1.y-q0.y)*.3;walkState.sx=sx;walkState.sy=sy;const cand=DIR8[((Math.round(Math.atan2(sy,sx)/(Math.PI/4))%8)+8)%8];
       // 길잡이 경로와 직접 조작이 겹치면 한 장면씩 방향이 튀어 그림이 좌우로 뒤집혔다(사용자): 화면 이동을 부드럽게 모으고, 새 방향이 3장면 이어질 때만 바꾼다.
       if(cand===walkState.dir)walkState.pend=0;else if(cand===walkState.pendDir){if(++walkState.pend>=3){walkState.dir=cand;walkState.pend=0;}}else{walkState.pendDir=cand;walkState.pend=1;}}}}
