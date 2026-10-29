@@ -271,15 +271,16 @@ if(R48&&typeof R48.applyBodyPose==='function'){const poseBase=R48.applyBodyPose;
 // ---- drawing of own effects ---------------------------------------------------------
 // R111: 적중 섬광도 7단계 — 성장 전(0단계)엔 작은 불티만, 단계가 오를수록 커지고 진해진다(흰 섬광이 화면을 덮지 않게).
 function drawHeroHit(e,t){let q=project(e.x,e.y),y=q.y-e.lift;const vc115=e.tgt&&window.__STORYWORLD_PLAY_R115__?.centreOf?.(e.tgt);if(vc115){q={x:vc115.cx,y:q.y};y=vc115.cy;}// R115: 그림의 실제 중심
- const F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7));
- if(T>=1)sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:(.35+.05*clamp(T,0,7))*fadeOut(t),glow:(.08+.03*clamp(T,0,7))*ease});
- if(T>=4&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
+ const F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7)),round=player?.hero==='gunner'; // R121: 기억사수는 사선(/) 표시 없이 원형만(사용자)
+ if(T>=1&&!round)sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:(.35+.05*clamp(T,0,7))*fadeOut(t),glow:(.08+.03*clamp(T,0,7))*ease});
+
+ if(T>=4&&F.sig2&&!round)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
  if(e.heavy&&player?.hero!=='gunner')sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  disc(q.x,y,s*.22*(1-ease*.5),rgba(F.b,.55*ease*ease));
  // R111: 가는 실선 고리(실오라)는 뺐다 — 그림 텍스처 고리로 대신.
  {const S1=SPR();if(S1)S1.draw('ring',F,q.x,y,s*.9*(.35+.65*(1-ease)),s*.54*(.35+.65*(1-ease)),{alpha:.7*ease});}
- const n=lowFx()?4:5+T,reach=e.size/actorHeight();for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.9,len=(14+30*rnd(e.seed,i+9))*Z()*reach,d=len*(.3+1.1*(1-ease));
+ const n=round?0:lowFx()?4:5+T,reach=e.size/actorHeight();for(let i=0;i<n;i++){const a=e.sa+(rnd(e.seed,i)-.5)*1.9,len=(14+30*rnd(e.seed,i+9))*Z()*reach,d=len*(.3+1.1*(1-ease));
   const x0=q.x+Math.cos(a)*d*.5,y0=y+Math.sin(a)*d*.5*.7,x1=q.x+Math.cos(a)*d,y1=y+Math.sin(a)*d*.7;ctx.strokeStyle=rgba(i%2?F.b:F.a,.95*ease);ctx.lineWidth=Math.max(1.2,(3.2-2*t)*Z());ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}
  if(T>=2){const S2=SPR();if(S2)S2.draw('ring',F,q.x,q.y,s*1.5*(1-ease*.5),s*.75*(1-ease*.5),{alpha:.5*ease});}}
 function drawHeroHurt(e,t){const q=project(e.x,e.y),y=q.y-e.lift,k=1-t,ease=k*k,h=actorHeight(),s=h*1.1;

@@ -126,7 +126,11 @@
   ctx.strokeStyle=`rgba(225,250,255,${.95*k*k})`;ctx.lineWidth=Math.max(1,2.2*z*k);ctx.beginPath();ctx.moveTo(q.x-c,cy);ctx.lineTo(q.x+c,cy);ctx.moveTo(q.x,cy-c);ctx.lineTo(q.x,cy+c);ctx.stroke();
   ctx.fillStyle=`rgba(200,245,255,${.5*k*k})`;ctx.beginPath();ctx.arc(q.x,cy,2.4*z*k+1,0,6.283);ctx.fill();ctx.restore();stats.gunnerHits=(stats.gunnerHits||0)+1;return true;}
  const finite=v=>Number.isFinite(+v)?+v:0;
- if(typeof drawEffect==='function'){const hitBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.gunnerHit&&f?.type==='e568HeroImpact'&&(f.heroIdE568==='gunner'||/gunner-memory-impact/.test(String(f.asset||'')))&&drawGunnerHit(f))return;}catch(_){}return hitBase.call(this,f,...a);};}
+ const nearGunnerHit=f=>typeof effects!=='undefined'&&effects.some(g=>g!==f&&g.type==='e568HeroImpact'&&g.heroIdE568==='gunner'&&finite(g.age)<.45&&Math.hypot(g.x-f.x,g.y-f.y)<.9);
+ if(typeof drawEffect==='function'){const hitBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.gunnerHit&&f){
+   if(f.type==='e568HeroImpact'&&(f.heroIdE568==='gunner'||/gunner-memory-impact/.test(String(f.asset||'')))&&drawGunnerHit(f))return;
+   // 같은 적중에 함께 생기는 주황 별빛 폭발(burst)·플레이어 근접 불꽃(X자 pxf 묶음)도 사선처럼 보여 기억사수 적중에서는 그리지 않는다.
+   if(player?.hero==='gunner'&&(f.type==='burst'||(f.type==='pxfSprite'&&/player-atlas/.test(String(f.asset||''))))&&nearGunnerHit(f)){stats.gunnerHitHidden=(stats.gunnerHitHidden||0)+1;return;}}}catch(_){}return hitBase.call(this,f,...a);};}
  // 6) Esc로 메뉴·설정 창 닫기 (사용자 2026-10-29): 열린 창(openPanel)의 '계속/닫기'(.close) 단추를 대신 누른다.
  //    입력칸에 글을 쓰는 중이거나 열린 창이 없으면 원래 Esc 동작 그대로.
  if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
