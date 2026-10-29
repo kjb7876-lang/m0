@@ -73,7 +73,9 @@ function grainURL(){if(grainCanvas)return grainCanvas;const c=document.createEle
  for(let i=0;i<im.data.length;i+=4){const v=Math.random()*255|0;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255;}g.putImageData(im,0,0);grainCanvas=c.toDataURL('image/png');return grainCanvas;}
 const part=n=>layer?.querySelector('[data-c="'+n+'"]');
 function applyGrade(force=false){const G=GRADE[prefs.horror];const key=prefs.horror+'|'+prefs.grain+'|'+prefs.lightPool+'|'+lowFx();if(!force&&key===lastGradeKey)return;lastGradeKey=key;
- for(const c of worldCanvases())c.style.filter=G?G.filter:'';
+ // R123: 다크 판타지 톤(dark-r123.js)이 있으면 녹·피 쪽 색을 필터 끝에 덧붙인다(호러 끔이어도 그 톤만은 따로 끌 수 있다).
+ let dk='';try{dk=window.__STORYWORLD_DARK_R123__?.filter?.()||'';}catch(_){}
+ for(const c of worldCanvases())c.style.filter=G?G.filter+dk:dk.trim();
  if(!layer)layer=makeLayer();if(!layer)return;layer.style.display=G?'block':'none';if(!G)return;
  part('vig').style.background='radial-gradient(ellipse 75% 70% at 50% 48%,rgba(0,0,0,0) 46%,rgba(4,2,8,'+G.vig+') 100%)';
  const gr=part('grain');if(prefs.grain&&!lowFx()){const u=grainURL();if(u){gr.style.backgroundImage='url('+u+')';gr.style.opacity=String(G.grain*(reduced()?.5:1));}}else gr.style.opacity='0';}
