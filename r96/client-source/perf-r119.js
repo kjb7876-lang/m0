@@ -34,8 +34,10 @@
  // 화면 밖 몹은 그리지 않는다: dist01에서 39마리 중 평균 30.6마리가 화면 밖인데 매 프레임 그림 명령을 만들었다.
  // 몸 높이의 2배만큼 여유를 두고(큰 그림·그림자·이름표가 가장자리에서 잘리지 않게), 공격·환영 준비 중이거나 보스급이면 늘 그린다.
  const major=e=>!!(e?.boss||e?.midboss||e?.persona||e?.cosmic||e?.trial);
+ // 실제 화면 프레임(draw) 안에서만 생략한다: 다른 코드·검사가 drawEnemy를 직접 부르면 늘 그린다.
+ let inFrame=false;if(typeof draw==='function'){const frameBase=draw;draw=function(...a){inFrame=true;try{return frameBase.apply(this,a);}finally{inFrame=false;}};}
  if(typeof drawEnemy==='function'&&typeof project==='function'){const drawBase=drawEnemy;
-  drawEnemy=function(e,...rest){if(prefs.cull&&e&&!major(e)&&!e.attack&&!e.r61Action&&!(e.rangedWindup>0)&&e.hp>0){try{const q=project(e.x,e.y),h=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1),m=h*2+40,w=typeof W==='number'?W:innerWidth,hh=typeof H==='number'?H:innerHeight;
+  drawEnemy=function(e,...rest){if(prefs.cull&&inFrame&&e&&!major(e)&&!e.attack&&!e.r61Action&&!(e.rangedWindup>0)&&e.hp>0){try{const q=project(e.x,e.y),h=(typeof actorHeight==='function'?actorHeight():60)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1),m=h*2+40,w=typeof W==='number'?W:innerWidth,hh=typeof H==='number'?H:innerHeight;
     if(q.x<-m||q.x>w+m||q.y<-m*.6||q.y>hh+m*1.6){stats.culled++;return;}}catch(_){}}
    return drawBase.call(this,e,...rest);};}
  function set(p={}){if(typeof p.cull==='boolean')prefs.cull=p.cull;if(typeof p.mergeFx==='boolean')prefs.mergeFx=p.mergeFx;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
