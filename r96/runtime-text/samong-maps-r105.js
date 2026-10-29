@@ -27,109 +27,109 @@
    records:[{key:'prelude',at:0,n:3,label:'서문 · 주인 없는 자장가'},{key:'prelude',at:'last',n:2,label:'서문 · 잠든 사람'},{key:'threshold',at:0,n:2,label:'문턱 · 코어 아래로'}]}},
   'S-01':{
    survival:{title:'뿌리 밑동의 광장',style:'forge',shape:'ring',inner:3.5,pillars:0,props:[['stump',6],['obelisk',3],['brazier',4]],
-    records:[{key:'threshold',sub:'그 뿌리를 무너뜨리',n:2,label:'문턱 · 666의 잔영'}]},
+    records:[{key:'threshold',sub:'내가 검을 박아 그',i:4,n:2,label:'문턱 · 666의 잔영'}]},
    maze:{title:'빛이 닿는 만큼 생기는 복도',style:'forge',cols:8,rows:8,straight:.8,braid:.12,rooms:1,props:[['brazier',3],['crate',2]],
-    records:[{key:'threshold',sub:'나는 뒤돌아 가까운',n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
+    records:[{key:'threshold',sub:'나는 그때마다 짧게',i:5,n:2,label:'문턱 · 복도'},{key:'threshold',at:'last',n:3,label:'계단 위의 여섯 물건',objects:['인형','젖은 출석부','검게 물든 도복 조각','배달 영수증','붉은 입술 자국이 남은 잔','날짜 없는 탄피']}]},
    ascent:{title:'찻잔 속의 집 · 정원과 긴 식탁',style:'domestic',variant:'spiral',props:[['ferns',6],['statue',1],['workbench',6],['well',1],['cabinet',1],['brazier',2]],
-    records:[{key:'S-01',at:0,n:3,label:'꿰맨 장미의 집 · 들어서며'},{key:'S-01',sub:'식탁 너머에서 가위',n:2,label:'식탁의 안주인'},{key:'S-01',at:'last',n:2,label:'종이 울릴 때',prop:'cabinet'}]}},
+    records:[{key:'S-01',at:0,n:3,label:'꿰맨 장미의 집 · 들어서며'},{key:'S-01',sub:'식탁 너머 복도에서',i:7,n:2,label:'식탁의 안주인'},{key:'S-01',at:'last',n:2,label:'종이 울릴 때',prop:'cabinet'}]}},
   'S-02':{
    survival:{title:'자정 1분 전의 운동장',shape:'square',radius:17,pillars:4,outdoor:{family:'stone',trees:'dead',wall:1.2},props:[['brazier',6],['statue',2]],
     records:[{key:'S-02',at:0,n:3,label:'교문이 닫히기 전'}]},
    maze:{title:'자정 1분 전의 학교 복도',style:'clinical',cols:9,rows:8,straight:.9,braid:.1,rooms:5,props:[['workbench',10],['cabinet',4],['empty-bed',2],['brazier',2]],
-    records:[{key:'S-02',at:.2,n:2,label:'교무실 · 출석부',prop:'cabinet'},{key:'S-02',at:.4,n:2,label:'음악실 · 피아노 한 음',prop:'workbench'},{key:'S-02',sub:'열쇠가 부딪치는 소',n:2,label:'자료실 문',prop:'cabinet'},{key:'S-02',at:.65,n:2,label:'보건실 · 벽에서 시작하는 발자국',prop:'empty-bed'}]},
+    records:[{key:'S-02',at:.2,n:2,label:'교무실 · 출석부',prop:'cabinet'},{key:'S-02',at:.4,n:2,label:'음악실 · 피아노 한 음',prop:'workbench'},{key:'S-02',sub:'복도 끝에서 열쇠 ',i:2,n:2,label:'자료실 문',prop:'cabinet'},{key:'S-02',at:.65,n:2,label:'보건실 · 벽에서 시작하는 발자국',prop:'empty-bed'}]},
    ascent:{title:'방송실로 오르는 계단',style:'clinical',variant:'straight',props:[['cabinet',3],['brazier',3],['crate',2]],
-    records:[{key:'S-02',sub:'방송실은 위층에',n:2,label:'방송실 계단'},{key:'S-02',at:'last',n:2,label:'자정의 종',prop:'cabinet'}]}},
+    records:[{key:'S-02',sub:'학교 전체에 목소리',i:16,n:2,label:'방송실 계단'},{key:'S-02',at:'last',n:2,label:'자정의 종',prop:'cabinet'}]}},
   'S-03':{
    survival:{title:'대련장과 관람석',shape:'octagon',radius:19,pillars:0,props:[['statue',4],['crate',8],['brazier',4]],
     records:[{key:'S-03',at:0,n:3,label:'흰 도복의 대련장'},{key:'S-03',at:.3,n:2,label:'관람석의 치료사'}]},
    maze:{title:'시험장 천막 뒤편 · 23년 전 빗속 골목',cols:8,rows:8,straight:.6,braid:.25,rooms:2,outdoor:{family:'stone',trees:null,wall:null},props:[['crate',6],['brazier',4],['stump',2]],
-    records:[{key:'S-03',sub:'손전등을 아래로 내',n:2,label:'천막 뒤편'},{key:'S-03',at:.55,n:2,label:'23년 전의 비 오는 골목'}]},
+    records:[{key:'S-03',sub:'천이 검게 죽어 갈',i:1,n:2,label:'천막 뒤편'},{key:'S-03',at:.55,n:2,label:'23년 전의 비 오는 골목'}]},
    ascent:{title:'검은 고리 장치가 있는 천막 뒤',variant:'zigzag',props:[['workbench',2],['statue',2],['brazier',3]],
-    records:[{key:'S-03',sub:'빗소리가 잦아든 뒤',n:2,label:'비가 그친 뒤'},{key:'S-03',at:'last',n:2,label:'열여섯',prop:'workbench'}]}},
+    records:[{key:'S-03',sub:'억수 같던 빗소리가',i:45,n:2,label:'비가 그친 뒤'},{key:'S-03',at:'last',n:2,label:'열여섯',prop:'workbench'}]}},
   'S-04':{
    survival:{title:'감정의 탑 로비',shape:'square',radius:18,pillars:9,props:[['cabinet',2],['statue',4],['brazier',4]],
     records:[{key:'S-04',at:0,n:3,label:'로비 · 하늘과 류찬'}]},
    maze:{title:'열여섯 층의 복도',cols:9,rows:9,straight:.7,braid:.15,rooms:6,props:[['statue',6],['cabinet',4],['workbench',3],['empty-bed',2],['brazier',3]],
-    records:[{key:'S-04',at:.15,n:2,label:'4층 식당 · 규칙을 지키는 마네킹',prop:'statue'},{key:'S-04',at:.3,n:2,label:'2층 경비실 · 멈춘 시계',prop:'cabinet'},{key:'S-04',sub:'나는 막힌 벽 앞에',n:2,label:'무너지는 복도'},{key:'S-04',at:.5,n:2,label:'5층 · 초상화 갤러리',prop:'cabinet'},{key:'S-04',at:.62,n:2,label:'8층 · 기록',prop:'cabinet'},{key:'S-04',at:.72,n:2,label:'12층 · 박수 홀',prop:'statue'}]},
+    records:[{key:'S-04',at:.15,n:2,label:'4층 식당 · 규칙을 지키는 마네킹',prop:'statue'},{key:'S-04',at:.3,n:2,label:'2층 경비실 · 멈춘 시계',prop:'cabinet'},{key:'S-04',sub:'나는 빈틈없이 막힌',i:6,n:2,label:'무너지는 복도'},{key:'S-04',at:.5,n:2,label:'5층 · 초상화 갤러리',prop:'cabinet'},{key:'S-04',at:.62,n:2,label:'8층 · 기록',prop:'cabinet'},{key:'S-04',at:.72,n:2,label:'12층 · 박수 홀',prop:'statue'}]},
    ascent:{title:'13층에서 16층으로',variant:'spiral',props:[['crate',16],['cabinet',2],['brazier',4]],
-    records:[{key:'S-04',sub:'엘리베이터가 멈춘 곳은 4층',n:2,label:'엘리베이터'},{key:'S-04',sub:'13층에서 강재헌의',n:3,label:'13층 · 강재헌'},{key:'S-04',at:'last',n:2,label:'열여섯 개의 의자와 거울',prop:'cabinet'}]}},
+    records:[{key:'S-04',sub:'식당 주인인 지연은',i:10,n:2,label:'엘리베이터'},{key:'S-04',sub:'나 역시 그 기괴한',i:31,n:3,label:'13층 · 강재헌'},{key:'S-04',at:'last',n:2,label:'열여섯 개의 의자와 거울',prop:'cabinet'}]}},
   'S-05':{
    survival:{title:'눈 내리는 돌길 사거리',shape:'cross',radius:19,street:3.5,outdoor:{family:'snow',trees:null,wall:null},props:[['brazier',8],['crate',6],['stump',2]],
     records:[{key:'S-05',at:0,n:3,label:'술집 · 잭앤코크와 전차 불빛'},{key:'S-05',at:.3,n:2,label:'지현'}]},
    maze:{title:'눈 내리는 골목',cols:9,rows:9,straight:.55,braid:.3,rooms:3,outdoor:{family:'snow',trees:null,wall:null},props:[['crate',8],['brazier',6],['cabinet',2]],
-    records:[{key:'S-05',sub:'추워서 가까운 곳으',n:2,label:'골목의 추위'},{key:'S-05',at:.55,n:2,label:'사무실 · 보고서',prop:'cabinet'},{key:'S-05',at:.7,n:2,label:'지현의 사진이 실린 신문'}]},
+    records:[{key:'S-05',sub:'몸이 얼어붙어 근처',i:25,n:2,label:'골목의 추위'},{key:'S-05',at:.55,n:2,label:'사무실 · 보고서',prop:'cabinet'},{key:'S-05',at:.7,n:2,label:'지현의 사진이 실린 신문'}]},
    ascent:{title:'관사 · 불빛이 다시 켜지는 집',variant:'straight',props:[['brazier',6],['cabinet',2],['crate',3]],
-    records:[{key:'S-05',sub:'남자의 기억에서 빠',n:2,label:'검은 재의 거리'},{key:'S-05',at:'last',n:2,label:'기차 안내 방송',prop:'cabinet'}]}},
+    records:[{key:'S-05',sub:'스스로를 태워 죽인',i:41,n:2,label:'검은 재의 거리'},{key:'S-05',at:'last',n:2,label:'기차 안내 방송',prop:'cabinet'}]}},
   'S-06':{
    survival:{title:'만조 요새의 끊어진 다리',shape:'bridge',radius:20,width:7,outdoor:{family:'coast',water:'sea',trees:null,wall:.8},props:[['obelisk',4],['crate',4],['brazier',3]],
     records:[{key:'NS-01',at:0,n:3,label:'2189 네오 서울 · 케이블의 한강'},{key:'NS-01',at:.5,n:2,label:'거꾸로 선 전함과 폐환승역'},{key:'NS-02',at:0,n:3,label:'2174 네오 도쿄 해변 공원'},{key:'NS-03',at:0,n:3,label:'2189 · 병원이 된 은신처'}]},
    maze:{title:'도시의 밑면 · 작은 방',cols:9,rows:9,straight:.75,braid:.15,rooms:4,props:[['workbench',2],['cabinet',5],['crate',6],['brazier',4]],
-    records:[{key:'NS-03',at:.5,n:2,label:'유예관 · 공중에 멈춘 탄환'},{key:'NS-04',at:0,n:3,label:'2196 · 매달린 빗방울'},{key:'NS-05',sub:'문 안쪽은 작은 방',n:3,label:'시간 없는 작은 방 · 책상 아래',prop:'workbench'},{key:'NS-05',at:.5,n:2,label:'세 개의 달력',prop:'cabinet'},{key:'NS-06',at:0,n:3,label:'나루 · 유예관'},{key:'NS-07',at:0,n:3,label:'모든 창에 비친 같은 방'}]},
+    records:[{key:'NS-03',at:.5,n:2,label:'유예관 · 공중에 멈춘 탄환'},{key:'NS-04',at:0,n:3,label:'2196 · 매달린 빗방울'},{key:'NS-05',sub:'해온의 심장 너머로',i:0,n:3,label:'시간 없는 작은 방 · 책상 아래',prop:'workbench'},{key:'NS-05',at:.5,n:2,label:'세 개의 달력',prop:'cabinet'},{key:'NS-06',at:0,n:3,label:'나루 · 유예관'},{key:'NS-07',at:0,n:3,label:'모든 창에 비친 같은 방'}]},
    ascent:{title:'통제실 · 열일곱 개의 고리',variant:'spiral',props:[['obelisk',8],['brazier',4],['cabinet',2]],
     records:[{key:'NS-07',at:'last',n:2,label:'날개가 열리다'},{key:'NS-08',at:0,n:3,label:'미명천사'},{key:'NS-09',at:0,n:3,label:'날짜 없는 서울 · 빈 의자 둘',prop:'crate'},{key:'NS-10',at:0,n:3,label:'환승역 반대편 · 환도',prop:'crate'}]}},
   'S-07':{
    survival:{title:'손님 자리 하나뿐인 식탁',shape:'ring',inner:4,pillars:0,props:[['workbench',8],['crate',6],['brazier',4],['statue',1]],
-    records:[{key:'S-07',at:0,n:3,label:'페르소나 · 내 얼굴을 쓴 자'},{key:'S-07',sub:'탁자 위로 인형과',n:2,label:'탁자 위의 여섯 물건'}]},
+    records:[{key:'S-07',at:0,n:3,label:'페르소나 · 내 얼굴을 쓴 자'},{key:'S-07',sub:'괜찮으냐고 나직이 ',i:2,n:2,label:'탁자 위의 여섯 물건'}]},
    maze:{title:'식탁 뒤의 복도',cols:7,rows:7,straight:.6,braid:.2,rooms:2,props:[['cabinet',3],['crate',4],['brazier',3]],
-    records:[{key:'S-07',sub:'이것은 다른 사람들',n:2,label:'더 깨끗한 가면'}]},
+    records:[{key:'S-07',sub:'나는 그것이 사랑하',i:7,n:2,label:'더 깨끗한 가면'}]},
    ascent:{title:'거울상 앞의 단',variant:'straight',props:[['statue',2],['cabinet',2],['brazier',4]],
-    records:[{key:'S-07',sub:'나는 페르소나를 베',n:2,label:'멈춤'},{key:'S-07',sub:'칼 안에서 첫째의',n:2,label:'EGO 각성',prop:'cabinet'}]}},
+    records:[{key:'S-07',sub:'마지막으로 날짜 없',i:8,n:2,label:'멈춤'},{key:'S-07',sub:'실패한 나 자신을 ',i:18,n:2,label:'EGO 각성',prop:'cabinet'}]}},
   RA:{
    survival:{title:'어제가 도착하는 승강장',style:'clinical',shape:'platform',radius:19,width:10,pillars:6,props:[['obelisk',6],['workbench',1],['crate',3],['brazier',4]],
     records:[{key:'R-00',at:0,n:3,label:'미술관 · 어제가 도착하는 승강장'},{key:'R-00',at:.5,n:2,label:'눈을 가린 화가'},{key:'R-01',at:0,n:3,label:'도겸의 독백'},{key:'R-01',at:'last',n:2,label:'이젤의 뒷면',prop:'workbench'}]},
    maze:{title:'검은 태양 아래 설원 · 침대 고랑',cols:9,rows:8,straight:.5,braid:.3,rooms:3,outdoor:{family:'snow',trees:'dead',wall:1},props:[['empty-bed',12],['brazier',3],['crate',2]],
-    records:[{key:'R-02',at:0,n:3,label:'검은 태양 아래의 학교'},{key:'R-02',sub:'학교 창 안쪽에서',n:2,label:'창문의 별'},{key:'R-02',at:.6,n:2,label:'31번째 책상 아래의 신발',prop:'crate'}]},
+    records:[{key:'R-02',at:0,n:3,label:'검은 태양 아래의 학교'},{key:'R-02',sub:'학교 건물의 얼어붙',i:3,n:2,label:'창문의 별'},{key:'R-02',at:.6,n:2,label:'31번째 책상 아래의 신발',prop:'crate'}]},
    ascent:{title:'학교와 병원 사이의 이송로',variant:'straight',outdoor:{family:'ash',trees:'dead',wall:1},props:[['empty-bed',6],['brazier',4],['stump',2]],
-    records:[{key:'R-02',sub:'날아오는 열쇠를 피',n:2,label:'순찰자의 길'},{key:'R-02',at:'last',n:2,label:'검은 태양의 균열'}]}},
+    records:[{key:'R-02',sub:'어둠 속에서 날아오',i:7,n:2,label:'순찰자의 길'},{key:'R-02',at:'last',n:2,label:'검은 태양의 균열'}]}},
   RB:{
    survival:{title:'대기실 · 두 의자와 세 잔',shape:'square',radius:17,pillars:4,props:[['crate',5],['cabinet',2],['brazier',4],['well',1]],
     records:[{key:'R-03',at:0,n:3,label:'녹아내린 시계의 승강장'},{key:'R-03',at:.45,n:2,label:'두 의자와 세 잔의 물'},{key:'R-03',at:'last',n:2,label:'열네 개의 어두운 창'}]},
    maze:{title:'녹아내린 승강장 · 호텔 주방',cols:8,rows:8,straight:.65,braid:.2,rooms:4,props:[['workbench',6],['cabinet',4],['crate',4],['brazier',3]],
-    records:[{key:'R-03',sub:'학교 시계에서 흘러',n:2,label:'철로 위의 초침'},{key:'R-04',at:0,n:3,label:'밖은 경성 술집, 안은 호텔 주방',prop:'workbench'},{key:'R-04',at:.5,n:2,label:'공실 장부 식탁보',prop:'cabinet'}]},
+    records:[{key:'R-03',sub:'학교의 녹아내린 벽',i:0,n:2,label:'철로 위의 초침'},{key:'R-04',at:0,n:3,label:'밖은 경성 술집, 안은 호텔 주방',prop:'workbench'},{key:'R-04',at:.5,n:2,label:'공실 장부 식탁보',prop:'cabinet'}]},
    ascent:{title:'호텔 계단 · 7층 방화문',variant:'spiral',props:[['cabinet',4],['brazier',6],['crate',2]],
-    records:[{key:'R-04',sub:'거울에서 지현의 얼',n:2,label:'거울의 손'},{key:'R-04',at:'last',n:2,label:'천장에 돋는 관람석'}]}},
+    records:[{key:'R-04',sub:'바로 그 옆에 나란',i:17,n:2,label:'거울의 손'},{key:'R-04',at:'last',n:2,label:'천장에 돋는 관람석'}]}},
   RC:{
    survival:{title:'여섯 번 접힌 대련장',shape:'octagon',radius:19,pillars:0,props:[['statue',6],['crate',6],['brazier',4]],
     records:[{key:'R-05',at:0,n:3,label:'흑백의 청색재판'},{key:'R-05',at:.4,n:2,label:'흰 도복과 검은 도복'}]},
    maze:{title:'접히는 재판정',cols:8,rows:8,straight:.6,braid:.2,rooms:3,props:[['statue',4],['cabinet',3],['crate',4],['brazier',3]],
-    records:[{key:'R-05',sub:'나는 단상으로 올라',n:2,label:'재판관의 망치'},{key:'R-05',sub:'재판관이 자리에서',n:2,label:'거절'},{key:'R-05',at:'last',n:2,label:'열여섯 금박 의자의 추락'}]},
+    records:[{key:'R-05',sub:'저 괴물은 내 내면',i:16,n:2,label:'재판관의 망치'},{key:'R-05',sub:'그때, 수직으로 솟',i:15,n:2,label:'거절'},{key:'R-05',at:'last',n:2,label:'열여섯 금박 의자의 추락'}]},
    ascent:{title:'지하에 매달린 꼭대기 층',style:'forge',variant:'spiral',props:[['brazier',8],['crate',16],['obelisk',2],['cabinet',2]],
     records:[{key:'R-06',at:0,n:3,label:'밀랍 샹들리에의 층'},{key:'R-06',at:.45,n:2,label:'맘몬의 금고 · 종이 왕',prop:'obelisk'},{key:'R-06',at:'last',n:2,label:'물이 된 바닥'}]}},
   RD:{
    survival:{title:'늪의 다리 · 붉은 교각',shape:'bridge',radius:20,width:7,outdoor:{family:'swamp',water:'swamp',trees:'dead',wall:.8},props:[['ferns',10],['brazier',6],['stump',2]],
-    records:[{key:'R-07',at:0,n:3,label:'잠들지 못하는 마을의 다리'},{key:'R-07',sub:'처음 발을 디뎠을 때에는',n:2,label:'가짜 문과 진짜 길'}]},
+    records:[{key:'R-07',at:0,n:3,label:'잠들지 못하는 마을의 다리'},{key:'R-07',sub:'물 위로 솟아오른 ',i:0,n:2,label:'가짜 문과 진짜 길'}]},
    maze:{title:'수련 아래의 불면병동',style:'clinical',cols:9,rows:9,straight:.7,braid:.15,rooms:5,props:[['empty-bed',10],['cabinet',4],['workbench',6],['crate',6],['brazier',3]],
     records:[{key:'R-07',at:.7,n:2,label:'물속 학교의 보건실',prop:'empty-bed'},{key:'R-08',at:0,n:3,label:'잠긴 교실',prop:'workbench'},{key:'R-08',at:'last',n:2,label:'모든 액자가 돌아서다',prop:'crate'}]},
    ascent:{title:'일곱 기둥의 대성당',style:'forge',variant:'straight',props:[['obelisk',7],['brazier',6],['cabinet',2]],
-    records:[{key:'R-09',at:0,n:3,label:'첫 번째 나팔 · 열리는 지붕'},{key:'R-09',sub:'나팔이 울려 하늘을',n:2,label:'나팔 소리'},{key:'R-09',at:'last',n:2,label:'빈 원고의 제단',prop:'cabinet'}]}},
+    records:[{key:'R-09',at:0,n:3,label:'첫 번째 나팔 · 열리는 지붕'},{key:'R-09',sub:'하늘 어딘가에서 귀',i:0,n:2,label:'나팔 소리'},{key:'R-09',at:'last',n:2,label:'빈 원고의 제단',prop:'cabinet'}]}},
   RE:{
    survival:{title:'천장을 뚫고 온 열차',shape:'platform',radius:19,width:9,pillars:6,props:[['crate',10],['brazier',6],['statue',2]],
     records:[{key:'R-10',at:0,n:3,label:'밤마다 다른 객차'},{key:'R-10',at:.25,n:2,label:'승전식의 메달 인형',prop:'statue'}]},
    maze:{title:'관람석이 붙은 탈출로',cols:9,rows:7,straight:.9,braid:.15,rooms:3,props:[['crate',8],['statue',4],['brazier',4]],
-    records:[{key:'R-10',sub:'앞서 달리던 사람이',n:2,label:'빠른 사람과 느린 사람'},{key:'R-10',sub:'사수가 자세를 고칠',n:2,label:'관람석'}]},
+    records:[{key:'R-10',sub:'불안감에 바닥의 탄',i:14,n:2,label:'빠른 사람과 느린 사람'},{key:'R-10',sub:'가장 앞장서서 전속',i:16,n:2,label:'관람석'}]},
    ascent:{title:'마지막 객차 · 두 사람의 의자',variant:'straight',props:[['brazier',6],['workbench',1],['crate',4]],
-    records:[{key:'R-10',sub:'백색 사수는 이미',n:2,label:'백색 사수'},{key:'R-10',at:'last',n:2,label:'설계도만 집어 들다',prop:'workbench'}]}},
+    records:[{key:'R-10',sub:'쇄골이 부서지는 격',i:6,n:2,label:'백색 사수'},{key:'R-10',at:'last',n:2,label:'설계도만 집어 들다',prop:'workbench'}]}},
   RF:{
    survival:{title:'표지가 쌓인 미술관 홀',shape:'square',radius:18,pillars:9,props:[['cabinet',8],['crate',4],['brazier',4]],
     records:[{key:'R-11',at:0,n:3,label:'스토리텔러 · 손목의 붉은 선'},{key:'R-11',at:.35,n:2,label:'낚싯바늘 문장'}]},
    maze:{title:'책의 등 안쪽',cols:8,rows:8,straight:.75,braid:.1,rooms:2,props:[['cabinet',8],['crate',3],['brazier',3]],
-    records:[{key:'R-11',sub:'도겸이 발을 멈췄다',n:2,label:'다섯 번째 나팔'},{key:'R-11',at:.6,n:2,label:'의자·방석·그릇',prop:'crate'}]},
+    records:[{key:'R-11',sub:'내 설명을 들은 도',i:20,n:2,label:'다섯 번째 나팔'},{key:'R-11',at:.6,n:2,label:'의자·방석·그릇',prop:'crate'}]},
    ascent:{title:'작은 탁자가 있는 자리',variant:'spiral',props:[['cabinet',4],['brazier',4],['workbench',1]],
-    records:[{key:'R-11',sub:'스토리텔러는 그런',n:2,label:'종이 얼굴'},{key:'R-12',at:0,n:3,label:'도겸의 휴식 · 빈 의자를 다시 그리다',prop:'workbench'},{key:'R-12',at:'last',n:2,label:'작은 서명'}]}},
+    records:[{key:'R-11',sub:'물론 그 위선적인 ',i:3,n:2,label:'종이 얼굴'},{key:'R-12',at:0,n:3,label:'도겸의 휴식 · 빈 의자를 다시 그리다',prop:'workbench'},{key:'R-12',at:'last',n:2,label:'작은 서명'}]}},
   RG:{
    survival:{title:'무너진 미술관 벽 · 일곱 기둥',shape:'field',radius:20,pillars:0,outdoor:{family:'ash',trees:'dead',wall:1},props:[['obelisk',7],['stump',4],['brazier',4]],
     records:[{key:'R-13',at:0,n:3,label:'일곱 번째 나팔 · 무너지는 벽'},{key:'R-13',at:.25,n:2,label:'겹쳐진 세계'}]},
    maze:{title:'여백의 전쟁터',cols:9,rows:9,straight:.5,braid:.3,rooms:4,outdoor:{family:'ash',trees:'dead',wall:1},props:[['obelisk',4],['stump',6],['crate',4],['brazier',4]],
-    records:[{key:'R-13',sub:'도겸이 남긴 여백이',n:2,label:'들어 올린 여백'},{key:'R-13',at:.55,n:2,label:'그러므로 뒤의 문장'}]},
+    records:[{key:'R-13',sub:'그때, 도겸이 젖은',i:4,n:2,label:'들어 올린 여백'},{key:'R-13',at:.55,n:2,label:'그러므로 뒤의 문장'}]},
    ascent:{title:'회전 고리가 있는 기둥',style:'forge',variant:'straight',props:[['obelisk',6],['brazier',6],['cabinet',1]],
-    records:[{key:'R-13',sub:'하늘에는 나팔 일곱',n:2,label:'빈 소매의 나팔'},{key:'R-14',at:0,n:3,label:'도겸의 휴식 · 일곱 번째 의자',prop:'cabinet'},{key:'R-14',at:'last',n:2,label:'실로 그린 문'}]}},
+    records:[{key:'R-13',sub:'까마득한 암흑의 상',i:2,n:2,label:'빈 소매의 나팔'},{key:'R-14',at:0,n:3,label:'도겸의 휴식 · 일곱 번째 의자',prop:'cabinet'},{key:'R-14',at:'last',n:2,label:'실로 그린 문'}]}},
   M:{
    survival:{title:'궁전 정원 · 쓰러진 악마 나무',shape:'field',radius:20,pillars:0,outdoor:{family:'garden',trees:'living',wall:1},props:[['stump',3],['crate',6],['ferns',6],['brazier',4]],
     records:[{key:'R-15',at:0,n:3,label:'분리된 세계들'},{key:'R-15',at:.5,n:2,label:'두 사람의 성 · 두드리고 기다리기'},{key:'R-16',at:0,n:3,label:'두 겹의 발자국'},{key:'R-16',at:'last',n:2,label:'열네 개의 조명'},{key:'R-17',at:0,n:3,label:'궁전 정원 · 서명 없는 별',prop:'stump'},{key:'R-17',at:'last',n:3,label:'문턱의 여섯 물건'}]},
    maze:{title:'상담실로 밀려온 성벽',cols:7,rows:7,straight:.6,braid:.2,rooms:2,props:[['obelisk',4],['cabinet',3],['crate',3],['brazier',4]],
-    records:[{key:'M1',at:0,n:2,label:'마지막에 남은 사람'},{key:'M1',sub:'그녀에게 한 발 가',n:2,label:'성벽과 시곗바늘'}]},
+    records:[{key:'M1',at:0,n:2,label:'마지막에 남은 사람'},{key:'M1',sub:'내가 그녀를 구하겠',i:1,n:2,label:'성벽과 시곗바늘'}]},
    ascent:{title:'상담실',variant:'straight',props:[['cabinet',4],['crate',4],['brazier',4]],
-    records:[{key:'M1',at:.5,n:2,label:'연결을 하나씩 끊다'},{key:'M1',sub:'모든 문이 그녀의',n:2,label:'모든 문을 혼자'},{key:'M2',at:0,n:2,label:'엔딩 · 정신과 의사(처치 뒤 연출)'},{key:'M3',at:0,n:2,label:'엔딩 · 코어에 남은 사람(처치 뒤 연출)'},{key:'epilogue',at:0,n:2,label:'종장(처치 뒤 연출)'},{key:'record',at:0,n:2,label:'진료기록(처치 뒤 연출)'}]}}
+    records:[{key:'M1',at:.5,n:2,label:'연결을 하나씩 끊다'},{key:'M1',sub:'저 사방의 모든 문',i:4,n:2,label:'모든 문을 혼자'},{key:'M2',at:0,n:2,label:'엔딩 · 정신과 의사(처치 뒤 연출)'},{key:'M3',at:0,n:2,label:'엔딩 · 코어에 남은 사람(처치 뒤 연출)'},{key:'epilogue',at:0,n:2,label:'종장(처치 뒤 연출)'},{key:'record',at:0,n:2,label:'진료기록(처치 뒤 연출)'}]}}
  };
  const STAGE_NAME={survival:'생존 · 666',maze:'손전등 미로',ascent:'상승 · 보스'};
  const stageName=s=>STAGE_NAME[s]||s;
@@ -239,7 +239,7 @@
  // ---- 기록 표식 읽기 (원문 문단만, 해설 없음) -----------------------------------------------------
  let S5={version:VERSION,read:[]};const clean=v=>({version:VERSION,read:Array.isArray(v?.read)?v.read.filter(x=>typeof x==='string').slice(-256):[]});
  function rows(R){const s=TEXT()[R.key];if(!s)return[];const all=s.blocks.flatMap(b=>b.paras.map(t=>({t,n:b.narrator})));if(!all.length)return[];const n=Math.max(1,R.n||3);let at=0;
-  if(R.sub){at=all.findIndex(v=>v.t.startsWith(R.sub));if(at<0)at=all.findIndex(v=>v.t.includes(R.sub));if(at<0)at=0;}
+  if(R.sub){at=Number.isInteger(R.i)&&all[R.i]&&all[R.i].t.startsWith(R.sub)?R.i:all.findIndex(v=>v.t.startsWith(R.sub));/* R122 */if(at<0)at=all.findIndex(v=>v.t.includes(R.sub));if(at<0)at=0;}
   else if(R.at==='last')at=Math.max(0,all.length-n);else if(typeof R.at==='number')at=R.at<=1?Math.floor(R.at*Math.max(0,all.length-n)):Math.min(all.length-1,R.at);
   return all.slice(at,at+n);}
  function use(p){const R=p?.r105Record;if(!R)return false;const list=rows(R);const s=TEXT()[R.key];if(!list.length||!s)return false;

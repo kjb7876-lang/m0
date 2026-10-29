@@ -17454,28 +17454,28 @@
     },
     {
       "path": "samong-maps-r105.js",
-      "bytes": 42489,
-      "sha256": "5561b1bce967cc571502a9bf3a5b2c217f840600b782be946343a6f33471e7ef"
+      "bytes": 43001,
+      "sha256": "96036a1e3090b83053cf16c295f1bec04145680bbdbed45540a062b60eade902"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 69653,
-      "sha256": "51efbbdc283bd619b6c30cf6aa0e29fcb0d21a77bd505e270ce5916cc703c86f"
+      "bytes": 70089,
+      "sha256": "94c1d2317225fa879ecd2bef8b0bffb8139741ca504df93730d5744d409df543"
     },
     {
       "path": "samong-text-r103.js",
-      "bytes": 227158,
-      "sha256": "b276b37acf385451ef3c34727804646a2e255e0413958571839e68a65c6ae972"
+      "bytes": 499803,
+      "sha256": "9b1a36dcb6eb5066cb857c35787513b3eeb2aeb105487de335278ce0e615cecc"
     },
     {
       "path": "samong-zones-r115-data.js",
-      "bytes": 67711,
-      "sha256": "fd09b86a48b28ae5b22d5c79ecdc340ed2af2d51a3a95efa513445c3ab1b26fb"
+      "bytes": 72743,
+      "sha256": "ef68253e6c613b51148322f966c2bed37efc0eb051e1b66245fd9142fb4318ee"
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 39104,
-      "sha256": "f14e41b20e082aaf330b8ad3f1c493da7ca67da74c67064974a3605f52b0cd9b"
+      "bytes": 39588,
+      "sha256": "3ee7d36fb2fea452d28fedd51d36005335e03cecf5ec1f9df1ed7d0d17ec9bfe"
     },
     {
       "path": "scene-props-r117.js",
@@ -17489,8 +17489,8 @@
     },
     {
       "path": "story-canon-r106-data.js",
-      "bytes": 145625,
-      "sha256": "e2d61189310a7f7a84750c55aca8c04d11c56f9c70158da109333315ab03787b"
+      "bytes": 173914,
+      "sha256": "7f3afcb1f0e7802b7b2a9a19a0f8e378fdd054c180eec633489278dbf2b66ceb"
     },
     {
       "path": "story-canon-r106.js",
@@ -17654,7 +17654,7 @@
     }
   ],
   "fileCount": 3530,
-  "totalBytes": 765112668,
+  "totalBytes": 765420066,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {

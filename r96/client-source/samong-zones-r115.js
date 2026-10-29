@@ -29,8 +29,8 @@
      {x:4,y:18,w:18,h:12,kind:'hall',name:'현관과 신발장',along:[['cabinet','w',2],['cabinet','e',3]],grid:{kind:'cabinet',cols:3,rows:2,x:8,y:21,dx:4,dy:4}},
      {x:26,y:21,w:14,h:4,kind:'corridor',name:'1층 복도'},{x:41,y:12,w:6,h:13,kind:'stair',name:'복도 모퉁이'}],
     links:[[0,1,4,'vh'],[1,2,3],[2,3,3]],entry:{x:12.5,y:37.5},exit:{x:44.5,y:13.5},
-    clues:[{room:0,at:[6,.5],key:'S-02',sub:'현관 유리에 비친',n:1,label:'현관 유리 · 멈춘 분침',prop:'cabinet'},
-     {room:1,at:[9,10],key:'S-02',sub:'등 뒤에서 교문이',n:1,label:'신발장 · 주머니 속 귀가 확인서',prop:'cabinet',after:0}],
+    clues:[{room:0,at:[6,.5],key:'S-02',sub:'현관 유리문에 비친',i:0,n:1,label:'현관 유리 · 멈춘 분침',prop:'cabinet'},
+     {room:1,at:[9,10],key:'S-02',sub:'등 뒤에서 육중한 ',i:1,n:1,label:'신발장 · 주머니 속 귀가 확인서',prop:'cabinet',after:0}],
     wander:{cap:2,every:12},goal:{clues:true}},
    {id:'sz115-S02-2',title:'순찰자가 도는 복도',kind:'maze',style:'clinical',stealth:true,
     rooms:[{x:4,y:40,w:44,h:3,kind:'corridor',name:'1층 복도'},{x:4,y:24,w:44,h:3,kind:'corridor',name:'2층 복도'},{x:4,y:8,w:44,h:3,kind:'corridor',name:'3층 복도'},
@@ -40,24 +40,24 @@
      {x:10,y:14,w:10,h:7,kind:'room',name:'2-1 교실',grid:{kind:'workbench',cols:3,rows:2,x:12,y:15.5,dx:3,dy:3}},
      {x:30,y:14,w:10,h:7,kind:'room',name:'2-2 교실',grid:{kind:'workbench',cols:3,rows:2,x:32,y:15.5,dx:3,dy:3}}],
     links:[[6,0,2,'vh'],[7,1,2,'vh'],[8,2,2,'vh'],[9,1,2,'vh']],entry:{x:5.5,y:41.5},exit:{x:46.5,y:9.5},save:{x:25.5,y:30.5},chests:[{x:14.5,y:35.5},{x:35.5,y:18.5}],
-    cue:[{key:'S-02',sub:'열쇠가 부딪치는 소',n:1}],
-    clues:[{room:5,at:[1,4],key:'S-02',sub:'순찰자가 창문 앞을',n:1,label:'창문 앞을 지나는 순찰자',prop:'cabinet'}],
-    patrol:{donor:PATROL,name:'순찰자',routes:[[[5.5,25.5],[46.5,25.5],[46.5,9.5],[5.5,9.5]],[[25.5,41.5],[46.5,41.5],[46.5,25.5],[25.5,25.5]]],spotted:{key:'S-02',sub:'그가 고개를 돌리자',n:1}},
-    after:[{key:'S-02',sub:'순찰자가 지나간 뒤에도',n:1}],mobCap:4,mobEvery:9,goal:{reach:true}},
+    cue:[{key:'S-02',sub:'복도 끝에서 열쇠 ',i:2,n:1}],
+    clues:[{room:5,at:[1,4],key:'S-02',sub:'순찰자가 복도 쪽 ',i:3,n:1,label:'창문 앞을 지나는 순찰자',prop:'cabinet'}],
+    patrol:{donor:PATROL,name:'순찰자',routes:[[[5.5,25.5],[46.5,25.5],[46.5,9.5],[5.5,9.5]],[[25.5,41.5],[46.5,41.5],[46.5,25.5],[25.5,25.5]]],spotted:{key:'S-02',sub:'그가 복도에서 천천',i:4,n:1}},
+    after:[{key:'S-02',sub:'순찰자의 발소리가 ',i:5,n:1}],mobCap:4,mobEvery:9,goal:{reach:true}},
    {id:'sz115-S02-3',title:'서른 개의 책상',kind:'explore',style:'clinical',
     rooms:[{x:4,y:32,w:28,h:3,kind:'corridor',name:'교실 앞 복도'},
      {x:8,y:10,w:22,h:17,kind:'room',name:'교실',wall:3.4,grid:{kind:'workbench',cols:6,rows:5,x:10.5,y:14,dx:3.2,dy:2.6}},
      {x:32,y:6,w:3,h:16,kind:'corridor',name:'뒷문 복도'}],
     links:[[0,1,3,'vh'],[1,2,2,'hv']],entry:{x:5.5,y:33.5},exit:{x:33.5,y:7.5},
-    clues:[{room:1,at:[11,1],key:'S-02',sub:'교실에 놓인 책상은',n:1,label:'칠판의 서른 · 학급 사진',prop:'cabinet',spawn:5}],
+    clues:[{room:1,at:[11,1],key:'S-02',sub:'교실 안에 놓인 나',i:6,n:1,label:'칠판의 서른 · 학급 사진',prop:'cabinet',spawn:5}],
     wander:{cap:5,every:10,afterClue:0},goal:{clues:true}},
    {id:'sz115-S02-4',title:'교무실',kind:'explore',style:'clinical',
     rooms:[{x:4,y:34,w:36,h:3,kind:'corridor',name:'교무실 앞 복도'},
      {x:6,y:12,w:24,h:16,kind:'hall',name:'교무실',along:[['cabinet','n',3]],grid:{kind:'workbench',cols:4,rows:3,x:9,y:16,dx:5,dy:3.6}},
      {x:32,y:14,w:8,h:8,kind:'room',name:'기록 보관 칸',along:[['cabinet','n',2],['cabinet','e',3]]}],
     links:[[0,1,3,'vh'],[1,2,2,'hv']],entry:{x:5.5,y:35.5},exit:{x:38.5,y:35.5},
-    clues:[{room:2,at:[3,5],key:'S-02',sub:'교무실에서 낡은',n:1,label:'낡은 출석부',prop:'cabinet'},
-     {room:1,at:[12,11],key:'S-02',sub:'두 기록이 서로',n:1,label:'출석부 곁의 귀가 확인서',prop:'workbench',after:0,spawn:4,mobs:WRITING,mobName:'칠판을 벗어난 글씨'}],
+    clues:[{room:2,at:[3,5],key:'S-02',sub:'복도를 빠져나와 교',i:7,n:1,label:'낡은 출석부',prop:'cabinet'},
+     {room:1,at:[12,11],key:'S-02',sub:'두 기록이 서로 정',i:8,n:1,label:'출석부 곁의 귀가 확인서',prop:'workbench',after:0,spawn:4,mobs:WRITING,mobName:'칠판을 벗어난 글씨'}],
     wander:{cap:4,every:11,afterClue:1,mobs:WRITING,mobName:'칠판을 벗어난 글씨'},goal:{clues:true}},
    {id:'sz115-S02-5',title:'분필이 번지는 복도',kind:'combat',style:'clinical',
     rooms:[{x:4,y:36,w:40,h:5,kind:'corridor',name:'칠판이 늘어선 복도'},{x:39,y:8,w:5,h:33,kind:'corridor',name:'꺾인 복도'},{x:10,y:8,w:34,h:5,kind:'corridor',name:'음악실 쪽 복도'},
@@ -70,28 +70,28 @@
     rooms:[{x:8,y:10,w:20,h:16,kind:'room',name:'음악실',wall:3.6,grid:{kind:'crate',cols:5,rows:2,x:11,y:18,dx:3.4,dy:3}},
      {x:28,y:16,w:18,h:3,kind:'corridor',name:'자료실로 가는 복도'},{x:44,y:8,w:5,h:14,kind:'corridor',name:'복도 끝'}],
     links:[[0,1,3,'hv'],[1,2,3,'hv']],entry:{x:10.5,y:24.5},exit:{x:46.5,y:9.5},
-    clues:[{room:0,at:[10,2],key:'S-02',sub:'나는 그곳에서 달아나',n:1,label:'피아노 · 건반 아래 쪽지',prop:'workbench'},
-     {room:2,at:[2.5,5],key:'S-02',sub:'복도 끝의 자료실 문이',n:2,label:'흔들리는 자료실 문',prop:'cabinet',after:0}],
+    clues:[{room:0,at:[10,2],key:'S-02',sub:'나는 그 문장들에서',i:9,n:1,label:'피아노 · 건반 아래 쪽지',prop:'workbench'},
+     {room:2,at:[2.5,5],key:'S-02',sub:'그때, 복도 맨 끝',i:10,n:2,label:'흔들리는 자료실 문',prop:'cabinet',after:0}],
     wander:{cap:3,every:12},goal:{clues:true}},
    {id:'sz115-S02-7',title:'불 꺼진 교실과 보건실',kind:'combat',style:'clinical',dark:true,
     rooms:[{x:6,y:20,w:20,h:16,kind:'room',name:'불 꺼진 교실',grid:{kind:'workbench',cols:5,rows:4,x:8.5,y:23,dx:3.6,dy:3}},
      {x:26,y:26,w:26,h:4,kind:'corridor',name:'자료실 쪽 복도'},{x:34,y:10,w:12,h:10,kind:'room',name:'보건실',along:[['empty-bed','n',3]]},
      {x:48,y:26,w:4,h:16,kind:'corridor',name:'막힌 벽 앞'}],
     links:[[2,1,2,'vh']],entry:{x:9.5,y:33.5},exit:{x:50.5,y:40.5},
-    cue:[{key:'S-02',sub:'형광등이 하나씩',n:1}],
-    clues:[{room:2,at:[6,6],key:'S-02',sub:'달리는 도중 조금 열린',n:1,label:'보건실 · 작은 발자국',prop:'empty-bed'},
-     {room:1,at:[24,2],key:'S-02',sub:'벽 가까이 가 보려던',n:1,label:'벽 앞에서 시작된 어른 발자국',prop:'statue',after:0}],
+    cue:[{key:'S-02',sub:'복도의 형광등이 깜',i:12,n:1}],
+    clues:[{room:2,at:[6,6],key:'S-02',sub:'숨이 턱에 차도록 ',i:13,n:1,label:'보건실 · 작은 발자국',prop:'empty-bed'},
+     {room:1,at:[24,2],key:'S-02',sub:'수상한 벽면 가까이',i:14,n:1,label:'벽 앞에서 시작된 어른 발자국',prop:'statue',after:0}],
     mobs:STUDENT,mobName:'얼굴 없는 학생',goal:{kills:50,clues:true}},
    {id:'sz115-S02-8',title:'자료실과 방송실',kind:'confront',style:'clinical',
     rooms:[{x:6,y:6,w:19,h:19,kind:'hall',name:'방송실',wall:4},{x:24,y:20,w:6,h:4,kind:'stair',name:'계단참'},{x:28,y:20,w:4,h:20,kind:'stair',name:'방송실로 오르는 계단'},
      {x:28,y:36,w:14,h:5,kind:'corridor',name:'자료실 앞'},{x:40,y:30,w:10,h:13,kind:'room',name:'자료실',along:[['cabinet','n',2],['cabinet','e',3]]}],
     links:[],entry:{x:45.5,y:40.5},dais:{x:15.5,y:15.5},landings:[{x:35.5,y:38.5},{x:30.5,y:30.5},{x:27.5,y:22.5}],
-    clues:[{room:4,at:[3,4],key:'S-02',sub:'자료실 문을 열었으나',n:1,label:'자료실 · 실내화와 고장 난 시계',prop:'workbench'}],
-    boss:{name:'순찰자',donor:PATROL,patterns:['sides','ground']},bossCue:{key:'S-02',sub:'방송실은 위층에',n:1},
+    clues:[{room:4,at:[3,4],key:'S-02',sub:'덜컹거리는 자료실 ',i:15,n:1,label:'자료실 · 실내화와 고장 난 시계',prop:'workbench'}],
+    boss:{name:'순찰자',donor:PATROL,patterns:['sides','ground']},bossCue:{key:'S-02',sub:'학교 전체에 목소리',i:16,n:1},
     // 원문 해법: 확인서를 내밀지 않고 사실을 적는다(진술 셋) → 얼굴이 갈라진다 → 출석부 위 명령선만 끊는다.
-    solve:{statements:[{key:'S-02',sub:'나는 확인서를 내밀려다가',n:1,label:'진술 · 문을 열지 않은 일'},{key:'S-02',sub:'아직 입을 열지도',n:1,label:'진술 · 방송으로 퍼지는 말'},{key:'S-02',sub:'순찰자의 얼굴에 금이',n:2,label:'진술 · 갈라진 얼굴'}],
-     floor:.45,book:{key:'S-02',sub:'기억에서 돌아오니',n:1,label:'젖은 출석부 · 교주의 명령'},cut:{key:'S-02',sub:'나는 이름을 짚던',n:1,label:'명령선만 끊기'}},
-    after:[{key:'S-02',sub:'교문이 열렸지만',n:1},{key:'S-02',sub:'보건실에 돌아오니',n:1}]}
+    solve:{statements:[{key:'S-02',sub:'나는 변명처럼 귀가',i:17,n:1,label:'진술 · 문을 열지 않은 일'},{key:'S-02',sub:'나는 아직 입을 열',i:18,n:1,label:'진술 · 방송으로 퍼지는 말'},{key:'S-02',sub:'내 앞을 가로막던 ',i:19,n:2,label:'진술 · 갈라진 얼굴'}],
+     floor:.45,book:{key:'S-02',sub:'졸업생의 기억에서 ',i:21,n:1,label:'젖은 출석부 · 교주의 명령'},cut:{key:'S-02',sub:'나는 은재의 이름을',i:22,n:1,label:'명령선만 끊기'}},
+    after:[{key:'S-02',sub:'굳게 닫혔던 철제 ',i:23,n:1},{key:'S-02',sub:'복도를 돌아 보건실',i:24,n:1}]}
   ]
  };
  const chapter=key=>CH[key]||null;
@@ -202,7 +202,7 @@
   r.samongR115={zone:z.id,props:n,clues:(z.clues||[]).length};}
 
  // ---- 원문 보여 주기 (R105 기록 표식과 같은 문단 규칙) -----------------------------------------------
- function rows(R){const s=TEXT()[R.key];if(!s)return[];const all=s.blocks.flatMap(b=>b.paras.map(t=>({t,n:b.narrator})));let at=all.findIndex(v=>v.t.startsWith(R.sub));if(at<0)at=all.findIndex(v=>v.t.includes(R.sub));if(at<0)return[];return all.slice(at,at+Math.max(1,R.n||1));}
+ function rows(R){const s=TEXT()[R.key];if(!s)return[];const all=s.blocks.flatMap(b=>b.paras.map(t=>({t,n:b.narrator})));let at=Number.isInteger(R.i)&&all[R.i]&&all[R.i].t.startsWith(R.sub)?R.i:all.findIndex(v=>v.t.startsWith(R.sub));/* R122: 위치 번호가 맞으면 그 문단 */if(at<0)at=all.findIndex(v=>v.t.includes(R.sub));if(at<0)return[];return all.slice(at,at+Math.max(1,R.n||1));}
  function scenesFor(list,z,tag){const ep=SM()?.episodes?.[room?.samongR103?.ep??-1]||{};const out=[];
   for(const R of list||[]){const rs=rows(R);if(!rs.length)continue;const s=TEXT()[R.key];out.push({id:ep.host||room?.id,record:{title:ep.title||s.title,narrator:rs[0].n,chapter:ep.chapter||''},part:'body',text:rs.map(v=>v.t).join('\n\n'),title:s.title+' · '+z.title,narrator:rs[0].n?'〈'+rs[0].n+'〉':'',chapter:ep.chapter||'',key:'DREAM:sz115:'+z.id+':'+tag+':'+out.length});}
   return out;}
