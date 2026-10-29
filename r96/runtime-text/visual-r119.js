@@ -77,7 +77,10 @@
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
  // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
  const OWN_WALK={gunner:{s:['s',0],se:['e6',0],e:['e6',0],ne:['ne',0],n:['n',0],sw:['e6',1],w:['e6',1],nw:['ne',1]}};// R121: 옆은 윤서하 걸음을 따라 그린 6프레임(사용자)// R121: 아래 대각선은 4장 대각선이 어색해(사용자) 옆 8장으로 대체// 옆(e8)은 앞으로 나가는 다리가 무릎을 접어 들었다 내딛는 8프레임(2줄, 사용자 제안)
- const preloadWalk=()=>{try{if(typeof ensureImages==='function'&&typeof player==='object'&&player?.hero&&OWN_WALK[player.hero]){const ps=[...new Set(Object.values(OWN_WALK[player.hero]).map(v=>'assets/r121/walk/walk-'+player.hero+'-'+v[0]+'.png'))];if(ps.some(p=>!walkLoading.has(p))){ps.forEach(p=>walkLoading.add(p));Promise.resolve(ensureImages(ps)).catch(()=>ps.forEach(p=>walkMissing.add(p)));}}}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
+ // 지역을 옮기면 게임이 그림 기억(캐시)을 비워 걷기 그림도 사라졌는데, '이미 받음'으로 기억해 다시 받지 않아 정지 그림으로 이동했다
+ // (사용자: 길잡이 켜면 그림 하나로 고정된 채 이동 — 길잡이가 지역을 자주 옮겨 더 자주 보였다). 준비 안 됐으면 1초마다 다시 받는다.
+ const askAt=new Map(),wantImage=p=>{if(walkMissing.has(p)||typeof ensureImages!=='function')return;const t0=Date.now();if(t0-(askAt.get(p)||0)<1000)return;askAt.set(p,t0);Promise.resolve(ensureImages([p])).catch(()=>walkMissing.add(p));};
+ const preloadWalk=()=>{try{if(typeof readyImage==='function'&&typeof player==='object'&&player?.hero&&OWN_WALK[player.hero])for(const v of new Set(Object.values(OWN_WALK[player.hero]).map(v=>'assets/r121/walk/walk-'+player.hero+'-'+v[0]+'.png')))if(!readyImage(v))wantImage(v);}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
  function sheetFor(hero,dir){const own=OWN_WALK[hero]?.[dir];if(own){const p='assets/r121/walk/walk-'+hero+'-'+own[0]+'.png';if(!walkMissing.has(p)){const n=own[0].endsWith('12')?12:own[0].endsWith('8')?8:own[0].endsWith('6')?6:4,cols=n===6?3:4;return{path:p,mirror:!!own[1],cols,rows:n/cols,frames:n,own8:n>4};}}
   if(dir==='n'){const ab=Math.floor(walkState.d*3.2)%2?'b':'a',p='assets/heroes/normalized/'+hero+'/run_back_'+ab+'.webp';if(!walkMissing.has(p))return{path:p,mirror:false,single:true};}/* R121: 위쪽 걷기 묶음이 없어 정면 위로 갈 때 뒷모습 달리기 2장 */const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
   for(const d of [dir,...(NEAR[dir]||[])]){const s=tryDir(d);if(s&&!walkMissing.has(s.path))return s;}return null;}
@@ -117,7 +120,7 @@
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
    if(busyMove)return r;
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
-   if(!row){if(!walkLoading.has(sh.path)&&typeof ensureImages==='function'){walkLoading.add(sh.path);Promise.resolve(ensureImages([sh.path])).catch(()=>walkMissing.add(sh.path));}return r;}
+   if(!row){wantImage(sh.path);return r;}
    let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
    if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===6?4.8:sh.frames===12?9.6:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.
