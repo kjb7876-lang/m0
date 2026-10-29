@@ -47,7 +47,10 @@ if sys.argv[1] == '--grid8':  # R121: 8프레임(2줄 x 4칸) 옆 걷기 -> 4x2 
         for r in runs:
             if merged and r[0] - merged[-1][1] < 25: merged[-1] = (merged[-1][0], r[1])
             else: merged.append(r)
-        assert len(merged) == 4, merged
+        while len(merged) < 4:  # 붙은 두 장: 가장 넓은 덩어리를 가운데 40% 안에서 가장 얇은 세로줄로 가른다
+            j = max(range(len(merged)), key=lambda i: merged[i][1] - merged[i][0]); x0, x1 = merged[j]; w = x1 - x0
+            cs = sub[:, x0 + int(w * .3):x0 + int(w * .7)].sum(0); cut = x0 + int(w * .3) + int(np.argmin(cs))
+            merged[j:j + 1] = [(x0, cut), (cut + 1, x1)]
         for x0, x1 in merged:
             m = sub[:, x0:x1]; ys = np.nonzero(m.any(1))[0]; y0, y1 = ys.min() + ya, ys.max() + 1 + ya
             cx = float(np.nonzero(solid[y0:y0 + int((y1 - y0) * .45), x0:x1])[1].mean()) + x0
