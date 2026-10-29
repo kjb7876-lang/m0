@@ -8533,6 +8533,26 @@
       "sha256": "8e6341ff4e7e92583786bf7964fa0f35b8d6c4e7100e7c9788bc1b06ec7d19f2"
     },
     {
+      "path": "assets/r120/cult/cult-leader-drive-fold-v17.webp",
+      "bytes": 72902,
+      "sha256": "c51d89509e9e52a07b539027596b986094f5e56fdff3f587e2c19c9ffe38ed93"
+    },
+    {
+      "path": "assets/r120/cult/cult-leader-drive-impact-v17.webp",
+      "bytes": 141070,
+      "sha256": "318c20e9dc3588e5929e619a9a8da35bfbf12c3674848752ba46127152247f57"
+    },
+    {
+      "path": "assets/r120/cult/cult-leader-drive-spear-v17.webp",
+      "bytes": 64746,
+      "sha256": "507b0455ada4be3ff8876d1686aef6362539b57782333c849c48ba21ed352dd8"
+    },
+    {
+      "path": "assets/r120/cult/cult-leader-drive-stitch-v17.webp",
+      "bytes": 90032,
+      "sha256": "6c2785664e1226250da23a2c048043ca8c3b2cfeeb4c5d1c8259c7d3d8b3649a"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -16984,8 +17004,8 @@
     },
     {
       "path": "combat-r118.js",
-      "bytes": 24162,
-      "sha256": "a2837294b5758158274653b04ff56e721d4c012bd32b604b2a468744fdc62a48"
+      "bytes": 24890,
+      "sha256": "1fb2587509b2a40864157996898b9b9d7f6e2de37e96d394cd71ac3ccd24882a"
     },
     {
       "path": "combat-r98.js",
@@ -17478,8 +17498,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3495,
-  "totalBytes": 760628061,
+  "fileCount": 3499,
+  "totalBytes": 760997539,
   "webHTMLSha256": "7b86a0bb5879f3d74217a40cdfe2a1d3de65893a379afda1a9f1d3874e21656e",
   "largest": [
     {
