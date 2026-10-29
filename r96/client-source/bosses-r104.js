@@ -9,7 +9,7 @@
  if(window.__STORYWORLD_BOSS_KEYPOSES_R104__)return;
  const DATA=window.__STORYWORLD_BOSS_KEYPOSES_R104_DATA__||{},REV='boss-keyposes-r104';
  // Phase indices (phaseSprites5 / phasePresentation order) each form depicts.
- const PHASES={'b02-boss':[0,1],'b04-boss':[2],'b06-boss':[0,1],'b06b-boss':[0],'b07-boss':[0],'b08-boss':[0,1],'b09-boss':[1,2],'a11-boss':[0]};
+ const PHASES={'b02-boss':[0,1],'b04-boss':[2],'b06-boss':[0,1],'b06b-boss':[0],'b07-boss':[0],'b08-boss':[0,1],'b09-boss':[1,2],'a11-boss':[0],'c104-boss':[0,1,2,3]};// R119: 교만의 사이보그 교주(Drive v17) — 그림 객체가 잠겨 있어 경로 단위 교체로 그린다
  // Native frame keys -> key pose (0 anticipation, 1 strike, 2 follow-through, 3 recovery).
  const POSE={anticipation:0,windup:0,prepare:0,charge:0,attack:1,attackA:1,strike:1,contact:1,attackB:2,hit:2,recover:2,follow:2,idle:3,move:3,recovery:3,death:3};
  const KEY='storyworld.r104.keyposes',stats={draws:0,swapped:0,patchedFrames:0,skippedPhase:0,loading:0,failures:0};let lastError=null,cur=null,on=true;
