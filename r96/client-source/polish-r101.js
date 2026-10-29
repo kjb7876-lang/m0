@@ -274,7 +274,7 @@ function drawHeroHit(e,t){let q=project(e.x,e.y),y=q.y-e.lift;const vc115=e.tgt&
  const F=e.F,k=1-t,ease=k*k,T=e.tier??2,s=e.size*(.8+.35*(1-ease))*(.42+.083*clamp(T,0,7));
  if(T>=1)sig('hit',F.sig,q.x,y,t,s*1.15,{alpha:(.35+.05*clamp(T,0,7))*fadeOut(t),glow:(.08+.03*clamp(T,0,7))*ease});
  if(T>=4&&F.sig2)sig('hit',F.sig2,q.x,y,Math.min(.999,t*1.1),s*.8,{alpha:.7*fadeOut(t),glow:.2*ease});
- if(e.heavy)sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});
+ if(e.heavy&&player?.hero!=='gunner')sig('slash',F.sig,q.x,y,Math.min(.999,t*1.15),s*1.35,{angle:e.sa+Math.PI,alpha:.85*fadeOut(t,.5),glow:.3*ease});
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
  disc(q.x,y,s*.22*(1-ease*.5),rgba(F.b,.55*ease*ease));
  // R111: 가는 실선 고리(실오라)는 뺐다 — 그림 텍스처 고리로 대신.

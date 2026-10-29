@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true,gunnerHit:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle','gunnerHit'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -85,6 +85,9 @@
   let box=[sx,sy,cw,ch];try{const c=document.createElement('canvas');c.width=Math.ceil(cw);c.height=Math.ceil(ch);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,cw,ch,0,0,cw,ch);const d=g.getImageData(0,0,c.width,c.height).data;
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(cw,x1-x0+3),Math.min(ch,y1-y0+3)];}catch(_){}walkBox.set(k,box);return box;}
+ // 영웅 몸 그림만 고른다: 반자동이 공명 방어를 쓰면 영웅 위에 큰 방어막 그림(barrier-sigil)이 함께 그려져, '가장 큰 영웅 그림'을
+ // 몸으로 잘못 골라 방어막을 걷기 그림으로 바꾸고 몸은 정지 그림으로 남던 버그(사용자 2026-10-29 "길잡이·반자동 켜면 이미지 버그")를 막는다.
+ const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|awakening|^blob:/;
  const bodyMemo=new WeakMap();
  function bodyFracOf(im,rect){if(!im||!rect)return null;let m=bodyMemo.get(im);if(!m){m=new Map();bodyMemo.set(im,m);}const k=rect.map(Math.round).join(',');if(m.has(k))return m.get(k);let f=null;
   try{const [sx,sy,sw,sh]=rect,s=Math.min(1,160/Math.max(sw,sh)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(sw*s));c.height=Math.max(1,Math.round(sh*s));const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,c.width,c.height);
@@ -96,13 +99,15 @@
      if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),ang=Math.atan2(q1.y-q0.y,q1.x-q0.x);walkState.dir=DIR8[((Math.round(ang/(Math.PI/4))%8)+8)%8];}}}
    walkState.x=player.x;walkState.y=player.y;
    const busy=player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
+   // 이동 중 기본 사격·방어(반자동은 걸으면서 계속 쏜다)에는 걷기를 이어 간다 — 걷기 그림도 총을 앞으로 든 자세라 정지 그림이 미끄러지던 것보다 자연스럽다.
+   const busyMove=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0;
    preloadWalk();
-   if(!player.moving){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
+   if(!player.moving){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
-   if(busy)return r;
+   if(busyMove)return r;
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
    if(!row){if(!walkLoading.has(sh.path)&&typeof ensureImages==='function'){walkLoading.add(sh.path);Promise.resolve(ensureImages([sh.path])).catch(()=>walkMissing.add(sh.path));}return r;}
-   let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
+   let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
    if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===12?9.6:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.
    const n=sh.frames||8,ph=(n===12?[0,-1,-.4,1,.4,0,-1,-.4,1,.4,0,0][frame]:n===8?[0,-1,1,.4,0,-1,1,.4][frame]:[0,1,0,1][frame])??0,bob=(ph>0?.025*ph:.015*ph)*want;
@@ -110,11 +115,21 @@
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
     points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
   return r;};}
+ // 9) 기억사수 적중 표시 (사용자 2026-10-29 "공격 적중 시 / 이펙트는 없애고 원형이나 십자가로"): 기본 적중 그림(gunner-memory-impact,
+ //    대각선 파편 베기 모양) 대신 하늘색 원이 퍼지며 사라지고 가운데에 짧은 십자가 반짝인다. 적 그림의 가운데(R115)에 그린다. 다른 영웅은 그대로. 설정 gunnerHit.
+ function drawGunnerHit(f){if(typeof ctx==='undefined'||typeof project!=='function')return false;const life=finite(f.life)||.3,t=Math.min(1,Math.max(0,finite(f.age)/life)),k=1-t;
+  let q=project(f.x,f.y),cy=q.y-26;const tgt=f.targetIdE568&&(room?.enemies||[]).find(e=>String(e.id)===String(f.targetIdE568)),v=tgt&&window.__STORYWORLD_PLAY_R115__?.centreOf?.(tgt);if(v){q={x:v.cx,y:q.y};cy=v.cy;}
+  const z=typeof zoom==='number'?zoom:1,R=(6+16*Math.sqrt(t))*z,c=Math.max(3,9*z*(1-t*.6));ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
+  ctx.strokeStyle=`rgba(120,230,255,${.85*k})`;ctx.lineWidth=Math.max(1.2,2.6*z*k);ctx.beginPath();ctx.ellipse(q.x,cy,R,R*.72,0,0,6.283);ctx.stroke();
+  ctx.strokeStyle=`rgba(225,250,255,${.95*k*k})`;ctx.lineWidth=Math.max(1,2.2*z*k);ctx.beginPath();ctx.moveTo(q.x-c,cy);ctx.lineTo(q.x+c,cy);ctx.moveTo(q.x,cy-c);ctx.lineTo(q.x,cy+c);ctx.stroke();
+  ctx.fillStyle=`rgba(200,245,255,${.5*k*k})`;ctx.beginPath();ctx.arc(q.x,cy,2.4*z*k+1,0,6.283);ctx.fill();ctx.restore();stats.gunnerHits=(stats.gunnerHits||0)+1;return true;}
+ const finite=v=>Number.isFinite(+v)?+v:0;
+ if(typeof drawEffect==='function'){const hitBase=drawEffect;drawEffect=function(f,...a){try{if(prefs.gunnerHit&&f?.type==='e568HeroImpact'&&(f.heroIdE568==='gunner'||/gunner-memory-impact/.test(String(f.asset||'')))&&drawGunnerHit(f))return;}catch(_){}return hitBase.call(this,f,...a);};}
  // 6) Esc로 메뉴·설정 창 닫기 (사용자 2026-10-29): 열린 창(openPanel)의 '계속/닫기'(.close) 단추를 대신 누른다.
  //    입력칸에 글을 쓰는 중이거나 열린 창이 없으면 원래 Esc 동작 그대로.
  if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
   const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
   ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
- function set(p={}){if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ function set(p={}){if(typeof p.gunnerHit==='boolean')prefs.gunnerHit=p.gunnerHit;if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
  window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),lastError,collisionChanged:false})});
 })();

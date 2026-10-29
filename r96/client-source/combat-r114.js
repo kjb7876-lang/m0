@@ -234,7 +234,7 @@ function setPath(hero,dir){const f=DIR_FILE[dir];if(!f)return null;if(f==='e'||f
 const OVERLAY_ART=/r91\/walk\/walk-|r93\/idle\/idle-/,overlayHeroes=new Set();
 const heroSize=new Map();
 const heroLast=new Map();
-function unifyHero(rec,start){let best=null,bh=0;for(let i=start;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
+function unifyHero(rec,start){let best=null,bh=0;for(let i=start;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!HERO_ART.test(String(c.sourcePath||'')))continue;/* R121: 방어막 등 효과 그림을 몸으로 고르지 않게 */const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
  if(!best)return;const key=player.hero+'|'+player.direction+'|'+(player.moving?'m':'s'),path=String(best.sourcePath||'');
  if(OVERLAY_ART.test(path))overlayHeroes.add(player.hero);
  if(NEW_ART.test(path)){const P=best.points;if(/r91\/walk\//.test(path))return;/* R121: 걷기 묶음 한 칸(여백 포함 칸 전체)을 기억해 멈춘 뒤에 크게 다시 쓰던 것을 막는다 */heroSize.set(player.hero,{w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});heroLast.set(key,{image:best.image,sourcePath:best.sourcePath,immutableTint:best.immutableTint,sourceRect:best.sourceRect.slice(),imageSize:best.imageSize.slice(),w:P[1][0]-P[0][0],h:P[3][1]-P[0][1]});return;}
