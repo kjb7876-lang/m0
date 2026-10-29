@@ -1,0 +1,140 @@
+{
+ "schema": "storyworld.r118.drive-weapons/v1",
+ "sourceFolder": "합일 세로판 보스 회전 무기 20261029 (+ 7대죄_헬모드_자산_20261029)",
+ "hold": [
+  {
+   "id": "mammon-atlas-512",
+   "reason": "2x2 small body poses (512px), not a weapon; replacing the Mammon boss body needs its own pass"
+  }
+ ],
+ "tracks": [
+  {
+   "id": "violet-sword",
+   "path": "assets/r118/drive/violet-sword.png",
+   "owner": "mb-dist01",
+   "mode": "spin",
+   "size": [
+    220,
+    47
+   ],
+   "sourceTitle": "violet-sword.png",
+   "sourceSha256": "e91c2ddfa14e2edf2cb6c3a13f1dad150770164003fdee1aecb98a43c1a7bc56",
+   "sourceBytes": 371193,
+   "sha256": "d139ea05aac3f09b1f8189e794d77b691ffe5cbf0b05578484e29af3bccf66fa",
+   "bytes": 12272,
+   "faintCleared": 22806
+  },
+  {
+   "id": "horn-cleaver",
+   "path": "assets/r118/drive/horn-cleaver.png",
+   "owner": "mb-dist02",
+   "mode": "spin",
+   "size": [
+    220,
+    45
+   ],
+   "sourceTitle": "horn-cleaver.png",
+   "sourceSha256": "de5e22d4d6ad9f3283eb62ee52047242ba850213c2149d41695bd388cfbf26a7",
+   "sourceBytes": 1128521,
+   "sha256": "536a7d76fa78e2ac56eb337104e4b0f85f8780cb5d77b463a127c5c8ed30c846",
+   "bytes": 22778,
+   "faintCleared": 18696
+  },
+  {
+   "id": "mask-feather",
+   "path": "assets/r118/drive/mask-feather.png",
+   "owner": "mb-ep1a11",
+   "mode": "flutter",
+   "size": [
+    200,
+    67
+   ],
+   "sourceTitle": "mask-feather.png",
+   "sourceSha256": "e8d30eaa562ee139da17138a1eb0a6236a27b6c93c8d886ca4d88b6fb6bdacdd",
+   "sourceBytes": 665062,
+   "sha256": "eaefc817a88cae18bcd0c078d91ace9ec625ee5a13346ca0c51550a8e36fce64",
+   "bytes": 21809,
+   "faintCleared": 20298
+  },
+  {
+   "id": "lucifer-shard",
+   "path": "assets/r118/drive/lucifer-shard.png",
+   "owner": "a11-boss",
+   "mode": "spin",
+   "size": [
+    179,
+    220
+   ],
+   "sourceTitle": "lucifer-shard.png",
+   "sourceSha256": "90d92f10c32311ab43573c6a07b5151ef941061fdc0610c43342e809043ebcdf",
+   "sourceBytes": 937312,
+   "sha256": "e10b719600589115eff61e78366f2fc2dfd5210977fa8e13444fd9fc3f73dcc3",
+   "bytes": 57488,
+   "faintCleared": 12584
+  },
+  {
+   "id": "glutton-core",
+   "path": "assets/r118/drive/glutton-core.png",
+   "owner": "b04-boss",
+   "mode": "spin",
+   "size": [
+    126,
+    200
+   ],
+   "sourceTitle": "glutton-core.png",
+   "sourceSha256": "027c1ce6572541490f23ba3a10463ddb7771f2ab3af7cf9c3a7b27cc1575a1f6",
+   "sourceBytes": 828086,
+   "sha256": "54a3e068f076f9ce96834afb6db0e7383a96d58d31314e64834fe107dad151c2",
+   "bytes": 35969,
+   "faintCleared": 5611
+  },
+  {
+   "id": "wrath-wolf-manifest",
+   "path": "assets/r118/drive/wrath-wolf-manifest.png",
+   "owner": "b07-boss",
+   "mode": "charge",
+   "size": [
+    233,
+    300
+   ],
+   "sourceTitle": "wrath-wolf-manifest.png",
+   "sourceSha256": "37146094be23e94ace3c4535645945af32b719e48c797132a601882e5bfda99b",
+   "sourceBytes": 1442658,
+   "sha256": "f09498c6f8db7dd273afa1f3cf8e08bf3aa0bdb72255144b9880747c6e5de3bb",
+   "bytes": 116617,
+   "faintCleared": 62025
+  },
+  {
+   "id": "wrath-bear-manifest",
+   "path": "assets/r118/drive/wrath-bear-manifest.png",
+   "owner": "b07-boss",
+   "mode": "charge",
+   "size": [
+    292,
+    300
+   ],
+   "sourceTitle": "wrath-bear-manifest.png",
+   "sourceSha256": "37dc272118a0e4a45bb00f1851dc1ba875ab0fd2590a10b2c3c05ff91459d631",
+   "sourceBytes": 2069709,
+   "sha256": "f764effe6494318e8de99a33fc0f578f1b1ae86831ab5fddd5e5cc28d02e85e3",
+   "bytes": 157877,
+   "faintCleared": 66729
+  },
+  {
+   "id": "wrath-dragon-manifest",
+   "path": "assets/r118/drive/wrath-dragon-manifest.png",
+   "owner": "b07-boss",
+   "mode": "charge",
+   "size": [
+    280,
+    300
+   ],
+   "sourceTitle": "wrath-dragon-manifest.png",
+   "sourceSha256": "ef16f5ba70e07748193d7f330b2f793562a4ae3835bb43893ae6860a03f15faa",
+   "sourceBytes": 1958099,
+   "sha256": "1b1943a2273aada91f09d47dc9fd882b1d3bb12be3c645c40daddfa44e4b2439",
+   "bytes": 148820,
+   "faintCleared": 71118
+  }
+ ]
+}
