@@ -25,7 +25,7 @@
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
   try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=SWAP[k];
-    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;fitState.delete(k);fitHero(k,r);}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
+    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;if(typeof imageCrop==='function'){r.r119Crop=r.crop;r.crop=imageCrop(im);}/* R121: 게임이 처음 그림으로 재 둔 내용 상자(crop)를 새 그림으로 다시 잰다 — 안 하면 바깥이 잘린다 */swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;fitState.delete(k);fitHero(k,r);}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
   return row;};}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
  //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
@@ -50,7 +50,7 @@
    const d=g.getImageData(0,0,W,H).data;let top=H,foot=-1,x0=W,x1=-1;for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>16){if(y<top)top=y;if(y>foot)foot=y;if(x<x0)x0=x;if(x>x1)x1=x;}
    if(foot<0){fitState.set(k,'empty');return;}const s=FIT*H/(foot-top+1);if(Math.abs(s-1)<.04){fitState.set(k,'kept');return;}
    const cx=(x0+x1)/2,o=document.createElement('canvas');o.width=W;o.height=H;const q=o.getContext('2d');q.imageSmoothingQuality='high';q.translate(cx,foot);q.scale(s,s);q.drawImage(im,-cx,-foot);
-   o.toBlob(b=>{if(!b)return;const n=new Image();n.decoding='async';n.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroFit&&r.image===im){r.r119Unfit=im;r.image=n;fitState.set(k,'fit '+s.toFixed(2));stats.fits=(stats.fits||0)+1;}};n.src=URL.createObjectURL(b);});
+   o.toBlob(b=>{if(!b)return;const n=new Image();n.decoding='async';n.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroFit&&r.image===im){r.r119Unfit=im;r.image=n;if(typeof imageCrop==='function')r.crop=imageCrop(n);fitState.set(k,'fit '+s.toFixed(2));stats.fits=(stats.fits||0)+1;}};n.src=URL.createObjectURL(b);});
   }catch(e){fitState.set(k,'error');lastError=String(e?.message||e);}}
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyFit=readyImage;readyImage=function(path){const row=readyFit.apply(this,arguments);
   try{if(prefs.heroFit&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,'');if(FIT_RE.test(k)){const im=row.image;
