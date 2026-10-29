@@ -13,6 +13,24 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+def key_out(path):
+    a = np.asarray(Image.open(path).convert('RGB')).astype(np.float32); r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    mag = (r - g > 60) & (b - g > 60); alpha = np.where(mag, 0, 255).astype(np.float32)
+    soft = (r - g > 25) & (b - g > 25) & ~mag; alpha[soft] = 128
+    a[soft, 0] = a[soft, 1] = np.minimum(a[soft, 0], a[soft, 2]) * .6 + a[soft, 1] * .4; a[soft, 2] = a[soft, 0]
+    return a, alpha
+if sys.argv[1] == '--replace':
+    strip = Image.open(sys.argv[2]).convert('RGBA'); idx = int(sys.argv[3]); a, alpha = key_out(sys.argv[4])
+    cw, ch = strip.width // 4, strip.height
+    ref = np.asarray(strip.crop((0, 0, cw, ch)))[..., 3] > 24; rys = np.nonzero(ref.any(1))[0]; rh = rys.max() - rys.min() + 1
+    rcx = float(np.nonzero(ref[rys.min():rys.min() + int(rh * .45)])[1].mean())
+    m = alpha > 0; ys, xs = np.nonzero(m); y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    piece = Image.fromarray(np.dstack([a, alpha]).clip(0, 255).astype(np.uint8)[y0:y1, x0:x1]); k = rh / (y1 - y0)
+    cx = (float(np.nonzero(m[y0:y0 + int((y1 - y0) * .45)])[1].mean()) - x0) * k
+    piece = piece.resize((round(piece.width * k), round(piece.height * k)), Image.LANCZOS)
+    cell = Image.new('RGBA', (cw, ch), (0, 0, 0, 0)); cell.alpha_composite(piece, (int(round(rcx - cx)), int(rys.max() + 1 - piece.height)))
+    out_img = strip.copy(); out_img.paste(Image.new('RGBA', (cw, ch), (0, 0, 0, 0)), (idx * cw, 0)); out_img.alpha_composite(cell, (idx * cw, 0))
+    out_img.save(sys.argv[2], optimize=True); print('replaced frame', idx, 'scale', round(k, 3)); sys.exit(0)
 raw, d, out = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3]); out.mkdir(parents=True, exist_ok=True)
 a = np.asarray(Image.open(raw).convert('RGB')).astype(np.float32)
 r, g, b = a[..., 0], a[..., 1], a[..., 2]
@@ -49,3 +67,7 @@ for i, (x0, x1, y0, y1, cx) in enumerate(frames):
 p = out / f'walk-gunner-{d}.png'; strip.save(p, optimize=True)
 print(json.dumps({'file': p.name, 'cell': [int(cw), int(ch)], 'frames': 4, 'bytes': p.stat().st_size, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest(),
                   'source': {'name': raw.name, 'sha256': hashlib.sha256(raw.read_bytes()).hexdigest()}}, ensure_ascii=False))
+
+# --- R121 보조: 한 장짜리 그림(자홍 배경)을 기존 스트립의 n번째 칸에 같은 키·발밑·몸 가운데로 끼운다.
+#     usage: python -I scripts/r121-gunner-walk.py --replace <strip.png> <index 0-3> <single.png>
+#     (옆 걷기에서 3번째 장이 1번째 장과 같은 다리를 내밀어 한쪽 다리만 움직여 보였다 -> 다리를 바꾼 한 장으로 교체)
