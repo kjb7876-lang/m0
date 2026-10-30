@@ -115,9 +115,13 @@ const foe=(id,x,y,o={})=>({id,x,y,hp:100,maxHp:100,spawnState:'active',radius:.3
  // ⑤ 전투 위주 자동 진행
  sb.storyScene={key:'a'};sb.__diffOpen=true;sb.__now=10000;sb.tick(1/60);
  check('combat run off: scenes and difficulty left alone',sb.calls.adv===0&&sb.__diffOpen===true);
- C.set({combatRun:true});sb.__now=20000;sb.tick(1/60);
- check('combat run on: scene skipped, current difficulty confirmed, guide+auto on',sb.calls.adv===1&&sb.storyScene===null&&sb.__diffOpen===false&&sb.__diffSel==='hard'&&sb.guide===true&&sb.auto===true);
+ C.set({combatRun:true});sb.__now=15000;sb.tick(1/60);
+ // R134: 이 설정만으로 길잡이를 켜지 않는다(저장된 설정 때문에 새 게임마다 길잡이가 처음부터 켜지고 꺼도 다시 켜지던 사용자 버그)
+ check('combat run on but guide off: guide stays off, scenes and difficulty left alone',sb.guide===false&&sb.calls.adv===0&&sb.__diffOpen===true);
+ sb.guide=true;sb.__now=20000;sb.tick(1/60);
+ check('combat run on with guide on: scene skipped, current difficulty confirmed, auto on',sb.calls.adv===1&&sb.storyScene===null&&sb.__diffOpen===false&&sb.__diffSel==='hard'&&sb.guide===true&&sb.auto===true);
  sb.storyScene={key:'b'};sb.__now=30000;sb.__interval();check('scenes opened while paused are skipped by the timer too',sb.storyScene===null);
+ sb.guide=false;sb.__now=40000;sb.tick(1/60);check('turning the guide off sticks (combat run does not switch it back on)',sb.guide===false);
 
  check('no runtime errors',C.inspect().stats.errors===0,C.inspect().stats.lastError);
  const html=fs.readFileSync(path.join(RT,'index.html'),'utf8'),ver=fs.readFileSync(path.join(ROOT,'..','scripts','verify-r96-public.py'),'utf8');

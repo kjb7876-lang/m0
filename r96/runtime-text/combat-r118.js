@@ -162,10 +162,10 @@
 
  // ---- ⑤ 길잡이: 전투 위주 자동 진행 -----------------------------------------------------------------
  let runAt=0;
- function combatRunTick(){if(!prefs.combatRun||!solo())return;const t=performance.now();if(t-runAt<200)return;runAt=t;
+ function combatRunTick(){if(!prefs.combatRun||!solo())return;/* R134: 길잡이가 켜져 있을 때만(이 설정이 저장돼 있으면 새 게임마다 길잡이가 처음부터 켜지고, 끄거나 방향키를 눌러도 0.2초 만에 다시 켜졌다) */if(typeof guide==='undefined'||!guide)return;const t=performance.now();if(t-runAt<200)return;runAt=t;
   if(typeof storyScene!=='undefined'&&storyScene&&typeof advanceScene==='function'){let n=0;while(storyScene&&n++<80){advanceScene();stats.scenesSkipped++;}}
   const P=window.__STORYWORLD_PROGRESSION_R71__;try{if(P?.difficultyState?.().open){const cur=P.difficultyState().selected||'normal';P.selectDifficulty?.(cur);P.confirmDifficulty?.();stats.difficultyAuto++;}}catch(err){fail(err);}
-  if(typeof started!=='undefined'&&started&&player?.hp>0&&!(typeof loading!=='undefined'&&loading)){try{if(typeof guide!=='undefined'&&!guide)guide=true;if(typeof auto!=='undefined'&&!auto)auto=true;}catch(err){fail(err);}}}
+  if(typeof started!=='undefined'&&started&&player?.hp>0&&!(typeof loading!=='undefined'&&loading)){try{if(typeof auto!=='undefined'&&!auto)auto=true;}catch(err){fail(err);}}}
  // 장면이 열리는 순간에도 바로 넘긴다(틱이 멈춘 패널 상태 포함).
  setInterval(()=>{try{if(prefs.combatRun&&typeof storyScene!=='undefined'&&storyScene)combatRunTick();}catch(err){fail(err);}},250);
 
