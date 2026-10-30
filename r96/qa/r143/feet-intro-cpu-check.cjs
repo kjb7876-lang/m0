@@ -30,7 +30,7 @@ function runA(o){const cmds=[];const body={kind:'image',owner:{kind:'hero'},sour
  const copy={...body,points:body.points.map(p=>p.slice())};const im={naturalWidth:1152,naturalHeight:256,width:1152,height:256};
  const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},document:{createElement:()=>({getContext:()=>null})},Date,Math,Promise,
   started:true,time:1,player:{hero:o.hero||'lauren',x:0,y:0,hp:10,attackAnim:0,direction:'right'},room:{enemies:o.enemies||[]},ctx:{commands:cmds},
-  project:(x,y)=>({x:x*10+100,y:y*10+200}),actorHeight:()=>54,readyImage:p=>({image:{...im,src:p}}),drawHero(){cmds.push(body);if(o.dup)cmds.push(copy);}};
+  project:(x,y)=>({x:x*10+100,y:y*10+200}),actorHeight:()=>54,readyImage:p=>({image:{...im,...(/\/hit\//.test(p)?{naturalWidth:384,width:384}:{}),src:p}}),drawHero(){cmds.push(body);if(o.dup)cmds.push(copy);}};
  vm.createContext(sb);vm.runInContext(C('attack-anim-r143.js'),sb);return{sb,cmds,body};}
 {let t=runA({enemies:[{x:-2,y:0,hp:5}]});const seq=[];for(const a of [.24,.2,.16,.12,.08,.04]){t.cmds.length=0;t.body.sourcePath='assets/r130/lauren/g-e.webp';t.sb.player.attackAnim=a;t.sb.drawHero();seq.push(t.body.sourceRect?t.body.sourceRect[0]/192:-1);}
  ok('basic attack walks through the 6 frames in order (wind-up, strike, recovery)',seq.join()==='0,0,1,3,4,5',seq.join());
@@ -40,5 +40,13 @@ function runA(o){const cmds=[];const body={kind:'image',owner:{kind:'hero'},sour
 {let t=runA({hero:'hwando',src:'assets/r93/idle/idle-hwando-s.png',dup:true});t.sb.drawHero();
  ok('hwando idle uses the white sheet (first attack frame), old double body removed',/r143\/attack\/hwando\/attack-/.test(t.body.sourcePath)&&t.body.sourceRect[0]===0&&t.cmds.length===1,t.body.sourcePath+' '+t.cmds.length);}
 {let t=runA({hero:'hwando',src:'assets/r130/hwando/walk-e.webp'});t.body.r121Walk=true;t.sb.drawHero();ok('walking (R119 walk cycle) is left alone',t.body.sourcePath==='assets/r130/hwando/walk-e.webp');}
+{let t=runA({enemies:[{x:2,y:0,hp:5}]});const seq=[];for(const a of [.3,.2,.1]){t.cmds.length=0;t.body.sourcePath='assets/heroes/normalized/actions-v3126/lauren-hurt-right.webp';t.sb.player.hurtAnim=a;t.sb.drawHero();seq.push(/r143\/hit\/lauren\/hit-e\.webp$/.test(t.body.sourcePath)?t.body.sourceRect[0]/192:-1);}
+ ok('hit plays the 2-frame hit sheet facing the attacker (impact, recoil)',seq.join()==='0,0,1',seq.join());}
+{let t=runA({hero:'hwando',src:'assets/hero-authored-v314rc5/hwando-action-atlas.png'});t.sb.player.hurtAnim=.2;t.sb.drawHero();ok('hwando hit (no hit sheet): white sheet ready stance instead of the old tan atlas',/r143\/attack\/hwando\//.test(t.body.sourcePath)&&t.body.sourceRect[0]===0,t.body.sourcePath);
+ t.cmds.length=0;t.body.r143Attack=false;t.body.sourcePath='assets/hero-authored-v314rc5/hwando-action-atlas.png';t.sb.player.hurtAnim=0;t.sb.player.skillAnim=.3;t.sb.drawHero();ok('hwando skill: white attack sheet 3rd frame (R130 mapping)',/r143\/attack\/hwando\//.test(t.body.sourcePath)&&t.body.sourceRect[0]===2*192,t.body.sourcePath+' '+t.body.sourceRect);
+ t.cmds.length=0;t.body.r143Attack=false;t.body.sourcePath='assets/hero-authored-v314rc5/hwando-walk-atlas.png';t.sb.player.skillAnim=0;t.sb.player.dashAnim=.2;t.sb.drawHero();ok('hwando dash: white walk sheet 4th frame',/r130\/hwando\/walk-/.test(t.body.sourcePath)&&t.body.sourceRect[0]===3*192,t.body.sourcePath);
+ t.cmds.length=0;t.body.r143Attack=false;t.body.sourcePath='assets/hero-authored-v314rc5/hwando-action-atlas.png';t.sb.player.dashAnim=0;t.sb.player.ultimateAnim=.5;t.sb.drawHero();ok('hwando ultimate keeps its own art (built-in effect)',t.body.sourcePath==='assets/hero-authored-v314rc5/hwando-action-atlas.png');}
+{const crypto=require('crypto');let all=true;for(const h of ['lauren','seoha','neon','michaela','hunter','slayer','gunner']){const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text','assets','r143','hit',h,'index.json'),'utf8'));for(const d of ['s','se','e','ne','n']){const r=idx.directions[d];if(r.frames!==2||crypto.createHash('sha256').update(fs.readFileSync(path.join(R,'runtime-text',r.path))).digest('hex')!==r.sha256)all=false;}}
+ ok('hit sheets: 7 heroes x 5 directions, 2 frames, hashes recorded',all);}
 ok('workflow runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r143/feet-intro-cpu-check.cjs'));
 const fail=checks.filter(c=>!c.pass);console.log(JSON.stringify({status:fail.length?'FAIL':'PASS',passed:checks.length-fail.length,total:checks.length,fail},null,1));process.exit(fail.length?1:0);

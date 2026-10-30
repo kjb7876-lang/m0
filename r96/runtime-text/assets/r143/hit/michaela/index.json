@@ -1,0 +1,113 @@
+{
+ "hero": "michaela",
+ "action": "hit",
+ "order": "피격 충격 → 뒤로 젖힘 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "맞았을 때 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/hit/michaela/hit-s.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-hit-s.png",
+    "sha256": "d6dbd4752898078238721aa4ec7ead09710cdc996053ac5e0f23409ceb4863f4",
+    "bytes": 44500
+   },
+   "sha256": "8613abcd652192ddc8b4b01fb9c02384a5d14e27b486aead29c890f9cc0dd8e4",
+   "bytes": 14256
+  },
+  "se": {
+   "path": "assets/r143/hit/michaela/hit-se.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-hit-se.png",
+    "sha256": "45a0749f61a48aa2ebb504a76de62f5db9df0f6f0a4138479df27139d1ed105b",
+    "bytes": 40057
+   },
+   "sha256": "de1720e267c15d2ad392395b10827fb3a1c70351bec3d6bb7732a7fe9737d773",
+   "bytes": 13552
+  },
+  "e": {
+   "path": "assets/r143/hit/michaela/hit-e.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-hit-e.png",
+    "sha256": "a10d159c2c27a88126d514cacfdfc0e24b56d3f41c38495777c2c462777e5c08",
+    "bytes": 37685
+   },
+   "sha256": "38d031cc1d2e3a75698e6f259d6abf5cdf37f969ccb1abfc86290784b8b3294c",
+   "bytes": 12522
+  },
+  "ne": {
+   "path": "assets/r143/hit/michaela/hit-ne.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-hit-ne.png",
+    "sha256": "88a3d3c0e2f02a78e806ccf9372115bc4718a327ac171ea34504113db4e2e05f",
+    "bytes": 40479
+   },
+   "sha256": "8b566fb64d48256e9acb2d1891f108bc85c09cccbbdbf54cf71870ea448543de",
+   "bytes": 14008
+  },
+  "n": {
+   "path": "assets/r143/hit/michaela/hit-n.webp",
+   "frames": 2,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-hit-n.png",
+    "sha256": "cc54d738a0154d797bcb3a73055e6964c85ff31798df0bd64e7fcf7be33f4c69",
+    "bytes": 43584
+   },
+   "sha256": "1b5dc18c9f193aa54a9b062b7e6ccc4247977d220c8e0be7fd382ac766bf68e8",
+   "bytes": 14298
+  }
+ }
+}
