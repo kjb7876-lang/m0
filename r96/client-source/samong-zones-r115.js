@@ -132,7 +132,12 @@
   dais(z,r,p){const rooms=[{x:6,y:6,w:19,h:19,kind:'hall',shape:p.square?null:'disc',name:p.name||z.title,wall:p.wall},{x:24,y:22,w:6,h:5,kind:'stair',name:'계단참'},{x:30,y:28,w:6,h:6,kind:'stair',name:'계단'},{x:36,y:34,w:p.aw||10,h:p.ah||9,kind:'room',name:p.ante||'앞방'}];
    return{rooms,links:[[1,0,3,'hv'],[1,2,3,'hv'],[2,3,3,'hv']],entry:{x:41.5,y:41.5},dais:{x:15.5,y:15.5},landings:[{x:33,y:31},{x:27,y:24.5}]};}};
  function roomWall(R){return R.wall||WALL[R.kind]||3.2;}
- function expand(z){if(!z.tpl)return z;const r=rng(hash(z.id)),T=TPL[z.tpl](z,r,z.p||{}),out={...z,...T};
+ // R139: 생존(뱀서류) 구역은 바닥 틀을 1.5배(넓이 2.25배)로 키운다 — 몰려드는 적 사이로 움직일 자리가 좁았다. 방 번호·연결·단서 방은 그대로.
+ const SURVIVAL_SCALE=1.5;
+ function scaleTpl(T,k){const P=v=>v&&Number.isFinite(v.x)?{...v,x:+(v.x*k).toFixed(2),y:+(v.y*k).toFixed(2)}:v,B=R=>({...R,x:Math.round(R.x*k),y:Math.round(R.y*k),w:Math.max(R.w,Math.round(R.w*k)),h:Math.max(R.h,Math.round(R.h*k))});
+  const out={...T,rooms:T.rooms.map(B),entry:P(T.entry),exit:P(T.exit),r139Scale:k};if(T.cuts)out.cuts=T.cuts.map(c=>({...c,x:Math.round((c.x+c.w/2)*k-c.w/2),y:Math.round((c.y+c.h/2)*k-c.h/2)}));
+  for(const key of['save','dais'])if(T[key])out[key]=P(T[key]);for(const key of['chests','landings'])if(T[key])out[key]=T[key].map(P);return out;}
+ function expand(z){if(!z.tpl)return z;const r=rng(hash(z.id)),T0=TPL[z.tpl](z,r,z.p||{}),T=z.kind==='combat'?scaleTpl(T0,SURVIVAL_SCALE):T0,out={...z,...T};
   // 단서는 입구가 아닌 방을 돌아가며 놓는다(방 가운데 근처, 바닥 위).
   const pool=(T.clueRooms||[]).length?T.clueRooms:out.rooms.map((_,i)=>i);
   if(z.p?.wall)for(const R of out.rooms)R.wall=z.p.wall;

@@ -63,12 +63,14 @@
 
  // ---- ⑥ 길잡이·반자동 자동 공명 방어 ------------------------------------------------------------
  const auto7={next:0,until:0,ours:false};
- function enemiesNear(r){return (room?.enemies||[]).some(e=>e.hp>0&&e.spawnState!=='hidden'&&e.spawnState!=='dead'&&Math.hypot(e.x-player.x,e.y-player.y)<r);}
+ // 싸움 중일 때만: 공격·조준 중인 적, 자기 어그로 거리(최대 7칸) 안의 적, 또는 방금(2.5초) 맞았을 때. 멀리 서 있는 적만 있으면 쓰지 않는다.
+ let hurtAt=-99;
+ function fighting(){if(T()-hurtAt<2.5)return true;return (room?.enemies||[]).some(e=>{if(!(e.hp>0)||e.visible===false||['hidden','dead','inactive','disabled','despawned'].includes(e.spawnState))return false;const d=Math.hypot(e.x-player.x,e.y-player.y);return d<10&&(!!e.attack||e.rangedWindup>0||d<Math.min(7,Number(e.combatProfile?.aggro)||6));});}
  function autoGuardTick(){if(!prefs.autoGuard||!solo()||!live())return;const t=T(),on=(typeof guide!=='undefined'&&guide)||(typeof auto!=='undefined'&&auto);
   if(auto7.ours&&(t>=auto7.until||!on)){auto7.ours=false;if(player.guard&&typeof guardEnd==='function')guardEnd();return;}
   if(!on||auto7.ours||player.guard||typeof guardStart!=='function')return;
   if(!auto7.next)auto7.next=t+7;if(t<auto7.next)return;auto7.next=t+7;
-  if(regionById?.[zone]?.safe||!enemiesNear(10))return;auto7.ours=true;auto7.until=t+.7;guardStart();stats.autoGuards++;}
+  if(regionById?.[zone]?.safe||!fighting())return;auto7.ours=true;auto7.until=t+.7;guardStart();stats.autoGuards++;}
 
  // ---- ⑦ 블링크로 얇은 벽 넘기 -------------------------------------------------------------------
  // 원래 블링크와 같은 방향 규칙: 방향키 → 경로 다음 점·가까운 적(15칸) → 바라보는 쪽
@@ -93,7 +95,7 @@
    try{if(prefs.midbossScale&&midClass(e)&&Number.isFinite(ds)){e.defScale=ds*.7;scaled=true;stats.midbossDraws++;}
     if(prefs.faceAlways&&typeof player==='object'&&player&&inFight(e)){const want=toward(e);if(['left','right'].includes(want)&&e.direction!==want){e.direction=want;turned=true;stats.faced++;}}}catch(err){fail(err);}
    try{return base.apply(this,arguments);}finally{if(scaled)e.defScale=ds;if(turned)e.direction=dir;}};}
-  if(typeof hurt==='function'){const base=hurt;hurt=function(value,source,...a){let added=false;
+  if(typeof hurt==='function'){const base=hurt;hurt=function(value,source,...a){let added=false;if(value>0)hurtAt=T();
    if(solo()){swapBind(source);
     // R58 은 맞힌 물체에 상태가 없으면 적의 공격·차례(affliction(owner,step))에서 골라 속박이 섞였다 — 그 값을 미리 보고 속박이면 바꿔 넣는다.
     try{const r58=R58(),owner=ownerOf(source);if(prefs.bindRootOnly&&r58&&owner&&!rootBoss(owner)&&source&&typeof source==='object'&&!source.r58Affliction){

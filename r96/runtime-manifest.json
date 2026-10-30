@@ -7609,8 +7609,8 @@
     },
     {
       "path": "assets/r106/fx/meta.json",
-      "bytes": 6601,
-      "sha256": "cc1be57217ae4e5306f57d751b0fc42e9febb527cd9af92c5feb56892fcc9eb3"
+      "bytes": 6894,
+      "sha256": "3cab6fc3ee677b8b719a48ff7f99b96d2ee3dd01db63bfe80896cf732d6910fb"
     },
     {
       "path": "assets/r106/fx/orb.webp",
@@ -7641,6 +7641,11 @@
       "path": "assets/r106/fx/rune.webp",
       "bytes": 101340,
       "sha256": "84fb8ed6c3750a349f29e7af7f8151bac90d5b64d326d6f5cb77c70d5392b62d"
+    },
+    {
+      "path": "assets/r106/fx/runecross.webp",
+      "bytes": 68342,
+      "sha256": "cae98ce3970dfc8df89cdda75b7e61e0e247a47688b32ff8ce36116feb815d0b"
     },
     {
       "path": "assets/r106/fx/shard.webp",
@@ -19259,8 +19264,8 @@
     },
     {
       "path": "combat-r137.js",
-      "bytes": 16782,
-      "sha256": "6a92fe4d99d0ef21e58df779d45c4e81d4fd6f688b0571ccf124e59b82a4c7be"
+      "bytes": 17201,
+      "sha256": "34a75ef851839b6cb37eefe7d14aebf451f3716784a79a14e97c5830870e2415"
     },
     {
       "path": "combat-r98.js",
@@ -19389,8 +19394,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 20916,
-      "sha256": "a62daa22dfb008d15a25aa6f2d84e9da7504296534ee52257612d809674514bf"
+      "bytes": 20914,
+      "sha256": "cf14c8bce214d1d2cc2adf12a809ae9dfb24ac5b09ee608ea71df6f9c9552116"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -19399,13 +19404,13 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 30497,
-      "sha256": "3ee8d0db1dd8bfd6824eb556ea6144089a883d6f6b1db13e73d6315cc4fe6242"
+      "bytes": 30755,
+      "sha256": "b63f178e1317e64c41bc70d2c8e467af2787d9b4533503407f4e4fa45aaebe27"
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 11107,
-      "sha256": "6b131a59798e666bafa35f3c5c87741037532cf4e062570a47ea05a7dd6f63f0"
+      "bytes": 11141,
+      "sha256": "353305f8d4c82539273bb763db918a86bc6ac0501bb1491f9feca251b871a7b6"
     },
     {
       "path": "growth-r103.js",
@@ -19414,8 +19419,8 @@
     },
     {
       "path": "hero-fx-r102.js",
-      "bytes": 51252,
-      "sha256": "606a45b95d5b4adfffdc05c6c704bc1863fd8d95df5ce14bb2a3038c994c6924"
+      "bytes": 51256,
+      "sha256": "a12ef1d3a35fc1aa64e3945c7d2ba9021b1d2181cdc1a7de64e808cb23267c46"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -19464,8 +19469,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563249,
-      "sha256": "a6978b159b132d55dc7762a102767378331c6f0b29a11cdc295f7a363e370530"
+      "bytes": 6563293,
+      "sha256": "1118685f8822e1a88de313f58af6fc0b33384eaacebebd023adfe1c9ec04bef0"
     },
     {
       "path": "mobs-r109.js",
@@ -19539,8 +19544,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 64024,
-      "sha256": "f8636c037cc11b83d92292f2cbc19f1f80d05266515a0a3750d80a730a97c8d6"
+      "bytes": 67439,
+      "sha256": "fb09fa31739d4f73e736b50841c7ca41bf83a720c3ff79a01a1bff82ad72177c"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -19583,14 +19588,19 @@
       "sha256": "9b1a36dcb6eb5066cb857c35787513b3eeb2aeb105487de335278ce0e615cecc"
     },
     {
+      "path": "samong-ult-r139.js",
+      "bytes": 4361,
+      "sha256": "f6e817b18371e23d54e1b1cd8cf76fbcf77c857f0c51c52786f3931c6616cdb7"
+    },
+    {
       "path": "samong-zones-r115-data.js",
       "bytes": 72743,
       "sha256": "ef68253e6c613b51148322f966c2bed37efc0eb051e1b66245fd9142fb4318ee"
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 40438,
-      "sha256": "3ffcb036ab27d3911b3fb498f5be7853282eb01fe897f42f3a55b9461bf20aa1"
+      "bytes": 41295,
+      "sha256": "3783499ad7e5226d9e1b77e8cae962ed8ef5758e039f8fd9db77858230151ec6"
     },
     {
       "path": "scene-props-r117.js",
@@ -19719,8 +19729,8 @@
     },
     {
       "path": "world-combat-r78.js",
-      "bytes": 20833,
-      "sha256": "8802b48d0be23275e93a47965bb786fbef95743e85531f75cea969e923693a70"
+      "bytes": 21086,
+      "sha256": "fccd4bcb6d7d675d9af7d2da63143bc3c4b25aa956380826d774f04c819b4cef"
     },
     {
       "path": "world-combat-v4-compat.js",
@@ -19773,9 +19783,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3954,
-  "totalBytes": 779462852,
-  "webHTMLSha256": "a6978b159b132d55dc7762a102767378331c6f0b29a11cdc295f7a363e370530",
+  "fileCount": 3956,
+  "totalBytes": 779541130,
+  "webHTMLSha256": "1118685f8822e1a88de313f58af6fc0b33384eaacebebd023adfe1c9ec04bef0",
   "largest": [
     {
       "path": "index.html",

@@ -313,6 +313,18 @@
    "use": "circuit circle (draw squashed for the ground)",
    "bytes": 98608,
    "sha256": "c90433158eec639d8ac64b73efc456eb505420f54e2572417d922d83ed523bb5"
+  },
+  "runecross": {
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "frames": 1,
+   "use": "R139 lauren ground marker: rune ring with a cross (scripts/r139-rune-cross.py)",
+   "bytes": 68342,
+   "sha256": "cae98ce3970dfc8df89cdda75b7e61e0e247a47688b32ff8ce36116feb815d0b"
   }
  }
 }

@@ -68,7 +68,7 @@ for(const[k,l]of chapters){const ei=SM.episodes.findIndex(e=>e.key===k);for(cons
  check(z.id+' wall heights vary and indoor walls stand above the 2.2 door (R116 lower walls)',new Set(hs).size>=4&&L.walls.filter(w=>!w.r115Jamb&&w.r115?.base>2).every(w=>w.height>=2.5),[...new Set(hs)].join(','));
  check(z.id+' backdrop terrain fills the ring around the floor and never covers a floor cell',L.backdropRects?.length>0&&!L.backdropRects.some(b=>L.floorCells.some(([x,y])=>y===b.y&&x>=b.x&&x<b.x+b.width)),String(L.backdropRects?.length));
  if(L.samongR115.doors)check(z.id+' doors have two jambs taller than the door (outdoor: none)',(z.outdoor?jam.length===0:jam.length===2*L.samongR115.doors)&&jam.every(w=>w.height>2.7));
- check(z.id+' size stays mobile-friendly (≤ 66×66 with the backdrop ring, ≤ 1400 floor cells)',L.bounds[2]<=66&&L.bounds[3]<=66&&L.floorCells.length<=1400,L.bounds+' '+L.floorCells.length);}}
+ {const big=z.kind==='combat',M=big?100:66,N=big?3200:1400;check(z.id+' size stays bounded (≤ 66×66 / 1400 cells; R139 survival zones x1.5: ≤ 100×100 / 3200)',L.bounds[2]<=M&&L.bounds[3]<=M&&L.floorCells.length<=N,L.bounds+' '+L.floorCells.length);}}}
 // ---- R103 흐름 ----
 const r103=fs.readFileSync(path.join(SRC,'samong-r103.js'),'utf8');
 check('save keeps zone fields and migrates old stages into the chapter zones',/s\.zone=typeof v\.zone==='string'/.test(r103)&&/ZN\(\)\.migrate\(EP\[s\.ep\]\.key,s\.stage\)/.test(r103)&&/zone:null,zoneDone:\[\],zoneRead:\[\],zoneSolve:\{\}/.test(r103));

@@ -3164,7 +3164,9 @@
     "drive-props-r138.js",
     "assets/r138/props/bones.webp",
     "assets/r138/props/window.webp",
-    "assets/r138/props/index.json"
+    "assets/r138/props/index.json",
+    "samong-ult-r139.js",
+    "assets/r106/fx/runecross.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4239,5 +4241,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1e65383c2d2f5aa62a83385a6dd59e14a5a8415b0075e401cda5b96b47f3292f"
+  "runtimeManifestSHA256": "6b443085358e0b66c30b61e49b3a5a1e0633f063192581422b1e89ff497e34c7"
 }
