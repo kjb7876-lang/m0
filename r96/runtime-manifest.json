@@ -10788,6 +10788,21 @@
       "sha256": "ff92aa7922f51a6b72d9744b777d775163781e9eecfc63a6de2822dcd591cdd2"
     },
     {
+      "path": "assets/r138/props/bones.webp",
+      "bytes": 41698,
+      "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
+    },
+    {
+      "path": "assets/r138/props/index.json",
+      "bytes": 2622,
+      "sha256": "e0f8295e16413b18068ca09e5b3fd1020a3d722c2a58a49dca17a371a9faed33"
+    },
+    {
+      "path": "assets/r138/props/window.webp",
+      "bytes": 67922,
+      "sha256": "2095970f41f08193b13a407450955fe0fd88e6b60d60a4fa6df166caf2d899da"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19323,6 +19338,11 @@
       "sha256": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
     },
     {
+      "path": "drive-props-r138.js",
+      "bytes": 5512,
+      "sha256": "87090ea33918905b2f1365e103558fc83bce931f8e1da3d144af87b2b968771c"
+    },
+    {
       "path": "dynamic-vfx-r84.js",
       "bytes": 12829,
       "sha256": "960343e5c0744fccbc56d8527c7095b1fcb4cfb09ad0e03bbc24c6a06dcc86fa"
@@ -19444,8 +19464,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563204,
-      "sha256": "1d931f57e90002bb3ac5cf40074bdb402c7a5f23ce7190ce40286cf92a3aae07"
+      "bytes": 6563249,
+      "sha256": "a6978b159b132d55dc7762a102767378331c6f0b29a11cdc295f7a363e370530"
     },
     {
       "path": "mobs-r109.js",
@@ -19753,9 +19773,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3950,
-  "totalBytes": 779345053,
-  "webHTMLSha256": "1d931f57e90002bb3ac5cf40074bdb402c7a5f23ce7190ce40286cf92a3aae07",
+  "fileCount": 3954,
+  "totalBytes": 779462852,
+  "webHTMLSha256": "a6978b159b132d55dc7762a102767378331c6f0b29a11cdc295f7a363e370530",
   "largest": [
     {
       "path": "index.html",

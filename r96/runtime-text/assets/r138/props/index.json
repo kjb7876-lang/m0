@@ -1,0 +1,92 @@
+{
+ "revision": "R138",
+ "props": {
+  "bones": {
+   "path": "assets/r138/props/bones.webp",
+   "size": [
+    189,
+    512
+   ],
+   "bytes": 41698,
+   "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049",
+   "use": "dist01 거미동굴 천장에 매달린 뼈(에피소드1A L37), 비충돌 장식",
+   "source": {
+    "drive": "StoryWorld-spider-cave-hanging-bones-static-candidate.zip",
+    "driveId": "1P0OUKt9QJowwBlHqESwE3v4xGsap9d89",
+    "file": "exec-1f4c05ec-5e9f-4ed1-930a-668b9a6f4b83.png",
+    "sha256": "78f2ff827ccffcf41b646b3802a5d5c43e3e74a902363e3e76b7b85675dc701b",
+    "bytes": 1599712,
+    "size": [
+     1024,
+     1536
+    ],
+    "crop": [
+     257,
+     2,
+     796,
+     1460
+    ]
+   }
+  },
+  "window": {
+   "path": "assets/r138/props/window.webp",
+   "size": [
+    344,
+    512
+   ],
+   "bytes": 67922,
+   "sha256": "2095970f41f08193b13a407450955fe0fd88e6b60d60a4fa6df166caf2d899da",
+   "use": "dist00 뒷벽 부착 창과 얼굴 없는 성상(에피소드1A L28), 비충돌·비상호작용 장식",
+   "source": {
+    "drive": "StoryWorld-corridor-window-faceless-static-candidate.zip",
+    "driveId": "14nRYLGrxTB5RWxxlVyiY5fMh5nEuv7F9",
+    "file": "exec-2a15a13c-f7bf-4346-8dd2-a3af80c33ad3.png",
+    "sha256": "765b179716f473c0f46cb6983f24a9da7b3fffd114a17452f7e2f04d114b9a73",
+    "bytes": 1433727,
+    "size": [
+     1367,
+     1150
+    ],
+    "crop": [
+     324,
+     5,
+     1085,
+     1137
+    ]
+   }
+  }
+ },
+ "held": {
+  "spider-cave-low-rock-corner": {
+   "driveId": "12suhKjR46n_IsGWF2wQGXXuQXisCxtRm",
+   "reason": "구조물(충돌·통행 폭·끝단 접합 미검증, README: 바닥·통행로 위 임의 적용 금지)"
+  },
+  "M004-flight-up/mid/down": {
+   "driveIds": [
+    "16vKY3QCyI-BC4jmwUwodOz75k7ZhaLqr",
+    "1kesqWgxqGICT24xESKUFtmDWzYLKBBhW",
+    "1qnnv2yNO-prA8yLT0CvhyqSXzo4bOazL"
+   ],
+   "reason": "비행 키 후보(루프·피벗·색 튐 미검증, README: 완성 비행 아님)"
+  },
+  "M004-three-key-review": {
+   "driveIds": [
+    "1H1diViUXe5xWMA1BaojpG-QtScI5Was9",
+    "17Bi2iljIxXXW7N5Gk8rLwssUSpd2Blw-"
+   ],
+   "reason": "검수용 미리보기(게임 자산 아님)"
+  },
+  "M002-frontleg-recovery": {
+   "driveId": "1DtDLEAdNuMdyfkFQy4RRKYieunY92dEP",
+   "reason": "단일 보행 키(8다리 루프·척도·피벗 미검증)"
+  },
+  "r74-root-tracker-low-windup2": {
+   "driveId": "1wGTfSzW9QCQDiOHulcDjksiPoa8uejf4",
+   "reason": "공격 준비 단일 키(README: 승격하지 않음)"
+  },
+  "M004-flight-render-review-aid": {
+   "driveId": "1vLED3dhOrKdQlcV1VtrRxbvgyoRRcTxw",
+   "reason": "NOT-runtime 표기"
+  }
+ }
+}
