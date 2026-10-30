@@ -8798,6 +8798,331 @@
       "sha256": "cba8dff00a6c223bb139b38987177a7cb4259b86a944a48c84357870d41063e0"
     },
     {
+      "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
+      "bytes": 19332,
+      "sha256": "ecd2a8bd00076850a1a9a2cf75a69652bc95090d2a45c82d7928b92ab635ee6d"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-attack-front.webp",
+      "bytes": 18756,
+      "sha256": "62d63f46bba584d0b792f6e377a3b16e794e028bcebcae24884be8dcdd30fbf7"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-attack-left.webp",
+      "bytes": 17722,
+      "sha256": "22f6e02451b07dd7fbff1991bd36fa7baf5da5d2ecd5a87d544ffc839bf35f1f"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-attack-right.webp",
+      "bytes": 17702,
+      "sha256": "923bc306995eac3065c35bc11e1e5e2e2369b6b53c4f90c9440c54a87370a5c8"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-dash-back.webp",
+      "bytes": 20900,
+      "sha256": "258253fe151df68a81652f7d2897ab60d5f615c0a8ac7ab45d2c5cd9598315d1"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-dash-front.webp",
+      "bytes": 19304,
+      "sha256": "8a10d762e5373c8c5d08e25b2fc3fa3d048ba103af731cc4e9e89976e39a74a4"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-dash-left.webp",
+      "bytes": 16834,
+      "sha256": "d970e944cc9bef87c347511d84e0c80b533ca3a2582287fa245ad665ebaf2599"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-dash-right.webp",
+      "bytes": 16878,
+      "sha256": "482bd70de07e1c74119883ecbd4949ba531d481e97accc5906238959e6305273"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-guard-back.webp",
+      "bytes": 17926,
+      "sha256": "78fbb5ae4556d6b7a5b1c367d7f421bbdf38d7a834bb8def6771cca6943af551"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-guard-front.webp",
+      "bytes": 14940,
+      "sha256": "35d14a86835d1b88d794125dec601539f40b34fed4048cec1b64c43c4830008f"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-guard-left.webp",
+      "bytes": 14452,
+      "sha256": "ed25e93a67d807f60ed6ae6583035e98e8521107f6b9fc5773bea066d88d8002"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-guard-right.webp",
+      "bytes": 14420,
+      "sha256": "b0d3c3ac08e301300b780cacd78cddaa2c1f6dac74b69c1f0deb97dbf15b3180"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-skill-back.webp",
+      "bytes": 19890,
+      "sha256": "b3c3f4915f563e467fea057666b92b39d4f44350dfff4ce74e4ea23e62fb276f"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-skill-front.webp",
+      "bytes": 19386,
+      "sha256": "a445a7a59fde38852b5d1d08bd4bb10d40342baf2d6e395aaf58ce7ba26efe6c"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-skill-left.webp",
+      "bytes": 17100,
+      "sha256": "aeb049a0bc8983e0ddf6718ea423d3a94af19dd349df56e1bfa82e4afbfe9ce7"
+    },
+    {
+      "path": "assets/r128/gunner/actions-consistent-gunner-skill-right.webp",
+      "bytes": 17264,
+      "sha256": "59f617938d9a97883a5c431665fdb665370c6c28866e59af5163db41c5ba948c"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-hurt-back.webp",
+      "bytes": 12626,
+      "sha256": "6bdb423fdb21b1422aa6b19ba787a1cf974342346747e7efdf813a6b40918cd9"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-hurt-front.webp",
+      "bytes": 12580,
+      "sha256": "e45e480eb68c50f3308ba68efd155c271b82546957633d306f2347e4624a6460"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-hurt-left.webp",
+      "bytes": 12812,
+      "sha256": "6b9f1d97b9421474caaf747928caca2c63f33b44bc616d6d611d248684062246"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-hurt-right.webp",
+      "bytes": 12870,
+      "sha256": "a582e92659a136f9e7f6c4fe16f8d7587ef69efbf4de0e6f3a7fa7f10c7c74e9"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-move-back.webp",
+      "bytes": 13188,
+      "sha256": "7090f57ad60e0eec747e8dc10bd6ca208fb87b0da1738345a04032f43a3e4b9e"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-move-front.webp",
+      "bytes": 14226,
+      "sha256": "4a5873a80ca6ac6d3ebdebc370c40bbf6e11d4933bbb23caf9dde85162969df4"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-move-left.webp",
+      "bytes": 11540,
+      "sha256": "980f4f50ec200a1d104643a56870d540d6298e1d648b3f10cf5999e98247edcf"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-move-right.webp",
+      "bytes": 11326,
+      "sha256": "f7f3e33e261c1f23f617088e04606ef06834891eef2a10522b8aa47474ed4b75"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-back.webp",
+      "bytes": 12152,
+      "sha256": "f6e812c53d5b6910cc7952940f465a889c20085d99982fdda383ab594e0cd5d8"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-front.webp",
+      "bytes": 12838,
+      "sha256": "afdf466a93d9bca81ffb0724f96c78e8edd281803affa8aadf371a3f75bb0d40"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-left.webp",
+      "bytes": 11840,
+      "sha256": "6244099729baf10ca9ffd772b6a6c84240fc008498ff9ee6e31284889889ed16"
+    },
+    {
+      "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-right.webp",
+      "bytes": 11440,
+      "sha256": "55fc1ee2685300acb467600d34cc1cf0f7d7349e805b738ca533725c2c962a84"
+    },
+    {
+      "path": "assets/r128/gunner/g-aim_back.webp",
+      "bytes": 18000,
+      "sha256": "9717a8164624c7f5b22b9b0744c3bab6e687edc0399cec040a91323b482d17a5"
+    },
+    {
+      "path": "assets/r128/gunner/g-aim_front.webp",
+      "bytes": 17440,
+      "sha256": "bf3e34c274c5ac7c4bb46b42232385b3c88db22435fa0d5536e717d07878c06f"
+    },
+    {
+      "path": "assets/r128/gunner/g-attack_left.webp",
+      "bytes": 16536,
+      "sha256": "d103d5114125dafd37d30f0f5731b740244d76a06d030fc82cd9c8b8c98768ac"
+    },
+    {
+      "path": "assets/r128/gunner/g-attack_right.webp",
+      "bytes": 16696,
+      "sha256": "b5dc6b7d84d807d908e9562157d31dbc1d1e7d9a5627dfe72e7d21ff95748d4d"
+    },
+    {
+      "path": "assets/r128/gunner/g-dash_left.webp",
+      "bytes": 8984,
+      "sha256": "89f7bd4109005add2fa525344cf62e1883beea39bebbfdc7a549443f9c8bd675"
+    },
+    {
+      "path": "assets/r128/gunner/g-dash_right.webp",
+      "bytes": 9016,
+      "sha256": "7f0fa8d97b33353ed67a4027c226de27512d3738c91792a269f705a661420d2f"
+    },
+    {
+      "path": "assets/r128/gunner/g-e.webp",
+      "bytes": 20614,
+      "sha256": "a7c9bac5f8e41fad33f5232b9880b8ae01cf23613083b66bc3786e88f1f4da89"
+    },
+    {
+      "path": "assets/r128/gunner/g-guard_left.webp",
+      "bytes": 14522,
+      "sha256": "d6fcc3199f79477e6e7f5c93e7855ecaa10e292b2ffce5cef367a3ed5be0b480"
+    },
+    {
+      "path": "assets/r128/gunner/g-guard_right.webp",
+      "bytes": 14440,
+      "sha256": "0304cee1da6bf7f0fdf17ed3c74d6bdf25cc3df302f9f9af014fdf10975eb9ae"
+    },
+    {
+      "path": "assets/r128/gunner/g-n.webp",
+      "bytes": 30802,
+      "sha256": "9e2382de17cb8f6cd2db56c1fdb7eb119b16e11f51cc68526ac9be3ab18ed8cf"
+    },
+    {
+      "path": "assets/r128/gunner/g-ne.webp",
+      "bytes": 27994,
+      "sha256": "766c648fee29f33968698c8c80285377081eb4a9296824d3c7dbf8854cadb80d"
+    },
+    {
+      "path": "assets/r128/gunner/g-nw.webp",
+      "bytes": 28546,
+      "sha256": "b8507750c148d5c270b5fd0f61c63294235ced5aa1b28b86b6774813b65f09ff"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_aim.webp",
+      "bytes": 15924,
+      "sha256": "2aadaf37b23f928d9fa1e4fbfa99c68b43bd828d84dabc8e5a7b7da2ba824022"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_aimup.webp",
+      "bytes": 18764,
+      "sha256": "8a569b30a49ece7bcd4b20d32ffc5e4d1b9e45d315630c4a2d839d634953bdde"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_crouch.webp",
+      "bytes": 11098,
+      "sha256": "884ff4312c83137260c53caaab206089358efa84da0435c642917991421e9a40"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_idle.webp",
+      "bytes": 17734,
+      "sha256": "e3edac8677f5ecccb9498dcc41e8d025e3eedab198c3f83fa0119ddd8927e5a7"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_roll.webp",
+      "bytes": 9016,
+      "sha256": "7f0fa8d97b33353ed67a4027c226de27512d3738c91792a269f705a661420d2f"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_run1.webp",
+      "bytes": 15678,
+      "sha256": "3ab94a1b474e3a26488e2dac496803f46f629b6c69beeb47a6691617c740d3a3"
+    },
+    {
+      "path": "assets/r128/gunner/g-player_run2.webp",
+      "bytes": 17174,
+      "sha256": "69ac5572cd9a5f40e0f1e16631a9ee2128dabbe1f10148c721bcec034fbd283f"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_back_a.webp",
+      "bytes": 19776,
+      "sha256": "7f9a8ecda98875453d0e2c72511daa6f511ac75c2c7ffb77f9f48378d4ffbea4"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_back_b.webp",
+      "bytes": 20138,
+      "sha256": "dab36a05195659c5004df05c86a69cd345c48fc3ef74530abc51a81f3d1c24c8"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_front_a.webp",
+      "bytes": 18842,
+      "sha256": "35c73ba1e2efafeb45acd4d3a358c9892a70dba3378a1d0a1187f8578345ae03"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_front_b.webp",
+      "bytes": 18890,
+      "sha256": "0f46370b632a074f4533c8dab334aec6c90eaebe1c6c2f047d8a0b1fd5f8cf1f"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_left_a.webp",
+      "bytes": 15726,
+      "sha256": "93a00922296a1f179bacc0f7f5eb1758b6ea2257dbce46743fe5fe4e2703709d"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_left_b.webp",
+      "bytes": 17238,
+      "sha256": "6df9046dd966aacdb7f90bc848999c2ffba90157d96ad9d3908e98b909540680"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_right_a.webp",
+      "bytes": 15678,
+      "sha256": "3ab94a1b474e3a26488e2dac496803f46f629b6c69beeb47a6691617c740d3a3"
+    },
+    {
+      "path": "assets/r128/gunner/g-run_right_b.webp",
+      "bytes": 17174,
+      "sha256": "69ac5572cd9a5f40e0f1e16631a9ee2128dabbe1f10148c721bcec034fbd283f"
+    },
+    {
+      "path": "assets/r128/gunner/g-s.webp",
+      "bytes": 30848,
+      "sha256": "7ef5f90b0b4d2d033397e11deb0b2737eaf04495baaa878de5993b029c114f6d"
+    },
+    {
+      "path": "assets/r128/gunner/g-se.webp",
+      "bytes": 20280,
+      "sha256": "35ca60dccf5bbe65e8f1076e71683d0cdc2eadc30657222ceede5492bf4e9790"
+    },
+    {
+      "path": "assets/r128/gunner/g-sw.webp",
+      "bytes": 20856,
+      "sha256": "327b9454b1ef6f4959f9fcf82f7d263f5bd8ab763c17c08cb86aed759a4db621"
+    },
+    {
+      "path": "assets/r128/gunner/g-w.webp",
+      "bytes": 20860,
+      "sha256": "051d933d37a3017e64ef40dc494546cf78ec9f2bf2e4c7d7d011259f8b5fb368"
+    },
+    {
+      "path": "assets/r128/gunner/index.json",
+      "bytes": 20808,
+      "sha256": "bbc6f961eedd21d1455b25cf1adee7a25cdd6c629d2954b86cd6ed73853c9250"
+    },
+    {
+      "path": "assets/r128/gunner/walk-e.webp",
+      "bytes": 53476,
+      "sha256": "2f7a1529dbf81d6adfb5e08443b65d1395fd3db51790c261f05ab86d729e28fe"
+    },
+    {
+      "path": "assets/r128/gunner/walk-n.webp",
+      "bytes": 53936,
+      "sha256": "1fbc97290895c07476d7ae0d226f60359da9e0722700087181fa21b882df562f"
+    },
+    {
+      "path": "assets/r128/gunner/walk-ne.webp",
+      "bytes": 57616,
+      "sha256": "00d957169db7546cf823c35f1e69d4ade88eac539e596ca549c9b0030a9bf5f5"
+    },
+    {
+      "path": "assets/r128/gunner/walk-s.webp",
+      "bytes": 54812,
+      "sha256": "0635254244db6c74639d4e24f41d95aaa8def602147f45f5dc96fb7ff0c00f55"
+    },
+    {
+      "path": "assets/r128/gunner/walk-se.webp",
+      "bytes": 50694,
+      "sha256": "22daf1458bc5f3ff02290a4d12eac5ff37801aee26ed9a571dba06e2716c6c71"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -17644,8 +17969,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 26685,
-      "sha256": "feccfaa0badb14ca8da3fb9c95597557e64a56d258680d697dcdba1a42fa2b1a"
+      "bytes": 27998,
+      "sha256": "a6e8278a35ac4791ce1f68bdd0108f949546d4593db13cf9ccd5d6c6a2899f75"
     },
     {
       "path": "visual-r90-world.js",
@@ -17758,8 +18083,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3551,
-  "totalBytes": 767758092,
+  "fileCount": 3616,
+  "totalBytes": 769048275,
   "webHTMLSha256": "2359c46dbe66154b8e9c9f0223ad7da1361e327527cc378e04ababe3c71280fa",
   "largest": [
     {

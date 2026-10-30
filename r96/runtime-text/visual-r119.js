@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true,gunnerHit:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle','gunnerHit'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true,gunnerHit:true,gunnerSheet:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle','gunnerHit','gunnerSheet'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -22,9 +22,13 @@
   // R121: 기억사수 동작 프레임 중 흰 스티커 테두리·검은 번짐이 있는 세대를 정리한 사본(scripts/r121-gunner-clean.py)으로 바꿔 8방향 그림과 화풍을 맞춘다.
   ['aim_back','aim_front','attack_left','attack_right','guard_left','guard_right','player_aim','player_aimup','player_crouch','player_idle','player_run1','player_run2','run_back_a','run_back_b','run_front_a','run_front_b','run_left_a','run_left_b','run_right_a','run_right_b'].map(n=>['assets/heroes/normalized/gunner/'+n+'.webp','assets/r121/heroes/gunner/'+n+'.webp']))));// R119: 윤서하·네온·미카엘라·헌터도 북쪽이 정면에서 무기를 치켜든 그림이라 같은 방식으로 뒷모습 교체
  //    원래 그림이 캐시에 정상으로 올라온 뒤에 새 그림을 따로 받아, 다 받아지면 같은 캐시 칸의 그림만 바꾼다(실패하면 원래 그림 유지).
+ // R128: 기억사수를 Gemini 시트(Drive StoryWorld-HERO-gunner-sheet-20261030, 7.5~8등신 다크 판타지, scripts/r128-gunner-sheet.py)로 바꾼다.
+ //    기존 정지·동작 그림(만화체) 59장 각각을 같은 동작·방향 프레임으로 만든 대체본(같은 512 캔버스·발 위치·몸 키)으로 보낸다. 설정 gunnerSheet.
+ const G128=/^assets\/(?:hero_direction33[47]\/gunner\/|heroes\/normalized\/gunner\/|heroes\/normalized\/actions-(?:consistent|v3126)\/gunner-)[^/]+\.webp$/;
+ const swap128=k=>{if(!prefs.gunnerSheet||!G128.test(k))return null;const parts=k.split('/');return'assets/r128/gunner/'+parts[parts.length-2].replace('gunner','g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';};
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
-  try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=SWAP[k];
+  try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=swap128(k)||SWAP[k];
     if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;if(typeof imageCrop==='function'){r.r119Crop=r.crop;r.crop=imageCrop(im);}/* R121: 게임이 처음 그림으로 재 둔 내용 상자(crop)를 새 그림으로 다시 잰다 — 안 하면 바깥이 잘린다 */swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
   return row;};}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
@@ -76,12 +80,16 @@
  try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
  // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
+ // R128: 기억사수 걷기는 Gemini 시트의 5방향 8프레임 한 줄(왼쪽 3방향은 반전). gunnerSheet 를 끄면 R121 걷기.
+ const OWN_WALK128={gunner:{s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]}};
  const OWN_WALK={gunner:{s:['s',0],se:['e6',0],e:['e6',0],ne:['ne',0],n:['n',0],sw:['e6',1],w:['e6',1],nw:['ne',1]}};// R121: 옆은 윤서하 걸음을 따라 그린 6프레임(사용자)// R121: 아래 대각선은 4장 대각선이 어색해(사용자) 옆 8장으로 대체// 옆(e8)은 앞으로 나가는 다리가 무릎을 접어 들었다 내딛는 8프레임(2줄, 사용자 제안)
  // 지역을 옮기면 게임이 그림 기억(캐시)을 비워 걷기 그림도 사라졌는데, '이미 받음'으로 기억해 다시 받지 않아 정지 그림으로 이동했다
  // (사용자: 길잡이 켜면 그림 하나로 고정된 채 이동 — 길잡이가 지역을 자주 옮겨 더 자주 보였다). 준비 안 됐으면 1초마다 다시 받는다.
  const askAt=new Map(),wantImage=p=>{if(walkMissing.has(p)||typeof ensureImages!=='function')return;const t0=Date.now();if(t0-(askAt.get(p)||0)<1000)return;askAt.set(p,t0);Promise.resolve(ensureImages([p])).catch(()=>walkMissing.add(p));};
- const preloadWalk=()=>{try{if(typeof readyImage==='function'&&typeof player==='object'&&player?.hero&&OWN_WALK[player.hero])for(const v of new Set(Object.values(OWN_WALK[player.hero]).map(v=>'assets/r121/walk/walk-'+player.hero+'-'+v[0]+'.png')))if(!readyImage(v))wantImage(v);}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
- function sheetFor(hero,dir){const own=OWN_WALK[hero]?.[dir];if(own){const p='assets/r121/walk/walk-'+hero+'-'+own[0]+'.png';if(!walkMissing.has(p)){const n=own[0].endsWith('12')?12:own[0].endsWith('8')?8:own[0].endsWith('6')?6:4,cols=n===6?3:4;return{path:p,mirror:!!own[1],cols,rows:n/cols,frames:n,own8:n>4};}}
+ const ownWalk=hero=>prefs.gunnerSheet&&OWN_WALK128[hero]?{map:OWN_WALK128[hero],path:v=>'assets/r128/'+hero+'/walk-'+v+'.webp',r128:true}:OWN_WALK[hero]?{map:OWN_WALK[hero],path:v=>'assets/r121/walk/walk-'+hero+'-'+v+'.png'}:null;
+ const preloadWalk=()=>{try{const o=typeof player==='object'&&player?.hero?ownWalk(player.hero):null;if(typeof readyImage==='function'&&o)for(const v of new Set(Object.values(o.map).map(v=>o.path(v[0]))))if(!readyImage(v))wantImage(v);}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
+ function sheetFor(hero,dir){const ow=ownWalk(hero),own=ow?.map[dir];if(own&&ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p))return{path:p,mirror:!!own[1],cols:8,rows:1,frames:8,own8:true,r128:true};}
+  if(own&&!ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p)){const n=own[0].endsWith('12')?12:own[0].endsWith('8')?8:own[0].endsWith('6')?6:4,cols=n===6?3:4;return{path:p,mirror:!!own[1],cols,rows:n/cols,frames:n,own8:n>4};}}
   if(dir==='n'){const ab=Math.floor(walkState.d*3.2)%2?'b':'a',p='assets/heroes/normalized/'+hero+'/run_back_'+ab+'.webp';if(!walkMissing.has(p))return{path:p,mirror:false,single:true};}/* R121: 위쪽 걷기 묶음이 없어 정면 위로 갈 때 뒷모습 달리기 2장 */const plan=walkPlan[hero];const tryDir=d=>{const p=plan?.[d];if(p&&p.use)return{path:WALK_DIR+'walk-'+hero+'-'+p.use+'.png',mirror:!!p.mirror};if(!plan)return{path:WALK_DIR+'walk-'+hero+'-'+d+'.png',mirror:false};return null;};
   for(const d of [dir,...(NEAR[dir]||[])]){const s=tryDir(d);if(s&&!walkMissing.has(s.path))return s;}return null;}
  function cellBox(row,path,i,cols=4,rows=2){const k=path+'|'+i;if(walkBox.has(k))return walkBox.get(k);const im=row.image,W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,one=i<0,cw=one?W:W/cols,ch=one?H:H/rows,sx=one?0:(i%cols)*cw,sy=one?0:Math.floor(i/cols)*ch;
@@ -90,7 +98,7 @@
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(cw,x1-x0+3),Math.min(ch,y1-y0+3)];}catch(_){}walkBox.set(k,box);return box;}
  // 영웅 몸 그림만 고른다: 반자동이 공명 방어를 쓰면 영웅 위에 큰 방어막 그림(barrier-sigil)이 함께 그려져, '가장 큰 영웅 그림'을
  // 몸으로 잘못 골라 방어막을 걷기 그림으로 바꾸고 몸은 정지 그림으로 남던 버그(사용자 2026-10-29 "길잡이·반자동 켜면 이미지 버그")를 막는다.
- const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|awakening|^blob:/;
+ const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|awakening|^blob:/;
  const bodyMemo=new WeakMap();
  function bodyFracOf(im,rect){if(!im||!rect)return null;let m=bodyMemo.get(im);if(!m){m=new Map();bodyMemo.set(im,m);}const k=rect.map(Math.round).join(',');if(m.has(k))return m.get(k);let f=null;
   try{const [sx,sy,sw,sh]=rect,s=Math.min(1,160/Math.max(sw,sh)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(sw*s));c.height=Math.max(1,Math.round(sh*s));const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,c.width,c.height);
@@ -148,6 +156,6 @@
  if(typeof addEventListener==='function')addEventListener('keydown',ev=>{try{if(ev.key!=='Escape'||ev.repeat)return;const t=ev.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
   const btn=[...document.querySelectorAll('button.close')].reverse().find(b=>b.offsetParent!==null&&!b.disabled);if(!btn)return;
   ev.preventDefault();ev.stopImmediatePropagation();btn.click();stats.escCloses=(stats.escCloses||0)+1;}catch(_){}},true);
- function set(p={}){if(typeof p.gunnerHit==='boolean')prefs.gunnerHit=p.gunnerHit;if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
- window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),lastError,collisionChanged:false})});
+ function set(p={}){if(typeof p.gunnerSheet==='boolean')prefs.gunnerSheet=p.gunnerSheet;if(typeof p.gunnerHit==='boolean')prefs.gunnerHit=p.gunnerHit;if(typeof p.walkCycle==='boolean')prefs.walkCycle=p.walkCycle;if(typeof p.earlyGrace==='boolean')prefs.earlyGrace=p.earlyGrace;if(typeof p.heroBlood==='boolean')prefs.heroBlood=p.heroBlood;if(typeof p.heroFit==='boolean')prefs.heroFit=p.heroFit;if(typeof p.angelArt==='boolean')prefs.angelArt=p.angelArt;if(typeof p.heroArt==='boolean')prefs.heroArt=p.heroArt;if(typeof p.seeThrough==='boolean')prefs.seeThrough=p.seeThrough;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+ window.__STORYWORLD_VISUAL_R119__=Object.freeze({revision:'R119-visual-1',nativeMin:NATIVE_MIN,min:MIN,remap,prefs:()=>({...prefs}),set,swap:SWAP,swap128,ownWalk,sheetFor,inspect:()=>({prefs:{...prefs},stats:{...stats},swapState:Object.fromEntries(swapState),fitState:Object.fromEntries(fitState),lastError,collisionChanged:false})});
 })();
