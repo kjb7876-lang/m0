@@ -14,7 +14,9 @@
  if(window.__STORYWORLD_MOOD_R123__)return;
  const REV='R123-mood-1';
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r123.mood';
- const prefs={mood:true,deco:true,floor:true,overlay:true,banner:true,tick:true,tilt:true};
+ const prefs={mood:true,deco:true,floor:true,overlay:true,banner:true,tick:true,tilt:true,art:true};
+ // R126: Drive 2026-10-29 원화(assets/r126/props, scripts/r126-drive-props.py). 그림이 준비되면 게임 소품 그리기로, 그 전에는 코드 그림으로.
+ const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56}};
  try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}last=null;try{window.__STORYWORLD_CINEMA_R114__?.applyGrade?.(true);}catch(_){}return{...prefs};}
  const stats={rooms:0,deco:0,decals:0,frames:0,banners:0,warps:0,lifts:0,drawnDeco:0,drawnDecals:0,ghosts:0,cmdsMax:0};
@@ -70,7 +72,7 @@
    parts:[],rain:.42,floor:['grid','glyph'],deco:[['monolith',3]]},
   forest:{tint:['rgba(255,190,110,.15)','soft-light'],shade:null,fog:'radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,210,140,.22),rgba(0,0,0,0) 65%)',
    parts:[['mote',26]],floor:['sunpool','leaf','roots'],deco:[['tree',3]]},
-  school:{tint:['rgba(130,180,170,.12)','soft-light'],shade:'rgba(8,16,26,.24)',fog:null,parts:[['dust',12]],floor:['lamps','spiral','chalk'],deco:[['locker',2,'wall']],ghosts:true,cone:true},
+  school:{tint:['rgba(130,180,170,.12)','soft-light'],shade:'rgba(8,16,26,.24)',fog:null,parts:[['dust',12]],floor:['lamps','spiral','chalk'],deco:[['locker',2,'wall'],['noticeboard',2,'wall']],ghosts:true,cone:true},
   manga:{tint:['rgba(255,255,255,.05)','soft-light'],shade:'rgba(16,10,16,.20)',fog:null,parts:[['dust',10]],floor:['lamps','spiral'],deco:[],ghosts:true},
   ink:{tint:null,filter:'grayscale(.78) contrast(1.12)',shade:'rgba(10,10,12,.10)',fog:null,parts:[['dust',10]],floor:['lamps','ring','splat','spiral'],deco:[['inkpost',2]],ghosts:true},
   gyeong:{tint:['rgba(220,170,110,.12)','soft-light'],shade:'rgba(14,12,22,.20)',fog:'linear-gradient(to bottom,rgba(200,210,230,.10),rgba(0,0,0,0) 45%)',parts:[['snow',34]],floor:['lamps','spiral'],deco:[['lantern',3]],ghosts:true},
@@ -207,7 +209,8 @@
 
  // ---- 조형물(표현 전용 소품) ------------------------------------------------------------------------------
  function decoProps(r,st){if(!prefs.deco)return;if(st.decoPlaced)return;st.decoPlaced=true;const all=[...st.deco];if(st.lift)all.push({id:'r123:'+st.zone+':lift',kind:'lift',x:st.lift.x,y:st.lift.y,seed:1,floor:st.theme.floors?.list?.slice(-1)[0]});
-  for(const d of all)r.props.push({id:d.id,x:d.x,y:d.y,height:60,solid:false,visible:true,enabled:true,autoTargetEligible6:false,r80PresentationOnly:true,r123Deco:d});}
+  for(const d of all){const q={id:d.id,x:d.x,y:d.y,height:60,solid:false,visible:true,enabled:true,autoTargetEligible6:false,r80PresentationOnly:true,r123Deco:d},a=ART[d.kind];
+   if(a&&prefs.art){q.path=a.path;q.height=a.h;if(a.lift)q.visualLiftPx=a.lift;try{if(typeof addImage==='function')addImage(a.path);}catch(e){fail(e);}stats.art=(stats.art||0)+1;}r.props.push(q);}}
  const DRAW={
   teacup(g,q,u,t,d){const w=u*1.25,h=u*.95;g.fillStyle='rgba(30,10,20,.35)';g.beginPath();g.ellipse(q.x,q.y+2,w*1.05,w*.36,0,0,TAU);g.fill();g.fillStyle='#d8cec3';g.beginPath();g.ellipse(q.x,q.y,w*.95,w*.32,0,0,TAU);g.fill();
    g.fillStyle='#efe5da';g.beginPath();g.moveTo(q.x-w*.62,q.y-h);g.bezierCurveTo(q.x-w*.6,q.y-h*.35,q.x-w*.42,q.y-h*.06,q.x,q.y-h*.04);g.bezierCurveTo(q.x+w*.42,q.y-h*.06,q.x+w*.6,q.y-h*.35,q.x+w*.62,q.y-h);g.closePath();g.fill();
@@ -237,6 +240,8 @@
    g.fillStyle='rgba(255,255,255,.06)';g.beginPath();g.moveTo(q.x-w/2,y0-h*.2);g.lineTo(q.x-w/2+w*.35,y0-h);g.lineTo(q.x-w/2+w*.5,y0-h);g.lineTo(q.x-w/2,y0-h*.05);g.closePath();g.fill();},
   sign(g,q,u,t,d){const w=u*.9,h=u*.5,y0=q.y-u*1.1;g.fillStyle='#2a2622';g.fillRect(q.x-u*.04,y0,u*.08,u*1.1);g.fillStyle='#14120f';g.fillRect(q.x-w/2,y0-h,w,h);g.strokeStyle='#8a7a5a';g.lineWidth=1.5;g.beginPath();g.rect(q.x-w/2+2,y0-h+2,w-4,h-4);g.stroke();
    g.fillStyle='#e8dcc0';g.font='bold '+Math.round(u*.34)+'px serif';g.textAlign='center';g.textBaseline='middle';g.fillText(d.floor==='G'?'G':d.floor+'F',q.x,y0-h/2);},
+  noticeboard(g,q,u,t,d){const w=u*1.2,h=u*.9,y0=q.y-u*1.2;g.fillStyle='#4a3020';g.fillRect(q.x-w/2,y0-h,w,h);g.fillStyle='#7a5a3a';g.fillRect(q.x-w/2+u*.08,y0-h+u*.08,w-u*.16,h-u*.16);
+   g.fillStyle='#e8dcc0';for(const[dx,dy,pw,ph]of[[-.4,-.75,.32,.4],[.1,-.78,.3,.22],[-.38,-.3,.3,.2],[.1,-.48,.3,.38]])g.fillRect(q.x+dx*w,y0+dy*h,pw*w,ph*h);},
   stairs(g,q,u,t,d){const[dx,dy]=d.dir||[0,-1],[px,py]=d.perp||[1,0],W=.75,step=.32,hp=u*.42,bx=d.x-dx*1.6,by=d.y-dy*1.6;
    // 벽 쪽으로 오르는 다섯 칸: 영웅 쪽(앞)이 낮고 벽 쪽이 높다. 세계 좌표로 그려 바닥과 맞고, 뒤 칸부터 그린다.
    for(let k=4;k>=0;k--){const s0=k*step,s1=s0+step,hh=(k+1)*hp,a=P(bx+dx*s0-px*W,by+dy*s0-py*W),b=P(bx+dx*s0+px*W,by+dy*s0+py*W),c=P(bx+dx*s1+px*W,by+dy*s1+py*W),e=P(bx+dx*s1-px*W,by+dy*s1-py*W);
@@ -436,12 +441,15 @@
   const used=(ctx?.commands?.length||0)-before;if(used>stats.cmdsMax)stats.cmdsMax=used;}
  function install(){
   if(typeof drawExits==='function'){const b=drawExits;drawExits=function(...a){const r=b.apply(this,a);try{ground();}catch(e){fail(e);}return r;};}
-  if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(p?.r123Deco){try{if(live())drawDeco(p);}catch(e){fail(e);}return;}return b.call(this,p,...a);};}
+  if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(p?.r123Deco){if(!prefs.deco||!prefs.mood)return;
+    // 원화가 있고 준비됐으면 게임의 소품 그리기(그림자·가림·접지 그대로), 아직이면 다시 요청하고 코드 그림으로 버틴다(지역 이동 때 그림 캐시가 비워진다)
+    if(p.path&&prefs.art){let ok=false;try{ok=typeof readyImage==='function'&&!!readyImage(p.path);if(!ok&&typeof addImage==='function')addImage(p.path);}catch(e){fail(e);}if(ok){stats.drawnArt=(stats.drawnArt||0)+1;return b.call(this,p,...a);}}
+    try{if(live())drawDeco(p);}catch(e){fail(e);}return;}return b.call(this,p,...a);};}
   if(typeof showSettings==='function'){const b=showSettings;showSettings=function(...a){const r=b.apply(this,a);try{settingsSection();}catch(e){fail(e);}return r;};}
   if(typeof requestAnimationFrame==='function')requestAnimationFrame(loop);}
  function settingsSection(){if(typeof document==='undefined'||document.getElementById('moodSettingsR123'))return;const host=document.getElementById('detailSettingsR114')||document.getElementById('panel');if(!host)return;
   const d=document.createElement('details');d.id='moodSettingsR123';d.className='r114-group';
-  const rows=[['mood','사몽 구역 분위기(감정의 탑 층·네오 서울 연도·장미의 집·밤의 학교·화가 화풍)'],['deco','분위기 조형물(찻잔·바늘·창·기계 탑·나무·이젤·녹는 시계 등)'],['floor','바닥 무늬(체스판·층 번호·데이터 격자·붓결·소용돌이)'],['overlay','화면 색·안개·떠다니는 입자·데이터 비·손전등 원뿔'],['banner','들어설 때 층·연도 표시'],['tick','시대 전환 시계 째깍 소리'],['tilt','장미의 집 기울어진 방']];
+  const rows=[['mood','사몽 구역 분위기(감정의 탑 층·네오 서울 연도·장미의 집·밤의 학교·화가 화풍)'],['deco','분위기 조형물(찻잔·바늘·창·기계 탑·나무·이젤·녹는 시계 등)'],['floor','바닥 무늬(체스판·층 번호·데이터 격자·붓결·소용돌이)'],['overlay','화면 색·안개·떠다니는 입자·데이터 비·손전등 원뿔'],['banner','들어설 때 층·연도 표시'],['tick','시대 전환 시계 째깍 소리'],['tilt','장미의 집 기울어진 방'],['art','Drive 원화 소품(찻잔·바늘과 실·사물함·게시판)']];
   d.innerHTML='<summary>사몽 구역 분위기(R123)</summary><div class="settings">'+rows.map(([k,l])=>'<label><input type="checkbox" data-r123="'+k+'" '+(prefs[k]?'checked':'')+'> '+l+'</label>').join('')+'</div>';
   d.querySelectorAll('[data-r123]').forEach(el=>el.onchange=()=>set({[el.dataset.r123]:el.checked}));host.appendChild(d);
   const q=document.getElementById('quickSettingsR114');if(q&&!document.getElementById('r123QuickMood')){const l=document.createElement('label');l.id='r123QuickMood';l.innerHTML='<input type="checkbox" '+(prefs.mood?'checked':'')+'> 사몽 구역 분위기(층·연도·화풍)';q.appendChild(l);l.querySelector('input').onchange=e=>{set({mood:e.target.checked});const m=d.querySelector('[data-r123="mood"]');if(m)m.checked=e.target.checked;};}}

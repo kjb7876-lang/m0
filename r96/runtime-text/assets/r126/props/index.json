@@ -1,0 +1,113 @@
+{
+ "revision": "R126",
+ "props": {
+  "locker": {
+   "path": "assets/r126/props/locker.webp",
+   "size": [
+    221,
+    512
+   ],
+   "bytes": 28266,
+   "sha256": "9dbd2ccf31d44d32d20bf66899aff68c36e46a27593931353c4f7cd8e6bc687c",
+   "use": "S-02 밤의 학교 뒷벽 사물함 2칸",
+   "source": {
+    "drive": "StoryWorld-R123-two-front-lockers-20261029.zip",
+    "driveId": "1wiYVlf73M_NaF21UtLTAXzjffk6BTDfK",
+    "file": "R123-two-lockers-original.png",
+    "sha256": "efcba861b98ab9b5f99a2ae41da7424222c7299362f766856e1704731365b1e8",
+    "bytes": 2168218,
+    "size": [
+     1024,
+     1536
+    ],
+    "crop": [
+     207,
+     55,
+     818,
+     1473
+    ]
+   }
+  },
+  "teacup": {
+   "path": "assets/r126/props/teacup.webp",
+   "size": [
+    512,
+    401
+   ],
+   "bytes": 94234,
+   "sha256": "cba8dff00a6c223bb139b38987177a7cb4259b86a944a48c84357870d41063e0",
+   "use": "S-01 꿰맨 장미의 집 거대 찻잔",
+   "source": {
+    "drive": "StoryWorld-ROSEHOUSE-cup-saucer-20261029.zip",
+    "driveId": "1pNniTEtZQw8zRq7NdTFLjMhDpL5w-ink",
+    "file": "ROSEHOUSE-cup-saucer-original.png",
+    "sha256": "0ca57a02c46d31b821ecefca1aee2c6e3b3bd1295558338e83b96a2604458729",
+    "bytes": 2680127,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     169,
+     45,
+     1365,
+     982
+    ]
+   }
+  },
+  "needle": {
+   "path": "assets/r126/props/needle.webp",
+   "size": [
+    512,
+    315
+   ],
+   "bytes": 31412,
+   "sha256": "36886a9edcf20ebafddd1f9bf7763efba4823a05d53693ead1a5e62fe8140c12",
+   "use": "S-01 꿰맨 장미의 집 바늘과 실(원문 L641)",
+   "source": {
+    "drive": "StoryWorld-ROSEHOUSE-needle-thread-20261029.zip",
+    "driveId": "1Eax4OZHd47qzgPu251XV72m0f8Nupee1",
+    "file": "ROSEHOUSE-needle-thread-original.png",
+    "sha256": "1dba03730f1994fbee84cb82dec53d02e1465516d93f02b0c01fdbe07f20e21e",
+    "bytes": 1214236,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     143,
+     102,
+     1422,
+     890
+    ]
+   }
+  },
+  "noticeboard": {
+   "path": "assets/r126/props/noticeboard.webp",
+   "size": [
+    512,
+    415
+   ],
+   "bytes": 104304,
+   "sha256": "11f14711705c9ddbddfd505deebda5f415c1ae2aa3abc2e3c3800c628a5cb580",
+   "use": "S-02 밤의 학교 복도 빈 게시판",
+   "source": {
+    "drive": "StoryWorld-SCHOOL-blank-noticeboard-20261029.zip",
+    "driveId": "1t75leEFgw-TT94yZq12J_skzr5W4J3rp",
+    "file": "SCHOOL-noticeboard-original.png",
+    "sha256": "2a829d3b674050307d2936d6444829d26fab5039a1fd8d4029a1c06d06547438",
+    "bytes": 2812513,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     220,
+     55,
+     1315,
+     942
+    ]
+   }
+  }
+ }
+}

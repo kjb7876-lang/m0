@@ -8773,6 +8773,31 @@
       "sha256": "236a5e4749d9598207dde510a4353a3ba0b897f4ed60ae4f8b5866a8ea10b8ea"
     },
     {
+      "path": "assets/r126/props/index.json",
+      "bytes": 2627,
+      "sha256": "0378fb78c0238b7002bdc34ca09911bf2c8d5a8c9717c9c7e892fb2e640bdccb"
+    },
+    {
+      "path": "assets/r126/props/locker.webp",
+      "bytes": 28266,
+      "sha256": "9dbd2ccf31d44d32d20bf66899aff68c36e46a27593931353c4f7cd8e6bc687c"
+    },
+    {
+      "path": "assets/r126/props/needle.webp",
+      "bytes": 31412,
+      "sha256": "36886a9edcf20ebafddd1f9bf7763efba4823a05d53693ead1a5e62fe8140c12"
+    },
+    {
+      "path": "assets/r126/props/noticeboard.webp",
+      "bytes": 104304,
+      "sha256": "11f14711705c9ddbddfd505deebda5f415c1ae2aa3abc2e3c3800c628a5cb580"
+    },
+    {
+      "path": "assets/r126/props/teacup.webp",
+      "bytes": 94234,
+      "sha256": "cba8dff00a6c223bb139b38987177a7cb4259b86a944a48c84357870d41063e0"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -17529,8 +17554,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 73420,
-      "sha256": "deb9fd6df778d051437eddd4f54c3c90696e5aae7daf48966acc947e0f3320ac"
+      "bytes": 74993,
+      "sha256": "c9fe8c4be89183db97cc463a9a68f5cb1f69aa95cd8874a30a80cebddc478a04"
     },
     {
       "path": "samong-r103.js",
@@ -17733,8 +17758,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3546,
-  "totalBytes": 767495676,
+  "fileCount": 3551,
+  "totalBytes": 767758092,
   "webHTMLSha256": "2359c46dbe66154b8e9c9f0223ad7da1361e327527cc378e04ababe3c71280fa",
   "largest": [
     {
