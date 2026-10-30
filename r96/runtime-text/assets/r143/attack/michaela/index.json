@@ -1,0 +1,113 @@
+{
+ "hero": "michaela",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/michaela/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-attack-s.png",
+    "sha256": "df37afdbf9f5f9273b01f39ea82dc585ee8a1f219f5674b46b42a4d758f7732a",
+    "bytes": 125632
+   },
+   "sha256": "030a93e69d2dc527fb4176b09965c7a776aabe43fcab1b4d83e576c289ad77e6",
+   "bytes": 41240
+  },
+  "se": {
+   "path": "assets/r143/attack/michaela/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-attack-se.png",
+    "sha256": "70f211d84ecc776cae751e2ec4ff6e1159f57db10bd6567e52c55f0f4c60961b",
+    "bytes": 112898
+   },
+   "sha256": "063dadf873a216f572f3f656f0fbc486f33376eeb8682cd074c08758f37779e3",
+   "bytes": 38750
+  },
+  "e": {
+   "path": "assets/r143/attack/michaela/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-attack-e.png",
+    "sha256": "a6ecb812ebdba1521336a0cbe4bf346096da6d1a9bf036b1abfb019201a022bc",
+    "bytes": 107322
+   },
+   "sha256": "7af3cd7bf648be50f94d56e3dfba626ae0080a4695d93a64d519219bca04e74c",
+   "bytes": 36312
+  },
+  "ne": {
+   "path": "assets/r143/attack/michaela/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-attack-ne.png",
+    "sha256": "4d666d784da0f1f721f6da977f8d9a75a6b1a4809d5a3d1f4c5e66ef35561c8e",
+    "bytes": 113682
+   },
+   "sha256": "65c52252a1e19703338fe77c1e1ea7a5bca2600e1d82d298b2051caeec3827d5",
+   "bytes": 40504
+  },
+  "n": {
+   "path": "assets/r143/attack/michaela/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-attack-n.png",
+    "sha256": "218ef3870ece3b25ca6700c96bddbfe2726b1901f270aaaf3b5ef8405d22d2fe",
+    "bytes": 124472
+   },
+   "sha256": "bec5ae57eb8dd668ac1eaa260457469dc5e6a78eae95f5388b33cddad4ddd795",
+   "bytes": 41494
+  }
+ }
+}

@@ -19,5 +19,26 @@ ok('solo: ring is drawn before the hero body (ground layer, under the boots)',r.
 ok('solo: DOM marker hidden',r.m.style.display==='none');
 r=run({coop:true});ok('co-op: R63 DOM marker kept, no ground ring',r.m.style.display==='block'&&!r.ops.some(x=>Array.isArray(x)));
 r=run({dead:true});ok('dead hero: no ring',!r.ops.some(x=>Array.isArray(x)));
+
+// attack-anim-r143: basic-attack frames from the Drive 6-frame sheets, hwando idle from the same white sheet.
+ok('attack-anim-r143.js runtime copy matches',fs.readFileSync(path.join(R,'runtime-text','attack-anim-r143.js'),'utf8')===C('attack-anim-r143.js'));
+ok('index.html loads attack-anim-r143 before audio-r98',html.indexOf('./attack-anim-r143.js')>0&&html.indexOf('./attack-anim-r143.js')<html.indexOf('./audio-r98.js'));
+{const crypto=require('crypto');let all=true,detail='';for(const h of ['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner']){const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text','assets','r143','attack',h,'index.json'),'utf8'));
+  for(const d of ['s','se','e','ne','n']){const r=idx.directions[d];const b=fs.readFileSync(path.join(R,'runtime-text',r.path));if(r.frames!==6||crypto.createHash('sha256').update(b).digest('hex')!==r.sha256||!/^[A-Za-z0-9_-]{20,}$/.test(r.source.driveId)||!r.source.sha256){all=false;detail+=h+d+' ';}}}
+ ok('attack sheets: 8 heroes x 5 directions, 6 frames, hashes and Drive sources recorded',all,detail);}
+function runA(o){const cmds=[];const body={kind:'image',owner:{kind:'hero'},sourcePath:o.src||'assets/r130/lauren/g-e.webp',image:{src:'old'},points:[[0,0],[10,0],[10,50],[0,50]]};
+ const copy={...body,points:body.points.map(p=>p.slice())};const im={naturalWidth:1152,naturalHeight:256,width:1152,height:256};
+ const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},document:{createElement:()=>({getContext:()=>null})},Date,Math,Promise,
+  started:true,time:1,player:{hero:o.hero||'lauren',x:0,y:0,hp:10,attackAnim:0,direction:'right'},room:{enemies:o.enemies||[]},ctx:{commands:cmds},
+  project:(x,y)=>({x:x*10+100,y:y*10+200}),actorHeight:()=>54,readyImage:p=>({image:{...im,src:p}}),drawHero(){cmds.push(body);if(o.dup)cmds.push(copy);}};
+ vm.createContext(sb);vm.runInContext(C('attack-anim-r143.js'),sb);return{sb,cmds,body};}
+{let t=runA({enemies:[{x:-2,y:0,hp:5}]});const seq=[];for(const a of [.24,.2,.16,.12,.08,.04]){t.cmds.length=0;t.body.sourcePath='assets/r130/lauren/g-e.webp';t.sb.player.attackAnim=a;t.sb.drawHero();seq.push(t.body.sourceRect?t.body.sourceRect[0]/192:-1);}
+ ok('basic attack walks through the 6 frames in order (wind-up, strike, recovery)',seq.join()==='0,0,1,3,4,5',seq.join());
+ ok('attack faces the nearest enemy (west → mirrored east sheet)',/attack-e\.webp$/.test(t.body.sourcePath)&&t.body.points[1][0]<t.body.points[0][0],t.body.sourcePath);
+ const P=t.body.points;ok('attack frame keeps the foot anchor on the ground point',Math.abs(((P[2][1]+P[3][1])/2)-(200+(256-227)*54*.98/199))<3,JSON.stringify(P));}
+{let t=runA({});t.sb.player.skillAnim=.3;t.sb.player.attackAnim=.2;t.sb.drawHero();ok('skill/hurt/dash/guard keep their own art',t.body.sourcePath==='assets/r130/lauren/g-e.webp');}
+{let t=runA({hero:'hwando',src:'assets/r93/idle/idle-hwando-s.png',dup:true});t.sb.drawHero();
+ ok('hwando idle uses the white sheet (first attack frame), old double body removed',/r143\/attack\/hwando\/attack-/.test(t.body.sourcePath)&&t.body.sourceRect[0]===0&&t.cmds.length===1,t.body.sourcePath+' '+t.cmds.length);}
+{let t=runA({hero:'hwando',src:'assets/r130/hwando/walk-e.webp'});t.body.r121Walk=true;t.sb.drawHero();ok('walking (R119 walk cycle) is left alone',t.body.sourcePath==='assets/r130/hwando/walk-e.webp');}
 ok('workflow runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r143/feet-intro-cpu-check.cjs'));
 const fail=checks.filter(c=>!c.pass);console.log(JSON.stringify({status:fail.length?'FAIL':'PASS',passed:checks.length-fail.length,total:checks.length,fail},null,1));process.exit(fail.length?1:0);
