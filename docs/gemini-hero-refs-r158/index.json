@@ -1,0 +1,63 @@
+{
+ "round": "R158",
+ "purpose": "sheet2 빠진 방향·방향별 불일치 채우기(2026-10-30 21:15 UTC 드라이브 정리 기준)",
+ "packages": [
+  {
+   "hero": "seoha",
+   "zip": "StoryWorld-HERO-R158-FILL-seoha.zip",
+   "bytes": 943154,
+   "sha256": "727b39370c9eace58cc2b8c21a0a2cc0d2c1ce13a94e171e35c24814e159e927",
+   "files": 1,
+   "refs": [
+    "reference/seoha-current-walk-s-f0.png",
+    "reference/seoha-skill-e.png",
+    "reference/seoha-skill-n.png",
+    "reference/seoha-skill-ne.png",
+    "reference/seoha-skill-s.png"
+   ]
+  },
+  {
+   "hero": "hwando",
+   "zip": "StoryWorld-HERO-R158-FILL-hwando.zip",
+   "bytes": 1563803,
+   "sha256": "1dc56508f3d0ff7a49a0c97d3e9bdf2d69e53699e6fa80e9f59cebe7cf7fcf6d",
+   "files": 2,
+   "refs": [
+    "reference/hwando-current-walk-s-f0.png",
+    "reference/hwando-guard-e.png",
+    "reference/hwando-guard-n.png",
+    "reference/hwando-guard-ne.png",
+    "reference/hwando-guard-s.png",
+    "reference/hwando-idle-e.png",
+    "reference/hwando-idle-n.png",
+    "reference/hwando-idle-ne.png",
+    "reference/hwando-idle-s.png"
+   ]
+  },
+  {
+   "hero": "lauren",
+   "zip": "StoryWorld-HERO-R158-FILL-lauren.zip",
+   "bytes": 496199,
+   "sha256": "3607bf0c097b7dbad4cd8032f8ef761956c426af2b76403586aad63d144e550b",
+   "files": 1,
+   "refs": [
+    "reference/lauren-current-walk-s-f0.png",
+    "reference/lauren-guard-e.png",
+    "reference/lauren-guard-n.png",
+    "reference/lauren-guard-s.png",
+    "reference/lauren-guard-se.png"
+   ]
+  },
+  {
+   "hero": "michaela",
+   "zip": "StoryWorld-HERO-R158-FILL-michaela.zip",
+   "bytes": 222520,
+   "sha256": "32fd9f172b1476c7ce72756d1329891731f41e70099c03a1fae509badc6ec723",
+   "files": 4,
+   "refs": [
+    "reference/michaela-current-walk-s-f0.png",
+    "reference/michaela-skill-s.png"
+   ]
+  }
+ ]
+}
