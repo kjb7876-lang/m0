@@ -38,7 +38,7 @@ function condense(){const panel=document.getElementById('panel'),quick=document.
  const modal=document.getElementById('modal');if(modal)for(const c of [...modal.children])if(c!==panel&&c.tagName!=='STYLE'&&c.tagName!=='SCRIPT'){quick.appendChild(c);stats.moved++;}
  let more=document.getElementById('moreSettingsR142');
  if(!more){more=document.createElement('details');more.id='moreSettingsR142';const sm=document.createElement('summary');sm.textContent='더 보기 (분위기·소리 켜기·조명·전투·길잡이)';more.appendChild(sm);}
- const vol=quick.querySelector(':scope>.r114-volumes'),rows=[...quick.querySelectorAll(':scope>.r114-row')],keep=new Set([quick.querySelector(':scope>h3'),rows[0],vol,more].filter(Boolean));
+ const vol=quick.querySelector(':scope>.r114-volumes'),rows=[...quick.querySelectorAll(':scope>.r114-row')],keep=new Set([quick.querySelector(':scope>h3'),rows[0],vol,quick.querySelector(':scope>#perfRowR150'),more].filter(Boolean));// R153: 렉 줄이기(R150)도 접지 않고 바로 보이게
  for(const c of [...quick.children])if(!keep.has(c)){more.appendChild(c);stats.moved++;}
  quick.appendChild(more);
  const det=document.getElementById('detailSettingsR114');if(det)det.open=false;

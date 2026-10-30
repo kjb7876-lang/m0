@@ -7,6 +7,8 @@ ok('runtime copy matches',fs.readFileSync(path.join(R,'runtime-text','perf-r150.
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
 ok('index.html loads perf-r150 before audio-r98',html.indexOf('./perf-r150.js')>0&&html.indexOf('./perf-r150.js')<html.indexOf('./audio-r98.js'));
 ok('public verify list includes perf-r150',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'perf-r150.js'"));
+ok('R153: settings row sits right after 그래픽 품질 and mobile quick settings keep it unfolded',/g\.after\(row\)/.test(src)&&C('mobile-settings-r142.js').includes("quick.querySelector(':scope>#perfRowR150')"));
+ok('R153: meter sits below the guide compass (does not cover the objective box)',/#perfMeterR150\{position:fixed;left:8px;top:150px;/.test(src));
 ok('lite keeps darkness·torch·light pool (visibility) and only hides decoration',!/data-d="vig"|data-d="torch"|data-c="pool"|data-c="vig"/.test(src)&&/data-d="rust"/.test(src)&&/data-d="fog"/.test(src)&&/data-d="cv"/.test(src)&&/data-c="grain"/.test(src));
 function el(tag){const e={tagName:tag,children:[],style:{},dataset:{},hidden:false,attrs:{},classList:{s:new Set(),toggle(c,on){on?this.s.add(c):this.s.delete(c);},contains(c){return this.s.has(c);}},
  setAttribute(k,v){this.attrs[k]=v;},appendChild(c){this.children.push(c);return c;},querySelectorAll(){return [];},querySelector(){return {checked:false};},set innerHTML(v){this._html=v;},get innerHTML(){return this._html||'';}};return e;}
