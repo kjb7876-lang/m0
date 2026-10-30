@@ -1,0 +1,113 @@
+{
+ "hero": "slayer",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/slayer/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-death-s.png",
+    "sha256": "59d33d365d40b7b1f74a39ae3c342d2fce269563f0833373a4e18ae9cbce6c0d",
+    "bytes": 124210
+   },
+   "sha256": "5efdb5892611e93296b6f4c996cbea49186f39b89bb2181aa9983d1ca7f697c8",
+   "bytes": 42362
+  },
+  "se": {
+   "path": "assets/r143/death/slayer/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-death-se.png",
+    "sha256": "248ed8b28f21da58d1ffde39e035b2a283a20e0d834ca9d53534d4bf39cbe543",
+    "bytes": 108391
+   },
+   "sha256": "8708b766d97834607101b1336a7f46f295ec11b1ac851c907efb1aae96421837",
+   "bytes": 38556
+  },
+  "e": {
+   "path": "assets/r143/death/slayer/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-death-e.png",
+    "sha256": "9f979962340ba6d2347a6c10a24c76949086358211085ef7b92c878a9263553b",
+    "bytes": 66008
+   },
+   "sha256": "f19597414920958998fee48e479383d5710527481ddea8180c6cb7ec45df1956",
+   "bytes": 21332
+  },
+  "ne": {
+   "path": "assets/r143/death/slayer/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-death-ne.png",
+    "sha256": "9c06c8f60b115c6bdf4eb0f9474a22f7c9e85dcdf0660c7deecf6ab5ce586ace",
+    "bytes": 104478
+   },
+   "sha256": "dff039103d8e22cc2c44d5a47ba0ffae10fe3fc59887e0fb384e0e39aa9ea853",
+   "bytes": 33810
+  },
+  "n": {
+   "path": "assets/r143/death/slayer/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1nB3PbKbZB_y3WgrNSWCN25L0YobBq01q",
+    "file": "HERO-slayer-death-n.png",
+    "sha256": "56730a176a984873baacebff6462dd4e12775969c69aac65f3fe424897e4e62e",
+    "bytes": 120362
+   },
+   "sha256": "43be2356834aea8cff74c7b9698bcf5b4d0244f0d90b409f17d57929024f1db6",
+   "bytes": 37550
+  }
+ }
+}

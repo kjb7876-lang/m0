@@ -1,0 +1,113 @@
+{
+ "hero": "michaela",
+ "action": "death",
+ "order": "휘청 2 → 무릎 1 → 눕기 3 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "쓰러질 때(R151 death-r151.js) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/death/michaela/death-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-death-s.png",
+    "sha256": "b6484eb7ba9f8a75bf562a34d3cbbd8e0084dbaf2d2b5250ba8857bdd494ab76",
+    "bytes": 94794
+   },
+   "sha256": "7e0526a4ca8b3f7a83453896a0f699671683d6ee86815449e7be4741c9ebcf3d",
+   "bytes": 29936
+  },
+  "se": {
+   "path": "assets/r143/death/michaela/death-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-death-se.png",
+    "sha256": "2154756273e4d6654f36a3fe73e93f35e0af0ce10966ad9a976c0bc880c0e9a8",
+    "bytes": 84861
+   },
+   "sha256": "b3b5a40f64cf650f4bd992c18990beccaa8c5f0bb6341a65ea41ca19cd203b54",
+   "bytes": 27922
+  },
+  "e": {
+   "path": "assets/r143/death/michaela/death-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-death-e.png",
+    "sha256": "2858016dda903629a108b07c9b677dff57dcdf0f8728f51077be0d9ea6c2b04f",
+    "bytes": 81021
+   },
+   "sha256": "332b48945a64512dd78e0c0ec8b2c9f260e0f7bd237a89f62c5ef6d051dcf285",
+   "bytes": 27184
+  },
+  "ne": {
+   "path": "assets/r143/death/michaela/death-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-death-ne.png",
+    "sha256": "9b0a1a31ac30266598361b3828a8dee253457318244a58deed3f3be6d16ff213",
+    "bytes": 87129
+   },
+   "sha256": "f253538b4c83b89b70b129d42fb69d94a9d1f95f26e1b41b4dc9407b97120d9a",
+   "bytes": 29988
+  },
+  "n": {
+   "path": "assets/r143/death/michaela/death-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    228
+   ],
+   "source": {
+    "driveId": "1j0_BiunRO6gjqGOJ3Fom5F92eEz5ySqo",
+    "file": "HERO-michaela-death-n.png",
+    "sha256": "97b3a90942f48642b381b073f83dc107b0cf89a9b157573e11ad8bb960f0e568",
+    "bytes": 95926
+   },
+   "sha256": "ff71193d429aba7adcf069816a607b1dc52e049cb58f502cd016965484f3d31e",
+   "bytes": 30992
+  }
+ }
+}

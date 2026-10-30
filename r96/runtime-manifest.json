@@ -11358,6 +11358,226 @@
       "sha256": "427566c66fd826cf4a23c4f803ef5c634b838806d29deb05364b98344ad5784a"
     },
     {
+      "path": "assets/r151/death/gunner/death-e.webp",
+      "bytes": 28338,
+      "sha256": "71ab8118c52c8d03893ec7cead5e64e922ad034062d81ba612e63c2c92c0b554"
+    },
+    {
+      "path": "assets/r151/death/gunner/death-n.webp",
+      "bytes": 28414,
+      "sha256": "e7b8f08fc96a15694346272c0e8a57a88a52d51162a60b6872a72839a76670e6"
+    },
+    {
+      "path": "assets/r151/death/gunner/death-ne.webp",
+      "bytes": 30848,
+      "sha256": "c1e8e1c2bc23d4ca00472f131ef76a0826b68926f166c7c84a575b52036d8fbb"
+    },
+    {
+      "path": "assets/r151/death/gunner/death-s.webp",
+      "bytes": 28170,
+      "sha256": "c756627f008baa08cb355924a0ec6bd32439bf3ed07029eb700c1844c4b31fe8"
+    },
+    {
+      "path": "assets/r151/death/gunner/death-se.webp",
+      "bytes": 27404,
+      "sha256": "c5a6e53e6c56c2d1322e5cc736d64f59fa84174e60076946bb52a06e19674d19"
+    },
+    {
+      "path": "assets/r151/death/gunner/index.json",
+      "bytes": 2631,
+      "sha256": "6d383850169cc1f8b70ab0f20f95ce0ee3b81d632636e145c64eca9807ba2004"
+    },
+    {
+      "path": "assets/r151/death/hunter/death-e.webp",
+      "bytes": 23576,
+      "sha256": "3aaa148d902fc0b2d07093d3ff9631f5c595503ad9b63818f0080cea7bd48af1"
+    },
+    {
+      "path": "assets/r151/death/hunter/death-n.webp",
+      "bytes": 28932,
+      "sha256": "0ae244f6fcb20ca7ed4269ffdb4ec88a8ad92a8a4e8b496a74cacb22a1ac80d4"
+    },
+    {
+      "path": "assets/r151/death/hunter/death-ne.webp",
+      "bytes": 26666,
+      "sha256": "6f69799f0c79aa93b4d33c8101e3f92285bcba3448f71a2b49a772ca1d017a1e"
+    },
+    {
+      "path": "assets/r151/death/hunter/death-s.webp",
+      "bytes": 28838,
+      "sha256": "ce1ceab8a4cd0ce72a24f216937a00beea79072903a412b3ac753fa0e9814aa5"
+    },
+    {
+      "path": "assets/r151/death/hunter/death-se.webp",
+      "bytes": 26292,
+      "sha256": "e9dd7c24fdbc09913788484b9dfd5860bbc1a33f591e2088968d17352c43a71d"
+    },
+    {
+      "path": "assets/r151/death/hunter/index.json",
+      "bytes": 2626,
+      "sha256": "82eeb2a6406409815731af4ca18464c393d3e0d06c530a0e318fbddf112f4a63"
+    },
+    {
+      "path": "assets/r151/death/hwando/death-e.webp",
+      "bytes": 68518,
+      "sha256": "d91ce7768453fb4b4fcd409e31ca7328afbefb626e69ffec6fbc4d52fed99213"
+    },
+    {
+      "path": "assets/r151/death/hwando/index.json",
+      "bytes": 761,
+      "sha256": "73f01038eed460edc0cc4e479dca5cb622c41de96b85f8ae9ec132617b7c2a3f"
+    },
+    {
+      "path": "assets/r151/death/lauren/death-e.webp",
+      "bytes": 26606,
+      "sha256": "da4ee5a82d90882cf013c2006f3092cc26ac4834b9d6c75970780f4318f727b8"
+    },
+    {
+      "path": "assets/r151/death/lauren/death-n.webp",
+      "bytes": 31348,
+      "sha256": "65e19e5812b80e17f66d4105281d27085c48d637aac7ab971c10c237be9aaa29"
+    },
+    {
+      "path": "assets/r151/death/lauren/death-ne.webp",
+      "bytes": 30242,
+      "sha256": "bd0de16b4e0a849f67f0a05a05f2025ab09fba4ba5076d54060802906b4eb4cc"
+    },
+    {
+      "path": "assets/r151/death/lauren/death-s.webp",
+      "bytes": 32616,
+      "sha256": "d10b40c76f333d768313a98fd81f7a50aa005a7adfcf61c1b2981d2598767a2d"
+    },
+    {
+      "path": "assets/r151/death/lauren/death-se.webp",
+      "bytes": 32504,
+      "sha256": "d0ab473f7ebe3beea36048c43cc097842ad95ba346afe6572d5156e33f64b16e"
+    },
+    {
+      "path": "assets/r151/death/lauren/index.json",
+      "bytes": 2628,
+      "sha256": "de6731ea22e6a18e008391667856e35dfaaf4eb7f5769944c57da09499de4de1"
+    },
+    {
+      "path": "assets/r151/death/michaela/death-e.webp",
+      "bytes": 27184,
+      "sha256": "332b48945a64512dd78e0c0ec8b2c9f260e0f7bd237a89f62c5ef6d051dcf285"
+    },
+    {
+      "path": "assets/r151/death/michaela/death-n.webp",
+      "bytes": 30992,
+      "sha256": "ff71193d429aba7adcf069816a607b1dc52e049cb58f502cd016965484f3d31e"
+    },
+    {
+      "path": "assets/r151/death/michaela/death-ne.webp",
+      "bytes": 29988,
+      "sha256": "f253538b4c83b89b70b129d42fb69d94a9d1f95f26e1b41b4dc9407b97120d9a"
+    },
+    {
+      "path": "assets/r151/death/michaela/death-s.webp",
+      "bytes": 29936,
+      "sha256": "7e0526a4ca8b3f7a83453896a0f699671683d6ee86815449e7be4741c9ebcf3d"
+    },
+    {
+      "path": "assets/r151/death/michaela/death-se.webp",
+      "bytes": 27922,
+      "sha256": "b3b5a40f64cf650f4bd992c18990beccaa8c5f0bb6341a65ea41ca19cd203b54"
+    },
+    {
+      "path": "assets/r151/death/michaela/index.json",
+      "bytes": 2648,
+      "sha256": "28c1548673f743a2edbfa9bb9c2555a7b1cc1df876a31b0f6af614bd34957850"
+    },
+    {
+      "path": "assets/r151/death/neon/death-e.webp",
+      "bytes": 22768,
+      "sha256": "9cf89f4b6cf519c36829a1ea3479190b9f47c1a08d1e0a7bb25fd0aaa0a94024"
+    },
+    {
+      "path": "assets/r151/death/neon/death-n.webp",
+      "bytes": 30764,
+      "sha256": "82c402a5fd2848a9c18189ca3546f644a263885f5f30d8edcebb6ef532778abd"
+    },
+    {
+      "path": "assets/r151/death/neon/death-ne.webp",
+      "bytes": 27926,
+      "sha256": "aafa2b1dcbdbf32c62d115bfa355142b66acac026cafc72ab3b0f0e0a2a2d0f7"
+    },
+    {
+      "path": "assets/r151/death/neon/death-s.webp",
+      "bytes": 30848,
+      "sha256": "4a0648ed0d6412e4f8275f55ae1a8ff139438c6e4e7b9479393c752d8ee720c3"
+    },
+    {
+      "path": "assets/r151/death/neon/death-se.webp",
+      "bytes": 28870,
+      "sha256": "d0e1a21a1b5a5d4b7f8f06f0fd227cac136f5554ec7ee9a0dd533062a50edaea"
+    },
+    {
+      "path": "assets/r151/death/neon/index.json",
+      "bytes": 2606,
+      "sha256": "0fffd9ac6919020a6b59975a6565e5b93563dfba8fc6c7489d82257e72f22bf7"
+    },
+    {
+      "path": "assets/r151/death/seoha/death-e.webp",
+      "bytes": 30950,
+      "sha256": "81804e8a01779a6002cccb694a767859513d276787778a87b5b62c01230834a7"
+    },
+    {
+      "path": "assets/r151/death/seoha/death-n.webp",
+      "bytes": 37524,
+      "sha256": "15994cdb5bdf8e4296ec27a7111dfb8a6347ef6b418b3259f89d581b68a5f404"
+    },
+    {
+      "path": "assets/r151/death/seoha/death-ne.webp",
+      "bytes": 33286,
+      "sha256": "57b28656de7a0da2a5827102b94c6d1f074e3f831f9885562fb0361c43fc8900"
+    },
+    {
+      "path": "assets/r151/death/seoha/death-s.webp",
+      "bytes": 40916,
+      "sha256": "6642238ba21060c0c0f01477898d7935d671e8922f0767bc0788f2fee87fe495"
+    },
+    {
+      "path": "assets/r151/death/seoha/death-se.webp",
+      "bytes": 36534,
+      "sha256": "1fb504c83d201a01670d85152e1d66e254bd900c9efd0d7f38c29f18a4ef614f"
+    },
+    {
+      "path": "assets/r151/death/seoha/index.json",
+      "bytes": 2618,
+      "sha256": "7550ce44613ee56b211e46f1de8eb5f5c44563cc6700f81c3bd0020fb3c51a37"
+    },
+    {
+      "path": "assets/r151/death/slayer/death-e.webp",
+      "bytes": 21332,
+      "sha256": "f19597414920958998fee48e479383d5710527481ddea8180c6cb7ec45df1956"
+    },
+    {
+      "path": "assets/r151/death/slayer/death-n.webp",
+      "bytes": 37550,
+      "sha256": "43be2356834aea8cff74c7b9698bcf5b4d0244f0d90b409f17d57929024f1db6"
+    },
+    {
+      "path": "assets/r151/death/slayer/death-ne.webp",
+      "bytes": 33810,
+      "sha256": "dff039103d8e22cc2c44d5a47ba0ffae10fe3fc59887e0fb384e0e39aa9ea853"
+    },
+    {
+      "path": "assets/r151/death/slayer/death-s.webp",
+      "bytes": 42362,
+      "sha256": "5efdb5892611e93296b6f4c996cbea49186f39b89bb2181aa9983d1ca7f697c8"
+    },
+    {
+      "path": "assets/r151/death/slayer/death-se.webp",
+      "bytes": 38556,
+      "sha256": "8708b766d97834607101b1336a7f46f295ec11b1ac851c907efb1aae96421837"
+    },
+    {
+      "path": "assets/r151/death/slayer/index.json",
+      "bytes": 2630,
+      "sha256": "f065909522817c1e30f44788e2caffae8f0877784bcf16b0bd3cfc770076bcb0"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19858,6 +20078,11 @@
       "sha256": "6f66439e104abcdf5ff01b306830f7fbc4e16bfd44d88d28962596910a5991db"
     },
     {
+      "path": "death-r151.js",
+      "bytes": 7057,
+      "sha256": "9450e6e15c3efeb15622b80cf43d122062c477aa24cef382c376694438351855"
+    },
+    {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
       "bytes": 33982,
       "sha256": "1ecabb4e4efd2aac32f2dfee0c2de5f237a69c22e2b184daac92d62eaeaed562"
@@ -20029,8 +20254,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563593,
-      "sha256": "b067fe68835f808176b2fb807a36b417b183921302774a10f7628ec9a6441fda"
+      "bytes": 6563632,
+      "sha256": "712e3c3be11498d2d1ba06a3eda1cb61c322cd0c51b535bfe2a817a64e1e8e3a"
     },
     {
       "path": "intro-r140.js",
@@ -20373,9 +20598,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4074,
-  "totalBytes": 787852285,
-  "webHTMLSha256": "b067fe68835f808176b2fb807a36b417b183921302774a10f7628ec9a6441fda",
+  "fileCount": 4119,
+  "totalBytes": 789017859,
+  "webHTMLSha256": "712e3c3be11498d2d1ba06a3eda1cb61c322cd0c51b535bfe2a817a64e1e8e3a",
   "largest": [
     {
       "path": "index.html",
