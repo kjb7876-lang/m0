@@ -179,7 +179,9 @@
    if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===6?4.8:sh.frames===12?9.6:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.
    const n=sh.frames||8,ph=(n===6?[.2,-1,1,.2,-1,1][frame]:n===12?[0,-1,-.4,1,.4,0,-1,-.4,1,.4,0,0][frame]:n===8?[.6,1,.3,-1,.6,1,.3,-1][frame]:[0,1,0,1][frame])??0,bob=(ph>0?.025*ph:.015*ph)*want;
-   const P=best.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1])-bob,f=sh.mirror?-1:1;
+   // R134: 발은 실제 영웅 위치(띄움 포함)에 맞춘다 — 바탕 그림 상자의 밑변을 발로 보면, 멈춘 직후 바탕이 서 있기 시트(칸 아래 여백)일 때
+   //  걷기 그림이 7~8px 아래로 툭 떨어졌다가(슬레이어는 좌우로도 6px) 서 있기로 바뀌었다.
+   const P=best.points,q0=typeof project==='function'?project(player.x,player.y):null,lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q0?q0.x:(P[2][0]+P[3][0])/2,fy=(q0?q0.y-lift:Math.max(P[2][1],P[3][1]))-bob,f=sh.mirror?-1:1;
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
     points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
   return r;};}

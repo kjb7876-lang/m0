@@ -342,10 +342,44 @@ if(typeof findPath==='function'){const fpBase=findPath;findPath=function(from,to
 // 2) stage goals the R75 guide has no view of (world-ward phases, sealed exits): when the
 //    guide left the hero idle, walk to the compass goal and use what is there.
 let idleSince=0,lastAct=0;
+// R134 길잡이 전수조사(사용자 2026-10-30):
+//  ① 저장을 불러오거나 이어하기로 시작하면 저장해 둔 길잡이 켜짐이 그대로 살아나 '처음부터 길잡이가 켜져' 있었다 — 불러온 뒤에는 끈다(켜는 건 사람).
+//  ② 새 지역에 들어갈 때 도착 위치 맞추기가 불러오기 뒤(약 1~2초 늦게) 영웅을 포탈 도착점으로 옮겨, 그 사이 이미 걷기 시작한 길잡이가
+//     순간이동한 뒤 옛 경로 쪽으로 되돌아 걸었다(되돌아감·방향 뒤집힘) — 들어가는 중에는 길잡이를 쉬고, 다 들어가면 경로를 새로 짠다.
+//  ③ 길 찾기 경로 점이 0.25칸마다 있어, 점에 닿는 장면마다 영웅이 그 점에 멈춰 한 장면 쉬었다(걸음이 뚝뚝 끊김) — 한 걸음 안의 점은 미리 건너뛴다.
+let entering=0,enterAt=0;const enteringNow=()=>entering>0&&Date.now()-enterAt<4000;// 들어가기가 끝나지 않아도 4초 뒤에는 길잡이를 다시 움직인다
+for(const fn of ['restoreSave','normalizeSave3']){try{const f=globalThis[fn];if(typeof f!=='function')continue;globalThis[fn]=function(...a){const r=f.apply(this,a);try{if(window.__STORYWORLD_COOP_SIM_R62__?.mode?.()==='off'||!window.__STORYWORLD_COOP_SIM_R62__){guide=false;stats.guideLoadOff=(stats.guideLoadOff||0)+1;}}catch(e){fail(e);}return r;};}catch(e){fail(e);}}
+if(typeof enterRegion==='function'){const erBase=enterRegion;enterRegion=async function(...a){entering++;enterAt=Date.now();try{return await erBase.apply(this,a);}finally{entering=Math.max(0,entering-1);
+ try{if(!entering&&typeof guide!=='undefined'&&guide){route=[];command=null;guideTimer=0;stats.guideReplans=(stats.guideReplans||0)+1;}}catch(e){fail(e);}}};}
+if(typeof tick==='function'){const tkBase=tick;tick=function(dt,...a){
+ try{if(enteringNow()&&typeof guide!=='undefined'&&guide&&route?.length){route=[];}
+  else if(started&&!modal&&!loading&&player&&route?.length>1&&keys.size===0&&Math.hypot(joystickVector.x,joystickVector.y)<.08&&Number.isFinite(dt)&&dt>0){
+   const step=SPEED*dt+.04;let n=0;while(route.length>1&&n<4&&Math.hypot(route[0].x-player.x,route[0].y-player.y)<step){route.shift();n++;}if(n)stats.routeSkips=(stats.routeSkips||0)+n;}}catch(e){fail(e);}
+ return tkBase.call(this,dt,...a);};}
+//  ④ 나침반 목표는 출구인데 그 출구가 몹 무리를 처치해야 열리는 경우(dist00 '침식된 명령의 봉인 해제'), 길잡이가 닫힌 문 앞에서
+//     0.6초마다 이동만 시도하며('안전한 문 접근점을 찾지 못했습니다') 몹이 살아 있는 채로 멈췄다 — R75 길잡이 목표가 몹이면 그 몹부터 친다.
+function chasePackGoal(g){try{if(!g||(g.kind!=='exit'&&g.kind!=='portal'))return false;const g75=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();
+ if(g75?.kind!=='enemy'||!g75.point)return false;const pt=g75.point,live=(room.enemies||[]).filter(v=>v.hp>0&&v.spawnState!=='dead');
+ const e=live.find(v=>v.id===pt.id)||live.filter(v=>Math.hypot(v.x-pt.x,v.y-pt.y)<4).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];if(!e)return false;
+ const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;route=[];}
+ else{const p=POL()?.navPath?.(player,e)||(typeof findPath==='function'?findPath(player,e):null);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;}else return false;}
+ stats.guidePack=(stats.guidePack||0)+1;return true;}catch(e){fail(e);return false;}}
+// R134 (사용자 2026-10-30 "길잡이 버그"): 길잡이가 출구에서 travel 을 바로 불러 R77 '다음 서사 맵은 노말' 표시를 건너뛰었다 —
+//  난이도 선택 창이 열린 채 길잡이가 멈췄다(쉼터 → 첫 기억에서 재현). 원래 길잡이처럼 노말 표시를 먼저 걸고 이동한다.
+function guideTravel(dir){const G=window.__STORYWORLD_GUIDE_R77__;let id=false;try{id=G?.armNextNormal?.({kind:'portal',direction:dir,source:'guide-goal'},zone,layer);}catch(e){fail(e);}
+ const res=travel(dir);if(id&&res&&typeof res.then==='function')res.then(ok=>{if(!ok)G.cancelNextNormal(id);},()=>G.cancelNextNormal(id));stats.guideTravels=(stats.guideTravels||0)+1;return res;}
+// 그래도 다른 길(E 대신 누르기 등)로 난이도 창이 열려 길잡이가 멈추면: 길잡이 ON 이고 창이 열린 뒤 사람이 아무것도 누르지 않은 채 3초가 지나면
+//  지금 골라진 난이도로 확인을 누른다(R118 '난이도 선택을 지금 값으로 확정'과 같은 규칙). 사람이 누르거나 고르면 손대지 않는다.
+const diffWatch={openAt:0,input:0};
+try{for(const ev of ['pointerdown','keydown','touchstart'])document.addEventListener(ev,e=>{if(e.isTrusted)diffWatch.input=Date.now();},true);}catch(_){}
+setInterval(()=>{try{const btn=document.getElementById('r71DifficultyConfirm'),on=typeof guide!=='undefined'&&!!guide&&prefs.guide;
+ if(!btn||!btn.offsetParent){diffWatch.openAt=0;return;}if(!diffWatch.openAt){diffWatch.openAt=Date.now();return;}
+ if(on&&diffWatch.input<diffWatch.openAt&&Date.now()-diffWatch.openAt>3000){diffWatch.openAt=Date.now()+60000;stats.guideDifficulty=(stats.guideDifficulty||0)+1;btn.click();}}catch(e){fail(e);}},300);
 function extendGuide(){if(player.moving||(typeof route!=='undefined'&&route?.length)||(typeof command!=='undefined'&&command)){idleSince=time;return;}
  if(time-idleSince<1||time-lastAct<.6)return;lastAct=time;const g=POL()?.goal?.();if(!g)return;const d=Math.hypot(g.x-player.x,g.y-player.y);
  if(g.kind==='enemy'||g.kind==='boss'){const e=(room.enemies||[]).find(v=>v.hp>0&&Math.abs(v.x-g.x)<.01&&Math.abs(v.y-g.y)<.01);if(e&&d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;stats.guideActs++;return;}}
- if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)travel(dir);}stats.guideActs++;return;}
+ if(chasePackGoal(g))return;
+ if(d<=1.1){if(g.kind==='objective'&&typeof interact==='function')interact();else if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir)guideTravel(dir);}stats.guideActs++;return;}
  const p=POL()?.navPath?.(player,g);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;stats.guideNav++;}}
 // World-ward rooms (R78 phases: route → rally → door → boss → exit) are outside the R75
 // guide's view, so there the compass goal drives the step instead.
@@ -353,14 +387,16 @@ let wardPlan=0,wardKey='',wardStuckAt=0,wardPos=null;
 function wardStep(){if(time<wardPlan)return;wardPlan=time+.6;const g=POL()?.goal?.();if(!g)return;const d=Math.hypot(g.x-player.x,g.y-player.y);
  if(g.kind==='enemy'||g.kind==='boss'){const e=(room.enemies||[]).filter(v=>v.hp>0&&v.spawnState==='active').sort((p,q)=>Math.hypot(p.x-g.x,p.y-g.y)-Math.hypot(q.x-g.x,q.y-g.y))[0];
   if(e&&Math.hypot(e.x-player.x,e.y-player.y)<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;route=[];stats.guideActs++;return;}}
+ if(chasePackGoal(g))return;
  if(d<=1.6){const world=window.__STORYWORLD_WORLD_R74__,near=(world?.interactions?.()||[]).filter(t=>t?.point&&Math.hypot(t.point.x-player.x,t.point.y-player.y)<2.4).sort((p,q)=>Math.hypot(p.point.x-player.x,p.point.y-player.y)-Math.hypot(q.point.x-player.x,q.point.y-player.y));
   for(const t of near){try{if(world.canUse(t)){world.use(t);stats.guideActs++;route=[];return;}}catch(e){fail(e);}}
-  if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir){travel(dir);stats.guideActs++;return;}}
+  if(g.kind==='exit'&&typeof travel==='function'){const dir=window.__STORYWORLD_REGION_ROUTES__?.activeDirection?.();if(dir){guideTravel(dir);stats.guideActs++;return;}}
   if(typeof interact==='function')interact();stats.guideActs++;if(d<=.9){route=[];return;}}
  const key=Math.floor(g.x)+':'+Math.floor(g.y)+':'+g.kind,moved=!wardPos||Math.hypot(player.x-wardPos.x,player.y-wardPos.y)>.15;if(moved){wardPos={x:player.x,y:player.y};wardStuckAt=time;}
  if(key===wardKey&&route?.length&&time-wardStuckAt<1.2)return;wardKey=key;
  const p=POL()?.navPath?.(player,g);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;stats.guideNav++;}}
 if(typeof guideStep==='function'){const gsBase=guideStep;guideStep=function(...a){
+ try{if(enteringNow())return;}catch(_){}
  try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true&&window.__STORYWORLD_WORLD_COMBAT_R78__?.controlled?.(room)===true){wardStep();return;}}catch(e){fail(e);}
  const r=gsBase.apply(this,a);try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true)extendGuide();}catch(e){fail(e);}return r;};}
 // 3) death: with the guide on, the hero returns to the sanctuary after a short pause and
