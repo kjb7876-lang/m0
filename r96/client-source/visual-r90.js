@@ -156,10 +156,19 @@ html.r90-ui .muted{color:#b8ad9c}html.r90-ui .bar{border-color:#75634e;border-ra
   const L=r?.exploration;if(!L?.floorCells?.length||!L.walls?.length)return[];
   // Only authored geometry participates in selection. Moving props, route and
   // the current arrival entry may hide a mark but never select a different one.
+  // R156: 칸마다 모든 벽과 거리를 재던 것을, 벽마다 '2칸 안' 격자 칸에만 넣어 두고 그 칸의 벽만 잰다(R155 와 같은 방법).
+  //  쓰는 문턱이 1.65칸이라 2칸 안 최솟값은 그대로이고, 2칸 밖은 똑같이 '멀다'. window.__STORYWORLD_R155_NOGRID__ 이면 옛 방식.
+  const NEAR=2,grid=new Map();if(!window.__STORYWORLD_R155_NOGRID__)L.walls.forEach((w,i)=>{let x0,x1,y0,y1;
+   if(Array.isArray(w.endpoints)&&w.endpoints.length===2){const[a,b]=w.endpoints,m=NEAR+(w.depth||.24)/2;x0=Math.min(a[0],b[0])-m;x1=Math.max(a[0],b[0])+m;y0=Math.min(a[1],b[1])-m;y1=Math.max(a[1],b[1])+m;}
+   else if(finite(w)&&Number.isFinite(w.width+w.depth)){x0=w.x-w.width/2-NEAR;x1=w.x+w.width/2+NEAR;y0=w.y-w.depth/2-NEAR;y1=w.y+w.depth/2+NEAR;}else return;
+   if(![x0,x1,y0,y1].every(Number.isFinite)||(x1-x0)*(y1-y0)>40000){let a=grid.get('all');if(!a)grid.set('all',a=[]);a.push(i);return;}
+   for(let gx=Math.floor(x0);gx<=Math.floor(x1);gx++)for(let gy=Math.floor(y0);gy<=Math.floor(y1);gy++){const k=gx+','+gy;let a=grid.get(k);if(!a)grid.set(k,a=[]);a.push(i);}});
+  const nearWall=p=>{if(window.__STORYWORLD_R155_NOGRID__)return Math.min(...L.walls.map(w=>wallDistance(p,w)));
+   let m=Infinity;for(const i of [...(grid.get(Math.floor(p.x)+','+Math.floor(p.y))||[]),...(grid.get('all')||[])]){const d=wallDistance(p,L.walls[i]);if(d<m)m=d;}return m;};
   const guard=protections(r,id,false),candidates=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5,seed:hash('r90-floor:'+id+':'+x+':'+y)})).sort((a,b)=>a.seed-b.seed||a.y-b.y||a.x-b.x),out=[];
   for(const c of candidates){
    const radius=.32+(c.seed%100)/500,p={x:c.x,y:c.y,radius,angle:((c.seed>>>8)%360)*Math.PI/180,alpha:.2+((c.seed>>>16)%5)*.02};
-   const wall=Math.min(...L.walls.map(w=>wallDistance(p,w)));
+   const wall=nearWall(p);
    if(wall<radius+.08||wall>1.65||!safe(p,guard,r,false)||out.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<2.6))continue;
    out.push(p);if(out.length===LIMIT)break;
   }
