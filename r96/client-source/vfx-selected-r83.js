@@ -8,7 +8,8 @@
  const beginFrame=()=>{frameDraws=0;frameKeys.clear();for(const role of Object.keys(roleDraws))roleDraws[role]=0;window.__STORYWORLD_DYNAMIC_VFX_R84__?.beginFrame();};
  const note=r=>{events.push({...r,at:time});if(events.length>192)events.shift();};
  const mode=()=>window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off';
- const scoped=()=>layer==='STORY'&&!window.__STORYWORLD_EGO151__?.inspect().state.active&&mode()==='off'&&!window.matchMedia?.('(pointer: coarse)').matches;
+ const coarseMQ=window.matchMedia?.('(pointer:coarse)');// R152: 장면마다 matchMedia 를 새로 만들지 않고 값만 읽는다
+ const scoped=()=>layer==='STORY'&&!window.__STORYWORLD_EGO151__?.inspect().state.active&&mode()==='off'&&!coarseMQ?.matches;
  const eligible=()=>!!(started&&player?.hp>0&&room&&current===zone&&currentRoom===room&&scoped()&&data.regions[zone]);
  const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial)&&e.hp>0&&!e.deadRecorded);
  const actor=id=>typeof id==='object'?id:room?.enemies?.find(e=>e.id===id||e.nativeId===id);

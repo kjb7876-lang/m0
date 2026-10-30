@@ -27,7 +27,7 @@
  function set(patch={}){for(const k of Object.keys(DEFAULTS))if(typeof patch[k]==='boolean')prefs[k]=patch[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();return{...prefs};}
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),finite=Number.isFinite,TAU=Math.PI*2;
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
- const coarse=()=>!!window.matchMedia?.('(pointer:coarse)').matches;
+ const coarseMQ=window.matchMedia?.('(pointer:coarse)'),coarse=()=>!!coarseMQ?.matches;// R152: 장면마다 matchMedia 를 새로 만들지 않고 한 번 만든 목록의 값만 읽는다
  const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
  const hash=s=>{let h=2166136261;for(const c of String(s)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;};
  const live=()=>typeof started!=='undefined'&&started&&!loading&&!!room&&!!player;
