@@ -24,7 +24,7 @@ let prefs={on:true,hwandoIdle:true};try{prefs={...prefs,...JSON.parse(localStora
 const stats={hitFrames:0,idleFrames:0,frames:0,swings:0,dupRemoved:0,waiting:0,errors:0,lastDir:null,lastFrame:null};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
-const pathOf=(h,d,act='attack')=>act==='walk'?'assets/r130/'+h+'/walk-'+d+'.webp':'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES.filter(h=>h!=='hwando'));
+const pathOf=(h,d,act='attack')=>act==='walk'?'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp':'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES.filter(h=>h!=='hwando'));
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 걷기(R140 sheetMeasure)와 같은 방법: 칸마다 가운데 100px 띠의 머리 꼭대기 → 발(226)~머리 키의 중앙값.
@@ -52,13 +52,18 @@ function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))){rec.commands.splice(i,1);stats.dupRemoved++;}}
  return fr;}
 // 환도: 옛 그림(황갈색 R93 서 있기, hero-authored 동작 묶음)을 같은 흰 망토 시트로. R130 이 다른 영웅에 쓴 대응과 같다
-//  (스킬 → 공격 3번째 칸, 막기·맞음 → 공격 첫 칸(시트에 피격 없음), 대시 → 걷기 4번째 칸). 궁극기는 그림에 효과가 들어 있어 그대로.
+//  (스킬 → 공격 3번째 칸, 막기·맞음 → 공격 첫 칸(시트에 피격 없음), 대시 → 걷기 4번째 칸, 궁극기 → 공격 4번째 칸(타격) —
+//   옛 묶음의 궁극기 칸은 효과 없는 황갈색 찌르기 자세였다).
 function hwandoUnify(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;if(c.r121Walk||c.r143Attack)return;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(!best)return;const src=String(best.sourcePath||best.image?.src||''),walkDir=()=>{const d=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.walkDir||FOUR[player.direction]||'s';return DIR8.includes(d)?d:'s';};
  if(/r93\/idle\/idle-hwando/.test(src)){if(place(rec,st,best,'hwando',walkDir(),0,1,1)!=null)stats.idleFrames++;return;}
- if(!/hero-authored[^/]*\/hwando-(action|walk)-atlas/.test(src)||player.ultimateAnim>0)return;
- const[act,fr,dir]=player.dashAnim>0?['walk',3,walkDir()]:player.skillAnim>0?['attack',2,dirNow()]:['attack',0,dirNow()];
+ if(!/hero-authored[^/]*\/hwando-(action|walk)-atlas/.test(src))return;
+ const[act,fr,dir]=player.ultimateAnim>0?['attack',3,dirNow()]:player.dashAnim>0?['walk',3,walkDir()]:player.skillAnim>0?['attack',2,dirNow()]:['attack',0,dirNow()];
  if(place(rec,st,best,'hwando',dir,0,1,0,act,fr)!=null)stats.hwandoActs=(stats.hwandoActs||0)+1;}
+// 기억사수 대시: R128 이 만든 대시 그림(g-dash_*)은 몸이 34% 작아(36px vs 서 있기 54px) 대시 때마다 영웅이 줄었다 → 다른 영웅(R130)처럼 걷기 4번째 칸.
+function gunnerDash(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
+ if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.walkDir||FOUR[player.direction]||'e';
+ if(place(rec,st,best,'gunner',DIR8.includes(d)?d:'e',0,1,0,'walk',3)!=null)stats.gunnerDash=(stats.gunnerDash||0)+1;}
 let hurt={start:0,prev:0,dir:'s'};
 function applyHit(rec,st){const h=player.hero;if(!HIT.has(h))return;const a=+player.hurtAnim||0;if(a>hurt.prev+1e-6||hurt.start<=0){hurt.start=a;hurt.dir=dirNow();}hurt.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
@@ -69,6 +74,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
  try{if(player&&player.hero!==lastHero){lastHero=player.hero;preload();}
   const busy=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
   if(!(player?.attackAnim>0))swing.prev=0;if(!(player?.hurtAnim>0))hurt.prev=0;
+  if(prefs.on&&st>=0&&solo()&&player?.hero==='gunner'&&player.dashAnim>0){gunnerDash(rec,st);return r;}
   if(prefs.on&&prefs.hwandoIdle&&st>=0&&solo()&&player?.hero==='hwando'&&!(player.attackAnim>0&&!busy)){hwandoUnify(rec,st);return r;}
   if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){applyHit(rec,st);return r;}
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;

@@ -19074,8 +19074,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 10949,
-      "sha256": "6be138f2dfb9f8c41063296f7bb7a33dc8091195857da1e07e0eafcb62bff19f"
+      "bytes": 12014,
+      "sha256": "c3a12f780a1dd3634ff2dddddf13a03ad8a28830b15c5d1eb3037e25914e6d6e"
     },
     {
       "path": "audio-r108.js",
@@ -20289,7 +20289,7 @@
     }
   ],
   "fileCount": 4057,
-  "totalBytes": 787031352,
+  "totalBytes": 787032417,
   "webHTMLSha256": "ddf9bc83fd7cc04c635a80e44a41c6eea6bd88e7f7ea846809ff1153f8c846cb",
   "largest": [
     {
