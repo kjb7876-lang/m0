@@ -25,14 +25,55 @@
  // R128: 기억사수를 Gemini 시트(Drive StoryWorld-HERO-gunner-sheet-20261030, 7.5~8등신 다크 판타지, scripts/r128-gunner-sheet.py)로 바꾼다.
  //    기존 정지·동작 그림(만화체) 59장 각각을 같은 동작·방향 프레임으로 만든 대체본(같은 512 캔버스·발 위치·몸 키)으로 보낸다. 설정 gunnerSheet.
  // R130: 같은 방식을 영웅마다(scripts/r130-hero-sheet.py). keep: 그림에 특수 효과가 들어 있어 원래 그림을 두는 동작(미카엘라 궁극기 날개·방향 막기 방패).
- const SHEETS={gunner:{dir:'assets/r128/gunner/',keep:null},michaela:{dir:'assets/r130/michaela/',keep:/ultimate-|actions-directional\/michaela-guard-/}};
- const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[47]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
- const swap128=k=>{if(!prefs.gunnerSheet)return null;for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;const parts=k.split('/');return SHEETS[h].dir+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
+ const SHEETS={gunner:{dir:'assets/r128/gunner/',keep:null},michaela:{dir:'assets/r130/michaela/',keep:/ultimate-|actions-directional\/michaela-guard-/},
+  seoha:{dir:'assets/r130/seoha/',keep:/ultimate-/},lauren:{dir:'assets/r130/lauren/',keep:/ultimate-/},
+  neon:{dir:'assets/r130/neon/',keep:/ultimate-/},hunter:{dir:'assets/r130/hunter/',keep:/ultimate-/},slayer:{dir:'assets/r130/slayer/',keep:/ultimate-|actions-directional\/slayer-guard-/},
+  hwando:{dir:'assets/r130/hwando/',keep:/./}};// 환도: 서 있기 그림이 좋아 걷기만 새 시트(정지·동작 그림은 그대로)// R131: 서하·로렌(궁극기 그림은 큰 효과가 들어 있어 원래 그림)
+ const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[478]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
+ const swap128=k0=>{if(!prefs.gunnerSheet)return null;const k=String(k0).replace(/^assets\/r99\/clean\//,'');/* R131: R99 정리 사본(assets/r99/clean/assets/…)도 같은 대체본 */for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;const parts=k.split('/');return SHEETS[h].dir+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
  const swapState=new Map();
+ // R131: 바꿔 넣을 그림을 미리 받아 두고, 준비됐으면 그 자리에서 바로 바꾼다(예전엔 원래 그림이 먼저 그려진 뒤 바뀌어 옛 그림이 잠깐 보였고,
+ //       지역 이동으로 그림 캐시가 비면 '이미 바꿈'으로 기억해 옛 그림이 그대로 남았다). 캐시 줄마다 매번 확인한다.
+ const art=new Map();// 새 그림 주소 -> {img, state, keys}
+ function wantArt(to,k){let e=art.get(to);if(!e){e={img:new Image(),state:'loading',keys:new Set()};e.img.decoding='async';
+   e.img.onload=()=>{e.state='ready';for(const kk of e.keys){const r=typeof imageCache!=='undefined'?imageCache.get(kk):null;if(r)applyArt(r,e);}};e.img.onerror=()=>{e.state='failed';};
+   art.set(to,e);e.img.src=typeof urlFor==='function'?urlFor(to):to;}if(k)e.keys.add(k);return e;}
+ function applyArt(r,e){if(!r||r.image===e.img)return;if(!r.r119Original)r.r119Original=r.image;r.image=e.img;if(typeof imageCrop==='function'){r.r119Crop=r.crop;r.crop=imageCrop(e.img);}stats.swaps=(stats.swaps||0)+1;}
+ const swapTo=k=>swap128(k)||(prefs.heroArt?SWAP[k]:null);
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
-  try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=swap128(k)||SWAP[k];
-    if(to&&!swapState.has(k)){swapState.set(k,'loading');const im=new Image();im.decoding='async';im.onload=()=>{const r=imageCache.get(k);if(r&&prefs.heroArt){r.r119Original=r.image;r.image=im;if(typeof imageCrop==='function'){r.r119Crop=r.crop;r.crop=imageCrop(im);}/* R121: 게임이 처음 그림으로 재 둔 내용 상자(crop)를 새 그림으로 다시 잰다 — 안 하면 바깥이 잘린다 */swapState.set(k,'swapped');stats.swaps=(stats.swaps||0)+1;}};im.onerror=()=>swapState.set(k,'failed');im.src=typeof urlFor==='function'?urlFor(to):to;}}}catch(_){}
+  try{if(row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=swapTo(k);
+    if(to){const e=wantArt(to,k);swapState.set(k,e.state==='ready'?'swapped':e.state);if(e.state==='ready')applyArt(row,e);}}}catch(_){}
   return row;};}
+ // 영웅을 고르거나 바꾸면 그 영웅의 대체 그림·걷기·서 있기 시트를 미리 받는다.
+ const preloaded=new Set();
+ function preloadHeroArt(){try{const h=typeof player==='object'&&player?.hero;if(!h||preloaded.has(h)||typeof heroPaths!=='function')return;preloaded.add(h);
+  for(const p of heroPaths(h)){const k=String(p).replace(/^\.\//,''),to=swapTo(k);if(to)wantArt(to,k);}
+  if(SHEETS[h]&&prefs.gunnerSheet){for(const d of ['s','se','e','ne','n'])wantArt(SHEETS[h].dir+'walk-'+d+'.webp');loadSheetIndex(h);}}catch(_){}}
+ const sheetIdx=new Map(),sheetSwap=new Map(),ATLAS_HEROES=new Set(['slayer']);// 아틀라스로 그리는 영웅: 동작 그림을 미리 다 받아 둔다(첫 공격부터 새 그림)
+ function loadSheetIndex(h){if(sheetIdx.has(h)||typeof fetch!=='function')return;sheetIdx.set(h,null);const u=SHEETS[h].dir+'index.json';
+  fetch(typeof urlFor==='function'?urlFor(u):u).then(r=>r.ok?r.json():null).then(j=>{if(j?.swap){sheetSwap.set(h,j.swap);if(ATLAS_HEROES.has(h)){const ks=Object.keys(j.swap);for(const k of ks)wantArt(j.swap[k].path,k);if(typeof ensureImages==='function')Promise.resolve(ensureImages(ks.filter(k=>!(typeof imageCache!=='undefined'&&imageCache.get(k))))).catch(()=>{});}}if(j?.idle){sheetIdx.set(h,j.idle);for(const it of Object.values(j.idle))wantArt(it.path);}}).catch(()=>{});}
+ // R93 서 있기(visual-r93)가 이 영웅의 새 8방향 서 있기 시트를 쓰게 알려 준다. 준비 전에는 null(R93 원래 그림).
+ const OPP={e:'w',w:'e',se:'sw',sw:'se',ne:'nw',nw:'ne',s:'s',n:'n'};
+ window.__STORYWORLD_HERO_SHEETS__=Object.freeze({idleItem(h,dir,mirrored){if(!prefs.gunnerSheet||!SHEETS[h])return null;loadSheetIndex(h);const m=sheetIdx.get(h);if(!m)return null;
+   const it=m[mirrored?OPP[dir]||dir:dir]||m.s;const e=it&&wantArt(it.path);return e&&e.state==='ready'?{...it,image:e.img}:null;},heroes:()=>Object.keys(SHEETS)});
+ // R131: 슬레이어는 게임이 옛 그림 묶음(hero-authored-v314rc5 동작·걷기 아틀라스)의 칸으로 그려서 새 시트로 바꾼 정지·동작 그림이
+ //  쓰이지 않았다(브라우저 측정: 공격 때 옛 그림). 영웅 그림이 지나는 R83 표시 단계에서 그 칸을 같은 상태·방향의 새 그림(발 위치·몸 키는
+ //  index.json frame)으로 바꾼다. 새 그림이 아직 준비되지 않았으면 원래 칸을 그대로 그린다(영웅이 사라지지 않게). 환도는 원래 그림 유지.
+ const ATLAS_RE=/hero-authored-v314rc5\/([a-z]+)-(?:action|walk)-atlas\.png$/,SIDE4={front:'front',back:'back',left:'left',right:'right'};
+ function atlasSwap(frame){const n=frame?.nativeHero5,m=ATLAS_RE.exec(String(frame?.path||''));if(!n||!m||m[1]!==n.hero||!SHEETS[n.hero]||n.hero==='hwando'||!prefs.gunnerSheet)return null;
+  loadSheetIndex(n.hero);const sw=sheetSwap.get(n.hero),side=SIDE4[n.direction];if(!sw||!side)return null;const h=n.hero,N='assets/heroes/normalized/',swing=Number(n.atlasFrame)>=4;
+  const orig=n.state==='hit'?`${N}actions-v3126/${h}-hurt-${side}.webp`:n.state==='move'?`${N}actions-v3126/${h}-move-${side}.webp`:n.state==='dash'?`${N}actions-consistent/${h}-dash-${side}.webp`
+   :n.state==='guard'?`${N}actions-consistent/${h}-guard-${side}.webp`:n.state==='attack'||n.state==='ultimate'?`${N}actions-consistent/${h}-${swing||n.state==='ultimate'?'attack':'skill'}-${side}.webp`
+   :n.state==='skill'?`${N}actions-consistent/${h}-${swing?'attack':'skill'}-${side}.webp`:`${N}directions/${h}-${side}.webp`;
+  const it=sw[orig];if(!it?.frame)return null;const e=wantArt(it.path,orig);if(e.state!=='ready')return null;
+  const row=typeof readyImage==='function'?readyImage(orig):null;if(!row||row.image!==e.img){if(!row&&typeof ensureImages==='function'&&!atlasWant.has(orig)){atlasWant.add(orig);Promise.resolve(ensureImages([orig])).catch(()=>{});}return null;}
+  const [W]=it.frame.size,[px,py]=it.frame.pivot,half=Math.max(8,Math.min(px,W-px));stats.atlasSwap=(stats.atlasSwap||0)+1;
+  // 자르기 상자를 발 기준 좌우 대칭·발 높이까지로 둔다(걷기·서 있기 덧그림이 상자 밑 가운데를 발로 본다)
+  return{...frame,path:orig,assetFrame:{...frame.assetFrame,sourceRect:[px-half,0,half*2,py],pivot:[half,py],visibleHeight:it.frame.visibleHeight,bakedFacing:side==='left'?'left':'right',muzzle:null},
+   nativeHero5:{...n,flip:false,swordTip:null,clip:null,r131Atlas:it.path}};}
+ const atlasWant=new Set();
+ {const r83=window.StoryHeroPresentationR83;if(r83&&typeof r83.present==='function'){const base=r83.present;
+  window.StoryHeroPresentationR83=Object.freeze({...r83,present(frame){const res=base.call(r83,frame);try{const f=atlasSwap(res?.frame||frame);if(f)return{...(res||{heightScale:1}),frame:f};}catch(e){lastError=String(e?.message||e);}return res;}});}}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
  //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
  //    ChatGPT 2026-10-29, 대기 그림 참조, 오른쪽을 봄)으로 그 칸만 바꿔 그린다. 좌우 판단(R110 표 'L' = 오른쪽을 보는 그림)은 그대로.
@@ -111,11 +152,13 @@
   try{const [sx,sy,sw,sh]=rect,c=document.createElement('canvas');c.width=Math.ceil(sw);c.height=Math.ceil(sh);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,sw,sh);const d=g.getImageData(0,0,c.width,c.height).data;
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(sw,x1-x0+3),Math.min(sh,y1-y0+3)];}catch(_){}m.set(k,box);return box;}
- if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
+ if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){preloadHeroArt();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
   try{if(!prefs.walkCycle||st<0||!player)return r;const co=window.__STORYWORLD_COOP_SIM_R62__;if(co?.mode&&co.mode()!=='off')return r;/* 협동에서는 한 번에 여러 영웅을 그려 다른 영웅 그림을 바꿀 수 있어 건너뜀(Codex 리뷰) */let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
-     if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),sx=(walkState.sx||0)*.7+(q1.x-q0.x)*.3,sy=(walkState.sy||0)*.7+(q1.y-q0.y)*.3;walkState.sx=sx;walkState.sy=sy;const cand=DIR8[((Math.round(Math.atan2(sy,sx)/(Math.PI/4))%8)+8)%8];
+     if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),sx=(walkState.sx||0)*.7+(q1.x-q0.x)*.3,sy=(walkState.sy||0)*.7+(q1.y-q0.y)*.3;walkState.sx=sx;walkState.sy=sy;let cand=DIR8[((Math.round(Math.atan2(sy,sx)/(Math.PI/4))%8)+8)%8];
+      // R131: 움직이는 입력 방향(moveVX150)이 있으면 그것을 쓴다 — 위치 변화로 짐작하면 몇 장면 늦게 바뀌어 위로 가는데 옆 걷기가 보였다. 2장면 이어지면 바꾼다.
+      const mvx=+player.moveVX150||0,mvy=+player.moveVY150||0;let fast=false;if(Math.hypot(mvx,mvy)>.05){const a0=project(player.x,player.y),b0=project(player.x+mvx,player.y+mvy);cand=DIR8[((Math.round(Math.atan2(b0.y-a0.y,b0.x-a0.x)/(Math.PI/4))%8)+8)%8];fast=true;}
       // 길잡이 경로와 직접 조작이 겹치면 한 장면씩 방향이 튀어 그림이 좌우로 뒤집혔다(사용자): 화면 이동을 부드럽게 모으고, 새 방향이 3장면 이어질 때만 바꾼다.
-      if(cand===walkState.dir)walkState.pend=0;else if(cand===walkState.pendDir){if(++walkState.pend>=3){walkState.dir=cand;walkState.pend=0;}}else{walkState.pendDir=cand;walkState.pend=1;}}}}
+      if(cand===walkState.dir)walkState.pend=0;else if(cand===walkState.pendDir){if(++walkState.pend>=(fast?2:3)){walkState.dir=cand;walkState.pend=0;}}else{walkState.pendDir=cand;walkState.pend=1;}}}}
    walkState.x=player.x;walkState.y=player.y;
    const busy=player.attackAnim>0||player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
    // 이동 중 기본 사격·방어(반자동은 걸으면서 계속 쏜다)에는 걷기를 이어 간다 — 걷기 그림도 총을 앞으로 든 자세라 정지 그림이 미끄러지던 것보다 자연스럽다.
@@ -129,8 +172,9 @@
       Object.assign(sb,{sourceRect:b,points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walkStops=(stats.walkStops||0)+1;return r;}
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
    if(busyMove)return r;
-   const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;const row=typeof readyImage==='function'?readyImage(sh.path):null;
-   if(!row){wantImage(sh.path);return r;}
+   const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;let row=typeof readyImage==='function'?readyImage(sh.path):null;
+   // R131: 게임 캐시에 아직 없으면 미리 받아 둔 그림을 바로 쓴다(환도: 첫 몇 장면 옛 R91 걷기 그림이 보였다).
+   if(!row){wantImage(sh.path);const pe=art.get(sh.path);if(pe?.state!=='ready')return r;row={image:pe.img};}
    let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
    if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===6?4.8:sh.frames===12?9.6:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.

@@ -34,12 +34,18 @@ for act, (a, f) in {'attack': ('attack', 3), 'skill': ('attack', 2), 'guard': ('
     for side, (d, m) in {'front': ('s', 0), 'back': ('n', 0), 'left': ('e', 1), 'right': ('e', 0)}.items(): MAP[AC + act + '-' + side + '.webp'] = (a, d, f, m)
 for side, (d, m) in {'front': ('s', 0), 'back': ('n', 0), 'left': ('e', 1), 'right': ('e', 0)}.items(): MAP[V + 'hurt-' + side + '.webp'] = ('hit', d, 1, m)
 for side, d in {'front': 's', 'back': 'n', 'left': 'e', 'right': 'e'}.items(): MAP[V + 'move-' + side + '.webp'] = ('walk', d, 2, 0)  # 두 옆 그림 모두 오른쪽을 봄
+# R131: 게임은 왼쪽을 볼 때 hurt-right, 오른쪽을 볼 때 hurt-left 를 그린다(브라우저 측정) — 쓰이는 방향으로 맞춘다
+MAP[V + 'hurt-right.webp'] = ('hit', 'e', 1, 1); MAP[V + 'hurt-left.webp'] = ('hit', 'e', 1, 0)
 for side, (d, m) in {'front': ('s', 0), 'back': ('n', 0), 'left': ('e', 0), 'right': ('e', 1)}.items(): MAP[V + 'ultimate-' + side + '.webp'] = ('attack', d, 3, m)  # 이름과 반대로 그려져 있음
 
 def box(a, thr=24):
     ys, xs = np.nonzero(a > thr); return (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1) if len(xs) else None
 def foot(a, b):
-    x0, y0, x1, y1 = b; rows = a[max(y0, y1 - 8):y1, x0:x1] > 24; xs = np.nonzero(rows.any(0))[0]; return x0 + (xs.mean() if len(xs) else (x1 - x0) / 2), y1
+    # R131: 발 = 몸통 폭이 있는 가장 아래 줄(칼끝·창끝처럼 가는 것은 건너뜀), x 는 그 위 10% 높이 안의 알파 무게 중심
+    x0, y0, x1, y1 = b; m = a[y0:y1, x0:x1] > 24; cnt = m.sum(1); need = max(4, int((x1 - x0) * .10))
+    rows = np.nonzero(cnt >= need)[0]; fy = (rows[-1] + 1) if len(rows) else (y1 - y0)
+    band = a[y0 + max(0, fy - max(6, int((y1 - y0) * .10))):y0 + fy, x0:x1].astype(float); w = band.sum(0)
+    return x0 + (float((w * np.arange(len(w))).sum() / w.sum()) if w.sum() else (x1 - x0) / 2), y0 + fy
 sheets = {}
 def frame(act, d, i):
     k = (act, d)
@@ -47,8 +53,15 @@ def frame(act, d, i):
     return sheets[k].crop((i * CW, 0, (i + 1) * CW, CH))
 index = {'revision': 'R128', 'source': {'drive': 'StoryWorld-HERO-gunner-sheet-20261030.zip', 'driveId': '13-unzqWeeD2_9N7q2KInxcXm29JTI3JR', 'maker': 'Gemini (사용자 요청, docs/gemini-hero-refs 규격)',
          'files': {k: v['sha256'] for k, v in man.items()}}, 'walk': {}, 'swap': {}}
+index['idle'] = {}  # R131: 8방향 서 있기(R93 idle 대신) 4프레임, 왼쪽 3방향은 미리 뒤집음
+for d, (b, m) in {'s': ('s', 0), 'se': ('se', 0), 'e': ('e', 0), 'ne': ('ne', 0), 'n': ('n', 0), 'sw': ('se', 1), 'w': ('e', 1), 'nw': ('ne', 1)}.items():
+    im = Image.open(src / f'HERO-gunner-idle-{b}.png').convert('RGBA'); fr = [im.crop((i * CW, 0, (i + 1) * CW, CH)) for i in range(im.width // CW)]
+    if m: fr = [f.transpose(Image.FLIP_LEFT_RIGHT) for f in fr]
+    im = Image.new('RGBA', (CW * len(fr), CH)); [im.alpha_composite(f, (i * CW, 0)) for i, f in enumerate(fr)]
+    a = np.asarray(fr[0])[..., 3]; b0 = box(a); fx, fy = foot(a, b0); p = out / f'idle-{d}.webp'; im.save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
+    index['idle'][d] = {'path': f'assets/r128/gunner/idle-{d}.webp', 'frames': len(fr), 'cellW': CW, 'cellH': CH, 'footX': round(float(fx), 1), 'footY': int(fy), 'refBody': int(b0[3] - b0[1]), 'sha256': sha(p.read_bytes())}
 for d in ['s', 'se', 'e', 'ne', 'n']:
-    p = out / f'walk-{d}.webp'; Image.open(src / f'HERO-gunner-walk-{d}.png').convert('RGBA').save(p, 'WEBP', quality=92, alpha_quality=100, method=6)
+    p = out / f'walk-{d}.webp'; Image.open(src / f'HERO-gunner-walk-{d}.png').convert('RGBA').save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
     index['walk'][d] = {'path': f'assets/r128/gunner/walk-{d}.webp', 'cols': 8, 'rows': 1, 'cell': [CW, CH], 'sha256': sha(p.read_bytes())}
 for orig, (act, d, i, m) in MAP.items():
     o = np.asarray(Image.open(site / orig).convert('RGBA'))[..., 3]; ob = box(o)

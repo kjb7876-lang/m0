@@ -1,0 +1,715 @@
+{
+ "revision": "R130",
+ "hero": "slayer",
+ "source": {
+  "files": {
+   "README.txt": "e6a297eefd5c7a8d9ccaa6dcad12e8bbc3f768cbbf767ce5758a8faf876a6619",
+   "SPEC.json": "fbd1f73b2b1ee23b452963203d5996c6ec3a51dc7981042478c9c7c0df50988b",
+   "HERO-slayer-attack-e.png": "0632eb2838d0dc0259ad28219a27fad132685bc2e015e9b1aa755899d331e772",
+   "HERO-slayer-attack-n.png": "171019944f64eccbe60f35ae54f6759d0aa0dac83dde04863ea3499e2d5c59b9",
+   "HERO-slayer-attack-ne.png": "ba4334999797aa53938e688ac91aa4ef35904612abf91a4a9a1819769e53ffd9",
+   "HERO-slayer-attack-s.png": "31c0feb06d47ce4707b8d4d3b87d155922cad21fada20fe3a96d7b7dde06e561",
+   "HERO-slayer-attack-se.png": "c79a1e0caf124714e27a157e17b73da681c13f802ac8fe7a57e366a21e2e5a2e",
+   "HERO-slayer-death-e.png": "9f979962340ba6d2347a6c10a24c76949086358211085ef7b92c878a9263553b",
+   "HERO-slayer-death-n.png": "56730a176a984873baacebff6462dd4e12775969c69aac65f3fe424897e4e62e",
+   "HERO-slayer-death-ne.png": "9c06c8f60b115c6bdf4eb0f9474a22f7c9e85dcdf0660c7deecf6ab5ce586ace",
+   "HERO-slayer-death-s.png": "59d33d365d40b7b1f74a39ae3c342d2fce269563f0833373a4e18ae9cbce6c0d",
+   "HERO-slayer-death-se.png": "248ed8b28f21da58d1ffde39e035b2a283a20e0d834ca9d53534d4bf39cbe543",
+   "HERO-slayer-hit-e.png": "16ac11e20f80e02b8c54794bf2e885fce8276025e2088ad06d837181143fc676",
+   "HERO-slayer-hit-n.png": "2a8efb2a1fa974ff380e513b9964401b8fd7d4a0d866f3c75929b686cbade168",
+   "HERO-slayer-hit-ne.png": "c449e22f74ff80e5f50b2288047059be2eab8191eb9fabd7d4ac6cda27038dd1",
+   "HERO-slayer-hit-s.png": "603f22f13cc5d945676dc39a1b7c9f4de3dc59947e90d99b3daf1e276dcc195e",
+   "HERO-slayer-hit-se.png": "cdc9b81aa29acf802b1df0f2688fa53125be0c1f96d60022f6385524117284e8",
+   "HERO-slayer-idle-e.png": "792c721c05eee83c335af25c6ecbd9f31d15c709d432d6c987ba01833a177c46",
+   "HERO-slayer-idle-n.png": "1272d9c854cb1686d24fed16bab50f38eae4d2ad11b43c6916e350643eab8561",
+   "HERO-slayer-idle-ne.png": "afbd13d9128d5d664877850f68f86b4d684d9fb9951f4cc321c392ed060cbda1",
+   "HERO-slayer-idle-s.png": "3ec03d1f308f8ce11158789c150d5153e4e82f74193fa8911c9cb30d3a007000",
+   "HERO-slayer-idle-se.png": "835519afef776dcacc6d97d9d62c3e6a03c3a609590c5f86a349cdac035cf709",
+   "HERO-slayer-walk-e.png": "07b72190d9e41225a36629e221ea09053d0f73bf8b8d14c62df2c712492e0415",
+   "HERO-slayer-walk-n.png": "ca22ab83448ea593641f878d7e9877cd940ce2719ba6d20b3c0aba0543d86d63",
+   "HERO-slayer-walk-ne.png": "9ba4294d929e72131f00051f092e2476eab63500d37407652d713337313ebc59",
+   "HERO-slayer-walk-s.png": "2981a6317ca0a5a4d4597ee9a81d0c40cbd06d38929577ed03c0825fd712dace",
+   "HERO-slayer-walk-se.png": "b0dce65b50bf35fe03c92540444c89e88167e9283cbbec94f68ec810e626ebea"
+  }
+ },
+ "keep": [
+  "actions-v3126/slayer-ultimate-",
+  "actions-directional/slayer-guard-"
+ ],
+ "walk": {
+  "s": {
+   "path": "assets/r130/slayer/walk-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "7ebb9feffaffeda6e858b608fe858fe47aa14de1a75666ab6ea1aca46b5c4578"
+  },
+  "se": {
+   "path": "assets/r130/slayer/walk-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "f80c0f14ba06a1a825a373a0ca68e5463c8e621072dfada237d7f84b74c49a3f"
+  },
+  "e": {
+   "path": "assets/r130/slayer/walk-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "299a61892b6af59f46d241e706c949fffff00edce2d31d77c4c431785cfcaf2d"
+  },
+  "ne": {
+   "path": "assets/r130/slayer/walk-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "2c1604ae4d8d85f134cab4248d9b1460c7cf79c28d0d40a10bc6ec3a02063e3b"
+  },
+  "n": {
+   "path": "assets/r130/slayer/walk-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "628aefa7eba23f735f273b09d947d9b59604be9d925211ff59b493c284c6bf80"
+  }
+ },
+ "swap": {
+  "assets/heroes/normalized/directions/slayer-front.webp": {
+   "path": "assets/r130/slayer/directions-slayer-front.webp",
+   "from": "HERO-slayer-idle-s.png#0",
+   "mirror": false,
+   "sha256": "d053a334abe8e2fb7278d23b770d0c5c85b001ab7c4d846d751714bc790c27b7",
+   "bytes": 43452,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     251.5,
+     461
+    ],
+    "visibleHeight": 421.0
+   }
+  },
+  "assets/heroes/normalized/directions/slayer-back.webp": {
+   "path": "assets/r130/slayer/directions-slayer-back.webp",
+   "from": "HERO-slayer-idle-n.png#0",
+   "mirror": false,
+   "sha256": "1c98d7bc51a9f13d71c0ad2bc7db122b585848be7a752ad0d8c14c8472ec9c65",
+   "bytes": 39898,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     240.7,
+     474
+    ],
+    "visibleHeight": 421.0
+   }
+  },
+  "assets/heroes/normalized/directions/slayer-left.webp": {
+   "path": "assets/r130/slayer/directions-slayer-left.webp",
+   "from": "HERO-slayer-idle-e.png#0",
+   "mirror": true,
+   "sha256": "66e99330977db686ed80bdac6fea9d7345430a9132ce40aec429390bac28059c",
+   "bytes": 22414,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     301.9,
+     460
+    ],
+    "visibleHeight": 419.7
+   }
+  },
+  "assets/heroes/normalized/directions/slayer-right.webp": {
+   "path": "assets/r130/slayer/directions-slayer-right.webp",
+   "from": "HERO-slayer-idle-e.png#0",
+   "mirror": false,
+   "sha256": "8d6ea8d51e45924c30f32eed343f5437c45832fa89cd2de25a9279786592c8da",
+   "bytes": 22642,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     261.2,
+     460
+    ],
+    "visibleHeight": 419.7
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-attack-front.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-attack-front.webp",
+   "from": "HERO-slayer-attack-s.png#3",
+   "mirror": false,
+   "sha256": "f9a213bae0afec6a36cc819ebb2d597f91eefaf9bd7925ff825750580b3794cb",
+   "bytes": 41784,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     251.3,
+     475
+    ],
+    "visibleHeight": 424.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-attack-back.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-attack-back.webp",
+   "from": "HERO-slayer-attack-n.png#3",
+   "mirror": false,
+   "sha256": "6b10370102827579f4c0b181f8e1a354472cefa17966e080e47c492df6813fe1",
+   "bytes": 37924,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     240.8,
+     476
+    ],
+    "visibleHeight": 433.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-attack-left.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-attack-left.webp",
+   "from": "HERO-slayer-attack-e.png#3",
+   "mirror": true,
+   "sha256": "f1f9a61ad0611e680be298ffc8484a700049c7d685eb3a46a4699e24502ce0ad",
+   "bytes": 21812,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     260.2,
+     445
+    ],
+    "visibleHeight": 415.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-attack-right.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-attack-right.webp",
+   "from": "HERO-slayer-attack-e.png#3",
+   "mirror": false,
+   "sha256": "1caed48d24035766cc6f6fd961a9f022d68f1477aa07b131ee6e035322790e2c",
+   "bytes": 21618,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     267.3,
+     449
+    ],
+    "visibleHeight": 414.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-skill-front.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-skill-front.webp",
+   "from": "HERO-slayer-attack-s.png#2",
+   "mirror": false,
+   "sha256": "3351c1d8d30fbde735b97f80b93d7d4cce1fc21bc93cb4e9eff3efd10d9cf3fb",
+   "bytes": 42178,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     252.1,
+     469
+    ],
+    "visibleHeight": 442.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-skill-back.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-skill-back.webp",
+   "from": "HERO-slayer-attack-n.png#2",
+   "mirror": false,
+   "sha256": "00d45a0571ae49d9715dd848120374f21bdf938e03fe403257aabc6a548f8f70",
+   "bytes": 38578,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     239.9,
+     477
+    ],
+    "visibleHeight": 432.6
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-skill-left.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-skill-left.webp",
+   "from": "HERO-slayer-attack-e.png#2",
+   "mirror": true,
+   "sha256": "7af569ddb13a318f4aa14659f4d08b79b80a532fdbbd939eaef17e8af504833f",
+   "bytes": 21392,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     263.2,
+     453
+    ],
+    "visibleHeight": 437.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-skill-right.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-skill-right.webp",
+   "from": "HERO-slayer-attack-e.png#2",
+   "mirror": false,
+   "sha256": "ddf5437693550477c65473b14a02f407dd03c0165be2977d3483e9e7e8a20a6d",
+   "bytes": 21312,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     266.0,
+     455
+    ],
+    "visibleHeight": 436.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-guard-front.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-guard-front.webp",
+   "from": "HERO-slayer-attack-s.png#0",
+   "mirror": false,
+   "sha256": "12b071b5eca034235a82377b5f1897f644f5d324b34f101975a121c943fd9533",
+   "bytes": 38852,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     252.3,
+     477
+    ],
+    "visibleHeight": 409.5
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-guard-back.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-guard-back.webp",
+   "from": "HERO-slayer-attack-n.png#0",
+   "mirror": false,
+   "sha256": "8438353af43c730042d00708261a2f00ca74da23eef68d5fceaa967a89e27046",
+   "bytes": 35874,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     241.2,
+     490
+    ],
+    "visibleHeight": 414.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-guard-left.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-guard-left.webp",
+   "from": "HERO-slayer-attack-e.png#0",
+   "mirror": true,
+   "sha256": "7296e2fceb3b041226573416482c47a99ad766308cb4a654630a711d152aa4a8",
+   "bytes": 20574,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     260.9,
+     465
+    ],
+    "visibleHeight": 413.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-guard-right.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-guard-right.webp",
+   "from": "HERO-slayer-attack-e.png#0",
+   "mirror": false,
+   "sha256": "2c13f54961a770cb5c5c6df7978dbc6a4b35f9779ddcd077b18f8c8b2cdda68e",
+   "bytes": 20576,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     267.6,
+     465
+    ],
+    "visibleHeight": 412.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-dash-front.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-dash-front.webp",
+   "from": "HERO-slayer-walk-s.png#3",
+   "mirror": false,
+   "sha256": "8bb5caf65b0afafd1875db47f5be4704e3418299f84569e17bfe5ec8fde550c9",
+   "bytes": 43290,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     250.6,
+     479
+    ],
+    "visibleHeight": 439.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-dash-back.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-dash-back.webp",
+   "from": "HERO-slayer-walk-n.png#3",
+   "mirror": false,
+   "sha256": "d867e3be8db6d3ce1f25509d7ec2b21d4a73e1f824aa5f2239f99aa929b70c87",
+   "bytes": 41338,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     234.7,
+     505
+    ],
+    "visibleHeight": 457.9
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-dash-left.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-dash-left.webp",
+   "from": "HERO-slayer-walk-e.png#3",
+   "mirror": true,
+   "sha256": "6530c4f024e3d0d10f5ae64bf1c2c7c16dd7ab5280aa18c312970590450de64b",
+   "bytes": 21476,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     285.8,
+     472
+    ],
+    "visibleHeight": 433.6
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/slayer-dash-right.webp": {
+   "path": "assets/r130/slayer/actions-consistent-slayer-dash-right.webp",
+   "from": "HERO-slayer-walk-e.png#3",
+   "mirror": false,
+   "sha256": "7395ed92ca2356d203351a64d967e58696d2b1f1b6da318199f3e17fb06a0b54",
+   "bytes": 21146,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     242.7,
+     467
+    ],
+    "visibleHeight": 429.6
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-hurt-front.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-hurt-front.webp",
+   "from": "HERO-slayer-hit-s.png#1",
+   "mirror": false,
+   "sha256": "96010f0a6b8947989b1a3080c54c3574f1401ef203e3e816137bca29a15a36f0",
+   "bytes": 24986,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     281.9,
+     503
+    ],
+    "visibleHeight": 285.0
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-move-front.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-move-front.webp",
+   "from": "HERO-slayer-walk-s.png#2",
+   "mirror": false,
+   "sha256": "28c248d6850ea8beec3eaf6a940ceb22c96719b07e8dac0911366cd673a0e514",
+   "bytes": 23734,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     265.5,
+     509
+    ],
+    "visibleHeight": 284.0
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-hurt-back.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-hurt-back.webp",
+   "from": "HERO-slayer-hit-n.png#1",
+   "mirror": false,
+   "sha256": "81aef5fa105d85ca379792fffd0537f39ab3b6a627e743bcbe02ba28bb267c3a",
+   "bytes": 22896,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     231.5,
+     506
+    ],
+    "visibleHeight": 297.2
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-move-back.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-move-back.webp",
+   "from": "HERO-slayer-walk-n.png#2",
+   "mirror": false,
+   "sha256": "10a01bd9c5e9a52fbb0542ccaeb6f38b4753a93d39d31c13538455b2fb391f9f",
+   "bytes": 21022,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     238.4,
+     507
+    ],
+    "visibleHeight": 270.5
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-hurt-left.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-hurt-left.webp",
+   "from": "HERO-slayer-hit-e.png#1",
+   "mirror": true,
+   "sha256": "fc3b3f6f26df0a541680b8ad45e8a45a2a81698882273c0174c17caf7e976698",
+   "bytes": 13292,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     290.8,
+     508
+    ],
+    "visibleHeight": 286.4
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-move-left.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-move-left.webp",
+   "from": "HERO-slayer-walk-e.png#2",
+   "mirror": true,
+   "sha256": "73527d7086a8d0b402eed4f00127b4773d2f10a8a8e9cf5819e41e9e61fa9e3d",
+   "bytes": 11378,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     285.3,
+     483
+    ],
+    "visibleHeight": 259.6
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-hurt-right.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-hurt-right.webp",
+   "from": "HERO-slayer-hit-e.png#1",
+   "mirror": false,
+   "sha256": "92365dd71767c9fcd792e6b0341b2fa6fe9be3b03addca329873207c5a2bc87c",
+   "bytes": 12904,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     263.0,
+     509
+    ],
+    "visibleHeight": 286.4
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/slayer-move-right.webp": {
+   "path": "assets/r130/slayer/actions-v3126-slayer-move-right.webp",
+   "from": "HERO-slayer-walk-e.png#2",
+   "mirror": false,
+   "sha256": "19f658f48cd1e7c048e9fa5952dcbfff829f95eb78912c71183d3fb590efc7e2",
+   "bytes": 11308,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     232.3,
+     492
+    ],
+    "visibleHeight": 263.5
+   }
+  },
+  "assets/heroes/normalized/actions-directional/slayer-attack-left.webp": {
+   "path": "assets/r130/slayer/actions-directional-slayer-attack-left.webp",
+   "from": "HERO-slayer-attack-e.png#3",
+   "mirror": true,
+   "sha256": "0bd394e8b0897bccb13f613052b84a9dd2614a401de575978992d4522f952081",
+   "bytes": 15116,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     300.2,
+     369
+    ],
+    "visibleHeight": 306.6
+   }
+  },
+  "assets/heroes/normalized/actions-directional/slayer-attack-right.webp": {
+   "path": "assets/r130/slayer/actions-directional-slayer-attack-right.webp",
+   "from": "HERO-slayer-attack-e.png#3",
+   "mirror": false,
+   "sha256": "27bca6df458412d00100e2408450703c664194d7f5fda50f480b2700f43a4a28",
+   "bytes": 14980,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     210.8,
+     369
+    ],
+    "visibleHeight": 306.6
+   }
+  }
+ },
+ "idle": {
+  "s": {
+   "path": "assets/r130/slayer/idle-s.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 99.5,
+   "footY": 222,
+   "refBody": 181,
+   "sha256": "be128970b56ff72215d90811b883c5bf5d02f6c0e021cde2d8d59613cdbf704c"
+  },
+  "se": {
+   "path": "assets/r130/slayer/idle-se.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 98.7,
+   "footY": 222,
+   "refBody": 181,
+   "sha256": "7bf28271009c6cc334661ff6fc680b4b7f8218651f3508892d1df8dcf1daae17"
+  },
+  "e": {
+   "path": "assets/r130/slayer/idle-e.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 86.3,
+   "footY": 222,
+   "refBody": 182,
+   "sha256": "9c06ce6c9077da35cdbbcd687f368e31769cd3668a3e8bdab5b44723269ed670"
+  },
+  "ne": {
+   "path": "assets/r130/slayer/idle-ne.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 87.6,
+   "footY": 226,
+   "refBody": 182,
+   "sha256": "b405d533ea18ae2628ec38c3546584ca6d6a9fb771e35896a64a3a76dfe48f19"
+  },
+  "n": {
+   "path": "assets/r130/slayer/idle-n.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 86.4,
+   "footY": 226,
+   "refBody": 181,
+   "sha256": "cd77b562f12d7e6539280a81f38fb5dd4f1822e07a4cb6a80dce281489a06938"
+  },
+  "sw": {
+   "path": "assets/r130/slayer/idle-sw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 92.3,
+   "footY": 222,
+   "refBody": 181,
+   "sha256": "1edc77db162e13ebb2e0c395304085a6b650404fa6bd6fe80c5db180dc6209ed"
+  },
+  "w": {
+   "path": "assets/r130/slayer/idle-w.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 104.7,
+   "footY": 222,
+   "refBody": 182,
+   "sha256": "29937af8ae8f027d119384201f86e3732445a3f2622ea885fa8ae40ff93c283c"
+  },
+  "nw": {
+   "path": "assets/r130/slayer/idle-nw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 103.4,
+   "footY": 226,
+   "refBody": 182,
+   "sha256": "f1110e4b0ad03b16987d1a8ae54a640f41b7b96adb1e58472dafb58d2a02849b"
+  }
+ }
+}
