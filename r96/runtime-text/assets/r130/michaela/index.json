@@ -25,12 +25,16 @@
    "HERO-michaela-idle-ne.png": "5aaef3874492e4581a2f09732ff54bf6de54a7bd62aa7eb9735dc56076ca71c5",
    "HERO-michaela-idle-s.png": "9cee52aed1d41f1ca659c173d0ecbbd6ca3596865390ebc9148cea0f69e78bb2",
    "HERO-michaela-idle-se.png": "6d5097ee5473b29420d064dfd8c300c24b9cc8f6df7427c6738cd04fe1e35049",
-   "HERO-michaela-walk-e.png": "1e71e3f16354449a9a0d407315db5c39b1959f25c3d37c4c26b6b0836748a3c0",
-   "HERO-michaela-walk-n.png": "627bfd15fd54ff3b4fbcb578b5542761e3bd455f5f884868f35b624eee767e11",
-   "HERO-michaela-walk-ne.png": "3e2debb210650415f7d458cebd7bf42dfdaaafb6bca215d82288cb0afd2f7de5",
-   "HERO-michaela-walk-s.png": "3295c3cd2ff2e4f6584369df463b860c31f2ce8bb90d2917b588332aa36b2f9e",
-   "HERO-michaela-walk-se.png": "8d8a64d73f4c93957fe656ca3942f45c1b2df5586ba22811fe85e1f9cb26d587"
-  }
+   "HERO-michaela-walk-e.png": "3945c84063a645140f46bdd59acbfe24fbf1fa46b4c7e15e01fabf59b831e4c0",
+   "HERO-michaela-walk-n.png": "97a96176f1d0d4f7374d804ad35f3bf87a7c673ad48b6c5995bf4d531da0ffd9",
+   "HERO-michaela-walk-ne.png": "5bcc79301d9eb2a1d53c306464cbb125dc85d7454b6f1e73aa5c601188a646fd",
+   "HERO-michaela-walk-s.png": "454a576aa84f575da352532adc3bbd0dbda90887a891709315b25bbab04ca829",
+   "HERO-michaela-walk-se.png": "d9d89bf8bbc9fb23d06c72cadefbab5c7d1e0cfa4a743a402b533066fd52427d"
+  },
+  "drive": "StoryWorld-HERO-michaela-sheet-20261030.zip",
+  "driveId": "13y2Zuzf6Ty1vHCAMmw1P7euKNDjINUfO",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
   "actions-v3126/michaela-ultimate-",
@@ -45,7 +49,7 @@
     192,
     256
    ],
-   "sha256": "68e247c89592a424c3497aa16e5eac57dbebc3479f24cde68209500645ba2069"
+   "sha256": "91c7bc0492d3ed30015c178ac3ff6ca7f5affd33cd6f21d1d9110254ac21b3ca"
   },
   "se": {
    "path": "assets/r130/michaela/walk-se.webp",
@@ -55,7 +59,7 @@
     192,
     256
    ],
-   "sha256": "fdbd5cb742dfd298058eac3757d65d9e45ef57b9d68efb1184b82c6a7a3373a0"
+   "sha256": "150f9fe3565bc8250dd9364b7062b35196fe9a92e0aed458dc2787ec899d6707"
   },
   "e": {
    "path": "assets/r130/michaela/walk-e.webp",
@@ -65,7 +69,7 @@
     192,
     256
    ],
-   "sha256": "34f7b322c32d8cfb8221012034a5a635685f7a6c197d5b16ce52ff05d2901112"
+   "sha256": "58951a54a914271cd2eb66f9830361c411f4c99965ef3eec9b81cc6b0ff7e17b"
   },
   "ne": {
    "path": "assets/r130/michaela/walk-ne.webp",
@@ -75,7 +79,7 @@
     192,
     256
    ],
-   "sha256": "865b54f314e077f91a17ebce9b7ba70269ebcfd3798fb48bc6e8a59d76e15761"
+   "sha256": "5515dbb7e0a4db585b933ce931d14d95680d547fdca62066ff206d3ecab2192a"
   },
   "n": {
    "path": "assets/r130/michaela/walk-n.webp",
@@ -85,7 +89,7 @@
     192,
     256
    ],
-   "sha256": "b145bac5a740c2cec24d0bff5595e32d1a5424572fd690a8311ff36d6eb5e884"
+   "sha256": "496ac874cdd99d3b0bcec94c903081c02ea3445dd9ebcc54908efe0c8a3dffdd"
   }
  },
  "swap": {
@@ -525,8 +529,8 @@
    "path": "assets/r130/michaela/actions-consistent-michaela-dash-front.webp",
    "from": "HERO-michaela-walk-s.png#3",
    "mirror": false,
-   "sha256": "9d184a42ba6bf67268a5a48311d99561605bcaa13da9227a2304fc651eb11026",
-   "bytes": 26138,
+   "sha256": "078b4b197b0218971551768571bb39588010daed348b630080015b46823d419e",
+   "bytes": 25912,
    "frame": {
     "size": [
      512,
@@ -536,15 +540,15 @@
      251.2,
      492
     ],
-    "visibleHeight": 434.2
+    "visibleHeight": 448.9
    }
   },
   "assets/heroes/normalized/actions-consistent/michaela-dash-back.webp": {
    "path": "assets/r130/michaela/actions-consistent-michaela-dash-back.webp",
    "from": "HERO-michaela-walk-n.png#3",
    "mirror": false,
-   "sha256": "cbc37993c15d32051642bbc16fd89e0581357e2a464cb68b23f62a8b98a9c20f",
-   "bytes": 27874,
+   "sha256": "4830d1208e39457f8eb72b4b76072a6faca0d876cbdbc11619d91cf625951cbf",
+   "bytes": 27462,
    "frame": {
     "size": [
      512,
@@ -554,15 +558,15 @@
      254.8,
      507
     ],
-    "visibleHeight": 459.0
+    "visibleHeight": 454.0
    }
   },
   "assets/heroes/normalized/actions-consistent/michaela-dash-left.webp": {
    "path": "assets/r130/michaela/actions-consistent-michaela-dash-left.webp",
    "from": "HERO-michaela-walk-e.png#3",
    "mirror": true,
-   "sha256": "a54eb791b59a30d3191132ccc96b82d8e52cccb9d629c7be74989dc8ab77f23d",
-   "bytes": 23278,
+   "sha256": "bdc3428ff1d202dcfd9eff824991a7f0646696c5583e806909d7909907b5c41e",
+   "bytes": 24728,
    "frame": {
     "size": [
      512,
@@ -572,15 +576,15 @@
      264.6,
      481
     ],
-    "visibleHeight": 447.8
+    "visibleHeight": 440.4
    }
   },
   "assets/heroes/normalized/actions-consistent/michaela-dash-right.webp": {
    "path": "assets/r130/michaela/actions-consistent-michaela-dash-right.webp",
    "from": "HERO-michaela-walk-e.png#3",
    "mirror": false,
-   "sha256": "3a607d05e83fcd68c0056e24d2b137cca66348bf3f5b1a77c763c104b72b7e83",
-   "bytes": 23306,
+   "sha256": "36de8fb5c401f634fe516a15d31f57b92f750f073f869813041ce2d60380b0d3",
+   "bytes": 24746,
    "frame": {
     "size": [
      512,
@@ -590,7 +594,7 @@
      243.3,
      481
     ],
-    "visibleHeight": 446.8
+    "visibleHeight": 439.4
    }
   },
   "assets/heroes/normalized/actions-v3126/michaela-hurt-front.webp": {
@@ -615,8 +619,8 @@
    "path": "assets/r130/michaela/actions-v3126-michaela-move-front.webp",
    "from": "HERO-michaela-walk-s.png#2",
    "mirror": false,
-   "sha256": "8f219a8d4e359e79ec9dddbc529b7d399ae60a6a3e1b3aee18df5e8694b010d0",
-   "bytes": 17338,
+   "sha256": "22d628b69c604b864c067b8c07aa80ca471cca9cc135525ce8f6adb60cc68ba7",
+   "bytes": 17874,
    "frame": {
     "size": [
      512,
@@ -626,7 +630,7 @@
      249.3,
      512
     ],
-    "visibleHeight": 302.7
+    "visibleHeight": 316.0
    }
   },
   "assets/heroes/normalized/actions-v3126/michaela-hurt-back.webp": {
@@ -651,8 +655,8 @@
    "path": "assets/r130/michaela/actions-v3126-michaela-move-back.webp",
    "from": "HERO-michaela-walk-n.png#2",
    "mirror": false,
-   "sha256": "7a230d46e38b5c116bd551dc738bbf15e91bba7756482dac352fa97345a71257",
-   "bytes": 17768,
+   "sha256": "4b835445c0284f459aed228251e2b2e4efca9c1a02fa00513dab222a5a38519f",
+   "bytes": 18156,
    "frame": {
     "size": [
      512,
@@ -662,7 +666,7 @@
      251.2,
      512
     ],
-    "visibleHeight": 301.7
+    "visibleHeight": 315.0
    }
   },
   "assets/heroes/normalized/actions-v3126/michaela-hurt-left.webp": {
@@ -687,8 +691,8 @@
    "path": "assets/r130/michaela/actions-v3126-michaela-move-left.webp",
    "from": "HERO-michaela-walk-e.png#2",
    "mirror": false,
-   "sha256": "ed910a8f1372ee608e2724361f96d9877a2b3dd2c857d7582035cb1103e6c579",
-   "bytes": 14812,
+   "sha256": "a1fa16c3450240db7ddcf9f9eaa25db0f331c1e8e5f27dee08c6ad13ccb9d8c2",
+   "bytes": 16284,
    "frame": {
     "size": [
      512,
@@ -698,7 +702,7 @@
      337.3,
      507
     ],
-    "visibleHeight": 308.6
+    "visibleHeight": 312.0
    }
   },
   "assets/heroes/normalized/actions-v3126/michaela-hurt-right.webp": {
@@ -723,8 +727,8 @@
    "path": "assets/r130/michaela/actions-v3126-michaela-move-right.webp",
    "from": "HERO-michaela-walk-e.png#2",
    "mirror": false,
-   "sha256": "129cf7bd46df150462d963cbe77378cfc9a3183964f47fd0a72ad999b56431a4",
-   "bytes": 14494,
+   "sha256": "a99d5fb5297bc8edbcffea77044b8813176406c1fabe8fed266a2a48befa2ac1",
+   "bytes": 15892,
    "frame": {
     "size": [
      512,
@@ -734,7 +738,7 @@
      180.4,
      501
     ],
-    "visibleHeight": 302.7
+    "visibleHeight": 306.0
    }
   },
   "assets/heroes/normalized/actions-directional/michaela-attack-left.webp": {

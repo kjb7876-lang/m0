@@ -2,7 +2,7 @@
  "revision": "R128",
  "source": {
   "drive": "StoryWorld-HERO-gunner-sheet-20261030.zip",
-  "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+  "driveId": "1juCeDNw4YORb9OW3PnTvu7jJ9mrCrVfZ",
   "maker": "Gemini (사용자 요청, docs/gemini-hero-refs 규격)",
   "files": {
    "README.txt": "04cdeb8b3667cf896f50dfaa9f277e9745ea8e84bb719451eb3db9dbb238c0fe",
@@ -27,12 +27,14 @@
    "HERO-gunner-idle-ne.png": "5fc104fbc9f805f10ba44f35c6eb1b077b41ebbec9697025aed93bf08e7dbee7",
    "HERO-gunner-idle-s.png": "f426b63dc12fe1f7f7c17bf02cac68d923b387f2ab3ecf4e546bf3ac88f22d35",
    "HERO-gunner-idle-se.png": "a053f5f4ee612ed91136013d5be262e4ad209b362238379edd44bb8383eb8035",
-   "HERO-gunner-walk-e.png": "d489263db30aaa6c43eb13dfc01071da10c38bdad8dc20a2479d7a0923e22369",
-   "HERO-gunner-walk-n.png": "53e9d3fac1bd4c0639e7e74cbc8b04f37ef02bb78abed15873f73075818ebbae",
-   "HERO-gunner-walk-ne.png": "93812ad9e8aa39891fa92bca7c320f9e33c47fda18f7595e9d21a5a49739e71f",
-   "HERO-gunner-walk-s.png": "b2a9d8224dee06987adab0fd4bc95860f937bc51ed0fa664b1348ec87dc40896",
-   "HERO-gunner-walk-se.png": "9374f5b0f7b32664be1861be24164a89fbb8255dbdda65c104fe5a378f723ba5"
-  }
+   "HERO-gunner-walk-e.png": "8ffcca54b06d3ab780faf6ee354d2043c6341ac6b115abfec7644a879489422e",
+   "HERO-gunner-walk-n.png": "e556b3f4c81162e3bf1de81f66161631c63a2c74e1bb64cfb14b06ab1534574c",
+   "HERO-gunner-walk-ne.png": "85c75c74731b6717391ddf1cfd6d9fc9501f3e4d728603bb892ad4c9b6c59d97",
+   "HERO-gunner-walk-s.png": "b78d3dbb4311a9df4d6d93060f09605f44373832a559ed41bdfdc9ee1779e1d4",
+   "HERO-gunner-walk-se.png": "09e94387fa3e8076c8be0dd385a917a10dc36b284869ae6bd7d5057153ee4483"
+  },
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "walk": {
   "s": {
@@ -43,7 +45,7 @@
     192,
     256
    ],
-   "sha256": "3c8ed27213fe53bb7d108d533e1572300d401496d555aae5055e5f270e145a33"
+   "sha256": "3854e295531b9264d3aceea4176ef96d18671a6a282e54fd2ec8c69e9f750e8a"
   },
   "se": {
    "path": "assets/r128/gunner/walk-se.webp",
@@ -53,7 +55,7 @@
     192,
     256
    ],
-   "sha256": "c7a600eebe6ccd1c28c910a01e99ddf5dd0dbd022d151961ae3339a7f9ceaf92"
+   "sha256": "b043ecbbc5579ed098981bf0ae3f10fb48e59bf7d00f3bb57f1dd40ea02845ac"
   },
   "e": {
    "path": "assets/r128/gunner/walk-e.webp",
@@ -63,7 +65,7 @@
     192,
     256
    ],
-   "sha256": "cfa4c300440a65f82d79878294389688ab0b8d56f92c2f256a76e182ab1f1fa8"
+   "sha256": "9cccb75f786383b2dff9a091fb57a33d81a781f57c41c6726ed3c69ca2f3ddb6"
   },
   "ne": {
    "path": "assets/r128/gunner/walk-ne.webp",
@@ -73,7 +75,7 @@
     192,
     256
    ],
-   "sha256": "363dd7a1c2603b74c2aaad092ac8c79e1a75511a09fe95729908d7317b935ba3"
+   "sha256": "6dabc12e22bb2fc72d4be2ebc73d6b686774d306813a69d1b8a10c131840125f"
   },
   "n": {
    "path": "assets/r128/gunner/walk-n.webp",
@@ -83,7 +85,7 @@
     192,
     256
    ],
-   "sha256": "ec67ee8c3ae45abcc6137febe96c5ad12caa06c81ed4e0e21cf5751c5f884951"
+   "sha256": "9528b2622ff19977f7b8fc272a73c9b47ebdecac37946768291a0c5d9472ff00"
   }
  },
  "swap": {
@@ -154,71 +156,71 @@
    "path": "assets/r128/gunner/g-run_front_a.webp",
    "from": "HERO-gunner-walk-s.png#1",
    "mirror": false,
-   "sha256": "7f3e9fc0e4e743aabb275fc1743ee07a9e7a2ab189f1cf92f2ee3d8f5ff043ec",
-   "bytes": 19362
+   "sha256": "f10a3b41436b7c13937b34766035563843193828d6f62b2d1c44349dcf0f6042",
+   "bytes": 18360
   },
   "assets/heroes/normalized/gunner/run_front_b.webp": {
    "path": "assets/r128/gunner/g-run_front_b.webp",
    "from": "HERO-gunner-walk-s.png#5",
    "mirror": false,
-   "sha256": "00881a57f261c9b1b17214572342a5fd14ec87b66db70597e468c3746eec19d8",
-   "bytes": 18826
+   "sha256": "617c3a90c302d3b6833b23b43e96a355f7ea04e86ae0da38b861900c300f30dc",
+   "bytes": 17670
   },
   "assets/heroes/normalized/gunner/run_back_a.webp": {
    "path": "assets/r128/gunner/g-run_back_a.webp",
    "from": "HERO-gunner-walk-n.png#1",
    "mirror": false,
-   "sha256": "912135c58b1553d60f9de5f2eff4f06f89f4f9c3b358cd7783687f199a5c8115",
-   "bytes": 19704
+   "sha256": "5200ea601731e54d11852d857bc6bedd8686663bce4a1e3390e1062449a3b784",
+   "bytes": 19886
   },
   "assets/heroes/normalized/gunner/run_back_b.webp": {
    "path": "assets/r128/gunner/g-run_back_b.webp",
    "from": "HERO-gunner-walk-n.png#5",
    "mirror": false,
-   "sha256": "6b643a639d72d44fad890f6ce684dc83974c4fa6e123bdef32024e37631b24e3",
-   "bytes": 19864
+   "sha256": "9b0739117401bf6db21f1894601c30e79d07967dc0174ba755d44226151849cc",
+   "bytes": 19970
   },
   "assets/heroes/normalized/gunner/run_left_a.webp": {
    "path": "assets/r128/gunner/g-run_left_a.webp",
    "from": "HERO-gunner-walk-e.png#1",
    "mirror": true,
-   "sha256": "53bb153a153adeaea5414d79fbf9016e8e9b4c485b63f29a8e2f8cd6710710ef",
-   "bytes": 15734
+   "sha256": "d08efcca2210882c9d25e7ffb79e1f951f9515b6db1e687600474954d40cad62",
+   "bytes": 16574
   },
   "assets/heroes/normalized/gunner/run_left_b.webp": {
    "path": "assets/r128/gunner/g-run_left_b.webp",
    "from": "HERO-gunner-walk-e.png#5",
    "mirror": true,
-   "sha256": "74641f2a7bd6a0160245ed2df7e3944516445f19df46501ce2ed9b7bf126eaff",
-   "bytes": 17522
+   "sha256": "fd9365303df2fb1a405ab2859a051457255a993653f81aec5767d9b69126eeb2",
+   "bytes": 17622
   },
   "assets/heroes/normalized/gunner/run_right_a.webp": {
    "path": "assets/r128/gunner/g-run_right_a.webp",
    "from": "HERO-gunner-walk-e.png#1",
    "mirror": false,
-   "sha256": "6fce06d7008cfd0fa3cb6742cb98e13f858cd661e1adb8a481c55aa3f3c97794",
-   "bytes": 16088
+   "sha256": "4961fe586c0d4c2d8cdbe239e6f7e7081bec8cec0570edde8eccf3cf2e21a8a3",
+   "bytes": 16594
   },
   "assets/heroes/normalized/gunner/run_right_b.webp": {
    "path": "assets/r128/gunner/g-run_right_b.webp",
    "from": "HERO-gunner-walk-e.png#5",
    "mirror": false,
-   "sha256": "a272a0e04c1c2c0650e952863cd1f5b999504ace573194c3bfe6ec4ee5cac3ea",
-   "bytes": 17584
+   "sha256": "b0b3620a2ee577ebf2d174bf6af41390371b21b51ee0012e912cdd25cbd7e3c4",
+   "bytes": 16936
   },
   "assets/heroes/normalized/gunner/player_run1.webp": {
    "path": "assets/r128/gunner/g-player_run1.webp",
    "from": "HERO-gunner-walk-e.png#1",
    "mirror": false,
-   "sha256": "6fce06d7008cfd0fa3cb6742cb98e13f858cd661e1adb8a481c55aa3f3c97794",
-   "bytes": 16088
+   "sha256": "4961fe586c0d4c2d8cdbe239e6f7e7081bec8cec0570edde8eccf3cf2e21a8a3",
+   "bytes": 16594
   },
   "assets/heroes/normalized/gunner/player_run2.webp": {
    "path": "assets/r128/gunner/g-player_run2.webp",
    "from": "HERO-gunner-walk-e.png#5",
    "mirror": false,
-   "sha256": "a272a0e04c1c2c0650e952863cd1f5b999504ace573194c3bfe6ec4ee5cac3ea",
-   "bytes": 17584
+   "sha256": "b0b3620a2ee577ebf2d174bf6af41390371b21b51ee0012e912cdd25cbd7e3c4",
+   "bytes": 16936
   },
   "assets/heroes/normalized/gunner/guard_left.webp": {
    "path": "assets/r128/gunner/g-guard_left.webp",
@@ -238,15 +240,15 @@
    "path": "assets/r128/gunner/g-dash_left.webp",
    "from": "HERO-gunner-walk-e.png#3",
    "mirror": true,
-   "sha256": "125a219d371696c231072f955f3318d55c14e3b45845cdfb52c9567e13d92133",
-   "bytes": 8990
+   "sha256": "47fd0d75a14689d429ffe0f3d77ae641bd761180830ebb34a447713456a287b2",
+   "bytes": 9268
   },
   "assets/heroes/normalized/gunner/dash_right.webp": {
    "path": "assets/r128/gunner/g-dash_right.webp",
    "from": "HERO-gunner-walk-e.png#3",
    "mirror": false,
-   "sha256": "9779cbca984485db7d2f3fc5bb6cd730eaa8f8b12d9103e0996dd95d77f4773c",
-   "bytes": 8932
+   "sha256": "5ed7f32621fe0eded4b2466f62df2a22fefcd1bb3d7fc37db653749876c54c29",
+   "bytes": 9302
   },
   "assets/heroes/normalized/gunner/attack_left.webp": {
    "path": "assets/r128/gunner/g-attack_left.webp",
@@ -301,8 +303,8 @@
    "path": "assets/r128/gunner/g-player_roll.webp",
    "from": "HERO-gunner-walk-e.png#3",
    "mirror": false,
-   "sha256": "9779cbca984485db7d2f3fc5bb6cd730eaa8f8b12d9103e0996dd95d77f4773c",
-   "bytes": 8932
+   "sha256": "5ed7f32621fe0eded4b2466f62df2a22fefcd1bb3d7fc37db653749876c54c29",
+   "bytes": 9302
   },
   "assets/heroes/normalized/actions-consistent/gunner-attack-front.webp": {
    "path": "assets/r128/gunner/actions-consistent-gunner-attack-front.webp",
@@ -392,29 +394,29 @@
    "path": "assets/r128/gunner/actions-consistent-gunner-dash-front.webp",
    "from": "HERO-gunner-walk-s.png#3",
    "mirror": false,
-   "sha256": "2652aff167e0e89c51ddc272b45bd3a02f4f6a2ff2a32d5f57ef123a92acf4b2",
-   "bytes": 19174
+   "sha256": "36113ed309dfe9e9f4ea156840f42717395032ce33baa9e3df1b13b1b43471a3",
+   "bytes": 18968
   },
   "assets/heroes/normalized/actions-consistent/gunner-dash-back.webp": {
    "path": "assets/r128/gunner/actions-consistent-gunner-dash-back.webp",
    "from": "HERO-gunner-walk-n.png#3",
    "mirror": false,
-   "sha256": "bbd5f9494e63bc4119c0cba5dfac5955218dab25266a0a70b0a67d9e936860a8",
-   "bytes": 20482
+   "sha256": "bf2fd12b0fe308fab29a0b35d1d07e505038f68d32ad9eb3aadde5d8a26801fe",
+   "bytes": 20252
   },
   "assets/heroes/normalized/actions-consistent/gunner-dash-left.webp": {
    "path": "assets/r128/gunner/actions-consistent-gunner-dash-left.webp",
    "from": "HERO-gunner-walk-e.png#3",
    "mirror": true,
-   "sha256": "4fe54e199cdb53bac400c907825c09894dacfc7c6122daf2c63072a733b42b96",
-   "bytes": 17198
+   "sha256": "9304d8238b91afb494691ceccb3248e5599e44687334cbc3b27ccc24d586a4d1",
+   "bytes": 17376
   },
   "assets/heroes/normalized/actions-consistent/gunner-dash-right.webp": {
    "path": "assets/r128/gunner/actions-consistent-gunner-dash-right.webp",
    "from": "HERO-gunner-walk-e.png#3",
    "mirror": false,
-   "sha256": "2f35f567a061b45ad7ec5f321e306e3ebc3e59dd98a878a2d7278ac2407c8556",
-   "bytes": 17048
+   "sha256": "c74d362d176e9eeef5866fc66b119bfdf72531d73eba55b647fb0bacefc049aa",
+   "bytes": 17064
   },
   "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp": {
    "path": "assets/r128/gunner/actions-v3126-gunner-hurt-front.webp",
@@ -448,29 +450,29 @@
    "path": "assets/r128/gunner/actions-v3126-gunner-move-front.webp",
    "from": "HERO-gunner-walk-s.png#2",
    "mirror": false,
-   "sha256": "58f9c22e235b13b9d07e3d63668edeb969f31256ed18beb6e1e57a666dcdd690",
-   "bytes": 14236
+   "sha256": "5d360f3a70ea3e82ffe60908ee35bddc7d35fd0ab2943825a245e3d123e2e826",
+   "bytes": 15020
   },
   "assets/heroes/normalized/actions-v3126/gunner-move-back.webp": {
    "path": "assets/r128/gunner/actions-v3126-gunner-move-back.webp",
    "from": "HERO-gunner-walk-n.png#2",
    "mirror": false,
-   "sha256": "ad2138e056b79969edaad7a02ccd8645cb56b8ad1b63f3559e8352a3509c88a4",
-   "bytes": 13142
+   "sha256": "5a4fd0c0c44c74060f7877eab94aa3710d5c58b937667fd22748bd0d22df7cd7",
+   "bytes": 14442
   },
   "assets/heroes/normalized/actions-v3126/gunner-move-left.webp": {
    "path": "assets/r128/gunner/actions-v3126-gunner-move-left.webp",
    "from": "HERO-gunner-walk-e.png#2",
    "mirror": false,
-   "sha256": "0a480bfd3620bd436334b74f7f4c567f6b54bef8a936c9257292494db5e5337f",
-   "bytes": 11576
+   "sha256": "216d3ca5560cd398c33bc0eebe89354da052c87a7d464835a5136f3a9d769621",
+   "bytes": 12318
   },
   "assets/heroes/normalized/actions-v3126/gunner-move-right.webp": {
    "path": "assets/r128/gunner/actions-v3126-gunner-move-right.webp",
    "from": "HERO-gunner-walk-e.png#2",
    "mirror": false,
-   "sha256": "12647c2d6dc42e3affd83d5e43990783a3c70c4bd32acabca2ede98c412434d2",
-   "bytes": 11272
+   "sha256": "50146882b589f0794b410fb379bd1d37244689ede9bd59a6cc6c8745072c1e92",
+   "bytes": 11774
   },
   "assets/heroes/normalized/actions-v3126/gunner-ultimate-front.webp": {
    "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-front.webp",
