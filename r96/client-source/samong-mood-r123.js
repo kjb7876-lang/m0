@@ -16,7 +16,7 @@
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r123.mood';
  const prefs={mood:true,deco:true,floor:true,overlay:true,banner:true,tick:true,tilt:true,art:true};
  // R126: Drive 2026-10-29 원화(assets/r126/props, scripts/r126-drive-props.py). 그림이 준비되면 게임 소품 그리기로, 그 전에는 코드 그림으로.
- const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56},
+ const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56},badge:{path:'assets/r126/props/badge.webp',h:22},
   // R129: Drive 2026-10-30 원화(scripts/r129-drive-assets.py) — 숲 나무·데이터 비석·기계 철탑, 화가 소품 3점, 녹는 시계 4키(가까이 가면 K1→K4 한 번)
   tree:{path:'assets/r129/props/tree.webp',h:230},monolith:{path:'assets/r129/props/monolith.webp',h:130},pylon:{path:'assets/r129/props/pylon.webp',h:210},
   brush:{path:'assets/r129/props/brush.webp',h:40},tweezers:{path:'assets/r129/props/tweezers.webp',h:40},vase:{path:'assets/r129/props/vase.webp',h:64},
@@ -77,7 +77,7 @@
    parts:[],rain:.42,floor:['grid','glyph'],deco:[['monolith',3]]},
   forest:{tint:['rgba(255,190,110,.15)','soft-light'],shade:null,fog:'radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,210,140,.22),rgba(0,0,0,0) 65%)',
    parts:[['mote',26]],floor:['sunpool','leaf','roots'],deco:[['tree',3]]},
-  school:{tint:['rgba(130,180,170,.12)','soft-light'],shade:'rgba(8,16,26,.24)',fog:null,parts:[['dust',12]],floor:['lamps','spiral','chalk'],deco:[['locker',2,'wall'],['noticeboard',2,'wall']],ghosts:true,cone:true},
+  school:{tint:['rgba(130,180,170,.12)','soft-light'],shade:'rgba(8,16,26,.24)',fog:null,parts:[['dust',12]],floor:['lamps','spiral','chalk'],deco:[['locker',2,'wall'],['noticeboard',2,'wall'],['badge',1]],ghosts:true,cone:true},
   manga:{tint:['rgba(255,255,255,.05)','soft-light'],shade:'rgba(16,10,16,.20)',fog:null,parts:[['dust',10]],floor:['lamps','spiral'],deco:[],ghosts:true},
   ink:{tint:null,filter:'grayscale(.78) contrast(1.12)',shade:'rgba(10,10,12,.10)',fog:null,parts:[['dust',10]],floor:['lamps','ring','splat','spiral'],deco:[['inkpost',2]],ghosts:true},
   gyeong:{tint:['rgba(220,170,110,.12)','soft-light'],shade:'rgba(14,12,22,.20)',fog:'linear-gradient(to bottom,rgba(200,210,230,.10),rgba(0,0,0,0) 45%)',parts:[['snow',34]],floor:['lamps','spiral'],deco:[['lantern',3]],ghosts:true},
@@ -247,6 +247,9 @@
    g.fillStyle='#e8dcc0';g.font='bold '+Math.round(u*.34)+'px serif';g.textAlign='center';g.textBaseline='middle';g.fillText(d.floor==='G'?'G':d.floor+'F',q.x,y0-h/2);},
   noticeboard(g,q,u,t,d){const w=u*1.2,h=u*.9,y0=q.y-u*1.2;g.fillStyle='#4a3020';g.fillRect(q.x-w/2,y0-h,w,h);g.fillStyle='#7a5a3a';g.fillRect(q.x-w/2+u*.08,y0-h+u*.08,w-u*.16,h-u*.16);
    g.fillStyle='#e8dcc0';for(const[dx,dy,pw,ph]of[[-.4,-.75,.32,.4],[.1,-.78,.3,.22],[-.38,-.3,.3,.2],[.1,-.48,.3,.38]])g.fillRect(q.x+dx*w,y0+dy*h,pw*w,ph*h);},
+  // R133: 은재 명찰(Drive 원화 준비 전·끄기 시) — 바닥에 떨어진 흰 플라스틱 명찰, 글자는 원화에만
+  badge(g,q,u,t,d){const w=u*.62,h=u*.24;g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(q.x,q.y+1,w*.62,h*.5,0,0,TAU);g.fill();
+   g.fillStyle='#d9d4c8';g.beginPath();g.roundRect(q.x-w/2,q.y-h,w,h,h*.25);g.fill();g.fillStyle='#2a2622';g.fillRect(q.x-w*.28,q.y-h*.62,w*.56,h*.2);},
   brush(g,q,u,t,d){g.strokeStyle='#6a4022';g.lineWidth=Math.max(2,u*.09);g.lineCap='round';g.beginPath();g.moveTo(q.x+u*.7,q.y-u*.35);g.lineTo(q.x-u*.25,q.y-u*.05);g.stroke();
    g.fillStyle='#a0a4a8';g.fillRect(q.x-u*.38,q.y-u*.08,u*.16,u*.1);g.fillStyle='#7aa0b8';g.beginPath();g.ellipse(q.x-u*.55,q.y,u*.2,u*.09,-.3,0,TAU);g.fill();},
   tweezers(g,q,u,t,d){g.strokeStyle='#b0b4b8';g.lineWidth=Math.max(1.5,u*.05);g.beginPath();g.moveTo(q.x+u*.6,q.y-u*.5);g.lineTo(q.x-u*.25,q.y-u*.08);g.moveTo(q.x+u*.6,q.y-u*.42);g.lineTo(q.x-u*.25,q.y-u*.08);g.stroke();
