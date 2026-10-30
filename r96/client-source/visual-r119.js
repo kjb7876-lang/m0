@@ -131,6 +131,7 @@
  //    칸마다 실제 몸 테두리로 잘라 키를 actorHeight x 0.98(R114 서 있기 기준)로 맞추고 발밑은 그대로. 그림이 없는 방향은 가까운 방향/좌우반전.
  const WALK_DIR='assets/r91/walk/',walkPlan={},walkBox=new Map(),walkMissing=new Set(),walkLoading=new Set(),walkState={d:0,x:null,y:null,dir:'s'};
  try{if(typeof fetch==='function')fetch((typeof urlFor==='function'?urlFor(WALK_DIR+'index.json'):WALK_DIR+'index.json')).then(r=>r.ok?r.json():null).then(j=>{if(j?.plan)Object.assign(walkPlan,j.plan);}).catch(()=>{});}catch(_){}
+ const WALK_RATE_R148=3.2;
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
  // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
  // R128: 기억사수 걷기는 Gemini 시트의 5방향 8프레임 한 줄(왼쪽 3방향은 반전). gunnerSheet 를 끄면 R121 걷기.
@@ -199,9 +200,12 @@
    // R131: 게임 캐시에 아직 없으면 미리 받아 둔 그림을 바로 쓴다(환도: 첫 몇 장면 옛 R91 걷기 그림이 보였다).
    if(!row){wantImage(sh.path);const pe=art.get(sh.path);if(pe?.state!=='ready')return r;row={image:pe.img};}
    let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
-   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===6?4.8:sh.frames===12?9.6:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
+   // R148: 걸음 박자 — Gemini 시트(8칸 한 줄)를 1칸당 6.4장(이동 6.47칸/초에 41장/초 = 초당 10걸음)으로 넘겨 다리가 종종거리고,
+   //  화면이 초당 20장 안팎이면 한 번에 2칸씩 건너뛰어 8칸 중 홀수(또는 짝수) 4칸만 보여 뚝뚝 끊긴 '어기적' 걸음이 됐다(사용자 2026-10-30).
+   //  1칸당 3.2장(초당 약 2.6바퀴·5걸음, 21장/초)으로 늦춰 30장/초 화면에서도 칸을 건너뛰지 않게 한다.
+   if(!best)return r;const frame=sh.single?-1:Math.floor(walkState.d*(sh.frames===4?3.2:sh.frames===6?4.8:sh.frames===12?9.6:sh.r128?WALK_RATE_R148:sh.own8?6.4:5))%(sh.frames||8),box=cellBox(row,sh.path,frame,sh.cols||4,sh.rows||2),im=row.image,want=(typeof actorHeight==='function'?actorHeight():bh)*(standRatio.v||.98),w=want*box[2]/box[3];
    // 걸음 무게감: 발을 디딘 직후 살짝 내려앉고(-1.5%), 다리가 엇갈릴 때 올라간다(+2.5%). 8프레임: 2·6번째가 가장 낮고 3·7번째가 가장 높다.
-   const n=sh.frames||8,ph=(n===6?[.2,-1,1,.2,-1,1][frame]:n===12?[0,-1,-.4,1,.4,0,-1,-.4,1,.4,0,0][frame]:n===8?[.6,1,.3,-1,.6,1,.3,-1][frame]:[0,1,0,1][frame])??0,bob=(ph>0?.025*ph:.015*ph)*want;
+   const n=sh.frames||8,ph=(n===6?[.2,-1,1,.2,-1,1][frame]:n===12?[0,-1,-.4,1,.4,0,-1,-.4,1,.4,0,0][frame]:n===8?[.6,1,.3,-1,.6,1,.3,-1][frame]:[0,1,0,1][frame])??0,bob=sh.r128?0:(ph>0?.025*ph:.015*ph)*want;/* R148: Gemini 시트는 칸마다 머리가 4~5px 오르내리게 이미 그려져 있다 — 옛 R91 시트용 출렁임을 반대 박자로 더해 몸이 들쭉날쭉 튀었다 */
    // R134: 발은 실제 영웅 위치(띄움 포함)에 맞춘다 — 바탕 그림 상자의 밑변을 발로 보면, 멈춘 직후 바탕이 서 있기 시트(칸 아래 여백)일 때
    //  걷기 그림이 7~8px 아래로 툭 떨어졌다가(슬레이어는 좌우로도 6px) 서 있기로 바뀌었다.
    const P=best.points,q0=typeof project==='function'?project(player.x,player.y):null,lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q0?q0.x:(P[2][0]+P[3][0])/2,fy=(q0?q0.y-lift:Math.max(P[2][1],P[3][1]))-bob,f=sh.mirror?-1:1;
