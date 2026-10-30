@@ -33,7 +33,7 @@
   },
   "drive": "StoryWorld-HERO-seoha-sheet-20261030.zip",
   "driveId": "1NZdP8dnfej9Ef23lyn74tKYgsMDoBCwG",
-  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30), R134 게임 기준 키·발 피벗 맞춤, 자르기 테두리",
   "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
@@ -96,216 +96,288 @@
    "path": "assets/r130/seoha/g-s.webp",
    "from": "HERO-seoha-idle-s.png#0",
    "mirror": false,
-   "sha256": "dc1daa967727c77d35fe07910d0078ee318eeca61388e49a312132a392619dee",
-   "bytes": 42120,
+   "sha256": "b0adeacce7b8b415d283e121c8a92b4d99666d32e8bb846483beb4f74d450d39",
+   "bytes": 38786,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     251.5,
-     496
+     251.7,
+     494
     ],
-    "visibleHeight": 480.0
+    "visibleHeight": 451.7,
+    "bbox": [
+     145,
+     51,
+     367,
+     502
+    ]
    }
   },
   "assets/hero_direction337/seoha/n.webp": {
    "path": "assets/r130/seoha/g-n.webp",
    "from": "HERO-seoha-idle-n.png#0",
    "mirror": false,
-   "sha256": "0e887669155c032fe3fd0bf9b84089e64daaaab6054aae0fe90d623ede001b78",
-   "bytes": 40488,
+   "sha256": "b2b1b7cd2128f9eba853fd1728972190864a3d6b1101f8fc581ab23626906a36",
+   "bytes": 31284,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     247.8,
+     248.6,
      496
     ],
-    "visibleHeight": 482.7
+    "visibleHeight": 389.8,
+    "bbox": [
+     140,
+     112,
+     326,
+     499
+    ]
    }
   },
   "assets/hero_direction334/seoha/e.webp": {
    "path": "assets/r130/seoha/g-e.webp",
    "from": "HERO-seoha-idle-e.png#0",
    "mirror": false,
-   "sha256": "ce0f2988cf70d53396bbaa60ed9fec79542c6c5ebe874b038d3d20a151dab6a9",
-   "bytes": 31444,
+   "sha256": "288e8a68844f61d2fa16d1309505c97a55c654d8ba5c6ad82fa6f9496c9f4cdd",
+   "bytes": 28096,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     216.1,
-     490
+     214.0,
+     488
     ],
-    "visibleHeight": 464.6
+    "visibleHeight": 425.7,
+    "bbox": [
+     100,
+     66,
+     290,
+     490
+    ]
    }
   },
   "assets/hero_direction334/seoha/w.webp": {
    "path": "assets/r130/seoha/g-w.webp",
    "from": "HERO-seoha-idle-e.png#0",
    "mirror": true,
-   "sha256": "ee21b9e4cb9872d6de8b8f7ec829b9368a80255deb7e6e6023b5ecf7298f8e42",
-   "bytes": 30998,
+   "sha256": "3f150a6b074f78f7f1cea743d11bd741b36b83c178d12e26bc3d3289dc751bd2",
+   "bytes": 28578,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     297.7,
-     490
+     301.0,
+     488
     ],
-    "visibleHeight": 462.5
+    "visibleHeight": 425.7,
+    "bbox": [
+     227,
+     66,
+     417,
+     490
+    ]
    }
   },
   "assets/hero_direction334/seoha/ne.webp": {
    "path": "assets/r130/seoha/g-ne.webp",
    "from": "HERO-seoha-idle-ne.png#0",
    "mirror": false,
-   "sha256": "163208d46132f1cea46edb1d475bd731bc205f0ddb1ed8b1ed1aef9d536a089f",
-   "bytes": 34408,
+   "sha256": "21fbd802a89b98f34d90d587b45db46507c2d80085da3830d49e6a1d5d240f0b",
+   "bytes": 34528,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     237.5,
-     491
+     237.0,
+     488
     ],
-    "visibleHeight": 474.2
+    "visibleHeight": 464.7,
+    "bbox": [
+     149,
+     35,
+     343,
+     496
+    ]
    }
   },
   "assets/hero_direction334/seoha/nw.webp": {
    "path": "assets/r130/seoha/g-nw.webp",
    "from": "HERO-seoha-idle-ne.png#0",
    "mirror": true,
-   "sha256": "ecfc38d8acabb803c04f3d6e8cad973bfb1cd15438b5161a7cd90feedc01a620",
-   "bytes": 34852,
+   "sha256": "76b090a0d33c19a76848da4ddd2dc52512f3dc7ecb5f01e517ce6a212328e63d",
+   "bytes": 32330,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     264.4,
-     490
+     265.0,
+     488
     ],
-    "visibleHeight": 473.2
+    "visibleHeight": 445.3,
+    "bbox": [
+     165,
+     53,
+     351,
+     494
+    ]
    }
   },
   "assets/hero_direction334/seoha/se.webp": {
    "path": "assets/r130/seoha/g-se.webp",
    "from": "HERO-seoha-idle-se.png#0",
    "mirror": false,
-   "sha256": "8e2b0e1b4e8a6c821be99d89200bfc7e2b640eba0346032476b1cfdc730775a1",
-   "bytes": 36668,
+   "sha256": "76d857da7dc9d88ae61d100327db176d7e1d782977f0f3c44b8db356ba7a6f9f",
+   "bytes": 36094,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     234.2,
-     490
+     224.0,
+     489
     ],
-    "visibleHeight": 465.6
+    "visibleHeight": 465.1,
+    "bbox": [
+     123,
+     30,
+     326,
+     493
+    ]
    }
   },
   "assets/hero_direction334/seoha/sw.webp": {
    "path": "assets/r130/seoha/g-sw.webp",
    "from": "HERO-seoha-idle-se.png#0",
    "mirror": true,
-   "sha256": "ff191f624ce5f8855001096d0882186204f57b40a2ba35736de30f77f850e492",
-   "bytes": 35866,
+   "sha256": "1f74d7c1728bcfd2b784df255b8f72c3fb82372658b1cc0231fd6ce1d2011c15",
+   "bytes": 36228,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     272.1,
-     490
+     274.0,
+     488
     ],
-    "visibleHeight": 464.6
+    "visibleHeight": 463.1,
+    "bbox": [
+     175,
+     31,
+     377,
+     493
+    ]
    }
   },
   "assets/heroes/normalized/directions/seoha-front.webp": {
    "path": "assets/r130/seoha/directions-seoha-front.webp",
    "from": "HERO-seoha-idle-s.png#0",
    "mirror": false,
-   "sha256": "570765abca8094fc46ded0396956990c7d5d9e5de08cc27194b5acec66f2a61f",
-   "bytes": 36460,
+   "sha256": "bce88db06cfee07fd7d11e80aae8625eee71c6a2461ed2bde4006b2ffcde9a1a",
+   "bytes": 35076,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     287.1,
-     471
+     256.0,
+     476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 410.0,
+    "bbox": [
+     160,
+     73,
+     361,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/directions/seoha-back.webp": {
    "path": "assets/r130/seoha/directions-seoha-back.webp",
    "from": "HERO-seoha-idle-n.png#0",
    "mirror": false,
-   "sha256": "19e26a12bda27ef18e9e3a138c4e889e173e7df51164dcf15045f5691ed2c1f3",
-   "bytes": 34922,
+   "sha256": "7a08d6971f470f7975faba4974f25bae28ddf29ce450b580d2c1b39cdce7cd04",
+   "bytes": 33260,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     273.0,
-     471
+     256.0,
+     476
     ],
-    "visibleHeight": 423.3
+    "visibleHeight": 410.0,
+    "bbox": [
+     142,
+     72,
+     338,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/directions/seoha-left.webp": {
    "path": "assets/r130/seoha/directions-seoha-left.webp",
    "from": "HERO-seoha-idle-e.png#0",
    "mirror": true,
-   "sha256": "533c6291f8a4c4dcca5b16e611bc5f3ffa512a24fb39eaf0eeb7718bc8409448",
-   "bytes": 27740,
+   "sha256": "f1b6cb648a414d701d549d62d0a730383db3ed4d921fbf6a00b2123246461865",
+   "bytes": 26900,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     237.9,
-     475
+     256.0,
+     476
     ],
-    "visibleHeight": 423.3
+    "visibleHeight": 410.0,
+    "bbox": [
+     185,
+     69,
+     369,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/directions/seoha-right.webp": {
    "path": "assets/r130/seoha/directions-seoha-right.webp",
    "from": "HERO-seoha-idle-e.png#0",
    "mirror": false,
-   "sha256": "28cd57cfea75a8ffbae63f2a5bf316ac915325364fe5b3d5fc21c44ea10919cc",
-   "bytes": 27894,
+   "sha256": "8e7ba32a1866d5a98d09b1c5bfaed1b45b0f9d4a358901035c31b1a4980dfd70",
+   "bytes": 27610,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     274.4,
+     256.0,
      476
     ],
-    "visibleHeight": 424.3
+    "visibleHeight": 411.0,
+    "bbox": [
+     146,
+     67,
+     330,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-attack-front.webp": {
@@ -323,7 +395,13 @@
      280.4,
      482
     ],
-    "visibleHeight": 426.3
+    "visibleHeight": 426.3,
+    "bbox": [
+     163,
+     60,
+     425,
+     491
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-attack-back.webp": {
@@ -341,7 +419,13 @@
      273.5,
      473
     ],
-    "visibleHeight": 435.8
+    "visibleHeight": 435.8,
+    "bbox": [
+     124,
+     48,
+     386,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-attack-left.webp": {
@@ -359,7 +443,13 @@
      236.2,
      478
     ],
-    "visibleHeight": 440.8
+    "visibleHeight": 440.8,
+    "bbox": [
+     172,
+     41,
+     371,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-attack-right.webp": {
@@ -377,7 +467,13 @@
      274.2,
      474
     ],
-    "visibleHeight": 429.7
+    "visibleHeight": 429.7,
+    "bbox": [
+     145,
+     48,
+     339,
+     475
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-skill-front.webp": {
@@ -395,7 +491,13 @@
      286.9,
      479
     ],
-    "visibleHeight": 444.8
+    "visibleHeight": 444.8,
+    "bbox": [
+     156,
+     53,
+     425,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-skill-back.webp": {
@@ -413,7 +515,13 @@
      273.8,
      474
     ],
-    "visibleHeight": 437.4
+    "visibleHeight": 437.4,
+    "bbox": [
+     136,
+     46,
+     395,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-skill-left.webp": {
@@ -431,7 +539,13 @@
      236.5,
      479
     ],
-    "visibleHeight": 444.3
+    "visibleHeight": 444.3,
+    "bbox": [
+     132,
+     41,
+     391,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-skill-right.webp": {
@@ -449,43 +563,61 @@
      275.3,
      477
     ],
-    "visibleHeight": 441.3
+    "visibleHeight": 441.3,
+    "bbox": [
+     124,
+     42,
+     382,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-guard-front.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-guard-front.webp",
    "from": "HERO-seoha-attack-s.png#0",
    "mirror": false,
-   "sha256": "6aefbe511fa21e6a3b1d556103ddf72e94a678cff33bdeccf412e8b72f23503f",
-   "bytes": 33028,
+   "sha256": "ed8c3b96799fe0f5628d6dd434423aaeb6d8d7f34dd628d3f8f5c54cb693fc0c",
+   "bytes": 33098,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     286.4,
-     487
+     256.0,
+     491
     ],
-    "visibleHeight": 411.7
+    "visibleHeight": 414.0,
+    "bbox": [
+     161,
+     78,
+     361,
+     495
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-guard-back.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-guard-back.webp",
    "from": "HERO-seoha-attack-n.png#0",
    "mirror": false,
-   "sha256": "8b3e792724d603710d7f34a1c4867c897effb6168bc13848b561464716f71990",
-   "bytes": 31864,
+   "sha256": "7ed4a7ed97ae4c6e50046f3f3cd171351aba0193638d6d928a4ddef1e88cb328",
+   "bytes": 31718,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     272.3,
-     487
+     256.0,
+     491
     ],
-    "visibleHeight": 416.3
+    "visibleHeight": 418.6,
+    "bbox": [
+     144,
+     80,
+     343,
+     496
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-guard-left.webp": {
@@ -503,7 +635,13 @@
      237.0,
      488
     ],
-    "visibleHeight": 415.3
+    "visibleHeight": 415.3,
+    "bbox": [
+     178,
+     75,
+     347,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-guard-right.webp": {
@@ -521,43 +659,61 @@
      276.0,
      488
     ],
-    "visibleHeight": 418.3
+    "visibleHeight": 418.3,
+    "bbox": [
+     168,
+     72,
+     338,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-front.webp",
    "from": "HERO-seoha-walk-s.png#3",
    "mirror": false,
-   "sha256": "1c31f41065c48accf56b51e97d55a692d284357bc04bce92aa5ae1f7b24f6937",
-   "bytes": 33822,
+   "sha256": "a02cc490ec3e24818814e0e59efd43ff75f51af7ce212f4f4bf75fd935fbbcf6",
+   "bytes": 34822,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     285.5,
-     488
+     256.0,
+     494
     ],
-    "visibleHeight": 445.3
+    "visibleHeight": 450.4,
+    "bbox": [
+     150,
+     56,
+     370,
+     498
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-back.webp",
    "from": "HERO-seoha-walk-n.png#3",
    "mirror": false,
-   "sha256": "0d22aae07f99c542cd1e8d8f7cd3e6f83eef85a9f0d203576f69f88132252294",
-   "bytes": 34556,
+   "sha256": "a5502230bfc51d21ecbf40a98a47607aa39bcec1502467e97c469f15a2d1f54e",
+   "bytes": 34358,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     286.8,
-     502
+     256.0,
+     507
     ],
-    "visibleHeight": 464.6
+    "visibleHeight": 464.6,
+    "bbox": [
+     153,
+     51,
+     376,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-left.webp": {
@@ -575,7 +731,13 @@
      241.5,
      478
     ],
-    "visibleHeight": 439.8
+    "visibleHeight": 439.8,
+    "bbox": [
+     156,
+     43,
+     353,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-right.webp": {
@@ -593,151 +755,205 @@
      263.6,
      477
     ],
-    "visibleHeight": 432.8
+    "visibleHeight": 432.8,
+    "bbox": [
+     156,
+     49,
+     350,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-hurt-front.webp",
    "from": "HERO-seoha-hit-s.png#1",
    "mirror": false,
-   "sha256": "139fb4b86bae39eeb6121494bf3c4967d9a42a5b25a0c29904c4a4aa6ec735dc",
-   "bytes": 22084,
+   "sha256": "8bf9442d31e437522e9702ad847741de09d4e0aa43a997e9fe1331225f04eee7",
+   "bytes": 21980,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     288.5,
-     511
+     256.0,
+     512
     ],
-    "visibleHeight": 292.0
+    "visibleHeight": 292.0,
+    "bbox": [
+     171,
+     233,
+     325,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-move-front.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-move-front.webp",
    "from": "HERO-seoha-walk-s.png#2",
    "mirror": false,
-   "sha256": "c7ec7239d1d2f520be98464b752b01b417762a75be838ff0096a249e2c97d4b0",
-   "bytes": 26606,
+   "sha256": "9da0e1a9ac8f3d147cff6d2e7edc9731b83c626e44f95e5902851a335d8db1fb",
+   "bytes": 26780,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     247.3,
-     510
+     256.0,
+     511
     ],
-    "visibleHeight": 344.7
+    "visibleHeight": 348.6,
+    "bbox": [
+     187,
+     173,
+     356,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-hurt-back.webp",
    "from": "HERO-seoha-hit-n.png#1",
    "mirror": false,
-   "sha256": "687d2246cbf15bf07a9e1eed2a51a58c0622a0f04637085fff64030bcd4863cd",
-   "bytes": 35632,
+   "sha256": "f6518e521b5f82c022619ef33e8de56fb60dcc6c891bf37692f8b225cb1f3685",
+   "bytes": 35356,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     254.0,
-     464
+     272.5,
+     494
     ],
-    "visibleHeight": 475.6
+    "visibleHeight": 475.6,
+    "bbox": [
+     101,
+     61,
+     368,
+     501
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-move-back.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-move-back.webp",
    "from": "HERO-seoha-walk-n.png#2",
    "mirror": false,
-   "sha256": "421fcf4c492f44aa6370fc5a77f8ea7c8c79e4e87f50f087c1b6f50388d2eaf2",
-   "bytes": 25662,
+   "sha256": "23e7be81dc823a2b6095c686aae6ce1bfae14085c547d398be3581ac9a5395de",
+   "bytes": 25542,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     248.1,
-     510
+     256.0,
+     511
     ],
-    "visibleHeight": 346.6
+    "visibleHeight": 348.6,
+    "bbox": [
+     174,
+     176,
+     342,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-hurt-left.webp",
    "from": "HERO-seoha-hit-e.png#1",
    "mirror": true,
-   "sha256": "addf64b4d4c04b0636d3b595b44687629fdf85871e9c1106a08360ffe6c35522",
-   "bytes": 31580,
+   "sha256": "2915b0034a50edeba6107cbc7252df906093ca47a5c5a09e2d136ca15d539bb3",
+   "bytes": 31900,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     268.5,
-     479
+     257.0,
+     489
     ],
-    "visibleHeight": 500.8
+    "visibleHeight": 500.8,
+    "bbox": [
+     208,
+     23,
+     451,
+     490
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-move-left.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-move-left.webp",
    "from": "HERO-seoha-walk-e.png#2",
    "mirror": true,
-   "sha256": "dc7454a5a549702963658085666470d084cd229acf7bfe2a4bd76f7f95803889",
-   "bytes": 19910,
+   "sha256": "1af875471c3ed9f8d636fea7cc059672e83ba7da3daa2932f16d74b4424828ed",
+   "bytes": 20002,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     306.0,
-     507
+     256.0,
+     512
     ],
-    "visibleHeight": 336.0
+    "visibleHeight": 337.9,
+    "bbox": [
+     198,
+     175,
+     345,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-hurt-right.webp",
    "from": "HERO-seoha-hit-e.png#1",
    "mirror": false,
-   "sha256": "ffe876e86f015664a38afc918db771d7fab7a58dd92db74d43f81ffa825cfc87",
-   "bytes": 20872,
+   "sha256": "a34dbe7c6abca6d60cf6ad7f43fc91ae6561c204c561c1156d9025f97348e07f",
+   "bytes": 21016,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     253.3,
-     511
+     255.5,
+     512
     ],
-    "visibleHeight": 346.8
+    "visibleHeight": 346.8,
+    "bbox": [
+     123,
+     190,
+     291,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-move-right.webp": {
    "path": "assets/r130/seoha/actions-v3126-seoha-move-right.webp",
    "from": "HERO-seoha-walk-e.png#2",
    "mirror": false,
-   "sha256": "85bd96cf7040482ba9808cd44f8700280ca5a60cb773c200d94d65507851b9e8",
-   "bytes": 19800,
+   "sha256": "1b9eca78f8752113955ba61edbccde8b202ec73a35e01fab4ad7de6a762fa06a",
+   "bytes": 20030,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     215.2,
-     507
+     256.0,
+     512
     ],
-    "visibleHeight": 336.0
+    "visibleHeight": 337.9,
+    "bbox": [
+     169,
+     175,
+     316,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/seoha-attack-left.webp": {
@@ -755,7 +971,13 @@
      290.9,
      393
     ],
-    "visibleHeight": 361.0
+    "visibleHeight": 361.0,
+    "bbox": [
+     238,
+     36,
+     402,
+     395
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/seoha-attack-right.webp": {
@@ -773,7 +995,13 @@
      220.1,
      393
     ],
-    "visibleHeight": 361.0
+    "visibleHeight": 361.0,
+    "bbox": [
+     111,
+     36,
+     275,
+     395
+    ]
    }
   }
  },
@@ -783,8 +1011,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.2,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.2,
+    225
+   ],
    "refBody": 182,
    "sha256": "490d957e476e8e6d83aeff239c456922b23bbc00c3d8f3c40bd1fbf43d936704"
   },
@@ -793,8 +1025,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 96.3,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    96.3,
+    226
+   ],
    "refBody": 181,
    "sha256": "777ec6d0f9d2156e735d16a405e0316b45b23e7bab957ab73f98ff148fc91c91"
   },
@@ -803,8 +1039,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 100.0,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    100.0,
+    227
+   ],
    "refBody": 181,
    "sha256": "bb7743614af7e6134e5fa340cd0c2b9d8090f4cda4abb2abaa806b2d5200df95"
   },
@@ -813,8 +1053,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 91.1,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    91.1,
+    225
+   ],
    "refBody": 180,
    "sha256": "086599c4cb5d9cebefb6773ab78e27962123bdbad5f708bcd942cc14837e8072"
   },
@@ -823,8 +1067,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.6,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    99.6,
+    226
+   ],
    "refBody": 181,
    "sha256": "85782e201d3429ac534dc82a5c7202f81dd7cbe37e1f17d5b10079331092d86e"
   },
@@ -833,8 +1081,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 94.7,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    94.7,
+    226
+   ],
    "refBody": 181,
    "sha256": "01c264b407c7a7ee8cee66a168246b5ed2876350a48ca7586103e208bfe7a9fc"
   },
@@ -843,8 +1095,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 91.0,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    91.0,
+    227
+   ],
    "refBody": 181,
    "sha256": "b06d4ba112b6503335ae451499ee5f6fb768842fc9958aca33694b8a1897b4e6"
   },
@@ -853,8 +1109,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.9,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    99.9,
+    225
+   ],
    "refBody": 180,
    "sha256": "5c36ef8197bc8df37b8d55f298cc091624334e110006dae7973791fcdbe21c0c"
   }

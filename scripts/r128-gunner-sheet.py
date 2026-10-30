@@ -11,6 +11,7 @@ import hashlib, json, sys
 from pathlib import Path
 import numpy as np
 from PIL import Image
+sys.path.insert(0, str(Path(__file__).resolve().parent)); import hero_game_scale
 
 src, site = Path(sys.argv[1]), Path(sys.argv[2]); out = Path('r96/runtime-text/assets/r128/gunner'); out.mkdir(parents=True, exist_ok=True)
 sha = lambda b: hashlib.sha256(b).hexdigest(); CW, CH = 192, 256
@@ -47,6 +48,7 @@ def foot(a, b):
     band = a[y0 + max(0, fy - max(6, int((y1 - y0) * .10))):y0 + fy, x0:x1].astype(float); w = band.sum(0)
     return x0 + (float((w * np.arange(len(w))).sum() / w.sum()) if w.sum() else (x1 - x0) / 2), y0 + fy
 sheets = {}
+VH = hero_game_scale.load(site)
 def frame(act, d, i):
     k = (act, d)
     if k not in sheets: sheets[k] = Image.open(src / f'HERO-gunner-{act}-{d}.png').convert('RGBA')
@@ -59,7 +61,7 @@ for d, (b, m) in {'s': ('s', 0), 'se': ('se', 0), 'e': ('e', 0), 'ne': ('ne', 0)
     if m: fr = [f.transpose(Image.FLIP_LEFT_RIGHT) for f in fr]
     im = Image.new('RGBA', (CW * len(fr), CH)); [im.alpha_composite(f, (i * CW, 0)) for i, f in enumerate(fr)]
     a = np.asarray(fr[0])[..., 3]; b0 = box(a); fx, fy = foot(a, b0); p = out / f'idle-{d}.webp'; im.save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
-    index['idle'][d] = {'path': f'assets/r128/gunner/idle-{d}.webp', 'frames': len(fr), 'cellW': CW, 'cellH': CH, 'footX': round(float(fx), 1), 'footY': int(fy), 'refBody': int(b0[3] - b0[1]), 'sha256': sha(p.read_bytes())}
+    index['idle'][d] = {'path': f'assets/r128/gunner/idle-{d}.webp', 'frames': len(fr), 'cellW': CW, 'cellH': CH, 'footX': 96.0, 'footY': 226, 'measuredFoot': [round(float(fx), 1), int(fy)], 'refBody': int(b0[3] - b0[1]), 'sha256': sha(p.read_bytes())}
 for d in ['s', 'se', 'e', 'ne', 'n']:
     p = out / f'walk-{d}.webp'; Image.open(src / f'HERO-gunner-walk-{d}.png').convert('RGBA').save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
     index['walk'][d] = {'path': f'assets/r128/gunner/walk-{d}.webp', 'cols': 8, 'rows': 1, 'cell': [CW, CH], 'sha256': sha(p.read_bytes())}
@@ -69,11 +71,15 @@ for orig, (act, d, i, m) in MAP.items():
     oh = ob[3] - ob[1]; nh = fb[3] - fb[1]
     # 몸 키는 서 있는 그림 기준으로 맞춘다(쓰러짐·웅크림처럼 키가 낮은 프레임은 같은 비율로 줄여 납작해지지 않게)
     ref = 180; k = oh / max(nh, ref * .5) if act in ('idle', 'walk', 'attack', 'hit') else oh / ref
+    g = VH.get(orig)
+    if g and act in ('idle', 'walk', 'attack'): k = g['visibleHeight'] / max(1, box(fa, 40)[3] - box(fa, 40)[1])  # R134: 게임 기준 키에 맞춤
     sw, sh = max(1, round(fr.width * k)), max(1, round(fr.height * k)); big = fr.resize((sw, sh), Image.LANCZOS)
     fx, fy = foot(fa, fb); ox, oy = foot(o, ob)
+    if g: ox, oy = g['foot']  # R134: 게임이 이 그림을 세우는 발 점(피벗)에 새 발을 놓는다
     canvas = Image.new('RGBA', Image.open(site / orig).size, (0, 0, 0, 0)); canvas.alpha_composite(big, (int(round(ox - fx * k)), int(round(oy - fy * k))))
     name = orig.split('/')[-2].replace('gunner', 'g') + '-' + orig.split('/')[-1].rsplit('.', 1)[0] + '.webp'; p = out / name
     canvas.save(p, 'WEBP', quality=90, alpha_quality=100, method=6)
-    index['swap'][orig] = {'path': f'assets/r128/gunner/{name}', 'from': f'HERO-gunner-{act}-{d}.png#{i}', 'mirror': bool(m), 'sha256': sha(p.read_bytes()), 'bytes': p.stat().st_size}
+    bb = box(np.asarray(canvas)[..., 3], 16)
+    index['swap'][orig] = {'path': f'assets/r128/gunner/{name}', 'from': f'HERO-gunner-{act}-{d}.png#{i}', 'mirror': bool(m), 'sha256': sha(p.read_bytes()), 'bytes': p.stat().st_size, 'frame': {'size': list(canvas.size), 'bbox': [int(v) for v in bb] if bb else None}}
 (out / 'index.json').write_text(json.dumps(index, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 print('walk', len(index['walk']), 'swap', len(index['swap']), 'bytes', sum(f.stat().st_size for f in out.glob('*.webp')))

@@ -30,7 +30,7 @@
   neon:{dir:'assets/r130/neon/',keep:/ultimate-/},hunter:{dir:'assets/r130/hunter/',keep:/ultimate-/},slayer:{dir:'assets/r130/slayer/',keep:/ultimate-|actions-directional\/slayer-guard-/},
   hwando:{dir:'assets/r130/hwando/',keep:/./}};// 환도: 서 있기 그림이 좋아 걷기만 새 시트(정지·동작 그림은 그대로)// R131: 서하·로렌(궁극기 그림은 큰 효과가 들어 있어 원래 그림)
  const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[478]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
- const swap128=k0=>{if(!prefs.gunnerSheet)return null;const k=String(k0).replace(/^assets\/r99\/clean\//,'');/* R131: R99 정리 사본(assets/r99/clean/assets/…)도 같은 대체본 */for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;const parts=k.split('/');return SHEETS[h].dir+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
+ const swap128=k0=>{if(!prefs.gunnerSheet)return null;const k=String(k0).replace(/^assets\/r99\/clean\//,'');/* R131: R99 정리 사본(assets/r99/clean/assets/…)도 같은 대체본 */for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;const parts=k.split('/');return SHEETS[h].dir+(/\/hero_direction338\//.test(k)?'d338-':'')/* R134: 337·338 묶음 이름 겹침(로렌) */+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
  const swapState=new Map();
  // R131: 바꿔 넣을 그림을 미리 받아 두고, 준비됐으면 그 자리에서 바로 바꾼다(예전엔 원래 그림이 먼저 그려진 뒤 바뀌어 옛 그림이 잠깐 보였고,
  //       지역 이동으로 그림 캐시가 비면 '이미 바꿈'으로 기억해 옛 그림이 그대로 남았다). 캐시 줄마다 매번 확인한다.
@@ -66,14 +66,24 @@
    :n.state==='guard'?`${N}actions-consistent/${h}-guard-${side}.webp`:n.state==='attack'||n.state==='ultimate'?`${N}actions-consistent/${h}-${swing||n.state==='ultimate'?'attack':'skill'}-${side}.webp`
    :n.state==='skill'?`${N}actions-consistent/${h}-${swing?'attack':'skill'}-${side}.webp`:`${N}directions/${h}-${side}.webp`;
   const it=sw[orig];if(!it?.frame)return null;const e=wantArt(it.path,orig);if(e.state!=='ready')return null;
-  const row=typeof readyImage==='function'?readyImage(orig):null;if(!row||row.image!==e.img){if(!row&&typeof ensureImages==='function'&&!atlasWant.has(orig)){atlasWant.add(orig);Promise.resolve(ensureImages([orig])).catch(()=>{});}return null;}
+  // R134: 게임 그림 기억에 아직 없으면(처음 쓰는 기술·피격, 지역 이동 직후) 옛 아틀라스가 보였다 — 미리 받은 새 그림을 그 주소로 기억에 넣고 바로 그린다.
+  const key=typeof cleanPath==='function'?cleanPath(it.path):it.path;
+  try{if(typeof imageCache!=='undefined'&&!imageCache.get(key)?.ready)imageCache.set(key,{path:key,image:e.img,ready:true,error:null,promise:Promise.resolve(),crop:typeof imageCrop==='function'?imageCrop(e.img):null,attempts153:[],r134Injected:true});}catch(_){return null;}
+  if(!(typeof readyImage==='function'&&readyImage(it.path)))return null;
   const [W]=it.frame.size,[px,py]=it.frame.pivot,half=Math.max(8,Math.min(px,W-px));stats.atlasSwap=(stats.atlasSwap||0)+1;
   // 자르기 상자를 발 기준 좌우 대칭·발 높이까지로 둔다(걷기·서 있기 덧그림이 상자 밑 가운데를 발로 본다)
-  return{...frame,path:orig,assetFrame:{...frame.assetFrame,sourceRect:[px-half,0,half*2,py],pivot:[half,py],visibleHeight:it.frame.visibleHeight,bakedFacing:side==='left'?'left':'right',muzzle:null},
+  return{...frame,path:it.path,assetFrame:{...frame.assetFrame,sourceRect:[px-half,0,half*2,py],pivot:[half,py],visibleHeight:it.frame.visibleHeight,bakedFacing:side==='left'?'left':'right',muzzle:null},
    nativeHero5:{...n,flip:false,swordTip:null,clip:null,r131Atlas:it.path}};}
- const atlasWant=new Set();
+ // R134: 대체본 몸이 원래 그림의 자르기 상자보다 커서 머리·발이 잘려 보였다(로렌 달리기 앞모습 머리 44px, 미카엘라 옆 공격, 네온 막기).
+ //  대체본이 실제로 그려질 때만 자르기 상자를 대체본 테두리까지 넓힌다. 발 기준점·키 비율은 그대로라 위치·크기는 같다.
+ function cropSwap(frame){const n=frame?.nativeHero5,a=frame?.assetFrame;if(!n||!a||!SHEETS[n.hero]||!prefs.gunnerSheet||n.r131Atlas)return null;
+  const k=String(frame.path||'').replace(/^\.\//,'').replace(/^assets\/r99\/clean\//,''),it=sheetSwap.get(n.hero)?.[k],bb=it?.frame?.bbox;if(!bb)return null;
+  const row=typeof readyImage==='function'?readyImage(frame.path):null,e=art.get(it.path);if(!row||!e||row.image!==e.img)return null;
+  const [x,y,w,h]=a.sourceRect,W=e.img.naturalWidth||it.frame.size[0],H=e.img.naturalHeight||it.frame.size[1],nx=Math.max(0,Math.min(x,bb[0]-2)),ny=Math.max(0,Math.min(y,bb[1]-2)),nx1=Math.min(W,Math.max(x+w,bb[2]+2)),ny1=Math.min(H,Math.max(y+h,bb[3]+2));
+  if(nx===x&&ny===y&&nx1===x+w&&ny1===y+h)return null;stats.cropSwap=(stats.cropSwap||0)+1;
+  return{...frame,assetFrame:{...a,sourceRect:[nx,ny,nx1-nx,ny1-ny],pivot:[a.pivot[0]+(x-nx),a.pivot[1]+(y-ny)]},nativeHero5:{...n,clip:null,swordTip:null}};}
  {const r83=window.StoryHeroPresentationR83;if(r83&&typeof r83.present==='function'){const base=r83.present;
-  window.StoryHeroPresentationR83=Object.freeze({...r83,present(frame){const res=base.call(r83,frame);try{const f=atlasSwap(res?.frame||frame);if(f)return{...(res||{heightScale:1}),frame:f};}catch(e){lastError=String(e?.message||e);}return res;}});}}
+  window.StoryHeroPresentationR83=Object.freeze({...r83,present(frame){const res=base.call(r83,frame);try{const f=atlasSwap(res?.frame||frame)||cropSwap(res?.frame||frame);if(f)return{...(res||{heightScale:1}),frame:f};}catch(e){lastError=String(e?.message||e);}return res;}});}}
  // 3) 보라 날개 타락천사(a11-c1, 첫 정원부터 나옴): 공격할 때만 공용 공격 묶음의 다른 캐릭터(해골 투구 기사, rc137 01 #940,0)로
  //    바뀌어 긴 은발 천사와 해골 기사가 번갈아 보였다. 같은 캐릭터로 새로 그린 공격 4동작(들어올림·내려베기·마무리·복귀,
  //    ChatGPT 2026-10-29, 대기 그림 참조, 오른쪽을 봄)으로 그 칸만 바꿔 그린다. 좌우 판단(R110 표 'L' = 오른쪽을 보는 그림)은 그대로.
@@ -165,7 +175,9 @@
    const busyMove=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0;
    preloadWalk();
    // 반자동 비켜서기·물러나기·길잡이처럼 '이동 중' 표시 없이 위치만 옮기는 경우도 걷기로 본다(사용자: 반자동 켜고 움직이면 동작 없이 이동).
-   const movingNow=player.moving||((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15);
+   // R134: '이동 중' 표시만 켜지고 실제로는 막혀 제자리인 경우(적·벽에 막힘)에도 걷기 그림이 한 장면씩 끼어 공격 자세와 번갈아 깜빡였다(제자리 걸음).
+   //  실제로 움직였을 때만 걷기로 본다(반자동 비켜서기처럼 표시 없이 움직인 경우는 그대로 걷기).
+   const movingNow=((typeof time==='number'?time:0)-(walkState.movedAt??-9)<.15);
    if(!movingNow){if(!busy&&typeof actorHeight==='function'){let sb=null,sbh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||'')))continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>sbh){sbh=h;sb=c;}}
      // 멈춘 직후에도 R91 걷기 칸(여백 포함 칸 전체)이 한두 장면 그려져 몸이 갑자기 커졌다(사용자: 네온 이동 후 멈춤이 이상) — 몸 테두리로 잘라 서 있기 키로 그린다.
      if(sb&&/r91\/walk\//.test(String(sb.sourcePath||''))&&!sb.r121Walk&&sb.sourceRect){const im=sb.image,b=tightBox(im,sb.sourceRect),P=sb.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=P[1][0]<P[0][0]?-1:1,want=actorHeight()*(standRatio.v||.98),w=want*b[2]/b[3];
@@ -182,8 +194,13 @@
    // R134: 발은 실제 영웅 위치(띄움 포함)에 맞춘다 — 바탕 그림 상자의 밑변을 발로 보면, 멈춘 직후 바탕이 서 있기 시트(칸 아래 여백)일 때
    //  걷기 그림이 7~8px 아래로 툭 떨어졌다가(슬레이어는 좌우로도 6px) 서 있기로 바뀌었다.
    const P=best.points,q0=typeof project==='function'?project(player.x,player.y):null,lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q0?q0.x:(P[2][0]+P[3][0])/2,fy=(q0?q0.y-lift:Math.max(P[2][1],P[3][1]))-bob,f=sh.mirror?-1:1;
+   // R134: Gemini 시트(칸 192x256, 모든 칸 발 가운데 96,226, 몸 키 180 — SPEC)는 칸마다 테두리 가운데·테두리 키로 맞추면 무기·코트가 흔들릴 때
+   //  몸이 좌우로 미끄러지고(기억사수·슬레이어 테두리 가운데가 20px 넘게 움직임) 무기를 든 칸에서 몸이 작아졌다 — 칸의 발 기준점·고정 배율로 그린다.
+   let pts=[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]];
+   if(sh.r128&&frame>=0){const cw=(im.naturalWidth||im.width)/(sh.cols||8),ax=(frame%(sh.cols||8))*cw+96,ay=226,k=want/180,X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*k;
+    pts=[[X(box[0]),Y(box[1])],[X(box[0]+box[2]),Y(box[1])],[X(box[0]+box[2]),Y(box[1]+box[3])],[X(box[0]),Y(box[1]+box[3])]];stats.walkAnchor=(stats.walkAnchor||0)+1;}
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
-    points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
+    points:pts,r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
   return r;};}
  // 9) 기억사수 적중 표시 (사용자 2026-10-29 "공격 적중 시 / 이펙트는 없애고 원형이나 십자가로"): 기본 적중 그림(gunner-memory-impact,
  //    대각선 파편 베기 모양) 대신 하늘색 원이 퍼지며 사라지고 가운데에 짧은 십자가 반짝인다. 적 그림의 가운데(R115)에 그린다. 다른 영웅은 그대로. 설정 gunnerHit.

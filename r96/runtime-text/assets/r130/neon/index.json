@@ -33,7 +33,7 @@
   },
   "drive": "StoryWorld-HERO-neon-sheet-20261030.zip",
   "driveId": "1tnZFtJgW_2hQXIgC_5UmipX2M81Y3pkK",
-  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30), R134 게임 기준 키·발 피벗 맞춤, 자르기 테두리",
   "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
@@ -96,216 +96,288 @@
    "path": "assets/r130/neon/g-s.webp",
    "from": "HERO-neon-idle-s.png#0",
    "mirror": false,
-   "sha256": "20c8e1f9e21a6ba48be7fd5fdfc264b314508f0138ce3050ea5b7d5f795c01d9",
-   "bytes": 33706,
+   "sha256": "4a4b2dd191d14e12df8a592c4d25ee928760f907fe40bad44e1237860cfb963a",
+   "bytes": 31412,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     259.0,
-     496
+     259.1,
+     495
     ],
-    "visibleHeight": 480.0
+    "visibleHeight": 454.7,
+    "bbox": [
+     135,
+     50,
+     435,
+     505
+    ]
    }
   },
   "assets/hero_direction337/neon/n.webp": {
    "path": "assets/r130/neon/g-n.webp",
    "from": "HERO-neon-idle-n.png#0",
    "mirror": false,
-   "sha256": "f2b6ac66d317cc2a02aef3c66d43cce64e0a831e722e6ecec78acd1ef1931d44",
-   "bytes": 33164,
+   "sha256": "cb2615c28337df351adb27ad490acbf4712821423c1a500b955faf02ba1abb5a",
+   "bytes": 20616,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     252.0,
-     496
+     253.0,
+     495
     ],
-    "visibleHeight": 482.7
+    "visibleHeight": 320.3,
+    "bbox": [
+     171,
+     182,
+     378,
+     502
+    ]
    }
   },
   "assets/hero_direction334/neon/e.webp": {
    "path": "assets/r130/neon/g-e.webp",
    "from": "HERO-neon-idle-e.png#0",
    "mirror": false,
-   "sha256": "8a7a1b841be7dffb587e427c522345dcc01b5de33a19c14165fa570192ac068b",
-   "bytes": 16282,
+   "sha256": "8a2b297e93bde429f19c5b68f72e5387dcb37dbdf060dca6f4048647299a841a",
+   "bytes": 16084,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     153.3,
+     167.8,
      487
     ],
-    "visibleHeight": 323.0
+    "visibleHeight": 316.7,
+    "bbox": [
+     94,
+     173,
+     263,
+     490
+    ]
    }
   },
   "assets/hero_direction334/neon/w.webp": {
    "path": "assets/r130/neon/g-w.webp",
    "from": "HERO-neon-idle-e.png#0",
    "mirror": true,
-   "sha256": "decf66446b49c19ae8130710697ef8963f60cd1c92e281a6f70032ad6879da09",
-   "bytes": 16056,
+   "sha256": "6b18c1003f22a71f92ffc20e5d6af70c13eba1661a384800f02794191bb94912",
+   "bytes": 15952,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     336.7,
-     489
+     325.1,
+     488
     ],
-    "visibleHeight": 323.0
+    "visibleHeight": 318.6,
+    "bbox": [
+     230,
+     171,
+     401,
+     490
+    ]
    }
   },
   "assets/hero_direction334/neon/ne.webp": {
    "path": "assets/r130/neon/g-ne.webp",
    "from": "HERO-neon-idle-ne.png#0",
    "mirror": false,
-   "sha256": "965f4efccac65458d67e999a0f2284d5498f737b48b8150c5e24ead90922af7a",
-   "bytes": 23444,
+   "sha256": "ad37dc8d049702e074a7fa8fb0e0343f95d55acdf0aaf68c8c5375fe30ff223e",
+   "bytes": 17618,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     177.8,
-     487
+     196.3,
+     486
     ],
-    "visibleHeight": 385.1
+    "visibleHeight": 305.6,
+    "bbox": [
+     123,
+     188,
+     299,
+     493
+    ]
    }
   },
   "assets/hero_direction334/neon/nw.webp": {
    "path": "assets/r130/neon/g-nw.webp",
    "from": "HERO-neon-idle-ne.png#0",
    "mirror": true,
-   "sha256": "a1f6dc078dc3647aba4179e75a8336f4471add98fcbb1671cc5f11670c11b008",
-   "bytes": 23378,
+   "sha256": "00beffa5ff0e588e621a90c61a47f5e74308066c53c5d774d313bb79a1bf4c9c",
+   "bytes": 17392,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     324.3,
-     489
+     307.2,
+     488
     ],
-    "visibleHeight": 389.1
+    "visibleHeight": 302.3,
+    "bbox": [
+     206,
+     193,
+     381,
+     495
+    ]
    }
   },
   "assets/hero_direction334/neon/se.webp": {
    "path": "assets/r130/neon/g-se.webp",
    "from": "HERO-neon-idle-se.png#0",
    "mirror": false,
-   "sha256": "fcb519be787ee5eb57acedf664d19cc3f11edfee4de3a5c3b775eab236d2aa26",
-   "bytes": 18948,
+   "sha256": "0e1258acf185d29b0caf69865b3fbd586b1f9aad9f0b08a945c29cc6b296b158",
+   "bytes": 18822,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     189.8,
-     490
+     171.1,
+     488
     ],
-    "visibleHeight": 316.0
+    "visibleHeight": 313.3,
+    "bbox": [
+     90,
+     182,
+     277,
+     495
+    ]
    }
   },
   "assets/hero_direction334/neon/sw.webp": {
    "path": "assets/r130/neon/g-sw.webp",
    "from": "HERO-neon-idle-se.png#0",
    "mirror": true,
-   "sha256": "3377b4eb7b6233135f53c8a8ddeedf3a50435807de238ee1327542b49b44b381",
-   "bytes": 19188,
+   "sha256": "9f5052c0fa1c2f8995a7f54b9a0e8061985ea27b7d362de8cbbe7419a0b674f1",
+   "bytes": 18702,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     325.0,
-     488
+     326.2,
+     486
     ],
-    "visibleHeight": 318.0
+    "visibleHeight": 313.6,
+    "bbox": [
+     222,
+     180,
+     409,
+     493
+    ]
    }
   },
   "assets/heroes/normalized/directions/neon-front.webp": {
    "path": "assets/r130/neon/directions-neon-front.webp",
    "from": "HERO-neon-idle-s.png#0",
    "mirror": false,
-   "sha256": "c78da3877c79521aa67afbf21c287ceae798792517289816d0374cfd08fe8ada",
-   "bytes": 28230,
+   "sha256": "a30bfd85b7239ee78143e8575820b7bc7dfcb6fcf3a641739249faf575fb8329",
+   "bytes": 27436,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     206.7,
-     437
+     256.0,
+     476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 408.7,
+    "bbox": [
+     144,
+     76,
+     414,
+     484
+    ]
    }
   },
   "assets/heroes/normalized/directions/neon-back.webp": {
    "path": "assets/r130/neon/directions-neon-back.webp",
    "from": "HERO-neon-idle-n.png#0",
    "mirror": false,
-   "sha256": "4bd6bb50fb3fa346868ed35bc280f4cfc7fad62635b9ff77c10c0ed0aca6fece",
-   "bytes": 28176,
+   "sha256": "5078839a9d35da63d7b884f8e7e7ec83f2e9b20362daeb32b533b06d5a6e825f",
+   "bytes": 26958,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     225.5,
-     469
+     256.0,
+     476
     ],
-    "visibleHeight": 423.3
+    "visibleHeight": 407.7,
+    "bbox": [
+     152,
+     76,
+     416,
+     483
+    ]
    }
   },
   "assets/heroes/normalized/directions/neon-left.webp": {
    "path": "assets/r130/neon/directions-neon-left.webp",
    "from": "HERO-neon-idle-e.png#0",
    "mirror": true,
-   "sha256": "d760b8a249bd2423f5047e219f7e14f0b7af3232a8995ad63ac47173fd019be7",
-   "bytes": 22436,
+   "sha256": "24c3aa6c896fa344bfbce08a3ab3f86111e445281d058bfe57c0923fdfd6fe13",
+   "bytes": 21374,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     270.8,
+     256.0,
      476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 405.5,
+    "bbox": [
+     136,
+     72,
+     353,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/directions/neon-right.webp": {
    "path": "assets/r130/neon/directions-neon-right.webp",
    "from": "HERO-neon-idle-e.png#0",
    "mirror": false,
-   "sha256": "e838b5fb46944852804d0b079b97de2b7e71398479ca8bf07d6b5ac00a5d4185",
-   "bytes": 22004,
+   "sha256": "809c2ce8d8c9d2854fe63874a194eaa8d787798641e25b1e0ebc8fd34420070b",
+   "bytes": 21770,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     248.2,
-     475
+     256.0,
+     476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 405.5,
+    "bbox": [
+     162,
+     72,
+     379,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-attack-front.webp": {
@@ -323,7 +395,13 @@
      228.5,
      450
     ],
-    "visibleHeight": 421.7
+    "visibleHeight": 421.7,
+    "bbox": [
+     98,
+     28,
+     390,
+     458
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-attack-back.webp": {
@@ -341,7 +419,13 @@
      224.8,
      471
     ],
-    "visibleHeight": 433.4
+    "visibleHeight": 433.4,
+    "bbox": [
+     98,
+     48,
+     394,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-attack-left.webp": {
@@ -359,7 +443,13 @@
      268.5,
      472
     ],
-    "visibleHeight": 435.4
+    "visibleHeight": 435.4,
+    "bbox": [
+     140,
+     41,
+     384,
+     473
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-attack-right.webp": {
@@ -377,7 +467,13 @@
      260.9,
      467
     ],
-    "visibleHeight": 435.4
+    "visibleHeight": 435.4,
+    "bbox": [
+     148,
+     36,
+     392,
+     468
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-skill-front.webp": {
@@ -395,7 +491,13 @@
      212.6,
      445
     ],
-    "visibleHeight": 444.8
+    "visibleHeight": 444.8,
+    "bbox": [
+     71,
+     20,
+     384,
+     455
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-skill-back.webp": {
@@ -413,7 +515,13 @@
      224.0,
      472
     ],
-    "visibleHeight": 435.0
+    "visibleHeight": 435.0,
+    "bbox": [
+     94,
+     45,
+     396,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-skill-left.webp": {
@@ -431,7 +539,13 @@
      270.8,
      478
     ],
-    "visibleHeight": 433.6
+    "visibleHeight": 433.6,
+    "bbox": [
+     141,
+     45,
+     397,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-skill-right.webp": {
@@ -449,43 +563,61 @@
      250.5,
      476
     ],
-    "visibleHeight": 433.6
+    "visibleHeight": 433.6,
+    "bbox": [
+     126,
+     43,
+     382,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-guard-front.webp": {
    "path": "assets/r130/neon/actions-consistent-neon-guard-front.webp",
    "from": "HERO-neon-attack-s.png#0",
    "mirror": false,
-   "sha256": "5b345a17c6d0c0429a205ca208fe824795721b02093b7d2f1046cb5b84919f94",
-   "bytes": 25592,
+   "sha256": "090c02a1fc316e4f89be366be39611cc0653bac7b8a22425a1e5d0117be5cb1c",
+   "bytes": 25916,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     210.4,
-     449
+     256.0,
+     491
     ],
-    "visibleHeight": 409.5
+    "visibleHeight": 412.7,
+    "bbox": [
+     147,
+     83,
+     414,
+     501
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-guard-back.webp": {
    "path": "assets/r130/neon/actions-consistent-neon-guard-back.webp",
    "from": "HERO-neon-attack-n.png#0",
    "mirror": false,
-   "sha256": "9d6718003cc9e33190d3187abc247c1a4b0e02c3202a0b20680fd8074df08ed6",
-   "bytes": 25392,
+   "sha256": "4990e622db9db3759f23b323a4e7f9b70e73b9c3026da381314fe01f432e4276",
+   "bytes": 25526,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     225.5,
-     485
+     256.0,
+     491
     ],
-    "visibleHeight": 416.3
+    "visibleHeight": 416.3,
+    "bbox": [
+     153,
+     84,
+     418,
+     500
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-guard-left.webp": {
@@ -503,7 +635,13 @@
      269.9,
      488
     ],
-    "visibleHeight": 413.0
+    "visibleHeight": 413.0,
+    "bbox": [
+     148,
+     78,
+     365,
+     490
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-guard-right.webp": {
@@ -521,43 +659,61 @@
      244.8,
      487
     ],
-    "visibleHeight": 414.0
+    "visibleHeight": 414.0,
+    "bbox": [
+     152,
+     76,
+     370,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-dash-front.webp": {
    "path": "assets/r130/neon/actions-consistent-neon-dash-front.webp",
    "from": "HERO-neon-walk-s.png#3",
    "mirror": false,
-   "sha256": "c256145f4f5a5445a4b657b2ed40b068f905eb201148a025c930fa599715e836",
-   "bytes": 26646,
+   "sha256": "f52800a5e3a181be2e37d11e815ccf7ed2475992a53a1cfeaff82388374ec487",
+   "bytes": 26840,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     199.4,
-     470
+     256.0,
+     494
     ],
-    "visibleHeight": 446.4
+    "visibleHeight": 448.9,
+    "bbox": [
+     138,
+     56,
+     423,
+     496
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-dash-back.webp": {
    "path": "assets/r130/neon/actions-consistent-neon-dash-back.webp",
    "from": "HERO-neon-walk-n.png#3",
    "mirror": false,
-   "sha256": "45b1f64e1463d529db4cf5277bcc88e0cb020b3451213b3f81f2dd3ed7e2af38",
-   "bytes": 27498,
+   "sha256": "e0c239bb11520a11e7af1d3dcbd518d3980cb97ce10bd2e2db955e23c00d2186",
+   "bytes": 27206,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     225.9,
-     500
+     256.0,
+     507
     ],
-    "visibleHeight": 454.5
+    "visibleHeight": 454.5,
+    "bbox": [
+     165,
+     53,
+     448,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-dash-left.webp": {
@@ -575,7 +731,13 @@
      273.9,
      480
     ],
-    "visibleHeight": 446.5
+    "visibleHeight": 446.5,
+    "bbox": [
+     151,
+     38,
+     384,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/neon-dash-right.webp": {
@@ -593,151 +755,205 @@
      237.6,
      476
     ],
-    "visibleHeight": 448.5
+    "visibleHeight": 448.5,
+    "bbox": [
+     129,
+     31,
+     362,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-hurt-front.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-hurt-front.webp",
    "from": "HERO-neon-hit-s.png#1",
    "mirror": false,
-   "sha256": "ca1244f7c463e52f1716cdbe18f8b5afbe5e4156a6204ac4c3ebaaf3acf85fe6",
-   "bytes": 15618,
+   "sha256": "f44822d236b23d246a75f8e724632e815e6fc9d8386533634509f5f43b11c3f4",
+   "bytes": 15226,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     257.2,
-     500
+     255.5,
+     512
     ],
-    "visibleHeight": 261.1
+    "visibleHeight": 261.1,
+    "bbox": [
+     185,
+     254,
+     350,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-move-front.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-move-front.webp",
    "from": "HERO-neon-walk-s.png#2",
    "mirror": false,
-   "sha256": "dfbd63677f1344da1321a9d897223ab73e4de3dfc2aa5a8b725b5bfe50aea691",
-   "bytes": 17576,
+   "sha256": "d92f4084ebf0350aed10affe28b4e391bd310ff310705b5f2046c9c6b521d8b0",
+   "bytes": 17184,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     243.9,
-     498
+     256.0,
+     512
     ],
-    "visibleHeight": 294.0
+    "visibleHeight": 294.0,
+    "bbox": [
+     182,
+     225,
+     369,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-hurt-back.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-hurt-back.webp",
    "from": "HERO-neon-hit-n.png#1",
    "mirror": false,
-   "sha256": "abf2c037a979d375a14ff4a03697b26bc58ccfa5ff952bd91b5e0152f53e431f",
-   "bytes": 14614,
+   "sha256": "abc3a3ec3bc66fb4224bddd7738478bd79605b50d7315e946ffb144c4f973f59",
+   "bytes": 14310,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     271.7,
-     506
+     255.5,
+     512
     ],
-    "visibleHeight": 264.7
+    "visibleHeight": 264.7,
+    "bbox": [
+     189,
+     260,
+     352,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-move-back.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-move-back.webp",
    "from": "HERO-neon-walk-n.png#2",
    "mirror": false,
-   "sha256": "00cad2acea5a845b9883b66a7aa1d899444880cebecf8ac9e9cef3aff19749e0",
-   "bytes": 16636,
+   "sha256": "4e069348a0105757ff1e14b62dd41f8ac3dcb2af64863e6133a7f736000e4f8f",
+   "bytes": 16468,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     239.4,
-     476
+     256.0,
+     511
     ],
-    "visibleHeight": 285.0
+    "visibleHeight": 286.6,
+    "bbox": [
+     194,
+     230,
+     372,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-hurt-left.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-hurt-left.webp",
    "from": "HERO-neon-hit-e.png#1",
    "mirror": true,
-   "sha256": "9168fd3afc66a7365c22f2f10309b116ec4821b37b5cfd3b05f074a7c0a53b4d",
-   "bytes": 11758,
+   "sha256": "5a66c2b81bd07ac177ebe261f1d2601f198b57a6931c5df7fa3fca4ee822b7f5",
+   "bytes": 11868,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     271.7,
-     503
+     255.5,
+     512
     ],
-    "visibleHeight": 260.9
+    "visibleHeight": 260.9,
+    "bbox": [
+     178,
+     255,
+     319,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-move-left.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-move-left.webp",
    "from": "HERO-neon-walk-e.png#2",
    "mirror": true,
-   "sha256": "5ff340558a89d9a17a82198484b1d2411cb58f546ae3106492c7368c3bfa07a6",
-   "bytes": 13292,
+   "sha256": "86cabb76ba2948696c34534a20ee78033a4d380525bc35e0ae4a86d83d8e8323",
+   "bytes": 13274,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     227.2,
-     486
+     256.0,
+     511
     ],
-    "visibleHeight": 276.0
+    "visibleHeight": 276.0,
+    "bbox": [
+     183,
+     236,
+     328,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-hurt-right.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-hurt-right.webp",
    "from": "HERO-neon-hit-e.png#1",
    "mirror": false,
-   "sha256": "aee42cc1f108267902c24596a62478cca5b99b26a2f5a0250623d7df907d7afc",
-   "bytes": 12004,
+   "sha256": "24e95dc9549414d5a5dcc7a5f137da5876d22552cf348ac37a03723871248e88",
+   "bytes": 11908,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     243.0,
-     503
+     256.0,
+     512
     ],
-    "visibleHeight": 262.9
+    "visibleHeight": 262.9,
+    "bbox": [
+     193,
+     253,
+     335,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/neon-move-right.webp": {
    "path": "assets/r130/neon/actions-v3126-neon-move-right.webp",
    "from": "HERO-neon-walk-e.png#2",
    "mirror": false,
-   "sha256": "12828073a58845c39a4671afbbaa83264e676eafbd255b75bad4924fd41bd9e5",
-   "bytes": 13434,
+   "sha256": "69adde9910515b5a4f3060c6f4b1b2089c3454d5b6dcf6a1677eb38112fadb33",
+   "bytes": 13298,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     279.3,
-     489
+     256.0,
+     511
     ],
-    "visibleHeight": 275.0
+    "visibleHeight": 275.0,
+    "bbox": [
+     185,
+     237,
+     329,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/neon-attack-left.webp": {
@@ -755,7 +971,13 @@
      334.2,
      371
     ],
-    "visibleHeight": 379.1
+    "visibleHeight": 379.1,
+    "bbox": [
+     222,
+     0,
+     435,
+     372
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/neon-attack-right.webp": {
@@ -773,7 +995,13 @@
      176.8,
      371
     ],
-    "visibleHeight": 379.1
+    "visibleHeight": 379.1,
+    "bbox": [
+     78,
+     0,
+     291,
+     372
+    ]
    }
   }
  },
@@ -783,8 +1011,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.8,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.8,
+    224
+   ],
    "refBody": 182,
    "sha256": "82a7c1460c1c84302481c0560d35f5da2704600893daa768e1bfedbcb3ccf04c"
   },
@@ -793,8 +1025,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 96.4,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    96.4,
+    224
+   ],
    "refBody": 182,
    "sha256": "9c99f31221df8f861bbc23f23224b28c613a6b61759ce1af21e2607138065dd7"
   },
@@ -803,8 +1039,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.2,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.2,
+    227
+   ],
    "refBody": 182,
    "sha256": "496d46b43f4afbf265f3e8ac8f4569dd8d429ef7045a172095ec8fef33a697e6"
   },
@@ -813,8 +1053,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 91.1,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    91.1,
+    224
+   ],
    "refBody": 181,
    "sha256": "14d5c30d76da21e95ecc70e24f52f8c674d81520eedfbeaa4d5cb0524fa32f6a"
   },
@@ -823,8 +1067,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 90.2,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    90.2,
+    224
+   ],
    "refBody": 181,
    "sha256": "a28be0691de4db9f3329d1c2b1e8d9aea8ef17afa74bbb9e32c1d7d09048ff01"
   },
@@ -833,8 +1081,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 94.6,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    94.6,
+    224
+   ],
    "refBody": 182,
    "sha256": "a40c09524419aaff4abd80f2cf59f753beaac872a595bfc9dd1dc32d647d4052"
   },
@@ -843,8 +1095,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.8,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.8,
+    227
+   ],
    "refBody": 182,
    "sha256": "83fc9e683f366e99687f706e84be044bfa79d026b6da6980f14dc3eef578910c"
   },
@@ -853,8 +1109,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.9,
-   "footY": 224,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    99.9,
+    224
+   ],
    "refBody": 181,
    "sha256": "655b8d5634df031213986a99ec6d011771d21d57e31eb587f5359fde4bdb838b"
   }

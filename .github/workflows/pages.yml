@@ -105,6 +105,8 @@ jobs:
         run: node r96/qa/r125/ambience-cpu-check.cjs
       - name: R134 guide portal (normal intent, difficulty watchdog) and walk foot anchor
         run: node r96/qa/r134/guide-cpu-check.cjs
+      - name: R135 hero motion (blocked-walk flicker, walk anchor, still scale/pivot/crop, slayer atlas)
+        run: node r96/qa/r135/motion-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
