@@ -163,6 +163,8 @@
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(sw,x1-x0+3),Math.min(sh,y1-y0+3)];}catch(_){}m.set(k,box);return box;}
  if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){preloadHeroArt();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
+  // R136: 맞은 뒤 '피격 보호' 동안 몸 전체가 84% 불투명으로 그려져, 전투 중 거의 내내 영웅이 반투명해 보였다(사용자 '투명화'). 몸은 불투명하게.
+  try{if(st>=0&&player&&player.invincible>0){for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind==='image'&&c.owner?.kind==='hero'&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))&&c.style&&c.style.globalAlpha<1&&c.style.globalAlpha>=.8){c.style.globalAlpha=1;stats.opaqueHit=(stats.opaqueHit||0)+1;}}}}catch(_){}
   try{if(!prefs.walkCycle||st<0||!player)return r;const co=window.__STORYWORLD_COOP_SIM_R62__;if(co?.mode&&co.mode()!=='off')return r;/* 협동에서는 한 번에 여러 영웅을 그려 다른 영웅 그림을 바꿀 수 있어 건너뜀(Codex 리뷰) */let mv=0;if(walkState.x!=null){const dx=player.x-walkState.x,dy=player.y-walkState.y,d=Math.hypot(dx,dy);
      if(d>1e-4&&d<1.2){walkState.d+=d;mv=d;if(d>.004)walkState.movedAt=typeof time==='number'?time:0;if(typeof project==='function'){const q0=project(walkState.x,walkState.y),q1=project(player.x,player.y),sx=(walkState.sx||0)*.7+(q1.x-q0.x)*.3,sy=(walkState.sy||0)*.7+(q1.y-q0.y)*.3;walkState.sx=sx;walkState.sy=sy;let cand=DIR8[((Math.round(Math.atan2(sy,sx)/(Math.PI/4))%8)+8)%8];
       // R131: 움직이는 입력 방향(moveVX150)이 있으면 그것을 쓴다 — 위치 변화로 짐작하면 몇 장면 늦게 바뀌어 위로 가는데 옆 걷기가 보였다. 2장면 이어지면 바꾼다.
