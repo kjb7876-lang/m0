@@ -3159,7 +3159,8 @@
     "assets/r130/slayer/walk-se.webp",
     "assets/r126/props/badge.webp",
     "assets/r130/lauren/d338-g-s.webp",
-    "assets/r130/lauren/d338-g-n.webp"
+    "assets/r130/lauren/d338-g-n.webp",
+    "combat-r137.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4234,5 +4235,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "997bc00cb2c49c8682fa523c38c331129bce1f2b4edf9ef4a73356e5f971b6af"
+  "runtimeManifestSHA256": "26efc77a8c676301c1846ae30ab379f08e9fbd0f140c053d0e2a186eefe3ebe1"
 }
