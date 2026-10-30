@@ -381,7 +381,11 @@ function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=docu
   // walks toward the stage goal instead.
   if(typeof drawExits==='function'){const exitsBase=drawExits;drawExits=function(...a){if(here())return;return exitsBase.apply(this,a);};}
   if(typeof travel==='function'){const travelBase=travel;travel=function(...a){if(here())return false;return travelBase.apply(this,a);};}
-  if(typeof guideStep==='function'){const guideBase=guideStep;let guideAt=0;guideStep=function(dt,...a){if(!here())return guideBase.call(this,dt,...a);try{if(typeof guide!=='undefined'&&guide&&!modal&&!loading&&player.hp>0&&time>=guideAt){guideAt=time+.6;const g=navGoal();const d=g?Math.hypot(g.x-player.x,g.y-player.y):0;
+  if(typeof guideStep==='function'){const guideBase=guideStep;let guideAt=0;guideStep=function(dt,...a){if(!here())return guideBase.call(this,dt,...a);try{if(typeof guide!=='undefined'&&guide&&!modal&&!loading&&player.hp>0&&time>=guideAt){guideAt=time+.6;const px=room?.samongR103?.portal;
+   // R141: 문(포탈)이 열린 뒤에는 목표가 비어(navGoal=null) 길잡이가 아무것도 하지 않았다 — 보스를 잡은 자리가 문에서 E 거리 밖이면 그대로 멈춤
+   //  (S05-6 '불탄 거리' 486초). 열린 문까지 걸어가 E 를 대신 누른다.
+   if(px&&!(typeof storyScene!=='undefined'&&storyScene)&&!(room.enemies||[]).some(e=>e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&Math.hypot(e.x-player.x,e.y-player.y)<6)){const dp=Math.hypot(px.x-player.x,px.y-player.y);if(dp>.7){const w=routeTo(px);route=w.length?w:[{x:px.x,y:px.y}];command=null;}else if(typeof interact==='function'){route=[];interact();}return;}
+   const g=navGoal();const d=g?Math.hypot(g.x-player.x,g.y-player.y):0;
    // R141: 단서·진술(목표)은 1.6칸 안에 들어오면 길을 더 잡지 않아, 입장 자리가 단서에서 1.56칸이면 E 거리(약 1.2칸) 밖에 선 채 멈췄다(S01-3 '긴 식탁의 방' 12초).
    //  목표는 0.8칸까지 다가가고, 닿으면 E(상호작용)를 대신 누른다.
    if(g&&(d>1.6||(g.kind==='objective'&&d>.8))){const w=routeTo(g);if(w.length){route=w;command=null;}else if(d<=1.6){route=[{x:g.x,y:g.y}];command=null;}}
