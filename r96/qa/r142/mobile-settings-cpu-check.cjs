@@ -4,7 +4,7 @@ const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 for(const f of['mobile-settings-r142.js','combat-r137.js'])ok(f+' runtime copy matches',fs.readFileSync(path.join(R,'runtime-text',f),'utf8')===C(f));
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
-ok('index.html loads mobile-settings-r142 before audio-r98',/mobile-settings-r142\.js"><\/script><script src="\.\/audio-r98\.js"/.test(html));
+ok('index.html loads mobile-settings-r142 before audio-r98',(html.indexOf('./mobile-settings-r142.js')>0&&html.indexOf('./mobile-settings-r142.js')<html.indexOf('./audio-r98.js')));
 ok('public verify list includes mobile-settings-r142',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'mobile-settings-r142.js'"));
 const src=C('mobile-settings-r142.js');
 ok('condensing only on mobile',/prefs\.on&&mobile\(\)/.test(src));

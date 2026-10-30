@@ -81,6 +81,87 @@
      1020
     ]
    }
+  },
+  "weed": {
+   "path": "assets/r138/props/weed.webp",
+   "size": [
+    512,
+    252
+   ],
+   "bytes": 52962,
+   "sha256": "633027398115352202f2b82e4ffb27d55499b8b011f07e7ed779e8a59a041ef4",
+   "use": "dist02 늪지대 수초 덩어리(에피소드1A L45, 드라이브 10-30 R145), 바닥 비충돌 장식(붙잡기 판정 없음)",
+   "source": {
+    "drive": "Dist02-Waterweed-Clump1.zip",
+    "driveId": "1WFaucz-Li0pzqQLylwEoe5bkcxJ-1P_s",
+    "file": "exec-13b0a057-b48e-4ee6-8f26-46305554a700.png",
+    "sha256": "d75e4e253160faff8163e021795db726514566b4d85c1c847e5d62d9f381ef0e",
+    "bytes": 684846,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     53,
+     382,
+     1199,
+     945
+    ]
+   }
+  },
+  "ripple": {
+   "path": "assets/r138/props/ripple.webp",
+   "size": [
+    512,
+    236
+   ],
+   "bytes": 47770,
+   "sha256": "75d322ddfc86aeac835aa42e7cb0b0e26a2af4f313f9439ba154a6faa5471fa2",
+   "use": "dist02 늪 수면 잔물결 v2(에피소드1A L47, R145), 바닥에 눕힌 비충돌 장식(애니 없음) — R145 보류: 어두운 늪 바닥에서 거의 보이지 않아 배치하지 않음(파생본만 보관)",
+   "source": {
+    "drive": "Dist02-Quiet-Ripple-v2.zip",
+    "driveId": "1EXrdaguXu6KehgPeKbhYzQy2B8vJIUlI",
+    "file": "exec-f6f56781-a6ee-49ad-a231-9523f558a31d.png",
+    "sha256": "c1b9c54384d593d68ee3ec77fd0c928a236651d1bd4c65f7bc314c3024d4c76a",
+    "bytes": 335759,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     164,
+     433,
+     1121,
+     875
+    ]
+   }
+  },
+  "chain": {
+   "path": "assets/r138/props/chain.webp",
+   "size": [
+    512,
+    185
+   ],
+   "bytes": 39682,
+   "sha256": "8c4bade013b8842fb5cb8258aa9aa5641d50309b45d1b5f908c194ab185a0fa6",
+   "use": "dist03 재에 묻힌 사슬(에피소드1A L59, R145), 바닥 비충돌 장식(당김·충돌 없음)",
+   "source": {
+    "drive": "Dist03-Ash-Chain1.zip",
+    "driveId": "1zanY1daqpUJDC_4xhp6ZmE-Vw1T75LW8",
+    "file": "exec-21b87d0b-549e-4878-a989-6954f6629543.png",
+    "sha256": "b6fd576a1bd01ff0edb9d78f095c3ca41d4d5081487897ff81ad83a6fea34ddd",
+    "bytes": 1459543,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     100,
+     299,
+     1404,
+     771
+    ]
+   }
   }
  },
  "held": {
@@ -137,6 +218,10 @@
   "M004-flight-render-review-aid": {
    "driveId": "1vLED3dhOrKdQlcV1VtrRxbvgyoRRcTxw",
    "reason": "NOT-runtime 표기"
-  }
+  },
+  "Dist05-Pillar-Ember1.zip (1KqOZrki-4EZk3rQ9M53ZryMSrxyzfLXz)": "R145 보류: 기둥 틈 잔불 — 기둥에 붙일 자리 없이 바닥에 두면 어색함, 전체폭128px에서 본체 약13px로 세부 약함(README)",
+  "Ep1A09-Injection-Room-Sign1.zip (1DXL9GrVO7fTEIdO9tPov8B5z6Jj70fFe)": "R145 보류: 병원 ep1a09 벽 표지 — 병원 미로는 이 배치(본편 지역 방 사각형)를 쓰지 않아 벽 부착 자리 검증 필요",
+  "Ep1A11-Hospital-Window-Lit-v2.zip (1rNXmFJgh3mNb80buhsaMnUHOGj-9jThm)": "R145 보류: 병원 ep1a11 창문 v2 — 같은 이유(벽 접합 미검증), README 도 크림색 벽 가장자리가 두껍다고 기록",
+  "Ep1A11-Old-Silver-Seal1.zip (128Db5NGLIJTMK9zHUKgvmthSABLdM7lJ)": "R145 보류: 낡은 은빛 인장 — README 가 사진·렌더풍 하이라이트로 기존 회화풍 정합 미통과라고 기록, 획득·상호작용 설계 없음"
  }
 }

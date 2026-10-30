@@ -1,0 +1,113 @@
+{
+ "hero": "hunter",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/hunter/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-attack-s.png",
+    "sha256": "73a8d960839980a3337b85afc497d8d008b2e8344f7145637a8b90474f277a12",
+    "bytes": 117154
+   },
+   "sha256": "63efa334d06014098b3626b0000a4154730b5458a22b376662e6bb0b44829ee7",
+   "bytes": 39940
+  },
+  "se": {
+   "path": "assets/r143/attack/hunter/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-attack-se.png",
+    "sha256": "385e7b8f3d8aa4e85c6d30bf1add4a744fd0fea8a25e4afb6e18260578c89f2e",
+    "bytes": 105286
+   },
+   "sha256": "279d08e7bf918919ef79f0e276eda98b71c17ec6163015ba3c0cf440cdf7c6fc",
+   "bytes": 37136
+  },
+  "e": {
+   "path": "assets/r143/attack/hunter/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-attack-e.png",
+    "sha256": "4b63d186fa607094d5c8dd421331198541039edd9e4a49e153d19ea90791efcb",
+    "bytes": 96302
+   },
+   "sha256": "01cd911bb039d8664a7e2cee328057084c464f24b0bd298885a6a81515efc076",
+   "bytes": 33578
+  },
+  "ne": {
+   "path": "assets/r143/attack/hunter/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-attack-ne.png",
+    "sha256": "357557b93c71e929a655d13c3e59cee8fa7dd394ad9dc749d8822c359e1e5c2a",
+    "bytes": 113499
+   },
+   "sha256": "a6ccf491ba0ab74621cf21260f23effdbadfd8b8ee4fc1063558c17ce723bcb3",
+   "bytes": 39190
+  },
+  "n": {
+   "path": "assets/r143/attack/hunter/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "15wwTg5v3Tij6oJvxgfyoBwIMbRcYppYD",
+    "file": "HERO-hunter-attack-n.png",
+    "sha256": "772cd96bf4d3b384a6051b6c4d8186a33e44f229f553a1be8f1cd27f9c2a2464",
+    "bytes": 124101
+   },
+   "sha256": "f443b8040a6228e7b8127975b8ab545e2b268dbf2cc5a0d57e6ead6a51deaf30",
+   "bytes": 41672
+  }
+ }
+}

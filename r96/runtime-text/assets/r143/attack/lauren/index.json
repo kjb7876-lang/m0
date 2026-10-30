@@ -1,0 +1,113 @@
+{
+ "hero": "lauren",
+ "action": "attack",
+ "order": "예비 2 · 타격 2 · 회수 2 (README)",
+ "mirroredInGame": {
+  "w": "e",
+  "sw": "se",
+  "nw": "ne"
+ },
+ "applied": "기본 공격(멈춰 서서) 프레임 애니메이션 — client-source/attack-anim-r143.js",
+ "directions": {
+  "s": {
+   "path": "assets/r143/attack/lauren/attack-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    225
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-attack-s.png",
+    "sha256": "7bb1f12d337fbe180cff71f246f7a6c183bc65f231dc386ce3bc4c06e16f2609",
+    "bytes": 141693
+   },
+   "sha256": "9817d2124cee6acd97a153fba1242de76cf5b1a474efa8a7c5bbe84f1c3de7d0",
+   "bytes": 45506
+  },
+  "se": {
+   "path": "assets/r143/attack/lauren/attack-se.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    223
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-attack-se.png",
+    "sha256": "4fe7557c9a3e09404ee13c8fe57f468e436f6ff7db24dec39b8f3bf2c952f42f",
+    "bytes": 136512
+   },
+   "sha256": "d1303f5a6e269e3397b861f52894e0e8d3796e151476c53825c9cccf72fc1484",
+   "bytes": 45074
+  },
+  "e": {
+   "path": "assets/r143/attack/lauren/attack-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    227
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-attack-e.png",
+    "sha256": "06cf96504cdde348d62b0e829ac16a0c9f828eccb06b388bc20fd6a4b9096e5d",
+    "bytes": 98925
+   },
+   "sha256": "639291dbc21ab0bc04db479f85aed29c8f7c548a8308e890c79598ee95135c81",
+   "bytes": 35262
+  },
+  "ne": {
+   "path": "assets/r143/attack/lauren/attack-ne.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-attack-ne.png",
+    "sha256": "b3b943198681c6bb1b5286cff7b7cf9ee4c1959e0d8c5362a6dad556840e19cb",
+    "bytes": 117241
+   },
+   "sha256": "c2758ffd55897218afc02e89f4499b0989f4387070c0ab5cd074b0eaded9e403",
+   "bytes": 39916
+  },
+  "n": {
+   "path": "assets/r143/attack/lauren/attack-n.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "foot": [
+    96,
+    226
+   ],
+   "source": {
+    "driveId": "1nk0xW0f8tobHGGAL4e-yYGJ5t4SVi6kL",
+    "file": "HERO-lauren-attack-n.png",
+    "sha256": "460efab7288e0686df22faddcbba1fdcafcaa88bcd4fde00ec58f2b9a14cd9b9",
+    "bytes": 124731
+   },
+   "sha256": "4ab37d758d692f2ef2362c166304531f93ae35289f914f2b4d683f15ec5a800a",
+   "bytes": 41772
+  }
+ }
+}
