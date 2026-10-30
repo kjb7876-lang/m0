@@ -126,7 +126,7 @@
 
  // ---- 설정 ----------------------------------------------------------------------------------
  const LABELS=[['echoMajorOnly','환영 공격은 중간보스급 이상만'],['midbossScale','중간보스 크기 70%'],['faceAlways','전투 중 몹이 늘 영웅을 봄'],['bindRootOnly','속박은 뿌리 보스만'],['bindRoot','속박 중 걸어서 이동 불가'],['guardCleanse','공명 방어로 상태이상 해제'],['guardOrb','체력 구슬에 공명 방어 회복·보호막'],['autoGuard','길잡이·반자동 7초마다 공명 방어'],['blinkWalls','블링크로 얇은 벽 넘기']];
- function settingsBox(){const q=document.getElementById('settingsR118')?.parentElement||document.querySelector('#modal .settings,#modal');if(!q||document.getElementById('settingsR137'))return;
+ function settingsBox(){const q=document.getElementById('settingsR118')?.parentElement||document.getElementById('detailSettingsR114')||document.getElementById('panel');/* R142: '#modal .settings,#modal' 은 #modal 자체가 먼저 맞아 상자가 설정 창 밖(오른쪽)에 붙었다(모바일에서 창이 좁아짐) */if(!q||document.getElementById('settingsR137'))return;
   const box=document.createElement('div');box.id='settingsR137';box.innerHTML='<h4 style="margin:.6em 0 .2em">몹·공명 방어 (R137)</h4>'+LABELS.map(([k,l])=>'<label style="display:flex;gap:.4em;align-items:center;margin:.15em 0"><input type="checkbox" data-r137="'+k+'"'+(prefs[k]?' checked':'')+'> '+l+'</label>').join('');
   q.appendChild(box);box.querySelectorAll('[data-r137]').forEach(el=>el.onchange=()=>set({[el.dataset.r137]:el.checked}));}
  if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{settingsBox();}catch(e){fail(e);}return r;};}

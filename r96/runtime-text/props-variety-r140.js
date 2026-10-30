@@ -12,7 +12,7 @@ const h32=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.char
 const WALLY=/window|frame|board|notice|locker|sign|banner|mirror|wall|door|gate|portal|stair|lift|shelf|cabinet/i;
 function free(p){if(!p||typeof p!=='object'||p.interactive||p.r74Door||p.terrainWall||p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson||p.r115Clue||p.r115Stmt!=null||p.r105Record||p.samongR103||p.objective||/objective/i.test(String(p.id||'')))return false;
  if(p.r123Deco){const d=p.r123Deco;if(d.face||WALLY.test(String(d.kind||'')))return false;return true;}
- if(p.r138Drive)return p.r138Drive==='bones';
+ if(p.r138Drive)return p.r138Drive==='bones'||p.r138Drive==='root';
  if(p.r115Prop){const id=String(p.id||'');if(/:(a|g)\d/.test(id)||WALLY.test(p.r115Prop))return false;return true;}
  if(p.r80Dressing||p.r81NativeSkin){const k=String(p.r80Art||p.path||p.r81NativeSkin?.path||'');return !WALLY.test(k);}
  return false;}

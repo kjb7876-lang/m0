@@ -1,0 +1,21 @@
+// R141 CPU check: line-of-sight reuse (same pair, small move, short time; flush on door use/room change), wall trim material reuse, Drive root prop.
+const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
+const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
+for(const f of['perf-r141.js','visual-r90-world.js','drive-props-r138.js','props-variety-r140.js'])ok(f+' runtime copy matches',fs.readFileSync(path.join(R,'runtime-text',f),'utf8')===C(f));
+let calls=0;const roomA={id:'a'},roomB={id:'b'};const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},time:1,room:roomA,clearLine(a,b,r){calls++;return a.x<5;},interact(){return 1;}};
+vm.createContext(sb);vm.runInContext(C('perf-r141.js'),sb);
+const e={x:1,y:1},h={x:2,y:2};sb.clearLine(e,h);sb.clearLine(e,h);ok('same pair, same place: measured once',calls===1);
+e.x=1.1;sb.time=1.1;sb.clearLine(e,h);ok('small move within 0.15 s reuses the result',calls===1);
+sb.time=1.4;sb.clearLine(e,h);ok('older than the reuse window: measured again',calls===2);
+e.x=1.5;sb.clearLine(e,h);ok('moved beyond tolerance: measured again',calls===3);
+sb.interact();sb.clearLine(e,h);ok('interact (doors) flushes',calls===4);
+sb.room=roomB;sb.clearLine(e,h,roomB);ok('room change flushes',calls===5);
+const far={x:20,y:20};sb.clearLine(e,far,roomB);e.x=1.8;sb.time=1.6;sb.clearLine(e,far,roomB);ok('far lines tolerate a larger move (0.3 at ~26 tiles)',calls===6);
+ok('results are the original answers',sb.clearLine({x:9,y:0},{x:0,y:0})===false&&sb.clearLine({x:1,y:0},{x:0,y:0})===true);
+sb.window.__STORYWORLD_PERF_R141__.set('lineCache',false);const c0=calls;sb.clearLine(e,h,roomB);sb.clearLine(e,h,roomB);ok('can be turned off',calls===c0+2);
+const v=C('visual-r90-world.js');ok('wall trim materials reused per source (no per-rebuild clone/dispose)',/function trimMaterialFor\(r,source,T\)/.test(v)&&/disposeGroup\(r\.r90WallTrim,r\.r90TrimMats\)/.test(v)&&/trimMaterialFor\(r,source,T\)\);mesh\.name='r90-cap-rims-and-posts'/.test(v));
+ok('unchanged wall list skips the per-frame signature 9 of 10 frames',/r\.r90WallSkip=\(r\.r90WallSkip\|\|0\)\+1\)%10/.test(v));
+const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');ok('perf-r141 loaded before audio-r98',html.indexOf('perf-r141.js')>0&&html.indexOf('perf-r141.js')<html.indexOf('./audio-r98.js'));
+ok('workflow runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r141/perf-cpu-check.cjs'));
+const fails=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' :: '+c.detail));console.log(fails.length?'FAIL':'PASS',checks.length-fails.length+'/'+checks.length,'r141 checks');if(fails.length)process.exit(1);

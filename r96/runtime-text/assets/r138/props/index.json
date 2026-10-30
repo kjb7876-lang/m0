@@ -54,6 +54,33 @@
      1137
     ]
    }
+  },
+  "root": {
+   "path": "assets/r138/props/root.webp",
+   "size": [
+    512,
+    333
+   ],
+   "bytes": 41866,
+   "sha256": "4bd161b04937b8362c2b828f646b95ef226cd85811c083563bed09c0fe524ee5",
+   "use": "dist00 돌바닥을 지나는 낮은 뿌리 연결부(에피소드1A L28), 바닥에 누운 비충돌 장식(R141)",
+   "source": {
+    "drive": "Dist00-Low-Root-Connector1.zip",
+    "driveId": "1O-Yb-I0xTkRJm3ttMyA9InSHP56jJtav",
+    "file": "exec-a674651b-9a8b-436a-97fc-6c15b8699d54.png",
+    "sha256": "516a3f39e18af5c3adede3b0646ef58a8bdb370fdfffa4e67ec195549d979ae3",
+    "bytes": 674337,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     43,
+     248,
+     1231,
+     1020
+    ]
+   }
   }
  },
  "held": {
@@ -83,6 +110,29 @@
   "r74-root-tracker-low-windup2": {
    "driveId": "1wGTfSzW9QCQDiOHulcDjksiPoa8uejf4",
    "reason": "공격 준비 단일 키(README: 승격하지 않음)"
+  },
+  "samong-puppet-ego": {
+   "driveIds": [
+    "1t2TyZV4aFJGRUIl_tX-7qyRTykPf5w3X",
+    "1oz-tTJmho5E04AoUwWy7wqNxIXczx_Wc"
+   ],
+   "reason": "사몽 이후 대체 몹 — 적용 범위 정책상 지정된 맵·빈 슬롯이 확인되지 않아 보류"
+  },
+  "samong-memory-fallback": {
+   "driveIds": [
+    "1Qah1IFb-WLqbwOY_Hy1zt7B2BYr-_udz",
+    "14UJQ_X4nLE2BI0CYz6PKvHg7uPUhHbaD",
+    "1SOlmkZgJ1FYBbJ5Qtnoyyg-m1X_aVZZX"
+   ],
+   "reason": "사몽 이후 대체 조형물·타일 — 기존 적합 자산 있음, 타일 무봉합 미통과(범위 정책)"
+  },
+  "root-black-sap-v2": {
+   "driveId": "11OJb8NC-43IW1eKWfaO4f1RO4GRHynaP",
+   "reason": "검 부착·타이밍 미검증 효과 원화"
+  },
+  "r74-root-tracker-short-contact1": {
+   "driveId": "1-OOS85KGVx20Gmo_fYSmpY1BT_INOF60",
+   "reason": "공격 키 후보(몸 고정 실패)"
   },
   "M004-flight-render-review-aid": {
    "driveId": "1vLED3dhOrKdQlcV1VtrRxbvgyoRRcTxw",
