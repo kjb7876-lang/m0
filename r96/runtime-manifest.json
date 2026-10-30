@@ -20254,8 +20254,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563632,
-      "sha256": "712e3c3be11498d2d1ba06a3eda1cb61c322cd0c51b535bfe2a817a64e1e8e3a"
+      "bytes": 6563670,
+      "sha256": "81137d9ad017c724fbf5cb1903aedbbe34ee83b62822a9e86be4e678526c7c5f"
     },
     {
       "path": "intro-r140.js",
@@ -20311,6 +20311,11 @@
       "path": "perf-r150.js",
       "bytes": 7443,
       "sha256": "f895fd1a366ebb8925c80cb5564ad58edaab6cfe3d1217d829d79a3cd3c0f94d"
+    },
+    {
+      "path": "perf-r154.js",
+      "bytes": 1978,
+      "sha256": "8897bea087f2abd0ec805d98edb0a9a4d41730026755a2cd59a1a9d01473158b"
     },
     {
       "path": "perf-r97.js",
@@ -20598,9 +20603,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4119,
-  "totalBytes": 789019027,
-  "webHTMLSha256": "712e3c3be11498d2d1ba06a3eda1cb61c322cd0c51b535bfe2a817a64e1e8e3a",
+  "fileCount": 4120,
+  "totalBytes": 789021043,
+  "webHTMLSha256": "81137d9ad017c724fbf5cb1903aedbbe34ee83b62822a9e86be4e678526c7c5f",
   "largest": [
     {
       "path": "index.html",
