@@ -40,7 +40,7 @@ function opaqueBox(img,sx,sy,sw,sh){let m=BOX.get(img);if(!m){m=new Map();BOX.se
  try{const N=40;scanCanvas??=document.createElement('canvas');scanCanvas.width=N;scanCanvas.height=N;const g=scanCanvas.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,N,N);g.drawImage(img,sx,sy,sw,sh,0,0,N,N);
   const d=g.getImageData(0,0,N,N).data;let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
   if(x1>=0)b={x0:x0/N,y0:y0/N,x1:(x1+1)/N,y1:(y1+1)/N};stats.scans++;}catch(e){}
- if(m.size>48)m.clear();m.set(k,b);return b;}
+ if(m.size>2000)m.clear();m.set(k,b);return b;}// R147: 48칸이면 적 동작 칸이 많아 계속 지우고 다시 쟀다(그림 픽셀 읽기)
 function record(e,best,T0){const{img,sx,sy,sw,sh,dx,dy,dw,dh,T}=best;const b=opaqueBox(img,sx,sy,sw,sh);if(!b)return;
  const DM=m=>m instanceof DOMMatrix?m:new DOMMatrix([finite(m.a,1),finite(m.b),finite(m.c),finite(m.d,1),finite(m.e),finite(m.f)]),M=DM(T0).inverse().multiply(DM(T)),pts=[[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]].map(([u,v])=>M.transformPoint(new DOMPoint(dx+dw*u,dy+dh*v)));
  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const p of pts){x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);y0=Math.min(y0,p.y);y1=Math.max(y1,p.y);}

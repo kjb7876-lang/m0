@@ -26,6 +26,8 @@ const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
 const pathOf=(h,d,act='attack')=>act==='walk'?(d==='e'&&(h==='gunner'||h==='hwando')?'assets/r144/walk/'+h+'/walk-e.webp':'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp'):'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES.filter(h=>h!=='hwando'));
 const asked=new Map();
+// R147: R119 상태(서 있기 비율·걷기 방향)는 0.25초마다 한 번만 읽는다(inspect 는 상태표 전체를 복사한다).
+let r119S={},r119At=0;const r119Stats=()=>{const t=Date.now();if(t-r119At>250){r119At=t;try{r119S=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats||{};}catch(_){r119S={};}}return r119S;};
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 걷기(R140 sheetMeasure)와 같은 방법: 칸마다 가운데 100px 띠의 머리 꼭대기 → 발(226)~머리 키의 중앙값.
 const bodyMemo=new WeakMap();
@@ -43,7 +45,7 @@ function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
 // 시트 칸 하나를 몸 그림 자리에 그린다(발 기준점·걷기와 같은 키). idle 이면 첫 칸 + 숨쉬기.
 function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd,mir]=SHEET[dir8]||SHEET.s,p=pathOf(h,sd,act),im=image(p);if(!im)return null;
  const n=Math.max(1,Math.round((im.naturalWidth||im.width)/192)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
- const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio||.98),k=want/bodyOf(im),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
+ const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(r119Stats().standRatio||.98),k=want/bodyOf(im),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=act==='walk'?226:(FOOT[h]?.[sd])||226;
  const sx=fr*192,X=v=>fx+f*(v-96)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[sx,0,192,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
@@ -55,14 +57,14 @@ function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd
 //  (스킬 → 공격 3번째 칸, 막기·맞음 → 공격 첫 칸(시트에 피격 없음), 대시 → 걷기 4번째 칸, 궁극기 → 공격 4번째 칸(타격) —
 //   옛 묶음의 궁극기 칸은 효과 없는 황갈색 찌르기 자세였다).
 function hwandoUnify(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;if(c.r121Walk||c.r143Attack)return;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
- if(!best)return;const src=String(best.sourcePath||best.image?.src||''),walkDir=()=>{const d=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.walkDir||FOUR[player.direction]||'s';return DIR8.includes(d)?d:'s';};
+ if(!best)return;const src=String(best.sourcePath||best.image?.src||''),walkDir=()=>{const d=r119Stats().walkDir||FOUR[player.direction]||'s';return DIR8.includes(d)?d:'s';};
  if(/r93\/idle\/idle-hwando/.test(src)){if(place(rec,st,best,'hwando',walkDir(),0,1,1)!=null)stats.idleFrames++;return;}
  if(!/hero-authored[^/]*\/hwando-(action|walk)-atlas/.test(src))return;
  const[act,fr,dir]=player.ultimateAnim>0?['attack',3,dirNow()]:player.dashAnim>0?['walk',3,walkDir()]:player.skillAnim>0?['attack',2,dirNow()]:['attack',0,dirNow()];
  if(place(rec,st,best,'hwando',dir,0,1,0,act,fr)!=null)stats.hwandoActs=(stats.hwandoActs||0)+1;}
 // 기억사수 대시: R128 이 만든 대시 그림(g-dash_*)은 몸이 34% 작아(36px vs 서 있기 54px) 대시 때마다 영웅이 줄었다 → 다른 영웅(R130)처럼 걷기 4번째 칸.
 function gunnerDash(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const src=String(c.sourcePath||c.image?.src||'');if(!BODY_ART.test(src))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
- if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.walkDir||FOUR[player.direction]||'e';
+ if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=r119Stats().walkDir||FOUR[player.direction]||'e';
  if(place(rec,st,best,'gunner',DIR8.includes(d)?d:'e',0,1,0,'walk',3)!=null)stats.gunnerDash=(stats.gunnerDash||0)+1;}
 let hurt={start:0,prev:0,dir:'s'};
 function applyHit(rec,st){const h=player.hero;if(!HIT.has(h))return;const a=+player.hurtAnim||0;if(a>hurt.prev+1e-6||hurt.start<=0){hurt.start=a;hurt.dir=dirNow();}hurt.prev=a;
