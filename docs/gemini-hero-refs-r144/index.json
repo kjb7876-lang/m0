@@ -1,0 +1,129 @@
+{
+ "round": "R144",
+ "purpose": "현재 자산으로 고칠 수 없는 영웅 동작 새로 받기(R143 전수 점검 결과)",
+ "packages": [
+  {
+   "rank": 1,
+   "hero": "hwando",
+   "zip": "StoryWorld-HERO-R144-1-hwando.zip",
+   "bytes": 214190,
+   "sha256": "6b7388b3b7e8834579e1cfe89f374301faecb2bf431dcfaa3276f9278b2ed059",
+   "actions": [
+    "idle",
+    "hit",
+    "death",
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 35,
+   "why": "흰 망토 시트에 서 있기·피격·쓰러짐이 없어 공격 첫 칸으로 대신 중, 스킬·막기·대시·궁극기도 정지 그림 한 장"
+  },
+  {
+   "rank": 2,
+   "hero": "gunner",
+   "zip": "StoryWorld-HERO-R144-2-gunner.zip",
+   "bytes": 174635,
+   "sha256": "2e0bf6fa99259821542c69fbd7ec01196bb6df98eeee9a3d8074b14df0a84d1b",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·궁극기가 정지 그림 한 장, 대시는 쓸 그림이 없음(옛 대시 그림은 몸이 34% 작아 걷기 칸으로 대신 중)"
+  },
+  {
+   "rank": 3,
+   "hero": "lauren",
+   "zip": "StoryWorld-HERO-R144-3-lauren.zip",
+   "bytes": 161200,
+   "sha256": "62c91e7a9ca364eaf40beef84b2ab588f7e550c5ce21877baa514044e427cefe",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  },
+  {
+   "rank": 4,
+   "hero": "slayer",
+   "zip": "StoryWorld-HERO-R144-4-slayer.zip",
+   "bytes": 172201,
+   "sha256": "077f320560dab69c1377aac43dbd158a96af4928b9fb130a9afedc9e702f5b76",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  },
+  {
+   "rank": 5,
+   "hero": "seoha",
+   "zip": "StoryWorld-HERO-R144-5-seoha.zip",
+   "bytes": 189088,
+   "sha256": "f9a7befb128a9941e40146d527b04fee675484af4f052ad4864b7a817843cee9",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  },
+  {
+   "rank": 6,
+   "hero": "neon",
+   "zip": "StoryWorld-HERO-R144-6-neon.zip",
+   "bytes": 166509,
+   "sha256": "4aadca6a2df5ee18534f2c6097d529decaf23fd8928a48bf8774e61a29efc8fe",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  },
+  {
+   "rank": 7,
+   "hero": "michaela",
+   "zip": "StoryWorld-HERO-R144-7-michaela.zip",
+   "bytes": 151342,
+   "sha256": "7141b9ce81d4dcc33002756eba0afa4ee67d485aa2f073296646c66bb08242ad",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  },
+  {
+   "rank": 8,
+   "hero": "hunter",
+   "zip": "StoryWorld-HERO-R144-8-hunter.zip",
+   "bytes": 145647,
+   "sha256": "8c9b72bfe695e3423b3ba5b9eca9d6be4d1496249a74d73ca672303f3139e51d",
+   "actions": [
+    "skill",
+    "guard",
+    "dash",
+    "ultimate"
+   ],
+   "files": 20,
+   "why": "스킬·막기·대시·궁극기가 지금은 정지 그림 한 장이라 동작이 끊겨 보임"
+  }
+ ]
+}

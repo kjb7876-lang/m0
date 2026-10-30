@@ -24,7 +24,7 @@ let prefs={on:true,hwandoIdle:true};try{prefs={...prefs,...JSON.parse(localStora
 const stats={hitFrames:0,idleFrames:0,frames:0,swings:0,dupRemoved:0,waiting:0,errors:0,lastDir:null,lastFrame:null};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
-const pathOf=(h,d,act='attack')=>act==='walk'?'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp':'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES.filter(h=>h!=='hwando'));
+const pathOf=(h,d,act='attack')=>act==='walk'?(d==='e'&&(h==='gunner'||h==='hwando')?'assets/r144/walk/'+h+'/walk-e.webp':'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp'):'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES.filter(h=>h!=='hwando'));
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 // 걷기(R140 sheetMeasure)와 같은 방법: 칸마다 가운데 100px 띠의 머리 꼭대기 → 발(226)~머리 키의 중앙값.
@@ -68,12 +68,18 @@ let hurt={start:0,prev:0,dir:'s'};
 function applyHit(rec,st){const h=player.hero;if(!HIT.has(h))return;const a=+player.hurtAnim||0;if(a>hurt.prev+1e-6||hurt.start<=0){hurt.start=a;hurt.dir=dirNow();}hurt.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(best&&place(rec,st,best,h,hurt.dir,a,hurt.start,0,'hit')!=null)stats.hitFrames++;}
+// R144: 옆 걷기(walk-e) 는 드라이브 v1 시트로(기억사수·환도). v2 walk-e 는 8칸 모두 뒷다리 아래가 잘려 장화가 몸에서 떨어져 보였다
+//  (scripts/r144-walk-v1.py, assets/r144/walk/<영웅>/index.json). 칸 배치·발 기준점이 같아 그림만 바꾼다. 받기 전에는 예전 그림 그대로.
+const WALK_V1={'assets/r128/gunner/walk-e.webp':'assets/r144/walk/gunner/walk-e.webp','assets/r130/hwando/walk-e.webp':'assets/r144/walk/hwando/walk-e.webp'};
+function swapWalk(rec,st){for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero')continue;const src=String(c.sourcePath||c.image?.src||'').replace(/^.*?(assets\/)/,'$1').split('?')[0];const to=WALK_V1[src];if(!to)continue;
+ const row=typeof readyImage==='function'?readyImage(to):null;if(!row?.image){image(to);continue;}c.image=row.image;c.sourcePath=to;stats.walkV1=(stats.walkV1||0)+1;}}
 // 미리 받기: 영웅이 바뀔 때뿐 아니라 지역을 옮길 때도(게임이 지역마다 그림 기억을 비운다) — 처음 쓰는 순간 그림이 없어
 //  옛 그림이 0.3초쯤 보이던 것(환도 스킬, 헤드리스 120초 관찰 8장면)을 막는다. 아직 못 받은 것은 2초마다 다시 묻는다.
-function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h))want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}
+function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h))want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
  for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
 let lastHero=null,lastRoom=null,nextPre=0;
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
+ try{if(st>=0&&rec&&prefs.on)swapWalk(rec,st);}catch(e){fail(e);}
  try{const now=Date.now();if(player&&(player.hero!==lastHero||(typeof room!=='undefined'&&room!==lastRoom)||now>=nextPre)){lastHero=player.hero;lastRoom=typeof room!=='undefined'?room:null;nextPre=now+(preload()?2000:15000);}
   const busy=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
   if(!(player?.attackAnim>0))swing.prev=0;if(!(player?.hurtAnim>0))hurt.prev=0;

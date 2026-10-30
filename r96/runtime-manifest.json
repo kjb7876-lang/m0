@@ -11278,6 +11278,26 @@
       "sha256": "e3728d23e4b6ad20246f9fb443be61c7fc72be17b234b1161751af2e9e744932"
     },
     {
+      "path": "assets/r144/walk/gunner/index.json",
+      "bytes": 718,
+      "sha256": "63dc4dc5f5ac5ab58b3e9ef8842d10c7960e75fa7f4de8f4bc8c7976d7e37499"
+    },
+    {
+      "path": "assets/r144/walk/gunner/walk-e.webp",
+      "bytes": 54934,
+      "sha256": "cfa4c300440a65f82d79878294389688ab0b8d56f92c2f256a76e182ab1f1fa8"
+    },
+    {
+      "path": "assets/r144/walk/hwando/index.json",
+      "bytes": 718,
+      "sha256": "27b0d468dd96009fc7274abe20c34711911480d8c198b2e1bd2388f8ed89d221"
+    },
+    {
+      "path": "assets/r144/walk/hwando/walk-e.webp",
+      "bytes": 70930,
+      "sha256": "427566c66fd826cf4a23c4f803ef5c634b838806d29deb05364b98344ad5784a"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19074,8 +19094,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 12913,
-      "sha256": "bcaf1f718d546ad5dd798014e5115ac5f24ae2792d29c91ed85e4f5dfd891c22"
+      "bytes": 14079,
+      "sha256": "965852394c136771f09663d8c0dde49d597648101853aff6aaf715deaeb0866a"
     },
     {
       "path": "audio-r108.js",
@@ -20288,8 +20308,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4057,
-  "totalBytes": 787033316,
+  "fileCount": 4061,
+  "totalBytes": 787161782,
   "webHTMLSha256": "ddf9bc83fd7cc04c635a80e44a41c6eea6bd88e7f7ea846809ff1153f8c846cb",
   "largest": [
     {
