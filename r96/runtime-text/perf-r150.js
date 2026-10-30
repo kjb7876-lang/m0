@@ -31,7 +31,7 @@ function apply(){setLite(prefs.lite==='on'||(prefs.lite==='auto'&&stats.autoOn>0
 const gaps=[],works=[];let last=0,since=0,slowSince=0,t0=0;const ch=typeof MessageChannel==='function'?new MessageChannel():null;
 if(ch)ch.port1.onmessage=()=>{if(t0){works.push(performance.now()-t0);if(works.length>120)works.shift();t0=0;}};
 function loop(t){try{stats.frames++;const play=playing();if(play&&last&&t-last<1000){gaps.push(t-last);if(gaps.length>120)gaps.shift();stats.playFrames++;since+=t-last;}else if(!play){since=0;}
-  last=t;if(play&&ch&&!t0){t0=performance.now();ch.port2.postMessage(0);}
+  last=t;if(play&&ch&&!t0&&prefs.meter){t0=performance.now();ch.port2.postMessage(0);}/* R157: 한 장면 시간은 성능 표시를 켰을 때만 잰다(자동 전환은 장면 간격만 쓴다) */
   if(since>=2000){since=0;check(t);}}catch(e){fail(e);}requestAnimationFrame(loop);}
 function q(a,p){if(!a.length)return null;const s=a.slice().sort((x,y)=>x-y);return s[Math.min(s.length-1,Math.floor((s.length-1)*p))];}
 function check(t){stats.checks++;stats.median=Math.round(q(gaps,.5)*10)/10;stats.p90=Math.round(q(gaps,.9)*10)/10;stats.work=works.length?Math.round(q(works,.5)*10)/10:null;
