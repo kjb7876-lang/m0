@@ -33,7 +33,7 @@
   },
   "drive": "StoryWorld-HERO-slayer-sheet-20261030.zip",
   "driveId": "1H_m_zOeyIjCf3MQPBmbO8Lbz732VeN20",
-  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30), R134 게임 기준 키·발 피벗 맞춤, 자르기 테두리",
   "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
@@ -108,7 +108,13 @@
      251.5,
      461
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 421.0,
+    "bbox": [
+     103,
+     53,
+     415,
+     473
+    ]
    }
   },
   "assets/heroes/normalized/directions/slayer-back.webp": {
@@ -126,7 +132,13 @@
      240.7,
      474
     ],
-    "visibleHeight": 381.5
+    "visibleHeight": 381.5,
+    "bbox": [
+     107,
+     54,
+     404,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/directions/slayer-left.webp": {
@@ -144,7 +156,13 @@
      301.9,
      460
     ],
-    "visibleHeight": 422.0
+    "visibleHeight": 422.0,
+    "bbox": [
+     184,
+     50,
+     362,
+     473
+    ]
    }
   },
   "assets/heroes/normalized/directions/slayer-right.webp": {
@@ -162,7 +180,13 @@
      261.2,
      460
     ],
-    "visibleHeight": 422.0
+    "visibleHeight": 422.0,
+    "bbox": [
+     203,
+     50,
+     381,
+     473
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-front.webp": {
@@ -180,7 +204,13 @@
      251.3,
      475
     ],
-    "visibleHeight": 425.8
+    "visibleHeight": 425.8,
+    "bbox": [
+     95,
+     53,
+     445,
+     484
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-back.webp": {
@@ -198,7 +228,13 @@
      240.8,
      476
     ],
-    "visibleHeight": 392.7
+    "visibleHeight": 392.7,
+    "bbox": [
+     87,
+     47,
+     416,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-left.webp": {
@@ -216,7 +252,13 @@
      260.2,
      445
     ],
-    "visibleHeight": 414.9
+    "visibleHeight": 414.9,
+    "bbox": [
+     123,
+     43,
+     332,
+     463
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-right.webp": {
@@ -234,7 +276,13 @@
      267.3,
      449
     ],
-    "visibleHeight": 414.0
+    "visibleHeight": 414.0,
+    "bbox": [
+     198,
+     48,
+     406,
+     466
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-front.webp": {
@@ -252,7 +300,13 @@
      252.1,
      469
     ],
-    "visibleHeight": 445.9
+    "visibleHeight": 445.9,
+    "bbox": [
+     92,
+     51,
+     457,
+     487
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-back.webp": {
@@ -270,7 +324,13 @@
      239.9,
      477
     ],
-    "visibleHeight": 392.0
+    "visibleHeight": 392.0,
+    "bbox": [
+     74,
+     44,
+     404,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-left.webp": {
@@ -288,7 +348,13 @@
      263.2,
      453
     ],
-    "visibleHeight": 438.3
+    "visibleHeight": 438.3,
+    "bbox": [
+     143,
+     33,
+     340,
+     466
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-right.webp": {
@@ -306,7 +372,13 @@
      266.0,
      455
     ],
-    "visibleHeight": 437.3
+    "visibleHeight": 437.3,
+    "bbox": [
+     193,
+     36,
+     389,
+     469
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-front.webp": {
@@ -324,7 +396,13 @@
      252.3,
      477
     ],
-    "visibleHeight": 411.5
+    "visibleHeight": 411.5,
+    "bbox": [
+     105,
+     72,
+     412,
+     486
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-back.webp": {
@@ -342,7 +420,13 @@
      241.2,
      490
     ],
-    "visibleHeight": 375.1
+    "visibleHeight": 375.1,
+    "bbox": [
+     117,
+     78,
+     407,
+     494
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-left.webp": {
@@ -360,7 +444,13 @@
      260.9,
      465
     ],
-    "visibleHeight": 415.5
+    "visibleHeight": 415.5,
+    "bbox": [
+     140,
+     60,
+     322,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-right.webp": {
@@ -378,7 +468,13 @@
      267.6,
      465
     ],
-    "visibleHeight": 414.5
+    "visibleHeight": 414.5,
+    "bbox": [
+     210,
+     61,
+     391,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-front.webp": {
@@ -396,7 +492,13 @@
      250.6,
      479
     ],
-    "visibleHeight": 397.8
+    "visibleHeight": 397.8,
+    "bbox": [
+     93,
+     61,
+     431,
+     501
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-back.webp": {
@@ -414,7 +516,13 @@
      234.7,
      505
     ],
-    "visibleHeight": 410.4
+    "visibleHeight": 410.4,
+    "bbox": [
+     102,
+     53,
+     411,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-left.webp": {
@@ -432,7 +540,13 @@
      285.8,
      472
     ],
-    "visibleHeight": 392.9
+    "visibleHeight": 392.9,
+    "bbox": [
+     160,
+     51,
+     349,
+     488
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-right.webp": {
@@ -450,7 +564,13 @@
      242.7,
      467
     ],
-    "visibleHeight": 389.3
+    "visibleHeight": 389.3,
+    "bbox": [
+     183,
+     50,
+     370,
+     483
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-front.webp": {
@@ -468,7 +588,13 @@
      281.9,
      503
     ],
-    "visibleHeight": 286.7
+    "visibleHeight": 286.7,
+    "bbox": [
+     174,
+     222,
+     393,
+     509
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-front.webp": {
@@ -486,7 +612,13 @@
      265.5,
      509
     ],
-    "visibleHeight": 255.9
+    "visibleHeight": 255.9,
+    "bbox": [
+     182,
+     234,
+     398,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-back.webp": {
@@ -504,7 +636,13 @@
      231.5,
      506
     ],
-    "visibleHeight": 269.3
+    "visibleHeight": 269.3,
+    "bbox": [
+     129,
+     219,
+     330,
+     508
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-back.webp": {
@@ -522,7 +660,13 @@
      238.4,
      507
     ],
-    "visibleHeight": 253.2
+    "visibleHeight": 253.2,
+    "bbox": [
+     158,
+     227,
+     348,
+     508
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-left.webp": {
@@ -540,7 +684,13 @@
      290.8,
      508
     ],
-    "visibleHeight": 289.8
+    "visibleHeight": 289.8,
+    "bbox": [
+     193,
+     226,
+     328,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-left.webp": {
@@ -558,7 +708,13 @@
      285.3,
      483
     ],
-    "visibleHeight": 235.2
+    "visibleHeight": 235.2,
+    "bbox": [
+     211,
+     230,
+     323,
+     491
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-right.webp": {
@@ -576,7 +732,13 @@
      263.0,
      509
     ],
-    "visibleHeight": 289.8
+    "visibleHeight": 289.8,
+    "bbox": [
+     228,
+     227,
+     363,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-right.webp": {
@@ -594,7 +756,13 @@
      232.3,
      492
     ],
-    "visibleHeight": 238.8
+    "visibleHeight": 238.8,
+    "bbox": [
+     195,
+     235,
+     310,
+     501
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/slayer-attack-left.webp": {
@@ -612,7 +780,13 @@
      300.2,
      369
     ],
-    "visibleHeight": 306.3
+    "visibleHeight": 306.3,
+    "bbox": [
+     199,
+     72,
+     353,
+     382
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/slayer-attack-right.webp": {
@@ -630,7 +804,13 @@
      210.8,
      369
     ],
-    "visibleHeight": 306.3
+    "visibleHeight": 306.3,
+    "bbox": [
+     160,
+     72,
+     314,
+     382
+    ]
    }
   }
  },
@@ -640,8 +820,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 76.5,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    76.5,
+    227
+   ],
    "refBody": 164,
    "sha256": "ed9789ef3212b5b83d45fb44c139d4a10fd0e40da971f5d8977216349c411dad"
   },
@@ -650,8 +834,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 76.7,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    76.7,
+    227
+   ],
    "refBody": 164,
    "sha256": "c56829b9bc18dfc36a85fb2e6ea0784fc07771ee357477c6ae19731e937b6481"
   },
@@ -660,8 +848,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 86.6,
-   "footY": 237,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    86.6,
+    237
+   ],
    "refBody": 164,
    "sha256": "843ec449e7eb097bf1513cbb29b05e8bdb235ebc5e8e012cf9380d242ff1ab6d"
   },
@@ -670,8 +862,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 87.6,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    87.6,
+    226
+   ],
    "refBody": 182,
    "sha256": "b405d533ea18ae2628ec38c3546584ca6d6a9fb771e35896a64a3a76dfe48f19"
   },
@@ -680,8 +876,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 86.4,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    86.4,
+    226
+   ],
    "refBody": 181,
    "sha256": "cd77b562f12d7e6539280a81f38fb5dd4f1822e07a4cb6a80dce281489a06938"
   },
@@ -690,8 +890,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 114.3,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    114.3,
+    227
+   ],
    "refBody": 164,
    "sha256": "4fa727cdbc3b53f85edc9635229a13e7c18c382c1c0e827be48eb63e9b9a31af"
   },
@@ -700,8 +904,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 104.4,
-   "footY": 237,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    104.4,
+    237
+   ],
    "refBody": 164,
    "sha256": "0854028e3f884e099b8c7a0b730273236586b398d99eae5722fa98d3fdd5370d"
   },
@@ -710,8 +918,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 103.4,
+   "footX": 96.0,
    "footY": 226,
+   "measuredFoot": [
+    103.4,
+    226
+   ],
    "refBody": 182,
    "sha256": "f1110e4b0ad03b16987d1a8ae54a640f41b7b96adb1e58472dafb58d2a02849b"
   }

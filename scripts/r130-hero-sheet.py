@@ -9,6 +9,7 @@ import hashlib, json, sys
 from pathlib import Path
 import numpy as np
 from PIL import Image
+sys.path.insert(0, str(Path(__file__).resolve().parent)); import hero_game_scale
 
 hero, src, site, outroot = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3]), Path(sys.argv[4]); out = outroot / hero; out.mkdir(parents=True, exist_ok=True)
 sha = lambda b: hashlib.sha256(b).hexdigest(); CW, CH = 192, 256
@@ -44,13 +45,14 @@ def foot(a, b):
     band = a[y0 + max(0, fy - max(6, int((y1 - y0) * .10))):y0 + fy, x0:x1].astype(float); w = band.sum(0)
     return x0 + (float((w * np.arange(len(w))).sum() / w.sum()) if w.sum() else (x1 - x0) / 2), y0 + fy
 sheets = {}
+VH = hero_game_scale.load(site)
 def frame(act, d, i):
     k = (act, d)
     if k not in sheets: sheets[k] = Image.open(src / f'HERO-{hero}-{act}-{d}.png').convert('RGBA')
     return sheets[k].crop((i * CW, 0, (i + 1) * CW, CH))
 rel = str(outroot).split('runtime-text/')[-1]
 index = {'revision': rel.split('/')[-1].upper(), 'hero': hero, 'source': {'files': {k: v['sha256'] for k, v in man.items()}}, 'keep': KEEP.get(hero, []), 'walk': {}, 'swap': {}}
-name_of = lambda orig: orig.split('/')[-2].replace(hero, 'g') + '-' + orig.split('/')[-1].rsplit('.', 1)[0] + '.webp'
+name_of = lambda orig: ('d338-' if '/hero_direction338/' in orig else '') + orig.split('/')[-2].replace(hero, 'g') + '-' + orig.split('/')[-1].rsplit('.', 1)[0] + '.webp'  # R134: 337·338 묶음이 같은 이름이라 서로 덮어썼다(로렌)
 index['idle'] = {}
 for d, (b, m) in ({} if hero in WALK_ONLY else {'s': ('s', 0), 'se': ('se', 0), 'e': ('e', 0), 'ne': ('ne', 0), 'n': ('n', 0), 'sw': ('se', 1), 'w': ('e', 1), 'nw': ('ne', 1)}).items():
     im = Image.open(src / f'HERO-{hero}-idle-{b}.png').convert('RGBA'); fr = [im.crop((i * CW, 0, (i + 1) * CW, CH)) for i in range(im.width // CW)]
@@ -58,7 +60,7 @@ for d, (b, m) in ({} if hero in WALK_ONLY else {'s': ('s', 0), 'se': ('se', 0), 
     im = Image.new('RGBA', (CW * len(fr), CH)); [im.alpha_composite(f, (i * CW, 0)) for i, f in enumerate(fr)]
     a = np.asarray(fr[0])[..., 3]; b0 = box(a); fx, fy = foot(a, b0)
     p = out / f'idle-{d}.webp'; im.save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
-    index['idle'][d] = {'path': f'{rel}/{hero}/idle-{d}.webp', 'frames': len(fr), 'cellW': CW, 'cellH': CH, 'footX': round(float(fx), 1), 'footY': int(fy), 'refBody': int(b0[3] - b0[1]), 'sha256': sha(p.read_bytes())}
+    index['idle'][d] = {'path': f'{rel}/{hero}/idle-{d}.webp', 'frames': len(fr), 'cellW': CW, 'cellH': CH, 'footX': 96.0, 'footY': 226, 'measuredFoot': [round(float(fx), 1), int(fy)], 'refBody': int(b0[3] - b0[1]), 'sha256': sha(p.read_bytes())}
 for d in ['s', 'se', 'e', 'ne', 'n']:
     p = out / f'walk-{d}.webp'; Image.open(src / f'HERO-{hero}-walk-{d}.png').convert('RGBA').save(p, 'WEBP', quality=92, alpha_quality=100, method=4)
     index['walk'][d] = {'path': f'{rel}/{hero}/walk-{d}.webp', 'cols': 8, 'rows': 1, 'cell': [CW, CH], 'sha256': sha(p.read_bytes())}
@@ -67,11 +69,14 @@ for orig, (act, d, i, m) in MAP.items():
     o = np.asarray(Image.open(site / orig).convert('RGBA'))[..., 3]; ob = box(o)
     fr = frame(act, d, i); fr = fr.transpose(Image.FLIP_LEFT_RIGHT) if m else fr; fa = np.asarray(fr)[..., 3]; fb = box(fa)
     oh, nh = ob[3] - ob[1], fb[3] - fb[1]; k = oh / max(nh, 90) if act in ('idle', 'walk', 'attack', 'hit') else oh / 180
+    g = VH.get(orig)
+    if g and act in ('idle', 'walk', 'attack'): k = g['visibleHeight'] / max(1, box(fa, 40)[3] - box(fa, 40)[1])  # R134: 게임 기준 키에 맞춤
     big = fr.resize((max(1, round(fr.width * k)), max(1, round(fr.height * k))), Image.LANCZOS); fx, fy = foot(fa, fb); ox, oy = foot(o, ob)
+    if g: ox, oy = g['foot']  # R134: 게임이 이 그림을 세우는 발 점(피벗)에 새 발을 놓는다
     canvas = Image.new('RGBA', Image.open(site / orig).size, (0, 0, 0, 0)); canvas.alpha_composite(big, (int(round(ox - fx * k)), int(round(oy - fy * k))))
     p = out / name_of(orig); canvas.save(p, 'WEBP', quality=90, alpha_quality=100, method=4)
     # R131: 아틀라스로 그리던 영웅(슬레이어)이 이 그림을 그릴 때 쓰는 발 위치·몸 키(서 있기 첫 칸 키 x 배율 — 동작마다 몸 크기가 같게)
-    fr_ = {'size': list(canvas.size), 'pivot': [round(float(ox), 1), int(oy)], 'visibleHeight': round(float(REF * k), 1)}
+    bb = box(np.asarray(canvas)[..., 3], 16); fr_ = {'size': list(canvas.size), 'pivot': [round(float(ox), 1), int(oy)], 'visibleHeight': round(float(REF * k), 1), 'bbox': [int(v) for v in bb] if bb else None}  # R134 bbox: 게임 자르기 상자를 넓혀 머리·발이 잘리지 않게
     index['swap'][orig] = {'path': f'{rel}/{hero}/{p.name}', 'from': f'HERO-{hero}-{act}-{d}.png#{i}', 'mirror': bool(m), 'sha256': sha(p.read_bytes()), 'bytes': p.stat().st_size, 'frame': fr_}
 (out / 'index.json').write_text(json.dumps(index, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 print(hero, 'walk', len(index['walk']), 'swap', len(index['swap']), 'bytes', sum(f.stat().st_size for f in out.glob('*.webp')))

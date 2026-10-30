@@ -33,7 +33,7 @@
   },
   "drive": "StoryWorld-HERO-hunter-sheet-20261030.zip",
   "driveId": "1MSqxulhq-zh24I28S4nNISE-7XQ53qro",
-  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30), R134 게임 기준 키·발 피벗 맞춤, 자르기 테두리",
   "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
@@ -96,216 +96,288 @@
    "path": "assets/r130/hunter/g-s.webp",
    "from": "HERO-hunter-idle-s.png#0",
    "mirror": false,
-   "sha256": "f9049435d7934cecbd694266ffc9fbe428127357fb889721bb43aa9b3da96c63",
-   "bytes": 30380,
+   "sha256": "e141ed8ebc509d72b67f36c4d10a7eefa71e8b61d2d152965e205feee8a0a661",
+   "bytes": 28488,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     256.2,
+     255.8,
      496
     ],
-    "visibleHeight": 480.0
+    "visibleHeight": 449.4,
+    "bbox": [
+     166,
+     49,
+     354,
+     497
+    ]
    }
   },
   "assets/hero_direction337/hunter/n.webp": {
    "path": "assets/r130/hunter/g-n.webp",
    "from": "HERO-hunter-idle-n.png#0",
    "mirror": false,
-   "sha256": "5d0e62ea5244195229a0179ed545f9e1c341bcbc7836476bfdc26a7f446c72c9",
-   "bytes": 32484,
+   "sha256": "a955a50a0072342e3205c14e4c73c23fe56909d8e43b43d55ecf5ec211a5af7c",
+   "bytes": 24258,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     253.0,
-     496
+     254.0,
+     495
     ],
-    "visibleHeight": 480.0
+    "visibleHeight": 363.6,
+    "bbox": [
+     151,
+     134,
+     332,
+     497
+    ]
    }
   },
   "assets/hero_direction334/hunter/e.webp": {
    "path": "assets/r130/hunter/g-e.webp",
    "from": "HERO-hunter-idle-e.png#0",
    "mirror": false,
-   "sha256": "89ea22f02fd8bb3681aa41d5175ec44dc9133459c89bdfcc80c1f7fc4a1756d6",
-   "bytes": 22452,
+   "sha256": "9867ad7883a4d69e5740aff426b87c98fce8ad34480ee34e9e1a9cfe1a7e2f91",
+   "bytes": 18814,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     222.9,
-     485
+     213.8,
+     488
     ],
-    "visibleHeight": 428.0
+    "visibleHeight": 362.3,
+    "bbox": [
+     147,
+     128,
+     272,
+     490
+    ]
    }
   },
   "assets/hero_direction334/hunter/w.webp": {
    "path": "assets/r130/hunter/g-w.webp",
    "from": "HERO-hunter-idle-e.png#0",
    "mirror": true,
-   "sha256": "a17be2fbbb97e1fcea7112125e1b3045b81e8a9c193d49ea31d301248ed971ad",
-   "bytes": 23212,
+   "sha256": "9109ff84a2c9a8ca9f527adffb524ae01f1b0b8508f3337eacb1dcd3b8cb464e",
+   "bytes": 18928,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     306.8,
-     483
+     303.3,
+     487
     ],
-    "visibleHeight": 435.0
+    "visibleHeight": 366.4,
+    "bbox": [
+     246,
+     123,
+     373,
+     488
+    ]
    }
   },
   "assets/hero_direction334/hunter/ne.webp": {
    "path": "assets/r130/hunter/g-ne.webp",
    "from": "HERO-hunter-idle-ne.png#0",
    "mirror": false,
-   "sha256": "4d5723b3b0e05f0ea37f72b2a6410b2679143c3e445c99666f6258fbe1e83bc0",
-   "bytes": 27682,
+   "sha256": "ee8114b9f0d1e3ba99fab1d504d8371fcfece4798aaff847104a64df8042be6c",
+   "bytes": 21114,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     253.5,
-     491
+     255.5,
+     488
     ],
-    "visibleHeight": 447.0
+    "visibleHeight": 350.1,
+    "bbox": [
+     164,
+     140,
+     321,
+     490
+    ]
    }
   },
   "assets/hero_direction334/hunter/nw.webp": {
    "path": "assets/r130/hunter/g-nw.webp",
    "from": "HERO-hunter-idle-ne.png#0",
    "mirror": true,
-   "sha256": "9fbc5088bc8630523cfa4686bd09050eb6865a12cc334f22065632f9bcd9d006",
-   "bytes": 27932,
+   "sha256": "f529673d6fbe79d92412ae7544420b7a5262dec9414f04c0942e2236b3d0c241",
+   "bytes": 19700,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     255.2,
-     489
+     257.9,
+     487
     ],
-    "visibleHeight": 452.0
+    "visibleHeight": 340.4,
+    "bbox": [
+     197,
+     149,
+     350,
+     489
+    ]
    }
   },
   "assets/hero_direction334/hunter/se.webp": {
    "path": "assets/r130/hunter/g-se.webp",
    "from": "HERO-hunter-idle-se.png#0",
    "mirror": false,
-   "sha256": "192152c1c6379f913c4331c8523cd12c939f9d99152acd60753d2e0997140a68",
-   "bytes": 19926,
+   "sha256": "c0d61e8decb21bd089a1a62f1d0d13c743aad0b2ce92316930f1f75f787b62cc",
+   "bytes": 20084,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     247.8,
-     485
+     223.0,
+     488
     ],
-    "visibleHeight": 358.0
+    "visibleHeight": 357.3,
+    "bbox": [
+     155,
+     134,
+     288,
+     490
+    ]
    }
   },
   "assets/hero_direction334/hunter/sw.webp": {
    "path": "assets/r130/hunter/g-sw.webp",
    "from": "HERO-hunter-idle-se.png#0",
    "mirror": true,
-   "sha256": "f0101fdd50459d535ce334455f912d271c94835e26c82073159aba4f89d0fabe",
-   "bytes": 20430,
+   "sha256": "d3f07155ea886d5148145cac57bd2330f1787c9afa340e53a7e840f58edbc605",
+   "bytes": 20056,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     277.5,
-     483
+     284.4,
+     487
     ],
-    "visibleHeight": 362.0
+    "visibleHeight": 360.4,
+    "bbox": [
+     220,
+     129,
+     354,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/directions/hunter-front.webp": {
    "path": "assets/r130/hunter/directions-hunter-front.webp",
    "from": "HERO-hunter-idle-s.png#0",
    "mirror": false,
-   "sha256": "0aefee1590e1edc1b817ea21c6ccbbfe5290b8fd518f8a26e5a7fb795b222ba0",
-   "bytes": 26366,
+   "sha256": "62e27b10002d1cb86e2b6f2d4074faf07533954381c85475583682f1d9d79d61",
+   "bytes": 25770,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     253.3,
-     475
+     256.0,
+     476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 411.0,
+    "bbox": [
+     174,
+     67,
+     347,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/directions/hunter-back.webp": {
    "path": "assets/r130/hunter/directions-hunter-back.webp",
    "from": "HERO-hunter-idle-n.png#0",
    "mirror": false,
-   "sha256": "5dff47ecdc255fb10e8c4c119f9b1196100c84942db43eb58ff6456452e7ee61",
-   "bytes": 28002,
+   "sha256": "274b1ff636cff125203a956dfd379b6938528cafde99d2f0eb833ec0d6c34172",
+   "bytes": 26988,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     269.6,
+     256.0,
      476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 406.5,
+    "bbox": [
+     141,
+     71,
+     344,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/directions/hunter-left.webp": {
    "path": "assets/r130/hunter/directions-hunter-left.webp",
    "from": "HERO-hunter-idle-e.png#0",
    "mirror": true,
-   "sha256": "df21686c26b3cf9e36121a62a7875fdb8df334580f9dbbab1f029a1bbccb1780",
-   "bytes": 21986,
+   "sha256": "5c3f4cf8694d75a5e72f8e396e2f16d7f373291b255cef94477dc368caceff78",
+   "bytes": 21752,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     251.6,
+     256.0,
      476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 411.0,
+    "bbox": [
+     193,
+     67,
+     335,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/directions/hunter-right.webp": {
    "path": "assets/r130/hunter/directions-hunter-right.webp",
    "from": "HERO-hunter-idle-e.png#0",
    "mirror": false,
-   "sha256": "d51ba04d56b9e856cb6c3b178c71781ba2b84fc2bc3f9f95ef4220da558034be",
-   "bytes": 22484,
+   "sha256": "35bdd7555053208a69571b93efe72a3e48833d37eb0c1c8be523abafce2e298f",
+   "bytes": 21332,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     254.7,
+     256.0,
      476
     ],
-    "visibleHeight": 422.0
+    "visibleHeight": 411.0,
+    "bbox": [
+     180,
+     67,
+     322,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-attack-front.webp": {
@@ -323,7 +395,13 @@
      252.9,
      488
     ],
-    "visibleHeight": 424.0
+    "visibleHeight": 424.0,
+    "bbox": [
+     161,
+     58,
+     341,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-attack-back.webp": {
@@ -341,7 +419,13 @@
      269.4,
      478
     ],
-    "visibleHeight": 431.0
+    "visibleHeight": 431.0,
+    "bbox": [
+     140,
+     49,
+     386,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-attack-left.webp": {
@@ -359,7 +443,13 @@
      253.1,
      479
     ],
-    "visibleHeight": 433.0
+    "visibleHeight": 433.0,
+    "bbox": [
+     190,
+     49,
+     336,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-attack-right.webp": {
@@ -377,7 +467,13 @@
      253.0,
      473
     ],
-    "visibleHeight": 434.0
+    "visibleHeight": 434.0,
+    "bbox": [
+     172,
+     42,
+     319,
+     474
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-skill-front.webp": {
@@ -395,7 +491,13 @@
      253.2,
      484
     ],
-    "visibleHeight": 447.3
+    "visibleHeight": 447.3,
+    "bbox": [
+     151,
+     50,
+     357,
+     485
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-skill-back.webp": {
@@ -413,7 +515,13 @@
      269.5,
      479
     ],
-    "visibleHeight": 432.6
+    "visibleHeight": 432.6,
+    "bbox": [
+     153,
+     47,
+     378,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-skill-left.webp": {
@@ -431,7 +539,13 @@
      252.3,
      480
     ],
-    "visibleHeight": 437.0
+    "visibleHeight": 437.0,
+    "bbox": [
+     171,
+     46,
+     351,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-skill-right.webp": {
@@ -449,115 +563,157 @@
      254.0,
      478
     ],
-    "visibleHeight": 436.0
+    "visibleHeight": 436.0,
+    "bbox": [
+     158,
+     45,
+     339,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-guard-front.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-guard-front.webp",
    "from": "HERO-hunter-attack-s.png#0",
    "mirror": false,
-   "sha256": "dc692af3b9f381ae0363181afad7912f2eb715bab5272b58ad3d85c05e842954",
-   "bytes": 24276,
+   "sha256": "a25d0533af4117dace1b4d69e1e757ab7e4a25e3d2a507fa663c1a50b9774ff0",
+   "bytes": 24430,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     252.8,
+     256.0,
      491
     ],
-    "visibleHeight": 409.5
+    "visibleHeight": 412.7,
+    "bbox": [
+     169,
+     77,
+     343,
+     494
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-guard-back.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-guard-back.webp",
    "from": "HERO-hunter-attack-n.png#0",
    "mirror": false,
-   "sha256": "1a28e474f4f3fb0593da9ce6c9df01ec1528ffeac4a5219f1a5e02e366b9170c",
-   "bytes": 26302,
+   "sha256": "85c7875189833593faee754bad5e6ff0e1ad72b55b87501029065ddf1af43d44",
+   "bytes": 26486,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     269.4,
-     492
+     256.0,
+     491
     ],
-    "visibleHeight": 414.0
+    "visibleHeight": 415.0,
+    "bbox": [
+     134,
+     79,
+     349,
+     493
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-guard-left.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-guard-left.webp",
    "from": "HERO-hunter-attack-e.png#0",
    "mirror": true,
-   "sha256": "3e92aa257d2b22d32adf9800b3558b9d835908e69863d805b2859e97bb099974",
-   "bytes": 20304,
+   "sha256": "2ce5f633f803df764fbd3270a50a7fa8c3638f32c1bc3997120293b89f89bf0a",
+   "bytes": 20538,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     249.5,
-     489
+     256.0,
+     491
     ],
-    "visibleHeight": 414.0
+    "visibleHeight": 416.3,
+    "bbox": [
+     198,
+     78,
+     331,
+     493
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-guard-right.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-guard-right.webp",
    "from": "HERO-hunter-attack-e.png#0",
    "mirror": false,
-   "sha256": "2e76e427ca8255c2b9c4681729edadefdcfd7931910aeb425b394d71ea330397",
-   "bytes": 20296,
+   "sha256": "16b3e3848830ff4006cf8fe2b9ed59014bc0e0cf7970bce7b146761f870893d8",
+   "bytes": 20804,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     256.3,
-     488
+     256.0,
+     491
     ],
-    "visibleHeight": 415.0
+    "visibleHeight": 417.3,
+    "bbox": [
+     183,
+     77,
+     317,
+     493
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-front.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-front.webp",
    "from": "HERO-hunter-walk-s.png#3",
    "mirror": false,
-   "sha256": "4c4b45fdb7ca78ee7ec9e25ec579522c4bf4999620a00a8c7a5a5254fb964dbc",
-   "bytes": 25552,
+   "sha256": "17e9802086844a4bf711f4c47598310607c91bcf0a21ec29af5ba14dc3ceb75d",
+   "bytes": 25504,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     252.9,
-     493
+     256.0,
+     494
     ],
-    "visibleHeight": 446.4
+    "visibleHeight": 448.9,
+    "bbox": [
+     167,
+     54,
+     357,
+     495
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-back.webp",
    "from": "HERO-hunter-walk-n.png#3",
    "mirror": false,
-   "sha256": "d83bc6532f4273665c7df22d8bbb90cc4c7f931af067d8dbd876b57b72d67543",
-   "bytes": 27822,
+   "sha256": "1fdbde3f6c26564a173f8b59a528996a8862e9ca2fbeb1bc23c16a2c2874696e",
+   "bytes": 27952,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     269.5,
-     507
+     256.0,
+     508
     ],
-    "visibleHeight": 453.0
+    "visibleHeight": 455.5,
+    "bbox": [
+     158,
+     46,
+     394,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-left.webp": {
@@ -575,7 +731,13 @@
      258.4,
      480
     ],
-    "visibleHeight": 436.4
+    "visibleHeight": 436.4,
+    "bbox": [
+     186,
+     48,
+     337,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-right.webp": {
@@ -593,151 +755,205 @@
      243.2,
      478
     ],
-    "visibleHeight": 441.4
+    "visibleHeight": 441.4,
+    "bbox": [
+     166,
+     41,
+     319,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-hurt-front.webp",
    "from": "HERO-hunter-hit-s.png#1",
    "mirror": false,
-   "sha256": "a289decbe41750515f8e0a05a73b300e8ad49e0a2ccbeecb6dbdb0437ac96099",
-   "bytes": 16788,
+   "sha256": "9a19563d2d2bae62e27bdb11510d7185593f041af7516ecb5579a3da48b1a85c",
+   "bytes": 16744,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     276.7,
-     494
+     255.5,
+     512
     ],
-    "visibleHeight": 299.7
+    "visibleHeight": 299.7,
+    "bbox": [
+     188,
+     211,
+     314,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-move-front.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-move-front.webp",
    "from": "HERO-hunter-walk-s.png#2",
    "mirror": false,
-   "sha256": "5b9b45eb06ea3014761bdcd40f299a7df2e756e0fab692dad17de55fb792495f",
-   "bytes": 15456,
+   "sha256": "272f7136b5a9ff1a934ea59f683dd27effa0fe501bd30905a5444dfa55962aea",
+   "bytes": 15248,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     239.8,
-     504
+     256.0,
+     512
     ],
-    "visibleHeight": 287.6
+    "visibleHeight": 289.2,
+    "bbox": [
+     207,
+     226,
+     328,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-hurt-back.webp",
    "from": "HERO-hunter-hit-n.png#1",
    "mirror": false,
-   "sha256": "1596699a81c81c149ab6bebb8d9e637a380e7620a4338955e5c67628d2ed367a",
-   "bytes": 17834,
+   "sha256": "c79562a4367441f70c1cb26da128bb73d8949b3114c005a5eb9ff51014c51bd4",
+   "bytes": 17396,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     226.6,
-     509
+     255.5,
+     512
     ],
-    "visibleHeight": 307.4
+    "visibleHeight": 307.4,
+    "bbox": [
+     160,
+     215,
+     323,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-move-back.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-move-back.webp",
    "from": "HERO-hunter-walk-n.png#2",
    "mirror": false,
-   "sha256": "9d762d6854f2b59412a9fae19781859fba34fc753ceaec1532530675a6e14d8d",
-   "bytes": 17172,
+   "sha256": "4b61245a53b6ba8ddee124e0b66095bebaf73613d09dd1265f7cd1a73e0fa11b",
+   "bytes": 17352,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     250.9,
-     509
+     256.0,
+     511
     ],
-    "visibleHeight": 298.0
+    "visibleHeight": 298.0,
+    "bbox": [
+     178,
+     221,
+     335,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-hurt-left.webp",
    "from": "HERO-hunter-hit-e.png#1",
    "mirror": true,
-   "sha256": "6ce265a1f0c6d8d90ea66102d5cf6f67074633e5a47f9d6ad9e7153ae205646c",
-   "bytes": 14602,
+   "sha256": "9f68ef12f943a4b82c6cc132cd2cf96b5de750427172b87f7c0bfe6639a3bb6d",
+   "bytes": 14430,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     238.3,
-     509
+     255.5,
+     512
     ],
-    "visibleHeight": 314.5
+    "visibleHeight": 314.5,
+    "bbox": [
+     223,
+     203,
+     317,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-move-left.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-move-left.webp",
    "from": "HERO-hunter-walk-e.png#2",
    "mirror": true,
-   "sha256": "73cc242f12a599d88729e5fbfb0c860e5e257919d0c7eec8a629f465ae044ffd",
-   "bytes": 12718,
+   "sha256": "bf51aca68915f1379dff63ada4470652a84a78bee73f82b46d8b020c74190dbf",
+   "bytes": 12770,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     176.0,
-     506
+     256.0,
+     512
     ],
-    "visibleHeight": 278.0
+    "visibleHeight": 279.5,
+    "bbox": [
+     215,
+     233,
+     309,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-hurt-right.webp",
    "from": "HERO-hunter-hit-e.png#1",
    "mirror": false,
-   "sha256": "457031aa1fdec06e6cf260793c80d3a04d7f8750cb7b5e07fd626277bb0c7209",
-   "bytes": 14698,
+   "sha256": "93f37441a2e8f8f40ebd28e61078bb0d58265464e237c186352bf9c36c60299b",
+   "bytes": 14580,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     269.1,
-     510
+     255.5,
+     512
     ],
-    "visibleHeight": 314.5
+    "visibleHeight": 314.5,
+    "bbox": [
+     196,
+     203,
+     290,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-move-right.webp": {
    "path": "assets/r130/hunter/actions-v3126-hunter-move-right.webp",
    "from": "HERO-hunter-walk-e.png#2",
    "mirror": false,
-   "sha256": "9d94130a0fdcead8dd0b4b975365e940b3c5be9d444f2255a2a747916542969d",
-   "bytes": 12652,
+   "sha256": "1e801df72db39bd65fc4d886c7643507a4ca496fea919a79f103be884630e7fb",
+   "bytes": 13064,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     319.1,
-     506
+     256.0,
+     512
     ],
-    "visibleHeight": 279.0
+    "visibleHeight": 280.5,
+    "bbox": [
+     205,
+     232,
+     299,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/hunter-attack-left.webp": {
@@ -755,7 +971,13 @@
      278.6,
      377
     ],
-    "visibleHeight": 370.0
+    "visibleHeight": 370.0,
+    "bbox": [
+     224,
+     10,
+     349,
+     378
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/hunter-attack-right.webp": {
@@ -773,7 +995,13 @@
      232.4,
      377
     ],
-    "visibleHeight": 370.0
+    "visibleHeight": 370.0,
+    "bbox": [
+     163,
+     10,
+     288,
+     378
+    ]
    }
   }
  },
@@ -783,8 +1011,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 96.3,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    96.3,
+    227
+   ],
    "refBody": 182,
    "sha256": "6c66f3fae4308e448b302337f9de358b12f23c91381844ece5d4923d83defcca"
   },
@@ -793,8 +1025,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 96.1,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    96.1,
+    227
+   ],
    "refBody": 182,
    "sha256": "99e8b28109fb38b43e7c9f579c352b53e392235e413a3d5f914642fbd6b69ef6"
   },
@@ -803,8 +1039,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.6,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    99.6,
+    227
+   ],
    "refBody": 182,
    "sha256": "daaccfcf7925ab510e0dd9d58d4091051ffa205977b8d19591af9d1c6a08009c"
   },
@@ -813,8 +1053,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 91.4,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    91.4,
+    227
+   ],
    "refBody": 182,
    "sha256": "a6d8bdcf45e455f1546d8d20754a4b6844ab78d6329462f445eb1a07d4546d15"
   },
@@ -823,8 +1067,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 90.6,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    90.6,
+    227
+   ],
    "refBody": 182,
    "sha256": "aefa043befec13e75563b606d9563154266c480f64c72719930ae399f760e37f"
   },
@@ -833,8 +1081,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 94.9,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    94.9,
+    227
+   ],
    "refBody": 182,
    "sha256": "2d25ac338232b6855e5b4154a5936e9d37b7c3e641c6971ce0732334f8182edb"
   },
@@ -843,8 +1095,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 91.4,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    91.4,
+    227
+   ],
    "refBody": 182,
    "sha256": "124dda6ed6440d9939b957c9660c76c1410bf09941013ba5403d581fdd463b86"
   },
@@ -853,8 +1109,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.6,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    99.6,
+    227
+   ],
    "refBody": 182,
    "sha256": "b7dfcf5de20bd12852645814694b147dea06096794ddb11d9da66a600f64a192"
   }

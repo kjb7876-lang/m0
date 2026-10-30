@@ -33,7 +33,7 @@
   },
   "drive": "StoryWorld-HERO-lauren-sheet-20261030.zip",
   "driveId": "10JF4klZAdlk2F3mvwwB4hVbOj5mkTzO9",
-  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30), R134 게임 기준 키·발 피벗 맞춤, 자르기 테두리",
   "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
@@ -96,252 +96,336 @@
    "path": "assets/r130/lauren/g-s.webp",
    "from": "HERO-lauren-idle-s.png#0",
    "mirror": false,
-   "sha256": "23ad6f4e467147d794e986257adb13464301138a202c7dbc9a4ee9a98671000c",
-   "bytes": 28036,
+   "sha256": "12ee96dbad3f86c2169939bee7db5ef11edb4fc16771206e648931824c46f7ed",
+   "bytes": 25276,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     256.7,
-     480
+     255.1,
+     478
     ],
-    "visibleHeight": 480.0
+    "visibleHeight": 437.0,
+    "bbox": [
+     172,
+     47,
+     329,
+     486
+    ]
    }
   },
   "assets/hero_direction337/lauren/n.webp": {
    "path": "assets/r130/lauren/g-n.webp",
    "from": "HERO-lauren-idle-n.png#0",
    "mirror": false,
-   "sha256": "bedc636f1b4a64144f412a1c6cd88d61164a079dace23bbcf2557306338f0881",
-   "bytes": 26748,
+   "sha256": "108acee1b4a9103383b03e02d5d413d84f4e132c3b93129d27f00635caed5030",
+   "bytes": 16998,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     260.6,
+     259.1,
      496
     ],
-    "visibleHeight": 477.7
+    "visibleHeight": 314.8,
+    "bbox": [
+     198,
+     181,
+     319,
+     498
+    ]
    }
   },
   "assets/hero_direction338/lauren/s.webp": {
-   "path": "assets/r130/lauren/g-s.webp",
+   "path": "assets/r130/lauren/d338-g-s.webp",
    "from": "HERO-lauren-idle-s.png#0",
    "mirror": false,
-   "sha256": "435619b272560c03af7231048f3ec8311f33d2cfa814124a8203cb9481d7e124",
-   "bytes": 22770,
+   "sha256": "81e060215c099e383bd091739ed0fc88af0e0a00166bf47287cc09053c928c4a",
+   "bytes": 20624,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     256.2,
-     484
+     265.0,
+     481
     ],
-    "visibleHeight": 409.0
+    "visibleHeight": 366.5,
+    "bbox": [
+     196,
+     119,
+     327,
+     487
+    ]
    }
   },
   "assets/hero_direction338/lauren/n.webp": {
-   "path": "assets/r130/lauren/g-n.webp",
+   "path": "assets/r130/lauren/d338-g-n.webp",
    "from": "HERO-lauren-idle-n.png#0",
    "mirror": false,
-   "sha256": "563c0ea26d1125d8f3fddeee120b5dbeb39d295399022c0a9d6eca4cde6e41dc",
-   "bytes": 26844,
+   "sha256": "6804bd413c6840072b47e7a7067899d2bcf7211c5edb757367a3d77f33462fa2",
+   "bytes": 19584,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     292.1,
+     286.9,
      484
     ],
-    "visibleHeight": 477.7
+    "visibleHeight": 357.3,
+    "bbox": [
+     218,
+     126,
+     355,
+     486
+    ]
    }
   },
   "assets/hero_direction334/lauren/e.webp": {
    "path": "assets/r130/lauren/g-e.webp",
    "from": "HERO-lauren-idle-e.png#0",
    "mirror": false,
-   "sha256": "5b029e47b0e723151d9b6fcdd2c331f2d2a33e8e96d1303debfa2e774dc34767",
-   "bytes": 17840,
+   "sha256": "0181af4744fe93e8a5066ed70b7660cc66f1ece5b8dfb3bb532230804cd9483e",
+   "bytes": 17580,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     196.9,
-     491
+     193.0,
+     488
     ],
-    "visibleHeight": 378.4
+    "visibleHeight": 373.1,
+    "bbox": [
+     142,
+     123,
+     244,
+     490
+    ]
    }
   },
   "assets/hero_direction334/lauren/w.webp": {
    "path": "assets/r130/lauren/g-w.webp",
    "from": "HERO-lauren-idle-e.png#0",
    "mirror": true,
-   "sha256": "0687cf41779c372fcc43dbc04369a5c8cc45eebd8842303f08fff68e33a7f164",
-   "bytes": 18510,
+   "sha256": "46e367e12876c264089472d3284edec7e996b5b7e4631b563363360b2983f0a1",
+   "bytes": 18160,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     292.5,
-     492
+     304.0,
+     488
     ],
-    "visibleHeight": 382.5
+    "visibleHeight": 381.3,
+    "bbox": [
+     254,
+     115,
+     359,
+     490
+    ]
    }
   },
   "assets/hero_direction334/lauren/ne.webp": {
    "path": "assets/r130/lauren/g-ne.webp",
    "from": "HERO-lauren-idle-ne.png#0",
    "mirror": false,
-   "sha256": "5432cebf02b2a9b246a1d8e2561a721f3f836ab3868032b30088e4269a3996df",
-   "bytes": 24644,
+   "sha256": "0f672df56131c6b73776386c22021c166bcdace90cda18eb329fa6bcec311436",
+   "bytes": 18508,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     208.9,
-     491
+     204.0,
+     488
     ],
-    "visibleHeight": 455.6
+    "visibleHeight": 356.3,
+    "bbox": [
+     146,
+     131,
+     268,
+     490
+    ]
    }
   },
   "assets/hero_direction334/lauren/nw.webp": {
    "path": "assets/r130/lauren/g-nw.webp",
    "from": "HERO-lauren-idle-ne.png#0",
    "mirror": true,
-   "sha256": "f315c20aec4895d247611f3c1310f77051256d4e192486465eb8a13c6a26f3f1",
-   "bytes": 24578,
+   "sha256": "fccf274cca669366b2256a484d8c003d396448f3d8efe873291ed4b774f0c509",
+   "bytes": 19152,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     288.8,
-     492
+     292.0,
+     489
     ],
-    "visibleHeight": 458.5
+    "visibleHeight": 368.2,
+    "bbox": [
+     228,
+     120,
+     354,
+     491
+    ]
    }
   },
   "assets/hero_direction334/lauren/se.webp": {
    "path": "assets/r130/lauren/g-se.webp",
    "from": "HERO-lauren-idle-se.png#0",
    "mirror": false,
-   "sha256": "d80bb592d8970b39c28603c2bfc40c4f439da64de6a9263c618b7f9e221ee88c",
-   "bytes": 22236,
+   "sha256": "233bbc9b31165ab2848876f0d05f27deb91ed3f275061dc5b2ba3d13d621d981",
+   "bytes": 20670,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     239.8,
-     491
+     214.0,
+     489
     ],
-    "visibleHeight": 390.0
+    "visibleHeight": 367.0,
+    "bbox": [
+     148,
+     127,
+     270,
+     495
+    ]
    }
   },
   "assets/hero_direction334/lauren/sw.webp": {
    "path": "assets/r130/lauren/g-sw.webp",
    "from": "HERO-lauren-idle-se.png#0",
    "mirror": true,
-   "sha256": "e2885b5db08961b08c85366af01132af2bb0159969aaec1487507f487930e40a",
-   "bytes": 22918,
+   "sha256": "4cb0d970edb5148eca7a294310d48fc5e9c136d0502eb09197b3e25df0ecddf2",
+   "bytes": 21236,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     267.4,
-     492
+     290.0,
+     488
     ],
-    "visibleHeight": 401.0
+    "visibleHeight": 369.0,
+    "bbox": [
+     236,
+     124,
+     358,
+     494
+    ]
    }
   },
   "assets/heroes/normalized/directions/lauren-front.webp": {
    "path": "assets/r130/lauren/directions-lauren-front.webp",
    "from": "HERO-lauren-idle-s.png#0",
    "mirror": false,
-   "sha256": "940a35ba4721d67482f93f7d23270d0d90b484c1e8d6e909a31d8c806e9f8fbf",
-   "bytes": 24326,
+   "sha256": "8cf2dddfd92d365b79fd222e11a93fc42f029e72ddd88085f6ca068b7fb55d5c",
+   "bytes": 23406,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     265.8,
-     473
+     256.0,
+     476
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 405.5,
+    "bbox": [
+     179,
+     75,
+     325,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/directions/lauren-back.webp": {
    "path": "assets/r130/lauren/directions-lauren-back.webp",
    "from": "HERO-lauren-idle-n.png#0",
    "mirror": false,
-   "sha256": "307d0f74894cd851daf2b41e0bc7cb4b5537bb7722aa08704217cd50cc0e3aad",
-   "bytes": 23244,
+   "sha256": "99b7f7a67c8bf7f152abe8798f5d9143fc05df1c92b6c4276c94ef50a277fe27",
+   "bytes": 22330,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     255.9,
-     475
+     256.0,
+     476
     ],
-    "visibleHeight": 419.0
+    "visibleHeight": 403.5,
+    "bbox": [
+     178,
+     71,
+     333,
+     478
+    ]
    }
   },
   "assets/heroes/normalized/directions/lauren-left.webp": {
    "path": "assets/r130/lauren/directions-lauren-left.webp",
    "from": "HERO-lauren-idle-e.png#0",
    "mirror": true,
-   "sha256": "86b7d5714ddd468b50c79193305dcb8506b60cc7ea99819817b3bf88e1c344eb",
-   "bytes": 20930,
+   "sha256": "5f75048cb888ab515734f1b0a318f9b52eaba6cd6a453be2057b087477543986",
+   "bytes": 20578,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     247.0,
+     256.0,
      476
     ],
-    "visibleHeight": 429.4
+    "visibleHeight": 415.6,
+    "bbox": [
+     202,
+     69,
+     315,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/directions/lauren-right.webp": {
    "path": "assets/r130/lauren/directions-lauren-right.webp",
    "from": "HERO-lauren-idle-e.png#0",
    "mirror": false,
-   "sha256": "2a6e2a85cb1357442c355f5af0c3e29e692c2049b78733d93eb905bd95c328a8",
-   "bytes": 20598,
+   "sha256": "2379e01200e995978d44b3476a2e814cc7d569a9b3f742474cb382f35929595e",
+   "bytes": 20260,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     254.8,
+     256.0,
      476
     ],
-    "visibleHeight": 428.4
+    "visibleHeight": 415.6,
+    "bbox": [
+     199,
+     69,
+     312,
+     477
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-attack-front.webp": {
@@ -359,7 +443,13 @@
      262.9,
      483
     ],
-    "visibleHeight": 420.7
+    "visibleHeight": 420.7,
+    "bbox": [
+     183,
+     58,
+     344,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-attack-back.webp": {
@@ -377,7 +467,13 @@
      254.6,
      469
     ],
-    "visibleHeight": 425.8
+    "visibleHeight": 425.8,
+    "bbox": [
+     166,
+     41,
+     334,
+     471
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-attack-left.webp": {
@@ -395,7 +491,13 @@
      249.6,
      482
     ],
-    "visibleHeight": 441.6
+    "visibleHeight": 441.6,
+    "bbox": [
+     196,
+     48,
+     307,
+     482
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-attack-right.webp": {
@@ -413,7 +515,13 @@
      252.8,
      479
     ],
-    "visibleHeight": 435.5
+    "visibleHeight": 435.5,
+    "bbox": [
+     199,
+     51,
+     309,
+     480
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-skill-front.webp": {
@@ -431,7 +539,13 @@
      264.5,
      480
     ],
-    "visibleHeight": 445.9
+    "visibleHeight": 445.9,
+    "bbox": [
+     179,
+     54,
+     360,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-skill-back.webp": {
@@ -449,7 +563,13 @@
      256.2,
      476
     ],
-    "visibleHeight": 432.9
+    "visibleHeight": 432.9,
+    "bbox": [
+     160,
+     44,
+     341,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-skill-left.webp": {
@@ -467,7 +587,13 @@
      247.8,
      480
     ],
-    "visibleHeight": 446.9
+    "visibleHeight": 446.9,
+    "bbox": [
+     180,
+     45,
+     327,
+     481
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-skill-right.webp": {
@@ -485,43 +611,61 @@
      253.6,
      479
     ],
-    "visibleHeight": 443.8
+    "visibleHeight": 443.8,
+    "bbox": [
+     177,
+     46,
+     323,
+     479
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-guard-front.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-guard-front.webp",
    "from": "HERO-lauren-attack-s.png#0",
    "mirror": false,
-   "sha256": "41dfef795bad61e46c8af869877a76acaa84a79c84c33e0738eaa8e7dfe0c0ce",
-   "bytes": 22914,
+   "sha256": "48704e934987634414e8615d2b6a99d2506b3d169f00a973115b595f8a8e668a",
+   "bytes": 23282,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     264.5,
-     488
+     256.0,
+     491
     ],
-    "visibleHeight": 408.0
+    "visibleHeight": 408.0,
+    "bbox": [
+     180,
+     83,
+     326,
+     499
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-guard-back.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-guard-back.webp",
    "from": "HERO-lauren-attack-n.png#0",
    "mirror": false,
-   "sha256": "2cfd7c13ad006e76fdbafa9981885ed23aa5a6c6df8186a200deadcffb5b3138",
-   "bytes": 22244,
+   "sha256": "b0e8b8f6ce3566262e6aa11788a038a62dd1eca2b646b8487ab85bc7a52b8bd3",
+   "bytes": 22186,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     256.1,
-     489
+     256.0,
+     491
     ],
-    "visibleHeight": 410.0
+    "visibleHeight": 410.0,
+    "bbox": [
+     181,
+     79,
+     333,
+     494
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-guard-left.webp": {
@@ -539,7 +683,13 @@
      245.5,
      490
     ],
-    "visibleHeight": 421.2
+    "visibleHeight": 421.2,
+    "bbox": [
+     193,
+     76,
+     299,
+     491
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-guard-right.webp": {
@@ -557,43 +707,61 @@
      256.3,
      489
     ],
-    "visibleHeight": 422.2
+    "visibleHeight": 422.2,
+    "bbox": [
+     205,
+     73,
+     311,
+     489
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-front.webp",
    "from": "HERO-lauren-walk-s.png#3",
    "mirror": false,
-   "sha256": "97d66ae1b61300ef925fe181f08e939b09fa5614735d3cb24a423cccc6c83334",
-   "bytes": 23630,
+   "sha256": "ab740d40af0e1d140e379eca33724128855da0cd481bb343ff53e19919c43ab7",
+   "bytes": 23648,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     265.7,
-     491
+     256.0,
+     494
     ],
-    "visibleHeight": 442.3
+    "visibleHeight": 444.5,
+    "bbox": [
+     166,
+     57,
+     331,
+     497
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-back.webp",
    "from": "HERO-lauren-walk-n.png#3",
    "mirror": false,
-   "sha256": "22ce2f3c199c81b59faaf905ca40ce92f7f7cde2532d9ae3225dcb1e708d3470",
-   "bytes": 23814,
+   "sha256": "1c788ba041e6e46391ed531e615c4f629aa024ea101abbe1438d7e7784d4a8d4",
+   "bytes": 24164,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     258.0,
-     505
+     256.0,
+     508
     ],
-    "visibleHeight": 455.3
+    "visibleHeight": 460.8,
+    "bbox": [
+     181,
+     45,
+     352,
+     511
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-left.webp": {
@@ -611,7 +779,13 @@
      254.4,
      482
     ],
-    "visibleHeight": 442.8
+    "visibleHeight": 442.8,
+    "bbox": [
+     199,
+     50,
+     316,
+     483
+    ]
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-right.webp": {
@@ -629,7 +803,13 @@
      248.2,
      482
     ],
-    "visibleHeight": 437.7
+    "visibleHeight": 437.7,
+    "bbox": [
+     189,
+     55,
+     305,
+     483
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-front.webp": {
@@ -647,25 +827,37 @@
      254.6,
      509
     ],
-    "visibleHeight": 270.4
+    "visibleHeight": 270.4,
+    "bbox": [
+     200,
+     239,
+     303,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-move-front.webp": {
    "path": "assets/r130/lauren/actions-v3126-lauren-move-front.webp",
    "from": "HERO-lauren-walk-s.png#2",
    "mirror": false,
-   "sha256": "969b4d58bc40db0cb7ec8ef50cee4214dcd84820608cf54407b5ef7b538ec7a5",
-   "bytes": 13526,
+   "sha256": "765723ecc34f0742e546f652109b421841c058f5a82ee44463b62058a47fd381",
+   "bytes": 13376,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     314.4,
-     456
+     256.0,
+     512
     ],
-    "visibleHeight": 267.2
+    "visibleHeight": 267.2,
+    "bbox": [
+     208,
+     252,
+     306,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-back.webp": {
@@ -683,25 +875,37 @@
      236.8,
      510
     ],
-    "visibleHeight": 267.2
+    "visibleHeight": 267.2,
+    "bbox": [
+     184,
+     249,
+     283,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-move-back.webp": {
    "path": "assets/r130/lauren/actions-v3126-lauren-move-back.webp",
    "from": "HERO-lauren-walk-n.png#2",
    "mirror": false,
-   "sha256": "89085753f1b2b59073b60113aabb986369b593049edb7e52f9de1382c2fff0f3",
-   "bytes": 12210,
+   "sha256": "d171fa31e49d80e9ebc0c23e386de5b7d3a74ce3c372ed2a44254e010c9d09de",
+   "bytes": 11870,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     205.3,
-     498
+     256.0,
+     512
     ],
-    "visibleHeight": 249.4
+    "visibleHeight": 249.4,
+    "bbox": [
+     212,
+     264,
+     305,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-left.webp": {
@@ -719,25 +923,37 @@
      248.8,
      507
     ],
-    "visibleHeight": 267.8
+    "visibleHeight": 267.8,
+    "bbox": [
+     222,
+     247,
+     287,
+     507
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-move-left.webp": {
    "path": "assets/r130/lauren/actions-v3126-lauren-move-left.webp",
    "from": "HERO-lauren-walk-e.png#2",
    "mirror": true,
-   "sha256": "45b7ecb4041520f41a58adb92fd94505a30a401e1f4551159a265cdd7f1e6063",
-   "bytes": 13478,
+   "sha256": "38fd08a1658df005aaacc6c46d153d8e293c1b214cdf8d09ac69f18b5e7231d6",
+   "bytes": 13604,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     197.1,
-     405
+     256.0,
+     410
     ],
-    "visibleHeight": 306.0
+    "visibleHeight": 306.0,
+    "bbox": [
+     221,
+     110,
+     303,
+     411
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-right.webp": {
@@ -755,25 +971,37 @@
      260.3,
      507
     ],
-    "visibleHeight": 278.1
+    "visibleHeight": 278.1,
+    "bbox": [
+     222,
+     237,
+     290,
+     507
+    ]
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-move-right.webp": {
    "path": "assets/r130/lauren/actions-v3126-lauren-move-right.webp",
    "from": "HERO-lauren-walk-e.png#2",
    "mirror": false,
-   "sha256": "696fec9eb71e3c06ab17bcb871035e31d4de7bc6f1a9ab04c779e52a56e4fba3",
-   "bytes": 9438,
+   "sha256": "a40c43699867914774ce1287a8b501e24e404dd37ace4f1e432ff03f89885aa6",
+   "bytes": 9434,
    "frame": {
     "size": [
      512,
      512
     ],
     "pivot": [
-     290.2,
-     510
+     256.0,
+     511
     ],
-    "visibleHeight": 231.5
+    "visibleHeight": 231.5,
+    "bbox": [
+     222,
+     284,
+     284,
+     512
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/lauren-attack-left.webp": {
@@ -791,7 +1019,13 @@
      272.6,
      364
     ],
-    "visibleHeight": 305.0
+    "visibleHeight": 305.0,
+    "bbox": [
+     235,
+     64,
+     312,
+     365
+    ]
    }
   },
   "assets/heroes/normalized/actions-directional/lauren-attack-right.webp": {
@@ -809,7 +1043,13 @@
      238.4,
      364
     ],
-    "visibleHeight": 305.0
+    "visibleHeight": 305.0,
+    "bbox": [
+     201,
+     64,
+     278,
+     365
+    ]
    }
   }
  },
@@ -819,8 +1059,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 98.0,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    98.0,
+    225
+   ],
    "refBody": 205,
    "sha256": "015480b2f681b77e771705be1ee8890337d2ca4366a3ed55a16cab93d4cae6dc"
   },
@@ -829,8 +1073,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 97.4,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    97.4,
+    225
+   ],
    "refBody": 205,
    "sha256": "60ee2c1a0ee8f77c5b17d0745e37c224f28d1419a36c78429971ed2778294e63"
   },
@@ -839,8 +1087,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.6,
-   "footY": 228,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.6,
+    228
+   ],
    "refBody": 201,
    "sha256": "9ac0f8fdb5a4c61193929f9f6a34532cacefb75c1def22d01774af0b3ecf5da0"
   },
@@ -849,8 +1101,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 97.4,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    97.4,
+    227
+   ],
    "refBody": 207,
    "sha256": "8ab890a77d22a3e425824181a4f7d5096add54cd7c690c725072931d5af9e7dd"
   },
@@ -859,8 +1115,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 97.5,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    97.5,
+    227
+   ],
    "refBody": 206,
    "sha256": "b514df61ab443d67f0e0c6dd478444074b5bcac03ffd3c104243271beca9134e"
   },
@@ -869,8 +1129,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 93.6,
-   "footY": 225,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    93.6,
+    225
+   ],
    "refBody": 205,
    "sha256": "136a5d126cca07fa4bf8ffd68b4cc778fdad9f266984ed2973a33dad333d10bc"
   },
@@ -879,8 +1143,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 95.4,
-   "footY": 228,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    95.4,
+    228
+   ],
    "refBody": 201,
    "sha256": "87d1a76c847e544269a263dda8cb333db2eb98f0c595e14afc850de2f5c5b21a"
   },
@@ -889,8 +1157,12 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 93.6,
-   "footY": 227,
+   "footX": 96.0,
+   "footY": 226,
+   "measuredFoot": [
+    93.6,
+    227
+   ],
    "refBody": 207,
    "sha256": "1922dcd36406cdf418abe01a97de6a2374f3929e23168e79756df63c4c7f0a53"
   }
