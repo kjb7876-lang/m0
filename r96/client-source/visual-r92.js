@@ -47,7 +47,18 @@
   const openAhead=p=>{for(const s of[.5,1,1.5,2,2.5])for(const o of[-.5,0,.5])if(!onFloor(p.x+s+o,p.y+s-o))return false;return true;};
   const cells=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5,seed:hash('r92:'+zone+':'+x+':'+y)})).sort((a,b)=>a.seed-b.seed||a.y-b.y||a.x-b.x);
   const decals=[],lights=[],DECALS=quota(cells.length,DECAL_CELLS,8,110),LIGHTS=quota(cells.length,LIGHT_CELLS,3,26);
-  const nearCache=new Map(),near=p=>{const k=p.x+','+p.y;let n=nearCache.get(k);if(n)return n;n={d:Infinity,x:p.x,y:p.y};for(const w of L.walls){const c=closest(p,w);if(c&&c.d<n.d)n=c;}nearCache.set(k,n);return n;};
+  // R155: 바닥 칸마다 모든 벽과 거리를 재던 것(칸 수 x 벽 수)을, 벽마다 '2칸 안' 범위의 격자 칸에만 넣어 두고 그 칸의 벽만 잰다.
+  //  2칸 안 벽은 빠짐없이 찾고 같은 순서(벽 번호 순, 같으면 먼저 것)로 고르므로 2칸 안 결과는 그대로이고, 그보다 먼 결과는
+  //  아래 쓰임(1.8·1.25·0.45 문턱)에서 똑같이 '멀다'로 판정된다. window.__STORYWORLD_R155_NOGRID__ 이면 옛 방식.
+  const NEAR=2,grid=new Map();if(!window.__STORYWORLD_R155_NOGRID__)L.walls.forEach((w,i)=>{let x0,x1,y0,y1;
+   if(Array.isArray(w.endpoints)&&w.endpoints.length===2){const[a,b]=w.endpoints,m=NEAR+(w.depth||.24)/2;x0=Math.min(a[0],b[0])-m;x1=Math.max(a[0],b[0])+m;y0=Math.min(a[1],b[1])-m;y1=Math.max(a[1],b[1])+m;}
+   else if(finite(w)&&Number.isFinite(w.width+w.depth)){x0=w.x-w.width/2-NEAR;x1=w.x+w.width/2+NEAR;y0=w.y-w.depth/2-NEAR;y1=w.y+w.depth/2+NEAR;}else return;
+   if(![x0,x1,y0,y1].every(Number.isFinite)||(x1-x0)*(y1-y0)>40000)return grid.set('all',[...(grid.get('all')||[]),i]);
+   for(let gx=Math.floor(x0);gx<=Math.floor(x1);gx++)for(let gy=Math.floor(y0);gy<=Math.floor(y1);gy++){const k=gx+','+gy;let a=grid.get(k);if(!a)grid.set(k,a=[]);a.push(i);}});
+  const nearCache=new Map(),near=p=>{const k=p.x+','+p.y;let n=nearCache.get(k);if(n)return n;n={d:Infinity,x:p.x,y:p.y};
+   if(window.__STORYWORLD_R155_NOGRID__){for(const w of L.walls){const c=closest(p,w);if(c&&c.d<n.d)n=c;}}
+   else{const own=grid.get(Math.floor(p.x)+','+Math.floor(p.y))||[],far=grid.get('all'),ids=far?[...new Set([...own,...far])].sort((a,b)=>a-b):own;for(const i of ids){const c=closest(p,L.walls[i]);if(c&&c.d<n.d)n=c;}}
+   nearCache.set(k,n);return n;};
   // Stains gather along wall feet and corners; only a few lie in open floor (R94).
   for(const c of cells){if(decals.length>=DECALS||!floors.length)break;const p={x:c.x+((c.seed>>>4)%100)/200-.25,y:c.y+((c.seed>>>12)%100)/200-.25};
    if(near(c).d>1.8&&(c.seed>>>24)%10>=3)continue;
