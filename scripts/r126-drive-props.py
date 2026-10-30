@@ -16,6 +16,7 @@ JOBS = {
  'locker':      ('R123-two-front-lockers', 'R123-two-lockers-original.png', 'StoryWorld-R123-two-front-lockers-20261029.zip', '1wiYVlf73M_NaF21UtLTAXzjffk6BTDfK', 'S-02 밤의 학교 뒷벽 사물함 2칸'),
  'teacup':      ('ROSEHOUSE-cup-saucer', 'ROSEHOUSE-cup-saucer-original.png', 'StoryWorld-ROSEHOUSE-cup-saucer-20261029.zip', '1pNniTEtZQw8zRq7NdTFLjMhDpL5w-ink', 'S-01 꿰맨 장미의 집 거대 찻잔'),
  'needle':      ('ROSEHOUSE-needle-thread', 'ROSEHOUSE-needle-thread-original.png', 'StoryWorld-ROSEHOUSE-needle-thread-20261029.zip', '1Eax4OZHd47qzgPu251XV72m0f8Nupee1', 'S-01 꿰맨 장미의 집 바늘과 실(원문 L641)'),
+ 'badge':       ('eunjae-name-badge', 'eunjae-name-badge-original.png', 'StoryWorld-eunjae-name-badge-20261030.zip', '1r05TbBsvUtssrX9ufYDG4v2h1PsHPuox', 'S-02 밤의 학교 바닥에 떨어진 은재 명찰(원문 은재 출석부·음악실 대목; R133)'),
  'noticeboard': ('SCHOOL-blank-noticeboard', 'SCHOOL-noticeboard-original.png', 'StoryWorld-SCHOOL-blank-noticeboard-20261029.zip', '1t75leEFgw-TT94yZq12J_skzr5W4J3rp', 'S-02 밤의 학교 복도 빈 게시판'),
 }
 idx_path = out / 'index.json'
