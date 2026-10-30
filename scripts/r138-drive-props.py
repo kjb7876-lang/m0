@@ -19,6 +19,15 @@ JOBS = {
  'weed':   ('dist02-waterweed-clump1', 'exec-13b0a057-b48e-4ee6-8f26-46305554a700.png', 'Dist02-Waterweed-Clump1.zip', '1WFaucz-Li0pzqQLylwEoe5bkcxJ-1P_s', 'dist02 늪지대 수초 덩어리(에피소드1A L45, 드라이브 10-30 R145), 바닥 비충돌 장식(붙잡기 판정 없음)'),
  'ripple': ('dist02-quiet-ripple2', 'exec-f6f56781-a6ee-49ad-a231-9523f558a31d.png', 'Dist02-Quiet-Ripple-v2.zip', '1EXrdaguXu6KehgPeKbhYzQy2B8vJIUlI', 'dist02 늪 수면 잔물결 v2(에피소드1A L47, R145), 바닥에 눕힌 비충돌 장식(애니 없음)'),
  'chain':  ('dist03-ash-chain1', 'exec-21b87d0b-549e-4878-a989-6954f6629543.png', 'Dist03-Ash-Chain1.zip', '1zanY1daqpUJDC_4xhp6ZmE-Vw1T75LW8', 'dist03 재에 묻힌 사슬(에피소드1A L59, R145), 바닥 비충돌 장식(당김·충돌 없음)'),
+ 'sign':    ('ep1a09-injection-room-sign1', 'exec-a70fb87b-25ed-4015-b6fa-bfb6bd43d6d0.png', 'Ep1A09-Injection-Room-Sign1.zip', '1DXL9GrVO7fTEIdO9tPov8B5z6Jj70fFe', 'ep1a09 주사실 벽 표지(에피소드1A L116, R146), 벽에 붙여 띄운 비충돌 장식'),
+ 'hwindow': ('ep1a11-hospital-window-lit2', 'exec-65406de3-a465-4587-929a-6977267c8e55.png', 'Ep1A11-Hospital-Window-Lit-v2.zip', '1rNXmFJgh3mNb80buhsaMnUHOGj-9jThm', 'ep1a11 불 켜진 병원 창문 v2(L154, R146), 벽에 붙인 비충돌 장식'),
+ 'syringe': ('ep1a11-scattered-syringes1', 'exec-1d6e16eb-870a-41a6-95bc-e4459c7c4399.png', 'Ep1A11-Scattered-Syringes1.zip', '1uyMhPUZR0WPR6BqQ_C0r-l-Bpzco7nSc', 'ep1a11 바닥에 흩어진 주사기(L140, R146), 바닥 비충돌 장식(획득·독 효과 없음)'),
+ 'fridge':  ('ep1b02-rusted-fridge1', 'exec-d8041d29-3d7b-4b5f-9426-e15228b977d3.png', 'Ep1B02-Rusted-Fridge1.zip', '1Q2x6yzmzL7rhkv6wzm2XXTfSgGiwTbWY', 'ep1b02 나태의 집 녹슨 냉장고(최종본2 L33, R146), 벽에 기댄 비충돌 장식(열림 없음)'),
+ 'pet':     ('ep1b02-crushed-pet-scatter1', 'exec-f833bd14-4d3a-4af9-9700-b2d780c005fb.png', 'Ep1B02-Crushed-PET-Scatter1.zip', '1ngS1YEyZblD7FeOu839xRMLn-3GAi2EG', 'ep1b02 찌그러진 페트병(L31, R146), 바닥 비충돌 장식'),
+ 'glasses': ('ep1b03-cracked-glasses1', 'exec-31c52fe0-1361-4ffc-9c92-9bcbd10cde4d.png', 'Ep1B03-Cracked-Glasses1.zip', '1BPCsu5tD-OA9na7K3q-VKckelDa5ldkX', 'ep1b03 금 간 안경(L48, R146), 바닥 비충돌 장식(획득 없음)'),
+ 'plate':   ('ep1b04-disturbed-food-plate1', 'exec-678e8efe-31ee-4aac-82e0-53c73e21ac45.png', 'Ep1B04-Disturbed-Food-Plate1.zip', '1a-rethceU4SpBO72x5G-EoF9KBBPx4EM', 'ep1b04 탐식의 주방 흐트러진 식사 접시(L58, R146), 바닥 비충돌 장식'),
+ 'counter': ('ep1b04-low-kitchen-counter1', 'exec-dd4024c1-8a69-4c32-a8d3-b1c077aaa1d9.png', 'Ep1B04-Low-Kitchen-Counter1.zip', '1UwJyLJH-LulUClr-Vhj5nBSK3n_a25Qd', 'ep1b04 낮은 조리대(L60, R146), 벽에 붙인 비충돌 장식'),
+ 'cwindow': ('ep1b06b-cabin-snow-window1', 'exec-0e472b10-f865-4e80-ac59-5dfbf0b97692.png', 'Ep1B06B-Cabin-Snow-Window1.zip', '1AjrEE46hTX_LVVEIhWuy3TsKQVjPTdFe', 'ep1b06b 눈보라 속 오두막 눈 쌓인 창문(R146), 벽에 붙인 비충돌 장식'),
 }
 idx_path = out / 'index.json'
 index = json.loads(idx_path.read_text(encoding='utf-8')) if idx_path.exists() else {'revision': 'R138', 'props': {}}
@@ -26,6 +35,8 @@ for pid, (folder, name, zipname, drive_id, use) in JOBS.items():
     d = next((p for p in src.rglob(folder) if p.is_dir()), None)
     if not d or not (d / name).exists(): print('skip', pid, '(bundle not found)'); continue
     raw = (d / name).read_bytes(); man = json.loads(next(p for p in [d / 'manifest.json', d / 'MANIFEST.json'] if p.exists()).read_text(encoding='utf-8'))
+    if isinstance(man, list): man = {e.get('file') or e.get('name') or e.get('path'): e for e in man}  # R146: 목록 형식 MANIFEST(오두막 창문 묶음)
+    man = {k.split('/')[-1]: v for k, v in man.items()}
     if sha(raw) != man[name]['sha256']: raise SystemExit('sha mismatch: ' + name)
     im = Image.open(d / name).convert('RGBA'); a = im.getchannel('A').point(lambda v: 255 if v >= A else 0); box = a.getbbox()
     x0, y0, x1, y1 = box; x0, y0 = max(0, x0 - PAD), max(0, y0 - PAD); x1, y1 = min(im.width, x1 + PAD), min(im.height, y1 + PAD)

@@ -162,6 +162,249 @@
      771
     ]
    }
+  },
+  "sign": {
+   "path": "assets/r138/props/sign.webp",
+   "size": [
+    512,
+    271
+   ],
+   "bytes": 40686,
+   "sha256": "20b96bf40a44950b4885105195ba1c970048ed4559e1b6fcce5e34f831e389e5",
+   "use": "ep1a09 주사실 벽 표지(에피소드1A L116, R146), 벽에 붙여 띄운 비충돌 장식",
+   "source": {
+    "drive": "Ep1A09-Injection-Room-Sign1.zip",
+    "driveId": "1DXL9GrVO7fTEIdO9tPov8B5z6Jj70fFe",
+    "file": "exec-a70fb87b-25ed-4015-b6fa-bfb6bd43d6d0.png",
+    "sha256": "cd3f028f464638dccbfd26e69205e5720678d6d5bf59a0ff33d7ca34d58cb5fb",
+    "bytes": 1041321,
+    "size": [
+     1774,
+     887
+    ],
+    "crop": [
+     287,
+     148,
+     1489,
+     785
+    ]
+   }
+  },
+  "hwindow": {
+   "path": "assets/r138/props/hwindow.webp",
+   "size": [
+    512,
+    393
+   ],
+   "bytes": 66216,
+   "sha256": "47520d6f0455899127c6fb00cdd689cf8b6f7b301920eb8211de0e415e0a4abd",
+   "use": "ep1a11 불 켜진 병원 창문 v2(L154, R146), 벽에 붙인 비충돌 장식",
+   "source": {
+    "drive": "Ep1A11-Hospital-Window-Lit-v2.zip",
+    "driveId": "1rNXmFJgh3mNb80buhsaMnUHOGj-9jThm",
+    "file": "exec-65406de3-a465-4587-929a-6977267c8e55.png",
+    "sha256": "b4e37de5e78b6de2d68a93e0d7707b03d78206f761fd4514949876ecd49eda34",
+    "bytes": 1696285,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     283,
+     175,
+     1244,
+     913
+    ]
+   }
+  },
+  "syringe": {
+   "path": "assets/r138/props/syringe.webp",
+   "size": [
+    512,
+    321
+   ],
+   "bytes": 42788,
+   "sha256": "b163835e5128a79710223bfaa4b74bf3da84da970ad100c3dd4c7e7b7d655fe2",
+   "use": "ep1a11 바닥에 흩어진 주사기(L140, R146), 바닥 비충돌 장식(획득·독 효과 없음)",
+   "source": {
+    "drive": "Ep1A11-Scattered-Syringes1.zip",
+    "driveId": "1uyMhPUZR0WPR6BqQ_C0r-l-Bpzco7nSc",
+    "file": "exec-1d6e16eb-870a-41a6-95bc-e4459c7c4399.png",
+    "sha256": "6c481c6d1a20a82f14dee14d906b8c23a46589aa7f5b0bf1d718b162c4b4e72f",
+    "bytes": 1575684,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     81,
+     82,
+     1443,
+     936
+    ]
+   }
+  },
+  "fridge": {
+   "path": "assets/r138/props/fridge.webp",
+   "size": [
+    293,
+    512
+   ],
+   "bytes": 63936,
+   "sha256": "8c0fc25f42b724f98c39e6cef1175ebd7313e2bdcb59cbab4e5ca7ea637a600b",
+   "use": "ep1b02 나태의 집 녹슨 냉장고(최종본2 L33, R146), 벽에 기댄 비충돌 장식(열림 없음)",
+   "source": {
+    "drive": "Ep1B02-Rusted-Fridge1.zip",
+    "driveId": "1Q2x6yzmzL7rhkv6wzm2XXTfSgGiwTbWY",
+    "file": "exec-d8041d29-3d7b-4b5f-9426-e15228b977d3.png",
+    "sha256": "698ad9ed745e6d56706f3b5ebfd5995918839a5b188a6210020d77b6c8ec1432",
+    "bytes": 1029344,
+    "size": [
+     1269,
+     1239
+    ],
+    "crop": [
+     362,
+     120,
+     918,
+     1092
+    ]
+   }
+  },
+  "pet": {
+   "path": "assets/r138/props/pet.webp",
+   "size": [
+    512,
+    376
+   ],
+   "bytes": 72884,
+   "sha256": "411b10715504179910c2a95c44042dc14c34754f0cbf7a7a4d2fd34578dedc52",
+   "use": "ep1b02 찌그러진 페트병(L31, R146), 바닥 비충돌 장식",
+   "source": {
+    "drive": "Ep1B02-Crushed-PET-Scatter1.zip",
+    "driveId": "1ngS1YEyZblD7FeOu839xRMLn-3GAi2EG",
+    "file": "exec-f833bd14-4d3a-4af9-9700-b2d780c005fb.png",
+    "sha256": "9f2e22b425404a991b5a76f8a1b9ae7059a2039702b2588873b53c0c9a9240ad",
+    "bytes": 800993,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     189,
+     369,
+     1063,
+     1011
+    ]
+   }
+  },
+  "glasses": {
+   "path": "assets/r138/props/glasses.webp",
+   "size": [
+    512,
+    228
+   ],
+   "bytes": 37438,
+   "sha256": "012b9d07b36a709aecaef328de009bbbb13bcaf2289fe179e2852da145a74858",
+   "use": "ep1b03 금 간 안경(L48, R146), 바닥 비충돌 장식(획득 없음)",
+   "source": {
+    "drive": "Ep1B03-Cracked-Glasses1.zip",
+    "driveId": "1BPCsu5tD-OA9na7K3q-VKckelDa5ldkX",
+    "file": "exec-31c52fe0-1361-4ffc-9c92-9bcbd10cde4d.png",
+    "sha256": "20b01291b11d4632369455dec408830ed787398f62d52e10dabb99f949046b84",
+    "bytes": 1457801,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     133,
+     236,
+     1475,
+     833
+    ]
+   }
+  },
+  "plate": {
+   "path": "assets/r138/props/plate.webp",
+   "size": [
+    512,
+    345
+   ],
+   "bytes": 70796,
+   "sha256": "123058158b859d644a49456dd0122f34a532f77304a921fdb2b57971e44af601",
+   "use": "ep1b04 탐식의 주방 흐트러진 식사 접시(L58, R146), 바닥 비충돌 장식",
+   "source": {
+    "drive": "Ep1B04-Disturbed-Food-Plate1.zip",
+    "driveId": "1a-rethceU4SpBO72x5G-EoF9KBBPx4EM",
+    "file": "exec-678e8efe-31ee-4aac-82e0-53c73e21ac45.png",
+    "sha256": "f7508749719c10c9bf3eacd874ef3d79c78424f4ee2ae20fd5f4d1e682e3ccca",
+    "bytes": 1084922,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     134,
+     313,
+     1117,
+     975
+    ]
+   }
+  },
+  "counter": {
+   "path": "assets/r138/props/counter.webp",
+   "size": [
+    512,
+    410
+   ],
+   "bytes": 51502,
+   "sha256": "3cff39b104cc795cb4896e038a81377d38bf2ef81c320985654f98dad83499fb",
+   "use": "ep1b04 낮은 조리대(L60, R146), 벽에 붙인 비충돌 장식",
+   "source": {
+    "drive": "Ep1B04-Low-Kitchen-Counter1.zip",
+    "driveId": "1UwJyLJH-LulUClr-Vhj5nBSK3n_a25Qd",
+    "file": "exec-dd4024c1-8a69-4c32-a8d3-b1c077aaa1d9.png",
+    "sha256": "bdd826e7181489515be72b060cb143c83ea6b2020194a7cf40dacb7f3973a999",
+    "bytes": 1371697,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     101,
+     242,
+     1169,
+     1097
+    ]
+   }
+  },
+  "cwindow": {
+   "path": "assets/r138/props/cwindow.webp",
+   "size": [
+    512,
+    385
+   ],
+   "bytes": 82190,
+   "sha256": "ef1348cb0a88aa6f4b86aae4b519fb1fe8e38a0cbb17c3f51774f9b4c819bf81",
+   "use": "ep1b06b 눈보라 속 오두막 눈 쌓인 창문(R146), 벽에 붙인 비충돌 장식",
+   "source": {
+    "drive": "Ep1B06B-Cabin-Snow-Window1.zip",
+    "driveId": "1AjrEE46hTX_LVVEIhWuy3TsKQVjPTdFe",
+    "file": "exec-0e472b10-f865-4e80-ac59-5dfbf0b97692.png",
+    "sha256": "db7def6aa983bd849d05e2bab427ab90323dd54cc876a147e23aec9dc33243e0",
+    "bytes": 1864168,
+    "size": [
+     1254,
+     1254
+    ],
+    "crop": [
+     77,
+     210,
+     1212,
+     1063
+    ]
+   }
   }
  },
  "held": {
@@ -219,9 +462,7 @@
    "driveId": "1vLED3dhOrKdQlcV1VtrRxbvgyoRRcTxw",
    "reason": "NOT-runtime 표기"
   },
-  "Dist05-Pillar-Ember1.zip (1KqOZrki-4EZk3rQ9M53ZryMSrxyzfLXz)": "R145 보류: 기둥 틈 잔불 — 기둥에 붙일 자리 없이 바닥에 두면 어색함, 전체폭128px에서 본체 약13px로 세부 약함(README)",
-  "Ep1A09-Injection-Room-Sign1.zip (1DXL9GrVO7fTEIdO9tPov8B5z6Jj70fFe)": "R145 보류: 병원 ep1a09 벽 표지 — 병원 미로는 이 배치(본편 지역 방 사각형)를 쓰지 않아 벽 부착 자리 검증 필요",
-  "Ep1A11-Hospital-Window-Lit-v2.zip (1rNXmFJgh3mNb80buhsaMnUHOGj-9jThm)": "R145 보류: 병원 ep1a11 창문 v2 — 같은 이유(벽 접합 미검증), README 도 크림색 벽 가장자리가 두껍다고 기록",
-  "Ep1A11-Old-Silver-Seal1.zip (128Db5NGLIJTMK9zHUKgvmthSABLdM7lJ)": "R145 보류: 낡은 은빛 인장 — README 가 사진·렌더풍 하이라이트로 기존 회화풍 정합 미통과라고 기록, 획득·상호작용 설계 없음"
+  "Ep1B01-Chapel-Short-Steps1.zip (1Q3h4vsziYo5XHYU8sKdV4oBCA41vQTVE)": "R146 보류: 성당 돌계단 — 오를 수 있어 보이는 구조물인데 이동·높이·통행이 없어 어색함(README 도 이동·충돌 미검증)",
+  "Ep1A11-Old-Silver-Seal1.zip (128Db5NGLIJTMK9zHUKgvmthSABLdM7lJ)": "R145 보류 유지: README 가 사진·렌더풍 하이라이트로 기존 회화풍 정합 미통과라고 기록, 획득·상호작용 설계 없음"
  }
 }
