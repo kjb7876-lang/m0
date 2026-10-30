@@ -2826,7 +2826,19 @@
     "assets/r128/gunner/walk-n.webp",
     "assets/r128/gunner/walk-ne.webp",
     "assets/r128/gunner/walk-s.webp",
-    "assets/r128/gunner/walk-se.webp"
+    "assets/r128/gunner/walk-se.webp",
+    "assets/r118/tiles/cement14.webp",
+    "assets/r129/props/brush.webp",
+    "assets/r129/props/clock-k1.webp",
+    "assets/r129/props/clock-k2.webp",
+    "assets/r129/props/clock-k3.webp",
+    "assets/r129/props/clock-k4.webp",
+    "assets/r129/props/index.json",
+    "assets/r129/props/monolith.webp",
+    "assets/r129/props/pylon.webp",
+    "assets/r129/props/tree.webp",
+    "assets/r129/props/tweezers.webp",
+    "assets/r129/props/vase.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -3901,5 +3913,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d6867fc4a1324bdb6265504418839e5219673013e41d7004defaef4a9a75a766"
+  "runtimeManifestSHA256": "b92c7fcb9ecb4ba0dfac773985afbb319de5de75b5ff339f1a60ec883ebfe6ce"
 }

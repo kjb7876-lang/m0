@@ -8518,6 +8518,11 @@
       "sha256": "4f98a10cd3c1e9a8fd7524471af71c54f0fe1057196f996dfcd0547428d59fae"
     },
     {
+      "path": "assets/r118/tiles/cement14.webp",
+      "bytes": 867448,
+      "sha256": "35bc9f0f4d99300a12912ad146872d7597d75d1b9824350bfae9a9b3f77ac27c"
+    },
+    {
       "path": "assets/r118/tiles/garden.webp",
       "bytes": 351588,
       "sha256": "ccf99e1a0c49fb943470f503d642bd4fc2f4557253d9f607c67513798a35ea9f"
@@ -8529,8 +8534,8 @@
     },
     {
       "path": "assets/r118/tiles/index.json",
-      "bytes": 8699,
-      "sha256": "c0c2ffd17468cfec0afad61e41293f207e4f81e38d4173081f3666ebf67a80ab"
+      "bytes": 8890,
+      "sha256": "39b5ed80bdbba0c8e51699b311889363fb812645e5f6b5ac996ff89e5610fcee"
     },
     {
       "path": "assets/r118/tiles/kitchen.webp",
@@ -9121,6 +9126,61 @@
       "path": "assets/r128/gunner/walk-se.webp",
       "bytes": 50694,
       "sha256": "22daf1458bc5f3ff02290a4d12eac5ff37801aee26ed9a571dba06e2716c6c71"
+    },
+    {
+      "path": "assets/r129/props/brush.webp",
+      "bytes": 22368,
+      "sha256": "e69e741996f4757349fc181bda259ae67967e3ed1dae94308df4aa252297041e"
+    },
+    {
+      "path": "assets/r129/props/clock-k1.webp",
+      "bytes": 45186,
+      "sha256": "a160f17bf02115b7bd0ac822a5f5fd5790aaf82f782299696209c7ed576650f9"
+    },
+    {
+      "path": "assets/r129/props/clock-k2.webp",
+      "bytes": 44154,
+      "sha256": "78bb37b5d2ed9a94b45a93e1379377eb42fe3a7d9d63f9f2fff876f8c4a5c76a"
+    },
+    {
+      "path": "assets/r129/props/clock-k3.webp",
+      "bytes": 45960,
+      "sha256": "9eedc815b618d316973bb7a30e04d6fe82f208f298fb71e9b6f2d58274892230"
+    },
+    {
+      "path": "assets/r129/props/clock-k4.webp",
+      "bytes": 42076,
+      "sha256": "2f66505753de6ceb4fb4328687e21a7ec2206ab7d65abb724f323fe8ff10ad2f"
+    },
+    {
+      "path": "assets/r129/props/index.json",
+      "bytes": 4742,
+      "sha256": "7e1d07a763ad4c0e4b0f0c5f5242bb7429a3abbdd0891e346de24cf4f921e2d2"
+    },
+    {
+      "path": "assets/r129/props/monolith.webp",
+      "bytes": 33934,
+      "sha256": "777ce3480405ac82dd303f0eb4124ee006ff29bc850efd80404d21cdbe4b78ce"
+    },
+    {
+      "path": "assets/r129/props/pylon.webp",
+      "bytes": 43966,
+      "sha256": "2da2cc60728b8224481ad91982be4e00e9c76f2b256700e5108a2df1e1f9c93d"
+    },
+    {
+      "path": "assets/r129/props/tree.webp",
+      "bytes": 140698,
+      "sha256": "01d210c65ec0822446493003499bbd6da56258c0d6b2929165ce68c8bf4170ab"
+    },
+    {
+      "path": "assets/r129/props/tweezers.webp",
+      "bytes": 28084,
+      "sha256": "aa24baa369cd5d80843f44a9fbbf51c9788a0e3563cef7971b62f78fbe9c8863"
+    },
+    {
+      "path": "assets/r129/props/vase.webp",
+      "bytes": 106578,
+      "sha256": "d142eefc624d8a2e85daa3fd0a95e5732a1ae6241a01b5cd13d726ea073209f5"
     },
     {
       "path": "assets/r74/effects.png",
@@ -17879,8 +17939,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 74993,
-      "sha256": "c9fe8c4be89183db97cc463a9a68f5cb1f69aa95cd8874a30a80cebddc478a04"
+      "bytes": 77418,
+      "sha256": "7e64ae9d76e4cc82de4a9cf085f866e0d92ee4634041b0f929e3abb3cb03d486"
     },
     {
       "path": "samong-r103.js",
@@ -18074,8 +18134,8 @@
     },
     {
       "path": "world-tiles-r118.js",
-      "bytes": 8907,
-      "sha256": "22fa6b34f0d9722fd7b4cd89cf4bdfcfd963571f9dd2c1c5e472c367cad1e426"
+      "bytes": 9056,
+      "sha256": "071f6789004f54f24d2e5b64195596f704d52adc2abe6b9b815631d771e4ba01"
     },
     {
       "path": "world-visual-r78.js",
@@ -18083,8 +18143,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3616,
-  "totalBytes": 769048275,
+  "fileCount": 3628,
+  "totalBytes": 770476234,
   "webHTMLSha256": "2359c46dbe66154b8e9c9f0223ad7da1361e327527cc378e04ababe3c71280fa",
   "largest": [
     {
