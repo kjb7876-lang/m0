@@ -3283,7 +3283,8 @@
     "assets/r138/props/pet.webp",
     "assets/r138/props/plate.webp",
     "assets/r138/props/sign.webp",
-    "assets/r138/props/syringe.webp"
+    "assets/r138/props/syringe.webp",
+    "perf-r150.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4358,5 +4359,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "102147f0aa4cf775d896527a8ca1d694c1bdce53a4450c670bb0b3b216cbc910"
+  "runtimeManifestSHA256": "7e6175b131669feed9a5225460cb23f231c9dc0f3a0b30890376744815c6a5da"
 }
