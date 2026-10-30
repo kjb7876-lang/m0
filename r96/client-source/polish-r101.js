@@ -365,7 +365,7 @@ function r75Objective(){try{const g75=window.__STORYWORLD_GUIDE_R75__?.currentGo
 // R136: R75 의 문 접근(StoryInteractionCoreR74.approach)은 경로의 모든 마디가 몸 반지름 .31 로 곧게 트여 있어야 받아들이고 길 찾기를 3번만 해,
 //  모퉁이를 도는 격자 경로를 모두 버려 닫힌 문 쪽으로 걷지도 못했다(dist00 문-0 → '뿌리 연결 절단'). 목표로 가는 길이 없을 때만
 //  가장 가까운 닫힌 문의 이쪽 문턱(게임 canUse 와 같은 .9칸 앞)까지 걸어가 연다. 열린 뒤에는 R75 가 그대로 이어 간다.
-let doorPlanAt=0,doorWalkUntil=0,portalWaitAt=0,portalWaitKey='';
+let doorPlanAt=0,doorWalkUntil=0;
 // 목표(제단)가 준비됐는데 닫힌 문 너머라 길이 없을 때도 같은 문 열기로 넘긴다(R75·나침반 목표가 출구가 아니어도; dist00 문-0 뒤 '뿌리 연결 절단').
 function objectiveBlocked(){try{if(typeof storyReady!=='function'||!room?.objective||!storyReady(regionById?.[zone]))return false;if(typeof findPath==='function'&&findPath(player,room.objective,room,.31)?.length)return false;stats.guideObjectiveDoor=(stats.guideObjectiveDoor||0)+1;return true;}catch(e){fail(e);return false;}}
 function guideDoorStep(target){try{const W=window.__STORYWORLD_WORLD_R74__,pt=target||window.__STORYWORLD_GUIDE_R75__?.currentGoal?.()?.point;if(!W||!pt)return false;
@@ -437,10 +437,6 @@ if(typeof guideStep==='function'){const gsBase=guideStep;guideStep=function(...a
  try{if(enteringNow())return;}catch(_){}
  // 문까지 걷는 동안(최대 6초)은 원래 길잡이·구역 길잡이가 길을 지우거나 다시 짜지 않게 둔다(0.5초마다 덮어써 제자리걸음).
  try{if(time<doorWalkUntil&&route?.length&&guide&&!nearestEnemy?.(8))return;}catch(_){}
- // R138: 허브·일반 지역에서도 길잡이가 포탈 앞에 닿으면 1.2초 뒤 스스로 들어간다(R83 은 E 를 기다려 허브에서 30초 넘게 멈췄다).
- try{if(prefs.guide&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&!nearestEnemy?.(8)){const g=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();
-  if(g?.kind==='portal'&&g.point&&g.direction&&Math.hypot(g.point.x-player.x,g.point.y-player.y)<=(g.reach||1.6)){if(!portalWaitAt||portalWaitKey!==zone+':'+g.direction){portalWaitAt=time;portalWaitKey=zone+':'+g.direction;}
-   else if(time-portalWaitAt>=1.2){portalWaitAt=0;stats.guidePortalAuto=(stats.guidePortalAuto||0)+1;guideTravel(g.direction);return;}}else portalWaitAt=0;}}catch(e){fail(e);}
  try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true&&window.__STORYWORLD_WORLD_COMBAT_R78__?.controlled?.(room)===true&&!r75Objective()&&!(nearestEnemy?.(8)?false:objectiveBlocked())){wardStep();return;}}catch(e){fail(e);}
  try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&!nearestEnemy?.(8)&&time>=doorPlanAt){const viaR75=r75Objective(),viaObj=!viaR75&&objectiveBlocked();if(viaR75||viaObj){doorPlanAt=time+.5;if(guideDoorStep(viaObj?room.objective:undefined))return;}}}catch(e){fail(e);}
  const r=gsBase.apply(this,a);try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true)extendGuide();}catch(e){fail(e);}return r;};}

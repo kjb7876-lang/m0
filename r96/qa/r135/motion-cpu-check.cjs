@@ -9,7 +9,7 @@ let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.l
 const v=fs.readFileSync(path.join(SRC,'visual-r119.js'),'utf8');
 check('runtime copy matches client-source',v===fs.readFileSync(path.join(RT,'visual-r119.js'),'utf8'));
 check('walk only when the hero actually moved (not the bare moving flag while blocked)',/const movingNow=\(\(typeof time==='number'\?time:0\)-\(walkState\.movedAt\?\?-9\)<\.15\);/.test(v)&&!/const movingNow=player\.moving\|\|/.test(v));
-check('Gemini walk rows anchored at the sheet foot point (96,226) with one scale (body 180 px)',/ax=\(frame%\(sh\.cols\|\|8\)\)\*cw\+96,ay=226,k=want\/180/.test(v));
+check('Gemini walk rows anchored at the sheet foot point (96,226) with one scale per sheet (R140: measured body height, 180 px nominal)',/ax=\(frame%\(sh\.cols\|\|8\)\)\*cw\+96,ay=226,k=want\/sheetBody\(im,sh\.cols\|\|8,sh\.rows\|\|2\)/.test(v)&&/function sheetMeasure\(im,cols,rows\)\{let v=sheetMemo\.get\(im\);if\(v\)return v;v=\{body:180,foot:226\}/.test(v));
 check('slayer atlas cells use the preloaded new still even before the game cache has it',/r134Injected:true/.test(v)&&/return\{\.\.\.frame,path:it\.path,assetFrame:/.test(v));
 check('replacement stills widen the game crop to their own outline (no cut heads/feet), feet and scale kept',/function cropSwap\(frame\)/.test(v)&&/pivot:\[a\.pivot\[0\]\+\(x-nx\),a\.pivot\[1\]\+\(y-ny\)\]/.test(v)&&/atlasSwap\(res\?\.frame\|\|frame\)\|\|cropSwap\(res\?\.frame\|\|frame\)/.test(v));
 check('runtime name for the 338 set matches the generator (d338-)',/hero_direction338\\\/\/\.test\(k\)\?'d338-':''/.test(v)&&fs.readFileSync(path.join(REPO,'scripts','r130-hero-sheet.py'),'utf8').includes("'d338-' if '/hero_direction338/' in orig"));

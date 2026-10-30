@@ -202,7 +202,7 @@
   if(z.props?.length){const cells=new Set(L.floorCells.map(([a,b])=>K(a,b))),inner=(a,b)=>[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([dx,dy])=>cells.has(K(a+dx,b+dy)));
    const keep=[L.entry,x.exit,x.dais&&{...x.dais,r:10},x.save,...(x.chests||[]),...(x.landings||[]),...r.props.filter(p=>p.r115Clue||p.r115Stmt!=null)].filter(Boolean);
    const rr=rng(hash(z.id+':props')),cand=L.floorCells.filter(([a,b])=>inner(a,b)).map(([a,b])=>({x:a+.5,y:b+.5,k:rr()})).sort((a,b)=>a.k-b.k),used=[];
-   for(const[kind,count]of z.props){let c=0;for(const q of cand){if(c>=count)break;if(keep.some(p=>Math.hypot(p.x-q.x,p.y-q.y)<(p.r||2.6))||used.some(p=>Math.hypot(p.x-q.x,p.y-q.y)<3))continue;used.push(q);r.props.push(deco(z.id+':s:'+kind+':'+c,kind,q.x,q.y));c++;n++;}}}
+   for(const[kind,count0]of z.props){const count=Math.ceil(count0/2);/* R140: 흩어 놓는 소품은 절반만, 서로 4.5칸 떨어뜨려 남발하지 않게 */let c=0;for(const q of cand){if(c>=count)break;if(keep.some(p=>Math.hypot(p.x-q.x,p.y-q.y)<(p.r||2.6))||used.some(p=>Math.hypot(p.x-q.x,p.y-q.y)<4.5))continue;used.push(q);r.props.push(deco(z.id+':s:'+kind+':'+c,kind,q.x,q.y));c++;n++;}}}
   if(z.outdoor)delete r.r99Trees;
   r.samongR115={zone:z.id,props:n,clues:(z.clues||[]).length};}
 

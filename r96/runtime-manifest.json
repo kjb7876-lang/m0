@@ -19469,8 +19469,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563338,
-      "sha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d"
+      "bytes": 6563385,
+      "sha256": "1ace3870589edce2fb4f65988e01ed5d568e3618f40617ad3891e9a9ef6f4b63"
     },
     {
       "path": "mobs-r109.js",
@@ -19544,8 +19544,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 67439,
-      "sha256": "fb09fa31739d4f73e736b50841c7ca41bf83a720c3ff79a01a1bff82ad72177c"
+      "bytes": 66674,
+      "sha256": "5d963cbfd9cde69545903cc138448ebfdd2acaf7277c4dbbeff8099ce07cd0ec"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -19561,6 +19561,11 @@
       "path": "props-static-r105.js",
       "bytes": 6482,
       "sha256": "29c89a776282d09cbe54b6392828bc8fa26596f63c1463697bee5cf72332f490"
+    },
+    {
+      "path": "props-variety-r140.js",
+      "bytes": 2841,
+      "sha256": "7e1499a3ecbccea82387c5609a22b901b153c8eb64f510fb313339b629584adb"
     },
     {
       "path": "render-compat-r83.js",
@@ -19599,8 +19604,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 41295,
-      "sha256": "3783499ad7e5226d9e1b77e8cae962ed8ef5758e039f8fd9db77858230151ec6"
+      "bytes": 41423,
+      "sha256": "3fa51ddd4fd1d76fcf72690b2004405e50718e04319f166b7f647d14311d38e4"
     },
     {
       "path": "scene-props-r117.js",
@@ -19614,8 +19619,8 @@
     },
     {
       "path": "story-batch-r139.js",
-      "bytes": 4380,
-      "sha256": "ede22704de68e6d21722a1aba556debeb468c0b6217dc506958697a686083285"
+      "bytes": 5501,
+      "sha256": "4c5b13c880cb752fb36163e2894b897256d116c64692ef5482609618363ae09e"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -19674,8 +19679,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 39272,
-      "sha256": "d5e6e6672ff129a2e8317b1bc783d81454eb56cdf4395ec4ff4bbf188feee531"
+      "bytes": 42011,
+      "sha256": "f738d96db730804b1f137de39df62c0f2ba69866f01227b27fa5d9a0a9654264"
     },
     {
       "path": "visual-r90-world.js",
@@ -19749,8 +19754,8 @@
     },
     {
       "path": "world-environment-r81.js",
-      "bytes": 10233,
-      "sha256": "fae6cb6ccfb5b506abc7692fdd809bc9708cc886b5bb244bde44055c8092a558"
+      "bytes": 10317,
+      "sha256": "cea1ba3c31031c1ff85486b6918834ad9b8e199692859d827d749a13af51c5c0"
     },
     {
       "path": "world-layout-r78.js",
@@ -19788,9 +19793,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3957,
-  "totalBytes": 779545555,
-  "webHTMLSha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d",
+  "fileCount": 3958,
+  "totalBytes": 779551750,
+  "webHTMLSha256": "1ace3870589edce2fb4f65988e01ed5d568e3618f40617ad3891e9a9ef6f4b63",
   "largest": [
     {
       "path": "index.html",
