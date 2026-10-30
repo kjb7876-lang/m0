@@ -8,7 +8,7 @@ ok('index.html loads mobile-settings-r142 before audio-r98',(html.indexOf('./mob
 ok('public verify list includes mobile-settings-r142',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'mobile-settings-r142.js'"));
 const src=C('mobile-settings-r142.js');
 ok('condensing only on mobile',/prefs\.on&&mobile\(\)/.test(src));
-ok('quick settings keep graphics row and volumes, rest folded into 더 보기',/rows\[0\],vol,more/.test(src)&&src.includes("'moreSettingsR142'"));
+ok('quick settings keep graphics row, volumes (and R150 lag row), rest folded into 더 보기',/rows\[0\],vol,(?:quick\.querySelector\(':scope>#perfRowR150'\),)?more/.test(src)&&src.includes("'moreSettingsR142'"));
 ok('R137 box is placed inside the settings panel',/settingsR118'\)\?\.parentElement\|\|document\.getElementById\('detailSettingsR114'\)/.test(C('combat-r137.js')));
 function run(state){let titled=0,toasts=[];const sb={window:{__STORYWORLD5__:{returnToTitle:()=>{titled++;return true;}}},localStorage:{getItem:()=>null,setItem(){}},document:{},
  started:true,loading:false,storyScene:null,room:{},confirm:()=>state.confirm!==false,toast:t=>toasts.push(t),showSettings(){},...state.sb};

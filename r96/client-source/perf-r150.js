@@ -6,6 +6,7 @@
 //  · 가벼운 화면: 녹 얼룩·바닥 안개·불티(R123), 필름 노이즈(R114), 떠다니는 먼지(R100), 주변 환경빛(R62), 게임 화면 색 보정 필터를 끈다.
 //    어둠(비네트)·횃불 빛·빛 웅덩이는 길과 적이 보이게 하는 것이라 남긴다. 판정·피해·저장·그림 자산은 건드리지 않는다.
 //  · 자동 켜기는 사람이 쓰는 브라우저에서만 한다(navigator.webdriver 인 자동 시험 브라우저는 그래픽 카드 없이 소프트웨어로 그려 장면 간격이 실제와 무관하다).
+//  · R153: 성능 표시는 왼쪽 위 목표 안내와 겹치지 않게 길잡이 나침반 아래(위에서 150px)에 둔다.
 //  · 설정 간이설정에 '렉 줄이기 자동/켜기/끄기'와 '초당 장면 수 표시'(왼쪽 위 작은 글씨: 장면/초 · 한 장면에 걸린 시간 ms). storyworld.r150.perf 에 저장.
 (()=>{'use strict';
 if(window.__STORYWORLD_PERF_R150__)return;
@@ -22,7 +23,7 @@ function css(){if(document.getElementById('perfR150Css'))return;const s=document
  s.textContent='html.swLiteR150 #darkR123 [data-d="rust"],html.swLiteR150 #darkR123 [data-d="fog"],html.swLiteR150 #darkR123 [data-d="cv"],'
  +'html.swLiteR150 #cinemaR114 [data-c="grain"],html.swLiteR150 #ambienceR100,html.swLiteR150 #passiveEnvironmentR62{display:none!important}'
  +'html.swLiteR150 #phase1-webgl{filter:none!important}'
- +'#perfMeterR150{position:fixed;left:6px;top:6px;z-index:99999;pointer-events:none;font:12px/1.3 monospace;color:#d8f0d0;background:rgba(0,0,0,.55);padding:2px 6px;border-radius:4px}'
+ +'#perfMeterR150{position:fixed;left:8px;top:150px;z-index:99999;pointer-events:none;font:12px/1.3 monospace;color:#d8f0d0;background:rgba(0,0,0,.55);padding:2px 6px;border-radius:4px}'
  +'#perfMeterR150[hidden]{display:none}';document.head.appendChild(s);}
 function setLite(on,why){stats.lite=!!on;stats.reason=why||'';document.documentElement.classList.toggle('swLiteR150',!!on);meterText();}
 function apply(){setLite(prefs.lite==='on'||(prefs.lite==='auto'&&stats.autoOn>0),prefs.lite==='on'?'setting':stats.autoOn?'auto':'');}
@@ -44,7 +45,7 @@ function settingsSection(){const host=document.getElementById('quickSettingsR114
  const L={auto:'자동',on:'켜기',off:'끄기'};
  row.innerHTML='렉 줄이기(안개·불티·노이즈 끄기) '+Object.keys(L).map(k=>'<button type="button" data-r150-lite="'+k+'" aria-pressed="'+(prefs.lite===k)+'" class="'+(prefs.lite===k?'active':'')+'">'+L[k]+'</button>').join(' ')
   +' <label><input type="checkbox" data-r150-meter '+(prefs.meter?'checked':'')+'> 초당 장면 수 표시</label>';
- host.appendChild(row);
+ const g=host.querySelector(':scope>.r114-row');if(g)g.after(row);else host.appendChild(row);// R153: 그래픽 품질 바로 아래(휴대폰 간이설정에서도 접히지 않음)
  row.querySelectorAll('[data-r150-lite]').forEach(b=>b.onclick=()=>{prefs.lite=b.dataset.r150Lite;save();apply();row.querySelectorAll('[data-r150-lite]').forEach(x=>{const on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});});
  const m=row.querySelector('[data-r150-meter]');m.onchange=()=>{prefs.meter=m.checked;save();meterText();};}
 try{css();apply();requestAnimationFrame(loop);
