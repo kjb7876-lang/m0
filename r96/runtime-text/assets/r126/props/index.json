@@ -108,6 +108,33 @@
      942
     ]
    }
+  },
+  "badge": {
+   "path": "assets/r126/props/badge.webp",
+   "size": [
+    512,
+    237
+   ],
+   "bytes": 25464,
+   "sha256": "fd12f3e8efd3654d060607145cbd6f6f55728f7fd65afd5a9f4d3d1507ae0281",
+   "use": "S-02 밤의 학교 바닥에 떨어진 은재 명찰(원문 은재 출석부·음악실 대목; R133)",
+   "source": {
+    "drive": "StoryWorld-eunjae-name-badge-20261030.zip",
+    "driveId": "1r05TbBsvUtssrX9ufYDG4v2h1PsHPuox",
+    "file": "eunjae-name-badge-original.png",
+    "sha256": "995629935f2ea8398c39010cabcddb7b83750cd6d915d4ffa98ca686b7038414",
+    "bytes": 1754122,
+    "size": [
+     1536,
+     1024
+    ],
+    "crop": [
+     97,
+     201,
+     1439,
+     822
+    ]
+   }
   }
  }
 }
