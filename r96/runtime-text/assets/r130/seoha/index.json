@@ -1,0 +1,858 @@
+{
+ "revision": "R130",
+ "hero": "seoha",
+ "source": {
+  "files": {
+   "README.txt": "c777c2011cf007ae328c328f16ec0c18e51826cfecfb378979a2e197c092ed36",
+   "SPEC.json": "632a5f647d531883b032cb29785f63d00d18715e1019c6852cdc7fb6291abb1b",
+   "HERO-seoha-attack-e.png": "fbc511b9d78345c2286b6c58dc4fa68094acf2dc4a9df22bdc197b6d1ac6c87c",
+   "HERO-seoha-attack-n.png": "9f98c3b679b3a38958ce59ae2ab81fb0e0ea37f032da24bcf2b4c364b0479751",
+   "HERO-seoha-attack-ne.png": "2a332c1291b597b9c96075374fa4dc4064ecf72a2be69d8499bb37b571ef57d6",
+   "HERO-seoha-attack-s.png": "0024a6ab43fce40ba0fcd1076bcfaa6c1ef8c3e046786e2d33663b771de57e1a",
+   "HERO-seoha-attack-se.png": "90bce71ab68cf9e6dfea518f7cb987eddd68d8795baa2034eda73ea1d5d5bf59",
+   "HERO-seoha-death-e.png": "53adcbb626529c16a251c186ee8c5f54f7e28e787e48112f35c6e4554b9be69a",
+   "HERO-seoha-death-n.png": "f8b2c488989126d96afd2658489587bfc6c0f1c7d16bf943bcfe47818e8f22c5",
+   "HERO-seoha-death-ne.png": "92b3ee1c0469712212631958c7d66bd9bf94527468805a00a579ff31609d0321",
+   "HERO-seoha-death-s.png": "3a5b187620833d4cea790ae06ba8c9aca9341e1219ba9360c8db79aecb2e3f1a",
+   "HERO-seoha-death-se.png": "abbe1b4bded7ada6970257c4f64c2c22816f6e520f7efa31cbd9c76ad8218d63",
+   "HERO-seoha-hit-e.png": "b7ed025fe63468096a8cf155c693830f69b767a9cd0da2b1586996a34dafb6ad",
+   "HERO-seoha-hit-n.png": "85d45871ae521e032604c7081669ffaf31e0f591450405d68c882bb71a66a6bc",
+   "HERO-seoha-hit-ne.png": "d70059826c662230d12f4e6dab7ea532546e3152837c93a5a04a011c5e52fa5d",
+   "HERO-seoha-hit-s.png": "c737435bf974579caf591e755d047dbae898e330d0a9d5e98f743138720777fb",
+   "HERO-seoha-hit-se.png": "6bdc3b8e537e30601bab7e41f42679d34b9b4efe8c9d398f8c166be6dfb457c3",
+   "HERO-seoha-idle-e.png": "5ea9f00fbb0bd56d4886ea79c56e9b39ef584b6b63ccb3f5dc8007209dc0f49e",
+   "HERO-seoha-idle-n.png": "cdd064c1d61756af6d373dd816d5cdc0dc503cb825e87e7dd79c4aa68359a2b1",
+   "HERO-seoha-idle-ne.png": "4b2642f7a9473a9df0dd05f411a3edb49b7504e4030999dc2c216fc1a2618fcc",
+   "HERO-seoha-idle-s.png": "952d17ce68d4308c8d044a82013ac11d9677b59ee331e55049f8193917d02149",
+   "HERO-seoha-idle-se.png": "b095a66178806bbe6d07cfd4f31ebf455b41f335f89aab5809ab70082b77bcba",
+   "HERO-seoha-walk-e.png": "da4befb539633fd0a771f609194200056c0ef776ecb7b381d97511ab495d8dc3",
+   "HERO-seoha-walk-n.png": "eda17753214087756c6bb58811f6395850aef01dcdf5fd31e4906fdc0550b432",
+   "HERO-seoha-walk-ne.png": "e2f2d044fd84ce2e653e5be3449a93d3c589250c0e080164dd5b35457aec6de4",
+   "HERO-seoha-walk-s.png": "418a9538694414be62728c720124eff7e570e57c5311458413f570ae5c8ea17c",
+   "HERO-seoha-walk-se.png": "7e2a93aa2c23d84feb5c803d01ade62a104824d86739e63a281a219fb33e8f0a"
+  }
+ },
+ "keep": [
+  "actions-v3126/seoha-ultimate-"
+ ],
+ "walk": {
+  "s": {
+   "path": "assets/r130/seoha/walk-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "1ffa8ed116434a02e27f68ea86dfd6a1820a3314e7cd3590f26bcf3faa522ece"
+  },
+  "se": {
+   "path": "assets/r130/seoha/walk-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "f543f2f8c5ff70417fbc76921536700c7b3f1c7cb83e6aa13440b58a0d476f0b"
+  },
+  "e": {
+   "path": "assets/r130/seoha/walk-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "130fc8e3adae442e2da20ebb9d2f9a191f51ed865b74113f756b3192cf350f08"
+  },
+  "ne": {
+   "path": "assets/r130/seoha/walk-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "28802ce80ee112a0346dbbc4902db81059dbe3e7aa674f425716b120871db37e"
+  },
+  "n": {
+   "path": "assets/r130/seoha/walk-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "e22725dfdf09fda064b99cd6dae2d83f888380bf983b1bfdedb3998af7f5a8cf"
+  }
+ },
+ "swap": {
+  "assets/hero_direction337/seoha/s.webp": {
+   "path": "assets/r130/seoha/g-s.webp",
+   "from": "HERO-seoha-idle-s.png#0",
+   "mirror": false,
+   "sha256": "dc1daa967727c77d35fe07910d0078ee318eeca61388e49a312132a392619dee",
+   "bytes": 42120,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     251.5,
+     496
+    ],
+    "visibleHeight": 480.0
+   }
+  },
+  "assets/hero_direction337/seoha/n.webp": {
+   "path": "assets/r130/seoha/g-n.webp",
+   "from": "HERO-seoha-idle-n.png#0",
+   "mirror": false,
+   "sha256": "0e887669155c032fe3fd0bf9b84089e64daaaab6054aae0fe90d623ede001b78",
+   "bytes": 40488,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     247.8,
+     496
+    ],
+    "visibleHeight": 482.7
+   }
+  },
+  "assets/hero_direction334/seoha/e.webp": {
+   "path": "assets/r130/seoha/g-e.webp",
+   "from": "HERO-seoha-idle-e.png#0",
+   "mirror": false,
+   "sha256": "ce0f2988cf70d53396bbaa60ed9fec79542c6c5ebe874b038d3d20a151dab6a9",
+   "bytes": 31444,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     216.1,
+     490
+    ],
+    "visibleHeight": 464.6
+   }
+  },
+  "assets/hero_direction334/seoha/w.webp": {
+   "path": "assets/r130/seoha/g-w.webp",
+   "from": "HERO-seoha-idle-e.png#0",
+   "mirror": true,
+   "sha256": "ee21b9e4cb9872d6de8b8f7ec829b9368a80255deb7e6e6023b5ecf7298f8e42",
+   "bytes": 30998,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     297.7,
+     490
+    ],
+    "visibleHeight": 462.5
+   }
+  },
+  "assets/hero_direction334/seoha/ne.webp": {
+   "path": "assets/r130/seoha/g-ne.webp",
+   "from": "HERO-seoha-idle-ne.png#0",
+   "mirror": false,
+   "sha256": "163208d46132f1cea46edb1d475bd731bc205f0ddb1ed8b1ed1aef9d536a089f",
+   "bytes": 34408,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     237.5,
+     491
+    ],
+    "visibleHeight": 474.2
+   }
+  },
+  "assets/hero_direction334/seoha/nw.webp": {
+   "path": "assets/r130/seoha/g-nw.webp",
+   "from": "HERO-seoha-idle-ne.png#0",
+   "mirror": true,
+   "sha256": "ecfc38d8acabb803c04f3d6e8cad973bfb1cd15438b5161a7cd90feedc01a620",
+   "bytes": 34852,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     264.4,
+     490
+    ],
+    "visibleHeight": 473.2
+   }
+  },
+  "assets/hero_direction334/seoha/se.webp": {
+   "path": "assets/r130/seoha/g-se.webp",
+   "from": "HERO-seoha-idle-se.png#0",
+   "mirror": false,
+   "sha256": "8e2b0e1b4e8a6c821be99d89200bfc7e2b640eba0346032476b1cfdc730775a1",
+   "bytes": 36668,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     234.2,
+     490
+    ],
+    "visibleHeight": 465.6
+   }
+  },
+  "assets/hero_direction334/seoha/sw.webp": {
+   "path": "assets/r130/seoha/g-sw.webp",
+   "from": "HERO-seoha-idle-se.png#0",
+   "mirror": true,
+   "sha256": "ff191f624ce5f8855001096d0882186204f57b40a2ba35736de30f77f850e492",
+   "bytes": 35866,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     272.1,
+     490
+    ],
+    "visibleHeight": 464.6
+   }
+  },
+  "assets/heroes/normalized/directions/seoha-front.webp": {
+   "path": "assets/r130/seoha/directions-seoha-front.webp",
+   "from": "HERO-seoha-idle-s.png#0",
+   "mirror": false,
+   "sha256": "570765abca8094fc46ded0396956990c7d5d9e5de08cc27194b5acec66f2a61f",
+   "bytes": 36460,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     287.1,
+     471
+    ],
+    "visibleHeight": 421.0
+   }
+  },
+  "assets/heroes/normalized/directions/seoha-back.webp": {
+   "path": "assets/r130/seoha/directions-seoha-back.webp",
+   "from": "HERO-seoha-idle-n.png#0",
+   "mirror": false,
+   "sha256": "19e26a12bda27ef18e9e3a138c4e889e173e7df51164dcf15045f5691ed2c1f3",
+   "bytes": 34922,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     273.0,
+     471
+    ],
+    "visibleHeight": 423.3
+   }
+  },
+  "assets/heroes/normalized/directions/seoha-left.webp": {
+   "path": "assets/r130/seoha/directions-seoha-left.webp",
+   "from": "HERO-seoha-idle-e.png#0",
+   "mirror": true,
+   "sha256": "533c6291f8a4c4dcca5b16e611bc5f3ffa512a24fb39eaf0eeb7718bc8409448",
+   "bytes": 27740,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     237.9,
+     475
+    ],
+    "visibleHeight": 423.3
+   }
+  },
+  "assets/heroes/normalized/directions/seoha-right.webp": {
+   "path": "assets/r130/seoha/directions-seoha-right.webp",
+   "from": "HERO-seoha-idle-e.png#0",
+   "mirror": false,
+   "sha256": "28cd57cfea75a8ffbae63f2a5bf316ac915325364fe5b3d5fc21c44ea10919cc",
+   "bytes": 27894,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     274.4,
+     476
+    ],
+    "visibleHeight": 424.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-attack-front.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-attack-front.webp",
+   "from": "HERO-seoha-attack-s.png#3",
+   "mirror": false,
+   "sha256": "e8def5e6bce05543d3cf8eeff2164e37e61ec625c186266663576c547fa14357",
+   "bytes": 37132,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     280.4,
+     482
+    ],
+    "visibleHeight": 426.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-attack-back.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-attack-back.webp",
+   "from": "HERO-seoha-attack-n.png#3",
+   "mirror": false,
+   "sha256": "49b291148292a4d4384ff8a38f79b43d071a8a517a9182282b368eaa8bdeed80",
+   "bytes": 35436,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     273.5,
+     473
+    ],
+    "visibleHeight": 435.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-attack-left.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-attack-left.webp",
+   "from": "HERO-seoha-attack-e.png#3",
+   "mirror": true,
+   "sha256": "5ed5ffc07b15e38f824b4cf79c1135ea64c46c5ee5c31493428c66b7d79156b9",
+   "bytes": 29060,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     236.2,
+     478
+    ],
+    "visibleHeight": 440.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-attack-right.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-attack-right.webp",
+   "from": "HERO-seoha-attack-e.png#3",
+   "mirror": false,
+   "sha256": "9705103038e5c0d126fff582a98c211db80216bae825d15cf6c6016e3c8422bb",
+   "bytes": 28460,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     274.2,
+     474
+    ],
+    "visibleHeight": 429.7
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-skill-front.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-skill-front.webp",
+   "from": "HERO-seoha-attack-s.png#2",
+   "mirror": false,
+   "sha256": "6b45ea5f5a48c0a34c867a6c10f1bd90eb268d8d48a302d874e03064365ab354",
+   "bytes": 38706,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     286.9,
+     479
+    ],
+    "visibleHeight": 444.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-skill-back.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-skill-back.webp",
+   "from": "HERO-seoha-attack-n.png#2",
+   "mirror": false,
+   "sha256": "76b2984e035334773a54c62dc878f9b3c4454e88337dbbdd26bf88f553b87b61",
+   "bytes": 35764,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     273.8,
+     474
+    ],
+    "visibleHeight": 437.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-skill-left.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-skill-left.webp",
+   "from": "HERO-seoha-attack-e.png#2",
+   "mirror": true,
+   "sha256": "6a6a221b937b4a98c862a97188e692ae68d38babf7d2691455203215912d3c90",
+   "bytes": 29940,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     236.5,
+     479
+    ],
+    "visibleHeight": 444.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-skill-right.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-skill-right.webp",
+   "from": "HERO-seoha-attack-e.png#2",
+   "mirror": false,
+   "sha256": "b771c23235c6988303f9d66a517f72d872a0aa737574c501244f86e91340fa9f",
+   "bytes": 29958,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     275.3,
+     477
+    ],
+    "visibleHeight": 441.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-guard-front.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-guard-front.webp",
+   "from": "HERO-seoha-attack-s.png#0",
+   "mirror": false,
+   "sha256": "6aefbe511fa21e6a3b1d556103ddf72e94a678cff33bdeccf412e8b72f23503f",
+   "bytes": 33028,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     286.4,
+     487
+    ],
+    "visibleHeight": 411.7
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-guard-back.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-guard-back.webp",
+   "from": "HERO-seoha-attack-n.png#0",
+   "mirror": false,
+   "sha256": "8b3e792724d603710d7f34a1c4867c897effb6168bc13848b561464716f71990",
+   "bytes": 31864,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     272.3,
+     487
+    ],
+    "visibleHeight": 416.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-guard-left.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-guard-left.webp",
+   "from": "HERO-seoha-attack-e.png#0",
+   "mirror": true,
+   "sha256": "3e54e75bd5e901f908945d04d028bbc2e70a4eeef3503372f24a24a3498a8c1c",
+   "bytes": 25978,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     237.0,
+     488
+    ],
+    "visibleHeight": 415.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-guard-right.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-guard-right.webp",
+   "from": "HERO-seoha-attack-e.png#0",
+   "mirror": false,
+   "sha256": "038cb5928c7f6ee42546418874bf11e1ef771fb4113f3cf84d3e31c9ecfa7d69",
+   "bytes": 26172,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     276.0,
+     488
+    ],
+    "visibleHeight": 418.3
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-dash-front.webp",
+   "from": "HERO-seoha-walk-s.png#3",
+   "mirror": false,
+   "sha256": "8765ade35c4716f455fc0c58f3214c12ccab71985fa83c386d427125fb171a15",
+   "bytes": 34554,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     285.5,
+     488
+    ],
+    "visibleHeight": 440.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-dash-back.webp",
+   "from": "HERO-seoha-walk-n.png#3",
+   "mirror": false,
+   "sha256": "593eb10fff385eff0064f2691eeea38380e45d4821988769117381d2ebb2e36b",
+   "bytes": 36062,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     286.8,
+     502
+    ],
+    "visibleHeight": 467.1
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-dash-left.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-dash-left.webp",
+   "from": "HERO-seoha-walk-e.png#3",
+   "mirror": true,
+   "sha256": "e7a7c4f330a0dfe2ff46b5d40556ac566a08d23a29d81111946e03b1f32caeef",
+   "bytes": 26704,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     241.5,
+     478
+    ],
+    "visibleHeight": 449.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/seoha-dash-right.webp": {
+   "path": "assets/r130/seoha/actions-consistent-seoha-dash-right.webp",
+   "from": "HERO-seoha-walk-e.png#3",
+   "mirror": false,
+   "sha256": "ef3daf20790c942276de761dd32ff366f01465efbb43f59d7ea006c12790dedc",
+   "bytes": 25802,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     263.6,
+     477
+    ],
+    "visibleHeight": 442.6
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-hurt-front.webp",
+   "from": "HERO-seoha-hit-s.png#1",
+   "mirror": false,
+   "sha256": "139fb4b86bae39eeb6121494bf3c4967d9a42a5b25a0c29904c4a4aa6ec735dc",
+   "bytes": 22084,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     288.5,
+     511
+    ],
+    "visibleHeight": 292.0
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-move-front.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-move-front.webp",
+   "from": "HERO-seoha-walk-s.png#2",
+   "mirror": false,
+   "sha256": "cd75fa7bb95af8461a524b118679d440b77228e08c6e90c064e0f6ef5b75c7ba",
+   "bytes": 25664,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     247.3,
+     510
+    ],
+    "visibleHeight": 331.7
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-hurt-back.webp",
+   "from": "HERO-seoha-hit-n.png#1",
+   "mirror": false,
+   "sha256": "687d2246cbf15bf07a9e1eed2a51a58c0622a0f04637085fff64030bcd4863cd",
+   "bytes": 35632,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     254.0,
+     464
+    ],
+    "visibleHeight": 475.6
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-move-back.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-move-back.webp",
+   "from": "HERO-seoha-walk-n.png#2",
+   "mirror": false,
+   "sha256": "91c4b78d2b227aa923b32edd468a7a3d00d0af68ea7fcaf4b6793835f3792261",
+   "bytes": 24502,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     248.1,
+     510
+    ],
+    "visibleHeight": 331.7
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-hurt-left.webp",
+   "from": "HERO-seoha-hit-e.png#1",
+   "mirror": true,
+   "sha256": "addf64b4d4c04b0636d3b595b44687629fdf85871e9c1106a08360ffe6c35522",
+   "bytes": 31580,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     268.5,
+     479
+    ],
+    "visibleHeight": 500.8
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-move-left.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-move-left.webp",
+   "from": "HERO-seoha-walk-e.png#2",
+   "mirror": true,
+   "sha256": "4259d7fd951db6a9dac96de65f09b8f51d237f8ea30515811d859ac7aa243188",
+   "bytes": 19038,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     306.0,
+     507
+    ],
+    "visibleHeight": 336.0
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-hurt-right.webp",
+   "from": "HERO-seoha-hit-e.png#1",
+   "mirror": false,
+   "sha256": "ffe876e86f015664a38afc918db771d7fab7a58dd92db74d43f81ffa825cfc87",
+   "bytes": 20872,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     253.3,
+     511
+    ],
+    "visibleHeight": 346.8
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/seoha-move-right.webp": {
+   "path": "assets/r130/seoha/actions-v3126-seoha-move-right.webp",
+   "from": "HERO-seoha-walk-e.png#2",
+   "mirror": false,
+   "sha256": "3a3699876d942bb319fcfcb7e6d706d95602287eb82243776ae1c093624ac935",
+   "bytes": 19234,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     215.2,
+     507
+    ],
+    "visibleHeight": 336.0
+   }
+  },
+  "assets/heroes/normalized/actions-directional/seoha-attack-left.webp": {
+   "path": "assets/r130/seoha/actions-directional-seoha-attack-left.webp",
+   "from": "HERO-seoha-attack-e.png#3",
+   "mirror": true,
+   "sha256": "016cce89cdddc733d91a4c895afa9b73aa78e093ec5c616f7ab48937a7383f6b",
+   "bytes": 23432,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     290.9,
+     393
+    ],
+    "visibleHeight": 361.0
+   }
+  },
+  "assets/heroes/normalized/actions-directional/seoha-attack-right.webp": {
+   "path": "assets/r130/seoha/actions-directional-seoha-attack-right.webp",
+   "from": "HERO-seoha-attack-e.png#3",
+   "mirror": false,
+   "sha256": "7e7082d683f67dc9c16a0f7f61a9af8c66a172e9007a54e0b86363f5405aa6a9",
+   "bytes": 23292,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     220.1,
+     393
+    ],
+    "visibleHeight": 361.0
+   }
+  }
+ },
+ "idle": {
+  "s": {
+   "path": "assets/r130/seoha/idle-s.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 95.2,
+   "footY": 225,
+   "refBody": 182,
+   "sha256": "490d957e476e8e6d83aeff239c456922b23bbc00c3d8f3c40bd1fbf43d936704"
+  },
+  "se": {
+   "path": "assets/r130/seoha/idle-se.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 96.3,
+   "footY": 226,
+   "refBody": 181,
+   "sha256": "777ec6d0f9d2156e735d16a405e0316b45b23e7bab957ab73f98ff148fc91c91"
+  },
+  "e": {
+   "path": "assets/r130/seoha/idle-e.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 100.0,
+   "footY": 227,
+   "refBody": 181,
+   "sha256": "bb7743614af7e6134e5fa340cd0c2b9d8090f4cda4abb2abaa806b2d5200df95"
+  },
+  "ne": {
+   "path": "assets/r130/seoha/idle-ne.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 91.1,
+   "footY": 225,
+   "refBody": 180,
+   "sha256": "086599c4cb5d9cebefb6773ab78e27962123bdbad5f708bcd942cc14837e8072"
+  },
+  "n": {
+   "path": "assets/r130/seoha/idle-n.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 99.6,
+   "footY": 226,
+   "refBody": 181,
+   "sha256": "85782e201d3429ac534dc82a5c7202f81dd7cbe37e1f17d5b10079331092d86e"
+  },
+  "sw": {
+   "path": "assets/r130/seoha/idle-sw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 94.7,
+   "footY": 226,
+   "refBody": 181,
+   "sha256": "01c264b407c7a7ee8cee66a168246b5ed2876350a48ca7586103e208bfe7a9fc"
+  },
+  "w": {
+   "path": "assets/r130/seoha/idle-w.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 91.0,
+   "footY": 227,
+   "refBody": 181,
+   "sha256": "b06d4ba112b6503335ae451499ee5f6fb768842fc9958aca33694b8a1897b4e6"
+  },
+  "nw": {
+   "path": "assets/r130/seoha/idle-nw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 99.9,
+   "footY": 225,
+   "refBody": 180,
+   "sha256": "5c36ef8197bc8df37b8d55f298cc091624334e110006dae7973791fcdbe21c0c"
+  }
+ }
+}

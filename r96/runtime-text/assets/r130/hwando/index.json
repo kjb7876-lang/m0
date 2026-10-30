@@ -1,0 +1,75 @@
+{
+ "revision": "R130",
+ "hero": "hwando",
+ "source": {
+  "files": {
+   "README.txt": "22dbac0af3b6182ae43aa8219e8a134a2920f7dd7d664f9d2b7106d06a317b0c",
+   "SPEC.json": "80d0ef796b9599b78fd7da46d4784e27d17976496c742f0fefc6dc5baad249b0",
+   "HERO-hwando-attack-e.png": "f5e4e027f1d15df92a2e17d9fa8cce370c27caf4cd226f0734a7fff08c742936",
+   "HERO-hwando-attack-n.png": "185f15195b03363b3c8dd9bd3284e5422a4b49562ffde0e1f1faa6e337180109",
+   "HERO-hwando-attack-ne.png": "114525264d09cf2540c82a26803d42145290e43bb63dce7ba85b9e50fdbd1699",
+   "HERO-hwando-attack-s.png": "91eb906be42a1aed34748931a67e4700ae6424b5e2cf4d0a6148a79285d4463c",
+   "HERO-hwando-attack-se.png": "44f6a0bb779b89582c31e0a396ff8496b172308f585cab6cb335a2faad83c380",
+   "HERO-hwando-walk-e.png": "b709454bf5c6abfb0c36b1ddcee07187df46e2adb9c357a7e86f2ca459e15459",
+   "HERO-hwando-walk-n.png": "1fea1489ed11b2052cc00d99c77489d81d95abc503041a7b4d175d05cc690104",
+   "HERO-hwando-walk-ne.png": "481aa12e354560af094009a640cbbe3cfbbcc87ccf26a2749402f15ad4d4b9c6",
+   "HERO-hwando-walk-s.png": "95121be220b3a0d4cafe74ef636a2c4797a045a97be74357dd3c18756314c852",
+   "HERO-hwando-walk-se.png": "0a1a3058784937601f763c7220503d9c2eb1cace88f5ca4964656214c912768c"
+  }
+ },
+ "keep": [],
+ "walk": {
+  "s": {
+   "path": "assets/r130/hwando/walk-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "f1c5369027d5ae7bca4c8c621f903858dfd05594d3bfadc41d0dcaaaa7da8e8a"
+  },
+  "se": {
+   "path": "assets/r130/hwando/walk-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "7e79f1a770b7ba97e12faa110e97244ee2a874cf9c552b2e36026bc849b5d2a9"
+  },
+  "e": {
+   "path": "assets/r130/hwando/walk-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "427566c66fd826cf4a23c4f803ef5c634b838806d29deb05364b98344ad5784a"
+  },
+  "ne": {
+   "path": "assets/r130/hwando/walk-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "97f3a67481de6210772f138a22c17c5a13d4cf3ef7006344f0b5bb8559ea4ee7"
+  },
+  "n": {
+   "path": "assets/r130/hwando/walk-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "f98140fbb975f24ba961adc664f97698c9910282a673f1ec2f25f37c7eb50de5"
+  }
+ },
+ "swap": {},
+ "idle": {}
+}

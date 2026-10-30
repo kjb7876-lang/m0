@@ -1,0 +1,894 @@
+{
+ "revision": "R130",
+ "hero": "lauren",
+ "source": {
+  "files": {
+   "README.txt": "320c37ba7a56d06ec60f4f60eab09a9bd8a021c9467529e90d45e72c99ad835c",
+   "SPEC.json": "fa954db079dbe6fcaacdea3e536ee0904d7762bd5dcf7e6d0c09ae8e0052455a",
+   "HERO-lauren-attack-e.png": "06cf96504cdde348d62b0e829ac16a0c9f828eccb06b388bc20fd6a4b9096e5d",
+   "HERO-lauren-attack-n.png": "460efab7288e0686df22faddcbba1fdcafcaa88bcd4fde00ec58f2b9a14cd9b9",
+   "HERO-lauren-attack-ne.png": "b3b943198681c6bb1b5286cff7b7cf9ee4c1959e0d8c5362a6dad556840e19cb",
+   "HERO-lauren-attack-s.png": "7bb1f12d337fbe180cff71f246f7a6c183bc65f231dc386ce3bc4c06e16f2609",
+   "HERO-lauren-attack-se.png": "4fe7557c9a3e09404ee13c8fe57f468e436f6ff7db24dec39b8f3bf2c952f42f",
+   "HERO-lauren-death-e.png": "ba5bc82a8e6e236267eaa2388d002fee4cfe592ee08caa369780ae91b0d176ed",
+   "HERO-lauren-death-n.png": "822b5b3eb4c25f8ccfdcb10b9e48ede0058ccd567b6cb23c094f263211575fe3",
+   "HERO-lauren-death-ne.png": "6427842932b83022a0b7f152897933e07b54951ce2ced43ca4820bee15422709",
+   "HERO-lauren-death-s.png": "07f05b872fcb0d40ea74cdcba02cb3fdf1dae5f41534defd86d5034cb3758b3f",
+   "HERO-lauren-death-se.png": "c9f8bce38f0b0d602e3154d01f2eba7086d11e3508580e0d7a96e9c22d2061dc",
+   "HERO-lauren-hit-e.png": "f0030ed46cf14a4fdec623d2e04414c31dbd5d444e6b591589665dc67d80e3a7",
+   "HERO-lauren-hit-n.png": "8d18e20ea8ddbe2a36cb3ec325d80f4d0c133c8e2c9a7f8ee5b9a1334e2ff67f",
+   "HERO-lauren-hit-ne.png": "03600436cb0fdd94435238ab308adce1ac7bbe49f7428d49c115362134228653",
+   "HERO-lauren-hit-s.png": "47cb622202efd5b0230e1c785031f3ea57ae1c7326dd6c68cc7c9c06e564f755",
+   "HERO-lauren-hit-se.png": "fca1d40bd1bd4a1c9725e84f2f0dfa2087c3b7952b43e45893f6affe3059bad3",
+   "HERO-lauren-idle-e.png": "657e8e538ff46a616bdd82cb05289a09c4a33fe560b221bdfd5c08f47d2057d4",
+   "HERO-lauren-idle-n.png": "b106df807ec7887a2fc497aa569dd962e6b69e512a68abf9d7e62217d5acbe28",
+   "HERO-lauren-idle-ne.png": "c43635f096b70e731c0e384edc3c8a65593f661e9915c781f1e703a0f045991f",
+   "HERO-lauren-idle-s.png": "8423fa4766b26e33989f6a7bc0b892b83f3cced9fc3aa659444081b66a47a2d4",
+   "HERO-lauren-idle-se.png": "0e29e742847de98de2fae917a38d74922fc5fb885fa36d05c8453880f0203a74",
+   "HERO-lauren-walk-e.png": "b2432c8be6d144faa08e1f8ebed032e21f87bad0a3c19fae9f542bb43f6c3e12",
+   "HERO-lauren-walk-n.png": "46c041f026f0d72718be3f033fa2361b244504a72ffe30424c2d7ff0b7faf0a7",
+   "HERO-lauren-walk-ne.png": "756adef14d7edb02b0124e051ea6ae3087e5d830aa6c7402ece83c9a1d60af94",
+   "HERO-lauren-walk-s.png": "0ee8d14c14c17b1b80b2f66158bfa92ec15d903a4ca5c409221c8098a93314ef",
+   "HERO-lauren-walk-se.png": "cfb220c59c990ae082626df708a8bc1770eaac730dfaad7080e98b574235a1b5"
+  }
+ },
+ "keep": [
+  "actions-v3126/lauren-ultimate-"
+ ],
+ "walk": {
+  "s": {
+   "path": "assets/r130/lauren/walk-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "77322b5b57c4cbbdf43c95813339fb507c775e3661ea543dbbc7642c5725ab56"
+  },
+  "se": {
+   "path": "assets/r130/lauren/walk-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "224ee1ac4697d5939391bc21251f8e524484a7e88c09be9844596246c2f81b8d"
+  },
+  "e": {
+   "path": "assets/r130/lauren/walk-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "2dbd0df3c64373c7dca73b25cf92cae364ff08a3d6ed67f602582ccb102a6b56"
+  },
+  "ne": {
+   "path": "assets/r130/lauren/walk-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "f02c4502d799153c9029b579c883456d67f84e0e83fa96950ac0fb7c2c4f0c98"
+  },
+  "n": {
+   "path": "assets/r130/lauren/walk-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "8ec6e3a4ee2bac586aaea14a4be9a810787d1b15899adcf774a03b527767a445"
+  }
+ },
+ "swap": {
+  "assets/hero_direction337/lauren/s.webp": {
+   "path": "assets/r130/lauren/g-s.webp",
+   "from": "HERO-lauren-idle-s.png#0",
+   "mirror": false,
+   "sha256": "23ad6f4e467147d794e986257adb13464301138a202c7dbc9a4ee9a98671000c",
+   "bytes": 28036,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     256.7,
+     480
+    ],
+    "visibleHeight": 480.0
+   }
+  },
+  "assets/hero_direction337/lauren/n.webp": {
+   "path": "assets/r130/lauren/g-n.webp",
+   "from": "HERO-lauren-idle-n.png#0",
+   "mirror": false,
+   "sha256": "bedc636f1b4a64144f412a1c6cd88d61164a079dace23bbcf2557306338f0881",
+   "bytes": 26748,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     260.6,
+     496
+    ],
+    "visibleHeight": 477.7
+   }
+  },
+  "assets/hero_direction338/lauren/s.webp": {
+   "path": "assets/r130/lauren/g-s.webp",
+   "from": "HERO-lauren-idle-s.png#0",
+   "mirror": false,
+   "sha256": "435619b272560c03af7231048f3ec8311f33d2cfa814124a8203cb9481d7e124",
+   "bytes": 22770,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     256.2,
+     484
+    ],
+    "visibleHeight": 409.0
+   }
+  },
+  "assets/hero_direction338/lauren/n.webp": {
+   "path": "assets/r130/lauren/g-n.webp",
+   "from": "HERO-lauren-idle-n.png#0",
+   "mirror": false,
+   "sha256": "563c0ea26d1125d8f3fddeee120b5dbeb39d295399022c0a9d6eca4cde6e41dc",
+   "bytes": 26844,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     292.1,
+     484
+    ],
+    "visibleHeight": 477.7
+   }
+  },
+  "assets/hero_direction334/lauren/e.webp": {
+   "path": "assets/r130/lauren/g-e.webp",
+   "from": "HERO-lauren-idle-e.png#0",
+   "mirror": false,
+   "sha256": "5b029e47b0e723151d9b6fcdd2c331f2d2a33e8e96d1303debfa2e774dc34767",
+   "bytes": 17840,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     196.9,
+     491
+    ],
+    "visibleHeight": 378.4
+   }
+  },
+  "assets/hero_direction334/lauren/w.webp": {
+   "path": "assets/r130/lauren/g-w.webp",
+   "from": "HERO-lauren-idle-e.png#0",
+   "mirror": true,
+   "sha256": "0687cf41779c372fcc43dbc04369a5c8cc45eebd8842303f08fff68e33a7f164",
+   "bytes": 18510,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     292.5,
+     492
+    ],
+    "visibleHeight": 382.5
+   }
+  },
+  "assets/hero_direction334/lauren/ne.webp": {
+   "path": "assets/r130/lauren/g-ne.webp",
+   "from": "HERO-lauren-idle-ne.png#0",
+   "mirror": false,
+   "sha256": "5432cebf02b2a9b246a1d8e2561a721f3f836ab3868032b30088e4269a3996df",
+   "bytes": 24644,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     208.9,
+     491
+    ],
+    "visibleHeight": 455.6
+   }
+  },
+  "assets/hero_direction334/lauren/nw.webp": {
+   "path": "assets/r130/lauren/g-nw.webp",
+   "from": "HERO-lauren-idle-ne.png#0",
+   "mirror": true,
+   "sha256": "f315c20aec4895d247611f3c1310f77051256d4e192486465eb8a13c6a26f3f1",
+   "bytes": 24578,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     288.8,
+     492
+    ],
+    "visibleHeight": 458.5
+   }
+  },
+  "assets/hero_direction334/lauren/se.webp": {
+   "path": "assets/r130/lauren/g-se.webp",
+   "from": "HERO-lauren-idle-se.png#0",
+   "mirror": false,
+   "sha256": "d80bb592d8970b39c28603c2bfc40c4f439da64de6a9263c618b7f9e221ee88c",
+   "bytes": 22236,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     239.8,
+     491
+    ],
+    "visibleHeight": 390.0
+   }
+  },
+  "assets/hero_direction334/lauren/sw.webp": {
+   "path": "assets/r130/lauren/g-sw.webp",
+   "from": "HERO-lauren-idle-se.png#0",
+   "mirror": true,
+   "sha256": "e2885b5db08961b08c85366af01132af2bb0159969aaec1487507f487930e40a",
+   "bytes": 22918,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     267.4,
+     492
+    ],
+    "visibleHeight": 401.0
+   }
+  },
+  "assets/heroes/normalized/directions/lauren-front.webp": {
+   "path": "assets/r130/lauren/directions-lauren-front.webp",
+   "from": "HERO-lauren-idle-s.png#0",
+   "mirror": false,
+   "sha256": "940a35ba4721d67482f93f7d23270d0d90b484c1e8d6e909a31d8c806e9f8fbf",
+   "bytes": 24326,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     265.8,
+     473
+    ],
+    "visibleHeight": 421.0
+   }
+  },
+  "assets/heroes/normalized/directions/lauren-back.webp": {
+   "path": "assets/r130/lauren/directions-lauren-back.webp",
+   "from": "HERO-lauren-idle-n.png#0",
+   "mirror": false,
+   "sha256": "307d0f74894cd851daf2b41e0bc7cb4b5537bb7722aa08704217cd50cc0e3aad",
+   "bytes": 23244,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     255.9,
+     475
+    ],
+    "visibleHeight": 419.0
+   }
+  },
+  "assets/heroes/normalized/directions/lauren-left.webp": {
+   "path": "assets/r130/lauren/directions-lauren-left.webp",
+   "from": "HERO-lauren-idle-e.png#0",
+   "mirror": true,
+   "sha256": "86b7d5714ddd468b50c79193305dcb8506b60cc7ea99819817b3bf88e1c344eb",
+   "bytes": 20930,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     247.0,
+     476
+    ],
+    "visibleHeight": 429.4
+   }
+  },
+  "assets/heroes/normalized/directions/lauren-right.webp": {
+   "path": "assets/r130/lauren/directions-lauren-right.webp",
+   "from": "HERO-lauren-idle-e.png#0",
+   "mirror": false,
+   "sha256": "2a6e2a85cb1357442c355f5af0c3e29e692c2049b78733d93eb905bd95c328a8",
+   "bytes": 20598,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     254.8,
+     476
+    ],
+    "visibleHeight": 428.4
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-attack-front.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-attack-front.webp",
+   "from": "HERO-lauren-attack-s.png#3",
+   "mirror": false,
+   "sha256": "bc45967127693d0349ab8dbc9a4c77a9c0891ed8750dae40c9cc1d9f89e0180f",
+   "bytes": 22506,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     262.9,
+     483
+    ],
+    "visibleHeight": 420.7
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-attack-back.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-attack-back.webp",
+   "from": "HERO-lauren-attack-n.png#3",
+   "mirror": false,
+   "sha256": "09bc230c11bdd960de07e0e01324e9e24f82637c4e7746fb65cd8ea2b42d6294",
+   "bytes": 21556,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     254.6,
+     469
+    ],
+    "visibleHeight": 425.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-attack-left.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-attack-left.webp",
+   "from": "HERO-lauren-attack-e.png#3",
+   "mirror": true,
+   "sha256": "c7d877a55a5e29b36e91a02a31981afe0fd9dad571c24689d2f22cbee47013c6",
+   "bytes": 19590,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     249.6,
+     482
+    ],
+    "visibleHeight": 441.6
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-attack-right.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-attack-right.webp",
+   "from": "HERO-lauren-attack-e.png#3",
+   "mirror": false,
+   "sha256": "8fb2e71fe2defcfc218cf541d72ea761a9a796f18a101430afe874441b9ccee0",
+   "bytes": 19256,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     252.8,
+     479
+    ],
+    "visibleHeight": 435.5
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-skill-front.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-skill-front.webp",
+   "from": "HERO-lauren-attack-s.png#2",
+   "mirror": false,
+   "sha256": "1aedcb811fa4558710736158c3100ca7d9c272b5f60155d3bbe12fe1ab0c24d4",
+   "bytes": 24412,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     264.5,
+     480
+    ],
+    "visibleHeight": 445.9
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-skill-back.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-skill-back.webp",
+   "from": "HERO-lauren-attack-n.png#2",
+   "mirror": false,
+   "sha256": "5180490cdc85faaf545ccf3dd919df85431215a697ec411063c31c7e426ebb59",
+   "bytes": 23866,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     256.2,
+     476
+    ],
+    "visibleHeight": 432.9
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-skill-left.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-skill-left.webp",
+   "from": "HERO-lauren-attack-e.png#2",
+   "mirror": true,
+   "sha256": "8901705e9a6cf666fa59109ebc0231f4033006e39099a57a4d4b8a00ca067059",
+   "bytes": 21694,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     247.8,
+     480
+    ],
+    "visibleHeight": 446.9
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-skill-right.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-skill-right.webp",
+   "from": "HERO-lauren-attack-e.png#2",
+   "mirror": false,
+   "sha256": "a97f345f028ca122a865a1c5f0889a8110c0af7b83b824b3202229269a93d3b4",
+   "bytes": 21538,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     253.6,
+     479
+    ],
+    "visibleHeight": 443.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-guard-front.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-guard-front.webp",
+   "from": "HERO-lauren-attack-s.png#0",
+   "mirror": false,
+   "sha256": "41dfef795bad61e46c8af869877a76acaa84a79c84c33e0738eaa8e7dfe0c0ce",
+   "bytes": 22914,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     264.5,
+     488
+    ],
+    "visibleHeight": 408.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-guard-back.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-guard-back.webp",
+   "from": "HERO-lauren-attack-n.png#0",
+   "mirror": false,
+   "sha256": "2cfd7c13ad006e76fdbafa9981885ed23aa5a6c6df8186a200deadcffb5b3138",
+   "bytes": 22244,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     256.1,
+     489
+    ],
+    "visibleHeight": 410.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-guard-left.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-guard-left.webp",
+   "from": "HERO-lauren-attack-e.png#0",
+   "mirror": true,
+   "sha256": "7aabd7b3a562f25c013388187aa168235dd95656b49c4c0a3070ca2c16bcc54c",
+   "bytes": 18602,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     245.5,
+     490
+    ],
+    "visibleHeight": 421.2
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-guard-right.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-guard-right.webp",
+   "from": "HERO-lauren-attack-e.png#0",
+   "mirror": false,
+   "sha256": "4b6dc7bd5d0efca02140fb0ba9de8a987ad6c6380256c7c828f05934925a0193",
+   "bytes": 18870,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     256.3,
+     489
+    ],
+    "visibleHeight": 422.2
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-dash-front.webp",
+   "from": "HERO-lauren-walk-s.png#3",
+   "mirror": false,
+   "sha256": "25b934ac540eb8b10dbda6c1e20b47a0918d71e99b7dd6c394b3cfec371022f5",
+   "bytes": 23928,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     265.7,
+     491
+    ],
+    "visibleHeight": 444.5
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-dash-back.webp",
+   "from": "HERO-lauren-walk-n.png#3",
+   "mirror": false,
+   "sha256": "8cf648c143534098a1fd2db846c97fd6580c7873db2e9a98f9da542e7a8df876",
+   "bytes": 24352,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     258.0,
+     505
+    ],
+    "visibleHeight": 459.8
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-dash-left.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-dash-left.webp",
+   "from": "HERO-lauren-walk-e.png#3",
+   "mirror": true,
+   "sha256": "1b0994ef95867896bd3dd74be57b427e32cd6f8152110c4ee39e8f70800a8fe3",
+   "bytes": 20674,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     254.4,
+     482
+    ],
+    "visibleHeight": 445.0
+   }
+  },
+  "assets/heroes/normalized/actions-consistent/lauren-dash-right.webp": {
+   "path": "assets/r130/lauren/actions-consistent-lauren-dash-right.webp",
+   "from": "HERO-lauren-walk-e.png#3",
+   "mirror": false,
+   "sha256": "a38497d890d3c0082dd617107499e904bd103a76895312f800c9b4885a0840ea",
+   "bytes": 20560,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     248.2,
+     482
+    ],
+    "visibleHeight": 439.9
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-hurt-front.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-hurt-front.webp",
+   "from": "HERO-lauren-hit-s.png#1",
+   "mirror": false,
+   "sha256": "6ba1f00b61529afa365b34066c9bf6a62c11e5d706157f0f0e22f78f1a1cb50a",
+   "bytes": 14044,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     254.6,
+     509
+    ],
+    "visibleHeight": 270.4
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-move-front.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-move-front.webp",
+   "from": "HERO-lauren-walk-s.png#2",
+   "mirror": false,
+   "sha256": "b42489df084e4886cc1a1eecba9aa1468bb74c1a9dc92f754def397be9a14aa5",
+   "bytes": 12962,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     314.4,
+     456
+    ],
+    "visibleHeight": 259.5
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-hurt-back.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-hurt-back.webp",
+   "from": "HERO-lauren-hit-n.png#1",
+   "mirror": false,
+   "sha256": "d59109bafb5f7bf346165aa74e6b979b6cab210be045a2c1d00b81d3ba5ed7c4",
+   "bytes": 12472,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     236.8,
+     510
+    ],
+    "visibleHeight": 267.2
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-move-back.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-move-back.webp",
+   "from": "HERO-lauren-walk-n.png#2",
+   "mirror": false,
+   "sha256": "0d964eef6b090d7a6b4df6048fdf4ecf845ad47a2d5b3823ddd6cf010020d5cf",
+   "bytes": 11614,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     205.3,
+     498
+    ],
+    "visibleHeight": 240.0
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-hurt-left.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-hurt-left.webp",
+   "from": "HERO-lauren-hit-e.png#1",
+   "mirror": true,
+   "sha256": "5b5d4387cfeca5932c43d3425824707e55cab1a29f2186dff1ef19796e14a1c2",
+   "bytes": 11032,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     248.8,
+     507
+    ],
+    "visibleHeight": 267.8
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-move-left.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-move-left.webp",
+   "from": "HERO-lauren-walk-e.png#2",
+   "mirror": true,
+   "sha256": "140a8df7dabc9bcf0f1cd90e32c496d5915413d4e64e238cc0679f2237d0bf69",
+   "bytes": 13592,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     197.1,
+     405
+    ],
+    "visibleHeight": 304.5
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-hurt-right.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-hurt-right.webp",
+   "from": "HERO-lauren-hit-e.png#1",
+   "mirror": false,
+   "sha256": "39f06695ae02ba2a8bbb76533736416eba7be216c353d051d7cc286f9cdc4957",
+   "bytes": 11620,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     260.3,
+     507
+    ],
+    "visibleHeight": 278.1
+   }
+  },
+  "assets/heroes/normalized/actions-v3126/lauren-move-right.webp": {
+   "path": "assets/r130/lauren/actions-v3126-lauren-move-right.webp",
+   "from": "HERO-lauren-walk-e.png#2",
+   "mirror": false,
+   "sha256": "e5451582d9362bbf494053985cb67359f33819009fb556aa40434d862a6686a0",
+   "bytes": 9352,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     290.2,
+     510
+    ],
+    "visibleHeight": 230.4
+   }
+  },
+  "assets/heroes/normalized/actions-directional/lauren-attack-left.webp": {
+   "path": "assets/r130/lauren/actions-directional-lauren-attack-left.webp",
+   "from": "HERO-lauren-attack-e.png#3",
+   "mirror": true,
+   "sha256": "2e7c5ca284d445814015963c7d4a4f3af36c73c698d028347fee9a6056244f69",
+   "bytes": 12856,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     272.6,
+     364
+    ],
+    "visibleHeight": 305.0
+   }
+  },
+  "assets/heroes/normalized/actions-directional/lauren-attack-right.webp": {
+   "path": "assets/r130/lauren/actions-directional-lauren-attack-right.webp",
+   "from": "HERO-lauren-attack-e.png#3",
+   "mirror": false,
+   "sha256": "b125f3b2ffa71727eaaaaaf0e6d71d10735986b7d7390026aa67c3f21cb175c2",
+   "bytes": 12886,
+   "frame": {
+    "size": [
+     512,
+     512
+    ],
+    "pivot": [
+     238.4,
+     364
+    ],
+    "visibleHeight": 305.0
+   }
+  }
+ },
+ "idle": {
+  "s": {
+   "path": "assets/r130/lauren/idle-s.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 98.0,
+   "footY": 225,
+   "refBody": 205,
+   "sha256": "015480b2f681b77e771705be1ee8890337d2ca4366a3ed55a16cab93d4cae6dc"
+  },
+  "se": {
+   "path": "assets/r130/lauren/idle-se.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 97.4,
+   "footY": 225,
+   "refBody": 205,
+   "sha256": "60ee2c1a0ee8f77c5b17d0745e37c224f28d1419a36c78429971ed2778294e63"
+  },
+  "e": {
+   "path": "assets/r130/lauren/idle-e.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 95.6,
+   "footY": 228,
+   "refBody": 201,
+   "sha256": "9ac0f8fdb5a4c61193929f9f6a34532cacefb75c1def22d01774af0b3ecf5da0"
+  },
+  "ne": {
+   "path": "assets/r130/lauren/idle-ne.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 97.4,
+   "footY": 227,
+   "refBody": 207,
+   "sha256": "8ab890a77d22a3e425824181a4f7d5096add54cd7c690c725072931d5af9e7dd"
+  },
+  "n": {
+   "path": "assets/r130/lauren/idle-n.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 97.5,
+   "footY": 227,
+   "refBody": 206,
+   "sha256": "b514df61ab443d67f0e0c6dd478444074b5bcac03ffd3c104243271beca9134e"
+  },
+  "sw": {
+   "path": "assets/r130/lauren/idle-sw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 93.6,
+   "footY": 225,
+   "refBody": 205,
+   "sha256": "136a5d126cca07fa4bf8ffd68b4cc778fdad9f266984ed2973a33dad333d10bc"
+  },
+  "w": {
+   "path": "assets/r130/lauren/idle-w.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 95.4,
+   "footY": 228,
+   "refBody": 201,
+   "sha256": "87d1a76c847e544269a263dda8cb333db2eb98f0c595e14afc850de2f5c5b21a"
+  },
+  "nw": {
+   "path": "assets/r130/lauren/idle-nw.webp",
+   "frames": 4,
+   "cellW": 192,
+   "cellH": 256,
+   "footX": 93.6,
+   "footY": 227,
+   "refBody": 207,
+   "sha256": "1922dcd36406cdf418abe01a97de6a2374f3929e23168e79756df63c4c7f0a53"
+  }
+ }
+}

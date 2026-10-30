@@ -15,7 +15,7 @@
  // still in a plain pose the single native body drawImage is swapped, like the
  // R91 walk; facing keeps the last walking direction. Installed first so the
  // body-anchor pass below measures the idle frame actually drawn.
- const IDLE_INDEX='./assets/r93/idle/index.json',IDLE_STEP=.42,HERO_ART=/hero-authored|hero_direction33\d|heroes\/normalized/;
+ const IDLE_INDEX='./assets/r93/idle/index.json',IDLE_STEP=.42,HERO_ART=/hero-authored|hero_direction33\d|heroes\/normalized|r128\/gunner\/|r130\/[a-z]+\//;
  const DIR4={front:'s',back:'n',left:'w',right:'e'};let idle=null,idleState='idle',idleAt=0,facing8=null;
  function loadIdle(){if(idleState!=='idle')return;idleState='loading';fetch(IDLE_INDEX,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('R93 idle index '+r.status);return r.json();}).then(j=>{idle=j;idleState='ready';}).catch(e=>{idleState='failed';fail(e);});}
  function moveDir(){const vx=Number(player.moveVX150)||0,vy=Number(player.moveVY150)||0;if(Math.hypot(vx,vy)<.02)return null;
@@ -25,13 +25,16 @@
   !window.__STORYWORLD_EGO151__?.inspect?.()?.state?.active&&(window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off')==='off'&&(typeof layer==='undefined'||layer==='STORY');
  function idleFrame(){loadIdle();if(!idle||!player)return null;const d=moveDir();if(d){facing8=d;return null;}if(!plainStand())return null;
   const now=performance.now();if(now-idleAt>2000&&typeof addImage==='function'&&typeof readyImage==='function'){idleAt=now;for(const it of idle.items)if(it.hero===player.hero&&!readyImage(it.path))addImage(it.path,'R93 generated idle');}
-  const dir=facing8||DIR4[player.direction]||'s',it=idle.items.find(i=>i.hero===player.hero&&i.dir===dir),img=it&&typeof readyImage==='function'&&readyImage(it.path)?.image;if(!img)return null;
+  const dir=facing8||DIR4[player.direction]||'s';
+  // R131: Gemini 영웅 시트가 있는 영웅(visual-r119 __STORYWORLD_HERO_SHEETS__)은 새 8방향 서 있기 4프레임을 쓴다. 뒤집힌 그리기 안에서는 반대쪽 그림을 골라 화면에서 같은 쪽을 보게 한다.
+  const sheets=window.__STORYWORLD_HERO_SHEETS__;if(sheets?.idleItem&&sheets.heroes().includes(player.hero)){const ov=sheets.idleItem(player.hero,dir,false);if(ov)return{it:ov,img:ov.image,f:Math.floor(time/IDLE_STEP)%ov.frames,sheet:{hero:player.hero,dir}};}
+  const it=idle.items.find(i=>i.hero===player.hero&&i.dir===dir),img=it&&typeof readyImage==='function'&&readyImage(it.path)?.image;if(!img)return null;
   return{it,img,f:Math.floor(time/IDLE_STEP)%it.frames};}
  {const base=drawHero;drawHero=function(...args){let w=null;try{w=idleFrame();}catch(e){fail(e);}
   if(!w||typeof ctx==='undefined')return base.apply(this,args);const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage;let done=false;
   // Every native hero-body draw in this pass gets the same idle cell: a second
   // body draw (overlay or echo) left native would show two different poses.
-  c.drawImage=function(img,...a){if(a.length===8&&HERO_ART.test(String(img?.src||''))){if(done)stats.idleExtraBodies=(stats.idleExtraBodies||0)+1;done=true;try{const k=(typeof actorHeight==='function'?actorHeight():66)/w.it.refBody;
+  c.drawImage=function(img,...a){if(a.length===8&&HERO_ART.test(String(img?.src||''))){if(done)stats.idleExtraBodies=(stats.idleExtraBodies||0)+1;done=true;try{if(w.sheet){const m=c.getTransform?.();if(m&&m.a<0){const alt=window.__STORYWORLD_HERO_SHEETS__.idleItem(w.sheet.hero,w.sheet.dir,true);if(alt){w.it=alt;w.img=alt.image;}}}const k=(typeof actorHeight==='function'?actorHeight():66)/w.it.refBody;
      return prev.call(this,w.img,w.f*w.it.cellW,0,w.it.cellW,w.it.cellH,-w.it.footX*k,-w.it.footY*k,w.it.cellW*k,w.it.cellH*k);}catch(e){fail(e);return prev.apply(this,[img,...a]);}}return prev.apply(this,[img,...a]);};
   try{return base.apply(this,args);}finally{if(own)c.drawImage=prev;else delete c.drawImage;if(done)stats.idleFrames=(stats.idleFrames||0)+1;}};}
 
