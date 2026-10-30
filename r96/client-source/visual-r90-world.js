@@ -101,18 +101,25 @@
   // A worn dark stone lip a step lighter than the cap, not a bright outline.
   m.color?.set(0x4c463d);m.emissive?.set(0x0c0b09);m.roughness=1;m.transparent=false;m.opacity=1;m.depthWrite=true;m.needsUpdate=true;return m;
  }
- function disposeGroup(group){if(!group)return;group.parent?.remove(group);const materials=new Set();group.traverse(o=>{o.geometry?.dispose();for(const m of(Array.isArray(o.material)?o.material:[o.material]))if(m)materials.add(m);});for(const m of materials)m.dispose();}
+ function disposeGroup(group,keep){if(!group)return;group.parent?.remove(group);const materials=new Set();group.traverse(o=>{o.geometry?.dispose();for(const m of(Array.isArray(o.material)?o.material:[o.material]))if(m)materials.add(m);});for(const m of materials)if(!keep?.has(m))m.dispose();}
+ // R141: 벽 테두리는 덩어리(벽 메시)가 들고 날 때마다 다시 만드는데(헤드리스 전투 15초에 15번), 그때마다 재질을 새로 복제·폐기해
+ //  셰이더 프로그램이 다시 컴파일되었다(같은 시간 23번 — 실제 GPU 에서 끊김). 원본 재질마다 테두리 재질 하나를 두고 다시 쓴다.
+ const trimCache=new WeakMap();
+ function trimMaterialFor(r,source,T){if(!source)return trimMaterial(source,T);let m=trimCache.get(source);if(!m){m=trimMaterial(source,T);trimCache.set(source,m);(r.r90TrimMats||(r.r90TrimMats=new Set())).add(m);stats.trimMaterials=(stats.trimMaterials||0)+1;}return m;}
  function ensureWalls(r,frame){const want=active(frame)&&prefs().walls;if(!want){if(r.r90WallTrim)r.r90WallTrim.visible=false;return;}
-  const sources=wallSources(r);for(const m of sources)m.updateMatrixWorld(true);
+  const sources=wallSources(r);
+  // R141: 벽 목록이 지난 장면과 같은 물체들이면 9장면은 서명(모든 벽의 행렬을 이어 붙인 긴 문자열)과 행렬 갱신을 건너뛴다(장면당 약 8%).
+  const prev=r.r90WallList;if(r.r90WallTrim?.parent===r.spatialRoot&&prev&&prev.length===sources.length&&sources.every((m,i)=>m===prev[i])&&((r.r90WallSkip=(r.r90WallSkip||0)+1)%10)){r.r90WallTrim.visible=true;for(const mesh of r.r90WallTrim.children){const so=mesh.userData.r90SourceMaterial;if(so){mesh.material.opacity=so.opacity;mesh.material.transparent=so.transparent;mesh.material.depthWrite=so.depthWrite;}}stats.wallSkips=(stats.wallSkips||0)+1;return;}
+  r.r90WallList=sources.slice();for(const m of sources)m.updateMatrixWorld(true);
   const signature=sources.map(m=>[m.uuid,m.geometry.uuid,m.geometry.attributes.position?.version,...(Array.isArray(m.material)?m.material:[m.material]).map(v=>v?.uuid),...m.matrixWorld.elements].join(':')).join('|');
   const syncFade=group=>{for(const mesh of group.children){const source=mesh.userData.r90SourceMaterial;if(!source)continue;mesh.material.opacity=source.opacity;mesh.material.transparent=source.transparent;mesh.material.depthWrite=source.depthWrite;}};
   if(r.r90WallTrim?.parent===r.spatialRoot&&signature===r.r90WallSignature){r.r90WallTrim.visible=true;syncFade(r.r90WallTrim);return;}
-  disposeGroup(r.r90WallTrim);r.r90WallTrim=null;r.r90WallSignature=signature;if(!sources.length)return;
+  disposeGroup(r.r90WallTrim,r.r90TrimMats);r.r90WallTrim=null;r.r90WallSignature=signature;if(!sources.length)return;
   const data=outline(r,sources),T=r.T,group=new T.Group(),byMaterial=new Map();group.name='r90-cap-trim';group.userData.r90Spatial=true;
   const add=(source,g)=>{if(!byMaterial.has(source))byMaterial.set(source,[]);byMaterial.get(source).push(g);};
   // Low lip only; the raised corner posts read as toy blocks and are left out.
   for(const e of data.edges){const dx=e.b.x-e.a.x,dz=e.b.z-e.a.z,g=new T.BoxGeometry(Math.hypot(dx,dz),.022,.04);g.rotateY(-Math.atan2(dz,dx));g.translate((e.a.x+e.b.x)/2,e.a.y+.011,(e.a.z+e.b.z)/2);add(e.material,g);}
-  for(const[source,boxes]of byMaterial){const mesh=new T.Mesh(merged(T,boxes),trimMaterial(source,T));mesh.name='r90-cap-rims-and-posts';mesh.layers.set(2);mesh.userData={r90Spatial:true,presentationOnly:true,r90SourceMaterial:source};group.add(mesh);}
+  for(const[source,boxes]of byMaterial){const mesh=new T.Mesh(merged(T,boxes),trimMaterialFor(r,source,T));mesh.name='r90-cap-rims-and-posts';mesh.layers.set(2);mesh.userData={r90Spatial:true,presentationOnly:true,r90SourceMaterial:source};group.add(mesh);}
   group.userData.counts={edges:data.edges.length,posts:data.posts.length,topTriangles:data.topTriangles};syncFade(group);r.spatialRoot.add(group);r.r90WallTrim=group;stats.wallBuilds++;stats.rimSegments=data.edges.length;stats.cornerPosts=0;
  }
  function atmosphere(r,frame){const fam=family(frame),want=active(frame)&&prefs().atmosphere&&!sight()&&!frame.settings?.lowFx&&!frame.settings?.reducedMotion&&['clinical','swamp','ash','forge'].includes(fam);

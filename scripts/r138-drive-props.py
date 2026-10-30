@@ -14,6 +14,7 @@ A, PAD, MAX = 16, 6, 512
 # id: (번들 폴더, 원본 파일, Drive zip, Drive id, 쓰는 곳)
 JOBS = {
  'bones':  ('dist01-hanging-bones', 'exec-1f4c05ec-5e9f-4ed1-930a-668b9a6f4b83.png', 'StoryWorld-spider-cave-hanging-bones-static-candidate.zip', '1P0OUKt9QJowwBlHqESwE3v4xGsap9d89', 'dist01 거미동굴 천장에 매달린 뼈(에피소드1A L37), 비충돌 장식'),
+ 'root':   ('dist00-low-root-connector1', 'exec-a674651b-9a8b-436a-97fc-6c15b8699d54.png', 'Dist00-Low-Root-Connector1.zip', '1O-Yb-I0xTkRJm3ttMyA9InSHP56jJtav', 'dist00 돌바닥을 지나는 낮은 뿌리 연결부(에피소드1A L28), 바닥에 누운 비충돌 장식(R141)'),
  'window': ('dist00-corridor-window', 'exec-2a15a13c-f7bf-4346-8dd2-a3af80c33ad3.png', 'StoryWorld-corridor-window-faceless-static-candidate.zip', '14nRYLGrxTB5RWxxlVyiY5fMh5nEuv7F9', 'dist00 뒷벽 부착 창과 얼굴 없는 성상(에피소드1A L28), 비충돌·비상호작용 장식'),
 }
 idx_path = out / 'index.json'
@@ -21,7 +22,7 @@ index = json.loads(idx_path.read_text(encoding='utf-8')) if idx_path.exists() el
 for pid, (folder, name, zipname, drive_id, use) in JOBS.items():
     d = next((p for p in src.rglob(folder) if p.is_dir()), None)
     if not d or not (d / name).exists(): print('skip', pid, '(bundle not found)'); continue
-    raw = (d / name).read_bytes(); man = json.loads((d / 'manifest.json').read_text(encoding='utf-8'))
+    raw = (d / name).read_bytes(); man = json.loads(next(p for p in [d / 'manifest.json', d / 'MANIFEST.json'] if p.exists()).read_text(encoding='utf-8'))
     if sha(raw) != man[name]['sha256']: raise SystemExit('sha mismatch: ' + name)
     im = Image.open(d / name).convert('RGBA'); a = im.getchannel('A').point(lambda v: 255 if v >= A else 0); box = a.getbbox()
     x0, y0, x1, y1 = box; x0, y0 = max(0, x0 - PAD), max(0, y0 - PAD); x1, y1 = min(im.width, x1 + PAD), min(im.height, y1 + PAD)
@@ -36,6 +37,10 @@ index['held'] = {
  'M004-three-key-review': {'driveIds': ['1H1diViUXe5xWMA1BaojpG-QtScI5Was9', '17Bi2iljIxXXW7N5Gk8rLwssUSpd2Blw-'], 'reason': '검수용 미리보기(게임 자산 아님)'},
  'M002-frontleg-recovery': {'driveId': '1DtDLEAdNuMdyfkFQy4RRKYieunY92dEP', 'reason': '단일 보행 키(8다리 루프·척도·피벗 미검증)'},
  'r74-root-tracker-low-windup2': {'driveId': '1wGTfSzW9QCQDiOHulcDjksiPoa8uejf4', 'reason': '공격 준비 단일 키(README: 승격하지 않음)'},
+ 'samong-puppet-ego': {'driveIds': ['1t2TyZV4aFJGRUIl_tX-7qyRTykPf5w3X', '1oz-tTJmho5E04AoUwWy7wqNxIXczx_Wc'], 'reason': '사몽 이후 대체 몹 — 적용 범위 정책상 지정된 맵·빈 슬롯이 확인되지 않아 보류'},
+ 'samong-memory-fallback': {'driveIds': ['1Qah1IFb-WLqbwOY_Hy1zt7B2BYr-_udz', '14UJQ_X4nLE2BI0CYz6PKvHg7uPUhHbaD', '1SOlmkZgJ1FYBbJ5Qtnoyyg-m1X_aVZZX'], 'reason': '사몽 이후 대체 조형물·타일 — 기존 적합 자산 있음, 타일 무봉합 미통과(범위 정책)'},
+ 'root-black-sap-v2': {'driveId': '11OJb8NC-43IW1eKWfaO4f1RO4GRHynaP', 'reason': '검 부착·타이밍 미검증 효과 원화'},
+ 'r74-root-tracker-short-contact1': {'driveId': '1-OOS85KGVx20Gmo_fYSmpY1BT_INOF60', 'reason': '공격 키 후보(몸 고정 실패)'},
  'M004-flight-render-review-aid': {'driveId': '1vLED3dhOrKdQlcV1VtrRxbvgyoRRcTxw', 'reason': 'NOT-runtime 표기'},
 }
 idx_path.write_text(json.dumps(index, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
