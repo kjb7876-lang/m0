@@ -1,0 +1,70 @@
+{
+ "round": "R149",
+ "purpose": "영웅 이동(달리기) 8프레임 5방향 새로 받기 — 지금 걷기 시트는 보폭이 거의 없어 어기적거림(R148 측정)",
+ "packages": [
+  {
+   "rank": 1,
+   "hero": "hwando",
+   "zip": "StoryWorld-HERO-R149-RUN-1-hwando.zip",
+   "bytes": 249334,
+   "sha256": "df94d7b74ab2209ad80a2ce88f294238e4adff90d1fd1251b292916f1608d86a",
+   "files": 5
+  },
+  {
+   "rank": 2,
+   "hero": "gunner",
+   "zip": "StoryWorld-HERO-R149-RUN-2-gunner.zip",
+   "bytes": 207421,
+   "sha256": "073ebf373a95fad4b09c2d553f2902ab41c652503d91be14a07ff7693440abef",
+   "files": 5
+  },
+  {
+   "rank": 3,
+   "hero": "lauren",
+   "zip": "StoryWorld-HERO-R149-RUN-3-lauren.zip",
+   "bytes": 189545,
+   "sha256": "a3a353d5590919b41056e892307b3870b528df4d0dcd329b18e44044d08a1187",
+   "files": 5
+  },
+  {
+   "rank": 4,
+   "hero": "slayer",
+   "zip": "StoryWorld-HERO-R149-RUN-4-slayer.zip",
+   "bytes": 200923,
+   "sha256": "fef58fc348867da3e2381f9fcd4e7c6b6f7e9ead3c53dc9e69fc3c5c9a67fbef",
+   "files": 5
+  },
+  {
+   "rank": 5,
+   "hero": "seoha",
+   "zip": "StoryWorld-HERO-R149-RUN-5-seoha.zip",
+   "bytes": 217035,
+   "sha256": "2c794c6b6ff4e5581c8abbe9457e46f4bc90d12e5a50a6ebea51a5fcd4cb6041",
+   "files": 5
+  },
+  {
+   "rank": 6,
+   "hero": "neon",
+   "zip": "StoryWorld-HERO-R149-RUN-6-neon.zip",
+   "bytes": 195745,
+   "sha256": "3ab88340ed9c6f62913023f4532e0e2cdf3290880e6b4e027b001f4dd80b1569",
+   "files": 5
+  },
+  {
+   "rank": 7,
+   "hero": "michaela",
+   "zip": "StoryWorld-HERO-R149-RUN-7-michaela.zip",
+   "bytes": 178444,
+   "sha256": "4d138f33fa0301cc6f2f46fa2e7104c1c9aa0f0becf75da5be7738ac712dc929",
+   "files": 5
+  },
+  {
+   "rank": 8,
+   "hero": "hunter",
+   "zip": "StoryWorld-HERO-R149-RUN-8-hunter.zip",
+   "bytes": 172696,
+   "sha256": "417223d5a3a0b9ec05bb67fc91a61795920a1972009dc6a5750796540289fd51",
+   "files": 5
+  }
+ ]
+}
