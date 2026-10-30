@@ -125,6 +125,10 @@ jobs:
         run: node r96/qa/r147/perf-paint-cpu-check.cjs
       - name: R148 hero walk cadence and single bob
         run: node r96/qa/r148/walk-cadence-cpu-check.cjs
+      - name: R150 lite screen (auto/on/off) and performance meter
+        run: node r96/qa/r150/perf-lite-cpu-check.cjs
+      - name: R151 hero collapse animation before the death panel
+        run: node r96/qa/r151/death-anim-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
