@@ -50,5 +50,8 @@ function runA(o){const cmds=[];const body={kind:'image',owner:{kind:'hero'},sour
  ok('gunner dash: walk sheet frame instead of the 34%-smaller dash picture',/r128\/gunner\/walk-/.test(t.body.sourcePath)&&t.body.sourceRect[0]===3*192&&h>54,t.body.sourcePath+' h'+h.toFixed(1));}
 {const crypto=require('crypto');let all=true;for(const h of ['lauren','seoha','neon','michaela','hunter','slayer','gunner']){const idx=JSON.parse(fs.readFileSync(path.join(R,'runtime-text','assets','r143','hit',h,'index.json'),'utf8'));for(const d of ['s','se','e','ne','n']){const r=idx.directions[d];if(r.frames!==2||crypto.createHash('sha256').update(fs.readFileSync(path.join(R,'runtime-text',r.path))).digest('hex')!==r.sha256)all=false;}}
  ok('hit sheets: 7 heroes x 5 directions, 2 frames, hashes recorded',all);}
+{const asked=[];let t=runA({hero:'hwando',src:'assets/r93/idle/idle-hwando-s.png'});t.sb.readyImage=p=>null;t.sb.ensureImages=ps=>{asked.push(...ps);return Promise.resolve();};t.sb.drawHero();const first=asked.length;
+ t.sb.room={enemies:[]};asked.length=0;t.cmds.length=0;t.sb.Date={now:()=>Date.now()+5000};t.sb.drawHero();
+ ok('sheets are requested again after a region change (the game clears its image cache per region)',first===10&&asked.length===10&&asked.some(p=>/r143\/attack\/hwando\/attack-s\.webp/.test(p)),first+' then '+asked.length);}
 ok('workflow runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r143/feet-intro-cpu-check.cjs'));
 const fail=checks.filter(c=>!c.pass);console.log(JSON.stringify({status:fail.length?'FAIL':'PASS',passed:checks.length-fail.length,total:checks.length,fail},null,1));process.exit(fail.length?1:0);

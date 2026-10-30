@@ -68,10 +68,13 @@ let hurt={start:0,prev:0,dir:'s'};
 function applyHit(rec,st){const h=player.hero;if(!HIT.has(h))return;const a=+player.hurtAnim||0;if(a>hurt.prev+1e-6||hurt.start<=0){hurt.start=a;hurt.dir=dirNow();}hurt.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(best&&place(rec,st,best,h,hurt.dir,a,hurt.start,0,'hit')!=null)stats.hitFrames++;}
-function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return;for(const d of['s','se','e','ne','n']){image(pathOf(h,d));if(HIT.has(h))image(pathOf(h,d,'hit'));}}catch(_){}}
-let lastHero=null;
+// 미리 받기: 영웅이 바뀔 때뿐 아니라 지역을 옮길 때도(게임이 지역마다 그림 기억을 비운다) — 처음 쓰는 순간 그림이 없어
+//  옛 그림이 0.3초쯤 보이던 것(환도 스킬, 헤드리스 120초 관찰 8장면)을 막는다. 아직 못 받은 것은 2초마다 다시 묻는다.
+function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h))want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}
+ for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
+let lastHero=null,lastRoom=null,nextPre=0;
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(player&&player.hero!==lastHero){lastHero=player.hero;preload();}
+ try{const now=Date.now();if(player&&(player.hero!==lastHero||(typeof room!=='undefined'&&room!==lastRoom)||now>=nextPre)){lastHero=player.hero;lastRoom=typeof room!=='undefined'?room:null;nextPre=now+(preload()?2000:15000);}
   const busy=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
   if(!(player?.attackAnim>0))swing.prev=0;if(!(player?.hurtAnim>0))hurt.prev=0;
   if(prefs.on&&st>=0&&solo()&&player?.hero==='gunner'&&player.dashAnim>0){gunnerDash(rec,st);return r;}
