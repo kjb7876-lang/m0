@@ -63,6 +63,9 @@ const GRADE={off:null,
  high:{filter:'contrast(1.18) saturate(.68) brightness(.88) sepia(.08)',vig:.6,pool:.4,grain:.07}};
 let layer=null,grainCanvas=null,lastGradeKey='',bossSeen=new WeakSet(),letterUntil=0,pulse=0;
 function stageEl(){return document.getElementById('stage');}
+// R152: 무대·게임 캔버스 위치는 장면마다 재지 않고(강제 레이아웃) 0.5초마다·창 크기가 바뀔 때만 다시 잰다.
+let rectAtR152=0,rectsR152Cache=null;try{addEventListener('resize',()=>{rectAtR152=0;});}catch(_){}
+function rectsR152(s){const t=performance.now();if(!rectsR152Cache||rectsR152Cache[3]!==s||t-rectAtR152>500){rectAtR152=t;const r=s.getBoundingClientRect(),c=document.getElementById('game');rectsR152Cache=[r,c,c?.getBoundingClientRect?.()||r,s];}return rectsR152Cache;}
 function worldCanvases(){return['game','phase1-webgl'].map(id=>document.getElementById(id)).filter(Boolean);}
 function makeLayer(){const s=stageEl();if(!s)return null;let el=document.getElementById('cinemaR114');if(el)return el;
  el=document.createElement('div');el.id='cinemaR114';el.setAttribute('aria-hidden','true');
@@ -85,7 +88,7 @@ let poolCss='';
 function frame(){try{stats.frames++;const G=GRADE[prefs.horror];if(!G||!layer||!live()){if(layer&&!live())part('pulse').style.opacity='0';return;}
  if(lastGradeKey.split('|')[3]!==String(lowFx())||stats.frames%90===0)applyGrade(true);
  // 영웅 불빛 원: 영웅 주변은 밝게, 바깥은 어둡게
- const pool=part('pool'),s=stageEl();if(prefs.lightPool&&typeof project==='function'&&s){const q=project(player.x,player.y),r=s.getBoundingClientRect(),c=document.getElementById('game'),cr=c?.getBoundingClientRect?.()||r,
+ const pool=part('pool'),s=stageEl();if(prefs.lightPool&&typeof project==='function'&&s){const q=project(player.x,player.y),[r,c,cr]=rectsR152(s),
   sx=(cr.width/(c?.width||cr.width))*(typeof dpr==='number'?dpr:1)||1,px=cr.left-r.left+q.x*(sx||1),py=cr.top-r.top+(q.y-40)*(sx||1),rad=Math.max(160,Math.min(r.width,r.height)*.42);
   const css='radial-gradient(circle '+Math.round(rad*1.6)+'px at '+(Math.round(px/4)*4)+'px '+(Math.round(py/4)*4)+'px,rgba(0,0,0,0) 0,rgba(0,0,0,0) '+Math.round(rad*.55)+'px,rgba(3,2,8,'+G.pool+') 100%)';if(css!==poolCss){poolCss=css;pool.style.background=css;stats.poolPaints=(stats.poolPaints||0)+1;}}else if(poolCss!=='none'){poolCss='none';pool.style.background='none';}// R147: 같은 자리면 다시 칠하지 않는다(4px 단위)
  // 필름 그레인: 매 프레임 위치만 흔든다
