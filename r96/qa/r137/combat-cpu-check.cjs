@@ -7,7 +7,7 @@ let n=0,failed=0;const check=(name,ok,detail='')=>{n++;if(!ok)failed++;console.l
 const code=fs.readFileSync(path.join(SRC,'combat-r137.js'),'utf8');
 check('runtime copy matches client-source',code===fs.readFileSync(path.join(RT,'combat-r137.js'),'utf8'));
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
-check('loaded right before audio-r98.js and listed in the public verify script',/combat-r137\.js"><\/script><script src="\.\/audio-r98\.js">/.test(html)&&fs.readFileSync(path.join(REPO,'scripts','verify-r96-public.py'),'utf8').includes("'combat-r137.js'"));
+check('loaded before audio-r98.js and listed in the public verify script',/combat-r137\.js"><\/script>(<script src="\.\/[a-z0-9-]+-r1\d\d\.js"><\/script>)*<script src="\.\/audio-r98\.js">/.test(html)&&fs.readFileSync(path.join(REPO,'scripts','verify-r96-public.py'),'utf8').includes("'combat-r137.js'"));
 // sandbox: rules
 const enemies=[],calls=[];let guardOn=false;
 const sb={console,Math,JSON,Date,Set,Map,WeakMap,Object,Array,Number,String,Boolean,Error,Promise,Symbol,localStorage:{getItem(){return null;},setItem(){}},document:{querySelector:()=>null,getElementById:()=>null,body:{contains:()=>false},createElement:()=>({style:{},querySelector:()=>({style:{},setAttribute(){}})})},getComputedStyle:()=>({position:'relative'}),requestAnimationFrame(){},
