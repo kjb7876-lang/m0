@@ -16,7 +16,12 @@
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r123.mood';
  const prefs={mood:true,deco:true,floor:true,overlay:true,banner:true,tick:true,tilt:true,art:true};
  // R126: Drive 2026-10-29 원화(assets/r126/props, scripts/r126-drive-props.py). 그림이 준비되면 게임 소품 그리기로, 그 전에는 코드 그림으로.
- const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56}};
+ const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56},
+  // R129: Drive 2026-10-30 원화(scripts/r129-drive-assets.py) — 숲 나무·데이터 비석·기계 철탑, 화가 소품 3점, 녹는 시계 4키(가까이 가면 K1→K4 한 번)
+  tree:{path:'assets/r129/props/tree.webp',h:230},monolith:{path:'assets/r129/props/monolith.webp',h:130},pylon:{path:'assets/r129/props/pylon.webp',h:210},
+  brush:{path:'assets/r129/props/brush.webp',h:40},tweezers:{path:'assets/r129/props/tweezers.webp',h:40},vase:{path:'assets/r129/props/vase.webp',h:64},
+  clock:{path:'assets/r129/props/clock-k1.webp',h:92,frames:[1,2,3,4].map(i=>'assets/r129/props/clock-k'+i+'.webp')}};
+ const clockPlay=new Map();
  try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}last=null;try{window.__STORYWORLD_CINEMA_R114__?.applyGrade?.(true);}catch(_){}return{...prefs};}
  const stats={rooms:0,deco:0,decals:0,frames:0,banners:0,warps:0,lifts:0,drawnDeco:0,drawnDecals:0,ghosts:0,cmdsMax:0};
@@ -83,10 +88,10 @@
   gogh:{tint:['rgba(60,90,210,.13)','soft-light'],shade:'rgba(8,14,40,.14)',fog:'radial-gradient(ellipse 70% 50% at 50% 0%,rgba(255,220,90,.16),rgba(0,0,0,0) 60%)',
    parts:[['paint',18]],floor:['swirl'],deco:[['sunflower',3],['cypress',2]]},
   dali:{tint:['rgba(230,170,90,.12)','soft-light'],shade:null,fog:'linear-gradient(to bottom,rgba(70,110,170,.20),rgba(0,0,0,0) 42%)',parts:[['dust',8]],floor:['sand'],deco:[['clock',3],['stone',3]]},
-  manet:{tint:['rgba(240,225,190,.08)','soft-light'],shade:'rgba(18,16,14,.30)',fog:null,parts:[],floor:['cream'],deco:[['bottle',3],['frame',2,'wall']]},
+  manet:{tint:['rgba(240,225,190,.08)','soft-light'],shade:'rgba(18,16,14,.30)',fog:null,parts:[],floor:['cream'],deco:[['bottle',3],['frame',2,'wall'],['vase',2]]},
   picasso:{tint:['rgba(40,90,200,.20)','soft-light'],shade:'rgba(8,18,48,.20)',fog:null,parts:[],floor:['facet'],deco:[['shard',3]]},
-  klimt:{tint:['rgba(255,200,60,.14)','soft-light'],shade:'rgba(30,20,4,.10)',fog:null,parts:[['gold',26]],floor:['mosaic'],deco:[['goldpillar',3]]},
-  monet:{tint:['rgba(170,150,225,.15)','soft-light'],shade:null,fog:'linear-gradient(to top,rgba(150,190,200,.16),rgba(0,0,0,0) 50%)',parts:[['pollen',14]],floor:['lily'],deco:[['willow',2]]},
+  klimt:{tint:['rgba(255,200,60,.14)','soft-light'],shade:'rgba(30,20,4,.10)',fog:null,parts:[['gold',26]],floor:['mosaic'],deco:[['goldpillar',3],['tweezers',2]]},
+  monet:{tint:['rgba(170,150,225,.15)','soft-light'],shade:null,fog:'linear-gradient(to top,rgba(150,190,200,.16),rgba(0,0,0,0) 50%)',parts:[['pollen',14]],floor:['lily'],deco:[['willow',2],['brush',2]]},
   surreal:{tint:['rgba(200,150,110,.10)','soft-light'],shade:'rgba(20,14,24,.10)',fog:null,parts:[['dust',8]],floor:['sand'],deco:[['clock',2],['stone',3],['endless',1,'wall']]},
   blank:{tint:['rgba(255,255,255,.10)','soft-light'],shade:null,fog:'radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0) 40%,rgba(230,230,225,.16) 100%)',parts:[['dust',6]],floor:['blank'],deco:[['canvas',3]]},
   garden:{tint:['rgba(255,200,130,.12)','soft-light'],shade:null,fog:'radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,220,160,.18),rgba(0,0,0,0) 65%)',parts:[['mote',14]],floor:['sunpool','leaf'],deco:[['frame',2],['tree',1]]}};
@@ -210,7 +215,7 @@
  // ---- 조형물(표현 전용 소품) ------------------------------------------------------------------------------
  function decoProps(r,st){if(!prefs.deco)return;if(st.decoPlaced)return;st.decoPlaced=true;const all=[...st.deco];if(st.lift)all.push({id:'r123:'+st.zone+':lift',kind:'lift',x:st.lift.x,y:st.lift.y,seed:1,floor:st.theme.floors?.list?.slice(-1)[0]});
   for(const d of all){const q={id:d.id,x:d.x,y:d.y,height:60,solid:false,visible:true,enabled:true,autoTargetEligible6:false,r80PresentationOnly:true,r123Deco:d},a=ART[d.kind];
-   if(a&&prefs.art){q.path=a.path;q.height=a.h;if(a.lift)q.visualLiftPx=a.lift;try{if(typeof addImage==='function')addImage(a.path);}catch(e){fail(e);}stats.art=(stats.art||0)+1;}r.props.push(q);}}
+   if(a&&prefs.art){q.path=a.path;q.height=a.h;if(a.lift)q.visualLiftPx=a.lift;if(a.frames)q.r129Frames=a.frames;try{if(typeof addImage==='function')for(const f of a.frames||[a.path])addImage(f);}catch(e){fail(e);}stats.art=(stats.art||0)+1;}r.props.push(q);}}
  const DRAW={
   teacup(g,q,u,t,d){const w=u*1.25,h=u*.95;g.fillStyle='rgba(30,10,20,.35)';g.beginPath();g.ellipse(q.x,q.y+2,w*1.05,w*.36,0,0,TAU);g.fill();g.fillStyle='#d8cec3';g.beginPath();g.ellipse(q.x,q.y,w*.95,w*.32,0,0,TAU);g.fill();
    g.fillStyle='#efe5da';g.beginPath();g.moveTo(q.x-w*.62,q.y-h);g.bezierCurveTo(q.x-w*.6,q.y-h*.35,q.x-w*.42,q.y-h*.06,q.x,q.y-h*.04);g.bezierCurveTo(q.x+w*.42,q.y-h*.06,q.x+w*.6,q.y-h*.35,q.x+w*.62,q.y-h);g.closePath();g.fill();
@@ -242,6 +247,12 @@
    g.fillStyle='#e8dcc0';g.font='bold '+Math.round(u*.34)+'px serif';g.textAlign='center';g.textBaseline='middle';g.fillText(d.floor==='G'?'G':d.floor+'F',q.x,y0-h/2);},
   noticeboard(g,q,u,t,d){const w=u*1.2,h=u*.9,y0=q.y-u*1.2;g.fillStyle='#4a3020';g.fillRect(q.x-w/2,y0-h,w,h);g.fillStyle='#7a5a3a';g.fillRect(q.x-w/2+u*.08,y0-h+u*.08,w-u*.16,h-u*.16);
    g.fillStyle='#e8dcc0';for(const[dx,dy,pw,ph]of[[-.4,-.75,.32,.4],[.1,-.78,.3,.22],[-.38,-.3,.3,.2],[.1,-.48,.3,.38]])g.fillRect(q.x+dx*w,y0+dy*h,pw*w,ph*h);},
+  brush(g,q,u,t,d){g.strokeStyle='#6a4022';g.lineWidth=Math.max(2,u*.09);g.lineCap='round';g.beginPath();g.moveTo(q.x+u*.7,q.y-u*.35);g.lineTo(q.x-u*.25,q.y-u*.05);g.stroke();
+   g.fillStyle='#a0a4a8';g.fillRect(q.x-u*.38,q.y-u*.08,u*.16,u*.1);g.fillStyle='#7aa0b8';g.beginPath();g.ellipse(q.x-u*.55,q.y,u*.2,u*.09,-.3,0,TAU);g.fill();},
+  tweezers(g,q,u,t,d){g.strokeStyle='#b0b4b8';g.lineWidth=Math.max(1.5,u*.05);g.beginPath();g.moveTo(q.x+u*.6,q.y-u*.5);g.lineTo(q.x-u*.25,q.y-u*.08);g.moveTo(q.x+u*.6,q.y-u*.42);g.lineTo(q.x-u*.25,q.y-u*.08);g.stroke();
+   g.fillStyle='#e0b030';g.beginPath();g.moveTo(q.x-u*.25,q.y-u*.12);g.lineTo(q.x-u*.5,q.y-u*.02);g.lineTo(q.x-u*.32,q.y+u*.12);g.lineTo(q.x-u*.1,q.y+u*.02);g.closePath();g.fill();},
+  vase(g,q,u,t,d){g.fillStyle='rgba(200,220,230,.55)';g.fillRect(q.x-u*.16,q.y-u*.55,u*.32,u*.55);g.strokeStyle='#3a6a30';g.lineWidth=Math.max(1,u*.04);g.beginPath();g.moveTo(q.x,q.y-u*.5);g.lineTo(q.x-u*.1,q.y-u*1.1);g.moveTo(q.x,q.y-u*.5);g.lineTo(q.x+u*.15,q.y-u*1.05);g.stroke();
+   g.fillStyle='#a07ac8';for(const[dx,dy]of[[-.12,-1.15],[.17,-1.1],[0,-1.25],[-.25,-1]]){g.beginPath();g.ellipse(q.x+dx*u,q.y+dy*u,u*.12,u*.18,0,0,TAU);g.fill();}},
   stairs(g,q,u,t,d){const[dx,dy]=d.dir||[0,-1],[px,py]=d.perp||[1,0],W=.75,step=.32,hp=u*.42,bx=d.x-dx*1.6,by=d.y-dy*1.6;
    // 벽 쪽으로 오르는 다섯 칸: 영웅 쪽(앞)이 낮고 벽 쪽이 높다. 세계 좌표로 그려 바닥과 맞고, 뒤 칸부터 그린다.
    for(let k=4;k>=0;k--){const s0=k*step,s1=s0+step,hh=(k+1)*hp,a=P(bx+dx*s0-px*W,by+dy*s0-py*W),b=P(bx+dx*s0+px*W,by+dy*s0+py*W),c=P(bx+dx*s1+px*W,by+dy*s1+py*W),e=P(bx+dx*s1-px*W,by+dy*s1-py*W);
@@ -443,6 +454,9 @@
   if(typeof drawExits==='function'){const b=drawExits;drawExits=function(...a){const r=b.apply(this,a);try{ground();}catch(e){fail(e);}return r;};}
   if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(p?.r123Deco){if(!prefs.deco||!prefs.mood)return;
     // 원화가 있고 준비됐으면 게임의 소품 그리기(그림자·가림·접지 그대로), 아직이면 다시 요청하고 코드 그림으로 버틴다(지역 이동 때 그림 캐시가 비워진다)
+    if(p.r129Frames&&prefs.art){try{const n=p.r129Frames.length;let st=clockPlay.get(p.id);// 녹는 시계: 영웅이 가까이 오면 K1→K4 를 한 번, K4 에서 멈춘다(되감기 없음)
+     if(!st&&typeof player!=='undefined'&&player&&Math.hypot(player.x-p.x,player.y-p.y)<3.6){st={t0:performance.now()};clockPlay.set(p.id,st);stats.clockPlays=(stats.clockPlays||0)+1;}
+     p.path=p.r129Frames[st?Math.min(n-1,Math.floor((performance.now()-st.t0)/520)):0];}catch(e){fail(e);}}
     if(p.path&&prefs.art){let ok=false;try{ok=typeof readyImage==='function'&&!!readyImage(p.path);if(!ok&&typeof addImage==='function')addImage(p.path);}catch(e){fail(e);}if(ok){stats.drawnArt=(stats.drawnArt||0)+1;return b.call(this,p,...a);}}
     try{if(live())drawDeco(p);}catch(e){fail(e);}return;}return b.call(this,p,...a);};}
   if(typeof showSettings==='function'){const b=showSettings;showSettings=function(...a){const r=b.apply(this,a);try{settingsSection();}catch(e){fail(e);}return r;};}

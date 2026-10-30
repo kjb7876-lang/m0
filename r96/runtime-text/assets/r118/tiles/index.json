@@ -344,6 +344,25 @@
    "bytes": 494468,
    "sha256": "7e079ffa0806d70efd391fe7f335fddf2ccd3582e91d9f867f0aa58eb0bd5d37",
    "added": "R120"
+  },
+  "cement14": {
+   "family": "S04-14F-cement-wall",
+   "regions": [
+    "sz115-S04-12"
+   ],
+   "floor": null,
+   "wall": {
+    "source": "cement-wall-original.png (StoryWorld-S04-14F-cement-wall-ORIGINAL-PART01/02-20261030.zip, SHA 7d1c6167…)",
+    "decodedRgbSha256": "dd9f5c8dd8a07a680b7d7b7bd6df7407bf707777792babd827e81d95b070a986",
+    "size": [
+     1254,
+     1254
+    ]
+   },
+   "file": "cement14.webp",
+   "bytes": 867448,
+   "sha256": "35bc9f0f4d99300a12912ad146872d7597d75d1b9824350bfae9a9b3f77ac27c",
+   "added": "R129"
   }
  }
 }
