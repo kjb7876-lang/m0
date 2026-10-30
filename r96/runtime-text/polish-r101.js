@@ -370,11 +370,13 @@ function guideTravel(dir){const G=window.__STORYWORLD_GUIDE_R77__;let id=false;t
  const res=travel(dir);if(id&&res&&typeof res.then==='function')res.then(ok=>{if(!ok)G.cancelNextNormal(id);},()=>G.cancelNextNormal(id));stats.guideTravels=(stats.guideTravels||0)+1;return res;}
 // 그래도 다른 길(E 대신 누르기 등)로 난이도 창이 열려 길잡이가 멈추면: 길잡이 ON 이고 창이 열린 뒤 사람이 아무것도 누르지 않은 채 3초가 지나면
 //  지금 골라진 난이도로 확인을 누른다(R118 '난이도 선택을 지금 값으로 확정'과 같은 규칙). 사람이 누르거나 고르면 손대지 않는다.
-const diffWatch={openAt:0,input:0};
-try{for(const ev of ['pointerdown','keydown','touchstart'])document.addEventListener(ev,e=>{if(e.isTrusted)diffWatch.input=Date.now();},true);}catch(_){}
+const diffWatch={openAt:0,input:0,touched:false};
+// R135 (Codex 리뷰): 창이 열린 뒤 첫 확인(0.3초 간격) 전에 누른 것도 사람 입력으로 본다 — 입력 순간 난이도 창이 보이면 표시해 둔다.
+const diffOpen=()=>{const b=document.getElementById('r71DifficultyConfirm');return !!(b&&b.offsetParent);};
+try{for(const ev of ['pointerdown','keydown','touchstart'])document.addEventListener(ev,e=>{if(!e.isTrusted)return;diffWatch.input=Date.now();if(diffOpen())diffWatch.touched=true;},true);}catch(_){}
 setInterval(()=>{try{const btn=document.getElementById('r71DifficultyConfirm'),on=typeof guide!=='undefined'&&!!guide&&prefs.guide;
- if(!btn||!btn.offsetParent){diffWatch.openAt=0;return;}if(!diffWatch.openAt){diffWatch.openAt=Date.now();return;}
- if(on&&diffWatch.input<diffWatch.openAt&&Date.now()-diffWatch.openAt>3000){diffWatch.openAt=Date.now()+60000;stats.guideDifficulty=(stats.guideDifficulty||0)+1;btn.click();}}catch(e){fail(e);}},300);
+ if(!btn||!btn.offsetParent){diffWatch.openAt=0;diffWatch.touched=false;return;}if(!diffWatch.openAt){diffWatch.openAt=Date.now();return;}
+ if(on&&!diffWatch.touched&&diffWatch.input<diffWatch.openAt&&Date.now()-diffWatch.openAt>3000){diffWatch.openAt=Date.now()+60000;stats.guideDifficulty=(stats.guideDifficulty||0)+1;btn.click();}}catch(e){fail(e);}},300);
 function extendGuide(){if(player.moving||(typeof route!=='undefined'&&route?.length)||(typeof command!=='undefined'&&command)){idleSince=time;return;}
  if(time-idleSince<1||time-lastAct<.6)return;lastAct=time;const g=POL()?.goal?.();if(!g)return;const d=Math.hypot(g.x-player.x,g.y-player.y);
  if(g.kind==='enemy'||g.kind==='boss'){const e=(room.enemies||[]).find(v=>v.hp>0&&Math.abs(v.x-g.x)<.01&&Math.abs(v.y-g.y)<.01);if(e&&d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;stats.guideActs++;return;}}
