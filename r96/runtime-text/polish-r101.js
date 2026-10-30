@@ -358,15 +358,42 @@ if(typeof tick==='function'){const tkBase=tick;tick=function(dt,...a){
  return tkBase.call(this,dt,...a);};}
 //  ④ 나침반 목표는 출구인데 그 출구가 몹 무리를 처치해야 열리는 경우(dist00 '침식된 명령의 봉인 해제'), 길잡이가 닫힌 문 앞에서
 //     0.6초마다 이동만 시도하며('안전한 문 접근점을 찾지 못했습니다') 몹이 살아 있는 채로 멈췄다 — R75 길잡이 목표가 몹이면 그 몹부터 친다.
+// R136: 몹을 다 잡은 뒤 R75 목표가 문 너머 상호작용 지점(dist00 '뿌리 연결 절단')인데 나침반은 닫힌 출구를 가리키면, 세계 결계 방의 wardStep 이
+//  출구만 0.6초마다 시도해 150초 넘게 멈췄다(재현). R75 길잡이는 가까운 문을 열고 지나가는 길을 알므로 이때는 R75 에 맡긴다.
+function r75Objective(){try{const g75=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();if(!g75||!['objective','interaction','door'].includes(g75.kind))return false;
+ const gp=POL()?.goal?.();if(gp&&gp.kind!=='exit'&&gp.kind!=='portal')return false;stats.guideR75Objective=(stats.guideR75Objective||0)+1;return true;}catch(e){fail(e);return false;}}
+// R136: R75 의 문 접근(StoryInteractionCoreR74.approach)은 경로의 모든 마디가 몸 반지름 .31 로 곧게 트여 있어야 받아들이고 길 찾기를 3번만 해,
+//  모퉁이를 도는 격자 경로를 모두 버려 닫힌 문 쪽으로 걷지도 못했다(dist00 문-0 → '뿌리 연결 절단'). 목표로 가는 길이 없을 때만
+//  가장 가까운 닫힌 문의 이쪽 문턱(게임 canUse 와 같은 .9칸 앞)까지 걸어가 연다. 열린 뒤에는 R75 가 그대로 이어 간다.
+let doorPlanAt=0;
+function guideDoorStep(target){try{const W=window.__STORYWORLD_WORLD_R74__,pt=target||window.__STORYWORLD_GUIDE_R75__?.currentGoal?.()?.point;if(!W||!pt)return false;
+ if(typeof findPath==='function'&&findPath(player,pt,room,.31)?.length)return false;
+ const ds=room?.exploration?.worldR74?.doors||[],closed=(W.interactions?.()||[]).filter(t=>t.kind==='door'&&t.label==='문 열기');let best=null;
+ for(const t of closed){const d=ds.find(v=>v.id===t.id);if(!d)continue;if(W.canUse(t)){if(W.use(t)){stats.guideDoors=(stats.guideDoors||0)+1;route=[];return true;}continue;}
+  for(const s of [-1,1]){const q={x:d.axis==='x'?d.x+s*.9:d.x,y:d.axis==='y'?d.y+s*.9:d.y};if(typeof blocked==='function'&&blocked(q.x,q.y,.29,room))continue;
+   const p=POL()?.navPath?.(player,q)||(typeof findPath==='function'?findPath(player,q,room,.29):null);if(p?.length&&(!best||p.length<best.p.length))best={p,t};}}
+ if(!best)return false;route=best.p.slice(1).map(v=>({x:v.x,y:v.y}));command=null;stats.guideDoorWalk=(stats.guideDoorWalk||0)+1;return true;}catch(e){fail(e);return false;}}
 function chasePackGoal(g){try{if(!g||(g.kind!=='exit'&&g.kind!=='portal'))return false;const g75=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();
- if(g75?.kind!=='enemy'||!g75.point)return false;const pt=g75.point,live=(room.enemies||[]).filter(v=>v.hp>0&&v.spawnState!=='dead');
+ if(!g75?.point)return false;
+ // R136: 몹 무리를 다 잡은 뒤 R75 목표가 '뿌리 연결 절단' 같은 상호작용 지점으로 바뀌어도 나침반은 닫힌 출구를 가리켜 길잡이가 100초 넘게 멈췄다
+ //  (dist00, 숨은 보스는 그 지점을 써야 나온다) — 그 지점으로 가서 E 를 대신 누른다.
+ if(g75.kind==='objective'||g75.kind==='interaction'||g75.kind==='door'){const q=g75.point,dq=Math.hypot(q.x-player.x,q.y-player.y);
+  if(dq<2.2){if(typeof interact==='function')interact();route=[];stats.guideObjective=(stats.guideObjective||0)+1;return true;}
+  const p=POL()?.navPath?.(player,q)||(typeof findPath==='function'?findPath(player,q):null);if(p?.length>1){route=p.slice(1).map(v=>({x:v.x,y:v.y}));command=null;stats.guideObjective=(stats.guideObjective||0)+1;return true;}return false;}
+ if(g75.kind!=='enemy')return false;const pt=g75.point,live=(room.enemies||[]).filter(v=>v.hp>0&&v.spawnState!=='dead');
  const e=live.find(v=>v.id===pt.id)||live.filter(v=>Math.hypot(v.x-pt.x,v.y-pt.y)<4).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];if(!e)return false;
  const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<8&&typeof clearLine==='function'&&clearLine(player,e)){command=e.id;target=e.id;route=[];}
  else{const p=POL()?.navPath?.(player,e)||(typeof findPath==='function'?findPath(player,e):null);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;}else return false;}
  stats.guidePack=(stats.guidePack||0)+1;return true;}catch(e){fail(e);return false;}}
 // R134 (사용자 2026-10-30 "길잡이 버그"): 길잡이가 출구에서 travel 을 바로 불러 R77 '다음 서사 맵은 노말' 표시를 건너뛰었다 —
 //  난이도 선택 창이 열린 채 길잡이가 멈췄다(쉼터 → 첫 기억에서 재현). 원래 길잡이처럼 노말 표시를 먼저 걸고 이동한다.
-function guideTravel(dir){const G=window.__STORYWORLD_GUIDE_R77__;let id=false;try{id=G?.armNextNormal?.({kind:'portal',direction:dir,source:'guide-goal'},zone,layer);}catch(e){fail(e);}
+function guideTravel(dir){
+ // R136: 결계 방을 정리한 뒤 실제 출구(게임 status().point, 결계 방은 따로 그린 다음 포탈)는 나침반 출구 자리와 달라, 나침반 자리에 선 채
+ //  '문 입구의 안전한 길로 접근하세요.'만 0.5초마다 떴다(dist00 보스 뒤 40초 넘게 멈춤). 게임이 쓰는 포탈 자리로 먼저 걸어간다.
+ try{const st=window.__STORYWORLD_ROUTES_R72__?.status?.(dir);if(st?.open&&st.point&&(Math.hypot(st.point.x-player.x,st.point.y-player.y)>2.2||(typeof clearPath3==='function'&&!clearPath3(player,st.point,.31,room)))){
+  const p=POL()?.navPath?.(player,st.point)||(typeof findPath==='function'?findPath(player,st.point,room,.31):null);if(p?.length>1){route=p.slice(1).map(v=>({x:v.x,y:v.y}));command=null;stats.guidePortalWalk=(stats.guidePortalWalk||0)+1;return false;}
+  if(guideDoorStep(st.point)){stats.guidePortalDoor=(stats.guidePortalDoor||0)+1;return false;}}}catch(e){fail(e);}// 포탈이 닫힌 문(보스 방 문) 너머면 그 문부터 연다
+ const G=window.__STORYWORLD_GUIDE_R77__;let id=false;try{id=G?.armNextNormal?.({kind:'portal',direction:dir,source:'guide-goal'},zone,layer);}catch(e){fail(e);}
  const res=travel(dir);if(id&&res&&typeof res.then==='function')res.then(ok=>{if(!ok)G.cancelNextNormal(id);},()=>G.cancelNextNormal(id));stats.guideTravels=(stats.guideTravels||0)+1;return res;}
 // 그래도 다른 길(E 대신 누르기 등)로 난이도 창이 열려 길잡이가 멈추면: 길잡이 ON 이고 창이 열린 뒤 사람이 아무것도 누르지 않은 채 3초가 지나면
 //  지금 골라진 난이도로 확인을 누른다(R118 '난이도 선택을 지금 값으로 확정'과 같은 규칙). 사람이 누르거나 고르면 손대지 않는다.
@@ -399,7 +426,8 @@ function wardStep(){if(time<wardPlan)return;wardPlan=time+.6;const g=POL()?.goal
  const p=POL()?.navPath?.(player,g);if(p?.length>1){route=p.slice(1).map(q=>({x:q.x,y:q.y}));command=null;stats.guideNav++;}}
 if(typeof guideStep==='function'){const gsBase=guideStep;guideStep=function(...a){
  try{if(enteringNow())return;}catch(_){}
- try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true&&window.__STORYWORLD_WORLD_COMBAT_R78__?.controlled?.(room)===true){wardStep();return;}}catch(e){fail(e);}
+ try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true&&window.__STORYWORLD_WORLD_COMBAT_R78__?.controlled?.(room)===true&&!r75Objective()){wardStep();return;}}catch(e){fail(e);}
+ try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&!nearestEnemy?.(8)&&r75Objective()&&time>=doorPlanAt){doorPlanAt=time+.5;if(guideDoorStep())return;}}catch(e){fail(e);}
  const r=gsBase.apply(this,a);try{if(prefs.guide&&typeof guide!=='undefined'&&guide&&live()&&!modal&&!loading&&player.hp>0&&!storyScene&&window.__STORYWORLD_COOP_CLIENT_R62__?.active?.()!==true)extendGuide();}catch(e){fail(e);}return r;};}
 // 3) death: with the guide on, the hero returns to the sanctuary after a short pause and
 //    the guide stays on, so a run keeps going without a tap.
