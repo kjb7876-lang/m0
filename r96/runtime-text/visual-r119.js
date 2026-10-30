@@ -162,6 +162,13 @@
   try{const [sx,sy,sw,sh]=rect,c=document.createElement('canvas');c.width=Math.ceil(sw);c.height=Math.ceil(sh);const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,sw,sh);const d=g.getImageData(0,0,c.width,c.height).data;
    let x0=c.width,y0=c.height,x1=-1,y1=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(sw,x1-x0+3),Math.min(sh,y1-y0+3)];}catch(_){}m.set(k,box);return box;}
+ // R140: Gemini 걷기 시트는 '몸 키 180px, 발 226'(SPEC)로 그렸는데, 라우렌 시트는 몸이 더 커서(약 205px) 걸을 때만 14% 크게 보였다(서 있기·동작 53.7px, 걷기 61.4px).
+ //  시트마다 칸들의 머리 꼭대기 중앙값으로 발(226)~머리 키를 한 번 재서 그 키로 맞춘다(SPEC 180 근처면 그대로).
+ const sheetMemo=new WeakMap();
+ function sheetMeasure(im,cols,rows){let v=sheetMemo.get(im);if(v)return v;v={body:180,foot:226};try{const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;rows=Math.max(1,Math.round(H/256));cols=Math.max(1,Math.round(W/192));const cw=W/cols,ch=H/rows,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,W,H).data,hs=[],fs=[];
+   for(let r=0;r<rows;r++)for(let k=0;k<cols;k++){const x0=Math.round(k*cw+96-50),x1=Math.round(k*cw+96+50),y0=Math.round(r*ch),yh=Math.round(ch);let top=-1,bot=-1;for(let y=y0;y<y0+yh&&top<0;y++)for(let x=x0;x<x1;x+=2)if(d[(y*W+x)*4+3]>24){top=y-y0;break;}for(let y=y0+yh-1;y>=y0&&bot<0;y--)for(let x=x0;x<x1;x+=2)if(d[(y*W+x)*4+3]>24){bot=y-y0;break;}if(top>=0&&bot>top){hs.push(226-top);fs.push(bot);}}
+   hs.sort((a,b)=>a-b);fs.sort((a,b)=>a-b);const m=hs[hs.length>>1],f=fs[fs.length>>1];if(m>=150&&m<=240)v.body=m;stats.sheetBody=v.body;/* 발은 SPEC 226 그대로 — 맨 아래 알파는 늘어진 칼끝·옷자락일 수 있다(슬레이어 옆 걷기) */}catch(_){}sheetMemo.set(im,v);return v;}
+ const sheetBody=(im,cols,rows)=>sheetMeasure(im,cols,rows).body;
  if(typeof drawHero==='function'){const heroDraw=drawHero;drawHero=function(...a){preloadHeroArt();const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=heroDraw.apply(this,a);
   // R136: 맞은 뒤 '피격 보호' 동안 몸 전체가 84% 불투명으로 그려져, 전투 중 거의 내내 영웅이 반투명해 보였다(사용자 '투명화'). 몸은 불투명하게.
   try{if(st>=0&&player&&player.invincible>0){for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind==='image'&&c.owner?.kind==='hero'&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))&&c.style&&c.style.globalAlpha<1&&c.style.globalAlpha>=.8){c.style.globalAlpha=1;stats.opaqueHit=(stats.opaqueHit||0)+1;}}}}catch(_){}
@@ -184,6 +191,8 @@
      // 멈춘 직후에도 R91 걷기 칸(여백 포함 칸 전체)이 한두 장면 그려져 몸이 갑자기 커졌다(사용자: 네온 이동 후 멈춤이 이상) — 몸 테두리로 잘라 서 있기 키로 그린다.
      if(sb&&/r91\/walk\//.test(String(sb.sourcePath||''))&&!sb.r121Walk&&sb.sourceRect){const im=sb.image,b=tightBox(im,sb.sourceRect),P=sb.points,fx=(P[2][0]+P[3][0])/2,fy=Math.max(P[2][1],P[3][1]),f=P[1][0]<P[0][0]?-1:1,want=actorHeight()*(standRatio.v||.98),w=want*b[2]/b[3];
       Object.assign(sb,{sourceRect:b,points:[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]],r121Walk:true});stats.walkStops=(stats.walkStops||0)+1;return r;}
+     // R140: 같은 서 있기 그림을 같은 자리에 두 번 그리던 것(환도 R93) — 한 장만 남긴다(겹쳐 그리면 반투명 테두리가 진해진다).
+     if(sb)for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==sb&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===sb.image&&String(c.sourceRect)===String(sb.sourceRect)&&String(c.points)===String(sb.points)){rec.commands.splice(i,1);stats.dupBodies=(stats.dupBodies||0)+1;}}
      const fr=sb&&bodyFracOf(sb.image,sb.sourceRect);if(fr&&sbh>6){const v=sbh*fr/actorHeight();if(v>.6&&v<1.6){standRatio.v=standRatio.v==null?v:standRatio.v*.9+v*.1;stats.standRatio=Math.round(standRatio.v*1000)/1000;}}}return r;}
    if(busyMove)return r;
    const sh=sheetFor(player.hero,walkState.dir);if(!sh)return r;let row=typeof readyImage==='function'?readyImage(sh.path):null;
@@ -199,10 +208,13 @@
    // R134: Gemini 시트(칸 192x256, 모든 칸 발 가운데 96,226, 몸 키 180 — SPEC)는 칸마다 테두리 가운데·테두리 키로 맞추면 무기·코트가 흔들릴 때
    //  몸이 좌우로 미끄러지고(기억사수·슬레이어 테두리 가운데가 20px 넘게 움직임) 무기를 든 칸에서 몸이 작아졌다 — 칸의 발 기준점·고정 배율로 그린다.
    let pts=[[fx-f*w/2,fy-want],[fx+f*w/2,fy-want],[fx+f*w/2,fy],[fx-f*w/2,fy]];
-   if(sh.r128&&frame>=0){const cw=(im.naturalWidth||im.width)/(sh.cols||8),ax=(frame%(sh.cols||8))*cw+96,ay=226,k=want/180,X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*k;
+   if(sh.r128&&frame>=0){const cw=(im.naturalWidth||im.width)/(sh.cols||8),ax=(frame%(sh.cols||8))*cw+96,ay=226,k=want/sheetBody(im,sh.cols||8,sh.rows||2),X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*k;
     pts=[[X(box[0]),Y(box[1])],[X(box[0]+box[2]),Y(box[1])],[X(box[0]+box[2]),Y(box[1]+box[3])],[X(box[0]),Y(box[1]+box[3])]];stats.walkAnchor=(stats.walkAnchor||0)+1;}
    Object.assign(best,{image:im,sourcePath:im.src||sh.path,immutableTint:null,sourceRect:box.slice(),imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
-    points:pts,r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;}catch(e){lastError=String(e?.message||e);}
+    points:pts,r121Walk:true});stats.walk=(stats.walk||0)+1;stats.walkDir=walkState.dir;
+   // R140: 몸을 두 번 그리는 영웅(환도: 몸 + 겹친 사본)은 R91 걷기·R93 서 있기가 두 장을 모두 바꿔, 여기서 큰 한 장만 새 걷기로 바꾸면
+   //  나머지 한 장(옛 R91 걷기·공격 아틀라스 조각)이 함께 보였다(사용자 '두 개 동시에'). 걷기로 바꾼 뒤 같은 그리기의 다른 몸 그림은 지운다.
+   for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&BODY_ART.test(String(c.sourcePath||c.image?.src||''))){rec.commands.splice(i,1);stats.extraBodies=(stats.extraBodies||0)+1;}}}catch(e){lastError=String(e?.message||e);}
   return r;};}
  // 9) 기억사수 적중 표시 (사용자 2026-10-29 "공격 적중 시 / 이펙트는 없애고 원형이나 십자가로"): 기본 적중 그림(gunner-memory-impact,
  //    대각선 파편 베기 모양) 대신 하늘색 원이 퍼지며 사라지고 가운데에 짧은 십자가 반짝인다. 적 그림의 가운데(R115)에 그린다. 다른 영웅은 그대로. 설정 gunnerHit.

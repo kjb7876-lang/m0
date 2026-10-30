@@ -10808,6 +10808,21 @@
       "sha256": "2095970f41f08193b13a407450955fe0fd88e6b60d60a4fa6df166caf2d899da"
     },
     {
+      "path": "assets/r140/intro/index.json",
+      "bytes": 702,
+      "sha256": "31202db1dd80dd66a9bba8434e1ce946c670c50dd4c3da3f5448937749a1aa8e"
+    },
+    {
+      "path": "assets/r140/intro/opening-8heroes.mp4",
+      "bytes": 5054974,
+      "sha256": "760edaf1f948c3976b4fabe7b2acf689ed83f2c762a1f86c6606872f3c8cd398"
+    },
+    {
+      "path": "assets/r140/intro/poster.jpg",
+      "bytes": 13554,
+      "sha256": "262984a19a4e9d07134cfc8fed88b5ef1b00473ea14ccca68e54b9585f8b1b1c"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19469,8 +19484,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563338,
-      "sha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d"
+      "bytes": 6563424,
+      "sha256": "e4ea5e918466a44931dbf21622090c021c15f68c9a66e2cbe66f5bfa2ab07da5"
+    },
+    {
+      "path": "intro-r140.js",
+      "bytes": 3772,
+      "sha256": "13099847e64cbc1b1af0cbe0c5a2fe37949340abdf01827bc45c183c2591fbbb"
     },
     {
       "path": "mobs-r109.js",
@@ -19544,8 +19564,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 67439,
-      "sha256": "fb09fa31739d4f73e736b50841c7ca41bf83a720c3ff79a01a1bff82ad72177c"
+      "bytes": 66674,
+      "sha256": "5d963cbfd9cde69545903cc138448ebfdd2acaf7277c4dbbeff8099ce07cd0ec"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -19561,6 +19581,11 @@
       "path": "props-static-r105.js",
       "bytes": 6482,
       "sha256": "29c89a776282d09cbe54b6392828bc8fa26596f63c1463697bee5cf72332f490"
+    },
+    {
+      "path": "props-variety-r140.js",
+      "bytes": 2841,
+      "sha256": "7e1499a3ecbccea82387c5609a22b901b153c8eb64f510fb313339b629584adb"
     },
     {
       "path": "render-compat-r83.js",
@@ -19599,8 +19624,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 41295,
-      "sha256": "3783499ad7e5226d9e1b77e8cae962ed8ef5758e039f8fd9db77858230151ec6"
+      "bytes": 41423,
+      "sha256": "3fa51ddd4fd1d76fcf72690b2004405e50718e04319f166b7f647d14311d38e4"
     },
     {
       "path": "scene-props-r117.js",
@@ -19614,8 +19639,8 @@
     },
     {
       "path": "story-batch-r139.js",
-      "bytes": 4380,
-      "sha256": "ede22704de68e6d21722a1aba556debeb468c0b6217dc506958697a686083285"
+      "bytes": 5501,
+      "sha256": "4c5b13c880cb752fb36163e2894b897256d116c64692ef5482609618363ae09e"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -19674,8 +19699,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 39272,
-      "sha256": "d5e6e6672ff129a2e8317b1bc783d81454eb56cdf4395ec4ff4bbf188feee531"
+      "bytes": 42011,
+      "sha256": "f738d96db730804b1f137de39df62c0f2ba69866f01227b27fa5d9a0a9654264"
     },
     {
       "path": "visual-r90-world.js",
@@ -19749,8 +19774,8 @@
     },
     {
       "path": "world-environment-r81.js",
-      "bytes": 10233,
-      "sha256": "fae6cb6ccfb5b506abc7692fdd809bc9708cc886b5bb244bde44055c8092a558"
+      "bytes": 10327,
+      "sha256": "6b71be371263fc89e144033e633bb048e9287270d4299779b5b0a94836c034d9"
     },
     {
       "path": "world-layout-r78.js",
@@ -19788,9 +19813,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3957,
-  "totalBytes": 779545555,
-  "webHTMLSha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d",
+  "fileCount": 3962,
+  "totalBytes": 784624801,
+  "webHTMLSha256": "e4ea5e918466a44931dbf21622090c021c15f68c9a66e2cbe66f5bfa2ab07da5",
   "largest": [
     {
       "path": "index.html",

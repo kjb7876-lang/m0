@@ -3167,7 +3167,12 @@
     "assets/r138/props/index.json",
     "samong-ult-r139.js",
     "assets/r106/fx/runecross.webp",
-    "story-batch-r139.js"
+    "story-batch-r139.js",
+    "props-variety-r140.js",
+    "intro-r140.js",
+    "assets/r140/intro/opening-8heroes.mp4",
+    "assets/r140/intro/poster.jpg",
+    "assets/r140/intro/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4242,5 +4247,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "8a9586a1a287765d9fe042675738b12af66519aaf6c80744c44e20fea2e9c538"
+  "runtimeManifestSHA256": "5faee6eb1cb2659b989ffcfdf3c1157fd63d1e1baa5bcb02c2622fbc31fe3fa1"
 }

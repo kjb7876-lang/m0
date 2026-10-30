@@ -66,7 +66,7 @@
   const sourcePalette=regionById[r.id]?.regionObjects6||native,quietPalette=sourcePalette.filter(p=>p.path&&!/gate|door|stair|arch|frame|threshold|portal|entrance/i.test(p.path)),palette=quietPalette.length?quietPalette:sourcePalette;
   generic.forEach((p,i)=>{if(position(r,p,i*2,used)){const donor=palette[i%Math.max(1,palette.length)];if(donor?.path){p.r81NativeSkin={path:donor.path,height:Math.min(86,Number(donor.height)||68)};metrics.genericReskinned++;}}});
   // R94: passage-like or façade art (R80 list) is swapped for a same-series piece.
-  const swap=window.__STORYWORLD_PROP_SUBSTITUTE_R94__||(k=>k),keys=[...new Set((spec.props||[]).map(swap).filter(Boolean))],large=keys.length===1&&D.assets[keys[0]]?.scale>=1.7,count=large?8:12;
+  const swap=window.__STORYWORLD_PROP_SUBSTITUTE_R94__||(k=>k),keys=[...new Set((spec.props||[]).map(swap).filter(Boolean))],large=keys.length===1&&D.assets[keys[0]]?.scale>=1.7,count=8;// R140: 지역 장면 소품 12→8(물려받은 검사의 하한 8) — 조형물이 너무 많았다
   for(let i=0;i<count;i++){const key=keys[i%keys.length],a=D.assets[key];if(!a)continue;let p=scene[i];if(!p){p={id:'r81:scene:'+r.id+':'+i,path:a.path,r80Dressing:true,r80Art:key,r80PresentationOnly:true,solid:false,visible:true,enabled:true,height:64*a.scale};r.props.push(p);}if(position(r,p,i+3,used))metrics.sceneProps++;}
   // R80 never made more than six; remove no source object and add no solid object.
   r.worldEnvironmentR81={version:1,family:specs[r.id].family,nativeProps:native.length,genericProps:generic.length,sceneProps:count,occupiedRooms:[...new Set(used.map(p=>p.node))].sort((a,b)=>a-b)};metrics.rooms++;return r;

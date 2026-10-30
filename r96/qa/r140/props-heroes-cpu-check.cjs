@@ -1,0 +1,27 @@
+// R140 CPU check: fewer decorative props, mirrored free-standing props (not wall pieces), hero walk sheet scale and single body.
+const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
+const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
+for(const f of['props-variety-r140.js','visual-r119.js','world-environment-r81.js','samong-zones-r115.js'])ok(f+' runtime copy matches',fs.readFileSync(path.join(R,'runtime-text',f),'utf8')===C(f));
+ok('R81 scene props per region 12 -> 8 (inherited R81 gate keeps 8-12)',/count=8;/.test(C('world-environment-r81.js')));
+ok('samong scattered props halved and spaced 4.5',/const count=Math\.ceil\(count0\/2\)/.test(C('samong-zones-r115.js'))&&/<4\.5\)\)continue;/.test(C('samong-zones-r115.js')));
+const ops=[];const ctx={save(){ops.push('save')},restore(){ops.push('restore')},translate(x,y){ops.push('t'+x)},scale(x,y){ops.push('s'+x)}};
+const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},ctx,project:(x,y)=>({x:x*10,y:y*10}),drawProp:p=>ops.push('draw:'+p.id)};vm.createContext(sb);vm.runInContext(C('props-variety-r140.js'),sb);
+const V=sb.window.__STORYWORLD_PROPS_VARIETY_R140__;
+const free=[{id:'r81:scene:dist00:1',r80Dressing:true,r80Art:'r80-011',x:1,y:1},{id:'r115:z:s:crate:0',r115Prop:'crate',x:1,y:1},{id:'r123:x',r123Deco:{kind:'teacup'},x:1,y:1},{id:'r138:dist01:bones:0',r138Drive:'bones',x:1,y:1}];
+const fixed=[{id:'r138:dist00:window:0',r138Drive:'window'},{id:'r123:w',r123Deco:{kind:'frame',face:'x'}},{id:'r115:z:a0:n:1:2',r115Prop:'locker'},{id:'r115:clue',r115Clue:'c',r74Prop:'crate'},{id:'npc',r75NPC:true},{id:'door',r74Door:true},{id:'ep-objective',r80Dressing:true}];
+ok('free-standing decorative props are eligible',free.every(p=>V.free(p)),JSON.stringify(free.filter(p=>!V.free(p))));
+ok('wall pieces, clues, doors, NPCs, objectives never flip',fixed.every(p=>!V.free(p)),JSON.stringify(fixed.filter(p=>V.free(p))));
+const many=Array.from({length:200},(_,i)=>({id:'r81:scene:x:'+i,r80Dressing:true,r80Art:'r80-0'+i}));const share=many.filter(V.flipOf).length/200;ok('about half of them are mirrored, fixed per id',share>.35&&share<.65&&many.every(p=>V.flipOf(p)===V.flipOf(p)),share);
+ops.length=0;const pf=many.find(V.flipOf);sb.drawProp(pf);ok('mirror is a horizontal flip around the prop foot',ops.join()===['save','t'+pf.x*10,'s-1','t'+(-pf.x*10),'draw:'+pf.id,'restore'].join(),ops.join());
+ops.length=0;sb.drawProp(fixed[0]);ok('non-eligible props draw unchanged',ops.join()==='draw:'+fixed[0].id);
+const v=C('visual-r119.js');
+ok('walk sheet scaled by its measured body height (Lauren sheet ~205px drew 14% large)',/k=want\/sheetBody\(im,sh\.cols\|\|8,sh\.rows\|\|2\)/.test(v)&&/rows=Math\.max\(1,Math\.round\(H\/256\)\);cols=Math\.max\(1,Math\.round\(W\/192\)\)/.test(v)&&/hs\.push\(226-top\)/.test(v));
+ok('other body images of the same pass are removed once the walk replaces the body (Hwando drew two)',/rec\.commands\.splice\(i,1\);stats\.extraBodies/.test(v));
+ok('duplicate identical idle body removed',/stats\.dupBodies/.test(v));
+{const crypto=require('crypto'),T=path.join(R,'runtime-text'),idx=JSON.parse(fs.readFileSync(path.join(T,'assets/r140/intro/index.json'),'utf8'));const b=fs.readFileSync(path.join(T,idx.video.path));
+ ok('opening video is the Drive original (hash recorded)',crypto.createHash('sha256').update(b).digest('hex')===idx.video.sha256&&idx.video.source.driveId==='1ogaW8Acx01d5IJneiq6xO12rJ6fJH9zT');
+ const it=C('intro-r140.js');ok('intro: new game only, skippable, not under automation',/newGame=async function/.test(it)&&/navigator\.webdriver/.test(it)&&/건너뛰기/.test(it)&&/'Escape'/.test(it)&&fs.readFileSync(path.join(T,'intro-r140.js'),'utf8')===it);}
+const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');ok('props-variety and intro loaded before audio-r98',html.indexOf('intro-r140.js')>0&&html.indexOf('intro-r140.js')<html.indexOf('./audio-r98.js')&&html.indexOf('props-variety-r140.js')>0&&html.indexOf('props-variety-r140.js')<html.indexOf('./audio-r98.js'));
+ok('workflow runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r140/props-heroes-cpu-check.cjs'));
+const fails=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' :: '+c.detail));console.log(fails.length?'FAIL':'PASS',checks.length-fails.length+'/'+checks.length,'r140 checks');if(fails.length)process.exit(1);
