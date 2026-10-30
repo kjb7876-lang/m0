@@ -95,7 +95,7 @@
   use(t,...a){if(controlled(room)&&state()&&[room.exploration.bossDoorId,'door-2'].includes(t?.id)&&!doorIntent)return interact();return nativeDoors.use(t,...a);}
  });
  const interactBase=interact;interact=function(...a){if(!controlled(room)||!state())return interactBase.apply(this,a);if(!started||modal||loading||player?.hp<=0)return false;const s=state(),bossDoor=door(room.exploration.bossDoorId),exitDoor=door('door-2');
-  if(exitDoor&&distance(player,exitDoor)<3.2){if(['exit','exitStory'].includes(s.phase))return showExitStory();if(s.phase==='done'){nativeOpen('door-2');return interactBase.apply(this,a);}toast('보스 전투를 마치고 이 문에서 기억을 확인하세요.',3);return false;}
+  if(exitDoor&&distance(player,exitDoor)<3.2){if(['exit','exitStory'].includes(s.phase))return showExitStory();if(s.phase==='done'){/* R139: 방금 연 문을 일반 문 처리기가 곧바로 다시 닫았다(E 한 번에 열림→닫힘) — 새로 열었으면 여기서 끝낸다 */const was=nativeDoors.isOpen(room,exitDoor);nativeOpen('door-2');if(!was&&nativeDoors.isOpen(room,exitDoor))return true;return interactBase.apply(this,a);}toast('보스 전투를 마치고 이 문에서 기억을 확인하세요.',3);return false;}
   if(bossDoor&&distance(player,bossDoor)<3.2){if(['door','doorStory'].includes(s.phase))return showDoorStory();if(!phaseOpen(bossDoor.id,s)){toast('중앙에 집결한 적과 중간보스를 먼저 제압하세요.',3);return false;}return nativeOpen(bossDoor.id);}
   return interactBase.apply(this,a);
  };

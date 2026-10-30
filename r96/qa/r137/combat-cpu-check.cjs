@@ -38,6 +38,8 @@ r58cleared=r53cleared=0;sb.player.storyStatus150={key:'slow'};sb.player.heroSlow
 check('resonance guard clears R53/R58/story statuses',r58cleared===1&&r53cleared===1&&sb.player.storyStatus150===null&&sb.player.heroSlowUntil150===0);
 sb.guardEnd();calls.length=0;mob.x=3;sb.time=10;sb.tick(1/60);sb.time=17.1;sb.tick(1/60);const started=calls.some(c=>c[0]==='guardStart');sb.time=17.9;sb.tick(1/60);
 check('guide/semi-auto: resonance guard every 7 s for 0.7 s in a fight',started&&calls.some(c=>c[0]==='guardEnd'),JSON.stringify(calls));
+calls.length=0;const keep=[mid.x,boss.x,boss.y];mob.x=9;mid.x=-9;boss.x=9;boss.y=9;sb.time=30;sb.tick(1/60);sb.time=37.1;sb.tick(1/60);sb.time=44.2;sb.tick(1/60);
+check('no automatic guard while enemies idle out of aggro range',!calls.some(c=>c[0]==='guardStart'),JSON.stringify(calls));mob.x=3;[mid.x,boss.x,boss.y]=keep;
 const q=C.overWall({x:0,y:0},{x:1,y:0},0);check('blink target past a thin wall lands on free floor beyond it',q&&q.x>2&&q.x<2.6,JSON.stringify(q));
 check('thick walls (>1.3 tiles) are not crossed',(()=>{const b=sb.blocked;sb.blocked=(x)=>x>1&&x<3;const r=C.overWall({x:0,y:0},{x:1,y:0},0);sb.blocked=b;return r===null;})());
 check('workflow runs this check',fs.readFileSync(path.join(REPO,'.github','workflows','pages.yml'),'utf8').includes('r96/qa/r137/combat-cpu-check.cjs'));

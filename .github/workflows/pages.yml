@@ -111,6 +111,8 @@ jobs:
         run: node r96/qa/r137/combat-cpu-check.cjs
       - name: R138 drive props CPU check
         run: node r96/qa/r138/drive-props-cpu-check.cjs
+      - name: R139 samong ultimate, Lauren meteor violet/cross, guide altar/exit/portal
+        run: node r96/qa/r139/samong-lauren-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

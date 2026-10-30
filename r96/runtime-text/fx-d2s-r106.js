@@ -115,7 +115,7 @@ const DRAW={
   const c=P(e.x,e.y,h*.66),w=h*2.1*(.6+.4*smooth(e.t/.25));if(u<.8){S('wing',F,c.x+h*.08,c.y,w,w,{alpha:.8*(1-u/.8),blend:'lighter'});S('wing',F,c.x-h*.08,c.y,w,w,{alpha:.8*(1-u/.8),flip:true,blend:'lighter'});}},
  // 메테오: 표적 마법진 → 하늘에서 떨어지는 불덩이 → 폭발 → 타오르는 바닥
  meteor(e,u,h){const F=e.F,q=P(e.tx,e.ty),fall=e.fall,v=e.t/fall,fr=Math.floor(time*12);
-  if(e.t<fall+.1)S('rune',F,q.x,q.y,h*2.6,h*2.6,{squash:.5,angle:time*1.5,alpha:.85*smooth(e.t/.15)});
+  if(e.t<fall+.1)S('runecross',F,q.x,q.y,h*2.6,h*2.6,{squash:.5,angle:0,alpha:.85*smooth(e.t/.15)});
   if(e.t<fall){const s={x:q.x+h*4.5,y:q.y-h*8},m={x:lerp(s.x,q.x,v*v),y:lerp(s.y,q.y,v*v)};A('slashline',F,s.x+(m.x-s.x)*.55,s.y+(m.y-s.y)*.55,m.x,m.y,h*.9,{alpha:.9});
    S('flame',F,m.x,m.y,h*1.3,h*2.2,{frame:fr,angle:Math.atan2(m.y-s.y,m.x-s.x)-Math.PI/2+Math.PI,alpha:.9,pivot:[.5,.25]});S('glow',F,m.x,m.y,h*1.8,h*1.8,{alpha:.9});S('orb',pb(F),m.x,m.y,h*.9,h*.9,{alpha:1});return;}
   const w=e.t-fall,k=clamp(w/.35,0,1),burn=1-smooth((w-.9)/(e.life-fall-.9));

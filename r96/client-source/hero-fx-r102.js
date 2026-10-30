@@ -265,7 +265,7 @@ function wingFlash(x,y,s0,F,u,fade){const s=SPR(),a=fade*Math.sin(Math.PI*clamp(
  if(s&&s.draw('wing',F,x+s0*.08,y,W,W,{alpha:.85*a})){s.draw('wing',F,x-s0*.08,y,W,W,{alpha:.85*a,flip:true});for(let i=0;i<4;i++){const fx=x+(rnd(7,i)-.5)*s0*2,fy=y-s0*.2+s0*1.2*smooth(u)*(.4+.6*rnd(8,i));s.draw('feather',F,fx,fy,s0*.12,s0*.36,{alpha:.7*a,angle:Math.sin(time*3+i)*.6});}return;}
  wingFlash0(x,y,s0,F,u,fade);}
 function runeCircle(x,y,r,F,u,fade,t,seed){const s=SPR(),v=smooth(u/.25),a=fade*(1-smooth((u-.55)/.45)),R=r*v,spin=time*1.3+seed;if(a<=0||R<1)return;
- if(s&&s.draw('rune',F,x,y,2*R/.95,2*R/.95,{squash:.5,angle:spin*.5,alpha:a})){if(t>=2)s.draw('rune',s.pal(F.b),x,y,1.2*R/.95,1.2*R/.95,{squash:.5,angle:-spin*.8,alpha:.7*a});if(t>=3)s.draw('ring',F,x,y,2.4*R/.82,1.2*R/.82,{alpha:.5*a});s.draw('glow',F,x,y-r*.05,r*.9,r*.9,{alpha:.6*a});return;}
+ if(s&&s.draw('runecross',F,x,y,2*R/.95,2*R/.95,{squash:.5,angle:0,alpha:a})){if(t>=2)s.draw('runecross',s.pal(F.b),x,y,1.2*R/.95,1.2*R/.95,{squash:.5,angle:-spin*.8,alpha:.7*a});if(t>=3)s.draw('ring',F,x,y,2.4*R/.82,1.2*R/.82,{alpha:.5*a});s.draw('glow',F,x,y-r*.05,r*.9,r*.9,{alpha:.6*a});return;}
  runeCircle0(x,y,r,F,u,fade,t,seed);}
 function smoke(x,y,h,u,seed){const s=SPR(),a=.55*(1-u);if(s){const prev=ctx.globalCompositeOperation;let ok=true;for(let i=0;i<3&&ok;i++){const ang=rnd(seed,i)*TAU,d=h*(.15+.5*smooth(u)),r=h*(.5+.3*u);ok=s.draw('smoke',DARK,x+Math.cos(ang)*d,y+Math.sin(ang)*d*.5-h*.15*u,r*2,r*1.3,{blend:'source-over',alpha:a,angle:ang});}ctx.globalCompositeOperation=prev;if(ok)return;}smoke0(x,y,h,u,seed);}
 function cracks(x,y,r,F,u,seed,n){const s=SPR(),v=smooth(u/.3),a=1-smooth((u-.4)/.6);if(a<=0)return;const S=2*r*Math.max(.1,v)*1.05;

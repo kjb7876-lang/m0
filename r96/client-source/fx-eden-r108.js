@@ -205,17 +205,19 @@ PRE.fist=(e,u,h)=>{if(!ready(NEED.fist))return false;const F=heroOf(e),T=e.t,q=P
 // lauren: rune -> fireball flight (above-left -> target) -> explosion + smoke -> scorch and embers
 const GOLD=Object.freeze({a:Object.freeze([255,198,84]),b:Object.freeze([255,246,208])});
 const FIRE=Object.freeze({a:Object.freeze([255,112,28]),b:Object.freeze([255,224,150])});
+// R139: 라우렌 메테오는 보라 계열(영웅색 바이올렛), 바닥 표식은 육망성 대신 십자가 마법진(runecross)
+const VIOLET=Object.freeze({a:Object.freeze([150,70,255]),b:Object.freeze([232,214,255])});
 PRE.meteor=(e,u,h)=>{if(!ready(NEED.meteor))return false;const F=heroOf(e),q=P(e.tx,e.ty),fall=e.fall,T=e.t,k=tierK(e),fr=Math.floor(T*20);
- if(T<fall+.1)S('rune',F,q.x,q.y,h*2.6*k,h*2.6*k,{squash:.5,angle:time*1.5,alpha:.85*smooth(T/.15)});
+ if(T<fall+.1)S('runecross',F,q.x,q.y,h*2.6*k,h*2.6*k,{squash:.5,angle:0,alpha:.85*smooth(T/.15)});
  if(T<fall){const v=T/fall,s={x:q.x-h*5.4,y:q.y-h*8.6},e2=v*v,m={x:lerp(s.x,q.x,e2),y:lerp(s.y,q.y-h*.35,e2)},th=Math.atan2(q.y-h*.35-s.y,q.x-s.x),sz=h*(2.7+2.3*v)*k;
-  const sh=P(e.tx,e.ty);S('glow',{a:[30,6,10],b:[60,16,20]},sh.x,sh.y,h*(.6+1.4*v),h*(.3+.6*v),{blend:'source-over',alpha:.25+.3*v});
-  clip('fire.fly',T*1.0,m.x,m.y,sz,{angle:th,alpha:1,noVeil:true});S('glow',F,m.x,m.y,h*1.7,h*1.7,{alpha:.55*v+.3});return true;}
+  const sh=P(e.tx,e.ty);S('glow',{a:[22,6,34],b:[48,16,70]},sh.x,sh.y,h*(.6+1.4*v),h*(.3+.6*v),{blend:'source-over',alpha:.25+.3*v});
+  clip('fire.fly',T*1.0,m.x,m.y,sz,{angle:th,alpha:1,noVeil:true,tint:VIOLET});S('glow',F,m.x,m.y,h*1.7,h*1.7,{alpha:.55*v+.3});return true;}
  const w=T-fall,burn=1-smooth((w-.9)/(e.life-fall-.9));
- clip('fire.boom',w,q.x,q.y-h*.55,h*3.7*k,{alpha:1});
- if(w<.3){const kk=w/.3;if(!reduced())S('flare',pb(FIRE),q.x,q.y-h*.3,h*5*(.4+kk),h*5*(.4+kk),{angle:kk,alpha:(1-kk)*.9});S('ring',FIRE,q.x,q.y,h*(1.5+5*kk),h*(.75+2.5*kk),{alpha:1-kk});}
- S('crack',{a:[40,8,10],b:[110,40,20]},q.x,q.y,h*3.4,h*3.4,{squash:.5,angle:e.seed,alpha:.85*burn,blend:'source-over'});S('crack',FIRE,q.x,q.y,h*3.0,h*3.0,{squash:.5,angle:e.seed,alpha:.6*burn});
- const ne=lowFx()?3:7;for(let i=0;i<ne;i++){const ang=rnd(e.seed,i)*TAU,d=rnd(e.seed,i+9)*1.3,qq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d);S('flame',FIRE,qq.x,qq.y,h*.9,h*(1.1+.5*rnd(e.seed,i+3)),{frame:fr+i,alpha:.8*burn*smooth(w/.25)});}
- const nem=lowFx()?4:11;for(let i=0;i<nem;i++){const v=(w-.1*rnd(e.seed,i))/1.5;if(v<0||v>1)continue;const ang=rnd(e.seed,i+20)*TAU,d=.3+1.6*rnd(e.seed,i+31)*smooth(v),eq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d,h*(.2+1.8*v));S('pixel',{a:[255,110,30],b:[255,220,140]},eq.x,eq.y,h*.14*(1-v*.6),h*.14*(1-v*.6),{alpha:.95*(1-v)});}
+ clip('fire.boom',w,q.x,q.y-h*.55,h*3.7*k,{alpha:1,tint:VIOLET});
+ if(w<.3){const kk=w/.3;if(!reduced())S('flare',pb(VIOLET),q.x,q.y-h*.3,h*5*(.4+kk),h*5*(.4+kk),{angle:kk,alpha:(1-kk)*.9});S('ring',VIOLET,q.x,q.y,h*(1.5+5*kk),h*(.75+2.5*kk),{alpha:1-kk});}
+ S('crack',{a:[26,8,40],b:[70,34,110]},q.x,q.y,h*3.4,h*3.4,{squash:.5,angle:e.seed,alpha:.85*burn,blend:'source-over'});S('crack',VIOLET,q.x,q.y,h*3.0,h*3.0,{squash:.5,angle:e.seed,alpha:.6*burn});
+ const ne=lowFx()?3:7;for(let i=0;i<ne;i++){const ang=rnd(e.seed,i)*TAU,d=rnd(e.seed,i+9)*1.3,qq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d);S('flame',VIOLET,qq.x,qq.y,h*.9,h*(1.1+.5*rnd(e.seed,i+3)),{frame:fr+i,alpha:.8*burn*smooth(w/.25)});}
+ const nem=lowFx()?4:11;for(let i=0;i<nem;i++){const v=(w-.1*rnd(e.seed,i))/1.5;if(v<0||v>1)continue;const ang=rnd(e.seed,i+20)*TAU,d=.3+1.6*rnd(e.seed,i+31)*smooth(v),eq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d,h*(.2+1.8*v));S('pixel',{a:[160,80,255],b:[230,210,255]},eq.x,eq.y,h*.14*(1-v*.6),h*.14*(1-v*.6),{alpha:.95*(1-v)});}
  return true;};
 
 // hunter: bright arrows as before; painted hit sparks where an arrow meets an enemy; tier 3+ the target burns
