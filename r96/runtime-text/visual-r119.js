@@ -24,8 +24,10 @@
  //    원래 그림이 캐시에 정상으로 올라온 뒤에 새 그림을 따로 받아, 다 받아지면 같은 캐시 칸의 그림만 바꾼다(실패하면 원래 그림 유지).
  // R128: 기억사수를 Gemini 시트(Drive StoryWorld-HERO-gunner-sheet-20261030, 7.5~8등신 다크 판타지, scripts/r128-gunner-sheet.py)로 바꾼다.
  //    기존 정지·동작 그림(만화체) 59장 각각을 같은 동작·방향 프레임으로 만든 대체본(같은 512 캔버스·발 위치·몸 키)으로 보낸다. 설정 gunnerSheet.
- const G128=/^assets\/(?:hero_direction33[47]\/gunner\/|heroes\/normalized\/gunner\/|heroes\/normalized\/actions-(?:consistent|v3126)\/gunner-)[^/]+\.webp$/;
- const swap128=k=>{if(!prefs.gunnerSheet||!G128.test(k))return null;const parts=k.split('/');return'assets/r128/gunner/'+parts[parts.length-2].replace('gunner','g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';};
+ // R130: 같은 방식을 영웅마다(scripts/r130-hero-sheet.py). keep: 그림에 특수 효과가 들어 있어 원래 그림을 두는 동작(미카엘라 궁극기 날개·방향 막기 방패).
+ const SHEETS={gunner:{dir:'assets/r128/gunner/',keep:null},michaela:{dir:'assets/r130/michaela/',keep:/ultimate-|actions-directional\/michaela-guard-/}};
+ const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[47]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
+ const swap128=k=>{if(!prefs.gunnerSheet)return null;for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;const parts=k.split('/');return SHEETS[h].dir+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
  const swapState=new Map();
  if(typeof readyImage==='function'&&typeof imageCache!=='undefined'){const readyBase=readyImage;readyImage=function(path,...rest){const row=readyBase.apply(this,arguments);
   try{if(prefs.heroArt&&row?.image){const k=typeof cleanPath==='function'?cleanPath(path):String(path).replace(/^\.\//,''),to=swap128(k)||SWAP[k];
@@ -81,12 +83,12 @@
  const DIR8=['e','se','s','sw','w','nw','n','ne'],NEAR={n:['ne','nw'],s:['se','sw'],e:['ne','se'],w:['nw','sw'],ne:['e','n'],nw:['w','n'],se:['e','s'],sw:['w','s']};
  // R121: 기억사수는 서 있기(R93 치비 비율)와 같은 비율로 새로 그린 4프레임 걷기(ChatGPT 2026-10-29, scripts/r121-gunner-walk.py)를 쓴다.
  // R128: 기억사수 걷기는 Gemini 시트의 5방향 8프레임 한 줄(왼쪽 3방향은 반전). gunnerSheet 를 끄면 R121 걷기.
- const OWN_WALK128={gunner:{s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]}};
+ const WALK5={s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]},OWN_WALK128=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,WALK5]));
  const OWN_WALK={gunner:{s:['s',0],se:['e6',0],e:['e6',0],ne:['ne',0],n:['n',0],sw:['e6',1],w:['e6',1],nw:['ne',1]}};// R121: 옆은 윤서하 걸음을 따라 그린 6프레임(사용자)// R121: 아래 대각선은 4장 대각선이 어색해(사용자) 옆 8장으로 대체// 옆(e8)은 앞으로 나가는 다리가 무릎을 접어 들었다 내딛는 8프레임(2줄, 사용자 제안)
  // 지역을 옮기면 게임이 그림 기억(캐시)을 비워 걷기 그림도 사라졌는데, '이미 받음'으로 기억해 다시 받지 않아 정지 그림으로 이동했다
  // (사용자: 길잡이 켜면 그림 하나로 고정된 채 이동 — 길잡이가 지역을 자주 옮겨 더 자주 보였다). 준비 안 됐으면 1초마다 다시 받는다.
  const askAt=new Map(),wantImage=p=>{if(walkMissing.has(p)||typeof ensureImages!=='function')return;const t0=Date.now();if(t0-(askAt.get(p)||0)<1000)return;askAt.set(p,t0);Promise.resolve(ensureImages([p])).catch(()=>walkMissing.add(p));};
- const ownWalk=hero=>prefs.gunnerSheet&&OWN_WALK128[hero]?{map:OWN_WALK128[hero],path:v=>'assets/r128/'+hero+'/walk-'+v+'.webp',r128:true}:OWN_WALK[hero]?{map:OWN_WALK[hero],path:v=>'assets/r121/walk/walk-'+hero+'-'+v+'.png'}:null;
+ const ownWalk=hero=>prefs.gunnerSheet&&OWN_WALK128[hero]?{map:OWN_WALK128[hero],path:v=>SHEETS[hero].dir+'walk-'+v+'.webp',r128:true}:OWN_WALK[hero]?{map:OWN_WALK[hero],path:v=>'assets/r121/walk/walk-'+hero+'-'+v+'.png'}:null;
  const preloadWalk=()=>{try{const o=typeof player==='object'&&player?.hero?ownWalk(player.hero):null;if(typeof readyImage==='function'&&o)for(const v of new Set(Object.values(o.map).map(v=>o.path(v[0]))))if(!readyImage(v))wantImage(v);}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
  function sheetFor(hero,dir){const ow=ownWalk(hero),own=ow?.map[dir];if(own&&ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p))return{path:p,mirror:!!own[1],cols:8,rows:1,frames:8,own8:true,r128:true};}
   if(own&&!ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p)){const n=own[0].endsWith('12')?12:own[0].endsWith('8')?8:own[0].endsWith('6')?6:4,cols=n===6?3:4;return{path:p,mirror:!!own[1],cols,rows:n/cols,frames:n,own8:n>4};}}
@@ -98,7 +100,7 @@
    if(x1>=x0)box=[sx+Math.max(0,x0-1),sy+Math.max(0,y0-1),Math.min(cw,x1-x0+3),Math.min(ch,y1-y0+3)];}catch(_){}walkBox.set(k,box);return box;}
  // 영웅 몸 그림만 고른다: 반자동이 공명 방어를 쓰면 영웅 위에 큰 방어막 그림(barrier-sigil)이 함께 그려져, '가장 큰 영웅 그림'을
  // 몸으로 잘못 골라 방어막을 걷기 그림으로 바꾸고 몸은 정지 그림으로 남던 버그(사용자 2026-10-29 "길잡이·반자동 켜면 이미지 버그")를 막는다.
- const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|awakening|^blob:/;
+ const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|awakening|^blob:/;
  const bodyMemo=new WeakMap();
  function bodyFracOf(im,rect){if(!im||!rect)return null;let m=bodyMemo.get(im);if(!m){m=new Map();bodyMemo.set(im,m);}const k=rect.map(Math.round).join(',');if(m.has(k))return m.get(k);let f=null;
   try{const [sx,sy,sw,sh]=rect,s=Math.min(1,160/Math.max(sw,sh)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(sw*s));c.height=Math.max(1,Math.round(sh*s));const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,sx,sy,sw,sh,0,0,c.width,c.height);
