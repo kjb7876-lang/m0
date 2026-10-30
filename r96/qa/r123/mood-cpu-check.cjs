@@ -103,7 +103,9 @@ check('설정 저장(r123.mood)',[...store.keys()].some(k=>k.endsWith('r123.mood
 check('no failures recorded',M.inspect().failures===0,M.inspect().lastError);
 // ---- 등록 ----
 const src=fs.readFileSync(path.join(SRC,'samong-mood-r123.js'),'utf8');
-check('code-only: no new image files referenced',!/assets\//.test(src)&&!/\.(png|webp|jpg)['"]/.test(src));
+const artRefs=[...src.matchAll(/'(assets\/[^']+)'/g)].map(m=>m[1]);const pidx=JSON.parse(fs.readFileSync(path.join(RT,'assets/r126/props/index.json'),'utf8'));
+check('R126: only Drive props from assets/r126/props are referenced; files match the index hash, Drive provenance kept, each < 150 kB',artRefs.length===4&&artRefs.every(a=>a.startsWith('assets/r126/props/'))&&Object.values(pidx.props).every(p=>{const b=fs.readFileSync(path.join(RT,p.path));return require('crypto').createHash('sha256').update(b).digest('hex')===p.sha256&&b.length<150000&&/^[0-9a-f]{64}$/.test(p.source.sha256)&&p.source.driveId&&p.source.drive.endsWith('.zip');})&&artRefs.every(a=>Object.values(pidx.props).some(p=>p.path===a)),artRefs.join(','));
+{const r=rooms['sz115-S01-3'].r;const art=r.props.filter(p=>p.r123Deco&&p.path);check('R126: rose-house teacups/needles and school lockers/noticeboards carry the Drive art path (vector drawing until the image is ready)',art.some(p=>p.r123Deco.kind==='teacup'&&/teacup\.webp$/.test(p.path))&&art.some(p=>p.r123Deco.kind==='needle')&&M.themes.school.deco.some(d=>d[0]==='noticeboard')&&typeof M.draw.noticeboard==='function');}
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 check('runtime copy matches source; index.html loads it before audio-r98.js',fs.readFileSync(path.join(RT,'samong-mood-r123.js'),'utf8')===src&&html.indexOf('samong-mood-r123.js')>0&&html.indexOf('samong-mood-r123.js')<html.indexOf('src="./audio-r98.js"'));
 const pub=fs.readFileSync(path.join(REPO,'scripts','verify-r96-public.py'),'utf8'),ci=fs.readFileSync(path.join(REPO,'.github','workflows','pages.yml'),'utf8'),inputs=JSON.parse(fs.readFileSync(path.join(ROOT,'runtime-inputs.json'),'utf8'));
