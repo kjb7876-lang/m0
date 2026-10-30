@@ -16,6 +16,9 @@ JOBS = {
  'bones':  ('dist01-hanging-bones', 'exec-1f4c05ec-5e9f-4ed1-930a-668b9a6f4b83.png', 'StoryWorld-spider-cave-hanging-bones-static-candidate.zip', '1P0OUKt9QJowwBlHqESwE3v4xGsap9d89', 'dist01 거미동굴 천장에 매달린 뼈(에피소드1A L37), 비충돌 장식'),
  'root':   ('dist00-low-root-connector1', 'exec-a674651b-9a8b-436a-97fc-6c15b8699d54.png', 'Dist00-Low-Root-Connector1.zip', '1O-Yb-I0xTkRJm3ttMyA9InSHP56jJtav', 'dist00 돌바닥을 지나는 낮은 뿌리 연결부(에피소드1A L28), 바닥에 누운 비충돌 장식(R141)'),
  'window': ('dist00-corridor-window', 'exec-2a15a13c-f7bf-4346-8dd2-a3af80c33ad3.png', 'StoryWorld-corridor-window-faceless-static-candidate.zip', '14nRYLGrxTB5RWxxlVyiY5fMh5nEuv7F9', 'dist00 뒷벽 부착 창과 얼굴 없는 성상(에피소드1A L28), 비충돌·비상호작용 장식'),
+ 'weed':   ('dist02-waterweed-clump1', 'exec-13b0a057-b48e-4ee6-8f26-46305554a700.png', 'Dist02-Waterweed-Clump1.zip', '1WFaucz-Li0pzqQLylwEoe5bkcxJ-1P_s', 'dist02 늪지대 수초 덩어리(에피소드1A L45, 드라이브 10-30 R145), 바닥 비충돌 장식(붙잡기 판정 없음)'),
+ 'ripple': ('dist02-quiet-ripple2', 'exec-f6f56781-a6ee-49ad-a231-9523f558a31d.png', 'Dist02-Quiet-Ripple-v2.zip', '1EXrdaguXu6KehgPeKbhYzQy2B8vJIUlI', 'dist02 늪 수면 잔물결 v2(에피소드1A L47, R145), 바닥에 눕힌 비충돌 장식(애니 없음)'),
+ 'chain':  ('dist03-ash-chain1', 'exec-21b87d0b-549e-4878-a989-6954f6629543.png', 'Dist03-Ash-Chain1.zip', '1zanY1daqpUJDC_4xhp6ZmE-Vw1T75LW8', 'dist03 재에 묻힌 사슬(에피소드1A L59, R145), 바닥 비충돌 장식(당김·충돌 없음)'),
 }
 idx_path = out / 'index.json'
 index = json.loads(idx_path.read_text(encoding='utf-8')) if idx_path.exists() else {'revision': 'R138', 'props': {}}

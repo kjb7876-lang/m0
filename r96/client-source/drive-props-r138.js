@@ -2,13 +2,16 @@
 //  · dist01 거미동굴: 천장에 매달린 뼈(에피소드1A L37) 2개 — 바닥에서 띄워 그린다.
 //  · dist00: 뒷벽에 붙인 창과 얼굴 없는 성상(에피소드1A L28) 1개 — 문·포탈로 쓰지 않는다(상호작용 없음).
 //  · dist00: 돌바닥을 지나는 낮은 뿌리 연결부(L28, 드라이브 10-30 R141) 2개 — 바닥에 누운 비충돌 장식.
+//  · dist02 늪지대: 수초 덩어리(L45) 2개, dist03: 재에 묻힌 사슬(L59) 2개 — 드라이브 10-30 R145, 바닥 비충돌 장식(붙잡기·당김 없음).
+//    수면 잔물결 v2(L47)는 어두운 늪 바닥에서 거의 보이지 않아(헤드리스 화면 확인, README 도 대비 낮음) 넣지 않았다. 기둥 틈 잔불(dist05)은 기둥에 붙일 자리가 없어, 병원 표지·창문·인장(ep1a09·ep1a11)은 병원 미로가
+//    이 배치(본편 지역 방 사각형)를 쓰지 않아 보류(assets/r138/props/index.json 의 held).
 // 모두 비충돌·그리기 전용이다. 원래 소품·적·문·세이브는 건드리지 않고, 자리는 R81 의 안전 검사(문·입구·목표·적과 거리)를 그대로 쓴다.
 // 바위 코너(구조물)와 몹 애니메이션 키 후보는 전달 README 가 보류로 표시해 넣지 않았다(assets/r138/props/index.json 의 held).
 (()=>{'use strict';
 if(window.__STORYWORLD_DRIVE_PROPS_R138__)return;
 const E=window.__STORYWORLD_ENVIRONMENT_R81__;
-const ART={root:{path:'assets/r138/props/root.webp',height:56},bones:{path:'assets/r138/props/bones.webp',height:150,lift:104},window:{path:'assets/r138/props/window.webp',height:140}};
-const PLAN={dist01:[['bones',2]],dist00:[['window',1],['root',2]]};
+const ART={weed:{path:'assets/r138/props/weed.webp',height:44},chain:{path:'assets/r138/props/chain.webp',height:22},root:{path:'assets/r138/props/root.webp',height:56},bones:{path:'assets/r138/props/bones.webp',height:150,lift:104},window:{path:'assets/r138/props/window.webp',height:140}};
+const PLAN={dist01:[['bones',2]],dist00:[['window',1],['root',2]],dist02:[['weed',2]],dist03:[['chain',2]]};
 // R81 과 같은 방 사각형. 뼈는 방 안쪽 천장 아래에 둔다.
 const bounds=[[30,4,46,20],[48,4,66,20],[68,4,84,20],[68,30,84,42],[10,30,34,42],[38,30,64,42],[10,52,32,68],[34,52,48,68],[50,52,68,68],[70,52,80,68],[10,74,36,82],[50,74,78,82],[10,90,24,104],[26,92,42,104],[44,90,62,104],[64,90,78,104]];
 const stats={rooms:0,placed:0,failures:0,draws:0};let lastError=null;

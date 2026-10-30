@@ -10798,14 +10798,29 @@
       "sha256": "6b3f1618d8a20ea475102df6c6a8edc1daef6816886ee66bf0bafc90d7e3c049"
     },
     {
+      "path": "assets/r138/props/chain.webp",
+      "bytes": 39682,
+      "sha256": "8c4bade013b8842fb5cb8258aa9aa5641d50309b45d1b5f908c194ab185a0fa6"
+    },
+    {
       "path": "assets/r138/props/index.json",
-      "bytes": 4186,
-      "sha256": "bb1a41f668c2f2add8f51f412809029238182a113a20ac38a49378a5f49b86a0"
+      "bytes": 7307,
+      "sha256": "edb1abf6126b34145127611050f79b540ddaf81223f084a9a9f388d1a82ec3b7"
+    },
+    {
+      "path": "assets/r138/props/ripple.webp",
+      "bytes": 47770,
+      "sha256": "75d322ddfc86aeac835aa42e7cb0b0e26a2af4f313f9439ba154a6faa5471fa2"
     },
     {
       "path": "assets/r138/props/root.webp",
       "bytes": 41866,
       "sha256": "4bd161b04937b8362c2b828f646b95ef226cd85811c083563bed09c0fe524ee5"
+    },
+    {
+      "path": "assets/r138/props/weed.webp",
+      "bytes": 52962,
+      "sha256": "633027398115352202f2b82e4ffb27d55499b8b011f07e7ed779e8a59a041ef4"
     },
     {
       "path": "assets/r138/props/window.webp",
@@ -19839,8 +19854,8 @@
     },
     {
       "path": "drive-props-r138.js",
-      "bytes": 5711,
-      "sha256": "3054caf2bf2171390f59009646ab693dc1691aaf952c0a3258a97dc88cb7237d"
+      "bytes": 6427,
+      "sha256": "4bafcd959cf2aeb66ff1b1b9b2f6447da38385ef4f3691d6903361b1c5cc9209"
     },
     {
       "path": "dynamic-vfx-r84.js",
@@ -20308,8 +20323,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4061,
-  "totalBytes": 787161782,
+  "fileCount": 4064,
+  "totalBytes": 787306033,
   "webHTMLSha256": "ddf9bc83fd7cc04c635a80e44a41c6eea6bd88e7f7ea846809ff1153f8c846cb",
   "largest": [
     {
