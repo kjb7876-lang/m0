@@ -5,32 +5,36 @@
   "files": {
    "README.txt": "e6a297eefd5c7a8d9ccaa6dcad12e8bbc3f768cbbf767ce5758a8faf876a6619",
    "SPEC.json": "fbd1f73b2b1ee23b452963203d5996c6ec3a51dc7981042478c9c7c0df50988b",
-   "HERO-slayer-attack-e.png": "0632eb2838d0dc0259ad28219a27fad132685bc2e015e9b1aa755899d331e772",
+   "HERO-slayer-attack-e.png": "a270feaae6cfd9e2bc4d4335c9c9536012b84bfdff8b5488bd77c99fa8260ec8",
    "HERO-slayer-attack-n.png": "171019944f64eccbe60f35ae54f6759d0aa0dac83dde04863ea3499e2d5c59b9",
    "HERO-slayer-attack-ne.png": "ba4334999797aa53938e688ac91aa4ef35904612abf91a4a9a1819769e53ffd9",
-   "HERO-slayer-attack-s.png": "31c0feb06d47ce4707b8d4d3b87d155922cad21fada20fe3a96d7b7dde06e561",
-   "HERO-slayer-attack-se.png": "c79a1e0caf124714e27a157e17b73da681c13f802ac8fe7a57e366a21e2e5a2e",
-   "HERO-slayer-death-e.png": "9f979962340ba6d2347a6c10a24c76949086358211085ef7b92c878a9263553b",
+   "HERO-slayer-attack-s.png": "75e1187deb255c347d06c79ed39ba6e86ae4475aafddc6851cd6b8337ae72285",
+   "HERO-slayer-attack-se.png": "8abcaf8e8ad112c80e8d18a890f73e03f9aae293db3188db1158d076716d06a8",
+   "HERO-slayer-death-e.png": "6467f621cc0bfe287f100267ee16aa3f48175d1de982e405ace80e38d684dfff",
    "HERO-slayer-death-n.png": "56730a176a984873baacebff6462dd4e12775969c69aac65f3fe424897e4e62e",
    "HERO-slayer-death-ne.png": "9c06c8f60b115c6bdf4eb0f9474a22f7c9e85dcdf0660c7deecf6ab5ce586ace",
-   "HERO-slayer-death-s.png": "59d33d365d40b7b1f74a39ae3c342d2fce269563f0833373a4e18ae9cbce6c0d",
-   "HERO-slayer-death-se.png": "248ed8b28f21da58d1ffde39e035b2a283a20e0d834ca9d53534d4bf39cbe543",
-   "HERO-slayer-hit-e.png": "16ac11e20f80e02b8c54794bf2e885fce8276025e2088ad06d837181143fc676",
+   "HERO-slayer-death-s.png": "78d7330ff155f05fa785d38b1f7bc0108952691a284ac47698389201de3c83ca",
+   "HERO-slayer-death-se.png": "78088de7dc231484d712d36f2e881bc3305c27d0f431a28a369c3f3cfd1f18c5",
+   "HERO-slayer-hit-e.png": "bdf14613f37906890ce4152dc0a466420f433de40764656a52749a5e33f9777f",
    "HERO-slayer-hit-n.png": "2a8efb2a1fa974ff380e513b9964401b8fd7d4a0d866f3c75929b686cbade168",
    "HERO-slayer-hit-ne.png": "c449e22f74ff80e5f50b2288047059be2eab8191eb9fabd7d4ac6cda27038dd1",
-   "HERO-slayer-hit-s.png": "603f22f13cc5d945676dc39a1b7c9f4de3dc59947e90d99b3daf1e276dcc195e",
-   "HERO-slayer-hit-se.png": "cdc9b81aa29acf802b1df0f2688fa53125be0c1f96d60022f6385524117284e8",
-   "HERO-slayer-idle-e.png": "792c721c05eee83c335af25c6ecbd9f31d15c709d432d6c987ba01833a177c46",
+   "HERO-slayer-hit-s.png": "fdec857058a08772b70074a0b935ed396cec3251d4cda182e534fa570e75888d",
+   "HERO-slayer-hit-se.png": "0cde60030423505171e2c38cf2835b3dbbcb9a0ad30d43a5e0c1270c66f39a84",
+   "HERO-slayer-idle-e.png": "17f508defe57fb934accfc6b5c4ac4540c917e984166486a820d5ca6f158d201",
    "HERO-slayer-idle-n.png": "1272d9c854cb1686d24fed16bab50f38eae4d2ad11b43c6916e350643eab8561",
    "HERO-slayer-idle-ne.png": "afbd13d9128d5d664877850f68f86b4d684d9fb9951f4cc321c392ed060cbda1",
-   "HERO-slayer-idle-s.png": "3ec03d1f308f8ce11158789c150d5153e4e82f74193fa8911c9cb30d3a007000",
-   "HERO-slayer-idle-se.png": "835519afef776dcacc6d97d9d62c3e6a03c3a609590c5f86a349cdac035cf709",
-   "HERO-slayer-walk-e.png": "07b72190d9e41225a36629e221ea09053d0f73bf8b8d14c62df2c712492e0415",
-   "HERO-slayer-walk-n.png": "ca22ab83448ea593641f878d7e9877cd940ce2719ba6d20b3c0aba0543d86d63",
-   "HERO-slayer-walk-ne.png": "9ba4294d929e72131f00051f092e2476eab63500d37407652d713337313ebc59",
-   "HERO-slayer-walk-s.png": "2981a6317ca0a5a4d4597ee9a81d0c40cbd06d38929577ed03c0825fd712dace",
-   "HERO-slayer-walk-se.png": "b0dce65b50bf35fe03c92540444c89e88167e9283cbbec94f68ec810e626ebea"
-  }
+   "HERO-slayer-idle-s.png": "ce055e08549d028ca33105173bf5ec26ef421d1d293a89bad16ac815b1fd4d25",
+   "HERO-slayer-idle-se.png": "3ac91d8c8fb598d12e707e964897c8dce4325fabf4ccee70dcac371c9bee6401",
+   "HERO-slayer-walk-e.png": "b3478e503753eb77740dfbf80cbbadc1b625af79b86639ed3a1b11883ca4a827",
+   "HERO-slayer-walk-n.png": "77a7565a25e2f10f5afbfbcd43b8b14765a2f3d8904b8030d52a40bf12de41fc",
+   "HERO-slayer-walk-ne.png": "c1db510321dc9f170661d18c6348b6901fda1f062775b983d23d4e8ee8afbbc7",
+   "HERO-slayer-walk-s.png": "928796564c085e46512d554a24d342edd04599a25c0dbf0b92bbfd4b496027ff",
+   "HERO-slayer-walk-se.png": "af3de26ed6fe8259b0875d4b177b7c72bedb364885e6b7b520f9eebc99c5ccfc"
+  },
+  "drive": "StoryWorld-HERO-slayer-sheet-20261030.zip",
+  "driveId": "1H_m_zOeyIjCf3MQPBmbO8Lbz732VeN20",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
   "actions-v3126/slayer-ultimate-",
@@ -45,7 +49,7 @@
     192,
     256
    ],
-   "sha256": "7ebb9feffaffeda6e858b608fe858fe47aa14de1a75666ab6ea1aca46b5c4578"
+   "sha256": "5c4c7868d228896b994bd3c1c36282e274b4dd5a6001b2f459c3907280e87e2d"
   },
   "se": {
    "path": "assets/r130/slayer/walk-se.webp",
@@ -55,7 +59,7 @@
     192,
     256
    ],
-   "sha256": "f80c0f14ba06a1a825a373a0ca68e5463c8e621072dfada237d7f84b74c49a3f"
+   "sha256": "ff92aa7922f51a6b72d9744b777d775163781e9eecfc63a6de2822dcd591cdd2"
   },
   "e": {
    "path": "assets/r130/slayer/walk-e.webp",
@@ -65,7 +69,7 @@
     192,
     256
    ],
-   "sha256": "299a61892b6af59f46d241e706c949fffff00edce2d31d77c4c431785cfcaf2d"
+   "sha256": "dbe8bd80efb5eebf58b48f665e314c7c3414fd1cd7c845e01ae0d95ec89824c5"
   },
   "ne": {
    "path": "assets/r130/slayer/walk-ne.webp",
@@ -75,7 +79,7 @@
     192,
     256
    ],
-   "sha256": "2c1604ae4d8d85f134cab4248d9b1460c7cf79c28d0d40a10bc6ec3a02063e3b"
+   "sha256": "df1a5b08df6f0ee9c100f54233129ad577e9425f9b10860cedad75470d1ec192"
   },
   "n": {
    "path": "assets/r130/slayer/walk-n.webp",
@@ -85,7 +89,7 @@
     192,
     256
    ],
-   "sha256": "628aefa7eba23f735f273b09d947d9b59604be9d925211ff59b493c284c6bf80"
+   "sha256": "9fc491ff0800abe5ea870cd4a6aea95be570980098fbc1605c340a200784fc18"
   }
  },
  "swap": {
@@ -93,8 +97,8 @@
    "path": "assets/r130/slayer/directions-slayer-front.webp",
    "from": "HERO-slayer-idle-s.png#0",
    "mirror": false,
-   "sha256": "d053a334abe8e2fb7278d23b770d0c5c85b001ab7c4d846d751714bc790c27b7",
-   "bytes": 43452,
+   "sha256": "68be7a9a8d5b67d8dc47d954849ad3bed181b46cf894e7bab06ace27267a72fa",
+   "bytes": 36738,
    "frame": {
     "size": [
      512,
@@ -122,15 +126,15 @@
      240.7,
      474
     ],
-    "visibleHeight": 421.0
+    "visibleHeight": 381.5
    }
   },
   "assets/heroes/normalized/directions/slayer-left.webp": {
    "path": "assets/r130/slayer/directions-slayer-left.webp",
    "from": "HERO-slayer-idle-e.png#0",
    "mirror": true,
-   "sha256": "66e99330977db686ed80bdac6fea9d7345430a9132ce40aec429390bac28059c",
-   "bytes": 22414,
+   "sha256": "92c3be3bb637abf686140e5dca18b08851ab15e48ed9cdd87c3bf19120141162",
+   "bytes": 19072,
    "frame": {
     "size": [
      512,
@@ -140,15 +144,15 @@
      301.9,
      460
     ],
-    "visibleHeight": 419.7
+    "visibleHeight": 422.0
    }
   },
   "assets/heroes/normalized/directions/slayer-right.webp": {
    "path": "assets/r130/slayer/directions-slayer-right.webp",
    "from": "HERO-slayer-idle-e.png#0",
    "mirror": false,
-   "sha256": "8d6ea8d51e45924c30f32eed343f5437c45832fa89cd2de25a9279786592c8da",
-   "bytes": 22642,
+   "sha256": "eca7a6ca5df6cfdd308b4443962678b34366ac9d3b844fd5595292ec5ba91d2f",
+   "bytes": 19272,
    "frame": {
     "size": [
      512,
@@ -158,15 +162,15 @@
      261.2,
      460
     ],
-    "visibleHeight": 419.7
+    "visibleHeight": 422.0
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-front.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-attack-front.webp",
    "from": "HERO-slayer-attack-s.png#3",
    "mirror": false,
-   "sha256": "f9a213bae0afec6a36cc819ebb2d597f91eefaf9bd7925ff825750580b3794cb",
-   "bytes": 41784,
+   "sha256": "e261e960d956b810a04f9cc45c5bf34a8d006ade0ce11d0af9c78e5cb823fc6a",
+   "bytes": 36502,
    "frame": {
     "size": [
      512,
@@ -176,7 +180,7 @@
      251.3,
      475
     ],
-    "visibleHeight": 424.0
+    "visibleHeight": 425.8
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-back.webp": {
@@ -194,15 +198,15 @@
      240.8,
      476
     ],
-    "visibleHeight": 433.4
+    "visibleHeight": 392.7
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-left.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-attack-left.webp",
    "from": "HERO-slayer-attack-e.png#3",
    "mirror": true,
-   "sha256": "f1f9a61ad0611e680be298ffc8484a700049c7d685eb3a46a4699e24502ce0ad",
-   "bytes": 21812,
+   "sha256": "cf9a905b9ab596751a5857918bf27d731265e2caf6bc759873d9b1ecab4c14fa",
+   "bytes": 18224,
    "frame": {
     "size": [
      512,
@@ -212,15 +216,15 @@
      260.2,
      445
     ],
-    "visibleHeight": 415.4
+    "visibleHeight": 414.9
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-attack-right.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-attack-right.webp",
    "from": "HERO-slayer-attack-e.png#3",
    "mirror": false,
-   "sha256": "1caed48d24035766cc6f6fd961a9f022d68f1477aa07b131ee6e035322790e2c",
-   "bytes": 21618,
+   "sha256": "f7f73097cd78998795ee0d2849862ef1d034a5f253987d15fca5e6c161ab7244",
+   "bytes": 18638,
    "frame": {
     "size": [
      512,
@@ -230,15 +234,15 @@
      267.3,
      449
     ],
-    "visibleHeight": 414.4
+    "visibleHeight": 414.0
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-front.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-skill-front.webp",
    "from": "HERO-slayer-attack-s.png#2",
    "mirror": false,
-   "sha256": "3351c1d8d30fbde735b97f80b93d7d4cce1fc21bc93cb4e9eff3efd10d9cf3fb",
-   "bytes": 42178,
+   "sha256": "484c9880a541f6980da89e70c850c331badec04a6c9bd25ea6e47c701df085a5",
+   "bytes": 36322,
    "frame": {
     "size": [
      512,
@@ -248,7 +252,7 @@
      252.1,
      469
     ],
-    "visibleHeight": 442.3
+    "visibleHeight": 445.9
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-back.webp": {
@@ -266,15 +270,15 @@
      239.9,
      477
     ],
-    "visibleHeight": 432.6
+    "visibleHeight": 392.0
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-left.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-skill-left.webp",
    "from": "HERO-slayer-attack-e.png#2",
    "mirror": true,
-   "sha256": "7af569ddb13a318f4aa14659f4d08b79b80a532fdbbd939eaef17e8af504833f",
-   "bytes": 21392,
+   "sha256": "5a7a40a19e12ec559e25610800f36f17e3993edccf1f9edbe892de348f063a29",
+   "bytes": 19040,
    "frame": {
     "size": [
      512,
@@ -284,15 +288,15 @@
      263.2,
      453
     ],
-    "visibleHeight": 437.8
+    "visibleHeight": 438.3
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-skill-right.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-skill-right.webp",
    "from": "HERO-slayer-attack-e.png#2",
    "mirror": false,
-   "sha256": "ddf5437693550477c65473b14a02f407dd03c0165be2977d3483e9e7e8a20a6d",
-   "bytes": 21312,
+   "sha256": "d0e484963e168664e9beca21357bdeb475000d5b765aefafadb8e4f869af6dbb",
+   "bytes": 18996,
    "frame": {
     "size": [
      512,
@@ -302,15 +306,15 @@
      266.0,
      455
     ],
-    "visibleHeight": 436.8
+    "visibleHeight": 437.3
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-front.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-guard-front.webp",
    "from": "HERO-slayer-attack-s.png#0",
    "mirror": false,
-   "sha256": "12b071b5eca034235a82377b5f1897f644f5d324b34f101975a121c943fd9533",
-   "bytes": 38852,
+   "sha256": "0c6e729c047a4183c3d62a1384a91b62ad5e9f3bf0478d82329ec8794d21f4d7",
+   "bytes": 33534,
    "frame": {
     "size": [
      512,
@@ -320,7 +324,7 @@
      252.3,
      477
     ],
-    "visibleHeight": 409.5
+    "visibleHeight": 411.5
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-back.webp": {
@@ -338,15 +342,15 @@
      241.2,
      490
     ],
-    "visibleHeight": 414.0
+    "visibleHeight": 375.1
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-left.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-guard-left.webp",
    "from": "HERO-slayer-attack-e.png#0",
    "mirror": true,
-   "sha256": "7296e2fceb3b041226573416482c47a99ad766308cb4a654630a711d152aa4a8",
-   "bytes": 20574,
+   "sha256": "bd3c04d9e37795cf06cb02060a17616b16e370ff9798e615a861adad37470760",
+   "bytes": 18150,
    "frame": {
     "size": [
      512,
@@ -356,15 +360,15 @@
      260.9,
      465
     ],
-    "visibleHeight": 413.4
+    "visibleHeight": 415.5
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-guard-right.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-guard-right.webp",
    "from": "HERO-slayer-attack-e.png#0",
    "mirror": false,
-   "sha256": "2c13f54961a770cb5c5c6df7978dbc6a4b35f9779ddcd077b18f8c8b2cdda68e",
-   "bytes": 20576,
+   "sha256": "c8805a80da8c4827942c14baa5a3ad9a314e80038aa773379d6de9693d1a0c3c",
+   "bytes": 18098,
    "frame": {
     "size": [
      512,
@@ -374,15 +378,15 @@
      267.6,
      465
     ],
-    "visibleHeight": 412.4
+    "visibleHeight": 414.5
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-front.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-dash-front.webp",
    "from": "HERO-slayer-walk-s.png#3",
    "mirror": false,
-   "sha256": "8bb5caf65b0afafd1875db47f5be4704e3418299f84569e17bfe5ec8fde550c9",
-   "bytes": 43290,
+   "sha256": "0e8636c37a54ea640a489779c4bdffc7023ad880f08969a7a0531a024ffcafe5",
+   "bytes": 40646,
    "frame": {
     "size": [
      512,
@@ -392,15 +396,15 @@
      250.6,
      479
     ],
-    "visibleHeight": 439.0
+    "visibleHeight": 397.8
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-back.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-dash-back.webp",
    "from": "HERO-slayer-walk-n.png#3",
    "mirror": false,
-   "sha256": "d867e3be8db6d3ce1f25509d7ec2b21d4a73e1f824aa5f2239f99aa929b70c87",
-   "bytes": 41338,
+   "sha256": "75582f9e54d50a4cc16b8dbe052dc663d858da79df245f14c081abc9c96477a3",
+   "bytes": 37586,
    "frame": {
     "size": [
      512,
@@ -410,15 +414,15 @@
      234.7,
      505
     ],
-    "visibleHeight": 457.9
+    "visibleHeight": 410.4
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-left.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-dash-left.webp",
    "from": "HERO-slayer-walk-e.png#3",
    "mirror": true,
-   "sha256": "6530c4f024e3d0d10f5ae64bf1c2c7c16dd7ab5280aa18c312970590450de64b",
-   "bytes": 21476,
+   "sha256": "afbb6249f41ac1c39f819321fb508da8c14df0d2f4587d50500ac68a638e8c5f",
+   "bytes": 22490,
    "frame": {
     "size": [
      512,
@@ -428,15 +432,15 @@
      285.8,
      472
     ],
-    "visibleHeight": 433.6
+    "visibleHeight": 392.9
    }
   },
   "assets/heroes/normalized/actions-consistent/slayer-dash-right.webp": {
    "path": "assets/r130/slayer/actions-consistent-slayer-dash-right.webp",
    "from": "HERO-slayer-walk-e.png#3",
    "mirror": false,
-   "sha256": "7395ed92ca2356d203351a64d967e58696d2b1f1b6da318199f3e17fb06a0b54",
-   "bytes": 21146,
+   "sha256": "efa9cab81d0a2d4f7af53b02512911f50f7f44b9002d54511f78ebc4b6676d9c",
+   "bytes": 22942,
    "frame": {
     "size": [
      512,
@@ -446,15 +450,15 @@
      242.7,
      467
     ],
-    "visibleHeight": 429.6
+    "visibleHeight": 389.3
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-front.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-hurt-front.webp",
    "from": "HERO-slayer-hit-s.png#1",
    "mirror": false,
-   "sha256": "96010f0a6b8947989b1a3080c54c3574f1401ef203e3e816137bca29a15a36f0",
-   "bytes": 24986,
+   "sha256": "c945af4b485f1f8262dd0a0171693301f99f7eb2d1f7be48c3deddb76a25b569",
+   "bytes": 23142,
    "frame": {
     "size": [
      512,
@@ -464,15 +468,15 @@
      281.9,
      503
     ],
-    "visibleHeight": 285.0
+    "visibleHeight": 286.7
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-front.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-move-front.webp",
    "from": "HERO-slayer-walk-s.png#2",
    "mirror": false,
-   "sha256": "28c248d6850ea8beec3eaf6a940ceb22c96719b07e8dac0911366cd673a0e514",
-   "bytes": 23734,
+   "sha256": "0ceea4ee31b56aaeed546834a1e413105ce1c4fb41aa9ac6489b201aa4107e41",
+   "bytes": 24162,
    "frame": {
     "size": [
      512,
@@ -482,7 +486,7 @@
      265.5,
      509
     ],
-    "visibleHeight": 284.0
+    "visibleHeight": 255.9
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-back.webp": {
@@ -500,15 +504,15 @@
      231.5,
      506
     ],
-    "visibleHeight": 297.2
+    "visibleHeight": 269.3
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-back.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-move-back.webp",
    "from": "HERO-slayer-walk-n.png#2",
    "mirror": false,
-   "sha256": "10a01bd9c5e9a52fbb0542ccaeb6f38b4753a93d39d31c13538455b2fb391f9f",
-   "bytes": 21022,
+   "sha256": "a349d2878944e840b68397e8e3b529e7fb9eae5d283092cbc78c94a605e59605",
+   "bytes": 21876,
    "frame": {
     "size": [
      512,
@@ -518,15 +522,15 @@
      238.4,
      507
     ],
-    "visibleHeight": 270.5
+    "visibleHeight": 253.2
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-left.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-hurt-left.webp",
    "from": "HERO-slayer-hit-e.png#1",
    "mirror": true,
-   "sha256": "fc3b3f6f26df0a541680b8ad45e8a45a2a81698882273c0174c17caf7e976698",
-   "bytes": 13292,
+   "sha256": "4a34084a3baf68b39734a06f6ce0e38e1d5973d127d33edf2021f6cbbce1923f",
+   "bytes": 12138,
    "frame": {
     "size": [
      512,
@@ -536,15 +540,15 @@
      290.8,
      508
     ],
-    "visibleHeight": 286.4
+    "visibleHeight": 289.8
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-left.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-move-left.webp",
    "from": "HERO-slayer-walk-e.png#2",
    "mirror": true,
-   "sha256": "73527d7086a8d0b402eed4f00127b4773d2f10a8a8e9cf5819e41e9e61fa9e3d",
-   "bytes": 11378,
+   "sha256": "c98568d02e9f1a031d1f1b1703da51784afa3c9037dea93a5254ced7c301e764",
+   "bytes": 12182,
    "frame": {
     "size": [
      512,
@@ -554,15 +558,15 @@
      285.3,
      483
     ],
-    "visibleHeight": 259.6
+    "visibleHeight": 235.2
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-hurt-right.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-hurt-right.webp",
    "from": "HERO-slayer-hit-e.png#1",
    "mirror": false,
-   "sha256": "92365dd71767c9fcd792e6b0341b2fa6fe9be3b03addca329873207c5a2bc87c",
-   "bytes": 12904,
+   "sha256": "5ffd470cddc09a0e0c3594e94e38e8383d67e46a4056250688fbba9939c0a880",
+   "bytes": 12068,
    "frame": {
     "size": [
      512,
@@ -572,15 +576,15 @@
      263.0,
      509
     ],
-    "visibleHeight": 286.4
+    "visibleHeight": 289.8
    }
   },
   "assets/heroes/normalized/actions-v3126/slayer-move-right.webp": {
    "path": "assets/r130/slayer/actions-v3126-slayer-move-right.webp",
    "from": "HERO-slayer-walk-e.png#2",
    "mirror": false,
-   "sha256": "19f658f48cd1e7c048e9fa5952dcbfff829f95eb78912c71183d3fb590efc7e2",
-   "bytes": 11308,
+   "sha256": "cbccb5a995d91f0b30fac681839c026fff2155834a3801867576fc7587b79452",
+   "bytes": 12270,
    "frame": {
     "size": [
      512,
@@ -590,15 +594,15 @@
      232.3,
      492
     ],
-    "visibleHeight": 263.5
+    "visibleHeight": 238.8
    }
   },
   "assets/heroes/normalized/actions-directional/slayer-attack-left.webp": {
    "path": "assets/r130/slayer/actions-directional-slayer-attack-left.webp",
    "from": "HERO-slayer-attack-e.png#3",
    "mirror": true,
-   "sha256": "0bd394e8b0897bccb13f613052b84a9dd2614a401de575978992d4522f952081",
-   "bytes": 15116,
+   "sha256": "e8ee43d5de5acefdcc700aca3e9a2fee5d1d345f56edb7ed12734871dd91808d",
+   "bytes": 13516,
    "frame": {
     "size": [
      512,
@@ -608,15 +612,15 @@
      300.2,
      369
     ],
-    "visibleHeight": 306.6
+    "visibleHeight": 306.3
    }
   },
   "assets/heroes/normalized/actions-directional/slayer-attack-right.webp": {
    "path": "assets/r130/slayer/actions-directional-slayer-attack-right.webp",
    "from": "HERO-slayer-attack-e.png#3",
    "mirror": false,
-   "sha256": "27bca6df458412d00100e2408450703c664194d7f5fda50f480b2700f43a4a28",
-   "bytes": 14980,
+   "sha256": "a299a67e46f4c797991a626826628adfb7e34e40930aae7d8256c47de667cd4e",
+   "bytes": 13416,
    "frame": {
     "size": [
      512,
@@ -626,7 +630,7 @@
      210.8,
      369
     ],
-    "visibleHeight": 306.6
+    "visibleHeight": 306.3
    }
   }
  },
@@ -636,30 +640,30 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 99.5,
-   "footY": 222,
-   "refBody": 181,
-   "sha256": "be128970b56ff72215d90811b883c5bf5d02f6c0e021cde2d8d59613cdbf704c"
+   "footX": 76.5,
+   "footY": 227,
+   "refBody": 164,
+   "sha256": "ed9789ef3212b5b83d45fb44c139d4a10fd0e40da971f5d8977216349c411dad"
   },
   "se": {
    "path": "assets/r130/slayer/idle-se.webp",
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 98.7,
-   "footY": 222,
-   "refBody": 181,
-   "sha256": "7bf28271009c6cc334661ff6fc680b4b7f8218651f3508892d1df8dcf1daae17"
+   "footX": 76.7,
+   "footY": 227,
+   "refBody": 164,
+   "sha256": "c56829b9bc18dfc36a85fb2e6ea0784fc07771ee357477c6ae19731e937b6481"
   },
   "e": {
    "path": "assets/r130/slayer/idle-e.webp",
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 86.3,
-   "footY": 222,
-   "refBody": 182,
-   "sha256": "9c06ce6c9077da35cdbbcd687f368e31769cd3668a3e8bdab5b44723269ed670"
+   "footX": 86.6,
+   "footY": 237,
+   "refBody": 164,
+   "sha256": "843ec449e7eb097bf1513cbb29b05e8bdb235ebc5e8e012cf9380d242ff1ab6d"
   },
   "ne": {
    "path": "assets/r130/slayer/idle-ne.webp",
@@ -686,20 +690,20 @@
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 92.3,
-   "footY": 222,
-   "refBody": 181,
-   "sha256": "1edc77db162e13ebb2e0c395304085a6b650404fa6bd6fe80c5db180dc6209ed"
+   "footX": 114.3,
+   "footY": 227,
+   "refBody": 164,
+   "sha256": "4fa727cdbc3b53f85edc9635229a13e7c18c382c1c0e827be48eb63e9b9a31af"
   },
   "w": {
    "path": "assets/r130/slayer/idle-w.webp",
    "frames": 4,
    "cellW": 192,
    "cellH": 256,
-   "footX": 104.7,
-   "footY": 222,
-   "refBody": 182,
-   "sha256": "29937af8ae8f027d119384201f86e3732445a3f2622ea885fa8ae40ff93c283c"
+   "footX": 104.4,
+   "footY": 237,
+   "refBody": 164,
+   "sha256": "0854028e3f884e099b8c7a0b730273236586b398d99eae5722fa98d3fdd5370d"
   },
   "nw": {
    "path": "assets/r130/slayer/idle-nw.webp",

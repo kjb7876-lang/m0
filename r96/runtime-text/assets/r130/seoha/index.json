@@ -25,12 +25,16 @@
    "HERO-seoha-idle-ne.png": "4b2642f7a9473a9df0dd05f411a3edb49b7504e4030999dc2c216fc1a2618fcc",
    "HERO-seoha-idle-s.png": "952d17ce68d4308c8d044a82013ac11d9677b59ee331e55049f8193917d02149",
    "HERO-seoha-idle-se.png": "b095a66178806bbe6d07cfd4f31ebf455b41f335f89aab5809ab70082b77bcba",
-   "HERO-seoha-walk-e.png": "da4befb539633fd0a771f609194200056c0ef776ecb7b381d97511ab495d8dc3",
-   "HERO-seoha-walk-n.png": "eda17753214087756c6bb58811f6395850aef01dcdf5fd31e4906fdc0550b432",
-   "HERO-seoha-walk-ne.png": "e2f2d044fd84ce2e653e5be3449a93d3c589250c0e080164dd5b35457aec6de4",
-   "HERO-seoha-walk-s.png": "418a9538694414be62728c720124eff7e570e57c5311458413f570ae5c8ea17c",
-   "HERO-seoha-walk-se.png": "7e2a93aa2c23d84feb5c803d01ade62a104824d86739e63a281a219fb33e8f0a"
-  }
+   "HERO-seoha-walk-e.png": "f928b8addf55965a9932975af2af09c9d0830f7a4a4cf0a95b9154d5994e57b6",
+   "HERO-seoha-walk-n.png": "601b61c459d6d694094cc64a0615de074b2ea7de76371f8744f25bd5f3a5554b",
+   "HERO-seoha-walk-ne.png": "4edf26bdc4b0aba5d072b8158d7851dcc00f95b5c1f2a05b9097427a271d4cda",
+   "HERO-seoha-walk-s.png": "236d8ab9c892728488129f5cf97c245a4b52a35bf984cd83f1937c1b5fac2167",
+   "HERO-seoha-walk-se.png": "2de7c505c3bb8ba80d2d1210217cc7230cf0cfcdb70faa57869e2f9addfb2935"
+  },
+  "drive": "StoryWorld-HERO-seoha-sheet-20261030.zip",
+  "driveId": "1NZdP8dnfej9Ef23lyn74tKYgsMDoBCwG",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
   "actions-v3126/seoha-ultimate-"
@@ -44,7 +48,7 @@
     192,
     256
    ],
-   "sha256": "1ffa8ed116434a02e27f68ea86dfd6a1820a3314e7cd3590f26bcf3faa522ece"
+   "sha256": "4468ebab810a344157d5bde9c3e83aad0d3db2bcad4f065382f4531012db8155"
   },
   "se": {
    "path": "assets/r130/seoha/walk-se.webp",
@@ -54,7 +58,7 @@
     192,
     256
    ],
-   "sha256": "f543f2f8c5ff70417fbc76921536700c7b3f1c7cb83e6aa13440b58a0d476f0b"
+   "sha256": "5e45a274482bacccbc5491a4594b2a0807bd13f24fcec3fdd27c85fcee9f3db5"
   },
   "e": {
    "path": "assets/r130/seoha/walk-e.webp",
@@ -64,7 +68,7 @@
     192,
     256
    ],
-   "sha256": "130fc8e3adae442e2da20ebb9d2f9a191f51ed865b74113f756b3192cf350f08"
+   "sha256": "bdeee6944e67d7b460422d63910657300067f72d7a4059d354743607bbafe60b"
   },
   "ne": {
    "path": "assets/r130/seoha/walk-ne.webp",
@@ -74,7 +78,7 @@
     192,
     256
    ],
-   "sha256": "28802ce80ee112a0346dbbc4902db81059dbe3e7aa674f425716b120871db37e"
+   "sha256": "8a564819af37ada0ddef4f181d829fffa0ed20ac72632ba0d4fcfeb9e2edcbb6"
   },
   "n": {
    "path": "assets/r130/seoha/walk-n.webp",
@@ -84,7 +88,7 @@
     192,
     256
    ],
-   "sha256": "e22725dfdf09fda064b99cd6dae2d83f888380bf983b1bfdedb3998af7f5a8cf"
+   "sha256": "faa001d2c7184b4271d5af65fce0366dac792e8e1cc5297faaec18b69147178c"
   }
  },
  "swap": {
@@ -524,8 +528,8 @@
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-front.webp",
    "from": "HERO-seoha-walk-s.png#3",
    "mirror": false,
-   "sha256": "8765ade35c4716f455fc0c58f3214c12ccab71985fa83c386d427125fb171a15",
-   "bytes": 34554,
+   "sha256": "1c31f41065c48accf56b51e97d55a692d284357bc04bce92aa5ae1f7b24f6937",
+   "bytes": 33822,
    "frame": {
     "size": [
      512,
@@ -535,15 +539,15 @@
      285.5,
      488
     ],
-    "visibleHeight": 440.4
+    "visibleHeight": 445.3
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-back.webp",
    "from": "HERO-seoha-walk-n.png#3",
    "mirror": false,
-   "sha256": "593eb10fff385eff0064f2691eeea38380e45d4821988769117381d2ebb2e36b",
-   "bytes": 36062,
+   "sha256": "0d22aae07f99c542cd1e8d8f7cd3e6f83eef85a9f0d203576f69f88132252294",
+   "bytes": 34556,
    "frame": {
     "size": [
      512,
@@ -553,15 +557,15 @@
      286.8,
      502
     ],
-    "visibleHeight": 467.1
+    "visibleHeight": 464.6
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-left.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-left.webp",
    "from": "HERO-seoha-walk-e.png#3",
    "mirror": true,
-   "sha256": "e7a7c4f330a0dfe2ff46b5d40556ac566a08d23a29d81111946e03b1f32caeef",
-   "bytes": 26704,
+   "sha256": "fe4e83bad084231e0062da0d12cd34cca5920ef6593c70b58b90e9a937b2bf37",
+   "bytes": 26766,
    "frame": {
     "size": [
      512,
@@ -571,15 +575,15 @@
      241.5,
      478
     ],
-    "visibleHeight": 449.8
+    "visibleHeight": 439.8
    }
   },
   "assets/heroes/normalized/actions-consistent/seoha-dash-right.webp": {
    "path": "assets/r130/seoha/actions-consistent-seoha-dash-right.webp",
    "from": "HERO-seoha-walk-e.png#3",
    "mirror": false,
-   "sha256": "ef3daf20790c942276de761dd32ff366f01465efbb43f59d7ea006c12790dedc",
-   "bytes": 25802,
+   "sha256": "0467ad3e3d5a5e1b52496abe85752b42488d6fbe6adb05a2f9409a82a6520b5b",
+   "bytes": 27124,
    "frame": {
     "size": [
      512,
@@ -589,7 +593,7 @@
      263.6,
      477
     ],
-    "visibleHeight": 442.6
+    "visibleHeight": 432.8
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp": {
@@ -614,8 +618,8 @@
    "path": "assets/r130/seoha/actions-v3126-seoha-move-front.webp",
    "from": "HERO-seoha-walk-s.png#2",
    "mirror": false,
-   "sha256": "cd75fa7bb95af8461a524b118679d440b77228e08c6e90c064e0f6ef5b75c7ba",
-   "bytes": 25664,
+   "sha256": "c7ec7239d1d2f520be98464b752b01b417762a75be838ff0096a249e2c97d4b0",
+   "bytes": 26606,
    "frame": {
     "size": [
      512,
@@ -625,7 +629,7 @@
      247.3,
      510
     ],
-    "visibleHeight": 331.7
+    "visibleHeight": 344.7
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp": {
@@ -650,8 +654,8 @@
    "path": "assets/r130/seoha/actions-v3126-seoha-move-back.webp",
    "from": "HERO-seoha-walk-n.png#2",
    "mirror": false,
-   "sha256": "91c4b78d2b227aa923b32edd468a7a3d00d0af68ea7fcaf4b6793835f3792261",
-   "bytes": 24502,
+   "sha256": "421fcf4c492f44aa6370fc5a77f8ea7c8c79e4e87f50f087c1b6f50388d2eaf2",
+   "bytes": 25662,
    "frame": {
     "size": [
      512,
@@ -661,7 +665,7 @@
      248.1,
      510
     ],
-    "visibleHeight": 331.7
+    "visibleHeight": 346.6
    }
   },
   "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp": {
@@ -686,8 +690,8 @@
    "path": "assets/r130/seoha/actions-v3126-seoha-move-left.webp",
    "from": "HERO-seoha-walk-e.png#2",
    "mirror": true,
-   "sha256": "4259d7fd951db6a9dac96de65f09b8f51d237f8ea30515811d859ac7aa243188",
-   "bytes": 19038,
+   "sha256": "dc7454a5a549702963658085666470d084cd229acf7bfe2a4bd76f7f95803889",
+   "bytes": 19910,
    "frame": {
     "size": [
      512,
@@ -722,8 +726,8 @@
    "path": "assets/r130/seoha/actions-v3126-seoha-move-right.webp",
    "from": "HERO-seoha-walk-e.png#2",
    "mirror": false,
-   "sha256": "3a3699876d942bb319fcfcb7e6d706d95602287eb82243776ae1c093624ac935",
-   "bytes": 19234,
+   "sha256": "85bd96cf7040482ba9808cd44f8700280ca5a60cb773c200d94d65507851b9e8",
+   "bytes": 19800,
    "frame": {
     "size": [
      512,

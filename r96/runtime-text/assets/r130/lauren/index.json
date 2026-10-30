@@ -25,12 +25,16 @@
    "HERO-lauren-idle-ne.png": "c43635f096b70e731c0e384edc3c8a65593f661e9915c781f1e703a0f045991f",
    "HERO-lauren-idle-s.png": "8423fa4766b26e33989f6a7bc0b892b83f3cced9fc3aa659444081b66a47a2d4",
    "HERO-lauren-idle-se.png": "0e29e742847de98de2fae917a38d74922fc5fb885fa36d05c8453880f0203a74",
-   "HERO-lauren-walk-e.png": "b2432c8be6d144faa08e1f8ebed032e21f87bad0a3c19fae9f542bb43f6c3e12",
-   "HERO-lauren-walk-n.png": "46c041f026f0d72718be3f033fa2361b244504a72ffe30424c2d7ff0b7faf0a7",
-   "HERO-lauren-walk-ne.png": "756adef14d7edb02b0124e051ea6ae3087e5d830aa6c7402ece83c9a1d60af94",
-   "HERO-lauren-walk-s.png": "0ee8d14c14c17b1b80b2f66158bfa92ec15d903a4ca5c409221c8098a93314ef",
-   "HERO-lauren-walk-se.png": "cfb220c59c990ae082626df708a8bc1770eaac730dfaad7080e98b574235a1b5"
-  }
+   "HERO-lauren-walk-e.png": "10e8933aba4bbf2905c9c9afb88fec0a5b155e000c96172a707e70a76c3011d3",
+   "HERO-lauren-walk-n.png": "07d15a506fce6c42cb4f1a00f0134873c4bb05c5dca09e7eb20bb4a2f8186029",
+   "HERO-lauren-walk-ne.png": "50ca40e0bb8863a428070dc540ddf12005bfe066793000ffcf2149de6ee004f7",
+   "HERO-lauren-walk-s.png": "d663b3c64597d8bcc1f62444523697d02b416ecca6cde21c8d153fbfdef16a85",
+   "HERO-lauren-walk-se.png": "4c2f7bf028855c190ba9dd5214f6cff3b74439529dea8900102b206d6e94ca89"
+  },
+  "drive": "StoryWorld-HERO-lauren-sheet-20261030.zip",
+  "driveId": "10JF4klZAdlk2F3mvwwB4hVbOj5mkTzO9",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
   "actions-v3126/lauren-ultimate-"
@@ -44,7 +48,7 @@
     192,
     256
    ],
-   "sha256": "77322b5b57c4cbbdf43c95813339fb507c775e3661ea543dbbc7642c5725ab56"
+   "sha256": "09ce45504c2d1391e902ad6d28e1039ff6ef78814ebbdda3179338bb0ede4b87"
   },
   "se": {
    "path": "assets/r130/lauren/walk-se.webp",
@@ -54,7 +58,7 @@
     192,
     256
    ],
-   "sha256": "224ee1ac4697d5939391bc21251f8e524484a7e88c09be9844596246c2f81b8d"
+   "sha256": "30e2ef45571c3e19b2f443e420353e070bed7ce095766ac026d65e9417bead1b"
   },
   "e": {
    "path": "assets/r130/lauren/walk-e.webp",
@@ -64,7 +68,7 @@
     192,
     256
    ],
-   "sha256": "2dbd0df3c64373c7dca73b25cf92cae364ff08a3d6ed67f602582ccb102a6b56"
+   "sha256": "279ab6a73e3ee39baeb5d4c14801a85a9eae6628c877106a8ad30559b603e0af"
   },
   "ne": {
    "path": "assets/r130/lauren/walk-ne.webp",
@@ -74,7 +78,7 @@
     192,
     256
    ],
-   "sha256": "f02c4502d799153c9029b579c883456d67f84e0e83fa96950ac0fb7c2c4f0c98"
+   "sha256": "7f0cf92ca06a90ba5a00a5a6adcbaefcec54c4fe3d325b9bb8457a44c59cc712"
   },
   "n": {
    "path": "assets/r130/lauren/walk-n.webp",
@@ -84,7 +88,7 @@
     192,
     256
    ],
-   "sha256": "8ec6e3a4ee2bac586aaea14a4be9a810787d1b15899adcf774a03b527767a445"
+   "sha256": "2a4e5c8ce18dddf5882b789f44972dc5204f8c1d56bd2877a333311302a7d61b"
   }
  },
  "swap": {
@@ -560,8 +564,8 @@
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-front.webp",
    "from": "HERO-lauren-walk-s.png#3",
    "mirror": false,
-   "sha256": "25b934ac540eb8b10dbda6c1e20b47a0918d71e99b7dd6c394b3cfec371022f5",
-   "bytes": 23928,
+   "sha256": "97d66ae1b61300ef925fe181f08e939b09fa5614735d3cb24a423cccc6c83334",
+   "bytes": 23630,
    "frame": {
     "size": [
      512,
@@ -571,15 +575,15 @@
      265.7,
      491
     ],
-    "visibleHeight": 444.5
+    "visibleHeight": 442.3
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-back.webp",
    "from": "HERO-lauren-walk-n.png#3",
    "mirror": false,
-   "sha256": "8cf648c143534098a1fd2db846c97fd6580c7873db2e9a98f9da542e7a8df876",
-   "bytes": 24352,
+   "sha256": "22ce2f3c199c81b59faaf905ca40ce92f7f7cde2532d9ae3225dcb1e708d3470",
+   "bytes": 23814,
    "frame": {
     "size": [
      512,
@@ -589,15 +593,15 @@
      258.0,
      505
     ],
-    "visibleHeight": 459.8
+    "visibleHeight": 455.3
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-left.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-left.webp",
    "from": "HERO-lauren-walk-e.png#3",
    "mirror": true,
-   "sha256": "1b0994ef95867896bd3dd74be57b427e32cd6f8152110c4ee39e8f70800a8fe3",
-   "bytes": 20674,
+   "sha256": "133f0ed67748dd3efefaced85574276fcfd85a5d6eb91d53a66c513f442c6b31",
+   "bytes": 20418,
    "frame": {
     "size": [
      512,
@@ -607,15 +611,15 @@
      254.4,
      482
     ],
-    "visibleHeight": 445.0
+    "visibleHeight": 442.8
    }
   },
   "assets/heroes/normalized/actions-consistent/lauren-dash-right.webp": {
    "path": "assets/r130/lauren/actions-consistent-lauren-dash-right.webp",
    "from": "HERO-lauren-walk-e.png#3",
    "mirror": false,
-   "sha256": "a38497d890d3c0082dd617107499e904bd103a76895312f800c9b4885a0840ea",
-   "bytes": 20560,
+   "sha256": "adc5c32d69da0744d7db5353bc2ae15d98e81805e3a19565f23805b41967773d",
+   "bytes": 20232,
    "frame": {
     "size": [
      512,
@@ -625,7 +629,7 @@
      248.2,
      482
     ],
-    "visibleHeight": 439.9
+    "visibleHeight": 437.7
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-front.webp": {
@@ -650,8 +654,8 @@
    "path": "assets/r130/lauren/actions-v3126-lauren-move-front.webp",
    "from": "HERO-lauren-walk-s.png#2",
    "mirror": false,
-   "sha256": "b42489df084e4886cc1a1eecba9aa1468bb74c1a9dc92f754def397be9a14aa5",
-   "bytes": 12962,
+   "sha256": "969b4d58bc40db0cb7ec8ef50cee4214dcd84820608cf54407b5ef7b538ec7a5",
+   "bytes": 13526,
    "frame": {
     "size": [
      512,
@@ -661,7 +665,7 @@
      314.4,
      456
     ],
-    "visibleHeight": 259.5
+    "visibleHeight": 267.2
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-back.webp": {
@@ -686,8 +690,8 @@
    "path": "assets/r130/lauren/actions-v3126-lauren-move-back.webp",
    "from": "HERO-lauren-walk-n.png#2",
    "mirror": false,
-   "sha256": "0d964eef6b090d7a6b4df6048fdf4ecf845ad47a2d5b3823ddd6cf010020d5cf",
-   "bytes": 11614,
+   "sha256": "89085753f1b2b59073b60113aabb986369b593049edb7e52f9de1382c2fff0f3",
+   "bytes": 12210,
    "frame": {
     "size": [
      512,
@@ -697,7 +701,7 @@
      205.3,
      498
     ],
-    "visibleHeight": 240.0
+    "visibleHeight": 249.4
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-left.webp": {
@@ -722,8 +726,8 @@
    "path": "assets/r130/lauren/actions-v3126-lauren-move-left.webp",
    "from": "HERO-lauren-walk-e.png#2",
    "mirror": true,
-   "sha256": "140a8df7dabc9bcf0f1cd90e32c496d5915413d4e64e238cc0679f2237d0bf69",
-   "bytes": 13592,
+   "sha256": "45b7ecb4041520f41a58adb92fd94505a30a401e1f4551159a265cdd7f1e6063",
+   "bytes": 13478,
    "frame": {
     "size": [
      512,
@@ -733,7 +737,7 @@
      197.1,
      405
     ],
-    "visibleHeight": 304.5
+    "visibleHeight": 306.0
    }
   },
   "assets/heroes/normalized/actions-v3126/lauren-hurt-right.webp": {
@@ -758,8 +762,8 @@
    "path": "assets/r130/lauren/actions-v3126-lauren-move-right.webp",
    "from": "HERO-lauren-walk-e.png#2",
    "mirror": false,
-   "sha256": "e5451582d9362bbf494053985cb67359f33819009fb556aa40434d862a6686a0",
-   "bytes": 9352,
+   "sha256": "696fec9eb71e3c06ab17bcb871035e31d4de7bc6f1a9ab04c779e52a56e4fba3",
+   "bytes": 9438,
    "frame": {
     "size": [
      512,
@@ -769,7 +773,7 @@
      290.2,
      510
     ],
-    "visibleHeight": 230.4
+    "visibleHeight": 231.5
    }
   },
   "assets/heroes/normalized/actions-directional/lauren-attack-left.webp": {

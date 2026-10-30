@@ -10,12 +10,16 @@
    "HERO-hwando-attack-ne.png": "114525264d09cf2540c82a26803d42145290e43bb63dce7ba85b9e50fdbd1699",
    "HERO-hwando-attack-s.png": "91eb906be42a1aed34748931a67e4700ae6424b5e2cf4d0a6148a79285d4463c",
    "HERO-hwando-attack-se.png": "44f6a0bb779b89582c31e0a396ff8496b172308f585cab6cb335a2faad83c380",
-   "HERO-hwando-walk-e.png": "b709454bf5c6abfb0c36b1ddcee07187df46e2adb9c357a7e86f2ca459e15459",
-   "HERO-hwando-walk-n.png": "1fea1489ed11b2052cc00d99c77489d81d95abc503041a7b4d175d05cc690104",
-   "HERO-hwando-walk-ne.png": "481aa12e354560af094009a640cbbe3cfbbcc87ccf26a2749402f15ad4d4b9c6",
-   "HERO-hwando-walk-s.png": "95121be220b3a0d4cafe74ef636a2c4797a045a97be74357dd3c18756314c852",
-   "HERO-hwando-walk-se.png": "0a1a3058784937601f763c7220503d9c2eb1cace88f5ca4964656214c912768c"
-  }
+   "HERO-hwando-walk-e.png": "e9e747a02410a7749231f60e60d1f3ed7f754545d44ebcc25e1323730737114f",
+   "HERO-hwando-walk-n.png": "490e0c7ee448a7f2ea1bb81cdfac251cd1cd8604550ff9fe366312aa51dae6c8",
+   "HERO-hwando-walk-ne.png": "adf8110428f85fd3a0f5beb72eaa26e83772918953a9e51db788050314645ea5",
+   "HERO-hwando-walk-s.png": "574daac23fd1d3adf68a11ad07c056079b5ded10a41c4ecfa75a9341550bef0c",
+   "HERO-hwando-walk-se.png": "e6b1bef4f42bd32412d077322c4955772360bc6e6236ae8ee3d10f539cdea665"
+  },
+  "drive": "StoryWorld-HERO-hwando-sheet-20261030.zip",
+  "driveId": "1MpIdjVzC46punGgMkJfutrPBNWW-AS_x",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [],
  "walk": {
@@ -27,7 +31,7 @@
     192,
     256
    ],
-   "sha256": "f1c5369027d5ae7bca4c8c621f903858dfd05594d3bfadc41d0dcaaaa7da8e8a"
+   "sha256": "2fefc4299e310f614382f5d5644ec2d97beab23ada9fff0da30159085301458f"
   },
   "se": {
    "path": "assets/r130/hwando/walk-se.webp",
@@ -37,7 +41,7 @@
     192,
     256
    ],
-   "sha256": "7e79f1a770b7ba97e12faa110e97244ee2a874cf9c552b2e36026bc849b5d2a9"
+   "sha256": "76a87d6a8200ff044e222964cc2fb89747d45e6e2188c3e0bac539622e778008"
   },
   "e": {
    "path": "assets/r130/hwando/walk-e.webp",
@@ -47,7 +51,7 @@
     192,
     256
    ],
-   "sha256": "427566c66fd826cf4a23c4f803ef5c634b838806d29deb05364b98344ad5784a"
+   "sha256": "f0cd3bdf7d318ec372c445b601e57e5367593a07ee6740250b99f313f4f4e26d"
   },
   "ne": {
    "path": "assets/r130/hwando/walk-ne.webp",
@@ -57,7 +61,7 @@
     192,
     256
    ],
-   "sha256": "97f3a67481de6210772f138a22c17c5a13d4cf3ef7006344f0b5bb8559ea4ee7"
+   "sha256": "9b30f7c7a728c8b86343b1a786f56c15847522ea66abfb29cd805aa5182a1d56"
   },
   "n": {
    "path": "assets/r130/hwando/walk-n.webp",
@@ -67,7 +71,7 @@
     192,
     256
    ],
-   "sha256": "f98140fbb975f24ba961adc664f97698c9910282a673f1ec2f25f37c7eb50de5"
+   "sha256": "96e333540b8e12e4350d3adb0f2de1d2f56a6a4b90bf0405d72c1d04880c3c3a"
   }
  },
  "swap": {},

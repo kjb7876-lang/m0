@@ -25,12 +25,16 @@
    "HERO-hunter-idle-ne.png": "e88ae3f095028516f10a9bb30e5905d842dc72bfef0e0394bed68c322bfb5b20",
    "HERO-hunter-idle-s.png": "74737831ee0226efaa058ac9bc99af14c19c3428b3c3cc422472220c50dfe105",
    "HERO-hunter-idle-se.png": "8aceb481ef0e21801625a6d2a965dc994bb17c081cfd0e17eb6bc532632316e0",
-   "HERO-hunter-walk-e.png": "c2e465c4241657750daff4e145160db1a44c11ff282505a67fa7d6e670307ce7",
-   "HERO-hunter-walk-n.png": "a855a12f694e6609a70f4830167470aaaca51df1bc027c14a46168a52fab6f75",
-   "HERO-hunter-walk-ne.png": "1de73c0bfcf5734500dd6444c7efcdce5c60deecf9df7751ed0d2cfe8db47abe",
-   "HERO-hunter-walk-s.png": "c170d9e0351b69674b07a004db0bcb165e7653785ca99c021f16b3be4782f8e3",
-   "HERO-hunter-walk-se.png": "678e14eb102d379079f4977692f99542fcf1a2061a1c90d560bae95e1aac689d"
-  }
+   "HERO-hunter-walk-e.png": "0466cc1341232a2e7b6a03ff4222fe72532977daed535bb4555d0c98742672eb",
+   "HERO-hunter-walk-n.png": "1d71eca2c170908babc439c4a01fd427561340673c0c849464f1c7f267b6aba8",
+   "HERO-hunter-walk-ne.png": "12da30308ca5220e724df284a39b03fde54f7462229b28391c226b78a4ccc0ea",
+   "HERO-hunter-walk-s.png": "2d232a2cf303d60cd141a85008070bc5925cba93a0be4b07f9984e520ce356d7",
+   "HERO-hunter-walk-se.png": "890e179fd4e5d85c172f2f9d4f2f04d7f37701aaad9cff935416934df9378806"
+  },
+  "drive": "StoryWorld-HERO-hunter-sheet-20261030.zip",
+  "driveId": "1MSqxulhq-zh24I28S4nNISE-7XQ53qro",
+  "revision": "R132 걷기 개선본(사용자 재업로드 2026-10-30)",
+  "manifestNote": "동봉 MANIFEST.json 이 이전 판 해시 그대로라 바뀐 PNG 는 맞지 않음 — 바뀐 파일은 이전 판 해시와 일치(갱신 누락) 확인 후 실제 해시를 files 에 기록"
  },
  "keep": [
   "actions-v3126/hunter-ultimate-"
@@ -44,7 +48,7 @@
     192,
     256
    ],
-   "sha256": "4a6824351f87f7f92dceabd8ee68532a218f04d1a9485303962946b224fb301f"
+   "sha256": "6e964c75ab653b3cf0035e354fd13df04e73a5e91bc0b67de95d5953e6963dc9"
   },
   "se": {
    "path": "assets/r130/hunter/walk-se.webp",
@@ -54,7 +58,7 @@
     192,
     256
    ],
-   "sha256": "8985065c06d3c5408ae6801882f670ac719ce65a4da7eba6bae1d388d4b92d32"
+   "sha256": "3768dc2489ed9ea37cd8841ef74f0cb1424d145187c2a04cb53a825a6b442b01"
   },
   "e": {
    "path": "assets/r130/hunter/walk-e.webp",
@@ -64,7 +68,7 @@
     192,
     256
    ],
-   "sha256": "b83009d2d678df9cd5287eaf573b346fb380999b959b61c1d863f5456068725f"
+   "sha256": "1d8383c8afe1528c18171f31b362a6dfcb033d6b4f2033825456b1e776347989"
   },
   "ne": {
    "path": "assets/r130/hunter/walk-ne.webp",
@@ -74,7 +78,7 @@
     192,
     256
    ],
-   "sha256": "aa96b0a207d04c9165ae1da8cef4acfc5dc41665d16684ef98965fb550f85d62"
+   "sha256": "cb47c29d32b62799ccb9b9051dd766fcfef3e6fed1be3f8d05584a7076eeb9c6"
   },
   "n": {
    "path": "assets/r130/hunter/walk-n.webp",
@@ -84,7 +88,7 @@
     192,
     256
    ],
-   "sha256": "daccd6f06f3d77b3ec9f07bb660995c872641a5e15d72e8eaf6fe0445ad184e8"
+   "sha256": "2cde8b0309367a20b6c89b1a7547bb63e87aaeb6b6e3342ab0d55067cb45dbe1"
   }
  },
  "swap": {
@@ -524,8 +528,8 @@
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-front.webp",
    "from": "HERO-hunter-walk-s.png#3",
    "mirror": false,
-   "sha256": "8c577855df42ccda1b0ff012d709c9c61018b70fa8c8eef36a1a1de63ac53fc9",
-   "bytes": 25720,
+   "sha256": "4c4b45fdb7ca78ee7ec9e25ec579522c4bf4999620a00a8c7a5a5254fb964dbc",
+   "bytes": 25552,
    "frame": {
     "size": [
      512,
@@ -535,15 +539,15 @@
      252.9,
      493
     ],
-    "visibleHeight": 436.6
+    "visibleHeight": 446.4
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-back.webp",
    "from": "HERO-hunter-walk-n.png#3",
    "mirror": false,
-   "sha256": "7e4dab0b61097ff422718309546b16e16d6332f6b28c6408c4bd9318df614919",
-   "bytes": 29324,
+   "sha256": "d83bc6532f4273665c7df22d8bbb90cc4c7f931af067d8dbd876b57b72d67543",
+   "bytes": 27822,
    "frame": {
     "size": [
      512,
@@ -553,15 +557,15 @@
      269.5,
      507
     ],
-    "visibleHeight": 458.0
+    "visibleHeight": 453.0
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-left.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-left.webp",
    "from": "HERO-hunter-walk-e.png#3",
    "mirror": true,
-   "sha256": "9ff80a0e617004ca779e4929a6812b9bd5ca89c866a0273c9d27a43578a53e7e",
-   "bytes": 21228,
+   "sha256": "938866a7f91de9462ea59348416ecf7ff10dee42bec842a3e26f855f2a3c02d7",
+   "bytes": 22340,
    "frame": {
     "size": [
      512,
@@ -571,15 +575,15 @@
      258.4,
      480
     ],
-    "visibleHeight": 446.3
+    "visibleHeight": 436.4
    }
   },
   "assets/heroes/normalized/actions-consistent/hunter-dash-right.webp": {
    "path": "assets/r130/hunter/actions-consistent-hunter-dash-right.webp",
    "from": "HERO-hunter-walk-e.png#3",
    "mirror": false,
-   "sha256": "41105461a0bdac9b70df192250c73e6284b6f3c74aac52efb0ce86e918ee9ab2",
-   "bytes": 21544,
+   "sha256": "2b3fa2d6ea9e3ca99b889ca233f71d01d828cf86b1ae6f02d213c4c84d6f319c",
+   "bytes": 22130,
    "frame": {
     "size": [
      512,
@@ -589,7 +593,7 @@
      243.2,
      478
     ],
-    "visibleHeight": 451.4
+    "visibleHeight": 441.4
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp": {
@@ -614,8 +618,8 @@
    "path": "assets/r130/hunter/actions-v3126-hunter-move-front.webp",
    "from": "HERO-hunter-walk-s.png#2",
    "mirror": false,
-   "sha256": "72559c3db7b4c614d53cb0ceb8409431e43f762385283a1f97625125f3b46979",
-   "bytes": 14368,
+   "sha256": "5b9b45eb06ea3014761bdcd40f299a7df2e756e0fab692dad17de55fb792495f",
+   "bytes": 15456,
    "frame": {
     "size": [
      512,
@@ -625,7 +629,7 @@
      239.8,
      504
     ],
-    "visibleHeight": 275.4
+    "visibleHeight": 287.6
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp": {
@@ -650,8 +654,8 @@
    "path": "assets/r130/hunter/actions-v3126-hunter-move-back.webp",
    "from": "HERO-hunter-walk-n.png#2",
    "mirror": false,
-   "sha256": "79b402aa0c5073f6d7529c8d4af278152bb78add1e85c6557718ae33224b8bdc",
-   "bytes": 16546,
+   "sha256": "9d762d6854f2b59412a9fae19781859fba34fc753ceaec1532530675a6e14d8d",
+   "bytes": 17172,
    "frame": {
     "size": [
      512,
@@ -661,7 +665,7 @@
      250.9,
      509
     ],
-    "visibleHeight": 285.5
+    "visibleHeight": 298.0
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp": {
@@ -686,8 +690,8 @@
    "path": "assets/r130/hunter/actions-v3126-hunter-move-left.webp",
    "from": "HERO-hunter-walk-e.png#2",
    "mirror": true,
-   "sha256": "2607ef3fa5faa4aab409432f6f99bffeef04ed5b4d1c2be0a3e1174e913e39e0",
-   "bytes": 11888,
+   "sha256": "73cc242f12a599d88729e5fbfb0c860e5e257919d0c7eec8a629f465ae044ffd",
+   "bytes": 12718,
    "frame": {
     "size": [
      512,
@@ -697,7 +701,7 @@
      176.0,
      506
     ],
-    "visibleHeight": 276.5
+    "visibleHeight": 278.0
    }
   },
   "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp": {
@@ -722,8 +726,8 @@
    "path": "assets/r130/hunter/actions-v3126-hunter-move-right.webp",
    "from": "HERO-hunter-walk-e.png#2",
    "mirror": false,
-   "sha256": "35065d7ef277e962319ef643c897b60010ad30dbde2882afe2eab09ef590b32b",
-   "bytes": 12030,
+   "sha256": "9d94130a0fdcead8dd0b4b975365e940b3c5be9d444f2255a2a747916542969d",
+   "bytes": 12652,
    "frame": {
     "size": [
      512,
@@ -733,7 +737,7 @@
      319.1,
      506
     ],
-    "visibleHeight": 277.5
+    "visibleHeight": 279.0
    }
   },
   "assets/heroes/normalized/actions-directional/hunter-attack-left.webp": {
