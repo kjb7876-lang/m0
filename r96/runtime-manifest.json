@@ -19469,8 +19469,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563293,
-      "sha256": "1118685f8822e1a88de313f58af6fc0b33384eaacebebd023adfe1c9ec04bef0"
+      "bytes": 6563338,
+      "sha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d"
     },
     {
       "path": "mobs-r109.js",
@@ -19611,6 +19611,11 @@
       "path": "status-r96.js",
       "bytes": 5692,
       "sha256": "01ab5961ac4af2100c63dfa51b32847d37cf12ac317b11fa0c9e3cec68ed9882"
+    },
+    {
+      "path": "story-batch-r139.js",
+      "bytes": 4380,
+      "sha256": "ede22704de68e6d21722a1aba556debeb468c0b6217dc506958697a686083285"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -19783,9 +19788,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 3956,
-  "totalBytes": 779541130,
-  "webHTMLSha256": "1118685f8822e1a88de313f58af6fc0b33384eaacebebd023adfe1c9ec04bef0",
+  "fileCount": 3957,
+  "totalBytes": 779545555,
+  "webHTMLSha256": "6ea5a3a5c307326e401ed2034419e0294c1583690c9240e6adea3a2a10ede93d",
   "largest": [
     {
       "path": "index.html",
