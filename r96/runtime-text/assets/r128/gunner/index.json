@@ -1,0 +1,504 @@
+{
+ "revision": "R128",
+ "source": {
+  "drive": "StoryWorld-HERO-gunner-sheet-20261030.zip",
+  "driveId": "13-unzqWeeD2_9N7q2KInxcXm29JTI3JR",
+  "maker": "Gemini (사용자 요청, docs/gemini-hero-refs 규격)",
+  "files": {
+   "README.txt": "04cdeb8b3667cf896f50dfaa9f277e9745ea8e84bb719451eb3db9dbb238c0fe",
+   "SPEC.json": "8cf3d9942feca5b30542dec0fe71053ebb0e14cf7ac23a1fcf05c9530fc1fae6",
+   "HERO-gunner-attack-e.png": "47edc14c89bbfb3aa4738e137e7a9de6dd52b8529685902a5410ba3aedad07b0",
+   "HERO-gunner-attack-n.png": "6a30ed35e007f992440da5712761607e5da9106d82025b1bba89e1bb00083377",
+   "HERO-gunner-attack-ne.png": "d5b6d00556a13128346119d8c9634aeca082b155305fa6382697e747ec94b698",
+   "HERO-gunner-attack-s.png": "9d5345394739c493811377eac00de3226d80197b505dc381fd17fcd99e7babb3",
+   "HERO-gunner-attack-se.png": "765eb40d1fc231e85bdf3e9a8ddeab063c38baa8d148c719428d5a656a58798b",
+   "HERO-gunner-death-e.png": "7d66d836ed8dd4301a8ab17c93b4c76910097c1b68481e3c9c1bb61236e9838f",
+   "HERO-gunner-death-n.png": "d399ce5a899dd6e9aee88f7d782652bb25f2c32de432bcebd7900899439eba9f",
+   "HERO-gunner-death-ne.png": "4508a6240ba7c0563c50c20f4cddcc95d0718c6502f467c719c6833a8160455c",
+   "HERO-gunner-death-s.png": "b5ada8bdf5871ad6f9661e34b943ac1bcfde4a95905cbc68e898a75ff5f65866",
+   "HERO-gunner-death-se.png": "56bcab37613dc07f15f85d0dd377cde01dfdeb4623d9a5f3bfbf84f5f9292f7a",
+   "HERO-gunner-hit-e.png": "212507ddf7e5ab99f9382a159e6113d09db8aafea580ba4771f8da8733ddc990",
+   "HERO-gunner-hit-n.png": "f7e75994fc20cbb0a125746011c0b13166f6270a6288b6632c3ec24fbcd7f2c5",
+   "HERO-gunner-hit-ne.png": "21edf91296d08ecd91efd1fcff910e9be934e11c0066186812ac5fcc770979cf",
+   "HERO-gunner-hit-s.png": "b229addee954b8a20f87a0997f15a3d01028589457fd294e85d75fef36d6a613",
+   "HERO-gunner-hit-se.png": "5492c91a3b27f6edb454dba64e714dcf5b27aaa474dc0150efe9368c5b0841b3",
+   "HERO-gunner-idle-e.png": "5c05eedf6290ddee29e1c6a5668978a3bdb69238884ce7107feef583021c2e30",
+   "HERO-gunner-idle-n.png": "775f032ce881aa361537d09f87542b5ba1eff91e23cb34a889c89936f65421e5",
+   "HERO-gunner-idle-ne.png": "5fc104fbc9f805f10ba44f35c6eb1b077b41ebbec9697025aed93bf08e7dbee7",
+   "HERO-gunner-idle-s.png": "f426b63dc12fe1f7f7c17bf02cac68d923b387f2ab3ecf4e546bf3ac88f22d35",
+   "HERO-gunner-idle-se.png": "a053f5f4ee612ed91136013d5be262e4ad209b362238379edd44bb8383eb8035",
+   "HERO-gunner-walk-e.png": "d489263db30aaa6c43eb13dfc01071da10c38bdad8dc20a2479d7a0923e22369",
+   "HERO-gunner-walk-n.png": "53e9d3fac1bd4c0639e7e74cbc8b04f37ef02bb78abed15873f73075818ebbae",
+   "HERO-gunner-walk-ne.png": "93812ad9e8aa39891fa92bca7c320f9e33c47fda18f7595e9d21a5a49739e71f",
+   "HERO-gunner-walk-s.png": "b2a9d8224dee06987adab0fd4bc95860f937bc51ed0fa664b1348ec87dc40896",
+   "HERO-gunner-walk-se.png": "9374f5b0f7b32664be1861be24164a89fbb8255dbdda65c104fe5a378f723ba5"
+  }
+ },
+ "walk": {
+  "s": {
+   "path": "assets/r128/gunner/walk-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "0635254244db6c74639d4e24f41d95aaa8def602147f45f5dc96fb7ff0c00f55"
+  },
+  "se": {
+   "path": "assets/r128/gunner/walk-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "22daf1458bc5f3ff02290a4d12eac5ff37801aee26ed9a571dba06e2716c6c71"
+  },
+  "e": {
+   "path": "assets/r128/gunner/walk-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "2f7a1529dbf81d6adfb5e08443b65d1395fd3db51790c261f05ab86d729e28fe"
+  },
+  "ne": {
+   "path": "assets/r128/gunner/walk-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "00d957169db7546cf823c35f1e69d4ade88eac539e596ca549c9b0030a9bf5f5"
+  },
+  "n": {
+   "path": "assets/r128/gunner/walk-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "1fbc97290895c07476d7ae0d226f60359da9e0722700087181fa21b882df562f"
+  }
+ },
+ "swap": {
+  "assets/hero_direction337/gunner/s.webp": {
+   "path": "assets/r128/gunner/g-s.webp",
+   "from": "HERO-gunner-idle-s.png#0",
+   "mirror": false,
+   "sha256": "7ef5f90b0b4d2d033397e11deb0b2737eaf04495baaa878de5993b029c114f6d",
+   "bytes": 30848
+  },
+  "assets/hero_direction337/gunner/n.webp": {
+   "path": "assets/r128/gunner/g-n.webp",
+   "from": "HERO-gunner-idle-n.png#0",
+   "mirror": false,
+   "sha256": "9e2382de17cb8f6cd2db56c1fdb7eb119b16e11f51cc68526ac9be3ab18ed8cf",
+   "bytes": 30802
+  },
+  "assets/hero_direction334/gunner/e.webp": {
+   "path": "assets/r128/gunner/g-e.webp",
+   "from": "HERO-gunner-idle-e.png#0",
+   "mirror": false,
+   "sha256": "a7c9bac5f8e41fad33f5232b9880b8ae01cf23613083b66bc3786e88f1f4da89",
+   "bytes": 20614
+  },
+  "assets/hero_direction334/gunner/w.webp": {
+   "path": "assets/r128/gunner/g-w.webp",
+   "from": "HERO-gunner-idle-e.png#0",
+   "mirror": true,
+   "sha256": "051d933d37a3017e64ef40dc494546cf78ec9f2bf2e4c7d7d011259f8b5fb368",
+   "bytes": 20860
+  },
+  "assets/hero_direction334/gunner/ne.webp": {
+   "path": "assets/r128/gunner/g-ne.webp",
+   "from": "HERO-gunner-idle-ne.png#0",
+   "mirror": false,
+   "sha256": "766c648fee29f33968698c8c80285377081eb4a9296824d3c7dbf8854cadb80d",
+   "bytes": 27994
+  },
+  "assets/hero_direction334/gunner/nw.webp": {
+   "path": "assets/r128/gunner/g-nw.webp",
+   "from": "HERO-gunner-idle-ne.png#0",
+   "mirror": true,
+   "sha256": "b8507750c148d5c270b5fd0f61c63294235ced5aa1b28b86b6774813b65f09ff",
+   "bytes": 28546
+  },
+  "assets/hero_direction334/gunner/se.webp": {
+   "path": "assets/r128/gunner/g-se.webp",
+   "from": "HERO-gunner-idle-se.png#0",
+   "mirror": false,
+   "sha256": "35ca60dccf5bbe65e8f1076e71683d0cdc2eadc30657222ceede5492bf4e9790",
+   "bytes": 20280
+  },
+  "assets/hero_direction334/gunner/sw.webp": {
+   "path": "assets/r128/gunner/g-sw.webp",
+   "from": "HERO-gunner-idle-se.png#0",
+   "mirror": true,
+   "sha256": "327b9454b1ef6f4959f9fcf82f7d263f5bd8ab763c17c08cb86aed759a4db621",
+   "bytes": 20856
+  },
+  "assets/heroes/normalized/gunner/player_idle.webp": {
+   "path": "assets/r128/gunner/g-player_idle.webp",
+   "from": "HERO-gunner-idle-e.png#0",
+   "mirror": false,
+   "sha256": "e3edac8677f5ecccb9498dcc41e8d025e3eedab198c3f83fa0119ddd8927e5a7",
+   "bytes": 17734
+  },
+  "assets/heroes/normalized/gunner/run_front_a.webp": {
+   "path": "assets/r128/gunner/g-run_front_a.webp",
+   "from": "HERO-gunner-walk-s.png#1",
+   "mirror": false,
+   "sha256": "35c73ba1e2efafeb45acd4d3a358c9892a70dba3378a1d0a1187f8578345ae03",
+   "bytes": 18842
+  },
+  "assets/heroes/normalized/gunner/run_front_b.webp": {
+   "path": "assets/r128/gunner/g-run_front_b.webp",
+   "from": "HERO-gunner-walk-s.png#5",
+   "mirror": false,
+   "sha256": "0f46370b632a074f4533c8dab334aec6c90eaebe1c6c2f047d8a0b1fd5f8cf1f",
+   "bytes": 18890
+  },
+  "assets/heroes/normalized/gunner/run_back_a.webp": {
+   "path": "assets/r128/gunner/g-run_back_a.webp",
+   "from": "HERO-gunner-walk-n.png#1",
+   "mirror": false,
+   "sha256": "7f9a8ecda98875453d0e2c72511daa6f511ac75c2c7ffb77f9f48378d4ffbea4",
+   "bytes": 19776
+  },
+  "assets/heroes/normalized/gunner/run_back_b.webp": {
+   "path": "assets/r128/gunner/g-run_back_b.webp",
+   "from": "HERO-gunner-walk-n.png#5",
+   "mirror": false,
+   "sha256": "dab36a05195659c5004df05c86a69cd345c48fc3ef74530abc51a81f3d1c24c8",
+   "bytes": 20138
+  },
+  "assets/heroes/normalized/gunner/run_left_a.webp": {
+   "path": "assets/r128/gunner/g-run_left_a.webp",
+   "from": "HERO-gunner-walk-e.png#1",
+   "mirror": true,
+   "sha256": "93a00922296a1f179bacc0f7f5eb1758b6ea2257dbce46743fe5fe4e2703709d",
+   "bytes": 15726
+  },
+  "assets/heroes/normalized/gunner/run_left_b.webp": {
+   "path": "assets/r128/gunner/g-run_left_b.webp",
+   "from": "HERO-gunner-walk-e.png#5",
+   "mirror": true,
+   "sha256": "6df9046dd966aacdb7f90bc848999c2ffba90157d96ad9d3908e98b909540680",
+   "bytes": 17238
+  },
+  "assets/heroes/normalized/gunner/run_right_a.webp": {
+   "path": "assets/r128/gunner/g-run_right_a.webp",
+   "from": "HERO-gunner-walk-e.png#1",
+   "mirror": false,
+   "sha256": "3ab94a1b474e3a26488e2dac496803f46f629b6c69beeb47a6691617c740d3a3",
+   "bytes": 15678
+  },
+  "assets/heroes/normalized/gunner/run_right_b.webp": {
+   "path": "assets/r128/gunner/g-run_right_b.webp",
+   "from": "HERO-gunner-walk-e.png#5",
+   "mirror": false,
+   "sha256": "69ac5572cd9a5f40e0f1e16631a9ee2128dabbe1f10148c721bcec034fbd283f",
+   "bytes": 17174
+  },
+  "assets/heroes/normalized/gunner/player_run1.webp": {
+   "path": "assets/r128/gunner/g-player_run1.webp",
+   "from": "HERO-gunner-walk-e.png#1",
+   "mirror": false,
+   "sha256": "3ab94a1b474e3a26488e2dac496803f46f629b6c69beeb47a6691617c740d3a3",
+   "bytes": 15678
+  },
+  "assets/heroes/normalized/gunner/player_run2.webp": {
+   "path": "assets/r128/gunner/g-player_run2.webp",
+   "from": "HERO-gunner-walk-e.png#5",
+   "mirror": false,
+   "sha256": "69ac5572cd9a5f40e0f1e16631a9ee2128dabbe1f10148c721bcec034fbd283f",
+   "bytes": 17174
+  },
+  "assets/heroes/normalized/gunner/guard_left.webp": {
+   "path": "assets/r128/gunner/g-guard_left.webp",
+   "from": "HERO-gunner-attack-e.png#0",
+   "mirror": true,
+   "sha256": "d6fcc3199f79477e6e7f5c93e7855ecaa10e292b2ffce5cef367a3ed5be0b480",
+   "bytes": 14522
+  },
+  "assets/heroes/normalized/gunner/guard_right.webp": {
+   "path": "assets/r128/gunner/g-guard_right.webp",
+   "from": "HERO-gunner-attack-e.png#0",
+   "mirror": false,
+   "sha256": "0304cee1da6bf7f0fdf17ed3c74d6bdf25cc3df302f9f9af014fdf10975eb9ae",
+   "bytes": 14440
+  },
+  "assets/heroes/normalized/gunner/dash_left.webp": {
+   "path": "assets/r128/gunner/g-dash_left.webp",
+   "from": "HERO-gunner-walk-e.png#3",
+   "mirror": true,
+   "sha256": "89f7bd4109005add2fa525344cf62e1883beea39bebbfdc7a549443f9c8bd675",
+   "bytes": 8984
+  },
+  "assets/heroes/normalized/gunner/dash_right.webp": {
+   "path": "assets/r128/gunner/g-dash_right.webp",
+   "from": "HERO-gunner-walk-e.png#3",
+   "mirror": false,
+   "sha256": "7f0fa8d97b33353ed67a4027c226de27512d3738c91792a269f705a661420d2f",
+   "bytes": 9016
+  },
+  "assets/heroes/normalized/gunner/attack_left.webp": {
+   "path": "assets/r128/gunner/g-attack_left.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": true,
+   "sha256": "d103d5114125dafd37d30f0f5731b740244d76a06d030fc82cd9c8b8c98768ac",
+   "bytes": 16536
+  },
+  "assets/heroes/normalized/gunner/attack_right.webp": {
+   "path": "assets/r128/gunner/g-attack_right.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": false,
+   "sha256": "b5dc6b7d84d807d908e9562157d31dbc1d1e7d9a5627dfe72e7d21ff95748d4d",
+   "bytes": 16696
+  },
+  "assets/heroes/normalized/gunner/player_aim.webp": {
+   "path": "assets/r128/gunner/g-player_aim.webp",
+   "from": "HERO-gunner-attack-e.png#1",
+   "mirror": false,
+   "sha256": "2aadaf37b23f928d9fa1e4fbfa99c68b43bd828d84dabc8e5a7b7da2ba824022",
+   "bytes": 15924
+  },
+  "assets/heroes/normalized/gunner/player_aimup.webp": {
+   "path": "assets/r128/gunner/g-player_aimup.webp",
+   "from": "HERO-gunner-attack-ne.png#1",
+   "mirror": false,
+   "sha256": "8a569b30a49ece7bcd4b20d32ffc5e4d1b9e45d315630c4a2d839d634953bdde",
+   "bytes": 18764
+  },
+  "assets/heroes/normalized/gunner/aim_front.webp": {
+   "path": "assets/r128/gunner/g-aim_front.webp",
+   "from": "HERO-gunner-attack-s.png#1",
+   "mirror": false,
+   "sha256": "bf3e34c274c5ac7c4bb46b42232385b3c88db22435fa0d5536e717d07878c06f",
+   "bytes": 17440
+  },
+  "assets/heroes/normalized/gunner/aim_back.webp": {
+   "path": "assets/r128/gunner/g-aim_back.webp",
+   "from": "HERO-gunner-attack-n.png#1",
+   "mirror": false,
+   "sha256": "9717a8164624c7f5b22b9b0744c3bab6e687edc0399cec040a91323b482d17a5",
+   "bytes": 18000
+  },
+  "assets/heroes/normalized/gunner/player_crouch.webp": {
+   "path": "assets/r128/gunner/g-player_crouch.webp",
+   "from": "HERO-gunner-death-e.png#2",
+   "mirror": false,
+   "sha256": "884ff4312c83137260c53caaab206089358efa84da0435c642917991421e9a40",
+   "bytes": 11098
+  },
+  "assets/heroes/normalized/gunner/player_roll.webp": {
+   "path": "assets/r128/gunner/g-player_roll.webp",
+   "from": "HERO-gunner-walk-e.png#3",
+   "mirror": false,
+   "sha256": "7f0fa8d97b33353ed67a4027c226de27512d3738c91792a269f705a661420d2f",
+   "bytes": 9016
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-attack-front.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-attack-front.webp",
+   "from": "HERO-gunner-attack-s.png#3",
+   "mirror": false,
+   "sha256": "62d63f46bba584d0b792f6e377a3b16e794e028bcebcae24884be8dcdd30fbf7",
+   "bytes": 18756
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-attack-back.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-attack-back.webp",
+   "from": "HERO-gunner-attack-n.png#3",
+   "mirror": false,
+   "sha256": "ecd2a8bd00076850a1a9a2cf75a69652bc95090d2a45c82d7928b92ab635ee6d",
+   "bytes": 19332
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-attack-left.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-attack-left.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": true,
+   "sha256": "22f6e02451b07dd7fbff1991bd36fa7baf5da5d2ecd5a87d544ffc839bf35f1f",
+   "bytes": 17722
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-attack-right.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-attack-right.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": false,
+   "sha256": "923bc306995eac3065c35bc11e1e5e2e2369b6b53c4f90c9440c54a87370a5c8",
+   "bytes": 17702
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-skill-front.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-skill-front.webp",
+   "from": "HERO-gunner-attack-s.png#2",
+   "mirror": false,
+   "sha256": "a445a7a59fde38852b5d1d08bd4bb10d40342baf2d6e395aaf58ce7ba26efe6c",
+   "bytes": 19386
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-skill-back.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-skill-back.webp",
+   "from": "HERO-gunner-attack-n.png#2",
+   "mirror": false,
+   "sha256": "b3c3f4915f563e467fea057666b92b39d4f44350dfff4ce74e4ea23e62fb276f",
+   "bytes": 19890
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-skill-left.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-skill-left.webp",
+   "from": "HERO-gunner-attack-e.png#2",
+   "mirror": true,
+   "sha256": "aeb049a0bc8983e0ddf6718ea423d3a94af19dd349df56e1bfa82e4afbfe9ce7",
+   "bytes": 17100
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-skill-right.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-skill-right.webp",
+   "from": "HERO-gunner-attack-e.png#2",
+   "mirror": false,
+   "sha256": "59f617938d9a97883a5c431665fdb665370c6c28866e59af5163db41c5ba948c",
+   "bytes": 17264
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-guard-front.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-guard-front.webp",
+   "from": "HERO-gunner-attack-s.png#0",
+   "mirror": false,
+   "sha256": "35d14a86835d1b88d794125dec601539f40b34fed4048cec1b64c43c4830008f",
+   "bytes": 14940
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-guard-back.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-guard-back.webp",
+   "from": "HERO-gunner-attack-n.png#0",
+   "mirror": false,
+   "sha256": "78fbb5ae4556d6b7a5b1c367d7f421bbdf38d7a834bb8def6771cca6943af551",
+   "bytes": 17926
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-guard-left.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-guard-left.webp",
+   "from": "HERO-gunner-attack-e.png#0",
+   "mirror": true,
+   "sha256": "ed25e93a67d807f60ed6ae6583035e98e8521107f6b9fc5773bea066d88d8002",
+   "bytes": 14452
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-guard-right.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-guard-right.webp",
+   "from": "HERO-gunner-attack-e.png#0",
+   "mirror": false,
+   "sha256": "b0d3c3ac08e301300b780cacd78cddaa2c1f6dac74b69c1f0deb97dbf15b3180",
+   "bytes": 14420
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-dash-front.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-dash-front.webp",
+   "from": "HERO-gunner-walk-s.png#3",
+   "mirror": false,
+   "sha256": "8a10d762e5373c8c5d08e25b2fc3fa3d048ba103af731cc4e9e89976e39a74a4",
+   "bytes": 19304
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-dash-back.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-dash-back.webp",
+   "from": "HERO-gunner-walk-n.png#3",
+   "mirror": false,
+   "sha256": "258253fe151df68a81652f7d2897ab60d5f615c0a8ac7ab45d2c5cd9598315d1",
+   "bytes": 20900
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-dash-left.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-dash-left.webp",
+   "from": "HERO-gunner-walk-e.png#3",
+   "mirror": true,
+   "sha256": "d970e944cc9bef87c347511d84e0c80b533ca3a2582287fa245ad665ebaf2599",
+   "bytes": 16834
+  },
+  "assets/heroes/normalized/actions-consistent/gunner-dash-right.webp": {
+   "path": "assets/r128/gunner/actions-consistent-gunner-dash-right.webp",
+   "from": "HERO-gunner-walk-e.png#3",
+   "mirror": false,
+   "sha256": "482bd70de07e1c74119883ecbd4949ba531d481e97accc5906238959e6305273",
+   "bytes": 16878
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-hurt-front.webp",
+   "from": "HERO-gunner-hit-s.png#1",
+   "mirror": false,
+   "sha256": "e45e480eb68c50f3308ba68efd155c271b82546957633d306f2347e4624a6460",
+   "bytes": 12580
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-back.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-hurt-back.webp",
+   "from": "HERO-gunner-hit-n.png#1",
+   "mirror": false,
+   "sha256": "6bdb423fdb21b1422aa6b19ba787a1cf974342346747e7efdf813a6b40918cd9",
+   "bytes": 12626
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-left.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-hurt-left.webp",
+   "from": "HERO-gunner-hit-e.png#1",
+   "mirror": true,
+   "sha256": "6b9f1d97b9421474caaf747928caca2c63f33b44bc616d6d611d248684062246",
+   "bytes": 12812
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-right.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-hurt-right.webp",
+   "from": "HERO-gunner-hit-e.png#1",
+   "mirror": false,
+   "sha256": "a582e92659a136f9e7f6c4fe16f8d7587ef69efbf4de0e6f3a7fa7f10c7c74e9",
+   "bytes": 12870
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-move-front.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-move-front.webp",
+   "from": "HERO-gunner-walk-s.png#2",
+   "mirror": false,
+   "sha256": "4a5873a80ca6ac6d3ebdebc370c40bbf6e11d4933bbb23caf9dde85162969df4",
+   "bytes": 14226
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-move-back.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-move-back.webp",
+   "from": "HERO-gunner-walk-n.png#2",
+   "mirror": false,
+   "sha256": "7090f57ad60e0eec747e8dc10bd6ca208fb87b0da1738345a04032f43a3e4b9e",
+   "bytes": 13188
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-move-left.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-move-left.webp",
+   "from": "HERO-gunner-walk-e.png#2",
+   "mirror": false,
+   "sha256": "980f4f50ec200a1d104643a56870d540d6298e1d648b3f10cf5999e98247edcf",
+   "bytes": 11540
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-move-right.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-move-right.webp",
+   "from": "HERO-gunner-walk-e.png#2",
+   "mirror": false,
+   "sha256": "f7f3e33e261c1f23f617088e04606ef06834891eef2a10522b8aa47474ed4b75",
+   "bytes": 11326
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-ultimate-front.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-front.webp",
+   "from": "HERO-gunner-attack-s.png#3",
+   "mirror": false,
+   "sha256": "afdf466a93d9bca81ffb0724f96c78e8edd281803affa8aadf371a3f75bb0d40",
+   "bytes": 12838
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-ultimate-back.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-back.webp",
+   "from": "HERO-gunner-attack-n.png#3",
+   "mirror": false,
+   "sha256": "f6e812c53d5b6910cc7952940f465a889c20085d99982fdda383ab594e0cd5d8",
+   "bytes": 12152
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-ultimate-left.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-left.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": false,
+   "sha256": "6244099729baf10ca9ffd772b6a6c84240fc008498ff9ee6e31284889889ed16",
+   "bytes": 11840
+  },
+  "assets/heroes/normalized/actions-v3126/gunner-ultimate-right.webp": {
+   "path": "assets/r128/gunner/actions-v3126-gunner-ultimate-right.webp",
+   "from": "HERO-gunner-attack-e.png#3",
+   "mirror": true,
+   "sha256": "55fc1ee2685300acb467600d34cc1cf0f7d7349e805b738ca533725c2c962a84",
+   "bytes": 11440
+  }
+ }
+}
