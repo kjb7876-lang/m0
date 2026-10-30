@@ -75,21 +75,26 @@ const part=n=>layer?.querySelector('[data-c="'+n+'"]');
 function applyGrade(force=false){const G=GRADE[prefs.horror];const key=prefs.horror+'|'+prefs.grain+'|'+prefs.lightPool+'|'+lowFx();if(!force&&key===lastGradeKey)return;lastGradeKey=key;
  // R123: 다크 판타지 톤(dark-r123.js)이 있으면 녹·피 쪽 색을 필터 끝에 덧붙인다(호러 끔이어도 그 톤만은 따로 끌 수 있다).
  let dk='';try{dk=(window.__STORYWORLD_DARK_R123__?.filter?.()||'')+(window.__STORYWORLD_MOOD_R123__?.filter?.()||'');}catch(_){}// R124: 사몽 구역 분위기 필터(흑과 백)도
- for(const c of worldCanvases())c.style.filter=G?G.filter+dk:dk.trim();
+ // R147: 휴대폰에서는 3D 화면 전체에 거는 CSS 색 필터를 뺀다(매 장면 화면 전체를 한 번 더 처리해 렉의 큰 원인). 어둡게 하는 덮개·비네트는 그대로.
+ const mob=(()=>{try{return !!window.__STORYWORLD_MOBILE_R63__?.isMobile?.();}catch(_){return false;}})();stats.mobileNoFilter=mob;
+ for(const c of worldCanvases())c.style.filter=mob?'':(G?G.filter+dk:dk.trim());
  if(!layer)layer=makeLayer();if(!layer)return;layer.style.display=G?'block':'none';if(!G)return;
  part('vig').style.background='radial-gradient(ellipse 75% 70% at 50% 48%,rgba(0,0,0,0) 46%,rgba(4,2,8,'+G.vig+') 100%)';
  const gr=part('grain');if(prefs.grain&&!lowFx()){const u=grainURL();if(u){gr.style.backgroundImage='url('+u+')';gr.style.opacity=String(G.grain*(reduced()?.5:1));}}else gr.style.opacity='0';}
+let poolCss='';
 function frame(){try{stats.frames++;const G=GRADE[prefs.horror];if(!G||!layer||!live()){if(layer&&!live())part('pulse').style.opacity='0';return;}
  if(lastGradeKey.split('|')[3]!==String(lowFx())||stats.frames%90===0)applyGrade(true);
  // 영웅 불빛 원: 영웅 주변은 밝게, 바깥은 어둡게
  const pool=part('pool'),s=stageEl();if(prefs.lightPool&&typeof project==='function'&&s){const q=project(player.x,player.y),r=s.getBoundingClientRect(),c=document.getElementById('game'),cr=c?.getBoundingClientRect?.()||r,
   sx=(cr.width/(c?.width||cr.width))*(typeof dpr==='number'?dpr:1)||1,px=cr.left-r.left+q.x*(sx||1),py=cr.top-r.top+(q.y-40)*(sx||1),rad=Math.max(160,Math.min(r.width,r.height)*.42);
-  pool.style.background='radial-gradient(circle '+Math.round(rad*1.6)+'px at '+Math.round(px)+'px '+Math.round(py)+'px,rgba(0,0,0,0) 0,rgba(0,0,0,0) '+Math.round(rad*.55)+'px,rgba(3,2,8,'+G.pool+') 100%)';}else pool.style.background='none';
+  const css='radial-gradient(circle '+Math.round(rad*1.6)+'px at '+(Math.round(px/4)*4)+'px '+(Math.round(py/4)*4)+'px,rgba(0,0,0,0) 0,rgba(0,0,0,0) '+Math.round(rad*.55)+'px,rgba(3,2,8,'+G.pool+') 100%)';if(css!==poolCss){poolCss=css;pool.style.background=css;stats.poolPaints=(stats.poolPaints||0)+1;}}else if(poolCss!=='none'){poolCss='none';pool.style.background='none';}// R147: 같은 자리면 다시 칠하지 않는다(4px 단위)
  // 필름 그레인: 매 프레임 위치만 흔든다
- const gr=part('grain');if(gr.style.opacity!=='0'&&!reduced()){gr.style.transform='translate('+((Math.random()*20-10)|0)+'%,'+((Math.random()*20-10)|0)+'%)';}
+ const gr=part('grain');if(gr.style.opacity!=='0'&&!reduced()&&stats.frames%3===0){// R147: 3장면에 한 번만 흔든다
+gr.style.transform='translate('+((Math.random()*20-10)|0)+'%,'+((Math.random()*20-10)|0)+'%)';}
  // 체력이 낮으면 붉은 맥박
  const hpK=player.maxHp>0?player.hp/player.maxHp:(typeof maxHP==='function'?player.hp/Math.max(1,maxHP()):1),low=hpK<.3&&player.hp>0;pulse=low?(pulse+.06)%TAU:0;
- const pl=part('pulse');if(low){const a=(.18+.14*Math.sin(pulse*2))*(reduced()?.5:1);pl.style.background='radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 40%,rgba(120,0,10,'+a.toFixed(3)+') 100%)';pl.style.opacity='1';}else pl.style.opacity='0';
+ // R147: 맥박은 그라데이션을 한 번만 칠하고 투명도만 바꾼다(투명도는 그래픽 카드가 합성만 해 다시 칠하지 않는다).
+ const pl=part('pulse');if(low){const a=(.18+.14*Math.sin(pulse*2))*(reduced()?.5:1);if(!pl.dataset.r147){pl.dataset.r147='1';pl.style.background='radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 40%,rgba(120,0,10,.32) 100%)';}pl.style.opacity=(a/.32).toFixed(2);}else pl.style.opacity='0';
  // 보스와 맞붙는 순간 레터박스
  const t=performance.now();if(prefs.letterbox&&room.engaged){const boss=(room.enemies||[]).find(e=>e&&(e.boss||e.midboss)&&e.hp>0&&e.spawnState==='active');if(boss&&!bossSeen.has(boss)){bossSeen.add(boss);letterUntil=t+2500;stats.letterboxes++;}}
  const bar=t<letterUntil?Math.round((s?.clientHeight||600)*.09)+'px':'0';part('top').style.height=bar;part('bot').style.height=bar;

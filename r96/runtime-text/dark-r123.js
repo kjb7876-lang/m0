@@ -36,10 +36,10 @@
  function ensureHost(){if(host?.isConnected)return host;const s=stageEl();if(!s)return null;host=document.createElement('div');host.id='darkR123';host.setAttribute('aria-hidden','true');
   host.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden';
   host.innerHTML='<div data-d="rust" style="position:absolute;inset:0;mix-blend-mode:soft-light"></div><div data-d="vig" style="position:absolute;inset:0;mix-blend-mode:multiply"></div><div data-d="torch" style="position:absolute;inset:0;mix-blend-mode:soft-light"></div>'
-   +'<div data-d="fog" style="position:absolute;left:0;right:0;bottom:0;height:62%;background-repeat:repeat;background-size:768px 768px;mask-image:linear-gradient(to top,#000 0,#000 30%,transparent 100%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 30%,transparent 100%)"></div>'
+   +'<div data-d="fog" style="position:absolute;left:0;right:0;bottom:0;height:62%;overflow:hidden;mask-image:linear-gradient(to top,#000 0,#000 30%,transparent 100%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 30%,transparent 100%)"><div data-d="fogi" style="position:absolute;left:-768px;top:-96px;width:calc(100% + 1536px);height:calc(100% + 192px);background-repeat:repeat;background-size:768px 768px;will-change:transform"></div></div>'
    +'<canvas data-d="cv" style="position:absolute;inset:0;width:100%;height:100%"></canvas>';
   if(getComputedStyle(s).position==='static')s.style.position='relative';s.appendChild(host);cv=host.querySelector('canvas');
-  if(!document.getElementById('darkR123Style')){const st=document.createElement('style');st.id='darkR123Style';st.textContent='@keyframes darkR123Fog{from{background-position:0 0}to{background-position:768px 96px}}';document.head.appendChild(st);}
+  if(!document.getElementById('darkR123Style')){const st=document.createElement('style');st.id='darkR123Style';st.textContent='@keyframes darkR123Fog{from{transform:translate3d(0,0,0)}to{transform:translate3d(768px,96px,0)}}';document.head.appendChild(st);}
   return host;}
  const part=n=>host?.querySelector('[data-d="'+n+'"]');
  const moodShade=()=>{try{const m=window.__STORYWORLD_MOOD_R123__?.inspect?.();return!!(m?.theme&&window.__STORYWORLD_MOOD_R123__.themes[m.theme]?.shade);}catch(_){return false;}};
@@ -47,12 +47,17 @@
   // 사몽 구역 분위기(R123 mood)가 이미 화면을 어둡게 하면 겹쳐 너무 어두워지지 않게 절반만
   const sh=ms?T.shade*.5:T.shade;part('rust').style.background='rgba(130,40,20,'+(ms?T.rust*.6:T.rust).toFixed(3)+')';
   part('vig').style.background='radial-gradient(ellipse 80% 75% at 50% 48%,rgba(70,58,58,'+sh+') 0,rgba(70,58,58,'+sh+') 40%,rgba(60,8,6,'+T.vig+') 100%)';
-  const f=part('fog');if(prefs.fog&&!lowFx()){if(!f.style.backgroundImage){const u=fogURL();if(u)f.style.backgroundImage='url('+u+')';}f.style.opacity=String(T.fog/.09*.3);f.style.animation=reduced()?'none':'darkR123Fog 90s linear infinite';}else{f.style.opacity='0';f.style.animation='none';}}
+  // R147: 안개는 배경 위치(background-position)를 움직이면 매 장면 화면을 다시 칠한다 → 안쪽 층을 transform 으로 옮겨 그래픽 카드가 합성만 하게.
+  const f=part('fog'),fi=part('fogi')||f;if(prefs.fog&&!lowFx()){if(!fi.style.backgroundImage){const u=fogURL();if(u)fi.style.backgroundImage='url('+u+')';}f.style.opacity=String(T.fog/.09*.3);fi.style.animation=reduced()?'none':'darkR123Fog 90s linear infinite';}else{f.style.opacity='0';fi.style.animation='none';}}
+ let torchAt=0,torchCss='',embersClear=false,emberTick=0;
  function frame(){if(!host||host.style.display==='none')return;const T=tone();if(!T)return;const t=performance.now()/1000,dt=clamp(t-(lastT||t),0,.1);lastT=t;
   // 영웅 횃불빛: 흔들리는 따뜻한 원(가까운 곳을 오히려 밝게)
   const tc=part('torch');if(typeof project==='function'&&!busy()){const q=project(player.x,player.y),fl=reduced()?1:.85+.1*Math.sin(t*9.1)+.05*Math.sin(t*23.7),r=Math.max(140,U()*5.2)*fl,a=(T.torch*fl).toFixed(3);
-   tc.style.background='radial-gradient(circle '+Math.round(r)+'px at '+Math.round(q.x)+'px '+Math.round(q.y-U()*.8)+'px,rgba(255,150,70,'+a+') 0,rgba(255,110,40,'+(a*.5).toFixed(3)+') 45%,rgba(0,0,0,0) 100%)';}else tc.style.background='none';
+   // R147: 화면 전체 크기 그라데이션을 매 장면 새로 칠하면 기기에서 화면 전체를 다시 그린다 — 흔들림은 초당 15번, 자리는 4px 단위로 바뀔 때만 칠한다.
+   if(t-torchAt>=1/15){torchAt=t;const css='radial-gradient(circle '+(Math.round(r/4)*4)+'px at '+(Math.round(q.x/4)*4)+'px '+(Math.round((q.y-U()*.8)/4)*4)+'px,rgba(255,150,70,'+a+') 0,rgba(255,110,40,'+(a*.5).toFixed(3)+') 45%,rgba(0,0,0,0) 100%)';if(css!==torchCss){torchCss=css;tc.style.background=css;stats.torchPaints=(stats.torchPaints||0)+1;}}}else if(torchCss!=='none'){torchCss='none';tc.style.background='none';}
   // 불티
+  // R147: 불티는 30번/초면 충분하고, 불티가 없으면 빈 캔버스를 매 장면 지우고 다시 올리지 않는다.
+  const wantE=prefs.embers&&!lowFx()&&!busy()?T.embers:0;if(!wantE&&!embers.length){if(!embersClear){const g0=cv?.getContext?.('2d');if(g0){g0.setTransform(1,0,0,1,0,0);g0.clearRect(0,0,cv.width,cv.height);}embersClear=true;}return;}embersClear=false;if((emberTick=(emberTick+1)%2)===1)return;
   const g=cv?.getContext?.('2d');if(!g)return;const b=host.getBoundingClientRect(),dp=Math.min(1.5,devicePixelRatio||1);if(cv.width!==Math.round(b.width*dp)||cv.height!==Math.round(b.height*dp)){cv.width=Math.round(b.width*dp);cv.height=Math.round(b.height*dp);}
   g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);const want=prefs.embers&&!lowFx()&&!busy()?T.embers:0;
   while(embers.length<want)embers.push({x:Math.random()*b.width,y:b.height+Math.random()*b.height*.5,v:20+Math.random()*30,w:Math.random()*TAU,s:.8+Math.random()*1.4});if(embers.length>want)embers.length=want;
@@ -64,9 +69,13 @@
  const isLight=p=>!!p&&p.visible!==false&&(['brazier','torch','candle','lantern'].includes(p.r74Prop||p.r105Prop||p.r115Prop)||(typeof p.path==='string'&&FIRE.test(p.path)&&!NOT.test(p.path)));
  const cache=new WeakMap();
  // 불빛 자리: 화로·횃불·제단 소품 + 뒷벽(화면 위쪽 벽)을 따라 9칸마다 벽 횃불이 바닥에 흘리는 빛(벽 그림의 횃불과 어울리게).
+ // R147: 벽 횃불 자리(바닥 칸 전체를 훑는 계산)는 지역 모양이 같으면 다시 셀 필요가 없다 — 소품 수가 바뀔 때마다(떨어진 물건 등) 다시 세던 것을 지역마다 한 번으로.
+ const wallCache=new WeakMap();
  function lightsOf(r){let c=cache.get(r);if(c&&c.n===(r.props?.length||0))return c.list;const list=(r.props||[]).filter(isLight).map(p=>({x:p.x,y:p.y,id:p.id,r:3}));
-  const cells=r.exploration?.floorCells;if(Array.isArray(cells)&&cells.length){const set=new Set(cells.map(q=>q[0]+':'+q[1])),wall=[];
+  const cells=r.exploration?.floorCells;const wc=r.exploration&&wallCache.get(r.exploration);if(wc&&wc.cells===cells){for(const w of wc.wall){if(list.length>=60)break;if(list.some(q=>Math.hypot(q.x-w.x,q.y-w.y)<9))continue;list.push(w);}}
+  else if(Array.isArray(cells)&&cells.length){const set=new Set(cells.map(q=>q[0]+':'+q[1])),wall=[];
    for(const[a,b]of cells){if(set.has(a+':'+(b-1))&&set.has((a-1)+':'+b))continue;if(!set.has((a+1)+':'+b)||!set.has(a+':'+(b+1)))continue;if(((a*7+b*13)%5)!==0)continue;wall.push({x:a+.6,y:b+.6,id:'wall:'+a+':'+b,r:2.2});}
+   if(r.exploration)wallCache.set(r.exploration,{cells,wall});
    for(const w of wall){if(list.length>=60)break;if(list.some(q=>Math.hypot(q.x-w.x,q.y-w.y)<9))continue;list.push(w);}}
   cache.set(r,{n:r.props?.length||0,list});return list;}
  function drawLights(){const T=tone();if(!T||!prefs.torches||typeof ctx==='undefined'||typeof project!=='function')return 0;const list=lightsOf(room),u=U(),t=typeof time==='number'?time:performance.now()/1000,w=typeof W==='number'?W:1280,h=typeof H==='number'?H:800;let n=0;
