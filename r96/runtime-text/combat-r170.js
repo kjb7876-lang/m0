@@ -1,7 +1,7 @@
 // R170 — 사용자 2026-10-31 요청 묶음(이토 준지·다크에덴·디아블로풍, 기존 그림체 유지).
 //  ① 근접 공격 준비 화살표·이름표 없애기: '근접 공격 준비/원거리 조준' 상자·글자, 몸에서 뻗는 방향 화살표, 원거리 조준 점선·과녁(R41)을
 //     일반 몹에서 그리지 않는다. 공격은 몸짓(R92/R109 공격 그림·R161 찌르기)과 이펙트(R98·R169)만으로 읽힌다. 판정·시간은 그대로.
-//  ② 피의 탑(고정형 원거리 몹): 맵마다 그 서사의 조형물 그림으로 된 움직이지 않는 적을 둔다(본편 = 그 지역 조형물, 사몽 = 세뇌당한 기억의 조각).
+//  ② 피의 육망성 조형물(고정형 원거리 몹, R176 서사 검수로 지어낸 '피의 탑' 이름을 사용자 표현대로 바꿈): 맵마다 그 서사의 조형물 그림으로 된 움직이지 않는 적을 둔다(본편 = 그 지역 조형물, 사몽 = 세뇌당한 기억의 조각).
 //     가까이 오면 6초마다 영웅 발밑에 피로 그린 육망성을 띄우고(1.3초 예고), 그 자리에서 탑의 고유색·보조색 촉수가 솟아 친다.
 //     두 번에 한 번은 그 맵의 잡몹 둘을 육망성에서 불러낸다(탑 하나당 12마리까지). 본편 전투 맵 1, 사몽 전투 구역 1, B·D 구역 2.
 //  ③ 나무 조형물은 그림자를 그리지 않는다(뿌리 묻기는 play-r115 의 9%).
@@ -55,18 +55,21 @@ function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)ret
  let h=(String(room.id).length*7919+n*104729)>>>0;for(let t=0;t<300;t++){h=Math.imul(h^(h>>>13),0x5bd1e995)>>>0;const c=L.floorCells[h%L.floorCells.length],x=c[0]+.5,y=c[1]+.5,d=Math.hypot(x-entry.x,y-entry.y);
   const gap=zoneMode()==='F'?3.5:6;if(d<(gap<6?4:7)||d>26||taken.some(q=>Math.hypot(q.x-x,q.y-y)<gap)||!okCell(x,y)||(gap>=6&&!offPath(x,y)))continue;return{x,y};}return null;}
 function towers(){return (room?.enemies||[]).filter(e=>e.r170Tower);}
-let placedKey='';
-function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+String(room.samongR103?.zone||'');if(!want){placedKey=key;return;}if(placedKey===key)return;// 한 구역에 한 번만(깨진 탑이 다시 서지 않게)
+let placedKey='',storyAt=0,spotKey='',spot0=null;
+function nearSpot(){const key=String(room.id);if(spotKey!==key){spotKey=key;spot0=wanted()?spotFor(0,[]):null;}return !!spot0&&Math.hypot(spot0.x-player.x,spot0.y-player.y)<10;}
+function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+String(room.samongR103?.zone||''),x=room.samongR103;if(!want){placedKey=key;if(x&&x.r173PlacedKey!==key){x.r173PlacedKey=key;x.r173Need=0;}return;}if(placedKey===key)return;// 한 구역에 한 번만(깨진 탑이 다시 서지 않게)
+ if(x&&x.r173PlacedKey===key){placedKey=key;return;}// 같은 방 객체로 다시 들어와도 깨진 탑은 다시 서지 않는다
  const art=artFor();if(!art)return;const donor=(room.enemies||[]).find(e=>e.hp>0&&!major(e)&&!e.r170Tower);if(!donor)return;placedKey=key;
  let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=JSON.stringify(donor),taken=[];
  for(let n=towers().length;n<want;n++){const at=spotFor(n,taken);if(!at)break;taken.push(at);let e;try{e=JSON.parse(snap);}catch(_){break;}
   Object.assign(e,{id:'r170:tower:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
    r170Tower:{art:art.path,h:art.h,next:T()+3,casts:0,summoned:0,snap},r75Tower:true,r61PreserveHealth:true,speed:0,ai:'melee',samongElite:false,samongSurvival:false,r162Lane:false,samongSubR170:false,
-   name:art.name||(donor.name||'')+' · 피의 탑'});
+   name:art.name||'피의 육망성 조형물'});
   e.maxHp=e.hp=Math.round(samongRoom()?atk*25:Math.max(60,(Number(donor.maxHp)||60)*6));e.damage=(Number(donor.damage)||10)*1.3;e.defScale=1;e.cd=99;
-  room.enemies.push(e);stats.towers++;if(room.samongR103)room.samongR103.r173Towers=(room.samongR103.r173Towers||0)+1;try{if(typeof ensureImages==='function')ensureImages([art.path]);}catch(_){}}}
-function palOf(e){const P=window.__STORYWORLD_COMBAT_R114__?.palette;let pl=null;try{pl=P?P(JSON.parse(e.r170Tower.snap)):null;}catch(_){}
- return pl?{main:{a:pl.p,b:pl.gp},sub:{a:pl.s,b:pl.gs}}:{main:{a:[90,12,20],b:[255,120,110]},sub:{a:[40,6,10],b:[200,60,60]}};}
+  room.enemies.push(e);stats.towers++;if(x)x.r173Towers=(x.r173Towers||0)+1;try{if(typeof ensureImages==='function')ensureImages([art.path]);}catch(_){}}
+ if(x){x.r173PlacedKey=key;x.r173Need=x.r173Towers||0;}}// 실제로 선 수(자리가 모자라면 6보다 적다) — F 구역 문 조건은 이 수를 따른다
+function palOf(e){if(e.r170Tower.pal)return e.r170Tower.pal;const P=window.__STORYWORLD_COMBAT_R114__?.palette;let pl=null;try{pl=P?P(JSON.parse(e.r170Tower.snap)):null;}catch(_){}
+ return e.r170Tower.pal=pl?{main:{a:pl.p,b:pl.gp},sub:{a:pl.s,b:pl.gs}}:{main:{a:[90,12,20],b:[255,120,110]},sub:{a:[40,6,10],b:[200,60,60]}};}
 function cast(e){const t=e.r170Tower;t.casts++;stats.casts++;const px=player.x,py=player.y,warn=1.3,dmg=e.damage;
  hazards.push({id:++uid,type:'field',owner:e.id,x:px,y:py,radius:1.7,age:0,warning:warn,life:warn+.9,asset:typeof VFX!=='undefined'?VFX.mark:null,damage:dmg,lastHit:-99,samongPattern:'r170-hex',r170:{tower:e.id,pal:palOf(e),seed:Math.random()*6,burst:false}});
  if(t.casts%2===0&&t.summoned<12){const live=(room.enemies||[]).filter(x=>x.hp>0).length;if(live<70)for(let k=0;k<2;k++){let m;try{m=JSON.parse(t.snap);}catch(_){break;}const a=Math.random()*6.28;
@@ -128,14 +131,12 @@ try{
  if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h?.samongPattern==='r170-hex'&&h.r170)return;return base.apply(this,[h,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r170-fx'){try{seals();}catch(err){fail(err);}try{const lc=room?.samongR103?.r173Light;if(lc){const f=()=>drawLight(lc);if(typeof ctx.scope==='function')ctx.scope({id:'r173:light',kind:'effect',x:lc.x,y:lc.y},f);else f();}}catch(err){fail(err);}try{for(const h of hazards)if(h?.r170&&h.age<h.life){const f=()=>drawHex(h);if(typeof ctx.scope==='function')ctx.scope({id:'r170:hex:'+h.id,kind:'effect',x:h.x,y:h.y},f);else f();stats.hexDraws=(stats.hexDraws||0)+1;}}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
- // 탑: 본편은 맵에 들어설 때 한 번(전투 도중에 적 수가 바뀌지 않게), 사몽은 적이 나온 뒤 틱에서.
- if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(samongRoom()&&(T()>=at||T()<at-5)){at=T()+.7;place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170)||room?.samongR103?.r173Light||zoneMode()==='D')arm();else disarm();}}catch(e){fail(e);}return r;};}
- // 저장에는 탑이 없다 — 불러온 뒤 같은 자리·같은 id 로 다시 세운다(자리·id 는 맵과 순번으로 정해진다).
- if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(...a){const r=await base.apply(this,a);try{if(r!==false&&live()&&!samongRoom()&&prefs.towers){placedKey='';place();}}catch(e){fail(e);}return r;};}
- if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
-   if(r!==false&&!restore)try{spreadStory();if(!samongRoom()&&prefs.towers)place();}catch(e){fail(e);}return r;};}
+// 탑: 사몽은 적이 나온 뒤, 본편은 들어선 지 6초 뒤 영웅이 탑 자리 10칸 안에 왔을 때 처음 선다(저장에는 들어가지 않아 다시 오면 새로 선다).
+ if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;if(samongRoom())place();else if(T()>=storyAt&&nearSpot())place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170)||room?.samongR103?.r173Light||zoneMode()==='D')arm();else disarm();}}catch(e){fail(e);}return r;};}
+ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';storyAt=T()+6;const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
+   if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();

@@ -27,7 +27,7 @@ function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.m
   for(let i=0;i<px.length;i+=4){if(!px[i+3])continue;const l=(px[i]*.3+px[i+1]*.59+px[i+2]*.11)/255;let r,gg,b;
    if(l<.5){const k=l/.5;r=D[0]+(A[0]-D[0])*k;gg=D[1]+(A[1]-D[1])*k;b=D[2]+(A[2]-D[2])*k;}else if(l<.85){const k=(l-.5)/.35;r=A[0]+(B[0]-A[0])*k;gg=A[1]+(B[1]-A[1])*k;b=A[2]+(B[2]-A[2])*k;}else{const k=(l-.85)/.15;r=B[0]+(255-B[0])*k*.6;gg=B[1]+(255-B[1])*k*.6;b=B[2]+(255-B[2])*k*.6;}
    px[i]=r;px[i+1]=gg;px[i+2]=b;}
-  g.putImageData(d,0,0);c.__storyworldStaticTint=true;}catch(e){fail(e);return im;}
+  g.putImageData(d,0,0);c.__storyworldStaticTint=true;}catch(e){fail(e);c=im;}// 못 물들이면(오염된 캔버스 등) 원본을 캐시해 매 프레임 다시 시도하지 않는다
  tinted.set(key,c);if(tinted.size>40)tinted.delete(tinted.keys().next().value);stats.tinted=(stats.tinted||0)+1;return c;}
 // play(이름, 바닥 x, y, {h: 화면에서의 키(px, 기본 영웅 키 배수 k), k, delay(초), rate(재생 속도), alpha, flip, loop, key(같은 key 는 하나만), z(띄움 px)})
 function play(name,x,y,o={}){if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);

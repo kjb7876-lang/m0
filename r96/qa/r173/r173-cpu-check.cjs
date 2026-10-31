@@ -15,12 +15,15 @@ ok('storyworld.r173.modes {on:false} restores R162 zones (no F/G/H)',!Object.val
 // done() rules
 const F=all.find(z=>z.mode==='F'),H0=all.find(z=>z.mode==='H'),H={...H0,goal:{kills:66},clues:[]},G=all.find(z=>z.mode==='G');
 const room=x=>({samongR103:x,enemies:[]});
-ok('F is done only after 6 fragments are broken (and 66 kills, via kills check)',Z.done(room({r173Towers:6,r173Broken:5}),{...F,goal:{}})===false&&Z.done(room({r173Towers:6,r173Broken:6}),{...F,goal:{}})===true);
+ok('F is done only after the fragments that stood are all broken (and 66 kills, via kills check)',Z.done(room({r173Towers:6,r173Need:6,r173Broken:5}),{...F,goal:{}})===false&&Z.done(room({r173Towers:6,r173Need:6,r173Broken:6}),{...F,goal:{}})===true);
+ok('broken fragments stay broken when the same room is entered again; tower palette is worked out once',/x&&x\.r173PlacedKey===key/.test(C('combat-r170.js'))&&/if\(e\.r170Tower\.pal\)return e\.r170Tower\.pal/.test(C('combat-r170.js')));
+ok('F never locks the door when fewer fragments could stand (towers off, co-op, small zone)',Z.done(room({r173Towers:2,r173Need:2,r173Broken:2}),{...F,goal:{}})===true&&Z.done(room({r173Need:0}),{...F,goal:{}})===true&&Z.done(room({r173Towers:3,r173Need:3,r173Broken:1}),{...F,goal:{}})===false);
 ok('H is done after the 6th wave is cleared, not by kill count',Z.done(room({r173Wave:5}),H)===false&&Z.done(room({r173Wave:6}),H)===true&&Z.done({samongR103:{r173Wave:6},enemies:[{hp:5,samongSurvival:true}]},H)===false);
 ok('G is done when the core arrives',Z.done(room({}),G)===false&&Z.done(room({r173Arrived:true}),G)===true);
 ok('HUD names each mode',/세뇌당한 기억의 조각/.test(Z.hudText(room({r173Broken:2}),F).text)&&/물결/.test(Z.hudText(room({r173Wave:3}),H).text)&&/호위/.test(Z.hudText(room({r173Light:{hp:700,max:777,prog:.4}}),G).text));
 const r103=C('samong-r103.js');
-ok('H: 11 per wave, 6 waves, last wave has one 준보스',/x\.r173Wave>=6/.test(r103)&&/for\(let n=0;n<11;n\+\+\)/.test(r103)&&/x\.r173Wave===6&&n===0/.test(r103));
+ok('H: 11 per wave, 6 waves, last wave has one 준보스',/x\.r173Wave>=6/.test(r103)&&/x\.r173Pend=11/.test(r103)&&/x\.r173Wave===6&&n===0/.test(r103));
+ok('H: spawns that found no spot are made up on later ticks, and the door waits for them',/if\(x\.r173Pend>0\)\{waveSpawnR173/.test(r103)&&/\(x\?\.r173Pend\|\|0\)>0/.test(C('samong-zones-r115.js')));
 ok('G: core 777 moves only with no enemy within 3.5, leaks 6 / 66, resets on fall',/hp:777,max:777/.test(r103)&&/dc<3\.5\)near=true/.test(r103)&&/c\.hp-=e\.samongElite\?66:6/.test(r103)&&/c\.x=start\.x;c\.y=start\.y/.test(r103));
 ok('F: 6 fragment towers (once per zone), counted as broken when they fall',/m==='F'\?6/.test(C('combat-r170.js'))&&/if\(placedKey===key\)return;/.test(C('combat-r170.js'))&&/r173Broken=Math\.max/.test(r103));
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}

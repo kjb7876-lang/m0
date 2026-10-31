@@ -11643,56 +11643,6 @@
       "sha256": "47b1a828f575fe4d10f614d69e33be0dd7b58c5a75ecaf24692ae0307ab28162"
     },
     {
-      "path": "assets/r163/pixelfx/mob-clinical.webp",
-      "bytes": 15396,
-      "sha256": "c2bf8213147d559c88e065681146f7bbcbe352443799778d86a36a67f0e01c0a"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-coast.webp",
-      "bytes": 94652,
-      "sha256": "a131efa3c03e506c583c7ef42f35e7bd20bf959e0102f2178dc641adad59f1f2"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-domestic.webp",
-      "bytes": 25194,
-      "sha256": "f74fe48a9b28ad7c6c65b151bc6385acf23ea5f31256a9530cb56fca5343dc54"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-forge.webp",
-      "bytes": 104144,
-      "sha256": "9c68f157580585b0799adf400aadb60260cb55b2cb3c60bd49cd8bedefd5ddb9"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-garden.webp",
-      "bytes": 52766,
-      "sha256": "2ab6e8a88a935f62dad8fcf202d4bc66c2306587336df7a73d962b7ac6f15bde"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-memory.webp",
-      "bytes": 237598,
-      "sha256": "23932de3b8cb0a92c142ebc7b0a559cda0a33e9b9b1001cd0ba764f243021077"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-neural.webp",
-      "bytes": 36940,
-      "sha256": "af5882b7ed1677659f7a83c4f074f107bc59586d22b0fc784da1a1f2386cc30a"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-regional.webp",
-      "bytes": 21154,
-      "sha256": "065a4e5ccee887c67f89ab633293901d1374ce97c8a7373eea57cd673ef572e3"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-snow.webp",
-      "bytes": 130682,
-      "sha256": "c7e25ba60742289a43ca4df835ced7b2033d08b7f2712f38b638e34849f74564"
-    },
-    {
-      "path": "assets/r163/pixelfx/mob-stone.webp",
-      "bytes": 222634,
-      "sha256": "34f164ae6490652efd5c622d2825848ccf27a45cc081385ac5765f83d0da1ede"
-    },
-    {
       "path": "assets/r163/pixelfx/portal-teal.webp",
       "bytes": 175166,
       "sha256": "6ac0ea0f03cd188dff0c5a7416e518cd29f9d59e772fba0d6e80b9c2140f5d1c"
@@ -20209,8 +20159,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 20730,
-      "sha256": "3ab2b10a2e312b0ee3d43d263b6c4b3e2c7d28f97c9ed9e0ec28507fa277570c"
+      "bytes": 21196,
+      "sha256": "e97b2bcdf02c17b8156cac3381375794ac92cf821bd94c21dc8c235c040db58d"
     },
     {
       "path": "combat-r98.js",
@@ -20499,8 +20449,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 7034,
-      "sha256": "6a2e160544f635df76d73c03bab82d2e75fd5db1304f90ccdb4b065433d5fac3"
+      "bytes": 7137,
+      "sha256": "6b9c45cec85f24fb023802ca4c9c1edbaaac8ffdc3530d43829dce3b00ebd90b"
     },
     {
       "path": "play-r106.js",
@@ -20584,8 +20534,8 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 83513,
-      "sha256": "849497ca2ae0e98da34ed24b8fcc23cfdf03cd18708d1064d28e302602dcff01"
+      "bytes": 84520,
+      "sha256": "de1e3b9192afd7898a01750de5cbbb4c362a8620fdc5b322c0e954a2481b822d"
     },
     {
       "path": "samong-r161.js",
@@ -20609,8 +20559,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 48204,
-      "sha256": "32c8fb5c84acab359aba0865c4d0e563a8e0544912631393a01ffa3c1b2d446e"
+      "bytes": 48450,
+      "sha256": "5e9cefcdf92fd6ad7e6073f6a7bfb66bdf4bb03c5e8cfee55ff1491c7b2e3736"
     },
     {
       "path": "scene-props-r117.js",
@@ -20803,8 +20753,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4160,
-  "totalBytes": 794363488,
+  "fileCount": 4150,
+  "totalBytes": 793424150,
   "webHTMLSha256": "7310967c35ca3fb870439b7be0658c4241fab2d671ef4babd0e14971e7575774",
   "largest": [
     {
