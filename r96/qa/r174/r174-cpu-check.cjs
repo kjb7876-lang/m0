@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 ok('hero-threads-r174.js runtime copy matches',fs.readFileSync(path.join(R,'runtime-text','hero-threads-r174.js'),'utf8')===C('hero-threads-r174.js'));
-ok('loads after play-r169 (after combat-r160 tags basic shots)',/play-r169\.js"><\/script><script src="\.\/hero-threads-r174\.js"><\/script>/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
+ok('loads after play-r169 (after combat-r160 tags basic shots)',/play-r169\.js"><\/script>(<script src="\.\/combat-r170\.js"><\/script>)?<script src="\.\/hero-threads-r174\.js"><\/script>/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
 let t=0;const hits=[],fxs=[],baseCasts=[];
 const target={id:'e1',x:10,y:10,hp:500};const player={hero:'gunner',x:7,y:10,hp:100};
 const gold={learned:true,designs:[{id:'d1',strokes:[[{x:0,y:-1},{x:1,y:0},{x:0,y:1},{x:-1,y:0},{x:0,y:-1}]]}],equipped:['d1']};

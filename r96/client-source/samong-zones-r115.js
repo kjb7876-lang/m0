@@ -199,7 +199,7 @@
   let at=-1;out.forEach((z,i)=>{if(z.kind==='confront')at=i;});if(at<0)at=out.length;
   const ref=out.find(z=>z.kind==='combat')||out[0]||{};
   const extra=[];
-  if(!hasB)extra.push(expand({id:'sz162-'+key+'-B',title:'666의 광장',kind:'combat',mode:'B',style:ref.style,tpl:'arena',p:{r:14,name:'666의 광장',ante:'광장 어귀'},goal:{kills:666},props:[['brazier',4],['obelisk',2]],r162New:true}));
+  if(!hasB)extra.push(expand({id:'sz162-'+key+'-B',title:'광장 · 처치 666',kind:'combat',mode:'B',style:ref.style,tpl:'arena',p:{r:14,name:'광장 · 처치 666',ante:'광장 어귀'},goal:{kills:666},props:[['brazier',4],['obelisk',2]],r162New:true}));
   extra.push(expand({id:'sz162-'+key+'-D',title:'정화의 코어',kind:'combat',mode:'D',style:ref.style,tpl:'lane',p:{name:'정화의 코어로 가는 길'},goal:{kills:666},props:[['brazier',4]],r162New:true}));
   out.splice(at,0,...extra);return out;}
  if(R162)for(const k of Object.keys(CH)){try{CH[k]=reshapeR162(k,CH[k]);}catch(e){fail(e);}}

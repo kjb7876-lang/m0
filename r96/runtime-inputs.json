@@ -3361,6 +3361,7 @@
     "play-r169.js",
     "assets/r164/michaela/run-ne-v2.webp",
     "hero-threads-r174.js",
+    "combat-r170.js",
     "nav-r176.js"
   ],
   "mediaPaths": [
@@ -4436,5 +4437,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7e54429f89a7cc9e43abdb07357df5c37db7ec90713265835d6bd9ee400fcd28"
+  "runtimeManifestSHA256": "d2072d0b4cb011f31b34fb95eadbf421c52a2e616cb72d8138470d1f6bd5e210"
 }
