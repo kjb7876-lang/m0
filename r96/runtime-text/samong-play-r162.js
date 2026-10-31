@@ -110,7 +110,7 @@ try{
  if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){try{if(e&&here())lastKill={x:e.x,y:e.y};}catch(_){}return base.apply(this,[e,...a]);};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r162Frag){try{drawFrag(p);}catch(err){fail(err);}return;}return base.apply(this,[p,...a]);};}
  // R163: 분신·운석·촉수의 바닥 예고는 본편의 금빛 문양(밝은 섞기) 대신 어두운 핏빛 원 — 촉수·운석 그림이 예고 문양에 묻혀 보이지 않았다.
- if(typeof drawHazard==='function'){const base=drawHazard;const MINE=new Set(['clones','meteor','tentacles']);drawHazard=function(h,...a){if(!h||!MINE.has(h.samongPattern)||!prefs.patterns||typeof project!=='function')return base.apply(this,[h,...a]);
+ if(typeof drawHazard==='function'){const base=drawHazard;const MINE=new Set(['clones','meteor','tentacles']);drawHazard=function(h,...a){if(!h||!(MINE.has(h.samongPattern)||/^puppet-/.test(h.samongPattern||''))||!prefs.patterns||typeof project!=='function')return base.apply(this,[h,...a]);
    try{const q=project(h.x,h.y),w=h.radius*(typeof TILE==='number'?TILE:64)*(typeof zoom==='number'?zoom:1),warn=h.age<h.warning,u=warn?h.age/Math.max(.01,h.warning):1;
     ctx.save();try{ctx.translate(q.x,q.y-2);ctx.scale(1,.55);ctx.globalAlpha*=warn?.35+.25*u:.55*Math.min(1,(h.life-h.age)*4);
      ctx.fillStyle=warn?'rgba(40,4,10,.85)':'rgba(90,10,22,.9)';ctx.beginPath();ctx.arc(0,0,w*(warn?.55+.45*u:1),0,Math.PI*2);ctx.fill();
