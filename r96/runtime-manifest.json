@@ -20424,8 +20424,8 @@
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 11141,
-      "sha256": "353305f8d4c82539273bb763db918a86bc6ac0501bb1491f9feca251b871a7b6"
+      "bytes": 12109,
+      "sha256": "92050ba8ea3ff65541ce160e8ae647685d56197dc965fe1ecaad4d441e118a39"
     },
     {
       "path": "growth-r103.js",
@@ -20489,8 +20489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564299,
-      "sha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590"
+      "bytes": 6564337,
+      "sha256": "df4d6a1b72ee47d93a4eacde6cab010f0308c3ee9a0ae6e4c733fcfbb3023929"
     },
     {
       "path": "intro-r140.js",
@@ -20556,6 +20556,11 @@
       "path": "perf-r154.js",
       "bytes": 2141,
       "sha256": "b0154fab4571e011332c50f2e8b49f5e4123fcd0c9291e7660b106d55c32bf6d"
+    },
+    {
+      "path": "perf-r180.js",
+      "bytes": 5075,
+      "sha256": "b91a3631ec7854a911843b612f9415855e0c112fa0f9236203d9484793e0c3a3"
     },
     {
       "path": "perf-r97.js",
@@ -20644,8 +20649,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 78459,
-      "sha256": "3a9019d9c7c03f05b15ca53368205fb5041bdaa75232827eec29f4a2325e7865"
+      "bytes": 78626,
+      "sha256": "6014cfb75826b44c3c7d7fd19896cc2bb8985084f8ce6d30abb4e2592bd37fb4"
     },
     {
       "path": "samong-play-r162.js",
@@ -20883,9 +20888,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4176,
-  "totalBytes": 797028870,
-  "webHTMLSha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590",
+  "fileCount": 4177,
+  "totalBytes": 797035118,
+  "webHTMLSha256": "df4d6a1b72ee47d93a4eacde6cab010f0308c3ee9a0ae6e4c733fcfbb3023929",
   "largest": [
     {
       "path": "index.html",
