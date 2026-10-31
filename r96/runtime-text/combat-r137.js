@@ -112,14 +112,15 @@
 
  // ---- ⑤ 체력 구슬: 공명 방어 회복·보호막 실시간 ---------------------------------------------------
  let orbBox=null,guardHeal=0,lastHp=null,wasGuard=false;
- function orb(){if(orbBox&&document.body.contains(orbBox))return orbBox;const host=document.querySelector('.r93-orb.r93-hp')||document.getElementById('heroCard');if(!host)return null;
+ function orb(){const host=document.querySelector('.r93-orb.r93-hp');/* R160: 구슬이 아직 없을 때 영웅 카드 전체(284×111)에 붙어 카드 크기로 늘어난 하늘색 원이 구슬 옆에 그려졌다(사용자 '구슬 칸 쪽 하늘색 원') — 체력 구슬에만 붙이고, 구슬이 새로 생기면 옮긴다 */
+  if(orbBox&&document.body.contains(orbBox)&&orbBox.parentElement===host)return orbBox;if(orbBox){orbBox.remove();orbBox=null;}if(!host)return null;
   orbBox=document.createElement('div');orbBox.id='r137GuardOrb';orbBox.style.cssText='position:absolute;inset:0;pointer-events:none;border-radius:50%;z-index:3';
   orbBox.innerHTML='<div class="g" style="position:absolute;inset:6%;border-radius:50%;box-shadow:0 0 0 0 rgba(120,220,255,0);transition:box-shadow .12s"></div><svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%"><circle cx="50" cy="50" r="46" fill="none" stroke="rgba(130,210,255,.9)" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 999" transform="rotate(-90 50 50)"/></svg><span style="position:absolute;left:0;right:0;top:-1.15em;text-align:center;font:700 12px/1 sans-serif;color:#9fe6ff;text-shadow:0 1px 2px #000"></span>';
   if(getComputedStyle(host).position==='static')host.style.position='relative';host.appendChild(orbBox);return orbBox;}
  function orbTick(){try{if(!prefs.guardOrb||typeof player!=='object'||!player){if(orbBox)orbBox.style.display='none';return;}const o=orb();if(!o)return;o.style.display='';
    const g=!!player.guard,hp=player.hp;if(g&&!wasGuard){guardHeal=0;lastHp=hp;}if(g&&lastHp!=null&&hp>lastHp)guardHeal+=hp-lastHp;lastHp=hp;wasGuard=g;
    o.querySelector('.g').style.boxShadow=g?'inset 0 0 14px 4px rgba(120,220,255,.75)':'0 0 0 0 rgba(0,0,0,0)';
-   const sh=Math.max(0,+player.shield||0),c=o.querySelector('circle');c.setAttribute('stroke-dasharray',(Math.min(1,sh/50)*289).toFixed(1)+' 999');
+   const sh=Math.max(0,+player.shield||0),c=o.querySelector('circle');c.setAttribute('stroke-dasharray',(Math.min(1,sh/50)*289).toFixed(1)+' 999');c.style.display=sh>0?'':'none';/* R160: 보호막 0 이면 숨긴다 — 길이 0 선도 둥근 끝(stroke-linecap:round) 때문에 구슬 위에 하늘색 점이 남아 보였다(사용자 '구슬 칸 쪽 하늘색 원') */
    o.querySelector('span').textContent=g?('공명 +'+Math.round(guardHeal)+(sh>0?' · 보호막 '+Math.round(sh):'')):(sh>0?'보호막 '+Math.round(sh):'');
    if(g&&typeof updateHUD==='function')updateHUD();}catch(e){fail(e);}}
  (function loop(){orbTick();requestAnimationFrame(loop);})();

@@ -28,7 +28,10 @@ let enabled=true;try{if(localStorage.getItem(KEY)==='0')enabled=false;}catch(_){
 const on=()=>enabled&&!!SP()?.on?.();
 function setEnabled(v){enabled=!!v;try{localStorage.setItem(KEY,enabled?'1':'0');}catch(_){}return enabled;}
 const ARCH=Object.freeze({hwando:'iai',seoha:'orb',neon:'chain',michaela:'fist',lauren:'meteor',hunter:'multishot',slayer:'fissure',gunner:'nova'});
-const NAMES=Object.freeze({hammer:'소용돌이 칼날',iai:'발도 연참',orb:'프로즌 오브',chain:'체인 라이트닝',fist:'천국의 주먹',meteor:'메테오',multishot:'멀티샷',fissure:'피셔',nova:'노바'});
+// R160 (사용자 2026-10-31 "미카엘라 모든 스킬이 비슷한이펙트인문제"): 미카엘라는 Q·Z·X·C 가 모두 '천국의 주먹' 빛 기둥 하나로 그려졌다.
+//  Q 는 그대로 두고, Z(W 원본: 방패) → 성역 방벽, X(E 원본: 날개 돌진) → 날개 돌진, C(R 원본: 날개 십자) → 세라핌 강림으로 나눈다(색은 영웅 팔레트 그대로).
+const SLOT_KIND=Object.freeze({michaela:Object.freeze({w:'aegis',e:'wingdash',r:'seraph'})});
+const NAMES=Object.freeze({hammer:'소용돌이 칼날',iai:'발도 연참',orb:'프로즌 오브',chain:'체인 라이트닝',fist:'천국의 주먹',aegis:'성역 방벽',wingdash:'날개 돌진',seraph:'세라핌 강림',meteor:'메테오',multishot:'멀티샷',fissure:'피셔',nova:'노바'});
 const H=()=>typeof actorHeight==='function'?actorHeight():60;
 function enemies(){try{return typeof liveEnemies==='function'?liveEnemies():[];}catch(_){return[];}}
 function nearestTo(x,y,max,skip){let best=null,bd=max;for(const e of enemies()){if(skip&&skip.has(e))continue;const d=Math.hypot(e.x-x,e.y-y);if(d<bd){bd=d;best=e;}}return best;}
@@ -39,7 +42,7 @@ const SENTINEL={type:'r106-d2s',x:0,y:0,age:0,life:Infinity,r106Sentinel:true};
 function add(e){if(list.length>=MAX)list.shift();e.id='r106d2s:'+(++serial);e.t=0;list.push(e);stats.spawned++;return e;}
 
 // ---- launching -----------------------------------------------------------------------------------
-function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?.PALETTE?.[hero];const kind=ARCH[hero];if(!F||!kind)return;
+function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?.PALETTE?.[hero];const kind=SLOT_KIND[hero]?.[slot]||ARCH[hero];if(!F||!kind)return;
  const t=clamp(R102()?.tier?.(player)??0,0,7),lo=lowFx(),k=lo?.5:1,p={x:player.x,y:player.y},a=Number.isFinite(angle)?angle:0,seed=Math.random()*100;
  let tx=target?.x,ty=target?.y;if(!Number.isFinite(tx)||!Number.isFinite(ty)){tx=p.x+Math.cos(a)*4;ty=p.y+Math.sin(a)*4;}
  const base={kind,hero,F,tier:t,slot,x:p.x,y:p.y,tx,ty,a:Math.atan2(ty-p.y,tx-p.x),seed,k};
@@ -60,6 +63,9 @@ function launch(hero,slot,angle,target){if(!on()||!live())return;const F=R102()?
  else if(kind==='chain'){const hops=[],seen=new Set();let from={x:p.x,y:p.y};for(let i=0;i<3+t;i++){const e=nearestTo(from.x,from.y,i?5.5:9,seen);if(!e)break;seen.add(e);hops.push({x:e.x,y:e.y,e});from=e;}
   if(!hops.length)hops.push({x:tx,y:ty});add({...base,life:.32+.07*hops.length,hops,bolts:Math.round((2+t)*k)});}
  else if(kind==='fist')add({...base,life:1.15,rays:Math.round((8+2*t)*k)});
+ else if(kind==='aegis')add({...base,life:1.25,n:Math.round((5+t)*Math.max(.6,k))});
+ else if(kind==='wingdash'){const e=nearestTo(p.x,p.y,8);add({...base,tx:e?e.x:tx,ty:e?e.y:ty,life:.95,n:Math.round((6+t)*k)});}
+ else if(kind==='seraph'){const hit=enemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<6.5).slice(0,lo?4:3+t).map(e=>({x:e.x,y:e.y}));add({...base,life:1.5,hit});}
  else if(kind==='meteor'){const e=nearestTo(p.x,p.y,10);add({...base,tx:e?e.x:tx,ty:e?e.y:ty,life:2.1+.15*t,fall:.55});}
  else if(kind==='multishot')add({...base,life:1.0,n:[3,4,5,6,7,9,11,13][t],range:7.5+.3*t});
  else if(kind==='fissure')add({...base,life:1.5,n:Math.round((5+t)*Math.max(.6,k)),step:.075});
@@ -113,6 +119,23 @@ const DRAW={
   if(hit){const v=clamp((e.t-.12)/.6,0,1);S('cross',F,q.x,q.y-h*1.3,h*1.1,h*1.65,{alpha:a*.9});S('flare',pb(F),q.x,q.y-h*.4,h*3*(.6+v),h*3*(.6+v),{angle:v*2,alpha:a});S('ring',F,q.x,q.y,h*(1+5*v),h*(.5+2.5*v),{alpha:1-v});
    for(let i=0;i<e.rays;i++){const ang=i*TAU/e.rays+e.seed,d=.3+5.5*smooth(v),qq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d,h*.4),q0=P(e.tx+Math.cos(ang)*(d-.7),e.ty+Math.sin(ang)*(d-.7),h*.4);A('spark',F,q0.x,q0.y,qq.x,qq.y,h*.22,{alpha:(1-v)});S('cross',pb(F),qq.x,qq.y,h*.22,h*.33,{alpha:(1-v)*.9});}}
   const c=P(e.x,e.y,h*.66),w=h*2.1*(.6+.4*smooth(e.t/.25));if(u<.8){S('wing',F,c.x+h*.08,c.y,w,w,{alpha:.8*(1-u/.8),blend:'lighter'});S('wing',F,c.x-h*.08,c.y,w,w,{alpha:.8*(1-u/.8),flip:true,blend:'lighter'});}},
+ // R160 성역 방벽(Z): 시전자 둘레에 차례로 퍼지는 빛 고리 세 겹 + 둘레를 도는 작은 십자 + 위로 솟는 후광.
+ aegis(e,u,h){const F=e.F,c=P(e.x,e.y),a=1-smooth((u-.6)/.4);
+  for(let i=0;i<3;i++){const v=clamp((e.t-i*.14)/.55,0,1);if(v<=0||v>=1)continue;S('ring',i===1?pb(F):F,c.x,c.y,h*(1.2+2.6*v),h*(.6+1.3*v),{alpha:(1-v)*.95});}
+  S('halo',F,c.x,c.y-h*(.9+.5*smooth(e.t/.4)),h*1.5,h*.55,{alpha:.85*a});S('glow',F,c.x,c.y-h*.4,h*2.4,h*2.2,{alpha:.45*a});
+  for(let i=0;i<e.n;i++){const ang=i*TAU/e.n+e.t*2.6,R=1.05+.15*Math.sin(e.t*6+i),q=P(e.x+Math.cos(ang)*R,e.y+Math.sin(ang)*R,h*(.35+.15*Math.sin(e.t*4+i)));S('cross',i%2?pb(F):F,q.x,q.y,h*.3,h*.45,{alpha:.95*a});}},
+ // R160 날개 돌진(X): 시전자에서 표적까지 빛 꼬리와 날개 잔상 세 장이 지나가고, 표적에서 깃털이 흩어진다.
+ wingdash(e,u,h){const F=e.F,v=smooth(clamp(e.t/.3,0,1)),x=lerp(e.x,e.tx,v),y=lerp(e.y,e.ty,v),c0=P(e.x,e.y,h*.55),c=P(x,y,h*.55),a=1-smooth((u-.55)/.45);
+  A('slashline',F,c0.x,c0.y,c.x,c.y,h*.55,{alpha:.75*a});A('spark',pb(F),c0.x,c0.y,c.x,c.y,h*.22,{alpha:a});
+  for(let i=0;i<3;i++){const w=clamp(v-i*.18,0,1),q=P(lerp(e.x,e.tx,w),lerp(e.y,e.ty,w),h*.6),al=(1-i*.3)*a*(e.t<.45?1:.6);S('wingside',F,q.x,q.y,h*1.7,h*1.7,{alpha:.75*al,blend:'lighter'});}
+  const b=e.t-.28;if(b>0){const q=P(e.tx,e.ty),k=clamp(b/.5,0,1);S('flare',pb(F),q.x,q.y-h*.45,h*2.4*(.5+k),h*2.4*(.5+k),{angle:b*3,alpha:1-k});S('ring',F,q.x,q.y,h*(.8+2.6*k),h*(.4+1.3*k),{alpha:1-k});
+   for(let i=0;i<e.n;i++){const ang=rnd(e.seed,i)*TAU,d=.2+1.8*smooth(k)*(.5+rnd(e.seed,i+3)),fq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d,h*(.2+1.1*k));S('feather',i%2?pb(F):F,fq.x,fq.y,h*.32,h*.32,{angle:ang+k*4,alpha:(1-k)*.95});}}},
+ // R160 세라핌 강림(C): 시전자 뒤로 커다란 날개가 펼쳐지고, 머리 위 후광에서 가까운 적마다 빛줄기가 내리꽂혀 십자가 새겨진다.
+ seraph(e,u,h){const F=e.F,c=P(e.x,e.y,h*.75),g=P(e.x,e.y),open=smooth(clamp(e.t/.35,0,1)),a=1-smooth((u-.65)/.35),w=h*(1.6+2.2*open),top={x:g.x,y:g.y-h*2.2};
+  S('wingback',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('wingback-f',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('pillar',pb(F),g.x,g.y,h*1.1,h*3.6,{alpha:.55*a});S('halo',F,top.x,top.y+h*.3,h*1.4,h*.5,{alpha:a});
+  (e.hit.length?e.hit:[{x:e.tx,y:e.ty}]).forEach((t,i)=>{const v=e.t-.3-i*.07;if(v<0||v>.7)return;const q=P(t.x,t.y),k=v/.7,fr=Math.floor(time*24)+i;
+   if(v<.3){A('bolt',F,top.x,top.y,q.x,q.y-h*.3,h*.7,{frame:fr,alpha:1-v/.3});A('line',pb(F),top.x,top.y,q.x,q.y-h*.3,h*.12,{alpha:1-v/.3});}
+   S('cross',F,q.x,q.y-h*.9,h*.8,h*1.2,{alpha:(1-k)*.95});S('ring',pb(F),q.x,q.y,h*(.6+2*k),h*(.3+k),{alpha:1-k});});},
  // 메테오: 표적 마법진 → 하늘에서 떨어지는 불덩이 → 폭발 → 타오르는 바닥
  meteor(e,u,h){const F=e.F,q=P(e.tx,e.ty),fall=e.fall,v=e.t/fall,fr=Math.floor(time*12);
   if(e.t<fall+.1)S('runecross',F,q.x,q.y,h*2.6,h*2.6,{squash:.5,angle:0,alpha:.85*smooth(e.t/.15)});
