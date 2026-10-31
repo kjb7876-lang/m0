@@ -11783,6 +11783,11 @@
       "sha256": "4d6848eaa7a9ee0c973e5c2aa075a48aa87c099d9d892c2aa4f1bdaf77cbfcbb"
     },
     {
+      "path": "assets/r180/audio/The_Sovereigns_Last_March-b61b82cc.mp3",
+      "bytes": 3432960,
+      "sha256": "c874979f5d74731ca6e20720711f7dbc8743d48d482c8d0c419ada285934da21"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19743,6 +19748,11 @@
       "sha256": "6ef5443b1066371ab9cd1b265850290b5afa3d5e56e68cbf1d40564f83fe32cb"
     },
     {
+      "path": "bgm-r180.js",
+      "bytes": 3372,
+      "sha256": "ed68728dc8c3d313a0cdc7ecdfff21e0df6ed4c5e69f8356c99c5fcf934bbed4"
+    },
+    {
       "path": "bosses-r104-data.js",
       "bytes": 23577,
       "sha256": "0532ab8aa0e10c46f2ec832ad879688a37f39bef58972030b62726b57d66fe56"
@@ -20489,8 +20499,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564299,
-      "sha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590"
+      "bytes": 6564480,
+      "sha256": "78fa4f618a450575bea3e73704658d6c707fc08bd33ede1c7ad1fcaf0fa857bf"
     },
     {
       "path": "intro-r140.js",
@@ -20883,9 +20893,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4176,
-  "totalBytes": 796953393,
-  "webHTMLSha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590",
+  "fileCount": 4178,
+  "totalBytes": 800389906,
+  "webHTMLSha256": "78fa4f618a450575bea3e73704658d6c707fc08bd33ede1c7ad1fcaf0fa857bf",
   "largest": [
     {
       "path": "index.html",

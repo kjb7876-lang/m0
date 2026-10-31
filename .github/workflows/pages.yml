@@ -173,6 +173,8 @@ jobs:
         run: node r96/qa/r178/r178-cpu-check.cjs
       - name: R179 early boss health scale (root gatekeeper) CPU check
         run: node r96/qa/r179/r179-cpu-check.cjs
+      - name: R180 final-chapter boss march BGM CPU check
+        run: node r96/qa/r180/bgm-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
