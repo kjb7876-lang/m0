@@ -303,6 +303,326 @@
    "frames": 36,
    "fps": 15.0,
    "loop": true
+  },
+  "mob-domestic": {
+   "fx": "melee/double-slash",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "집 — 할퀸 듯한 두 번 베기",
+   "file": "mob-domestic.webp",
+   "sha256": "f74fe48a9b28ad7c6c65b151bc6385acf23ea5f31256a9530cb56fca5343dc54",
+   "bytes": 25194,
+   "frame": [
+    164,
+    108
+   ],
+   "pivot": [
+    44,
+    92
+   ],
+   "columns": 3,
+   "frames": 10,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-forge": {
+   "fx": "melee/hammer-smash",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "대장간 — 망치 내려치기 불티",
+   "file": "mob-forge.webp",
+   "sha256": "9c68f157580585b0799adf400aadb60260cb55b2cb3c60bd49cd8bedefd5ddb9",
+   "bytes": 104144,
+   "frame": [
+    208,
+    112
+   ],
+   "pivot": [
+    80,
+    92
+   ],
+   "columns": 4,
+   "frames": 28,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-memory": {
+   "fx": "shadow/hex-sigil",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "기억 — 육망성 문양",
+   "file": "mob-memory.webp",
+   "sha256": "23932de3b8cb0a92c142ebc7b0a559cda0a33e9b9b1001cd0ba764f243021077",
+   "bytes": 237598,
+   "frame": [
+    168,
+    128
+   ],
+   "pivot": [
+    84,
+    112
+   ],
+   "columns": 7,
+   "frames": 57,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-neural": {
+   "fx": "lightning/zap-hit",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "신경 — 신경 가지처럼 갈라지는 전류",
+   "file": "mob-neural.webp",
+   "sha256": "af5882b7ed1677659f7a83c4f074f107bc59586d22b0fc784da1a1f2386cc30a",
+   "bytes": 36940,
+   "frame": [
+    144,
+    112
+   ],
+   "pivot": [
+    76,
+    56
+   ],
+   "columns": 4,
+   "frames": 14,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-clinical": {
+   "fx": "melee/thrust",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "병원 — 메스로 찌르기",
+   "file": "mob-clinical.webp",
+   "sha256": "c2bf8213147d559c88e065681146f7bbcbe352443799778d86a36a67f0e01c0a",
+   "bytes": 15396,
+   "frame": [
+    196,
+    76
+   ],
+   "pivot": [
+    34,
+    62
+   ],
+   "columns": 2,
+   "frames": 8,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-garden": {
+   "fx": "nature/vine-whip",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "정원 — 덩굴 채찍",
+   "file": "mob-garden.webp",
+   "sha256": "2ab6e8a88a935f62dad8fcf202d4bc66c2306587336df7a73d962b7ac6f15bde",
+   "bytes": 52766,
+   "frame": [
+    216,
+    128
+   ],
+   "pivot": [
+    60,
+    114
+   ],
+   "columns": 4,
+   "frames": 21,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-stone": {
+   "fx": "nature/earth-spike",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "석조·동굴 — 솟는 돌가시",
+   "file": "mob-stone.webp",
+   "sha256": "34f164ae6490652efd5c622d2825848ccf27a45cc081385ac5765f83d0da1ede",
+   "bytes": 222634,
+   "frame": [
+    272,
+    150
+   ],
+   "pivot": [
+    136,
+    132
+   ],
+   "columns": 6,
+   "frames": 49,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-snow": {
+   "fx": "ice/ice-shatter",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "눈 — 얼음 깨짐",
+   "file": "mob-snow.webp",
+   "sha256": "c7e25ba60742289a43ca4df835ced7b2033d08b7f2712f38b638e34849f74564",
+   "bytes": 130682,
+   "frame": [
+    224,
+    112
+   ],
+   "pivot": [
+    68,
+    90
+   ],
+   "columns": 5,
+   "frames": 40,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-coast": {
+   "fx": "water/splash",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "해안·늪 — 물 튐",
+   "file": "mob-coast.webp",
+   "sha256": "a131efa3c03e506c583c7ef42f35e7bd20bf959e0102f2178dc641adad59f1f2",
+   "bytes": 94652,
+   "frame": [
+    176,
+    100
+   ],
+   "pivot": [
+    88,
+    78
+   ],
+   "columns": 5,
+   "frames": 36,
+   "fps": 15.0,
+   "loop": false
+  },
+  "mob-regional": {
+   "fx": "melee/sword-slash",
+   "options": {
+    "palette": [
+     "#050505",
+     "#1c1c1c",
+     "#383838",
+     "#5a5a5a",
+     "#808080",
+     "#a8a8a8",
+     "#d2d2d2",
+     "#ffffff"
+    ],
+    "seed": 2
+   },
+   "use": "그 밖 — 베기",
+   "file": "mob-regional.webp",
+   "sha256": "065a4e5ccee887c67f89ab633293901d1374ce97c8a7373eea57cd673ef572e3",
+   "bytes": 21154,
+   "frame": [
+    136,
+    104
+   ],
+   "pivot": [
+    44,
+    92
+   ],
+   "columns": 3,
+   "frames": 9,
+   "fps": 15.0,
+   "loop": false
   }
  }
 }
