@@ -26,11 +26,13 @@ const mode=()=>window.__STORYWORLD_COOP_SIM_R62__?.mode?.()||'off';
 const done=new WeakMap();
 const blocked=(L,x,y,s)=>{const a=window.StoryPhase1;return typeof a?.explorationBlocked==='function'?a.explorationBlocked(L,x,y,s):true;};
 // 창: 바로 뒤(화면 안쪽, -x 또는 -y)에 벽이 있고 앞은 트인 칸만. 벽 쪽으로 붙여 세워 문처럼 홀로 서 보이지 않게 한다.
-function wallSpots(r,n){const b=bounds[n.id],L=r.exploration;if(!b)return[];const[a,b0,c,d]=b,out=[];
+// R171: 서사 지도는 방마다 box 를 싣는다.
+const boxOf=(L,n)=>L?.storyMapR171?n.box:bounds[n.id];
+function wallSpots(r,n){const b=boxOf(r.exploration,n),L=r.exploration;if(!b)return[];const[a,b0,c,d]=b,out=[];
  for(let y=b0+.5;y<d;y+=1)for(let x=a+.5;x<c;x+=1){if(blocked(L,x,y,.55))continue;
   for(const[dx,dy]of[[-1,0],[0,-1]])if(blocked(L,x+dx*1.45,y+dy*1.45,.05)&&!blocked(L,x-dx*1.2,y-dy*1.2,.3)&&!blocked(L,x+dy*1.2,y+dx*1.2,.3)&&!blocked(L,x-dy*1.2,y-dx*1.2,.3))out.push([x,y,dx,dy]);}
  return out;}
-function spots(r,n,kind){const b=bounds[n.id];if(!b)return[];const[a,b0,c,d]=b;
+function spots(r,n,kind){const b=boxOf(r.exploration,n);if(!b)return[];const[a,b0,c,d]=b;
  if(ART[kind]?.wall)return wallSpots(r,n);
  return[[(a+c)/2,(b0+d)/2],[(a*2+c)/3,(b0+d)/2],[(a+c)/2,(b0*2+d)/3],[(a+c*2)/3,(b0+d*2)/3],[a+3,b0+3]];}
 function place(r){try{
@@ -38,7 +40,7 @@ function place(r){try{
  if(done.get(r)===r.exploration)return r;done.set(r,r.exploration);
  r.props=r.props.filter(p=>!p.r138Drive);
  const used=r.props.filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.visible!==false).map(p=>({x:p.x,y:p.y}));
- const nodes=r.exploration.nodes.filter(n=>bounds[n.id]);let k=0;
+ const nodes=r.exploration.nodes.filter(n=>boxOf(r.exploration,n));let k=0;
  for(const[kind,count]of plan)for(let i=0;i<count;i++){const a=ART[kind];let spot=null;
   for(let j=0;j<nodes.length&&!spot;j++){const n=nodes[(k*7+j+3)%nodes.length];for(const[x,y,dx=0,dy=0]of spots(r,n,kind)){const p={x,y};if(E.safe(r,p,used,.6)){spot={x:x+dx*.5,y:y+dy*.5};break;}}}
   k++;if(!spot){stats.failures++;continue;}used.push(spot);

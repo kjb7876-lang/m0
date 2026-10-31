@@ -68,7 +68,7 @@
  function plant(r,look){if(!prefs.trees||!look?.trees||r.r99Trees)return;const L=r.exploration,b=L.bounds;if(!Array.isArray(b)||typeof A.explorationBlocked!=='function')return;
   const blocked=(x,y,s=.3)=>A.explorationBlocked(L,x,y,s),pts=[],seed=hash(r.id),step=2.5,forest=look.trees==='living',cap=forest?30:14,gap=forest?4.6:6.5;
   for(let y=b[1]+1;y<b[3]-1;y+=step)for(let x=b[0]+1;x<b[2]-1;x+=step){const jx=x+((hash(seed+':'+x+':'+y)%100)/100-.5)*1.2,jy=y+((hash(y+':'+x+':'+seed)%100)/100-.5)*1.2;
-   if(!blocked(jx,jy,.9))continue;let near=0;for(const[dx,dy]of[[2.6,0],[-2.6,0],[0,2.6],[0,-2.6]])if(!blocked(jx+dx,jy+dy,.2))near++;if(near>2||(!near&&!forest))continue;pts.push({x:jx,y:jy,k:hash(seed+':'+jx.toFixed(2)+jy.toFixed(2))});}
+   if(!blocked(jx,jy,.9))continue;if(L.storyMapR171&&blocked(jx,jy,.3))continue;/* R179: 서사 지도(R171)는 방 사이가 비어 있어 벽 밖 빈 곳에 나무가 섰다 — 그 지도에서는 벽 가까운 바닥(.3~.9칸)에만 심는다(소품은 바닥 위라는 기존 약속) */let near=0;for(const[dx,dy]of[[2.6,0],[-2.6,0],[0,2.6],[0,-2.6]])if(!blocked(jx+dx,jy+dy,.2))near++;if(near>2||(!near&&!forest))continue;pts.push({x:jx,y:jy,k:hash(seed+':'+jx.toFixed(2)+jy.toFixed(2))});}
   pts.sort((a,c)=>a.k-c.k);const keep=[],avoid=[L.entry,r.objective,...(L.worldR74?.doors||[])].filter(p=>p&&Number.isFinite(p.x));
   for(const p of pts){if(keep.length>=cap)break;if(avoid.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<5))continue;if(keep.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<gap))continue;keep.push(p);}
   const frames=treeFrames(look.trees);if(typeof addImage==='function')for(const f of frames)try{addImage(f);}catch(_){}
