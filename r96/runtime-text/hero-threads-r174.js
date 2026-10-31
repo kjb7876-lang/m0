@@ -50,7 +50,8 @@ function spot(o,u){const n=o.pts.length-1,f=Math.max(0,Math.min(n,u*n)),k=Math.m
 function orbitTick(){const o=orbit;if(!o)return;const p=o.p;if(p!==player||p.hp<=0||(typeof modal!=='undefined'&&modal)){orbit=null;return;}
  if(o.target&&o.target.hp>0){o.center.x=o.target.x;o.center.y=o.target.y;}
  const u=Math.min(1,(T()-o.start)/o.duration),at=spot(o,u);
- try{if(typeof blocked!=='function'||!blocked(at.x,at.y,.3)){p.x=at.x;p.y=at.y;}}catch(_){}
+ // 지난 자리에서 새 자리까지 0.25칸마다 벽을 본다 — 얇은 벽을 건너뛰어 미로 반대편에 갇히지 않게. 한 번 막히면 그 자리에서 남은 발사만 한다.
+ if(!o.stuck)try{let ok=true;if(typeof blocked==='function'){const n=Math.max(1,Math.ceil(Math.hypot(at.x-p.x,at.y-p.y)/.25));for(let i=1;i<=n&&ok;i++)if(blocked(p.x+(at.x-p.x)*i/n,p.y+(at.y-p.y)*i/n,.3))ok=false;}if(ok){p.x=at.x;p.y=at.y;}else{o.stuck=true;stats.stuck=(stats.stuck||0)+1;}}catch(_){}
  trail.push({x:p.x,y:p.y,t:T()});if(trail.length>40)trail.shift();
  const tg=o.target;if(tg){const a=Math.atan2(tg.y-p.y,tg.x-p.x);p.attackAngle=a;p.skillAngle=a;try{p.direction=facing(tg.x-p.x,tg.y-p.y);}catch(_){}p.moving=true;p.skillAnim=Math.max(p.skillAnim||0,.12);}
  while(o.shots<SHOTS&&u>=(o.shots+1)/(SHOTS+1)){o.shots++;if(!o.target||o.target.hp<=0)o.target=nearest(p,p);const e=o.target;if(!e)continue;

@@ -8,7 +8,7 @@ ok('index names the source repo, commit and MIT license (with the Sprite Fusion 
 const need=['tendrils-blood','hands-blood','meteor','dark-explosion-blood','collect-burst','crit-hit','hit-flash','core-orb-teal','level-up','heal-aoe','portal-teal'];
 ok('all 11 game effects are present (R165 +3; R166 dropped poof-ash for painted smoke)',need.every(n=>idx.effects[n]),Object.keys(idx.effects).join(','));
 const bad=[];for(const[n,e]of Object.entries(idx.effects)){const p=path.join(A,e.file);if(!fs.existsSync(p)){bad.push(n+':missing');continue;}const b=fs.readFileSync(p);if(crypto.createHash('sha256').update(b).digest('hex')!==e.sha256||b.length!==e.bytes)bad.push(n+':hash');
- const w=b.readUInt32LE(4);if(!(e.frames>0&&e.columns>0&&e.frame[0]>0&&e.pivot.length===2&&e.fps===15))bad.push(n+':meta');}
+ const w=b.readUInt32LE(4);if(!(e.frames>0&&e.columns>0&&e.frame[0]>0&&e.pivot.length===2&&(n.startsWith('pvfx-')?e.fps>0&&/CC0 1\.0/.test(e.source||'')&&/^[0-9a-f]{64}$/.test(e.sourceSha256||''):e.fps===15)))bad.push(n+':meta');}// R178: PVFX Foundry(CC0) 시트는 원본 20fps, 출처·원본 해시 기록
 ok('every sheet matches its recorded sha256/bytes and frame table',!bad.length,bad.join(' '));
 ok('sheets are softened toward the painted game style (R166) and each stays under 800 KB',idx.soften&&idx.soften.blur>0&&idx.soften.bloom>0&&idx.soften.sat<1);
 ok('each sheet stays under 800 KB',Object.values(idx.effects).every(e=>e.bytes<800000));

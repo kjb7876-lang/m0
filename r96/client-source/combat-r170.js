@@ -74,7 +74,7 @@ function cast(e){const t=e.r170Tower;t.casts++;stats.casts++;const px=player.x,p
  hazards.push({id:++uid,type:'field',owner:e.id,x:px,y:py,radius:1.7,age:0,warning:warn,life:warn+.9,asset:typeof VFX!=='undefined'?VFX.mark:null,damage:dmg,lastHit:-99,samongPattern:'r170-hex',r170:{tower:e.id,pal:palOf(e),seed:Math.random()*6,burst:false}});
  if(t.casts%2===0&&t.summoned<12){const live=(room.enemies||[]).filter(x=>x.hp>0).length;if(live<70)for(let k=0;k<2;k++){let m;try{m=JSON.parse(t.snap);}catch(_){break;}const a=Math.random()*6.28;
    Object.assign(m,{id:'r170:sum:'+e.id+':'+(t.summoned++),x:px+Math.cos(a)*1.1,y:py+Math.sin(a)*1.1,homeX:px,homeY:py,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',cd:1.6+k*.4,r170Summoned:true});
-   m.hp=m.maxHp;if(typeof blocked==='function'&&blocked(m.x,m.y,.25,room)){m.x=px;m.y=py;}room.enemies.push(m);stats.summons++;}}}
+   m.hp=m.maxHp;if(typeof blocked==='function'&&blocked(m.x,m.y,.25,room)){m.x=px;m.y=py;}room.enemies.push(m);stats.summons++;try{const X=window.__STORYWORLD_PIXELFX_R163__;if(X?.has?.('pvfx-rift-portal'))X.play('pvfx-rift-portal',m.x,m.y,{k:.75,tint:{a:[110,8,18],b:[255,96,96]}});}catch(_){}/* R178: 육망성에서 나오는 자리에 균열 문(CC0 PVFX, 핏빛) */}}}
 function towerTick(){for(const e of towers()){if(e.hp<=0)continue;e.cd=Math.max(e.cd||0,9);e.attack=null;e.rangedWindup=0;const t=e.r170Tower;
   if(Math.hypot(player.x-e.x,player.y-e.y)>11){t.next=Math.max(t.next,T()+1.5);continue;}if(T()>=t.next){t.next=T()+6;cast(e);}}}
 // 피의 육망성 → 촉수
@@ -86,10 +86,11 @@ function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(proj
   ctx.lineWidth=Math.max(2.5,3.6*(typeof zoom==='number'?zoom:1));ctx.strokeStyle='rgba(200,16,30,1)';ctx.shadowColor='rgba(255,50,60,.95)';ctx.shadowBlur=14;
   ctx.beginPath();ctx.arc(0,0,w,0,Math.PI*2*Math.min(1,u*1.2));ctx.stroke();ctx.beginPath();ctx.arc(0,0,w*.93,0,Math.PI*2);ctx.lineWidth*=.45;ctx.stroke();ctx.lineWidth/=.45;hexPath(ctx,w*.86,-Math.PI/2+h.r170.seed*.1);ctx.globalAlpha*=Math.min(1,.4+u*1.2);ctx.stroke();ctx.restore();
   if(warn&&S){S.draw('ring',P.main,0,0,w*2.2,w*1.2,{alpha:.55+.35*u,overHero:true});S.draw('glow',{a:[120,8,16],b:[255,90,90]},0,-hh*.05,w*1.4*u,w*.7*u,{alpha:.45*u,overHero:true});}
-  if(!warn&&S){const v=Math.min(1,(h.age-h.warning)/.25),n=7;for(let i=0;i<n;i++){const a=h.r170.seed+i*2*Math.PI/n,rr=w*(.25+.55*((i*37)%7)/7),x=Math.cos(a)*rr,y=Math.sin(a)*rr*.55,len=hh*(1.1+.5*((i*13)%5)/5)*v;
+  const PX=window.__STORYWORLD_PIXELFX_R163__,pxOn=!!PX?.has?.('tendrils-blood');// R176: 터진 뒤는 프레임 애니메이션(핏빛 촉수)만 — 한 장짜리 가시 늘이기는 시트가 없을 때만
+  if(!warn&&S&&!pxOn){const v=Math.min(1,(h.age-h.warning)/.25),n=7;for(let i=0;i<n;i++){const a=h.r170.seed+i*2*Math.PI/n,rr=w*(.25+.55*((i*37)%7)/7),x=Math.cos(a)*rr,y=Math.sin(a)*rr*.55,len=hh*(1.1+.5*((i*13)%5)/5)*v;
     S.draw('spike',P.main,x,y,hh*.3,len,{pivot:[.5,1],angle:Math.sin(T()*3+i)*.18,alpha:.95,blend:'source-over',overHero:true});S.draw('spike',P.sub,x+hh*.05,y,hh*.16,len*.8,{pivot:[.5,1],angle:Math.sin(T()*3+i+1)*.22,alpha:.8,overHero:true});}
    S.draw('glow',P.main,0,-hh*.2,w*1.6,w*.9,{alpha:.5*(1-v*.5),overHero:true});}}finally{ctx.restore();}
- if(!warn&&!h.r170.burst){h.r170.burst=true;try{window.__STORYWORLD_PIXELFX_R163__?.play('tendrils-blood',h.x,h.y,{k:1.1});}catch(_){}}}
+ if(!warn&&!h.r170.burst){h.r170.burst=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,sd=h.r170.seed||0;X?.play('tendrils-blood',h.x,h.y,{k:1.25});for(let i=0;i<2;i++){const a=sd+i*Math.PI+.6;X?.play('tendrils-blood',h.x+Math.cos(a)*h.radius*.55,h.y+Math.sin(a)*h.radius*.55,{k:.85,delay:.08+.1*i,flip:i===1});}}catch(_){}}}
 // R173 G: 위로 오르는 정화의 코어(청록 빛구슬 + 체력 막대).
 function drawLight(c){const q=project(c.x,c.y),hh=H(),S=SPR(),T0=T(),hit=c.hp<c.max&&(c.lastHp??c.hp)>c.hp;c.lastHp=c.hp;const HOLY={a:[20,90,90],b:[200,255,240]},pulse=1+.06*Math.sin(T0*4);
  try{window.__STORYWORLD_PIXELFX_R163__?.play('core-orb-teal',c.x,c.y,{loop:true,key:'r173-light',k:.9,z:hh*.35,until:T0+.4});}catch(_){}

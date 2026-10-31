@@ -13,11 +13,12 @@ const stats={squared:0,renders:0,procBuys:0,talentBuys:0,errors:0};let lastError
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const P62=()=>window.__STORYWORLD_PROGRESSION_R62__,GR=()=>window.__STORYWORLD_GROWTH_R103__;
 const me=()=>window.__STORYWORLD_COOP_SIM_R62__?.localPlayer?.()||(typeof player==='object'?player:null);
+const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const SQUARE=new Set();
 // ---- 오라·무한강화 비용 = 다음 단계² -----------------------------------------------------------------
 function squareCosts(){const A=P62();if(!A?.defs)return;for(const d of A.defs){if(d.maxRank!=null||d.id==='threadDanceR63'||SQUARE.has(d.id))continue;
-  try{Object.defineProperty(d,'cost',{configurable:true,enumerable:true,get(){if(!prefs.square)return 1;const p=me();const n=p?Number(A.ranks(d.id,p))||0:0;return (n+1)*(n+1);}});SQUARE.add(d.id);stats.squared++;}catch(e){fail(e);}}}
+  try{Object.defineProperty(d,'cost',{configurable:true,enumerable:true,get(){if(!prefs.square||!solo())return 1;/* 함께하기: 코어 purchase(id,p)는 산 사람 p 를 쓰는데 이 getter 는 p 를 모른다 → 방장·손님 값이 어긋나지 않게 원래 비용 */const p=me();const n=p?Number(A.ranks(d.id,p))||0:0;return (n+1)*(n+1);}});SQUARE.add(d.id);stats.squared++;}catch(e){fail(e);}}}
 const nextCost=id=>{const d=P62()?.defs?.find(x=>x.id===id);return d?Number(d.cost)||1:null;};
 // ---- 비용에 맞춘 효과 상향(사용자 "비례해서 강화 능력치도 밸런스 맞게 상향") ------------------------------------------
 //  k단계 하나의 효과 = 원래 한 단계 효과 × k. n단계 누적은 원래 공식에 n 대신 T(n)=n(n+1)/2 를 넣은 값(예: 끝없는 의지 10단계 +2%×55 = +110%).
@@ -26,7 +27,7 @@ const nextCost=id=>{const d=P62()?.defs?.find(x=>x.id===id);return d?Number(d.co
 const TRI=n=>n*(n+1)/2;
 const rk=(id,p)=>{try{return Math.max(0,Number(P62()?.ranks(id,p))||0);}catch(_){return 0;}};
 const F={power:(a,b)=>1+.02*a+.01*b,tempo:n=>.28+.72/(1+.04*n),cool:n=>.25+.75/(1+.035*n),ward:n=>1-.30*n/(n+40),res:n=>1+.01*n,dream:n=>8*n/(n+20)};
-const boostOn=()=>prefs.square&&prefs.boost!==false;
+const boostOn=()=>prefs.square&&prefs.boost!==false&&solo();
 function legacyBase(p){try{const u=typeof UPGRADES!=='undefined'?UPGRADES.find(x=>x.id==='vital'):null,k=u?.hero?String(p?.hero)+':vital':'vital';return 260+35*(Number(p?.upgrades?.[k])||0)+5*(Math.max(1,Number(p?.level)||1)-1);}catch(_){return 260;}}
 function ratios(p){const n=id=>rk(id,p),pw=n('endlessPower'),eg=n('egoAura'),hs=n('endlessHaste'),cd=n('endlessCooldown'),wd=n('endlessWard'),rs=n('endlessResonance'),vt=n('endlessVital'),dr=n('dreamAura'),B=legacyBase(p);
  return{power:F.power(TRI(pw),TRI(eg))/F.power(pw,eg),tempo:F.tempo(TRI(hs))/F.tempo(hs),cool:F.cool(TRI(cd))/F.cool(cd),hurt:F.ward(TRI(wd))/F.ward(wd)*(B+18*vt)/(B+18*TRI(vt)),res:F.res(TRI(rs))/F.res(rs),dream:F.dream(TRI(dr))-F.dream(dr),
@@ -61,7 +62,7 @@ function buyTalent(id){const p=player;const u=UPGRADES.find(x=>x.id===id);if(!p|
  try{sound('upgrade',true);}catch(_){}try{saveGame(false);}catch(_){}stats.talentBuys++;return true;}
 function css(){if(document.getElementById('r169UpCss'))return;const s=document.createElement('style');s.id='r169UpCss';
  s.textContent='#panel .r169sec{grid-column:1/-1;margin:10px 0 2px;padding:4px 2px;border-bottom:1px solid #6b5a46;color:#f0d9b0;font:700 14px/1.4 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.04em}#panel .r169sec small{font-weight:400;color:#bfa98a;margin-left:8px;font-size:12px}#panel p.r169rule{margin:4px 0 8px;color:#e8d6bb}';document.head.appendChild(s);}
-function merge(){if(!prefs.merge)return;const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!cards||!cards.querySelector('[data-r62-passive]')||cards.querySelector('.r169card'))return;const p=me();if(!p)return;css();
+function merge(){if(!prefs.merge||!solo())return;/* 통합 카드는 player 를 직접 바꾼다 — 함께하기에서는 손님 요청 경로(R62 카드)만 쓴다 */const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!cards||!cards.querySelector('[data-r62-passive]')||cards.querySelector('.r169card'))return;const p=me();if(!p)return;css();
  const sec=(t,s)=>'<div class="r169sec">'+t+(s?'<small>'+s+'</small>':'')+'</div>';
  cards.insertAdjacentHTML('afterbegin',sec('오라 · 무한강화','다음 단계 비용 = 단계²'));
  cards.insertAdjacentHTML('beforeend',sec('Z · X · C 스킬강화','k단계 k²점 · 최대 7단계')+procCards(p)+sec('일반강화','기존 영웅·공통 재능 · 1점')+talentCards(p));

@@ -165,6 +165,14 @@ jobs:
         run: node r96/qa/r174/r174-cpu-check.cjs
       - name: R171 per-region story narrative maps (source-topology templates, floor bound, door ids, BFS entry/gather/boss/exit, spawn clearance, off switch) CPU check
         run: node r96/qa/r171/story-maps-cpu-check.cjs
+      - name: R176 back/forward window navigation and review fixes CPU check
+        run: node r96/qa/r176/r176-cpu-check.cjs
+      - name: R177 story text as collectibles (chart / memory shard / report / note) CPU check
+        run: node r96/qa/r177/r177-cpu-check.cjs
+      - name: R178 CC0 PVFX Foundry frame effects (blink, guard, EGO, tower rift) CPU check
+        run: node r96/qa/r178/r178-cpu-check.cjs
+      - name: R179 early boss health scale (root gatekeeper) CPU check
+        run: node r96/qa/r179/r179-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

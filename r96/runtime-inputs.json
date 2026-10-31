@@ -3372,6 +3372,20 @@
     "assets/r163/pixelfx/mob-regional.webp",
     "assets/r163/pixelfx/mob-snow.webp",
     "assets/r163/pixelfx/mob-stone.webp",
+    "nav-r176.js",
+    "samong-hud-r177.js",
+    "story-collect-r177.js",
+    "effects-r178.js",
+    "assets/r163/pixelfx/pvfx-resonant-break.webp",
+    "assets/r163/pixelfx/pvfx-rift-portal.webp",
+    "assets/r163/pixelfx/pvfx-choir-moths.webp",
+    "assets/r163/pixelfx/pvfx-void-implosion.webp",
+    "balance-r179.js",
+    "assets/r163/pixelfx/pvfx-earth-rupture.webp",
+    "assets/r163/pixelfx/pvfx-electric-impact.webp",
+    "assets/r163/pixelfx/pvfx-frost-nova.webp",
+    "assets/r163/pixelfx/pvfx-mass-release.webp",
+    "assets/r163/pixelfx/pvfx-warm-explosion.webp",
     "story-maps-r171.js"
   ],
   "mediaPaths": [
@@ -4447,5 +4461,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "af57f882062b8af3c19670b4bd1eff0936c7b9fa28688ed8cea2d45110410de2"
+  "runtimeManifestSHA256": "9cdf07666779f594ccbfecde079165008c3780e0a8c2fac149c41dfc8636324e"
 }

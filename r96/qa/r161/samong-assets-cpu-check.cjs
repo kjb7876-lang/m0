@@ -18,7 +18,7 @@ const room={samongR103:{key:'sz115-S04-3',ep:4},enemies:[],props:[],exploration:
 const sb={window:{__STORYWORLD_DRIVE_ART_R105__:{artFor:e=>e.r105?'x':null}},localStorage:{getItem(){return null;},setItem(){}},room,time:0,readyImage:()=>null,drawEnemy(){},drawProp(){},tick(){},Math,JSON,String,Object,Number,Date,Promise};
 vm.createContext(sb);vm.runInContext(C('samong-r161.js'),sb);const S=sb.window.__STORYWORLD_SAMONG_R161__;
 ok('samong common mob is drawn as the puppet',S.puppetOf({samongR103:'k',hp:5}));
-ok('bosses / midbosses are not replaced',!S.puppetOf({samongR103:'k',boss:true})&&!S.puppetOf({samongR103:'k',name:'중간보스 x'}));
+ok('R177: bosses / midbosses keep their samong art, and without samong art become the puppet (never the story-mode art)',!S.puppetOf({samongR103:'k',boss:true,r105:1})&&!S.puppetOf({samongR103:'k',name:'중간보스 x',r105:1})&&S.puppetOf({samongR103:'k',boss:true})&&S.puppetOf({samongR103:'k',name:'중간보스 x'}));
 ok('mobs with R105 samong art keep it',!S.puppetOf({samongR103:'k',r105:true}));
 ok('STORY mobs (no samongR103) are never replaced',!S.puppetOf({hp:5}));
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
