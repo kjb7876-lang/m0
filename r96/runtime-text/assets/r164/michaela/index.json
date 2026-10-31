@@ -1,0 +1,74 @@
+{
+ "revision": "R164 미카엘라 달리기(사용자 2026-10-31 \"미카엘라 드라이브에 올라온 것도 적용\")",
+ "drive": "Michaela-movement-v1-review.zip",
+ "driveId": "18S3rWKBmhSnRuq7jHhXJhZs_01ChPEfi",
+ "status": "적용前 비교 검토 자료 — 게임 완성 또는 최종 품질 승인 아님",
+ "decision": "R130 걷기(다리를 거의 벌리지 않는 종종걸음, 사용자 \"어그적어그적\")보다 보폭·팔·머리 흔들림이 큼, 색·복장 같음, 칸 192x256·발 (96,226)·몸 키 174~187 로 게임 규격과 맞아 이동 그림으로 씀. 대시(발 높이 프레임마다 18px 차)·ADDENDUM13/14 대시·ADDENDUM15 북쪽 스킬(한 방향)은 보류.",
+ "run": {
+  "s": {
+   "path": "assets/r164/michaela/run-s.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sourcePng": "HERO-michaela-run-s.png",
+   "sourceSha256": "9236391cfac04160ba2556a01428b6de2fd68d11bf8180cc41d35367dbb2cc23",
+   "sha256": "0ce99db235d6ffe838abf31c27d144e2c930330d000732603465eef0e5e00329",
+   "bytes": 127550
+  },
+  "se": {
+   "path": "assets/r164/michaela/run-se.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sourcePng": "HERO-michaela-run-se.png",
+   "sourceSha256": "13fe4d096a53d35388c2c18c973d307d5a184134aa137fd770754d4d5db27826",
+   "sha256": "4d6848eaa7a9ee0c973e5c2aa075a48aa87c099d9d892c2aa4f1bdaf77cbfcbb",
+   "bytes": 153240
+  },
+  "e": {
+   "path": "assets/r164/michaela/run-e.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sourcePng": "HERO-michaela-run-e.png",
+   "sourceSha256": "49c36c88667922421201b7af930ba66a2d1f9fffc4c0bfbe6772143049cbc10a",
+   "sha256": "addc6fae59a66f0fe111d57175d0e64c7225b35cd99cfbb0ca23df9ba1e72994",
+   "bytes": 153222
+  },
+  "ne": {
+   "path": "assets/r164/michaela/run-ne.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sourcePng": "HERO-michaela-run-ne.png",
+   "sourceSha256": "9ce7cdb06a152a8127751fac2322afc71f50378694a64e014328308168a4be98",
+   "sha256": "bb58158aa13142609692c342277da66692320c833cbb649d09012c4fd603cd96",
+   "bytes": 157776
+  },
+  "n": {
+   "path": "assets/r164/michaela/run-n.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "sourcePng": "HERO-michaela-run-n.png",
+   "sourceSha256": "27a7728d243d255d8ac3c416a64146f60ea6b423bc968bccfec90c3bc926c45b",
+   "sha256": "1f657c573f0e23c967c07d7021c36d952962529a8ce8843f921ab87e78c4e3df",
+   "bytes": 133922
+  }
+ }
+}

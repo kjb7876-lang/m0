@@ -29,6 +29,7 @@
   seoha:{dir:'assets/r130/seoha/',keep:/ultimate-/},lauren:{dir:'assets/r130/lauren/',keep:/ultimate-/},
   neon:{dir:'assets/r130/neon/',keep:/ultimate-/},hunter:{dir:'assets/r130/hunter/',keep:/ultimate-/},slayer:{dir:'assets/r130/slayer/',keep:/ultimate-|actions-directional\/slayer-guard-/},
   hwando:{dir:'assets/r130/hwando/',keep:/./}};// 환도: 서 있기 그림이 좋아 걷기만 새 시트(정지·동작 그림은 그대로)// R131: 서하·로렌(궁극기 그림은 큰 효과가 들어 있어 원래 그림)
+ const RUN164={michaela:'assets/r164/michaela/run-'},walkPath=(hero,v)=>RUN164[hero]&&prefs.run164!==false?RUN164[hero]+v+'.webp':SHEETS[hero].dir+'walk-'+v+'.webp';
  const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[478]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
  const swap128=k0=>{if(!prefs.gunnerSheet)return null;const k=String(k0).replace(/^assets\/r99\/clean\//,'');/* R131: R99 정리 사본(assets/r99/clean/assets/…)도 같은 대체본 */for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;if(/actions-directional\//.test(k)&&(h==='gunner'||!/-attack-(?:left|right)\.webp$/.test(k)))return null;/* R159: 방향 동작 대체본은 R130 시트의 공격 좌·우뿐(기억사수 R128 은 없음) — 없는 대체본(스킬 좌·우 등)을 매번 받으려다 404 나던 것을 묻지 않는다(원래 그림 그대로) */const parts=k.split('/');return SHEETS[h].dir+(/\/hero_direction338\//.test(k)?'d338-':'')/* R134: 337·338 묶음 이름 겹침(로렌) */+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
  const swapState=new Map();
@@ -48,7 +49,7 @@
  const preloaded=new Set();
  function preloadHeroArt(){try{const h=typeof player==='object'&&player?.hero;if(!h||preloaded.has(h)||typeof heroPaths!=='function')return;preloaded.add(h);
   for(const p of heroPaths(h)){const k=String(p).replace(/^\.\//,''),to=swapTo(k);if(to)wantArt(to,k);}
-  if(SHEETS[h]&&prefs.gunnerSheet){for(const d of ['s','se','e','ne','n'])wantArt(SHEETS[h].dir+'walk-'+d+'.webp');loadSheetIndex(h);}}catch(_){}}
+  if(SHEETS[h]&&prefs.gunnerSheet){for(const d of ['s','se','e','ne','n'])wantArt(walkPath(h,d));loadSheetIndex(h);}}catch(_){}}
  const sheetIdx=new Map(),sheetSwap=new Map(),ATLAS_HEROES=new Set(['slayer']);// 아틀라스로 그리는 영웅: 동작 그림을 미리 다 받아 둔다(첫 공격부터 새 그림)
  function loadSheetIndex(h){if(sheetIdx.has(h)||typeof fetch!=='function')return;sheetIdx.set(h,null);const u=SHEETS[h].dir+'index.json';
   fetch(typeof urlFor==='function'?urlFor(u):u).then(r=>r.ok?r.json():null).then(j=>{if(j?.swap){sheetSwap.set(h,j.swap);if(ATLAS_HEROES.has(h)){const ks=Object.keys(j.swap);for(const k of ks)wantArt(j.swap[k].path,k);if(typeof ensureImages==='function')Promise.resolve(ensureImages(ks.filter(k=>!(typeof imageCache!=='undefined'&&imageCache.get(k))))).catch(()=>{});}}if(j?.idle){sheetIdx.set(h,j.idle);for(const it of Object.values(j.idle))wantArt(it.path);}}).catch(()=>{});}
@@ -140,7 +141,9 @@
  // 지역을 옮기면 게임이 그림 기억(캐시)을 비워 걷기 그림도 사라졌는데, '이미 받음'으로 기억해 다시 받지 않아 정지 그림으로 이동했다
  // (사용자: 길잡이 켜면 그림 하나로 고정된 채 이동 — 길잡이가 지역을 자주 옮겨 더 자주 보였다). 준비 안 됐으면 1초마다 다시 받는다.
  const askAt=new Map(),wantImage=p=>{if(walkMissing.has(p)||typeof ensureImages!=='function')return;const t0=Date.now();if(t0-(askAt.get(p)||0)<1000)return;askAt.set(p,t0);Promise.resolve(ensureImages([p])).catch(()=>walkMissing.add(p));};
- const ownWalk=hero=>prefs.gunnerSheet&&OWN_WALK128[hero]?{map:OWN_WALK128[hero],path:v=>SHEETS[hero].dir+'walk-'+v+'.webp',r128:true}:OWN_WALK[hero]?{map:OWN_WALK[hero],path:v=>'assets/r121/walk/walk-'+hero+'-'+v+'.png'}:null;
+ // R164: 미카엘라 이동 그림은 드라이브 'Michaela-movement-v1-review'의 달리기 8칸 5방향(보폭 큰 달리기, assets/r164/michaela; 출처·해시는 그 index.json).
+ //  R130 걷기는 다리를 거의 벌리지 않는 종종걸음이었다(사용자 '어그적어그적'). 칸·발 기준점이 같아 그림 경로만 바꾼다. storyworld.r119.visual {run164:false} 로 예전 걷기.
+ const ownWalk=hero=>prefs.gunnerSheet&&OWN_WALK128[hero]?{map:OWN_WALK128[hero],path:v=>walkPath(hero,v),r128:true}:OWN_WALK[hero]?{map:OWN_WALK[hero],path:v=>'assets/r121/walk/walk-'+hero+'-'+v+'.png'}:null;
  const preloadWalk=()=>{try{const o=typeof player==='object'&&player?.hero?ownWalk(player.hero):null;if(typeof readyImage==='function'&&o)for(const v of new Set(Object.values(o.map).map(v=>o.path(v[0]))))if(!readyImage(v))wantImage(v);}catch(_){}};// 처음 걸을 때 예전 그림이 잠깐 보이지 않게 미리 받는다
  function sheetFor(hero,dir){const ow=ownWalk(hero),own=ow?.map[dir];if(own&&ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p))return{path:p,mirror:!!own[1],cols:8,rows:1,frames:8,own8:true,r128:true};}
   if(own&&!ow.r128){const p=ow.path(own[0]);if(!walkMissing.has(p)){const n=own[0].endsWith('12')?12:own[0].endsWith('8')?8:own[0].endsWith('6')?6:4,cols=n===6?3:4;return{path:p,mirror:!!own[1],cols,rows:n/cols,frames:n,own8:n>4};}}
