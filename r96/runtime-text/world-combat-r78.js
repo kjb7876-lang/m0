@@ -24,7 +24,8 @@
  function safe(r,e,p,used=[]){const radius=coreRadius(e)+.12;return p&&Number.isFinite(p.x+p.y)&&!blocked(p.x,p.y,radius,r)&&used.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>radius+(q.radius||.35)+.18);}
  function choose(r,e,center,index=0,used=[]){const candidates=[center];for(let ring=1;ring<=14;ring++)for(let step=0;step<16;step++){const a=index*.73+step*Math.PI/8,d=ring*.35;candidates.push({x:center.x+Math.cos(a)*d,y:center.y+Math.sin(a)*d});}return candidates.find(p=>safe(r,e,p,used))||null;}
  function setPosition(e,p){e.x=e.homeX=p.x;e.y=e.homeY=p.y;e.nav=[];e.navAt=typeof time==='number'?time-.6:0;e.stuck=0;e.attack=null;e.rangedWindup=0;e.storyPreparedCast150=null;e.aim=null;e.state='idle';e.cd=Math.max(.8,Number(e.cd)||0);}
- function routeSpots(r){return window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__?.routeSpawns||{'1':[{x:17,y:94},{x:21,y:63.5},{x:20,y:36}],'2':[{x:70,y:94},{x:59,y:63.5},{x:51,y:36}]};}
+ // R171: 지역별 서사 지도(story-maps-r171.js)는 자기 길·집결·보스 자리를 worldWardR81 에 싣는다. 없으면 예전 병동 좌표.
+ function routeSpots(r){return r?.exploration?.worldWardR81?.routeSpawns||window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__?.routeSpawns||{'1':[{x:17,y:94},{x:21,y:63.5},{x:20,y:36}],'2':[{x:70,y:94},{x:59,y:63.5},{x:51,y:36}]};}
  function championHealth(r){if(!controlled(r))return;for(const e of r.enemies||[])if(e.wardChampionR81){const donor=r.enemies.find(a=>!a.wardChampionR81&&!major(a)&&a.nativeId===e.nativeId);if(!donor||!(donor.maxHp>0))continue;const target=donor.maxHp*6,fraction=Math.max(0,Math.min(1,e.hp/Math.max(1,e.maxHp)));e.difficultyBaseHpR63=(donor.difficultyBaseHpR63||donor.maxHp)*6;e.difficultyFactorR63=donor.difficultyFactorR63||1;if(e.maxHp!==target){e.maxHp=target;e.hp=target*fraction;}}}
  function addChampions(r,ordinary,used){
   // Imported V4 rooms keep their existing encounter population; newly visited
@@ -51,7 +52,7 @@
   const spec=r.exploration.worldR78,normal=controlled(r),saved=pending?.worldMazeR81?.rooms?.[layerKey(r.id,r.layer)];
   if(normal){const old=pending?.rooms?.[layerKey(r.id,r.layer)];states.set(r,saved?clean(saved):{version:1,phase:r.cleared||completed(r.id,r.layer)?'done':old?.engaged?'boss':'route',route:null,rallied:[],doorStoryDone:!!old?.engaged,exitStoryDone:false});}
   const s=state(r);if(s?.phase==='done')return r;
-  const majors=(r.enemies||[]).filter(e=>alive(e)&&major(e)),used=[],bossPoints=[{x:16,y:10},{x:24,y:13},{x:20,y:8},{x:13,y:15},{x:23,y:16}];
+  const majors=(r.enemies||[]).filter(e=>alive(e)&&major(e)),used=[],bossPoints=r.exploration.worldWardR81?.bossPoints||[{x:16,y:10},{x:24,y:13},{x:20,y:8},{x:13,y:15},{x:23,y:16}];
   majors.forEach((e,i)=>{const p=choose(r,e,bossPoints[i%bossPoints.length],i,used);if(!p){metrics.unplaced++;throw Error('R81 major placement blocked: '+r.id+':'+e.id);}setPosition(e,p);used.push({...p,radius:coreRadius(e)});if(normal&&!['boss','exit','exitStory','done'].includes(s.phase))e.spawnState='hidden';if(e.boss)metrics.bossMoved++;else metrics.midbossMoved++;});
   const ordinary=(r.enemies||[]).filter(e=>alive(e)&&!major(e)&&!e.persona&&!e.trial&&!e.cosmic&&!e.r61Summoned&&!e.r61Clone&&Number.isInteger(e.r75Pack)),spots=routeSpots(r);
   ordinary.forEach((e,i)=>{const route=i%2+1,points=spots[route],preferred=points[Math.floor(i/2)%points.length],p=choose(r,e,preferred,i,used);if(!p){metrics.unplaced++;throw Error('R81 ordinary placement blocked: '+r.id+':'+e.id);}setPosition(e,p);used.push({...p,radius:coreRadius(e)});e.wardRouteR81=route;
@@ -64,7 +65,7 @@
  }
  const nativeDoors=window.__STORYWORLD_WORLD_R74__;
  function nativeOpen(id){const d=door(id);if(!d)return false;if(nativeDoors.isOpen(room,d))return true;doorIntent=true;try{return nativeDoors.use({id:d.id,kind:'door',point:{x:d.x,y:d.y},reach:d.reach});}finally{doorIntent=false;}}
- function rally(){const s=state();if(!controlled(room)||s?.phase!=='route')return false;const rows=room.enemies.filter(field),spots=window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__?.rally||[],used=[{x:player.x,y:player.y,radius:.5}];
+ function rally(){const s=state();if(!controlled(room)||s?.phase!=='route')return false;const rows=room.enemies.filter(field),spots=room.exploration.worldWardR81?.rallySpots||window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__?.rally||[],used=[{x:player.x,y:player.y,radius:.5}];
   const moves=rows.map((e,i)=>{const preferred=spots[i%spots.length]||{x:12+(i%7)*3,y:31.5+Math.floor(i/7)*3},p=choose(room,e,preferred,i,used);if(!p)throw Error('R81 rally placement blocked: '+e.id);used.push({...p,radius:coreRadius(e)});return{e,p};});
   for(const{e,p}of moves){setPosition(e,p);e.spawnState='active';e.explorationLeash=28;e.explorationGroup=room.id+':ward-rally';e.graceUntil=time+1.1;}
   s.phase='rally';s.rallied=rows.map(e=>e.id);room.engaged=true;room.encounterStage='active';room.activeEncounter='midboss';room.fieldWaveCleared6=false;metrics.rallies++;
@@ -101,7 +102,7 @@
  };
  const resumeBase=resumeScene3;resumeScene3=function(...a){if(controlled(room)&&state()?.phase==='doorStory')return showDoorStory();if(controlled(room)&&state()?.phase==='exitStory')return showExitStory();return resumeBase.apply(this,a);};
  const tickBase=tick;tick=function(dt,...a){const before=time,result=tickBase.call(this,dt,...a);if(time<=before||modal||loading||player?.hp<=0||!controlled(room))return result;placeRoom(room);const s=state(),g=room.exploration.worldWardR81;if(!s)return result;
-  if(s.phase==='route'){if(s.route===null&&player.y<104)s.route=player.x<43?1:2;if(distance(player,g.gatherAnchor)<=5.5){s.route??=player.x<43?1:2;rally();}}
+  if(s.phase==='route'){const sp=g.routeSplit||{x:43,y:104};if(s.route===null&&player.y<sp.y)s.route=player.x<sp.x?1:2;if(distance(player,g.gatherAnchor)<=5.5){s.route??=player.x<sp.x?1:2;rally();}}
   else if(s.phase==='rally'){room.engaged=true;settle();}
   else if(s.phase==='boss'){const b=g.bossBounds;if(player.x>b[0]+.5&&player.x<b[2]-.5&&player.y>b[1]+.5&&player.y<b[3]-.5)beginBoss();settle();}
   return result;

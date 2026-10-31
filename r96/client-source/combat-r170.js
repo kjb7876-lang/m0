@@ -111,14 +111,21 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
 // ---- ④ 본편 몹을 맵 곳곳에(사용자 "스토리모드 몹 분포 맵 곳곳에, 한쪽 길목에 몰지 말고") ----------------------------------
 //  맵에 들어설 때 아직 싸우지 않은 일반 몹을 셋까지의 무리(첫 몹에서 2.5칸 안)로 묶고, 바닥 칸에서 '가장 먼 점 고르기'로 고른 자리들(입구에서 8칸 넘게,
 //  무리끼리 7칸 넘게, 사방이 트인 곳)에 무리째 옮긴다. 보스·중간보스·나중에 오는 물결·탑은 그대로. storyworld.r170.combat {spread:false}.
+// R179: 무리째 옮길 때 몸 크기를 본다. 예전엔 반지름 .3 으로만 재고, 막히면 무리 중심(at)에 검사 없이 놓아서
+//  몸이 큰 중간보스(R81 챔피언, 반지름 .5~.9)가 벽에 박힌 채 놓였다(R171 작은 지도 dist02 에서 드러남). 몸+.12 여유로 재고,
+//  그 자리·무리 중심·둘레(최대 2.4칸)에서 비는 곳을 찾고, 끝내 없으면 원래(이미 안전하게 놓인) 자리에 둔다.
+//  지도가 spawnExclude(R171 앞방처럼 닫힌 문 뒤 막다른 방)를 주면 그 안으로는 옮기지 않는다.
+function bodySpot(e,x,y,at){if(typeof blocked!=='function')return{x,y};const r=Math.max(.3,Number(e?.combatProfile?.bodyBlock?.r)||Number(e?.radius)||.3)+.12,list=[{x,y},{x:at.x,y:at.y}];
+ for(let ring=1;ring<=8;ring++)for(let k=0;k<12;k++){const a=k*Math.PI/6+ring*.4;list.push({x:at.x+Math.cos(a)*ring*.3,y:at.y+Math.sin(a)*ring*.3});}
+ try{return list.find(p=>Number.isFinite(p.x+p.y)&&!blocked(p.x,p.y,r,room))||null;}catch(_){return null;}}
 function spreadStory(){if(prefs.spread===false||!live()||!solo()||samongRoom()||SPECIAL.has(room.id))return;try{if(typeof safeRegion==='function'&&safeRegion())return;}catch(_){}
  const L=room.exploration;if(!L?.floorCells?.length||room.engaged||room.r170Spread===room.id)return;const mobs=(room.enemies||[]).filter(e=>e.hp>0&&!major(e)&&!e.r170Tower&&e.spawnState==='active'&&!e.attack);if(mobs.length<6)return;
  room.r170Spread=room.id;const entry=L.entry||room.r72Entry||player,packs=[];for(const e of mobs){let p=packs.find(k=>k.length<3&&Math.hypot(k[0].x-e.x,k[0].y-e.y)<2.5);if(p)p.push(e);else packs.push([e]);}// 무리는 셋까지 — 길목에 줄지어 있던 몹이 하나로 뭉쳐 그대로 남지 않게
- const cand=[];let h=(String(room.id).length*2654435761)>>>0;for(let t=0;t<900&&cand.length<420;t++){h=Math.imul(h^(h>>>15),0x2c1b3c6d)>>>0;const c=L.floorCells[h%L.floorCells.length],x=c[0]+.5,y=c[1]+.5;if(Math.hypot(x-entry.x,y-entry.y)<8||!okCell(x,y))continue;cand.push({x,y});}
+ const cand=[];let h=(String(room.id).length*2654435761)>>>0;for(let t=0;t<900&&cand.length<420;t++){h=Math.imul(h^(h>>>15),0x2c1b3c6d)>>>0;const c=L.floorCells[h%L.floorCells.length],x=c[0]+.5,y=c[1]+.5;if(Math.hypot(x-entry.x,y-entry.y)<8||(L.spawnExclude||[]).some(b=>x>=b[0]&&x<b[2]&&y>=b[1]&&y<b[3])||!okCell(x,y))continue;cand.push({x,y});}
  if(cand.length<packs.length)return;const chosen=[],far=q=>Math.min(Math.hypot(q.x-entry.x,q.y-entry.y)*.6,...chosen.map(c=>Math.hypot(c.x-q.x,c.y-q.y)));
  for(let i=0;i<packs.length;i++){let best=null,bd=-1;for(const q of cand){const d=chosen.length?far(q):Math.hypot(q.x-entry.x,q.y-entry.y)*((i*7919)%5+1);if(d>bd){bd=d;best=q;}}if(!best)break;chosen.push(best);}
  packs.forEach((pk,i)=>{const at=chosen[i];if(!at)return;const cx=pk.reduce((s,e)=>s+e.x,0)/pk.length,cy=pk.reduce((s,e)=>s+e.y,0)/pk.length;
-  for(const e of pk){let x=at.x+Math.max(-1.6,Math.min(1.6,e.x-cx)),y=at.y+Math.max(-1.6,Math.min(1.6,e.y-cy));if(typeof blocked==='function'&&blocked(x,y,.3,room)){x=at.x;y=at.y;}e.x=e.homeX=x;e.y=e.homeY=y;e.nav=[];e.navAt=0;stats.spread=(stats.spread||0)+1;}});
+  for(const e of pk){const p=bodySpot(e,at.x+Math.max(-1.6,Math.min(1.6,e.x-cx)),at.y+Math.max(-1.6,Math.min(1.6,e.y-cy)),at);if(!p){stats.spreadKept=(stats.spreadKept||0)+1;continue;}e.x=e.homeX=p.x;e.y=e.homeY=p.y;e.nav=[];e.navAt=0;stats.spread=(stats.spread||0)+1;}});
  stats.packs=packs.length;}
 
 // ---- 설치 -------------------------------------------------------------------------------------

@@ -20259,8 +20259,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 21849,
-      "sha256": "019952cf9e73994b35aee25fe82989b28f81b6fa907344f2de43096b484519cd"
+      "bytes": 22951,
+      "sha256": "bd4ab73b557169eba3282d3f2f1bc7d3c76a1d6b7c139ad98d6203a2e5989bc2"
     },
     {
       "path": "combat-r98.js",
@@ -20344,8 +20344,8 @@
     },
     {
       "path": "drive-props-r138.js",
-      "bytes": 7716,
-      "sha256": "7fa4e2ae69b0a2c55a1b7277c8fec104b3f4300d42fc88ad722b1f2a093dd25d"
+      "bytes": 7856,
+      "sha256": "d26f8f9b607ef862c68efde1fb458cd61d129c1f28cadf017c062b1903026387"
     },
     {
       "path": "dynamic-vfx-r84.js",
@@ -20489,8 +20489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564254,
-      "sha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916"
+      "bytes": 6564299,
+      "sha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590"
     },
     {
       "path": "intro-r140.js",
@@ -20713,6 +20713,11 @@
       "sha256": "9d62ee9495751cc7f1540e38093c8fb626effe55c3eb0d0db996e6614c0f2e65"
     },
     {
+      "path": "story-maps-r171.js",
+      "bytes": 36130,
+      "sha256": "1907df0ff49c8201a0ba419f219d5f45f114353748ef22f666a0695facad7b82"
+    },
+    {
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
@@ -20824,8 +20829,8 @@
     },
     {
       "path": "world-combat-r78.js",
-      "bytes": 21086,
-      "sha256": "fccd4bcb6d7d675d9af7d2da63143bc3c4b25aa956380826d774f04c819b4cef"
+      "bytes": 21407,
+      "sha256": "bad9d7b772d2f2235a99b40bec10128f5fc928c0c7f1f9b36a468ec13e8aa106"
     },
     {
       "path": "world-combat-v4-compat.js",
@@ -20839,8 +20844,8 @@
     },
     {
       "path": "world-environment-r81.js",
-      "bytes": 10327,
-      "sha256": "6b71be371263fc89e144033e633bb048e9287270d4299779b5b0a94836c034d9"
+      "bytes": 11846,
+      "sha256": "2110dbabb0c0d7a9a2257371af8fa989a9c15bac3a03c358e2f7313995427042"
     },
     {
       "path": "world-layout-r78.js",
@@ -20849,8 +20854,8 @@
     },
     {
       "path": "world-outdoor-r99.js",
-      "bytes": 15692,
-      "sha256": "d73969e9ac51e90599f8f49ca5b475f7ca85741259f0e36c6c833e255af329cf"
+      "bytes": 15949,
+      "sha256": "0f8bd6d9180cb2c629a95df833775a0855b247e4c991dee958cd30846f036102"
     },
     {
       "path": "world-presentation-r81.js",
@@ -20878,9 +20883,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4175,
-  "totalBytes": 796913879,
-  "webHTMLSha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916",
+  "fileCount": 4176,
+  "totalBytes": 796953393,
+  "webHTMLSha256": "e613e83e14e4759f1d6d32a1909dd2ad6a069811de9b0fb2740eec024ee8d590",
   "largest": [
     {
       "path": "index.html",

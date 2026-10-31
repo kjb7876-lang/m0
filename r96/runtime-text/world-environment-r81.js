@@ -47,7 +47,14 @@
  // R94: back corner and back edges first (they face the camera), then the side
  // corners; the front corner (largest x+y) sits behind the camera-side wall and
  // read as standing on its roof, so it is no longer a candidate.
- function candidates(node,index){const b=bounds[node.id];if(!b)return[];const[a,b0,c,d]=b,m=2.1,pts=[[a+m,b0+m],[(a+c)/2,b0+m],[a+m,(b0+d)/2],[c-m,b0+m],[a+m,d-m],[c-m,(b0+d)/2],[(a+c)/2,d-m]];return pts.map((_,i)=>{const p=pts[(i+index)%pts.length];return{x:p[0],y:p[1]};});}
+ // R171: 서사 지도는 방마다 box 를 싣는다(병동 방 번호표 대신).
+ const boxOf=(L,n)=>L?.storyMapR171?n.box:bounds[n.id];
+ /* R179: 서사 지도(R171)의 방은 작고(복도 3칸 격자·둥근 빈터) 모서리 일곱 점이 벽 밖이나 벽 위에 떨어져 소품이 거의 놓이지 않았다.
+    그 지도에서는 방 상자(+1칸) 안의 실제 바닥 칸 가운데를 후보로 쓴다(안전 검사 safe()는 그대로). */
+ const floorSets=new WeakMap(),floorSet=L=>{let s=floorSets.get(L);if(!s){s=new Set((L.floorCells||[]).map(c=>c[0]+':'+c[1]));floorSets.set(L,s);}return s;};
+ function storyCandidates(node,index,L){const b=node.box,f=floorSet(L),pts=[];for(let y=Math.floor(b[1])-1;y<=Math.ceil(b[3]);y++)for(let x=Math.floor(b[0])-1;x<=Math.ceil(b[2]);x++)if(f.has(x+':'+y))pts.push({x:x+.5,y:y+.5});
+  if(!pts.length)return pts;const k=(index*7)%pts.length;return[...pts.slice(k),...pts.slice(0,k)];}
+ function candidates(node,index,L){const b=boxOf(L,node);if(!b)return[];if(L?.storyMapR171)return storyCandidates(node,index,L);const[a,b0,c,d]=b,m=2.1,pts=[[a+m,b0+m],[(a+c)/2,b0+m],[a+m,(b0+d)/2],[c-m,b0+m],[a+m,d-m],[c-m,(b0+d)/2],[(a+c)/2,d-m]];return pts.map((_,i)=>{const p=pts[(i+index)%pts.length];return{x:p[0],y:p[1]};});}
  function safe(r,p,used,radius=.55){const L=r.exploration;if(A.explorationBlocked(L,p.x,p.y,radius))return false;
   for(const s of[.8,1.6,2.4])if(A.explorationBlocked(L,p.x+s,p.y+s,.2))return false;
   if((L.worldR74?.doors||[]).some(d=>Math.hypot(d.x-p.x,d.y-p.y)<4))return false;
@@ -57,7 +64,10 @@
   if((r.props||[]).some(q=>(q.r75NPC||q.r75NarrativeNPC||q.r75FortPerson||q.interactive)&&Math.hypot(p.x-q.x,p.y-q.y)<2))return false;
   return used.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>2.4);
  }
- function locate(r,index,used,radius=.55){const nodes=r.exploration.nodes.filter(n=>bounds[n.id]);for(let i=0;i<nodes.length;i++){const n=nodes[(index*5+i)%nodes.length];for(const p of candidates(n,index+i))if(safe(r,p,used,radius))return{...p,node:n.id};}return null;}
+ function locate(r,index,used,radius=.55){const L=r.exploration,nodes=L.nodes.filter(n=>boxOf(L,n));
+  /* R179: 서사 지도는 방이 작아 소품이 한 방에 몰렸다 — 아직 소품이 없는 방을 먼저 찾고, 없으면 예전처럼 아무 방이나. */
+  const taken=L.storyMapR171?new Set(used.map(q=>q.node)):null;
+  for(const skip of taken?[true,false]:[false])for(let i=0;i<nodes.length;i++){const n=nodes[(index*5+i)%nodes.length];if(skip&&taken.has(n.id))continue;for(const p of candidates(n,index+i,L))if(safe(r,p,used,radius))return{...p,node:n.id};}return null;}
  function position(r,p,index,used){const q=locate(r,index,used,Math.max(.55,Number(p.radius)||0)+.12);if(!q){metrics.placementFailures++;return false;}p.x=q.x;p.y=q.y;p.r81RoomNode=q.node;used.push(q);return true;}
  function dress(r){if(!eligible(r))return r;surface(r.exploration,r.id);if(applied.get(r)===r.exploration)return r;applied.set(r,r.exploration);
   const spec=D.regions[r.id],native=r.props.filter(p=>!excluded(p)&&!p.r80Dressing&&!p.r74Prop),generic=r.props.filter(p=>!excluded(p)&&p.r74Prop),scene=r.props.filter(p=>p.r80Dressing),used=[];
@@ -67,7 +77,7 @@
   generic.forEach((p,i)=>{if(position(r,p,i*2,used)){const donor=palette[i%Math.max(1,palette.length)];if(donor?.path){p.r81NativeSkin={path:donor.path,height:Math.min(86,Number(donor.height)||68)};metrics.genericReskinned++;}}});
   // R94: passage-like or façade art (R80 list) is swapped for a same-series piece.
   const swap=window.__STORYWORLD_PROP_SUBSTITUTE_R94__||(k=>k),keys=[...new Set((spec.props||[]).map(swap).filter(Boolean))],large=keys.length===1&&D.assets[keys[0]]?.scale>=1.7,count=8;// R140: 지역 장면 소품 12→8(물려받은 검사의 하한 8) — 조형물이 너무 많았다
-  for(let i=0;i<count;i++){const key=keys[i%keys.length],a=D.assets[key];if(!a)continue;let p=scene[i];if(!p){p={id:'r81:scene:'+r.id+':'+i,path:a.path,r80Dressing:true,r80Art:key,r80PresentationOnly:true,solid:false,visible:true,enabled:true,height:64*a.scale};r.props.push(p);}if(position(r,p,i+3,used))metrics.sceneProps++;}
+  for(let i=0;i<count;i++){const key=keys[i%keys.length],a=D.assets[key];if(!a)continue;let p=scene[i];const fresh=!p;if(fresh)p={id:'r81:scene:'+r.id+':'+i,path:a.path,r80Dressing:true,r80Art:key,r80PresentationOnly:true,solid:false,visible:true,enabled:true,height:64*a.scale};if(position(r,p,i+3,used)){metrics.sceneProps++;if(fresh)r.props.push(p);}}/* R179: 자리를 못 찾은 새 소품은 넣지 않는다 — 좌표 없는 소품이 그리기 명령에 NaN 을 넣어 Three 렌더러가 멈췄다(작은 서사 지도) */
   // R80 never made more than six; remove no source object and add no solid object.
   r.worldEnvironmentR81={version:1,family:specs[r.id].family,nativeProps:native.length,genericProps:generic.length,sceneProps:count,occupiedRooms:[...new Set(used.map(p=>p.node))].sort((a,b)=>a-b)};metrics.rooms++;return r;
  }
