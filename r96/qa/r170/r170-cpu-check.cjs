@@ -42,7 +42,7 @@ setImmediate(()=>{
  ok('B·D: midboss every 100 kills (was 111) and D gets them too',/S\.kills<\(x\.r162Mid\+1\)\*100/.test(r103)&&/gradesR170\(dt,r,x,z,ep,L,true\)/.test(r103));
  ok('B·D: 6 sub-bosses at every 90 kills, one boss-grade at 600 from the episode boss',/x\.r170Sub<6&&S\.kills>=\(x\.r170Sub\+1\)\*90/.test(r103)&&/S\.kills>=600/.test(r103)&&/'보스 · '\)\+bd\.name/.test(r103)&&/spare=x\.ep==='RD'\|\|chap\.some/.test(r103)&&/bd\.donor/.test(r103));
  ok('their health is kept (R61 normalisation skipped) and based on attack without samong/EGO buffs',(r103.match(/r61PreserveHealth=true/g)||[]).length>=3&&/function baseAtkR170/.test(r103));
- ok('puppet art is not forced on towers or the boss-grade',/!e\.r170Tower&&!e\.samongBossR170/.test(C('samong-r161.js')));
+ ok('puppet art is not forced on towers; bosses without samong art use the puppet (R177) instead of story art',/!e\.r170Tower&&!hasSamongArt\(e\)/.test(C('samong-r161.js')));
  ok('mob attack FX colour = the mob\'s own palette (unique → glow, secondary → glow)',/function palOf\(e,fam\)/.test(C('play-r169.js'))&&/main:\{a:pl\.p,b:pl\.gp/.test(C('play-r169.js')));
  ok('tree roots sink 9% into the ground',/r99Tree\|\|\/tree\/i\.test\(String\(p\?\.path\|\|''\)\)\)return \.09/.test(C('play-r115.js')));
  let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}

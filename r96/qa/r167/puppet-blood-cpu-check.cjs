@@ -9,7 +9,7 @@ Object.defineProperty(sb,'time',{get:()=>t});vm.createContext(sb);vm.runInContex
 const e={samongR103:'k',hp:10,x:4,y:5,attack:{elapsed:0,angle:0,committed:false,id:1,shape154:{windup:.5,active:.2,recovery:.4,range:1.2}}};
 const d0=S.lunge(e).d;e.attack.elapsed=.5;const d1=S.lunge(e).d;e.attack.elapsed=.7;const d2=S.lunge(e).d;e.attack.elapsed=1.1;const d3=S.lunge(e).d;
 ok('lunge: pulls back during windup, thrusts forward on strike, returns in recovery',d0===0&&d1<-.3&&d2>.7&&Math.abs(d3)<.01,[d0,d1,d2,d3]);
-ok('B midboss puppets are drawn as puppets, plain bosses/midbosses still are not',S.puppetOf({samongR103:'k',midboss:true,samongMidR162:true})&&!S.puppetOf({samongR103:'k',midboss:true})&&!S.puppetOf({samongR103:'k',boss:true}));
+ok('B midboss puppets are drawn as puppets; R177: bosses/midbosses without samong art (none in this sandbox) are puppets too, never story art',S.puppetOf({samongR103:'k',midboss:true,samongMidR162:true})&&S.puppetOf({samongR103:'k',midboss:true})&&S.puppetOf({samongR103:'k',boss:true}));
 room.enemies.push(e);e.r161={};e.attack.committed=true;vm.runInContext('tick()',sb);
 ok('a landed thrust bursts blood at the hero',S.inspect().stats.bursts===1,S.inspect().stats);
 const mb={samongR103:'k',hp:100,x:2,y:2,midboss:true,samongMidR162:true,damage:10,name:'중간보스 · x'};room.enemies.push(mb);
