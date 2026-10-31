@@ -4,19 +4,34 @@
 //  · 세뇌당한 기억의 조각(피의 육망성 조형물)이 깨질 때: 안으로 무너짐(pvfx-void-implosion, 핏빛)
 //  · 잡몹을 부를 때 균열 문(pvfx-rift-portal, combat-r170)·기억 조각 수집물을 주울 때 흩어지는 나방(pvfx-choir-moths, story-collect-r177)
 //  블링크 접힘·공명 방어 문양은 기존 연출에 묻히고 깔끔한 기하 무늬가 화풍과 맞지 않아 쓰지 않는다.
+//  · R179 고유 기술(Q) 중 밋밋하던 다섯 영웅에 프레임 애니메이션을 덧입힌다(사용자 "밋밋한 스킬 이펙트 강화, 다크에덴·다크판타지 느낌"):
+//    네온 회로 폭주 — 맞는 적(가까운 셋)마다 전격 폭발 · 라우렌 잔향 결계 — 표적 마력 폭발 · 헌터 추적 일제사격 — 부채꼴 방출
+//    슬레이어 종결 강타 — 겨눈 방향으로 땅 균열 셋 · 기억사수 기억 재현 — 발밑 노바. 색은 영웅 고유색을 어둡게 눌러(다크 판타지) 보조색으로 빛나게.
+//    환도·서하·미카엘라는 이미 굵은 연출이라 그대로.
 //  시트는 scripts/r178-pvfx-import.py 가 assets/r163/pixelfx/pvfx-*.webp + index.json(출처·라이선스·원본 sha256)으로 만든다.
 //  판정·쿨다운·피해는 건드리지 않는다. 시트가 아직 없으면 아무것도 하지 않는다. storyworld.r178.effects {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_EFFECTS_R178__)return;
 const REV='R178-effects-1',KEY='storyworld.r178.effects';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={ego:0,towers:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={ego:0,towers:0,special:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const X=()=>window.__STORYWORLD_PIXELFX_R163__;
 const pal=()=>{try{const P=window.__STORYWORLD_HERO_FX_R102__?.PALETTE;const c=P?.[player?.hero]||P?.hwando;return c?{a:c.a,b:c.b}:null;}catch(_){return null;}};
+const dark=()=>{const p=pal();return p?{a:p.a.map(v=>Math.round(v*.55)),b:p.b}:null;};
+function near(n,r){try{return (room.enemies||[]).filter(e=>e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<r).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y)).slice(0,n);}catch(_){return[];}}
+function specialFx(){const h=player.hero,P=X();if(!prefs.on||!P)return;const t=dark(),H=typeof actorHeight==='function'?actorHeight():60,ang=Number.isFinite(player.skillAngle)?player.skillAngle:Number.isFinite(player.attackAngle)?player.attackAngle:0;
+ const go=(n,x,y,o)=>{if(P.has?.(n)){P.play(n,x,y,{tint:t||undefined,...o});return true;}return false;};let any=false;
+ if(h==='neon'){near(3,8).forEach((e,i)=>{any=go('pvfx-electric-impact',e.x,e.y,{k:1,delay:.07*i,z:H*.35,flip:i%2===1})||any;});}
+ else if(h==='lauren'){const e=near(1,9)[0];any=go('pvfx-warm-explosion',e?e.x:player.x+Math.cos(ang)*3,e?e.y:player.y+Math.sin(ang)*3,{k:1.35,delay:.18});}
+ else if(h==='hunter'){any=go('pvfx-mass-release',player.x+Math.cos(ang)*.8,player.y+Math.sin(ang)*.8,{k:1.2,z:H*.3,flip:Math.cos(ang)-Math.sin(ang)<0});}
+ else if(h==='slayer'){for(let i=1;i<=3;i++)any=go('pvfx-earth-rupture',player.x+Math.cos(ang)*1.4*i,player.y+Math.sin(ang)*1.4*i,{k:1+.15*i,delay:.09*(i-1)})||any;}
+ else if(h==='gunner'){any=go('pvfx-frost-nova',player.x,player.y,{k:1.8});}
+ if(any)stats.special++;}
 function play(name,x,y,o){if(!prefs.on)return false;const P=X();if(!P?.has?.(name))return false;P.play(name,x,y,{tint:pal()||undefined,...o});return true;}
 try{
  if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){const tw=!!(e&&e.r170Tower&&!e.r178Broke);const r=base.apply(this,[e,...a]);
   try{if(tw&&e.hp<=0){e.r178Broke=true;const P=X();if(prefs.on&&P?.has?.('pvfx-void-implosion')){P.play('pvfx-void-implosion',e.x,e.y,{k:1.1,tint:{a:[100,6,16],b:[255,90,90]},z:(typeof actorHeight==='function'?actorHeight():60)*.4});stats.towers++;}}}catch(err){fail(err);}return r;};}
+ if(typeof special==='function'){const base=special;special=function(...a){const cd0=player?.specialCD||0;const r=base.apply(this,a);try{if(player&&(player.specialCD||0)>cd0)specialFx();}catch(err){fail(err);}return r;};}
  if(typeof ego==='function'){const base=ego;ego=function(...a){const e0=player?.ego||0;const r=base.apply(this,a);
   try{if(player&&(player.ego||0)>e0){play('pvfx-resonant-break',player.x,player.y,{k:1.15,z:(typeof actorHeight==='function'?actorHeight():60)*.3});stats.ego++;}}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}

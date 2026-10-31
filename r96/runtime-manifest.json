@@ -11629,8 +11629,8 @@
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 14295,
-      "sha256": "9f8e5578f1958a89d1772a4946dc66c9647683d42ce4cb7705558daaf066e4cb"
+      "bytes": 17866,
+      "sha256": "3b620c31f39e23e341dd89eac82151ee85bd9b4fcfbab123e363b5af80bf07f4"
     },
     {
       "path": "assets/r163/pixelfx/level-up.webp",
@@ -11703,6 +11703,26 @@
       "sha256": "c722c859064b05bacedb75757a01037732a8f05881f4fc88681d34d8195d0ebe"
     },
     {
+      "path": "assets/r163/pixelfx/pvfx-earth-rupture.webp",
+      "bytes": 244410,
+      "sha256": "9bb05adf824f5cce50f582de1b92cc3eec360e9276b3f77d4dbba3d6408f2944"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-electric-impact.webp",
+      "bytes": 130634,
+      "sha256": "eb9f11bdaf8e67535396b8b01c0deec095ad85a6246791c1a22fb16006f91ff4"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-frost-nova.webp",
+      "bytes": 111906,
+      "sha256": "2688651c74e17a1065ffa2a2f6aa699adf4b1dfc6a41f75d2030f2897845d11d"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-mass-release.webp",
+      "bytes": 196430,
+      "sha256": "edab74d911855ab1eaa7896f7dbed737e150e74c14ec6b804e2ecd9193b40ed3"
+    },
+    {
       "path": "assets/r163/pixelfx/pvfx-resonant-break.webp",
       "bytes": 387356,
       "sha256": "826290fc01cc4625552399a4d1eaac4cff9c082ecc9d7d83fc8e02f28c7677c5"
@@ -11716,6 +11736,11 @@
       "path": "assets/r163/pixelfx/pvfx-void-implosion.webp",
       "bytes": 159016,
       "sha256": "a8d2abc0a2ee099fc5c6502bd4fd093db383547385aba1d76e7a0c0e8968a2b0"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-warm-explosion.webp",
+      "bytes": 146626,
+      "sha256": "c9e3f171b600070ac4664317e626d7155cf771bff8985ea6fcb4fc95f22a9c2c"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
@@ -20339,8 +20364,8 @@
     },
     {
       "path": "effects-r178.js",
-      "bytes": 3002,
-      "sha256": "0eff97b1918be19d805b73f54b25e48c896095dd63536aab3d3ba2c9e3cdd23a"
+      "bytes": 5315,
+      "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
     },
     {
       "path": "ego-restore-health-r79.js",
@@ -20853,8 +20878,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4170,
-  "totalBytes": 796077989,
+  "fileCount": 4175,
+  "totalBytes": 796913879,
   "webHTMLSha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916",
   "largest": [
     {

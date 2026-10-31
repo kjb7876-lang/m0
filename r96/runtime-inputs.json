@@ -3380,7 +3380,12 @@
     "assets/r163/pixelfx/pvfx-rift-portal.webp",
     "assets/r163/pixelfx/pvfx-choir-moths.webp",
     "assets/r163/pixelfx/pvfx-void-implosion.webp",
-    "balance-r179.js"
+    "balance-r179.js",
+    "assets/r163/pixelfx/pvfx-earth-rupture.webp",
+    "assets/r163/pixelfx/pvfx-electric-impact.webp",
+    "assets/r163/pixelfx/pvfx-frost-nova.webp",
+    "assets/r163/pixelfx/pvfx-mass-release.webp",
+    "assets/r163/pixelfx/pvfx-warm-explosion.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4455,5 +4460,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c5c39734e2866a3bb71d3d43f20180313828c6843ffb7487af149c9c508fcac1"
+  "runtimeManifestSHA256": "97db5edb7a9afaaa3389b403032d7cd0cfa5e4c0aa0d5f664976f392b45a8cb4"
 }
