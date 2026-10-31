@@ -81,7 +81,7 @@ function drawDoc(p){const d=p.r177Doc,q=project(p.x,p.y),h=typeof actorHeight===
   if(d.form!=='shard'){ctx.strokeStyle=d.form==='chart'?'#7d8a96':'#8a7458';ctx.lineWidth=.8;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(-w*.35,-hh/2+i*hh/4.5);ctx.lineTo(w*.35,-hh/2+i*hh/4.5);ctx.stroke();}if(d.form==='chart'){ctx.fillStyle='#7d8a96';ctx.fillRect(-w/2,-hh/2,w,hh*.14);}}
  }finally{ctx.restore();}}
 function pickTick(){if(!live())return;const L=docsHere();if(L.length)arm();else disarm();for(const p of L.slice()){if(Math.hypot(p.x-player.x,p.y-player.y)>=1.15)continue;L.splice(L.indexOf(p),1);keep(p.r177Doc);show(p.r177Doc);stats.picked++;
- try{window.__STORYWORLD_PIXELFX_R163__?.play?.('collect-burst',p.x,p.y,{k:.5});}catch(_){}}}
+ try{const PX=window.__STORYWORLD_PIXELFX_R163__;if(p.r177Doc.form==='shard'&&PX?.has?.('pvfx-choir-moths'))PX.play('pvfx-choir-moths',p.x,p.y,{k:.7,loop:false,tint:{a:[100,6,16],b:[255,120,120]}});else PX?.play?.('collect-burst',p.x,p.y,{k:.5});}catch(_){}/* R178: 기억 조각은 흩어지는 핏빛 나방(CC0 PVFX) */}}
 try{
  if(typeof playScenes==='function'){const base=playScenes;playScenes=function(scenes,done,...a){
   try{const rows=Array.isArray(scenes)?scenes.filter(s=>s&&typeof s.text==='string'&&s.text.trim()):[];

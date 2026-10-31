@@ -623,6 +623,94 @@
    "frames": 9,
    "fps": 15.0,
    "loop": false
+  },
+  "pvfx-resonant-break": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/resonant-break/grid/sprite-sheet.png",
+   "sourceSha256": "a810c342bf34684a7b191c715ce4e37fbb768e6bcedab4af715e97fb5a1dd582",
+   "use": "EGO 진입 — 공명이 깨지며 터지는 초승달 조각(영웅 색)",
+   "file": "pvfx-resonant-break.webp",
+   "sha256": "826290fc01cc4625552399a4d1eaac4cff9c082ecc9d7d83fc8e02f28c7677c5",
+   "bytes": 387356,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 34,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-rift-portal": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/rift-portal/grid/sprite-sheet.png",
+   "sourceSha256": "44ecf2b090aa73246fa15046d4ae1a0fec9e2faaaaa701e92bca0562dd7bc927",
+   "use": "피의 육망성 조형물이 잡몹을 부를 때 — 균열 문(핏빛)",
+   "file": "pvfx-rift-portal.webp",
+   "sha256": "752e3ca4e3f0ba221c37d7d484f8e6e494a52115f0f5516802e215e2b31023fb",
+   "bytes": 341870,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 16,
+   "fps": 20.0,
+   "loop": true,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-void-implosion": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/void-implosion/grid/sprite-sheet.png",
+   "sourceSha256": "9faf77b951c88adf14d7521893ccba5a7fa982d2122efb4dae06c621a97d4a40",
+   "use": "세뇌당한 기억의 조각(탑)이 깨질 때 — 안으로 무너짐(핏빛)",
+   "file": "pvfx-void-implosion.webp",
+   "sha256": "a8d2abc0a2ee099fc5c6502bd4fd093db383547385aba1d76e7a0c0e8968a2b0",
+   "bytes": 159016,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    100
+   ],
+   "columns": 5,
+   "frames": 14,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-choir-moths": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/choir-moths/grid/sprite-sheet.png",
+   "sourceSha256": "7dfe945450dbe3d663e1ea381d82ef5f9f27d01f2bfbe5479f9af114f0e93953",
+   "use": "기억 조각 수집물을 주울 때 — 흩어지는 나방(핏빛)",
+   "file": "pvfx-choir-moths.webp",
+   "sha256": "c722c859064b05bacedb75757a01037732a8f05881f4fc88681d34d8195d0ebe",
+   "bytes": 768970,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 60,
+   "fps": 20.0,
+   "loop": true,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
   }
  }
 }
