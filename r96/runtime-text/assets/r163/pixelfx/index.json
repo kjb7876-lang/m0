@@ -220,6 +220,118 @@
    "frames": 36,
    "fps": 15.0,
    "loop": true
+  },
+  "level-up": {
+   "fx": "ui/level-up",
+   "options": {
+    "seed": 1,
+    "text": ""
+   },
+   "use": "레벨이 오를 때(본편은 공용 회복 문양 한 장)",
+   "file": "level-up.webp",
+   "sha256": "bb75366dd411c21a361cb84b5dc57a0195bde8e5155cffdbf982c88b9bc2717a",
+   "bytes": 261064,
+   "frame": [
+    176,
+    138
+   ],
+   "pivot": [
+    88,
+    114
+   ],
+   "columns": 7,
+   "frames": 49,
+   "fps": 15.0,
+   "loop": false
+  },
+  "heal-aoe": {
+   "fx": "holy/heal-aoe",
+   "options": {
+    "seed": 1
+   },
+   "use": "체력 회복(레벨업·5연타 보호막 회복) — 발밑 빛 고리",
+   "file": "heal-aoe.webp",
+   "sha256": "820a8fe40bf4b8215bac6f43f0ec08fb398c4282c5c8f6d974a3541021825669",
+   "bytes": 304544,
+   "frame": [
+    256,
+    136
+   ],
+   "pivot": [
+    128,
+    104
+   ],
+   "columns": 5,
+   "frames": 42,
+   "fps": 15.0,
+   "loop": false
+  },
+  "poof-ash": {
+   "fx": "spawn/poof",
+   "options": {
+    "palette": [
+     "#120b0d",
+     "#2e1d21",
+     "#4f353a",
+     "#765458",
+     "#a07c7e",
+     "#cbb0ae"
+    ],
+    "stars": [
+     "#8a1c28",
+     "#c4454c",
+     "#e8a29e"
+    ],
+    "seed": 2
+   },
+   "use": "몹이 쓰러질 때(본편은 공용 터짐 한 장) — 화면에 동시에 몇 개까지만",
+   "file": "poof-ash.webp",
+   "sha256": "e37bb4a15783c375c7c5c5f630802e971f110500e31603f58ea55c6dda90cd31",
+   "bytes": 40850,
+   "frame": [
+    112,
+    92
+   ],
+   "pivot": [
+    56,
+    80
+   ],
+   "columns": 5,
+   "frames": 22,
+   "fps": 15.0,
+   "loop": false
+  },
+  "portal-teal": {
+   "fx": "arcane/portal",
+   "options": {
+    "palette": [
+     "#02090a",
+     "#06222a",
+     "#0b4a52",
+     "#13807e",
+     "#2fb8a8",
+     "#7ae0cf",
+     "#c8fff2",
+     "#ffffff"
+    ],
+    "seed": 1
+   },
+   "use": "사몽 구역의 열린 끝의 문(반복)",
+   "file": "portal-teal.webp",
+   "sha256": "b273efbac974a6efe5a0a7fd13cea6b8ab98be0b0d75f411a730ea4e858de82c",
+   "bytes": 300706,
+   "frame": [
+    152,
+    116
+   ],
+   "pivot": [
+    76,
+    106
+   ],
+   "columns": 6,
+   "frames": 36,
+   "fps": 15.0,
+   "loop": true
   }
  }
 }

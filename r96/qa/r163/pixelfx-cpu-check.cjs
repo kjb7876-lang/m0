@@ -5,8 +5,8 @@ const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 ok('pixelfx-r163.js runtime copy matches',fs.readFileSync(path.join(R,'runtime-text','pixelfx-r163.js'),'utf8')===C('pixelfx-r163.js'));
 const idx=JSON.parse(fs.readFileSync(path.join(A,'index.json'),'utf8'));
 ok('index names the source repo, commit and MIT license (with the Sprite Fusion notice)',idx.source==='https://github.com/patch-gg/pixelfx'&&/^[0-9a-f]{40}$/.test(idx.commit)&&/^MIT/.test(idx.license)&&/Sprite Fusion/.test(idx.notice));
-const need=['tendrils-blood','hands-blood','meteor','dark-explosion-blood','collect-burst','crit-hit','hit-flash','core-orb-teal'];
-ok('all 8 game effects are present',need.every(n=>idx.effects[n]),Object.keys(idx.effects).join(','));
+const need=['tendrils-blood','hands-blood','meteor','dark-explosion-blood','collect-burst','crit-hit','hit-flash','core-orb-teal','level-up','heal-aoe','poof-ash','portal-teal'];
+ok('all 12 game effects are present (R165 +4)',need.every(n=>idx.effects[n]),Object.keys(idx.effects).join(','));
 const bad=[];for(const[n,e]of Object.entries(idx.effects)){const p=path.join(A,e.file);if(!fs.existsSync(p)){bad.push(n+':missing');continue;}const b=fs.readFileSync(p);if(crypto.createHash('sha256').update(b).digest('hex')!==e.sha256||b.length!==e.bytes)bad.push(n+':hash');
  const w=b.readUInt32LE(4);if(!(e.frames>0&&e.columns>0&&e.frame[0]>0&&e.pivot.length===2&&e.fps===15))bad.push(n+':meta');}
 ok('every sheet matches its recorded sha256/bytes and frame table',!bad.length,bad.join(' '));

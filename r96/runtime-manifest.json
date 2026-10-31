@@ -11618,19 +11618,39 @@
       "sha256": "6c43ae1520d109edc943d589d3bbe95c4182b4e84914e62ca28f2435ccec8700"
     },
     {
+      "path": "assets/r163/pixelfx/heal-aoe.webp",
+      "bytes": 304544,
+      "sha256": "820a8fe40bf4b8215bac6f43f0ec08fb398c4282c5c8f6d974a3541021825669"
+    },
+    {
       "path": "assets/r163/pixelfx/hit-flash.webp",
       "bytes": 9194,
       "sha256": "18de161086e88e0ed3889af5432af247cdea475fffc585c0f50adda31cda6c76"
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 4315,
-      "sha256": "d96bfee681fd5443965636ddf982f2be5505302e30c67be511bdb03c92111071"
+      "bytes": 6400,
+      "sha256": "a17de137b68cace6fe34c9bf55ef74191a16f95c0dbff0c51b48dd11fbb5d6ab"
+    },
+    {
+      "path": "assets/r163/pixelfx/level-up.webp",
+      "bytes": 261064,
+      "sha256": "bb75366dd411c21a361cb84b5dc57a0195bde8e5155cffdbf982c88b9bc2717a"
     },
     {
       "path": "assets/r163/pixelfx/meteor.webp",
       "bytes": 619746,
       "sha256": "deb44ce7e081d6b9d616061076f6540f792fcb3b9e48bad80fe50b9c3c71ffc8"
+    },
+    {
+      "path": "assets/r163/pixelfx/poof-ash.webp",
+      "bytes": 40850,
+      "sha256": "e37bb4a15783c375c7c5c5f630802e971f110500e31603f58ea55c6dda90cd31"
+    },
+    {
+      "path": "assets/r163/pixelfx/portal-teal.webp",
+      "bytes": 300706,
+      "sha256": "b273efbac974a6efe5a0a7fd13cea6b8ab98be0b0d75f411a730ea4e858de82c"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
@@ -20233,6 +20253,11 @@
       "sha256": "9ef25f7106a53b164ebb7dc8ff0c2b611d4b52bdcd2a8e7c3080d5f209a1009d"
     },
     {
+      "path": "effects-r165.js",
+      "bytes": 4000,
+      "sha256": "bace0c4294f1423b7499bc565529a9815e82342a9994de0ca55f82eafb215168"
+    },
+    {
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
@@ -20349,8 +20374,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563836,
-      "sha256": "d44d63164861880fd11470711147c2f2edcc9d165df2ded0430c267e1e46f78e"
+      "bytes": 6563877,
+      "sha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667"
     },
     {
       "path": "intro-r140.js",
@@ -20713,9 +20738,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4142,
-  "totalBytes": 792550898,
-  "webHTMLSha256": "d44d63164861880fd11470711147c2f2edcc9d165df2ded0430c267e1e46f78e",
+  "fileCount": 4147,
+  "totalBytes": 793464188,
+  "webHTMLSha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667",
   "largest": [
     {
       "path": "index.html",
