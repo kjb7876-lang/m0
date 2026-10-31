@@ -41,12 +41,17 @@
  };
  // S-02 밤의 출석부 school: wood floor only (the catalog wall is a non-tileable plaster-over-panel design).
  for(let i=1;i<=8;i++)REGIONS['sz115-S02-'+i]={file:'school',floor:0xece4dc};
+ // R161: 전용 바닥이 없는 사몽 구역(sz115-*)은 STORY 호스트 지역 바닥을 그대로 빌려 쓰던 것을 드라이브 '피로 얼룩진 기억 타일'
+ //  (Samong-Memory-Fallback PART02+03 합본, sha256 f480fb72…, 1254→1024)로 바꾼다. 전달 문서의 조건(사몽 및 그 이후 맵, 적합한 기존 자산이 없을 때만)대로
+ //  위 표에 있는 구역은 그대로 둔다. 바닥만(벽 없음). 엄격 무봉합 검사는 통과하지 못한 조건부 텍스처라 반복 이음매가 약하게 보일 수 있다.
+ const BLOOD=Object.freeze({file:'blood-memory-r161',floor:0xd2cac6,r161:true});
+ const rowOf=k=>REGIONS[k]||(/^sz115-/.test(String(k||''))?BLOOD:null);
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
  // 사몽 구역은 호스트 지역 id(room.id)를 쓰므로 구역 id(samongR115.zone)가 있으면 그것으로 찾는다.
  const keyOf=r=>r?.samongR115?.zone||(r?.samongR103||r?.exploration?.samongR103||r?.exploration?.type==='r103-samong'?null:r?.id);
- const eligible=r=>solo()&&(r?.layer==='STORY'||r?.exploration?.type==='r103-samong')&&!!REGIONS[keyOf(r)]&&!!r.exploration?.surface?.art?.r55PhysicalUV;
+ const eligible=r=>solo()&&(r?.layer==='STORY'||r?.exploration?.type==='r103-samong')&&!!rowOf(keyOf(r))&&!!r.exploration?.surface?.art?.r55PhysicalUV;
  function dress(r){if(!eligible(r))return r;const art=r.exploration.surface.art;if(art.r118Tiles)return r;
-  const k=keyOf(r),row=REGIONS[k];r.exploration.surface={...r.exploration.surface,art:{...art,r118Tiles:{id:k,...row}}};stats.dressed++;return r;}
+  const k=keyOf(r),row=rowOf(k);r.exploration.surface={...r.exploration.surface,art:{...art,r118Tiles:{id:k,...row}}};stats.dressed++;return r;}
  const makeBase=makeRoom;makeRoom=function(...args){const r=makeBase.apply(this,args);try{dress(r);}catch(e){fail(e);}return r;};
  const enterBase=enterRegion;enterRegion=async function(...args){const out=await enterBase.apply(this,args);try{if(out!==false)dress(room);}catch(e){fail(e);}return out;};
  if(typeof restoreSave==='function'){const restoreBase=restoreSave;restoreSave=async function(...args){const out=await restoreBase.apply(this,args);try{if(out!==false)for(const r of new Set([...Object.values(world||{}),room]))dress(r);}catch(e){fail(e);}return out;};}
@@ -77,7 +82,7 @@
   host.appendChild(l);const el=l.querySelector('#r118-tiles');el.checked=prefs.tiles;el.onchange=()=>set({tiles:el.checked});}
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
 
- window.__STORYWORLD_TILES_R118__=Object.freeze({revision:'R118-tiles-1',prefs:()=>({...prefs}),set,regions:REGIONS,
+ window.__STORYWORLD_TILES_R118__=Object.freeze({revision:'R118-tiles-1',prefs:()=>({...prefs}),set,regions:REGIONS,rowOf,
   inspect:()=>({prefs:{...prefs},stats:{...stats},current:typeof room!=='undefined'?room?.exploration?.surface?.art?.r118Tiles||null:null,lastError,collisionChanged:false,layoutRouteChanged:false,savesTouched:false})});
  for(const r of new Set([...Object.values(typeof world==='object'&&world||{}),typeof room==='object'?room:null]))try{dress(r);}catch(e){fail(e);}
 })();
