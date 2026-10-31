@@ -20158,6 +20158,11 @@
       "sha256": "82361ed926e848ef403ce53abdf9ef1eb6b05bbaed2eef58103fa6577cc31e80"
     },
     {
+      "path": "combat-r170.js",
+      "bytes": 18205,
+      "sha256": "7976f7616438c71e6a92fa4e63512d37399c68bb8e72bc03317d941ab5056cdc"
+    },
+    {
       "path": "combat-r98.js",
       "bytes": 6694,
       "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
@@ -20379,8 +20384,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564004,
-      "sha256": "bfebe11aaba9e4bd257e4e2d6c5124b1fb11281d091192af4032f179ae0e5e42"
+      "bytes": 6564044,
+      "sha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf"
     },
     {
       "path": "intro-r140.js",
@@ -20469,13 +20474,13 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 26829,
-      "sha256": "0386aa221912d9869bc85bb071f587d1e2c6676151734a77763120e0a0245d8f"
+      "bytes": 26938,
+      "sha256": "7d42efbc1c94d0f3af0dbe0eae30e257e1e31a374749612ca460649ae3d4c56a"
     },
     {
       "path": "play-r169.js",
-      "bytes": 25380,
-      "sha256": "0ab989321d5bc356907e6aa97e48f8a2d9d5f4ea94a2b2ff182e25d6317dced5"
+      "bytes": 26014,
+      "sha256": "9dd89ff15ca62de52adf686be25fcdcd05a13bf1078e9f2961cf9302957354d3"
     },
     {
       "path": "polish-r100-data.js",
@@ -20534,13 +20539,13 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 76480,
-      "sha256": "69b706818cde4454c7f3a56518751cece7b4b796d6f550545748489d5aea43b2"
+      "bytes": 80249,
+      "sha256": "d4cec8c5c9dc015df34b7c57e9dae480bc8f777bb8eb64ae20cf927c3eb196e9"
     },
     {
       "path": "samong-r161.js",
-      "bytes": 16753,
-      "sha256": "d7ddc0a82cb8eb017a6c1590a1a80d841546e7f5aaa16955c5be753adb878d26"
+      "bytes": 16786,
+      "sha256": "1fdab66e0b12085d9da42084ada26cd0513131ce76e8cce9727aa999d1d80699"
     },
     {
       "path": "samong-text-r103.js",
@@ -20559,8 +20564,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 45679,
-      "sha256": "2ac14a057c78a006c46f5483c211ca178c49c3f178cd953aeeb8810bf2ce57bf"
+      "bytes": 45693,
+      "sha256": "94e143ac9a788fc9b90b00f3430cb85907bc6e1480334a16cee22f23c3cbe809"
     },
     {
       "path": "scene-props-r117.js",
@@ -20753,9 +20758,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4150,
-  "totalBytes": 793394489,
-  "webHTMLSha256": "bfebe11aaba9e4bd257e4e2d6c5124b1fb11281d091192af4032f179ae0e5e42",
+  "fileCount": 4151,
+  "totalBytes": 793417293,
+  "webHTMLSha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf",
   "largest": [
     {
       "path": "index.html",

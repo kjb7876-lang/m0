@@ -100,7 +100,7 @@ function spacingTick(dt){if(!prefs.spacing)return;const list=[];for(const e of r
 
 // ---- ⑤ 조형물 묻기 (play-r113 접지 단계가 묻는다) --------------------------------------------------
 const NOSINK=/wall|door|gate|banner|torch|relief|frame|window|painting|chest|lamp|portal|record|clue|sign|sconce/i;
-function sinkOf(owner,p){if(!prefs.sink)return 0;const id=String(owner?.id||'');if(NOSINK.test(id)||p&&(p.samongR103||p.r115Clue||p.r115Stmt!=null||p.r115Book||p.chest||p.wallMounted))return 0;stats.sunk++;return p?.r99Tree?.04:(.04+(hash(id)%3)*.01);}
+function sinkOf(owner,p){if(!prefs.sink)return 0;const id=String(owner?.id||'');if(NOSINK.test(id)||p&&(p.samongR103||p.r115Clue||p.r115Stmt!=null||p.r115Book||p.chest||p.wallMounted))return 0;stats.sunk++;if(p?.r99Tree||/tree/i.test(String(p?.path||'')))return .09;return .04+(hash(id)%3)*.01;}// R170: 나무는 뿌리가 땅에 박혀 보이게 9%(예전 4%)
 
 // ---- ⑥ 보는 사람 쪽 빛 ----------------------------------------------------------------------------
 function installLight(){if(typeof shadow!=='function')return;const base=shadow;shadow=function(x,y,radius=18,opt={}){if(!prefs.frontLight||typeof ctx==='undefined'||!Number.isFinite(x+y))return base.apply(this,arguments);
