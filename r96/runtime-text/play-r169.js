@@ -64,12 +64,12 @@ function noteTick(){if(!prefs.notes||!solo()||!live()||!SB()?.pending)return;con
  for(const s of pend)if(s.key&&!known.has(s.key))known.set(s.key,s);
  // 대기열에서 빠졌는데 줍지 않은 것 = 정리 서사·포탈에서 이미 보인 것 → 모음에만 넣는다.
  for(const[k,s]of known)if(!keys.has(k)){if(!picked.has(k))collect({key:'story:'+k,title:s.title||'기억',narr:s.narrator,text:s.text,place:placeOf(s)});known.delete(k);}
- const props=room.props||(room.props=[]);for(const p of props.slice())if(p.r169Note&&!keys.has(p.noteKey))room.props=room.props.filter(q=>q!==p);
+ const props=room.props||(room.props=[]);/* 아래 filter 가 room.props 를 새 배열로 바꾸므로 새 쪽지는 room.props 에 직접 넣는다 */for(const p of props.slice())if(p.r169Note&&!keys.has(p.noteKey))room.props=room.props.filter(q=>q!==p);
  const t=T(),todo=pend.find(s=>s.key&&!dropped.has(s.key));
  // R169 균형: 맵의 적을 (남은 쪽지 + 1) 몫으로 나눠 그만큼 처치할 때마다 한 장 — 전투 내내 고루 나온다. 적이 적은 맵은 40초마다.
  const left=pend.filter(s=>s.key&&!dropped.has(s.key)).length,gap=foes>0?Math.max(2,Math.floor(foes/(left+1))):Infinity;
  if(todo&&(kills-dropKills>=gap||t-dropT>=40&&t-enterT>=8)){const near=lastKill&&Math.hypot(lastKill.x-player.x,lastKill.y-player.y)<10?lastKill:{x:player.x+1.3,y:player.y+.7},at=freeSpot(near);
-  dropped.add(todo.key);dropKills=kills;dropT=t;props.push({id:'r169:note:'+todo.key,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r169Note:true,noteKey:todo.key,label:'기억 쪽지',t0:t});stats.noteDrops++;
+  dropped.add(todo.key);dropKills=kills;dropT=t;(room.props||(room.props=[])).push({id:'r169:note:'+todo.key,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r169Note:true,noteKey:todo.key,label:'기억 쪽지',t0:t});stats.noteDrops++;
   try{toast('기억 쪽지가 떨어졌습니다 · 가까이 가면 주워집니다.',2.2);}catch(_){}}
  for(const p of (room.props||[]).slice()){if(!p.r169Note||Math.hypot(p.x-player.x,p.y-player.y)>=1.1)continue;room.props=room.props.filter(q=>q!==p);const s=SB().take(p.noteKey);if(!s)continue;picked.add(p.noteKey);stats.notePicks++;
   const n={key:'story:'+s.key,title:'기억 쪽지 · '+(s.title||placeOf(s)),narr:s.narrator||'',text:s.text,place:placeOf(s)};collect(n);showNote(n);
