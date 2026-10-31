@@ -11638,6 +11638,36 @@
       "sha256": "d12cd47a34057b2f7081b4f47b18516313ca36d9e9d1cf3ee1f4e422b07200b0"
     },
     {
+      "path": "assets/r164/michaela/index.json",
+      "bytes": 2491,
+      "sha256": "aa188511fc5820c3d6f17edf22e24b221f5afa37d05328c1b15c16e8d5c4a7c8"
+    },
+    {
+      "path": "assets/r164/michaela/run-e.webp",
+      "bytes": 153222,
+      "sha256": "addc6fae59a66f0fe111d57175d0e64c7225b35cd99cfbb0ca23df9ba1e72994"
+    },
+    {
+      "path": "assets/r164/michaela/run-n.webp",
+      "bytes": 133922,
+      "sha256": "1f657c573f0e23c967c07d7021c36d952962529a8ce8843f921ab87e78c4e3df"
+    },
+    {
+      "path": "assets/r164/michaela/run-ne.webp",
+      "bytes": 157776,
+      "sha256": "bb58158aa13142609692c342277da66692320c833cbb649d09012c4fd603cd96"
+    },
+    {
+      "path": "assets/r164/michaela/run-s.webp",
+      "bytes": 127550,
+      "sha256": "0ce99db235d6ffe838abf31c27d144e2c930330d000732603465eef0e5e00329"
+    },
+    {
+      "path": "assets/r164/michaela/run-se.webp",
+      "bytes": 153240,
+      "sha256": "4d6848eaa7a9ee0c973e5c2aa075a48aa87c099d9d892c2aa4f1bdaf77cbfcbb"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20569,8 +20599,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 43078,
-      "sha256": "191d65a18f1f85998b1e60c7926b347750f3454b2d72b00dd5c998cba36abe85"
+      "bytes": 43619,
+      "sha256": "eaa18c06d536d4da5539b1e6a78e48849fb6f279ecde563f7cbddbc71b18f61e"
     },
     {
       "path": "visual-r90-world.js",
@@ -20683,8 +20713,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4136,
-  "totalBytes": 791822156,
+  "fileCount": 4142,
+  "totalBytes": 792550898,
   "webHTMLSha256": "d44d63164861880fd11470711147c2f2edcc9d165df2ded0430c267e1e46f78e",
   "largest": [
     {
