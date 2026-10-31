@@ -3,7 +3,7 @@
 (()=>{'use strict';
  const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
  if(!C||window.__STORYWORLD_SPATIAL_R90__)return;
- const prefs=()=>window.__STORYWORLD_VISUAL_R90__?.prefs()||{},MAX_LIGHTS=8,MAX_PARTICLES=72;
+ const prefs=()=>window.__STORYWORLD_VISUAL_R90__?.prefs()||{},MAX_LIGHTS=8,LIGHTS_R172=4,MAX_PARTICLES=72;
  const stats={frames:0,lightSources:0,wallBuilds:0,rimSegments:0,cornerPosts:0,atmosphereBuilds:0,errors:0};let lastError=null;
  const active=f=>f?.layer==='STORY'&&(!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off');
  const sight=()=>window.__STORYWORLD_SIGHT24__?.enabled===true;
@@ -25,7 +25,10 @@
   // R92 props may carry their own colour (blue crystal, violet dream, green cauldron).
   for(const p of window.__STORYWORLD_VISUAL_R91__?.lightPoints?.()||[])add({x:p.x,y:p.y,kind:'lamp',id:p.id});
   for(const p of window.__STORYWORLD_VISUAL_R92__?.lightPoints?.()||[])add({x:p.x,y:p.y,kind:'lamp',id:p.id,color:p.color});
-  return [...found.values()].sort((a,b)=>(hero?Math.hypot(a.x-hero.x,a.y-hero.y)-Math.hypot(b.x-hero.x,b.y-hero.y):0)||a.key.localeCompare(b.key)).slice(0,MAX_LIGHTS);
+  // R172(렉): 화면 밖 불빛까지 8개를 셰이더 반복에 넣던 것을 영웅 10칸 안 가까운 4개로 — 스토리 맵 조각 셰이딩 비용이 컸다.
+  //  포탈 불빛은 멀어도 가까운 2개까지 남긴다(출구 위치를 알리는 빛·R90 포탈 검사).
+  const dist=l=>hero?Math.hypot(l.x-hero.x,l.y-hero.y):0,order=(a,b)=>(dist(a)-dist(b))||a.key.localeCompare(b.key),all=[...found.values()];
+  return [...all.filter(l=>l.portal).sort(order).slice(0,2),...all.filter(l=>!l.portal&&dist(l)<10).sort(order)].slice(0,LIGHTS_R172);
  }
  const LIGHT_TOKEN='gl_FragColor=vec4(k,1.);';
  const LIGHT_HEAD='uniform int r90LocalCount;uniform vec4 r90Local[8];uniform vec3 r90LocalColor[8];\n';

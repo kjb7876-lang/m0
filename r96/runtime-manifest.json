@@ -20699,8 +20699,8 @@
     },
     {
       "path": "visual-r90-world.js",
-      "bytes": 17933,
-      "sha256": "450ff2ab48f9c898194ff87dba57b71483ddd32257181c49784f57207af6ea50"
+      "bytes": 18341,
+      "sha256": "ecc3ab9e3dbeced1e82a0d9d725b3e4257f1119a17a8b80b7d9e007e74fae813"
     },
     {
       "path": "visual-r90.js",
@@ -20794,8 +20794,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 32275,
-      "sha256": "36063c25c709f47bf2d890e01a3144ee39a9c8874ef0d8992c9c34b91508b03c"
+      "bytes": 32546,
+      "sha256": "27e9c0c090090f9ea31f7413b431899d5034a9e46b6e46294af822ebf3ac0485"
     },
     {
       "path": "world-tiles-r118.js",
@@ -20809,7 +20809,7 @@
     }
   ],
   "fileCount": 4161,
-  "totalBytes": 794376585,
+  "totalBytes": 794377264,
   "webHTMLSha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf",
   "largest": [
     {
