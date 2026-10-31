@@ -20369,8 +20369,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563877,
-      "sha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667"
+      "bytes": 6563958,
+      "sha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989"
     },
     {
       "path": "intro-r140.js",
@@ -20459,8 +20459,13 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 26492,
-      "sha256": "e1ba10977c93ce3d23cb034faecf03b6192a388521e5288e05f6f3d6ebce6487"
+      "bytes": 26829,
+      "sha256": "0386aa221912d9869bc85bb071f587d1e2c6676151734a77763120e0a0245d8f"
+    },
+    {
+      "path": "play-r169.js",
+      "bytes": 24754,
+      "sha256": "b4065eeeb28117f5dc99e3f6f156f56af052e8bd29f705fd1de7b4d87afd04bb"
     },
     {
       "path": "polish-r100-data.js",
@@ -20514,8 +20519,8 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 18209,
-      "sha256": "40397b6c98060c90e37e7e4af77d968a87ccc26ef1a7ff29c74b30f9aa6d695e"
+      "bytes": 18397,
+      "sha256": "a6059637a19dca719cc92bf1194d544a42a3d421a064080df99d3cd44cc1c3e5"
     },
     {
       "path": "samong-r103.js",
@@ -20524,8 +20529,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 15809,
-      "sha256": "ba5f0cd03b7210a2b7fdb5a4394085cca11e4400c667002540baa8afeaf15675"
+      "bytes": 16753,
+      "sha256": "d7ddc0a82cb8eb017a6c1590a1a80d841546e7f5aaa16955c5be753adb878d26"
     },
     {
       "path": "samong-text-r103.js",
@@ -20559,8 +20564,8 @@
     },
     {
       "path": "story-batch-r139.js",
-      "bytes": 5501,
-      "sha256": "4c5b13c880cb752fb36163e2894b897256d116c64692ef5482609618363ae09e"
+      "bytes": 5834,
+      "sha256": "fb24e9492669f262078c4b24e09f672408b0714654c380479be66120e2e5bdc9"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -20576,6 +20581,11 @@
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
+    },
+    {
+      "path": "upgrades-r169.js",
+      "bytes": 7173,
+      "sha256": "891cf9efd7cbc55e7c6ecef85c3d1e8d483f702b7a162977257d1db5311c35ca"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -20733,9 +20743,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4146,
-  "totalBytes": 793184306,
-  "webHTMLSha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667",
+  "fileCount": 4148,
+  "totalBytes": 793218116,
+  "webHTMLSha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989",
   "largest": [
     {
       "path": "index.html",

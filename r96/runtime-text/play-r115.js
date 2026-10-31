@@ -128,10 +128,11 @@ function samongTick(){if(!prefs.samongCluster||typeof effects==='undefined'||!(p
 
 // ---- ⑧ 스킬 강화 모음 ----------------------------------------------------------------------------
 const VIEWKEY=KEY+'.book';let view='book';try{view=localStorage.getItem(VIEWKEY)||'book';}catch(_){}
-const GROUPS=[['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],['실검무',/^thread/],['사몽',/dream|samong/i]];
-function bookRows(panel){return[...panel.querySelectorAll('.cards button.card.upgrade')].map(b=>{const id=b.dataset.r62Passive||b.dataset.up||'',name=(b.querySelector('strong')?.textContent||'').trim(),small=b.querySelector('small')?.innerText||'',m=name.match(/^(.*?)\s+(\d+)단계\s*\/\s*(∞|\d+)/)||name.match(/^(.*?)\s+(\d+)\s*\/\s*(∞|\d+)$/),title=m?m[1]:name,lv=m?+m[2]:0,max=m?m[3]:'',line=small.split(/\n/)[0].split(/(?<=[.。])\s/)[0].slice(0,90);
+// R169: 오라 창 한 곳에서 Z·X·C 스킬강화(확률 발동)·일반강화(기존 재능)까지 모두 본다(upgrades-r169 가 카드를 덧붙인다).
+const GROUPS=[['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],['Z·X·C 스킬강화',/^r169proc/],['일반강화',/^r169up/],['실검무',/^thread/],['사몽',/dream|samong/i]];
+function bookRows(panel){return[...panel.querySelectorAll('.cards button.card.upgrade')].map(b=>{const id=b.dataset.r62Passive||b.dataset.up||b.dataset.r169||'',name=(b.querySelector('strong')?.textContent||'').trim(),small=b.querySelector('small')?.innerText||'',m=name.match(/^(.*?)\s+(\d+)단계\s*\/\s*(∞|\d+)/)||name.match(/^(.*?)\s+(\d+)\s*\/\s*(∞|\d+)$/),title=m?m[1]:name,lv=m?+m[2]:0,max=m?m[3]:'',line=small.split(/\n/)[0].split(/(?<=[.。])\s/)[0].slice(0,90);
  return{b,id,title,lv,max,line,cost:(small.match(/강화 비용[^\n]*/)||[''])[0],disabled:b.disabled,img:b.querySelector('img')?.getAttribute('src')||''};});}
-function skillLevels(){try{const g=window.__STORYWORLD_GROWTH_R103__?.state?.(),h=player?.hero;if(!g||!h)return null;return['w','e','r'].map(k=>({k:k.toUpperCase(),n:clamp(finite(g.procs?.[h+':'+k]),0,7)}));}catch(_){return null;}}
+function skillLevels(){try{const g=window.__STORYWORLD_GROWTH_R103__?.state?.(),h=player?.hero;if(!g||!h)return null;return['w','e','r'].map(k=>({k:{w:'Z',e:'X',r:'C'}[k],n:clamp(finite(g.procs?.[h+':'+k]),0,7)}));}catch(_){return null;}}
 function tierInfo(){try{const R=window.__STORYWORLD_HERO_FX_R102__;const t=R?.tier?.(player);return Number.isFinite(t)?t:null;}catch(_){return null;}}
 function buildBook(){const panel=document.getElementById('panel');if(!panel||!prefs.skillBook)return;const cards=panel.querySelector('.cards');if(!cards||!cards.querySelector('button.card.upgrade')||panel.querySelector('#r115Book'))return;
  const rows=bookRows(panel);if(!rows.length)return;stats.books++;
@@ -141,7 +142,7 @@ function buildBook(){const panel=document.getElementById('panel');if(!panel||!pr
  let h='<div id="r115Book"><div class="r115top"><b>스킬 강화 모음</b><span>'+esc(pts||'')+'</span><span class="r115tabs"><button data-r115view="book" class="'+(view==='book'?'on':'')+'">모음 보기</button><button data-r115view="cards" class="'+(view==='cards'?'on':'')+'">자세히</button></span></div>';
  h+='<div class="r115chips">'+(tier!=null?'<span>스킬 연출 '+tier+' / 7 '+bar(tier,7)+'</span>':'')+(sk?sk.map(s=>'<span>'+s.k+' 기술 '+s.n+' / 7 '+bar(s.n,7)+'</span>').join(''):'')+'</div>';
  h+='<div class="r115groups">';for(const[g,list]of groups){if(!list.length)continue;const got=list.filter(r=>r.lv>0).length;h+='<section><h4>'+esc(g)+' <small>'+got+' / '+list.length+' 배움</small></h4>';
-  for(const r of list){const i=rows.indexOf(r);h+='<div class="r115row'+(r.lv>0?' got':'')+'">'+(r.img?'<img src="'+esc(r.img)+'" alt="">':'<i></i>')+'<span class="nm">'+esc(r.title)+'</span><span class="lv">'+(r.max==='1'?(r.lv?'보유':'미보유'):r.lv+'단계')+'</span><span class="ln">'+esc(r.line)+'</span><button data-r115up="'+i+'" '+(r.disabled?'disabled':'')+'>+1</button></div>';}
+  for(const r of list){const i=rows.indexOf(r);h+='<div class="r115row'+(r.lv>0?' got':'')+'">'+(r.img?'<img src="'+esc(r.img)+'" alt="">':'<i></i>')+'<span class="nm">'+esc(r.title)+'</span><span class="lv">'+(r.max==='1'?(r.lv?'보유':'미보유'):r.lv+'단계')+(r.max!=='1'&&/\d+점/.test(r.cost)?' · 다음 '+r.cost.match(/(\d+)점/)[1]+'점':'')+'</span><span class="ln">'+esc(r.line)+'</span><button data-r115up="'+i+'" '+(r.disabled?'disabled':'')+'>+1</button></div>';}
   h+='</section>';}
  h+='</div></div>';
  const box=document.createElement('div');box.innerHTML=h;const el=box.firstChild;cards.parentNode.insertBefore(el,cards);

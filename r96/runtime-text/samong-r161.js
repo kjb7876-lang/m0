@@ -4,7 +4,7 @@
 //  · 꼭두각시 자아: 사몽 구역의 일반 몹 중 사몽 전용 그림(R105 학생·종이 형상)이 없는 몹은 몸 그림을 빼고, 드라이브 '영웅의 꼭두각시 자아'
 //    걷기 8프레임(오른쪽, 왼쪽은 반전)으로 그린다. 그림자·체력바·이름·판정·체력·피해·스킬·저장은 그대로(보이는 것만).
 //    보스·중간보스·페르소나 급과 사몽 전용 그림이 있는 몹은 건드리지 않는다. 걷기 한 동작뿐이라 공격·피격은 같은 걷기 칸 + 번쩍임으로 보인다.
-//  · 세뇌당한 기억의 조각: 사몽 구역마다 통로를 막지 않는 장식 조형물 2개(간소화 1개)를 입구·출구·다른 조형물에서 떨어진 바닥에 둔다.
+//  · 세뇌당한 기억의 조각: 사몽 구역마다 통로를 막지 않는 장식 조형물 하나를 길에서 떨어진, 단서 기록 곁의 트인 바닥에 둔다(R169, 예전 2개).
 //  · 피로 얼룩진 기억 타일: world-tiles-r118.js 에서 전용 바닥이 없는 사몽 구역의 바닥 텍스처로 쓴다.
 //  자산 출처(드라이브, 읽기 전용 원본 보존): Samong-Hero-Puppet-Ego RUNTIME(시트 sha256 bb64255c…), Samong-Memory-Fallback PART01(조형물 f1a9c0a9…),
 //  PART02+03(타일 두 조각 합본 f480fb72…). 세 자산 모두 전달 문서상 '사몽 및 그 이후 맵 전용, 적합한 기존 자산이 없을 때만'의 조건부 후보다.
@@ -92,11 +92,17 @@ function hash(s){let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charC
 function dress(){if(!prefs.sculpture||!solo()||!samongRoom())return;const r=room,L=r.exploration,key=r.samongR103.key||r.samongR103.zone||'';if(!L||r.r161Dressed===key)return;
  r.r161Dressed=key;stats.rooms++;const cells=(L.floorCells||[]).slice();if(!cells.length)return;
  const avoid=[L.entry,r.objective,L.samongR103?.exit,L.samongR103?.dais,L.samongR103?.centre].filter(p=>p&&Number.isFinite(p.x)),props=r.props||(r.props=[]);
- const want=(typeof settings!=='undefined'&&settings.lowFx)?1:2;let h=hash(key),n=0;
- for(let t=0;t<120&&n<want;t++){h=Math.imul(h^(h>>>13),0x5bd1e995)>>>0;const c=cells[h%cells.length],x=c[0]+.5,y=c[1]+.5;
+ // R169(사용자 "서사와 관련된 조형물만, 너무 남발하지 않아 길을 막지 않도록 미적 감각 동원"): 방마다 하나만, 입구→목표·출구 길에서 2.5칸 넘게 떨어진
+ //  사방이 트인 자리에 두고, 단서 기록(record·단서)이 있으면 그 곁(약 2.4칸)에 세워 기록을 지키는 것처럼 보이게 한다.
+ const path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(r)||null,marks=props.filter(p=>p.samongR103==='record'||p.r115Clue),open=(x,y)=>typeof blocked!=='function'||!blocked(x,y,.3,r);
+ const offPath=(x,y)=>{if(!path)return true;for(let dx=-3;dx<=3;dx++)for(let dy=-3;dy<=3;dy++)if(path.has((Math.floor(x)+dx)+','+(Math.floor(y)+dy))&&Math.hypot(Math.floor(x)+dx+.5-x,Math.floor(y)+dy+.5-y)<2.5)return false;return true;};
+ let h=hash(key),n=0,best=null,bs=1e9;
+ for(let t=0;t<260;t++){h=Math.imul(h^(h>>>13),0x5bd1e995)>>>0;const c=cells[h%cells.length],x=c[0]+.5,y=c[1]+.5;
   if(avoid.some(p=>Math.hypot(p.x-x,p.y-y)<4.5))continue;if(props.some(p=>Math.hypot(p.x-x,p.y-y)<2.2))continue;
-  if(typeof blocked==='function'&&[[1,0],[-1,0],[0,1],[0,-1]].filter(([a,b])=>!blocked(x+a,y+b,.3,r)).length<4)continue;// 통로 한가운데(좁은 곳)는 피한다
-  props.push({id:'r161:sculpt:'+key+':'+n,path:SCULPT,x,y,height:118+(h%17),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r161Sculpture:true,flip:!!(h&1)});n++;stats.sculptures++;}
+  if([[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]].some(([a,b])=>!open(x+a,y+b)))continue;// 좁은 곳·벽에 붙은 곳은 피한다
+  if(!offPath(x,y))continue;
+  const d=marks.length?Math.min(...marks.map(m=>Math.hypot(m.x-x,m.y-y))):0,score=marks.length?Math.abs(d-2.4):t;if(score<bs){bs=score;best={x,y};}if(!marks.length)break;}
+ if(best){props.push({id:'r161:sculpt:'+key+':0',path:SCULPT,x:best.x,y:best.y,height:118+(h%17),solid:false,autoTargetEligible6:false,visible:true,r80PresentationOnly:true,r161Sculpture:true,flip:!!(h&1)});n=1;stats.sculptures++;}
  if(n)image(SCULPT);}
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r161Sculpture&&!image(p.path))return;return base.apply(this,[p,...a]);};}
 let next=0;

@@ -51,7 +51,8 @@ function css(){if(document.getElementById('r162Css'))return;const s=document.cre
  +'#r162Note[hidden]{display:none}#r162Note b{display:block;font:700 12px/1.4 "Malgun Gothic",sans-serif;letter-spacing:.06em;color:#7a2a24;margin-bottom:6px}#r162Note small{display:block;color:#6a5440;font-size:12px;margin-bottom:6px}#r162Note p{margin:0 0 8px;white-space:pre-wrap}#r162Note i{display:block;text-align:right;font:11px "Malgun Gothic",sans-serif;color:#7a6650;font-style:normal}'
  +'@media (max-width:780px){#r162Note{top:auto;bottom:calc(var(--bottom,144px) + 12px);max-height:34vh}}';document.head.appendChild(s);}
 function note(z,c,i,N){if(!c)return;let text='',narr='';try{const sc=ZN().scenesFor([c],z,'r162frag');text=sc.map(v=>v.text).join('\n\n');narr=sc[0]?.narrator||'';}catch(e){fail(e);}
- if(!text)text=c.label||'';queue.push({title:'단서조각 '+(i+1)+' / '+N+' · '+z.title,narr,text});stats.notes++;showNext();}
+ if(!text)text=c.label||'';queue.push({title:'단서조각 '+(i+1)+' / '+N+' · '+z.title,narr,text});stats.notes++;showNext();
+ try{window.__STORYWORLD_PLAY_R169__?.collect({key:'r162:'+z.id+':'+i,title:'단서조각 '+(i+1)+' / '+N+' · '+z.title,narr,text,place:z.title});}catch(e){fail(e);}}// R169 쪽지 모음
 function showNext(){if(showing||!queue.length)return;css();if(!noteEl){noteEl=document.createElement('div');noteEl.id='r162Note';noteEl.setAttribute('role','dialog');noteEl.setAttribute('aria-label','단서조각 쪽지');noteEl.onclick=()=>{showing=null;noteEl.hidden=true;showNext();};document.body.appendChild(noteEl);}
  showing=queue.shift();noteEl.innerHTML='';const b=document.createElement('b');b.textContent=showing.title;noteEl.appendChild(b);if(showing.narr){const s=document.createElement('small');s.textContent=showing.narr;noteEl.appendChild(s);}
  for(const para of showing.text.split(/\n{2,}/)){const p=document.createElement('p');p.textContent=para;noteEl.appendChild(p);}const i=document.createElement('i');i.textContent='누르면 닫힘';noteEl.appendChild(i);
