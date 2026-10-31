@@ -11629,8 +11629,8 @@
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 5929,
-      "sha256": "e95b1d1bb144b6dd1b0f4668d236a9683ba148cc7f3aae309b060477a264e85f"
+      "bytes": 11459,
+      "sha256": "aa8049e7dae24190434adb3603f11bd00d7a19477fe9ea909f9627571e69455c"
     },
     {
       "path": "assets/r163/pixelfx/level-up.webp",
@@ -11641,6 +11641,56 @@
       "path": "assets/r163/pixelfx/meteor.webp",
       "bytes": 536716,
       "sha256": "47b1a828f575fe4d10f614d69e33be0dd7b58c5a75ecaf24692ae0307ab28162"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-clinical.webp",
+      "bytes": 15396,
+      "sha256": "c2bf8213147d559c88e065681146f7bbcbe352443799778d86a36a67f0e01c0a"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-coast.webp",
+      "bytes": 94652,
+      "sha256": "a131efa3c03e506c583c7ef42f35e7bd20bf959e0102f2178dc641adad59f1f2"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-domestic.webp",
+      "bytes": 25194,
+      "sha256": "f74fe48a9b28ad7c6c65b151bc6385acf23ea5f31256a9530cb56fca5343dc54"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-forge.webp",
+      "bytes": 104144,
+      "sha256": "9c68f157580585b0799adf400aadb60260cb55b2cb3c60bd49cd8bedefd5ddb9"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-garden.webp",
+      "bytes": 52766,
+      "sha256": "2ab6e8a88a935f62dad8fcf202d4bc66c2306587336df7a73d962b7ac6f15bde"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-memory.webp",
+      "bytes": 237598,
+      "sha256": "23932de3b8cb0a92c142ebc7b0a559cda0a33e9b9b1001cd0ba764f243021077"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-neural.webp",
+      "bytes": 36940,
+      "sha256": "af5882b7ed1677659f7a83c4f074f107bc59586d22b0fc784da1a1f2386cc30a"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-regional.webp",
+      "bytes": 21154,
+      "sha256": "065a4e5ccee887c67f89ab633293901d1374ce97c8a7373eea57cd673ef572e3"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-snow.webp",
+      "bytes": 130682,
+      "sha256": "c7e25ba60742289a43ca4df835ced7b2033d08b7f2712f38b638e34849f74564"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-stone.webp",
+      "bytes": 222634,
+      "sha256": "34f164ae6490652efd5c622d2825848ccf27a45cc081385ac5765f83d0da1ede"
     },
     {
       "path": "assets/r163/pixelfx/portal-teal.webp",
@@ -20454,8 +20504,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 5469,
-      "sha256": "702235f3553683b139a691c466223142088a7ab5dfd97dfce3b8bf4948a06eb3"
+      "bytes": 7137,
+      "sha256": "6b9c45cec85f24fb023802ca4c9c1edbaaac8ffdc3530d43829dce3b00ebd90b"
     },
     {
       "path": "play-r106.js",
@@ -20479,8 +20529,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 26014,
-      "sha256": "9dd89ff15ca62de52adf686be25fcdcd05a13bf1078e9f2961cf9302957354d3"
+      "bytes": 26822,
+      "sha256": "c9fa5f8f754fbf7b3afe7196c183b2b1b2dced0ed3c869352a5647ecdffd9e9a"
     },
     {
       "path": "polish-r100-data.js",
@@ -20758,8 +20808,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4151,
-  "totalBytes": 793427419,
+  "fileCount": 4161,
+  "totalBytes": 794376585,
   "webHTMLSha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf",
   "largest": [
     {

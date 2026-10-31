@@ -13,6 +13,7 @@ from PIL import Image, ImageFilter
 import numpy as np
 
 BLOOD = ["#070203", "#1a0508", "#3a0a12", "#64111f", "#931c2c", "#c43a44", "#ec8a86", "#ffe6df"]
+GRAY = ["#050505", "#1c1c1c", "#383838", "#5a5a5a", "#808080", "#a8a8a8", "#d2d2d2", "#ffffff"]  # R175: 게임에서 물들일 회색
 TEAL = ["#02090a", "#06222a", "#0b4a52", "#13807e", "#2fb8a8", "#7ae0cf", "#c8fff2", "#ffffff"]
 # 게임 이름: (pixelfx 효과, 옵션, 쓰는 곳)
 EFFECTS = {
@@ -29,6 +30,18 @@ EFFECTS = {
     "heal-aoe": ("holy/heal-aoe", {"seed": 1}, "체력 회복(레벨업·5연타 보호막 회복) — 발밑 빛 고리"),
     # R166: poof-ash(만화풍 동글 구름)는 게임 그림체와 맞지 않아 빼고, 몹 사망은 게임의 칠한 연기·불티 스프라이트로 그린다(effects-r165.js).
     "portal-teal": ("arcane/portal", {"palette": TEAL, "seed": 1}, "사몽 구역의 열린 끝의 문(반복)"),
+    # R175(사용자 "pixelfx … 이것도 활용, 이펙트 색은 각자의 이름색+고유색+보조색"): 잡몹 공격 타격 — 지역 서사별 모양을 회색으로 뽑아
+    #  게임에서 그 몹의 R114 고유색·보조색으로 물들인다(pixelfx-r163 tint). 초안 24개를 나란히 그려 보고 고른 것(사람·글씨·검은 배경 든 것은 뺌).
+    "mob-domestic": ("melee/double-slash", {"palette": GRAY, "seed": 2}, "집 — 할퀸 듯한 두 번 베기"),
+    "mob-forge": ("melee/hammer-smash", {"palette": GRAY, "seed": 2}, "대장간 — 망치 내려치기 불티"),
+    "mob-memory": ("shadow/hex-sigil", {"palette": GRAY, "seed": 2}, "기억 — 육망성 문양"),
+    "mob-neural": ("lightning/zap-hit", {"palette": GRAY, "seed": 2}, "신경 — 신경 가지처럼 갈라지는 전류"),
+    "mob-clinical": ("melee/thrust", {"palette": GRAY, "seed": 2}, "병원 — 메스로 찌르기"),
+    "mob-garden": ("nature/vine-whip", {"palette": GRAY, "seed": 2}, "정원 — 덩굴 채찍"),
+    "mob-stone": ("nature/earth-spike", {"palette": GRAY, "seed": 2}, "석조·동굴 — 솟는 돌가시"),
+    "mob-snow": ("ice/ice-shatter", {"palette": GRAY, "seed": 2}, "눈 — 얼음 깨짐"),
+    "mob-coast": ("water/splash", {"palette": GRAY, "seed": 2}, "해안·늪 — 물 튐"),
+    "mob-regional": ("melee/sword-slash", {"palette": GRAY, "seed": 2}, "그 밖 — 베기"),
 }
 STEP = 2
 
@@ -67,8 +80,13 @@ def main():
     commit = subprocess.check_output(["git", "-C", src, "rev-parse", "HEAD"], text=True).strip()
     index = {"source": "https://github.com/patch-gg/pixelfx", "commit": commit, "license": "MIT (Copyright (c) 2026 Patch, Copyright (c) 2026 Hugo Duprez)",
              "notice": "src/core/sim.js 와 일부 효과는 Sprite Fusion(Hugo Duprez, MIT) 효과를 각색 — 저장소 NOTICE.md", "step": STEP, "soften": SOFT, "effects": {}}
+    only = set(filter(None, os.environ.get("R163_ONLY", "").split(",")))  # R175: 이름만 골라 다시 뽑기(나머지 시트·출처표는 그대로)
+    if only and os.path.exists(os.path.join(out, "index.json")):
+        index["effects"] = json.load(open(os.path.join(out, "index.json")))["effects"]
     with tempfile.TemporaryDirectory() as tmp:
         for name, (fx, opts, use) in EFFECTS.items():
+            if only and name not in only:
+                continue
             subprocess.run(["node", "tools/render.mjs", fx, "--sheet", "--no-actor", "--opts", json.dumps(opts), "--out", tmp], cwd=src, check=True, stdout=subprocess.DEVNULL)
             base = os.path.join(tmp, fx, fx.split("/")[1])
             meta = json.load(open(base + ".json"))
