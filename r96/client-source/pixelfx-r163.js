@@ -33,6 +33,10 @@ function tintedSheet(name,im,t){const q=c=>(c||[0,0,0]).map(v=>Math.max(0,Math.m
 function play(name,x,y,o={}){if(!prefs.on||!meta?.[name]||!Number.isFinite(x+y))return null;image(name);
  if(o.key){const old=list.find(e=>e.key===o.key);if(old){old.x=x;old.y=y;if(o.until)old.until=o.until;return old;}}
  if(list.length>=MAX)list.shift();const e={name,x,y,t0:T()+(o.delay||0),rate:o.rate||1,k:o.k||1,h:o.h||0,alpha:o.alpha??1,flip:!!o.flip,loop:o.loop??!!meta[name].loop,key:o.key||null,z:o.z||0,until:o.until||0,tint:o.tint||null};list.push(e);stats.plays++;arm();return e;}
+// R177: 화면 자리에 진행도(0~1)로 한 칸을 바로 그린다 — 이미 진행도를 가진 기존 연출(영웅 스킬 무늬)을 프레임 애니메이션으로 바꿀 때. 그림이 아직 없으면 false.
+function frameAt(name,u,x,y,o={}){const m=meta?.[name];if(!m||!prefs.on||typeof ctx==='undefined'||!ctx)return false;image(name);const raw=image(name);if(!raw)return false;
+ const n=m.frames,fr=Math.max(0,Math.min(n-1,Math.floor(u*n)));const im=o.tint?tintedSheet(name,raw,o.tint):raw;const[fw,fh]=m.frame,[px,py]=m.pivot,s=(o.h||H()*1.9)/fh,sx=(fr%m.columns)*fw,sy=Math.floor(fr/m.columns)*fh;
+ ctx.save();try{ctx.globalAlpha*=o.alpha??1;ctx.translate(x,y);ctx.scale(o.flip?-s:s,s);ctx.drawImage(im,sx,sy,fw,fh,-px,-py,fw,fh);stats.frameAt=(stats.frameAt||0)+1;}catch(err){fail(err);return false;}finally{ctx.restore();}return true;}
 function stop(key){for(let i=list.length-1;i>=0;i--)if(list[i].key===key)list.splice(i,1);}
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function drawAll(){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const t=T();
@@ -48,6 +52,6 @@ try{
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);list.length=0;return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_PIXELFX_R163__=Object.freeze({revision:REV,dir:DIR,set,play,stop,warm,ready:()=>!!meta,has:n=>!!meta?.[n],meta:()=>meta,
+window.__STORYWORLD_PIXELFX_R163__=Object.freeze({revision:REV,dir:DIR,set,play,frameAt,stop,warm,ready:()=>!!meta,has:n=>!!meta?.[n],meta:()=>meta,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},active:list.map(e=>e.name),ready:!!meta,lastError})});
 })();

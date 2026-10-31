@@ -4,6 +4,8 @@
 //  · 사몽 스킬의 간략한 수치(남은 시간/지속·궁극기 파동·즉사 규칙·재사용)는 전투 화면이 아니라 아래 스킬 칸(EGO 진입 단추)에 둔다
 //    (사용자 "세부스펙은 스킬 UI 안으로, 전투화면에서는 빼고"): 단추에 올리거나 길게 누르면 펼쳐지고, 사몽 동안 단추에 남은 시간이 보인다.
 //  · 왼쪽 아래 사몽 아이콘(R160)과 체력 구슬 위 하늘색 보호막 원(R137)은 기본값을 끔(설정에서 다시 켤 수 있음).
+//  · 사몽 구역 이름: 사몽 구역은 쉼터(hub) 지역을 빌려 쓰므로 기본 화면 갱신·입장 배너·메뉴가 '제1부 — …'·'잠들지 못하는 마을' 같은 스토리 이름으로 덮어쓰던 것을
+//    사몽 장(예: 제9부 — 사몽 · 경성의 밤)과 구역 이름(예: 계급장의 거리)으로 맞춘다(사용자 "사몽구역 에피소드 네이밍, 스토리 쪽이랑 혼합되는 버그").
 //  판정·지속·재사용·피해는 건드리지 않는다. storyworld.r177.samongHud {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_HUD_R177__)return;
@@ -32,17 +34,28 @@ function hookBtn(){const b=btn();if(!b||b.__r177)return;b.__r177=true;b.style.po
  let hold=0;b.addEventListener('touchstart',()=>{hold=setTimeout(openTip,420);},{passive:true});b.addEventListener('touchend',()=>{clearTimeout(hold);setTimeout(closeTip,1600);},{passive:true});}
 function leftBadge(on){const b=btn();if(!b)return;let s=b.querySelector('.r177left');if(!on){if(s)s.remove();return;}if(!s){s=document.createElement('span');s.className='r177left';b.appendChild(s);}s.textContent='사몽 '+Math.max(0,player.samong).toFixed(1)+'s';}
 function apply(){try{document.documentElement.classList.toggle('r177-samong',!!prefs.on);}catch(_){}}
+// ---- 사몽 구역 이름 ----
+const cache=new Map();
+function samongNames(){try{if(typeof layer==='undefined'||layer!=='DREAM')return null;const id=room?.samongR103?.zone;if(!id)return null;if(cache.has(id))return cache.get(id);
+ const ZN=window.__STORYWORLD_SAMONG_ZONES_R115__,SM=window.__STORYWORLD_SAMONG_R103__,z=ZN?.zone?.(id);if(!z)return null;let ep=null;
+ for(const e of (SM?.episodes||[])){const zs=ZN.chapter?.(e.key);if(Array.isArray(zs)&&zs.some(q=>q.id===id)){ep=e;break;}}
+ const out={zone:z.title||'',ep:ep?.title||'',chapter:ep?.chapter||''};cache.set(id,out);return out;}catch(e){fail(e);return null;}}
+function fixHud(){const n=samongNames();if(!n)return;const set=(id,v)=>{const el=document.getElementById(id);if(el&&v&&el.textContent!==v)el.textContent=v;};
+ set('regionName',n.zone);const sub=document.getElementById('regionSub');if(sub&&/^제\d+부/.test(sub.textContent)&&!sub.textContent.startsWith(n.chapter))sub.textContent=n.chapter+' · '+n.ep;}
 try{
+ if(typeof displayRegion==='function'){const base=displayRegion;displayRegion=function(id){try{const n=(id===undefined||id===zone)?samongNames():null;if(n&&n.zone)return '사몽 · '+n.ep+' · '+n.zone;}catch(e){fail(e);}return base.apply(this,arguments);};}
+ if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r=base.apply(this,a);try{fixHud();}catch(e){fail(e);}return r;};}
+ if(typeof banner==='function'){const base=banner;banner=function(...a){const r=base.apply(this,a);try{const n=samongNames(),b=document.getElementById('banner');if(n&&b){b.textContent=n.zone;const sm=document.createElement('small');sm.textContent=n.chapter+' · '+n.ep;b.appendChild(sm);stats.banners=(stats.banners||0)+1;}}catch(e){fail(e);}return r;};}
  // R160 사몽 아이콘·R137 보호막 원: 사용자가 따로 켜 둔 적이 없으면 끈다.
  for(const [api,k] of [['__STORYWORLD_COMBAT_R160__','samongIcon'],['__STORYWORLD_COMBAT_R137__','guardOrb']]){try{const A=window[api];if(A?.set&&prefs.on&&!prefs['kept_'+k])A.set({[k]:false});}catch(e){fail(e);}}
  css();apply();
  if(typeof showAwakening==='function'){const base=showAwakening;showAwakening=function(...a){const r=base.apply(this,a);try{if(prefs.on)stats.shows++;}catch(e){fail(e);}return r;};}
  if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);
   try{if(prefs.on&&typeof player==='object'&&player&&player.samong>0){if(typeof cutinUntil!=='undefined'&&typeof time==='number')cutinUntil=Math.max(cutinUntil,time+.2);
-   const now=performance.now();if(now-at>200){at=now;hookBtn();leftBadge(true);if(tipOn){box().innerHTML=spec();place();}stats.updates++;}
+   const now=performance.now();if(now-at>200){at=now;fixHud();hookBtn();leftBadge(true);if(tipOn){box().innerHTML=spec();place();}stats.updates++;}
    const c=document.getElementById('cutin');if(c&&!c.classList.contains('on'))c.classList.add('on');}
-  else{const now=performance.now();if(now-at>500){at=now;hookBtn();leftBadge(false);if(tipOn){box().innerHTML=spec();place();}}}}catch(e){fail(e);}return r;};}
+  else{const now=performance.now();if(now-at>500){at=now;fixHud();hookBtn();leftBadge(false);if(tipOn){box().innerHTML=spec();place();}}}}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();}
-window.__STORYWORLD_SAMONG_HUD_R177__=Object.freeze({revision:REV,set,spec,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+window.__STORYWORLD_SAMONG_HUD_R177__=Object.freeze({revision:REV,set,spec,samongNames,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();

@@ -326,7 +326,12 @@ const STYLES={
 function patSides(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ang=i*TAU/n+rnd(seed,i)*.3,d0=R*(1.05+.25*rnd(seed,i+3)),v=smooth(clamp((u-.05*rnd(seed,i+5))/.55,0,1)),d=d0*(1-v),a=fade*(v<1?1:0)*(1-u*.4);if(a<=0)continue;
  const px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.55,tx=x+Math.cos(ang)*(d+R*.22),ty=y+Math.sin(ang)*(d+R*.22)*.55;streak(tx,ty,px,py,R*.018,rgba(F.a,.7*a));diamond(px,py,R*.03,rgba(i%2?F.b:F.a,.95*a),ang+Math.PI/2);}
  if(u>.55)shock(x,y,R*.5,F,clamp((u-.55)/.45,0,1),fade);}
-function patGround(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ang=rnd(seed,i)*TAU,d=R*(.15+.8*rnd(seed,i+11)),px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.5,t0=.08*rnd(seed,i+2),v=clamp((u-t0)/.5,0,1),rise=Math.sin(Math.PI*v),H=R*(.32+.25*rnd(seed,i+7))*rise,w=R*.045,a=fade*rise;if(a<=.02)continue;
+function patGround(x,y,R,F,u,seed,n,fade){// R177: 솟는 돌가시 프레임 애니메이션 시트가 있으면 한 장짜리 가시 늘이기 대신 시트(그 색으로 물들임)를 몇 자리에
+ const PX=window.__STORYWORLD_PIXELFX_R163__;if(PX?.frameAt&&PX.has?.('mob-stone')){const m=Math.min(4,Math.max(2,Math.round(n/3)));let drew=false;
+  for(let i=0;i<m;i++){const ang=rnd(seed,i)*TAU,d=R*(.15+.7*rnd(seed,i+11)),px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.5,t0=.1*rnd(seed,i+2),v=clamp((u-t0)/.8,0,1);if(v<=0||v>=1)continue;
+   if(PX.frameAt('mob-stone',v,px,py,{h:R*(.7+.25*rnd(seed,i+7)),tint:{a:F.a,b:F.b},flip:rnd(seed,i+3)>.5,alpha:fade}))drew=true;}
+  if(drew){ring(x,y,R*(.4+.6*smooth(u)),R*(.2+.3*smooth(u)),rgba(F.a,.45*fade*(1-u)),1.4*Z());return;}}
+ for(let i=0;i<n;i++){const ang=rnd(seed,i)*TAU,d=R*(.15+.8*rnd(seed,i+11)),px=x+Math.cos(ang)*d,py=y+Math.sin(ang)*d*.5,t0=.08*rnd(seed,i+2),v=clamp((u-t0)/.5,0,1),rise=Math.sin(Math.PI*v),H=R*(.32+.25*rnd(seed,i+7))*rise,w=R*.045,a=fade*rise;if(a<=.02)continue;
  const S6=SPR();if(S6&&S6.draw('spike',F,px,py,w*3.2,H/.97,{alpha:Math.min(1,a*1.05)})){S6.draw('glow',F,px,py,w*5,w*2.5,{alpha:.5*a});continue;}ctx.fillStyle=rgba(F.a,.75*a);ctx.beginPath();ctx.moveTo(px-w,py);ctx.lineTo(px,py-H);ctx.lineTo(px+w,py);ctx.closePath();ctx.fill();ctx.fillStyle=rgba(F.b,.85*a);ctx.beginPath();ctx.moveTo(px-w*.35,py);ctx.lineTo(px,py-H*.85);ctx.lineTo(px+w*.35,py);ctx.closePath();ctx.fill();disc(px,py,w*1.3,rgba(F.a,.35*a));}
  ring(x,y,R*(.4+.6*smooth(u)),R*(.2+.3*smooth(u)),rgba(F.a,.45*fade*(1-u)),1.4*Z());}
 function patSky(x,y,R,F,u,seed,n,fade){for(let i=0;i<n;i++){const ox=(rnd(seed,i)-.5)*2*R*.85,oy=(rnd(seed,i+4)-.5)*R*.7,t0=.4*rnd(seed,i+8),v=clamp((u-t0)/.3,0,1),tx=x+ox,ty=y+oy,top=ty-R*1.9;if(v<=0)continue;
