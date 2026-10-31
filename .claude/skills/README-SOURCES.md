@@ -20,3 +20,12 @@
 - superpowers: `/plugin install superpowers@claude-plugins-official`
 - ponytail: `/plugin marketplace add DietrichGebert/ponytail` 후 `/plugin install ponytail@ponytail`
 - ui-ux-pro-max: `npx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max`
+
+## ui-ux-pro-max 검색 스크립트 쓰는 법
+사용자 2026-10-31 허용. 저장소 안에서 바로 돌리지 말고 격리 모드로:
+
+    python3 -I .claude/skills/ui-ux-pro-max/scripts/search.py "<검색어>" -d style -n 3
+
+- 결과는 웹사이트용 기준(네온·사이버펑크·평면 대시보드 등)이 많다. 그대로 쓰지 않고 `storyworld-art-style` 규칙(손으로 칠한 고딕 호러, 핏빛·금빛·청록)에 맞는 것만 고른다.
+- 쓸 만한 쪽: `-d ux`(간격·대비·터치 크기), `-d typography`, `-d color` 의 대비 판단. 색 자체는 게임 문서를 따른다.
+- 2026-10-31 시험: "dark gothic horror game HUD" → cyberpunk-ui, hud-sci-fi-fui, dark-mode-oled(색은 게임과 안 맞음, 대비·reduced-motion 점검 목록만 참고). "game hud health bar hotbar"(-d ux) → 일치 없음.
