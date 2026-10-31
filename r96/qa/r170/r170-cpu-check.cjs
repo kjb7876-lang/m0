@@ -29,11 +29,11 @@ setImmediate(()=>{
  ok('story mobs bunched in one corner get spread over the map in packs (span > 30 tiles)',span>30,span);
  ok('spread mobs keep their home where they now stand',room.enemies.every(e=>e.homeX===e.x&&e.homeY===e.y));
  // ② 탑
- t=1;vm.runInContext('tick()',sb);const tw=room.enemies.filter(e=>e.r170Tower);if(!tw.length)console.log(JSON.stringify(X.inspect()));
+ t=1;vm.runInContext('tick()',sb);ok('no story tower in the first seconds after entering (saves/tests keep the same enemy list)',!room.enemies.some(e=>e.r170Tower));t=8;const sp=X.nextSpot();sb.player.x=sp.x+3;sb.player.y=sp.y;vm.runInContext('tick()',sb);const tw=room.enemies.filter(e=>e.r170Tower);if(!tw.length)console.log(JSON.stringify(X.inspect()));
  ok('one blood tower appears in a story combat map, using the region statue/memorial art and preserved health',tw.length===1&&/blank_memorial/.test(tw[0].r170Tower.art)&&tw[0].speed===0&&tw[0].r75Tower&&tw[0].r61PreserveHealth===true,tw.map(e=>e.r170Tower&&e.r170Tower.art));
- const T0=tw[0];sb.player.x=T0.x+3;sb.player.y=T0.y;t=10;vm.runInContext('tick()',sb);
+ const T0=tw[0];sb.player.x=T0.x+3;sb.player.y=T0.y;t=12;vm.runInContext('tick()',sb);
  ok('near the hero the tower casts a blood hexagram field under the hero',hazards.some(h=>h.samongPattern==='r170-hex'&&Math.abs(h.x-sb.player.x)<.01&&h.warning>1),hazards.map(h=>h.samongPattern));
- const before=room.enemies.length;t=16.5;vm.runInContext('tick()',sb);ok('every second cast summons two of the map\'s mobs from the hexagram',room.enemies.length===before+2&&room.enemies.slice(-2).every(e=>e.r170Summoned));
+ const before=room.enemies.length;t=18.5;vm.runInContext('tick()',sb);ok('every second cast summons two of the map\'s mobs from the hexagram',room.enemies.length===before+2&&room.enemies.slice(-2).every(e=>e.r170Summoned));
  ok('hexagram is drawn in the effect layer (R167 style), not as the gold hazard sigil',effects.some(e=>e.type==='r170-fx'));
  // ③ 나무 그림자
  shadowCalls=0;sb.drawProp({path:'assets/r99/outdoor/tree-living-03.webp',r99Tree:{}});sb.drawProp({path:'assets/props/v290/blood_altar.webp'});

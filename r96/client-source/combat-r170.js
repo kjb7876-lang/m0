@@ -55,7 +55,8 @@ function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)ret
  let h=(String(room.id).length*7919+n*104729)>>>0;for(let t=0;t<300;t++){h=Math.imul(h^(h>>>13),0x5bd1e995)>>>0;const c=L.floorCells[h%L.floorCells.length],x=c[0]+.5,y=c[1]+.5,d=Math.hypot(x-entry.x,y-entry.y);
   if(d<7||d>26||taken.some(q=>Math.hypot(q.x-x,q.y-y)<6)||!okCell(x,y)||!offPath(x,y))continue;return{x,y};}return null;}
 function towers(){return (room?.enemies||[]).filter(e=>e.r170Tower);}
-let placedKey='';
+let placedKey='',storyAt=0,spotKey='',spot0=null;
+function nearSpot(){const key=String(room.id);if(spotKey!==key){spotKey=key;spot0=wanted()?spotFor(0,[]):null;}return !!spot0&&Math.hypot(spot0.x-player.x,spot0.y-player.y)<10;}
 function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+String(room.samongR103?.zone||'');if(!want){placedKey=key;return;}if(placedKey===key&&towers().length)return;
  const art=artFor();if(!art)return;const donor=(room.enemies||[]).find(e=>e.hp>0&&!major(e)&&!e.r170Tower&&!e.r162Lane);if(!donor)return;placedKey=key;
  let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=JSON.stringify(donor),taken=[];
@@ -118,14 +119,12 @@ try{
  if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h?.samongPattern==='r170-hex'&&h.r170)return;return base.apply(this,[h,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r170-fx'){try{for(const h of hazards)if(h?.r170&&h.age<h.life){const f=()=>drawHex(h);if(typeof ctx.scope==='function')ctx.scope({id:'r170:hex:'+h.id,kind:'effect',x:h.x,y:h.y},f);else f();stats.hexDraws=(stats.hexDraws||0)+1;}}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
- // 탑: 본편은 맵에 들어설 때 한 번(전투 도중에 적 수가 바뀌지 않게), 사몽은 적이 나온 뒤 틱에서.
- if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(samongRoom()&&(T()>=at||T()<at-5)){at=T()+.7;place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170))arm();else disarm();}}catch(e){fail(e);}return r;};}
- // 저장에는 탑이 없다 — 불러온 뒤 같은 자리·같은 id 로 다시 세운다(자리·id 는 맵과 순번으로 정해진다).
- if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(...a){const r=await base.apply(this,a);try{if(r!==false&&live()&&!samongRoom()&&prefs.towers){placedKey='';place();}}catch(e){fail(e);}return r;};}
- if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
-   if(r!==false&&!restore)try{spreadStory();if(!samongRoom()&&prefs.towers)place();}catch(e){fail(e);}return r;};}
+ // 탑: 사몽은 적이 나온 뒤, 본편은 들어선 지 6초 뒤 영웅이 탑 자리 10칸 안에 왔을 때 처음 선다(저장에는 들어가지 않아 다시 오면 새로 선다).
+ if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;if(samongRoom())place();else if(T()>=storyAt&&nearSpot())place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170))arm();else disarm();}}catch(e){fail(e);}return r;};}
+ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';storyAt=T()+6;const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
+   if(r!==false&&!restore)try{spreadStory();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
+window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,nextSpot:()=>{try{nearSpot();}catch(_){}return spot0?{...spot0}:null;},towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},towers:live()?towers().length:0,lastError})});
 })();
