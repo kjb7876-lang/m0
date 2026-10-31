@@ -93,11 +93,15 @@ const major=e=>!!(e?.boss||e?.midboss||e?.persona||e?.cosmic||e?.trial||e?.samon
 // R170(사용자 "이펙트 색은 각자의 이름색 + 고유색 + 보조색에 맞게"): 모양은 지역 서사, 색은 그 몹의 R114 팔레트(이름에 색이 있으면 그 색이 고유색).
 //  주 그림 = 고유색 → 그 발광색, 보조 조각 = 보조색 → 그 발광색. 팔레트가 없는 몹만 지역 기본색.
 function palOf(e,fam){try{const pl=window.__STORYWORLD_COMBAT_R114__?.palette?.(e);if(pl&&pl.p&&pl.s)return{main:{a:pl.p,b:pl.gp||pl.p},sub:{a:pl.s,b:pl.gs||pl.s}};}catch(_){}const M=MOBFX[fam]||MOBFX.regional;return{main:M.pal,sub:M.pal};}
+// R175: 동굴은 석조, 늪은 해안, 잿더미는 대장간 pixelfx 모양을 함께 쓴다.
+const PXFAM={cave:'stone',swamp:'coast',ash:'forge'};
 const seen=new WeakMap(),mfx=[];
-function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();
+let warmed='';
+function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);
   if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
    if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
+   if(a&&a.committed&&s&&s.hit&&!s.px){s.px=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,nm='mob-'+(PXFAM[fam]||fam),P=palOf(e,fam).main;if(X?.has?.(nm)){const sx=Math.cos(a.angle)-Math.sin(a.angle),r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));X.play(nm,e.x+Math.cos(a.angle)*r*.45,e.y+Math.sin(a.angle)*r*.45,{k:1.3,rate:1.2,flip:sx<0,tint:P});stats.mobPixel=(stats.mobPixel||0)+1;}}catch(_){}}// R175: pixelfx 서사 모양을 그 몹 색으로
   else if(s&&!a)seen.delete(e);}
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}
 // 영웅 가까이 그리는 그림은 R106 이 흐리게 하므로(영웅 가림 방지) 칼끝 쪽(사거리 38%)에 두고 overHero 로 그린다.
