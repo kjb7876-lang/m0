@@ -46,7 +46,8 @@ function zoneMode(){try{const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(
 function artFor(){if(samongRoom())return{path:SCULPT,name:'세뇌당한 기억의 조각',h:170};
  try{const reg=regionById?.[room.id];const list=(reg?.regionObjects6||[]).map(o=>typeof o==='string'?{path:o}:o).filter(o=>o&&STATUE.test(String(o.path||'')));if(!list.length)return null;
   const o=list[0];return{path:o.path,name:String(o.name||o.label||o.title||'').trim()||null,h:Math.max(150,(Number(o.height)||100)*1.7)};}catch(_){return null;}}
-function wanted(){if(!live()||!solo())return 0;if(samongRoom()){const m=zoneMode();return m==='B'||m==='D'?2:m==='C'||m==='combat'?1:0;}
+const SPECIAL=new Set(['ep1a08']);// 특수 병동(본편 미로 진행·집결 규칙)은 손대지 않는다
+function wanted(){if(!live()||!solo()||SPECIAL.has(room.id))return 0;if(samongRoom()){const m=zoneMode();return m==='B'||m==='D'?2:m==='C'||m==='combat'?1:0;}
  try{if(typeof safeRegion==='function'&&safeRegion())return 0;}catch(_){}return (room.enemies||[]).filter(e=>e.hp>0&&!major(e)).length>=20?1:0;}
 const okCell=(x,y)=>{try{return typeof blocked!=='function'||[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([a,b])=>!blocked(x+a*.8,y+b*.8,.3,room));}catch(_){return true;}};
 function spotFor(n,taken){const L=room.exploration;if(!L?.floorCells?.length)return null;const path=window.__STORYWORLD_PLAY_R169__?.pathCells?.(room)||null,entry=L.entry||room.r72Entry||player;
@@ -96,7 +97,7 @@ function drawTower(e){const t=e.r170Tower,row=typeof readyImage==='function'?rea
 // ---- ④ 본편 몹을 맵 곳곳에(사용자 "스토리모드 몹 분포 맵 곳곳에, 한쪽 길목에 몰지 말고") ----------------------------------
 //  맵에 들어설 때 아직 싸우지 않은 일반 몹을 셋까지의 무리(첫 몹에서 2.5칸 안)로 묶고, 바닥 칸에서 '가장 먼 점 고르기'로 고른 자리들(입구에서 8칸 넘게,
 //  무리끼리 7칸 넘게, 사방이 트인 곳)에 무리째 옮긴다. 보스·중간보스·나중에 오는 물결·탑은 그대로. storyworld.r170.combat {spread:false}.
-function spreadStory(){if(prefs.spread===false||!live()||!solo()||samongRoom())return;try{if(typeof safeRegion==='function'&&safeRegion())return;}catch(_){}
+function spreadStory(){if(prefs.spread===false||!live()||!solo()||samongRoom()||SPECIAL.has(room.id))return;try{if(typeof safeRegion==='function'&&safeRegion())return;}catch(_){}
  const L=room.exploration;if(!L?.floorCells?.length||room.engaged||room.r170Spread===room.id)return;const mobs=(room.enemies||[]).filter(e=>e.hp>0&&!major(e)&&!e.r170Tower&&e.spawnState==='active'&&!e.attack);if(mobs.length<6)return;
  room.r170Spread=room.id;const entry=L.entry||room.r72Entry||player,packs=[];for(const e of mobs){let p=packs.find(k=>k.length<3&&Math.hypot(k[0].x-e.x,k[0].y-e.y)<2.5);if(p)p.push(e);else packs.push([e]);}// 무리는 셋까지 — 길목에 줄지어 있던 몹이 하나로 뭉쳐 그대로 남지 않게
  const cand=[];let h=(String(room.id).length*2654435761)>>>0;for(let t=0;t<900&&cand.length<420;t++){h=Math.imul(h^(h>>>15),0x2c1b3c6d)>>>0;const c=L.floorCells[h%L.floorCells.length],x=c[0]+.5,y=c[1]+.5;if(Math.hypot(x-entry.x,y-entry.y)<8||!okCell(x,y))continue;cand.push({x,y});}
@@ -107,19 +108,20 @@ function spreadStory(){if(prefs.spread===false||!live()||!solo()||samongRoom())r
  stats.packs=packs.length;}
 
 // ---- 설치 -------------------------------------------------------------------------------------
-let hideAll=false;
 try{
- if(typeof readyImage==='function'){const base=readyImage;readyImage=function(...a){if(hideAll)return null;return base.apply(this,a);};}
  if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
-   if(e?.r170Tower){hideAll=true;let r;try{r=base.apply(this,[e,...a]);}finally{hideAll=false;}try{const f=()=>drawTower(e);if(typeof ctx.scope==='function')ctx.scope({id:'r170:tower:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return r;}
+   // 탑은 본편 몹 그림 대신 조형물 그림만 그린다(전역 readyImage 를 가리면 영웅 그림 고르기까지 흔들려 직접 그린다).
+   if(e?.r170Tower){try{const f=()=>drawTower(e);if(typeof ctx.scope==='function')ctx.scope({id:'r170:tower:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return;}
    if(prefs.quietTells&&telling(e)&&typeof ctx!=='undefined'&&ctx)return muted(ctx,()=>base.apply(this,[e,...a]));
    return base.apply(this,[e,...a]);};}
  // 바닥 예고 칸(drawHazard)에 그린 선은 Three 렌더러에서 거의 보이지 않아(R167 육망성처럼) 이펙트 칸에서 그린다. 본편 금빛 예고는 끈다.
  if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h?.samongPattern==='r170-hex'&&h.r170)return;return base.apply(this,[h,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r170-fx'){try{for(const h of hazards)if(h?.r170&&h.age<h.life){const f=()=>drawHex(h);if(typeof ctx.scope==='function')ctx.scope({id:'r170:hex:'+h.id,kind:'effect',x:h.x,y:h.y},f);else f();stats.hexDraws=(stats.hexDraws||0)+1;}}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
- if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(T()>=at||T()<at-5){at=T()+.7;place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170))arm();else disarm();}}catch(e){fail(e);}return r;};}
- if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';try{spreadStory();}catch(e){fail(e);}return r;};}
+ // 탑: 본편은 맵에 들어설 때 한 번(전투 도중에 적 수가 바뀌지 않게), 사몽은 적이 나온 뒤 틱에서.
+ if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(samongRoom()&&(T()>=at||T()<at-5)){at=T()+.7;place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170))arm();else disarm();}}catch(e){fail(e);}return r;};}
+ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
+   if(r!==false&&!restore)try{spreadStory();if(!samongRoom()&&prefs.towers)place();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_COMBAT_R170__=Object.freeze({revision:REV,set,towers:()=>towers().map(e=>({id:e.id,name:e.name,x:e.x,y:e.y,hp:e.hp,art:e.r170Tower.art})),cast:e=>cast(e),
