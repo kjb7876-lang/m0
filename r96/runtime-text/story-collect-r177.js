@@ -31,7 +31,7 @@ function formOf(rows){const t=rows.map(s=>[s.narrator,s.record?.narrator,s.title
 function live(){return prefs.on&&solo()&&typeof started!=='undefined'&&started&&!(typeof loading!=='undefined'&&loading)&&typeof room!=='undefined'&&room&&typeof player==='object'&&player&&player.hp>0;}
 function spot(){const ok=(x,y)=>{try{return typeof blocked!=='function'||!blocked(x,y,.3,room);}catch(_){return true;}};const taken=docsHere();
  for(let k=0;k<16;k++){const a=k*.83+.4,r=1.4+.12*k,x=player.x+Math.cos(a)*r,y=player.y+Math.sin(a)*r;if(ok(x,y)&&!taken.some(p=>Math.hypot(p.x-x,p.y-y)<.9))return{x,y};}return{x:player.x+.6,y:player.y+.6};}
-let serial=0,styleNext=null;const DOCS=new Map();// 맵 id → 바닥의 수집물(맵 소품 목록에는 넣지 않는다)
+let serial=0;const DOCS=new Map();// 맵 id → 바닥의 수집물(맵 소품 목록에는 넣지 않는다)
 function docsHere(){const k=String(room?.id||'');if(!DOCS.has(k))DOCS.set(k,[]);return DOCS.get(k);}
 const SENT={type:'r177-docs',x:0,y:0,age:0,life:Infinity,r177Sentinel:true};
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
@@ -85,11 +85,12 @@ function pickTick(){if(!live())return;const L=docsHere();if(L.length)arm();else 
 try{
  if(typeof playScenes==='function'){const base=playScenes;playScenes=function(scenes,done,...a){
   try{const rows=Array.isArray(scenes)?scenes.filter(s=>s&&typeof s.text==='string'&&s.text.trim()):[];
-   if(!rows.length||!live()||rows.some(manual)||interacting>0||typeof done==='function'&&!rows.every(freeKey)){if(rows.length){stats.immediate++;styleNext=formOf(rows);}return base.call(this,scenes,done,...a);}
+   if(!rows.length||!live()||rows.some(manual)||interacting>0||typeof done==='function'&&!rows.every(freeKey)){if(rows.length)stats.immediate++;return base.call(this,scenes,done,...a);}
    try{if(typeof readScenes!=='undefined'&&readScenes?.add)for(const s of rows)if(s.key)readScenes.add(s.key);}catch(e){fail(e);}
    drop(rows);if(typeof done==='function')Promise.resolve().then(()=>{try{done();}catch(e){fail(e);}});return;}
   catch(e){fail(e);return base.call(this,scenes,done,...a);}};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r177-docs'){try{if(live())for(const p of docsHere()){const f=()=>drawDoc(p);if(typeof ctx.scope==='function')ctx.scope({id:p.id,kind:'prop',x:p.x,y:p.y},f);else f();}}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
+ if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){try{document.getElementById('panel')?.classList.remove('r177-chart','r177-shard','r177-report','r177-note');}catch(_){}return base.apply(this,a);};}// 다른 창에 종이 모양이 남지 않게
  if(typeof interact==='function'){const base=interact;interact=function(...a){interacting++;try{return base.apply(this,a);}finally{interacting--;}};}
  // 바로 보이는 서사도 같은 종이 모양으로(장면 창의 글 칸에 모양 이름을 단다)
  if(typeof advanceScene==='function'){const base=advanceScene;advanceScene=function(...a){const r=base.apply(this,a);try{const pn=document.getElementById('panel');if(pn){pn.classList.remove('r177-chart','r177-shard','r177-report','r177-note');

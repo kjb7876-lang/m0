@@ -46,8 +46,8 @@ try{
  if(typeof displayRegion==='function'){const base=displayRegion;displayRegion=function(id){try{const n=(id===undefined||id===zone)?samongNames():null;if(n&&n.zone)return '사몽 · '+n.ep+' · '+n.zone;}catch(e){fail(e);}return base.apply(this,arguments);};}
  if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r=base.apply(this,a);try{fixHud();}catch(e){fail(e);}return r;};}
  if(typeof banner==='function'){const base=banner;banner=function(...a){const r=base.apply(this,a);try{const n=samongNames(),b=document.getElementById('banner');if(n&&b){b.textContent=n.zone;const sm=document.createElement('small');sm.textContent=n.chapter+' · '+n.ep;b.appendChild(sm);stats.banners=(stats.banners||0)+1;}}catch(e){fail(e);}return r;};}
- // R160 사몽 아이콘·R137 보호막 원: 사용자가 따로 켜 둔 적이 없으면 끈다.
- for(const [api,k] of [['__STORYWORLD_COMBAT_R160__','samongIcon'],['__STORYWORLD_COMBAT_R137__','guardOrb']]){try{const A=window[api];if(A?.set&&prefs.on&&!prefs['kept_'+k])A.set({[k]:false});}catch(e){fail(e);}}
+ // R160 사몽 아이콘·R137 보호막 원: 처음 한 번 끈다.
+ if(prefs.on&&!prefs.iconsOff){for(const [api,k] of [['__STORYWORLD_COMBAT_R160__','samongIcon'],['__STORYWORLD_COMBAT_R137__','guardOrb']]){try{window[api]?.set?.({[k]:false});}catch(e){fail(e);}}set({iconsOff:true});}// 한 번만 끈다 — 설정에서 다시 켜면 그대로 둔다
  css();apply();
  if(typeof showAwakening==='function'){const base=showAwakening;showAwakening=function(...a){const r=base.apply(this,a);try{if(prefs.on)stats.shows++;}catch(e){fail(e);}return r;};}
  if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);

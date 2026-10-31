@@ -17,6 +17,8 @@ const F=all.find(z=>z.mode==='F'),H0=all.find(z=>z.mode==='H'),H={...H0,goal:{ki
 const room=x=>({samongR103:x,enemies:[]});
 ok('F is done only after the fragments that stood are all broken (and 66 kills, via kills check)',Z.done(room({r173Towers:6,r173Need:6,r173Broken:5}),{...F,goal:{}})===false&&Z.done(room({r173Towers:6,r173Need:6,r173Broken:6}),{...F,goal:{}})===true);
 ok('broken fragments stay broken when the same room is entered again; tower palette is worked out once',/x&&x\.r173PlacedKey===key/.test(C('combat-r170.js'))&&/if\(e\.r170Tower\.pal\)return e\.r170Tower\.pal/.test(C('combat-r170.js')));
+{const B=all.find(z=>z.mode==='B'),bz={...B,goal:{},lead:null,clues:[]},r=room({});r.enemies=[{hp:500,boss:true,samongBossR170:true,name:'보스 · x'}];const shut=Z.done(r,bz)===false;r.enemies[0].hp=0;
+ ok('R177: a combat zone stays shut while its boss(-grade) is alive and opens once it falls',shut&&Z.done(r,bz)===true,{shut});}
 ok('F never locks the door when fewer fragments could stand (towers off, co-op, small zone)',Z.done(room({r173Towers:2,r173Need:2,r173Broken:2}),{...F,goal:{}})===true&&Z.done(room({r173Need:0}),{...F,goal:{}})===true&&Z.done(room({r173Towers:3,r173Need:3,r173Broken:1}),{...F,goal:{}})===false);
 ok('H is done after the 6th wave is cleared, not by kill count',Z.done(room({r173Wave:5}),H)===false&&Z.done(room({r173Wave:6}),H)===true&&Z.done({samongR103:{r173Wave:6},enemies:[{hp:5,samongSurvival:true}]},H)===false);
 ok('G is done when the core arrives',Z.done(room({}),G)===false&&Z.done(room({r173Arrived:true}),G)===true);
