@@ -208,14 +208,14 @@
   let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.midboss=true;e.samongMidR162=true;e.maxHp=e.hp=Math.round(atk*60);e.defScale=(e.defScale||1)*1.4;e.speed=(e.speed||1)*.55;e.damage=(e.damage||8)*1.8;e.name='중간보스 · '+(z.mobName||ep.mobName);x.r162Mid++;
   try{toast('중간보스 '+x.r162Mid+' / 6 · '+e.name,3);sound('boss');}catch(_){}}
  // R162 D(정화의 코어): 세로 길 위쪽 끝에서 쏟아져 내려오는 666마리. 영웅 가까이(3.2칸)가 아니면 코어 쪽으로 곧장 내려오고,
- //  코어에 닿으면 사라지며 코어 체력을 깎는다(짙은 형상 6, 보통 1). 코어 66 이 모두 깎이면 그 구역을 처음부터(처치 0, 적 비움).
- const CORE_R162=66;
+ //  코어에 닿으면 사라지며 코어 체력을 깎는다(짙은 형상 66, 보통 6). 코어 777 이 모두 깎이면 그 구역을 처음부터(처치 0, 적 비움).
+ const CORE_R162=777;// 사용자 2026-10-31 "우리편은 다 7 77 777, 코어체력도 777" — 적이 깎는 양은 적 쪽 숫자(보통 6, 짙은 형상 66)
  function defenseR162(dt,r,x,z,ep,L){const core=L.core||L.exit;if(!core)return;const c=x.r162Core||(x.r162Core={hp:CORE_R162,max:CORE_R162,leaks:0});
   const cells=x.r162Top||(x.r162Top=(()=>{const f=r.exploration.floorCells||[];let m=1e9;for(const[a,b]of f)m=Math.min(m,a+b);return f.filter(([a,b])=>a+b<=m+5).map(([a,b])=>({x:a+.5,y:b+.5}));})());
   const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length,cap=caps().survival;
   if(time>=x.spawnAt&&alive<cap&&cells.length){x.spawnAt=time+.3;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(6,cap-alive);n++){const q=cells[Math.floor(Math.random()*cells.length)];if(!floorAt(q.x,q.y))continue;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'d',aggro:4});if(e){swarm(e,elite);e.r162Lane=true;}}}
   for(const e of r.enemies){if(!living(e)||!e.r162Lane)continue;const dc=Math.hypot(core.x-e.x,core.y-e.y);
-   if(dc<1.4){c.hp-=e.samongElite?6:1;c.leaks++;e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;try{window.__STORYWORLD_SAMONG_PLAY_R162__?.coreHit?.(core,c);}catch(_){}continue;}
+   if(dc<1.4){c.hp-=e.samongElite?66:6;c.leaks++;e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;try{window.__STORYWORLD_SAMONG_PLAY_R162__?.coreHit?.(core,c);}catch(_){}continue;}
    if(Math.hypot(player.x-e.x,player.y-e.y)<3.2)continue;const sp=Math.max(2.6,(e.speed||1)*1.05)*dt,nx=e.x+(core.x-e.x)/dc*sp,ny=e.y+(core.y-e.y)/dc*sp;
    if(!blocked(nx,ny,.25,r)){e.x=nx;e.y=ny;}else if(!blocked(nx,e.y,.25,r))e.x=nx;else if(!blocked(e.x,ny,.25,r))e.y=ny;e.homeX=e.x;e.homeY=e.y;e.moving=true;e.moveVX150=(core.x-e.x)/dc;e.moveVY150=(core.y-e.y)/dc;}
   if(c.hp<=0){for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}
