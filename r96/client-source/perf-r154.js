@@ -7,13 +7,13 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_PERF_R154__||typeof imageCrop!=='function')return;
 const KEY='storyworld.r154.perf',LIMIT=6000;let prefs={cropMemo:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={hit:0,miss:0,skipped:0};const memo=new Map(),base=imageCrop;
+const stats={hit:0,miss:0,skipped:0,failed:0};const memo=new Map(),base=imageCrop;
 const copy=v=>v&&typeof v==='object'?{...v}:v;
 imageCrop=function(im,...rest){
  if(!prefs.cropMemo||rest.length){stats.skipped++;return base.call(this,im,...rest);}
  const src=String(im?.currentSrc||im?.src||''),w=+im?.naturalWidth||0,h=+im?.naturalHeight||0;
  if(!src||!w||!h){stats.skipped++;return base.call(this,im);}
  const k=src+'|'+w+'x'+h;if(memo.has(k)){stats.hit++;return copy(memo.get(k));}
- const v=base.call(this,im);stats.miss++;if(memo.size>=LIMIT)memo.delete(memo.keys().next().value);memo.set(k,copy(v));return v;};
+ const v=base.call(this,im);stats.miss++;if(v==null){stats.failed=(stats.failed||0)+1;return v;}/* R159: 재기 실패(메모리 부족 등 null)는 기억하지 않고 다음에 다시 잰다 */if(memo.size>=LIMIT)memo.delete(memo.keys().next().value);memo.set(k,copy(v));return v;};
 window.__STORYWORLD_PERF_R154__=Object.freeze({inspect:()=>({prefs:{...prefs},stats:{...stats},size:memo.size}),base});
 })();

@@ -89,7 +89,8 @@
   if(!finite(w)||!Number.isFinite(w.width+w.depth))return null;const cx=Math.max(w.x-w.width/2,Math.min(w.x+w.width/2,p.x)),cy=Math.max(w.y-w.depth/2,Math.min(w.y+w.depth/2,p.y));return{d:Math.hypot(p.x-cx,p.y-cy),x:cx,y:cy};}
  function current(){if(!index||typeof room==='undefined'||!room)return null;const key=room;
   if(planKey!==key||plan?.zone!==zone||plan?.layout!==room.exploration){plan={...build(room),zone,layout:room.exploration};planKey=key;}return plan;}
- const byId=id=>index.items.find(i=>i.id===id);
+ // R159: 얼룩·등불마다 장면마다 목록 전체를 훑던 것(index.items.find)을 목록이 바뀔 때만 만드는 Map 으로.
+ let byIdItems=null,byIdMap=null;const byId=id=>{if(byIdItems!==index.items){byIdItems=index.items;byIdMap=new Map();for(const i of index.items||[])if(!byIdMap.has(i.id))byIdMap.set(i.id,i);}return byIdMap.get(id);};
  function image(it){const row=typeof readyImage==='function'?readyImage(it.path):null;return row?.image||null;}
  // The native image cache is purged after region entry; re-request missing rows.
  function preload(p){const now=performance.now();if(now-preloadAt<2000||typeof addImage!=='function'||typeof readyImage!=='function')return;preloadAt=now;
