@@ -623,6 +623,204 @@
    "frames": 9,
    "fps": 15.0,
    "loop": false
+  },
+  "pvfx-resonant-break": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/resonant-break/grid/sprite-sheet.png",
+   "sourceSha256": "a810c342bf34684a7b191c715ce4e37fbb768e6bcedab4af715e97fb5a1dd582",
+   "use": "EGO 진입 — 공명이 깨지며 터지는 초승달 조각(영웅 색)",
+   "file": "pvfx-resonant-break.webp",
+   "sha256": "826290fc01cc4625552399a4d1eaac4cff9c082ecc9d7d83fc8e02f28c7677c5",
+   "bytes": 387356,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 34,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-rift-portal": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/rift-portal/grid/sprite-sheet.png",
+   "sourceSha256": "44ecf2b090aa73246fa15046d4ae1a0fec9e2faaaaa701e92bca0562dd7bc927",
+   "use": "피의 육망성 조형물이 잡몹을 부를 때 — 균열 문(핏빛)",
+   "file": "pvfx-rift-portal.webp",
+   "sha256": "752e3ca4e3f0ba221c37d7d484f8e6e494a52115f0f5516802e215e2b31023fb",
+   "bytes": 341870,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 16,
+   "fps": 20.0,
+   "loop": true,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-void-implosion": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/void-implosion/grid/sprite-sheet.png",
+   "sourceSha256": "9faf77b951c88adf14d7521893ccba5a7fa982d2122efb4dae06c621a97d4a40",
+   "use": "세뇌당한 기억의 조각(탑)이 깨질 때 — 안으로 무너짐(핏빛)",
+   "file": "pvfx-void-implosion.webp",
+   "sha256": "a8d2abc0a2ee099fc5c6502bd4fd093db383547385aba1d76e7a0c0e8968a2b0",
+   "bytes": 159016,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    100
+   ],
+   "columns": 5,
+   "frames": 14,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-choir-moths": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/choir-moths/grid/sprite-sheet.png",
+   "sourceSha256": "7dfe945450dbe3d663e1ea381d82ef5f9f27d01f2bfbe5479f9af114f0e93953",
+   "use": "기억 조각 수집물을 주울 때 — 흩어지는 나방(핏빛)",
+   "file": "pvfx-choir-moths.webp",
+   "sha256": "c722c859064b05bacedb75757a01037732a8f05881f4fc88681d34d8195d0ebe",
+   "bytes": 768970,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    96
+   ],
+   "columns": 5,
+   "frames": 60,
+   "fps": 20.0,
+   "loop": true,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-electric-impact": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/electric-impact/grid/sprite-sheet.png",
+   "sourceSha256": "738b31bb0237431fa7fc70adb2c1d8dfcb5d39da7a5a19a0fbedc066f51aff8f",
+   "use": "네온 고유 기술(회로 폭주) — 맞는 적마다 전격 폭발(영웅 색)",
+   "file": "pvfx-electric-impact.webp",
+   "sha256": "eb9f11bdaf8e67535396b8b01c0deec095ad85a6246791c1a22fb16006f91ff4",
+   "bytes": 130634,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    108
+   ],
+   "columns": 5,
+   "frames": 14,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-warm-explosion": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/warm-explosion/grid/sprite-sheet.png",
+   "sourceSha256": "dee1c564a92054f8765353900a16ba3fe92ea55eb0c8c411331e0152d097e6dc",
+   "use": "라우렌 고유 기술(잔향 결계) — 표적 마력 폭발(영웅 색)",
+   "file": "pvfx-warm-explosion.webp",
+   "sha256": "c9e3f171b600070ac4664317e626d7155cf771bff8985ea6fcb4fc95f22a9c2c",
+   "bytes": 146626,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    116
+   ],
+   "columns": 5,
+   "frames": 15,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-mass-release": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/mass-release/grid/sprite-sheet.png",
+   "sourceSha256": "55a217ccb12c23104c4e07ecaeaf12231f6202b9b8fdf7182d7e5093455d54c1",
+   "use": "헌터 고유 기술(추적 일제사격) — 부채꼴 방출(영웅 색)",
+   "file": "pvfx-mass-release.webp",
+   "sha256": "edab74d911855ab1eaa7896f7dbed737e150e74c14ec6b804e2ecd9193b40ed3",
+   "bytes": 196430,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    144
+   ],
+   "columns": 5,
+   "frames": 30,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-earth-rupture": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/earth-rupture/grid/sprite-sheet.png",
+   "sourceSha256": "93b51e1d31823487b063e0902da22734caaac51d68e91d6d6cfc18461297a5c8",
+   "use": "슬레이어 고유 기술(종결 강타) — 겨눈 방향 땅 균열(영웅 색)",
+   "file": "pvfx-earth-rupture.webp",
+   "sha256": "9bb05adf824f5cce50f582de1b92cc3eec360e9276b3f77d4dbba3d6408f2944",
+   "bytes": 244410,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    142
+   ],
+   "columns": 5,
+   "frames": 20,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
+  },
+  "pvfx-frost-nova": {
+   "source": "PVFX Foundry 0.10.0 (CC0 1.0 Universal) — https://nerijs.itch.io/pvfx-foundry",
+   "sourceFile": "effects/frost-nova/grid/sprite-sheet.png",
+   "sourceSha256": "1d61836778ca6687a791db2576c4a9ab9e79fc8015e77ec5432580bbbbcfb14a",
+   "use": "기억사수 고유 기술(기억 재현) — 발밑 노바(영웅 색)",
+   "file": "pvfx-frost-nova.webp",
+   "sha256": "2688651c74e17a1065ffa2a2f6aa699adf4b1dfc6a41f75d2030f2897845d11d",
+   "bytes": 111906,
+   "frame": [
+    192,
+    192
+   ],
+   "pivot": [
+    96,
+    122
+   ],
+   "columns": 5,
+   "frames": 13,
+   "fps": 20.0,
+   "loop": false,
+   "soften": "x2 nearest, saturation .82, blur .8px, glow 6px .4"
   }
  }
 }

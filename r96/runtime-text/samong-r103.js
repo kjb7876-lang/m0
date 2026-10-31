@@ -387,7 +387,11 @@
  function ending(){S.done=true;saveGame(false);const keys=zonesOf(EP.length-1)?[]:['M2','M3','epilogue'],list=[];for(const k of keys){const s=TEXT()[k];if(!s)continue;for(const b of s.blocks){const t=b.paras.join('\n\n');if(t)list.push({id:room.id,record:{title:s.title,narrator:b.narrator,chapter:'제12부 — 마지막에 남은 사람'},part:'body',text:t,title:s.title,narrator:b.narrator?'〈'+b.narrator+'〉':'',chapter:'제12부 — 마지막에 남은 사람',key:'DREAM:sm103:ending:'+k+':'+list.length});}}
   if(list.length)playScenes(list,record);else record();}
  function record(){const s=TEXT().record,b=s?.blocks?.[0];// 기록 뒤에 해설이나 정답 장면을 붙이지 않습니다.
-  openPanel('<div class="eyebrow">'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'</div><h2>〈'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'〉</h2><div class="storyText r103-record">'+(b?.paras||[]).map(t=>'<p>'+escapeHTML(t)+'</p>').join('')+'</div><div class="actions"><button id="r103End" class="primary">닫기</button></div>');button('r103End',()=>{closePanel(true);leave();});}
+  // R176: 원문에서 진료기록 다음 '에필로그 — 심연의 검사(檢査)와 닫히는 눈'(병원장이 서하와 말을 나누고 미카엘라 병실로 가는 장면)은
+  //  문서가 아니라 장면이다 — 같은 덩어리로 읽혀 기록 창 맨 아래 문단으로 묻혀 있던 것을 떼어, 기록 창을 닫으면 서사 장면으로 보여 준다(문장은 원문 그대로).
+  const all=b?.paras||[],cut=all.findIndex(t=>/^에필로그\s*—/.test(String(t))),paras=cut>=0?all.slice(0,cut):all,epi=cut>=0?all.slice(cut):[];
+  openPanel('<div class="eyebrow">'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'</div><h2>〈'+escapeHTML(b?.narrator||'윤서하의 진료기록')+'〉</h2><div class="storyText r103-record">'+paras.map(t=>'<p>'+escapeHTML(t)+'</p>').join('')+'</div><div class="actions"><button id="r103End" class="primary">'+(epi.length>1?'다음':'닫기')+'</button></div>');
+  button('r103End',()=>{closePanel(true);if(epi.length>1){const title=String(epi[0]),text=epi.slice(1).join('\n\n');playScenes([{id:room.id,record:{title,narrator:'',chapter:'에필로그'},part:'body',text,title,narrator:'',chapter:'에필로그',key:'DREAM:sm103:ending:epilogue-abyss'}],leave);}else leave();});}
  async function leave(){const to=S.returnTo&&regionById[S.returnTo.zone]?S.returnTo:{zone:'hub',layer:'DREAM'};deactivate();await enterRegion(to.zone,null,{layer:to.layer,restore:true});saveGame(false);}
  function deactivate(){S.active=false;stageRoom=null;restoreFlash();const c=overlay;if(c){c.style.display='none';}}
 

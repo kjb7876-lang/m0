@@ -64,12 +64,12 @@ function noteTick(){if(!prefs.notes||!solo()||!live()||!SB()?.pending)return;con
  for(const s of pend)if(s.key&&!known.has(s.key))known.set(s.key,s);
  // 대기열에서 빠졌는데 줍지 않은 것 = 정리 서사·포탈에서 이미 보인 것 → 모음에만 넣는다.
  for(const[k,s]of known)if(!keys.has(k)){if(!picked.has(k))collect({key:'story:'+k,title:s.title||'기억',narr:s.narrator,text:s.text,place:placeOf(s)});known.delete(k);}
- const props=room.props||(room.props=[]);for(const p of props.slice())if(p.r169Note&&!keys.has(p.noteKey))room.props=room.props.filter(q=>q!==p);
+ const props=room.props||(room.props=[]);/* 아래 filter 가 room.props 를 새 배열로 바꾸므로 새 쪽지는 room.props 에 직접 넣는다 */for(const p of props.slice())if(p.r169Note&&!keys.has(p.noteKey))room.props=room.props.filter(q=>q!==p);
  const t=T(),todo=pend.find(s=>s.key&&!dropped.has(s.key));
  // R169 균형: 맵의 적을 (남은 쪽지 + 1) 몫으로 나눠 그만큼 처치할 때마다 한 장 — 전투 내내 고루 나온다. 적이 적은 맵은 40초마다.
  const left=pend.filter(s=>s.key&&!dropped.has(s.key)).length,gap=foes>0?Math.max(2,Math.floor(foes/(left+1))):Infinity;
  if(todo&&(kills-dropKills>=gap||t-dropT>=40&&t-enterT>=8)){const near=lastKill&&Math.hypot(lastKill.x-player.x,lastKill.y-player.y)<10?lastKill:{x:player.x+1.3,y:player.y+.7},at=freeSpot(near);
-  dropped.add(todo.key);dropKills=kills;dropT=t;props.push({id:'r169:note:'+todo.key,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r169Note:true,noteKey:todo.key,label:'기억 쪽지',t0:t});stats.noteDrops++;
+  dropped.add(todo.key);dropKills=kills;dropT=t;(room.props||(room.props=[])).push({id:'r169:note:'+todo.key,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r169Note:true,noteKey:todo.key,label:'기억 쪽지',t0:t});stats.noteDrops++;
   try{toast('기억 쪽지가 떨어졌습니다 · 가까이 가면 주워집니다.',2.2);}catch(_){}}
  for(const p of (room.props||[]).slice()){if(!p.r169Note||Math.hypot(p.x-player.x,p.y-player.y)>=1.1)continue;room.props=room.props.filter(q=>q!==p);const s=SB().take(p.noteKey);if(!s)continue;picked.add(p.noteKey);stats.notePicks++;
   const n={key:'story:'+s.key,title:'기억 쪽지 · '+(s.title||placeOf(s)),narr:s.narrator||'',text:s.text,place:placeOf(s)};collect(n);showNote(n);
@@ -100,7 +100,7 @@ let warmed='';
 function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);
   if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
-   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
+   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14&&!window.__STORYWORLD_PIXELFX_R163__?.has?.('mob-'+(PXFAM[fam]||fam))){/* R176: 시트가 있으면 프레임 애니메이션만 */mfx.push({kind:'hit',fam,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
    if(a&&a.committed&&s&&s.hit&&!s.px){s.px=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,nm='mob-'+(PXFAM[fam]||fam),P=palOf(e,fam).main;if(X?.has?.(nm)){const sx=Math.cos(a.angle)-Math.sin(a.angle),r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));X.play(nm,e.x+Math.cos(a.angle)*r*.45,e.y+Math.sin(a.angle)*r*.45,{k:1.3,rate:1.2,flip:sx<0,tint:P});stats.mobPixel=(stats.mobPixel||0)+1;}}catch(_){}}// R175: pixelfx 서사 모양을 그 몹 색으로
   else if(s&&!a)seen.delete(e);}
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}

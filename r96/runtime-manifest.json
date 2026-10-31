@@ -11629,8 +11629,8 @@
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 11459,
-      "sha256": "aa8049e7dae24190434adb3603f11bd00d7a19477fe9ea909f9627571e69455c"
+      "bytes": 17866,
+      "sha256": "3b620c31f39e23e341dd89eac82151ee85bd9b4fcfbab123e363b5af80bf07f4"
     },
     {
       "path": "assets/r163/pixelfx/level-up.webp",
@@ -11696,6 +11696,51 @@
       "path": "assets/r163/pixelfx/portal-teal.webp",
       "bytes": 175166,
       "sha256": "6ac0ea0f03cd188dff0c5a7416e518cd29f9d59e772fba0d6e80b9c2140f5d1c"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-choir-moths.webp",
+      "bytes": 768970,
+      "sha256": "c722c859064b05bacedb75757a01037732a8f05881f4fc88681d34d8195d0ebe"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-earth-rupture.webp",
+      "bytes": 244410,
+      "sha256": "9bb05adf824f5cce50f582de1b92cc3eec360e9276b3f77d4dbba3d6408f2944"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-electric-impact.webp",
+      "bytes": 130634,
+      "sha256": "eb9f11bdaf8e67535396b8b01c0deec095ad85a6246791c1a22fb16006f91ff4"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-frost-nova.webp",
+      "bytes": 111906,
+      "sha256": "2688651c74e17a1065ffa2a2f6aa699adf4b1dfc6a41f75d2030f2897845d11d"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-mass-release.webp",
+      "bytes": 196430,
+      "sha256": "edab74d911855ab1eaa7896f7dbed737e150e74c14ec6b804e2ecd9193b40ed3"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-resonant-break.webp",
+      "bytes": 387356,
+      "sha256": "826290fc01cc4625552399a4d1eaac4cff9c082ecc9d7d83fc8e02f28c7677c5"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-rift-portal.webp",
+      "bytes": 341870,
+      "sha256": "752e3ca4e3f0ba221c37d7d484f8e6e494a52115f0f5516802e215e2b31023fb"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-void-implosion.webp",
+      "bytes": 159016,
+      "sha256": "a8d2abc0a2ee099fc5c6502bd4fd093db383547385aba1d76e7a0c0e8968a2b0"
+    },
+    {
+      "path": "assets/r163/pixelfx/pvfx-warm-explosion.webp",
+      "bytes": 146626,
+      "sha256": "c9e3f171b600070ac4664317e626d7155cf771bff8985ea6fcb4fc95f22a9c2c"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
@@ -19693,6 +19738,11 @@
       "sha256": "6b19214185896be7fdb0ab6e179b77423e901b0324e5b84e3b8d64cebc3cc913"
     },
     {
+      "path": "balance-r179.js",
+      "bytes": 2632,
+      "sha256": "6ef5443b1066371ab9cd1b265850290b5afa3d5e56e68cbf1d40564f83fe32cb"
+    },
+    {
       "path": "bosses-r104-data.js",
       "bytes": 23577,
       "sha256": "0532ab8aa0e10c46f2ec832ad879688a37f39bef58972030b62726b57d66fe56"
@@ -20209,8 +20259,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 21196,
-      "sha256": "e97b2bcdf02c17b8156cac3381375794ac92cf821bd94c21dc8c235c040db58d"
+      "bytes": 21849,
+      "sha256": "019952cf9e73994b35aee25fe82989b28f81b6fa907344f2de43096b484519cd"
     },
     {
       "path": "combat-r98.js",
@@ -20313,6 +20363,11 @@
       "sha256": "0ae0022ebc307101053bc5c5414b38a1650a258e321015c28b606e0630aa9c3d"
     },
     {
+      "path": "effects-r178.js",
+      "bytes": 5315,
+      "sha256": "c924228f95ce8b22109b1b5a43c6fbeb9a8f6aaff057bd8c374593c00ec8d90f"
+    },
+    {
       "path": "ego-restore-health-r79.js",
       "bytes": 1215,
       "sha256": "ff8cbdd5af4146ffe677acf229d85897144d5f61061d981f02ecf4478d208b63"
@@ -20379,8 +20434,8 @@
     },
     {
       "path": "hero-fx-r102.js",
-      "bytes": 51256,
-      "sha256": "a12ef1d3a35fc1aa64e3945c7d2ba9021b1d2181cdc1a7de64e808cb23267c46"
+      "bytes": 51950,
+      "sha256": "4b981f996806132c101a6c071637bb7af60b78c29d8fee198f38de15c69f2e53"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -20389,8 +20444,8 @@
     },
     {
       "path": "hero-threads-r174.js",
-      "bytes": 11229,
-      "sha256": "230c2a3f2ee1dc3c0289d354a3d1b442d3d5b8f76c1e4819d58d25eba7e33568"
+      "bytes": 11637,
+      "sha256": "5877f449000caf401518ee78c7e7060908b6766015635f1519c1385499ad7187"
     },
     {
       "path": "heroes-r108.js",
@@ -20434,8 +20489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564044,
-      "sha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf"
+      "bytes": 6564254,
+      "sha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916"
     },
     {
       "path": "intro-r140.js",
@@ -20461,6 +20516,11 @@
       "path": "mobs-tune-r116.js",
       "bytes": 8744,
       "sha256": "c805ad734279a79ff81f741d1818997ec6d415a1429d3774aab578def4fd8d91"
+    },
+    {
+      "path": "nav-r176.js",
+      "bytes": 5684,
+      "sha256": "dc9f25885b4cbc747d36fe10f234459df1acfdb8af0b0d972d83ef9952d3d886"
     },
     {
       "path": "painted-vfx-data-r87.js",
@@ -20504,8 +20564,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 7137,
-      "sha256": "6b9c45cec85f24fb023802ca4c9c1edbaaac8ffdc3530d43829dce3b00ebd90b"
+      "bytes": 7988,
+      "sha256": "5cb660b64061d4eec958150958309a26dc526e6efcc1dd435375b7f1d9de1eec"
     },
     {
       "path": "play-r106.js",
@@ -20529,8 +20589,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 26822,
-      "sha256": "c9fa5f8f754fbf7b3afe7196c183b2b1b2dced0ed3c869352a5647ecdffd9e9a"
+      "bytes": 27087,
+      "sha256": "86c43f499ef532a4a1b5f814cdfe9d41800d9913e1d1176c6c7e223726df9761"
     },
     {
       "path": "polish-r100-data.js",
@@ -20573,6 +20633,11 @@
       "sha256": "aecbc8b4d4bbea8462118768d8108d86ca2eb76c867e6dbef934735918e809a9"
     },
     {
+      "path": "samong-hud-r177.js",
+      "bytes": 8561,
+      "sha256": "4fad800a6f350961c13afde6f74be1aaa83d33c58949f7eb9821151ed385350f"
+    },
+    {
       "path": "samong-maps-r105.js",
       "bytes": 43001,
       "sha256": "96036a1e3090b83053cf16c295f1bec04145680bbdbed45540a062b60eade902"
@@ -20589,13 +20654,13 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 84520,
-      "sha256": "de1e3b9192afd7898a01750de5cbbb4c362a8620fdc5b322c0e954a2481b822d"
+      "bytes": 85362,
+      "sha256": "a49adc721447d66c3f7b2997b730791d521d6e9e8110d294219c7bd7130e7254"
     },
     {
       "path": "samong-r161.js",
-      "bytes": 16786,
-      "sha256": "1fdab66e0b12085d9da42084ada26cd0513131ce76e8cce9727aa999d1d80699"
+      "bytes": 17520,
+      "sha256": "9ba8591949a91508829c504011a12f78a4a495d6cb93912dbe64d736e2d25100"
     },
     {
       "path": "samong-text-r103.js",
@@ -20614,8 +20679,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 48450,
-      "sha256": "5e9cefcdf92fd6ad7e6073f6a7bfb66bdf4bb03c5e8cfee55ff1491c7b2e3736"
+      "bytes": 48892,
+      "sha256": "d357ca7192cb08cfb5179aed63e98dc11abd4aac9ab57a7e6267edbd6f804e1d"
     },
     {
       "path": "scene-props-r117.js",
@@ -20643,14 +20708,19 @@
       "sha256": "d02c73aaf228bfcd696ec055a0e5e5f0c922987a6232a65ecb3fe2e1225293c8"
     },
     {
+      "path": "story-collect-r177.js",
+      "bytes": 15279,
+      "sha256": "9d62ee9495751cc7f1540e38093c8fb626effe55c3eb0d0db996e6614c0f2e65"
+    },
+    {
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
     },
     {
       "path": "upgrades-r169.js",
-      "bytes": 12225,
-      "sha256": "2bec9aa07b0f3fa5b226320f436f8b77f79729dbb86f6e7dd95bd393c90cda0f"
+      "bytes": 12645,
+      "sha256": "a7da1a2e9120e6f23b31839a633281e4620fa32790d142ff64461bf86bfeece2"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -20808,9 +20878,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4161,
-  "totalBytes": 794377264,
-  "webHTMLSha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf",
+  "fileCount": 4175,
+  "totalBytes": 796913879,
+  "webHTMLSha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916",
   "largest": [
     {
       "path": "index.html",
