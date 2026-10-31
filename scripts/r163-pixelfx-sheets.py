@@ -23,6 +23,11 @@ EFFECTS = {
     "crit-hit": ("impacts/crit-hit", {"seed": 1}, "기본공격 5연타 폭발(R160)"),
     "hit-flash": ("impacts/hit-flash", {"seed": 1}, "정화의 코어에 적이 닿을 때"),
     "core-orb-teal": ("arcane/arcane-orb", {"palette": TEAL, "seed": 1}, "정화의 코어(D 구역) 빛"),
+    # R165 (사용자 2026-10-31 "부족한 이펙트 총개선, 이미 괜찮은 건 놔두고"): 공용 그림 한 장뿐이던 순간들
+    "level-up": ("ui/level-up", {"seed": 1, "text": ""}, "레벨이 오를 때(본편은 공용 회복 문양 한 장)"),
+    "heal-aoe": ("holy/heal-aoe", {"seed": 1}, "체력 회복(레벨업·5연타 보호막 회복) — 발밑 빛 고리"),
+    "poof-ash": ("spawn/poof", {"palette": ["#120b0d", "#2e1d21", "#4f353a", "#765458", "#a07c7e", "#cbb0ae"], "stars": ["#8a1c28", "#c4454c", "#e8a29e"], "seed": 2}, "몹이 쓰러질 때(본편은 공용 터짐 한 장) — 화면에 동시에 몇 개까지만"),
+    "portal-teal": ("arcane/portal", {"palette": TEAL, "seed": 1}, "사몽 구역의 열린 끝의 문(반복)"),
 }
 STEP = 2
 
@@ -36,7 +41,7 @@ def main():
              "notice": "src/core/sim.js 와 일부 효과는 Sprite Fusion(Hugo Duprez, MIT) 효과를 각색 — 저장소 NOTICE.md", "step": STEP, "effects": {}}
     with tempfile.TemporaryDirectory() as tmp:
         for name, (fx, opts, use) in EFFECTS.items():
-            subprocess.run(["node", "tools/render.mjs", fx, "--sheet", "--opts", json.dumps(opts), "--out", tmp], cwd=src, check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(["node", "tools/render.mjs", fx, "--sheet", "--no-actor", "--opts", json.dumps(opts), "--out", tmp], cwd=src, check=True, stdout=subprocess.DEVNULL)
             base = os.path.join(tmp, fx, fx.split("/")[1])
             meta = json.load(open(base + ".json"))
             sheet = Image.open(base + ".png").convert("RGBA")

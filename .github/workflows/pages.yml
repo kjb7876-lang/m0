@@ -149,6 +149,8 @@ jobs:
         run: node r96/qa/r163/pixelfx-cpu-check.cjs
       - name: R164 michaela run sheets (Drive movement v1) CPU check
         run: node r96/qa/r164/michaela-run-cpu-check.cjs
+      - name: R165 weak-moment effects (level up, heal, deaths, samong portal) CPU check
+        run: node r96/qa/r165/effects-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
