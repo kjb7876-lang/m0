@@ -165,6 +165,8 @@ jobs:
         run: node r96/qa/r174/r174-cpu-check.cjs
       - name: R176 back/forward window navigation and review fixes CPU check
         run: node r96/qa/r176/r176-cpu-check.cjs
+      - name: R177 story text as collectibles (chart / memory shard / report / note) CPU check
+        run: node r96/qa/r177/r177-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0

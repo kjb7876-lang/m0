@@ -20434,8 +20434,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564125,
-      "sha256": "fe8e257a0a3f495b2935f790f0e3256576dc2bba694d5e8fefaf427d63526eac"
+      "bytes": 6564172,
+      "sha256": "44d26f6b76bda056821da17aae23e84430d02512fcef06a3bf73d67017387862"
     },
     {
       "path": "intro-r140.js",
@@ -20579,8 +20579,8 @@
     },
     {
       "path": "samong-hud-r177.js",
-      "bytes": 4576,
-      "sha256": "033cba0603e1fdeffcdd43288e6887c4d48dc9c414687ae9e53e0c7527dabd56"
+      "bytes": 6302,
+      "sha256": "5146d8149c0ec651473d7fb14f5d04eb8b5761cdecaf9eddb994d601febfca77"
     },
     {
       "path": "samong-maps-r105.js",
@@ -20651,6 +20651,11 @@
       "path": "story-canon-r106.js",
       "bytes": 7646,
       "sha256": "d02c73aaf228bfcd696ec055a0e5e5f0c922987a6232a65ecb3fe2e1225293c8"
+    },
+    {
+      "path": "story-collect-r177.js",
+      "bytes": 11805,
+      "sha256": "d8ab3b8d9e3c02d44c4279a477e843b1e7952d12a57bbd0d80b211b3918e5574"
     },
     {
       "path": "story-reader-r122.js",
@@ -20818,9 +20823,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4163,
-  "totalBytes": 794390444,
-  "webHTMLSha256": "fe8e257a0a3f495b2935f790f0e3256576dc2bba694d5e8fefaf427d63526eac",
+  "fileCount": 4164,
+  "totalBytes": 794404022,
+  "webHTMLSha256": "44d26f6b76bda056821da17aae23e84430d02512fcef06a3bf73d67017387862",
   "largest": [
     {
       "path": "index.html",
