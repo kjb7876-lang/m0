@@ -1,7 +1,7 @@
 // R170 — 사용자 2026-10-31 요청 묶음(이토 준지·다크에덴·디아블로풍, 기존 그림체 유지).
 //  ① 근접 공격 준비 화살표·이름표 없애기: '근접 공격 준비/원거리 조준' 상자·글자, 몸에서 뻗는 방향 화살표, 원거리 조준 점선·과녁(R41)을
 //     일반 몹에서 그리지 않는다. 공격은 몸짓(R92/R109 공격 그림·R161 찌르기)과 이펙트(R98·R169)만으로 읽힌다. 판정·시간은 그대로.
-//  ② 피의 탑(고정형 원거리 몹): 맵마다 그 서사의 조형물 그림으로 된 움직이지 않는 적을 둔다(본편 = 그 지역 조형물, 사몽 = 세뇌당한 기억의 조각).
+//  ② 피의 육망성 조형물(고정형 원거리 몹, R176 서사 검수로 지어낸 '피의 탑' 이름을 사용자 표현대로 바꿈): 맵마다 그 서사의 조형물 그림으로 된 움직이지 않는 적을 둔다(본편 = 그 지역 조형물, 사몽 = 세뇌당한 기억의 조각).
 //     가까이 오면 6초마다 영웅 발밑에 피로 그린 육망성을 띄우고(1.3초 예고), 그 자리에서 탑의 고유색·보조색 촉수가 솟아 친다.
 //     두 번에 한 번은 그 맵의 잡몹 둘을 육망성에서 불러낸다(탑 하나당 12마리까지). 본편 전투 맵 1, 사몽 전투 구역 1, B·D 구역 2.
 //  ③ 나무 조형물은 그림자를 그리지 않는다(뿌리 묻기는 play-r115 의 9%).
@@ -63,7 +63,7 @@ function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+Stri
  for(let n=towers().length;n<want;n++){const at=spotFor(n,taken);if(!at)break;taken.push(at);let e;try{e=JSON.parse(snap);}catch(_){break;}
   Object.assign(e,{id:'r170:tower:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
    r170Tower:{art:art.path,h:art.h,next:T()+3,casts:0,summoned:0,snap},r75Tower:true,r61PreserveHealth:true,speed:0,ai:'melee',samongElite:false,samongSurvival:false,r162Lane:false,samongSubR170:false,
-   name:art.name||(donor.name||'')+' · 피의 탑'});
+   name:art.name||'피의 육망성 조형물'});
   e.maxHp=e.hp=Math.round(samongRoom()?atk*25:Math.max(60,(Number(donor.maxHp)||60)*6));e.damage=(Number(donor.damage)||10)*1.3;e.defScale=1;e.cd=99;
   room.enemies.push(e);stats.towers++;try{if(typeof ensureImages==='function')ensureImages([art.path]);}catch(_){}}}
 function palOf(e){const P=window.__STORYWORLD_COMBAT_R114__?.palette;let pl=null;try{pl=P?P(JSON.parse(e.r170Tower.snap)):null;}catch(_){}
