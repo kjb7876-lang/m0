@@ -202,7 +202,7 @@
   let at=-1;out.forEach((z,i)=>{if(z.kind==='confront')at=i;});if(at<0)at=out.length;
   const ref=out.find(z=>z.kind==='combat')||out[0]||{};
   const extra=[];
-  if(!hasB)extra.push(expand({id:'sz162-'+key+'-B',title:'666의 광장',kind:'combat',mode:'B',style:ref.style,tpl:'arena',p:{r:14,name:'666의 광장',ante:'광장 어귀'},goal:{kills:666},props:[['brazier',4],['obelisk',2]],r162New:true}));
+  if(!hasB)extra.push(expand({id:'sz162-'+key+'-B',title:'광장 · 처치 666',kind:'combat',mode:'B',style:ref.style,tpl:'arena',p:{r:14,name:'광장 · 처치 666',ante:'광장 어귀'},goal:{kills:666},props:[['brazier',4],['obelisk',2]],r162New:true}));
   extra.push(expand({id:'sz162-'+key+'-D',title:'정화의 코어',kind:'combat',mode:'D',style:ref.style,tpl:'lane',p:{name:'정화의 코어로 가는 길'},goal:{kills:666},props:[['brazier',4]],r162New:true}));
   // R173(사용자 "사몽 B·D 같은 전투 방식이 많았으면"): 보통 처치 66 전투 구역을 차례로 보통 → F(세뇌당한 기억의 조각 6개 깨기) → H(여섯 물결)로 바꾸고,
   //  에피소드마다 G(정화의 코어 호위) 구역을 하나 더한다. 처치 위주(버티기 없음)·적 6/66/666·우리 편 777 규칙 그대로. storyworld.r173.modes {on:false} 로 끈다.
@@ -257,7 +257,7 @@
  const solveOf=z=>{const S=st();if(!S)return{};S.zoneSolve=S.zoneSolve||{};return S.zoneSolve[z.id]||(S.zoneSolve[z.id]={stmt:0,book:0,cut:0});};
  function cluesDone(z){return(z.clues||[]).every((c,i)=>read(clueId(z,i)));}
  function done(r,z){const S=st();if(S?.zoneDone?.includes(z.id))return true;const g=z.goal||{};if(z.kind==='explore')return cluesDone(z);
-  if(z.kind==='combat'){if(z.lead&&r?.samongR103&&(!r.samongR103.leadId||r.samongR103.leadAlive))return false;if(g.kills&&z.mode!=='H'&&(S?.kills||0)<g.kills)return false;if(g.hold&&(r?.samongR103?.holdT||0)<g.hold)return false;if(g.clues&&!cluesDone(z))return false;const x=r?.samongR103;if(z.mode==='F'&&!((x?.r173Towers||0)>=6&&(x?.r173Broken||0)>=6))return false;if(z.mode==='H'&&((x?.r173Wave||0)<6||(r?.enemies||[]).some(e=>e.hp>0&&e.samongSurvival&&!e.deadRecorded)))return false;if(z.mode==='G'&&!x?.r173Arrived)return false;return true;}
+  if(z.kind==='combat'){if(z.lead&&r?.samongR103&&(!r.samongR103.leadId||r.samongR103.leadAlive))return false;if(g.kills&&z.mode!=='H'&&(S?.kills||0)<g.kills)return false;if(g.hold&&(r?.samongR103?.holdT||0)<g.hold)return false;if(g.clues&&!cluesDone(z))return false;const x=r?.samongR103;if(z.mode==='F'&&(x?.r173Broken||0)<(x?.r173Need??0))return false;/* 실제로 선 조각 수만큼(탑 끔·함께하기·자리 부족이면 그만큼 줄어 갇히지 않는다) */if(z.mode==='H'&&((x?.r173Wave||0)<6||(x?.r173Pend||0)>0||(r?.enemies||[]).some(e=>e.hp>0&&e.samongSurvival&&!e.deadRecorded)))return false;if(z.mode==='G'&&!x?.r173Arrived)return false;return true;}
   return false;}
  function use(p,api){const z=zone(room?.samongR103?.zone);if(!z)return false;
   if(p.r115Clue){const i=(z.clues||[]).findIndex((c,n)=>clueId(z,n)===p.r115Clue),c=z.clues[i];if(!c)return false;
@@ -311,9 +311,9 @@
   else if(z.kind==='explore'){text='원문 단서 '+got+' / '+clues+' · 빛나는 표식에서 E';unlock='단서를 모두 보면 다음 문';}
   else if(z.kind==='combat'&&z.mode==='D'){const c=x.r162Core;text='정화의 코어를 지키세요 · 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(c?' · 코어 '+Math.max(0,Math.ceil(c.hp))+' / '+c.max:'');unlock='666마리를 막아내면 문';}
   else if(z.kind==='combat'&&z.mode==='B'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+'쏟아지는 적 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(x.r162Mid?' · 중간보스 '+x.r162Mid+' / 6':'')+(clues?' · 단서조각 '+got+'/'+clues:'');unlock='666마리를 쓰러뜨리면 문';}
-  else if(z.kind==='combat'&&z.mode==='F'){text='세뇌당한 기억의 조각 '+(x.r173Broken||0)+' / 6 깨기 · 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(clues?' · 단서조각 '+got+'/'+clues:'');unlock='조각 6개를 모두 깨고 66마리를 쓰러뜨리면 문';}
+  else if(z.kind==='combat'&&z.mode==='F'){const need=x.r173Need??6;text=(need?'세뇌당한 기억의 조각 '+Math.min(x.r173Broken||0,need)+' / '+need+' 깨기 · ':'')+'처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(clues?' · 단서조각 '+got+'/'+clues:'');unlock=need?'조각 '+need+'개를 모두 깨고 66마리를 쓰러뜨리면 문':'66마리를 쓰러뜨리면 문';}
   else if(z.kind==='combat'&&z.mode==='H'){text='물결 '+Math.min(6,x.r173Wave||0)+' / 6 · 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(clues?' · 단서조각 '+got+'/'+clues:'');unlock='여섯 물결을 모두 쓸어내면 문';}
-  else if(z.kind==='combat'&&z.mode==='G'){const c=x.r173Light;text='정화의 코어를 위쪽 끝까지 호위 · '+(c?Math.round(100*(c.prog||0))+'% · 코어 '+Math.max(0,Math.ceil(c.hp))+' / '+c.max:'')+' · 가까운 적을 쓰러뜨려야 나아갑니다';unlock='코어가 문 앞에 닿으면 문';}
+  else if(z.kind==='combat'&&z.mode==='G'){const c=x.r173Light;text='정화의 코어를 위쪽 끝까지 호위'+(c?' · '+Math.round(100*(c.prog||0))+'% · 코어 '+Math.max(0,Math.ceil(c.hp))+' / '+c.max:'')+' · 가까운 적을 쓰러뜨려야 나아갑니다';unlock='코어가 문 앞에 닿으면 문';}
   else if(z.kind==='combat'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+(g.kills?'처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills:'')+(g.hold?'버티기 '+Math.min(g.hold,Math.floor(x.holdT||0))+' / '+g.hold+'초':'')+(clues?(z.r162Frag?' · 단서조각 ':' · 단서 ')+got+'/'+clues:'')+(g.reach?' · 끝의 문까지':'');unlock=g.reach?'목표를 채우면 끝의 문이 열립니다':'목표를 채우면 문';}
   else if(z.kind==='maze'){text=z.stealth?'순찰자는 쓰러지지 않습니다 · 책상 사이에 숨어 지나가세요':'손전등이 비추는 쪽으로 출구를 찾으세요';unlock='출구에 닿으면 다음 구역 · 등불에서 저장';}
   else{const s=solveOf(z),N=(z.solve?.statements||[]).length;text=z.solve?(x.bossUp?(z.solve.hold&&!s.held?'버티기 '+Math.floor(s.holdT||0)+' / '+z.solve.hold+'초':N?(z.solve.word||'진술')+' '+s.stmt+' / '+N+(s.stmt>=N&&z.solve.book?' · '+z.solve.book.label:''):'끝까지'):'위쪽으로 올라가 마주하세요'):x.bossUp?'대면':'위쪽으로';unlock=z.solve?(z.solve.unlock||'쓰러뜨리는 것이 아니라 사실을 적어 끝냅니다'):'대면 후 다음 구역';}

@@ -221,15 +221,21 @@
  function gradesR170(dt,r,x,z,ep,L,lane){const atk=baseAtkR170();const top=lane?x.r162Top:null;if(lane&&!(top&&top.length))return;if(lane)midbossR162(r,x,z,ep,top);
   x.r170Sub=x.r170Sub||0;if(x.r170Sub<6&&S.kills>=(x.r170Sub+1)*90){const q=top&&top.length?top[Math.floor(Math.random()*top.length)]:ringPoint(player,7,12);
    if(q){const mobs=zoneMobs(z,ep),e=spawn(mobs[(S.serial+3)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'sb',aggro:60});if(e){swarm(e,true);e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.speed=(e.speed||1)*.8;e.name='준보스 · '+(z.mobName||ep.mobName);if(lane)e.r162Lane=true;x.r170Sub++;try{toast('준보스 '+x.r170Sub+' / 6 · '+e.name,2.4);}catch(_){}}}}
-  const bd=z?.boss||ep.boss;if(!x.r170Boss&&bd?.donor&&S.kills>=600){const q=lane?(L.entry&&L.core?{x:(L.entry.x+L.core.x)/2,y:(L.entry.y+L.core.y)/2}:ringPoint(player,6,9)):ringPoint(player,6,9);
-   if(q&&floorAt(q.x,q.y)){const b=spawn(bd.donor,q,{boss:true,name:bd.name,tag:'bb',aggro:60});if(b){x.r170Boss=b.id;b.samongBossR170=true;b.r61PreserveHealth=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';b.maxHp=b.hp=Math.round(atk*150);b.name='보스 · '+bd.name;b.patternsR103=R162P(bd.patterns);
-    try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',q.x,q.y,{k:1.4});}catch(_){}try{toast('보스격 · '+bd.name,3);sound('boss');}catch(_){}}}}
+  // 서사 검수(R176): 원문에서 그 장의 보스를 '쓰러뜨리지 않는' 장(마지막 대면이 해결형 solve 인 장, 소리뿐인 첫 번째 나팔 RD)은
+  //  보스를 내지 않고 그 구역 몹을 키운 '보스격 · 몹 이름'을 낸다(미카엘라·페르소나·일곱 번째 나팔·강재헌·교주의 인장 등을 죽이는 장면을 만들지 않는다).
+  const chap=(()=>{try{return ZN()?.chapters?.[x.ep]||[];}catch(_){return[];}})(),spare=x.ep==='RD'||chap.some(q=>q.kind==='confront'&&q.solve);
+  const bd0=z?.boss||ep.boss,bd=spare?{donor:zoneMobs(z,ep)[0],name:z.mobName||ep.mobName,patterns:['ground','sides'],grade:true}:bd0;if(!x.r170Boss&&bd?.donor&&S.kills>=600){const q=lane?(L.entry&&L.core?{x:(L.entry.x+L.core.x)/2,y:(L.entry.y+L.core.y)/2}:ringPoint(player,6,9)):ringPoint(player,6,9);
+   if(q&&floorAt(q.x,q.y)){const b=spawn(bd.donor,q,{boss:true,name:bd.name,tag:'bb',aggro:60});if(b){x.r170Boss=b.id;b.samongBossR170=true;b.r61PreserveHealth=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';b.maxHp=b.hp=Math.round(atk*150);b.name=(bd.grade?'보스격 · ':'보스 · ')+bd.name;if(bd.grade)b.defScale=(b.defScale||1)*1.8;b.patternsR103=R162P(bd.patterns);
+    try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',q.x,q.y,{k:1.4});}catch(_){}try{toast(b.name,3);sound('boss');}catch(_){}}}}
   const b=x.r170Boss&&r.enemies.find(e=>e.id===x.r170Boss);if(b&&b.hp>0&&!b.deadRecorded){const sa=x.patAt,sn=x.patN;x.patAt=b.r170PatAt;x.patN=b.r170PatN;try{bossPatterns(b,dt);}finally{b.r170PatAt=x.patAt;b.r170PatN=x.patN;x.patAt=sa;x.patN=sn;}}}
  // R173 H(여섯 물결): 앞 물결을 다 쓰러뜨리면 다음 물결 11마리가 영웅 둘레에서 한꺼번에 솟는다(6 × 11 = 66). 마지막 물결에는 준보스 하나.
- function wavesR173(dt,r,x,z,ep){x.r173Wave=x.r173Wave||0;const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length;if(alive||x.r173Wave>=6)return;if(!x.r173Next){x.r173Next=time+(x.r173Wave?1.6:.8);return;}if(time<x.r173Next)return;x.r173Next=0;
-  x.r173Wave++;const mobs=zoneMobs(z,ep),atk=baseAtkR170();for(let n=0;n<11;n++){const q=ringPoint(player,6,11);if(!q)continue;const e=spawn(mobs[(S.serial+n)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'h',aggro:60});if(!e)continue;const sub=x.r173Wave===6&&n===0;swarm(e,sub||n%6===5);
-   if(sub){e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.name='준보스 · '+(z.mobName||ep.mobName);}}
+ function wavesR173(dt,r,x,z,ep){x.r173Wave=x.r173Wave||0;
+  if(x.r173Pend>0){waveSpawnR173(r,x,z,ep);return;}// 자리가 없어 못 나온 몫은 다음 틱에 마저 낸다(66마리를 다 채워야 단서조각이 다 떨어진다)
+  const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length;if(alive||x.r173Wave>=6)return;if(!x.r173Next){x.r173Next=time+(x.r173Wave?1.6:.8);return;}if(time<x.r173Next)return;x.r173Next=0;
+  x.r173Wave++;x.r173Pend=11;x.r173Made=0;waveSpawnR173(r,x,z,ep);
   try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',player.x,player.y,{k:1.1});toast('물결 '+x.r173Wave+' / 6',2);}catch(_){}}
+ function waveSpawnR173(r,x,z,ep){const mobs=zoneMobs(z,ep),atk=baseAtkR170();for(let k=x.r173Pend;k>0;k--){const n=x.r173Made||0,q=ringPoint(player,6,11);if(!q)break;const e=spawn(mobs[(S.serial+n)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'h',aggro:60});if(!e)break;x.r173Made=n+1;x.r173Pend--;const sub=x.r173Wave===6&&n===0;swarm(e,sub||n%6===5);
+   if(sub){e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.name='준보스 · '+(z.mobName||ep.mobName);}}}
  // R173 G(정화의 코어 호위): 코어(체력 777)가 맨 아래에서 위쪽 끝(문)으로 곧게 오른다. 코어 3.5칸 안에 적이 없을 때만 나아가고(처치가 길을 연다),
  //  적은 위쪽 끝에서 쏟아져 코어로 곧장 간다 — 닿으면 사라지며 코어를 깎는다(보통 6, 짙은 형상 66). 코어가 무너지면 처음 자리로(처치 0).
  function escortR173(dt,r,x,z,ep,L){const top=L.top||L.exit,start=L.core;if(!top||!start)return;const c=x.r173Light||(x.r173Light={x:start.x,y:start.y,hp:777,max:777,prog:0,fails:0});
