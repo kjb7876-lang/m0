@@ -22,6 +22,8 @@
  // Core colour of the carried light per family (multiplier, <=1 per channel).
  const WARM={regional:[1,.95,.87],clinical:[1,.95,.86],garden:[1,.96,.88],cave:[1,.94,.84],swamp:[1,.96,.86],ash:[1,.92,.8],domestic:[1,.94,.84],
   stone:[1,.94,.84],forge:[1,.91,.78],snow:[1,.98,.94],coast:[1,.97,.92],memory:[1,.95,.9],neural:[1,.97,.93]};
+ // R172(렉): 벽 비침(discard) 대상은 영웅 + 가까운 적 2까지 — 적이 몰리면 겹친 벽 조각마다 6번 반복하던 비용. 벽 노이즈는 윗면에서만(삼항 대신 if: 옆면에서 계산 안 함).
+ const FOCUS_R172=3;
  const MAX_FOCUS=6,stats={patched:0,skirtBuilds:0,skirtEdges:0,frames:0,litFrames:0,focusMax:0,propsDimmed:0,fadesSuppressed:0,hintFixes:0,errors:0};
  let prefs=load(),U=null,lastError=null;
  function load(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return{...DEFAULTS};const v=JSON.parse(raw);return{light:LIGHT.hasOwnProperty(v.light)?v.light:DEFAULTS.light,grade:v.grade!==false,dither:v.dither!==false,contact:v.contact!==false};}catch(_){return{...DEFAULTS};}}
@@ -54,7 +56,7 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
  c=mix(vec3(l),c,r89Sat)*r89Tint*r89Gain;`+
   // Wall caps were one flat plastic-looking slab; give them a darker, mottled
   // worn-stone surface in world space so long runs no longer read as strips.
-  (role==='wall'?`vec3 n=r89WorldNormal;float face=abs(n.y)>.6?r89Faces.y*mix(.7,1.1,r89Noise(r89WorldPos.xz*4.3)*.45+r89Noise(r89WorldPos.xz*11.+3.1)*.3+r89Noise(r89WorldPos.xz*.9+7.7)*.25):mix(r89Faces.x,r89Faces.z,clamp(.5+.5*(abs(n.z)-abs(n.x)),0.,1.));c*=face*mix(.8,1.,smoothstep(0.,.9,r89WorldPos.y));`:
+  (role==='wall'?`vec3 n=r89WorldNormal;float face;if(abs(n.y)>.6){face=r89Faces.y*mix(.7,1.1,r89Noise(r89WorldPos.xz*4.3)*.45+r89Noise(r89WorldPos.xz*11.+3.1)*.3+r89Noise(r89WorldPos.xz*.9+7.7)*.25);}else{face=mix(r89Faces.x,r89Faces.z,clamp(.5+.5*(abs(n.z)-abs(n.x)),0.,1.));}c*=face*mix(.8,1.,smoothstep(0.,.9,r89WorldPos.y));`:
    // Roof caps reuse the wall panel bitmap (R82). Flatten its bands into one
    // slate mass so the perimeter no longer reads as a striped ramp.
    role==='roof'?`float lr=mix(.45,dot(c,vec3(.2126,.7152,.0722)),.3)*mix(.86,1.08,r89Noise(r89WorldPos.xz*.23))*mix(.72,1.1,r89Noise(r89WorldPos.xz*4.3)*.45+r89Noise(r89WorldPos.xz*11.+1.7)*.3+r89Noise(r89WorldPos.xz*.9+7.7)*.25);c=vec3(lr)*vec3(.94,1.,.98)*r89Tint*r89Faces.y*.92;`:
@@ -198,7 +200,7 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
 
  function focusList(r,frame){const list=[];if(!prefs.dither||!active(frame))return list;
   const p=r.projection,zoom=p.zoom||1,hero=frame.entities?.find(e=>e.hero&&Number.isFinite(e.x+e.y));if(!hero)return list;
-  const sight=window.__STORYWORLD_SIGHT24__,actors=[hero,...(frame.entities||[]).filter(e=>e!==hero&&e.alive!==false&&e.enemy&&Number.isFinite(e.x+e.y)&&Math.hypot(e.x-hero.x,e.y-hero.y)<11&&(!sight?.enabled||sight.pointVisible(e.x,e.y))).sort((a,b)=>Math.hypot(a.x-hero.x,a.y-hero.y)-Math.hypot(b.x-hero.x,b.y-hero.y))].slice(0,MAX_FOCUS);
+  const sight=window.__STORYWORLD_SIGHT24__,actors=[hero,...(frame.entities||[]).filter(e=>e!==hero&&e.alive!==false&&e.enemy&&Number.isFinite(e.x+e.y)&&Math.hypot(e.x-hero.x,e.y-hero.y)<11&&(!sight?.enabled||sight.pointVisible(e.x,e.y))).sort((a,b)=>Math.hypot(a.x-hero.x,a.y-hero.y)-Math.hypot(b.x-hero.x,b.y-hero.y))].slice(0,FOCUS_R172);
   // The hero window also opens the floor around the feet: camera-side boundary
   // walls and the exterior roof otherwise hide ~4 units of walkable floor, which
   // reads as walking on a roof (R93).
