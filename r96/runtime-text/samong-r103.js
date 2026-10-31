@@ -199,8 +199,28 @@
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,L.exit,nextTitle(z));}
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(again||(fin&&!g.reach)||z.noMobs)return;attackTokens();
-  const alive=r.enemies.filter(living).length,cap=Math.round(caps().survival*.6);if(time<x.spawnAt||alive>=cap)return;
-  x.spawnAt=time+.45;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(4,cap-alive);n++){const q=ringPoint(player,8,14);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+  if(z.mode==='D'){defenseR162(dt,r,x,z,ep,L);return;}
+  const B=z.mode==='B';if(B)midbossR162(r,x,z,ep);
+  const alive=r.enemies.filter(living).length,cap=B?caps().survival:Math.round(caps().survival*.6);if(time<x.spawnAt||alive>=cap)return;
+  x.spawnAt=time+(B?.3:.45);const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(B?6:4,cap-alive);n++){const q=B?ringPoint(player,9,15):ringPoint(player,8,14);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
+ // R162 B(뱀서류 광장): 처치 111마다 중간보스 1마리(모두 6마리) — 그 구역 몹 하나를 키운다(체력 영웅 공격력 × 60, 몸 1.7배).
+ function midbossR162(r,x,z,ep){x.r162Mid=x.r162Mid||0;if(x.r162Mid>=6||S.kills<(x.r162Mid+1)*111)return;const q=ringPoint(player,7,11);if(!q)return;const mobs=zoneMobs(z,ep),e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'mb',aggro:60});if(!e)return;swarm(e,true);
+  let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.midboss=true;e.samongMidR162=true;e.maxHp=e.hp=Math.round(atk*60);e.defScale=(e.defScale||1)*1.4;e.speed=(e.speed||1)*.55;e.damage=(e.damage||8)*1.8;e.name='중간보스 · '+(z.mobName||ep.mobName);x.r162Mid++;
+  try{toast('중간보스 '+x.r162Mid+' / 6 · '+e.name,3);sound('boss');}catch(_){}}
+ // R162 D(정화의 코어): 세로 길 위쪽 끝에서 쏟아져 내려오는 666마리. 영웅 가까이(3.2칸)가 아니면 코어 쪽으로 곧장 내려오고,
+ //  코어에 닿으면 사라지며 코어 체력을 깎는다(짙은 형상 66, 보통 6). 코어 777 이 모두 깎이면 그 구역을 처음부터(처치 0, 적 비움).
+ const CORE_R162=777;// 사용자 2026-10-31 "우리편은 다 7 77 777, 코어체력도 777" — 적이 깎는 양은 적 쪽 숫자(보통 6, 짙은 형상 66)
+ function defenseR162(dt,r,x,z,ep,L){const core=L.core||L.exit;if(!core)return;const c=x.r162Core||(x.r162Core={hp:CORE_R162,max:CORE_R162,leaks:0});
+  const cells=x.r162Top||(x.r162Top=(()=>{const f=r.exploration.floorCells||[];let m=1e9;for(const[a,b]of f)m=Math.min(m,a+b);return f.filter(([a,b])=>a+b<=m+5).map(([a,b])=>({x:a+.5,y:b+.5}));})());
+  const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length,cap=caps().survival;
+  if(time>=x.spawnAt&&alive<cap&&cells.length){x.spawnAt=time+.3;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(6,cap-alive);n++){const q=cells[Math.floor(Math.random()*cells.length)];if(!floorAt(q.x,q.y))continue;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'d',aggro:4});if(e){swarm(e,elite);e.r162Lane=true;}}}
+  for(const e of r.enemies){if(!living(e)||!e.r162Lane)continue;const dc=Math.hypot(core.x-e.x,core.y-e.y);
+   if(dc<1.4){c.hp-=e.samongElite?66:6;c.leaks++;e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;try{window.__STORYWORLD_SAMONG_PLAY_R162__?.coreHit?.(core,c);}catch(_){}continue;}
+   if(Math.hypot(player.x-e.x,player.y-e.y)<3.2)continue;const sp=Math.max(2.6,(e.speed||1)*1.05)*dt,nx=e.x+(core.x-e.x)/dc*sp,ny=e.y+(core.y-e.y)/dc*sp;
+   if(!blocked(nx,ny,.25,r)){e.x=nx;e.y=ny;}else if(!blocked(nx,e.y,.25,r))e.x=nx;else if(!blocked(e.x,ny,.25,r))e.y=ny;e.homeX=e.x;e.homeY=e.y;e.moving=true;e.moveVX150=(core.x-e.x)/dc;e.moveVY150=(core.y-e.y)/dc;}
+  if(c.hp<=0){for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}
+   S.kills=0;c.hp=c.max;c.fails=(c.fails||0)+1;x.spawnAt=time+3;const at=L.entry||core;player.x=at.x;player.y=at.y;try{cam={x:player.x,y:player.y};}catch(_){}
+   try{toast('정화의 코어가 무너졌습니다 · 처음부터 다시 막아 내세요.',4);}catch(_){}}}
  function tickExplore(dt){const r=room,x=r.samongR103,z=zoneOf(x.zone),L=r.exploration.samongR103;if(!x.portal&&ZN().done(r,z))openPortal(r,L.exit,nextTitle(z));r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);}
  const zapi={spawn:(row,at,o)=>spawn(row,at,o),sight:(a,b)=>clearPath3(a,b,.2,room),boss:()=>room.enemies.find(e=>e.id===room.samongR103.boss)||null,
   record:p=>{try{return window.__STORYWORLD_SAMONG_MAPS_R105__?.use?.(p)===true;}catch(e){fail(e);return false;}},
@@ -223,7 +243,7 @@
  function tickAscent(dt){const r=room,x=r.samongR103,ep=EP[x.ep],L=r.exploration.samongR103,z=zoneOf(x.zone),bd=z?.boss||ep.boss;
   if(z&&S.zoneDone.includes(z.id)){if(!x.portal)openPortal(r,L.dais,nextTitle(z));return;}
   if(!x.born){x.born=1;for(const q of L.landings)for(let n=0;n<2;n++){const g=ep.guard?.[n%ep.guard.length];if(g)spawn(g,{x:q.x+(n?1.2:-1.2),y:q.y+(n?-.6:.6)},{tag:'g',hpScale:.8,aggro:8});}
-   const b=spawn(bd.donor,L.dais,{boss:true,name:bd.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=bd.patterns;x.boss=b.id;}}
+   const b=spawn(bd.donor,L.dais,{boss:true,name:bd.name,tag:'b'});if(b){b.spawnState='hidden';b.samongBoss=true;b.patternsR103=R162P(bd.patterns);x.boss=b.id;}}
   const b=r.enemies.find(e=>e.id===x.boss);
   if(!x.bossUp&&b&&Math.hypot(player.x-L.dais.x,player.y-L.dais.y)<10.5){x.bossUp=true;r.engaged=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';player.invincible=Math.max(player.invincible,.8);player.invReason='전투 진입';try{sound('boss');}catch(e){}const sc=z?zoneScenes(z,[z.bossCue].filter(Boolean),'boss'):scenes(ep,'boss');if(sc.length)playScenes(sc,()=>banner103(bd.name,z?.solve?'대면':'보스'));else banner103(bd.name,z?.solve?'대면':'보스');}
   if(x.bossUp&&b&&b.hp>0)bossPatterns(b,dt);
@@ -231,10 +251,23 @@
  // Four readable pattern families (예고 표시 → 판정). Damage scales from the actor's own value.
  function bossPatterns(b,dt){const x=room.samongR103;x.patAt=x.patAt||time+3;if(time<x.patAt||!b.patternsR103?.length)return;const list=b.patternsR103,kind=list[(x.patN=(x.patN||0)+1)%list.length],dmg=(b.damage||20)*.55;x.patAt=time+(kind==='rain'?5.5:4.2);
   const field=(px,py,radius,warning,life,asset)=>{if(blocked(px,py,.1,room))return;hazards.push({id:++uid,type:'field',owner:b.id,x:px,y:py,radius,age:0,warning,life:warning+life,asset,damage:dmg,lastHit:-99,samongPattern:kind});};
+  if(kind==='clones'||kind==='meteor'||kind==='tentacles'){const next=patternR162(kind,b,dmg,field);if(next)x.patAt=time+next;return;}
   if(kind==='sky'){for(let n=0;n<6;n++){const a=n*1.0472+time,d=1.5+n*.55;field(player.x+Math.cos(a)*d,player.y+Math.sin(a)*d,1.25,1.1+n*.12,.45,VFX.cross);}fxPattern('sky',player.x,player.y);}
   else if(kind==='ground'){for(let n=0;n<10;n++){const t=(n+1)/10,px=b.x+(player.x-b.x)*t*1.25,py=b.y+(player.y-b.y)*t*1.25;field(px,py,.95,.75+n*.09,.5,VFX.burst);}fxPattern('ground',b.x,b.y);}
   else if(kind==='sides'){const n=12;for(let k=0;k<n;k++){const a=k*Math.PI*2/n,sx=player.x+Math.cos(a)*7,sy=player.y+Math.sin(a)*7;const s=makeShot(sx,sy,a+Math.PI,4.2,dmg,{owner:b.id,asset:VFX.bolt,radius:.2,life:3.2,samongPattern:'sides'});if(s)s.delay=.7;}fxPattern('sides',player.x,player.y);}
   else if(kind==='rain'){for(let n=0;n<16;n++){const px=player.x+(Math.random()*2-1)*6,py=player.y+(Math.random()*2-1)*6;field(px,py,.7,.9+Math.random()*1.4,.35,VFX.mark);}fxPattern('rain',player.x,player.y);}}
+ // R162: 보스마다 기존 패턴 사이에 분신 6·운석 소환·촉수(땅 밑에서 솟는 수많은 촉수)를 끼운다(이토 준지·디아블로·다크에덴풍; 그림은 samong-play-r162.js).
+ function R162P(list){const base=Array.isArray(list)&&list.length?list:['ground','sides'];if(window.__STORYWORLD_SAMONG_ZONES_R115__?.r162===false)return base;const add=['clones','meteor','tentacles'],out=[];base.forEach((k,i)=>{out.push(k);out.push(add[i%3]);});for(const k of add)if(!out.includes(k))out.push(k);return out;}
+ function patternR162(kind,b,dmg,field){const play=window.__STORYWORLD_SAMONG_PLAY_R162__;
+  if(kind==='clones'){const pts=[];for(let k=0;k<6;k++){const a=k*Math.PI/3+Math.random()*.3,sx=player.x+Math.cos(a)*5,sy=player.y+Math.sin(a)*5,ex=player.x-Math.cos(a)*5,ey=player.y-Math.sin(a)*5;pts.push({sx,sy,ex,ey,a});
+    for(let n=0;n<9;n++){const t=(n+.5)/9;field(sx+(ex-sx)*t,sy+(ey-sy)*t,.62,1.05+n*.035,.3,VFX.burst);}}
+   try{play?.pattern?.('clones',{boss:b,pts,warn:1.05});}catch(_){}return 6.2;}
+  if(kind==='meteor'){const vx=player.moveVX150||0,vy=player.moveVY150||0,pts=[];for(let k=0;k<6;k++){const px=player.x+vx*.35+(Math.random()*2-1)*3.2,py=player.y+vy*.35+(Math.random()*2-1)*3.2,w=1.2+k*.28;pts.push({x:px,y:py,warn:w});
+    if(blocked(px,py,.1,room))continue;hazards.push({id:++uid,type:'field',owner:b.id,x:px,y:py,radius:1.7,age:0,warning:w,life:w+.55,asset:VFX.burst,damage:dmg*1.4,lastHit:-99,samongPattern:'meteor'});}
+   try{play?.pattern?.('meteor',{boss:b,pts});}catch(_){}return 6.6;}
+  if(kind==='tentacles'){const pts=[];[[1.3,6],[2.7,12],[4.1,18]].forEach(([R,n],ring)=>{for(let k=0;k<n;k++){const a=k*Math.PI*2/n+ring*.3,px=player.x+Math.cos(a)*R,py=player.y+Math.sin(a)*R,w=.8+ring*.38;pts.push({x:px,y:py,warn:w,ring});field(px,py,.72,w,.95,VFX.mark);}});
+   try{play?.pattern?.('tentacles',{boss:b,pts});}catch(_){}return 6.0;}
+  return 0;}
  function fxPattern(kind,x,y){try{window.__STORYWORLD_HERO_FX_R103__?.pattern?.(kind,x,y,{hostile:true});}catch(e){fail(e);}}
 
  // ---- portals, stage flow -------------------------------------------------------------------

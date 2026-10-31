@@ -136,7 +136,7 @@
  const SURVIVAL_SCALE=1.5;
  function scaleTpl(T,k){const P=v=>v&&Number.isFinite(v.x)?{...v,x:+(v.x*k).toFixed(2),y:+(v.y*k).toFixed(2)}:v,B=R=>({...R,x:Math.round(R.x*k),y:Math.round(R.y*k),w:Math.max(R.w,Math.round(R.w*k)),h:Math.max(R.h,Math.round(R.h*k))});
   const out={...T,rooms:T.rooms.map(B),entry:P(T.entry),exit:P(T.exit),r139Scale:k};if(T.cuts)out.cuts=T.cuts.map(c=>({...c,x:Math.round((c.x+c.w/2)*k-c.w/2),y:Math.round((c.y+c.h/2)*k-c.h/2)}));
-  for(const key of['save','dais'])if(T[key])out[key]=P(T[key]);for(const key of['chests','landings'])if(T[key])out[key]=T[key].map(P);return out;}
+  for(const key of['save','dais','core','top'])if(T[key])out[key]=P(T[key]);for(const key of['chests','landings'])if(T[key])out[key]=T[key].map(P);return out;}
  function expand(z){if(!z.tpl)return z;const r=rng(hash(z.id)),T0=TPL[z.tpl](z,r,z.p||{}),T=z.kind==='combat'?scaleTpl(T0,SURVIVAL_SCALE):T0,out={...z,...T};
   // 단서는 입구가 아닌 방을 돌아가며 놓는다(방 가운데 근처, 바닥 위).
   const pool=(T.clueRooms||[]).length?T.clueRooms:out.rooms.map((_,i)=>i);
@@ -173,13 +173,43 @@
   L.walls.push(...jambs);if(L.worldR74)L.worldR74.wallCount=L.walls.length;return jambs.length;}
  // 나머지 장·역행·엔딩은 scripts/build-samong-zones.py 가 만든 samong-zones-r115-data.js(원문 문단 앵커 포함)를 배치 틀(tpl)로 펼친다.
  const DATA=window.__STORYWORLD_SAMONG_ZONES_R115_DATA__;if(DATA?.chapters)for(const[k,list]of Object.entries(DATA.chapters))if(!CH[k])CH[k]=list.map(z=>{try{return expand(z);}catch(e){fail(e);return null;}}).filter(Boolean);
+ // ---- R162 (사용자 2026-10-31): 버티기는 재미없으니 처치 위주, 숫자는 6·66·666. 탐색(맵 돌며 단서 읽기)은 에피소드당 1번만,
+ //  나머지는 전투(C) 위주. 전투에는 B(뱀서류: 넓은 광장 가운데로 쏟아지는 666마리 + 중간보스 6)와
+ //  D(세로 일자길: 위에서 쏟아지는 666마리를 막아 맨 아래 '정화의 코어'를 지키기)를 에피소드마다 1번씩 반드시 둔다.
+ //  단서는 주로 몬스터를 쓰러뜨리면 떨어지는 '단서조각'을 주워 쪽지로 읽는다(samong-play-r162.js). 원문 단서 문단은 하나도 빼지 않는다.
+ //  · 탐색: 장의 첫 탐색 구역만 탐색으로 두고, 나머지 탐색 구역은 전투(처치 66 + 그 구역 단서를 단서조각으로)로 바꾼다.
+ //  · 전투: 처치 40·45·50 → 66, 666 은 그대로, 버티기(hold) → 처치 66, 상대를 세우지 않던 버티기(hazards)도 처치 66.
+ //  · 대면: 진술 전에 먼저 버티던 조건(solve.hold)을 뺀다(진술은 그대로).
+ //  · B: 장에 처치 666 구역(P-2)이 있으면 그 구역을 B 로 삼고, 없으면 '666의 광장'을 새로 둔다. D: '정화의 코어'를 새로 둔다.
+ //    새 구역은 장의 마지막 대면 바로 앞에(대면이 없으면 끝에) B → D 순서로 넣는다. 구역 id 는 sz162-<장>-B/D(예전 저장은 그대로 유효).
+ //  storyworld.r162.samong {reshape:false} 로 끄면 R115 그대로.
+ TPL.lane=function(z,r,p){// 화면에서 위→아래로 곧게 뻗는 길: 마름모(정사각 방)를 대각선으로 겹쳐 잇는다. 위쪽 끝에서 적이 쏟아지고 맨 아래에 코어.
+  const n=p.n||12,S=p.s||7,step=2,rooms=[];for(let i=0;i<n;i++)rooms.push({x:4+i*step,y:4+i*step,w:S,h:S,kind:'yard',name:i<3?(p.top||'쏟아지는 길목'):i>n-3?(p.bottom||'정화의 코어'):(p.name||z.title)});
+  const last=rooms[n-1],first=rooms[0],core={x:last.x+S-1.5,y:last.y+S-1.5};
+  return{rooms,links:[],entry:{x:core.x-2.6,y:core.y-2.6},exit:{...core},core,top:{x:first.x+S/2,y:first.y+S/2},laneDir:{x:Math.SQRT1_2,y:Math.SQRT1_2}};};
+ const R162=(()=>{let on=true;try{on=JSON.parse(localStorage.getItem('storyworld.r162.samong')||'{}').reshape!==false;}catch(_){}return on;})();
+ function reshapeR162(key,list){let keptExplore=false,hasB=false;const out=[];
+  for(const z0 of list){let z=z0;
+   if(z.kind==='explore'){if(!keptExplore){keptExplore=true;out.push(z);continue;}z={...z,kind:'combat',r162From:'explore',goal:{kills:66,...((z.clues||[]).length?{clues:true}:{})}};delete z.wander;}
+   if(z.kind==='combat'){const g=z.goal||{},ng={kills:g.kills===666?666:66};if(g.clues)ng.clues=true;if(g.reach)ng.reach=true;
+    z={...z,goal:ng,r162Hold:g.hold||undefined};delete z.hazards;delete z.noMobs;if((z.clues||[]).length)z.r162Frag=true;
+    if(ng.kills===666&&!hasB){z.mode='B';hasB=true;}}
+   if(z.kind==='confront'&&z.solve?.hold){const sv={...z.solve};delete sv.hold;z={...z,solve:sv};}
+   out.push(z);}
+  let at=-1;out.forEach((z,i)=>{if(z.kind==='confront')at=i;});if(at<0)at=out.length;
+  const ref=out.find(z=>z.kind==='combat')||out[0]||{};
+  const extra=[];
+  if(!hasB)extra.push(expand({id:'sz162-'+key+'-B',title:'666의 광장',kind:'combat',mode:'B',style:ref.style,tpl:'arena',p:{r:14,name:'666의 광장',ante:'광장 어귀'},goal:{kills:666},props:[['brazier',4],['obelisk',2]],r162New:true}));
+  extra.push(expand({id:'sz162-'+key+'-D',title:'정화의 코어',kind:'combat',mode:'D',style:ref.style,tpl:'lane',p:{name:'정화의 코어로 가는 길'},goal:{kills:666},props:[['brazier',4]],r162New:true}));
+  out.splice(at,0,...extra);return out;}
+ if(R162)for(const k of Object.keys(CH)){try{CH[k]=reshapeR162(k,CH[k]);}catch(e){fail(e);}}
  const ALL=new Map();for(const list of Object.values(CH))for(const z of list)ALL.set(z.id,z);
  function layout(z,ep,api){const{cells,owner,doors,bounds}=carve(z),epx={...ep,style:z.style||ep.style};
   const nodes=z.rooms.map((R,n)=>({id:n,x:R.x+R.w/2,y:R.y+R.h/2,radius:Math.min(R.w,R.h)/2,shape:'square',width:R.w,depth:R.h,name:R.name}));
   const edges=(z.links||[]).map(([a,b,w])=>[a,b,w||3]);
   const extra={kind:z.kind,r115:z.id,rooms:z.rooms.map(R=>({x:R.x,y:R.y,w:R.w,h:R.h,name:R.name,kind:R.kind})),doors:doors.map(d=>({x:d.x,y:d.y,axis:d.axis})),
    exit:z.exit?{...z.exit}:null,centre:z.exit?{...z.exit}:{x:nodes[0].x,y:nodes[0].y},save:z.save?{...z.save}:null,chests:(z.chests||[]).map(c=>({...c})),
-   dais:z.dais?{...z.dais}:null,landings:(z.landings||[]).map(c=>({...c})),patrol:z.patrol?z.patrol.routes.map(r=>r.map(([x,y])=>({x,y}))):null,path:[]};
+   dais:z.dais?{...z.dais}:null,core:z.core?{...z.core}:null,top:z.top?{...z.top}:null,mode:z.mode||null,landings:(z.landings||[]).map(c=>({...c})),patrol:z.patrol?z.patrol.routes.map(r=>r.map(([x,y])=>({x,y}))):null,path:[]};
   const L=api.build(z.id,epx,cells,{nodes,edges,entry:{...z.entry,node:0},bounds,wallHeight:WALL.room,extra});
   L.samongR115={rev:REV,zone:z.id,title:z.title,kind:z.kind,jambs:heights(L,z,owner,doors),doors:doors.length};
   L.backdropRects=backdropAround(cells,bounds[2],bounds[3],8);L.samongR115.backdrop=L.backdropRects.length;
@@ -196,7 +226,7 @@
   z.rooms.forEach((R,ri)=>{if(R.grid){const g=R.grid;for(let j=0;j<g.rows;j++)for(let i=0;i<g.cols;i++)r.props.push({...deco(z.id+':g'+ri+':'+i+':'+j,g.kind,g.x+i*g.dx,g.y+j*g.dy),r115Hide:true});n+=g.rows*g.cols;}
    for(const[kind,side,step]of R.along||[]){const pts=[];if(side==='n'||side==='s'){const y=side==='n'?R.y+.7:R.y+R.h-.7;for(let px=R.x+1.5;px<R.x+R.w-1;px+=step)pts.push([px,y]);}else{const px=side==='w'?R.x+.7:R.x+R.w-.7;for(let y=R.y+1.5;y<R.y+R.h-1;y+=step)pts.push([px,y]);}
     for(const[px,py]of pts){if(Math.hypot(px-L.entry.x,py-L.entry.y)<2.5)continue;r.props.push(deco(z.id+':a'+ri+':'+side+':'+Math.round(px*10)+':'+Math.round(py*10),kind,px,py));n++;}}});
-  (z.clues||[]).forEach((c,i)=>{const R=z.rooms[c.room],at={x:R.x+c.at[0],y:R.y+c.at[1]};r.props.push({id:'r115:'+clueId(z,i),x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:'record',r74Prop:c.prop||'crate',label:c.label,r115Clue:clueId(z,i),r105Record:{key:c.key,sub:c.sub,n:c.n||1,label:c.label}});});
+  if(!z.r162Frag)(z.clues||[]).forEach((c,i)=>{const R=z.rooms[c.room],at={x:R.x+c.at[0],y:R.y+c.at[1]};r.props.push({id:'r115:'+clueId(z,i),x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:'record',r74Prop:c.prop||'crate',label:c.label,r115Clue:clueId(z,i),r105Record:{key:c.key,sub:c.sub,n:c.n||1,label:c.label}});});
   if(z.solve){const d=x.dais;(z.solve.statements||[]).forEach((s,i)=>{const a=-Math.PI/2+i*2.094,at={x:d.x+Math.cos(a)*5.6,y:d.y+Math.sin(a)*5.6};r.props.push({id:'r115:'+z.id+':stmt:'+i,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:'record',r74Prop:'workbench',label:s.label,r115Stmt:i,r105Record:{key:s.key,sub:s.sub,n:s.n||1,label:s.label}});});}
   // 흩어 놓는 소품: 벽·입구·출구·단서·단상에서 떨어진 바닥 안쪽 칸(벽과 겹치지 않게).
   if(z.props?.length){const cells=new Set(L.floorCells.map(([a,b])=>K(a,b))),inner=(a,b)=>[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]].every(([dx,dy])=>cells.has(K(a+dx,b+dy)));
@@ -272,10 +302,12 @@
   let text,dest,unlock;
   if(x.portal){text='문이 열렸습니다 · 문에서 E';unlock='다음 구역으로';}
   else if(z.kind==='explore'){text='원문 단서 '+got+' / '+clues+' · 빛나는 표식에서 E';unlock='단서를 모두 보면 다음 문';}
-  else if(z.kind==='combat'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+(g.kills?'처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills:'')+(g.hold?'버티기 '+Math.min(g.hold,Math.floor(x.holdT||0))+' / '+g.hold+'초':'')+(clues?' · 단서 '+got+'/'+clues:'')+(g.reach?' · 끝의 문까지':'');unlock=g.reach?'목표를 채우면 끝의 문이 열립니다':'목표를 채우면 문';}
+  else if(z.kind==='combat'&&z.mode==='D'){const c=x.r162Core;text='정화의 코어를 지키세요 · 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(c?' · 코어 '+Math.max(0,Math.ceil(c.hp))+' / '+c.max:'');unlock='666마리를 막아내면 문';}
+  else if(z.kind==='combat'&&z.mode==='B'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+'쏟아지는 적 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(x.r162Mid?' · 중간보스 '+x.r162Mid+' / 6':'')+(clues?' · 단서조각 '+got+'/'+clues:'');unlock='666마리를 쓰러뜨리면 문';}
+  else if(z.kind==='combat'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+(g.kills?'처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills:'')+(g.hold?'버티기 '+Math.min(g.hold,Math.floor(x.holdT||0))+' / '+g.hold+'초':'')+(clues?(z.r162Frag?' · 단서조각 ':' · 단서 ')+got+'/'+clues:'')+(g.reach?' · 끝의 문까지':'');unlock=g.reach?'목표를 채우면 끝의 문이 열립니다':'목표를 채우면 문';}
   else if(z.kind==='maze'){text=z.stealth?'순찰자는 쓰러지지 않습니다 · 책상 사이에 숨어 지나가세요':'손전등이 비추는 쪽으로 출구를 찾으세요';unlock='출구에 닿으면 다음 구역 · 등불에서 저장';}
   else{const s=solveOf(z),N=(z.solve?.statements||[]).length;text=z.solve?(x.bossUp?(z.solve.hold&&!s.held?'버티기 '+Math.floor(s.holdT||0)+' / '+z.solve.hold+'초':N?(z.solve.word||'진술')+' '+s.stmt+' / '+N+(s.stmt>=N&&z.solve.book?' · '+z.solve.book.label:''):'끝까지'):'위쪽으로 올라가 마주하세요'):x.bossUp?'대면':'위쪽으로';unlock=z.solve?(z.solve.unlock||'쓰러뜨리는 것이 아니라 사실을 적어 끝냅니다'):'대면 후 다음 구역';}
-  dest=z.title+' · 구역 '+tag;return{text,dest,unlock,badge:z.title+' '+tag,sub:{explore:'탐색',maze:'손전등 미로',combat:'전투',confront:'대면'}[z.kind]+' · '+tag};}
+  dest=z.title+' · 구역 '+tag;return{text,dest,unlock,badge:z.title+' '+tag,sub:(z.mode==='B'?'광장(B)':z.mode==='D'?'코어 방어(D)':{explore:'탐색',maze:'손전등 미로',combat:'전투',confront:'대면'}[z.kind])+' · '+tag};}
  const chapterOf=z=>{for(const list of Object.values(CH))if(list.includes(z))return list;return[z];};
 
  // ---- 구버전 저장 → 구역 (지우지 않고 옮긴다) ------------------------------------------------------
@@ -288,5 +320,5 @@
  function install(){if(typeof openPanel==='function'){const b=openPanel;openPanel=function(html,...a){const r=b.call(this,html,...a);try{if(typeof html==='string'&&html.includes('id="codeMap"'))inject();}catch(e){fail(e);}return r;};}}
  try{install();}catch(e){fail(e);}
  function inspect(){return{revision:REV,failures,lastError,chapters:Object.fromEntries(Object.entries(CH).map(([k,v])=>[k,v.map(z=>z.id)])),zones:ALL.size,current:typeof room!=='undefined'?room?.samongR115||null:null};}
- window.__STORYWORLD_SAMONG_ZONES_R115__=Object.freeze({revision:REV,chapters:CH,chapter,zone,stageOf,layout,dress,tick,use,done,navGoal,hudText,scenesFor,play,migrate,clueId,cluesDone,solveOf,carve,inspect});
+ window.__STORYWORLD_SAMONG_ZONES_R115__=Object.freeze({revision:REV,r162:R162,chapters:CH,chapter,zone,stageOf,layout,dress,tick,use,done,navGoal,hudText,scenesFor,play,migrate,clueId,cluesDone,solveOf,carve,inspect});
 })();
