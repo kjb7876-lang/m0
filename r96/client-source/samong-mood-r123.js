@@ -2,7 +2,7 @@
  * 원문 장면에 맞춰 구역마다 '분위기 층'을 덧입힌다. 지형·충돌·길·몹·목표·저장은 건드리지 않는다. 새 그림 파일 없이 코드로 그린다.
  *  ① S-04 감정의 탑: 구역마다 층(공터·1F~16F). 들어서면 층 표시와 16칸 높이 눈금, 층이 바뀌면 승강기 연출(빛줄기가 흐르고 숫자가 넘어감),
  *     바닥에 칠한 층 번호, 벽가의 층 표지판·창(높을수록 하늘이 어둡고 구름이 발아래), 출구의 승강기 문. 위층일수록 화면 양옆이 좁아지고 어두워진다.
- *  ② S-06 네오 서울(NS-01~NS-10): 들어서면 원문 제목의 연도(2189·2174·2196·연도 없음…)가 숫자를 굴리다 멈춘다. 시대가 바뀌면 화면 일그러짐·
+ *  ② S-06 (R180: 디스토피아 DYS-01~13 — 연도 없는 구간은 구간 제목만 띄운다. 이전 네오 서울 NS-01~10 설명:) 들어서면 원문 제목의 연도(2189·2174·2196·연도 없음…)가 숫자를 굴리다 멈춘다. 시대가 바뀌면 화면 일그러짐·
  *     초록 데이터 비·시계 째깍. 구역마다 기계 폐허 도시 / 초록 글자 데이터 세계 / 따뜻한 빛의 거대 나무 숲을 번갈아 입힌다.
  *  ③ S-01 꿰맨 장미의 집: 뒤틀린 동화(거대 찻잔·바늘과 실·실패·단추 눈 인형·기운 액자, 체스판 바닥, 장미 꽃잎·실 보풀, 실내는 방이 살짝 기운다).
  *  ④ S-02 밤의 출석부(학교)·S-03·S-05·M(현실): 꺼졌다 켜지는 복도등, 문 너머에 섰다 사라지는 그림자, 바닥의 소용돌이 낙서, 학교는 손전등 원뿔 시야.
@@ -40,12 +40,10 @@
  const U=()=>(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1);
 
  // ---- 구역 → 분위기 ------------------------------------------------------------------------------------
- function sectionOf(z){if(!z)return null;let out=null;const walk=o=>{if(out||!o||typeof o!=='object')return;if(typeof o.key==='string'&&/^(NS-|R-|S-|M\d|epilogue)/.test(o.key)){out=o.key;return;}for(const v of Object.values(o))walk(v);};
+ function sectionOf(z){if(!z)return null;let out=null;const walk=o=>{if(out||!o||typeof o!=='object')return;if(typeof o.key==='string'&&/^(NS-|DYS-|R-|S-|M\d|epilogue)/.test(o.key)){out=o.key;return;}for(const v of Object.values(o))walk(v);};
   walk([z.cue,z.clues,z.solve,z.after]);return out;}
- // 네오 서울: 원문 구간(NS-xx)마다 시대 결을 번갈아 입힌다(기계 폐허 / 데이터 / 빛의 숲).
- const ERA={'sz115-S06-1':'machine','sz115-S06-2':'machine','sz115-S06-3':'machine','sz115-S06-4':'forest','sz115-S06-5':'forest',
-  'sz115-S06-6':'machine','sz115-S06-7':'machine','sz115-S06-8':'machine','sz115-S06-9':'data','sz115-S06-10':'data','sz115-S06-11':'data',
-  'sz115-S06-12':'machine','sz115-S06-13':'data','sz115-S06-14':'machine','sz115-S06-15':'data','sz115-S06-16':'forest','sz115-S06-17':'forest'};
+ // R180: S-06 디스토피아(DYS-01~13) — 구역마다 결을 입힌다(전장·기지=기계 폐허 / 기밀·AI·도약 기록=데이터 / 스무 살의 원룸=따뜻한 빛).
+ const ERA={'sz115-S06-1':'machine','sz115-S06-2':'machine','sz115-S06-3':'machine','sz115-S06-4':'machine','sz115-S06-5':'machine','sz115-S06-6':'data','sz115-S06-7':'data','sz115-S06-8':'machine','sz115-S06-9':'machine','sz115-S06-10':'machine','sz115-S06-11':'data','sz115-S06-12':'machine','sz115-S06-13':'machine','sz115-S06-14':'machine','sz115-S06-15':'machine','sz115-S06-16':'data','sz115-S06-17':'machine','sz115-S06-18':'machine','sz115-S06-19':'machine','sz115-S06-20':'data','sz115-S06-21':'data','sz115-S06-22':'forest','sz115-S06-23':'data'};
  // 화가 구역: 원문 R-xx 장에서 그 화가의 이름·화풍이 중심인 장(고흐 R-02, 달리 R-03·R-13, 마네 R-04, 피카소 R-05, 클림트 R-06, 모네 R-07).
  const PAINTER={'R-00':'gallery','R-01':'gallery','R-02':'gogh','R-03':'dali','R-04':'manet','R-05':'picasso','R-06':'klimt','R-07':'monet','R-08':'lesson',
   'R-09':'surreal','R-10':'surreal','R-11':'surreal','R-12':'blank','R-13':'dali','R-14':'gallery','R-15':'surreal','R-16':'surreal','R-17':'garden'};
@@ -55,7 +53,7 @@
   return{year:y?y[1]:null,label:(y?t.replace(/\d{4}년\s*·?\s*/,''):t).trim()||sec,noYear:!y};}
  function themeOf(zid){const m=/^sz115-([A-Z0-9]+)-(\d+)$/.exec(String(zid||''))||/^sz162-([A-Z0-9-]+)-[BD]$/.exec(String(zid||''))||/^sz173-([A-Z0-9-]+)-G$/.exec(String(zid||''));/* R173: G(코어 호위) 구역도 그 장의 분위기 */if(!m)return null;const ch=m[1].replace('-',''),/* R162: 새 B·D 구역(sz162-<장>-B/D)도 그 장의 분위기 */z=ZN()?.zone?.(zid)||null,sec=sectionOf(z);
   if(ch==='S04')return{key:'tower',zone:zid,sec:'S-04',floors:towerFloors(z),z};
-  if(ch==='S06')return{key:ERA[zid]||'machine',zone:zid,sec,ns:sec&&/^NS-/.test(sec)?nsInfo(sec):null,z};
+  if(ch==='S06')return{key:ERA[zid]||'machine',zone:zid,sec,ns:sec&&/^(NS-|DYS-)/.test(sec)?nsInfo(sec):null,z};
   if(ch==='S01')return{key:'rose',zone:zid,sec:'S-01',z};
   if(ch==='S02')return{key:'school',zone:zid,sec:'S-02',z};
   if(ch==='S03')return{key:'ink',zone:zid,sec,z};      // R124: 흑과 백 — 먹·검은 고리, 화면을 흑백 쪽으로
@@ -466,7 +464,7 @@
   if(typeof requestAnimationFrame==='function')requestAnimationFrame(loop);}
  function settingsSection(){if(typeof document==='undefined'||document.getElementById('moodSettingsR123'))return;const host=document.getElementById('detailSettingsR114')||document.getElementById('panel');if(!host)return;
   const d=document.createElement('details');d.id='moodSettingsR123';d.className='r114-group';
-  const rows=[['mood','사몽 구역 분위기(감정의 탑 층·네오 서울 연도·장미의 집·밤의 학교·화가 화풍)'],['deco','분위기 조형물(찻잔·바늘·창·기계 탑·나무·이젤·녹는 시계 등)'],['floor','바닥 무늬(체스판·층 번호·데이터 격자·붓결·소용돌이)'],['overlay','화면 색·안개·떠다니는 입자·데이터 비·손전등 원뿔'],['banner','들어설 때 층·연도 표시'],['tick','시대 전환 시계 째깍 소리'],['tilt','장미의 집 기울어진 방'],['art','Drive 원화 소품(찻잔·바늘과 실·사물함·게시판)']];
+  const rows=[['mood','사몽 구역 분위기(감정의 탑 층·디스토피아 구간·장미의 집·밤의 학교·화가 화풍)'],['deco','분위기 조형물(찻잔·바늘·창·기계 탑·나무·이젤·녹는 시계 등)'],['floor','바닥 무늬(체스판·층 번호·데이터 격자·붓결·소용돌이)'],['overlay','화면 색·안개·떠다니는 입자·데이터 비·손전등 원뿔'],['banner','들어설 때 층·연도 표시'],['tick','시대 전환 시계 째깍 소리'],['tilt','장미의 집 기울어진 방'],['art','Drive 원화 소품(찻잔·바늘과 실·사물함·게시판)']];
   d.innerHTML='<summary>사몽 구역 분위기(R123)</summary><div class="settings">'+rows.map(([k,l])=>'<label><input type="checkbox" data-r123="'+k+'" '+(prefs[k]?'checked':'')+'> '+l+'</label>').join('')+'</div>';
   d.querySelectorAll('[data-r123]').forEach(el=>el.onchange=()=>set({[el.dataset.r123]:el.checked}));host.appendChild(d);
   const q=document.getElementById('quickSettingsR114');if(q&&!document.getElementById('r123QuickMood')){const l=document.createElement('label');l.id='r123QuickMood';l.innerHTML='<input type="checkbox" '+(prefs.mood?'checked':'')+'> 사몽 구역 분위기(층·연도·화풍)';q.appendChild(l);l.querySelector('input').onchange=e=>{set({mood:e.target.checked});const m=d.querySelector('[data-r123="mood"]');if(m)m.checked=e.target.checked;};}}

@@ -31,6 +31,12 @@ def canon_story(text):
         if not buf: start=i0+k+1
         buf.append(s.strip())
     if buf: paras.append((start,'\n'.join(buf)))
+    # R180: 정본 20261101 은 '제2부 — …' 같은 부·구역 제목이 앞 문단 끝줄 바로 아래에 빈 줄 없이 붙어 있다 — 제목 줄에서 문단을 끊는다(문장은 그대로).
+    split=[]
+    for st,p in paras:
+        ls=p.split('\n');cut=[0]+[k for k,x in enumerate(ls) if k>0 and (PART.match(x) or ZONE.match(x))]+[len(ls)]
+        for a,b in zip(cut,cut[1:]): split.append((st+a,'\n'.join(ls[a:b])))
+    paras=split
     # 제목 줄이 같은 문단 첫 줄에 붙어 있으면 떼어 낸다
     items=[]
     for ln,p in paras:

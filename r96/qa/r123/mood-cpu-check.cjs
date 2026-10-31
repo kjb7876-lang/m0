@@ -38,13 +38,13 @@ const allFloors=new Set(tower.flatMap(id=>T[id].floors.list).filter(f=>f!=='G'))
 check('S-04: floors 1F~16F each shown somewhere in the tower',[...Array(16)].every((_,i)=>allFloors.has(i+1)),[...allFloors].join(','));
 check('S-04: multi-floor tower rooms read 8·9F and 10·11·12F from the title',T['sz115-S04-9'].floors.list.join()==='8,9'&&T['sz115-S04-10'].floors.list.join()==='10,11,12');
 check('higher floor → darker/narrower (height grows with floor)',M.heightOf('G')===0&&M.heightOf(1)<M.heightOf(8)&&M.heightOf(8)<M.heightOf(16)&&M.heightOf(16)===1);
-// ---- 네오 서울 ----
+// ---- R180: S-06 디스토피아(DYS-01~13) — 네오 서울(NS-xx)은 정본에서 삭제됨 ----
 const ns=ids.filter(id=>id.startsWith('sz115-S06-'));
-check('S-06: every zone is tied to its NS section (NS-01~NS-10)',ns.length===17&&ns.every(id=>/^NS-(0[1-9]|10)$/.test(T[id]?.sec||'')),ns.map(id=>T[id]?.sec).join(','));
+check('S-06: every zone is tied to its DYS section (DYS-01~DYS-13)',ns.length===23&&ns.every(id=>/^DYS-(0[1-9]|1[0-3])$/.test(T[id]?.sec||'')),ns.map(id=>T[id]?.sec).join(','));
 const yr=sec=>T[ns.find(id=>T[id].sec===sec)].ns;
-check('years come from the canon titles: NS-01 2189 · NS-02 2174 · NS-03 2189 · NS-04 2196 · NS-05 연도 없음',yr('NS-01').year==='2189'&&yr('NS-02').year==='2174'&&yr('NS-03').year==='2189'&&yr('NS-04').year==='2196'&&yr('NS-05').year===null&&/연도가 없는 방/.test(yr('NS-05').label),JSON.stringify([yr('NS-01'),yr('NS-05')]));
+check('DYS banners show the canon section title (no invented years)',yr('DYS-01').year===null&&yr('DYS-01').label==='침공'&&yr('DYS-13').label==='기록이 끝난 자리',JSON.stringify([yr('DYS-01'),yr('DYS-13')]));
 const eras=ns.map(id=>T[id].key);let switches=0;for(let i=1;i<eras.length;i++)if(eras[i]!==eras[i-1])switches++;
-check('three eras (기계 폐허 · 데이터 · 빛의 숲) alternate across the 17 zones',['machine','data','forest'].every(e=>eras.includes(e))&&switches>=6,eras.join(' '));
+check('eras (기계 폐허 · 데이터 · 원룸의 빛) alternate across the 23 zones',['machine','data','forest'].every(e=>eras.includes(e))&&switches>=6,eras.join(' '));
 // ---- 장미의 집 · 학교 · 호러 만화 · 화가 ----
 check('S-01 → rose (뒤틀린 동화), S-02 8 zones → school, S-03 → ink(흑과 백), S-05 → gyeong(경성의 밤), M → manga',ids.filter(i=>i.startsWith('sz115-S01-')).every(i=>T[i].key==='rose')&&ids.filter(i=>i.startsWith('sz115-S02-')).length===8&&ids.filter(i=>i.startsWith('sz115-S02-')).every(i=>T[i].key==='school')&&ids.filter(i=>/^sz115-S03-/.test(i)).every(i=>T[i].key==='ink')&&ids.filter(i=>/^sz115-S05-/.test(i)).every(i=>T[i].key==='gyeong')&&ids.filter(i=>/^sz115-M-/.test(i)).every(i=>T[i].key==='manga'));
 const painterOf=sec=>T[ids.find(id=>T[id]?.sec===sec&&T[id].painter)]?.key;
@@ -53,7 +53,7 @@ const P6=['gogh','dali','manet','picasso','klimt','monet'];
 check('the six painter looks differ in colour, floor brushwork and props',new Set(P6.map(k=>M.themes[k].tint[0])).size===6&&new Set(P6.map(k=>M.themes[k].floor.join())).size===6&&new Set(P6.map(k=>M.themes[k].deco.map(d=>d[0]).join())).size===6);
 check('surreal motifs present (녹는 시계 · 떠 있는 돌 · 끝없는 회랑)',['clock','stone','endless'].every(k=>Object.values(M.themes).some(t=>t.deco.some(d=>d[0]===k)))&&['clock','stone','endless'].every(k=>typeof M.draw[k]==='function'));
 const rg=ids.filter(id=>/^sz115-R[A-G]-/.test(id));
-check('every 화가 zone (RA~RG, 40) gets a painter or surreal look',rg.length===40&&rg.every(id=>T[id]?.painter&&M.themes[T[id].key]),rg.filter(id=>!T[id]).join(','));
+check('every 화가 zone (RA~RG, 42 — R180 R-10 4구역) gets a painter or surreal look',rg.length===42&&rg.every(id=>T[id]?.painter&&M.themes[T[id].key]),rg.filter(id=>!T[id]).join(','));
 check('R124: 문턱(P) → root (코어 아래 검은 뿌리), 페르소나(S-07) → persona (가면·손님 의자 하나)',ids.filter(i=>/^sz115-P-/.test(i)).every(i=>T[i]?.key==='root')&&ids.filter(i=>/^sz115-S07-/.test(i)).every(i=>T[i]?.key==='persona'));
 check('R124: 흑과 백은 R114 필터 사슬에 흑백을 붙이고(투명한 바깥은 물들지 않게), 경성은 함박눈, 페르소나는 벽 가면·거울·의자',/grayscale/.test(M.themes.ink.filter)&&!M.themes.ink.tint&&M.themes.gyeong.parts.some(p=>p[0]==='snow')&&['mask','mirror','chair'].every(k=>M.themes.persona.deco.some(d=>d[0]===k))&&['tendril','lantern','inkpost'].every(k=>typeof M.draw[k]==='function'));
 // R162: 전투 위주 재구성으로 장마다 B·D 구역이 더해져 108 → 140 구역 — 모든 구역에 분위기가 있어야 한다는 뜻은 그대로.
@@ -82,7 +82,7 @@ const t10=rooms['sz115-S04-10'];const R10=Z.zone('sz115-S04-10').rooms;
 check('tower: each storey of a multi-floor zone reads its own floor',R10.length===3&&[0,1,2].every(i=>M.floorAt(t10.st.theme,R10[i].x+R10[i].w/2,R10[i].y+R10[i].h/2)===10+i));
 check('school zones: dead/dim/flickering corridor lamps and door shadows',['sz115-S02-1','sz115-S02-3'].every(id=>rooms[id].st.lamps.length>0&&rooms[id].st.lamps.some(l=>l.mode==='dead'))&&ids.filter(i=>i.startsWith('sz115-S02-')).some(id=>rooms[id].st.ghosts.length>0));
 check('S-01 indoor floor becomes a chessboard (tile zone and garden excluded)',rooms['sz115-S01-3'].st.decals.filter(d=>d.g==='checker').length>20&&!rooms['sz115-S01-2'].st.decals.some(d=>d.g==='checker'));
-check('data world: green grid and flashing glyph cells',rooms['sz115-S06-9'].st.decals.some(d=>d.g==='grid')&&rooms['sz115-S06-9'].st.glyph.length>0);
+check('data world: green grid and flashing glyph cells',rooms['sz115-S06-6'].st.decals.some(d=>d.g==='grid')&&rooms['sz115-S06-6'].st.glyph.length>0);
 // ---- 표현 전용 소품 ----
 const rr=rooms['sz115-S01-3'];sb.room=rr.r;sb.player={x:rr.L.entry.x,y:rr.L.entry.y};M.enter(rr.st);const deco=rr.r.props.filter(p=>p.r123Deco);
 check('props are presentation-only (no collision, no auto-target)',deco.length===rr.st.deco.length&&deco.every(p=>p.solid===false&&p.r80PresentationOnly===true&&p.autoTargetEligible6===false));

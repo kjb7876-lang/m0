@@ -12,12 +12,12 @@ sb.window=sb;vm.createContext(sb);
 for(const f of ['samong-text-r103.js','samong-zones-r115-data.js','samong-zones-r115.js','samong-r103.js'])vm.runInContext(fs.readFileSync(path.join(SRC,f),'utf8'),sb,{filename:f});
 const SM=sb.__STORYWORLD_SAMONG_R103__,Z=sb.__STORYWORLD_SAMONG_ZONES_R115__,TX=sb.__STORYWORLD_SAMONG_TEXT_R103__;
 check('modules load',SM&&Z&&TX);
-check('text is the R122 서사 최종검수본',TX.sha256==='390e9e357529a66038d4ffdf77e9b7555183574bac2822ff4b2ba29dff0b296d');
+check('text is the R180 정본(네오 도쿄 삭제·경성의 밤 이후 각색본 20261101)',TX.sha256==='98f9508dec6d4decf8489336b5799a9ccf9c8a071d8d633ff221937c9a4a1bda');
 const chapters=Object.entries(Z.chapters);
 check('S-02 pilot has 8 zones',Z.chapter('S-02')?.length===8);
-check('108 zones over 사몽·역행·엔딩 (설계안 표)',chapters.reduce((n,[,l])=>n+l.length,0)===108&&SM.episodes.every(e=>Z.chapter(e.key)?.length),chapters.map(([k,l])=>k+':'+l.length).join(' '));
-const want={P:4,'S-01':5,'S-02':8,'S-03':7,'S-04':14,'S-05':6,'S-06':17,'S-07':3,RA:5,RB:6,RC:6,RD:7,RE:2,RF:3,RG:11,M:4};
-check('map count per episode follows the plan (S-04 12~15, S-06 16~20, S-07 3~4 …)',Object.entries(want).every(([k,n])=>Z.chapter(k)?.length===n));
+check('116 zones over 사몽·역행·엔딩 (R180: S-06 디스토피아 23 · R-10 4)',chapters.reduce((n,[,l])=>n+l.length,0)===116&&SM.episodes.every(e=>Z.chapter(e.key)?.length),chapters.map(([k,l])=>k+':'+l.length).join(' '));
+const want={P:4,'S-01':5,'S-02':8,'S-03':7,'S-04':14,'S-05':6,'S-06':23,'S-07':3,RA:5,RB:6,RC:6,RD:7,RE:4,RF:3,RG:11,M:4};
+check('map count per episode follows the plan (S-04 12~15, S-06 디스토피아 23, S-07 3~4 …)',Object.entries(want).every(([k,n])=>Z.chapter(k)?.length===n));
 const ids=chapters.flatMap(([k,l])=>l.map(z=>z.id));
 check('zone ids fixed and unique (sz115-<장>-<n>)',new Set(ids).size===ids.length&&chapters.every(([k,l])=>l.every((z,i)=>z.id==='sz115-'+k.replace('-','')+'-'+(i+1))),ids.join(','));
 check('every chapter key is an R103 episode',chapters.every(([k])=>SM.episodes.some(e=>e.key===k)));
@@ -31,7 +31,7 @@ const anchors=[];for(const[k,l]of chapters)for(const z of l){for(const c of z.cl
 const miss=anchors.filter(([id,c])=>!paras(c.key).some(p=>p.startsWith(c.sub))).map(([id,c])=>id+':'+c.sub);
 check('every clue/cue/statement anchor starts a 총집본 paragraph ('+anchors.length+')',!miss.length&&anchors.length>20,miss.join(' | '));
 const idx=c=>paras(c.key).findIndex(p=>p.startsWith(c.sub));
-const SECS=['prelude','threshold','S-01','S-02','S-03','S-04','S-05','NS-01','NS-02','NS-03','NS-04','NS-05','NS-06','NS-07','NS-08','NS-09','NS-10','S-07','R-00','R-01','R-02','R-03','R-04','R-05','R-06','R-07','R-08','R-09','R-10','R-11','R-12','R-13','R-14','R-15','R-16','R-17','M1','M2','M3','epilogue'];
+const SECS=['prelude','threshold','S-01','S-02','S-03','S-04','S-05','DYS-01','DYS-02','DYS-03','DYS-04','DYS-05','DYS-06','DYS-07','DYS-08','DYS-09','DYS-10','DYS-11','DYS-12','DYS-13','S-07','R-00','R-01','R-02','R-03','R-04','R-05','R-06','R-07','R-08','R-09','R-10','R-11','R-12','R-13','R-14','R-15','R-16','R-17','M1','M2','M3','epilogue'];
 const zoneRefs=z=>[z.patrol?.spotted,...(z.cue||[]),...(z.clues||[]),z.bossCue,...(z.solve?z.solve.statements:[]),...(z.solve?[z.solve.book,z.solve.cut]:[]),...(z.after||[])].filter(Boolean);
 const pos=c=>SECS.indexOf(c.key)*1000+idx(c);
 const unordered=[];for(const[k,l]of chapters){let last=-1;for(const z of l){const first=Math.min(...zoneRefs(z).map(pos));if(Number.isFinite(first)){if(first<last)unordered.push(z.id);last=first;}}}
@@ -46,7 +46,7 @@ check('S-02 zones show every S-02 paragraph ('+S02.size+'/'+paras('S-02').length
 // ---- 원문 인물·해법 ----
 const conf=chapters.flatMap(([,l])=>l.filter(z=>z.kind==='confront'));
 const bossName=z=>(z.boss||SM.episodes.find(e=>Z.chapter(e.key).includes(z)).boss).name;
-const ALLOWED=['순찰자','봉합부인','검은 고리','강재헌','교주의 인장','만조','유예관','미명천사','페르소나','백색 손님','재판관','종이 왕','백색 사수','스토리텔러','미카엘라'];
+const ALLOWED=['상대 초인','검은 명령선','순찰자','봉합부인','검은 고리','강재헌','교주의 인장','페르소나','백색 손님','재판관','종이 왕','백색 사수','스토리텔러','미카엘라'];
 check('confrontations only use figures named in the text (no new bosses)',conf.every(z=>ALLOWED.includes(bossName(z))),conf.map(bossName).join(','));
 check('페르소나 and 미카엘라 are never solved by killing (statements + HP floor)',conf.filter(z=>['페르소나','미카엘라'].includes(bossName(z))).length===2&&conf.filter(z=>['페르소나','미카엘라'].includes(bossName(z))).every(z=>z.solve?.statements?.length>=3&&z.solve.floor>=.6));
 check('knot/choice confrontations need their steps, not HP alone',conf.every(z=>z.solve&&((z.solve.statements||[]).length||z.solve.hold)));

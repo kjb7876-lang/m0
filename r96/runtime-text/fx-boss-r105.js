@@ -28,6 +28,7 @@ const PAL={
  'b06-boss':{a:[196,126,62],b:[255,224,176],elem:'shock',style:'fireball',sheet:'dali'},
  'mb-ep1b03':{a:[204,172,92],b:[255,250,222],elem:'shock',style:'fireball'},
  'c102-boss':{a:[196,34,54],b:[255,176,176],elem:'fire',style:'meteor',sheet:'monet'},
+ 'u203-mid':{a:[170,44,40],b:[255,196,176],elem:'shock',style:'comet'},/* R180: S-06 디스토피아 상대 초인(붉은 코어) */
  'u201-mid':{a:[196,218,240],b:[255,255,255],elem:'frost',style:'comet'},
  'c103-boss':{a:[176,30,52],b:[255,128,146],elem:'fire',style:'thread'},
  'c104-mid':{a:[126,64,204],b:[250,222,126],elem:'corruption',style:'meteor'},
