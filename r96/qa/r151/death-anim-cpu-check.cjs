@@ -29,5 +29,7 @@ function run({ready=true,coop='off',story=null,hero='lauren'}={}){let panels=0,t
 {const t=run({coop:'duo'});t.sb.player.hp=0;t.sb.showDeath();ok('co-op mode → original panel at once',t.panels===1&&t.timers.length===0);}
 {const t=run({story:{id:'x'}});t.sb.player.hp=0;t.sb.showDeath();ok('during a story scene → original panel at once',t.panels===1);}
 {const t=run({hero:'hwando'});t.sb.player.hp=0;t.sb.showDeath();t.tick(10);ok('hwando (e only) facing left uses the mirrored e sheet',t.api.inspect().stats.frames===1);}
+{const t=run();let cleared=0;t.sb.clearControls=()=>cleared++;t.sb.stopVoice=()=>{};t.sb.player.hp=0;t.sb.showDeath();ok('R159: controls are cleared the moment the hero falls (held attack/guard keys do not linger)',cleared===1,cleared);
+ t.tick(100);t.sb.player.hp=777;t.tick(100);ok('R159: if the hero is alive again during the fall (new game/load), the fall frames stop at once',!t.api.inspect().dying&&t.api.inspect().stats.revived===1,t.api.inspect());}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

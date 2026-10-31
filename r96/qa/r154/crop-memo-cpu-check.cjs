@@ -18,5 +18,7 @@ const A={src:'http://x/m0/assets/a.webp',naturalWidth:100,naturalHeight:200},A2=
  t.sb.imageCrop({src:'',naturalWidth:10,naturalHeight:10});t.sb.imageCrop({src:'',naturalWidth:10,naturalHeight:10});ok('images without an address are always measured',t.calls===5);
  const st=t.api.inspect().stats;ok('stats count hits and misses',st.hit===2&&st.miss===3&&st.skipped===2,st);}
 {const t=run({cropMemo:false});t.sb.imageCrop(A);t.sb.imageCrop(A2);ok('storyworld.r154.perf {cropMemo:false} turns it off',t.calls===2);}
+{let calls=0,fail=true;const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},imageCrop(im){calls++;return fail?null:{x:1,y:1,w:2,h:2};}};vm.createContext(sb);vm.runInContext(src,sb);
+ const A={src:'http://x/a.webp',naturalWidth:10,naturalHeight:10};sb.imageCrop(A);fail=false;const r=sb.imageCrop(A);ok('R159: a failed measurement (null) is not remembered — the next load measures again',calls===2&&r&&r.w===2,{calls,r});}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

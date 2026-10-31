@@ -30,7 +30,7 @@ function apply(){setLite(prefs.lite==='on'||(prefs.lite==='auto'&&stats.autoOn>0
 // 장면 간격·한 장면 일 시간: 이 스크립트의 장면 콜백이 게임 그리기보다 먼저 불리므로(먼저 등록), 콜백 시작부터 그 장면의 그리기가 끝난 뒤 메시지까지를 잰다.
 const gaps=[],works=[];let last=0,since=0,slowSince=0,t0=0;const ch=typeof MessageChannel==='function'?new MessageChannel():null;
 if(ch)ch.port1.onmessage=()=>{if(t0){works.push(performance.now()-t0);if(works.length>120)works.shift();t0=0;}};
-function loop(t){try{stats.frames++;const play=playing();if(play&&last&&t-last<1000){gaps.push(t-last);if(gaps.length>120)gaps.shift();stats.playFrames++;since+=t-last;}else if(!play){since=0;}
+function loop(t){try{stats.frames++;const play=playing();if(play&&last&&t-last<1000){gaps.push(t-last);if(gaps.length>120)gaps.shift();stats.playFrames++;since+=t-last;}else if(!play){since=0;slowSince=0;gaps.length=0;}/* R159: 서사·창·로딩 동안 끊긴 시간을 '연속 느림'으로 세지 않는다 */
   last=t;if(play&&ch&&!t0&&prefs.meter){t0=performance.now();ch.port2.postMessage(0);}/* R157: 한 장면 시간은 성능 표시를 켰을 때만 잰다(자동 전환은 장면 간격만 쓴다) */
   if(since>=2000){since=0;check(t);}}catch(e){fail(e);}requestAnimationFrame(loop);}
 function q(a,p){if(!a.length)return null;const s=a.slice().sort((x,y)=>x-y);return s[Math.min(s.length-1,Math.floor((s.length-1)*p))];}
@@ -47,10 +47,10 @@ function settingsSection(){const host=document.getElementById('quickSettingsR114
   +' <label><input type="checkbox" data-r150-meter '+(prefs.meter?'checked':'')+'> 초당 장면 수 표시</label>';
  const g=host.querySelector(':scope>.r114-row');if(g)g.after(row);else host.appendChild(row);// R153: 그래픽 품질 바로 아래(휴대폰 간이설정에서도 접히지 않음)
  row.querySelectorAll('[data-r150-lite]').forEach(b=>b.onclick=()=>{prefs.lite=b.dataset.r150Lite;save();apply();row.querySelectorAll('[data-r150-lite]').forEach(x=>{const on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});});
- const m=row.querySelector('[data-r150-meter]');m.onchange=()=>{prefs.meter=m.checked;save();meterText();};}
+ const m=row.querySelector('[data-r150-meter]');m.onchange=()=>{prefs.meter=m.checked;if(m.checked)works.length=0;save();meterText();};/* R159: 다시 켜면 옛 측정값을 버린다 */}
 try{css();apply();requestAnimationFrame(loop);
  if(typeof showSettings==='function'){const b=showSettings;showSettings=function(...a){const r=b.apply(this,a);try{settingsSection();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
-window.__STORYWORLD_PERF_R150__=Object.freeze({inspect:()=>({...stats,automated,prefs:{...prefs},lastError}),set(p){prefs={...prefs,...p};save();apply();meterText();},
+window.__STORYWORLD_PERF_R150__=Object.freeze({inspect:()=>({...stats,automated,prefs:{...prefs},lastError}),set(p){if(p&&p.meter&&!prefs.meter)works.length=0;prefs={...prefs,...p};save();apply();meterText();},
  _check:check,_gaps:gaps,SLOW_MS,NEED_MS});
 })();
