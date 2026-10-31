@@ -11594,68 +11594,63 @@
     },
     {
       "path": "assets/r163/pixelfx/collect-burst.webp",
-      "bytes": 35368,
-      "sha256": "05360bc362352406f09dc1a043d5730a1cca907ebb819d2a7c2587102f0abf7c"
+      "bytes": 38626,
+      "sha256": "9e9acacbb829823e9744d69bbf271e8989b935ff7c6c156936e750afab5d7dc3"
     },
     {
       "path": "assets/r163/pixelfx/core-orb-teal.webp",
-      "bytes": 216226,
-      "sha256": "024e15e248e82a66809840b50fe13ddbccc1461dd071bf813a6c78efeed64042"
+      "bytes": 153624,
+      "sha256": "0ba828820f81a050f143163e2e7913d842854e8a1168bc050ac271f312f1910a"
     },
     {
       "path": "assets/r163/pixelfx/crit-hit.webp",
-      "bytes": 55490,
-      "sha256": "2b81b99644e841247f33eccc1b4b7756cfc226fd9165c8b98ed3af729b3e559c"
+      "bytes": 50452,
+      "sha256": "9bee8284c7e3ba56f0f42dca794c87c202be7030b69c5bf025b8121af57ea488"
     },
     {
       "path": "assets/r163/pixelfx/dark-explosion-blood.webp",
-      "bytes": 699874,
-      "sha256": "73560237215890220f5809608b7ddb1e4a4a55bd624e3cdb0283b916ef1e5f11"
+      "bytes": 634712,
+      "sha256": "d6a0f98c90c9a06abf7a2fea7db1fdbe0d8f019a2b778292d7111edb1a1ba84d"
     },
     {
       "path": "assets/r163/pixelfx/hands-blood.webp",
-      "bytes": 203860,
-      "sha256": "6c43ae1520d109edc943d589d3bbe95c4182b4e84914e62ca28f2435ccec8700"
+      "bytes": 144824,
+      "sha256": "b88f43b367facb0e9a0a46b767bdd3ed1dc457d5ce45d183b06f7e6138cd74c3"
     },
     {
       "path": "assets/r163/pixelfx/heal-aoe.webp",
-      "bytes": 304544,
-      "sha256": "820a8fe40bf4b8215bac6f43f0ec08fb398c4282c5c8f6d974a3541021825669"
+      "bytes": 266778,
+      "sha256": "65cab3a345c812ce4f278bc0444e7e271d4f4dededa8297fbe6188fa6f6ddd18"
     },
     {
       "path": "assets/r163/pixelfx/hit-flash.webp",
-      "bytes": 9194,
-      "sha256": "18de161086e88e0ed3889af5432af247cdea475fffc585c0f50adda31cda6c76"
+      "bytes": 11892,
+      "sha256": "79e82658f6b72cf611ba1d997be063433c3e0a9e4cc36e6403410e4577fe9c9c"
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 6400,
-      "sha256": "a17de137b68cace6fe34c9bf55ef74191a16f95c0dbff0c51b48dd11fbb5d6ab"
+      "bytes": 5929,
+      "sha256": "e95b1d1bb144b6dd1b0f4668d236a9683ba148cc7f3aae309b060477a264e85f"
     },
     {
       "path": "assets/r163/pixelfx/level-up.webp",
-      "bytes": 261064,
-      "sha256": "bb75366dd411c21a361cb84b5dc57a0195bde8e5155cffdbf982c88b9bc2717a"
+      "bytes": 581436,
+      "sha256": "5d6a2f122be73795fa5eef661b84ac795e66cf4c22ab034547e2c426d6b050ec"
     },
     {
       "path": "assets/r163/pixelfx/meteor.webp",
-      "bytes": 619746,
-      "sha256": "deb44ce7e081d6b9d616061076f6540f792fcb3b9e48bad80fe50b9c3c71ffc8"
-    },
-    {
-      "path": "assets/r163/pixelfx/poof-ash.webp",
-      "bytes": 40850,
-      "sha256": "e37bb4a15783c375c7c5c5f630802e971f110500e31603f58ea55c6dda90cd31"
+      "bytes": 536716,
+      "sha256": "47b1a828f575fe4d10f614d69e33be0dd7b58c5a75ecaf24692ae0307ab28162"
     },
     {
       "path": "assets/r163/pixelfx/portal-teal.webp",
-      "bytes": 300706,
-      "sha256": "b273efbac974a6efe5a0a7fd13cea6b8ab98be0b0d75f411a730ea4e858de82c"
+      "bytes": 175166,
+      "sha256": "6ac0ea0f03cd188dff0c5a7416e518cd29f9d59e772fba0d6e80b9c2140f5d1c"
     },
     {
       "path": "assets/r163/pixelfx/tendrils-blood.webp",
-      "bytes": 338030,
-      "sha256": "d12cd47a34057b2f7081b4f47b18516313ca36d9e9d1cf3ee1f4e422b07200b0"
+      "bytes": 201724,
+      "sha256": "e3773a05bdff46a9491e17c9e72d89ba373271599eb80bb4088a9edcb3601e3a"
     },
     {
       "path": "assets/r164/michaela/index.json",
@@ -20254,8 +20249,8 @@
     },
     {
       "path": "effects-r165.js",
-      "bytes": 4000,
-      "sha256": "bace0c4294f1423b7499bc565529a9815e82342a9994de0ca55f82eafb215168"
+      "bytes": 5774,
+      "sha256": "0ae0022ebc307101053bc5c5414b38a1650a258e321015c28b606e0630aa9c3d"
     },
     {
       "path": "ego-restore-health-r79.js",
@@ -20738,8 +20733,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4147,
-  "totalBytes": 793464188,
+  "fileCount": 4146,
+  "totalBytes": 793176489,
   "webHTMLSha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667",
   "largest": [
     {
