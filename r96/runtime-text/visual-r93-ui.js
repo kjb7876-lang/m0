@@ -54,6 +54,12 @@ body.r93-dock header .region #regionSub{flex-basis:100%;font-size:10px;opacity:.
 #story-wer-controls.r93-dock .skill img{width:20px;height:20px;margin-top:5px}
 #story-wer-controls.r93-dock .skill .label{display:none}
 #story-wer-controls.r93-dock .skill kbd{font-size:9px}
+#story-wer-controls.r93-dock.r160-bar:not(.hidden){display:contents!important}
+#story-wer-controls.r160-bar .skill{width:70px!important;height:77px!important;flex:0 0 70px;padding:4px!important}
+#story-wer-controls.r160-bar .skill img{width:54px;height:50px;margin-top:0}
+#story-wer-controls.r160-bar .skill .label{display:block}
+#story-wer-controls.r160-bar .skill kbd{font-size:9px}
+#story-wer-controls.r160-bar #story-wer-w{margin-left:10px}
 body.r93-dock .footRight{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:1px;max-width:190px;max-height:104px;overflow:hidden}
 body.r93-dock .footRight #upgradeBtn{padding:2px 6px;font-size:11px}
 body.r93-dock .footRight #awakeText,body.r93-dock .footRight #buildText{font-size:10px;line-height:1.2}
@@ -72,14 +78,18 @@ body.r93-dock #minipanel{top:0!important;right:0!important;transform:scale(.72);
   b.classList.toggle('r93-cd',busy||b.disabled);b.classList.toggle('r93-on',!busy&&(b.classList.contains('active')||b.classList.contains('on')||b.getAttribute('aria-pressed')==='true'));}}
  // Floating map windows move into the header and footer; each element keeps its
  // id and listeners, and returns to its original parent when the option is off.
+ // R160: 넓은 화면(가로 1200px 이상·세로 511px 이상·마우스)에서는 Z/X/C 를 맨 아래 기술 칸 줄 끝에 같은 크기 칸으로 둔다
+ //  (사용자 2026-10-31 "zxc키도 맨아래쪽 버튼공간으로 ui개선"). 좁은 화면은 칸이 넘치므로 예전처럼 오른쪽 작은 칸.
+ const wideMQ=window.matchMedia?matchMedia('(min-width:1200px) and (min-height:511px) and (pointer:fine)'):null;
+ const wideBar=()=>!!wideMQ?.matches;
  const homes=new Map();
  const DOCK=[['quest',()=>document.querySelector('header .region'),'append'],['goldHudR72',()=>document.querySelector('header .topnav'),'prepend'],
-  ['story-code-button',()=>document.querySelector('header .topnav'),'prepend'],['story-wer-controls',()=>document.querySelector('footer .footRight'),'prepend']];
+  ['story-code-button',()=>document.querySelector('header .topnav'),'prepend'],['story-wer-controls',()=>wideBar()?document.querySelector('footer .hotbar'):document.querySelector('footer .footRight'),'append']];
  function dock(){const enabled=prefs.dockUi&&!document.body.classList.contains('mobile-live-r63');document.body.classList.toggle('r93-dock',enabled);for(const[id,target,how]of DOCK){const el=document.getElementById(id),host=target();if(!el||!host)continue;
    // The native full-screen mobile layout hides header/footer entirely.
    // Keep its floating controls in their native, reachable parents.
-   if(enabled){if(el.parentElement===host)continue;if(!homes.has(id)){const marker=document.createElement('span');marker.hidden=true;marker.style.display='none';const parent=el.parentElement,next=el.nextSibling;parent.insertBefore(marker,el);homes.set(id,{parent,next,marker});}host[how](el);el.classList.add('r93-dock');stats.docked=(stats.docked||0)+1;}
-   else if(homes.has(id)&&el.parentElement===host){const h=homes.get(id);el.classList.remove('r93-dock');if(h.marker.parentNode)h.marker.parentNode.insertBefore(el,h.marker);else h.parent?.insertBefore(el,h.next&&h.next.parentNode===h.parent?h.next:null);h.marker.remove();homes.delete(id);}}}
+   if(enabled){if(id==='story-wer-controls')el.classList.toggle('r160-bar',host.classList.contains('hotbar'));if(el.parentElement===host)continue;if(!homes.has(id)){const marker=document.createElement('span');marker.hidden=true;marker.style.display='none';const parent=el.parentElement,next=el.nextSibling;parent.insertBefore(marker,el);homes.set(id,{parent,next,marker});}host[how](el);el.classList.add('r93-dock');stats.docked=(stats.docked||0)+1;}
+   else if(homes.has(id)&&el.parentElement===host){const h=homes.get(id);el.classList.remove('r93-dock','r160-bar');if(h.marker.parentNode)h.marker.parentNode.insertBefore(el,h.marker);else h.parent?.insertBefore(el,h.next&&h.next.parentNode===h.parent?h.next:null);h.marker.remove();homes.delete(id);}}}
  setInterval(()=>{try{dock();}catch(e){fail(e);}},500);
  function apply(){document.body.classList.toggle('r93-dock',prefs.dockUi);try{dock();}catch(e){fail(e);}document.body.classList.toggle('r93-slots',prefs.slotFrames);document.body.classList.toggle('r93-panels',prefs.panelFrames);document.body.classList.toggle('r93-orbs',prefs.orbs);
   if(!prefs.orbs&&orbs){orbs.remove();orbs=null;}if(!prefs.ambience)ambienceOff();}
