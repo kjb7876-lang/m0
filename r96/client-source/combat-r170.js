@@ -60,7 +60,7 @@ function place(){const want=prefs.towers?wanted():0,key=String(room.id)+':'+Stri
  const art=artFor();if(!art)return;const donor=(room.enemies||[]).find(e=>e.hp>0&&!major(e)&&!e.r170Tower&&!e.r162Lane);if(!donor)return;placedKey=key;
  let atk=40;try{atk=Math.max(1,Number(attackPower())||40);if(player.samong>0)atk/=7;else if(player.ego>0)atk/=1.55*(1+.07*Math.max(0,(player.egoStackR169||1)-1));}catch(_){}/* 잠깐 버프(사몽·EGO) 뺀 값 */const snap=JSON.stringify(donor),taken=[];
  for(let n=towers().length;n<want;n++){const at=spotFor(n,taken);if(!at)break;taken.push(at);let e;try{e=JSON.parse(snap);}catch(_){break;}
-  Object.assign(e,{id:'r170:tower:'+room.id+':'+n+':'+Math.floor(T()*10),x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
+  Object.assign(e,{id:'r170:tower:'+room.id+':'+n,x:at.x,y:at.y,homeX:at.x,homeY:at.y,nav:[],navAt:0,attack:null,rangedWindup:0,deadRecorded:false,spawnState:'active',
    r170Tower:{art:art.path,h:art.h,next:T()+3,casts:0,summoned:0,snap},r75Tower:true,r61PreserveHealth:true,speed:0,ai:'melee',samongElite:false,samongSurvival:false,r162Lane:false,samongSubR170:false,
    name:art.name||(donor.name||'')+' · 피의 탑'});
   e.maxHp=e.hp=Math.round(samongRoom()?atk*25:Math.max(60,(Number(donor.maxHp)||60)*6));e.damage=(Number(donor.damage)||10)*1.3;e.defScale=1;e.cd=99;
@@ -120,6 +120,8 @@ try{
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(!prefs.treeShadow&&p&&(p.r99Tree||/tree/i.test(String(p.path||'')))&&typeof shadow==='function'){const sh=shadow;shadow=function(){stats.treeShadowsSkipped++;};try{return base.apply(this,[p,...a]);}finally{shadow=sh;}}return base.apply(this,[p,...a]);};}
  // 탑: 본편은 맵에 들어설 때 한 번(전투 도중에 적 수가 바뀌지 않게), 사몽은 적이 나온 뒤 틱에서.
  if(typeof tick==='function'){const base=tick;let at=0;tick=function(...a){const r=base.apply(this,a);try{if(live()&&prefs.towers){if(samongRoom()&&(T()>=at||T()<at-5)){at=T()+.7;place();}towerTick();}if(live()){if(typeof hazards!=='undefined'&&hazards.some(h=>h?.r170))arm();else disarm();}}catch(e){fail(e);}return r;};}
+ // 저장에는 탑이 없다 — 불러온 뒤 같은 자리·같은 id 로 다시 세운다(자리·id 는 맵과 순번으로 정해진다).
+ if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=async function(...a){const r=await base.apply(this,a);try{if(r!==false&&live()&&!samongRoom()&&prefs.towers){placedKey='';place();}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);placedKey='';const restore=a.some(x=>x&&typeof x==='object'&&x.restore===true);// 저장 불러오기는 자리·적 목록을 그대로
    if(r!==false&&!restore)try{spreadStory();if(!samongRoom()&&prefs.towers)place();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
