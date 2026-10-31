@@ -53,7 +53,7 @@
   const m=/(\d+)(?:~(\d+))?층/.exec(z.title||'');if(!m)return null;const a=+m[1],b=m[2]?+m[2]:a,list=[];for(let f=a;f<=b;f++)list.push(f);return{list};}
  function nsInfo(sec){const t=String(TXT()[sec]?.title||'').replace(/^\[[^\]]*\]\s*/,''),y=/(\d{4})년/.exec(t);
   return{year:y?y[1]:null,label:(y?t.replace(/\d{4}년\s*·?\s*/,''):t).trim()||sec,noYear:!y};}
- function themeOf(zid){const m=/^sz115-([A-Z0-9]+)-(\d+)$/.exec(String(zid||''));if(!m)return null;const ch=m[1],z=ZN()?.zone?.(zid)||null,sec=sectionOf(z);
+ function themeOf(zid){const m=/^sz115-([A-Z0-9]+)-(\d+)$/.exec(String(zid||''))||/^sz162-([A-Z0-9-]+)-[BD]$/.exec(String(zid||''));if(!m)return null;const ch=m[1].replace('-',''),/* R162: 새 B·D 구역(sz162-<장>-B/D)도 그 장의 분위기 */z=ZN()?.zone?.(zid)||null,sec=sectionOf(z);
   if(ch==='S04')return{key:'tower',zone:zid,sec:'S-04',floors:towerFloors(z),z};
   if(ch==='S06')return{key:ERA[zid]||'machine',zone:zid,sec,ns:sec&&/^NS-/.test(sec)?nsInfo(sec):null,z};
   if(ch==='S01')return{key:'rose',zone:zid,sec:'S-01',z};

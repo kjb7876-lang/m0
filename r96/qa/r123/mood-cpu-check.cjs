@@ -56,7 +56,8 @@ const rg=ids.filter(id=>/^sz115-R[A-G]-/.test(id));
 check('every 화가 zone (RA~RG, 40) gets a painter or surreal look',rg.length===40&&rg.every(id=>T[id]?.painter&&M.themes[T[id].key]),rg.filter(id=>!T[id]).join(','));
 check('R124: 문턱(P) → root (코어 아래 검은 뿌리), 페르소나(S-07) → persona (가면·손님 의자 하나)',ids.filter(i=>/^sz115-P-/.test(i)).every(i=>T[i]?.key==='root')&&ids.filter(i=>/^sz115-S07-/.test(i)).every(i=>T[i]?.key==='persona'));
 check('R124: 흑과 백은 R114 필터 사슬에 흑백을 붙이고(투명한 바깥은 물들지 않게), 경성은 함박눈, 페르소나는 벽 가면·거울·의자',/grayscale/.test(M.themes.ink.filter)&&!M.themes.ink.tint&&M.themes.gyeong.parts.some(p=>p[0]==='snow')&&['mask','mirror','chair'].every(k=>M.themes.persona.deco.some(d=>d[0]===k))&&['tendril','lantern','inkpost'].every(k=>typeof M.draw[k]==='function'));
-check('every one of the 108 zones now has a mood',ids.length===108&&ids.every(i=>T[i]),ids.filter(i=>!T[i]).join(','));
+// R162: 전투 위주 재구성으로 장마다 B·D 구역이 더해져 108 → 140 구역 — 모든 구역에 분위기가 있어야 한다는 뜻은 그대로.
+check('every one of the zones (108 + R162 B·D '+(ids.length-108)+') now has a mood',ids.length>=108&&ids.every(i=>T[i]),ids.filter(i=>!T[i]).join(','));
 // ---- 실제 배치 위에 짓기 ----
 const epOf=id=>SM.episodes.findIndex(e=>Z.chapter(e.key)?.some(z=>z.id===id));
 const rooms={};let badDeco=[],noDecal=[],noDeco=[],faceless=[];
@@ -70,7 +71,7 @@ for(const id of ids){if(!T[id])continue;const L=SM.layoutFor(epOf(id),null,id);c
   if(['window','endless'].includes(d.kind)&&!d.face)faceless.push(id+':'+d.kind);}
  for(let i=0;i<st.deco.length;i++)for(let j=i+1;j<st.deco.length;j++)if(Math.hypot(st.deco[i].x-st.deco[j].x,st.deco[i].y-st.deco[j].y)<2.9)badDeco.push(id+':overlap');}
 const built=Object.keys(rooms).length;
-check('builds on every themed zone layout ('+built+')',built===108&&badDeco.filter(x=>x.endsWith('nostate')).length===0);
+check('builds on every themed zone layout ('+built+')',built===ids.length&&badDeco.filter(x=>x.endsWith('nostate')).length===0);
 check('props stand on floor cells, ≥3 tiles from entry/exit and apart from each other',badDeco.length===0,badDeco.slice(0,8).join(' '));
 check('every themed zone gets floor marks',noDecal.length===0,noDecal.join(','));
 check('zones with a prop list get at least one prop',noDeco.length<=2,noDeco.join(','));
