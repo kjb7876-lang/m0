@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 ok('nav-r176.js runtime copy matches',fs.readFileSync(path.join(R,'runtime-text','nav-r176.js'),'utf8')===C('nav-r176.js'));
-ok('loads after every overlay that wraps openPanel/show* (only combat-r118 and world-tiles-r118, which wrap neither, come after)',/audio-r98\.js"><\/script>(<script src="\.\/effects-r178\.js"><\/script><script src="\.\/story-collect-r177\.js"><\/script><script src="\.\/samong-hud-r177\.js"><\/script>)?<script src="\.\/nav-r176\.js"><\/script>\s*<script src="\.\/combat-r118\.js"><\/script>\s*<script src="\.\/world-tiles-r118\.js"><\/script>\s*$/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
+ok('loads after every overlay that wraps openPanel/show* (only combat-r118 and world-tiles-r118, which wrap neither, come after)',/audio-r98\.js"><\/script>(<script src="\.\/effects-r178\.js"><\/script><script src="\.\/story-collect-r177\.js"><\/script><script src="\.\/balance-r179\.js"><\/script><script src="\.\/samong-hud-r177\.js"><\/script>)?<script src="\.\/nav-r176\.js"><\/script>\s*<script src="\.\/combat-r118\.js"><\/script>\s*<script src="\.\/world-tiles-r118\.js"><\/script>\s*$/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
 // fake history
 const entries=[{state:null}];let idx=0;const listeners=[];
 const history={get length(){return entries.length;},pushState(s){entries.splice(idx+1);entries.push({state:s});idx++;},replaceState(s){entries[idx]={state:s};},
@@ -39,5 +39,8 @@ vm.runInContext('showJournal()',sb);sb.storyScene={};const before=panel;history.
 {const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),hud=C('samong-hud-r177.js');
  ok('samong zone names: region name / chapter line / entry banner / menu use the samong episode and zone, not the borrowed hub story names',/function samongNames\(\)/.test(hud)&&/updateHUD=function/.test(hud)&&/banner=function/.test(hud)&&/displayRegion=function/.test(hud)&&/'사몽 · '\+n\.ep\+' · '\+n\.zone/.test(hud));
  ok('hero ground-spike pattern plays the earth-spike frame animation (tinted with the hero colours) instead of stretched still spikes; pixelfx has a screen-space frameAt',/function frameAt\(name,u,x,y,o=\{\}\)/.test(C('pixelfx-r163.js'))&&/PX\.frameAt\('mob-stone',v,px,py/.test(C('hero-fx-r102.js')));}
+{// 한 줄 코드 안의 // 주석이 뒤따르는 코드를 지워 버리는 실수 막기(R176 upgrades-r169 통합 카드가 통째로 사라졌던 일)
+ const bad=[];for(const f of ['nav-r176.js','samong-hud-r177.js','story-collect-r177.js','effects-r178.js','balance-r179.js','upgrades-r169.js']){fs.readFileSync(path.join(R,'client-source',f),'utf8').split('\n').forEach((l,i)=>{const t=l.trimStart();if(/^(\/\/|\/\*|\*)/.test(t))return;const m=l.match(/(^|[^:\\])\/\/(.*)$/);if(!m)return;const before=l.slice(0,m.index+1);if((before.split("'").length-1)%2||(before.split('"').length-1)%2||(before.split('`').length-1)%2)return;if(/[;{}]\s*[A-Za-z_$]|\b(const|let|if|for|return)\b/.test(m[2]))bad.push(f+':'+(i+1));});}
+ ok('no inline // comment swallows code on the same line in R176–R179 overlays',!bad.length,bad);}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

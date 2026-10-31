@@ -19713,6 +19713,11 @@
       "sha256": "6b19214185896be7fdb0ab6e179b77423e901b0324e5b84e3b8d64cebc3cc913"
     },
     {
+      "path": "balance-r179.js",
+      "bytes": 2632,
+      "sha256": "6ef5443b1066371ab9cd1b265850290b5afa3d5e56e68cbf1d40564f83fe32cb"
+    },
+    {
       "path": "bosses-r104-data.js",
       "bytes": 23577,
       "sha256": "0532ab8aa0e10c46f2ec832ad879688a37f39bef58972030b62726b57d66fe56"
@@ -20459,8 +20464,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564213,
-      "sha256": "dc6ba80984567686d51f02c9effc0628423889cb26386c2e69b6f2601d4de2c2"
+      "bytes": 6564254,
+      "sha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916"
     },
     {
       "path": "intro-r140.js",
@@ -20689,8 +20694,8 @@
     },
     {
       "path": "upgrades-r169.js",
-      "bytes": 12642,
-      "sha256": "b3ba827c3e88aca2a538ddcc23545463b51a722d43432b621be07c9b0c00902b"
+      "bytes": 12645,
+      "sha256": "a7da1a2e9120e6f23b31839a633281e4620fa32790d142ff64461bf86bfeece2"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -20848,9 +20853,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4169,
-  "totalBytes": 796075313,
-  "webHTMLSha256": "dc6ba80984567686d51f02c9effc0628423889cb26386c2e69b6f2601d4de2c2",
+  "fileCount": 4170,
+  "totalBytes": 796077989,
+  "webHTMLSha256": "9e13456fc33dc54647ca8b7955ca5e6eb7495229b6eda7e3ad943d098b437916",
   "largest": [
     {
       "path": "index.html",

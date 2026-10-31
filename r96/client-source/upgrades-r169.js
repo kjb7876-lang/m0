@@ -62,7 +62,7 @@ function buyTalent(id){const p=player;const u=UPGRADES.find(x=>x.id===id);if(!p|
  try{sound('upgrade',true);}catch(_){}try{saveGame(false);}catch(_){}stats.talentBuys++;return true;}
 function css(){if(document.getElementById('r169UpCss'))return;const s=document.createElement('style');s.id='r169UpCss';
  s.textContent='#panel .r169sec{grid-column:1/-1;margin:10px 0 2px;padding:4px 2px;border-bottom:1px solid #6b5a46;color:#f0d9b0;font:700 14px/1.4 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.04em}#panel .r169sec small{font-weight:400;color:#bfa98a;margin-left:8px;font-size:12px}#panel p.r169rule{margin:4px 0 8px;color:#e8d6bb}';document.head.appendChild(s);}
-function merge(){if(!prefs.merge||!solo())return;// 통합 카드는 player 를 직접 바꾼다 — 함께하기에서는 손님 요청 경로(R62 카드)만 쓴다const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!cards||!cards.querySelector('[data-r62-passive]')||cards.querySelector('.r169card'))return;const p=me();if(!p)return;css();
+function merge(){if(!prefs.merge||!solo())return;/* 통합 카드는 player 를 직접 바꾼다 — 함께하기에서는 손님 요청 경로(R62 카드)만 쓴다 */const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!cards||!cards.querySelector('[data-r62-passive]')||cards.querySelector('.r169card'))return;const p=me();if(!p)return;css();
  const sec=(t,s)=>'<div class="r169sec">'+t+(s?'<small>'+s+'</small>':'')+'</div>';
  cards.insertAdjacentHTML('afterbegin',sec('오라 · 무한강화','다음 단계 비용 = 단계²'));
  cards.insertAdjacentHTML('beforeend',sec('Z · X · C 스킬강화','k단계 k²점 · 최대 7단계')+procCards(p)+sec('일반강화','기존 영웅·공통 재능 · 1점')+talentCards(p));

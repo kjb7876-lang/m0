@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
-ok('story-collect-r177 runtime copy matches and loads before samong-hud-r177',fs.readFileSync(path.join(R,'runtime-text','story-collect-r177.js'),'utf8')===C('story-collect-r177.js')&&/story-collect-r177\.js"><\/script><script src="\.\/samong-hud-r177\.js"/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
+ok('story-collect-r177 runtime copy matches and loads before samong-hud-r177',fs.readFileSync(path.join(R,'runtime-text','story-collect-r177.js'),'utf8')===C('story-collect-r177.js')&&/story-collect-r177\.js"><\/script>(<script src="\.\/balance-r179\.js"><\/script>)?<script src="\.\/samong-hud-r177\.js"/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));
 const played=[],kept=[];const room={id:'ep1a09',props:[],enemies:[]};
 const sb={window:{__STORYWORLD_PLAY_R169__:{collect:n=>kept.push(n)}},localStorage:{getItem(){return null;},setItem(){}},document:{getElementById(){return null;},createElement(){return{style:{},setAttribute(){},appendChild(){}};},head:{appendChild(){}},body:{appendChild(){}}},
  setInterval(){},performance:{now:()=>0},started:true,loading:false,room,player:{x:5,y:5,hp:100},readScenes:new Set(),regionById:{ep1a09:{title:'주사실'}},blocked:()=>false,toast(){},
