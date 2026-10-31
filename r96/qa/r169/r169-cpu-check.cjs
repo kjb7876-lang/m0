@@ -18,6 +18,16 @@ const doc={getElementById:()=>null,createElement:el,head:el(),body:el(),querySel
  ranks.egoAura=6;ok('cost follows the current rank (rank 6 → 49)',defs[0].cost===49);
  ok('silver-thread dance and one-time motifs keep their old cost',defs[2].cost===undefined&&defs[3].cost===1&&!U.squared().includes('threadDanceR63'));
  U.set({square:false});ok('storyworld.r169.upgrades {square:false} restores 1 point',defs[0].cost===1);}
+// 효과 상향: k단계 효과 = 기본 × k (누적 T(n)=n(n+1)/2)
+{const player={hero:'hwando',points:0,level:1,upgrades:{},attackCD:0,specialCD:0,samong:0,samongCD:0};const ranks={endlessPower:10,egoAura:0,endlessWard:0,endlessVital:0,endlessHaste:4,endlessCooldown:0,endlessResonance:0,dreamAura:0};let dmg=0;
+ const sb={window:{__STORYWORLD_PROGRESSION_R62__:{defs:[{id:'endlessPower',text:'t'}],ranks:(id)=>ranks[id]||0}},localStorage:store,document:doc,player,showUpgrades(){},time:0,
+  attackPower:()=>100*(1+.02*ranks.endlessPower),hurt:d=>{dmg=d;},gainResonance(){},basicAttack(){player.attackCD=1;},awaken(){player.samong=7;player.samongCD=77;},UPGRADES:[{id:'vital'}],Math,JSON,String,Object,Number,Set};
+ vm.createContext(sb);vm.runInContext(C('upgrades-r169.js'),sb);const U=sb.window.__STORYWORLD_UPGRADES_R169__;
+ ok('aura effect grows with rank: 끝없는 의지 10단계 = +2% × 55 = ×2.10 (was ×1.20)',Math.abs(sb.attackPower()-210)<1e-9,sb.attackPower());
+ sb.basicAttack();const t4=.28+.72/(1+.04*10),t1=.28+.72/(1+.04*4);ok('이어지는 검결 4단계 uses the 10-rank interval formula',Math.abs(player.attackCD-t4/t1)<1e-9,player.attackCD);
+ ranks.endlessWard=3;ranks.endlessVital=2;sb.hurt(100);const w=(n)=>1-.3*n/(n+40);ok('ward 3 → 6-rank reduction, vital 2 → 3-rank (R71 HP 777: less damage taken)',Math.abs(dmg-100*w(6)/w(3)*(260+36)/(260+54))<1e-9,dmg);
+ ok('the R169 note is appended to the aura text once',sb.window.__STORYWORLD_PROGRESSION_R62__.defs[0].text.endsWith('〕')&&U.TRI(10)===55);
+ U.set({boost:false});ok('{boost:false} turns the boost off',sb.attackPower()===100*(1+.02*10));}
 ok('the merged window adds Z·X·C (buyProc) and 일반강화 cards, the skill book groups them',/r169proc:/.test(C('upgrades-r169.js'))&&/buyProc\(id\)/.test(C('upgrades-r169.js'))&&/'Z·X·C 스킬강화',\/\^r169proc\//.test(C('play-r115.js'))&&/'일반강화',\/\^r169up\//.test(C('play-r115.js'))&&/b\.dataset\.r169/.test(C('play-r115.js')));
 
 // ---- play-r169 -------------------------------------------------------------------------------
@@ -44,7 +54,7 @@ sb.layer='DREAM';player.egoCD=0;player.egoCount=0;player.resonance=100;sb.ego();
 ok('in DREAM every stack also counts toward the 7 EGO uses, so 사몽 opens sooner',player.egoCount===7&&awakened===1,[player.egoCount,awakened]);
 sb.layer='STORY';player.samong=0;player.ego=0;
 // 기억 쪽지
-t+=20;vm.runInContext('tick()',sb);const note=room.props.find(p=>p.r169Note);
+t+=45;vm.runInContext('tick()',sb);const note=room.props.find(p=>p.r169Note);
 ok('a deferred story scene drops as a 기억 쪽지 during combat',!!note&&note.noteKey==='STORY:ep1a09:pre:0');
 player.x=note.x;player.y=note.y;vm.runInContext('tick()',sb);
 ok('walking onto it picks it up, takes it out of the batch queue and keeps it in 쪽지 모음',!room.props.some(p=>p.r169Note)&&pending.length===0&&P.book().length===1&&P.book()[0].place==='주사실',P.book());

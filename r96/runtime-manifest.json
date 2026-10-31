@@ -11654,8 +11654,8 @@
     },
     {
       "path": "assets/r164/michaela/index.json",
-      "bytes": 2491,
-      "sha256": "aa188511fc5820c3d6f17edf22e24b221f5afa37d05328c1b15c16e8d5c4a7c8"
+      "bytes": 3609,
+      "sha256": "ffccdc566f04785f47f18af94d8648ca6db68a585ef70d9d6166c955df9088ac"
     },
     {
       "path": "assets/r164/michaela/run-e.webp",
@@ -11666,6 +11666,11 @@
       "path": "assets/r164/michaela/run-n.webp",
       "bytes": 133922,
       "sha256": "1f657c573f0e23c967c07d7021c36d952962529a8ce8843f921ab87e78c4e3df"
+    },
+    {
+      "path": "assets/r164/michaela/run-ne-v2.webp",
+      "bytes": 158038,
+      "sha256": "5e6505019899c791f9ef00a06e9af0d7ead13100f1bd93829f61f47d87e135e1"
     },
     {
       "path": "assets/r164/michaela/run-ne.webp",
@@ -20464,8 +20469,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 24754,
-      "sha256": "b4065eeeb28117f5dc99e3f6f156f56af052e8bd29f705fd1de7b4d87afd04bb"
+      "bytes": 25380,
+      "sha256": "0ab989321d5bc356907e6aa97e48f8a2d9d5f4ea94a2b2ff182e25d6317dced5"
     },
     {
       "path": "polish-r100-data.js",
@@ -20584,8 +20589,8 @@
     },
     {
       "path": "upgrades-r169.js",
-      "bytes": 7173,
-      "sha256": "891cf9efd7cbc55e7c6ecef85c3d1e8d483f702b7a162977257d1db5311c35ca"
+      "bytes": 12225,
+      "sha256": "2bec9aa07b0f3fa5b226320f436f8b77f79729dbb86f6e7dd95bd393c90cda0f"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -20629,8 +20634,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 43619,
-      "sha256": "eaa18c06d536d4da5539b1e6a78e48849fb6f279ecde563f7cbddbc71b18f61e"
+      "bytes": 43883,
+      "sha256": "913351f98fa029f07356d2b3d755e7038aa80f6197b866db06a4ce2d8978d255"
     },
     {
       "path": "visual-r90-world.js",
@@ -20743,8 +20748,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4148,
-  "totalBytes": 793218116,
+  "fileCount": 4149,
+  "totalBytes": 793383214,
   "webHTMLSha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989",
   "largest": [
     {

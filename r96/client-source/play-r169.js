@@ -1,6 +1,6 @@
 // R169 — 사용자 2026-10-31 요청 묶음.
 //  ① 서사를 단서 쪽지 형식으로: 전투 맵에서 R139 가 모아 두던 서사(들어설 때·구역 cue 등)를 전투 중 '기억 쪽지'로 떨어뜨린다.
-//     처치 2마리마다(또는 15초마다) 한 장, 가까이 가면 주워지고 양피지 쪽지로 오른쪽에 뜬다(전투는 계속). 주운 쪽지는 맵 정리 때 다시 뜨지 않고,
+//     맵의 적 수를 (남은 쪽지 + 1)로 나눈 만큼 처치할 때마다(적이 적으면 40초마다) 한 장, 가까이 가면 주워지고 양피지 쪽지로 오른쪽에 뜬다(전투는 계속). 주운 쪽지는 맵 정리 때 다시 뜨지 않고,
 //     못 주운 것은 예전처럼 정리 서사 앞에 모아 보인다. 주운 쪽지·사몽 단서조각(R162)·정리 때 본 서사는 '쪽지 모음'(메뉴·기억 창)에 쌓인다.
 //  ② 잡몹 공격 이펙트를 서사(지역 성격)에 맞게: 병원 = 메스 자국·유리 조각, 정원 = 가시, 동굴·석조 = 금, 늪 = 독기, 잿더미 = 불씨,
 //     대장간 = 불꽃, 집 = 할퀸 자국, 눈 = 얼음 조각, 해안 = 물결, 기억 = 룬, 신경 = 회로. 기 모으기(예고) + 내려칠 때 한 번. 칠한 R106 스프라이트로.
@@ -57,7 +57,7 @@ setInterval(()=>{try{const m=typeof modal!=='undefined'&&!!modal;if(noteEl)noteE
 
 // ---- ① 서사 → 기억 쪽지 --------------------------------------------------------------------------
 const SB=()=>window.__STORYWORLD_STORY_BATCH_R139__;
-let known=new Map(),dropped=new Set(),picked=new Set(),lastKill=null,kills=0,dropKills=0,dropT=0,enterT=0;
+let known=new Map(),dropped=new Set(),picked=new Set(),lastKill=null,kills=0,dropKills=0,dropT=0,enterT=0,foes=0;
 function freeSpot(at){const ok=(x,y)=>{try{return typeof blocked!=='function'||!blocked(x,y,.3,room);}catch(_){return true;}};if(ok(at.x,at.y))return at;
  for(let k=0;k<12;k++){const a=k*.52,r=.8+.15*k,x=at.x+Math.cos(a)*r,y=at.y+Math.sin(a)*r;if(ok(x,y))return{x,y};}return{x:player.x,y:player.y};}
 function noteTick(){if(!prefs.notes||!solo()||!live()||!SB()?.pending)return;const pend=SB().pending(),keys=new Set(pend.map(s=>s.key));
@@ -66,7 +66,9 @@ function noteTick(){if(!prefs.notes||!solo()||!live()||!SB()?.pending)return;con
  for(const[k,s]of known)if(!keys.has(k)){if(!picked.has(k))collect({key:'story:'+k,title:s.title||'기억',narr:s.narrator,text:s.text,place:placeOf(s)});known.delete(k);}
  const props=room.props||(room.props=[]);for(const p of props.slice())if(p.r169Note&&!keys.has(p.noteKey))room.props=room.props.filter(q=>q!==p);
  const t=T(),todo=pend.find(s=>s.key&&!dropped.has(s.key));
- if(todo&&(kills-dropKills>=2||t-dropT>=15&&t-enterT>=6)){const near=lastKill&&Math.hypot(lastKill.x-player.x,lastKill.y-player.y)<10?lastKill:{x:player.x+1.3,y:player.y+.7},at=freeSpot(near);
+ // R169 균형: 맵의 적을 (남은 쪽지 + 1) 몫으로 나눠 그만큼 처치할 때마다 한 장 — 전투 내내 고루 나온다. 적이 적은 맵은 40초마다.
+ const left=pend.filter(s=>s.key&&!dropped.has(s.key)).length,gap=foes>0?Math.max(2,Math.floor(foes/(left+1))):Infinity;
+ if(todo&&(kills-dropKills>=gap||t-dropT>=40&&t-enterT>=8)){const near=lastKill&&Math.hypot(lastKill.x-player.x,lastKill.y-player.y)<10?lastKill:{x:player.x+1.3,y:player.y+.7},at=freeSpot(near);
   dropped.add(todo.key);dropKills=kills;dropT=t;props.push({id:'r169:note:'+todo.key,x:at.x,y:at.y,solid:false,autoTargetEligible6:false,visible:true,r169Note:true,noteKey:todo.key,label:'기억 쪽지',t0:t});stats.noteDrops++;
   try{toast('기억 쪽지가 떨어졌습니다 · 가까이 가면 주워집니다.',2.2);}catch(_){}}
  for(const p of (room.props||[]).slice()){if(!p.r169Note||Math.hypot(p.x-player.x,p.y-player.y)>=1.1)continue;room.props=room.props.filter(q=>q!==p);const s=SB().take(p.noteKey);if(!s)continue;picked.add(p.noteKey);stats.notePicks++;
@@ -92,19 +94,20 @@ const seen=new WeakMap(),mfx=[];
 function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);
   if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
-   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
+   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
   else if(s&&!a)seen.delete(e);}
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}
 // 영웅 가까이 그리는 그림은 R106 이 흐리게 하므로(영웅 가림 방지) 칼끝 쪽(사거리 38%)에 두고 overHero 로 그린다.
-function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.25,h*1.25,{overHero:true,...o})},t=T(),h=H();
+// 금·물결·연기·룬·회로 같은 바닥 그림은 몹 발밑에 — 본편 타격 폭발(R98)에 묻히지 않게.
+function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.6,h*1.6,{overHero:true,...o})},t=T(),h=H();
  for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const M=MOBFX[f.fam]||MOBFX.regional;
   if(f.kind==='charge'){const e=f.e,q=project(e.x,e.y);scope({id:'r169:charge:'+f.t0,kind:'effect',x:e.x,y:e.y},()=>{S.draw('glow',M.pal,q.x,q.y-h*.55,h*(.35+.45*v),h*(.35+.45*v),{alpha:.25+.45*v});S.draw('ring',M.pal,q.x,q.y,h*(.9-.35*v),h*(.45-.17*v),{alpha:.35*v});});continue;}
   stats.mobDrawn=(stats.mobDrawn||0)+1;
   const q=project(f.x,f.y),q1=project(f.x+Math.cos(f.ang),f.y+Math.sin(f.ang)),ang=Math.atan2(q1.y-q.y,q1.x-q.x),u=1-v,[a,b]=M.hit;
   scope({id:'r169:hit:'+f.t0,kind:'effect',x:f.x,y:f.y},()=>{
    if(a==='spike'){for(let k=-1;k<=1;k++)S.draw('spike',M.pal,q.x+Math.cos(ang+k*.5)*h*.25,q.y-h*.1+Math.sin(ang+k*.5)*h*.12,h*.28,h*(.5+.25*(1-Math.abs(k)))*(.5+.5*Math.min(1,v*3)),{angle:0,alpha:u,blend:'source-over'});}
-   else if(a==='crack'||a==='ring'||a==='smoke'){S.draw(a,M.pal,q.x,q.y,h*(.9+.6*v),h*(.45+.3*v),{alpha:u,angle:f.seed,blend:a==='ring'?'lighter':'source-over'});}
-   else if(a==='rune'||a==='circuit'){S.draw(a,M.pal,q.x,q.y-h*.1,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
+   else if(a==='crack'||a==='ring'||a==='smoke'){const g=project(f.ex,f.ey);S.draw(a,M.pal,g.x,g.y,h*(.9+.6*v),h*(.45+.3*v),{alpha:u,angle:f.seed,blend:a==='ring'?'lighter':'source-over'});}
+   else if(a==='rune'||a==='circuit'){const g=project(f.ex,f.ey);S.draw(a,M.pal,g.x,g.y-h*.05,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
    else{S.draw(a,M.pal,q.x,q.y-h*.45,h*f.r*.9,h*.38,{angle:ang+(f.seed>3?.35:-.35),alpha:u,blend:'source-over'});S.draw(a,M.pal,q.x,q.y-h*.45,h*f.r*.7,h*.22,{angle:ang+(f.seed>3?.35:-.35),alpha:u*.8});}
    if(b==='spark'||b==='shard'||b==='petal'){for(let k=0;k<4;k++){const aa=ang+(k-1.5)*.45+f.seed*.1,d=h*(.15+.55*v);S.draw(b,M.pal,q.x+Math.cos(aa)*d,q.y-h*.4+Math.sin(aa)*d*.6,h*.2,h*.08,{angle:aa,alpha:u*.9});}}
    else S.draw(b,M.pal,q.x,q.y-(b==='glow'?h*.4:0),h*(.7+.5*v),h*(b==='glow'?.7+.5*v:.35+.25*v),{alpha:.6*u});});}}
@@ -158,7 +161,7 @@ try{
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r169Note){try{drawNote(p);}catch(err){fail(err);}return;}return base.apply(this,[p,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r169-fx'){try{drawMob();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(live()){if(!(player.ego>0))player.egoStackR169=0;noteTick();mobTick();curate();bonusTick();if(mfx.length)arm();else disarm();}}catch(e){fail(e);}return r;};}
- if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dropped=new Set();picked=new Set();lastKill=null;dropKills=kills;dropT=T();enterT=T();mfx.length=0;curated='';curN=-1;curAt=0;
+ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dropped=new Set();picked=new Set();lastKill=null;dropKills=kills;dropT=T();enterT=T();foes=(room?.enemies||[]).filter(e=>e&&e.hp>0&&!major(e)).length;mfx.length=0;curated='';curN=-1;curAt=0;
    for(const id of bonus.keys())if(!room?.passivePointDropsR64?.some(d=>d.id===id))bonus.delete(id);}catch(e){fail(e);}return r;};}
  // 쪽지 모음 단추: 메뉴와 기억(일지) 창
  const addBtn=()=>{const box=document.querySelector('#panel .actions');if(!box||document.getElementById('r169BookBtn'))return;const b=document.createElement('button');b.id='r169BookBtn';b.textContent='쪽지 모음 · '+book.length;b.onclick=()=>showBook();box.appendChild(b);};

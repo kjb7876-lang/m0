@@ -4,11 +4,11 @@
 //    이미 산 단계는 그대로 두고, 앞으로 사는 단계부터 적용한다. 한 번만 사는 실검무 모티프(비용 1)는 그대로.
 //  · P(패시브 강화) 창 하나에 Z·X·C 스킬강화와 일반강화(기존 영웅·공통 재능)를 카드로 덧붙인다. 각 카드는 원래 구매 규칙을 그대로 부른다
 //    (Z·X·C = __STORYWORLD_GROWTH_R103__.buyProc, 일반강화 = 본편 재능 구매와 같은 순서). R115 '스킬 강화 모음'이 묶음별로 정리해 보여 준다.
-//  play-r115.js 보다 먼저 실려야 모음이 덧붙인 카드까지 읽는다. storyworld.r169.upgrades {square:false} 로 비용 규칙을, {merge:false} 로 통합을 끈다.
+//  play-r115.js 보다 먼저 실려야 모음이 덧붙인 카드까지 읽는다. storyworld.r169.upgrades {square:false} 로 비용 규칙(과 효과 상향)을, {boost:false} 로 효과 상향만, {merge:false} 로 통합을 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_UPGRADES_R169__)return;
 const REV='R169-upgrades-1',KEY='storyworld.r169.upgrades';
-let prefs={square:true,merge:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+let prefs={square:true,merge:true,boost:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={squared:0,renders:0,procBuys:0,talentBuys:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const P62=()=>window.__STORYWORLD_PROGRESSION_R62__,GR=()=>window.__STORYWORLD_GROWTH_R103__;
@@ -19,6 +19,33 @@ const SQUARE=new Set();
 function squareCosts(){const A=P62();if(!A?.defs)return;for(const d of A.defs){if(d.maxRank!=null||d.id==='threadDanceR63'||SQUARE.has(d.id))continue;
   try{Object.defineProperty(d,'cost',{configurable:true,enumerable:true,get(){if(!prefs.square)return 1;const p=me();const n=p?Number(A.ranks(d.id,p))||0:0;return (n+1)*(n+1);}});SQUARE.add(d.id);stats.squared++;}catch(e){fail(e);}}}
 const nextCost=id=>{const d=P62()?.defs?.find(x=>x.id===id);return d?Number(d.cost)||1:null;};
+// ---- 비용에 맞춘 효과 상향(사용자 "비례해서 강화 능력치도 밸런스 맞게 상향") ------------------------------------------
+//  k단계 하나의 효과 = 원래 한 단계 효과 × k. n단계 누적은 원래 공식에 n 대신 T(n)=n(n+1)/2 를 넣은 값(예: 끝없는 의지 10단계 +2%×55 = +110%).
+//  비용(k²)보다 느리게 늘어 한 점당 효율은 단계가 오를수록 조금씩 줄고, 같은 점수로 여러 오라를 고루 올리는 쪽도 손해가 크지 않다.
+//  R62 가 이미 n 으로 적용한 값 위에 'T(n) 공식 ÷ n 공식' 비율만 덧곱한다(최대 체력 777 고정 R71 에서는 깊어지는 생명 = 받는 피해 감소).
+const TRI=n=>n*(n+1)/2;
+const rk=(id,p)=>{try{return Math.max(0,Number(P62()?.ranks(id,p))||0);}catch(_){return 0;}};
+const F={power:(a,b)=>1+.02*a+.01*b,tempo:n=>.28+.72/(1+.04*n),cool:n=>.25+.75/(1+.035*n),ward:n=>1-.30*n/(n+40),res:n=>1+.01*n,dream:n=>8*n/(n+20)};
+const boostOn=()=>prefs.square&&prefs.boost!==false;
+function legacyBase(p){try{const u=typeof UPGRADES!=='undefined'?UPGRADES.find(x=>x.id==='vital'):null,k=u?.hero?String(p?.hero)+':vital':'vital';return 260+35*(Number(p?.upgrades?.[k])||0)+5*(Math.max(1,Number(p?.level)||1)-1);}catch(_){return 260;}}
+function ratios(p){const n=id=>rk(id,p),pw=n('endlessPower'),eg=n('egoAura'),hs=n('endlessHaste'),cd=n('endlessCooldown'),wd=n('endlessWard'),rs=n('endlessResonance'),vt=n('endlessVital'),dr=n('dreamAura'),B=legacyBase(p);
+ return{power:F.power(TRI(pw),TRI(eg))/F.power(pw,eg),tempo:F.tempo(TRI(hs))/F.tempo(hs),cool:F.cool(TRI(cd))/F.cool(cd),hurt:F.ward(TRI(wd))/F.ward(wd)*(B+18*vt)/(B+18*TRI(vt)),res:F.res(TRI(rs))/F.res(rs),dream:F.dream(TRI(dr))-F.dream(dr),
+  show:{power:F.power(TRI(pw),TRI(eg)),tempo:Math.max(.14/.6,F.tempo(TRI(hs))),cool:F.cool(TRI(cd)),ward:F.ward(TRI(wd)),vital:18*TRI(vt),res:F.res(TRI(rs)),dream:F.dream(TRI(dr))}};}
+const ONE=Object.freeze({power:1,tempo:1,cool:1,hurt:1,res:1,dream:0});
+const R=()=>{const p=typeof player==='object'?player:null;return boostOn()&&p?ratios(p):ONE;};
+function installBoost(){
+ if(typeof attackPower==='function'){const b=attackPower;attackPower=function(...a){const v=b.apply(this,a);try{const r=R().power;return Number.isFinite(v)&&r!==1?Math.min(Number.MAX_SAFE_INTEGER,v*r):v;}catch(e){fail(e);return v;}};}
+ if(typeof hurt==='function'){const b=hurt;hurt=function(d,...a){try{const r=R().hurt;if(Number.isFinite(d)&&r!==1)d*=r;}catch(e){fail(e);}return b.call(this,d,...a);};}
+ if(typeof gainResonance==='function'){const b=gainResonance;gainResonance=function(v,...a){try{const r=R().res;if(Number.isFinite(v)&&r!==1)v*=r;}catch(e){fail(e);}return b.call(this,v,...a);};}
+ if(typeof basicAttack==='function'){const b=basicAttack;basicAttack=function(...a){const p=player,before=Number(p?.attackCD)||0,res=b.apply(this,a);try{if(p===player&&before<=0&&p?.attackCD>0){const r=R().tempo;if(r!==1)p.attackCD=Math.max(.14,p.attackCD*r);}}catch(e){fail(e);}return res;};}
+ const cool=(name,key)=>{if(typeof globalThis[name]!=='function')return;const b=globalThis[name];globalThis[name]=function(...a){const p=player,before=Number(p?.[key])||0,res=b.apply(this,a);try{if(p===player&&before<=0&&p?.[key]>0){const r=R().cool;if(r!==1)p[key]=Math.max(.22,p[key]*r);}}catch(e){fail(e);}return res;};};
+ cool('special','specialCD');cool('blink','blinkCD');cool('ego','egoCD');
+ if(typeof awaken==='function'){const b=awaken;awaken=function(...a){const p=player,before=Number(p?.samong)||0,res=b.apply(this,a);try{if(p===player&&before<=0&&p?.samong>0){const r=R();p.samong+=r.dream;if(r.cool!==1)p.samongCD=Math.max(.22,p.samongCD*r.cool);}}catch(e){fail(e);}return res;};}
+ if(typeof fx==='function'){const b=fx;const seen={};fx=function(type,x,y,opt={},...a){try{if(type==='storySourceSkill'&&opt?.storyWER&&opt.stage==='warning'&&player&&opt.sourceHero===player.hero){const k=player.hero+':'+opt.sourceSlot,ready=player.storyWER?.ready,at=Number(ready?.[k]),r=R().cool;
+   if(r!==1&&ready&&Number.isFinite(at)&&at>time&&seen[k]!==opt.castId){seen[k]=opt.castId;ready[k]=time+Math.max(.35,(at-time)*r);}}}catch(e){fail(e);}return b.call(this,type,x,y,opt,...a);};}
+ stats.boost=true;}
+const BOOST_NOTE=' 〔R169: k단계 하나의 효과 = 원래 한 단계 × k, n단계 누적 = n(n+1)/2단계 몫〕';
+function noteText(){const A=P62();if(!A?.defs)return;for(const d of A.defs)if(SQUARE.has(d.id)&&typeof d.text==='string'&&!d.text.includes('〔R169'))d.text+=BOOST_NOTE;}
 // ---- 한 창에 모으기 ------------------------------------------------------------------------------
 const SLOT_KEY={w:'Z',e:'X',r:'C'};
 function procCards(p){const G=GR(),defs=window.__STORYWORLD_WER__?.defs?.[p.hero]||{};if(!G)return'';let open=false,st=null;try{const i=G.inspect();open=!!i.routeOpen;st=i.state;}catch(e){fail(e);}
@@ -38,15 +65,15 @@ function merge(){if(!prefs.merge)return;const panel=document.getElementById('pan
  const sec=(t,s)=>'<div class="r169sec">'+t+(s?'<small>'+s+'</small>':'')+'</div>';
  cards.insertAdjacentHTML('afterbegin',sec('오라 · 무한강화','다음 단계 비용 = 단계²'));
  cards.insertAdjacentHTML('beforeend',sec('Z · X · C 스킬강화','k단계 k²점 · 최대 7단계')+procCards(p)+sec('일반강화','기존 영웅·공통 재능 · 1점')+talentCards(p));
- const h2=panel.querySelector('h2');if(h2&&!panel.querySelector('.r169rule'))h2.insertAdjacentHTML('afterend','<p class="small r169rule">모든 강화를 이 창 한 곳에서: 오라·무한강화(비용 = 다음 단계의 제곱) · Z·X·C 스킬강화 · 일반강화</p>');
+ const h2=panel.querySelector('h2'),sh=boostOn()?ratios(p).show:null;if(h2&&!panel.querySelector('.r169rule'))h2.insertAdjacentHTML('afterend','<p class="small r169rule">모든 강화를 이 창 한 곳에서: 오라·무한강화(비용 = 다음 단계의 제곱, 효과도 단계마다 커짐) · Z·X·C 스킬강화 · 일반강화'+(sh?'<br>지금 오라 합계: 위력 ×'+sh.power.toFixed(2)+' · 공격 간격 '+Math.round(sh.tempo*100)+'% · 재사용 '+Math.round(sh.cool*100)+'% · 받는 피해 '+Math.round(sh.ward*100)+'% · 공명 획득 ×'+sh.res.toFixed(2)+' · 사몽 +'+sh.dream.toFixed(1)+'초':'')+'</p>');
  cards.querySelectorAll('[data-r169]').forEach(b=>b.onclick=()=>{if(b.disabled||!b.isConnected)return;const [kind,id]=b.dataset.r169.split(':');let ok=false;
   try{if(kind==='r169proc'){ok=GR()?.buyProc(id)===true;if(ok)stats.procBuys++;}else ok=buyTalent(id);}catch(e){fail(e);}
   if(ok)try{showUpgrades();}catch(e){fail(e);}});
  stats.renders++;}
 try{
- squareCosts();
- if(typeof showUpgrades==='function'){const base=showUpgrades;showUpgrades=function(...a){squareCosts();const r=base.apply(this,a);try{merge();}catch(e){fail(e);}return r;};}
+ squareCosts();noteText();installBoost();
+ if(typeof showUpgrades==='function'){const base=showUpgrades;showUpgrades=function(...a){squareCosts();noteText();const r=base.apply(this,a);try{merge();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_UPGRADES_R169__=Object.freeze({revision:REV,set,nextCost,squared:()=>[...SQUARE],inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},squared:[...SQUARE],lastError})});
+window.__STORYWORLD_UPGRADES_R169__=Object.freeze({revision:REV,set,nextCost,squared:()=>[...SQUARE],ratios:()=>{const p=typeof player==='object'?player:null;return p?ratios(p):null;},TRI,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},squared:[...SQUARE],lastError})});
 })();
