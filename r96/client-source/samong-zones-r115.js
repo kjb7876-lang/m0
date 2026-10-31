@@ -184,7 +184,7 @@
  //    새 구역은 장의 마지막 대면 바로 앞에(대면이 없으면 끝에) B → D 순서로 넣는다. 구역 id 는 sz162-<장>-B/D(예전 저장은 그대로 유효).
  //  storyworld.r162.samong {reshape:false} 로 끄면 R115 그대로.
  TPL.lane=function(z,r,p){// 화면에서 위→아래로 곧게 뻗는 길: 마름모(정사각 방)를 대각선으로 겹쳐 잇는다. 위쪽 끝에서 적이 쏟아지고 맨 아래에 코어.
-  const n=p.n||16,S=p.s||7,step=2,rooms=[];for(let i=0;i<n;i++)rooms.push({x:4+i*step,y:4+i*step,w:S,h:S,kind:'yard',name:i<3?(p.top||'쏟아지는 길목'):i>n-3?(p.bottom||'정화의 코어'):(p.name||z.title)});
+  const n=p.n||12,S=p.s||7,step=2,rooms=[];for(let i=0;i<n;i++)rooms.push({x:4+i*step,y:4+i*step,w:S,h:S,kind:'yard',name:i<3?(p.top||'쏟아지는 길목'):i>n-3?(p.bottom||'정화의 코어'):(p.name||z.title)});
   const last=rooms[n-1],first=rooms[0],core={x:last.x+S-1.5,y:last.y+S-1.5};
   return{rooms,links:[],entry:{x:core.x-2.6,y:core.y-2.6},exit:{...core},core,top:{x:first.x+S/2,y:first.y+S/2},laneDir:{x:Math.SQRT1_2,y:Math.SQRT1_2}};};
  const R162=(()=>{let on=true;try{on=JSON.parse(localStorage.getItem('storyworld.r162.samong')||'{}').reshape!==false;}catch(_){}return on;})();

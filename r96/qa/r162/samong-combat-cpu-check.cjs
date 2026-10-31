@@ -27,7 +27,7 @@ ok('zone ids unique; old R115 ids all still resolve (saves keep working)',new Se
 let bad=[];for(const[k,l]of ch){const ei=SM.episodes.findIndex(e=>e.key===k);for(const z of l.filter(z=>z.mode)){let L=null;try{L=SM.layoutFor(ei,Z.stageOf(z),z.id);}catch(e){bad.push(z.id+':'+e);continue;}
  const cells=new Set(L.floorCells.map(([x,y])=>x+':'+y)),on=p=>p&&cells.has(Math.floor(p.x)+':'+Math.floor(p.y));
  if(!on(L.entry))bad.push(z.id+':entry');if(z.mode==='D'){const X=L.samongR103;if(!on(X.core))bad.push(z.id+':core');if(!on(X.top))bad.push(z.id+':top');
-  const top=Math.min(...L.floorCells.map(([a,b])=>a+b)),bot=Math.max(...L.floorCells.map(([a,b])=>a+b));if(bot-top<40)bad.push(z.id+':short '+(bot-top));if(X.core.x+X.core.y<bot-6)bad.push(z.id+':core not at the bottom');}
+  const top=Math.min(...L.floorCells.map(([a,b])=>a+b)),bot=Math.max(...L.floorCells.map(([a,b])=>a+b));if(bot-top<30)bad.push(z.id+':short '+(bot-top));if(X.core.x+X.core.y<bot-6)bad.push(z.id+':core not at the bottom');}
  if(z.mode==='B'&&L.floorCells.length<700)bad.push(z.id+':plaza small '+L.floorCells.length);}}
 ok('every B plaza is wide and every D lane runs top→bottom with the core on its bottom end',!bad.length,bad.slice(0,6).join(' '));
 const r103=C('samong-r103.js');

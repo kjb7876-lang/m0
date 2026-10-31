@@ -62,13 +62,16 @@ function drawFrag(p){const q=P(p.x,p.y),h=H(),bob=Math.sin(T()*3+p.x)*h*.05,S=SP
 
 // ---- 보스 패턴 그림 ------------------------------------------------------------------------------
 const fxList=[];const SENT={type:'r162-samong',x:0,y:0,age:0,life:Infinity,r162Sentinel:true};
-function pattern(kind,data){if(!prefs.patterns)return;const e={kind,t0:T(),...data,seed:Math.random()*100,proxies:null};e.life=kind==='clones'?1.6:kind==='meteor'?Math.max(...data.pts.map(p=>p.warn))+.9:Math.max(...data.pts.map(p=>p.warn))+1.3;fxList.push(e);if(fxList.length>8)fxList.shift();stats.patterns++;arm();}
+function pattern(kind,data){if(!prefs.patterns)return;const e={kind,t0:T(),...data,seed:Math.random()*100};e.life=kind==='clones'?1.6:kind==='meteor'?Math.max(...data.pts.map(p=>p.warn))+.9:Math.max(...data.pts.map(p=>p.warn))+1.3;fxList.push(e);if(fxList.length>8)fxList.shift();stats.patterns++;arm();}
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
-function drawClones(e,t,h){const S=SPR(),b=e.boss,w=e.warn;if(!e.proxies&&b){e.proxies=e.pts.map((p,k)=>{const o=Object.create(b);o.id=String(b.id)+':r162c'+k;o.x=p.sx;o.y=p.sy;o.flash=0;o.r162Clone=true;return o;});}
+function bossPath(b){try{const f=b.profile?.frames?.idle||b.profile?.frames?.move||null;return f?.path||b.path||b.profile?.path||null;}catch(_){return b?.path||null;}}
+function drawClones(e,t,h){const S=SPR(),b=e.boss,w=e.warn,path=b?bossPath(b):null,row=path&&typeof readyImage==='function'?readyImage(path):null,size=h*(b?.boss?2.05:1.2)*(b?.defScale||1);
+ // 보스 몸 그림을 검은 그림자로 여섯 번 그린다(게임의 적 그리기를 거치지 않아 패턴이 끝나면 남지 않는다). 그림이 없으면 연기 덩어리.
  e.pts.forEach((p,k)=>{const v=t<w?0:smooth((t-w)/.32),x=p.sx+(p.ex-p.sx)*v,y=p.sy+(p.ey-p.sy)*v,a=t<w?smooth(t/.25):1-smooth((t-w-.3)/.3);if(a<=0)return;const q=P(x,y);
-  if(S){S.draw('smoke',{a:[20,6,12],b:[60,10,20]},q.x,q.y-h*.4,h*1.3,h*1.0,{blend:'source-over',alpha:.55*a,angle:e.seed+k});}
-  const o=e.proxies?.[k];if(o){o.x=x;o.y=y;ctx.save();try{ctx.globalAlpha*=.62*a;ctx.filter='brightness(.25) saturate(0) contrast(1.6)';drawEnemy(o);}catch(err){fail(err);}finally{ctx.restore();}}
-  if(S){S.draw('glow',BLOOD,q.x,q.y-h*.82,h*.35,h*.18,{alpha:.9*a});}
+  if(S)S.draw('smoke',{a:[20,6,12],b:[60,10,20]},q.x,q.y-size*.35,size*.9,size*.7,{blend:'source-over',alpha:.5*a,angle:e.seed+k});
+  if(row&&typeof sprite==='function'){sprite(path,q.x,q.y,size,{alpha:.78*a,flip:p.ex<p.sx,filter:'brightness(.12) saturate(0) contrast(1.8)'});}
+  else if(S)S.draw('smoke',{a:[10,4,8],b:[40,8,14]},q.x,q.y-size*.5,size*.6,size,{blend:'source-over',alpha:.8*a});
+  if(S){S.draw('glow',BLOOD,q.x-size*.06,q.y-size*.82,size*.12,size*.07,{alpha:.95*a});S.draw('glow',BLOOD,q.x+size*.06,q.y-size*.82,size*.12,size*.07,{alpha:.95*a});}
   if(t>=w&&S){const q0=P(p.sx,p.sy,h*.45),q1=P(x,y,h*.45);S.along('slashline',BLOOD,q0.x,q0.y,q1.x,q1.y,h*.5,{alpha:.8*a});}});}
 function drawMeteors(e,t,h){const S=SPR();if(!S)return;e.pts.forEach((p,k)=>{const q=P(p.x,p.y),w=p.warn,fr=Math.floor(T()*12)+k;
  if(t<w){const v=smooth(t/w)**2,sx=q.x+h*4.5,sy=q.y-h*9,mx=sx+(q.x-sx)*v,my=sy+(q.y-sy)*v;S.draw('runecross',BLOOD,q.x,q.y,h*2.4,h*2.4,{squash:.5,angle:t,alpha:.55*smooth(t/.3)});

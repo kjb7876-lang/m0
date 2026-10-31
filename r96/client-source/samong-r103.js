@@ -216,7 +216,7 @@
   if(time>=x.spawnAt&&alive<cap&&cells.length){x.spawnAt=time+.3;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(6,cap-alive);n++){const q=cells[Math.floor(Math.random()*cells.length)];if(!floorAt(q.x,q.y))continue;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'d',aggro:4});if(e){swarm(e,elite);e.r162Lane=true;}}}
   for(const e of r.enemies){if(!living(e)||!e.r162Lane)continue;const dc=Math.hypot(core.x-e.x,core.y-e.y);
    if(dc<1.4){c.hp-=e.samongElite?6:1;c.leaks++;e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;try{window.__STORYWORLD_SAMONG_PLAY_R162__?.coreHit?.(core,c);}catch(_){}continue;}
-   if(Math.hypot(player.x-e.x,player.y-e.y)<3.2)continue;const sp=(e.speed||1)*1.05*dt,nx=e.x+(core.x-e.x)/dc*sp,ny=e.y+(core.y-e.y)/dc*sp;
+   if(Math.hypot(player.x-e.x,player.y-e.y)<3.2)continue;const sp=Math.max(2.6,(e.speed||1)*1.05)*dt,nx=e.x+(core.x-e.x)/dc*sp,ny=e.y+(core.y-e.y)/dc*sp;
    if(!blocked(nx,ny,.25,r)){e.x=nx;e.y=ny;}else if(!blocked(nx,e.y,.25,r))e.x=nx;else if(!blocked(e.x,ny,.25,r))e.y=ny;e.homeX=e.x;e.homeY=e.y;e.moving=true;e.moveVX150=(core.x-e.x)/dc;e.moveVY150=(core.y-e.y)/dc;}
   if(c.hp<=0){for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}
    S.kills=0;c.hp=c.max;c.fails=(c.fails||0)+1;x.spawnAt=time+3;const at=L.entry||core;player.x=at.x;player.y=at.y;try{cam={x:player.x,y:player.y};}catch(_){}
