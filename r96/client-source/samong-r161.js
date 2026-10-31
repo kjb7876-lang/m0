@@ -29,7 +29,7 @@ function image(p){try{const row=typeof readyImage==='function'?readyImage(p):nul
 const samongRoom=()=>typeof room==='object'&&!!room?.samongR103;
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
 function hasSamongArt(e){try{return !!window.__STORYWORLD_DRIVE_ART_R105__?.artFor?.(e);}catch(_){return false;}}
-const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&(!major(e)||!!e.samongMidR162)&&!hasSamongArt(e);
+const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!e.samongBossR170&&(!major(e)||!!e.samongMidR162)&&!hasSamongArt(e);
 
 // ---- 꼭두각시 자아 -------------------------------------------------------------------------
 let hiding=null;

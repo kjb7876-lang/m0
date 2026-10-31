@@ -31,7 +31,7 @@ let bad=[];for(const[k,l]of ch){const ei=SM.episodes.findIndex(e=>e.key===k);for
  if(z.mode==='B'&&L.floorCells.length<700)bad.push(z.id+':plaza small '+L.floorCells.length);}}
 ok('every B plaza is wide and every D lane runs top→bottom with the core on its bottom end',!bad.length,bad.slice(0,6).join(' '));
 const r103=C('samong-r103.js');
-ok('B: midboss every 111 kills, 6 in all',/S\.kills<\(x\.r162Mid\+1\)\*111/.test(r103)&&/x\.r162Mid>=6/.test(r103));
+ok('B: midboss every 100 kills (R170: was 111, +10%), 6 in all',/S\.kills<\(x\.r162Mid\+1\)\*100/.test(r103)&&/x\.r162Mid>=6/.test(r103));
 ok('D: enemies spawn on the lane top, leak into the core (777; 6 per mob, 66 per elite), core loss restarts the zone',/const CORE_R162=777;/.test(r103)&&/c\.hp-=e\.samongElite\?66:6/.test(r103)&&/function defenseR162/.test(r103)&&/S\.kills=0;c\.hp=c\.max/.test(r103));
 ok('boss pattern lists gain 분신 6 · 운석 · 촉수',(()=>{try{const f=new Function('window',r103.match(/ function R162P\(list\)\{[^\n]*\n/)[0]+';return R162P;');const P=f({});const out=P(['sky','ground']);return ['clones','meteor','tentacles'].every(k=>out.includes(k))&&out.includes('sky');}catch(e){return false;}})());
 ok('clones pattern has exactly 6 shadows',/for\(let k=0;k<6;k\+\+\)\{const a=k\*Math\.PI\/3/.test(r103));

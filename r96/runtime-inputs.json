@@ -3359,7 +3359,8 @@
     "assets/r163/pixelfx/portal-teal.webp",
     "upgrades-r169.js",
     "play-r169.js",
-    "assets/r164/michaela/run-ne-v2.webp"
+    "assets/r164/michaela/run-ne-v2.webp",
+    "combat-r170.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4434,5 +4435,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a2842927e4bdd111669b7f7a133576756d4cf52bc0c2a1532293e1377bbed666"
+  "runtimeManifestSHA256": "12fcb79ba6c8a54d6bef27db2c6dcf6919d1565c4f5ea39c4b5be95f186a5261"
 }

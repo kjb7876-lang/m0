@@ -90,27 +90,30 @@ const MOBFX={
  regional:{hit:['slashwide','spark'],pal:C([90,30,30],[240,200,170])}};
 const famOf=()=>{try{const L=room?.exploration;const f=L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family;return MOBFX[f]?f:'regional';}catch(_){return'regional';}};
 const major=e=>!!(e?.boss||e?.midboss||e?.persona||e?.cosmic||e?.trial||e?.samongMidR162||e?.samongR103);
+// R170(사용자 "이펙트 색은 각자의 이름색 + 고유색 + 보조색에 맞게"): 모양은 지역 서사, 색은 그 몹의 R114 팔레트(이름에 색이 있으면 그 색이 고유색).
+//  주 그림 = 고유색 → 그 발광색, 보조 조각 = 보조색 → 그 발광색. 팔레트가 없는 몹만 지역 기본색.
+function palOf(e,fam){try{const pl=window.__STORYWORLD_COMBAT_R114__?.palette?.(e);if(pl&&pl.p&&pl.s)return{main:{a:pl.p,b:pl.gp||pl.p},sub:{a:pl.s,b:pl.gs||pl.s}};}catch(_){}const M=MOBFX[fam]||MOBFX.regional;return{main:M.pal,sub:M.pal};}
 const seen=new WeakMap(),mfx=[];
 function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);
-  if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
-   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
+  if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
+   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14){mfx.push({kind:'hit',fam,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
   else if(s&&!a)seen.delete(e);}
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}
 // 영웅 가까이 그리는 그림은 R106 이 흐리게 하므로(영웅 가림 방지) 칼끝 쪽(사거리 38%)에 두고 overHero 로 그린다.
 // 금·물결·연기·룬·회로 같은 바닥 그림은 몹 발밑에 — 본편 타격 폭발(R98)에 묻히지 않게.
-function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.6,h*1.6,{overHero:true,...o})},t=T(),h=H();
- for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const M=MOBFX[f.fam]||MOBFX.regional;
-  if(f.kind==='charge'){const e=f.e,q=project(e.x,e.y);scope({id:'r169:charge:'+f.t0,kind:'effect',x:e.x,y:e.y},()=>{S.draw('glow',M.pal,q.x,q.y-h*.55,h*(.35+.45*v),h*(.35+.45*v),{alpha:.25+.45*v});S.draw('ring',M.pal,q.x,q.y,h*(.9-.35*v),h*(.45-.17*v),{alpha:.35*v});});continue;}
+function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.9,h*1.9,{overHero:true,...o})},t=T(),h=H();
+ for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const M=MOBFX[f.fam]||MOBFX.regional,PM=f.pal?.main||M.pal,PS=f.pal?.sub||M.pal;
+  if(f.kind==='charge'){const e=f.e,q=project(e.x,e.y);scope({id:'r169:charge:'+f.t0,kind:'effect',x:e.x,y:e.y},()=>{S.draw('glow',PM,q.x,q.y-h*.55,h*(.35+.45*v),h*(.35+.45*v),{alpha:.25+.45*v});S.draw('ring',PM,q.x,q.y,h*(.9-.35*v),h*(.45-.17*v),{alpha:.35*v});});continue;}
   stats.mobDrawn=(stats.mobDrawn||0)+1;
   const q=project(f.x,f.y),q1=project(f.x+Math.cos(f.ang),f.y+Math.sin(f.ang)),ang=Math.atan2(q1.y-q.y,q1.x-q.x),u=1-v,[a,b]=M.hit;
-  scope({id:'r169:hit:'+f.t0,kind:'effect',x:f.x,y:f.y},()=>{
-   if(a==='spike'){for(let k=-1;k<=1;k++)S.draw('spike',M.pal,q.x+Math.cos(ang+k*.5)*h*.25,q.y-h*.1+Math.sin(ang+k*.5)*h*.12,h*.28,h*(.5+.25*(1-Math.abs(k)))*(.5+.5*Math.min(1,v*3)),{angle:0,alpha:u,blend:'source-over'});}
-   else if(a==='crack'||a==='ring'||a==='smoke'){const g=project(f.ex,f.ey);S.draw(a,M.pal,g.x,g.y,h*(.9+.6*v),h*(.45+.3*v),{alpha:u,angle:f.seed,blend:a==='ring'?'lighter':'source-over'});}
-   else if(a==='rune'||a==='circuit'){const g=project(f.ex,f.ey);S.draw(a,M.pal,g.x,g.y-h*.05,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
-   else{S.draw(a,M.pal,q.x,q.y-h*.45,h*f.r*.9,h*.38,{angle:ang+(f.seed>3?.35:-.35),alpha:u,blend:'source-over'});S.draw(a,M.pal,q.x,q.y-h*.45,h*f.r*.7,h*.22,{angle:ang+(f.seed>3?.35:-.35),alpha:u*.8});}
-   if(b==='spark'||b==='shard'||b==='petal'){for(let k=0;k<4;k++){const aa=ang+(k-1.5)*.45+f.seed*.1,d=h*(.15+.55*v);S.draw(b,M.pal,q.x+Math.cos(aa)*d,q.y-h*.4+Math.sin(aa)*d*.6,h*.2,h*.08,{angle:aa,alpha:u*.9});}}
-   else S.draw(b,M.pal,q.x,q.y-(b==='glow'?h*.4:0),h*(.7+.5*v),h*(b==='glow'?.7+.5*v:.35+.25*v),{alpha:.6*u});});}}
+  scope({id:'r169:hit:'+f.t0,kind:'effect',x:f.x+.4,y:f.y+.4},()=>{
+   if(a==='spike'){for(let k=-1;k<=1;k++)S.draw('spike',PM,q.x+Math.cos(ang+k*.5)*h*.25,q.y-h*.1+Math.sin(ang+k*.5)*h*.12,h*.28,h*(.5+.25*(1-Math.abs(k)))*(.5+.5*Math.min(1,v*3)),{angle:0,alpha:u,blend:'source-over'});}
+   else if(a==='crack'||a==='ring'||a==='smoke'){const g=project(f.ex,f.ey);S.draw(a,PM,g.x,g.y,h*(.9+.6*v),h*(.45+.3*v),{alpha:u,angle:f.seed,blend:a==='ring'?'lighter':'source-over'});}
+   else if(a==='rune'||a==='circuit'){const g=project(f.ex,f.ey);S.draw(a,PM,g.x,g.y-h*.05,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
+   else{S.draw(a,PM,q.x,q.y-h*.45,h*f.r*.9,h*.38,{angle:ang+(f.seed>3?.35:-.35),alpha:u,blend:'source-over'});S.draw(a,PM,q.x,q.y-h*.45,h*f.r*.7,h*.22,{angle:ang+(f.seed>3?.35:-.35),alpha:u*.8});}
+   if(b==='spark'||b==='shard'||b==='petal'){for(let k=0;k<4;k++){const aa=ang+(k-1.5)*.45+f.seed*.1,d=h*(.15+.55*v);S.draw(b,PS,q.x+Math.cos(aa)*d,q.y-h*.4+Math.sin(aa)*d*.6,h*.2,h*.08,{angle:aa,alpha:u*.9});}}
+   else S.draw(b,PS,q.x,q.y-(b==='glow'?h*.4:0),h*(.7+.5*v),h*(b==='glow'?.7+.5*v:.35+.25*v),{alpha:.6*u});});}}
 
 // ---- ③ 길 위의 장식 소품 숨기기 · 길 격자 ----------------------------------------------------------------
 function pathCells(r=room){try{const L=r?.exploration;if(!L||!Array.isArray(L.floorCells)||!L.floorCells.length)return null;const key=c=>c[0]+','+c[1],floor=new Set(L.floorCells.map(key));
