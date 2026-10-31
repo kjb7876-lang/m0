@@ -47,7 +47,8 @@ check('a samong room still on its host id (zone unknown) is not dressed',!r4.exp
 r4.samongR115={zone:'sz115-S03-2'};sb.room=r4;const rn=new sb.Renderer();rn.createSpatial({}, r4.exploration.surface.art);
 check('once the zone id is known the room gets the sparring look at spatial creation',r4.exploration.surface.art.r118Tiles?.file==='sparring'&&sb.imgs.some(i=>i._src==='assets/r118/tiles/sparring.webp'));
 const r5=sb.makeRoom('ep1b06b',{samongR115:{zone:'sz115-S06-3'},samongR103:{ep:6},exploration:{type:'r103-samong',surface:{art:{path:'q.png',r55PhysicalUV:true}}}});
-check('a samong zone that is not in the table does not inherit its host region look',!r5.exploration.surface.art.r118Tiles);
+// R161(사용자 2026-10-31): 표에 없는 사몽 구역은 호스트 지역 바닥 대신 '피로 얼룩진 기억 타일'(assets/r161/tiles)을 깐다 — 호스트 지역 바닥을 물려받지 않는 것은 그대로.
+check('a samong zone that is not in the table does not inherit its host region look (R161: blood memory tile instead)',r5.exploration.surface.art.r118Tiles?.file==='blood-memory'&&r5.exploration.surface.art.r118Tiles?.dir==='assets/r161/tiles/'&&r5.exploration.surface.art.r118Tiles?.file!=='cabin');
 sb.__STORYWORLD_COOP_SIM_R62__={mode:()=>'host'};const r6=sb.makeRoom('dist03');check('co-op: no tiles',!r6.exploration.surface.art.r118Tiles);delete sb.__STORYWORLD_COOP_SIM_R62__;
 
 // 도색: 이미지가 도착하면 바닥·벽·배경에 맵을 얹고 색 곱을 정한다

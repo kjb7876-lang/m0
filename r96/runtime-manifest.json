@@ -11578,6 +11578,21 @@
       "sha256": "f065909522817c1e30f44788e2caffae8f0877784bcf16b0bd3cfc770076bcb0"
     },
     {
+      "path": "assets/r161/puppet/puppet-ego-walk-right-8.webp",
+      "bytes": 93566,
+      "sha256": "5182b89dcf3431ad59f6d3b7eae98aeab8726fe5b5669b59049a81ac7c33b4af"
+    },
+    {
+      "path": "assets/r161/sculpture/memory-fragment.webp",
+      "bytes": 46390,
+      "sha256": "6b2f032e0ce0c85bb81b4c185925cc8f0f37a4d2affdd352d807044e93332f6d"
+    },
+    {
+      "path": "assets/r161/tiles/blood-memory.webp",
+      "bytes": 413970,
+      "sha256": "73b535b974f01e42fb9dee3ec9e49a81f4d05d3d685f6553977255584d731e84"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20259,8 +20274,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563710,
-      "sha256": "e3700102315532fd3ebeab226b8d0fe001e5f2d04417c5b66e78a2a461164b95"
+      "bytes": 6563750,
+      "sha256": "74b4594cdeef4cf02a9eca491d50b5fe01cf11d28eb1d26c7f41d72ee25121d4"
     },
     {
       "path": "intro-r140.js",
@@ -20401,6 +20416,11 @@
       "path": "samong-r103.js",
       "bytes": 71345,
       "sha256": "2ffb44382284a445b6eea48c20d5f5fc523287df1d4c17632a14c5f888e0e23a"
+    },
+    {
+      "path": "samong-r161.js",
+      "bytes": 8032,
+      "sha256": "42ff274a6b76c870ec3f9df8d6e6e56590436e781e1b9512e0ea11fa54399d9b"
     },
     {
       "path": "samong-text-r103.js",
@@ -20599,8 +20619,8 @@
     },
     {
       "path": "world-tiles-r118.js",
-      "bytes": 9056,
-      "sha256": "071f6789004f54f24d2e5b64195596f704d52adc2abe6b9b815631d771e4ba01"
+      "bytes": 9854,
+      "sha256": "3cf9d1e2ed5e214be133e640521eab76348bdfd3c7e29b613a6cb269d8b6b762"
     },
     {
       "path": "world-visual-r78.js",
@@ -20608,9 +20628,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4121,
-  "totalBytes": 789043699,
-  "webHTMLSha256": "e3700102315532fd3ebeab226b8d0fe001e5f2d04417c5b66e78a2a461164b95",
+  "fileCount": 4125,
+  "totalBytes": 789606495,
+  "webHTMLSha256": "74b4594cdeef4cf02a9eca491d50b5fe01cf11d28eb1d26c7f41d72ee25121d4",
   "largest": [
     {
       "path": "index.html",

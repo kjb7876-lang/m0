@@ -41,20 +41,25 @@
  };
  // S-02 밤의 출석부 school: wood floor only (the catalog wall is a non-tileable plaster-over-panel design).
  for(let i=1;i<=8;i++)REGIONS['sz115-S02-'+i]={file:'school',floor:0xece4dc};
+ // R161: 전용 바닥이 없는 사몽 구역(sz115-*)은 STORY 호스트 지역 바닥을 그대로 빌려 쓰던 것을 드라이브 '피로 얼룩진 기억 타일'
+ //  (Samong-Memory-Fallback PART02+03 합본, sha256 f480fb72…, 1254→1024, assets/r161/tiles/blood-memory.webp)로 바꾼다. 전달 문서의 조건(사몽 및 그 이후 맵, 적합한 기존 자산이 없을 때만)대로
+ //  위 표에 있는 구역은 그대로 둔다. 바닥만(벽 없음). 엄격 무봉합 검사는 통과하지 못한 조건부 텍스처라 반복 이음매가 약하게 보일 수 있다.
+ const BLOOD=Object.freeze({file:'blood-memory',dir:'assets/r161/tiles/',floor:0xd2cac6,r161:true});
+ const rowOf=k=>REGIONS[k]||(/^sz115-/.test(String(k||''))?BLOOD:null);
  const solo=()=>!window.__STORYWORLD_COOP_SIM_R62__?.mode||window.__STORYWORLD_COOP_SIM_R62__.mode()==='off';
  // 사몽 구역은 호스트 지역 id(room.id)를 쓰므로 구역 id(samongR115.zone)가 있으면 그것으로 찾는다.
  const keyOf=r=>r?.samongR115?.zone||(r?.samongR103||r?.exploration?.samongR103||r?.exploration?.type==='r103-samong'?null:r?.id);
- const eligible=r=>solo()&&(r?.layer==='STORY'||r?.exploration?.type==='r103-samong')&&!!REGIONS[keyOf(r)]&&!!r.exploration?.surface?.art?.r55PhysicalUV;
+ const eligible=r=>solo()&&(r?.layer==='STORY'||r?.exploration?.type==='r103-samong')&&!!rowOf(keyOf(r))&&!!r.exploration?.surface?.art?.r55PhysicalUV;
  function dress(r){if(!eligible(r))return r;const art=r.exploration.surface.art;if(art.r118Tiles)return r;
-  const k=keyOf(r),row=REGIONS[k];r.exploration.surface={...r.exploration.surface,art:{...art,r118Tiles:{id:k,...row}}};stats.dressed++;return r;}
+  const k=keyOf(r),row=rowOf(k);r.exploration.surface={...r.exploration.surface,art:{...art,r118Tiles:{id:k,...row}}};stats.dressed++;return r;}
  const makeBase=makeRoom;makeRoom=function(...args){const r=makeBase.apply(this,args);try{dress(r);}catch(e){fail(e);}return r;};
  const enterBase=enterRegion;enterRegion=async function(...args){const out=await enterBase.apply(this,args);try{if(out!==false)dress(room);}catch(e){fail(e);}return out;};
  if(typeof restoreSave==='function'){const restoreBase=restoreSave;restoreSave=async function(...args){const out=await restoreBase.apply(this,args);try{if(out!==false)for(const r of new Set([...Object.values(world||{}),room]))dress(r);}catch(e){fail(e);}return out;};}
 
  const images=new Map();
- function lookImage(file){let row=images.get(file);if(!row){row={image:new Image(),ready:false,waiters:[]};row.image.decoding='async';
+ function lookImage(file,dir=DIR){let row=images.get(dir+file);if(!row){row={image:new Image(),ready:false,waiters:[]};row.image.decoding='async';
   row.image.onload=()=>{row.ready=true;for(const f of row.waiters.splice(0))try{f(row.image);}catch(e){fail(e);}};
-  row.image.onerror=()=>fail(Error('tile image failed: '+file));row.image.src=DIR+file+'.webp';images.set(file,row);}return row;}
+  row.image.onerror=()=>fail(Error('tile image failed: '+file));row.image.src=dir+file+'.webp';images.set(dir+file,row);}return row;}
  function cell(r,image,x){const T=r.T,c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.imageSmoothingEnabled=true;if('imageSmoothingQuality'in g)g.imageSmoothingQuality='high';g.drawImage(image,x,0,1024,1024,0,0,512,512);
   const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.generateMipmaps=true;t.minFilter=T.LinearMipmapLinearFilter;t.magFilter=T.LinearFilter;t.wrapS=t.wrapT=T.RepeatWrapping;t.anisotropy=Math.min(8,r.renderer?.capabilities?.getMaxAnisotropy?.()||1);t.userData.r118Tile=true;r.spatialResources?.add(t);return t;}
  function paint(r,art){const spec=art?.r118Tiles;if(!spec||!prefs.tiles)return;const stone=r.stoneMaterial,wall=r.wallMaterial,back=art.r59Backdrop?null:r.backgroundMaterial;let tries=0;
@@ -64,7 +69,7 @@
    if(spec.floor!=null){const t=cell(r,image,0);for(const m of[stone,back])if(m){m.map=t;m.color?.setHex?.(spec.floor);m.needsUpdate=true;}stats.floors++;}
    if(spec.wall!=null&&wall){wall.map=cell(r,image,1024);wall.color?.setHex?.(spec.wall);wall.needsUpdate=true;stats.walls++;}
    r.r118TileLook=spec.file;stats.paints++;};
-  const row=lookImage(spec.file);row.ready?apply(row.image):row.waiters.push(apply);}
+  const row=lookImage(spec.file,spec.dir||DIR);row.ready?apply(row.image):row.waiters.push(apply);}
  const spatialBase=C.createSpatial;
  if(spatialBase)C.createSpatial=function(asset,art,...args){const out=spatialBase.call(this,asset,art,...args);
   try{let a=art;// the zone id of a samong room is only known once the zone is built: dress the shown room here too
@@ -77,7 +82,7 @@
   host.appendChild(l);const el=l.querySelector('#r118-tiles');el.checked=prefs.tiles;el.onchange=()=>set({tiles:el.checked});}
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
 
- window.__STORYWORLD_TILES_R118__=Object.freeze({revision:'R118-tiles-1',prefs:()=>({...prefs}),set,regions:REGIONS,
+ window.__STORYWORLD_TILES_R118__=Object.freeze({revision:'R118-tiles-1',prefs:()=>({...prefs}),set,regions:REGIONS,rowOf,
   inspect:()=>({prefs:{...prefs},stats:{...stats},current:typeof room!=='undefined'?room?.exploration?.surface?.art?.r118Tiles||null:null,lastError,collisionChanged:false,layoutRouteChanged:false,savesTouched:false})});
  for(const r of new Set([...Object.values(typeof world==='object'&&world||{}),typeof room==='object'?room:null]))try{dress(r);}catch(e){fail(e);}
 })();
