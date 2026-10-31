@@ -3335,7 +3335,7 @@
     "samong-r161.js",
     "assets/r161/puppet/puppet-ego-walk-right-8.webp",
     "assets/r161/sculpture/memory-fragment.webp",
-    "assets/r118/tiles/blood-memory-r161.webp"
+    "assets/r161/tiles/blood-memory.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4410,5 +4410,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "158aea78ad1be70ac448e53b6e29fdcad0e8ac3cc985f6d371e40d3ee949e254"
+  "runtimeManifestSHA256": "58751854391f89bdcd155ed679b787393cf9abe361fa6c688936cd54d104203d"
 }
