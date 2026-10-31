@@ -36,7 +36,7 @@ let inBasic=0,chain=0,lastHitT=-9,lastStepT=-9,serial=0,frameHits=0,frameT=-1;
 const isBasic=s=>(inBasic>0&&(s==null||typeof s!=='object'||(!s.kind&&!s.ability&&!s.attackKind9)))||s?.attackKind9==='basic'||s?.r160Basic===true;
 function onBasicHit(e){const t=T();if(t-lastHitT>CHAIN_GAP)chain=0;if(t-lastStepT>.12){chain++;lastStepT=t;}lastHitT=t;stats.basicHits++;if(chain>stats.chainMax)stats.chainMax=chain;
  if(frameT!==t){frameT=t;frameHits=0;}if(++frameHits>(lowFx()?2:4))return;// 한 번에 여러 적을 베어도 이펙트는 몇 개만
- if(list.length>=MAX)list.shift();const burst=chain>=5&&chain%5===0&&frameHits===1;if(burst)stats.bursts++;
+ if(list.length>=MAX)list.shift();const burst=chain>=5&&chain%5===0&&frameHits===1;if(burst){stats.bursts++;try{window.__STORYWORLD_PIXELFX_R163__?.play?.('crit-hit',e.x,e.y,{k:.7,z:H()*.45});}catch(_){}}
  list.push({id:'r160:'+(++serial),x:e.x,y:e.y,t:0,life:burst?.85:.5,n:chain,burst,F:palOf(player.hero),seed:Math.random()*100,side:chain%2?1:-1});
  if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}
 function drawHit(e,h){const S=SPR(),F=e.F,u=e.t/e.life,lo=lowFx(),k=1+Math.min(4,e.n-1)*.12,c=P(e.x,e.y,h*.45),g=P(e.x,e.y);

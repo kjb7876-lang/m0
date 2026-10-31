@@ -11593,6 +11593,51 @@
       "sha256": "73b535b974f01e42fb9dee3ec9e49a81f4d05d3d685f6553977255584d731e84"
     },
     {
+      "path": "assets/r163/pixelfx/collect-burst.webp",
+      "bytes": 35368,
+      "sha256": "05360bc362352406f09dc1a043d5730a1cca907ebb819d2a7c2587102f0abf7c"
+    },
+    {
+      "path": "assets/r163/pixelfx/core-orb-teal.webp",
+      "bytes": 216226,
+      "sha256": "024e15e248e82a66809840b50fe13ddbccc1461dd071bf813a6c78efeed64042"
+    },
+    {
+      "path": "assets/r163/pixelfx/crit-hit.webp",
+      "bytes": 55490,
+      "sha256": "2b81b99644e841247f33eccc1b4b7756cfc226fd9165c8b98ed3af729b3e559c"
+    },
+    {
+      "path": "assets/r163/pixelfx/dark-explosion-blood.webp",
+      "bytes": 699874,
+      "sha256": "73560237215890220f5809608b7ddb1e4a4a55bd624e3cdb0283b916ef1e5f11"
+    },
+    {
+      "path": "assets/r163/pixelfx/hands-blood.webp",
+      "bytes": 203860,
+      "sha256": "6c43ae1520d109edc943d589d3bbe95c4182b4e84914e62ca28f2435ccec8700"
+    },
+    {
+      "path": "assets/r163/pixelfx/hit-flash.webp",
+      "bytes": 9194,
+      "sha256": "18de161086e88e0ed3889af5432af247cdea475fffc585c0f50adda31cda6c76"
+    },
+    {
+      "path": "assets/r163/pixelfx/index.json",
+      "bytes": 4315,
+      "sha256": "d96bfee681fd5443965636ddf982f2be5505302e30c67be511bdb03c92111071"
+    },
+    {
+      "path": "assets/r163/pixelfx/meteor.webp",
+      "bytes": 619746,
+      "sha256": "deb44ce7e081d6b9d616061076f6540f792fcb3b9e48bad80fe50b9c3c71ffc8"
+    },
+    {
+      "path": "assets/r163/pixelfx/tendrils-blood.webp",
+      "bytes": 338030,
+      "sha256": "d12cd47a34057b2f7081b4f47b18516313ca36d9e9d1cf3ee1f4e422b07200b0"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20059,8 +20104,8 @@
     },
     {
       "path": "combat-r160.js",
-      "bytes": 12837,
-      "sha256": "71aa2d1570715bc2badeb3329a88ad44094095c629d9f4d7b0b591eaeeae8859"
+      "bytes": 12934,
+      "sha256": "82361ed926e848ef403ce53abdf9ef1eb6b05bbaed2eef58103fa6577cc31e80"
     },
     {
       "path": "combat-r98.js",
@@ -20194,8 +20239,8 @@
     },
     {
       "path": "fx-boss-r105.js",
-      "bytes": 21952,
-      "sha256": "a7ad4b0e167b095ade429941585e145746607922aff233ac6519de280f42511d"
+      "bytes": 22163,
+      "sha256": "4536c2c7c4c5a09a19a69ccea99b04cf40160de7ffb18032a7844cd8dec9e166"
     },
     {
       "path": "fx-d2s-r106.js",
@@ -20274,8 +20319,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563795,
-      "sha256": "7973cbcf8e3fc13dfe295ed8c5b4f4df09a7e0d0e19acf0e979cd6335fc5d4b1"
+      "bytes": 6563836,
+      "sha256": "d44d63164861880fd11470711147c2f2edcc9d165df2ded0430c267e1e46f78e"
     },
     {
       "path": "intro-r140.js",
@@ -20341,6 +20386,11 @@
       "path": "perf-r97.js",
       "bytes": 5359,
       "sha256": "446e18d7e54633bcdc29fa73a32bd5a2a8c2f38c6e29a7036dd0daa026ada90c"
+    },
+    {
+      "path": "pixelfx-r163.js",
+      "bytes": 5469,
+      "sha256": "702235f3553683b139a691c466223142088a7ab5dfd97dfce3b8bf4948a06eb3"
     },
     {
       "path": "play-r106.js",
@@ -20414,13 +20464,13 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 15986,
-      "sha256": "ced41b29b1d74e9eb36c182ecec3c8edc3b6568400f498b7ea379be923ecc5e2"
+      "bytes": 18169,
+      "sha256": "84f35f17e611357567bbe45d1c3b2080ad076ef42ff3dbeb5600a8772594e374"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 76388,
-      "sha256": "e7b8d37afc3ebcb3609b895270327214016175634f9841607b6e4d1564e1591c"
+      "bytes": 76480,
+      "sha256": "69b706818cde4454c7f3a56518751cece7b4b796d6f550545748489d5aea43b2"
     },
     {
       "path": "samong-r161.js",
@@ -20633,9 +20683,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4126,
-  "totalBytes": 789631960,
-  "webHTMLSha256": "7973cbcf8e3fc13dfe295ed8c5b4f4df09a7e0d0e19acf0e979cd6335fc5d4b1",
+  "fileCount": 4136,
+  "totalBytes": 791822156,
+  "webHTMLSha256": "d44d63164861880fd11470711147c2f2edcc9d165df2ded0430c267e1e46f78e",
   "largest": [
     {
       "path": "index.html",

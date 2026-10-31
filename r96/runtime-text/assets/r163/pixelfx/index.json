@@ -1,0 +1,225 @@
+{
+ "source": "https://github.com/patch-gg/pixelfx",
+ "commit": "fe7103c36d94e02f2d7df7d8f7a341e493837cde",
+ "license": "MIT (Copyright (c) 2026 Patch, Copyright (c) 2026 Hugo Duprez)",
+ "notice": "src/core/sim.js 와 일부 효과는 Sprite Fusion(Hugo Duprez, MIT) 효과를 각색 — 저장소 NOTICE.md",
+ "step": 2,
+ "effects": {
+  "tendrils-blood": {
+   "fx": "shadow/shadow-tendrils",
+   "options": {
+    "palette": [
+     "#070203",
+     "#1a0508",
+     "#3a0a12",
+     "#64111f",
+     "#931c2c",
+     "#c43a44",
+     "#ec8a86",
+     "#ffe6df"
+    ],
+    "seed": 3
+   },
+   "use": "사몽 보스 촉수 패턴(R162) — 촉수 자리마다",
+   "file": "tendrils-blood.webp",
+   "sha256": "d12cd47a34057b2f7081b4f47b18516313ca36d9e9d1cf3ee1f4e422b07200b0",
+   "bytes": 338030,
+   "frame": [
+    208,
+    130
+   ],
+   "pivot": [
+    104,
+    106
+   ],
+   "columns": 6,
+   "frames": 44,
+   "fps": 15.0,
+   "loop": false
+  },
+  "hands-blood": {
+   "fx": "shadow/grasping-hands",
+   "options": {
+    "palette": [
+     "#070203",
+     "#1a0508",
+     "#3a0a12",
+     "#64111f",
+     "#931c2c",
+     "#c43a44",
+     "#ec8a86",
+     "#ffe6df"
+    ],
+    "seed": 5
+   },
+   "use": "B 광장 중간보스가 나타날 때",
+   "file": "hands-blood.webp",
+   "sha256": "6c43ae1520d109edc943d589d3bbe95c4182b4e84914e62ca28f2435ccec8700",
+   "bytes": 203860,
+   "frame": [
+    200,
+    116
+   ],
+   "pivot": [
+    100,
+    100
+   ],
+   "columns": 5,
+   "frames": 42,
+   "fps": 15.0,
+   "loop": false
+  },
+  "meteor": {
+   "fx": "fire/meteor",
+   "options": {
+    "seed": 2
+   },
+   "use": "사몽 보스 운석 패턴(R162) — 떨어져 터지는 자리",
+   "file": "meteor.webp",
+   "sha256": "deb44ce7e081d6b9d616061076f6540f792fcb3b9e48bad80fe50b9c3c71ffc8",
+   "bytes": 619746,
+   "frame": [
+    272,
+    232
+   ],
+   "pivot": [
+    150,
+    208
+   ],
+   "columns": 8,
+   "frames": 72,
+   "fps": 15.0,
+   "loop": false
+  },
+  "dark-explosion-blood": {
+   "fx": "shadow/dark-explosion",
+   "options": {
+    "palette": [
+     "#070203",
+     "#1a0508",
+     "#3a0a12",
+     "#64111f",
+     "#931c2c",
+     "#c43a44",
+     "#ec8a86",
+     "#ffe6df"
+    ],
+    "seed": 4
+   },
+   "use": "분신 돌진이 끝나는 자리, 중간보스가 쓰러질 때",
+   "file": "dark-explosion-blood.webp",
+   "sha256": "73560237215890220f5809608b7ddb1e4a4a55bd624e3cdb0283b916ef1e5f11",
+   "bytes": 699874,
+   "frame": [
+    280,
+    248
+   ],
+   "pivot": [
+    140,
+    206
+   ],
+   "columns": 7,
+   "frames": 55,
+   "fps": 15.0,
+   "loop": false
+  },
+  "collect-burst": {
+   "fx": "pickups/collect-burst",
+   "options": {
+    "seed": 1
+   },
+   "use": "단서조각을 주울 때",
+   "file": "collect-burst.webp",
+   "sha256": "05360bc362352406f09dc1a043d5730a1cca907ebb819d2a7c2587102f0abf7c",
+   "bytes": 35368,
+   "frame": [
+    112,
+    108
+   ],
+   "pivot": [
+    56,
+    94
+   ],
+   "columns": 5,
+   "frames": 17,
+   "fps": 15.0,
+   "loop": false
+  },
+  "crit-hit": {
+   "fx": "impacts/crit-hit",
+   "options": {
+    "seed": 1
+   },
+   "use": "기본공격 5연타 폭발(R160)",
+   "file": "crit-hit.webp",
+   "sha256": "2b81b99644e841247f33eccc1b4b7756cfc226fd9165c8b98ed3af729b3e559c",
+   "bytes": 55490,
+   "frame": [
+    216,
+    136
+   ],
+   "pivot": [
+    84,
+    106
+   ],
+   "columns": 3,
+   "frames": 11,
+   "fps": 15.0,
+   "loop": false
+  },
+  "hit-flash": {
+   "fx": "impacts/hit-flash",
+   "options": {
+    "seed": 1
+   },
+   "use": "정화의 코어에 적이 닿을 때",
+   "file": "hit-flash.webp",
+   "sha256": "18de161086e88e0ed3889af5432af247cdea475fffc585c0f50adda31cda6c76",
+   "bytes": 9194,
+   "frame": [
+    80,
+    64
+   ],
+   "pivot": [
+    40,
+    54
+   ],
+   "columns": 3,
+   "frames": 6,
+   "fps": 15.0,
+   "loop": false
+  },
+  "core-orb-teal": {
+   "fx": "arcane/arcane-orb",
+   "options": {
+    "palette": [
+     "#02090a",
+     "#06222a",
+     "#0b4a52",
+     "#13807e",
+     "#2fb8a8",
+     "#7ae0cf",
+     "#c8fff2",
+     "#ffffff"
+    ],
+    "seed": 1
+   },
+   "use": "정화의 코어(D 구역) 빛",
+   "file": "core-orb-teal.webp",
+   "sha256": "024e15e248e82a66809840b50fe13ddbccc1461dd071bf813a6c78efeed64042",
+   "bytes": 216226,
+   "frame": [
+    136,
+    112
+   ],
+   "pivot": [
+    68,
+    104
+   ],
+   "columns": 6,
+   "frames": 36,
+   "fps": 15.0,
+   "loop": true
+  }
+ }
+}

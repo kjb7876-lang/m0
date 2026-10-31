@@ -206,6 +206,7 @@
  // R162 B(뱀서류 광장): 처치 111마다 중간보스 1마리(모두 6마리) — 그 구역 몹 하나를 키운다(체력 영웅 공격력 × 60, 몸 1.7배).
  function midbossR162(r,x,z,ep){x.r162Mid=x.r162Mid||0;if(x.r162Mid>=6||S.kills<(x.r162Mid+1)*111)return;const q=ringPoint(player,7,11);if(!q)return;const mobs=zoneMobs(z,ep),e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'mb',aggro:60});if(!e)return;swarm(e,true);
   let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.midboss=true;e.samongMidR162=true;e.maxHp=e.hp=Math.round(atk*60);e.defScale=(e.defScale||1)*1.4;e.speed=(e.speed||1)*.55;e.damage=(e.damage||8)*1.8;e.name='중간보스 · '+(z.mobName||ep.mobName);x.r162Mid++;
+  try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',q.x,q.y,{k:1.0});}catch(_){}
   try{toast('중간보스 '+x.r162Mid+' / 6 · '+e.name,3);sound('boss');}catch(_){}}
  // R162 D(정화의 코어): 세로 길 위쪽 끝에서 쏟아져 내려오는 666마리. 영웅 가까이(3.2칸)가 아니면 코어 쪽으로 곧장 내려오고,
  //  코어에 닿으면 사라지며 코어 체력을 깎는다(짙은 형상 66, 보통 6). 코어 777 이 모두 깎이면 그 구역을 처음부터(처치 0, 적 비움).
