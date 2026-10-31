@@ -26,7 +26,9 @@
   for(const p of window.__STORYWORLD_VISUAL_R91__?.lightPoints?.()||[])add({x:p.x,y:p.y,kind:'lamp',id:p.id});
   for(const p of window.__STORYWORLD_VISUAL_R92__?.lightPoints?.()||[])add({x:p.x,y:p.y,kind:'lamp',id:p.id,color:p.color});
   // R172(렉): 화면 밖 불빛까지 8개를 셰이더 반복에 넣던 것을 영웅 10칸 안 가까운 4개로 — 스토리 맵 조각 셰이딩 비용이 컸다.
-  return [...found.values()].filter(l=>!hero||Math.hypot(l.x-hero.x,l.y-hero.y)<10).sort((a,b)=>(hero?Math.hypot(a.x-hero.x,a.y-hero.y)-Math.hypot(b.x-hero.x,b.y-hero.y):0)||a.key.localeCompare(b.key)).slice(0,LIGHTS_R172);
+  //  포탈 불빛은 멀어도 가까운 2개까지 남긴다(출구 위치를 알리는 빛·R90 포탈 검사).
+  const dist=l=>hero?Math.hypot(l.x-hero.x,l.y-hero.y):0,order=(a,b)=>(dist(a)-dist(b))||a.key.localeCompare(b.key),all=[...found.values()];
+  return [...all.filter(l=>l.portal).sort(order).slice(0,2),...all.filter(l=>!l.portal&&dist(l)<10).sort(order)].slice(0,LIGHTS_R172);
  }
  const LIGHT_TOKEN='gl_FragColor=vec4(k,1.);';
  const LIGHT_HEAD='uniform int r90LocalCount;uniform vec4 r90Local[8];uniform vec3 r90LocalColor[8];\n';
