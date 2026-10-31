@@ -4435,5 +4435,9 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
+<<<<<<< HEAD
   "runtimeManifestSHA256": "3e0639f4a78ab6229fc2bf60a807daa648894deee44b07871b67035bcdf1c367"
+=======
+  "runtimeManifestSHA256": "d70bec04cb7a9383fc2cbf53cb7017f526e700ad811d67d674d540f50ff7d04c"
+>>>>>>> origin/claude/r170-towers-fx
 }

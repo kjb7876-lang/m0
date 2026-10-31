@@ -20159,8 +20159,13 @@
     },
     {
       "path": "combat-r170.js",
+<<<<<<< HEAD
       "bytes": 19092,
       "sha256": "937b5f819650cc422d056212f907682f596bf1a00de714d533e915da94fa2511"
+=======
+      "bytes": 18132,
+      "sha256": "a0c15877c303a3daad027e66c6839f616c6b0741f2344429c0846db984b0d27f"
+>>>>>>> origin/claude/r170-towers-fx
     },
     {
       "path": "combat-r98.js",
@@ -20754,7 +20759,11 @@
     }
   ],
   "fileCount": 4150,
+<<<<<<< HEAD
   "totalBytes": 793412787,
+=======
+  "totalBytes": 793405237,
+>>>>>>> origin/claude/r170-towers-fx
   "webHTMLSha256": "7310967c35ca3fb870439b7be0658c4241fab2d671ef4babd0e14971e7575774",
   "largest": [
     {
