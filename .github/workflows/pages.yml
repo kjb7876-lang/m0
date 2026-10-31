@@ -137,6 +137,8 @@ jobs:
         run: node r96/qa/r155/decal-grid-cpu-check.cjs
       - name: R156 R90 floor-mark nearest-wall grid equals the all-walls answer
         run: node r96/qa/r156/decal-r90-grid-cpu-check.cjs
+      - name: R159 code-review fixes (no missing directional art requests, item map) and autoplay tool
+        run: node r96/qa/r159/review-fixes-cpu-check.cjs
       - name: R160 combat effects and hotbar CPU check
         run: node r96/qa/r160/combat-cpu-check.cjs
       - name: Install pinned sandboxed Chromium

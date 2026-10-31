@@ -17,7 +17,7 @@ function run({webdriver=false,stored=null,gapsMs=40,secs=8,play=true}={}){const 
  const doc={documentElement:root,hidden:false,head:el('head'),body:el('body'),createElement:t=>el(t),getElementById:id=>ids[id]||null};doc.head.appendChild=c=>{if(c.id)ids[c.id]=c;return c;};doc.body.appendChild=c=>{if(c.id)ids[c.id]=c;return c;};
  const store={};if(stored)store['storyworld.r150.perf']=JSON.stringify(stored);
  const sb={window:{},document:doc,navigator:{webdriver},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},performance:{now:()=>0},MessageChannel:undefined,
-  requestAnimationFrame:f=>{frames.push(f);return frames.length;},toast:t=>toasts.push(t),started:play,modal:null,loading:false,storyScene:null,showSettings(){}};
+  requestAnimationFrame:f=>{frames.push(f);return frames.length;},__q:frames,toast:t=>toasts.push(t),started:play,modal:null,loading:false,storyScene:null,showSettings(){}};
  vm.createContext(sb);vm.runInContext(src,sb);const api=sb.window.__STORYWORLD_PERF_R150__;
  let t=1000;for(let i=0;i<secs*1000/gapsMs;i++){const f=frames.shift();if(!f)break;t+=gapsMs;f(t);}
  return {api,root,toasts,store,ids,sb};}
@@ -30,5 +30,8 @@ function run({webdriver=false,stored=null,gapsMs=40,secs=8,play=true}={}){const 
 {const r=run({gapsMs:16.7,secs:2,stored:{lite:'on'}});ok('setting 켜기 forces lite at once',r.root.classList.contains('swLiteR150'),r.api.inspect());
  r.api.set({lite:'auto'});ok('back to 자동 (fast device) restores the full look',!r.root.classList.contains('swLiteR150'));ok('choice is saved',JSON.parse(r.store['storyworld.r150.perf']).lite==='auto');}
 {const r=run({gapsMs:20,secs:5,stored:{meter:true}});const m=r.ids.perfMeterR150;ok('performance meter shows frames per second',m&&!m.hidden&&/장면\/초 50/.test(m.textContent),m&&m.textContent);}
+{const r=run({gapsMs:40,secs:3});r.sb.started=false;const fr=[];/* 서사·창(플레이 아님) 동안 시간이 흐른 뒤 다시 느린 2초 */
+ const sb=r.sb;let t=1e6;const tick=n=>{for(let i=0;i<n;i++){const f=sb.__q.shift();if(!f)break;t+=40;f(t);}};ok('R159: helper exposes frame queue',!!sb.__q,null);
+ sb.started=false;tick(200);sb.started=true;tick(60);ok('R159: a pause (story/menu) resets the slow streak — 3s slow + pause + 2.4s slow does not switch',!r.root.classList.contains('swLiteR150')&&r.api.inspect().autoOn===0,r.api.inspect());}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

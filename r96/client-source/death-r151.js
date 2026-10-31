@@ -38,11 +38,14 @@ function draw(rec,st){const D=dying;if(!D||!player)return;let best=null,bh=0;
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&(c.image===before||BODY_ART.test(String(c.sourcePath||c.image?.src||''))))rec.commands.splice(i,1);}
  stats.frames++;stats.lastFrame=fr;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(dying&&st>=0)draw(rec,st);else if(player&&HEROES.includes(player.hero)&&player.hp>0&&++preTick%30===0){/* 지금 보는 방향의 쓰러짐 그림을 미리 받아 둔다(지역마다 그림 기억이 비워짐) */const[sd]=sheetOf(player.hero,facing());image(pathOf(player.hero,sd));}}catch(e){fail(e);}return r;};}
+ try{if(dying&&player&&player.hp>0){dying=null;stats.revived=(stats.revived||0)+1;}/* R159: 새 게임·불러오기로 다시 살아나면 쓰러짐 그림을 멈춘다 */
+  if(dying&&st>=0)draw(rec,st);else if(player&&HEROES.includes(player.hero)&&player.hp>0&&++preTick%30===0){/* 지금 보는 방향의 쓰러짐 그림을 미리 받아 둔다(지역마다 그림 기억이 비워짐) */const[sd]=sheetOf(player.hero,facing());image(pathOf(player.hero,sd));}}catch(e){fail(e);}return r;};}
 if(typeof showDeath==='function'){const base=showDeath;showDeath=function(...a){
  if(dying)return;// 이미 쓰러지는 중 — 끝나면 창을 연다
  try{if(prefs.on&&solo()&&player&&HEROES.includes(player.hero)&&!storyScene&&typeof project==='function'){const d8=facing(),[sd,mir]=sheetOf(player.hero,d8),path=pathOf(player.hero,sd),im=image(path);
   if(im){dying={t0:performance.now(),path,im,mir,dir:d8};stats.plays++;const self=this;
+   // R159: 원래 창이 하던 조작 정리·음성 멈춤은 쓰러지는 순간 바로(누르던 공격·막기 키가 1.5초 동안 남지 않게).
+   try{if(typeof clearControls==='function')clearControls();if(typeof stopVoice==='function')stopVoice();}catch(e){fail(e);}
    setTimeout(()=>{dying=null;try{if(typeof started!=='undefined'&&started&&player&&player.hp<=0){stats.panels++;base.apply(self,a);}else stats.skipped++;}catch(e){fail(e);}},HOLD_MS);return;}}}catch(e){fail(e);}
  stats.immediate++;return base.apply(this,a);};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
