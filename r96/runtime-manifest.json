@@ -20159,8 +20159,8 @@
     },
     {
       "path": "combat-r170.js",
-      "bytes": 17775,
-      "sha256": "6f932082804ca6b3188b9998b6ab9a19a64ba695e747763c82230ff6fbd09bf6"
+      "bytes": 19092,
+      "sha256": "937b5f819650cc422d056212f907682f596bf1a00de714d533e915da94fa2511"
     },
     {
       "path": "combat-r98.js",
@@ -20524,8 +20524,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 78036,
-      "sha256": "609bc23ae6a01db288a9fe45bd01cce474830d6e24127f9e2eba9a864ffdd7c1"
+      "bytes": 78143,
+      "sha256": "8f09ef10e88d2da870be26eec7ebfa82c37a298600709196ad281d0fb7476a0e"
     },
     {
       "path": "samong-play-r162.js",
@@ -20534,8 +20534,8 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 79555,
-      "sha256": "38a72a313e4e58a87da400cc23b39c26168c84572dc8958b8cc7b063a222f053"
+      "bytes": 83513,
+      "sha256": "849497ca2ae0e98da34ed24b8fcc23cfdf03cd18708d1064d28e302602dcff01"
     },
     {
       "path": "samong-r161.js",
@@ -20559,8 +20559,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 45679,
-      "sha256": "2ac14a057c78a006c46f5483c211ca178c49c3f178cd953aeeb8810bf2ce57bf"
+      "bytes": 48204,
+      "sha256": "32c8fb5c84acab359aba0865c4d0e563a8e0544912631393a01ffa3c1b2d446e"
     },
     {
       "path": "scene-props-r117.js",
@@ -20754,7 +20754,7 @@
     }
   ],
   "fileCount": 4150,
-  "totalBytes": 793404880,
+  "totalBytes": 793412787,
   "webHTMLSha256": "7310967c35ca3fb870439b7be0658c4241fab2d671ef4babd0e14971e7575774",
   "largest": [
     {
