@@ -157,6 +157,8 @@ jobs:
         run: node r96/qa/r169/r169-cpu-check.cjs
       - name: R170 quiet tells, blood towers, story mob spread, B/D sub-bosses and boss, mob palette FX, tree shadows CPU check
         run: node r96/qa/r170/r170-cpu-check.cjs
+      - name: R173 samong combat modes F (fragments) / H (six waves) / G (core escort) CPU check
+        run: node r96/qa/r173/r173-cpu-check.cjs
       - name: R174 ranged heroes golden thread orbit and silver thread hit mark CPU check
         run: node r96/qa/r174/r174-cpu-check.cjs
       - name: R176 back/forward window navigation and review fixes CPU check
