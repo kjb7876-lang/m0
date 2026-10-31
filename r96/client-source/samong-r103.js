@@ -199,15 +199,55 @@
    if(time>=x.endAt||!r.enemies.some(living))openPortal(r,L.exit,nextTitle(z));}
   r.enemies=r.enemies.filter(e=>living(e)||time-(e.deadAt||0)<1.5);
   if(again||(fin&&!g.reach)||z.noMobs)return;attackTokens();
-  if(z.mode==='D'){defenseR162(dt,r,x,z,ep,L);return;}
-  const B=z.mode==='B';if(B)midbossR162(r,x,z,ep);
+  if(z.mode==='D'){gradesR170(dt,r,x,z,ep,L,true);defenseR162(dt,r,x,z,ep,L);return;}
+  if(z.mode==='G'){escortR173(dt,r,x,z,ep,L);return;}
+  if(z.mode==='H'){wavesR173(dt,r,x,z,ep);return;}
+  if(z.mode==='F'){const live=r.enemies.filter(e=>living(e)&&e.r170Tower).length;if((x.r173Towers||0)>0)x.r173Broken=Math.max(x.r173Broken||0,x.r173Towers-live);}
+  const B=z.mode==='B';if(B){midbossR162(r,x,z,ep);gradesR170(dt,r,x,z,ep,L,false);}
   const alive=r.enemies.filter(living).length,cap=B?caps().survival:Math.round(caps().survival*.6);if(time<x.spawnAt||alive>=cap)return;
   x.spawnAt=time+(B?.3:.45);const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(B?6:4,cap-alive);n++){const q=B?ringPoint(player,9,15):ringPoint(player,8,14);if(!q)break;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'s',aggro:60});if(e)swarm(e,elite);}}
- // R162 B(뱀서류 광장): 처치 111마다 중간보스 1마리(모두 6마리) — 그 구역 몹 하나를 키운다(체력 영웅 공격력 × 60, 몸 1.7배).
- function midbossR162(r,x,z,ep){x.r162Mid=x.r162Mid||0;if(x.r162Mid>=6||S.kills<(x.r162Mid+1)*111)return;const q=ringPoint(player,7,11);if(!q)return;const mobs=zoneMobs(z,ep),e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'mb',aggro:60});if(!e)return;swarm(e,true);
-  let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.midboss=true;e.samongMidR162=true;e.maxHp=e.hp=Math.round(atk*60);e.defScale=(e.defScale||1)*1.4;e.speed=(e.speed||1)*.55;e.damage=(e.damage||8)*1.8;e.name='중간보스 · '+(z.mobName||ep.mobName);x.r162Mid++;
+ // R162 B(뱀서류 광장): 중간보스 1마리씩(모두 6마리) — 그 구역 몹 하나를 키운다(체력 영웅 공격력 × 60, 몸 1.7배).
+ //  R170(사용자 "B·D 구역에 중간보스 비율 10% 늘리고"): 처치 111 → 100마다, D(정화의 코어)에도 나온다(D 는 길 위쪽 끝에서 내려와 코어로).
+ function midbossR162(r,x,z,ep,top){x.r162Mid=x.r162Mid||0;if(x.r162Mid>=6||S.kills<(x.r162Mid+1)*100)return;const q=top&&top.length?top[Math.floor(Math.random()*top.length)]:ringPoint(player,7,11);if(!q)return;const mobs=zoneMobs(z,ep),e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'mb',aggro:60});if(!e)return;swarm(e,true);
+  const atk=baseAtkR170();e.midboss=true;e.samongMidR162=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*60);e.defScale=(e.defScale||1)*1.4;e.speed=(e.speed||1)*.55;e.damage=(e.damage||8)*1.8;e.name='중간보스 · '+(z.mobName||ep.mobName);x.r162Mid++;if(top)e.r162Lane=true;
   try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',q.x,q.y,{k:1.0});}catch(_){}
   try{toast('중간보스 '+x.r162Mid+' / 6 · '+e.name,3);sound('boss');}catch(_){}}
+ // R170: 체력 기준 공격력은 사몽(×7~)·EGO(×1.55, 중첩) 같은 잠깐 버프를 뺀 값 — 나올 때 버프 중이었는지에 따라 체력이 8배까지 달라졌다.
+ function baseAtkR170(){let v=40;try{v=Number(attackPower())||40;if(player.samong>0)v/=7+.4*(typeof rank==='function'?rank('samongPower'):0);else if(player.ego>0){const n=Math.max(1,player.egoStackR169||1);v/=1.55*(1+.07*(n-1));}}catch{}return Math.max(1,v);}
+ // R170(사용자 "6마리 정도 준보스격 적도, 1마리는 보스격이 나오도록 서사에 맞게"): B·D 구역마다
+ //  · 준보스 6마리 — 처치 90·180·…·540 에서 그 구역 몹을 키운다(체력 영웅 공격력 × 20, 몸 1.25배, 짙은 형상 취급).
+ //  · 보스격 1마리 — 처치 600 에서 그 에피소드의 보스(EP.boss·구역 boss 원본 그림·이름)가 '보스 · 이름' 으로 나와 보스 패턴을 쓴다(체력 × 150).
+ //  D 의 준보스는 길 위쪽 끝에서 내려와 코어로 간다(코어를 66 깎는다). 보스격은 내려오지 않고 그 자리에서 싸운다.
+ function gradesR170(dt,r,x,z,ep,L,lane){const atk=baseAtkR170();const top=lane?x.r162Top:null;if(lane&&!(top&&top.length))return;if(lane)midbossR162(r,x,z,ep,top);
+  x.r170Sub=x.r170Sub||0;if(x.r170Sub<6&&S.kills>=(x.r170Sub+1)*90){const q=top&&top.length?top[Math.floor(Math.random()*top.length)]:ringPoint(player,7,12);
+   if(q){const mobs=zoneMobs(z,ep),e=spawn(mobs[(S.serial+3)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'sb',aggro:60});if(e){swarm(e,true);e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.speed=(e.speed||1)*.8;e.name='준보스 · '+(z.mobName||ep.mobName);if(lane)e.r162Lane=true;x.r170Sub++;try{toast('준보스 '+x.r170Sub+' / 6 · '+e.name,2.4);}catch(_){}}}}
+  // 서사 검수(R176): 원문에서 그 장의 보스를 '쓰러뜨리지 않는' 장(마지막 대면이 해결형 solve 인 장, 소리뿐인 첫 번째 나팔 RD)은
+  //  보스를 내지 않고 그 구역 몹을 키운 '보스격 · 몹 이름'을 낸다(미카엘라·페르소나·일곱 번째 나팔·강재헌·교주의 인장 등을 죽이는 장면을 만들지 않는다).
+  const chap=(()=>{try{return ZN()?.chapters?.[x.ep]||[];}catch(_){return[];}})(),spare=x.ep==='RD'||chap.some(q=>q.kind==='confront'&&q.solve);
+  const bd0=z?.boss||ep.boss,bd=spare?{donor:zoneMobs(z,ep)[0],name:z.mobName||ep.mobName,patterns:['ground','sides'],grade:true}:bd0;if(!x.r170Boss&&bd?.donor&&S.kills>=600){const q=lane?(L.entry&&L.core?{x:(L.entry.x+L.core.x)/2,y:(L.entry.y+L.core.y)/2}:ringPoint(player,6,9)):ringPoint(player,6,9);
+   if(q&&floorAt(q.x,q.y)){const b=spawn(bd.donor,q,{boss:true,name:bd.name,tag:'bb',aggro:60});if(b){x.r170Boss=b.id;b.samongBossR170=true;b.r61PreserveHealth=true;b.spawnState='active';b.cd=1.2;b.rest=.8;b.phaseAge=0;b.phaseStage='active';b.maxHp=b.hp=Math.round(atk*150);b.name=(bd.grade?'보스격 · ':'보스 · ')+bd.name;if(bd.grade)b.defScale=(b.defScale||1)*1.8;b.patternsR103=R162P(bd.patterns);
+    try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',q.x,q.y,{k:1.4});}catch(_){}try{toast(b.name,3);sound('boss');}catch(_){}}}}
+  const b=x.r170Boss&&r.enemies.find(e=>e.id===x.r170Boss);if(b&&b.hp>0&&!b.deadRecorded){const sa=x.patAt,sn=x.patN;x.patAt=b.r170PatAt;x.patN=b.r170PatN;try{bossPatterns(b,dt);}finally{b.r170PatAt=x.patAt;b.r170PatN=x.patN;x.patAt=sa;x.patN=sn;}}}
+ // R173 H(여섯 물결): 앞 물결을 다 쓰러뜨리면 다음 물결 11마리가 영웅 둘레에서 한꺼번에 솟는다(6 × 11 = 66). 마지막 물결에는 준보스 하나.
+ function wavesR173(dt,r,x,z,ep){x.r173Wave=x.r173Wave||0;
+  if(x.r173Pend>0){waveSpawnR173(r,x,z,ep);return;}// 자리가 없어 못 나온 몫은 다음 틱에 마저 낸다(66마리를 다 채워야 단서조각이 다 떨어진다)
+  const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length;if(alive||x.r173Wave>=6)return;if(!x.r173Next){x.r173Next=time+(x.r173Wave?1.6:.8);return;}if(time<x.r173Next)return;x.r173Next=0;
+  x.r173Wave++;x.r173Pend=11;x.r173Made=0;waveSpawnR173(r,x,z,ep);
+  try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',player.x,player.y,{k:1.1});toast('물결 '+x.r173Wave+' / 6',2);}catch(_){}}
+ function waveSpawnR173(r,x,z,ep){const mobs=zoneMobs(z,ep),atk=baseAtkR170();for(let k=x.r173Pend;k>0;k--){const n=x.r173Made||0,q=ringPoint(player,6,11);if(!q)break;const e=spawn(mobs[(S.serial+n)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'h',aggro:60});if(!e)break;x.r173Made=n+1;x.r173Pend--;const sub=x.r173Wave===6&&n===0;swarm(e,sub||n%6===5);
+   if(sub){e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.name='준보스 · '+(z.mobName||ep.mobName);}}}
+ // R173 G(정화의 코어 호위): 코어(체력 777)가 맨 아래에서 위쪽 끝(문)으로 곧게 오른다. 코어 3.5칸 안에 적이 없을 때만 나아가고(처치가 길을 연다),
+ //  적은 위쪽 끝에서 쏟아져 코어로 곧장 간다 — 닿으면 사라지며 코어를 깎는다(보통 6, 짙은 형상 66). 코어가 무너지면 처음 자리로(처치 0).
+ function escortR173(dt,r,x,z,ep,L){const top=L.top||L.exit,start=L.core;if(!top||!start)return;const c=x.r173Light||(x.r173Light={x:start.x,y:start.y,hp:777,max:777,prog:0,fails:0});
+  const cells=x.r162Top||(x.r162Top=(()=>{const f=r.exploration.floorCells||[];let m=1e9;for(const[a,b]of f)m=Math.min(m,a+b);return f.filter(([a,b])=>a+b<=m+5).map(([a,b])=>({x:a+.5,y:b+.5}));})());
+  const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length,cap=Math.round(caps().survival*.7);
+  if(!x.r173Arrived&&time>=x.spawnAt&&alive<cap&&cells.length){x.spawnAt=time+.45;const mobs=zoneMobs(z,ep);for(let n=0;n<Math.min(4,cap-alive);n++){const q=cells[Math.floor(Math.random()*cells.length)];if(!floorAt(q.x,q.y)||Math.hypot(q.x-c.x,q.y-c.y)<6)continue;const elite=(S.serial+n)%13===12,e=spawn(mobs[S.serial%mobs.length],q,{name:z.mobName||ep.mobName,tag:'g',aggro:4});if(e){swarm(e,elite);e.r173Escort=true;}}}
+  let near=false;for(const e of r.enemies){if(!living(e)||!e.r173Escort)continue;const dc=Math.hypot(c.x-e.x,c.y-e.y);if(dc<3.5)near=true;
+   if(dc<1.2){c.hp-=e.samongElite?66:6;e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;try{window.__STORYWORLD_SAMONG_PLAY_R162__?.coreHit?.(c,{hp:c.hp,max:c.max});}catch(_){}continue;}
+   if(Math.hypot(player.x-e.x,player.y-e.y)<3.2)continue;const sp=Math.max(2.4,(e.speed||1))*dt,nx=e.x+(c.x-e.x)/dc*sp,ny=e.y+(c.y-e.y)/dc*sp;if(!blocked(nx,ny,.25,r)){e.x=nx;e.y=ny;}e.homeX=e.x;e.homeY=e.y;e.moving=true;}
+  const D=Math.hypot(top.x-start.x,top.y-start.y)||1;if(!near&&!x.r173Arrived){const d=Math.hypot(top.x-c.x,top.y-c.y),st=Math.min(d,1.1*dt);c.x+=(top.x-c.x)/(d||1)*st;c.y+=(top.y-c.y)/(d||1)*st;}
+  c.prog=Math.max(0,Math.min(1,1-Math.hypot(top.x-c.x,top.y-c.y)/D));if(!x.r173Arrived&&c.prog>=.985){x.r173Arrived=true;try{toast('정화의 코어가 문 앞에 닿았습니다.',3);}catch(_){}}
+  if(c.hp<=0){for(const e of r.enemies)if(living(e)&&e.samongSurvival){e.hp=0;e.deadRecorded=true;e.spawnState='dead';e.deadAt=time;e.samongR103Silent=true;}c.hp=c.max;c.x=start.x;c.y=start.y;c.prog=0;c.fails++;S.kills=0;x.spawnAt=time+3;try{toast('정화의 코어가 무너졌습니다 · 처음 자리에서 다시.',3.5);}catch(_){}}}
  // R162 D(정화의 코어): 세로 길 위쪽 끝에서 쏟아져 내려오는 666마리. 영웅 가까이(3.2칸)가 아니면 코어 쪽으로 곧장 내려오고,
  //  코어에 닿으면 사라지며 코어 체력을 깎는다(짙은 형상 66, 보통 6). 코어 777 이 모두 깎이면 그 구역을 처음부터(처치 0, 적 비움).
  const CORE_R162=777;// 사용자 2026-10-31 "우리편은 다 7 77 777, 코어체력도 777" — 적이 깎는 양은 적 쪽 숫자(보통 6, 짙은 형상 66)
@@ -229,7 +269,7 @@
   wander:cfg=>{const r=room,x=r.samongR103,ep=EP[x.ep];if(!x.wanderAt){x.wanderAt=time+cfg.every;return;}const alive=r.enemies.filter(e=>living(e)&&!e.samongPatrolR115).length;if(time<x.wanderAt||alive>=cfg.cap)return;x.wanderAt=time+cfg.every;const q=ringPoint(player,9,16);if(!q)return;const list=cfg.mobs||ep.mobs,e=spawn(list[S.serial%list.length],q,{name:cfg.mobName||ep.mobName,hpScale:.6,tag:'w',aggro:7});if(e)e.damage=(e.damage||8)*.7;},
   addProp:p=>room.props.push(p),removeProp:p=>{room.props=room.props.filter(q=>q!==p);},clear:()=>{if(here()&&!room.samongR103.portal)stageCleared(room);}};
  // Survival mobs are a melee swarm: they close in, die in one or two honest hits (scaled to the hero, not the zone) and only a few may wind up at once.
- function swarm(e,elite){let atk=40;try{atk=Math.max(1,Number(attackPower())||40);}catch{}e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
+ function swarm(e,elite){const atk=baseAtkR170();e.ai='melee';e.type='melee';e.rangedWindup=0;e.samongSurvival=true;e.speed=(e.speed||1)*(elite?1.5:1.9);e.samongFastR106=true;e.damage=(e.damage||8)*(elite?.9:.6);e.maxHp=e.hp=Math.max(1,Math.round(atk*(elite?5.5:1.15)));if(elite){e.samongElite=true;e.defScale=(e.defScale||1)*1.22;e.name=e.name+' · 짙은 형상';}}
  function attackTokens(){let busy=0;const ready=[];for(const e of room.enemies){if(!living(e)||!e.samongSurvival)continue;if((e.attack&&!e.attack.committed)||e.rangedWindup>0)busy++;else if((e.cd||0)<=.2)ready.push(e);}ready.sort((a,b)=>distance(a,player)-distance(b,player));for(const e of ready.slice(Math.max(0,6-busy)))e.cd=Math.max(e.cd||0,.12+Math.random()*.2);
   // R106: 생존 잡몹 공격 속도 1.6배 — 다음 공격까지의 대기만 줄인다(공격 예고 동작은 그대로).
   const dt=typeof R106_DT==='number'?R106_DT:0;if(dt>0)for(const e of room.enemies)if(living(e)&&e.samongSurvival&&(e.cd||0)>0&&!(e.attack&&!e.attack.committed))e.cd=Math.max(0,e.cd-dt*.6);}

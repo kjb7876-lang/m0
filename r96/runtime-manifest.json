@@ -11629,8 +11629,8 @@
     },
     {
       "path": "assets/r163/pixelfx/index.json",
-      "bytes": 5929,
-      "sha256": "e95b1d1bb144b6dd1b0f4668d236a9683ba148cc7f3aae309b060477a264e85f"
+      "bytes": 11459,
+      "sha256": "aa8049e7dae24190434adb3603f11bd00d7a19477fe9ea909f9627571e69455c"
     },
     {
       "path": "assets/r163/pixelfx/level-up.webp",
@@ -11641,6 +11641,56 @@
       "path": "assets/r163/pixelfx/meteor.webp",
       "bytes": 536716,
       "sha256": "47b1a828f575fe4d10f614d69e33be0dd7b58c5a75ecaf24692ae0307ab28162"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-clinical.webp",
+      "bytes": 15396,
+      "sha256": "c2bf8213147d559c88e065681146f7bbcbe352443799778d86a36a67f0e01c0a"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-coast.webp",
+      "bytes": 94652,
+      "sha256": "a131efa3c03e506c583c7ef42f35e7bd20bf959e0102f2178dc641adad59f1f2"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-domestic.webp",
+      "bytes": 25194,
+      "sha256": "f74fe48a9b28ad7c6c65b151bc6385acf23ea5f31256a9530cb56fca5343dc54"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-forge.webp",
+      "bytes": 104144,
+      "sha256": "9c68f157580585b0799adf400aadb60260cb55b2cb3c60bd49cd8bedefd5ddb9"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-garden.webp",
+      "bytes": 52766,
+      "sha256": "2ab6e8a88a935f62dad8fcf202d4bc66c2306587336df7a73d962b7ac6f15bde"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-memory.webp",
+      "bytes": 237598,
+      "sha256": "23932de3b8cb0a92c142ebc7b0a559cda0a33e9b9b1001cd0ba764f243021077"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-neural.webp",
+      "bytes": 36940,
+      "sha256": "af5882b7ed1677659f7a83c4f074f107bc59586d22b0fc784da1a1f2386cc30a"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-regional.webp",
+      "bytes": 21154,
+      "sha256": "065a4e5ccee887c67f89ab633293901d1374ce97c8a7373eea57cd673ef572e3"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-snow.webp",
+      "bytes": 130682,
+      "sha256": "c7e25ba60742289a43ca4df835ced7b2033d08b7f2712f38b638e34849f74564"
+    },
+    {
+      "path": "assets/r163/pixelfx/mob-stone.webp",
+      "bytes": 222634,
+      "sha256": "34f164ae6490652efd5c622d2825848ccf27a45cc081385ac5765f83d0da1ede"
     },
     {
       "path": "assets/r163/pixelfx/portal-teal.webp",
@@ -20158,6 +20208,11 @@
       "sha256": "82361ed926e848ef403ce53abdf9ef1eb6b05bbaed2eef58103fa6577cc31e80"
     },
     {
+      "path": "combat-r170.js",
+      "bytes": 21196,
+      "sha256": "e97b2bcdf02c17b8156cac3381375794ac92cf821bd94c21dc8c235c040db58d"
+    },
+    {
       "path": "combat-r98.js",
       "bytes": 6694,
       "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
@@ -20333,6 +20388,11 @@
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
     },
     {
+      "path": "hero-threads-r174.js",
+      "bytes": 11229,
+      "sha256": "230c2a3f2ee1dc3c0289d354a3d1b442d3d5b8f76c1e4819d58d25eba7e33568"
+    },
+    {
       "path": "heroes-r108.js",
       "bytes": 4386,
       "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
@@ -20374,8 +20434,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563958,
-      "sha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989"
+      "bytes": 6564044,
+      "sha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf"
     },
     {
       "path": "intro-r140.js",
@@ -20444,8 +20504,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 5469,
-      "sha256": "702235f3553683b139a691c466223142088a7ab5dfd97dfce3b8bf4948a06eb3"
+      "bytes": 7137,
+      "sha256": "6b9c45cec85f24fb023802ca4c9c1edbaaac8ffdc3530d43829dce3b00ebd90b"
     },
     {
       "path": "play-r106.js",
@@ -20464,13 +20524,13 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 26829,
-      "sha256": "0386aa221912d9869bc85bb071f587d1e2c6676151734a77763120e0a0245d8f"
+      "bytes": 26938,
+      "sha256": "7d42efbc1c94d0f3af0dbe0eae30e257e1e31a374749612ca460649ae3d4c56a"
     },
     {
       "path": "play-r169.js",
-      "bytes": 25380,
-      "sha256": "0ab989321d5bc356907e6aa97e48f8a2d9d5f4ea94a2b2ff182e25d6317dced5"
+      "bytes": 26822,
+      "sha256": "c9fa5f8f754fbf7b3afe7196c183b2b1b2dced0ed3c869352a5647ecdffd9e9a"
     },
     {
       "path": "polish-r100-data.js",
@@ -20519,8 +20579,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 78036,
-      "sha256": "609bc23ae6a01db288a9fe45bd01cce474830d6e24127f9e2eba9a864ffdd7c1"
+      "bytes": 78143,
+      "sha256": "8f09ef10e88d2da870be26eec7ebfa82c37a298600709196ad281d0fb7476a0e"
     },
     {
       "path": "samong-play-r162.js",
@@ -20529,13 +20589,13 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 76480,
-      "sha256": "69b706818cde4454c7f3a56518751cece7b4b796d6f550545748489d5aea43b2"
+      "bytes": 84520,
+      "sha256": "de1e3b9192afd7898a01750de5cbbb4c362a8620fdc5b322c0e954a2481b822d"
     },
     {
       "path": "samong-r161.js",
-      "bytes": 16753,
-      "sha256": "d7ddc0a82cb8eb017a6c1590a1a80d841546e7f5aaa16955c5be753adb878d26"
+      "bytes": 16786,
+      "sha256": "1fdab66e0b12085d9da42084ada26cd0513131ce76e8cce9727aa999d1d80699"
     },
     {
       "path": "samong-text-r103.js",
@@ -20554,8 +20614,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 45679,
-      "sha256": "2ac14a057c78a006c46f5483c211ca178c49c3f178cd953aeeb8810bf2ce57bf"
+      "bytes": 48450,
+      "sha256": "5e9cefcdf92fd6ad7e6073f6a7bfb66bdf4bb03c5e8cfee55ff1491c7b2e3736"
     },
     {
       "path": "scene-props-r117.js",
@@ -20748,9 +20808,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4149,
-  "totalBytes": 793383893,
-  "webHTMLSha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989",
+  "fileCount": 4161,
+  "totalBytes": 794377264,
+  "webHTMLSha256": "f7bd4a20d847add439d1c4a443bd7d73d073dd34fb1fd68f75e8e366c0df2adf",
   "largest": [
     {
       "path": "index.html",

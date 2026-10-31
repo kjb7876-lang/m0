@@ -16,10 +16,10 @@ const ch=Object.entries(Z.chapters),all=ch.flatMap(([,l])=>l);
 ok('every episode keeps at most one explore (map-search) zone',ch.every(([k,l])=>l.filter(z=>z.kind==='explore').length<=1),ch.map(([k,l])=>k+':'+l.filter(z=>z.kind==='explore').length).join(' '));
 ok('every episode has exactly one B (광장) and one D (정화의 코어) zone',ch.every(([k,l])=>l.filter(z=>z.mode==='B').length===1&&l.filter(z=>z.mode==='D').length===1),ch.map(([k,l])=>k+':'+l.filter(z=>z.mode==='B').length+'/'+l.filter(z=>z.mode==='D').length).join(' '));
 ok('no hold (버티기) goals remain, no hazard-only fights, no hold before statements',all.every(z=>!z.goal?.hold&&!z.hazards&&!z.solve?.hold));
-ok('combat kill goals are only 66 or 666; B and D are 666',all.filter(z=>z.kind==='combat').every(z=>[66,666].includes(z.goal?.kills))&&all.filter(z=>z.mode).every(z=>z.goal.kills===666));
+ok('combat kill goals are only 66 or 666 (R173: G escort has none); B and D are 666, F/H are 66',all.filter(z=>z.kind==='combat'&&z.mode!=='G').every(z=>[66,666].includes(z.goal?.kills))&&all.filter(z=>z.mode==='B'||z.mode==='D').every(z=>z.goal.kills===666)&&all.filter(z=>z.mode==='F'||z.mode==='H').every(z=>z.goal.kills===66)&&all.filter(z=>z.mode==='G').every(z=>z.goal.escort===true));
 ok('P-2 (뿌리 666, lead boss) became the P chapter B zone',Z.zone('sz115-P-2')?.mode==='B'&&!!Z.zone('sz115-P-2').lead);
-ok('B/D zones sit right before the last confront (or at the end)',ch.every(([k,l])=>{const last=l.map(z=>z.kind).lastIndexOf('confront'),d=l.findIndex(z=>z.mode==='D');return last<0?d===l.length-1:d===last-1;}));
-const clueKey=z=>(z.clues||[]).map(c=>c.key+'|'+c.sub).join(';');const before=Object.values(Z0.chapters).flat().map(clueKey).join('#'),after=all.filter(z=>!z.r162New).map(clueKey).join('#');
+ok('B/D (+R173 G) zones sit right before the last confront (or at the end): … D, G, confront',ch.every(([k,l])=>{const last=l.map(z=>z.kind).lastIndexOf('confront'),d=l.findIndex(z=>z.mode==='D'),g=l.findIndex(z=>z.mode==='G');return last<0?(g===l.length-1&&d===g-1):(g===last-1&&d===last-2);}));
+const clueKey=z=>(z.clues||[]).map(c=>c.key+'|'+c.sub).join(';');const before=Object.values(Z0.chapters).flat().map(clueKey).join('#'),after=all.filter(z=>!z.r162New&&!z.r173New).map(clueKey).join('#');
 ok('every original clue paragraph is still in the game (same anchors, same order)',before===after&&before.length>100);
 ok('combat zones with clues hand them out as 단서조각 (fragments), explore keeps placed clue boxes',all.filter(z=>z.kind==='combat'&&(z.clues||[]).length).every(z=>z.r162Frag)&&all.filter(z=>z.kind==='explore').every(z=>!z.r162Frag));
 ok('zone ids unique; old R115 ids all still resolve (saves keep working)',new Set(all.map(z=>z.id)).size===all.length&&Object.values(Z0.chapters).flat().every(z=>Z.zone(z.id)));
@@ -31,7 +31,7 @@ let bad=[];for(const[k,l]of ch){const ei=SM.episodes.findIndex(e=>e.key===k);for
  if(z.mode==='B'&&L.floorCells.length<700)bad.push(z.id+':plaza small '+L.floorCells.length);}}
 ok('every B plaza is wide and every D lane runs top→bottom with the core on its bottom end',!bad.length,bad.slice(0,6).join(' '));
 const r103=C('samong-r103.js');
-ok('B: midboss every 111 kills, 6 in all',/S\.kills<\(x\.r162Mid\+1\)\*111/.test(r103)&&/x\.r162Mid>=6/.test(r103));
+ok('B: midboss every 100 kills (R170: was 111, +10%), 6 in all',/S\.kills<\(x\.r162Mid\+1\)\*100/.test(r103)&&/x\.r162Mid>=6/.test(r103));
 ok('D: enemies spawn on the lane top, leak into the core (777; 6 per mob, 66 per elite), core loss restarts the zone',/const CORE_R162=777;/.test(r103)&&/c\.hp-=e\.samongElite\?66:6/.test(r103)&&/function defenseR162/.test(r103)&&/S\.kills=0;c\.hp=c\.max/.test(r103));
 ok('boss pattern lists gain 분신 6 · 운석 · 촉수',(()=>{try{const f=new Function('window',r103.match(/ function R162P\(list\)\{[^\n]*\n/)[0]+';return R162P;');const P=f({});const out=P(['sky','ground']);return ['clones','meteor','tentacles'].every(k=>out.includes(k))&&out.includes('sky');}catch(e){return false;}})());
 ok('clones pattern has exactly 6 shadows',/for\(let k=0;k<6;k\+\+\)\{const a=k\*Math\.PI\/3/.test(r103));
