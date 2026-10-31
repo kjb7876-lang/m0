@@ -82,10 +82,11 @@ function fieldBody(h,P){const q=project(h.x,h.y),R=Math.max(4,h.radius*TILE*zoom
   }}
  ctx.restore();stats.fields++;}
 // ---- 광역기: 운석·불덩이가 날아온 뒤 넓게 터진다 ----
-const seen=new Set(),pending=new Map(),meteors=[];let lastRoom=null,mid=0;
+const seen=new Set(),pending=new Map(),meteors=[];const R162_OWN=new Set(['clones','meteor','tentacles']);// R163: R162 분신·운석·촉수는 자기 그림(pixelfx)이 있어 이 금빛 낙하 연출을 덧그리지 않는다
+let lastRoom=null,mid=0;
 function scan(){if(typeof hazards==='undefined'||!Array.isArray(hazards))return;if(room!==lastRoom){lastRoom=room;seen.clear();meteors.length=0;owners.clear();}
  pending.clear();const live=new Set();
- for(const h of hazards){live.add(h.id);if(h.type!=='field'||!h.owner||seen.has(h.id))continue;seen.add(h.id);const e=enemyOf(h.owner);if(!e||!e.boss)continue;let g=pending.get(h.owner);if(!g){g={e,list:[]};pending.set(h.owner,g);}g.list.push(h);}
+ for(const h of hazards){live.add(h.id);if(h.type!=='field'||!h.owner||seen.has(h.id)||R162_OWN.has(h.samongPattern))continue;seen.add(h.id);const e=enemyOf(h.owner);if(!e||!e.boss)continue;let g=pending.get(h.owner);if(!g){g={e,list:[]};pending.set(h.owner,g);}g.list.push(h);}
  if(seen.size>400)for(const id of seen)if(!live.has(id))seen.delete(id);
  for(const g of pending.values()){if(g.list.length<5&&!g.list.some(h=>h.radius>=3.2))continue;launch(g.e,g.list);}}
 function launch(e,list){const P=palOf(e);let cx=0,cy=0;for(const h of list){cx+=h.x;cy+=h.y;}cx/=list.length;cy/=list.length;let ext=0,warn=9;for(const h of list){ext=Math.max(ext,Math.hypot(h.x-cx,h.y-cy)+h.radius);warn=Math.min(warn,h.warning);}
