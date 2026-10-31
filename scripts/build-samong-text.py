@@ -12,7 +12,7 @@ def load(path):
     return raw, text
 
 HEAD=[('prelude',re.compile(r'^서문 — ')),('threshold',re.compile(r'^문턱 — ')),
-      ('S',re.compile(r'^S-(\d\d)\. ')),('NS',re.compile(r'^\[NS-(\d\d)\] ')),('R',re.compile(r'^R-(\d\d)\. ')),
+      ('S',re.compile(r'^S-(\d\d)\. ')),('NS',re.compile(r'^\[NS-(\d\d)\] ')),('DYS',re.compile(r'^\[DYS-(\d\d)\] ')),('R',re.compile(r'^R-(\d\d)\. ')),
       ('M',re.compile(r'^([123])\. ')),('epilogue',re.compile(r'^종장 — ')),('record',re.compile(r'^〈윤서하의 진료기록〉$'))]
 SKIP=re.compile(r'^(제(9|1[0-2])부 — |[─━═]{3,}|[①②③④⑤⑥⑦⑧⑨] )')
 NARR=re.compile(r'^〈(.+)〉$')
@@ -48,6 +48,7 @@ def parse(text):
             if kind in('prelude','threshold','epilogue'): new_section(kind,s)
             elif kind=='S': new_section('S-'+m.group(1),s)
             elif kind=='NS': new_section('NS-'+m.group(1),s)
+            elif kind=='DYS': new_section('DYS-'+m.group(1),s)
             elif kind=='R': new_section('R-'+m.group(1),s)
             elif kind=='M': new_section('M'+m.group(1),s)
             elif kind=='record': new_section('record','윤서하의 진료기록'); new_block('윤서하의 진료기록')

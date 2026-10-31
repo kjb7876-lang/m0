@@ -62,9 +62,10 @@ EP_STYLE = {'P': 'forge', 'S-01': 'domestic', 'S-03': 'garden', 'S-04': 'clinica
             'RA': 'clinical', 'RB': 'domestic', 'RC': 'garden', 'RD': 'forge', 'RE': 'forge', 'RF': 'domestic', 'RG': 'forge', 'M': 'domestic'}
 DEF_TPL = {'explore': 'rooms', 'maze': 'grid', 'combat': 'arena', 'confront': 'dais'}
 
+# R180: R-03·R-10 은 정본 20261101 에서 크게 다시 쓰여 0(비례 이동 안 함)으로 두고 새 번호로 직접 나눈다.
 # R122: 최종검수본(2026-10-29)으로 원문을 바꾸면서 장마다 문단 수가 달라졌다. 아래 SPEC 의 문단 번호는 이전 원문(문단 수 OLD_N) 기준으로
 # 정해 둔 것이라, 같은 장 안에서 새 문단 수에 비례해 옮긴다(서사 골격은 같고 문장만 늘거나 줄었으므로 구역이 맡는 대목은 그대로 따라간다).
-OLD_N = {"prelude": 4, "threshold": 10, "S-01": 19, "S-02": 25, "S-03": 53, "S-04": 37, "S-05": 45, "S-06": 0, "NS-01": 14, "NS-02": 9, "NS-03": 10, "NS-04": 9, "NS-05": 12, "NS-06": 10, "NS-07": 8, "NS-08": 11, "NS-09": 9, "NS-10": 7, "S-07": 19, "R-00": 15, "R-01": 18, "R-02": 16, "R-03": 19, "R-04": 19, "R-05": 16, "R-06": 15, "R-07": 19, "R-08": 15, "R-09": 12, "R-10": 16, "R-11": 16, "R-12": 16, "R-13": 17, "R-14": 12, "R-15": 13, "R-16": 10, "R-17": 9, "M1": 12, "M2": 13, "M3": 7, "epilogue": 16, "record": 25}
+OLD_N = {"prelude": 4, "threshold": 10, "S-01": 19, "S-02": 25, "S-03": 53, "S-04": 37, "S-05": 45, "S-06": 0, "NS-01": 14, "NS-02": 9, "NS-03": 10, "NS-04": 9, "NS-05": 12, "NS-06": 10, "NS-07": 8, "NS-08": 11, "NS-09": 9, "NS-10": 7, "S-07": 19, "R-00": 15, "R-01": 18, "R-02": 16, "R-03": 0, "R-04": 19, "R-05": 16, "R-06": 15, "R-07": 19, "R-08": 15, "R-09": 12, "R-10": 0, "R-11": 16, "R-12": 16, "R-13": 17, "R-14": 12, "R-15": 13, "R-16": 10, "R-17": 9, "M1": 12, "M2": 13, "M3": 7, "epilogue": 16, "record": 25}
 def remap(sec, a, b):
     no, nn = OLD_N.get(sec), len(SEC[sec])
     if not no or no == nn: return (sec, a, b)
@@ -138,34 +139,38 @@ SPEC = {
   Z('불탄 거리', 'confront', ('S-05', 40, 44), out='ash', p={'name': '불탄 거리', 'square': 1},
     conf={'cue': [(40, 40)], 'bossCue': (41, 41), 'steps': [(42, 42)], 'after': (43, 44), 'floor': .5, 'word': '인장',
           'hint': '인장만 지웁니다 · 둘레의 표식에서 E', 'unlock': '교주의 인장만 지우고 기록과 죽음은 남깁니다'})],
- 'S-06': [
-  Z('폐쇄된 환승역', 'explore', ('NS-01', 0, 9), tpl='station', p={'platform': '폐쇄된 승강장', 'hall': '환승 통로'}),
-  Z('무너진 교량', 'combat', ('NS-01', 10, 10), tpl='bridge', out='coast', kills=40),
-  Z('만조 요새 중심부', 'confront', ('NS-01', 11, 13), p={'name': '요새 중심부', 'square': 1},
-    boss={'name': '만조', 'donor': ['u203', 'u203-boss'], 'patterns': ['rain', 'sides']},
-    conf={'bossCue': (11, 11), 'steps': [(12, 12)], 'after': (13, 13), 'floor': .5, 'word': '냉각관', 'hint': '장갑이 아니라 냉각관입니다 · 둘레의 표식에서 E'}),
-  Z('2174 해안 공원', 'explore', ('NS-02', 0, 2), tpl='yard', out='coast', p={'name': '바다 위의 공원'}),
-  Z('정비 다리와 가로등 포대', 'combat', ('NS-02', 3, 8), tpl='bridge', out='coast', kills=45),
-  Z('병원이 된 환승역', 'explore', ('NS-03', 0, 2), tpl='station', p={'platform': '병상이 놓인 승강장', 'hall': '대합실 병동'}),
-  Z('봉쇄된 거리와 통신탑', 'combat', ('NS-03', 3, 4), tpl='street', out='stone', kills=45),
-  Z('대피 철로', 'confront', ('NS-03', 5, 9), p={'name': '대피 철로', 'square': 1},
-    boss={'name': '유예관', 'donor': ['u205', 'u205-mid'], 'patterns': ['sides', 'rain']},
-    conf={'bossCue': (5, 5), 'hold': 25, 'steps': [(6, 6)], 'after': (7, 9), 'floor': .55, 'word': '퇴로', 'unlock': '유예관을 물러나게 하고 사람들을 빼냅니다',
-          'hint': '유예관은 처치하지 않습니다 · 버틴 뒤 둘레의 표식에서 E'}),
-  Z('멈춘 비의 관제소', 'explore', ('NS-04', 0, 8), tpl='rooms', p={'spine': '관제소 복도', 'n': 4}),
-  Z('연도가 없는 방', 'explore', ('NS-05', 0, 9), tpl='hall', p={'name': '연도가 없는 방', 'ante': '문 안쪽'}),
-  Z('도시의 밑면', 'maze', ('NS-05', 10, 11), dark=1),
-  Z('유예관의 문밖', 'confront', ('NS-06', 0, 9), p={'name': '문밖'},
-    boss={'name': '유예관', 'donor': ['u205', 'u205-mid'], 'patterns': ['sides', 'ground']},
-    conf={'cue': [(0, 0)], 'bossCue': (1, 5), 'steps': [(6, 6), (7, 7)], 'after': (8, 9), 'floor': .5, 'word': '장막',
-          'hint': '유예관은 처치하지 않습니다 · 장막 연결부를 둘레의 표식에서 E', 'unlock': '장막 연결부를 쏘고 노란 장갑을 내려놓습니다'}),
-  Z('자장가 창문 방들', 'combat', ('NS-07', 0, 7), tpl='rooms', hold=45, clueN=2, p={'spine': '창문 복도', 'n': 5}),
-  Z('갈라지는 승강장', 'combat', ('NS-08', 0, 2), tpl='station', kills=50, p={'platform': '갈라지는 승강장', 'hall': '두 도시의 대합실'}),
-  Z('달의 눈', 'confront', ('NS-08', 3, 10), p={'name': '달의 안쪽'},
-    conf={'cue': [(3, 3)], 'bossCue': (4, 5), 'steps': [(6, 6), (7, 8)], 'after': (9, 10), 'floor': .4, 'word': '조준',
-          'hint': '자정의 조준 표시를 끄고 날개가 벌어지는 틈을 노리세요 · 둘레의 표식에서 E'}),
-  Z('날짜가 없는 서울', 'explore', ('NS-09', 0, 8), tpl='street', out='stone', p={'len': 44}),
-  Z('환승역의 탄피', 'explore', ('NS-10', 0, 6), tpl='station', p={'platform': '환승역 건너편', 'hall': '인쇄 장치 뒤'})],
+ 'S-06': [  # R180: 정본 20261101 — 네오 서울(NS-01~10)을 지우고 '디스토피아 — 종말을 되돌리는 사람'(DYS-01~13)으로 바꿈. 이름은 모두 원문 낱말.
+  Z('원반 그림자 아래 무너지는 상가', 'combat', ('DYS-01', 0, 7), tpl='street', out='ash', kills=40, clueN=2),
+  Z('방폭 격벽 안 대기실', 'explore', ('DYS-02', 0, 5), tpl='rooms', p={'spine': '지하 기지 복도', 'n': 3, 'names': ['대기실', '의료 지원반', '서버 냉각실']}),
+  Z('북부 방어선', 'combat', ('DYS-02', 6, 14), tpl='arena', out='ash', kills=45, clueN=2, p={'name': '북부 방어선'},
+    lead={'name': '적 지휘 개체', 'donor': ['cult04', 'c104-mid'], 'patterns': ['ground', 'sides']}),
+  Z('생체 도살장 겸 공장', 'maze', ('DYS-03', 0, 2), dark=1),
+  Z('중앙 통제실', 'confront', ('DYS-03', 3, 17), p={'name': '중앙 통제실', 'square': 1},
+    conf={'cue': [(3, 3)], 'bossCue': (4, 4), 'steps': [(5, 7), (8, 10)], 'after': (11, 17), 'floor': .5, 'word': '포탑',
+          'hint': '상대 초인은 통제실 기계의 절반을 쥐고 있습니다 · 둘레의 포탑 표식에서 E로 장악하세요.', 'unlock': '포탑을 장악해 맞서면 붉은 코어가 멈춥니다'}),
+  Z('중앙 서버의 기밀 금고', 'explore', ('DYS-04', 0, 9), tpl='hall', p={'name': '기밀 금고', 'ante': '중앙 통신망'}),
+  Z('몽세의 유리 감옥', 'explore', ('DYS-05', 0, 7), tpl='rooms', noMobs=1, p={'spine': '유리벽 안쪽', 'n': 3}),
+  Z('기계의 반란', 'combat', ('DYS-06', 0, 6), tpl='street', out='ash', hold=45, clueN=2),
+  Z('허리가 끊어진 고가도로', 'combat', ('DYS-07', 0, 8), tpl='bridge', out='ash', kills=50, clueN=3),
+  Z('고가도로 잔해 아래', 'explore', ('DYS-07', 9, 17), tpl='yard', out='ash', p={'name': '고가도로 잔해 아래'}),
+  Z('원형 발판의 공동', 'explore', ('DYS-08', 0, 9), tpl='hall', p={'name': '원형 발판', 'ante': '원형 격벽 문', 'pillars': 1}),
+  Z('최심부 시설 위쪽 통로', 'combat', ('DYS-08', 10, 13), tpl='arena', hold=35, clueN=2),
+  Z('폐쇄된 지하 탄약 창고', 'explore', ('DYS-08', 14, 18), tpl='rooms', p={'spine': '옛 아군 기지', 'n': 3}),
+  Z('의료 지원반 대기실', 'explore', ('DYS-09', 0, 12), tpl='rooms', p={'spine': '기지 복도', 'n': 4}),
+  Z('제3 대피소', 'maze', ('DYS-09', 13, 25), dark=1),
+  Z('되풀이되는 사흘', 'explore', ('DYS-10', 0, 8), tpl='rooms', p={'spine': '지휘 본부', 'n': 4}),
+  Z('만년설 아래 지하 벙커', 'explore', ('DYS-10', 9, 13), tpl='hall', out='snow', p={'name': '얼음 밑 벙커', 'ante': '사격장'}),
+  Z('눈밭의 지휘 기체', 'combat', ('DYS-10', 14, 23), tpl='yard', out='snow', kills=45, clueN=2, p={'name': '극지방 눈밭'},
+    lead={'name': '적 지휘 기체', 'donor': ['u206', 'u206-mid'], 'patterns': ['sky', 'ground']}),
+  Z('남태평양 무인도 벙커', 'combat', ('DYS-10', 24, 32), tpl='rooms', hold=40, clueN=2, p={'spine': '벙커 통로', 'n': 4}),
+  Z('무수한 시간 도약', 'maze', ('DYS-10', 33, 39)),
+  Z('코어 파편의 기록', 'explore', ('DYS-11', 0, 23), tpl='hall', noMobs=1, p={'name': '홀로그램 기록', 'ante': '코어 파편'}),
+  Z('스무 살의 원룸', 'explore', ('DYS-12', 0, 29), tpl='rooms', noMobs=1, p={'spine': '원룸 복도', 'n': 2, 'names': ['원룸 철문 앞', '좁은 원룸']}),
+  Z('검은 명령선', 'confront', ('DYS-13', 0, 18), p={'name': '무너진 통제실', 'square': 1},
+    boss={'name': '검은 명령선', 'donor': ['hando01', 'mb-hando01'], 'patterns': ['sides', 'rain']},
+    conf={'cue': [(0, 1), (2, 8)], 'bossCue': (9, 9), 'steps': [(10, 10), (11, 11)], 'after': (12, 18), 'floor': .5, 'word': '명령선',
+          'hint': '사내의 기록은 건드리지 않고 뒤끝에 들러붙은 검은 명령선만 끊습니다 · 둘레의 표식에서 E', 'unlock': '검은 명령선만 끊어 끝냅니다',
+          'done': '검은 명령선이 끊어졌습니다.'})],
  'S-07': [
   Z('손님 자리 하나뿐인 식탁', 'explore', ('S-07', 0, 2), tpl='hall', p={'name': '식탁의 방', 'ante': '문 안'}),
   Z('여섯 물건이 비추는 길', 'maze', ('S-07', 3, 6), p={'c': 6, 'r': 6}),
@@ -181,8 +186,8 @@ SPEC = {
   Z('학교 창-병동-정원', 'explore', ('R-02', 7, 15), tpl='rooms', ref='R02-2', p={'spine': '이어진 복도', 'n': 3, 'names': ['학교 창가', '병동', '정원 문']})],
  'RB': [
   Z('두 의자와 세 컵의 대합실', 'explore', ('R-03', 0, 3), tpl='hall', ref='R03-1', p={'name': '대합실', 'ante': '매표소'}),
-  Z('성문과 군단', 'combat', ('R-03', 4, 12), tpl='arena', kills=45, clueN=2, ref='R03-2', p={'name': '성문 앞'}),
-  Z('성벽 너머와 그림 벽', 'explore', ('R-03', 13, 18), tpl='rooms', ref='R03-3', p={'spine': '성벽 안 길', 'n': 3}),
+  Z('성문과 군단', 'combat', ('R-03', 4, 17), tpl='arena', kills=45, clueN=2, ref='R03-2', p={'name': '성문 앞'}),
+  Z('성벽 너머와 그림 벽', 'explore', ('R-03', 18, 34), tpl='rooms', ref='R03-3', p={'spine': '성벽 안 길', 'n': 3}),
   Z('화형식당', 'combat', ('R-04', 0, 3), tpl='hall', hold=40, ref='R04-1', p={'name': '화형식당', 'ante': '주방 문'}),
   Z('방화문 두 화재', 'explore', ('R-04', 4, 9), tpl='rooms', ref='R04-2', p={'spine': '방화문 복도', 'n': 3}),
   Z('거울과 백색 손님', 'confront', ('R-04', 10, 18), ref='R04-3', p={'name': '거울의 식탁'},
@@ -209,10 +214,13 @@ SPEC = {
   Z('문 위에 매달린 것들', 'combat', ('R-08', 11, 14), tpl='rooms', hold=35, ref='R08-2', p={'spine': '문이 늘어선 복도', 'n': 4}),
   Z('결말을 먹는 도시', 'combat', ('R-09', 0, 5), tpl='street', out='ash', kills=50, ref='R09-1'),
   Z('발록 기둥과 성당 제단', 'explore', ('R-09', 6, 11), tpl='hall', ref='R09-2', p={'name': '성당 제단', 'ante': '기둥 사이', 'pillars': 1})],
- 'RE': [
-  Z('객차가 지나는 플랫폼', 'combat', ('R-10', 0, 3), tpl='station', kills=45, ref='R10-1'),
-  Z('승전식', 'confront', ('R-10', 4, 15), ref='R10-2', p={'name': '승전식 단상', 'square': 1},
-    conf={'bossCue': (4, 5), 'steps': [(6, 7), (8, 9), (10, 11)], 'after': (12, 15), 'floor': .45, 'word': '자리'})],
+ 'RE': [  # R180: 정본 20261101 에서 R-10 이 다시 쓰여(16→42문단) 비례 이동 대신 새 문단 번호로 직접 나눈다.
+  Z('객차가 지나는 플랫폼', 'combat', ('R-10', 0, 2), tpl='station', kills=45, ref='R10-1'),
+  Z('무너진 계단의 생존자', 'combat', ('R-10', 3, 13), tpl='station', hold=40, clueN=3, p={'platform': '선로 맞은편 승강장', 'hall': '무너진 계단'}),
+  Z('승전식', 'confront', ('R-10', 14, 35), ref='R10-2', p={'name': '승전식 단상', 'square': 1},
+    conf={'cue': [(14, 15)], 'bossCue': (16, 17), 'steps': [(18, 22), (23, 28), (29, 32)], 'after': (33, 35), 'floor': .45, 'word': '명령선',
+          'hint': '천장의 빛을 먼저 끊고 바닥의 자동 조준 명령선을 자릅니다 · 둘레의 표식에서 E'}),
+  Z('마지막 객차', 'explore', ('R-10', 36, 41), tpl='rooms', p={'spine': '마지막 객차', 'n': 2})],
  'RF': [
   Z('선생님의 빈 얼굴', 'confront', ('R-11', 0, 11), ref='R11-1', p={'name': '빈 교실'},
     conf={'cue': [(0, 0)], 'bossCue': (1, 3), 'steps': [(4, 5), (6, 8), (9, 11)], 'floor': .5, 'word': '함정',

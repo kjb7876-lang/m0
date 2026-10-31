@@ -15,11 +15,11 @@ check('modules load',SM&&GR&&TX);
 check('16 episodes, last is final',SM.episodes.length===16&&SM.episodes[15].boss.final===true);
 check('goal is 666',SM.GOAL===666);
 // ---- text ----
-const need=['prelude','threshold','S-01','S-02','S-03','S-04','S-05','NS-01','NS-10','S-07','M1','M2','M3','epilogue','record'];
+const need=['prelude','threshold','S-01','S-02','S-03','S-04','S-05','DYS-01','DYS-13','S-07','M1','M2','M3','epilogue','record'];
 check('narrative sections present',need.every(k=>TX.sections[k]?.blocks?.length),need.filter(k=>!TX.sections[k]).join(','));
 const rec=TX.sections.record?.blocks?.[0]?.paras||[];
-// R122: 진료기록은 최종검수본의 경과기록 원문 그대로이고, 그 뒤에 새 에필로그(심연의 검사와 닫히는 눈)가 이어진다.
-check('record is the final clinical note followed by the epilogue',rec.length>=40&&rec[0].startsWith('정신건강의학과 경과기록')&&rec.includes('에필로그 — 심연의 검사(檢査)와 닫히는 눈')&&rec[rec.length-1].endsWith('연결된 순간이었다.'));
+// R180: 에필로그 제목이 심연의 검사(劍士)로 바뀜(정본 20261101). R122: 진료기록은 최종검수본의 경과기록 원문 그대로이고, 그 뒤에 새 에필로그(심연의 검사와 닫히는 눈)가 이어진다.
+check('record is the final clinical note followed by the epilogue',rec.length>=40&&rec[0].startsWith('정신건강의학과 경과기록')&&rec.includes('에필로그 — 심연의 검사(劍士)와 닫히는 눈')&&rec[rec.length-1].endsWith('연결된 순간이었다.'));
 for(const ep of SM.episodes)check('episode text keys exist · '+ep.key,ep.text.every(k=>TX.sections[k]),ep.text.filter(k=>!TX.sections[k]).join(','));
 // ---- maze ----
 function bfs(L,from,to){const key=(x,y)=>x+':'+y,cells=new Set(L.floorCells.map(([x,y])=>key(x,y)));const s=key(Math.floor(from.x),Math.floor(from.y)),t=key(Math.floor(to.x),Math.floor(to.y));if(!cells.has(s)||!cells.has(t))return -1;
