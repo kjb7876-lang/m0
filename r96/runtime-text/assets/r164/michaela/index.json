@@ -70,5 +70,25 @@
    "sha256": "1f657c573f0e23c967c07d7021c36d952962529a8ce8843f921ab87e78c4e3df",
    "bytes": 133922
   }
+ },
+ "runV2": {
+  "ne": {
+   "path": "assets/r164/michaela/run-ne-v2.webp",
+   "cols": 8,
+   "rows": 1,
+   "cell": [
+    192,
+    256
+   ],
+   "drive": "Michaela-NE-NW-v2-comparison-patch.zip",
+   "driveId": "1lW2kBUjj-ZFH9v3alenqLtxqaahdqB3Y",
+   "driveZipSha256": "910dadd2f1d5dd2cd31a7273576d19dc298ca49dbfb4106c6eba76f4dd598dad",
+   "sourcePng": "HERO-michaela-run-ne.png",
+   "sourceSha256": "942f2842eded038739989aeb75ed9cb31eb52c6f62d64c78db7ece9b24c96be1",
+   "sha256": "5e6505019899c791f9ef00a06e9af0d7ead13100f1bd93829f61f47d87e135e1",
+   "bytes": 158038,
+   "status": "README: 비교 후보 — 최종 완성 인증 아님(F4 약한 질감 차이·작은 반투명 점), 실게임 접지·미끄러짐 미검증",
+   "decision": "2026-10-31 R169: v1 북동 F4·F5 가 옆으로 크게 벌어짐(폭 101px, 발 222). v2 는 폭 89px·발 225(기준 226)로 보폭이 다른 방향과 맞고 나머지 6칸은 v1 과 픽셀 일치 → 북동·북서(반전)에 v2 사용. 같은 날 대시 SE·NE v2 보완팩(1b6YLardsJoRAJXEUT54BH7bIb1S65A_x)은 게임이 대시 그림을 아직 쓰지 않아 보류."
+  }
  }
 }

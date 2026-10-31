@@ -11654,8 +11654,8 @@
     },
     {
       "path": "assets/r164/michaela/index.json",
-      "bytes": 2491,
-      "sha256": "aa188511fc5820c3d6f17edf22e24b221f5afa37d05328c1b15c16e8d5c4a7c8"
+      "bytes": 3609,
+      "sha256": "ffccdc566f04785f47f18af94d8648ca6db68a585ef70d9d6166c955df9088ac"
     },
     {
       "path": "assets/r164/michaela/run-e.webp",
@@ -11666,6 +11666,11 @@
       "path": "assets/r164/michaela/run-n.webp",
       "bytes": 133922,
       "sha256": "1f657c573f0e23c967c07d7021c36d952962529a8ce8843f921ab87e78c4e3df"
+    },
+    {
+      "path": "assets/r164/michaela/run-ne-v2.webp",
+      "bytes": 158038,
+      "sha256": "5e6505019899c791f9ef00a06e9af0d7ead13100f1bd93829f61f47d87e135e1"
     },
     {
       "path": "assets/r164/michaela/run-ne.webp",
@@ -20369,8 +20374,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6563877,
-      "sha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667"
+      "bytes": 6563958,
+      "sha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989"
     },
     {
       "path": "intro-r140.js",
@@ -20459,8 +20464,13 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 26492,
-      "sha256": "e1ba10977c93ce3d23cb034faecf03b6192a388521e5288e05f6f3d6ebce6487"
+      "bytes": 26829,
+      "sha256": "0386aa221912d9869bc85bb071f587d1e2c6676151734a77763120e0a0245d8f"
+    },
+    {
+      "path": "play-r169.js",
+      "bytes": 25380,
+      "sha256": "0ab989321d5bc356907e6aa97e48f8a2d9d5f4ea94a2b2ff182e25d6317dced5"
     },
     {
       "path": "polish-r100-data.js",
@@ -20514,8 +20524,8 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 18209,
-      "sha256": "40397b6c98060c90e37e7e4af77d968a87ccc26ef1a7ff29c74b30f9aa6d695e"
+      "bytes": 18397,
+      "sha256": "a6059637a19dca719cc92bf1194d544a42a3d421a064080df99d3cd44cc1c3e5"
     },
     {
       "path": "samong-r103.js",
@@ -20524,8 +20534,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 15809,
-      "sha256": "ba5f0cd03b7210a2b7fdb5a4394085cca11e4400c667002540baa8afeaf15675"
+      "bytes": 16753,
+      "sha256": "d7ddc0a82cb8eb017a6c1590a1a80d841546e7f5aaa16955c5be753adb878d26"
     },
     {
       "path": "samong-text-r103.js",
@@ -20559,8 +20569,8 @@
     },
     {
       "path": "story-batch-r139.js",
-      "bytes": 5501,
-      "sha256": "4c5b13c880cb752fb36163e2894b897256d116c64692ef5482609618363ae09e"
+      "bytes": 5834,
+      "sha256": "fb24e9492669f262078c4b24e09f672408b0714654c380479be66120e2e5bdc9"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -20576,6 +20586,11 @@
       "path": "story-reader-r122.js",
       "bytes": 5020,
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
+    },
+    {
+      "path": "upgrades-r169.js",
+      "bytes": 12225,
+      "sha256": "2bec9aa07b0f3fa5b226320f436f8b77f79729dbb86f6e7dd95bd393c90cda0f"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -20619,8 +20634,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 43619,
-      "sha256": "eaa18c06d536d4da5539b1e6a78e48849fb6f279ecde563f7cbddbc71b18f61e"
+      "bytes": 43883,
+      "sha256": "913351f98fa029f07356d2b3d755e7038aa80f6197b866db06a4ce2d8978d255"
     },
     {
       "path": "visual-r90-world.js",
@@ -20733,9 +20748,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4146,
-  "totalBytes": 793184306,
-  "webHTMLSha256": "9fa1685e5078ddbad804ed1bd4e0900fdc58f358239cdf726783e8cccbe36667",
+  "fileCount": 4149,
+  "totalBytes": 793383214,
+  "webHTMLSha256": "36bcf6a20d67406eaacf4e90448091499d62667a5cf23f4c79a1a668d227c989",
   "largest": [
     {
       "path": "index.html",

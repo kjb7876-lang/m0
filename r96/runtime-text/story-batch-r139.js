@@ -40,5 +40,7 @@ if(typeof interact==='function'){const base=interact;interact=function(...a){int
 // 정리 서사 없이 떠나면(포탈) 떠나기 전에 모아 둔 서사를 먼저 보여 준다.
 if(typeof travel==='function'){const base=travel;travel=async function(...a){try{sync();if(queue.length&&active()&&typeof playScenes==='function'){const all=queue;queue=[];stats.travelFlush++;stats.flushed+=all.length;await new Promise(res=>{flushing=true;try{playScenes(all,res);}finally{flushing=false;}});}}catch(e){fail(e);}return base.apply(this,a);};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_STORY_BATCH_R139__=Object.freeze({revision:REV,set,queued:()=>queue.map(s=>s.key),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},queued:queue.length,map:mapKey,lastError})});
+// R169: 모아 둔 서사를 전투 중 '기억 쪽지'로 떨어뜨려 줍게 한다(play-r169). 주운 쪽지는 대기열에서 빠져 정리 때 다시 뜨지 않는다.
+function take(key){const i=queue.findIndex(s=>s.key===key);return i<0?null:queue.splice(i,1)[0];}
+window.__STORYWORLD_STORY_BATCH_R139__=Object.freeze({revision:REV,set,queued:()=>queue.map(s=>s.key),pending:()=>{sync();return active()?queue.slice():[];},take,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},queued:queue.length,map:mapKey,lastError})});
 })();
