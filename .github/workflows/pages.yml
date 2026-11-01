@@ -203,6 +203,8 @@ jobs:
         run: node r96/qa/r198/r198-cpu-check.cjs
       - name: R200 samong regular-mob shades from Drive sheets (zone/narrative placement) CPU check
         run: node r96/qa/r200/r200-cpu-check.cjs
+      - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
+        run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R195 classical BGM (licenses, per-zone/boss selection, fades, ducking) CPU check
         run: node r96/qa/r195/r195-cpu-check.cjs
       - name: R196 Hwando hit/death color-matched to walk/attack CPU check
