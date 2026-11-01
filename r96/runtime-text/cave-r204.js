@@ -465,16 +465,16 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // 엔진이 매 프레임 visible 을 다시 켜는 메시가 있어(벽 가림·R188) 레이어를 비워 숨긴다(원래 레이어는 기억했다가 되돌린다).
 function hideNative(r){let n=0;r.spatialRoot.traverse(o=>{if(o===r.spatialRoot||o.userData?.r204||o.name==='r204-cave'||o.parent?.name==='r204-cave')return;
- if(HIDE.test(o.name||'')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;}
-function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});}
+ if(HIDE.test(o.name||'')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;r.__r204Hidden=true;}
+function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});r.__r204Hidden=false;}
 function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entities?.find(e=>e.hero);if(!h){U.r204Hero.value.w=0;return;}
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
 function before(r,frame){try{
- const st=r.__r204;if(!eligible(r,frame)){if(st?.group){st.group.visible=false;restoreNative(r);}return;}
+ const st=r.__r204;if(!eligible(r,frame)){if(st?.group)st.group.visible=false;if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그룹이 없어도(빌드 실패·대기 중 지역 이탈) 가린 원래 지형을 되돌린다 — Codex #132 */
  // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
  const veil=()=>{hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
- if(st.failed)return;if(st.pending){veil();return;}st.group.visible=true;
+ if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  hideNative(r);heroUniform(r,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다

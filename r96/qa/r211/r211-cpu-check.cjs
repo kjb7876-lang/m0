@@ -37,5 +37,15 @@ ok('no walkable pocket is cut off from the entrance by rock bulges (6 seeds × 2
  ok('R111 setting labels are Korean for every R111 boolean pref',keys.every(k=>new RegExp(k+":'[^']*[가-힣]").test(cin))&&keys.every(k=>new RegExp('\\b'+k+':').test(p111)),keys.filter(k=>!new RegExp(k+":'[^']*[가-힣]").test(cin)));
  ok('R137 labels follow R205 (midboss 50%, echo boss-only)',/중간보스 크기 줄이기\(R205: 50%\)/.test(c137)&&/환영 공격 제한\(R205: 보스만·가끔\)/.test(c137)&&!/중간보스 크기 70%/.test(c137));
  ok('samong mood quick toggle and detailed toggle stay in sync both ways',/r123QuickMood input'\);if\(qm\)qm\.checked=el\.checked/.test(mood));}
+// Codex #132 리뷰 3건
+{const cave=C('cave-r204.js');ok('cave: failed build and leaving eligibility restore hidden native geometry (even without a group)',/if\(st\.failed\)\{if\(r\.__r204Hidden\)restoreNative\(r\);return;\}/.test(cave)&&/if\(st\?\.group\)st\.group\.visible=false;if\(r\.__r204Hidden\)restoreNative\(r\);return;/.test(cave)&&/r\.__r204Hidden=true;\}/.test(cave)&&/r\.__r204Hidden=false;\}/.test(cave));}
+{const sb2={console,Math,JSON,String,Number,Object,Promise,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,time:1,player:{hero:'michaela',x:0,y:0},room:{id:'dist00'},casts:[],
+  window:{__STORYWORLD_WER__:Object.freeze({bindings:{z:'w',x:'e',c:'r'},cast(slot){sb2.casts.push(slot);return true;}}),__STORYWORLD_ENEMY_MOTION_R51__:Object.freeze({flip:()=>'base'}),__STORYWORLD_STORY_COMBAT_R54__:Object.freeze({frameFor:()=>({path:'orig'})})},document:{getElementById:()=>null}};
+ vm.createContext(sb2);vm.runInContext('function tick(){} function updateHUD(){} function drawEffect(){} function drawEnemy(){} function serializeSave(){return {};}',sb2);
+ vm.runInContext(C('skills-r209.js'),sb2);vm.runInContext(C('story-mobs-r208.js'),sb2);
+ const W=sb2.window.__STORYWORLD_WER__;const r1=W.cast('w',true),r2=W.cast('e',true),r3=W.cast('r',true);
+ ok('cast admission blocks removed slots for whoever is the current actor (co-op remote steps)',r1===false&&r2===false&&r3===true&&sb2.casts.join()==='r',[r1,r2,r3,sb2.casts]);
+ const M=sb2.window.__STORYWORLD_ENEMY_MOTION_R51__;
+ ok('replacement sprites keep their own facing in the R51 flip chain',M.flip({},{r208Mob:'x',flip:true})===true&&M.flip({},{r208Mob:'x',flip:false})===false&&M.flip({},{r200Shade:'y',flip:true})===true&&M.flip({},{path:'orig'})==='base');}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

@@ -45,7 +45,11 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof 
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r208:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){
    if(typeof readyImage!=='function'||!(readyImage(m.path)?.image?.naturalWidth>0)){if(typeof ensureImages==='function')Promise.resolve(ensureImages([m.path])).catch(()=>{});stats.waiting=(stats.waiting||0)+1;return S.frameFor(e,f);}/* 그림이 읽히기 전에는 원래 그림(몸이 비지 않게) */
    stats.frames++;return frameOf(e,m);}}catch(err){fail(err);}return S.frameFor(e,f);}});stats.reinstalls++;return true;}
-let tries=0;(function arm(){try{install();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
+// R211(Codex #132): 실제 좌우는 R51 몸짓의 flip() 이 정한다. R100 이 원래 그림 표(근위 = 왼쪽을 봄)로 뒤집어 새 그림(오른쪽을 봄)이 영웅 반대쪽을 봤다
+//  → R208(그리고 같은 방식의 R200 잔영) 칸은 그 칸이 계산한 flip(영웅이 왼쪽이면 뒤집음)을 그대로 쓴다.
+function installFlip(){const M=window.__STORYWORLD_ENEMY_MOTION_R51__;if(!M||typeof M.flip!=='function')return false;if(M.__r208)return true;const base=M.flip;
+ window.__STORYWORLD_ENEMY_MOTION_R51__=Object.freeze({...M,__r208:true,flip(e,f,fallback){if(prefs.on&&f&&(f.r208Mob||f.r200Shade)&&typeof f.flip==='boolean'){stats.flips=(stats.flips||0)+1;return f.flip;}return base.call(this,e,f,fallback);}});return true;}
+let tries=0;(function arm(){try{install();installFlip();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 // 땅에 붙이기: R109 호버는 visualLiftPx 가 이미 양수면 손대지 않는다 → 아주 작은 값(0.001px)을 잠깐 넣어 막는다. R206 은 0.5px 이하를 접지로 본다.
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let lift=null;
  try{if(prefs.on&&e&&e.r208Mob&&e.hp>0){const own=Object.prototype.hasOwnProperty.call(e,'visualLiftPx');lift={own,old:e.visualLiftPx};e.visualLiftPx=.001;stats.grounded++;}}catch(err){fail(err);}

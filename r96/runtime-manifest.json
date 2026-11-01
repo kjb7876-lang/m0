@@ -20399,8 +20399,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 66413,
-      "sha256": "240f0aa5f92f7382eaafb3a0c63c73bcfbf38698e182165382136026e5c4ea56"
+      "bytes": 66706,
+      "sha256": "f748c10e30a201fa45379f4292d9944d6399bc3fcd1620fcc76edc57687418ee"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21414,8 +21414,8 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 6979,
-      "sha256": "47cc1ce2e3105b5b6958cbdf3dbebc02bdc02cc2b72f74ec6a412264e244e60d"
+      "bytes": 7610,
+      "sha256": "8e14710d4349faf7c9cd47133ff3e4270ca72390b4fd35fa14a8d1db4f4795bf"
     },
     {
       "path": "status-r96.js",
@@ -21449,8 +21449,8 @@
     },
     {
       "path": "story-mobs-r208.js",
-      "bytes": 6732,
-      "sha256": "a88f997077231d019b574fc6c0030617cb892fc5f6704b666fdf94542130e004"
+      "bytes": 7504,
+      "sha256": "4bc24b6fa20819493d5ff7d7fdd14c3fc8c88374b4a0f4389323ce92a058debf"
     },
     {
       "path": "story-reader-r122.js",
@@ -21619,7 +21619,7 @@
     }
   ],
   "fileCount": 4323,
-  "totalBytes": 842800009,
+  "totalBytes": 842801705,
   "webHTMLSha256": "8f88a7364c143b3f505192c3756b1cb1a9f8c4c913f0f6860af75052e1f86a45",
   "largest": [
     {
