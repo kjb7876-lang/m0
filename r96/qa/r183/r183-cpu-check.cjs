@@ -14,6 +14,8 @@ const caps=[];for(const [id,s] of Object.entries(S3.SCENES))for(const i of s.lin
 ok('every caption is a verbatim prefix of its canon paragraph (no invented text)',caps.every(([,,c,p])=>c&&p.startsWith(c)),caps.filter(([,,c,p])=>!p.startsWith(c)).map(x=>x[0]+':'+x[1]).join(','));
 const src=C('scene3d-r183.js');
 ok('plays once per scene (remembered), skippable by click/Esc/Space, off in settings',/prefs\.seen\[id\]=Date\.now\(\)/.test(src)&&/e\.key==='Escape'/.test(src)&&/root\.onclick=\(\)=>finish\(true\)/.test(src)&&/id='r183On'/.test(src)||/r183On/.test(src));
+ok('R185: entry trigger waits while a narrative modal/loading is open (zone not recorded until it can play)',/const busy=\(typeof modal!=='undefined'&&modal\)\|\|\(typeof loading!=='undefined'&&loading\);if\(!busy\)\{lastZone=z;/.test(src));
+ok('R185: all gameplay keys are swallowed while a scene plays; held movement keys cleared',/const key=e=>\{[^}]*e\.preventDefault\(\);e\.stopImmediatePropagation\(\);/.test(src)&&/addEventListener\('keyup',keyUp,true\)/.test(src)&&/keys\.clear\(\)/.test(src));
 ok('game time pauses while the scene plays; Three.js resources disposed after',/tick=function\(\.\.\.a\)\{if\(active\)return;/.test(src)&&/renderer\.dispose\(\)/.test(src));
 ok('no paid generators / no external URLs (only the vendored Three.js)',!/https?:\/\//.test(src.replace(/\/\/[^\n]*/g,''))&&/import\('\.\/vendor\/three\/build\/three\.module\.js'\)/.test(src));
 // R184 시트
