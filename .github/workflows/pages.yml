@@ -201,6 +201,8 @@ jobs:
         run: node r96/qa/r194/r194-cpu-check.cjs
       - name: R198 Drive mob eight-key strips fill only missing motions CPU check
         run: node r96/qa/r198/r198-cpu-check.cjs
+      - name: R195 classical BGM (licenses, per-zone/boss selection, fades, ducking) CPU check
+        run: node r96/qa/r195/r195-cpu-check.cjs
       - name: R196 Hwando hit/death color-matched to walk/attack CPU check
         run: node r96/qa/r196/r196-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
