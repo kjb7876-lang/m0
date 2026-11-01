@@ -2,10 +2,10 @@
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
-const ix=JSON.parse(RT('assets/r200/shades/index.json'));
-ok('16 mobs across S-01..S-06, every zone has at least two',ix.mobs.length===16&&['S-01','S-02','S-03','S-04','S-05','S-06'].every(z=>ix.mobs.filter(m=>m.zone===z).length>=2));
-ok('strip hash/size match, 11 cells, move 1-5 / attack 6-11',ix.mobs.every(m=>{const b=fs.readFileSync(path.join(R,'runtime-text',m.path));return b.length===m.bytes&&sha(b)===m.sha256&&m.frames===11&&m.move.join()==='0,1,2,3,4'&&m.attack.join()==='5,6,7,8,9,10';}));
-ok('source sheets recorded with sha256; boss name (봉합부인) not used as a regular mob',Object.keys(ix.sheets).length===6&&Object.values(ix.sheets).every(s=>/^[0-9a-f]{64}$/.test(s.sha256))&&!ix.mobs.some(m=>m.name==='봉합부인')&&ix.unused.some(u=>u.name==='봉합부인'));
+const ix=JSON.parse(RT('assets/r200/shades/index.json'));const s16=ix.mobs.filter(m=>/^S-0[1-6]$/.test(m.zone));/* R203 이 사몽역행 6종(시트 07·08)을 덧붙였다 — R200 몫 16종만 본다(R203 검사가 나머지) */
+ok('16 mobs across S-01..S-06, every zone has at least two',s16.length===16&&['S-01','S-02','S-03','S-04','S-05','S-06'].every(z=>ix.mobs.filter(m=>m.zone===z).length>=2));
+ok('strip hash/size match, 11 cells, move 1-5 / attack 6-11',s16.every(m=>{const b=fs.readFileSync(path.join(R,'runtime-text',m.path));return b.length===m.bytes&&sha(b)===m.sha256&&m.frames===11&&m.move.join()==='0,1,2,3,4'&&m.attack.join()==='5,6,7,8,9,10';}));
+ok('source sheets recorded with sha256; boss name (봉합부인) not used as a regular mob',['1','2','3','4','5','6'].every(k=>ix.sheets[k])&&s16.every(m=>m.source.sheet.file<'07')&&Object.values(ix.sheets).every(s=>/^[0-9a-f]{64}$/.test(s.sha256))&&!ix.mobs.some(m=>m.name==='봉합부인')&&ix.unused.some(u=>u.name==='봉합부인'));
 const idx=RT('index.html');ok('samong-shades-r200 loads after mob-style-r199, before combat-r118',idx.indexOf('./samong-shades-r200.js')>idx.indexOf('./mob-style-r199.js')&&idx.indexOf('./samong-shades-r200.js')<idx.indexOf('./combat-r118.js'));
 for(const f of ['samong-shades-r200.js','samong-r161.js'])ok('runtime copy matches · '+f,RT(f)===C(f));
 ok('R161 puppet skips mobs that got a shade',/!e\.r200Shade/.test(C('samong-r161.js')));

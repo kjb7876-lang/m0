@@ -3,6 +3,8 @@
 //   S-01 꿰맨 장미의 집: 식탁의 마네킹 잔영·기운 누더기 골렘 / S-02 밤의 출석부: 검은 태양의 학교 순찰자·면도날 종이 아이
 //   S-03 흑과 백: 흑백 잔상의 투사·관람석 거울의 잔영·검은 고리의 대련생 / S-04 감정의 탑: 화형식당 앞치마 식객·박수치는 객석의 잔영·불면병동 무안 환자·금박 박제 망자
 //   S-05 경성의 밤: 호외 신문의 밀고자 잔영·물감 철로의 유령 승객 / S-06 디스토피아: 두족류 생체기계 침공병·폐선로 태엽 군단병·변이된 사냥개 괴수
+//  R203 — 시트 07·08(사용자 업로드) 6종을 사몽역행(제11부) 구역에: RB 두 개의 의자와 세 잔의 물: 카이로 회랑의 시계침 수문장 잔영 / RE 네 번째 나팔: 승전식 제복 마네킹 잔영
+//   RF 다섯 번째 나팔: 낚싯바늘 원고지 망령 / RG 일곱 번째 나팔: 일곱 나팔의 빈 소매 잔영·검은 공방의 용광로 박제공 잔영·검은 제단의 전선 망자 잔영(이동 1~6칸·공격 7~11칸)
 //  · 사몽 구역의 일반 몹(보스·중간보스·페르소나·탑·꿰맨 인형 제외) 중 85%는 그 구역 잔영 그림·이름으로, 15%는 꼭두각시 자아로 남긴다(몹 id 해시로 고정).
 //    S-06 의 상대 초인·지휘 개체(R184 전용 그림)와 S-07 페르소나 구역은 건드리지 않는다.
 //  · 그림만 바꾼다: 엔진 그림 선택 사슬(__STORYWORLD_STORY_COMBAT_R54__.frameFor)에 칸을 내주면 엔진 drawEnemy 가 그린다(체력바·대상 표시·기록기 깊이 그대로).
@@ -10,7 +12,7 @@
 //  · 판정·체력·공격·보상·저장은 그대로. storyworld.r200.shades {on:false,puppetShare:.15} 로 조절.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_SHADES_R200__)return;
-const REV='R200-shades-1',KEY='storyworld.r200.shades',INDEX='assets/r200/shades/index.json';
+const REV='R203-shades-2',KEY='storyworld.r200.shades',INDEX='assets/r200/shades/index.json';
 let prefs={on:true,puppetShare:.15};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,puppetKept:0,frames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null,byZone={};
@@ -18,7 +20,7 @@ fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(!j?.mobs)return;idx=j;for(c
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;h=Math.imul(h,0xc2b2ae35);h^=h>>>16;return (h>>>0)/4294967296;};/* 끝 섞기(브라우저에서 비슷한 id 가 몰려 꼭두각시 15%가 0%로 나왔음) */
 const objective=e=>/기억의 조각|단서|코어/.test(String(e?.name||''))||!!(e?.objective||e?.r162Shard||e?.r162Fragment);/* 깨는 목표물(세뇌당한 기억의 조각 등)은 몹이 아님 */
 const major=e=>!!(e&&(e.boss||e.midboss||e.miniBoss||e.persona||e.cosmic||e.trial||e.r170Tower||e.r193Doll||e.samongMidR162||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
-function zoneKey(){try{const x=typeof room==='object'?room?.samongR103:null;if(!x)return null;const m=/^sz115-(S0\d)-/.exec(String(x.zone||''));return m?m[1].replace('S0','S-0'):(x.key||null);}catch(_){return null;}}
+function zoneKey(){try{const x=typeof room==='object'?room?.samongR103:null;if(!x)return null;const m=/^sz115-(S0\d|R[A-G]|M|P)-/.exec(String(x.zone||''));return m?m[1].replace(/^S0/,'S-0'):(x.key||null);}catch(_){return null;}}
 function assign(e){if(!prefs.on||!idx||!e||e.r200Checked||!e.samongR103||major(e)||objective(e))return e?.r200Shade?byId(e.r200Shade):null;
  const z=zoneKey(),list=byZone[z];e.r200Checked=true;if(!list)return null;
  if(z==='S-06'&&/상대 초인|지휘 (개체|기체)/.test(String(e.name||'')))return null;
@@ -30,7 +32,7 @@ function cellFor(e,m){const n=m.move.length;
  if(e.attack&&Number.isFinite(e.attack.elapsed)){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));const u=Math.min(.999,Math.max(0,e.attack.elapsed/tot));return m.attack[Math.floor(u*m.attack.length)];}
  if(e.rangedWindup>0)return m.attack[Math.floor(T()*6)%3];
  if(!(e.hp>0)||e.hitTimer>0)return m.move[0];
- if(e.moving){const seq=[0,1,2,3,4,3,2,1],k=Math.floor(T()*9+hash(e.id)*8)%seq.length;return m.move[Math.min(n-1,seq[k])];}
+ if(e.moving){const seq=n>1?[...Array(n).keys(),...Array.from({length:n-2},(_,i)=>n-2-i)]:[0],k=Math.floor(T()*9+hash(e.id)*8)%seq.length;return m.move[seq[k]];}/* 왕복(0..n-1..1) */
  return m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m);
  return {path:m.path,assetFrame:{sourceRect:[k*cw,0,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,0,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
