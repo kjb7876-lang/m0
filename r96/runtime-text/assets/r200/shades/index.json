@@ -1,7 +1,7 @@
 {
  "schema": "storyworld.r200.shades/v1",
  "revision": "R200",
- "note": "Drive 2026-11-01 몹 스프라이트시트 01~06(사용자 업로드) 파생본. 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.",
+ "note": "Drive 2026-11-01 몹 스프라이트시트 01~08(사용자 업로드) 파생본. 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.",
  "sheets": {
   "1": {
    "file": "01.png",
@@ -32,6 +32,16 @@
    "file": "06.png",
    "bytes": 2172340,
    "sha256": "be420328a4d4858cc1057bb4c697a9dc0eb8c263c0beb4be28f2a21ce6a460d6"
+  },
+  "7": {
+   "file": "07.png",
+   "bytes": 2151304,
+   "sha256": "7069b29455a8cdb38a5326224454ddb1bd926b0bbc5833397ac73035ed379e08"
+  },
+  "8": {
+   "file": "08.png",
+   "bytes": 2025773,
+   "sha256": "ccbcac38cbe56a43a5bb21803888ca58cf6375d4ef0ad409c0318db7fbb2d74b"
   }
  },
  "mobs": [
@@ -734,6 +744,270 @@
      "file": "01.png",
      "bytes": 1897096,
      "sha256": "aabfee28dd545d520cdda37d506937ec53dee55e47a18c34c1a1b3c516e578a1"
+    },
+    "row": 3,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "clockhand-warden",
+   "name": "카이로 회랑의 시계침 수문장 잔영",
+   "zone": "RB",
+   "why": "두 개의 의자와 세 잔의 물 — 멈춘 시계·카이로(수문장) 몹 자리",
+   "path": "assets/r200/shades/clockhand-warden.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    114,
+    177
+   ],
+   "pivot": [
+    57.09,
+    160.63
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 112914,
+   "sha256": "8c11fdd49eca3f8c2e7d21761d8eb530952d18c3196e8295c2826ae4be4729ac",
+   "source": {
+    "sheet": {
+     "file": "08.png",
+     "bytes": 2025773,
+     "sha256": "ccbcac38cbe56a43a5bb21803888ca58cf6375d4ef0ad409c0318db7fbb2d74b"
+    },
+    "row": 1,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "parade-mannequin",
+   "name": "승전식 제복 마네킹 잔영",
+   "zone": "RE",
+   "why": "네 번째 나팔 — 백색 사수의 승전식(훈장·행진)",
+   "path": "assets/r200/shades/parade-mannequin.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    113,
+    185
+   ],
+   "pivot": [
+    58.15,
+    153.26
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 80430,
+   "sha256": "6be3717ef25000f7fba59fadd1286046c3d6cc8e7dab2f0286bd674b829e296a",
+   "source": {
+    "sheet": {
+     "file": "07.png",
+     "bytes": 2151304,
+     "sha256": "7069b29455a8cdb38a5326224454ddb1bd926b0bbc5833397ac73035ed379e08"
+    },
+    "row": 1,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "fishhook-manuscript",
+   "name": "낚싯바늘 원고지 망령",
+   "zone": "RF",
+   "why": "다섯 번째 나팔 — 낚싯바늘·원고지",
+   "path": "assets/r200/shades/fishhook-manuscript.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    123,
+    187
+   ],
+   "pivot": [
+    53.15,
+    151.77
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 99118,
+   "sha256": "264fc76801a67a40684929ae5d61f80c15c2def4103a46823148d30f2b74e1bf",
+   "source": {
+    "sheet": {
+     "file": "07.png",
+     "bytes": 2151304,
+     "sha256": "7069b29455a8cdb38a5326224454ddb1bd926b0bbc5833397ac73035ed379e08"
+    },
+    "row": 2,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "empty-sleeve-trumpet",
+   "name": "일곱 나팔의 빈 소매 잔영",
+   "zone": "RG",
+   "why": "일곱 번째 나팔 — 여백의 전쟁",
+   "path": "assets/r200/shades/empty-sleeve-trumpet.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    110,
+    190
+   ],
+   "pivot": [
+    54.93,
+    152.64
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 111232,
+   "sha256": "44006343d74e35089d6453686d91af284bbddef109ecdd93e758ed81fd101d5a",
+   "source": {
+    "sheet": {
+     "file": "07.png",
+     "bytes": 2151304,
+     "sha256": "7069b29455a8cdb38a5326224454ddb1bd926b0bbc5833397ac73035ed379e08"
+    },
+    "row": 3,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "furnace-taxidermist",
+   "name": "검은 공방의 용광로 박제공 잔영",
+   "zone": "RG",
+   "why": "일곱 번째 나팔 — 검은 공방의 용광로",
+   "path": "assets/r200/shades/furnace-taxidermist.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    115,
+    205
+   ],
+   "pivot": [
+    55.55,
+    184.96
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 95548,
+   "sha256": "50380da6e2824b8f101986e1d9ed383de38750d8c73247f0fb59a274edb40685",
+   "source": {
+    "sheet": {
+     "file": "08.png",
+     "bytes": 2025773,
+     "sha256": "ccbcac38cbe56a43a5bb21803888ca58cf6375d4ef0ad409c0318db7fbb2d74b"
+    },
+    "row": 2,
+    "cells": "1-11 of 12"
+   }
+  },
+  {
+   "id": "wire-bound-dead",
+   "name": "검은 제단의 전선 망자 잔영",
+   "zone": "RG",
+   "why": "불탄 책의 뒤편(R-15) — 제단 뒤 전선",
+   "path": "assets/r200/shades/wire-bound-dead.webp",
+   "frames": 11,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cell": [
+    99,
+    166
+   ],
+   "pivot": [
+    50.56,
+    160.65
+   ],
+   "visibleHeight": 150,
+   "facing": "right",
+   "bytes": 85198,
+   "sha256": "e661221566501d5c17c6ebbabcce638082b78cd8a0d00cd95fd8db59673b30df",
+   "source": {
+    "sheet": {
+     "file": "08.png",
+     "bytes": 2025773,
+     "sha256": "ccbcac38cbe56a43a5bb21803888ca58cf6375d4ef0ad409c0318db7fbb2d74b"
     },
     "row": 3,
     "cells": "1-11 of 12"

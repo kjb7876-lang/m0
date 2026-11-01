@@ -36,7 +36,7 @@ function runA(o){const cmds=[];const body={kind:'image',owner:{kind:'hero'},sour
  ok('basic attack walks through the 6 frames in order (wind-up, strike, recovery)',seq.join()==='0,0,1,3,4,5',seq.join());
  ok('attack faces the nearest enemy (west → mirrored east sheet)',/attack-e\.webp$/.test(t.body.sourcePath)&&t.body.points[1][0]<t.body.points[0][0],t.body.sourcePath);
  const P=t.body.points;ok('attack frame keeps the foot anchor on the ground point',Math.abs(((P[2][1]+P[3][1])/2)-(200+(256-227)*54*.98/199))<3,JSON.stringify(P));}
-{let t=runA({});t.sb.player.skillAnim=.3;t.sb.player.attackAnim=.2;t.sb.drawHero();ok('skill/hurt/dash/guard keep their own art',t.body.sourcePath==='assets/r130/lauren/g-e.webp');}
+{let t=runA({});t.sb.player.skillAnim=.3;t.sb.player.attackAnim=.2;t.sb.drawHero();ok('skill/hurt/dash/guard keep their own art (R201: delivered skill/guard/dash/ultimate sheets replace the static pose; nothing else)',t.body.sourcePath==='assets/r130/lauren/g-e.webp'||/^assets\/r143\/skill\/lauren\/skill-(s|e)\.webp$/.test(t.body.sourcePath),t.body.sourcePath);}
 {let t=runA({hero:'hwando',src:'assets/r93/idle/idle-hwando-s.png',dup:true});t.sb.drawHero();
  ok('hwando idle uses the white sheet (first attack frame), old double body removed',/r143\/attack\/hwando\/attack-/.test(t.body.sourcePath)&&t.body.sourceRect[0]===0&&t.cmds.length===1,t.body.sourcePath+' '+t.cmds.length);}
 {let t=runA({hero:'hwando',src:'assets/r130/hwando/walk-e.webp'});t.body.r121Walk=true;t.sb.drawHero();ok('walking (R119 walk cycle) keeps its frame (only the R144 v1 side-walk image swap applies)',t.body.sourcePath==='assets/r144/walk/hwando/walk-e.webp'&&!t.body.r143Attack&&!t.body.r143Idle);}
