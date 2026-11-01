@@ -12388,6 +12388,36 @@
       "sha256": "2a55efa02cd23901d33bfdca581ff95cfe50d6200bc873dfc7a9799f2a8d9538"
     },
     {
+      "path": "assets/r208/mobs/ember-hound.webp",
+      "bytes": 136202,
+      "sha256": "a77c1044d28cdbb677a24429bc253f51bfd5099187e205ab1238d46eb7a00599"
+    },
+    {
+      "path": "assets/r208/mobs/halberd-revenant.webp",
+      "bytes": 81088,
+      "sha256": "0f73d1388a9df7870c6416cf9e040d1a8f14d684f9882c8a86e794708064161f"
+    },
+    {
+      "path": "assets/r208/mobs/index.json",
+      "bytes": 4694,
+      "sha256": "e34c588b751eed6311d8b02d0a0349458870b0b06a89f689ae4796def444fc57"
+    },
+    {
+      "path": "assets/r208/mobs/root-bound-ghoul.webp",
+      "bytes": 75022,
+      "sha256": "50c1e10937d74d7cf8cd1170175a34290bcb83d0579cef9785925f354b1d8fac"
+    },
+    {
+      "path": "assets/r208/mobs/twin-head-corpse.webp",
+      "bytes": 68378,
+      "sha256": "0cbabc587bb6f372a3ec536a74ed917cb0cf9c85558478baa31cd4526c45130b"
+    },
+    {
+      "path": "assets/r208/mobs/web-bound-skeleton.webp",
+      "bytes": 111114,
+      "sha256": "40f73fefce0d79eaad2f83d1419ed9d4768326f444b13b2e801c7cd0ba47f95a"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20369,8 +20399,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 57822,
-      "sha256": "3fc37e4f793335818917ef1c3f951a20290dbaabb62d346014b35084b1b3edc9"
+      "bytes": 62936,
+      "sha256": "6cb64b2a63af9c2368fb4e8180e813061c5d9d2002e60ef20e16ed4482d37d33"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21134,8 +21164,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6565054,
-      "sha256": "a53936bbc0e14a72a254537d579d6d078ecda3579aecb8db885a2e8e6ccbf31a"
+      "bytes": 6565138,
+      "sha256": "8f88a7364c143b3f505192c3756b1cb1a9f8c4c913f0f6860af75052e1f86a45"
     },
     {
       "path": "intro-r140.js",
@@ -21144,8 +21174,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 7685,
-      "sha256": "a89619bf2bfe6490f573b96ecd1b3bfb6817ff3d0097500662892f99b5bfe1e5"
+      "bytes": 10381,
+      "sha256": "09df9905f5d5c2ea297b7bc0aa793c16c59cc3d21efef803acf5536dd1ad44a1"
     },
     {
       "path": "mob-death-r188.js",
@@ -21154,8 +21184,8 @@
     },
     {
       "path": "mob-ground-r206.js",
-      "bytes": 2167,
-      "sha256": "c2eb4f82666370e81d6dc9be89f2c9254470d4b19915e9143ec849b5fcdf2264"
+      "bytes": 2219,
+      "sha256": "632e8529cd6360d6f74af2a876a0cd568e5ff7cd3081310be1dc474a351b4d3a"
     },
     {
       "path": "mob-style-r199.js",
@@ -21383,6 +21413,11 @@
       "sha256": "47219fdaaeab606f603b60e7269d6860962cba1e2061939ebf7464eea25a6d98"
     },
     {
+      "path": "skills-r209.js",
+      "bytes": 6979,
+      "sha256": "47cc1ce2e3105b5b6958cbdf3dbebc02bdc02cc2b72f74ec6a412264e244e60d"
+    },
+    {
       "path": "status-r96.js",
       "bytes": 5692,
       "sha256": "01ab5961ac4af2100c63dfa51b32847d37cf12ac317b11fa0c9e3cec68ed9882"
@@ -21411,6 +21446,11 @@
       "path": "story-maps-r171.js",
       "bytes": 36276,
       "sha256": "3816440b75287fdba027b809d7bc2425e7bf6ac077b16d58cec44b188133d363"
+    },
+    {
+      "path": "story-mobs-r208.js",
+      "bytes": 6732,
+      "sha256": "a88f997077231d019b574fc6c0030617cb892fc5f6704b666fdf94542130e004"
     },
     {
       "path": "story-reader-r122.js",
@@ -21578,9 +21618,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4315,
-  "totalBytes": 842297507,
-  "webHTMLSha256": "a53936bbc0e14a72a254537d579d6d078ecda3579aecb8db885a2e8e6ccbf31a",
+  "fileCount": 4323,
+  "totalBytes": 842795662,
+  "webHTMLSha256": "8f88a7364c143b3f505192c3756b1cb1a9f8c4c913f0f6860af75052e1f86a45",
   "largest": [
     {
       "path": "index.html",

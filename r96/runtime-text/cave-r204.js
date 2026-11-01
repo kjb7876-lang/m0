@@ -35,7 +35,27 @@ const ZONES={
  dist00:{seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
-  uprights:[['garden_low_border_01',.34]],uprightRate:1/110}};
+  uprights:[['garden_low_border_01',.34]],uprightRate:1/110},
+ // R210 — 나머지 1부 야외 지역(사용자 "나머지맵들도 작업 … 모든맵이 화풍이 비슷해야함"). 통로 넓히기는 하지 않는다(맵 레이아웃·전수 검사 그대로), 불룩도 중간.
+ // 늪지대의 뿔악마: 이끼 흙·진흙 바닥, 물 먹은 이끼 둔덕, 마른 나무
+ dist02:{seed:0x5d0202,tint:[.78,.86,.7],topK:1.9,floorK:.98,hiTop:1.2,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/150,
+  tex:{floorA:['assets/r118/tiles/meadow.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  patches:[['soil_rock_transition_01','base',.3,1/120,.5],['garden_soil_paving_transition_01','floor',.34,1/300,.8]]},
+ // 무너진 성: 성 돌바닥·정원 돌길, 벽면은 성 벽돌, 윗면은 무너진 잔해 — 건축물이라 불룩 작게(hub 처럼)
+ dist03:{seed:0x5d0303,tint:[.92,.86,.8],floorBGain:1.04,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
+  tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]},
+  patches:[['garden_root_paving_break_01','floor',.3,1/420,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]},
+ // 시체들이 되살아난 밤: 검은 흙·이끼 무덤가, 암반 둔덕, 마른 나무
+ dist04:{seed:0x5d0404,tint:[.8,.8,.88],topK:2.0,floorK:1.0,hiTop:1.3,loTop:.42,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/90,
+  tex:{floorA:['assets/r118/tiles/sandblack.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]},
+  patches:[['soil_rock_transition_02','base',.3,1/110,.5],['cliff_contact_shadow_01','base',.4,1/130,1]]},
+ // 일곱 기둥: 금고·성 돌바닥 신전 터, 잔해 윗면 — 건축물
+ dist05:{seed:0x5d0505,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.7,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
+  tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}},
+ // 추락: 낭떠러지 암반·검은 모래
+ dist06:{seed:0x5d0606,tint:[.92,.82,.72],hiTop:1.6,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,boulders:1/70,floorK:1.0,topK:2.2,
+  tex:{floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],face:['assets/r99/outdoor/surround-cliff.webp',1]},
+  patches:[['cliff_contact_shadow_01','base',.42,1/110,1]]}};
 const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};
@@ -184,8 +204,16 @@ function protectPoints(r){const out=[],ex=r.exploration,pt=(q,rad)=>{if(q&&Numbe
  for(const q of r.enemies||[])pt(q,1.0);for(const d of window.__STORYWORLD_WORLD_R74__?.doors||[])pt(d,2.4);if(typeof player==='object'&&player&&typeof room!=='undefined'&&r===room)pt(player,1.2);return out;}
 function fieldFor(r,make=false){const ex=r?.exploration;if(!ex)return null;let F=cache.get(ex);if(F||!make||!roomOn(r))return F||null;
  const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.doors=layoutDoorPoints(ex);F.ms=Math.round(performance.now()-t0);cache.set(ex,F);return F;}
+// 맵에 들어설 때(로딩 중) 거리장을 미리 계산하고, 게임 시작 뒤 한가할 때 지형 질감을 미리 받아 둔다 → 첫 화면에서 바로 새 지형
+/* R208 전환 안정: 지역에 들어간 뒤 2.5초 동안은 화면 흔들림(shake)을 0 으로 둔다 — 로딩 직후 끊긴 프레임 위에 피격·연출 흔들림이 겹치면 크게 흔들려 보였다. */
+let calmUntil=0;const calm=()=>{try{if(typeof shake==='number'&&shake>0)shake=0;}catch(_){}if(performance.now()<calmUntil&&typeof requestAnimationFrame==='function')requestAnimationFrame(calm);};
+if(typeof enterRegion==='function'){const en=enterRegion;enterRegion=async function(...a){calmUntil=performance.now()+1e5;calm();let out;try{out=await en.apply(this,a);}finally{calmUntil=performance.now()+2500;}return out;};}/* 지형장은 첫 렌더에서 만든다(전환 직후 미리 만들면 렌더 전 판정까지 바뀜 — 전수 검사 projectile) */
+if(typeof setTimeout==='function')setTimeout(()=>{try{const paths=new Set();for(const z of Object.values(ZONES)){for(const [p] of Object.values({...TEX,...(z.tex||{})}))paths.add(p);for(const [n] of [...(z.patches||[]),...(z.uprights||[])])paths.add('assets/r207/organic/'+n+'.png');if(z.trees)for(let i=0;i<12;i++)paths.add('assets/r99/outdoor/tree-'+z.trees+'-'+String(i).padStart(2,'0')+'.webp');}
+ let i=0;const list=[...paths];const next=()=>{if(i>=list.length)return;loadImg(list[i++]).catch(()=>{}).finally(()=>setTimeout(next,60));};next();}catch(e){fail(e);}},2500);
 if(typeof blocked==='function'){const base=blocked;
  blocked=function(x,y,rad=.27,where=(typeof room!=='undefined'?room:null)){if(base.call(this,x,y,rad,where))return true;
+  /* R208: 바위 언덕 판정은 몸(반지름 .2 초과: 영웅·몹·길잡이 .29)에만 — 투사체(.08·.18)는 원래처럼 terrainContact153 기준(렌더 시점에 따라 결과가 달라지던 전수 검사 projectile) */
+  if(!(rad>.2))return false;
   try{if(prefs.on&&where?.exploration){const F=cache.get(where.exploration);if(F&&roomOn(where)){const fv=at(F,F.f,x,y);
    // 길찾기(findPath·R100·R101)는 칸 중심을 반지름 .29 로 묻고 대각선 모서리 깎기는 보지 않는다 → 새 바위 둘레에선 .32칸 여유를 더해 경로가 바위 가장자리를 스치지 않게 한다(실제 이동 .27 은 그대로).
    const need=rad>=.285&&rad<=.3?rad+.32:rad;if(fv<need&&at(F,F.raw,x,y)-fv>.02){stats.blocks++;return true;}}}}catch(e){fail(e);}return false;};}
@@ -423,8 +451,10 @@ function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entit
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
 function before(r,frame){try{
  const st=r.__r204;if(!eligible(r,frame)){if(st?.group){st.group.visible=false;restoreNative(r);}return;}
- if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);return;}
- if(st.pending||st.failed)return;st.group.visible=true;
+ // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
+ const veil=()=>{hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
+ if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
+ if(st.failed)return;if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  hideNative(r);heroUniform(r,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
