@@ -80,7 +80,10 @@ function drawPuppet(e,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Num
  if(L){const q2=project(e.x+Math.cos(L.angle)*L.d,e.y+Math.sin(L.angle)*L.d);ox=q2.x-q.x;oy=q2.y-q.y;const s=Math.cos(L.angle)-Math.sin(L.angle);if(Math.abs(s)>.05)m.face=s<0?-1:1;lean=L.lean;fr=L.d<0?1:5;}
  else{const walking=T()<m.moving||e.state==='attack'||e.state==='windup';fr=walking?Math.floor(T()*FPS+m.seed)%8:0;}
  const sx0=(fr%4)*CW,sy0=Math.floor(fr/4)*CH;
- ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;const big=major(e)&&!e.samongMidR162;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':big?'saturate(.75) contrast(1.18) brightness(.82) drop-shadow(0 0 7px rgba(170,0,24,.85))':'saturate(.92) contrast(1.05)';
+ ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;const big=major(e)&&!e.samongMidR162;/* R181: drop-shadow 필터는 3D 그리기(Three.js 기록기)가 받지 않아 큰 꼭두각시(앞장 보스·대면 보스)가 나오면 'Three.js 실행 실패'로 화면이 꺼졌다(불탄 거리·북부 방어선)
+     → 지원되는 필터(밝기·대비·채도)만 쓰고, 붉은 기운은 발밑 R106 glow 조각으로 따로 그린다 */
+  if(big&&!(e.flash>0)){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(S?.on?.())S.draw('glow',{a:[120,0,18],b:[200,20,40]},q.x+ox,q.y-lift+oy-CH*k*.35,CW*k*1.15,CH*k*.9,{alpha:.55,blend:'source-over'});}
+  ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':big?'saturate(.75) contrast(1.18) brightness(.82)':'saturate(.92) contrast(1.05)';
   ctx.translate(q.x+ox,q.y-lift+oy);if(lean)ctx.rotate(lean*m.face);const kb=big&&!(e.defScale>1.2)?k*1.25:k;ctx.scale(m.face*kb,kb);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}finally{ctx.restore();}
  stats.puppetDraws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let im=null;

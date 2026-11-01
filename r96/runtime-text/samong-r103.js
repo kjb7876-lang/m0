@@ -400,7 +400,7 @@
  // direction, so mobile needs no held button and no second hand.
  let overlay=null,lastDir={x:1,y:1},hudAt=0;
  // The maze beam is its own overlay; the player's R24 sight setting is left as it is.
- function forceFlash(on){if(!on){restoreFlash();return;}
+ function forceFlash(on){if(!on){restoreFlash();return;}if(window.__STORYWORLD_LIGHT_R182__?.mode?.()==='full')return;/* R182: 시야 '전체'(기본)에서는 미로도 손전등을 켜지 않는다 */
   // R107: the maze uses the story-mode flashlight (R24 polygon sight, walls block light) so the floor, walls and doors read like story mode with the flashlight on.
   if(S.flashSaved===null)S.flashSaved=settings.flashlight58!==false;if(settings.flashlight58!==true){settings.flashlight58=true;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.add('flashlight-black-r58');}
  function restoreFlash(){if(S.flashSaved===null)return;const v=S.flashSaved;S.flashSaved=null;if(settings.flashlight58!==v){settings.flashlight58=v;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',v!==false);}
@@ -408,14 +408,15 @@
  beamC.style.display='block';if(beamC.width!==c.width||beamC.height!==c.height){beamC.width=c.width;beamC.height=c.height;}return beamC;}
 function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=document.getElementById('stage');if(!stage)return null;overlay=document.createElement('canvas');overlay.id='r103Flashlight';overlay.setAttribute('aria-hidden','true');overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';stage.appendChild(overlay);return overlay;}
  function rayLen(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.18)if(blocked(ox+dx*t,oy+dy*t,.02,room))return t;return max;}
- function drawFlash(){const want=here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark)&&!modal;const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
+ function drawFlash(){const want=here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark)&&!modal&&window.__STORYWORLD_LIGHT_R182__?.mode?.()!=='full';const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
   const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
   const mv={x:(player.moveVX150||0),y:(player.moveVY150||0)};if(Math.hypot(mv.x,mv.y)>.05)lastDir=norm(mv.x,mv.y);else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w&&Math.hypot(player.moveVX150||0,player.moveVY150||0)<=.05&&!lastDir)lastDir=norm(w[0],w[1]);}
   // Standing still with the beam on a wall (or on arrival): turn it toward the longest open line.
   if(Math.hypot(mv.x,mv.y)<=.05&&rayLen(player.x,player.y,Math.atan2(lastDir.y,lastDir.x),3)<2.2){let best=0,ba=0;for(let k=0;k<16;k++){const a=k*Math.PI/8,t=rayLen(player.x,player.y,a,9);if(t>best){best=t;ba=a;}}lastDir={x:Math.cos(ba),y:Math.sin(ba)};}
-  const a0=Math.atan2(lastDir.y,lastDir.x),half=1.05,reach=12*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=5.5,pts=[],o=project(player.x,player.y);
-  for(let k=0;k<=28;k++){const a=a0-half+2*half*k/28,t=rayLen(player.x,player.y,a,reach);pts.push(project(player.x+Math.cos(a)*t,player.y+Math.sin(a)*t));}
+  /* R182: 시야 두 모드 — 횃불(기본): 둘레 원형 빛(벽이 가린다), 손전등(설정에서 켰을 때만): 움직이는 쪽 부채꼴 */
+  const torch=window.__STORYWORLD_LIGHT_R182__?.mode?.()==='torch',a0=Math.atan2(lastDir.y,lastDir.x),half=torch?Math.PI:1.05,reach=(torch?8.5:12)*(window.__STORYWORLD_GROWTH_R103__?.lightScale?.()||1),near=5.5,pts=[],o=project(player.x,player.y),RN=torch?48:28;
+  for(let k=0;k<=RN;k++){const a=a0-half+2*half*k/RN,t=rayLen(player.x,player.y,a,reach);pts.push(project(player.x+Math.cos(a)*t,player.y+Math.sin(a)*t));}
   // R107: graded ambient instead of a flat 62% black: near walls stay readable, the far maze stays dim.
   const nat=window.__STORYWORLD_SIGHT24__?.enabled===true,amb=g.createRadialGradient(o.x,o.y,near*TILE*zoom*.5,o.x,o.y,reach*1.6*TILE*zoom);amb.addColorStop(0,nat?'rgba(4,4,8,.08)':'rgba(4,4,8,.22)');amb.addColorStop(1,nat?'rgba(4,4,8,.26)':'rgba(4,4,8,.40)');g.fillStyle=amb;g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
   const grad=g.createRadialGradient(o.x,o.y,4,o.x,o.y,reach*TILE*zoom);grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.8,'rgba(0,0,0,.95)');grad.addColorStop(1,'rgba(0,0,0,.6)');

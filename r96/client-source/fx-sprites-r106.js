@@ -19,7 +19,7 @@ const stats={builds:0,draws:0,misses:0,deferred:0,warmed:0,evicted:0,errors:0,bu
    쌓여 사몽 전투가 끊기던 것을 줄인다. 상한을 넘으면 옅은 조각(투명도 .55 미만)부터 건너뛰고, 1.7배를 넘으면 영웅 위에 덧그리는 것 말고는 건너뛴다.
    storyworld…r106.fxbudget 에 숫자(0=끔)를 넣어 바꿀 수 있다. */
 let FB=150;try{const v=localStorage.getItem((window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r106.fxbudget');if(v!==null&&Number.isFinite(+v))FB=+v;}catch(_){}
-let frameDraws=0;(function mark(){try{if(frameDraws>stats.frameMax)stats.frameMax=frameDraws;frameDraws=0;requestAnimationFrame(mark);}catch(_){}})();
+let frameDraws=0,crowd=0,crowdAt=0,addArea=0;(function mark(t){try{if(frameDraws>stats.frameMax)stats.frameMax=frameDraws;frameDraws=0;addArea=0;/* R181: 적이 25마리를 넘는 큰 싸움에서는 상한을 ×.73 */if(!(t-crowdAt<500)){crowdAt=t||0;crowd=(typeof room!=='undefined'&&room?.enemies)?room.enemies.reduce((n,e)=>n+(e&&e.hp>0?1:0),0):0;}requestAnimationFrame(mark);}catch(_){try{requestAnimationFrame(mark);}catch(__){}}})(0);
 function fail(e){stats.errors++;lastError=String(e?.message||e);}
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r106.fxsprites';
 let enabled=true;try{const v=localStorage.getItem(KEY);if(v==='0')enabled=false;}catch(_){}
@@ -75,12 +75,16 @@ function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
 function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)return false;
  if(!(Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(w)&&Number.isFinite(h))||Math.abs(w)<.5||Math.abs(h)<.5)return true;
  const alpha=o.alpha??1;if(!(alpha>.004))return true;
- if(FB>0&&!o.overHero&&frameDraws>=FB&&(alpha<.55||frameDraws>=FB*1.7)){stats.budgetSkips++;return true;}
+ if(FB>0&&!o.overHero){const fb=crowd>25?Math.round(FB*.73):FB;if(frameDraws>=fb&&(alpha<.55||frameDraws>=fb*1.7)){stats.budgetSkips++;return true;}}
  const m=META[name];if(!m)return false;const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
  const n=m[3],fr=n>1?((Math.floor(o.frame||0)%n)+n)%n:0,rows=ROWS.has(name),fw=rows?c.width:c.width/n,fh=rows?c.height/n:c.height,sx=rows?0:fr*fw,sy=rows?fr*fh:0,piv=o.pivot||m[2];
  const veil=o.overHero?1:heroVeil(x,y,w,h,piv,o);
  ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle)ctx.rotate(o.angle);if(o.flip)ctx.scale(-1,1);
-  ctx.globalAlpha*=clamp(alpha*veil,0,1);ctx.globalCompositeOperation=o.blend||'lighter';ctx.drawImage(c,sx,sy,fw,fh,-piv[0]*w,-piv[1]*h,w,h);}
+  /* R181: 큰 덧셈(lighter) 조각이 겹치면 흰색으로 타 버려 영웅이 안 보이던 것(환도·서하 고유기술 등) — 영웅 키 1.3배보다 큰 덧셈 조각만 넓이에 반비례해 옅게(최대 ×.35) */
+  let tame=1;if(!o.blend||o.blend==='lighter'){const hh=(typeof actorHeight==='function'?actorHeight():60)*1.3,ar=Math.abs(w*h)/(hh*hh);if(ar>1){tame=Math.max(.35,1/ar);stats.tamedBig=(stats.tamedBig||0)+1;}
+   /* 좁은 기둥 여러 개가 나란히 겹쳐 하얗게 되는 것(미카엘라 고유기술 빛기둥 등): 한 프레임 덧셈 넓이 합이 영웅 넓이의 3배를 넘으면 넘친 만큼 옅게 */
+   if(ar>.12){addArea+=ar;if(addArea>3){tame*=Math.max(.35,3/addArea);stats.tamedSum=(stats.tamedSum||0)+1;}}}
+  ctx.globalAlpha*=clamp(alpha*veil*tame,0,1);ctx.globalCompositeOperation=o.blend||'lighter';ctx.drawImage(c,sx,sy,fw,fh,-piv[0]*w,-piv[1]*h,w,h);}
  catch(e){fail(e);}finally{ctx.restore();}stats.draws++;frameDraws++;return true;}
 // A sprite laid along a segment: its x axis from (x0,y0) to (x1,y1), `thick` px across.
 // 'line' has its ends at 25%/75% of the width; other strips span the full width.

@@ -3387,7 +3387,9 @@
     "assets/r163/pixelfx/pvfx-mass-release.webp",
     "assets/r163/pixelfx/pvfx-warm-explosion.webp",
     "story-maps-r171.js",
-    "perf-r180.js"
+    "perf-r180.js",
+    "skills-r181.js",
+    "light-r182.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4462,5 +4464,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "da8df2992f5f7e6e26d91d95f1ffbfeb8f4e09e309b42c497774fabe2a120b60"
+  "runtimeManifestSHA256": "008e01183c5cf64b76a92e7ab7d29ce1a435a43b05fe823595c365b67d2ad65e"
 }
