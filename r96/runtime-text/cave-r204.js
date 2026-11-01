@@ -119,6 +119,26 @@ function field(ex,cfg,protect){
    if(deep>0&&deep<TH){let add=(TH-deep)*Math.min(1,Math.max(0,(TH+.15-v)/(TH+.15)));
     if(v>0)add=Math.min(add,Math.max(0,hw[k]-1.15-(raw[k]-v)));// 바닥 쪽으로 키울 땐 통로 반폭 1.15칸(폭 2.3칸)은 남긴다
     f[k]=Math.min(f[k],v-add);}}}
+ // R208 연결 보장(이지 모드 자연 진행에서 dist00 도착 포털 앞 목이 바위 언덕에 막혀 길잡이가 멈춤):
+ //  원래 지형(raw)에서 입구로부터 영웅 몸(.27칸)으로 갈 수 있던 점이 바위 언덕(f) 때문에 끊기면, 원래 길(입구에서 그 점까지)을 따라 반경 .75칸만 바닥 깊이 .7까지 되돌린다(바위 모양은 거의 그대로).
+ {const OK=.27,starts=[];const add=q=>{if(q&&Number.isFinite(q.x)&&Number.isFinite(q.y))starts.push(q);};add(ex.entry);(ex.starts||[]).forEach(add);for(const q of prot)starts.push({x:q[0],y:q[1]});
+  const idx=(x,y)=>{const i=Math.floor((x+M)*R),j=Math.floor((y+M)*R);return i>=0&&j>=0&&i<GW&&j<GH?j*GW+i:-1;};
+  const bfs=(arr,par)=>{const seen=new Uint8Array(N),q=new Int32Array(N);let h=0,t=0;for(const st of starts){const k=idx(st.x,st.y);if(k>=0&&arr[k]>=OK&&!seen[k]){seen[k]=1;q[t++]=k;if(par)par[k]=-1;}}
+   while(h<t){const k=q[h++],i=k%GW,j=(k-i)/GW;for(const [di,dj] of [[1,0],[-1,0],[0,1],[0,-1]]){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GW||jj>=GH)continue;const kk=jj*GW+ii;if(seen[kk]||arr[kk]<OK)continue;seen[kk]=1;if(par)par[kk]=k;q[t++]=kk;}}return seen;};
+  const par=new Int32Array(N).fill(-1),nat=bfs(raw,par);let carved=0;
+  for(let pass=0;pass<4;pass++){const got=bfs(f,null);let any=false;
+   for(let k=0;k<N;k++){if(!nat[k]||got[k]||f[k]<OK)continue;any=true;/* 바위에 덮인 점은 의도된 것 — 아직 걸을 수 있는데 끊긴 주머니만 잇는다 */let c=k,steps=0;
+    while(c>=0&&steps++<4000){const ci=c%GW,cj=(c-ci)/GW;for(let dj=-3;dj<=3;dj++)for(let di=-3;di<=3;di++){const ii=ci+di,jj=cj+dj;if(ii<0||jj<0||ii>=GW||jj>=GH||di*di+dj*dj>9)continue;const kk=jj*GW+ii,want=Math.min(raw[kk],.7);if(f[kk]<want){f[kk]=want;carved++;}}
+     if(got[c])break;c=par[c];}}
+   if(!any)break;}
+  // 길찾기는 칸 중심만 .29(+.32 여유)로 묻는다 → 이웃한 두 칸 중심이 모두 길로 보이면 그 사이 직선 위 얇은 바위(잔물결)를 걷어 실제 이동(.27)과 맞춘다.
+  const atF=(x,y)=>{const i=Math.max(0,Math.min(GW-1,Math.floor((x+M)*R))),j=Math.max(0,Math.min(GH-1,Math.floor((y+M)*R)));return j*GW+i;};
+  const PATH=.61,cells=new Set((ex.floorCells||[]).map(c=>(c.x??c[0])+','+(c.y??c[1])));let slivers=0;const stop=(k,need)=>f[k]<need&&raw[k]-f[k]>.02;/* 판정 감싸기와 같은 조건 */
+  for(const key of cells){const [cx,cy]=key.split(',').map(Number),ax=cx+.5,ay=cy+.5;if(stop(atF(ax,ay),PATH)||raw[atF(ax,ay)]<.29)continue;
+   for(const [dx,dy] of [[1,0],[0,1],[1,1],[1,-1]]){if(!cells.has((cx+dx)+','+(cy+dy)))continue;const bx=ax+dx,by=ay+dy;if(stop(atF(bx,by),PATH)||raw[atF(bx,by)]<.29)continue;
+    let bad=false;for(let t=.1;t<.95;t+=.1){const k=atF(ax+dx*t,ay+dy*t);if(stop(k,.34)&&raw[k]>=.3){bad=true;break;}}if(!bad)continue;
+    for(let t=0;t<=1.0001;t+=.1){const ci=Math.floor((ax+dx*t+M)*R),cj=Math.floor((ay+dy*t+M)*R);for(let dj=-2;dj<=2;dj++)for(let di=-2;di<=2;di++){const ii=ci+di,jj=cj+dj;if(ii<0||jj<0||ii>=GW||jj>=GH||di*di+dj*dj>4)continue;const kk=jj*GW+ii,want=Math.min(raw[kk],.7);if(f[kk]<want){f[kk]=want;slivers++;}}}}}
+  stats.carved=(stats.carved||0)+carved;stats.slivers=(stats.slivers||0)+slivers;}
  let mod=0;for(let k=0;k<N;k++)if(raw[k]>0&&raw[k]-f[k]>.3)mod++;
  return {W,H,GW,GH,f,raw,inside,walk,CW,G:blur(blur(blur(blur(f)))),bulgedCells:Math.round(mod/(R*R)),protect:prot.length};
 }
@@ -203,7 +223,7 @@ function protectPoints(r){const out=[],ex=r.exploration,pt=(q,rad)=>{if(q&&Numbe
  for(const q of [ex.entrance,ex.entry,ex.gate])pt(q,1.6);for(const q of r.props||[])pt(q,/door|chest|altar|gate|portal/i.test(String(q.kind||q.id||''))?2.2:.9+(Number(q.radius)||0));
  for(const q of r.enemies||[])pt(q,1.0);for(const d of window.__STORYWORLD_WORLD_R74__?.doors||[])pt(d,2.4);if(typeof player==='object'&&player&&typeof room!=='undefined'&&r===room)pt(player,1.2);return out;}
 function fieldFor(r,make=false){const ex=r?.exploration;if(!ex)return null;let F=cache.get(ex);if(F||!make||!roomOn(r))return F||null;
- const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.doors=layoutDoorPoints(ex);F.ms=Math.round(performance.now()-t0);cache.set(ex,F);return F;}
+ const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.doors=layoutDoorPoints(ex);F.ms=Math.round(performance.now()-t0);cache.set(ex,F);try{window.__STORYWORLD_POLISH_R100__?.resetNav?.();if(typeof room!=='undefined'&&r===room&&typeof route!=='undefined'&&Array.isArray(route)&&route.length)route=[];}catch(_){}/* R208: 거리장이 생기기 전에 잰 길안내 격자·경로는 버린다 */return F;}
 // 맵에 들어설 때(로딩 중) 거리장을 미리 계산하고, 게임 시작 뒤 한가할 때 지형 질감을 미리 받아 둔다 → 첫 화면에서 바로 새 지형
 /* R208 전환 안정: 지역에 들어간 뒤 2.5초 동안은 화면 흔들림(shake)을 0 으로 둔다 — 로딩 직후 끊긴 프레임 위에 피격·연출 흔들림이 겹치면 크게 흔들려 보였다. */
 let calmUntil=0;const calm=()=>{try{if(typeof shake==='number'&&shake>0)shake=0;}catch(_){}if(performance.now()<calmUntil&&typeof requestAnimationFrame==='function')requestAnimationFrame(calm);};
@@ -445,16 +465,16 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // 엔진이 매 프레임 visible 을 다시 켜는 메시가 있어(벽 가림·R188) 레이어를 비워 숨긴다(원래 레이어는 기억했다가 되돌린다).
 function hideNative(r){let n=0;r.spatialRoot.traverse(o=>{if(o===r.spatialRoot||o.userData?.r204||o.name==='r204-cave'||o.parent?.name==='r204-cave')return;
- if(HIDE.test(o.name||'')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;}
-function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});}
+ if(HIDE.test(o.name||'')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;n++;}});stats.hidden+=n;r.__r204Hidden=true;}
+function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});r.__r204Hidden=false;}
 function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entities?.find(e=>e.hero);if(!h){U.r204Hero.value.w=0;return;}
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
 function before(r,frame){try{
- const st=r.__r204;if(!eligible(r,frame)){if(st?.group){st.group.visible=false;restoreNative(r);}return;}
+ const st=r.__r204;if(!eligible(r,frame)){if(st?.group)st.group.visible=false;if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그룹이 없어도(빌드 실패·대기 중 지역 이탈) 가린 원래 지형을 되돌린다 — Codex #132 */
  // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
  const veil=()=>{hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
- if(st.failed)return;if(st.pending){veil();return;}st.group.visible=true;
+ if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  hideNative(r);heroUniform(r,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다

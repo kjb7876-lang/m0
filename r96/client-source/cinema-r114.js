@@ -120,11 +120,13 @@ function quickHTML(){const cur=settings.lowFx?'low':prefs.horror==='high'?'high'
  +'<div class="r114-volumes"></div><div class="r114-toggles"></div>'
  +chk('r114Shadows','빛 방향 그림자',prefs.shadows)+chk('r114Grain','필름 그레인',prefs.grain)+chk('r114Pool','영웅 불빛(주변만 밝게)',prefs.lightPool)+chk('r114Letter','보스전 시네마 레터박스',prefs.letterbox)
  +'</section>';}
+/* R211: R111 항목 라벨을 한국어로(설정 창은 한국어만 — 그림체 기준 5) */
+const R111_KO={facing:'공격 뒤 겨눈 적 바라보기',resonance777:'공명 777 표시·충전 1.35배',egoAura:'EGO 불꽃 오라',threadArt:'실검무 은빛 띠·베기 그림',props:'장식 소품 벽 간격·밑동 맞춤',ranged:'원거리 영웅 회피·사거리',guard:'공명 방어 77% 방어·회복 문양',samong:'사몽 각성 흑백·빛줄기',shots:'아군 탄 총구 보정·빛무리',bossRoot:'보스 속박 고유색 그림'};
 function detailHTML(){const C=window.__STORYWORLD_COMBAT_R114__,P113=window.__STORYWORLD_PLAY_R113__,P111=window.__STORYWORLD_PLAY_R111__;
  const rows=[];const add=(api,k,label)=>{if(api?.prefs){const p=api.prefs();if(typeof p[k]==='boolean')rows.push('<label><input type="checkbox" data-r114-api="'+(api===C?'c114':api===P113?'p113':'p111')+'" data-r114-key="'+k+'" '+(p[k]?'checked':'')+'> '+label+'</label>');}};
  add(C,'palette','몹·보스 스킬 고유색/보조색');add(C,'echo','환영 공격 기 모으기·대시');
  add(P113,'ranged','원거리 영웅 순간이동 금지');add(P113,'facing','전투 중 서로 바라보기');add(P113,'ground','조형물 접지·벽 간격');add(P113,'thrown','던진 물체 폭발');add(P113,'physics','기본 물리(밀림)');add(P113,'dust','발밑 먼지');
- if(P111?.prefs){const p=P111.prefs();for(const[k,v]of Object.entries(p))if(typeof v==='boolean')rows.push('<label><input type="checkbox" data-r114-api="p111" data-r114-key="'+k+'" '+(v?'checked':'')+'> R111 '+k+'</label>');}
+ if(P111?.prefs){const p=P111.prefs();for(const[k,v]of Object.entries(p))if(typeof v==='boolean')rows.push('<label><input type="checkbox" data-r114-api="p111" data-r114-key="'+k+'" '+(v?'checked':'')+'> '+(R111_KO[k]||('R111 '+k))+'</label>');}
  return rows.length?'<details class="r114-group"><summary>전투·연출(R111~R114)</summary><div class="settings">'+rows.join('')+'</div></details>':'';}
 function restructure(){const panel=document.getElementById('panel');if(!panel||panel.querySelector('#quickSettingsR114'))return;const base=panel.querySelector('.settings');if(!base)return;
  const h2=panel.querySelector('h2');if(h2)h2.textContent='설정';
