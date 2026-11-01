@@ -8,14 +8,14 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_DEATH_R151__)return;
 const REV='R151-death-1',KEY='storyworld.r151.death',FRAME_MS=170,HOLD_MS=1500,FOOT_Y=227;
-const HEROES=['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner'],ONLY_E=new Set(['hwando']);
+const HEROES=['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner'],ONLY_E=new Set([]);/* R194: 환도도 5방향(드라이브 Hwando 49/276 묶음 death s·se·e·ne·n → assets/r194/death/hwando) */
 const DIR8=['e','se','s','sw','w','nw','n','ne'],SHEET={s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]},FOUR={front:'s',back:'n',left:'w',right:'e'};
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/(?:attack|hit)\/|r144\/walk\/|awakening|^blob:/;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={plays:0,frames:0,panels:0,immediate:0,skipped:0,errors:0,lastFrame:null};let lastError=null,dying=null,preTick=0;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
-const pathOf=(h,d)=>'assets/r151/death/'+h+'/death-'+d+'.webp';
+const pathOf=(h,d)=>(h==='hwando'?'assets/r194/death/':'assets/r151/death/')+h+'/death-'+d+'.webp';
 const sheetOf=(h,d8)=>ONLY_E.has(h)?(['w','nw','sw'].includes(d8)?['e',1]:['e',0]):(SHEET[d8]||SHEET.s);
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
