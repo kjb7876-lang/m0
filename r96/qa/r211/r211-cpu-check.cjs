@@ -31,5 +31,11 @@ ok('no walkable pocket is cut off from the entrance by rock bulges (6 seeds × 2
  for(const [cx,cy] of uniq){const ax=cx+.5,ay=cy+.5;if(stop(ax,ay,.61)||at(F.raw,ax,ay)<.29)continue;for(const [dx,dy] of [[1,0],[0,1],[1,1],[1,-1]]){if(!set.has([cx+dx,cy+dy]+''))continue;const bx=ax+dx,by=ay+dy;if(stop(bx,by,.61)||at(F.raw,bx,by)<.29)continue;
   for(let t=.1;t<.95;t+=.1){const x=ax+dx*t,y=ay+dy*t;if(stop(x,y,.27)&&at(F.raw,x,y)>=.3){bad.push([cx,cy,dx,dy]);break;}}}}
  ok('no hidden rock sliver between two path-free neighbouring cell centres',bad.length===0,bad.slice(0,5));}
+// 설정 창 라벨(이지 모드 설정 점검에서 찾은 것)
+{const cin=C('cinema-r114.js'),c137=C('combat-r137.js'),mood=C('samong-mood-r123.js'),p111=C('play-r111.js');
+ const keys=['facing','resonance777','egoAura','threadArt','props','ranged','guard','samong','shots','bossRoot'];
+ ok('R111 setting labels are Korean for every R111 boolean pref',keys.every(k=>new RegExp(k+":'[^']*[가-힣]").test(cin))&&keys.every(k=>new RegExp('\\b'+k+':').test(p111)),keys.filter(k=>!new RegExp(k+":'[^']*[가-힣]").test(cin)));
+ ok('R137 labels follow R205 (midboss 50%, echo boss-only)',/중간보스 크기 줄이기\(R205: 50%\)/.test(c137)&&/환영 공격 제한\(R205: 보스만·가끔\)/.test(c137)&&!/중간보스 크기 70%/.test(c137));
+ ok('samong mood quick toggle and detailed toggle stay in sync both ways',/r123QuickMood input'\);if\(qm\)qm\.checked=el\.checked/.test(mood));}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');

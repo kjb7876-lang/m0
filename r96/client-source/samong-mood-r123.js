@@ -466,7 +466,7 @@
   const d=document.createElement('details');d.id='moodSettingsR123';d.className='r114-group';
   const rows=[['mood','사몽 구역 분위기(감정의 탑 층·디스토피아 구간·장미의 집·밤의 학교·화가 화풍)'],['deco','분위기 조형물(찻잔·바늘·창·기계 탑·나무·이젤·녹는 시계 등)'],['floor','바닥 무늬(체스판·층 번호·데이터 격자·붓결·소용돌이)'],['overlay','화면 색·안개·떠다니는 입자·데이터 비·손전등 원뿔'],['banner','들어설 때 층·연도 표시'],['tick','시대 전환 시계 째깍 소리'],['tilt','장미의 집 기울어진 방'],['art','Drive 원화 소품(찻잔·바늘과 실·사물함·게시판)']];
   d.innerHTML='<summary>사몽 구역 분위기(R123)</summary><div class="settings">'+rows.map(([k,l])=>'<label><input type="checkbox" data-r123="'+k+'" '+(prefs[k]?'checked':'')+'> '+l+'</label>').join('')+'</div>';
-  d.querySelectorAll('[data-r123]').forEach(el=>el.onchange=()=>set({[el.dataset.r123]:el.checked}));host.appendChild(d);
+  d.querySelectorAll('[data-r123]').forEach(el=>el.onchange=()=>{set({[el.dataset.r123]:el.checked});if(el.dataset.r123==='mood'){const qm=document.querySelector('#r123QuickMood input');if(qm)qm.checked=el.checked;}/* R211: 빠른 설정과 양쪽 맞춤 */});host.appendChild(d);
   const q=document.getElementById('quickSettingsR114');if(q&&!document.getElementById('r123QuickMood')){const l=document.createElement('label');l.id='r123QuickMood';l.innerHTML='<input type="checkbox" '+(prefs.mood?'checked':'')+'> 사몽 구역 분위기(층·연도·화풍)';q.appendChild(l);l.querySelector('input').onchange=e=>{set({mood:e.target.checked});const m=d.querySelector('[data-r123="mood"]');if(m)m.checked=e.target.checked;};}}
  try{install();}catch(e){fail(e);}
  window.__STORYWORLD_MOOD_R123__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,filter,themes:THEMES,themeOf,sectionOf,floorAt,heightOf,build,stateFor,drawDecals,drawDeco,draw:DRAW,frame,enter,
