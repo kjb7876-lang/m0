@@ -195,6 +195,8 @@ jobs:
         run: node r96/qa/r191/r191-cpu-check.cjs
       - name: R192 renderer instance wrapped once (no growing render chain) CPU check
         run: node r96/qa/r192/r192-cpu-check.cjs
+      - name: R193 S-01 stitched doll ranged mob CPU check
+        run: node r96/qa/r193/r193-cpu-check.cjs
       - name: Install pinned sandboxed Chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.0
