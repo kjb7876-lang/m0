@@ -3388,7 +3388,8 @@
     "assets/r163/pixelfx/pvfx-warm-explosion.webp",
     "story-maps-r171.js",
     "perf-r180.js",
-    "skills-r181.js"
+    "skills-r181.js",
+    "light-r182.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4463,5 +4464,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ce53927f3feb07a4d1636c09c8997c4ec8d2d4d65142f48c8143ca2de931fbdf"
+  "runtimeManifestSHA256": "008e01183c5cf64b76a92e7ab7d29ce1a435a43b05fe823595c365b67d2ad65e"
 }

@@ -20489,13 +20489,18 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564377,
-      "sha256": "dedfcc5d19f0a31a4a15fad743ec862f141adbaa5881dfa98a4a0c285a9471ee"
+      "bytes": 6564416,
+      "sha256": "e8e58046755e538547ba472eef668eeec81302f869c48494705a7400383af043"
     },
     {
       "path": "intro-r140.js",
       "bytes": 3772,
       "sha256": "13099847e64cbc1b1af0cbe0c5a2fe37949340abdf01827bc45c183c2591fbbb"
+    },
+    {
+      "path": "light-r182.js",
+      "bytes": 7079,
+      "sha256": "a660d4ec707cb34e92f643906dc4d748ccae51de4df8ace8f08a0ae36bb5e887"
     },
     {
       "path": "mobile-settings-r142.js",
@@ -20594,8 +20599,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 27087,
-      "sha256": "86c43f499ef532a4a1b5f814cdfe9d41800d9913e1d1176c6c7e223726df9761"
+      "bytes": 27415,
+      "sha256": "b03700a1a6efe1d0f3736a5d9eda04034dc5ca199db32c4b867b16822e2a778d"
     },
     {
       "path": "polish-r100-data.js",
@@ -20654,13 +20659,13 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 18397,
-      "sha256": "a6059637a19dca719cc92bf1194d544a42a3d421a064080df99d3cd44cc1c3e5"
+      "bytes": 18657,
+      "sha256": "1e3f74ee2f11334de1fba003a572d92011ee500ff6edc149eb4a9b752294e05e"
     },
     {
       "path": "samong-r103.js",
-      "bytes": 85442,
-      "sha256": "55dca9adacaf26d994710b026d399c1e821b69f603c2fe2627b9d343f6269237"
+      "bytes": 85896,
+      "sha256": "9b6fab6cc51f2fcff405d8c5df8229f3539678309bef7de059b2ccc84fe6df78"
     },
     {
       "path": "samong-r161.js",
@@ -20704,8 +20709,8 @@
     },
     {
       "path": "story-batch-r139.js",
-      "bytes": 5834,
-      "sha256": "fb24e9492669f262078c4b24e09f672408b0714654c380479be66120e2e5bdc9"
+      "bytes": 6863,
+      "sha256": "3aef8a30f3089e0ca9e05ffd2a967cd008d5e71829ede33ae66ed8dcbcadd89b"
     },
     {
       "path": "story-canon-r106-data.js",
@@ -20719,8 +20724,8 @@
     },
     {
       "path": "story-collect-r177.js",
-      "bytes": 15279,
-      "sha256": "9d62ee9495751cc7f1540e38093c8fb626effe55c3eb0d0db996e6614c0f2e65"
+      "bytes": 19744,
+      "sha256": "475a9aae3c9c7913c0f1ceb220252aaf9280ca02078f3482ed5f7a17fd56a284"
     },
     {
       "path": "story-maps-r171.js",
@@ -20893,9 +20898,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4178,
-  "totalBytes": 797044383,
-  "webHTMLSha256": "dedfcc5d19f0a31a4a15fad743ec862f141adbaa5881dfa98a4a0c285a9471ee",
+  "fileCount": 4179,
+  "totalBytes": 797058037,
+  "webHTMLSha256": "e8e58046755e538547ba472eef668eeec81302f869c48494705a7400383af043",
   "largest": [
     {
       "path": "index.html",

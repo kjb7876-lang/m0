@@ -11,7 +11,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_STORY_COLLECT_R177__)return;
 const REV='R177-story-collect-1',KEY='storyworld.r177.collect';
-let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+let prefs={on:true,pages:true,autoShow:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}/* R182: pages 한 장씩 넘기기, autoShow 주우면 바로 펼치기 */
 const stats={dropped:0,picked:0,autoKept:0,shown:0,immediate:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
 const T=()=>typeof time==='number'?time:performance.now()/1000;
@@ -41,6 +41,9 @@ function drop(rows){const form=formOf(rows),first=rows[0]||{},title=String(first
  const key='r177:'+(rows.map(s=>s.key||'').join('|')||('n'+(++serial)));const at=spot();
  const doc={key,form,title,narr,text,place};docsHere().push({id:'r177:doc:'+(++serial),x:at.x,y:at.y,r177Doc:doc,t0:T()});arm();
  stats.dropped++;try{if(typeof toast==='function')toast(FORMS[form]+'이(가) 떨어졌습니다 · 가까이 가면 주워집니다.',2.2);}catch(_){}}
+const seenKeys=new Set();
+/* 그 장면 열쇠가 이미 모음(R169 쪽지 모음: 'story:'+열쇠 또는 R177 'r177:'+열쇠|열쇠…)에 있거나 이번 실행에서 떨어뜨렸는지 */
+function collected(key){if(!key)return false;if(seenKeys.has(key))return true;try{const b=window.__STORYWORLD_PLAY_R169__?.book?.()||[];for(const n of b){const k=n.key;if(k==='story:'+key)return true;if(typeof k==='string'&&k.startsWith('r177:')&&k.slice(5).split('|').includes(key))return true;}}catch(e){fail(e);}return false;}
 function keep(doc){try{window.__STORYWORLD_PLAY_R169__?.collect?.({key:doc.key,title:FORMS[doc.form]+' · '+doc.title,narr:doc.narr,text:doc.text,place:doc.place});}catch(e){fail(e);}}
 // ---- 펼친 종이 ----
 function css(){if(document.getElementById('r177DocCss'))return;const s=document.createElement('style');s.id='r177DocCss';
@@ -63,14 +66,29 @@ function css(){if(document.getElementById('r177DocCss'))return;const s=document.
   +'#panel.r177-chart .storyText{background:#f3f1ea repeating-linear-gradient(180deg,transparent 0 27px,#c9d3dc 27px 28px);color:#1d2630;padding:10px 16px;border:1px solid #7d8a96;font-family:"Noto Sans KR",sans-serif}#panel.r177-chart .r177Tag{background:#7d8a96;color:#fff}'
   +'#panel.r177-shard .storyText{background:radial-gradient(120% 90% at 30% 10%,#3a1820,#120a10);color:#ecd9d6;padding:12px 16px;border:1px solid #b0404a;box-shadow:0 0 18px #b0404a55}#panel.r177-shard .r177Tag{background:#3a1820;color:#ff9a9a;border:1px solid #b0404a}'
   +'#panel.r177-report .storyText{background:#e9e4d8;color:#1e1c18;padding:10px 16px;border:1px solid #6c6556;font-family:"Nanum Gothic Coding","D2Coding",monospace}#panel.r177-report .r177Tag{background:#e9e4d8;color:#5a1a14;border:1px dashed #6c6556}'
+  +'#r177Doc.r182pages{overflow:hidden;max-height:none}#r177Doc .pg{min-height:7em}#r177Doc .foot button{font:inherit;background:none;border:1px solid currentColor;border-radius:3px;margin:0 3px;padding:0 7px;cursor:pointer;color:inherit;opacity:.85}#r177Doc .foot button:disabled{opacity:.3;cursor:default}#r177Doc.r182pages .pg p{animation:r182flip .28s ease-out}@keyframes r182flip{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}'
   +'@media (max-width:780px){#r177Doc{top:auto;bottom:calc(var(--bottom,144px) + 12px);max-height:36vh}}';document.head.appendChild(s);}
-let el=null,showing=null,hideAt=0,hover=false;const Q=[];
-function show(doc){Q.push(doc);next();}
-function next(){if(showing||!Q.length)return;css();if(!el){el=document.createElement('div');el.id='r177Doc';el.setAttribute('role','dialog');el.onclick=()=>{showing=null;el.hidden=true;next();};el.onmouseenter=()=>hover=true;el.onmouseleave=()=>hover=false;document.body.appendChild(el);}
- showing=Q.shift();el.className=showing.form;el.innerHTML='<span class="h">'+esc(FORMS[showing.form])+' · '+esc(showing.title)+(showing.narr?' · '+esc(showing.narr):'')+'</span>'
-  +showing.text.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('')+'<span class="foot">누르면 닫힘 · 메뉴의 쪽지 모음에서 다시 볼 수 있음</span>';
- el.hidden=false;el.scrollTop=0;hideAt=performance.now()+Math.max(14000,Math.min(70000,showing.text.length*95));stats.shown++;}
-setInterval(()=>{try{const m=typeof modal!=='undefined'&&!!modal;if(el)el.style.visibility=m?'hidden':'';if(m&&showing)hideAt+=300;if(showing&&!hover&&!m&&performance.now()>hideAt){showing=null;if(el)el.hidden=true;next();}}catch(e){fail(e);}},300);
+let el=null,showing=null,hideAt=0,hover=false,page=0,pages=[];const Q=[];
+/* R182: 한 장씩 넘기기 — 문단을 묶어 한 장(약 300자)씩. 누르거나 휠을 굴리면 다음 장, 마지막 장에서 누르면 닫힘. 설정에서 끄면 예전처럼 한 번에(스크롤). */
+function paginate(text,limit){const paras=String(text||'').split(/\n{2,}/).map(t=>t.trim()).filter(Boolean),out=[];let cur=[],n=0;
+ const push=()=>{if(cur.length){out.push(cur);cur=[];n=0;}};
+ for(let p of paras){while(p.length>limit*1.25){let cut=p.lastIndexOf('다. ',limit);if(cut<limit*.4)cut=p.lastIndexOf('. ',limit);if(cut<limit*.4)cut=p.lastIndexOf(' ',limit);if(cut<1)cut=limit;else cut+=2;push();out.push([p.slice(0,cut).trim()]);p=p.slice(cut).trim();}
+  if(n&&n+p.length>limit)push();cur.push(p);n+=p.length;}
+ push();return out.length?out:[['']];}
+function show(doc,opt={}){if(!doc)return;if(!prefs.autoShow&&!opt.force){try{if(typeof toast==='function')toast((FORMS[doc.form]||'쪽지')+'을(를) 쪽지 모음에 넣었습니다 · 메뉴 → 쪽지 모음',2.2);}catch(_){}return;}Q.push(doc);next();}
+function close(){showing=null;if(el)el.hidden=true;next();}
+function turn(d){if(!showing)return;if(!prefs.pages)return close();const np=page+d;if(np>=pages.length)return close();if(np<0)return;page=np;paint();}
+function paint(){const d=showing;const head='<span class="h">'+esc(FORMS[d.form]||'쪽지')+' · '+esc(d.title)+(d.narr?' · '+esc(d.narr):'')+'</span>';
+ if(!prefs.pages){el.innerHTML=head+d.text.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('')+'<span class="foot">누르면 닫힘 · 메뉴의 쪽지 모음에서 다시 볼 수 있음</span>';el.scrollTop=0;hideAt=performance.now()+Math.max(14000,Math.min(70000,d.text.length*95));return;}
+ const body=pages[page]||[],len=body.join('').length,last=page>=pages.length-1;
+ el.innerHTML=head+'<div class="pg">'+body.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div><span class="foot"><button type="button" data-r182="prev"'+(page?'':' disabled')+'>◀</button> '+(page+1)+' / '+pages.length+' <button type="button" data-r182="next">'+(last?'닫기':'▶')+'</button><button type="button" data-r182="close" title="닫기">✕</button></span>';
+ el.scrollTop=0;hideAt=performance.now()+Math.max(9000,Math.min(40000,len*110));}
+function next(){if(showing||!Q.length)return;css();if(!el){el=document.createElement('div');el.id='r177Doc';el.setAttribute('role','dialog');
+  el.onclick=ev=>{const b=ev.target.closest?.('[data-r182]');if(b){ev.stopPropagation();const k=b.dataset.r182;if(k==='prev')turn(-1);else if(k==='next')turn(1);else close();return;}turn(1);};
+  el.addEventListener('wheel',ev=>{if(!prefs.pages||!showing)return;ev.preventDefault();turn(ev.deltaY>0?1:-1);},{passive:false});
+  el.onmouseenter=()=>hover=true;el.onmouseleave=()=>hover=false;document.body.appendChild(el);}
+ showing=Q.shift();pages=paginate(showing.text,innerWidth<700?220:320);page=0;el.className=showing.form+(prefs.pages?' r182pages':'');paint();el.hidden=false;stats.shown++;}
+setInterval(()=>{try{const m=typeof modal!=='undefined'&&!!modal;if(el)el.style.visibility=m?'hidden':'';if(m&&showing)hideAt+=300;if(showing&&!hover&&!m&&performance.now()>hideAt){if(prefs.pages&&page<pages.length-1)turn(1);else close();}}catch(e){fail(e);}},300);
 // ---- 바닥의 수집물 ----
 const TINT={chart:{a:[150,170,190],b:[235,245,255]},shard:{a:[150,20,36],b:[255,130,130]},report:{a:[150,130,90],b:[245,230,190]},note:{a:[170,130,80],b:[255,235,190]}};
 function drawDoc(p){const d=p.r177Doc,q=project(p.x,p.y),h=typeof actorHeight==='function'?actorHeight():60,bob=Math.sin(T()*3+p.x)*h*.05,S=window.__STORYWORLD_FX_SPRITES_R106__;
@@ -87,7 +105,10 @@ try{
   try{const rows=Array.isArray(scenes)?scenes.filter(s=>s&&typeof s.text==='string'&&s.text.trim()):[];
    if(!rows.length||!live()||rows.some(manual)||interacting>0||typeof done==='function'&&!rows.every(freeKey)){if(rows.length)stats.immediate++;return base.call(this,scenes,done,...a);}
    try{if(typeof readScenes!=='undefined'&&readScenes?.add)for(const s of rows)if(s.key)readScenes.add(s.key);}catch(e){fail(e);}
-   drop(rows);if(typeof done==='function')Promise.resolve().then(()=>{try{done();}catch(e){fail(e);}});return;}
+   /* R182: 이미 쪽지·기억 쪽지로 모은 서사(같은 장면 열쇠)는 다시 떨어뜨리지 않는다 — 진행하다 같은 글이 여러 번 뜨던 것 */
+   const fresh=rows.filter(s=>!collected(s.key));if(!fresh.length){stats.dupSkipped=(stats.dupSkipped||0)+rows.length;if(typeof done==='function')Promise.resolve().then(()=>{try{done();}catch(e){fail(e);}});return;}
+   for(const s of fresh)if(s.key)seenKeys.add(s.key);
+   drop(fresh);if(typeof done==='function')Promise.resolve().then(()=>{try{done();}catch(e){fail(e);}});return;}
   catch(e){fail(e);return base.call(this,scenes,done,...a);}};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r177-docs'){try{if(live())for(const p of docsHere()){const f=()=>drawDoc(p);if(typeof ctx.scope==='function')ctx.scope({id:p.id,kind:'prop',x:p.x,y:p.y},f);else f();}}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){try{document.getElementById('panel')?.classList.remove('r177-chart','r177-shard','r177-report','r177-note');}catch(_){}return base.apply(this,a);};}// 다른 창에 종이 모양이 남지 않게
@@ -98,6 +119,8 @@ try{
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{pickTick();}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){try{if(typeof room!=='undefined'&&room){const L=docsHere(),left=L.splice(0);if(left.length){for(const p of left)keep(p.r177Doc);stats.autoKept+=left.length;try{toast('줍지 않은 기록 '+left.length+'장을 쪽지 모음에 넣었습니다.',2.4);}catch(_){}}}}catch(e){fail(e);}return base.apply(this,a);};}
 }catch(e){fail(e);}
+try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r182Pages')){
+   for(const [id,k,label] of [['r182Pages','pages','쪽지 한 장씩 넘기기(누르기·휠)'],['r182Auto','autoShow','주운 쪽지 바로 펼치기(끄면 쪽지 모음에만)']]){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id=id;c.checked=prefs[k]!==false;c.onchange=()=>set({[k]:c.checked});l.appendChild(c);l.appendChild(document.createTextNode(' '+label));grid.appendChild(l);}}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_STORY_COLLECT_R177__=Object.freeze({revision:REV,set,formOf,FORMS,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},onMap:live()?docsHere().length:0,docs:()=>docsHere().map(p=>({...p.r177Doc,x:p.x,y:p.y})),lastError})});
+window.__STORYWORLD_STORY_COLLECT_R177__=Object.freeze({revision:REV,set,formOf,FORMS,show,collected,paginate,prefs:()=>({...prefs}),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},onMap:live()?docsHere().length:0,docs:()=>docsHere().map(p=>({...p.r177Doc,x:p.x,y:p.y})),lastError})});
 })();

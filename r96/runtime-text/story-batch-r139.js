@@ -30,7 +30,7 @@ if(typeof playScenes==='function'){const base=playScenes;playScenes=function(sce
   // 진행이 서사 뒤에 걸린 것(보스 문·출구 문·성 방어·최종장 단계)은 그 자리에서 바로 보인다 — 읽음 기록으로 다음 단계를 여는 코드가 있다.
   //  사몽 구역 입장 cue·보스 등장(배너만 뒤따름)과, 뒤따르는 진행이 없는 본편 입장 서사만 모은다.
   if(typeof done==='function'&&!rows.every(s=>/^DREAM:(sz115:[^:]+:(cue|boss)|sm103:[^:]+:(s|m|a|b)):/.test(String(s.key||''))))return base.call(this,scenes,done,...a);
-  if(rows.some(closing)){const all=dedupe([...queue,...rows]);queue=[];stats.flushes++;stats.flushed+=all.length;flushing=true;try{return base.call(this,all,done,...a);}finally{flushing=false;}}
+  if(rows.some(closing)){const all=dedupe([...queue.filter(s=>!gotIt(s.key)),...rows]);/* R182: 이미 모은 서사는 정리 때 다시 띄우지 않음 */queue=[];stats.flushes++;stats.flushed+=all.length;flushing=true;try{return base.call(this,all,done,...a);}finally{flushing=false;}}
   const seen=new Set(queue.map(s=>s.key));for(const s of rows)if(!s.key||!seen.has(s.key)){queue.push(s);if(s.key)seen.add(s.key);stats.deferred++;}
   try{if(typeof readScenes!=='undefined'&&readScenes?.add)for(const s of rows)if(s.key)readScenes.add(s.key);}catch(e){fail(e);}// 읽음으로 두어 같은 서사가 다시 뜨지 않고, 읽음을 보는 진행 코드도 그대로 간다
   later(done);return;}catch(e){fail(e);return base.call(this,scenes,done,...a);}};}
@@ -38,7 +38,11 @@ function dedupe(list){const seen=new Set(),out=[];for(const s of list){if(s.key&
 // 플레이어가 E 로 연 서사는 그 자리에서 바로 보인다.
 if(typeof interact==='function'){const base=interact;interact=function(...a){interacting++;try{return base.apply(this,a);}finally{interacting--;}};}
 // 정리 서사 없이 떠나면(포탈) 떠나기 전에 모아 둔 서사를 먼저 보여 준다.
-if(typeof travel==='function'){const base=travel;travel=async function(...a){try{sync();if(queue.length&&active()&&typeof playScenes==='function'){const all=queue;queue=[];stats.travelFlush++;stats.flushed+=all.length;await new Promise(res=>{flushing=true;try{playScenes(all,res);}finally{flushing=false;}});}}catch(e){fail(e);}return base.apply(this,a);};}
+const gotIt=k=>{try{return !!window.__STORYWORLD_STORY_COLLECT_R177__?.collected?.(k);}catch(_){return false;}};
+/* R182: 떠날 때 모아 둔 서사를 예전처럼 창으로 한꺼번에 띄우면 이미 본 글이 또 나오던 것 — 쪽지 모음에 조용히 넣고 알린다(이미 모은 것은 건너뜀) */
+function stash(list){const P=window.__STORYWORLD_PLAY_R169__;if(!P?.collect)return false;let n=0;for(const s of list){if(!s?.key||gotIt(s.key))continue;try{if(P.collect({key:'story:'+s.key,title:s.title||'기억',narr:s.narrator||'',text:s.text,place:(()=>{try{return regionById?.[s.id]?.title||'';}catch(_){return'';}})()}))n++;}catch(e){fail(e);}}
+ if(n)try{toast('읽지 않은 서사 '+n+'장을 쪽지 모음에 넣었습니다.',2.4);}catch(_){}stats.stashed=(stats.stashed||0)+n;return true;}
+if(typeof travel==='function'){const base=travel;travel=async function(...a){try{sync();if(queue.length&&active()&&window.__STORYWORLD_STORY_COLLECT_R177__?.prefs?.().on!==false&&stash(queue)){queue=[];}if(queue.length&&active()&&typeof playScenes==='function'){const all=queue;queue=[];stats.travelFlush++;stats.flushed+=all.length;await new Promise(res=>{flushing=true;try{playScenes(all,res);}finally{flushing=false;}});}}catch(e){fail(e);}return base.apply(this,a);};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 // R169: 모아 둔 서사를 전투 중 '기억 쪽지'로 떨어뜨려 줍게 한다(play-r169). 주운 쪽지는 대기열에서 빠져 정리 때 다시 뜨지 않는다.
 function take(key){const i=queue.findIndex(s=>s.key===key);return i<0?null:queue.splice(i,1)[0];}
