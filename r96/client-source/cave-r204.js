@@ -22,7 +22,7 @@ const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const ZONES={
  // 마수궁 피난 거점(첫 맵): 무너진 석조 회랑 — 정원 돌길·이끼·흙 바닥, 벽면은 기존 벽돌(r118 공방 벽), 윗면은 이끼 낀 잔해(r99 폐허 오른쪽 반).
  //  통로 넓히기 없음(회랑 레이아웃 그대로), 불룩도 작게(건축물), 둔덕 위 낮은 돌 경계.
- hub:{seed:0x5d00a1,tint:[.96,.9,.8],floorBGain:1.05,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/120,floorK:1.15,topK:2.0,
+ hub:{decalMix:{near:[[5,3],[6,3],[2,1],[11,2]],open:[[0,2],[5,3],[6,3],[7,2],[11,1]]},tufts:['assets/r138/props/weed.webp',.11,1/70],seed:0x5d00a1,tint:[.96,.9,.8],floorBGain:1.05,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/120,floorK:1.15,topK:2.0,
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/workshop.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.32,1/420,.8],['garden_soil_paving_transition_01','floor',.34,1/380,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/160,uprightEdge:[-1.0,-.35]},
  // 거미동굴: 흙·암반 동굴, 종유석, 거미줄
@@ -32,30 +32,57 @@ const ZONES={
   // 암벽 조각(세운 그림)은 동굴 암반 질감과 어긋나 보여 쓰지 않는다(R207 2차) — 대신 대지 위 낮은 바위 무더기(boulders)
   boulders:1/60,floorK:1.02,topK:2.25},
  // 악마화 나무의 정원: 정원 돌길·이끼 흙·마른 풀, 이끼 낀 둔덕, 둔덕 위 마른 나무(r99 원화 12장). 거미줄 없음.
- dist00:{seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
+ dist00:{decalMix:{near:[[2,3],[11,3],[5,2],[6,2]],open:[[0,2],[11,3],[5,2],[6,2],[7,1],[2,1]]},decalDensity:11,tufts:['assets/r138/props/weed.webp',.12,1/34],seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
   uprights:[['garden_low_border_01',.34]],uprightRate:1/110},
  // R210 — 나머지 1부 야외 지역(사용자 "나머지맵들도 작업 … 모든맵이 화풍이 비슷해야함"). 통로 넓히기는 하지 않는다(맵 레이아웃·전수 검사 그대로), 불룩도 중간.
  // 늪지대의 뿔악마: 이끼 흙·진흙 바닥, 물 먹은 이끼 둔덕, 마른 나무
- dist02:{seed:0x5d0202,tint:[.78,.86,.7],topK:1.9,floorK:.98,hiTop:1.2,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/150,
+ dist02:{decalMix:{near:[[2,3],[11,4],[5,1],[6,1]],open:[[10,4],[9,1],[11,4],[5,1],[6,1],[0,1]]},decalDensity:10,tufts:['assets/r138/props/weed.webp',.13,1/22],seed:0x5d0202,tint:[.78,.86,.7],topK:1.9,floorK:.98,hiTop:1.2,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/150,
   tex:{floorA:['assets/r118/tiles/meadow.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
   patches:[['soil_rock_transition_01','base',.3,1/120,.5],['garden_soil_paving_transition_01','floor',.34,1/300,.8]]},
  // 무너진 성: 성 돌바닥·정원 돌길, 벽면은 성 벽돌, 윗면은 무너진 잔해 — 건축물이라 불룩 작게(hub 처럼)
- dist03:{seed:0x5d0303,tint:[.92,.86,.8],floorBGain:1.04,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
+ dist03:{decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,3],[6,2],[7,2],[8,1],[1,.4]]},decalDensity:12,seed:0x5d0303,tint:[.92,.86,.8],floorBGain:1.04,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
   tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.3,1/420,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]},
  // 시체들이 되살아난 밤: 검은 흙·이끼 무덤가, 암반 둔덕, 마른 나무
- dist04:{seed:0x5d0404,tint:[.8,.8,.88],topK:2.0,floorK:1.0,hiTop:1.3,loTop:.42,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/90,
+ dist04:{decalMix:{near:[[2,3],[1,2],[5,2],[11,1]],open:[[1,2],[0,2],[5,2],[6,2],[11,2],[7,1]]},decalDensity:11,tufts:['assets/r138/props/weed.webp',.11,1/40],seed:0x5d0404,tint:[.8,.8,.88],topK:2.0,floorK:1.0,hiTop:1.3,loTop:.42,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/90,
   tex:{floorA:['assets/r118/tiles/sandblack.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]},
   patches:[['soil_rock_transition_02','base',.3,1/110,.5],['cliff_contact_shadow_01','base',.4,1/130,1]]},
  // 일곱 기둥: 금고·성 돌바닥 신전 터, 잔해 윗면 — 건축물
- dist05:{seed:0x5d0505,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.7,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
+ dist05:{decalMix:{near:[[5,3],[6,3],[0,2]],open:[[0,4],[5,3],[6,2],[7,2],[8,.6]]},decalDensity:12,seed:0x5d0505,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.7,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
   tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}},
  // 추락: 낭떠러지 암반·검은 모래
- dist06:{seed:0x5d0606,tint:[.92,.82,.72],hiTop:1.6,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,boulders:1/70,floorK:1.0,topK:2.2,
+ dist06:{decalMix:{near:[[5,4],[6,3],[7,2]],open:[[5,4],[6,3],[7,3],[0,3]]},decalDensity:10,seed:0x5d0606,tint:[.92,.82,.72],hiTop:1.6,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,boulders:1/70,floorK:1.0,topK:2.2,
   tex:{floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],face:['assets/r99/outdoor/surround-cliff.webp',1]},
-  patches:[['cliff_contact_shadow_01','base',.42,1/110,1]]}};
+  patches:[['cliff_contact_shadow_01','base',.42,1/110,1]]},
+ // R212 — 정원·해안 마을·설원 계열의 나머지 야외 지역(사용자 "다른맵들도작업"). 서사 지역 이름만 보고 겉모습 결을 고른다(서사·배치는 그대로). 넓히기 없음.
+ // 중립 지역의 재각성(4부): 되살아나는 정원 — 살아 있는 나무·풀
+ last304:{seed:0x5d3040,tint:[.84,.94,.78],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'living',boulders:1/140,
+  decalMix:{near:[[2,2],[11,4],[5,2],[6,2]],open:[[11,4],[0,1],[5,2],[6,2],[7,1]]},decalDensity:11,tufts:['assets/r138/props/weed.webp',.12,1/26],
+  tex:{floorA:['assets/r118/tiles/meadow.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  patches:[['garden_soil_paving_transition_01','floor',.36,1/260,.85]],uprights:[['garden_low_border_01',.32]],uprightRate:1/140},
+ // 고블린 두목과 장미 인장(4부): 장미 정원 돌길·이끼
+ last305:{seed:0x5d3050,tint:[.9,.86,.8],topK:1.9,floorK:1.02,hiTop:1.3,loTop:.42,bulge:1.0,widen:false,web:false,pillars:false,trees:'living',boulders:1/120,
+  decalMix:{near:[[2,2],[11,3],[5,2],[6,2]],open:[[0,2],[11,2],[5,3],[6,2],[7,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/34],
+  tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-paving.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  patches:[['garden_root_paving_break_01','floor',.34,1/280,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/130},
+ // 빼앗긴 시간(5부): 시간을 빼앗긴 마른 정원
+ kair05:{seed:0x5d5050,tint:[.86,.84,.8],topK:2.0,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/110,
+  decalMix:{near:[[2,3],[5,2],[6,2],[0,1]],open:[[0,3],[5,2],[6,2],[7,1],[11,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.1,1/50],
+  tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
+ // 잠들지 못하는 마을(4부): 바닷가 마을 — 포장 돌길·모래, 낮은 언덕, 둔덕 위 풀
+ last302:{seed:0x5d3020,tint:[.9,.88,.84],floorBGain:1.03,topK:1.9,floorK:1.05,hiTop:1.4,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/130,
+  decalMix:{near:[[5,3],[6,3],[2,1],[11,1]],open:[[0,2],[5,3],[6,2],[7,2]]},decalDensity:13,tufts:['assets/r138/props/weed.webp',.1,1/60],
+  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},
+ // 한약과 불면귀(4부): 약초 마을 — 돌길·풀밭, 살아 있는 나무 몇 그루
+ last303:{seed:0x5d3030,tint:[.88,.9,.8],floorBGain:1.02,topK:1.9,floorK:1.03,hiTop:1.4,loTop:.48,bulge:.85,widen:false,web:false,pillars:false,trees:'living',boulders:1/150,
+  decalMix:{near:[[2,2],[11,2],[5,2],[6,2]],open:[[0,1],[11,2],[5,2],[6,2],[7,1]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.11,1/40],
+  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/meadow.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]}},
+ // 눈보라 속의 소년(2부): 눈 덮인 바위 언덕·검은 돌
+ ep1b06b:{seed:0x5d1066,tint:[.92,.96,1.06],topK:2.1,floorK:1.04,hiTop:1.5,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,trees:'dead',boulders:1/80,
+  decalMix:{near:[[5,4],[6,3],[7,2]],open:[[5,3],[6,3],[7,2],[0,1]]},decalDensity:13,
+  tex:{floorA:['assets/r118/tiles/snow.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r118/tiles/snow.webp',0],face:['assets/r99/outdoor/ground-cliff.webp',1]}}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
 const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};
@@ -251,7 +278,7 @@ function fieldTex(T,r,F){const w=F.GW,h=F.GH,data=new Uint8Array(w*h*4),s=ZONES_
 let SEED=1;const ZONES_SEED=()=>SEED;
 
 // 거미줄·잔돌 데칼(직접 그린 보조 자산) + 기존 균열·뼈·뿌리 그림을 한 장(1024×512, 4×2 칸)에 모은다.
-function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.width=1024;c.height=512;const g=c.getContext('2d');const rnd=rng(cfg.seed^0x77);
+function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.width=1024;c.height=768;/* R212: 4×3 칸(8~11 추가) */const g=c.getContext('2d');const rnd=rng(cfg.seed^0x77);
  const put=(im,k)=>{const x=(k%4)*256,y=Math.floor(k/4)*256;const w=im.naturalWidth,h=im.naturalHeight,s=Math.min(236/w,236/h);g.drawImage(im.__c||im,x+128-w*s/2,y+128-h*s/2,w*s,h*s);};
  // r106 균열은 원래 하얗게 빛나는 효과 그림 → 바닥 균열로 쓰도록 어둡게(밝기 반전에 가깝게 눌러) 칠한다
  {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d');g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
@@ -268,6 +295,16 @@ function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.widt
    const gr=g.createRadialGradient(x-s*.25,y-s*.3,s*.1,x,y,s);gr.addColorStop(0,'rgba(150,132,110,1)');gr.addColorStop(.7,'rgba(78,66,54,1)');gr.addColorStop(1,'rgba(30,24,20,0)');
    g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x+s*.25,y+s*.3,s*.9,s*.5,0,0,Math.PI*2);g.fill();
    g.fillStyle=gr;g.beginPath();const m=6+Math.floor(rnd()*3);for(let q=0;q<m;q++){const aa=q/m*Math.PI*2,rr=s*(.7+rnd()*.35);const px=x+Math.cos(aa)*rr,py=y+Math.sin(aa)*rr*.75;q?g.lineTo(px,py):g.moveTo(px,py);}g.closePath();g.fill();}}
+ // R212 8: 땅에 떨어진 쇠사슬(r138, 성) 9: 물결(r138 ripple, 늪 웅덩이 위) 10: 늪 웅덩이(검푸른 물·젖은 가장자리) 11: 이끼 얼룩
+ if(ims.chain)put(ims.chain,8);
+ if(ims.ripple){const c3=document.createElement('canvas');c3.width=ims.ripple.naturalWidth;c3.height=ims.ripple.naturalHeight;const g3=c3.getContext('2d');g3.drawImage(ims.ripple,0,0);const id=g3.getImageData(0,0,c3.width,c3.height),d=id.data;
+  for(let i=0;i<d.length;i+=4){d[i]=Math.min(255,d[i]*.55+20);d[i+1]=Math.min(255,d[i+1]*.62+24);d[i+2]=Math.min(255,d[i+2]*.6+22);d[i+3]=d[i+3]*.55;}g3.putImageData(id,0,0);put({naturalWidth:c3.width,naturalHeight:c3.height,__c:c3},9);}
+ {const ox=2*256,oy=2*256;for(let i=0;i<5;i++){const x=ox+128+(rnd()-.5)*70,y=oy+128+(rnd()-.5)*40,rx=40+rnd()*50,ry=rx*(.45+rnd()*.2);
+   const gr=g.createRadialGradient(x,y,rx*.1,x,y,rx);gr.addColorStop(0,'rgba(44,58,54,.9)');gr.addColorStop(.55,'rgba(30,40,34,.86)');gr.addColorStop(.86,'rgba(50,54,36,.55)');/* 탁한 늪물(검은 구멍처럼 보이지 않게) */gr.addColorStop(1,'rgba(40,36,24,0)');
+   g.fillStyle=gr;g.beginPath();g.ellipse(x,y,rx,ry,(rnd()-.5)*.6,0,Math.PI*2);g.fill();}
+  for(const [a,w,al] of [[.0,3,.32],[.5,1.6,.22]]){g.strokeStyle='rgba(176,196,190,'+al+')';g.lineWidth=w;g.beginPath();g.ellipse(ox+116+a*20,oy+118+a*8,50-a*14,17-a*5,-.2,Math.PI*1.08,Math.PI*1.8);g.stroke();}/* 물 같은 반사 띠 */}
+ {const ox=3*256,oy=2*256;for(let i=0;i<60;i++){const a=rnd()*Math.PI*2,d=Math.sqrt(rnd())*96,x=ox+128+Math.cos(a)*d,y=oy+128+Math.sin(a)*d*.75,s=6+rnd()*16;
+   const gr=g.createRadialGradient(x,y,1,x,y,s);gr.addColorStop(0,'rgba(78,96,46,.7)');gr.addColorStop(1,'rgba(40,52,24,0)');g.fillStyle=gr;g.beginPath();g.arc(x,y,s,0,Math.PI*2);g.fill();}}
  const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.generateMipmaps=true;t.minFilter=T.LinearMipmapLinearFilter;r.spatialResources.add(t);return t;}
 
 // ---- 셰이더 조각 --------------------------------------------------------------------------------
@@ -375,15 +412,19 @@ function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f 
     for(let ri=0;ri<rings.length-1;ri++)for(let k=0;k<sides;k++){const a3=start+ri*(sides+1)+k,b=a3+1,c=a3+sides+1,d=c+1;idx.push(a3,b,c,b,d,c);}}nb++;}
   stats.boulders=nb;}
  stats.pillars=count;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setIndex(idx);g.computeVertexNormals();g.computeBoundingSphere();return g;}
+// R212: 지역마다 장식 비율(cfg.decalMix {near,open}: [[칸,무게]…])·밀도(cfg.decalDensity, 칸 수 나눔). 없으면 예전 동굴 규칙.
+const pickW=(list,r)=>{let t=0;for(const [,w] of list)t+=w;let x=r*t;for(const [k,w] of list){x-=w;if(x<=0)return k;}return list[list.length-1][0];};
+const DSIZE={0:1.8,1:1.1,2:1.5,3:1.6,4:1.6,5:1.0,6:1.0,7:.9,8:1.5,9:1.4,10:2.4,11:1.7};
 function decalMesh(T,F,cfg){// 바닥 데칼: 보행 영역(f>0.15) — 균열·잔돌·뼈는 아무 데나, 뿌리·거미줄은 절벽 가까이(f<1.2)
- const rnd=rng(cfg.seed^0x2718),pos=[],uv=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/14);
+ const rnd=rng(cfg.seed^0x2718),pos=[],uv=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/(cfg.decalDensity||14));const mix=cfg.decalMix;
  for(let t=0;t<want*20&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv<.15)continue;
   const near=fv<1.2;let k;const r0=rnd();
-  if(near)k=r0<.32&&cfg.web?(r0<.16?3:4):r0<.55?2:r0<.8?5:6;else k=r0<.3?0:r0<.55?5:r0<.75?6:r0<.88?7:1;
-  const size=(k===3||k===4?1.6:k===1?1.1:k===2?1.5:k===0?1.8:k===7?.9:1.0)*(.65+rnd()*.7),rot=rnd()*Math.PI*2,u0=(k%4)/4,v0=Math.floor(k/4)/2;
+  if(mix)k=pickW(near?mix.near:mix.open,r0);else if(near)k=r0<.32&&cfg.web?(r0<.16?3:4):r0<.55?2:r0<.8?5:6;else k=r0<.3?0:r0<.55?5:r0<.75?6:r0<.88?7:1;
+  if(k===10&&fv<1.6)continue;/* 웅덩이는 트인 곳에만 */
+  const size=(DSIZE[k]||1)*(.65+rnd()*.7),rot=k===10||k===9?(rnd()-.5)*.3:rnd()*Math.PI*2,u0=(k%4)/4,v0=Math.floor(k/4)/3;
   const cs=Math.cos(rot)*size/2,sn=Math.sin(rot)*size/2;const yy=.012+count*1e-5;
   pos.push(x-cs+sn,yy,y-sn-cs, x+cs+sn,yy,y+sn-cs, x+cs-sn,yy,y+sn+cs, x-cs-sn,yy,y-sn+cs);
-  uv.push(u0,1-v0, u0+.25,1-v0, u0+.25,1-v0-.5, u0,1-v0-.5);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;count++;}
+  uv.push(u0,1-v0, u0+.25,1-v0, u0+.25,1-v0-1/3, u0,1-v0-1/3);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;count++;}
  stats.decals=count;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();return g;}
 
 function blobTex(T,r){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d'),gr=g.createRadialGradient(64,64,4,64,64,62);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.55,'rgba(255,255,255,.55)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);
@@ -435,6 +476,17 @@ function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.G
    sp.scale.set(wpx/ppu,hpx/ppu*1.15,1);sp.center.set(u.box.cx/u.box.w,1-(u.box.y1-6)/u.box.h);sp.position.set(x,h-.05,y);sp.layers.set(2);sp.renderOrder=-26;sp.userData.r204=true;g.add(sp);nu++;}}
  stats.organicPatches=np;stats.organicUprights=nu;return(np||nu)?g:null;}
 
+// R212 풀 덤불(r138 weed): 절벽 밑 바닥(f .2~1.0) 가장자리에 세운 그림. 지역 색으로 살짝 누름. 문·소품 둘레는 비움.
+function tuftSprites(T,r,F,cfg,ims,rm){const im=ims.tuft;if(!im||!cfg.tufts)return null;const [,sc,rate]=cfg.tufts,rnd=rng(cfg.seed^0x7af7),g=new T.Group();
+ const box=bboxOf(im),t=new T.Texture(im);t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);
+ const mats=[.85,1,1.12].map(k=>{const c=i=>Math.min(1.2,(.45+.55*cfg.tint[i])*k);const m=new T.SpriteMaterial({map:t,alphaTest:.35,depthWrite:true,toneMapped:false,color:new T.Color(c(0),c(1),c(2)*.95)});r.spatialResources.add(m);return m;});
+ const avoid=[...(F.doors||[]).map(d=>[d[0],d[1],Math.max(3,(d[2]||3.5)-.5)]),...(rm?.props||[]).filter(q=>Number.isFinite(q.x)).map(q=>[q.x,q.y,1.2+(Number(q.radius)||0)])];
+ const want=Math.round(F.W*F.H*rate),placed=[],ppu=ISO_T*Math.SQRT2;let n=0;
+ for(let t2=0;t2<want*40&&n<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);const top=n%3===2;/* 셋에 하나는 둔덕 윗면(이끼·풀이 자란 대지) */
+  if(top?(fv>-.9||fv<-3):(fv<.2||fv>1.0))continue;const hy=top?topHeight(F,cfg,x,y):.02;if(top&&hy<.6)continue;if(avoid.some(a=>Math.hypot(a[0]-x,a[1]-y)<a[2])||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<1.1))continue;placed.push([x,y]);
+  const k=sc*(.7+rnd()*.6),sp=new T.Sprite(mats[Math.floor(rnd()*mats.length)]);sp.scale.set(box.w*k/ppu*(rnd()<.5?-1:1),box.h*k/ppu*1.1,1);sp.center.set(box.cx/box.w,1-(box.y1-4)/box.h);sp.position.set(x,hy,y);sp.layers.set(2);sp.renderOrder=-25;sp.userData.r204=true;g.add(sp);n++;}
+ stats.tufts=n;return n?g:null;}
+
 // ---- 장면 연결 ----------------------------------------------------------------------------------
 const FLOOR_CMD=/^r9[02]:floor:/;
 const HIDE=/wall|partition|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
@@ -444,6 +496,8 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
  const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
  const TX={...TEX,...(cfg.tex||{})},want=Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
  for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg('assets/r207/organic/'+n+'.png');
+ want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
+ if(cfg.tufts)want.tuft=loadImg(cfg.tufts[0]).catch(()=>null);
  if(cfg.trees)for(let i=0;i<12;i++)want['tree'+i]=loadImg('assets/r99/outdoor/tree-'+cfg.trees+'-'+String(i).padStart(2,'0')+'.webp');
  Promise.all(Object.values(want)).then(list=>{if(r.disposed||r.sceneGeneration!==gen)return;const ims={};Object.keys(want).forEach((k,i)=>ims[k]=list[i]);
   const F=fieldFor(roomOf(frame),true);if(!F)throw Error('no field');const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
@@ -460,6 +514,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   // 조형물 발밑 그늘(사용자 "조형물도 자연스럽게"): 바닥에 붙은 부드러운 어두운 타원 — 소품이 바닥에 놓여 있게 보이도록
   {const rm=roomOf(frame),pg=propShadowMesh(T,F,rm);if(pg){const m=new T.MeshBasicMaterial({map:blobTex(T,r),transparent:true,depthWrite:false,toneMapped:false,color:0x000000,opacity:.62,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);add(pg,m,'r204-prop-shadows',-18);}}
   if(cfg.trees){const tg=treeSprites(T,r,F,cfg,ims);if(tg){tg.name='r204-trees';group.add(tg);}}
+  if(cfg.tufts){const tg=tuftSprites(T,r,F,cfg,ims,roomOf(frame));if(tg){tg.name='r212-tufts';group.add(tg);}}
   if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
   r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
