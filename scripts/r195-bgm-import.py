@@ -4,7 +4,7 @@
 받은 원본(저장소 밖 스테이징, 신뢰하지 않는 파일)을 ffmpeg 로 변환만 한다. 원본은 실행하지 않고 저장소에 넣지 않는다.
   · 음량 맞추기(EBU R128 loudnorm, 목표 -18 LUFS, 피크 -1.5 dBTP)
   · 최대 길이 270초(넘으면 끝 4초 페이드아웃), 시작 0.6초 페이드인
-  · mp3 112 kbps 스테레오 44.1 kHz(모든 브라우저·모바일에서 재생)
+  · mp3 96 kbps 스테레오(R202: 14곡 40MB 예산 안으로 112→96) 44.1 kHz(모든 브라우저·모바일에서 재생)
 결과: r96/runtime-text/assets/audio/bgm/classical/<id>.mp3 + catalog.json(라이선스·출처·해시·바꾼 점) + 저장소 루트 MUSIC_CREDITS.md
 
 쓰는 법: python3 -I scripts/r195-bgm-import.py <stage-dir> <plan.json>
@@ -47,8 +47,8 @@ def main(stage, plan_path):
             af += ',afade=t=out:st=%.2f:d=4' % (length - 4)
         dst = os.path.join(OUT, t['id'] + '.mp3')
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', str(start), '-t', '%.2f' % length, '-i', src, '-vn', '-map_metadata', '-1',
-                        '-af', af, '-ac', '2', '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '112k', dst], check=True)
-        changes = '음량 맞춤(-18 LUFS), mp3 112kbps 변환' + (', %d초에서 자르고 끝 4초 페이드아웃' % round(length) if cut else '') + (', %.0f초부터 시작' % start if start else '')
+                        '-af', af, '-ac', '2', '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '96k', dst], check=True)
+        changes = '음량 맞춤(-18 LUFS), mp3 96kbps 변환' + (', %d초에서 자르고 끝 4초 페이드아웃' % round(length) if cut else '') + (', %.0f초부터 시작' % start if start else '')
         tracks[t['id']] = {k: t[k] for k in ('title', 'composer', 'performer', 'license', 'licenseUrl', 'source', 'licenseEvidence') if k in t}
         tracks[t['id']].update({'file': t['id'] + '.mp3', 'bytes': os.path.getsize(dst), 'sha256': sha(dst), 'durationSec': round(duration(dst), 2),
                                 'gain': t.get('gain', 0.62), 'changes': changes, 'originalSha256': sha(src), 'originalBytes': os.path.getsize(src)})

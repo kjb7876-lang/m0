@@ -129,38 +129,78 @@
     },
     {
       "path": "assets/audio/bgm/classical/air.mp3",
-      "bytes": 2566993,
-      "sha256": "91cb8d5f732bd0450c55eabbf6f0159bed8ebf8fad29d31d1016081b26745159"
+      "bytes": 2200286,
+      "sha256": "54a12d1ac14f812736f9809f6a7a62820afea73f402c3a8f5113a226483d86a7"
     },
     {
       "path": "assets/audio/bgm/classical/catalog.json",
-      "bytes": 6436,
-      "sha256": "f7ee38bdaacf87c7adc56b6fd948cb32ee9788d1d0d291b12f91eccb20e4122a"
+      "bytes": 15662,
+      "sha256": "fe2e7feef06972828299e23df1fa97427aa6633c8808387940d67131177136fe"
+    },
+    {
+      "path": "assets/audio/bgm/classical/coriolan.mp3",
+      "bytes": 3240691,
+      "sha256": "3bbe1612e6233b1f18b9e5a4045e272e8aaa341b602bb61d77e3f5e942efd3fd"
     },
     {
       "path": "assets/audio/bgm/classical/danse-macabre-1925.mp3",
-      "bytes": 3780798,
-      "sha256": "b25d7670cc13c6bd28a6c6865157401f05f21e7d74ab4c7ee32815d590170ca7"
+      "bytes": 3240691,
+      "sha256": "c865ee506b0215d7c552908eb754ce25b645e4d0c69f072158cc96c29aa58500"
     },
     {
       "path": "assets/audio/bgm/classical/danse-macabre.mp3",
-      "bytes": 3780798,
-      "sha256": "7000651900e73d1e56b55f829df924f7942ed660629cfe0ebfcf46fc25509182"
+      "bytes": 3240691,
+      "sha256": "d488bd00fb355ae20f6f7816b08e37ad4c99aeaaaaa35b2f708ed464e050e7f2"
+    },
+    {
+      "path": "assets/audio/bgm/classical/funeral-march.mp3",
+      "bytes": 3240691,
+      "sha256": "3e3e57cb5ca88a42baa66882499ab91ec45a649048ba0fe88bac4a7edc370497"
+    },
+    {
+      "path": "assets/audio/bgm/classical/moonlight.mp3",
+      "bytes": 3240691,
+      "sha256": "3615cdca22075e2661ccf3a8fe89f7824cd55fb36adaf2757b1d75c80ed3ede3"
     },
     {
       "path": "assets/audio/bgm/classical/mountain-king.mp3",
-      "bytes": 2158124,
-      "sha256": "e2adde99407007a0a9bb1ce2cb90dce54528900dad1af1134252f6a008596da1"
+      "bytes": 1849827,
+      "sha256": "fedb4fae0b8088edbb063f0905caebc69d8cd48868de83df4f245865eb60516e"
+    },
+    {
+      "path": "assets/audio/bgm/classical/mozart40.mp3",
+      "bytes": 3240691,
+      "sha256": "d9f8f7fddb147fe4c9e586bbb3cf483cb9b8fd59d5f4470f67a6615d90448e4e"
+    },
+    {
+      "path": "assets/audio/bgm/classical/nocturne-c-minor.mp3",
+      "bytes": 3240691,
+      "sha256": "5ba0c7259fd75533d7a2581a44cf6a3dd93b2a44aaa06499b5a2dce73df5f80e"
+    },
+    {
+      "path": "assets/audio/bgm/classical/prelude-2.mp3",
+      "bytes": 1697795,
+      "sha256": "2ad27843e7fdebaebf74ee8b89db3c3a3ecb3d4354d9d1ea69181749eacb7df6"
+    },
+    {
+      "path": "assets/audio/bgm/classical/revolutionary.mp3",
+      "bytes": 1978350,
+      "sha256": "7d5d7bc03301a6939fdb284b88558c7e39463967c796e6b930a1b00ff596e01b"
+    },
+    {
+      "path": "assets/audio/bgm/classical/sonata2-finale.mp3",
+      "bytes": 1501249,
+      "sha256": "bad56555a019866f69628209dfabbc4e7b5a8d45afc0f8cd54c9c8f50befc7b5"
     },
     {
       "path": "assets/audio/bgm/classical/toccata.mp3",
-      "bytes": 3780798,
-      "sha256": "95b20d77ff81b0d1d1120a29cafc316fbe253fa49f328ebd3453e12a22ad2b20"
+      "bytes": 3240691,
+      "sha256": "824f8c1b76d042eb70899670c813d4a0315b4bbb57760d7729f95452d2424fdd"
     },
     {
       "path": "assets/audio/bgm/classical/winter.mp3",
-      "bytes": 2768135,
-      "sha256": "0cdd0769dd911bb48f8b7b02e8699b14383b5d060901914578261d8bf7feecd6"
+      "bytes": 2372694,
+      "sha256": "83f3f7856c1a33017edf1739023122fac3822fd5b8441fa82928b09f8ce92b32"
     },
     {
       "path": "assets/auras-r62/ego-halo.webp",
@@ -12193,6 +12233,11 @@
       "sha256": "d890e8064cc7e2dfa49460e06cbcf8dfa3fcfa4ede0fe00ac15113c7c9bdfcb9"
     },
     {
+      "path": "assets/r200/shades/clockhand-warden.webp",
+      "bytes": 112914,
+      "sha256": "8c11fdd49eca3f8c2e7d21761d8eb530952d18c3196e8295c2826ae4be4729ac"
+    },
+    {
       "path": "assets/r200/shades/clockwork-legionary.webp",
       "bytes": 101098,
       "sha256": "e6e854547987b1cc4f92b0b79c212540314f0cbd11e2ceb2a3c6abd4ca08b099"
@@ -12203,9 +12248,24 @@
       "sha256": "d58e83a4f29c06f20719e7f8317a9685a07723f52645c2c0448dfd23f204d6af"
     },
     {
+      "path": "assets/r200/shades/empty-sleeve-trumpet.webp",
+      "bytes": 111232,
+      "sha256": "44006343d74e35089d6453686d91af284bbddef109ecdd93e758ed81fd101d5a"
+    },
+    {
       "path": "assets/r200/shades/extra-informant.webp",
       "bytes": 121970,
       "sha256": "5b8b340810bcdc0457e4a678d4f23d1847d3ddcce4e4ce9476a631fc89628645"
+    },
+    {
+      "path": "assets/r200/shades/fishhook-manuscript.webp",
+      "bytes": 99118,
+      "sha256": "264fc76801a67a40684929ae5d61f80c15c2def4103a46823148d30f2b74e1bf"
+    },
+    {
+      "path": "assets/r200/shades/furnace-taxidermist.webp",
+      "bytes": 95548,
+      "sha256": "50380da6e2824b8f101986e1d9ed383de38750d8c73247f0fb59a274edb40685"
     },
     {
       "path": "assets/r200/shades/gilded-hollow.webp",
@@ -12214,8 +12274,8 @@
     },
     {
       "path": "assets/r200/shades/index.json",
-      "bytes": 13687,
-      "sha256": "6ca72718936f6bfe6a6f92a38c8570ad36e24cd8f1eb1bf04a3aeb6b677cecef"
+      "bytes": 18780,
+      "sha256": "ef24a3f563366fda95dcb5473462ad7ad355673e9dc982a73d82f1166c018997"
     },
     {
       "path": "assets/r200/shades/insomnia-patient.webp",
@@ -12243,6 +12303,11 @@
       "sha256": "5fd2c429bcd7384cb3aee0946a577a23f48cd5b2e1d7cc721baf7ca1ce68e05e"
     },
     {
+      "path": "assets/r200/shades/parade-mannequin.webp",
+      "bytes": 80430,
+      "sha256": "6be3717ef25000f7fba59fadd1286046c3d6cc8e7dab2f0286bd674b829e296a"
+    },
+    {
       "path": "assets/r200/shades/plague-hound.webp",
       "bytes": 138636,
       "sha256": "5dea638e3cb5b38c6bc8fb3198695aaa2b07bd0140fa4b57e5c08508ea8ef37a"
@@ -12266,6 +12331,11 @@
       "path": "assets/r200/shades/tram-passenger.webp",
       "bytes": 97234,
       "sha256": "352e73a9e67010787fbf62ab445745aa3b72a2eb6c4d19613efbcd0ca5c11609"
+    },
+    {
+      "path": "assets/r200/shades/wire-bound-dead.webp",
+      "bytes": 85198,
+      "sha256": "e661221566501d5c17c6ebbabcce638082b78cd8a0d00cd95fd8db59673b30df"
     },
     {
       "path": "assets/r74/effects.png",
@@ -21204,8 +21274,8 @@
     },
     {
       "path": "samong-shades-r200.js",
-      "bytes": 6075,
-      "sha256": "a0f0b902921163015d959fe01822c7566367077a9d4a3af02d02bb059ff38633"
+      "bytes": 6620,
+      "sha256": "23f60529ffd820cb99046f5fc47af12d43bdee40472c317a0b33a96b5b0fd679"
     },
     {
       "path": "samong-text-r103.js",
@@ -21443,8 +21513,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4288,
-  "totalBytes": 821567331,
+  "fileCount": 4302,
+  "totalBytes": 840856718,
   "webHTMLSha256": "c526e9b9b83c30637f98adf70e5d24705761a0a7a49b7713a0e640009b390477",
   "largest": [
     {
