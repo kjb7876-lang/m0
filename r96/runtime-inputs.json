@@ -3420,6 +3420,14 @@
     "assets/r143/hit/hwando/hit-e.webp",
     "assets/r143/hit/hwando/hit-n.webp",
     "assets/r143/hit/hwando/index.json",
+    "bgm-classical-r195.js",
+    "assets/audio/bgm/classical/air.mp3",
+    "assets/audio/bgm/classical/catalog.json",
+    "assets/audio/bgm/classical/danse-macabre-1925.mp3",
+    "assets/audio/bgm/classical/danse-macabre.mp3",
+    "assets/audio/bgm/classical/mountain-king.mp3",
+    "assets/audio/bgm/classical/toccata.mp3",
+    "assets/audio/bgm/classical/winter.mp3",
     "assets/r196/hwando/death-e.webp",
     "assets/r196/hwando/death-n.webp",
     "assets/r196/hwando/death-ne.webp",
@@ -4504,5 +4512,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "05232eab42c375c38bfb8e5e8f79a059a237175dc577b18f6667f602bcc97998"
+  "runtimeManifestSHA256": "64601d2bb844c85bf2e317cc7013dbe20958f030dc7b6c67853b549424e40341"
 }

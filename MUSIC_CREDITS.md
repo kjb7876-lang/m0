@@ -1,0 +1,17 @@
+# 음악 크레딧 (MUSIC_CREDITS)
+
+『합일몽세·스토리월드』의 클래식 배경음악(R195)입니다. 퍼블릭 도메인·CC0 녹음을 먼저 쓰고, 없을 때만 CC BY 녹음을 썼습니다.
+NC(비상업)·SA(동일조건)·ND(변경금지)·라이선스가 불분명한 녹음은 쓰지 않았습니다. 게임 안 설정 → "음악 크레딧"에서도 볼 수 있습니다.
+
+| 곡 | 작곡 | 연주 | 라이선스 | 원본 | 바꾼 점 | 쓰는 곳 |
+|---|---|---|---|---|---|---|
+| Toccata and Fugue in D minor, BWV 565 | Johann Sebastian Bach | Kevin MacLeod (incompetech.com) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [원본 페이지](https://commons.wikimedia.org/wiki/File:Toccata_and_Fugue_in_D_Minor_(ISRC_USUAN1100350).mp3) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환, 270초에서 자르고 끝 4초 페이드아웃 | boss:default |
+| In the Hall of the Mountain King (Peer Gynt Suite No. 1, Op. 46 IV) | Edvard Grieg | Musopen Symphony Orchestra (Czech National Symphony Orchestra, Musopen Kickstarter 2012) | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://commons.wikimedia.org/wiki/File:Grieg_-_Peer_Gynt_Suite_No._1,_Op._46_-_IV._In_the_Hall_of_the_Mountain_King_(Musopen_Symphony).flac) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환 | combat:default, combat:samong |
+| Danse macabre, Op. 40 | Camille Saint-Saëns | Kevin MacLeod (incompetech.com) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [원본 페이지](https://commons.wikimedia.org/wiki/File:Danse_Macabre_(ISRC_USUAN1100546).mp3) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환, 270초에서 자르고 끝 4초 페이드아웃 | boss2:default |
+| Danse macabre, Op. 40 (historic 1925 recording) | Camille Saint-Saëns | Philadelphia Orchestra, cond. Leopold Stokowski (Victor 6505, rec. 1925-04-29) | [Public domain](https://commons.wikimedia.org/wiki/Template:PD-US-record-expired) | [원본 페이지](https://commons.wikimedia.org/wiki/File:PhiladelphiaSymphonyOrchestra-DanseMacabre.ogg) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환, 270초에서 자르고 끝 4초 페이드아웃 | explore:samong |
+| The Four Seasons, Winter (L'inverno) RV 297 - I. Allegro non molto | Antonio Vivaldi | United States Air Force Band | [Public domain](https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force) | [원본 페이지](https://archive.org/details/TheFourSeasonsWinter) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환 | explore:default |
+| Air (Orchestral Suite No. 3 in D, BWV 1068) - 'Air on the G string' | Johann Sebastian Bach | United States Air Force Band, Air Force Strings | [Public domain](https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force) | [원본 페이지](https://archive.org/details/AirSuiteNo.3InDMajor) | 음량 맞춤(-18 LUFS), mp3 112kbps 변환 | safe:default |
+
+CC BY 곡은 위 표의 저작자·라이선스 표기로 출처를 밝힙니다(변경: 음량 맞춤·길이 자름·mp3 변환).
+
+파일 무결성(sha256)은 `r96/runtime-text/assets/audio/bgm/classical/catalog.json` 에 있습니다.
