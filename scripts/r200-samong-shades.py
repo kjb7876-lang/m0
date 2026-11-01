@@ -8,7 +8,7 @@
   · 12번 칸은 쓰지 않는다(몇 장에 AI 생성 표시 ✦가 있고, 1번과 같은 복귀 자세).
   · 몹 하나의 1~11칸을 같은 상자(합친 알파 상자)로 잘라 몸의 앞뒤 움직임을 살리고, 1번 칸(서 있는 자세) 가시 높이를 150px로 맞춘다.
   · 1~5칸 = 이동/대기, 6~11칸 = 공격(시트 설명 "이동 및 … 공격 사이클" 순서).
-Usage: python3 -I scripts/r200-samong-shades.py <sheet dir with 01.png..06.png> r96/runtime-text/assets/r200/shades
+Usage: python3 -I scripts/r200-samong-shades.py <sheet dir with 01.png..08.png> r96/runtime-text/assets/r200/shades
 """
 import sys, json, hashlib
 from collections import deque
@@ -19,6 +19,10 @@ from PIL import Image, ImageFilter
 src, out = Path(sys.argv[1]), Path(sys.argv[2]); out.mkdir(parents=True, exist_ok=True)
 sha = lambda b: hashlib.sha256(b).hexdigest()
 ROWS = [(52, 238), (312, 514), (575, 760)]; X0, X1 = 35, 1341; CW = (X1 - X0) / 12; INSET = 3
+# R203: 시트 07·08 은 칸 자리가 다르다(07 은 번호가 칸 위, 08 은 칸 밖 위·왼쪽에 번호·줄 이름). 이동 1~6칸, 공격 7~11칸.
+LAYOUT = {i: {'rows': ROWS, 'x0': X0, 'x1': X1, 'bottom': 30, 'move': [0, 1, 2, 3, 4], 'attack': [5, 6, 7, 8, 9, 10]} for i in range(1, 7)}
+LAYOUT[7] = {'rows': [(78, 272), (328, 524), (573, 764)], 'x0': 23.5, 'x1': 1351, 'bottom': 0, 'teal': True, 'move': [0, 1, 2, 3, 4, 5], 'attack': [6, 7, 8, 9, 10]}
+LAYOUT[8] = {'rows': [(58, 241), (299, 488), (547, 729)], 'x0': 57, 'x1': 1353, 'bottom': 0, 'move': [0, 1, 2, 3, 4, 5], 'attack': [6, 7, 8, 9, 10]}
 TARGET_H, PAD = 150, 3
 # (시트, 줄) → 게임 id·이름·구역. 이름은 시트에 적힌 이름을 그대로 쓰고, 구역은 그림과 사몽 구역 서사로 정했다.
 MOBS = [
@@ -38,11 +42,18 @@ MOBS = [
  (2, 1, 'cephalopod-invader', '두족류 생체기계 침공병', 'S-06', '디스토피아 — 침공 기체'),
  (4, 2, 'clockwork-legionary', '폐선로 태엽 군단병', 'S-06', '디스토피아 — 기계의 반란'),
  (1, 2, 'plague-hound', '변이된 사냥개 괴수', 'S-06', '디스토피아 — 생체 도살장 겸 공장'),
+ # R203 시트 07·08 — 사몽역행(제11부) 구역. 시트 이름이 가리키는 장(R-03 시계·R-10 승전식·R-11 낚싯바늘·R-13 일곱 번째 나팔·검은 공방·R-15 제단과 전선)에 둔다.
+ (8, 0, 'clockhand-warden', '카이로 회랑의 시계침 수문장 잔영', 'RB', '두 개의 의자와 세 잔의 물 — 멈춘 시계·카이로(수문장) 몹 자리'),
+ (7, 0, 'parade-mannequin', '승전식 제복 마네킹 잔영', 'RE', '네 번째 나팔 — 백색 사수의 승전식(훈장·행진)'),
+ (7, 1, 'fishhook-manuscript', '낚싯바늘 원고지 망령', 'RF', '다섯 번째 나팔 — 낚싯바늘·원고지'),
+ (7, 2, 'empty-sleeve-trumpet', '일곱 나팔의 빈 소매 잔영', 'RG', '일곱 번째 나팔 — 여백의 전쟁'),
+ (8, 1, 'furnace-taxidermist', '검은 공방의 용광로 박제공 잔영', 'RG', '일곱 번째 나팔 — 검은 공방의 용광로'),
+ (8, 2, 'wire-bound-dead', '검은 제단의 전선 망자 잔영', 'RG', '불탄 책의 뒤편(R-15) — 제단 뒤 전선'),
 ]
 UNUSED = [(1, 1, '저주받은 무덤 기사', '사몽 구역 서사에 맞는 자리가 없어 보류'), (2, 0, '봉합부인', 'S-01 보스 이름이라 일반 몹으로 쓰지 않음')]
 
 
-def clean_cell(im):
+def clean_cell(im, bottom=30, teal=False):
     h, w, _ = im.shape
     border = np.concatenate([im[0], im[-1], im[:, 0], im[:, -1]])
     bg = np.median(border, 0); bgL = bg.mean()
@@ -54,7 +65,10 @@ def clean_cell(im):
         y, x = q.popleft()
         if seen[y, x]: continue
         seen[y, x] = True
-        ok = d[y, x] <= 22 or (y >= floor and sat[y, x] < 12 and bgL - 24 < L[y, x] < bgL - 2)  # 바닥 그림자는 고른 무채색(≈21), 몸의 짙은 그늘(<10)은 남긴다
+        # 07 시트: 칸마다 청록 둥근 조명 배경과 바닥 마름모 격자 — 청록 기운(G·B 가 R 보다 높음)이나 거의 검은 픽셀이면 배경
+        #   어두운 청록·검정은 칸 가장자리 18px 안에서만 배경으로 본다(검은 옷자락이 청록 조명을 받아 같이 지워지지 않게)
+        edge = min(y, x, h - 1 - y, w - 1 - x) < 18
+        ok = d[y, x] <= 22 or (teal and (((im[y, x, 1] - im[y, x, 0] >= 5 and im[y, x, 2] - im[y, x, 0] >= 3) and (L[y, x] >= 24 or edge)) or (L[y, x] <= 14 and edge))) or (y >= floor and sat[y, x] < 12 and bgL - 24 < L[y, x] < bgL - 2)  # 바닥 그림자는 고른 무채색(≈21), 몸의 짙은 그늘(<10)은 남긴다
         if not ok: continue
         gone[y, x] = True
         for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
@@ -70,7 +84,7 @@ def clean_cell(im):
                 if x2 - x <= 2 and all(sat[y, k] < 10 and 38 < L[y, k] < 90 for k in range(x, x2)): gone[y, x:x2] = True
                 x = x2
             else: x += 1
-    gone[h - 30:, :] = True  # 프레임 번호(칸 아래 가운데)와 칸 밑선 — 발은 이보다 위에 있다
+    if bottom: gone[h - bottom:, :] = True  # 프레임 번호(칸 아래 가운데)와 칸 밑선 — 발은 이보다 위에 있다
     # 작은 외딴 덩어리(위쪽 칸 가는 선, 남은 글자 조각)를 지운다: 60px 미만이면서 칸 위 20%나 아래 35%에 있는 것
     lab = np.zeros((h, w), np.int32); n = 0
     keep = ~gone
@@ -98,15 +112,15 @@ def bbox(al):
 
 rows = []
 sheets = {}
-for i in range(1, 7):
+for i in sorted({m[0] for m in MOBS}):
     p = src / ('%02d.png' % i); b = p.read_bytes(); sheets[i] = {'file': p.name, 'bytes': len(b), 'sha256': sha(b)}
 for sheet, row, gid, name, zone, why in MOBS:
     im = np.asarray(Image.open(src / ('%02d.png' % sheet)).convert('RGB')).astype(int)
-    y0, y1 = ROWS[row]
+    L = LAYOUT[sheet]; y0, y1 = L['rows'][row]; cwid = (L['x1'] - L['x0']) / 12
     cells = []
     for c in range(11):
-        x0 = int(round(X0 + c * CW)) + INSET; x1 = int(round(X0 + (c + 1) * CW)) - INSET
-        cells.append(clean_cell(im[y0 + INSET:y1 - INSET, x0:x1]))
+        x0 = int(round(L['x0'] + c * cwid)) + INSET; x1 = int(round(L['x0'] + (c + 1) * cwid)) - INSET
+        cells.append(clean_cell(im[y0 + INSET:y1 - INSET, x0:x1], L['bottom'], L.get('teal', False)))
     hh = min(c.shape[0] for c in cells); ww = min(c.shape[1] for c in cells)
     cells = [c[:hh, :ww] for c in cells]
     boxes = [bbox(c[..., 3]) for c in cells]
@@ -120,15 +134,15 @@ for sheet, row, gid, name, zone, why in MOBS:
         r = np.asarray(Image.fromarray(cc.clip(0, 255).astype(np.uint8), 'RGBA').resize((cw, ch), Image.LANCZOS)).astype(np.float32)
         aa = r[..., 3:4]; rgb = np.where(aa > 0, r[..., :3] * 255 / np.maximum(aa, 1), 0)
         strip.paste(Image.fromarray(np.concatenate([rgb, aa], -1).clip(0, 255).astype(np.uint8), 'RGBA'), (k * cw, 0))
-    ground = float(np.median([b[3] for b in boxes[:5]]))
-    footx = float(np.median([(b[0] + b[2]) / 2 for b in boxes[:5]]))
+    nm = len(L['move']); ground = float(np.median([b[3] for b in boxes[:nm]]))
+    footx = float(np.median([(b[0] + b[2]) / 2 for b in boxes[:nm]]))
     pivot = [round((footx - ux0) * sc, 2), round((ground - uy0) * sc, 2)]
     fn = gid + '.webp'; dst = out / fn; strip.save(dst, 'WEBP', quality=90, method=6); b = dst.read_bytes()
-    rows.append({'id': gid, 'name': name, 'zone': zone, 'why': why, 'path': 'assets/r200/shades/' + fn, 'frames': 11, 'move': [0, 1, 2, 3, 4], 'attack': [5, 6, 7, 8, 9, 10],
+    rows.append({'id': gid, 'name': name, 'zone': zone, 'why': why, 'path': 'assets/r200/shades/' + fn, 'frames': 11, 'move': L['move'], 'attack': L['attack'],
                  'cell': [cw, ch], 'pivot': pivot, 'visibleHeight': TARGET_H, 'facing': 'right', 'bytes': len(b), 'sha256': sha(b),
                  'source': {'sheet': sheets[sheet], 'row': row + 1, 'cells': '1-11 of 12'}})
     print(gid, zone, 'cell', cw, ch, 'pivot', pivot, 'bytes', len(b))
 (out / 'index.json').write_text(json.dumps({'schema': 'storyworld.r200.shades/v1', 'revision': 'R200',
-    'note': 'Drive 2026-11-01 몹 스프라이트시트 01~06(사용자 업로드) 파생본. 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.',
+    'note': 'Drive 2026-11-01 몹 스프라이트시트 01~08(사용자 업로드) 파생본. 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.',
     'sheets': sheets, 'mobs': rows, 'unused': [{'sheet': s, 'row': r + 1, 'name': n, 'why': w} for s, r, n, w in UNUSED]}, ensure_ascii=False, indent=1))
 print(len(rows), 'mobs')
