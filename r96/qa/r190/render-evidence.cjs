@@ -1,0 +1,5 @@
+'use strict';
+const fs=require('node:fs'),{execFileSync}=require('node:child_process');const {fixture}=require('./pixelfx-fixture.cjs');
+(async()=>{const source=execFileSync('git',['show','4473f2a5f48b8abf175119dd924f3ba0859d6327:r96/client-source/pixelfx-r163.js'],{encoding:'utf8'});
+for(const after of [false,true]){const f=await fixture(after?{overlay:true}:{source});f.P.play('core-orb-teal',480,430,{key:'core',loop:true,k:2.2});for(let i=0;i<64;i++)f.P.play('pvfx-electric-impact',10000,10000);f.step(.4);f.draw();const c=f.ctx;c.globalCompositeOperation='destination-over';c.fillStyle='#171114';c.fillRect(0,0,960,640);c.globalCompositeOperation='source-over';c.fillStyle='#e2d1b8';c.font='24px sans-serif';c.fillText(after?'AFTER: admitted core survives':'BEFORE: live core evicted',28,45);c.font='16px sans-serif';c.fillText('Native Canvas fixture — existing game atlas, not a hospital/GPU screenshot',28,78);c.fillText('1 looping core + 64 new offscreen effects; t = 0.4 sec',28,105);fs.writeFileSync('docs/r190/overflow-'+(after?'after':'before')+'.png',f.canvas.toBuffer('image/png'));}
+})().catch(e=>{console.error(e);process.exitCode=1});

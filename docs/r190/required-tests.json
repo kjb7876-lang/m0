@@ -1,0 +1,34 @@
+[
+  {
+    "command": "node r96/qa/r103/samong-cpu-check.cjs",
+    "exitCode": 0,
+    "tail": [
+      "PASS Michaela every 777 points",
+      "{\"checks\":42,\"failed\":0}"
+    ]
+  },
+  {
+    "command": "node r96/qa/r104/bosses-cpu-check.cjs",
+    "exitCode": 0,
+    "tail": [
+      "PASS every phase-limited id has data",
+      "ALL PASS 10"
+    ]
+  },
+  {
+    "command": "node r96/qa/r105/samong-maps-cpu-check.cjs",
+    "exitCode": 0,
+    "tail": [
+      "PASS place() fills every planned stage",
+      "{\"checks\":26,\"failed\":0}"
+    ]
+  },
+  {
+    "command": "node r96/qa/r163/pixelfx-cpu-check.cjs",
+    "exitCode": 0,
+    "tail": [
+      "PASS generator script is in the repo",
+      "all 12 passed"
+    ]
+  }
+]

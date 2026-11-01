@@ -9,6 +9,8 @@
 | systematic-debugging, verification-before-completion, test-driven-development, writing-plans, executing-plans, requesting-code-review, receiving-code-review, writing-skills | github.com/obra/superpowers @ 2ce8aa1 | MIT (각 폴더 LICENSE) | 원문 그대로 |
 | ponytail, ponytail-review | github.com/DietrichGebert/ponytail @ 96608e0 | MIT | 원문 그대로(플러그인의 세션 훅은 넣지 않음 — 부를 때만 적용) |
 | ui-ux-pro-max | github.com/nextlevelbuilder/ui-ux-pro-max-skill @ 9a3f14f | MIT | 원문 그대로, 검색 스크립트는 python3 필요 |
+| performance-optimization | github.com/gamedev-skills/awesome-gamedev-agent-skills @ 19d93f97c9c1ea0f8b306e77aa81e0d3e352d3e9 | Apache-2.0 (폴더 LICENSE·NOTICE) | R190: 동일 장면 측정·캐시·할당·리소스 예산; 원문 그대로, 실행 스크립트 없음 |
+| threejs-debug-profiler | github.com/majidmanzarpour/threejs-game-skills @ 8286774b22a2566bf894dbc825825c16921866af | MIT (폴더 LICENSE) | R190: Three.js 렌더·로딩·텍스처 진단; 원문 그대로, 실행 스크립트 없음 |
 
 ## 넣지 않은 것과 이유
 - superpowers `using-superpowers`: "어떤 답이든 먼저 스킬을 부르라"를 모든 세션에 강제한다 — 기존 작업 흐름을 통째로 바꾼다.
@@ -29,3 +31,9 @@
 - 결과는 웹사이트용 기준(네온·사이버펑크·평면 대시보드 등)이 많다. 그대로 쓰지 않고 `storyworld-art-style` 규칙(손으로 칠한 고딕 호러, 핏빛·금빛·청록)에 맞는 것만 고른다.
 - 쓸 만한 쪽: `-d ux`(간격·대비·터치 크기), `-d typography`, `-d color` 의 대비 판단. 색 자체는 게임 문서를 따른다.
 - 2026-10-31 시험: "dark gothic horror game HUD" → cyberpunk-ui, hud-sci-fi-fui, dark-mode-oled(색은 게임과 안 맞음, 대비·reduced-motion 점검 목록만 참고). "game hud health bar hotbar"(-d ux) → 일치 없음.
+
+## R190 프로젝트 범위 적용
+
+- [검사·선정·SHA-256 기록](../../docs/r190/skills-audit.md): 요청한 10개 스킬을 검토하고 필요한 두 문서형 스킬만 추가했다. 기존 12개 스킬은 유지한다.
+- 외부 문서의 다른 스킬·생성기·명령어 언급은 자동 설치나 호출 지시가 아니다. 유료 API(Tripo·Gemini·ElevenLabs 포함), 자격증명 생성, 새 프로젝트/Vite/TypeScript 전환을 실행하지 않는다.
+- 해상도·원본 자산·전투·AI·맵·서사·저장 형식 보존과 기존 QA를 우선한다. 추정 성능이나 헤드리스 수치를 실기기 달성 수치로 보고하지 않는다.

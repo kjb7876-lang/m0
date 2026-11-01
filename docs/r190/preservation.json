@@ -1,0 +1,18 @@
+{
+  "baseline": "4473f2a5f48b8abf175119dd924f3ba0859d6327",
+  "protectedTrackedFiles": 1350,
+  "changedProtectedFiles": [],
+  "runtimeFiles": 4192,
+  "runtimeHashMismatches": [],
+  "newOverlayLoadedBeforePixelfx": true,
+  "note": "Runtime binding/build verification; not actual GPU execution or save migration test.",
+  "changedExistingRuntimePaths": [
+    "index.html",
+    "pixelfx-r163.js"
+  ],
+  "addedRuntimePaths": [
+    "fx-performance-r190.js"
+  ],
+  "removedRuntimePaths": [],
+  "unchangedExistingRuntimeFiles": 4189
+}

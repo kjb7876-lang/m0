@@ -20463,6 +20463,11 @@
       "sha256": "b63f178e1317e64c41bc70d2c8e467af2787d9b4533503407f4e4fa45aaebe27"
     },
     {
+      "path": "fx-performance-r190.js",
+      "bytes": 2723,
+      "sha256": "9118fab66aec9232be5f96a435fc8dd0f025784a4b59ce1313d91e21d201e6d8"
+    },
+    {
       "path": "fx-sprites-r106.js",
       "bytes": 13208,
       "sha256": "bc580d05a893a3eda61a1494236c4a7235972ee03bec5f1ae74dbd719b84b1cc"
@@ -20534,8 +20539,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564673,
-      "sha256": "ed8323f3b9397304c827cfaf4c647aa0f49b55d90fe1629b1c844412deda83cb"
+      "bytes": 6564721,
+      "sha256": "63d64c5fec1033602061e935623c7265c7e8b06052baf4ec1ad1bb2e3a482295"
     },
     {
       "path": "intro-r140.js",
@@ -20624,8 +20629,8 @@
     },
     {
       "path": "pixelfx-r163.js",
-      "bytes": 7988,
-      "sha256": "5cb660b64061d4eec958150958309a26dc526e6efcc1dd435375b7f1d9de1eec"
+      "bytes": 8303,
+      "sha256": "6272c2bf03c9411574a898e0544a95652fb31f78f197012f1e2fc6075f43424e"
     },
     {
       "path": "play-r106.js",
@@ -20958,9 +20963,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4191,
-  "totalBytes": 797121452,
-  "webHTMLSha256": "ed8323f3b9397304c827cfaf4c647aa0f49b55d90fe1629b1c844412deda83cb",
+  "fileCount": 4192,
+  "totalBytes": 797124538,
+  "webHTMLSha256": "63d64c5fec1033602061e935623c7265c7e8b06052baf4ec1ad1bb2e3a482295",
   "largest": [
     {
       "path": "index.html",

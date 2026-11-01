@@ -1,0 +1,81 @@
+{
+  "checks": [
+    {
+      "name": "overlay loaded once before player",
+      "passed": true
+    },
+    {
+      "name": "canonical/runtime equality: fx-performance-r190.js",
+      "passed": true
+    },
+    {
+      "name": "canonical/runtime equality: pixelfx-r163.js",
+      "passed": true
+    },
+    {
+      "name": "pilot on in hospital",
+      "passed": true
+    },
+    {
+      "name": "inside preserved",
+      "passed": true
+    },
+    {
+      "name": "fully outside culled",
+      "passed": true
+    },
+    {
+      "name": "intersecting left edge preserved",
+      "passed": true
+    },
+    {
+      "name": "flipped pivot bounds respected",
+      "passed": true
+    },
+    {
+      "name": "parent translation into viewport preserved",
+      "passed": true
+    },
+    {
+      "name": "mask operation kept",
+      "passed": true
+    },
+    {
+      "name": "blurred effects kept",
+      "passed": true
+    },
+    {
+      "name": "overflow refused without dropping core",
+      "passed": true
+    },
+    {
+      "name": "key refresh allowed at capacity",
+      "passed": true
+    },
+    {
+      "name": "ended effects free slots",
+      "passed": true
+    },
+    {
+      "name": "finite loop deadline fades",
+      "passed": true
+    },
+    {
+      "name": "nonloop timing unchanged",
+      "passed": true
+    },
+    {
+      "name": "other maps inactive",
+      "passed": true
+    },
+    {
+      "name": "runtime rollback",
+      "passed": true
+    },
+    {
+      "name": "transition clears visual list",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

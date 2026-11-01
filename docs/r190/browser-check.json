@@ -1,0 +1,24 @@
+{
+  "url": "http://terminal.local:4173/r190-review.html",
+  "stage": "baseline R189",
+  "controller": {
+    "requested": "three",
+    "requiredThree": true,
+    "active": "legacy",
+    "reason": "WebGL2 context unavailable",
+    "failed": true
+  },
+  "gameErrors": [],
+  "hospitalFixture": "restore:true redirected locked ep1a08 to hub; no hospital screenshot claimed",
+  "screenshot": "docs/r190/browser-webgl-blocked.jpg",
+  "playwright": "launch failed: chromium_headless_shell-1234 executable absent; install chromium failed: downloaded file not valid ZIP",
+  "actualGPUFramesMeasured": false,
+  "mobileDeviceVerified": false,
+  "officialChromeAttempt": {
+    "version": "156.0.8078.80",
+    "download": "successful; official Chrome for Testing JSON and ZIP verified",
+    "rootLaunch": "sandboxed launch refused: running as root without --no-sandbox unsupported",
+    "nonRootLaunch": "runuser cannot set groups: Operation not permitted",
+    "sandboxDisabled": false
+  }
+}

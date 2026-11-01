@@ -1,0 +1,41 @@
+{
+  "source": "https://quaternius.com/packs/ultimatemonsters.html",
+  "author": "Quaternius",
+  "license": "CC0 1.0 Universal",
+  "commercialUse": "Explicitly permitted by original pack page",
+  "officialDownloadFolder": "https://drive.google.com/drive/folders/18m4KpzpEzhC9wl7jzr6dUc0N8Jozr79C",
+  "downloadFile": "https://drive.google.com/file/d/1ehcq9DH5LXAlZKMRJNr2_w1xeVXScGGx/view?usp=drivesdk",
+  "downloadMethod": "Google Drive connector raw file reference; materialized using its returned authenticated URL without persisting that temporary URL",
+  "downloadStatus": "success; bytes agree with Drive metadata and Blender header validated",
+  "bytes": 2985780,
+  "sha256": "86a9aebbfe9fd4ae55828517f101867338848f4096e2609117c3c0d68520e09b",
+  "header": "BLENDER-v306",
+  "path": "asset-staging/r190/originals/Demon.blend",
+  "sourceDimensions": {
+    "DemonMesh": [
+      3.1286487579345703,
+      1.6321457624435425,
+      2.9410927295684814
+    ],
+    "TridentMesh": [
+      1.5458130836486816,
+      0.6644452810287476,
+      1.8633275032043457
+    ]
+  },
+  "includedLicenseFile": "https://drive.google.com/file/d/16GqsDGESyEOfRbc4dS7EqAwkIUSIW4_y/view?usp=drivesdk",
+  "licenseDiscrepancy": "Included License.txt names Ultimate Platformer Pack, while original Ultimate Monsters page and its linked folder identify this model and explicitly state CC0. Do not conceal mismatch.",
+  "conversion": "Blender 4.5.15 LTS, disabled source scripts, CPU Cycles 24 samples, orthographic 30deg camera, fixed foot-reference pivot (96,226), 4 directions x 4 Idle frames, RGBA 192x256, shadow catcher, source atlas unchanged; outputs in monster-proof/; shadow catcher limited to radius 1.2 disc; residual alpha haze explicitly fails corner gate",
+  "appliedPath": null,
+  "status": "independent 16-frame proof rendered; rejected for art mismatch and residual corner alpha",
+  "blockers": [],
+  "unverified": [
+    "full Walk/Run/Weapon/Death loops",
+    "in-game monster size and occlusion",
+    "natural gameplay appearance"
+  ],
+  "artDecision": "Do not apply: rounded cartoon geometry/flat atlas shading conflict with painted Gothic horror; corner alpha 5\u201312/255 also fails sprite transparency gate",
+  "proofManifest": "asset-staging/r190/monster-proof/render-manifest.json",
+  "proofValidation": "asset-staging/r190/monster-proof/validation.json",
+  "toolsReceipt": "asset-staging/r190/blender-download-receipt.json"
+}

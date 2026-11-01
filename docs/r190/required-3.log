@@ -1,0 +1,13 @@
+PASS pixelfx-r163.js runtime copy matches
+PASS index names the source repo, commit and MIT license (with the Sprite Fusion notice)
+PASS all 11 game effects are present (R165 +3; R166 dropped poof-ash for painted smoke)
+PASS every sheet matches its recorded sha256/bytes and frame table
+PASS sheets are softened toward the painted game style (R166) and each stays under 800 KB
+PASS each sheet stays under 800 KB
+PASS pixelfx-r163.js is loaded
+PASS samong boss tentacles / meteor / clone dash end use the sheets (with the old drawing as fallback)
+PASS fragment pickup bursts, purification core glows and bursts (R188: blood burst instead of the hit-flash doll sheet)
+PASS B midboss rises from blood hands
+PASS 5-hit combo burst plays crit-hit
+PASS generator script is in the repo
+all 12 passed

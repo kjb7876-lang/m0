@@ -1,0 +1,26 @@
+{
+  "source": "https://opengameart.org/content/animated-particle-effects-2",
+  "downloadUrl": "https://opengameart.org/sites/default/files/blood_hit_02.png",
+  "author": "para",
+  "license": "CC0 1.0",
+  "downloadStatus": 200,
+  "bytes": 38081,
+  "sha256": "eef5bcd4096e70a1c52a060731108a4bc6e868ae65a7fc0f5467878f65180fc1",
+  "dimensions": [
+    512,
+    512
+  ],
+  "format": "PNG",
+  "mode": "RGBA",
+  "frameCell": [
+    128,
+    128
+  ],
+  "frames": 16,
+  "fps": 30,
+  "path": "asset-staging/r190/originals/para-blood-hit-02.png",
+  "conversion": "none — original preserved",
+  "appliedPath": null,
+  "status": "rejected for runtime after sheet inspection",
+  "rejection": "Flat monochrome red silhouette and stepped edge do not improve the existing painted R106 smoke / R163 blood explosion. No additional runtime bytes or draw calls justified."
+}

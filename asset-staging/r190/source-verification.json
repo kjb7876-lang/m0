@@ -1,0 +1,76 @@
+{
+  "checkedDate": "2026-11-01",
+  "method": "urllib via inherited proxy, TLS verification enabled; source page facts only; asset download status tracked separately",
+  "sources": {
+    "kenney-particle-pack": {
+      "url": "https://kenney.nl/assets/particle-pack",
+      "status": 200,
+      "pageBytes": 18215,
+      "pageSha256": "56bc1533c0ecc82decd33399ad9056a95e4ff015209dfb8fa9d3152fc441e5a6",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": false
+    },
+    "kenney-smoke-particles": {
+      "url": "https://kenney.nl/assets/smoke-particles",
+      "status": 200,
+      "pageBytes": 18424,
+      "pageSha256": "bbcfeec30fbadb53573c1d8b75a405e70ac8d43b51826827353fb8ddde191da1",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": false
+    },
+    "oga-animated-particle-effects-2": {
+      "url": "https://opengameart.org/content/animated-particle-effects-2",
+      "status": 200,
+      "pageBytes": 66364,
+      "pageSha256": "69419dc67b1e495b3932f0103d859b0be08ec0fa05168aabc30a27bed6f90c04",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "http://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": false
+    },
+    "kenney-rpg-audio": {
+      "url": "https://kenney.nl/assets/rpg-audio",
+      "status": 200,
+      "pageBytes": 17885,
+      "pageSha256": "52d6c63c94061fd5a7b1d7d8ec5f879eba8c04a125fb223911270e3994633856",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": false
+    },
+    "kenney-impact-sounds": {
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "status": 200,
+      "pageBytes": 17723,
+      "pageSha256": "f14a01829b52e4f43bf7f507e673e71987cf20a5004ed5913cd627832b0abcd1",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": false
+    },
+    "polyhaven-license": {
+      "url": "https://polyhaven.com/license",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    "quaternius-ultimate-monsters": {
+      "url": "https://quaternius.com/packs/ultimatemonsters.html",
+      "status": 200,
+      "pageBytes": 14972,
+      "pageSha256": "5adff0c0a2d5677f59b9810cf7e40d13a72234dafcd1b50968dbdb149c9cb563",
+      "cc0Mention": true,
+      "licenseLinks": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "commercialMention": true
+    }
+  }
+}

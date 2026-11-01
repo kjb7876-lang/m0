@@ -1,0 +1,11 @@
+PASS 45 key-pose sets (R104 44 + R119 c104-boss) — 45
+PASS R105 Chapter6/7 ids present
+PASS every frame file exists
+PASS frame sizes and pivots match the data
+PASS overlay installs — {"draws":0,"swapped":0,"patchedFrames":2,"skippedPhase":0,"loading":0,"failures":0}
+PASS logic reads the original frame
+PASS own draw shows recovery idle and strike poses — ["mb-dist03","assets/r104/bosses/mb-dist03-p4.webp","assets/r104/bosses/mb-dist03-p2.webp",null]
+PASS another enemy's draw keeps the original — ["mb-dist04","assets/old/mb-dist03.png","assets/old/mb-dist03.png",[{"path":"x"}]]
+PASS after drawing, logic reads the original again
+PASS every phase-limited id has data
+ALL PASS 10

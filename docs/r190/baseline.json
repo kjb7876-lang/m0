@@ -1,0 +1,27 @@
+{
+  "kind": "Native Canvas CPU fixture; no browser/GPU/FPS claim",
+  "scenarios": [
+    {
+      "offscreen": false,
+      "coldMs": 106.46603099999999,
+      "p50Ms": 0.6017219999999952,
+      "p95Ms": 1.4025930000000244,
+      "draws": 5808,
+      "reads": 1,
+      "pixels": 3888640
+    },
+    {
+      "offscreen": true,
+      "coldMs": 80.941012,
+      "p50Ms": 0.6508729999999332,
+      "p95Ms": 1.1674889999999323,
+      "draws": 5808,
+      "reads": 1,
+      "pixels": 3888640
+    }
+  ],
+  "overflow": {
+    "coreSurvives": false,
+    "active": 64
+  }
+}

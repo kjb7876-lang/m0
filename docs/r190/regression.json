@@ -1,0 +1,81 @@
+{
+  "checks": [
+    {
+      "name": "visible pixels identical",
+      "passed": true
+    },
+    {
+      "name": "edge pixels identical",
+      "passed": true
+    },
+    {
+      "name": "flip pixels identical",
+      "passed": true
+    },
+    {
+      "name": "transformed pixels identical",
+      "passed": true
+    },
+    {
+      "name": "offscreen pixels identical",
+      "passed": true
+    },
+    {
+      "name": "offscreen performs no draw or recolor",
+      "passed": true
+    },
+    {
+      "name": "offscreen keeps lifetime",
+      "passed": true
+    },
+    {
+      "name": "raised pixels identical",
+      "passed": true
+    },
+    {
+      "name": "saturated pool retains live core",
+      "passed": true
+    },
+    {
+      "name": "pool remains bounded at 64",
+      "passed": true
+    },
+    {
+      "name": "key refresh still works at capacity",
+      "passed": true
+    },
+    {
+      "name": "expired one shots free admission capacity",
+      "passed": true
+    },
+    {
+      "name": "deadline has smooth tail",
+      "passed": true
+    },
+    {
+      "name": "ordinary one shots unchanged",
+      "passed": true
+    },
+    {
+      "name": "other maps preserve existing admission behavior",
+      "passed": true
+    },
+    {
+      "name": "map transition clears only visual list",
+      "passed": true
+    },
+    {
+      "name": "frameAt translated into view draws",
+      "passed": true
+    },
+    {
+      "name": "disable restores draw path",
+      "passed": true
+    },
+    {
+      "name": "mask blends keep original draw semantics",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

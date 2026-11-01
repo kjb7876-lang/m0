@@ -1,0 +1,166 @@
+{
+  "orthoScale": 5.4,
+  "result": "rejected: weapon/body edge clipping; rerender with same fixed pivot and larger orthographic field",
+  "frames": [
+    {
+      "file": "idle-back-0.png",
+      "opaqueBounds": [
+        0,
+        92,
+        172,
+        235
+      ],
+      "edgeTouch": true
+    },
+    {
+      "file": "idle-back-1.png",
+      "opaqueBounds": [
+        6,
+        91,
+        171,
+        236
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-2.png",
+      "opaqueBounds": [
+        11,
+        91,
+        169,
+        241
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-3.png",
+      "opaqueBounds": [
+        4,
+        91,
+        171,
+        235
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-0.png",
+      "opaqueBounds": [
+        20,
+        116,
+        192,
+        241
+      ],
+      "edgeTouch": true
+    },
+    {
+      "file": "idle-front-1.png",
+      "opaqueBounds": [
+        22,
+        113,
+        186,
+        236
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-2.png",
+      "opaqueBounds": [
+        24,
+        111,
+        181,
+        233
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-3.png",
+      "opaqueBounds": [
+        21,
+        115,
+        188,
+        237
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-0.png",
+      "opaqueBounds": [
+        46,
+        97,
+        139,
+        256
+      ],
+      "edgeTouch": true
+    },
+    {
+      "file": "idle-left-1.png",
+      "opaqueBounds": [
+        38,
+        96,
+        138,
+        256
+      ],
+      "edgeTouch": true
+    },
+    {
+      "file": "idle-left-2.png",
+      "opaqueBounds": [
+        34,
+        95,
+        138,
+        255
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-3.png",
+      "opaqueBounds": [
+        39,
+        96,
+        139,
+        256
+      ],
+      "edgeTouch": true
+    },
+    {
+      "file": "idle-right-0.png",
+      "opaqueBounds": [
+        53,
+        97,
+        146,
+        255
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-1.png",
+      "opaqueBounds": [
+        54,
+        96,
+        154,
+        254
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-2.png",
+      "opaqueBounds": [
+        54,
+        95,
+        158,
+        253
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-3.png",
+      "opaqueBounds": [
+        53,
+        96,
+        152,
+        256
+      ],
+      "edgeTouch": true
+    }
+  ]
+}

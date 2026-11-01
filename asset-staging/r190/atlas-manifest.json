@@ -1,0 +1,17 @@
+{
+  "source": "https://quaternius.com/packs/ultimatemonsters.html",
+  "downloadFile": "https://drive.google.com/file/d/1glCkqdNYhTv7EP9gvRIqjwTqC02zNmiM/view?usp=drivesdk",
+  "author": "Quaternius",
+  "license": "CC0 1.0 from original pack page; included pack-name discrepancy retained in monster-manifest.json",
+  "path": "asset-staging/r190/originals/Atlas_Monsters.png",
+  "bytes": 9007,
+  "sha256": "b970ed1359ce749fd81a8395d58ff5f3044d843213e17fb94b97892d417c0af9",
+  "dimensions": [
+    1024,
+    1024
+  ],
+  "mode": "RGB",
+  "conversion": "none; used as original atlas in isolated Blender proof",
+  "appliedPath": null,
+  "downloadStatus": "success; metadata bytes and PNG decode verified"
+}

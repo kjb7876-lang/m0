@@ -1,0 +1,8 @@
+{
+  "url": "https://download.blender.org/release/Blender4.5/blender-4.5.15-linux-x64.tar.xz",
+  "checksumUrl": "https://download.blender.org/release/Blender4.5/blender-4.5.15.sha256",
+  "expectedSHA256": "0d2b8bb2efe97e6c8eb57de6b7322f8800e1984e3125b60decca5f6771e4773e",
+  "actualSHA256": "0d2b8bb2efe97e6c8eb57de6b7322f8800e1984e3125b60decca5f6771e4773e",
+  "bytes": 378036492,
+  "verified": true
+}

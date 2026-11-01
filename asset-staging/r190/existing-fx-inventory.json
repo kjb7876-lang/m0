@@ -1,0 +1,79 @@
+[
+  {
+    "runtimePath": "assets/r106/fx/smoke.webp",
+    "bytes": 10942,
+    "sha256": "55c2727763f0927f6b51bb44eb59b5da9198c58f644d139e40dcf2c00dfc484e",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r106/fx/glow.webp",
+    "bytes": 3168,
+    "sha256": "a08107223476bb8f1d725fa7907367005b901c7bdbde941cd4bcff250763018c",
+    "dimensions": [
+      128,
+      128
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r163/pixelfx/crit-hit.webp",
+    "bytes": 50452,
+    "sha256": "9bee8284c7e3ba56f0f42dca794c87c202be7030b69c5bf025b8121af57ea488",
+    "dimensions": [
+      648,
+      544
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r163/pixelfx/dark-explosion-blood.webp",
+    "bytes": 634712,
+    "sha256": "d6a0f98c90c9a06abf7a2fea7db1fdbe0d8f019a2b778292d7111edb1a1ba84d",
+    "dimensions": [
+      1960,
+      1984
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r163/pixelfx/heal-aoe.webp",
+    "bytes": 266778,
+    "sha256": "65cab3a345c812ce4f278bc0444e7e271d4f4dededa8297fbe6188fa6f6ddd18",
+    "dimensions": [
+      1280,
+      1224
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r163/pixelfx/pvfx-earth-rupture.webp",
+    "bytes": 244410,
+    "sha256": "9bb05adf824f5cce50f582de1b92cc3eec360e9276b3f77d4dbba3d6408f2944",
+    "dimensions": [
+      960,
+      768
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  },
+  {
+    "runtimePath": "assets/r163/pixelfx/pvfx-warm-explosion.webp",
+    "bytes": 146626,
+    "sha256": "c9e3f171b600070ac4664317e626d7155cf771bff8985ea6fcb4fc95f22a9c2c",
+    "dimensions": [
+      960,
+      576
+    ],
+    "mode": "RGBA",
+    "status": "existing, unchanged; reuse candidate"
+  }
+]

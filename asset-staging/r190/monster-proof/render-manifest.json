@@ -1,0 +1,284 @@
+{
+  "blender": "4.5.15 LTS",
+  "engine": "Cycles CPU",
+  "samples": 24,
+  "cell": [
+    192,
+    256
+  ],
+  "camera": {
+    "type": "orthographic",
+    "elevationDegrees": 30,
+    "orthoScale": 7.2,
+    "fixedAcrossFrames": true,
+    "footReference": [
+      96,
+      226
+    ]
+  },
+  "alpha": "RGBA + transparent film + shadow catcher",
+  "originalAnimations": [
+    {
+      "name": "Death",
+      "frames": [
+        0.0,
+        23.0
+      ]
+    },
+    {
+      "name": "Duck",
+      "frames": [
+        0.0,
+        50.0
+      ]
+    },
+    {
+      "name": "HitReact",
+      "frames": [
+        0.0,
+        18.0
+      ]
+    },
+    {
+      "name": "Idle",
+      "frames": [
+        0.0,
+        30.0
+      ]
+    },
+    {
+      "name": "Jump",
+      "frames": [
+        0.0,
+        11.0
+      ]
+    },
+    {
+      "name": "Jump_Idle",
+      "frames": [
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "name": "Jump_Land",
+      "frames": [
+        0.0,
+        11.0
+      ]
+    },
+    {
+      "name": "No",
+      "frames": [
+        0.0,
+        50.0
+      ]
+    },
+    {
+      "name": "Punch",
+      "frames": [
+        0.0,
+        26.0
+      ]
+    },
+    {
+      "name": "Run",
+      "frames": [
+        0.0,
+        17.0
+      ]
+    },
+    {
+      "name": "Walk",
+      "frames": [
+        0.0,
+        30.0
+      ]
+    },
+    {
+      "name": "Wave",
+      "frames": [
+        0.0,
+        50.0
+      ]
+    },
+    {
+      "name": "Weapon",
+      "frames": [
+        0.0,
+        26.0
+      ]
+    },
+    {
+      "name": "Yes",
+      "frames": [
+        0.0,
+        50.0
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "file": "idle-front-0.png",
+      "direction": "front",
+      "sourceFrame": 0,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-front-1.png",
+      "direction": "front",
+      "sourceFrame": 8,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-front-2.png",
+      "direction": "front",
+      "sourceFrame": 16,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-front-3.png",
+      "direction": "front",
+      "sourceFrame": 24,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-right-0.png",
+      "direction": "right",
+      "sourceFrame": 0,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-right-1.png",
+      "direction": "right",
+      "sourceFrame": 8,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-right-2.png",
+      "direction": "right",
+      "sourceFrame": 16,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-right-3.png",
+      "direction": "right",
+      "sourceFrame": 24,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-back-0.png",
+      "direction": "back",
+      "sourceFrame": 0,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-back-1.png",
+      "direction": "back",
+      "sourceFrame": 8,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-back-2.png",
+      "direction": "back",
+      "sourceFrame": 16,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-back-3.png",
+      "direction": "back",
+      "sourceFrame": 24,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-left-0.png",
+      "direction": "left",
+      "sourceFrame": 0,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-left-1.png",
+      "direction": "left",
+      "sourceFrame": 8,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-left-2.png",
+      "direction": "left",
+      "sourceFrame": 16,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    },
+    {
+      "file": "idle-left-3.png",
+      "direction": "left",
+      "sourceFrame": 24,
+      "action": "Idle",
+      "pivot": [
+        96,
+        226
+      ]
+    }
+  ],
+  "runtimeApplied": false,
+  "purpose": "Independent style/proportion experiment, not final game art"
+}

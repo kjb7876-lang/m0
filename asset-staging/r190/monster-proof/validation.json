@@ -1,0 +1,463 @@
+{
+  "frames": [
+    {
+      "file": "idle-front-0.png",
+      "bytes": 20006,
+      "sha256": "80af6d528e0f8bbc5a4e510437b7e73e9cfe07a5eee18b93a6eaa8fb4473a1e2",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        39,
+        143,
+        168,
+        238
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        8,
+        6
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-1.png",
+      "bytes": 20241,
+      "sha256": "37c64d62e3630f6300b056cb6769bda624983f2139e2c7c01cf09f7f378a1264",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        40,
+        142,
+        163,
+        234
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        10,
+        7
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-2.png",
+      "bytes": 20130,
+      "sha256": "a8d146b5c30775289165bfb83b62fd499d2fd80ea5b1331ad29855200287199e",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        42,
+        140,
+        159,
+        231
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        10,
+        6
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-front-3.png",
+      "bytes": 20438,
+      "sha256": "af25c75071b46c8a524ef0452a2f1b9e5b0ba0c8de5bb2be823b1c4cc73a3d8d",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        40,
+        142,
+        165,
+        235
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        8,
+        8
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-0.png",
+      "bytes": 17265,
+      "sha256": "e28e29a76cf1b0146d54fafd5a668be3bfd0bae44ea2ccebbce71c45e9c87f74",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        64,
+        129,
+        133,
+        247
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        9
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-1.png",
+      "bytes": 17518,
+      "sha256": "8a9b0a6ab6ba027ffeaa2a5094937ad862973f6c0d1080784eacd2851e4cfd71",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        64,
+        129,
+        139,
+        247
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        8
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-2.png",
+      "bytes": 17553,
+      "sha256": "5ce221d3a5700dfd591c2a12a4698cfcb6d20cb2c3edd6b4ba36b4a7bc4a694f",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        65,
+        128,
+        142,
+        246
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        9
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-right-3.png",
+      "bytes": 17420,
+      "sha256": "17a0bdddbba6daa55ea88c7027b639e917b113cd008a685ac11941f1238303f1",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        64,
+        129,
+        138,
+        247
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        10,
+        9
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-0.png",
+      "bytes": 20918,
+      "sha256": "d4e33077a7e9c58f64247b0499ea33d210ec0cbe7eb34091e8026b08ec03a116",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        24,
+        126,
+        153,
+        232
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        7,
+        9
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-1.png",
+      "bytes": 20717,
+      "sha256": "79ab011b0dc5f72b2a61b315bde90989878cfa9c1ea212c68d16dc13cf026246",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        29,
+        125,
+        152,
+        234
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        8,
+        8
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-2.png",
+      "bytes": 20663,
+      "sha256": "f4d494eba142c238379ba0712198c343fdae97503e74a8dedc2fe40ea1d45d4b",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        33,
+        125,
+        150,
+        237
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        6,
+        9
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-back-3.png",
+      "bytes": 20857,
+      "sha256": "0a52fbedb9a077816258b7ed5a0640ba174a25253932947713264c4492663b68",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        27,
+        125,
+        152,
+        232
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        6,
+        8
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-0.png",
+      "bytes": 17026,
+      "sha256": "a456d4ed54570c165df6007340db3cf33871fecdace11d9359bd589331377ff5",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        59,
+        129,
+        128,
+        249
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        8
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-1.png",
+      "bytes": 17362,
+      "sha256": "a039b2ab0e35077ae793bcdd4f3adf08c523221ae14c38c9b558f27c02047ab6",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        53,
+        129,
+        128,
+        248
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        6
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-2.png",
+      "bytes": 17443,
+      "sha256": "9695b47330d6b6ed913375f26bfcd0cd6ebd06c2984377c27f9577cd106ff76b",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        50,
+        128,
+        127,
+        248
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        6
+      ],
+      "edgeTouch": false
+    },
+    {
+      "file": "idle-left-3.png",
+      "bytes": 17098,
+      "sha256": "a30e861fa8bb0f0d0837b8923f99b45c549b6636a9ea307e8c68e5e7c25138a2",
+      "dimensions": [
+        192,
+        256
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        54,
+        129,
+        128,
+        249
+      ],
+      "cornerAlpha": [
+        5,
+        12,
+        11,
+        7
+      ],
+      "edgeTouch": false
+    }
+  ],
+  "checks": {
+    "16Frames": true,
+    "RGBA192x256": true,
+    "noOpaqueEdgeClipping": true,
+    "distinctAnimationFrames": true,
+    "idleFootBonesStable": true,
+    "fourDirections": true,
+    "transparentCorners": false
+  },
+  "pivot": [
+    96,
+    226
+  ],
+  "shadow": "Cycles shadow-catcher pass on transparent film",
+  "artDecision": "REJECT for runtime: rounded cartoon body and flat atlas texture do not match hand-painted Gothic horror; body/weapon framing is conservative and not a game-size approval",
+  "runtimeApplied": false,
+  "unverified": [
+    "full Walk/Run/Weapon/Death loops",
+    "in-game monster scaling and occlusion",
+    "natural-play appearance"
+  ],
+  "inputs": [
+    {
+      "path": "/workspace/scratch/20e15046b657/m0/asset-staging/r190/originals/Demon.blend",
+      "sha256": "86a9aebbfe9fd4ae55828517f101867338848f4096e2609117c3c0d68520e09b",
+      "bytes": 2985780
+    },
+    {
+      "path": "/workspace/scratch/20e15046b657/m0/asset-staging/r190/originals/Atlas_Monsters.png",
+      "sha256": "b970ed1359ce749fd81a8395d58ff5f3044d843213e17fb94b97892d417c0af9",
+      "bytes": 9007
+    }
+  ],
+  "tool": {
+    "url": "https://download.blender.org/release/Blender4.5/blender-4.5.15-linux-x64.tar.xz",
+    "checksumUrl": "https://download.blender.org/release/Blender4.5/blender-4.5.15.sha256",
+    "expectedSHA256": "0d2b8bb2efe97e6c8eb57de6b7322f8800e1984e3125b60decca5f6771e4773e",
+    "actualSHA256": "0d2b8bb2efe97e6c8eb57de6b7322f8800e1984e3125b60decca5f6771e4773e",
+    "bytes": 378036492,
+    "verified": true,
+    "executableSHA256": "7421ab1c52a25df4b5dbb0f2ee3f008d9f71f4bb437ff69a1d0af78dfec50323"
+  },
+  "shadowLimitation": "Residual corner alpha 5\u201312/255; transparency gate fails; do not use as production sprite"
+}

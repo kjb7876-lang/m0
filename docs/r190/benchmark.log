@@ -1,0 +1,36 @@
+{
+  after: false,
+  offscreen: false,
+  coldMs: 94.81877899999995,
+  p50Ms: 0.6530110000001059,
+  p95Ms: 1.3806299999998828,
+  draws: 5808,
+  recoloredPixels: 3888640
+}
+{
+  after: false,
+  offscreen: true,
+  coldMs: 71.72074199999997,
+  p50Ms: 0.724496000000272,
+  p95Ms: 1.4204669999999169,
+  draws: 5808,
+  recoloredPixels: 3888640
+}
+{
+  after: true,
+  offscreen: false,
+  coldMs: 87.19049799999993,
+  p50Ms: 0.781144000000495,
+  p95Ms: 1.3778259999999136,
+  draws: 5808,
+  recoloredPixels: 3888640
+}
+{
+  after: true,
+  offscreen: true,
+  coldMs: 1.1051909999996496,
+  p50Ms: 0.4760180000002947,
+  p95Ms: 0.9922040000001289,
+  draws: 0,
+  recoloredPixels: 0
+}
