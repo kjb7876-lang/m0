@@ -12093,6 +12093,91 @@
       "sha256": "c1d79e608aa744a968496026127098726f59686a61e4bd82d52cdaad52906007"
     },
     {
+      "path": "assets/r200/shades/applause-shade.webp",
+      "bytes": 117850,
+      "sha256": "67fae8bcca21b0e01491ce25d255235f819f4a73396e5263f98df8213a2f96e0"
+    },
+    {
+      "path": "assets/r200/shades/cephalopod-invader.webp",
+      "bytes": 102528,
+      "sha256": "d890e8064cc7e2dfa49460e06cbcf8dfa3fcfa4ede0fe00ac15113c7c9bdfcb9"
+    },
+    {
+      "path": "assets/r200/shades/clockwork-legionary.webp",
+      "bytes": 101098,
+      "sha256": "e6e854547987b1cc4f92b0b79c212540314f0cbd11e2ceb2a3c6abd4ca08b099"
+    },
+    {
+      "path": "assets/r200/shades/diner-ghoul.webp",
+      "bytes": 72346,
+      "sha256": "d58e83a4f29c06f20719e7f8317a9685a07723f52645c2c0448dfd23f204d6af"
+    },
+    {
+      "path": "assets/r200/shades/extra-informant.webp",
+      "bytes": 121970,
+      "sha256": "5b8b340810bcdc0457e4a678d4f23d1847d3ddcce4e4ce9476a631fc89628645"
+    },
+    {
+      "path": "assets/r200/shades/gilded-hollow.webp",
+      "bytes": 101122,
+      "sha256": "e132dfb982cfa17b1e6ab7bda55310d45fe10ac60edf8ff8a173e719bc446a22"
+    },
+    {
+      "path": "assets/r200/shades/index.json",
+      "bytes": 13687,
+      "sha256": "6ca72718936f6bfe6a6f92a38c8570ad36e24cd8f1eb1bf04a3aeb6b677cecef"
+    },
+    {
+      "path": "assets/r200/shades/insomnia-patient.webp",
+      "bytes": 49120,
+      "sha256": "1c824a2820dd93cbff6d69b90e3c353f2e99f4953e6c61f6e5f909287c47b7f9"
+    },
+    {
+      "path": "assets/r200/shades/mannequin.webp",
+      "bytes": 108570,
+      "sha256": "c4963de706fc5d5381c2bc9df8b781fcce71fb0bf4a3e6e73b3b137c035289e6"
+    },
+    {
+      "path": "assets/r200/shades/mirror-shade.webp",
+      "bytes": 103472,
+      "sha256": "a93b9fa20cae23704b5047253a2ccdf4f09c82160033fcf4d3a6d90e4b5f7ea2"
+    },
+    {
+      "path": "assets/r200/shades/mono-fighter.webp",
+      "bytes": 119080,
+      "sha256": "720adf996919430056db8b00ee0bf27519229a093fc485c0a296023b238c90ec"
+    },
+    {
+      "path": "assets/r200/shades/paper-child.webp",
+      "bytes": 100728,
+      "sha256": "5fd2c429bcd7384cb3aee0946a577a23f48cd5b2e1d7cc721baf7ca1ce68e05e"
+    },
+    {
+      "path": "assets/r200/shades/plague-hound.webp",
+      "bytes": 138636,
+      "sha256": "5dea638e3cb5b38c6bc8fb3198695aaa2b07bd0140fa4b57e5c08508ea8ef37a"
+    },
+    {
+      "path": "assets/r200/shades/ring-sparrer.webp",
+      "bytes": 89690,
+      "sha256": "ebd244062f1e9256fa235001ee4b4f70cc9b71f52a72f5467ad28a40caf84701"
+    },
+    {
+      "path": "assets/r200/shades/stitched-golem.webp",
+      "bytes": 123528,
+      "sha256": "95921cb13dfe2f91c0d93bfd03378efd1481939b49d243fae9c5af2daa015fd4"
+    },
+    {
+      "path": "assets/r200/shades/sun-patrol.webp",
+      "bytes": 119152,
+      "sha256": "5c5202a6163440fdc601963a4fad9e045ba0df32f53248780e8aba416433dc78"
+    },
+    {
+      "path": "assets/r200/shades/tram-passenger.webp",
+      "bytes": 97234,
+      "sha256": "352e73a9e67010787fbf62ab445745aa3b72a2eb6c4d19613efbcd0ca5c11609"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20829,8 +20914,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564844,
-      "sha256": "32ed2a63809f400b94cb1bcc3a5a8cfd1b943964da90b41df25bb7dc0c499780"
+      "bytes": 6564891,
+      "sha256": "68e4393db607bb0833308730b003b3a7f44d12af6cacdbe95f76cacbdb639639"
     },
     {
       "path": "intro-r140.js",
@@ -21019,8 +21104,13 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 18938,
-      "sha256": "9b4dbf9d5a47b3d9642374c863e39b1def3ef14a0e49b4d78b62bf64049ca04d"
+      "bytes": 19027,
+      "sha256": "125a9492a91532a590be58c8dd1c0a90a1ad38eac1e0c1b1ba13c1de34924821"
+    },
+    {
+      "path": "samong-shades-r200.js",
+      "bytes": 5681,
+      "sha256": "81f969fc967a9415c175382c26b47f718a66785af9fbb5528c0610c2039777df"
     },
     {
       "path": "samong-text-r103.js",
@@ -21258,9 +21348,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4251,
-  "totalBytes": 819076705,
-  "webHTMLSha256": "32ed2a63809f400b94cb1bcc3a5a8cfd1b943964da90b41df25bb7dc0c499780",
+  "fileCount": 4269,
+  "totalBytes": 820762333,
+  "webHTMLSha256": "68e4393db607bb0833308730b003b3a7f44d12af6cacdbe95f76cacbdb639639",
   "largest": [
     {
       "path": "index.html",
