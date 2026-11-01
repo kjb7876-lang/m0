@@ -9,7 +9,7 @@ ok('in the public verify list and the CI workflow',/'story-mobs-r208\.js'/.test(
 const J=JSON.parse(RT('assets/r208/mobs/index.json'));
 ok('5 mobs, each with 10+ frames (move+attack), files present with matching sha256',J.mobs.length===5&&J.mobs.every(m=>m.frames>=10&&m.move.length+m.attack.length===m.frames&&(()=>{const b=fs.readFileSync(path.join(R,'runtime-text',m.path));return b.length===m.bytes&&crypto.createHash('sha256').update(b).digest('hex')===m.sha256;})()),J.mobs.map(m=>[m.id,m.frames]));
 const sb={console,Math,JSON,String,Number,Object,Promise,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},window:{},calls:[],time:1,room:{id:'dist00'},player:{x:10,y:0},
- fetch:()=>Promise.resolve({ok:true,json:()=>J}),setTimeout:(f)=>0};vm.createContext(sb);
+ readyImage:()=>({image:{naturalWidth:9}}),fetch:()=>Promise.resolve({ok:true,json:()=>J}),setTimeout:(f)=>0};vm.createContext(sb);
 vm.runInContext(`window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({frameFor:(e,f)=>({path:'orig'})});
  function shadow(x,y,r,opt){calls.push(['shadow']);} function drawEnemy(e){calls.push(['lift',e.visualLiftPx]);if(!(e.visualLiftPx>0))e.__hovered=true;shadow(e.x,e.y,18,{});}`,sb);
 vm.runInContext(C('mob-ground-r206.js'),sb);vm.runInContext(C('story-mobs-r208.js'),sb);
@@ -31,6 +31,7 @@ vm.runInContext(C('mob-ground-r206.js'),sb);vm.runInContext(C('story-mobs-r208.j
  sb.calls.length=0;vm.runInContext(`globalThis.G={id:'m1',name:'침식 근위',x:1,y:1,hp:5,r208Mob:'root-bound-ghoul'};drawEnemy(G)`,sb);
  ok('drawn grounded: tiny lift blocks R109 hover, no contact shadow, lift restored',sb.calls.length===1&&sb.calls[0][1]===.001&&!vm.runInContext('G.__hovered',sb)&&!('visualLiftPx' in vm.runInContext('G',sb)),sb.calls);
  ok('R206 treats R208 mobs as grounded',sb.window.__STORYWORLD_MOB_GROUND_R206__.floating({r208Mob:'x',name:'날개'},{})===false);
- sb.window.__STORYWORLD_STORY_MOBS_R208__.set({on:false});ok('switching off restores the original art',ff(`{id:'z',name:'침식 근위',x:1,y:1,hp:5}`).path==='orig');
+ sb.window.__STORYWORLD_STORY_MOBS_R208__.set({on:false});vm.runInContext("globalThis.readyImage=p=>p==='assets/r208/mobs/root-bound-ghoul.webp'?{image:{naturalWidth:0}}:{image:{naturalWidth:9}}",sb);ok('before the sheet is loaded the original art is used (no empty body)',ff(`{id:'w1',name:'침식 근위',x:1,y:1,hp:5}`).path==='orig');vm.runInContext('globalThis.readyImage=()=>({image:{naturalWidth:9}})',sb);
+ok('switching off restores the original art',ff(`{id:'z',name:'침식 근위',x:1,y:1,hp:5}`).path==='orig');
  let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
  if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');})();

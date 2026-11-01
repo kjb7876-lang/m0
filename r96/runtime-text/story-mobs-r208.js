@@ -11,7 +11,7 @@
 //  · 보스·페르소나와 이름 붙은 중간보스(보라검천사 등)는 건드리지 않는다. storyworld.r208.mobs {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_STORY_MOBS_R208__)return;
-const REV='R208-mobs-1',KEY='storyworld.r208.mobs',INDEX='assets/r208/mobs/index.json';
+const REV='R208-mobs-2',KEY='storyworld.r208.mobs',INDEX='assets/r208/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,grounded:0,reinstalls:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 지역·이름 → 그림 id. 정본 이름("…증원/추격대/후속 증원", "중간보스 · …" 변형 포함)으로 고른다.
@@ -22,7 +22,7 @@ const RULES=[
  {zone:'dist03',re:/피냄새 추적자/,id:'ember-hound'},
  {zone:'dist04',re:/피로 꿰맨 전령/,id:'twin-head-corpse'}];
 let idx=null;const byId=id=>idx?.mobs?.find(m=>m.id===id)||null;
-if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
+if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs){idx=j;try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(j.mobs.map(m=>m.path))).catch(()=>{});}catch(_){}}}).catch(fail);
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;return (h>>>0)/4294967296;};
 const major=e=>!!(e&&(e.boss||e.persona||e.cosmic||e.trial||e.samongR103));
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?(room.id||''):'');}catch(_){return '';}};
@@ -43,7 +43,7 @@ function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||1
 // 다른 덧씌우기가 나중에 frameFor 를 바꿔 끼워도 가장 바깥에 다시 선다(20초 동안 확인).
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r208)return true;
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r208:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){
-   if(typeof readyImage==='function'&&!readyImage(m.path)&&typeof ensureImages==='function')Promise.resolve(ensureImages([m.path])).catch(()=>{});
+   if(typeof readyImage!=='function'||!(readyImage(m.path)?.image?.naturalWidth>0)){if(typeof ensureImages==='function')Promise.resolve(ensureImages([m.path])).catch(()=>{});stats.waiting=(stats.waiting||0)+1;return S.frameFor(e,f);}/* 그림이 읽히기 전에는 원래 그림(몸이 비지 않게) */
    stats.frames++;return frameOf(e,m);}}catch(err){fail(err);}return S.frameFor(e,f);}});stats.reinstalls++;return true;}
 let tries=0;(function arm(){try{install();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 // 땅에 붙이기: R109 호버는 visualLiftPx 가 이미 양수면 손대지 않는다 → 아주 작은 값(0.001px)을 잠깐 넣어 막는다. R206 은 0.5px 이하를 접지로 본다.

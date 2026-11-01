@@ -38,3 +38,8 @@ Drive 몹 스프라이트시트 15(ID 1j2ydPaA6To8EHsDg_btRi8fipLLiLkli)·16(ID 
 전수 검사 projectile 의 "dist01 baffle 시작점" 검사가 CPU 부하에 따라 통과·실패가 갈렸다: 렌더가 검사보다 먼저 돌면 R204 거리장이 생겨 시작점(바위 언덕 안)이 막힘.
 투사체는 원래 terrainContact153 으로 벽을 판정하므로, R204 바위 언덕 판정을 몸 크기(반지름 > .2: 영웅·몹·길잡이 .29) 질의에만 적용해 결정적으로 만들었다.
 단독 실행 13/13 확인 후 수정, 4묶음(projectile·environment·campaign-map-admission·map-perimeter) 재실행.
+
+## 5. CI enemy-facing 수정
+PR #132 첫 CI 에서 전수 검사 enemy-facing("모든 탐침에서 몸 프레임이 그려진다")이 dist01 거미줄에 묶인 수호병에서 실패.
+원인: R208 시트가 아직 읽히지 않았을 때도 새 프레임을 돌려줘 엔진이 몸을 그리지 못함(그 순간 몸이 빔).
+수정: 시트가 읽히기 전(naturalWidth 0)에는 원래 그림을 쓰고, 색인을 받으면 시트 5장을 미리 읽는다. 로컬 enemy-facing 통과.
