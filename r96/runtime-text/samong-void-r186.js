@@ -21,7 +21,8 @@ function install(){const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!
   const mesh=r.r186Void;mesh.visible=true;const s=performance.now()/1000,k=.9+.1*Math.sin(s*.7);mesh.material.color.setRGB(1.25*k,1.0*k,1.0*k);}
  const renderBase=C.render;C.render=function(frame){try{sync(this,frame);}catch(e){fail(e);}return renderBase.call(this,frame);};
  /* perf-r97 이 렌더러 인스턴스에 render 를 복사해 두므로(이 파일보다 먼저 설치되면 위 prototype 손질이 안 탐) 인스턴스도 감싼다 */
- const wrapInst=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r||!Object.prototype.hasOwnProperty.call(r,'render')||r.render.__r186)return;const b=r.render;const w=function(frame){try{sync(this,frame);}catch(e){fail(e);}return b.call(this,frame);};w.__r186=true;r.render=w;stats.instWrapped=(stats.instWrapped||0)+1;}catch(e){fail(e);}};
+ const WRAPPED=new WeakSet();
+ const wrapInst=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r||!Object.prototype.hasOwnProperty.call(r,'render')||WRAPPED.has(r))return;WRAPPED.add(r);/* R192: 렌더러마다 한 번만 — 예전엔 R186·R188 이 서로의 감싸기를 보고 0.5초마다 다시 감싸 사슬이 끝없이 길어졌다(렉·스택 초과) */const b=r.render;const w=function(frame){try{sync(this,frame);}catch(e){fail(e);}return b.call(this,frame);};w.__r186=true;r.render=w;stats.instWrapped=(stats.instWrapped||0)+1;}catch(e){fail(e);}};
  setInterval(wrapInst,500);wrapInst();
  const clearBase=C.clearScene;C.clearScene=function(...a){try{drop(this);}catch(e){fail(e);}return clearBase.apply(this,a);};return true;}
 let ok=false;try{ok=install();}catch(e){fail(e);}

@@ -11813,6 +11813,26 @@
       "sha256": "df6fbe1293c1b067d3263c9ead572c8c7f4068271817571cb72f64a44b938489"
     },
     {
+      "path": "assets/r190/blood/blood-burst.webp",
+      "bytes": 46902,
+      "sha256": "3543bf9d3a9ec9a8c9363968c42f813e986eb02d37e351e653f3092ced82a442"
+    },
+    {
+      "path": "assets/r190/blood/blood-death.webp",
+      "bytes": 50398,
+      "sha256": "ac0d315d9d3780ffa648907863fd502d147f20ee8e5f19b05a8bb46b7c7b85dd"
+    },
+    {
+      "path": "assets/r190/blood/blood-splash.webp",
+      "bytes": 42724,
+      "sha256": "2eb64e13d104c528077b02485ff927d400155faa12039982d9d9782f76b21e86"
+    },
+    {
+      "path": "assets/r190/blood/index.json",
+      "bytes": 2147,
+      "sha256": "b47c782b41ff937074e00e6131ad9b587d4d06fda0accd869298cd9a5f23bd97"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20389,8 +20409,8 @@
     },
     {
       "path": "edges-r188.js",
-      "bytes": 7299,
-      "sha256": "5f72a0f26c314a57efa24d94126b5703d058cb9eb2d287ab55cf696d7ec796d6"
+      "bytes": 7520,
+      "sha256": "7b0721283fe7359de00ab68799d51faf7b209063ae6ce0b6a446e990e62a69aa"
     },
     {
       "path": "effect-presentation-r83.js",
@@ -20418,6 +20438,11 @@
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
     },
     {
+      "path": "era-r191.js",
+      "bytes": 4378,
+      "sha256": "fb5c5aa6f554cff679e972461968048b6c736df115ac8e813e97a587169b7e85"
+    },
+    {
       "path": "feet-r143.js",
       "bytes": 2601,
       "sha256": "6bdcd5c73f0abd9c19f296d4f3a7697e8c47b78df758c9380c91bf03cdac1a7e"
@@ -20441,6 +20466,11 @@
       "path": "final42-runtime-r88.js",
       "bytes": 20997,
       "sha256": "f0201ecfd605210a91455ad2ee54091a0b6ba72e57540879330c1f6ccd3675f3"
+    },
+    {
+      "path": "fx-blood-r190.js",
+      "bytes": 5258,
+      "sha256": "b4220aa8f6c565ae5f49826368b7b94685103f2e1a66916d802a5776254151ce"
     },
     {
       "path": "fx-boss-r105.js",
@@ -20534,8 +20564,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564673,
-      "sha256": "ed8323f3b9397304c827cfaf4c647aa0f49b55d90fe1629b1c844412deda83cb"
+      "bytes": 6564752,
+      "sha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e"
     },
     {
       "path": "intro-r140.js",
@@ -20734,8 +20764,8 @@
     },
     {
       "path": "samong-void-r186.js",
-      "bytes": 4573,
-      "sha256": "7020cb16973da513057cea14d72af232116917bc954d5dbb70dee32cd21f5ce6"
+      "bytes": 4794,
+      "sha256": "e0a0f613dee5a9c869361b1feabb8df5ab7658af9c1c42b7304b5a5a5e20fb21"
     },
     {
       "path": "samong-zones-r115-data.js",
@@ -20759,8 +20789,8 @@
     },
     {
       "path": "skills-r181.js",
-      "bytes": 7582,
-      "sha256": "b7d139c02dd964efdb10887b73983605789f65eebb128081c1b9e0df0e548836"
+      "bytes": 7921,
+      "sha256": "47219fdaaeab606f603b60e7269d6860962cba1e2061939ebf7464eea25a6d98"
     },
     {
       "path": "status-r96.js",
@@ -20958,9 +20988,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4191,
-  "totalBytes": 797121452,
-  "webHTMLSha256": "ed8323f3b9397304c827cfaf4c647aa0f49b55d90fe1629b1c844412deda83cb",
+  "fileCount": 4197,
+  "totalBytes": 797274119,
+  "webHTMLSha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e",
   "largest": [
     {
       "path": "index.html",

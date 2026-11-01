@@ -43,7 +43,8 @@ function install(){const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!
    mesh.userData={presentationOnly:true,r188Edge:true,collisionChanged:false};r.spatialRoot.add(mesh);r.spatialResources?.add(mat);r.r188Edge=mesh;stats.built++;}
   if(r.r188Edge){r.r188Edge.visible=true;if(sam){const k=.9+.1*Math.sin(performance.now()/1000*.7);r.r188Edge.material.color.setRGB(1.25*k*.86,1.0*k*.86,1.0*k*.86);}}}
  const renderBase=C.render;C.render=function(frame){try{sync(this,frame);}catch(e){fail(e);}return renderBase.call(this,frame);};
- const wrapInst=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r||!Object.prototype.hasOwnProperty.call(r,'render')||r.render.__r188)return;const b=r.render;const w=function(frame){try{sync(this,frame);}catch(e){fail(e);}return b.call(this,frame);};w.__r188=true;r.render=w;}catch(e){fail(e);}};
+ const WRAPPED=new WeakSet();
+ const wrapInst=()=>{try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r||!Object.prototype.hasOwnProperty.call(r,'render')||WRAPPED.has(r))return;WRAPPED.add(r);/* R192: 렌더러마다 한 번만 — 예전엔 R186·R188 이 서로의 감싸기를 보고 0.5초마다 다시 감싸 사슬이 끝없이 길어졌다(렉·스택 초과) */const b=r.render;const w=function(frame){try{sync(this,frame);}catch(e){fail(e);}return b.call(this,frame);};w.__r188=true;r.render=w;}catch(e){fail(e);}};
  setInterval(wrapInst,500);wrapInst();
  const clearBase=C.clearScene;C.clearScene=function(...a){try{drop(this);}catch(e){fail(e);}return clearBase.apply(this,a);};return true;}
 let ok=false;try{ok=install();}catch(e){fail(e);}

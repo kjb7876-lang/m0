@@ -36,3 +36,16 @@
 - 전달 ZIP은 개당 3,000,000바이트 이하로 나누고 SHA-256 목록·파일 목록·README·자산 적용표·미검증 목록을 함께 둔다. ChatGPT Library에 새 파일을 올리거나 기존 파일을 삭제·공유 확대하지 않는다.
 - 최종 보고에는 완료한 작업과 동작 변화, 사용한 스킬·도구, 실행한 검사와 결과, 커밋 SHA·PR·CI·배포 링크, 남은 문제와 미검증 항목(예정/진행 중/완료/실패/미실행), 사용자가 할 정확한 단계를 적는다.
 - 권한·보안·샌드박스 거부, 유료 API·새 비용·인증정보 생성이 필요하면 그 단계만 멈추고 정확한 필요 사항을 보고한다. 유료 결제는 하지 않는다.
+
+## 작업 학습 메모(세션에서 확인한 함정·요령 — 사용자 2026-11-01 "유용한 건 따로 기억해서 저장")
+- **빌드 연결**: 새 오버레이는 `runtime-text/index.html` 스크립트 태그(combat-r118·world-tiles-r118 가 맨 끝), `qa/r176` 순서 정규식, `scripts/verify-r96-public.py` 기대 목록, `.github/workflows/pages.yml` CPU 검사 줄, `sync-r99.py <새 파일>` 다섯 곳 모두에 넣는다. `r96/qa` 는 gitignore 라 `git add -f`. sync 후 `runtime-manifest.json` 충돌은 손으로 고치지 말고 sync 를 다시 돌린다.
+- **Three.js 기록기 CSS filter**: brightness·contrast·saturate·grayscale·hue-rotate 만 된다. `drop-shadow`·`blur` 를 게임 ctx.filter 에 쓰면 Three.js 가 Legacy 로 떨어져 화면이 검게 된다(오프스크린 캔버스에는 써도 됨).
+- **렌더러 render 감싸기**: perf-r97 이 렌더러 인스턴스에 render 를 복사해 두므로 prototype 만 감싸면 스크립트 순서에 따라 안 탄다 → 인스턴스 render 도 같이 감싼다(R186·R188 wrapInst).
+- **몹 그림 사슬**: 엔진 drawEnemy 는 `__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,fallback)` 로 그림을 고른다. R92·R109·R116 덧씌우기는 hp>0 일 때만 바꾼다(R188 이 죽음까지 이어 줌).
+- **R163 pixelfx `hit-flash` 시트는 섬광이 아니라 작은 인형(치비) 그림** — 쓰지 않는다. 시트는 쓰기 전에 반드시 이미지로 열어 본다.
+- **문자열 검사 함정**: 'outdoor' 안에 'door' 가 있다 — 낱말 경계 정규식을 쓴다.
+- **길잡이 난이도**: R77 `takeNextNormal` 은 원래 늘 'normal'(R189 가 지금 지역 난이도·설정값으로 바꿈). 지금 지역 난이도는 `room.difficultyR63`. `mapMode`·`setMapMode` 는 클로저 안이라 전역이 아니다.
+- **진행 구조**: 이 캠페인은 `room.exits` 포탈이 아니라 제단(`room.altar`)·R81 문(door-0 보스 구역·door-1 앞방·door-2 다음 구역, `worldR74.doors`, 닫히면 `blocked()` 가 막음)으로 넘어간다.
+- **탐색용 헤드리스 도구**: 스크래치패드 `lag/lib2.mjs`(boot → 777 → go(zone)), 포트 4410 정적 서버(`srv/m0` → site 심볼릭 링크). 서버가 컨테이너 재시작으로 죽으면 다시 띄운다. `window.tick=undefined` 같은 전역 덮어쓰기는 게임을 망가뜨린다.
+- **병합 API**: 드래프트 PR 은 ready 로 바꾼 뒤 병합, expectedHeadSha 는 40자 전체.
+- **Drive 정기 확인**: HAPIL-* 는 다른 게임이라 건너뛰고, review·WIP·COMPARISON·PRIVATE·INCOMPLETE 묶음은 보류한다.

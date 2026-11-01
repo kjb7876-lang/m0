@@ -3400,6 +3400,12 @@
     "assets/r186/index.json",
     "mob-death-r188.js",
     "edges-r188.js",
+    "fx-blood-r190.js",
+    "assets/r190/blood/blood-splash.webp",
+    "assets/r190/blood/blood-burst.webp",
+    "assets/r190/blood/blood-death.webp",
+    "assets/r190/blood/index.json",
+    "era-r191.js",
     "doors-r189.js",
     "guide-difficulty-r189.js"
   ],
@@ -4476,5 +4482,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b5545922b521403a72a203f162cbc8568b193ba58e04292bb30a8588101799f3"
+  "runtimeManifestSHA256": "393897b0e12223a5dedb16d7166a72cd721a16d511543342ff1a0ab613a071c1"
 }

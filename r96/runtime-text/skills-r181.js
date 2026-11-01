@@ -43,7 +43,8 @@ try{
     if(prefs.tame){
      // ② 고유기술 큰 그림(영웅 -q)
      if((e.type==='slash'||e.type==='sigil'||e.type==='storySourceSkill')&&HERO_Q.test(String(e.asset||''))&&fin(e.size)&&e.size>=3){stats.tamed++;
-      const size=e.size>4?4+(e.size-4)*.25:e.size;if(size!==e.size)stats.shrunk++;return withTemp(e,{size},()=>alphaScope(e.size>=5?.6:.72,()=>base.apply(this,[e,...a])));}
+      /* R190: 자동 전투에서 9초에 17번 겹치던 환도 고유기술(4.2칸) 흰 섬광이 화면을 덮음 → 상한 3.3칸, 투명도 .6, 같은 그림이 동시에 여럿이면 더 옅게 */
+      const size=e.size>3.3?3.3+(e.size-3.3)*.2:e.size;if(size!==e.size)stats.shrunk++;let same=0;try{for(const f of effects)if(f!==e&&f.asset===e.asset)same++;}catch(_){}const k=(e.size>=5?.5:.6)*(same?Math.max(.45,1-.22*same):1);return withTemp(e,{size},()=>alphaScope(k,()=>base.apply(this,[e,...a])));}
      // ② 영웅 피격점 그림: 영웅 키 0.95배 상한(환도는 R44/R49 가 따로 그린다)
      if(e.type==='e568HeroImpact'&&heroOf(e)!=='hwando'&&typeof actorHeight==='function'&&typeof zoom!=='undefined'){const cap=actorHeight()*.95/Math.max(.01,zoom);
       if(fin(e.sizePxE568)&&e.sizePxE568>cap){stats.shrunk++;return withTemp(e,{sizePxE568:cap},()=>alphaScope(.86,()=>base.apply(this,[e,...a])));}

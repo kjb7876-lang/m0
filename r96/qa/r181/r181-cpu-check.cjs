@@ -16,7 +16,7 @@ ok('buffs are not merged with debuffs and stay',rows.some(r=>r.label==='EGO'&&r.
 ok('6 rows → 5 chips (one row on screen)',rows.length===5,rows.length);
 // ---- 그리기 손질(정적) ----
 const s=C('skills-r181.js');
-ok('special big art (hero -q, size ≥3) dimmed ×.72 (×.6 when ≥5) and capped, restored after draw',/HERO_Q=\/assets\\\/vfx\\\/heroes\\\/\[a-z\]\+-q\\\.webp\$\//.test(s)&&/alphaScope\(e\.size>=5\?\.6:\.72/.test(s)&&/function withTemp/.test(s)&&/finally\{for\(const \[k,had,v\] of old\)/.test(s));
+ok('special big art (hero -q, size ≥3) dimmed (R190: ×.6, ×.5 when ≥5, fainter when the same art overlaps) and capped at 3.3, restored after draw',/HERO_Q=\/assets\\\/vfx\\\/heroes\\\/\[a-z\]\+-q\\\.webp\$\//.test(s)&&/const k=\(e\.size>=5\?\.5:\.6\)\*\(same\?/.test(s)&&/e\.size>3\.3\?3\.3\+/.test(s)&&/function withTemp/.test(s)&&/finally\{for\(const \[k,had,v\] of old\)/.test(s));
 ok('hero impact art capped at 0.95 × hero height (Hando keeps its own R44/R49 path)',/actorHeight\(\)\*\.95\/Math\.max\(\.01,zoom\)/.test(s)&&/heroOf\(e\)!=='hwando'/.test(s));
 ok('square burst skipped only when a hero impact hits the same target within 0.12 s',/f\.type==='e568HeroImpact'&&f\.r7DamageTarget===e\.r7DamageTarget&&Math\.abs\(\(f\.age\|\|0\)-\(e\.age\|\|0\)\)<\.12/.test(s));
 ok('faint basic attacks (michaela/seoha/gunner/hunter) get one darkened hero-colour blood burst (R188: not the hit-flash doll sheet), not skills/ultimates',/new Set\(\['michaela','seoha','gunner','hunter'\]\)/.test(s)&&/skill\|ultimate/.test(s)&&/P\.play\('dark-explosion-blood'/.test(s)&&!/P\.play\('hit-flash'/.test(s));
