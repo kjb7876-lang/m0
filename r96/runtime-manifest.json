@@ -20424,8 +20424,8 @@
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 12109,
-      "sha256": "92050ba8ea3ff65541ce160e8ae647685d56197dc965fe1ecaad4d441e118a39"
+      "bytes": 13208,
+      "sha256": "bc580d05a893a3eda61a1494236c4a7235972ee03bec5f1ae74dbd719b84b1cc"
     },
     {
       "path": "growth-r103.js",
@@ -20489,8 +20489,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564337,
-      "sha256": "df4d6a1b72ee47d93a4eacde6cab010f0308c3ee9a0ae6e4c733fcfbb3023929"
+      "bytes": 6564377,
+      "sha256": "dedfcc5d19f0a31a4a15fad743ec862f141adbaa5881dfa98a4a0c285a9471ee"
     },
     {
       "path": "intro-r140.js",
@@ -20559,8 +20559,8 @@
     },
     {
       "path": "perf-r180.js",
-      "bytes": 5075,
-      "sha256": "b91a3631ec7854a911843b612f9415855e0c112fa0f9236203d9484793e0c3a3"
+      "bytes": 6057,
+      "sha256": "dd02ffbdc3fe3c773bf797333d0d4a0dcdbc77bc24ff7f230950b7dd46630dd1"
     },
     {
       "path": "perf-r97.js",
@@ -20691,6 +20691,11 @@
       "path": "scene-props-r117.js",
       "bytes": 5425,
       "sha256": "0106b3c28d8c742f3a3ae9391df7ef8d2e18a84b0a1865667fd883018cf1dcc5"
+    },
+    {
+      "path": "skills-r181.js",
+      "bytes": 6622,
+      "sha256": "8ccfbe7dda53a76cf1dee2ec257a3ecea57da64ae364e03644c5a80b7a5dc711"
     },
     {
       "path": "status-r96.js",
@@ -20888,9 +20893,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4177,
-  "totalBytes": 797035118,
-  "webHTMLSha256": "df4d6a1b72ee47d93a4eacde6cab010f0308c3ee9a0ae6e4c733fcfbb3023929",
+  "fileCount": 4178,
+  "totalBytes": 797043861,
+  "webHTMLSha256": "dedfcc5d19f0a31a4a15fad743ec862f141adbaa5881dfa98a4a0c285a9471ee",
   "largest": [
     {
       "path": "index.html",

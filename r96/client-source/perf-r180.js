@@ -8,7 +8,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_PERF_R180__)return;
 const REV='R180-perf-1',KEY='storyworld.r180.perf';
-let prefs={floor:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+let prefs={floor:true,wallHairlines:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={layouts:0,merged:0,skipped:0,tilesBefore:0,tilesAfter:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const seen=new WeakSet();
 /* 사각형 합집합을 격자(T) 칸 경계로 나눈 사각형 목록. 좌표가 0.5 단위가 아니거나 너무 크면 null(바꾸지 않음). */
@@ -41,6 +41,11 @@ try{
    if(!prefs.floor||!L||seen.has(L))return base.apply(this,a);
    seen.add(L);stats.layouts++;const m=plan(L);if(!m){stats.skipped++;return base.apply(this,a);}
    const orig={floorRects:L.floorRects,backdropRects:L.backdropRects};stats.merged++;for(const k in m)if(m[k])L[k]=m[k];try{return base.apply(this,a);}finally{L.floorRects=orig.floorRects;L.backdropRects=orig.backdropRects;}};}
+/* R181: 벽 윗면 실선(R39 drawFloorFinish39 — 투명도 .09~.13 머리카락 같은 선 2~3줄/벽)이 벽마다 GPU 그리기 2~3번(사몽 666 구역 약 100번)을 쓰는데
+    화면에서는 거의 보이지 않는다 — 지형 벽을 그리는 동안만 투명도 .14 이하의 가는 선(stroke)을 건너뛴다. 벽 그림·면·빛은 그대로. {wallHairlines:true} 로 되돌린다. */
+ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(w,...a){if(!w?.terrainWall||prefs.wallHairlines||typeof ctx==='undefined'||!ctx||typeof ctx.stroke!=='function')return base.apply(this,[w,...a]);
+   const C=ctx,own=Object.prototype.hasOwnProperty.call(C,'stroke'),prev=C.stroke;C.stroke=function(...b){if(C.globalAlpha<=.14&&(C.lineWidth||1)<=2.5){stats.hairlinesSkipped=(stats.hairlinesSkipped||0)+1;return;}return prev.apply(this,b);};
+   try{return base.apply(this,[w,...a]);}finally{if(own)C.stroke=prev;else delete C.stroke;}};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_PERF_R180__=Object.freeze({revision:REV,gridMerge,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});

@@ -23,7 +23,7 @@ ok('swap is draw-only: original rects restored in finally',/finally\{L\.floorRec
 ok('only applied when the tile count actually drops and areas match (overlaps skipped)',/after\.length>=before\.length/.test(src)&&/area\(m\)-area\(rects\)/.test(src));
 // ---- R106 budget ----
 const fx=C('fx-sprites-r106.js');
-ok('R106 sprites: per-frame budget skips faint pieces first, never pieces drawn over the hero',/if\(FB>0&&!o\.overHero&&frameDraws>=FB&&\(alpha<\.55\|\|frameDraws>=FB\*1\.7\)\)/.test(fx)&&/frameDraws\+\+/.test(fx));
+ok('R106 sprites: per-frame budget skips faint pieces first, never pieces drawn over the hero',/if\(FB>0&&!o\.overHero\)\{const fb=[^;]+;if\(frameDraws>=fb&&\(alpha<\.55\|\|frameDraws>=fb\*1\.7\)\)/.test(fx)/* R181: 혼잡하면 상한 ×.73 */&&/frameDraws\+\+/.test(fx));
 // ---- 디스토피아 배너 ----
 const mood=C('samong-mood-r123.js');
 ok('S-06 banner reads 디스토피아 (not 네오 서울) and stops on the DYS section number, not "연도 없음"',/b\.dys\?'디스토피아':'네오 서울'/.test(mood)&&/target=b\.year\|\|\(b\.dys\?b\.dys:'연도 없음'\)/.test(mood)&&/dys:\/\^DYS-\/\.test/.test(mood));
