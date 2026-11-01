@@ -38,7 +38,7 @@
 - 권한·보안·샌드박스 거부, 유료 API·새 비용·인증정보 생성이 필요하면 그 단계만 멈추고 정확한 필요 사항을 보고한다. 유료 결제는 하지 않는다.
 
 ## 작업 학습 메모(세션에서 확인한 함정·요령 — 사용자 2026-11-01 "유용한 건 따로 기억해서 저장")
-- **빌드 연결**: 새 오버레이는 `runtime-text/index.html` 스크립트 태그(combat-r118·world-tiles-r118 가 맨 끝), `qa/r176` 순서 정규식, `scripts/verify-r96-public.py` 기대 목록, `.github/workflows/pages.yml` CPU 검사 줄, `sync-r99.py <새 파일>` 다섯 곳 모두에 넣는다. `r96/qa` 는 gitignore 라 `git add -f`. sync 후 `runtime-manifest.json` 충돌은 손으로 고치지 말고 sync 를 다시 돌린다.
+- **빌드 연결**: 새 오버레이는 `runtime-text/index.html` 스크립트 태그(combat-r118·world-tiles-r118 가 맨 끝), `qa/r176` 순서 정규식, `scripts/verify-r96-public.py` 기대 목록, `.github/workflows/pages.yml` CPU 검사 줄, `sync-r99.py <새 파일>` 다섯 곳 모두에 넣는다. `r96/qa` 는 gitignore 라 `git add -f`. sync 후 `runtime-manifest.json`·`runtime-inputs.json` 충돌은 손으로 고치지 말고 `--ours` 로 고른 뒤 **main 에 새로 들어온 파일(js·자산)을 sync 인자로 함께 넘겨** 다시 돌린다(인자 없이 돌리면 main 쪽 새 파일이 목록에서 빠진다 — R195 병합 때 R196 파생본이 빠졌던 일). pages.yml 충돌은 양쪽 검사 줄을 모두 남긴다.
 - **Three.js 기록기 CSS filter**: brightness·contrast·saturate·grayscale·hue-rotate 만 된다. `drop-shadow`·`blur` 를 게임 ctx.filter 에 쓰면 Three.js 가 Legacy 로 떨어져 화면이 검게 된다(오프스크린 캔버스에는 써도 됨).
 - **렌더러 render 감싸기**: perf-r97 이 렌더러 인스턴스에 render 를 복사해 두므로 prototype 만 감싸면 스크립트 순서에 따라 안 탄다 → 인스턴스 render 도 같이 감싼다(R186·R188 wrapInst).
 - **몹 그림 사슬**: 엔진 drawEnemy 는 `__STORYWORLD_STORY_COMBAT_R54__.frameFor(e,fallback)` 로 그림을 고른다. R92·R109·R116 덧씌우기는 hp>0 일 때만 바꾼다(R188 이 죽음까지 이어 줌).
