@@ -1,0 +1,45 @@
+{
+ "revision": "R201",
+ "hero": "michaela",
+ "action": "ultimate",
+ "directions": {
+  "s": {
+   "path": "assets/r143/ultimate/michaela/ultimate-s.webp",
+   "frames": 8,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "70c5f0a8c1546a03d4814249eafb2335fa3a9c0fd70c9ee335a354662e3eb668",
+   "bytes": 79968,
+   "source": {
+    "zip": "Michaela-scoped-static-default-part2-of2.zip",
+    "png": "assets/ultimate/HERO-michaela-ultimate-s.png",
+    "sha256": "40d943f7191f8f6a99bf33f521374982a7ba2f7225abdbbc07e21db8df982748",
+    "manifestStatus": "STATIC_ASSET_PASS"
+   }
+  },
+  "e": {
+   "path": "assets/r143/ultimate/michaela/ultimate-e.webp",
+   "frames": 8,
+   "cell": [
+    192,
+    256
+   ],
+   "sha256": "8cfe10e9a9579c4f9ec8caf9273135cb9067411e83b23945f4b4f7c203f745d2",
+   "bytes": 84962,
+   "source": {
+    "zip": "Michaela-scoped-static-default-part2-of2.zip",
+    "png": "assets/ultimate/HERO-michaela-ultimate-e.png",
+    "sha256": "b2abbacb1c97a7883848dbe887d388a384634e9ef4efc72e7ce6250ad30ba73f",
+    "manifestStatus": "STATIC_ASSET_PASS"
+   }
+  }
+ },
+ "missing": [
+  "se",
+  "ne",
+  "n"
+ ],
+ "note": "기본팩(scoped static default) part2 추가 선별 S/E만. 다른 방향은 기존 그림 유지(스킬: 공격 3번째 칸 한 장, 궁극기: 예전 날개 그림). W 는 E 좌우 반전(기존 방향 매핑과 같음). 실게임·VFX 연동 미검증(팩 README)."
+}

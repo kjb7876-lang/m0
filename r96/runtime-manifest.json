@@ -11398,6 +11398,36 @@
       "sha256": "e3728d23e4b6ad20246f9fb443be61c7fc72be17b234b1161751af2e9e744932"
     },
     {
+      "path": "assets/r143/skill/michaela/index.json",
+      "bytes": 1357,
+      "sha256": "77ad30b59ddf77a16916393580defbe0c0b876e7834c2c7efd11e1a1741ed6d9"
+    },
+    {
+      "path": "assets/r143/skill/michaela/skill-e.webp",
+      "bytes": 61916,
+      "sha256": "cf2b3b581fb94f7a8bafd37f11be7be27b5042af0a97f9975246c5e1b4f994f1"
+    },
+    {
+      "path": "assets/r143/skill/michaela/skill-s.webp",
+      "bytes": 51488,
+      "sha256": "d25fe3a51560973d45082fae27a5d0737606f05a89596af689b58f88077c7a64"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/index.json",
+      "bytes": 1384,
+      "sha256": "1c2b42b52b03327a64ac247d7e055f3009ca0a11a8a823a43cf1514a14576024"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/ultimate-e.webp",
+      "bytes": 84962,
+      "sha256": "8cfe10e9a9579c4f9ec8caf9273135cb9067411e83b23945f4b4f7c203f745d2"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/ultimate-s.webp",
+      "bytes": 79968,
+      "sha256": "70c5f0a8c1546a03d4814249eafb2335fa3a9c0fd70c9ee335a354662e3eb668"
+    },
+    {
       "path": "assets/r144/walk/gunner/index.json",
       "bytes": 718,
       "sha256": "63dc4dc5f5ac5ab58b3e9ef8842d10c7960e75fa7f4de8f4bc8c7976d7e37499"
@@ -19889,8 +19919,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 14829,
-      "sha256": "e124dbca087a0c661bee7017251199c971d41ce60704530c44242af26cf51045"
+      "bytes": 16684,
+      "sha256": "5ee0b754760290b7a1e8100459f40735b64e263f3ae2c903aa85c27be3e4331e"
     },
     {
       "path": "audio-r108.js",
@@ -21263,8 +21293,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4252,
-  "totalBytes": 819080778,
+  "fileCount": 4258,
+  "totalBytes": 819363708,
   "webHTMLSha256": "f05b8a8b345ed0c3b93b94f67deb36cc0c75ba057f6bbdf466ff8df665380cb0",
   "largest": [
     {

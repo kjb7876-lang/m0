@@ -17,6 +17,9 @@ const REV='R143-attack-anim-1',KEY='storyworld.r143.attack';
 const HEROES=['lauren','hwando','seoha','neon','michaela','hunter','slayer','gunner'];
 const FOOT={lauren:{s:225,se:223,e:227,ne:226,n:226},hwando:{s:219,se:220,e:226,ne:226,n:226},seoha:{s:226,se:225,e:226,ne:224,n:225},neon:{s:225,se:225,e:226,ne:226,n:226},
  michaela:{s:226,se:226,e:226,ne:226,n:226},hunter:{s:226,se:226,e:226,ne:226,n:226},slayer:{s:220,se:220,e:223,ne:225,n:226},gunner:{s:227,se:227,e:227,ne:227,n:227}};// index.json 의 방향별 발 실측
+/* R201(사용자 2026-11-01 영웅 기본팩 적용): 미카엘라 기본팩 part2 의 스킬 6칸·궁극기 8칸 S/E 만 실제 동작으로 — 다른 방향은 기존 그림 유지(W 는 E 반전, 기존 매핑과 같음).
+   기본팩의 대기·걷기·공격·피격·사망 25세트(미카엘라·서하)는 이미 들어간 그림과 픽셀이 같아 바꿀 것이 없었다(R130·R143·R151). */
+const SKILLSET={michaela:{skill:['s','e'],ultimate:['s','e']}},ACT_FOOT={'michaela:skill':{s:227,e:232},'michaela:ultimate':{s:226,e:231}};// 칸 안 발 실측(E 는 걷기보다 6px 아래)
 const DIR8=['e','se','s','sw','w','nw','n','ne'],SHEET={s:['s',0],se:['se',0],e:['e',0],ne:['ne',0],n:['n',0],sw:['se',1],w:['e',1],nw:['ne',1]};
 const FOUR={front:'s',back:'n',left:'w',right:'e'};
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|awakening|^blob:/;
@@ -47,7 +50,7 @@ function apply(rec,st){const h=player.hero;if(!HEROES.includes(h))return;
 function place(rec,st,best,h,dir8,a,start,idle,act='attack',fixed=null){const[sd0,mir]=SHEET[dir8]||SHEET.s,sd=act==='hit'&&HIT_FALLBACK[h]?.[sd0]||sd0,p=pathOf(h,sd,act),im=image(p);if(!im)return null;
  const n=Math.max(1,Math.round((im.naturalWidth||im.width)/192)),fr=fixed!=null?Math.min(n-1,fixed):idle?0:Math.min(n-1,Math.floor(Math.min(.999,Math.max(0,1-a/Math.max(.05,start)))*n));
  const bh=Math.abs(best.points[3][1]-best.points[0][1]),want=(typeof actorHeight==='function'?actorHeight():bh)*(r119Stats().standRatio||.98),k=want/bodyOf(im),ky=idle?k*(1+.01*Math.sin((typeof time==='number'?time:0)*2.2)):k;
- const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=act==='walk'?226:(FOOT[h]?.[sd])||226;
+ const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,f=mir?-1:1,ay=ACT_FOOT[h+':'+act]?.[sd]??(act==='walk'?226:(FOOT[h]?.[sd])||226);
  const sx=fr*192,X=v=>fx+f*(v-96)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[sx,0,192,256],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[X(0),Y(0)],[X(192),Y(0)],[X(192),Y(256)],[X(0),Y(256)]],r143Attack:!idle&&act==='attack',r143Hit:act==='hit',r143Idle:!!idle});
@@ -68,6 +71,12 @@ function gunnerDash(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.lengt
  if(!best||!/r128\/gunner\/g-dash/.test(String(best.sourcePath||best.image?.src||'')))return;const d=r119Stats().walkDir||FOUR[player.direction]||'e';
  if(place(rec,st,best,'gunner',DIR8.includes(d)?d:'e',0,1,0,'walk',3)!=null)stats.gunnerDash=(stats.gunnerDash||0)+1;}
 let hurt={start:0,prev:0,dir:'s'};
+const cast={act:null,start:0,prev:0,dir:'s'};
+function applySkill(rec,st){const h=player.hero,act=player.ultimateAnim>0?'ultimate':player.skillAnim>0?'skill':null;if(!act||!SKILLSET[h]?.[act])return false;
+ const a=+player[act+'Anim']||0;if(cast.act!==act||a>cast.prev+1e-6||cast.start<=0){cast.act=act;cast.start=a;cast.dir=dirNow();}cast.prev=a;
+ const sd=(SHEET[cast.dir]||SHEET.s)[0];if(!SKILLSET[h][act].includes(sd))return false;/* 없는 방향은 기존 그림 그대로 */
+ let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
+ if(!best)return false;const fr=place(rec,st,best,h,cast.dir,a,cast.start,0,act);if(fr==null)return false;stats[act+'Frames']=(stats[act+'Frames']||0)+1;stats.lastFrame=fr;return true;}
 function applyHit(rec,st){const h=player.hero;if(!HIT.has(h))return;const a=+player.hurtAnim||0;if(a>hurt.prev+1e-6||hurt.start<=0){hurt.start=a;hurt.dir=dirNow();}hurt.prev=a;
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(best&&place(rec,st,best,h,hurt.dir,a,hurt.start,0,'hit')!=null)stats.hitFrames++;}
@@ -78,7 +87,7 @@ function swapWalk(rec,st){for(let i=st;i<rec.commands.length;i++){const c=rec.co
  const row=typeof readyImage==='function'?readyImage(to):null;if(!row?.image){image(to);continue;}c.image=row.image;c.sourcePath=to;stats.walkV1=(stats.walkV1||0)+1;}}
 // 미리 받기: 영웅이 바뀔 때뿐 아니라 지역을 옮길 때도(게임이 지역마다 그림 기억을 비운다) — 처음 쓰는 순간 그림이 없어
 //  옛 그림이 0.3초쯤 보이던 것(환도 스킬, 헤드리스 120초 관찰 8장면)을 막는다. 아직 못 받은 것은 2초마다 다시 묻는다.
-function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h)&&!HIT_FALLBACK[h]?.[d])want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
+function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let miss=0;const want=[];for(const [act,ds] of Object.entries(SKILLSET[h]||{}))for(const d of ds)want.push(pathOf(h,d,act));/* R201 */for(const d of['s','se','e','ne','n']){want.push(pathOf(h,d));if(HIT.has(h)&&!HIT_FALLBACK[h]?.[d])want.push(pathOf(h,d,'hit'));if(h==='hwando'||h==='gunner')want.push(pathOf(h,d,'walk'));}if(h==='hwando'||h==='gunner')want.push('assets/r144/walk/'+h+'/walk-e.webp');
  for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
 let lastHero=null,lastRoom=null,nextPre=0;
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
@@ -90,6 +99,7 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
   const hurtOnly=player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard);/* R194: 환도도 피격 시트가 생겨 맞을 땐 아래 applyHit 로 */
   if(prefs.on&&prefs.hwandoIdle&&st>=0&&solo()&&player?.hero==='hwando'&&!(player.attackAnim>0&&!busy)&&!hurtOnly){hwandoUnify(rec,st);return r;}
   if(prefs.on&&st>=0&&solo()&&player?.hurtAnim>0&&!(player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard)){applyHit(rec,st);return r;}
+  if(prefs.on&&st>=0&&solo()&&player&&(player.skillAnim>0||player.ultimateAnim>0)&&!(player.dashAnim>0||player.guard)){if(applySkill(rec,st))return r;}else cast.act=null;
   if(!prefs.on||st<0||!solo()||!player||!(player.attackAnim>0)||busy)return r;
   apply(rec,st);}catch(e){fail(e);}return r;};}
 function set(k,v){prefs[k]=!!v;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
