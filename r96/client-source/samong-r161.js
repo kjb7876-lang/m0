@@ -17,6 +17,10 @@
 if(window.__STORYWORLD_SAMONG_R161__)return;
 const REV='R161-samong-1',KEY='storyworld.r161.samong';
 const PUPPET='assets/r161/puppet/puppet-ego-walk-right-8.webp',SCULPT='assets/r161/sculpture/memory-fragment.webp';
+/* R184: S-06 디스토피아는 원문 외형대로 그린 임시 픽셀 시트(같은 칸 규격 256×320, 4×2 걷기 8프레임)를 꼭두각시 대신 쓴다 — 좋은 자산이 오면 이 표만 바꾼다 */
+const S06='assets/r184/s06/',S06ART={invader:S06+'s06-invader-walk-right-8.webp',rival:S06+'s06-rival-walk-right-8.webp',commander:S06+'s06-commander-walk-right-8.webp'},SHEETS=new Set([PUPPET,...Object.values(S06ART)]);
+function sheetFor(e){try{const x=typeof room==='object'?room?.samongR103:null;if(!x||!(x.key==='S-06'||/^sz115-S06-/.test(String(x.zone||''))))return PUPPET;const n=String(e?.name||'');
+ if(/상대 초인/.test(n))return S06ART.rival;if(/지휘 (개체|기체)/.test(n))return S06ART.commander;if(/검은 명령선/.test(n))return PUPPET;return S06ART.invader;}catch(_){return PUPPET;}}
 // 시트 1024×640, 4열×2행, 칸 256×320. 발 기준점(칸 안) 101.8,299.5, 몸 키 214.5px(실 제외, 원본 429px의 절반).
 const CW=256,CH=320,PX=101.8,PY=299.5,BODY=214.5,FPS=8;
 let prefs={puppet:true,sculpture:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
@@ -34,7 +38,7 @@ const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170To
 
 // ---- 꼭두각시 자아 -------------------------------------------------------------------------
 let hiding=null;
-if(typeof readyImage==='function'){const base=readyImage;readyImage=function(p,...a){if(hiding&&typeof p==='string'&&p!==PUPPET)return null;return base.call(this,p,...a);};}
+if(typeof readyImage==='function'){const base=readyImage;readyImage=function(p,...a){if(hiding&&typeof p==='string'&&!SHEETS.has(p))return null;return base.call(this,p,...a);};}
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 function shapeOf(e){const sh=e.attack?.shape154||e.combatProfile?.attackShape||{};return{w:e.attack?.castWindup150??(sh.windup??.45),a:sh.active??.15,r:sh.recovery??.35,range:sh.range??1.2};}
 function lunge(e){const A=e.attack;if(!A||!Number.isFinite(A.elapsed)||!Number.isFinite(A.angle))return null;const S=shapeOf(e),t=A.elapsed;
@@ -87,7 +91,7 @@ function drawPuppet(e,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Num
   ctx.translate(q.x+ox,q.y-lift+oy);if(lean)ctx.rotate(lean*m.face);const kb=big&&!(e.defScale>1.2)?k*1.25:k;ctx.scale(m.face*kb,kb);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}finally{ctx.restore();}
  stats.puppetDraws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let im=null;
- try{if(puppetOf(e)){im=image(PUPPET);if(!im)stats.waits++;}else if(e?.samongR103&&samongRoom()){if(major(e))stats.skippedMajor++;else stats.skippedArt++;}}catch(err){fail(err);im=null;}
+ try{if(puppetOf(e)){im=image(sheetFor(e));if(!im)stats.waits++;}else if(e?.samongR103&&samongRoom()){if(major(e))stats.skippedMajor++;else stats.skippedArt++;}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
  hiding=e;let r;try{r=base.apply(this,[e,...a]);}finally{hiding=null;}
  try{scopeDraw(e,()=>drawPuppet(e,im));}catch(err){fail(err);}return r;};}
@@ -114,8 +118,8 @@ if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){i
 let next=0;
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(T()>=next||T()<next-5){next=T()+.5;dress();}bloodTick();const t=T();for(let i=bfx.length-1;i>=0;i--)if(t-bfx[i].t0>bfx[i].life)bfx.splice(i,1);if(bfx.length)barm();else if(typeof effects!=='undefined'){const i=effects.indexOf(BSENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(ef,...a){if(ef&&ef.type==='r167-blood'){try{drawBlood();}catch(err){fail(err);}return;}return base.apply(this,[ef,...a]);};}
-if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dress();if(samongRoom())image(PUPPET);}catch(e){fail(e);}return r;};}
+if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dress();if(samongRoom()){image(PUPPET);for(const v of Object.values(S06ART))image(v);}}catch(e){fail(e);}return r;};}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_SAMONG_R161__=Object.freeze({revision:REV,set,puppetOf,lunge,bloodBurst,_midSkill:midSkill,PUPPET,SCULPT,
+window.__STORYWORLD_SAMONG_R161__=Object.freeze({revision:REV,set,puppetOf,sheetFor,S06ART,lunge,bloodBurst,_midSkill:midSkill,PUPPET,SCULPT,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,room:samongRoom()?{key:room.samongR103.key,dressed:room.r161Dressed||null,sculptures:(room.props||[]).filter(p=>p.r161Sculpture).length,puppets:(room.enemies||[]).filter(e=>e.hp>0&&puppetOf(e)).length,mobs:(room.enemies||[]).filter(e=>e.hp>0).length}:null})});
 })();

@@ -11783,6 +11783,26 @@
       "sha256": "4d6848eaa7a9ee0c973e5c2aa075a48aa87c099d9d892c2aa4f1bdaf77cbfcbb"
     },
     {
+      "path": "assets/r184/s06/index.json",
+      "bytes": 1505,
+      "sha256": "988094b1920595ccde0273028fed3fe60ba5dd8430fb06fcdc944bfd41c4fe53"
+    },
+    {
+      "path": "assets/r184/s06/s06-commander-walk-right-8.webp",
+      "bytes": 2096,
+      "sha256": "7fcc724f663a44e2e6ce803db750956c5a79ac27b5588bf877e909f77d3ff7fa"
+    },
+    {
+      "path": "assets/r184/s06/s06-invader-walk-right-8.webp",
+      "bytes": 1032,
+      "sha256": "280bcae9e1e65c7d095a2eeb4eb98b23e3dbd2446fbda94df52d1fe22943f20a"
+    },
+    {
+      "path": "assets/r184/s06/s06-rival-walk-right-8.webp",
+      "bytes": 1392,
+      "sha256": "181f676679c96d17e5fcbf9e7b6a16523371f3577d2113108e12a243cc6ac77a"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20489,8 +20509,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564416,
-      "sha256": "e8e58046755e538547ba472eef668eeec81302f869c48494705a7400383af043"
+      "bytes": 6564457,
+      "sha256": "7873f58f7f957c60e9933d532d2d5c8574e9c4e152851a76cb921e6f4a97f495"
     },
     {
       "path": "intro-r140.js",
@@ -20669,8 +20689,8 @@
     },
     {
       "path": "samong-r161.js",
-      "bytes": 18042,
-      "sha256": "64957e01d8bf076697cdaa503ad30b813d41817b43fcd4e8a85c902827c4f19a"
+      "bytes": 18938,
+      "sha256": "9b4dbf9d5a47b3d9642374c863e39b1def3ef14a0e49b4d78b62bf64049ca04d"
     },
     {
       "path": "samong-text-r103.js",
@@ -20696,6 +20716,11 @@
       "path": "scene-props-r117.js",
       "bytes": 5425,
       "sha256": "0106b3c28d8c742f3a3ae9391df7ef8d2e18a84b0a1865667fd883018cf1dcc5"
+    },
+    {
+      "path": "scene3d-r183.js",
+      "bytes": 12304,
+      "sha256": "14dcde735211265d6915e78d0fc7aa6846c976d065193678ec66c47f64dc265a"
     },
     {
       "path": "skills-r181.js",
@@ -20898,9 +20923,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4179,
-  "totalBytes": 797058037,
-  "webHTMLSha256": "e8e58046755e538547ba472eef668eeec81302f869c48494705a7400383af043",
+  "fileCount": 4184,
+  "totalBytes": 797077303,
+  "webHTMLSha256": "7873f58f7f957c60e9933d532d2d5c8574e9c4e152851a76cb921e6f4a97f495",
   "largest": [
     {
       "path": "index.html",
