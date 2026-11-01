@@ -260,7 +260,7 @@
   own.layout=function(id,l=(typeof layer!=='undefined'?layer:'STORY'),...a){if(eligible(id,l)){const L=layoutFor(id);if(L){stats.used++;return L;}}return EX.layout.call(EX,id,l,...a);};own.storyMapR171=true;
   try{window.__STORYWORLD_EXPLORATION__=Object.freeze(own);}catch(e){fail(e);return false;}return true;}
  // makeRoom 을 병동 미로 붙이기(phase1-original-adapter) 보다 먼저 감싼다: 방이 처음부터 이 지도를 가지면 그 붙이기는 건너뛴다.
- if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(r&&!r.exploration&&eligible(r.id,r.layer||l)){installExploration();const L=layoutFor(r.id);if(L){r.exploration=L;stats.rooms++;}}}catch(e){fail(e);}return r;};}
+ if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(id,l,...a){const r=base.call(this,id,l,...a);try{if(r&&!r.exploration&&eligible(r.id,r.layer||l)){installExploration();const L0=layoutFor(r.id),L=(L0&&window.__STORYWORLD_LAYOUT_HOOK_R204__?.(r.id,L0))||L0;/* R204: 지역별 지형 손질(통로 넓히기)은 꾸미기(R80·R81) 전에 */if(L){r.exploration=L;stats.rooms++;}}}catch(e){fail(e);}return r;};}
  // 예전(병동 미로) 저장의 위치가 이 지도에서 벽 속이면 원래 복원 코드는 (15,19)로 옮긴다 — 그 자리는 여기서 보스 전투실 안이라
  // 보스 구역 문이 열리기 전이면 갇힌다. 그 경우에만 입구로 옮긴다(보스 단계 이후·정리된 지역은 그대로).
  function rescue(){try{const L=typeof room!=='undefined'?room?.exploration:null;if(!L?.storyMapR171||typeof player==='undefined'||!player)return false;

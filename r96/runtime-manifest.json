@@ -12338,6 +12338,56 @@
       "sha256": "e661221566501d5c17c6ebbabcce638082b78cd8a0d00cd95fd8db59673b30df"
     },
     {
+      "path": "assets/r207/organic/cliff_contact_shadow_01.png",
+      "bytes": 29809,
+      "sha256": "d737b8ff7559f696bc7335cd1a5347d01a6c3d62c006bd20277a75dd12a294ac"
+    },
+    {
+      "path": "assets/r207/organic/cliff_inner_join_01.png",
+      "bytes": 166935,
+      "sha256": "6b754632cdae4896dd7c3bca074594e8927ab1bc0a7206815a8a3b6bf23fa255"
+    },
+    {
+      "path": "assets/r207/organic/cliff_outer_join_01.png",
+      "bytes": 183678,
+      "sha256": "606cd298425a2be72ba877636c10aee8bdbe04a4c85a0333c115b63ac72befc4"
+    },
+    {
+      "path": "assets/r207/organic/cliff_straight_01.png",
+      "bytes": 146303,
+      "sha256": "efe6f68683c62d4aba1743bf905f99b17f95ac425e136dced5f2829850a47d4b"
+    },
+    {
+      "path": "assets/r207/organic/garden_low_border_01.png",
+      "bytes": 140438,
+      "sha256": "b4d43603a306ee7721e392a1f6915bd997ba0ee21776c7b126672b126dd95736"
+    },
+    {
+      "path": "assets/r207/organic/garden_root_paving_break_01.png",
+      "bytes": 188568,
+      "sha256": "fd5888f01777579f2f216aeffb1ab308297329d0089529a21c62f4e6133aba6f"
+    },
+    {
+      "path": "assets/r207/organic/garden_soil_paving_transition_01.png",
+      "bytes": 171238,
+      "sha256": "cd44807e9beab7281dd94836897727edaf3b40c0a0614ca5b4840ca0cdd1ed50"
+    },
+    {
+      "path": "assets/r207/organic/index.json",
+      "bytes": 7617,
+      "sha256": "3c9e6c5f9a42777ade2530d27d5e5cc2e783a4ccf827040f383691b0bcf481cb"
+    },
+    {
+      "path": "assets/r207/organic/soil_rock_transition_01.png",
+      "bytes": 152788,
+      "sha256": "0480b0f4436c222a271f09d60eee1675a71e31e4f0c898828e8f79f05ff4d5c7"
+    },
+    {
+      "path": "assets/r207/organic/soil_rock_transition_02.png",
+      "bytes": 184544,
+      "sha256": "2a55efa02cd23901d33bfdca581ff95cfe50d6200bc873dfc7a9799f2a8d9538"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20318,6 +20368,11 @@
       "sha256": "1df0b490e44db39f4065db7c5dee91f6dad5116a72bba12610ae2a97701cf0e0"
     },
     {
+      "path": "cave-r204.js",
+      "bytes": 57822,
+      "sha256": "3fc37e4f793335818917ef1c3f951a20290dbaabb62d346014b35084b1b3edc9"
+    },
+    {
       "path": "chunks/ep1a08-0-0.json",
       "bytes": 1147,
       "sha256": "a7df6b6c37fc6e1846de7edf16debc3de9577baaba16e3d6e9b66687eab1eb6f"
@@ -21079,8 +21134,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564972,
-      "sha256": "3e8c468c7b1c2f5371a447ca9ecf7969365dbefe325f211418c3c6f017dbd1ae"
+      "bytes": 6565054,
+      "sha256": "a53936bbc0e14a72a254537d579d6d078ecda3579aecb8db885a2e8e6ccbf31a"
     },
     {
       "path": "intro-r140.js",
@@ -21096,6 +21151,11 @@
       "path": "mob-death-r188.js",
       "bytes": 2682,
       "sha256": "ce115235c43f83ec19d6ea993f11dd8b33bf0867df08adf98206cd785f437d95"
+    },
+    {
+      "path": "mob-ground-r206.js",
+      "bytes": 2167,
+      "sha256": "c2eb4f82666370e81d6dc9be89f2c9254470d4b19915e9143ec849b5fcdf2264"
     },
     {
       "path": "mob-style-r199.js",
@@ -21349,8 +21409,8 @@
     },
     {
       "path": "story-maps-r171.js",
-      "bytes": 36130,
-      "sha256": "1907df0ff49c8201a0ba419f219d5f45f114353748ef22f666a0695facad7b82"
+      "bytes": 36276,
+      "sha256": "3816440b75287fdba027b809d7bc2425e7bf6ac077b16d58cec44b188133d363"
     },
     {
       "path": "story-reader-r122.js",
@@ -21518,9 +21578,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4303,
-  "totalBytes": 840865372,
-  "webHTMLSha256": "3e8c468c7b1c2f5371a447ca9ecf7969365dbefe325f211418c3c6f017dbd1ae",
+  "fileCount": 4315,
+  "totalBytes": 842297507,
+  "webHTMLSha256": "a53936bbc0e14a72a254537d579d6d078ecda3579aecb8db885a2e8e6ccbf31a",
   "largest": [
     {
       "path": "index.html",
