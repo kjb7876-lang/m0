@@ -96,7 +96,7 @@ function drawTentacles(e,t,h){const S=SPR();e.pts.forEach((p,k)=>{const q=P(p.x,
  if(S&&v<.3)S.draw('ring',BLOOD,q.x,q.y,h*(.5+v*3),h*(.25+v*1.5),{alpha:1-v/.3});});}
 // ---- 정화의 코어 --------------------------------------------------------------------------------
 let coreFlash=0;
-function coreHit(core,c){coreFlash=T();stats.coreHits++;arm();try{PFX()?.play('hit-flash',core.x,core.y,{k:.9,z:H()*.7});}catch(_){}}
+function coreHit(core,c){coreFlash=T();stats.coreHits++;arm();try{PFX()?.play('dark-explosion-blood',core.x,core.y,{k:.7,z:H()*.7})/* R188: hit-flash 시트는 인형 그림 */;}catch(_){}}
 function drawCore(){const z=zoneNow();if(!z||z.mode!=='D')return;const L=room.exploration?.samongR103,core=L?.core;if(!core)return;const c=room.samongR103.r162Core,h=H(),q=P(core.x,core.y),S=SPR(),hit=T()-coreFlash<.35,pulse=.85+.15*Math.sin(T()*3);
  const X=PFX();if(X)X.play('core-orb-teal',core.x,core.y,{loop:true,key:'r162-core',k:1.0,z:h*.35,until:T()+.5});
  ctx.save();try{if(S){S.draw('ring',HOLY,q.x,q.y,h*2.2*pulse,h*1.1*pulse,{alpha:.75});S.draw('glow',hit?BLOOD:HOLY,q.x,q.y-h*.7,h*2.2,h*2.2,{alpha:.75});if(!X){S.draw('orb',HOLY,q.x,q.y-h*.7,h*.9*pulse,h*.9*pulse,{alpha:1});S.draw('flare',HOLY,q.x,q.y-h*.7,h*1.6,h*1.6,{angle:T()*.6,alpha:.7});}}

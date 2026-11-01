@@ -233,7 +233,7 @@
   if(x.r173Pend>0){waveSpawnR173(r,x,z,ep);return;}// 자리가 없어 못 나온 몫은 다음 틱에 마저 낸다(66마리를 다 채워야 단서조각이 다 떨어진다)
   const alive=r.enemies.filter(e=>living(e)&&e.samongSurvival).length;if(alive||x.r173Wave>=6)return;if(!x.r173Next){x.r173Next=time+(x.r173Wave?1.6:.8);return;}if(time<x.r173Next)return;x.r173Next=0;
   x.r173Wave++;x.r173Pend=11;x.r173Made=0;waveSpawnR173(r,x,z,ep);
-  try{window.__STORYWORLD_PIXELFX_R163__?.play?.('hands-blood',player.x,player.y,{k:1.1});toast('물결 '+x.r173Wave+' / 6',2);}catch(_){}}
+  try{/* R188: 촉수·핏빛 손은 적의 것 — 영웅 발밑이 아니라 몹이 솟는 둘레(반지름 6)에서 */const P=window.__STORYWORLD_PIXELFX_R163__;for(let i=0;i<4;i++){const a=x.r173Wave*1.7+i*Math.PI/2,px=player.x+Math.cos(a)*6,py=player.y+Math.sin(a)*6;if(!blocked(px,py,.3,r))P?.play?.('hands-blood',px,py,{k:.9,delay:i*.08});}toast('물결 '+x.r173Wave+' / 6',2);}catch(_){}}
  function waveSpawnR173(r,x,z,ep){const mobs=zoneMobs(z,ep),atk=baseAtkR170();for(let k=x.r173Pend;k>0;k--){const n=x.r173Made||0,q=ringPoint(player,6,11);if(!q)break;const e=spawn(mobs[(S.serial+n)%mobs.length],q,{name:z.mobName||ep.mobName,tag:'h',aggro:60});if(!e)break;x.r173Made=n+1;x.r173Pend--;const sub=x.r173Wave===6&&n===0;swarm(e,sub||n%6===5);
    if(sub){e.samongSubR170=true;e.r61PreserveHealth=true;e.maxHp=e.hp=Math.round(atk*20);e.defScale=(e.defScale||1)*1.25;e.damage=(e.damage||8)*1.4;e.name='준보스 · '+(z.mobName||ep.mobName);}}}
  // R173 G(정화의 코어 호위): 코어(체력 777)가 맨 아래에서 위쪽 끝(문)으로 곧게 오른다. 코어 3.5칸 안에 적이 없을 때만 나아가고(처치가 길을 연다),

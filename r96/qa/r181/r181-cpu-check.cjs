@@ -19,7 +19,7 @@ const s=C('skills-r181.js');
 ok('special big art (hero -q, size ≥3) dimmed ×.72 (×.6 when ≥5) and capped, restored after draw',/HERO_Q=\/assets\\\/vfx\\\/heroes\\\/\[a-z\]\+-q\\\.webp\$\//.test(s)&&/alphaScope\(e\.size>=5\?\.6:\.72/.test(s)&&/function withTemp/.test(s)&&/finally\{for\(const \[k,had,v\] of old\)/.test(s));
 ok('hero impact art capped at 0.95 × hero height (Hando keeps its own R44/R49 path)',/actorHeight\(\)\*\.95\/Math\.max\(\.01,zoom\)/.test(s)&&/heroOf\(e\)!=='hwando'/.test(s));
 ok('square burst skipped only when a hero impact hits the same target within 0.12 s',/f\.type==='e568HeroImpact'&&f\.r7DamageTarget===e\.r7DamageTarget&&Math\.abs\(\(f\.age\|\|0\)-\(e\.age\|\|0\)\)<\.12/.test(s));
-ok('faint basic attacks (michaela/seoha/gunner/hunter) get one hero-colour hit-flash frame, not skills/ultimates',/new Set\(\['michaela','seoha','gunner','hunter'\]\)/.test(s)&&/skill\|ultimate/.test(s)&&/P\.play\('hit-flash'/.test(s));
+ok('faint basic attacks (michaela/seoha/gunner/hunter) get one darkened hero-colour blood burst (R188: not the hit-flash doll sheet), not skills/ultimates',/new Set\(\['michaela','seoha','gunner','hunter'\]\)/.test(s)&&/skill\|ultimate/.test(s)&&/P\.play\('dark-explosion-blood'/.test(s)&&!/P\.play\('hit-flash'/.test(s));
 ok('damage, cooldowns and timers untouched (no assignment to hp/specialCD/attackCD/remaining on game objects)',!/\b(hp|specialCD|attackCD|egoCD)\s*=[^=]/.test(s));
 // ---- 렉 ----
 const p=C('perf-r180.js'),fx=C('fx-sprites-r106.js');
