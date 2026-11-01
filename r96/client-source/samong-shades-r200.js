@@ -15,10 +15,11 @@ let prefs={on:true,puppetShare:.15};try{prefs={...prefs,...JSON.parse(localStora
 const stats={assigned:0,puppetKept:0,frames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null,byZone={};
 fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(!j?.mobs)return;idx=j;for(const m of j.mobs)(byZone[m.zone]=byZone[m.zone]||[]).push(m);}).catch(fail);
-const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
+const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;h=Math.imul(h,0xc2b2ae35);h^=h>>>16;return (h>>>0)/4294967296;};/* 끝 섞기(브라우저에서 비슷한 id 가 몰려 꼭두각시 15%가 0%로 나왔음) */
+const objective=e=>/기억의 조각|단서|코어/.test(String(e?.name||''))||!!(e?.objective||e?.r162Shard||e?.r162Fragment);/* 깨는 목표물(세뇌당한 기억의 조각 등)은 몹이 아님 */
 const major=e=>!!(e&&(e.boss||e.midboss||e.miniBoss||e.persona||e.cosmic||e.trial||e.r170Tower||e.r193Doll||e.samongMidR162||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
 function zoneKey(){try{const x=typeof room==='object'?room?.samongR103:null;if(!x)return null;const m=/^sz115-(S0\d)-/.exec(String(x.zone||''));return m?m[1].replace('S0','S-0'):(x.key||null);}catch(_){return null;}}
-function assign(e){if(!prefs.on||!idx||!e||e.r200Checked||!e.samongR103||major(e))return e?.r200Shade?byId(e.r200Shade):null;
+function assign(e){if(!prefs.on||!idx||!e||e.r200Checked||!e.samongR103||major(e)||objective(e))return e?.r200Shade?byId(e.r200Shade):null;
  const z=zoneKey(),list=byZone[z];e.r200Checked=true;if(!list)return null;
  if(z==='S-06'&&/상대 초인|지휘 (개체|기체)/.test(String(e.name||'')))return null;
  const u=hash(e.id);if(u<prefs.puppetShare){stats.puppetKept++;return null;}

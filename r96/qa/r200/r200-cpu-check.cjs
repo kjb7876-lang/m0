@@ -24,6 +24,8 @@ ok('in the public verify list',/'samong-shades-r200\.js'/.test(fs.readFileSync(p
  ok('idle uses cells 1-2, attack uses cells 6-11 by progress',idle<=1&&atk>=5&&atk<=10,{idle,atk});
  const keep=[{boss:true},{midboss:true},{persona:true},{r170Tower:true},{r193Doll:true},{samongMidR162:true}].map((o,i)=>({id:'k'+i,hp:10,samongR103:{},...o}));
  ok('bosses, midbosses, persona, towers, dolls untouched',keep.every(e=>F().frameFor(e,null).path==='base'));
+ ok('breakable objectives (세뇌당한 기억의 조각) are not mobs',F().frameFor({id:'o1',name:'세뇌당한 기억의 조각',hp:10,samongR103:{}},null).path==='base');
+ const ids=[...Array(60)].map((_,i)=>({id:String(1000+i),hp:10,samongR103:{}}));const kept=ids.filter(e=>!F().frameFor(e,null).r200Shade).length;ok('short numeric ids still leave some puppets (well-mixed hash)',kept>=3&&kept<=20,kept);
  sb.room={samongR103:{zone:'sz115-S06-3'}};const riv={id:'r1',name:'상대 초인',hp:10,samongR103:{}};ok('S-06 rival/commander keep their R184 art',F().frameFor(riv,null).path==='base');
  sb.room={samongR103:{zone:'sz115-S07-1'}};ok('S-07 persona zone untouched',F().frameFor({id:'p1',hp:10,samongR103:{}},null).path==='base');
  sb.room={};ok('story (non-samong) mobs untouched',F().frameFor({id:'s1',hp:10},null).path==='base');
