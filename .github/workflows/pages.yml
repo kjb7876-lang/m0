@@ -207,6 +207,8 @@ jobs:
         run: node r96/qa/r204/r204-cpu-check.cjs
       - name: R206 grounded mobs (no contact shadow unless floating) CPU check
         run: node r96/qa/r206/r206-cpu-check.cjs
+      - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
+        run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check
         run: node r96/qa/r203/r203-cpu-check.cjs
       - name: R195 classical BGM (licenses, per-zone/boss selection, fades, ducking) CPU check
