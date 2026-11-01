@@ -9,7 +9,7 @@ const REV='R182-light-1',KEY='storyworld.r182.light',MODES=['full','torch','flas
 let prefs={mode:'full'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(MODES.includes(s.mode))prefs.mode=s.mode;}catch(_){}
 const stats={toggles:0,coneFrames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const mode=()=>prefs.mode;
-function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=prefs.mode!=='full';if(window.__STORYWORLD_SAMONG_R103__&&typeof room!=='undefined'&&room?.samongR103&&want)return;/* 사몽 미로는 samong-r103 이 켜고 끈다 */
+function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=prefs.mode!=='full';/* R185: 사몽 안에서 '전체'→횃불/손전등으로 바꿔도 바로 R24 시야를 켠다(예전에는 다음 구역까지 기다림 — Codex 리뷰) */
   if((settings.flashlight58!==false)!==want){settings.flashlight58=want;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',want);}catch(e){fail(e);}}
 function set(p){if(MODES.includes(p?.mode))prefs.mode=p.mode;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();return{...prefs};}
 function toggle(){set({mode:MODES[(MODES.indexOf(prefs.mode)+1)%MODES.length]});stats.toggles++;try{if(typeof toast==='function')toast('시야: '+NAME[prefs.mode],1.6);}catch(_){}}
