@@ -10,10 +10,11 @@ const pub=fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'ut
 const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,performance:{now:()=>0},blocked:()=>false};vm.createContext(sb);vm.runInContext(C('doors-r189.js'),sb);const D=sb.window.__STORYWORLD_DOORS_R189__;
 ok('kinds: broken_gate→gate, collapsed_stairs/R123 stairs→stairs, r99 outdoor tree→none, R74/R81 progression doors→none',D.kindOf({key:'gate',path:'assets/props/v290/broken_gate.webp'})==='gate'&&D.kindOf({key:'stairs',path:'assets/props/v290/collapsed_stairs.webp'})==='stairs'&&D.kindOf({r123Deco:{kind:'stairs'}})==='stairs'&&D.kindOf({path:'assets/r99/outdoor/tree-a.webp'})===null&&D.kindOf({r74Door:{}})===null&&D.kindOf({r81WardDoor:true,key:'door'})===null);
 const walls=[{x:10,y:5,width:12,depth:.24}];const q=D.snapPoint({x:12,y:8.5},walls,.35,null);
-ok('snaps onto the floor-side face of the nearest wall, keeping its place along the wall',q&&Math.abs(q.y-(5+.12+.35))<1e-9&&Math.abs(q.x-12)<1e-9&&q.horiz===true,q);
+ok('snaps onto the floor-side face of the nearest wall (kept clear of it by the R81 clearance), keeping its place along the wall',q&&Math.abs(q.y-(5+.12+.35))<1e-9&&Math.abs(q.x-12)<1e-9&&q.horiz===true,q);
+ok('placement uses the R81 environment clearance (explorationBlocked, max(.55,r)+.14)',/explorationBlocked\?\.\(L,c\.x,c\.y,need\)/.test(fs.readFileSync(path.join(R,'client-source','doors-r189.js'),'utf8')));
 ok('a prop more than 8 tiles from any wall is left alone',D.snapPoint({x:40,y:40},walls,.35,null)===null);
 const room={exploration:{walls},props:[{key:'stairs',x:11,y:9,solid:false,visualOnly6:true},{key:'gate',x:12,y:9,solid:true},{path:'assets/r99/outdoor/tree.webp',x:9,y:9,solid:false,visualOnly6:true}]};D.arrange(room);
-ok('only decorative non-solid door/stair props move; stairs flagged as level passage',room.props[0].r189Stairs===true&&Math.abs(room.props[0].y-(5+.12+.55))<1e-9&&room.props[1].y===9&&room.props[2].y===9);
+ok('only decorative non-solid door/stair props move; stairs flagged as level passage',room.props[0].r189Stairs===true&&Math.abs(room.props[0].y-(5+.12+.8))<1e-9&&room.props[1].y===9&&room.props[2].y===9);
 // 길잡이 난이도
 const g={window:{__STORYWORLD_GUIDE_R77__:Object.freeze({armNextNormal(){},takeNextNormal:(d)=>d==='ok'?'normal':null})},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,room:{difficultyR63:'hard'},toast(){}};vm.createContext(g);vm.runInContext(C('guide-difficulty-r189.js'),g);
 const G=g.window.__STORYWORLD_GUIDE_R77__,T=g.window.__STORYWORLD_GUIDE_TIER_R189__;

@@ -19,10 +19,11 @@ function snapPoint(p,walls,off,where){let best=null,bd=8;for(const w of walls){i
  if(!best)return null;const w=best,horiz=w.width>=w.depth;const cands=[];
  if(horiz){const x=Math.max(w.x-w.width/2+.7,Math.min(w.x+w.width/2-.7,p.x));const s=Math.sign(p.y-w.y)||1;cands.push({x,y:w.y+s*(w.depth/2+off)},{x,y:w.y-s*(w.depth/2+off)});}
  else{const y=Math.max(w.y-w.depth/2+.7,Math.min(w.y+w.depth/2-.7,p.y));const s=Math.sign(p.x-w.x)||1;cands.push({x:w.x+s*(w.width/2+off),y},{x:w.x-s*(w.width/2+off),y});}
- for(const c of cands){try{if(typeof blocked==='function'&&blocked(c.x,c.y,.3,where))continue;}catch(_){continue;}return{...c,dist:bd,horiz};}return null;}
+ /* R81 환경 검사와 같은 기준: 조형물 중심은 벽에서 max(.55,반지름)+.12 이상 떨어져야 한다 */const need=Math.max(.55,Number(p.radius)||0)+.14,L=where?.exploration;
+ for(const c of cands){try{if(L&&window.StoryPhase1?.explorationBlocked?.(L,c.x,c.y,need))continue;if(typeof blocked==='function'&&blocked(c.x,c.y,.3,where))continue;}catch(_){continue;}return{...c,dist:bd,horiz};}return null;}
 function arrange(r){if(!prefs.on||!r||done.has(r))return;const L=r.exploration;if(!L?.walls?.length||!Array.isArray(r.props))return;done.add(r);
  for(const p of r.props){const k=kindOf(p);if(!k||!isDeco(p)||!Number.isFinite(p.x)||!Number.isFinite(p.y))continue;
-  try{const q=snapPoint(p,L.walls,k==='stairs'?.55:.35,r);if(!q||q.dist<.25){stats.kept++;continue;}if(!p.r189From)p.r189From={x:p.x,y:p.y};p.x=q.x;p.y=q.y;p.r189Wall=q.horiz?'h':'v';stats.snapped++;if(k==='stairs'){p.r189Stairs=true;stats.stairs++;}}catch(e){fail(e);}}}
+  try{const q=snapPoint(p,L.walls,k==='stairs'?.8:.74,r);/* 벽 면에서 .74~.8 — 그림 폭이 벽에 닿아 보이고 R81 통과 여유는 지킨다 */if(!q||q.dist<.25){stats.kept++;continue;}if(!p.r189From)p.r189From={x:p.x,y:p.y};p.x=q.x;p.y=q.y;p.r189Wall=q.horiz?'h':'v';stats.snapped++;if(k==='stairs'){p.r189Stairs=true;stats.stairs++;}}catch(e){fail(e);}}}
 try{if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(...a){const r=base.apply(this,a);try{arrange(r);}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 /* 이미 만들어진 방(불러오기·첫 방)도 */
 (function poll(){try{if(typeof room!=='undefined'&&room)arrange(room);}catch(e){fail(e);}setTimeout(poll,700);})();
