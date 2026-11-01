@@ -26,6 +26,10 @@ const p=C('perf-r180.js'),fx=C('fx-sprites-r106.js');
 ok('wall hairlines (alpha ≤ .14, thin) skipped only while drawing terrain walls; ctx.stroke restored',/if\(C\.globalAlpha<=\.14&&\(C\.lineWidth\|\|1\)<=2\.5\)/.test(p)&&/finally\{if\(own\)C\.stroke=prev;else delete C\.stroke;\}/.test(p)&&/w\?\.terrainWall/.test(p));
 ok('R106 big additive pieces dimmed by area (floor ×.35) and by per-frame additive area over 3 hero areas',/tame=Math\.max\(\.35,1\/ar\)/.test(fx)&&/addArea>3\)\{tame\*=Math\.max\(\.35,3\/addArea\)/.test(fx)&&/addArea=0;/.test(fx));
 ok('R106 frame budget tightens ×.73 in crowds over 25 enemies',/crowd>25\?Math\.round\(FB\*\.73\):FB/.test(fx));
+// ---- 3D 기록기가 받지 않는 CSS 필터(drop-shadow 등)를 캔버스에 쓰면 'Three.js 실행 실패'로 화면이 꺼진다(R181: 북부 방어선·불탄 거리 큰 꼭두각시) ----
+{const bad=[];for(const f of fs.readdirSync(path.join(R,'client-source')).filter(f=>f.endsWith('.js'))){const src=C(f);for(const m of src.matchAll(/\b(?:ctx|c|g|context|cx)\.filter\s*\+?=\s*([^;]{0,300})/g)){for(const lit of m[1].matchAll(/'([^']*)'/g)){const fns=[...lit[1].matchAll(/([a-z-]+)\(/g)].map(x=>x[1]);const no=fns.filter(x=>!['brightness','contrast','saturate','grayscale','hue-rotate','rgba','rgb'].includes(x));if(no.length)bad.push(f+': '+lit[1].slice(0,60));}}}
+ ok('canvas ctx.filter strings only use filters the Three.js recorder supports (brightness/contrast/saturate/grayscale/hue-rotate)',!bad.length,bad.join(' | '));}
+ok('R161 big puppet: no drop-shadow filter, red glow drawn as an R106 sprite instead',!/ctx\.filter=[^;]*drop-shadow/.test(C('samong-r161.js'))&&/S\.draw\('glow',\{a:\[120,0,18\]/.test(C('samong-r161.js')));
 for(const f of ['skills-r181.js','perf-r180.js','fx-sprites-r106.js'])ok('no mid-line // comment swallowing code · '+f,!C(f).split('\n').some(l=>/[;)}]\s*\/\/[^\n]*[;{}]\s*\S/.test(l)&&!/^\s*\/\//.test(l)&&!/['"`][^'"`]*\/\/[^'"`]*['"`]/.test(l)));
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');
