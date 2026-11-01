@@ -11203,6 +11203,31 @@
       "sha256": "84d883dbbad27b1cdb5abfaa24f4823cb7964fa1ac58998dbc81ebecaf8ccf65"
     },
     {
+      "path": "assets/r143/dash/lauren/dash-s.webp",
+      "bytes": 43580,
+      "sha256": "0785267661a2dfc8b9640d07a3ec434dca550936e774a5a75771146ecc2d2060"
+    },
+    {
+      "path": "assets/r143/dash/lauren/index.json",
+      "bytes": 1393,
+      "sha256": "f18f3a253a6b416b64d2b15251da5f5fee71f0aa403dd7dcb8393ab94ae3d2c4"
+    },
+    {
+      "path": "assets/r143/guard/lauren/guard-e.webp",
+      "bytes": 37470,
+      "sha256": "db5d45f369baa2c831b19954a02269485f1b4e0675fb029ad8c4a1c7f7808aa1"
+    },
+    {
+      "path": "assets/r143/guard/lauren/guard-s.webp",
+      "bytes": 40118,
+      "sha256": "b4b0b71070a895f4e779c496f1f1eac4163f3d089c539acda78b8814c8ca5256"
+    },
+    {
+      "path": "assets/r143/guard/lauren/index.json",
+      "bytes": 1556,
+      "sha256": "477785cb0068f6205a4f17f8600fc86ae1a1e792ae7032493515be7830299359"
+    },
+    {
       "path": "assets/r143/hit/gunner/hit-e.webp",
       "bytes": 13874,
       "sha256": "176f1e5952636c88f0eba93a7e23e1cfcfa272b2da3a14648a110e9e462d7600"
@@ -11436,6 +11461,71 @@
       "path": "assets/r143/hit/slayer/index.json",
       "bytes": 2570,
       "sha256": "e3728d23e4b6ad20246f9fb443be61c7fc72be17b234b1161751af2e9e744932"
+    },
+    {
+      "path": "assets/r143/skill/lauren/index.json",
+      "bytes": 1626,
+      "sha256": "69deddd0a9caf401335e8d21871ae3adbbe985953754607c27c0f4c53d7e8432"
+    },
+    {
+      "path": "assets/r143/skill/lauren/skill-e.webp",
+      "bytes": 56052,
+      "sha256": "a71a40c2717aa6bf3921708eeb02b4f5e20d89ce7216cded4e3f3fb7c0ce238e"
+    },
+    {
+      "path": "assets/r143/skill/lauren/skill-s.webp",
+      "bytes": 71346,
+      "sha256": "560d16ca936d81370da0f61110e353d27ba47169bdcf26bfe322255eba0f47a9"
+    },
+    {
+      "path": "assets/r143/skill/michaela/index.json",
+      "bytes": 1710,
+      "sha256": "7e9fde6097d40e9ef5a6259607f320346c258c1eb55e91778509458999d4d5e2"
+    },
+    {
+      "path": "assets/r143/skill/michaela/skill-e.webp",
+      "bytes": 61916,
+      "sha256": "cf2b3b581fb94f7a8bafd37f11be7be27b5042af0a97f9975246c5e1b4f994f1"
+    },
+    {
+      "path": "assets/r143/skill/michaela/skill-s.webp",
+      "bytes": 51488,
+      "sha256": "d25fe3a51560973d45082fae27a5d0737606f05a89596af689b58f88077c7a64"
+    },
+    {
+      "path": "assets/r143/ultimate/lauren/index.json",
+      "bytes": 2427,
+      "sha256": "cbdb7e8987a6c78df50bbc2f2ec57f048524040c9424feb24fb515e06706b781"
+    },
+    {
+      "path": "assets/r143/ultimate/lauren/ultimate-e.webp",
+      "bytes": 80556,
+      "sha256": "783150f237dda6f8e6f3ddc3473f2ad1af9f18dbb05493e64c0f7a33560e04bb"
+    },
+    {
+      "path": "assets/r143/ultimate/lauren/ultimate-s.webp",
+      "bytes": 105038,
+      "sha256": "8ef7f92ad00ea426103d069c93d2366ff60086ffcc4cf82821b659b581797692"
+    },
+    {
+      "path": "assets/r143/ultimate/lauren/ultimate-se.webp",
+      "bytes": 74864,
+      "sha256": "ec306a29fb823b1f5ce2819d4849e416223e46d59fffea6b6e647e5a9684f918"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/index.json",
+      "bytes": 1805,
+      "sha256": "585bb17e5f67fe9414cb83ff1a17e4cd1d0dacc4119acd53bd0c4e06589f6448"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/ultimate-e.webp",
+      "bytes": 84962,
+      "sha256": "8cfe10e9a9579c4f9ec8caf9273135cb9067411e83b23945f4b4f7c203f745d2"
+    },
+    {
+      "path": "assets/r143/ultimate/michaela/ultimate-s.webp",
+      "bytes": 79968,
+      "sha256": "70c5f0a8c1546a03d4814249eafb2335fa3a9c0fd70c9ee335a354662e3eb668"
     },
     {
       "path": "assets/r144/walk/gunner/index.json",
@@ -20044,8 +20134,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 14829,
-      "sha256": "e124dbca087a0c661bee7017251199c971d41ce60704530c44242af26cf51045"
+      "bytes": 17485,
+      "sha256": "bf9b7059d883bce119b89e402448517372a4cb9cbfbdbe41fbe6095bf1ab6f7f"
     },
     {
       "path": "audio-r108.js",
@@ -21423,8 +21513,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4284,
-  "totalBytes": 840056187,
+  "fileCount": 4302,
+  "totalBytes": 840856718,
   "webHTMLSha256": "c526e9b9b83c30637f98adf70e5d24705761a0a7a49b7713a0e640009b390477",
   "largest": [
     {
