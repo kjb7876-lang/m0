@@ -15,5 +15,12 @@ ok('dolls are ranged (type/ai/weapon ranged, preferred range 5.2 like engine ran
 ok('donor and boss untouched',r.enemies[0].type==='melee'&&r.enemies[0].hp===100&&r.enemies[1].hp===900);
 const o=mk('sz115-S02-4');D.make(o);ok('other samong zones untouched',!o.enemies.some(e=>e.r193Doll)&&o.props.length===3);
 D.make(r);ok('idempotent per room',r.enemies.filter(e=>e.r193Doll).length===2);
+// R197 (Codex 리뷰): 몹이 아직 없을 때 방을 끝내 버리지 않음 / 몸 그림은 frameFor 로만 바꿈(drawEnemy 를 대신하지 않음 → 기록기 범위·체력바·대상 표시 유지)
+{const e0=mk('sz115-S01-3'),saved=e0.enemies;e0.enemies=[];D.make(e0);const none=e0.enemies.length===0&&e0.props.length===3;e0.enemies=saved;D.make(e0);
+ ok('room entered before mobs spawn (intro open) is retried and gets its dolls once mobs exist',none&&e0.enemies.filter(e=>e.r193Doll).length===2);}
+{const sb2={window:{__STORYWORLD_STORY_COMBAT_R54__:Object.freeze({frameFor:(e,f)=>({path:'base',e})})},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,player:{x:0,y:0},drawEnemy:function orig(){}};
+ vm.createContext(sb2);const orig=sb2.drawEnemy;vm.runInContext(C('samong-doll-r193.js'),sb2);const S=sb2.window.__STORYWORLD_STORY_COMBAT_R54__;
+ const fd=S.frameFor({r193Doll:true,hp:5,x:3,y:1},null),fn=S.frameFor({hp:5},null);
+ ok('doll body comes from the frameFor chain (engine draws it: recorder scope, hp bar, target mark kept); drawEnemy is not replaced',sb2.drawEnemy===orig&&fd.path==='assets/r105/drive/prop-doll.webp'&&fd.assetFrame.sourceRect[2]===259&&fn.path==='base'&&!/drawEnemy\s*=/.test(C('samong-doll-r193.js')),{fd:fd.path,fn:fn.path});}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('all '+checks.length+' passed');
