@@ -542,6 +542,10 @@ function hideNative(r){let n=0;r.spatialRoot.traverse(o=>{if(o===r.spatialRoot||
 function restoreNative(r){r.spatialRoot.traverse(o=>{if(o.userData?.r204Mask!=null){o.layers.mask=o.userData.r204Mask;delete o.userData.r204Mask;}});r.__r204Hidden=false;}
 function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entities?.find(e=>e.hero);if(!h){U.r204Hero.value.w=0;return;}
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
+// R213(Codex #134): 풀 덤불·나무는 SpriteMaterial 이라 R24 시야 마스크(attachSight24 은 메시 재질만)를 받지 않아 시야 밖에서도 보였다.
+//  → 시야가 켜져 있으면 12장면마다 각 그림의 바닥 점이 보이는지(SIGHT24.pointVisible) 물어 안 보이면 레이어를 끈다(엔진이 visible 을 되살리므로 layers.mask 로).
+let sightTick=0;function spriteSight(st){try{const S=window.__STORYWORLD_SIGHT24__,on=!!S?.enabled;if(!st?.group)return;if(on&&(++sightTick%12))return;
+ for(const g of st.group.children){if(g.name!=='r212-tufts'&&g.name!=='r204-trees')continue;for(const sp of g.children){const want=!on||S.pointVisible(sp.position.x,sp.position.z)?4:0;if(sp.layers.mask!==want)sp.layers.mask=want;}}}catch(e){fail(e);}}
 function before(r,frame){try{
  const st=r.__r204;if(!eligible(r,frame)){if(st?.group)st.group.visible=false;if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그룹이 없어도(빌드 실패·대기 중 지역 이탈) 가린 원래 지형을 되돌린다 — Codex #132 */
  // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
@@ -549,7 +553,7 @@ function before(r,frame){try{
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
- hideNative(r);heroUniform(r,frame);stats.frames++;
+ hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
