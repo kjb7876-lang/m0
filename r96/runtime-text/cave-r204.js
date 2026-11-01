@@ -82,7 +82,25 @@ const ZONES={
  // 눈보라 속의 소년(2부): 눈 덮인 바위 언덕·검은 돌
  ep1b06b:{seed:0x5d1066,tint:[.92,.96,1.06],topK:2.1,floorK:1.04,hiTop:1.5,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,trees:'dead',boulders:1/80,
   decalMix:{near:[[5,4],[6,3],[7,2]],open:[[5,3],[6,3],[7,2],[0,1]]},decalDensity:13,
-  tex:{floorA:['assets/r118/tiles/snow.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r118/tiles/snow.webp',0],face:['assets/r99/outdoor/ground-cliff.webp',1]}}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
+  tex:{floorA:['assets/r118/tiles/snow.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r118/tiles/snow.webp',0],face:['assets/r99/outdoor/ground-cliff.webp',1]}},
+ // R213 — 돌 유적 계열 야외 지역(탐침 계열 stone, 판타지 유적 서사). 건축물이라 불룩 작게(무너진 성·일곱 기둥처럼), 넓히기 없음.
+ // 솔로몬의 봉인식(2부): 봉인 의식 터 — 금고 돌바닥·성 돌, 균열·쇠사슬
+ ep1b01:{seed:0x5d1010,tint:[.9,.86,.86],floorBGain:1.03,hiTop:1.7,loTop:.55,bulge:.75,widen:false,web:false,pillars:false,boulders:1/120,floorK:1.08,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,4],[5,2],[6,2],[7,2],[8,.8]]},decalDensity:12,
+  tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}},
+ // 하늘에 서려는 자(2부): 높이 쌓은 돌 언덕 — 높은 윗면, 벽돌 벽면
+ ep1b08:{seed:0x5d1080,tint:[.88,.86,.9],floorBGain:1.02,hiTop:1.95,loTop:.6,bulge:.8,widen:false,web:false,pillars:false,boulders:1/100,floorK:1.06,topK:2.1,
+  decalMix:{near:[[5,3],[6,3],[7,2],[0,1]],open:[[0,3],[5,3],[6,2],[7,2]]},decalDensity:12,
+  tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r99/outdoor/ground-paving.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/workshop.webp',1]}},
+ // 최초명령의 세계(5부): 오래된 돌 평원 — 포장 돌·흙, 낮은 바위 언덕
+ kair01:{seed:0x5d5010,tint:[.9,.88,.84],floorBGain:1.02,hiTop:1.5,loTop:.5,bulge:.9,widen:false,web:false,pillars:false,boulders:1/90,floorK:1.04,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[2,1],[0,1]],open:[[0,3],[5,3],[6,2],[7,2],[11,.6]]},decalDensity:12,tufts:['assets/r138/props/weed.webp',.1,1/80],
+  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]}},
+ // 예순여섯 수문장(5부): 문을 지키는 돌 회랑 — 성 돌바닥·잔해 윗면
+ kair04:{seed:0x5d5040,tint:[.88,.84,.82],floorBGain:1.03,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[0,2],[1,.5]],open:[[0,3],[5,3],[6,2],[7,2],[8,.6],[1,.3]]},decalDensity:12,
+  tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/vault.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]},
+  uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
 const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};
