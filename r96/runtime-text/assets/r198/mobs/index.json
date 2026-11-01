@@ -4,6 +4,252 @@
  "note": "Drive 2026-10-29~30 eight-key 묶음에서 게임에 없던 이동·공격·대기만 채운 가공 사본. 원본 보존, 맞음은 R116 4키 유지. 완성 루프 승인 아님(묶음 표기: smooth_loop_validated=false).",
  "tracks": [
   {
+   "group": "M011",
+   "ids": [
+    "a08-s1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M011-idle.png",
+   "frames": 2,
+   "cell": [
+    118,
+    154
+   ],
+   "pivot": [
+    59.0,
+    154
+   ],
+   "visibleHeight": 150,
+   "bytes": 62122,
+   "sha256": "fed4a21e78ae953d5d96cc58552b486712158cd87fa9b4e6f14b94246d98d3e8",
+   "flipped": false,
+   "use": "복도 비명잔영 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.01,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M011-eight-key-20261029-PART01.zip",
+      "bytes": 2703749,
+      "sha256": "6c1b8ef7e331ae55ba5e8bc257bf070fa398135e85ad9e14906cc17cdbd9d914"
+     },
+     {
+      "name": "StoryWorld-M011-eight-key-20261029-PART02.zip",
+      "bytes": 2152468,
+      "sha256": "5a7395c66b763125ce058fce4f4d9b612030defc89c9b64a9eb722562c3a6d0b"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M011-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M011-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "49458600aaa9aa2d17e6bda51fedea17540596762d1e07d5b930ca6c1b2dc11a"
+     },
+     {
+      "zip": "StoryWorld-M011-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M011-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "0fd1a0663a926747bc9e96f809da0c30f984d65d14208d7e1ac2cc54147daf8e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M012",
+   "ids": [
+    "a08-o1",
+    "a08-o2",
+    "a09-o1",
+    "a10-o1",
+    "a11-o1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M012-idle.png",
+   "frames": 2,
+   "cell": [
+    112,
+    160
+   ],
+   "pivot": [
+    56.0,
+    160
+   ],
+   "visibleHeight": 150,
+   "bytes": 52911,
+   "sha256": "80bb9cbe2b6f837baf3572aa1ed1d21022314be326c2fb558bf8f38e3f7bc2ab",
+   "flipped": false,
+   "use": "백의 구속자 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.098,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M012-eight-key-20261029-PART01.zip",
+      "bytes": 2647215,
+      "sha256": "bc21368bfacb4d9e4246c0665bbd4cc3818e3c54ec1cf62ae9c27d818d46e5df"
+     },
+     {
+      "name": "StoryWorld-M012-eight-key-20261029-PART02.zip",
+      "bytes": 510779,
+      "sha256": "36cb32dea5fdb07de19d501e69c5ab97db32789b4f39d519b1d22976e5c50a1d"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M012-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M012-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "2495fecbaff07dab3cba3cdce634435336b06a32eb5a10ff6d7cb5a7e19b3702"
+     },
+     {
+      "zip": "StoryWorld-M012-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M012-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "225a8e70c622806ec8f1337d8c8c9ff8ccee6ae50db2b20b15cc5703ddba3d8e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M013",
+   "ids": [
+    "a09-v1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M013-idle.png",
+   "frames": 2,
+   "cell": [
+    114,
+    153
+   ],
+   "pivot": [
+    57.0,
+    153
+   ],
+   "visibleHeight": 150,
+   "bytes": 66016,
+   "sha256": "88781f8911b35621f0f0a27581cf1ae61a897bb19db00bacd17777fa355c0e0e",
+   "flipped": false,
+   "use": "갈망의 약병핵 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.002,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M013-eight-key-20261029-PART01.zip",
+      "bytes": 2569473,
+      "sha256": "c774d28a51cc27af622112f4bf3ce27d8873190f62659f5fa769aaa793278957"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M013-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M013-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "52e83e1a0abaaf8020e83724d4f0d70de452d0c034161e0dc8849589aad2f535"
+     },
+     {
+      "zip": "StoryWorld-M013-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M013-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "6f4d49d247b29992bee5237732583cd2567a473a3efc31ab805e68e3fb3583c9"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M016",
+   "ids": [
+    "a10-s1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M016-idle.png",
+   "frames": 2,
+   "cell": [
+    128,
+    153
+   ],
+   "pivot": [
+    64.0,
+    153
+   ],
+   "visibleHeight": 150,
+   "bytes": 76088,
+   "sha256": "e99f93681d88b4ed67b3e2d8d04c7cdf27d49282297889890540095afb0f253f",
+   "flipped": false,
+   "use": "부정의 잔영 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.002,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M016-eight-key-20261029-PART01.zip",
+      "bytes": 2607038,
+      "sha256": "ce05883db3c79939f94f8c44f3c1a678d1ddf76aa82bce2ed48b4163a28f09c7"
+     },
+     {
+      "name": "StoryWorld-M016-eight-key-20261029-PART02.zip",
+      "bytes": 2358335,
+      "sha256": "b21fcc7140c7eca8454a7f4e08cb8f554c9b46160b5c076f6408f3e63d47abf4"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M016-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M016-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "49285e8aaea262ce7a0786a25fdfb3e4c8246f9f73deb6fb1cc784ee416bf26e"
+     },
+     {
+      "zip": "StoryWorld-M016-eight-key-20261029-PART02.zip",
+      "png": "StoryWorld-M016-eight-key-20261029-PART02/frames/idle_02.png",
+      "sha256": "69208f3eece49da311f674bb3e5e0d4df8e87e860f74f02f88192619c9d5a6a4"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M018",
+   "ids": [
+    "b01-s1",
+    "b03-g1",
+    "b03-g2"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M018-idle.png",
+   "frames": 2,
+   "cell": [
+    139,
+    154
+   ],
+   "pivot": [
+    69.5,
+    154
+   ],
+   "visibleHeight": 150,
+   "bytes": 71791,
+   "sha256": "6527ce25cc9327dad1c7f8c390b4e436690d9c29b25d409bffad42924cd26c82",
+   "flipped": false,
+   "use": "이름 없던 공포 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.01,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M018-eight-key-20261029-PART01.zip",
+      "bytes": 2216662,
+      "sha256": "c647a3cabbb73035036f5ba88bc96e089ff422cd595d280cc5a5259be7d48d2b"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M018-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M018-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "a7a981ed678b45c086f25a82e88de68a490a4c19f47028728d3405e97a9105bc"
+     },
+     {
+      "zip": "StoryWorld-M018-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M018-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "a0973fb1ae3327ec3cf96e2129ff7db750c2d905073a392a2fe9735701bbb9df"
+     }
+    ]
+   }
+  },
+  {
    "group": "M022",
    "ids": [
     "b02-m1"
@@ -104,6 +350,57 @@
       "zip": "StoryWorld-M024-eight-key-20261029-PART02.zip",
       "png": "StoryWorld-M024-eight-key-20261029-PART02/frames/idle_02.png",
       "sha256": "5b4dfdb057634ca2323023d2f5df27277a69b6332b378a97d0d18d1ca7c81bc4"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M025",
+   "ids": [
+    "b04-g1",
+    "b04-s1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M025-idle.png",
+   "frames": 2,
+   "cell": [
+    184,
+    157
+   ],
+   "pivot": [
+    92.0,
+    157
+   ],
+   "visibleHeight": 150,
+   "bytes": 96667,
+   "sha256": "2fdf0a9d4137d73d9840ee384a1be8fcc2eff92bdcd1ef3747a8d496f523c03f",
+   "flipped": false,
+   "use": "버려진 최고급 식재료 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.053,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M025-eight-key-20261029-PART01.zip",
+      "bytes": 2732890,
+      "sha256": "4a4ac8bf02658c36970207f32388439c5f9e1600c3d341dcf98c054a4bbff65d"
+     },
+     {
+      "name": "StoryWorld-M025-eight-key-20261029-PART02.zip",
+      "bytes": 811454,
+      "sha256": "24c23cb75cb83433eaf68e6112b88182a401cee834f3040e71b7e38b06be88db"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M025-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M025-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "dce1ab131634b1566f7de40f89b13a3f0a7ac91c982c4f4316a902cb0a699088"
+     },
+     {
+      "zip": "StoryWorld-M025-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M025-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "abf9c02fe93a6559353bd467c8dfd9feab09a3b0575a4dc759f14abf1092dcdd"
      }
     ]
    }
@@ -414,6 +711,145 @@
    }
   },
   {
+   "group": "M038",
+   "ids": [
+    "u201-e1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M038-idle.png",
+   "frames": 2,
+   "cell": [
+    224,
+    153
+   ],
+   "pivot": [
+    112.0,
+    153
+   ],
+   "visibleHeight": 150,
+   "bytes": 95337,
+   "sha256": "a4ade47be40cab25897d2e3f8210d091b108d11ae8cddfe8eb4a27dd50c6a20f",
+   "flipped": false,
+   "use": "전쟁기억 정찰드론 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.0,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M038-eight-key-20261029-PART01.zip",
+      "bytes": 1357377,
+      "sha256": "23eaf9fc03c6149b67dda9cec0e254c439f4c7b4a8bcdabcdc49725e11d31ce1"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M038-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M038-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "d4c9c93a66aa0511d7456ac95f2ff06bf499143d3833ee2932f853389e54eb5f"
+     },
+     {
+      "zip": "StoryWorld-M038-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M038-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "df774aa6ef08f87baa7da7fec609b2d8c49953f3394968c2ecd345b40264db6e"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M042",
+   "ids": [
+    "u203-e1",
+    "u204-e1",
+    "u206-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M042-idle.png",
+   "frames": 2,
+   "cell": [
+    150,
+    153
+   ],
+   "pivot": [
+    75.0,
+    153
+   ],
+   "visibleHeight": 150,
+   "bytes": 93244,
+   "sha256": "52e41ef213d8ce1a1f7b24abb39d954fb2915ebf8e40adc83da73b1def3123df",
+   "flipped": false,
+   "use": "이동문 청람잔영 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.006,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M042-eight-key-20261029-PART01.zip",
+      "bytes": 2548456,
+      "sha256": "b4d356dd2791d3aa4d9f20c3db79a4d89684634fffdc29e596b067da543df593"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M042-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M042-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "0b40a395288ec2eecf92b9e1c4d453578764b277517cc465954777ce6886ebfd"
+     },
+     {
+      "zip": "StoryWorld-M042-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M042-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "500c134808149d436180ebb754b3365f8391774b044a8f95d6c2a826e33f91cd"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M045",
+   "ids": [
+    "l302-e3",
+    "l304-e1",
+    "l304-e3"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M045-idle.png",
+   "frames": 2,
+   "cell": [
+    278,
+    162
+   ],
+   "pivot": [
+    139.0,
+    162
+   ],
+   "visibleHeight": 150,
+   "bytes": 128722,
+   "sha256": "3113a41e97e9509a0ba97e13606df201d7b9816e303fdbe15848249ac3b79a7b",
+   "flipped": false,
+   "use": "귀비탕 공명 안개핵 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.128,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M045-eight-key-20261029-PART01.zip",
+      "bytes": 2713848,
+      "sha256": "619c08b01ab0dde89899fd6cfebf5fdb6c6a81c6fb83a712d53a0c3ab258434c"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M045-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M045-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "6e516d1cd5a3ecd59f9abc7f270c98be92dc7374f220204aa622bddf47f0a014"
+     },
+     {
+      "zip": "StoryWorld-M045-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M045-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "9e69c7c3fc68c6e339e6cb7e579d65307240aeb4a1c03fe8b473127e774176bb"
+     }
+    ]
+   }
+  },
+  {
    "group": "M046",
    "ids": [
     "l302-e2",
@@ -613,6 +1049,51 @@
       "zip": "StoryWorld-M047-eight-key-20261029-PART02.zip",
       "png": "StoryWorld-M047-eight-key-20261029-PART02/frames/idle_02.png",
       "sha256": "337de32322f9d0661558e5e9161b5f6052f3c33a2ebc5bd950c59f680a72cea3"
+     }
+    ]
+   }
+  },
+  {
+   "group": "M128",
+   "ids": [
+    "c101-e1"
+   ],
+   "track": "idle",
+   "kind": "walk",
+   "path": "assets/r198/mobs/M128-idle.png",
+   "frames": 2,
+   "cell": [
+    102,
+    153
+   ],
+   "pivot": [
+    51.0,
+    153
+   ],
+   "visibleHeight": 150,
+   "bytes": 49365,
+   "sha256": "f12093a46d6bc2598a3d4c2c77db9fad6657239d9121ce96dc0f67aa4c3cbf20",
+   "flipped": false,
+   "use": "흑장미 눈가린 신도 · 대기 2키 (게임에 없던 동작만 채움)",
+   "heightRatio": 1.002,
+   "source": {
+    "zips": [
+     {
+      "name": "StoryWorld-M128-eight-key-20261029-PART01.zip",
+      "bytes": 2262079,
+      "sha256": "b19ae245dc985045f093a090af7300e7cdfe5ea19db06cb74ce7d9c44832c3aa"
+     }
+    ],
+    "frames": [
+     {
+      "zip": "StoryWorld-M128-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M128-eight-key-20261029-PART01/frames/idle_01.png",
+      "sha256": "079f0035592a740913377bd141ae2814b76da6275fd81920a39c54f1d0d2a604"
+     },
+     {
+      "zip": "StoryWorld-M128-eight-key-20261029-PART01.zip",
+      "png": "StoryWorld-M128-eight-key-20261029-PART01/frames/idle_02.png",
+      "sha256": "1b45c710e2d3f8cc06dbb3a85e6d1e9f34adfd88e1946cf76ba31abfb020c0ca"
      }
     ]
    }

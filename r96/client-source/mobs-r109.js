@@ -12,7 +12,7 @@
  *   Drive 그림 한 장 경로에 artPatch로 끼움: 걸을 때만 갈아 끼우고 서 있을 때·공격 때는 원래 그림)을 더한다.
  * R116: Drive 2026-10-28 적용본 맞음·회복 4장 29종·대기 4장 11종(assets/r116/mobs, scripts/r116-mob-frames.py)을 더한다.
  *   맞으면 맞음 4장을 한 번 돌고, 걷는 몹이 서 있으면 대기 4장을 천천히 돌린다. 이동·공격 그림과 맞음 판정·시간은 그대로.
- * R198: Drive 2026-10-29~30 8키 묶음에서 게임에 없던 이동 8·공격 2·대기 5줄(2장, assets/r198/mobs, scripts/r198-mob-eightkey.py)을 빈 칸에만 더한다.
+ * R198: Drive 2026-10-29~30 8키 묶음에서 게임에 없던 이동 6·공격 2·대기 15줄(2장, assets/r198/mobs, scripts/r198-mob-eightkey.py)을 빈 칸에만 더한다.
  * 공격 시간·판정·AI·저장 형식은 읽기만 하고 바꾸지 않는다(그림만 바뀜). 병원(ep1a08) 전용 자세와 R74 세계 괴물 그림은 건드리지 않는다. */
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBS_R109__||typeof drawEnemy!=='function')return;

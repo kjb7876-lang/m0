@@ -3443,7 +3443,17 @@
     "assets/r196/hwando/hit-n.webp",
     "assets/r196/hwando/hit-s.webp",
     "assets/r196/hwando/hit-se.webp",
-    "assets/r196/hwando/index.json"
+    "assets/r196/hwando/index.json",
+    "assets/r198/mobs/M011-idle.png",
+    "assets/r198/mobs/M012-idle.png",
+    "assets/r198/mobs/M013-idle.png",
+    "assets/r198/mobs/M016-idle.png",
+    "assets/r198/mobs/M018-idle.png",
+    "assets/r198/mobs/M025-idle.png",
+    "assets/r198/mobs/M038-idle.png",
+    "assets/r198/mobs/M042-idle.png",
+    "assets/r198/mobs/M045-idle.png",
+    "assets/r198/mobs/M128-idle.png"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4518,5 +4528,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9881946775edffd62610d39d3e073a3693e1c3737414af0b664cd366ee3228c6"
+  "runtimeManifestSHA256": "9bd8467433906e4a71a01349e86efb8d8b930b69324a20af3af87d51c96ebd5a"
 }

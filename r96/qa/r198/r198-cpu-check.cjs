@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),A=f=>path.join(R,'runtime-text','assets',f),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const ix=JSON.parse(fs.readFileSync(A('r198/mobs/index.json'),'utf8')),T=ix.tracks;
-ok('13 tracks: move/attack/idle only, 2 frames each, visible height 150',T.length===13&&T.every(t=>['move','attack','idle'].includes(t.track)&&t.frames===2&&t.visibleHeight===150),T.map(t=>t.group+'-'+t.track));
+ok('23 tracks: move/attack/idle only, 2 frames each, visible height 150',T.length===23&&T.every(t=>['move','attack','idle'].includes(t.track)&&t.frames===2&&t.visibleHeight===150),T.map(t=>t.group+'-'+t.track));
 ok('every strip hash/size matches and cell*2 = image width',T.every(t=>{const b=fs.readFileSync(path.join(R,'runtime-text',t.path));const w=b.readUInt32BE(16),h=b.readUInt32BE(20);return b.length===t.bytes&&sha(b)===t.sha256&&w===t.cell[0]*2&&h===t.cell[1];}));
 ok('Drive provenance recorded (zip sha256 + original frame sha256 per strip)',T.every(t=>t.source.zips.length&&t.source.zips.every(z=>/^[0-9a-f]{64}$/.test(z.sha256))&&t.source.frames.length===2&&t.source.frames.every(f=>/^[0-9a-f]{64}$/.test(f.sha256))));
 const r92=JSON.parse(fs.readFileSync(A('r92/mobs/index.json'),'utf8')).groups,have={};

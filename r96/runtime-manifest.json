@@ -11938,6 +11938,31 @@
       "sha256": "d1e4da8eaf2423d509e61d8eaeb63665595bfff33b49ea27573abb1d442ba8b4"
     },
     {
+      "path": "assets/r198/mobs/M011-idle.png",
+      "bytes": 62122,
+      "sha256": "fed4a21e78ae953d5d96cc58552b486712158cd87fa9b4e6f14b94246d98d3e8"
+    },
+    {
+      "path": "assets/r198/mobs/M012-idle.png",
+      "bytes": 52911,
+      "sha256": "80bb9cbe2b6f837baf3572aa1ed1d21022314be326c2fb558bf8f38e3f7bc2ab"
+    },
+    {
+      "path": "assets/r198/mobs/M013-idle.png",
+      "bytes": 66016,
+      "sha256": "88781f8911b35621f0f0a27581cf1ae61a897bb19db00bacd17777fa355c0e0e"
+    },
+    {
+      "path": "assets/r198/mobs/M016-idle.png",
+      "bytes": 76088,
+      "sha256": "e99f93681d88b4ed67b3e2d8d04c7cdf27d49282297889890540095afb0f253f"
+    },
+    {
+      "path": "assets/r198/mobs/M018-idle.png",
+      "bytes": 71791,
+      "sha256": "6527ce25cc9327dad1c7f8c390b4e436690d9c29b25d409bffad42924cd26c82"
+    },
+    {
       "path": "assets/r198/mobs/M022-move.png",
       "bytes": 142941,
       "sha256": "4d1577a83fe37573b359aa9a19198a190ba4dfe328a78fb8c79b61869cb57494"
@@ -11946,6 +11971,11 @@
       "path": "assets/r198/mobs/M024-idle.png",
       "bytes": 102320,
       "sha256": "208a0bf665f3c6c5723fd1c83245b56a000215b171be1094f774c5b5e080e48f"
+    },
+    {
+      "path": "assets/r198/mobs/M025-idle.png",
+      "bytes": 96667,
+      "sha256": "2fdf0a9d4137d73d9840ee384a1be8fcc2eff92bdcd1ef3747a8d496f523c03f"
     },
     {
       "path": "assets/r198/mobs/M030-idle.png",
@@ -11978,6 +12008,21 @@
       "sha256": "d1dc452a22aead7d1e6b318189f5f8b605833833a4f68469d15aadd43f5d9084"
     },
     {
+      "path": "assets/r198/mobs/M038-idle.png",
+      "bytes": 95337,
+      "sha256": "a4ade47be40cab25897d2e3f8210d091b108d11ae8cddfe8eb4a27dd50c6a20f"
+    },
+    {
+      "path": "assets/r198/mobs/M042-idle.png",
+      "bytes": 93244,
+      "sha256": "52e41ef213d8ce1a1f7b24abb39d954fb2915ebf8e40adc83da73b1def3123df"
+    },
+    {
+      "path": "assets/r198/mobs/M045-idle.png",
+      "bytes": 128722,
+      "sha256": "3113a41e97e9509a0ba97e13606df201d7b9816e303fdbe15848249ac3b79a7b"
+    },
+    {
       "path": "assets/r198/mobs/M046-idle.png",
       "bytes": 88040,
       "sha256": "7d7f3ebc688f1edda23b5c71da09d737583c597b5a2753775026b11df0fbbed4"
@@ -11998,14 +12043,19 @@
       "sha256": "f31c4e35b16aa4d15aaf5becf238bb25aed009a1a0d36c793540c382a90997ed"
     },
     {
+      "path": "assets/r198/mobs/M128-idle.png",
+      "bytes": 49365,
+      "sha256": "f12093a46d6bc2598a3d4c2c77db9fad6657239d9121ce96dc0f67aa4c3cbf20"
+    },
+    {
       "path": "assets/r198/mobs/M129-attack.png",
       "bytes": 45380,
       "sha256": "56da861ca6140dba7e27aca158b07b71f30801d70f09e85580ac7f8b19a7c280"
     },
     {
       "path": "assets/r198/mobs/index.json",
-      "bytes": 19125,
-      "sha256": "509511fd07d94ba845e9cca0428a441b5a349b30087986c1835782d805d7e096"
+      "bytes": 32142,
+      "sha256": "c1d79e608aa744a968496026127098726f59686a61e4bd82d52cdaad52906007"
     },
     {
       "path": "assets/r74/effects.png",
@@ -20764,8 +20814,8 @@
     },
     {
       "path": "mobs-r109.js",
-      "bytes": 25322,
-      "sha256": "a69946cc2b5903eccc28e00b768714ce15c4d1229cf1543063a9a55bcc986e3a"
+      "bytes": 25323,
+      "sha256": "6e16d5cae4f9663cad346fd50c555cdd965494f7f8a2bc3c3470dd1f452b561a"
     },
     {
       "path": "mobs-r112.js",
@@ -21168,8 +21218,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4233,
-  "totalBytes": 799418086,
+  "fileCount": 4243,
+  "totalBytes": 800223367,
   "webHTMLSha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51",
   "largest": [
     {
