@@ -20,6 +20,11 @@ const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
 const ZONES={
+ // 마수궁 피난 거점(첫 맵): 무너진 석조 회랑 — 정원 돌길·이끼·흙 바닥, 벽면은 기존 벽돌(r118 공방 벽), 윗면은 이끼 낀 잔해(r99 폐허 오른쪽 반).
+ //  통로 넓히기 없음(회랑 레이아웃 그대로), 불룩도 작게(건축물), 둔덕 위 낮은 돌 경계.
+ hub:{seed:0x5d00a1,tint:[.96,.9,.8],floorBGain:1.05,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/120,floorK:1.15,topK:2.0,
+  tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/workshop.webp',1]},
+  patches:[['garden_root_paving_break_01','floor',.32,1/420,.8],['garden_soil_paving_transition_01','floor',.34,1/380,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/160,uprightEdge:[-1.0,-.35]},
  // 거미동굴: 흙·암반 동굴, 종유석, 거미줄
  dist01:{seed:0x5d0124,tint:[1.0,.78,.55],hiTop:1.6,loTop:.45,bulge:1.35,widen:true,web:true,pillars:true,
   // R207 Drive 「첫 정원 → 거미동굴」 512 패치: 절벽 밑 흙·자갈·접지 그림자(바닥 평면), 뒤쪽 대지 가장자리 암벽 조각(세운 그림)
@@ -27,7 +32,7 @@ const ZONES={
   // 암벽 조각(세운 그림)은 동굴 암반 질감과 어긋나 보여 쓰지 않는다(R207 2차) — 대신 대지 위 낮은 바위 무더기(boulders)
   boulders:1/60,floorK:1.02,topK:2.25},
  // 악마화 나무의 정원: 정원 돌길·이끼 흙·마른 풀, 이끼 낀 둔덕, 둔덕 위 마른 나무(r99 원화 12장). 거미줄 없음.
- dist00:{seed:0x5d0077,tint:[.86,.92,.76],hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
+ dist00:{seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
   uprights:[['garden_low_border_01',.34]],uprightRate:1/110}};
@@ -52,7 +57,11 @@ function field(ex,cfg,protect){
  const inside=new Uint8Array(N);
  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++)inside[j*GW+i]=walk[Math.floor(j/R)*CW+Math.floor(i/R)];
  // 바닥 칸 사이에 선 벽판(미로 칸막이 등)도 바위로 본다 — 원래 벽 그림을 숨기므로 보이지 않는 벽이 생기지 않게. 문 벽은 제외.
- for(const w of ex.walls||[]){const e=w.endpoints;if(!e||e.length!==2||/door/i.test(String(w.id||'')))continue;const [[x0,y0],[x1,y1]]=e,len=Math.hypot(x1-x0,y1-y0);if(!(len>0))continue;
+ for(const w of ex.walls||[]){if(/door/i.test(String(w.id||'')))continue;
+  // 선분이 아닌 상자 벽(기둥·덩어리): AABB 안을 바위로
+  if((!w.endpoints||w.endpoints.length!==2)&&Number.isFinite(w.x)&&Number.isFinite(w.y)&&w.width>0&&w.depth>0&&!w.decorative){const hx=w.width/2+.05,hy=w.depth/2+.05;
+   for(let j=Math.max(0,Math.floor((w.y-hy+M)*R));j<=Math.min(GH-1,Math.ceil((w.y+hy+M)*R));j++)for(let i=Math.max(0,Math.floor((w.x-hx+M)*R));i<=Math.min(GW-1,Math.ceil((w.x+hx+M)*R));i++){const px=(i+.5)/R-M,py=(j+.5)/R-M;if(Math.abs(px-w.x)<=hx&&Math.abs(py-w.y)<=hy)inside[j*GW+i]=0;}continue;}
+  const e=w.endpoints;if(!e||e.length!==2)continue;const [[x0,y0],[x1,y1]]=e,len=Math.hypot(x1-x0,y1-y0);if(!(len>0))continue;
   const ux=(x1-x0)/len,uy=(y1-y0)/len,minx=Math.min(x0,x1)-.4,maxx=Math.max(x0,x1)+.4,miny=Math.min(y0,y1)-.4,maxy=Math.max(y0,y1)+.4;
   for(let j=Math.max(0,Math.floor((miny+M)*R));j<=Math.min(GH-1,Math.ceil((maxy+M)*R));j++)for(let i=Math.max(0,Math.floor((minx+M)*R));i<=Math.min(GW-1,Math.ceil((maxx+M)*R));i++){
    const px=(i+.5)/R-M-x0,py=(j+.5)/R-M-y0,t=px*ux+py*uy;if(t<-.05||t>len+.05)continue;if(Math.abs(px*uy-py*ux)<.3)inside[j*GW+i]=0;}}
@@ -195,8 +204,11 @@ let SEED=1;const ZONES_SEED=()=>SEED;
 
 // 거미줄·잔돌 데칼(직접 그린 보조 자산) + 기존 균열·뼈·뿌리 그림을 한 장(1024×512, 4×2 칸)에 모은다.
 function decalAtlas(T,r,ims,cfg){const c=document.createElement('canvas');c.width=1024;c.height=512;const g=c.getContext('2d');const rnd=rng(cfg.seed^0x77);
- const put=(im,k)=>{const x=(k%4)*256,y=Math.floor(k/4)*256;const w=im.naturalWidth,h=im.naturalHeight,s=Math.min(236/w,236/h);g.drawImage(im,x+128-w*s/2,y+128-h*s/2,w*s,h*s);};
- put(ims.crack,0);put(ims.bones,1);put(ims.root,2);
+ const put=(im,k)=>{const x=(k%4)*256,y=Math.floor(k/4)*256;const w=im.naturalWidth,h=im.naturalHeight,s=Math.min(236/w,236/h);g.drawImage(im.__c||im,x+128-w*s/2,y+128-h*s/2,w*s,h*s);};
+ // r106 균열은 원래 하얗게 빛나는 효과 그림 → 바닥 균열로 쓰도록 어둡게(밝기 반전에 가깝게 눌러) 칠한다
+ {const c2=document.createElement('canvas');c2.width=ims.crack.naturalWidth;c2.height=ims.crack.naturalHeight;const g2=c2.getContext('2d');g2.drawImage(ims.crack,0,0);const id=g2.getImageData(0,0,c2.width,c2.height),d=id.data;
+  for(let i=0;i<d.length;i+=4){d[i]=26;d[i+1]=20;d[i+2]=16;d[i+3]=Math.min(255,d[i+3]*.85);}g2.putImageData(id,0,0);put({naturalWidth:c2.width,naturalHeight:c2.height,__c:c2},0);}
+ put(ims.bones,1);put(ims.root,2);
  // 3: 거미줄(모서리형) 4: 거미줄(둥근형)
  const web=(ox,oy,corner)=>{g.save();g.translate(ox,oy);g.strokeStyle='rgba(222,214,200,.55)';g.lineWidth=1.1;const n=corner?7:11,ang=corner?Math.PI/2:Math.PI*2,R0=corner?236:118,cx=corner?6:128,cy=corner?6:128;
   const spokes=[];for(let i=0;i<n;i++){const a=(corner?0:0)+ang*(i+(corner?.0:.0))/(corner?n-1:n)+(rnd()-.5)*.12;spokes.push(a);g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*R0,cy+Math.sin(a)*R0);g.stroke();}
@@ -221,12 +233,12 @@ function cutaway(shader,uniforms){// 영웅 앞의 조각만 성글게 지운다
  shader.fragmentShader='varying vec4 r204Clip;\nuniform vec4 r204Hero;\nuniform float r204Aspect;\n'+shader.fragmentShader.replace('void main() {','void main() {\n{vec2 nd=r204Clip.xy/r204Clip.w-r204Hero.xy;nd.x*=r204Aspect;float dz=r204Clip.z/r204Clip.w;float dd=length(nd);\n if(r204Hero.w>0.5&&dz<r204Hero.z-0.002&&dd<0.2){float k=smoothstep(0.2,0.11,dd);float pat=mod(floor(gl_FragCoord.x)+floor(gl_FragCoord.y),2.0);float pat2=mod(floor(gl_FragCoord.x*0.5)+floor(gl_FragCoord.y*0.5),2.0);if(k>0.66||(k>0.33&&pat>0.5)||(pat>0.5&&pat2>0.5))discard;}}');}
 
 function groundMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
- m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204A:{value:tx.floorA},r204B:{value:tx.floorB},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)},r204FloorK:{value:cfg.floorK??.92}});
+ m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204A:{value:tx.floorA},r204B:{value:tx.floorB},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)},r204FloorK:{value:cfg.floorK??.92},r204BGain:{value:cfg.floorBGain??2.2}});
   sh.vertexShader='varying vec2 r204W;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204W=(modelMatrix*vec4(transformed,1.0)).xz;');
-  sh.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204Field,r204A,r204B,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;uniform float r204FloorK;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
+  sh.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204Field,r204A,r204B,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;uniform float r204FloorK;uniform float r204BGain;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
    vec2 fu=(r204W-r204Min)/r204Span;vec4 fd=texture2D(r204Field,fu);float fv=(fd.r-0.5)*6.0;
    vec4 a1=r204tex(r204A,r204W,0.21,0.0,vec2(0.0)),a2=r204tex(r204A,r204W,0.137,1.1,vec2(0.37,0.11));vec3 ta=mix(a1.rgb,a2.rgb,smoothstep(0.35,0.65,fd.b));
-   vec3 tb=r204tex(r204B,r204W,0.17+0.05*fd.b,0.6,vec2(0.0)).rgb*2.2;
+   vec3 tb=r204tex(r204B,r204W,0.17+0.05*fd.b,0.6,vec2(0.0)).rgb*r204BGain;
    vec3 tc=r204tex(r204C,r204W,0.12+0.07*fd.g,1.9,vec2(0.2,0.7)).rgb;float lc=dot(tc,vec3(0.3,0.59,0.11));tc=vec3(lc)*1.25;
    float wB=smoothstep(0.42,0.62,fd.g),wC=smoothstep(0.55,0.75,fd.b)*(1.0-wB*0.5);
    vec3 col=mix(mix(ta,tb,wB),tc,wC*0.75);float lum=dot(col,vec3(0.3,0.59,0.11));col=mix(vec3(lum)*r204Tint,col*r204Tint,0.35)*r204FloorK;
@@ -299,7 +311,7 @@ function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각
    const cross=(q[0]-p[0])*ny-(q[1]-p[1])*nx;if(cross<0)idx.push(n,n+2,n+1,n+1,n+2,n+3);else idx.push(n,n+1,n+2,n+1,n+3,n+2);n+=4;}}
  stats.segments=n/4;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setAttribute('r204top',new T.Float32BufferAttribute(tops,1));g.setIndex(idx);g.computeBoundingSphere();return g;}
 function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f -0.6~-2.6)에 고정 시드로. 6~8각 뿔, 꼭짓점을 흔든다.
- const rnd=rng(cfg.seed^0x3141),pos=[],col=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/55);
+ const rnd=rng(cfg.seed^0x3141),pos=[],col=[],idx=[];let n=0,count=0;const want=cfg.pillars===false?0:Math.round((F.W*F.H)/55);
  for(let t=0;t<want*30&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.6||fv<-2.6)continue;
   const base=topHeight(F,cfg,x,y),tall=(.9+rnd()*2.2)*(fv<-1.5?1.25:.85)*Math.min(1,Math.max(.35,base/cfg.hiTop)),rad=.18+rnd()*.32,sides=6+Math.floor(rnd()*3),lean=[(rnd()-.5)*.25,(rnd()-.5)*.25];
   const rings=[[0,1],[.45,.72],[.8,.38],[1,.04]];const start=n;
@@ -377,7 +389,7 @@ function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.G
 
 // ---- 장면 연결 ----------------------------------------------------------------------------------
 const FLOOR_CMD=/^r9[02]:floor:/;
-const HIDE=/wall|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
+const HIDE=/wall|partition|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
 const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.exploration?room:null;
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
@@ -395,7 +407,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   const group=new T.Group();group.name='r204-cave';
   const add=(geo,mat,name,order)=>{const mesh=new T.Mesh(geo,mat);mesh.name=name;mesh.layers.set(2);mesh.renderOrder=order;mesh.userData.presentationOnly=true;mesh.userData.r204=true;mesh.frustumCulled=true;r.spatialResources.add(geo);group.add(mesh);return mesh;};
   // 앞에서 뒤로 그린다: 대지·절벽·기둥이 먼저 깊이를 채우면 그 뒤 바닥 조각은 깊이 검사에서 일찍 버려진다(덧그리기 감소)
-  add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false)add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
+  add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false||cfg.boulders)add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
   add(groundMesh(T,F),mats.ground,'r204-ground',-20);add(decalMesh(T,F,cfg),mats.decal,'r204-decals',-19);
   // 조형물 발밑 그늘(사용자 "조형물도 자연스럽게"): 바닥에 붙은 부드러운 어두운 타원 — 소품이 바닥에 놓여 있게 보이도록
   {const rm=roomOf(frame),pg=propShadowMesh(T,F,rm);if(pg){const m=new T.MeshBasicMaterial({map:blobTex(T,r),transparent:true,depthWrite:false,toneMapped:false,color:0x000000,opacity:.62,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);add(pg,m,'r204-prop-shadows',-18);}}
