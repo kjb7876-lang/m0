@@ -5,7 +5,7 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R182-light-1',KEY='storyworld.r182.light',MODES=['full','torch','flashlight'],NAME={full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R182-light-2',KEY='storyworld.r182.light',MODES=['full','torch','flashlight'],NAME={full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 let prefs={mode:'full'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(MODES.includes(s.mode))prefs.mode=s.mode;}catch(_){}
 const stats={toggles:0,coneFrames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const mode=()=>prefs.mode;
@@ -22,7 +22,7 @@ addEventListener('keydown',e=>{try{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)r
 let cv=null,dir={x:1,y:1};
 function canvas(){if(cv?.isConnected)return cv;const st=document.getElementById('stage');if(!st)return null;cv=document.createElement('canvas');cv.id='r182Cone';cv.setAttribute('aria-hidden','true');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';st.appendChild(cv);return cv;}
 function hide(){if(cv&&cv.style.display!=='none'){cv.style.display='none';cv.width=0;cv.height=0;}}
-function want(){try{if(prefs.mode!=='flashlight'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103)return false;/* 사몽은 samong-r103 이 그린다 */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
+function want(){try{if(prefs.mode!=='flashlight'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103&&document.getElementById('r103Flashlight')?.style.display==='block')return false;/* 사몽 미로·어두운 구역은 samong-r103 이 그린다 — R187: 그 밖의 사몽 구역(전투·생존)은 여기서 부채꼴을 그린다(예전엔 손전등이 횃불과 똑같이 보임) */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
 const blockedAt=(x,y)=>{try{return typeof blocked==='function'?blocked(x,y,.02,room):false;}catch(_){return false;}};
 function ray(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.2)if(blockedAt(ox+dx*t,oy+dy*t))return t;return max;}
 function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.style.display='block';const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);
@@ -30,6 +30,8 @@ function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
   const mv={x:player.moveVX150||0,y:player.moveVY150||0};if(Math.hypot(mv.x,mv.y)>.05){const l=Math.hypot(mv.x,mv.y);dir={x:mv.x/l,y:mv.y/l};}
   else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w)dir={x:w[0]/Math.SQRT2,y:w[1]/Math.SQRT2};}
+  /* R187: 멈춰 선 채 부채꼴이 벽에 막히면(samong-r103 와 같이) 가장 멀리 트인 쪽으로 돌린다 */
+  if(Math.hypot(mv.x,mv.y)<=.05&&ray(player.x,player.y,Math.atan2(dir.y,dir.x),3)<2.2){let best=0,ba=0;for(let k=0;k<16;k++){const a=k*Math.PI/8,t=ray(player.x,player.y,a,9);if(t>best){best=t;ba=a;}}dir={x:Math.cos(ba),y:Math.sin(ba)};}
   const a0=Math.atan2(dir.y,dir.x),half=1.0,reach=Math.max(7,window.__STORYWORLD_SIGHT24__?.geometry?.()?.radius||10),o=project(player.x,player.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),pts=[];
   for(let k=0;k<=24;k++){const a=a0-half+2*half*k/24,t=ray(player.x,player.y,a,reach);pts.push(project(player.x+Math.cos(a)*t,player.y+Math.sin(a)*t));}
   g.fillStyle='rgba(3,3,7,.62)';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';

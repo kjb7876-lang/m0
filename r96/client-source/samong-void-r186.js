@@ -4,7 +4,7 @@
 //  임시 자산 — 좋은 자산이 오면 텍스처만 바꾼다. storyworld.r186.void {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_VOID_R186__)return;
-const REV='R186-void-1',KEY='storyworld.r186.void',TEX='assets/r186/flesh-void.webp';
+const REV='R186-void-2',KEY='storyworld.r186.void',TEX='assets/r186/flesh-void.webp';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={planes:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
@@ -25,6 +25,8 @@ function install(){const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!
  setInterval(wrapInst,500);wrapInst();
  const clearBase=C.clearScene;C.clearScene=function(...a){try{drop(this);}catch(e){fail(e);}return clearBase.apply(this,a);};return true;}
 let ok=false;try{ok=install();}catch(e){fail(e);}
+/* R187: 환경 설정 창에 켜고 끄기 */
+try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings')||document.querySelector('.settings');if(grid&&!document.getElementById('r186Void')){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id='r186Void';c.checked=prefs.on!==false;c.onchange=()=>set({on:c.checked});l.appendChild(c);l.appendChild(document.createTextNode(' 사몽 빈 공간 살덩이 무늬'));grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_SAMONG_VOID_R186__=Object.freeze({revision:REV,TEX,set,inspect:()=>({revision:REV,installed:ok,prefs:{...prefs},stats:{...stats},lastError})});
 })();
