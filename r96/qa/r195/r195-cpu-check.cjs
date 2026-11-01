@@ -45,7 +45,7 @@ const fake={tracks:{a:{file:'a.ogg',title:'A',composer:'X',gain:.6},b:{file:'b.o
  S.zone='ep1b04';T.step();ok('part 2 picks explore:p2',T.api.inspect().active?.id==='b');ok('switch cross-fades (fading flag)',T.api.inspect().fading);
  for(let i=0;i<40;i++)T.step();ok('fade completes and only one deck stays audible',!T.api.inspect().fading&&T.els.filter(e=>!e.paused).length===1);
  S.zone='hub';T.step();ok('safe region picks calm',T.api.inspect().active?.id==='calm');
- S.zone='sz115-S02-3';T.step();ok('samong zone picks explore:samong',T.api.inspect().active?.id==='dream');
+ S.zone='cult03';S.room={engaged:false,enemies:[],samongR103:{zone:'sz115-S02-3'}};T.step();ok('a samong room is detected from room.samongR103 even when the global zone is a story id',T.api.inspect().active?.id==='dream');S.room={engaged:false,enemies:[]};S.zone='sz115-S02-3';T.step();ok('samong zone picks explore:samong',T.api.inspect().active?.id==='dream');
  S.zone='cult04';S.room={engaged:true,enemies:[{persona:true,hp:900,maxHp:1000,spawnState:'active'}]};T.step();ok('boss alive + engaged picks boss',T.api.inspect().active?.id==='boss');
  for(let i=0;i<20;i++)T.step();const bossEl=T.els.find(e=>!e.paused);bossEl.currentTime=42;
  S.room.enemies[0].hp=300;T.step();ok('boss under half hp switches to boss2 (phase change)',T.api.inspect().active?.id==='boss2');

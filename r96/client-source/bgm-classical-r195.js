@@ -18,8 +18,11 @@ let cat=null;const failed=new Set(),memory=new Map();/* trackId -> {time,at} */
 fetch(DIR+'catalog.json').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.tracks&&j.slots)cat=j;}).catch(fail);
 const decks=[0,1].map(i=>{const el=new Audio();el.preload='none';el.loop=true;el.volume=0;const d={i,el,id:null,w:0};el.onerror=()=>{if(d.id){failed.add(d.id);stats.failedTracks++;fail('track '+d.id);}};return d;});
 let active=null,fade=null,blocked=false,duck=1,clock=0,lastSel=null;
-const G=(n,f)=>{try{return typeof globalThis[n]!=='undefined'?globalThis[n]:f;}catch(_){return f;}};
-function part(z){if(/^sz\d/.test(z))return 'samong';try{const ch=regionById?.[z]?.chapter||'';const m=/제\s*(\d+)\s*부/.exec(ch);if(m)return 'p'+m[1];}catch(_){}return 'default';}
+/* 게임 전역은 스크립트 범위 let 이라 globalThis 에 없다 — 이름으로 직접 읽는다 */
+const V={started:()=>typeof started!=='undefined'&&!!started,loading:()=>typeof loading!=='undefined'&&!!loading,modal:()=>typeof modal!=='undefined'&&!!modal,
+ storyScene:()=>typeof storyScene!=='undefined'?storyScene:null,voiceElement:()=>typeof voiceElement!=='undefined'?voiceElement:null,zone:()=>typeof zone!=='undefined'?String(zone||''):''};
+const G=(n,f)=>{try{return V[n]?V[n]():f;}catch(_){return f;}};
+function part(z){try{if(typeof room!=='undefined'&&room?.samongR103)return 'samong';}catch(_){}if(/^sz\d/.test(z))return 'samong';try{const ch=regionById?.[z]?.chapter||'';const m=/제\s*(\d+)\s*부/.exec(ch);if(m)return 'p'+m[1];}catch(_){}return 'default';}
 function bossState(){try{if(!room?.engaged)return null;let best=null;for(const e of room.enemies||[])if((e.boss||e.persona)&&e.hp>0&&e.spawnState!=='dead'){const f=e.hp/Math.max(1,e.maxHp||e.hp);if(!best||f<best)best=f;}return best;}catch(_){return null;}}
 function kind(){try{if(regionById?.[zone]?.safe)return 'safe';}catch(_){}const b=bossState();if(b!==null)return b<.5?'boss2':'boss';try{if(room?.engaged)return 'combat';}catch(_){}return 'explore';}
 const FALL={boss2:['boss2','boss','combat','explore'],boss:['boss','combat','explore'],combat:['combat','explore'],explore:['explore'],safe:['safe','explore']};

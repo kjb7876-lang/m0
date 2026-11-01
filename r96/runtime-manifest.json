@@ -128,6 +128,41 @@
       "sha256": "f9b826cb998969fbb8d64dd65c6b746fa9c26b513d9452adef29aed1ba1fff48"
     },
     {
+      "path": "assets/audio/bgm/classical/air.mp3",
+      "bytes": 2566993,
+      "sha256": "91cb8d5f732bd0450c55eabbf6f0159bed8ebf8fad29d31d1016081b26745159"
+    },
+    {
+      "path": "assets/audio/bgm/classical/catalog.json",
+      "bytes": 6436,
+      "sha256": "f7ee38bdaacf87c7adc56b6fd948cb32ee9788d1d0d291b12f91eccb20e4122a"
+    },
+    {
+      "path": "assets/audio/bgm/classical/danse-macabre-1925.mp3",
+      "bytes": 3780798,
+      "sha256": "b25d7670cc13c6bd28a6c6865157401f05f21e7d74ab4c7ee32815d590170ca7"
+    },
+    {
+      "path": "assets/audio/bgm/classical/danse-macabre.mp3",
+      "bytes": 3780798,
+      "sha256": "7000651900e73d1e56b55f829df924f7942ed660629cfe0ebfcf46fc25509182"
+    },
+    {
+      "path": "assets/audio/bgm/classical/mountain-king.mp3",
+      "bytes": 2158124,
+      "sha256": "e2adde99407007a0a9bb1ce2cb90dce54528900dad1af1134252f6a008596da1"
+    },
+    {
+      "path": "assets/audio/bgm/classical/toccata.mp3",
+      "bytes": 3780798,
+      "sha256": "95b20d77ff81b0d1d1120a29cafc316fbe253fa49f328ebd3453e12a22ad2b20"
+    },
+    {
+      "path": "assets/audio/bgm/classical/winter.mp3",
+      "bytes": 2768135,
+      "sha256": "0cdd0769dd911bb48f8b7b02e8699b14383b5d060901914578261d8bf7feecd6"
+    },
+    {
       "path": "assets/auras-r62/ego-halo.webp",
       "bytes": 137510,
       "sha256": "1f4b8ee72b6d3aa270d2f72f4cf185b007b6dcb9e56444e31c7f4dccb5afcf05"
@@ -19848,6 +19883,11 @@
       "sha256": "6ef5443b1066371ab9cd1b265850290b5afa3d5e56e68cbf1d40564f83fe32cb"
     },
     {
+      "path": "bgm-classical-r195.js",
+      "bytes": 11209,
+      "sha256": "42beeda51356856e3b2600e19e0fe78970b9ac66326d35961bce9a3b7ecb1ecd"
+    },
+    {
       "path": "bosses-r104-data.js",
       "bytes": 23577,
       "sha256": "0532ab8aa0e10c46f2ec832ad879688a37f39bef58972030b62726b57d66fe56"
@@ -20619,8 +20659,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564797,
-      "sha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51"
+      "bytes": 6564844,
+      "sha256": "32ed2a63809f400b94cb1bcc3a5a8cfd1b943964da90b41df25bb7dc0c499780"
     },
     {
       "path": "intro-r140.js",
@@ -21048,9 +21088,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4209,
-  "totalBytes": 797745644,
-  "webHTMLSha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51",
+  "fileCount": 4217,
+  "totalBytes": 816598982,
+  "webHTMLSha256": "32ed2a63809f400b94cb1bcc3a5a8cfd1b943964da90b41df25bb7dc0c499780",
   "largest": [
     {
       "path": "index.html",
