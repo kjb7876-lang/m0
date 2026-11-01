@@ -20564,8 +20564,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564752,
-      "sha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e"
+      "bytes": 6564797,
+      "sha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51"
     },
     {
       "path": "intro-r140.js",
@@ -20721,6 +20721,11 @@
       "path": "render-compat-r83.js",
       "bytes": 2345,
       "sha256": "aecbc8b4d4bbea8462118768d8108d86ca2eb76c867e6dbef934735918e809a9"
+    },
+    {
+      "path": "samong-doll-r193.js",
+      "bytes": 3983,
+      "sha256": "544584817d8e1f7dd97b9f83675a2d2c8230cba7ebda1a25d60d458972c13bfc"
     },
     {
       "path": "samong-hud-r177.js",
@@ -20988,9 +20993,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4197,
-  "totalBytes": 797274119,
-  "webHTMLSha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e",
+  "fileCount": 4198,
+  "totalBytes": 797278147,
+  "webHTMLSha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51",
   "largest": [
     {
       "path": "index.html",
