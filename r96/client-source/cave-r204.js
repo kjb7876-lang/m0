@@ -35,7 +35,27 @@ const ZONES={
  dist00:{seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
   patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
-  uprights:[['garden_low_border_01',.34]],uprightRate:1/110}};
+  uprights:[['garden_low_border_01',.34]],uprightRate:1/110},
+ // R210 — 나머지 1부 야외 지역(사용자 "나머지맵들도 작업 … 모든맵이 화풍이 비슷해야함"). 통로 넓히기는 하지 않는다(맵 레이아웃·전수 검사 그대로), 불룩도 중간.
+ // 늪지대의 뿔악마: 이끼 흙·진흙 바닥, 물 먹은 이끼 둔덕, 마른 나무
+ dist02:{seed:0x5d0202,tint:[.78,.86,.7],topK:1.9,floorK:.98,hiTop:1.2,loTop:.4,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/150,
+  tex:{floorA:['assets/r118/tiles/meadow.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  patches:[['soil_rock_transition_01','base',.3,1/120,.5],['garden_soil_paving_transition_01','floor',.34,1/300,.8]]},
+ // 무너진 성: 성 돌바닥·정원 돌길, 벽면은 성 벽돌, 윗면은 무너진 잔해 — 건축물이라 불룩 작게(hub 처럼)
+ dist03:{seed:0x5d0303,tint:[.92,.86,.8],floorBGain:1.04,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
+  tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]},
+  patches:[['garden_root_paving_break_01','floor',.3,1/420,.8]],uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]},
+ // 시체들이 되살아난 밤: 검은 흙·이끼 무덤가, 암반 둔덕, 마른 나무
+ dist04:{seed:0x5d0404,tint:[.8,.8,.88],topK:2.0,floorK:1.0,hiTop:1.3,loTop:.42,bulge:1.1,widen:false,web:false,pillars:false,trees:'dead',boulders:1/90,
+  tex:{floorA:['assets/r118/tiles/sandblack.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r99/outdoor/ground-cliff.webp',1]},
+  patches:[['soil_rock_transition_02','base',.3,1/110,.5],['cliff_contact_shadow_01','base',.4,1/130,1]]},
+ // 일곱 기둥: 금고·성 돌바닥 신전 터, 잔해 윗면 — 건축물
+ dist05:{seed:0x5d0505,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.7,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
+  tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}},
+ // 추락: 낭떠러지 암반·검은 모래
+ dist06:{seed:0x5d0606,tint:[.92,.82,.72],hiTop:1.6,loTop:.45,bulge:1.15,widen:false,web:false,pillars:false,boulders:1/70,floorK:1.0,topK:2.2,
+  tex:{floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],face:['assets/r99/outdoor/surround-cliff.webp',1]},
+  patches:[['cliff_contact_shadow_01','base',.42,1/110,1]]}};
 const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};

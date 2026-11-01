@@ -211,6 +211,8 @@ jobs:
         run: node r96/qa/r208/r208-cpu-check.cjs
       - name: R209 hero skill dedupe and themed effects CPU check
         run: node r96/qa/r209/r209-cpu-check.cjs
+      - name: R210 organic terrain for dist02-06 CPU check
+        run: node r96/qa/r210/r210-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check
