@@ -11888,6 +11888,56 @@
       "sha256": "b88c45276bfab36a9b9a4d1b2729d2f3f4cd0ec7e25625677758f88300d48b53"
     },
     {
+      "path": "assets/r196/hwando/death-e.webp",
+      "bytes": 65104,
+      "sha256": "dcaa90be164b9e7b62f626182c98c1b5b48c4087b72e232c2b71ad3347ffff42"
+    },
+    {
+      "path": "assets/r196/hwando/death-n.webp",
+      "bytes": 62396,
+      "sha256": "1b2513e62c2b4627edcee5a99a817639eaff7b30a9bd77bbaea83d3da1325140"
+    },
+    {
+      "path": "assets/r196/hwando/death-ne.webp",
+      "bytes": 57194,
+      "sha256": "a52f0a1406b90fc2bc76be3f03712fe6a339a850ae4295e9f8288b7790f97050"
+    },
+    {
+      "path": "assets/r196/hwando/death-s.webp",
+      "bytes": 69098,
+      "sha256": "ac6a37b8552d27e9668809bab437414d6998a32e7a8d5606016a49bc2399e0fb"
+    },
+    {
+      "path": "assets/r196/hwando/death-se.webp",
+      "bytes": 65602,
+      "sha256": "82affca16a8766f26e0d4a451c9b1502aea878f0fea8067b5412a390f1be729d"
+    },
+    {
+      "path": "assets/r196/hwando/hit-e.webp",
+      "bytes": 25716,
+      "sha256": "b141c5f8ea9ec346f2abb63e4ba48992aa3ce5bbfc5d7a2aca6e5e3a55d6d84c"
+    },
+    {
+      "path": "assets/r196/hwando/hit-n.webp",
+      "bytes": 26308,
+      "sha256": "d6f5ff7598d320509c61df6da7654e3aeecc517adc549d47591b99b1bf272d42"
+    },
+    {
+      "path": "assets/r196/hwando/hit-s.webp",
+      "bytes": 32902,
+      "sha256": "99c6719bc48c5cabbc68ffc6a115dec94e41e2e8597b1438b46e0d4f0902b8d0"
+    },
+    {
+      "path": "assets/r196/hwando/hit-se.webp",
+      "bytes": 34392,
+      "sha256": "1e79e0862aba73b48c10a81c67f3ab5b082ba19cdfb75a1311ad119a7082d415"
+    },
+    {
+      "path": "assets/r196/hwando/index.json",
+      "bytes": 5886,
+      "sha256": "d1e4da8eaf2423d509e61d8eaeb63665595bfff33b49ea27573abb1d442ba8b4"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -19684,8 +19734,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 14733,
-      "sha256": "cd847b03d83be64dca24679de0d20a113001bd055041f848eeca5e567d5147bb"
+      "bytes": 14829,
+      "sha256": "e124dbca087a0c661bee7017251199c971d41ce60704530c44242af26cf51045"
     },
     {
       "path": "audio-r108.js",
@@ -20404,8 +20454,8 @@
     },
     {
       "path": "death-r151.js",
-      "bytes": 7649,
-      "sha256": "e5be29857143b415d61e6ddb168a5749f53c56a298852b6ef59438d33f63ae7e"
+      "bytes": 7748,
+      "sha256": "d265aa0e5a7ee55fc53af6a44f0569d0e5c7a8f338bac25ec45ff6ddf59125cf"
     },
     {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
@@ -21048,8 +21098,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4209,
-  "totalBytes": 797745644,
+  "fileCount": 4219,
+  "totalBytes": 798190437,
   "webHTMLSha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51",
   "largest": [
     {
