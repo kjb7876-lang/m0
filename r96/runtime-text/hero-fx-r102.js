@@ -47,7 +47,7 @@ const PALETTE=Object.freeze({
  hwando:pal({a:[214,222,234],b:GOLD,sig:'pale',sig2:'gold',form:'blade',style:'blade',name:'실버',name2:'골드'}),
  seoha:pal({a:[120,206,255],b:SILVER,sig:'cyan',sig2:'pale',form:'orbs',style:'beam',name:'아이스 블루',name2:'실버'}),
  neon:pal({a:[52,236,176],b:SILVER,sig:'teal',sig2:'pale',form:'arcs',style:'bolt',name:'민트',name2:'실버'}),
- michaela:pal({a:[255,122,178],b:SILVER,sig:'pink',sig2:'pale',form:'angel',style:'holy',name:'로즈',name2:'실버'}),
+ michaela:pal({a:[178,26,62],b:SILVER,sig:'magenta',sig2:'pale',form:'angel',style:'holy',name:'핏빛 장미',name2:'실버'}),/* R188: 분홍(귀여움) → 핏빛 장미(다크 판타지 호러, 사용자 2026-11-01) */
  lauren:pal({a:[164,98,255],b:SILVER,sig:'violet',sig2:'pale',form:'runes',style:'rune',name:'바이올렛',name2:'실버'}),
  hunter:pal({a:[255,96,40],b:SILVER,sig:'orange',sig2:'pale',form:'petals',style:'arrows',name:'주홍',name2:'실버'}),
  slayer:pal({a:[222,22,52],b:SILVER,sig:'red',sig2:'pale',form:'dark',style:'smash',name:'크림슨',name2:'실버'}),

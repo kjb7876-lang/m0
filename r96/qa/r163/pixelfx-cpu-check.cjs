@@ -15,7 +15,7 @@ ok('each sheet stays under 800 KB',Object.values(idx.effects).every(e=>e.bytes<8
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');ok('pixelfx-r163.js is loaded',html.includes('<script src="./pixelfx-r163.js"></script>'));
 const play=C('samong-play-r162.js');
 ok('samong boss tentacles / meteor / clone dash end use the sheets (with the old drawing as fallback)',/X\.play\('tendrils-blood'/.test(play)&&/X\.play\('meteor'/.test(play)&&/X\.play\('dark-explosion-blood'/.test(play)&&/if\(e\.pfx&&t>=w\)return;/.test(play));
-ok('fragment pickup bursts, purification core glows and flashes',/play\('collect-burst'/.test(play)&&/play\('core-orb-teal'/.test(play)&&/play\('hit-flash'/.test(play));
+ok('fragment pickup bursts, purification core glows and bursts (R188: blood burst instead of the hit-flash doll sheet)',/play\('collect-burst'/.test(play)&&/play\('core-orb-teal'/.test(play)&&/play\('dark-explosion-blood',core\.x/.test(play)&&!/play\('hit-flash'/.test(play));
 ok('B midboss rises from blood hands',/play\?\.\('hands-blood'/.test(C('samong-r103.js')));
 ok('5-hit combo burst plays crit-hit',/play\?\.\('crit-hit'/.test(C('combat-r160.js')));
 ok('generator script is in the repo',fs.existsSync(path.join(R,'..','scripts','r163-pixelfx-sheets.py')));

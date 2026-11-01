@@ -6,7 +6,9 @@
 //     → 고유기술 큰 그림은 투명도를 낮추고(×.72) 너무 큰 것은 줄이며, 영웅 피격점 그림은 영웅 키 0.95배를 넘지 않게 한다.
 //  ③ 한 번 맞을 때마다 같은 표적에 네모난 '충돌 섬광(burst-impact)'과 영웅 고유 피격점 그림이 겹쳐 그려짐(그리기 횟수도 두 배)
 //     → 같은 표적·같은 순간에 영웅 피격점 그림이 있으면 네모 섬광은 그리지 않는다(환도는 R35 에서 이미 이렇게 함).
-//  ④ 미카엘라·서하·기억사수·헌터 기본공격이 맞는 자리에 보이는 것이 거의 없음 → 맞는 자리에 영웅 색 섬광 프레임(R163 hit-flash) 하나.
+//  ④ 미카엘라·서하·기억사수·헌터 기본공격이 맞는 자리에 보이는 것이 거의 없음 → 맞는 자리에 영웅 색을 어둡게 누른 핏빛 터짐(R163 dark-explosion-blood) 하나.
+//     (R188: 처음엔 R163 'hit-flash' 를 썼는데 그 시트는 섬광이 아니라 작은 인형 그림이었다 — 사용자 "미카엘라 공격 적중 시 인형 같은 이펙트")
+//  ⑤ R188 다크 판타지 호러: 미카엘라의 분홍 그림(장미·깃털·천사 날개·세라프 불꽃)은 그릴 때 핏빛으로 누른다(채도↑·색상 −32°·밝기 .7).
 //  판정·피해·쿨다운은 건드리지 않는다. storyworld.r181.skills {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_SKILLS_R181__)return;
@@ -25,13 +27,16 @@ function wrapWounds(){const W=window.__STORYWORLD_HOSPITAL_WOUNDS_R53__;if(!W||W
  const base=W.statusRows;const next=Object.freeze({...W,statusRows(...a){const r=base.apply(W,a);try{return compact(r);}catch(e){fail(e);return r;}},__r181:true});
  try{window.__STORYWORLD_HOSPITAL_WOUNDS_R53__=next;return true;}catch(e){fail(e);return false;}}
 // ---- ②·③ 그리기 때 손질 ----
-const HERO_Q=/assets\/vfx\/heroes\/[a-z]+-q\.webp$/;
+const HERO_Q=/assets\/vfx\/heroes\/[a-z]+-q\.webp$/,MICHAELA_ART=/michaela-|seraph|sig-[a-z]+-pink|resonance-petals/;
 const heroOf=e=>e?.heroIdE568||e?.sourceHero||e?.nativeVfxHeroOct11||e?.ownerHero||null;
 function withTemp(e,patch,run){const keys=Object.keys(patch),old=keys.map(k=>[k,Object.prototype.hasOwnProperty.call(e,k),e[k]]);for(const k of keys)e[k]=patch[k];try{return run();}finally{for(const [k,had,v] of old){if(had)e[k]=v;else delete e[k];}}}
 function alphaScope(k,run){if(typeof ctx==='undefined'||!ctx)return run();ctx.save();try{ctx.globalAlpha*=k;return run();}finally{ctx.restore();}}
 try{
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){
    if(!prefs.on||!e||typeof e!=='object')return base.apply(this,[e,...a]);
+   if(prefs.dark!==false&&typeof ctx!=='undefined'&&ctx&&(heroOf(e)==='michaela'||MICHAELA_ART.test(String(e.asset||'')))){const f0=ctx.filter;ctx.filter=(f0&&f0!=='none'?f0+' ':'')+'saturate(1.35) hue-rotate(-32deg) brightness(.7)';stats.darkened=(stats.darkened||0)+1;try{return drawEffectInner.apply(this,[e,...a]);}finally{ctx.filter=f0;}}
+   return drawEffectInner.apply(this,[e,...a]);};
+  const drawEffectInner=function(e,...a){
    try{
     // ③ 네모 충돌 섬광: 같은 표적에 영웅 피격점 그림이 같은 순간(0.12초 안) 있으면 건너뛴다
     if(prefs.dedupe&&e.type==='burst'&&e.r7DamageTarget!=null&&Array.isArray(effects)&&effects.some(f=>f!==e&&f.type==='e568HeroImpact'&&f.r7DamageTarget===e.r7DamageTarget&&Math.abs((f.age||0)-(e.age||0))<.12)){stats.dedupedBursts++;return;}
@@ -51,7 +56,7 @@ try{
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt={}){const r=base.apply(this,arguments);
    try{if(prefs.on&&prefs.flash&&type==='e568HeroImpact'&&FAINT.has(opt?.heroIdE568)&&!/skill|ultimate/.test(String(opt?.sourceActionE568||''))){
      const P=window.__STORYWORLD_PIXELFX_R163__,C=window.__STORYWORLD_HERO_FX_R102__?.PALETTE?.[opt.heroIdE568];
-     if(P?.has?.('hit-flash')&&fin(x)&&fin(y)){P.play('hit-flash',x,y,{k:.62,z:(typeof actorHeight==='function'?actorHeight():60)*.42,tint:C?{a:C.a,b:C.b}:undefined});stats.flashes++;}}}catch(err){fail(err);}
+     if(P?.has?.('dark-explosion-blood')&&fin(x)&&fin(y)){P.play('dark-explosion-blood',x,y,{k:.42,z:(typeof actorHeight==='function'?actorHeight():60)*.42,tint:C?{a:C.a.map(v=>Math.round(v*.5)),b:C.b}:undefined});stats.flashes++;}}}catch(err){fail(err);}
    return r;};}
 }catch(e){fail(e);}
 let tries=0;(function arm(){if(wrapWounds()||++tries>40)return;setTimeout(arm,250);})();
