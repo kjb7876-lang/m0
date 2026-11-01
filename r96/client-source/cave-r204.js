@@ -19,7 +19,17 @@ let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
-const ZONES={dist01:{seed:0x5d0124,tint:[1.0,.78,.55],hiTop:1.6,loTop:.45,bulge:1.6,widen:true,web:true}};
+const ZONES={
+ // 거미동굴: 흙·암반 동굴, 종유석, 거미줄
+ dist01:{seed:0x5d0124,tint:[1.0,.78,.55],hiTop:1.6,loTop:.45,bulge:1.35,widen:true,web:true,pillars:true,
+  // R207 Drive 「첫 정원 → 거미동굴」 512 패치: 절벽 밑 흙·자갈·접지 그림자(바닥 평면), 뒤쪽 대지 가장자리 암벽 조각(세운 그림)
+  patches:[['soil_rock_transition_01','base',.3,1/90,.5],['soil_rock_transition_02','base',.3,1/90,.5],['cliff_contact_shadow_01','base',.42,1/110,1]],
+  uprights:[['cliff_straight_01',.36],['cliff_inner_join_01',.34],['cliff_outer_join_01',.34]],uprightRate:1/95},
+ // 악마화 나무의 정원: 정원 돌길·이끼 흙·마른 풀, 이끼 낀 둔덕, 둔덕 위 마른 나무(r99 원화 12장). 거미줄 없음.
+ dist00:{seed:0x5d0077,tint:[.86,.92,.76],hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
+  tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
+  patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
+  uprights:[['garden_low_border_01',.34]],uprightRate:1/110}};
 const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};
@@ -40,6 +50,11 @@ function field(ex,cfg,protect){
  for(const c of ex.floorCells||[]){const x=(c.x??c[0])+M,y=(c.y??c[1])+M;if(x>=0&&y>=0&&x<CW&&y<H+2*M)walk[y*CW+x]=1;}
  const inside=new Uint8Array(N);
  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++)inside[j*GW+i]=walk[Math.floor(j/R)*CW+Math.floor(i/R)];
+ // 바닥 칸 사이에 선 벽판(미로 칸막이 등)도 바위로 본다 — 원래 벽 그림을 숨기므로 보이지 않는 벽이 생기지 않게. 문 벽은 제외.
+ for(const w of ex.walls||[]){const e=w.endpoints;if(!e||e.length!==2||/door/i.test(String(w.id||'')))continue;const [[x0,y0],[x1,y1]]=e,len=Math.hypot(x1-x0,y1-y0);if(!(len>0))continue;
+  const ux=(x1-x0)/len,uy=(y1-y0)/len,minx=Math.min(x0,x1)-.4,maxx=Math.max(x0,x1)+.4,miny=Math.min(y0,y1)-.4,maxy=Math.max(y0,y1)+.4;
+  for(let j=Math.max(0,Math.floor((miny+M)*R));j<=Math.min(GH-1,Math.ceil((maxy+M)*R));j++)for(let i=Math.max(0,Math.floor((minx+M)*R));i<=Math.min(GW-1,Math.ceil((maxx+M)*R));i++){
+   const px=(i+.5)/R-M-x0,py=(j+.5)/R-M-y0,t=px*ux+py*uy;if(t<-.05||t>len+.05)continue;if(Math.abs(px*uy-py*ux)<.3)inside[j*GW+i]=0;}}
  // 두 방향 챔퍼 거리(점 단위) — 안쪽은 바깥까지, 바깥은 안쪽까지
  const INF=1e9,dIn=new Float32Array(N).fill(INF),dOut=new Float32Array(N).fill(INF);
  for(let k=0;k<N;k++){if(inside[k])dOut[k]=0;else dIn[k]=0;}
@@ -62,9 +77,18 @@ function field(ex,cfg,protect){
   // 절벽 불룩: 벽에서 보행 쪽으로만(최대 cfg.bulge 칸). 통로는 2.3칸 이상 남기고, 지켜야 할 자리(입구·문·조형물·몹) 둘레 2.6칸은 건드리지 않는다.
   let allow=Math.min(cfg.bulge,Math.max(0,hw[k]-1.15));
   if(allow>0)for(const q of prot){const dd=Math.hypot(q[0]-x,q[1]-y)-q[2];if(dd<1){allow*=Math.max(0,dd);if(allow<=0)break;}}
-  const n1=fbm(x*.2,y*.2,s,3)*.5+.5,n2=fbm(x*.62,y*.62,s+33,2);
+  const n1=fbm(x*.2,y*.2,s,3)*.5+.5,n2=fbm(x*.62,y*.62,s+33,2)*.67;// 잔물결 ±0.2칸
   const bulge=allow*Math.min(1,Math.max(0,(n1-.2)/.42));
   f[k]=Math.min(sm[k]-bulge+.3*n2,raw[k]);}
+
+ // 얇게 튀어나온 바위 두껍게(사용자 "뜬금없이 얇게 튀어나온 건 일정 두께 이상"): 바위 쪽으로 기울기를 따라 걸어 바위 한가운데 깊이(r)를 재고,
+ //  r<THICK/2 이면 둘레를 (THICK/2-r)만큼 바닥 쪽으로 키운다 → 바위 두께가 THICK(1.4칸) 이상. 키운 자리는 이동 판정도 막는다(f<raw).
+ {const TH=(cfg.thick??1.4)/2,g=f.slice(),SF=(x,y)=>{const i=Math.max(0,Math.min(GW-1,Math.round(x))),j=Math.max(0,Math.min(GH-1,Math.round(y)));return g[j*GW+i];};
+  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++){const k=j*GW+i,v=g[k];if(v>TH+.15||v<-TH)continue;let x=i,y=j,cur=v,deep=-v;
+   for(let t=0;t<16;t++){const gx=SF(x+1,y)-SF(x-1,y),gy=SF(x,y+1)-SF(x,y-1),gl=Math.hypot(gx,gy);if(gl<1e-4)break;const nx=x-gx/gl*.75,ny=y-gy/gl*.75,nv=SF(nx,ny);if(nv>=cur-1e-4)break;x=nx;y=ny;cur=nv;deep=Math.max(deep,-nv);}
+   if(deep>0&&deep<TH){let add=(TH-deep)*Math.min(1,Math.max(0,(TH+.15-v)/(TH+.15)));
+    if(v>0)add=Math.min(add,Math.max(0,hw[k]-1.15-(raw[k]-v)));// 바닥 쪽으로 키울 땐 통로 반폭 1.15칸(폭 2.3칸)은 남긴다
+    f[k]=Math.min(f[k],v-add);}}}
  let mod=0;for(let k=0;k<N;k++)if(raw[k]>0&&raw[k]-f[k]>.3)mod++;
  return {W,H,GW,GH,f,raw,inside,walk,CW,G:blur(blur(blur(blur(f)))),bulgedCells:Math.round(mod/(R*R)),protect:prot.length};
 }
@@ -75,7 +99,10 @@ function topHeight(F,cfg,x,y){const g=at(F,F.G,x,y),gx=at(F,F.G,x+.5,y)-at(F,F.G
  const front=Math.max(0,(-gx-gy)/(L*Math.SQRT2)),deep=Math.min(1,Math.max(0,(-g-2.5)/2.5));
  const s=Math.max(1-Math.min(1,Math.max(0,(front-.15)/.55)),deep);
  // 윗선이 들쭉날쭉하게: 높이에 비례한 잔물결(대지 윗면과 절벽 윗선이 같은 함수를 써서 이어진다)
- const hh=cfg.loTop+(cfg.hiTop-cfg.loTop)*s;return hh*(1+.22*fbm(x*1.7,y*1.7,cfg.seed+71,2))+.06*fbm(x*4.1,y*4.1,cfg.seed+5,1);}
+ let hh=cfg.loTop+(cfg.hiTop-cfg.loTop)*s;
+ // 문 둘레: 문틀(약 2.6) 높이까지 절벽을 올려 문이 바위 사이에 박혀 보이게(1.6칸 안은 문틀 높이, 3.6칸까지 서서히)
+ for(const d of F.doors||[]){const dd=Math.hypot(d[0]-x,d[1]-y);if(dd<3.6){const w=dd<1.6?1:1-(dd-1.6)/2;hh=Math.max(hh,hh+(2.55-hh)*w*w);}}
+ return hh*(1+.22*fbm(x*1.7,y*1.7,cfg.seed+71,2))+.06*fbm(x*4.1,y*4.1,cfg.seed+5,1);}
 
 // ---- 통로 넓히기(사용자 "모든 맵 통로 지금보다 2~3배 넓게" — 이 시범 지역부터) -----------------------------------
 // 엔진 충돌은 floorCells(바닥 칸)와 얇은 벽 AABB(walls)뿐이다. 좁은 통로 칸 옆에 바닥 칸을 더하고, 양쪽이 다 바닥이 된 벽판을 빼서
@@ -87,29 +114,55 @@ function widen(ex,cfg,doorPts){const W=ex.bounds[2],H=ex.bounds[3],key=(x,y)=>x+
  const q=[];for(const c of ex.floorCells){const [x,y]=c;let edge=false;for(let dy=-1;dy<=1&&!edge;dy++)for(let dx=-1;dx<=1;dx++)if(!has(x+dx,y+dy)){edge=true;break;}if(edge){dist.set(key(x,y),1);q.push([x,y]);}}
  for(let h=0;h<q.length;h++){const [x,y]=q[h],d=dist.get(key(x,y));for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const k=key(x+dx,y+dy);if(S.has(k)&&!dist.has(k)){dist.set(k,d+1);q.push([x+dx,y+dy]);}}}
  const hwOf=(x,y)=>{let m=0;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)m=Math.max(m,dist.get(key(x+dx,y+dy))||0);return m;};
- const nearDoor=(x,y)=>doorPts.some(p=>Math.hypot(p[0]-x-.5,p[1]-y-.5)<3.5);
+ const nearDoor=(x,y)=>doorPts.some(p=>Math.hypot(p[0]-x-.5,p[1]-y-.5)<(p[2]||3.5));// 문 폭의 절반 + 3칸(넓은 문 끝을 돌아가는 길이 생기지 않게)
  const reach=(sx,sy,lim)=>{const seen=new Map([[key(sx,sy),0]]),qq=[[sx,sy]];for(let h=0;h<qq.length;h++){const [x,y]=qq[h],d=seen.get(key(x,y));if(d>=lim)continue;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const k=key(x+dx,y+dy);if(S.has(k)&&!seen.has(k)){seen.set(k,d+1);qq.push([x+dx,y+dy]);}}}return seen;};
+ // 4칸 이상 긴 벽은 그대로 둔다(원래 지도의 큰 벽 — 그 목록·순서를 바꾸지 않는다). 그 바로 뒤 칸은 넓히지 않는다(벽 뒤 1칸 바닥 띠 방지).
+ const longEdge=new Set();for(const w of ex.walls||[]){const e=w.endpoints;if(!e||e.length!==2)continue;const [[x0,y0],[x1,y1]]=e;
+  if(x0===x1&&Math.abs(y1-y0)>=4)for(let y=Math.min(y0,y1);y<Math.max(y0,y1);y++)longEdge.add('v:'+x0+':'+y);else if(y0===y1&&Math.abs(x1-x0)>=4)for(let x=Math.min(x0,x1);x<Math.max(x0,x1);x++)longEdge.add('h:'+x+':'+y0);}
+ const behindLong=(x,y)=>(has(x-1,y)&&longEdge.has('v:'+x+':'+y))||(has(x+1,y)&&longEdge.has('v:'+(x+1)+':'+y))||(has(x,y-1)&&longEdge.has('h:'+x+':'+y))||(has(x,y+1)&&longEdge.has('h:'+x+':'+(y+1)));
  const add=new Set();
  for(const c of ex.floorCells){const [x,y]=c;if(hwOf(x,y)>2||nearDoor(x,y))continue;let R8=null;
   for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){if(Math.hypot(dx,dy)>1.5)continue;const nx=x+dx,ny=y+dy,k=key(nx,ny);if(S.has(k)||add.has(k))continue;
-   if(nx<2||ny<2||nx>W-3||ny>H-3||nearDoor(nx,ny))continue;R8=R8||reach(x,y,8);let ok=true;
+   if(nx<2||ny<2||nx>W-3||ny>H-3||nearDoor(nx,ny)||behindLong(nx,ny))continue;R8=R8||reach(x,y,8);let ok=true;
    for(let yy=-2;yy<=2&&ok;yy++)for(let xx=-2;xx<=2;xx++){if(Math.hypot(xx,yy)>2.3)continue;const kk=key(nx+xx,ny+yy);if(S.has(kk)&&!R8.has(kk)){ok=false;break;}}
    if(ok)add.add(k);}}
  if(!add.size)return null;
- const S2=new Set([...S,...add]),has2=(x,y)=>S2.has(key(x,y));let removed=0;
- const walls=(ex.walls||[]).filter(w=>{const e=w.endpoints;if(!e||e.length!==2)return true;const [[x0,y0],[x1,y1]]=e;
-  if(x0===x1&&Math.abs(y1-y0)===1){const y=Math.min(y0,y1);if(has2(x0-1,y)&&has2(x0,y)){removed++;return false;}}
-  else if(y0===y1&&Math.abs(x1-x0)===1){const x=Math.min(x0,x1);if(has2(x,y0-1)&&has2(x,y0)){removed++;return false;}}return true;});
- const floorCells=[...ex.floorCells,...[...add].map(k=>k.split(',').map(Number))];
- return {...ex,floorCells,walls,r204Widened:{added:add.size,wallsRemoved:removed,before:S.size,after:S2.size}};}
-const doorPointsOf=r=>{const out=[];for(const d of window.__STORYWORLD_WORLD_R74__?.doors||[])if(Number.isFinite(d.x))out.push([d.x,d.y]);
- for(const q of r.props||[])if(/door|gate|portal|altar|chest/i.test(String(q.kind||q.id||''))&&Number.isFinite(q.x))out.push([q.x,q.y]);
- for(const w of r.exploration?.walls||[])if(/door/i.test(String(w.id||''))&&Number.isFinite(w.x))out.push([w.x,w.y]);
- const ex=r.exploration;for(const q of [ex?.gate])if(q&&Number.isFinite(q.x))out.push([q.x,q.y]);return out;};
-function widenRoom(r){try{if(!roomOn(r)||!ZONES[r.id].widen||r.exploration.r204Widened)return r;const nx=widen(r.exploration,ZONES[r.id],doorPointsOf(r));
- if(nx){r.exploration=nx;stats.widened=nx.r204Widened;}}catch(e){fail(e);}return r;}
-if(typeof makeRoom==='function'){const mk=makeRoom;makeRoom=function(...a){return widenRoom(mk.apply(this,a));};}
-if(typeof enterRegion==='function'){const en=enterRegion;enterRegion=async function(...a){const out=await en.apply(this,a);try{if(out!==false&&typeof room!=='undefined')widenRoom(room);}catch(e){fail(e);}return out;};}
+ // 벽: 각 벽이 덮는 칸 경계(세로 'v:x:y' = (x-1,y)|(x,y), 가로 'h:x:y' = (x,y-1)|(x,y))를 구한다.
+ //  넓힌 칸에 닿는 경계이고 양쪽이 다 바닥이 되면 그 벽을 뺀다 — 원래부터 양쪽이 바닥이던 미로 칸막이는 그대로 둔다. 긴 벽은 덮는 경계가 모두 해당될 때만 뺀다.
+ const S2=new Set([...S,...add]),has2=(x,y)=>S2.has(key(x,y)),isAdd=(x,y)=>add.has(key(x,y));
+ const edgesOf=w=>{const e=w.endpoints;if(!e||e.length!==2)return null;const [[x0,y0],[x1,y1]]=e,out=[];
+  if(x0===x1&&Number.isInteger(x0)&&Number.isInteger(y0)&&Number.isInteger(y1))for(let y=Math.min(y0,y1);y<Math.max(y0,y1);y++)out.push(['v',x0,y,[x0-1,y],[x0,y]]);
+  else if(y0===y1&&Number.isInteger(y0)&&Number.isInteger(x0)&&Number.isInteger(x1))for(let x=Math.min(x0,x1);x<Math.max(x0,x1);x++)out.push(['h',x,y0,[x,y0-1],[x,y0]]);
+  else return null;return out;};
+ let removed=0;const blockedEdge=new Set();
+ // 긴 벽은 넓힌 칸에 닿아 열린 경계만 1칸 단위로 잘라 낸다(나머지 구간은 1칸 벽판으로 남김) — 긴 벽 뒤에 1칸짜리 바닥 띠가 생기지 않게.
+ const unit=(w,[k,x,y],n)=>k==='v'?{...w,id:w.id+'#'+n,x,y:y+.5,width:w.width??.24,depth:1,endpoints:[[x,y],[x,y+1]],analyticBounds12:[x-.12,y,x+.12,y+1],r204Split:true}
+  :{...w,id:w.id+'#'+n,x:x+.5,y,width:1,depth:w.depth??.24,endpoints:[[x,y],[x+1,y]],analyticBounds12:[x,y-.12,x+1,y+.12],r204Split:true};
+ const walls=[];for(const w of ex.walls||[]){const es=edgesOf(w);if(!es||!es.length||/door/i.test(String(w.id||''))){walls.push(w);continue;}
+  if(es.length>=4){walls.push(w);for(const [k,x,y] of es)blockedEdge.add(k+':'+x+':'+y);continue;}
+  const open=es.map(([,, ,a,b])=>has2(...a)&&has2(...b)&&(isAdd(...a)||isAdd(...b)));
+  if(open.every(Boolean)){removed++;continue;}
+  if(!open.some(Boolean)){walls.push(w);for(const [k,x,y] of es)blockedEdge.add(k+':'+x+':'+y);continue;}
+  removed++;es.forEach((e,n)=>{if(open[n])return;walls.push(unit(w,e,n));blockedEdge.add(e[0]+':'+e[1]+':'+e[2]);});}
+ // 원래 바닥에서 4방향(남은 벽을 넘지 않고)으로 닿는 추가 칸만 남긴다 — 벽 뒤에 갇힌 조각을 만들지 않는다.
+ const edgeKey=(x,y,nx,ny)=>nx!==x?'v:'+Math.max(x,nx)+':'+y:'h:'+x+':'+Math.max(y,ny);
+ const reachAdd=new Set(),qq=[...S].map(k=>k.split(',').map(Number)),seenB=new Set(S);
+ for(let h=0;h<qq.length;h++){const [x,y]=qq[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=key(nx,ny);if(seenB.has(k)||!add.has(k)||blockedEdge.has(edgeKey(x,y,nx,ny)))continue;seenB.add(k);reachAdd.add(k);qq.push([nx,ny]);}}
+ const dropped=add.size-reachAdd.size;
+ // 버린 칸에 닿아 뺐던 벽은 되살린다
+ // 버린 칸이 있으면 그 칸에 닿는 열린 경계에 1칸 벽판을 되살린다
+ const keepWalls=walls.slice();if(dropped){const dropSet=new Set([...add].filter(k=>!reachAdd.has(k)));let n=0;
+  for(const w of ex.walls||[]){const es=edgesOf(w);if(!es||/door/i.test(String(w.id||'')))continue;for(const e of es){const [k,x,y,a,b]=e,ek=k+':'+x+':'+y;if(blockedEdge.has(ek))continue;
+    if(dropSet.has(key(...a))||dropSet.has(key(...b))){keepWalls.push(unit(w,e,'r'+(n++)));blockedEdge.add(ek);}}}}
+ const floorCells=[...ex.floorCells,...[...reachAdd].map(k=>k.split(',').map(Number))];
+ return {...ex,floorCells,walls:keepWalls,r204Widened:{added:reachAdd.size,dropped,wallsRemoved:removed,before:S.size,after:S.size+reachAdd.size}};}
+// 문·입구 자리: 레이아웃 안의 R74 문(worldR74.doors)·입구·관문, 이름에 door 가 든 벽.
+const layoutDoorPoints=L=>{const out=[],pt=(q,rad)=>{if(q&&Number.isFinite(q.x)&&Number.isFinite(q.y))out.push([q.x,q.y,rad||3.5]);};
+ for(const d of L.worldR74?.doors||[])pt(d,Math.max(3.5,(Number(d.width)||0)/2+3));for(const q of [L.gate,L.entrance,L.entry])pt(q);for(const w of L.walls||[])if(/door/i.test(String(w.id||'')))pt(w);return out;};
+// R171 지도 레이아웃이 처음 방에 붙을 때(꾸미기 전에) 부른다 — 같은 원본 레이아웃에는 늘 같은 결과 객체를 돌려준다(꾸미기·색인이 한 번만).
+const widened=new WeakMap();
+window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!solo()||!ZONES[id]?.widen||!L?.floorCells?.length)return null;if(widened.has(L))return widened.get(L);
+ const nx=widen(L,ZONES[id],layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
 
 // ---- 게임 쪽 거리장: 이동 판정(blocked)과 렌더러가 같은 것을 쓴다 ------------------------------------
 // 첫 렌더 때(몹·조형물이 다 놓인 뒤) 만든다. 만들기 전에는 막는 것도 그리는 것도 없다(Legacy 렌더러도 그대로).
@@ -120,7 +173,7 @@ function protectPoints(r){const out=[],ex=r.exploration,pt=(q,rad)=>{if(q&&Numbe
  for(const q of [ex.entrance,ex.entry,ex.gate])pt(q,1.6);for(const q of r.props||[])pt(q,/door|chest|altar|gate|portal/i.test(String(q.kind||q.id||''))?2.2:.9+(Number(q.radius)||0));
  for(const q of r.enemies||[])pt(q,1.0);for(const d of window.__STORYWORLD_WORLD_R74__?.doors||[])pt(d,2.4);if(typeof player==='object'&&player&&typeof room!=='undefined'&&r===room)pt(player,1.2);return out;}
 function fieldFor(r,make=false){const ex=r?.exploration;if(!ex)return null;let F=cache.get(ex);if(F||!make||!roomOn(r))return F||null;
- const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.ms=Math.round(performance.now()-t0);cache.set(ex,F);return F;}
+ const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.doors=layoutDoorPoints(ex);F.ms=Math.round(performance.now()-t0);cache.set(ex,F);return F;}
 if(typeof blocked==='function'){const base=blocked;
  blocked=function(x,y,rad=.27,where=(typeof room!=='undefined'?room:null)){if(base.call(this,x,y,rad,where))return true;
   try{if(prefs.on&&where?.exploration){const F=cache.get(where.exploration);if(F&&roomOn(where)){const fv=at(F,F.f,x,y);
@@ -261,6 +314,55 @@ function decalMesh(T,F,cfg){// 바닥 데칼: 보행 영역(f>0.15) — 균열·
   uv.push(u0,1-v0, u0+.25,1-v0, u0+.25,1-v0-.5, u0,1-v0-.5);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;count++;}
  stats.decals=count;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();return g;}
 
+function blobTex(T,r){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d'),gr=g.createRadialGradient(64,64,4,64,64,62);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.55,'rgba(255,255,255,.55)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);
+ const t=new T.CanvasTexture(c);t.colorSpace=T.NoColorSpace;r.spatialResources.add(t);return t;}
+// 바닥에 놓인 조형물(문·상자·빛 소품 포함, 공중 장식 제외) 아래 타원. 반지름은 소품 반지름의 1.25배(최소 0.45칸), 화면 세로로 눌린 모양은 바닥 평면이라 저절로 생긴다.
+function propShadowMesh(T,F,rm){const props=(rm?.props||[]).filter(q=>Number.isFinite(q.x)&&Number.isFinite(q.y)&&!q.flying&&!q.r204NoShadow&&at(F,F.f,q.x,q.y)>-.2);if(!props.length)return null;
+ const pos=[],uv=[],idx=[];let n=0;for(const q of props){const rad=Math.max(.45,(Number(q.radius)||.4)*1.25),y=.011;
+  pos.push(q.x-rad,y,q.y-rad, q.x+rad,y,q.y-rad, q.x+rad,y,q.y+rad, q.x-rad,y,q.y+rad);uv.push(0,0,1,0,1,1,0,1);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
+ stats.propShadows=props.length;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();return g;}
+// 둔덕 위 나무: 뒤쪽(높은) 둔덕에만 — 카메라 쪽 낮은 둔덕엔 세우지 않아 영웅을 가리지 않는다. 원화 12장 중 고정 시드로 고르고 좌우 반전·크기만 바꾼다.
+function treeSprites(T,r,F,cfg,ims){const rnd=rng(cfg.seed^0x7ee5),g=new T.Group(),mats=[];let n=0;const want=Math.round((F.W*F.H)/120);
+ for(let i=0;i<12;i++){const im=ims['tree'+i];if(!im)continue;const t=new T.Texture(im);t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);
+  const m=new T.SpriteMaterial({map:t,alphaTest:.45,depthWrite:true,toneMapped:false,color:new T.Color(cfg.tint[0]*.9,cfg.tint[1]*.9,cfg.tint[2]*.9)});r.spatialResources.add(m);mats.push(m);}
+ if(!mats.length)return null;const placed=[];
+ for(let t=0;t<want*40&&n<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.9||fv<-4)continue;const h=topHeight(F,cfg,x,y);if(h<1.05)continue;
+  if(placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<2.2))continue;placed.push([x,y]);
+  const s=new T.Sprite(mats[Math.floor(rnd()*mats.length)]);const hgt=3.4+rnd()*1.8;s.scale.set(hgt*.95,hgt,1);s.center.set(.5,.04);s.position.set(x,h-.05,y);s.layers.set(2);s.renderOrder=-27;s.userData.r204=true;g.add(s);n++;}
+ stats.trees=n;return n?g:null;}
+
+// ---- R207 Drive 유기 지형 패치 ---------------------------------------------------------------------
+// 그림 자체가 이 게임의 2:1 아이소 시점으로 그려져 있다 → 화면 픽셀을 바닥 좌표로 되돌린 평면 사각형에 붙이면 그린 모양 그대로 바닥에 눕는다.
+//  화면 (dpx,dpy) px(줌 1) → 바닥 x−y = dpx/34, x+y = dpy/17 (엔진 Projection tile=34). 늘이기·회전·반전 없음(조명 방향 보존). 비충돌.
+const ISO_T=34;
+function isoQuad(cx,cy,box,s,yOff){const P=(px,py)=>{const dx=(px-box.cx)*s,dy=(py-box.cy)*s;return[cx+(dx/ISO_T+dy/(ISO_T/2))/2,yOff,cy+(dy/(ISO_T/2)-dx/ISO_T)/2];};
+ return[P(box.x0,box.y0),P(box.x1,box.y0),P(box.x1,box.y1),P(box.x0,box.y1)];}
+function bboxOf(im){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height).data;
+ let x0=c.width,y0=c.height,x1=0,y1=0;for(let y=0;y<c.height;y+=2)for(let x=0;x<c.width;x+=2)if(d[(y*c.width+x)*4+3]>24){if(x<x0)x0=x;if(y<y0)y0=y;if(x>x1)x1=x;if(y>y1)y1=y;}
+ return{x0,y0,x1:x1+2,y1:y1+2,cx:(x0+x1)/2,cy:(y0+y1)/2,w:c.width,h:c.height};}
+// 바위 조각은 회보라 암석이라 지역 색(tint)으로 다시 칠한다(밝기만 살림) — 화풍·색 일관
+function tintedCanvas(im,tint){const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);const id=g.getImageData(0,0,c.width,c.height),d=id.data;
+ for(let i=0;i<d.length;i+=4){const l=(d[i]*.3+d[i+1]*.59+d[i+2]*.11)/255,k=Math.pow(l,1.1)*1.05;d[i]=Math.min(255,k*255*tint[0]);d[i+1]=Math.min(255,k*255*tint[1]);d[i+2]=Math.min(255,k*255*tint[2]);}g.putImageData(id,0,0);return c;}
+function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.Group();let np=0,nu=0;
+ const avoid=[...(F.doors||[]).map(d=>[d[0],d[1],Math.max(3,(d[2]||3.5)-.5)]),...(rm?.props||[]).filter(q=>Number.isFinite(q.x)).map(q=>[q.x,q.y,1.4+(Number(q.radius)||0)])];
+ const clear=(x,y)=>!avoid.some(a=>Math.hypot(a[0]-x,a[1]-y)<a[2]);
+ for(const [name,where,sc,rate,bright=1] of cfg.patches||[]){const im=ims['org:'+name];if(!im)continue;const box=bboxOf(im),t=new T.Texture(im);t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);
+  const m=new T.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.92*bright,cfg.tint[1]*.92*bright,cfg.tint[2]*.92*bright),polygonOffset:true,polygonOffsetFactor:-4});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);
+  const pos=[],uv=[],idx=[];let k=0;const want=Math.max(1,Math.round(F.W*F.H*rate)),placed=[];
+  for(let t2=0;t2<want*40&&k<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(where==='base'?(fv<.25||fv>1.1):fv<1.3)continue;if(!clear(x,y)||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<3.2))continue;placed.push([x,y]);
+   const q=isoQuad(x,y,box,sc*(.85+rnd()*.3),.013+np*1e-5);for(const v of q)pos.push(...v);uv.push(box.x0/box.w,1-box.y0/box.h,box.x1/box.w,1-box.y0/box.h,box.x1/box.w,1-box.y1/box.h,box.x0/box.w,1-box.y1/box.h);
+   const b=k*4;idx.push(b,b+2,b+1,b,b+3,b+2);k++;np++;}
+  if(!k)continue;const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);geo.computeBoundingSphere();r.spatialResources.add(geo);
+  const mesh=new T.Mesh(geo,m);mesh.layers.set(2);mesh.renderOrder=-17;mesh.userData.r204=true;mesh.name='r207-patch:'+name;g.add(mesh);}
+ // 세운 그림(암벽 조각·낮은 돌 경계): 뒤쪽 높은 대지 가장자리만(카메라 쪽 낮은 대지·바닥엔 두지 않아 영웅·길을 가리지 않음). 바닥 기준점 = 그림 아래 끝 가운데.
+ const ups=(cfg.uprights||[]).map(([name,sc])=>{const im=ims['org:'+name];if(!im)return null;const box=bboxOf(im),src=/garden/.test(name)?im:tintedCanvas(im,cfg.tint),t=new (src instanceof HTMLCanvasElement?T.CanvasTexture:T.Texture)(src);
+  t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);const m=new T.SpriteMaterial({map:t,alphaTest:.4,depthWrite:true,toneMapped:false});r.spatialResources.add(m);return{m,box,sc};}).filter(Boolean);
+ if(ups.length){const want=Math.round(F.W*F.H*(cfg.uprightRate||1/100)),placed=[];
+  for(let t2=0;t2<want*40&&nu<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.35||fv<-1.4)continue;const h=topHeight(F,cfg,x,y);if(h<1.0)continue;if(!clear(x,y)||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<2.6))continue;placed.push([x,y]);
+   const u=ups[Math.floor(rnd()*ups.length)],sp=new T.Sprite(u.m),wpx=u.box.w*u.sc,hpx=u.box.h*u.sc,ppu=ISO_T*Math.SQRT2;// 화면 px → 월드 크기(정사영: 화면 1px ≈ 1/(34·√2) 단위)
+   sp.scale.set(wpx/ppu,hpx/ppu*1.15,1);sp.center.set(u.box.cx/u.box.w,1-(u.box.y1-6)/u.box.h);sp.position.set(x,h-.05,y);sp.layers.set(2);sp.renderOrder=-26;sp.userData.r204=true;g.add(sp);nu++;}}
+ stats.organicPatches=np;stats.organicUprights=nu;return(np||nu)?g:null;}
+
 // ---- 장면 연결 ----------------------------------------------------------------------------------
 const FLOOR_CMD=/^r9[02]:floor:/;
 const HIDE=/wall|masonry|roof-caps|cap-rims|cap-trim|contact-skirt|nonwalkable|-edge|decor|halo|annex-ground|jamb|threshold|door-contact|door-apertures/i;
@@ -268,9 +370,11 @@ const roomOf=frame=>typeof room!=='undefined'&&room?.exploration===frame?.explor
 function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&frame?.layer==='STORY'&&r.spatialBuilt);}
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
  const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
- const want=Object.fromEntries(Object.entries(TEX).map(([k,[p]])=>[k,loadImg(p)]));
+ const TX={...TEX,...(cfg.tex||{})},want=Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
+ for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg('assets/r207/organic/'+n+'.png');
+ if(cfg.trees)for(let i=0;i<12;i++)want['tree'+i]=loadImg('assets/r99/outdoor/tree-'+cfg.trees+'-'+String(i).padStart(2,'0')+'.webp');
  Promise.all(Object.values(want)).then(list=>{if(r.disposed||r.sceneGeneration!==gen)return;const ims={};Object.keys(want).forEach((k,i)=>ims[k]=list[i]);
-  const F=fieldFor(roomOf(frame),true);if(!F)throw Error('no field');const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,0),face:tileTex(T,r,ims.face,1)};
+  const F=fieldFor(roomOf(frame),true);if(!F)throw Error('no field');const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
   const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
   const mats={ground:bakeGround(T,r,F,groundMaterial(T,r,F,tx,cfg,U),tx.floorA,cfg),top:topMaterial(T,r,F,tx,cfg,U),face:faceMaterial(T,r,tx,cfg),pillar:faceMaterial(T,r,tx,cfg),
    decal:new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2})};
@@ -279,8 +383,12 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   const group=new T.Group();group.name='r204-cave';
   const add=(geo,mat,name,order)=>{const mesh=new T.Mesh(geo,mat);mesh.name=name;mesh.layers.set(2);mesh.renderOrder=order;mesh.userData.presentationOnly=true;mesh.userData.r204=true;mesh.frustumCulled=true;r.spatialResources.add(geo);group.add(mesh);return mesh;};
   // 앞에서 뒤로 그린다: 대지·절벽·기둥이 먼저 깊이를 채우면 그 뒤 바닥 조각은 깊이 검사에서 일찍 버려진다(덧그리기 감소)
-  add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
+  add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false)add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
   add(groundMesh(T,F),mats.ground,'r204-ground',-20);add(decalMesh(T,F,cfg),mats.decal,'r204-decals',-19);
+  // 조형물 발밑 그늘(사용자 "조형물도 자연스럽게"): 바닥에 붙은 부드러운 어두운 타원 — 소품이 바닥에 놓여 있게 보이도록
+  {const rm=roomOf(frame),pg=propShadowMesh(T,F,rm);if(pg){const m=new T.MeshBasicMaterial({map:blobTex(T,r),transparent:true,depthWrite:false,toneMapped:false,color:0x000000,opacity:.62,polygonOffset:true,polygonOffsetFactor:-3});r.spatialResources.add(m);if(r.sightState24)A.attachSight24?.(m,r.sightState24);add(pg,m,'r204-prop-shadows',-18);}}
+  if(cfg.trees){const tg=treeSprites(T,r,F,cfg,ims);if(tg){tg.name='r204-trees';group.add(tg);}}
+  if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
   r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // 엔진이 매 프레임 visible 을 다시 켜는 메시가 있어(벽 가림·R188) 레이어를 비워 숨긴다(원래 레이어는 기억했다가 되돌린다).
