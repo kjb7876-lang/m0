@@ -1,0 +1,82 @@
+{
+ "revision": "R201",
+ "hero": "lauren",
+ "action": "skill",
+ "directions": {
+  "s": {
+   "path": "assets/r143/skill/lauren/skill-s.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "footY": 226,
+   "feet": [
+    226,
+    226,
+    226,
+    226,
+    226,
+    226
+   ],
+   "tops": [
+    12,
+    13,
+    12,
+    12,
+    12,
+    12
+   ],
+   "sha256": "560d16ca936d81370da0f61110e353d27ba47169bdcf26bfe322255eba0f47a9",
+   "bytes": 71346,
+   "status": "STATIC_ASSET_PASS",
+   "source": {
+    "files": [
+     {
+      "path": "assets/skill/HERO-lauren-skill-s.png",
+      "sha256": "2c4d235d051bcefe1e2e6309f45549fa98a066a4ca8891ba8b3ba8e59b3d26df"
+     }
+    ],
+    "manifest": "로렌 정적 검수 선별 자산팩"
+   }
+  },
+  "e": {
+   "path": "assets/r143/skill/lauren/skill-e.webp",
+   "frames": 6,
+   "cell": [
+    192,
+    256
+   ],
+   "footY": 226,
+   "feet": [
+    225,
+    225,
+    226,
+    226,
+    226,
+    226
+   ],
+   "tops": [
+    27,
+    27,
+    25,
+    24,
+    26,
+    26
+   ],
+   "sha256": "a71a40c2717aa6bf3921708eeb02b4f5e20d89ce7216cded4e3f3fb7c0ce238e",
+   "bytes": 56052,
+   "status": "STATIC_ASSET_PASS",
+   "source": {
+    "files": [
+     {
+      "path": "assets/skill/HERO-lauren-skill-e.png",
+      "sha256": "fb64a942d2158f85c2e4ba131a91290943d7bb03dc10a277c4271cc69496a952"
+     }
+    ],
+    "manifest": "로렌 정적 검수 선별 자산팩"
+   }
+  }
+ },
+ "note": "기본팩(scoped static default) 추가 동작. 없는 방향은 기존 그림 유지, W/SW/NW 는 E/SE/NE 반전(기존 매핑). 최소 12칸 미충족(팩 README). 실게임 재생·VFX 연동은 팩 기준 미검증."
+}
