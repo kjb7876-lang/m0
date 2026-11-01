@@ -12,13 +12,14 @@
  *   Drive 그림 한 장 경로에 artPatch로 끼움: 걸을 때만 갈아 끼우고 서 있을 때·공격 때는 원래 그림)을 더한다.
  * R116: Drive 2026-10-28 적용본 맞음·회복 4장 29종·대기 4장 11종(assets/r116/mobs, scripts/r116-mob-frames.py)을 더한다.
  *   맞으면 맞음 4장을 한 번 돌고, 걷는 몹이 서 있으면 대기 4장을 천천히 돌린다. 이동·공격 그림과 맞음 판정·시간은 그대로.
+ * R198: Drive 2026-10-29~30 8키 묶음에서 게임에 없던 이동 8·공격 2·대기 5줄(2장, assets/r198/mobs, scripts/r198-mob-eightkey.py)을 빈 칸에만 더한다.
  * 공격 시간·판정·AI·저장 형식은 읽기만 하고 바꾸지 않는다(그림만 바뀜). 병원(ep1a08) 전용 자세와 R74 세계 괴물 그림은 건드리지 않는다. */
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBS_R109__||typeof drawEnemy!=='function')return;
-const REV='R116-mobs-3',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json',R116='./assets/r116/mobs/index.json';
+const REV='R116-mobs-3',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json',R116='./assets/r116/mobs/index.json',R198='./assets/r198/mobs/index.json';
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r109.mobs';
 const FPS={walk:6.5,fly:8,hover:4},IDLE_FPS={fly:3.2,hover:2.6,idle:3.4},FOLLOW=.22,HOVER=.012,HIT_DUR=.36;
-let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true},state='idle',r92=null,r109=null,r116=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
+let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true},state='idle',r92=null,r109=null,r116=null,r198=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
 const stats={draws:0,move:0,idle:0,windup:0,attack:0,follow:0,calmPoses:0,hover:0,missingImage:0,preloads:0,artMove:0,seeThrough:0,stripFlips:0,labelsHidden:0,hit:0,standIdle:0};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,300);};
@@ -43,10 +44,14 @@ function build(){table.clear();artRows.clear();
  // R116: Drive 2026-10-28 적용본 맞음·회복 4장(hit)·대기 4장(idle)을 기존 이동·공격 줄 위에 더한다(이동·공격은 그대로).
  if(r116)for(const t of r116.tracks||[]){const tr=t.track;if(tr!=='hit'&&tr!=='idle')continue;
   for(const id of t.ids||[]){const row=table.get(id)||{gid:t.group,move:null,idle:null,attack:null,kind:'walk',src:'R116'};
-   table.set(id,{...row,[tr]:t,src:row.src==='R116'?'R116':row.src+'+R116'});}}}
+   table.set(id,{...row,[tr]:t,src:row.src==='R116'?'R116':row.src+'+R116'});}}
+ // R198: Drive 2026-10-29~30 8키 묶음에서 게임에 없던 이동·공격·대기 2장만 — 이미 있는 줄(R92·R109·R116)은 덮지 않는다.
+ if(r198)for(const t of r198.tracks||[]){const tr=t.track;if(tr!=='move'&&tr!=='attack'&&tr!=='idle')continue;
+  for(const id of t.ids||[]){const row=table.get(id)||{gid:t.group,move:null,idle:null,attack:null,kind:'walk',src:'R198'};if(row[tr])continue;
+   table.set(id,{...row,[tr]:t,...(tr==='move'?{kind:t.kind||'walk'}:{}),src:row.src==='R198'?'R198':row.src+'+R198'});stats.r198=(stats.r198||0)+1;}}}
 function load(){if(state!=='idle')return;state='loading';
  const get=u=>fetch(u,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(u+' '+r.status);return r.json();});
- Promise.allSettled([get(R92),get(R109),get(R116)]).then(([a,b,c])=>{if(a.status==='fulfilled')r92=a.value;else fail(a.reason);if(b.status==='fulfilled')r109=b.value;else fail(b.reason);if(c.status==='fulfilled')r116=c.value;else fail(c.reason);
+ Promise.allSettled([get(R92),get(R109),get(R116),get(R198)]).then(([a,b,c,d4])=>{if(d4.status==='fulfilled')r198=d4.value;else fail(d4.reason);if(a.status==='fulfilled')r92=a.value;else fail(a.reason);if(b.status==='fulfilled')r109=b.value;else fail(b.reason);if(c.status==='fulfilled')r116=c.value;else fail(c.reason);
   build();state=table.size?'ready':'failed';}).catch(e=>{state='failed';fail(e);});}
 const rowOf=e=>e?.nativeId?table.get(e.nativeId)||null:null;
 const cell=t=>t.frames||t.pivots?.length||4;
@@ -173,5 +178,5 @@ window.__STORYWORLD_MOBS_R109__=Object.freeze({revision:REV,prefs:()=>({...prefs
  seeAlpha:e=>{try{return seeAlpha(e);}catch(err){fail(err);return 1;}},
  patchFor:e=>{try{return state==='ready'&&eligible(e)?patchFor(e):null;}catch(err){fail(err);return null;}},
  coverage:()=>{const es=(room?.enemies||[]).filter(e=>!major(e));return{zone,layer:typeof layer==='undefined'?null:layer,enemies:es.length,mapped:es.filter(e=>rowOf(e)).length,withMove:es.filter(e=>rowOf(e)?.move).length,withAttack:es.filter(e=>rowOf(e)?.attack).length,withHit:es.filter(e=>rowOf(e)?.hit).length,withIdle:es.filter(e=>rowOf(e)?.idle).length,driveStatic:es.filter(e=>art(e)).length};},
- inspect:()=>({revision:REV,state,ids:table.size,artRows:artRows.size,r109Groups:(r109?.tracks||[]).map(t=>t.group),r116Tracks:(r116?.tracks||[]).length,prefs:{...prefs},stats:{...stats},failures,lastError,presentationOnly:true,gameplayChanged:false,saveSlotsChanged:false})});
+ inspect:()=>({revision:REV,state,ids:table.size,artRows:artRows.size,r109Groups:(r109?.tracks||[]).map(t=>t.group),r116Tracks:(r116?.tracks||[]).length,r198Tracks:(r198?.tracks||[]).length,prefs:{...prefs},stats:{...stats},failures,lastError,presentationOnly:true,gameplayChanged:false,saveSlotsChanged:false})});
 })();

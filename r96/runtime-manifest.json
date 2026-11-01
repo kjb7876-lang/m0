@@ -11888,6 +11888,76 @@
       "sha256": "b88c45276bfab36a9b9a4d1b2729d2f3f4cd0ec7e25625677758f88300d48b53"
     },
     {
+      "path": "assets/r198/mobs/M022-move.png",
+      "bytes": 142941,
+      "sha256": "4d1577a83fe37573b359aa9a19198a190ba4dfe328a78fb8c79b61869cb57494"
+    },
+    {
+      "path": "assets/r198/mobs/M024-idle.png",
+      "bytes": 102320,
+      "sha256": "208a0bf665f3c6c5723fd1c83245b56a000215b171be1094f774c5b5e080e48f"
+    },
+    {
+      "path": "assets/r198/mobs/M030-idle.png",
+      "bytes": 112410,
+      "sha256": "3fe7135b7d64c1ab46d0e935a2ef7d62ce005d94a788d0bd87ae4e3f51d25b2a"
+    },
+    {
+      "path": "assets/r198/mobs/M030-move.png",
+      "bytes": 111340,
+      "sha256": "8df9216f1ae33e95e909b6100824edbe0940b81c0a155e8d1e86f6c8dc529aaf"
+    },
+    {
+      "path": "assets/r198/mobs/M033-move.png",
+      "bytes": 31991,
+      "sha256": "6952355bfbb891a736ec12e3a6d6588ee4b2ac3d64ef3e678bb44d23578502f9"
+    },
+    {
+      "path": "assets/r198/mobs/M036-attack.png",
+      "bytes": 120831,
+      "sha256": "daeb3c87d388631a30cdd2795c3764db476ba5f3ac25eca81c04bfcdf331c97c"
+    },
+    {
+      "path": "assets/r198/mobs/M036-idle.png",
+      "bytes": 113289,
+      "sha256": "a327e6e09710665200368fb39c72080948955db8350333aedae69296a0bbc457"
+    },
+    {
+      "path": "assets/r198/mobs/M036-move.png",
+      "bytes": 101750,
+      "sha256": "d1dc452a22aead7d1e6b318189f5f8b605833833a4f68469d15aadd43f5d9084"
+    },
+    {
+      "path": "assets/r198/mobs/M046-idle.png",
+      "bytes": 88040,
+      "sha256": "7d7f3ebc688f1edda23b5c71da09d737583c597b5a2753775026b11df0fbbed4"
+    },
+    {
+      "path": "assets/r198/mobs/M046-move.png",
+      "bytes": 75888,
+      "sha256": "10445d04892e68d23ec21b18eabdf67cbc6122a1f7853cbaf22f250053c9a4c1"
+    },
+    {
+      "path": "assets/r198/mobs/M047-idle.png",
+      "bytes": 84553,
+      "sha256": "5e8262b6d8e6fe6c8afd40c68653c9283109bb80810d6dcc51775be515eae47c"
+    },
+    {
+      "path": "assets/r198/mobs/M047-move.png",
+      "bytes": 76226,
+      "sha256": "f31c4e35b16aa4d15aaf5becf238bb25aed009a1a0d36c793540c382a90997ed"
+    },
+    {
+      "path": "assets/r198/mobs/M129-attack.png",
+      "bytes": 45380,
+      "sha256": "56da861ca6140dba7e27aca158b07b71f30801d70f09e85580ac7f8b19a7c280"
+    },
+    {
+      "path": "assets/r198/mobs/index.json",
+      "bytes": 19125,
+      "sha256": "509511fd07d94ba845e9cca0428a441b5a349b30087986c1835782d805d7e096"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20644,8 +20714,8 @@
     },
     {
       "path": "mobs-r109.js",
-      "bytes": 24423,
-      "sha256": "7cfc868d33676f0b83bcaae1e4aad1ed708cabac7bf4ca3954940b97a92de76f"
+      "bytes": 25322,
+      "sha256": "a69946cc2b5903eccc28e00b768714ce15c4d1229cf1543063a9a55bcc986e3a"
     },
     {
       "path": "mobs-r112.js",
@@ -21048,8 +21118,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4209,
-  "totalBytes": 797746310,
+  "fileCount": 4223,
+  "totalBytes": 798973293,
   "webHTMLSha256": "5bd8845d884d511c316da0343de2c659ee9a5e7e3b5bf6aa88a95a4d80d39e51",
   "largest": [
     {

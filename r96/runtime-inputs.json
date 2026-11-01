@@ -3419,7 +3419,21 @@
     "assets/r143/hit/hwando/hit-se.webp",
     "assets/r143/hit/hwando/hit-e.webp",
     "assets/r143/hit/hwando/hit-n.webp",
-    "assets/r143/hit/hwando/index.json"
+    "assets/r143/hit/hwando/index.json",
+    "assets/r198/mobs/M022-move.png",
+    "assets/r198/mobs/M024-idle.png",
+    "assets/r198/mobs/M030-idle.png",
+    "assets/r198/mobs/M030-move.png",
+    "assets/r198/mobs/M033-move.png",
+    "assets/r198/mobs/M036-attack.png",
+    "assets/r198/mobs/M036-idle.png",
+    "assets/r198/mobs/M036-move.png",
+    "assets/r198/mobs/M046-idle.png",
+    "assets/r198/mobs/M046-move.png",
+    "assets/r198/mobs/M047-idle.png",
+    "assets/r198/mobs/M047-move.png",
+    "assets/r198/mobs/M129-attack.png",
+    "assets/r198/mobs/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4494,5 +4508,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "c8e5b0d866604c88477c3ddd7070238e0477975e4b76b1f5e1d0165f2e2ba861"
+  "runtimeManifestSHA256": "c911156a65f92d06830b3a35c0501244c7e8ba93ca2a95db66e366bbd63030ad"
 }
