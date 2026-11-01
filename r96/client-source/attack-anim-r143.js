@@ -24,7 +24,7 @@ let prefs={on:true,hwandoIdle:true};try{prefs={...prefs,...JSON.parse(localStora
 const stats={hitFrames:0,idleFrames:0,frames:0,swings:0,dupRemoved:0,waiting:0,errors:0,lastDir:null,lastFrame:null};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
-const pathOf=(h,d,act='attack')=>act==='walk'?(d==='e'&&(h==='gunner'||h==='hwando')?'assets/r144/walk/'+h+'/walk-e.webp':'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp'):'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES);/* R194: 환도 피격 2프레임(드라이브 Hwando 49/276 묶음, s·se·e·n — hit-NE 는 묶음 품질 보류 '칼 하나 더' 라 북동은 북 시트로) */
+const pathOf=(h,d,act='attack')=>act==='walk'?(d==='e'&&(h==='gunner'||h==='hwando')?'assets/r144/walk/'+h+'/walk-e.webp':'assets/'+(h==='gunner'?'r128':'r130')+'/'+h+'/walk-'+d+'.webp'):act==='hit'&&h==='hwando'?'assets/r196/hwando/hit-'+d+'.webp'/* R196 색감 맞춘 파생본 */:'assets/r143/'+act+'/'+h+'/'+act+'-'+d+'.webp',HIT=new Set(HEROES);/* R194: 환도 피격 2프레임(드라이브 Hwando 49/276 묶음, s·se·e·n — hit-NE 는 묶음 품질 보류 '칼 하나 더' 라 북동은 북 시트로) */
 const HIT_FALLBACK={hwando:{ne:'n'}};
 const asked=new Map();
 // R147: R119 상태(서 있기 비율·걷기 방향)는 0.25초마다 한 번만 읽는다(inspect 는 상태표 전체를 복사한다).

@@ -19719,8 +19719,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 14733,
-      "sha256": "cd847b03d83be64dca24679de0d20a113001bd055041f848eeca5e567d5147bb"
+      "bytes": 14829,
+      "sha256": "e124dbca087a0c661bee7017251199c971d41ce60704530c44242af26cf51045"
     },
     {
       "path": "audio-r108.js",
@@ -20444,8 +20444,8 @@
     },
     {
       "path": "death-r151.js",
-      "bytes": 7649,
-      "sha256": "e5be29857143b415d61e6ddb168a5749f53c56a298852b6ef59438d33f63ae7e"
+      "bytes": 7748,
+      "sha256": "d265aa0e5a7ee55fc53af6a44f0569d0e5c7a8f338bac25ec45ff6ddf59125cf"
     },
     {
       "path": "delivery/additional-audio13-20261005/processed/sfx-candidate/Resonance_energy_gai__2-1791000424116-211cce07.ogg",
@@ -21089,7 +21089,7 @@
     }
   ],
   "fileCount": 4217,
-  "totalBytes": 816599648,
+  "totalBytes": 816599843,
   "webHTMLSha256": "32ed2a63809f400b94cb1bcc3a5a8cfd1b943964da90b41df25bb7dc0c499780",
   "largest": [
     {
