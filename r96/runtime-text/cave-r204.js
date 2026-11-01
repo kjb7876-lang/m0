@@ -24,7 +24,8 @@ const ZONES={
  dist01:{seed:0x5d0124,tint:[1.0,.78,.55],hiTop:1.6,loTop:.45,bulge:1.35,widen:true,web:true,pillars:true,
   // R207 Drive 「첫 정원 → 거미동굴」 512 패치: 절벽 밑 흙·자갈·접지 그림자(바닥 평면), 뒤쪽 대지 가장자리 암벽 조각(세운 그림)
   patches:[['soil_rock_transition_01','base',.3,1/90,.5],['soil_rock_transition_02','base',.3,1/90,.5],['cliff_contact_shadow_01','base',.42,1/110,1]],
-  uprights:[['cliff_straight_01',.36],['cliff_inner_join_01',.34],['cliff_outer_join_01',.34]],uprightRate:1/95},
+  // 암벽 조각(세운 그림)은 동굴 암반 질감과 어긋나 보여 쓰지 않는다(R207 2차) — 대신 대지 위 낮은 바위 무더기(boulders)
+  boulders:1/60,floorK:1.02,topK:2.25},
  // 악마화 나무의 정원: 정원 돌길·이끼 흙·마른 풀, 이끼 낀 둔덕, 둔덕 위 마른 나무(r99 원화 12장). 거미줄 없음.
  dist00:{seed:0x5d0077,tint:[.86,.92,.76],hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
@@ -220,38 +221,41 @@ function cutaway(shader,uniforms){// 영웅 앞의 조각만 성글게 지운다
  shader.fragmentShader='varying vec4 r204Clip;\nuniform vec4 r204Hero;\nuniform float r204Aspect;\n'+shader.fragmentShader.replace('void main() {','void main() {\n{vec2 nd=r204Clip.xy/r204Clip.w-r204Hero.xy;nd.x*=r204Aspect;float dz=r204Clip.z/r204Clip.w;float dd=length(nd);\n if(r204Hero.w>0.5&&dz<r204Hero.z-0.002&&dd<0.2){float k=smoothstep(0.2,0.11,dd);float pat=mod(floor(gl_FragCoord.x)+floor(gl_FragCoord.y),2.0);float pat2=mod(floor(gl_FragCoord.x*0.5)+floor(gl_FragCoord.y*0.5),2.0);if(k>0.66||(k>0.33&&pat>0.5)||(pat>0.5&&pat2>0.5))discard;}}');}
 
 function groundMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
- m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204A:{value:tx.floorA},r204B:{value:tx.floorB},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)}});
+ m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204A:{value:tx.floorA},r204B:{value:tx.floorB},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)},r204FloorK:{value:cfg.floorK??.92}});
   sh.vertexShader='varying vec2 r204W;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204W=(modelMatrix*vec4(transformed,1.0)).xz;');
-  sh.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204Field,r204A,r204B,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
+  sh.fragmentShader='varying vec2 r204W;\nuniform sampler2D r204Field,r204A,r204B,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;uniform float r204FloorK;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
    vec2 fu=(r204W-r204Min)/r204Span;vec4 fd=texture2D(r204Field,fu);float fv=(fd.r-0.5)*6.0;
    vec4 a1=r204tex(r204A,r204W,0.21,0.0,vec2(0.0)),a2=r204tex(r204A,r204W,0.137,1.1,vec2(0.37,0.11));vec3 ta=mix(a1.rgb,a2.rgb,smoothstep(0.35,0.65,fd.b));
    vec3 tb=r204tex(r204B,r204W,0.17+0.05*fd.b,0.6,vec2(0.0)).rgb*2.2;
    vec3 tc=r204tex(r204C,r204W,0.12+0.07*fd.g,1.9,vec2(0.2,0.7)).rgb;float lc=dot(tc,vec3(0.3,0.59,0.11));tc=vec3(lc)*1.25;
    float wB=smoothstep(0.42,0.62,fd.g),wC=smoothstep(0.55,0.75,fd.b)*(1.0-wB*0.5);
-   vec3 col=mix(mix(ta,tb,wB),tc,wC*0.75);float lum=dot(col,vec3(0.3,0.59,0.11));col=mix(vec3(lum)*r204Tint,col*r204Tint,0.35)*0.92;
+   vec3 col=mix(mix(ta,tb,wB),tc,wC*0.75);float lum=dot(col,vec3(0.3,0.59,0.11));col=mix(vec3(lum)*r204Tint,col*r204Tint,0.35)*r204FloorK;
    float fl=(texture2D(r204Field,fu+vec2(-0.55,-0.55)/r204Span).r-0.5)*6.0;
    float ao=mix(0.3,1.0,smoothstep(-0.05,1.4,fv))*mix(0.62,1.0,smoothstep(0.0,1.8,fl));col*=ao;
    diffuseColor.rgb*=col;`);};
  m.customProgramCacheKey=()=>'r204-ground-v1';return m;}
 
 function topMaterial(T,r,F,tx,cfg,U){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
- m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204Field:{value:tx.field},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)}});
+ m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204TopK:{value:cfg.topK??2.5},r204Field:{value:tx.field},r204C:{value:tx.rock},r204Min:{value:new T.Vector2(-M,-M)},r204Span:{value:new T.Vector2(F.W+2*M,F.H+2*M)},r204Tint:{value:new T.Vector3(...cfg.tint)}});
   sh.vertexShader='varying vec2 r204W;varying float r204Y;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nvec4 r204wp=modelMatrix*vec4(transformed,1.0);r204W=r204wp.xz;r204Y=r204wp.y;');
-  sh.fragmentShader='varying vec2 r204W;varying float r204Y;\nuniform sampler2D r204Field,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
+  sh.fragmentShader='varying vec2 r204W;varying float r204Y;\nuniform sampler2D r204Field,r204C;uniform vec2 r204Min,r204Span;uniform vec3 r204Tint;uniform float r204TopK;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
    vec2 fu=(r204W-r204Min)/r204Span;vec4 fd=texture2D(r204Field,fu);float fv=(fd.r-0.5)*6.0;if(fv>0.0)discard;
    vec4 c1=r204tex(r204C,r204W,0.16,0.4,vec2(0.0)),c2=r204tex(r204C,r204W,0.27,2.0,vec2(0.3,0.6));vec3 tc=mix(c1.rgb,c2.rgb,fd.g);float lc=dot(tc,vec3(0.3,0.59,0.11));
-   vec3 col=vec3(lc)*r204Tint*3.1;float rim=smoothstep(-0.32,-0.04,fv);col*=mix(0.62,1.0,smoothstep(0.3,1.6,r204Y))*(1.0+rim*0.45);col*=mix(0.55,1.0,fd.b);
+   vec3 col=vec3(lc)*r204Tint*r204TopK;float rim=smoothstep(-0.32,-0.04,fv);col*=mix(0.66,1.0,smoothstep(0.3,1.6,r204Y))*(1.0+rim*0.55);col*=mix(0.55,1.0,fd.b);
+   col*=mix(1.0,0.42,smoothstep(0.4,4.5,-fv));// 통로에서 먼 바위일수록 어둡게(깊이감·통로 가독성)
+   col*=1.0-0.28*smoothstep(-0.55,-0.3,fv)*(1.0-smoothstep(-0.3,-0.12,fv));// 가장자리 바로 안쪽 어두운 균열 띠 → 밝은 입술과 대비
    diffuseColor.rgb*=col;`);};
  m.customProgramCacheKey=()=>'r204-top-v1';return m;}
 
-function faceMaterial(T,r,tx,cfg){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false,vertexColors:true});
+function faceMaterial(T,r,tx,cfg,lip=false){const m=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false,vertexColors:true});
  m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,{r204F:{value:tx.face},r204Tint:{value:new T.Vector3(...cfg.tint)}});
-  sh.vertexShader='varying vec3 r204P;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204P=(modelMatrix*vec4(transformed,1.0)).xyz;');
-  sh.fragmentShader='varying vec3 r204P;\nuniform sampler2D r204F;uniform vec3 r204Tint;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
+  sh.vertexShader='varying vec3 r204P;varying float r204Rel;\n'+(lip?'attribute float r204top;\n':'')+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nr204P=(modelMatrix*vec4(transformed,1.0)).xyz;r204Rel='+(lip?'clamp(r204P.y/max(0.2,r204top),0.0,1.0)':'0.5')+';');
+  sh.fragmentShader='varying vec3 r204P;varying float r204Rel;\nuniform sampler2D r204F;uniform vec3 r204Tint;\n'+NOISE_GLSL+sh.fragmentShader.replace('#include <map_fragment>',`
    vec2 q=vec2((r204P.x-r204P.z)*0.19,r204P.y*0.26+(r204P.x+r204P.z)*0.03);vec3 t1=texture2D(r204F,q).rgb,t2=texture2D(r204F,q*0.61+vec2(0.31,0.17)).rgb;vec3 tc=mix(t1,t2,0.4);
    float lc=dot(tc,vec3(0.3,0.59,0.11));float st=0.82+0.3*fract(sin(floor((r204P.x-r204P.z)*3.1)*12.9898)*43758.5);vec3 col=vec3(lc)*r204Tint*2.1*st;col*=mix(0.3,1.0,smoothstep(0.0,1.3,r204P.y));
+   col*=1.0+0.5*smoothstep(0.86,1.0,r204Rel)-0.18*smoothstep(0.55,0.8,r204Rel)*(1.0-smoothstep(0.8,0.9,r204Rel));// 윗가장자리 밝은 입술·그 아래 그늘 띠
    diffuseColor.rgb*=col;`);};
- m.customProgramCacheKey=()=>'r204-face-v1';return m;}
+ m.customProgramCacheKey=()=>'r204-face-v2'+(lip?'-lip':'');return m;}
 
 // ---- 바닥 굽기: 질감 3종 혼합·접촉 그림자를 진입할 때 한 번만 렌더 타깃(칸당 16px)에 굽는다 ----------------------
 // 매 프레임은 구운 그림 1장 + 잔결(거미동굴 바닥 질감) 1장만 읽는다 — 모바일 채움 비용을 줄인다.
@@ -277,7 +281,7 @@ function topMesh(T,F,cfg){// 칸당 1점 격자, 보행 쪽(f>0)은 셰이더가
   let mn=1e9;for(let q=0;q<R&&mn>.25;q++)for(let w=0;w<R;w++){const v=F.f[(j*R+q)*F.GW+i*R+w];if(v<mn)mn=v;}if(mn>.25)continue;idx.push(a,c,b,b,c,d);}
  const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(pos,3));g.setIndex(idx);g.computeBoundingSphere();return g;}
 function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각마다 세로 면. 법선은 보행 쪽(앞면) — 뒤쪽 면은 컬링.
- const pos=[],col=[],idx=[];let n=0;const f=F.f,GW=F.GW,GH=F.GH;
+ const pos=[],col=[],idx=[],tops=[];let n=0;const f=F.f,GW=F.GW,GH=F.GH;
  const P=(i,j)=>[(i+.5)/R-M,(j+.5)/R-M];const L=[-.55,.62,-.56];// 빛: 왼쪽 위 앞
  const edge=(i0,j0,i1,j1)=>{const v0=f[j0*GW+i0],v1=f[j1*GW+i1],t=v0/(v0-v1),a=P(i0,j0),b=P(i1,j1);return[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];};
  for(let j=0;j<GH-1;j++)for(let i=0;i<GW-1;i++){const a=f[j*GW+i],b=f[j*GW+i+1],c=f[(j+1)*GW+i+1],d=f[(j+1)*GW+i];
@@ -290,10 +294,10 @@ function faceMesh(T,F,cfg){// 마칭 스퀘어: 노드 값 f, 0 등고선 조각
    let nx=-(q[1]-p[1]),ny=q[0]-p[0];if(nx*gx+ny*gy<0){nx=-nx;ny=-ny;}const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;
    const h0=topHeight(F,cfg,p[0],p[1]),h1=topHeight(F,cfg,q[0],q[1]);
    const sh=.5+.5*Math.max(0,nx*L[0]+ny*L[2])+.12;const cA=Math.min(1.15,sh);
-   pos.push(p[0],-.03,p[1], q[0],-.03,q[1], p[0],h0,p[1], q[0],h1,q[1]);for(let k=0;k<4;k++)col.push(cA,cA,cA);
+   pos.push(p[0],-.03,p[1], q[0],-.03,q[1], p[0],h0,p[1], q[0],h1,q[1]);for(let k=0;k<4;k++)col.push(cA,cA,cA);tops.push(h0,h1,h0,h1);
    // 앞면(반시계, 바깥=보행 쪽)이 되도록 감는 방향을 법선으로 고른다
    const cross=(q[0]-p[0])*ny-(q[1]-p[1])*nx;if(cross<0)idx.push(n,n+2,n+1,n+1,n+2,n+3);else idx.push(n,n+1,n+2,n+1,n+3,n+2);n+=4;}}
- stats.segments=n/4;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setIndex(idx);g.computeBoundingSphere();return g;}
+ stats.segments=n/4;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setAttribute('r204top',new T.Float32BufferAttribute(tops,1));g.setIndex(idx);g.computeBoundingSphere();return g;}
 function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f -0.6~-2.6)에 고정 시드로. 6~8각 뿔, 꼭짓점을 흔든다.
  const rnd=rng(cfg.seed^0x3141),pos=[],col=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/55);
  for(let t=0;t<want*30&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.6||fv<-2.6)continue;
@@ -302,6 +306,14 @@ function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f 
   for(const [hv,rv] of rings)for(let s=0;s<=sides;s++){const a=s/sides*Math.PI*2+rnd()*.15,rr=rad*rv*(.8+rnd()*.35);pos.push(x+Math.cos(a)*rr+lean[0]*hv*tall,base-.05+hv*tall,y+Math.sin(a)*rr+lean[1]*hv*tall);const lit=.55+.45*Math.max(0,Math.cos(a+2.4));const c=Math.min(1.1,lit*(0.7+hv*.4));col.push(c,c,c);n++;}
   for(let ri=0;ri<rings.length-1;ri++)for(let s=0;s<sides;s++){const a=start+ri*(sides+1)+s,b=a+1,c=a+sides+1,d=c+1;idx.push(a,b,c,b,d,c);}
   count++;}
+ // 대지 위 낮은 바위 무더기: 깊은 대지(f<-1.1)에 납작하고 넓은 다각 덩어리 — 넓은 대지가 밋밋하지 않게. 높이는 대지 높이의 일부라 영웅을 가리지 않는다.
+ if(cfg.boulders){const wantB=Math.round(F.W*F.H*cfg.boulders);let nb=0;
+  for(let t=0;t<wantB*30&&nb<wantB;t++){const cx=rnd()*F.W,cy=rnd()*F.H,fv=at(F,F.f,cx,cy);if(fv>-1.1)continue;const base=topHeight(F,cfg,cx,cy);
+   const grp=1+Math.floor(rnd()*3);for(let gi=0;gi<grp;gi++){const x=cx+(rnd()-.5)*1.2,y=cy+(rnd()-.5)*1.2;if(at(F,F.f,x,y)>-.8)continue;
+    const rad=.35+rnd()*.55,tall=(.25+rnd()*.45)*Math.min(1,.5+base/cfg.hiTop),sides=7+Math.floor(rnd()*3),rings=[[0,1],[.45,1.08],[.8,.75],[1,.25]],start=n;
+    for(const [hv,rv] of rings)for(let k=0;k<=sides;k++){const a2=k/sides*Math.PI*2+rnd()*.25,rr=rad*rv*(.75+rnd()*.4);pos.push(x+Math.cos(a2)*rr,base-.06+hv*tall,y+Math.sin(a2)*rr*.85);const lit=.5+.5*Math.max(0,Math.cos(a2+2.4));const c=Math.min(1.05,lit*(.62+hv*.45));col.push(c,c,c);n++;}
+    for(let ri=0;ri<rings.length-1;ri++)for(let k=0;k<sides;k++){const a3=start+ri*(sides+1)+k,b=a3+1,c=a3+sides+1,d=c+1;idx.push(a3,b,c,b,d,c);}}nb++;}
+  stats.boulders=nb;}
  stats.pillars=count;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setIndex(idx);g.computeVertexNormals();g.computeBoundingSphere();return g;}
 function decalMesh(T,F,cfg){// 바닥 데칼: 보행 영역(f>0.15) — 균열·잔돌·뼈는 아무 데나, 뿌리·거미줄은 절벽 가까이(f<1.2)
  const rnd=rng(cfg.seed^0x2718),pos=[],uv=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/14);
@@ -358,7 +370,7 @@ function organicDecor(T,r,F,cfg,ims,rm){const rnd=rng(cfg.seed^0x0207),g=new T.G
  const ups=(cfg.uprights||[]).map(([name,sc])=>{const im=ims['org:'+name];if(!im)return null;const box=bboxOf(im),src=/garden/.test(name)?im:tintedCanvas(im,cfg.tint),t=new (src instanceof HTMLCanvasElement?T.CanvasTexture:T.Texture)(src);
   t.colorSpace=T.SRGBColorSpace;t.needsUpdate=true;r.spatialResources.add(t);const m=new T.SpriteMaterial({map:t,alphaTest:.4,depthWrite:true,toneMapped:false});r.spatialResources.add(m);return{m,box,sc};}).filter(Boolean);
  if(ups.length){const want=Math.round(F.W*F.H*(cfg.uprightRate||1/100)),placed=[];
-  for(let t2=0;t2<want*40&&nu<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>-.35||fv<-1.4)continue;const h=topHeight(F,cfg,x,y);if(h<1.0)continue;if(!clear(x,y)||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<2.6))continue;placed.push([x,y]);
+  const [eLo,eHi]=cfg.uprightEdge||[-1.4,-.35];for(let t2=0;t2<want*40&&nu<want;t2++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv>eHi||fv<eLo)continue;const h=topHeight(F,cfg,x,y);if(h<1.0)continue;if(!clear(x,y)||placed.some(p=>Math.hypot(p[0]-x,p[1]-y)<2.6))continue;placed.push([x,y]);
    const u=ups[Math.floor(rnd()*ups.length)],sp=new T.Sprite(u.m),wpx=u.box.w*u.sc,hpx=u.box.h*u.sc,ppu=ISO_T*Math.SQRT2;// 화면 px → 월드 크기(정사영: 화면 1px ≈ 1/(34·√2) 단위)
    sp.scale.set(wpx/ppu,hpx/ppu*1.15,1);sp.center.set(u.box.cx/u.box.w,1-(u.box.y1-6)/u.box.h);sp.position.set(x,h-.05,y);sp.layers.set(2);sp.renderOrder=-26;sp.userData.r204=true;g.add(sp);nu++;}}
  stats.organicPatches=np;stats.organicUprights=nu;return(np||nu)?g:null;}
@@ -376,7 +388,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
  Promise.all(Object.values(want)).then(list=>{if(r.disposed||r.sceneGeneration!==gen)return;const ims={};Object.keys(want).forEach((k,i)=>ims[k]=list[i]);
   const F=fieldFor(roomOf(frame),true);if(!F)throw Error('no field');const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
   const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
-  const mats={ground:bakeGround(T,r,F,groundMaterial(T,r,F,tx,cfg,U),tx.floorA,cfg),top:topMaterial(T,r,F,tx,cfg,U),face:faceMaterial(T,r,tx,cfg),pillar:faceMaterial(T,r,tx,cfg),
+  const mats={ground:bakeGround(T,r,F,groundMaterial(T,r,F,tx,cfg,U),tx.floorA,cfg),top:topMaterial(T,r,F,tx,cfg,U),face:faceMaterial(T,r,tx,cfg,true),pillar:faceMaterial(T,r,tx,cfg),
    decal:new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2})};
   for(const k of ['top','face','pillar']){const m=mats[k],before=m.onBeforeCompile;m.onBeforeCompile=function(sh,re){before.call(this,sh,re);cutaway(sh,U);};const key=m.customProgramCacheKey;m.customProgramCacheKey=()=>key()+'|cut';}
   for(const m of Object.values(mats)){r.spatialResources.add(m);if(r.sightState24&&A.attachSight24)A.attachSight24(m,r.sightState24);}
