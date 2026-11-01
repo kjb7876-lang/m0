@@ -20393,6 +20393,11 @@
       "sha256": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
     },
     {
+      "path": "doors-r189.js",
+      "bytes": 5113,
+      "sha256": "31d98d078fe04545665fd1b88ce048b6a970dc69c8fe3897a55c228e7626c0af"
+    },
+    {
       "path": "drive-props-r138.js",
       "bytes": 7856,
       "sha256": "d26f8f9b607ef862c68efde1fb458cd61d129c1f28cadf017c062b1903026387"
@@ -20498,6 +20503,11 @@
       "sha256": "ffc53e9029ccd01aec8abc6c31baa57d18e53742fd89d7ffb7560f2156cdcc14"
     },
     {
+      "path": "guide-difficulty-r189.js",
+      "bytes": 3746,
+      "sha256": "9f702f785df0f6bcb120c2a02bf64f39f3b7e00bd3727e10d3fa785c4d13c646"
+    },
+    {
       "path": "hero-fx-r102.js",
       "bytes": 52052,
       "sha256": "758d0792086e1148a9aa945021a66759400859ae30f62f6a0f9ab61137ba6b58"
@@ -20554,8 +20564,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6564663,
-      "sha256": "bde1c5e3bd0cf9e3916e4d8fe0eb21d60f6a073ce2bc0ddd47338796b9eaa34b"
+      "bytes": 6564752,
+      "sha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e"
     },
     {
       "path": "intro-r140.js",
@@ -20978,9 +20988,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4195,
-  "totalBytes": 797264729,
-  "webHTMLSha256": "bde1c5e3bd0cf9e3916e4d8fe0eb21d60f6a073ce2bc0ddd47338796b9eaa34b",
+  "fileCount": 4197,
+  "totalBytes": 797273677,
+  "webHTMLSha256": "34e1bae5b10253fa816af65e39d1ef9b60f3337f08687bacabb45673fa00f88e",
   "largest": [
     {
       "path": "index.html",

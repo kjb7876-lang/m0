@@ -187,6 +187,8 @@ jobs:
         run: node r96/qa/r187/r187-cpu-check.cjs
       - name: R188 mob death keeps its look, organic floor edges, no doll/hero tentacles (dark horror pass) CPU check
         run: node r96/qa/r188/r188-cpu-check.cjs
+      - name: R189 doors/stairs on walls, stairs as level passages, guide next-map difficulty CPU check
+        run: node r96/qa/r189/r189-cpu-check.cjs
       - name: R190 CC0 blood hit effects (OpenGameArt, provenance), skill install records CPU check
         run: node r96/qa/r190/r190-cpu-check.cjs
       - name: R191 era-appropriate patrol mobs and furniture (machine/modern/medieval) CPU check
