@@ -9,6 +9,7 @@
   · 몹 하나의 1~11칸을 같은 상자(합친 알파 상자)로 잘라 몸의 앞뒤 움직임을 살리고, 1번 칸(서 있는 자세) 가시 높이를 150px로 맞춘다.
   · 1~5칸 = 이동/대기, 6~11칸 = 공격(시트 설명 "이동 및 … 공격 사이클" 순서).
 Usage: python3 -I scripts/r200-samong-shades.py <sheet dir with 01.png..08.png> r96/runtime-text/assets/r200/shades
+       python3 -I scripts/r200-samong-shades.py <sheet dir with 15.png,16.png> r96/runtime-text/assets/r208/mobs story   (R208 스토리 일반몹)
 """
 import sys, json, hashlib
 from collections import deque
@@ -51,6 +52,21 @@ MOBS = [
  (8, 2, 'wire-bound-dead', '검은 제단의 전선 망자 잔영', 'RG', '불탄 책의 뒤편(R-15) — 제단 뒤 전선'),
 ]
 UNUSED = [(1, 1, '저주받은 무덤 기사', '사몽 구역 서사에 맞는 자리가 없어 보류'), (2, 0, '봉합부인', 'S-01 보스 이름이라 일반 몹으로 쓰지 않음')]
+# R208 스토리모드 일반몹 시트 15·16(이름표 없음) — 그림을 보고 서사 자리에 맞춰 이름·지역을 정한다. 게임 안 이름은 원래 몹 이름을 그대로 쓰고, 여기 이름은 출처표용.
+LAYOUT[15] = {'rows': [(44, 268), (276, 506), (515, 739)], 'x0': 33, 'x1': 1342, 'bottom': 0, 'move': [0, 1, 2, 3, 4, 5], 'attack': [6, 7, 8, 9, 10]}
+LAYOUT[16] = {'rows': [(34, 250), (291, 506), (548, 766)], 'x0': 6, 'x1': 1369, 'bottom': 0, 'inset': 10, 'move': [0, 1, 2, 3, 4, 5], 'attack': [6, 7, 8, 9, 10]}
+STORY_MOBS = [
+ (15, 0, 'root-bound-ghoul', '뿌리에 감긴 망자', 'dist00', '악마화 나무의 정원 — 나무에 침식된 근위(보라 검·검은 날개 타락천사 그림 대체)'),
+ (15, 2, 'web-bound-skeleton', '거미줄에 묶인 해골 병사', 'dist01', '거미동굴 — 거미줄에 묶인 수호병'),
+ (15, 1, 'twin-head-corpse', '머리 둘 달린 되살아난 시체', 'dist04', '시체들이 되살아난 밤 — 되살아나는 몸'),
+ (16, 1, 'halberd-revenant', '미늘창 든 성의 망령 기사', 'dist03', '무너진 성 — 성의 기사'),
+ (16, 0, 'ember-hound', '불씨 사냥개', 'dist03', '피냄새 추적자 — 피 냄새를 쫓는 불씨 사냥개'),
+]
+STORY_UNUSED = [(16, 2, '붉은 눈 우리', '맞는 스토리 자리를 정하지 못해 보류')]
+STORY = len(sys.argv) > 3 and sys.argv[3] == 'story'
+PREFIX = 'assets/r208/mobs/' if STORY else 'assets/r200/shades/'
+if STORY:
+    MOBS, UNUSED = STORY_MOBS, STORY_UNUSED
 
 
 def clean_cell(im, bottom=30, teal=False):
@@ -119,8 +135,8 @@ for sheet, row, gid, name, zone, why in MOBS:
     L = LAYOUT[sheet]; y0, y1 = L['rows'][row]; cwid = (L['x1'] - L['x0']) / 12
     cells = []
     for c in range(11):
-        x0 = int(round(L['x0'] + c * cwid)) + INSET; x1 = int(round(L['x0'] + (c + 1) * cwid)) - INSET
-        cells.append(clean_cell(im[y0 + INSET:y1 - INSET, x0:x1], L['bottom'], L.get('teal', False)))
+        ins = L.get('inset', INSET); x0 = int(round(L['x0'] + c * cwid)) + ins; x1 = int(round(L['x0'] + (c + 1) * cwid)) - ins
+        cells.append(clean_cell(im[y0 + ins:y1 - ins, x0:x1], L['bottom'], L.get('teal', False)))
     hh = min(c.shape[0] for c in cells); ww = min(c.shape[1] for c in cells)
     cells = [c[:hh, :ww] for c in cells]
     boxes = [bbox(c[..., 3]) for c in cells]
@@ -138,11 +154,11 @@ for sheet, row, gid, name, zone, why in MOBS:
     footx = float(np.median([(b[0] + b[2]) / 2 for b in boxes[:nm]]))
     pivot = [round((footx - ux0) * sc, 2), round((ground - uy0) * sc, 2)]
     fn = gid + '.webp'; dst = out / fn; strip.save(dst, 'WEBP', quality=90, method=6); b = dst.read_bytes()
-    rows.append({'id': gid, 'name': name, 'zone': zone, 'why': why, 'path': 'assets/r200/shades/' + fn, 'frames': 11, 'move': L['move'], 'attack': L['attack'],
+    rows.append({'id': gid, 'name': name, 'zone': zone, 'why': why, 'path': PREFIX + fn, 'frames': 11, 'move': L['move'], 'attack': L['attack'],
                  'cell': [cw, ch], 'pivot': pivot, 'visibleHeight': TARGET_H, 'facing': 'right', 'bytes': len(b), 'sha256': sha(b),
                  'source': {'sheet': sheets[sheet], 'row': row + 1, 'cells': '1-11 of 12'}})
     print(gid, zone, 'cell', cw, ch, 'pivot', pivot, 'bytes', len(b))
-(out / 'index.json').write_text(json.dumps({'schema': 'storyworld.r200.shades/v1', 'revision': 'R200',
-    'note': 'Drive 2026-11-01 몹 스프라이트시트 01~08(사용자 업로드) 파생본. 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.',
+(out / 'index.json').write_text(json.dumps({'schema': 'storyworld.r208.storymobs/v1' if STORY else 'storyworld.r200.shades/v1', 'revision': 'R208' if STORY else 'R200',
+    'note': ('Drive 2026-11-01 몹 스프라이트시트 15·16(사용자 업로드) 파생본.' if STORY else 'Drive 2026-11-01 몹 스프라이트시트 01~08(사용자 업로드) 파생본.')+' 배경·번호·그림자를 지우고 1~11칸만 씀. 원본 보존. 최종 아트 확정 아님.',
     'sheets': sheets, 'mobs': rows, 'unused': [{'sheet': s, 'row': r + 1, 'name': n, 'why': w} for s, r, n, w in UNUSED]}, ensure_ascii=False, indent=1))
 print(len(rows), 'mobs')

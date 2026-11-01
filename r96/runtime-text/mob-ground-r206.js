@@ -9,7 +9,7 @@ const REV='R206-ground-1',KEY='storyworld.r206.ground';
 let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
 const stats={skipped:0,kept:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const FLY_NAME=/유령|망령|혼령|원혼|잔영|박쥐|나방|날개|비행|부유|떠도는|wisp|ghost|bat|moth|wing|fly|hover|float/i;
-function floating(e,opt){try{if(Number(e?.visualLiftPx)>0.5||Number(opt?.lift)>0.02)return true;if(window.__STORYWORLD_POLISH_R100__?.artOf?.(e)?.fly)return true;
+function floating(e,opt){try{if(e?.r208Mob)return false;/* R208 땅 몹 그림 */if(Number(e?.visualLiftPx)>0.5||Number(opt?.lift)>0.02)return true;if(window.__STORYWORLD_POLISH_R100__?.artOf?.(e)?.fly)return true;
  return FLY_NAME.test(String(e?.name||'')+' '+String(e?.nativeId||'')+' '+String(e?.r200Shade||''));}catch(err){fail(err);return false;}}
 let cur=null;
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){const prev=cur;cur=e||null;try{return base.call(this,e,...a);}finally{cur=prev;}};}

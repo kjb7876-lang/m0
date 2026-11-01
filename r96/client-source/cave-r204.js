@@ -184,8 +184,16 @@ function protectPoints(r){const out=[],ex=r.exploration,pt=(q,rad)=>{if(q&&Numbe
  for(const q of r.enemies||[])pt(q,1.0);for(const d of window.__STORYWORLD_WORLD_R74__?.doors||[])pt(d,2.4);if(typeof player==='object'&&player&&typeof room!=='undefined'&&r===room)pt(player,1.2);return out;}
 function fieldFor(r,make=false){const ex=r?.exploration;if(!ex)return null;let F=cache.get(ex);if(F||!make||!roomOn(r))return F||null;
  const t0=performance.now();F=field(ex,ZONES[r.id],protectPoints(r));F.zone=r.id;F.doors=layoutDoorPoints(ex);F.ms=Math.round(performance.now()-t0);cache.set(ex,F);return F;}
+// 맵에 들어설 때(로딩 중) 거리장을 미리 계산하고, 게임 시작 뒤 한가할 때 지형 질감을 미리 받아 둔다 → 첫 화면에서 바로 새 지형
+/* R208 전환 안정: 지역에 들어간 뒤 2.5초 동안은 화면 흔들림(shake)을 0 으로 둔다 — 로딩 직후 끊긴 프레임 위에 피격·연출 흔들림이 겹치면 크게 흔들려 보였다. */
+let calmUntil=0;const calm=()=>{try{if(typeof shake==='number'&&shake>0)shake=0;}catch(_){}if(performance.now()<calmUntil&&typeof requestAnimationFrame==='function')requestAnimationFrame(calm);};
+if(typeof enterRegion==='function'){const en=enterRegion;enterRegion=async function(...a){calmUntil=performance.now()+1e5;calm();let out;try{out=await en.apply(this,a);}finally{calmUntil=performance.now()+2500;}return out;};}/* 지형장은 첫 렌더에서 만든다(전환 직후 미리 만들면 렌더 전 판정까지 바뀜 — 전수 검사 projectile) */
+if(typeof setTimeout==='function')setTimeout(()=>{try{const paths=new Set();for(const z of Object.values(ZONES)){for(const [p] of Object.values({...TEX,...(z.tex||{})}))paths.add(p);for(const [n] of [...(z.patches||[]),...(z.uprights||[])])paths.add('assets/r207/organic/'+n+'.png');if(z.trees)for(let i=0;i<12;i++)paths.add('assets/r99/outdoor/tree-'+z.trees+'-'+String(i).padStart(2,'0')+'.webp');}
+ let i=0;const list=[...paths];const next=()=>{if(i>=list.length)return;loadImg(list[i++]).catch(()=>{}).finally(()=>setTimeout(next,60));};next();}catch(e){fail(e);}},2500);
 if(typeof blocked==='function'){const base=blocked;
  blocked=function(x,y,rad=.27,where=(typeof room!=='undefined'?room:null)){if(base.call(this,x,y,rad,where))return true;
+  /* R208: 바위 언덕 판정은 몸(반지름 .2 초과: 영웅·몹·길잡이 .29)에만 — 투사체(.08·.18)는 원래처럼 terrainContact153 기준(렌더 시점에 따라 결과가 달라지던 전수 검사 projectile) */
+  if(!(rad>.2))return false;
   try{if(prefs.on&&where?.exploration){const F=cache.get(where.exploration);if(F&&roomOn(where)){const fv=at(F,F.f,x,y);
    // 길찾기(findPath·R100·R101)는 칸 중심을 반지름 .29 로 묻고 대각선 모서리 깎기는 보지 않는다 → 새 바위 둘레에선 .32칸 여유를 더해 경로가 바위 가장자리를 스치지 않게 한다(실제 이동 .27 은 그대로).
    const need=rad>=.285&&rad<=.3?rad+.32:rad;if(fv<need&&at(F,F.raw,x,y)-fv>.02){stats.blocks++;return true;}}}}catch(e){fail(e);}return false;};}
@@ -423,8 +431,10 @@ function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entit
  const v=new r.T.Vector3(h.x,.9,h.y).project(r.camera);U.r204Hero.value.set(v.x,v.y,v.z,1);const el=r.renderer.domElement;U.r204Aspect.value=el.width/Math.max(1,el.height);}
 function before(r,frame){try{
  const st=r.__r204;if(!eligible(r,frame)){if(st?.group){st.group.visible=false;restoreNative(r);}return;}
- if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);return;}
- if(st.pending||st.failed)return;st.group.visible=true;
+ // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
+ const veil=()=>{hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
+ if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
+ if(st.failed)return;if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  hideNative(r);heroUniform(r,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다

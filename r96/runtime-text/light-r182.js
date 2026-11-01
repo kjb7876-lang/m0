@@ -5,7 +5,7 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R182-light-2',KEY='storyworld.r182.light',MODES=['full','torch','flashlight'],NAME={full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R208-light-3',KEY='storyworld.r182.light',MODES=['full','torch','flashlight'],NAME={full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 let prefs={mode:'full'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(MODES.includes(s.mode))prefs.mode=s.mode;}catch(_){}
 const stats={toggles:0,coneFrames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const mode=()=>prefs.mode;
@@ -22,12 +22,13 @@ addEventListener('keydown',e=>{try{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)r
 let cv=null,dir={x:1,y:1};
 function canvas(){if(cv?.isConnected)return cv;const st=document.getElementById('stage');if(!st)return null;cv=document.createElement('canvas');cv.id='r182Cone';cv.setAttribute('aria-hidden','true');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';st.appendChild(cv);return cv;}
 function hide(){if(cv&&cv.style.display!=='none'){cv.style.display='none';cv.width=0;cv.height=0;}}
-function want(){try{if(prefs.mode!=='flashlight'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103&&document.getElementById('r103Flashlight')?.style.display==='block')return false;/* 사몽 미로·어두운 구역은 samong-r103 이 그린다 — R187: 그 밖의 사몽 구역(전투·생존)은 여기서 부채꼴을 그린다(예전엔 손전등이 횃불과 똑같이 보임) */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
+function want(){try{if(prefs.mode==='full'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103&&document.getElementById('r103Flashlight')?.style.display==='block')return false;/* 사몽 미로·어두운 구역은 samong-r103 이 그린다 — R187: 그 밖의 사몽 구역(전투·생존)은 여기서 부채꼴을 그린다(예전엔 손전등이 횃불과 똑같이 보임) */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
 const blockedAt=(x,y)=>{try{return typeof blocked==='function'?blocked(x,y,.02,room):false;}catch(_){return false;}};
 function ray(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.2)if(blockedAt(ox+dx*t,oy+dy*t))return t;return max;}
 function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.style.display='block';const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);
   if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
+  if(prefs.mode==='torch'){torch(g,b);return;}
   const mv={x:player.moveVX150||0,y:player.moveVY150||0};if(Math.hypot(mv.x,mv.y)>.05){const l=Math.hypot(mv.x,mv.y);dir={x:mv.x/l,y:mv.y/l};}
   else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w)dir={x:w[0]/Math.SQRT2,y:w[1]/Math.SQRT2};}
   /* R187: 멈춰 선 채 부채꼴이 벽에 막히면(samong-r103 와 같이) 가장 멀리 트인 쪽으로 돌린다 */
@@ -38,6 +39,22 @@ function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.
   const gr=g.createRadialGradient(o.x,o.y,4,o.x,o.y,reach*U);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(.8,'rgba(0,0,0,.95)');gr.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=gr;g.beginPath();g.moveTo(o.x,o.y);for(const p of pts)g.lineTo(p.x,p.y);g.closePath();g.fill();
   const near=2.2*U,n=g.createRadialGradient(o.x,o.y-14*(zoom||1),2,o.x,o.y-14*(zoom||1),near);n.addColorStop(0,'rgba(0,0,0,.95)');n.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=n;g.beginPath();g.arc(o.x,o.y-14*(zoom||1),near,0,Math.PI*2);g.fill();
   g.globalCompositeOperation='source-over';g.fillStyle='rgba(255,226,170,.05)';g.beginPath();g.moveTo(o.x,o.y);for(const p of pts)g.lineTo(p.x,p.y);g.closePath();g.fill();stats.coneFrames++;}catch(e){fail(e);}}
+/* R208 횃불: 사용자 2026-11-01 "횃불시야(스포트라이트)모드하면 플레이어 주변부만 원형으로 확실하게 잘보이게".
+   R24 둘레 시야는 반지름이 화면만 해서(8~18칸) 원이 안 보였고, R100 이 시야 밖을 32~58% 밝기로만 낮춰 흐릿했다.
+   → 화면 위에 어둠(86%)을 깔고 영웅 둘레 TORCH_R 칸 원(벽에 막히면 그 자리까지)만 뚫는다. 가장자리는 바깥 25%만 부드럽게. 따뜻한 불빛을 살짝. */
+const TORCH_R=5.2,TORCH_N=56;let tk='',tr=[];
+function torchRays(){const k=Math.round(player.x*8)+','+Math.round(player.y*8)+','+(room.id||'');if(k===tk)return tr;tk=k;tr=[];for(let i=0;i<TORCH_N;i++){const a=i*Math.PI*2/TORCH_N;const t=ray(player.x,player.y,a,TORCH_R);tr.push([a,t<TORCH_R?Math.min(TORCH_R,t+.75):t]);/* 막힌 곳은 벽면이 보이도록 .75칸 더 */}return tr;}
+function torch(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),flick=1+.025*Math.sin((typeof time==='number'?time:0)*7.3)+.015*Math.sin((typeof time==='number'?time:0)*13.1),R=TORCH_R*flick;
+ const pts=torchRays().map(([a,t])=>project(player.x+Math.cos(a)*t*flick,player.y+Math.sin(a)*t*flick));
+ g.fillStyle='rgba(2,2,6,.86)';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
+ // 바닥 원은 2:1 마름모 투영이라 화면에서 타원 — 반지름은 화면 가로 기준(R·U·√2)
+ const rx=R*U*Math.SQRT2,gr=g.createRadialGradient(o.x,o.y,0,o.x,o.y,rx);gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(.72,'rgba(0,0,0,1)');gr.addColorStop(.9,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');
+ g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=gr;g.restore();
+ g.save();g.beginPath();g.moveTo(o.x,o.y);for(const p of pts)g.lineTo(p.x,p.y);g.closePath();g.clip();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=gr;g.fillRect(o.x-rx,o.y-rx,2*rx,2*rx);g.restore();
+ // 영웅 몸(위로 솟은 부분)도 밝게
+ const hy=o.y-22*(typeof zoom==='number'?zoom:1),hn=g.createRadialGradient(o.x,hy,2,o.x,hy,1.6*U);hn.addColorStop(0,'rgba(0,0,0,1)');hn.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=hn;g.beginPath();g.arc(o.x,hy,1.6*U,0,Math.PI*2);g.fill();
+ g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,o.y,0,o.x,o.y,rx);w.addColorStop(0,'rgba(255,190,110,.10)');w.addColorStop(1,'rgba(255,150,70,0)');
+ g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=w;g.beginPath();g.arc(o.x,o.y,rx,0,Math.PI*2);g.fill();g.restore();stats.torchFrames=(stats.torchFrames||0)+1;}
 let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;if(prefs.mode==='full'&&typeof settings!=='undefined'&&settings?.flashlight58!==false&&!(typeof room!=='undefined'&&room?.samongR103))apply();else if(prefs.mode!=='full'&&typeof settings!=='undefined'&&settings?.flashlight58===false)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
 window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
