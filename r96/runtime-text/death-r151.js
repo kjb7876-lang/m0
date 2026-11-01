@@ -15,7 +15,7 @@ let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)|
 const stats={plays:0,frames:0,panels:0,immediate:0,skipped:0,errors:0,lastFrame:null};let lastError=null,dying=null,preTick=0;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
-const pathOf=(h,d)=>(h==='hwando'?'assets/r194/death/':'assets/r151/death/')+h+'/death-'+d+'.webp';
+const pathOf=(h,d)=>h==='hwando'?'assets/r196/hwando/death-'+d+'.webp'/* R196: r194 드라이브 쓰러짐을 걷기·공격 색감에 맞춘 파생본 */:'assets/r151/death/'+h+'/death-'+d+'.webp';
 const sheetOf=(h,d8)=>ONLY_E.has(h)?(['w','nw','sw'].includes(d8)?['e',1]:['e',0]):(SHEET[d8]||SHEET.s);
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
