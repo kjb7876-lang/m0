@@ -298,7 +298,7 @@
   host.parentNode.insertBefore(s,host.nextSibling);for(const k of Object.keys(DEFAULTS)){const el=s.querySelector('#r100-'+k);el.checked=prefs[k];el.onchange=()=>set({[k]:el.checked});}}
  if(typeof showSettings==='function'){const sb=showSettings;showSettings=function(...args){const result=sb.apply(this,args);try{settingsSection();}catch(e){fail(e);}return result;};}
 
- window.__STORYWORLD_POLISH_R100__=Object.freeze({prefs:()=>({...prefs}),set,colourOf,artOf:e=>{const r=artOf(e);return r?{...r}:null;},rooted:()=>root.on,
+ window.__STORYWORLD_POLISH_R100__=Object.freeze({resetNav:()=>{grid=null;}/* R208: 지형 판정이 바뀌면(R204 동굴 거리장) 길안내 격자를 다시 잰다 */,prefs:()=>({...prefs}),set,colourOf,artOf:e=>{const r=artOf(e);return r?{...r}:null;},rooted:()=>root.on,
   sig:D.sig,sigColours:D.sigColours,capMesh:()=>capRenderer?.r100Cap||null,goal:()=>nav.goal?{...nav.goal}:null,path:()=>nav.path?nav.path.map(p=>({...p})):null,navPath,
   inspect:()=>({revision:'R100-polish',prefs:{...prefs},stats:{...stats},nav:{visible:nav.visible,goal:nav.goal,meters:nav.meters,points:nav.path?.length||0},cap:capInfo(),root:{on:root.on,off:root.off},lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
