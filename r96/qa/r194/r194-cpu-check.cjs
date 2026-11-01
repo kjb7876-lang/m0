@@ -10,7 +10,7 @@ ok('old r151 hwando death (east only) is kept, not overwritten',fs.existsSync(pa
 const Hd=path.join(R,'runtime-text','assets','r143','hit','hwando');
 ok('hwando hit: s/se/e/n present, held NE absent',['s','se','e','n'].every(d=>fs.existsSync(path.join(Hd,'hit-'+d+'.webp')))&&!fs.existsSync(path.join(Hd,'hit-ne.webp')));
 const S=C('death-r151.js'),A=C('attack-anim-r143.js');
-ok('R151: hwando no longer east-only; reads assets/r194/death/hwando',/ONLY_E=new Set\(\[\]\)/.test(S)&&/h==='hwando'\?'assets\/r194\/death\/'/.test(S));
+ok('R151: hwando no longer east-only; reads the r194 Drive death sheets (R196: via their color-matched derivatives in assets/r196/hwando)',/ONLY_E=new Set\(\[\]\)/.test(S)&&(/h==='hwando'\?'assets\/r194\/death\/'/.test(S)||/h==='hwando'\?'assets\/r196\/hwando\/death-'/.test(S)));
 ok('R143: hwando hit enabled with NE→N fallback; NE never requested; hurt routes to applyHit before hwandoUnify',/HIT=new Set\(HEROES\)/.test(A)&&/HIT_FALLBACK=\{hwando:\{ne:'n'\}\}/.test(A)&&/!HIT_FALLBACK\[h\]\?\.\[d\]\)want\.push/.test(A)&&/&&!hurtOnly\)\{hwandoUnify/.test(A));
 ok('held sets (dash, run, ultimate, guard) not shipped from this package',!fs.existsSync(path.join(R,'runtime-text','assets','r194','run'))&&!fs.existsSync(path.join(R,'runtime-text','assets','r194','dash'))&&!/HERO-hwando-(dash|run|ultimate|guard)/.test(JSON.stringify(di)));
 const man=fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8');ok('runtime manifest lists the new sheets',man.includes('assets/r194/death/hwando/death-ne.webp')&&man.includes('assets/r143/hit/hwando/hit-n.webp'));
