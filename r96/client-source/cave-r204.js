@@ -14,8 +14,8 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R204-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;}catch(_){}
+const REV='R218-cave-1',KEY='storyworld.r204.cave';
+let prefs={on:true,widen:true,skeleton:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -121,11 +121,11 @@ const WIDEN_SKIP=new Set(['hub']);for(const [id,c] of Object.entries(ZONES))if(!
 // R215 디테일 전용(decorOnly) — 사용자 "모든맵개선" + 앞서 "현대 건물 안(학교·호텔)은 직각 타일 허용". 실내·현대·기계 계열은 원래 벽·바닥·충돌을 그대로 두고
 //  같은 화풍의 바닥 장식(균열·잔해·얼룩·쇠사슬)만 덧입힌다. 지형을 숨기지 않고, 이동 판정·길찾기도 바꾸지 않는다.
 const DECO=(seed,kind)=>{const K={
-  clinic:{tint:[.82,.8,.8],decalMix:{near:[[0,2],[5,2],[6,2],[10,1]],open:[[0,3],[5,2],[6,1],[7,1],[10,1.2]]},decalDensity:18},
-  urban:{tint:[.84,.82,.8],decalMix:{near:[[0,2],[5,2],[6,2],[11,1]],open:[[0,3],[5,2],[6,2],[7,1],[10,1]]},decalDensity:18},
-  home:{tint:[.86,.82,.78],decalMix:{near:[[0,2],[5,1],[6,1]],open:[[0,2],[5,1],[7,1],[10,.5]]},decalDensity:26},
-  forge:{tint:[.86,.8,.74],decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,2],[7,2],[8,1]]},decalDensity:16},
-  machine:{tint:[.7,.74,.82],decalMix:{near:[[0,2],[7,1]],open:[[0,2],[7,1]]},decalDensity:34}}[kind];
+  clinic:{bone:[.5,.54,.53],floorLift:1,tint:[.82,.8,.8],decalMix:{near:[[0,2],[5,2],[6,2],[10,1]],open:[[0,3],[5,2],[6,1],[7,1],[10,1.2]]},decalDensity:18},
+  urban:{bone:[.58,.55,.52],floorLift:1.4,tint:[.84,.82,.8],decalMix:{near:[[0,2],[5,2],[6,2],[11,1]],open:[[0,3],[5,2],[6,2],[7,1],[10,1]]},decalDensity:18},
+  home:{bone:[.52,.4,.3],floorLift:1.8,tint:[.86,.82,.78],decalMix:{near:[[0,2],[5,1],[6,1]],open:[[0,2],[5,1],[7,1],[10,.5]]},decalDensity:26},
+  forge:{bone:[.46,.4,.35],floorLift:1.15,tint:[.86,.8,.74],decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,2],[7,2],[8,1]]},decalDensity:16},
+  machine:{bone:[.4,.44,.5],floorLift:1.1,tint:[.7,.74,.82],decalMix:{near:[[0,2],[7,1]],open:[[0,2],[7,1]]},decalDensity:34}}[kind];
  return {seed,decorOnly:true,kind,bulge:0,widen:false,web:false,pillars:false,...K};};
 Object.assign(ZONES,{
  ep1a08:DECO(0x5e1a08,'clinic'),ep1a09:DECO(0x5e1a09,'clinic'),ep1a10:DECO(0x5e1a10,'urban'),ep1a11:DECO(0x5e1a11,'clinic'),ep1a09b:DECO(0x5e1a9b,'urban'),
@@ -468,6 +468,22 @@ function pillarMesh(T,F,cfg){// 종유석·바위 기둥: 대지 가장자리(f 
 // R212: 지역마다 장식 비율(cfg.decalMix {near,open}: [[칸,무게]…])·밀도(cfg.decalDensity, 칸 수 나눔). 없으면 예전 동굴 규칙.
 const pickW=(list,r)=>{let t=0;for(const [,w] of list)t+=w;let x=r*t;for(const [k,w] of list){x-=w;if(x<=0)return k;}return list[list.length-1][0];};
 const DSIZE={0:1.8,1:1.1,2:1.5,3:1.6,4:1.6,5:1.0,6:1.0,7:.9,8:1.5,9:1.4,10:2.4,11:1.7};
+// R218 실내 골격(사용자 2026-11-02 "내부맵도 개선 다만 내부맵은 건물답게 골격이 확실히 있어야해"):
+//  디테일 전용(실내·현대) 지역의 벽 모서리·T자·끝점과 긴 벽(6칸 이상)의 4칸마다 기둥(받침·몸통·머리)을 세운다. 높이는 그 벽 높이에 맞춘다.
+//  문 둘레(문 폭 절반+1칸)는 비운다. 판정·길찾기는 바꾸지 않는다(보기 전용, 벽 두께 안쪽에 서므로 걸리지 않음).
+function skeletonPoints(ex){const walls=(ex.walls||[]).filter(w=>Array.isArray(w.endpoints)&&w.endpoints.length===2&&!/door/i.test(String(w.id||'')));
+ const doors=layoutDoorPoints(ex).map(([x,y,r])=>[x,y,Math.max(1.6,(r||3.5)-1.5)]),nearDoor=(x,y)=>doors.some(d=>Math.hypot(d[0]-x,d[1]-y)<d[2]);
+ const pts=new Map(),key=(x,y)=>Math.round(x*4)+','+Math.round(y*4);
+ const put=(x,y,h,kind)=>{if(nearDoor(x,y))return;const k=key(x,y),o=pts.get(k);if(o){o.h=Math.max(o.h,h);o.n++;if(kind==='end')o.end=true;}else pts.set(k,{x,y,h,n:1,end:kind==='end'});};
+ for(const w of walls){const [[x0,y0],[x1,y1]]=w.endpoints,h=Number(w.height)||2.85,len=Math.hypot(x1-x0,y1-y0);if(!(len>.6))continue;put(x0,y0,h,'end');put(x1,y1,h,'end');
+  if(len>=6){const n=Math.floor(len/4);for(let i=1;i<n;i++){const t=i/n;put(x0+(x1-x0)*t,y0+(y1-y0)*t,h,'mid');}}}
+ return [...pts.values()];}
+function skeletonMesh(T,ex,cfg){const pts=skeletonPoints(ex);if(!pts.length)return null;const pos=[],uv=[],col=[],idx=[];let n=0;const bc=cfg.bone||[.55,.55,.55];
+ const box=(cx,cz,w,y0,y1,shade)=>{const h=w/2,X=[cx-h,cx+h],Z=[cz-h,cz+h];
+  const faces=[[[X[0],y1,Z[0]],[X[1],y1,Z[0]],[X[1],y1,Z[1]],[X[0],y1,Z[1]],1.0],[[X[1],y0,Z[0]],[X[1],y0,Z[1]],[X[1],y1,Z[1]],[X[1],y1,Z[0]],.82],[[X[0],y0,Z[1]],[X[1],y0,Z[1]],[X[1],y1,Z[1]],[X[0],y1,Z[1]],.64],[[X[0],y0,Z[0]],[X[0],y0,Z[1]],[X[0],y1,Z[1]],[X[0],y1,Z[0]],.5],[[X[0],y0,Z[0]],[X[1],y0,Z[0]],[X[1],y1,Z[0]],[X[0],y1,Z[0]],.56]];
+  for(const [a,b,c,d,k] of faces){const s=k*shade,top=a[1]===b[1]&&b[1]===c[1];for(const [v,uu,vv] of [[a,0,0],[b,1,0],[c,1,1],[d,0,1]]){pos.push(...v);uv.push(uu*w*1.6,top?vv*w*1.6:(v[1]-y0)*.55);const g=top?1:.72+.28*Math.min(1,(v[1]-y0)/Math.max(.2,y1-y0));col.push(bc[0]*s*g,bc[1]*s*g,bc[2]*s*g);}idx.push(n,n+1,n+2,n,n+2,n+3);n+=4;}};
+ for(const p of pts){const big=p.n>1||!p.end?1:0,h=p.h,w=big?.44:.38;box(p.x,p.y,w+.14,0,.18,.78);box(p.x,p.y,w,.18,h-.02,1);box(p.x,p.y,w+.16,h-.02,h+.12,1.08);}
+ const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setIndex(idx);g.computeBoundingSphere();stats.skeleton=pts.length;return g;}
 function decalMesh(T,F,cfg){// 바닥 데칼: 보행 영역(f>0.15) — 균열·잔돌·뼈는 아무 데나, 뿌리·거미줄은 절벽 가까이(f<1.2)
  const rnd=rng(cfg.seed^0x2718),pos=[],uv=[],idx=[];let n=0,count=0;const want=Math.round((F.W*F.H)/(cfg.decalDensity||14));const mix=cfg.decalMix;
  for(let t=0;t<want*20&&count<want;t++){const x=rnd()*F.W,y=rnd()*F.H,fv=at(F,F.f,x,y);if(fv<.15)continue;
@@ -557,7 +573,14 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   // R216(Codex #136): 디테일 전용은 바닥 굽기(전체 맵 렌더 타깃)·지형 재질을 만들지 않고 장식 재질만 만든다
   if(cfg.decorOnly){const dm=new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2});
    r.spatialResources.add(dm);if(r.sightState24&&A.attachSight24)A.attachSight24(dm,r.sightState24);const group=new T.Group();group.name='r204-cave';const geo=decalMesh(T,F,cfg),mesh=new T.Mesh(geo,dm);
-   mesh.name='r215-decals';mesh.layers.set(2);mesh.renderOrder=-19;mesh.userData.presentationOnly=true;mesh.userData.r204=true;r.spatialResources.add(geo);group.add(mesh);r.spatialRoot.add(group);
+   mesh.name='r215-decals';mesh.layers.set(2);mesh.renderOrder=-19;mesh.userData.presentationOnly=true;mesh.userData.r204=true;r.spatialResources.add(geo);group.add(mesh);
+   if(prefs.skeleton!==false){const sg=skeletonMesh(T,ex,cfg);if(sg){let tex=null;r.spatialRoot.traverse(o=>{if(!tex&&/masonry-boundary-bevel-and-fascia/.test(o.name||'')&&o.material?.map)tex=o.material.map;});
+     let map=null;if(tex){map=tex.clone();map.wrapS=map.wrapT=T.RepeatWrapping;map.needsUpdate=true;r.spatialResources.add(map);}
+     const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
+     const sm=new T.MeshBasicMaterial({color:0xffffff,vertexColors:true,map,toneMapped:false});sm.onBeforeCompile=sh=>cutaway(sh,U);sm.customProgramCacheKey=()=>'r218-skeleton'+(map?'-map':'');
+     r.spatialResources.add(sm);if(r.sightState24&&A.attachSight24)A.attachSight24(sm,r.sightState24);const sk=new T.Mesh(sg,sm);sk.name='r218-skeleton';sk.layers.set(2);sk.renderOrder=-26;sk.userData.presentationOnly=true;sk.userData.r204=true;r.spatialResources.add(sg);group.add(sk);}}
+   if(prefs.skeleton!==false&&cfg.floorLift>1){let k=0;r.spatialRoot.traverse(o=>{if(/^annex-ground:/.test(o.name||'')&&o.material?.color&&!o.material.userData?.r218Lift){const c=o.material.color;c.setRGB(c.r*cfg.floorLift,c.g*cfg.floorLift,c.b*cfg.floorLift);/* 1을 넘겨도 된다(MeshBasic·톤매핑 없음 → 그림 자체가 밝아짐) */o.material.userData.r218Lift=true;k++;}});stats.floorLifted=k;}
+   r.spatialRoot.add(group);
    r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}
   const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
   const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
@@ -595,7 +618,7 @@ function before(r,frame){try{
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
- if(deco){stats.frames++;return;}
+ if(deco){heroUniform(r,frame);stats.frames++;return;}
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
@@ -604,7 +627,7 @@ const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,fra
 C.render=wrapFn(C.render);
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();
