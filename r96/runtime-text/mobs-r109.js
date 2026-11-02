@@ -16,10 +16,10 @@
  * 공격 시간·판정·AI·저장 형식은 읽기만 하고 바꾸지 않는다(그림만 바뀜). 병원(ep1a08) 전용 자세와 R74 세계 괴물 그림은 건드리지 않는다. */
 (()=>{'use strict';
 if(window.__STORYWORLD_MOBS_R109__||typeof drawEnemy!=='function')return;
-const REV='R116-mobs-3',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json',R116='./assets/r116/mobs/index.json',R198='./assets/r198/mobs/index.json';
+const REV='R220-mobs-4',R92='./assets/r92/mobs/index.json',R109='./assets/r109/mobs/index.json',R116='./assets/r116/mobs/index.json',R198='./assets/r198/mobs/index.json';
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r109.mobs';
 const FPS={walk:6.5,fly:8,hover:4},IDLE_FPS={fly:3.2,hover:2.6,idle:3.4},FOLLOW=.22,HOVER=.012,HIT_DUR=.36;
-let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true},state='idle',r92=null,r109=null,r116=null,r198=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
+let prefs={frames:true,calm:true,seeHero:true,tidyLabels:true,oneFamily:true},state='idle',r92=null,r109=null,r116=null,r198=null,lastError=null,failures=0,preloadAt=0,preloadZone=null;
 const stats={draws:0,move:0,idle:0,windup:0,attack:0,follow:0,calmPoses:0,hover:0,missingImage:0,preloads:0,artMove:0,seeThrough:0,stripFlips:0,labelsHidden:0,hit:0,standIdle:0};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,300);};
@@ -56,11 +56,11 @@ function load(){if(state!=='idle')return;state='loading';
 const rowOf=e=>e?.nativeId?table.get(e.nativeId)||null:null;
 const cell=t=>t.frames||t.pivots?.length||4;
 const cache=new Map();
-function frame(t,i,facing){const k=t.path+':'+i+':'+(facing||'');let f=cache.get(k);if(f)return f;const [cw,ch]=t.cell,[px,py]=t.pivot||t.pivots[i];
+function frame(t,i,facing){const k=t.path+':'+i+':'+(facing||'');let f=cache.get(k);if(f)return f;const [cw,ch]=t.cell,[px0,py0]=t.pivot||t.pivots[i],px=Math.min(cw,Math.max(0,px0)),py=Math.min(ch,Math.max(0,py0));/* R220: 기준점이 칸 밖(예: M052 공격 159>156)이면 엔진이 칸 그림으로 받지 않아 다른 경로로 빠졌다 → 칸 안으로 */
  f=Object.freeze({path:t.path,r92Mob:true,r109Mob:true,assetFrame:Object.freeze({sourceRect:[i*cw,0,cw,ch],pivot:[px,py],visibleHeight:t.visibleHeight||150,...(facing?{bakedFacing:facing}:{})})});cache.set(k,f);return f;}
 const ready=t=>!!t&&typeof readyImage==='function'&&!!readyImage(t.path);
 const art=e=>{try{return window.__STORYWORLD_DRIVE_ART_R105__?.artFor?.(e)||null;}catch(_){return null;}};
-const eligible=e=>!!e&&!major(e)&&!e.r74Monster&&e.hp>0&&e.spawnState!=='dead'&&(!(e.hitTimer>0)||!!rowOf(e)?.hit)&&typeof zone!=='undefined'&&zone!=='ep1a08'&&!art(e);
+const eligible=e=>!!e&&!major(e)&&!e.r74Monster&&e.hp>0&&e.spawnState!=='dead'&&(!(e.hitTimer>0)||!!rowOf(e)?.hit||(prefs.oneFamily&&!!(rowOf(e)?.move||rowOf(e)?.idle)))&&typeof zone!=='undefined'&&zone!=='ep1a08'&&!art(e);
 const flies=(e,row)=>row.kind==='fly'||row.kind==='hover'||winged(e);
 
 const artRowOf=e=>{const p=art(e);return p?artRows.get(String(p).replace(/^\.\//,''))||null:null;};
@@ -78,6 +78,10 @@ function patchFor(e){const row=rowOf(e);if(!row)return null;const F=e.profile?.f
  const H=row.hit;if(H&&e.hitTimer>0&&!e.attack){if(!ready(H)){stats.missingImage++;return null;}
   let k=hitAt.get(e);if(!k||!(now()>=k.at)||now()-k.at>HIT_DUR+.25||e.hitTimer>k.ht+1e-4){k={at:now(),ht:e.hitTimer};hitAt.set(e,k);}k.ht=e.hitTimer;
   const f=frame(H,Math.min(3,Math.floor((now()-k.at)/HIT_DUR*4)),F.idle?.assetFrame?.bakedFacing||face);out.idle=out.move=out.windup=f;stats.hit++;return out;}
+ // R220(사용자 "병원몹같은 몹 떨림문제"): 이동·대기 그림 묶음은 있는데 맞음·공격 그림이 없는 몹(병원 M012 등)은 맞을 때 원래 한 장, 공격 때 공용 공격 시트(rc137),
+ //  준비 때 원래 한 장으로 갈아 끼워 키·화풍이 매번 바뀌어 떨려 보였다(실측: 한 마리가 4가지 그림 72·79·95·74px 를 오감). → 같은 묶음 칸으로 이어 그린다.
+ const S0=row.idle||row.move,still=()=>{const n=cell(S0);return frame(S0,Math.floor(now()*(row.idle?IDLE_FPS.idle:FPS.walk)+(hash(e.id)%n))%n,(row.idle?F.idle:F.move)?.assetFrame?.bakedFacing||face);};
+ if(prefs.oneFamily&&S0&&!H&&e.hitTimer>0&&!(e.attack&&row.attack)){if(!ready(S0)){stats.missingImage++;return null;}const f=still();out.idle=out.move=out.windup=out.attack=out.attackA=out.attackB=f;stats.familyHit=(stats.familyHit||0)+1;return out;}
  if(e.hitTimer>0&&!(e.attack&&row.attack))return null;
  const A=row.attack;
  if(e.attack&&A){if(!ready(A)){stats.missingImage++;return null;}
@@ -86,6 +90,7 @@ function patchFor(e){const row=rowOf(e);if(!row)return null;const F=e.profile?.f
   const f=frame(A,i,F.attack?.assetFrame?.bakedFacing||face);
   if(t<wind+act){out.attack=out.attackA=out.attackB=out.windup=f;stats[t<wind?'windup':'attack']++;return out;}
   if(t<wind+act+FOLLOW){out.idle=out.move=f;stats.follow++;return out;}}
+ if(prefs.oneFamily&&S0&&!A&&(e.attack||e.rangedWindup>0)){if(!ready(S0)){stats.missingImage++;return null;}const f=still();out.attack=out.attackA=out.attackB=out.windup=out.idle=out.move=f;stats.familyAttack=(stats.familyAttack||0)+1;return out;}
  if(e.rangedWindup>0&&A){if(!ready(A)){stats.missingImage++;return null;}const f=frame(A,Math.floor(now()*5)%2,F.attack?.assetFrame?.bakedFacing||face);out.attack=out.windup=f;stats.windup++;return out;}
  // R110: 대기 4장만 있는 몹(M119 향로 사제)은 서 있을 때도 움직일 때도 대기 그림을 천천히 돌린다.
  if(!row.move&&row.idle){const I=row.idle;if(!ready(I)){stats.missingImage++;return null;}
@@ -158,10 +163,27 @@ function muteLabel(c){const own=k=>Object.prototype.hasOwnProperty.call(c,k),had
  c.fillText=function(txt,...a){if(LABELS.has(String(txt)))return;return ft.call(this,txt,...a);};
  return()=>{muting=false;for(const [k,v] of [['fillRect',fr],['rect',rc],['fillText',ft]]){if(had[k])c[k]=v;else delete c[k];}};}
 
+// R220: 한 장짜리 그림(칸 정보 없음)은 엔진이 쓰는 알파 경계(crop)로 칸 정보를 만들어 돌려준다 — 칸 정보가 없으면 다른 그리기 경로로 빠져 RC146 몸 칸 기록(재·죽음 연출)이 빠진다.
+const ownCache=new Map();
+function ownFrame(e){const F=e?.profile?.frames||{},o=F.idle||F.move;if(o?.assetFrame?.sourceRect)return o;const path=String(o?.path||e?.path||'');if(!path||typeof readyImage!=='function')return null;
+ const row=readyImage(path);if(!row?.image)return null;const c=row.crop||{x:0,y:0,w:row.image.naturalWidth,h:row.image.naturalHeight};if(!(c.w>0&&c.h>0))return null;const k=path+'|'+c.x+','+c.y+','+c.w+','+c.h;let f=ownCache.get(k);
+ if(!f){f=Object.freeze({path,r220Own:true,assetFrame:Object.freeze({sourceRect:[c.x,c.y,c.w,c.h],pivot:[c.w/2,c.h],visibleHeight:c.h})});ownCache.set(k,f);while(ownCache.size>200)ownCache.delete(ownCache.keys().next().value);}return f;}
+// R220: 원거리 공격 뒤에도 이야기 전투 자세 타이머(storyAttackState5·storyAttackUntil5)가 남아 R54 가 공용 자세를 고른다 → 그 구간도 공격 중으로 본다.
+const inAtk=e=>!!(e&&(e.attack||e.rangedWindup>0||(finite(e.storyAttackUntil5)&&now()<e.storyAttackUntil5)));
+// R220(떨림): 공격·준비·맞음 칸을 같은 그림 묶음으로 — 엔진은 확장 방이 아니면 R54 frameFor 를 거치지 않고 프로필의 공격 칸(rc137 공용 자세)·원래 한 장을 바로 쓴다.
+//  그래서 그릴 때 프로필 칸 자체를 덮는다: 묶음이 있으면 그 묶음 칸(공격 묶음 > 대기 > 이동), 한 장짜리면 제 그림.
+function familyFrames(e,patch){if(!prefs.oneFamily||!prefs.frames||state!=='ready'||!e||major(e)||e.r74Monster||e.r208Mob||e.r200Shade||!(e.hp>0)||e.spawnState==='dead'||(typeof zone!=='undefined'&&zone==='ep1a08')||art(e))return null;
+ if(!(inAtk(e)||e.hitTimer>0))return null;const row=rowOf(e),F=e.profile?.frames||{};
+ if(row&&(row.idle||row.move||row.attack)){const S0=row.idle||row.move;let f0=patch?.idle||patch?.move||null;
+  if(!f0&&S0&&ready(S0)){const n=cell(S0);f0=frame(S0,Math.floor(now()*(row.idle?IDLE_FPS.idle:FPS.walk)+(hash(e.id)%n))%n,(row.idle?F.idle:F.move)?.assetFrame?.bakedFacing||F.idle?.assetFrame?.bakedFacing);}
+  const atk=patch?.attack||patch?.windup||f0;if(!atk&&!f0)return null;stats.familyFrames=(stats.familyFrames||0)+1;
+  return {attack:atk,attackA:atk,attackB:atk,windup:patch?.windup||atk,hit:patch?.hit||patch?.idle||f0||atk,...(f0&&!(patch?.idle)?{idle:f0}:{})};}
+ const own=ownFrame(e);if(!own)return null;stats.ownStatic=(stats.ownStatic||0)+1;return {attack:own,attackA:own,attackB:own,windup:own,hit:own};}
 // ---- draw wrapper ------------------------------------------------------------------------------
 const base=drawEnemy;
 drawEnemy=function(e,...args){const prevScope=scoped;scoped=e;let patch=null,prof=null,lift=null;
  try{load();if(state==='ready'&&prefs.frames&&eligible(e)){preload();patch=patchFor(e);}
+  {const fam=familyFrames(e,patch);if(fam)patch={...(patch||{}),...fam};}/* R220 */
   // 날개·부유 몹의 호버는 느리고 작게(몸 높이 1.2% 이하): R100은 이미 정해진 높이를 그대로 쓴다.
   if(prefs.calm&&e&&!major(e)&&e.hp>0&&e.spawnState!=='dead'&&typeof actorHeight==='function'){const row=rowOf(e);if((row&&flies(e,row))||winged(e)){
    const own=Object.prototype.hasOwnProperty.call(e,'visualLiftPx'),old=e.visualLiftPx;if(!(finite(old)&&old>0)){const h=actorHeight();lift={own,old};e.visualLiftPx=h*(.13+HOVER*Math.sin(now()*1.6+hash(e.id)%628/100));stats.hover++;}}}}
@@ -172,6 +194,15 @@ drawEnemy=function(e,...args){const prevScope=scoped;scoped=e;let patch=null,pro
   return base.call(this,e,...args);}
  finally{if(unmute){try{unmute();}catch(_){}}if(ga!==null)ctx.globalAlpha=ga;if(prof)e.profile=prof;if(lift){if(lift.own)e.visualLiftPx=lift.old;else delete e.visualLiftPx;}scoped=prevScope;}};
 
+// R220(떨림): 엔진 그림 선택 사슬 끝(R54 frameFor)은 공격·준비 때 공용 공격 자세(rc137)·원래 한 장을 골라 R109 칸(제 공격 묶음 포함)을 덮었다 → 자기 그림 묶음이 있는 몹은
+//  공격·준비·맞음 때도 같은 묶음 칸(공격 묶음이 있으면 그것, 없으면 대기·이동 칸)을 돌려준다(R208 처럼 frameFor 를 감쌈; 다른 덧씌우기가 나중에 감싸도 그 안쪽에서 동작).
+function installOneFamily(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r220)return true;
+ window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r220:true,frameFor(e,f){try{if(prefs.oneFamily&&prefs.frames&&state==="ready"&&e&&!e.r208Mob&&!e.r200Shade&&(inAtk(e)||e.hitTimer>0)&&eligible(e)){const row=rowOf(e);
+   if(row&&(row.attack||row.move||row.idle)){const p=patchFor(e),fr=p&&(inAtk(e)?(p.attack||p.windup||p.idle||p.move):(p.idle||p.move));if(fr){stats.oneFamily=(stats.oneFamily||0)+1;return fr;}}}
+  // 그림 묶음이 없는 한 장짜리 몹: 공격·준비 때 공용 공격 자세(rc137, 몸보다 최대 70px 큼)로 갈아 끼우지 않고 제 그림을 둔다(공격은 R109 짧은 내딛기로 보임).
+  if(prefs.oneFamily&&e&&!major(e)&&!e.r74Monster&&!e.r208Mob&&!e.r200Shade&&e.hp>0&&inAtk(e)&&!rowOf(e)&&!art(e)&&(typeof zone==='undefined'||zone!=='ep1a08')){const own=ownFrame(e);if(own){stats.ownStatic=(stats.ownStatic||0)+1;return own;}}
+ }catch(err){fail(err);}return S.frameFor(e,f);}});return true;}
+{let tries=0;(function arm(){try{installOneFamily();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();}
 window.__STORYWORLD_MOBS_R109__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,storageKey:KEY,
  trackFor:e=>{const r=rowOf(e)||artRowOf(e);return r?{group:r.gid,src:r.src,kind:r.kind,idle:r.idle?{path:r.idle.path,frames:cell(r.idle)}:null,move:r.move?{path:r.move.path,frames:cell(r.move)}:null,attack:r.attack?{path:r.attack.path,frames:cell(r.attack)}:null,hit:r.hit?{path:r.hit.path,frames:cell(r.hit)}:null}:null;},
  artPatch:(e,path)=>{try{return artPatch(e,path);}catch(err){fail(err);return null;}},

@@ -14,8 +14,8 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R219-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true,skeleton:true,inflate:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;}catch(_){}
+const REV='R220-cave-1',KEY='storyworld.r204.cave';
+let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -625,13 +625,13 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   if(cfg.decorOnly){const dm=new T.MeshBasicMaterial({map:decalAtlas(T,r,ims,cfg),transparent:true,depthWrite:false,toneMapped:false,color:new T.Color(cfg.tint[0]*.82,cfg.tint[1]*.82,cfg.tint[2]*.82),polygonOffset:true,polygonOffsetFactor:-2});
    r.spatialResources.add(dm);if(r.sightState24&&A.attachSight24)A.attachSight24(dm,r.sightState24);const group=new T.Group();group.name='r204-cave';const geo=decalMesh(T,F,cfg),mesh=new T.Mesh(geo,dm);
    mesh.name='r215-decals';mesh.layers.set(2);mesh.renderOrder=-19;mesh.userData.presentationOnly=true;mesh.userData.r204=true;r.spatialResources.add(geo);group.add(mesh);
-   if(prefs.skeleton!==false){const sg=skeletonMesh(T,ex,cfg);if(sg){let tex=null;r.spatialRoot.traverse(o=>{if(!tex&&/masonry-boundary-bevel-and-fascia/.test(o.name||'')&&o.material?.map)tex=o.material.map;});
+   if(prefs.skeleton===true){const sg=skeletonMesh(T,ex,cfg);if(sg){let tex=null;r.spatialRoot.traverse(o=>{if(!tex&&/masonry-boundary-bevel-and-fascia/.test(o.name||'')&&o.material?.map)tex=o.material.map;});
      let map=null;if(tex){map=tex.clone();map.wrapS=map.wrapT=T.RepeatWrapping;map.needsUpdate=true;r.spatialResources.add(map);}
      const U=r.__r204U||(r.__r204U={r204Hero:{value:new T.Vector4(0,0,0,0)},r204Aspect:{value:1}});
      const sm=new T.MeshBasicMaterial({color:0xffffff,vertexColors:true,map,toneMapped:false});sm.onBeforeCompile=sh=>cutaway(sh,U);sm.customProgramCacheKey=()=>'r218-skeleton'+(map?'-map':'');
      r.spatialResources.add(sm);if(r.sightState24&&A.attachSight24)A.attachSight24(sm,r.sightState24);const sk=new T.Mesh(sg,sm);sk.name='r218-skeleton';sk.layers.set(2);sk.renderOrder=-26;sk.userData.presentationOnly=true;sk.userData.r204=true;r.spatialResources.add(sg);group.add(sk);}}
-   if(prefs.skeleton!==false&&cfg.floorLift>1){let k=0;r.spatialRoot.traverse(o=>{if(/annex-ground/.test(o.name||'')&&o.material?.color&&!o.material.userData?.r218Lift){const c=o.material.color;c.setRGB(c.r*cfg.floorLift,c.g*cfg.floorLift,c.b*cfg.floorLift);/* 1을 넘겨도 된다(MeshBasic·톤매핑 없음 → 그림 자체가 밝아짐) */o.material.userData.r218Lift=true;k++;}});stats.floorLifted=k;}
-   dimRoofs(r);
+   if(prefs.unify!==false&&cfg.floorLift>1){let k=0;r.spatialRoot.traverse(o=>{if(/annex-ground/.test(o.name||'')&&o.material?.color&&!o.material.userData?.r218Lift){const c=o.material.color;c.setRGB(c.r*cfg.floorLift,c.g*cfg.floorLift,c.b*cfg.floorLift);/* 1을 넘겨도 된다(MeshBasic·톤매핑 없음 → 그림 자체가 밝아짐) */o.material.userData.r218Lift=true;k++;}});stats.floorLifted=k;}
+   dimRoofs(r);interiorShell(r);interiorProps(roomOf(frame),cfg);
    r.spatialRoot.add(group);
    r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}
   const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
@@ -652,8 +652,20 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
   r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
+// R220 실내 일관성(사용자 2026-11-02 "보고바탕진행" — R220 측정: 실내 맵 바깥이 물·절벽 같은 야외 그림, 길거리 소품, 방마다 다른 밝기):
+//  ① 실내 지역에서는 야외용 바깥 덮개(r100-hedge-top: 이끼·절벽 그림)와 맵 밖 바닥판(r98-annex-ground-open: 물·절벽 그림)을 숨긴다 —
+//     바깥은 병원(ep1a08~)처럼 어두운 바탕이 되어 '건물 안'으로 읽힌다. 원래 레이어는 기억했다가 실내를 벗어나면 되돌린다(restoreNative).
+const SHELL=/^(r100-hedge-top|r98-annex-ground-open)$/;
+function interiorShell(r){if(prefs.unify===false)return 0;let k=0;r.spatialRoot.traverse(o=>{if(SHELL.test(o.name||'')&&o.userData.r204Mask==null){o.userData.r204Mask=o.layers.mask;o.layers.mask=0;k++;}});if(k){r.__r204Hidden=true;stats.shellHidden=(stats.shellHidden||0)+k;}return k;}
+//  ② 실내에 깔린 지역 공통 소품 중 길거리·야외 그림(가로등·시장 좌판·이끼 바위·죽은 나무·부서진 대문)은 뺀다. 주택(home)·도심(urban, 살인사건 집·아파트) 계열은 지붕 환풍구(r80-058)도 뺀다.
+//     이름 붙은 서사 소품(q.name)·상자·상호작용 물건은 그대로 둔다.
+const OUTDOOR_PROP=/street_lamp|ruined_market|moss_boulder|dead_tree|broken_gate|\/tree-|boulder/i,HOME_EXTRA=/world-r80\/r80-058\./;
+function interiorProps(rm,cfg){if(prefs.unify===false||!rm||!Array.isArray(rm.props)||rm.r220Props)return 0;const before=rm.props.length;
+ rm.props=rm.props.filter(q=>{if(!q||q.name||q.interactive||q.altar||q.chest||/chest|altar|portal|door|note|memory/i.test(String(q.kind||'')+String(q.id||'')))return true;const pth=String(q.path||'');
+  if(OUTDOOR_PROP.test(pth))return false;if((cfg.kind==='home'||cfg.kind==='urban')&&HOME_EXTRA.test(pth))return false;return true;});
+ rm.r220Props=true;const k=before-rm.props.length;stats.propsRemoved=(stats.propsRemoved||0)+k;return k;}
 // R219: 실내에 남은 지붕 덮개(벽 위 평판)는 어둡게 — 벽 덩어리로 읽히게(사용자 "벽지붕 같은 공간 이질감"). 엔진이 덮개를 나중에 다시 만들 수 있어 실내 프레임에서 가끔 다시 본다.
-function dimRoofs(r){if(prefs.skeleton===false)return 0;let k=0;r.spatialRoot.traverse(o=>{if(!/roof/i.test(o.name||''))return;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m?.color&&!m.userData?.r219Dim){m.color.multiplyScalar(.45);m.userData.r219Dim=true;k++;}}});if(k)stats.roofDimmed=(stats.roofDimmed||0)+k;return k;}
+function dimRoofs(r){if(prefs.unify===false)return 0;let k=0;r.spatialRoot.traverse(o=>{if(!/roof/i.test(o.name||''))return;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m?.color&&!m.userData?.r219Dim){m.color.multiplyScalar(.45);m.userData.r219Dim=true;k++;}}});if(k)stats.roofDimmed=(stats.roofDimmed||0)+k;return k;}
 let dimTick=0;
 // 엔진이 매 프레임 visible 을 다시 켜는 메시가 있어(벽 가림·R188) 레이어를 비워 숨긴다(원래 레이어는 기억했다가 되돌린다).
 function hideNative(r){let n=0;r.spatialRoot.traverse(o=>{if(o===r.spatialRoot||o.userData?.r204||o.name==='r204-cave'||o.parent?.name==='r204-cave')return;
@@ -673,7 +685,7 @@ function before(r,frame){try{
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
- if(deco){heroUniform(r,frame);if(!(++dimTick%30))dimRoofs(r);stats.frames++;return;}
+ if(deco){heroUniform(r,frame);if(!(++dimTick%30)){dimRoofs(r);interiorShell(r);}stats.frames++;return;}
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
@@ -682,7 +694,7 @@ const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,fra
 C.render=wrapFn(C.render);
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();
