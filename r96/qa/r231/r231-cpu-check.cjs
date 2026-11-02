@@ -19,6 +19,10 @@ function guideSb(px,py,enemies){const sb={console,Math,JSON,Number,String,Object
  for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
  ok('open side with no route: it steps along a walkable cell path (through the gap), never across the thin wall',st.escapes>=1&&!st.unsealed&&(p.y>10||(p.x>1.5&&p.x<3.6)),{st,p});}
+{const sb=guideSb(16.5,16.5,[]);sb.room.objective={x:5.5,y:5.5};
+ for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
+ const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
+ ok('R232: no live enemies (guide heading to doors/exit) → never pulled toward the room objective',!st.escapes&&!st.unsealed&&p.x===16.5&&p.y===16.5,{st,p});}
 ok('the 2-cell hop checks the straight line, not just the end point',/lineFree\(player,q\)/.test(g));
 // R225 닿음: 얇은 벽 너머는 닿지 않음
 {const sb={console,Math,JSON,Set,Map,WeakMap,Number,String,Object,Array,localStorage:{getItem:()=>null,setItem(){}},window:{},setInterval:()=>0,started:true,loading:false,

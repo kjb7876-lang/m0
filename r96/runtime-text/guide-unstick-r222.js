@@ -60,7 +60,7 @@ function bfs(starts,ok,stop,limit){const prev=new Map(),q=[];for(const s of star
 function escapeStep(){try{const L=room.exploration;if(!L)return null;const [bx,by,BW,BH]=L.bounds||[0,0,160,160];
  const inB=(x,y)=>x>=bx&&y>=by&&x<bx+BW&&y<by+BH;const walk=(x,y,nx,ny,dx,dy)=>inB(nx,ny)&&!blk(nx+.5,ny+.5)&&!blk(x+.5+dx*.5,y+.5+dy*.5);
  const goals=new Set();for(const e of room.enemies||[])if(e&&e.hp>0&&e.spawnState!=='hidden')goals.add(Math.floor(e.x)+','+Math.floor(e.y));
- const gr=(L.worldR74?.rooms||[]).find(q=>q.id===2);if(!goals.size){const o=room.objective||gr;if(o)goals.add(Math.floor(o.x)+','+Math.floor(o.y));}
+ // R232: 적이 없으면 길잡이는 문·출구로 가는 중이다 — 방 목표 쪽으로 끌어당기지 않는다(ep1a09 출구 앞에서 3칸 뒤로 옮겨 버림). 갇힌 주머니 꺼내기(2)만 본다.
  const near=(x,y)=>{for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(goals.has((x+dx)+','+(y+dy)))return true;return false;};
  const s0=[Math.floor(player.x),Math.floor(player.y)],k0=s0+'',back=(r)=>{const path=[];for(let k=r.hit;k&&k!==k0;k=r.prev.get(k))path.unshift(k);return path;};
  // 1) 걸어서(칸 경계 포함) 가장 가까운 적까지 — 그 길 앞쪽 3칸으로
