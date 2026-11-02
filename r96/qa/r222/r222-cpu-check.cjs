@@ -22,7 +22,7 @@ ok('can be switched off',/storyworld\.r222\.upgradesUi/.test(src)&&/s\.on===fals
 
 // 길잡이 멈춤 풀기(guide-unstick-r222.js)
 {const g=C('guide-unstick-r222.js');
- ok('unstick: runtime copy matches; loads right after lag-r217.js; in the public verify list',RT('guide-unstick-r222.js')===g&&idx.indexOf('<script src="./lag-r217.js"></script><script src="./guide-unstick-r222.js"></script>')>0&&/'guide-unstick-r222\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+ ok('unstick: runtime copy matches; loads right after lag-r217.js; in the public verify list',RT('guide-unstick-r222.js')===g&&/<script src="\.\/lag-r217\.js"><\/script>(<script src="\.\/[a-z0-9-]+-r22[5-9]\.js"><\/script>)*<script src="\.\/guide-unstick-r222\.js"><\/script>/.test(idx)&&/'guide-unstick-r222\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
  const mk=(walls,doorsOpen)=>{const opened=new Set(doorsOpen||[]);const door={id:'door-1',x:5,y:3,reach:3};const sb={console,Math,JSON,localStorage:{getItem:()=>null,setItem(){}},window:{},time:0,modal:null,loading:false,guide:true,
    player:{x:5,y:5,hp:10},room:{id:'z',exploration:{worldR74:{doors:[door]}}},route:[],used:[],
    blocked:(x,y)=>walls.some(([x0,y0,x1,y1])=>x>=x0&&x<=x1&&y>=y0&&y<=y1),

@@ -237,6 +237,8 @@ jobs:
         run: node r96/qa/r223/r223-cpu-check.cjs
       - name: R224 interior rooms (rectangular rooms, 1-cell walls, doorways, no door bypass, low walls, furniture) CPU check
         run: node r96/qa/r224/r224-cpu-check.cjs
+      - name: R225 unreachable enemies moved (no soft-lock) + weak skill effects boosted CPU check
+        run: node r96/qa/r225/r225-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check
