@@ -9,11 +9,12 @@
 //  3) 3초: 길을 비워 다시 찾게 한다.
 //  4) 3초: 손 닿는 닫힌 문이 있으면 연다(문은 원래 E 로 여는 것).
 //  5) 6초: 마지막 수단으로 길 앞쪽 2칸 안의 막히지 않은 길점으로 옮긴다(짧은 순간이동, stats.hops 로 센다).
+//     길 자체가 없으면(R231) 영웅 반지름 칸 탐색으로 가장 가까운 적까지의 길 앞쪽 3칸 자리로 옮긴다(stats.escapes).
 // 길잡이의 E 는 열린 문을 닫지 않는다(그 순간만 열린 문을 손 닿는 거리 밖으로 뺀다).
 // 끄기: localStorage['storyworld.r222.guideUnstick']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_GUIDE_UNSTICK_R222__)return;
-const REV='R222-guide-unstick-1',KEY='storyworld.r222.guideUnstick',RAD=.27;
+const REV='R222-guide-unstick-1+R231',KEY='storyworld.r222.guideUnstick',RAD=.27;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={stalls:0,skipped:0,sidesteps:0,replans:0,doors:0,hops:0,closeSkipped:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -46,9 +47,30 @@ function watch(){
    for(const s of [1,-1]){const nx=player.x-dy/l*.3*s,ny=player.y+dx/l*.3*s;if(!blk(nx,ny)){player.x=nx;player.y=ny;stats.sidesteps++;break;}}}}
  if(still>=3&&stage<3){stage=3;if(!openNearDoor()&&R&&R.length){route=[];stats.replans++;}}
  if(still>=6&&stage<4){stage=4;const R2=Array.isArray(route)?route:[];
-  const cand=R2.slice(0,12).find(q=>Math.hypot(q.x-player.x,q.y-player.y)<=2&&Math.hypot(q.x-player.x,q.y-player.y)>.4&&!blk(q.x,q.y));
-  if(cand){player.x=cand.x;player.y=cand.y;stats.hops++;anchor=null;}}
+  const cand=R2.slice(0,12).find(q=>Math.hypot(q.x-player.x,q.y-player.y)<=2&&Math.hypot(q.x-player.x,q.y-player.y)>.4&&!blk(q.x,q.y)&&lineFree(player,q));/* R231: 얇은 벽을 넘어 옮기지 않게 직선 위도 본다 */
+  if(cand){player.x=cand.x;player.y=cand.y;stats.hops++;anchor=null;}
+  else{const q=escapeStep();if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;}}}
 }
+// R231: 길이 아예 없을 때(엔진 findPath 는 칸 중심을 반지름 .29 로만 물어, 영웅(.27)은 들어갈 수 있는 좁은 틈 안쪽 주머니에서는 바깥 길을 0 으로 돌려준다)
+//  영웅 반지름으로 칸 너비 탐색을 해 가장 가까운 살아 있는 적(없으면 방 목표·중앙 전투실)까지 가는 칸 길을 찾고, 그 길 앞쪽 최대 3칸 자리로 옮긴다.
+//  dist01 실플레이(헤드리스): 보스문 남쪽 주머니(12.5,21.6)에서 길 0·목표 없음으로 50분 넘게 멈춤 — 재현됨.
+const lineFree=(a,b)=>{const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.max(2,Math.ceil(d/.08));for(let i=1;i<=n;i++){const t=i/n;if(blk(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t))return false;}return true;};
+function bfs(starts,ok,stop,limit){const prev=new Map(),q=[];for(const s of starts){const k=s+'';if(!prev.has(k)){prev.set(k,null);q.push(s);}}
+ for(let h=0;h<q.length&&h<(limit||40000);h++){const [x,y]=q[h];if(stop&&h>=starts.length&&stop(x,y))return {hit:x+','+y,prev};for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=nx+','+ny;if(prev.has(k)||!ok(x,y,nx,ny,dx,dy))continue;prev.set(k,x+','+y);q.push([nx,ny]);}}return {hit:null,prev};}
+function escapeStep(){try{const L=room.exploration;if(!L)return null;const [bx,by,BW,BH]=L.bounds||[0,0,160,160];
+ const inB=(x,y)=>x>=bx&&y>=by&&x<bx+BW&&y<by+BH;const walk=(x,y,nx,ny,dx,dy)=>inB(nx,ny)&&!blk(nx+.5,ny+.5)&&!blk(x+.5+dx*.5,y+.5+dy*.5);
+ const goals=new Set();for(const e of room.enemies||[])if(e&&e.hp>0&&e.spawnState!=='hidden')goals.add(Math.floor(e.x)+','+Math.floor(e.y));
+ const gr=(L.worldR74?.rooms||[]).find(q=>q.id===2);if(!goals.size){const o=room.objective||gr;if(o)goals.add(Math.floor(o.x)+','+Math.floor(o.y));}
+ const near=(x,y)=>{for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(goals.has((x+dx)+','+(y+dy)))return true;return false;};
+ const s0=[Math.floor(player.x),Math.floor(player.y)],k0=s0+'',back=(r)=>{const path=[];for(let k=r.hit;k&&k!==k0;k=r.prev.get(k))path.unshift(k);return path;};
+ // 1) 걸어서(칸 경계 포함) 가장 가까운 적까지 — 그 길 앞쪽 3칸으로
+ if(goals.size){const r=bfs([s0],walk,near);if(r.hit){const path=back(r);if(path.length){const [cx,cy]=path[Math.min(2,path.length-1)].split(',').map(Number);return {x:cx+.5,y:cy+.5};}}}
+ // 2) 걸어서는 나갈 길이 없음(얇은 벽으로 막힌 주머니에 들어가 버림) → 입구에서 걸어서 닿는 칸 중 가장 가까운 곳으로 꺼낸다. 닫힌 문 둘레는 넘지 않는다.
+ const e=L.entry;if(!e)return null;const ent=bfs([[Math.floor(e.x),Math.floor(e.y)]],walk,null,60000).prev;if(ent.has(k0))return null;
+ const W=window.__STORYWORLD_WORLD_R74__,doors=[...(L.worldR74?.doors||[])].filter(d=>{try{return !W?.isOpen?.(room,d);}catch(_){return true;}});
+ const nearClosed=(x,y)=>doors.some(d=>Math.abs(x+.5-d.x)<(+d.width||1)/2+1.2&&Math.abs(y+.5-d.y)<(+d.depth||1)/2+1.2);
+ const r=bfs([s0],(x,y,nx,ny)=>inB(nx,ny)&&!nearClosed(nx,ny)&&Math.hypot(nx-s0[0],ny-s0[1])<8,(x,y)=>ent.has(x+','+y));if(!r.hit)return null;
+ const [cx,cy]=r.hit.split(',').map(Number);stats.unsealed=(stats.unsealed||0)+1;return {x:cx+.5,y:cy+.5};}catch(e){fail(e);return null;}}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!modal&&!loading)watch();}catch(e){fail(e);}return r;};}
 window.__STORYWORLD_GUIDE_UNSTICK_R222__=Object.freeze({revision:REV,inspect:()=>({revision:REV,on,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();
