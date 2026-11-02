@@ -32,7 +32,7 @@ if(typeof interact==='function'){const base=interact;interact=function(...a){
  try{return base.apply(this,a);}finally{for(const [d,r] of hidden)d.reach=r;if(backs)try{room.props.push(...backs.filter(q=>!room.props.includes(q)));}catch(e){fail(e);}}};}
 let anchor=null,stage=0,walkTried=null;
 // 제자리에서 싸우는 중(3칸 안에 살아 있는 적)이면 건드리지 않는다. room.engaged 는 '집결한 생존 적' 같은 필드 전투 내내 켜져 있어 기준으로 쓰지 않는다(dist01 실측).
-const fighting=()=>{try{return (room.enemies||[]).some(e=>e&&e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<3);}catch(_){return false;}};
+const fighting=()=>{try{return (room.enemies||[]).some(e=>e&&e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<3&&(typeof clearLine!=='function'||clearLine(player,e)));}catch(_){return false;}};/* R235: 벽 너머 적은 싸움으로 치지 않는다 */
 function openNearDoor(){const w=W();if(!w)return false;
  const near=doorsHere().filter(d=>!w.isOpen(room,d)).map(d=>({d,dist:Math.hypot(player.x-d.x,player.y-d.y)})).filter(o=>o.dist<=(o.d.reach||3)).sort((a,b)=>a.dist-b.dist);
  for(const {d} of near){const tg={kind:'door',id:d.id};if(w.canUse(tg)&&w.use(tg)){stats.doors++;return true;}}return false;}
@@ -54,7 +54,8 @@ function watch(){
    //  같은 자리에서 한 번 걸어 보고도 못 움직였으면 그때 3칸 옮긴다.
    const here=Math.floor(player.x)+','+Math.floor(player.y);
    if(q&&q.path&&q.path.length>1&&walkTried!==here){walkTried=here;route=q.path.slice(0,40);stats.walkRoutes=(stats.walkRoutes||0)+1;anchor=null;}
-   else if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;walkTried=null;}}}
+   else if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;walkTried=null;}
+   else anchor=null;/* R235: 아무것도 못 했으면 6초 뒤 다시 본다(한 번 실패하고 영영 멈춰 있던 일) */}}
 }
 // R231: 길이 아예 없을 때(엔진 findPath 는 칸 중심을 반지름 .29 로만 물어, 영웅(.27)은 들어갈 수 있는 좁은 틈 안쪽 주머니에서는 바깥 길을 0 으로 돌려준다)
 //  영웅 반지름으로 칸 너비 탐색을 해 가장 가까운 살아 있는 적(없으면 방 목표·중앙 전투실)까지 가는 칸 길을 찾고, 그 길 앞쪽 최대 3칸 자리로 옮긴다.
@@ -72,9 +73,8 @@ function escapeStep(){try{const L=room.exploration;if(!L)return null;const [bx,b
  if(goals.size){const r=bfs([s0],walk,near);if(r.hit){const path=back(r);if(path.length){const [cx,cy]=path[Math.min(2,path.length-1)].split(',').map(Number);return {x:cx+.5,y:cy+.5,path:path.map(k=>{const [a,b]=k.split(',').map(Number);return {x:a+.5,y:b+.5};})};}}}
  // 2) 걸어서는 나갈 길이 없음(얇은 벽으로 막힌 주머니에 들어가 버림) → 입구에서 걸어서 닿는 칸 중 가장 가까운 곳으로 꺼낸다. 닫힌 문 둘레는 넘지 않는다.
  const e=L.entry;if(!e)return null;const ent=bfs([[Math.floor(e.x),Math.floor(e.y)]],walk,null,60000).prev;if(ent.has(k0))return null;
- const W=window.__STORYWORLD_WORLD_R74__,doors=[...(L.worldR74?.doors||[])].filter(d=>{try{return !W?.isOpen?.(room,d);}catch(_){return true;}});
- const nearClosed=(x,y)=>doors.some(d=>Math.abs(x+.5-d.x)<(+d.width||1)/2+1.2&&Math.abs(y+.5-d.y)<(+d.depth||1)/2+1.2);
- const r=bfs([s0],(x,y,nx,ny)=>inB(nx,ny)&&!nearClosed(nx,ny)&&Math.hypot(nx-s0[0],ny-s0[1])<8,(x,y)=>ent.has(x+','+y));if(!r.hit)return null;
+ // R235: 닫힌 문 너머(입구에서 못 닿는 쪽)에 들어가 버렸으면 입구 쪽으로 나오는 것이므로 닫힌 문을 넘어도 된다(dist02 실플레이: (22.5,4.3) 47분). 거리 20칸까지.
+ const r=bfs([s0],(x,y,nx,ny)=>inB(nx,ny)&&Math.hypot(nx-s0[0],ny-s0[1])<20,(x,y)=>ent.has(x+','+y));if(!r.hit)return null;
  const [cx,cy]=r.hit.split(',').map(Number);stats.unsealed=(stats.unsealed||0)+1;return {x:cx+.5,y:cy+.5};}catch(e){fail(e);return null;}}
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(!modal&&!loading)watch();}catch(e){fail(e);}return r;};}
 window.__STORYWORLD_GUIDE_UNSTICK_R222__=Object.freeze({revision:REV,inspect:()=>({revision:REV,on,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
