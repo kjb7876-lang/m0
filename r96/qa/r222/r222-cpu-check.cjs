@@ -19,5 +19,29 @@ ok('plain descriptions are left alone',U.friendly('단계마다 위력 +1%.',2)=
 ok('calculator refuses anything but numbers and + - × / ( )',(()=>{try{U.calc('1+alert(1)');return false;}catch(_){return true;}})()&&U.calc('2×(3+1)/4')===2);
 ok('no eval / Function in the overlay',!/\beval\s*\(|new\s+Function\s*\(/.test(src));
 ok('can be switched off',/storyworld\.r222\.upgradesUi/.test(src)&&/s\.on===false/.test(src));
+
+// 길잡이 멈춤 풀기(guide-unstick-r222.js)
+{const g=C('guide-unstick-r222.js');
+ ok('unstick: runtime copy matches; loads right after lag-r217.js; in the public verify list',RT('guide-unstick-r222.js')===g&&idx.indexOf('<script src="./lag-r217.js"></script><script src="./guide-unstick-r222.js"></script>')>0&&/'guide-unstick-r222\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')));
+ const mk=(walls,doorsOpen)=>{const opened=new Set(doorsOpen||[]);const door={id:'door-1',x:5,y:3,reach:3};const sb={console,Math,JSON,localStorage:{getItem:()=>null,setItem(){}},window:{},time:0,modal:null,loading:false,guide:true,
+   player:{x:5,y:5,hp:10},room:{id:'z',exploration:{worldR74:{doors:[door]}}},route:[],used:[],
+   blocked:(x,y)=>walls.some(([x0,y0,x1,y1])=>x>=x0&&x<=x1&&y>=y0&&y<=y1),
+   interact(){sb.used.push('interact');}};
+  sb.window.__STORYWORLD_WORLD_R74__={isOpen:(r,d)=>opened.has(d.id),canUse:()=>true,use:t=>{opened.has(t.id)?opened.delete(t.id):opened.add(t.id);sb.used.push('use:'+t.id);return true;}};
+  vm.createContext(sb);vm.runInContext('function tick(dt){time+=dt;}',sb);vm.runInContext(g,sb);return {sb,opened,door};};
+ const run=(sb,sec)=>{for(let i=0;i<sec*30;i++)vm.runInContext('tick(1/30)',sb);};
+ // 1) 막힌 앞 길점 건너뛰기
+ {const {sb}=mk([[3.6,4.6,4.0,5.4]]);sb.route=[{x:3.9,y:5},{x:3.5,y:6},{x:3,y:7}];run(sb,.8);
+  ok('unstick: after 0.6s still, leading route points blocked at hero radius are skipped',sb.route.length===2&&sb.route[0].x===3.5,sb.route);}
+ // 2) 옆걸음
+ {const {sb}=mk([[3.0,4.0,4.6,6.0]]);sb.route=[{x:3,y:5},{x:2,y:5}];run(sb,1.7);const I=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats;
+  ok('unstick: after 1.5s a sidestep (0.3 cell, perpendicular, unblocked side) is tried',I.sidesteps===1&&Math.abs(sb.player.x-5)<1e-9&&Math.abs(Math.abs(sb.player.y-5)-.3)<1e-9,{I,p:sb.player});}
+ // 3) 닫힌 문 열기
+ {const {sb,opened}=mk([[0,0,10,4.6]]);sb.route=[];run(sb,3.2);ok('unstick: after 3s a closed door within reach is opened (doors open with E anyway)',opened.has('door-1'),[...opened]);}
+ // 4) 길잡이 E 는 열린 문을 닫지 않음
+ {const {sb,opened,door}=mk([],['door-1']);vm.runInContext('interact()',sb);ok('unstick: the guide E press never closes an open door (reach restored after)',opened.has('door-1')&&door.reach===3&&sb.used.includes('interact'));}
+ // 5) 손으로 할 때는 그대로
+ {const {sb}=mk([[3.0,4.0,4.6,6.0]]);sb.guide=false;sb.route=[{x:3,y:5}];run(sb,7);ok('unstick: nothing happens when the guide is off',sb.player.x===5&&sb.player.y===5&&sb.route.length===1);}
+ ok('unstick: can be switched off',/storyworld\.r222\.guideUnstick/.test(g));}
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`${checks.length-fail.length}/${checks.length}`);process.exit(fail.length?1:0);

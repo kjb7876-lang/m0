@@ -21108,6 +21108,11 @@
       "sha256": "9f702f785df0f6bcb120c2a02bf64f39f3b7e00bd3727e10d3fa785c4d13c646"
     },
     {
+      "path": "guide-unstick-r222.js",
+      "bytes": 4695,
+      "sha256": "b89b879c2e3aa07f606217a068816cd3244cb5fb5568275cad0dbecd0bee2696"
+    },
+    {
       "path": "hero-fx-r102.js",
       "bytes": 52052,
       "sha256": "758d0792086e1148a9aa945021a66759400859ae30f62f6a0f9ab61137ba6b58"
@@ -21164,8 +21169,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6565307,
-      "sha256": "789f33f16ebda4214cdd49dd59847f7989955084840ba56487bee093564363d7"
+      "bytes": 6565354,
+      "sha256": "6ba2f42e48c0cceb524f56e7fd63abe179cc40b8d495ab3cc41b6331402a4611"
     },
     {
       "path": "intro-r140.js",
@@ -21638,9 +21643,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4327,
-  "totalBytes": 842864473,
-  "webHTMLSha256": "789f33f16ebda4214cdd49dd59847f7989955084840ba56487bee093564363d7",
+  "fileCount": 4328,
+  "totalBytes": 842869215,
+  "webHTMLSha256": "6ba2f42e48c0cceb524f56e7fd63abe179cc40b8d495ab3cc41b6331402a4611",
   "largest": [
     {
       "path": "index.html",
