@@ -26,7 +26,7 @@ function guideSb(px,py,enemies){const sb={console,Math,JSON,Number,String,Object
 {const sb=guideSb(16.5,16.5,[]);sb.room.objective={x:5.5,y:5.5};
  for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
- ok('R232: no live enemies (guide heading to doors/exit) → never pulled toward the room objective',!st.escapes&&!st.unsealed&&p.x===16.5&&p.y===16.5,{st,p});}
+ ok('R232/R236: no live enemies → never teleported toward the room objective; only a walkable route to it is offered',!st.escapes&&!st.unsealed&&st.walkRoutes>=1&&Math.hypot(p.x-16.5,p.y-16.5)<1.5,{st,p});}
 {const sb=guideSb(16.5,12.5,[{hp:5,x:16.5,y:15.2,spawnState:'active'}]);sb.clearLine=(a,b)=>!(Math.min(a.y,b.y)<14&&Math.max(a.y,b.y)>14);
  for(let i=0;i<400;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
