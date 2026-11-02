@@ -231,6 +231,8 @@ jobs:
         run: node r96/qa/r220/r220-cpu-check.cjs
       - name: R221 enrage field overlap + WebGL2 missing notice CPU check
         run: node r96/qa/r221/r221-cpu-check.cjs
+      - name: R222 skill-up window (reasons on disabled buttons, buyable highlight, folded help, formula to numbers) CPU check
+        run: node r96/qa/r222/r222-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check

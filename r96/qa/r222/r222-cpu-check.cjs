@@ -1,0 +1,23 @@
+// R222 CPU check: 스킬업(P) 창 — 막힌 단추 이유(최대·잠김·부족), 살 수 있는 단추 강조, 설명 접기, 수식 → 지금·다음 수치.
+const fs=require('fs'),path=require('path'),vm=require('vm');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
+const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
+const src=C('ui-upgrades-r222.js'),idx=RT('index.html'),pos=f=>idx.indexOf('./'+f);
+ok('runtime copy matches; loads right after play-r115.js (the skill book it decorates)',RT('ui-upgrades-r222.js')===src&&pos('ui-upgrades-r222.js')>pos('play-r115.js')&&pos('play-r115.js')>0&&idx.indexOf('<script src="./play-r115.js"></script><script src="./ui-upgrades-r222.js"></script>')>0);
+ok('in the public verify list and the CI workflow',/'ui-upgrades-r222\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8'))&&/qa\/r222\/r222-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+const sb={window:{},localStorage:{getItem:()=>null},document:{readyState:'complete',getElementById:()=>null,head:{appendChild(){}},createElement:()=>({})},MutationObserver:class{observe(){}},Promise,console,Number,Math,JSON,String,player:{points:1}};
+vm.createContext(sb);vm.runInContext(src,sb);const U=sb.window.__STORYWORLD_UPGRADES_UI_R222__;
+const card=t=>({innerText:t});
+ok('maxed card (6 / 6) reads as max, not "next 1 point"',U.reasonOf(card('단단한 자아 6 / 6최대 체력 777 유지. 강화 비용 1점'),1).kind==='max');
+const lk=U.reasonOf(card('Z · 월섬 회천 0단계 / 7발동 0% → 7% · 기본 공격 때 이 기술이 확률로 저절로 나갑니다. 사몽 루트를 시작하면 열립니다. 강화 비용 1점 (k단계 k²점)'),1);
+ok('locked card shows its unlock condition',lk.kind==='lock'&&/사몽 루트를 시작하면 열립니다/.test(lk.why),lk);
+ok('not enough points (cost 4, have 1) reads as short',U.reasonOf(card('끝없는 의지 1 / ∞ 단계마다 위력 +2%. 강화 비용 4점'),4).kind==='short');
+ok('attack-interval formula → current and next percent',U.friendly('공격 간격 × [0.28 + 0.72 / (1 + 0.04 × 단계)].',0)==='공격 간격 100% → 다음 97.2%');
+ok('cooldown formula at level 3',U.friendly('기술·블링크·EGO·사몽 대기시간 × [0.25 + 0.75 / (1 + 0.035 × 단계)].',3)==='기술·블링크·EGO·사몽 대기시간 92.9% → 다음 90.8%');
+ok('damage-reduction formula',U.friendly('추가 피해감소 30 × 단계 / (단계 + 40)%.',0)==='추가 피해감소 0% → 다음 0.7%');
+ok('plain descriptions are left alone',U.friendly('단계마다 위력 +1%.',2)===null);
+ok('calculator refuses anything but numbers and + - × / ( )',(()=>{try{U.calc('1+alert(1)');return false;}catch(_){return true;}})()&&U.calc('2×(3+1)/4')===2);
+ok('no eval / Function in the overlay',!/\beval\s*\(|new\s+Function\s*\(/.test(src));
+ok('can be switched off',/storyworld\.r222\.upgradesUi/.test(src)&&/s\.on===false/.test(src));
+const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
+console.log(`${checks.length-fail.length}/${checks.length}`);process.exit(fail.length?1:0);
