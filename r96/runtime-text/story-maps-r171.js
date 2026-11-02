@@ -254,6 +254,8 @@
   // 병동 미로(R81)가 아닌 경로(예전 R74 배치 등)로 만들어진 지역은 건드리지 않는다.
   if(!base||base.type!=='r81-story-ward-maze'||!base.worldWardR81){stats.fallback++;return null;}
   let L=null;try{L=build(id,base,profiles()[id]);window.__STORYWORLD_ENVIRONMENT_R81__?.surface?.(L,id);stats.built++;}catch(e){fail(e);L=null;}
+  // R219: 지역별 지형 손질(R204 통로 넓히기·R219 실내 넓히기)을 여기서 바로 입힌다 — 엔진 바닥·벽 덩어리(loadDescriptor 가 이 layout 을 읽음)와 판정이 같은 지도를 보게.
+  if(L)try{const H=window.__STORYWORLD_LAYOUT_HOOK_R204__?.(id,L);if(H)L=H;}catch(e){fail(e);}
   cache.set(id,L);while(cache.size>12)cache.delete(cache.keys().next().value);return L;}
  function installExploration(){const EX=window.__STORYWORLD_EXPLORATION__;if(!EX||EX.storyMapR171||typeof EX.layout!=='function')return!!EX?.storyMapR171;EX0=EX;
   const own={};for(const k of Object.keys(EX))own[k]=EX[k];

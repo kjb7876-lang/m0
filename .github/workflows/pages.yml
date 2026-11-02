@@ -225,6 +225,8 @@ jobs:
         run: node r96/qa/r217/r217-cpu-check.cjs
       - name: R218 interior building skeleton CPU check
         run: node r96/qa/r218/r218-cpu-check.cjs
+      - name: R219 interior inflate (more floor, wall seams, door-safe, outer wall, regenerated walls/floorRects) CPU check
+        run: node r96/qa/r219/r219-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check

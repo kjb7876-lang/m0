@@ -32,7 +32,7 @@ const results=[];const check=(name,ok,detail='')=>{results.push({name,ok:!!ok,de
      doors:L.worldR74.doors.map(d=>({id:d.id,x:d.x,y:d.y,width:d.width,depth:d.depth,axis:d.axis})),bossDoorId:L.bossDoorId,entry:L.entry,gather:g.gatherAnchor,boss:g.bossAnchor,next:g.portalNext,bossBounds:g.bossBounds,
      closet:L.nodes[S.closet]?{x:L.nodes[S.closet].x,y:L.nodes[S.closet].y}:null,spawnExclude:L.spawnExclude,
      spots:[...g.routeSpawns['1'],...g.routeSpawns['2'],...g.rallySpots,...g.fieldAnchors,...g.bossPoints],floor:[...cells],
-     again:JSON.stringify(M.build(id,null,P[id]).floorCells)===JSON.stringify(L.floorCells)});}
+     again:JSON.stringify(M.build(id,null,P[id]).floorCells)===JSON.stringify((L.r219Source||L.r204Source||L).floorCells)/* R219: layoutFor 가 R204·R219 손질을 입힌 뒤에는 손질 전 원본과 비교 */});}
    out.push(row);}return out;})()`);
  const NATIVE=['hando01','hando02','hando03','kair02','kair03','last301','cult04'];
  const maps=rows.filter(r=>r.type==='r171-story-narrative-map');
