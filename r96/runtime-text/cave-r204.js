@@ -100,8 +100,37 @@ const ZONES={
  kair04:{seed:0x5d5040,tint:[.88,.84,.82],floorBGain:1.03,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/110,floorK:1.1,topK:2.0,
   decalMix:{near:[[5,3],[6,3],[0,2],[1,.5]],open:[[0,3],[5,3],[6,2],[7,2],[8,.6],[1,.3]]},decalDensity:12,
   tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/vault.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]},
-  uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
-const R=4,M=8;                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
+  uprights:[['garden_low_border_01',.3]],uprightRate:1/170,uprightEdge:[-1.0,-.35]},
+ // R214 — 큰 레이아웃(바닥 8022칸) 돌 계열 지역. 건축물이라 불룩 작게, 넓히기 없음.
+ // 타락천사 기사(4부, coast): 바닷가 성채 — 포장 돌·모래, 바위 둔덕
+ last301:{seed:0x5d3010,tint:[.88,.88,.9],floorBGain:1.03,hiTop:1.6,loTop:.5,bulge:.8,widen:false,web:false,pillars:false,boulders:1/140,floorK:1.05,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[0,2],[8,.6]],open:[[0,3],[5,3],[6,2],[7,2],[8,.5]]},decalDensity:13,
+  tex:{floorA:['assets/r99/outdoor/ground-paving.webp',0],floorB:['assets/r118/tiles/sandgold.webp',0],rock:['assets/r99/outdoor/surround-cliff.webp',-1],face:['assets/r118/tiles/castle.webp',1]}},
+ // 성 안에 소환된 의목사(hando, stone): 성 안뜰 — 성 돌바닥, 잔해 윗면
+ hando01:{seed:0x5d6010,tint:[.9,.86,.84],floorBGain:1.03,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,3],[6,2],[7,2],[8,.6]]},decalDensity:13,
+  tex:{floorA:['assets/r118/tiles/castle.webp',0],floorB:['assets/r118/tiles/garden.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}},
+ // 두 주인의 각성(hando, stone): 같은 성 — 금고 돌·성 돌
+ hando02:{seed:0x5d6020,tint:[.88,.84,.86],floorBGain:1.03,hiTop:1.75,loTop:.55,bulge:.7,widen:false,web:false,pillars:false,boulders:1/130,floorK:1.1,topK:2.0,
+  decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,4],[5,3],[6,2],[7,2],[8,.6]]},decalDensity:13,
+  tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
+const R=4,M=8;
+// R215 디테일 전용(decorOnly) — 사용자 "모든맵개선" + 앞서 "현대 건물 안(학교·호텔)은 직각 타일 허용". 실내·현대·기계 계열은 원래 벽·바닥·충돌을 그대로 두고
+//  같은 화풍의 바닥 장식(균열·잔해·얼룩·쇠사슬)만 덧입힌다. 지형을 숨기지 않고, 이동 판정·길찾기도 바꾸지 않는다.
+const DECO=(seed,kind)=>{const K={
+  clinic:{tint:[.82,.8,.8],decalMix:{near:[[0,2],[5,2],[6,2],[10,1]],open:[[0,3],[5,2],[6,1],[7,1],[10,1.2]]},decalDensity:18},
+  urban:{tint:[.84,.82,.8],decalMix:{near:[[0,2],[5,2],[6,2],[11,1]],open:[[0,3],[5,2],[6,2],[7,1],[10,1]]},decalDensity:18},
+  home:{tint:[.86,.82,.78],decalMix:{near:[[0,2],[5,1],[6,1]],open:[[0,2],[5,1],[7,1],[10,.5]]},decalDensity:26},
+  forge:{tint:[.86,.8,.74],decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,3],[5,2],[7,2],[8,1]]},decalDensity:16},
+  machine:{tint:[.7,.74,.82],decalMix:{near:[[0,2],[7,1]],open:[[0,2],[7,1]]},decalDensity:34}}[kind];
+ return {seed,decorOnly:true,kind,bulge:0,widen:false,web:false,pillars:false,...K};};
+Object.assign(ZONES,{
+ ep1a08:DECO(0x5e1a08,'clinic'),ep1a09:DECO(0x5e1a09,'clinic'),ep1a10:DECO(0x5e1a10,'urban'),ep1a11:DECO(0x5e1a11,'clinic'),ep1a09b:DECO(0x5e1a9b,'urban'),
+ ep1b02:DECO(0x5e1b02,'home'),ep1b03:DECO(0x5e1b03,'home'),ep1b04:DECO(0x5e1b04,'home'),ep1b05:DECO(0x5e1b05,'urban'),ep1b06:DECO(0x5e1b06,'forge'),ep1b07:DECO(0x5e1b07,'forge'),ep1b09:DECO(0x5e1b09,'machine'),
+ u201:DECO(0x5e2201,'machine'),u202:DECO(0x5e2202,'machine'),u203:DECO(0x5e2203,'machine'),u204:DECO(0x5e2204,'machine'),u205:DECO(0x5e2205,'machine'),u206:DECO(0x5e2206,'machine'),
+ hando03:DECO(0x5e6030,'machine'),murder01:DECO(0x5e7001,'urban'),murder02:DECO(0x5e7002,'home'),murder03:DECO(0x5e7003,'urban'),murder04:DECO(0x5e7004,'home'),
+ cult01:DECO(0x5e8001,'machine'),cult02:DECO(0x5e8002,'machine'),cult03:DECO(0x5e8003,'machine'),cult04:DECO(0x5e8004,'machine'),cult05:DECO(0x5e8005,'urban'),cult06:DECO(0x5e8006,'machine')});
+                       // 칸당 거리장 점 수, 맵 바깥 여백(칸)
 const TEX={floorA:['assets/r118/tiles/cave.webp',0],floorB:['assets/r118/tiles/sandblack.webp',0],rock:['assets/r99/outdoor/ground-cliff.webp',0],
  face:['assets/r99/outdoor/ground-moss.webp',1],crack:['assets/r106/fx/crack.webp',-1],bones:['assets/r138/props/bones.webp',-1],root:['assets/r138/props/root.webp',-1]};
 const solo=()=>{const c=window.__STORYWORLD_COOP_SIM_R62__;return !c?.mode||c.mode()==='off';};
@@ -279,6 +308,7 @@ if(typeof blocked==='function'){const base=blocked;
  blocked=function(x,y,rad=.27,where=(typeof room!=='undefined'?room:null)){if(base.call(this,x,y,rad,where))return true;
   /* R208: 바위 언덕 판정은 몸(반지름 .2 초과: 영웅·몹·길잡이 .29)에만 — 투사체(.08·.18)는 원래처럼 terrainContact153 기준(렌더 시점에 따라 결과가 달라지던 전수 검사 projectile) */
   if(!(rad>.2))return false;
+  if(ZONES[where?.id]?.decorOnly)return false;/* R215: 디테일 전용 지역은 판정을 바꾸지 않는다 */
   try{if(prefs.on&&where?.exploration){const F=cache.get(where.exploration);if(F&&roomOn(where)){const fv=at(F,F.f,x,y);
    // 길찾기(findPath·R100·R101)는 칸 중심을 반지름 .29 로 묻고 대각선 모서리 깎기는 보지 않는다 → 새 바위 둘레에선 .32칸 여유를 더해 경로가 바위 가장자리를 스치지 않게 한다(실제 이동 .27 은 그대로).
    const need=rad>=.285&&rad<=.3?rad+.32:rad;if(fv<need&&at(F,F.raw,x,y)-fv>.02){stats.blocks++;return true;}}}}catch(e){fail(e);}return false;};}
@@ -526,6 +556,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   for(const m of Object.values(mats)){r.spatialResources.add(m);if(r.sightState24&&A.attachSight24)A.attachSight24(m,r.sightState24);}
   const group=new T.Group();group.name='r204-cave';
   const add=(geo,mat,name,order)=>{const mesh=new T.Mesh(geo,mat);mesh.name=name;mesh.layers.set(2);mesh.renderOrder=order;mesh.userData.presentationOnly=true;mesh.userData.r204=true;mesh.frustumCulled=true;r.spatialResources.add(geo);group.add(mesh);return mesh;};
+  if(cfg.decorOnly){add(decalMesh(T,F,cfg),mats.decal,'r215-decals',-19);r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}/* R215: 바닥 장식만 */
   // 앞에서 뒤로 그린다: 대지·절벽·기둥이 먼저 깊이를 채우면 그 뒤 바닥 조각은 깊이 검사에서 일찍 버려진다(덧그리기 감소)
   add(faceMesh(T,F,cfg),mats.face,'r204-cliff-faces',-30);if(cfg.pillars!==false||cfg.boulders)add(pillarMesh(T,F,cfg),mats.pillar,'r204-stalagmites',-29);add(topMesh(T,F,cfg),mats.top,'r204-plateau',-28);
   add(groundMesh(T,F),mats.ground,'r204-ground',-20);add(decalMesh(T,F,cfg),mats.decal,'r204-decals',-19);
@@ -549,10 +580,12 @@ let sightTick=0;function spriteSight(st){try{const S=window.__STORYWORLD_SIGHT24
 function before(r,frame){try{
  const st=r.__r204;if(!eligible(r,frame)){if(st?.group)st.group.visible=false;if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그룹이 없어도(빌드 실패·대기 중 지역 이탈) 가린 원래 지형을 되돌린다 — Codex #132 */
  // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
- const veil=()=>{hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
+ const deco=!!ZONES[frame.zone]?.decorOnly;/* R215: 디테일 전용 — 원래 지형을 가리지 않는다 */
+ const veil=()=>{if(deco)return;hideNative(r);if(Array.isArray(frame.commands))frame.commands=frame.commands.filter(c=>c?.owner?.kind!=='ground');stats.veiled=(stats.veiled||0)+1;};
  if(!st||st.gen!==r.sceneGeneration||st.zone!==frame.zone){build(r,frame);veil();return;}
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
+ if(deco){stats.frames++;return;}
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
