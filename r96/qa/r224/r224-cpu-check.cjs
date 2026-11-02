@@ -36,5 +36,6 @@ const F2=rm.props.filter(q=>q.r224Furniture);
 ok('furniture: pieces are placed (art from world-r80 clinic set), non-blocking',n>0&&F2.every(q=>q.solid===false&&/^r80-1(4[1-9]|5[0-2])$/.test(q.r80Art)),F2.slice(0,3));
 ok('furniture: never within reach of a door, the entry or the objective',F2.every(q=>Math.hypot(q.x-25,q.y-12)>=3.2&&Math.hypot(q.x-5.5,q.y-5.5)>=3&&Math.hypot(q.x-8,q.y-7)>=3));
 ok('furniture: only once per room object',API.furnish(rm,{kind:'clinic',seed:7},'ep1a09')===0);
+ok('room labels: entering another room in an interior shows its name once (not in combat, not the first room on arrival)',/function roomLabelTick\(\)/.test(src)&&/if\(first\|\|room\.engaged\)return;/.test(src)&&/k===lastRoomKey\)return/.test(src));
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+String(JSON.stringify(c.detail)).slice(0,400)));
 console.log(`${checks.length-fail.length}/${checks.length}`);process.exit(fail.length?1:0);

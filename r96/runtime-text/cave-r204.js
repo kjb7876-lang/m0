@@ -724,6 +724,14 @@ function before(r,frame){try{
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
+// R224 방 이름(이터널리턴식 구역 표시): 실내에서 다른 방(r224Rooms)에 들어서면 그 방 이름·용도를 잠깐 띄운다. 같은 방은 다시 띄우지 않고, 전투 중(room.engaged)·모달·서사 장면에서는 쉰다.
+let lastRoomKey=null;
+function roomLabelTick(){try{if(prefs.rooms===false||typeof room!=='object'||!room||typeof player!=='object'||!player||modal||loading||(typeof storyScene!=='undefined'&&storyScene))return;
+ const L=room.exploration,R=L?.r224Rooms;if(!R?.length||!ZONES[room.id]?.decorOnly){lastRoomKey=null;return;}
+ const x=player.x,y=player.y,r=R.find(q=>x>=q.x0&&x<q.x1&&y>=q.y0&&y<q.y1);if(!r)return;const k=room.id+':'+r.id;if(k===lastRoomKey)return;const first=lastRoomKey==null||!lastRoomKey.startsWith(room.id+':');lastRoomKey=k;if(first||room.engaged)return;
+ const info=(L.worldR74?.rooms||[]).find(q=>q.id===r.id);const name=info?.name||info?.purpose;if(!name||typeof toast!=='function')return;
+ toast('◇ '+name+(info.purpose&&info.purpose!==name?' · '+info.purpose:''),1.6);stats.roomLabels=(stats.roomLabels||0)+1;}catch(e){fail(e);}}
+setInterval(roomLabelTick,400);
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
 const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r204=true;return w;};
 C.render=wrapFn(C.render);
