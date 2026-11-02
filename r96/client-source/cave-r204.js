@@ -15,7 +15,7 @@
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
 const REV='R220-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;}catch(_){}
+let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true,rooms:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -306,17 +306,32 @@ function inflate(ex,opt={}){const D=opt.depth||8,MARGIN=opt.margin??1;const [bx0
   const d=m.seen.get(b);return d!=null&&d<=lim;};
  const close=(a,b)=>{if(a===b)return true;const [ax,ay]=a.split(',').map(Number),[bx,by]=b.split(',').map(Number);const e=Math.hypot(ax-bx,ay-by);return pathWithin(a,b,Math.ceil(1.5*e+4));};
  // 3) 이음매: 이웃 칸의 src 가 길로 먼 곳이면 그 칸은 벽으로 남김
- const add=new Set();for(const [k,d] of dep){if(d===0)continue;const [x,y]=k.split(',').map(Number),s=src.get(k);let seam=false;
+ const add=new Set();
+ // R224 방형식(사용자 영상 "실내맵은 이런 느낌 방형식으로", 디아블로·이터널리턴 참고): BFS 대신 방(worldR74.rooms) 직사각형을 한 칸씩 키운다.
+ //  · 다른 방과는 1칸 틈(= 벽)을 남기고, 원래 통로가 그 틈을 지나는 곳은 그대로 바닥 → 출입구.
+ //  · 문·입구 둘레(nearDoor)와 외벽 여백은 넘지 않고, 원래 바닥은 그 방에서 길로 가까운 것만 먹는다(닫힌 문 우회 방지 — R219 와 같은 기준).
+ let roomRects=null;
+ if(opt.rooms){const RM=(ex.worldR74?.rooms||[]).filter(r=>Number.isFinite(r.x)&&Number.isFinite(r.y)&&Number(r.width)>=3&&Number(r.depth)>=3).map(r=>{const x0=Math.floor(r.x-r.width/2),y0=Math.floor(r.y-r.depth/2);return {x0,y0,x1:x0+Math.round(r.width),y1:y0+Math.round(r.depth),c:key(Math.floor(r.x),Math.floor(r.y)),id:r.id};}).filter(r=>S.has(r.c));
+  const G=opt.grow||10,gap=1;const free=(x,y,me)=>x>=MARGIN&&y>=MARGIN&&x<=W-1-MARGIN&&y<=H-1-MARGIN&&!nearDoor(x,y)&&RM.every(o=>o===me||x<o.x0-gap||x>=o.x1+gap||y<o.y0-gap||y>=o.y1+gap)&&(!S.has(key(x,y))||close(me.c,key(x,y)));
+  for(let it=0;it<G;it++){let grew=false;for(const r of RM){
+   const tryStrip=(cells,apply)=>{if(cells.every(([x,y])=>free(x,y,r))){apply();grew=true;}};
+   tryStrip(Array.from({length:r.x1-r.x0},(_,i)=>[r.x0+i,r.y0-1]),()=>r.y0--);
+   tryStrip(Array.from({length:r.x1-r.x0},(_,i)=>[r.x0+i,r.y1]),()=>r.y1++);
+   tryStrip(Array.from({length:r.y1-r.y0},(_,i)=>[r.x0-1,r.y0+i]),()=>r.x0--);
+   tryStrip(Array.from({length:r.y1-r.y0},(_,i)=>[r.x1,r.y0+i]),()=>r.x1++);}if(!grew)break;}
+  for(const r of RM)for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const k=key(x,y);if(!S.has(k))add.add(k);}
+  roomRects=RM.map(r=>({id:r.id,x0:r.x0,y0:r.y0,x1:r.x1,y1:r.y1}));stats.roomsR224=(stats.roomsR224||0)+1;}
+ else for(const [k,d] of dep){if(d===0)continue;const [x,y]=k.split(',').map(Number),s=src.get(k);let seam=false;
   for(let dy=-1;dy<=1&&!seam;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nk=key(x+dx,y+dy),t=src.get(nk);if(t&&!close(s,t)){seam=true;break;}}
   if(!seam)add.add(k);}
  // 이음매가 대각선으로만 이어지면 새 바닥끼리 대각선으로 붙어 벽이 끊긴다 → 원래 바닥(src)이 서로 먼 두 새 칸이 대각선이면 둘 다 뺀다
- for(const k of [...add]){const [x,y]=k.split(',').map(Number),s=src.get(k);for(const [dx,dy] of [[1,1],[1,-1],[-1,1],[-1,-1]]){const nk=key(x+dx,y+dy);if((add.has(nk)||S.has(nk))&&!close(s,src.get(nk))){add.delete(k);break;}}}
+ if(!opt.rooms)for(const k of [...add]){const [x,y]=k.split(',').map(Number),s=src.get(k);for(const [dx,dy] of [[1,1],[1,-1],[-1,1],[-1,-1]]){const nk=key(x+dx,y+dy);if((add.has(nk)||S.has(nk))&&!close(s,src.get(nk))){add.delete(k);break;}}}
  // 4) 새 바닥에서 원래 바닥으로 4방향으로 이어진 칸만
  const F=new Set(S),qq=[...S].map(k=>k.split(',').map(Number));for(let h=0;h<qq.length;h++){const [x,y]=qq[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nk=key(x+dx,y+dy);if(add.has(nk)&&!F.has(nk)){F.add(nk);qq.push([x+dx,y+dy]);}}}
  const fh=(x,y)=>F.has(key(x,y));
  // 5) 벽: 원래 칸막이(양쪽 다 바닥이던 벽)는 남기고, 새 바닥 경계 변을 이어 붙인 벽을 만든다
  const tpl=ex.walls[0]||{};let n=0;const walls=[];
- const mk=(o,x0,y0,x1,y1,h)=>{const hz=y0===y1,len=hz?x1-x0:y1-y0;return {...tpl,id:'r219-wall:'+(n++),x:hz?x0+len/2:x0,y:hz?y0:y0+len/2,width:hz?len:.24,depth:hz?.24:len,height:h||tpl.height||2.85,angle:0,endpoints:[[x0,y0],[x1,y1]],analyticBounds12:hz?[x0,y0-.12,x1,y0+.12]:[x0-.12,y0,x0+.12,y1],r219:true};};
+ const mk=(o,x0,y0,x1,y1,h)=>{const hz=y0===y1,len=hz?x1-x0:y1-y0;return {...tpl,id:'r219-wall:'+(n++),x:hz?x0+len/2:x0,y:hz?y0:y0+len/2,width:hz?len:.24,depth:hz?.24:len,height:h||opt.wallH||tpl.height||2.85,angle:0,endpoints:[[x0,y0],[x1,y1]],analyticBounds12:hz?[x0,y0-.12,x1,y0+.12]:[x0-.12,y0,x0+.12,y1],r219:true,...(opt.rooms?{r224Room:true}:{})};};
  // 칸막이: 원래부터 양쪽이 다 바닥이던 벽만(원래 경계벽 바깥이 새 바닥이 된 경우는 칸막이가 아니다 — 남기면 새 바닥을 갈라 놓는다)
  const isPart=w=>{const e=w.endpoints;if(!e)return false;const [[x0,y0],[x1,y1]]=e;if(x0===x1){for(let y=Math.min(y0,y1);y<Math.max(y0,y1);y++)if(!(has(x0-1,y)&&has(x0,y)))return false;return true;}
   if(y0===y1){for(let x=Math.min(x0,x1);x<Math.max(x0,x1);x++)if(!(has(x,y0-1)&&has(x,y0)))return false;return true;}return false;};
@@ -333,14 +348,14 @@ function inflate(ex,opt={}){const D=opt.depth||8,MARGIN=opt.margin??1;const [bx0
  const rects=[];const open=new Map();for(let y=0;y<=H;y++){const runs=[];let r0=null;for(let x=0;x<=W;x++){const f=x<W&&y<H&&fh(x,y);if(f&&r0==null)r0=x;if(!f&&r0!=null){runs.push(r0+':'+x);r0=null;}}
   const next=new Map();for(const r of runs){const o=open.get(r);if(o){o.depth++;next.set(r,o);}else{const [a,b2]=r.split(':').map(Number);const o2={x:a,y,width:b2-a,depth:1};rects.push(o2);next.set(r,o2);}}open.clear();for(const [k,v] of next)open.set(k,v);}
  const floorCells=[...F].map(k=>k.split(',').map(Number));
- stats.inflated={before:S.size,after:F.size};const out={...ex,floorCells,floorRects:rects,walls:[...walls,...keepPart],r219:{before:S.size,after:F.size,walls:walls.length,kept:keepPart.length}};Object.defineProperty(out,"r219Source",{value:ex});return out;}
+ stats.inflated={before:S.size,after:F.size};const out={...ex,floorCells,floorRects:rects,walls:[...walls,...keepPart],r219:{before:S.size,after:F.size,walls:walls.length,kept:keepPart.length}};Object.defineProperty(out,"r219Source",{value:ex});if(roomRects)out.r224Rooms=roomRects;return out;}
 // 문·입구 자리: 레이아웃 안의 R74 문(worldR74.doors)·입구·관문, 이름에 door 가 든 벽.
 const layoutDoorPoints=L=>{const out=[],pt=(q,rad)=>{if(q&&Number.isFinite(q.x)&&Number.isFinite(q.y))out.push([q.x,q.y,rad||3.5]);};
  for(const d of L.worldR74?.doors||[])pt(d,Math.max(3.5,(Number(d.width)||0)/2+3));for(const q of [L.gate,L.entrance,L.entry])pt(q);for(const w of L.walls||[])if(/door/i.test(String(w.id||'')))pt(w);return out;};
 // R171 지도 레이아웃이 처음 방에 붙을 때(꾸미기 전에) 부른다 — 같은 원본 레이아웃에는 늘 같은 결과 객체를 돌려준다(꾸미기·색인이 한 번만).
 const widened=new WeakMap();
 window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!solo()||!L?.floorCells?.length||L.r204Widened||L.r219)return null;if(widened.has(L))return widened.get(L);
- if(ZONES[id]?.decorOnly){if(!prefs.inflate)return null;const nx=inflate(L,{depth:ZONES[id].inflateDepth||3});widened.set(L,nx);return nx;}/* R219 */
+ if(ZONES[id]?.decorOnly){if(!prefs.inflate)return null;const nx=inflate(L,{depth:ZONES[id].inflateDepth||3,rooms:prefs.rooms!==false,wallH:prefs.rooms!==false?(window.__R224_WALLH||1.3):0});widened.set(L,nx);return nx;}/* R219 */
  if(!prefs.widen||!ZONES[id]?.widen)return null;
  const nx=widen(L,ZONES[id],layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
 
@@ -631,7 +646,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
      const sm=new T.MeshBasicMaterial({color:0xffffff,vertexColors:true,map,toneMapped:false});sm.onBeforeCompile=sh=>cutaway(sh,U);sm.customProgramCacheKey=()=>'r218-skeleton'+(map?'-map':'');
      r.spatialResources.add(sm);if(r.sightState24&&A.attachSight24)A.attachSight24(sm,r.sightState24);const sk=new T.Mesh(sg,sm);sk.name='r218-skeleton';sk.layers.set(2);sk.renderOrder=-26;sk.userData.presentationOnly=true;sk.userData.r204=true;r.spatialResources.add(sg);group.add(sk);}}
    if(prefs.unify!==false&&cfg.floorLift>1){let k=0;r.spatialRoot.traverse(o=>{if(/annex-ground/.test(o.name||'')&&o.material?.color&&!o.material.userData?.r218Lift){const c=o.material.color;c.setRGB(c.r*cfg.floorLift,c.g*cfg.floorLift,c.b*cfg.floorLift);/* 1을 넘겨도 된다(MeshBasic·톤매핑 없음 → 그림 자체가 밝아짐) */o.material.userData.r218Lift=true;k++;}});stats.floorLifted=k;}
-   dimRoofs(r);interiorShell(r);interiorProps(roomOf(frame),cfg);
+   dimRoofs(r);interiorShell(r);interiorProps(roomOf(frame),cfg);furnish(roomOf(frame),cfg,frame.zone);
    r.spatialRoot.add(group);
    r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}
   const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
@@ -660,6 +675,26 @@ function interiorShell(r){if(prefs.unify===false)return 0;let k=0;r.spatialRoot.
 //  ② 실내에 깔린 지역 공통 소품 중 길거리·야외 그림(가로등·시장 좌판·이끼 바위·죽은 나무·부서진 대문)은 뺀다. 주택(home)·도심(urban, 살인사건 집·아파트) 계열은 지붕 환풍구(r80-058)도 뺀다.
 //     이름 붙은 서사 소품(q.name)·상자·상호작용 물건은 그대로 둔다.
 const OUTDOOR_PROP=/street_lamp|ruined_market|moss_boulder|dead_tree|broken_gate|\/tree-|boulder/i,HOME_EXTRA=/world-r80\/r80-058\./;
+// R224 방 가구(사용자 영상: 회의실 탁자·소파·책장·벤치처럼 방 용도 가구가 벽에 붙어 있음). 방(r224Rooms)마다 뒤쪽 두 벽(위·왼쪽, 화면에서 보이는 벽)을 따라
+//  지역 계열 가구(world-r80 그림)를 1~4개 놓는다. 막지 않는 장식(solid:false)이고 문·입구·목표·출입구 둘레는 비운다.
+const FURN={clinic:['r80-142','r80-144','r80-148','r80-141','r80-143','r80-149','r80-146','r80-145'],home:['r80-024','r80-026','r80-027','r80-025'],
+ urban:['r80-054','r80-056','r80-051','r80-024'],forge:['r80-045','r80-039','r80-018','r80-027'],machine:['r80-075','r80-001','r80-151','r80-152','r80-002'],cult:['r80-061','r80-062','r80-064','r80-069','r80-075']};
+function furnish(rm,cfg,zid){if(prefs.rooms===false||!rm||!Array.isArray(rm.props)||rm.r224Furnished)return 0;const L=rm.exploration,R=L?.r224Rooms;rm.r224Furnished=true;if(!R?.length)return 0;
+ const A=window.__STORYWORLD_ASSETS_R80_DATA__?.assets||{};const set=(/^cult/.test(zid)?FURN.cult:FURN[cfg.kind]||FURN.urban).filter(id=>A[id]);if(!set.length)return 0;
+ const F=new Set(L.floorCells.map(c=>c[0]+','+c[1]));const keep=[];for(const d of L.worldR74?.doors||[])keep.push([d.x,d.y,(+d.width||0)/2+2.2]);for(const q of [L.entry,L.gate,rm.objective,rm.altar])if(q&&Number.isFinite(q.x))keep.push([q.x,q.y,3]);
+ let n=0,h=(cfg.seed>>>0)||1;const rnd=()=>{h^=h<<13;h>>>=0;h^=h>>>17;h^=h<<5;h>>>=0;return h/4294967296;};
+ for(const r of R){const w=r.x1-r.x0,d=r.y1-r.y0;if(w<5||d<5)continue;const want=Math.max(1,Math.min(4,Math.round(w*d/45)));let put=0;
+  const spots=[];for(let x=r.x0+1.5;x<r.x1-1;x+=3.2)spots.push([x,r.y0+.85]);for(let y=r.y0+2.6;y<r.y1-1;y+=3.2)spots.push([r.x0+.85,y]);
+  for(let i=spots.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[spots[i],spots[j]]=[spots[j],spots[i]];}
+  for(const [x,y] of spots){if(put>=want)break;const cx=Math.floor(x),cy=Math.floor(y);if(!F.has(cx+','+cy))continue;
+   if(keep.some(([kx,ky,kr])=>Math.hypot(kx-x,ky-y)<kr))continue;
+   // 출입구 둘레: 방 바깥으로 이어진 바닥 칸이 1.5칸 안에 있으면 비움
+   let door=false;for(let dy=-2;dy<=2&&!door;dy++)for(let dx=-2;dx<=2;dx++){const ax=cx+dx,ay=cy+dy;if((ax<r.x0||ax>=r.x1||ay<r.y0||ay>=r.y1)&&F.has(ax+','+ay)){door=true;break;}}if(door)continue;
+   if(rm.props.some(q=>Math.hypot((q.x||0)-x,(q.y||0)-y)<1.6))continue;
+   const id=set[Math.floor(rnd()*set.length)],a=A[id];
+   rm.props.push({id:'r224:furn:'+rm.id+':'+(n++),path:a.path,x,y,height:64*(a.scale||1),solid:false,visible:true,enabled:true,r80Dressing:true,r80Art:id,r80PresentationOnly:true,r224Furniture:true});put++;}}
+ if(n)try{const ps=[...new Set(rm.props.filter(q=>q.r224Furniture).map(q=>q.path))];if(typeof ensureImages==='function')Promise.resolve(ensureImages(ps)).catch(()=>{});}catch(_){}/* 그림은 방에 들어온 뒤 읽는다(R80 은 자기 소품 그림만 미리 읽음) */
+ stats.furniture=(stats.furniture||0)+n;return n;}
 function interiorProps(rm,cfg){if(prefs.unify===false||!rm||!Array.isArray(rm.props)||rm.r220Props)return 0;const before=rm.props.length;
  rm.props=rm.props.filter(q=>{if(!q||q.name||q.interactive||q.altar||q.chest||/chest|altar|portal|door|note|memory/i.test(String(q.kind||'')+String(q.id||'')))return true;const pth=String(q.path||'');
   if(OUTDOOR_PROP.test(pth))return false;if((cfg.kind==='home'||cfg.kind==='urban')&&HOME_EXTRA.test(pth))return false;return true;});
@@ -689,12 +724,20 @@ function before(r,frame){try{
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
+// R224 방 이름(이터널리턴식 구역 표시): 실내에서 다른 방(r224Rooms)에 들어서면 그 방 이름·용도를 잠깐 띄운다. 같은 방은 다시 띄우지 않고, 전투 중(room.engaged)·모달·서사 장면에서는 쉰다.
+let lastRoomKey=null;
+function roomLabelTick(){try{if(prefs.rooms===false||typeof room!=='object'||!room||typeof player!=='object'||!player||modal||loading||(typeof storyScene!=='undefined'&&storyScene))return;
+ const L=room.exploration,R=L?.r224Rooms;if(!R?.length||!ZONES[room.id]?.decorOnly){lastRoomKey=null;return;}
+ const x=player.x,y=player.y,r=R.find(q=>x>=q.x0&&x<q.x1&&y>=q.y0&&y<q.y1);if(!r)return;const k=room.id+':'+r.id;if(k===lastRoomKey)return;const first=lastRoomKey==null||!lastRoomKey.startsWith(room.id+':');lastRoomKey=k;if(first||room.engaged)return;
+ const info=(L.worldR74?.rooms||[]).find(q=>q.id===r.id);const name=info?.name||info?.purpose;if(!name||typeof toast!=='function')return;
+ toast('◇ '+name+(info.purpose&&info.purpose!==name?' · '+info.purpose:''),1.6);stats.roomLabels=(stats.roomLabels||0)+1;}catch(e){fail(e);}}
+setInterval(roomLabelTick,400);
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
 const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r204=true;return w;};
 C.render=wrapFn(C.render);
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
+function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

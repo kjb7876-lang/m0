@@ -11,7 +11,7 @@
 //  · 보스·페르소나와 이름 붙은 중간보스(보라검천사 등)는 건드리지 않는다. storyworld.r208.mobs {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_STORY_MOBS_R208__)return;
-const REV='R208-mobs-2',KEY='storyworld.r208.mobs',INDEX='assets/r208/mobs/index.json';
+const REV='R223-mobs-3',KEY='storyworld.r208.mobs',INDEX='assets/r208/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,grounded:0,reinstalls:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 지역·이름 → 그림 id. 정본 이름("…증원/추격대/후속 증원", "중간보스 · …" 변형 포함)으로 고른다.
@@ -20,9 +20,20 @@ const RULES=[
  {zone:'dist01',re:/거미줄에 묶인 수호병/,id:'web-bound-skeleton'},
  {zone:'dist03',re:/쓰러진 수호병/,id:'halberd-revenant'},
  {zone:'dist03',re:/피냄새 추적자/,id:'ember-hound'},
- {zone:'dist04',re:/피로 꿰맨 전령/,id:'twin-head-corpse'}];
+ {zone:'dist04',re:/피로 꿰맨 전령/,id:'twin-head-corpse'},
+ // R223(사용자 2026-11-02 "최근몹들"): Drive 일반몹 시트 21~28 에서 이름이 게임 안 몹과 맞는 9종(assets/r223/mobs, scripts/r223-drive-mobs.py).
+ {zone:'dist01',re:/망각의 거미/,id:'oblivion-spider'},
+ {zone:'ep1a09',re:/주사실 감시환각/,id:'thread-nurse'},
+ {zone:'ep1a09',re:/갈망의 약병핵/,id:'vial-collector'},
+ {zone:'ep1b05',re:/얼굴 없는 남자의 박수/,id:'curtain-mannequin'},
+ {zone:'hando01',re:/성벽 침식 봉인병/,id:'ash-mason'},
+ {zone:'murder01',re:/빗속 횡단보도의 기억 잔향/,id:'signal-golem'},
+ {zone:'cult01',re:/흑장미 귀막은 신도/,id:'censer-priest'},
+ {zone:'cult06',re:/기계재판 연결자/,id:'superego-inquisitor'},
+ {zone:'kair01',re:/최초명령 훈련파동/,id:'clockwork-sentinel'}];
+const INDEX2='assets/r223/mobs/index.json';
 let idx=null;const byId=id=>idx?.mobs?.find(m=>m.id===id)||null;
-if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs){idx=j;try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(j.mobs.map(m=>m.path))).catch(()=>{});}catch(_){}}}).catch(fail);
+if(typeof fetch==='function')for(const url of [INDEX,INDEX2])fetch(url).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs){idx={...(idx||{}),mobs:[...(idx?.mobs||[]),...j.mobs.filter(m=>!idx?.mobs?.some(o=>o.id===m.id))]};/* 그림은 처음 그 몹을 그릴 때 읽는다(assign → ensureImages) — 시작 때 23장을 한꺼번에 읽지 않게 */if(url===INDEX)try{if(typeof ensureImages==='function')Promise.resolve(ensureImages(j.mobs.map(m=>m.path))).catch(()=>{});}catch(_){}}}).catch(fail);
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;return (h>>>0)/4294967296;};
 const major=e=>!!(e&&(e.boss||e.persona||e.cosmic||e.trial||e.samongR103));
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?(room.id||''):'');}catch(_){return '';}};
@@ -39,7 +50,7 @@ function cellFor(e,m){const n=m.move.length;
  return m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m);
  return {path:m.path,assetFrame:{sourceRect:[k*cw,0,cw,ch],pivot:[px,py],visibleHeight:vh},sourceAlphaCore:[k*cw,0,cw,ch],metricThreshold:16,sourcePixelsEdited:false,
-  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r208Mob:m.id,flip:!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y))};}
+  normalizedFullRectangleExtents:[-px/vh,-py/vh,(cw-px)/vh,(ch-py)/vh],r208Mob:m.id,flip:(!!(typeof player!=='undefined'&&player&&(player.x-player.y)<(e.x-e.y)))!==(m.facing==='left')};}/* R223: 왼쪽을 보는 그림은 반대로 */
 // 다른 덧씌우기가 나중에 frameFor 를 바꿔 끼워도 가장 바깥에 다시 선다(20초 동안 확인).
 function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof S.frameFor!=='function')return false;if(S.__r208)return true;
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r208:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){
