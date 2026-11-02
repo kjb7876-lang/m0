@@ -251,6 +251,8 @@ jobs:
         run: node r96/qa/r230/r230-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check
         run: node r96/qa/r231/r231-cpu-check.cjs
+      - name: R234 far last enemies regrouped near the hero CPU check
+        run: node r96/qa/r234/r234-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check
