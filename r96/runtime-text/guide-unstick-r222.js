@@ -28,11 +28,13 @@ if(typeof interact==='function'){const base=interact;interact=function(...a){
  if(hidden.length)stats.closeSkipped++;
  try{return base.apply(this,a);}finally{for(const [d,r] of hidden)d.reach=r;}};}
 let anchor=null,stage=0;
+// 제자리에서 싸우는 중(3칸 안에 살아 있는 적)이면 건드리지 않는다. room.engaged 는 '집결한 생존 적' 같은 필드 전투 내내 켜져 있어 기준으로 쓰지 않는다(dist01 실측).
+const fighting=()=>{try{return (room.enemies||[]).some(e=>e&&e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<3);}catch(_){return false;}};
 function openNearDoor(){const w=W();if(!w)return false;
  const near=doorsHere().filter(d=>!w.isOpen(room,d)).map(d=>({d,dist:Math.hypot(player.x-d.x,player.y-d.y)})).filter(o=>o.dist<=(o.d.reach||3)).sort((a,b)=>a.dist-b.dist);
  for(const {d} of near){const tg={kind:'door',id:d.id};if(w.canUse(tg)&&w.use(tg)){stats.doors++;return true;}}return false;}
 function watch(){
- if(!on||!guiding()||typeof player!=='object'||!player||player.hp<=0||typeof room!=='object'||!room||room.engaged)return void(anchor=null);
+ if(!on||!guiding()||typeof player!=='object'||!player||player.hp<=0||typeof room!=='object'||!room||fighting())return void(anchor=null);
  const t=typeof time==='number'?time:0;
  if(!anchor||anchor.zone!==room.id||Math.hypot(player.x-anchor.x,player.y-anchor.y)>.05){anchor={x:player.x,y:player.y,t,zone:room.id};stage=0;return;}
  const still=t-anchor.t,R=Array.isArray(route)?route:null;
