@@ -6,16 +6,18 @@
 //  · 본편(STORY)만. 사몽 구역·DREAM·함께하기는 그대로. 표 SCALE 를 고치면 바로 바뀐다. storyworld.r179.balance {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_BALANCE_R179__)return;
-const REV='R179-balance-2',KEY='storyworld.r179.balance';
+const REV='R217-balance-3',KEY='storyworld.r179.balance';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 // 지역 → 보스·중간보스 체력 배율(받는 피해 = 원래 피해 ÷ 배율)
 const SCALE=Object.freeze({dist00:.45,dist01:.6,dist02:.6,dist03:.6,dist04:.6,dist05:.6,dist06:.6,ep1a08:.8,ep1a09:.8,ep1a09b:.8,ep1a10:.8,ep1a11:.8});
 const stats={boosted:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const major=e=>!!(e&&(e.boss||e.midboss||e.combatProfile?.major));
+// R217(사용자 2026-11-02 "뿌리보스체력 현재의 66프로수준으로 너프"): 뿌리의 문지기(dist00 보스)만 지금 체력의 66% — 받는 피해를 1/0.66 배 더 키운다(중간보스는 그대로).
+const BOSS_EXTRA=Object.freeze({dist00:.66});
 function factor(r){try{if(!prefs.on||typeof layer==='undefined'||layer!=='STORY'||r?.samongR103)return 1;const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(m&&m!=='off')return 1;return SCALE[r?.id]||1;}catch(_){return 1;}}
 try{
- if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if(major(e)&&Number.isFinite(value)&&value>0){const k=factor(typeof room!=='undefined'?room:null);if(k<1){value=value/k;stats.boosted++;}}}catch(err){fail(err);}return base.apply(this,[e,value,...a]);};}
+ if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if(major(e)&&Number.isFinite(value)&&value>0){const rm=typeof room!=='undefined'?room:null;let k=factor(rm);if(e.boss&&k<1)k*=BOSS_EXTRA[rm?.id]||1;if(k<1){value=value/k;stats.boosted++;}}}catch(err){fail(err);}return base.apply(this,[e,value,...a]);};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_BALANCE_R179__=Object.freeze({revision:REV,SCALE,set,factor:id=>factor({id}),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+window.__STORYWORLD_BALANCE_R179__=Object.freeze({revision:REV,SCALE,BOSS_EXTRA,set,factor:id=>factor({id}),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();

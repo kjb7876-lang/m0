@@ -10,8 +10,8 @@
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_R205__)return;
-const REV='R205-boss-1',KEY='storyworld.r205.boss';
-const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true};
+const REV='R217-boss-2',KEY='storyworld.r205.boss';
+const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true};
 const prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={midDraws:0,echoStopped:0,echoCancelled:0,echoGaps:0,moves:0,moveDist:0,enraged:0,scaledHazards:0,enragedDraws:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -23,6 +23,11 @@ const bossClass=e=>!!(e&&(e.boss||e.persona||e.cosmic||e.trial));
 const R137=()=>window.__STORYWORLD_COMBAT_R137__;
 const midClass=e=>!!e&&!e.boss&&(e.midboss===true||e.wardChampionR81===true||!!R137()?.midClass?.(e));
 const ENRAGE_AT=.3,ENRAGE_DMG=1.06,ENRAGE_SIZE=2,ENRAGE_RANGE=2,ECHO_GAP=26,MOVE_MAX=7;
+// R217(사용자 2026-11-02 "뿌리보스 분신사용쿨타임 증가 현재의 66프로이상너프", "보스들 크기 플레이어 최소1.6배이상은되도록 보라검천사보스 지금 너무 작게나옴"):
+//  · 뿌리의 문지기(dist00 보스) 환영 간격 ×3(26초 → 78초) — 사용 빈도 약 67% 줄임.  · 보스·중간보스는 그림 키가 영웅의 1.6배 아래로 내려가지 않게(중간보스 절반 규칙 뒤에 적용).
+const ROOT_GAP_MUL=3,MIN_BOSS_H=1.6;
+const rootBoss=e=>!!(e&&e.boss&&(String(e.nativeId||'').startsWith('dist00')||/뿌리의 문지기/.test(String(e.name||''))));
+const gapOf=e=>rootBoss(e)?ECHO_GAP*ROOT_GAP_MUL:ECHO_GAP;
 
 // ---- ② 환영은 보스만, 가끔 ----------------------------------------------------------------------
 const gap=new WeakMap();// e -> 다음 환영 허용 시각
@@ -33,7 +38,7 @@ function gateEcho(){const api=F();if(!api?.state||!room?.enemies)return;const t=
    if(midClass(e)&&a&&!a.cancelled&&a.kind==='echo'&&t<(a.releaseAt??0)){a.cancelled=true;e.r61BusyUntil=0;stats.echoCancelled++;}continue;}
   // 보스: 환영이 끝난 뒤 ECHO_GAP 초 동안은 R61 차례 중 환영 칸(보스급 ['field','echo','prop'][step%3])만 건너뛴다 — 장판·던지기는 그대로.
   const g=gap.get(e);
-  if(a&&a.kind==='echo'&&!a.r205Seen){a.r205Seen=true;if(g&&t<g&&t<(a.releaseAt??0)){a.cancelled=true;e.r61BusyUntil=0;stats.echoCancelled++;}else gap.set(e,(a.endAt||t)+ECHO_GAP);}
+  if(a&&a.kind==='echo'&&!a.r205Seen){a.r205Seen=true;if(g&&t<g&&t<(a.releaseAt??0)){a.cancelled=true;e.r61BusyUntil=0;stats.echoCancelled++;}else gap.set(e,(a.endAt||t)+gapOf(e));}
   const g2=gap.get(e);if(g2&&t<g2&&s&&Number.isFinite(s.step)&&s.step%3===1){s.step++;stats.echoGaps++;}}}
 
 // ---- ③ 보스가 환영 쪽으로 이동 --------------------------------------------------------------------
@@ -66,12 +71,13 @@ if(typeof tick==='function'){const base=tick;tick=function(dt,...a){
  try{if(solo()&&live()){if(prefs.echoBossOnly)gateEcho();if(prefs.echoMove)watchEcho();if(prefs.enrage)enrageTick();}}catch(e){fail(e);}
  const r=base.call(this,dt,...a);try{if(moving.size&&live())stepMoves(Number.isFinite(dt)?dt:1/60);}catch(e){fail(e);}return r;};}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!e)return base.apply(this,arguments);const ds=e.defScale;let k=1;
- try{if(Number.isFinite(ds)){if(prefs.midHalf&&midClass(e)){k*=R137()?.prefs?.().midbossScale?5/7:.5;stats.midDraws++;}if(prefs.enrage&&e.r205Enraged&&e.hp>0){k*=ENRAGE_SIZE;stats.enragedDraws++;}}}catch(err){fail(err);}
+ try{if(Number.isFinite(ds)){if(prefs.midHalf&&midClass(e)){k*=R137()?.prefs?.().midbossScale?5/7:.5;stats.midDraws++;}if(prefs.enrage&&e.r205Enraged&&e.hp>0){k*=ENRAGE_SIZE;stats.enragedDraws++;}
+  if(prefs.minSize&&(bossClass(e)||midClass(e)||e.midboss)){const sr=Number(e.combatProfile?.spriteRect?.height)||1,h=sr*ds*k;if(h>0&&h<MIN_BOSS_H){k*=MIN_BOSS_H/h;stats.minSized=(stats.minSized||0)+1;}}}}catch(err){fail(err);}
  if(k!==1)e.defScale=ds*k;
  try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'){/* 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
    ctx.save();const g=ctx.createRadialGradient(q.x,q.y,R0*.15,q.x,q.y,R0);g.addColorStop(0,'rgba(190,20,24,.42)');g.addColorStop(1,'rgba(120,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(q.x,q.y,R0,R0*.5,0,0,Math.PI*2);ctx.fill();ctx.restore();}}catch(err){fail(err);}
  try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;}};}
 function set(p={}){for(const k of Object.keys(DEFAULTS))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX},
+window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},moving:moving.size,lastError})});
 })();

@@ -7,7 +7,7 @@ const got=[];const sb={window:{},localStorage:{getItem(){return null;},setItem()
 vm.createContext(sb);vm.runInContext(C('balance-r179.js'),sb);
 const hit=(e,v)=>{got.length=0;sb.__e=e;sb.__v=v;vm.runInContext('hitEnemy(__e,__v)',sb);return got[0];};
 const boss={boss:true,hp:11066,maxHp:11066};
-ok('뿌리의 문지기(dist00): damage ÷0.45, max HP untouched',Math.abs(hit(boss,100)-100/.45)<1e-6&&boss.maxHp===11066);
+ok('뿌리의 문지기(dist00): damage ÷(0.45×0.66) (R217 체력 66%), max HP untouched',Math.abs(hit(boss,100)-100/(.45*.66))<1e-6&&boss.maxHp===11066);
 ok('ordinary mobs take normal damage',hit({hp:50,maxHp:50},10)===10);
 sb.room={id:'dist03'};ok('rest of part 1: ÷0.6 (midboss)',Math.abs(hit({midboss:true,hp:1,maxHp:1},60)-100)<1e-6);
 sb.room={id:'ep1b02'};ok('later regions unchanged',hit({boss:true,hp:1,maxHp:1},60)===60);
