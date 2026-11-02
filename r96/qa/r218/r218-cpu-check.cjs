@@ -5,7 +5,7 @@ const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const src=C('cave-r204.js');
 ok('runtime copy matches · cave-r204.js',RT('cave-r204.js')===src);
 ok('in the CI workflow',/qa\/r218\/r218-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
-ok('skeleton is built only in the decor-only (interior) branch and can be switched off',/if\(cfg\.decorOnly\)\{[\s\S]*?prefs\.skeleton!==false[\s\S]*?r218-skeleton[\s\S]*?return;\}/.test(src)&&/skeleton:true/.test(src));
+ok('skeleton is built only in the decor-only (interior) branch; R220: off by default (user: pillars lowered quality), on only with {skeleton:true}',/if\(cfg\.decorOnly\)\{[\s\S]*?prefs\.skeleton===true[\s\S]*?r218-skeleton[\s\S]*?return;\}/.test(src)&&/skeleton:false/.test(src));
 ok('skeleton uses the hero cutaway (never hides the hero) and the sight mask',/sm\.onBeforeCompile=sh=>cutaway\(sh,U\)/.test(src)&&/attachSight24\(sm,/.test(src)&&/if\(deco\)\{heroUniform\(r,frame\);/.test(src));
 ok('no ctx.filter drop-shadow/blur (Three recorder rule)',!/drop-shadow|filter\s*=\s*['"]blur/.test(src));
 ok('every interior kind has a structure colour; dark home/urban floors are lifted more than clinic',['clinic','urban','home','forge','machine'].every(k=>new RegExp(k+':\\{bone:\\[').test(src))&&/home:\{bone:\[[^\]]+\],floorLift:1\.8/.test(src)&&/clinic:\{bone:\[[^\]]+\],floorLift:1,/.test(src));

@@ -26,7 +26,7 @@ const sb={console,Math,JSON,Set,Map,WeakMap,WeakSet,Object,Array,Number,String,B
 sb.window=sb;const drawn=[];sb.drawEnemy=function(e){drawn.push(e.profile.frames);return 'base';};
 vm.createContext(sb);vm.runInContext(fs.readFileSync(path.join(SRC,'mobs-r109.js'),'utf8'),sb,{filename:'mobs-r109.js'});
 const M=sb.__STORYWORLD_MOBS_R109__;
-check('overlay revision R116',M?.revision==='R116-mobs-3');
+check('overlay revision R116',/^R116-mobs-3$|^R220-mobs-/.test(M?.revision||'')/* R220: 같은 오버레이에 한 묶음 그림 고정 추가 */);
 const still={path:'still.png',assetFrame:{sourceRect:[0,0,10,10],pivot:[5,10]}};
 const mk=(id,o={})=>({id:'e'+id+Math.random(),nativeId:id,hp:10,x:3,y:0,profile:{frames:{idle:still,move:still,attack:still,windup:still}},combatProfile:{attackShape:{windup:.4,active:.2}},...o});
 const cellOf=f=>f.assetFrame.sourceRect[0]/(f.assetFrame.sourceRect[2]||1);
