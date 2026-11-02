@@ -241,6 +241,8 @@ jobs:
         run: node r96/qa/r225/r225-cpu-check.cjs
       - name: R226 Michaela NE/NW run legs alternate (v3) CPU check
         run: node r96/qa/r226/r226-cpu-check.cjs
+      - name: R227 samong E prefers clues over Michaela CPU check
+        run: node r96/qa/r227/r227-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check

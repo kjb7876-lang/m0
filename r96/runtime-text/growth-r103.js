@@ -8,7 +8,7 @@
  * 저장 필드는 growthR103 하나이며 기존 저장·진행은 건드리지 않습니다. */
 (()=>{'use strict';
  if(window.__STORYWORLD_GROWTH_R103__)return;
- const REV='R103-growth-1',VERSION=1,MAX_LEVEL=7,MICHAELA_EVERY=777;
+ const REV='R103-growth-1+R227',VERSION=1,MAX_LEVEL=7,MICHAELA_EVERY=777;
  let failures=0,lastError=null;const fail=e=>{failures++;lastError=String(e?.stack||e).slice(0,400);};
  const live=()=>typeof started!=='undefined'&&started&&!!player&&!!room;
  const SM=()=>window.__STORYWORLD_SAMONG_R103__;
@@ -118,7 +118,10 @@
  // ---- hooks ---------------------------------------------------------------------------------
  let lastTrack=0;
  function track(){if(!live())return;const p=Number(player.points);if(!Number.isFinite(p))return;if(G.lastPoints===null){G.lastPoints=p;return;}if(p>G.lastPoints&&routeOpen())G.earned+=p-G.lastPoints;G.lastPoints=p;}
- function near(kind){let best=null,bd=1e9;for(const p of room?.props||[]){if(p.growthR103!==kind||p.visible===false)continue;const d=Math.hypot(p.x-player.x,p.y-player.y);if(d<1.9&&d<bd){best=p;bd=d;}}return best;}
+ // R227: 미카엘라(처방)·상자가 단서·문 같은 사몽 표식보다 멀면 E 는 그 표식으로 간다. 사몽 실플레이 S01-1 '찻잔 안의 집'에서 단서 바로 위에 선 길잡이의 E 가
+//  1.9칸 안에 소환된 미카엘라를 먼저 집어 처방 창만 23분 되풀이해 열렸다(단서 0/1 그대로). 손으로 누를 때도 같은 일이 생겼다.
+function closerGoal(p){try{const d=Math.hypot(p.x-player.x,p.y-player.y);return (room?.props||[]).some(q=>q&&q!==p&&q.samongR103&&!q.growthR103&&q.samongR103!=='back'&&q.visible!==false&&Math.hypot(q.x-player.x,q.y-player.y)<Math.min(d,1.9));}catch(_){return false;}}
+function near(kind){let best=null,bd=1e9;for(const p of room?.props||[]){if(p.growthR103!==kind||p.visible===false)continue;const d=Math.hypot(p.x-player.x,p.y-player.y);if(d<1.9&&d<bd){best=p;bd=d;}}return best;}
  function preload(){for(const p of[ASSET.closed,ASSET.open,ASSET.michaela])try{if(!readyImage(p)&&typeof addImage==='function')addImage(p,'R103 성장');}catch(e){fail(e);}}
  function install(){
   preload();
@@ -129,7 +132,7 @@
   const killBase=killEnemy;killEnemy=function(e,...a){const first=!!e&&!e.deadRecorded;const r=killBase.apply(this,[e,...a]);try{if(first&&e?.deadRecorded&&!e.samongR103Silent&&live()){const heal=bonus('heal');if(heal>0&&player.hp>0)player.hp=Math.min(maxHP(),player.hp+heal);
     // 사몽 처치 보상: 처치 여섯 번마다 1점, 사몽 보스 77점.
     if(e.samongR103&&inSamong()){if(e.samongBoss)player.points+=77;else if(++G.killAcc>=6){G.killAcc=0;player.points+=1;}}}}catch(err){fail(err);}return r;};
-  const interactBase=interact;interact=function(...a){try{if(live()&&!modal&&!loading&&player.hp>0){const c=near('chest');if(c&&!chestSeen(c.chestR103||c.chest)){openChest(c);return;}const m=near('michaela');if(m){talkMichaela(m);return;}}}catch(e){fail(e);}return interactBase.apply(this,a);};
+  const interactBase=interact;interact=function(...a){try{if(live()&&!modal&&!loading&&player.hp>0){const c=near('chest');if(c&&!chestSeen(c.chestR103||c.chest)&&!closerGoal(c)){openChest(c);return;}const m=near('michaela');if(m&&!closerGoal(m)){talkMichaela(m);return;}}}catch(e){fail(e);}return interactBase.apply(this,a);};
   const enterBase=enterRegion;enterRegion=async function(...a){const r=await enterBase.apply(this,a);try{preload();if(live()&&!room.samongR103)placeChest(room);}catch(e){fail(e);}return r;};
   const saveBase=serializeSave;serializeSave=function(...a){const d=saveBase.apply(this,a);try{d.growthR103=JSON.parse(JSON.stringify(G));}catch(e){fail(e);}return d;};
   const restoreBase=restoreSave;restoreSave=async function(raw,...a){const prior=G;G=clean(raw?.growthR103);G.lastPoints=null;totalsCache=null;try{const r=await restoreBase.call(this,raw,...a);if(r===false)G=prior;else{G.lastPoints=null;try{if(live()&&!room.samongR103)placeChest(room);}catch(e){fail(e);}}return r;}catch(e){G=prior;throw e;}};
