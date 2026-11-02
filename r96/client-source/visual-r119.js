@@ -7,7 +7,7 @@
  const C=window.StoryPhase1?.ThreeRenderer?.prototype;
  if(window.__STORYWORLD_VISUAL_R119__||!C||typeof C.updateGlows!=='function')return;
  const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r119.visual';
- const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true,gunnerHit:true,gunnerSheet:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle','gunnerHit','gunnerSheet'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+ const prefs={seeThrough:true,heroArt:true,angelArt:true,heroFit:false,heroBlood:true,earlyGrace:true,walkCycle:true,gunnerHit:true,gunnerSheet:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of ['seeThrough','heroArt','angelArt','heroFit','heroBlood','earlyGrace','walkCycle','gunnerHit','gunnerSheet','run164','run164v2','run226','run229'])if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
  const NATIVE_MIN=.42,MIN=.22,stats={frames:0,walls:0};let lastError=null;
  const remap=a=>a>=.995?a:Math.max(MIN,1-(1-a)*((1-MIN)/(1-NATIVE_MIN)));
  const base=C.updateGlows;
@@ -30,8 +30,9 @@
   neon:{dir:'assets/r130/neon/',keep:/ultimate-/},hunter:{dir:'assets/r130/hunter/',keep:/ultimate-/},slayer:{dir:'assets/r130/slayer/',keep:/ultimate-|actions-directional\/slayer-guard-/},
   hwando:{dir:'assets/r130/hwando/',keep:/./}};// 환도: 서 있기 그림이 좋아 걷기만 새 시트(정지·동작 그림은 그대로)// R131: 서하·로렌(궁극기 그림은 큰 효과가 들어 있어 원래 그림)
  // R169: 드라이브 'Michaela-NE-NW-v2-comparison-patch'(F4·F5 보폭 보정, 나머지 6칸은 v1 과 같음) — 북동(북서는 좌우 반전)만 v2. {run164v2:false} 로 v1.
+ // R229: 사용자 "미카엘라 대각위모션 발이 꼬인느낌" — v3 는 4→5·8→1 칸에서 다리가 옆으로 튀고 6칸에서 무릎이 겹쳤다. 북쪽 달리기(다리가 제대로 번갈아 나가는 한 바퀴)의 다리를 북동 v2 윗몸 밑에 맞춰 넣은 v4(scripts/r229-michaela-ne-legs.py). {run229:false} 로 v3.
  // R226: 사용자 "미카엘라 대각위 동작 한쪽발만 나가는 거 같은데 다리만 좌우반전해서" — v2 8칸 모두 같은 다리만 차올려서, 5~8칸 다리를 1~4칸 다리의 좌우 반전으로 바꾼 v3(scripts/r226-michaela-ne-legs.py). {run226:false} 로 v2.
- const RUN164={michaela:'assets/r164/michaela/run-'},RUN164V2={michaela:{ne:'-v2'}},RUN226={michaela:{ne:'assets/r226/michaela/run-ne-v3.webp'}},walkPath=(hero,v)=>RUN164[hero]&&prefs.run164!==false?(prefs.run226!==false&&RUN226[hero]?.[v]||RUN164[hero]+v+(prefs.run164v2!==false&&RUN164V2[hero]?.[v]||'')+'.webp'):SHEETS[hero].dir+'walk-'+v+'.webp';
+ const RUN164={michaela:'assets/r164/michaela/run-'},RUN164V2={michaela:{ne:'-v2'}},RUN226={michaela:{ne:prefs.run229!==false?'assets/r229/michaela/run-ne-v4.webp':'assets/r226/michaela/run-ne-v3.webp'}},walkPath=(hero,v)=>RUN164[hero]&&prefs.run164!==false?(prefs.run226!==false&&RUN226[hero]?.[v]||RUN164[hero]+v+(prefs.run164v2!==false&&RUN164V2[hero]?.[v]||'')+'.webp'):SHEETS[hero].dir+'walk-'+v+'.webp';
  const sheetRe=Object.fromEntries(Object.keys(SHEETS).map(h=>[h,new RegExp('^assets\\/(?:hero_direction33[478]\\/'+h+'\\/|heroes\\/normalized\\/'+h+'\\/|heroes\\/normalized\\/(?:directions|actions-(?:consistent|v3126|directional))\\/'+h+'-)[^/]+\\.webp$')]));
  const swap128=k0=>{if(!prefs.gunnerSheet)return null;const k=String(k0).replace(/^assets\/r99\/clean\//,'');/* R131: R99 정리 사본(assets/r99/clean/assets/…)도 같은 대체본 */for(const h in SHEETS){if(!sheetRe[h].test(k)||SHEETS[h].keep?.test(k))continue;if(/actions-directional\//.test(k)&&(h==='gunner'||!/-attack-(?:left|right)\.webp$/.test(k)))return null;/* R159: 방향 동작 대체본은 R130 시트의 공격 좌·우뿐(기억사수 R128 은 없음) — 없는 대체본(스킬 좌·우 등)을 매번 받으려다 404 나던 것을 묻지 않는다(원래 그림 그대로) */const parts=k.split('/');return SHEETS[h].dir+(/\/hero_direction338\//.test(k)?'d338-':'')/* R134: 337·338 묶음 이름 겹침(로렌) */+parts[parts.length-2].replace(h,'g')+'-'+parts[parts.length-1].replace(/\.webp$/,'')+'.webp';}return null;};
  const swapState=new Map();
