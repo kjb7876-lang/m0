@@ -13,7 +13,7 @@ const sb={console,Math,JSON,Set,Map,WeakMap,Promise,Float32Array,Uint8Array,Int3
 vm.runInContext(`var room=null,player={x:5.5,y:5.5};function blocked(){return false;}function makeRoom(id){return {id,layer:'STORY',props:[],enemies:[],exploration:{bounds:[0,0,10,10],floorCells:[],walls:[]}};}async function enterRegion(){return true;}`,sb);
 vm.runInContext(src,sb);const API=sb.window.__STORYWORLD_CAVE_R204__;
 ok('all interior/modern/machine regions registered as decor-only',decoIds.every(z=>API.zones.includes(z)),decoIds.filter(z=>!API.zones.includes(z)));
-ok('decor-only zones keep native walls/floor (no veil, no hide, no floor-command filter)',/const deco=!!ZONES\[frame\.zone\]\?\.decorOnly;/.test(src)&&/const veil=\(\)=>\{if\(deco\)return;/.test(src)&&/if\(deco\)\{stats\.frames\+\+;return;\}/.test(src));
+ok('decor-only zones keep native walls/floor (no veil, no hide, no floor-command filter)',/const deco=!!ZONES\[frame\.zone\]\?\.decorOnly;/.test(src)&&/const veil=\(\)=>\{if\(deco\)return;/.test(src)&&/if\(deco\)\{(heroUniform\(r,frame\);)?(if\(!\(\+\+dimTick%30\)\)dimRoofs\(r\);)?stats\.frames\+\+;return;\}/.test(src)/* R218: 실내 골격의 영웅 앞 투명 처리용 위치 갱신만 허용 */);
 ok('decor-only zones never change collision or pathing',/if\(ZONES\[where\?\.id\]\?\.decorOnly\)return false;/.test(src));
 {const b=src.slice(src.indexOf('function build(r,frame)'));const i=b.indexOf('if(cfg.decorOnly){const dm='),j=b.indexOf('bakeGround(');
  ok('decor-only build adds only the decal layer and returns before terrain textures/baking (Codex #136)',i>0&&j>i&&/mesh\.name='r215-decals'/.test(b)&&/want=cfg\.decorOnly\?\{crack:/.test(b),{i,j});}

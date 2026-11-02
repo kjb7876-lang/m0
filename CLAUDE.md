@@ -51,3 +51,4 @@
 - **Drive 정기 확인**: HAPIL-* 는 다른 게임이라 건너뛰고, review·WIP·COMPARISON·PRIVATE·INCOMPLETE 묶음은 보류한다.
 - **지형 메시 숨기기**: 엔진(벽 가림·R188)이 spatialRoot 메시의 `visible` 을 매 프레임 다시 켠다 → 숨길 땐 `layers.mask=0`(원래 값 기억). 프레임 명령은 render 감싸기에서 `frame.commands` 를 걸러 뺀다(R204).
 - **충돌 데이터**: `explorationBlocked` 는 `floorCells`+벽 AABB 만 보고 색인을 레이아웃 객체 WeakMap 에 캐시한다 → 바닥을 바꾸려면 새 레이아웃 객체로 바꿔 끼운다. `findPath` 는 칸 중심만 반지름 .29 로 묻고 대각선 모서리 깎기를 안 본다(칸 경계가 아닌 장애물을 넣으면 .29 질의에 여유를 더 줘야 길잡이가 안 걸린다, R204).
+- **레이아웃 손질 위치**: 엔진 바닥·벽 덩어리(index.html loadDescriptor)는 `__STORYWORLD_EXPLORATION__.layout(id)` = R171 `layoutFor` 결과의 `floorRects`·`walls` 를 그린다. room.exploration 만 바꾸면 판정과 그림이 어긋난다 → 손질은 `layoutFor` 안(R204 훅)에서 한 번만, floorCells·floorRects·walls 를 함께 바꾼다(R219). 실내 지붕 덮개는 hospital-improvements-a5 `plan(L)` 이 floorCells 여집합으로 만든다.

@@ -37,7 +37,7 @@ const layout=()=>({bounds:[0,0,32,24],floorCells:uniq.map(c=>c.slice()),walls:[{
   ok('no added floor strip sits behind a remaining wall next to the original floor',bad.length===0,bad.slice(0,5));}
  ok('every added cell is reachable from the original floor without crossing a wall',w.dropped>=0&&ex.floorCells.length===w.after);
  // R217(사용자 "전체적인 맵통로 확장"): 쉼터(hub)·디테일 전용(실내·현대) 지역은 그대로, 다른 유기 지형 지역도 같은 넓히기를 받는다.
-ok('rest hub and decor-only regions untouched; other organic regions widened too (R217)',hook('hub',layout())===null&&hook('ep1a08',layout())===null&&hook('dist02',layout())!==null);
+ok('rest hub untouched; other organic regions widened (R217); decor-only interiors get the R219 inflate (not the organic widen)',hook('hub',layout())===null&&hook('dist02',layout())?.r204Widened&&hook('ep1a08',layout())?.r219&&!hook('ep1a08',layout()).r204Widened);
  // 거리장
  const F=API.field(ex,{seed:0x5d0124,bulge:1.35},[[4.5,4.5,1.6]]);
  let leak=0,n=0;for(let k=0;k<F.f.length;k++){if(F.f[k]>0){n++;if(F.raw[k]<=0)leak++;}}
