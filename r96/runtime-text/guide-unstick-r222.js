@@ -30,7 +30,7 @@ if(typeof interact==='function'){const base=interact;interact=function(...a){
  // 사몽 구역 입구의 '이전 구역' 표지(samongR103:'back')는 길잡이 E 로 고르지 않는다 — 도착 직후 단서를 줍다 앞 구역으로 되돌아가던 일(사몽 실플레이 S01-3→S01-2→S01-3).
  let backs=null;try{if(Array.isArray(room?.props)&&room.props.some(q=>q&&q.samongR103==='back')){backs=room.props.filter(q=>q&&q.samongR103==='back');room.props=room.props.filter(q=>!(q&&q.samongR103==='back'));stats.backSkipped=(stats.backSkipped||0)+1;}}catch(e){fail(e);}
  try{return base.apply(this,a);}finally{for(const [d,r] of hidden)d.reach=r;if(backs)try{room.props.push(...backs.filter(q=>!room.props.includes(q)));}catch(e){fail(e);}}};}
-let anchor=null,stage=0;
+let anchor=null,stage=0,walkTried=null;
 // 제자리에서 싸우는 중(3칸 안에 살아 있는 적)이면 건드리지 않는다. room.engaged 는 '집결한 생존 적' 같은 필드 전투 내내 켜져 있어 기준으로 쓰지 않는다(dist01 실측).
 const fighting=()=>{try{return (room.enemies||[]).some(e=>e&&e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<3);}catch(_){return false;}};
 function openNearDoor(){const w=W();if(!w)return false;
@@ -49,7 +49,12 @@ function watch(){
  if(still>=6&&stage<4){stage=4;const R2=Array.isArray(route)?route:[];
   const cand=R2.slice(0,12).find(q=>Math.hypot(q.x-player.x,q.y-player.y)<=2&&Math.hypot(q.x-player.x,q.y-player.y)>.4&&!blk(q.x,q.y)&&lineFree(player,q));/* R231: 얇은 벽을 넘어 옮기지 않게 직선 위도 본다 */
   if(cand){player.x=cand.x;player.y=cand.y;stats.hops++;anchor=null;}
-  else{const q=escapeStep();if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;}}}
+  else{const q=escapeStep();
+   // R233: 칸 길이 있으면 먼저 걸어서 따라가게 길(route)로 넣는다(ep1a08 좁은 미로 — 엔진 findPath(.29)는 0, 영웅(.27) 칸 길은 있음: 6초마다 3칸 순간이동으로만 나아갔다).
+   //  같은 자리에서 한 번 걸어 보고도 못 움직였으면 그때 3칸 옮긴다.
+   const here=Math.floor(player.x)+','+Math.floor(player.y);
+   if(q&&q.path&&q.path.length>1&&walkTried!==here){walkTried=here;route=q.path.slice(0,40);stats.walkRoutes=(stats.walkRoutes||0)+1;anchor=null;}
+   else if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;walkTried=null;}}}
 }
 // R231: 길이 아예 없을 때(엔진 findPath 는 칸 중심을 반지름 .29 로만 물어, 영웅(.27)은 들어갈 수 있는 좁은 틈 안쪽 주머니에서는 바깥 길을 0 으로 돌려준다)
 //  영웅 반지름으로 칸 너비 탐색을 해 가장 가까운 살아 있는 적(없으면 방 목표·중앙 전투실)까지 가는 칸 길을 찾고, 그 길 앞쪽 최대 3칸 자리로 옮긴다.
@@ -64,7 +69,7 @@ function escapeStep(){try{const L=room.exploration;if(!L)return null;const [bx,b
  const near=(x,y)=>{for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(goals.has((x+dx)+','+(y+dy)))return true;return false;};
  const s0=[Math.floor(player.x),Math.floor(player.y)],k0=s0+'',back=(r)=>{const path=[];for(let k=r.hit;k&&k!==k0;k=r.prev.get(k))path.unshift(k);return path;};
  // 1) 걸어서(칸 경계 포함) 가장 가까운 적까지 — 그 길 앞쪽 3칸으로
- if(goals.size){const r=bfs([s0],walk,near);if(r.hit){const path=back(r);if(path.length){const [cx,cy]=path[Math.min(2,path.length-1)].split(',').map(Number);return {x:cx+.5,y:cy+.5};}}}
+ if(goals.size){const r=bfs([s0],walk,near);if(r.hit){const path=back(r);if(path.length){const [cx,cy]=path[Math.min(2,path.length-1)].split(',').map(Number);return {x:cx+.5,y:cy+.5,path:path.map(k=>{const [a,b]=k.split(',').map(Number);return {x:a+.5,y:b+.5};})};}}}
  // 2) 걸어서는 나갈 길이 없음(얇은 벽으로 막힌 주머니에 들어가 버림) → 입구에서 걸어서 닿는 칸 중 가장 가까운 곳으로 꺼낸다. 닫힌 문 둘레는 넘지 않는다.
  const e=L.entry;if(!e)return null;const ent=bfs([[Math.floor(e.x),Math.floor(e.y)]],walk,null,60000).prev;if(ent.has(k0))return null;
  const W=window.__STORYWORLD_WORLD_R74__,doors=[...(L.worldR74?.doors||[])].filter(d=>{try{return !W?.isOpen?.(room,d);}catch(_){return true;}});

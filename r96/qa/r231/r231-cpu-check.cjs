@@ -15,10 +15,14 @@ function guideSb(px,py,enemies){const sb={console,Math,JSON,Number,String,Object
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats;const p=sb.player;
  ok('sealed pocket (thin walls, no gap): the guide is taken out to the nearest cell reachable from the entrance',st.unsealed===1&&!(p.x>14&&p.x<19&&p.y>11&&p.y<14),{st,p});
  ok('…landing on the nearest entrance-connected cell just outside the pocket wall (within 1.5 cells of it)',p.y>14&&p.y<15.6&&p.x>14&&p.x<19,p);}
-{const sb=guideSb(16.5,16.5,[{hp:5,x:2.5,y:5.5,spawnState:'active'}]);
- for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
+{const sb=guideSb(16.5,16.5,[{hp:5,x:2.5,y:5.5,spawnState:'active'}]);let firstRoute=null;
+ for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);if(!firstRoute&&sb.route&&sb.route.length)firstRoute=sb.route.slice();}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
- ok('open side with no route: it steps along a walkable cell path (through the gap), never across the thin wall',st.escapes>=1&&!st.unsealed&&(p.y>10||(p.x>1.5&&p.x<3.6)),{st,p});}
+ const crosses=(firstRoute||[]).some((q,i,a)=>i&&((a[i-1].y-10)*(q.y-10)<0)&&!(q.x>2&&q.x<3));
+ ok('R233: open side with no engine route: it first hands the guide a walkable cell route (through the gap) instead of teleporting',st.walkRoutes===1&&!st.escapes&&firstRoute&&firstRoute.length>3&&!crosses,{st,len:firstRoute?.length});
+ for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
+ const st2=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p2=sb.player;
+ ok('…and keeps moving toward the goal along that route without crossing the thin wall',!st2.unsealed&&(p2.y>10||(p2.x>1.5&&p2.x<3.6))&&Math.hypot(p2.x-2.5,p2.y-5.5)<Math.hypot(16.5-2.5,16.5-5.5),{st2,p2});}
 {const sb=guideSb(16.5,16.5,[]);sb.room.objective={x:5.5,y:5.5};
  for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
