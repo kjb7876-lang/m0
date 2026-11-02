@@ -15,7 +15,8 @@ vm.runInContext(src,sb);const API=sb.window.__STORYWORLD_CAVE_R204__;
 ok('all interior/modern/machine regions registered as decor-only',decoIds.every(z=>API.zones.includes(z)),decoIds.filter(z=>!API.zones.includes(z)));
 ok('decor-only zones keep native walls/floor (no veil, no hide, no floor-command filter)',/const deco=!!ZONES\[frame\.zone\]\?\.decorOnly;/.test(src)&&/const veil=\(\)=>\{if\(deco\)return;/.test(src)&&/if\(deco\)\{stats\.frames\+\+;return;\}/.test(src));
 ok('decor-only zones never change collision or pathing',/if\(ZONES\[where\?\.id\]\?\.decorOnly\)return false;/.test(src));
-ok('decor-only build adds only the decal layer',/if\(cfg\.decorOnly\)\{add\(decalMesh\(T,F,cfg\),mats\.decal,'r215-decals',-19\);/.test(src));
+{const b=src.slice(src.indexOf('function build(r,frame)'));const i=b.indexOf('if(cfg.decorOnly){const dm='),j=b.indexOf('bakeGround(');
+ ok('decor-only build adds only the decal layer and returns before terrain textures/baking (Codex #136)',i>0&&j>i&&/mesh\.name='r215-decals'/.test(b)&&/want=cfg\.decorOnly\?\{crack:/.test(b),{i,j});}
 ok('decor-only zones are not in the organic ZONES literal (modern maps keep right angles)',!decoIds.some(z=>new RegExp('\\n '+z+':\\{').test(block)));
 const wf=fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8');ok('in the CI workflow',/qa\/r214\/r214-cpu-check\.cjs/.test(wf));
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
