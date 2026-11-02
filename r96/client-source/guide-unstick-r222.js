@@ -54,6 +54,7 @@ function watch(){
    //  같은 자리에서 한 번 걸어 보고도 못 움직였으면 그때 3칸 옮긴다.
    const here=Math.floor(player.x)+','+Math.floor(player.y);
    if(q&&q.path&&q.path.length>1&&walkTried!==here){walkTried=here;route=q.path.slice(0,40);stats.walkRoutes=(stats.walkRoutes||0)+1;anchor=null;}
+   else if(q&&q.walkOnly)anchor=null;
    else if(q){player.x=q.x;player.y=q.y;stats.escapes=(stats.escapes||0)+1;route=[];anchor=null;walkTried=null;}
    else anchor=null;/* R235: 아무것도 못 했으면 6초 뒤 다시 본다(한 번 실패하고 영영 멈춰 있던 일) */}}
 }
@@ -71,6 +72,12 @@ function escapeStep(){try{const L=room.exploration;if(!L)return null;const [bx,b
  const s0=[Math.floor(player.x),Math.floor(player.y)],k0=s0+'',back=(r)=>{const path=[];for(let k=r.hit;k&&k!==k0;k=r.prev.get(k))path.unshift(k);return path;};
  // 1) 걸어서(칸 경계 포함) 가장 가까운 적까지 — 그 길 앞쪽 3칸으로
  if(goals.size){const r=bfs([s0],walk,near);if(r.hit){const path=back(r);if(path.length){const [cx,cy]=path[Math.min(2,path.length-1)].split(',').map(Number);return {x:cx+.5,y:cy+.5,path:path.map(k=>{const [a,b]=k.split(',').map(Number);return {x:a+.5,y:b+.5};})};}}}
+ // R236: 살아 있는 적이 없으면(문·목표로 가는 중) 방 목표(room.objective)까지 '걸어서 따라갈 길'만 준다 — 옮기지는 않는다(R232).
+ //  ep1a08 스토리 실플레이: 적은 다 잡고 '중앙 준비실로 이동'인데 좁은 미로라 엔진 길이 0 이라 (30.1,91)에 섰다.
+  //  목표가 닫힌 문 너머(ep1a08 제단 (15,13) 은 보스 문 안)면 걸어서 닿는 칸 중 목표에 가장 가까운 칸까지(그 길에 중앙 준비실이 있어 집결이 시작된다).
+ if(!goals.size&&room.objective&&Number.isFinite(room.objective.x)){const ox=room.objective.x,oy=room.objective.y;const r=bfs([s0],walk,null,80000);let best=null,bd=Math.hypot(s0[0]+.5-ox,s0[1]+.5-oy)-2;
+  for(const k of r.prev.keys()){const [x,y]=k.split(',').map(Number);const d=Math.hypot(x+.5-ox,y+.5-oy);if(d<bd){bd=d;best=k;}}
+  if(best){const path=back({hit:best,prev:r.prev});if(path.length>1)return {walkOnly:true,path:path.map(k=>{const [a,b]=k.split(',').map(Number);return {x:a+.5,y:b+.5};})};}}
  // 2) 걸어서는 나갈 길이 없음(얇은 벽으로 막힌 주머니에 들어가 버림) → 입구에서 걸어서 닿는 칸 중 가장 가까운 곳으로 꺼낸다. 닫힌 문 둘레는 넘지 않는다.
  const e=L.entry;if(!e)return null;const ent=bfs([[Math.floor(e.x),Math.floor(e.y)]],walk,null,60000).prev;if(ent.has(k0))return null;
  // R235: 닫힌 문 너머(입구에서 못 닿는 쪽)에 들어가 버렸으면 입구 쪽으로 나오는 것이므로 닫힌 문을 넘어도 된다(dist02 실플레이: (22.5,4.3) 47분). 거리 20칸까지.
