@@ -4,7 +4,7 @@ const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const src=C('cave-r204.js');
 ok('runtime copy matches; in the CI workflow',RT('cave-r204.js')===src&&/qa\/r224\/r224-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
-ok('rooms mode is the default for interiors and can be switched off',/rooms:true\}/.test(src)&&/rooms:prefs\.rooms!==false/.test(src)&&/prefs\.rooms=p\.rooms/.test(src));
+ok('rooms mode is the default for interiors and can be switched off',/rooms:true[,}]/.test(src)&&/rooms:prefs\.rooms!==false/.test(src)&&/prefs\.rooms=p\.rooms/.test(src));
 const sb={console,Math,JSON,Set,Map,WeakMap,Promise,Float32Array,Uint8Array,Array,Object,Number,String,Error,performance:{now:()=>0},setInterval:()=>0,setTimeout:()=>0,localStorage:{getItem:()=>null,setItem(){}},
  window:{__STORYWORLD_ASSETS_R80_DATA__:{assets:Object.fromEntries(['r80-141','r80-142','r80-143','r80-144','r80-145','r80-146','r80-148','r80-149'].map(id=>[id,{path:'assets/world-r80/'+id+'.webp',scale:1.2}]))},StoryPhase1:{ThreeRenderer:Object.assign(function(){},{prototype:{render(){}}}),attachSight24(){}}}};
 vm.createContext(sb);vm.runInContext('var room=null,player={x:0,y:0};function blocked(){return false;}function makeRoom(id){return {id,layer:"STORY",props:[],enemies:[]};}async function enterRegion(){return true;}var ensureImages=()=>Promise.resolve();',sb);vm.runInContext(src,sb);

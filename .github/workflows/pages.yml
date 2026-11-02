@@ -243,6 +243,8 @@ jobs:
         run: node r96/qa/r226/r226-cpu-check.cjs
       - name: R227 samong E prefers clues over Michaela CPU check
         run: node r96/qa/r227/r227-cpu-check.cjs
+      - name: R228 interior per-room floor tones CPU check
+        run: node r96/qa/r228/r228-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check

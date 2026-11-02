@@ -14,8 +14,8 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R220-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true,rooms:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;}catch(_){}
+const REV='R228-cave-1',KEY='storyworld.r204.cave';
+let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -647,6 +647,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
      r.spatialResources.add(sm);if(r.sightState24&&A.attachSight24)A.attachSight24(sm,r.sightState24);const sk=new T.Mesh(sg,sm);sk.name='r218-skeleton';sk.layers.set(2);sk.renderOrder=-26;sk.userData.presentationOnly=true;sk.userData.r204=true;r.spatialResources.add(sg);group.add(sk);}}
    if(prefs.unify!==false&&cfg.floorLift>1){let k=0;r.spatialRoot.traverse(o=>{if(/annex-ground/.test(o.name||'')&&o.material?.color&&!o.material.userData?.r218Lift){const c=o.material.color;c.setRGB(c.r*cfg.floorLift,c.g*cfg.floorLift,c.b*cfg.floorLift);/* 1을 넘겨도 된다(MeshBasic·톤매핑 없음 → 그림 자체가 밝아짐) */o.material.userData.r218Lift=true;k++;}});stats.floorLifted=k;}
    dimRoofs(r);interiorShell(r);interiorProps(roomOf(frame),cfg);furnish(roomOf(frame),cfg,frame.zone);
+   {const rg=roomFloorMesh(T,roomOf(frame),cfg,frame.zone);if(rg){const rmat=new T.MeshBasicMaterial({vertexColors:true,transparent:true,blending:T.MultiplyBlending,premultipliedAlpha:true,depthWrite:false,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-1});r.spatialResources.add(rmat);r.spatialResources.add(rg);if(r.sightState24&&A.attachSight24)A.attachSight24(rmat,r.sightState24);const rmesh=new T.Mesh(rg,rmat);rmesh.name='r228-room-floors';rmesh.layers.set(2);rmesh.renderOrder=-20;rmesh.userData.presentationOnly=true;rmesh.userData.r204=true;group.add(rmesh);}}
    r.spatialRoot.add(group);
    r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,decorOnly:true};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);return;}
   const tx={field:fieldTex(T,r,F),floorA:tileTex(T,r,ims.floorA,0),floorB:tileTex(T,r,ims.floorB,0),rock:tileTex(T,r,ims.rock,TX.rock[1]),face:tileTex(T,r,ims.face,TX.face[1])};
@@ -724,6 +725,19 @@ function before(r,frame){try{
  hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
+// R228 방마다 다른 바닥(사용자 영상·디아블로·이터널리턴: 방이 바뀌면 바닥 결이 바뀐다). R224 방(r224Rooms) 사각형마다 그 지역 계열(진료·집·도시·대장간·기계·교단) 안에서
+//  고정 시드로 고른 색 한 겹을 옅게 깔고, 가장자리 띠(0.35칸)는 조금 더 어둡게 해 방 경계가 깔개·타일 구역처럼 보이게 한다. 그림만(판정·길찾기 그대로).
+const RFLOOR={clinic:[[.62,.78,.8],[.82,.84,.78],[.55,.66,.72]],home:[[.62,.42,.26],[.74,.55,.36],[.5,.32,.24]],urban:[[.56,.56,.6],[.66,.6,.52],[.46,.5,.56]],
+ forge:[[.62,.36,.2],[.5,.4,.3],[.7,.48,.26]],machine:[[.42,.52,.66],[.5,.56,.6],[.36,.44,.58]],cult:[[.5,.16,.18],[.36,.2,.3],[.58,.26,.2]]};
+const strHash=t=>{let h=2166136261;for(const ch of String(t)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;};
+function roomFloorMesh(T,rm,cfg,zid){if(prefs.rooms===false||prefs.roomFloors===false)return null;const R=rm?.exploration?.r224Rooms;if(!R?.length)return null;
+ const pal=(/^cult/.test(zid||'')?RFLOOR.cult:RFLOOR[cfg?.kind])||RFLOOR.urban;const pos=[],col=[],idx=[];let n=0,k=0;
+ const quad=(x0,y0,x1,y1,c,a,y)=>{pos.push(x0,y,y0, x1,y,y0, x1,y,y1, x0,y,y1);for(let i=0;i<4;i++)col.push(c[0],c[1],c[2]);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;};
+ for(const q of R){if(!(q.x1-q.x0>=2&&q.y1-q.y0>=2))continue;const h=strHash(zid+':'+q.id),c=pal[Math.abs(h)%pal.length],e=.35,y=.0102+(k++)*1e-5;
+  const m=Math.max(...c),t=(a,d)=>c.map(v=>(1-a+a*v/m)*d);/* 곱하기 혼합: 바닥 무늬는 그대로, 색조만(1=그대로) */
+  const a0=q.x0+.08,b0=q.y0+.08,a1=q.x1-.08,b1=q.y1-.08,ce=t(.6,.58);/* 가장자리 띠 네 줄(겹치지 않게) + 안쪽 */
+  quad(a0,b0,a1,b0+e,ce,1,y);quad(a0,b1-e,a1,b1,ce,1,y);quad(a0,b0+e,a0+e,b1-e,ce,1,y);quad(a1-e,b0+e,a1,b1-e,ce,1,y);quad(a0+e,b0+e,a1-e,b1-e,t(.55,.97),1,y);}
+ if(!n)return null;stats.roomFloors=k;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(col,3));g.setIndex(idx);g.computeBoundingSphere();return g;}
 // R224 방 이름(이터널리턴식 구역 표시): 실내에서 다른 방(r224Rooms)에 들어서면 그 방 이름·용도를 잠깐 띄운다. 같은 방은 다시 띄우지 않고, 전투 중(room.engaged)·모달·서사 장면에서는 쉰다.
 let lastRoomKey=null;
 function roomLabelTick(){try{if(prefs.rooms===false||typeof room!=='object'||!room||typeof player!=='object'||!player||modal||loading||(typeof storyScene!=='undefined'&&storyScene))return;
