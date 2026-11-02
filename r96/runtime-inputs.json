@@ -3555,7 +3555,8 @@
     "assets/r226/michaela/index.json",
     "assets/r229/michaela/run-ne-v4.webp",
     "assets/r229/michaela/index.json",
-    "mob-flank-r230.js"
+    "mob-flank-r230.js",
+    "auto-levelup-r237.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4630,5 +4631,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fcca305b48f33e4bf9d56ab3fbe1add589773c4d664c17d0ec634cab8f6af3cf"
+  "runtimeManifestSHA256": "372741fd6a7bb259864fff2d45d42a24cd5d3c32d1ed6cf4456d4004b98a18b1"
 }
