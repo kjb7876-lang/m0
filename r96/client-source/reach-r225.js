@@ -7,7 +7,7 @@
 // 끄기: localStorage['storyworld.r225.reach']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_REACH_R225__)return;
-const REV='R225-reach-1+R231',KEY='storyworld.r225.reach',RAD=.27;
+const REV='R225-reach-1+R231+R234',KEY='storyworld.r225.reach',RAD=.27;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={layouts:0,moved:0,checks:0,errors:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const key=(x,y)=>x+','+y;const cache=new WeakMap();
@@ -21,6 +21,13 @@ function reachOf(L,fresh){let R=fresh?null:cache.get(L);if(R)return R;const e=L.
  const seen=new Set([key(...s)]),q=[s];const [bx,by,W,H]=L.bounds||[0,0,200,200];
  for(let h=0;h<q.length&&h<60000;h++){const [x,y]=q[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=key(nx,ny);if(nx<bx||ny<by||nx>=bx+W||ny>=by+H||seen.has(k))continue;if(open(L,nx,ny)&&edge(L,x,y,dx,dy)){seen.add(k);q.push([nx,ny]);}}}
  R={seen,size:seen.size};cache.set(L,R);stats.layouts++;return R;}
+// R234: 남은 적이 2 이하일 때는 '지금 영웅 자리에서 닫힌 문을 그대로 두고' 걸어서 닿는지도 본다. kair06 지역별 길잡이 검사에서
+//  중간보스(시간수문장 13, 체력 504/7839)가 닫힌 문 너머 (39,58)에 남아, 문을 열린 것으로 보는 위 계산으로는 '닿음'이라 옮겨지지 않았고
+//  길잡이는 중앙 근처만 맴돌며 끝나지 않았다(37분). 10초 넘게 계속 못 닿으면 영웅이 닿는 가장 가까운 칸으로 옮긴다.
+function reachStrict(L){if(typeof player!=='object'||!player)return null;const s=[Math.floor(player.x),Math.floor(player.y)];const ok=(cx,cy)=>{try{return !blocked(cx+.5,cy+.5,RAD,room);}catch(_){return false;}};
+ const okE=(x,y,dx,dy)=>{try{return !blocked(x+.5+dx*.5,y+.5+dy*.5,RAD,room);}catch(_){return false;}};const seen=new Set([key(...s)]),q=[s];const [bx,by,W,H]=L.bounds||[0,0,200,200];
+ for(let h=0;h<q.length&&h<60000;h++){const [x,y]=q[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=key(nx,ny);if(nx<bx||ny<by||nx>=bx+W||ny>=by+H||seen.has(k))continue;if(ok(nx,ny)&&okE(x,y,dx,dy)){seen.add(k);q.push([nx,ny]);}}}
+ return {seen,size:seen.size};}
 function nearest(R,x,y){const cx=Math.floor(x),cy=Math.floor(y);for(let r=1;r<40;r++){let best=null,bd=1e9;for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;const k=key(cx+dx,cy+dy);if(!R.seen.has(k))continue;const d=dx*dx+dy*dy;if(d<bd){bd=d;best=[cx+dx,cy+dy];}}if(best)return best;}return null;}
 function check(){if(!on||typeof room!=='object'||!room||typeof player!=='object'||!player||loading||!started)return;const L=room.exploration;if(!L?.floorCells?.length)return;
  if(L.worldR74==null&&!L.entry)return;
@@ -28,7 +35,10 @@ function check(){if(!on||typeof room!=='object'||!room||typeof player!=='object'
  const act=(room.enemies||[]).filter(e=>e&&e.hp>0&&e.spawnState!=='hidden');if(!act.length||act.length>3)return;
  const R=reachOf(L,true);if(!R||R.size<40)return;stats.checks++;
  for(const e of room.enemies||[]){if(!e||!(e.hp>0)||e.spawnState==='hidden')continue;if(R.seen.has(key(Math.floor(e.x),Math.floor(e.y))))continue;
-  const to=nearest(R,e.x,e.y);if(!to)continue;const from=[+e.x.toFixed(1),+e.y.toFixed(1)];e.x=to[0]+.5;e.y=to[1]+.5;if(Number.isFinite(e.homeX)){e.homeX=e.x;e.homeY=e.y;}e.nav=[];e.r225Moved=(e.r225Moved||0)+1;stats.moved++;stats.last={zone:room.id,id:e.nativeId||e.id,name:e.name,from,to:[e.x,e.y]};}}
+  const to=nearest(R,e.x,e.y);if(!to)continue;const from=[+e.x.toFixed(1),+e.y.toFixed(1)];e.x=to[0]+.5;e.y=to[1]+.5;if(Number.isFinite(e.homeX)){e.homeX=e.x;e.homeY=e.y;}e.nav=[];e.r225Moved=(e.r225Moved||0)+1;stats.moved++;stats.last={zone:room.id,id:e.nativeId||e.id,name:e.name,from,to:[e.x,e.y]};}
+ if(act.length<=2){const RS=reachStrict(L);if(!RS||RS.size<40)return;const now=typeof time==='number'?time:0;
+  for(const e of act){if(RS.seen.has(key(Math.floor(e.x),Math.floor(e.y)))){e.r234Since=null;continue;}if(e.r234Since==null){e.r234Since=now;continue;}if(now-e.r234Since<10)continue;
+   const to=nearest(RS,e.x,e.y);if(!to)continue;const from=[+e.x.toFixed(1),+e.y.toFixed(1)];e.x=to[0]+.5;e.y=to[1]+.5;if(Number.isFinite(e.homeX)){e.homeX=e.x;e.homeY=e.y;}e.nav=[];e.r234Since=null;e.r234Moved=(e.r234Moved||0)+1;stats.strictMoved=(stats.strictMoved||0)+1;stats.last={zone:room.id,id:e.nativeId||e.id,name:e.name,from,to:[e.x,e.y],strict:true};}}}
 if(typeof setInterval==='function')setInterval(()=>{try{check();}catch(e){fail(e);}},3000);
 window.__STORYWORLD_REACH_R225__=Object.freeze({revision:REV,inspect:()=>({revision:REV,on,stats:{...stats},lastError}),check,reachOf,set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();
