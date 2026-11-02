@@ -18,8 +18,11 @@ vm.runInContext(C('boss-r205.js'),sb);const API=sb.window.__STORYWORLD_BOSS_R205
 const mid={id:'mid',midboss:true,hp:100,maxHp:100,defScale:1.4,x:5,y:5,damage:10},boss={id:'boss',boss:true,hp:1000,maxHp:1000,defScale:2,x:5,y:10,damage:50,combatProfile:{attackShape:{range:3,radius:1.5}}},mob={id:'mob',hp:10,maxHp:10,defScale:1,x:9,y:9,damage:5};
 sb.room.enemies.push(mid,boss,mob);
 // ① 크기
+sb.window.__STORYWORLD_BOSS_R205__.set({minSize:false});/* R217 최소 크기는 따로 검사 */
 vm.runInContext(`drawEnemy(room.enemies[0]);drawEnemy(room.enemies[1]);drawEnemy(room.enemies[2]);`,sb);
 ok('midboss drawn at 5/7 of R137 70% scale (=50% overall), restored after; boss and mob unchanged',Math.abs(drawn[0][1]-1.4*5/7)<1e-9&&mid.defScale===1.4&&drawn[1][1]===2&&drawn[2][1]===1,drawn);
+{const n0=drawn.length;sb.window.__STORYWORLD_BOSS_R205__.set({minSize:true});vm.runInContext(`drawEnemy(room.enemies[0]);drawEnemy(room.enemies[1]);drawEnemy(room.enemies[2]);`,sb);const d=drawn.slice(n0);
+ ok('R217: midboss and boss never drawn below 1.6× hero height; mobs unchanged',Math.abs(d[0][1]-1.6)<1e-9&&d[1][1]===2&&d[2][1]===1&&mid.defScale===1.4,d);}
 // ② 환영: 중간보스 차례 멈춤, 시작된 환영 거둠
 const aMid={kind:'echo',start:10,releaseAt:11,endAt:11.5,angle:0};mid.r61Action=aMid;vm.runInContext('tick(1/60)',sb);
 ok('midboss R61 turn stopped and its started illusion cancelled before release',states.get(mid).next===Infinity&&aMid.cancelled===true);

@@ -36,15 +36,19 @@ const layout=()=>({bounds:[0,0,32,24],floorCells:uniq.map(c=>c.slice()),walls:[{
   const bad=ex.floorCells.filter(([x,y])=>!orig.has(x+','+y)&&[[1,0,'v:'+(x+1)+':'+y],[-1,0,'v:'+x+':'+y],[0,1,'h:'+x+':'+(y+1)],[0,-1,'h:'+x+':'+y]].some(([dx,dy,k])=>orig.has((x+dx)+','+(y+dy))&&edges.has(k)));
   ok('no added floor strip sits behind a remaining wall next to the original floor',bad.length===0,bad.slice(0,5));}
  ok('every added cell is reachable from the original floor without crossing a wall',w.dropped>=0&&ex.floorCells.length===w.after);
- ok('other regions untouched',hook('dist02',layout())===null);
+ // R217(사용자 "전체적인 맵통로 확장"): 쉼터(hub)·디테일 전용(실내·현대) 지역은 그대로, 다른 유기 지형 지역도 같은 넓히기를 받는다.
+ok('rest hub and decor-only regions untouched; other organic regions widened too (R217)',hook('hub',layout())===null&&hook('ep1a08',layout())===null&&hook('dist02',layout())!==null);
  // 거리장
  const F=API.field(ex,{seed:0x5d0124,bulge:1.35},[[4.5,4.5,1.6]]);
  let leak=0,n=0;for(let k=0;k<F.f.length;k++){if(F.f[k]>0){n++;if(F.raw[k]<=0)leak++;}}
  ok('visible floor never extends past walkable cells (f>0 ⊆ raw>0)',leak===0&&n>0,{leak,n});
  let corner=0;for(const [x,y] of [[2.05,2.05],[9.95,2.05]])if(API.at(F,F.f,x,y)<0)corner++;ok('room corners are rounded off (cliff cuts the right angle)',corner===2,corner);
  ok('protected entrance stays open',API.at(F,F.f,4.5,4.5)>.9);
- {let run=0,best=0;for(let y=12;y<=19;y+=.05){if(API.at(F,F.f,14.5,y)<0){run+=.05;best=Math.max(best,run);}else run=0;}
-  ok('a 1-cell rock rib between two corridors is thickened to ≥1.35 cells (no paper-thin walls)',best>=1.35,best);}
+ // R217: 이전 검사는 x=14.5 한 점(벽 w2 자리)만 재서 1.4칸이 나왔다 — 같은 R204 코드에서도 갈비 나머지 구간은 1.15~1.2칸이었다(qa/r217/README).
+ //  그래서 갈비 전체 길이(x 10.5~18.5)에서 가장 얇은 곳을 재고, 넓히기가 갈비 칸(y=15)에 바닥을 더하지 않는지 함께 본다.
+ {const rib=x=>{let run=0,best=0;for(let y=12;y<=19;y+=.05){if(API.at(F,F.f,x,y)<0){run+=.05;best=Math.max(best,run);}else run=0;}return best;};
+  const xs=[10.5,11.5,12.5,13.5,14.5,15.5,16.5,17.5,18.5],min=Math.min(...xs.map(rib)),eaten=ex.floorCells.filter(([x,y])=>y===15&&x>=10&&x<=19).length;
+  ok('a 1-cell rock rib between two corridors stays at least a full cell thick along its whole length and widening never eats into it (no paper-thin walls)',min>=1.05&&eaten===0,{min,eaten});}
  ok('a baffle wall between floor cells is drawn as rock (no invisible walls)',API.at(F,F.f,12,13.5)<0);
  // 반지름 .27 로 방 A → 방 B 가 이어지는지(0.25칸 격자 BFS, f>=.27)
  const step=.25,seen=new Set(),q=[[5,5]];const key=(x,y)=>x.toFixed(2)+','+y.toFixed(2);seen.add(key(5,5));let reached=false;

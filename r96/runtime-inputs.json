@@ -3533,7 +3533,9 @@
     "assets/r208/mobs/root-bound-ghoul.webp",
     "assets/r208/mobs/twin-head-corpse.webp",
     "assets/r208/mobs/web-bound-skeleton.webp",
-    "skills-r209.js"
+    "skills-r209.js",
+    "view-r217.js",
+    "lag-r217.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4608,5 +4610,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bf88004ab7ff40fc86d75a195a8b2d27baa3ae9823544ee3fbda0132ff280e9f"
+  "runtimeManifestSHA256": "25b47137abf7f02d023c4c9338170a3c5672cb7ca1f623162f2f11b2369647a2"
 }
