@@ -233,6 +233,10 @@ jobs:
         run: node r96/qa/r221/r221-cpu-check.cjs
       - name: R222 skill-up window + guide unstick (blocked route points, sidestep, replan, doors) CPU check
         run: node r96/qa/r222/r222-cpu-check.cjs
+      - name: R223 recent Drive mobs (sheets 21-28, name-matched art, facing) CPU check
+        run: node r96/qa/r223/r223-cpu-check.cjs
+      - name: R224 interior rooms (rectangular rooms, 1-cell walls, doorways, no door bypass, low walls, furniture) CPU check
+        run: node r96/qa/r224/r224-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check

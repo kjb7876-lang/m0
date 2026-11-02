@@ -12418,6 +12418,56 @@
       "sha256": "40f73fefce0d79eaad2f83d1419ed9d4768326f444b13b2e801c7cd0ba47f95a"
     },
     {
+      "path": "assets/r223/mobs/ash-mason.webp",
+      "bytes": 78056,
+      "sha256": "f8857a13e05138ae6805687b4cc4d8abc3a1e4a92144e969acc2b3ce6d10c454"
+    },
+    {
+      "path": "assets/r223/mobs/censer-priest.webp",
+      "bytes": 83380,
+      "sha256": "faf9719b7bbd943a7ffed78c82eef8e91f7280b11b560a9f1ca25bcc4f86b923"
+    },
+    {
+      "path": "assets/r223/mobs/clockwork-sentinel.webp",
+      "bytes": 90156,
+      "sha256": "ae9d165546708217c25b601035741649e41de2f8aed421ac69994fa36ff40d5b"
+    },
+    {
+      "path": "assets/r223/mobs/curtain-mannequin.webp",
+      "bytes": 70406,
+      "sha256": "cf7fdb2be07f4428f9be81ae6cd4ae9cde44ac389fbd49aa7f810f59e7375949"
+    },
+    {
+      "path": "assets/r223/mobs/index.json",
+      "bytes": 10300,
+      "sha256": "8283df49db60010d5919d2dae92e1b91d415b8e4a281ef14a7658cb9f3135c97"
+    },
+    {
+      "path": "assets/r223/mobs/oblivion-spider.webp",
+      "bytes": 123174,
+      "sha256": "9d945688fc8244106d300073b008e8268c2da3e93ca1e1b5ff54b213ceb4e909"
+    },
+    {
+      "path": "assets/r223/mobs/signal-golem.webp",
+      "bytes": 82400,
+      "sha256": "8b1158157ec75d6da0517cb7bfef0a6c2704d45f2b2c6905ce0f9deb009a4318"
+    },
+    {
+      "path": "assets/r223/mobs/superego-inquisitor.webp",
+      "bytes": 71050,
+      "sha256": "ff747dcf8e1d8af23b8b296671251d5ca0e20978a7d0ecc550765ecc2b832d63"
+    },
+    {
+      "path": "assets/r223/mobs/thread-nurse.webp",
+      "bytes": 100752,
+      "sha256": "914fe1533a34dc4de1eed8cb014eeb62f24c1635f9ec5534b2dd6e3ddfcf4995"
+    },
+    {
+      "path": "assets/r223/mobs/vial-collector.webp",
+      "bytes": 77500,
+      "sha256": "05cb775f576894daa86994aba7d62826915ede8e418553e1cd2a7984a3ad7b29"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20399,8 +20449,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 100986,
-      "sha256": "8cf64616c8c2c69e7e3269c1cbb03137f406a5baa5d2299d087314484594962d"
+      "bytes": 106083,
+      "sha256": "a39ae3b62f93ac86c47635bf3ddcca8a1543b52416b9722c8e60f2ae30336d3a"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21459,8 +21509,8 @@
     },
     {
       "path": "story-mobs-r208.js",
-      "bytes": 7504,
-      "sha256": "4bc24b6fa20819493d5ff7d7fdd14c3fc8c88374b4a0f4389323ce92a058debf"
+      "bytes": 8679,
+      "sha256": "bb66304b3d13145e3f1eace2c87a2197b67ccc56013cdb998d9be2c276808348"
     },
     {
       "path": "story-reader-r122.js",
@@ -21643,8 +21693,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4328,
-  "totalBytes": 842869597,
+  "fileCount": 4338,
+  "totalBytes": 843663043,
   "webHTMLSha256": "6ba2f42e48c0cceb524f56e7fd63abe179cc40b8d495ab3cc41b6331402a4611",
   "largest": [
     {
