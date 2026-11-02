@@ -7,17 +7,19 @@
 // 끄기: localStorage['storyworld.r225.reach']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_REACH_R225__)return;
-const REV='R225-reach-1',KEY='storyworld.r225.reach',RAD=.27;
+const REV='R225-reach-1+R231',KEY='storyworld.r225.reach',RAD=.27;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={layouts:0,moved:0,checks:0,errors:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const key=(x,y)=>x+','+y;const cache=new WeakMap();
 function doorsOf(L){return [...(L?.worldR74?.doors||[]),...(L?.hospitalDoorsB3||[])];}
 function nearDoor(L,x,y){return doorsOf(L).some(d=>Math.abs(d.x-x)<(Number(d.width)||1)/2+.7&&Math.abs(d.y-y)<(Number(d.depth)||1)/2+.7);}
 function open(L,cx,cy){const x=cx+.5,y=cy+.5;try{return nearDoor(L,x,y)||!blocked(x,y,RAD,room);}catch(_){return false;}}
+// R231: 칸 중심만 보면 칸 경계에 놓인 얇은 벽(두께 .24)을 건너뛰어 벽 너머 주머니를 '닿는다'고 셌다 → 두 칸 사이 경계 중간점도 본다(문 둘레는 열린 것으로).
+function edge(L,x,y,dx,dy){const mx=x+.5+dx*.5,my=y+.5+dy*.5;try{return nearDoor(L,mx,my)||!blocked(mx,my,RAD,room);}catch(_){return false;}}
 function reachOf(L,fresh){let R=fresh?null:cache.get(L);if(R)return R;const e=L.entry||L.entrance||(typeof player==='object'?player:null);if(!e)return null;
  let s=[Math.floor(e.x),Math.floor(e.y)];if(!open(L,...s)){const p=typeof player==='object'&&player?[Math.floor(player.x),Math.floor(player.y)]:null;if(p&&open(L,...p))s=p;else return null;}
  const seen=new Set([key(...s)]),q=[s];const [bx,by,W,H]=L.bounds||[0,0,200,200];
- for(let h=0;h<q.length&&h<60000;h++){const [x,y]=q[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=key(nx,ny);if(nx<bx||ny<by||nx>=bx+W||ny>=by+H||seen.has(k))continue;if(open(L,nx,ny)){seen.add(k);q.push([nx,ny]);}}}
+ for(let h=0;h<q.length&&h<60000;h++){const [x,y]=q[h];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=key(nx,ny);if(nx<bx||ny<by||nx>=bx+W||ny>=by+H||seen.has(k))continue;if(open(L,nx,ny)&&edge(L,x,y,dx,dy)){seen.add(k);q.push([nx,ny]);}}}
  R={seen,size:seen.size};cache.set(L,R);stats.layouts++;return R;}
 function nearest(R,x,y){const cx=Math.floor(x),cy=Math.floor(y);for(let r=1;r<40;r++){let best=null,bd=1e9;for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){if(Math.max(Math.abs(dx),Math.abs(dy))!==r)continue;const k=key(cx+dx,cy+dy);if(!R.seen.has(k))continue;const d=dx*dx+dy*dy;if(d<bd){bd=d;best=[cx+dx,cy+dy];}}if(best)return best;}return null;}
 function check(){if(!on||typeof room!=='object'||!room||typeof player!=='object'||!player||loading||!started)return;const L=room.exploration;if(!L?.floorCells?.length)return;
