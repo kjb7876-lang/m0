@@ -247,6 +247,8 @@ jobs:
         run: node r96/qa/r228/r228-cpu-check.cjs
       - name: R229 Michaela NE/NW run legs from the N run cycle (v4) CPU check
         run: node r96/qa/r229/r229-cpu-check.cjs
+      - name: R230 mobs blink beside the hero before a vertical melee attack CPU check
+        run: node r96/qa/r230/r230-cpu-check.cjs
       - name: R205 midboss 50%, boss-only rare illusions with move, boss enrage CPU check
         run: node r96/qa/r205/r205-cpu-check.cjs
       - name: R203 samong-retrograde shades from Drive sheets 07/08 (RB/RE/RF/RG) CPU check
