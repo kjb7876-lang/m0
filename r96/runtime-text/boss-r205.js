@@ -10,7 +10,7 @@
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_R205__)return;
-const REV='R217-boss-2',KEY='storyworld.r205.boss';
+const REV='R217-boss-3',KEY='storyworld.r205.boss';
 const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true};
 const prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={midDraws:0,echoStopped:0,echoCancelled:0,echoGaps:0,moves:0,moveDist:0,enraged:0,scaledHazards:0,enragedDraws:0,errors:0};let lastError=null;
@@ -70,13 +70,27 @@ function enrageTick(){const list=typeof hazards!=='undefined'&&Array.isArray(haz
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){
  try{if(solo()&&live()){if(prefs.echoBossOnly)gateEcho();if(prefs.echoMove)watchEcho();if(prefs.enrage)enrageTick();}}catch(e){fail(e);}
  const r=base.call(this,dt,...a);try{if(moving.size&&live())stepMoves(Number.isFinite(dt)?dt:1/60);}catch(e){fail(e);}return r;};}
+// R217: 보스·중간보스의 "그려진 몸"(기록기 그림 명령 높이 × 불투명 세로 비율)이 영웅 몸(actorHeight × .98, R114 맞춤 기준)의 1.6배보다 작으면 발밑 기준으로 키운다.
+//  그림마다 투명 여백·가로로 넓은 날개 때문에 정해진 배율(defScale)만으로는 실제 크기가 영웅과 비슷하게 나왔다(보라검천사 ≈1.07배 실측).
+const HERO_BODY=.98,MAX_FIT=3;const recOK=()=>typeof ctx==='object'&&!!ctx&&Array.isArray(ctx.commands)&&typeof actorHeight==='function';
+const fracCache=new WeakMap();
+function bodyFrac(image,rect){if(!image||!rect)return null;let m=fracCache.get(image);if(!m){m=new Map();fracCache.set(image,m);}const key=rect.map(v=>Math.round(v)).join(',');if(m.has(key))return m.get(key);
+ let out=null;try{const [sx,sy,sw,sh]=rect,H=64,W=Math.max(8,Math.round(64*sw/sh)),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(image,sx,sy,sw,sh,0,0,W,H);
+  const d=g.getImageData(0,0,W,H).data,rows=[];for(let y=0;y<H;y++){let n=0;for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>100)n++;rows.push(n);}const mx=Math.max(...rows);if(mx>0){const th=mx*.12;let a=-1,b=-1;for(let y=0;y<H;y++)if(rows[y]>=th){if(a<0)a=y;b=y;}out=(b-a+1)/H;}
+  c.width=c.height=1;}catch(_){out=null;}m.set(key,out);stats.fracScans=(stats.fracScans||0)+1;return out;}
+function fitMin(st){const C=ctx.commands;let best=null,bh=0;for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind!=='image'||!c.points)continue;const h=Math.abs(c.points[3][1]-c.points[0][1]);if(h>bh){bh=h;best=c;}}
+ if(!best||bh<6)return;const f=bodyFrac(best.image,best.sourceRect)||1,now=bh*f,want=actorHeight()*HERO_BODY*MIN_BOSS_H;stats.lastBodyRatio=Math.round(now/(actorHeight()*HERO_BODY)*100)/100;if(now>=want*.98)return;
+ const k=Math.min(MAX_FIT,want/now),P=best.points,fx=(P[2][0]+P[3][0])/2,fy=(P[2][1]+P[3][1])/2,own=best.owner;
+ for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind!=='image'||!c.points||(c!==best&&(!own||c.owner!==own)))continue;c.points=c.points.map(([x,y])=>[fx+(x-fx)*k,fy+(y-fy)*k]);}
+ stats.minSized=(stats.minSized||0)+1;stats.lastFitK=Math.round(k*100)/100;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!e)return base.apply(this,arguments);const ds=e.defScale;let k=1;
  try{if(Number.isFinite(ds)){if(prefs.midHalf&&midClass(e)){k*=R137()?.prefs?.().midbossScale?5/7:.5;stats.midDraws++;}if(prefs.enrage&&e.r205Enraged&&e.hp>0){k*=ENRAGE_SIZE;stats.enragedDraws++;}
-  if(prefs.minSize&&(bossClass(e)||midClass(e)||e.midboss)){const sr=Number(e.combatProfile?.spriteRect?.height)||1,h=sr*ds*k;if(h>0&&h<MIN_BOSS_H){k*=MIN_BOSS_H/h;stats.minSized=(stats.minSized||0)+1;}}}}catch(err){fail(err);}
+  if(prefs.minSize&&!recOK()&&(bossClass(e)||midClass(e)||e.midboss)){const sr=Number(e.combatProfile?.spriteRect?.height)||1,h=sr*ds*k;if(h>0&&h<MIN_BOSS_H){k*=MIN_BOSS_H/h;stats.minSized=(stats.minSized||0)+1;}}}}catch(err){fail(err);}
  if(k!==1)e.defScale=ds*k;
  try{if(k!==1&&e.r205Enraged&&typeof ctx==='object'&&ctx&&typeof project==='function'){/* 붉은 기운: 그림 뒤 바닥 타원(기록기 호환 — filter 없음) */const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,R0=34*z*(1.1+.12*Math.sin(T()*6));
    ctx.save();const g=ctx.createRadialGradient(q.x,q.y,R0*.15,q.x,q.y,R0);g.addColorStop(0,'rgba(190,20,24,.42)');g.addColorStop(1,'rgba(120,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(q.x,q.y,R0,R0*.5,0,0,Math.PI*2);ctx.fill();ctx.restore();}}catch(err){fail(err);}
- try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;}};}
+ const big=prefs.minSize&&recOK()&&e.hp>0&&(bossClass(e)||midClass(e)||e.midboss),st=big?ctx.commands.length:0;
+ try{return base.apply(this,arguments);}finally{if(k!==1)e.defScale=ds;if(big)try{fitMin(st);}catch(err){fail(err);}}};}
 function set(p={}){for(const k of Object.keys(DEFAULTS))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_BOSS_R205__=Object.freeze({revision:REV,set,bossClass,midClass,enrage,scaleRanges,constants:{ENRAGE_AT,ENRAGE_DMG,ENRAGE_SIZE,ENRAGE_RANGE,ECHO_GAP,MOVE_MAX,ROOT_GAP_MUL,MIN_BOSS_H},rootBoss,gapOf,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},moving:moving.size,lastError})});

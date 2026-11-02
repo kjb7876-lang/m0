@@ -15,7 +15,7 @@
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
 const REV='R204-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;}catch(_){}
+let prefs={on:true,widen:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -115,6 +115,9 @@ const ZONES={
   decalMix:{near:[[5,3],[6,3],[0,2],[8,1]],open:[[0,4],[5,3],[6,2],[7,2],[8,.6]]},decalDensity:13,
   tex:{floorA:['assets/r118/tiles/vault.webp',0],floorB:['assets/r118/tiles/castle.webp',0],rock:['assets/r99/outdoor/ground-ruin.webp',1],face:['assets/r118/tiles/castle.webp',1]}}};/* 윗면은 눈, 벽면은 바위, 바닥 일부는 검은 흙(밟힌 눈) */
 const R=4,M=8;
+// R217 통로 확장(사용자 2026-11-02 "전체적인 맵통로 확장") — 쉼터(hub)를 뺀 유기 지형 지역 모두 좁은 통로(바닥 깊이 2칸 이하) 둘레를 2.3칸까지 넓힌다(바닥 깊이 2칸 이하 = 폭 4칸 이하 통로만, 원래 R204 는 1.5칸·거미동굴 등 5곳).
+//  긴 벽(4칸 이상)·문 둘레·맵 가장자리는 그대로, 원래 바닥에서 닿는 칸만 더한다(widen 참고). storyworld.r204.cave {widen:false} 로 끈다.
+const WIDEN_SKIP=new Set(['hub']);for(const [id,c] of Object.entries(ZONES))if(!WIDEN_SKIP.has(id)){c.widen=true;c.widenHW=c.widenHW||2;c.widenR=c.widenR||2.3;}
 // R215 디테일 전용(decorOnly) — 사용자 "모든맵개선" + 앞서 "현대 건물 안(학교·호텔)은 직각 타일 허용". 실내·현대·기계 계열은 원래 벽·바닥·충돌을 그대로 두고
 //  같은 화풍의 바닥 장식(균열·잔해·얼룩·쇠사슬)만 덧입힌다. 지형을 숨기지 않고, 이동 판정·길찾기도 바꾸지 않는다.
 const DECO=(seed,kind)=>{const K={
@@ -245,10 +248,12 @@ function widen(ex,cfg,doorPts){const W=ex.bounds[2],H=ex.bounds[3],key=(x,y)=>x+
   if(x0===x1&&Math.abs(y1-y0)>=4)for(let y=Math.min(y0,y1);y<Math.max(y0,y1);y++)longEdge.add('v:'+x0+':'+y);else if(y0===y1&&Math.abs(x1-x0)>=4)for(let x=Math.min(x0,x1);x<Math.max(x0,x1);x++)longEdge.add('h:'+x+':'+y0);}
  const behindLong=(x,y)=>(has(x-1,y)&&longEdge.has('v:'+x+':'+y))||(has(x+1,y)&&longEdge.has('v:'+(x+1)+':'+y))||(has(x,y-1)&&longEdge.has('h:'+x+':'+y))||(has(x,y+1)&&longEdge.has('h:'+x+':'+(y+1)));
  const add=new Set();
- for(const c of ex.floorCells){const [x,y]=c;if(hwOf(x,y)>2||nearDoor(x,y))continue;let R8=null;
-  for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){if(Math.hypot(dx,dy)>1.5)continue;const nx=x+dx,ny=y+dy,k=key(nx,ny);if(S.has(k)||add.has(k))continue;
-   if(nx<2||ny<2||nx>W-3||ny>H-3||nearDoor(nx,ny)||behindLong(nx,ny))continue;R8=R8||reach(x,y,8);let ok=true;
-   for(let yy=-2;yy<=2&&ok;yy++)for(let xx=-2;xx<=2;xx++){if(Math.hypot(xx,yy)>2.3)continue;const kk=key(nx+xx,ny+yy);if(S.has(kk)&&!R8.has(kk)){ok=false;break;}}
+ const HW=cfg.widenHW||2,GR=cfg.widenR||1.5,GI=Math.ceil(GR),CK=GR+.8,CI=Math.ceil(CK),RL=Math.ceil(CK*3);
+ for(const c of ex.floorCells){const [x,y]=c;if(hwOf(x,y)>HW||nearDoor(x,y))continue;let R8=null;
+  for(let dy=-GI;dy<=GI;dy++)for(let dx=-GI;dx<=GI;dx++){if(Math.hypot(dx,dy)>GR)continue;const nx=x+dx,ny=y+dy,k=key(nx,ny);if(S.has(k)||add.has(k))continue;
+   if(nx<2||ny<2||nx>W-3||ny>H-3||nearDoor(nx,ny)||behindLong(nx,ny))continue;
+   if(GR>1.5){const sx=Math.sign(dx),sy=Math.sign(dy);let thin=false;for(let t=1;t<=2&&!thin;t++)if(has(nx+sx*t,ny+sy*t)||(sx&&sy&&(has(nx+sx*t,ny)||has(nx,ny+sy*t))))thin=true;if(thin)continue;}/* R217: 넓힌 칸 너머 2칸 안에 다른 바닥이 있으면(두 통로 사이 바위 벽) 넓히지 않는다 — 벽이 종잇장처럼 얇아지지 않게 */R8=R8||reach(x,y,RL);let ok=true;
+   for(let yy=-CI;yy<=CI&&ok;yy++)for(let xx=-CI;xx<=CI;xx++){if(Math.hypot(xx,yy)>CK)continue;const kk=key(nx+xx,ny+yy);if(S.has(kk)&&!R8.has(kk)){ok=false;break;}}
    if(ok)add.add(k);}}
  if(!add.size)return null;
  // 벽: 각 벽이 덮는 칸 경계(세로 'v:x:y' = (x-1,y)|(x,y), 가로 'h:x:y' = (x,y-1)|(x,y))를 구한다.
@@ -285,7 +290,7 @@ const layoutDoorPoints=L=>{const out=[],pt=(q,rad)=>{if(q&&Number.isFinite(q.x)&
  for(const d of L.worldR74?.doors||[])pt(d,Math.max(3.5,(Number(d.width)||0)/2+3));for(const q of [L.gate,L.entrance,L.entry])pt(q);for(const w of L.walls||[])if(/door/i.test(String(w.id||'')))pt(w);return out;};
 // R171 지도 레이아웃이 처음 방에 붙을 때(꾸미기 전에) 부른다 — 같은 원본 레이아웃에는 늘 같은 결과 객체를 돌려준다(꾸미기·색인이 한 번만).
 const widened=new WeakMap();
-window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!solo()||!ZONES[id]?.widen||!L?.floorCells?.length)return null;if(widened.has(L))return widened.get(L);
+window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!prefs.widen||!solo()||!ZONES[id]?.widen||!L?.floorCells?.length)return null;if(widened.has(L))return widened.get(L);
  const nx=widen(L,ZONES[id],layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
 
 // ---- 게임 쪽 거리장: 이동 판정(blocked)과 렌더러가 같은 것을 쓴다 ------------------------------------
@@ -599,7 +604,7 @@ const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,fra
 C.render=wrapFn(C.render);
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
-function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
+function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,
  inspect:()=>{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,st=r?.__r204,F=st?.F;return{revision:REV,prefs:{...prefs},active:!!st?.group?.visible,zone:st?.zone||null,field:F?{ms:F.ms,bulgedCells:F.bulgedCells,protect:F.protect,size:[F.W,F.H]}:null,stats:{...stats},lastError};}});
 })();

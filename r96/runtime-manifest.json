@@ -20384,8 +20384,8 @@
     },
     {
       "path": "boss-r205.js",
-      "bytes": 9558,
-      "sha256": "c5588f0abe434a844a47e389870dcaa7df3ef7f9dcd10fd8c29dfbac4f2f5b9a"
+      "bytes": 11921,
+      "sha256": "b189271b925f54c26251b8fd3d4ad61d7f690c2e9c70b4ad9f75473f9642aa8f"
     },
     {
       "path": "bosses-r104-data.js",
@@ -20399,8 +20399,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 84295,
-      "sha256": "17e1af1f6d46ce1e70719b793d5f443f1537d0fc1d7ae84731dcf43c2d701a2b"
+      "bytes": 85538,
+      "sha256": "4b8881a9213b0446a7cfb6c93d10d3dcacd69c3f2de942a1fbb7f8c6d70bd501"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21164,13 +21164,18 @@
     },
     {
       "path": "index.html",
-      "bytes": 6565176,
-      "sha256": "fa20eca6dc1869efede6d8f705bc80dce0e7a3be36289e48ebd156a5b8e46a9a"
+      "bytes": 6565213,
+      "sha256": "a4ebc88400d0157bc33cc2d1a3545a6f181bb9bc36e158f557b076e0b7c228fa"
     },
     {
       "path": "intro-r140.js",
       "bytes": 3772,
       "sha256": "13099847e64cbc1b1af0cbe0c5a2fe37949340abdf01827bc45c183c2591fbbb"
+    },
+    {
+      "path": "lag-r217.js",
+      "bytes": 2390,
+      "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
     },
     {
       "path": "light-r182.js",
@@ -21623,9 +21628,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4324,
-  "totalBytes": 842823326,
-  "webHTMLSha256": "fa20eca6dc1869efede6d8f705bc80dce0e7a3be36289e48ebd156a5b8e46a9a",
+  "fileCount": 4325,
+  "totalBytes": 842829359,
+  "webHTMLSha256": "a4ebc88400d0157bc33cc2d1a3545a6f181bb9bc36e158f557b076e0b7c228fa",
   "largest": [
     {
       "path": "index.html",
