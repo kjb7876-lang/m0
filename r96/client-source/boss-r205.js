@@ -10,7 +10,7 @@
  * Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_R205__)return;
-const REV='R217-boss-3',KEY='storyworld.r205.boss';
+const REV='R221-boss-4',KEY='storyworld.r205.boss';
 const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true,enrageLite:true};
 const prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={midDraws:0,echoStopped:0,echoCancelled:0,echoGaps:0,moves:0,moveDist:0,enraged:0,scaledHazards:0,enragedDraws:0,errors:0};let lastError=null;
