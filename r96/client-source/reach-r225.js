@@ -10,7 +10,7 @@ if(window.__STORYWORLD_REACH_R225__)return;
 const REV='R225-reach-1+R231+R234',KEY='storyworld.r225.reach',RAD=.27;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={layouts:0,moved:0,checks:0,errors:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
-const key=(x,y)=>x+','+y;const cache=new WeakMap();
+const key=(x,y)=>x+','+y;const regroup={zone:null,sum:-1,at:0};const cache=new WeakMap();
 function doorsOf(L){return [...(L?.worldR74?.doors||[]),...(L?.hospitalDoorsB3||[])];}
 function nearDoor(L,x,y){return doorsOf(L).some(d=>Math.abs(d.x-x)<(Number(d.width)||1)/2+.7&&Math.abs(d.y-y)<(Number(d.depth)||1)/2+.7);}
 function open(L,cx,cy){const x=cx+.5,y=cy+.5;try{return nearDoor(L,x,y)||!blocked(x,y,RAD,room);}catch(_){return false;}}
@@ -37,6 +37,12 @@ function check(){if(!on||typeof room!=='object'||!room||typeof player!=='object'
  for(const e of room.enemies||[]){if(!e||!(e.hp>0)||e.spawnState==='hidden')continue;if(R.seen.has(key(Math.floor(e.x),Math.floor(e.y))))continue;
   const to=nearest(R,e.x,e.y);if(!to)continue;const from=[+e.x.toFixed(1),+e.y.toFixed(1)];e.x=to[0]+.5;e.y=to[1]+.5;if(Number.isFinite(e.homeX)){e.homeX=e.x;e.homeY=e.y;}e.nav=[];e.r225Moved=(e.r225Moved||0)+1;stats.moved++;stats.last={zone:room.id,id:e.nativeId||e.id,name:e.name,from,to:[e.x,e.y]};}
  if(act.length<=2){const RS=reachStrict(L);if(!RS||RS.size<40)return;const now=typeof time==='number'?time:0;
+  // R234b: 남은 적이 멀리(12칸 넘게) 있고 20초 동안 남은 적 체력이 전혀 줄지 않았으면(길잡이가 그쪽으로 가지 않음) 그 적을 영웅 쪽 4칸 앞 닿는 칸으로 불러온다.
+  //  kair06: 중간보스는 집결 때 숨겨졌다가(R78) 나중에 제자리 (39,58)에 나타났고, 길잡이는 집결 단계라 중앙 전투실 근처만 지켜 37분 끝나지 않았다(길은 있음).
+  const sum=act.reduce((a,e)=>a+Math.max(0,e.hp),0),zk=room.id;if(regroup.zone!==zk||Math.abs(sum-regroup.sum)>.5){regroup.zone=zk;regroup.sum=sum;regroup.at=now;}
+  else if(now-regroup.at>20){const far=act.filter(e=>Math.hypot(e.x-player.x,e.y-player.y)>12).sort((a,b)=>Math.hypot(b.x-player.x,b.y-player.y)-Math.hypot(a.x-player.x,a.y-player.y))[0];
+   if(far){const d=Math.hypot(far.x-player.x,far.y-player.y),tx=player.x+(far.x-player.x)/d*4,ty=player.y+(far.y-player.y)/d*4,to=nearest(RS,tx,ty)||nearest(RS,player.x,player.y);
+    if(to){const from=[+far.x.toFixed(1),+far.y.toFixed(1)];far.x=to[0]+.5;far.y=to[1]+.5;if(Number.isFinite(far.homeX)){far.homeX=far.x;far.homeY=far.y;}far.nav=[];far.r234Regroup=(far.r234Regroup||0)+1;stats.regrouped=(stats.regrouped||0)+1;stats.last={zone:room.id,id:far.nativeId||far.id,name:far.name,from,to:[far.x,far.y],regroup:true};regroup.at=now;}}}
   for(const e of act){if(RS.seen.has(key(Math.floor(e.x),Math.floor(e.y)))){e.r234Since=null;continue;}if(e.r234Since==null){e.r234Since=now;continue;}if(now-e.r234Since<10)continue;
    const to=nearest(RS,e.x,e.y);if(!to)continue;const from=[+e.x.toFixed(1),+e.y.toFixed(1)];e.x=to[0]+.5;e.y=to[1]+.5;if(Number.isFinite(e.homeX)){e.homeX=e.x;e.homeY=e.y;}e.nav=[];e.r234Since=null;e.r234Moved=(e.r234Moved||0)+1;stats.strictMoved=(stats.strictMoved||0)+1;stats.last={zone:room.id,id:e.nativeId||e.id,name:e.name,from,to:[e.x,e.y],strict:true};}}}
 if(typeof setInterval==='function')setInterval(()=>{try{check();}catch(e){fail(e);}},3000);
