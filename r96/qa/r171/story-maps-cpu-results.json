@@ -1,0 +1,118 @@
+{
+ "revision": "r171-story-maps-cpu",
+ "results": [
+  {
+   "name": "runtime copy identical",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "loaded right after dist/phase1.js (optionally after the R221 WebGL notice)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "listed in verify-r96-public.py",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pref {on:false} disables every region",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "native boot completes",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "module installed",
+   "ok": true,
+   "detail": "{\"revision\":\"R171-story-maps-1\",\"prefs\":{\"on\":true},\"failures\":0,\"lastError\":null,\"stats\":{\"built\":97,\"used\":55,\"fallback\":0,\"rooms\":111},\"cached\":[\"murder01\",\"murder02\",\"murder04\",\"murder03\",\"cult01\",\"cult02\",\"cult05\",\"cult06\",\"cult03\",\"dist00\",\"dist01\",\"kair01\"],\"current\":null,\"browser\":false,\"GPU\":false}"
+  },
+  {
+   "name": "every eligible story region uses an R171 map (48)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "native-owner regions and the hospital keep their own layout",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "template follows the region source topology",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "several templates are in use (not one shared maze)",
+   "ok": true,
+   "detail": "[\"grove\",\"bridge\",\"street\",\"switchback\",\"lanes\",\"radial\",\"grid-wide\",\"ward\",\"grid\",\"nave\"]"
+  },
+  {
+   "name": "floor cells within 1,500–4,000 and bounds 68×70",
+   "ok": true,
+   "detail": "[\"dist00:2313\",\"dist01:2187\",\"dist02:2187\",\"dist03:1975\",\"dist04:2181\",\"dist05:2014\",\"dist06:2196\",\"ep1a09:3359\",\"ep1a09b:3646\",\"ep1a10:3554\",\"ep1a11:3228\",\"ep1b01:2255\",\"ep1b02:3226\",\"ep1b03:3519\",\"ep1b04:3489\",\"ep1b05:3282\",\"ep1b06:3404\",\"ep1b06b:2208\",\"ep1b07:3510\",\"ep1b08:2127\",\"ep1b09:3356\",\"u201:3533\",\"u202:3439\",\"u204:3198\",\"u205:3260\",\"u206:3343\",\"u203:3339\",\"last304:2265\",\"last305:2324\",\"last302:1999\",\"last303:2256\",\"kair01:2054\",\"kair04:2006\",\"kair05:2236\",\"kair06:1863\",\"kair07:2159\",\"kair08:1850\",\"kair09:1961\",\"kair10:1943\",\"murder01:3356\",\"murder02:3499\",\"murder04:3264\",\"murder03:3"
+  },
+  {
+   "name": "layout is deterministic per region",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "three doors with the ward ids and positions (boss 20,20 · exit 5,6)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "BFS entry → gathering room with every door closed",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "closed doors seal the boss room, the exit and the side room",
+   "ok": true,
+   "detail": "{\"boss\":[],\"next\":[],\"closet\":[]}"
+  },
+  {
+   "name": "door-0 opens the boss room (and its exit yard); door-2 then reaches the next-region alcove",
+   "ok": true,
+   "detail": "{\"boss\":[],\"exit\":[]}"
+  },
+  {
+   "name": "door-1 opens the side room",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "every field spawn spot is reachable from the entry with doors closed",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "enemy spots stand on cells whose eight neighbours are floor, outside the side room",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "777 entry: R171 map, safe hero, gathering room reachable, boss room locked",
+   "ok": true,
+   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":39,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":41,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":40,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
+  },
+  {
+   "name": "777 entry: no living enemy (champions included) embedded in walls or parked in the side room",
+   "ok": true,
+   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":39,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":41,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":40,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
+  },
+  {
+   "name": "native error ledger stays clear",
+   "ok": true,
+   "detail": "[]"
+  }
+ ],
+ "passed": true,
+ "browser": false,
+ "GPU": false
+}

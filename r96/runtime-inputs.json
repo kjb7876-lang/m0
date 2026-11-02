@@ -3535,7 +3535,8 @@
     "assets/r208/mobs/web-bound-skeleton.webp",
     "skills-r209.js",
     "view-r217.js",
-    "lag-r217.js"
+    "lag-r217.js",
+    "webgl-fallback-r221.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4610,5 +4611,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d47134832d9cd327b1a6a34c2b599c4db8f6dc5bb2bd50c852a4fa1a5edfb135"
+  "runtimeManifestSHA256": "a4638190bfe7c6115ab9789c7af0187c6fb77250137b9dd865f85c18d3a84c5f"
 }

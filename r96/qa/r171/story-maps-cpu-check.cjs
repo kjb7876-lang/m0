@@ -14,7 +14,8 @@ const results=[];const check=(name,ok,detail='')=>{results.push({name,ok:!!ok,de
 (async()=>{
  const src=fs.readFileSync(R('r96/client-source/story-maps-r171.js'),'utf8'),html=fs.readFileSync(R('r96/runtime-text/index.html'),'utf8');
  check('runtime copy identical',fs.readFileSync(R('r96/runtime-text/story-maps-r171.js'),'utf8')===src);
- check('loaded right after dist/phase1.js',/dist\/phase1\.js[^"]*"><\/script>\s*<script src="\.\/story-maps-r171\.js"><\/script>/.test(html));
+ // R221: phase1 알림만 감싸는 webgl-fallback-r221.js 가 사이에 올 수 있다(게임 상태·지도에 손대지 않음). story-maps 는 여전히 phase1 어댑터보다 앞이다.
+check('loaded right after dist/phase1.js (optionally after the R221 WebGL notice)',/dist\/phase1\.js[^"]*"><\/script>\s*(<script src="\.\/webgl-fallback-r221\.js"><\/script>\s*)?<script src="\.\/story-maps-r171\.js"><\/script>/.test(html));
  check('listed in verify-r96-public.py',fs.readFileSync(R('scripts/verify-r96-public.py'),'utf8').includes("'story-maps-r171.js'"));
 
  // ---- 끄기 설정: 모듈만 따로 띄워 본다 ----
