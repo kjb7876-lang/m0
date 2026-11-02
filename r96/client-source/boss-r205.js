@@ -11,7 +11,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_BOSS_R205__)return;
 const REV='R217-boss-3',KEY='storyworld.r205.boss';
-const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true};
+const DEFAULTS={midHalf:true,echoBossOnly:true,echoMove:true,enrage:true,minSize:true,enrageLite:true};
 const prefs={...DEFAULTS};try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(DEFAULTS))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={midDraws:0,echoStopped:0,echoCancelled:0,echoGaps:0,moves:0,moveDist:0,enraged:0,scaledHazards:0,enragedDraws:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -64,7 +64,11 @@ function enrageTick(){const list=typeof hazards!=='undefined'&&Array.isArray(haz
   // 광폭화한 보스의 새 R61 행동: 범위 2배
   const a=e.r61Action;if(e.r205Enraged&&a&&!a.r205Range){a.r205Range=true;scaleRanges(a,ENRAGE_RANGE);}}
  if(list)for(const h of list){if(!h||h.r205Scaled)continue;const owner=h.owner??h.ownerId??h.r61Owner;if(owner==null)continue;const e=room.enemies?.find(q=>q.id===owner);
-  h.r205Scaled=true;if(e?.r205Enraged&&(h.age==null||h.age<.05)){if(scaleRanges(h,ENRAGE_RANGE))stats.scaledHazards++;}}}
+  h.r205Scaled=true;if(e?.r205Enraged&&(h.age==null||h.age<.05)){
+  // R220(사용자 "7대죄 하이힐 서윤 보스 광폭화시 렉"): 광폭화 장판 10~12개를 모두 2배로 키우면 서로 크게 겹쳐(총면적 16.7→506칸², 삼각형 3.3배) 반투명 겹쳐 그리기가 무거웠다.
+  //  같은 보스의 이미 키운 장판과 겹치는(중심 거리 < 그 반지름) 새 장판은 원래 크기로 둔다 — 덮이는 범위는 거의 같고 겹쳐 그리는 면적만 준다.
+  const R0=+h.radius;if(prefs.enrageLite!==false&&h.type==='field'&&Number.isFinite(R0)&&list.some(o=>o!==h&&o.r205Big&&(o.owner??o.ownerId??o.r61Owner)===owner&&o.type==='field'&&Number.isFinite(+o.radius)&&Math.hypot(o.x-h.x,o.y-h.y)<+o.radius)){stats.liteFields=(stats.liteFields||0)+1;}
+  else if(scaleRanges(h,ENRAGE_RANGE)){stats.scaledHazards++;if(h.type==='field')h.r205Big=true;}}}}
 
 // ---- 연결 ----------------------------------------------------------------------------------------
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){
