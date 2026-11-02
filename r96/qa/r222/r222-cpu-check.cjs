@@ -45,6 +45,11 @@ ok('can be switched off',/storyworld\.r222\.upgradesUi/.test(src)&&/s\.on===fals
  // 6) 가까운 적과 싸우는 중이면 그대로, 필드 전투(engaged)만으로는 막지 않음
  {const {sb}=mk([[3.0,4.0,4.6,6.0]]);sb.room.enemies=[{hp:5,x:6,y:5,spawnState:'active'}];sb.route=[{x:3,y:5}];run(sb,7);ok('unstick: no action while fighting an enemy within 3 cells',sb.player.x===5&&sb.player.y===5);}
  {const {sb}=mk([[3.0,4.0,4.6,6.0]]);sb.room.engaged=true;sb.room.enemies=[{hp:5,x:15,y:25,spawnState:'active'}];sb.route=[{x:3,y:5},{x:2,y:5}];run(sb,1.7);ok('unstick: still works during a field encounter (room.engaged) when no enemy is near',sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats.sidesteps===1);}
+ {const {sb}=mk([]);const bk={samongR103:'back',x:5,y:5},cl={r115Clue:1,x:5,y:5};sb.room.props=[bk,cl];
+  vm.runInContext('var __seen=null;',sb);sb.__peek=()=>sb.room.props.slice();
+  const g2=g.replace('const base=interact;','const base=function(){__seen=room.props.slice();};');const sb2={...sb,window:{__STORYWORLD_WORLD_R74__:sb.window.__STORYWORLD_WORLD_R74__}};vm.createContext(sb2);vm.runInContext('function tick(dt){time+=dt;}',sb2);vm.runInContext(g2,sb2);vm.runInContext('interact()',sb2);
+  const seen=vm.runInContext('__seen',sb2);
+  ok('unstick: guide E ignores the samong "back" sign (hidden during the press) and restores it afterwards',seen&&!seen.includes(bk)&&seen.includes(cl)&&sb2.room.props.includes(bk)&&sb2.room.props.includes(cl),{seen:seen&&seen.length});}
  ok('unstick: can be switched off',/storyworld\.r222\.guideUnstick/.test(g));}
 const fail=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`${checks.length-fail.length}/${checks.length}`);process.exit(fail.length?1:0);

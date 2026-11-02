@@ -26,7 +26,9 @@ if(typeof interact==='function'){const base=interact;interact=function(...a){
  const w=W(),hidden=[];
  try{if(w&&typeof room==='object'&&room)for(const d of doorsHere())if(w.isOpen(room,d)&&typeof d.reach==='number'&&Math.hypot(player.x-d.x,player.y-d.y)<=d.reach){hidden.push([d,d.reach]);d.reach=-1;}}catch(e){fail(e);}
  if(hidden.length)stats.closeSkipped++;
- try{return base.apply(this,a);}finally{for(const [d,r] of hidden)d.reach=r;}};}
+ // 사몽 구역 입구의 '이전 구역' 표지(samongR103:'back')는 길잡이 E 로 고르지 않는다 — 도착 직후 단서를 줍다 앞 구역으로 되돌아가던 일(사몽 실플레이 S01-3→S01-2→S01-3).
+ let backs=null;try{if(Array.isArray(room?.props)&&room.props.some(q=>q&&q.samongR103==='back')){backs=room.props.filter(q=>q&&q.samongR103==='back');room.props=room.props.filter(q=>!(q&&q.samongR103==='back'));stats.backSkipped=(stats.backSkipped||0)+1;}}catch(e){fail(e);}
+ try{return base.apply(this,a);}finally{for(const [d,r] of hidden)d.reach=r;if(backs)try{room.props.push(...backs.filter(q=>!room.props.includes(q)));}catch(e){fail(e);}}};}
 let anchor=null,stage=0;
 // 제자리에서 싸우는 중(3칸 안에 살아 있는 적)이면 건드리지 않는다. room.engaged 는 '집결한 생존 적' 같은 필드 전투 내내 켜져 있어 기준으로 쓰지 않는다(dist01 실측).
 const fighting=()=>{try{return (room.enemies||[]).some(e=>e&&e.hp>0&&e.spawnState!=='hidden'&&Math.hypot(e.x-player.x,e.y-player.y)<3);}catch(_){return false;}};
