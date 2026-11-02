@@ -27,6 +27,10 @@ function guideSb(px,py,enemies){const sb={console,Math,JSON,Number,String,Object
  for(let i=0;i<300;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
  const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
  ok('R232: no live enemies (guide heading to doors/exit) → never pulled toward the room objective',!st.escapes&&!st.unsealed&&p.x===16.5&&p.y===16.5,{st,p});}
+{const sb=guideSb(16.5,12.5,[{hp:5,x:16.5,y:15.2,spawnState:'active'}]);sb.clearLine=(a,b)=>!(Math.min(a.y,b.y)<14&&Math.max(a.y,b.y)>14);
+ for(let i=0;i<400;i++){sb.time+=1/30;vm.runInContext('tick()',sb);}
+ const st=sb.window.__STORYWORLD_GUIDE_UNSTICK_R222__.inspect().stats,p=sb.player;
+ ok('R235: an enemy within 3 cells but behind the wall does not count as fighting — the sealed hero is still taken out',st.unsealed>=1&&!(p.x>14&&p.x<19&&p.y>11&&p.y<14),{st,p});}
 ok('the 2-cell hop checks the straight line, not just the end point',/lineFree\(player,q\)/.test(g));
 // R225 닿음: 얇은 벽 너머는 닿지 않음
 {const sb={console,Math,JSON,Set,Map,WeakMap,Number,String,Object,Array,localStorage:{getItem:()=>null,setItem(){}},window:{},setInterval:()=>0,started:true,loading:false,
