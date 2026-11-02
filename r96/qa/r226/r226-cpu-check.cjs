@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const v=C('visual-r119.js'),idx=JSON.parse(RT('assets/r226/michaela/index.json'));
-ok('runtime copy matches; NE walk uses the v3 sheet, switchable back to v2 ({run226:false})',RT('visual-r119.js')===v&&/RUN226=\{michaela:\{ne:'assets\/r226\/michaela\/run-ne-v3\.webp'\}\}/.test(v)&&/prefs\.run226!==false&&RUN226\[hero\]\?\.\[v\]/.test(v));
+ok('runtime copy matches; NE walk uses the v3 sheet, switchable back to v2 ({run226:false})',RT('visual-r119.js')===v&&/RUN226=\{michaela:\{ne:(prefs\.run229!==false\?'assets\/r229\/michaela\/run-ne-v4\.webp':)?'assets\/r226\/michaela\/run-ne-v3\.webp'\}\}/.test(v)&&/prefs\.run226!==false&&RUN226\[hero\]\?\.\[v\]/.test(v));
 const b=fs.readFileSync(path.join(R,'runtime-text',idx.path)),src=fs.readFileSync(path.join(R,'runtime-text',idx.source.path));
 ok('v3 sheet exists with recorded size/sha256, made from the v2 sheet (hash recorded), original untouched',b.length===idx.bytes&&crypto.createHash('sha256').update(b).digest('hex')===idx.sha256&&crypto.createHash('sha256').update(src).digest('hex')===idx.source.sha256);
 ok('same sheet layout as before (8 cells 192x256, foot pivot 96,226)',idx.cols===8&&idx.rows===1&&idx.cell[0]===192&&idx.cell[1]===256&&idx.pivot[0]===96&&idx.pivot[1]===226);
