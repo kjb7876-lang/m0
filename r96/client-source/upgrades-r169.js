@@ -76,5 +76,5 @@ try{
  if(typeof showUpgrades==='function'){const base=showUpgrades;showUpgrades=function(...a){squareCosts();noteText();const r=base.apply(this,a);try{merge();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_UPGRADES_R169__=Object.freeze({revision:REV,set,nextCost,squared:()=>[...SQUARE],ratios:()=>{const p=typeof player==='object'?player:null;return p?ratios(p):null;},TRI,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},squared:[...SQUARE],lastError})});
+window.__STORYWORLD_UPGRADES_R169__=Object.freeze({revision:REV,set,nextCost,buyTalent,/* R237 자동 스킬레벨업이 같은 구매 규칙을 쓰도록 */squared:()=>[...SQUARE],ratios:()=>{const p=typeof player==='object'?player:null;return p?ratios(p):null;},TRI,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},squared:[...SQUARE],lastError})});
 })();
