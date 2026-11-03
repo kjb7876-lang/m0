@@ -25,8 +25,12 @@ function res(anim,dir){const N=IDX?.anims?.[anim];if(N?.[dir]?.file)return {A:N[
  const O=window.__STORYWORLD_HWANDO_R242__?.index?.(),dk=dir==='w'?'e':dir,A=O?.anims?.[anim]?.[dk]||O?.anims?.[anim]?.s;if(!A)return null;return {A,base:OLD,mir:dir==='w',body:O.anims.walk?.[dk]?.body||A.body||180,old:true};}
 const S={x:null,y:null,movedAt:-9,sx:0,sy:0,dist:0,dir:'s',walkDir:'s',swing:null,hit:null,prevAtk:0,prevHurt:0};
 function dirFromVec(vx,vy){if(Math.abs(vx)>=Math.abs(vy))return vx>=0?'e':'w';return vy>=0?'s':'n';}
-function enemyDir(){try{const q=project(player.x,player.y);let best=null,bd=4;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false||e.spawnState==='hidden')continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
- if(best){const b=project(best.x,best.y);return dirFromVec(b.x-q.x,b.y-q.y);}}catch(_){}return null;}
+function enemyDir(){const v=enemyVec();return v?dirFromVec(v[0],v[1]):null;}
+function enemyVec(){try{const q=project(player.x,player.y);let best=null,bd=4;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false||e.spawnState==='hidden')continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
+ if(best){const b=project(best.x,best.y);return [b.x-q.x,b.y-q.y];}}catch(_){}return null;}
+const P277=()=>{const P=window.__STORYWORLD_HWANDO_R277__;return P?.on?.()?P:null;};
+// R277: 공격 방향은 좌·우·아래만(위 → 가로 성분의 좌·우)
+function aimDir(){const v=enemyVec(),d=v?dirFromVec(v[0],v[1]):S.dir,P=P277();return P?P.attackDir(d,v?v[0]:0):d;}
 function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y,d=Math.hypot(dx,dy);
   if(d>1e-4&&d<1.2){const q0=project(S.x,S.y),q1=project(player.x,player.y),px=q1.x-q0.x,py=q1.y-q0.y;S.sx=S.sx*.6+px*.4;S.sy=S.sy*.6+py*.4;if(d>.004)S.movedAt=t;
    S.dist+=Math.hypot(px,py);const mvx=+player.moveVX150||0,mvy=+player.moveVY150||0;let v=[S.sx,S.sy];if(Math.hypot(mvx,mvy)>.05){const a=project(player.x,player.y),b=project(player.x+mvx,player.y+mvy);v=[b.x-a.x,b.y-a.y];}
@@ -39,7 +43,7 @@ function draw(rec,st,best,anim,dir,frame,opt={}){const R=res(anim,dir);if(!R)ret
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
  const X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*ky,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
-  points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r271:anim,r121Walk:anim==='walk'});
+  points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r271:anim,r121Walk:anim==='walk',r277Hold:!!opt.hold});
  for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before){rec.commands.splice(i,1);stats.dupRemoved++;}}
  stats.frames++;stats[anim]=(stats[anim]||0)+1;if(R.old)stats.fallback++;stats.last={anim,dir,frame:fr,old:!!R.old};return true;}
 function frameAt(ms,tms,loop){const tot=ms.reduce((a,b)=>a+b,0);let t=loop?((tms%tot)+tot)%tot:Math.min(tms,tot-1);for(let i=0;i<ms.length;i++){if(t<ms[i])return i;t-=ms[i];}return ms.length-1;}
@@ -47,21 +51,21 @@ function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.fl
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|awakening|^blob:/;
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
-function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of ['walk','idle'])for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image(BASE+A.file);}}
+function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image(BASE+A.file);}}
 const atkOf=d=>res('attack',d)?.A;
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
  track();preload();
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0;
- if(atk>S.prevAtk+1e-6){const d=enemyDir()||S.dir,a=atkOf(d);if(a){const off=contactStart(a.ms),rest=a.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.48);S.swing={t0:t,dir:d,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}}
+ if(atk>S.prevAtk+1e-6){const d=aimDir(),a=atkOf(d);if(a){const off=contactStart(a.ms),rest=a.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.48);S.swing={t0:t,dir:d,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}}
  S.prevAtk=atk;
  if(hurt>S.prevHurt+1e-6)S.hit={t0:t,dir:enemyDir()||S.dir};S.prevHurt=hurt;
  const moving=t-S.movedAt<.15;
- if(busy){const d=enemyDir()||S.dir;S.dir=d;stats.skill++;if(player.dashAnim>0)return draw(rec,st,best,'walk',d,3);const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
+ if(busy){const d=player.dashAnim>0?(enemyDir()||S.dir):aimDir();S.dir=d;stats.skill++;if(player.dashAnim>0)return draw(rec,st,best,'walk',d,3);const a=atkOf(d);return a&&draw(rec,st,best,'attack',d,Math.floor(a.n*(player.ultimateAnim>0?.55:.45)));}
  if(S.swing){const a=atkOf(S.swing.dir),el=(t-S.swing.t0)*ms/S.swing.scale+S.swing.off,tot=a.ms.reduce((x,y)=>x+y,0);
   if(el<tot&&!(moving&&t-S.swing.t0>.35)){S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
  if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
- if(moving){S.dir=S.walkDir;const R=res('walk',S.walkDir),k=want()/(R?.A?.body||180),per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k;return draw(rec,st,best,'walk',S.walkDir,Math.floor(S.dist/Math.max(1,per)));}
- const fd=enemyDir()||S.dir;S.dir=fd;const a=res('idle',fd)?.A;if(!a)return;
+ if(moving){S.dir=S.walkDir;P277()?.face(S.walkDir);const R=res('walk',S.walkDir),k=want()/(R?.A?.body||180),per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k;return draw(rec,st,best,'walk',S.walkDir,Math.floor(S.dist/Math.max(1,per)));}
+ const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const w=res('walk',fd)?.A;if(!w)return;P.idle(fd);return draw(rec,st,best,'walk',fd,w.n-1);}/* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
