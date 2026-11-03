@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const src=C('hwando-r242.js'),idx=RT('index.html');
-ok('runtime copy matches; loads after auto-levelup-r237; in verify list and CI',RT('hwando-r242.js')===src&&idx.includes('<script src="./auto-levelup-r237.js"></script><script src="./hwando-r242.js"></script>')&&/'hwando-r242\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8'))&&/qa\/r242\/r242-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
+ok('runtime copy matches; loads after auto-levelup-r237; in verify list and CI',RT('hwando-r242.js')===src&&/auto-levelup-r237\.js"><\/script>(<script src="\.\/[a-z0-9-]+\.js"><\/script>)*<script src="\.\/hwando-r242\.js"><\/script>/.test(idx)&&/'hwando-r242\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8'))&&/qa\/r242\/r242-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')));
 const A=path.join(R,'runtime-text','assets','r242','hwando'),I=JSON.parse(fs.readFileSync(path.join(A,'index.json'),'utf8'));
 const recs=[];for(const [k,v] of Object.entries(I.anims))for(const [d,r] of Object.entries(v))if(r&&r.file)recs.push([k,d,r]);
 ok('index lists walk(N/S/E 8), idle·hit(N/S/E), ready(N/E), attack(S/E 13, N 25 slots), toReady(N/E 3) — W mirrors E',
