@@ -38,7 +38,14 @@ function doorToward(goal){try{const W=window.__STORYWORLD_WORLD_R74__,ds=room?.e
   let best=null;for(const sg of [-1,1]){const q={x:d.axis==='x'?d.x+sg*.9:d.x,y:d.axis==='y'?d.y+sg*.9:d.y};if(blocked(q.x,q.y,.29,room))continue;const pp=findPath(player,q,room,.29);if(pp.length&&(!best||pp.length<best.length))best=pp;}
   if(best){route=best;command=null;stats.doorWalk=(stats.doorWalk||0)+1;return true;}}
  return false;}catch(e){fail(e);return false;}}
-function step(dt){if(forward(dt))return true;const ph=phase();if(!ph)return false;
+// (3) R75 목표(제단·시작 표식)가 닫힌 R81 문 너머일 때(실플레이 hando02: '성문 수비 시작' 15,13 앞 중심 전투실 문 door-2 20,20 —
+//  polish-r101 이 목표에서 먼 서쪽 성문(17,105)으로 걸어가 y 70↔100 을 25분 왕복) 목표에 가장 가까운 닫힌 문을 열러 간다.
+let oTimer=0,oHold=false;
+function objectiveDoor(dt){if(!guide||modal||loading||!(player?.hp>0)||storyScene||nearestEnemy(40)||room?.engaged)return false;if(phase())return false;
+ const g=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();if(!g||!['objective','interaction'].includes(g.kind)||!g.point||!Number.isFinite(g.point.x+g.point.y))return false;
+ oTimer-=dt;if(oTimer>0)return oHold;oTimer=.6;oHold=false;if(findPath(player,g.point,room,.31).length)return false;
+ const ok=doorToward(g.point);if(ok)stats.objectiveDoor=(stats.objectiveDoor||0)+1;oHold=ok;return ok;}
+function step(dt){if(forward(dt))return true;if(objectiveDoor(dt))return true;const ph=phase();if(!ph)return false;
  const act=decide(ph,{guide,modal,loading,hp:player?.hp,enemyNear:!!nearestEnemy(40),px:player.x,py:player.y,merge:L()?.merge});if(!act)return false;
  timer-=dt;if(timer>0)return true;timer=.5;
  if(act==='merge'){const m=L().merge,p=findPath(player,{x:m.x,y:m.y},room,.31);if(!p.length){stats.noPath++;return false;}route=p;command=null;stats.merge++;return true;}

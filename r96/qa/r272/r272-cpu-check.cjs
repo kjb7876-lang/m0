@@ -19,6 +19,7 @@ const f={cheat:true,completed:true,pendingIdx:1,zoneIdx:13,nextOpen:true};
 ok('777 + cleared + earlier pending + next open → forward (dreamRest repro)',G.forwardRole(f)===true);
 ok('no forward without 777, uncleared map, pending ahead, or closed next portal',[{cheat:false},{completed:false},{pendingIdx:20},{nextOpen:false},{pendingIdx:-1}].every(o=>G.forwardRole({...f,...o})===false));
 ok('777 forward: next portal behind a closed R81 door → open/walk to the door nearest the portal (never the ante-room door-1)',/function doorToward\(goal\)/.test(src)&&/d\.id!=='door-1'&&!W\.isOpen\(room,d\)/.test(src)&&/return doorToward\(st\.point\)/.test(src));
+ok('R75 objective behind a closed R81 door (hando02 castle-start) → door nearest the objective; hospital excluded; holds between replans',/function objectiveDoor\(dt\)/.test(src)&&/if\(phase\(\)\)return false/.test(src)&&/doorToward\(g\.point\)/.test(src)&&/return oHold/.test(src));
 ok('no balance/progression writes (route/door/hp/difficulty untouched)',!/\.hp\s*=[^=]|difficultyR63\s*=|setMapMode|\.phase\s*=[^=]|progress\[/.test(src));
 ok('base guide still runs when R272 has nothing to do',(sb.guideStep(.1),base===1));
 
