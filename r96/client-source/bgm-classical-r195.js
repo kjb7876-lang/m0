@@ -11,13 +11,13 @@
 //  · 설정 창에 '클래식 BGM' 켜기/끄기와 '음악 크레딧' 버튼을 넣는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_BGM_CLASSICAL_R195__)return;
-const REV='R195-classical-1',KEY='storyworld.r195.bgm',DIR='assets/audio/bgm/classical/',FADE=2.4,FADE_BOSS=1.2,RESUME_MS=120000;
+const REV='R265-classical-2',KEY='storyworld.r195.bgm',DIR='assets/audio/bgm/classical/',FADE=2.4,FADE_BOSS=1.2,RESUME_MS=120000;
 let prefs={on:true,nowPlaying:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={ticks:0,switches:0,resumes:0,errors:0,blocked:0,failedTracks:0,nativeFallback:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let cat=null;const failed=new Set(),memory=new Map();/* trackId -> {time,at} */
 fetch(DIR+'catalog.json').then(r=>r.ok?r.json():null).then(j=>{if(j&&j.tracks&&j.slots)cat=j;}).catch(fail);
 const decks=[0,1].map(i=>{const el=new Audio();el.preload='none';el.loop=true;el.volume=0;const d={i,el,id:null,w:0};el.onerror=()=>{if(d.id){failed.add(d.id);stats.failedTracks++;fail('track '+d.id);}};return d;});
-let active=null,fade=null,blocked=false,duck=1,clock=0,lastSel=null;
+let active=null,fade=null,blocked=false,duck=1,clock=0,lastSel=null;const hold={id:null,since:0,zone:null},HOLD_MS=12000;
 /* 게임 전역은 스크립트 범위 let 이라 globalThis 에 없다 — 이름으로 직접 읽는다 */
 const V={started:()=>typeof started!=='undefined'&&!!started,loading:()=>typeof loading!=='undefined'&&!!loading,modal:()=>typeof modal!=='undefined'&&!!modal,
  storyScene:()=>typeof storyScene!=='undefined'?storyScene:null,voiceElement:()=>typeof voiceElement!=='undefined'?voiceElement:null,zone:()=>typeof zone!=='undefined'?String(zone||''):''};
@@ -29,9 +29,10 @@ const FALL={boss2:['boss2','boss','combat','explore'],boss:['boss','combat','exp
 function pick(){if(!cat)return null;const z=String(G('zone','')),p=part(z),k=kind();
  for(const kk of FALL[k]||[k])for(const s of [kk+':'+z,kk+':'+p,kk+':default']){const id=cat.slots[s];if(id&&cat.tracks[id]&&!failed.has(id))return {id,kind:k,slot:s};}
  return null;}
-function want(){return !!(G('started',false)&&settings?.music&&settings.bgm>0&&!G('loading',false)&&!document.hidden);}
+/* R265: 지역을 옮기는 로딩 중에도 멈추지 않는다(사용자 "브금끊기지않게연속적으로재생") — 로딩 동안은 줄여서 이어 튼다 */
+function want(){return !!(G('started',false)&&settings?.music&&settings.bgm>0&&!document.hidden);}
 let settingsOpen=false;
-function menuOpen(){/* 설정(일시정지) 창이 열려 있으면 멈추고, 대화·쪽지 같은 다른 창은 줄이기만 한다 */if(!G('modal',false))settingsOpen=false;return settingsOpen;}
+function menuOpen(){/* R265: 설정 창이 열려도 멈추지 않고(줄이기만) 이어 튼다 — 아래 duck 에서 .35 */if(!G('modal',false))settingsOpen=false;return false;}
 function remember(d){if(d?.id&&Number.isFinite(d.el.currentTime))memory.set(d.id,{time:d.el.currentTime,at:Date.now()});}
 function start(d,id){const t=cat.tracks[id];remember(d);d.el.pause();d.id=id;d.w=0;d.el.volume=0;d.el.loop=!(t.loopEnd>0);d.el.preload='auto';d.el.src=DIR+t.file;
  const m=memory.get(id);d.seek=m&&Date.now()-m.at<RESUME_MS?m.time:(t.loopStart||0);if(m&&Date.now()-m.at<RESUME_MS)stats.resumes++;d.needSeek=true;play(d);}
@@ -48,10 +49,13 @@ function switchTo(sel){if(active?.id===sel.id)return;const to=decks.find(d=>d!==
 function silenceNative(base,self,args){/* 원래 엔진의 덱을 멈춘다: 음악 스위치를 잠깐 끈 채로 한 번 돌리면 엔진이 자기 덱을 멈춘다 */const m=settings.music;try{settings.music=false;base.apply(self,args);}finally{settings.music=m;}}
 function tick(){const now=performance.now(),dt=Math.min(.25,Math.max(0,(now-clock)/1000));clock=now;stats.ticks++;
  if(!want()||menuOpen()){pauseAll();return;}
- const sel=pick();if(!sel){return false;}lastSel=sel;if(!active||active.id!==sel.id)switchTo(sel);
+ const sel=pick();if(!sel){return false;}lastSel=sel;
+ /* R265: 탐색↔전투가 몇 초마다 바뀔 때마다 곡이 넘어가 끊겨 들렸다 → 같은 지역에서 보스가 아닌 곡 전환은 새 상태가 12초 이어질 때만 */
+ const zid=String(G('zone',''));if(active&&active.id!==sel.id&&!sel.kind.startsWith('boss')&&!String(active.kind||'').startsWith('boss')&&zid===hold.zone){if(hold.id!==sel.id){hold.id=sel.id;hold.since=now;}if(now-hold.since<HOLD_MS){stats.held=(stats.held||0)+1;}else{switchTo(sel);active.kind=sel.kind;}}
+ else if(!active||active.id!==sel.id){switchTo(sel);active.kind=sel.kind;hold.id=sel.id;hold.since=now;}else{hold.id=sel.id;hold.since=now;}hold.zone=zid;
  if(fade){const u=Math.min(1,(now-fade.t0)/fade.dur);fade.to.w=u;fade.from.w=1-u;if(u>=1){remember(fade.from);fade.from.el.pause();fade.from.w=0;fade=null;}}
  const t=active&&cat.tracks[active.id];if(t?.loopEnd>0&&active.el.currentTime>=t.loopEnd){try{active.el.currentTime=t.loopStart||0;}catch(_){}}
- const voice=G('voiceElement',null),talking=voice&&!voice.paused||globalThis.speechSynthesis?.speaking,target=talking?.2:G('modal',false)?.35:1;
+ const voice=G('voiceElement',null),talking=voice&&!voice.paused||globalThis.speechSynthesis?.speaking,target=talking?.2:G('modal',false)?.35:G('loading',false)?.5:1;
  duck+=(target-duck)*(1-Math.exp(-dt/(target<duck?.12:.6)));
  for(const d of decks){const tr=d.id&&cat.tracks[d.id];const v=Math.max(0,Math.min(1,settings.bgm*(tr?.gain??.6)*duck*d.w));d.el.volume=v;if(d.w>0&&d.el.paused)play(d);else if(d.w<=0&&!d.el.paused)d.el.pause();}
  return true;}
