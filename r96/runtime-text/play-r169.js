@@ -14,7 +14,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_PLAY_R169__)return;
 const REV='R169-play-1',KEY='storyworld.r169.play',BOOK='storyworld.r169.notes';
-let prefs={notes:true,mobFx:true,curate:true,egoStack:true,levelPoints:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+let prefs={notes:true,mobFx:true,bossFx:true,curate:true,egoStack:true,levelPoints:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={noteDrops:0,notePicks:0,collected:0,mobCharge:0,mobImpact:0,hidden:0,stacks:0,bonusPoints:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const T=()=>typeof time==='number'?time:0;
@@ -90,6 +90,9 @@ const MOBFX={
  regional:{hit:['slashwide','spark'],pal:C([90,30,30],[240,200,170])}};
 const famOf=()=>{try{const L=room?.exploration;const f=L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[zone]?.family;return MOBFX[f]?f:'regional';}catch(_){return'regional';}};
 const major=e=>!!(e?.boss||e?.midboss||e?.persona||e?.cosmic||e?.trial||e?.samongMidR162||e?.samongR103);
+// R240(사용자 "이펙트 없는 몹·보스들 이펙트 생성 적용, 화풍 맞게"): 777 실측에서 보스·중간보스 근접 공격만 기 모으기·타격 그림이 0이었다(잡몹만 R169 이펙트).
+//  같은 그림(그 몹 R114 팔레트 색·지역 서사 모양)을 몸집만큼 키워 보스에게도 쓰고, 타격 순간 발밑에 핏빛 균열·어둠 고리(지면 충격)를 더한다.
+const SC=e=>!major(e)?1:e.boss?2:e.midboss||e.samongMidR162?1.6:1.8;
 // R170(사용자 "이펙트 색은 각자의 이름색 + 고유색 + 보조색에 맞게"): 모양은 지역 서사, 색은 그 몹의 R114 팔레트(이름에 색이 있으면 그 색이 고유색).
 //  주 그림 = 고유색 → 그 발광색, 보조 조각 = 보조색 → 그 발광색. 팔레트가 없는 몹만 지역 기본색.
 function palOf(e,fam){try{const pl=window.__STORYWORLD_COMBAT_R114__?.palette?.(e);if(pl&&pl.p&&pl.s)return{main:{a:pl.p,b:pl.gp||pl.p},sub:{a:pl.s,b:pl.gs||pl.s}};}catch(_){}const M=MOBFX[fam]||MOBFX.regional;return{main:M.pal,sub:M.pal};}
@@ -98,17 +101,19 @@ const PXFAM={cave:'stone',swamp:'coast',ash:'forge'};
 const seen=new WeakMap(),mfx=[];
 let warmed='';
 function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
- for(const e of room.enemies){if(!e||e.hp<=0||major(e)||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);
-  if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<14){mfx.push({kind:'charge',e,fam,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;}}
-   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));if(mfx.length<14&&!window.__STORYWORLD_PIXELFX_R163__?.has?.('mob-'+(PXFAM[fam]||fam))){/* R176: 시트가 있으면 프레임 애니메이션만 */mfx.push({kind:'hit',fam,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
-   if(a&&a.committed&&s&&s.hit&&!s.px){s.px=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,nm='mob-'+(PXFAM[fam]||fam),P=palOf(e,fam).main;if(X?.has?.(nm)){const sx=Math.cos(a.angle)-Math.sin(a.angle),r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));X.play(nm,e.x+Math.cos(a.angle)*r*.45,e.y+Math.sin(a.angle)*r*.45,{k:1.3,rate:1.2,flip:sx<0,tint:P});stats.mobPixel=(stats.mobPixel||0)+1;}}catch(_){}}// R175: pixelfx 서사 모양을 그 몹 색으로
+ for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);const sc=SC(e),cap=sc>1?18:14;
+  if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<cap){mfx.push({kind:'charge',e,fam,sc,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;if(sc>1)stats.bossCharge=(stats.bossCharge||0)+1;}}
+   if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4*sc,Math.max(.8,Number(a.shape154?.range)||1.3));if(sc>1&&mfx.length<cap){mfx.push({kind:'quake',fam,sc,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.45,y:e.y+Math.sin(a.angle)*r*.45,t0:t,life:.7,seed:Math.random()*6});stats.bossQuake=(stats.bossQuake||0)+1;}if(mfx.length<cap&&!window.__STORYWORLD_PIXELFX_R163__?.has?.('mob-'+(PXFAM[fam]||fam))){/* R176: 시트가 있으면 프레임 애니메이션만 */mfx.push({kind:'hit',fam,sc,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
+   if(a&&a.committed&&s&&s.hit&&!s.px){s.px=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,nm='mob-'+(PXFAM[fam]||fam),P=palOf(e,fam).main;if(X?.has?.(nm)){const sx=Math.cos(a.angle)-Math.sin(a.angle),r=Math.min(2.4,Math.max(.8,Number(a.shape154?.range)||1.3));X.play(nm,e.x+Math.cos(a.angle)*r*.45*sc,e.y+Math.sin(a.angle)*r*.45*sc,{k:sc>1?1.6:1.3,rate:sc>1?1:1.2,flip:sx<0,tint:P}/* 보스는 1.6 — 2배면 영웅을 다 가린다(R240 스크린샷) */);stats.mobPixel=(stats.mobPixel||0)+1;}}catch(_){}}// R175: pixelfx 서사 모양을 그 몹 색으로
   else if(s&&!a)seen.delete(e);}
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}
 // 영웅 가까이 그리는 그림은 R106 이 흐리게 하므로(영웅 가림 방지) 칼끝 쪽(사거리 38%)에 두고 overHero 로 그린다.
 // 금·물결·연기·룬·회로 같은 바닥 그림은 몹 발밑에 — 본편 타격 폭발(R98)에 묻히지 않게.
-function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.9,h*1.9,{overHero:true,...o})},t=T(),h=H();
- for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const M=MOBFX[f.fam]||MOBFX.regional,PM=f.pal?.main||M.pal,PS=f.pal?.sub||M.pal;
+function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.9,h*1.9,{overHero:true,...o})},t=T(),h0=H();
+ for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const h=h0*(f.sc||1);const M=MOBFX[f.fam]||MOBFX.regional,PM=f.pal?.main||M.pal,PS=f.pal?.sub||M.pal;
   if(f.kind==='charge'){const e=f.e,q=project(e.x,e.y);scope({id:'r169:charge:'+f.t0,kind:'effect',x:e.x,y:e.y},()=>{S.draw('glow',PM,q.x,q.y-h*.55,h*(.35+.45*v),h*(.35+.45*v),{alpha:.25+.45*v});S.draw('ring',PM,q.x,q.y,h*(.9-.35*v),h*(.45-.17*v),{alpha:.35*v});});continue;}
+  if(f.kind==='quake'){const q=project(f.x,f.y),u=1-v,PM=f.pal?.main||(MOBFX[f.fam]||MOBFX.regional).pal;/* 지면 충격: 핏빛 균열 + 퍼지는 어둠 고리(다크 판타지) */
+   scope({id:'r240:quake:'+f.t0,kind:'effect',x:f.x,y:f.y},()=>{S.draw('crack',{a:[60,8,12],b:PM.b||[150,30,30]},q.x,q.y,h*(.7+.5*Math.min(1,v*2.5)),h*(.35+.25*Math.min(1,v*2.5)),{alpha:.85*u,angle:f.seed,blend:'source-over'});S.draw('ring',{a:[30,6,10],b:PM.b||[160,40,40]},q.x,q.y,h*(.4+1.1*v),h*(.2+.55*v),{alpha:.7*u});});stats.bossQuakeDrawn=(stats.bossQuakeDrawn||0)+1;continue;}
   stats.mobDrawn=(stats.mobDrawn||0)+1;
   const q=project(f.x,f.y),q1=project(f.x+Math.cos(f.ang),f.y+Math.sin(f.ang)),ang=Math.atan2(q1.y-q.y,q1.x-q.x),u=1-v,[a,b]=M.hit;
   scope({id:'r169:hit:'+f.t0,kind:'effect',x:f.x+.4,y:f.y+.4},()=>{
