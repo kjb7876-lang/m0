@@ -251,5 +251,14 @@
   }finally{restoring--;pending=prior;}
   if(result!==false)saveGame(false);return result;
  };
+ // R239 길잡이: 보스 격파 뒤(exit·exitStory·done) E 는 주사실 문(door-2) 3.2칸 안에서만 받는데, 길잡이는 room.objective(보스방 피 제단 15,13)로만 가서
+ //  13칸 떨어진 곳에 서 있었다(777 실플레이 ep1a08 14분 멈춤). 이 단계에서는 주사실 문 옆 빈자리를 목표로 준다(문까지 길이 닿는 자리, 1초마다 다시 고름).
+ let exitGoalCache=null;
+ function exitGoal(){if(!hospital(room)||!state())return null;const s=state();if(!['exit','exitStory','done'].includes(s.phase))return null;const d=door('door-2');if(!d)return null;
+  if(exitGoalCache&&exitGoalCache.room===room&&time-exitGoalCache.at<1)return exitGoalCache.goal;let best=null,bd=Infinity;
+  for(const r of [1.3,1.8,2.3])for(let k=0;k<16;k++){const a=k/16*Math.PI*2,x=d.x+Math.cos(a)*r,y=d.y+Math.sin(a)*r;if(typeof blocked==='function'&&blocked(x,y,.3,room))continue;const dd=Math.hypot(x-player.x,y-player.y);if(dd>=bd)continue;
+   let ok=true;try{if(typeof findPath==='function'&&dd>1)ok=findPath(player,{x,y},room,.31).length>0;}catch(_){ok=false;}if(ok){best={x,y};bd=dd;}}
+  const goal=best?{kind:'objective',id:'hospital-exit-r239',point:best,reach:1.2,label:s.phase==='done'?'주사실 문 · 다음 기억으로':'주사실 문 앞 E · 다음 기억으로'}:null;exitGoalCache={room,at:time,goal};return goal;}
+ (function armExitGoal(n){try{const O=window.__STORYWORLD_OBJECTIVES_R75__;if(O&&!O.__r239){window.__STORYWORLD_OBJECTIVES_R75__=Object.freeze({...O,__r239:true,goal(...a){try{const g=exitGoal();if(g)return g;}catch(_){}return O.goal.apply(this,a);}});}}catch(_){}if(n<40&&typeof setTimeout==='function')setTimeout(()=>armExitGoal(n+1),250);})(0);
  window.__STORYWORLD_HOSPITAL_MAZE_PROGRESSION__=Object.freeze({revision:'hospital-maze-progression-r2',seed,clean,settle,inspect:()=>({state:state()?copy(state()):null,ordinary:room?.enemies?.filter(ordinary).map(e=>({id:e.id,elite:e.mazeEliteR2===true,route:e.mazeRouteR1,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp}))||[],bosses:room?.enemies?.filter(e=>e.boss||e.midboss).map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,spawnState:e.spawnState}))||[],events:[...events],browserVerified:false,GPUVerified:false,finalBossId:FINAL_ID})});
 })();
