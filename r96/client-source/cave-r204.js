@@ -14,7 +14,7 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R260-cave-1',KEY='storyworld.r204.cave';
+const REV='R262-cave-1',KEY='storyworld.r204.cave';
 let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -255,6 +255,18 @@ function widen(ex,cfg,doorPts){const W=ex.bounds[2],H=ex.bounds[3],key=(x,y)=>x+
    if(GR>1.5){const sx=Math.sign(dx),sy=Math.sign(dy);let thin=false;for(let t=1;t<=2&&!thin;t++)if(has(nx+sx*t,ny+sy*t)||(sx&&sy&&(has(nx+sx*t,ny)||has(nx,ny+sy*t))))thin=true;if(thin)continue;}/* R217: 넓힌 칸 너머 2칸 안에 다른 바닥이 있으면(두 통로 사이 바위 벽) 넓히지 않는다 — 벽이 종잇장처럼 얇아지지 않게 */R8=R8||reach(x,y,RL);let ok=true;
    for(let yy=-CI;yy<=CI&&ok;yy++)for(let xx=-CI;xx<=CI;xx++){if(Math.hypot(xx,yy)>CK)continue;const kk=key(nx+xx,ny+yy);if(S.has(kk)&&!R8.has(kk)){ok=false;break;}}
    if(ok)add.add(k);}}
+ // R262: 모서리 둥글게 — 사용자 "모서리부분은 둥글게 깍아서 너무 맵중간중간에 뾰족한부분나와 거슬리지 않도록".
+ //  넓힌 뒤 남은 뾰족한 곳(바닥 쪽으로 튀어나온 벽 끝·한 칸 홈 = 상하좌우 바닥 3개 이상, 볼록한 직각 모서리 = 직각 두 바닥 + 그 사이 대각 바닥)을 바닥으로 깎는다. 두 번(2칸 깊이까지).
+ //  안전 규칙은 넓히기와 같다(문 둘레·지도 가장자리 2칸·긴 벽 바로 뒤 제외) + 그 칸 둘레 8칸의 바닥이 이미 하나로 이어져 있을 때만(새 지름길·벽 뚫림 없음).
+ if(prefs.round!==false){const hasA=(x,y)=>S.has(key(x,y))||add.has(key(x,y)),ring=[[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
+  const simple=(x,y)=>{const idx=[];ring.forEach(([dx,dy],i)=>{if(hasA(x+dx,y+dy))idx.push(i);});if(!idx.length)return false;const seen=new Set([idx[0]]),st=[idx[0]];
+   while(st.length){const i=st.pop();for(const j of idx){if(seen.has(j))continue;if(Math.abs(ring[i][0]-ring[j][0])+Math.abs(ring[i][1]-ring[j][1])===1){seen.add(j);st.push(j);}}}return seen.size===idx.length;};
+  let rounded=0;for(let pass=0;pass<2;pass++){const cand=new Set();for(const k of [...S,...add]){const [x,y]=k.split(',').map(Number);for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]])cand.add(key(x+dx,y+dy));}
+   for(const k of cand){const [x,y]=k.split(',').map(Number);if(hasA(x,y)||x<2||y<2||x>W-3||y>H-3||nearDoor(x,y)||behindLong(x,y))continue;
+    const n=hasA(x,y-1),e=hasA(x+1,y),so=hasA(x,y+1),w=hasA(x-1,y),o=n+e+so+w;
+    const convex=(n&&e&&hasA(x+1,y-1))||(e&&so&&hasA(x+1,y+1))||(so&&w&&hasA(x-1,y+1))||(w&&n&&hasA(x-1,y-1));
+    if((o>=3||(o===2&&convex))&&simple(x,y)){add.add(k);rounded++;}}}
+  stats.rounded=(stats.rounded||0)+rounded;}
  if(!add.size)return null;
  // 벽: 각 벽이 덮는 칸 경계(세로 'v:x:y' = (x-1,y)|(x,y), 가로 'h:x:y' = (x,y-1)|(x,y))를 구한다.
  //  넓힌 칸에 닿는 경계이고 양쪽이 다 바닥이 되면 그 벽을 뺀다 — 원래부터 양쪽이 바닥이던 미로 칸막이는 그대로 둔다. 긴 벽은 덮는 경계가 모두 해당될 때만 뺀다.
