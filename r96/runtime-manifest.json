@@ -21814,8 +21814,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 24598,
-      "sha256": "0d401d980bb56dbcfb95a1a51fb540719a3b727932aa8f5dcb276215fd83dbe1"
+      "bytes": 24855,
+      "sha256": "87bb0d8d65ad019cf99ef9fd568c3c4dc23aba640f05d95e9bed20a22948ff36"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -21824,13 +21824,13 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 30755,
-      "sha256": "b63f178e1317e64c41bc70d2c8e467af2787d9b4533503407f4e4fa45aaebe27"
+      "bytes": 31097,
+      "sha256": "2ef4f265a08325896a902f7c9bf7acaac295dfd6d4753a647db00a4423aeaffa"
     },
     {
       "path": "fx-sprites-r106.js",
-      "bytes": 13208,
-      "sha256": "bc580d05a893a3eda61a1494236c4a7235972ee03bec5f1ae74dbd719b84b1cc"
+      "bytes": 13596,
+      "sha256": "6a2f916644c0b36d8a0d5c61181b9e5d49729b2520de99ab4903e28992e1333f"
     },
     {
       "path": "growth-r103.js",
@@ -21866,6 +21866,11 @@
       "path": "hero-select-r263.js",
       "bytes": 11527,
       "sha256": "ac42ae971fa865046998377e1beeebaed6d37453150fa836c684e7f1d8827da3"
+    },
+    {
+      "path": "hero-skills-r269.js",
+      "bytes": 8342,
+      "sha256": "0c4d16d09df951acf6ec077285dfefe985456374fc6439e81793ed14a39524fc"
     },
     {
       "path": "hero-threads-r174.js",
@@ -21924,8 +21929,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566100,
-      "sha256": "2d73f30b76f1b97707fa7998ecd2762f33ae578dd5e0f33eb85ba054ae830543"
+      "bytes": 6566232,
+      "sha256": "0111b1395bc9e13b6baad03b901d16b327983fa2ee39e3921c4cac9a17434469"
     },
     {
       "path": "intro-r140.js",
@@ -21956,6 +21961,11 @@
       "path": "mob-flank-r230.js",
       "bytes": 4647,
       "sha256": "a6df8cc683f900dc2916de5ace8c411919eb5a83f39f1a615a3ba088069e2d05"
+    },
+    {
+      "path": "mob-gaze-r268.js",
+      "bytes": 7496,
+      "sha256": "908a49ef437bb4761d68cdd56816383324401c89ef20592c3a53aa83ddcda9fe"
     },
     {
       "path": "mob-ground-r206.js",
@@ -22099,8 +22109,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 67143,
-      "sha256": "679ecc2fb60fa4f38011c3e84634cf16fff022e517b67e4a6411b0a89a88baa2"
+      "bytes": 67505,
+      "sha256": "f38b79e9a23881d24b7fc3c065df88869d7d985d94a8f42f0049c5e3c15f86e8"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -22131,6 +22141,11 @@
       "path": "render-compat-r83.js",
       "bytes": 2345,
       "sha256": "aecbc8b4d4bbea8462118768d8108d86ca2eb76c867e6dbef934735918e809a9"
+    },
+    {
+      "path": "roof-height-r267.js",
+      "bytes": 2703,
+      "sha256": "f4a6dadda1b309c164774f19127f70d150bb364377598d4fdee8a678021123cc"
     },
     {
       "path": "samong-doll-r193.js",
@@ -22448,9 +22463,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4489,
-  "totalBytes": 851869780,
-  "webHTMLSha256": "2d73f30b76f1b97707fa7998ecd2762f33ae578dd5e0f33eb85ba054ae830543",
+  "fileCount": 4492,
+  "totalBytes": 851889802,
+  "webHTMLSha256": "0111b1395bc9e13b6baad03b901d16b327983fa2ee39e3921c4cac9a17434469",
   "largest": [
     {
       "path": "index.html",

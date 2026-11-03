@@ -30,7 +30,8 @@ function setEnabled(v){enabled=!!v;try{localStorage.setItem(KEY,enabled?'1':'0')
 const ARCH=Object.freeze({hwando:'iai',seoha:'orb',neon:'chain',michaela:'fist',lauren:'meteor',hunter:'multishot',slayer:'fissure',gunner:'nova'});
 // R160 (사용자 2026-10-31 "미카엘라 모든 스킬이 비슷한이펙트인문제"): 미카엘라는 Q·Z·X·C 가 모두 '천국의 주먹' 빛 기둥 하나로 그려졌다.
 //  Q 는 그대로 두고, Z(W 원본: 방패) → 성역 방벽, X(E 원본: 날개 돌진) → 날개 돌진, C(R 원본: 날개 십자) → 세라핌 강림으로 나눈다(색은 영웅 팔레트 그대로).
-const SLOT_KIND=Object.freeze({michaela:Object.freeze({w:'aegis',e:'wingdash',r:'seraph'})});
+// R269: 다른 영웅도 Q·Z·C 원형을 나눈다 — 미카엘라 외 영웅의 칸은 hero-skills-r269 의 슬롯 표에서(꺼져 있으면 원래 원형)
+const SLOT_KIND=new Proxy(Object.freeze({michaela:Object.freeze({w:'aegis',e:'wingdash',r:'seraph'})}),{get:(o,h)=>o[h]||window.__STORYWORLD_HERO_SKILLS_R269__?.slotsFor?.(h)||undefined});
 const NAMES=Object.freeze({hammer:'소용돌이 칼날',iai:'발도 연참',orb:'프로즌 오브',chain:'체인 라이트닝',fist:'천국의 주먹',aegis:'성역 방벽',wingdash:'날개 돌진',seraph:'세라핌 강림',meteor:'메테오',multishot:'멀티샷',fissure:'피셔',nova:'노바'});
 const H=()=>typeof actorHeight==='function'?actorHeight():60;
 function enemies(){try{return typeof liveEnemies==='function'?liveEnemies():[];}catch(_){return[];}}
