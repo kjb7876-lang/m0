@@ -16,6 +16,7 @@ const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
 const REV='R262-cave-1',KEY='storyworld.r204.cave';
 let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
+const orgPath=n=>n.includes('/')?n:'assets/r207/organic/'+n+'.png';/* R281: 이름 대신 경로를 준 데칼(assets/r281/…)도 받는다 */
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -34,7 +35,8 @@ const ZONES={
  // 악마화 나무의 정원: 정원 돌길·이끼 흙·마른 풀, 이끼 낀 둔덕, 둔덕 위 마른 나무(r99 원화 12장). 거미줄 없음.
  dist00:{decalMix:{near:[[2,3],[11,3],[5,2],[6,2]],open:[[0,2],[11,3],[5,2],[6,2],[7,1],[2,1]]},decalDensity:11,tufts:['assets/r138/props/weed.webp',.12,1/34],seed:0x5d0077,tint:[.86,.92,.76],topK:1.9,floorK:1.0,hiTop:1.3,loTop:.4,bulge:1.35,widen:true,web:false,pillars:false,trees:'dead',
   tex:{floorA:['assets/r118/tiles/garden.webp',0],floorB:['assets/r99/outdoor/ground-moss.webp',0],rock:['assets/r99/outdoor/surround-moss.webp',-1],face:['assets/r99/outdoor/ground-moss.webp',1]},
-  patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5]],
+  patches:[['garden_root_paving_break_01','floor',.36,1/260,.8],['garden_soil_paving_transition_01','floor',.38,1/220,.8],['soil_rock_transition_02','base',.3,1/120,.5],
+   ['assets/r281/garden/garden-soil-fringe-outer-01.png','floor',.38,1/300,.8]/* R281: 드라이브 정원 흙띠 바깥 배치 변형(조건부·최종 아님) */],
   uprights:[['garden_low_border_01',.34]],uprightRate:1/110},
  // R210 — 나머지 1부 야외 지역(사용자 "나머지맵들도 작업 … 모든맵이 화풍이 비슷해야함"). 통로 넓히기는 하지 않는다(맵 레이아웃·전수 검사 그대로), 불룩도 중간.
  // 늪지대의 뿔악마: 이끼 흙·진흙 바닥, 물 먹은 이끼 둔덕, 마른 나무
@@ -388,7 +390,7 @@ function fieldFor(r,make=false){const ex=r?.exploration;if(!ex)return null;let F
 /* R208 전환 안정: 지역에 들어간 뒤 2.5초 동안은 화면 흔들림(shake)을 0 으로 둔다 — 로딩 직후 끊긴 프레임 위에 피격·연출 흔들림이 겹치면 크게 흔들려 보였다. */
 let calmUntil=0;const calm=()=>{try{if(typeof shake==='number'&&shake>0)shake=0;}catch(_){}if(performance.now()<calmUntil&&typeof requestAnimationFrame==='function')requestAnimationFrame(calm);};
 if(typeof enterRegion==='function'){const en=enterRegion;enterRegion=async function(...a){calmUntil=performance.now()+1e5;calm();let out;try{out=await en.apply(this,a);}finally{calmUntil=performance.now()+2500;}return out;};}/* 지형장은 첫 렌더에서 만든다(전환 직후 미리 만들면 렌더 전 판정까지 바뀜 — 전수 검사 projectile) */
-if(typeof setTimeout==='function')setTimeout(()=>{try{const paths=new Set();for(const z of Object.values(ZONES)){for(const [p] of Object.values({...TEX,...(z.tex||{})}))paths.add(p);for(const [n] of [...(z.patches||[]),...(z.uprights||[])])paths.add('assets/r207/organic/'+n+'.png');if(z.trees)for(let i=0;i<12;i++)paths.add('assets/r99/outdoor/tree-'+z.trees+'-'+String(i).padStart(2,'0')+'.webp');}
+if(typeof setTimeout==='function')setTimeout(()=>{try{const paths=new Set();for(const z of Object.values(ZONES)){for(const [p] of Object.values({...TEX,...(z.tex||{})}))paths.add(p);for(const [n] of [...(z.patches||[]),...(z.uprights||[])])paths.add(orgPath(n));if(z.trees)for(let i=0;i<12;i++)paths.add('assets/r99/outdoor/tree-'+z.trees+'-'+String(i).padStart(2,'0')+'.webp');}
  let i=0;const list=[...paths];const next=()=>{if(i>=list.length)return;loadImg(list[i++]).catch(()=>{}).finally(()=>setTimeout(next,60));};next();}catch(e){fail(e);}},2500);
 if(typeof blocked==='function'){const base=blocked;
  blocked=function(x,y,rad=.27,where=(typeof room!=='undefined'?room:null)){if(base.call(this,x,y,rad,where))return true;
@@ -645,7 +647,7 @@ function eligible(r,frame){const rm=roomOf(frame);return !!(rm&&roomOn(rm)&&fram
 function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],ex=frame.exploration;SEED=cfg.seed;
  const gen=r.sceneGeneration;r.__r204={gen,pending:true,zone:frame.zone};
  const TX={...TEX,...(cfg.tex||{})},want=cfg.decorOnly?{crack:loadImg(TEX.crack[0]),bones:loadImg(TEX.bones[0]),root:loadImg(TEX.root[0])}/* R216: 디테일 전용은 장식판에 쓰는 그림만 */:Object.fromEntries(Object.entries(TX).map(([k,[p]])=>[k,loadImg(p)]));
- for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg('assets/r207/organic/'+n+'.png');
+ for(const [n] of [...(cfg.patches||[]),...(cfg.uprights||[])])want['org:'+n]=loadImg(orgPath(n));
  want.chain=loadImg('assets/r138/props/chain.webp').catch(()=>null);want.ripple=loadImg('assets/r138/props/ripple.webp').catch(()=>null);/* R212 */
  if(cfg.tufts)want.tuft=loadImg(cfg.tufts[0]).catch(()=>null);
  if(cfg.trees)for(let i=0;i<12;i++)want['tree'+i]=loadImg('assets/r99/outdoor/tree-'+cfg.trees+'-'+String(i).padStart(2,'0')+'.webp');
