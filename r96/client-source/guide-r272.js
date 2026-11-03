@@ -8,7 +8,7 @@
 //  (2) 777 로 병원부터 시작하면 앞 장(dist00 등)이 '미완료'로 남아 R75 길잡이가 다 깬 쉼터(dreamRest)에서 '앞선 서사 맵으로'(이전 포탈)를 목표로 삼아
 //   이전 포탈 위에 멈춘다(실플레이: ep1a11 → dreamRest 15.2,18.4 에서 40분 넘게 제자리, 다음 포탈 ep1b01 은 열려 있음).
 //   777 이 켜져 있고, 지금 지역을 깼고, 미완료 첫 지역이 캠페인 순서상 뒤쪽이 아니며, '다음' 포탈이 열려 있을 때만 다음 포탈로 데려간다
-//   (포탈 위에서는 원래 travel → 777 난이도 창 그대로).
+//   (포탈 위에서는 원래 travel → 777 난이도 창 그대로). 다음 포탈이 닫힌 R81 문 너머면(last301: 다음 포탈 5,3.5 앞 door-2) 그 문을 열러 간다.
 (()=>{'use strict';
 if(window.__STORYWORLD_GUIDE_R272__)return;
 const REV='R272-guide-1',stats={merge:0,door:0,interact:0,noPath:0,forward:0,travel:0,errors:0};let lastError=null,timer=0;
@@ -30,7 +30,14 @@ function forward(dt){if(!guide||modal||loading||!(player?.hp>0)||storyScene||nea
  if(!forwardRole({cheat:window.__STORYWORLD_CHEAT777__?.active?.()===true,completed:completed(zone),pendingIdx:pend?order.indexOf(pend.id):-1,zoneIdx:order.indexOf(zone),nextOpen:!!st?.open&&!!st.point}))return false;
  fTimer-=dt;if(fTimer>0)return true;fTimer=.5;
  if(Math.hypot(player.x-st.point.x,player.y-st.point.y)<=.75){stats.travel++;travel(d);return true;}
- const p=findPath(player,st.point,room,.31);if(!p.length){stats.noPath++;return false;}route=p;command=null;stats.forward++;return true;}
+ const p=findPath(player,st.point,room,.31);if(!p.length){stats.noPath++;return doorToward(st.point);}route=p;command=null;stats.forward++;return true;}
+// 다음 포탈이 닫힌 R81 문 너머(last301 실플레이: 다음 포탈 5,3.5 길 0칸 → R75 가 이전 포탈로 되돌아감)면 가장 가까운 닫힌 문을 열거나 그 문턱으로 걸어간다(polish-r101 guideDoorStep 과 같은 방식, 앞방 문 제외).
+function doorToward(goal){try{const W=window.__STORYWORLD_WORLD_R74__,ds=room?.exploration?.worldR74?.doors||[];if(!W?.isOpen)return false;
+ const shut=ds.filter(d=>d.id!=='door-1'&&!W.isOpen(room,d)).sort((a,b)=>Math.hypot(a.x-goal.x,a.y-goal.y)-Math.hypot(b.x-goal.x,b.y-goal.y));
+ for(const d of shut.slice(0,2)){const t={id:d.id,kind:'door'};try{if(W.canUse(t)&&W.use(t)){stats.doors=(stats.doors||0)+1;route=[];return true;}}catch(_){}
+  let best=null;for(const sg of [-1,1]){const q={x:d.axis==='x'?d.x+sg*.9:d.x,y:d.axis==='y'?d.y+sg*.9:d.y};if(blocked(q.x,q.y,.29,room))continue;const pp=findPath(player,q,room,.29);if(pp.length&&(!best||pp.length<best.length))best=pp;}
+  if(best){route=best;command=null;stats.doorWalk=(stats.doorWalk||0)+1;return true;}}
+ return false;}catch(e){fail(e);return false;}}
 function step(dt){if(forward(dt))return true;const ph=phase();if(!ph)return false;
  const act=decide(ph,{guide,modal,loading,hp:player?.hp,enemyNear:!!nearestEnemy(40),px:player.x,py:player.y,merge:L()?.merge});if(!act)return false;
  timer-=dt;if(timer>0)return true;timer=.5;

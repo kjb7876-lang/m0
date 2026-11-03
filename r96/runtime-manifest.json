@@ -21899,8 +21899,8 @@
     },
     {
       "path": "guide-r272.js",
-      "bytes": 5220,
-      "sha256": "e93348f3110d0c3c7f4d2488405dcc5e26b49068fd326dae6c7a05677263ad5e"
+      "bytes": 6433,
+      "sha256": "52d44e70b20e3638bcf7657231ea7c3b524c02cc64d41b6c38a0a7bb26e5e5c1"
     },
     {
       "path": "guide-unstick-r222.js",
@@ -22534,7 +22534,7 @@
     }
   ],
   "fileCount": 4506,
-  "totalBytes": 854771356,
+  "totalBytes": 854772569,
   "webHTMLSha256": "a4a1d460558179aabd52af400ccb3b3f61c25c41f8e50a79e5afea607c8ea878",
   "largest": [
     {
