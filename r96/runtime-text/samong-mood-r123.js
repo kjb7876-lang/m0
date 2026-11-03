@@ -18,7 +18,7 @@
  // R126: Drive 2026-10-29 원화(assets/r126/props, scripts/r126-drive-props.py). 그림이 준비되면 게임 소품 그리기로, 그 전에는 코드 그림으로.
  const ART={teacup:{path:'assets/r126/props/teacup.webp',h:110},needle:{path:'assets/r126/props/needle.webp',h:70},locker:{path:'assets/r126/props/locker.webp',h:150},noticeboard:{path:'assets/r126/props/noticeboard.webp',h:80,lift:56},badge:{path:'assets/r126/props/badge.webp',h:22},
   // R129: Drive 2026-10-30 원화(scripts/r129-drive-assets.py) — 숲 나무·데이터 비석·기계 철탑, 화가 소품 3점, 녹는 시계 4키(가까이 가면 K1→K4 한 번)
-  tree:{path:'assets/r129/props/tree.webp',h:230},monolith:{path:'assets/r129/props/monolith.webp',h:130},pylon:{path:'assets/r129/props/pylon.webp',h:210},
+  tree:{path:'assets/r129/props/tree.webp',h:230},monolith:{path:'assets/r129/props/monolith.webp',h:130},'monolith-side':{path:'assets/r273/props/monolith-side.webp',h:130},/* R273: 데이터 기념석 측후면(조건부·최종 아님) */pylon:{path:'assets/r129/props/pylon.webp',h:210},
   brush:{path:'assets/r129/props/brush.webp',h:40},tweezers:{path:'assets/r129/props/tweezers.webp',h:40},vase:{path:'assets/r129/props/vase.webp',h:64},
   clock:{path:'assets/r129/props/clock-k1.webp',h:92,frames:[1,2,3,4].map(i=>'assets/r129/props/clock-k'+i+'.webp')}};
  const clockPlay=new Map();
@@ -212,7 +212,7 @@
 
  // ---- 조형물(표현 전용 소품) ------------------------------------------------------------------------------
  function decoProps(r,st){if(!prefs.deco)return;if(st.decoPlaced)return;st.decoPlaced=true;const all=[...st.deco];if(st.lift)all.push({id:'r123:'+st.zone+':lift',kind:'lift',x:st.lift.x,y:st.lift.y,seed:1,floor:st.theme.floors?.list?.slice(-1)[0]});
-  for(const d of all){const q={id:d.id,x:d.x,y:d.y,height:60,solid:false,visible:true,enabled:true,autoTargetEligible6:false,r80PresentationOnly:true,r123Deco:d},a=ART[d.kind];
+  for(const d of all){const q={id:d.id,x:d.x,y:d.y,height:60,solid:false,visible:true,enabled:true,autoTargetEligible6:false,r80PresentationOnly:true,r123Deco:d},alt=d.kind==='monolith'&&/:1$/.test(d.id)?'monolith-side':null,a=(alt&&ART[alt])||ART[d.kind];if(alt)q.r273Angle=alt;
    if(a&&prefs.art){q.path=a.path;q.height=a.h;if(a.lift)q.visualLiftPx=a.lift;if(a.frames)q.r129Frames=a.frames;try{if(typeof addImage==='function')for(const f of a.frames||[a.path])addImage(f);}catch(e){fail(e);}stats.art=(stats.art||0)+1;}r.props.push(q);}}
  const DRAW={
   teacup(g,q,u,t,d){const w=u*1.25,h=u*.95;g.fillStyle='rgba(30,10,20,.35)';g.beginPath();g.ellipse(q.x,q.y+2,w*1.05,w*.36,0,0,TAU);g.fill();g.fillStyle='#d8cec3';g.beginPath();g.ellipse(q.x,q.y,w*.95,w*.32,0,0,TAU);g.fill();

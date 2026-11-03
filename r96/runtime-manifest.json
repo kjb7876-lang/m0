@@ -13188,6 +13188,16 @@
       "sha256": "3c77345c48c79300d489d67c3b8ccbd07c430ae7e180dee0830d7afc4a081c14"
     },
     {
+      "path": "assets/r273/props/index.json",
+      "bytes": 1149,
+      "sha256": "b8b70332f4dc221f6097dae0aadd96063b96045496897ce8283e908567ef2d67"
+    },
+    {
+      "path": "assets/r273/props/monolith-side.webp",
+      "bytes": 42960,
+      "sha256": "76285df61fde0b4b2d314771d7676d5b89254eae3198339e1fc165e3cdcd2d6e"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22224,8 +22234,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 78785,
-      "sha256": "c75efda057885c2aeed997a0d65e197f7907082242d42858aad3742240bf6eed"
+      "bytes": 79023,
+      "sha256": "5c91b2b77f96f7434a1f25dc0c250fe188743a24e444cbc141db0405313bd96c"
     },
     {
       "path": "samong-play-r162.js",
@@ -22523,8 +22533,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4504,
-  "totalBytes": 854764593,
+  "fileCount": 4506,
+  "totalBytes": 854808940,
   "webHTMLSha256": "530f3c7e3abe7a15cd437bb704f9622a71df0bf233d35f2d224b92d3fec46553",
   "largest": [
     {
