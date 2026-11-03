@@ -273,6 +273,10 @@ jobs:
         run: node r96/qa/r271/r271-cpu-check.cjs
       - name: R272 guide (hospital route/door, 777 forward) CPU check
         run: node r96/qa/r272/r272-cpu-check.cjs
+      - name: R277 hwando motion consistency CPU check
+        run: node r96/qa/r277/r277-cpu-check.cjs
+      - name: R274 manual play rewards CPU check
+        run: node r96/qa/r274/r274-cpu-check.cjs
       - name: R247 michaela Z/X bishop skills CPU check
         run: node r96/qa/r247/r247-cpu-check.cjs
       - name: R251 Balrog summoning circle tower CPU check
@@ -297,6 +301,12 @@ jobs:
         run: node r96/qa/r262/r262-cpu-check.cjs
       - name: R257 Drive angle variants for props CPU check
         run: node r96/qa/r257/r257-cpu-check.cjs
+      - name: R273 Data Monument side-rear angle variant CPU check
+        run: node r96/qa/r273/r273-cpu-check.cjs
+      - name: R276 School noticeboard side-oblique angle variant CPU check
+        run: node r96/qa/r276/r276-cpu-check.cjs
+      - name: R279 Teacup/locker/steel-tower angle variants CPU check
+        run: node r96/qa/r279/r279-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check

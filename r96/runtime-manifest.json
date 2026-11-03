@@ -13188,6 +13188,46 @@
       "sha256": "3c77345c48c79300d489d67c3b8ccbd07c430ae7e180dee0830d7afc4a081c14"
     },
     {
+      "path": "assets/r273/props/index.json",
+      "bytes": 1149,
+      "sha256": "b8b70332f4dc221f6097dae0aadd96063b96045496897ce8283e908567ef2d67"
+    },
+    {
+      "path": "assets/r273/props/monolith-side.webp",
+      "bytes": 42960,
+      "sha256": "76285df61fde0b4b2d314771d7676d5b89254eae3198339e1fc165e3cdcd2d6e"
+    },
+    {
+      "path": "assets/r276/props/index.json",
+      "bytes": 1171,
+      "sha256": "1c69538408f8a9f8d9dca5d954062924541a2bc4c4db7be11a18d5d66b9ebb12"
+    },
+    {
+      "path": "assets/r276/props/noticeboard-side.webp",
+      "bytes": 105864,
+      "sha256": "5ee69d08d1b5a015edb8f5b0754d50fd7316967e7bf85b87bab5eb3e4b23ca93"
+    },
+    {
+      "path": "assets/r279/props/index.json",
+      "bytes": 3154,
+      "sha256": "b2de5dc42ca991f39028fb572c1098ae3e5eb1358d74c90751a0cf5996d2e924"
+    },
+    {
+      "path": "assets/r279/props/locker-left.webp",
+      "bytes": 32244,
+      "sha256": "5c6c3d3ff5e482530075488dfef6df54e38747cb2a607c663ff68a351f362e9e"
+    },
+    {
+      "path": "assets/r279/props/pylon-rear.webp",
+      "bytes": 49156,
+      "sha256": "f26debea96a8e16f871db88d922509765a14a23cb71edf2d674c1d99e27f7dc9"
+    },
+    {
+      "path": "assets/r279/props/teacup-handle.webp",
+      "bytes": 85872,
+      "sha256": "4e85df11c7dec85b2f45ec59144ef5f01631ed50702db00b1de32a80852ff238"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -21984,13 +22024,18 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 9491,
-      "sha256": "24b6115d7df7773d64fc02a1e2a90870166dd3bbf3b0996e1d953a94e9ac8c35"
+      "bytes": 10097,
+      "sha256": "a3187bd967c3bf2092e47ec32fadb339317bd21056007fd12b2bd0516ffc8722"
+    },
+    {
+      "path": "hwando-r277.js",
+      "bytes": 2487,
+      "sha256": "fdfb11ae2c05059995f0fa4717c10f19f899bf52bfc5151f461202e317ef3ec8"
     },
     {
       "path": "index.html",
-      "bytes": 6566388,
-      "sha256": "a4a1d460558179aabd52af400ccb3b3f61c25c41f8e50a79e5afea607c8ea878"
+      "bytes": 6566474,
+      "sha256": "c578c106639a65d574d0e8970b6e10d9a0a9bc868435e49565e607c3e2cf8311"
     },
     {
       "path": "intro-r140.js",
@@ -22006,6 +22051,11 @@
       "path": "light-r182.js",
       "bytes": 11771,
       "sha256": "c11a5cd7101fa5f374b9049327137e5c4da10a38cd3e23af22ed3b7a88b7e366"
+    },
+    {
+      "path": "manual-bonus-r274.js",
+      "bytes": 7297,
+      "sha256": "c4850bd8b399451a3a9df5d86fb7fba78730e586d2c79c78933ebbaaa540c9f6"
     },
     {
       "path": "michaela-r247.js",
@@ -22234,8 +22284,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 78785,
-      "sha256": "c75efda057885c2aeed997a0d65e197f7907082242d42858aad3742240bf6eed"
+      "bytes": 79738,
+      "sha256": "77fac486acdcf38fe4d56364aca0fc06441c97eb225c771139539a04cd7bb7ed"
     },
     {
       "path": "samong-play-r162.js",
@@ -22533,9 +22583,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4506,
-  "totalBytes": 854772569,
-  "webHTMLSha256": "a4a1d460558179aabd52af400ccb3b3f61c25c41f8e50a79e5afea607c8ea878",
+  "fileCount": 4516,
+  "totalBytes": 855105568,
+  "webHTMLSha256": "c578c106639a65d574d0e8970b6e10d9a0a9bc868435e49565e607c3e2cf8311",
   "largest": [
     {
       "path": "index.html",

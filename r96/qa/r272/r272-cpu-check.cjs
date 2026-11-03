@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const src=C('guide-r272.js'),idx=RT('index.html');
-ok('runtime copy matches; loads after hwando-r271 (after every guideStep wrapper)',RT('guide-r272.js')===src&&idx.indexOf('hwando-r271.js')<idx.indexOf('guide-r272.js')&&idx.indexOf('guide-r272.js')<idx.indexOf('combat-r118.js'));
+ok('runtime copy matches; loads after hwando-r271/r277/manual-bonus-r274 (after every guideStep wrapper)',RT('guide-r272.js')===src&&idx.indexOf('hwando-r271.js')<idx.indexOf('guide-r272.js')&&idx.indexOf('guide-r272.js')<idx.indexOf('combat-r118.js'));
 ok('in verify list, CI and manifest',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'guide-r272.js'")&&fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r272-cpu-check.cjs')&&fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8').includes('guide-r272.js'));
 // 샌드박스에서 오버레이를 실제로 실행해 판단 함수를 꺼낸다.
 let base=0;const sb={window:{},guideStep:()=>{base++;},setTimeout,console};sb.window=sb;vm.createContext(sb);vm.runInContext(src,sb);
