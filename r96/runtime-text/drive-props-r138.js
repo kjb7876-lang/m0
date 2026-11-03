@@ -15,9 +15,14 @@ if(window.__STORYWORLD_DRIVE_PROPS_R138__)return;
 const E=window.__STORYWORLD_ENVIRONMENT_R81__;
 const ART={sign:{path:'assets/r138/props/sign.webp',height:20,lift:44,wall:1},hwindow:{path:'assets/r138/props/hwindow.webp',height:36,lift:24,wall:1},cwindow:{path:'assets/r138/props/cwindow.webp',height:34,lift:24,wall:1},
  fridge:{path:'assets/r138/props/fridge.webp',height:62,wall:1},counter:{path:'assets/r138/props/counter.webp',height:36,wall:1},syringe:{path:'assets/r138/props/syringe.webp',height:14},pet:{path:'assets/r138/props/pet.webp',height:16},glasses:{path:'assets/r138/props/glasses.webp',height:9},plate:{path:'assets/r138/props/plate.webp',height:13},
- weed:{path:'assets/r138/props/weed.webp',height:44},chain:{path:'assets/r138/props/chain.webp',height:22},root:{path:'assets/r138/props/root.webp',height:56},bones:{path:'assets/r138/props/bones.webp',height:150,lift:104},window:{path:'assets/r138/props/window.webp',height:140,wall:1}};
+ weed:{path:'assets/r138/props/weed.webp',height:44},
+ /* R257: 드라이브 11-03 각도·배치 변형본(assets/r257/props, scripts/r257-drive-angles.py) */'chain-end':{path:'assets/r257/props/chain-end.webp',height:22},'weed-opp':{path:'assets/r257/props/weed-opp.webp',height:44},'cwindow-obl':{path:'assets/r257/props/cwindow-obl.webp',height:34,lift:24,wall:1},
+ armor:{path:'assets/r257/props/armor.webp',height:26},kitchen:{path:'assets/r257/props/kitchen.webp',height:14},cable:{path:'assets/r257/props/cable.webp',height:22},chain:{path:'assets/r138/props/chain.webp',height:22},root:{path:'assets/r138/props/root.webp',height:56},bones:{path:'assets/r138/props/bones.webp',height:150,lift:104},window:{path:'assets/r138/props/window.webp',height:140,wall:1}};
 const PLAN={dist01:[['bones',2]],dist00:[['window',1],['root',2]],dist02:[['weed',2]],dist03:[['chain',2]],
  ep1a09:[['sign',1]],ep1a11:[['hwindow',1],['syringe',2]],ep1b02:[['fridge',1],['pet',2]],ep1b03:[['glasses',1]],ep1b04:[['counter',1],['plate',1]],ep1b06b:[['cwindow',1]]};
+/* R257: 드라이브 11-03 배치 변형본 중 원래 지역이 정해진 것 — 그 지역에 바닥 비충돌 장식 하나씩 더 */const PLAN257={dist04:[['armor',1]],ep1b04:[['kitchen',1]],ep1b09:[['cable',1]]};
+// R257: 같은 방에 같은 소품이 둘이면 두 번째는 다른 각도 그림으로, 벽에 붙는 오두막 창은 붙는 벽에 맞는 각도로(뒷벽 -y 정면 원본 · 왼쪽 벽 -x 반대 사선).
+const ALT={chain:'chain-end',weed:'weed-opp'},WALL_ALT={cwindow:{'-1,0':'cwindow-obl'}};
 // R81 과 같은 방 사각형. 뼈는 방 안쪽 천장 아래에 둔다.
 const bounds=[[30,4,46,20],[48,4,66,20],[68,4,84,20],[68,30,84,42],[10,30,34,42],[38,30,64,42],[10,52,32,68],[34,52,48,68],[50,52,68,68],[70,52,80,68],[10,74,36,82],[50,74,78,82],[10,90,24,104],[26,92,42,104],[44,90,62,104],[64,90,78,104]];
 const stats={rooms:0,placed:0,failures:0,draws:0};let lastError=null;
@@ -36,17 +41,18 @@ function spots(r,n,kind){const b=boxOf(r.exploration,n);if(!b)return[];const[a,b
  if(ART[kind]?.wall)return wallSpots(r,n);
  return[[(a+c)/2,(b0+d)/2],[(a*2+c)/3,(b0+d)/2],[(a+c)/2,(b0*2+d)/3],[(a+c*2)/3,(b0+d*2)/3],[a+3,b0+3]];}
 function place(r){try{
- if(!E||!r||mode()!=='off'||r.layer!=='STORY'||!r.exploration?.worldWardR81)return r;const plan=PLAN[r.id];if(!plan)return r;
+ if(!E||!r||mode()!=='off'||r.layer!=='STORY'||!r.exploration?.worldWardR81)return r;const plan=[...(PLAN[r.id]||[]),...(PLAN257[r.id]||[])];if(!plan.length)return r;
  if(done.get(r)===r.exploration)return r;done.set(r,r.exploration);
  r.props=r.props.filter(p=>!p.r138Drive);
  const used=r.props.filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.visible!==false).map(p=>({x:p.x,y:p.y}));
  const nodes=r.exploration.nodes.filter(n=>boxOf(r.exploration,n));let k=0;
  for(const[kind,count]of plan)for(let i=0;i<count;i++){const a=ART[kind];let spot=null;
-  for(let j=0;j<nodes.length&&!spot;j++){const n=nodes[(k*7+j+3)%nodes.length];for(const[x,y,dx=0,dy=0]of spots(r,n,kind)){const p={x,y};if(E.safe(r,p,used,.6)){spot={x:x+dx*.5,y:y+dy*.5};break;}}}
+  for(let j=0;j<nodes.length&&!spot;j++){const n=nodes[(k*7+j+3)%nodes.length];for(const[x,y,dx=0,dy=0]of spots(r,n,kind)){const p={x,y};if(E.safe(r,p,used,.6)){spot={x:x+dx*.5,y:y+dy*.5,dx,dy};break;}}}
   k++;if(!spot){stats.failures++;continue;}used.push(spot);
-  const q={id:'r138:'+r.id+':'+kind+':'+i,x:spot.x,y:spot.y,path:a.path,height:a.height,solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true,r138Drive:kind};
-  if(a.lift)q.r138Lift=a.lift;r.props.push(q);stats.placed++;
-  try{if(typeof addImage==='function')addImage(a.path);}catch(e){fail(e);}}
+  const alt=(i%2===1&&ALT[kind])||WALL_ALT[kind]?.[spot.dx+','+spot.dy],av=alt&&ART[alt];if(av)stats.angles=(stats.angles||0)+1;const ap=av||a;
+  const q={id:'r138:'+r.id+':'+kind+':'+i,x:spot.x,y:spot.y,path:ap.path,height:ap.height,r257Angle:alt||undefined,solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true,r138Drive:kind};
+  if(ap.lift)q.r138Lift=ap.lift;r.props.push(q);stats.placed++;
+  try{if(typeof addImage==='function')addImage(ap.path);}catch(e){fail(e);}}
  stats.rooms++;}catch(e){fail(e);}return r;}
 if(typeof makeRoom==='function'){const b=makeRoom;makeRoom=function(...a){return place(b.apply(this,a));};}
 if(typeof enterRegion==='function'){const b=enterRegion;enterRegion=async function(...a){const out=await b.apply(this,a);if(out!==false)place(room);return out;};}
@@ -56,5 +62,5 @@ function hang(p){const row=readyImage(p.path);if(!row)return;const z=typeof zoom
  const paint=()=>sprite(p.path,q.x,q.y-lift,h,{alpha:behind?.36:1,filter:'none'});if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:p.path,alive:true},paint);else paint();}
 if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(p?.r138Drive){stats.draws++;try{if(typeof readyImage==='function'&&!readyImage(p.path)){if(typeof addImage==='function')addImage(p.path);return;}if(p.r138Lift){hang(p);return;}}catch(e){fail(e);return;}}return b.call(this,p,...a);};}
 try{for(const r of new Set([...Object.values(world||{}),room]))place(r);}catch(e){fail(e);}
-window.__STORYWORLD_DRIVE_PROPS_R138__=Object.freeze({ART,PLAN,place,inspect:()=>({revision:'R138',...stats,lastError,browser:false,GPU:false})});
+window.__STORYWORLD_DRIVE_PROPS_R138__=Object.freeze({ART,PLAN,PLAN257,place,inspect:()=>({revision:'R138',...stats,lastError,browser:false,GPU:false})});
 })();

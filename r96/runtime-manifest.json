@@ -13103,6 +13103,41 @@
       "sha256": "c443e41269c45507125e28dd7807eb181ead259aada0a4864f7ead3ddcaf40ea"
     },
     {
+      "path": "assets/r257/props/armor.webp",
+      "bytes": 63298,
+      "sha256": "3a3df126e2e07915b06cd71a465e8739136a8422df05293a27fc09264dc243cd"
+    },
+    {
+      "path": "assets/r257/props/cable.webp",
+      "bytes": 59538,
+      "sha256": "2bcedac6397a3778f2935fe092296d89f376f4e81b42e3c9385aafdbfa67153f"
+    },
+    {
+      "path": "assets/r257/props/chain-end.webp",
+      "bytes": 37846,
+      "sha256": "5934369679c909bb4744ddbf3d7f63605a05f5094b74a8d550072e167e0bea5b"
+    },
+    {
+      "path": "assets/r257/props/cwindow-obl.webp",
+      "bytes": 74286,
+      "sha256": "3e60f425f2de4043e3eb488628f0d6667ebdce8e98cfb86ed9388c2de0f64f07"
+    },
+    {
+      "path": "assets/r257/props/index.json",
+      "bytes": 5000,
+      "sha256": "30a6ba5288c639a4be1cee9db1ce9fbd758aa067ec30858bf35109678916b231"
+    },
+    {
+      "path": "assets/r257/props/kitchen.webp",
+      "bytes": 31806,
+      "sha256": "58e13eff9b73ad6d6b842c40cefd47819cb4f399e8ad340e0b8b3353b4856f2b"
+    },
+    {
+      "path": "assets/r257/props/weed-opp.webp",
+      "bytes": 57892,
+      "sha256": "512743d4edf643821220bb435ec6c4e1f2ae6e1cad0ee90410d1e0df1f19e0ee"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -21694,8 +21729,8 @@
     },
     {
       "path": "drive-props-r138.js",
-      "bytes": 7856,
-      "sha256": "d26f8f9b607ef862c68efde1fb458cd61d129c1f28cadf017c062b1903026387"
+      "bytes": 9088,
+      "sha256": "4480b335bf6bae1f44a953666972ad858fb8d42dadf517e92b2974de2b5160f2"
     },
     {
       "path": "dynamic-vfx-r84.js",
@@ -22398,8 +22433,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4479,
-  "totalBytes": 851512043,
+  "fileCount": 4486,
+  "totalBytes": 851842941,
   "webHTMLSha256": "a9f49f0036de5160a644f1ed837f3549d896184ad3a911c9eec68f6cf9195e36",
   "largest": [
     {

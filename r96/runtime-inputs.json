@@ -3689,7 +3689,14 @@
     "assets/r251/index.json",
     "story-fragments-r255.js",
     "guide-loot-r261.js",
-    "mob-preload-r260.js"
+    "mob-preload-r260.js",
+    "assets/r257/props/chain-end.webp",
+    "assets/r257/props/weed-opp.webp",
+    "assets/r257/props/cwindow-obl.webp",
+    "assets/r257/props/armor.webp",
+    "assets/r257/props/kitchen.webp",
+    "assets/r257/props/cable.webp",
+    "assets/r257/props/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4764,5 +4771,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ca023bb7a19e90ba7ef8f6130974c5f1bb00b775c85379f92a2e1bed13b2170f"
+  "runtimeManifestSHA256": "1f631ce8b754a215da3b14ed4c2c4679a9e644a1150b30563dec40e7f1ea4f13"
 }
