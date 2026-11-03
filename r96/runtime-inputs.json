@@ -3716,7 +3716,9 @@
     "assets/r271/hwando/walk-w.webp",
     "manual-bonus-r274.js",
     "assets/r273/props/monolith-side.webp",
-    "assets/r273/props/index.json"
+    "assets/r273/props/index.json",
+    "assets/r276/props/noticeboard-side.webp",
+    "assets/r276/props/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4791,5 +4793,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f8fc273f59ebbb6bcc12c3c3673c85465c5c220519d010b5d6e2faed8ccc644b"
+  "runtimeManifestSHA256": "5d3175279732e5e07adee4bfcd1368b4b1dbf79c866e097786cd1406e7f17457"
 }
