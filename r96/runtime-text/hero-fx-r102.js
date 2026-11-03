@@ -286,14 +286,14 @@ const STYLES={
  blade(e,u,q,qt,h,F,t,sa,fade){const cy=q.y-h*.42,n=1+Math.min(6,t),reach=h*(1.05+.18*t);
   for(let i=0;i<n;i++){const v=clamp((u-i*.07)/.55,0,1);if(v<=0||v>=1)continue;crescent(q.x,cy,reach*(.55+.6*smooth(v)),sa+(i?(i%2?.35:-.35):0),1.5+.25*t,h*(.12+.02*t)*(1-v*.5),F,(1-v)*fade*(1-.08*i));}
   if(t>=2){sig('slash',F.sig2,q.x+Math.cos(sa)*reach*.7,cy+Math.sin(sa)*reach*.45,u,h*(1.2+.2*t),{alpha:.8*fade,angle:sa});sparks(q.x+Math.cos(sa)*reach*.8,cy+Math.sin(sa)*reach*.5,sa,1.4,6+2*t,h*.6,F.b,fade*(1-u),e.seed,u);}
-  if(t>=4)xslash(qt.x,qt.y-h*.45,h*(.8+.15*t),sa,F,u,fade);
+  if(t>=4)xslash(qt.cx??qt.x,qt.cy??qt.y-h*.45,h*(.8+.15*t),sa,F,u,fade);
   if(t>=6)pillar(qt.x,qt.y,h,F,u);},
  beam(e,u,q,qt,h,F,t,sa,fade){const cy=q.y-h*.5,len=h*(2.6+.5*t),w=h*(.05+.012*t),v=smooth(u/.25),x1=q.x+Math.cos(sa)*len*v,y1=cy+Math.sin(sa)*len*v,a=fade*(1-u*.6);
   streak(q.x,cy,x1,y1,w*2.4,rgba(F.a,.35*a));streak(q.x,cy,x1,y1,w,rgba(F.b,.9*a));
   if(t>=2)for(let i=0;i<4+2*t;i++){const k=rnd(e.seed,i),drift=(rnd(e.seed,i+20)-.5)*h*.6*smooth(u);diamond(lerp(q.x,x1,k)-Math.sin(sa)*drift,lerp(cy,y1,k)+Math.cos(sa)*drift,h*.04,rgba(i%2?F.b:F.a,.9*a),time*3+i);}
   if(t>=4){clockRing(q.x,q.y,h*.85,F,u,fade);for(const s of[-1,1])streak(q.x,cy,q.x+Math.cos(sa+s*.07)*len*v*.85,cy+Math.sin(sa+s*.07)*len*v*.85,w*.9,rgba(F.a,.45*a));}
-  if(t>=6)shatter(qt.x,qt.y-h*.4,h,F,u,e.seed);},
- bolt(e,u,q,qt,h,F,t,sa,fade){const from={x:q.x,y:q.y-h*.55},to={x:qt.x,y:qt.y-h*.45};lightning(from,to,F,fade*(1-u*.5),e.seed,h,t>=2?2:0);glow(to.x,to.y,h*(.3+.06*t),F.a,fade*(1-u));
+  if(t>=6)shatter(qt.cx??qt.x,qt.cy??qt.y-h*.4,h,F,u,e.seed);},
+ bolt(e,u,q,qt,h,F,t,sa,fade){const from={x:q.x,y:q.y-h*.55},to={x:qt.cx??qt.x,y:qt.cy??qt.y-h*.45};lightning(from,to,F,fade*(1-u*.5),e.seed,h,t>=2?2:0);glow(to.x,to.y,h*(.3+.06*t),F.a,fade*(1-u));
   if(t>=4)circuit(q.x,q.y,h,F,u,fade,e.seed);
   if(t>=6&&e.extra)for(const x of e.extra){const p=project(x.x,x.y);lightning(to,{x:p.x,y:p.y-h*.45},F,fade*(1-u)*.8,e.seed+3,h,0);}},
  holy(e,u,q,qt,h,F,t,sa,fade){crossGlyph(q.x,q.y-h*1.3,h*(.35+.08*t),F,u,fade);
@@ -307,12 +307,12 @@ const STYLES={
   for(let i=0;i<n;i++){const v=clamp((u-Math.abs(i-(n-1)/2)*.03)/.35,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*(.09+.01*t),head=len*smooth(v),tail=Math.max(0,head-h*(.9+.1*t)),al=fade*(1-v*.7),x1=q.x+Math.cos(ang)*head,y1=cy+Math.sin(ang)*head;
    streak(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,x1,y1,h*.03,rgba(F.a,.85*al));disc(x1,y1,h*.03,rgba(F.b,.9*al));}
   if(t>=2)petalBurst(q.x,q.y-h*.4,h*(.6+.1*t),F,u,e.seed,6+2*t);
-  if(t>=4)petalBurst(qt.x,qt.y-h*.4,h*(.8+.1*t),F,u,e.seed+5,8+2*t);
+  if(t>=4)petalBurst(qt.cx??qt.x,qt.cy??qt.y-h*.4,h*(.8+.1*t),F,u,e.seed+5,8+2*t);
   if(t>=6)petalRing(q.x,q.y,h,F,u,e.seed);},
  smash(e,u,q,qt,h,F,t,sa,fade){shock(qt.x,qt.y,h*(1+.25*t),F,u,fade);
   if(t>=1)smoke(qt.x,qt.y,h,u,e.seed);
   if(t>=2)cracks(qt.x,qt.y,h*(.9+.2*t),F,u,e.seed,6+t);
-  if(t>=4)xslash(qt.x,qt.y-h*.45,h*(.9+.15*t),sa,F,u,fade);
+  if(t>=4)xslash(qt.cx??qt.x,qt.cy??qt.y-h*.45,h*(.9+.15*t),sa,F,u,fade);
   if(t>=6){pillar(qt.x,qt.y,h,F,u);shock(qt.x,qt.y,h*(1.6+.3*t),F,clamp(u*1.4-.3,0,1),fade);}},
  pixels(e,u,q,qt,h,F,t,sa,fade){const n=[2,3,3,4,5,5,6,6][t]||3,cy=q.y-h*.55,len=h*(2.4+.4*t);
   for(let i=0;i<n;i++){const v=clamp((u-i*.06)/.4,0,1);if(v<=0)continue;const ang=sa+(i-(n-1)/2)*.05,head=len*smooth(v),tail=Math.max(0,head-h*.8);trailSquares(q.x+Math.cos(ang)*tail,cy+Math.sin(ang)*tail,q.x+Math.cos(ang)*head,cy+Math.sin(ang)*head,h,F,fade*(1-v*.6),e.seed+i);}
@@ -342,6 +342,7 @@ function patRain(x,y,R,F,u,seed,n,fade){const a=fade*Math.sin(Math.PI*clamp(u,0,
  ctx.fillStyle=rgba(F.a,.07*a);ctx.beginPath();ctx.ellipse(x,y,R,R*.5,0,0,TAU);ctx.fill();}
 const PATTERNS={sides:patSides,ground:patGround,sky:patSky,rain:patRain};
 function drawCast(e,u){let q=project(e.x,e.y),qt=project(e.tx,e.ty),h=actorHeight(),F=e.F,t=e.tier,fade=u<.7?1:1-(u-.7)/.3;
+ /* R259: 공중에서 맞는 끝점(번개·X베기·파편·꽃잎)은 그 적 그림 가운데로 — 바닥 문양(룬·충격파·기둥)은 발밑 그대로 */try{const c=window.__STORYWORLD_HIT_CENTER_R259__?.aim?.(e.tx,e.ty);if(c&&(c.x!==qt.x||c.y!==qt.y)){qt.cx=c.x;qt.cy=c.y;}}catch(_){}
  let sa=Math.atan2(qt.y-q.y,qt.x-q.x);if(Math.hypot(qt.x-q.x,qt.y-q.y)<2)sa=screenAngle(e.angle);
  ctx.globalCompositeOperation='lighter';ctx.lineCap='round';ctx.lineJoin='round';
  // tier 0: one thin ring in the primary colour; from tier 1 a double ring (primary + secondary)
