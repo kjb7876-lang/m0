@@ -21094,8 +21094,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 110615,
-      "sha256": "0273a39eca5aa34a95876ca6b3d37fa4c5d666a72978672f1fc39462eb89f1ba"
+      "bytes": 112214,
+      "sha256": "7c27316c0b9a7441fde89f84074e4254ad8971e964befbcb46954ae37d3ef60d"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21879,8 +21879,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6565921,
-      "sha256": "d9c07f1c41486a2f66d711cb1e76ad374aab9ed3a04bd2c69b803bf01152f08f"
+      "bytes": 6565966,
+      "sha256": "a9f49f0036de5160a644f1ed837f3549d896184ad3a911c9eec68f6cf9195e36"
     },
     {
       "path": "intro-r140.js",
@@ -21916,6 +21916,11 @@
       "path": "mob-ground-r206.js",
       "bytes": 2219,
       "sha256": "632e8529cd6360d6f74af2a876a0cd568e5ff7cd3081310be1dc474a351b4d3a"
+    },
+    {
+      "path": "mob-preload-r260.js",
+      "bytes": 4943,
+      "sha256": "fa1bc5b1cb855d4e76bcc1ba07c144d530538a1eb097c717b728a1de43b9bb0f"
     },
     {
       "path": "mob-style-r199.js",
@@ -22393,9 +22398,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4478,
-  "totalBytes": 851503654,
-  "webHTMLSha256": "d9c07f1c41486a2f66d711cb1e76ad374aab9ed3a04bd2c69b803bf01152f08f",
+  "fileCount": 4479,
+  "totalBytes": 851510241,
+  "webHTMLSha256": "a9f49f0036de5160a644f1ed837f3549d896184ad3a911c9eec68f6cf9195e36",
   "largest": [
     {
       "path": "index.html",

@@ -281,6 +281,8 @@ jobs:
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
         run: node r96/qa/r258/r258-cpu-check.cjs
+      - name: R260 mob art preload and cave line flicker CPU check
+        run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check
         run: node r96/qa/r261/r261-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check

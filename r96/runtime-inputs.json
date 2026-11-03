@@ -3688,7 +3688,8 @@
     "assets/r251/hands.webp",
     "assets/r251/index.json",
     "story-fragments-r255.js",
-    "guide-loot-r261.js"
+    "guide-loot-r261.js",
+    "mob-preload-r260.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4763,5 +4764,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3f4f4fbf586077adeb3eaf7c4bde221ca2b3caa7537b18c9a6c964959267a91a"
+  "runtimeManifestSHA256": "c370100a823a0b12eb44618f03419628e37647bc5ca28d7c541a4ae5e03074b5"
 }

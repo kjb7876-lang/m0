@@ -14,7 +14,7 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R228-cave-1',KEY='storyworld.r204.cave';
+const REV='R260-cave-1',KEY='storyworld.r204.cave';
 let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
@@ -750,7 +750,15 @@ function roomLabelTick(){try{if(prefs.rooms===false||typeof room!=='object'||!ro
  toast('◇ '+name+(info.purpose&&info.purpose!==name?' · '+info.purpose:''),1.6);stats.roomLabels=(stats.roomLabels||0)+1;}catch(e){fail(e);}}
 setInterval(roomLabelTick,400);
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
-const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r204=true;return w;};
+// R260: 엔진은 그리기(C.render) 도중에 벽 위 테두리(r90 cap-rims)·모서리 선(r188 -edge)·벽 밑 띠(contact-skirt)를 다시 만들 때가 있다.
+//  before() 는 그리기 전에만 숨기므로 새로 생긴 선이 그 한 프레임 보였다 사라졌다(사용자 "거미동굴처음에 검은선같은느낌들이 깜빡이는버그").
+//  → 실제 GL 그리기(한 프레임에 여러 패스) 직전마다 한 번 더 숨긴다(새로 생긴 것만 골라 숨기므로 가볍다; 새 지형이 붙었거나 붙기를 기다리는 중이고, 디테일 전용이 아닐 때만).
+function glGuard(r){const gl=r?.renderer;if(!gl||gl.__r260)return;const base=gl.render;if(typeof base!=='function')return;
+ gl.render=function(...a){try{{const st=r.__r204,zid=typeof zone!=='undefined'?zone:null;
+  const mine=st&&(st.gen===r.sceneGeneration||st.zone===zid)&&!st.failed&&!ZONES[st.zone]?.decorOnly&&(st.pending||st.group?.visible);/* 새 지형을 기다리는 중(입장 직후)도 */
+  const first=!mine&&prefs.on&&zid&&ZONES[zid]&&!ZONES[zid].decorOnly&&typeof room!=='undefined'&&room?.id===zid&&roomOn(room)&&(typeof layer==='undefined'||layer==='STORY')&&!(st?.failed&&st.zone===zid);/* 입장 첫 프레임: 엔진이 그리기 안에서 장면을 막 만들어(spatialBuilt 는 그 뒤에 켜짐) before() 가 아직 못 본 경우 */
+  if(mine||first){const n0=stats.hidden;hideNative(r);if(stats.hidden>n0)stats.lateHidden=(stats.lateHidden||0)+(stats.hidden-n0);}}}catch(e){fail(e);}return base.apply(this,a);};gl.__r260=true;}
+const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,frame);try{glGuard(this);}catch(e){fail(e);}return fn.apply(this,arguments);};w.__r204=true;return w;};
 C.render=wrapFn(C.render);
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
