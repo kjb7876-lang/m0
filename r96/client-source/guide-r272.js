@@ -24,7 +24,7 @@ function decide(ph,ctx){if(!ctx.guide||ctx.modal||ctx.loading||!(ctx.hp>0)||ctx.
  if(ph==='door')return'door';return null;}
 function forwardRole(o){/* 순수: 777 앞질러 가기에서 이전 대신 다음으로 갈지 */return !!(o.cheat&&o.completed&&o.pendingIdx>=0&&o.zoneIdx>=0&&o.pendingIdx<o.zoneIdx&&o.nextOpen);}
 let fTimer=0;
-function forward(dt){if(!guide||modal||loading||!(player?.hp>0)||storyScene||nearestEnemy(40)||room?.engaged)return false;if(window.__STORYWORLD_EGO151__?.inspect?.()?.isVisit===true)return false;
+function forward(dt){/* R280: 깬 맵에 남은 먼 무리 몹(kair02 26칸) 때문에 이전 포탈에 멈췄다 → 8칸 안 적만 먼저 상대 */if(!guide||modal||loading||!(player?.hp>0)||storyScene||nearestEnemy(8)||room?.engaged)return false;if(window.__STORYWORLD_EGO151__?.inspect?.()?.isVisit===true)return false;
  const api=window.__STORYWORLD_ROUTES_R72__,order=window.__STORYWORLD_STORY_PROFILE_R54__?.campaignOrder;if(!api||!order)return false;
  const d=api.visibleDirections().find(v=>api.status(v).role==='next'),st=d&&api.status(d),pend=firstPending();
  if(!forwardRole({cheat:window.__STORYWORLD_CHEAT777__?.active?.()===true,completed:completed(zone),pendingIdx:pend?order.indexOf(pend.id):-1,zoneIdx:order.indexOf(zone),nextOpen:!!st?.open&&!!st.point}))return false;
