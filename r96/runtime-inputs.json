@@ -3714,6 +3714,7 @@
     "assets/r271/hwando/walk-n.webp",
     "assets/r271/hwando/walk-s.webp",
     "assets/r271/hwando/walk-w.webp",
+    "manual-bonus-r274.js",
     "assets/r273/props/monolith-side.webp",
     "assets/r273/props/index.json"
   ],
@@ -4790,5 +4791,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d5cd8cbb1a2b8c147567095e66a20ee48f25526ca9276039e23f3d5eccba92da"
+  "runtimeManifestSHA256": "f8fc273f59ebbb6bcc12c3c3673c85465c5c220519d010b5d6e2faed8ccc644b"
 }
