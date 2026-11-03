@@ -285,6 +285,8 @@ jobs:
         run: node r96/qa/r262/r262-cpu-check.cjs
       - name: R257 Drive angle variants for props CPU check
         run: node r96/qa/r257/r257-cpu-check.cjs
+      - name: R259 hit effects at enemy art centre CPU check
+        run: node r96/qa/r259/r259-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check
         run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check

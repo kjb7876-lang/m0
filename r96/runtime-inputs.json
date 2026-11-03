@@ -3696,7 +3696,8 @@
     "assets/r257/props/armor.webp",
     "assets/r257/props/kitchen.webp",
     "assets/r257/props/cable.webp",
-    "assets/r257/props/index.json"
+    "assets/r257/props/index.json",
+    "hit-center-r259.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4771,5 +4772,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1f631ce8b754a215da3b14ed4c2c4679a9e644a1150b30563dec40e7f1ea4f13"
+  "runtimeManifestSHA256": "bcb4254c3db8a1c0213b9eb8ea35519949669dfaef7b1963b4c9803b95c54216"
 }
