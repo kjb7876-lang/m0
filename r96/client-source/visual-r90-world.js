@@ -78,10 +78,15 @@
     for(const[p,q]of[[a,b],[b,c],[c,a]]){const ka=pointKey(p),kb=pointKey(q),key=ka<kb?ka+'|'+kb:kb+'|'+ka,old=edges.get(key);if(old)old.count++;else edges.set(key,{a:p,b:q,count:1,material});}
    }
   }
-  const inside=(x,z,y)=>tris.some(t=>Math.abs(t.y-y)<.02&&x>=t.minX-1e-7&&x<=t.maxX+1e-7&&z>=t.minZ-1e-7&&z<=t.maxZ+1e-7&&(()=>{const v1=cross(t.b.x-t.a.x,t.b.z-t.a.z,x-t.a.x,z-t.a.z),v2=cross(t.c.x-t.b.x,t.c.z-t.b.z,x-t.b.x,z-t.b.z),v3=cross(t.a.x-t.c.x,t.a.z-t.c.z,x-t.c.x,z-t.c.z);return(v1>=-1e-7&&v2>=-1e-7&&v3>=-1e-7)||(v1<=1e-7&&v2<=1e-7&&v3<=1e-7);})());
+  // R272: 칸 색인(2칸) — 지형 조각이 들고 날 때마다 다시 만드는 테두리 계산이 벽 수의 제곱(ep1b03 한 번 ~30ms+)이라 끊겼다. 같은 판정을 후보만 두고 한다(결과 동일).
+  const CELL=2,ck=(i,j)=>i+','+j,triGrid=new Map(),edgeGrid=new Map(),put=(grid,x0,z0,x1,z1,v)=>{for(let i=Math.floor(x0/CELL);i<=Math.floor(x1/CELL);i++)for(let j=Math.floor(z0/CELL);j<=Math.floor(z1/CELL);j++){const k=ck(i,j);let l=grid.get(k);if(!l)grid.set(k,l=[]);l.push(v);}};
+  for(const t of tris)put(triGrid,t.minX-1e-6,t.minZ-1e-6,t.maxX+1e-6,t.maxZ+1e-6,t);
+  const inside=(x,z,y)=>(triGrid.get(ck(Math.floor(x/CELL),Math.floor(z/CELL)))||[]).some(t=>Math.abs(t.y-y)<.02&&x>=t.minX-1e-7&&x<=t.maxX+1e-7&&z>=t.minZ-1e-7&&z<=t.maxZ+1e-7&&(()=>{const v1=cross(t.b.x-t.a.x,t.b.z-t.a.z,x-t.a.x,z-t.a.z),v2=cross(t.c.x-t.b.x,t.c.z-t.b.z,x-t.b.x,z-t.b.z),v3=cross(t.a.x-t.c.x,t.a.z-t.c.z,x-t.c.x,z-t.c.z);return(v1>=-1e-7&&v2>=-1e-7&&v3>=-1e-7)||(v1<=1e-7&&v2<=1e-7&&v3<=1e-7);})());
   const raw=[...edges.values()].filter(e=>e.count===1),out=new Map(),corners=new Map();
+  for(const e of raw)put(edgeGrid,Math.min(e.a.x,e.b.x)-1e-4,Math.min(e.a.z,e.b.z)-1e-4,Math.max(e.a.x,e.b.x)+1e-4,Math.max(e.a.z,e.b.z)+1e-4,e);
+  const near=e=>{const set=new Set();for(let i=Math.floor((Math.min(e.a.x,e.b.x)-1e-4)/CELL);i<=Math.floor((Math.max(e.a.x,e.b.x)+1e-4)/CELL);i++)for(let j=Math.floor((Math.min(e.a.z,e.b.z)-1e-4)/CELL);j<=Math.floor((Math.max(e.a.z,e.b.z)+1e-4)/CELL);j++)for(const f of edgeGrid.get(ck(i,j))||[])set.add(f);return set;};
   for(const e of raw){const dx=e.b.x-e.a.x,dz=e.b.z-e.a.z,len=Math.hypot(dx,dz);if(len<.02)continue;const cuts=[0,1];
-   for(const f of raw){if(f===e||Math.abs(f.a.y-e.a.y)>.02)continue;const ex=f.b.x-f.a.x,ez=f.b.z-f.a.z,qx=f.a.x-e.a.x,qz=f.a.z-e.a.z,den=cross(dx,dz,ex,ez);
+   for(const f of near(e)){if(f===e||Math.abs(f.a.y-e.a.y)>.02)continue;const ex=f.b.x-f.a.x,ez=f.b.z-f.a.z,qx=f.a.x-e.a.x,qz=f.a.z-e.a.z,den=cross(dx,dz,ex,ez);
     if(Math.abs(den)>1e-7){const t=cross(qx,qz,ex,ez)/den,u=cross(qx,qz,dx,dz)/den;if(t>1e-5&&t<1-1e-5&&u>=-1e-5&&u<=1+1e-5)cuts.push(t);}
     else if(Math.abs(cross(qx,qz,dx,dz))<1e-5){for(const p of[f.a,f.b]){const t=((p.x-e.a.x)*dx+(p.z-e.a.z)*dz)/(len*len);if(t>1e-5&&t<1-1e-5)cuts.push(t);}}
    }

@@ -20,5 +20,27 @@ ok('777 + cleared + earlier pending + next open → forward (dreamRest repro)',G
 ok('no forward without 777, uncleared map, pending ahead, or closed next portal',[{cheat:false},{completed:false},{pendingIdx:20},{nextOpen:false},{pendingIdx:-1}].every(o=>G.forwardRole({...f,...o})===false));
 ok('no balance/progression writes (route/door/hp/difficulty untouched)',!/\.hp\s*=[^=]|difficultyR63\s*=|setMapMode|\.phase\s*=[^=]|progress\[/.test(src));
 ok('base guide still runs when R272 has nothing to do',(sb.guideStep(.1),base===1));
+
+// R272 렉: visual-r90 벽 테두리 outline() 칸 색인 — 결과는 원래 전수 비교와 같고 더 빠르다.
+{const v90=C('visual-r90-world.js'),i0=v90.indexOf(' function outline(r,sources){'),i1=v90.indexOf(' function merged(');const body=v90.slice(i0,i1);
+ const brute=body.replace("for(const f of near(e))","for(const f of raw)").replace("(triGrid.get(ck(Math.floor(x/CELL),Math.floor(z/CELL)))||[]).some(","tris.some(");
+ class V{constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z;}fromBufferAttribute(a,i){this.x=a.array[i*3];this.y=a.array[i*3+1];this.z=a.array[i*3+2];return this;}applyMatrix4(){return this;}clone(){return new V(this.x,this.y,this.z);}sub(o){this.x-=o.x;this.y-=o.y;this.z-=o.z;return this;}
+  cross(o){const{x,y,z}=this;this.x=y*o.z-z*o.y;this.y=z*o.x-x*o.z;this.z=x*o.y-y*o.x;return this;}lengthSq(){return this.x**2+this.y**2+this.z**2;}normalize(){const l=Math.sqrt(this.lengthSq())||1;this.x/=l;this.y/=l;this.z/=l;return this;}lerp(o,t){this.x+=(o.x-this.x)*t;this.y+=(o.y-this.y)*t;this.z+=(o.z-this.z)*t;return this;}}
+ const top=(x0,z0,x1,z1,h)=>{const a=[x0,h,z0, x0,h,z1, x1,h,z1, x0,h,z0, x1,h,z1, x1,h,z0];return{updateMatrixWorld(){},matrixWorld:null,material:{id:1},geometry:{attributes:{position:{array:a,count:6}},index:null}};};
+ let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;const walls=[];
+ for(let k=0;k<160;k++){const x=Math.round(rnd()*60),z=Math.round(rnd()*60),hz=rnd()<.5,len=1+Math.round(rnd()*8);walls.push(hz?top(x,z-.12,x+len,z+.12,2.85):top(x-.12,z,x+.12,z+len,2.85));}
+ const mk=src=>new Function('pointKey','cross',src+';return outline;')(p=>[p.x,p.y,p.z].map(n=>Math.round(n*10000)).join(':'),(ax,az,bx,bz)=>ax*bz-az*bx);
+ const r={T:{Vector3:V}},key=o=>o.edges.map(e=>[e.a.x,e.a.z,e.b.x,e.b.z].map(n=>n.toFixed(4)).join()).join('|')+'#'+o.posts.length;
+ let t=Date.now();const A=mk(brute)(r,walls);const tb=Date.now()-t;t=Date.now();const B=mk(body)(r,walls);const tg=Date.now()-t;
+ ok('r90 outline grid index gives identical rims to brute force (160 random walls)',key(A)===key(B)&&A.edges.length>50,{a:A.edges.length,b:B.edges.length});
+ ok('r90 outline grid index is faster ('+tb+'ms brute → '+tg+'ms grid)',tg<=tb,{tb,tg});}
+
+// R272 렉: 못 찾은 길 기억(perf-r272)
+{const ps=C('perf-r272.js');ok('perf-r272 loads right after guide-r272, in verify list',idx.indexOf('guide-r272.js')<idx.indexOf('perf-r272.js')&&idx.indexOf('perf-r272.js')<idx.indexOf('combat-r118.js')&&RT('perf-r272.js')===ps&&fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'perf-r272.js'"));
+ let calls=0,gen=0;const roomA={id:'x'};const sb={window:{},performance:{now:()=>sb.__t},__t:0,localStorage:{getItem:()=>null,setItem(){}},setInterval(){},room:roomA,findPath:(f,t)=>{calls++;return t.x<0?[]:[t];},console};sb.window=sb;sb.__STORYWORLD_WORLD_R74__={generation:()=>gen};vm.createContext(sb);vm.runInContext(ps,sb);
+ const fp=sb.findPath,P={x:1,y:1};fp(P,{x:-5,y:3},roomA,.31);fp(P,{x:-5,y:3},roomA,.31);const cachedFail=calls===1;fp(P,{x:5,y:3},roomA,.31);fp(P,{x:5,y:3},roomA,.31);const okNotCached=calls===3;
+ sb.__t=2000;fp(P,{x:-5,y:3},roomA,.31);const expired=calls===4;gen=1;fp(P,{x:-5,y:3},roomA,.31);const doorBust=calls===5;
+ ok('failed path remembered 1.5 s; found paths never cached; door generation change re-searches',cachedFail&&okNotCached&&expired&&doorBust,{calls});
+ ok('ground command drop only when 3D floor rows exist; off switch',/floorRows\?\.size>0/.test(ps)&&/storyworld\.r272\.perf/.test(ps)&&/owner\?\.id==='ground'/.test(ps));}
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R272 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
