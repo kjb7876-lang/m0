@@ -13208,6 +13208,26 @@
       "sha256": "5ee69d08d1b5a015edb8f5b0754d50fd7316967e7bf85b87bab5eb3e4b23ca93"
     },
     {
+      "path": "assets/r279/props/index.json",
+      "bytes": 3154,
+      "sha256": "b2de5dc42ca991f39028fb572c1098ae3e5eb1358d74c90751a0cf5996d2e924"
+    },
+    {
+      "path": "assets/r279/props/locker-left.webp",
+      "bytes": 32244,
+      "sha256": "5c6c3d3ff5e482530075488dfef6df54e38747cb2a607c663ff68a351f362e9e"
+    },
+    {
+      "path": "assets/r279/props/pylon-rear.webp",
+      "bytes": 49156,
+      "sha256": "f26debea96a8e16f871db88d922509765a14a23cb71edf2d674c1d99e27f7dc9"
+    },
+    {
+      "path": "assets/r279/props/teacup-handle.webp",
+      "bytes": 85872,
+      "sha256": "4e85df11c7dec85b2f45ec59144ef5f01631ed50702db00b1de32a80852ff238"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22244,8 +22264,8 @@
     },
     {
       "path": "samong-mood-r123.js",
-      "bytes": 79228,
-      "sha256": "c7f5eb588d107985c98fc5c5a67921a82f3feca265f25d3080ba17cfe05d387c"
+      "bytes": 79738,
+      "sha256": "77fac486acdcf38fe4d56364aca0fc06441c97eb225c771139539a04cd7bb7ed"
     },
     {
       "path": "samong-play-r162.js",
@@ -22543,8 +22563,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4508,
-  "totalBytes": 854916180,
+  "fileCount": 4512,
+  "totalBytes": 855087116,
   "webHTMLSha256": "530f3c7e3abe7a15cd437bb704f9622a71df0bf233d35f2d224b92d3fec46553",
   "largest": [
     {
