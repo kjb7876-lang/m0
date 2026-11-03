@@ -19,13 +19,15 @@ const REMOVED=Object.freeze(Object.fromEntries(HEROES8.map(h=>[h,h==='michaela'|
 const WHY={e:'블링크(S)와 같은 순간 이동',w:'공명방어(D)와 같은 보호막·상태이상 해제'};
 const removed=(hero,slot)=>!!(prefs.dedupe&&REMOVED[hero]?.includes(slot));
 const FAR=1e6;
+/* R247: 미카엘라 Z·X 는 새 스킬(비숍 결)이 맡는다 — 원래 칸(방패·위상전이)은 계속 막고(재사용 대기), 단추·창구 입구만 R247 에 넘긴다 */
+const owned=(hero,slot)=>hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.();
 function gate(){try{if(typeof player!=='object'||!player||typeof time!=='number')return;const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});if(!s.ready)s.ready={};
   for(const slot of REMOVED[player.hero]||[]){const k=player.hero+':'+slot;if(removed(player.hero,slot)){if(!(s.ready[k]>time+FAR/2)){s.ready[k]=time+FAR;stats.blocked++;}}else if(s.ready[k]>time+FAR/2)s.ready[k]=0;}}catch(e){fail(e);}}
-function hideButtons(){try{const hero=typeof player==='object'&&player?player.hero:null;for(const slot of ['w','e','r']){const b=document.getElementById('story-wer-'+slot);if(!b)continue;const off=!!hero&&removed(hero,slot);if(b.hidden!==off)b.hidden=off;if(off)b.style.display='none';else if(b.style.display==='none')b.style.display='';}}catch(e){fail(e);}}
+function hideButtons(){try{const hero=typeof player==='object'&&player?player.hero:null;for(const slot of ['w','e','r']){const b=document.getElementById('story-wer-'+slot);if(!b)continue;const off=!!hero&&removed(hero,slot)&&!owned(hero,slot);if(b.hidden!==off)b.hidden=off;if(off)b.style.display='none';else if(b.style.display==='none')b.style.display='';}}catch(e){fail(e);}}
 // X 키(E 칸)는 모든 영웅에서 지웠으니 묶음에서 뺀다. Z 는 남은 영웅이 있어 그대로 두고 재사용 대기로 막는다.
 // R211(Codex #132): 협동 시뮬레이션의 다른 영웅은 자기 차례에 player 를 바꿔 window.__STORYWORLD_WER__.cast 를 바로 부른다 → 시전 입구에서도 막는다.
 let werWrapped=false;function wrapCast(){const W=window.__STORYWORLD_WER__;if(!W||werWrapped||W.__r209)return !!W;const base=W.cast;
- window.__STORYWORLD_WER__=Object.freeze({...W,__r209:true,cast(slot,...a){try{const h=typeof player==='object'&&player?player.hero:null;if(h&&removed(h,String(slot).toLowerCase())){stats.blocked++;return false;}}catch(e){fail(e);}return base.call(this,slot,...a);}});werWrapped=true;return true;}
+ window.__STORYWORLD_WER__=Object.freeze({...W,__r209:true,cast(slot,...a){try{const h=typeof player==='object'&&player?player.hero:null;if(h&&removed(h,String(slot).toLowerCase())&&!owned(h,String(slot).toLowerCase())){stats.blocked++;return false;}}catch(e){fail(e);}return base.call(this,slot,...a);}});werWrapped=true;return true;}
 function rebind(){try{wrapCast();const b=window.__STORYWORLD_WER__?.bindings;if(!b)return false;if(prefs.dedupe){if(b.x==='e')delete b.x;}else if(!b.x)b.x='e';return true;}catch(e){fail(e);return false;}}
 // 저장: 지운 칸의 먼 재사용 대기는 저장 파일에 남기지 않는다(원래 코드가 15배 박자로 자르지만, 끄면 바로 돌아오도록).
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a);try{const r=d?.storyWER?.remaining;if(r&&typeof player==='object'&&player)for(const slot of REMOVED[player.hero]||[])if(removed(player.hero,slot))delete r[player.hero+':'+slot];}catch(e){fail(e);}return d;};}

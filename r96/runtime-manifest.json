@@ -21249,8 +21249,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6565524,
-      "sha256": "1399bde00138b38efe08e4afc76777879a0133d5a3c8bfaffa10042860af0a30"
+      "bytes": 6565566,
+      "sha256": "a682ed15d0b920404df05da58f71d639a0e00545ac2742a6cd0caa1df7674cbc"
     },
     {
       "path": "intro-r140.js",
@@ -21266,6 +21266,11 @@
       "path": "light-r182.js",
       "bytes": 10381,
       "sha256": "09df9905f5d5c2ea297b7bc0aa793c16c59cc3d21efef803acf5536dd1ad44a1"
+    },
+    {
+      "path": "michaela-r247.js",
+      "bytes": 12069,
+      "sha256": "caa54c8bbb5594a33ba045d9e3fb519e67899004308a0af8a921d0e6d1f0353e"
     },
     {
       "path": "mob-death-r188.js",
@@ -21514,8 +21519,8 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 7610,
-      "sha256": "8e14710d4349faf7c9cd47133ff3e4270ca72390b4fd35fa14a8d1db4f4795bf"
+      "bytes": 7971,
+      "sha256": "0597b98a822bcfea8a72dfac234f993b3e2363e407b32fbd61ca69d6d4b1b3cb"
     },
     {
       "path": "status-r96.js",
@@ -21733,9 +21738,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4346,
-  "totalBytes": 844014606,
-  "webHTMLSha256": "1399bde00138b38efe08e4afc76777879a0133d5a3c8bfaffa10042860af0a30",
+  "fileCount": 4347,
+  "totalBytes": 844027078,
+  "webHTMLSha256": "a682ed15d0b920404df05da58f71d639a0e00545ac2742a6cd0caa1df7674cbc",
   "largest": [
     {
       "path": "index.html",
