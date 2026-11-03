@@ -8,7 +8,7 @@ for(const f of ['light-r182.js','samong-r103.js','story-collect-r177.js','play-r
 // ---- 시야 ----
 const store={};const sb={window:{},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},settings:{flashlight58:true},document:{getElementById:()=>null,querySelector:()=>null},addEventListener(){},requestAnimationFrame(){},Math,JSON,Number,Object,Array,String,Set,Map};vm.createContext(sb);vm.runInContext(C('light-r182.js'),sb);
 const L=sb.window.__STORYWORLD_LIGHT_R182__;
-ok('default mode is full (bright, everything visible)',L.mode()==='full'&&JSON.stringify(L.MODES)==='["full","torch","flashlight"]');
+ok('default (R254 auto) is full outside mazes (bright, everything visible); the manual modes are still selectable',L.mode()==='full'&&L.choice()==='auto'&&JSON.stringify(L.MODES)==='["auto","full","torch","flashlight"]');
 L.apply();ok('full mode turns the R24 sight limit off',sb.settings.flashlight58===false);
 L.set({mode:'torch'});ok('torch turns the round R24 sight on and is remembered',sb.settings.flashlight58===true&&/torch/.test(Object.values(store).join()));
 L.toggle();ok('L key cycles full → torch → flashlight → full',L.mode()==='flashlight');L.toggle();ok('…back to full',L.mode()==='full'&&sb.settings.flashlight58===false);
@@ -18,7 +18,7 @@ ok('samong maze: full mode never forces the flashlight; torch draws a round ligh
 ok('settings window gets a 시야 select (full/torch/flashlight)',/id='lightModeR182'/.test(C('light-r182.js'))||/lightModeR182/.test(C('light-r182.js')));
 // ---- 쪽지 ----
 const sc=C('story-collect-r177.js');
-ok('notes turn one page at a time (click / wheel / ◀ ▶), with a settings toggle and an auto-open toggle',/prefs=\{on:true,pages:true,autoShow:true\}/.test(sc)&&/addEventListener\('wheel'/.test(sc)&&/data-r182="next"/.test(sc)&&/'r182Pages','pages'/.test(sc)&&/'r182Auto','autoShow'/.test(sc));
+ok('notes turn one page at a time (click / wheel / ◀ ▶), with a settings toggle and an auto-open toggle',/prefs=\{on:true,pages:true,autoShow:true(,secs:0)?\}/.test(sc)&&/addEventListener\('wheel'/.test(sc)&&/data-r182="next"/.test(sc)&&/'r182Pages','pages'/.test(sc)&&/'r182Auto','autoShow'/.test(sc));
 const sb2={window:{},localStorage:{getItem:()=>null,setItem(){}},document:{getElementById:()=>null,querySelector:()=>null,createElement:()=>({style:{},appendChild(){},addEventListener(){}}),head:{appendChild(){}},body:{appendChild(){}}},setInterval(){},performance:{now:()=>0},innerWidth:1200,Math,JSON,Number,Object,Array,String,Set,Map,Promise,RegExp};vm.createContext(sb2);vm.runInContext(sc,sb2);
 const V=sb2.window.__STORYWORLD_STORY_COLLECT_R177__,txt=Array.from({length:7},(_,i)=>'문단'+i+' '+'가'.repeat(150)).join('\n\n'),pg=V.paginate(txt,320);
 ok('pagination keeps every paragraph, in order, about 300 chars a page',pg.flat().join('\n\n')===txt&&pg.length>=3&&pg.every(p=>p.join('').length<=480),pg.map(p=>p.join('').length).join(','));

@@ -255,6 +255,8 @@ jobs:
         run: node r96/qa/r238/r238-cpu-check.cjs
       - name: R243 gold/silver thread apply/save + default silver equip toggle CPU check
         run: node r96/qa/r243/r243-cpu-check.cjs
+      - name: R252 skill window scroll, note seconds, maze-only light CPU check
+        run: node r96/qa/r252/r252-cpu-check.cjs
       - name: R239 hospital exit guide goal (ep1a08 door-2) CPU check
         run: node r96/qa/r239/r239-cpu-check.cjs
       - name: R240 boss/midboss melee attack effects CPU check

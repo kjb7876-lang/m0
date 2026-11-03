@@ -56,7 +56,7 @@ function note(z,c,i,N){if(!c)return;let text='',narr='';try{const sc=ZN().scenes
 function showNext(){if(showing||!queue.length)return;css();if(!noteEl){noteEl=document.createElement('div');noteEl.id='r162Note';noteEl.setAttribute('role','dialog');noteEl.setAttribute('aria-label','단서조각 쪽지');noteEl.onclick=()=>{showing=null;noteEl.hidden=true;showNext();};document.body.appendChild(noteEl);}
  showing=queue.shift();noteEl.innerHTML='';const b=document.createElement('b');b.textContent=showing.title;noteEl.appendChild(b);if(showing.narr){const s=document.createElement('small');s.textContent=showing.narr;noteEl.appendChild(s);}
  for(const para of showing.text.split(/\n{2,}/)){const p=document.createElement('p');p.textContent=para;noteEl.appendChild(p);}const i=document.createElement('i');i.textContent='누르면 닫힘';noteEl.appendChild(i);
- noteEl.hidden=false;noteEl.scrollTop=0;hideAt=performance.now()+Math.max(9000,Math.min(30000,showing.text.length*90));}
+ noteEl.hidden=false;noteEl.scrollTop=0;hideAt=performance.now()+(window.__STORYWORLD_STORY_COLLECT_R177__?.pageMs?.(Math.max(9000,Math.min(30000,showing.text.length*90)))??Math.max(9000,Math.min(30000,showing.text.length*90)));/* R253: 설정한 초(1~60) */}
 setInterval(()=>{try{if(showing&&performance.now()>hideAt){showing=null;if(noteEl)noteEl.hidden=true;showNext();}if(showing&&noteEl&&!here()){showing=null;queue.length=0;noteEl.hidden=true;}}catch(e){fail(e);}},300);
 function drawFrag(p){const q=P(p.x,p.y),h=H(),bob=Math.sin(T()*3+p.x)*h*.05,S=SPR();
  ctx.save();try{if(S){S.draw('glow',{a:[255,210,140],b:[255,245,220]},q.x,q.y-h*.28+bob,h*.9,h*.9,{alpha:.65});S.draw('ring',{a:[255,200,120],b:[255,240,210]},q.x,q.y,h*(.5+.12*Math.sin(T()*4)),h*.25,{alpha:.6});}

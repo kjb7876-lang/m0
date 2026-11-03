@@ -51,7 +51,7 @@ function next(){if(showing||!noteQ.length)return;noteCss();if(!noteEl){noteEl=do
  showing=noteQ.shift();noteEl.innerHTML='';const b=document.createElement('b');b.textContent=showing.title;noteEl.appendChild(b);if(showing.narr){const s=document.createElement('small');s.textContent=showing.narr;noteEl.appendChild(s);}
  for(const para of showing.text.split(/\n{2,}/)){const p=document.createElement('p');p.textContent=para;noteEl.appendChild(p);}const i=document.createElement('i');i.textContent='누르면 닫힘 · 메뉴의 쪽지 모음에서 다시 볼 수 있음';noteEl.appendChild(i);
  const other=document.getElementById('r162Note');noteEl.style.top=other&&!other.hidden?Math.round(other.getBoundingClientRect().bottom+10)+'px':'';
- noteEl.hidden=false;noteEl.scrollTop=0;hideAt=performance.now()+Math.max(12000,Math.min(60000,showing.text.length*95));}
+ noteEl.hidden=false;noteEl.scrollTop=0;hideAt=performance.now()+(window.__STORYWORLD_STORY_COLLECT_R177__?.pageMs?.(Math.max(12000,Math.min(60000,showing.text.length*95)))??Math.max(12000,Math.min(60000,showing.text.length*95)));/* R253: 설정한 초(1~60) */}
 setInterval(()=>{try{const m=typeof modal!=='undefined'&&!!modal;if(noteEl)noteEl.style.visibility=m?'hidden':'';if(m&&showing)hideAt+=300;// 창이 열린 동안은 가리고 시간도 멈춘다
  if(showing&&!hover&&!m&&performance.now()>hideAt){showing=null;if(noteEl)noteEl.hidden=true;next();}}catch(e){fail(e);}},300);
 
