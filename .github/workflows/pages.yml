@@ -301,6 +301,8 @@ jobs:
         run: node r96/qa/r273/r273-cpu-check.cjs
       - name: R276 School noticeboard side-oblique angle variant CPU check
         run: node r96/qa/r276/r276-cpu-check.cjs
+      - name: R279 Teacup/locker/steel-tower angle variants CPU check
+        run: node r96/qa/r279/r279-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check

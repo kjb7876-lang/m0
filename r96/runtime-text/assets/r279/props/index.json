@@ -1,0 +1,83 @@
+{
+ "revision": "R279",
+ "method": "alpha bbox (alpha>=16) + pad 6, long side <=512, WebP q92 alpha 100",
+ "items": {
+  "teacup-handle": {
+   "path": "assets/r279/props/teacup-handle.webp",
+   "driveZip": "StoryWorld-Rose-Teacup-handle-oblique-v1.zip",
+   "driveId": "1eGMfVoW0GhNNCyMdf1ud0NuZRqGZnESu",
+   "zipSHA256": "20e5915bd29e5b233e044739b510131afd6a32c156dc7dc89a62a1a9a01022b6",
+   "originalSHA256": "adc0425108c1e86dfcd58ece8c4197370ef37b7a4f7dfa15e6deef0b35bfd72a",
+   "originalSize": [
+    1536,
+    1024
+   ],
+   "derivedSHA256": "4e85df11c7dec85b2f45ec59144ef5f01631ed50702db00b1de32a80852ff238",
+   "derivedBytes": 85872,
+   "derivedSize": [
+    512,
+    374
+   ],
+   "status": "CONDITIONAL_ROSE_TEACUP_DECORATIVE_INTERPRETATION_ONLY",
+   "region": "s01_rosehouse",
+   "canonLines": [
+    877,
+    879
+   ],
+   "baseInGame": "r126 teacup",
+   "use": "S-01 장미 집 바닥 찻잔(samong-mood-r123 rose deco, 방마다 2개) 중 두 번째(:1)에만 써서 같은 방 두 잔이 같은 그림으로 겹쳐 보이지 않게 한다(조건부·최종 아님, 장식 해석)",
+   "applied": true,
+   "note": "조건부·최종 아님(CONDITIONAL 각도 변형, R257 방식)"
+  },
+  "locker-left": {
+   "path": "assets/r279/props/locker-left.webp",
+   "driveZip": "StoryWorld-Two-Lockers-front-left-v1.zip",
+   "driveId": "1WZGwM9WShbg_HOz5zEL7_bxAevueiXpU",
+   "zipSHA256": "f4feb23e6f49d616a27f00bbd34b78ac0d0429ee8984ba8108f324c01713916f",
+   "originalSHA256": "eb408549375c2d08b4e0d71c42274dba2185ba5a39570e3165c50b1e452bf760",
+   "originalSize": [
+    1024,
+    1536
+   ],
+   "derivedSHA256": "5c6c3d3ff5e482530075488dfef6df54e38747cb2a607c663ff68a351f362e9e",
+   "derivedBytes": 32244,
+   "derivedSize": [
+    248,
+    512
+   ],
+   "status": "CONDITIONAL_TWO_CLOSED_LOCKERS_FRONT_LEFT_OBSERVATION",
+   "region": "s02_school",
+   "canonLines": [
+    916
+   ],
+   "baseInGame": "r126 locker",
+   "use": "S-02 학교 벽 사물함(school deco, 벽 2개) 중 옆벽(face y)에 붙은 것에만 써서 벽 방향과 맞춘다(R276 게시판과 같은 규칙, 조건부·최종 아님)",
+   "applied": true,
+   "note": "조건부·최종 아님(CONDITIONAL 각도 변형, R257 방식)"
+  },
+  "pylon-rear": {
+   "path": "assets/r279/props/pylon-rear.webp",
+   "driveZip": "StoryWorld-Steel-Tower-rear-oblique-v1.zip",
+   "driveId": "1fSbPdpVYSqDcTpOLcfj-HDXTM2oX8NnK",
+   "zipSHA256": "6ce22273fa7a4edd004974095434ca93a0c412178e76d8ceacb5fbce3b06c3f2",
+   "originalSHA256": "51d018e98de0937525186ed80c722afd4804646c4361e2e26fe39c32d5518110",
+   "originalSize": [
+    1024,
+    1536
+   ],
+   "derivedSHA256": "f26debea96a8e16f871db88d922509765a14a23cb71edf2d674c1d99e27f7dc9",
+   "derivedBytes": 49156,
+   "derivedSize": [
+    225,
+    512
+   ],
+   "status": "CONDITIONAL_STEEL_TOWER_REAR_OBLIQUE_OBSERVATION",
+   "region": "existing_machine_region_decoration",
+   "canonLines": [],
+   "baseInGame": "r129 pylon",
+   "use": "기계 지역 철탑(machine deco, 방마다 2개) 중 두 번째(:1)에만 뒤사선(조건부·최종 아님)",
+   "applied": true,
+   "note": "조건부·최종 아님(CONDITIONAL 각도 변형, R257 방식)"
+  }
+ }
+}
