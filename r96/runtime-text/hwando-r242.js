@@ -54,7 +54,8 @@ function draw(rec,st,best,anim,dir,frame,opt={}){const set=IDX?.anims?.[anim];if
 // 시간 → 칸
 function frameAt(ms,tms,loop){const tot=ms.reduce((a,b)=>a+b,0);let t=loop?((tms%tot)+tot)%tot:Math.min(tms,tot-1);for(let i=0;i<ms.length;i++){if(t<ms[i])return i;t-=ms[i];}return ms.length-1;}
 function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.floor(ms.length*.4);let pre=0;for(let i=0;i<c;i++)pre+=ms[i];return Math.max(0,pre-90);}
-function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
+const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|awakening|^blob:/;
+function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;/* Codex #156: 영웅 칸의 보호막·오라 같은 이펙트는 고르지 않는다(R119·R143 과 같은 몸 그림 목록) */const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
 function preload(){if(!IDX||preloaded===room)return;preloaded=room;const A=IDX.anims;want(['n','s','e'].flatMap(d=>[A.walk?.[d],A.idle?.[d]]).filter(Boolean).map(a=>BASE+a.file));}
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const A=IDX.anims,t=T(),ms=1000;
