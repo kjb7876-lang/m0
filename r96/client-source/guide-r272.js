@@ -11,7 +11,7 @@
 //   (포탈 위에서는 원래 travel → 777 난이도 창 그대로). 다음 포탈이 닫힌 R81 문 너머면(last301: 다음 포탈 5,3.5 앞 door-2) 그 문을 열러 간다.
 (()=>{'use strict';
 if(window.__STORYWORLD_GUIDE_R272__)return;
-const REV='R272-guide-1',stats={merge:0,door:0,interact:0,noPath:0,forward:0,travel:0,errors:0};let lastError=null,timer=0;
+const REV='R272-guide-2',stats={merge:0,door:0,interact:0,noPath:0,forward:0,travel:0,errors:0};let lastError=null,timer=0;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const P=()=>window.__STORYWORLD_HOSPITAL_MAZE_PROGRESSION__,L=()=>window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__;
 function phase(){try{if(typeof room==='undefined'||room?.id!=='ep1a08'||room.layer!=='STORY'||room.egoVisitId151)return null;return P()?.inspect?.()?.state?.phase||null;}catch(e){fail(e);return null;}}
@@ -53,5 +53,13 @@ function step(dt){if(forward(dt))return true;if(objectiveDoor(dt))return true;co
  if(Math.hypot(player.x-g.door.x,player.y-g.door.y)<3){stats.interact++;interact();return true;}
  route=findPath(player,g,room,.31);command=null;stats.door++;return true;}
 try{const base=guideStep;guideStep=function(dt){try{if(step(dt))return;}catch(e){fail(e);}return base.apply(this,arguments);};}catch(e){fail(e);}
-window.__STORYWORLD_GUIDE_R272__=Object.freeze({revision:REV,decide,forwardRole,inspect:()=>({revision:REV,phase:phase(),stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});
+// (3) last303 실플레이(1/4 확률): 길잡이·상자 줍기(R261)·R101 이 interact() 를 누를 때 목표 2.5칸 밖이면 R75 가 가장 가까운 동료/주민을 먼저 쓴다.
+//   주민(villager)은 '목표 안내' 정보 창만 여는데, 길잡이가 그 옆에서 E 를 되풀이해 '주민 · 보호 대상' 창이 수십 번 다시 열렸다(MODAL-LOOP).
+//   길잡이가 켜져 있을 때만, 버튼이 '돌아가기' 하나뿐인 R75 정보 창(narrativeNPCBackR75)은 창 대신 토스트로 한 번만 알리고 열지 않는다.
+//   손으로 E 를 누르는 플레이(길잡이 끔)·성문 권한·다른 창은 그대로.
+const npcSeen=new Set();
+function npcInfoOnly(h){/* 순수 */h=String(h||'');return h.includes('narrativeNPCBackR75')&&(h.match(/<button/g)||[]).length===1;}
+if(typeof openPanel==='function')try{const op=openPanel;openPanel=function(h,...a){try{if(typeof guide!=='undefined'&&guide&&npcInfoOnly(h)){const t=String(h).match(/<h2>([^<]*)<\/h2>/)?.[1]||'';const k=(typeof zone!=='undefined'?zone:'')+'|'+t;
+ stats.npcPanel=(stats.npcPanel||0)+1;if(!npcSeen.has(k)){npcSeen.add(k);try{toast(t.replace(/&[^;]+;/g,' ')+' · 길잡이 진행 중');}catch(_){}}return;}}catch(e){fail(e);}return op.apply(this,[h,...a]);};}catch(e){fail(e);}
+window.__STORYWORLD_GUIDE_R272__=Object.freeze({revision:REV,decide,forwardRole,npcInfoOnly,inspect:()=>({revision:REV,phase:phase(),stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});
 })();
