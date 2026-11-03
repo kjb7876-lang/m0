@@ -315,6 +315,8 @@ jobs:
         run: node r96/qa/r260/r260-cpu-check.cjs
       - name: R275 mob/boss audit — off-screen mobs skipped outermost, fixed R208/R223 mob strips CPU check
         run: node r96/qa/r275/r275-cpu-check.cjs
+      - name: R283 Hwando idle side stance and unified colour CPU check
+        run: node r96/qa/r283/r283-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
         run: node r96/qa/r280/r280-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check

@@ -37,7 +37,7 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    const nd=dirFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,opt={}){const R=res(anim,dir);if(!R)return false;const A=R.A,p=R.base+A.file,im=image(p);if(!im)return false;
+function draw(rec,st,best,anim,dir,frame,opt={}){const R=res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im)return false;
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
@@ -51,7 +51,7 @@ function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.fl
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|awakening|^blob:/;
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
-function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image(BASE+A.file);}}
+function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file);}}
 const atkOf=d=>res('attack',d)?.A;
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
  track();preload();
@@ -65,7 +65,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),
   if(el<tot&&!(moving&&t-S.swing.t0>.35)){S.dir=S.swing.dir;return draw(rec,st,best,'attack',S.swing.dir,frameAt(a.ms,el,false));}S.swing=null;}
  if(S.hit&&!moving){const d=S.hit.dir,h=res('hit',d)?.A,el=(t-S.hit.t0)*ms/.6;if(h&&el<h.ms.reduce((x,y)=>x+y,0)){S.dir=d;return draw(rec,st,best,'hit',d,frameAt(h.ms,el,false));}S.hit=null;}
  if(moving){S.dir=S.walkDir;P277()?.face(S.walkDir);const R=res('walk',S.walkDir),k=want()/(R?.A?.body||180),per=(IDX.anims.walk?.stride?.px_per_frame||12.8)*k;return draw(rec,st,best,'walk',S.walkDir,Math.floor(S.dist/Math.max(1,per)));}
- const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const w=res('walk',fd)?.A;if(!w)return;P.idle(fd);return draw(rec,st,best,'walk',fd,w.n-1);}/* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
+ const fd=enemyDir()||S.dir;S.dir=fd;const P=P277();if(P){P.face(fd);const I=window.__STORYWORLD_HWANDO_R283__?.idle?.(P),dd=I?I.dir:fd;const w=res('walk',dd)?.A;if(!w)return;P.idle(dd);return draw(rec,st,best,'walk',dd,I?Math.min(I.frame,w.n-1):w.n-1);}/* R283: 좌·우 걷기의 선 자세 칸 *//* R277: 걷기 마지막 칸으로 멈춘 대기 */const a=res('idle',fd)?.A;if(!a)return;
  return draw(rec,st,best,'idle',fd,frameAt(a.ms,t*ms,true),{breath:true});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
