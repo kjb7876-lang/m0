@@ -21924,8 +21924,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568933,
-      "sha256": "895cd4b8a63caadff94f5288882000fcbca59f3bbe416137befc9d667820459b"
+      "bytes": 6566055,
+      "sha256": "d79cce4c9312eb928d515ec16b8281f1af32ee83e2cd602d216406a1ef836348"
     },
     {
       "path": "intro-r140.js",
@@ -22444,8 +22444,8 @@
     }
   ],
   "fileCount": 4488,
-  "totalBytes": 851865204,
-  "webHTMLSha256": "895cd4b8a63caadff94f5288882000fcbca59f3bbe416137befc9d667820459b",
+  "totalBytes": 851862326,
+  "webHTMLSha256": "d79cce4c9312eb928d515ec16b8281f1af32ee83e2cd602d216406a1ef836348",
   "largest": [
     {
       "path": "index.html",
