@@ -257,6 +257,12 @@ jobs:
         run: node r96/qa/r239/r239-cpu-check.cjs
       - name: R240 boss/midboss melee attack effects CPU check
         run: node r96/qa/r240/r240-cpu-check.cjs
+      - name: R251 Balrog summoning circle tower CPU check
+        run: node r96/qa/r251/r251-cpu-check.cjs
+      - name: R249 map entry shows the entrance at once CPU check
+        run: node r96/qa/r249/r249-cpu-check.cjs
+      - name: R248 no mob art reuse; temporary pixel mobs; new mob attack fx CPU check
+        run: node r96/qa/r248/r248-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check
         run: node r96/qa/r231/r231-cpu-check.cjs
       - name: R234 far last enemies regrouped near the hero CPU check
