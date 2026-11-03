@@ -48,7 +48,9 @@ const KSCALE={coin:.55,lipstick:.6,candy:.6,bottle:.6,mask:.7,blade:.75,heel:.65
 function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Number.isFinite(e.deadAt)?e.deadAt:T());if(dead&&age>.8)return;
  const q=project(e.x,e.y),cp=e.combatProfile,AH=(typeof actorHeight==='function'?actorHeight():60),size0=AH*(cp?.spriteRect?.height||1)*(e.defScale||1)*(KSCALE[s.kind]||1),size=Math.min(size0,AH*(e.boss?2.4:major(e)?1.7:1.3)),k=size/Math.max(40,s.body||200),lift=Math.max(0,Math.min(size*.65,Number(e.visualLiftPx)||0));
  const m=e.r248||(e.r248={x:e.x,y:e.y,moving:0,face:1,seed:Math.random()*8});const dx=e.x-m.x,dy=e.y-m.y;
- if(Math.hypot(dx,dy)>.002){m.moving=T()+.25;const sx=dx-dy;if(Math.abs(sx)>.001)m.face=sx<0?-1:1;}else if(typeof player==='object'&&player){const sd=(player.x-player.y)-(e.x-e.y);if(Math.abs(sd)>.05&&T()>m.moving)m.face=sd<0?-1:1;}
+ /* R259: 영웅 8칸 안이면 걷거나 옆으로 돌 때도 영웅 쪽을 본다(멀리서는 가는 쪽) — 사용자 "적들공격및 이동등 방향이미지도 영웅을목표로했을때 자연스러운 방향" */
+ const hd=typeof player==='object'&&player?Math.hypot(player.x-e.x,player.y-e.y):1e9,sdH=hd<1e9?(player.x-player.y)-(e.x-e.y):0;
+ if(Math.hypot(dx,dy)>.002){m.moving=T()+.25;const sx=dx-dy;if(hd<8){if(Math.abs(sdH)>.05)m.face=sdH<0?-1:1;}else if(Math.abs(sx)>.001)m.face=sx<0?-1:1;}else if(hd<1e9){if(Math.abs(sdH)>.05&&(T()>m.moving||hd<8))m.face=sdH<0?-1:1;}
  m.x=e.x;m.y=e.y;let fr=attackFrame(e);if(fr>=0&&Number.isFinite(e.attack?.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)m.face=sd<0?-1:1;}
  if(fr<0)fr=T()<m.moving?Math.floor(T()*FPS+m.seed)%8:Math.floor(T()*2+m.seed)%2;
  const sx0=(fr%4)*CW,sy0=Math.floor(fr/4)*CH;
