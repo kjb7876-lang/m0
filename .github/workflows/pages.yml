@@ -253,6 +253,8 @@ jobs:
         run: node r96/qa/r237/r237-cpu-check.cjs
       - name: R238 hold-only samong confront (S04-11) keeps its hold CPU check
         run: node r96/qa/r238/r238-cpu-check.cjs
+      - name: R239 hospital exit guide goal (ep1a08 door-2) CPU check
+        run: node r96/qa/r239/r239-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check
         run: node r96/qa/r231/r231-cpu-check.cjs
       - name: R234 far last enemies regrouped near the hero CPU check
