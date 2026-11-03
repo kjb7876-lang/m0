@@ -13138,6 +13138,56 @@
       "sha256": "512743d4edf643821220bb435ec6c4e1f2ae6e1cad0ee90410d1e0df1f19e0ee"
     },
     {
+      "path": "assets/r271/hwando/attack-e.webp",
+      "bytes": 355176,
+      "sha256": "9e57a6503379022d86d020749f6ac6b7ec42837eda435fa93fd72bb03bccb7ca"
+    },
+    {
+      "path": "assets/r271/hwando/idle-e.webp",
+      "bytes": 354682,
+      "sha256": "c72e72816fe7b69c0138cc2f96e550f9856bdb5104410855f8bc1f6002c53d94"
+    },
+    {
+      "path": "assets/r271/hwando/idle-n.webp",
+      "bytes": 371336,
+      "sha256": "b5ac2121f89a92b6131b8d358deb480538b5a776433511067e6b17ada88469b8"
+    },
+    {
+      "path": "assets/r271/hwando/idle-s.webp",
+      "bytes": 383766,
+      "sha256": "b65575741a5adadaad0a756d1dc1399010053eb376dfa029614db506df30f7e1"
+    },
+    {
+      "path": "assets/r271/hwando/idle-w.webp",
+      "bytes": 355156,
+      "sha256": "77167a89123a7057b84b60cec93cf388c79545c7f87931493799f7d840b1556c"
+    },
+    {
+      "path": "assets/r271/hwando/index.json",
+      "bytes": 11560,
+      "sha256": "8844f057eeafdb5d7cbf17ad31b068ec35201f2793b43dec01e905762f13bbc8"
+    },
+    {
+      "path": "assets/r271/hwando/walk-e.webp",
+      "bytes": 251024,
+      "sha256": "801c884fcbe1213bb2b697bdc6719492a4abafeab86b854bc3c94421b24e9a70"
+    },
+    {
+      "path": "assets/r271/hwando/walk-n.webp",
+      "bytes": 270588,
+      "sha256": "8ffb0fda10a00398e12566b048c048a1a00a7911dd5afe44a8d0e4ddd428a273"
+    },
+    {
+      "path": "assets/r271/hwando/walk-s.webp",
+      "bytes": 223652,
+      "sha256": "304cf92d9ee6726d855f44f3907532a78874ec269686b9699d3bb8c6b79c3e1b"
+    },
+    {
+      "path": "assets/r271/hwando/walk-w.webp",
+      "bytes": 280810,
+      "sha256": "3c77345c48c79300d489d67c3b8ccbd07c430ae7e180dee0830d7afc4a081c14"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -21924,13 +21974,18 @@
     },
     {
       "path": "hwando-r242.js",
-      "bytes": 12328,
-      "sha256": "7d96fc1503d9b7f15de30313b8441fbdf6bbc6d6d3825bd83a0b5cd308ca6b93"
+      "bytes": 12495,
+      "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
+    },
+    {
+      "path": "hwando-r271.js",
+      "bytes": 9491,
+      "sha256": "24b6115d7df7773d64fc02a1e2a90870166dd3bbf3b0996e1d953a94e9ac8c35"
     },
     {
       "path": "index.html",
-      "bytes": 6566232,
-      "sha256": "0111b1395bc9e13b6baad03b901d16b327983fa2ee39e3921c4cac9a17434469"
+      "bytes": 6566272,
+      "sha256": "9c110018fc2c84646e48987cb6f7cbd942fa8ca3b97c4c55e05af1bd66f143f9"
     },
     {
       "path": "intro-r140.js",
@@ -22463,9 +22518,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4492,
-  "totalBytes": 851889802,
-  "webHTMLSha256": "0111b1395bc9e13b6baad03b901d16b327983fa2ee39e3921c4cac9a17434469",
+  "fileCount": 4503,
+  "totalBytes": 854757250,
+  "webHTMLSha256": "9c110018fc2c84646e48987cb6f7cbd942fa8ca3b97c4c55e05af1bd66f143f9",
   "largest": [
     {
       "path": "index.html",

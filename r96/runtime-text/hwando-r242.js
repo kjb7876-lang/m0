@@ -57,7 +57,7 @@ function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.fl
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|awakening|^blob:/;
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;/* Codex #156: 영웅 칸의 보호막·오라 같은 이펙트는 고르지 않는다(R119·R143 과 같은 몸 그림 목록) */const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
-function preload(){if(!IDX||preloaded===room)return;preloaded=room;const A=IDX.anims;want(['n','s','e'].flatMap(d=>[A.walk?.[d],A.idle?.[d]]).filter(Boolean).map(a=>BASE+a.file));}
+function preload(){if(!IDX||preloaded===room||window.__STORYWORLD_HWANDO_R271__?.active?.())return;preloaded=room;const A=IDX.anims;want(['n','s','e'].flatMap(d=>[A.walk?.[d],A.idle?.[d]]).filter(Boolean).map(a=>BASE+a.file));}
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const A=IDX.anims,t=T(),ms=1000;
  track();preload();
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0;
@@ -82,7 +82,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const A=IDX.
  const a=A[mode][dk];let off=0;if(S.loopAt!=null&&S.startFrame!=null){let c=0;for(let i=0;i<S.startFrame&&i<a.ms.length;i++)c+=a.ms[i];off=c-(S.loopAt*ms%a.ms.reduce((x,y)=>x+y,0));}
  return draw(rec,st,best,mode,fd,frameAt(a.ms,t*ms+off,true),{breath:mode==='idle'});}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
- try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
+ try{if(on&&st>=0&&solo()&&player?.hero==='hwando'&&player.hp>0){loadIndex();if(IDX&&!window.__STORYWORLD_HWANDO_R271__?.active?.())choose(rec,st);/* R271: 새 통합 v2 그림이 켜져 있으면 그쪽이 그린다 */}}catch(e){fail(e);}return r;};}
 loadIndex();
 window.__STORYWORLD_HWANDO_R242__=Object.freeze({revision:REV,active:()=>on&&!!IDX&&typeof player==='object'&&player?.hero==='hwando'&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing},hit:S.hit&&{...S.hit},trans:S.trans&&{to:S.trans.to,dir:S.trans.dir}}),
  inspect:()=>({revision:REV,on,ready:!!IDX,stats:{...stats},lastError}),set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
