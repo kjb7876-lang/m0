@@ -21898,6 +21898,11 @@
       "sha256": "2cc9f2bcd89da90ea22b7e8d4be5401328e325a8927a9eb51933597ec67c77ca"
     },
     {
+      "path": "guide-r272.js",
+      "bytes": 5220,
+      "sha256": "e93348f3110d0c3c7f4d2488405dcc5e26b49068fd326dae6c7a05677263ad5e"
+    },
+    {
       "path": "guide-unstick-r222.js",
       "bytes": 11220,
       "sha256": "f7a8e060e71e772876ff6886c80dfde20619535b899f03f1996036af50769b3d"
@@ -21984,8 +21989,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566272,
-      "sha256": "9c110018fc2c84646e48987cb6f7cbd942fa8ca3b97c4c55e05af1bd66f143f9"
+      "bytes": 6566311,
+      "sha256": "97c6a7f2a32422fb7f11126cb6ec33a6fcd6a612fc980155124fc3a129b7b563"
     },
     {
       "path": "intro-r140.js",
@@ -22518,9 +22523,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4503,
-  "totalBytes": 854757250,
-  "webHTMLSha256": "9c110018fc2c84646e48987cb6f7cbd942fa8ca3b97c4c55e05af1bd66f143f9",
+  "fileCount": 4504,
+  "totalBytes": 854762509,
+  "webHTMLSha256": "97c6a7f2a32422fb7f11126cb6ec33a6fcd6a612fc980155124fc3a129b7b563",
   "largest": [
     {
       "path": "index.html",
