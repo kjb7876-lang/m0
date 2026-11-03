@@ -20444,8 +20444,8 @@
     },
     {
       "path": "auto-levelup-r237.js",
-      "bytes": 6581,
-      "sha256": "369034688641453dd76024d43a69094c776e498bca813d0d6e4038da2895b32d"
+      "bytes": 7830,
+      "sha256": "bff4177ee37406205c2648c1b412ebc83c32d92f1e31bd981b6e7cb5244d4e72"
     },
     {
       "path": "balance-r179.js",
@@ -21264,8 +21264,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 10381,
-      "sha256": "09df9905f5d5c2ea297b7bc0aa793c16c59cc3d21efef803acf5536dd1ad44a1"
+      "bytes": 11771,
+      "sha256": "c11a5cd7101fa5f374b9049327137e5c4da10a38cd3e23af22ed3b7a88b7e366"
     },
     {
       "path": "mob-death-r188.js",
@@ -21384,8 +21384,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 28912,
-      "sha256": "4673e2cb256d7736c3a07f2ab6fe10a3c4001ed1b3380a7515d6156bb7346c83"
+      "bytes": 29053,
+      "sha256": "9d20f044cf08f80b44e60a642a4d9e14c2e7631cce51b2346ca6b33a439e4e45"
     },
     {
       "path": "polish-r100-data.js",
@@ -21454,8 +21454,8 @@
     },
     {
       "path": "samong-play-r162.js",
-      "bytes": 18713,
-      "sha256": "8ce4a206fd74f272b3e843dddda56dfd114cd3ded717705b2f0f83fb82e4eb1c"
+      "bytes": 18853,
+      "sha256": "cfa8c8ea270afa27dcc953b1ff0b18cf568c865ca4171837549ac2b2fc2cdb6a"
     },
     {
       "path": "samong-r103.js",
@@ -21539,8 +21539,8 @@
     },
     {
       "path": "story-collect-r177.js",
-      "bytes": 20246,
-      "sha256": "882e3effc46c72cfdbfcf26cbb696fc6e46005f61afeeb1b0c661b761cb39f48"
+      "bytes": 21536,
+      "sha256": "5f35282f43c495de008ac14ef1f1dc619abf604a5218fb3bf66f2397bc49bbd8"
     },
     {
       "path": "story-maps-r171.js",
@@ -21739,7 +21739,7 @@
     }
   ],
   "fileCount": 4347,
-  "totalBytes": 844022234,
+  "totalBytes": 844026444,
   "webHTMLSha256": "d2ab8fea521a8c3744111e050ce7b4fa1993932f67dc94b77004ffa59422f6a8",
   "largest": [
     {

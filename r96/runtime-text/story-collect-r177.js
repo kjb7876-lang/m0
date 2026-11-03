@@ -11,7 +11,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_STORY_COLLECT_R177__)return;
 const REV='R177-story-collect-1',KEY='storyworld.r177.collect';
-let prefs={on:true,pages:true,autoShow:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}/* R182: pages 한 장씩 넘기기, autoShow 주우면 바로 펼치기 */
+let prefs={on:true,pages:true,autoShow:true,secs:0};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}/* R182: pages 한 장씩 넘기기, autoShow 주우면 바로 펼치기 */
 const stats={dropped:0,picked:0,autoKept:0,shown:0,immediate:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const solo=()=>{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off';};
 const T=()=>typeof time==='number'?time:performance.now()/1000;
@@ -69,6 +69,8 @@ function css(){if(document.getElementById('r177DocCss'))return;const s=document.
   +'#r177Doc.r182pages{overflow:hidden;max-height:calc(100vh - 124px)}#r177Doc.r182pages .pg{max-height:calc(100vh - 190px);overflow:auto}#r177Doc .pg{min-height:7em}#r177Doc .foot button{font:inherit;background:none;border:1px solid currentColor;border-radius:3px;margin:0 3px;padding:0 7px;cursor:pointer;color:inherit;opacity:.85}#r177Doc .foot button:disabled{opacity:.3;cursor:default}#r177Doc.r182pages .pg p{animation:r182flip .28s ease-out}@keyframes r182flip{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}'
   +'@media (max-width:780px){#r177Doc{top:auto;bottom:calc(var(--bottom,144px) + 12px);max-height:36vh}}';document.head.appendChild(s);}
 let el=null,showing=null,hideAt=0,hover=false,page=0,pages=[];const Q=[];
+/* R253(사용자 2026-11-03 "기억조각및 쪽지 서사텍스트 자동넘기기 설정에서 몇초인지 설정가능하도록 1~60초 장당"): secs 0 = 글자 수에 맞춰 자동(예전), 1~60 = 한 장(넘기기를 끄면 한 쪽지)마다 그 초. 사몽 단서 쪽지(R162)·지역 쪽지(R169)도 이 값을 쓴다. */
+function pageMs(def){const v=Math.round(Number(prefs.secs)||0);return v>=1?Math.min(60,v)*1000:def;}
 /* R182: 한 장씩 넘기기 — 문단을 묶어 한 장(약 300자)씩. 누르거나 휠을 굴리면 다음 장, 마지막 장에서 누르면 닫힘. 설정에서 끄면 예전처럼 한 번에(스크롤). */
 /* R187: 낮은 화면(가로 모드 휴대폰 높이 390 등)에서 한 장이 화면 밖으로 넘치던 것 — 남은 높이로 한 장 글자 수를 정한다 */
 function pageLimit(){const base=innerWidth<700?220:320,lines=Math.floor((innerHeight-190)/24.5);return Math.max(110,Math.min(base,lines*20));}
@@ -81,10 +83,10 @@ function show(doc,opt={}){if(!doc)return;if(!prefs.autoShow&&!opt.force){try{if(
 function close(){showing=null;if(el)el.hidden=true;next();}
 function turn(d){if(!showing)return;if(!prefs.pages)return close();const np=page+d;if(np>=pages.length)return close();if(np<0)return;page=np;paint();}
 function paint(){const d=showing;const head='<span class="h">'+esc(FORMS[d.form]||'쪽지')+' · '+esc(d.title)+(d.narr?' · '+esc(d.narr):'')+'</span>';
- if(!prefs.pages){el.innerHTML=head+d.text.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('')+'<span class="foot">누르면 닫힘 · 메뉴의 쪽지 모음에서 다시 볼 수 있음</span>';el.scrollTop=0;hideAt=performance.now()+Math.max(14000,Math.min(70000,d.text.length*95));return;}
+ if(!prefs.pages){el.innerHTML=head+d.text.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join('')+'<span class="foot">누르면 닫힘 · 메뉴의 쪽지 모음에서 다시 볼 수 있음</span>';el.scrollTop=0;hideAt=performance.now()+pageMs(Math.max(14000,Math.min(70000,d.text.length*95)));return;}
  const body=pages[page]||[],len=body.join('').length,last=page>=pages.length-1;
  el.innerHTML=head+'<div class="pg">'+body.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div><span class="foot"><button type="button" data-r182="prev"'+(page?'':' disabled')+'>◀</button> '+(page+1)+' / '+pages.length+' <button type="button" data-r182="next">'+(last?'닫기':'▶')+'</button><button type="button" data-r182="close" title="닫기">✕</button></span>';
- el.scrollTop=0;hideAt=performance.now()+Math.max(9000,Math.min(40000,len*110));}
+ el.scrollTop=0;hideAt=performance.now()+pageMs(Math.max(9000,Math.min(40000,len*110)));}
 function next(){if(showing||!Q.length)return;css();if(!el){el=document.createElement('div');el.id='r177Doc';el.setAttribute('role','dialog');
   el.onclick=ev=>{const b=ev.target.closest?.('[data-r182]');if(b){ev.stopPropagation();const k=b.dataset.r182;if(k==='prev')turn(-1);else if(k==='next')turn(1);else close();return;}turn(1);};
   el.addEventListener('wheel',ev=>{if(!prefs.pages||!showing)return;ev.preventDefault();turn(ev.deltaY>0?1:-1);},{passive:false});
@@ -122,7 +124,11 @@ try{
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){try{if(typeof room!=='undefined'&&room){const L=docsHere(),left=L.splice(0);if(left.length){for(const p of left)keep(p.r177Doc);stats.autoKept+=left.length;try{toast('줍지 않은 기록 '+left.length+'장을 쪽지 모음에 넣었습니다.',2.4);}catch(_){}}}}catch(e){fail(e);}return base.apply(this,a);};}
 }catch(e){fail(e);}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r182Pages')){
-   for(const [id,k,label] of [['r182Pages','pages','쪽지 한 장씩 넘기기(누르기·휠)'],['r182Auto','autoShow','주운 쪽지 바로 펼치기(끄면 쪽지 모음에만)']]){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id=id;c.checked=prefs[k]!==false;c.onchange=()=>set({[k]:c.checked});l.appendChild(c);l.appendChild(document.createTextNode(' '+label));grid.appendChild(l);}}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+   for(const [id,k,label] of [['r182Pages','pages','쪽지 한 장씩 넘기기(누르기·휠)'],['r182Auto','autoShow','주운 쪽지 바로 펼치기(끄면 쪽지 모음에만)']]){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id=id;c.checked=prefs[k]!==false;c.onchange=()=>set({[k]:c.checked});l.appendChild(c);l.appendChild(document.createTextNode(' '+label));grid.appendChild(l);}
+   const l=document.createElement('label'),sel=document.createElement('select');l.id='r253SecsRow';sel.id='r253Secs';sel.title='쪽지·기억조각이 한 장마다 몇 초 뒤 저절로 넘어갈지';
+   const o0=document.createElement('option');o0.value='0';o0.textContent='자동(글자 수에 맞춰)';sel.appendChild(o0);for(let i=1;i<=60;i++){const o=document.createElement('option');o.value=String(i);o.textContent=i+'초';sel.appendChild(o);}
+   sel.value=String(Math.max(0,Math.min(60,Math.round(Number(prefs.secs)||0))));sel.onchange=()=>{const v=Math.max(0,Math.min(60,parseInt(sel.value,10)||0));set({secs:v});if(showing&&el){hideAt=performance.now()+pageMs(hideAt-performance.now());}};
+   l.appendChild(document.createTextNode('쪽지 자동 넘기기 (한 장마다) '));l.appendChild(sel);grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
-window.__STORYWORLD_STORY_COLLECT_R177__=Object.freeze({revision:REV,set,formOf,FORMS,show,collected,paginate,pageLimit,prefs:()=>({...prefs}),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},onMap:live()?docsHere().length:0,docs:()=>docsHere().map(p=>({...p.r177Doc,x:p.x,y:p.y})),lastError})});
+window.__STORYWORLD_STORY_COLLECT_R177__=Object.freeze({revision:REV,set,pageMs,formOf,FORMS,show,collected,paginate,pageLimit,prefs:()=>({...prefs}),inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},onMap:live()?docsHere().length:0,docs:()=>docsHere().map(p=>({...p.r177Doc,x:p.x,y:p.y})),lastError})});
 })();

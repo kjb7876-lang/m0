@@ -5,11 +5,18 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R208-light-3',KEY='storyworld.r182.light',MODES=['full','torch','flashlight'],NAME={full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
-let prefs={mode:'full'};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(MODES.includes(s.mode))prefs.mode=s.mode;}catch(_){}
+const REV='R254-light-4',KEY='storyworld.r182.light',MODES=['auto','full','torch','flashlight'],NAME={auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+/* R254(사용자 2026-11-03 "미로맵만 횃불or손전등시야(시대상에맞게)이고 나머지상황은 모두전체보이는시야"): 기본은 '자동' — 미로 구역에서만 시대에 맞춰
+   (현대·기계 = 손전등, 그 밖 = 횃불) 빛을 쓰고, 나머지는 모두 전체 시야. 예전에 저장된 값은 한 번 '자동'으로 옮긴다(v:254). 직접 고르면 그대로 따른다. */
+let prefs={mode:'auto',v:254};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.v===254&&MODES.includes(s.mode))prefs.mode=s.mode;}catch(_){}
 const stats={toggles:0,coneFrames:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
-const mode=()=>prefs.mode;
-function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=prefs.mode!=='full';/* R185: 사몽 안에서 '전체'→횃불/손전등으로 바꿔도 바로 R24 시야를 켠다(예전에는 다음 구역까지 기다림 — Codex 리뷰) */
+function inMaze(){try{if(typeof room==='undefined'||!room)return false;const x=room.samongR103;if(x){if(x.stage==='maze')return true;const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone);return z?.kind==='maze';}
+  return !!(room.exploration?.mazeR72||room.exploration?.maze||/미로/.test(String(room.exploration?.name||'')));}catch(_){return false;}}
+const MODERN_STYLE=/clinical|domestic|urban|school|hospital|hotel|office|modern|city|subway|station/i;
+function mazeLight(){try{const era=window.__STORYWORLD_ERA_R191__?.eraOf?.(room);if(era==='tech'||era==='modern')return 'flashlight';const x=room?.samongR103,z=x&&window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone);
+  if(MODERN_STYLE.test(String(z?.style||''))||MODERN_STYLE.test(String(room?.exploration?.worldR74?.style||room?.exploration?.backgroundTheme||'')))return 'flashlight';}catch(_){}return 'torch';}
+const mode=()=>prefs.mode==='auto'?(inMaze()?mazeLight():'full'):prefs.mode;
+function apply(){try{if(typeof settings==='undefined'||!settings)return;const want=mode()!=='full';/* R185: 사몽 안에서 '전체'→횃불/손전등으로 바꿔도 바로 R24 시야를 켠다(예전에는 다음 구역까지 기다림 — Codex 리뷰) */
   if((settings.flashlight58!==false)!==want){settings.flashlight58=want;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',want);}catch(e){fail(e);}}
 function set(p){if(MODES.includes(p?.mode))prefs.mode=p.mode;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}apply();return{...prefs};}
 function toggle(){set({mode:MODES[(MODES.indexOf(prefs.mode)+1)%MODES.length]});stats.toggles++;try{if(typeof toast==='function')toast('시야: '+NAME[prefs.mode],1.6);}catch(_){}}
@@ -22,13 +29,13 @@ addEventListener('keydown',e=>{try{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)r
 let cv=null,dir={x:1,y:1};
 function canvas(){if(cv?.isConnected)return cv;const st=document.getElementById('stage');if(!st)return null;cv=document.createElement('canvas');cv.id='r182Cone';cv.setAttribute('aria-hidden','true');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';st.appendChild(cv);return cv;}
 function hide(){if(cv&&cv.style.display!=='none'){cv.style.display='none';cv.width=0;cv.height=0;}}
-function want(){try{if(prefs.mode==='full'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103&&document.getElementById('r103Flashlight')?.style.display==='block')return false;/* 사몽 미로·어두운 구역은 samong-r103 이 그린다 — R187: 그 밖의 사몽 구역(전투·생존)은 여기서 부채꼴을 그린다(예전엔 손전등이 횃불과 똑같이 보임) */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
+function want(){try{if(mode()==='full'||typeof started==='undefined'||!started||typeof player==='undefined'||!player||typeof room==='undefined'||!room)return false;if(typeof modal!=='undefined'&&modal)return false;if(room.samongR103&&document.getElementById('r103Flashlight')?.style.display==='block')return false;/* 사몽 미로·어두운 구역은 samong-r103 이 그린다 — R187: 그 밖의 사몽 구역(전투·생존)은 여기서 부채꼴을 그린다(예전엔 손전등이 횃불과 똑같이 보임) */return settings?.flashlight58!==false&&window.__STORYWORLD_SIGHT24__?.enabled===true;}catch(_){return false;}}
 const blockedAt=(x,y)=>{try{return typeof blocked==='function'?blocked(x,y,.02,room):false;}catch(_){return false;}};
 function ray(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.2)if(blockedAt(ox+dx*t,oy+dy*t))return t;return max;}
 function frame(){try{if(!want()){hide();return;}const c=canvas();if(!c)return;c.style.display='block';const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);
   if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
-  if(prefs.mode==='torch'){torch(g,b);return;}
+  if(mode()==='torch'){torch(g,b);return;}
   const mv={x:player.moveVX150||0,y:player.moveVY150||0};if(Math.hypot(mv.x,mv.y)>.05){const l=Math.hypot(mv.x,mv.y);dir={x:mv.x/l,y:mv.y/l};}
   else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w)dir={x:w[0]/Math.SQRT2,y:w[1]/Math.SQRT2};}
   /* R187: 멈춰 선 채 부채꼴이 벽에 막히면(samong-r103 와 같이) 가장 멀리 트인 쪽으로 돌린다 */
@@ -55,6 +62,6 @@ function torch(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'
  const hy=o.y-22*(typeof zoom==='number'?zoom:1),hn=g.createRadialGradient(o.x,hy,2,o.x,hy,1.6*U);hn.addColorStop(0,'rgba(0,0,0,1)');hn.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=hn;g.beginPath();g.arc(o.x,hy,1.6*U,0,Math.PI*2);g.fill();
  g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,o.y,0,o.x,o.y,rx);w.addColorStop(0,'rgba(255,190,110,.10)');w.addColorStop(1,'rgba(255,150,70,0)');
  g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=w;g.beginPath();g.arc(o.x,o.y,rx,0,Math.PI*2);g.fill();g.restore();stats.torchFrames=(stats.torchFrames||0)+1;}
-let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;if(prefs.mode==='full'&&typeof settings!=='undefined'&&settings?.flashlight58!==false&&!(typeof room!=='undefined'&&room?.samongR103))apply();else if(prefs.mode!=='full'&&typeof settings!=='undefined'&&settings?.flashlight58===false)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
-window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;const m=mode();if(m==='full'&&typeof settings!=='undefined'&&settings?.flashlight58!==false)apply();else if(m!=='full'&&typeof settings!=='undefined'&&settings?.flashlight58===false)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
+window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
