@@ -271,6 +271,8 @@ jobs:
         run: node r96/qa/r242/r242-cpu-check.cjs
       - name: R271 hwando unified v2 polish assets CPU check
         run: node r96/qa/r271/r271-cpu-check.cjs
+      - name: R274 manual play rewards CPU check
+        run: node r96/qa/r274/r274-cpu-check.cjs
       - name: R247 michaela Z/X bishop skills CPU check
         run: node r96/qa/r247/r247-cpu-check.cjs
       - name: R251 Balrog summoning circle tower CPU check
