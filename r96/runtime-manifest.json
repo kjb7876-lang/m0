@@ -13303,6 +13303,61 @@
       "sha256": "4e85df11c7dec85b2f45ec59144ef5f01631ed50702db00b1de32a80852ff238"
     },
     {
+      "path": "assets/r283/hwando/index.json",
+      "bytes": 8962,
+      "sha256": "fe7ba5f351a2c51c1b8fbed6fc9819f55d25775ba5458dd95142130192a35192"
+    },
+    {
+      "path": "assets/r283/hwando/r242/attack-n.webp",
+      "bytes": 340518,
+      "sha256": "06e8a0121ba22105d7538b162c43c3e0ebd90f93183a3f59f6137529a0915c72"
+    },
+    {
+      "path": "assets/r283/hwando/r242/attack-s.webp",
+      "bytes": 206748,
+      "sha256": "edf63cf5734bbee14fd84803f163e7ebf0f33629b6f79701fb02311f61a2e319"
+    },
+    {
+      "path": "assets/r283/hwando/r242/hit-e.webp",
+      "bytes": 151160,
+      "sha256": "9cdf7242e4be33002999a946c7dbf5561c438622156e20b4e0ebf8462805a49e"
+    },
+    {
+      "path": "assets/r283/hwando/r242/hit-n.webp",
+      "bytes": 180764,
+      "sha256": "2bbfaf2db9ef432fbbd7e5a41cb07466c62831471c864226af3c6e233a5b9043"
+    },
+    {
+      "path": "assets/r283/hwando/r242/hit-s.webp",
+      "bytes": 205228,
+      "sha256": "e521efb85f7408f35998ad5e3dcb77791a4c3de97e8f13c3fed96a9dbab0632c"
+    },
+    {
+      "path": "assets/r283/hwando/r271/attack-e.webp",
+      "bytes": 169448,
+      "sha256": "d8984e859e35d2bd3d3c5a60ee666dd5fed4ed1b0632550dc358a97149bd1bcb"
+    },
+    {
+      "path": "assets/r283/hwando/r271/walk-e.webp",
+      "bytes": 126254,
+      "sha256": "1cf503b96dd3135c274ab0a5e79827ed1e40959c8ad54406203a9e77c7b60b0e"
+    },
+    {
+      "path": "assets/r283/hwando/r271/walk-n.webp",
+      "bytes": 131624,
+      "sha256": "a59513048970d37ada41b713b4f92cb7777dddf4709b98c493bb97d6b3365b30"
+    },
+    {
+      "path": "assets/r283/hwando/r271/walk-s.webp",
+      "bytes": 110230,
+      "sha256": "d55794cbe654c740b928b40956bfb06763ba14781b26a20a232a488f29e81958"
+    },
+    {
+      "path": "assets/r283/hwando/r271/walk-w.webp",
+      "bytes": 137602,
+      "sha256": "76488a8c038d028b9511d90ee3861cd35685951be2c53effa9cfafb84286a28a"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22099,8 +22154,8 @@
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 10097,
-      "sha256": "a3187bd967c3bf2092e47ec32fadb339317bd21056007fd12b2bd0516ffc8722"
+      "bytes": 10384,
+      "sha256": "be95e4592eceddeed11e1a5d924670f8ca99c5c3ebfe31c1ceaf98623d18684b"
     },
     {
       "path": "hwando-r277.js",
@@ -22108,9 +22163,14 @@
       "sha256": "fdfb11ae2c05059995f0fa4717c10f19f899bf52bfc5151f461202e317ef3ec8"
     },
     {
+      "path": "hwando-r283.js",
+      "bytes": 2701,
+      "sha256": "4f150581bd72ab676f7490e07328b0155e10ee434001bff1e7c4091e5ce1de29"
+    },
+    {
       "path": "index.html",
-      "bytes": 6566515,
-      "sha256": "dee4fb6681a59d819e11759deef77c7c8885ad3f71e461ef17ab609f15afd487"
+      "bytes": 6566555,
+      "sha256": "2d826ec655bbeb3182e0eb5590d7ead4f1b4858c167effdbe63014a02b6e68ec"
     },
     {
       "path": "intro-r140.js",
@@ -22663,9 +22723,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4532,
-  "totalBytes": 857621541,
-  "webHTMLSha256": "dee4fb6681a59d819e11759deef77c7c8885ad3f71e461ef17ab609f15afd487",
+  "fileCount": 4544,
+  "totalBytes": 859393107,
+  "webHTMLSha256": "2d826ec655bbeb3182e0eb5590d7ead4f1b4858c167effdbe63014a02b6e68ec",
   "largest": [
     {
       "path": "index.html",
