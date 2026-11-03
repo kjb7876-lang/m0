@@ -371,7 +371,7 @@ function objectiveBlocked(){try{if(typeof storyReady!=='function'||!room?.object
 function guideDoorStep(target){try{const W=window.__STORYWORLD_WORLD_R74__,pt=target||window.__STORYWORLD_GUIDE_R75__?.currentGoal?.()?.point;if(!W||!pt)return false;
  if(typeof findPath==='function'&&findPath(player,pt,room,.31)?.length)return false;
  const ds=room?.exploration?.worldR74?.doors||[],closed=(W.interactions?.()||[]).filter(t=>t.kind==='door'&&t.label==='문 열기');let best=null;
- for(const t of closed){const d=ds.find(v=>v.id===t.id);if(!d)continue;if(W.canUse(t)){if(W.use(t)){stats.guideDoors=(stats.guideDoors||0)+1;route=[];return true;}continue;}
+ for(const t of closed){const d=ds.find(v=>v.id===t.id);if(!d)continue;/* R261(사용자 2026-11-03 "길잡이키면 처음에 문열고 가는버그"): 목표가 닫힌 보스 문 너머일 때 '열 수 있는 가장 가까운 문'으로 입구 옆 앞방 문(door-1)을 열고 들어갔다 나왔다 → 목표가 그 문 가까이(6칸)가 아니면 앞방 문은 고르지 않는다 */if((d.id==='door-1'||/앞방/.test(String(d.name||'')))&&Math.hypot(pt.x-d.x,pt.y-d.y)>6){stats.guideClosetSkip=(stats.guideClosetSkip||0)+1;continue;}if(W.canUse(t)){if(W.use(t)){stats.guideDoors=(stats.guideDoors||0)+1;route=[];return true;}continue;}
   for(const s of [-1,1]){const q={x:d.axis==='x'?d.x+s*.9:d.x,y:d.axis==='y'?d.y+s*.9:d.y};if(typeof blocked==='function'&&blocked(q.x,q.y,.29,room))continue;
    const p=POL()?.navPath?.(player,q)||(typeof findPath==='function'?findPath(player,q,room,.29):null);if(p?.length&&(!best||p.length<best.p.length))best={p,t};}}
  if(!best)return false;route=best.p.slice(1).map(v=>({x:v.x,y:v.y}));command=null;doorWalkUntil=time+6;stats.guideDoorWalk=(stats.guideDoorWalk||0)+1;return true;}catch(e){fail(e);return false;}}
