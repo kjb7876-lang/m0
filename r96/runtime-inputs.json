@@ -3742,7 +3742,8 @@
     "assets/r275/mobs/thread-nurse.webp",
     "assets/r275/mobs/twin-head-corpse.webp",
     "assets/r275/mobs/vial-collector.webp",
-    "assets/r275/mobs/web-bound-skeleton.webp"
+    "assets/r275/mobs/web-bound-skeleton.webp",
+    "stranded-r280.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4817,5 +4818,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "53455d25a3ce6d41b0cf0647f1714f1a0da346bdf73f52127e1199fdc2995753"
+  "runtimeManifestSHA256": "747a7f2a470b3550f4b92ff88130c594781af1e3d7cdbfb2656081544851fc55"
 }
