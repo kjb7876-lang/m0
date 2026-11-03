@@ -271,6 +271,8 @@ jobs:
         run: node r96/qa/r242/r242-cpu-check.cjs
       - name: R271 hwando unified v2 polish assets CPU check
         run: node r96/qa/r271/r271-cpu-check.cjs
+      - name: R272 guide (hospital route/door, 777 forward) CPU check
+        run: node r96/qa/r272/r272-cpu-check.cjs
       - name: R277 hwando motion consistency CPU check
         run: node r96/qa/r277/r277-cpu-check.cjs
       - name: R274 manual play rewards CPU check
