@@ -90,7 +90,7 @@ function drawHex(h){const q=project(h.x,h.y),w=h.radius*Math.SQRT2*Math.abs(proj
   if(!warn&&S&&!pxOn){const v=Math.min(1,(h.age-h.warning)/.25),n=7;for(let i=0;i<n;i++){const a=h.r170.seed+i*2*Math.PI/n,rr=w*(.25+.55*((i*37)%7)/7),x=Math.cos(a)*rr,y=Math.sin(a)*rr*.55,len=hh*(1.1+.5*((i*13)%5)/5)*v;
     S.draw('spike',P.main,x,y,hh*.3,len,{pivot:[.5,1],angle:Math.sin(T()*3+i)*.18,alpha:.95,blend:'source-over',overHero:true});S.draw('spike',P.sub,x+hh*.05,y,hh*.16,len*.8,{pivot:[.5,1],angle:Math.sin(T()*3+i+1)*.22,alpha:.8,overHero:true});}
    S.draw('glow',P.main,0,-hh*.2,w*1.6,w*.9,{alpha:.5*(1-v*.5),overHero:true});}}finally{ctx.restore();}
- if(!warn&&!h.r170.burst){h.r170.burst=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,sd=h.r170.seed||0;X?.play('tendrils-blood',h.x,h.y,{k:1.25});for(let i=0;i<2;i++){const a=sd+i*Math.PI+.6;X?.play('tendrils-blood',h.x+Math.cos(a)*h.radius*.55,h.y+Math.sin(a)*h.radius*.55,{k:.85,delay:.08+.1*i,flip:i===1});}}catch(_){}}}
+ if(!warn&&!h.r170.burst){h.r170.burst=true;try{const X=window.__STORYWORLD_PIXELFX_R163__,sd=h.r170.seed||0;X?.play('tendrils-blood',h.x,h.y,{k:1.7});/* R250: 영웅 발밑 촉수를 더 크게(작아서 안 보였음) */for(let i=0;i<2;i++){const a=sd+i*Math.PI+.6;X?.play('tendrils-blood',h.x+Math.cos(a)*h.radius*.45,h.y+Math.sin(a)*h.radius*.45,{k:1.2,delay:.08+.1*i,flip:i===1});}}catch(_){}}}
 // R173 G: 위로 오르는 정화의 코어(청록 빛구슬 + 체력 막대).
 function drawLight(c){const q=project(c.x,c.y),hh=H(),S=SPR(),T0=T(),hit=c.hp<c.max&&(c.lastHp??c.hp)>c.hp;c.lastHp=c.hp;const HOLY={a:[20,90,90],b:[200,255,240]},pulse=1+.06*Math.sin(T0*4);
  try{window.__STORYWORLD_PIXELFX_R163__?.play('core-orb-teal',c.x,c.y,{loop:true,key:'r173-light',k:.9,z:hh*.35,until:T0+.4});}catch(_){}

@@ -41,6 +41,11 @@ function addToggle(){const panel=document.getElementById('panel');if(!panel||!pa
  h2.insertAdjacentHTML('beforeend','<button id="r237Auto" class="r237auto" title="포인트가 생기면 싼 것부터 알아서 강화합니다" style="margin-left:10px;padding:2px 12px;border:1px solid #8a7354;border-radius:999px;font-size:13px;vertical-align:middle;background:#1d1610;color:#e8d6bb;cursor:pointer">자동 스킬레벨업: '+(on?'켜짐':'꺼짐')+'</button>');
  const b=panel.querySelector('#r237Auto');if(b)b.onclick=()=>{set(!on);b.textContent='자동 스킬레벨업: '+(on?'켜짐':'꺼짐');};}
 try{if(typeof showUpgrades==='function'){const base=showUpgrades;showUpgrades=function(...a){const r=base.apply(this,a);try{addToggle();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
+// R252(사용자 2026-11-03 "스킬레벨업창에서 스킬레벨업하면 자동으로윗쪽으로 휠이올라가는버그"): 강화를 사면 창을 통째로 다시 그려(openPanel) #panel 스크롤이 0 으로 돌아갔다.
+//  같은 창(제목 첫 글이 같음)을 다시 그릴 때만 직전 스크롤 위치를 되돌린다(그린 직후·다음 프레임 두 번 — 뒤이어 붙는 R169·R115 덧붙이기가 높이를 바꾸므로). 다른 창을 열 때는 그대로 맨 위.
+const headOf=pn=>{try{const h=pn&&typeof pn.querySelector==='function'?pn.querySelector('h2'):null;if(!h)return '';const kids=h.childNodes&&typeof h.childNodes.length==='number'?Array.prototype.slice.call(h.childNodes):[];const t=kids.filter(n=>n&&n.nodeType===3).map(n=>String(n.textContent||'')).join('').trim();return t||String(h.textContent||'').trim();}catch(_){return '';}};/* 가짜 DOM(검사 하네스)에서도 던지지 않게 */
+try{if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){const pn=document.getElementById('panel'),wasOpen=typeof modal!=='undefined'&&!!modal,top=pn?pn.scrollTop:0,head=wasOpen?headOf(pn):'';const r=base.apply(this,a);
+ try{if(wasOpen&&top>0&&head&&headOf(pn)===head){const back=()=>{if(headOf(pn)===head&&pn.scrollTop<top)pn.scrollTop=top;};back();if(typeof requestAnimationFrame==='function')requestAnimationFrame(back);setTimeout(back,0);stats.keptScroll=(stats.keptScroll||0)+1;}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 if(typeof setInterval==='function')setInterval(()=>{try{step(false);}catch(e){fail(e);}},EVERY);
 window.__STORYWORLD_AUTOLEVEL_R237__=Object.freeze({revision:REV,set,step,candidates:()=>{const p=g('player');return p?candidates(p):[];},inspect:()=>({revision:REV,on,stats:{...stats,last:[...stats.last]},lastError})});
