@@ -305,6 +305,8 @@ jobs:
         run: node r96/qa/r276/r276-cpu-check.cjs
       - name: R279 Teacup/locker/steel-tower angle variants CPU check
         run: node r96/qa/r279/r279-cpu-check.cjs
+      - name: R281 Drive boss move6 / garden soil fringe (conditional) CPU check
+        run: node r96/qa/r281/r281-cpu-check.cjs
       - name: R259 hit effects at enemy art centre CPU check
         run: node r96/qa/r259/r259-cpu-check.cjs
       - name: R260 mob art preload and cave line flicker CPU check
