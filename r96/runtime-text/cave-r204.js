@@ -15,7 +15,7 @@
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
 const REV='R228-cave-1',KEY='storyworld.r204.cave';
-let prefs={on:true,widen:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
+let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 // 지역별 설정. 확장할 때 여기에 한 줄씩 더한다.
@@ -356,8 +356,11 @@ const layoutDoorPoints=L=>{const out=[],pt=(q,rad)=>{if(q&&Number.isFinite(q.x)&
 const widened=new WeakMap();
 window.__STORYWORLD_LAYOUT_HOOK_R204__=(id,L)=>{try{if(!prefs.on||!solo()||!L?.floorCells?.length||L.r204Widened||L.r219)return null;if(widened.has(L))return widened.get(L);
  if(ZONES[id]?.decorOnly){if(!prefs.inflate)return null;const nx=inflate(L,{depth:ZONES[id].inflateDepth||3,rooms:prefs.rooms!==false,wallH:prefs.rooms!==false?(window.__R224_WALLH||1.3):0});widened.set(L,nx);return nx;}/* R219 */
- if(!prefs.widen||!ZONES[id]?.widen)return null;
- const nx=widen(L,ZONES[id],layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
+ /* R256(사용자 2026-11-03 "맵통로 전반적으로 더 넓혀주고"): 넓히기를 켠 시범 지역(dist00·dist01)만이 아니라, 유기 지형으로 다시 그린 모든 지역
+    (현대·실내 디테일 전용과 첫 거점 hub 은 빼고)에 같은 넓히기를 쓴다. 안전 규칙(문 둘레·가장자리·긴 벽·두 통로 사이 얇은 벽·새 지름길 금지)은 그대로. */
+ const allOn=prefs.widenAll!==false&&ZONES[id]&&!ZONES[id].decorOnly&&id!=='hub';
+ if(!prefs.widen||!(ZONES[id]?.widen||allOn))return null;
+ const nx=widen(L,ZONES[id]?.widen?ZONES[id]:{...ZONES[id],widenR:ZONES[id].widenR||1.5,widenHW:ZONES[id].widenHW||2},layoutDoorPoints(L));widened.set(L,nx);if(nx)stats.widened=nx.r204Widened;return nx;}catch(e){fail(e);return null;}};
 
 // ---- 게임 쪽 거리장: 이동 판정(blocked)과 렌더러가 같은 것을 쓴다 ------------------------------------
 // 첫 렌더 때(몹·조형물이 다 놓인 뒤) 만든다. 만들기 전에는 막는 것도 그리는 것도 없다(Legacy 렌더러도 그대로).
