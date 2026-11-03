@@ -3719,7 +3719,11 @@
     "assets/r273/props/index.json",
     "assets/r276/props/noticeboard-side.webp",
     "assets/r276/props/index.json",
-    "hwando-r277.js"
+    "hwando-r277.js",
+    "assets/r279/props/teacup-handle.webp",
+    "assets/r279/props/locker-left.webp",
+    "assets/r279/props/pylon-rear.webp",
+    "assets/r279/props/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4794,5 +4798,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ef83a53a62c5bb0a13e190d3b539272f446dd4d0f52e2ebad467a6d6eaede405"
+  "runtimeManifestSHA256": "7692b1bce6acbe5a6be196b1535faba316543443f691badfc1182a11f9346f61"
 }
