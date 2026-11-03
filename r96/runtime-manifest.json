@@ -13303,6 +13303,31 @@
       "sha256": "4e85df11c7dec85b2f45ec59144ef5f01631ed50702db00b1de32a80852ff238"
     },
     {
+      "path": "assets/r281/bosses/dist00-boss-walk6.webp",
+      "bytes": 347142,
+      "sha256": "5e0824e9d2ad61bab8f537f412acfa13b55a522a5ee54c30d991e5a5484cd61d"
+    },
+    {
+      "path": "assets/r281/bosses/mb-dist02-walk6.webp",
+      "bytes": 404860,
+      "sha256": "8395ef1513e428e036deb466cde855d57d2e636f83f0a7b5be9440228f391ce2"
+    },
+    {
+      "path": "assets/r281/bosses/mb-ep1a07-walk6.webp",
+      "bytes": 433628,
+      "sha256": "298ae0b34f0893f64fec03b31d2fdd470ee280a76039253c6064feb8a6ab76ce"
+    },
+    {
+      "path": "assets/r281/garden/garden-soil-fringe-outer-01.png",
+      "bytes": 125225,
+      "sha256": "da4e291555cfd5153d42443dadd0e77e4060df0209a922729d2792b3382d18e3"
+    },
+    {
+      "path": "assets/r281/index.json",
+      "bytes": 3630,
+      "sha256": "a3869c441d580d58eb5f1a0d8d5ff2ea4232ae16afc2eb39201f9071954547a5"
+    },
+    {
       "path": "assets/r283/hwando/index.json",
       "bytes": 8962,
       "sha256": "fe7ba5f351a2c51c1b8fbed6fc9819f55d25775ba5458dd95142130192a35192"
@@ -21349,8 +21374,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 114016,
-      "sha256": "af45c78aa00690a21c4d02d8c92d6c4a15254caf0d72124bb0ff6504397e1f10"
+      "bytes": 114283,
+      "sha256": "8fbbfc2c79dbb399f6d8ace575f7a34c3e82d4b3cee6b49b2478dd5c9d021516"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -21953,6 +21978,11 @@
       "sha256": "4480b335bf6bae1f44a953666972ad858fb8d42dadf517e92b2974de2b5160f2"
     },
     {
+      "path": "drive-r281.js",
+      "bytes": 4402,
+      "sha256": "20030abe72c39aa0420573f8d568058bc947e3f8d8ff35ad7b4858a9b40886dc"
+    },
+    {
       "path": "dynamic-vfx-r84.js",
       "bytes": 12829,
       "sha256": "960343e5c0744fccbc56d8527c7095b1fcb4cfb09ad0e03bbc24c6a06dcc86fa"
@@ -22069,8 +22099,8 @@
     },
     {
       "path": "guide-r272.js",
-      "bytes": 8663,
-      "sha256": "1c99a819551b83325022a75ad3ba0fe6ae9219f9035d0f606983f2fa49a1f6ce"
+      "bytes": 8791,
+      "sha256": "c0d03f41703c302217f854d1018b2e67357b83a70032fcfd3b2612a06dab378d"
     },
     {
       "path": "guide-unstick-r222.js",
@@ -22169,8 +22199,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566555,
-      "sha256": "2d826ec655bbeb3182e0eb5590d7ead4f1b4858c167effdbe63014a02b6e68ec"
+      "bytes": 6566636,
+      "sha256": "aee3ec86d5b47da3d9d86cd99339f457c16f152644f4fda72782084b106a5ad2"
     },
     {
       "path": "intro-r140.js",
@@ -22538,6 +22568,11 @@
       "sha256": "8ae5c12368141823034fd67f6215c32613d7ba059257e1ff4b69252e7f18a6ed"
     },
     {
+      "path": "stranded-r280.js",
+      "bytes": 4551,
+      "sha256": "45cd0c5dd21b00fe8a67372ece3c276e72d736ec8c91b07c30fbd872cd8162de"
+    },
+    {
       "path": "summoning-r251.js",
       "bytes": 10418,
       "sha256": "38f7eb8714693e2728df62392bb8d67fd25817359d1babdf07a0e90eaa129a16"
@@ -22723,9 +22758,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4544,
-  "totalBytes": 859393107,
-  "webHTMLSha256": "2d826ec655bbeb3182e0eb5590d7ead4f1b4858c167effdbe63014a02b6e68ec",
+  "fileCount": 4551,
+  "totalBytes": 860717021,
+  "webHTMLSha256": "aee3ec86d5b47da3d9d86cd99339f457c16f152644f4fda72782084b106a5ad2",
   "largest": [
     {
       "path": "index.html",
