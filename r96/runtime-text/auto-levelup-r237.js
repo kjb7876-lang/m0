@@ -43,7 +43,7 @@ function addToggle(){const panel=document.getElementById('panel');if(!panel||!pa
 try{if(typeof showUpgrades==='function'){const base=showUpgrades;showUpgrades=function(...a){const r=base.apply(this,a);try{addToggle();}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 // R252(사용자 2026-11-03 "스킬레벨업창에서 스킬레벨업하면 자동으로윗쪽으로 휠이올라가는버그"): 강화를 사면 창을 통째로 다시 그려(openPanel) #panel 스크롤이 0 으로 돌아갔다.
 //  같은 창(제목 첫 글이 같음)을 다시 그릴 때만 직전 스크롤 위치를 되돌린다(그린 직후·다음 프레임 두 번 — 뒤이어 붙는 R169·R115 덧붙이기가 높이를 바꾸므로). 다른 창을 열 때는 그대로 맨 위.
-const headOf=pn=>{const h=pn&&pn.querySelector('h2');if(!h)return '';const t=[...h.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();return t||h.textContent.trim();};
+const headOf=pn=>{try{const h=pn&&typeof pn.querySelector==='function'?pn.querySelector('h2'):null;if(!h)return '';const kids=h.childNodes&&typeof h.childNodes.length==='number'?Array.prototype.slice.call(h.childNodes):[];const t=kids.filter(n=>n&&n.nodeType===3).map(n=>String(n.textContent||'')).join('').trim();return t||String(h.textContent||'').trim();}catch(_){return '';}};/* 가짜 DOM(검사 하네스)에서도 던지지 않게 */
 try{if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){const pn=document.getElementById('panel'),wasOpen=typeof modal!=='undefined'&&!!modal,top=pn?pn.scrollTop:0,head=wasOpen?headOf(pn):'';const r=base.apply(this,a);
  try{if(wasOpen&&top>0&&head&&headOf(pn)===head){const back=()=>{if(headOf(pn)===head&&pn.scrollTop<top)pn.scrollTop=top;};back();if(typeof requestAnimationFrame==='function')requestAnimationFrame(back);setTimeout(back,0);stats.keptScroll=(stats.keptScroll||0)+1;}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
