@@ -3690,6 +3690,13 @@
     "story-fragments-r255.js",
     "guide-loot-r261.js",
     "mob-preload-r260.js",
+    "assets/r257/props/chain-end.webp",
+    "assets/r257/props/weed-opp.webp",
+    "assets/r257/props/cwindow-obl.webp",
+    "assets/r257/props/armor.webp",
+    "assets/r257/props/kitchen.webp",
+    "assets/r257/props/cable.webp",
+    "assets/r257/props/index.json",
     "hit-center-r259.js"
   ],
   "mediaPaths": [
@@ -4765,5 +4772,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "789b754e4e2393822d9257baaf1409304c193f71bb69076fe3a47898a68c4852"
+  "runtimeManifestSHA256": "bcb4254c3db8a1c0213b9eb8ea35519949669dfaef7b1963b4c9803b95c54216"
 }
