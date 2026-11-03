@@ -3556,7 +3556,25 @@
     "assets/r229/michaela/run-ne-v4.webp",
     "assets/r229/michaela/index.json",
     "mob-flank-r230.js",
-    "auto-levelup-r237.js"
+    "auto-levelup-r237.js",
+    "hwando-r242.js",
+    "assets/r242/hwando/attack-e.webp",
+    "assets/r242/hwando/attack-n.webp",
+    "assets/r242/hwando/attack-s.webp",
+    "assets/r242/hwando/hit-e.webp",
+    "assets/r242/hwando/hit-n.webp",
+    "assets/r242/hwando/hit-s.webp",
+    "assets/r242/hwando/idle-e.webp",
+    "assets/r242/hwando/idle-n.webp",
+    "assets/r242/hwando/idle-s.webp",
+    "assets/r242/hwando/index.json",
+    "assets/r242/hwando/ready-e.webp",
+    "assets/r242/hwando/ready-n.webp",
+    "assets/r242/hwando/to-ready-e.webp",
+    "assets/r242/hwando/to-ready-n.webp",
+    "assets/r242/hwando/walk-e.webp",
+    "assets/r242/hwando/walk-n.webp",
+    "assets/r242/hwando/walk-s.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4631,5 +4649,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f7024a2b04eb0bc7d6cc7f2d506a56983d3edd2fcdf90077a7cc9406fb5ba33c"
+  "runtimeManifestSHA256": "89a931976450e5e70bf63f974f355a696b93e20bd9c26f3468192ee2737e9b73"
 }

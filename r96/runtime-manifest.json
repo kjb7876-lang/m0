@@ -12488,6 +12488,91 @@
       "sha256": "ba744af751fb6b76aa5801619bba6782aba0289588c3fc5cb6a02ded032de343"
     },
     {
+      "path": "assets/r242/hwando/attack-e.webp",
+      "bytes": 393010,
+      "sha256": "5e5bcc203838ed815782b9e4c4d707fde65308cb8feda6f469facc96794c7b73"
+    },
+    {
+      "path": "assets/r242/hwando/attack-n.webp",
+      "bytes": 791120,
+      "sha256": "245b975e6157ea40561c2422aa050937876907bc26ec2cacbfad4a63f4866bf0"
+    },
+    {
+      "path": "assets/r242/hwando/attack-s.webp",
+      "bytes": 446568,
+      "sha256": "1a9054790ff68fbcea23a5614035af8345e94aa7200a1185007ba93aa960aa60"
+    },
+    {
+      "path": "assets/r242/hwando/hit-e.webp",
+      "bytes": 369408,
+      "sha256": "91fbf305622c750569c3c2143a21f16f7bb73900975325d66c51be684c7a7565"
+    },
+    {
+      "path": "assets/r242/hwando/hit-n.webp",
+      "bytes": 433994,
+      "sha256": "ceffb242146601f2c02dd0df2de0157eed2411e0d492ad9bb15d812a2dccdecd"
+    },
+    {
+      "path": "assets/r242/hwando/hit-s.webp",
+      "bytes": 463270,
+      "sha256": "92a9a2c42c6222bee453cfb07b79f85c8bfd4247381414e420f2f8c7bc945fac"
+    },
+    {
+      "path": "assets/r242/hwando/idle-e.webp",
+      "bytes": 357958,
+      "sha256": "9ed79c7ce24887fca82ab351a167efbbb1df389fb606444a2f0d88481f09ce02"
+    },
+    {
+      "path": "assets/r242/hwando/idle-n.webp",
+      "bytes": 350522,
+      "sha256": "4122c02cb8991fa46083bba79a643288137c0fdd7e3d648035d029157c79514e"
+    },
+    {
+      "path": "assets/r242/hwando/idle-s.webp",
+      "bytes": 455114,
+      "sha256": "83250ce9b8bfcb4af5c91be90b624ef4909b24d5f31041db6cf0d09fe656ee1a"
+    },
+    {
+      "path": "assets/r242/hwando/index.json",
+      "bytes": 8875,
+      "sha256": "778b536853edf8b0391de4d00e9668cf63845de2ea357b36d861095b0bf536ea"
+    },
+    {
+      "path": "assets/r242/hwando/ready-e.webp",
+      "bytes": 375358,
+      "sha256": "f53b3fc308b186d9433c16a29a0d0659228c8daf7818f8bca156eb8df7305c22"
+    },
+    {
+      "path": "assets/r242/hwando/ready-n.webp",
+      "bytes": 438374,
+      "sha256": "ea48deb5fd08f3d4e89cad417f957f9b0736485a180cf0102f42927de42e6fe8"
+    },
+    {
+      "path": "assets/r242/hwando/to-ready-e.webp",
+      "bytes": 97182,
+      "sha256": "aa154e51b8c3645c3b2098d9321d239cbfaca3b6286a44499c42c0948f789655"
+    },
+    {
+      "path": "assets/r242/hwando/to-ready-n.webp",
+      "bytes": 109096,
+      "sha256": "9cadc4dc6a462926666f81428017de9a09c63fbc7ed9bdfda8543accff0c9953"
+    },
+    {
+      "path": "assets/r242/hwando/walk-e.webp",
+      "bytes": 158776,
+      "sha256": "ca9a51536e92bf8b170019f1ff51fbc0dbfe0344750016f203d704d63f89e21b"
+    },
+    {
+      "path": "assets/r242/hwando/walk-n.webp",
+      "bytes": 201226,
+      "sha256": "75cffa167138d89b5bc9bf94b468643acf68f7e4bddef6bbe45f3568e4fa58d6"
+    },
+    {
+      "path": "assets/r242/hwando/walk-s.webp",
+      "bytes": 207512,
+      "sha256": "458f1ac168f008bf2b7e6a3f66283ca19296b60fdd76d4026b84eaab116c3add"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -20284,8 +20369,8 @@
     },
     {
       "path": "attack-anim-r143.js",
-      "bytes": 17485,
-      "sha256": "bf9b7059d883bce119b89e402448517372a4cb9cbfbdbe41fbe6095bf1ab6f7f"
+      "bytes": 17695,
+      "sha256": "12cb3841eeb0ceb04ac060b28b96150c349dd0f11a1f479af05f06431209887c"
     },
     {
       "path": "audio-r108.js",
@@ -21248,9 +21333,14 @@
       "sha256": "133505c82d777a46044681e5ef66b84638a02ee56052c1a4c9b1821a773036a3"
     },
     {
+      "path": "hwando-r242.js",
+      "bytes": 11938,
+      "sha256": "131dcb77d7d8ce6fdfafdd324f17da92f10879b8cc37f600b787ddeac1aaeae3"
+    },
+    {
       "path": "index.html",
-      "bytes": 6565524,
-      "sha256": "1399bde00138b38efe08e4afc76777879a0133d5a3c8bfaffa10042860af0a30"
+      "bytes": 6565564,
+      "sha256": "e58ab0b036a4894cfe88a6b5e5accdba5530c82ccea1a7a4d21efb76eb5a0433"
     },
     {
       "path": "intro-r140.js",
@@ -21614,8 +21704,8 @@
     },
     {
       "path": "visual-r119.js",
-      "bytes": 44719,
-      "sha256": "1b6874845336a9c6fbea704c79f5b347fe990f224b0fefd17b4d689881d6b617"
+      "bytes": 44863,
+      "sha256": "c2f4db9eb1af660c80ec50ca8af73b4cc77f858c30e7993818ac17aec3d61912"
     },
     {
       "path": "visual-r90-world.js",
@@ -21733,9 +21823,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4346,
-  "totalBytes": 844013109,
-  "webHTMLSha256": "1399bde00138b38efe08e4afc76777879a0133d5a3c8bfaffa10042860af0a30",
+  "fileCount": 4364,
+  "totalBytes": 849682804,
+  "webHTMLSha256": "e58ab0b036a4894cfe88a6b5e5accdba5530c82ccea1a7a4d21efb76eb5a0433",
   "largest": [
     {
       "path": "index.html",

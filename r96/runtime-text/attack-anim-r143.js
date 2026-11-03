@@ -96,6 +96,7 @@ function preload(){try{const h=player?.hero;if(!HEROES.includes(h))return 0;let 
  for(const p of want){if(typeof readyImage==='function'&&readyImage(p))continue;miss++;const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}catch(_){}}}stats.preloadMiss=miss;return miss;}catch(_){return 0;}}
 let lastHero=null,lastRoom=null,nextPre=0;
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
+ if(player?.hero==='hwando'&&window.__STORYWORLD_HWANDO_R242__?.active?.())return r;/* R242: 환도는 새 선택 자산이 그린다 — 옛 시트를 그리거나 받지 않는다(텍스처 중복 방지) */
  try{if(st>=0&&rec&&prefs.on)swapWalk(rec,st);}catch(e){fail(e);}
  try{const now=Date.now();if(player&&(player.hero!==lastHero||(typeof room!=='undefined'&&room!==lastRoom)||now>=nextPre)){lastHero=player.hero;lastRoom=typeof room!=='undefined'?room:null;nextPre=now+(preload()?2000:15000);}
   const busy=player.skillAnim>0||player.hurtAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard;
