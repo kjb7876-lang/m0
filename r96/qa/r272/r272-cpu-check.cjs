@@ -42,5 +42,13 @@ ok('base guide still runs when R272 has nothing to do',(sb.guideStep(.1),base===
  sb.__t=2000;fp(P,{x:-5,y:3},roomA,.31);const expired=calls===4;gen=1;fp(P,{x:-5,y:3},roomA,.31);const doorBust=calls===5;
  ok('failed path remembered 1.5 s; found paths never cached; door generation change re-searches',cachedFail&&okNotCached&&expired&&doorBust,{calls});
  ok('ground command drop only when 3D floor rows exist; off switch',/floorRows\?\.size>0/.test(ps)&&/storyworld\.r272\.perf/.test(ps)&&/owner\?\.id==='ground'/.test(ps));}
+
+// R272 조형물: 빈 기념비는 빼고, 무너진 계단은 실제 이동 지점 3.5칸 안만 남김(충돌 없는 소품만)
+{const pr=C('props-r272.js');ok('props-r272 wired (index after perf-r272, verify list, runtime copy)',RT('props-r272.js')===pr&&idx.indexOf('perf-r272.js')<idx.indexOf('props-r272.js')&&idx.indexOf('props-r272.js')<idx.indexOf('combat-r118.js')&&fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'props-r272.js'"));
+ const sb={window:{},localStorage:{getItem:()=>null},setInterval(){},setTimeout(){},getRoom:()=>null,console};sb.window=sb;vm.createContext(sb);vm.runInContext(pr,sb);const K=sb.__STORYWORLD_PROPS_R272__.keep;
+ const pts=[{x:10,y:10}];
+ ok('blank memorial always dropped; stairs kept only near a transition point',K({key:'memorial',path:'assets/props/v290/blank_memorial.webp',x:10,y:10},pts)===false&&K({key:'stairs',path:'assets/props/v290/collapsed_stairs.webp',x:12,y:12},pts)===true&&K({key:'stairs',path:'assets/props/v290/collapsed_stairs.webp',x:30,y:30},pts)===false);
+ ok('statues, obelisks and other props untouched',['memory_archivist_statue.webp','time_obelisk.webp','broken_gate.webp','blood_altar.webp'].every(f=>K({key:'x',path:'assets/props/v290/'+f,x:50,y:50},pts)===true));
+ const data=RT('index.html');const solid=[...data.matchAll(/"key":"(memorial|stairs)","path":"[^"]+"[^{}]*?"solid":(true|false)/g)].map(m=>m[2]);ok('every memorial/stairs prop in data is non-solid (collision unchanged)',solid.length>=30&&solid.every(v=>v==='false'),{n:solid.length});}
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R272 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
