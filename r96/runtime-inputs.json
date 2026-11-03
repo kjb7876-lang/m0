@@ -3714,16 +3714,32 @@
     "assets/r271/hwando/walk-n.webp",
     "assets/r271/hwando/walk-s.webp",
     "assets/r271/hwando/walk-w.webp",
-    "manual-bonus-r274.js",
-    "assets/r273/props/monolith-side.webp",
-    "assets/r273/props/index.json",
-    "assets/r276/props/noticeboard-side.webp",
-    "assets/r276/props/index.json",
+    "mob-fix-r275.js",
+    "assets/r275/mobs/ash-mason.webp",
+    "assets/r275/mobs/censer-priest.webp",
+    "assets/r275/mobs/clockwork-sentinel.webp",
+    "assets/r275/mobs/curtain-mannequin.webp",
+    "assets/r275/mobs/ember-hound.webp",
+    "assets/r275/mobs/halberd-revenant.webp",
+    "assets/r275/mobs/index.json",
+    "assets/r275/mobs/oblivion-spider.webp",
+    "assets/r275/mobs/root-bound-ghoul.webp",
+    "assets/r275/mobs/signal-golem.webp",
+    "assets/r275/mobs/superego-inquisitor.webp",
+    "assets/r275/mobs/thread-nurse.webp",
+    "assets/r275/mobs/twin-head-corpse.webp",
+    "assets/r275/mobs/vial-collector.webp",
+    "assets/r275/mobs/web-bound-skeleton.webp",
     "hwando-r277.js",
+    "manual-bonus-r274.js",
     "assets/r279/props/teacup-handle.webp",
     "assets/r279/props/locker-left.webp",
     "assets/r279/props/pylon-rear.webp",
-    "assets/r279/props/index.json"
+    "assets/r279/props/index.json",
+    "assets/r276/props/noticeboard-side.webp",
+    "assets/r276/props/index.json",
+    "assets/r273/props/monolith-side.webp",
+    "assets/r273/props/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4798,5 +4814,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7692b1bce6acbe5a6be196b1535faba316543443f691badfc1182a11f9346f61"
+  "runtimeManifestSHA256": "07ea4e95e12c88f69e26db6518695e1205e7177d83b43799b0ced83cabeb261c"
 }

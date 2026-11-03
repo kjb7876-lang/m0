@@ -13198,6 +13198,81 @@
       "sha256": "76285df61fde0b4b2d314771d7676d5b89254eae3198339e1fc165e3cdcd2d6e"
     },
     {
+      "path": "assets/r275/mobs/ash-mason.webp",
+      "bytes": 141354,
+      "sha256": "176ec3c2ac8db23c949efc28114efa04183f6862593c01a765c243abe547ea19"
+    },
+    {
+      "path": "assets/r275/mobs/censer-priest.webp",
+      "bytes": 161626,
+      "sha256": "66905e1ff92e659e88d356fe8f49ab65d494b8df85e8a4d7b26288b67ddb3a3e"
+    },
+    {
+      "path": "assets/r275/mobs/clockwork-sentinel.webp",
+      "bytes": 178888,
+      "sha256": "2ae5dadb2156f6af0ae99c2c2c439f30b965e98139d5d8d6a90d87b4f1457669"
+    },
+    {
+      "path": "assets/r275/mobs/curtain-mannequin.webp",
+      "bytes": 128734,
+      "sha256": "be6b17af209529c68f7eb1fdcc124f749a3291d610d8ee4d2a28f0a33ba0058b"
+    },
+    {
+      "path": "assets/r275/mobs/ember-hound.webp",
+      "bytes": 310820,
+      "sha256": "2c670e93b3d1af9fa680e0b22565e2402ef912e1e3c5851c25ce3c476da2d632"
+    },
+    {
+      "path": "assets/r275/mobs/halberd-revenant.webp",
+      "bytes": 159316,
+      "sha256": "427d0f4a06c9f277520189a7af588e3c560931ccb9399188f47e55d4f3316529"
+    },
+    {
+      "path": "assets/r275/mobs/index.json",
+      "bytes": 9524,
+      "sha256": "34ecdce07b3d4cd75392418e874802fd76818f3ac5dd3073033258f43e555795"
+    },
+    {
+      "path": "assets/r275/mobs/oblivion-spider.webp",
+      "bytes": 281370,
+      "sha256": "b37e95c8d4189c3c4b06daa472e55791f5781aa1b58313beb7054ef02f17cf70"
+    },
+    {
+      "path": "assets/r275/mobs/root-bound-ghoul.webp",
+      "bytes": 135922,
+      "sha256": "a777f9c22367e761af2ccbdc07ded9f117097465dfa46277c6738026d7dcbd70"
+    },
+    {
+      "path": "assets/r275/mobs/signal-golem.webp",
+      "bytes": 175666,
+      "sha256": "c67c87dd741423c952a67f0495f735bfb41d5e91cabaa74683d5eb406010e07d"
+    },
+    {
+      "path": "assets/r275/mobs/superego-inquisitor.webp",
+      "bytes": 147570,
+      "sha256": "2522ce84f01207544a5e07d5c4785fa060e393be0d647b9da05125f984c4ce72"
+    },
+    {
+      "path": "assets/r275/mobs/thread-nurse.webp",
+      "bytes": 186978,
+      "sha256": "678bcc534ac736f0f9a67a7fe6c585740ccca90599353a055c6ff6c9e464a382"
+    },
+    {
+      "path": "assets/r275/mobs/twin-head-corpse.webp",
+      "bytes": 128232,
+      "sha256": "f7763f46d8727cb7c371e24ac05d6597f71a9c8c0ee8a4e5efb15abf620ac47f"
+    },
+    {
+      "path": "assets/r275/mobs/vial-collector.webp",
+      "bytes": 154020,
+      "sha256": "60f2472220caec590a5737dd9cff144172d13d326ea6c1dde2d38fe00ec7601c"
+    },
+    {
+      "path": "assets/r275/mobs/web-bound-skeleton.webp",
+      "bytes": 207680,
+      "sha256": "043c40f2853ffe33d26b19f96fdb9e99d3ab51739ac17d3c2527a1b8445b7713"
+    },
+    {
       "path": "assets/r276/props/index.json",
       "bytes": 1171,
       "sha256": "1c69538408f8a9f8d9dca5d954062924541a2bc4c4db7be11a18d5d66b9ebb12"
@@ -22029,8 +22104,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566358,
-      "sha256": "90b61d8c37ded049f280ea3ba8cecca2c678458a06c6d69e0579ae98231d9771"
+      "bytes": 6566399,
+      "sha256": "57a760f6dc82795aa679ed1fa42a3f958239d9d55c9f2690f7e673e49b48d488"
     },
     {
       "path": "intro-r140.js",
@@ -22061,6 +22136,11 @@
       "path": "mob-death-r188.js",
       "bytes": 2682,
       "sha256": "ce115235c43f83ec19d6ea993f11dd8b33bf0867df08adf98206cd785f437d95"
+    },
+    {
+      "path": "mob-fix-r275.js",
+      "bytes": 6002,
+      "sha256": "60d89420b125e418312415d33292d1a46251aab6807a6fa81419f0c077e53a98"
     },
     {
       "path": "mob-flank-r230.js",
@@ -22568,9 +22648,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4513,
-  "totalBytes": 855090249,
-  "webHTMLSha256": "90b61d8c37ded049f280ea3ba8cecca2c678458a06c6d69e0579ae98231d9771",
+  "fileCount": 4529,
+  "totalBytes": 857603992,
+  "webHTMLSha256": "57a760f6dc82795aa679ed1fa42a3f958239d9d55c9f2690f7e673e49b48d488",
   "largest": [
     {
       "path": "index.html",
