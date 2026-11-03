@@ -21104,8 +21104,8 @@
     },
     {
       "path": "bgm-classical-r195.js",
-      "bytes": 11209,
-      "sha256": "42beeda51356856e3b2600e19e0fe78970b9ac66326d35961bce9a3b7ecb1ecd"
+      "bytes": 12022,
+      "sha256": "525ca75dd1c4732a259116705bbca9fbb3ca58bf4b4127f86ff1e6e6654ff23e"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -21924,8 +21924,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566055,
-      "sha256": "d79cce4c9312eb928d515ec16b8281f1af32ee83e2cd602d216406a1ef836348"
+      "bytes": 6566100,
+      "sha256": "2d73f30b76f1b97707fa7998ecd2762f33ae578dd5e0f33eb85ba054ae830543"
     },
     {
       "path": "intro-r140.js",
@@ -22021,6 +22021,11 @@
       "path": "palette-r114-data.js",
       "bytes": 91808,
       "sha256": "2359958ca49956c52dc6e1668b83dac90363103ee8d3985ccfccf6c6956c1db3"
+    },
+    {
+      "path": "perf-groups-r266.js",
+      "bytes": 5350,
+      "sha256": "f5759ac56be91990068c0cf73b12e830d9ec4ee181e781f3b1a194e8ce4ef54a"
     },
     {
       "path": "perf-r119.js",
@@ -22399,8 +22404,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 8322,
-      "sha256": "85a27ddb8330bcb6679649f51c4753ceaddf2a9aacc3844117bd1353e0d5941d"
+      "bytes": 9568,
+      "sha256": "78a9e95589459af4867264a26cd1c0f6f02d572cdd5f10c8f454cadef0f29f30"
     },
     {
       "path": "world-environment-r81.js",
@@ -22443,9 +22448,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4488,
-  "totalBytes": 851862326,
-  "webHTMLSha256": "d79cce4c9312eb928d515ec16b8281f1af32ee83e2cd602d216406a1ef836348",
+  "fileCount": 4489,
+  "totalBytes": 851869780,
+  "webHTMLSha256": "2d73f30b76f1b97707fa7998ecd2762f33ae578dd5e0f33eb85ba054ae830543",
   "largest": [
     {
       "path": "index.html",

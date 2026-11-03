@@ -20,6 +20,9 @@
  }
  const point=(p,z)=>{const q=project(p.x,p.y);return{x:q.x,y:q.y-z*TILE*Math.sqrt(1.5)*zoom};};
  const corners=p=>[point(p.a,p.z1),point(p.b,p.z1),point(p.b,p.z0),point(p.a,p.z0)];
+ // R264: R204 유기 지형을 쓰는 지역(디테일 전용 제외)인지 — 그 지역 문틀은 어두운 바위색. 끄기: storyworld.r264.doorFrame {on:false}
+ let frameOn=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r264.doorFrame')||'null');if(s&&s.on===false)frameOn=false;}catch(_){}
+ const darkFrame=r=>{try{if(!frameOn||!r||hospital(r,{hospitalDoorFrameB3:1}))return false;const st=window.__STORYWORLD_PHASE1__?.controller?.state?.three?.__r204;/* 지금 그 지역 벽을 R204 유기 지형이 대신 그리는 중(디테일 전용 지역은 원래 벽 그대로라 원래 문틀이 맞다) */return !!(st&&st.zone===r.id&&!st.decorOnly&&!st.failed);}catch(_){return false;}};
  function polygon(ps){ctx.beginPath();ps.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();}
  function onScreen(ps){return Math.max(...ps.map(p=>p.x))>=-16&&Math.min(...ps.map(p=>p.x))<=W+16&&Math.max(...ps.map(p=>p.y))>=-16&&Math.min(...ps.map(p=>p.y))<=H+16;}
  function affinePatch(image,rect,ps){const[sx,sy,sw,sh]=rect,[a,b,,d]=ps;ctx.save();try{ctx.transform((b.x-a.x)/sw,(b.y-a.y)/sw,(d.x-a.x)/sh,(d.y-a.y)/sh,a.x,a.y);ctx.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);}finally{ctx.restore();}}
@@ -39,7 +42,7 @@
   ctx.save();try{const matrix=ctx.getTransform();ctx.setTransform(matrix.a,matrix.b,matrix.c,matrix.d,0,0);
   for(const part of g.parts){const ps=corners(part);if(!onScreen(ps)){stats.culled++;continue;}const path=part.source==='wall'?art?.path:atlas.path,plane={ax:part.a.x,ay:part.a.y,bx:part.b.x,by:part.b.y},owner={id:'r83-ward-door:'+p.id+':'+part.id,kind:'prop',x:(part.a.x+part.b.x)/2,y:(part.a.y+part.b.y)/2,alive:true,bodyPath:path,r83WardDoor:true,hospitalDoorR86:clinical,doorFaceOffsetR86:g.faceOffset,doorId:d.id,doorOpen:open,r83DoorPart:part.id,r83DoorPlane:plane,r83WallTint:part.source==='wall'?r.exploration.surface?.art?.r81Palette?.wall:undefined,groundAligned:false},paint=()=>{ctx.save();try{
    if(open&&part.source==='leaf')ctx.globalAlpha*=.88;
-   if(part.source==='wall'){if(wall&&art.wallRect)affinePatch(wall,art.wallRect,ps);else{polygon(ps);ctx.fillStyle='#687874';ctx.fill();}}
+   if(part.source==='wall'){if(darkFrame(r)){/* R264: 유기 지형(R204) 지역은 문틀을 어두운 바위색으로 — 원래 병동 벽 그림(밝은 회색)·대체색 #687874 가 검은 동굴·늪 바닥 위에서 흰 테두리처럼 떠 보였다(사용자 "문에 흰테두리가 있는문제") */polygon(ps);const top=ps[0],bot=ps[3]||ps[0],gr=ctx.createLinearGradient?ctx.createLinearGradient(top.x,top.y,bot.x,bot.y):null;if(gr){gr.addColorStop(0,'#2b2520');gr.addColorStop(1,'#16120f');ctx.fillStyle=gr;}else ctx.fillStyle='#211c18';ctx.fill();}else if(wall&&art.wallRect)affinePatch(wall,art.wallRect,ps);else{polygon(ps);ctx.fillStyle='#687874';ctx.fill();}}
    else{polygon(ps);ctx.fillStyle=clinical?'#365154':metal?'#665b3d':'#584336';ctx.fill();if(leaf&&cell)leafPatch(leaf,cell,part,ps,metal,clinical);}
    stats.planes++;
   }finally{ctx.restore();}};

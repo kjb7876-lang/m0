@@ -54,7 +54,7 @@ const fake={tracks:{a:{file:'a.ogg',title:'A',composer:'X',gain:.6},b:{file:'b.o
  const act=T.api.inspect();ok('retrying the boss resumes the boss track where it stopped (no restart from 0)',act.active?.id==='boss'&&act.stats.resumes>=1,act);
  // 대화 더킹, 설정 창 멈춤
  for(let i=0;i<20;i++)T.step();S.modal=true;S.storyScene={id:'x'};for(let i=0;i<20;i++)T.step();ok('dialogue open ducks to ~35% and keeps playing',T.api.inspect().duck<.45&&!T.api.inspect().active.paused,T.api.inspect().duck);
- S.storyScene=null;S.showSettings();T.step();ok('settings (pause) panel pauses the music',T.api.inspect().active.paused);
+ S.storyScene=null;S.showSettings();T.step();ok('settings panel keeps the music going (R265: continuous, ducked by the open window)',!T.api.inspect().active.paused);
  S.modal=false;T.step();T.step();ok('closing the panel resumes',!T.api.inspect().active.paused);
  S.settings.bgm=0;T.step();ok('BGM volume 0 pauses (existing bgm setting is the volume)',T.api.inspect().active.paused);S.settings.bgm=.5;T.step();
  // 실패한 곡 → 원래 엔진
