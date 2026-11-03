@@ -31,5 +31,6 @@ function mk(o={}){const plays=[],draws=[];let natives=0;const owners=new Map();
  ok('turning it off restores the original R62 siege',r&&r.native&&natives()===1);}
 {const {sb}=mk();const boss={id:'b5',boss:true,hp:100,maxHp:100,spawnState:'active',x:22,y:20};const B=sb.window.__STORYWORLD_BOSS_FIELDS_R62__;const a=B.prepare(boss);sb.time=13;const b2=B.prepare(boss);sb.time=16.1;const c=B.prepare(boss);
  ok('one boss casts at most once every 6 s even when the R118 cycle and the own loop overlap',a&&!b2&&c&&sb.hazards.length===12,{a,b2,c,n:sb.hazards.length});}
+ok('Codex #154: damage floor in legacy HP units, one hit per meteor, visuals scale with the effective radius',/__STORYWORLD_HEALTH_R71__\?\.legacyMaxHP\?\.\(player\)/.test(src)&&/h\.r241Meteor&&h\.damage>0&&Number\(h\.lastHit\)>-99\)\{h\.damage=0;/.test(src)&&/Number\(h\.radius\)\|\|RAD\)\/RAD/.test(src));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R241 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);

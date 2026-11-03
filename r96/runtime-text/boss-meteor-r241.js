@@ -28,7 +28,7 @@ function spots(){const pts=[{x:player.x+(Math.random()-.5)*.6,y:player.y+(Math.r
  while(pts.length<N&&guard++<220){const a=Math.random()*Math.PI*2,r=1.8+Math.random()*3.8,x=player.x+Math.cos(a)*r,y=player.y+Math.sin(a)*r;
   try{if(typeof blocked==='function'&&blocked(x,y,.25,room))continue;}catch(_){continue;}if(pts.some(q=>Math.hypot(q.x-x,q.y-y)<1.6))continue;pts.push({x,y});}
  return pts;}
-function cast(e){if(!on||!live(e)||typeof hazards==='undefined'||!Array.isArray(hazards))return null;const lc=lastCast.get(e);if(lc!=null&&T()-lc<GAP)return null;/* R118 순환과 자체 순환이 겹쳐도 보스마다 6초에 한 번 */lastCast.set(e,T());const P=pal(e),pts=spots(),mh=typeof maxHP==='function'?maxHP():260,dmg=Math.max((Number(e.damage)||20)*.9,mh*.06);
+function cast(e){if(!on||!live(e)||typeof hazards==='undefined'||!Array.isArray(hazards))return null;const lc=lastCast.get(e);if(lc!=null&&T()-lc<GAP)return null;/* R118 순환과 자체 순환이 겹쳐도 보스마다 6초에 한 번 */lastCast.set(e,T());const P=pal(e),pts=spots(),mh=(()=>{try{const v=window.__STORYWORLD_HEALTH_R71__?.legacyMaxHP?.(player);if(Number.isFinite(v)&&v>0)return v;}catch(_){}return typeof maxHP==='function'?maxHP():260;})()/* Codex #154: 엔진 hurt 가 777 기준으로 다시 맞추므로 바탕 최대 체력 단위로 잰다 */,dmg=Math.max((Number(e.damage)||20)*.9,mh*.06);
  const id='r241-'+(++stats.casts);
  pts.forEach((p,k)=>{const warn=1.25+k*.12+Math.random()*.1,h={id:(typeof uid==='number'?++uid:Date.now()+k),type:'meteor-r241'/* 'field' 이면 R98 바닥 고리·모이는 빛줄기, R105 보스 장판 그림이 덧그려진다(R241 스크린샷) — 피해는 엔진이 type 과 상관없이 반지름으로 준다 */,owner:e.id,x:p.x,y:p.y,radius:RAD,age:0,warning:warn,life:warn+.45,damage:dmg,lastHit:-99,r241Meteor:{cast:id,k,pal:P,seed:Math.random()*6.28,boss:e.name||''}};
   hazards.push(h);stats.meteors++;
@@ -40,7 +40,7 @@ function cast(e){if(!on||!live(e)||typeof hazards==='undefined'||!Array.isArray(
 const scope=(o,fn)=>{if(typeof ctx!=='undefined'&&typeof ctx.scope==='function')ctx.scope(o,fn);else fn();};
 function drawMeteor(h){scope({id:'r241:'+h.id,kind:'effect',x:h.x,y:h.y},()=>drawMeteor0(h));}
 function drawMeteor0(h){const S0=SPR();if(!S0)return;/* overHero: 영웅 가림 흐리기·프레임 예산 건너뛰기에서 빼야 보인다(R169 와 같음) */const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w,h,{overHero:true,...o})};
- if(typeof project!=='function')return;const m=h.r241Meteor,q=project(h.x,h.y),H=typeof actorHeight==='function'?actorHeight():60;
+ if(typeof project!=='function')return;const m=h.r241Meteor,q=project(h.x,h.y),H=(typeof actorHeight==='function'?actorHeight():60)*Math.max(.5,(Number(h.radius)||RAD)/RAD)/* Codex #154: 광폭화로 반지름이 커지면 예고·충돌 그림도 같이 */;
  // 어두운 바닥에서도 보이게: 덧셈(빛) 그림은 그 보스 발광색 → 흰빛 쪽으로 밝힌 색, 그림자·연기는 주색을 어둡게
  const lit=c=>c.map(v=>Math.min(255,Math.round(v+(255-v)*.55))),FIRE={a:m.pal.main.b,b:lit(m.pal.main.b)},EMB={a:m.pal.sub.b,b:lit(m.pal.sub.b)},shade={a:dark(m.pal.main.a),b:dark(m.pal.main.b)},SMK={a:dark(m.pal.sub.a),b:m.pal.sub.a};
  stats.drawn++;
@@ -63,7 +63,7 @@ function drawMeteor0(h){const S0=SPR();if(!S0)return;/* overHero: 영웅 가림 
 function install(){
  const B=window.__STORYWORLD_BOSS_FIELDS_R62__;
  if(B&&!B.__r241){window.__STORYWORLD_BOSS_FIELDS_R62__=Object.freeze({...B,__r241:true,prepare(e,...a){if(!on||!solo())return B.prepare(e,...a);return cast(e);}});}
- if(typeof tick==='function'&&!tickWrapped){tickWrapped=true;const base=tick;tick=function(dt,...a){const r=base.call(this,dt,...a);try{loop();}catch(err){fail(err);}return r;};}
+ if(typeof tick==='function'&&!tickWrapped){tickWrapped=true;const base=tick;tick=function(dt,...a){const r=base.call(this,dt,...a);try{loop();/* Codex #154: 운석 하나는 한 번만 친다(엔진은 0.35초마다 다시 닿음을 본다 — 남은 불길은 그림만) */if(typeof hazards!=='undefined')for(const h of hazards)if(h&&h.r241Meteor&&h.damage>0&&Number(h.lastHit)>-99){h.damage=0;stats.singleHit=(stats.singleHit||0)+1;}}catch(err){fail(err);}return r;};}
  if(typeof drawHazard==='function'&&!drawWrapped){drawWrapped=true;const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r241Meteor)return;/* 그림은 효과 단계에서(아래) */return base.apply(this,[h,...a]);};}
  if(typeof drawEffect==='function'&&!effWrapped){effWrapped=true;const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r241-fx'){try{for(const h of (typeof hazards!=='undefined'?hazards:[]))if(h&&h.r241Meteor)drawMeteor(h);}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}}
 function loop(){if(typeof hazards!=='undefined'&&hazards.some(h=>h&&h.r241Meteor))armSent();if(!on||!solo()||typeof room!=='object'||!room?.engaged||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading))return;const B=window.__STORYWORLD_BOSS_FIELDS_R62__,t=T();

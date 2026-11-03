@@ -15,5 +15,6 @@ ok('walk stride recorded from the art (one step ≈ 43.5 px, 8 frames = two step
 ok('attack visual skips the windup to just before contact and fits the attack interval (judgement unchanged)',/contactStart/.test(src)&&/attackCD/.test(src)&&!/hitEnemy|basicAttack=/.test(src));
 ok('old R143/R119 hwando sheets are not drawn or preloaded while R242 is active (no duplicate textures)',/hero==='hwando'&&window\.__STORYWORLD_HWANDO_R242__\?\.active\?\.\(\)\)return r;/.test(C('attack-anim-r143.js'))&&/hero==='hwando'&&window\.__STORYWORLD_HWANDO_R242__\?\.active\?\.\(\)\)return r;/.test(C('visual-r119.js')));
 ok('can be turned off (storyworld.r242.hwando {on:false}) and only touches the solo hero hwando alive',/storyworld\.r242\.hwando/.test(src)&&/solo\(\)&&player\?\.hero==='hwando'&&player\.hp>0/.test(src));
+{const hs=fs.readFileSync(path.join(R,'client-source','hwando-r242.js'),'utf8');ok('Codex #156: body pick only takes hero body artwork (not barrier/aura effects)',/function pickBody\(rec,st\)\{[^}]*BODY_ART\.test\(String\(c\.sourcePath\|\|c\.image\?\.src\|\|''\)\)/.test(hs));}
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R242 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);

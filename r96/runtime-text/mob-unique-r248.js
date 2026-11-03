@@ -34,8 +34,13 @@ const SHEETS=new Set(Object.values(DATA.sheets||{}).map(s=>DATA.dir+s.file));
 const asked=new Map();
 function image(p){try{const row=typeof readyImage==='function'?readyImage(p):null;if(row?.image)return row.image;const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
 // ---- 그리기 ---------------------------------------------------------------------------------
-let hiding=null;
-if(typeof readyImage==='function'){const base=readyImage;readyImage=function(p,...a){if(hiding&&typeof p==='string'&&!SHEETS.has(p))return null;return base.call(this,p,...a);};}
+/* 엔진 그리기는 그대로 돌린다(그림 칸 고르기·체력바·그림자·검사용 rc146BodyFrame 기록 포함). 그동안 그 몹의 몸 그림(프레임 묶음·경로)만 칠하지 않는다. */
+function bodyPaths(e){const out=new Set();try{const fs=window.__STORYWORLD_STORY_COMBAT_R54__?.frameSet?.(e);if(fs)for(const v of Object.values(fs))if(v?.path)out.add(v.path);}catch(_){}
+ try{for(const v of Object.values(e.profile?.frames||{}))if(v?.path)out.add(v.path);}catch(_){}if(e.path)out.add(e.path);return out;}
+const srcPath=im=>{try{const s=String(im?.__path||im?.src||'');if(!s)return '';const i=s.indexOf('/assets/');return i>=0?s.slice(i+1):s.replace(/^https?:\/\/[^/]+\/(m0\/)?/,'');}catch(_){return '';}};
+function withoutBody(e,f){const c=typeof ctx!=='undefined'?ctx:null;if(!c||typeof c.drawImage!=='function')return f();const paths=bodyPaths(e),od=c.drawImage;
+ c.drawImage=function(im,...a){try{const p=srcPath(im),lp=e.rc146BodyFrame?.path;if(p&&!SHEETS.has(p)&&(paths.has(p)||p===lp||[...paths].some(x=>p.endsWith(x))||(lp&&p.endsWith(lp)))){stats.hiddenBody=(stats.hiddenBody||0)+1;return;}}catch(_){}return od.apply(this,[im,...a]);};
+ try{return f();}finally{c.drawImage=od;}}
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 function shapeOf(e){const sh=e.attack?.shape154||e.combatProfile?.attackShape||{};return{w:e.attack?.castWindup150??(sh.windup??.45),a:sh.active??.15,r:sh.recovery??.35,range:sh.range??1.2};}
 function attackFrame(e){const A=e.attack;if(!A||!Number.isFinite(A.elapsed))return -1;const S=shapeOf(e),t=A.elapsed;if(t<S.w)return t<S.w*.5?8:8;if(t<S.w+S.a)return 9;if(t<S.w+S.a+S.r*.5)return 10;return 11;}
@@ -52,7 +57,7 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let s=null,im=null;
  try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle){s=sheetOf(e);if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
- hiding=e;let r;try{r=base.apply(this,[e,...a]);}finally{hiding=null;}
+ const r=withoutBody(e,()=>base.apply(this,[e,...a]));
  try{const f=()=>drawOwn(e,s,im);if(typeof ctx.scope==='function')ctx.scope({id:'r248:mob:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return r;};}
 // ---- 공격 이펙트·상태이상 ------------------------------------------------------------------------
 const FXK={quad:'bite',serpent:'bite',spider:'web',slime:'acid',mech:'shock',drone:'shock',wraith:'chill',fog:'miasma',crystal:'drop',cross:'drop',golem:'drop',plant:'thorns',puppet:'thread',winged:'dive',
