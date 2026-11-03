@@ -167,9 +167,10 @@ const wingHold=new WeakMap();
 function wingView(p){const d=wingSector(p),v=d[0]==='n'?'back':d==='e'||d==='w'?'side':'front',st=wingHold.get(p);
  if(st&&st.v!==v&&time-st.at<.12)return st;const ns=st&&st.v===v?{...st,flip:d==='e'}:{v,flip:d==='e',at:time};wingHold.set(p,ns);return ns;}
 function wingsView(p,layer,x,fy,h,F,k,seed){const s=SPR(),wv=wingView(p);if(!s)return false;if((wv.v==='back')!==(layer==='front'))return true;
- const name='wing'+wv.v+(p.moving||p.attackAnim>0||p.skillAnim>0||p.ego>0||p.samong>0?'':'-f');if(!s.ready(name,F))return false;
- const W=h*(wv.v==='side'?1.15:1.35)*(1+.35*clamp(k,0,1)),flap=Math.sin(time*(p.moving?4:2.4)+seed)*(wv.v==='side'?.08:.05),sy=fy-h*.64+Math.sin(time*2.4+seed)*h*.015;
- const asp=name.startsWith('wingside')?.78:.74,o={angle:flap*(wv.flip?-1:1),alpha:wv.v==='back'?.82:.9,blend:'source-over',flip:wv.flip};
+ const pose=skillPose(p);/* R269: 미카엘라 스킬마다 날개 자세(펼침·크기·퍼덕임·기울기) */
+ const name='wing'+wv.v+(pose?(pose.open?'':'-f'):p.moving||p.attackAnim>0||p.skillAnim>0||p.ego>0||p.samong>0?'':'-f');if(!s.ready(name,F))return false;
+ const W=h*(wv.v==='side'?1.15:1.35)*(1+.35*clamp(k,0,1))*(pose?pose.scale:1),flap=pose?pose.flap:Math.sin(time*(p.moving?4:2.4)+seed)*(wv.v==='side'?.08:.05),sy=fy-h*.64+Math.sin(time*2.4+seed)*h*.015;
+ const asp=name.startsWith('wingside')?.78:.74,o={angle:(flap+(pose?pose.tilt:0))*(wv.flip?-1:1),alpha:pose?1:wv.v==='back'?.82:.9,blend:'source-over',flip:wv.flip};
  const dx=wv.v==='side'?(wv.flip?-1:1)*h*.06:0;s.draw(name,F,x+dx,sy,W,W*asp,o);
  if(k>.3)for(let i=0;i<2;i++){const ph=(time*.35+i/2+seed)%1,side=wv.v==='side'?(wv.flip?-1:1):i%2?1:-1;s.draw('feather',F,x+side*h*(.3+.45*ph),sy+h*(.2+.9*ph),h*.07,h*.21,{alpha:.6*Math.sin(Math.PI*ph),angle:Math.sin(time*2+i)*.7});}
  return true;}
@@ -199,14 +200,15 @@ function pillar(x,fy,h,F,t){const s=SPR(),k=1-t;if(s&&s.draw('pillar',F,x,fy,h*(
 // form faintly with fewer pieces, 3 most of it, 4 (and EGO/사몽) all of it.
 // R111: 7단계 — 2 희미하게 일부, 3·4·5·6 조금씩 더 보이고, 7(과 EGO/사몽) 전부.
 const FORM7=[null,null,{alpha:.4,cut:3},{alpha:.55,cut:2},{alpha:.7,cut:2},{alpha:.8,cut:1},{alpha:.9,cut:1},{alpha:1,cut:0}];
-function formLevel(p,t){if(p.ego>0||p.samong>0)return{on:true,alpha:1,cut:0};const f=FORM7[clamp(t,0,7)];return f?{on:true,...f}:{on:false,alpha:0,cut:9};}
+const skillPose=p=>{try{return window.__STORYWORLD_HERO_SKILLS_R269__?.wingPose?.(p)||null;}catch(_){return null;}};
+function formLevel(p,t){if(p.ego>0||p.samong>0||skillPose(p))return{on:true,alpha:1,cut:0};const f=FORM7[clamp(t,0,7)];return f?{on:true,...f}:{on:false,alpha:0,cut:9};}
 function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100,awake=p.ego>0||p.samong>0;
  scope({id:'r101:aura-back:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{
   groundGlow(q,h,F,k);if(t>=1||awake)field(q.x,fy,h,F,k);
   if(L.on){ctx.globalAlpha*=L.alpha;
    if(F.form==='runes'&&(t>=4||awake))runeRing(q,h,F,Math.max(k,.5+.08*Math.max(0,t-3)));
    if(F.form==='flame'||F.form==='dark'||awake)flames(q.x,fy,h,F,F.form==='dark'?'dark':'bright',k*(F.form==='flame'||F.form==='dark'?1:.8),seed);
-   if(F.form==='angel'&&(t>=5||awake)||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
+   if(F.form==='angel'&&(t>=5||awake||skillPose(p))||p.samong>0)wings(q.x,fy,h,F,k,seed,p);
    // R107: no idle orbiting crescent blades for 환도 (looked odd); the iai cast carries the sword light now.
    if(F.form==='blade'&&BLADE_ORBIT)blades(q.x,fy,h,F,k,seed,'back',4-L.cut);
    if(F.form==='arcs'){const S4=SPR();if(S4)S4.draw('circuit',F,q.x,q.y,h*(1+.06*t),h*(1+.06*t),{squash:.5,angle:time*.5,alpha:.18+.08*t+(awake?.2:0)});}
@@ -215,7 +217,7 @@ function auraBack(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),
 function auraFront(p){const F=heroOf(p),t=tierOf(p),k=heat(p,t),L=formLevel(p,t),q=project(p.x,p.y),h=actorHeight(),lift=clamp(finite(p.visualLiftPx),0,h*.65),fy=q.y-lift,seed=hash(p.hero||'hwando')%628/100;
  if(!L.on)return;
  scope({id:'r101:aura-front:'+String(p.coopIdR62||p.id||'hero'),kind:'effect',x:p.x,y:p.y,groundAligned:false,r101:true},()=>{ctx.save();try{ctx.globalAlpha*=L.alpha;
-  if(F.form==='angel'&&(t>=5||p.ego>0||p.samong>0)||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
+  if(F.form==='angel'&&(t>=5||p.ego>0||p.samong>0||skillPose(p))||p.samong>0)wingsView(p,'front',q.x,fy,h,F,k,seed);
   if(F.form==='angel'||p.samong>0)halo(q.x,fy,h,F,k);
   // R111: 네온의 가는 번개 실선(실오라)은 뺐다. 대신 발밑 회로 문양이 단계에 따라 진해진다(뒤쪽 그리기).
   if(F.form==='petals')petals(p,q.x,fy,h,F,k,seed);

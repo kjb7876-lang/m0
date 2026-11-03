@@ -281,6 +281,10 @@ jobs:
         run: node r96/qa/r256/r256-cpu-check.cjs
       - name: R258 wider pre-boss gathering room CPU check
         run: node r96/qa/r258/r258-cpu-check.cjs
+      - name: R269 hero skill effects
+        run: node r96/qa/r269/r269-cpu-check.cjs
+      - name: R267 roof height + R268 mob gaze
+        run: node r96/qa/r267/r267-cpu-check.cjs
       - name: R264-R266 door frame, continuous BGM, hospital draw groups, actors over props CPU check
         run: node r96/qa/r266/r266-cpu-check.cjs
       - name: R263 hero select shortcut and showcase CPU check

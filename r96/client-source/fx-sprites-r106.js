@@ -72,9 +72,12 @@ function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
 // ---- drawing ------------------------------------------------------------------------------
 // Draws sprite `name` with its pivot at (x,y), size w×h px. o: angle (after squash), squash
 // (y scale applied before the rotation, for ground-plane art), flip, alpha, blend, frame, pivot.
+const FILT=[];
 function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)return false;
  if(!(Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(w)&&Number.isFinite(h))||Math.abs(w)<.5||Math.abs(h)<.5)return true;
  const alpha=o.alpha??1;if(!(alpha>.004))return true;
+ /* R269: 다른 오버레이가 특정 그림을 빼도록(미카엘라 스킬의 조잡한 'wing' 등) — 거르개가 false 면 그리지 않는다 */
+ if(FILT.length)for(const f of FILT){try{if(f(name,o)===false){stats.filtered=(stats.filtered||0)+1;return true;}}catch(_){}}
  if(FB>0&&!o.overHero){const fb=crowd>25?Math.round(FB*.73):FB;if(frameDraws>=fb&&(alpha<.55||frameDraws>=fb*1.7)){stats.budgetSkips++;return true;}}
  const m=META[name];if(!m)return false;const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
  const n=m[3],fr=n>1?((Math.floor(o.frame||0)%n)+n)%n:0,rows=ROWS.has(name),fw=rows?c.width:c.width/n,fh=rows?c.height/n:c.height,sx=rows?0:fr*fw,sy=rows?fr*fh:0,piv=o.pivot||m[2];
@@ -101,6 +104,6 @@ function pump(){let n=lowFx()?1:2;while(queue.length&&n>0){const[name,P]=queue[0
   if(tinted(name,P,true)){stats.warmed++;queue.shift();}else queue.push(queue.shift());n--;}}
 if(typeof tick==='function'){const tickBase=tick;tick=function(dt){const r=tickBase.call(this,dt);try{if(enabled&&queue.length&&!(typeof loading!=='undefined'&&loading))pump();}catch(e){fail(e);}return r;};}
 
-window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
+window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({addFilter:f=>{if(typeof f==='function'&&!FILT.includes(f))FILT.push(f);return FILT.length;},revision:'R106-fx-sprites-1',base:BASE,names:NAMES,meta:META,on:()=>enabled,setEnabled,pal,parseColour,draw,along,poly,warm,ready:(n,F)=>ready(n,pal(F)),setHeroVeil:on=>(veilOn=!!on),
  inspect:()=>({revision:'R106-fx-sprites-1',enabled,tints:tints.size,queue:queue.length,...stats,lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false})});
 })();
