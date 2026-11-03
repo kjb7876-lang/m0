@@ -65,7 +65,7 @@ function drawFrag(p){const q=P(p.x,p.y),h=H(),bob=Math.sin(T()*3+p.x)*h*.05,S=SP
 // ---- 보스 패턴 그림 ------------------------------------------------------------------------------
 const fxList=[];const SENT={type:'r162-samong',x:0,y:0,age:0,life:Infinity,r162Sentinel:true};
 function pattern(kind,data){if(!prefs.patterns)return;const e={kind,t0:T(),...data,seed:Math.random()*100};
- const X=PFX();if(X){e.pfx=true;try{if(kind==='tentacles')data.pts.forEach((p,k)=>{if(k%2===0||p.ring===0)X.play('tendrils-blood',p.x,p.y,{delay:p.warn-.12,rate:2.2,k:.62+.12*p.ring,flip:k%3===0});});
+ const X=PFX();if(X){e.pfx=true;try{if(kind==='tentacles')data.pts.forEach((p,k)=>{X.play('tendrils-blood',p.x,p.y,{delay:p.warn-.12,rate:2.2,k:p.ring===0?1.35:1.05-.1*p.ring,flip:k%3===0});});/* R250: 영웅 쪽에 모인 16개 모두 크게 */
   else if(kind==='meteor')data.pts.forEach(p=>X.play('meteor',p.x,p.y,{delay:Math.max(0,p.warn-.67),k:1.15}));
   else if(kind==='clones')data.pts.forEach(p=>X.play('dark-explosion-blood',p.ex,p.ey,{delay:(data.warn||1)+.3,rate:1.6,k:.7}));}catch(err){fail(err);}}e.life=kind==='clones'?1.6:kind==='meteor'?Math.max(...data.pts.map(p=>p.warn))+.9:Math.max(...data.pts.map(p=>p.warn))+1.3;fxList.push(e);if(fxList.length>8)fxList.shift();stats.patterns++;arm();}
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}

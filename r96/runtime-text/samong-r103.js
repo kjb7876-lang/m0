@@ -306,7 +306,7 @@
   if(kind==='meteor'){const vx=player.moveVX150||0,vy=player.moveVY150||0,pts=[];for(let k=0;k<6;k++){const px=player.x+vx*.35+(Math.random()*2-1)*3.2,py=player.y+vy*.35+(Math.random()*2-1)*3.2,w=1.2+k*.28;pts.push({x:px,y:py,warn:w});
     if(blocked(px,py,.1,room))continue;hazards.push({id:++uid,type:'field',owner:b.id,x:px,y:py,radius:1.7,age:0,warning:w,life:w+.55,asset:VFX.burst,damage:dmg*1.4,lastHit:-99,samongPattern:'meteor'});}
    try{play?.pattern?.('meteor',{boss:b,pts});}catch(_){}return 6.6;}
-  if(kind==='tentacles'){const pts=[];[[1.3,6],[2.7,12],[4.1,18]].forEach(([R,n],ring)=>{for(let k=0;k<n;k++){const a=k*Math.PI*2/n+ring*.3,px=player.x+Math.cos(a)*R,py=player.y+Math.sin(a)*R,w=.8+ring*.38;pts.push({x:px,y:py,warn:w,ring});field(px,py,.72,w,.95,VFX.mark);}});
+  if(kind==='tentacles'){const pts=[];/* R250(사용자 2026-11-03 "모든 촉수공격들이 영웅을 타깃으로해서 영웅이있는곳에 나와야해"): 예전엔 영웅 둘레 1.3·2.7·4.1칸 세 고리(36개)라 바깥 고리가 적들 사이에서 솟았다 → 영웅 발밑 하나 + 1.1·2.1칸 두 고리(16개)로 모은다 */[[0,1],[1.1,6],[2.1,9]].forEach(([R,n],ring)=>{for(let k=0;k<n;k++){const a=k*Math.PI*2/n+ring*.3,px=player.x+Math.cos(a)*R,py=player.y+Math.sin(a)*R,w=.75+ring*.35;pts.push({x:px,y:py,warn:w,ring});field(px,py,.72,w,.95,VFX.mark);}});
    try{play?.pattern?.('tentacles',{boss:b,pts});}catch(_){}return 6.0;}
   return 0;}
  function fxPattern(kind,x,y){try{window.__STORYWORLD_HERO_FX_R103__?.pattern?.(kind,x,y,{hostile:true});}catch(e){fail(e);}}
