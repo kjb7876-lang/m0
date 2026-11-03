@@ -197,7 +197,9 @@
    if(z.kind==='combat'){const g=z.goal||{},ng={kills:g.kills===666?666:66};if(g.clues)ng.clues=true;if(g.reach)ng.reach=true;
     z={...z,goal:ng,r162Hold:g.hold||undefined};delete z.hazards;delete z.noMobs;if((z.clues||[]).length)z.r162Frag=true;
     if(ng.kills===666&&!hasB){z.mode='B';hasB=true;}}
-   if(z.kind==='confront'&&z.solve?.hold){const sv={...z.solve};delete sv.hold;z={...z,solve:sv};}
+   /* R238: 진술이 없는 대면(S04-11 13층 후원자 — '이길 수 없는 대면 · 버티면 아래로 떨어집니다')은 버티기가 유일한 끝이라 남긴다.
+      지우면 끝낼 길이 없어 37분 멈췄다(실플레이 samong222). 진술이 있는 대면만 버티기를 뺀다. */
+   if(z.kind==='confront'&&z.solve?.hold&&(z.solve.statements||[]).length){const sv={...z.solve};delete sv.hold;z={...z,solve:sv};}
    out.push(z);}
   let at=-1;out.forEach((z,i)=>{if(z.kind==='confront')at=i;});if(at<0)at=out.length;
   const ref=out.find(z=>z.kind==='combat')||out[0]||{};
