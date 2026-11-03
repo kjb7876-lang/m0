@@ -47,7 +47,7 @@ c=world();run(c,'auto=false;guide=false;room.engaged=true');M().set(false);ok(Ma
 // 빌드 연결: 런타임 사본·스크립트 순서·공개 검증 목록·CI.
 {const R=path.join(__dirname,'../..'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),idx=RT('index.html');
  ok(RT('manual-bonus-r274.js')===src,'runtime copy matches');
- ok(/hwando-r271\.js"><\/script><script src="\.\/manual-bonus-r274\.js"><\/script>/.test(idx)&&idx.indexOf('manual-bonus-r274.js')<idx.indexOf('combat-r118.js'),'loads after hwando-r271, before combat-r118');
+ ok(/hwando-r271\.js"><\/script>(<script src="\.\/hwando-r277\.js"><\/script>)?<script src="\.\/manual-bonus-r274\.js"><\/script>/.test(idx)&&idx.indexOf('manual-bonus-r274.js')<idx.indexOf('combat-r118.js'),'loads after hwando-r271, before combat-r118');
  ok(/'manual-bonus-r274\.js'/.test(fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8')),'in public verify list');
  ok(/r96\/qa\/r274\/r274-cpu-check\.cjs/.test(fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8')),'in CI');}
 console.log(JSON.stringify({ok:true,checks:n,revision:M().revision}));
