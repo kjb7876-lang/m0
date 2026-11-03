@@ -1,0 +1,1776 @@
+{
+ "storyNames": 203,
+ "samongNames": 64,
+ "reassigned": 100,
+ "storyNameList": [
+  "뿌리의 문지기",
+  "악마화 나무의 침식 근위",
+  "뿌리에 묶인 근위의 기억",
+  "뿌리 추적자",
+  "망각의 거미",
+  "보랏빛 알집지기",
+  "거미줄에 묶인 수호병",
+  "보라검천사",
+  "재 나방",
+  "늪의 염소머리 악마",
+  "늪에서 되살아난 전우",
+  "수렁 주문사",
+  "진흙등 거미",
+  "늪의 뿔악마 군주",
+  "쓰러진 수호병",
+  "보라검 추격천사",
+  "피냄새 추적자",
+  "기억 운반거미",
+  "핏빛 수호로 추격자",
+  "되살아난 방패동료",
+  "이름 잃은 전우",
+  "피로 꿰맨 전령",
+  "보라검 부활자",
+  "첫 동료의 악마잔영",
+  "소환진 순례악마",
+  "검은기둥 주문사",
+  "검은기둥 가고일 수호자",
+  "마지막 길의 호위병",
+  "숨이 끊긴 전령의 그림자",
+  "지옥문 파수악마",
+  "검은기둥 화염술사",
+  "소환진 타락천사",
+  "소환진 검은기둥",
+  "발록 · 지옥의 문지기",
+  "백의 구속자",
+  "복도 비명잔영",
+  "격리실 감염 의료인",
+  "안정화 집행체",
+  "백의 안정화 감독",
+  "소독등 타락천사",
+  "병원 심부의 집도의",
+  "주사실 감시환각",
+  "갈망의 약병핵",
+  "유리 망령",
+  "부정의 잔영",
+  "오만의 흰 가면",
+  "갈망의 도시짐승",
+  "중독의 폐허핵",
+  "오만의 폐허핵",
+  "거짓천국 근위천사",
+  "치료거부의 가면",
+  "초자아 잠식체",
+  "초천사의 웃는 가면",
+  "루시퍼 · 가면 벗은 초천사",
+  "일흔두 번째 인장 잔류체",
+  "검은 실의 외부 신호",
+  "이름 없던 공포",
+  "교만의 잔향 · 제72문",
+  "곰팡이와 오물 봉투",
+  "등에 붙은 쓰레기더미",
+  "미뤄 둔 시간의 형상",
+  "나태의 껍데기 파수",
+  "나태에 잠식된 남자",
+  "찢어진 사진의 망령",
+  "긴 뱀의 그림자",
+  "칼날과 유리 조각",
+  "금이 간 비교잔영",
+  "호텔 부매니저 · 레비아탄",
+  "버려진 최고급 식재료",
+  "살아 있는 거대한 위장",
+  "끓어오르는 검은 소화액",
+  "폐기주방 감독",
+  "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+  "얼굴 없는 남자의 박수",
+  "붉은 하이힐 칼날",
+  "공중을 가르는 립스틱 탄환",
+  "심장빛 무대감독",
+  "붉은 하이힐의 서윤",
+  "칼날이 된 지폐",
+  "박제된 여우의 악마",
+  "모든 면이 뒷면인 동전",
+  "금고 장부감시자",
+  "회장에게 고용된 총지배인 · 맘몬",
+  "고슴도치 가시 사탕",
+  "눈보라 속 여우 악마",
+  "낡은 장난감 요요",
+  "겨울숲 가시파수",
+  "소년이 된 총지배인 · 맘몬",
+  "불길 속의 늑대",
+  "불길 속의 용",
+  "불길 속의 곰",
+  "호텔 화염기사",
+  "불을 지른 청소부 · 사탄",
+  "전극을 두른 좀비 수호기사",
+  "창처럼 날아오는 역십자가",
+  "육망성의 흑마술 실험체",
+  "역십자가 시체경호체",
+  "백색 정장의 호텔 그룹 회장",
+  "강철 턱의 사이보그 개",
+  "인간의 뇌를 닮은 투명 연산 장치",
+  "설원 아래의 기계 다리",
+  "생체부트로더 연산핵",
+  "사이보그 회장 · 생체 부트로더",
+  "태엽 수집자",
+  "전쟁기억 정찰드론",
+  "폭격기억 사이보그 사냥개",
+  "참호 공명기사",
+  "제4단계 전쟁관리자",
+  "가짜 자비 수집가",
+  "복종 봉인구",
+  "감옥 공명기사",
+  "제8단계 자비 교정관",
+  "첫 기억 청람잔영",
+  "기억 공백 망령",
+  "문턱 관측거미",
+  "제12단계 기억 검열기",
+  "학대기록 공허체",
+  "관리자 추적견",
+  "역전기록 수집가",
+  "제14단계 역전 관리자",
+  "기억이주 연결자",
+  "중앙이주 공명기사",
+  "입양기억 청람잔영",
+  "제17단계 중앙이주 코어",
+  "이동문 청람잔영",
+  "이동문 공허잔영",
+  "최종문 공명기사",
+  "기억의 문 수호 프레임",
+  "컨트롤러 · 기억의 문",
+  "중립초원 슬라임",
+  "중립초원 늑대",
+  "장미이슬 슬라임",
+  "숲 고블린",
+  "피리 고블린",
+  "고블린 추장",
+  "타락천사 기사",
+  "포구 검은 안개",
+  "귀비탕 공명 안개핵",
+  "검은 안개 심장 · 불면의 기억",
+  "불면귀",
+  "주민에게서 떨어진 검은 안개",
+  "불면귀의 안개 잔영",
+  "최초명령 훈련파동",
+  "최초명령 코어 오염체",
+  "시간수문장",
+  "상위수문장",
+  "휴식 수확관 · 과로의 수문장",
+  "대수문장",
+  "망각 묘지기 · 삭제된 선택",
+  "아르벨리아를 묶은 변조 명령",
+  "세이렌 모르",
+  "시간핵의 명령 파동",
+  "시간핵의 명령 잔류",
+  "성벽 침식 봉인병",
+  "악몽 정찰체",
+  "의존 신호 포식자",
+  "붕괴선 파수병",
+  "기억절제 연결자",
+  "무명 검흔",
+  "코어 운반 집행자",
+  "EGO 탈취 연결자",
+  "환수검 모조체",
+  "백은 없는 그림자",
+  "EGO 강탈 악몽왕",
+  "파란불 역주행 목격자",
+  "빗속 횡단보도의 기억 잔향",
+  "끊어진 통화의 인과 잔향",
+  "공실장부 당직감사",
+  "지워진 CCTV 기록의 잔향",
+  "새빛호텔 화재 기록의 잔향",
+  "공실 표기 잔재",
+  "제출되지 못한 문장",
+  "은폐기록 연결체",
+  "진술 봉쇄 인과핵",
+  "옥상 인과보관인",
+  "파란불",
+  "옥상으로 돌아온 기억 잔향",
+  "반복된 추락의 인과 잔향",
+  "흑장미 눈가린 신도",
+  "흑장미 귀막은 신도",
+  "세뇌 신호 점액체",
+  "칩 제단 방화벽",
+  "신경 케이블 포식체",
+  "합일 주파수 결정",
+  "과열 시냅스 점액체",
+  "네트워크 합창체",
+  "ID 배양 점액체",
+  "생체기계 악몽",
+  "본능 추출 결정",
+  "ID 생체조 관리자",
+  "SUPER EGO 판결인장",
+  "기계재판 연결자",
+  "죄책감 압축결정",
+  "기계재판 집행핵",
+  "EGO 구속 연결자",
+  "SUPER EGO 절개결정",
+  "ID 잔류 점액체",
+  "이단의목사 한리안",
+  "이단의목사 백이온",
+  "소환좌 칩 수호체",
+  "아마겟돈 계산결정",
+  "적그리스도 배양좌",
+  "교만의 사이보그 교주"
+ ],
+ "rows": [
+  {
+   "id": "m001",
+   "key": "뿌리에 묶인 근위의 기억",
+   "layer": "STORY",
+   "zones": [
+    "dist00"
+   ],
+   "major": false,
+   "why": [
+    "「악마화 나무의 침식 근위」 그림 root-bound-ghoul.webp"
+   ]
+  },
+  {
+   "id": "m002",
+   "key": "재 나방",
+   "layer": "STORY",
+   "zones": [
+    "dist01"
+   ],
+   "major": false,
+   "why": [
+    "「뿌리 추적자」 그림 monsters.png"
+   ]
+  },
+  {
+   "id": "m003",
+   "key": "진흙등 거미",
+   "layer": "STORY",
+   "zones": [
+    "dist02"
+   ],
+   "major": false,
+   "why": [
+    "「보랏빛 알집지기」 그림 M002-move.png"
+   ]
+  },
+  {
+   "id": "m004",
+   "key": "보라검 추격천사",
+   "layer": "STORY",
+   "zones": [
+    "dist03",
+    "ep1a09b"
+   ],
+   "major": false,
+   "why": [
+    "「늪에서 되살아난 전우」 그림 corrupted_guardian.webp"
+   ]
+  },
+  {
+   "id": "m005",
+   "key": "기억 운반거미",
+   "layer": "STORY",
+   "zones": [
+    "dist03",
+    "ep1a09b"
+   ],
+   "major": false,
+   "why": [
+    "「보랏빛 알집지기」 그림 nightmare_spider.webp",
+    "「보랏빛 알집지기」 그림 M002-move.png"
+   ]
+  },
+  {
+   "id": "m006",
+   "key": "되살아난 방패동료",
+   "layer": "STORY",
+   "zones": [
+    "dist04"
+   ],
+   "major": false,
+   "why": [
+    "「늪에서 되살아난 전우」 그림 corrupted_guardian.webp"
+   ]
+  },
+  {
+   "id": "m007",
+   "key": "이름 잃은 전우",
+   "layer": "STORY",
+   "zones": [
+    "dist04"
+   ],
+   "major": false,
+   "why": [
+    "「쓰러진 수호병」 그림 M001-move.png"
+   ]
+  },
+  {
+   "id": "m008",
+   "key": "보라검 부활자",
+   "layer": "STORY",
+   "zones": [
+    "dist04"
+   ],
+   "major": false,
+   "why": [
+    "「늪에서 되살아난 전우」 그림 corrupted_guardian.webp"
+   ]
+  },
+  {
+   "id": "m009",
+   "key": "검은기둥 주문사",
+   "layer": "STORY",
+   "zones": [
+    "dist05"
+   ],
+   "major": false,
+   "why": [
+    "「수렁 주문사」 그림 M003-idle.png",
+    "「수렁 주문사」 그림 M003-move.png"
+   ]
+  },
+  {
+   "id": "m010",
+   "key": "마지막 길의 호위병",
+   "layer": "STORY",
+   "zones": [
+    "dist05"
+   ],
+   "major": false,
+   "why": [
+    "「쓰러진 수호병」 그림 M001-move.png"
+   ]
+  },
+  {
+   "id": "m011",
+   "key": "지옥문 파수악마",
+   "layer": "STORY",
+   "zones": [
+    "dist06"
+   ],
+   "major": false,
+   "why": [
+    "「소환진 순례악마」 그림 M008-move.png"
+   ]
+  },
+  {
+   "id": "m012",
+   "key": "검은기둥 화염술사",
+   "layer": "STORY",
+   "zones": [
+    "dist06"
+   ],
+   "major": false,
+   "why": [
+    "「수렁 주문사」 그림 M003-idle.png",
+    "「수렁 주문사」 그림 M003-move.png"
+   ]
+  },
+  {
+   "id": "m013",
+   "key": "소환진 타락천사",
+   "layer": "STORY",
+   "zones": [
+    "dist06"
+   ],
+   "major": false,
+   "why": [
+    "「늪에서 되살아난 전우」 그림 corrupted_guardian.webp"
+   ]
+  },
+  {
+   "id": "m014",
+   "key": "격리실 감염 의료인",
+   "layer": "STORY",
+   "zones": [
+    "ep1a08"
+   ],
+   "major": false,
+   "why": [
+    "「백의 구속자」 그림 hallucinated_orderly.webp"
+   ]
+  },
+  {
+   "id": "m015",
+   "key": "안정화 집행체",
+   "layer": "STORY",
+   "zones": [
+    "ep1a08"
+   ],
+   "major": false,
+   "why": [
+    "「백의 구속자」 그림 hallucinated_orderly.webp"
+   ]
+  },
+  {
+   "id": "m016",
+   "key": "소독등 타락천사",
+   "layer": "STORY",
+   "zones": [
+    "ep1a08"
+   ],
+   "major": false,
+   "why": [
+    "「백의 구속자」 그림 hallucinated_orderly.webp"
+   ]
+  },
+  {
+   "id": "m017",
+   "key": "병원 심부의 집도의",
+   "layer": "STORY",
+   "zones": [
+    "ep1a08"
+   ],
+   "major": true,
+   "why": [
+    "「백의 안정화 감독」 그림 mb-ep1a08-p4.webp"
+   ]
+  },
+  {
+   "id": "m018",
+   "key": "유리 망령",
+   "layer": "STORY",
+   "zones": [
+    "ep1a09",
+    "ep1a10",
+    "ep1a11",
+    "ep1b01",
+    "ep1b02",
+    "ep1b03"
+   ],
+   "major": false,
+   "why": [
+    "「뿌리 추적자」 그림 monsters.png"
+   ]
+  },
+  {
+   "id": "m019",
+   "key": "갈망의 도시짐승",
+   "layer": "STORY",
+   "zones": [
+    "ep1a10"
+   ],
+   "major": false,
+   "why": [
+    "「소환진 순례악마」 그림 M008-move.png",
+    "「지옥문 파수악마」 그림 M008-idle.png"
+   ]
+  },
+  {
+   "id": "m020",
+   "key": "거짓천국 근위천사",
+   "layer": "STORY",
+   "zones": [
+    "ep1a11"
+   ],
+   "major": false,
+   "why": [
+    "「늪에서 되살아난 전우」 그림 corrupted_guardian.webp"
+   ]
+  },
+  {
+   "id": "m021",
+   "key": "치료거부의 가면",
+   "layer": "STORY",
+   "zones": [
+    "ep1a11"
+   ],
+   "major": false,
+   "why": [
+    "「오만의 흰 가면」 그림 M012-move.png"
+   ]
+  },
+  {
+   "id": "m022",
+   "key": "미뤄 둔 시간의 형상",
+   "layer": "STORY",
+   "zones": [
+    "ep1b02"
+   ],
+   "major": false,
+   "why": [
+    "「일흔두 번째 인장 잔류체」 그림 seal_residual.webp"
+   ]
+  },
+  {
+   "id": "m023",
+   "key": "찢어진 사진의 망령",
+   "layer": "STORY",
+   "zones": [
+    "ep1b03"
+   ],
+   "major": false,
+   "why": [
+    "「이름 없던 공포」 그림 M018-move.png"
+   ]
+  },
+  {
+   "id": "m024",
+   "key": "칼날과 유리 조각",
+   "layer": "STORY",
+   "zones": [
+    "ep1b03"
+   ],
+   "major": false,
+   "why": [
+    "「이름 없던 공포」 그림 M018-move.png"
+   ]
+  },
+  {
+   "id": "m025",
+   "key": "끓어오르는 검은 소화액",
+   "layer": "STORY",
+   "zones": [
+    "ep1b04"
+   ],
+   "major": false,
+   "why": [
+    "「버려진 최고급 식재료」 그림 M025-move.png"
+   ]
+  },
+  {
+   "id": "m026",
+   "key": "모든 면이 뒷면인 동전",
+   "layer": "STORY",
+   "zones": [
+    "ep1b06"
+   ],
+   "major": false,
+   "why": [
+    "「칼날이 된 지폐」 그림 greed_fox_hound.webp"
+   ]
+  },
+  {
+   "id": "m027",
+   "key": "고슴도치 가시 사탕",
+   "layer": "STORY",
+   "zones": [
+    "ep1b06b"
+   ],
+   "major": false,
+   "why": [
+    "「박제된 여우의 악마」 그림 greed_mammon.webp"
+   ]
+  },
+  {
+   "id": "m028",
+   "key": "눈보라 속 여우 악마",
+   "layer": "STORY",
+   "zones": [
+    "ep1b06b"
+   ],
+   "major": false,
+   "why": [
+    "「칼날이 된 지폐」 그림 greed_fox_hound.webp"
+   ]
+  },
+  {
+   "id": "m029",
+   "key": "낡은 장난감 요요",
+   "layer": "STORY",
+   "zones": [
+    "ep1b06b"
+   ],
+   "major": false,
+   "why": [
+    "「일흔두 번째 인장 잔류체」 그림 seal_residual.webp"
+   ]
+  },
+  {
+   "id": "m030",
+   "key": "불길 속의 곰",
+   "layer": "STORY",
+   "zones": [
+    "ep1b07"
+   ],
+   "major": false,
+   "why": [
+    "「불길 속의 늑대」 그림 M030-move.png"
+   ]
+  },
+  {
+   "id": "m031",
+   "key": "육망성의 흑마술 실험체",
+   "layer": "STORY",
+   "zones": [
+    "ep1b08"
+   ],
+   "major": false,
+   "why": [
+    "「일흔두 번째 인장 잔류체」 그림 seal_residual.webp"
+   ]
+  },
+  {
+   "id": "m032",
+   "key": "인간의 뇌를 닮은 투명 연산 장치",
+   "layer": "STORY",
+   "zones": [
+    "ep1b09"
+   ],
+   "major": false,
+   "why": [
+    "「일흔두 번째 인장 잔류체」 그림 seal_residual.webp"
+   ]
+  },
+  {
+   "id": "m033",
+   "key": "태엽 수집자",
+   "layer": "STORY",
+   "zones": [
+    "cult01",
+    "cult02",
+    "cult03",
+    "cult04",
+    "cult05",
+    "cult06"
+   ],
+   "major": false,
+   "why": [
+    "「뿌리 추적자」 그림 monsters.png"
+   ]
+  },
+  {
+   "id": "m034",
+   "key": "학대기록 공허체",
+   "layer": "STORY",
+   "zones": [
+    "u205"
+   ],
+   "major": false,
+   "why": [
+    "「기억 공백 망령」 그림 u2_void_wraith.webp"
+   ]
+  },
+  {
+   "id": "m035",
+   "key": "관리자 추적견",
+   "layer": "STORY",
+   "zones": [
+    "u205"
+   ],
+   "major": false,
+   "why": [
+    "「폭격기억 사이보그 사냥개」 그림 M036-move.png"
+   ]
+  },
+  {
+   "id": "m036",
+   "key": "역전기록 수집가",
+   "layer": "STORY",
+   "zones": [
+    "u205"
+   ],
+   "major": false,
+   "why": [
+    "「가짜 자비 수집가」 그림 u2_reactor_collector.webp"
+   ]
+  },
+  {
+   "id": "m037",
+   "key": "기억이주 연결자",
+   "layer": "STORY",
+   "zones": [
+    "u206"
+   ],
+   "major": false,
+   "why": [
+    "「복종 봉인구」 그림 M039-move.png"
+   ]
+  },
+  {
+   "id": "m038",
+   "key": "중앙이주 공명기사",
+   "layer": "STORY",
+   "zones": [
+    "u206"
+   ],
+   "major": false,
+   "why": [
+    "「참호 공명기사」 그림 M037-idle.png"
+   ]
+  },
+  {
+   "id": "m039",
+   "key": "입양기억 청람잔영",
+   "layer": "STORY",
+   "zones": [
+    "u206"
+   ],
+   "major": false,
+   "why": [
+    "「첫 기억 청람잔영」 그림 M042-move.png"
+   ]
+  },
+  {
+   "id": "m040",
+   "key": "이동문 청람잔영",
+   "layer": "STORY",
+   "zones": [
+    "u203"
+   ],
+   "major": false,
+   "why": [
+    "「첫 기억 청람잔영」 그림 M042-move.png"
+   ]
+  },
+  {
+   "id": "m041",
+   "key": "이동문 공허잔영",
+   "layer": "STORY",
+   "zones": [
+    "u203"
+   ],
+   "major": false,
+   "why": [
+    "「기억 공백 망령」 그림 u2_void_wraith.webp"
+   ]
+  },
+  {
+   "id": "m042",
+   "key": "최종문 공명기사",
+   "layer": "STORY",
+   "zones": [
+    "u203"
+   ],
+   "major": false,
+   "why": [
+    "「참호 공명기사」 그림 M037-idle.png"
+   ]
+  },
+  {
+   "id": "m043",
+   "key": "장미이슬 슬라임",
+   "layer": "STORY",
+   "zones": [
+    "last304"
+   ],
+   "major": false,
+   "why": [
+    "「중립초원 슬라임」 그림 M045-move.png"
+   ]
+  },
+  {
+   "id": "m044",
+   "key": "피리 고블린",
+   "layer": "STORY",
+   "zones": [
+    "last305"
+   ],
+   "major": false,
+   "why": [
+    "「숲 고블린」 그림 M047-move.png"
+   ]
+  },
+  {
+   "id": "m045",
+   "key": "귀비탕 공명 안개핵",
+   "layer": "STORY",
+   "zones": [
+    "last302"
+   ],
+   "major": false,
+   "why": [
+    "「중립초원 슬라임」 그림 M045-idle.png",
+    "「중립초원 슬라임」 그림 M045-move.png"
+   ]
+  },
+  {
+   "id": "m046",
+   "key": "주민에게서 떨어진 검은 안개",
+   "layer": "STORY",
+   "zones": [
+    "last303"
+   ],
+   "major": false,
+   "why": [
+    "「포구 검은 안개」 그림 bulmyeongwi_b.webp",
+    "「포구 검은 안개」 그림 M051-move.png"
+   ]
+  },
+  {
+   "id": "m047",
+   "key": "불면귀의 안개 잔영",
+   "layer": "STORY",
+   "zones": [
+    "last303"
+   ],
+   "major": false,
+   "why": [
+    "「포구 검은 안개」 그림 M051-move.png"
+   ]
+  },
+  {
+   "id": "m048",
+   "key": "아르벨리아를 묶은 변조 명령",
+   "layer": "STORY",
+   "zones": [
+    "kair02"
+   ],
+   "major": true,
+   "why": [
+    "「뿌리 추적자」 그림 monsters.png"
+   ]
+  },
+  {
+   "id": "m049",
+   "key": "시간핵의 명령 잔류",
+   "layer": "STORY",
+   "zones": [
+    "kair03"
+   ],
+   "major": false,
+   "why": [
+    "「시간핵의 명령 파동」 그림 M054-idle.png",
+    "「시간핵의 명령 파동」 그림 connector.png",
+    "「시간핵의 명령 파동」 그림 resonance-slave.png"
+   ]
+  },
+  {
+   "id": "m050",
+   "key": "지워진 CCTV 기록의 잔향",
+   "layer": "STORY",
+   "zones": [
+    "murder02"
+   ],
+   "major": false,
+   "why": [
+    "「끊어진 통화의 인과 잔향」 그림 rooftop_echo.png",
+    "「빗속 횡단보도의 기억 잔향」 그림 M127-move.png"
+   ]
+  },
+  {
+   "id": "m051",
+   "key": "새빛호텔 화재 기록의 잔향",
+   "layer": "STORY",
+   "zones": [
+    "murder02"
+   ],
+   "major": false,
+   "why": [
+    "「끊어진 통화의 인과 잔향」 그림 rooftop_echo.png",
+    "「빗속 횡단보도의 기억 잔향」 그림 M127-move.png"
+   ]
+  },
+  {
+   "id": "m052",
+   "key": "공실 표기 잔재",
+   "layer": "STORY",
+   "zones": [
+    "murder04"
+   ],
+   "major": false,
+   "why": [
+    "「빗속 횡단보도의 기억 잔향」 그림 M127-move.png"
+   ]
+  },
+  {
+   "id": "m053",
+   "key": "제출되지 못한 문장",
+   "layer": "STORY",
+   "zones": [
+    "murder04"
+   ],
+   "major": false,
+   "why": [
+    "「끊어진 통화의 인과 잔향」 그림 rooftop_echo.png"
+   ]
+  },
+  {
+   "id": "m054",
+   "key": "옥상으로 돌아온 기억 잔향",
+   "layer": "STORY",
+   "zones": [
+    "murder03"
+   ],
+   "major": false,
+   "why": [
+    "「끊어진 통화의 인과 잔향」 그림 rooftop_echo.png",
+    "「빗속 횡단보도의 기억 잔향」 그림 M127-move.png"
+   ]
+  },
+  {
+   "id": "m055",
+   "key": "반복된 추락의 인과 잔향",
+   "layer": "STORY",
+   "zones": [
+    "murder03"
+   ],
+   "major": false,
+   "why": [
+    "「옥상으로 돌아온 기억 잔향」 그림 blue_executor.webp",
+    "「끊어진 통화의 인과 잔향」 그림 rooftop_echo.png"
+   ]
+  },
+  {
+   "id": "m056",
+   "key": "ID 배양 점액체",
+   "layer": "STORY",
+   "zones": [
+    "cult05"
+   ],
+   "major": false,
+   "why": [
+    "「세뇌 신호 점액체」 그림 M130-move.png"
+   ]
+  },
+  {
+   "id": "m057",
+   "key": "본능 추출 결정",
+   "layer": "STORY",
+   "zones": [
+    "cult05"
+   ],
+   "major": false,
+   "why": [
+    "「합일 주파수 결정」 그림 black_rose_crystal_guardian.webp"
+   ]
+  },
+  {
+   "id": "m058",
+   "key": "죄책감 압축결정",
+   "layer": "STORY",
+   "zones": [
+    "cult06"
+   ],
+   "major": false,
+   "why": [
+    "「합일 주파수 결정」 그림 black_rose_crystal_guardian.webp"
+   ]
+  },
+  {
+   "id": "m059",
+   "key": "SUPER EGO 절개결정",
+   "layer": "STORY",
+   "zones": [
+    "cult03"
+   ],
+   "major": false,
+   "why": [
+    "「합일 주파수 결정」 그림 black_rose_crystal_guardian.webp"
+   ]
+  },
+  {
+   "id": "m060",
+   "key": "ID 잔류 점액체",
+   "layer": "STORY",
+   "zones": [
+    "cult03"
+   ],
+   "major": false,
+   "why": [
+    "「과열 시냅스 점액체」 그림 M131-move.png"
+   ]
+  },
+  {
+   "id": "m061",
+   "key": "아마겟돈 계산결정",
+   "layer": "STORY",
+   "zones": [
+    "cult04"
+   ],
+   "major": false,
+   "why": [
+    "「합일 주파수 결정」 그림 black_rose_crystal_guardian.webp"
+   ]
+  },
+  {
+   "id": "m062",
+   "key": "교만의 사이보그 교주",
+   "layer": "STORY",
+   "zones": [
+    "cult04"
+   ],
+   "major": true,
+   "why": [
+    "「소환좌 칩 수호체」 그림 pride_cyborg_cult_leader.webp"
+   ]
+  },
+  {
+   "id": "m063",
+   "key": "뿌리에서 쏟아진 잔영",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-P-2",
+    "sz115-P-3",
+    "sz115-P-4",
+    "sz115-S01-2",
+    "sz115-S01-3",
+    "sz115-S01-4"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m064",
+   "key": "코어 아래의 검은 뿌리",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-P-2"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m065",
+   "key": "사몽:포구 검은 안개",
+   "layer": "DREAM",
+   "zones": [
+    "sz162-P-D",
+    "sz173-P-G"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m066",
+   "key": "사몽:부정의 잔영",
+   "layer": "DREAM",
+   "zones": [
+    "sz162-P-D",
+    "sz173-P-G"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m067",
+   "key": "꿰맨 아기 인형",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S01-2",
+    "sz115-S01-3",
+    "sz115-S01-4",
+    "sz115-S01-5"
+   ],
+   "major": false,
+   "why": [
+    "「기운 누더기 골렘」 그림 stitched-golem.webp",
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m068",
+   "key": "사몽:얼굴 없는 남자의 박수",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S01-5"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m069",
+   "key": "다시 일으켜 세워진 도전자",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S03-2",
+    "sz115-S03-5",
+    "sz115-S03-6",
+    "sz162-S-03-B",
+    "sz162-S-03-D",
+    "sz173-S-03-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m070",
+   "key": "검은 고리",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S03-7"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m071",
+   "key": "불면병동 무안 환자",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RB-6",
+    "sz115-S04-10",
+    "sz115-S04-11",
+    "sz115-S04-12",
+    "sz115-S04-13",
+    "sz115-S04-14"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m072",
+   "key": "규칙을 어기지 않는 마네킹",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S04-10",
+    "sz115-S04-13",
+    "sz115-S04-2",
+    "sz115-S04-3",
+    "sz115-S04-4",
+    "sz115-S04-5"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m073",
+   "key": "강재헌",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S04-11",
+    "sz115-S04-14"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m074",
+   "key": "호외 신문의 밀고자 잔영",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RF-1",
+    "sz115-S05-2",
+    "sz115-S05-3",
+    "sz115-S05-4",
+    "sz115-S05-5",
+    "sz115-S05-6"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m075",
+   "key": "찢긴 호외의 잔향",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S05-2",
+    "sz115-S05-3",
+    "sz115-S05-4",
+    "sz162-S-05-B",
+    "sz162-S-05-D",
+    "sz173-S-05-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m076",
+   "key": "교주의 인장",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S05-6"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m077",
+   "key": "외계 침공군",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S06-1",
+    "sz115-S06-10",
+    "sz115-S06-11",
+    "sz115-S06-12",
+    "sz115-S06-13",
+    "sz115-S06-14"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m078",
+   "key": "사몽:폭격기억 사이보그 사냥개",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S06-5"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m079",
+   "key": "적 지휘 기체",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S06-18"
+   ],
+   "major": true,
+   "why": [
+    "「적 지휘 개체」 그림 s06-commander-walk-right-8.webp"
+   ]
+  },
+  {
+   "id": "m080",
+   "key": "검은 명령선",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S06-23"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m081",
+   "key": "여섯 물건의 그림자",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S07-2",
+    "sz162-S-07-B",
+    "sz162-S-07-D",
+    "sz173-S-07-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m082",
+   "key": "사몽:백은 없는 그림자",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S07-3"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m083",
+   "key": "페르소나",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-S07-3"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m084",
+   "key": "붉은 교정 표시",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RA-2",
+    "sz115-RA-3",
+    "sz115-RA-4",
+    "sz115-RA-5",
+    "sz162-RA-B",
+    "sz162-RA-D"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m085",
+   "key": "정해진 시각에 도착하지 못한 발자국",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RB-3",
+    "sz115-RB-4",
+    "sz115-RB-5",
+    "sz162-RB-B",
+    "sz162-RB-D",
+    "sz173-RB-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m086",
+   "key": "백색 손님",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RB-6"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m087",
+   "key": "관람석의 시선",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RC-1",
+    "sz115-RC-4",
+    "sz115-RC-5",
+    "sz162-RC-B",
+    "sz162-RC-D",
+    "sz173-RC-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m088",
+   "key": "사몽:찢어진 사진의 망령",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RC-3",
+    "sz115-RC-6"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m089",
+   "key": "재판관",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RC-3"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m090",
+   "key": "종이 왕",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RC-6"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m091",
+   "key": "서로의 결말을 먹는 도시",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RD-2",
+    "sz115-RD-3",
+    "sz115-RD-4",
+    "sz115-RD-5",
+    "sz115-RD-6",
+    "sz115-RD-7"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m092",
+   "key": "다음 자리를 노리는 사격",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RE-1",
+    "sz115-RE-2",
+    "sz162-RE-B",
+    "sz162-RE-D",
+    "sz173-RE-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m093",
+   "key": "백색 사수",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RE-3"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m094",
+   "key": "스토리텔러",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RF-1",
+    "sz115-RG-3"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m095",
+   "key": "일곱 나팔의 빈 소매 잔영",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RG-1",
+    "sz115-RG-10",
+    "sz115-RG-11",
+    "sz115-RG-2",
+    "sz115-RG-3",
+    "sz115-RG-5"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m096",
+   "key": "막힌 이름들",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RG-1",
+    "sz115-RG-10",
+    "sz115-RG-11",
+    "sz115-RG-2",
+    "sz115-RG-5",
+    "sz115-RG-6"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m097",
+   "key": "66 수문장",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-RG-7"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m098",
+   "key": "성벽과 시곗바늘의 잔해",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-M-2",
+    "sz115-M-4",
+    "sz162-M-B",
+    "sz162-M-D",
+    "sz173-M-G"
+   ],
+   "major": false,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  },
+  {
+   "id": "m099",
+   "key": "사몽:거짓천국 근위천사",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-M-1"
+   ],
+   "major": false,
+   "why": [
+    "본편 몹 이름·그림이 사몽에 그대로 나옴"
+   ]
+  },
+  {
+   "id": "m100",
+   "key": "미카엘라",
+   "layer": "DREAM",
+   "zones": [
+    "sz115-M-1"
+   ],
+   "major": true,
+   "why": [
+    "공용 꼭두각시 시트"
+   ]
+  }
+ ],
+ "kept": {
+  "dist00-boss-p4.webp": "뿌리의 문지기",
+  "root-bound-ghoul.webp": "악마화 나무의 침식 근위",
+  "monsters.png": "뿌리 추적자",
+  "oblivion-spider.webp": "망각의 거미",
+  "M002-move.png": "보랏빛 알집지기",
+  "nightmare_spider.webp": "보랏빛 알집지기",
+  "web-bound-skeleton.webp": "거미줄에 묶인 수호병",
+  "mb-dist01-p4.webp": "보라검천사",
+  "M005-idle.png": "늪의 염소머리 악마",
+  "corrupted_guardian.webp": "늪에서 되살아난 전우",
+  "M003-idle.png": "수렁 주문사",
+  "M003-move.png": "수렁 주문사",
+  "mb-dist02-p4.webp": "늪의 뿔악마 군주",
+  "M001-idle.png": "쓰러진 수호병",
+  "M001-move.png": "쓰러진 수호병",
+  "halberd-revenant.webp": "쓰러진 수호병",
+  "M006-move.png": "피냄새 추적자",
+  "ember-hound.webp": "피냄새 추적자",
+  "ghoul.png": "피냄새 추적자",
+  "mb-dist03-p4.webp": "핏빛 수호로 추격자",
+  "twin-head-corpse.webp": "피로 꿰맨 전령",
+  "mb-dist04-p4.webp": "첫 동료의 악마잔영",
+  "M008-move.png": "소환진 순례악마",
+  "M007-move.png": "검은기둥 가고일 수호자",
+  "mb-dist05-p4.webp": "숨이 끊긴 전령의 그림자",
+  "M008-idle.png": "지옥문 파수악마",
+  "mb-dist06-p4.webp": "소환진 검은기둥",
+  "80f5ab6bab50_balrog-idle.webp": "발록 · 지옥의 문지기",
+  "hallucinated_orderly.webp": "백의 구속자",
+  "corridor_scream_echo.webp": "복도 비명잔영",
+  "mb-ep1a08-p4.webp": "백의 안정화 감독",
+  "thread-nurse.webp": "주사실 감시환각",
+  "vial-collector.webp": "갈망의 약병핵",
+  "M016-move.png": "부정의 잔영",
+  "M012-idle.png": "오만의 흰 가면",
+  "M012-move.png": "오만의 흰 가면",
+  "M015-move.png": "중독의 폐허핵",
+  "mb-ep1a10-p4.webp": "오만의 폐허핵",
+  "ego_corrosion_vessel.webp": "초자아 잠식체",
+  "mb-ep1a11-p4.webp": "초천사의 웃는 가면",
+  "a11-boss-p4.webp": "루시퍼 · 가면 벗은 초천사",
+  "seal_residual.webp": "일흔두 번째 인장 잔류체",
+  "M019-move.png": "검은 실의 외부 신호",
+  "M018-move.png": "이름 없던 공포",
+  "mb-ep1b01-p4.webp": "교만의 잔향 · 제72문",
+  "M022-move.png": "곰팡이와 오물 봉투",
+  "M021-move.png": "등에 붙은 쓰레기더미",
+  "mb-ep1b02-p4.webp": "나태의 껍데기 파수",
+  "b02-boss-p4.webp": "나태에 잠식된 남자",
+  "M023-move.png": "긴 뱀의 그림자",
+  "mb-ep1b03-p4.webp": "금이 간 비교잔영",
+  "1a8ca2c5759b_ep1b03_envy_sister_phase0.webp": "호텔 부매니저 · 레비아탄",
+  "M025-move.png": "버려진 최고급 식재료",
+  "M024-idle.png": "살아 있는 거대한 위장",
+  "mb-ep1b04-p4.webp": "폐기주방 감독",
+  "fbc0132dd447_ep1b04_glutton_head_chef_phase0.webp": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+  "curtain-mannequin.webp": "얼굴 없는 남자의 박수",
+  "lust_asmodai.webp": "붉은 하이힐 칼날",
+  "M027-move.png": "공중을 가르는 립스틱 탄환",
+  "mb-ep1b05-p4.webp": "심장빛 무대감독",
+  "6861c5126992_ep1b05_lust_seoyun_puppet_phase0.webp": "붉은 하이힐의 서윤",
+  "greed_fox_hound.webp": "칼날이 된 지폐",
+  "greed_mammon.webp": "박제된 여우의 악마",
+  "mb-ep1b06-p4.webp": "금고 장부감시자",
+  "b06-boss-p4.webp": "회장에게 고용된 총지배인 · 맘몬",
+  "mb-ep1b06b-p4.webp": "겨울숲 가시파수",
+  "b06b-boss-p4.webp": "소년이 된 총지배인 · 맘몬",
+  "M030-move.png": "불길 속의 늑대",
+  "wrath_satan.webp": "불길 속의 용",
+  "mb-ep1b07-p4.webp": "호텔 화염기사",
+  "b07-boss-p4.webp": "불을 지른 청소부 · 사탄",
+  "M033-move.png": "전극을 두른 좀비 수호기사",
+  "M032-idle.png": "창처럼 날아오는 역십자가",
+  "mb-ep1b08-p4.webp": "역십자가 시체경호체",
+  "b08-boss-p4.webp": "백색 정장의 호텔 그룹 회장",
+  "polar_cyborg_hound.webp": "강철 턱의 사이보그 개",
+  "polar_chairman.webp": "설원 아래의 기계 다리",
+  "mb-ep1b09-p4.webp": "생체부트로더 연산핵",
+  "99c6dd7d202b_ep1b09_biobootloader_chairman_phase0.webp": "사이보그 회장 · 생체 부트로더",
+  "M038-move.png": "전쟁기억 정찰드론",
+  "M036-idle.png": "폭격기억 사이보그 사냥개",
+  "M036-move.png": "폭격기억 사이보그 사냥개",
+  "M037-idle.png": "참호 공명기사",
+  "u201-mid-p4.webp": "제4단계 전쟁관리자",
+  "u2_reactor_collector.webp": "가짜 자비 수집가",
+  "M039-move.png": "복종 봉인구",
+  "M041-idle.png": "감옥 공명기사",
+  "u202-mid-p4.webp": "제8단계 자비 교정관",
+  "M042-move.png": "첫 기억 청람잔영",
+  "u2_void_wraith.webp": "기억 공백 망령",
+  "M043-move.png": "문턱 관측거미",
+  "u204-mid-p4.webp": "제12단계 기억 검열기",
+  "u205-mid-p4.webp": "제14단계 역전 관리자",
+  "u206-mid.png": "제17단계 중앙이주 코어",
+  "u203-mid.png": "기억의 문 수호 프레임",
+  "c5859bd35492_controller_idle.webp": "컨트롤러 · 기억의 문",
+  "M045-idle.png": "중립초원 슬라임",
+  "M045-move.png": "중립초원 슬라임",
+  "M046-idle.png": "중립초원 늑대",
+  "M046-move.png": "중립초원 늑대",
+  "M047-move.png": "숲 고블린",
+  "l305-boss-poses.png": "고블린 추장",
+  "353a813314bc_Monster_FallenAngelKnight_MoveSide.webp": "타락천사 기사",
+  "M051-move.png": "포구 검은 안개",
+  "bulmyeongwi_b.webp": "포구 검은 안개",
+  "mb-last302-v31231-p4.webp": "검은 안개 심장 · 불면의 기억",
+  "692e4ae01c29_bulmyeongwi_idle.webp": "불면귀",
+  "clockwork-sentinel.webp": "최초명령 훈련파동",
+  "mb-kair01-v31231.png": "최초명령 코어 오염체",
+  "M057-idle.png": "시간수문장",
+  "M075-move.png": "시간수문장",
+  "M081-move.png": "시간수문장",
+  "M087-move.png": "시간수문장",
+  "M088-move.png": "시간수문장",
+  "M095-move.png": "시간수문장",
+  "M097-move.png": "시간수문장",
+  "guardian_01.webp": "시간수문장",
+  "guardian_02.webp": "시간수문장",
+  "guardian_04.webp": "시간수문장",
+  "guardian_05.webp": "시간수문장",
+  "guardian_06.webp": "시간수문장",
+  "guardian_07.webp": "시간수문장",
+  "guardian_08.webp": "시간수문장",
+  "guardian_09.webp": "시간수문장",
+  "guardian_10.webp": "시간수문장",
+  "guardian_11.webp": "시간수문장",
+  "guardian_12.webp": "시간수문장",
+  "guardian_13.webp": "시간수문장",
+  "guardian_14.webp": "시간수문장",
+  "guardian_15.webp": "시간수문장",
+  "guardian_16.webp": "시간수문장",
+  "guardian_17.webp": "시간수문장",
+  "guardian_19.webp": "시간수문장",
+  "guardian_20.webp": "시간수문장",
+  "guardian_21.webp": "시간수문장",
+  "guardian_22.webp": "시간수문장",
+  "guardian_24.webp": "시간수문장",
+  "guardian_25.webp": "시간수문장",
+  "guardian_26.webp": "시간수문장",
+  "guardian_27.webp": "시간수문장",
+  "guardian_29.webp": "시간수문장",
+  "guardian_30.webp": "시간수문장",
+  "guardian_31.webp": "시간수문장",
+  "guardian_32.webp": "시간수문장",
+  "guardian_33.webp": "시간수문장",
+  "guardian_35.webp": "시간수문장",
+  "guardian_37.webp": "시간수문장",
+  "guardian_38.webp": "시간수문장",
+  "guardian_39.webp": "시간수문장",
+  "guardian_40.webp": "시간수문장",
+  "guardian_41.webp": "시간수문장",
+  "guardian_42.webp": "시간수문장",
+  "guardian_43.webp": "시간수문장",
+  "guardian_44.webp": "시간수문장",
+  "guardian_45.webp": "시간수문장",
+  "guardian_46.webp": "시간수문장",
+  "guardian_47.webp": "시간수문장",
+  "guardian_48.webp": "시간수문장",
+  "M076-move.png": "상위수문장",
+  "M091-move.png": "상위수문장",
+  "M106-move.png": "상위수문장",
+  "M113-move.png": "상위수문장",
+  "M114-move.png": "상위수문장",
+  "guardian_49.webp": "상위수문장",
+  "guardian_50.webp": "상위수문장",
+  "guardian_51.webp": "상위수문장",
+  "guardian_53.webp": "상위수문장",
+  "guardian_54.webp": "상위수문장",
+  "guardian_56.webp": "상위수문장",
+  "guardian_57.webp": "상위수문장",
+  "mb-kair04-v31231.png": "휴식 수확관 · 과로의 수문장",
+  "great-01-atlas.webp": "대수문장",
+  "great-02-atlas.webp": "대수문장",
+  "great-04-atlas.webp": "대수문장",
+  "great-06-atlas.webp": "대수문장",
+  "kair-great-05.png": "대수문장",
+  "mb-kair09-v31231-poses.png": "망각 묘지기 · 삭제된 선택",
+  "b19d67bb1973_siren_idle.webp": "세이렌 모르",
+  "M054-idle.png": "시간핵의 명령 파동",
+  "connector.png": "시간핵의 명령 파동",
+  "resonance-slave.png": "시간핵의 명령 파동",
+  "false_signal_seal_guard.webp": "성벽 침식 봉인병",
+  "timeless_silver_scout.webp": "악몽 정찰체",
+  "mb-hando01-p4.webp": "의존 신호 포식자",
+  "return_coordinate_devourer.webp": "의존 신호 포식자",
+  "silver_seal_sentinel.webp": "붕괴선 파수병",
+  "memory_excision_connector.webp": "기억절제 연결자",
+  "M119-idle.png": "무명 검흔",
+  "mb-hando02-p4.webp": "코어 운반 집행자",
+  "order_seal_officer.webp": "코어 운반 집행자",
+  "M122-move.png": "EGO 탈취 연결자",
+  "mb-hando03-p4.webp": "환수검 모조체",
+  "phantom_reclaim_blade.webp": "환수검 모조체",
+  "fae708429341_hando_idle.webp": "EGO 강탈 악몽왕",
+  "mb-murder01-p4.webp": "파란불 역주행 목격자",
+  "M127-move.png": "빗속 횡단보도의 기억 잔향",
+  "signal-golem.webp": "빗속 횡단보도의 기억 잔향",
+  "rooftop_echo.png": "끊어진 통화의 인과 잔향",
+  "mb-murder02-p4.webp": "공실장부 당직감사",
+  "M127-idle.png": "공실 표기 잔재",
+  "M125-idle.png": "은폐기록 연결체",
+  "murder04-mid-p4.webp": "진술 봉쇄 인과핵",
+  "mb-murder03-p4.webp": "옥상 인과보관인",
+  "blue_executor_charge.png": "파란불",
+  "blue_executor.webp": "옥상으로 돌아온 기억 잔향",
+  "M128-move.png": "흑장미 눈가린 신도",
+  "censer-priest.webp": "흑장미 귀막은 신도",
+  "M130-move.png": "세뇌 신호 점액체",
+  "c101-mid.png": "칩 제단 방화벽",
+  "black_robed_nightmare_demon.webp": "신경 케이블 포식체",
+  "black_rose_crystal_guardian.webp": "합일 주파수 결정",
+  "M131-move.png": "과열 시냅스 점액체",
+  "c102-boss-poses.png": "네트워크 합창체",
+  "green_enemy_slime.webp": "ID 배양 점액체",
+  "black_rose_demon_soldier.webp": "생체기계 악몽",
+  "c105-mid.png": "ID 생체조 관리자",
+  "M135-move.png": "SUPER EGO 판결인장",
+  "superego_cyborg_cult_leader.webp": "SUPER EGO 판결인장",
+  "superego-inquisitor.webp": "기계재판 연결자",
+  "c106-mid.png": "기계재판 집행핵",
+  "black_rose_chip_penitent.webp": "EGO 구속 연결자",
+  "M131-idle.png": "ID 잔류 점액체",
+  "c103-mid-poses.png": "이단의목사 한리안",
+  "c103-boss-poses.png": "이단의목사 백이온",
+  "M137-move.png": "소환좌 칩 수호체",
+  "pride_cyborg_cult_leader.webp": "소환좌 칩 수호체",
+  "c104-mid.png": "적그리스도 배양좌",
+  "sun-patrol.webp": "검은 태양의 학교 순찰자",
+  "paper-child.webp": "면도날 종이 아이",
+  "stitched-golem.webp": "기운 누더기 골렘",
+  "mannequin.webp": "식탁의 마네킹 잔영",
+  "mono-fighter.webp": "흑백 잔상의 투사",
+  "mirror-shade.webp": "관람석 거울의 잔영",
+  "diner-ghoul.webp": "화형식당 앞치마 식객",
+  "insomnia-patient.webp": "불면병동 무안 환자",
+  "gilded-hollow.webp": "금박 박제 망자",
+  "applause-shade.webp": "박수치는 객석의 잔영",
+  "extra-informant.webp": "호외 신문의 밀고자 잔영",
+  "tram-passenger.webp": "물감 철로의 유령 승객",
+  "clockwork-legionary.webp": "폐선로 태엽 군단병",
+  "s06-invader-walk-right-8.webp": "외계 침공군",
+  "plague-hound.webp": "변이된 사냥개 괴수",
+  "s06-commander-walk-right-8.webp": "적 지휘 개체",
+  "cephalopod-invader.webp": "두족류 생체기계 침공병",
+  "s06-rival-walk-right-8.webp": "상대 초인",
+  "clockhand-warden.webp": "카이로 회랑의 시계침 수문장 잔영",
+  "parade-mannequin.webp": "승전식 제복 마네킹 잔영",
+  "PAPER-move.png": "종이 형상",
+  "mob-paper-figure.webp": "종이 형상",
+  "fishhook-manuscript.webp": "낚싯바늘 원고지 망령",
+  "wire-bound-dead.webp": "검은 제단의 전선 망자 잔영",
+  "empty-sleeve-trumpet.webp": "일곱 나팔의 빈 소매 잔영",
+  "furnace-taxidermist.webp": "검은 공방의 용광로 박제공 잔영"
+ }
+}

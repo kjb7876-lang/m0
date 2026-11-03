@@ -270,7 +270,11 @@
   const inCore=player.x>CORE.x&&player.x<CORE.x+CORE.w&&player.y>CORE.y-6&&player.y<CORE.y+CORE.h+2,stuck=typeof blocked==='function'&&blocked(player.x,player.y,.29,room);
   if(!(stuck||inCore&&!open))return false;const p=L.entry;player.x=p.x;player.y=p.y;try{cam={x:p.x,y:p.y};route=[];command=null;target=null;}catch(e){}stats.rescued=(stats.rescued||0)+1;return true;}catch(e){fail(e);return false;}}
  function wrapLate(){if(typeof restoreSave==='function'&&!restoreSave.storyMapR171){const b=restoreSave;restoreSave=async function(...a){const out=await b.apply(this,a);if(out!==false)rescue();return out;};restoreSave.storyMapR171=true;}
-  if(typeof enterRegion==='function'&&!enterRegion.storyMapR171){const b=enterRegion;enterRegion=async function(...a){const out=await b.apply(this,a);if(out!==false)rescue();return out;};enterRegion.storyMapR171=true;}}
+  if(typeof enterRegion==='function'&&!enterRegion.storyMapR171){const b=enterRegion;enterRegion=async function(...a){const out=await b.apply(this,a);if(out!==false)rescue();return out;};enterRegion.storyMapR171=true;}
+  /* R249(사용자 2026-11-03 "맵처음입장할때 이상한다른곳 왔다갔다하다가 시작쪽으로 카메라가 오는버그"): 엔진 enterRegion 은 영웅을 (15,19)에 두고 화면을 연 뒤
+     banner() 를 부른다. 위 바깥 감싸기의 rescue 는 다른 감싸기들(서사·그림 준비)이 끝난 뒤(약 5초 뒤)에야 돌아서 그동안 보스 전투실 같은 엉뚱한 자리가 보였다가
+     입구로 튀었다 → 엔진이 자리를 정하고 화면을 여는 그 순간(banner)에 바로 입구로 옮긴다(조건은 rescue 그대로: 벽 속이거나 닫힌 보스 구역 안일 때만). */
+  if(typeof banner==='function'&&!banner.storyMapR249){const b=banner;banner=function(...a){const r=b.apply(this,a);try{rescue();}catch(e){fail(e);}return r;};banner.storyMapR249=true;}}
  if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('DOMContentLoaded',()=>{try{installExploration();if(prefs.on)wrapLate();}catch(e){fail(e);}});
  function setPref(v){try{localStorage.setItem(PREF,JSON.stringify({on:v?.on!==false}));}catch(e){}return{on:v?.on!==false,reload:true};}
  function inspect(){const L=typeof room!=='undefined'?room?.exploration:null;return{revision:REV,prefs:{...prefs},failures,lastError,stats:{...stats},cached:[...cache.keys()],current:L?.storyMapR171||null,browser:false,GPU:false};}
