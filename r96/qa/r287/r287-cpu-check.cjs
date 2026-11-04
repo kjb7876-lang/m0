@@ -23,14 +23,14 @@ function world(o={}){
  const sceneObjs=[...kids,{isMesh:true,frustumCulled:true,layers:{mask:2},name:'cmd'}];
  const T={SRGBColorSpace:'srgb',WebGLRenderTarget:function(w,h){this.w=w;this.h=h;this.texture={};}};
  const gl={rt:null,shadowMap:{needsUpdate:false},render(scene,camera){log.glRender.push({rt:this.rt,cam:camera.layers.mask,masks:kids.map(k=>k.layers.mask),culled:sceneObjs.map(k=>k.frustumCulled)});},
-  getRenderTarget(){return this.rt;},setRenderTarget(t){this.rt=t;log.rt.push(t);},initTexture(t){t.uploaded=true;}};
+  getRenderTarget(){return this.rt;},setRenderTarget(t){this.rt=t;log.rt.push(t);if(t)log.warmRows=rows.size;},initTexture(t){t.uploaded=true;}};
  const rows=new Map();
- const chunks={size:10,rows,update(x,y,zone,grid){log.updates.push({zone,grid:JSON.parse(JSON.stringify(grid))});const d=engineDesired(x,y,10,grid);for(const k of [...rows.keys()])if(!d.has(k))rows.delete(k);for(const k of d)if(!rows.has(k))rows.set(k,{key:k,assets:['assets/a.webp']});return Promise.resolve([]);}};
+ const chunks={size:10,rows,update(x,y,zone,grid){log.updates.push({zone,grid:JSON.parse(JSON.stringify(grid))});const d=engineDesired(x,y,10,grid);for(const k of [...rows.keys()])if(!d.has(k))rows.delete(k);for(const k of d)if(!rows.has(k))rows.set(k,{key:k,assets:['assets/'+k+'.webp']});return Promise.resolve([]);}};
  const leases=[];const assets={lease(p){const l={p,released:false,release(){this.released=true;}};leases.push(l);return l;}};
  const img=(n)=>{const i=new ctx.HTMLImageElement();i.naturalWidth=64;i.naturalHeight=64;i.n=n;return i;};
  const commands={texture(image){let r=textures.get(image);if(!r){r={refs:0,tex:{}};textures.set(image,r);}r.refs++;return r.tex;},release(image){const r=textures.get(image);if(r&&--r.refs===0)textures.delete(image);}};
  const r={T,renderer:gl,scene:{traverse(f){sceneObjs.forEach(f);}},camera:{layers:{mask:7,enableAll(){this.mask=0xffffffff;}}},spatialRoot:{children:kids},chunks,assets,commands,spatialBuilt:true,visibleTerrainBounds:[0,0,10,10],lastViewportWidth:1280,
-  render(frame){this.camera.layers.mask=2;this.renderer.render(this.scene,this.camera);this.chunks.update(5,5,frame.layer+':'+frame.zone,{columns:o.cols||6,rows:o.rows||6,minX:0,minY:0,visibleBounds:this.visibleTerrainBounds});this.camera.layers.mask=4;this.renderer.render(this.scene,this.camera);}};
+  render(frame){this.camera.layers.mask=2;this.renderer.render(this.scene,this.camera);this.chunks.update(this.hx??5,5,frame.layer+':'+frame.zone,{columns:o.cols||6,rows:o.rows||6,minX:0,minY:0,visibleBounds:this.visibleTerrainBounds});this.camera.layers.mask=4;this.renderer.render(this.scene,this.camera);}};
  const ctx={console,Math,JSON,Promise,Object,Array,Number,String,Set,Map,WeakMap,WeakSet,Infinity,isFinite,
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setInterval:(f)=>{intervals.push(f);return 1;},performance:{now:()=>0},innerWidth:1280,innerHeight:720,matchMedia:()=>({matches:false}),
   W:1280,H:720,zoom:1,TILE:34,cam:{x:0,y:0},HTMLImageElement:function(){}};
@@ -97,6 +97,12 @@ function world(o={}){
  const last=w.log.updates.at(-1);ok('after the warm-up only the engine band stays',w.r.chunks.rows.size<40&&last.grid.visibleBounds[2]===10,{n:w.r.chunks.rows.size,vb:last.grid.visibleBounds});}
 
 {const w=world({prefs:{resident:true}});w.frame();await w.flush();w.frame();w.frame();w.frame();ok('{resident:true}: whole map stays loaded (standby) after the warm-up',w.r.chunks.rows.size===36);}
+// Codex 리뷰 재현: 전체 로드가 끝난 첫 프레임에 영웅이 반 칸 경계를 넘어 엔진이 chunks.update 를 다시 부른다 → 미리 그리기 전에 먼 덩어리가 내려가면 안 된다
+{const w=world();
+ w.frame();await w.flush();w.r.hx=5.6;/* 반 칸 넘음 */w.frame();
+ ok('warm-up runs with every chunk still loaded even if the hero moves on the first frame after the full load (36 at warm render)',w.api.inspect().stats.warms===1&&w.log.warmRows===36,{warmRows:w.log.warmRows,warms:w.api.inspect().stats.warms});
+ ok('leases taken for every chunk image before the band shrinks (36 leases, none released)',w.leases.length===36&&w.leases.every(l=>!l.released),w.leases.length);
+ w.r.hx=6.2;w.frame();ok('after the warm-up the band shrinks back to the engine rule',w.r.chunks.rows.size<36);}
 // ---- 대기 캐시 한도 ----
 {const w=world();w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;w.frame();
  w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;/* 엔진이 매 프레임 다시 쓰는 값 */

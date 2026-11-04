@@ -78,8 +78,9 @@ function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.
  const w=function(x,y,zone,grid={}){lastArgs={x,y,grid};if(!prefs.on)return base.call(this,x,y,zone,grid);
   let vb=grid?.visibleBounds;try{const g=chunkGrid(grid),cap=capFor(r),size=this.size||10;stats.chunksAll=g.count;
    if(zone!==zoneKey)newZone(zone);
-   if(warmState==='loading'&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';// 덩어리가 끝내 안 올라오면 미리 그리기 없이 진행
-   const all=(prefs.resident&&g.count<=cap)||(prefs.warm&&warmState==='loading'&&g.count<=cap*3);
+   const warming=warmState==='loading'||warmState==='ready';/* 'ready'(다 올라옴, 미리 그리기·리스 전)에도 맵 전체를 붙잡아 둔다 — 그 사이 엔진이 update 를 다시 불러도 먼 덩어리가 내려가지 않게 */
+   if(warming&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';// 덩어리가 끝내 안 올라오면 미리 그리기 없이 진행
+   const all=(prefs.resident&&g.count<=cap)||(prefs.warm&&warming&&warmState!=='done'&&g.count<=cap*3);
    if(g.count>cap)stats.overCap=g.count;
    if(all)vb=fullBounds(grid,size);else if(finite4(vb)&&CFG.prefetch>0)vb=expand(vb,CFG.prefetch);}catch(e){fail(e);}
   const pr=base.call(this,x,y,zone,{...grid,visibleBounds:vb});
