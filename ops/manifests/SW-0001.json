@@ -1,0 +1,21 @@
+{
+  "schema": "storyworld.asset-manifest/v1",
+  "task_id": "SW-0001",
+  "revision": 1,
+  "expected_count": 1,
+  "assets": [
+    {
+      "asset_id": "r290/mob/m001",
+      "file": "m001.webp",
+      "mime": "image/webp",
+      "bytes": 477146,
+      "sha256": "1c5c96ad8dada5571732c967975910da5aa6fd0d1e709f037d0b7a74356c1c53",
+      "origin": "dots 생성 후보 → 사용자 승인 2026-11-04 → R290(#189) 적용본",
+      "license": "project-original",
+      "target_path": "r96/runtime-text/assets/r290/mobs/m001.webp",
+      "format": { "width": 1024, "height": 960, "alpha": true },
+      "sprite": { "cell": [256, 320], "frames": 12, "directions": ["right"], "pivot": [128, 300], "walk": [0, 8], "attack": [8, 4] },
+      "review": "PASS(R290 CPU 27/27, 헤드리스 화면 확인) — 실기기·GPU 미검증"
+    }
+  ]
+}
