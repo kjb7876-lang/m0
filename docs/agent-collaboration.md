@@ -73,3 +73,21 @@
 - 작업이 꼬이면: 해당 Issue 를 `PAUSED` 로, 마지막 정상 커밋·manifest 해시를 댓글로 고정, revision 을 올려 다시 배정.
 - 잘못 병합: 새 브랜치에서 revert PR(강제 push 금지).
 - Dots 가 응답하지 않으면: 지시서 재게시 대신 수신 확인 파일 유무부터 본다. 2회 점검 동안 없으면 BLOCKED(사용자에게 Dots 세션 확인 요청).
+
+## 10. 도구 경로 (2026-11-04 점검, MCP 추가 0개)
+실측 환경: claude.ai 클라우드 세션(Claude Code 2.1.318). 예약 작업은 같은 세션으로 들어와 같은 연결을 쓴다(매시 13분 실행에서 GitHub·Drive 호출 성공 확인).
+
+| 업무 | 기본 경로 | 이유 / 범위 |
+|---|---|---|
+| Issue·PR·리뷰 답글·병합 | 세션 GitHub 연결(`mcp__github__*`, 이 저장소로 범위 제한) | 쓰기는 여기 하나로만. `gh` CLI 는 이 환경에서 인증 실패(GH_TOKEN 거부) → 쓰지 않음 |
+| CI·실행 상태 읽기 | PR 은 `get_check_runs`(약 1KB). main 실행 목록은 공개 REST `curl …/actions/runs?branch=main&per_page=3` + 필요한 필드만 출력 | `actions_list` 는 3건에 약 120KB 를 돌려줘 컨텍스트 낭비 |
+| Drive 검색 | `search_files` 를 `parentId`(지시·결과 폴더) + `modifiedTime > 마지막 확인` 으로 좁힘, 미리보기 gif 제외 | 전체 Drive 재탐색 금지. 마지막 확인 시각은 성공 처리 뒤에만 갱신 |
+| Drive 알려진 파일 | `get_file_metadata`(ID, `excludeContentSnippets`) | 파일명 재검색 대신 ID 로 크기·수정 시각만 |
+| Drive 메모·지시 읽기 | `read_file_content` | 사람이 읽는 용도. 마크다운 이스케이프가 붙어 **바이트가 원본과 다름** → 해시 검증에 쓰지 않음 |
+| Drive 해시·자산 검증 | `download_file_content` → 저장된 결과 파일을 `validate.py drive-decode 결과.json 새폴더/파일` 로 풀어 크기·sha256 | base64 를 대화에 다시 붙여넣지 않음. 큰 결과는 자동으로 파일 저장됨 |
+| Drive 업로드 | `create_file` 의 파일 참조(`sha256:<hash>:<경로>`) | 업로드 응답 크기 확인 + 재다운로드 해시로 검증 |
+| 파일·git·빌드·해시·PNG 규격 | 기본 셸·스크립트·CI | filesystem·git·shell MCP 추가 안 함 |
+
+- 추가하지 않은 것: GitHub 공식 원격 MCP(플러그인 `engineering:github` 가 이미 있으나 세션 저장소 범위 정책으로 403 — 같은 기능을 세션 GitHub 연결이 제공), 별도 Drive MCP(필요 기능 모두 claude.ai Drive 커넥터로 확인), desktop-commander(로컬 npx, 셸과 중복, 이 세션에선 연결 시간 초과).
+- 장애 시: 쓰기 응답이 끊기면 같은 쓰기를 반복하지 말고 먼저 조회(Issue 댓글·PR·Drive 목록)로 반영 여부 확인. 인증·권한 거부는 다른 경로로 우회하지 않고 그 기능만 BLOCKED.
+- 원복: 이 절과 `validate.py drive-decode` 는 독립 추가분이라 해당 커밋만 되돌리면 된다. 연결 설정은 바꾸지 않았다.
