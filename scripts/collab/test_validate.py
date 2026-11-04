@@ -156,6 +156,22 @@ class Manifest(unittest.TestCase):
         self.assertFalse(complete)
 
 
+class DriveDecode(unittest.TestCase):
+    def test_roundtrip_and_no_overwrite(self):
+        import base64, hashlib
+        src = os.path.join(ASSET_DIR, 'm001.webp')
+        raw = open(src, 'rb').read()
+        with tempfile.TemporaryDirectory() as d:
+            j = os.path.join(d, 'r.json')
+            json.dump({'content': base64.b64encode(raw).decode(), 'mimeType': 'image/webp', 'title': 'm001.webp'}, open(j, 'w'))
+            out = os.path.join(d, 'm001.webp')
+            info = v.drive_decode(j, out)
+            self.assertEqual(info['sha256'], hashlib.sha256(raw).hexdigest())
+            self.assertEqual(info['bytes'], len(raw))
+            with self.assertRaises(FileExistsError):
+                v.drive_decode(j, out)
+
+
 class Zip(unittest.TestCase):
     def _zip(self, entries):
         d = tempfile.mkdtemp()
