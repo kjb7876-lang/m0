@@ -53,9 +53,10 @@ if(typeof tick==='function'){const base=tick;tick=function(dt,...a){inTick=true;
 // HUD 칩.
 let el=null,lastText='';
 function hud(){if(typeof document==='undefined')return;const lines=[];if(on){prune();const c=inCombat(),d=Math.round(((1+(c&&autoOff()?DMG:0)+(c&&guideOff()?DMG:0))-1)*100);
- if(d>0)lines.push('손전투 피해 +'+d+'%');if(st.ego.length)lines.push('EGO 전능 +77% ×'+st.ego.length);if(st.dodge.length)lines.push('회피 전능 +7% ×'+st.dodge.length);if(parryActive())lines.push('공명 가속 +77% '+Math.ceil(st.parryUntil-now())+'초');}
- const text=lines.join(' · ');if(text===lastText)return;lastText=text;
- if(!el){el=document.createElement('div');el.id='manualBonusR274';el.setAttribute('aria-live','polite');el.style.cssText='position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:30;pointer-events:none;padding:3px 10px;border:1px solid #b8955a;border-radius:4px;background:linear-gradient(#2b2117e6,#1a140ee6);color:#f0dbb3;font:600 12px/1.4 serif;letter-spacing:.02em;box-shadow:0 1px 4px #0008;white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis';document.body&&document.body.appendChild(el);}
+ if(d>0)lines.push('손전투 +'+d+'%');if(st.ego.length)lines.push('EGO×'+st.ego.length);if(st.dodge.length)lines.push('회피×'+st.dodge.length);if(parryActive())lines.push('공명 '+Math.ceil(st.parryUntil-now())+'초');}
+ const text=lines.join(' · ');/* R288: 사용자 2026-11-04 "길잡이끈버프 반자동끈버프등은 빈칸에 아주작게 표시해줘 전투방해 안되게" — 전투 화면 위(top:84 금테 상자) 대신 아래 HUD 막대 맨 윗줄 빈칸(영웅 이름과 EGO 준비 사이)에 테두리 없는 10px 반투명 글씨로. 짧은 문구. */if(text===lastText)return;lastText=text;
+ if(!el){el=document.createElement('div');el.id='manualBonusR274';el.setAttribute('aria-live','polite');el.style.cssText='position:absolute;left:50%;top:2px;transform:translateX(-50%);z-index:3;pointer-events:none;padding:0 4px;background:none;border:0;color:#e9d3a6;opacity:.62;font:500 10px/1.25 serif;letter-spacing:.02em;text-shadow:0 1px 2px #000;white-space:nowrap;max-width:44%;overflow:hidden;text-overflow:ellipsis';
+  const host=document.querySelector('footer')||document.body;try{if(host!==document.body&&getComputedStyle(host).position==='static')host.style.position='relative';}catch(_){}if(host===document.body){el.style.position='fixed';el.style.top='auto';el.style.bottom='2px';}host&&host.appendChild(el);}
  el.textContent=text;el.style.display=text?'block':'none';}
 function set(v){on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on){st.ego=[];st.dodge=[];st.parryUntil=-1;}hud();return on;}
 window.__STORYWORLD_MANUAL_R274__=Object.freeze({revision:REV,set,enabled:()=>on,inCombat,damageMult,statMult,parryActive,
