@@ -129,10 +129,10 @@ function samongTick(){if(!prefs.samongCluster||typeof effects==='undefined'||!(p
 // ---- ⑧ 스킬 강화 모음 ----------------------------------------------------------------------------
 const VIEWKEY=KEY+'.book';let view='book';try{view=localStorage.getItem(VIEWKEY)||'book';}catch(_){}
 // R169: 오라 창 한 곳에서 Z·X·C 스킬강화(확률 발동)·일반강화(기존 재능)까지 모두 본다(upgrades-r169 가 카드를 덧붙인다).
-const GROUPS=[['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],['Z·X·C 스킬강화',/^r169proc/],['일반강화',/^r169up/],['실검무',/^thread/],['사몽',/dream|samong/i]];
+const GROUPS=[['성장',/^endless(Power|Vital|Haste|Cooldown|Ward)/],['오라·공명',/Aura|Resonance/],[(typeof KR291!=='undefined'&&KR291?KR291.werDot:'W·E·R')+' 스킬강화',/^r169proc/],['일반강화',/^r169up/],['실검무',/^thread/],['사몽',/dream|samong/i]];
 function bookRows(panel){return[...panel.querySelectorAll('.cards button.card.upgrade')].map(b=>{const id=b.dataset.r62Passive||b.dataset.up||b.dataset.r169||'',name=(b.querySelector('strong')?.textContent||'').trim(),small=b.querySelector('small')?.innerText||'',m=name.match(/^(.*?)\s+(\d+)단계\s*\/\s*(∞|\d+)/)||name.match(/^(.*?)\s+(\d+)\s*\/\s*(∞|\d+)$/),title=m?m[1]:name,lv=m?+m[2]:0,max=m?m[3]:'',line=small.split(/\n/)[0].split(/(?<=[.。])\s/)[0].slice(0,90);
  return{b,id,title,lv,max,line,cost:(small.match(/강화 비용[^\n]*/)||[''])[0],disabled:b.disabled,img:b.querySelector('img')?.getAttribute('src')||''};});}
-function skillLevels(){try{const g=window.__STORYWORLD_GROWTH_R103__?.state?.(),h=player?.hero;if(!g||!h)return null;return['w','e','r'].map(k=>({k:{w:'Z',e:'X',r:'C'}[k],n:clamp(finite(g.procs?.[h+':'+k]),0,7)}));}catch(_){return null;}}
+function skillLevels(){try{const g=window.__STORYWORLD_GROWTH_R103__?.state?.(),h=player?.hero;if(!g||!h)return null;return['w','e','r'].map(k=>({k:(typeof KR291!=='undefined'&&KR291?KR291:{w:'W',e:'E',r:'R',werDot:'W·E·R',werSp:'W · E · R'})[k],n:clamp(finite(g.procs?.[h+':'+k]),0,7)}));}catch(_){return null;}}
 function tierInfo(){try{const R=window.__STORYWORLD_HERO_FX_R102__;const t=R?.tier?.(player);return Number.isFinite(t)?t:null;}catch(_){return null;}}
 function buildBook(){const panel=document.getElementById('panel');if(!panel||!prefs.skillBook)return;const cards=panel.querySelector('.cards');if(!cards||!cards.querySelector('button.card.upgrade')||panel.querySelector('#r115Book'))return;
  const rows=bookRows(panel);if(!rows.length)return;stats.books++;

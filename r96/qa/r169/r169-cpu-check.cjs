@@ -28,7 +28,7 @@ const doc={getElementById:()=>null,createElement:el,head:el(),body:el(),querySel
  ranks.endlessWard=3;ranks.endlessVital=2;sb.hurt(100);const w=(n)=>1-.3*n/(n+40);ok('ward 3 → 6-rank reduction, vital 2 → 3-rank (R71 HP 777: less damage taken)',Math.abs(dmg-100*w(6)/w(3)*(260+36)/(260+54))<1e-9,dmg);
  ok('the R169 note is appended to the aura text once',sb.window.__STORYWORLD_PROGRESSION_R62__.defs[0].text.endsWith('〕')&&U.TRI(10)===55);
  U.set({boost:false});ok('{boost:false} turns the boost off',sb.attackPower()===100*(1+.02*10));}
-ok('the merged window adds Z·X·C (buyProc) and 일반강화 cards, the skill book groups them',/r169proc:/.test(C('upgrades-r169.js'))&&/buyProc\(id\)/.test(C('upgrades-r169.js'))&&/'Z·X·C 스킬강화',\/\^r169proc\//.test(C('play-r115.js'))&&/'일반강화',\/\^r169up\//.test(C('play-r115.js'))&&/b\.dataset\.r169/.test(C('play-r115.js')));
+ok('the merged window adds Z·X·C (buyProc) and 일반강화 cards, the skill book groups them',/r169proc:/.test(C('upgrades-r169.js'))&&/buyProc\(id\)/.test(C('upgrades-r169.js'))&&/KR291\.werDot:'W·E·R'\)\+' 스킬강화',\/\^r169proc\//.test(C('play-r115.js'))&&/'일반강화',\/\^r169up\//.test(C('play-r115.js'))&&/b\.dataset\.r169/.test(C('play-r115.js')));
 
 // ---- play-r169 -------------------------------------------------------------------------------
 let t=0;const toasts=[];const floor=[];for(let x=0;x<20;x++)for(let y=4;y<7;y++)floor.push([x,y]);for(let y=0;y<12;y++)floor.push([10,y]);
