@@ -23,3 +23,20 @@ NC(비상업)·SA(동일조건)·ND(변경금지)·라이선스가 불분명한 
 CC BY 곡은 위 표의 저작자·라이선스 표기로 출처를 밝힙니다(변경: 음량 맞춤·길이 자름·mp3 변환).
 
 파일 무결성(sha256)은 `r96/runtime-text/assets/audio/bgm/classical/catalog.json` 에 있습니다.
+
+## R308 — 맵당 한 곡(에피소드별 배정)으로 더한 곡
+
+같은 기준(퍼블릭 도메인 작곡 + PD/CC0 연주 녹음, archive.org Musopen 묶음의 licenseurl·설명을 확인하고 원본 md5 대조)으로 10곡을 더했습니다. 배정·원본 sha256 은 `r96/runtime-text/assets/r308/bgm/index.json`.
+
+| 곡 | 작곡 | 연주 | 라이선스 | 원본 | 바꾼 점 | 쓰는 곳 |
+|---|---|---|---|---|---|---|
+| Etude in E-flat minor, Op. 10 No. 6 | Frederic Chopin | Edward Neeman, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 S-07, 피로 물든 병원 |
+| Nocturne in C-sharp minor, Op. 27 No. 1 | Frederic Chopin | Luke Faulkner, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 S-01, 사이비 합일몽세 |
+| Nocturne in F minor, Op. 55 No. 1 | Frederic Chopin | Luke Faulkner, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 RE, 카이로노미콘 |
+| Prelude in C-sharp minor, Op. 45 | Frederic Chopin | Jeannette Fang, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 S-02, 카이로노미콘 |
+| Cello Sonata in G minor, Op. 65 - III. Largo | Frederic Chopin | Christopher Harding and Yeonjin Kim, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 S-03, 잠들지 못하는 마을 |
+| Etude in C-sharp minor, Op. 25 No. 7 | Frederic Chopin | Edward Neeman, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환, 360초에서 자르고 끝 4초 페이드아웃 | 사몽 RE, 사몽 S-04, 환도 자아의 탄생 |
+| Funeral March in C minor, Op. posth. 72 No. 2 | Frederic Chopin | Aya Higuchi, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 RD, 파란불 아래의 사람들 |
+| Nocturne in G minor, Op. 15 No. 3 | Frederic Chopin | OIga Gurevich, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 RB, 잠들지 못하는 마을 |
+| String Quartet No. 15 in D minor, K. 421 - I. Allegro moderato | Wolfgang Amadeus Mozart | Musopen String Quartet | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환, 360초에서 자르고 끝 4초 페이드아웃 | 사몽 M, 통제자의 열일곱 단계 |
+| String Quartet No. 6, Op. 18 No. 6 - IV. La Malinconia | Ludwig van Beethoven | Musopen String Quartet | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환, 360초에서 자르고 끝 4초 페이드아웃 | 사몽 S-04, 솔로몬의 봉인식 |
