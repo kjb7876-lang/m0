@@ -91,10 +91,10 @@ function world(o={}){
  ok('warm-up render: once, into an offscreen target, with every object un-culled, then target/layers/culling restored',w.api.inspect().stats.warms===1&&w.log.glRender.some(g=>g.rt&&g.rt.w===4&&g.cam===0xffffffff&&g.culled.every(c=>c===false))&&w.gl.rt===null&&w.sceneObjs.every(o=>o.frustumCulled===true),w.api.inspect());
  ok('chunk image leases are held for the zone',w.leases.length>=1&&w.leases.every(l=>!l.released));
  w.frame();w.frame();ok('warm-up not repeated in the same zone',w.api.inspect().stats.warms===1);
- const last=w.log.updates.at(-1);ok('default (resident off): after the warm-up the engine band + prefetch ring (view +10) is requested again',last.grid.visibleBounds[2]===20&&w.r.chunks.rows.size<36,{vb:last.grid.visibleBounds,n:w.r.chunks.rows.size});
+ const last=w.log.updates.at(-1);ok('default (resident off): after the warm-up the engine band itself (its own view bounds) is requested again',last.grid.visibleBounds[2]===10&&w.r.chunks.rows.size<36,{vb:last.grid.visibleBounds,n:w.r.chunks.rows.size});
  w.frame('STORY:z2');ok('zone change releases the held leases',w.leases.every(l=>l.released));}
 {const w=world({cols:30,rows:20});w.frame();ok('over the cap: one full load for the warm-up',w.r.chunks.rows.size===600);await w.flush();w.frame();w.frame();
- const last=w.log.updates.at(-1);ok('after the warm-up only view + prefetch ring stays (engine band rules)',w.r.chunks.rows.size<40&&last.grid.visibleBounds[2]===20,{n:w.r.chunks.rows.size,vb:last.grid.visibleBounds});}
+ const last=w.log.updates.at(-1);ok('after the warm-up only the engine band stays',w.r.chunks.rows.size<40&&last.grid.visibleBounds[2]===10,{n:w.r.chunks.rows.size,vb:last.grid.visibleBounds});}
 
 {const w=world({prefs:{resident:true}});w.frame();await w.flush();w.frame();w.frame();w.frame();ok('{resident:true}: whole map stays loaded (standby) after the warm-up',w.r.chunks.rows.size===36);}
 // ---- 대기 캐시 한도 ----

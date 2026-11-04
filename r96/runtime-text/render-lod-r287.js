@@ -9,7 +9,7 @@
 //  ② 우선 렌더링: 대기 중인 덩어리 메시 중 엔진이 원래 올려 두었을 것(영웅 둘레 3×3+보이는 범위, 엔진 규칙 그대로)만 그리고 — 그래서 화면에 그려지는 지형은 끄기 상태와 같다 —
 //     덩어리에 속하지 않은 지형 메시는 시야(엔진이 계산한 보이는 범위)+주변 고리(RING 칸) 안만 그린다. 나머지는 그 프레임의 그리기 동안만
 //     layers.mask=0(대기)로 두었다가 그리기가 끝나면 원래 값으로 되돌린다(엔진이 visible 을 매 프레임 다시 켜므로 visible 대신 layers).
-//     그 뒤엔 엔진 규칙대로 시야+고리(PREFETCH 칸)만 올려 두고, 내린 덩어리 지오메트리는 키운 대기 캐시(PC 24MB·모바일 6MB)에 GPU 버퍼째 남긴다.
+//     그 뒤엔 엔진 규칙(영웅 둘레 3×3 덩어리=시야 밖 10~20칸 여유 + 화면 안) 그대로 올려 두고(PREFETCH 0 — 더 넓히면 R90 벽 테두리 다시 만들기가 그만큼 무거워짐), 내린 덩어리 지오메트리는 키운 대기 캐시(PC 24MB·모바일 6MB)에 GPU 버퍼째 남긴다.
 //     {resident:true} 면 맵 전체를 계속 올려 둔다(기본 끔 — R90 벽 테두리 같은 파생 오버레이가 맵 전체 벽으로 만들어져 삼각형이 늘어남, ep1b03 19k→49k).
 //  ③ 약한 렌더링: 화면+여백 밖 조형물·벽의 2D 그리기는 PROP_EVERY 프레임에 한 번만(돌아가며) 한다 — 그림 지연 로딩·나무 그림 바꾸기 같은
 //     그리기 부수 효과는 그대로 일어나고, 그 명령은 원래도 화면 밖이라 엔진이 버리던 것이다. 들어온 첫 몇 프레임은 전부 그린다(미리 그리기).
@@ -18,7 +18,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_RENDER_LOD_R287__)return;
 const REV='R287-lod-1',KEY='storyworld.r287.lod';
-const CFG=Object.freeze({ring:4,prefetch:10,cap:400,capLow:120,propEvery:20,warmFrames:3,warmTimeout:900,propMarginFrac:.3,propMarginPx:160,texCap:320,texMaxPx:4096*4096,cacheBytes:24*1024*1024,cacheBytesLow:6*1024*1024,cacheCount:1024});
+const CFG=Object.freeze({ring:4,prefetch:0,cap:400,capLow:120,propEvery:20,warmFrames:3,warmTimeout:900,propMarginFrac:.3,propMarginPx:160,texCap:320,texMaxPx:4096*4096,cacheBytes:24*1024*1024,cacheBytesLow:6*1024*1024,cacheCount:1024});
 const prefs={on:true,warm:true,resident:false,cache:true,hide3d:true,props:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k in prefs)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={zones:0,warms:0,warmMs:0,warmMeshes:0,chunksResident:0,chunksAll:0,overCap:0,leases:0,texHeld:0,hidden:0,shown:0,propsNear:0,propsFar:0,propsFarDrawn:0,frames:0,errors:0};
@@ -81,7 +81,7 @@ function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.
    if(warmState==='loading'&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';// 덩어리가 끝내 안 올라오면 미리 그리기 없이 진행
    const all=(prefs.resident&&g.count<=cap)||(prefs.warm&&warmState==='loading'&&g.count<=cap*3);
    if(g.count>cap)stats.overCap=g.count;
-   if(all)vb=fullBounds(grid,size);else if(finite4(vb))vb=expand(vb,CFG.prefetch);}catch(e){fail(e);}
+   if(all)vb=fullBounds(grid,size);else if(finite4(vb)&&CFG.prefetch>0)vb=expand(vb,CFG.prefetch);}catch(e){fail(e);}
   const pr=base.call(this,x,y,zone,{...grid,visibleBounds:vb});
   if(warmState==='loading'&&!warmPromise){const z=zone;warmPromise=Promise.resolve(pr).then(()=>{if(zoneKey===z&&warmState==='loading')warmState='ready';},e=>fail(e)).finally(()=>{warmPromise=null;});}
   return pr;};
