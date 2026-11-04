@@ -86,15 +86,22 @@ function world(o={}){
  ok('row meshes restored after the frame',[fNear,fFar,wFar,wBoth].every(m=>m.layers.mask===4));}
 
 // ---- 덩어리: 맵 전체 대기 / 큰 맵은 미리 올린 뒤 시야+고리 ----
-{const w=world();w.frame();await w.flush();w.frame();
- const u=w.log.updates[0];ok('under the cap: chunk update asks for the whole map (all 36 chunks resident)',w.r.chunks.rows.size===36&&u.grid.visibleBounds[2]>59,u);
+{const w=world();w.frame();const u=w.log.updates[0];ok('zone entry: chunk update asks for the whole map once (all 36 chunks loaded for the warm-up)',w.r.chunks.rows.size===36&&u.grid.visibleBounds[2]>59,u);
+ await w.flush();w.frame();
  ok('warm-up render: once, into an offscreen target, with every object un-culled, then target/layers/culling restored',w.api.inspect().stats.warms===1&&w.log.glRender.some(g=>g.rt&&g.rt.w===4&&g.cam===0xffffffff&&g.culled.every(c=>c===false))&&w.gl.rt===null&&w.sceneObjs.every(o=>o.frustumCulled===true),w.api.inspect());
  ok('chunk image leases are held for the zone',w.leases.length>=1&&w.leases.every(l=>!l.released));
  w.frame();w.frame();ok('warm-up not repeated in the same zone',w.api.inspect().stats.warms===1);
+ const last=w.log.updates.at(-1);ok('default (resident off): after the warm-up the engine band + prefetch ring (view +10) is requested again',last.grid.visibleBounds[2]===20&&w.r.chunks.rows.size<36,{vb:last.grid.visibleBounds,n:w.r.chunks.rows.size});
  w.frame('STORY:z2');ok('zone change releases the held leases',w.leases.every(l=>l.released));}
 {const w=world({cols:30,rows:20});w.frame();ok('over the cap: one full load for the warm-up',w.r.chunks.rows.size===600);await w.flush();w.frame();w.frame();
  const last=w.log.updates.at(-1);ok('after the warm-up only view + prefetch ring stays (engine band rules)',w.r.chunks.rows.size<40&&last.grid.visibleBounds[2]===20,{n:w.r.chunks.rows.size,vb:last.grid.visibleBounds});}
 
+{const w=world({prefs:{resident:true}});w.frame();await w.flush();w.frame();w.frame();w.frame();ok('{resident:true}: whole map stays loaded (standby) after the warm-up',w.r.chunks.rows.size===36);}
+// ---- 대기 캐시 한도 ----
+{const w=world();w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;w.frame();
+ w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;/* 엔진이 매 프레임 다시 쓰는 값 */
+ ok('idle geometry cache limit raised while on (engine writes 2MB/256 → reads 24MB/1024)',w.r.idleGeometryByteLimit===24*1024*1024&&w.r.idleGeometryLimit===1024,[w.r.idleGeometryByteLimit,w.r.idleGeometryLimit]);
+ w.api.set({on:false});ok('off: the engine values are plain properties again (2MB/256)',w.r.idleGeometryByteLimit===2*1024*1024&&w.r.idleGeometryLimit===256&&Object.getOwnPropertyDescriptor(w.r,'idleGeometryByteLimit').writable===true);}
 // ---- 2D 명령 텍스처 대기 ----
 {const w=world();const a=w.img('a'),b=w.img('b');w.frame('STORY:z1',[{kind:'image',image:a},{kind:'image',image:b},{kind:'image',image:a},{kind:'image',image:{},mutable:true}]);
  ok('command image textures held once each and uploaded (initTexture)',w.textures.get(a)?.refs===1&&w.textures.get(b)?.refs===1&&w.textures.get(a).tex.uploaded===true);

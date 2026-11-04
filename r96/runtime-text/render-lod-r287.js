@@ -3,22 +3,23 @@
 //  측정(헤드리스, 같은 빌드): 맵 지형은 엔진이 영웅 둘레 3×3 덩어리(10칸)+화면 안만 올리고, 벗어나면 내린다(병원 벽 그림·가림 재질은 버림).
 //  그래서 처음 가는 곳·되돌아오는 곳에서 덩어리를 새로 만들고 GPU 에 다시 올리느라 한 프레임이 길어진다(ep1a08 순간 이동 뒤 3D 그리기 최대 수백 ms).
 //  또 2D 그리기는 맵의 모든 조형물·벽(ep1a08 222개×2번)을 매 프레임 그리고, 화면 밖 것은 엔진이 나중에 버린다.
-//  ① 보조 렌더링(한 번): 지역에 들어오면 맵 전체 덩어리를 한 번 올리고(덩어리 수 상한 안이면 그대로 대기 상태로 둔다),
+//  ① 보조 렌더링(한 번): 지역에 들어오면 맵 전체 덩어리를 한 번 올리고(덩어리 수 상한×3 안에서),
 //     다 올라오면 화면 밖 4×4 렌더 타깃에 장면 전체를 한 번 그려 셰이더·지오메트리·텍스처를 미리 올린다. 화면에는 아무것도 그리지 않는다.
 //     덩어리 그림 파일은 지역을 떠날 때까지 잡아 두고(리스), 2D 조형물 그림 텍스처도 지역 동안 잡아 둔다 → 다시 와도 다시 올리지 않는다.
 //  ② 우선 렌더링: 대기 중인 덩어리 메시 중 엔진이 원래 올려 두었을 것(영웅 둘레 3×3+보이는 범위, 엔진 규칙 그대로)만 그리고 — 그래서 화면에 그려지는 지형은 끄기 상태와 같다 —
 //     덩어리에 속하지 않은 지형 메시는 시야(엔진이 계산한 보이는 범위)+주변 고리(RING 칸) 안만 그린다. 나머지는 그 프레임의 그리기 동안만
 //     layers.mask=0(대기)로 두었다가 그리기가 끝나면 원래 값으로 되돌린다(엔진이 visible 을 매 프레임 다시 켜므로 visible 대신 layers).
-//     덩어리 수가 상한을 넘는 큰 맵은 전체를 대기시키지 않고, 한 번 미리 올린 뒤 시야+고리(PREFETCH 칸)만 미리 올려 둔다.
+//     그 뒤엔 엔진 규칙대로 시야+고리(PREFETCH 칸)만 올려 두고, 내린 덩어리 지오메트리는 키운 대기 캐시(PC 24MB·모바일 6MB)에 GPU 버퍼째 남긴다.
+//     {resident:true} 면 맵 전체를 계속 올려 둔다(기본 끔 — R90 벽 테두리 같은 파생 오버레이가 맵 전체 벽으로 만들어져 삼각형이 늘어남, ep1b03 19k→49k).
 //  ③ 약한 렌더링: 화면+여백 밖 조형물·벽의 2D 그리기는 PROP_EVERY 프레임에 한 번만(돌아가며) 한다 — 그림 지연 로딩·나무 그림 바꾸기 같은
 //     그리기 부수 효과는 그대로 일어나고, 그 명령은 원래도 화면 밖이라 엔진이 버리던 것이다. 들어온 첫 몇 프레임은 전부 그린다(미리 그리기).
 //  판정·충돌·길 찾기·몹 AI·진행은 건드리지 않는다(그리기만). room.props·room.exploration·엔진 레이아웃은 읽기만 한다.
-//  끄기: localStorage['storyworld.r287.lod']='{"on":false}' (전부) — 부분: {"warm":false} {"resident":false} {"hide3d":false} {"props":false}
+//  끄기: localStorage['storyworld.r287.lod']='{"on":false}' (전부) — 부분: {"warm":false} {"cache":false} {"hide3d":false} {"props":false}, 맵 전체 상주 {"resident":true}
 (()=>{'use strict';
 if(window.__STORYWORLD_RENDER_LOD_R287__)return;
 const REV='R287-lod-1',KEY='storyworld.r287.lod';
-const CFG=Object.freeze({ring:4,prefetch:10,cap:400,capLow:120,propEvery:20,warmFrames:3,warmTimeout:900,propMarginFrac:.3,propMarginPx:160,texCap:320,texMaxPx:4096*4096});
-const prefs={on:true,warm:true,resident:true,hide3d:true,props:true};
+const CFG=Object.freeze({ring:4,prefetch:10,cap:400,capLow:120,propEvery:20,warmFrames:3,warmTimeout:900,propMarginFrac:.3,propMarginPx:160,texCap:320,texMaxPx:4096*4096,cacheBytes:24*1024*1024,cacheBytesLow:6*1024*1024,cacheCount:1024});
+const prefs={on:true,warm:true,resident:false,cache:true,hide3d:true,props:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object')for(const k in prefs)if(typeof s[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={zones:0,warms:0,warmMs:0,warmMeshes:0,chunksResident:0,chunksAll:0,overCap:0,leases:0,texHeld:0,hidden:0,shown:0,propsNear:0,propsFar:0,propsFarDrawn:0,frames:0,errors:0};
 let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -127,7 +128,14 @@ function park(r){parked.length=0;if(!on('hide3d'))return;const vb=r.visibleTerra
  const kids=root.children;for(let i=0;i<kids.length;i++){const o=kids[i];if(!o||!o.isMesh||o.layers.mask===0||rowMeshes.has(o))continue;const b=meshBox(o);if(!b||!outside(b,act))continue;put(o);}
  stats.hidden=parked.length/2;stats.shown=kids.length-stats.hidden;}
 function unpark(){for(let i=0;i<parked.length;i+=2){const o=parked[i];if(o.layers.mask===0)o.layers.mask=parked[i+1];}parked.length=0;}
-function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
+/* 대기 캐시: 엔진은 내린 덩어리의 지오메트리(GPU 버퍼째)를 개수 256·2MB 까지만 들고 있다가 버린다(매 프레임 한도를 다시 씀).
+   미리 그리기로 맵 전체를 한 번 올린 뒤 내린 덩어리가 그대로 남도록 한도만 키운다(PC 24MB·모바일 6MB). 끄면 엔진 값 그대로. */
+function boostCache(r){if(!r||r.__r287Cache)return;const ownB=Object.getOwnPropertyDescriptor(r,'idleGeometryByteLimit'),ownN=Object.getOwnPropertyDescriptor(r,'idleGeometryLimit');if(ownB&&!('value' in ownB)||ownN&&!('value' in ownN))return;
+ let b=r.idleGeometryByteLimit,n=r.idleGeometryLimit;r.__r287Cache=true;
+ Object.defineProperty(r,'idleGeometryByteLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(b||0,capFor(r)===CFG.cap?CFG.cacheBytes:CFG.cacheBytesLow):b;},set(v){b=v;}});
+ Object.defineProperty(r,'idleGeometryLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(n||0,CFG.cacheCount):n;},set(v){n=v;}});}
+function unboostCache(r){if(!r?.__r287Cache)return;const b=r.idleGeometryByteLimit,n=r.idleGeometryLimit;delete r.idleGeometryByteLimit;delete r.idleGeometryLimit;delete r.__r287Cache;r.idleGeometryByteLimit=b;r.idleGeometryLimit=n;}/* set() 이 prefs 를 먼저 바꿔 두므로 위 b,n 은 엔진 값 */
+function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;boostCache(r);const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
 function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;
  if(warmState==='ready'&&r.spatialBuilt){warmState='done';if(prefs.warm){holdLeases(r);warmRender(r);}stats.chunksResident=r.chunks?.rows?.size||0;}
  else if(warmState==='done')stats.chunksResident=r.chunks?.rows?.size||0;}catch(e){fail(e);}}
@@ -140,7 +148,7 @@ function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.
  if(Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r287)r.render=wrapFn(r.render);wrapGL(r);wrapChunks(r);}catch(e){fail(e);}}
 setInterval(wrapAll,500);wrapAll();
 function set(p){const was=prefs.on;for(const k in prefs)if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
- if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R)unwrapChunks(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}
+ if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R){unwrapChunks(R);unboostCache(R);}else if(!prefs.cache&&R)unboostCache(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}
 window.__STORYWORLD_RENDER_LOD_R287__=Object.freeze({revision:REV,config:CFG,expand,engineKeeps,chunkGrid,fullBounds,outside,screenOutside,farTurn,propMargin,set,
  inspect:()=>({revision:REV,prefs:{...prefs},zone:zoneKey,warmState,stats:{...stats},lastError,gameplayChanged:false,browserVerified:false,GPUVerified:false})});
 })();
