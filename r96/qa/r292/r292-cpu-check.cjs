@@ -75,6 +75,10 @@ const run=(c,s)=>vm.runInContext(s,c);const settle=()=>new Promise(r=>setImmedia
  for(const [h,acts] of Object.entries(want))for(const act of acts)ok(plays[h+':'+act]>=1,`played ${h}:${act}`);
  ok(!Object.keys(plays).some(k=>k.startsWith('michaela:')),'michaela never plays');ok(!plays['gunner:basic']&&!plays['seoha:blink'],'no strip → no play');
  const sup=X.inspect().stats.suppressed;ok(sup['basic-slash']>=1&&sup['blink-sigil']>=1&&sup['special-flare']>=1&&sup['wer-w-warning']>=1&&sup['wer-e-flight']>=1,'generic duplicates suppressed: '+JSON.stringify(sup));
+ // Codex #195: strip image not decoded yet → keep the generic effect (no suppression, nothing lost)
+ {const c=world(true);await settle();run(c,`readyImage=()=>null;player.hero='hwando';player.attackCD=0;effects=[];basicAttack();drawn=[];for(const e of effects)drawEffect(e)`);
+  const s2=c.__STORYWORLD_SKILL_FX_R292__.inspect().stats.suppressed;ok(!(s2['basic-slash']>0),'no suppression while strip image not ready: '+JSON.stringify(s2));
+  ok(run(c,"drawn.includes('slash')"),'generic slash still drawn while strip image not ready');}
  // 'hit' stage kept
  run(b,`player.hero='hwando';effects=[];cue('w','hit',1,1);drawn=[];for(const e of effects)drawEffect(e)`);ok(run(b,'drawn').includes('storySourceSkill'),'storySourceSkill hit stage still drawn');
  // drawing: frame advance, crop, rotation, anchor

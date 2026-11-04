@@ -27,6 +27,8 @@ function row(h,action){if(!on||!table||!h||h==='michaela')return null;return tab
 const asked=new Map();
 function image(r){const p=DIR+r.file;try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image){if(!asked.get(p+':ok')){asked.set(p+':ok',1);stats.loaded++;}return got.image;}
  const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
+/* Codex 리뷰(#195): 띠 그림이 실제로 디코드된 뒤에만 일반 그림을 숨긴다 — 느린 연결·실패 시 기존 이펙트 유지 */
+function ready(h,action){const r=row(h,action);return !!(r&&image(r));}
 let warmed=null;function warm(){const h=hero();if(!table||!h||h===warmed)return;warmed=h;for(const a of Object.keys(table[h]||{}))if(row(h,a))image(table[h][a]);}
 fetch(DIR+'index.json').then(r=>r.ok?r.json():null).then(j=>{table=j?.effects||null;warm();}).catch(fail);
 const list=[],SENT={type:'r292-skill-fx',x:0,y:0,age:0,life:Infinity,r292Sentinel:true};
@@ -53,10 +55,10 @@ try{
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const n0=typeof effects!=='undefined'&&Array.isArray(effects)?effects.length:0,res=base.apply(this,arguments);
   try{const o=opt||{},h=hero();
    if(cap&&cap.angle==null&&(type==='slash'||type==='link')){if(fin(o.angle)&&type==='slash')cap.angle=o.angle;else if(fin(o.tx)&&fin(o.ty))cap.angle=Math.atan2(o.ty-y,o.tx-x);}
-   if(cap&&cap.kind==='basic'&&type==='slash'&&typeof VFX==='object'&&o.asset===VFX.slash&&row(h,'basic'))hide(pushed(type,x,y,n0),'basic-slash');
-   if(cap&&cap.kind==='blink'&&type==='sigil'&&typeof VFX==='object'&&o.asset===VFX.blink&&row(h,'blink'))hide(pushed(type,x,y,n0),'blink-sigil');
-   if(type==='slash'&&typeof VFX==='object'&&o.asset===VFX.flare&&flareUntil[h]>T()&&row(h,'special'))hide(pushed(type,x,y,n0),'special-flare');
-   if(type==='storySourceSkill'&&o.storyWER&&o.sourceHero===h&&row(h,o.sourceSlot)){const slot=o.sourceSlot;
+   if(cap&&cap.kind==='basic'&&type==='slash'&&typeof VFX==='object'&&o.asset===VFX.slash&&ready(h,'basic'))hide(pushed(type,x,y,n0),'basic-slash');
+   if(cap&&cap.kind==='blink'&&type==='sigil'&&typeof VFX==='object'&&o.asset===VFX.blink&&ready(h,'blink'))hide(pushed(type,x,y,n0),'blink-sigil');
+   if(type==='slash'&&typeof VFX==='object'&&o.asset===VFX.flare&&flareUntil[h]>T()&&ready(h,'special'))hide(pushed(type,x,y,n0),'special-flare');
+   if(type==='storySourceSkill'&&o.storyWER&&o.sourceHero===h&&ready(h,o.sourceSlot)){const slot=o.sourceSlot;
     if(WER_HIDE.has(o.stage))hide(pushed(type,x,y,n0),'wer-'+slot+'-'+o.stage);
     const want=WER_STAGE[slot]||'warning',id=o.castId;
     if(o.stage===want&&!werSeen.has(id)){werSeen.set(id,1);if(werSeen.size>64)werSeen.delete(werSeen.keys().next().value);
