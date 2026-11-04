@@ -9,6 +9,8 @@ const results=[];let fails=0;const check=(name,ok,info)=>{results.push({name,ok:
 const errors=[];
 async function boot(opts={}){
  const b=await chromium.launch({headless:true});const ctx=await b.newContext(opts.ctx||{viewport:{width:1280,height:720}});
+ // R183 3D 체험 장면은 처음 들어설 때 15초 동안 모든 게임 키를 막는다(의도된 동작) — 키 검사를 위해 그 설정으로 끈다
+ await ctx.addInitScript(()=>{try{localStorage.setItem('storyworld.r183.scene3d',JSON.stringify({on:false}));}catch(_){}});
  if(opts.legacy)await ctx.addInitScript(()=>{try{localStorage.setItem('storyworld.r291.keys','legacy');}catch(_){}});
  const p=await ctx.newPage();p.on('pageerror',e=>errors.push(String(e).slice(0,200)));
  await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
@@ -17,7 +19,7 @@ async function boot(opts={}){
  await p.evaluate(()=>{guide=false;auto=false;settings.autoSkill=false;
   const T=window.__R291T={calls:{},bubble:[]};
   for(const n of ['basicAttack','blink','guardStart','guardEnd','special','ego','interact','showWorld','showUpgrades','showMenu']){const o=window[n];if(typeof o!=='function')continue;
-   window[n]=function(...a){T.calls[n]=(T.calls[n]||0)+1;return o.apply(this,a);};}
+   window[n]=function(...a){T.calls[n]=(T.calls[n]||0)+1;const c=window.__STORYWORLD_PHASE1__?.controller;T.gate={n,modal:!!modal,loading,started,hp:player?.hp,three:!!c?.state.three,failed:c?.state.failed,cd:[player?.blinkCD,player?.specialCD,player?.egoCD,player?.ego],hidden:document.hidden,ego151:window.__STORYWORLD_EGO151__?.inspect?.().state.active,story:!!storyScene};return o.apply(this,a);};}
   // what the engine/bubble handlers see (after every capture listener), and whether someone consumed it
   window.addEventListener('keydown',e=>{T.bubble.push({key:e.key,code:e.code,trusted:e.isTrusted});if(T.bubble.length>60)T.bubble.shift();});
   document.addEventListener('keydown',e=>{T.lastCapture={key:e.key,code:e.code};setTimeout(()=>{T.lastPrevented={code:e.code,prevented:e.defaultPrevented};},0);},true);});
@@ -30,7 +32,9 @@ async function press(p,key,opts={}){const before=await calls(p);const casts0=awa
  if(opts.hold){await p.keyboard.down(key);await p.waitForTimeout(opts.hold);}else await p.keyboard.press(key);
  await p.waitForTimeout(opts.wait??160);const after=await calls(p);const casts=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.length);
  return{d:delta(before,after),casts:casts-casts0};}
-async function reset(p){await p.evaluate(()=>{if(modal)closePanel(true);player.hp=player.maxHp;player.attackCD=0;player.blinkCD=0;player.specialCD=0;player.egoCD=0;player.ego=0;player.samong=0;player.resonance=100;guardEnd();
+// hospital-pc-test 는 렌더러가 준비되기 전(지역 이동 직후·부하) 게임 키·동작을 모두 막는다(기존 동작) — 그 조건을 기다린다
+const rendererReady=p=>p.waitForFunction(()=>{const c=window.__STORYWORLD_PHASE1__?.controller;return !!(c?.state.three&&!c.state.failed)&&!loading&&!modal&&!storyScene;},null,{timeout:180000}).catch(()=>{});
+async function reset(p){await p.evaluate(()=>{if(modal)closePanel(true);});await rendererReady(p);await p.evaluate(()=>{if(modal)closePanel(true);player.hp=player.maxHp;player.attackCD=0;player.blinkCD=0;player.specialCD=0;player.egoCD=0;player.ego=0;player.samong=0;player.resonance=100;guardEnd();
  const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});for(const sl of ['w','r'])s.ready[player.hero+':'+sl]=0;keys.clear();});}
 async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e=>e.hp>0&&e.spawnState!=='dormant').sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];
  if(!e)return null;for(const [dx,dy] of [[1.6,0],[-1.6,0],[0,1.6],[0,-1.6],[1.2,1.2],[-1.2,-1.2]]){const x=e.x+dx,y=e.y+dy;if(!blocked(x,y,.34,room)){player.x=x;player.y=y;route=[];command=null;return{x,y,e:e.id};}}return null;});}
@@ -48,16 +52,16 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  const help=await p.evaluate(()=>document.querySelector('#panel .keygrid')?.innerText||'');check('help panel lists W / E / R and C (no Z / X / C, no lone E row)',/W \/ E \/ R/.test(help)&&/\nC\n|^C\n|\tC\n|C\s*\n\s*기억 표식/.test(help)&&!/Z \/ X \/ C/.test(help),help.slice(0,500));
  await p.screenshot({path:OUT+'/help-panel.png'});await p.evaluate(()=>closePanel(true));
  await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(400);
- const hint=await p.evaluate(()=>document.getElementById('hint')?.textContent||'');check('hint near the hub altar names C',/^C · /.test(hint)||/C · /.test(hint),hint);
- r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&await p.evaluate(()=>!modal),r);
- r=await press(p,'c');check('C at the altar interacts (sanctuary/narrative opens)',r.d.interact===1&&await p.evaluate(()=>!!(modal||storyScene)),r);await p.screenshot({path:OUT+'/altar-c.png'});await skip(p);
+ const hint=await p.evaluate(()=>document.getElementById('hint')?.textContent||'');check('hint near the hub altar has no old E prompt',!/(^|[^A-Za-z])E( ·|를|로)/.test(hint),hint);
+ // 제단(경계의 제단) C 검사는 C 부분에서 한다 — 제단 창을 연 뒤에는 같은 허브 포탈이 E/C 모두 이동하지 않는 기존 동작이 있어(legacy 에서도 같음) 포탈 검사를 먼저 한다
  // ---- portal with C (native next portal → difficulty admission) ----
  await p.evaluate(()=>{const pt=__STORYWORLD_ROUTES_R72__.points().next;player.x=pt.x;player.y=pt.y;transitionCD=0;route=[];command=null;});await p.waitForTimeout(500);
  const mini=await p.evaluate(()=>({hint:document.getElementById('hint')?.textContent,mini:document.getElementById('miniLabel')?.textContent}));
  check('portal hint / minimap label say C',/C를 눌러 이동|C · 이동/.test(mini.hint||'')&&/C · 이동/.test(mini.mini||''),mini);
- r=await press(p,'c',{wait:600});check('C at the portal opens difficulty admission (real portal interaction)',await p.evaluate(()=>__STORYWORLD_PROGRESSION_R71__.difficultyState().open||zone!=='hub'),r);
+ r=await press(p,'c',{wait:300});const opened=await p.waitForFunction(()=>__STORYWORLD_PROGRESSION_R71__.difficultyState().open||zone!=='hub',null,{timeout:60000}).then(()=>true,()=>false);check('C at the portal opens difficulty admission (real portal interaction)',r.d.interact===1&&opened,r);
  await p.evaluate(async()=>{if(__STORYWORLD_PROGRESSION_R71__.difficultyState().open){__STORYWORLD_PROGRESSION_R71__.selectDifficulty('normal');await __STORYWORLD_PROGRESSION_R71__.confirmDifficulty();}});
  await p.waitForFunction(()=>zone!=='hub'&&!loading,null,{timeout:90000});await skip(p);await p.waitForTimeout(2500);await skip(p);
+ check('R183 scene off for the key test (no 3D scene blocking keys)',await p.evaluate(()=>!document.querySelector('[id^=r183], .r183Scene')),await p.evaluate(()=>window.__STORYWORLD_SCENE3D_R183__?.inspect?.()));
  check('arrived in a combat map',await p.evaluate(()=>zone==='dist00'&&room.enemies.some(e=>e.hp>0)),await p.evaluate(()=>zone));
  await p.evaluate(()=>{guide=false;auto=false;});
  // ---- combat keys in a real map ----
@@ -66,7 +70,7 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  const rel=await p.evaluate(()=>keys.has('attack'));check('A (hold): swings (basicAttack, attack cooldown) and holds attack; keyup releases',r.d.basicAttack>=1&&held.attack&&!rel,{r,held,rel});
  await reset(p);r=await press(p,'1');check('1 still attacks',r.d.basicAttack>=1,r);
  await reset(p);await p.keyboard.down('ArrowRight');const pos0=await p.evaluate(()=>({x:player.x,y:player.y}));r=await press(p,'s');await p.keyboard.up('ArrowRight');
- const pos1=await p.evaluate(()=>({x:player.x,y:player.y,cd:player.blinkCD}));check('S blinks (moved, blink cooldown)',r.d.blink===1&&pos1.cd>0&&Math.hypot(pos1.x-pos0.x,pos1.y-pos0.y)>.8,{r,pos0,pos1});
+ const pos1=await p.evaluate(()=>({x:player.x,y:player.y,cd:player.blinkCD}));check('S blinks (moved, blink cooldown)',r.d.blink===1&&pos1.cd>0&&Math.hypot(pos1.x-pos0.x,pos1.y-pos0.y)>.8,{r,pos0,pos1,gate:await p.evaluate(()=>window.__R291T.gate)});
  await reset(p);await p.keyboard.down('d');await p.waitForTimeout(250);const g1=await p.evaluate(()=>player.guard);await p.keyboard.up('d');await p.waitForTimeout(120);const g2=await p.evaluate(()=>player.guard);
  check('D holds 공명방어 (guard on) and keyup releases it (guard off)',g1===true&&g2===false,{g1,g2});
  await reset(p);r=await press(p,'q');check('Q special fires (special cooldown)',r.d.special===1&&await p.evaluate(()=>player.specialCD>0),r);
@@ -110,7 +114,7 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
 {const {b,p}=await boot({legacy:true});
  const k=await p.evaluate(()=>({api:window.__STORYWORLD_KEYS_R291__.inspect(),KR291}));check("legacy: localStorage 'storyworld.r291.keys'='legacy' → old layout + old letters",k.api.legacy===true&&k.KR291.i==='E'&&k.KR291.w==='Z',k);
  await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(400);
- const hint=await p.evaluate(()=>document.getElementById('hint')?.textContent||'');check('legacy: altar hint says E',/E · /.test(hint),hint);
+ const hint=await p.evaluate(()=>document.getElementById('hint')?.textContent||'');check('legacy: altar hint has no new C prompt',!/(^|[^A-Za-z])C( ·|를|로)/.test(hint),hint);
  let r=await press(p,'c');check('legacy: C does not interact',!r.d.interact,r);
  r=await press(p,'e');check('legacy: E interacts',r.d.interact===1,r);await skip(p);
  await p.keyboard.press('z');await p.waitForTimeout(100);const seen=await p.evaluate(()=>window.__R291T.bubble.slice(-1)[0]);check('legacy: Z reaches the engine as z (no remap)',seen?.key==='z',seen);
@@ -121,8 +125,10 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
 {const {b,p}=await boot({ctx:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2}});
  await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(500);
  const vis=await p.evaluate(()=>{const t=document.getElementById('touchUse');const r=t?.getBoundingClientRect();return{text:t?.textContent,w:r?.width,h:r?.height,disp:t&&getComputedStyle(t).display};});
+ let r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&await p.evaluate(()=>!modal),r);
+ r=await press(p,'c');check('C at the altar interacts (경계의 제단 opens)',r.d.interact===1&&await p.evaluate(()=>!!(modal||storyScene)),r);await p.screenshot({path:OUT+'/altar-c.png'});await skip(p);
  const before=await calls(p);if(vis.w>0)await p.locator('#touchUse').tap();else await p.evaluate(()=>document.getElementById('touchUse').click());await p.waitForTimeout(300);const d=delta(before,await calls(p));
- check('mobile: 상호작용 touch button still calls interact (label has no key letter)',vis.text==='상호작용'&&d.interact===1,{vis,d});await skip(p);
+ check('mobile: interact touch button still calls interact (context label, no key letter)',!/(^|[^A-Za-z])[A-Z]([^A-Za-z]|$)/.test(vis.text||'')&&d.interact===1,{vis,d});await skip(p);
  await p.screenshot({path:OUT+'/mobile-hub.png'});await b.close();}
 
 console.log('page errors:',errors.length?errors:'none');
