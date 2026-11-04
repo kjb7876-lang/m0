@@ -10,6 +10,7 @@
 //  · 공격 이펙트·상태이상(이 시트로 그리는 몹만): 공격이 닿는 순간 영웅 자리에 유형별 그림 — 물기(네발·거미·뱀), 할퀴기(손톱), 베기(칼),
 //    찌르기(바늘·창), 낙하(결정·역십자가·덩어리 → 위에서 비석·파편이 떨어져 꽂힘), 가시(뿌리), 실(인형), 감전(기계), 산(점액), 한기·독안개(망령·안개), 불(용).
 //    상태이상은 엔진 둔화(heroSlowUntil150, 이동 0.62배)를 짧게(0.6~1.1초) — 수백 마리가 몰려도 4초에 한 번만, 영웅이 공격 거리 안일 때만.
+//  · R290: 시트 줄에 path 가 있으면 그 경로를 쓴다(새 손그림 시트는 assets/r290/mobs/, 원래 임시 시트는 그대로 둔다).
 //  · 혼자 플레이일 때만. 끄기: localStorage['storyworld.r248.mobs']='{"on":false}' (그림), '{"fx":false}' (공격 이펙트·상태이상)
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_UNIQUE_R248__)return;
@@ -24,7 +25,7 @@ function baseName(n){return String(n||'').replace(/^중간보스\s*·\s*/,'').re
 const cache=new WeakMap();
 const dream=e=>!!(e&&(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM')));
 function sheetOf(e){if(!e)return null;let v=cache.get(e);if(v&&v.n===e.name&&v.k===e.r248Key)return v.s;const b=baseName(e.name);
- const id=(e.r248Key&&DATA.byName[e.r248Key])||(dream(e)&&DATA.byName['사몽:'+b])||DATA.byName[b]||null,s=id?DATA.sheets[id]||null:null;cache.set(e,{n:e.name,k:e.r248Key,s:s?{id,...s,path:DATA.dir+s.file}:null});return cache.get(e).s;}
+ const id=(e.r248Key&&DATA.byName[e.r248Key])||(dream(e)&&DATA.byName['사몽:'+b])||DATA.byName[b]||null,s=id?DATA.sheets[id]||null:null;cache.set(e,{n:e.name,k:e.r248Key,s:s?{id,...s,path:s.path||DATA.dir+s.file}:null});return cache.get(e).s;}
 // 사몽에 본편 몹 이름이 그대로 나온 몹(기증 몹 이름이 남은 것): 그 구역(없으면 그 장)의 사몽 몹 이름으로 바꾸고, 그림은 사몽 전용 새 시트로.
 const STORY=new Set(DATA.storyNames||[]);
 function samongName(){try{const x=room?.samongR103;if(!x)return null;const z=window.__STORYWORLD_SAMONG_ZONES_R115__?.zone?.(x.zone),E=window.__STORYWORLD_SAMONG_R103__?.episodes;const ep=Array.isArray(E)?E.find(r=>r&&r.key===x.key):E?.[x.key];const n=z?.mobName||ep?.mobName||null;return n&&!STORY.has(n)?n:null;}catch(err){fail(err);return null;}}
