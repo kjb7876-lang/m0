@@ -13393,6 +13393,36 @@
       "sha256": "964adfaa8d41c4b50efd4a903a8ec95bdc3d9e1e4687de193a3509490185a6f0"
     },
     {
+      "path": "assets/r290/mobs/index.json",
+      "bytes": 22170,
+      "sha256": "f56eb5d5ede36507286a62557f5538222095025ae0872c9cfd40fd9429152168"
+    },
+    {
+      "path": "assets/r290/mobs/m001.webp",
+      "bytes": 477146,
+      "sha256": "1c5c96ad8dada5571732c967975910da5aa6fd0d1e709f037d0b7a74356c1c53"
+    },
+    {
+      "path": "assets/r290/mobs/m003.webp",
+      "bytes": 435614,
+      "sha256": "c330cc414ddf9b41ec346016732ddb79a9345c24e68b941aada2ae65dd72a251"
+    },
+    {
+      "path": "assets/r290/mobs/m004.webp",
+      "bytes": 490564,
+      "sha256": "13f2bf78c12ee3b3d744c335d67b98b62278a5c94e7a8d0f3c77f91f14eeaf36"
+    },
+    {
+      "path": "assets/r290/mobs/m005.webp",
+      "bytes": 332174,
+      "sha256": "c5672ae771670331ba7bb69c0ae608607d9aa8107d674ed174a672c09440d9ea"
+    },
+    {
+      "path": "assets/r290/mobs/m014.webp",
+      "bytes": 348590,
+      "sha256": "274c9f58a91c95c90810a66a3d5414d74994900916a2eb54449ba57929efc42e"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22209,8 +22239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566726,
-      "sha256": "77ae76330a537cc32b9b52560f93a0d416d27a5c710b53fe2c31d0c0f6e3bac8"
+      "bytes": 6566767,
+      "sha256": "1c37a714f082e4c5707907789e41b1421e854f300b519541bacf44458355198c"
     },
     {
       "path": "intro-r140.js",
@@ -22236,6 +22266,11 @@
       "path": "michaela-r247.js",
       "bytes": 12069,
       "sha256": "caa54c8bbb5594a33ba045d9e3fb519e67899004308a0af8a921d0e6d1f0353e"
+    },
+    {
+      "path": "mob-art-r290.js",
+      "bytes": 2853,
+      "sha256": "19bd9f724ed098f2abcdf47b07bc930a78d4f29b816ded484db256473522bcb2"
     },
     {
       "path": "mob-death-r188.js",
@@ -22284,8 +22319,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 16462,
-      "sha256": "2f5cd5ae5c2e284ffa4941c643cc4c72c694be9fefbb8f56f65b02b1510d7f96"
+      "bytes": 16623,
+      "sha256": "5296b97a911190eee55e421bb5a52e5fee52e68642ddb6ee85ce11ef737bc353"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -22778,9 +22813,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4555,
-  "totalBytes": 860896862,
-  "webHTMLSha256": "77ae76330a537cc32b9b52560f93a0d416d27a5c710b53fe2c31d0c0f6e3bac8",
+  "fileCount": 4562,
+  "totalBytes": 863006175,
+  "webHTMLSha256": "1c37a714f082e4c5707907789e41b1421e854f300b519541bacf44458355198c",
   "largest": [
     {
       "path": "index.html",
