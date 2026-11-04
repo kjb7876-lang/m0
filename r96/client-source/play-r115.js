@@ -72,7 +72,7 @@ const assist={next:0,until:0,skillAt:0,swing:new WeakSet()};
 function steering(){const k=typeof keys!=='undefined'?keys:null,j=typeof joystickVector!=='undefined'?joystickVector:null;
  const sx=(k?.has?.('ArrowRight')?1:0)-(k?.has?.('ArrowLeft')?1:0)+finite(j?.x),sy=(k?.has?.('ArrowDown')?1:0)-(k?.has?.('ArrowUp')?1:0)+finite(j?.y);return Math.hypot(sx,sy)>.01;}
 const assisting=()=>prefs.assist&&live()&&solo()&&!busy()&&player.hp>0&&((typeof auto!=='undefined'&&auto)||(typeof guide!=='undefined'&&guide))&&!steering();
-function threats(){const out=[];if(typeof hazards==='undefined')return out;for(const h of hazards){if(h.type!=='field'||!(finite(h.age)<finite(h.warning)+.05))continue;const hostile=h.owner==null?h.samongPattern==='r115-hold':(room.enemies||[]).some(e=>e.id===h.owner);if(hostile)out.push(h);}return out;}
+function threats(){const out=[];if(typeof hazards==='undefined')return out;for(const h of hazards){if((h.type!=='field'&&!h.r314Prop)||!(finite(h.age)<finite(h.warning)+.05))continue;const hostile=h.owner==null?h.samongPattern==='r115-hold':(room.enemies||[]).some(e=>e.id===h.owner);if(hostile)out.push(h);}return out;}
 const inThreat=(x,y,list,pad=.35)=>list.some(h=>Math.hypot(h.x-x,h.y-y)<finite(h.radius,1)+pad);
 function foes(r=12){const out=[];for(const e of room.enemies||[])if(liveFoe(e)&&Math.hypot(e.x-player.x,e.y-player.y)<r)out.push(e);return out;}
 function stepTo(p,hold){if(typeof route==='undefined')return false;route=[{x:p.x,y:p.y}];command=null;assist.until=now()+hold;try{if(typeof guideTimer!=='undefined')guideTimer=Math.max(guideTimer,hold);}catch(_){}return true;}
