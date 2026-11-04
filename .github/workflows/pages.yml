@@ -53,6 +53,8 @@ jobs:
           PY
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
+      - name: R307 CC0 sound effects (licenses, credits, size cap, event map, off switch)
+        run: node r96/qa/r307/r307-cpu-check.cjs
       - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions
         run: node r96/qa/r103/samong-cpu-check.cjs
       - name: R104 boss key-pose frames, pivots and draw-only swap

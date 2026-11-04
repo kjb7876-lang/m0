@@ -13523,6 +13523,121 @@
       "sha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d"
     },
     {
+      "path": "assets/r307/sfx/SFX_CREDITS.md",
+      "bytes": 417,
+      "sha256": "28aa71bdd1a87359edf5902bd7728df812d8f1b970f2ca376f4443a1ac6027a6"
+    },
+    {
+      "path": "assets/r307/sfx/altar-1.ogg",
+      "bytes": 7814,
+      "sha256": "c3a204d714c524bb631fd33ce5618693d5cf18883e017c47cfc78787167eb290"
+    },
+    {
+      "path": "assets/r307/sfx/book-close-1.ogg",
+      "bytes": 5357,
+      "sha256": "5c54aefdb39e4019be2766de1c4cac358d1c56b38db340813b9f1598615d4380"
+    },
+    {
+      "path": "assets/r307/sfx/door-open-1.ogg",
+      "bytes": 10476,
+      "sha256": "4b4787a2ec2c121bfe7dc27ef648adde8e5bb74ef6a08d0de3854a8d7c9eaaaa"
+    },
+    {
+      "path": "assets/r307/sfx/door-open-2.ogg",
+      "bytes": 13669,
+      "sha256": "1b0243cec5007bc0ce1276fa02e72bd10d5302a047d52592ec2a75b34bf1576c"
+    },
+    {
+      "path": "assets/r307/sfx/enemy-death-beast-1.ogg",
+      "bytes": 8100,
+      "sha256": "c71c1ccc9ffd6643dbc54bb840ada336a671a98a9d2b570971d3af789a7dfc57"
+    },
+    {
+      "path": "assets/r307/sfx/enemy-death-beast-2.ogg",
+      "bytes": 7566,
+      "sha256": "095ade1f345068b1826751c9afe8fde5e052ec070ec125e069fde50ad7404f05"
+    },
+    {
+      "path": "assets/r307/sfx/enemy-death-shade-1.ogg",
+      "bytes": 7519,
+      "sha256": "cd6a5fa42b20574941ebcceec231c628571427601801059deb8951a081acb962"
+    },
+    {
+      "path": "assets/r307/sfx/enemy-death-shade-2.ogg",
+      "bytes": 12229,
+      "sha256": "4f1ebda9aee6e83f2e62985bcb3fa3d4edb8d56854e4f3405c99029bbccf4c26"
+    },
+    {
+      "path": "assets/r307/sfx/index.json",
+      "bytes": 14156,
+      "sha256": "6b41c6f83546bcfcab1fd5598c15a5ea8c5d8fc004ec323d4d28c45c93f74a8b"
+    },
+    {
+      "path": "assets/r307/sfx/licenses/artisticdude-rpg-sound-pack-page.txt",
+      "bytes": 340,
+      "sha256": "d751f5f40552a8fee5d3305baba581c1b44a023f12188efc4cd45356f171d428"
+    },
+    {
+      "path": "assets/r307/sfx/licenses/kenney-interface-sounds-license.txt",
+      "bytes": 574,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "assets/r307/sfx/licenses/kenney-rpg-sounds-license.txt",
+      "bytes": 477,
+      "sha256": "6f12f89bf8d1cc417b25afd1f8e6d9560b2b1d1ac2b175cf4ee9c377e180783d"
+    },
+    {
+      "path": "assets/r307/sfx/page-flip-1.ogg",
+      "bytes": 8773,
+      "sha256": "76455a2cd06f5a4716b1bd4b84ad257e7529248e8a1d0aab52893043426c3a98"
+    },
+    {
+      "path": "assets/r307/sfx/page-flip-2.ogg",
+      "bytes": 7113,
+      "sha256": "781e9fa2f86632b41551554816aaadfcd3267cb2ca549c453a6473441fce3d3c"
+    },
+    {
+      "path": "assets/r307/sfx/page-flip-3.ogg",
+      "bytes": 5333,
+      "sha256": "86f467ccdecdfa097219d340276f880e2da2a122713b3e00d048ae28298aa0bc"
+    },
+    {
+      "path": "assets/r307/sfx/pickup-1.ogg",
+      "bytes": 5827,
+      "sha256": "987243d5cb3392255a121770626bbf9a95e256a0dffba9e73472f78b41c7e1c3"
+    },
+    {
+      "path": "assets/r307/sfx/pickup-2.ogg",
+      "bytes": 5243,
+      "sha256": "da519f50727f53db9a34b8825402d8f9f3779357446ce06c958e2a9fbdd44f93"
+    },
+    {
+      "path": "assets/r307/sfx/player-death-1.ogg",
+      "bytes": 6075,
+      "sha256": "2438f59d1f34188a0ab8ef2096cb0673fecd3515ebab25c4e1b106e8ede7ab7c"
+    },
+    {
+      "path": "assets/r307/sfx/player-death-2.ogg",
+      "bytes": 7128,
+      "sha256": "4dee56e8deac4b2d2028aeca9039ec25dd44dbe6169699298c723cd22d3d5fe1"
+    },
+    {
+      "path": "assets/r307/sfx/ui-back-1.ogg",
+      "bytes": 4380,
+      "sha256": "c23e0838f5f29f16a57591b18e6cdc62b02dc2a84c79d0005137e18f950627b6"
+    },
+    {
+      "path": "assets/r307/sfx/ui-click-1.ogg",
+      "bytes": 3801,
+      "sha256": "a03d7e1b9f7b4805d7d1eefef79dde6c037848e75b421a01625d009f9bf1423a"
+    },
+    {
+      "path": "assets/r307/sfx/ui-click-2.ogg",
+      "bytes": 3976,
+      "sha256": "9dc575598a2682a0b2cc5f652929611483607bae2dfcaa5b6e791b9f58e4a977"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22339,8 +22454,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568173,
-      "sha256": "dfd57108c7a27f2d0b8c4132aa5a31b2a0716293a23cb46c805edc8fef50465a"
+      "bytes": 6568210,
+      "sha256": "0d538a2544d3787520c3d6751973968e333130acea34c162e7acf4cb0bb5af75"
     },
     {
       "path": "intro-r140.js",
@@ -22683,6 +22798,11 @@
       "sha256": "6436054059e14e2008a98d6950172a515e18a2e985027b069c8f65aa5d25291c"
     },
     {
+      "path": "sfx-r307.js",
+      "bytes": 9836,
+      "sha256": "c9bb60b2cdc841aecfbb6698aac6f6eb0c814f5f818647a8d89c69b0bb3a0586"
+    },
+    {
       "path": "skill-fx-r292.js",
       "bytes": 11326,
       "sha256": "c5be1b2a4421919cded5ea469f8340d96b6d81372fae90f1d4c671e92bb3e70a"
@@ -22933,9 +23053,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4586,
-  "totalBytes": 868768509,
-  "webHTMLSha256": "dfd57108c7a27f2d0b8c4132aa5a31b2a0716293a23cb46c805edc8fef50465a",
+  "fileCount": 4610,
+  "totalBytes": 868924725,
+  "webHTMLSha256": "0d538a2544d3787520c3d6751973968e333130acea34c162e7acf4cb0bb5af75",
   "largest": [
     {
       "path": "index.html",

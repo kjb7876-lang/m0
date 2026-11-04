@@ -1,0 +1,6 @@
+Captured https://opengameart.org/content/rpg-sound-pack on 2026-11-04 (text of the OpenGameArt page fields).
+Title: RPG Sound Pack | OpenGameArt.org
+Author: artisticdude
+License(s): CC0
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Note: the zip ships no license file; the page license field is the source of the license.
