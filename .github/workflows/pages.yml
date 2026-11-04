@@ -331,6 +331,8 @@ jobs:
         run: node r96/qa/r287/r287-cpu-check.cjs
       - name: R292 hero action hand-painted fx strips CPU check
         run: node r96/qa/r292/r292-cpu-check.cjs
+      - name: R302 hero two-colour palette (neon mint, spear-tip strip replaced) CPU check
+        run: node r96/qa/r302/r302-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check
         run: node r96/qa/r261/r261-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check
