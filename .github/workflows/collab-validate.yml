@@ -1,0 +1,48 @@
+name: Collab contract check
+# 작업 계약(ops/tasks)·자산 manifest(ops/manifests)·검증기 단위 시험. 게임 빌드와 무관, 비밀정보 없음.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ops/**'
+      - 'scripts/collab/**'
+      - 'docs/agent-collaboration.md'
+      - '.github/workflows/collab-validate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'ops/**'
+      - 'scripts/collab/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: collab-validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests + all contracts/manifests
+        run: |
+          set -o pipefail
+          mkdir -p collab-evidence
+          python -I scripts/collab/test_validate.py 2>&1 | tee collab-evidence/unit.log
+          python -I scripts/collab/validate.py all | tee collab-evidence/contracts.json
+          for m in ops/manifests/*.json; do
+            python -I scripts/collab/validate.py manifest "$m" --targets | tee -a collab-evidence/manifests.jsonl
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: collab-evidence
+          path: collab-evidence/
+          retention-days: 14
