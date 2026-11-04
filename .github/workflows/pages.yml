@@ -249,6 +249,8 @@ jobs:
         run: node r96/qa/r229/r229-cpu-check.cjs
       - name: R284 Michaela NE/NW run — legs apart (no crossing) CPU check
         run: node r96/qa/r284/r284-cpu-check.cjs
+      - name: R289 dots asset events server (MCP Events, signed webhooks) local test
+        run: node --no-warnings tools/dots-asset-events/test/worker.test.mjs
       - name: R230 mobs blink beside the hero before a vertical melee attack CPU check
         run: node r96/qa/r230/r230-cpu-check.cjs
       - name: R237 auto skill level-up spends passive points (cheapest first) CPU check
