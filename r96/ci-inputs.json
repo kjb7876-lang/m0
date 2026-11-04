@@ -97,11 +97,11 @@
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 761514,
-      "sha256": "6197c4d54f308c49ce56fb113c1117dead3ae175cbecf5f44084d325d9a98e6d"
+      "bytes": 765689,
+      "sha256": "841f4de91c0c641f5eabc7054d9a222b848dcb55ce790f0c26f115893dc2cb56"
     }
   ],
-  "archiveSHA256": "23e0f8c8fee6064b8cee097a598eb539da2c81f8320a3e54ead654fa69b7cd9f",
+  "archiveSHA256": "a81ac539d27e56f6d8fb0cc7915ac108068d9914444a08511a3caa750c4278ea",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5792,8 +5792,8 @@
     },
     {
       "path": "qa/r83/portal-check.cjs",
-      "bytes": 11860,
-      "sha256": "d47d5ce4f05888044a24a804a7f3025ddf9e80ac3a41018b14cb144c1941628b"
+      "bytes": 11869,
+      "sha256": "888a1ce6517f9a17398e85e126b386e7f4b2243195d6b432476b9594f79427a0"
     },
     {
       "path": "qa/r83/portal-patch.cjs",

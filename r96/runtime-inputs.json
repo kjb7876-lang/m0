@@ -3795,7 +3795,8 @@
     "assets/r292/fx/seoha/basic.webp",
     "assets/r292/fx/seoha/e.webp",
     "assets/r292/fx/seoha/w.webp",
-    "mobile-perf-r298.js"
+    "mobile-perf-r298.js",
+    "keys-r291.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4870,5 +4871,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "616222937566eadceb1a3bf0999b1b6d0f8125c58c6511e4302bc32582c074a9"
+  "runtimeManifestSHA256": "2d22c221e38afa7cfedf98f7834432c413c2f5b93f27cf9baddbc5c030906bee"
 }
