@@ -15,8 +15,8 @@
  function waitForKey(direction){
   const key=layer+':'+zone+':'+direction;
   route=[];command=null;
-  if(waitingKey!==key){waitingKey=key;note('guide-waits-for-interaction',{direction});toast('포탈 앞에 도착했습니다. E를 눌러 이동하세요.',3);}
-  if($('hint'))$('hint').textContent='포탈 · E를 눌러 이동';
+  if(waitingKey!==key){waitingKey=key;note('guide-waits-for-interaction',{direction});toast('포탈 앞에 도착했습니다. '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'를 눌러 이동하세요.',3);}
+  if($('hint'))$('hint').textContent='포탈 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'를 눌러 이동';
   return false;
  }
  // Every legacy guide implementation (including EGO) dispatches travel inside
@@ -45,10 +45,10 @@
  };
  const hudBase=updateHUD;updateHUD=function(...args){
   const result=hudBase.apply(this,args),portal=nearby();
-  if(portal&&$('hint'))$('hint').textContent='포탈 · E를 눌러 이동 · '+(regionById[portal.destination]?.title||'다음 지역');
+  if(portal&&$('hint'))$('hint').textContent='포탈 · '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'를 눌러 이동 · '+(regionById[portal.destination]?.title||'다음 지역');
   return result;
  };
- if($('miniLabel'))$('miniLabel').textContent='포탈 앞에서 E · 이동';
+ if($('miniLabel'))$('miniLabel').textContent='포탈 앞에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' · 이동';
  window.__STORYWORLD_PORTAL_INTERACTION_R83__=Object.freeze({
   revision:'R83-EXPLICIT-PORTALS',nearby,
   inspect:()=>({requiresInteraction:true,guideWalks:true,guideCrossesPortals:false,waitingForKey:!!waitingKey,events:[...events]})

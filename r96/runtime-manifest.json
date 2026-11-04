@@ -21479,8 +21479,8 @@
     },
     {
       "path": "auto-levelup-r237.js",
-      "bytes": 8078,
-      "sha256": "3eed5d8c956772c2282152dcd798933c8935d3bfd8a47819dfa69f94a2eda457"
+      "bytes": 8157,
+      "sha256": "b71f94741a48408ffd2f67eb33f1b2b96bfa87c473da2cd95c37b28976fdefbf"
     },
     {
       "path": "balance-r179.js",
@@ -22299,8 +22299,8 @@
     },
     {
       "path": "hospital-maze-progression.js",
-      "bytes": 24525,
-      "sha256": "14893dd3dfb3a7f55c3b35913f3d1bac2ce17714586afb1652b93c4cf2eb66d4"
+      "bytes": 24875,
+      "sha256": "968a39404ac3f5ff8a3accaaba79a87111696c9b6dff3606839cc4d63867270f"
     },
     {
       "path": "hospital-maze-visuals.js",
@@ -22309,8 +22309,8 @@
     },
     {
       "path": "hospital-pc-test.js",
-      "bytes": 9850,
-      "sha256": "018fac971e532ab0098e4b14a37b32f5658ffc701939e2ff1d08d023a0fec27a"
+      "bytes": 9996,
+      "sha256": "7ec04f361d7abdbf67bae8b23bd3de95f5eafa287e121869926d53bf75355e22"
     },
     {
       "path": "hospital-settings-r84.js",
@@ -22339,8 +22339,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566941,
-      "sha256": "889a14883422e7dd90fc8df245665f9d2b39669c1d029123a7ca6de4aa12cfaf"
+      "bytes": 6568261,
+      "sha256": "012a1517ca88757005d8b75b1ab48f0a637bf59369511e2247daf79229831656"
     },
     {
       "path": "intro-r140.js",
@@ -22348,9 +22348,19 @@
       "sha256": "13099847e64cbc1b1af0cbe0c5a2fe37949340abdf01827bc45c183c2591fbbb"
     },
     {
+      "path": "keys-r291.js",
+      "bytes": 7477,
+      "sha256": "2d317a803c3c14fcb2b2dfa0586a5e7fd5b63f1aa2eb1536ecf7597557b62aa4"
+    },
+    {
       "path": "lag-r217.js",
       "bytes": 2390,
       "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
+    },
+    {
+      "path": "light-atmos-r300.js",
+      "bytes": 18846,
+      "sha256": "cf82aa1c42a4ca364fee771a32862c680660d80b5440932a1da235bd3d940d76"
     },
     {
       "path": "light-r182.js",
@@ -22364,8 +22374,8 @@
     },
     {
       "path": "michaela-r247.js",
-      "bytes": 12069,
-      "sha256": "caa54c8bbb5594a33ba045d9e3fb519e67899004308a0af8a921d0e6d1f0353e"
+      "bytes": 12179,
+      "sha256": "fa83d50f48594a14f804df32dce32dc2a3bff51b381ca7c2f4097d1713f79aeb"
     },
     {
       "path": "mob-art-r290.js",
@@ -22534,8 +22544,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 26938,
-      "sha256": "7d42efbc1c94d0f3af0dbe0eae30e257e1e31a374749612ca460649ae3d4c56a"
+      "bytes": 27069,
+      "sha256": "2be4c9b6ea1056c2b95bf8f2628b8b6ab84cfbd4aa800d6f596cf6c5c36bcb34"
     },
     {
       "path": "play-r169.js",
@@ -22559,8 +22569,8 @@
     },
     {
       "path": "portal-interaction-r83.js",
-      "bytes": 3109,
-      "sha256": "d38e825b38487de0a19d0b25ed0696da40519f8a9da1d1355087c53a25b3e422"
+      "bytes": 3309,
+      "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
     },
     {
       "path": "props-fit-r303.js",
@@ -22634,8 +22644,8 @@
     },
     {
       "path": "samong-r103.js",
-      "bytes": 86454,
-      "sha256": "ca5d6fa4537fc21ccd45a05523cc85caabb6eff83cf29bf65483c6857d626c18"
+      "bytes": 86695,
+      "sha256": "5a932d1efb16c28ad773a15390628b19376d9bb2f03173a7770b4fb36011de9e"
     },
     {
       "path": "samong-r161.js",
@@ -22669,8 +22679,8 @@
     },
     {
       "path": "samong-zones-r115.js",
-      "bytes": 49231,
-      "sha256": "49c37282de5e17a0ff26ca467e3ac80d2bcc0b21cb33b2bec20c1c6f5c08b492"
+      "bytes": 49888,
+      "sha256": "3284f48cddd0c18d6896298054646fa2f52c4b6ff9d93d4c038e51761d359935"
     },
     {
       "path": "scene-props-r117.js",
@@ -22684,8 +22694,8 @@
     },
     {
       "path": "skill-fx-r292.js",
-      "bytes": 11326,
-      "sha256": "c5be1b2a4421919cded5ea469f8340d96b6d81372fae90f1d4c671e92bb3e70a"
+      "bytes": 12208,
+      "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
     },
     {
       "path": "skills-r181.js",
@@ -22694,8 +22704,8 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 7971,
-      "sha256": "0597b98a822bcfea8a72dfac234f993b3e2363e407b32fbd61ca69d6d4b1b3cb"
+      "bytes": 8912,
+      "sha256": "360f5c572cd157df93839817fd92daca673fbea162de9051d77d9c5c120b26dc"
     },
     {
       "path": "status-r96.js",
@@ -22764,8 +22774,8 @@
     },
     {
       "path": "upgrades-r169.js",
-      "bytes": 12725,
-      "sha256": "3259d90ca2624d6094b5fc5bc84a5924d32d41e4f1421d1652ed2df765c80b81"
+      "bytes": 12996,
+      "sha256": "99b10ccdf429e3b38decf5bdb0baceb4401ac1ddbe720110ae1804527893d285"
     },
     {
       "path": "vendor/three/LICENSE",
@@ -22824,8 +22834,8 @@
     },
     {
       "path": "visual-r90.js",
-      "bytes": 21514,
-      "sha256": "91fb041a69dfb72191847e100cb8782ac33976650898d33b0c878c4aa59bf33f"
+      "bytes": 21620,
+      "sha256": "691b36170f191cb768379a18c087ef5e6e2ecfd0280b8fbdcc254f1317ef82dc"
     },
     {
       "path": "visual-r91.js",
@@ -22879,8 +22889,8 @@
     },
     {
       "path": "world-combat-r78.js",
-      "bytes": 21407,
-      "sha256": "bad9d7b772d2f2235a99b40bec10128f5fc928c0c7f1f9b36a468ec13e8aa106"
+      "bytes": 21507,
+      "sha256": "48a4806a9ab62a8c3cf302e84970a3b21bb6ac87e8d8f520ceb504fafabf5615"
     },
     {
       "path": "world-combat-v4-compat.js",
@@ -22919,8 +22929,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 32546,
-      "sha256": "27e9c0c090090f9ea31f7413b431899d5034a9e46b6e46294af822ebf3ac0485"
+      "bytes": 33079,
+      "sha256": "1c9f04f9f6cc117fceccdb2d47e05a870d79ee4b6e16b6c7f42b35f9da2a79cf"
     },
     {
       "path": "world-tiles-r118.js",
@@ -22933,9 +22943,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4586,
-  "totalBytes": 868771993,
-  "webHTMLSha256": "889a14883422e7dd90fc8df245665f9d2b39669c1d029123a7ca6de4aa12cfaf",
+  "fileCount": 4588,
+  "totalBytes": 868804383,
+  "webHTMLSha256": "012a1517ca88757005d8b75b1ab48f0a637bf59369511e2247daf79229831656",
   "largest": [
     {
       "path": "index.html",
