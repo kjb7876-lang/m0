@@ -51,8 +51,12 @@ jobs:
           r=json.load(open('r96/qa/r96/status-native-results.json'))
           assert len(r['checks'])==24 and all(v['passed'] for v in r['checks'])
           PY
+      - name: R303 props fit (theme, wall facing, floor clearance)
+        run: node r96/qa/r303/r303-cpu-check.cjs
       - name: R300 light pools, low fog, motes and hero footing budgets
         run: node r96/qa/r300/r300-cpu-check.cjs
+      - name: R308 one classical track per map, gapless loop, episode continuity, license fields
+        run: node r96/qa/r308/r308-cpu-check.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
       - name: R299 environment props/decals placement determinism, caps, no collision change, door/altar clearance

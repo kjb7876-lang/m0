@@ -13728,6 +13728,61 @@
       "sha256": "18735983d9b39b16e815cdade26599391d2a578a55ba85fb9ed1177475d22259"
     },
     {
+      "path": "assets/r308/bgm/beethoven-malinconia.ogg",
+      "bytes": 2886997,
+      "sha256": "7b1efdefd7bed722c36e4758d2c0a599a6507b422c28645754fabfcba57e5f7f"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-cello-largo.ogg",
+      "bytes": 1940852,
+      "sha256": "c6a672fbce1943034445c2bc7e7d30be7017239523bee0d442e712b9a3f4498b"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-etude-cello.ogg",
+      "bytes": 3050404,
+      "sha256": "0405edd64a18c4554d0e957503aa0bec8c211326347ff453ab35821ae6028024"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-etude-lament.ogg",
+      "bytes": 2065377,
+      "sha256": "498ad7c05d072690b736761c2ca40f59a40da1eb932852a2eb5ee4430c52d9e2"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-funeral-72.ogg",
+      "bytes": 2852825,
+      "sha256": "648d491489df026019ee9e7e2d80c37544015269976c0deeb6ee6cf3dbec00ee"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-15-3.ogg",
+      "bytes": 1798971,
+      "sha256": "0c5fabc44f7647fdb5199c0f6af4ff21a09646d8ea7cae6f2a510ff68985f7c4"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-27-1.ogg",
+      "bytes": 2837486,
+      "sha256": "072bce5586b5bd5f1ac86a5007ce2ebe231b05f559b54476c24ccf3fbb55842e"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-55-1.ogg",
+      "bytes": 2238610,
+      "sha256": "28e6057482e6b2ac53df26c18a88d2b90699014d6f3e0e403b029dee1d70e460"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-prelude-45.ogg",
+      "bytes": 2367753,
+      "sha256": "ca016319bade508b4476e253c876df64246b49f455005e8fc6e69b826110e9c2"
+    },
+    {
+      "path": "assets/r308/bgm/index.json",
+      "bytes": 42805,
+      "sha256": "4e9abe9d6f1f353c64ca410afdda8be5c04af15ad6a15247afd0fc534420fdcc"
+    },
+    {
+      "path": "assets/r308/bgm/mozart-k421.ogg",
+      "bytes": 2822895,
+      "sha256": "5d9579cd09306ad106aa9044785b50c0bc0c554d43793bc4519737b4538a7ca7"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -21698,6 +21753,11 @@
       "sha256": "525ca75dd1c4732a259116705bbca9fbb3ca58bf4b4127f86ff1e6e6654ff23e"
     },
     {
+      "path": "bgm-map-r308.js",
+      "bytes": 12912,
+      "sha256": "9cec003aaf439dab721e14316b6d4837ec57a07ad75474e0562f3993e912b076"
+    },
+    {
       "path": "boss-meteor-r241.js",
       "bytes": 10768,
       "sha256": "dd5ddc485c4199bcf1abf25e451a958da7210c142ee279ddebcd4a814a921af5"
@@ -22554,8 +22614,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568307,
-      "sha256": "79ad2139aa6149a450c5ccc2399ef873de4b542a9279dce07d82cdd0c946d828"
+      "bytes": 6568391,
+      "sha256": "541e109bccd08826c67c8b8fa30ae75ec666400e78d3912a1f3a3e058aee1695"
     },
     {
       "path": "intro-r140.js",
@@ -22786,6 +22846,11 @@
       "path": "portal-interaction-r83.js",
       "bytes": 3309,
       "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
+    },
+    {
+      "path": "props-fit-r303.js",
+      "bytes": 16894,
+      "sha256": "5551378807aa7a921bf4feb4b670c1eae19cd7b2f569de8698c3743097c56ec9"
     },
     {
       "path": "props-r102.js",
@@ -23153,9 +23218,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4630,
-  "totalBytes": 874127319,
-  "webHTMLSha256": "79ad2139aa6149a450c5ccc2399ef873de4b542a9279dce07d82cdd0c946d828",
+  "fileCount": 4643,
+  "totalBytes": 899062184,
+  "webHTMLSha256": "541e109bccd08826c67c8b8fa30ae75ec666400e78d3912a1f3a3e058aee1695",
   "largest": [
     {
       "path": "index.html",
