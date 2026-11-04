@@ -63,6 +63,11 @@ function decals(){if(typeof room==='undefined'||!eligible(room)||!room.r317Decal
  if(ctx.scope)ctx.scope({id:'r317:decal:'+d.name,kind:'ground',x:d.x,y:d.y,groundAligned:true,presentationOnly:true,alive:false,sourcePath:d.path},paint);else paint();}}
 if(typeof groundImage==='function'){const b=groundImage;groundImage=function(...a){const out=b.apply(this,a);try{decals();}catch(e){fail(e);}return out;};}
 if(typeof makeRoom==='function'){const b=makeRoom;makeRoom=function(...a){const r=b.apply(this,a);try{apply(r);}catch(e){fail(e);}return r;};}
+// Native entry/restore wrappers prune decoded images after makeRoom. Reload only
+// this active room's existing visual paths after those wrappers have completed.
+async function prepareCurrent(){const r=typeof room!=='undefined'?room:null;if(!eligible(r))return;apply(r);const paths=[...new Set([...(r.props||[]).filter(p=>p.r317).map(p=>p.path),...(r.r317Decals||[]).map(p=>p.path)])];if(paths.length&&typeof ensureImages==='function')await ensureImages(paths);}
+if(typeof enterRegion==='function'){const b=enterRegion;enterRegion=async function(...a){const out=await b.apply(this,a);if(out!==false)try{await prepareCurrent();}catch(e){fail(e);}return out;};}
+if(typeof restoreSave==='function'){const b=restoreSave;restoreSave=async function(...a){const out=await b.apply(this,a);if(out!==false)try{await prepareCurrent();}catch(e){fail(e);}return out;};}
 
 // Separate DOM layers animate existing images. No image asset is generated or edited.
 // No replay command is added; absent Balrog placement leaves this automatic path dormant.
