@@ -138,8 +138,11 @@ function boostCache(r){if(!r||r.__r287Cache)return;const ownB=Object.getOwnPrope
  Object.defineProperty(r,'idleGeometryLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(n||0,CFG.cacheCount):n;},set(v){n=v;}});}
 function unboostCache(r){if(!r?.__r287Cache)return;const b=r.idleGeometryByteLimit,n=r.idleGeometryLimit;delete r.idleGeometryByteLimit;delete r.idleGeometryLimit;delete r.__r287Cache;r.idleGeometryByteLimit=b;r.idleGeometryLimit=n;}/* set() 이 prefs 를 먼저 바꿔 두므로 위 b,n 은 엔진 값 */
 function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;boostCache(r);const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
-function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;if((warmState==='loading'||warmState==='ready')&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';/* 시간 초과는 프레임마다 본다(덩어리 update 가 없어도) */
- if(warmState==='ready'&&r.spatialBuilt){warmState='done';if(prefs.warm){holdLeases(r);warmRender(r);}stats.chunksResident=r.chunks?.rows?.size||0;}
+/* 미리 그리기(또는 시간 초과)가 끝나면 엔진 범위로 바로 줄인다 — 엔진은 위치·시야 키가 바뀔 때만 update 를 불러, 가만히 있으면 맵 전체가 남는다.
+   마지막 엔진 요청 그대로 다시 부르고(이제 'done' 이라 원래 범위), 엔진 키도 비워 다음 프레임에 엔진이 스스로 다시 요청하게 한다. */
+function shrink(r){try{if('lastChunkPosition' in r)r.lastChunkPosition=null;const A=lastArgs;if(A&&zoneKey&&r.chunks?.update&&!(prefs.resident&&chunkGrid(A.grid).count<=capFor(r)))Promise.resolve(r.chunks.update(A.x,A.y,zoneKey,A.grid)).catch(fail);}catch(e){fail(e);}}
+function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;if((warmState==='loading'||warmState==='ready')&&frameNo-zoneAt>CFG.warmTimeout){warmState='done';shrink(r);}/* 시간 초과는 프레임마다 본다(덩어리 update 가 없어도) */
+ if(warmState==='ready'&&r.spatialBuilt){warmState='done';if(prefs.warm){holdLeases(r);warmRender(r);}shrink(r);stats.chunksResident=r.chunks?.rows?.size||0;}
  else if(warmState==='done')stats.chunksResident=r.chunks?.rows?.size||0;}catch(e){fail(e);}}
 const wrapFn=fn=>{if(fn.__r287)return fn;const w=function(frame){before(this,frame);try{return fn.apply(this,arguments);}finally{after(this);}};w.__r287=true;return w;};
 function wrapGL(r){const gl=r?.renderer;if(!gl||gl.__r287)return;const base=gl.render;gl.__r287=true;

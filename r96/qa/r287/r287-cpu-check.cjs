@@ -108,6 +108,11 @@ function world(o={}){
  ok('zone change during a pending full load: the new zone still reaches the warm-up (per-zone generation)',w.api.inspect().warmState==='done'&&w.api.inspect().zone==='STORY:z2'&&w.api.inspect().stats.warms===1,w.api.inspect());}
 {const w=world({defer:true,keyed:true});w.frame();for(let i=0;i<w.api.config.warmTimeout+5;i++)w.frame();
  ok('warm-up timeout advances per frame even with no chunk updates (stationary hero, load never finishes)',w.api.inspect().warmState==='done',w.api.inspect().warmState);}
+// Codex 리뷰 3: 미리 그리기/시간 초과 뒤 영웅이 가만히 있으면(엔진 update 없음) 맵 전체가 계속 상주하면 안 된다
+{const w=world({keyed:true});w.frame();await w.flush();w.frame();w.frame();
+ ok('stationary hero: after the warm-up the band shrinks back without a new engine update',w.api.inspect().stats.warms===1&&w.r.chunks.rows.size<36,w.r.chunks.rows.size);}
+{const w=world({defer:true,keyed:true});w.frame();for(let i=0;i<w.api.config.warmTimeout+5;i++)w.frame();
+ ok('stationary hero: after the warm-up timeout the band shrinks back too',w.api.inspect().warmState==='done'&&w.r.chunks.rows.size<36,w.r.chunks.rows.size);}
 // ---- 대기 캐시 한도 ----
 {const w=world();w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;w.frame();
  w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;/* 엔진이 매 프레임 다시 쓰는 값 */
