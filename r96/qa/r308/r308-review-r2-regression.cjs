@@ -74,3 +74,17 @@ test('slow incoming track failure stops R308 before fallback', async () => {
   assert.equal(c.fallbackPlaying, true);
   assert.equal(c.overlaps, 0);
 });
+test('incoming deck paused while buffering resumes after music is wanted again', async () => {
+  const {c, decks, tick} = await boot(true);
+  tick(); const outgoing = decks.find(d => !d.paused);
+  c.zone = 'dist06'; tick();
+  const incoming = decks.find(d => d !== outgoing);
+  assert.equal(incoming.paused, false);
+  c.settings.music = false; tick();
+  assert.equal(decks.every(d => d.paused), true);
+  c.settings.music = true; incoming.readyState = 4; tick();
+  assert.equal(incoming.paused, false);
+  incoming.emit('playing'); tick(100); tick(2500);
+  assert.equal(outgoing.paused, true);
+  assert.equal(incoming.paused, false);
+});
