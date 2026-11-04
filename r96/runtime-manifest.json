@@ -22209,8 +22209,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566636,
-      "sha256": "aee3ec86d5b47da3d9d86cd99339f457c16f152644f4fda72782084b106a5ad2"
+      "bytes": 6566680,
+      "sha256": "3821a43fc6cf597532345e3cd32487cc04a6c3c5650c26c56cbc7f60ce2e344f"
     },
     {
       "path": "intro-r140.js",
@@ -22441,6 +22441,11 @@
       "path": "render-compat-r83.js",
       "bytes": 2345,
       "sha256": "aecbc8b4d4bbea8462118768d8108d86ca2eb76c867e6dbef934735918e809a9"
+    },
+    {
+      "path": "render-lod-r287.js",
+      "bytes": 15072,
+      "sha256": "0cc979ec82cc686805407f3d0d4c630e16c9618253953660cca2e1ee79784587"
     },
     {
       "path": "roof-height-r267.js",
@@ -22768,9 +22773,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4553,
-  "totalBytes": 860871027,
-  "webHTMLSha256": "aee3ec86d5b47da3d9d86cd99339f457c16f152644f4fda72782084b106a5ad2",
+  "fileCount": 4554,
+  "totalBytes": 860886143,
+  "webHTMLSha256": "3821a43fc6cf597532345e3cd32487cc04a6c3c5650c26c56cbc7f60ce2e344f",
   "largest": [
     {
       "path": "index.html",
