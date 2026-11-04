@@ -55,9 +55,18 @@ function onKey(ev){if(ev.type==='keydown')stats.down++;else stats.up++;translate
 window.addEventListener('keydown',onKey,true);window.addEventListener('keyup',onKey,true);
 // 이 키(엔진 논리 키)로 바뀌는가 — 검사·도구용.
 function logical(key,opts={}){const ev={key,code:opts.code||'',shiftKey:!!opts.shift,ctrlKey:!!opts.ctrl,metaKey:false,altKey:!!opts.alt,target:opts.target||null,type:'keydown'};translate(ev);return ev.key;}
+// 지금 쓸 수 있는 본편 칸의 키 글자만(R209 중복 정리로 꺼진 칸은 빼서 죽은 키를 안내하지 않는다).
+//  R209: 모든 영웅 E 칸(돌진 = 블링크 S), 미카엘라·기억사수 W 칸(= 공명방어 D) — storyworld.r209.skills {dedupe:false} 면 다시 켜짐.
+//  R247: 미카엘라 W·E 는 새 스킬이 맡으므로 살아 있다. hero 를 안 주면 지금 영웅(없으면 어느 영웅이든 쓸 수 있는 칸).
+const HEROES8=['hwando','seoha','neon','michaela','lauren','hunter','slayer','gunner'];
+function slotLive(hero,slot){try{const R=window.__STORYWORLD_SKILLS_R209__;if(!R?.removed?.(hero,slot))return true;return hero==='michaela'&&(slot==='w'||slot==='e')&&!!window.__STORYWORLD_MICHAELA_R247__?.on?.();}catch(_){return true;}}
+function liveSlots(hero){if(hero===undefined){try{hero=(typeof player==='object'&&player&&typeof started!=='undefined'&&started)?player.hero:null;}catch(_){hero=null;}}
+ return ['w','e','r'].filter(sl=>hero?slotLive(hero,sl):HEROES8.some(h=>slotLive(h,sl)));}
+function letters(){return (typeof KR291!=='undefined'&&KR291)?KR291:{w:legacy?'Z':'W',e:legacy?'X':'E',r:legacy?'C':'R'};}
+function werLabel(sep=' / ',hero){const L=letters(),s=liveSlots(hero);return s.length?s.map(sl=>L[sl]).join(sep):'-';}
 // legacy: 정적 HTML 두 곳(첫 화면 안내·미니맵 포탈 글자)만 예전 글자로 되돌린다. 나머지 글자는 KR291 을 읽는다.
-function legacyStatic(){if(!legacy)return;try{for(const el of document.querySelectorAll('.r291-i'))el.textContent='E';for(const el of document.querySelectorAll('.r291-wer'))el.textContent='Z / X / C';const m=document.getElementById('miniLabel');if(m&&m.textContent==='포탈 앞에서 C · 이동')m.textContent='포탈 앞에서 E · 이동';}catch(e){fail(e);}}
-if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',legacyStatic);else legacyStatic();}
-window.__STORYWORLD_KEYS_R291__=Object.freeze({rev:REV,storageKey:STORE,legacy,map:legacy?{}:MAP,table:TABLE,translate,logical,
+function staticText(){try{for(const el of document.querySelectorAll('.r291-wer'))el.textContent=werLabel(' / ',null);if(!legacy)return;for(const el of document.querySelectorAll('.r291-i'))el.textContent='E';const m=document.getElementById('miniLabel');if(m&&m.textContent==='포탈 앞에서 C · 이동')m.textContent='포탈 앞에서 E · 이동';}catch(e){fail(e);}}
+if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',staticText);else staticText();}
+window.__STORYWORLD_KEYS_R291__=Object.freeze({rev:REV,storageKey:STORE,legacy,map:legacy?{}:MAP,table:TABLE,translate,logical,liveSlots,werLabel,
  inspect:()=>({rev:REV,legacy,stats:{...stats},recent:recent.slice(),lastError})});
 })();

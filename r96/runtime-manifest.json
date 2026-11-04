@@ -22209,8 +22209,8 @@
     },
     {
       "path": "hospital-pc-test.js",
-      "bytes": 9946,
-      "sha256": "e532d56c3ea690486b11c772d3dce56619ad166c7b2a9426d25a2d9cbd929e24"
+      "bytes": 9996,
+      "sha256": "7ec04f361d7abdbf67bae8b23bd3de95f5eafa287e121869926d53bf75355e22"
     },
     {
       "path": "hospital-settings-r84.js",
@@ -22239,8 +22239,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6567718,
-      "sha256": "dcd1daa995ff220e512a90c18d14c32781675c981c2c9ef5ccd39b78c2d91274"
+      "bytes": 6568042,
+      "sha256": "5e4f4a6804dd3b644c0730ecb64e276922df25303eedc301d7038ef96d9473bd"
     },
     {
       "path": "intro-r140.js",
@@ -22249,8 +22249,8 @@
     },
     {
       "path": "keys-r291.js",
-      "bytes": 6168,
-      "sha256": "8bfa356df664f69ae9b2422855778c1cc2c94190fe4c1f3b6f308f93ec21ac62"
+      "bytes": 7477,
+      "sha256": "2d317a803c3c14fcb2b2dfa0586a5e7fd5b63f1aa2eb1536ecf7597557b62aa4"
     },
     {
       "path": "lag-r217.js",
@@ -22579,8 +22579,8 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 7971,
-      "sha256": "0597b98a822bcfea8a72dfac234f993b3e2363e407b32fbd61ca69d6d4b1b3cb"
+      "bytes": 8912,
+      "sha256": "360f5c572cd157df93839817fd92daca673fbea162de9051d77d9c5c120b26dc"
     },
     {
       "path": "status-r96.js",
@@ -22804,8 +22804,8 @@
     },
     {
       "path": "world-retro-r89.js",
-      "bytes": 32866,
-      "sha256": "d52b5ab18b5c542dbf9b6da004b1f9decc4a5ee63a128500e072617ed37193fd"
+      "bytes": 33079,
+      "sha256": "1c9f04f9f6cc117fceccdb2d47e05a870d79ee4b6e16b6c7f42b35f9da2a79cf"
     },
     {
       "path": "world-tiles-r118.js",
@@ -22819,8 +22819,8 @@
     }
   ],
   "fileCount": 4563,
-  "totalBytes": 863015849,
-  "webHTMLSha256": "dcd1daa995ff220e512a90c18d14c32781675c981c2c9ef5ccd39b78c2d91274",
+  "totalBytes": 863018686,
+  "webHTMLSha256": "5e4f4a6804dd3b644c0730ecb64e276922df25303eedc301d7038ef96d9473bd",
   "largest": [
     {
       "path": "index.html",

@@ -34,8 +34,8 @@ async function press(p,key,opts={}){const before=await calls(p);const casts0=awa
  return{d:delta(before,after),casts:casts-casts0};}
 // hospital-pc-test 는 렌더러가 준비되기 전(지역 이동 직후·부하) 게임 키·동작을 모두 막는다(기존 동작) — 그 조건을 기다린다
 const rendererReady=p=>p.waitForFunction(()=>{const c=window.__STORYWORLD_PHASE1__?.controller;return !!(c?.state.three&&!c.state.failed)&&!loading&&!modal&&!storyScene;},null,{timeout:180000}).catch(()=>{});
-async function reset(p){await p.evaluate(()=>{if(modal)closePanel(true);});await rendererReady(p);await p.evaluate(()=>{if(modal)closePanel(true);player.hp=player.maxHp;player.attackCD=0;player.blinkCD=0;player.specialCD=0;player.egoCD=0;player.ego=0;player.samong=0;player.resonance=100;guardEnd();
- const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});for(const sl of ['w','r'])s.ready[player.hero+':'+sl]=0;keys.clear();});}
+async function reset(p){await p.evaluate(()=>{if(modal)closePanel(true);});await rendererReady(p);await p.evaluate(()=>{if(modal)closePanel(true);player.hp=Math.max(player.hp,maxHP());player.attackCD=0;player.blinkCD=0;player.specialCD=0;player.egoCD=0;player.ego=0;player.samong=0;player.resonance=100;guardEnd();
+ const s=player.storyWER||(player.storyWER={ready:{},buffs:{}});for(const sl of ['w','e','r']){const k=player.hero+':'+sl;if(!(s.ready[k]>time+1e5))s.ready[k]=0;}keys.clear();});}
 async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e=>e.hp>0&&e.spawnState!=='dormant').sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];
  if(!e)return null;for(const [dx,dy] of [[1.6,0],[-1.6,0],[0,1.6],[0,-1.6],[1.2,1.2],[-1.2,-1.2]]){const x=e.x+dx,y=e.y+dy;if(!blocked(x,y,.34,room)){player.x=x;player.y=y;route=[];command=null;return{x,y,e:e.id};}}return null;});}
 
@@ -63,7 +63,8 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  await p.waitForFunction(()=>zone!=='hub'&&!loading,null,{timeout:90000});await skip(p);await p.waitForTimeout(2500);await skip(p);
  check('R183 scene off for the key test (no 3D scene blocking keys)',await p.evaluate(()=>!document.querySelector('[id^=r183], .r183Scene')),await p.evaluate(()=>window.__STORYWORLD_SCENE3D_R183__?.inspect?.()));
  check('arrived in a combat map',await p.evaluate(()=>zone==='dist00'&&room.enemies.some(e=>e.hp>0)),await p.evaluate(()=>zone));
- await p.evaluate(()=>{guide=false;auto=false;});
+ // 몹 34마리 사이에서 키를 하나씩 재므로 영웅이 죽지 않게 체력을 계속 채운다(죽으면 엔진이 모든 동작을 막는다 — 키와 무관)
+ await p.evaluate(()=>{guide=false;auto=false;window.__r291hp=setInterval(()=>{try{if(player&&player.hp>0)player.hp=Math.max(player.hp,maxHP());}catch(_){}},20);});
  // ---- combat keys in a real map ----
  await reset(p);await nearEnemy(p);
  r=await press(p,'a',{hold:350});const held=await p.evaluate(()=>({attack:keys.has('attack'),cd:player.attackCD}));await p.keyboard.up('a');await p.waitForTimeout(120);
@@ -80,9 +81,9 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  const ready=sl=>p.evaluate(sl=>(player.storyWER?.ready?.[player.hero+':'+sl]||0)-time,sl);
  await reset(p);await nearEnemy(p);r=await press(p,'w');check('W casts story W ('+hero+') with a cooldown',r.casts===1&&await ready('w')>0,{r,cd:await ready('w')});
  await reset(p);await nearEnemy(p);r=await press(p,'r');check('R casts story R with a cooldown',r.casts===1&&await ready('r')>0,{r,cd:await ready('r')});
- await reset(p);await nearEnemy(p);r=await press(p,'e');check('E = story E slot: removed by R209 for '+hero+' → no cast, and it is NOT interact',r.casts===0&&!r.d.interact,r);
+ await reset(p);await nearEnemy(p);r=await press(p,'e');const lastE=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.slice(-1)[0]?.slot);check('E casts story E (dash, R291 user decision re-enabled) with a cooldown — not blink, not interact',r.casts===1&&lastE==='e'&&await ready('e')>0&&!r.d.blink&&!r.d.interact,{r,lastE,cd:await ready('e')});
  await reset(p);await nearEnemy(p);r=await press(p,'6');check('6 = W',r.casts===1,r);await reset(p);await nearEnemy(p);r=await press(p,'8');check('8 = R',r.casts===1,r);
- await reset(p);await nearEnemy(p);r=await press(p,'7');check('7 = E slot (removed) → nothing',r.casts===0&&!Object.keys(r.d).length,r);
+ await reset(p);await nearEnemy(p);r=await press(p,'7');check('7 = E (cast, nothing else)',r.casts===1&&!Object.keys(r.d).length,r);
  await reset(p);await nearEnemy(p);r=await press(p,'z');check('old Z does nothing in combat',r.casts===0&&!Object.keys(r.d).length,r);
  await reset(p);await nearEnemy(p);r=await press(p,'x');check('old X does nothing in combat',r.casts===0&&!Object.keys(r.d).length,r);
  await reset(p);r=await press(p,'c');check('C away from anything: interact is called (and nothing else)',r.d.interact===1&&Object.keys(r.d).length===1&&r.casts===0,r);
@@ -93,6 +94,25 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  await reset(p);await p.keyboard.press('g');await p.waitForTimeout(150);const gp=await p.evaluate(()=>window.__R291T.lastPrevented);
  check('G still reaches the golden-thread handler (consumed: preventDefault)',gp?.code==='KeyG'&&gp.prevented===true,gp);await p.evaluate(()=>{window.__STORYWORLD_GOLDEN_R72__?.cancelAll?.();if(modal)closePanel(true);});
  const bub=await p.evaluate(()=>window.__R291T.bubble.slice(-40));check('events stay trusted after relabelling',bub.length>0&&bub.every(e=>e.trusted),bub.slice(-3));
+ // ---- R291 사용자 결정 "E·W 둘 다 되살리기": E/W 단추가 보이고, 반자동이 E 를 다시 쓰고, 기억사수 W·미카엘라 R247 W/E ----
+ {const vis=await p.evaluate(()=>['w','e','r'].map(s=>{const b=document.getElementById('story-wer-'+s);return !!b&&!b.hidden&&getComputedStyle(b).display!=='none';}));check('hwando: W / E / R buttons all shown on the skill bar',vis.every(Boolean),vis);}
+ await reset(p);
+ {const far=await p.evaluate(()=>{const e=room.enemies.filter(e=>e.hp>0).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];for(const d of [6,5,7,4.5]){for(let a=0;a<12;a++){const x=e.x+Math.cos(a/12*6.283)*d,y=e.y+Math.sin(a/12*6.283)*d;if(!blocked(x,y,.34,room)){player.x=x;player.y=y;route=[];command=null;return true;}}}return false;});
+  const n0=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.length);await p.evaluate(()=>{const s=player.storyWER;s.ready[player.hero+':w']=time+99;s.ready[player.hero+':r']=time+99;s.ready[player.hero+':e']=0;auto=true;});
+  await p.waitForFunction(n=>window.__STORYWORLD_WER__.inspect().casts.length>n,n0,{timeout:20000}).catch(()=>{});await p.evaluate(()=>{auto=false;});
+  const ac=await p.evaluate(n=>window.__STORYWORLD_WER__.inspect().casts.slice(n).map(c=>c.slot),n0);check('semi-auto casts the re-enabled E again (R209 far cooldown no longer blocks it)',far&&ac.includes('e'),{far,ac});}
+ const switchHero=h=>p.evaluate(async h=>{loading=true;try{await ensureImages(heroPaths(h));player.hero=h;player.combo=0;player.ego=0;}finally{loading=false;}updateHUD();},h);
+ await switchHero('gunner');await p.waitForTimeout(400);
+ await reset(p);await nearEnemy(p);r=await press(p,'w');{const last=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.slice(-1)[0]);check('gunner: W casts story W (상태 정화) with a cooldown — not guard',r.casts===1&&last?.slot==='w'&&last?.hero==='gunner'&&await ready('w')>0&&!r.d.guardStart,{r,last});}
+ await reset(p);await nearEnemy(p);r=await press(p,'e');check('gunner: E casts story E',r.casts===1&&await ready('e')>0&&!r.d.blink,r);
+ {const vis=await p.evaluate(()=>['w','e','r'].map(s=>{const b=document.getElementById('story-wer-'+s);return !!b&&!b.hidden&&getComputedStyle(b).display!=='none';}));check('gunner: W / E / R buttons shown',vis.every(Boolean),vis);}
+ await p.screenshot({path:OUT+'/hud-gunner.png'});
+ await switchHero('michaela');await p.waitForTimeout(400);
+ {await reset(p);await nearEnemy(p);const z0=await p.evaluate(()=>window.__STORYWORLD_MICHAELA_R247__.inspect());r=await press(p,'w');const z1=await p.evaluate(()=>window.__STORYWORLD_MICHAELA_R247__.inspect());
+  check('michaela: W fires her R247 skill once and NOT the original W (no double cast)',z0.on&&z1.stats.z===z0.stats.z+1&&r.casts===0,{z0:z0.stats,z1:z1.stats,r});
+  await reset(p);await nearEnemy(p);const x0=z1.stats.x;r=await press(p,'e');const x1=(await p.evaluate(()=>window.__STORYWORLD_MICHAELA_R247__.inspect())).stats.x;
+  check('michaela: E fires her R247 skill once and NOT the original E',x1===x0+1&&r.casts===0,{x0,x1,r});}
+ await switchHero('hwando');await p.waitForTimeout(300);
  // ---- R81/R74 door with C ----
  await reset(p);
  const door=await p.evaluate(()=>{const W=window.__STORYWORLD_WORLD_R74__;for(const t of W.interactions()){for(let a=0;a<16;a++)for(const rr of [1.2,1.8,2.4]){const x=t.point.x+Math.cos(a/16*6.283)*rr,y=t.point.y+Math.sin(a/16*6.283)*rr;if(blocked(x,y,.34,room))continue;const ox=player.x,oy=player.y;player.x=x;player.y=y;if(W.canUse(t)){route=[];command=null;return{id:t.id,x,y,open:W.inspect().doors.find(d=>d.id===t.id).open};}player.x=ox;player.y=oy;}}return null;});

@@ -39,7 +39,8 @@ ok('no walkable pocket is cut off from the entrance by rock bulges (6 seeds × 2
  ok('samong mood quick toggle and detailed toggle stay in sync both ways',/r123QuickMood input'\);if\(qm\)qm\.checked=el\.checked/.test(mood));}
 // Codex #132 리뷰 3건
 {const cave=C('cave-r204.js');ok('cave: failed build and leaving eligibility restore hidden native geometry (even without a group)',/if\(st\.failed\)\{if\(r\.__r204Hidden\)restoreNative\(r\);return;\}/.test(cave)&&/if\(st\?\.group\)st\.group\.visible=false;if\(r\.__r204Hidden\)restoreNative\(r\);return;/.test(cave)&&/r\.__r204Hidden=true;\}/.test(cave)&&/r\.__r204Hidden=false;\}/.test(cave));}
-{const sb2={console,Math,JSON,String,Number,Object,Promise,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,time:1,player:{hero:'michaela',x:0,y:0},room:{id:'dist00'},casts:[],
+// R291: R209 기본이 dedupe:false 로 바뀌어(사용자 결정 "E·W 둘 다 되살리기") 이 단언은 토글 dedupe:true 로 확인한다
+{const sb2={console,Math,JSON,String,Number,Object,Promise,performance:{now:()=>0},localStorage:{getItem:()=>'{"dedupe":true,"r291":true}',setItem(){}},setTimeout:()=>0,time:1,player:{hero:'michaela',x:0,y:0},room:{id:'dist00'},casts:[],
   window:{__STORYWORLD_WER__:Object.freeze({bindings:{z:'w',x:'e',c:'r'},cast(slot){sb2.casts.push(slot);return true;}}),__STORYWORLD_ENEMY_MOTION_R51__:Object.freeze({flip:()=>'base'}),__STORYWORLD_STORY_COMBAT_R54__:Object.freeze({frameFor:()=>({path:'orig'})})},document:{getElementById:()=>null}};
  vm.createContext(sb2);vm.runInContext('function tick(){} function updateHUD(){} function drawEffect(){} function drawEnemy(){} function serializeSave(){return {};}',sb2);
  vm.runInContext(C('skills-r209.js'),sb2);vm.runInContext(C('story-mobs-r208.js'),sb2);

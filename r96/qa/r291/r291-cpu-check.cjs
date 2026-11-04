@@ -16,7 +16,7 @@ const mich=C('michaela-r247.js'),mStart=mich.indexOf("addEventListener('keydown'
 const MICH_DOWN=mich.slice(mStart,mich.indexOf('},true);',mStart)+8);
 const KEYS_SRC=C('keys-r291.js');
 
-function world({legacy=false,dedupe=true,michaela=false}={}){
+function world({legacy=false,dedupe=false,michaela=false}={}){
  const listeners=[];const log=[];
  const store=new Map(legacy?[['storyworld.r291.keys','legacy']]:[]);
  const win={localStorage:{getItem:k=>store.has(k)?store.get(k):null,setItem(){}},
@@ -30,7 +30,7 @@ function world({legacy=false,dedupe=true,michaela=false}={}){
   showWorld(){log.push('map');},showUpgrades(){log.push('upgrades');},showMenu(){log.push('menu');},
   bindings:{z:'w',x:'e',c:'r'},active:()=>true,cast(slot){log.push('cast-'+slot);},
   mine:()=>michaela,busy:()=>false,fire(sl){log.push('michaela-'+sl);},fail(e){throw e;},KEYS:{z:'w',x:'e'}};
- if(dedupe)delete sb.bindings.x;// R209 이 지운 본편 E 칸(X 키) — 기본 설정
+ if(dedupe)delete sb.bindings.x;// R209 dedupe:true 일 때 지우는 본편 E 칸(X 키). R291 사용자 결정으로 기본은 dedupe:false(E 살아 있음)
  sb.addEventListener=win.addEventListener;
  vm.createContext(sb);
  vm.runInContext(KR_SRC,sb,{filename:'KR291'});
@@ -57,11 +57,12 @@ const P=(w,k,extra={})=>w.press({key:k,code:code(k),...extra});
  ok('keys-r291 loads, new layout by default, exposes translate/logical/table',w.api&&w.api.legacy===false&&typeof w.api.translate==='function'&&w.api.rev==='R291-keys-1');
  ok('KR291 label table (new): interact C, W/E/R',w.sb.KR291&&w.sb.KR291.i==='C'&&w.sb.KR291.w==='W'&&w.sb.KR291.e==='E'&&w.sb.KR291.r==='R'&&w.sb.KR291.legacy===false);
  const EXPECT={a:['attack'],'1':['attack'],s:['blink'],'2':['blink'],d:['guard'],'3':['guard'],q:['special'],'4':['special'],f:['ego'],'5':['ego'],
-  w:['cast-w'],'6':['cast-w'],e:[],'7':[],r:['cast-r'],'8':['cast-r'],c:['interact'],z:[],x:[],' ':[],m:['map'],p:['upgrades'],Escape:['menu'],g:[],t:[],l:[],j:[],ArrowUp:[],h:[],v:[],b:[],'9':[],'0':[]};
+  w:['cast-w'],'6':['cast-w'],e:['cast-e'],'7':['cast-e'],r:['cast-r'],'8':['cast-r'],c:['interact'],z:[],x:[],' ':[],m:['map'],p:['upgrades'],Escape:['menu'],g:[],t:[],l:[],j:[],ArrowUp:[],h:[],v:[],b:[],'9':[],'0':[]};
  const table=[];let allOk=true;
  for(const [k,exp] of Object.entries(EXPECT)){const r=P(w,k);table.push([k,r.down.join('+')||'-']);if(JSON.stringify(r.down)!==JSON.stringify(exp)){allOk=false;console.log('   mismatch',JSON.stringify(k),r.down,'expected',exp);}}
- console.log('   new layout (R209 dedupe on, non-Michaela):',table.map(([k,a])=>(k===' '?'Space':k)+'→'+a).join('  '));
- ok('every key does exactly its new action; none fires two actions; E/7 is the (R209-removed) E slot → nothing, like X before',allOk);
+ console.log('   new layout (R209 default dedupe off = all 8 keys cast, non-Michaela):',table.map(([k,a])=>(k===' '?'Space':k)+'→'+a).join('  '));
+ ok('every key does exactly its new action; none fires two actions (E/7 = story E, user decision "E·W 둘 다 되살리기")',allOk);
+ {const d=world({dedupe:true});ok('with R209 dedupe:true (toggle) E/7 do nothing — no blink/interact fallback',P(d,'e').down.length===0&&P(d,'7').down.length===0);}
  const before=w.sb.auto;P(w,' ');ok('Space still toggles semi-auto',w.sb.auto===!before);
  const up=P(w,'ArrowUp');ok('arrows untouched (key ArrowUp reaches engine)',up.key==='ArrowUp');
  const a=P(w,'a');ok('A held → keys has attack; keyup A releases it',a.holdAttack&&a.releasedAttack);
@@ -77,7 +78,7 @@ const P=(w,k,extra={})=>w.press({key:k,code:code(k),...extra});
  const inp=P(w,'c',{target:{tagName:'INPUT'}});ok('typing in an input (777 code) is untouched: key stays c, nothing fires',inp.key==='c'&&inp.down.length===0);
  ok('textarea / contentEditable also untouched',P(w,'w',{target:{tagName:'TEXTAREA'}}).key==='w'&&P(w,'e',{target:{tagName:'DIV',isContentEditable:true}}).key==='e');
  // 한글 입력 상태: key 가 자모, code 는 KeyX
- const hang={ㅁ:['KeyA','attack'],ㄴ:['KeyS','blink'],ㅇ:['KeyD','guard'],ㅂ:['KeyQ','special'],ㄹ:['KeyF','ego'],ㅈ:['KeyW','cast-w'],ㄱ:['KeyR','cast-r'],ㅊ:['KeyC','interact'],ㅡ:['KeyM','map'],ㅔ:['KeyP','upgrades'],ㅋ:['KeyZ',null],ㅌ:['KeyX',null],ㄷ:['KeyE',null]};
+ const hang={ㅁ:['KeyA','attack'],ㄴ:['KeyS','blink'],ㅇ:['KeyD','guard'],ㅂ:['KeyQ','special'],ㄹ:['KeyF','ego'],ㅈ:['KeyW','cast-w'],ㄱ:['KeyR','cast-r'],ㅊ:['KeyC','interact'],ㅡ:['KeyM','map'],ㅔ:['KeyP','upgrades'],ㅋ:['KeyZ',null],ㅌ:['KeyX',null],ㄷ:['KeyE','cast-e']};
  let hOk=true;for(const [k,[c,act]] of Object.entries(hang)){const r=w.press({key:k,code:c});if(JSON.stringify(r.down)!==JSON.stringify(act?[act]:[])){hOk=false;console.log('   hangul mismatch',k,c,r.down);}}
  ok('Korean IME (jamo key + KeyX code) maps to the same layout',hOk);
  ok("'Process' key with KeyC code → interact",JSON.stringify(w.press({key:'Process',code:'KeyC'}).down)==='["interact"]');
@@ -93,7 +94,7 @@ const P=(w,k,extra={})=>w.press({key:k,code:code(k),...extra});
 // ---- 2. 예전 배치(legacy) = R290 이전과 같다 -----------------------------------------------------------
 {const w=world({legacy:true});
  ok('legacy: KR291 shows old letters (E, Z/X/C)',w.sb.KR291.legacy===true&&w.sb.KR291.i==='E'&&w.sb.KR291.w==='Z'&&w.sb.KR291.r==='C');
- const EXPECT={a:['attack'],s:['blink'],d:['guard'],q:['special'],f:['ego'],z:['cast-w'],x:[],c:['cast-r'],e:['interact'],w:[],r:[],'6':[],'7':[],'8':[],m:['map'],p:['upgrades'],'1':['attack'],'5':['ego']};
+ const EXPECT={a:['attack'],s:['blink'],d:['guard'],q:['special'],f:['ego'],z:['cast-w'],x:['cast-e'],c:['cast-r'],e:['interact'],w:[],r:[],'6':[],'7':[],'8':[],m:['map'],p:['upgrades'],'1':['attack'],'5':['ego']};
  let allOk=true;for(const [k,exp] of Object.entries(EXPECT)){const r=P(w,k);if(JSON.stringify(r.down)!==JSON.stringify(exp)){allOk=false;console.log('   legacy mismatch',k,r.down,exp);}}
  ok("legacy 'storyworld.r291.keys'='legacy' restores E interact, Z/X/C skills, W/R/6-8 unbound",allOk);
  ok('legacy: overlay relabels nothing',P(w,'w').key==='w'&&P(w,'c').key==='c'&&w.api.map&&Object.keys(w.api.map).length===0);
@@ -113,16 +114,32 @@ for(const opt of [{dedupe:true,michaela:false},{dedupe:false,michaela:false},{de
  const strip=s=>s.split('\n').filter(l=>!/^\s*\/\//.test(l)).join('\n').replace(/\/\*[\s\S]*?\*\//g,'');
  const pats=[/['"`>][^'"`<\n]{0,80}(?<![A-Za-z0-9_.$#-])E\s?(·|를|로|\))[^'"`<\n]{0,40}['"`<]/,/에서 E['")]/,/'E · /,/Z\s?[·/]\s?X\s?[·/]\s?C/,/\{w:'Z',e:'X',r:'C'\}/,/E 상호작용/];
  // 예전 글자는 legacy 갈래(KR291 표 줄·KR291.legacy?'…' 문자열)에만 남는다 — 그것만 빼고 본다. 'W·E·R' 은 새 글자.
- const left=[];for(const f of files){for(const line of strip(RT(f)).split('\n')){if(line.startsWith('var KR291='))continue;const L=line.replace(/KR291\.legacy\)\?'[^']*'/g,'');for(const p of pats){const m=L.match(new RegExp(p.source,'g'))||[];for(const x of m)if(!/기록 조작 콘솔|EGO|Enter|W\s?[·/]\s?E\s?[·/]\s?R/.test(x))left.push(f+': '+x.slice(0,70));}}}
+ const left=[];for(const f of files){for(const line of strip(RT(f)).split('\n')){if(line.startsWith('var KR291='))continue;const L=line.replace(/(KR291\.legacy\)|legacyKeys\(\))\?'[^']*'/g,'');for(const p of pats){const m=L.match(new RegExp(p.source,'g'))||[];for(const x of m)if(!/기록 조작 콘솔|EGO|Enter|W\s?[·/]\s?E\s?[·/]\s?R/.test(x))left.push(f+': '+x.slice(0,70));}}}
  ok('no hard-coded old key letter left in visible strings (E prompts, Z/X/C)',left.length===0,left);
- ok('legacy branch keeps the old letters in one table (KR291) + r89 hint + pc-test help',/legacy\?\{legacy:true,i:'E',w:'Z',e:'X',r:'C'/.test(KR_SRC)&&/Z\/X\/C 기술 · E 상호작용/.test(C('world-retro-r89.js'))&&/W\/E\/R 기술 · C 상호작용/.test(C('world-retro-r89.js')));
+ ok('legacy branch keeps the old letters in one table (KR291) + r89 hint + pc-test help',/legacy\?\{legacy:true,i:'E',w:'Z',e:'X',r:'C'/.test(KR_SRC)&&/legacyKeys\(\)\?'Z\/X\/C':'W\/E\/R'/.test(C('world-retro-r89.js'))&&/'E':'C'\)\+' 상호작용'/.test(C('world-retro-r89.js')));
  ok('story W/E/R buttons show KR291 letters (kbd + aria-label)',/<kbd>'\+KR291\[slot\]\+'<\/kbd>/.test(idx)&&/aria-label',d\[0\]\+' · '\+KR291\[slot\]\)/.test(idx));
- ok('help panel lists the new keys from KR291',/<b>'\+KR291\.wer\+'<\/b><span>본편 W \/ E \/ R 전용 기술/.test(idx)&&/<b>'\+KR291\.i\+'<\/b><span>기억 표식/.test(idx));
+ ok('help panel lists the new keys from KR291',/<b>'\+\(window\.__STORYWORLD_KEYS_R291__\?\.werLabel\?\.\(\)\|\|KR291\.wer\)\+'<\/b><span>본편 W \/ E \/ R 전용 기술/.test(idx)&&/<b>'\+KR291\.i\+'<\/b><span>기억 표식/.test(idx));
  ok('static HTML: minimap portal label and title help line use C (legacy restores via keys-r291)',/<div id="miniLabel">포탈 앞에서 C · 이동<\/div>/.test(idx)&&/<span class="r291-i">C<\/span> 상호작용/.test(idx)&&/r291-i/.test(KEYS_SRC));
  ok('samong R115 data hints (E) converted when shown',/say\(z\.solve\.hint\?keyText\(z\.solve\.hint\)/.test(C('samong-zones-r115.js')));
  const ctx={KR291:{i:'C'}};vm.createContext(ctx);const kt=vm.runInContext("(t=>String(t).replace(/(^|[^A-Za-z0-9])E(?![A-Za-z0-9])/g,'$1'+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')))",ctx);
  ok('keyText: (E)/표식에서 E/E로 → C, EGO untouched',kt('매듭을 끊으세요(E).')==='매듭을 끊으세요(C).'&&kt('둘레의 표식에서 E')==='둘레의 표식에서 C'&&kt('포탑 표식에서 E로 장악')==='포탑 표식에서 C로 장악'&&kt('EGO 각성')==='EGO 각성');
  ok('touch button (#touchUse 상호작용) unchanged — no letter, still calls interact',/<button id="touchUse">상호작용<\/button>/.test(idx));
+}
+// ---- 4b. R209 가 끈 칸은 안내하지 않는다(죽은 키 광고 금지), dedupe 끄면 다시 안내 ----------------------
+{const mk=({legacy=false,dedupe=true,michaelaOn=true,hero=null}={})=>{const w=world({legacy});
+  const REMOVED={hwando:['e'],seoha:['e'],neon:['e'],michaela:['e','w'],lauren:['e'],hunter:['e'],slayer:['e'],gunner:['e','w']};
+  w.sb.window.__STORYWORLD_SKILLS_R209__={removed:(h,sl)=>dedupe&&!!REMOVED[h]?.includes(sl)};
+  w.sb.window.__STORYWORLD_MICHAELA_R247__={on:()=>michaelaOn};
+  if(hero){w.sb.player={hero};w.sb.started=true;}return w.api;};
+ ok('labels: hwando → W / R (E slot removed by R209)',mk({hero:'hwando'}).werLabel()==='W / R');
+ ok('labels: gunner → R only (W·E removed)',mk({hero:'gunner'}).werLabel()==='R');
+ ok('labels: michaela with R247 → W / E / R (her new W·E skills)',mk({hero:'michaela'}).werLabel()==='W / E / R');
+ ok('labels: michaela with R247 off → R',mk({hero:'michaela',michaelaOn:false}).werLabel()==='R');
+ ok('labels: R209 dedupe off → W / E / R again',mk({hero:'hwando',dedupe:false}).werLabel()==='W / E / R');
+ ok('labels: no hero yet (title) → slots usable by some hero = W / E / R (Michaela R247 owns E); without R247 → W / R',mk().werLabel(' / ',null)==='W / E / R'&&mk({michaelaOn:false}).werLabel(' / ',null)==='W / R');
+ ok('labels: legacy → Z / C for hwando',mk({legacy:true,hero:'hwando'}).werLabel()==='Z / C');
+ ok('help panel / r89 hint / title use werLabel (live slots only)',/__STORYWORLD_KEYS_R291__\?\.werLabel\?\.\(\)\|\|KR291\.wer\)\+'<\/b>/.test(idx)&&/werLabel\?\.\('\/'\)/.test(C('world-retro-r89.js'))&&/<span class="r291-wer">W \/ E \/ R<\/span>/.test(idx));
+ ok('skill buttons of removed slots stay hidden by R209 (hideButtons untouched)',/function hideButtons\(\)/.test(C('skills-r209.js'))&&/if\(b\.x==='e'\)delete b\.x;/.test(C('skills-r209.js')));
 }
 // ---- 5. 연결(다섯 곳) ----------------------------------------------------------------------------------
 {ok('runtime copy matches client-source',RT('keys-r291.js')===KEYS_SRC&&RT('michaela-r247.js')===C('michaela-r247.js'));
