@@ -8,6 +8,7 @@ docs/agent-collaboration.md 의 규칙을 기계적으로 검사한다.
   python3 -I scripts/collab/validate.py dispatch LEDGER.json TASK.json
   python3 -I scripts/collab/validate.py result TASK.json RESULT.json
   python3 -I scripts/collab/validate.py zip BUNDLE.zip
+  python3 -I scripts/collab/validate.py drive-decode TOOL_RESULT.json OUT_FILE  # Drive download 결과(JSON+base64)를 파일로, 크기·sha256 출력
   python3 -I scripts/collab/validate.py all          # ops/tasks/*.json, ops/manifests/*.json
 종료 코드: 0 통과, 1 위반, 2 사용법 오류. 출력은 한 줄 JSON.
 """
@@ -268,6 +269,19 @@ def check_zip(path, max_total=200 << 20, max_ratio=200):
     return errs
 
 
+def drive_decode(src, out):
+    """Drive download_file_content 의 저장된 도구 결과(JSON: content=base64)를 바이트 그대로 파일로 풀고 크기·해시를 돌려준다."""
+    import base64
+    with open(src, encoding='utf-8') as f:
+        d = json.load(f)
+    data = base64.b64decode(d['content'], validate=True)
+    if os.path.exists(out):
+        raise FileExistsError(out)
+    with open(out, 'xb') as f:
+        f.write(data)
+    return {'title': d.get('title'), 'mime': d.get('mimeType'), 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+
+
 def _load(p):
     with open(p, encoding='utf-8') as f:
         return json.load(f)
@@ -300,6 +314,8 @@ def main(argv):
     elif cmd == 'zip' and len(argv) == 3:
         errs = check_zip(argv[2])
         out.update(ok=not errs, errors=errs)
+    elif cmd == 'drive-decode' and len(argv) == 4:
+        out.update(ok=True, **drive_decode(argv[2], argv[3]))
     elif cmd == 'all':
         res = {}
         for d, kind in (('tasks', 'task'), ('manifests', 'manifest')):
