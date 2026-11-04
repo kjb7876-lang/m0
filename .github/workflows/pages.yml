@@ -323,6 +323,8 @@ jobs:
         run: node r96/qa/r280/r280-cpu-check.cjs
       - name: R286 mobile +77% all stats, attack-only/move-only mob motion fill CPU check
         run: node r96/qa/r286/r286-cpu-check.cjs
+      - name: R292 hero action hand-painted fx strips CPU check
+        run: node r96/qa/r292/r292-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check
         run: node r96/qa/r261/r261-cpu-check.cjs
       - name: R231 guide never trapped behind thin walls; reach respects thin walls CPU check
