@@ -51,6 +51,8 @@ jobs:
           r=json.load(open('r96/qa/r96/status-native-results.json'))
           assert len(r['checks'])==24 and all(v['passed'] for v in r['checks'])
           PY
+      - name: R317 palace/slum and betrayal CPU regression
+        run: node r96/qa/r317/r317-cpu-check.cjs
       - name: R303 props fit (theme, wall facing, floor clearance)
         run: node r96/qa/r303/r303-cpu-check.cjs
       - name: R300 light pools, low fog, motes and hero footing budgets

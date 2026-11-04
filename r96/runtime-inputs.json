@@ -4003,7 +4003,9 @@
     "assets/r306/pixel/pf7600322bd41.webp",
     "assets/r306/pixel/pf7f5394c1c7b.webp",
     "assets/r306/pixel/pf8b527f039e6.webp",
-    "assets/r306/pixel/pfe37f18eb7ed.webp"
+    "assets/r306/pixel/pfe37f18eb7ed.webp",
+    "maps-palace-slum-r317.js",
+    "assets/r317/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5078,5 +5080,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "94c69b2407207b9e804151451a8b65051f995294ab897608bc55e192071d88cb"
+  "runtimeManifestSHA256": "5bd79d141ab50b196e32dd39e0951f9742112ad1fcc0b8dfd3eb5e282a26b45c"
 }
