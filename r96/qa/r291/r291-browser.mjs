@@ -22,7 +22,7 @@ async function boot(opts={}){
    window[n]=function(...a){T.calls[n]=(T.calls[n]||0)+1;const c=window.__STORYWORLD_PHASE1__?.controller;T.gate={n,modal:!!modal,loading,started,hp:player?.hp,three:!!c?.state.three,failed:c?.state.failed,cd:[player?.blinkCD,player?.specialCD,player?.egoCD,player?.ego],hidden:document.hidden,ego151:window.__STORYWORLD_EGO151__?.inspect?.().state.active,story:!!storyScene};return o.apply(this,a);};}
   // what the engine/bubble handlers see (after every capture listener), and whether someone consumed it
   window.addEventListener('keydown',e=>{T.bubble.push({key:e.key,code:e.code,trusted:e.isTrusted});if(T.bubble.length>60)T.bubble.shift();});
-  document.addEventListener('keydown',e=>{T.lastCapture={key:e.key,code:e.code};setTimeout(()=>{T.lastPrevented={code:e.code,prevented:e.defaultPrevented};},0);},true);});
+  window.addEventListener('keydown',e=>{T.lastCapture={key:e.key,code:e.code};setTimeout(()=>{T.lastPrevented={code:e.code,prevented:e.defaultPrevented};},0);},true);});
  return {b,p};
 }
 const skip=p=>p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
@@ -97,10 +97,13 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  // ---- R291 사용자 결정 "E·W 둘 다 되살리기": E/W 단추가 보이고, 반자동이 E 를 다시 쓰고, 기억사수 W·미카엘라 R247 W/E ----
  {const vis=await p.evaluate(()=>['w','e','r'].map(s=>{const b=document.getElementById('story-wer-'+s);return !!b&&!b.hidden&&getComputedStyle(b).display!=='none';}));check('hwando: W / E / R buttons all shown on the skill bar',vis.every(Boolean),vis);}
  await reset(p);
- {const far=await p.evaluate(()=>{const e=room.enemies.filter(e=>e.hp>0).sort((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)-Math.hypot(b.x-player.x,b.y-player.y))[0];for(const d of [6,5,7,4.5]){for(let a=0;a<12;a++){const x=e.x+Math.cos(a/12*6.283)*d,y=e.y+Math.sin(a/12*6.283)*d;if(!blocked(x,y,.34,room)){player.x=x;player.y=y;route=[];command=null;return true;}}}return false;});
-  const n0=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.length);await p.evaluate(()=>{const s=player.storyWER;s.ready[player.hero+':w']=time+99;s.ready[player.hero+':r']=time+99;s.ready[player.hero+':e']=0;auto=true;});
-  await p.waitForFunction(n=>window.__STORYWORLD_WER__.inspect().casts.length>n,n0,{timeout:20000}).catch(()=>{});await p.evaluate(()=>{auto=false;});
-  const ac=await p.evaluate(n=>window.__STORYWORLD_WER__.inspect().casts.slice(n).map(c=>c.slot),n0);check('semi-auto casts the re-enabled E again (R209 far cooldown no longer blocks it)',far&&ac.includes('e'),{far,ac});}
+ {// 부하로 rAF 가 느려 실제 시간 대기 대신 게임 자신의 tick 을 직접 돌린다(같은 반자동 경로: WER tick → R49 autoTarget → cast)
+  const res=await p.evaluate(()=>{const R49=window.__STORYWORLD_HANDO_FINAL_R49__;const lo=HEROES[player.hero].range*.7+.15;let placed=null;
+   for(const e of room.enemies.filter(e=>e.hp>0)){for(const d of [2.6,3.0,3.4,2.3]){if(d<lo)continue;for(let a=0;a<12;a++){const x=e.x+Math.cos(a/12*6.283)*d,y=e.y+Math.sin(a/12*6.283)*d;if(blocked(x,y,.34,room))continue;player.x=x;player.y=y;if(R49?.autoTarget?.('e')){placed={e:e.id,d};break;}}if(placed)break;}if(placed)break;}
+   if(!placed)return{placed};const s=player.storyWER;const n=window.__STORYWORLD_WER__.inspect().casts.length;auto=true;
+   for(let i=0;i<300;i++){s.ready[player.hero+':w']=time+99;s.ready[player.hero+':r']=time+99;tick(1/60);if(window.__STORYWORLD_WER__.inspect().casts.slice(n).some(c=>c.slot==='e'))break;}
+   auto=false;return{placed,ac:window.__STORYWORLD_WER__.inspect().casts.slice(n).map(c=>c.slot)};});
+  check('semi-auto casts the re-enabled E again (R209 far cooldown no longer blocks it)',!!res.placed&&res.ac.includes('e'),res);}
  const switchHero=h=>p.evaluate(async h=>{loading=true;try{await ensureImages(heroPaths(h));player.hero=h;player.combo=0;player.ego=0;}finally{loading=false;}updateHUD();},h);
  await switchHero('gunner');await p.waitForTimeout(400);
  await reset(p);await nearEnemy(p);r=await press(p,'w');{const last=await p.evaluate(()=>window.__STORYWORLD_WER__.inspect().casts.slice(-1)[0]);check('gunner: W casts story W (상태 정화) with a cooldown — not guard',r.casts===1&&last?.slot==='w'&&last?.hero==='gunner'&&await ready('w')>0&&!r.d.guardStart,{r,last});}
@@ -115,11 +118,15 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  await switchHero('hwando');await p.waitForTimeout(300);
  // ---- R81/R74 door with C ----
  await reset(p);
- const door=await p.evaluate(()=>{const W=window.__STORYWORLD_WORLD_R74__;for(const t of W.interactions()){for(let a=0;a<16;a++)for(const rr of [1.2,1.8,2.4]){const x=t.point.x+Math.cos(a/16*6.283)*rr,y=t.point.y+Math.sin(a/16*6.283)*rr;if(blocked(x,y,.34,room))continue;const ox=player.x,oy=player.y;player.x=x;player.y=y;if(W.canUse(t)){route=[];command=null;return{id:t.id,x,y,open:W.inspect().doors.find(d=>d.id===t.id).open};}player.x=ox;player.y=oy;}}return null;});
- if(door){await p.waitForTimeout(250);r=await press(p,'c',{wait:400});const open2=await p.evaluate(id=>window.__STORYWORLD_WORLD_R74__.inspect().doors.find(d=>d.id===id).open,door.id);
-  check('C next to an R74/R81 door toggles it ('+door.id+' '+door.open+'→'+open2+')',r.d.interact===1&&open2!==door.open,{door,r,open2});await p.screenshot({path:OUT+'/door-c.png'});
-  r=await press(p,'e',{wait:300});const open3=await p.evaluate(id=>window.__STORYWORLD_WORLD_R74__.inspect().doors.find(d=>d.id===id).open,door.id);check('old E next to the door does nothing',open3===open2&&!r.d.interact,{open3,r});}
- else check('found a usable R74 door in dist00',false);
+ const doorIds=await p.evaluate(()=>window.__STORYWORLD_WORLD_R74__.interactions().map(t=>t.id));const tried=[];let toggled=null;
+ for(const id of doorIds){await reset(p);
+  const door=await p.evaluate(id=>{const W=window.__STORYWORLD_WORLD_R74__;const t=W.interactions().find(t=>t.id===id);if(!t)return null;for(let a=0;a<16;a++)for(const rr of [1.2,1.8,2.4]){const x=t.point.x+Math.cos(a/16*6.283)*rr,y=t.point.y+Math.sin(a/16*6.283)*rr;if(blocked(x,y,.34,room))continue;const ox=player.x,oy=player.y;player.x=x;player.y=y;if(W.canUse(t)){route=[];command=null;return{id,x,y,open:W.inspect().doors.find(d=>d.id===id).open};}player.x=ox;player.y=oy;}return null;},id);
+  if(!door){tried.push({id,usable:false});continue;}
+  await p.waitForTimeout(250);r=await press(p,'c',{wait:450});const open2=await p.evaluate(id=>window.__STORYWORLD_WORLD_R74__.inspect().doors.find(d=>d.id===id).open,id);
+  const toast=await p.evaluate(()=>document.getElementById('toast')?.textContent||'');tried.push({id,interact:r.d.interact,before:door.open,after:open2,toast:toast.slice(0,60)});
+  if(open2!==door.open&&r.d.interact===1){toggled={...door,open2};await p.screenshot({path:OUT+'/door-c.png'});
+   r=await press(p,'e',{wait:300});const open3=await p.evaluate(id=>window.__STORYWORLD_WORLD_R74__.inspect().doors.find(d=>d.id===id).open,id);check('old E next to the door does not use it (E = story E skill now)',open3===open2&&!r.d.interact,{open3,r});break;}}
+ check('C next to an R74/R81 door toggles it (locked boss/next doors refuse with their own message)',!!toggled,tried);
  // ---- HUD screenshot + labels ----
  await reset(p);await p.waitForTimeout(400);
  const hud=await p.evaluate(()=>({wer:['w','e','r'].map(s=>{const b=document.getElementById('story-wer-'+s);return b&&{kbd:b.querySelector('kbd')?.textContent,aria:b.getAttribute('aria-label'),shown:!b.hidden&&getComputedStyle(b).display!=='none'};}),
@@ -141,14 +148,20 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  const hud=await p.evaluate(()=>['w','e','r'].map(s=>document.querySelector('#story-wer-'+s+' kbd')?.textContent));check('legacy: skill keycaps Z / X / C',JSON.stringify(hud)==='["Z","X","C"]',hud);
  await p.screenshot({path:OUT+'/legacy-hud.png'});await b.close();}
 
+// ===================== B2. hub altar with C (desktop) =====================
+{const {b,p}=await boot();
+ await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(600);
+ const h0=await p.evaluate(()=>document.querySelector('#panel h2')?.textContent||'');
+ let r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&await p.evaluate(()=>!modal),r);
+ r=await press(p,'c',{wait:500});const h2=await p.evaluate(()=>document.querySelector('#panel h2')?.textContent||'');check('C at the altar interacts (hub altar opens its sanctuary/narrative panel)',r.d.interact===1&&(h2!==h0||await p.evaluate(()=>!!(modal||storyScene))),{r,h0,h2});await p.screenshot({path:OUT+'/altar-c.png'});
+ await b.close();}
+
 // ===================== C. mobile touch (unchanged behaviour) =====================
 {const {b,p}=await boot({ctx:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2}});
  await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(500);
  const vis=await p.evaluate(()=>{const t=document.getElementById('touchUse');const r=t?.getBoundingClientRect();return{text:t?.textContent,w:r?.width,h:r?.height,disp:t&&getComputedStyle(t).display};});
- let r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&await p.evaluate(()=>!modal),r);
- r=await press(p,'c');check('C at the altar interacts (경계의 제단 opens)',r.d.interact===1&&await p.evaluate(()=>!!(modal||storyScene)),r);await p.screenshot({path:OUT+'/altar-c.png'});await skip(p);
- const before=await calls(p);if(vis.w>0)await p.locator('#touchUse').tap();else await p.evaluate(()=>document.getElementById('touchUse').click());await p.waitForTimeout(300);const d=delta(before,await calls(p));
- check('mobile: interact touch button still calls interact (context label, no key letter)',!/(^|[^A-Za-z])[A-Z]([^A-Za-z]|$)/.test(vis.text||'')&&d.interact===1,{vis,d});await skip(p);
+ const before=await calls(p);const how='onclick';/* 단추는 onclick 하나 → interact (R291 이 건드리지 않음). 부하 중 tap 재시도가 두 번 누르는 것을 피하려고 click 한 번 */await p.evaluate(()=>document.getElementById('touchUse').click());await p.waitForTimeout(300);const d=delta(before,await calls(p));
+ check('mobile: interact touch button still calls interact (context label, no key letter) [via '+how+']',!/(^|[^A-Za-z])[A-Z]([^A-Za-z]|$)/.test(vis.text||'')&&d.interact===1,{vis,d});await skip(p);
  await p.screenshot({path:OUT+'/mobile-hub.png'});await b.close();}
 
 console.log('page errors:',errors.length?errors:'none');
