@@ -143,7 +143,7 @@ for(const opt of [{dedupe:true,michaela:false},{dedupe:false,michaela:false},{de
 }
 // ---- 5. 연결(다섯 곳) ----------------------------------------------------------------------------------
 {ok('runtime copy matches client-source',RT('keys-r291.js')===KEYS_SRC&&RT('michaela-r247.js')===C('michaela-r247.js'));
- ok('script tag: last overlay before combat-r118 / world-tiles-r118',/<script src="\.\/mob-motion-r286\.js"><\/script>(<script src="\.\/mob-art-r290\.js"><\/script>)?<script src="\.\/keys-r291\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(idx)&&idx.split('"./keys-r291.js"').length===2);
+ ok('script tag: last overlay before combat-r118 / world-tiles-r118',/<script src="\.\/mob-motion-r286\.js"><\/script>(<script src="\.\/mob-art-r290\.js"><\/script>)?(<script src="\.\/render-lod-r287\.js"><\/script>)?(<script src="\.\/skill-fx-r292\.js"><\/script>)?<script src="\.\/keys-r291\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(idx)&&idx.split('"./keys-r291.js"').length===2);
  ok('in verify-r96-public list',/'keys-r291\.js'/.test(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8')));
  ok('in pages.yml CPU checks',/node r96\/qa\/r291\/r291-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
  ok('in runtime-inputs textPaths',JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')).textPaths.includes('keys-r291.js'));
