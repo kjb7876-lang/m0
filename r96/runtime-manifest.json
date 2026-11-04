@@ -22339,8 +22339,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568128,
-      "sha256": "3e364e678f1f9c7aa4f6c91471537d55f591ef6930216c52befea0518d3859e8"
+      "bytes": 6568173,
+      "sha256": "dfd57108c7a27f2d0b8c4132aa5a31b2a0716293a23cb46c805edc8fef50465a"
     },
     {
       "path": "intro-r140.js",
@@ -22431,6 +22431,11 @@
       "path": "mobile-bonus-r286.js",
       "bytes": 6976,
       "sha256": "3c9b0d9900c8fe6f9dbfa29ad0fe0946ccd9835bb8ed5d1e993170ecae9c8724"
+    },
+    {
+      "path": "mobile-perf-r298.js",
+      "bytes": 4776,
+      "sha256": "c2978bca5b0456eb963e11c492bbc3038e976d6b0a66e00f56c8e3e013a23d3d"
     },
     {
       "path": "mobile-settings-r142.js",
@@ -22928,9 +22933,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4585,
-  "totalBytes": 868763582,
-  "webHTMLSha256": "3e364e678f1f9c7aa4f6c91471537d55f591ef6930216c52befea0518d3859e8",
+  "fileCount": 4586,
+  "totalBytes": 868768403,
+  "webHTMLSha256": "dfd57108c7a27f2d0b8c4132aa5a31b2a0716293a23cb46c805edc8fef50465a",
   "largest": [
     {
       "path": "index.html",
