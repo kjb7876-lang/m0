@@ -3763,7 +3763,9 @@
     "assets/r283/hwando/r271/walk-s.webp",
     "assets/r283/hwando/r271/walk-w.webp",
     "assets/r284/michaela/run-ne-v5.webp",
-    "assets/r284/michaela/index.json"
+    "assets/r284/michaela/index.json",
+    "mobile-bonus-r286.js",
+    "mob-motion-r286.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4838,5 +4840,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f9752b512c9d30f873cda27b936cd3524678281a4e07a2157cd31aa33f9d7504"
+  "runtimeManifestSHA256": "b75ebac958a96fa99ca9acbd8c732b88b003ccd88f4b8faed374c81c85ec9e3a"
 }
