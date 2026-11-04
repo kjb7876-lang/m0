@@ -13678,6 +13678,21 @@
       "sha256": "5d9579cd09306ad106aa9044785b50c0bc0c554d43793bc4519737b4538a7ca7"
     },
     {
+      "path": "assets/r309/intro/index.json",
+      "bytes": 1277,
+      "sha256": "e0d470c096809aafb0d9a125466ffc99a2cd4b184ffa420a0340a42bf9e6d8e0"
+    },
+    {
+      "path": "assets/r309/intro/opening-7s.mp4",
+      "bytes": 1812837,
+      "sha256": "f3a3d93d2a4cedd2bd3070d9b5bba8cbfc604faf9aaf79c508c49c7068d25258"
+    },
+    {
+      "path": "assets/r309/intro/poster.jpg",
+      "bytes": 79731,
+      "sha256": "5a32d6bde68477f7e2f89e3b6dfdab6d497b34c6c8eb4ecb08516c9d7c95e3b5"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22504,8 +22519,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568350,
-      "sha256": "2bfed020e5dde41bfe833433651244e7ddc1d869c289912f27a7db6e903d517b"
+      "bytes": 6568395,
+      "sha256": "3cb4435abff35d7626952200c24e216c06e5beccc54f68214df9d1fc43a03b32"
     },
     {
       "path": "intro-r140.js",
@@ -22514,8 +22529,13 @@
     },
     {
       "path": "intro-tree-r309.js",
-      "bytes": 24353,
-      "sha256": "bb3c1692450015bc1b57c236c2d53f1c7463c0a8103c47753e58b6fd4b0f3acd"
+      "bytes": 23600,
+      "sha256": "1e9385f68cc2cb3e8447f57b8a0fc9ee7a14ef719c56a11a1e0bb1ec5c5198fa"
+    },
+    {
+      "path": "intro-video-r309.js",
+      "bytes": 8344,
+      "sha256": "1ad3f61c65c25c05be6e373a9c86b4dc37defbc31c72de854d01b1a308b06641"
     },
     {
       "path": "keys-r291.js",
@@ -23108,9 +23128,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4621,
-  "totalBytes": 898582886,
-  "webHTMLSha256": "2bfed020e5dde41bfe833433651244e7ddc1d869c289912f27a7db6e903d517b",
+  "fileCount": 4625,
+  "totalBytes": 900484367,
+  "webHTMLSha256": "3cb4435abff35d7626952200c24e216c06e5beccc54f68214df9d1fc43a03b32",
   "largest": [
     {
       "path": "index.html",

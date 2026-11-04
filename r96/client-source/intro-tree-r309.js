@@ -1,13 +1,13 @@
 // R309 — 새 게임 오프닝: 궁전 한가운데서 악마화 나무가 자라나 천사들을 타락시키는 10초 3D 애니메이션(사용자 2026-11-04 "코드로 맨처음에 악마화나무가 궁전중심에서 자라나서 천사들을 타락시키는 3d애니메이션 10초정도").
 //  · 영상 파일·외부 그림 없이 Three.js 기본 도형과 코드로만 만든다(절차적 나무·뿌리·천사). 임시 3D 연출이며 최종 아트가 아니다.
 //  · 흐름(10초): 0–1.5 황금빛 궁전과 후광 천사들 → 1.2–6 중심 제단에서 나무가 솟고 가지·뿌리가 퍼짐 → 3–8.5 뿌리가 닿는 차례로 천사 타락
-//    (후광이 깜빡이다 꺼지고, 날개가 검게, 옷이 붉고 어둡게, 눈이 붉게) → 8–10 붉은 하늘 아래 'StoryWorld : 합일몽세' → 게임으로.
+//    (후광이 깜빡이다 꺼지고, 날개가 검게, 옷이 붉고 어둡게, 눈이 붉게) → 8–10 붉은 하늘 아래 제목 '합일(合一)'(사용자 2026-11-04 확정) → 게임으로.
 //  · 카메라: 높은 원경에서 나무 둘레를 반 바퀴 돌며 내려와 마지막엔 낮은 앙각으로 나무 꼭대기를 올려다본다.
-//  · 새 게임을 시작할 때 한 번(첫 장면 'hub' 진입 뒤 그 위에 덮음). 세이브 불러오기·지역 이동에는 띄우지 않는다.
+//  · 사용자가 직접 만든 오프닝 영상(intro-video-r309)으로 바뀌어, 이 애니메이션은 영상을 못 틀 때(코덱·파일 오류)만 대신 튼다. 스스로 newGame 을 감싸지 않는다.
 //  · 건너뛰기: 오른쪽 아래 단추 · 화면 누르기 · Esc/Enter/Space. 재생 중 게임 키는 막는다(뒤에서 상태가 바뀌지 않게).
 //  · 모바일: 픽셀 비율 1, 안티에일리어스 끔, 가지 깊이·입자 수 줄임, 느리면 해상도를 더 낮춤. 끝나면 렌더러·도형·재질을 모두 버린다.
 //  · WebGL·Three.js 를 못 쓰면 바로 넘어간다. 자동 검사(navigator.webdriver)에서는 띄우지 않는다(?intro309=1 또는 play({force:true}) 로 강제).
-//  · 환경 설정 '오프닝 3D 애니메이션'으로 끄고 켠다. storyworld.r309.intro {on:false}.
+//  · 켜고 끄기는 영상 쪽 설정 '오프닝 영상(새 게임)'을 따른다(대체 재생은 play({force:true})).
 (()=>{'use strict';
 if(window.__STORYWORLD_INTRO_TREE_R309__)return;
 const REV='R309-intro-tree-1',KEY='storyworld.r309.intro',DUR=10;
@@ -23,7 +23,7 @@ const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x,lerp=(a,b,t)=>a+(b-a)*t,sm=(a,b,x)=>{cons
 function rng(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
 function css(){if(document.getElementById('r309Css'))return;const s=document.createElement('style');s.id='r309Css';
  s.textContent='#r309{position:fixed;inset:0;z-index:2147483000;background:#000;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}#r309 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}'
- +'#r309 .ttl{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;color:#f3d9b8;font:700 clamp(26px,5.4vw,60px)/1.15 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.08em;text-shadow:0 0 18px #6a0a08,0 0 4px #000,0 3px 12px #000;opacity:0;transition:opacity 1.1s;pointer-events:none;white-space:nowrap}'
+ +'#r309 .ttl{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;color:#f3d9b8;font:700 clamp(40px,8vw,96px)/1.1 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.12em;text-shadow:0 0 18px #6a0a08,0 0 4px #000,0 3px 12px #000;opacity:0;transition:opacity 1.1s;pointer-events:none;white-space:nowrap}'
  +'#r309 .ttl small{display:block;margin-top:.5em;font:600 clamp(11px,1.5vw,15px)/1.4 "Malgun Gothic",sans-serif;letter-spacing:.42em;color:#c99a86;opacity:.85}#r309 .ttl.on{opacity:1}'
  +'#r309 .skip{position:absolute;right:max(16px,3vw);bottom:max(16px,4vh);padding:8px 16px;font:14px "Malgun Gothic",sans-serif;color:#efe6da;background:rgba(20,12,12,.66);border:1px solid #7b5a55;border-radius:6px;cursor:pointer;z-index:2}'
  +'#r309 .fade{position:absolute;inset:0;background:#000;opacity:1;transition:opacity .6s;pointer-events:none}#r309 .fade.off{opacity:0}'
@@ -181,7 +181,7 @@ async function play(opt={}){if(active)return false;if(!opt.force&&(!prefs.on||(n
  let T;try{T=await three();}catch(e){fail(e);return false;}
  const low=opt.low!=null?!!opt.low:isMobile();
  css();const root=document.createElement('div');root.id='r309';root.setAttribute('role','dialog');root.setAttribute('aria-label','오프닝 3D 애니메이션');
- root.innerHTML='<div class="vig"></div><div class="ttl">StoryWorld : 합일몽세<small>악마화 나무</small></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
+ root.innerHTML='<div class="vig"></div><div class="ttl">합일(合一)</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  document.body.appendChild(root);
  const W=()=>Math.max(1,innerWidth),H=()=>Math.max(1,innerHeight);let renderer;
  try{renderer=new T.WebGLRenderer({antialias:!low,powerPreference:low?'low-power':'default'});}catch(e){fail(e);root.remove();return false;}
@@ -209,9 +209,6 @@ async function play(opt={}){if(active)return false;if(!opt.force&&(!prefs.on||(n
   if(at==null&&tt>=DUR)return finish('ended');raf=requestAnimationFrame(loop);};
  raf=requestAnimationFrame(loop);return true;}
 function skip(){if(active){active.finish('skip');return true;}return false;}
-// 새 게임 시작 때 한 번(첫 장면 진입 뒤 그 위에)
-if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){const r=await base.apply(this,a);try{if(r!==false)play();}catch(e){fail(e);}return r;};}
-try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r309On')){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id='r309On';c.checked=prefs.on!==false;c.onchange=()=>{prefs.on=c.checked;save();};l.appendChild(c);l.appendChild(document.createTextNode(' 오프닝 3D 애니메이션(새 게임)'));grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){if(typeof p?.on==='boolean'){prefs.on=p.on;save();}return{on:prefs.on};}
 window.__STORYWORLD_INTRO_TREE_R309__=Object.freeze({revision:REV,duration:DUR,play,skip,set,buildScene:build,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},active:!!active,low:active?.low??null,counts:active?.counts||null,lastError})});
 })();
