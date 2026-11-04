@@ -41,7 +41,7 @@ function plan(r){if(!eligible(r)||!r.exploration?.floorCells?.length)return[];co
  else{take('storefront',100);take('storefront',90,'prop',{x:47,y:54});take('bag',26);take('syringe',24,'decal');take('papers',75,'decal');take('crack',70,'decal');}
  return out;}
 const rooms=new WeakMap(),loaded=new Set();
-function ensure(p){if(typeof readyImage==='function'&&readyImage(p))return true;if(!loaded.has(p)&&typeof addImage==='function'){loaded.add(p);addImage(p,'R317 existing temporary art');}return false;}
+function ensure(p){if(typeof readyImage==='function'&&readyImage(p))return true;if(!loaded.has(p)){loaded.add(p);try{if(typeof addImage==='function')addImage(p,'R317 existing temporary art');if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(fail);}catch(e){fail(e);}}return false;}
 function apply(r){if(!eligible(r)||!Array.isArray(r.props)||!r.exploration||rooms.get(r)===r.exploration)return;
  rooms.set(r,r.exploration);const list=plan(r);r.r317Decals=[];for(const [i,p]of list.entries()){ensure(p.path);if(p.kind==='decal'){r.r317Decals.push(p);continue;}
  r.props.push({...p,id:'r317:'+r.id+':'+i,r317:true,solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true});}stats.rooms++;}
@@ -63,6 +63,11 @@ function decals(){if(typeof room==='undefined'||!eligible(room)||!room.r317Decal
  if(ctx.scope)ctx.scope({id:'r317:decal:'+d.name,kind:'ground',x:d.x,y:d.y,groundAligned:true,presentationOnly:true,alive:false,sourcePath:d.path},paint);else paint();}}
 if(typeof groundImage==='function'){const b=groundImage;groundImage=function(...a){const out=b.apply(this,a);try{decals();}catch(e){fail(e);}return out;};}
 if(typeof makeRoom==='function'){const b=makeRoom;makeRoom=function(...a){const r=b.apply(this,a);try{apply(r);}catch(e){fail(e);}return r;};}
+// Native entry/restore wrappers prune decoded images after makeRoom. Reload only
+// this active room's existing visual paths after those wrappers have completed.
+async function prepareCurrent(){const r=typeof room!=='undefined'?room:null;if(!eligible(r))return;apply(r);const paths=[...new Set([...(r.props||[]).filter(p=>p.r317).map(p=>p.path),...(r.r317Decals||[]).map(p=>p.path)])];if(paths.length&&typeof ensureImages==='function')await ensureImages(paths);}
+if(typeof enterRegion==='function'){const b=enterRegion;enterRegion=async function(...a){const out=await b.apply(this,a);if(out!==false)try{await prepareCurrent();}catch(e){fail(e);}return out;};}
+if(typeof restoreSave==='function'){const b=restoreSave;restoreSave=async function(...a){const out=await b.apply(this,a);if(out!==false)try{await prepareCurrent();}catch(e){fail(e);}return out;};}
 
 // Separate DOM layers animate existing images. No image asset is generated or edited.
 // No replay command is added; absent Balrog placement leaves this automatic path dormant.
