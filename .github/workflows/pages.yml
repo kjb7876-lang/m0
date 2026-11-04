@@ -59,6 +59,8 @@ jobs:
         run: node r96/qa/r308/r308-cpu-check.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
+      - name: R299 environment props/decals placement determinism, caps, no collision change, door/altar clearance
+        run: node r96/qa/r299/r299-cpu-check.cjs
       - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions
         run: node r96/qa/r103/samong-cpu-check.cjs
       - name: R104 boss key-pose frames, pivots and draw-only swap
