@@ -23074,8 +23074,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568278,
-      "sha256": "2fabf1f22a649f65d6e91dee36597c27cf511caf38b8c4436b22c779fef3fa37"
+      "bytes": 6568323,
+      "sha256": "927ff74ab6d35bda9c1f19a2911ab97d129c3b6c40b609b11556a23e83f16093"
     },
     {
       "path": "intro-r140.js",
@@ -23091,6 +23091,11 @@
       "path": "lag-r217.js",
       "bytes": 2390,
       "sha256": "64754e0f1ba043700b7f79cbf31f9bbf916e33ea66d37be13df5066da7daf5ed"
+    },
+    {
+      "path": "light-atmos-r300.js",
+      "bytes": 18846,
+      "sha256": "cf82aa1c42a4ca364fee771a32862c680660d80b5440932a1da235bd3d940d76"
     },
     {
       "path": "light-r182.js",
@@ -23429,8 +23434,8 @@
     },
     {
       "path": "skill-fx-r292.js",
-      "bytes": 11326,
-      "sha256": "c5be1b2a4421919cded5ea469f8340d96b6d81372fae90f1d4c671e92bb3e70a"
+      "bytes": 12208,
+      "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
     },
     {
       "path": "skills-r181.js",
@@ -23569,8 +23574,8 @@
     },
     {
       "path": "visual-r90.js",
-      "bytes": 21514,
-      "sha256": "91fb041a69dfb72191847e100cb8782ac33976650898d33b0c878c4aa59bf33f"
+      "bytes": 21620,
+      "sha256": "691b36170f191cb768379a18c087ef5e6e2ecfd0280b8fbdcc254f1317ef82dc"
     },
     {
       "path": "visual-r91.js",
@@ -23678,9 +23683,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4735,
-  "totalBytes": 877053950,
-  "webHTMLSha256": "2fabf1f22a649f65d6e91dee36597c27cf511caf38b8c4436b22c779fef3fa37",
+  "fileCount": 4736,
+  "totalBytes": 877073829,
+  "webHTMLSha256": "927ff74ab6d35bda9c1f19a2911ab97d129c3b6c40b609b11556a23e83f16093",
   "largest": [
     {
       "path": "index.html",
