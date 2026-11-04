@@ -203,10 +203,14 @@ function installSamong(){if(typeof hitEnemy!=='function')return;const base=hitEn
 // 춤이 아닌 짧은 순간이동(0.6초 안에 4칸 넘게 갔다가 1.5칸 안으로 돌아옴)도 같은 방식으로 카메라를 붙잡는다.
 const RANGED_HEROES=new Set(['seoha','michaela','hunter','gunner','lauren']);
 const camHold={x:null,y:null,until:0,last:null};
-function cameraAnchor(){if(!live()||!RANGED_HEROES.has(player.hero))return null;let a=null;try{a=window.__STORYWORLD_PLAY_R113__?.dance?.()?.anchor||null;}catch(_){}
- if(a&&Number.isFinite(a.x+a.y))return a;const t=now(),L=camHold.last;
+function cameraAnchor(){if(!live()||!RANGED_HEROES.has(player.hero)){camHold.last=null;camHold.until=0;return null;}
+ const t=now();let L=camHold.last;
+ // Camera holds describe a temporary move within one actor/room timeline.
+ if(L&&(L.player!==player||L.room!==room||L.hero!==player.hero||t<L.t)){camHold.until=0;L=camHold.last=null;}
+ let a=null;try{a=window.__STORYWORLD_PLAY_R113__?.dance?.()?.anchor||null;}catch(_){}
+ if(a&&Number.isFinite(a.x+a.y))return a;
  if(L&&t-L.t<.25){const jump=Math.hypot(player.x-L.x,player.y-L.y);if(jump>4&&!camHold.until){camHold.x=L.x;camHold.y=L.y;camHold.until=t+.6;stats.camHolds++;}}
- camHold.last={x:player.x,y:player.y,t};
+ camHold.last={x:player.x,y:player.y,t,player,room,hero:player.hero};
  if(camHold.until){if(t>camHold.until||Math.hypot(player.x-camHold.x,player.y-camHold.y)<1.5){camHold.until=0;return null;}return{x:camHold.x,y:camHold.y};}return null;}
 function installCamera(){if(typeof cameraTick!=='function')return;const base=cameraTick;
  cameraTick=function(dt,...a){let A=null;try{A=cameraAnchor();}catch(e){fail(e);}if(!A)return base.call(this,dt,...a);const ox=player.x,oy=player.y;player.x=A.x;player.y=A.y;stats.camAnchored++;try{return base.call(this,dt,...a);}finally{player.x=ox;player.y=oy;}};}

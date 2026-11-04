@@ -13523,6 +13523,211 @@
       "sha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d"
     },
     {
+      "path": "assets/r299/arch.webp",
+      "bytes": 42342,
+      "sha256": "21c45295331c035f9c1cf3cf83fd7f9391b08dc030750558b78aebb31996aca2"
+    },
+    {
+      "path": "assets/r299/bed.webp",
+      "bytes": 16622,
+      "sha256": "8c7685a98665adea4e98a086e6496dc0fe16ed75e52b8dfa75402023c067432c"
+    },
+    {
+      "path": "assets/r299/blood-dragged.webp",
+      "bytes": 20910,
+      "sha256": "8ea1f9dc7c0305daa447b6af121d0c9b63f4eee4d2ac2a5b05e12aee597d886e"
+    },
+    {
+      "path": "assets/r299/blood-dried.webp",
+      "bytes": 21510,
+      "sha256": "7743427646cfbad1becbfac84016cc797762756c358a89b7f7647d5796b722dc"
+    },
+    {
+      "path": "assets/r299/candles.webp",
+      "bytes": 16546,
+      "sha256": "04545abbd1d8a67b492fca72fb9726f69fceddd1ff3ff40055bd3e380ab3f757"
+    },
+    {
+      "path": "assets/r299/cart.webp",
+      "bytes": 18030,
+      "sha256": "8230934e9d2eb230b6c328d33e54512a2c90e5f0c2b6bd7dd8fb76126cab788f"
+    },
+    {
+      "path": "assets/r299/chained-pillar.webp",
+      "bytes": 12598,
+      "sha256": "d0f08c83d508739ef6d9355ebcc7c5a53d4fdd0181811f5256b8c510fc39b9fd"
+    },
+    {
+      "path": "assets/r299/diary.webp",
+      "bytes": 13836,
+      "sha256": "af0bd463393aead413d6c093a67fbb903bb1e066699ba37ad75666474f3519a0"
+    },
+    {
+      "path": "assets/r299/doll.webp",
+      "bytes": 11878,
+      "sha256": "2a75acd861e2c7ac477adf922bc6ae924fe22a6c73d8a180fa84f144289f5c16"
+    },
+    {
+      "path": "assets/r299/hexagram.webp",
+      "bytes": 36854,
+      "sha256": "29227a9330c749dd0100455cd29214c340b4c996d4cb661683cd0622d0af5237"
+    },
+    {
+      "path": "assets/r299/index.json",
+      "bytes": 17004,
+      "sha256": "7f58dc8419107a16791eb3c07d9c9684b3e8b55f6da40b3b10c4e2421e310811"
+    },
+    {
+      "path": "assets/r299/mirror.webp",
+      "bytes": 9926,
+      "sha256": "a04aa670d6656e343b699a1fa59488951cb1779aa32c5868d8bd74f2ec7ef198"
+    },
+    {
+      "path": "assets/r299/obelisk.webp",
+      "bytes": 21910,
+      "sha256": "a40c309e50a53b38aab4c5d8a9f6fd148c4d093378cb02d6ea13e0955869cf71"
+    },
+    {
+      "path": "assets/r299/papers.webp",
+      "bytes": 22574,
+      "sha256": "a4c4c8c80bc9bbbd0b6e36ede14f4500981728129115c6a8a587b2165d6a8006"
+    },
+    {
+      "path": "assets/r299/prayer-stand.webp",
+      "bytes": 10120,
+      "sha256": "90b0a18bcf078f73e147c4e991527cb5dcde273d5e8a40866049c66dab26ac58"
+    },
+    {
+      "path": "assets/r299/seal-plank.webp",
+      "bytes": 7988,
+      "sha256": "2aa1afe98eafe84f2e476c198b518dc66f323fcc3c2a1362e7e62924bbe84c70"
+    },
+    {
+      "path": "assets/r299/soot.webp",
+      "bytes": 23774,
+      "sha256": "aecb3d71e229143c6baa374b0c3fa5440e66b033e4af22a3f5613ede0d20f398"
+    },
+    {
+      "path": "assets/r299/statue.webp",
+      "bytes": 53472,
+      "sha256": "4d5ba5ed2ce3a2de26bb8bbbdcb8fe722d96ab4a2a747a8e64f2c50854afa43e"
+    },
+    {
+      "path": "assets/r299/stone-cracked.webp",
+      "bytes": 21356,
+      "sha256": "bdd4078d6c655d577567859293a4dd14efcdf4dcddc5e7097c62203f37f0b19c"
+    },
+    {
+      "path": "assets/r299/suitcase.webp",
+      "bytes": 13128,
+      "sha256": "9e5d109b767986438bbf1075344edb230773b78fab4251e0415c6ca9fc8c304e"
+    },
+    {
+      "path": "assets/r299/tree.webp",
+      "bytes": 61242,
+      "sha256": "cdc76a956337c52edb4e0486935279a4509b388401ba030b3011b2e49aaf6965"
+    },
+    {
+      "path": "assets/r302/fx/gunner/blink.webp",
+      "bytes": 36996,
+      "sha256": "335b57ea3caae0844abd19db24aa02ce195c7182566aace3975aa7b48549d3c9"
+    },
+    {
+      "path": "assets/r302/fx/gunner/e.webp",
+      "bytes": 195554,
+      "sha256": "d6c7dcfb0d18b78496321209eb0b463eb3caa8364f3a69fba78e09f39171dc42"
+    },
+    {
+      "path": "assets/r302/fx/gunner/r.webp",
+      "bytes": 683246,
+      "sha256": "508be340f321c6b461e3311fa7b7d48d20863cbdb7f11d0c3cd44f2bbdc6b9f1"
+    },
+    {
+      "path": "assets/r302/fx/gunner/w.webp",
+      "bytes": 466276,
+      "sha256": "82ab9ec959d502a74858530ea3682e8a059ec027ca1d58342d18b932f6ee4687"
+    },
+    {
+      "path": "assets/r302/fx/hwando/basic.webp",
+      "bytes": 110004,
+      "sha256": "049c5cc56bc5af75f479c78e3a39b729172f6d37484a488be1b997ee97d4a6db"
+    },
+    {
+      "path": "assets/r302/fx/hwando/blink.webp",
+      "bytes": 35396,
+      "sha256": "67592b280b1b7531fbf7c198a97ccb374d3e45206fc7ac28e6db94704e6b4d44"
+    },
+    {
+      "path": "assets/r302/fx/hwando/e.webp",
+      "bytes": 100656,
+      "sha256": "17aa193f8a67a8f91207bb8751a2bc97872c4f1221f6d5bcfdbbe7dd8459ca5e"
+    },
+    {
+      "path": "assets/r302/fx/hwando/r.webp",
+      "bytes": 346656,
+      "sha256": "af858f9496e67e0825b3c53a6e6fe0b71bd35d9e7e6a8072cd3cb4abbd5b5c27"
+    },
+    {
+      "path": "assets/r302/fx/hwando/special.webp",
+      "bytes": 197860,
+      "sha256": "7db82c62dddcf7b5ddd46072e4753230cba17d024371663cdec29a07eff67d5b"
+    },
+    {
+      "path": "assets/r302/fx/hwando/w.webp",
+      "bytes": 227400,
+      "sha256": "263244829dce5a09f7a1cdddaefca9bb7247a2cb5c48a74f952188fcb5f2b476"
+    },
+    {
+      "path": "assets/r302/fx/index.json",
+      "bytes": 20481,
+      "sha256": "d38e733f0cd7e785360593dde76db0fc6987d3771f6f94b38ac41dbd40fad531"
+    },
+    {
+      "path": "assets/r302/fx/lauren/basic.webp",
+      "bytes": 173646,
+      "sha256": "2453dab3a24f289e0a75882e2b3596e809343eb035471dc7cd57821a0f3a50d7"
+    },
+    {
+      "path": "assets/r302/fx/lauren/blink.webp",
+      "bytes": 119264,
+      "sha256": "c60a60649708b860c574359a2320645322781fc8e7652918fe54a13e4a8b3d11"
+    },
+    {
+      "path": "assets/r302/fx/neon/basic.webp",
+      "bytes": 158050,
+      "sha256": "5e1c15dbe6e3af311460834af4b92f27e56e7e2b42f66eef880bf7af38a4283b"
+    },
+    {
+      "path": "assets/r302/fx/neon/blink.webp",
+      "bytes": 56242,
+      "sha256": "749e5b3f22b8e3fe2e23cb286af485a75b84e5b31690cecde6939f1a386a95a4"
+    },
+    {
+      "path": "assets/r302/fx/neon/special.webp",
+      "bytes": 442496,
+      "sha256": "509efe2f2420b16504211bc25cac9f20d3b0e9e725bc467117b9706c68441024"
+    },
+    {
+      "path": "assets/r302/fx/neon/w.webp",
+      "bytes": 575274,
+      "sha256": "5c076d48a232e232cc08db170277b35382ac7661467dece7e74b4b096b1b88f5"
+    },
+    {
+      "path": "assets/r302/fx/seoha/basic.webp",
+      "bytes": 51022,
+      "sha256": "5f9b1296818ab7b603c6be35791a09fc8dd6b7a29be69c7a848c11adf16f1889"
+    },
+    {
+      "path": "assets/r302/fx/seoha/e.webp",
+      "bytes": 262084,
+      "sha256": "f4336cb28d7c2bcab28015648333e220d5d6ca91ecfd62688c28f281f373a013"
+    },
+    {
+      "path": "assets/r302/fx/seoha/w.webp",
+      "bytes": 577766,
+      "sha256": "18735983d9b39b16e815cdade26599391d2a578a55ba85fb9ed1177475d22259"
+    },
+    {
       "path": "assets/r306/mob-art-variants.json",
       "bytes": 5111529,
       "sha256": "e0b1d2c9898da034657d95efbd6aed760e6bc5281dc823969885a8f2fc0620b9"
@@ -14256,6 +14461,61 @@
       "path": "assets/r306/pixel/pfe37f18eb7ed.webp",
       "bytes": 12856,
       "sha256": "dddb5ddaffe33b9d4fc0b8f47b778122a4213143dea5f35b95855d5dc60fcf4f"
+    },
+    {
+      "path": "assets/r308/bgm/beethoven-malinconia.ogg",
+      "bytes": 2886997,
+      "sha256": "7b1efdefd7bed722c36e4758d2c0a599a6507b422c28645754fabfcba57e5f7f"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-cello-largo.ogg",
+      "bytes": 1940852,
+      "sha256": "c6a672fbce1943034445c2bc7e7d30be7017239523bee0d442e712b9a3f4498b"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-etude-cello.ogg",
+      "bytes": 3050404,
+      "sha256": "0405edd64a18c4554d0e957503aa0bec8c211326347ff453ab35821ae6028024"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-etude-lament.ogg",
+      "bytes": 2065377,
+      "sha256": "498ad7c05d072690b736761c2ca40f59a40da1eb932852a2eb5ee4430c52d9e2"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-funeral-72.ogg",
+      "bytes": 2852825,
+      "sha256": "648d491489df026019ee9e7e2d80c37544015269976c0deeb6ee6cf3dbec00ee"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-15-3.ogg",
+      "bytes": 1798971,
+      "sha256": "0c5fabc44f7647fdb5199c0f6af4ff21a09646d8ea7cae6f2a510ff68985f7c4"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-27-1.ogg",
+      "bytes": 2837486,
+      "sha256": "072bce5586b5bd5f1ac86a5007ce2ebe231b05f559b54476c24ccf3fbb55842e"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-nocturne-55-1.ogg",
+      "bytes": 2238610,
+      "sha256": "28e6057482e6b2ac53df26c18a88d2b90699014d6f3e0e403b029dee1d70e460"
+    },
+    {
+      "path": "assets/r308/bgm/chopin-prelude-45.ogg",
+      "bytes": 2367753,
+      "sha256": "ca016319bade508b4476e253c876df64246b49f455005e8fc6e69b826110e9c2"
+    },
+    {
+      "path": "assets/r308/bgm/index.json",
+      "bytes": 42805,
+      "sha256": "4e9abe9d6f1f353c64ca410afdda8be5c04af15ad6a15247afd0fc534420fdcc"
+    },
+    {
+      "path": "assets/r308/bgm/mozart-k421.ogg",
+      "bytes": 2822895,
+      "sha256": "5d9579cd09306ad106aa9044785b50c0bc0c554d43793bc4519737b4538a7ca7"
     },
     {
       "path": "assets/r74/effects.png",
@@ -22224,8 +22484,13 @@
     },
     {
       "path": "bgm-classical-r195.js",
-      "bytes": 12022,
-      "sha256": "525ca75dd1c4732a259116705bbca9fbb3ca58bf4b4127f86ff1e6e6654ff23e"
+      "bytes": 12098,
+      "sha256": "7d1c0b7de817c9bc8c50fef4d3811a41e0d608aec04c4fe0d6f2a62801fde475"
+    },
+    {
+      "path": "bgm-map-r308.js",
+      "bytes": 13043,
+      "sha256": "661a0335d2b4ac15749fe6d7f1786092000c5bb55521556fbf202b0ab18456a1"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -22249,8 +22514,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 114283,
-      "sha256": "8fbbfc2c79dbb399f6d8ace575f7a34c3e82d4b3cee6b49b2478dd5c9d021516"
+      "bytes": 114463,
+      "sha256": "2e8f30fece39686b2a1d7a55137b10b991a1b73204d10f247c2a51a7d275b699"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -22739,8 +23004,8 @@
     },
     {
       "path": "combat-r114.js",
-      "bytes": 37508,
-      "sha256": "0185d49e47004353fb7130ea53db9747266bcdce34d2c4f089d8926a15a296a5"
+      "bytes": 37770,
+      "sha256": "56c38232bb327b67f05c81e8290bbb0d789e8d7db5465371084723ac6559bab0"
     },
     {
       "path": "combat-r118.js",
@@ -22893,6 +23158,11 @@
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
     },
     {
+      "path": "env-props-r299.js",
+      "bytes": 12820,
+      "sha256": "7dcc57554ccefb72de3edbf178d24ec53e9bf44c6f0332b8d0fdb01b6506f591"
+    },
+    {
       "path": "era-r191.js",
       "bytes": 4378,
       "sha256": "fb5c5aa6f554cff679e972461968048b6c736df115ac8e813e97a587169b7e85"
@@ -22988,6 +23258,11 @@
       "sha256": "c5f5d0ec3d0c19c32cd0bd5975889bd722bbd284dd0919d2247dba94d0e3c3a1"
     },
     {
+      "path": "hero-palette-r302.js",
+      "bytes": 15863,
+      "sha256": "57cf2b90c07b32a7347f3cd5161abd73c77f175a9cd9935aa0e7152bf0ad2014"
+    },
+    {
       "path": "hero-presentation-r83.js",
       "bytes": 24807,
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
@@ -23049,8 +23324,13 @@
     },
     {
       "path": "hospital-settings-r84.js",
-      "bytes": 3381,
-      "sha256": "133505c82d777a46044681e5ef66b84638a02ee56052c1a4c9b1821a773036a3"
+      "bytes": 3608,
+      "sha256": "b6001ad3b53633d71907dfe1dc0a30a5719792459b3f92dd0ca7b1680c8eaa3c"
+    },
+    {
+      "path": "hud-bgm-hwando-w-r313.js",
+      "bytes": 9593,
+      "sha256": "bf8c7a5f19ff88211ffa98fbbf7b28a2a35559b9ccfa69f3ba56ac10322ce427"
     },
     {
       "path": "hwando-r242.js",
@@ -23074,8 +23354,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568323,
-      "sha256": "927ff74ab6d35bda9c1f19a2911ab97d129c3b6c40b609b11556a23e83f16093"
+      "bytes": 6568546,
+      "sha256": "ea5b89d7a535990b68404ee9a88b6dc2507ba34797633b4ed408a717358cd4a0"
     },
     {
       "path": "intro-r140.js",
@@ -23229,8 +23509,8 @@
     },
     {
       "path": "perf-groups-r266.js",
-      "bytes": 5350,
-      "sha256": "f5759ac56be91990068c0cf73b12e830d9ec4ee181e781f3b1a194e8ce4ef54a"
+      "bytes": 5626,
+      "sha256": "4d099a1b9108571b16d47cd2a8a3e07ec632b3c90095e96ed19ed2d0c3081616"
     },
     {
       "path": "perf-r119.js",
@@ -23259,8 +23539,8 @@
     },
     {
       "path": "perf-r272.js",
-      "bytes": 4522,
-      "sha256": "d6856972771b3a4dc04c3f2022aa9d32323e5a7b3d5963d4fefe8fe9eae428f3"
+      "bytes": 4597,
+      "sha256": "37c47d3b90eebfea0c8822f2dba319c8664eeab82bb9c558fc597ea65712072e"
     },
     {
       "path": "perf-r97.js",
@@ -23318,6 +23598,11 @@
       "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
     },
     {
+      "path": "props-fit-r303.js",
+      "bytes": 16894,
+      "sha256": "5551378807aa7a921bf4feb4b670c1eae19cd7b2f569de8698c3743097c56ec9"
+    },
+    {
       "path": "props-r102.js",
       "bytes": 13090,
       "sha256": "e2c88d78c5fdbdfc41297a4318b24bbe212ca13a460b0bad78dfcda817354d93"
@@ -23349,8 +23634,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 20265,
-      "sha256": "a6f38fb7300670a5cdcc05617a7ca9d11ab329ca7841a3bbe8e2e3302665adc3"
+      "bytes": 20338,
+      "sha256": "c457c01dba77d4859bfa1952e66c51bdf969c5e2182cdaedd0868060939178e4"
     },
     {
       "path": "roof-height-r267.js",
@@ -23683,9 +23968,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4736,
-  "totalBytes": 877073829,
-  "webHTMLSha256": "927ff74ab6d35bda9c1f19a2911ab97d129c3b6c40b609b11556a23e83f16093",
+  "fileCount": 4793,
+  "totalBytes": 907358398,
+  "webHTMLSha256": "ea5b89d7a535990b68404ee9a88b6dc2507ba34797633b4ed408a717358cd4a0",
   "largest": [
     {
       "path": "index.html",

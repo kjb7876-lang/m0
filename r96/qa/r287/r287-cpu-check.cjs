@@ -4,7 +4,7 @@ const C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readF
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
 const src=C('render-lod-r287.js'),idx=RT('index.html');
 ok('runtime copy matches source',RT('render-lod-r287.js')===src);
-ok('loaded once, last before combat-r118 (after stranded-r280, mob-motion-r286, perf-groups-r266 → outermost drawProp wrapper)',idx.split('"./render-lod-r287.js"').length===2&&/\.js"><\/script><script src="\.\/render-lod-r287\.js"><\/script>(<script src="\.\/skill-fx-r292\.js"><\/script>)?\s*<script src="\.\/combat-r118\.js">/.test(idx)&&idx.indexOf('"./stranded-r280.js"')<idx.indexOf('"./render-lod-r287.js"')&&idx.indexOf('"./mob-motion-r286.js"')<idx.indexOf('"./render-lod-r287.js"')&&idx.indexOf('"./perf-groups-r266.js"')<idx.indexOf('"./render-lod-r287.js"'));
+ok('loaded once, last before combat-r118 (after stranded-r280, mob-motion-r286, perf-groups-r266 → outermost drawProp wrapper)',idx.split('"./render-lod-r287.js"').length===2&&/\.js"><\/script><script src="\.\/render-lod-r287\.js"><\/script>(<script src="\.\/skill-fx-r292\.js"><\/script>)?(<script src="\.\/hero-palette-r302\.js"><\/script>)?\s*<script src="\.\/combat-r118\.js">/.test(idx)&&idx.indexOf('"./stranded-r280.js"')<idx.indexOf('"./render-lod-r287.js"')&&idx.indexOf('"./mob-motion-r286.js"')<idx.indexOf('"./render-lod-r287.js"')&&idx.indexOf('"./perf-groups-r266.js"')<idx.indexOf('"./render-lod-r287.js"'));
 ok('in verify list and CI',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'render-lod-r287.js'")&&fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r287/r287-cpu-check.cjs'));
 ok('in runtime manifest/inputs',fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8').includes('render-lod-r287.js')&&fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8').includes('render-lod-r287.js'));
 
@@ -141,3 +141,5 @@ try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax',false,String(e));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R287 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
 })();
+
+require("node:assert").ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");

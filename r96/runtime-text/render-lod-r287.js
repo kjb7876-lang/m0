@@ -148,9 +148,10 @@ const wrapFn=fn=>{if(fn.__r287)return fn;const w=function(frame){before(this,fra
 function wrapGL(r){const gl=r?.renderer;if(!gl||gl.__r287)return;const base=gl.render;gl.__r287=true;
  gl.render=function(scene,camera){if(r.__r287Pending&&scene===r.scene){r.__r287Pending=false;try{park(r);}catch(e){fail(e);}}return base.call(this,scene,camera);};}
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
-function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r)return;const proto=Object.getPrototypeOf(r);
- if(proto&&typeof proto.render==='function'&&!proto.render.__r287)proto.render=wrapFn(proto.render);
- if(Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r287)r.render=wrapFn(r.render);wrapGL(r);wrapChunks(r);}catch(e){fail(e);}}
+const wrappedTargets=new WeakSet();
+function wrapOnce(target){if(!target||wrappedTargets.has(target)||typeof target.render!=='function')return;wrappedTargets.add(target);target.render=wrapFn(target.render);}
+function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!r)return;wrapOnce(Object.getPrototypeOf(r));
+ if(Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);wrapGL(r);wrapChunks(r);}catch(e){fail(e);}}
 setInterval(wrapAll,500);wrapAll();
 function set(p){const was=prefs.on;for(const k in prefs)if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
  if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R){unwrapChunks(R);unboostCache(R);}else if(!prefs.cache&&R)unboostCache(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}

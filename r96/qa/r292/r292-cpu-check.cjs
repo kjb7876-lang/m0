@@ -35,7 +35,7 @@ ok(!T.michaela,'no michaela strips in index');ok(/h==='michaela'\)return null/.t
 const CODE=SRC.split('\n').filter(l=>!/^\s*\/\//.test(l)).join('\n');ok(!/ctx\.filter|drop-shadow|blur\(/.test(CODE),'no ctx.filter / drop-shadow / blur');
 ok(!/hitEnemy\s*=|attackCD\s*=|blinkCD\s*=|specialCD\s*=|\.ready\[|attackPower\s*=/.test(CODE),'no damage/cooldown assignments in overlay');
 // ⑦ 순서·등록
-const html=RT('index.html').toString();ok(/<script src="\.\/skill-fx-r292\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html),'script tag is the last overlay before combat-r118');
+const html=RT('index.html').toString();ok(/<script src="\.\/skill-fx-r292\.js"><\/script>(<script src="\.\/hero-palette-r302\.js"><\/script>)?\s*<script src="\.\/combat-r118\.js">/.test(html),'script tag is the last overlay before combat-r118');
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r292/r292-cpu-check.cjs'),'CI step');
 ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includes("'skill-fx-r292.js'"),'public verify list');
 // ④ 가짜 엔진
@@ -105,3 +105,5 @@ const run=(c,s)=>vm.runInContext(s,c);const settle=()=>new Promise(r=>setImmedia
  ok(!/michaela/.test(JSON.stringify(IDX)),'index has no michaela');
  console.log('R292 CPU check: '+n+' checks passed');
 })().catch(e=>{console.error(e);process.exit(1);});
+
+assert.ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");
