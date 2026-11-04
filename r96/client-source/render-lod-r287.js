@@ -113,7 +113,7 @@ function park(r){parked.length=0;if(!on('hide3d'))return;const vb=r.visibleTerra
  const kids=root.children;for(let i=0;i<kids.length;i++){const o=kids[i];if(!o||!o.isMesh||o.layers.mask===0)continue;const b=meshBox(o);if(!b||!outside(b,act))continue;parked.push(o,o.layers.mask);o.layers.mask=0;}
  stats.hidden=parked.length/2;stats.shown=kids.length-stats.hidden;}
 function unpark(){for(let i=0;i<parked.length;i+=2){const o=parked[i];if(o.layers.mask===0)o.layers.mask=parked[i+1];}parked.length=0;}
-function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);// 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다r.__r287Pending=true;}catch(e){fail(e);}}
+function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
 function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;
  if(warmState==='ready'&&r.spatialBuilt){warmState='done';if(prefs.warm){holdLeases(r);warmRender(r);}stats.chunksResident=r.chunks?.rows?.size||0;}
  else if(warmState==='done')stats.chunksResident=r.chunks?.rows?.size||0;}catch(e){fail(e);}}

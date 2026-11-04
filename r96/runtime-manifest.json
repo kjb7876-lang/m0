@@ -22209,8 +22209,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566680,
-      "sha256": "3821a43fc6cf597532345e3cd32487cc04a6c3c5650c26c56cbc7f60ce2e344f"
+      "bytes": 6566770,
+      "sha256": "2ec886f0aaf6b2eaaafcc5c82654d2d494de4b33cbeac9267a3abff16257e6d8"
     },
     {
       "path": "intro-r140.js",
@@ -22263,6 +22263,11 @@
       "sha256": "632e8529cd6360d6f74af2a876a0cd568e5ff7cd3081310be1dc474a351b4d3a"
     },
     {
+      "path": "mob-motion-r286.js",
+      "bytes": 16425,
+      "sha256": "701116641ff8bef830346090c3d2d0f56dd17263921a5c31ab1a269a7fd7432e"
+    },
+    {
       "path": "mob-preload-r260.js",
       "bytes": 4943,
       "sha256": "fa1bc5b1cb855d4e76bcc1ba07c144d530538a1eb097c717b728a1de43b9bb0f"
@@ -22281,6 +22286,11 @@
       "path": "mob-unique-r248.js",
       "bytes": 16462,
       "sha256": "2f5cd5ae5c2e284ffa4941c643cc4c72c694be9fefbb8f56f65b02b1510d7f96"
+    },
+    {
+      "path": "mobile-bonus-r286.js",
+      "bytes": 6976,
+      "sha256": "3c9b0d9900c8fe6f9dbfa29ad0fe0946ccd9835bb8ed5d1e993170ecae9c8724"
     },
     {
       "path": "mobile-settings-r142.js",
@@ -22444,8 +22454,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 15072,
-      "sha256": "0cc979ec82cc686805407f3d0d4c630e16c9618253953660cca2e1ee79784587"
+      "bytes": 15188,
+      "sha256": "e2d9a28a1b353508a70499a71f5ba7fedc7ed08a3cd06f9040b65a006b2d36ed"
     },
     {
       "path": "roof-height-r267.js",
@@ -22773,9 +22783,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4554,
-  "totalBytes": 860888487,
-  "webHTMLSha256": "3821a43fc6cf597532345e3cd32487cc04a6c3c5650c26c56cbc7f60ce2e344f",
+  "fileCount": 4556,
+  "totalBytes": 860912094,
+  "webHTMLSha256": "2ec886f0aaf6b2eaaafcc5c82654d2d494de4b33cbeac9267a3abff16257e6d8",
   "largest": [
     {
       "path": "index.html",
