@@ -59,8 +59,10 @@ const near=(pts,x,y)=>pts.some(q=>Math.hypot(q.x-x,q.y-y)<q.r);
 
 // ---- 한 방 적용 --------------------------------------------------------------------------------
 const done=new WeakMap();
+// 다른 모듈이 나중에 바꾸는 것(소품 수·R191 바꿔치기·R81 그림 입히기)이 생기면 다시 본다
+const sigOf=r=>{let a=0,b=0;for(const p of r.props){if(p?.r191From)a++;const k=p?.r81NativeSkin?.path;if(k)b+=k.length;}return r.props.length+':'+a+':'+b;};
 function apply(r){if(!on||!r||!Array.isArray(r.props))return null;const L=r.exploration;if(!L)return null;
- const sig=r.props.length+':'+r.props.reduce((n,p)=>n+(p?.r191From?1:0),0);const prev=done.get(r);if(prev&&prev.sig===sig&&prev.L===L)return prev.report;
+ const sig=sigOf(r);const prev=done.get(r);if(prev&&prev.sig===sig&&prev.L===L)return prev.report;
  const t=themeOf(r),rep=prev&&prev.L===L?{...prev.report}:{room:r.id,zone:t.zone,theme:t.theme,indoor:t.indoor,restored:0,reskinned:0,replaced:0,hidden:0,snapped:0,flipped:0,wallHidden:0,floorHidden:0},base0={...rep};/* 다시 적용해도 방 합계는 누적 */
  try{
   // ① 사몽 구역: 기증 지역 양식으로 바뀐 R191 가구를 원래대로.
@@ -94,7 +96,7 @@ function apply(r){if(!on||!r||!Array.isArray(r.props))return null;const L=r.expl
   for(const p of order){if(near(avoid,p.x,p.y)||kept.some(q=>Math.hypot(q.x-p.x,q.y-p.y)<.8)||freeAt(L,p.x,p.y,.05)===false){p.r303Hide='floor';rep.floorHidden++;continue;}kept.push(p);}
  }catch(e){fail(e);}
  for(const k of ['restored','reskinned','replaced','hidden','snapped','flipped','wallHidden','floorHidden'])stats[k]+=rep[k]-base0[k];if(!prev)stats.rooms++;
- done.set(r,{sig:r.props.length+':'+r.props.reduce((n,p)=>n+(p?.r191From?1:0),0),L,report:rep});return rep;}
+ done.set(r,{sig:sigOf(r),L,report:rep});return rep;}
 
 // ---- 맵 이동 표식·저장 등불 그림(R303b, 사용자 2026-11-04 "맵 넘나들 때 오벨리스크 그만, 계단이나 문·워프 위주로") ------------------
 //  사몽 출구(samongR103 'portal')·뒷문('back')은 R103 이 R74 오벨리스크로, 저장 등불('save'·'lamp')은 화로로 그렸다. 기능·위치·상호작용·충돌은 그대로 두고
@@ -110,7 +112,10 @@ function markerArt(p,t){const k=p?.samongR103;if(!k||!t)return null;
  if((k==='save'||k==='lamp')&&indoorHome(t))return{path:'assets/r92/lights/'+INDOOR_LIGHTS[h32(p.id)%2]+'.png',height:96};
  return null;}
 const loaded=new Set();function ensure(path){try{if(typeof readyImage==='function'&&readyImage(path))return true;if(!loaded.has(path)&&typeof addImage==='function'){loaded.add(path);addImage(path,'R303 props fit');}}catch(_){}return false;}
-function drawCopy(p){let t=null;try{t=themeOf(typeof room!=='undefined'?room:null);}catch(_){return p;}const m=markerArt(p,t);if(!m)return p;
+// 지역 공통 세부 장식(regionalDecoration, room.props 밖의 목록)도 실내에서 실외 그림이면 그리지 않는다(사몽 학교 구역의 가로등 regional-detail:ep1a09:*).
+let themeCache=null;function roomTheme(){const r=typeof room!=='undefined'?room:null;if(!r)return null;if(themeCache?.r!==r||themeCache.L!==r.exploration)themeCache={r,L:r.exploration,t:themeOf(r)};return themeCache.t;}
+function hideDetail(p){const t=roomTheme();return !!t&&t.indoor&&['school','hospital','domestic','chapel'].includes(t.theme)&&!locked(p)&&badInside(t,artOf(p));}
+function drawCopy(p){let t=null;try{t=roomTheme();}catch(_){return p;}const m=markerArt(p,t);if(!m)return p;
  if(m.path){if(!ensure(m.path))return p;const c={...p,path:m.path,height:m.height};delete c.r74Prop;delete c.r81NativeSkin;return c;}
  return{...p,r74Prop:m.r74Prop};}
 try{const P=window.__STORYWORLD_PROPS_R102__;const inner=P?.lamps;
@@ -119,7 +124,7 @@ try{const P=window.__STORYWORLD_PROPS_R102__;const inner=P?.lamps;
 
 // ---- 그리기 -----------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
- if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;if(p.samongR103)p=drawCopy(p);
+ if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;if(p.samongR103)p=drawCopy(p);else if(p.regionalDecoration&&hideDetail(p))return;
  if(p.r303Flip&&typeof ctx?.scale==='function'&&typeof project==='function'){let q;try{q=project(p.x,p.y);}catch(e){return base.call(this,p,...a);}
   ctx.save();try{ctx.translate(q.x,0);ctx.scale(-1,1);ctx.translate(-q.x,0);return base.call(this,p,...a);}finally{ctx.restore();}}
  return base.call(this,p,...a);};}}catch(e){fail(e);}

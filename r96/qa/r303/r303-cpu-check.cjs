@@ -88,5 +88,11 @@ ok('학교·병원 실내에 가로등·오벨리스크 그림 0(기능 소품 �
   const L=c.__STORYWORLD_PROPS_R102__.lamps('z','regional',[{id:'lights_hospital_03',kind:'light'},{id:'lights_domestic_01',kind:'light'},{id:'lights_regional_01',kind:'light'}],[],'regional');
   assert.ok(L.length>0&&L.every(i=>i.id!=='lights_regional_01'));}
  const c=world(),f=forest();c.room=f;assert.equal(c.__STORYWORLD_PROPS_R102__.lamps('z','regional',[],[],'regional')[0].id,'lights_regional_01');});
+ok('R81 이 나중에 가로등 그림을 입혀도(사몽 학교 구역) 다시 적용해 실내 그림으로 바꾼다',()=>{const c=world(),r=school();c.api.apply(r);
+ const d=r.props.find(p=>/:g1:0:0/.test(p.id));d.r81NativeSkin={path:'assets/props/v290/broken_street_lamp.webp',height:80};c.api.apply(r);
+ assert.ok(!/street_lamp/.test(String(d.r81NativeSkin?.path||'')));});
+ok('room.props 밖의 지역 세부 장식(regionalDecoration) 가로등도 학교 실내에서는 그리지 않는다',()=>{const c=world(),r=school();c.room=r;c.draws.length=0;
+ c.drawProp({id:'regional-detail:ep1a09:5',path:'assets/props/v290/broken_street_lamp.webp',key:'lamp',x:16,y:35,regionalDecoration:true,solid:false});assert.equal(c.draws.length,0);
+ const f=forest();c.room=f;c.drawProp({id:'regional-detail:dist00:1',path:'assets/props/v290/broken_street_lamp.webp',key:'lamp',x:1,y:1,regionalDecoration:true});assert.equal(c.draws.length,1);});
 ok('끄기 설정이면 아무것도 바꾸지 않는다',()=>{const c=world();c.api.set({on:false});const r=hospital(),b=JSON.stringify(r);c.api.apply(r);assert.equal(JSON.stringify(r),b);});
 console.log(n+' checks passed');
