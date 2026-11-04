@@ -39,3 +39,5 @@ projection33/
 
 # Local restoration evidence; private checkpoints are not public site assets.
 /qa-r63/
+
+__pycache__/

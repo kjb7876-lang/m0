@@ -1,0 +1,26 @@
+name: 작업 요청 (SW)
+description: Claude 총괄이 SW-번호를 붙여 분해·배정합니다. 모바일에서도 작성 가능.
+title: "SW-???? "
+labels: ["agent-task", "status:QUEUED"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: 목표
+      description: 무엇을 바꾸고 싶은지 한두 줄로
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      description: "예: PR 만들기까지 / 병합·배포까지 / 자산 전달까지"
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 종류
+      options: ["코드", "자산(그림·이펙트)", "검사·조사", "기타"]
+  - type: textarea
+    id: notes
+    attributes:
+      label: 하지 말 것 / 참고
