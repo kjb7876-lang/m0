@@ -6,6 +6,16 @@ const REV='R313-hud-bgm-hwando-1',DIR='assets/audio/bgm/classical/';
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([255,198,72])});
 const COMPOSERS={'Johann Sebastian Bach':'바흐','Edvard Grieg':'그리그','Camille Saint-Saëns':'생상스','Antonio Vivaldi':'비발디','Frederic Chopin':'쇼팽','Ludwig van Beethoven':'베토벤','Wolfgang Amadeus Mozart':'모차르트'};
 const TITLES={
+ 'Etude in E-flat minor, Op. 10 No. 6':'연습곡 Op.10-6',
+ 'Nocturne in C-sharp minor, Op. 27 No. 1':'녹턴 Op.27-1',
+ 'Nocturne in F minor, Op. 55 No. 1':'녹턴 Op.55-1',
+ 'Prelude in C-sharp minor, Op. 45':'전주곡 Op.45',
+ 'Cello Sonata in G minor, Op. 65 - III. Largo':'첼로 소나타 Op.65 · 3악장',
+ 'Etude in C-sharp minor, Op. 25 No. 7':'연습곡 Op.25-7',
+ 'Funeral March in C minor, Op. posth. 72 No. 2':'장송행진곡 Op.72-2',
+ 'Nocturne in G minor, Op. 15 No. 3':'녹턴 Op.15-3',
+ 'String Quartet No. 15 in D minor, K. 421 - I. Allegro moderato':'현악 사중주 15번 · 1악장',
+ 'String Quartet No. 6, Op. 18 No. 6 - IV. La Malinconia':'현악 사중주 6번 · 4악장',
  'Toccata and Fugue in D minor, BWV 565':'토카타와 푸가 BWV 565',
  'In the Hall of the Mountain King (Peer Gynt Suite No. 1, Op. 46 IV)':'산왕의 궁전에서',
  'Danse macabre, Op. 40':'죽음의 무도 Op.40',
@@ -21,14 +31,28 @@ const TITLES={
  'Coriolan Overture in C minor, Op. 62':'코리올란 서곡 Op.62',
  'Prelude in A minor, Op. 28 No. 2':'전주곡 Op.28-2'
 };
+let mapCatalog=null;
+fetch('assets/r308/bgm/index.json').then(r=>r.ok?r.json():null).then(j=>{mapCatalog=j?.tracks||null;}).catch(()=>{});
 let catalog=null,label=null,pending='',shown='',changedAt=0,lastError=null;
 const stats={replaced:0,fallback:0,errors:0};
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,180);};
 fetch(DIR+'catalog.json').then(r=>r.ok?r.json():null).then(j=>{catalog=j?.tracks||null;}).catch(fail);
 function currentText(){
- const s=window.__STORYWORLD_BGM_CLASSICAL_R195__?.inspect?.(),a=s?.active;
- if(typeof settings==='undefined'||!settings.music||!(settings.bgm>0)||document.hidden||!s?.prefs?.on||s.blocked||!a||a.paused||!(a.volume>0)||s.failed?.includes(a.id))return '';
- const t=catalog?.[a.id];if(!t?.composer||!t?.title)return '';
+ if(typeof settings==='undefined'||!settings.music||!(settings.bgm>0)||document.hidden)return '';
+ const legacy=window.__STORYWORLD_BGM_CLASSICAL_R195__?.inspect?.();
+ const map=window.__STORYWORLD_BGM_MAP_R308__?.inspect?.();
+ const audible=d=>d&&!d.paused&&!d.muted&&!d.ended&&d.readyState>=3&&d.volume>0;
+ let t;
+ if(map?.active){
+  if(!map.prefs?.on||legacy?.prefs?.on===false)return '';
+  // cur points at the incoming deck even while it buffers. Show the louder audible deck.
+  const d=(map.decks||[]).filter(d=>audible(d)&&!map.failed?.includes(d.id)).sort((a,b)=>b.volume-a.volume)[0];
+  t=d&&mapCatalog?.[d.id];
+ }else{
+  const a=legacy?.active;if(!legacy?.prefs?.on||legacy.blocked||!audible(a)||legacy.failed?.includes(a.id))return '';
+  t=catalog?.[a.id];
+ }
+ if(!t?.composer||!t?.title)return '';
  // Localize the credit metadata, never infer a title from a filename or selected/pending track.
  const c=COMPOSERS[t.composer]||(/[가-힣]/.test(t.composer)?t.composer:null),n=TITLES[t.title]||(/[가-힣]/.test(t.title)?t.title:null);
  return c&&n?'♪ '+c+' · '+n:'';
@@ -42,7 +66,7 @@ function mount(){
  #r313RegionLine #layerTag{flex:none;margin-left:0}
  #r313Bgm{flex:1 1 0;min-width:0;max-width:22rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:11px/1.5 'Malgun Gothic',serif;color:#72551f;background:linear-gradient(100deg,#e3d5b6,#cbb88f);border-radius:2px;opacity:0;transition:opacity .2s ease}
  #r313Bgm[hidden]{display:none}
- @media(max-width:780px){#r313RegionLine{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:0 5px}#r313RegionLine #layerTag{grid-row:2;grid-column:1 / -1;width:max-content}}
+ @media(max-width:780px){header:has(#r313RegionLine) .brand{display:none}header:has(#r313RegionLine) .topnav{flex:0 0 auto;max-width:45%;overflow-x:auto;white-space:nowrap}header:has(#r313RegionLine) .topnav button{flex:none;white-space:nowrap}#r313RegionLine{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:0 5px}#r313RegionLine #layerTag{grid-row:2;grid-column:1 / -1;width:max-content}}
  `;document.head.appendChild(style);}
  const line=document.createElement('span');line.id='r313RegionLine';name.parentNode.insertBefore(line,name);line.appendChild(name);
  label=document.createElement('span');label.id='r313Bgm';label.hidden=true;line.appendChild(label);
@@ -88,17 +112,19 @@ function patchContext(c){if(!c||patched.has(c)||typeof c.drawImage!=='function')
   return base.call(this,im,...a);
  };
 }
-if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){
+let drawInstalled=false;
+function installDraw(){if(drawInstalled||!window.__STORYWORLD_SKILL_FX_R292__||typeof drawEffect!=='function')return;drawInstalled=true;const base=drawEffect;drawEffect=function(e,...a){
  if(e?.type!=='r292-skill-fx')return base.call(this,e,...a);
  patchContext(typeof ctx==='undefined'?null:ctx);
  const prev=stripPass,oldAges=ages,oldOrdinal=ordinal;
- stripPass=true;ordinal=0;ages=(window.__STORYWORLD_SKILL_FX_R292__?.inspect?.().active||[]).filter(x=>x.key==='hwando:w');
+ stripPass=true;ordinal=0;ages=(window.__STORYWORLD_SKILL_FX_R292__?.inspect?.().active||[]).filter(x=>x.key==='hwando:w'&&x.age>=0&&x.age<.6);
  try{return base.call(this,e,...a);}finally{stripPass=prev;ages=oldAges;ordinal=oldOrdinal;}
 };}
+installDraw();
 if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r=base.apply(this,a);update();return r;};}
 if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){const r=base.apply(this,a);update();return r;};}
 document.addEventListener('visibilitychange',update);
-if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(typeof player!=='undefined'&&player?.hero==='hwando')ready();}catch(e){fail(e);}return r;};}
+if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{installDraw();if(typeof player!=='undefined'&&player?.hero==='hwando')ready();}catch(e){fail(e);}return r;};}
 window.__STORYWORLD_HUD_BGM_HWANDO_R313__=Object.freeze({revision:REV,update,currentText,inspect:()=>({revision:REV,text:shown,pending,stats:{...stats},lastError,presentationOnly:true})});
 update();
 })();

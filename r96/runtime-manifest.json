@@ -21644,13 +21644,13 @@
     },
     {
       "path": "bgm-classical-r195.js",
-      "bytes": 12022,
-      "sha256": "525ca75dd1c4732a259116705bbca9fbb3ca58bf4b4127f86ff1e6e6654ff23e"
+      "bytes": 12098,
+      "sha256": "7d1c0b7de817c9bc8c50fef4d3811a41e0d608aec04c4fe0d6f2a62801fde475"
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 12912,
-      "sha256": "9cec003aaf439dab721e14316b6d4837ec57a07ad75474e0562f3993e912b076"
+      "bytes": 13043,
+      "sha256": "661a0335d2b4ac15749fe6d7f1786092000c5bb55521556fbf202b0ab18456a1"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -22483,6 +22483,11 @@
       "sha256": "133505c82d777a46044681e5ef66b84638a02ee56052c1a4c9b1821a773036a3"
     },
     {
+      "path": "hud-bgm-hwando-w-r313.js",
+      "bytes": 9593,
+      "sha256": "bf8c7a5f19ff88211ffa98fbbf7b28a2a35559b9ccfa69f3ba56ac10322ce427"
+    },
+    {
       "path": "hwando-r242.js",
       "bytes": 12495,
       "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
@@ -22504,8 +22509,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568348,
-      "sha256": "a321da3a629c17d4e791b4d36834fb36b94a8a9cbdb30bb18fca3cec4348749b"
+      "bytes": 6568398,
+      "sha256": "c6e1574d46b8b025acd345eecf00128ca043dd91d036fc169d12847872a5c5c1"
     },
     {
       "path": "intro-r140.js",
@@ -23108,9 +23113,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4621,
-  "totalBytes": 898575425,
-  "webHTMLSha256": "a321da3a629c17d4e791b4d36834fb36b94a8a9cbdb30bb18fca3cec4348749b",
+  "fileCount": 4622,
+  "totalBytes": 898585275,
+  "webHTMLSha256": "c6e1574d46b8b025acd345eecf00128ca043dd91d036fc169d12847872a5c5c1",
   "largest": [
     {
       "path": "index.html",
