@@ -6,7 +6,8 @@
 //  ① 보조 렌더링(한 번): 지역에 들어오면 맵 전체 덩어리를 한 번 올리고(덩어리 수 상한 안이면 그대로 대기 상태로 둔다),
 //     다 올라오면 화면 밖 4×4 렌더 타깃에 장면 전체를 한 번 그려 셰이더·지오메트리·텍스처를 미리 올린다. 화면에는 아무것도 그리지 않는다.
 //     덩어리 그림 파일은 지역을 떠날 때까지 잡아 두고(리스), 2D 조형물 그림 텍스처도 지역 동안 잡아 둔다 → 다시 와도 다시 올리지 않는다.
-//  ② 우선 렌더링: 시야(엔진이 계산한 보이는 범위)+주변 고리(RING 칸) 안의 지형 메시는 그대로 그리고, 밖의 메시는 그 프레임의 그리기 동안만
+//  ② 우선 렌더링: 대기 중인 덩어리 메시 중 엔진이 원래 올려 두었을 것(영웅 둘레 3×3+보이는 범위, 엔진 규칙 그대로)만 그리고 — 그래서 화면에 그려지는 지형은 끄기 상태와 같다 —
+//     덩어리에 속하지 않은 지형 메시는 시야(엔진이 계산한 보이는 범위)+주변 고리(RING 칸) 안만 그린다. 나머지는 그 프레임의 그리기 동안만
 //     layers.mask=0(대기)로 두었다가 그리기가 끝나면 원래 값으로 되돌린다(엔진이 visible 을 매 프레임 다시 켜므로 visible 대신 layers).
 //     덩어리 수가 상한을 넘는 큰 맵은 전체를 대기시키지 않고, 한 번 미리 올린 뒤 시야+고리(PREFETCH 칸)만 미리 올려 둔다.
 //  ③ 약한 렌더링: 화면+여백 밖 조형물·벽의 2D 그리기는 PROP_EVERY 프레임에 한 번만(돌아가며) 한다 — 그림 지연 로딩·나무 그림 바꾸기 같은
@@ -67,13 +68,13 @@ if(typeof draw==='function'){const base=draw;draw=function(...a){inDraw=true;fra
 if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){try{if(farProp(p))return;}catch(e){fail(e);}return base.apply(this,[p,...a]);};}
 
 // ---- 3D: 덩어리 대기·미리 올리기·시야 밖 대기 ----
-let R=null,zoneKey=null,warmState='idle',warmPromise=null,leases=[],held=[],heldSet=new WeakSet(),heldOwner=null,warmRT=null;
+let lastArgs=null,R=null,zoneKey=null,warmState='idle',warmPromise=null,leases=[],held=[],heldSet=new WeakSet(),heldOwner=null,warmRT=null;
 let coarse=null;const capFor=r=>{if(coarse===null){try{coarse=!!matchMedia('(pointer:coarse)').matches;}catch(_){coarse=false;}}return((r?.lastViewportWidth||innerWidth)<960||coarse)?CFG.capLow:CFG.cap;};
 function releaseZone(){for(const l of leases){try{l.release();}catch(e){fail(e);}}leases=[];
  if(heldOwner){for(const img of held){try{heldOwner.release(img);}catch(e){fail(e);}}}held=[];heldSet=new WeakSet();heldOwner=null;stats.leases=0;stats.texHeld=0;}
 let zoneAt=0;function newZone(zone){releaseZone();coarse=null;zoneKey=zone;warmState='loading';zoneAt=frameNo;stats.zones++;}
 function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.__r287)return;const base=C.update;
- const w=function(x,y,zone,grid={}){if(!prefs.on)return base.call(this,x,y,zone,grid);
+ const w=function(x,y,zone,grid={}){lastArgs={x,y,grid};if(!prefs.on)return base.call(this,x,y,zone,grid);
   let vb=grid?.visibleBounds;try{const g=chunkGrid(grid),cap=capFor(r),size=this.size||10;stats.chunksAll=g.count;
    if(zone!==zoneKey)newZone(zone);
    if(warmState==='loading'&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';// 덩어리가 끝내 안 올라오면 미리 그리기 없이 진행
@@ -108,9 +109,22 @@ function meshBox(o){const g=o.geometry;if(!g)return null;const m=o.matrixWorld.e
  if(!g.boundingBox)g.computeBoundingBox();const bb=g.boundingBox;if(!bb||!Number.isFinite(bb.min.x))return null;
  let x0=Infinity,z0=Infinity,x1=-Infinity,z1=-Infinity;for(const X of [bb.min.x,bb.max.x])for(const Y of [bb.min.y,bb.max.y])for(const Z of [bb.min.z,bb.max.z]){const wx=m[0]*X+m[4]*Y+m[8]*Z+m[12],wz=m[2]*X+m[6]*Y+m[10]*Z+m[14];if(wx<x0)x0=wx;if(wx>x1)x1=wx;if(wz<z0)z0=wz;if(wz>z1)z1=wz;}
  const box=[x0,z0,x1,z1];boxCache.set(o,{g,m0:m[0],m12:m[12],m14:m[14],m10:m[10],box});return box;}
+/* 엔진이 원래 올려 두었을 덩어리인가(ChunkManager.update 규칙 그대로: 영웅 둘레 3×3 + 보이는 범위 덩어리 + 경계 유지 여유).
+   대기 중인 나머지 덩어리 메시는 그리기에서 빼 → 화면에 그려지는 지형은 끄기 상태와 같다(겹치는 안개·배경 판이 더 쌓이지 않음). */
+function engineKeeps(key,x,y,size,view,grid){const k=String(key).split(',').map(Number);if(k.length!==2||!k.every(Number.isFinite))return true;const a=k[0],b=k[1];
+ const g=chunkGrid(grid||{});if(a<g.minX||b<g.minY||a>=g.columns||b>=g.rows)return false;
+ const cx=Math.floor(x/size),cy=Math.floor(y/size);if(Math.abs(a-cx)<=1&&Math.abs(b-cy)<=1)return true;
+ const v=finite4(view);if(v&&a>=Math.floor(view[0]/size)&&a<=Math.floor(view[2]/size)&&b>=Math.floor(view[1]/size)&&b<=Math.floor(view[3]/size))return true;
+ const mx=(a+.5)*size,my=(b+.5)*size;if(Math.abs(x-mx)<=size*1.5+1&&Math.abs(y-my)<=size*1.5+1)return true;
+ return !!(v&&mx>=view[0]-size/2-1&&mx<=view[2]+size/2+1&&my>=view[1]-size/2-1&&my<=view[3]+size/2+1);}
 let parked=[];// [obj,mask] 이번 프레임 동안만 대기
+const rowMeshes=new Set();
 function park(r){parked.length=0;if(!on('hide3d'))return;const vb=r.visibleTerrainBounds,root=r.spatialRoot;if(!finite4(vb)||!root)return;const act=expand(vb,CFG.ring);
- const kids=root.children;for(let i=0;i<kids.length;i++){const o=kids[i];if(!o||!o.isMesh||o.layers.mask===0)continue;const b=meshBox(o);if(!b||!outside(b,act))continue;parked.push(o,o.layers.mask);o.layers.mask=0;}
+ const put=o=>{if(o&&o.layers&&o.layers.mask!==0){parked.push(o,o.layers.mask);o.layers.mask=0;}};
+ rowMeshes.clear();const A=lastArgs,size=r.chunks?.size||10;
+ if(A){for(const M of [r.floorRows,r.backdropRows,r.fogRows,r.bridgeRows])if(M instanceof Map)for(const [key,mesh] of M){rowMeshes.add(mesh);if(!engineKeeps(key,A.x,A.y,size,vb,A.grid))put(mesh);}
+  if(r.wallRows instanceof Map)for(const e of r.wallRows.values()){if(!e?.mesh)continue;rowMeshes.add(e.mesh);let keep=!(e.refs&&e.refs.size);if(!keep)for(const key of e.refs)if(engineKeeps(key,A.x,A.y,size,vb,A.grid)){keep=true;break;}if(!keep)put(e.mesh);}}
+ const kids=root.children;for(let i=0;i<kids.length;i++){const o=kids[i];if(!o||!o.isMesh||o.layers.mask===0||rowMeshes.has(o))continue;const b=meshBox(o);if(!b||!outside(b,act))continue;put(o);}
  stats.hidden=parked.length/2;stats.shown=kids.length-stats.hidden;}
 function unpark(){for(let i=0;i<parked.length;i+=2){const o=parked[i];if(o.layers.mask===0)o.layers.mask=parked[i+1];}parked.length=0;}
 function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
@@ -127,6 +141,6 @@ function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.
 setInterval(wrapAll,500);wrapAll();
 function set(p){const was=prefs.on;for(const k in prefs)if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}
  if(!prefs.on||!prefs.warm){releaseZone();}if(!prefs.on&&R)unwrapChunks(R);if(prefs.on&&!was){zoneKey=null;wrapAll();}return{...prefs};}
-window.__STORYWORLD_RENDER_LOD_R287__=Object.freeze({revision:REV,config:CFG,expand,chunkGrid,fullBounds,outside,screenOutside,farTurn,propMargin,set,
+window.__STORYWORLD_RENDER_LOD_R287__=Object.freeze({revision:REV,config:CFG,expand,engineKeeps,chunkGrid,fullBounds,outside,screenOutside,farTurn,propMargin,set,
  inspect:()=>({revision:REV,prefs:{...prefs},zone:zoneKey,warmState,stats:{...stats},lastError,gameplayChanged:false,browserVerified:false,GPUVerified:false})});
 })();

@@ -22454,8 +22454,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 15188,
-      "sha256": "e2d9a28a1b353508a70499a71f5ba7fedc7ed08a3cd06f9040b65a006b2d36ed"
+      "bytes": 17181,
+      "sha256": "ff73eb127482109310c9123c7bcc0721b2e932dd7819666e217754fa2ef00c26"
     },
     {
       "path": "roof-height-r267.js",
@@ -22784,7 +22784,7 @@
     }
   ],
   "fileCount": 4556,
-  "totalBytes": 860912094,
+  "totalBytes": 860914087,
   "webHTMLSha256": "2ec886f0aaf6b2eaaafcc5c82654d2d494de4b33cbeac9267a3abff16257e6d8",
   "largest": [
     {

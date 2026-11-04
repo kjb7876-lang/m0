@@ -75,6 +75,16 @@ function world(o={}){
  w.far.layers.mask=8;w.r.visibleTerrainBounds=[0,0,10,10];w.log.glRender.length=0;w.frame();ok('engine-changed mask is kept (restored value = the mask the engine set this frame)',w.far.layers.mask===8&&w.log.glRender[0].masks[1]===0);
  w.far.layers.mask=0;w.frame();ok('a mesh the engine itself hid (mask 0) stays hidden',w.far.layers.mask===0);}
 
+// ---- 대기 덩어리 메시: 엔진이 올려 두었을 덩어리만 그린다 ----
+{const w=world();const A=w.api;const g={columns:6,rows:6,minX:0,minY:0};
+ ok('engineKeeps: 3×3 around the hero and view chunks kept, far chunk not, outside grid not',A.engineKeeps('0,0',5,5,10,[0,0,10,10],g)&&A.engineKeeps('1,1',5,5,10,[0,0,10,10],g)&&!A.engineKeeps('5,5',5,5,10,[0,0,10,10],g)&&!A.engineKeeps('7,0',5,5,10,[0,0,10,10],g));
+ const mk=(n)=>({name:n,isMesh:true,layers:{mask:4},matrixWorld:{elements:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]},geometry:{boundingBox:{min:{x:0,y:0,z:0},max:{x:100,y:1,z:100}}}});
+ const fNear=mk('fNear'),fFar=mk('fFar'),wFar=mk('wFar'),wBoth=mk('wBoth');w.r.floorRows=new Map([['0,0',fNear],['5,5',fFar]]);w.r.wallRows=new Map([['a',{mesh:wFar,refs:new Set(['5,4'])}],['b',{mesh:wBoth,refs:new Set(['5,5','1,0'])}]]);
+ w.kids.push(fNear,fFar,wFar,wBoth);const seen=[];const gr=w.gl.render;w.gl.render=function(s,c){seen.push([fNear,fFar,wFar,wBoth].map(m=>m.layers.mask));return gr.call(this,s,c);};
+ w.frame();w.frame();const last=seen.at(-1);
+ ok('resident far chunk meshes (floor, wall) parked even when their box overlaps the view; kept chunk meshes and shared walls drawn',last[0]===4&&last[1]===0&&last[2]===0&&last[3]===4,last);
+ ok('row meshes restored after the frame',[fNear,fFar,wFar,wBoth].every(m=>m.layers.mask===4));}
+
 // ---- 덩어리: 맵 전체 대기 / 큰 맵은 미리 올린 뒤 시야+고리 ----
 {const w=world();w.frame();await w.flush();w.frame();
  const u=w.log.updates[0];ok('under the cap: chunk update asks for the whole map (all 36 chunks resident)',w.r.chunks.rows.size===36&&u.grid.visibleBounds[2]>59,u);
