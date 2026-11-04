@@ -63,7 +63,7 @@ check('flashlight sight culls R299 props on Canvas, with and without R266',()=>{
   assert.equal(w.__STORYWORLD_ENV_PROPS_R299__.inspect().stats.errors,0);
  }
 });
-check('script order: env-props-r299 right before mobile-perf-r298',()=>{assert.ok(/<script src="\.\/env-props-r299\.js"><\/script><script src="\.\/mobile-perf-r298\.js">/.test(read('runtime-text/index.html')));});
+check('script order: env-props-r299 before optional map BGM and mobile-perf-r298',()=>{assert.ok(/<script src="\.\/env-props-r299\.js"><\/script>(<script src="\.\/bgm-map-r308\.js"><\/script>)?<script src="\.\/mobile-perf-r298\.js">/.test(read('runtime-text/index.html')));});
 check('public asset index contains zero drive-related keys at any depth',()=>{
  const walk=o=>{if(!o||typeof o!=='object')return;for(const[k,v]of Object.entries(o)){assert.ok(!/drive|드라이브/i.test(k),'private key: '+k);walk(v);}};
  walk(JSON.parse(read('runtime-text/assets/r299/index.json')));

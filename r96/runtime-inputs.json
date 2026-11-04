@@ -3819,6 +3819,18 @@
     "assets/r302/fx/seoha/basic.webp",
     "assets/r302/fx/seoha/e.webp",
     "assets/r302/fx/seoha/w.webp",
+    "bgm-map-r308.js",
+    "assets/r308/bgm/beethoven-malinconia.ogg",
+    "assets/r308/bgm/chopin-cello-largo.ogg",
+    "assets/r308/bgm/chopin-etude-cello.ogg",
+    "assets/r308/bgm/chopin-etude-lament.ogg",
+    "assets/r308/bgm/chopin-funeral-72.ogg",
+    "assets/r308/bgm/chopin-nocturne-15-3.ogg",
+    "assets/r308/bgm/chopin-nocturne-27-1.ogg",
+    "assets/r308/bgm/chopin-nocturne-55-1.ogg",
+    "assets/r308/bgm/chopin-prelude-45.ogg",
+    "assets/r308/bgm/index.json",
+    "assets/r308/bgm/mozart-k421.ogg",
     "assets/r299/arch.webp",
     "assets/r299/bed.webp",
     "assets/r299/blood-dragged.webp",
@@ -4915,5 +4927,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a75c54bacea5e0edf8fa070d3360c61782b2649c5c4986fe785582645b079e5b"
+  "runtimeManifestSHA256": "103665cbd4e0dedebf8756e560fc413b243189950dc3b45329d64e4a61d59123"
 }
