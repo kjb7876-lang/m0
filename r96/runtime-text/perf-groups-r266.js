@@ -28,6 +28,9 @@ if(typeof setInterval==='function')setInterval(()=>{try{scan();}catch(e){fail(e)
 //  배우 그리기 직전(drawObjective 바로 뒤)에 그 프레임의 조형물을 깊이순으로 먼저 다 그리고, 원래 자리의 조형물 그리기는 건너뛴다 → 몹·영웅이 늘 위.
 let actorsOnTop=true;try{const s=JSON.parse(localStorage.getItem('storyworld.r266.actorsOnTop')||'null');if(s&&s.on===false)actorsOnTop=false;}catch(_){}
 let pre=new WeakSet(),preFrame=false;
+const propRenderers=[];
+// Custom prop painters run after the actorsOnTop duplicate suppression.
+function registerPropRenderer(paint){if(typeof paint==='function')propRenderers.push(paint);}
 if(typeof drawObjective==='function'&&typeof drawProp==='function'){const baseObj=drawObjective;
  drawObjective=function(...a){const r=baseObj.apply(this,a);pre=new WeakSet();preFrame=false;
   try{if(actorsOnTop&&typeof room==='object'&&room&&Array.isArray(room.props)){const list=room.props.filter(q=>q&&Number.isFinite(q.x)&&Number.isFinite(q.y)).sort((p,q)=>(p.x+p.y)-(q.x+q.y));
@@ -35,7 +38,7 @@ if(typeof drawObjective==='function'&&typeof drawProp==='function'){const baseOb
 let passing=false;/* 먼저 그릴 때는 지금의 drawProp 전체(뒤에 실린 오버레이 감싸기 포함)를 그대로 탄다 */
 const drawPropNow=q=>{passing=true;try{drawProp(q);}catch(e){fail(e);}finally{passing=false;}};
 if(typeof drawProp==='function'){const baseProp=drawProp;
- drawProp=function(q,...a){if(!passing&&preFrame&&q&&pre.has(q)){pre.delete(q);return;}return baseProp.apply(this,[q,...a]);};}
+ drawProp=function(q,...a){if(!passing&&preFrame&&q&&pre.has(q)){pre.delete(q);return;}for(const paint of propRenderers)if(paint(q,...a)===true)return;return baseProp.apply(this,[q,...a]);};}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_PERF_GROUPS_R266__=Object.freeze({revision:REV,set,scan,actorsOnTop:v=>{actorsOnTop=v!==false;try{localStorage.setItem('storyworld.r266.actorsOnTop',JSON.stringify({on:actorsOnTop}));}catch(_){}return actorsOnTop;},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
+window.__STORYWORLD_PERF_GROUPS_R266__=Object.freeze({revision:REV,set,scan,registerPropRenderer,actorsOnTop:v=>{actorsOnTop=v!==false;try{localStorage.setItem('storyworld.r266.actorsOnTop',JSON.stringify({on:actorsOnTop}));}catch(_){}return actorsOnTop;},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();

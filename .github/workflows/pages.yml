@@ -59,6 +59,8 @@ jobs:
         run: node r96/qa/r308/r308-cpu-check.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
+      - name: R299 environment props/decals placement determinism, caps, no collision change, door/altar clearance
+        run: node r96/qa/r299/r299-cpu-check.cjs
       - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions
         run: node r96/qa/r103/samong-cpu-check.cjs
       - name: R104 boss key-pose frames, pivots and draw-only swap
@@ -127,6 +129,8 @@ jobs:
         run: node r96/qa/r141/perf-cpu-check.cjs
       - name: R142 mobile settings (start menu button, condensed quick settings)
         run: node r96/qa/r142/mobile-settings-cpu-check.cjs
+      - name: R319 title settings close returns to title (desktop/mobile), in-game resume kept
+        run: node r96/qa/r84/title-settings-close-check.cjs
       - name: R143 hero foot ring on the ground layer, opening intro removed
         run: node r96/qa/r143/feet-intro-cpu-check.cjs
       - name: R147 lag — full-screen layers stop repainting every frame, mobile CSS filter off, caches
@@ -345,6 +349,8 @@ jobs:
         run: node r96/qa/r313/r313-cpu-check.cjs
       - name: R301 boss nameplate single-draw CPU check
         run: node r96/qa/r301/r301-cpu-check.cjs
+      - name: R312 ranged camera hold lifecycle CPU check
+        run: node r96/qa/r312/r312-cpu-check.cjs
       - name: R291 QWER+ASDF combat keys, C interact, legacy toggle CPU check
         run: node r96/qa/r291/r291-cpu-check.cjs
       - name: R261 guide loot and closet-door fix CPU check
