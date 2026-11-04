@@ -24,7 +24,7 @@ function candidates(p){const out=[],have=pts(p);if(have<=0)return out;const L=g(
  // 1) 일반강화(R169 와 같은 목록·같은 조건)
  try{const UP=g('UPGRADES'),rank=g('rank');if(Array.isArray(UP)&&typeof rank==='function'&&U169()?.buyTalent)for(const u of UP){if(u.dream&&L!=='DREAM')continue;const n=Number(rank(u.id))||0;if(n>=u.max)continue;out.push({kind:'talent',id:u.id,cost:1,rank:n,name:u.name,order:0});}}catch(e){fail(e);}
  // 2) Z·X·C 확률 발동(사몽 루트가 열린 뒤)
- try{const G=GR();if(G){const i=G.inspect?.();if(i?.routeOpen){const st=i.state||G.state?.();for(const slot of ['w','e','r']){const lv=Number(st?.procs?.[p.hero+':'+slot])||0;if(lv>=(G.MAX_LEVEL||7))continue;out.push({kind:'proc',id:slot,cost:G.procCost(lv+1),rank:lv,name:{w:'Z',e:'X',r:'C'}[slot]+' 스킬강화',order:1});}}}}catch(e){fail(e);}
+ try{const G=GR();if(G){const i=G.inspect?.();if(i?.routeOpen){const st=i.state||G.state?.();for(const slot of ['w','e','r']){const lv=Number(st?.procs?.[p.hero+':'+slot])||0;if(lv>=(G.MAX_LEVEL||7))continue;out.push({kind:'proc',id:slot,cost:G.procCost(lv+1),rank:lv,name:(typeof KR291!=='undefined'&&KR291?KR291:{w:'W',e:'E',r:'R',werDot:'W·E·R',werSp:'W · E · R'})[slot]+' 스킬강화',order:1});}}}}catch(e){fail(e);}
  // 3) 오라·무한강화(R169 이후 비용 = 다음 단계²)
  try{const A=P62();if(A?.defs&&typeof A.ranks==='function'){const ids=L==='DREAM'?[...AURA,DREAM_AURA]:AURA;for(const id of ids){const d=A.defs.find(x=>x.id===id);if(!d)continue;const n=Number(A.ranks(id,p))||0;if(d.maxRank!=null&&n>=d.maxRank)continue;out.push({kind:'aura',id,cost:Number(d.cost)||1,rank:n,name:d.name,order:2});}}}catch(e){fail(e);}
  return out.filter(c=>Number.isFinite(c.cost)&&c.cost>0&&c.cost<=have).sort((a,b)=>a.cost-b.cost||a.order-b.order||a.rank-b.rank);}

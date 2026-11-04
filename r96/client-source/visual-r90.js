@@ -70,7 +70,8 @@ html.r90-ui .muted{color:#b8ad9c}html.r90-ui .bar{border-color:#75634e;border-ra
  function paintTarget(c,e){if(!e||typeof project!=='function')return;const q=project(e.x,e.y),z=typeof zoom==='number'?zoom:1,body=(typeof actorHeight==='function'?actorHeight():66)*(e.combatProfile?.spriteRect?.height||1)*(e.defScale||1),width=clamp(54*z,42,82),ratio=clamp(e.hp/Math.max(1,e.maxHp),0,1),top=q.y-body-(e.visualLiftPx||0)-12;
   if(q.x<0||q.x>W||q.y<0||q.y-body>H)return;
   c.save();try{c.globalAlpha=.8;c.strokeStyle='#9f5146';c.lineWidth=1.25;c.beginPath();c.ellipse(q.x,q.y+1,clamp(19*z,12,32),clamp(7*z,4,12),0,0,Math.PI*2);c.stroke();
-   c.globalAlpha=1;c.font='11px "Malgun Gothic",sans-serif';c.textAlign='center';c.fillStyle='#d6c8b8';c.shadowColor='#090808';c.shadowBlur=3;c.fillText(String(e.name||''),q.x,Math.max(12,top-5));c.shadowBlur=0;
+   // R301: drawEnemy already labels bosses; retain the target ring/bar without a second name.
+   c.globalAlpha=1;c.font='11px "Malgun Gothic",sans-serif';c.textAlign='center';c.fillStyle='#d6c8b8';c.shadowColor='#090808';c.shadowBlur=3;if(!e.boss)c.fillText(String(e.name||''),q.x,Math.max(12,top-5));c.shadowBlur=0;
    const y=Math.max(15,top);c.fillStyle='rgba(12,10,10,.9)';c.fillRect(q.x-width/2-1,y-1,width+2,4);c.fillStyle='#332826';c.fillRect(q.x-width/2,y,width,2);c.fillStyle='#865b50';c.fillRect(q.x-width/2,y,width*ratio,2);stats.targetPaints++;
   }finally{c.restore();}
  }
