@@ -54,8 +54,10 @@ export class ItemsPage {
   }
 
   async search(query: string) {
+    // Register the wait before the action so a fast response is not missed
+    const searchDone = this.page.waitForResponse(resp => resp.url().includes('/api/search'))
     await this.searchInput.fill(query)
-    await this.page.waitForResponse(resp => resp.url().includes('/api/search'))
+    await searchDone
     await this.page.waitForLoadState('networkidle')
   }
 
@@ -139,19 +141,12 @@ export default defineConfig({
 
 ## Flaky Test Patterns
 
-### Quarantine
+### No quarantine in this repository
 
-```typescript
-test('flaky: complex search', async ({ page }) => {
-  test.fixme(true, 'Flaky - Issue #123')
-  // test code...
-})
-
-test('conditional skip', async ({ page }) => {
-  test.skip(process.env.CI, 'Flaky in CI - Issue #123')
-  // test code...
-})
-```
+StoryWorld rule (CLAUDE.md): never skip, disable, `fixme` or CI-only-skip a test to get a green run.
+A flaky test is a bug to investigate: reproduce it with `--repeat-each`, collect the trace/screenshot,
+find the race or missing wait, and fix the test or the game code. Until it is fixed, keep the test
+running and report the check as failing or "미검증" (unverified) — never as passed.
 
 ### Identify Flakiness
 
@@ -176,8 +171,10 @@ await page.locator('[data-testid="button"]').click()
 // Bad: arbitrary timeout
 await page.waitForTimeout(5000)
 
-// Good: wait for specific condition
-await page.waitForResponse(resp => resp.url().includes('/api/data'))
+// Good: wait for a specific condition, registered before the triggering action
+const dataLoaded = page.waitForResponse(resp => resp.url().includes('/api/data'))
+await page.locator('[data-testid="load"]').click()
+await dataLoaded
 ```
 
 **Animation timing:**
@@ -316,11 +313,12 @@ test('trade execution', async ({ page }) => {
   await expect(preview).toContainText('1.0')
 
   // Confirm and wait for blockchain
-  await page.locator('[data-testid="confirm-trade"]').click()
-  await page.waitForResponse(
+  const tradeDone = page.waitForResponse(
     resp => resp.url().includes('/api/trade') && resp.status() === 200,
     { timeout: 30000 }
   )
+  await page.locator('[data-testid="confirm-trade"]').click()
+  await tradeDone
 
   await expect(page.locator('[data-testid="trade-success"]')).toBeVisible()
 })

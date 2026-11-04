@@ -47,3 +47,4 @@
 - `ecc-click-path-audit`: 버튼 하나를 누른 뒤 상태가 끝까지 맞게 바뀌는지 추적(예: 제목 화면 설정 닫기 같은 UI 흐름 버그).
 - 예시는 React·Next.js 기준이 많다. 우리 게임은 plain JS + three.js 오버레이라 방법만 쓰고, 검사 명령은 CLAUDE.md 를 따른다.
 - 고르지 않은 것: verification-loop(TS/npm 기준, 이미 verification-before-completion·CLAUDE.md 검사 있음), ai-regression-testing(Next.js API 전용), benchmark-methodology(마케팅 경쟁사 비교), context-budget·continuous-learning-v2(훅 상시 실행·토큰 증가), 나머지 다른 언어·프레임워크 스킬.
+- 우리 쪽 수정(Codex 리뷰 #215): `ecc-e2e-testing` 의 "Quarantine"(test.fixme·CI 에서만 skip) 예시를 저장소 규칙(테스트 끄기 금지, 미검증 보고)으로 바꿨고, `waitForResponse` 예시 3곳을 "동작 전에 기다림 등록" 순서로 고쳤다.
