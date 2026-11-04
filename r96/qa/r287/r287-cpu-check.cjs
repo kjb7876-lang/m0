@@ -141,3 +141,5 @@ try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax',false,String(e));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R287 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
 })();
+
+require("node:assert").ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");
