@@ -41,7 +41,7 @@ function plan(r){if(!eligible(r)||!r.exploration?.floorCells?.length)return[];co
  else{take('storefront',100);take('storefront',90,'prop',{x:47,y:54});take('bag',26);take('syringe',24,'decal');take('papers',75,'decal');take('crack',70,'decal');}
  return out;}
 const rooms=new WeakMap(),loaded=new Set();
-function ensure(p){if(typeof readyImage==='function'&&readyImage(p))return true;if(!loaded.has(p)&&typeof addImage==='function'){loaded.add(p);addImage(p,'R317 existing temporary art');}return false;}
+function ensure(p){if(typeof readyImage==='function'&&readyImage(p))return true;if(!loaded.has(p)){loaded.add(p);try{if(typeof addImage==='function')addImage(p,'R317 existing temporary art');if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(fail);}catch(e){fail(e);}}return false;}
 function apply(r){if(!eligible(r)||!Array.isArray(r.props)||!r.exploration||rooms.get(r)===r.exploration)return;
  rooms.set(r,r.exploration);const list=plan(r);r.r317Decals=[];for(const [i,p]of list.entries()){ensure(p.path);if(p.kind==='decal'){r.r317Decals.push(p);continue;}
  r.props.push({...p,id:'r317:'+r.id+':'+i,r317:true,solid:false,visible:true,enabled:true,interactive:false,autoTargetEligible6:false,r80PresentationOnly:true});}stats.rooms++;}
