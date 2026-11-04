@@ -9,7 +9,7 @@
  ui.style.cssText='position:fixed;right:10px;top:64px;z-index:13000;max-width:340px;background:#101e29ed;color:#eff8f4;border:1px solid #739796;border-radius:6px;padding:8px;font:12px sans-serif';
  const state=document.createElement('div'),help=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('p'),download=document.createElement('button');
  summary.textContent='PC 조작 / 검사 기록';
- text.textContent='방향키 이동·마우스 이동 / 좌클릭 표적·공격 / A·J·1 기본 공격 / S·2 회피 / D·3 방어 / Q·4 특수기 / F·5 EGO / E 상호작용 / Space 반자동 / Esc 메뉴·설정 / 저장 메뉴 3슬롯. 병원 앞 진행만 준비한 직행 테스트이며 원본 저장은 읽지 않습니다. 실제 화면 검증 전 후보입니다.';
+ text.textContent='방향키 이동·마우스 이동 / 좌클릭 표적·공격 / A·J·1 기본 공격 / S·2 회피 / D·3 방어 / Q·4 특수기 / F·5 EGO / '+((typeof KR291!=='undefined'&&KR291&&KR291.legacy)?'Z·X·C 기술 / E':'W·E·R 기술 / C')+' 상호작용 / Space 반자동 / Esc 메뉴·설정 / 저장 메뉴 3슬롯. 병원 앞 진행만 준비한 직행 테스트이며 원본 저장은 읽지 않습니다. 실제 화면 검증 전 후보입니다.';
  download.textContent='현재 검사 기록 저장';
  help.append(summary,text,download);ui.append(state,help);document.body.appendChild(ui);
  function recordFault(kind,message){if(faults.length<64)faults.push({at:clock(),kind,message:String(message).slice(0,600)});}

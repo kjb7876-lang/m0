@@ -293,7 +293,8 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
 
  // HUD hint: the shipped text promised WASD/J/2/3 while the native handler binds
  // arrows, A/J/1, S/2, D/3 (see index keydown and hospital-pc-test.js J alias).
- const HINT='방향키 이동 · A/J/1 공격 · S/2 블링크 · D/3 공명 · Q/4 고유기 · F/5 EGO · E 상호작용';
+ /* R291: 키 배치 표(KR291)에서 글자를 읽는다 — 기본 QWER+ASDF·C 상호작용, legacy 면 예전 Z/X/C·E */
+ const HINT=(typeof KR291!=='undefined'&&KR291&&KR291.legacy)?'방향키 이동 · A/J/1 공격 · S/2 블링크 · D/3 공명 · Q/4 고유기 · F/5 EGO · Z/X/C 기술 · E 상호작용':'방향키 이동 · A/J/1 공격 · S/2 블링크 · D/3 공명 · Q/4 고유기 · F/5 EGO · W/E/R 기술 · C 상호작용';
  if(typeof setHudTextR63R2==='function'){const hudBase=setHudTextR63R2;setHudTextR63R2=function(id,text,...rest){if(id==='hint'&&typeof text==='string'&&text.startsWith('WASD/')){text=HINT;stats.hintFixes++;}return hudBase.call(this,id,text,...rest);};}
  // Skill bar keycaps showed only "2"/"3" for blink/guard although S and D are bound.
  const caps=[['blinkBtn','2','S / 2',null],['guardBtn','3','D / 3',null]];

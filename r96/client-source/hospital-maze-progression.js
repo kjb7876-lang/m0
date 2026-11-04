@@ -111,11 +111,11 @@
   if(s.phase==='rally'){
    if(room.enemies.some(e=>living(e)&&!bossRoomActor(e)))return;
    s.phase='door';room.engaged=false;room.finalizing=false;room.encounterStage='bossReady';room.activeEncounter='';room.fieldWaveCleared6=true;
-   toast('집결지 섬멸 · 전투실 문 앞에서 E를 눌러 기억을 확인하세요.',4);note('rally-cleared');saveGame(false);
+   toast('집결지 섬멸 · 전투실 문 앞에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'를 눌러 기억을 확인하세요.',4);note('rally-cleared');saveGame(false);
   }else if(s.phase==='boss'&&!room.enemies.some(e=>bossRoomActor(e)&&living(e))){
    s.phase='exit';room.engaged=false;room.finalizing=false;room.encounterStage='bossReady';room.activeEncounter='';
    nativeOpen('door-2');
-   toast('병원 보스 격파 · 주사실 문이 해제됐습니다. 문 앞에서 E.',4);note('boss-cleared');saveGame(false);
+   toast('병원 보스 격파 · 주사실 문이 해제됐습니다. 문 앞에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'.',4);note('boss-cleared');saveGame(false);
   }
  }
  function beginBoss(){
@@ -194,7 +194,7 @@
   const previous=Object.keys(regionById[zone].exits).find(d=>regionById[zone].exits[d]==='dist06');
   if(previous&&distance(player,exitPoint(previous))<2.6)return travel(previous);
   const ward=door('door-1');if(ward&&distance(player,ward)<ward.reach)return nativeDoors.use({id:ward.id});
-  toast(s.phase==='route'?'1번 또는 2번 미로를 돌파해 중앙 준비실로 향하세요.':s.phase==='rally'?'집결한 적과 중간보스를 모두 제압하세요.':s.phase==='boss'?'보스방의 감독과 집도의를 모두 제압하세요.':'문 앞에서 E를 눌러 기억을 확인하세요.',3);return false;
+  toast(s.phase==='route'?'1번 또는 2번 미로를 돌파해 중앙 준비실로 향하세요.':s.phase==='rally'?'집결한 적과 중간보스를 모두 제압하세요.':s.phase==='boss'?'보스방의 감독과 집도의를 모두 제압하세요.':'문 앞에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'를 눌러 기억을 확인하세요.',3);return false;
  };
  const travelBase=travel;travel=async function(d,...a){
   if(!hospital(room)||!state()||regionById[zone]?.exits[d]!=='ep1a09')return travelBase.call(this,d,...a);
@@ -217,7 +217,7 @@
   return result;
  };
  const hudBase=updateHUD;updateHUD=function(...a){const result=hudBase.apply(this,a);if(!started||!hospital(room)||!state())return result;const s=state(),remaining=room.enemies.filter(e=>living(e)&&!bossRoomActor(e)).length;
-  const labels={route:'1·2번 미로 돌파 · 중앙 준비실로 이동',rally:'중간보스와 집결한 적 섬멸 · 남은 적 '+remaining,door:'전투실 문 앞 E · 기억 확인',doorStory:'전투실의 기억 확인',boss:'보스방의 감독과 집도의 모두 처치',exit:'주사실 문 앞 E · 다음 기억으로',exitStory:'병원의 기억 마무리',done:'주사실 ↔ 병원 · 입구에서 E로 왕복'};
+  const labels={route:'1·2번 미로 돌파 · 중앙 준비실로 이동',rally:'중간보스와 집결한 적 섬멸 · 남은 적 '+remaining,door:'전투실 문 앞 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' · 기억 확인',doorStory:'전투실의 기억 확인',boss:'보스방의 감독과 집도의 모두 처치',exit:'주사실 문 앞 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' · 다음 기억으로',exitStory:'병원의 기억 마무리',done:'주사실 ↔ 병원 · 입구에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+'로 왕복'};
   if($('questText'))$('questText').textContent=labels[s.phase];return result;};
  const saveBase=serializeSave;serializeSave=function(...a){for(const r of new Set([...Object.values(world||{}),room]))normalizeChampionHealth(r);const raw=saveBase.apply(this,a),rooms={};for(const r of new Set([...Object.values(world||{}),room]))if(hospital(r)&&state(r))rooms[layerKey(r.id,r.layer)]=copy(state(r));raw.hospitalMazeR1={version:VERSION,rooms};return raw;};
  const saveGameBase=saveGame;saveGame=function(...a){return restoring?false:saveGameBase.apply(this,a);};
@@ -258,7 +258,7 @@
   if(exitGoalCache&&exitGoalCache.room===room&&time-exitGoalCache.at<1)return exitGoalCache.goal;let best=null,bd=Infinity;
   for(const r of [1.3,1.8,2.3])for(let k=0;k<16;k++){const a=k/16*Math.PI*2,x=d.x+Math.cos(a)*r,y=d.y+Math.sin(a)*r;if(typeof blocked==='function'&&blocked(x,y,.3,room))continue;const dd=Math.hypot(x-player.x,y-player.y);if(dd>=bd)continue;
    let ok=true;try{if(typeof findPath==='function'&&dd>1)ok=findPath(player,{x,y},room,.31).length>0;}catch(_){ok=false;}if(ok){best={x,y};bd=dd;}}
-  const goal=best?{kind:'objective',id:'hospital-exit-r239',point:best,reach:1.2,label:s.phase==='done'?'주사실 문 · 다음 기억으로':'주사실 문 앞 E · 다음 기억으로'}:null;exitGoalCache={room,at:time,goal};return goal;}
+  const goal=best?{kind:'objective',id:'hospital-exit-r239',point:best,reach:1.2,label:s.phase==='done'?'주사실 문 · 다음 기억으로':'주사실 문 앞 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' · 다음 기억으로'}:null;exitGoalCache={room,at:time,goal};return goal;}
  (function armExitGoal(n){try{const O=window.__STORYWORLD_OBJECTIVES_R75__;if(O&&!O.__r239){window.__STORYWORLD_OBJECTIVES_R75__=Object.freeze({...O,__r239:true,goal(...a){try{const g=exitGoal();if(g)return g;}catch(_){}return O.goal.apply(this,a);}});}}catch(_){}if(n<40&&typeof setTimeout==='function')setTimeout(()=>armExitGoal(n+1),250);})(0);
  window.__STORYWORLD_HOSPITAL_MAZE_PROGRESSION__=Object.freeze({revision:'hospital-maze-progression-r2',seed,clean,settle,inspect:()=>({state:state()?copy(state()):null,ordinary:room?.enemies?.filter(ordinary).map(e=>({id:e.id,elite:e.mazeEliteR2===true,route:e.mazeRouteR1,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp}))||[],bosses:room?.enemies?.filter(e=>e.boss||e.midboss).map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,spawnState:e.spawnState}))||[],events:[...events],browserVerified:false,GPUVerified:false,finalBossId:FINAL_ID})});
 })();
