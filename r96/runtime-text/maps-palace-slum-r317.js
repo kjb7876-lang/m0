@@ -27,8 +27,6 @@ function themeLayout(id,L){const s=SPECS[id];if(!s||!L||layouts.has(L)||!solo()|
  L.surface={...L.surface,art:{...art,r317Theme:id,r118Tiles:{id,file:s.file,dir:s.dir,floor:s.floor},r81Palette:{...art.r81Palette,wall:s.wall,cap:s.wall}}};
  stats.layouts++;return L;}
 const previousLayout=window.__STORYWORLD_LAYOUT_HOOK_R204__;
-// Retained for inspectable CPU comparisons with the inherited geometry hook.
-window.__STORYWORLD_LAYOUT_HOOK_BASE_R317__=previousLayout;
 window.__STORYWORLD_LAYOUT_HOOK_R204__=function(id,L){const out=previousLayout?.(id,L)||L;return themeLayout(id,out);};
 
 function avoid(r){const L=r.exploration,out=[];for(const d of L.worldR74?.doors||[])out.push({x:d.x,y:d.y,r:Math.max(3.5,(Number(d.width)||0)/2+2)});
@@ -54,7 +52,7 @@ function drawOwn(p){if(!p?.r317)return false;if(p.visible===false||!visible(p.x,
  const detailed=()=>{paint();if(p.name==='storefront'){
  ctx.save();try{ctx.translate(q.x,q.y-34*z);ctx.rotate(-.44);ctx.fillStyle='#c3c8cf';ctx.font=Math.max(8,10*z)+'px serif';ctx.textAlign='center';ctx.fillText(WALL_TEXT[p.id.endsWith(':0')?0:1],0,0);ctx.fillText(WALL_TEXT[2],0,13*z);}finally{ctx.restore();}
  // Existing painted glow, small local reflected neon; no full-screen tint.
- const row=readyImage(PATHS.glow);if(row){ctx.save();try{ctx.globalCompositeOperation='lighter';ctx.globalAlpha*=.22;ctx.drawImage(row.image,q.x-35*z,q.y-9*z,70*z,18*z);}finally{ctx.restore();}}else ensure(PATHS.glow);
+ window.__STORYWORLD_FX_SPRITES_R106__?.draw?.('glow',{a:[60,86,112],b:[136,170,186]},q.x,q.y,70*z,18*z,{alpha:.3,blend:'lighter'});
  }};
  if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:p.path,alive:true},detailed);else detailed();}return true;}
 try{const P=window.__STORYWORLD_PERF_GROUPS_R266__;if(P?.registerPropRenderer)P.registerPropRenderer(drawOwn);
