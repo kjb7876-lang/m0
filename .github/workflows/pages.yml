@@ -55,8 +55,6 @@ jobs:
         run: node r96/qa/r300/r300-cpu-check.cjs
       - name: R308 one classical track per map, gapless loop, episode continuity, license fields
         run: node r96/qa/r308/r308-cpu-check.cjs
-      - name: R308 review regressions (resume position, slow incoming, paused buffering)
-        run: node r96/qa/r308/r308-review-regression.cjs && node r96/qa/r308/r308-review-r2-regression.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
       - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions

@@ -88,3 +88,30 @@ test('incoming deck paused while buffering resumes after music is wanted again',
   assert.equal(outgoing.paused, true);
   assert.equal(incoming.paused, false);
 });
+test('second map change while incoming buffers keeps the audible deck as source', async () => {
+  const {c, decks, api, tick} = await boot(true);
+  tick(); const audible = decks.find(d => !d.paused); const firstId = audible.url;
+  c.zone = 'dist06'; tick();
+  const pending = decks.find(d => d !== audible);
+  assert.equal(pending.readyState, 0);
+  c.zone = 'ep1a08'; tick();
+  assert.equal(audible.paused, false);
+  assert.equal(audible.url, firstId);
+  assert.ok(audible.volume > 0);
+  assert.equal(pending.url, index.tracks[index.maps.ep1a08.track].path);
+  tick(100); tick(2500);
+  assert.equal(audible.paused, true);
+  assert.equal(pending.paused, false);
+  assert.equal(api.inspect().fading, false);
+});
+test('returning to the audible track while incoming buffers cancels the pending fade', async () => {
+  const {c, decks, api, tick} = await boot(true);
+  tick(); const audible = decks.find(d => !d.paused);
+  c.zone = 'dist06'; tick();
+  const pending = decks.find(d => d !== audible);
+  c.zone = 'dist00'; tick(); tick(3000);
+  assert.equal(audible.paused, false);
+  assert.ok(audible.volume > 0);
+  assert.equal(pending.paused, true);
+  assert.equal(api.inspect().fading, false);
+});

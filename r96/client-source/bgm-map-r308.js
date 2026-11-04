@@ -41,7 +41,12 @@ const G=(n,f)=>{try{return V[n]();}catch(_){return f;}};
 function remember(d){if(d?.id&&Number.isFinite(d.el.currentTime))memory.set(d.id,{time:d.el.currentTime,at:Date.now()});}
 function play(d){if(blocked||!d.id)return;try{const p=d.el.play();p?.catch(e=>{if(e?.name==='AbortError')return;blocked=true;stats.blocked++;});}catch(e){fail(e);}}
 function load(d,id,at){const t=idx.tracks[id];remember(d);d.el.pause();d.id=id;d.w=0;d.el.volume=0;d.el.preload='auto';d.el.src=t.path;d.seek=at;d.needSeek=at>0;if(d.el.readyState>=1&&at>0){try{d.el.currentTime=at;d.needSeek=false;}catch(_){}}play(d);}
-function crossTo(id,at,dur){const to=decks.find(d=>d!==cur?.deck)||decks[0];
+function crossTo(id,at,dur){
+ // Incoming deck still silent (buffering): keep the audible fade.from as the source and retarget/cancel the pending deck.
+ if(fade&&fade.t0===null){const src=fade.from,pend=fade.to;fade=null;
+  if(src.id===id){pend.el.pause();pend.w=0;pend.el.volume=0;src.w=1;return src;}
+  load(pend,id,at);fade={from:src,to:pend,t0:pend.el.readyState>=3&&!pend.el.paused?performance.now():null,dur:dur*1000};return pend;}
+ const to=decks.find(d=>d!==cur?.deck)||decks[0];
  if(fade){const out=fade.from;remember(out);out.el.pause();out.w=0;out.el.volume=0;fade=null;}
  load(to,id,at);if(cur?.deck&&cur.deck.id){fade={from:cur.deck,to,t0:to.el.readyState>=3&&!to.el.paused?performance.now():null,dur:dur*1000};}else to.w=1;return to;}
 function loopNow(){if(!cur)return;stats.loops++;note('loop',{track:cur.track,zone:cur.zone});memory.delete(cur.track);const to=crossTo(cur.track,0,XF);cur={...cur,deck:to};}
