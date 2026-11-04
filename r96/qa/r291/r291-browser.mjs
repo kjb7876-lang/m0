@@ -16,15 +16,16 @@ async function boot(opts={}){
  await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
  await p.waitForFunction(()=>started&&!loading,null,{timeout:120000});await p.waitForTimeout(1200);await skip(p);
  await p.evaluate(async()=>{await window.__STORYWORLD_CHEAT777__.activate('777');});await p.waitForFunction(()=>!loading,null,{timeout:60000});await skip(p);
- await p.evaluate(()=>{guide=false;auto=false;settings.autoSkill=false;
+ await instrument(p);
+ return {b,p};
+}
+const instrument=p=>p.evaluate(()=>{guide=false;auto=false;settings.autoSkill=false;
   const T=window.__R291T={calls:{},bubble:[]};
-  for(const n of ['basicAttack','blink','guardStart','guardEnd','special','ego','interact','showWorld','showUpgrades','showMenu']){const o=window[n];if(typeof o!=='function')continue;
+  for(const n of ['basicAttack','blink','guardStart','guardEnd','special','ego','interact','showWorld','showUpgrades','showMenu','showSanctuary','openPanel']){const o=window[n];if(typeof o!=='function')continue;
    window[n]=function(...a){T.calls[n]=(T.calls[n]||0)+1;const c=window.__STORYWORLD_PHASE1__?.controller;T.gate={n,modal:!!modal,loading,started,hp:player?.hp,three:!!c?.state.three,failed:c?.state.failed,cd:[player?.blinkCD,player?.specialCD,player?.egoCD,player?.ego],hidden:document.hidden,ego151:window.__STORYWORLD_EGO151__?.inspect?.().state.active,story:!!storyScene};return o.apply(this,a);};}
   // what the engine/bubble handlers see (after every capture listener), and whether someone consumed it
   window.addEventListener('keydown',e=>{T.bubble.push({key:e.key,code:e.code,trusted:e.isTrusted});if(T.bubble.length>60)T.bubble.shift();});
   window.addEventListener('keydown',e=>{T.lastCapture={key:e.key,code:e.code};setTimeout(()=>{T.lastPrevented={code:e.code,prevented:e.defaultPrevented};},0);},true);});
- return {b,p};
-}
 const skip=p=>p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
 const calls=p=>p.evaluate(()=>({...window.__R291T.calls}));
 const delta=(a,b)=>{const d={};for(const k of new Set([...Object.keys(a),...Object.keys(b)])){const v=(b[k]||0)-(a[k]||0);if(v)d[k]=v;}return d;};
@@ -99,7 +100,7 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  await reset(p);
  {// 부하로 rAF 가 느려 실제 시간 대기 대신 게임 자신의 tick 을 직접 돌린다(같은 반자동 경로: WER tick → R49 autoTarget → cast)
   const res=await p.evaluate(()=>{const R49=window.__STORYWORLD_HANDO_FINAL_R49__;const lo=HEROES[player.hero].range*.7+.15;let placed=null;
-   for(const e of room.enemies.filter(e=>e.hp>0)){for(const d of [2.6,3.0,3.4,2.3]){if(d<lo)continue;for(let a=0;a<12;a++){const x=e.x+Math.cos(a/12*6.283)*d,y=e.y+Math.sin(a/12*6.283)*d;if(blocked(x,y,.34,room))continue;player.x=x;player.y=y;if(R49?.autoTarget?.('e')){placed={e:e.id,d};break;}}if(placed)break;}if(placed)break;}
+   for(const e of room.enemies.filter(e=>e.hp>0&&!e.boss&&!e.midboss&&e.spawnState!=='dormant')){for(const d of [2.6,3.0,3.4,2.3]){if(d<lo)continue;for(let a=0;a<12;a++){const x=e.x+Math.cos(a/12*6.283)*d,y=e.y+Math.sin(a/12*6.283)*d;if(blocked(x,y,.34,room))continue;player.x=x;player.y=y;if(R49?.autoTarget?.('e')){placed={e:e.id,d};break;}}if(placed)break;}if(placed)break;}
    if(!placed)return{placed};const s=player.storyWER;const n=window.__STORYWORLD_WER__.inspect().casts.length;auto=true;
    for(let i=0;i<300;i++){s.ready[player.hero+':w']=time+99;s.ready[player.hero+':r']=time+99;tick(1/60);if(window.__STORYWORLD_WER__.inspect().casts.slice(n).some(c=>c.slot==='e'))break;}
    auto=false;return{placed,ac:window.__STORYWORLD_WER__.inspect().casts.slice(n).map(c=>c.slot)};});
@@ -149,11 +150,13 @@ async function nearEnemy(p){return p.evaluate(()=>{const e=room.enemies.filter(e
  await p.screenshot({path:OUT+'/legacy-hud.png'});await b.close();}
 
 // ===================== B2. hub altar with C (desktop) =====================
+// 새 게임+777 직후 허브 제단은 상호작용해도 창이 열리지 않는 상태가 있어(legacy E 도 같음) 저장을 이어 불러 경계의 제단이 열리는 상태에서 잰다
 {const {b,p}=await boot();
+ await p.evaluate(()=>saveGame(false));await p.reload();await p.locator('#campaignContinue54').click({timeout:120000});
+ await p.waitForFunction(()=>started&&!loading,null,{timeout:120000});await p.waitForTimeout(800);await skip(p);await instrument(p);
  await p.evaluate(()=>{player.x=room.objective.x+1.4;player.y=room.objective.y;route=[];command=null;});await p.waitForTimeout(600);
- const h0=await p.evaluate(()=>document.querySelector('#panel h2')?.textContent||'');
- let r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&await p.evaluate(()=>!modal),r);
- r=await press(p,'c',{wait:500});const h2=await p.evaluate(()=>document.querySelector('#panel h2')?.textContent||'');check('C at the altar interacts (hub altar opens its sanctuary/narrative panel)',r.d.interact===1&&(h2!==h0||await p.evaluate(()=>!!(modal||storyScene))),{r,h0,h2});await p.screenshot({path:OUT+'/altar-c.png'});
+ let r=await press(p,'e');check('old E at the altar does NOT interact',!r.d.interact&&!r.d.showSanctuary&&await p.evaluate(()=>!modal),r);
+ r=await press(p,'c',{wait:500});check('C at the altar opens 경계의 제단 (sanctuary panel)',r.d.interact===1&&r.d.showSanctuary===1&&await p.evaluate(()=>!!modal&&/경계의 제단/.test(document.querySelector('#panel h2')?.textContent||'')),r);await p.screenshot({path:OUT+'/altar-c.png'});
  await b.close();}
 
 // ===================== C. mobile touch (unchanged behaviour) =====================
