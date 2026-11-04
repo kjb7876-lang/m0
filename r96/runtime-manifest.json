@@ -13574,8 +13574,8 @@
     },
     {
       "path": "assets/r299/index.json",
-      "bytes": 14042,
-      "sha256": "f8c026b40676b0f3161971a00db8c3ee50eb34b789271fcd45b4a309b7998cc9"
+      "bytes": 17299,
+      "sha256": "d02030bfa9519003f7ddab210637e2f3f90fb84386125bf781997fd3e70b0a0b"
     },
     {
       "path": "assets/r299/mirror.webp",
@@ -13591,6 +13591,21 @@
       "path": "assets/r299/papers.webp",
       "bytes": 22574,
       "sha256": "a4c4c8c80bc9bbbd0b6e36ede14f4500981728129115c6a8a587b2165d6a8006"
+    },
+    {
+      "path": "assets/r299/prayer-stand.webp",
+      "bytes": 10120,
+      "sha256": "90b0a18bcf078f73e147c4e991527cb5dcde273d5e8a40866049c66dab26ac58"
+    },
+    {
+      "path": "assets/r299/seal-plank.webp",
+      "bytes": 7988,
+      "sha256": "2aa1afe98eafe84f2e476c198b518dc66f323fcc3c2a1362e7e62924bbe84c70"
+    },
+    {
+      "path": "assets/r299/soot.webp",
+      "bytes": 23774,
+      "sha256": "aecb3d71e229143c6baa374b0c3fa5440e66b033e4af22a3f5613ede0d20f398"
     },
     {
       "path": "assets/r299/statue.webp",
@@ -22249,8 +22264,8 @@
     },
     {
       "path": "env-props-r299.js",
-      "bytes": 11166,
-      "sha256": "1ea577c16972fa6d8f5c60957ee71c42610d187c47f7ca91dfaf8887fec9fbdb"
+      "bytes": 12437,
+      "sha256": "0cfad0072f8cb0b896f3e44697595da0b7bfac34cce6b3c4423139e176ffb26d"
     },
     {
       "path": "era-r191.js",
@@ -23023,8 +23038,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4604,
-  "totalBytes": 869195877,
+  "fileCount": 4607,
+  "totalBytes": 869242287,
   "webHTMLSha256": "63d8a516166ed283d10d7fb498ef401f9659dd71eb5443ee1d58adcca50ba65f",
   "largest": [
     {

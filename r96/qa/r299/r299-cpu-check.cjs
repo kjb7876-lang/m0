@@ -38,13 +38,16 @@ check('apply: collision data untouched, added props non-solid/non-interactive, o
  assert.equal(JSON.stringify({f:r.exploration.floorCells,w:r.exploration.walls,d:r.exploration.worldR74.doors}),before);assert.equal(r.exploration,L);
  const own=r.props.filter(p=>p.r299);assert.ok(r.props.some(p=>p.id==='orig'));for(const p of own){assert.equal(p.solid,false);assert.equal(p.interactive,false);assert.equal(p.autoTargetEligible6,false);}
  const n=r.props.length,d=r.r299Decals.length;A.apply(r);assert.equal(r.props.length,n);assert.equal(r.r299Decals.length,d);assert.ok(own.length+d>0);});
-check('wall-mounted items sit next to missing floor on -x/-y and flip on -x walls',()=>{let seen=0;
- for(let i=0;i<120;i++){const r=room('w'+i,'cathedral'),F=new Set(r.exploration.floorCells.map(c=>c[0]+','+c[1]));for(const v of A.plan(r).items){if(!A.PROP[v.name]?.wall)continue;seen++;
-  const cx=Math.floor(v.x),cy=Math.floor(v.y);assert.ok(!F.has((cx-1)+','+cy)||!F.has(cx+','+(cy-1)));if(v.flip)assert.ok(!F.has((cx-1)+','+cy));}}assert.ok(seen>0);});
+check('wall-mounted items sit next to missing floor on -x/-y and flip only on -y walls',()=>{let seen=0;
+ for(let i=0;i<200;i++){const r=room('w'+i,'clinic'),F=new Set(r.exploration.floorCells.map(c=>c[0]+','+c[1]));for(const v of A.plan(r).items){if(!A.PROP[v.name]?.wall)continue;seen++;
+  const cx=Math.floor(v.x),cy=Math.floor(v.y);assert.ok(!F.has((cx-1)+','+cy)||!F.has(cx+','+(cy-1)));if(v.flip)assert.ok(!F.has(cx+','+(cy-1)));}}assert.ok(seen>0);});
 check('draw hook: non-r299 props go to base drawProp; ctx.filter has no blur/drop-shadow',()=>{c.drawProp({id:'x'});assert.equal(c.base,1);assert.ok(!/filter\s*=\s*'[^']*(blur|drop-shadow)/.test(src));assert.ok(!/(blur|drop-shadow)\(/.test(src));});
 check('script order: env-props-r299 right before mobile-perf-r298',()=>{assert.ok(/<script src="\.\/env-props-r299\.js"><\/script><script src="\.\/mobile-perf-r298\.js">/.test(read('runtime-text/index.html')));});
 check('asset index: every applied item exists with matching sha256, held list has reasons, no applied cookie',()=>{const ix=JSON.parse(read('runtime-text/assets/r299/index.json'));
  const used=new Set([...Object.keys(A.DECAL),...Object.keys(A.PROP)]);for(const k of used){const it=ix.items[k];assert.ok(it&&it.applied,k);const b=fs.readFileSync(path.join(R,'runtime-text',it.path));assert.equal(crypto.createHash('sha256').update(b).digest('hex'),it.derivedSHA256);assert.ok(b.length<80000);}
- assert.equal(Object.keys(ix.items).length,used.size);assert.equal(Object.keys(ix.items).length+Object.keys(ix.held).length,25);for(const[f,h]of Object.entries(ix.held))assert.ok(h.reason&&h.applied===false,f);
+ assert.equal(Object.keys(ix.items).length,used.size);assert.equal(Object.keys(ix.items).length+Object.keys(ix.held).length-3,25+2);// v1 25 + v2 5, v2 통과 3종은 v1 보류 기록과 짝for(const[f,h]of Object.entries(ix.held))assert.ok(h.reason&&h.applied===false,f);
  assert.ok(Object.keys(ix.held).filter(f=>/cookie/.test(f)).length===3);});
+check('seal-plank (door fragment) never within 6 tiles of a progression door',()=>{let seen=0;for(let i=0;i<300;i++){const r=room('df'+i,'cathedral');for(const v of A.plan(r).items)if(v.name==='seal-plank'){seen++;assert.ok(Math.hypot(v.x-18.5,v.y-9)>=6);}}assert.ok(seen>0);});
+check('no asset path is mistaken for a gate/door/stairs by R189 doors',()=>{for(const k of[...Object.keys(A.DECAL),...Object.keys(A.PROP)]){const s='assets/r299/'+k+'.webp';assert.ok(!/(^|[\W_])(gate|door)s?([\W_]|$)/i.test(s)&&!/stair/i.test(s),s);}});
+check('big sculptures stand only on fully open 5x5 floor (not against walls — roof/wall tops clip them)',()=>{let seen=0;for(let i=0;i<150;i++){const r=room('b'+i,i%2?'cathedral':'goblin-flute-forest',i%2?undefined:'outdoor'),F=new Set(r.exploration.floorCells.map(c=>c[0]+','+c[1]));for(const v of A.plan(r).items)if(v.kind==='big'){seen++;const cx=Math.floor(v.x),cy=Math.floor(v.y);for(let j=-2;j<=2;j++)for(let k=-2;k<=2;k++)assert.ok(F.has((cx+k)+','+(cy+j)));assert.equal(v.flip,false);}}assert.ok(seen>0);});
 console.log('R299 CPU checks passed: '+checks);

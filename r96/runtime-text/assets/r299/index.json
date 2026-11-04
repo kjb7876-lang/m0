@@ -369,6 +369,69 @@
    "dotsOpenIssues": [],
    "use": "큰 조형물 — 성당 계열",
    "applied": true
+  },
+  "soot": {
+   "path": "assets/r299/soot.webp",
+   "original": "soot_circle_decal_v2.png",
+   "batch": "v2",
+   "originalSHA256": "9a699e06adffb272949851dfb8cd3298e4da1ef28eeb58a55e684c5829bf9e97",
+   "originalBytes": 89569,
+   "originalSize": [
+    512,
+    512
+   ],
+   "derivedSHA256": "aecb3d71e229143c6baa374b0c3fa5440e66b033e4af22a3f5613ede0d20f398",
+   "derivedBytes": 23774,
+   "derivedSize": [
+    256,
+    192
+   ],
+   "kind": "decal",
+   "dotsStatus": "user_review_candidate_not_auto_apply",
+   "use": "바닥 데칼(v2 재작업) — 성당·숲 계열 바닥, 낮은 불투명도",
+   "applied": true
+  },
+  "prayer-stand": {
+   "path": "assets/r299/prayer-stand.webp",
+   "original": "collapsed_prayer_stand_v2.png",
+   "batch": "v2",
+   "originalSHA256": "4f71b6d0862c2c2cb43be62c04675a1419bb6a2fd0eb09e4000ca00109ae67a0",
+   "originalBytes": 28425,
+   "originalSize": [
+    256,
+    256
+   ],
+   "derivedSHA256": "90b0a18bcf078f73e147c4e991527cb5dcde273d5e8a40866049c66dab26ac58",
+   "derivedBytes": 10120,
+   "derivedSize": [
+    192,
+    87
+   ],
+   "kind": "prop",
+   "dotsStatus": "user_review_candidate_not_auto_apply",
+   "use": "서사 소품(v2 재작업, 쓰러진 기도대) — 성당 계열 바닥",
+   "applied": true
+  },
+  "seal-plank": {
+   "path": "assets/r299/seal-plank.webp",
+   "original": "sealed_door_fragment_v2.png",
+   "batch": "v2",
+   "originalSHA256": "fbc963dabbca616f128a1e6e7a9a26ba67db3e7a7dd1c3bc50d91a032b2603fd",
+   "originalBytes": 25591,
+   "originalSize": [
+    256,
+    256
+   ],
+   "derivedSHA256": "2aa1afe98eafe84f2e476c198b518dc66f323fcc3c2a1362e7e62924bbe84c70",
+   "derivedBytes": 7988,
+   "derivedSize": [
+    172,
+    114
+   ],
+   "kind": "prop",
+   "dotsStatus": "user_review_candidate_not_auto_apply",
+   "use": "서사 소품(v2 재작업, 바닥에 눕힌 부적 문짝 조각) — 성당·사몽 계열, 진행 문 6칸 안 금지",
+   "applied": true
   }
  },
  "held": {
@@ -459,6 +522,38 @@
    "dotsStatus": "review_candidate",
    "reason": "선이 매끈한 벡터·도안풍이라 손칠 결과 다르고, 쓸 곳도 아직 없음 — 부드러운 손칠 명암으로",
    "applied": false
+  },
+  "candle_wax_decal_v2.png": {
+   "batch": "v2",
+   "originalSHA256": "466052a674813acf0fd7e47ce5bccad581577a2dfdc8e3ddeb1ffc01e7267a80",
+   "originalBytes": 79798,
+   "originalSize": [
+    512,
+    512
+   ],
+   "dotsStatus": "user_review_candidate_not_auto_apply",
+   "reason": "v2 는 갈색으로 어두워졌지만 촛농이 아니라 진흙·마른 오물처럼 읽힌다 — 희끄무레한 상아색을 낮은 채도·납작한 흘러내림으로",
+   "applied": false
+  },
+  "cold_water_puddle_decal_v2.png": {
+   "batch": "v2",
+   "originalSHA256": "abe6cb0271d97ee004306fcfeb3d984a3046b4ec4832daa6b4433407e527fdcf",
+   "originalBytes": 65303,
+   "originalSize": [
+    512,
+    512
+   ],
+   "dotsStatus": "user_review_candidate_not_auto_apply",
+   "reason": "돌 테두리는 없어졌지만 연한 하늘색 수면이 밝아 어두운 바닥에서 빛나는 판처럼 뜬다(dots 도 밝은 가장자리 조건부) — 어두운 반사·가장자리 젖은 얼룩으로",
+   "applied": false
   }
+ },
+ "v2": {
+  "batch": "SW-env14_batch01_v2",
+  "driveZip": "SW-env14_batch01_v2.zip",
+  "driveId": "1ijNTXW65iqq2GpKF_YKJSS0f6YN6nRme",
+  "manifestDriveId": "1jrSNpb_degAvG8l3Afh1jwljAnb7STfQ",
+  "zipSHA256": "d0314c924ff609693cc866ed636c09e4f7af7eaff109abb2d5ca4ddbba7b076a",
+  "manifestStatus": "review_candidates_only"
  }
 }
