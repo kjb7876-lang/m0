@@ -21,6 +21,9 @@
  const titleBase=showTitle;showTitle=function(...args){const result=titleBase.apply(this,args);titleSettings();return result;};
  const settingsBase=showSettings;showSettings=function(...args){
   const result=settingsBase.apply(this,args),panel=document.getElementById('panel');if(!panel?.querySelector('#settingsClose'))return result;
+  // R63's mobile handler resumes gameplay; before a game exists, return to
+  // the title instead of leaving an empty, non-interactive world screen.
+  if(!started)panel.querySelector('#settingsClose').onclick=()=>showTitle();
   const section=document.createElement('section');section.id='hospitalTestSettingsR84';section.className='hospital-test-settings-r84';
   const heading=document.createElement('h3');heading.textContent='병원 테스트';
   const note=document.createElement('p');note.className='small muted';note.textContent='기존 병원 직행 테스트를 별도 테스트 저장으로 시작합니다.';

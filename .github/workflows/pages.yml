@@ -129,6 +129,8 @@ jobs:
         run: node r96/qa/r141/perf-cpu-check.cjs
       - name: R142 mobile settings (start menu button, condensed quick settings)
         run: node r96/qa/r142/mobile-settings-cpu-check.cjs
+      - name: R319 title settings close returns to title (desktop/mobile), in-game resume kept
+        run: node r96/qa/r84/title-settings-close-check.cjs
       - name: R143 hero foot ring on the ground layer, opening intro removed
         run: node r96/qa/r143/feet-intro-cpu-check.cjs
       - name: R147 lag — full-screen layers stop repainting every frame, mobile CSS filter off, caches
