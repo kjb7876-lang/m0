@@ -32,6 +32,7 @@ function resolve(z,ix,env={}){ix=ix||idx;if(!ix)return null;z=String(z||'');
 const decks=[0,1].map(i=>{const el=new Audio();el.preload='none';el.loop=false;el.volume=0;const d={i,el,id:null,w:0};
  el.onerror=()=>{if(d.id){failed.add(d.id);stats.failed++;fail('track '+d.id);}};
  el.addEventListener('ended',()=>{/* 교차 페이드를 놓쳤을 때(탭 숨김 등)도 같은 곡을 바로 잇는다 */if(cur&&cur.deck===d&&!fade){stats.restarts++;loopNow();}});
+ el.addEventListener('playing',()=>{if(fade&&fade.to===d&&fade.t0===null)fade.t0=performance.now();});
  el.addEventListener('loadedmetadata',()=>{if(d.needSeek){try{el.currentTime=d.seek||0;}catch(_){}d.needSeek=false;}});return d;});
 let cur=null/* {deck,track,zone,episode,role} */,fade=null,blocked=false,duck=1,clock=0,visit=null/* {zone,sel} */;
 const V={zone:()=>typeof zone!=='undefined'?String(zone||''):'',modal:()=>typeof modal!=='undefined'&&!!modal,started:()=>typeof started!=='undefined'&&!!started,
@@ -42,7 +43,7 @@ function play(d){if(blocked||!d.id)return;try{const p=d.el.play();p?.catch(e=>{i
 function load(d,id,at){const t=idx.tracks[id];remember(d);d.el.pause();d.id=id;d.w=0;d.el.volume=0;d.el.preload='auto';d.el.src=t.path;d.seek=at;d.needSeek=at>0;if(d.el.readyState>=1&&at>0){try{d.el.currentTime=at;d.needSeek=false;}catch(_){}}play(d);}
 function crossTo(id,at,dur){const to=decks.find(d=>d!==cur?.deck)||decks[0];
  if(fade){const out=fade.from;remember(out);out.el.pause();out.w=0;out.el.volume=0;fade=null;}
- load(to,id,at);if(cur?.deck&&cur.deck.id){fade={from:cur.deck,to,t0:performance.now(),dur:dur*1000};}else to.w=1;return to;}
+ load(to,id,at);if(cur?.deck&&cur.deck.id){fade={from:cur.deck,to,t0:to.el.readyState>=3&&!to.el.paused?performance.now():null,dur:dur*1000};}else to.w=1;return to;}
 function loopNow(){if(!cur)return;stats.loops++;note('loop',{track:cur.track,zone:cur.zone});memory.delete(cur.track);const to=crossTo(cur.track,0,XF);cur={...cur,deck:to};}
 function enterMap(sel){/* 맵에 들어올 때 한 번만 부른다 */
  if(cur&&cur.track===sel.track){stats.continued++;note('continue',{zone:sel.zone,track:sel.track,from:cur.zone,time:+cur.deck.el.currentTime.toFixed(2)});cur={...cur,zone:sel.zone,episode:sel.episode,role:sel.role};return;}
@@ -56,7 +57,9 @@ function announce(id){let np=true;try{np=JSON.parse(localStorage.getItem('storyw
 function unblock(){if(!blocked)return;blocked=false;for(const d of decks)if(d.w>0||fade&&d===fade.to)play(d);}
 for(const ev of['pointerdown','keydown','touchstart'])window.addEventListener(ev,unblock,{capture:true,passive:true});
 function pauseAll(){for(const d of decks)if(!d.el.paused)d.el.pause();}
-function stopAll(){for(const d of decks){remember(d);d.el.pause();d.w=0;d.el.volume=0;d.id=null;}cur=null;fade=null;visit=null;}
+function stopAll(){/* A completed loop leaves duplicate track ids; the active position must win. */
+ for(const d of decks)if(d!==cur?.deck)remember(d);remember(cur?.deck);
+ for(const d of decks){d.el.pause();d.w=0;d.el.volume=0;d.id=null;}cur=null;fade=null;visit=null;}
 let r195On=true,r195At=0;
 function enabled(){const now=performance.now();if(now-r195At>1000){r195At=now;try{r195On=window.__STORYWORLD_BGM_CLASSICAL_R195__?.inspect?.().prefs?.on!==false;}catch(_){}}
  return prefs.on&&r195On&&!!idx;}
@@ -67,7 +70,9 @@ function tick(){const now=performance.now(),dt=Math.min(.25,Math.max(0,(now-cloc
  const z=G('zone','');if(!z)return;
  if(!visit||visit.zone!==z){const sel=resolve(z,idx,{chapters:window.__STORYWORLD_SAMONG_ZONES_R115__?.chapters,samong:G('samong',false)});
   if(!sel||!idx.tracks[sel.track]||failed.has(sel.track))return false;visit={zone:z,sel};enterMap(sel);}
- if(fade){const u=Math.min(1,(now-fade.t0)/fade.dur);fade.to.w=u;fade.from.w=1-u;if(u>=1){remember(fade.from);fade.from.el.pause();fade.from.w=0;fade=null;}}
+ if(fade){/* Keep the outgoing deck audible while the incoming media buffers. */
+  if(fade.t0===null&&fade.to.el.readyState>=3&&!fade.to.el.paused)fade.t0=now;
+  const u=fade.t0===null?0:Math.min(1,(now-fade.t0)/fade.dur);fade.to.w=u;fade.from.w=1-u;if(u>=1){remember(fade.from);fade.from.el.pause();fade.from.w=0;fade=null;}}
  const a=cur?.deck;if(a&&!fade&&Number.isFinite(a.el.duration)&&a.el.duration>XF*2&&a.el.currentTime>=a.el.duration-XF)loopNow();
  const voice=G('voice',null),talking=voice&&!voice.paused||globalThis.speechSynthesis?.speaking,target=talking?.25:G('modal',false)?.5:1;
  duck+=(target-duck)*(1-Math.exp(-dt/(target<duck?.15:.6)));const boss=bossMul();

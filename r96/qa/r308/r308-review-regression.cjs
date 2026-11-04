@@ -10,7 +10,7 @@ const index = JSON.parse(fs.readFileSync(path.join(root, 'runtime-text/assets/r3
 async function boot() {
   const decks = [];
   class Audio {
-    constructor() { this.currentTime = 0; this.duration = 200; this.paused = true; this.readyState = 1; decks.push(this); }
+    constructor() { this.currentTime = 0; this.duration = 200; this.paused = true; this.readyState = 4; decks.push(this); }
     set src(value) { this.url = value; this.currentTime = 0; }
     play() { this.paused = false; return Promise.resolve(); }
     pause() { this.paused = true; }

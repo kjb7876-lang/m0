@@ -25,7 +25,7 @@ ok('S-02 pilot zones found',s02.length===8);chapters['S-02']=s02;
 for(const k of Object.keys(chapters))chapters[k]=[...chapters[k],{id:'sz162-'+k+'-D',kind:'combat'},{id:'sz173-'+k+'-G',kind:'combat'}];
 // 오버레이 실행(브라우저 흉내)
 function boot(){const audios=[];class Audio{constructor(){this.currentTime=0;this.duration=NaN;this.paused=true;this.volume=0;this.readyState=0;this.ls={};this._src='';audios.push(this);}
-  set src(v){this._src=v;this.currentTime=0;this.readyState=1;this.duration=200;this.loads=(this.loads||0)+1;}get src(){return this._src;}
+  set src(v){this._src=v;this.currentTime=0;this.readyState=4;this.duration=200;this.loads=(this.loads||0)+1;}get src(){return this._src;}
   play(){this.paused=false;return Promise.resolve();}pause(){this.paused=true;}addEventListener(e,f){(this.ls[e]=this.ls[e]||[]).push(f);}}
  const c={console,Audio,performance:{now:()=>c.__t},__t:0,Date:{now:()=>c.__t},localStorage:{getItem:()=>null,setItem(){}},document:{hidden:false,addEventListener(){},getElementById:()=>null},
   fetch:()=>Promise.resolve({ok:true,json:()=>Promise.resolve(JSON.parse(JSON.stringify(IX)))}),addEventListener(){},toast(){},globalThis:{}};
@@ -74,6 +74,6 @@ function boot(){const audios=[];class Audio{constructor(){this.currentTime=0;thi
  // 9. 스크립트 태그
  const idx=read('runtime-text/index.html');ok('script tag right before mobile-perf-r298',idx.includes('<script src="./bgm-map-r308.js"></script><script src="./mobile-perf-r298.js"></script>')&&idx.indexOf('bgm-classical-r195.js')<idx.indexOf('bgm-map-r308.js'));
  ok('built copy matches source',read('runtime-text/bgm-map-r308.js')===src);
- require('child_process').execFileSync(process.execPath,['--test',path.join(__dirname,'r308-review-regression.cjs')],{stdio:'inherit'});
+ require('child_process').execFileSync(process.execPath,['--test',path.join(__dirname,'r308-review-regression.cjs'),path.join(__dirname,'r308-review-r2-regression.cjs')],{stdio:'inherit'});
  console.log('R308 CPU check passed:',n,'checks');
 })().catch(e=>{console.error(e);process.exit(1);});
