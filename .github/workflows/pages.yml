@@ -339,6 +339,8 @@ jobs:
         run: node r96/qa/r286/r286-cpu-check.cjs
       - name: R287 hero-near render priority, one-time map warm-up, far props/meshes standby CPU check
         run: node r96/qa/r287/r287-cpu-check.cjs
+      - name: Long-session render hook lifecycle CPU
+        run: node r96/qa/cx-play-03/render-hook-lifecycle.cjs
       - name: R292 hero action hand-painted fx strips CPU check
         run: node r96/qa/r292/r292-cpu-check.cjs
       - name: R302 hero two-colour palette (neon mint, spear-tip strip replaced) CPU check

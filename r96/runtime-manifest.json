@@ -21779,8 +21779,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 114283,
-      "sha256": "8fbbfc2c79dbb399f6d8ace575f7a34c3e82d4b3cee6b49b2478dd5c9d021516"
+      "bytes": 114463,
+      "sha256": "2e8f30fece39686b2a1d7a55137b10b991a1b73204d10f247c2a51a7d275b699"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -22794,8 +22794,8 @@
     },
     {
       "path": "perf-r272.js",
-      "bytes": 4522,
-      "sha256": "d6856972771b3a4dc04c3f2022aa9d32323e5a7b3d5963d4fefe8fe9eae428f3"
+      "bytes": 4597,
+      "sha256": "37c47d3b90eebfea0c8822f2dba319c8664eeab82bb9c558fc597ea65712072e"
     },
     {
       "path": "perf-r97.js",
@@ -22889,8 +22889,8 @@
     },
     {
       "path": "render-lod-r287.js",
-      "bytes": 20265,
-      "sha256": "a6f38fb7300670a5cdcc05617a7ca9d11ab329ca7841a3bbe8e2e3302665adc3"
+      "bytes": 20338,
+      "sha256": "c457c01dba77d4859bfa1952e66c51bdf969c5e2182cdaedd0868060939178e4"
     },
     {
       "path": "roof-height-r267.js",
@@ -23224,7 +23224,7 @@
     }
   ],
   "fileCount": 4644,
-  "totalBytes": 899072523,
+  "totalBytes": 899072851,
   "webHTMLSha256": "769e9398a93721142b2f837556fa970650d582252e5ce254df9302ee5b2d275d",
   "largest": [
     {
