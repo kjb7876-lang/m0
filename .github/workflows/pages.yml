@@ -55,6 +55,8 @@ jobs:
         run: node r96/qa/r303/r303-cpu-check.cjs
       - name: R300 light pools, low fog, motes and hero footing budgets
         run: node r96/qa/r300/r300-cpu-check.cjs
+      - name: R306 new-run monster pixel variants and shadows
+        run: node r96/qa/r306/r306-cpu-check.cjs
       - name: R308 one classical track per map, gapless loop, episode continuity, license fields
         run: node r96/qa/r308/r308-cpu-check.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
