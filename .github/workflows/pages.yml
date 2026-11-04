@@ -345,6 +345,8 @@ jobs:
         run: node r96/qa/r302/r302-cpu-check.cjs
       - name: R304 Lauren basic attack VFX CPU check
         run: node r96/qa/r304/r304-cpu-check.cjs
+      - name: R313 BGM label and Hwando split CPU
+        run: node r96/qa/r313/r313-cpu-check.cjs
       - name: R301 boss nameplate single-draw CPU check
         run: node r96/qa/r301/r301-cpu-check.cjs
       - name: R312 ranged camera hold lifecycle CPU check

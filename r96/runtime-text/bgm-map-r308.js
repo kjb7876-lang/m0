@@ -102,5 +102,5 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)stopAll();}
 window.__STORYWORLD_BGM_MAP_R308__=Object.freeze({revision:REV,set,credits,resolve,samongOf,
  inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,tracks:idx?Object.keys(idx.tracks).length:0,visit:visit?{...visit.sel}:null,
-  active:cur?{track:cur.track,zone:cur.zone,episode:cur.episode,role:cur.role,time:cur.deck.el.currentTime,paused:cur.deck.el.paused,volume:cur.deck.el.volume}:null,fading:!!fade,blocked,duck,failed:[...failed],stats:{...stats},log:log.slice(-40),lastError})});
+  active:cur?{track:cur.track,zone:cur.zone,episode:cur.episode,role:cur.role,time:cur.deck.el.currentTime,paused:cur.deck.el.paused,volume:cur.deck.el.volume}:null,decks:decks.map(d=>({id:d.id,paused:d.el.paused,volume:d.el.volume,readyState:d.el.readyState,muted:d.el.muted,ended:d.el.ended})),fading:!!fade,blocked,duck,failed:[...failed],stats:{...stats},log:log.slice(-40),lastError})});
 })();
