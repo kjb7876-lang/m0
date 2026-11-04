@@ -22339,8 +22339,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566898,
-      "sha256": "cbc091a28baa41d7fb86b47165e3219973dd24c74d9bfaf678084495a78b1992"
+      "bytes": 6566941,
+      "sha256": "889a14883422e7dd90fc8df245665f9d2b39669c1d029123a7ca6de4aa12cfaf"
     },
     {
       "path": "intro-r140.js",
@@ -22561,6 +22561,11 @@
       "path": "portal-interaction-r83.js",
       "bytes": 3109,
       "sha256": "d38e825b38487de0a19d0b25ed0696da40519f8a9da1d1355087c53a25b3e422"
+    },
+    {
+      "path": "props-fit-r303.js",
+      "bytes": 12648,
+      "sha256": "3fdc0657101b7b26b5da01167aabaf27238468bbeba74a94e052d0096672eb9c"
     },
     {
       "path": "props-r102.js",
@@ -22928,9 +22933,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4585,
-  "totalBytes": 868755892,
-  "webHTMLSha256": "cbc091a28baa41d7fb86b47165e3219973dd24c74d9bfaf678084495a78b1992",
+  "fileCount": 4586,
+  "totalBytes": 868768583,
+  "webHTMLSha256": "889a14883422e7dd90fc8df245665f9d2b39669c1d029123a7ca6de4aa12cfaf",
   "largest": [
     {
       "path": "index.html",
