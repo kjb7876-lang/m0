@@ -13433,6 +13433,11 @@
       "sha256": "065a29588394e0660ffbc14e59c681da2c69c2436153fade0283c35534df52d9"
     },
     {
+      "path": "assets/r292/fx/gunner/r.webp",
+      "bytes": 728726,
+      "sha256": "f7ea0dca459fec604147ed6753a70a5e897291f96f9a7efafb59e1975d3c85b9"
+    },
+    {
       "path": "assets/r292/fx/gunner/w.webp",
       "bytes": 574194,
       "sha256": "9e212ab9a45da27272c3d6c57c3fc72e1002243b865f0566ef413010baa0b855"
@@ -13469,8 +13474,8 @@
     },
     {
       "path": "assets/r292/fx/index.json",
-      "bytes": 9355,
-      "sha256": "64133c06ff3f5f222d44f0a8938b706f2d291c821e5b3ffad6a260d82af57359"
+      "bytes": 12701,
+      "sha256": "b6904ee9e650d5aac13136a4c2acd8ced574d3de7855c4f97d2cb0026ac59d3e"
     },
     {
       "path": "assets/r292/fx/lauren/basic.webp",
@@ -13488,14 +13493,34 @@
       "sha256": "c64bb12eba24cda9c51bd061542c1416a4d6b09bba86d44bc4e3de77780530a6"
     },
     {
+      "path": "assets/r292/fx/neon/blink.webp",
+      "bytes": 72428,
+      "sha256": "ba2e82f3fa829a7e4b6b590abf21473702f8faabd371d1b47eb126cd174eebc2"
+    },
+    {
       "path": "assets/r292/fx/neon/special.webp",
       "bytes": 553650,
       "sha256": "564b4bb444c7e3928cb706f7c82b737ef0dcfce441e008879869ed26bb7a4574"
     },
     {
+      "path": "assets/r292/fx/neon/w.webp",
+      "bytes": 762062,
+      "sha256": "d26019cd02c82b45756e6926a3039f903ec579c2e160c492b71fade543138496"
+    },
+    {
       "path": "assets/r292/fx/seoha/basic.webp",
       "bytes": 63124,
       "sha256": "cf3129dc4988034fa9b726324ad6193e65e5786a32dd2f20cfa40f36f8f2b273"
+    },
+    {
+      "path": "assets/r292/fx/seoha/e.webp",
+      "bytes": 319070,
+      "sha256": "00363392425d21711e66819d064551318857306b8fa2c926dbdb2c23da94eb92"
+    },
+    {
+      "path": "assets/r292/fx/seoha/w.webp",
+      "bytes": 726070,
+      "sha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d"
     },
     {
       "path": "assets/r74/effects.png",
@@ -22644,8 +22669,8 @@
     },
     {
       "path": "skill-fx-r292.js",
-      "bytes": 11016,
-      "sha256": "35ad7b6cdc6f3021ff5d9a834c409fc3a042a3898cddd009cab0ca516b3fed3a"
+      "bytes": 11092,
+      "sha256": "ec643413b6e3782e874828c21dee42e3bcffacbf8f0984561af9ae24e11288a0"
     },
     {
       "path": "skills-r181.js",
@@ -22893,8 +22918,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4578,
-  "totalBytes": 866118750,
+  "fileCount": 4583,
+  "totalBytes": 868730528,
   "webHTMLSha256": "bd1a6bbbbcc3668adc4fcceea5839b0a01d5e35c9359ad5f3971d6f733fa98bb",
   "largest": [
     {

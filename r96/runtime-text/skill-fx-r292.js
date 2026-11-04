@@ -4,7 +4,7 @@
 //  표: assets/r292/fx/index.json (scripts/r292-fx-strips.py 가 만든다 — 새 띠는 그 스크립트 ROWS 에 한 줄 + sync). 영웅→동작→{file,frames,anchor,origin,dur,scale,blend,fit}.
 //   anchor dir = 오른쪽을 향한 띠를 겨눈 방향(화면각)으로 돌려 기준점(origin)을 영웅 몸 높이에 놓는다. 왼쪽을 볼 때는 위아래를 뒤집어(거울) 칼자국 휘는 쪽을 유지.
 //          fit 'path' = 기준점→기준점+288px 를 실제 이동(블링크·대시 시작→끝)의 화면 거리에 맞춰 늘인다(0.6~1.8배).
-//   anchor radial = 칸 가운데를 영웅(W·R 은 시전 원점, E 표식형은 표적)에 놓는다. scale = 칸 한 변이 화면 몇 칸(TILE×zoom)인지.
+//   anchor radial = 칸 가운데(또는 표의 origin, 네온 W 는 바닥 중심 (192,290) + lift 0 = 발밑)를 영웅(W·R 은 시전 원점)에 놓는다. scale = 칸 한 변이 화면 몇 칸(TILE×zoom)인지.
 //  겹쳐 어색한 '일반' 그림만 그리지 않는다(효과 객체는 그대로 두고 그리기에서만 건너뜀 — 다른 오버레이의 쿨다운·감지 훅은 그대로 돈다):
 //   · 기본공격(띠 있는 근접 영웅): 엔진 공용 'slash'(VFX.slash) 베기 그림
 //   · 블링크(띠 있는 영웅): 엔진 공용 착지 문양 'sigil'(VFX.blink). 잔상(ghost)은 남긴다.
@@ -37,7 +37,7 @@ function play(h,action,o){const r=row(h,action);if(!r||!o||!fin(o.x)||!fin(o.y))
  const e={key,hero:h,action,r,x:o.x,y:o.y,angle:fin(o.angle)?o.angle:0,tx:fin(o.tx)?o.tx:null,ty:fin(o.ty)?o.ty:null,t0:T()};list.push(e);stats.plays[key]=(stats.plays[key]||0)+1;arm();return e;}
 function screenAngle(x,y,a){const p=project(x,y),q=project(x+Math.cos(a),y+Math.sin(a));return Math.atan2(q.y-p.y,q.x-p.x);}
 function drawOne(e){const r=e.r,age=T()-e.t0;if(age<0||age>=r.dur)return;const im=image(r);if(!im){stats.skipped++;return;}
- const fr=Math.min(r.frames-1,Math.floor(age/r.dur*r.frames)),unit=(typeof TILE==='number'?TILE:32)*(typeof zoom==='number'?zoom:1),q=project(e.x,e.y),lift=H()*.3;
+ const fr=Math.min(r.frames-1,Math.floor(age/r.dur*r.frames)),unit=(typeof TILE==='number'?TILE:32)*(typeof zoom==='number'?zoom:1),q=project(e.x,e.y),lift=H()*(fin(r.lift)?r.lift:.3);
  let s=r.scale*unit/CELL,ang=0;
  if(r.anchor==='dir'){if(r.fit==='path'&&e.tx!=null){const to=project(e.tx,e.ty),d=Math.hypot(to.x-q.x,to.y-q.y);ang=d>1?Math.atan2(to.y-q.y,to.x-q.x):screenAngle(e.x,e.y,e.angle);if(d>1)s=Math.max(s*.6,Math.min(s*1.8,d/FIT));}else ang=screenAngle(e.x,e.y,e.angle);}
  const flip=r.anchor==='dir'&&Math.cos(ang)<0;

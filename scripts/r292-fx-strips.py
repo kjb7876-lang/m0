@@ -5,6 +5,7 @@
   dir    = 오른쪽을 향하고 기준점 (48,192) → 게임이 겨눈 방향으로 돌려 기준점을 영웅(또는 시작점)에 놓는다.
   radial = 칸 가운데 (192,192) 를 영웅(또는 표적)에 놓는다.
   fit    = 'path' 면 기준점→(기준점+fitPx) 를 실제 이동 거리(블링크·대시 시작→끝)에 맞춰 늘인다.
+  lift   = 기준점을 몸 높이(기본 .3×키)가 아닌 발밑(0)에 — 기준점 y 가 192 가 아닌 바닥 그림(네온 W)에 자동으로 붙는다.
   scale  = 384 칸 한 변이 화면에서 몇 칸(TILE×zoom)인지. dur = 한 번 재생 시간(초).
 
 이 스크립트는 원천 SHA-256 을 대조한 뒤(다르면 멈춤) 무손실 WebP(exact, 픽셀 동일 확인)로 옮기고
@@ -39,6 +40,11 @@ ROWS = [
  ('neon', 'special', 'drive-review-1104c/10_neon_Q/10_neon_Q_v1.png', '18181e23dd1ef363ee7e98d38a3f558503e2c4cc70b82c865032d754d4b3180a', 10, 'dir', [48, 192], .60, 7.0, 'screen', None, '회로 폭주 — 겨눈 쪽 연쇄 번개'),
  ('lauren', 'basic', 'drive-review-1104c/11_lauren_A/11_lauren_A_v1.png', 'cefc54f4541baa5cb516880d9148d87e005ab62797a8cb76473707b7419cb662', 8, 'dir', [48, 192], .30, 3.6, 'source-over', None, '기본 마력 베기(보라·어두운 색이라 일반 합성)'),
  ('lauren', 'blink', 'drive-review-1104c/11_lauren_S/11_lauren_S_v1.png', '1299298075348b4982b42063e69b5287a1ede97929924c076e43a2a78346ad8a', 8, 'dir', [48, 192], .35, 4.6, 'source-over', 'path', '블링크 — 출발점→도착점(어두운 보라라 일반 합성)'),
+ ('gunner', 'r', 'drive-review-1104d/07_gunner_R_v2/07_gunner_R_v2.png', 'b96518e71909b53dd2a31a4f658fc2a4d2d4ce0ae9183262900a168c2ad7074f', 12, 'dir', [48, 192], 1.0, 6.0, 'screen', None, '시간 지연포(delay-burst, 0.7초 뒤 폭발) — 겨눈 쪽 탄 + 끝 폭발'),
+ ('seoha', 'w', 'drive-review-1104d/09_seoha_W_v2/09_seoha_W_v2.png', 'a0e594862ef47423c15dccb5bcdf3877b616c5b797b00d98d0e6130fd87f265e', 10, 'radial', [192, 192], .60, 6.0, 'screen', None, '죽은 시간 개방(haste) — 영웅 둘레(5~8칸이 약 6px 높게 그려짐, 승인 시 허용)'),
+ ('seoha', 'e', 'drive-review-1104d/09_seoha_E_v1/09_seoha_E_v1.png', '984765f6aed8191d8028a28c3a017b39ea8f2cd8936933b5d723a0908c151873', 8, 'dir', [48, 192], .45, 4.6, 'screen', 'path', '카이로스의 순간(dash) — 시작점→끝점'),
+ ('neon', 'blink', 'drive-review-1104d/10_neon_S_v2_review/10_neon_S_v2_review.png', '3cab69fab75e296ff89c6647f097ec0d6baeef0a9d1e66e3466767dbf2685c7a', 8, 'dir', [48, 192], .35, 4.6, 'screen', 'path', '블링크 — 출발점→도착점'),
+ ('neon', 'w', 'drive-review-1104d/10_neon_W_v1/10_neon_W_v1.png', '3c7741cee9251ce244535ee75505d2b8b460be4392218866acdf3288e4e32d8c', 10, 'radial', [192, 290], .60, 7.0, 'screen', None, '성역 수복(heal-zone, 반경 3) — 바닥 원 방벽, 그림 중심 (192,290)을 발밑에(lift 0)'),
 ]
 
 
@@ -72,6 +78,8 @@ def main(src_root):
             'sha256': sha(out), 'bytes': len(out), 'size': [frames * CELL, CELL], 'cell': CELL, 'frames': frames,
             'anchor': anchor, 'origin': origin, 'dur': dur, 'scale': scale, 'blend': blend, 'fit': fit,
             'note': note, 'reason': REASON}
+        if origin[1] != 192:
+            effects[hero][action]['lift'] = 0  # 바닥 기준 그림: 기준점을 발밑에
         print(hero, action, len(raw), '->', len(out))
     idx = {'revision': 'R292-fx-strips-1', 'cell': CELL, 'reason': REASON,
            'source': 'Google Drive dots 제작 띠(읽기 전용 원천, 원본은 덮어쓰지 않음)', 'effects': effects}

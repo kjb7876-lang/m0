@@ -17,17 +17,17 @@ let count=0;
 for(const [hero,acts] of Object.entries(T))for(const [action,r] of Object.entries(acts)){count++;const rel='assets/r292/fx/'+r.file,b=RT(rel),sz=webpSize(b);
  ok(sz.w===r.frames*384&&sz.h===384&&r.size[0]===sz.w&&r.size[1]===384,`${rel} is ${r.frames}x384 × 384 (got ${sz.w}x${sz.h})`);ok(sz.lossless,rel+' lossless');
  ok(r.frames>=8&&r.frames<=12,rel+' 8~12 frames');ok(crypto.createHash('sha256').update(b).digest('hex')===r.sha256&&b.length===r.bytes,rel+' sha/bytes match index');
- ok(/^[0-9a-f]{64}$/.test(r.sourceSha256)&&/_v1\.png$/.test(r.driveName)&&r.reason==='dots 생성 → 사용자 승인 2026-11-04',rel+' provenance');
+ ok(/^[0-9a-f]{64}$/.test(r.sourceSha256)&&/_v[12](_review)?\.png$/.test(r.driveName)&&r.reason==='dots 생성 → 사용자 승인 2026-11-04',rel+' provenance');
  ok(['dir','radial','target'].includes(r.anchor)&&Array.isArray(r.origin)&&r.dur>0&&r.dur<=1.2&&r.scale>0&&['screen','source-over','lighter'].includes(r.blend),rel+' anchor/origin/dur/scale/blend');
- ok(r.anchor!=='radial'||(r.origin[0]===192&&r.origin[1]===192),rel+' radial origin centred');
+ ok(r.anchor!=='radial'||(r.origin[0]===192&&(r.origin[1]===192||r.lift===0)),rel+' radial origin centred (or ground pivot with lift 0)');
  ok(['basic','blink','special','w','e','r'].includes(action),rel+' action key');
  const m=rows.get(rel);ok(m&&m.sha256===r.sha256&&m.bytes===r.bytes&&inputs.textPaths.includes(rel),rel+' in runtime manifest/inputs');}
-ok(count===14,'14 approved strips ('+count+')');ok(rows.get('assets/r292/fx/index.json')?.sha256===crypto.createHash('sha256').update(RT('assets/r292/fx/index.json')).digest('hex'),'index.json in manifest');
+ok(count===19,'19 approved strips ('+count+')');ok(rows.get('assets/r292/fx/index.json')?.sha256===crypto.createHash('sha256').update(RT('assets/r292/fx/index.json')).digest('hex'),'index.json in manifest');
 ok(rows.get('skill-fx-r292.js')?.sha256===crypto.createHash('sha256').update(RT('skill-fx-r292.js')).digest('hex'),'overlay in manifest');
 // ② 생성 스크립트 ROWS = index
 const PY=fs.readFileSync(path.join(ROOT,'scripts','r292-fx-strips.py'),'utf8');
 for(const [hero,acts] of Object.entries(T))for(const [action,r] of Object.entries(acts))ok(PY.includes(`('${hero}', '${action}', `)&&PY.includes(r.sourceSha256),`generator row ${hero}/${action}`);
-const want={gunner:['w','e','blink'],hwando:['basic','blink','special','w','e','r'],seoha:['basic'],neon:['basic','special'],lauren:['basic','blink']};
+const want={gunner:['w','e','r','blink'],hwando:['basic','blink','special','w','e','r'],seoha:['basic','w','e'],neon:['basic','special','blink','w'],lauren:['basic','blink']};
 ok(JSON.stringify(Object.fromEntries(Object.entries(T).map(([h,a])=>[h,Object.keys(a).sort()])))===JSON.stringify(Object.fromEntries(Object.entries(want).map(([h,a])=>[h,[...a].sort()]))),'table = approved list');
 // ③ 미카엘라
 ok(!T.michaela,'no michaela strips in index');ok(/h==='michaela'\)return null/.test(SRC),'overlay refuses michaela');
@@ -86,6 +86,10 @@ const run=(c,s)=>vm.runInContext(s,c);const settle=()=>new Promise(r=>setImmedia
  run(b,`time+=.2;tick(0)`);ok(X.inspect().active.length===0,'finished strip removed');
  // left-facing → mirrored, path fit
  run(b,`foe.x=2;foe.y=5;player.attackCD=0;calls=[];basicAttack();drawEffect(effects.find(e=>e.type==='r292-skill-fx'))`);const s=run(b,'calls').find(c=>c[0]==='s');ok(s[2]<0&&s[1]>0,'left aim mirrored vertically');
+ // ground pivot (neon W: origin (192,290), lift 0 → pivot at the feet)
+ run(b,`time+=30;tick(0);player.hero='neon';player.x=5;player.y=5;calls=[];window.__STORYWORLD_SKILL_FX_R292__.play('neon','w',{x:5,y:5});time+=.2;drawEffect(effects.find(e=>e.type==='r292-skill-fx'))`);
+ {const tr=run(b,'calls').find(c=>c[0]==='t'),q2=run(b,'project(5,5)'),dd=run(b,'calls').find(c=>c[0]==='d');ok(Math.abs(tr[2]-q2.y)<1e-9&&Math.abs(tr[1]-q2.x)<1e-9,'neon W pivot at feet (lift 0)');ok(/neon\/w\.webp$/.test(dd[1]),'neon W strip drawn');}
+ run(b,`time+=30;tick(0);player.hero='hwando';foe.x=8;foe.y=5;`);
  // cap
  run(b,`for(let i=0;i<30;i++){player.attackCD=0;basicAttack();}`);ok(X.inspect().active.filter(e=>e.key==='hwando:basic').length<=2&&X.inspect().active.length<=8,'concurrency capped');
  // ⑤ 끄기
