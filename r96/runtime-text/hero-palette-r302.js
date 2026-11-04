@@ -74,7 +74,7 @@ function wrapSP(){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S||S.r302||S
 let PX0=null;
 function heroCall(stack){const f=callerFile(stack);
  // R178 also draws enemy tower destruction; only its hero action paths qualify.
- if(f==='effects-r178')return /at (?:Object\.)?(?:specialFx|special|ego)\b/.test(String(stack));
+ if(f==='effects-r178'){const frame=String(stack).split('\n').find(l=>/\/effects-r178\.js:/.test(l));return /at (?:Object\.)?(?:go|play|specialFx|special|ego)\b/.test(frame||'');}
  return f?HERO_FILES.has(f)||THREAD_FILES.has(f):HERO_FN.test(String(stack));}
 // Explicit non-hero ownership wins over caller/asset heuristics.
 function ownership(o,h){if(o?.enemy)return false;

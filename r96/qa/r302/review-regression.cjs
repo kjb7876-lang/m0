@@ -38,7 +38,7 @@ check('R225 pre-tinted frameAt is recoloured and enemy R178 tower keeps its tint
  const E=engine();E.run("__STORYWORLD_PIXELFX_R163__.frameAt('impact',.3,0,0,{tint:{a:[1,2,3],b:[4,5,6]},alpha:.8,k:2});",'fx-boost-r225');
  assert.deepEqual(Array.from(E.calls[0].tint.a),[62,230,193]);assert.ok(Math.abs(E.calls[0].alpha-.36)<1e-9);assert.equal(E.calls[0].k,1.4);
  E.g.killEnemy=e=>{e.hp=0;};E.run(fs.readFileSync(require('path').join(__dirname,'../../client-source/effects-r178.js'),'utf8'),'effects-r178');
- E.g.killEnemy({r170Tower:true,hp:10,x:0,y:0});assert.deepEqual(Array.from(E.calls[1].tint.a),[100,6,16]);assert.ok(!E.calls[1].r302Flash);
+ E.run("function special(){killEnemy({r170Tower:true,hp:10,x:0,y:0});} special();",'combat-r160');assert.deepEqual(Array.from(E.calls[1].tint.a),[100,6,16]);assert.ok(!E.calls[1].r302Flash);
 });
 if(failed)throw Error(`R302 review regressions: ${failed} failed, ${passed} passed`);
 console.log(`R302 review regressions: ${passed} passed`);

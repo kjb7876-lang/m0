@@ -22354,8 +22354,8 @@
     },
     {
       "path": "hero-palette-r302.js",
-      "bytes": 15474,
-      "sha256": "f639e082c4020afeb71ab6e91f987c0d125bf9157833cc4dc4d7317fc33faef1"
+      "bytes": 15557,
+      "sha256": "4ba978460e62aef16a6455d96d699626a13fbf1d9cd3e9fafe9a6f533f32fc95"
     },
     {
       "path": "hero-presentation-r83.js",
@@ -23034,7 +23034,7 @@
     }
   ],
   "fileCount": 4606,
-  "totalBytes": 873607781,
+  "totalBytes": 873607864,
   "webHTMLSha256": "de1c461831c0015fe2cc0a110522dfac3585e2e36fda4db38a2dc0265287e275",
   "largest": [
     {
