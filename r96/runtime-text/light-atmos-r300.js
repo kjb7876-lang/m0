@@ -127,10 +127,14 @@ function update(r,frame){const o=r.__r300;if(!o)return;
  attach(r,o);}
 
 // ---- 렌더러 감싸기(프로토타입 + 인스턴스) ----
-function wrapFn(fn){if(fn.__r300)return fn;const w=function(frame){try{if(this?.T&&this.scene){build(this);update(this,frame);}}catch(e){fail(e);}return fn.apply(this,arguments);};w.__r300=true;return w;}
+// R287 등 다른 오버레이도 500ms 마다 자기 표식으로 render 를 다시 감싸므로 "가장 바깥 함수 표식"으로는 설치 여부를 알 수 없다
+// (서로 번갈아 감싸며 래퍼가 쌓임). 설치한 대상(프로토타입·인스턴스)을 WeakSet 에 기억해 한 번만 감싸고, 같은 frame 은 한 번만 갱신한다.
+const wrappedTargets=new WeakSet();
+function wrapFn(fn){const w=function(frame){try{if(this?.T&&this.scene&&this.__r300Frame!==frame){this.__r300Frame=frame;stats.updates=(stats.updates||0)+1;build(this);update(this,frame);}}catch(e){fail(e);}
+  try{return fn.apply(this,arguments);}finally{if(this)this.__r300Frame=undefined;}};w.__r300=true;return w;}
+function wrapOnce(target){if(!target||wrappedTargets.has(target)||typeof target.render!=='function')return;wrappedTargets.add(target);target.render=wrapFn(target.render);}
 function wrapAll(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;const proto=r?Object.getPrototypeOf(r):window.StoryPhase1?.ThreeRenderer?.prototype;
- if(proto&&typeof proto.render==='function'&&!proto.render.__r300)proto.render=wrapFn(proto.render);
- if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&typeof r.render==='function'&&!r.render.__r300)r.render=wrapFn(r.render);}catch(e){fail(e);}}
+ wrapOnce(proto);if(r&&Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);}catch(e){fail(e);}}
 // 장면을 비우면(지역 이동) 우리 물체는 장면 밖으로 빠질 수 있다 — 다음 render 에서 다시 붙인다(attach). 버린 렌더러는 정리한다.
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype,d=C?.dispose;if(d&&!d.__r300){C.dispose=function(...a){try{const o=this.__r300;if(o){for(const m of [o.dim,o.pools,...o.fog,o.motes]){m.parent?.remove(m);m.geometry.dispose();m.material.map?.dispose?.();m.material.dispose();}o.fogTex.dispose();}this.__r300=null;}catch(_){}return d.apply(this,a);};C.dispose.__r300=true;}}catch(e){fail(e);}
 if(typeof setInterval==='function')setInterval(wrapAll,500);wrapAll();
@@ -141,8 +145,10 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){her
 if(typeof shadow==='function'){const base=shadow;shadow=function(x,y,radius=18,opt={}){
  if(heroDrawing){heroDrawing=false;try{if(want('hero')&&typeof ctx!=='undefined'&&Number.isFinite(x+y)&&typeof player!=='undefined'&&player){const art=heroCanvases(),B=budget(),
    h=typeof actorHeight==='function'?actorHeight():66,lift=Math.max(0,Math.min(1,+(opt?.lift)||0)),a=B.heroAlpha*(1-lift*.6);
-   ctx.save();try{ctx.globalAlpha*=a*.85;const w=Math.max(28,h*.92),hh=w*.36;ctx.drawImage(art.shadow,x-w/2,y-hh/2,w,hh);
-    if(!lowFx()){ctx.globalAlpha=a*.55;const rw=h*.78,rh=h*1.12;ctx.drawImage(art.rim,x-rw/2,y-h*.47-rh/2,rw,rh);}stats.heroDraws++;}finally{ctx.restore();}}}catch(e){fail(e);}}
+   const paint=()=>{ctx.save();try{ctx.globalAlpha*=a*.85;const w=Math.max(28,h*.92),hh=w*.36;ctx.drawImage(art.shadow,x-w/2,y-hh/2,w,hh);
+    if(!lowFx()){ctx.globalAlpha=a*.55;const rw=h*.78,rh=h*1.12;ctx.drawImage(art.rim,x-rw/2,y-h*.47-rh/2,rw,rh);}stats.heroDraws++;}finally{ctx.restore();}};
+   // 영웅 소유(layer 3, 깊이 무시)로 기록되면 앞벽·발 위에 그려진다 → 엔진 발밑 그림자처럼 contact 범위(layer 1, 몸·벽 뒤)로 기록한다.
+   if(typeof ctx.scope==='function')ctx.scope({...(ctx.owner||{}),kind:'contact'},paint);else paint();}}catch(e){fail(e);}}
  return base.apply(this,arguments);};}
 
 // ---- 설정 ----

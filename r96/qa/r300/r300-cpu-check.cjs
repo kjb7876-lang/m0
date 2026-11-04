@@ -27,27 +27,27 @@ const T={PlaneGeometry:Geo,BufferGeometry:Geo,BufferAttribute:class{},Sphere:cla
  Mesh:class extends Obj{constructor(g,m){super();this.geometry=g;this.material=m;}},Points:class extends Obj{constructor(g,m){super();this.geometry=g;this.material=m;}},
  InstancedMesh:class extends Obj{constructor(g,m,c){super();this.geometry=g;this.material=m;this.max=c;this.count=c;this.instanceMatrix={setUsage(){}};this.set=0;}setMatrixAt(i){assert.ok(i<this.max,'instance index within buffer');}setColorAt(){if(!this.instanceColor)this.instanceColor={setUsage(){}};}},
  CustomBlending:5,AddEquation:100,ZeroFactor:200,SrcColorFactor:202,OneFactor:201,AdditiveBlending:2,DynamicDrawUsage:35048,RepeatWrapping:1000};
-function world({coarse=false,lowFx=false,store={},sight=false,layer='STORY',props=40}={}){
+function world({coarse=false,lowFx=false,store={},sight=false,layer='STORY',props=40,r287=false,own=false}={}){
  const kids=[];const scene={children:kids,add(o){o.parent=scene;kids.push(o);},remove(o){kids.splice(kids.indexOf(o),1);o.parent=null;}};
- const ctxCalls=[];const g2={createRadialGradient:()=>({addColorStop(){}}),fillRect(){},setTransform(){},fill(){},beginPath(){}};
+ const ctxCalls=[],scopes=[];const g2={createRadialGradient:()=>({addColorStop(){}}),fillRect(){},setTransform(){},fill(){},beginPath(){}};
  class Proto{render(f){this.rendered=(this.rendered||0)+1;}dispose(){}}
- const r=Object.create(Proto.prototype);Object.assign(r,{T,scene,renderer:{getPixelRatio:()=>1}});
+ const r=Object.create(Proto.prototype);Object.assign(r,{T,scene,renderer:{getPixelRatio:()=>1}});if(own)r.render=Proto.prototype.render;/* perf-r97 인스턴스 복사 */const timers=[];
  const c={console,Math,JSON,Object,Array,Set,WeakMap,Number,String,
-  localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},matchMedia:()=>({matches:coarse}),performance:{now:()=>1000},setInterval:()=>0,
+  localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},matchMedia:()=>({matches:coarse}),performance:{now:()=>1000},setInterval:f=>{timers.push(f);return timers.length;},setTimeout:()=>0,requestAnimationFrame:()=>0,innerWidth:1280,innerHeight:720,
   document:{createElement:()=>({getContext:()=>g2,width:0,height:0}),getElementById:()=>null},
   settings:{lowFx,flashlight58:sight?true:false,reducedMotion:false},player:{x:20,y:20},
   room:{props:Array.from({length:props},(_,i)=>({x:i*2,y:i%5,path:'assets/props/brazier.webp'})),exploration:{floorCells:[]}},
-  actorHeight:()=>66,ctx:{globalAlpha:1,save(){},restore(){},drawImage(...a){ctxCalls.push(a);}},
+  actorHeight:()=>66,ctx:{globalAlpha:1,owner:{id:'hero1',kind:'hero'},save(){},restore(){},drawImage(...a){ctxCalls.push(a);},scope(o,fn){scopes.push(o);return fn();}},
   StoryPhase1:{ThreeRenderer:{prototype:Proto.prototype}}};
  c.window=c;c.__STORYWORLD_PHASE1__={controller:{state:{three:r}}};
  c.shadow=function(){ctxCalls.push(['base']);};c.drawHero=function(){c.shadow(20,20,18,{});};
- vm.createContext(c);vm.runInContext(SRC,c,{filename:'light-atmos-r300.js'});
- return{c,r,kids,ctxCalls,api:c.__STORYWORLD_LIGHT_ATMOS_R300__,frame:()=>{r.render({layer,zone:'z'});return r.__r300;}};}
+ vm.createContext(c);vm.runInContext(SRC,c,{filename:'light-atmos-r300.js'});if(r287)vm.runInContext(fs.readFileSync(path.join(R,'client-source/render-lod-r287.js'),'utf8'),c,{filename:'render-lod-r287.js'});
+ return{c,r,kids,ctxCalls,scopes,tick:k=>{for(let i=0;i<k;i++)for(const f of timers)f();},api:c.__STORYWORLD_LIGHT_ATMOS_R300__,frame:()=>{r.render({layer,zone:'z'});return r.__r300;}};}
 const draws=o=>[o.dim,o.pools,...o.fog,o.motes].filter(m=>m.visible&&m.parent).length;
 {const w=world(),o=w.frame();ok(o.pools.count===24&&o.pools.visible,'PC: 40 lights capped at 24 pools ('+o.pools.count+')');ok(o.pools.max===24,'instance buffer = PC cap');
  ok(o.motes.geometry.drawRange.count===300,'PC motes 300');ok(o.fog.filter(f=>f.visible).length===3,'PC fog bands 3');ok(o.dim.visible&&o.dim.material.uniforms.k.value>=.8&&o.dim.material.uniforms.k.value<=.85,'STORY dim 15~20%');
  ok(draws(o)<=w.api.config.extraDraws.pc&&draws(o)===6,'PC 3D draw increase <= 6 ('+draws(o)+')');ok(w.r.rendered===1,'base render still called');
- w.c.drawHero();ok(w.ctxCalls.length===3&&w.ctxCalls[2][0]==='base','hero: shadow + rim images then native shadow');}
+ w.c.drawHero();ok(w.ctxCalls.length===3&&w.ctxCalls[2][0]==='base','hero: shadow + rim images then native shadow');ok(w.scopes.length===1&&w.scopes[0].kind==='contact'&&w.scopes[0].id==='hero1','Codex P2: hero shadow/rim recorded in contact scope (layer 1, behind body/front walls), not hero scope');}
 {const w=world({coarse:true}),o=w.frame();ok(o.pools.count===10,'mobile pools capped at 10');ok(o.motes.geometry.drawRange.count===150,'mobile motes halved (150)');ok(o.fog.filter(f=>f.visible).length===2,'mobile fog bands 2');
  ok(o.dim.material.uniforms.k.value>w.api.config.dim.pc,'mobile dims less');ok(draws(o)<=w.api.config.extraDraws.mobile,'mobile 3D draw increase <= 5');}
 {const w=world({lowFx:true}),o=w.frame();ok(o.pools.count===6&&!o.motes.visible&&o.fog.filter(f=>f.visible).length===1,'low FX: 6 pools, no motes, 1 fog band');}
@@ -58,5 +58,9 @@ const draws=o=>[o.dim,o.pools,...o.fog,o.motes].filter(m=>m.visible&&m.parent).l
 {const w=world({props:0}),o=w.frame();ok(o.pools.count===0&&!o.pools.visible,'no lights → pool mesh hidden');}
 {const w=world();ok(typeof w.c.StoryPhase1.ThreeRenderer.prototype.render==='function'&&w.c.StoryPhase1.ThreeRenderer.prototype.render.__r300,'prototype render wrapped');
  w.r.render=w.c.StoryPhase1.ThreeRenderer.prototype.render;ok(/hasOwnProperty\.call\(r,'render'\)/.test(SRC),'instance render (perf-r97 copy) also wrapped');}
+// Codex P1: R287 이 500ms 마다 render 를 다시 감싸도 R300 래퍼가 쌓이지 않고 프레임당 갱신 1회
+for(const own of [false,true]){const w=world({r287:true,own});w.tick(600);const st=()=>w.api.inspect().stats.frames;const b=st();w.r.render({layer:'STORY',zone:'z'});
+ ok(st()-b===1,'R287+R300 after 600 timer ticks'+(own?' (instance render copy)':'')+': exactly 1 R300 update per frame (got '+(st()-b)+')');
+ ok(w.r.rendered>=1,'base render runs once per frame');}
 ok(/FOG_TEXTURES=Object\.freeze\(\{story:null,samong:null\}\)/.test(SRC),'fog texture hook present (assets/r300/fog-*.png later), no 404 fetch now');
 console.log('R300 CPU checks passed: '+n);
