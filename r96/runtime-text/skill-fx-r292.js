@@ -23,7 +23,12 @@ const T=()=>typeof time==='number'?time:0;
 const H=()=>typeof actorHeight==='function'?actorHeight():60;
 const hero=()=>typeof player==='object'&&player?player.hero:null;
 const fin=v=>typeof v==='number'&&Number.isFinite(v);
-function row(h,action){if(!on||!table||!h||h==='michaela')return null;return table[h]?.[action]||null;}
+// R304(사용자 2026-11-04 '라우렌 기본공격 저퀄 VFX'): 라우렌 기본공격 띠(11_lauren_A_v1: 가는 어두운 보라 번개, 화면에서 영웅 키의 1.5배 남짓)는 끈다 →
+//  R292 이전의 손그림 보라 수정 창끝(VFX.slash = assets/vfx/heroes/lauren-a.webp)이 다시 나온다. 같은 순간 겹치던 R163 pxf 'silver-slash'
+//  ·extra-02 등(평면 파스텔 띠 아틀라스, 근접 공용 pxf-basic 휘두르기)도 라우렌 기본공격에서만 그리지 않는다. 블링크 띠·다른 영웅·판정은 그대로.
+const OFF_R304=new Set(['lauren:basic']);
+const lowR304=e=>e&&e.type==='pxfSprite'&&e.pxfHero==='lauren'&&e.pxfStage==='attack'&&/^pxf-basic:/.test(String(e.pxfEvent||''));
+function row(h,action){if(OFF_R304.has(h+':'+action))return null;if(!on||!table||!h||h==='michaela')return null;return table[h]?.[action]||null;}
 const asked=new Map();
 function image(r){const p=DIR+r.file;try{const got=typeof readyImage==='function'?readyImage(p):null;if(got?.image){if(!asked.get(p+':ok')){asked.set(p+':ok',1);stats.loaded++;}return got.image;}
  const t=Date.now();if(t-(asked.get(p)||0)>1500){asked.set(p,t);if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});}}catch(e){fail(e);}return null;}
@@ -73,7 +78,7 @@ try{
   try{if(p&&!(before>0)&&row(p.hero,'special')){const e=typeof nearestEnemy==='function'?nearestEnemy(12):null;a=e?Math.atan2(e.y-p.y,e.x-p.x):typeof storyAim22==='function'?storyAim22():0;flareUntil[p.hero]=T()+.5;}}catch(err){fail(err);}
   const res=base.apply(this,args);
   try{if(p&&p===player&&!(before>0)&&p.specialCD>0&&a!=null)play(p.hero,'special',{x:p.x,y:p.y,angle:a});else if(p)flareUntil[p.hero]=0;}catch(err){fail(err);}return res;};}
- if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r292-skill-fx'){try{drawAll();}catch(err){fail(err);}return;}if(e&&e.r292Hidden&&on)return;return base.apply(this,[e,...a]);};}
+ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r292-skill-fx'){try{drawAll();}catch(err){fail(err);}return;}if(e&&e.r292Hidden&&on)return;if(on&&lowR304(e)){stats.suppressed['r304-lauren-pxf']=(stats.suppressed['r304-lauren-pxf']||0)+1;return;}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{warm();const t=T();for(let i=list.length-1;i>=0;i--){const e=list[i];if(t-e.t0>=e.r.dur||t<e.t0-1)list.splice(i,1);}
    if(list.length)arm();else if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);list.length=0;return r;};}

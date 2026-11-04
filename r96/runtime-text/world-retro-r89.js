@@ -293,8 +293,12 @@ float r89Bayer(vec2 p){vec2 q=mod(p,4.);int i=int(q.x)+int(q.y)*4;float m[16]=fl
 
  // HUD hint: the shipped text promised WASD/J/2/3 while the native handler binds
  // arrows, A/J/1, S/2, D/3 (see index keydown and hospital-pc-test.js J alias).
- const HINT='방향키 이동 · A/J/1 공격 · S/2 블링크 · D/3 공명 · Q/4 고유기 · F/5 EGO · E 상호작용';
- if(typeof setHudTextR63R2==='function'){const hudBase=setHudTextR63R2;setHudTextR63R2=function(id,text,...rest){if(id==='hint'&&typeof text==='string'&&text.startsWith('WASD/')){text=HINT;stats.hintFixes++;}return hudBase.call(this,id,text,...rest);};}
+ /* R291: 키 배치 표(KR291)에서 글자를 읽는다 — 기본 QWER+ASDF·C 상호작용, legacy 면 예전 Z/X/C·E.
+    본편 칸은 지금 영웅이 쓸 수 있는 칸만(R209 가 끈 칸은 안내하지 않음, keys-r291 werLabel) */
+ const legacyKeys=()=>typeof KR291!=='undefined'&&KR291&&KR291.legacy;
+ const werKeys=()=>{try{return window.__STORYWORLD_KEYS_R291__?.werLabel?.('/')||(legacyKeys()?'Z/X/C':'W/E/R');}catch(_){return legacyKeys()?'Z/X/C':'W/E/R';}};
+ const HINT=()=>'방향키 이동 · A/J/1 공격 · S/2 블링크 · D/3 공명 · Q/4 고유기 · F/5 EGO · '+werKeys()+' 기술 · '+(legacyKeys()?'E':'C')+' 상호작용';
+ if(typeof setHudTextR63R2==='function'){const hudBase=setHudTextR63R2;setHudTextR63R2=function(id,text,...rest){if(id==='hint'&&typeof text==='string'&&text.startsWith('WASD/')){text=HINT();stats.hintFixes++;}return hudBase.call(this,id,text,...rest);};}
  // Skill bar keycaps showed only "2"/"3" for blink/guard although S and D are bound.
  const caps=[['blinkBtn','2','S / 2',null],['guardBtn','3','D / 3',null]];
  function keycaps(){for(const row of caps){if(!row[3]?.isConnected)row[3]=document.querySelector('#'+row[0]+' kbd');const k=row[3];if(k&&k.textContent.trim()===row[1]){k.textContent=row[2];stats.hintFixes++;}}}
