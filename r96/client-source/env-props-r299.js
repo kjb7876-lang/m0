@@ -70,7 +70,7 @@ function apply(r){if(!on||!r||!r.exploration||!Array.isArray(r.props))return;if(
    if(it.kind==='big')stats.big++;else stats.props++;}
   stats.rooms++;last={zone:r.id,theme:P.theme,items:P.items.map(i=>i.kind+':'+i.name)};}catch(e){fail(e);}}
 // 소품 그리기: 붙은 벽에 맞게 좌우 뒤집기, 영웅이 뒤에 서면 옅게.
-function drawOwn(p){const row=readyImage(p.path);if(!row){if(typeof addImage==='function')addImage(p.path);return;}const z=typeof zoom==='number'?zoom:1,q=project(p.x,p.y),h=p.height*z,b=row.crop||{w:row.image.naturalWidth,h:row.image.naturalHeight},w=h*b.w/b.h,hero=project(player.x,player.y),
+function drawOwn(p){const sight=window.__STORYWORLD_SIGHT24__;if(sight?.enabled&&!sight.pointVisible(p.x,p.y))return;const row=readyImage(p.path);if(!row){if(typeof addImage==='function')addImage(p.path);return;}const z=typeof zoom==='number'?zoom:1,q=project(p.x,p.y),h=p.height*z,b=row.crop||{w:row.image.naturalWidth,h:row.image.naturalHeight},w=h*b.w/b.h,hero=project(player.x,player.y),
   behind=q.y>hero.y-3&&q.y-h<hero.y-15&&Math.abs(q.x-hero.x)<w*.45;
  const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(10*z,Math.min(w*.34,h*.5)));sprite(p.path,q.x,q.y,h,{alpha:behind?.36:1,flip:!!p.r299Flip,filter:typeof layer!=='undefined'&&layer==='DREAM'?'saturate(.6) brightness(.86)':'brightness(.92)'});};
  if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:p.path,alive:true},paint);else paint();stats.draws++;drawn[p.id]=(drawn[p.id]||0)+1;}

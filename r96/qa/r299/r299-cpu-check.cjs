@@ -50,6 +50,19 @@ check('R266 actorsOnTop: actual overlay order draws R299 once before actors, eac
  w.__STORYWORLD_ENV_PROPS_R299__.set({on:false});events.length=0;w.drawObjective();w.drawProp(w.room.props[0]);assert.deepEqual(events,[]);
  assert.equal(w.__STORYWORLD_ENV_PROPS_R299__.inspect().stats.errors,0);
 });
+check('flashlight sight culls R299 props on Canvas, with and without R266',()=>{
+ for(const withR266 of [false,true]){
+  const w=world(withR266),p={id:'r299:sight',r299:'prop',path:'assets/r299/bed.webp',x:4,y:5,height:46};let sprites=0,queries=0,visible=false;
+  w.room={props:[p]};w.readyImage=()=>({image:{naturalWidth:64,naturalHeight:64}});w.project=(x,y)=>({x,y});w.player={x:0,y:0};w.ctx={};w.sprite=()=>sprites++;
+  w.__STORYWORLD_SIGHT24__={enabled:true,pointVisible:(x,y)=>{queries++;assert.equal(x,p.x);assert.equal(y,p.y);return visible;}};
+  const frame=()=>{sprites=0;if(withR266)w.drawObjective();w.drawProp(p);return sprites;};
+  assert.equal(frame(),0,'outside flashlight sight must not draw');assert.ok(queries>0);
+  visible=true;assert.equal(frame(),1,'inside flashlight sight draws once');
+  visible=false;w.__STORYWORLD_SIGHT24__.enabled=false;const before=queries;assert.equal(frame(),1,'disabled sight does not cull');assert.equal(queries,before);
+  if(withR266){w.__STORYWORLD_PERF_GROUPS_R266__.actorsOnTop(false);w.__STORYWORLD_SIGHT24__.enabled=true;assert.equal(frame(),0);}
+  assert.equal(w.__STORYWORLD_ENV_PROPS_R299__.inspect().stats.errors,0);
+ }
+});
 check('script order: env-props-r299 right before mobile-perf-r298',()=>{assert.ok(/<script src="\.\/env-props-r299\.js"><\/script><script src="\.\/mobile-perf-r298\.js">/.test(read('runtime-text/index.html')));});
 check('public asset index contains zero drive-related keys at any depth',()=>{
  const walk=o=>{if(!o||typeof o!=='object')return;for(const[k,v]of Object.entries(o)){assert.ok(!/drive|드라이브/i.test(k),'private key: '+k);walk(v);}};
