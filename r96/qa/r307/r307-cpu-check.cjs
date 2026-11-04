@@ -18,23 +18,42 @@ ok('total under 3,000,000 bytes and each under 96KB',total<=3e6&&total===idx.tot
 ok('no runtime API / external URL in overlay',!/https?:\/\//.test(src.replace(/^\/\/.*$/gm,''))&&!/freesound|apikey|api_key/i.test(src));
 
 // ---- VM: event map, hooks, off switch, cap ----
-function boot(store={}){
+function boot(store={},collect=false){
  const played=[],calls={death:0,complete:0,sound:[],close:0,tick:0};
  class Node{connect(){}disconnect(){}}
  class Ctx{constructor(){this.state='running';this.destination=new Node();}createGain(){const g=new Node();g.gain={value:1};return g;}createBufferSource(){const s=new Node();s.start=()=>played.push(s);s.stop=()=>{s.stopped=true;};return s;}decodeAudioData(a,ok){ok({duration:.5,src:a.name});}}
- const listeners={};
- const c={console,performance:{now:()=>Date.now()},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},
-  document:{hidden:false,addEventListener:(t,f)=>{listeners[t]=f;},querySelector:()=>null,getElementById:()=>null},
+ const listeners={},elements={},timers=[];let now=Date.now();
+ const appendChild=e=>{elements[e.id]=e;};
+ const c={console,performance:{now:()=>now},innerWidth:1000,innerHeight:800,setInterval:f=>timers.push(f),localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},
+  document:{hidden:false,addEventListener:(t,f)=>{listeners[t]=f;},querySelector:()=>null,getElementById:id=>elements[id]||null,head:{appendChild},body:{appendChild},createElement:()=>({style:{},setAttribute(){},addEventListener(){}})},
   fetch:async u=>({ok:true,arrayBuffer:async()=>({name:u}),json:async()=>idx})};
  c.window=c;vm.createContext(c);
  c.__Ctx=Ctx;vm.runInContext(`let audioContext=new __Ctx(),masterGain=audioContext.createGain(),audioUnlocked=true,settings={sound:true,volume:.8},modal=false,soundProfiles={pickup:[]};
   let room={id:'r1',layer:'STORY',enemies:[{hp:5},{hp:3}]};
-  function showDeath(){__c.death++;} function completeRegion(){__c.complete++;} function sound(k){__c.sound.push(k);} function closePanel(){__c.close++;} function tick(){__c.tick++;room.enemies=room.enemies.filter(e=>e.hp>0);} function showSettings(){}`,Object.assign(c,{__c:calls}));
+  function stopEffects(){__c.stops=(__c.stops||0)+1;} function showDeath(){__c.death++;} function completeRegion(){__c.complete++;} function sound(k){__c.sound.push(k);} function closePanel(){__c.close++;} function tick(){__c.tick++;room.enemies=room.enemies.filter(e=>e.hp>0);} function showSettings(){}`,Object.assign(c,{__c:calls}));
  c.__STORYWORLD_WORLD_R74__={openedFor:()=>c.__doors||[]};c.__STORYWORLD_PLAY_R169__={book:()=>c.__book||[]};
+ if(collect)vm.runInContext(read('client-source/story-collect-r177.js'),c);
  vm.runInContext(src,c,{filename:'sfx-r307.js'});
- return {c,played,calls,listeners,run:s=>vm.runInContext(s,c),api:c.__STORYWORLD_SFX_R307__,flush:()=>new Promise(r=>setTimeout(r,5))};
+ return {c,played,calls,listeners,elements,timers,advance:ms=>{now+=ms;},run:s=>vm.runInContext(s,c),api:c.__STORYWORLD_SFX_R307__,flush:()=>new Promise(r=>setTimeout(r,5))};
 }
 (async()=>{
+ const regressions=[];
+ const regression=async(name,fn)=>{try{await fn();console.log('PASS',name);}catch(e){regressions.push(name+': '+e.message);console.error('FAIL',name,e.message);}};
+ for(const setting of ['settings.sound=false','settings.volume=0'])await regression(setting+' stops live R307 sources on tick',async()=>{
+  const t=boot();await t.api.play('door');assert.equal(t.played.length,1);t.run(setting+';tick();');assert.ok(t.played[0].stopped);assert.equal(t.api.inspect().active,0);
+ });
+ await regression('stopEffects stops R307 and preserves original',async()=>{const t=boot();await t.api.play('door');t.run('stopEffects();');assert.ok(t.played[0].stopped);assert.equal(t.calls.stops,1);});
+ for(const mode of ['click','automatic','hidden'])await regression('R177 '+mode+' close once and no stale note on other panel',async()=>{
+  const t=boot({},true);t.run('tick();');t.c.__book=[1];
+  t.c.__STORYWORLD_STORY_COLLECT_R177__.show({form:'note',title:'Test',text:'Test note'});t.run('tick();');await t.flush();
+  if(mode==='click')t.elements.r177Doc.onclick({target:{closest:()=>({dataset:{r182:'close'}})},stopPropagation(){}});
+  else if(mode==='automatic'){t.advance(120000);t.timers.forEach(f=>f());}
+  else t.elements.r177Doc.hidden=true;
+  assert.equal(t.elements.r177Doc.hidden,true);t.run('tick();tick();');await t.flush();
+  assert.equal(t.api.inspect().stats.byEvent.pageClose?.played,1);assert.equal(t.api.inspect().noteOpen,false);
+  t.advance(1000);t.run('closePanel();tick();');await t.flush();assert.equal(t.api.inspect().stats.byEvent.pageClose.requested,1);
+ });
+ assert.deepEqual(regressions,[],'review regressions');
  const t=boot(),A=t.api;
  const files=new Set(idx.files.map(f=>f.id));
  ok('event map: 9 events, each file exists in index.json, every applied file is used',Object.keys(A.EVENTS).length===9&&Object.values(A.EVENTS).every(e=>e.files.every(f=>files.has(f)))&&idx.files.filter(f=>f.applied).every(f=>Object.values(A.EVENTS).some(e=>e.files.includes(f.id))&&f.event in A.EVENTS));
@@ -46,7 +65,7 @@ function boot(store={}){
  t.c.__doors=['d0'];t.c.__book=[1];t.run('room.enemies[0].hp=0;tick();');await t.flush();
  const ev2=A.inspect().stats.byEvent;
  ok('door opened→door, new note→page, enemy hp to 0→enemyDeath (even when the engine drops it inside tick)',ev2.door?.played===1&&ev2.page?.played===1&&ev2.enemyDeath?.played===1);
- t.run('closePanel();');await t.flush();ok('note closed→pageClose',A.inspect().stats.byEvent.pageClose?.played===1);
+ t.run('closePanel();');await t.flush();ok('collection count alone does not make unrelated panel close a note',!A.inspect().stats.byEvent.pageClose);
  ok('concurrent playback capped at 3',A.MAX===3&&A.inspect().stats.capped>0&&A.inspect().active<=3);
  const t2=boot();t2.run('audioUnlocked=false;');await t2.api.play('door');ok('nothing plays before audio unlock (mobile first gesture)',t2.played.length===0);
  t2.run('audioUnlocked=true;settings.sound=false;');await t2.api.play('door');ok('respects existing sound switch',t2.played.length===0);

@@ -50,14 +50,17 @@ const hooked={};const fail=e=>{lastError=String(e?.message||e).slice(0,160);};
 try{if(typeof showDeath==='function'){const base=showDeath;showDeath=function(...a){play('playerDeath');return base.apply(this,a);};hooked.showDeath=true;}}catch(e){fail(e);}
 try{if(typeof completeRegion==='function'){const base=completeRegion;completeRegion=function(...a){play('altar');return base.apply(this,a);};hooked.completeRegion=true;}}catch(e){fail(e);}
 try{if(typeof sound==='function'){const base=sound;sound=function(kind,...a){try{if(kind==='pickup'&&!(G('soundProfiles',{}).pickup||[]).length)play('pickup');}catch(_){}return base.call(this,kind,...a);};hooked.sound=true;}}catch(e){fail(e);}
-try{if(typeof closePanel==='function'){const base=closePanel;closePanel=function(...a){if(noteOpen){noteOpen=false;play('pageClose');}return base.apply(this,a);};hooked.closePanel=true;}}catch(e){fail(e);}
-try{if(typeof tick==='function'){const base=tick;tick=function(dt){let before=[];try{before=(room?.enemies||[]).slice();}catch(_){}const r=base.apply(this,arguments);try{watch(before);}catch(e){fail(e);}return r;};hooked.tick=true;}}catch(e){fail(e);}
+try{if(typeof stopEffects==='function'){const base=stopEffects;stopEffects=function(...a){stopAll();return base.apply(this,a);};hooked.stopEffects=true;}}catch(e){fail(e);}
+try{if(typeof closePanel==='function'){const base=closePanel;closePanel=function(...a){const r=base.apply(this,a);watchNote();return r;};hooked.closePanel=true;}}catch(e){fail(e);}
+try{if(typeof tick==='function'){const base=tick;tick=function(dt){let before=[];try{before=(room?.enemies||[]).slice();}catch(_){}const r=base.apply(this,arguments);try{const s=G('settings',{});if(!s.sound||!(s.volume>0))stopAll();watchNote();watch(before);}catch(e){fail(e);}return r;};hooked.tick=true;}}catch(e){fail(e);}
 let noteOpen=false,seenRoom=null,doorCount=0,bookCount=-1;const hpSeen=new WeakMap();
+// R177 closes its own document (including its timer), independently of closePanel.
+function watchNote(){const el=document.getElementById('r177Doc'),open=!!el&&!el.hidden;if(noteOpen&&!open){noteOpen=false;play('pageClose');}noteOpen=open;}
 function watch(before){/* before: tick 전 몹 목록 — 엔진이 죽은 몹을 tick 안에서 목록에서 빼므로 그 전 사본으로 본다 */const room=G('room',null);if(!room)return;const W=window.__STORYWORLD_WORLD_R74__,P=window.__STORYWORLD_PLAY_R169__;
  const doors=(()=>{try{return W?.openedFor?.(room.id,room.layer)?.length||0;}catch(_){return 0;}})(),book=(()=>{try{return P?.book?.()?.length??0;}catch(_){return 0;}})();
  if(room!==seenRoom){seenRoom=room;doorCount=doors;for(const e of room.enemies||[])hpSeen.set(e,e.hp);}
  else{if(doors>doorCount)play('door');doorCount=doors;let died=false;for(const e of new Set([...(before||[]),...(room.enemies||[])])){const was=hpSeen.get(e);if(was>0&&!(e.hp>0)&&!died){died=true;play('enemyDeath');}hpSeen.set(e,e.hp);}}
- if(bookCount>=0&&book>bookCount){noteOpen=true;play('page');}bookCount=book;}
+ if(bookCount>=0&&book>bookCount){play('page');}bookCount=book;}
 document.addEventListener('click',e=>{const b=e.target?.closest?.('button');if(!b)return;play(/닫기|돌아가|취소|close|back/i.test((b.id||'')+' '+(b.textContent||''))?'uiBack':'ui');},true);
 
 // ---- 설정 창: 켜기/끄기 + 효과음 크레딧 ----
@@ -71,5 +74,5 @@ try{if(typeof showSettings==='function'){const base=showSettings;hooked.showSett
  const l=document.createElement('label');l.innerHTML='<input type="checkbox" id="r307On"> CC0 효과음(문·쪽지·클릭·사망)';grid.appendChild(l);const c=l.querySelector('input');c.checked=prefs.on;c.onchange=()=>set(c.checked);
  const b=document.createElement('button');b.id='r307CreditsBtn';b.textContent='효과음 크레딧';b.onclick=credits;grid.appendChild(b);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 
-window.__STORYWORLD_SFX_R307__=Object.freeze({revision:REV,EVENTS,MAX,set,play,credits,inspect:()=>({revision:REV,prefs:{...prefs},hooked:{...hooked},stats:{...stats,byEvent:JSON.parse(JSON.stringify(stats.byEvent))},active:live.length,cached:buffers.size,audit:[...audit],lastError,runtimeApiCalls:false,listeningVerified:false})});
+window.__STORYWORLD_SFX_R307__=Object.freeze({revision:REV,EVENTS,MAX,set,play,credits,inspect:()=>({revision:REV,prefs:{...prefs},hooked:{...hooked},stats:{...stats,byEvent:JSON.parse(JSON.stringify(stats.byEvent))},active:live.length,noteOpen,cached:buffers.size,audit:[...audit],lastError,runtimeApiCalls:false,listeningVerified:false})});
 })();
