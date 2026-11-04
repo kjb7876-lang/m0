@@ -133,6 +133,22 @@ class Manifest(unittest.TestCase):
             open(p, 'wb').write(png)
             self.assertEqual(v.image_info(p), ('image/png', 1, 1, True))
 
+    def test_targets_mode_assets_in_different_dirs(self):
+        other = 'r96/runtime-text/assets/r163/pixelfx/crit-hit.webp'
+        po = os.path.join(ROOT, other)
+        m = copy.deepcopy(MAN)
+        m['expected_count'] = 2
+        b = copy.deepcopy(m['assets'][0])
+        b.update(asset_id='r163/fx/crit-hit', file='crit-hit.webp', target_path=other,
+                 bytes=os.path.getsize(po), sha256=v.sha256_file(po))
+        b.pop('format'); b.pop('sprite')
+        m['assets'].append(b)
+        errs, complete = v.validate_manifest(m, use_targets=True)
+        self.assertEqual(errs, [])
+        self.assertTrue(complete)
+        m['assets'][1]['target_path'] = '../outside.webp'
+        self.assertFalse(v.validate_manifest(m, use_targets=True)[1])
+
     def test_bad_sprite_grid(self):
         m = copy.deepcopy(MAN)
         m['assets'][0]['sprite']['cell'] = [300, 320]

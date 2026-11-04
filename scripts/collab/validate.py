@@ -3,7 +3,8 @@
 
 docs/agent-collaboration.md 의 규칙을 기계적으로 검사한다.
   python3 -I scripts/collab/validate.py task ops/tasks/SW-0001.json
-  python3 -I scripts/collab/validate.py manifest M.json --root DIR
+  python3 -I scripts/collab/validate.py manifest M.json --root DIR   # 전달 폴더 기준(file)
+  python3 -I scripts/collab/validate.py manifest M.json --targets    # 저장소 안 target_path 기준
   python3 -I scripts/collab/validate.py dispatch LEDGER.json TASK.json
   python3 -I scripts/collab/validate.py result TASK.json RESULT.json
   python3 -I scripts/collab/validate.py zip BUNDLE.zip
@@ -171,7 +172,10 @@ def image_info(path):
     return None, None, None, None
 
 
-def validate_manifest(man, root=None):
+def validate_manifest(man, root=None, use_targets=False):
+    """root: 전달 폴더(file 기준). use_targets: 저장소 안 각 자산의 target_path 로 검사(CI)."""
+    if use_targets:
+        root = ROOT
     errs, verified = [], 0
     for k in ('task_id', 'revision', 'expected_count', 'assets'):
         if k not in man:
@@ -193,7 +197,7 @@ def validate_manifest(man, root=None):
             errs.append(tag + ' sha256 형식')
         if root is None:
             continue
-        fname = str(a.get('file', ''))
+        fname = str(a.get('target_path', '') if use_targets else a.get('file', ''))
         if os.path.isabs(fname) or '..' in fname.replace('\\', '/').split('/'):
             errs.append(tag + ' 파일 경로가 전달 루트 밖(절대 경로·..)')
             continue
@@ -279,9 +283,13 @@ def main(argv):
     if cmd == 'task' and len(argv) == 3:
         errs = validate_task(_load(argv[2]), cfg)
         out.update(ok=not errs, errors=errs)
-    elif cmd == 'manifest' and len(argv) in (3, 5):
+    elif cmd == 'manifest' and len(argv) in (3, 4, 5):
         root = argv[4] if len(argv) == 5 and argv[3] == '--root' else None
-        errs, complete = validate_manifest(_load(argv[2]), root)
+        targets = len(argv) == 4 and argv[3] == '--targets'
+        if len(argv) == 4 and not targets:
+            print(__doc__)
+            return 2
+        errs, complete = validate_manifest(_load(argv[2]), root, use_targets=targets)
         out.update(ok=not errs, complete=complete, errors=errs)
     elif cmd == 'dispatch' and len(argv) == 4:
         verdict, rec = check_dispatch(_load(argv[2]), _load(argv[3]))
