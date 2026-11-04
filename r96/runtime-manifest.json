@@ -22229,8 +22229,8 @@
     },
     {
       "path": "manual-bonus-r274.js",
-      "bytes": 7297,
-      "sha256": "c4850bd8b399451a3a9df5d86fb7fba78730e586d2c79c78933ebbaaa540c9f6"
+      "bytes": 7756,
+      "sha256": "fbe4105c117bd28647703c806141a2f15fad0742ada0b563264f8aac60885697"
     },
     {
       "path": "michaela-r247.js",
@@ -22769,7 +22769,7 @@
     }
   ],
   "fileCount": 4553,
-  "totalBytes": 860871027,
+  "totalBytes": 860871486,
   "webHTMLSha256": "aee3ec86d5b47da3d9d86cd99339f457c16f152644f4fda72782084b106a5ad2",
   "largest": [
     {
