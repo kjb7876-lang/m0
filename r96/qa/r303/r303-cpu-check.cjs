@@ -68,6 +68,31 @@ ok('unloaded marker image and disabled R303 preserve the original prop',()=>{
  c.api.set({on:false});p.samongR103='back';c.drawProp(p);assert.equal(ref,p);assert.equal(c.draws[1].r74Prop,'brazier');
 });
 
+ok('R80 native hospital furniture is preserved and still reaches its existing indoor skin renderer',()=>{
+ const refs=[],c=world({draw:p=>refs.push(p)}),r=hospital();r.id='ep1a08';
+ r.props=[
+  {id:'ep1a08-prop-2',x:10,y:3.8,path:'assets/props/v290/broken_street_lamp.webp',solid:false},
+  {id:'ep1a08-prop-3',x:21,y:3.8,path:'assets/props/v290/collapsed_pillar.webp',solid:false},
+  {id:'ep1a08-prop-4',x:25.9,y:4.1,path:'assets/props/v3100/memory_archivist_statue.webp',solid:false},
+  {id:'hospital-b3-frame:door-0',x:20,y:20,hospitalDoorFrameB3:{id:'door-0'},solid:false}
+ ];
+ const before=JSON.stringify(r.props);c.room=r;c.api.apply(r);
+ assert.equal(JSON.stringify(r.props),before,'native hospital source metadata and placement must stay exact');
+ for(const p of r.props)c.drawProp(p);
+ assert.equal(refs.length,r.props.length);r.props.forEach((p,i)=>assert.equal(refs[i],p));
+});
+ok('R81 cabinet wall placement preserves its original clearance and wall-facing direction',()=>{
+ for(const radius of [.34,.8]){
+ const c=world(),r=hospital(),p={id:'r74:ep1b03:scenery:2',x:15.5,y:15.5,r74Prop:'cabinet',r81RoomNode:0,radius,solid:false};
+ r.props=[p];c.api.apply(r);assert.ok(p.r303Moved);assert.ok(!p.r303Hide);
+ const gap=Math.max(.55,radius)+.12;
+ assert.equal(c.StoryPhase1.explorationBlocked(r.exploration,p.x,p.y,gap),false);
+ assert.ok(p.r303Wall==='n'||p.r303Wall==='w');
+ assert.equal(!!p.r303Flip,p.r303Wall==='w');
+ assert.equal(p.solid,false);
+ }
+});
+
 ok('runtime copy matches source; loaded once right before mobile-perf-r298; verify list, pages.yml, manifest',()=>{
  assert.equal(read('runtime-text/props-fit-r303.js'),src);const idx=read('runtime-text/index.html');
  assert.equal(idx.split('"./props-fit-r303.js"').length,2);assert.ok(idx.indexOf('"./props-fit-r303.js"')<idx.indexOf('"./combat-r118.js"'));

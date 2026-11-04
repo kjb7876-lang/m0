@@ -29,8 +29,10 @@ const WALL_ART=/r80-(026|029|031|057|068|078|144|148)\.webp|cabinet|locker|shelf
 const R74_OUT=new Set(['statue','well','obelisk','ash-tree','pine','stump','ferns']);
 const FURN={school:['workbench','cabinet'],hospital:['empty-bed','cabinet'],domestic:['cabinet','empty-bed'],other:['cabinet','crate']};
 const artOf=p=>String(p?.r81NativeSkin?.path||p?.path||p?.key||p?.r74Prop||'');
+// R80 already renders these preserved hospital source objects with indoor furniture skins.
+const nativeHospital=p=>!!p&&(!!p.hospitalDoorFrameB3||/^ep1a08-prop-[1-8]$/.test(String(p.id||'')));
 // 손대지 않는 것: 문·벽·NPC·목표·단서·진술·기록·상자·사몽 기능(저장 등불·출구·단상)·상호작용·충돌 소품.
-function locked(p){return !p||typeof p!=='object'||p.interactive||p.r74Door||p.r81WardDoor||p.terrainWall||p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson||p.r115Clue||p.r115Stmt!=null||p.r105Record||p.samongR103||p.objective||p.solid===true||/objective|chest/i.test(String(p.id||''));}
+function locked(p){return !p||typeof p!=='object'||nativeHospital(p)||p.interactive||p.r74Door||p.r81WardDoor||p.terrainWall||p.r75NPC||p.r75NarrativeNPC||p.r75FortPerson||p.r115Clue||p.r115Stmt!=null||p.r105Record||p.samongR103||p.objective||p.solid===true||/objective|chest/i.test(String(p.id||''));}
 // 바닥 장식으로 다루는 묶음(다른 모듈이 자리를 따로 정한 R123·R117·R138·R161·R105 는 맡기지 않는다)
 const isScenery=p=>!!p&&(/:scenery:/.test(String(p.id||''))||!!p.r80Dressing||/^[a-z0-9]+-prop-\d+$/i.test(String(p.id||'')));
 
@@ -81,9 +83,11 @@ function apply(r){if(!on||!r||!Array.isArray(r.props))return null;const L=r.expl
   for(const p of r.props){if(locked(p)||p.r303Hide||p.r74Prop!=='cabinet'||p.r81NativeSkin||!Number.isFinite(p.x+p.y))continue;if(p.r303Wall||/:g\d+:/.test(String(p.id||'')))continue;/* 사몽 격자(신발장 줄 등)는 설계된 배치 */
    const dw=wallDist(L,p.x,p.y,-1,0),dn=wallDist(L,p.x,p.y,0,-1);if(dw===Infinity&&dn===Infinity&&freeAt(L,p.x,p.y)===null)continue;
    const cand=[];if(dn<=16)cand.push({side:'n',d:dn});if(dw<=16)cand.push({side:'w',d:dw});cand.sort((a,b)=>a.d-b.d||(a.side<b.side?-1:1));
+   // R81 placements retain their original radius + wall margin when snapped.
+   const clearance=p.r81RoomNode!==undefined?Math.max(.55,Number(p.radius)||0)+.12:.3,inset=Math.max(.42,clearance+.05);
    let placed=false;for(const c of cand){const cx=Math.floor(p.x)+.5,cy=Math.floor(p.y)+.5;
-    for(const s of [0,1,-1,2,-2]){let x,y;if(c.side==='n'){x=cx+s;y=Math.floor(p.y)-c.d+1+.42;}else{x=Math.floor(p.x)-c.d+1+.42;y=cy+s;}
-     if(freeAt(L,x,y,.3)!==true||near(avoid,x,y))continue;
+    for(const s of [0,1,-1,2,-2]){let x,y;if(c.side==='n'){x=cx+s;y=Math.floor(p.y)-c.d+1+inset;}else{x=Math.floor(p.x)-c.d+1+inset;y=cy+s;}
+     if(freeAt(L,x,y,clearance)!==true||near(avoid,x,y))continue;
      if(c.side==='n'&&wallDist(L,x,y,0,-1,1)!==1)continue;if(c.side==='w'&&wallDist(L,x,y,-1,0,1)!==1)continue;
      if(r.props.some(q=>q!==p&&q&&!q.r303Hide&&Number.isFinite(q.x+q.y)&&Math.hypot(q.x-x,q.y-y)<.9))continue;
      if(Math.hypot(p.x-x,p.y-y)>.05){p.r303Moved={x:p.x,y:p.y};p.x=x;p.y=y;rep.snapped++;}
