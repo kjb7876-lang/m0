@@ -74,5 +74,6 @@ function boot(){const audios=[];class Audio{constructor(){this.currentTime=0;thi
  // 9. 스크립트 태그
  const idx=read('runtime-text/index.html');ok('script tag right before mobile-perf-r298',idx.includes('<script src="./bgm-map-r308.js"></script><script src="./mobile-perf-r298.js"></script>')&&idx.indexOf('bgm-classical-r195.js')<idx.indexOf('bgm-map-r308.js'));
  ok('built copy matches source',read('runtime-text/bgm-map-r308.js')===src);
+ require('child_process').execFileSync(process.execPath,['--test',path.join(__dirname,'r308-review-regression.cjs')],{stdio:'inherit'});
  console.log('R308 CPU check passed:',n,'checks');
 })().catch(e=>{console.error(e);process.exit(1);});

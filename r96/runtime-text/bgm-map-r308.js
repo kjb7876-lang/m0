@@ -46,6 +46,8 @@ function crossTo(id,at,dur){const to=decks.find(d=>d!==cur?.deck)||decks[0];
 function loopNow(){if(!cur)return;stats.loops++;note('loop',{track:cur.track,zone:cur.zone});memory.delete(cur.track);const to=crossTo(cur.track,0,XF);cur={...cur,deck:to};}
 function enterMap(sel){/* 맵에 들어올 때 한 번만 부른다 */
  if(cur&&cur.track===sel.track){stats.continued++;note('continue',{zone:sel.zone,track:sel.track,from:cur.zone,time:+cur.deck.el.currentTime.toFixed(2)});cur={...cur,zone:sel.zone,episode:sel.episode,role:sel.role};return;}
+ // A→B→A can return while A is still fading out; capture its latest position before choosing the resume offset.
+ if(fade&&fade.from.id===sel.track)remember(fade.from);
  const m=memory.get(sel.track),at=m&&Date.now()-m.at<RESUME_MS?m.time:0;if(at)stats.resumes++;
  const to=crossTo(sel.track,at,MAPF);stats.mapSwitches++;note('switch',{zone:sel.zone,track:sel.track,from:cur?.track||null,at:+at.toFixed?.(2)||0});
  cur={deck:to,track:sel.track,zone:sel.zone,episode:sel.episode,role:sel.role};announce(sel.track);}
@@ -75,7 +77,7 @@ function quiet(base,self,args){const m=settings.music;try{settings.music=false;b
 try{if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){
   if(!enabled()){if(cur)stopAll();stats.delegated++;return base.apply(this,a);}
   let ok=false;try{ok=tick()!==false;}catch(e){fail(e);}
-  if(!ok||failed.has(cur?.track)){if(cur&&failed.has(cur.track))stopAll();stats.delegated++;return base.apply(this,a);}
+  if(!ok||failed.has(cur?.track)){stopAll();stats.delegated++;return base.apply(this,a);}
   try{quiet(base,this,a);}catch(e){fail(e);}};}}catch(e){fail(e);}
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseAll();});
 
