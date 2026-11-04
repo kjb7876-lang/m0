@@ -3831,7 +3831,29 @@
     "assets/r308/bgm/chopin-prelude-45.ogg",
     "assets/r308/bgm/index.json",
     "assets/r308/bgm/mozart-k421.ogg",
-    "props-fit-r303.js"
+    "props-fit-r303.js",
+    "env-props-r299.js",
+    "assets/r299/arch.webp",
+    "assets/r299/bed.webp",
+    "assets/r299/blood-dragged.webp",
+    "assets/r299/blood-dried.webp",
+    "assets/r299/candles.webp",
+    "assets/r299/cart.webp",
+    "assets/r299/chained-pillar.webp",
+    "assets/r299/diary.webp",
+    "assets/r299/doll.webp",
+    "assets/r299/hexagram.webp",
+    "assets/r299/index.json",
+    "assets/r299/mirror.webp",
+    "assets/r299/obelisk.webp",
+    "assets/r299/papers.webp",
+    "assets/r299/prayer-stand.webp",
+    "assets/r299/seal-plank.webp",
+    "assets/r299/soot.webp",
+    "assets/r299/statue.webp",
+    "assets/r299/stone-cracked.webp",
+    "assets/r299/suitcase.webp",
+    "assets/r299/tree.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -4906,5 +4928,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "00d716e02efdbfb4aaef10095f0140473ac5238bebaa99fb24a3aa9b4aff4e30"
+  "runtimeManifestSHA256": "d36890ff6fbc198c3846d2124f99038b1031a1844390f467b330c1d6439c10ec"
 }
