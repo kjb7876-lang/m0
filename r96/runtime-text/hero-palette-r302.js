@@ -13,7 +13,7 @@
 //     판정은 팔레트 값 + 부른 파일로 한 번 하고 기억한다(스택은 처음 한 번만 읽음).
 //  ③ R163 pixelfx play·frameAt: 영웅 이펙트 파일에서 부르면 tint {a:고유색, b:보조색} 을 넣는다(R175 물들이기 그대로 씀).
 //  ④ 엔진 효과(slash·sigil·burst·link·storySourceSkill·pxfSprite·e568HeroImpact): 영웅 fx 호출, 영웅 그림 경로(assets/vfx/heroes·-player-atlas),
-//     영웅 동작(basicAttack·blink·special·ego) 뒤 .6초 안에 생긴 것은 그릴 때 그림을 영웅 2색 기울기로 칠한 정적 사본으로 바꿔 그린다(ctx.filter 안 씀). 문자열 색(e.color)도 2색.
+//     명시된 영웅 소유 정보가 있는 것은 그릴 때 그림을 영웅 2색 기울기로 칠한 정적 사본으로 바꿔 그린다(ctx.filter 안 씀). 문자열 색(e.color)도 2색.
 //     영웅 띠가 도는 동안 그 영웅의 burst·pxfSprite 섬광은 알파 .45, 0.4초에 2개까지.
 //  ⑤ 영웅 전용 그림 경로(HERO_ASSET: R108 eden·R106 fx·v31307 hero-impacts·r130 영웅 EGO·r225)를 그릴 때도 같은 사본.
 //  미카엘라: 그림만 재채색(스킬 구조는 그대로).
@@ -72,9 +72,18 @@ function wrapSP(){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S||S.r302||S
  window.__STORYWORLD_FX_SPRITES_R106__=Object.freeze(W);}
 // ---- ③ pixelfx tint ---------------------------------------------------------------------
 let PX0=null;
-function heroCall(stack){const f=callerFile(stack);return !!f&&(HERO_FILES.has(f)||THREAD_FILES.has(f))||HERO_FN.test(String(stack));}
+function heroCall(stack){const f=callerFile(stack);
+ // R178 also draws enemy tower destruction; only its hero action paths qualify.
+ if(f==='effects-r178')return /at (?:Object\.)?(?:specialFx|special|ego)\b/.test(String(stack));
+ return f?HERO_FILES.has(f)||THREAD_FILES.has(f):HERO_FN.test(String(stack));}
+// Explicit non-hero ownership wins over caller/asset heuristics.
+function ownership(o,h){if(o?.enemy)return false;
+ const values=[o?.sourceHero,o?.owner,o?.source,o?.hero].filter(v=>v!=null);
+ if(!values.length)return null;
+ return values.every(v=>v===h||v==='hero'||v==='player'||v===player);}
+function isHero(o,h,stack){const own=ownership(o,h);return own===null?heroCall(stack):own;}
 function wrapPX(){const X=window.__STORYWORLD_PIXELFX_R163__;if(!X||X.r302||X===PX0)return;PX0=X;
- const tint=(o,n)=>{const h=hero();if(!on||!h||o?.tint)return o;if(!heroCall(new Error().stack))return o;stats.pixelfx++;const C=PALETTE[h],r={...(o||{}),tint:{a:C.main,b:C.sub}};
+ const tint=(o,n)=>{const h=hero();if(!on||!h||!isHero(o,h,new Error().stack))return o;stats.pixelfx++;const C=PALETTE[h],r={...(o||{}),tint:{a:C.main,b:C.sub}};
   if(FLASH.test(n)&&stripOn(h)){r.alpha=(r.alpha??1)*.45;r.k=(r.k||1)*.7;r.r302Flash=true;}return r;};
  window.__STORYWORLD_PIXELFX_R163__=Object.freeze({...X,r302:true,play:(n,x,y,o)=>{const t=tint(o||{},n);if(t?.r302Flash&&!flashOk())return null;return X.play(n,x,y,t);},frameAt:(n,u,x,y,o)=>X.frameAt(n,u,x,y,tint(o||{},n))});}
 // 영웅 띠(R292→R302)가 도는 동안: 그 영웅의 범용 적중 섬광(흰 burst·pixelfx hit/crit/flash)은 알파 .45·크기 .7, 0.4초에 2개까지(사용자 2026-11-04 환도 Q 흰 섬광이 띠를 덮음)
@@ -102,22 +111,20 @@ function patchCtx(c){if(!c||patched.has(c)||typeof c.drawImage!=='function')retu
    // 영웅 띠가 도는 동안 영웅 전용 그림(R106 d2s·R108 eden 'lighter' 겹침 등)은 알파 .35 — 환도 Q 에서 eden slash 6장이 더하기 합성으로 하얗게 날아가 띠를 덮던 것
    if(HERO_ASSET.test(imgPath(im))&&stripOn(h)){const ga=this.globalAlpha;this.globalAlpha=ga*.35;stats.stripDim=(stats.stripDim||0)+1;try{return base.call(this,t,...a);}finally{this.globalAlpha=ga;}}
    return base.call(this,t,...a);}return base.call(this,im,...a);};}
-// 영웅 동작(기본공격·블링크·고유기술·EGO) 뒤 .6초 안에 새로 생긴 적중·불꽃 효과는 영웅 것으로 본다(엔진이 effects 에 바로 넣는 burst·pxfSprite·e568HeroImpact 포함)
+// Only explicit ownership or hero-only assets/types identify queued effects; no action time window.
 const MARK_TYPES=new Set(['slash','sigil','burst','link','storySourceSkill','pxfSprite','e568HeroImpact']);
 const HERO_EFFECT_ASSET=/assets\/vfx\/heroes\/|-player-atlas/;
-let actionUntil=-1;const seenFx=new WeakSet();const Tm=()=>typeof time==='number'?time:0;
+const seenFx=new WeakSet();
 function markNew(){const h=on?hero():null;if(typeof effects==='undefined'||!Array.isArray(effects))return;for(const e of effects){if(!e||typeof e!=='object'||seenFx.has(e))continue;seenFx.add(e);if(!h||e.r302||!MARK_TYPES.has(e.type))continue;
-  const asset=typeof e.asset==='string'?e.asset:(e.asset?.src||e.path||'');if(e.type==='e568HeroImpact'||HERO_EFFECT_ASSET.test(asset)||Tm()<actionUntil)markHero(e,h);}}
+  const own=ownership(e,h),asset=typeof e.asset==='string'?e.asset:(e.asset?.src||e.path||'');
+  if(own===true||(own===null&&(e.type==='e568HeroImpact'||HERO_EFFECT_ASSET.test(asset))))markHero(e,h);}}
 function markHero(e,h){e.r302=h;stats.fxMarked++;if(typeof e.color==='string')e.color=mapColor(e.color,h);
  if((e.type==='burst'||e.type==='pxfSprite')&&stripOn(h)){if(flashOk())e.alpha=(e.alpha??1)*.45;else{e.alpha=0;e.life=Math.min(e.life||0,.01);}stats.flashDim=(stats.flashDim||0)+1;}}
 function mapColor(s,h){try{const S=SP0||window.__STORYWORLD_FX_SPRITES_R106__,c=S?.parseColour?.(s);if(!c)return s;const C=PALETTE[h],t=lum(c)>170?(lum(C.main)>lum(C.sub)?C.main:C.sub):(lum(C.main)>lum(C.sub)?C.sub:C.main);return'rgb('+t.join(',')+')';}catch(_){return s;}}
 try{
- for(const fn of ['basicAttack','special','blink','ego']){try{const base=globalThis[fn]??(typeof eval(fn)==='function'?eval(fn):null);if(typeof base!=='function')continue;
-   const w=function(...args){try{markNew();}catch(_){}actionUntil=Tm()+.6;return base.apply(this,args);};
-   if(fn==='basicAttack')basicAttack=w;else if(fn==='special')special=w;else if(fn==='blink')blink=w;else if(fn==='ego')ego=w;}catch(_){}}
  if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const n0=typeof effects!=='undefined'&&Array.isArray(effects)?effects.length:0,res=base.apply(this,arguments);
-  try{const h=hero();if(on&&h&&FX_TYPES.has(type)){const o=opt||{};let mine=o.sourceHero?o.sourceHero===h:false;if(!mine&&!o.sourceHero&&!o.enemy)mine=heroCall(new Error().stack);
-    if(mine)for(let i=effects.length-1;i>=Math.max(0,n0-1);i--){const e=effects[i];if(e&&e.type===type&&!e.r302){seenFx.add(e);markHero(e,h);break;}}}}catch(err){fail(err);}return res;};}
+  try{const h=hero();if(on&&h&&FX_TYPES.has(type)){const mine=isHero(opt||{},h,new Error().stack);
+    if(mine)for(let i=effects.length-1;i>=n0;i--){const e=effects[i];if(e&&e.type===type&&!e.r302&&ownership(e,h)!==false){seenFx.add(e);markHero(e,h);break;}}}}catch(err){fail(err);}return res;};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){try{patchCtx(ctx);wrapSP();wrapPX();}catch(_){}if(e&&e.r302&&on){heroDraw++;try{return base.apply(this,[e,...a]);}finally{heroDraw--;}}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){try{wrapSP();wrapPX();if(typeof ctx!=='undefined')patchCtx(ctx);}catch(e){fail(e);}const r=base.apply(this,a);try{markNew();}catch(e){fail(e);}return r;};}
 }catch(e){fail(e);}

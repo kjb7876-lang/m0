@@ -38,7 +38,7 @@ ok(PAL.neon.main.join()==='62,230,193'&&PAL.neon.name==='민트','neon mint #3EE
 // ④ 가짜 엔진
 function engine(){const g={console,Math,JSON,Object,Array,Map,Set,WeakMap,WeakSet,String,Number,Error,RegExp,Promise,performance:{now:()=>0}};g.window=g;g.globalThis=g;
  g.localStorage={s:{},getItem(k){return this.s[k]??null;},setItem(k,v){this.s[k]=v;}};g.document={createElement:()=>({getContext:()=>null})};
- const seen=[];g.readyImage=p=>{seen.push(p);return null;};g.ensureImages=l=>{seen.push(...l);};g.time=0;g.basicAttack=function(){g.effects.push({type:'burst',x:1,y:1,life:.2});g.effects.push({type:'enemyBurnDeath',x:1,y:1});};g.effects=[];g.fx=(type,x,y,o)=>{g.effects.push({type,x,y,...(o||{})});};g.drawEffect=()=>{};g.tick=()=>{};
+ const seen=[];g.readyImage=p=>{seen.push(p);return null;};g.ensureImages=l=>{seen.push(...l);};g.time=0;g.basicAttack=function(){g.effects.push({type:'burst',owner:'hero',x:1,y:1,life:.2});g.effects.push({type:'enemyBurnDeath',x:1,y:1});};g.effects=[];g.fx=(type,x,y,o)=>{g.effects.push({type,x,y,...(o||{})});};g.drawEffect=()=>{};g.tick=()=>{};
  g.player={hero:'neon',x:0,y:0};const calls=[];
  const pal=(a,b)=>{if(a&&a.a&&a.b)return a;return{a:a.slice(),b:(b||a).slice()};};
  g.__STORYWORLD_FX_SPRITES_R106__=Object.freeze({pal,draw:(n,F)=>{calls.push(pal(F));return true;},along:(n,F)=>{calls.push(pal(F));return true;},poly:F=>{calls.push(pal(F));return true;},warm(){},ready:()=>true,on:()=>true,parseColour:s=>[255,255,255]});
@@ -57,15 +57,15 @@ const run=(E,file,code)=>vm.runInContext(code,E.g,{filename:'/x/'+file+'.js'});
   ok([E.calls[1].a,E.calls[1].b].every(c=>c.join()===PAL[h].main.join()||c.join()==='226,232,242'),'silver thread = main + silver '+h);
   E.calls.length=0;run(E,'mob-motion-r286',"__STORYWORLD_FX_SPRITES_R106__.draw('glow',{a:[70,6,10],b:[220,70,52]},0,0);");
   ok(E.calls[0].a.join()==='70,6,10'&&E.calls[0].b.join()==='220,70,52','enemy file colours untouched '+h);
-  E.px.length=0;run(E,'effects-r178',"__STORYWORLD_PIXELFX_R163__.play('pvfx-electric-impact',0,0,{k:1});");run(E,'samong-r161',"__STORYWORLD_PIXELFX_R163__.play('mob-x',0,0,{k:1});");
+  E.px.length=0;run(E,'effects-r178',"function special(){__STORYWORLD_PIXELFX_R163__.play('pvfx-electric-impact',0,0,{k:1});} special();");run(E,'samong-r161',"__STORYWORLD_PIXELFX_R163__.play('mob-x',0,0,{k:1});");
   ok(E.px[0].tint&&E.px[0].tint.a.join()===PAL[h].main.join()&&E.px[0].tint.b.join()===PAL[h].sub.join(),'hero pixelfx tinted '+h);ok(!E.px[1].tint,'enemy pixelfx not tinted '+h);}
  // 끄기
  E.g.player.hero='neon';P.set(false);E.calls.length=0;run(E,'skills-r209',"__STORYWORLD_FX_SPRITES_R106__.draw('glow',{a:[40,170,176],b:[170,250,240]},0,0);");ok(E.calls[0].a.join()==='40,170,176','off restores original');
  E.seen.length=0;E.g.readyImage('assets/r292/fx/neon/basic.webp');ok(E.seen[0]==='assets/r292/fx/neon/basic.webp','off keeps R292 path');}
 {const E=engine(),P=E.g.__STORYWORLD_HERO_PALETTE_R302__;E.g.player.hero='hwando';E.g.effects.push({type:'burst',x:0,y:0,life:.2});E.g.time=5;E.g.tick();
- ok(!E.g.effects[0].r302,'burst outside hero action window not marked (enemy)');E.g.basicAttack();E.g.tick();
- ok(E.g.effects[1].r302==='hwando'&&!E.g.effects[2].r302,'burst made in hero action window marked as hero; other types not');
- E.g.time=6;E.g.effects.push({type:'burst',x:0,y:0});E.g.effects.push({type:'e568HeroImpact',x:0,y:0});E.g.tick();ok(!E.g.effects[3].r302&&E.g.effects[4].r302==='hwando','window closes after .6s; hero impact type always hero');
+ ok(!E.g.effects[0].r302,'unowned burst not marked');E.g.basicAttack();E.g.tick();
+ ok(E.g.effects[1].r302==='hwando'&&!E.g.effects[2].r302,'explicitly hero-owned burst marked; other types not');
+ E.g.time=6;E.g.effects.push({type:'burst',x:0,y:0});E.g.effects.push({type:'e568HeroImpact',x:0,y:0});E.g.tick();ok(!E.g.effects[3].r302&&E.g.effects[4].r302==='hwando','unowned burst stays unchanged; hero-only impact type marked');
  for(const h of Object.keys(PAL)){const L=P.rampOf(h),p=PAL[h],cols=[];for(let x=0;x<256;x++)cols.push([L[x*3],L[x*3+1],L[x*3+2]]);
   const onLine=(c,a,b)=>{for(let t=0;t<=1.0001;t+=.002){if([0,1,2].every(i=>Math.abs(a[i]+(b[i]-a[i])*t-c[i])<=1.5))return true;}return false;};
   const[d,m]=lum(p.main)>lum(p.sub)?[p.sub,p.main]:[p.main,p.sub];const D=d.map(v=>v*.28),Mx=m.map(v=>v+(255-v)*.5);
@@ -78,3 +78,5 @@ ok(fs.readFileSync(path.join(ROOT,'scripts/verify-r96-public.py'),'utf8').includ
 ok(fs.readFileSync(path.join(ROOT,'.github/workflows/pages.yml'),'utf8').includes('node r96/qa/r302/r302-cpu-check.cjs'),'CI step');
 const inputs=fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8');ok(inputs.includes('hero-palette-r302.js')&&inputs.includes('assets/r302/fx/neon/basic.webp'),'runtime inputs');
 console.log('R302 CPU check: '+n+' checks passed');
+
+require('./review-regression.cjs');
