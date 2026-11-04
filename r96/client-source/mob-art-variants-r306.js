@@ -46,15 +46,16 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  const coop=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();if(coop&&coop!=='off')return base.apply(this,[e,...args]);
  const row=rowFor(e);if(!row){stats.unknown++;return base.apply(this,[e,...args]);}const im=image(row.pixel.path);if(!im){stats.waiting++;return base.apply(this,[e,...args]);}
  const c=typeof ctx!=='undefined'?ctx:null;if(!c?.drawImage)return base.apply(this,[e,...args]);
- const original=c.drawImage,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),outer=c.getTransform?.(),fr=cell(e);let replaced=false;
+ const original=c.drawImage,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),outer=c.getTransform?.();let replaced=false;
  c.drawImage=function(source,...a){const path=clean(source?.__path||source?.src),paths=[...(row.paths||[]),e.path,e.rc146BodyFrame?.path,...Object.values(e.profile?.frames||{}).map(f=>f?.path)].filter(Boolean).map(clean);
   if(!path||!paths.includes(path))return original.call(this,source,...a);
   if(replaced)return;if(a.length!==8&&a.length!==4&&a.length!==2)return original.call(this,source,...a);
   const s=row.pixel,f=frameForPath(e,row,path,a),sw=a.length===8?a[2]:(source.naturalWidth||source.width),sh=a.length===8?a[3]:(source.naturalHeight||source.height);
   const d=a.length===8?a.slice(4):a.length===4?a:[...a,sw,sh];if(!(sw>0&&sh>0&&d[2]>0&&d[3]>0))return original.call(this,source,...a);
   const pivot=f?.pivot||[sw*.5,sh*.96],body=f?.visibleHeight||sh,k=d[3]*body/sh/Math.max(1,s.body),x=d[0]+d[2]*pivot[0]/sw,y=d[1]+d[3]*pivot[1]/sh;
+  const fr=cell(e); // R286 has now applied its temporary attack/movement pose.
   replaced=true;try{paintShadow(e,s,im,fr,this,outer);}catch(err){fail(err);}
-  const smooth=this.imageSmoothingEnabled;this.imageSmoothingEnabled=false;try{stats.replaced++;return original.call(this,im,fr%s.cols*s.cell[0],Math.floor(fr/s.cols)*s.cell[1],...s.cell,x-s.pivot[0]*k,y-s.pivot[1]*k,s.cell[0]*k,s.cell[1]*k);}finally{this.imageSmoothingEnabled=smooth;}
+  const smooth=this.imageSmoothingEnabled;this.imageSmoothingEnabled=false;try{stats.replaced++;const q=[fr%s.cols*s.cell[0],Math.floor(fr/s.cols)*s.cell[1],...s.cell,x-s.pivot[0]*k,y-s.pivot[1]*k,s.cell[0]*k,s.cell[1]*k];const result=original.call(this,im,...q);window.__STORYWORLD_HIT_CENTER_R259__?.bodyDrawn?.(e,im,q,this.getTransform?.());return result;}finally{this.imageSmoothingEnabled=smooth;}
  };
  try{return base.apply(this,[e,...args]);}finally{if(own)c.drawImage=original;else delete c.drawImage;if(!replaced)stats.unmatched++;}
 };}

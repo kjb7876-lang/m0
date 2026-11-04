@@ -10,6 +10,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_HIT_CENTER_R259__)return;
 const REV='R259-hit-center-1',KEY='storyworld.r259.hitCenter',NEAR=.15;
+let bodyRecorder=null;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={measured:0,scans:0,moved:0,aimed:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const now=()=>typeof performance!=='undefined'?performance.now()/1000:0;
@@ -29,12 +30,15 @@ function record(e,best){const{img,sx,sy,sw,sh,dx,dy,dw,dh,T}=best;const b=opaque
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
  if(!on||!e||typeof ctx==='undefined'||typeof ctx?.getTransform!=='function'||typeof ctx?.drawImage!=='function')return base.apply(this,[e,...a]);
  const t=typeof time==='number'?time:0;if(t!==frameT){frameT=t;budget=6;}
+ const priorRecorder=bodyRecorder;
  const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage;let best=null,bh=0;
+ // A later art overlay can replace the candidate with its actual body draw.
+ bodyRecorder=(actor,img,q,T)=>{if(actor!==e||q.length!==8)return;best={img,sx:q[0],sy:q[1],sw:q[2],sh:q[3],dx:q[4],dy:q[5],dw:q[6],dh:q[7],T};bh=Infinity;};
  c.drawImage=function(img,...q){try{if(!SKIP.test(srcOf(img))){const T=c.getTransform();
    if(q.length===8){const h=Math.abs(q[7]*T.d)+Math.abs(q[7]*T.c);if(h>bh){bh=h;best={img,sx:q[0],sy:q[1],sw:q[2],sh:q[3],dx:q[4],dy:q[5],dw:q[6],dh:q[7],T};}}
    else if(q.length===4&&img){const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,h=Math.abs(q[3]*T.d);if(h>bh&&W&&H){bh=h;best={img,sx:0,sy:0,sw:W,sh:H,dx:q[0],dy:q[1],dw:q[2],dh:q[3],T};}}}}catch(_){}
   return prev.call(this,img,...q);};
- try{return base.apply(this,[e,...a]);}finally{if(own)c.drawImage=prev;else delete c.drawImage;if(best)try{record(e,best);}catch(err){fail(err);}}};}
+ try{return base.apply(this,[e,...a]);}finally{bodyRecorder=priorRecorder;if(own)c.drawImage=prev;else delete c.drawImage;if(best)try{record(e,best);}catch(err){fail(err);}}};}
 function centreOf(e){if(!on||!e)return null;const v=VC.get(e);if(!v||now()-v.t>.6)return null;return v;}
 const anyCentre=e=>{const v=centreOf(e);if(v)return v;try{return window.__STORYWORLD_PLAY_R115__?.centreOf?.(e)||null;}catch(_){return null;}};// 이 측정이 없으면 R115 측정
 function enemyAt(x,y){try{for(const e of (typeof room==='object'&&room?.enemies)||[])if(e&&e.hp>0&&Math.abs(e.x-x)<NEAR&&Math.abs(e.y-y)<NEAR)return e;}catch(_){}return null;}
@@ -51,5 +55,5 @@ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,.
 // 기술 끝점: 발밑(tx,ty)을 겨눈 점 → 그 적 그림 가운데. lift 는 그 효과가 원래 쓰던 높이(px, 발 위).
 function aim(x,y,lift=0){const q=typeof project==='function'?project(x,y):{x:0,y:0};try{const e=on&&enemyAt(x,y),v=e&&anyCentre(e);if(v){stats.aimed++;return {x:v.cx,y:v.cy+lift};}}catch(err){fail(err);}return q;}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_HIT_CENTER_R259__=Object.freeze({revision:REV,set,centreOf,aim,enemyAt,inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
+window.__STORYWORLD_HIT_CENTER_R259__=Object.freeze({revision:REV,set,centreOf,aim,enemyAt,bodyDrawn:(e,img,q,T)=>{if(on&&T)bodyRecorder?.(e,img,q,T);},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();
