@@ -51,6 +51,8 @@ jobs:
           r=json.load(open('r96/qa/r96/status-native-results.json'))
           assert len(r['checks'])==24 and all(v['passed'] for v in r['checks'])
           PY
+      - name: R300 light pools, low fog, motes and hero footing budgets
+        run: node r96/qa/r300/r300-cpu-check.cjs
       - name: R298 mobile offscreen image recording and snapshot savings
         run: node r96/qa/r298/mobile-perf-cpu-check.cjs
       - name: R103 사몽 loop, maze connectivity, growth costs and 777 prescriptions
