@@ -9,7 +9,6 @@ from pathlib import Path
 from PIL import Image
 src=Path(sys.argv[1]);zipf=Path(sys.argv[2]);src2=Path(sys.argv[3]);zip2=Path(sys.argv[4]);out=Path(sys.argv[5] if len(sys.argv)>5 else 'r96/runtime-text/assets/r299');out.mkdir(parents=True,exist_ok=True)
 sha=lambda b:hashlib.sha256(b).hexdigest();A,PAD=16,6
-ZIP_ID='1R4W6bzXd8HM_W16fktWet2PPTAm6Eox4';ZIP2_ID='1ijNTXW65iqq2GpKF_YKJSS0f6YN6nRme';MANIFEST2_ID='1jrSNpb_degAvG8l3Afh1jwljAnb7STfQ';MANIFEST_ID='1Rs446LCshoVylslSXYp1PIShQHuwsOS9'
 # id: (원본 파일, 종류, 긴 변, 쓰는 곳)
 PASS={
  'blood-dried':('dried_blood_decal_v1.png','decal',256,'바닥 데칼 — 병원·사몽 계열 바닥, 낮은 불투명도'),
@@ -53,7 +52,7 @@ man=json.loads((src/'manifest.json').read_text());by={a['file']:a for a in man['
 for f,a in by.items():
   b=(src/f).read_bytes();assert sha(b)==a['sha256'] and len(b)==a['bytes'],(f,'sha/size mismatch')
 assert set(by)=={v[0] for v in PASS.values()}|set(HELD),'manifest/pass/held mismatch'
-idx={'revision':'R299','batch':'SW-env14_batch01_v1','driveZip':'SW-env14_batch01_v1.zip','driveId':ZIP_ID,'manifestDriveId':MANIFEST_ID,'zipSHA256':sha(zipf.read_bytes()),
+idx={'revision':'R299','batch':'SW-env14_batch01_v1','zipSHA256':sha(zipf.read_bytes()),
  'manifestStatus':man.get('status'),'note':'dots 표기: 검토 후보·자동 적용 금지·최종 아트 아님. 아래 applied 는 R299 검수 통과분만.',
  'method':'alpha bbox (alpha>=16) + pad 6, long side decal 256 / prop 192 / big 384, WebP q92 alpha 100','items':{},'held':{}}
 for k,(f,kind,mx,use) in PASS.items():
@@ -70,7 +69,7 @@ man2=json.loads((src2/'manifest.json').read_text());by2={a['file']:a for a in ma
 for f,a in by2.items():
   b=(src2/f).read_bytes();assert sha(b)==a['sha256'] and len(b)==a['bytes'],(f,'v2 sha/size mismatch')
 assert set(by2)=={v[0] for v in PASS2.values()}|set(HELD2)
-idx['v2']={'batch':'SW-env14_batch01_v2','driveZip':'SW-env14_batch01_v2.zip','driveId':ZIP2_ID,'manifestDriveId':MANIFEST2_ID,'zipSHA256':sha(zip2.read_bytes()),'manifestStatus':man2.get('status')}
+idx['v2']={'batch':'SW-env14_batch01_v2','zipSHA256':sha(zip2.read_bytes()),'manifestStatus':man2.get('status')}
 for k,(f,kind,mx,use) in PASS2.items():
   a=by2[f];im=Image.open(src2/f).convert('RGBA');m=im.split()[3].point(lambda v:255 if v>=A else 0);bb=m.getbbox()
   bb=(max(0,bb[0]-PAD),max(0,bb[1]-PAD),min(im.width,bb[2]+PAD),min(im.height,bb[3]+PAD));im=im.crop(bb)

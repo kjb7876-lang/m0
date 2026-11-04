@@ -1,9 +1,6 @@
 {
  "revision": "R299",
  "batch": "SW-env14_batch01_v1",
- "driveZip": "SW-env14_batch01_v1.zip",
- "driveId": "1R4W6bzXd8HM_W16fktWet2PPTAm6Eox4",
- "manifestDriveId": "1Rs446LCshoVylslSXYp1PIShQHuwsOS9",
  "zipSHA256": "a003202b1f8f40f0c270e0d5275fe55ed04411ca0738898b643799ec7e523649",
  "manifestStatus": "review_candidates_only_no_auto_apply",
  "note": "dots 표기: 검토 후보·자동 적용 금지·최종 아트 아님. 아래 applied 는 R299 검수 통과분만.",
@@ -550,9 +547,6 @@
  },
  "v2": {
   "batch": "SW-env14_batch01_v2",
-  "driveZip": "SW-env14_batch01_v2.zip",
-  "driveId": "1ijNTXW65iqq2GpKF_YKJSS0f6YN6nRme",
-  "manifestDriveId": "1jrSNpb_degAvG8l3Afh1jwljAnb7STfQ",
   "zipSHA256": "d0314c924ff609693cc866ed636c09e4f7af7eaff109abb2d5ca4ddbba7b076a",
   "manifestStatus": "review_candidates_only"
  }

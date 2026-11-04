@@ -74,7 +74,12 @@ function drawOwn(p){const row=readyImage(p.path);if(!row){if(typeof addImage==='
   behind=q.y>hero.y-3&&q.y-h<hero.y-15&&Math.abs(q.x-hero.x)<w*.45;
  const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(10*z,Math.min(w*.34,h*.5)));sprite(p.path,q.x,q.y,h,{alpha:behind?.36:1,flip:!!p.r299Flip,filter:typeof layer!=='undefined'&&layer==='DREAM'?'saturate(.6) brightness(.86)':'brightness(.92)'});};
  if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:p.path,alive:true},paint);else paint();stats.draws++;drawn[p.id]=(drawn[p.id]||0)+1;}
-try{if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(p?.r299){if(!on||p.visible===false)return;try{drawOwn(p);}catch(e){fail(e);}return;}return b.call(this,p,...a);};}}catch(e){fail(e);}
+function paintProp(p){if(!p?.r299)return false;if(on&&p.visible!==false)try{drawOwn(p);}catch(e){fail(e);}return true;}
+// R266 owns the early pass and duplicate suppression; register inside that guard.
+try{const perf=window.__STORYWORLD_PERF_GROUPS_R266__;
+ if(typeof perf?.registerPropRenderer==='function')perf.registerPropRenderer(paintProp);
+ else if(typeof drawProp==='function'){const b=drawProp;drawProp=function(p,...a){if(paintProp(p))return;return b.call(this,p,...a);};}
+}catch(e){fail(e);}
 // 바닥 데칼: 바닥 그림 바로 뒤, 시야 안만.
 function drawDecals(){if(!on||typeof room==='undefined'||!room?.r299Decals?.length||typeof project!='function')return;const z=typeof zoom==='number'?zoom:1,tile=typeof TILE==='number'?TILE:32,sight=window.__STORYWORLD_SIGHT24__,vw=typeof W==='number'?W:innerWidth,vh=typeof H==='number'?H:innerHeight;
  for(const d of room.r299Decals){const row=readyImage(d.path);if(!row){if(typeof addImage==='function')addImage(d.path);continue;}if(sight?.enabled&&!sight.pointVisible(d.x,d.y))continue;

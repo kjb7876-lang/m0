@@ -5,9 +5,9 @@ const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('ass
 const R=path.resolve(__dirname,'../..'),read=p=>fs.readFileSync(path.join(R,p),'utf8');
 const src=read('client-source/env-props-r299.js');let checks=0;
 const check=(n,f)=>{f();checks++;console.log('PASS '+n);};
-function world(){const store={};const c={console,Math,JSON,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setInterval:()=>0,setTimeout:()=>0,performance:{now:()=>0}};
+function world(withR266=false){const store={};const c={console,Math,JSON,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setInterval:()=>0,setTimeout:()=>0,performance:{now:()=>0}};
  c.window=c;c.images=[];c.addImage=p=>c.images.push(p);c.readyImage=()=>null;c.drawProp=p=>{c.base=(c.base||0)+1;};c.groundImage=()=>true;
- vm.createContext(c);vm.runInContext(src,c,{filename:'env-props-r299.js'});return c;}
+ vm.createContext(c);if(withR266){c.drawObjective=()=>{};vm.runInContext(read('client-source/perf-groups-r266.js'),c);}vm.runInContext(src,c,{filename:'env-props-r299.js'});return c;}
 // 40×40 바닥(넓은 방 2개 + 좁은 통로)
 function layout(style,mode='indoor'){const cells=[];for(let y=2;y<16;y++)for(let x=2;x<18;x++)cells.push([x,y]);for(let y=8;y<10;y++)for(let x=18;x<26;x++)cells.push([x,y]);for(let y=2;y<16;y++)for(let x=26;x<40;x++)cells.push([x,y]);
  return{floorCells:cells,walls:[{x:0,y:0,w:1,h:1}],worldR74:{style,mode,doors:[{x:18.5,y:9,width:2}]},entry:{x:4.5,y:4.5}};}
@@ -42,7 +42,20 @@ check('wall-mounted items sit next to missing floor on -x/-y and flip only on -y
  for(let i=0;i<200;i++){const r=room('w'+i,'clinic'),F=new Set(r.exploration.floorCells.map(c=>c[0]+','+c[1]));for(const v of A.plan(r).items){if(!A.PROP[v.name]?.wall)continue;seen++;
   const cx=Math.floor(v.x),cy=Math.floor(v.y);assert.ok(!F.has((cx-1)+','+cy)||!F.has(cx+','+(cy-1)));if(v.flip)assert.ok(!F.has(cx+','+(cy-1)));}}assert.ok(seen>0);});
 check('draw hook: non-r299 props go to base drawProp; ctx.filter has no blur/drop-shadow',()=>{c.drawProp({id:'x'});assert.equal(c.base,1);assert.ok(!/filter\s*=\s*'[^']*(blur|drop-shadow)/.test(src));assert.ok(!/(blur|drop-shadow)\(/.test(src));});
+check('R266 actorsOnTop: actual overlay order draws R299 once before actors, each frame',()=>{
+ const w=world(true),events=[];w.room={props:[{id:'r299:test',r299:'prop',path:'assets/r299/bed.webp',x:4,y:5,height:46},{id:'ordinary',x:6,y:7}]};
+ w.readyImage=()=>({image:{naturalWidth:64,naturalHeight:64}});w.project=(x,y)=>({x,y});w.player={x:0,y:0};w.ctx={};w.sprite=()=>events.push('prop');
+ for(let frame=0;frame<2;frame++){events.length=0;const before=w.base||0;w.drawObjective();events.push('actor');for(const p of w.room.props)w.drawProp(p);assert.deepEqual(events,['prop','actor']);assert.equal(w.base-before,1);}
+ w.__STORYWORLD_PERF_GROUPS_R266__.actorsOnTop(false);events.length=0;w.drawObjective();events.push('actor');w.drawProp(w.room.props[0]);assert.deepEqual(events,['actor','prop']);
+ w.__STORYWORLD_ENV_PROPS_R299__.set({on:false});events.length=0;w.drawObjective();w.drawProp(w.room.props[0]);assert.deepEqual(events,[]);
+ assert.equal(w.__STORYWORLD_ENV_PROPS_R299__.inspect().stats.errors,0);
+});
 check('script order: env-props-r299 right before mobile-perf-r298',()=>{assert.ok(/<script src="\.\/env-props-r299\.js"><\/script><script src="\.\/mobile-perf-r298\.js">/.test(read('runtime-text/index.html')));});
+check('public asset index contains zero drive-related keys at any depth',()=>{
+ const walk=o=>{if(!o||typeof o!=='object')return;for(const[k,v]of Object.entries(o)){assert.ok(!/drive|드라이브/i.test(k),'private key: '+k);walk(v);}};
+ walk(JSON.parse(read('runtime-text/assets/r299/index.json')));
+ const generator=read('../scripts/r299-env-props.py');assert.ok(!/['"][A-Za-z0-9_-]{25,44}['"]/.test(generator),'hardcoded opaque ID in generator');
+});
 check('asset index: every applied item exists with matching sha256, held list has reasons, no applied cookie',()=>{const ix=JSON.parse(read('runtime-text/assets/r299/index.json'));
  const used=new Set([...Object.keys(A.DECAL),...Object.keys(A.PROP)]);for(const k of used){const it=ix.items[k];assert.ok(it&&it.applied,k);const b=fs.readFileSync(path.join(R,'runtime-text',it.path));assert.equal(crypto.createHash('sha256').update(b).digest('hex'),it.derivedSHA256);assert.ok(b.length<80000);}
  assert.equal(Object.keys(ix.items).length,used.size);assert.equal(Object.keys(ix.items).length+Object.keys(ix.held).length-3,25+2);// v1 25 + v2 5, v2 통과 3종은 v1 보류 기록과 짝for(const[f,h]of Object.entries(ix.held))assert.ok(h.reason&&h.applied===false,f);
