@@ -13523,6 +13523,96 @@
       "sha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d"
     },
     {
+      "path": "assets/r299/arch.webp",
+      "bytes": 42342,
+      "sha256": "21c45295331c035f9c1cf3cf83fd7f9391b08dc030750558b78aebb31996aca2"
+    },
+    {
+      "path": "assets/r299/bed.webp",
+      "bytes": 16622,
+      "sha256": "8c7685a98665adea4e98a086e6496dc0fe16ed75e52b8dfa75402023c067432c"
+    },
+    {
+      "path": "assets/r299/blood-dragged.webp",
+      "bytes": 20910,
+      "sha256": "8ea1f9dc7c0305daa447b6af121d0c9b63f4eee4d2ac2a5b05e12aee597d886e"
+    },
+    {
+      "path": "assets/r299/blood-dried.webp",
+      "bytes": 21510,
+      "sha256": "7743427646cfbad1becbfac84016cc797762756c358a89b7f7647d5796b722dc"
+    },
+    {
+      "path": "assets/r299/candles.webp",
+      "bytes": 16546,
+      "sha256": "04545abbd1d8a67b492fca72fb9726f69fceddd1ff3ff40055bd3e380ab3f757"
+    },
+    {
+      "path": "assets/r299/cart.webp",
+      "bytes": 18030,
+      "sha256": "8230934e9d2eb230b6c328d33e54512a2c90e5f0c2b6bd7dd8fb76126cab788f"
+    },
+    {
+      "path": "assets/r299/chained-pillar.webp",
+      "bytes": 12598,
+      "sha256": "d0f08c83d508739ef6d9355ebcc7c5a53d4fdd0181811f5256b8c510fc39b9fd"
+    },
+    {
+      "path": "assets/r299/diary.webp",
+      "bytes": 13836,
+      "sha256": "af0bd463393aead413d6c093a67fbb903bb1e066699ba37ad75666474f3519a0"
+    },
+    {
+      "path": "assets/r299/doll.webp",
+      "bytes": 11878,
+      "sha256": "2a75acd861e2c7ac477adf922bc6ae924fe22a6c73d8a180fa84f144289f5c16"
+    },
+    {
+      "path": "assets/r299/hexagram.webp",
+      "bytes": 36854,
+      "sha256": "29227a9330c749dd0100455cd29214c340b4c996d4cb661683cd0622d0af5237"
+    },
+    {
+      "path": "assets/r299/index.json",
+      "bytes": 14042,
+      "sha256": "f8c026b40676b0f3161971a00db8c3ee50eb34b789271fcd45b4a309b7998cc9"
+    },
+    {
+      "path": "assets/r299/mirror.webp",
+      "bytes": 9926,
+      "sha256": "a04aa670d6656e343b699a1fa59488951cb1779aa32c5868d8bd74f2ec7ef198"
+    },
+    {
+      "path": "assets/r299/obelisk.webp",
+      "bytes": 21910,
+      "sha256": "a40c309e50a53b38aab4c5d8a9f6fd148c4d093378cb02d6ea13e0955869cf71"
+    },
+    {
+      "path": "assets/r299/papers.webp",
+      "bytes": 22574,
+      "sha256": "a4c4c8c80bc9bbbd0b6e36ede14f4500981728129115c6a8a587b2165d6a8006"
+    },
+    {
+      "path": "assets/r299/statue.webp",
+      "bytes": 53472,
+      "sha256": "4d5ba5ed2ce3a2de26bb8bbbdcb8fe722d96ab4a2a747a8e64f2c50854afa43e"
+    },
+    {
+      "path": "assets/r299/stone-cracked.webp",
+      "bytes": 21356,
+      "sha256": "bdd4078d6c655d577567859293a4dd14efcdf4dcddc5e7097c62203f37f0b19c"
+    },
+    {
+      "path": "assets/r299/suitcase.webp",
+      "bytes": 13128,
+      "sha256": "9e5d109b767986438bbf1075344edb230773b78fab4251e0415c6ca9fc8c304e"
+    },
+    {
+      "path": "assets/r299/tree.webp",
+      "bytes": 61242,
+      "sha256": "cdc76a956337c52edb4e0486935279a4509b388401ba030b3011b2e49aaf6965"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22158,6 +22248,11 @@
       "sha256": "577694609c82a750b62b6a970443df726e58919768f7a9dfb2a2add66a1dd133"
     },
     {
+      "path": "env-props-r299.js",
+      "bytes": 11166,
+      "sha256": "1ea577c16972fa6d8f5c60957ee71c42610d187c47f7ca91dfaf8887fec9fbdb"
+    },
+    {
       "path": "era-r191.js",
       "bytes": 4378,
       "sha256": "fb5c5aa6f554cff679e972461968048b6c736df115ac8e813e97a587169b7e85"
@@ -22339,8 +22434,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6566898,
-      "sha256": "cbc091a28baa41d7fb86b47165e3219973dd24c74d9bfaf678084495a78b1992"
+      "bytes": 6566941,
+      "sha256": "63d8a516166ed283d10d7fb498ef401f9659dd71eb5443ee1d58adcca50ba65f"
     },
     {
       "path": "intro-r140.js",
@@ -22928,9 +23023,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4585,
-  "totalBytes": 868755892,
-  "webHTMLSha256": "cbc091a28baa41d7fb86b47165e3219973dd24c74d9bfaf678084495a78b1992",
+  "fileCount": 4604,
+  "totalBytes": 869195877,
+  "webHTMLSha256": "63d8a516166ed283d10d7fb498ef401f9659dd71eb5443ee1d58adcca50ba65f",
   "largest": [
     {
       "path": "index.html",
