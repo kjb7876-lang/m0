@@ -10,7 +10,7 @@
 //     파생본은 scripts/r302-hero-palette-strips.py 가 만든다(원본 보존, assets/r302/fx/index.json 에 출처·sha256).
 //  ② R106 칠한 스프라이트(draw·along·poly·warm): 부른 파일이 영웅 이펙트 파일(HERO_FILES)이면 팔레트 {a,b} 를 영웅 2색으로 바꾼다
 //     (원래 a·b 중 어두운 쪽 → 어두운 쪽 색). 실 파일(THREAD_FILES)은 금빛 팔레트 → {고유색, 골드}, 그 밖 → {고유색, 실버}.
-//     판정은 팔레트 값 + 부른 파일로 한 번 하고 기억한다(스택은 처음 한 번만 읽음).
+//     판정은 팔레트 값 + 영웅 + 호출자 분류로 기억한다. R111은 은색실 threadSlash 경로만 실 규칙을 적용한다.
 //  ③ R163 pixelfx play·frameAt: 영웅 이펙트 파일에서 부르면 tint {a:고유색, b:보조색} 을 넣는다(R175 물들이기 그대로 씀).
 //  ④ 엔진 효과(slash·sigil·burst·link·storySourceSkill·pxfSprite·e568HeroImpact): 영웅 fx 호출, 영웅 그림 경로(assets/vfx/heroes·-player-atlas),
 //     명시된 영웅 소유 정보가 있는 것은 그릴 때 그림을 영웅 2색 기울기로 칠한 정적 사본으로 바꿔 그린다(ctx.filter 안 씀). 문자열 색(e.color)도 2색.
@@ -61,8 +61,13 @@ function mapPal(F,h,file){const S0=SP0;let P;try{P=S0.pal(F);}catch(_){return F;
  let A,B;if(THREAD_FILES.has(file)){const second=isGold(P.a)||isGold(P.b)?THREAD.gold:THREAD.silver;A=C.main;B=second;}else{A=C.main;B=C.sub;}
  // 원래 어두운 쪽 → 두 색 중 어두운 쪽
  const dark=lum(A)<=lum(B)?A:B,light=dark===A?B:A;return lum(P.a)<=lum(P.b)?S0.pal(dark,light):S0.pal(light,dark);}
-function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;let k;try{const P=SP0.pal(F);k=P.a.join()+'|'+P.b.join()+'|'+h;}catch(_){return F;}
- let d=decided.get(k);if(d===undefined){const file=callerFile(new Error().stack);d=file&&(HERO_FILES.has(file)||THREAD_FILES.has(file))?mapPal(F,h,file):null;decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
+function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;
+ const stack=new Error().stack,file=callerFile(stack);
+ // R111 also renders bosses: only its silver-thread slash is a thread caller.
+ const thread=THREAD_FILES.has(file)||(file==='play-r111'&&/at threadSlash \(.*\/play-r111\.js:/.test(String(stack)));
+ const kind=thread?'thread':HERO_FILES.has(file)?'hero':'other';
+ let k;try{const P=SP0.pal(F);k=P.a.join()+'|'+P.b.join()+'|'+h+'|'+kind;}catch(_){return F;}
+ let d=decided.get(k);if(d===undefined){d=kind==='other'?null:mapPal(F,h,thread?'hero-threads-r174':file);decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
  if(d){stats.spMapped++;return d;}return F;}
 let SP0=null;
 function wrapSP(){const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S||S.r302||S===SP0)return;SP0=S;
