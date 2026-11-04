@@ -13523,6 +13523,106 @@
       "sha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d"
     },
     {
+      "path": "assets/r302/fx/gunner/blink.webp",
+      "bytes": 36996,
+      "sha256": "335b57ea3caae0844abd19db24aa02ce195c7182566aace3975aa7b48549d3c9"
+    },
+    {
+      "path": "assets/r302/fx/gunner/e.webp",
+      "bytes": 195554,
+      "sha256": "d6c7dcfb0d18b78496321209eb0b463eb3caa8364f3a69fba78e09f39171dc42"
+    },
+    {
+      "path": "assets/r302/fx/gunner/r.webp",
+      "bytes": 683246,
+      "sha256": "508be340f321c6b461e3311fa7b7d48d20863cbdb7f11d0c3cd44f2bbdc6b9f1"
+    },
+    {
+      "path": "assets/r302/fx/gunner/w.webp",
+      "bytes": 466276,
+      "sha256": "82ab9ec959d502a74858530ea3682e8a059ec027ca1d58342d18b932f6ee4687"
+    },
+    {
+      "path": "assets/r302/fx/hwando/basic.webp",
+      "bytes": 110004,
+      "sha256": "049c5cc56bc5af75f479c78e3a39b729172f6d37484a488be1b997ee97d4a6db"
+    },
+    {
+      "path": "assets/r302/fx/hwando/blink.webp",
+      "bytes": 35396,
+      "sha256": "67592b280b1b7531fbf7c198a97ccb374d3e45206fc7ac28e6db94704e6b4d44"
+    },
+    {
+      "path": "assets/r302/fx/hwando/e.webp",
+      "bytes": 100656,
+      "sha256": "17aa193f8a67a8f91207bb8751a2bc97872c4f1221f6d5bcfdbbe7dd8459ca5e"
+    },
+    {
+      "path": "assets/r302/fx/hwando/r.webp",
+      "bytes": 346656,
+      "sha256": "af858f9496e67e0825b3c53a6e6fe0b71bd35d9e7e6a8072cd3cb4abbd5b5c27"
+    },
+    {
+      "path": "assets/r302/fx/hwando/special.webp",
+      "bytes": 197860,
+      "sha256": "7db82c62dddcf7b5ddd46072e4753230cba17d024371663cdec29a07eff67d5b"
+    },
+    {
+      "path": "assets/r302/fx/hwando/w.webp",
+      "bytes": 227400,
+      "sha256": "263244829dce5a09f7a1cdddaefca9bb7247a2cb5c48a74f952188fcb5f2b476"
+    },
+    {
+      "path": "assets/r302/fx/index.json",
+      "bytes": 20481,
+      "sha256": "d38e733f0cd7e785360593dde76db0fc6987d3771f6f94b38ac41dbd40fad531"
+    },
+    {
+      "path": "assets/r302/fx/lauren/basic.webp",
+      "bytes": 173646,
+      "sha256": "2453dab3a24f289e0a75882e2b3596e809343eb035471dc7cd57821a0f3a50d7"
+    },
+    {
+      "path": "assets/r302/fx/lauren/blink.webp",
+      "bytes": 119264,
+      "sha256": "c60a60649708b860c574359a2320645322781fc8e7652918fe54a13e4a8b3d11"
+    },
+    {
+      "path": "assets/r302/fx/neon/basic.webp",
+      "bytes": 158050,
+      "sha256": "5e1c15dbe6e3af311460834af4b92f27e56e7e2b42f66eef880bf7af38a4283b"
+    },
+    {
+      "path": "assets/r302/fx/neon/blink.webp",
+      "bytes": 56242,
+      "sha256": "749e5b3f22b8e3fe2e23cb286af485a75b84e5b31690cecde6939f1a386a95a4"
+    },
+    {
+      "path": "assets/r302/fx/neon/special.webp",
+      "bytes": 442496,
+      "sha256": "509efe2f2420b16504211bc25cac9f20d3b0e9e725bc467117b9706c68441024"
+    },
+    {
+      "path": "assets/r302/fx/neon/w.webp",
+      "bytes": 575274,
+      "sha256": "5c076d48a232e232cc08db170277b35382ac7661467dece7e74b4b096b1b88f5"
+    },
+    {
+      "path": "assets/r302/fx/seoha/basic.webp",
+      "bytes": 51022,
+      "sha256": "5f9b1296818ab7b603c6be35791a09fc8dd6b7a29be69c7a848c11adf16f1889"
+    },
+    {
+      "path": "assets/r302/fx/seoha/e.webp",
+      "bytes": 262084,
+      "sha256": "f4336cb28d7c2bcab28015648333e220d5d6ca91ecfd62688c28f281f373a013"
+    },
+    {
+      "path": "assets/r302/fx/seoha/w.webp",
+      "bytes": 577766,
+      "sha256": "18735983d9b39b16e815cdade26599391d2a578a55ba85fb9ed1177475d22259"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22253,6 +22353,11 @@
       "sha256": "c5f5d0ec3d0c19c32cd0bd5975889bd722bbd284dd0919d2247dba94d0e3c3a1"
     },
     {
+      "path": "hero-palette-r302.js",
+      "bytes": 15863,
+      "sha256": "57cf2b90c07b32a7347f3cd5161abd73c77f175a9cd9935aa0e7152bf0ad2014"
+    },
+    {
       "path": "hero-presentation-r83.js",
       "bytes": 24807,
       "sha256": "244a778f548c5d3d65a3291fa69b63f9fbda83a747a12adbc2563a76e3ab70de"
@@ -22339,8 +22444,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568261,
-      "sha256": "012a1517ca88757005d8b75b1ab48f0a637bf59369511e2247daf79229831656"
+      "bytes": 6568307,
+      "sha256": "32568a88b8d277c28e1036ba416a6343774c82fd767e43d0d05f8ac8f905a562"
     },
     {
       "path": "intro-r140.js",
@@ -22943,9 +23048,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4588,
-  "totalBytes": 868805219,
-  "webHTMLSha256": "012a1517ca88757005d8b75b1ab48f0a637bf59369511e2247daf79229831656",
+  "fileCount": 4609,
+  "totalBytes": 873657497,
+  "webHTMLSha256": "32568a88b8d277c28e1036ba416a6343774c82fd767e43d0d05f8ac8f905a562",
   "largest": [
     {
       "path": "index.html",

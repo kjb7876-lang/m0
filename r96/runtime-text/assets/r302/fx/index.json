@@ -1,0 +1,915 @@
+{
+ "revision": "R302-hero-palette-strips-1",
+ "cell": 384,
+ "reason": "사용자 2026-11-04: 영웅 이펙트는 고유색+보조색 2색만 / 네온 창끝 이펙트 교체·민트 통일",
+ "source": "R292 띠(assets/r292/fx, 원본 보존) 재채색 파생본",
+ "palette": {
+  "hwando": {
+   "main": [
+    214,
+    222,
+    234
+   ],
+   "sub": [
+    255,
+    198,
+    72
+   ]
+  },
+  "seoha": {
+   "main": [
+    120,
+    206,
+    255
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "neon": {
+   "main": [
+    62,
+    230,
+    193
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "michaela": {
+   "main": [
+    178,
+    26,
+    62
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "lauren": {
+   "main": [
+    164,
+    98,
+    255
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "hunter": {
+   "main": [
+    255,
+    96,
+    40
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "slayer": {
+   "main": [
+    222,
+    22,
+    52
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  },
+  "gunner": {
+   "main": [
+    70,
+    124,
+    255
+   ],
+   "sub": [
+    226,
+    232,
+    242
+   ]
+  }
+ },
+ "effects": {
+  "gunner": {
+   "w": {
+    "file": "gunner/w.webp",
+    "driveName": "07_gunner_Z_v1.png",
+    "sourceSha256": "1819578ac88a53195eebcb045343e1de260338fae8c7ed92f8df4126ab2a55e8",
+    "sourceBytes": 681915,
+    "sha256": "82ab9ec959d502a74858530ea3682e8a059ec027ca1d58342d18b932f6ee4687",
+    "bytes": 466276,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "radial",
+    "origin": [
+     192,
+     192
+    ],
+    "dur": 0.55,
+    "scale": 6.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "상태 정화(purify) — 영웅 둘레 고리",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/gunner/w.webp",
+    "derivedFromSha256": "9e212ab9a45da27272c3d6c57c3fc72e1002243b865f0566ef413010baa0b855",
+    "palette": {
+     "main": [
+      70,
+      124,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 246
+   },
+   "e": {
+    "file": "gunner/e.webp",
+    "driveName": "07_gunner_E_v1.png",
+    "sourceSha256": "b2a66542a4e2bcffaf8bb5c249f397dae2a43038a559ef573ed7cb84168009e1",
+    "sourceBytes": 307340,
+    "sha256": "d6c7dcfb0d18b78496321209eb0b463eb3caa8364f3a69fba78e09f39171dc42",
+    "bytes": 195554,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.45,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "팬텀 블링크(dash) — 시작점→끝점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/gunner/e.webp",
+    "derivedFromSha256": "065a29588394e0660ffbc14e59c681da2c69c2436153fade0283c35534df52d9",
+    "palette": {
+     "main": [
+      70,
+      124,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 224
+   },
+   "blink": {
+    "file": "gunner/blink.webp",
+    "driveName": "07_gunner_S_v1.png",
+    "sourceSha256": "ed68ac3c900ea7e932852c33fb7976234ffbd11b3d8e95457bb14c4382c7cee7",
+    "sourceBytes": 59509,
+    "sha256": "335b57ea3caae0844abd19db24aa02ce195c7182566aace3975aa7b48549d3c9",
+    "bytes": 36996,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.35,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "블링크 — 출발점→도착점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/gunner/blink.webp",
+    "derivedFromSha256": "3cb09025423404b55802e8fd7c79694699c6bcf02b21240dc95405e6398421bd",
+    "palette": {
+     "main": [
+      70,
+      124,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 234
+   },
+   "r": {
+    "file": "gunner/r.webp",
+    "driveName": "07_gunner_R_v2.png",
+    "sourceSha256": "b96518e71909b53dd2a31a4f658fc2a4d2d4ce0ae9183262900a168c2ad7074f",
+    "sourceBytes": 947375,
+    "sha256": "508be340f321c6b461e3311fa7b7d48d20863cbdb7f11d0c3cd44f2bbdc6b9f1",
+    "bytes": 683246,
+    "size": [
+     4608,
+     384
+    ],
+    "cell": 384,
+    "frames": 12,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 1.0,
+    "scale": 6.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "시간 지연포(delay-burst, 0.7초 뒤 폭발) — 겨눈 쪽 탄 + 끝 폭발",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/gunner/r.webp",
+    "derivedFromSha256": "f7ea0dca459fec604147ed6753a70a5e897291f96f9a7efafb59e1975d3c85b9",
+    "palette": {
+     "main": [
+      70,
+      124,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 243
+   }
+  },
+  "hwando": {
+   "basic": {
+    "file": "hwando/basic.webp",
+    "driveName": "08_hwando_A_v1.png",
+    "sourceSha256": "41cf523e553b5df5f9c33cd667a0f761510d53924e9701af121d24840ff86d29",
+    "sourceBytes": 160299,
+    "sha256": "049c5cc56bc5af75f479c78e3a39b729172f6d37484a488be1b997ee97d4a6db",
+    "bytes": 110004,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     60,
+     192
+    ],
+    "dur": 0.3,
+    "scale": 3.6,
+    "blend": "screen",
+    "fit": null,
+    "note": "기본 베기 — 칼자국이 x≈54~66 에서 시작해 기준점 60",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/basic.webp",
+    "derivedFromSha256": "9f03967d8ac473c5ba9d3b6d459d109b52204a4f66f03dc0f0367272f83ea2df",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 242
+   },
+   "blink": {
+    "file": "hwando/blink.webp",
+    "driveName": "08_hwando_S_v1.png",
+    "sourceSha256": "b88f5db1b6029f2e10c93011dedb0c867c93c467f2852e4031a2cb2cbe06b636",
+    "sourceBytes": 60671,
+    "sha256": "67592b280b1b7531fbf7c198a97ccb374d3e45206fc7ac28e6db94704e6b4d44",
+    "bytes": 35396,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.35,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "블링크 — 출발점→도착점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/blink.webp",
+    "derivedFromSha256": "f2f7ca563a755b00b8e9c3a453f5917022a0db26085f964231b7a4da3a185007",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 238
+   },
+   "special": {
+    "file": "hwando/special.webp",
+    "driveName": "08_hwando_Q_v1.png",
+    "sourceSha256": "3622ddc4ca46bfc0aa89a7758003f5a0dce146a9360a42a14010f059d89d1491",
+    "sourceBytes": 303485,
+    "sha256": "7db82c62dddcf7b5ddd46072e4753230cba17d024371663cdec29a07eff67d5b",
+    "bytes": 197860,
+    "size": [
+     3840,
+     384
+    ],
+    "cell": 384,
+    "frames": 10,
+    "anchor": "radial",
+    "origin": [
+     192,
+     192
+    ],
+    "dur": 0.6,
+    "scale": 7.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "정화 연참 — 영웅 앞 X 베기",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/special.webp",
+    "derivedFromSha256": "e2d5532a1b036e0c282a71f54f5edd37c6390a42a15747a06cff855eef5712b9",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 240
+   },
+   "w": {
+    "file": "hwando/w.webp",
+    "driveName": "08_hwando_Z_v1.png",
+    "sourceSha256": "0faf4fe698422659f914e094ffdabaab73cb6a6a7be625b17366e9db59e77275",
+    "sourceBytes": 328575,
+    "sha256": "263244829dce5a09f7a1cdddaefca9bb7247a2cb5c48a74f952188fcb5f2b476",
+    "bytes": 227400,
+    "size": [
+     3840,
+     384
+    ],
+    "cell": 384,
+    "frames": 10,
+    "anchor": "radial",
+    "origin": [
+     192,
+     192
+    ],
+    "dur": 0.6,
+    "scale": 10.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "월섬 회천(circle, 반경 3.15) — 영웅 둘레 원 베기",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/w.webp",
+    "derivedFromSha256": "7e093c4e18ec8c773d50176b67b8ed7b6bf33e93ad765b843f83ba9eb05444e4",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 241
+   },
+   "e": {
+    "file": "hwando/e.webp",
+    "driveName": "08_hwando_E_v1.png",
+    "sourceSha256": "e5836736a8c4c7a7e30b5f79ab725c232b39ca811df76e1a8d475413efd187ed",
+    "sourceBytes": 144716,
+    "sha256": "17aa193f8a67a8f91207bb8751a2bc97872c4f1221f6d5bcfdbbe7dd8459ca5e",
+    "bytes": 100656,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.45,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "백은 유영보(dash) — 시작점→끝점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/e.webp",
+    "derivedFromSha256": "8b0cee6c7d31ca3a701758fe315e7a567e07f3e67f686f71d2217c1870369820",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 245
+   },
+   "r": {
+    "file": "hwando/r.webp",
+    "driveName": "08_hwando_R_v1.png",
+    "sourceSha256": "0855196530d345aa65a04d8a3f39e9a22260195585525a69a5c3ac60fd5f9d31",
+    "sourceBytes": 472794,
+    "sha256": "af858f9496e67e0825b3c53a6e6fe0b71bd35d9e7e6a8072cd3cb4abbd5b5c27",
+    "bytes": 346656,
+    "size": [
+     4608,
+     384
+    ],
+    "cell": 384,
+    "frames": 12,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 1.0,
+    "scale": 6.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "EGO 환수검(slashes, 7파 1초) — 겨눈 쪽으로 칸을 가로지르는 베기",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/hwando/r.webp",
+    "derivedFromSha256": "0278aeff87ba1b524442d41c8607499163f8548d9a08d3314dce8c4e0af8a89a",
+    "palette": {
+     "main": [
+      214,
+      222,
+      234
+     ],
+     "sub": [
+      255,
+      198,
+      72
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 247
+   }
+  },
+  "seoha": {
+   "basic": {
+    "file": "seoha/basic.webp",
+    "driveName": "09_seoha_A_v1.png",
+    "sourceSha256": "66842e9cccfd95a558cf49e57ad5f8d066908d63d619b052dc41189f714ae4a7",
+    "sourceBytes": 80011,
+    "sha256": "5f9b1296818ab7b603c6be35791a09fc8dd6b7a29be69c7a848c11adf16f1889",
+    "bytes": 51022,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.3,
+    "scale": 4.4,
+    "blend": "screen",
+    "fit": null,
+    "note": "기본 사격 — 총구 섬광·탄도",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/seoha/basic.webp",
+    "derivedFromSha256": "cf3129dc4988034fa9b726324ad6193e65e5786a32dd2f20cfa40f36f8f2b273",
+    "palette": {
+     "main": [
+      120,
+      206,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 240
+   },
+   "w": {
+    "file": "seoha/w.webp",
+    "driveName": "09_seoha_W_v2.png",
+    "sourceSha256": "a0e594862ef47423c15dccb5bcdf3877b616c5b797b00d98d0e6130fd87f265e",
+    "sourceBytes": 945741,
+    "sha256": "18735983d9b39b16e815cdade26599391d2a578a55ba85fb9ed1177475d22259",
+    "bytes": 577766,
+    "size": [
+     3840,
+     384
+    ],
+    "cell": 384,
+    "frames": 10,
+    "anchor": "radial",
+    "origin": [
+     192,
+     192
+    ],
+    "dur": 0.6,
+    "scale": 6.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "죽은 시간 개방(haste) — 영웅 둘레(5~8칸이 약 6px 높게 그려짐, 승인 시 허용)",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/seoha/w.webp",
+    "derivedFromSha256": "469fa9917d262b47929940f1868ffbf9d573512b53ac61993de0bf83921e1f0d",
+    "palette": {
+     "main": [
+      120,
+      206,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 143
+   },
+   "e": {
+    "file": "seoha/e.webp",
+    "driveName": "09_seoha_E_v1.png",
+    "sourceSha256": "984765f6aed8191d8028a28c3a017b39ea8f2cd8936933b5d723a0908c151873",
+    "sourceBytes": 382449,
+    "sha256": "f4336cb28d7c2bcab28015648333e220d5d6ca91ecfd62688c28f281f373a013",
+    "bytes": 262084,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.45,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "카이로스의 순간(dash) — 시작점→끝점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/seoha/e.webp",
+    "derivedFromSha256": "00363392425d21711e66819d064551318857306b8fa2c926dbdb2c23da94eb92",
+    "palette": {
+     "main": [
+      120,
+      206,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 237
+   }
+  },
+  "neon": {
+   "basic": {
+    "file": "neon/basic.webp",
+    "driveName": "10_neon_A_v1.png",
+    "sourceSha256": "1e06a4eb2de09ebcf661f4090f95e21f0fff0a7eef59942b807b1569822aa1e0",
+    "sourceBytes": 344197,
+    "sha256": "5e1c15dbe6e3af311460834af4b92f27e56e7e2b42f66eef880bf7af38a4283b",
+    "bytes": 158050,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.3,
+    "scale": 3.6,
+    "blend": "screen",
+    "fit": null,
+    "note": "기본 전격 찌르기 — 외줄 번개(창끝 모임 그림 대체)",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/neon/special.webp",
+    "derivedFromSha256": "564b4bb444c7e3928cb706f7c82b737ef0dcfce441e008879869ed26bb7a4574",
+    "palette": {
+     "main": [
+      62,
+      230,
+      193
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "neon/special.webp 1~2칸 외줄 번개 → 8칸 재구성 + recolor (창끝 모임 R292 neon/basic 대체)",
+    "offPaletteColours": 0,
+    "uniqueColours": 218
+   },
+   "special": {
+    "file": "neon/special.webp",
+    "driveName": "10_neon_Q_v1.png",
+    "sourceSha256": "18181e23dd1ef363ee7e98d38a3f558503e2c4cc70b82c865032d754d4b3180a",
+    "sourceBytes": 622456,
+    "sha256": "509efe2f2420b16504211bc25cac9f20d3b0e9e725bc467117b9706c68441024",
+    "bytes": 442496,
+    "size": [
+     3840,
+     384
+    ],
+    "cell": 384,
+    "frames": 10,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.6,
+    "scale": 7.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "회로 폭주 — 겨눈 쪽 연쇄 번개",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/neon/special.webp",
+    "derivedFromSha256": "564b4bb444c7e3928cb706f7c82b737ef0dcfce441e008879869ed26bb7a4574",
+    "palette": {
+     "main": [
+      62,
+      230,
+      193
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 237
+   },
+   "blink": {
+    "file": "neon/blink.webp",
+    "driveName": "10_neon_S_v2_review.png",
+    "sourceSha256": "3cab69fab75e296ff89c6647f097ec0d6baeef0a9d1e66e3466767dbf2685c7a",
+    "sourceBytes": 89658,
+    "sha256": "749e5b3f22b8e3fe2e23cb286af485a75b84e5b31690cecde6939f1a386a95a4",
+    "bytes": 56242,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.35,
+    "scale": 4.6,
+    "blend": "screen",
+    "fit": "path",
+    "note": "블링크 — 출발점→도착점",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/neon/blink.webp",
+    "derivedFromSha256": "ba2e82f3fa829a7e4b6b590abf21473702f8faabd371d1b47eb126cd174eebc2",
+    "palette": {
+     "main": [
+      62,
+      230,
+      193
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 242
+   },
+   "w": {
+    "file": "neon/w.webp",
+    "driveName": "10_neon_W_v1.png",
+    "sourceSha256": "3c7741cee9251ce244535ee75505d2b8b460be4392218866acdf3288e4e32d8c",
+    "sourceBytes": 905806,
+    "sha256": "5c076d48a232e232cc08db170277b35382ac7661467dece7e74b4b096b1b88f5",
+    "bytes": 575274,
+    "size": [
+     3840,
+     384
+    ],
+    "cell": 384,
+    "frames": 10,
+    "anchor": "radial",
+    "origin": [
+     192,
+     290
+    ],
+    "dur": 0.6,
+    "scale": 7.0,
+    "blend": "screen",
+    "fit": null,
+    "note": "성역 수복(heal-zone, 반경 3) — 바닥 원 방벽, 그림 중심 (192,290)을 발밑에(lift 0)",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "lift": 0,
+    "derivedFrom": "assets/r292/fx/neon/w.webp",
+    "derivedFromSha256": "d26019cd02c82b45756e6926a3039f903ec579c2e160c492b71fade543138496",
+    "palette": {
+     "main": [
+      62,
+      230,
+      193
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 228
+   }
+  },
+  "lauren": {
+   "basic": {
+    "file": "lauren/basic.webp",
+    "driveName": "11_lauren_A_v1.png",
+    "sourceSha256": "cefc54f4541baa5cb516880d9148d87e005ab62797a8cb76473707b7419cb662",
+    "sourceBytes": 252342,
+    "sha256": "2453dab3a24f289e0a75882e2b3596e809343eb035471dc7cd57821a0f3a50d7",
+    "bytes": 173646,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.3,
+    "scale": 3.6,
+    "blend": "source-over",
+    "fit": null,
+    "note": "기본 마력 베기(보라·어두운 색이라 일반 합성)",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/lauren/basic.webp",
+    "derivedFromSha256": "4894c3605df80cedd131cecd6c9cc1c6a4fc81a2a8ec00e02cf98f11dd9031b0",
+    "palette": {
+     "main": [
+      164,
+      98,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 228
+   },
+   "blink": {
+    "file": "lauren/blink.webp",
+    "driveName": "11_lauren_S_v1.png",
+    "sourceSha256": "1299298075348b4982b42063e69b5287a1ede97929924c076e43a2a78346ad8a",
+    "sourceBytes": 192888,
+    "sha256": "c60a60649708b860c574359a2320645322781fc8e7652918fe54a13e4a8b3d11",
+    "bytes": 119264,
+    "size": [
+     3072,
+     384
+    ],
+    "cell": 384,
+    "frames": 8,
+    "anchor": "dir",
+    "origin": [
+     48,
+     192
+    ],
+    "dur": 0.35,
+    "scale": 4.6,
+    "blend": "source-over",
+    "fit": "path",
+    "note": "블링크 — 출발점→도착점(어두운 보라라 일반 합성)",
+    "reason": "dots 생성 → 사용자 승인 2026-11-04",
+    "derivedFrom": "assets/r292/fx/lauren/blink.webp",
+    "derivedFromSha256": "1244761f05387f60b257f547d964948a0d555ae3b0cf87f7cb050e39c43d9fac",
+    "palette": {
+     "main": [
+      164,
+      98,
+      255
+     ],
+     "sub": [
+      226,
+      232,
+      242
+     ]
+    },
+    "how": "recolor",
+    "offPaletteColours": 0,
+    "uniqueColours": 237
+   }
+  }
+ }
+}
