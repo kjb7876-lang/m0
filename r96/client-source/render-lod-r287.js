@@ -73,7 +73,7 @@ let lastArgs=null,R=null,zoneKey=null,warmState='idle',warmPromise=null,leases=[
 let coarse=null;const capFor=r=>{if(coarse===null){try{coarse=!!matchMedia('(pointer:coarse)').matches;}catch(_){coarse=false;}}return((r?.lastViewportWidth||innerWidth)<960||coarse)?CFG.capLow:CFG.cap;};
 function releaseZone(){for(const l of leases){try{l.release();}catch(e){fail(e);}}leases=[];
  if(heldOwner){for(const img of held){try{heldOwner.release(img);}catch(e){fail(e);}}}held=[];heldSet=new WeakSet();heldOwner=null;stats.leases=0;stats.texHeld=0;}
-let zoneAt=0;function newZone(zone){releaseZone();coarse=null;zoneKey=zone;warmState='loading';zoneAt=frameNo;stats.zones++;}
+let zoneAt=0,warmGen=0;function newZone(zone){warmGen++;releaseZone();coarse=null;zoneKey=zone;warmState='loading';zoneAt=frameNo;stats.zones++;}
 function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.__r287)return;const base=C.update;
  const w=function(x,y,zone,grid={}){lastArgs={x,y,grid};if(!prefs.on)return base.call(this,x,y,zone,grid);
   let vb=grid?.visibleBounds;try{const g=chunkGrid(grid),cap=capFor(r),size=this.size||10;stats.chunksAll=g.count;
@@ -84,7 +84,8 @@ function wrapChunks(r){const C=r?.chunks;if(!C||typeof C.update!=='function'||C.
    if(g.count>cap)stats.overCap=g.count;
    if(all)vb=fullBounds(grid,size);else if(finite4(vb)&&CFG.prefetch>0)vb=expand(vb,CFG.prefetch);}catch(e){fail(e);}
   const pr=base.call(this,x,y,zone,{...grid,visibleBounds:vb});
-  if(warmState==='loading'&&!warmPromise){const z=zone;warmPromise=Promise.resolve(pr).then(()=>{if(zoneKey===z&&warmState==='loading')warmState='ready';},e=>fail(e)).finally(()=>{warmPromise=null;});}
+  if(warmState==='loading'&&warmPromise!==warmGen){const g=warmGen;warmPromise=g;/* 지역(세대)마다 완료 처리를 따로 단다 — 앞 지역 약속이 대기 중이어도 새 지역 것을 놓치지 않게 */
+   Promise.resolve(pr).then(()=>{if(g===warmGen&&warmState==='loading')warmState='ready';},e=>fail(e));}
   return pr;};
  w.__r287base=base;C.update=w;C.__r287=true;}
 function unwrapChunks(r){const C=r?.chunks;if(C?.__r287&&C.update.__r287base){C.update=C.update.__r287base;delete C.__r287;}}
@@ -137,7 +138,7 @@ function boostCache(r){if(!r||r.__r287Cache)return;const ownB=Object.getOwnPrope
  Object.defineProperty(r,'idleGeometryLimit',{configurable:true,enumerable:true,get(){return on('cache')?Math.max(n||0,CFG.cacheCount):n;},set(v){n=v;}});}
 function unboostCache(r){if(!r?.__r287Cache)return;const b=r.idleGeometryByteLimit,n=r.idleGeometryLimit;delete r.idleGeometryByteLimit;delete r.idleGeometryLimit;delete r.__r287Cache;r.idleGeometryByteLimit=b;r.idleGeometryLimit=n;}/* set() 이 prefs 를 먼저 바꿔 두므로 위 b,n 은 엔진 값 */
 function before(r,frame){try{stats.frames++;if(r!==R){R=r;}wrapChunks(r);if(!prefs.on)return;boostCache(r);const key=frame?.layer+':'+frame?.zone;if(frame?.zone&&key!==zoneKey)newZone(key);if(on('warm')&&(zoneFrames<90||frameNo%15===0))holdCommandTextures(r,frame);/* 들어온 직후 몇 초 동안 + 그 뒤 15프레임에 한 번만 훑는다 */r.__r287Pending=true;}catch(e){fail(e);}}
-function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;
+function after(r){try{unpark();r.__r287Pending=false;if(!prefs.on)return;if((warmState==='loading'||warmState==='ready')&&frameNo-zoneAt>CFG.warmTimeout)warmState='done';/* 시간 초과는 프레임마다 본다(덩어리 update 가 없어도) */
  if(warmState==='ready'&&r.spatialBuilt){warmState='done';if(prefs.warm){holdLeases(r);warmRender(r);}stats.chunksResident=r.chunks?.rows?.size||0;}
  else if(warmState==='done')stats.chunksResident=r.chunks?.rows?.size||0;}catch(e){fail(e);}}
 const wrapFn=fn=>{if(fn.__r287)return fn;const w=function(frame){before(this,frame);try{return fn.apply(this,arguments);}finally{after(this);}};w.__r287=true;return w;};

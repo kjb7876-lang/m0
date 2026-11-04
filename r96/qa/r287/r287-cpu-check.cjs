@@ -25,12 +25,12 @@ function world(o={}){
  const gl={rt:null,shadowMap:{needsUpdate:false},render(scene,camera){log.glRender.push({rt:this.rt,cam:camera.layers.mask,masks:kids.map(k=>k.layers.mask),culled:sceneObjs.map(k=>k.frustumCulled)});},
   getRenderTarget(){return this.rt;},setRenderTarget(t){this.rt=t;log.rt.push(t);if(t)log.warmRows=rows.size;},initTexture(t){t.uploaded=true;}};
  const rows=new Map();
- const chunks={size:10,rows,update(x,y,zone,grid){log.updates.push({zone,grid:JSON.parse(JSON.stringify(grid))});const d=engineDesired(x,y,10,grid);for(const k of [...rows.keys()])if(!d.has(k))rows.delete(k);for(const k of d)if(!rows.has(k))rows.set(k,{key:k,assets:['assets/'+k+'.webp']});return Promise.resolve([]);}};
+ const chunks={size:10,rows,update(x,y,zone,grid){log.updates.push({zone,grid:JSON.parse(JSON.stringify(grid))});const d=engineDesired(x,y,10,grid);for(const k of [...rows.keys()])if(!d.has(k))rows.delete(k);for(const k of d)if(!rows.has(k))rows.set(k,{key:k,assets:['assets/'+k+'.webp']});if(o.defer){let res;const pr=new Promise(r=>{res=r;});log.pending=(log.pending||[]);log.pending.push(res);return pr;}return Promise.resolve([]);}};
  const leases=[];const assets={lease(p){const l={p,released:false,release(){this.released=true;}};leases.push(l);return l;}};
  const img=(n)=>{const i=new ctx.HTMLImageElement();i.naturalWidth=64;i.naturalHeight=64;i.n=n;return i;};
  const commands={texture(image){let r=textures.get(image);if(!r){r={refs:0,tex:{}};textures.set(image,r);}r.refs++;return r.tex;},release(image){const r=textures.get(image);if(r&&--r.refs===0)textures.delete(image);}};
  const r={T,renderer:gl,scene:{traverse(f){sceneObjs.forEach(f);}},camera:{layers:{mask:7,enableAll(){this.mask=0xffffffff;}}},spatialRoot:{children:kids},chunks,assets,commands,spatialBuilt:true,visibleTerrainBounds:[0,0,10,10],lastViewportWidth:1280,
-  render(frame){this.camera.layers.mask=2;this.renderer.render(this.scene,this.camera);this.chunks.update(this.hx??5,5,frame.layer+':'+frame.zone,{columns:o.cols||6,rows:o.rows||6,minX:0,minY:0,visibleBounds:this.visibleTerrainBounds});this.camera.layers.mask=4;this.renderer.render(this.scene,this.camera);}};
+  render(frame){this.camera.layers.mask=2;this.renderer.render(this.scene,this.camera);const key=(this.hx??5)+':'+frame.layer+':'+frame.zone;if(!o.keyed||key!==this.lastKey){this.lastKey=key;this.chunks.update(this.hx??5,5,frame.layer+':'+frame.zone,{columns:o.cols||6,rows:o.rows||6,minX:0,minY:0,visibleBounds:this.visibleTerrainBounds});}this.camera.layers.mask=4;this.renderer.render(this.scene,this.camera);}};
  const ctx={console,Math,JSON,Promise,Object,Array,Number,String,Set,Map,WeakMap,WeakSet,Infinity,isFinite,
   localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setInterval:(f)=>{intervals.push(f);return 1;},performance:{now:()=>0},innerWidth:1280,innerHeight:720,matchMedia:()=>({matches:false}),
   W:1280,H:720,zoom:1,TILE:34,cam:{x:0,y:0},HTMLImageElement:function(){}};
@@ -103,6 +103,11 @@ function world(o={}){
  ok('warm-up runs with every chunk still loaded even if the hero moves on the first frame after the full load (36 at warm render)',w.api.inspect().stats.warms===1&&w.log.warmRows===36,{warmRows:w.log.warmRows,warms:w.api.inspect().stats.warms});
  ok('leases taken for every chunk image before the band shrinks (36 leases, none released)',w.leases.length===36&&w.leases.every(l=>!l.released),w.leases.length);
  w.r.hx=6.2;w.frame();ok('after the warm-up the band shrinks back to the engine rule',w.r.chunks.rows.size<36);}
+// Codex 리뷰 2: 앞 지역의 전체 로드가 끝나기 전에 지역을 바꾸고(약속 둘 다 대기), 영웅은 가만히(엔진은 키가 바뀔 때만 update) → 새 지역도 미리 그리기까지 가야 한다
+{const w=world({defer:true,keyed:true});w.frame('STORY:z1');w.frame('STORY:z2');for(const r of w.log.pending)r();await w.flush();await w.flush();w.frame('STORY:z2');w.frame('STORY:z2');
+ ok('zone change during a pending full load: the new zone still reaches the warm-up (per-zone generation)',w.api.inspect().warmState==='done'&&w.api.inspect().zone==='STORY:z2'&&w.api.inspect().stats.warms===1,w.api.inspect());}
+{const w=world({defer:true,keyed:true});w.frame();for(let i=0;i<w.api.config.warmTimeout+5;i++)w.frame();
+ ok('warm-up timeout advances per frame even with no chunk updates (stationary hero, load never finishes)',w.api.inspect().warmState==='done',w.api.inspect().warmState);}
 // ---- 대기 캐시 한도 ----
 {const w=world();w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;w.frame();
  w.r.idleGeometryByteLimit=2*1024*1024;w.r.idleGeometryLimit=256;/* 엔진이 매 프레임 다시 쓰는 값 */
