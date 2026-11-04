@@ -1,0 +1,39 @@
+{
+  "schema": "storyworld.collab.config/v1",
+  "project": "storyworld-m0",
+  "repository": "kjb7876-lang/m0",
+  "task_prefix": "SW",
+  "default_branch": "main",
+  "foreign_repositories_read_only": ["hapil-reboot", "hapil1"],
+  "official_ledger": "github-issues",
+  "ops_board_issue_title": "SW 운영 현황",
+  "labels": {
+    "task": "agent-task",
+    "board": "ops-board",
+    "status_prefix": "status:",
+    "executor_prefix": "executor:"
+  },
+  "statuses": ["QUEUED", "RUNNING", "REVIEW", "READY_FOR_APPROVAL", "DONE", "NEEDS_FIX", "BLOCKED", "PAUSED", "CANCELLED"],
+  "transitions": {
+    "QUEUED": ["RUNNING", "PAUSED", "CANCELLED", "BLOCKED"],
+    "RUNNING": ["REVIEW", "NEEDS_FIX", "BLOCKED", "PAUSED", "CANCELLED"],
+    "REVIEW": ["READY_FOR_APPROVAL", "NEEDS_FIX", "DONE", "BLOCKED", "CANCELLED"],
+    "READY_FOR_APPROVAL": ["DONE", "NEEDS_FIX", "PAUSED", "CANCELLED"],
+    "NEEDS_FIX": ["QUEUED", "RUNNING", "BLOCKED", "CANCELLED"],
+    "BLOCKED": ["QUEUED", "CANCELLED"],
+    "PAUSED": ["QUEUED", "CANCELLED"],
+    "DONE": [],
+    "CANCELLED": []
+  },
+  "executors": ["claude", "dots", "codex-cloud", "github-actions", "user"],
+  "codex_routes": ["via-dots", "github-codex-mention", "github-codex-review"],
+  "concurrency": { "code_tasks": 1, "asset_tasks": 1 },
+  "retry": { "transient_max_retries": 2, "fix_rounds_max": 3 },
+  "allowed_path_roots": ["r96/", "scripts/", "docs/", "ops/", ".github/", "CLAUDE.md", "AGENTS.md"],
+  "forbidden_path_patterns": ["\\.\\./", "^/", "hapil-reboot", "hapil1", "\\.env"],
+  "quiet_hours": { "tz": "Asia/Seoul", "start": "00:00", "end": "07:00" },
+  "deploy_policy": "squash-merge to main after green CI and Codex review settled; main push deploys GitHub Pages; verify public URL afterwards",
+  "approved_users": ["kjb7876-lang"],
+  "board_commands": ["/status", "/new", "/pause", "/resume", "/cancel", "/approve", "/stop-all", "/start-all"],
+  "public_repo_rules": "no Drive file/folder IDs, unpublished story text or private manifests in issues/commits; logical asset_id only"
+}
