@@ -335,6 +335,8 @@ jobs:
         run: node r96/qa/r292/r292-cpu-check.cjs
       - name: R302 hero two-colour palette (neon mint, spear-tip strip replaced) CPU check
         run: node r96/qa/r302/r302-cpu-check.cjs
+      - name: R309 procedural opening (demonised tree, fallen angels) CPU check
+        run: node r96/qa/r309/r309-cpu-check.cjs
       - name: R304 Lauren basic attack VFX CPU check
         run: node r96/qa/r304/r304-cpu-check.cjs
       - name: R301 boss nameplate single-draw CPU check
