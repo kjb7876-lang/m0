@@ -48,7 +48,8 @@ function installBoost(){
 const BOOST_NOTE=' 〔R169: k단계 하나의 효과 = 원래 한 단계 × k, n단계 누적 = n(n+1)/2단계 몫〕';
 function noteText(){const A=P62();if(!A?.defs)return;for(const d of A.defs)if(SQUARE.has(d.id)&&typeof d.text==='string'&&!d.text.includes('〔R169'))d.text+=BOOST_NOTE;}
 // ---- 한 창에 모으기 ------------------------------------------------------------------------------
-const SLOT_KEY={w:'Z',e:'X',r:'C'};
+/* R291: 칸 글자는 지금 키 배치(KR291)를 따른다 — 기본 W·E·R, legacy 면 Z·X·C */
+const KR=()=>(typeof KR291!=='undefined'&&KR291?KR291:{w:'W',e:'E',r:'R',werDot:'W·E·R',werSp:'W · E · R'}),SLOT_KEY={get w(){return KR().w;},get e(){return KR().e;},get r(){return KR().r;}};
 function procCards(p){const G=GR(),defs=window.__STORYWORLD_WER__?.defs?.[p.hero]||{};if(!G)return'';let open=false,st=null;try{const i=G.inspect();open=!!i.routeOpen;st=i.state;}catch(e){fail(e);}
  const icon=typeof VFX!=='undefined'&&typeof urlFor==='function'?urlFor(VFX.slash||VFX.crown):'';
  return['w','e','r'].map(slot=>{const lv=Number(st?.procs?.[p.hero+':'+slot])||0,max=G.MAX_LEVEL||7,next=lv<max?G.procCost(lv+1):null,now=Math.round(G.procChance(lv)*100),after=next!=null?Math.round(G.procChance(lv+1)*100):now,
@@ -65,8 +66,8 @@ function css(){if(document.getElementById('r169UpCss'))return;const s=document.c
 function merge(){if(!prefs.merge||!solo())return;/* 통합 카드는 player 를 직접 바꾼다 — 함께하기에서는 손님 요청 경로(R62 카드)만 쓴다 */const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!cards||!cards.querySelector('[data-r62-passive]')||cards.querySelector('.r169card'))return;const p=me();if(!p)return;css();
  const sec=(t,s)=>'<div class="r169sec">'+t+(s?'<small>'+s+'</small>':'')+'</div>';
  cards.insertAdjacentHTML('afterbegin',sec('오라 · 무한강화','다음 단계 비용 = 단계²'));
- cards.insertAdjacentHTML('beforeend',sec('Z · X · C 스킬강화','k단계 k²점 · 최대 7단계')+procCards(p)+sec('일반강화','기존 영웅·공통 재능 · 1점')+talentCards(p));
- const h2=panel.querySelector('h2'),sh=boostOn()?ratios(p).show:null;if(h2&&!panel.querySelector('.r169rule'))h2.insertAdjacentHTML('afterend','<p class="small r169rule">모든 강화를 이 창 한 곳에서: 오라·무한강화(비용 = 다음 단계의 제곱, 효과도 단계마다 커짐) · Z·X·C 스킬강화 · 일반강화'+(sh?'<br>지금 오라 합계: 위력 ×'+sh.power.toFixed(2)+' · 공격 간격 '+Math.round(sh.tempo*100)+'% · 재사용 '+Math.round(sh.cool*100)+'% · 받는 피해 '+Math.round(sh.ward*100)+'% · 공명 획득 ×'+sh.res.toFixed(2)+' · 사몽 +'+sh.dream.toFixed(1)+'초':'')+'</p>');
+ cards.insertAdjacentHTML('beforeend',sec(KR().werSp+' 스킬강화','k단계 k²점 · 최대 7단계')+procCards(p)+sec('일반강화','기존 영웅·공통 재능 · 1점')+talentCards(p));
+ const h2=panel.querySelector('h2'),sh=boostOn()?ratios(p).show:null;if(h2&&!panel.querySelector('.r169rule'))h2.insertAdjacentHTML('afterend','<p class="small r169rule">모든 강화를 이 창 한 곳에서: 오라·무한강화(비용 = 다음 단계의 제곱, 효과도 단계마다 커짐) · '+KR().werDot+' 스킬강화 · 일반강화'+(sh?'<br>지금 오라 합계: 위력 ×'+sh.power.toFixed(2)+' · 공격 간격 '+Math.round(sh.tempo*100)+'% · 재사용 '+Math.round(sh.cool*100)+'% · 받는 피해 '+Math.round(sh.ward*100)+'% · 공명 획득 ×'+sh.res.toFixed(2)+' · 사몽 +'+sh.dream.toFixed(1)+'초':'')+'</p>');
  cards.querySelectorAll('[data-r169]').forEach(b=>b.onclick=()=>{if(b.disabled||!b.isConnected)return;const [kind,id]=b.dataset.r169.split(':');let ok=false;
   try{if(kind==='r169proc'){ok=GR()?.buyProc(id)===true;if(ok)stats.procBuys++;}else ok=buyTalent(id);}catch(e){fail(e);}
   if(ok)try{showUpgrades();}catch(e){fail(e);}});

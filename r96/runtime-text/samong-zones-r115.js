@@ -14,6 +14,8 @@
  const hash=t=>{let h=2166136261;for(const c of String(t))h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;return h||1;};
  const K=(x,y)=>x+':'+y;
  const say=(t,s)=>{try{if(typeof toast==='function')toast(t,s);}catch(e){}};
+/* R291: 자료(samong-zones-r115-data)의 풀이 안내는 상호작용 글자를 E 로 적어 두었다 → 보여 줄 때 지금 상호작용 키 글자로 바꾼다 */
+const keyText=t=>String(t).replace(/(^|[^A-Za-z0-9])E(?![A-Za-z0-9])/g,'$1'+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'));
  const esc=s=>typeof escapeHTML==='function'?escapeHTML(String(s)):String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
  // ---- 구역 정의 (설계 문서 "사몽~미카엘라 엔딩 맵 확장 설계안" 표의 순서) ------------------------------
@@ -272,14 +274,14 @@
   if(p.r115Stmt!=null){const s=solveOf(z);if(z.solve.hold&&!s.held){say('먼저 버티세요 · '+Math.ceil(z.solve.hold-(s.holdT||0))+'초',3);return true;}if(p.r115Stmt>s.stmt){say('진술은 차례대로 적습니다 · '+z.solve.statements[s.stmt].label,3);return true;}
    api.record(p);if(p.r115Stmt===s.stmt){s.stmt++;if(s.stmt>=(z.solve.statements||[]).length)crack(z,api);try{saveGame(false);}catch(e){}}return true;}
   if(p.r115Book){const s=solveOf(z);const sc=scenesFor([s.book?z.solve.cut:z.solve.book],z,s.book?'cut':'book');
-   if(!s.book){s.book=1;play(sc,()=>say('출석부 위의 검은 선 · 다시 E 로 그 선만 끊습니다. 이름은 건드리지 않습니다.',4));}
+   if(!s.book){s.book=1;play(sc,()=>say('출석부 위의 검은 선 · 다시 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' 로 그 선만 끊습니다. 이름은 건드리지 않습니다.',4));}
    else if(!s.cut){s.cut=1;play(sc,()=>{api.removeProp(p);api.clear();});}try{saveGame(false);}catch(e){}return true;}
   return false;}
  function crack(z,api){// 진술을 끝까지 적으면 순찰자의 얼굴이 갈라진다 — 처치가 아니라 해제.
   const b=api.boss();if(b){b.r115Released=true;b.hp=0;b.deadRecorded=true;b.spawnState='dead';b.deadAt=typeof time==='number'?time:0;b.samongR103Silent=true;}
   if(!z.solve.book){if(z.solve.done)say(z.solve.done,4);api.clear();return;}
   const d=room.exploration.samongR103.dais;api.addProp({id:'r115:'+z.id+':book',x:d.x,y:d.y,solid:false,autoTargetEligible6:false,visible:true,samongR103:'record',r74Prop:'workbench',label:z.solve.book.label,r115Book:true});
-  say(z.solve.done||'순찰자의 얼굴이 갈라졌습니다 · 가운데의 젖은 출석부를 E 로 펼치세요.',4);}
+  say(z.solve.done||'순찰자의 얼굴이 갈라졌습니다 · 가운데의 젖은 출석부를 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+' 로 펼치세요.',4);}
  // 잠입: 순찰자는 쓰러지지 않는다. 손전등 빛이나 정면에 들키면 가까이 온다. 책상 사이에 숨으면 지나간다.
  function patrolTick(r,z,dt,api){const x=r.samongR115Patrol||(r.samongR115Patrol={units:[],alert:0,seen:0,hit:0}),L=r.exploration.samongR103;if(!L.patrol)return;
   if(!x.units.length)L.patrol.forEach((route,n)=>{const e=api.spawn(z.patrol.donor,route[0],{name:z.patrol.name,tag:'p'+n,boss:false,hpScale:3});if(!e)return;e.samongPatrolR115=true;e.samongSurvival=false;e.autoTargetEligible6=false;e.cd=99;e.damage=(e.damage||10)*.9;x.units.push({id:e.id,route,leg:1,chase:0});});
@@ -299,8 +301,8 @@
  function tick(r,z,dt,api){try{if(z.stealth)patrolTick(r,z,dt,api);if(z.lead)leadTick(r,z,api);
    if(z.wander&&(z.wander.afterClue==null||read(clueId(z,z.wander.afterClue))))api.wander(z.wander);
    if(z.hazards&&r.samongR103&&!r.samongR103.portal)hazardTick(r,z,dt);
-   if(z.solve?.hold&&r.samongR103?.bossUp){const s=solveOf(z);if(!s.held){s.holdT=(s.holdT||0)+dt;if(s.holdT>=z.solve.hold){s.held=1;if(!(z.solve.statements||[]).length)crack(z,api);else say('이제 둘레의 표식에서 E',3);}}}
-   if(z.solve&&!solveOf(z).cut){const b=api.boss();if(b&&b.hp>0&&!b.r115Released&&(solveOf(z).stmt<(z.solve.statements||[]).length||z.solve.hold&&!solveOf(z).held)){const f=b.maxHp*z.solve.floor;if(b.hp<f){b.hp=f;if(time-(r.r115FloorAt||-9)>6){r.r115FloorAt=time;say(z.solve.hint||(z.solve.book?'순찰자는 쓰러지지 않습니다 · 둘레의 책상에서 확인서 대신 사실을 적으세요(E).':(b.name||'상대')+'는 쓰러뜨려 끝나지 않습니다 · 둘레의 표식에서 E'),4);}}}}
+   if(z.solve?.hold&&r.samongR103?.bossUp){const s=solveOf(z);if(!s.held){s.holdT=(s.holdT||0)+dt;if(s.holdT>=z.solve.hold){s.held=1;if(!(z.solve.statements||[]).length)crack(z,api);else say('이제 둘레의 표식에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C'),3);}}}
+   if(z.solve&&!solveOf(z).cut){const b=api.boss();if(b&&b.hp>0&&!b.r115Released&&(solveOf(z).stmt<(z.solve.statements||[]).length||z.solve.hold&&!solveOf(z).held)){const f=b.maxHp*z.solve.floor;if(b.hp<f){b.hp=f;if(time-(r.r115FloorAt||-9)>6){r.r115FloorAt=time;say(z.solve.hint?keyText(z.solve.hint):(z.solve.book?'순찰자는 쓰러지지 않습니다 · 둘레의 책상에서 확인서 대신 사실을 적으세요('+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')+').':(b.name||'상대')+'는 쓰러뜨려 끝나지 않습니다 · 둘레의 표식에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C')),4);}}}}
   }catch(e){fail(e);}}
  function navGoal(r,z){const x=r.samongR103,pt=(p,label,kind)=>p?{x:p.x,y:p.y,label,kind}:null;if(x.portal)return null;
   if(z.solve&&x.bossUp){const s=solveOf(z),i=s.stmt;if(i<(z.solve.statements||[]).length){const p=r.props.find(q=>q.r115Stmt===i);return pt(p,z.solve.statements[i].label,'objective');}const b=r.props.find(q=>q.r115Book);if(b)return pt(b,b.label,'objective');}
@@ -309,8 +311,8 @@
  function hudText(r,z){const S=st(),g=z.goal||{},list=chapterOf(z),n=list.indexOf(z)+1,tag=n+'/'+list.length,x=r.samongR103;
   const clues=(z.clues||[]).length,got=(z.clues||[]).filter((c,i)=>read(clueId(z,i))).length;
   let text,dest,unlock;
-  if(x.portal){text='문이 열렸습니다 · 문에서 E';unlock='다음 구역으로';}
-  else if(z.kind==='explore'){text='원문 단서 '+got+' / '+clues+' · 빛나는 표식에서 E';unlock='단서를 모두 보면 다음 문';}
+  if(x.portal){text='문이 열렸습니다 · 문에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C');unlock='다음 구역으로';}
+  else if(z.kind==='explore'){text='원문 단서 '+got+' / '+clues+' · 빛나는 표식에서 '+(typeof KR291!=='undefined'&&KR291?KR291.i:'C');unlock='단서를 모두 보면 다음 문';}
   else if(z.kind==='combat'&&z.mode==='D'){const c=x.r162Core;text='정화의 코어를 지키세요 · 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(c?' · 코어 '+Math.max(0,Math.ceil(c.hp))+' / '+c.max:'');unlock='666마리를 막아내면 문';}
   else if(z.kind==='combat'&&z.mode==='B'){text=(z.lead&&x.leadAlive?z.lead.name+' · 먼저 무너뜨리세요 · ':'')+'쏟아지는 적 처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(x.r162Mid?' · 중간보스 '+x.r162Mid+' / 6':'')+(clues?' · 단서조각 '+got+'/'+clues:'');unlock='666마리를 쓰러뜨리면 문';}
   else if(z.kind==='combat'&&z.mode==='F'){const need=x.r173Need??6;text=(need?'세뇌당한 기억의 조각 '+Math.min(x.r173Broken||0,need)+' / '+need+' 깨기 · ':'')+'처치 '+Math.min(S?.kills||0,g.kills)+' / '+g.kills+(clues?' · 단서조각 '+got+'/'+clues:'');unlock=need?'조각 '+need+'개를 모두 깨고 66마리를 쓰러뜨리면 문':'66마리를 쓰러뜨리면 문';}
