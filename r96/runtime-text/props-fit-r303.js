@@ -96,15 +96,36 @@ function apply(r){if(!on||!r||!Array.isArray(r.props))return null;const L=r.expl
  for(const k of ['restored','reskinned','replaced','hidden','snapped','flipped','wallHidden','floorHidden'])stats[k]+=rep[k]-base0[k];if(!prev)stats.rooms++;
  done.set(r,{sig:r.props.length+':'+r.props.reduce((n,p)=>n+(p?.r191From?1:0),0),L,report:rep});return rep;}
 
+// ---- 맵 이동 표식·저장 등불 그림(R303b, 사용자 2026-11-04 "맵 넘나들 때 오벨리스크 그만, 계단이나 문·워프 위주로") ------------------
+//  사몽 출구(samongR103 'portal')·뒷문('back')은 R103 이 R74 오벨리스크로, 저장 등불('save'·'lamp')은 화로로 그렸다. 기능·위치·상호작용·충돌은 그대로 두고
+//  그릴 때만 테마에 맞는 기존 그림으로: 학교·병원·집 실내 = R74 나무 문(열림/닫힘), 성당·성 = R74 청동 문, 그 밖(야외·사몽 꿈) = 무너진 포탈(v290)·무너진 계단(v290).
+//  저장 등불은 실내(학교·병원·집)에서 R92 실내 조명(병원 등롱대·촛대)으로. R92 바닥 광원도 실내에서는 실내 조명 묶음만 쓴다(가로등 lights_regional_01 금지).
+const INDOOR_LIGHTS=['lights_hospital_03','lights_domestic_01','lights_hospital_01','lights_domestic_04'];
+const indoorHome=t=>!!t&&t.indoor&&['school','hospital','domestic'].includes(t.theme);
+function markerArt(p,t){const k=p?.samongR103;if(!k||!t)return null;
+ if(k==='portal'||k==='back'){const open=k==='portal';
+  if(indoorHome(t))return{r74Prop:open?'oak-open':'oak-closed'};
+  if(t.indoor&&(t.theme==='chapel'||t.theme==='castle'))return{r74Prop:open?'bronze-open':'bronze-closed'};
+  return{path:open?'assets/props/v290/ruined_portal.webp':'assets/props/v290/collapsed_stairs.webp',height:open?104:96};}
+ if((k==='save'||k==='lamp')&&indoorHome(t))return{path:'assets/r92/lights/'+INDOOR_LIGHTS[h32(p.id)%2]+'.png',height:96};
+ return null;}
+const loaded=new Set();function ensure(path){try{if(typeof readyImage==='function'&&readyImage(path))return true;if(!loaded.has(path)&&typeof addImage==='function'){loaded.add(path);addImage(path,'R303 props fit');}}catch(_){}return false;}
+function drawCopy(p){let t=null;try{t=themeOf(typeof room!=='undefined'?room:null);}catch(_){return p;}const m=markerArt(p,t);if(!m)return p;
+ if(m.path){if(!ensure(m.path))return p;const c={...p,path:m.path,height:m.height};delete c.r74Prop;delete c.r81NativeSkin;return c;}
+ return{...p,r74Prop:m.r74Prop};}
+try{const P=window.__STORYWORLD_PROPS_R102__;const inner=P?.lamps;
+ window.__STORYWORLD_PROPS_R102__=Object.freeze({...(P||{}),lamps:(z,reg,items,list,fam)=>{try{if(on&&typeof room!=='undefined'&&indoorHome(themeOf(room))&&Array.isArray(items)){const out=INDOOR_LIGHTS.map(id=>items.find(i=>i.id===id&&i.kind==='light')).filter(Boolean);if(out.length)return out;}}catch(e){fail(e);}
+  return typeof inner==='function'?inner(z,reg,items,list,fam):null;}});}catch(e){fail(e);}
+
 // ---- 그리기 -----------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
- if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;
+ if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;if(p.samongR103)p=drawCopy(p);
  if(p.r303Flip&&typeof ctx?.scale==='function'&&typeof project==='function'){let q;try{q=project(p.x,p.y);}catch(e){return base.call(this,p,...a);}
   ctx.save();try{ctx.translate(q.x,0);ctx.scale(-1,1);ctx.translate(-q.x,0);return base.call(this,p,...a);}finally{ctx.restore();}}
  return base.call(this,p,...a);};}}catch(e){fail(e);}
 try{if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(...a){const r=base.apply(this,a);try{apply(r);}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 (function poll(){try{if(typeof room!=='undefined'&&room)apply(room);}catch(e){fail(e);}setTimeout(poll,700);})();
 function set(o){if(o&&typeof o.on==='boolean')on=o.on;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}}
-window.__STORYWORLD_PROPS_FIT_R303__=Object.freeze({revision:REV,set,apply,themeOf,badInside,locked,isScenery,OUTDOOR,
+window.__STORYWORLD_PROPS_FIT_R303__=Object.freeze({revision:REV,set,apply,themeOf,markerArt,INDOOR_LIGHTS,badInside,locked,isScenery,OUTDOOR,
  inspect:()=>({revision:REV,on,stats:{...stats},room:typeof room!=='undefined'&&room?(done.get(room)?.report||null):null,lastError})});
 })();

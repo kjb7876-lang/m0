@@ -4,7 +4,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('ass
 const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..'),read=p=>fs.readFileSync(path.join(R,p),'utf8');
 const src=read('client-source/props-fit-r303.js');let n=0;const ok=(name,fn)=>{fn();n++;console.log('PASS '+name);};
 function world(){const store={},c={console,Math,JSON,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setTimeout:()=>0};
- c.window=c;c.room=null;c.draws=[];c.drawProp=function(p){c.draws.push(p.id);};c.ctx={save(){},restore(){},translate(){},scale(x){c.lastScale=x;}};c.project=(x,y)=>({x:(x-y)*32,y:(x+y)*16});
+ c.window=c;c.room=null;c.draws=[];c.drawProp=function(p){c.draws.push(p);};c.readyImage=()=>true;c.__STORYWORLD_PROPS_R102__={lamps:()=>[{id:'lights_regional_01'}]};c.ctx={save(){},restore(){},translate(){},scale(x){c.lastScale=x;}};c.project=(x,y)=>({x:(x-y)*32,y:(x+y)*16});
  c.StoryPhase1={explorationBlocked:(L,x,y,s)=>{const cells=L.__set||(L.__set=new Set(L.floorCells.map(([a,b])=>a+':'+b)));for(const[dx,dy]of[[-s,-s],[s,-s],[-s,s],[s,s],[0,0]])if(!cells.has(Math.floor(x+dx)+':'+Math.floor(y+dy)))return true;return false;}};
  c.__STORYWORLD_MOOD_R123__={themeOf:z=>/^sz115-S02-/.test(z)?{key:'school'}:{key:'ink'}};
  vm.createContext(c);vm.runInContext(src,c,{filename:'props-fit-r303.js'});c.api=c.__STORYWORLD_PROPS_FIT_R303__;return c;}
@@ -71,5 +71,22 @@ ok('실외 지역은 가로등·조각상을 그대로 둔다',()=>{const c=worl
 ok('결정적: 같은 방은 늘 같은 결과, 두 번 적용해도 그대로',()=>{const run=()=>{const c=world(),r=hospital();c.api.apply(r);c.api.apply(r);return JSON.stringify(r.props);};assert.equal(run(),run());
  const c=world(),r=school();c.api.apply(r);const a=JSON.stringify(r.props);r.props.push({id:'late',x:1,y:1});c.api.apply(r);r.props.pop();assert.equal(JSON.stringify(r.props),a);});
 
+
+ok('맵 이동 표식(사몽 출구·뒷문)에 오벨리스크 그림 0 — 학교·병원·집 = 나무 문, 성당·성 = 청동 문, 야외·꿈 = 무너진 포탈·계단; 기능·위치는 그대로',()=>{const c=world(),A=c.api;
+ const T=[['school',true],['hospital',true],['domestic',true],['chapel',true],['castle',true],['forest',false],['other',false],['dream:ink',false],['dream:rose',false]];
+ for(const[theme,indoor]of T)for(const k of ['portal','back']){const m=A.markerArt({id:'x',samongR103:k,r74Prop:'obelisk'},{theme,indoor});assert.ok(m,theme+k);assert.ok(!/obelisk/.test(JSON.stringify(m)),theme+k);}
+ assert.equal(A.markerArt({id:'x',samongR103:'portal'},{theme:'school',indoor:true}).r74Prop,'oak-open');
+ assert.equal(A.markerArt({id:'x',samongR103:'back'},{theme:'chapel',indoor:true}).r74Prop,'bronze-closed');
+ const r=school();c.api.apply(r);c.room=r;const back={id:'r103:back:1:1',x:12,y:12,samongR103:'back',r74Prop:'obelisk',solid:false};r.props.push(back);
+ c.draws.length=0;c.drawProp(back);assert.equal(c.draws[0].r74Prop,'oak-closed');assert.equal(c.draws[0].x,12);assert.equal(back.r74Prop,'obelisk');});
+ok('학교·병원 실내에 가로등·오벨리스크 그림 0(기능 소품 포함): 저장 등불 = 실내 조명, R92 광원 = 실내 조명 묶음',()=>{
+ for(const mk of [school,hospital]){const c=world(),r=mk();c.api.apply(r);c.room=r;const save={id:'r103:save:5:5',x:15,y:15,samongR103:'save',r74Prop:'brazier'};r.props.push(save);
+  c.draws.length=0;for(const p of r.props)c.drawProp(p);
+  const arts=c.draws.map(p=>String(p.r81NativeSkin?.path||p.path||p.key||p.r74Prop||''));
+  assert.equal(arts.filter(a=>/street_lamp|obelisk|lights_regional_01/.test(a)).length,0,arts.join());
+  assert.ok(/assets\/r92\/lights\/lights_(hospital|domestic)_0\d\.png/.test(c.draws.find(p=>p.id===save.id).path));
+  const L=c.__STORYWORLD_PROPS_R102__.lamps('z','regional',[{id:'lights_hospital_03',kind:'light'},{id:'lights_domestic_01',kind:'light'},{id:'lights_regional_01',kind:'light'}],[],'regional');
+  assert.ok(L.length>0&&L.every(i=>i.id!=='lights_regional_01'));}
+ const c=world(),f=forest();c.room=f;assert.equal(c.__STORYWORLD_PROPS_R102__.lamps('z','regional',[],[],'regional')[0].id,'lights_regional_01');});
 ok('끄기 설정이면 아무것도 바꾸지 않는다',()=>{const c=world();c.api.set({on:false});const r=hospital(),b=JSON.stringify(r);c.api.apply(r);assert.equal(JSON.stringify(r),b);});
 console.log(n+' checks passed');
