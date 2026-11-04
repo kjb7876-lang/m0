@@ -131,13 +131,29 @@ def accept_result(task, result):
     return 'OK'
 
 
+def _png_has_trns(path):
+    """팔레트·RGB PNG 의 tRNS 투명도 청크(IDAT 앞)를 찾는다."""
+    with open(path, 'rb') as f:
+        f.seek(8)
+        while True:
+            hdr = f.read(8)
+            if len(hdr) < 8:
+                return False
+            size, ctype = struct.unpack('>I4s', hdr)
+            if ctype == b'tRNS':
+                return True
+            if ctype in (b'IDAT', b'IEND'):
+                return False
+            f.seek(size + 4, 1)
+
+
 def image_info(path):
     """PNG/WebP 의 (폭, 높이, 알파 여부) — PIL 없이 헤더만 읽음."""
     with open(path, 'rb') as f:
         head = f.read(64)
     if head[:8] == b'\x89PNG\r\n\x1a\n':
         w, h, depth, ctype = struct.unpack('>IIBB', head[16:26])
-        return 'image/png', w, h, ctype in (4, 6)
+        return 'image/png', w, h, ctype in (4, 6) or _png_has_trns(path)
     if head[:4] == b'RIFF' and head[8:12] == b'WEBP':
         chunk = head[12:16]
         if chunk == b'VP8X':
@@ -162,8 +178,14 @@ def validate_manifest(man, root=None):
             errs.append('missing:' + k)
     if errs:
         return errs, False
+    seen_ids, seen_files = set(), set()
     for a in man['assets']:
         tag = a.get('asset_id', '?')
+        if tag in seen_ids or a.get('file') in seen_files:
+            errs.append(tag + ' 중복 항목(같은 asset_id 또는 파일)')
+            continue
+        seen_ids.add(tag)
+        seen_files.add(a.get('file'))
         for k in ('asset_id', 'file', 'mime', 'bytes', 'sha256', 'origin', 'license', 'target_path'):
             if k not in a:
                 errs.append('%s missing:%s' % (tag, k))
@@ -171,7 +193,15 @@ def validate_manifest(man, root=None):
             errs.append(tag + ' sha256 형식')
         if root is None:
             continue
-        p = os.path.join(root, a.get('file', ''))
+        fname = str(a.get('file', ''))
+        if os.path.isabs(fname) or '..' in fname.replace('\\', '/').split('/'):
+            errs.append(tag + ' 파일 경로가 전달 루트 밖(절대 경로·..)')
+            continue
+        real_root = os.path.realpath(root)
+        p = os.path.realpath(os.path.join(real_root, fname))
+        if os.path.commonpath([real_root, p]) != real_root:
+            errs.append(tag + ' 파일이 전달 루트 밖을 가리킴(심볼릭 링크 등)')
+            continue
         if not os.path.isfile(p):
             errs.append(tag + ' 파일 없음')
             continue
@@ -200,7 +230,7 @@ def validate_manifest(man, root=None):
                     errs.append(tag + ' 칸 규격과 프레임 수가 그림 크기와 맞지 않음')
                     continue
         verified += 1
-    complete = (not errs) and root is not None and verified == man['expected_count'] == len(man['assets'])
+    complete = (not errs) and root is not None and verified == man['expected_count'] == len(seen_ids)
     if root is not None and len(man['assets']) != man['expected_count']:
         errs.append('일부만 전달됨: %d/%d' % (len(man['assets']), man['expected_count']))
     return errs, complete
@@ -216,8 +246,16 @@ def check_zip(path, max_total=200 << 20, max_ratio=200):
                 errs.append('경로 이탈: ' + n)
             if (i.external_attr >> 16) & 0o170000 == 0o120000:
                 errs.append('심볼릭 링크: ' + n)
+            mode = (i.external_attr >> 16) & 0o7777
             if os.path.splitext(n)[1].lower() in SCRIPT_EXT:
                 errs.append('예상하지 않은 실행·스크립트 파일: ' + n)
+            elif not n.endswith('/') and mode & 0o111:
+                errs.append('실행 권한이 있는 파일: ' + n)
+            elif not n.endswith('/') and i.file_size:
+                with z.open(i) as fh:  # 읽기만 함(실행 안 함): 확장자 없는 스크립트·실행 파일 서명
+                    head = fh.read(4)
+                if head[:2] == b'#!' or head == b'\x7fELF' or head[:2] == b'MZ' or head in (b'\xcf\xfa\xed\xfe', b'\xca\xfe\xba\xbe'):
+                    errs.append('실행 파일·스크립트 내용: ' + n)
             total += i.file_size
             if i.compress_size and i.file_size / max(i.compress_size, 1) > max_ratio:
                 errs.append('비정상 압축률: ' + n)

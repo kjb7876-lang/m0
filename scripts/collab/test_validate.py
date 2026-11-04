@@ -98,6 +98,41 @@ class Manifest(unittest.TestCase):
             self.assertFalse(complete)
             self.assertTrue(errs)
 
+    def test_path_outside_root_rejected(self):
+        for bad in (os.path.join(ASSET_DIR, 'm001.webp'), '../mobs/m001.webp'):
+            m = copy.deepcopy(MAN)
+            m['assets'][0]['file'] = bad
+            with tempfile.TemporaryDirectory() as d:
+                errs, complete = v.validate_manifest(m, d)
+            self.assertFalse(complete, bad)
+            self.assertTrue(errs, bad)
+
+    def test_symlink_escape_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            os.symlink(os.path.join(ASSET_DIR, 'm001.webp'), os.path.join(d, 'm001.webp'))
+            errs, complete = v.validate_manifest(MAN, d)
+            self.assertFalse(complete)
+
+    def test_duplicate_entries_do_not_count(self):
+        m = copy.deepcopy(MAN)
+        m['expected_count'] = 2
+        m['assets'].append(copy.deepcopy(m['assets'][0]))
+        errs, complete = v.validate_manifest(m, ASSET_DIR)
+        self.assertFalse(complete)
+        self.assertTrue(any('중복' in e for e in errs))
+
+    def test_png_trns_alpha(self):
+        import struct, zlib
+        def chunk(tag, data):
+            return struct.pack('>I', len(data)) + tag + data + struct.pack('>I', zlib.crc32(tag + data) & 0xffffffff)
+        png = (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 1, 1, 8, 3, 0, 0, 0))
+               + chunk(b'PLTE', b'\xff\x00\x00') + chunk(b'tRNS', b'\x00')
+               + chunk(b'IDAT', zlib.compress(b'\x00\x00')) + chunk(b'IEND', b''))
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, 'a.png')
+            open(p, 'wb').write(png)
+            self.assertEqual(v.image_info(p), ('image/png', 1, 1, True))
+
     def test_bad_sprite_grid(self):
         m = copy.deepcopy(MAN)
         m['assets'][0]['sprite']['cell'] = [300, 320]
@@ -116,6 +151,18 @@ class Zip(unittest.TestCase):
 
     def test_clean_zip(self):
         self.assertEqual(v.check_zip(self._zip([('a/m.png', b'x'), ('a/MANIFEST.json', b'{}')])), [])
+
+    def test_exec_bit_and_shebang_without_extension(self):
+        d = tempfile.mkdtemp()
+        p = os.path.join(d, 'x.zip')
+        with zipfile.ZipFile(p, 'w') as z:
+            zi = zipfile.ZipInfo('run')
+            zi.external_attr = 0o100755 << 16
+            z.writestr(zi, b'#!/bin/sh\necho hi\n')
+            z.writestr('tool', b'#!/usr/bin/env python\n')
+            z.writestr('a/ok.png', b'\x89PNG....')
+        errs = v.check_zip(p)
+        self.assertEqual(len(errs), 2, errs)
 
     def test_traversal_and_scripts(self):
         errs = v.check_zip(self._zip([('../evil.png', b'x'), ('run.sh', b'x'), ('a/x.js', b'x')]))
