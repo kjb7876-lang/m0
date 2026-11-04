@@ -11,7 +11,7 @@
 //   (포탈 위에서는 원래 travel → 777 난이도 창 그대로). 다음 포탈이 닫힌 R81 문 너머면(last301: 다음 포탈 5,3.5 앞 door-2) 그 문을 열러 간다.
 (()=>{'use strict';
 if(window.__STORYWORLD_GUIDE_R272__)return;
-const REV='R272-guide-2',stats={merge:0,door:0,interact:0,noPath:0,forward:0,travel:0,errors:0};let lastError=null,timer=0;
+const REV='R272-guide-3',stats={merge:0,door:0,interact:0,noPath:0,forward:0,travel:0,errors:0};let lastError=null,timer=0;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const P=()=>window.__STORYWORLD_HOSPITAL_MAZE_PROGRESSION__,L=()=>window.__STORYWORLD_HOSPITAL_MAZE_LAYOUT__;
 function phase(){try{if(typeof room==='undefined'||room?.id!=='ep1a08'||room.layer!=='STORY'||room.egoVisitId151)return null;return P()?.inspect?.()?.state?.phase||null;}catch(e){fail(e);return null;}}
@@ -42,10 +42,21 @@ function doorToward(goal){try{const W=window.__STORYWORLD_WORLD_R74__,ds=room?.e
 //  polish-r101 이 목표에서 먼 서쪽 성문(17,105)으로 걸어가 y 70↔100 을 25분 왕복) 목표에 가장 가까운 닫힌 문을 열러 간다.
 let oTimer=0,oHold=false;
 function objectiveDoor(dt){if(!guide||modal||loading||!(player?.hp>0)||storyScene||nearestEnemy(40)||room?.engaged)return false;if(phase())return false;
+ /* R285: R78 경로·집결 단계의 보스방 문은 봉인(집결 적을 다 잡아야 열림) — 문 앞에서 E 를 되풀이하며 멈추지 않는다(dist04 20,20.9 에서 363번) */if(['route','rally'].includes(window.__STORYWORLD_WORLD_COMBAT_R78__?.state?.(room)?.phase))return false;
  const g=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.();if(!g||!['objective','interaction'].includes(g.kind)||!g.point||!Number.isFinite(g.point.x+g.point.y))return false;
  oTimer-=dt;if(oTimer>0)return oHold;oTimer=.6;oHold=false;if(findPath(player,g.point,room,.31).length)return false;
  const ok=doorToward(g.point);if(ok)stats.objectiveDoor=(stats.objectiveDoor||0)+1;oHold=ok;return ok;}
-function step(dt){if(forward(dt))return true;if(objectiveDoor(dt))return true;const ph=phase();if(!ph)return false;
+// (5) R285: R81 '두 갈래 길' 맵(dist00~05 등 R78 이 다루는 지역) — 경로(route) 단계에서는 중앙 전투실(worldWardR81.gatherAnchor) 반경 5.5 에 들어가야
+//   집결(rally)이 시작되는데, R75 길잡이는 잠긴 보스방 너머 제단(objective)을 목표로 잡아 보스방 문 앞에서 멈췄다
+//   (밸런스 실플레이 dist04 Lv5: 문 앞 20.5,20.5 에서 12분, 남은 적 없이 단계가 route 그대로). 병원(ep1a08)은 (1)이 따로 맡는다.
+//   길잡이가 켜져 있고 R78 단계가 route 이고 R75 목표가 적이 아니라 objective 일 때만 중앙 전투실로 길을 준다(적이 목표면 원래 길잡이가 싸운다).
+function wardRole(o){/* 순수 */return !!(o.guide&&!o.modal&&!o.loading&&o.hp>0&&o.phase==='route'&&o.goal==='objective'&&o.anchor&&Math.hypot(o.px-o.anchor.x,o.py-o.anchor.y)>4.5);}
+let wTimer=0;
+function wardRoute(dt){try{if(typeof room==='undefined'||!room||room.id==='ep1a08'||storyScene)return false;const C=window.__STORYWORLD_WORLD_COMBAT_R78__,st=C?.state?.(room),g=room.exploration?.worldWardR81;
+ const goal=window.__STORYWORLD_GUIDE_R75__?.currentGoal?.()?.kind;
+ if(!wardRole({guide,modal,loading,hp:player?.hp,phase:st?.phase,goal,anchor:g?.gatherAnchor,px:player.x,py:player.y}))return false;
+ wTimer-=dt;if(wTimer>0)return true;wTimer=.5;const a=g.gatherAnchor,p=findPath(player,{x:a.x,y:a.y},room,.31);if(!p.length){stats.noPath++;return false;}route=p;command=null;stats.ward=(stats.ward||0)+1;return true;}catch(e){fail(e);return false;}}
+function step(dt){if(forward(dt))return true;if(wardRoute(dt))return true;if(objectiveDoor(dt))return true;const ph=phase();if(!ph)return false;
  const act=decide(ph,{guide,modal,loading,hp:player?.hp,enemyNear:!!nearestEnemy(40),px:player.x,py:player.y,merge:L()?.merge});if(!act)return false;
  timer-=dt;if(timer>0)return true;timer=.5;
  if(act==='merge'){const m=L().merge,p=findPath(player,{x:m.x,y:m.y},room,.31);if(!p.length){stats.noPath++;return false;}route=p;command=null;stats.merge++;return true;}
@@ -61,5 +72,5 @@ const npcSeen=new Set();
 function npcInfoOnly(h){/* 순수 */h=String(h||'');return h.includes('narrativeNPCBackR75')&&(h.match(/<button/g)||[]).length===1;}
 if(typeof openPanel==='function')try{const op=openPanel;openPanel=function(h,...a){try{if(typeof guide!=='undefined'&&guide&&npcInfoOnly(h)){const t=String(h).match(/<h2>([^<]*)<\/h2>/)?.[1]||'';const k=(typeof zone!=='undefined'?zone:'')+'|'+t;
  stats.npcPanel=(stats.npcPanel||0)+1;if(!npcSeen.has(k)){npcSeen.add(k);try{toast(t.replace(/&[^;]+;/g,' ')+' · 길잡이 진행 중');}catch(_){}}return;}}catch(e){fail(e);}return op.apply(this,[h,...a]);};}catch(e){fail(e);}
-window.__STORYWORLD_GUIDE_R272__=Object.freeze({revision:REV,decide,forwardRole,npcInfoOnly,inspect:()=>({revision:REV,phase:phase(),stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});
+window.__STORYWORLD_GUIDE_R272__=Object.freeze({revision:REV,decide,forwardRole,npcInfoOnly,wardRole,inspect:()=>({revision:REV,phase:phase(),stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});
 })();

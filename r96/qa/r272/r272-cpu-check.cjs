@@ -26,6 +26,10 @@ ok('R75 objective behind a closed R81 door (hando02 castle-start) → door neare
  sb2.openPanel('<h2>상자</h2><button id="a">열기</button><button id="b">닫기</button>');const other=opened===1;
  vm.runInContext('guide=false',sb2);sb2.openPanel(villager);const manual=opened===2;
  ok('guide on: R75 info-only NPC panel (last303 villager MODAL-LOOP repro, 30 presses) → one toast, no panel; other panels and guide-off E unchanged',looped&&other&&manual&&sb2.__STORYWORLD_GUIDE_R272__.npcInfoOnly(villager)===true,{opened,toasts});}
+{const W=G.wardRole,b={guide:true,modal:false,loading:false,hp:777,phase:'route',goal:'objective',anchor:{x:16,y:33},px:20.5,py:20.5};
+ ok('R285 ward maps: route phase + R75 goal is the locked altar → walk to the gather room (dist04 boss-door stall repro)',W(b)===true);
+ ok('R285 ward maps: enemy goal / rally / already at the gather room / guide off → native guide',[{goal:'enemy'},{phase:'rally'},{phase:'boss'},{px:16,py:32},{guide:false},{modal:true}].every(o=>W({...b,...o})===false));}
+ok('R285: objective-door walk is skipped while the R78 boss door is sealed (route/rally), ward route runs before it',/\['route','rally'\]\.includes\(window\.__STORYWORLD_WORLD_COMBAT_R78__\?\.state\?\.\(room\)\?\.phase\)\)return false/.test(src)&&/if\(wardRoute\(dt\)\)return true;if\(objectiveDoor\(dt\)\)return true;/.test(src));
 ok('no balance/progression writes (route/door/hp/difficulty untouched)',!/\.hp\s*=[^=]|difficultyR63\s*=|setMapMode|\.phase\s*=[^=]|progress\[/.test(src));
 ok('base guide still runs when R272 has nothing to do',(sb.guideStep(.1),base===1));
 
