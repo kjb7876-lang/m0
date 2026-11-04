@@ -3,11 +3,11 @@
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert/strict');
 const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..'),read=p=>fs.readFileSync(path.join(R,p),'utf8');
 const src=read('client-source/props-fit-r303.js');let n=0;const ok=(name,fn)=>{fn();n++;console.log('PASS '+name);};
-function world(){const store={},c={console,Math,JSON,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setTimeout:()=>0};
- c.window=c;c.room=null;c.draws=[];c.drawProp=function(p){c.draws.push(p);};c.readyImage=()=>true;c.__STORYWORLD_PROPS_R102__={lamps:()=>[{id:'lights_regional_01'}]};c.ctx={save(){},restore(){},translate(){},scale(x){c.lastScale=x;}};c.project=(x,y)=>({x:(x-y)*32,y:(x+y)*16});
+function world({r266=false,draw}={}){const store={},c={console,Math,JSON,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=String(v);}},setTimeout:()=>0};
+ c.window=c;c.room=null;c.draws=[];c.drawProp=function(p){c.draws.push({...p});if(draw)return draw(p);};c.readyImage=()=>true;c.__STORYWORLD_PROPS_R102__={lamps:()=>[{id:'lights_regional_01'}]};c.ctx={save(){},restore(){},translate(){},scale(x){c.lastScale=x;}};c.project=(x,y)=>({x:(x-y)*32,y:(x+y)*16});
  c.StoryPhase1={explorationBlocked:(L,x,y,s)=>{const cells=L.__set||(L.__set=new Set(L.floorCells.map(([a,b])=>a+':'+b)));for(const[dx,dy]of[[-s,-s],[s,-s],[-s,s],[s,s],[0,0]])if(!cells.has(Math.floor(x+dx)+':'+Math.floor(y+dy)))return true;return false;}};
  c.__STORYWORLD_MOOD_R123__={themeOf:z=>/^sz115-S02-/.test(z)?{key:'school'}:{key:'ink'}};
- vm.createContext(c);vm.runInContext(src,c,{filename:'props-fit-r303.js'});c.api=c.__STORYWORLD_PROPS_FIT_R303__;return c;}
+ vm.createContext(c);if(r266){c.drawObjective=()=>{};vm.runInContext(read('client-source/perf-groups-r266.js'),c,{filename:'perf-groups-r266.js'});}vm.runInContext(src,c,{filename:'props-fit-r303.js'});c.api=c.__STORYWORLD_PROPS_FIT_R303__;return c;}
 const rect=(x0,y0,x1,y1)=>{const o=[];for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)o.push([x,y]);return o;};
 function school(){const props=[];for(let i=0;i<6;i++)for(let j=0;j<5;j++)props.push({id:`r115:sz115-S02-7:g1:${i}:${j}`,x:14+i*3,y:14+j*2.6,solid:false,r74Prop:['cabinet','empty-bed','statue'][(i+j)%3],r191From:'workbench',r115Prop:'workbench'});
  props.push({id:'r115:sz115-S02-7:a1:w:105:150',x:10.7,y:15,solid:false,r74Prop:'cabinet',r115Prop:'cabinet'});
@@ -27,6 +27,46 @@ function forest(){return{id:'dist00',exploration:{worldR74:{style:'demon-tree-pa
 const shown=r=>r.props.filter(p=>!p.r303Hide);
 const art=p=>String(p.r81NativeSkin?.path||p.path||p.key||p.r74Prop||'');
 const snap=r=>JSON.stringify({cells:r.exploration.floorCells,solid:r.props.filter(p=>p.solid===true).map(p=>[p.id,p.x,p.y]),count:r.props.length});
+
+ok('R266 then R303: school back marker draws once per frame with original identity',()=>{
+ const refs=[],c=world({r266:true,draw:p=>refs.push(p)}),r=school();
+ const back={id:'r103:back:1:1',x:12,y:12,samongR103:'back',r74Prop:'obelisk'};
+ r.props=[back];c.room=r;const before=Object.getOwnPropertyDescriptors(back);
+ for(let frame=1;frame<=2;frame++){
+  c.drawObjective();c.drawProp(back);
+  assert.equal(c.draws.length,frame,'school back marker must be drawn exactly once per frame');
+  assert.equal(refs[frame-1],back);assert.equal(c.draws[frame-1].r74Prop,'oak-closed');
+  assert.deepEqual(Object.getOwnPropertyDescriptors(back),before);
+ }
+});
+
+ok('marker drawing restores own fields, identity and return values even when drawing throws',()=>{
+ for(const kind of ['back','save','portal'])for(const throws of [false,true])for(const existing of [false,true]){
+  let ref,seen;const error=new Error('draw failed'),result={drawn:true};
+  const c=world({draw:p=>{ref=p;seen={...p};if(throws)throw error;return result;}});
+  c.room=kind==='portal'?forest():school();
+  const p={id:'marker',x:12,y:12,samongR103:kind,r74Prop:'obelisk'};
+  if(existing){p.path='original.png';p.height=47;p.r81NativeSkin={path:'original-skin.png'};}
+  const before=Object.getOwnPropertyDescriptors(p);
+  if(throws)assert.throws(()=>c.drawProp(p),e=>e===error);else assert.equal(c.drawProp(p),result);
+  assert.equal(ref,p);assert.deepEqual(Object.getOwnPropertyDescriptors(p),before);
+  if(kind==='back')assert.equal(seen.r74Prop,'oak-closed');
+  else {assert.ok(seen.path.startsWith('assets/'));assert.ok(!Object.hasOwn(seen,'r74Prop'));assert.ok(!Object.hasOwn(seen,'r81NativeSkin'));}
+ }
+});
+ok('R266 catches a drawing error after marker fields are restored; later pass stays suppressed',()=>{
+ const p={id:'back',x:12,y:12,samongR103:'back',r74Prop:'obelisk'};
+ const c=world({r266:true,draw:()=>{throw new Error('draw failed');}});c.room=school();c.room.props=[p];
+ const before=Object.getOwnPropertyDescriptors(p);c.drawObjective();c.drawProp(p);
+ assert.equal(c.draws.length,1);assert.deepEqual(Object.getOwnPropertyDescriptors(p),before);
+ assert.equal(c.__STORYWORLD_PERF_GROUPS_R266__.inspect().stats.errors,1);
+});
+ok('unloaded marker image and disabled R303 preserve the original prop',()=>{
+ let ref;const c=world({draw:p=>{ref=p;}});c.room=school();c.readyImage=()=>false;
+ const p={id:'save',x:12,y:12,samongR103:'save',r74Prop:'brazier'},before={...p};
+ c.drawProp(p);assert.equal(ref,p);assert.deepEqual(c.draws[0],before);
+ c.api.set({on:false});p.samongR103='back';c.drawProp(p);assert.equal(ref,p);assert.equal(c.draws[1].r74Prop,'brazier');
+});
 
 ok('runtime copy matches source; loaded once right before mobile-perf-r298; verify list, pages.yml, manifest',()=>{
  assert.equal(read('runtime-text/props-fit-r303.js'),src);const idx=read('runtime-text/index.html');

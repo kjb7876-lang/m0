@@ -115,19 +115,29 @@ const loaded=new Set();function ensure(path){try{if(typeof readyImage==='functio
 // 지역 공통 세부 장식(regionalDecoration, room.props 밖의 목록)도 실내에서 실외 그림이면 그리지 않는다(사몽 학교 구역의 가로등 regional-detail:ep1a09:*).
 let themeCache=null;function roomTheme(){const r=typeof room!=='undefined'?room:null;if(!r)return null;if(themeCache?.r!==r||themeCache.L!==r.exploration)themeCache={r,L:r.exploration,t:themeOf(r)};return themeCache.t;}
 function hideDetail(p){const t=roomTheme();return !!t&&t.indoor&&['school','hospital','domestic','chapel'].includes(t.theme)&&!locked(p)&&badInside(t,artOf(p));}
-function drawCopy(p){let t=null;try{t=roomTheme();}catch(_){return p;}const m=markerArt(p,t);if(!m)return p;
- if(m.path){if(!ensure(m.path))return p;const c={...p,path:m.path,height:m.height};delete c.r74Prop;delete c.r81NativeSkin;return c;}
- return{...p,r74Prop:m.r74Prop};}
+// Keep the room prop identity for R266's WeakSet; only drawing fields are temporary.
+function drawMarker(p,draw){let t=null;try{t=roomTheme();}catch(_){return draw();}const m=markerArt(p,t);
+ if(!m||(m.path&&!ensure(m.path)))return draw();
+ const keys=m.path?['path','height','r74Prop','r81NativeSkin']:['r74Prop'];
+ const saved=keys.map(k=>Object.getOwnPropertyDescriptor(p,k));
+ try{
+  if(m.path){p.path=m.path;p.height=m.height;delete p.r74Prop;delete p.r81NativeSkin;}
+  else p.r74Prop=m.r74Prop;
+  return draw();
+ }finally{for(let i=0;i<keys.length;i++){if(saved[i])Object.defineProperty(p,keys[i],saved[i]);else delete p[keys[i]];}}
+}
 try{const P=window.__STORYWORLD_PROPS_R102__;const inner=P?.lamps;
  window.__STORYWORLD_PROPS_R102__=Object.freeze({...(P||{}),lamps:(z,reg,items,list,fam)=>{try{if(on&&typeof room!=='undefined'&&indoorHome(themeOf(room))&&Array.isArray(items)){const out=INDOOR_LIGHTS.map(id=>items.find(i=>i.id===id&&i.kind==='light')).filter(Boolean);if(out.length)return out;}}catch(e){fail(e);}
   return typeof inner==='function'?inner(z,reg,items,list,fam):null;}});}catch(e){fail(e);}
 
 // ---- 그리기 -----------------------------------------------------------------------------------
 try{if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){
- if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;if(p.samongR103)p=drawCopy(p);else if(p.regionalDecoration&&hideDetail(p))return;
+ if(!on||!p)return base.call(this,p,...a);if(p.r303Hide)return;if(!p.samongR103&&p.regionalDecoration&&hideDetail(p))return;
+ const draw=()=>{
  if(p.r303Flip&&typeof ctx?.scale==='function'&&typeof project==='function'){let q;try{q=project(p.x,p.y);}catch(e){return base.call(this,p,...a);}
   ctx.save();try{ctx.translate(q.x,0);ctx.scale(-1,1);ctx.translate(-q.x,0);return base.call(this,p,...a);}finally{ctx.restore();}}
- return base.call(this,p,...a);};}}catch(e){fail(e);}
+ return base.call(this,p,...a);};
+ return p.samongR103?drawMarker(p,draw):draw();};}}catch(e){fail(e);}
 try{if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(...a){const r=base.apply(this,a);try{apply(r);}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 (function poll(){try{if(typeof room!=='undefined'&&room)apply(room);}catch(e){fail(e);}setTimeout(poll,700);})();
 function set(o){if(o&&typeof o.on==='boolean')on=o.on;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}}
