@@ -16,7 +16,7 @@ function mobile(){
 }
 function safeStyle(r){
  // Spatial filters and destructive compositing may affect pixels beyond the quad.
- return (r.globalCompositeOperation==='source-over'||r.globalCompositeOperation==='lighter')&&r.shadowBlur===0&&
+ return (r.globalCompositeOperation==='source-over'||r.globalCompositeOperation==='lighter'||r.globalCompositeOperation==='screen')&&r.shadowBlur===0&&
   (r.filter==='none'||/^(?:(?:brightness|contrast|saturate|grayscale|hue-rotate)\([^()]+\)\s*)+$/.test(r.filter));
 }
 function outside(r,image,a){

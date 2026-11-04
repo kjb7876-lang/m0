@@ -85,8 +85,9 @@ check('shadow and spatial filters preserve rendering and original safeguards',()
  for(const filter of ['blur(200px)','drop-shadow(0 0 200px #fff)','unrecognized(2)']){f.rec.filter=filter;draw(f.rec,'effect',[2000,2000]);}
  f.rec.filter='none';f.rec.shadowBlur=2;draw(f.rec,'effect',[2000,2000]);assert.equal(f.rec.commands.length,4);
 });
-check('color-only filters and lighter compositing can safely cull',()=>{
- const c=world(),f=c.rec();f.rec.filter='saturate(.4) brightness(1.4)';f.rec.globalCompositeOperation='lighter';draw(f.rec,'effect',[2000,2000]);assert.equal(f.rec.commands.length,0);
+check('color-only filters and additive/screen compositing can safely cull',()=>{
+ const c=world(),f=c.rec();f.rec.filter='saturate(.4) brightness(1.4)';
+ for(const mode of ['lighter','screen']){f.rec.globalCompositeOperation=mode;draw(f.rec,'effect',[2000,2000]);}assert.equal(f.rec.commands.length,0);
 });
 check('destructive compositing is never culled',()=>{
  const c=world(),f=c.rec();for(const mode of ['copy','destination-in','source-in','destination-atop']){f.rec.globalCompositeOperation=mode;draw(f.rec,'effect',[2000,2000]);}
