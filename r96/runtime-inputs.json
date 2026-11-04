@@ -3766,6 +3766,13 @@
     "assets/r284/michaela/index.json",
     "mobile-bonus-r286.js",
     "mob-motion-r286.js",
+    "mob-art-r290.js",
+    "assets/r290/mobs/index.json",
+    "assets/r290/mobs/m001.webp",
+    "assets/r290/mobs/m003.webp",
+    "assets/r290/mobs/m004.webp",
+    "assets/r290/mobs/m005.webp",
+    "assets/r290/mobs/m014.webp",
     "render-lod-r287.js"
   ],
   "mediaPaths": [
@@ -4841,5 +4848,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fdd02cda90024fc40b2a3aa0a3a7660ae23341d338451d50dfb57753c2d8a390"
+  "runtimeManifestSHA256": "04fcd0e0a8a005538a09faac87cb855fc96b5692d3a9ff6fcb4e0e6ede8b751b"
 }

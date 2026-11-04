@@ -1,0 +1,1095 @@
+{
+ "revision": "R290",
+ "generator": "scripts/r290-mob-sheets.py (candidate PNG -> lossless WebP 4x3 sheet, pixels unchanged)",
+ "cell": [
+  256,
+  320
+ ],
+ "cols": 4,
+ "walk": [
+  0,
+  8
+ ],
+ "attack": [
+  8,
+  4
+ ],
+ "pivot": [
+  128,
+  300
+ ],
+ "source": "Google Drive folder Storyworld_Assets (CANDIDATE_REVIEW_ONLY bundles, read-only reuse)",
+ "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+ "mobs": {
+  "m001": {
+   "name": "뿌리에 묶인 근위의 기억",
+   "key": "뿌리에 묶인 근위의 기억",
+   "kind": "plant",
+   "file": "m001.webp",
+   "sha256": "1c5c96ad8dada5571732c967975910da5aa6fd0d1e709f037d0b7a74356c1c53",
+   "bytes": 477146,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 213,
+   "foot": [
+    298,
+    299
+   ],
+   "temporary": false,
+   "drive": {
+    "id": "1ymldWAc1t0p0ZvyiYiogv_TIf1wYveP4",
+    "bundle": "CANDIDATE_REVIEW_ONLY_m001_rootbound_guard_walk8_attack4_v1",
+    "folder": "Storyworld_Assets"
+   },
+   "source": {
+    "kind": "frames",
+    "files": null,
+    "sheetMatchesPreassembled": true
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m001.webp",
+    "sha256": "5119c5ffdd30e3aa74ad2bb2cf5ebaa7e91d182dd355273234c8293653cd67fc",
+    "body": 222,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 손그림 걷기8·공격4 후보로 바꿈. 발 그림자 없음(엔진 그림자 사용), 발끝 y≈297~301 → pivot 300 에 붙음. body=걷기 8칸 몸 높이 중앙값이라 화면 키는 R248 때와 같은 size 규칙으로 맞춰진다.",
+   "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 86,
+     "foot": 298,
+     "body": 213,
+     "bbox": [
+      62,
+      86,
+      201,
+      299
+     ],
+     "file": "m001_walk_00.png",
+     "sha256": "b92fbfab306b594f71068de248ca881ae688fff2464806cfb2ab87034aa59e55",
+     "bytes": 56866
+    },
+    {
+     "cell": 1,
+     "top": 86,
+     "foot": 298,
+     "body": 213,
+     "bbox": [
+      58,
+      86,
+      202,
+      298
+     ],
+     "file": "m001_walk_01.png",
+     "sha256": "95ab2bfbd4efe642886904ccf3d8b086cd4fe0b20d65904a018bc7c8671c61b5",
+     "bytes": 53885
+    },
+    {
+     "cell": 2,
+     "top": 86,
+     "foot": 298,
+     "body": 213,
+     "bbox": [
+      61,
+      86,
+      203,
+      299
+     ],
+     "file": "m001_walk_02.png",
+     "sha256": "8a8803059344848db0c794f17fa493abc6eb52ba3ed7d483cd951c9bf40e38f5",
+     "bytes": 54574
+    },
+    {
+     "cell": 3,
+     "top": 86,
+     "foot": 298,
+     "body": 213,
+     "bbox": [
+      67,
+      86,
+      202,
+      298
+     ],
+     "file": "m001_walk_03.png",
+     "sha256": "71dc99dda8182209996a0144b40acd51e92e6510f6a990f0d5c331feb81bdc9e",
+     "bytes": 52510
+    },
+    {
+     "cell": 4,
+     "top": 87,
+     "foot": 299,
+     "body": 213,
+     "bbox": [
+      62,
+      87,
+      198,
+      300
+     ],
+     "file": "m001_walk_04.png",
+     "sha256": "b2ac63ac815cba3b47088afb2084c6eafc9ff1a5a04f4b8fc95984e78c83adb3",
+     "bytes": 54684
+    },
+    {
+     "cell": 5,
+     "top": 88,
+     "foot": 299,
+     "body": 212,
+     "bbox": [
+      57,
+      88,
+      196,
+      299
+     ],
+     "file": "m001_walk_05.png",
+     "sha256": "787d5163c3c6ff1b08bcb0c74767170688ccc9400210deea96741692ca9d584e",
+     "bytes": 54417
+    },
+    {
+     "cell": 6,
+     "top": 87,
+     "foot": 299,
+     "body": 213,
+     "bbox": [
+      58,
+      87,
+      202,
+      299
+     ],
+     "file": "m001_walk_06.png",
+     "sha256": "a94dc1c8a3d9679c7589d7770625cd29d8617f45abb5cc80664120dc645e88a8",
+     "bytes": 54465
+    },
+    {
+     "cell": 7,
+     "top": 88,
+     "foot": 299,
+     "body": 212,
+     "bbox": [
+      59,
+      88,
+      203,
+      299
+     ],
+     "file": "m001_walk_07.png",
+     "sha256": "66d355627a23d1f499a85e8ccfc70bd53b179c81c3fcc33623adaf04195e3f81",
+     "bytes": 55526
+    },
+    {
+     "cell": 8,
+     "top": 97,
+     "foot": 298,
+     "body": 202,
+     "bbox": [
+      52,
+      97,
+      187,
+      299
+     ],
+     "file": "m001_attack_00.png",
+     "sha256": "407baf2264fb75fa25c4572dd851deb566ec42cc253f1e04bee460b7f11b18cf",
+     "bytes": 55814
+    },
+    {
+     "cell": 9,
+     "top": 91,
+     "foot": 298,
+     "body": 208,
+     "bbox": [
+      40,
+      91,
+      229,
+      299
+     ],
+     "file": "m001_attack_01.png",
+     "sha256": "c57b8762060c66d29788ebf9c4050faa1bde10bcadf7c3dabd60020d56e5ec96",
+     "bytes": 61889
+    },
+    {
+     "cell": 10,
+     "top": 99,
+     "foot": 299,
+     "body": 201,
+     "bbox": [
+      22,
+      99,
+      249,
+      299
+     ],
+     "file": "m001_attack_02.png",
+     "sha256": "6560fe93b3e71b49348a67acaae85383bbdff92b9543407a01710ba2e148466a",
+     "bytes": 64290
+    },
+    {
+     "cell": 11,
+     "top": 94,
+     "foot": 299,
+     "body": 206,
+     "bbox": [
+      62,
+      94,
+      216,
+      299
+     ],
+     "file": "m001_attack_03.png",
+     "sha256": "ef6cc8b974e9f72836fc12a535af724a8a250d04d359c77ef44c7fd5d89396f4",
+     "bytes": 55505
+    }
+   ]
+  },
+  "m003": {
+   "name": "진흙등 거미",
+   "key": "진흙등 거미",
+   "kind": "spider",
+   "file": "m003.webp",
+   "sha256": "c330cc414ddf9b41ec346016732ddb79a9345c24e68b941aada2ae65dd72a251",
+   "bytes": 435614,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 152,
+   "foot": [
+    295,
+    297
+   ],
+   "temporary": false,
+   "drive": {
+    "id": "11X3JvpCprrxlWbCCrOFSYDEZYrSSz1N_",
+    "bundle": "CANDIDATE_REVIEW_ONLY_m003_walk8_attack4_v1",
+    "folder": "Storyworld_Assets"
+   },
+   "source": {
+    "kind": "frames",
+    "files": null,
+    "sheetMatchesPreassembled": true
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m003.webp",
+    "sha256": "e52a202c7e2b493429efdc4254f75ad818874620e30e5bb829f7fb983a65e3b3",
+    "body": 146,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 손그림 걷기8·공격4 후보로 바꿈. 발 그림자 없음(엔진 그림자 사용), 발끝 y≈297~301 → pivot 300 에 붙음. body=걷기 8칸 몸 높이 중앙값이라 화면 키는 R248 때와 같은 size 규칙으로 맞춰진다.",
+   "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 145,
+     "foot": 297,
+     "body": 153,
+     "bbox": [
+      23,
+      145,
+      209,
+      298
+     ],
+     "file": "m003_walk_00.png",
+     "sha256": "bf4dfa30d424db7a2937d6dbcba08d3afa32f413cc180896ca78fa129d426669",
+     "bytes": 52235
+    },
+    {
+     "cell": 1,
+     "top": 145,
+     "foot": 297,
+     "body": 153,
+     "bbox": [
+      22,
+      145,
+      218,
+      298
+     ],
+     "file": "m003_walk_01.png",
+     "sha256": "f2e9c8d60cbbd481a120429169f684a16527fbc69615fe9ac6cc0595272bba7e",
+     "bytes": 51588
+    },
+    {
+     "cell": 2,
+     "top": 146,
+     "foot": 297,
+     "body": 152,
+     "bbox": [
+      20,
+      146,
+      225,
+      298
+     ],
+     "file": "m003_walk_02.png",
+     "sha256": "e2f30f3129fa4a2178e306ed3a9d20a59665c933dd629d75510301a408884699",
+     "bytes": 51463
+    },
+    {
+     "cell": 3,
+     "top": 146,
+     "foot": 297,
+     "body": 152,
+     "bbox": [
+      22,
+      146,
+      221,
+      297
+     ],
+     "file": "m003_walk_03.png",
+     "sha256": "b0b1e32aa6cfce96cf53d200554347902514afe70b0d256bb8c72e420242fa5e",
+     "bytes": 50967
+    },
+    {
+     "cell": 4,
+     "top": 146,
+     "foot": 296,
+     "body": 151,
+     "bbox": [
+      22,
+      146,
+      208,
+      297
+     ],
+     "file": "m003_walk_04.png",
+     "sha256": "69b5426511a8573859209e08882193016fa8e7b3e245a749f305bb45f33fc9d5",
+     "bytes": 49743
+    },
+    {
+     "cell": 5,
+     "top": 146,
+     "foot": 297,
+     "body": 152,
+     "bbox": [
+      23,
+      146,
+      212,
+      297
+     ],
+     "file": "m003_walk_05.png",
+     "sha256": "3ceda695c5caa0e822a114107ab5743cbd15910ec091c3a5f071871af051bb3c",
+     "bytes": 50137
+    },
+    {
+     "cell": 6,
+     "top": 146,
+     "foot": 296,
+     "body": 151,
+     "bbox": [
+      23,
+      146,
+      214,
+      297
+     ],
+     "file": "m003_walk_06.png",
+     "sha256": "ba1551e60842a42b7156deae1a1402ab41ecf8e89b35c8fafc9fbdc59a5c8370",
+     "bytes": 50425
+    },
+    {
+     "cell": 7,
+     "top": 146,
+     "foot": 296,
+     "body": 151,
+     "bbox": [
+      24,
+      146,
+      216,
+      297
+     ],
+     "file": "m003_walk_07.png",
+     "sha256": "61f7a816d9db3781f9eadf1e5135e9a2ae6163192b47c7dc30ba250f91b80db8",
+     "bytes": 51242
+    },
+    {
+     "cell": 8,
+     "top": 150,
+     "foot": 295,
+     "body": 146,
+     "bbox": [
+      23,
+      150,
+      215,
+      296
+     ],
+     "file": "m003_attack_00.png",
+     "sha256": "dfb6ba5898a11f59a8911305b5f63ee426698d07fad995600138c939f9e222c5",
+     "bytes": 50509
+    },
+    {
+     "cell": 9,
+     "top": 147,
+     "foot": 295,
+     "body": 149,
+     "bbox": [
+      15,
+      147,
+      213,
+      296
+     ],
+     "file": "m003_attack_01.png",
+     "sha256": "fc9006dd71c89cf7ed90764aa600372fb6bacc55c97a2ebd969b6e8b9bcc15b8",
+     "bytes": 52907
+    },
+    {
+     "cell": 10,
+     "top": 150,
+     "foot": 295,
+     "body": 146,
+     "bbox": [
+      13,
+      150,
+      235,
+      295
+     ],
+     "file": "m003_attack_02.png",
+     "sha256": "851fe8d93ecd635ccf282d84c2d4cf1cf304407457ba3e7e12e0ce737fd6064b",
+     "bytes": 54570
+    },
+    {
+     "cell": 11,
+     "top": 150,
+     "foot": 295,
+     "body": 146,
+     "bbox": [
+      21,
+      150,
+      219,
+      295
+     ],
+     "file": "m003_attack_03.png",
+     "sha256": "7023b127ee95415f4b19b7e500bb2436ec5ec40d2a59ea3c67ca302903a0e780",
+     "bytes": 50893
+    }
+   ]
+  },
+  "m004": {
+   "name": "보라검 추격천사",
+   "key": "보라검 추격천사",
+   "kind": "human",
+   "file": "m004.webp",
+   "sha256": "13f2bf78c12ee3b3d744c335d67b98b62278a5c94e7a8d0f3c77f91f14eeaf36",
+   "bytes": 490564,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 211,
+   "foot": [
+    297,
+    299
+   ],
+   "temporary": false,
+   "drive": {
+    "id": "1pvHhvh7jbCkiD8suFzAdXPuAMgGHKevK",
+    "bundle": "CANDIDATE_REVIEW_ONLY_m004_walk8_attack4_v1",
+    "folder": "Storyworld_Assets"
+   },
+   "source": {
+    "kind": "frames",
+    "files": null,
+    "sheetMatchesPreassembled": true
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m004.webp",
+    "sha256": "4d638e2dd49b8cec0bddf0b5f6a742f43dababacf265d2ad3b939abb8cd3fc91",
+    "body": 222,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 손그림 걷기8·공격4 후보로 바꿈. 발 그림자 없음(엔진 그림자 사용), 발끝 y≈297~301 → pivot 300 에 붙음. body=걷기 8칸 몸 높이 중앙값이라 화면 키는 R248 때와 같은 size 규칙으로 맞춰진다.",
+   "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 89,
+     "foot": 299,
+     "body": 211,
+     "bbox": [
+      40,
+      89,
+      235,
+      299
+     ],
+     "file": "m004_walk_00.png",
+     "sha256": "e7f40f6cb53d9539c1017b5cd04542dafbd2c60d1a16342c937955712b9577fc",
+     "bytes": 60987
+    },
+    {
+     "cell": 1,
+     "top": 89,
+     "foot": 299,
+     "body": 211,
+     "bbox": [
+      40,
+      89,
+      235,
+      299
+     ],
+     "file": "m004_walk_01.png",
+     "sha256": "68d0a23a51d7aa3dfaeaf914950a01de886edd263e746bad675fd5b93e8a17fa",
+     "bytes": 59478
+    },
+    {
+     "cell": 2,
+     "top": 89,
+     "foot": 299,
+     "body": 211,
+     "bbox": [
+      36,
+      89,
+      227,
+      299
+     ],
+     "file": "m004_walk_02.png",
+     "sha256": "4fd65c8d18acdf3064543e2aea719d3444eed59634d55954327f1db8041678f2",
+     "bytes": 54944
+    },
+    {
+     "cell": 3,
+     "top": 88,
+     "foot": 299,
+     "body": 212,
+     "bbox": [
+      34,
+      88,
+      230,
+      300
+     ],
+     "file": "m004_walk_03.png",
+     "sha256": "03efedfb291428da7422fb48e330118cbfc3d293230413d5b1e3d44279704d74",
+     "bytes": 56357
+    },
+    {
+     "cell": 4,
+     "top": 88,
+     "foot": 297,
+     "body": 210,
+     "bbox": [
+      39,
+      88,
+      236,
+      298
+     ],
+     "file": "m004_walk_04.png",
+     "sha256": "eff757c1c00e8c6ccf3093c81ea6e46c91926b54574b50d2b86bb17af5b11a6a",
+     "bytes": 59693
+    },
+    {
+     "cell": 5,
+     "top": 89,
+     "foot": 298,
+     "body": 210,
+     "bbox": [
+      40,
+      89,
+      235,
+      298
+     ],
+     "file": "m004_walk_05.png",
+     "sha256": "19ba690351b90033066aacf094e0ec01fff3cd59920156f62ff837f982cf927e",
+     "bytes": 56107
+    },
+    {
+     "cell": 6,
+     "top": 89,
+     "foot": 298,
+     "body": 210,
+     "bbox": [
+      39,
+      89,
+      230,
+      298
+     ],
+     "file": "m004_walk_06.png",
+     "sha256": "f00caa98f0186509bce3495493b04b9d2d0993589d91c4d9d0a88778881f0635",
+     "bytes": 54642
+    },
+    {
+     "cell": 7,
+     "top": 88,
+     "foot": 298,
+     "body": 211,
+     "bbox": [
+      37,
+      88,
+      234,
+      298
+     ],
+     "file": "m004_walk_07.png",
+     "sha256": "1af6cc7a9b7af7de315c40b31c76bdd59eeba180e309a9fdc0693ede6d67e712",
+     "bytes": 55264
+    },
+    {
+     "cell": 8,
+     "top": 87,
+     "foot": 299,
+     "body": 213,
+     "bbox": [
+      38,
+      87,
+      219,
+      300
+     ],
+     "file": "m004_attack_00.png",
+     "sha256": "9b1c31817b8ec7bc2ad635bcd1122280ad2d5041c5891db54e724bf8b6463671",
+     "bytes": 62467
+    },
+    {
+     "cell": 9,
+     "top": 101,
+     "foot": 299,
+     "body": 199,
+     "bbox": [
+      21,
+      101,
+      249,
+      300
+     ],
+     "file": "m004_attack_01.png",
+     "sha256": "1709ed6788451ad8afd1c165d004d07abaa3486185d3010c4e22f752c006c680",
+     "bytes": 63862
+    },
+    {
+     "cell": 10,
+     "top": 101,
+     "foot": 298,
+     "body": 198,
+     "bbox": [
+      21,
+      101,
+      252,
+      299
+     ],
+     "file": "m004_attack_02.png",
+     "sha256": "2de832f4c9c969e3bea68100d1c487f4e4a08b7b41e255f75e01f690bb82bb8e",
+     "bytes": 64559
+    },
+    {
+     "cell": 11,
+     "top": 95,
+     "foot": 299,
+     "body": 205,
+     "bbox": [
+      29,
+      95,
+      229,
+      299
+     ],
+     "file": "m004_attack_03.png",
+     "sha256": "a6dbbac43e13612ba13508b75a859a5a4a1bb4c050c43b3659dc4137ada4757a",
+     "bytes": 60821
+    }
+   ]
+  },
+  "m005": {
+   "name": "기억 운반거미",
+   "key": "기억 운반거미",
+   "kind": "spider",
+   "file": "m005.webp",
+   "sha256": "c5672ae771670331ba7bb69c0ae608607d9aa8107d674ed174a672c09440d9ea",
+   "bytes": 332174,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 136,
+   "foot": [
+    297,
+    301
+   ],
+   "temporary": false,
+   "drive": {
+    "id": "1dyITGlrvnTSPNk1XZp3FH78wiCbeontr",
+    "bundle": "CANDIDATE_REVIEW_ONLY_m005_anchor_v2.zip",
+    "folder": "Storyworld_Assets"
+   },
+   "source": {
+    "kind": "frames",
+    "files": null,
+    "sheetMatchesPreassembled": true
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m005.webp",
+    "sha256": "951a2f1dd347549ff8842273d77cd28719c81022a2ea9adfb7c4b17810c2d8ad",
+    "body": 146,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 손그림 걷기8·공격4 후보로 바꿈. 발 그림자 없음(엔진 그림자 사용), 발끝 y≈297~301 → pivot 300 에 붙음. body=걷기 8칸 몸 높이 중앙값이라 화면 키는 R248 때와 같은 size 규칙으로 맞춰진다.",
+   "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 164,
+     "foot": 299,
+     "body": 136,
+     "bbox": [
+      30,
+      164,
+      226,
+      301
+     ],
+     "file": "m005_walk_00.png",
+     "sha256": "110f32446de8b76763134a5bb9f00990b00b85c4ca92ff528c4157c14ecb9741",
+     "bytes": 41089
+    },
+    {
+     "cell": 1,
+     "top": 166,
+     "foot": 300,
+     "body": 135,
+     "bbox": [
+      31,
+      166,
+      234,
+      301
+     ],
+     "file": "m005_walk_01.png",
+     "sha256": "13cf2435f0da080db34b0244762b9e9220e48e04b3267616e6fffd5072c9e04f",
+     "bytes": 40326
+    },
+    {
+     "cell": 2,
+     "top": 163,
+     "foot": 299,
+     "body": 137,
+     "bbox": [
+      31,
+      163,
+      235,
+      301
+     ],
+     "file": "m005_walk_02.png",
+     "sha256": "77d4ec335eaed04e1fdbd972fc9c3c8de3926c4e8e7899b609deb561d8f969e0",
+     "bytes": 40369
+    },
+    {
+     "cell": 3,
+     "top": 163,
+     "foot": 299,
+     "body": 137,
+     "bbox": [
+      31,
+      163,
+      230,
+      302
+     ],
+     "file": "m005_walk_03.png",
+     "sha256": "818fcb8b8c380b7436a0c5a453ad74a9edd9d1b150ab0c6431b43a177e482337",
+     "bytes": 39146
+    },
+    {
+     "cell": 4,
+     "top": 164,
+     "foot": 299,
+     "body": 136,
+     "bbox": [
+      31,
+      164,
+      215,
+      301
+     ],
+     "file": "m005_walk_04.png",
+     "sha256": "a8bd5043ee50d14339b50369f6266448ec8b55e2de7e6a8ad1ae758a08486f99",
+     "bytes": 38810
+    },
+    {
+     "cell": 5,
+     "top": 166,
+     "foot": 297,
+     "body": 132,
+     "bbox": [
+      31,
+      166,
+      231,
+      302
+     ],
+     "file": "m005_walk_05.png",
+     "sha256": "f1c398485bf1bb5ae08194cba85fa40dd074922ca96817992cafbb5688feda1c",
+     "bytes": 39346
+    },
+    {
+     "cell": 6,
+     "top": 166,
+     "foot": 300,
+     "body": 135,
+     "bbox": [
+      31,
+      166,
+      225,
+      302
+     ],
+     "file": "m005_walk_06.png",
+     "sha256": "5464a9588203f02238dc8d90da87ee813d5c1e5a016e9823cef9dc7282f6cd9e",
+     "bytes": 39349
+    },
+    {
+     "cell": 7,
+     "top": 162,
+     "foot": 299,
+     "body": 138,
+     "bbox": [
+      31,
+      162,
+      221,
+      301
+     ],
+     "file": "m005_walk_07.png",
+     "sha256": "ae039144d7ae2f2d6fbc989ee3e6a297ab6d46392c4d80dbc87d927f5ff94263",
+     "bytes": 40023
+    },
+    {
+     "cell": 8,
+     "top": 184,
+     "foot": 301,
+     "body": 118,
+     "bbox": [
+      31,
+      184,
+      221,
+      302
+     ],
+     "file": "m005_attack_00.png",
+     "sha256": "ad2d2a010e71d2e3e68e2b1f0a0d6add78fe3c87b5b6f5570c3c5430aebac42b",
+     "bytes": 38084
+    },
+    {
+     "cell": 9,
+     "top": 175,
+     "foot": 299,
+     "body": 125,
+     "bbox": [
+      26,
+      175,
+      217,
+      300
+     ],
+     "file": "m005_attack_01.png",
+     "sha256": "a97ab40b7471a4336275520f90ef7efe8bbc81fdbc464abb1ae965a9ecda4836",
+     "bytes": 40952
+    },
+    {
+     "cell": 10,
+     "top": 170,
+     "foot": 300,
+     "body": 131,
+     "bbox": [
+      25,
+      170,
+      225,
+      302
+     ],
+     "file": "m005_attack_02.png",
+     "sha256": "9f0d80cf8727b4cfe16e8d89298d609649a1cba4e898eca4ee6208c7f19a1725",
+     "bytes": 41910
+    },
+    {
+     "cell": 11,
+     "top": 170,
+     "foot": 299,
+     "body": 130,
+     "bbox": [
+      28,
+      170,
+      230,
+      302
+     ],
+     "file": "m005_attack_03.png",
+     "sha256": "9e02fa037268975a13e6588933ed78ace08cc58de6fc3019a24119b1aac8c988",
+     "bytes": 41251
+    }
+   ]
+  },
+  "m014": {
+   "name": "격리실 감염 의료인",
+   "key": "격리실 감염 의료인",
+   "kind": "human",
+   "file": "m014.webp",
+   "sha256": "274c9f58a91c95c90810a66a3d5414d74994900916a2eb54449ba57929efc42e",
+   "bytes": 348590,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 199,
+   "foot": [
+    299,
+    300
+   ],
+   "temporary": false,
+   "drive": {
+    "id": "1MnlSxqbsy8MNxoxKFMRsmffEB2JOu-Ql",
+    "bundle": "04_m014_v1.png",
+    "folder": "Storyworld_Assets"
+   },
+   "source": {
+    "kind": "sheet",
+    "files": [
+     {
+      "file": "04_m014_v1.png",
+      "sha256": "281d4e83cd00e2e41cc0ad6e44da4751838fc55419dd66b15c4f5094e0904d71",
+      "bytes": 512973
+     }
+    ],
+    "sheetMatchesPreassembled": null
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m014.webp",
+    "sha256": "5933cd43c199a2d9d0a4e7b360c53c4100f5305764654990fe5d4340bd222ffb",
+    "body": 198,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 손그림 걷기8·공격4 후보로 바꿈. 발 그림자 없음(엔진 그림자 사용), 발끝 y≈297~301 → pivot 300 에 붙음. body=걷기 8칸 몸 높이 중앙값이라 화면 키는 R248 때와 같은 size 규칙으로 맞춰진다.",
+   "approval": "dots 생성 후보 → 사용자 승인 2026-11-04",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 103,
+     "foot": 299,
+     "body": 197,
+     "bbox": [
+      54,
+      103,
+      188,
+      299
+     ]
+    },
+    {
+     "cell": 1,
+     "top": 100,
+     "foot": 299,
+     "body": 200,
+     "bbox": [
+      62,
+      100,
+      186,
+      300
+     ]
+    },
+    {
+     "cell": 2,
+     "top": 100,
+     "foot": 300,
+     "body": 201,
+     "bbox": [
+      73,
+      100,
+      191,
+      300
+     ]
+    },
+    {
+     "cell": 3,
+     "top": 100,
+     "foot": 300,
+     "body": 201,
+     "bbox": [
+      61,
+      100,
+      188,
+      300
+     ]
+    },
+    {
+     "cell": 4,
+     "top": 102,
+     "foot": 299,
+     "body": 198,
+     "bbox": [
+      61,
+      102,
+      188,
+      300
+     ]
+    },
+    {
+     "cell": 5,
+     "top": 102,
+     "foot": 299,
+     "body": 198,
+     "bbox": [
+      65,
+      102,
+      191,
+      299
+     ]
+    },
+    {
+     "cell": 6,
+     "top": 102,
+     "foot": 300,
+     "body": 199,
+     "bbox": [
+      80,
+      102,
+      191,
+      300
+     ]
+    },
+    {
+     "cell": 7,
+     "top": 103,
+     "foot": 299,
+     "body": 197,
+     "bbox": [
+      73,
+      103,
+      188,
+      300
+     ]
+    },
+    {
+     "cell": 8,
+     "top": 111,
+     "foot": 300,
+     "body": 190,
+     "bbox": [
+      51,
+      111,
+      190,
+      300
+     ]
+    },
+    {
+     "cell": 9,
+     "top": 112,
+     "foot": 299,
+     "body": 188,
+     "bbox": [
+      44,
+      112,
+      208,
+      300
+     ]
+    },
+    {
+     "cell": 10,
+     "top": 119,
+     "foot": 300,
+     "body": 182,
+     "bbox": [
+      31,
+      119,
+      248,
+      300
+     ]
+    },
+    {
+     "cell": 11,
+     "top": 114,
+     "foot": 300,
+     "body": 187,
+     "bbox": [
+      60,
+      114,
+      205,
+      300
+     ]
+    }
+   ]
+  }
+ }
+}
