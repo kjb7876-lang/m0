@@ -6,7 +6,7 @@
 //  · 끄기: localStorage['storyworld.r339.menu']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_HUD_MENU_R339__)return;
-const REV='R339-menu-2',KEY='storyworld.r339.menu';
+const REV='R339-menu-3',KEY='storyworld.r339.menu';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={menus:0,proxied:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const HIDE=['story-code-button','goldHudOpen','goldHudCast','goldHudSecond','goldHudThird','r263HeroBtn','journalBtn','mapBtn','saveBtn'];
@@ -14,14 +14,14 @@ const HIDE=['story-code-button','goldHudOpen','goldHudCast','goldHudSecond','gol
 const GROUPS=[
  ['진행',[['proxy:r263HeroBtn','영웅'],['proxy:journalBtn','기억'],['proxy:mapBtn','지도'],['menuGuide'],['menuHome']]],
  ['저장',[['menuSave'],['slotsOpenR73','저장 슬롯 · 불러오기'],['menuExport','저장 파일 내보내기'],['menuLoad','저장 파일 불러오기']]],
- ['전투와 성장',[['goldOpen','황금실 제작·관리'],['proxy:goldHudCast','황금실 연속'],['r103Grow'],['r169BookBtn']]],
+ ['전투와 성장',[['goldOpen','황금실 제작·관리'],['proxy:goldHudCast','황금실 연속'],['proxy:goldHudSecond','황금실 연속 · 둘째'],['proxy:goldHudThird','황금실 연속 · 셋째'],['r103Grow'],['r169BookBtn']]],
  ['사몽',[['r103Menu'],['r62DreamMenu']]],
  ['설정',[['menuSettings'],['menuHelp'],['menuDiag'],['proxy:story-code-button','777']]],
  ['처음으로',[['menuTitle'],['campaignTitle54'],['campaignNewMenu54']]]];
 const RARE=['packImages','packAudio'];
-const CLOSE_FIRST=new Set(['goldHudCast']);
+const CLOSE_FIRST=new Set(['goldHudCast','goldHudSecond','goldHudThird']);
 const CSS=`
-header .topnav #${HIDE.join(',header .topnav #')},header #goldHudR72,header #story-code-button{display:none!important}
+body.r339On header .topnav #${HIDE.join(',body.r339On header .topnav #')},body.r339On header #goldHudR72,body.r339On header #story-code-button{display:none!important}
 #panel .r339Menu{display:flex;flex-direction:column;gap:12px;margin-top:6px}
 #panel .r339Group h4{margin:0 0 6px;font:600 11px/1.4 'Malgun Gothic',serif;letter-spacing:.14em;color:#c8a86a;text-transform:none}
 #panel .r339Grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
@@ -53,10 +53,13 @@ function build(){try{if(!on)return;const panel=document.getElementById('panel');
  if(rest.length){if(!rare){rare=document.createElement('details');rare.className='r339Rare';rare.innerHTML='<summary>추가 도구 · 오프라인본 저장·검무 선택</summary>';box.appendChild(rare);}for(const el of rest)rare.appendChild(el);}
  for(const a of box.parentNode.querySelectorAll(':scope > .actions'))if(!a.querySelector('button'))a.classList.add('r339Hide');
 }catch(e){fail(e);}}
-function headerHide(){try{if(!on)return;style();}catch(e){fail(e);}}
+/* 협동 세션의 메뉴(showCoopMenu)는 이 묶음 메뉴를 만들지 않으므로, 그동안은 맨 위 버튼을 숨기지 않는다(Codex 리뷰) */
+const coop=()=>{try{return !!window.__STORYWORLD_COOP_CLIENT_R62__?.active?.();}catch(_){return false;}};
+function headerHide(){try{style();document.body?.classList?.toggle('r339On',on&&!coop());}catch(e){fail(e);}}
+setInterval(headerHide,1000);
 headerHide();
 if(typeof showMenu==='function'){const base=showMenu;showMenu=function(...a){const r=base.apply(this,a);build();setTimeout(build,60);setTimeout(build,350);return r;};}
 window.__STORYWORLD_HUD_MENU_R339__=Object.freeze({revision:REV,build,GROUPS,HIDE,
  inspect:()=>({revision:REV,on,stats:{...stats},lastError}),
- set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on)document.getElementById('r339Style')?.remove();else headerHide();return on;}});
+ set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}headerHide();return on;}});
 })();
