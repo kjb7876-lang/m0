@@ -42,5 +42,23 @@ for(const id of ids){const {sb,drawn,scales}=mk();const name=D.sheets[id].name,k
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),inp=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
 ok('runtime copy matches; manifest/inputs list every new sheet + index.json with matching hashes',RT('mob-art-r290.js')===src&&['mob-art-r290.js','assets/r290/mobs/index.json',...ids.map(id=>'assets/r290/mobs/'+id+'.webp')].every(p=>{const row=man.files.find(r=>r.path===p);return inp.textPaths.includes(p)&&row&&row.sha256===sha(fs.readFileSync(path.join(R,'runtime-text',p)));}));
 ok('in CI',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r359/r359-cpu-check.cjs'));
+// Codex 4483387588: 픽셀 모드(R306)는 row.paths 에 있는 몸 그림 경로만 픽셀 시트로 바꾼다 — R290 새 시트 경로도 R306 표에 있어야 한다.
+// 실제 mob-art-variants-r306.js + 데이터로 restoreSave({mobArt:'pixel'}) 뒤, R290 시트(8인자 칸 그리기)를 그리는 엔진 몸 그림이 R248 픽셀 시트로 바뀌는지 본다.
+{const vmm=require('vm');const dataSrc=fs.readFileSync(path.join(R,'client-source','mob-art-variants-r306-data.js'),'utf8'),code=fs.readFileSync(path.join(R,'client-source','mob-art-variants-r306.js'),'utf8');
+ const c={console,layer:'STORY',time:1,player:{id:'hero'},room:{enemies:[]},localStorage:{getItem:()=>null,setItem(){}},document:{getElementById:()=>null,createElement:()=>({}),addEventListener(){}},
+  ctx:{imageSmoothingEnabled:true,calls:[],drawImage(im,...a){this.calls.push(im.src);}},readyImage:p=>({image:{src:p,naturalWidth:1024,naturalHeight:960}}),ensureImages:()=>Promise.resolve(),
+  serializeSave:()=>({}),restoreSave:async()=>{},drawEnemy(e){c.ctx.drawImage({src:e.sheetR248},256,0,256,320,-64,-150,64,80);}};/* 실제 엔진처럼 e.path 는 기증 몹의 원래 그림이고, 몸은 R248 sheetFor 가 고른 R290 시트로 그린다 */
+ c.window=c;vmm.createContext(c);vmm.runInContext(dataSrc,c);vmm.runInContext(code,c);
+ (async()=>{})();
+ const D6=c.__STORYWORLD_MOB_ART_VARIANTS_R306_DATA__;const bad=[];let tried=0;
+ const done=c.restoreSave({mobArt:'pixel'});
+ globalThis.__r359pixel=Promise.resolve(done).then(()=>{for(const [key,rid] of Object.entries(D6.actors)){const row=D6.rows[rid];const m=/^assets\/r248\/mobs\/(m\d{3})\.webp$/.exec(row.pixel.path);if(!m||!ids.includes(m[1]))continue;
+  const [lay,nativeId,name]=key.split('|');c.layer=lay;c.ctx.calls.length=0;const before=c.__STORYWORLD_MOB_ART_VARIANTS_R306__.inspect().stats.unmatched;tried++;
+  c.drawEnemy({nativeId,name,path:'assets/donor/original.webp',sheetR248:'assets/r290/mobs/'+m[1]+'.webp',hp:10,x:0,y:0});const st=c.__STORYWORLD_MOB_ART_VARIANTS_R306__.inspect().stats;
+  if(c.ctx.calls.join()!==row.pixel.path||st.unmatched!==before)bad.push({key,calls:[...c.ctx.calls]});}
+  ok(`pixel-mode run (R306): every catalogued R359 actor drawing its new R290 sheet is replaced by the R248 pixel sheet (${tried} actors, 0 unmatched)`,tried>=20&&bad.length===0&&c.__STORYWORLD_MOB_ART_VARIANTS_R306__.inspect().mode==='pixel',{tried,bad:bad.slice(0,3)});
+  ok('R306 data: each R359 path carries 12 frames (256×320 cells, pivot 128,300, visibleHeight = R290 body), like the first five R290 rows',Object.values(D6.rows).every(row=>{const m=/^assets\/r248\/mobs\/(m\d{3})\.webp$/.exec(row.pixel.path);if(!m||!ids.includes(m[1]))return true;const p='assets/r290/mobs/'+m[1]+'.webp';const fr=row.frames.filter(f=>f.path===p);return row.paths.includes(p)&&fr.length===12&&fr.every((f,i)=>f.visibleHeight===idx.mobs[m[1]].body&&f.pivot[0]===128&&f.pivot[1]===300);}));});}
+(globalThis.__r359pixel||Promise.resolve()).then(()=>{
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+String(JSON.stringify(c.detail)).slice(0,400)));
 console.log(`R359 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
+});
