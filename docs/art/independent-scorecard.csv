@@ -1,0 +1,20 @@
+id,대상,화풍3,형태2,가독성2,적용성2,재현성1,가중점수,판정,근거파일,후속분담
+hero-hwando,환도 대기·걷기·공격·피격,8,8,7,7.5,8,7.7,임시,pc-hero-hwando-idle.jpg;pc-hero-hwando-move.jpg;pc-hero-hwando-attack.jpg;pc-hero-hwando-hit.jpg;mobile-hero-hwando-idle.jpg;mobile-hero-hwando-move.jpg;mobile-hero-hwando-attack.jpg;mobile-hero-hwando-hit.jpg,code/CX-0023
+hero-michaela,미카엘라 대기·걷기·공격·피격,8,7.5,6.5,7.5,8,7.5,임시,pc-hero-michaela-idle.jpg;pc-hero-michaela-move.jpg;pc-hero-michaela-attack.jpg;pc-hero-michaela-hit.jpg;mobile-hero-michaela-idle.jpg;mobile-hero-michaela-move.jpg;mobile-hero-michaela-attack.jpg;mobile-hero-michaela-hit.jpg,code/CX-0023
+hero-gunner,기억사수 대기·걷기·공격·피격,8,8,7,7.5,8,7.7,임시,pc-hero-gunner-idle.jpg;pc-hero-gunner-move.jpg;pc-hero-gunner-attack.jpg;pc-hero-gunner-hit.jpg;mobile-hero-gunner-idle.jpg;mobile-hero-gunner-move.jpg;mobile-hero-gunner-attack.jpg;mobile-hero-gunner-hit.jpg,code/CX-0023
+terrain-hub,허브 지형 명도·경계,8,7,5.5,7,8,7.1,임시,pc-hub.jpg;mobile-hub.jpg,code/CX-0023
+terrain-outdoor,정원·늪 야외 재질 구분,8,7,6,7,8,7.2,임시,pc-region-dist00.jpg;mobile-region-dist00.jpg;mobile-region-dist02.jpg,code/CX-0023
+terrain-interior,동굴·납골·소환진 통로,7.5,7,6,6.5,8,6.95,임시,mobile-region-dist01.jpg;mobile-region-dist03.jpg;pc-region-dist04.jpg;pc-region-dist05.jpg;pc-region-dist06.jpg,code/CX-0023
+ordinary-dark,일반 적의 어두운 실루엣,7.5,7,5,6.5,8,6.75,임시,pc-region-dist00.jpg;pc-region-dist00-gray.jpg;mobile-region-dist00.jpg;mobile-region-dist00-gray.jpg,code/CX-0023; 필요시 dots
+flat-render,평면·만화형 표현의 회화풍 혼입,3,3,5.5,3,6,3.8,임시,pc-region-dist04.jpg;pc-region-dist05.jpg;pc-region-dist06.jpg;mobile-region-dist04.jpg;mobile-region-dist05.jpg;mobile-region-dist06.jpg;mobile-region-ep1a08.jpg;pc-region-ep1a10.jpg;mobile-region-cult01.jpg;mobile-region-cult02.jpg,new-art/dots: 이름별 회화풍 모션시트 및 만화형 원본의 파생 대체; code: R248 고유 이름 정책을 보존한 최종 경로 연결
+bosses,지역 보스의 크기·형태 위계,8,8,7,7.5,8,7.7,임시,pc-region-dist00.jpg;mobile-region-dist00.jpg;mobile-region-dist01.jpg;mobile-region-dist02.jpg;mobile-region-dist03.jpg;pc-region-dist06.jpg,code: 대비 확인; 신규 그림시 dots
+props,촛대·나무·제단·상자 조형물,8,7.5,6.5,7,8,7.4,임시,pc-hub.jpg;mobile-hub.jpg;pc-region-dist00.jpg;pc-region-dist05.jpg;pc-region-dist06.jpg,code: 상호작용 신호; 신규 소품 dots
+hud-material,HUD·설정 아이콘·버튼 재질,6.5,7,7,6.5,8,6.85,임시,pc-hub.jpg;pc-region-dist06.jpg;mobile-hub.jpg;mobile-hero-gunner-idle.jpg,code: UI 토큰; 금속 프레임 신규 art는 dots
+navigation,길안내·상호작용 표식,6.5,7,7.5,7,8,7.05,임시,mobile-hub.jpg;mobile-hero-gunner-idle.jpg;pc-hub.jpg,code: 표시 규칙; CX-0025와 시각 모티프 공유
+hospital,병원 실내의 재질·명도,7.5,7,7,7,8,7.25,임시,mobile-region-ep1a08.jpg;mobile-region-ep1a09.jpg,code/CX-0023
+palace,결전의 날 궁전의 지역 정체성,6.5,6,6.5,5.5,8,6.35,임시,pc-region-ep1a09b.jpg;mobile-region-ep1a09b.jpg,new-art/dots: 궁전 구조 모티프; code: 지역별 소재 적용
+city,환자와 중독 도시 골목의 혼합 문법,5.5,6,6,5.5,8,5.95,임시,pc-region-ep1a10.jpg,code: 최종 시트경로; new-art/dots: 골목 재질 기준
+samong,사몽 탐색 구역의 형태·대비,7,6.5,6.5,6.5,8,6.8,임시,pc-samong.jpg;mobile-samong.jpg,code/CX-0023: 국소 가림·경계; new-art/dots: 선/벽 재질 통일
+fx-skill-hit,환도 W·기본공격의 현재 보이는 궤적,7,6.5,5.5,6.5,7,6.5,임시,pc-native-skill-hit.jpg;mobile-native-skill-hit.jpg,CX-0025: 프레임·동시효과 위계; CX-0023: 모바일 대비
+settings,설정 메뉴의 타이포·컨트롤 재질,6,7,8,6.5,8,6.9,임시,pc-settings.jpg;mobile-settings.jpg,code: 설정 UI토큰·문구 정리; dots: 공통 컨트롤 프레임
+note,쪽지 양피지와 모바일 본문 가독성,7,7.5,8,7,6,7.2,임시,pc-note.jpg;mobile-note.jpg,code: PC본문 표시 재현확인·모달 타이밍; dots: 양피지 재질

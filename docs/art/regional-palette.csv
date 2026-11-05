@@ -1,0 +1,66 @@
+region_id,지역명,실제프로필mode,실제프로필style,제안팔레트군,주색,보조색,환경금지색,상태
+hub,마수궁 피난 거점,정본프로필 없음,정본프로필 없음,거점·악마화 정원,#342B27,#64624A / #B38A52,형광 초록,제작 제안·현재 충족 미검증
+dist00,악마화 나무의 정원,outdoor,demon-tree-palace-garden,거점·악마화 정원,#342B27,#64624A / #B38A52,형광 초록,제작 제안·현재 충족 미검증
+dist01,거미동굴,cavern,bone-web-cavern,거미동굴,#31343C,#69737A / #A39B8C,순백 바닥·밝은 하늘색,제작 제안·현재 충족 미검증
+dist02,늪지대의 뿔악마,outdoor,face-reed-black-swamp,늪·야외 숲,#303C32,#625343 / #737553,민트 대면적 발광,제작 제안·현재 충족 미검증
+dist03,무너진 성,outdoor,summoning-city-approach,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+dist04,시체들이 되살아난 밤,outdoor,fallen-guardian-crossing,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+dist05,일곱 기둥,outdoor,seven-pillar-pilgrimage,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+dist06,추락,outdoor,balrog-gate-circle,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+ep1a08,피로 물든 병원,indoor,clinic,병원·주사실,#3A4244,#A39984 / #63323B,밝은 의료 앱 청록,제작 제안·현재 충족 미검증
+ep1a09,주사실,indoor,clinic,병원·주사실,#3A4244,#A39984 / #63323B,밝은 의료 앱 청록,제작 제안·현재 충족 미검증
+ep1a09b,결전의 날,outdoor,past-palace-rescue,결전의 날 궁전,#3A1B25,#7E6D69 / #9C8664,과자색 분홍·포화 보라 바탕,제작 제안·현재 충족 미검증
+ep1a10,환자와 중독의 도시,outdoor,patient-addiction-city,도시·골목,#30353D,#625754 / #87919C,포화 네온 대면적,제작 제안·현재 충족 미검증
+ep1a11,천사의 가면과 의목사 후보생,mixed,clinic-memory,병원·주사실,#3A4244,#A39984 / #63323B,밝은 의료 앱 청록,제작 제안·현재 충족 미검증
+dreamRest,기억하지 못하는 사람,indoor,consultation,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+ep1b01,솔로몬의 봉인식,indoor,chapel,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+ep1b02,나태의 집,indoor,house,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b03,금이 간 안경,indoor,mirror-house,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b04,탐식의 주방,indoor,kitchen,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b05,붉은 하이힐,mixed,stage,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b06,맘몬의 금고,indoor,vault,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b06b,눈보라 속의 소년,outdoor,mammon-winter-memory,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+ep1b07,불을 지른 남자,indoor,burned-hotel,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+ep1b08,하늘에 서려는 자,indoor,cathedral,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+ep1b09,생체 부트로더,mixed,snow-neural,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+restEp1b,사라진 귀환자,indoor,observation,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+u201,방어의 군단,outdoor,controller-war-loop,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+u202,잔인한 구원,outdoor,cruel-salvation-prison,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+u204,시스템의 거부권,outdoor,first-memory-threshold,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+u205,관리자 권한,indoor,memory-room,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+u206,중앙 코어 이주실,indoor,machine,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+u203,기억의 문,outdoor,controller-memory-gate,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+restU2,환도 자아의 탄생,outdoor,fusion-rift-outpost,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+last304,중립 지역의 재각성,outdoor,fusion-neutral-meadow,늪·야외 숲,#303C32,#625343 / #737553,민트 대면적 발광,제작 제안·현재 충족 미검증
+last305,고블린 두목과 장미 인장,outdoor,goblin-flute-forest,늪·야외 숲,#303C32,#625343 / #737553,민트 대면적 발광,제작 제안·현재 충족 미검증
+last301,타락천사 기사,outdoor,fallen-angel-black-sea,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+last302,잠들지 못하는 마을,outdoor,sleepless-port-village,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+last303,한약과 불면귀,outdoor,insomnia-black-fog-duel,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+restLast3,끼어든 시간,outdoor,post-portal-observation,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+kair01,최초명령의 세계,mixed,academy,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair04,예순여섯 수문장,outdoor,guardian-ruins,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair05,빼앗긴 시간,outdoor,guardian-time-forest,늪·야외 숲,#303C32,#625343 / #737553,민트 대면적 발광,제작 제안·현재 충족 미검증
+kair06,닫힌 층의 명령,outdoor,guardian-polluted-waterway,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair07,검은 공방,indoor,forge,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+kair08,뉴런 게이트 · 노이론 게이트,outdoor,guardian-neuron-gate,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair09,망각의 묘지,outdoor,guardian-oblivion-cemetery,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair10,붕괴 의식장,outdoor,guardian-collapsed-ritual,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair02,"아르벨리아, 유예의 수문장",indoor,clock-hall,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+kair03,세이렌 모르,outdoor,siren-command-time-core,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+restKairo,최초명령 재작성,outdoor,rewritten-first-command-garden,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+hando01,성 안에 소환된 의목사,mixed,castle,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+hando02,두 주인의 각성,mixed,castle,성곽·봉인 유적,#34323A,#77716B / #9A7950,깨끗한 흰 대리석,제작 제안·현재 충족 미검증
+hando03,함께 되찾은 코어,mixed,mirror-court,묘지·기억·시간,#38323E,#7B8490 / #B3A08A,밝은 파스텔,제작 제안·현재 충족 미검증
+restHando,잘못 이어진 기록,outdoor,blocked-time-wormhole,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+murder01,윤하람,outdoor,rain-crosswalk,도시·골목,#30353D,#625754 / #87919C,포화 네온 대면적,제작 제안·현재 충족 미검증
+murder02,장민재와 새빛호텔,indoor,burned-hotel,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+murder04,고서진과 청록빌라,indoor,villa,집·주방·금고,#3A2F2B,#8A704E / #8E8373,깨끗한 원색,제작 제안·현재 충족 미검증
+murder03,옥상의 순환,outdoor,rooftop-mobius-cycle,도시·골목,#30353D,#625754 / #87919C,포화 네온 대면적,제작 제안·현재 충족 미검증
+cult01,하나로 묶인 악몽,mixed,neural,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+cult02,교주가 기다리는 전쟁,mixed,neural,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+cult05,돌아오는 현실의 기억,mixed,organic,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+cult06,처음 세웠던 목표,mixed,judgment,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+cult03,사몽의 문턱,indoor,harvest-vault,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+cult04,교주의 사몽,mixed,throne,코어·시스템·공방,#292E33,#67634D / #6F9290,RGB 대면적 발광,제작 제안·현재 충족 미검증
+village,남겨진 몽세,정본프로필 없음,정본프로필 없음,정화·쉼터,#282C2D,#77AAA0 / #C09C61,화면 전체 순백 발광,제작 제안·현재 충족 미검증
+dist05/DREAM/sz115-P-1,사몽 진입 표본,실제 DREAM,R103/R115,사몽,#321B27,#6B2635 / #A59487,넓은 금빛 장판·치비,제작 제안·한 구역만 관찰
