@@ -71,6 +71,8 @@ jobs:
         run: node r96/qa/r332/mob-foot-cpu-check.cjs
       - name: R334 boss HP bar in the top header CPU check
         run: node r96/qa/r334/bossbar-header-cpu-check.cjs
+      - name: R336 hero facing 240 degrees left/right CPU check
+        run: node r96/qa/r336/facing-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
