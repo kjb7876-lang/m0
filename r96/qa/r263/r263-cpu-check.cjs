@@ -13,6 +13,10 @@ ok('stage uses existing R108 portraits and each hero colour, falls back to the i
 ok('escapes text into the stage HTML',/const esc=v=>String\(v\?\?''\)\.replace\(\/\[&<>"\]\/g/.test(src));
 ok('respects reduced motion and stacks to one column on phones',/prefers-reduced-motion:reduce/.test(src)&&/@media \(max-width:700px\)\{#r263Stage\{grid-template-columns:1fr/.test(src));
 ok('no canvas filters used (DOM only — Three recorder safe)',!/ctx\.filter/.test(src));
+// R358: '처음부터 시작' 슬롯 창(R101 #heroRowR101)에도 같은 무대 + 초상화 카드, 관찰자는 자기 class 손질에 반응하지 않음(무한 반복 방지)
+ok('new-game slot panel (R101 heroRowR101) gets the same stage and portrait cards',/querySelector\('#heroRowR101'\)/.test(src)&&/function startCards\(row\)/.test(src)&&/img\.src=portrait\(b\.dataset\.hero\)/.test(src)&&/#heroRowR101 \[data-hero\]'\)\)\{lastId=null;stage\(\);watch\(\)/.test(src)&&/r263start/.test(src));
+ok('R101 still owns the pick (pickedHero → newGame), R263 only restyles',/pickedHero=id;paint\(\)/.test(fs.readFileSync(path.join(R,'client-source','polish-r101.js'),'utf8'))&&!/pickedHero\s*=/.test(src));
+ok('observer ignores its own class edits (no feedback loop)',/attributeFilter:\['class'\]/.test(src)&&/r\.target\.matches\('\[data-hero\]'\)/.test(src)&&/if\(!panel\.classList\.contains\('r263'\)\)panel\.classList\.add/.test(src));
 try{new vm.Script(src);ok('syntax',true);}catch(e){ok('syntax',false,String(e));}
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(`R263 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);

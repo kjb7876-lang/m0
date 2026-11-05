@@ -5,10 +5,13 @@
 //  ② 멋있게: 선택창 위에 고른 영웅을 크게 보여 주는 무대를 붙인다 — R108 초상화(assets/r108/heroes, 384×512)를 크게, 영웅 색(HEROES.color)의
 //     기운·천천히 숨 쉬는 확대·위로 떠오르는 불티·빛 한 줄기, 이름·역할·근거리/원거리·패시브·Q 기술. 아래 카드는 초상화+이름만 남긴 띠로.
 //     영웅을 고르면(엔진이 창을 다시 그림) 무대가 새 영웅으로 바뀌며 짧게 번진다. 움직임 줄이기 설정(prefers-reduced-motion)이면 움직임 없이.
+//  ③ R358(사용자 2026-11-05 "처음부터시작에서 영웅선택창도 메뉴안영웅선택창으로 변경 새로생긴 초장화 간지나는 버전"):
+//     '처음부터 시작'(슬롯 확인 창, R101 시작 영웅 줄 #heroRowR101)에도 같은 무대를 붙이고, 작은 아이콘 줄을 R108 초상화 카드 띠로 바꾼다.
+//     고르는 방식(R101 pickedHero → newGame)은 그대로. 무대는 줄에서 고른 영웅(.selected)을 따라 바뀐다.
 //  끄기: localStorage['storyworld.r263.heroSelect']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_SELECT_R263__)return;
-const REV='R263-hero-select-1',KEY='storyworld.r263.heroSelect';
+const REV='R263-hero-select-2',KEY='storyworld.r263.heroSelect';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={opened:0,blocked:0,staged:0,backToGame:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const ROLE=()=>window.__STORYWORLD_HEROES_R108__?.roles||{};
@@ -50,6 +53,15 @@ function css(){if(document.getElementById('r263Css'))return;const s=document.cre
  '#panel.r263 .card.r108 small,#panel.r263 .card.r108 .role{display:none}',
  '#panel.r263 .card.r108 strong{font-size:13px;margin:0}',
  '#panel.r263 .card.r108.selected{transform:translateY(-2px)}',
+ '#panel.r263start #heroRowR101>p{display:none}',
+ '#panel.r263start #r263Stage{margin:2px 0 8px;padding:10px 14px}#panel.r263start #r263Stage .pt{height:clamp(160px,30vh,270px)}',
+ '#panel.r263start .heroRowR101 button img{max-height:clamp(84px,15vh,118px)}',
+ '#panel.r263start .heroRowR101{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin:2px 0 12px}',
+ '#panel.r263start .heroRowR101 button{width:auto;padding:6px;border-radius:2px;border:1px solid #4a4238;background:#0e1013;transition:transform .15s,border-color .15s}',
+ '#panel.r263start .heroRowR101 button img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 12%;margin:0 0 4px}',
+ '#panel.r263start .heroRowR101 button img.fb{object-fit:contain}',
+ '#panel.r263start .heroRowR101 button span{font-size:13px}',
+ '#panel.r263start .heroRowR101 button.selected{transform:translateY(-2px);border-color:var(--c);box-shadow:0 0 12px var(--c)}',
  '@keyframes r263breath{from{transform:scale(1)}to{transform:scale(1.035) translateY(-4px)}}',
  '@keyframes r263pulse{0%,100%{opacity:.55}50%{opacity:.95}}',
  '@keyframes r263ray{0%,100%{opacity:.15;transform:rotate(18deg) translateX(-30%)}50%{opacity:.55;transform:rotate(18deg) translateX(40%)}}',
@@ -59,9 +71,12 @@ function css(){if(document.getElementById('r263Css'))return;const s=document.cre
  '@media (prefers-reduced-motion:reduce){#r263Stage *,#r263Stage{animation:none!important}}'].join('\n');document.head.appendChild(s);}
 const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let lastId=null;
-function stage(){const panel=document.getElementById('panel'),cards=panel?.querySelector('.cards');if(!panel||!cards||!cards.querySelector('[data-hero]'))return;
- css();panel.classList.add('r263');const sel=cards.querySelector('.card.selected[data-hero]')||cards.querySelector('[data-hero]'),id=sel.dataset.hero,H=(typeof HEROES!=='undefined'&&HEROES[id])||{};
- let st=panel.querySelector('#r263Stage');if(!st){st=document.createElement('div');st.id='r263Stage';cards.parentNode.insertBefore(st,cards);}
+/* R358: 시작 영웅 줄의 작은 서기 그림을 R108 초상화로(못 읽으면 원래 그림으로 되돌림) */
+function startCards(row){for(const b of row.querySelectorAll('button[data-hero]')){if(b.dataset.r263)continue;b.dataset.r263='1';const img=b.querySelector('img');if(!img)continue;const old=img.src;img.onerror=()=>{img.onerror=null;img.src=old;img.classList.add('fb');};img.src=portrait(b.dataset.hero);stats.startCards=(stats.startCards||0)+1;}}
+function stage(){const panel=document.getElementById('panel'),start=panel?.querySelector('#heroRowR101'),cards=start?start.querySelector('.heroRowR101'):panel?.querySelector('.cards');if(!panel||!cards||!cards.querySelector('[data-hero]'))return;
+ css();if(!panel.classList.contains('r263'))panel.classList.add('r263');if(panel.classList.contains('r263start')!==!!start)panel.classList.toggle('r263start',!!start);const sel=cards.querySelector('.selected[data-hero]')||cards.querySelector('[data-hero]'),id=sel.dataset.hero,H=(typeof HEROES!=='undefined'&&HEROES[id])||{};
+ if(start)startCards(cards);const anchor=start||cards;
+ let st=panel.querySelector('#r263Stage');if(!st){st=document.createElement('div');st.id='r263Stage';anchor.parentNode.insertBefore(st,anchor);}
  if(st.dataset.hero===id)return;st.dataset.hero=id;st.style.setProperty('--c',H.color||'#d2b77e');
  const ranged=!(H.melee)&&Number(H.range)>4,embers=Array.from({length:14},(_,i)=>'<i class="ember" style="left:'+(6+((i*37)%88))+'%;animation-duration:'+(3.2+((i*13)%5)*.7)+'s;animation-delay:'+(((i*7)%10)*.35)+'s;--dx:'+(((i*29)%40)-20)+'px"></i>').join('');
  st.innerHTML='<div class="aura"></div><div class="ray"></div>'+embers+'<div class="pt"><img alt="'+esc(H.name)+'" decoding="async" src="'+esc(portrait(id))+'"></div>'
@@ -70,9 +85,9 @@ function stage(){const panel=document.getElementById('panel'),cards=panel?.query
  const img=st.querySelector('.pt img');img.onerror=()=>{img.onerror=null;try{img.src=urlFor(heroArt[id].idle.front);img.style.objectFit='contain';}catch(_){}};
  if(lastId&&lastId!==id){st.classList.remove('swap');void st.offsetWidth;st.classList.add('swap');}lastId=id;stats.staged++;
  if(fromField){const h2=panel.querySelector('h2');if(h2&&/거점에서 영웅 변경/.test(h2.textContent))h2.textContent='영웅 변경';}}
-let obs=null;function watch(){const p=document.getElementById('panel');if(!p)return;if(obs)obs.disconnect();obs=new MutationObserver(()=>{if(!p.querySelector('.cards [data-hero]')){p.classList.remove('r263');obs.disconnect();obs=null;lastId=null;return;}try{stage();}catch(e){fail(e);}});obs.observe(p,{childList:true,subtree:true});}
+let obs=null;function watch(){const p=document.getElementById('panel');if(!p)return;if(obs)obs.disconnect();obs=new MutationObserver(recs=>{/* R358: 우리 자신의 class 손질(무대·panel)에는 반응하지 않는다 — 고른 영웅 칸의 class 변화와 내용 교체만 */if(!recs.some(r=>r.type==='childList'?!(r.target.closest&&r.target.closest('#r263Stage')):!!(r.target.matches&&r.target.matches('[data-hero]'))))return;if(!p.querySelector('.cards [data-hero],#heroRowR101 [data-hero]')){p.classList.remove('r263','r263start');obs.disconnect();obs=null;lastId=null;return;}try{stage();}catch(e){fail(e);}});obs.observe(p,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});}
 if(typeof showHeroes==='function'){const base=showHeroes;showHeroes=function(...a){fromField=pending;/* 바로가기 단추로 연 때만 — 쉼터에서 연 창의 돌아가기는 원래대로 쉼터로 */const r=base.apply(this,a);try{if(on){lastId=null;stage();watch();}}catch(e){fail(e);}return r;};}
-if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){const r=base.apply(this,a);try{const p=document.getElementById('panel');if(p&&!p.querySelector('.cards [data-hero]'))p.classList.remove('r263');}catch(_){}return r;};}
+if(typeof openPanel==='function'){const base=openPanel;openPanel=function(...a){const r=base.apply(this,a);try{const p=document.getElementById('panel');if(p&&!p.querySelector('.cards [data-hero]'))p.classList.remove('r263','r263start');if(on&&p&&p.querySelector('#heroRowR101 [data-hero]')){lastId=null;stage();watch();stats.startStaged=(stats.startStaged||0)+1;}}catch(e){fail(e);}return r;};}
 try{addButton();}catch(e){fail(e);}if(typeof setInterval==='function')setInterval(()=>{try{syncButton();}catch(e){fail(e);}},500);
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}try{syncButton();}catch(_){}return on;}
 window.__STORYWORLD_HERO_SELECT_R263__=Object.freeze({revision:REV,set,canOpen,open:()=>document.getElementById('r263HeroBtn')?.click(),inspect:()=>({revision:REV,on,fromField,stats:{...stats},lastError})});
