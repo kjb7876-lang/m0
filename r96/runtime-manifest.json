@@ -13394,8 +13394,8 @@
     },
     {
       "path": "assets/r290/mobs/index.json",
-      "bytes": 132068,
-      "sha256": "e01f5970c7bf821c623c3e9c216617f6d97d34494c99cfe77cbe87cfe6b57c72"
+      "bytes": 138269,
+      "sha256": "eb70224915b3166229d2d2dc5a01916ce5c2722d2c1af3f4cb3bfb9cab60db07"
     },
     {
       "path": "assets/r290/mobs/m001.webp",
@@ -13431,6 +13431,11 @@
       "path": "assets/r290/mobs/m026.webp",
       "bytes": 149832,
       "sha256": "047a2519905865fcd9e09ec14ec6770657d45f333233e13c6cfb66fd43dc4a96"
+    },
+    {
+      "path": "assets/r290/mobs/m030.webp",
+      "bytes": 394754,
+      "sha256": "48812309f841e186c13621e5f30cc337ccb67dfce8a8b4075019af10586d32e2"
     },
     {
       "path": "assets/r290/mobs/m051.webp",
@@ -23729,8 +23734,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569632,
-      "sha256": "4796a33aa45ea62e00f52067718eec507a30ec89a86203f778ddcc1cd602ab30"
+      "bytes": 6569676,
+      "sha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4"
     },
     {
       "path": "intro-r140.js",
@@ -23789,13 +23794,13 @@
     },
     {
       "path": "mob-art-r290.js",
-      "bytes": 5341,
-      "sha256": "2c8496364a9408829519983dc3fd0f4b66fc49e42e3e9354ae67f0d719b94f2c"
+      "bytes": 5894,
+      "sha256": "02fc09b4708a2c8841fe9947ea0572317a72f707d5386b12fe429048051f6729"
     },
     {
       "path": "mob-art-variants-r306-data.js",
-      "bytes": 974403,
-      "sha256": "17a02f0a9ef2e2735e597bcb808f0eeff83ae50e8c116f2cc69440995edc88f6"
+      "bytes": 977001,
+      "sha256": "b13fb95c2c53a99ca962cec970f3d69849092f136cc384f92fda06e78e03efbd"
     },
     {
       "path": "mob-art-variants-r306.js",
@@ -23846,6 +23851,11 @@
       "path": "mob-preload-r260.js",
       "bytes": 4943,
       "sha256": "fa1bc5b1cb855d4e76bcc1ba07c144d530538a1eb097c717b728a1de43b9bb0f"
+    },
+    {
+      "path": "mob-rename-r362.js",
+      "bytes": 5353,
+      "sha256": "fba70fe3ee1afccb301c192149736dbd2ca276e2856aedcfe97954f9af7ddfe0"
     },
     {
       "path": "mob-style-r199.js",
@@ -24418,9 +24428,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4883,
-  "totalBytes": 938126147,
-  "webHTMLSha256": "4796a33aa45ea62e00f52067718eec507a30ec89a86203f778ddcc1cd602ab30",
+  "fileCount": 4885,
+  "totalBytes": 938535650,
+  "webHTMLSha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4",
   "largest": [
     {
       "path": "index.html",

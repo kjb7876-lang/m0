@@ -5871,6 +5871,247 @@
     }
    ]
   },
+  "m030": {
+   "name": "개와 늑대의 시간",
+   "nameBefore": "불길 속의 곰",
+   "key": "불길 속의 곰",
+   "kind": "quad",
+   "file": "m030.webp",
+   "sha256": "48812309f841e186c13621e5f30cc337ccb67dfce8a8b4075019af10586d32e2",
+   "bytes": 394754,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 151,
+   "foot": [
+    285,
+    300
+   ],
+   "shiftY": 0,
+   "temporary": false,
+   "conditional": true,
+   "revision": "R362",
+   "drive": {
+    "bundle": "SW-m030-painted-static-candidate-7.8429-20261105.zip",
+    "sha256": "73f4e719901f9800558666acbbdb14b362f5ead936d0787b46bc938a7d207daf",
+    "bytes": 1952431,
+    "folder": "결과 폴더(소유자 본인)"
+   },
+   "dots": {
+    "mean": 7.8429,
+    "scores": {
+     "art": 8.2,
+     "staging": 7.4,
+     "environment": 7.6,
+     "lighting": 7.8,
+     "motion": 7.5,
+     "UX": 8.3,
+     "camera": 8.1
+    },
+    "status": "conditional static-review candidate",
+    "actualPlayback": false,
+    "gameTested": false
+   },
+   "source": {
+    "kind": "frames",
+    "sheetMatchesPreassembled": true,
+    "sheetSha256": "1c15985b9b449dab7011e40e6506c6bb770b1df0670bf6b0dcde1f055c7024da",
+    "referenceR248Sha256": "dc94491ae3e0b6ab1dbba44a7a74ce046625b265e5b05b1e96a68e021a243bec"
+   },
+   "replaces": {
+    "file": "assets/r248/mobs/m030.webp",
+    "sha256": "dc94491ae3e0b6ab1dbba44a7a74ce046625b265e5b05b1e96a68e021a243bec",
+    "body": 182,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(우리 코드가 그린 대체 그림)를 Dots 손그림 걷기8+공격4 후보로 바꿈. R248 픽셀 참조(붉은 몸·긴 다리·각진 주둥이·짧게 올라간 꼬리·등불꽃)를 손칠 질감으로 새로 그린 걷기8·공격4(웅크림→이륙→공중 신전→회복). 인계 메모: 걷기 1·5 앞발 교대 미해결, 공격 12 앞발 공중(완전 착지 아님), 실제 재생·게임 미검증. body=걷기 8칸 몸 높이 중앙값 → 화면 키는 R248 size 규칙 그대로.",
+   "approval": "dots 후보(Claude 검토용 인계, 조건부·최종 아님) → 사용자 2026-11-06 결정 \"쓰고 이름을바꿔 개와늑대의시간으로\", PR 승인 대기",
+   "lossless": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 143,
+     "foot": 299,
+     "body": 157,
+     "bbox": [
+      40,
+      143,
+      212,
+      300
+     ],
+     "file": "frame_01.png",
+     "sha256": "0b90bc69c43b512d6febc586e0a8b37c12f7244d622fed46d8037c218f8b2297",
+     "bytes": 48434
+    },
+    {
+     "cell": 1,
+     "top": 148,
+     "foot": 299,
+     "body": 152,
+     "bbox": [
+      42,
+      148,
+      213,
+      300
+     ],
+     "file": "frame_02.png",
+     "sha256": "2a2d44bddca7ee83f9c56aea12e2a746b13258adfa475976852588e456df2b0c",
+     "bytes": 46270
+    },
+    {
+     "cell": 2,
+     "top": 150,
+     "foot": 300,
+     "body": 151,
+     "bbox": [
+      42,
+      150,
+      213,
+      300
+     ],
+     "file": "frame_03.png",
+     "sha256": "ce4393149d7e16a6ccd25c033253bdbfe71b81949566c29a2acd157517c17d8f",
+     "bytes": 46793
+    },
+    {
+     "cell": 3,
+     "top": 150,
+     "foot": 300,
+     "body": 151,
+     "bbox": [
+      43,
+      150,
+      223,
+      300
+     ],
+     "file": "frame_04.png",
+     "sha256": "6ac94e1918451905cae083fbdff2e413d3a3651a4c9803a0d013efd3b947e6d1",
+     "bytes": 46878
+    },
+    {
+     "cell": 4,
+     "top": 152,
+     "foot": 300,
+     "body": 149,
+     "bbox": [
+      37,
+      152,
+      214,
+      300
+     ],
+     "file": "frame_05.png",
+     "sha256": "bfcfd682d124ce22b6b7143d2f5560d972a31f710be2c675200aaa3da82c52be",
+     "bytes": 48095
+    },
+    {
+     "cell": 5,
+     "top": 153,
+     "foot": 300,
+     "body": 148,
+     "bbox": [
+      42,
+      153,
+      212,
+      301
+     ],
+     "file": "frame_06.png",
+     "sha256": "c1613abf492134eae8cdd6bc610e7bb34139b5109b0f31d9b67e512541fc0cf5",
+     "bytes": 45628
+    },
+    {
+     "cell": 6,
+     "top": 153,
+     "foot": 300,
+     "body": 148,
+     "bbox": [
+      42,
+      153,
+      213,
+      300
+     ],
+     "file": "frame_07.png",
+     "sha256": "7e4a780773d62f9b2d10b32196bab31b211a1c1f25aa7ee56e08e46edded20dd",
+     "bytes": 44793
+    },
+    {
+     "cell": 7,
+     "top": 152,
+     "foot": 300,
+     "body": 149,
+     "bbox": [
+      43,
+      152,
+      213,
+      300
+     ],
+     "file": "frame_08.png",
+     "sha256": "7b6c24c6b125a10e204adc374c6ac3171ae74a03f8073a1b9bf08e4e45bcd7c0",
+     "bytes": 45931
+    },
+    {
+     "cell": 8,
+     "top": 185,
+     "foot": 300,
+     "body": 116,
+     "bbox": [
+      40,
+      185,
+      212,
+      300
+     ],
+     "file": "frame_09.png",
+     "sha256": "f944a2f25a34c42016565f26c87dbb06ee951669c96e9fe527fb1ad8712a1375",
+     "bytes": 40244
+    },
+    {
+     "cell": 9,
+     "top": 155,
+     "foot": 300,
+     "body": 146,
+     "bbox": [
+      34,
+      155,
+      224,
+      301
+     ],
+     "file": "frame_10.png",
+     "sha256": "8bcf80a99644f26829626872b623a0f81a538a1ccef47d28c24610ba5c18c8f2",
+     "bytes": 43888
+    },
+    {
+     "cell": 10,
+     "top": 159,
+     "foot": 285,
+     "body": 127,
+     "bbox": [
+      14,
+      159,
+      245,
+      285
+     ],
+     "file": "frame_11.png",
+     "sha256": "0de5208052aa83a3b0554f701a268cbff3bc86bd9ecc2bad58566cb402708cd7",
+     "bytes": 47733
+    },
+    {
+     "cell": 11,
+     "top": 162,
+     "foot": 300,
+     "body": 139,
+     "bbox": [
+      42,
+      162,
+      216,
+      301
+     ],
+     "file": "frame_12.png",
+     "sha256": "7cc39be3a83be54a245ef7844700dbed2ea786dd7382e051e60f15a114d0fa78",
+     "bytes": 45027
+    }
+   ]
+  },
   "m052": {
    "name": "공실 표기 잔재",
    "legacy": "M127",
@@ -6107,6 +6348,17 @@
   "source": "Google Drive 결과 폴더(소유자 본인) SW-mNNN-*-candidate*.zip, 읽기 전용 재사용",
   "approval": "dots 후보(Claude 검토용 인계, 조건부·최종 아님) → 사용자 2026-11-05 적용 지시, PR 승인 대기",
   "footTarget": 296
+ },
+ "r362": {
+  "generator": "scripts/r362-m030-sheet.py (candidate PNG -> lossless WebP 4x3 sheet, pixels unchanged)",
+  "source": "Google Drive 결과 폴더(소유자 본인) SW-m030-painted-static-candidate-*.zip, 읽기 전용 재사용",
+  "approval": "dots 후보(Claude 검토용 인계, 조건부·최종 아님) → 사용자 2026-11-06 결정 \"쓰고 이름을바꿔 개와늑대의시간으로\", PR 승인 대기",
+  "rename": {
+   "old": "불길 속의 곰",
+   "new": "개와 늑대의 시간",
+   "overlay": "mob-rename-r362.js"
+  },
+  "idLink": "reference-r248.webp sha256 == R248 m030 sheet sha256"
  },
  "r363": {
   "generator": "scripts/r363-legacy-mob-sheets.py (Dots legacy-r92 repaint attack/walk + r92 legacy walk -> lossless WebP 4x3 sheet, resampled)",
