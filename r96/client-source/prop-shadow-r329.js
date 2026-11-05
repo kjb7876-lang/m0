@@ -9,7 +9,7 @@
 //  · storyworld.r329.propShadow = '0' 이면 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROP_SHADOW_R329__)return;
-const REV='R329-prop-shadow-2',KEY='storyworld.r329.propShadow';
+const REV='R329-prop-shadow-3',KEY='storyworld.r329.propShadow';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={props:0,cast:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 그림자: 키의 LEN 배로 눕히고, 키의 SHIFT 만큼 오른쪽·RISE 만큼 위(물체 뒤)로. 진하기 ALPHA(두 장 겹침 기준).
@@ -17,9 +17,15 @@ const LEN=.9,SHIFT=.3,RISE=.12,ALPHA=.42,SOFT=2;
 const WALLISH=/wall|door|gate|banner|torch|relief|frame|window|painting|portal|sign|sconce|curtain|poster|clock|mirror|vent|rug|carpet|decal|stain|puddle|blood-|crack/i;
 const recent=[];let cur=null,depth=0;
 // fn 으로 그 그림을 그대로 다시 그리되 발(x,footY)을 축으로 눕힌 검은 실루엣으로.
-function castVia(fn,self,args,xi,yi,hi,oi,footY){const x=+args[xi],h=+args[hi];if(!Number.isFinite(x+footY)||!(h>6))return;
- const opt=args[oi]&&typeof args[oi]==='object'?args[oi]:{},a=ALPHA*Math.max(.25,Math.min(1,Number(opt.alpha??1)));
- for(const dx of[-SOFT,SOFT]){ctx.save();try{ctx.translate(x+dx+h*SHIFT,footY-h*RISE);ctx.scale(1,LEN);ctx.translate(-x,-footY);
+// 근처(LIGHT_R 칸 안)에 빛나는 것(R300 lightsOf: 화로·횃불·촛대·등불·벽 촛대, R330 불길)이 있으면 그 빛 반대쪽으로 그림자를 민다.
+//  가까울수록 길고 진하다. 없으면 화면 밖 보는 사람 쪽 빛(오른쪽 위로 눕힘).
+const LIGHT_R=4.5;
+function lightDir(c){try{const W=window.__STORYWORLD_LIGHT_ATMOS_R300__,list=(W?.lightsOf?.(room)||[]).concat(window.__STORYWORLD_DISASTER_R330__?.lights?.()||[]);let best=null,bd=LIGHT_R;
+  for(const l of list){if(c.self&&l.x===c.self.x&&l.y===c.self.y)continue;const d=Math.hypot(l.x-c.wx,l.y-c.wy);if(d<bd&&d>.15){bd=d;best=l;}}
+  if(!best)return null;const a=project(best.x,best.y),b=project(c.wx,c.wy),dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1;stats.lit=(stats.lit||0)+1;return{x:dx/L,y:dy/L,k:1-bd/LIGHT_R};}catch(e){fail(e);return null;}}
+function castVia(fn,self,args,xi,yi,hi,oi,footY,c){const x=+args[xi],h=+args[hi];if(!Number.isFinite(x+footY)||!(h>6))return;const L=c&&Number.isFinite(c.wx)?lightDir(c):null;
+ const opt=args[oi]&&typeof args[oi]==='object'?args[oi]:{},a=ALPHA*(L?1+.4*L.k:1)*Math.max(.25,Math.min(1,Number(opt.alpha??1)));
+ for(const dx of[-SOFT,SOFT]){ctx.save();try{if(L){const len=h*(.25+.3*L.k);ctx.translate(x+dx+L.x*len,footY+L.y*len*.6);ctx.scale(1,LEN*(.85+.3*L.k));ctx.translate(-x,-footY);}else{ctx.translate(x+dx+h*SHIFT,footY-h*RISE);ctx.scale(1,LEN);ctx.translate(-x,-footY);}
    const b=args.slice();b[oi]={...opt,alpha:a,filter:'brightness(0)',blend:undefined};fn.apply(self,b);}finally{ctx.restore();}}
  stats.cast++;const k=String(args[0]?.path||args[0]).slice(-48);if(recent.length<30&&!recent.includes(k))recent.push(k);}
 function take(x){if(!cur||cur.done)return null;if(Math.abs(x-cur.x)>2)return null;cur.done=true;return cur;}
@@ -27,14 +33,14 @@ function install(){
  if(typeof drawProp!=='function'||typeof project!=='function')return false;
  const baseProp=drawProp;drawProp=function(p,...a){const ok=on&&p&&!p.terrainWall&&!p.wallMounted&&!p.r115Clue&&!WALLISH.test(String(p.id||'')+' '+String(p.path||'')+' '+String(p.r80Art||''));
   if(!ok){if(p)stats.skipped++;return baseProp.apply(this,[p,...a]);}
-  const prev=cur;let q=null;try{q=project(p.x,p.y);}catch(_){}cur=q?{x:q.x,y:q.y,done:false}:null;depth++;stats.props++;
+  const prev=cur;let q=null;try{q=project(p.x,p.y);}catch(_){}cur=q?{x:q.x,y:q.y,wx:p.x,wy:p.y,self:p,done:false}:null;depth++;stats.props++;
   try{return baseProp.apply(this,[p,...a]);}finally{depth--;cur=prev;}};
- if(typeof sprite==='function'){const baseSprite=sprite;sprite=function(path,x,y,height,opt){const c=depth>0&&typeof path==='string'?take(x):null;if(c&&y<=c.y+2&&y>=c.y-height*.75){try{castVia(baseSprite,this,[path,x,y,height,opt||{}],1,2,3,4,c.y);}catch(e){fail(e);}}return baseSprite.apply(this,arguments);};}
- if(typeof drawAssetFrame3==='function'){const baseF=drawAssetFrame3;drawAssetFrame3=function(path,frame,x,y,height,opt){const c=depth>0?take(x):null;if(c){try{castVia(baseF,this,[path,frame,x,y,height,opt||{}],2,3,4,5,c.y);}catch(e){fail(e);}}return baseF.apply(this,arguments);};}
+ if(typeof sprite==='function'){const baseSprite=sprite;sprite=function(path,x,y,height,opt){const c=depth>0&&typeof path==='string'?take(x):null;if(c&&y<=c.y+2&&y>=c.y-height*.75){try{castVia(baseSprite,this,[path,x,y,height,opt||{}],1,2,3,4,c.y,c);}catch(e){fail(e);}}return baseSprite.apply(this,arguments);};}
+ if(typeof drawAssetFrame3==='function'){const baseF=drawAssetFrame3;drawAssetFrame3=function(path,frame,x,y,height,opt){const c=depth>0?take(x):null;if(c){try{castVia(baseF,this,[path,frame,x,y,height,opt||{}],2,3,4,5,c.y,c);}catch(e){fail(e);}}return baseF.apply(this,arguments);};}
  return true;}
 const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
 // R102 움직이는 조형물은 처음 실린 drawAssetFrame3 를 직접 잡아 쓰므로 그쪽 paint 가 이 함수를 먼저 부른다.
-function before(fn,args,footY){if(!on||depth<1)return;const c=take(+args[2]);if(!c)return;try{castVia(fn,null,args,2,3,4,5,Number.isFinite(footY)?footY:c.y);}catch(e){fail(e);}}
+function before(fn,args,footY){if(!on||depth<1)return;const c=take(+args[2]);if(!c)return;try{castVia(fn,null,args,2,3,4,5,Number.isFinite(footY)?footY:c.y,c);}catch(e){fail(e);}}
 window.__STORYWORLD_PROP_SHADOW_R329__=Object.freeze({revision:REV,installed,before,
  inspect:()=>({revision:REV,on,installed,stats:{...stats},recent:recent.slice(),lastError}),
  set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}});
