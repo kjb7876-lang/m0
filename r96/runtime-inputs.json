@@ -4057,6 +4057,10 @@
     "assets/r349/hwando-arc.webp",
     "assets/r349/hwando-arc-r49.webp",
     "assets/r349/hwando-a-r49.webp",
+    "slayer-r351.js",
+    "assets/r351/slayer/attack-w.webp",
+    "assets/r351/slayer/walk-w.webp",
+    "assets/r351/slayer/index.json",
     "bgm-pick-r353.js"
   ],
   "mediaPaths": [
@@ -5132,5 +5136,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "55bc6f8a2d0e9762d9330aa220cb75b12cdb9f1b5bf9c7ab56c5e0f66d68fc76"
+  "runtimeManifestSHA256": "bcb890afd943d043dee183419d876074964fafb6e818dd9c00bee1e28b2d660d"
 }

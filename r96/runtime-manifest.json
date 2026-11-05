@@ -14703,6 +14703,21 @@
       "sha256": "52bacd27068531c34f196fca7c08135f33435ecfcb385e3555f58309b16d3a0b"
     },
     {
+      "path": "assets/r351/slayer/attack-w.webp",
+      "bytes": 187908,
+      "sha256": "a63300f81293032f68e01d9ef369e6600ffa13ce1e4143162c5a46f8e870f9d8"
+    },
+    {
+      "path": "assets/r351/slayer/index.json",
+      "bytes": 10069,
+      "sha256": "f9cebc4f2e2b8c8cff137f2c14bfe3c32969675e999cf59932e217f2657a6682"
+    },
+    {
+      "path": "assets/r351/slayer/walk-w.webp",
+      "bytes": 209048,
+      "sha256": "fe7b8a9924a80db4c1a1472e4ce5bcebdbbbdb449cae40c86673972753e7df88"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23574,8 +23589,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569322,
-      "sha256": "3d6538a9459af6998b2f8c20d0f08a1930adf686ec2eb7f67e5cefece21e0bd0"
+      "bytes": 6569362,
+      "sha256": "a89d189c3c8e340228c3e23d8761b2539fc04328241968495946c6a120b36f78"
     },
     {
       "path": "intro-r140.js",
@@ -23993,6 +24008,11 @@
       "sha256": "00406024db5545f1c3642128b3d9330a1d97772519536ebc02d6348004670da5"
     },
     {
+      "path": "slayer-r351.js",
+      "bytes": 10315,
+      "sha256": "1bbfabfb1d6710a2cfc53559fb0483b982d6efdfba576c1dd97f19d095319003"
+    },
+    {
       "path": "status-r96.js",
       "bytes": 5692,
       "sha256": "01ab5961ac4af2100c63dfa51b32847d37cf12ac317b11fa0c9e3cec68ed9882"
@@ -24238,9 +24258,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4847,
-  "totalBytes": 931527216,
-  "webHTMLSha256": "3d6538a9459af6998b2f8c20d0f08a1930adf686ec2eb7f67e5cefece21e0bd0",
+  "fileCount": 4851,
+  "totalBytes": 931944596,
+  "webHTMLSha256": "a89d189c3c8e340228c3e23d8761b2539fc04328241968495946c6a120b36f78",
   "largest": [
     {
       "path": "index.html",
