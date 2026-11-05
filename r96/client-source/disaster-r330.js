@@ -122,7 +122,7 @@ function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);retu
  // 회오리: 영웅을 쫓아가며 빨아들인다 / 홍수: 밀어낸다
  for(const f of fx){if(f.k==='tornado'&&t>=f.t0&&t-f.t0<f.life){const e=f.owner,tg=aimFor(f),dx=tg.x-f.x,dy=tg.y-f.y,L=Math.hypot(dx,dy)||1,sp=1.9*dt;
    let nx=f.x+dx/L*Math.min(sp,L),ny=f.y+dy/L*Math.min(sp,L);try{if(typeof blocked==='function'&&blocked(nx,ny,.3,room)){nx=f.x;ny=f.y;}}catch(_){}f.x=nx;f.y=ny;if(f.h){f.h.x=nx;f.h.y=ny;}
-   if(L<2.4&&L>.25&&typeof moveActor==='function'&&!(tg.invincible>0))try{moveActor(tg,-dx/L*dt*1.1,-dy/L*dt*1.1);}catch(_){}}}
+   if(typeof moveActor==='function')for(const a of heroes()){if(!(a&&a.hp>0)||a.invincible>0)continue;const ax=a.x-f.x,ay=a.y-f.y,la=Math.hypot(ax,ay);if(la<2.4&&la>.25)try{moveActor(a,-ax/la*dt*1.1,-ay/la*dt*1.1);}catch(_){}}}}
  if(typeof hazards!=='undefined'&&Array.isArray(hazards)&&typeof moveActor==='function')for(const h of hazards){if(!(h.r330&&h.push&&h.age>=h.warning&&h.age<h.life))continue;for(const a of heroes())if(a&&a.hp>0&&Math.hypot(a.x-h.x,a.y-h.y)<h.radius&&!(a.invincible>0))try{moveActor(a,h.push.x*dt*2.2,h.push.y*dt*2.2);}catch(_){}}
  for(let i=fx.length-1;i>=0;i--){const f=fx[i],end=(f.launch??f.t0)+(f.life??((f.warn||0)+1.2));if(t>end+.2||f.k==='sigil'&&!(f.e.hp>0))fx.splice(i,1);}
  if(!fx.length)disarm();}
