@@ -207,11 +207,17 @@ function install(){
  if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=last==null?0:Math.max(0,Math.min(.1,t-last));last=t;tickAll(dt);}catch(e){fail(e);}return r;};}
  return true;}
 const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
+/* 사몽 감속(samong-r75 shiftFrame)은 엔진 위험지대 나이만 늦춘다 — 재해의 대기열·그림·영역 시계도 같은 시전자의 감속분만큼 함께 민다(Codex 리뷰) */
+function clockHook(e,move){if(!e||typeof move!=='function')return;const mine=src=>!!src&&src.e===e;move(e,['r330Next']);
+ for(const q of queue)if(mine(q.src))move(q,['at']);
+ for(const f of fx)if(mine(f.src)||f.e===e)move(f,['t0','launch']);
+ for(const z of zones)if(mine(z.src))move(z,['start','end']);}
+try{const L=window.__STORYWORLD_ENEMY_CLOCKS_R75__=window.__STORYWORLD_ENEMY_CLOCKS_R75__||[];if(Array.isArray(L)&&!L.includes(clockHook))L.push(clockHook);}catch(err){fail(err);}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}
 /* 공명방어 정화(R137 guardCleanse)가 재해 상태이상도 지우게 — Codex 리뷰 */
 function clearStatus(a){const st=a&&statusOf.get(a);if(!st)return 0;const n=Object.keys(st).length;statusOf.delete(a);stats.cleansed=(stats.cleansed||0)+n;return n;}
 if(typeof guardStart==='function'){const gBase=guardStart;guardStart=function(...a){const was=typeof player!=='undefined'&&!!player?.guard,r=gBase.apply(this,a);try{const pr=window.__STORYWORLD_COMBAT_R137__?.prefs?.();if((!pr||pr.guardCleanse!==false)&&typeof player!=='undefined'&&player&&player.guard&&!was)clearStatus(player);}catch(err){fail(err);}return r;};}
-window.__STORYWORLD_DISASTER_R330__=Object.freeze({clearStatus,revision:REV,installed,KINDS:KINDS.slice(),NAME:{...NAME},set,kindOf:e=>kindOf(e),
+window.__STORYWORLD_DISASTER_R330__=Object.freeze({clearStatus,clockHook,revision:REV,installed,KINDS:KINDS.slice(),NAME:{...NAME},set,kindOf:e=>kindOf(e),
  cast:(e,k)=>{if(k&&GO[k])e.r330Kind=k;cast(e);},
  status:()=>Object.fromEntries(Object.entries(statusOf.get(player)||{}).map(([k,v])=>[k,{name:ST[k].name,left:+Math.max(0,v.until-T()).toFixed(2)}])),
  lights:()=>{const t=T();return fx.filter(f=>f.k==='blaze'&&t>=f.t0&&t-f.t0<f.life||f.k==='meteor'&&t-f.t0>f.warn&&t-f.t0<f.warn+1.5||f.k==='bomb'&&t-f.t0>f.warn&&t-f.t0<f.warn+.8).map(f=>({x:f.x,y:f.y,r:3,fire:true}));},

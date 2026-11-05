@@ -67,4 +67,13 @@ assert(/drawHazard=function\(h,\.\.\.a\)\{if\(h&&h\.r330&&SPR\(\)\)\{/.test(src)
 assert(/const g=!!a\.guard;if\(g&&!guardWas\.get\(a\)\)clearStatus\(a\);guardWas\.set\(a,g\);/.test(src));ok('guard cleanse runs per hero on the guard edge (covers co-op remote guards that bypass the guardStart wrapper)');
 assert(/f\.h\.x=nx;f\.h\.y=ny;[^\n]*delete f\.h\.footprint154;/.test(src));ok('moving tornado drops its cached R62 collision footprint');
 assert(/purge\(false\);\n[^\n]*if\(fx\.length\)arm\(\);/.test(src));ok('render sentinel is re-armed every tick while disaster visuals remain (engine effect cap cannot hide them)');
+// 사몽 감속(R75 shiftFrame): 등록된 적 시계 훅이 재해 대기열·그림·영역 시계를 같은 감속분만큼 민다
+{const run=(slow)=>{const hz4=[];const p4={x:5,y:5,hp:1000};const b={id:'s',name:'화산',boss:true,hp:100,x:8,y:5,damage:20,spawnState:'active',r330Next:1e9};const room4={id:'r',enemies:[b]};const W={};
+ const env4={window:W,localStorage:{getItem:()=>null,setItem(){}},hazards:hz4,effects:[],player:p4,started:true,ctx:{scope:(o,f)=>f()},project:(x,y)=>({x,y}),actorHeight:()=>60,toast(){},hurt(){},blocked:()=>false,uid:0};
+ const G4=new Function(...Object.keys(env4),'let time=0,room=null,tick=function(){},drawEffect=function(){},drawHazard=function(){},enterRegion=async function(){},moveActor=function(a,dx,dy){a.x+=dx;a.y+=dy;};'+src+';return {W:window,setT:v=>{time=v;},setRoom:r=>{room=r;},tick:()=>tick()};')(...Object.values(env4));
+ G4.setRoom(room4);const A4=G4.W.__STORYWORLD_DISASTER_R330__;A4.set(true);const hooks=G4.W.__STORYWORLD_ENEMY_CLOCKS_R75__;assert(Array.isArray(hooks)&&hooks.includes(A4.clockHook),'hook registered');
+ G4.setT(10);G4.tick();A4.cast(b,'bomb');let first=null;for(let t=10;t<=20;t+=.05){if(slow){const seen=new WeakMap();const move=(o,keys)=>{if(!o)return;let d=seen.get(o);if(!d){d=new Set();seen.set(o,d);}for(const k of keys)if(!d.has(k)&&Number.isFinite(o[k])){o[k]+=.025;d.add(k);}};for(const h of hooks)h(b,move);}G4.setT(t);G4.tick();if(first==null&&hz4.length)first=t;}
+ return first;};
+ const a=run(false),b2=run(true);assert(a!=null&&b2!=null,'spawn '+a+' '+b2);assert(b2-10>(a-10)*1.8,'slowed spawn '+a+' vs '+b2);ok('Samong slowdown hook delays queued disasters at half speed ('+(a-10).toFixed(2)+'s -> '+(b2-10).toFixed(2)+'s)');}
+assert(/function clockHook\(e,move\)\{[^\n]*move\(e,\['r330Next'\]\);/.test(src)&&/move\(f,\['t0','launch'\]\)/.test(src)&&/move\(z,\['start','end'\]\)/.test(src));ok('fx visuals and lingering zone windows shift with the same Samong delta');
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake engine; headless capture separately; no GPU or device'}));
