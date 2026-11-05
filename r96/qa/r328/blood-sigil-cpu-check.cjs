@@ -8,7 +8,9 @@ const m=src.match(/BLOOD_SIGIL=Object\.freeze\(\{a:Object\.freeze\(\[(\d+),(\d+)
 const [ar,ag,ab,br,bg,bb]=m.slice(1).map(Number);assert(ar>ag*4&&ar>ab*4&&br>bg*4&&br>bb*4,'red dominant');ok('blood palette is red-dominant at both ends');
 assert(/function sigilTick\(t\)/.test(src)&&/Number\(e\.rangedWindup\)>0/.test(src)&&/major\(e\)&&e\.attack/.test(src));ok('sigil starts on ranged windup and on boss/midboss attack prep');
 assert(/sigils\.length>=10/.test(src));ok('at most 10 sigils at once');
-assert(/q\.y-h\*\(1\.55/.test(src)&&!/drawSigils[\s\S]{0,900}squash/.test(src.slice(src.indexOf('function drawSigils'))));ok('sigil is drawn upright in mid-air above the caster (no floor squash)');
+{const body=src.slice(src.indexOf('function drawSigils'));const air=body.slice(body.indexOf("y=q.y-h*(1.55"));assert(/q\.y-h\*\(1\.55/.test(src)&&!/S0\.draw\('rune',BLOOD_INK,q\.x,y,[^)]*squash/.test(air)&&!/S0\.draw\('rune',BLOOD_SIGIL,q\.x,y,[^)]*squash/.test(air));}ok('mid-air sigil is drawn upright above the caster (no floor squash)');
+assert(/ranged,gx:player\.x,gy:player\.y,pal:palOf\(e,famOf\(\)\)\.main/.test(src)&&/if\(g\.ranged&&Number\.isFinite\(g\.gx\)\)/.test(src)&&/S0\.draw\('rune',BLOOD_SIGIL,q\.x,q\.y,R\*2,R\*2,\{squash:\.5/.test(src));ok('ranged casts also draw a flat blood hexagram on the ground at the aimed spot');
+assert(/S0\.draw\('ring',g\.pal,/.test(src));ok('ground sigil inner ring uses the mob unique colour (colour rule)');
 assert(src.includes('drawSigils(S0,t,h0)')&&src.includes('if(mfx.length||sigils.length)arm()'));ok('sigil draws through the R169 effect sentinel');
 assert(src.includes('sigilTick(t);'));ok('sigilTick runs each tick');
 console.log(JSON.stringify({ok:true,checks:n,method:'static; headless capture separately; no GPU or device'}));

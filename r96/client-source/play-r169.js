@@ -109,9 +109,15 @@ function sigilTick(t){for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!pr
   const ranged=Number(e.rangedWindup)>0,boss=major(e)&&e.attack&&Number.isFinite(e.attack.angle),key=ranged?'r':boss?'a'+e.attack.id:'';
   if(!key){sigilSeen.delete(e);continue;}if(sigilSeen.get(e)===key)continue;sigilSeen.set(e,key);if(sigils.length>=10)continue;
   const w=ranged?Number(e.rangedWindup):Number(e.attack.castWindup150??e.attack.shape154?.windup)||.45;
-  sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),seed:Math.random()*6});stats.sigils=(stats.sigils||0)+1;}
+  sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),seed:Math.random()*6,ranged,gx:player.x,gy:player.y,pal:palOf(e,famOf()).main});/* R328b: 원거리 시전은 노리는 자리(그 순간 영웅 위치) 바닥에도 육망성 */stats.sigils=(stats.sigils||0)+1;}
  for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t-g.t0>g.draw+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);}}
 function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.draw,out=v>1?Math.max(0,1-(t-g.t0-g.draw)/.35):1;if(out<=0)continue;
+  if(g.ranged&&Number.isFinite(g.gx)){/* R328b(사용자 2026-11-05 "적 모든 원거리 스킬 전조에는 바닥에 육망성, 색은 색 규칙대로"): 바닥 전조 — 검붉은 잉크 + 핏빛 육망성(위협 신호),
+     안쪽 고리만 그 몹의 고유색(SKILL.md 10절: 적 = 호러 배색 + 고유·이름색). 바닥이라 납작하게(squash .5), 시전 순간까지 그려지며 커진다. */
+   const q=project(g.gx,g.gy),k=Math.min(1,v),R=h0*(.55+.35*(1-(1-k)**2)),al=out*Math.min(1,v*2.2);
+   S0.draw('rune',BLOOD_INK,q.x,q.y,R*2.1,R*2.1,{squash:.5,angle:-g.seed-t*.9,alpha:.8*al,blend:'source-over',overHero:true});
+   S0.draw('rune',BLOOD_SIGIL,q.x,q.y,R*2,R*2,{squash:.5,angle:-g.seed-t*.9,alpha:.95*al,overHero:true});
+   if(g.pal)S0.draw('ring',g.pal,q.x,q.y,R*1.1,R*.55,{alpha:.55*al,overHero:true});stats.groundSigil=(stats.groundSigil||0)+1;}
   const k=Math.min(1,v),grow=1-(1-k)**3,h=h0*Math.min(1.7,g.sc),q=project(e.x,e.y),y=q.y-h*(1.55+.15*k),R=h*(.5+.24*grow)*(v>1?1+.25*(1-out):1);
   scope({id:'r328:sigil:'+g.t0,kind:'effect',x:e.x,y:e.y},()=>{S0.draw('glow',BLOOD_SIGIL,q.x,y,R*1.5,R*1.5,{alpha:.35*out*grow,overHero:true});
    const ang=g.seed+t*1.4,al=out*Math.min(1,v*2.5);S0.draw('rune',BLOOD_INK,q.x,y,R*2.05,R*2.05,{angle:ang,alpha:.85*al,blend:'source-over',overHero:true});/* 검붉은 잉크 바탕(어두운 바닥에서도 윤곽) */
