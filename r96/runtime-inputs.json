@@ -4046,7 +4046,11 @@
     "hero-facing-r336.js",
     "samong-gate-r338.js",
     "hud-menu-r339.js",
-    "enemy-hexagram-r341.js"
+    "enemy-hexagram-r341.js",
+    "assets/r308/bgm/pathetique-1.ogg",
+    "assets/r308/bgm/pathetique-2.ogg",
+    "assets/r308/bgm/pathetique-3.ogg",
+    "assets/r308/bgm/pathetique-4.ogg"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5121,5 +5125,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "64ccf9a8e03cef23ea12ad549eefc6c7621e770d839a4b6c1183d4638d6e5c6e"
+  "runtimeManifestSHA256": "6ababc8c0ff9aafa2a622f7edda9018c24e4c28782faba080e2643e38d4529a8"
 }
