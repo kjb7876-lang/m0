@@ -103,6 +103,8 @@ def validate(root):
                 errors.append('regional weighted score mismatch ' + row['regionId'])
             if scores is not None:
                 regional_scored += 1
+                if not row.get('captures'):
+                    errors.append('scored regional row has no reviewed image references ' + row['regionId'])
             if row.get('status') == '검증됨':
                 errors.append('regional fixture cannot establish final verification ' + row['regionId'])
             for ref in row.get('captures', []):

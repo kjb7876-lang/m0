@@ -100,6 +100,12 @@ class EvidenceTests(unittest.TestCase):
         self.write('independent-review.json', self.review)
         self.assertTrue(any('not bound to image hashes' in e for e in self.check_result()['errors']))
 
+    def test_scored_regional_row_needs_image_references(self):
+        self.write('audit-plan.json', {'scenes': ['hub'], 'regions': [{'id': 'r1'}]})
+        self.write('regional-review.json', {'regions': [{'regionId': 'r1', 'status': '임시', 'captures': [],
+            'scores': dict(style=8, form=8, readability=8, applicability=8, reproducibility=8), 'weighted': 8}]})
+        self.assertTrue(any('no reviewed image references' in e for e in self.check_result()['errors']))
+
     def test_wrong_screenshot_dimensions_are_rejected(self):
         Image.new('RGB', (10, 10)).save(self.root / 'mobile-hub.jpg')
         with self.assertRaisesRegex(ValueError, 'mobile-hub.jpg'):
