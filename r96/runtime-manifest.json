@@ -23539,8 +23539,8 @@
     },
     {
       "path": "light-r182.js",
-      "bytes": 11771,
-      "sha256": "c11a5cd7101fa5f374b9049327137e5c4da10a38cd3e23af22ed3b7a88b7e366"
+      "bytes": 13971,
+      "sha256": "665a124cc2ff28a81b6b549c235c470c3573f9022f599dd128dd3b4418bc2c31"
     },
     {
       "path": "manual-bonus-r274.js",
@@ -24149,7 +24149,7 @@
     }
   ],
   "fileCount": 4829,
-  "totalBytes": 914094305,
+  "totalBytes": 914096505,
   "webHTMLSha256": "4d5f8556c3aa76781876c23307d31f15159d1f31c0de478438925cb6d608ac95",
   "largest": [
     {
