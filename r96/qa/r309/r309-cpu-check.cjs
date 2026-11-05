@@ -26,10 +26,10 @@ ok('original 10 s upload is not shipped',!fs.readdirSync(A).some(f=>/opening\.mp
 ok('video plays after newGame resolves, never on load/save',/newGame=async function\(\.\.\.a\)\{const r=await base\.apply\(this,a\);try\{if\(r!==false\)play\(\);/.test(vsrc)&&!/loadGame\s*=/.test(vsrc));
 ok('tree animation no longer wraps newGame or settings (fallback only)',!/newGame\s*=/.test(src)&&!/showSettings\s*=/.test(src));
 ok("title is '합일(合一)' in both, old title gone",/TITLE='합일\(合一\)'/.test(vsrc)&&src.includes('>합일(合一)<')&&!/합일몽세/.test(vsrc+src.replace(/^\/\/.*$/mg,'')));
-ok('video stops at the cut even if the file runs long, title from 5.5 s, 1 s still hold then close',/CUT=6\.958/.test(vsrc)&&/if\(t>=CUT\)atEnd\(\)/.test(vsrc)&&/video\.pause\(\)/.test(vsrc)&&/HOLD_MS=1000/.test(vsrc)&&/TITLE_AT=5\.5/.test(vsrc));
+ok('video stops at the cut even if the file runs long, title from 5.5 s, 1 s still hold then close',/CUT=6\.958/.test(vsrc)&&/if\(t>=CUT\)\{atEnd\(o\);return;\}/.test(vsrc)&&/video\.pause\(\)/.test(vsrc)&&/HOLD_MS=1000/.test(vsrc)&&/TITLE_AT=5\.5/.test(vsrc));
 ok('skippable: button, pointer, Esc/Enter/Space; game keys blocked',/class="skip"/.test(vsrc)&&/pointerdown/.test(vsrc)&&/'Escape'/.test(vsrc)&&/'Enter'/.test(vsrc)&&/e\.code==='Space'/.test(vsrc)&&/stopImmediatePropagation/.test(vsrc));
 ok('automation gate with explicit override, setting toggle',/navigator\.webdriver&&!forced\(\)/.test(vsrc)&&/storyworld\.r309\.opening/.test(vsrc)&&/r309On/.test(vsrc));
-ok('autoplay-blocked → muted retry; error → tree fallback; stall → close',/video\.muted=true;stats\.muted\+\+/.test(vsrc)&&/if\(reason==='error'\)fallback\(\)/.test(vsrc)&&/close\('stall'\)/.test(vsrc)&&/__STORYWORLD_INTRO_TREE_R309__/.test(vsrc));
+ok('autoplay-blocked → muted retry; error → tree fallback; stall → close',/video\.muted=true;stats\.muted\+\+/.test(vsrc)&&/if\(reason==='error'\)fallback\(\)/.test(vsrc)&&/close\(o,'stall'\)/.test(vsrc)&&/__STORYWORLD_INTRO_TREE_R309__/.test(vsrc));
 ok('BGM ducked only in memory and restored',/settings\.bgm=0/.test(vsrc)&&/if\(settings\.bgm===0\)settings\.bgm=was/.test(vsrc)&&!/localStorage\.setItem\([^)]*settings/.test(vsrc));
 ok('fallback animation still skippable',/class="skip"/.test(src)&&/'Escape'/.test(src)&&/stopImmediatePropagation/.test(src));
 ok('fallback automation gate',/navigator\.webdriver&&!forced\(\)/.test(src));

@@ -18,6 +18,11 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 let THREE=null;async function three(){if(THREE)return THREE;THREE=await import('./vendor/three/build/three.module.js');return THREE;}
 const isMobile=()=>{try{const m=window.__STORYWORLD_MOBILE_R63__;if(typeof m?.isMobile==='function')return !!m.isMobile();}catch(_){}try{return matchMedia('(pointer:coarse)').matches;}catch(_){return false;}};
 const forced=()=>{try{return /[?&]intro309=1\b/.test(location.search);}catch(_){return false;}};
+// Install before later capture-phase skill handlers; a guard added at play time
+// cannot stop handlers that were already registered on the same window.
+const key=e=>{if(!active)return;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))active.finish('skip');};
+const keyUp=e=>{if(active)e.stopImmediatePropagation();};
+if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',keyUp,true);}
 // ---- 작은 도구 ----
 const clamp=(x,a=0,b=1)=>x<a?a:x>b?b:x,lerp=(a,b,t)=>a+(b-a)*t,sm=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
 function rng(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;};}
@@ -191,18 +196,17 @@ async function play(opt={}){if(active)return false;if(!opt.force&&(!prefs.on||(n
  let world;try{world=build(T,scene,cam,low);}catch(e){fail(e);try{renderer.dispose();}catch(_){}root.remove();return false;}
  const ttl=root.querySelector('.ttl'),fade=root.querySelector('.fade'),skipBtn=root.querySelector('.skip');
  let done=false,raf=0,t0=0,slow=0,lastNow=0;
- const finish=reason=>{if(done)return;done=true;cancelAnimationFrame(raf);if(reason==='skip')stats.skips++;else stats.ended++;fade.classList.remove('off');
-  removeEventListener('keydown',key,true);removeEventListener('keyup',keyUp,true);removeEventListener('resize',rs);
+ const finish=reason=>{if(done)return;done=true;cancelAnimationFrame(raf);if(reason==='skip')stats.skips++;else if(reason==='ended')stats.ended++;fade.classList.remove('off');
+  removeEventListener('resize',rs);
   setTimeout(()=>{try{scene.traverse(o=>{if(o.isInstancedMesh)o.dispose?.();});world.disp.forEach(x=>x.dispose?.());renderer.dispose();renderer.forceContextLoss?.();}catch(e){fail(e);}root.remove();active=null;try{opt.onEnd?.(reason);}catch(_){}},reason==='skip'?380:620);};
- const key=e=>{e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))finish('skip');};const keyUp=e=>{e.stopImmediatePropagation();};
  const rs=()=>{renderer.setSize(W(),H());fov();};
  root.addEventListener('pointerdown',e=>{e.preventDefault();finish('skip');});skipBtn.addEventListener('click',e=>{e.stopPropagation();finish('skip');});
- addEventListener('keydown',key,true);addEventListener('keyup',keyUp,true);addEventListener('resize',rs);try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
+ addEventListener('resize',rs);try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
  active={finish,low,counts:world.counts};stats.plays++;
  const at=Number.isFinite(opt.at)?opt.at:null;/* 검사용: 특정 순간 고정 */
  const loop=now=>{if(!t0)t0=now;const tt=at!=null?at:(now-t0)/1000;
   if(lastNow){const dt=now-lastNow;/* 느리면 한 번 해상도를 낮춘다 */if(tt>.8&&dt>45){if(++slow>20&&pr>.75){pr=Math.max(.6,pr*.7);renderer.setPixelRatio(pr);renderer.setSize(W(),H());stats.lowered++;slow=0;}}else slow=Math.max(0,slow-1);}lastNow=now;
-  try{world.update(Math.min(tt,DUR));}catch(e){fail(e);}renderer.render(scene,cam);stats.frames++;
+  try{world.update(Math.min(tt,DUR));renderer.render(scene,cam);stats.frames++;}catch(e){fail(e);finish('error');return;}
   if(tt>.05&&!fade.dataset.in){fade.dataset.in=1;fade.classList.add('off');}
   if(tt>=7.9&&!ttl.classList.contains('on'))ttl.classList.add('on');
   if(at==null&&tt>=DUR-.65&&!fade.dataset.out){fade.dataset.out=1;fade.classList.remove('off');}
