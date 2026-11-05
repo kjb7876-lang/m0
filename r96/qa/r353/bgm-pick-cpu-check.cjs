@@ -74,6 +74,9 @@ function boot(store){const audios=[];class Audio{constructor(){this.currentTime=
  b2.go('dist01');ok('skip does not stick to the old map',b2.A().track==='danse-macabre');
  // 9. 바르지 않은 저장 값이면 자동
  const b3=boot(new Map([['storyworld.r353.bgm','{"mode":"fixed","track":"nope"}']]));ok('invalid saved track → auto',b3.pick.inspect().prefs.mode==='auto');
+ // 9b. R195 '클래식 BGM' 스위치가 꺼져 있으면 적용 안 됨으로 알린다(Codex 리뷰)
+ {const b4=boot(new Map());await new Promise(r=>setTimeout(r,10));b4.run(20);ok('R195 on → available',b4.pick.inspect().r308On===true);b4.c.window.__STORYWORLD_BGM_CLASSICAL_R195__={inspect:()=>({prefs:{on:false}})};
+  ok('R195 classical switch off → picker reports not applied (r308On false)',b4.pick.inspect().r308On===false);}
  // 10. 연결
  const idx=read('runtime-text/index.html');
  ok('script tag once, in the overlay group after enemy-hexagram-r341 and before combat-r118',idx.split('"./bgm-pick-r353.js"').length===2&&idx.indexOf('"./bgm-pick-r353.js"')>idx.indexOf('"./enemy-hexagram-r341.js"')&&idx.indexOf('"./bgm-pick-r353.js"')<idx.indexOf('"./combat-r118.js"'));

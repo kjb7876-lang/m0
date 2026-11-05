@@ -52,12 +52,14 @@ function choose(sel,ix,current){stats.choose++;if(!sel)return sel;const has=id=>
 const stem=id=>(LABEL[id]?.title||'').replace(/\s*\(.*\)$/,'');
 // 다음 곡: 목록의 다음 곡. 같은 곡의 다른 녹음(죽음의 무도 1925)은 건너뛴다(같은 곡이 이어 들려 '다음'처럼 안 느껴진다).
 function after(id){let i=IDS.indexOf(id);for(let k=0;k<IDS.length;k++){i=(i+1)%IDS.length;if(!LABEL[id]||stem(IDS[i])!==stem(id))return IDS[i];}return IDS[(IDS.indexOf(id)+1)%IDS.length];}
+/* R195 '클래식 BGM' 스위치가 꺼져 있으면 R308 도 재생을 엔진 사슬에 넘긴다 — 고르기가 적용되지 않는다고 알려야 한다(Codex 리뷰) */
+function classicalOn(){try{const R=window.__STORYWORLD_BGM_CLASSICAL_R195__;const p=R?.inspect?.()?.prefs;return !p||p.on!==false;}catch(_){return true;}}
 function playing(){const m=map();return m?.active?.track||m?.visit?.track||null;}
 function set(mode,track){if(mode==='fixed'){const t=LABEL[track]?track:LABEL[prefs.track]?prefs.track:playing()&&LABEL[playing()]?playing():IDS[0];prefs.mode='fixed';prefs.track=t;}else{prefs.mode='auto';}skip=null;save();refresh();return inspect();}
 function next(){stats.next++;if(prefs.mode==='fixed'){prefs.track=after(prefs.track);save();}else{const z=curZone(),from=skip&&skip.zone===z?skip.track:playing();skip={zone:z,track:after(from||IDS[IDS.length-1])};}
  refresh();return inspect();}
 function inspect(){const m=map();return {revision:REV,prefs:{...prefs},skip:skip?{...skip}:null,key:key(),playing:m?.active?.track||null,playingZone:m?.active?.zone||null,role:m?.visit?.role||null,
- r308:!!m,r308On:!!(m&&m.prefs?.on!==false&&m.loaded),tracks:IDS.length,stats:{...stats},lastError};}
+ r308:!!m,r308On:!!(m&&m.prefs?.on!==false&&m.loaded&&classicalOn()),tracks:IDS.length,stats:{...stats},lastError};}
 /* ---- 설정 창 ---- */
 const CSS=`#r353Bgm{margin:12px 0 4px;padding:10px 12px 12px;border:1px solid #7a6033;border-radius:3px;background:linear-gradient(160deg,rgba(43,33,22,.92),rgba(24,18,13,.94));box-shadow:inset 0 0 0 1px rgba(214,178,110,.12)}
 #r353Bgm h3{margin:0 0 8px;font:600 14px/1.4 'Malgun Gothic',serif;letter-spacing:.12em;color:#d9bd84}
