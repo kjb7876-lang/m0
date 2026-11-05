@@ -63,6 +63,8 @@ jobs:
         run: node r96/qa/r343/nova-cross-cpu-check.cjs
       - name: R328 blood hexagram sigil before ranged and boss casts CPU check
         run: node r96/qa/r328/blood-sigil-cpu-check.cjs
+      - name: R329 prop cast shadows from the viewer-side light CPU check
+        run: node r96/qa/r329/prop-shadow-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
