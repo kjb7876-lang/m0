@@ -57,6 +57,8 @@ jobs:
         run: node r96/qa/r324/boss-meteor-painted-cpu-check.cjs
       - name: R325 pixel-mode readable dark mob sheets CPU check
         run: node r96/qa/r325/pixel-readable-cpu-check.cjs
+      - name: R336 hero facing 240 degrees left/right CPU check
+        run: node r96/qa/r336/facing-cpu-check.cjs
       - name: R320 native save transition CPU regression
         run: node r96/qa/r320/save-transaction-cpu-check.cjs
       - name: R320 desktop auto-skill restore and legacy preference regression
