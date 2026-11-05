@@ -16,7 +16,7 @@
 //  판정·피해·무적 시간·저장은 바꾸지 않는다(그림만). 끄기: localStorage['storyworld.r350.heroVisibility']='{"veil":false,"ghost":false,"blood":false,"order":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_HERO_VISIBILITY_R350__)return;
-const REV='R350-hero-visibility-1',KEY='storyworld.r350.heroVisibility';
+const REV='R350-hero-visibility-2',KEY='storyworld.r350.heroVisibility';
 let prefs={veil:true,ghost:true,blood:true,order:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={frames:0,heroFound:0,lifted:0,veiled:0,ghosts:0,bloodSpawned:0,bloodDraws:0,bloodSkipped:0,hits:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -27,7 +27,11 @@ const VEIL_KINDS=new Set(['effect','scene']);
 // 유령 시작점: 평소(패시브 오라·EGO 가시만 있을 때) 남는 가림이 1.2~1.6(헤드리스 실측) → 그보다 확실히 클 때(스킬 순간)만.
 const GHOST_FROM=2;
 const ENEMY_WORD=/(^|[:_-])(enemy|mob|mobs|boss|hazard|hex|sigil)([:_-]|$)/i;
-function enemySide(o){if(!o)return false;const id=String(o.id||'');return o.pxfSide==='enemy'||o.storyVfx===true||o.enemy===true||o.r98===true||ENEMY_ID.test(id)||ENEMY_WORD.test(id);}
+// FINAL42(R88) 적 쪽 그림 — final42-hooks-r88 가 적 탄(214 주사기·262 갈대)·돌진 예고(260)·늪 붙잡기/착탄/잔흔(111·261·259)·
+//  의료 독/메스 맞음(213·215)·가시 속박(99)·공격 예고 고리(251)를 api.render 로 바꿔 그리며, 주인은 kind 'effect'·id 'final42-r88:…' 이고
+//  정체는 r88SourceIndex 에만 있다 → 이 번호는 적 정보로 보고 옅게 하지 않는다(Codex 리뷰 4482124964).
+const HOSTILE_R88=new Set([99,111,213,214,215,251,259,260,261,262]);
+function enemySide(o){if(!o)return false;const id=String(o.id||'');return o.pxfSide==='enemy'||o.storyVfx===true||o.enemy===true||o.r98===true||ENEMY_ID.test(id)||ENEMY_WORD.test(id)||(o.r88Final42===true&&HOSTILE_R88.has(Number(o.r88SourceIndex)));}
 // 정보 그림은 옅게 하지 않는다: 영웅 상태이상 표시(final42-r88 native-status: 중독·출혈 입자)와, 맞은 직후(hurtAnim) 피격 표지(엔진 VFX.burst·R101 sig-hit).
 const INFO_ID=/^final42-r88:native-status/,HURT_PATH=/\/r100\/sig-hit-/;/* R101 drawHeroHurt 의 피격 표지(sig-hit-*) — 헤드리스 실측으로 옅게 되던 것 */
 function infoCommand(c){if(INFO_ID.test(String(c.owner?.id||'')))return true;
@@ -78,7 +82,10 @@ function process(commands){
  let j=0;for(const c of blood)c.order=maxOrder+50+(j++);
 }
 // ---- 렌더러 감싸기(perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입·인스턴스 둘 다) ----
-const wrapFn=fn=>{if(fn.__r350)return fn;const w=function(frame){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}return fn.apply(this,arguments);};w.__r350=true;return w;};
+// 한 번의 render 에 한 번만: Three 가 이 덧씌움보다 늦게 만들어지면 perf-r97 인스턴스 render 의 baseRender 가 이미 감싼 프로토타입이라
+//  wrapInst 가 또 감싸 명령을 두 번 고쳤다(옅게 0.15→0.0225, 유령 두 벌; Codex 리뷰 4482124957) → 안쪽 감싸기는 깊이로 건너뛴다.
+let depth=0;
+const wrapFn=fn=>{if(fn.__r350)return fn;const w=function(frame){if(depth===0){try{if(frame&&Array.isArray(frame.commands))process(frame.commands);}catch(e){fail(e);}}depth++;try{return fn.apply(this,arguments);}finally{depth--;}};w.__r350=true;return w;};
 try{const C=window.StoryPhase1?.ThreeRenderer?.prototype;if(C&&typeof C.render==='function')C.render=wrapFn(C.render);}catch(e){fail(e);}
 const wrapped=new WeakSet();
 function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrapped.has(r)){wrapped.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
@@ -128,7 +135,7 @@ try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async
 (function warm(n){try{if(typeof started!=='undefined'&&started&&prefs.blood){for(const s of Object.values(SHEET))image(s.file);return;}}catch(_){}if(n<120)setTimeout(()=>warm(n+1),1000);})(0);
 
 function set(p){for(const k of ['veil','ghost','blood','order'])if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_HERO_VISIBILITY_R350__=Object.freeze({revision:REV,set,spawn,process,
+window.__STORYWORLD_HERO_VISIBILITY_R350__=Object.freeze({revision:REV,set,spawn,process,wrapRender:wrapFn,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},active:list.length,recent:recent.slice(-120),lastVeiled:lastVeiled.slice(),contributors:[...contrib.entries()].sort((a,b)=>b[1]-a[1]).slice(0,16).map(([k,v])=>[k,+v.toFixed(2)]),lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false}),
  resetStats:()=>{recent.length=0;lastVeiled.length=0;contrib.clear();for(const k in stats)stats[k]=0;}});
 })();

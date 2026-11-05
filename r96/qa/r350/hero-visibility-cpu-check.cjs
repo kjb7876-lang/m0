@@ -27,7 +27,7 @@ const heroBody=()=>img({id:'hero',kind:'hero',x:5,y:5,bodyPath:'h.png'},rect(180
 function frameOf(...cs){cs.forEach((c,i)=>c.order=i);return{commands:cs};}
 
 {const {A,C,frames}=load();
- t(A&&A.revision==='R350-hero-visibility-1','API 노출·revision');
+ t(A&&A.revision==='R350-hero-visibility-2','API 노출·revision');
  t(typeof C.prototype.render==='function'&&C.prototype.render.__r350===true,'ThreeRenderer.prototype.render 감싸기(인스턴스 감싸기는 setInterval wrapInst)');
  // 영웅 쪽 큰 스킬 그림이 몸을 다 덮는다 → 옅게, 적 그림·R106·바닥·탄환은 그대로
  const hero=heroBody(),skill=img({id:'r292:hw-q:1',kind:'effect',x:5,y:5},rect(150,20,250,120),{style:{globalAlpha:1,globalCompositeOperation:'lighter',filter:'none'}}),
@@ -59,6 +59,24 @@ function frameOf(...cs){cs.forEach((c,i)=>c.order=i);return{commands:cs};}
  t(!f.commands.some(c=>c.owner?.r350),'옅게 한 뒤 남은 가림이 평소 수준(≤2)이면 유령을 넣지 않음');
  {const hero=heroBody(),half=img({id:'r292:y',kind:'effect'},rect(150,20,200,60),{style:{globalAlpha:.5,globalCompositeOperation:'lighter',filter:'none'}});const f2=frameOf(hero,half);C.prototype.render.call({},f2);t(!f2.commands.some(c=>c.owner?.r350),'남은 가림이 작으면 유령을 넣지 않음');}
  {const {C:C2}=load({order:false});const hero=heroBody(),f3=frameOf(hero);C2.prototype.render.call({},f3);t(hero.spatialRole==='body','order:false 면 몸 명령을 2번 패스 그대로 둠');}}
+{const {C}=load();// Codex 4482124964: FINAL42(R88) 적 탄·예고(r88SourceIndex 214·262·260 등)는 kind 'effect' 라도 옅게 안 함, 영웅 쪽 FINAL42 그림은 옅게
+ const r88=(n,i)=>img({id:'final42-r88:F'+n+':'+i,kind:'effect',r88Final42:true,r88SourceIndex:n,groundAligned:false},rect(150,20,250,120));
+ const hero=heroBody(),syr=r88(214,1),reed=r88(262,2),wind=r88(260,3),splash=r88(261,4),story=r88(112,5);C.prototype.render.call({},frameOf(hero,syr,reed,wind,splash,story));
+ t(syr.style.globalAlpha===1&&reed.style.globalAlpha===1&&wind.style.globalAlpha===1&&splash.style.globalAlpha===1,'FINAL42 적 탄(214 주사기·262 갈대)·돌진 예고(260)·늪 착탄(261)은 영웅과 겹쳐도 그대로(알파 1)');
+ t(story.style.globalAlpha<.5,'적 번호가 아닌 FINAL42 그림(112 서사)은 옅게: '+story.style.globalAlpha.toFixed(3));
+ const src88=fs.readFileSync(path.join(R,'client-source','final42-hooks-r88.js'),'utf8'),m=src88.match(/drawProjectile=function[\s\S]*?id=(\d+);else[\s\S]*?id=(\d+);/);
+ t(m&&[m[1],m[2]].every(n=>new Set([214,262]).has(+n))&&/api\.render\(260,/.test(src88),'final42-hooks-r88 의 적 탄 번호(214·262)·예고(260)가 그대로인지(바뀌면 HOSTILE_R88 도 고칠 것)');}
+{const {A,C}=load();// Codex 4482124957: 인스턴스 render 의 baseRender 가 이미 감싼 프로토타입 render 일 때(Three 가 늦게 만들어짐) 한 render 에 한 번만 고침
+ const inst={};const proto=C.prototype.render;inst.render=A.wrapRender(function(frame){return proto.call(this,frame);});/* perf-r97 식: 인스턴스 render → 감싼 프로토타입 */
+ const fresh=A.wrapRender(function(frame){return proto.call(this,frame);});t(fresh.__r350===true,'wrapRender 는 새 함수를 감쌈');
+ const hero=heroBody(),skill=img({id:'r292:hw-q:1',kind:'effect',x:5,y:5},rect(150,20,250,120)),en=img({id:'pxf-enemy-melee:1',kind:'effect'},rect(150,20,250,120)),
+  en2=img({id:'r163:mob-a:1',kind:'effect'},rect(150,20,250,120)),en3=img({id:'r163:mob-b:1',kind:'effect'},rect(150,20,250,120));
+ const f=frameOf(hero,skill,en,en2,en3),n0=A.inspect().stats.frames;const r=inst.render(f);
+ t(r==='rendered'&&A.inspect().stats.frames===n0+1,'겹친 감싸기: process 한 번(frames +1)');
+ t(Math.abs(skill.style.globalAlpha-.15)<.001,'옅게는 한 번만(0.15, 두 번이면 0.0225): '+skill.style.globalAlpha.toFixed(4));
+ t(f.commands.filter(c=>String(c.owner?.id).startsWith('r350:ghost:')).length===1,'유령 명령 한 벌만');
+ const f2=frameOf(heroBody(),img({id:'r292:x',kind:'effect'},rect(150,20,250,120)));inst.render(f2);t(A.inspect().stats.frames===n0+2,'다음 render 는 다시 처리(깊이 카운터 복원)');
+ let threw=false;const bad=A.wrapRender(function(){throw new Error('x');});try{bad({commands:[]});}catch(_){threw=true;}const f3=frameOf(heroBody());inst.render(f3);t(threw&&A.inspect().stats.frames===n0+3,'원래 render 가 예외를 던져도 깊이 카운터가 돌아옴');}
 {const {C}=load();// 영웅 몸이 없으면(죽음·숨김) 아무것도 안 함
  const skill=img({id:'r292:x',kind:'effect'},rect(150,20,250,120));const f=frameOf(skill);C.prototype.render.call({},f);t(skill.style.globalAlpha===1&&f.commands.length===1,'영웅 몸 명령이 없으면 그대로');}
 {const {C}=load({veil:false,ghost:false,blood:false,order:false});const hero=heroBody(),skill=img({id:'r292:x',kind:'effect'},rect(150,20,250,120)),r106=img({id:'s',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:glow:x'});
