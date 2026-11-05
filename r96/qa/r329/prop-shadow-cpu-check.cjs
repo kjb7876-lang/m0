@@ -33,4 +33,8 @@ W.api.set(true);W.calls.length=0;W.drawProp()({id:'tree',path:'assets/r99/outdoo
  const R=W4({},{getItem:()=>null,setItem(){}},ctx4,(x,y)=>({x:x*10,y:y*10}),src,draws,()=>owner);R.drawProp()({id:'statue',path:'assets/x/statue.webp',x:3,y:4});
  const sh=draws.filter(d=>d[0]==='brightness(0)');assert(sh.length===2&&sh.every(d=>d[1]&&d[1].groundAligned===true&&!d[1].bodyPath),JSON.stringify(draws));assert(draws.some(d=>d[0]!=='brightness(0)'&&d[1]&&d[1].bodyPath));
  ok('3D recorder: shadow copies are recorded in a ground-aligned scope without bodyPath (the prop itself keeps its body scope)');}
+{const src2=require('fs').readFileSync(require('path').join(__dirname,'..','..','client-source','prop-shadow-r329.js'),'utf8');
+ if(!/SG\.pointVisible\(c\.wx,c\.wy\)\)\{stats\.hidden/.test(src2))throw new Error('sight check');ok('props hidden by flashlight sight cast no shadow');
+ if(!/sy=LEN\*\(\.85\+\.3\*L\.k\)\*\(L\.y>\.2\?-\.6:1\)/.test(src2))throw new Error('flip');ok('light above the prop flips the silhouette downward (away from light)');
+ if(/Math\.round\(x\)\s*,\s*kind:'effect'/.test(src2)||!/'r329:shadow:'\+\(c\?\.self\?\.id\?\?\(Number\.isFinite\(c\?\.wx\)/.test(src2))throw new Error('scope id');ok('shadow scope id uses prop id / world position, stable while the camera pans');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake globals; headless capture separately; no GPU or device'}));
