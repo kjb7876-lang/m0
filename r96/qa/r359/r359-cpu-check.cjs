@@ -9,7 +9,7 @@ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 function webpSize(b){if(b.toString('ascii',0,4)!=='RIFF'||b.toString('ascii',8,12)!=='WEBP')return null;const t=b.toString('ascii',12,16);
  if(t==='VP8L'){const v=b.readUInt32LE(21);return{w:(v&0x3fff)+1,h:((v>>14)&0x3fff)+1,lossless:true};}if(t==='VP8X')return{w:b.readUIntLE(24,3)+1,h:b.readUIntLE(27,3)+1,lossless:b.includes(Buffer.from('VP8L'))};return{w:0,h:0,lossless:false};}
 const ids=['m025','m026','m051','m053','m055','m057','m058','m059','m061','m064','m066','m073','m074','m076','m082','m085','m087','m088','m090','m095'];
-const skipped=['m021','m029','m030','m045','m060','m062','m071','m075','m084'];/* 인계가 review·comparison 이거나 zip 없음·ID 연결 금지 → 이번에 적용하지 않음 */
+const skipped=['m021','m029','m045','m060','m062','m071','m075','m084'];/* 인계가 review·comparison 이거나 zip 없음·ID 연결 금지 → 이번에 적용하지 않음. m030 은 R362(사용자 2026-11-06 결정)에서 이름을 바꿔 적용 */
 const KS={coin:.55,lipstick:.6,candy:.6,bottle:.6,mask:.7,blade:.75,heel:.65,cross:.85,paper:.75,slime:.75,crystal:1,fog:.9,serpent:.7,spider:.85,quad:.8,drone:.8};
 const APPROVAL='dots 후보(Claude 검토용 인계, 조건부·최종 아님) → 사용자 2026-11-05 적용 지시, PR 승인 대기';
 ok('index: twenty R359 rows, conditional, approval note, reason, per-frame source hashes, Dots mean > 7.77',ids.every(id=>{const m=idx.mobs[id];return m&&m.revision==='R359'&&m.temporary===false&&m.conditional===true&&m.approval===APPROVAL&&m.reason&&m.dots?.mean>7.77&&m.dots.actualPlayback===false&&m.frames?.length===12&&m.frames.every(f=>/^[0-9a-f]{64}$/.test(f.sha256||'')&&f.body>60)&&m.source?.sheetMatchesPreassembled===true;})&&Object.keys(idx.mobs).filter(k=>idx.mobs[k].revision==='R359').length===ids.length,ids.filter(id=>!idx.mobs[id]));

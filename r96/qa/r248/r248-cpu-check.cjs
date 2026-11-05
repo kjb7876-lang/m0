@@ -32,6 +32,6 @@ function mk(o={}){const drawn=[];const ctx={save(){},restore(){},translate(){},s
  ok('status effects are throttled to once per 4 s even when many mobs hit',sb.window.__STORYWORLD_MOB_UNIQUE_R248__.inspect().stats.slows===1);}
 {const {sb}=mk();const M=sb.window.__STORYWORLD_MOB_UNIQUE_R248__;const kinds=new Set(Object.keys(D.byName).filter(k=>!k.startsWith('사몽:')).map(k=>M.fxKindOf({name:k})));
  ok('several attack families are used (bite/claw/slash/pierce/web/acid/shock/chill/drop/thorns/thread…)',kinds.size>=7,[...kinds]);}
-ok('runtime copies match; data loads before the overlay, both after auto-levelup-r237',RT('mob-unique-r248.js')===src&&RT('mob-unique-r248-data.js')===dsrc&&/<script src="\.\/mob-unique-r248-data\.js"><\/script><script src="\.\/mob-unique-r248\.js"><\/script>/.test(RT('index.html')));
+ok('runtime copies match; data loads before the overlay, both after auto-levelup-r237',RT('mob-unique-r248.js')===src&&RT('mob-unique-r248-data.js')===dsrc&&/<script src="\.\/mob-unique-r248-data\.js"><\/script>(<script src="\.\/mob-rename-r362\.js"><\/script>)?<script src="\.\/mob-unique-r248\.js"><\/script>/.test(RT('index.html')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail).slice(0,400)));
 console.log(`R248 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
