@@ -50,6 +50,9 @@ function installMaterial(m,role,enabled=on){
     'gl_FragColor.rgb=clamp(gl_FragColor.rgb*r323Gain,0.,1.);\n'+end);
    stats.compiles++;
   };
+  // Keep markers such as __storySight24 from the wrapped callback; attachSight24 checks them every
+  // frame and would otherwise wrap again and declare its sight uniforms twice (as world-retro-r89 does).
+  if(previous)for(const k of Object.keys(previous))m.onBeforeCompile[k]=previous[k];
   m.customProgramCacheKey=function(){return(previousKey?.call(this)||'')+(state.enabled?'|terrain-readability-r323':'');};
   m.needsUpdate=true;
  }
