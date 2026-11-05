@@ -351,6 +351,8 @@ jobs:
         run: node r96/qa/r292/r292-cpu-check.cjs
       - name: R302 hero two-colour palette (neon mint, spear-tip strip replaced) CPU check
         run: node r96/qa/r302/r302-cpu-check.cjs
+      - name: R309 new-game opening video (cut to 7 s, title 합일(合一)) with procedural fallback CPU check
+        run: node r96/qa/r309/r309-cpu-check.cjs
       - name: R304 Lauren basic attack VFX CPU check
         run: node r96/qa/r304/r304-cpu-check.cjs
       - name: R313 BGM label and Hwando split CPU

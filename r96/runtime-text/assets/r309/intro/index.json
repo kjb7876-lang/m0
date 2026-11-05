@@ -1,0 +1,29 @@
+{
+ "revision": "R309",
+ "note": "사용자가 직접 만들어 2026-11-04 프로젝트 채팅에 올린 오프닝 영상(opening.mp4). 사용자 지시 '7초까지만, 이후는 잘라서 안 나오게'. 원본은 저장소에 넣지 않았다.",
+ "source": {
+  "name": "opening.mp4",
+  "bytes": 6995188,
+  "sha256": "b4ea41926d9d5b68040f705a70c9e7c55403e528c2e5b209da77d7e1dbf37f4e",
+  "duration": 10.027,
+  "video": "h264 High 1280x720 24fps",
+  "audio": "aac 128k",
+  "omitted": "6.958초부터: 타락 천사 클로즈업(6.958–8), 'StoryWorld : 합입일몽세' 제목 화면과 게임 화면(8–10.03)"
+ },
+ "files": [
+  {
+   "path": "opening-7s.mp4",
+   "bytes": 1812837,
+   "sha256": "f3a3d93d2a4cedd2bd3070d9b5bba8cbfc604faf9aaf79c508c49c7068d25258",
+   "use": "새 게임 오프닝(intro-video-r309.js)",
+   "derive": "0–6.958초(167프레임, 7초 직전 장면 전환에서 끊어 1프레임 클로즈업 깜빡임 없앰), H.264 High@4.0 yuv420p CRF25 faststart, AAC 96k 스테레오, 끝 0.6초 소리 페이드"
+  },
+  {
+   "path": "poster.jpg",
+   "bytes": 79731,
+   "sha256": "5a32d6bde68477f7e2f89e3b6dfdab6d497b34c6c8eb4ecb08516c9d7c95e3b5",
+   "use": "영상 첫 프레임이 뜨기 전 포스터",
+   "derive": "원본 0.4초 프레임 JPEG"
+  }
+ ]
+}

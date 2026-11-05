@@ -3819,6 +3819,7 @@
     "assets/r302/fx/seoha/basic.webp",
     "assets/r302/fx/seoha/e.webp",
     "assets/r302/fx/seoha/w.webp",
+    "intro-tree-r309.js",
     "bgm-map-r308.js",
     "assets/r308/bgm/beethoven-malinconia.ogg",
     "assets/r308/bgm/chopin-cello-largo.ogg",
@@ -3831,8 +3832,10 @@
     "assets/r308/bgm/chopin-prelude-45.ogg",
     "assets/r308/bgm/index.json",
     "assets/r308/bgm/mozart-k421.ogg",
-    "props-fit-r303.js",
-    "env-props-r299.js",
+    "intro-video-r309.js",
+    "assets/r309/intro/opening-7s.mp4",
+    "assets/r309/intro/poster.jpg",
+    "assets/r309/intro/index.json",
     "assets/r299/arch.webp",
     "assets/r299/bed.webp",
     "assets/r299/blood-dragged.webp",
@@ -3854,9 +3857,6 @@
     "assets/r299/stone-cracked.webp",
     "assets/r299/suitcase.webp",
     "assets/r299/tree.webp",
-    "hud-bgm-hwando-w-r313.js",
-    "mob-art-variants-r306-data.js",
-    "mob-art-variants-r306.js",
     "assets/r306/mob-art-variants.json",
     "assets/r306/pixel/index.json",
     "assets/r306/pixel/p003969d46a2c.webp",
@@ -4004,8 +4004,13 @@
     "assets/r306/pixel/pf7f5394c1c7b.webp",
     "assets/r306/pixel/pf8b527f039e6.webp",
     "assets/r306/pixel/pfe37f18eb7ed.webp",
-    "maps-palace-slum-r317.js",
     "assets/r317/index.json",
+    "env-props-r299.js",
+    "hud-bgm-hwando-w-r313.js",
+    "maps-palace-slum-r317.js",
+    "mob-art-variants-r306-data.js",
+    "mob-art-variants-r306.js",
+    "props-fit-r303.js",
     "save-transition-r320.js"
   ],
   "mediaPaths": [
@@ -5081,5 +5086,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fcdef5359fa367d7e42a8e6fa001c502b082c3db5b03b375e2ef78d3501cd701"
+  "runtimeManifestSHA256": "26bb0513714741d6277e51ded4b43e038ae10d6ae3ca8b000650c34d13a87c44"
 }
