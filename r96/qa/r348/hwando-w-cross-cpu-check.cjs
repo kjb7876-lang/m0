@@ -55,7 +55,7 @@ const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{i
  ok(!E.draws.includes('blade')&&!E.draws.includes('rune')&&!E.draws.includes('runecross'),'초승달 칼날·룬 없음');
  for(let i=0;i<40;i++)E.adv(.033);
  const ids=E.hits.map(h=>h.id).sort();ok(JSON.stringify(ids)===JSON.stringify(['a','b','c']),'0.7초 뒤 분신 십자 베기가 곁의 적에게 스플래시(원 안·먼 적은 분신 피해 없음): '+ids);
- ok(E.hits.every(h=>Math.abs(h.v-100*1.25*.45)<1e-9&&h.s.friendly&&h.s.owner==='hero'&&h.s.sourceHero==='hwando'&&h.s.r348Clone),'피해 = W 원 피해(공격력×1.25)의 0.45배, 영웅 피해 경로(hitEnemy friendly)');
+ ok(E.hits.every(h=>Math.abs(h.v-100*1.25*.45)<1e-9&&h.s.friendly&&h.s.owner==='hero'&&h.s.sourceHero==='hwando'&&h.s.r348Clone&&h.s.attackKind9==='skill'),'피해 = W 원 피해(공격력×1.25)의 0.45배, 영웅 피해 경로(hitEnemy friendly)');
  ok(E.floats.length===3,'피해 숫자 표시');
  const st=A.inspect().stats;ok(st.slashes===7&&st.clones===7,'분신 7 모두 한 번씩 베기');
  for(let i=0;i<30;i++)E.adv(.05);ok(E.hits.length===3&&A.inspect().casts.length===0,'끝난 뒤 다시 때리지 않고 정리됨');}
@@ -70,4 +70,8 @@ const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{i
  ok(E.hits.length===0&&!E.api.owns('hwando','w'),'끄면 예전 그대로(분신·피해 없음, owns false)');}
 {const E=engine({enemies:[inside,...outside]});E.ctx.drawHero();release(E);E.g.room={id:'other',enemies:[]};E.ctx.room=E.g.room;for(let i=0;i<40;i++)E.adv(.033);
  ok(E.hits.length===0,'방이 바뀌면 남은 분신 베기 취소');}
+// Codex P2: 원 바로 밖 적(3.6칸) — 0.72칸 물러선 자리(2.88)는 원 안이라 적 자리로 바꿔야 한다
+{const E=engine({enemies:[{id:'edge',x:23.6,y:20}]});E.ctx.drawHero();release(E,'wer:edge');const c=E.api.inspect().casts[0],s=c.clones.find(s=>s.foe==='edge');
+ const o=E.g.project(20,20),sd=p=>{const q=E.g.project(p.x,p.y);return Math.hypot(q.x-o.x,q.y-o.y);},ringPx=E.api.config.ringCell*32;
+ ok(c.clones.every(s=>Math.hypot(s.x-20,s.y-20)>3.15&&(!s.foe||sd(s)>ringPx*1.02)),'원 바로 밖 적: 물러선 뒤에도 분신은 원 밖(판정·화면) — '+(s?s.x+','+s.y:'skip'));}
 console.log(JSON.stringify({ok:true,checks:n,method:'static+fake-engine'}));

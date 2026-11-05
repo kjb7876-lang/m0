@@ -15,7 +15,7 @@
 //  끄기: localStorage['storyworld.r348.hwandoW']='{"on":false}' (예전 연출로)
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_W_CROSS_R348__)return;
-const REV='R348-hwando-w-cross-1',KEY='storyworld.r348.hwandoW';
+const REV='R348-hwando-w-cross-2',KEY='storyworld.r348.hwandoW';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({clones:7,ringWorld:3.15,ringCell:115/384*10/* R292 띠 칸 반지름(px)/칸 → 화면 칸 수 */,cloneScreen:1.42,maxWorld:7.5,enemyScreen:2.7,
  crossLife:.5,cloneIn:.2,hold:.7,slashLife:.42,splash:1.5,mult:1.25*.45,offset:.85});
@@ -52,7 +52,9 @@ function pickSpots(o){const B=screenBasis(o.x,o.y),ringPx=CFG.ringCell*unit(),sp
  let foes=[];try{foes=(typeof liveEnemies==='function'?liveEnemies():[]).filter(e=>{const d=Math.hypot(e.x-o.x,e.y-o.y);return d>CFG.ringWorld+(e.radius||.3)&&d<=CFG.maxWorld&&sdist(e)>ringPx*1.02&&sdist(e)<=ringPx*CFG.enemyScreen&&(typeof damageable3!=='function'||damageable3(e));})
   .sort((a,b)=>Math.hypot(a.x-o.x,a.y-o.y)-Math.hypot(b.x-o.x,b.y-o.y));}catch(e){fail(e);}
  for(const e of foes){if(spots.length>=CFG.clones)break;const d=Math.hypot(e.x-o.x,e.y-o.y),k=Math.min(CFG.offset,d*.2),p={x:e.x-(e.x-o.x)/d*k,y:e.y-(e.y-o.y)/d*k};
-  const at=open(p.x,p.y)?p:open(e.x,e.y)?{x:e.x,y:e.y}:null;if(!at||!line(o,at))continue;const a=sAng(at);if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.32))continue;spots.push({...at,ang:a,foe:e.id,face:Math.sign(e.x-at.x||1)});}
+  /* 물러선 자리도 원 밖(판정 3.15칸 + 화면 원)인지 다시 본다 — 아니면 적 자리, 그것도 아니면 건너뜀 */
+  const outside=p=>Math.hypot(p.x-o.x,p.y-o.y)>CFG.ringWorld&&sdist(p)>ringPx*1.02;
+  const at=[p,{x:e.x,y:e.y}].find(c=>outside(c)&&open(c.x,c.y))||null;if(!at||!line(o,at))continue;const a=sAng(at);if(spots.some(s=>Math.abs(Math.atan2(Math.sin(a-s.ang),Math.cos(a-s.ang)))<.32))continue;spots.push({...at,ang:a,foe:e.id,face:Math.sign(e.x-at.x||1)});}
  // 나머지: 화면 원 둘레 바깥(반지름 ×1.42)에 고르게 — 화면 각도 기준(아이소 눌림과 상관없이 원 밖에 서게)
  const need=CFG.clones-spots.length,start=-Math.PI/2+(spots.length?spots[0].ang+Math.PI/2:0);
  for(let i=0;i<CFG.clones*3&&spots.length<CFG.clones;i++){const a=start+(i%CFG.clones)*Math.PI*2/CFG.clones+(i>=CFG.clones?(i>=CFG.clones*2?-.22:.22):0);
@@ -70,7 +72,7 @@ function valid(c){return c.room===room&&player===c.player&&player?.hp>0&&player.
 function strike(c,s){s.hit=true;stats.slashes++;if(!solo()||!valid(c)||typeof hitEnemy!=='function')return;const dmg=c.power*CFG.mult;if(!(dmg>0))return;
  const list=typeof liveEnemies==='function'?liveEnemies():[];
  for(const e of list){if(Math.hypot(e.x-s.x,e.y-s.y)>CFG.splash+(e.radius||0))continue;if(typeof damageable3==='function'&&!damageable3(e))continue;if(!line(s,e))continue;
-  const old=e.hp,ok=hitEnemy(e,dmg,{kind:'story-wer-clone-r348',friendly:true,owner:'hero',attackId9:'r348:'+c.id+':'+s.i,sourceHero:'hwando',sourceSlot:'w',r348Clone:true});
+  const old=e.hp,ok=hitEnemy(e,dmg,{kind:'story-wer-clone-r348',attackKind9:'skill',friendly:true,owner:'hero',attackId9:'r348:'+c.id+':'+s.i,sourceHero:'hwando',sourceSlot:'w',r348Clone:true});
   if(ok&&old>e.hp){stats.hits++;stats.damage+=old-e.hp;try{if(typeof floatText==='function')floatText(Math.round(old-e.hp),e.x,e.y);}catch(_){}}}}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 function cut(S,x0,y0,x1,y1,th,a){S.along('iai-cut',PAL,x0,y0,x1,y1,th,{alpha:a*.9,blend:'screen',overHero:true});S.along('slashline',PAL,x0,y0,x1,y1,th*.42,{alpha:a,blend:'screen',overHero:true});stats.draws+=2;}
