@@ -56,17 +56,27 @@ try{
  if(typeof ensureImages==='function'){const base=ensureImages;ensureImages=function(list,...a){return base.call(this,Array.isArray(list)?list.map(swapPath):list,...a);};}
 }catch(e){fail(e);}
 // ---- ② R106 칠한 스프라이트 팔레트 ---------------------------------------------------------
-const decided=new Map();
+const decided=new Map(),SHORT=4,T111=/at threadSlash \(.*\/play-r111\.js:/,needFull=new Set();
+const shortOk=(file,stack)=>!!file&&!(file==='play-r111'&&!T111.test(String(stack)));
 function mapPal(F,h,file){const S0=SP0;let P;try{P=S0.pal(F);}catch(_){return F;}if(!P||!P.a)return F;const C=PALETTE[h];
  let A,B;if(THREAD_FILES.has(file)){const second=isGold(P.a)||isGold(P.b)?THREAD.gold:THREAD.silver;A=C.main;B=second;}else{A=C.main;B=C.sub;}
  // 원래 어두운 쪽 → 두 색 중 어두운 쪽
  const dark=lum(A)<=lum(B)?A:B,light=dark===A?B:A;return lum(P.a)<=lum(P.b)?S0.pal(dark,light):S0.pal(light,dark);}
 function remapF(F){const h=hero();if(!on||!h||!F)return F;stats.sp++;
- const stack=new Error().stack,file=callerFile(stack);
+ // R361 렉: 호출 파일은 거의 늘 스택 위 4칸 안에 있다 → 먼저 4칸만 잡는다(스택 잡기·글자 만들기 비용 절반 이하).
+ //  4칸 스택은 전체 스택의 앞부분이라 거기서 찾은 파일·threadSlash 줄은 전체에서 찾은 것과 같다.
+ //  못 찾았거나, R111 인데 4칸 안에 threadSlash 가 없으면(더 깊이 있을 수 있음) 예전처럼 전체를 다시 잡는다.
+ //  그런 팔레트는 기억해 두고 다음엔 처음부터 전체를 잡는다(두 번 잡기 방지). 어느 쪽을 잡아도 판정은 예전과 같다(비용만 다름).
+ let k0;try{const P=SP0.pal(F);k0=P.a.join()+'|'+P.b.join();}catch(_){return F;}
+ let stack,file=null;const L=Error.stackTraceLimit;
+ if(L>SHORT&&!needFull.has(k0)){Error.stackTraceLimit=SHORT;try{stack=new Error().stack;}finally{Error.stackTraceLimit=L;}file=callerFile(stack);}
+ if(!shortOk(file,stack)){const tried=stack!==undefined;stack=new Error().stack;file=callerFile(stack);stats.spFull=(stats.spFull||0)+1;
+  if(tried){needFull.add(k0);if(needFull.size>400)needFull.delete(needFull.values().next().value);}
+  else if(L>SHORT){const head=String(stack).split('\n').slice(0,SHORT+1).join('\n');if(shortOk(callerFile(head),head))needFull.delete(k0);}}
  // R111 also renders bosses: only its silver-thread slash is a thread caller.
- const thread=THREAD_FILES.has(file)||(file==='play-r111'&&/at threadSlash \(.*\/play-r111\.js:/.test(String(stack)));
+ const thread=THREAD_FILES.has(file)||(file==='play-r111'&&T111.test(String(stack)));
  const kind=thread?'thread':HERO_FILES.has(file)?'hero':'other';
- let k;try{const P=SP0.pal(F);k=P.a.join()+'|'+P.b.join()+'|'+h+'|'+kind;}catch(_){return F;}
+ const k=k0+'|'+h+'|'+kind;
  let d=decided.get(k);if(d===undefined){d=kind==='other'?null:mapPal(F,h,thread?'hero-threads-r174':file);decided.set(k,d);stats.files[file||'?']=(stats.files[file||'?']||0)+1;if(decided.size>400)decided.delete(decided.keys().next().value);}
  if(d){stats.spMapped++;return d;}return F;}
 let SP0=null;
