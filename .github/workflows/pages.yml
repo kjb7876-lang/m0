@@ -93,6 +93,8 @@ jobs:
         run: node r96/qa/r351/slayer-cpu-check.cjs
       - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
         run: node r96/qa/r356/kairo-homage-cpu-check.cjs
+      - name: R360 hospital ep1a08 unreachable-altar path miss memo CPU check
+        run: node r96/qa/r360/perf-r360-cpu-check.cjs
       - name: R355 samong wide corridors and faceless student art CPU check
         run: node r96/qa/r355/samong-wide-cpu-check.cjs
       - name: R350 hero visibility under skill effects and hero blood cue CPU check
