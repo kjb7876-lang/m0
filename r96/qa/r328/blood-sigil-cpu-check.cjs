@@ -13,4 +13,5 @@ assert(/ranged,gx:player\.x,gy:player\.y,pal:palOf\(e,famOf\(\)\)\.main/.test(sr
 assert(/S0\.draw\('ring',g\.pal,/.test(src));ok('ground sigil inner ring uses the mob unique colour (colour rule)');
 assert(src.includes('drawSigils(S0,t,h0)')&&src.includes('if(mfx.length||sigils.length)arm()'));ok('sigil draws through the R169 effect sentinel');
 assert(src.includes('sigilTick(t);'));ok('sigilTick runs each tick');
+assert(/mfx\.length=0;sigils\.length=0;/.test(src)&&/if\(t<g\.t0\|\|t-g\.t0>g\.draw/.test(src));ok('sigils cleared on enterRegion and dropped when time resets (new game)');
 console.log(JSON.stringify({ok:true,checks:n,method:'static; headless capture separately; no GPU or device'}));

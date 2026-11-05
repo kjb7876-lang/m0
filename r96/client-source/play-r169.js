@@ -110,7 +110,7 @@ function sigilTick(t){for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!pr
   if(!key){sigilSeen.delete(e);continue;}if(sigilSeen.get(e)===key)continue;sigilSeen.set(e,key);if(sigils.length>=10)continue;
   const w=ranged?Number(e.rangedWindup):Number(e.attack.castWindup150??e.attack.shape154?.windup)||.45;
   sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),seed:Math.random()*6,ranged,gx:player.x,gy:player.y,pal:palOf(e,famOf()).main});/* R328b: 원거리 시전은 노리는 자리(그 순간 영웅 위치) 바닥에도 육망성 */stats.sigils=(stats.sigils||0)+1;}
- for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t-g.t0>g.draw+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);}}
+ for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t<g.t0||t-g.t0>g.draw+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);/* R328c: 새 게임에서 time 이 0 으로 돌아가면 지난 판 육망성은 버린다 */}}
 function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.draw,out=v>1?Math.max(0,1-(t-g.t0-g.draw)/.35):1;if(out<=0)continue;
   if(g.ranged&&Number.isFinite(g.gx)){/* R328b(사용자 2026-11-05 "적 모든 원거리 스킬 전조에는 바닥에 육망성, 색은 색 규칙대로"): 바닥 전조 — 검붉은 잉크 + 핏빛 육망성(위협 신호),
      안쪽 고리만 그 몹의 고유색(SKILL.md 10절: 적 = 호러 배색 + 고유·이름색). 바닥이라 납작하게(squash .5), 시전 순간까지 그려지며 커진다. */
@@ -196,7 +196,7 @@ try{
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r169Note){try{drawNote(p);}catch(err){fail(err);}return;}return base.apply(this,[p,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r169-fx'){try{drawMob();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(live()){if(!(player.ego>0))player.egoStackR169=0;noteTick();mobTick();curate();bonusTick();if(mfx.length||sigils.length)arm();else disarm();}}catch(e){fail(e);}return r;};}
- if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dropped=new Set();picked=new Set();lastKill=null;dropKills=kills;dropT=T();enterT=T();foes=(room?.enemies||[]).filter(e=>e&&e.hp>0&&!major(e)).length;mfx.length=0;curated='';curN=-1;curAt=0;
+ if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dropped=new Set();picked=new Set();lastKill=null;dropKills=kills;dropT=T();enterT=T();foes=(room?.enemies||[]).filter(e=>e&&e.hp>0&&!major(e)).length;mfx.length=0;sigils.length=0;curated='';curN=-1;curAt=0;
    for(const id of bonus.keys())if(!room?.passivePointDropsR64?.some(d=>d.id===id))bonus.delete(id);}catch(e){fail(e);}return r;};}
  // 쪽지 모음 단추: 메뉴와 기억(일지) 창
  const addBtn=()=>{const box=document.querySelector('#panel .actions');if(!box||document.getElementById('r169BookBtn'))return;const b=document.createElement('button');b.id='r169BookBtn';b.textContent='쪽지 모음 · '+book.length;b.onclick=()=>showBook();box.appendChild(b);};
