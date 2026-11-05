@@ -85,7 +85,7 @@ function paintCell(p,key,height){const hit=cellOf(key);if(!hit)return false;cons
  const lift=clamp(finite(p.visualLiftPx),0,h*.7),hero=typeof player!=='undefined'&&player?project(player.x,player.y):null,behind=!!hero&&q.y>hero.y-3&&q.y-lift-h<hero.y-15&&Math.abs(q.x-hero.x)<w*.4;
  const frame={path:A.path,assetFrame:{sourceRect:c.sourceRect,pivot:c.pivot,visibleHeight:c.visibleHeight,bakedFacing:'right'}};
  const filter=p.revisitFilterSix||(typeof layer!=='undefined'&&layer==='DREAM'?'saturate(.5) hue-rotate(10deg) brightness(.85)':undefined);
- const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(12*z,Math.min(w*.36,h*.56)),{lift:lift/Math.max(1,h)});frameBase(A.path,frame,q.x,q.y-lift,h,{alpha:behind?.36:1,filter});};
+ const paint=()=>{if(typeof shadow==='function')shadow(q.x,q.y,Math.max(12*z,Math.min(w*.36,h*.56)),{lift:lift/Math.max(1,h)});window.__STORYWORLD_PROP_SHADOW_R329__?.before?.(frameBase,[A.path,frame,q.x,q.y-lift,h,{alpha:behind?.36:1,filter}],q.y);/* R329 투영 그림자 */frameBase(A.path,frame,q.x,q.y-lift,h,{alpha:behind?.36:1,filter});};
  if(typeof ctx?.scope==='function')ctx.scope({id:'prop:'+p.id,kind:'prop',x:p.x,y:p.y,bodyPath:A.path,alive:true,r102Swap:key},paint);else paint();
  stats.swaps++;return true;}
 const R80API=()=>window.__STORYWORLD_WORLD_ASSETS_R80__;
