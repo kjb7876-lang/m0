@@ -1,0 +1,167 @@
+{
+  "schema": "storyworld.r317-existing-art/v1",
+  "status": "임시",
+  "assets": [
+    {
+      "path": "assets/episode1a/corrupted_guardian.webp",
+      "bytes": 55768,
+      "sha256": "2d7d33abed68b2bb0d09d401a9e4d023787c502e06c8ec7e83e21c12210f4ff2",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/generated-v31224/actors-normalized/a6f6c2767d0f_ep1a_false_archangel_smiling_mask.webp",
+      "bytes": 55484,
+      "sha256": "e0d1e44e2f61c858b7b7f1c65fe2c83ab8b96a52fc5d45ffe9630ad86a29c4a5",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r104/bosses/dist06-boss-p4.webp",
+      "bytes": 76864,
+      "sha256": "77a8d9296411e75404a4d3a303feedc47d280cc35e923fb13e3973988f30e4aa",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r106/fx/flare.webp",
+      "bytes": 10058,
+      "sha256": "af103a5ab0ff6d8cf9e09f389643de22dbdda8a791f97e13d88cd6561f990ab6",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r106/fx/glow.webp",
+      "bytes": 3168,
+      "sha256": "a08107223476bb8f1d725fa7907367005b901c7bdbde941cd4bcff250763018c",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r106/fx/smoke.webp",
+      "bytes": 10942,
+      "sha256": "55c2727763f0927f6b51bb44eb59b5da9198c58f644d139e40dcf2c00dfc484e",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": false
+    },
+    {
+      "path": "assets/r118/tiles/asphalt.webp",
+      "bytes": 441466,
+      "sha256": "18e46c7b843ff3537d24a7e47945b626dd541c0c7891f6a6d5fb0e0e03bd0c33",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r138/props/syringe.webp",
+      "bytes": 42788,
+      "sha256": "b163835e5128a79710223bfaa4b74bf3da84da970ad100c3dd4c7e7b7d655fe2",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r161/tiles/blood-memory.webp",
+      "bytes": 413970,
+      "sha256": "73b535b974f01e42fb9dee3ec9e49a81f4d05d3d685f6553977255584d731e84",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r299/blood-dried.webp",
+      "bytes": 21510,
+      "sha256": "7743427646cfbad1becbfac84016cc797762756c358a89b7f7647d5796b722dc",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r299/papers.webp",
+      "bytes": 22574,
+      "sha256": "a4c4c8c80bc9bbbd0b6e36ede14f4500981728129115c6a8a587b2165d6a8006",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r299/stone-cracked.webp",
+      "bytes": 21356,
+      "sha256": "bdd4078d6c655d577567859293a4dd14efcdf4dcddc5e7097c62203f37f0b19c",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r299/suitcase.webp",
+      "bytes": 13128,
+      "sha256": "9e5d109b767986438bbf1075344edb230773b78fab4251e0415c6ca9fc8c304e",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/r299/tree.webp",
+      "bytes": 61242,
+      "sha256": "cdc76a956337c52edb4e0486935279a4509b388401ba030b3011b2e49aaf6965",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/world-r80/r80-011.webp",
+      "bytes": 188334,
+      "sha256": "d25d1bc13f5e0a1c744e513b557beb763464105e9e0e061813fe15471980ee14",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/world-r80/r80-021.webp",
+      "bytes": 132268,
+      "sha256": "3ffde6ca63f1a2458a6ffdf416f8bf35c7903556c6b14377686c36fe7909ed47",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/world-r80/r80-072.webp",
+      "bytes": 299904,
+      "sha256": "865b04349c29e27d3103551b8a31000679c0ccb3a96b712bd8d615152a1e0355",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/world-r80/r80-073.webp",
+      "bytes": 273264,
+      "sha256": "57d8491e828bc20a86a52abdecc5825182b191c9c3b2589ecfa8204d427c761f",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    },
+    {
+      "path": "assets/world-r80/r80-089.webp",
+      "bytes": 150262,
+      "sha256": "de77e1a30fc777ccb2188a07fc44049fcdec4c03553d11bfde5231c84c289f4a",
+      "origin": "existing repository asset",
+      "status": "임시",
+      "applied": true
+    }
+  ],
+  "missing": [
+    "SW-map19 FINAL assets unavailable; no new art created",
+    "red marble/mosaic and damaged gilt wall artwork",
+    "broken throne, blood fountain, burnt flag, chandelier",
+    "dedicated demonic tree artwork (existing dead tree used temporarily)",
+    "market awning, drum fire, trash, air conditioner, fire escape, wires, mattress, fence",
+    "dedicated close-up/guardian keyframes (existing actor art used temporarily)",
+    "ep1a09b has no Balrog boss; natural post-Balrog trigger unavailable"
+  ]
+}

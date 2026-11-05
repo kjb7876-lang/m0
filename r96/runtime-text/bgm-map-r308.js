@@ -81,7 +81,7 @@ function tick(){const now=performance.now(),dt=Math.min(.25,Math.max(0,(now-cloc
  const a=cur?.deck;if(a&&!fade&&Number.isFinite(a.el.duration)&&a.el.duration>XF*2&&a.el.currentTime>=a.el.duration-XF)loopNow();
  const voice=G('voice',null),talking=voice&&!voice.paused||globalThis.speechSynthesis?.speaking,target=talking?.25:G('modal',false)?.5:1;
  duck+=(target-duck)*(1-Math.exp(-dt/(target<duck?.15:.6)));const boss=bossMul();
- for(const d of decks){const tr=d.id&&idx.tracks[d.id];const v=Math.max(0,Math.min(1,settings.bgm*(tr?.gain??.6)*duck*boss*d.w));d.el.volume=v;if((d.w>0||fade&&d===fade.to)&&d.el.paused)play(d);else if(d.w<=0&&!d.el.paused&&!(fade&&d===fade.to))d.el.pause();}
+ for(const d of decks){const tr=d.id&&idx.tracks[d.id];const v=Math.max(0,Math.min(1,settings.bgm*(tr?.gain??.6)*duck*boss*d.w*(window.__STORYWORLD_MAPS_PALACE_SLUM_R317__?.bgmGain?.()??1)));d.el.volume=v;if((d.w>0||fade&&d===fade.to)&&d.el.paused)play(d);else if(d.w<=0&&!d.el.paused&&!(fade&&d===fade.to))d.el.pause();}
  return true;}
 function quiet(base,self,args){const m=settings.music;try{settings.music=false;base.apply(self,args);}finally{settings.music=m;}}
 try{if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){
@@ -102,5 +102,5 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.on)stopAll();}
 window.__STORYWORLD_BGM_MAP_R308__=Object.freeze({revision:REV,set,credits,resolve,samongOf,
  inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,tracks:idx?Object.keys(idx.tracks).length:0,visit:visit?{...visit.sel}:null,
-  active:cur?{track:cur.track,zone:cur.zone,episode:cur.episode,role:cur.role,time:cur.deck.el.currentTime,paused:cur.deck.el.paused,volume:cur.deck.el.volume}:null,fading:!!fade,blocked,duck,failed:[...failed],stats:{...stats},log:log.slice(-40),lastError})});
+  active:cur?{track:cur.track,zone:cur.zone,episode:cur.episode,role:cur.role,time:cur.deck.el.currentTime,paused:cur.deck.el.paused,volume:cur.deck.el.volume}:null,decks:decks.map(d=>({id:d.id,paused:d.el.paused,volume:d.el.volume,readyState:d.el.readyState,muted:d.el.muted,ended:d.el.ended})),fading:!!fade,blocked,duck,failed:[...failed],stats:{...stats},log:log.slice(-40),lastError})});
 })();

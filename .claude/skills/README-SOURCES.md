@@ -39,3 +39,12 @@
 - 결과는 웹사이트용 기준(네온·사이버펑크·평면 대시보드 등)이 많다. 그대로 쓰지 않고 `storyworld-art-style` 규칙(손으로 칠한 고딕 호러, 핏빛·금빛·청록)에 맞는 것만 고른다.
 - 쓸 만한 쪽: `-d ux`(간격·대비·터치 크기), `-d typography`, `-d color` 의 대비 판단. 색 자체는 게임 문서를 따른다.
 - 2026-10-31 시험: "dark gothic horror game HUD" → cyberpunk-ui, hud-sci-fi-fui, dark-mode-oled(색은 게임과 안 맞음, 대비·reduced-motion 점검 목록만 참고). "game hud health bar hotbar"(-d ux) → 일치 없음.
+
+## ECC(affaan-m/everything-claude-code, MIT) 에서 고른 3개 — 2026-11-05
+사용자 "검토 후 쓸 만한 것만, 코덱스도 같이". 설치 스크립트·훅(매 도구 호출마다 실행)은 쓰지 않고 SKILL.md 만 복사했다. 라이선스 전문: `ECC-LICENSE.txt`.
+- `ecc-e2e-testing`: Playwright 브라우저 순회 테스트 짜는 법·흔들리는 테스트 다루기.
+- `ecc-browser-qa`: 배포 뒤 공개 URL 에서 콘솔 오류·화면 점검.
+- `ecc-click-path-audit`: 버튼 하나를 누른 뒤 상태가 끝까지 맞게 바뀌는지 추적(예: 제목 화면 설정 닫기 같은 UI 흐름 버그).
+- 예시는 React·Next.js 기준이 많다. 우리 게임은 plain JS + three.js 오버레이라 방법만 쓰고, 검사 명령은 CLAUDE.md 를 따른다.
+- 고르지 않은 것: verification-loop(TS/npm 기준, 이미 verification-before-completion·CLAUDE.md 검사 있음), ai-regression-testing(Next.js API 전용), benchmark-methodology(마케팅 경쟁사 비교), context-budget·continuous-learning-v2(훅 상시 실행·토큰 증가), 나머지 다른 언어·프레임워크 스킬.
+- 우리 쪽 수정(Codex 리뷰 #215): `ecc-e2e-testing` 의 "Quarantine"(test.fixme·CI 에서만 skip) 예시를 저장소 규칙(테스트 끄기 금지, 미검증 보고)으로 바꿨고, `waitForResponse` 예시 3곳을 "동작 전에 기다림 등록" 순서로 고쳤다.

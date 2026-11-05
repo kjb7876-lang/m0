@@ -105,3 +105,5 @@ const run=(c,s)=>vm.runInContext(s,c);const settle=()=>new Promise(r=>setImmedia
  ok(!/michaela/.test(JSON.stringify(IDX)),'index has no michaela');
  console.log('R292 CPU check: '+n+' checks passed');
 })().catch(e=>{console.error(e);process.exit(1);});
+
+assert.ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./maps-palace-slum-r317.js"></script><script src="./save-transition-r320.js"></script><script src="./bgm-map-r308.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");
