@@ -88,6 +88,14 @@ function fakeAudio(){const made=[];const node=()=>({connect(){},disconnect(){thi
  G.hazards.push({x:10,y:10,radius:1.2,age:0,warning:.5,life:1.6,damage:20});G.tick(.1);G.tick(.1);guest.x=12;G.tick(.1);G.tick(.1);G.tick(.2);
  assert.strictEqual(G.api.inspect().stats.triggers,1);assert(Math.abs(guest.blinkCD-1.3)<1e-9&&host.blinkCD===2);assert(G.room.enemies[0].cd===1.7&&G.room.enemies[1].cd===1);
  assert.deepStrictEqual(G.floats,['시간 제어']);assert(G.effects[0].x===12&&G.effects[0].coopPlayerR62==='g');assert.strictEqual(G.api.inspect().stats.sounds.chime,undefined);ok('co-op host: Seoha guest escaping gets the passive (refund on guest, enemies near guest delayed); effect placed on the guest, no chime on host screen');}
+// Codex 4483088097: 협동 호스트는 장판 피해를 R62 touches(발 y-.15·여유 .25)로 나눈다 — 그 안에 남은 윤서하는 맞으므로 탈출이 아니다
+assert(/function touches\(h,p\)\{[^\n]*const g=geometryFor\(h\);if\(g\)\{try\{return footprintContains154\(g,p\.x,p\.y-\.15,\.25\)&&\(!h\.medical20\|\|clearLine\(h\.medical20\.target\|\|h,p\)\)/.test(idx));
+assert(/const area=!source\?\.r62FieldContact&&\(scopeKind==='hazards'[^\n]*alivePlayers\(\)\.filter\(v=>touches\(source,v\)\)/.test(idx));
+{const mk=gx=>{const host={x:10.4,y:10,hp:100,hero:'hwando',blinkCD:2,specialCD:2,coopIdR62:'h'},guest={x:10,y:10,hp:100,hero:'seoha',blinkCD:2,specialCD:2,coopIdR62:'g'};
+  const G=world({coopApi:{mode:()=>'host',livingPlayers:()=>[host,guest],localPlayer:()=>host}});G.player=host;
+  G.hazards.push({x:10,y:10,radius:1.2,age:0,warning:.5,life:1.6,damage:20});G.tick(.1);G.tick(.1);guest.x=gx;G.tick(.1);G.tick(.1);G.tick(.2);return G.api.inspect().stats.triggers;};
+ assert.strictEqual(mk(11.3),0);ok('co-op host: Seoha just past the unpadded edge but inside the engine co-op footprint (y-.15, +.25) is still hit — no escape');
+ assert.strictEqual(mk(12),1);ok('co-op host: Seoha beyond the padded co-op footprint escapes');}
 // 5) 엔진 저작 캐스트: warning 은 releaseAt 에서 끝나도 impactAt 기준으로 0.7초 창을 본다
 {const G=world();const h={x:10,y:10,radius:1.2,age:0,warning:.3,life:2.5,damage:20,row150:{warningAt:1,releaseAt:1.3,impactAt:2.5}};G.hazards.push(h);
  for(let i=0;i<10;i++)G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);G.player.x=12;G.tick(.1);G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);

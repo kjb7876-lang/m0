@@ -66,7 +66,14 @@ function hostile(h){if(!h||h.friendly||!fin(h.warning)||!fin(h.age)||h.age>=h.li
  return h.damage>0;}
 // 착탄 순간에 실제로 터졌는가(발사되지 않고 취소된 캐스트는 탈출로 치지 않는다)
 function fired(h){if(h.medical20)return h.medical20.released&&!h.medical20.cancelled;if(h.r61Field)return h.r61Field.released!==false&&!h.r61Field.action?.cancelled;if(h.r62Field)return h.r62Field.released!==false&&!(h.life<=0);if(h.row150)return h.row150.stage!=='cancel';return true;}
-function inside(h,p){try{const x=p.x,y=p.y;
+// 협동 호스트는 장판 피해를 index.html R62 touches(h,p)(발 y-.15·여유 .25, 없으면 반경 max(.3,r))로 참가자 모두에게 나눈다 — 내보이지 않으므로 같은 조건을 여기 둔다.
+// 협동 중에는 혼자 판정 또는 협동 판정 중 하나라도 맞으면 '안' 으로 본다(엔진이 때릴 수 있는 자리면 탈출이 아니다).
+function coopHost(){const c=coop();try{return c?.mode?.()==='host';}catch(_){return false;}}
+function coopTouches(h,p){try{if(!p||p.hp<=0)return false;let g=null;try{g=h.footprint154||h.medical20?.geometry||h.storyPattern5&&lockPatternFootprint154(h)||genericFootprint154(h);}catch(_){g=null;}
+ if(g){try{return !!footprintContains154(g,p.x,p.y-.15,.25)&&(!h.medical20||typeof clearLine!=='function'||!!clearLine(h.medical20.target||h,p));}catch(_){}}
+ return Math.hypot(p.x-(+h.x||0),p.y-.15-(+h.y||0))<=Math.max(.3,+h.radius||1);}catch(e){fail(e);return false;}}
+function inside(h,p){if(!h.r62Field&&coopHost()&&coopTouches(h,p))return true;return insideSolo(h,p);}
+function insideSolo(h,p){try{const x=p.x,y=p.y;
  if(h.medical20){const m=h.medical20,q={x,y:y-.15},line=typeof clearLine==='function'?clearLine:()=>true;
   if(m.kind==='tools'){if(!line(m.origin,q))return false;}else if(!line(m.origin,m.target)||!line(m.target,q))return false;
   return !!footprintContains154(h.footprint154,q.x,q.y,.25);}
