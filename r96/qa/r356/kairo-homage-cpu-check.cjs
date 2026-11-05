@@ -78,7 +78,7 @@ function fakeAudio(){const made=[];const node=()=>({connect(){},disconnect(){thi
  const G=world({coopApi:{mode:()=>'host',livingPlayers:()=>[host,guest],localPlayer:()=>host}});G.player=host;G.room.enemies.push({x:11,y:10,hp:50,cd:1},{x:20,y:21,hp:50,cd:1});
  G.hazards.push({x:10,y:10,radius:1.2,age:0,warning:.5,life:1.6,damage:20});G.tick(.1);G.tick(.1);guest.x=12;G.tick(.1);G.tick(.1);G.tick(.2);
  assert.strictEqual(G.api.inspect().stats.triggers,1);assert(Math.abs(guest.blinkCD-1.3)<1e-9&&host.blinkCD===2);assert(G.room.enemies[0].cd===1.7&&G.room.enemies[1].cd===1);
- assert.deepStrictEqual(G.floats,[]);ok('co-op host: Seoha guest escaping gets the passive (refund on guest, enemies near guest delayed); host screen shows no float for it');}
+ assert.deepStrictEqual(G.floats,['시간 제어']);assert(G.effects[0].x===12&&G.effects[0].coopPlayerR62==='g');assert.strictEqual(G.api.inspect().stats.sounds.chime,undefined);ok('co-op host: Seoha guest escaping gets the passive (refund on guest, enemies near guest delayed); effect placed on the guest, no chime on host screen');}
 // 5) 엔진 저작 캐스트: warning 은 releaseAt 에서 끝나도 impactAt 기준으로 0.7초 창을 본다
 {const G=world();const h={x:10,y:10,radius:1.2,age:0,warning:.3,life:2.5,damage:20,row150:{warningAt:1,releaseAt:1.3,impactAt:2.5}};G.hazards.push(h);
  for(let i=0;i<10;i++)G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);G.player.x=12;G.tick(.1);G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);

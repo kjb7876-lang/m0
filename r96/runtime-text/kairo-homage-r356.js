@@ -72,10 +72,11 @@ function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha
    frozen.set(b,{vx:b.vx,vy:b.vy,until:now()+T.freeze});b.vx=0;b.vy=0;if(Number.isFinite(b.life))b.life+=T.freeze;stats.frozen++;}
   const r=R();for(const e of(r?.enemies||[])){if(!e||e.hp<=0||dist(e,p)>T.radius||!Number.isFinite(e.cd))continue;e.cd+=T.delay;stats.delayed++;}
   for(const k of['blinkCD','specialCD'])if(Number.isFinite(p[k])&&p[k]>0){p[k]=Math.max(0,p[k]-T.refund);stats.refunds++;}}
- note('time-control',{reason,frozen:frozen.size,hero:p.coopIdR62||'local'});if(!mine(p))return true;
+ note('time-control',{reason,frozen:frozen.size,hero:p.coopIdR62||'local'});
+ // 글자·연출은 그 참가자 자리에(손님은 자기 판정이 없어 호스트 스냅숏으로 받는다), 종소리는 이 화면의 주인공일 때만
  try{if(typeof floatText==='function')floatText('시간 제어',p.x,p.y,'#bfe6ff');}catch(e){fail(e);}
- try{if(typeof effects!=='undefined'&&Array.isArray(effects))effects.push({type:'r356-time',r356:true,x:p.x,y:p.y,age:0,life:T.freeze});}catch(e){fail(e);}
- play('chime');return true;}
+ try{if(typeof effects!=='undefined'&&Array.isArray(effects))effects.push({type:'r356-time',r356:true,x:p.x,y:p.y,age:0,life:T.freeze,...(p.coopIdR62?{coopPlayerR62:p.coopIdR62}:{})});}catch(e){fail(e);}
+ if(mine(p))play('chime');return true;}
 function thaw(){const t=now();for(const[b,s]of frozen){if(b.dead||t>=s.until||t<s.until-T.freeze-1){if(!b.dead){b.vx=s.vx;b.vy=s.vy;}frozen.delete(b);}else{b.vx=0;b.vy=0;}}}
 
 // ---------- 매 틱: 위험지대 감시 ----------
@@ -99,7 +100,7 @@ if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(
 const SHEET={path:'assets/r356/seoha-time-control.webp',cell:384,frames:10,img:null,ok:false,err:false};
 function sheet(){if(SHEET.img||typeof Image!=='function')return SHEET;try{const im=new Image();im.decoding='async';im.onload=()=>{SHEET.ok=true;};im.onerror=()=>{SHEET.err=true;};
  im.src=typeof urlFor==='function'?urlFor(SHEET.path):'./'+SHEET.path;SHEET.img=im;}catch(e){fail(e);}return SHEET;}
-function drawTime(e){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const p=P();const x=p?p.x:e.x,y=p?p.y:e.y,q=project(x,y),k=Math.max(0,Math.min(.999,e.age/e.life)),h=typeof actorHeight==='function'?actorHeight():60;
+function drawTime(e){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const p=e.coopPlayerR62?null:P(),q=project(p?p.x:e.x,p?p.y:e.y),k=Math.max(0,Math.min(.999,e.age/e.life)),h=typeof actorHeight==='function'?actorHeight():60;
  const sh=sheet();if(!sh.ok)return;const reduced=typeof settings!=='undefined'&&settings.reducedMotion;const f=reduced?4:Math.min(sh.frames-1,Math.floor(k*sh.frames)),size=h*1.8;
  ctx.save();try{ctx.globalCompositeOperation='screen';/* 영웅 몸을 가리지 않게 머리 위(발에서 1.3×키)에 둔다 */ctx.globalAlpha=.9;ctx.drawImage(sh.img,f*sh.cell,0,sh.cell,sh.cell,q.x-size/2,q.y-h*1.3-size/2,size,size);
   // 멈춘 적 투사체: 같은 띠의 서리 프레임(5)을 작게
