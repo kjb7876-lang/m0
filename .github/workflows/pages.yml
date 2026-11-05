@@ -57,6 +57,8 @@ jobs:
         run: node r96/qa/r324/boss-meteor-painted-cpu-check.cjs
       - name: R325 pixel-mode readable dark mob sheets CPU check
         run: node r96/qa/r325/pixel-readable-cpu-check.cjs
+      - name: R330 boss-tier disaster skills CPU check
+        run: node r96/qa/r330/disaster-cpu-check.cjs
       - name: R333 rally trap at every gather-room entrance CPU check
         run: node r96/qa/r333/rally-entrance-cpu-check.cjs
       - name: R343 hero nova ground cross (no ring) CPU check
@@ -81,6 +83,12 @@ jobs:
         run: node r96/qa/r339/menu-cpu-check.cjs
       - name: R341 enemy cross to hexagram CPU check
         run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
+      - name: R348 hwando W cross slash and seven clones CPU check
+        run: node r96/qa/r348/hwando-w-cross-cpu-check.cjs
+      - name: R353 BGM pick in settings CPU check
+        run: node r96/qa/r353/bgm-pick-cpu-check.cjs
+      - name: R351 slayer new walk/attack motion CPU check
+        run: node r96/qa/r351/slayer-cpu-check.cjs
       - name: R350 hero visibility under skill effects and hero blood cue CPU check
         run: node r96/qa/r350/hero-visibility-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
@@ -375,6 +383,12 @@ jobs:
         run: node r96/qa/r275/r275-cpu-check.cjs
       - name: R283 Hwando idle side stance and unified colour CPU check
         run: node r96/qa/r283/r283-cpu-check.cjs
+      - name: R345 Hwando preload / no legacy sprite flash CPU check
+        run: node r96/qa/r345/hwando-preload-cpu-check.cjs
+      - name: R349 Hwando three-direction motion and symmetric slash arc CPU check
+        run: node r96/qa/r349/hwando-arc-cpu-check.cjs
+      - name: R352 orphaned field-wave enemies wake near the hero CPU check
+        run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
         run: node r96/qa/r280/r280-cpu-check.cjs
       - name: R286 mobile +77% all stats, attack-only/move-only mob motion fill CPU check

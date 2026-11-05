@@ -4051,6 +4051,18 @@
     "assets/r308/bgm/pathetique-2.ogg",
     "assets/r308/bgm/pathetique-3.ogg",
     "assets/r308/bgm/pathetique-4.ogg",
+    "disaster-r330.js",
+    "hwando-arc-r349.js",
+    "wave-orphans-r352.js",
+    "assets/r349/hwando-arc.webp",
+    "assets/r349/hwando-arc-r49.webp",
+    "assets/r349/hwando-a-r49.webp",
+    "slayer-r351.js",
+    "assets/r351/slayer/attack-w.webp",
+    "assets/r351/slayer/walk-w.webp",
+    "assets/r351/slayer/index.json",
+    "bgm-pick-r353.js",
+    "hwando-w-cross-r348.js",
     "hero-visibility-r350.js"
   ],
   "mediaPaths": [
@@ -5126,5 +5138,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bfe801a384c08d7560d4ae9c03d6b54da27bdf3c143c9dd2bf00d239d7acf86a"
+  "runtimeManifestSHA256": "e2af6c1913fd2839f2b14ca5e22a82b8a1ba6e4faedfe65cf22c851d16cc1867"
 }
