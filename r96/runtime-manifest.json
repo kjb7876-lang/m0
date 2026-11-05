@@ -23359,8 +23359,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 24951,
-      "sha256": "4fefdc188dfaf79e8229e1ac2465f76354c8a7bfd6344b2103d2c75d2d008b1c"
+      "bytes": 25245,
+      "sha256": "aa587fe46b769fe156bd8269d1890b1e1bb75e3849c5fa39d4e26d33947cda2a"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -23369,8 +23369,8 @@
     },
     {
       "path": "fx-eden-r108.js",
-      "bytes": 31097,
-      "sha256": "2ef4f265a08325896a902f7c9bf7acaac295dfd6d4753a647db00a4423aeaffa"
+      "bytes": 31453,
+      "sha256": "ab16ba537dbc9a3eedd53a17e33aaa1f9c5dbfe1e43f8467bf4eeb072f243e1e"
     },
     {
       "path": "fx-sprites-r106.js",
@@ -24149,7 +24149,7 @@
     }
   ],
   "fileCount": 4829,
-  "totalBytes": 914096533,
+  "totalBytes": 914097183,
   "webHTMLSha256": "4d5f8556c3aa76781876c23307d31f15159d1f31c0de478438925cb6d608ac95",
   "largest": [
     {
