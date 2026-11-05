@@ -31,9 +31,12 @@ g.setT(199);g.tick();hazards.length=0;boss.r330Next=0;for(let t=200;t<230;t+=.2)
 D.set(true);room.difficultyR63='normal';player.x=5;player.y=5;player.hp=1000;env.__hurts=[];const e3={...boss,id:'b3',x:9,y:5};g.setT(300);g.tick();D.cast(e3,'volcano');
 for(let t=300;t<=306;t+=.05){player.x=5;player.y=5;g.setT(t);g.tick();}
 assert(D.inspect().stats.status>=1&&env.__hurts.some(h=>h&&h.status==='burn'),'burn applied: '+JSON.stringify(D.inspect().stats));ok('lingering fire zone gives 화상 (burn) with damage over time');
+{const bt=env.__hurts.filter(h=>h&&h.status==='burn');assert(bt.length&&bt.every(h=>h.owner&&h.owner.id==='b3'),'burn owner '+JSON.stringify(bt.map(h=>h.owner&&h.owner.id)));ok('status ticks carry the casting enemy as owner (difficulty multiplier applies)');}
 assert(/zone\('blaze',p\.x,p\.y,\.9,d\+w,4\.2/.test(src));ok('volcano fire lingers ~4 s on the ground');
 g.setT(400);g.tick();D.cast({...boss,id:'b4',x:9,y:5},'flood');for(let t=400;t<=403;t+=.05){player.x=5;player.y=5;g.setT(t);g.tick();}
 assert(D.status().wet,'wet: '+JSON.stringify(D.status()));const x0=player.x;g.move(player,1,0);assert(Math.abs(player.x-x0-.8)<1e-9,'slow '+(player.x-x0));ok('flood puddle gives 젖음 (wet) and slows movement x0.8');
+{assert(D.clearStatus(player)>=1&&!D.status().wet);const x1=player.x;g.move(player,1,0);assert(Math.abs(player.x-x1-1)<1e-9);assert(/if\(typeof guardStart==='function'\)\{const gBase=guardStart;guardStart=function/.test(src)&&/clearStatus\(player\)/.test(src));ok('guard cleanse clears disaster statuses (wet removed, speed restored)');}
+{assert(/wisp\(e,t,D\)\{const n=7,tg=TGT;/.test(src)&&/const x=tg\.x,y=tg\.y;/.test(src));ok('wisp keeps its own cast target in queued callbacks');}
 assert(['burn','poison','rad','chill','wet'].every(k=>new RegExp(k+':\\{name:').test(src)));ok('five statuses: burn/poison/rad/chill/wet');
 assert(typeof D.lights==='function');ok('active fire exposed as light sources for R329 shadows');
 // Codex 리뷰 후속: 보스가 죽거나 방을 옮기면 아직 안 온 재해는 취소 / 광폭화 반지름을 그림이 따라감 / 협동 손님은 시전 없음·연결 없는 위험지대는 바닥 육망성 / 상태이상은 영웅마다

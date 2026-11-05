@@ -69,13 +69,13 @@ const ST={burn:{name:'화상',dur:3,tickEvery:.5,dmg:.06,pal:P.ember},poison:{na
 const zones=[],statusOf=new WeakMap();
 function stOf(a){let s=statusOf.get(a);if(!s){s={};statusOf.set(a,s);}return s;}
 function zone(fxKind,x,y,R,start,life,D,st){zones.push({x,y,R,start,end:start+life,D,st,src:CUR});if(zones.length>30)zones.shift();if(fxKind)push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
-function giveStatus(a,st,D){const s=ST[st];if(!s)return;const status=stOf(a),t=T(),cur=status[st];if(!cur){status[st]={until:t+s.dur,D,next:t+(s.tickEvery||0)};stats.status=(stats.status||0)+1;
-   try{/* 엔진 fx(전역 함수)는 이 파일 안의 fx 배열에 가려지므로 window 로 부른다 */if(typeof window.fx==='function')window.fx('text',a.x,a.y,{text:s.name,color:'#e8b0a0',life:.9});}catch(_){}}else{cur.until=Math.max(cur.until,t+s.dur);cur.D=Math.max(cur.D,D);}}
+function giveStatus(a,st,D,owner){const s=ST[st];if(!s)return;const status=stOf(a),t=T(),cur=status[st];if(!cur){status[st]={until:t+s.dur,D,next:t+(s.tickEvery||0),owner};stats.status=(stats.status||0)+1;
+   try{/* 엔진 fx(전역 함수)는 이 파일 안의 fx 배열에 가려지므로 window 로 부른다 */if(typeof window.fx==='function')window.fx('text',a.x,a.y,{text:s.name,color:'#e8b0a0',life:.9});}catch(_){}}else{cur.until=Math.max(cur.until,t+s.dur);cur.D=Math.max(cur.D,D);if(owner)cur.owner=owner;}}
 function hurtAs(a,dmg,src){const c=COOP();if(c?.mode?.()==='host'&&typeof c.withPlayer==='function')return c.withPlayer(a,()=>hurt(dmg,src));return hurt(dmg,src);}
-function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D);}
+function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
  for(let i=zones.length-1;i>=0;i--)if(t>zones[i].end)zones.splice(i,1);
  for(const a of hs){const status=stOf(a);for(const k of Object.keys(status)){const s=status[k],d=ST[k];if(t>s.until||!(a.hp>0)){delete status[k];continue;}
-  if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true});}catch(err){fail(err);}}}}}
+  if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true,owner:s.owner||undefined});/* 시전한 적을 붙여 난이도 배율(enemySource)이 적용되게 — Codex 리뷰 */}catch(err){fail(err);}}}}}
 function slowMul(a){const status=statusOf.get(a);if(!status)return 1;let m=1;for(const k of Object.keys(status))if(ST[k].slow)m=Math.min(m,ST[k].slow);return m;}
 const GO={
  volcano(e,t,D){for(let i=0;i<6;i++){const p=i===0?{x:TGT.x,y:TGT.y}:near(TGT.x,TGT.y,3.2),d=t+i*.38,w=.95;
@@ -93,8 +93,8 @@ const GO={
    for(let i=0;i<7;i++){const s=1.2+i*1.15,x=e.x+ux*s,y=e.y+uy*s,d=t+i*.22;const f=push({k:'wave',x,y,ux,uy,t0:d,warn:.55,R:1.35,pal:P.water,seed:rnd()*6});
     later(d,()=>{f.h=hz(e,x,y,1.35,.55,.95,D*.42,{kind:'flood',push:{x:ux,y:uy}});});}
    push({k:'puddle',x:TGT.x,y:TGT.y,t0:t+1.4,life:4,R:2.4,pal:P.water});zone(null,TGT.x,TGT.y,2.4,t+1.4,4,D,'wet');},
- wisp(e,t,D){const n=7;for(let i=0;i<n;i++){const d=t+.5+i*.32;push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});
-   later(d,()=>{const x=TGT.x,y=TGT.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
+ wisp(e,t,D){const n=7,tg=TGT;/* 이 시전의 목표를 붙잡아 둔다(다른 보스 시전이 TGT 를 바꿔도) — Codex 리뷰 */for(let i=0;i<n;i++){const d=t+.5+i*.32;push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});
+   later(d,()=>{const x=tg.x,y=tg.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
  nuke(e,t,D){const x=TGT.x,y=TGT.y,w=2.6;const f=push({k:'nuke',x,y,t0:t,warn:w,R:4,pal:P.blood,seed:rnd()*6});
    later(t,()=>{f.h=hz(e,x,y,4,w,w+.35,D*1.6,{kind:'nuke'});rf.h=hz(e,x,y,3.4,w+.4,w+7.4,D*.12,{kind:'radiation'});});
    const rf=push({k:'rad',x,y,t0:t+w+.3,life:7,R:3.4,pal:P.rad,seed:rnd()*6});zone(null,x,y,3.4,t+w+.3,7,D,'rad');}
@@ -203,7 +203,10 @@ function install(){
  return true;}
 const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}
-window.__STORYWORLD_DISASTER_R330__=Object.freeze({revision:REV,installed,KINDS:KINDS.slice(),NAME:{...NAME},set,kindOf:e=>kindOf(e),
+/* 공명방어 정화(R137 guardCleanse)가 재해 상태이상도 지우게 — Codex 리뷰 */
+function clearStatus(a){const st=a&&statusOf.get(a);if(!st)return 0;const n=Object.keys(st).length;statusOf.delete(a);stats.cleansed=(stats.cleansed||0)+n;return n;}
+if(typeof guardStart==='function'){const gBase=guardStart;guardStart=function(...a){const was=typeof player!=='undefined'&&!!player?.guard,r=gBase.apply(this,a);try{const pr=window.__STORYWORLD_COMBAT_R137__?.prefs?.();if((!pr||pr.guardCleanse!==false)&&typeof player!=='undefined'&&player&&player.guard&&!was)clearStatus(player);}catch(err){fail(err);}return r;};}
+window.__STORYWORLD_DISASTER_R330__=Object.freeze({clearStatus,revision:REV,installed,KINDS:KINDS.slice(),NAME:{...NAME},set,kindOf:e=>kindOf(e),
  cast:(e,k)=>{if(k&&GO[k])e.r330Kind=k;cast(e);},
  status:()=>Object.fromEntries(Object.entries(statusOf.get(player)||{}).map(([k,v])=>[k,{name:ST[k].name,left:+Math.max(0,v.until-T()).toFixed(2)}])),
  lights:()=>{const t=T();return fx.filter(f=>f.k==='blaze'&&t>=f.t0&&t-f.t0<f.life||f.k==='meteor'&&t-f.t0>f.warn&&t-f.t0<f.warn+1.5||f.k==='bomb'&&t-f.t0>f.warn&&t-f.t0<f.warn+.8).map(f=>({x:f.x,y:f.y,r:3,fire:true}));},
