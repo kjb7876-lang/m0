@@ -27,4 +27,10 @@ W.api.set(true);W.calls.length=0;W.drawProp()({id:'tree',path:'assets/r99/outdoo
  const W2=new Function('window','localStorage','ctx','project','src','room',`let drawProp=function(p){sprite(p.path,p.x*10,p.y*10,80,{alpha:1});},sprite=()=>{},drawAssetFrame3=()=>{};${src}\n;return {drawProp:()=>drawProp,api:window.__STORYWORLD_PROP_SHADOW_R329__};`)(win,{getItem:()=>null,setItem(){}},c2,(x,y)=>({x:x*10,y:y*10}),src,{});
  W2.drawProp()({id:'statue',path:'assets/x/statue.webp',x:3,y:4});const first=tr[0];assert(first&&first[0]>30+5,'shadow pushed away from light: '+JSON.stringify(tr.slice(0,2)));assert(W2.api.inspect().stats.lit>=1);
  ok('a nearby light source pushes the shadow away from it (else viewer-side light)');}
+{const scopes=[];const c4={save(){},restore(){},translate(){},scale(){},scope(o,f){scopes.push(o);return f();}};const draws=[];
+ const W4=new Function('window','localStorage','ctx','project','src',`let drawProp=function(p){ctx.scope({id:'prop',kind:'prop',bodyPath:p.path},()=>sprite(p.path,p.x*10,p.y*10,80,{alpha:1}));},sprite=(path,x,y,h,o)=>__d.push([o&&o.filter,__cur()]),drawAssetFrame3=()=>{};const __d=arguments[5];const __cur=arguments[6];${src}\n;return {drawProp:()=>drawProp};`);
+ let owner=null;const ctx4={...c4,scope(o,f){scopes.push(o);const prev=owner;owner=o;try{return f();}finally{owner=prev;}}};
+ const R=W4({},{getItem:()=>null,setItem(){}},ctx4,(x,y)=>({x:x*10,y:y*10}),src,draws,()=>owner);R.drawProp()({id:'statue',path:'assets/x/statue.webp',x:3,y:4});
+ const sh=draws.filter(d=>d[0]==='brightness(0)');assert(sh.length===2&&sh.every(d=>d[1]&&d[1].groundAligned===true&&!d[1].bodyPath),JSON.stringify(draws));assert(draws.some(d=>d[0]!=='brightness(0)'&&d[1]&&d[1].bodyPath));
+ ok('3D recorder: shadow copies are recorded in a ground-aligned scope without bodyPath (the prop itself keeps its body scope)');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake globals; headless capture separately; no GPU or device'}));

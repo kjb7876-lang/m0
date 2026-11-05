@@ -9,7 +9,7 @@
 //  · storyworld.r329.propShadow = '0' 이면 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROP_SHADOW_R329__)return;
-const REV='R329-prop-shadow-4',KEY='storyworld.r329.propShadow';
+const REV='R329-prop-shadow-5',KEY='storyworld.r329.propShadow';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={props:0,cast:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 그림자: 키의 LEN 배로 눕히고, 키의 SHIFT 만큼 오른쪽·RISE 만큼 위(물체 뒤)로. 진하기 ALPHA(두 장 겹침 기준).
@@ -27,8 +27,11 @@ function lightDir(c){try{const W=window.__STORYWORLD_LIGHT_ATMOS_R300__,list=(W?
 function castVia(fn,self,args,xi,yi,hi,oi,footY,c){const x=+args[xi],h=+args[hi];if(!Number.isFinite(x+footY)||!(h>6))return;const L=c&&Number.isFinite(c.wx)?lightDir(c):null;
  const opt=args[oi]&&typeof args[oi]==='object'?args[oi]:{},a=ALPHA*(L?1+.4*L.k:1)*Math.max(.25,Math.min(1,Number(opt.alpha??1)));
  const fx=c&&c.flip?-1:1;/* R303 이 서쪽 벽 조형물을 ctx.scale(-1,1) 로 뒤집어 그리므로 그 안에서는 가로 밀기를 뒤집어야 화면 기준 방향이 맞다(Codex 리뷰) */
- for(const dx of[-SOFT,SOFT]){ctx.save();try{if(L){const len=h*(.25+.3*L.k);ctx.translate(x+dx+fx*L.x*len,footY+L.y*len*.6);ctx.scale(1,LEN*(.85+.3*L.k));ctx.translate(-x,-footY);}else{ctx.translate(x+dx+fx*h*SHIFT,footY-h*RISE);ctx.scale(1,LEN);ctx.translate(-x,-footY);}
+ const paint=()=>{ for(const dx of[-SOFT,SOFT]){ctx.save();try{if(L){const len=h*(.25+.3*L.k);ctx.translate(x+dx+fx*L.x*len,footY+L.y*len*.6);ctx.scale(1,LEN*(.85+.3*L.k));ctx.translate(-x,-footY);}else{ctx.translate(x+dx+fx*h*SHIFT,footY-h*RISE);ctx.scale(1,LEN);ctx.translate(-x,-footY);}
    const b=args.slice();b[oi]={...opt,alpha:a,filter:'brightness(0)',blend:undefined};fn.apply(self,b);}finally{ctx.restore();}}
+};
+ /* 3D 기록기: 그림자 복사본은 조형물 몸(bodyPath)으로 잡히지 않도록 바닥에 눕힌 별도 범위로 기록한다(서서 떠 보이지 않게 — Codex 리뷰) */
+ if(typeof ctx.scope==='function')ctx.scope({id:'r329:shadow:'+(c?.self?.id??'')+':'+Math.round(x),kind:'effect',x:c?.wx??0,y:c?.wy??0,groundAligned:true,r329Shadow:true},paint);else paint();
  stats.cast++;const k=String(args[0]?.path||args[0]).slice(-48);if(recent.length<30&&!recent.includes(k))recent.push(k);}
 function take(x){if(!cur||cur.done)return null;if(Math.abs(x-cur.x)>2)return null;cur.done=true;return cur;}
 function install(){
