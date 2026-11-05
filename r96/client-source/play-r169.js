@@ -100,7 +100,24 @@ function palOf(e,fam){try{const pl=window.__STORYWORLD_COMBAT_R114__?.palette?.(
 const PXFAM={cave:'stone',swamp:'coast',ash:'forge'};
 const seen=new WeakMap(),mfx=[];
 let warmed='';
-function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
+// R328(사용자 2026-11-05 "육망성 마법진을 허공에 … 핏빛으로, 모든 원거리 몹·보스가 스킬 쓸 때 허공에 마법진을 그린 다음 스킬"):
+//  관리자 권한(기억 계열) 잡몹 타격에 나오던 하얀 육망성 = R106 'rune' 을 몹 팔레트로 물들인 것 → 핏빛 고정.
+//  원거리 몹 시전(rangedWindup)·보스/중간보스 공격 준비 동안 머리 위 허공에 핏빛 육망성이 그려졌다가(선 긋듯 커짐) 시전과 함께 사라진다. 판정·타이밍은 그대로.
+const BLOOD_SIGIL=Object.freeze({a:Object.freeze([170,12,26]),b:Object.freeze([235,26,34])}),BLOOD_INK=Object.freeze({a:Object.freeze([36,0,6]),b:Object.freeze([120,6,18])});
+const sigilSeen=new WeakMap(),sigils=[];
+function sigilTick(t){for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>14)continue;
+  const ranged=Number(e.rangedWindup)>0,boss=major(e)&&e.attack&&Number.isFinite(e.attack.angle),key=ranged?'r':boss?'a'+e.attack.id:'';
+  if(!key){sigilSeen.delete(e);continue;}if(sigilSeen.get(e)===key)continue;sigilSeen.set(e,key);if(sigils.length>=10)continue;
+  const w=ranged?Number(e.rangedWindup):Number(e.attack.castWindup150??e.attack.shape154?.windup)||.45;
+  sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),seed:Math.random()*6});stats.sigils=(stats.sigils||0)+1;}
+ for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t-g.t0>g.draw+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);}}
+function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.draw,out=v>1?Math.max(0,1-(t-g.t0-g.draw)/.35):1;if(out<=0)continue;
+  const k=Math.min(1,v),grow=1-(1-k)**3,h=h0*Math.min(1.7,g.sc),q=project(e.x,e.y),y=q.y-h*(1.55+.15*k),R=h*(.5+.24*grow)*(v>1?1+.25*(1-out):1);
+  scope({id:'r328:sigil:'+g.t0,kind:'effect',x:e.x,y:e.y},()=>{S0.draw('glow',BLOOD_SIGIL,q.x,y,R*1.5,R*1.5,{alpha:.35*out*grow,overHero:true});
+   const ang=g.seed+t*1.4,al=out*Math.min(1,v*2.5);S0.draw('rune',BLOOD_INK,q.x,y,R*2.05,R*2.05,{angle:ang,alpha:.85*al,blend:'source-over',overHero:true});/* 검붉은 잉크 바탕(어두운 바닥에서도 윤곽) */
+   S0.draw('rune',BLOOD_SIGIL,q.x,y,R*2,R*2,{angle:ang,alpha:al,overHero:true});
+   if(v>.6&&v<1.15)S0.draw('flare',BLOOD_SIGIL,q.x,y,R*.9,R*.9,{alpha:.6*out*Math.min(1,(v-.6)*4),overHero:true});});stats.sigilDrawn=(stats.sigilDrawn||0)+1;}}
+function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();sigilTick(t);if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);const sc=SC(e),cap=sc>1?18:14;
   if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<cap){mfx.push({kind:'charge',e,fam,sc,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;if(sc>1)stats.bossCharge=(stats.bossCharge||0)+1;}}
    if(a.committed&&!s.hit){s.hit=true;const r=Math.min(2.4*sc,Math.max(.8,Number(a.shape154?.range)||1.3));if(sc>1&&mfx.length<cap){mfx.push({kind:'quake',fam,sc,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.45,y:e.y+Math.sin(a.angle)*r*.45,t0:t,life:.7,seed:Math.random()*6});stats.bossQuake=(stats.bossQuake||0)+1;}if(mfx.length<cap&&!window.__STORYWORLD_PIXELFX_R163__?.has?.('mob-'+(PXFAM[fam]||fam))){/* R176: 시트가 있으면 프레임 애니메이션만 */mfx.push({kind:'hit',fam,sc,pal:palOf(e,fam),x:e.x+Math.cos(a.angle)*r*.38,y:e.y+Math.sin(a.angle)*r*.38,ex:e.x,ey:e.y,ang:a.angle,r,t0:t,life:.45,seed:Math.random()*6});stats.mobImpact++;}}}
@@ -109,7 +126,7 @@ function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return
  for(let i=mfx.length-1;i>=0;i--)if(t-mfx[i].t0>mfx[i].life||mfx[i].kind==='charge'&&(mfx[i].e.hp<=0||!mfx[i].e.attack))mfx.splice(i,1);}
 // 영웅 가까이 그리는 그림은 R106 이 흐리게 하므로(영웅 가림 방지) 칼끝 쪽(사거리 38%)에 두고 overHero 로 그린다.
 // 금·물결·연기·룬·회로 같은 바닥 그림은 몹 발밑에 — 본편 타격 폭발(R98)에 묻히지 않게.
-function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.9,h*1.9,{overHero:true,...o})},t=T(),h0=H();
+function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;const S={draw:(n,F,x,y,w,h,o={})=>S0.draw(n,F,x,y,w*1.9,h*1.9,{overHero:true,...o})},t=T(),h0=H();try{drawSigils(S0,t,h0);}catch(err){fail(err);}
  for(const f of mfx){const v=(t-f.t0)/f.life;if(v<0||v>1)continue;const h=h0*(f.sc||1);const M=MOBFX[f.fam]||MOBFX.regional,PM=f.pal?.main||M.pal,PS=f.pal?.sub||M.pal;
   if(f.kind==='charge'){const e=f.e,q=project(e.x,e.y);scope({id:'r169:charge:'+f.t0,kind:'effect',x:e.x,y:e.y},()=>{S.draw('glow',PM,q.x,q.y-h*.55,h*(.35+.45*v),h*(.35+.45*v),{alpha:.25+.45*v});S.draw('ring',PM,q.x,q.y,h*(.9-.35*v),h*(.45-.17*v),{alpha:.35*v});});continue;}
   if(f.kind==='quake'){const q=project(f.x,f.y),u=1-v,PM=f.pal?.main||(MOBFX[f.fam]||MOBFX.regional).pal;/* 지면 충격: 핏빛 균열 + 퍼지는 어둠 고리(다크 판타지) */
@@ -119,7 +136,7 @@ function drawMob(){const S0=SPR();if(!S0||typeof project!=='function')return;con
   scope({id:'r169:hit:'+f.t0,kind:'effect',x:f.x+.4,y:f.y+.4},()=>{
    if(a==='spike'){for(let k=-1;k<=1;k++)S.draw('spike',PM,q.x+Math.cos(ang+k*.5)*h*.25,q.y-h*.1+Math.sin(ang+k*.5)*h*.12,h*.28,h*(.5+.25*(1-Math.abs(k)))*(.5+.5*Math.min(1,v*3)),{angle:0,alpha:u,blend:'source-over'});}
    else if(a==='crack'||a==='ring'||a==='smoke'){const g=project(f.ex,f.ey);S.draw(a,PM,g.x,g.y,h*(.9+.6*v),h*(.45+.3*v),{alpha:u,angle:f.seed,blend:a==='ring'?'lighter':'source-over'});}
-   else if(a==='rune'||a==='circuit'){const g=project(f.ex,f.ey);S.draw(a,PM,g.x,g.y-h*.05,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
+   else if(a==='rune'||a==='circuit'){const g=project(f.ex,f.ey);S.draw(a,a==='rune'?BLOOD_SIGIL:PM,g.x,g.y-h*.05,h*(.7+.3*v),h*(.35+.15*v),{alpha:u,angle:f.seed*.2});}
    else{S.draw(a,PM,q.x,q.y-h*.45,h*f.r*.9,h*.38,{angle:ang+(f.seed>3?.35:-.35),alpha:u,blend:'source-over'});S.draw(a,PM,q.x,q.y-h*.45,h*f.r*.7,h*.22,{angle:ang+(f.seed>3?.35:-.35),alpha:u*.8});}
    if(b==='spark'||b==='shard'||b==='petal'){for(let k=0;k<4;k++){const aa=ang+(k-1.5)*.45+f.seed*.1,d=h*(.15+.55*v);S.draw(b,PS,q.x+Math.cos(aa)*d,q.y-h*.4+Math.sin(aa)*d*.6,h*.2,h*.08,{angle:aa,alpha:u*.9});}}
    else S.draw(b,PS,q.x,q.y-(b==='glow'?h*.4:0),h*(.7+.5*v),h*(b==='glow'?.7+.5*v:.35+.25*v),{alpha:.6*u});});}}
@@ -172,7 +189,7 @@ try{
     if(prefs.levelPoints&&solo()&&first&&drops&&drops.length>before){const lv=levelOf(e),k=Math.floor(lv/7);if(k>0)for(const row of drops.slice(before)){const amount=Number(row.amount)||0;if(amount>0&&row.id)bonus.set(row.id,{extra:amount*k,amount,level:lv});}}}catch(err){fail(err);}return r;};}
  if(typeof drawProp==='function'){const base=drawProp;drawProp=function(p,...a){if(p?.r169Note){try{drawNote(p);}catch(err){fail(err);}return;}return base.apply(this,[p,...a]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r169-fx'){try{drawMob();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(live()){if(!(player.ego>0))player.egoStackR169=0;noteTick();mobTick();curate();bonusTick();if(mfx.length)arm();else disarm();}}catch(e){fail(e);}return r;};}
+ if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{if(live()){if(!(player.ego>0))player.egoStackR169=0;noteTick();mobTick();curate();bonusTick();if(mfx.length||sigils.length)arm();else disarm();}}catch(e){fail(e);}return r;};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){const r=await base.apply(this,a);try{dropped=new Set();picked=new Set();lastKill=null;dropKills=kills;dropT=T();enterT=T();foes=(room?.enemies||[]).filter(e=>e&&e.hp>0&&!major(e)).length;mfx.length=0;curated='';curN=-1;curAt=0;
    for(const id of bonus.keys())if(!room?.passivePointDropsR64?.some(d=>d.id===id))bonus.delete(id);}catch(e){fail(e);}return r;};}
  // 쪽지 모음 단추: 메뉴와 기억(일지) 창
@@ -182,5 +199,5 @@ try{
 }catch(e){fail(e);}
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 window.__STORYWORLD_PLAY_R169__=Object.freeze({revision:REV,set,collect,showBook,pathCells,MOBFX,STACK_MAX,STEP,book:()=>book.map(n=>({key:n.key,title:n.title,place:n.place})),
- inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},book:book.length,notesOnMap:live()?(room.props||[]).filter(p=>p.r169Note).length:0,mobFx:mfx.length,stack:live()?stackOf(player):0,bonusPending:bonus.size,note:showing?showing.title:null,lastError})});
+ inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},book:book.length,notesOnMap:live()?(room.props||[]).filter(p=>p.r169Note).length:0,mobFx:mfx.length,sigils:sigils.length,stack:live()?stackOf(player):0,bonusPending:bonus.size,note:showing?showing.title:null,lastError})});
 })();
