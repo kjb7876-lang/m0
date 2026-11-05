@@ -40,3 +40,14 @@ CC BY 곡은 위 표의 저작자·라이선스 표기로 출처를 밝힙니다
 | Nocturne in G minor, Op. 15 No. 3 | Frederic Chopin | OIga Gurevich, Musopen | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | [원본 페이지](https://archive.org/details/musopen-chopin-complete-works-flac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환 | 사몽 RB, 잠들지 못하는 마을 |
 | String Quartet No. 15 in D minor, K. 421 - I. Allegro moderato | Wolfgang Amadeus Mozart | Musopen String Quartet | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환, 360초에서 자르고 끝 4초 페이드아웃 | 사몽 M, 통제자의 열일곱 단계 |
 | String Quartet No. 6, Op. 18 No. 6 - IV. La Malinconia | Ludwig van Beethoven | Musopen String Quartet | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 80kbps 변환, 360초에서 자르고 끝 4초 페이드아웃 | 사몽 S-04, 솔로몬의 봉인식 |
+
+## R340 — 차이코프스키 교향곡 6번 '비창' 4악장
+
+같은 기준(퍼블릭 도메인 작곡 + 퍼블릭 도메인 연주 녹음, archive.org Musopen 묶음 MusopenCollectionAsFlac 의 licenseurl `publicdomain/mark/1.0` 확인, 원본 FLAC md5 4개 모두 대조 일치)으로 더했습니다. 배정·원본 sha256 은 `r96/runtime-text/assets/r308/bgm/index.json`.
+
+| 곡 | 작곡 | 연주 | 라이선스 | 원본 | 바꾼 점 | 쓰는 곳 |
+|---|---|---|---|---|---|---|
+| Symphony No. 6 'Pathétique', Op. 74 - I. Adagio - Allegro non troppo | Pyotr Ilyich Tchaikovsky | Czech National Symphony Orchestra, Musopen | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환 | 사이비 합일몽세(제8부) |
+| Symphony No. 6 'Pathétique', Op. 74 - II. Allegro con grazia | Pyotr Ilyich Tchaikovsky | Czech National Symphony Orchestra, Musopen | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환 | 사몽의 문턱(cult03) |
+| Symphony No. 6 'Pathétique', Op. 74 - III. Allegro molto vivace | Pyotr Ilyich Tchaikovsky | Czech National Symphony Orchestra, Musopen | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환 | 교주 최종 결전(cult04) |
+| Symphony No. 6 'Pathétique', Op. 74 - IV. Finale: Adagio lamentoso | Pyotr Ilyich Tchaikovsky | Czech National Symphony Orchestra, Musopen | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [원본 페이지](https://archive.org/details/MusopenCollectionAsFlac) | 음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환 | 최종장 남겨진 몽세(village) |

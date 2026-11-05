@@ -478,6 +478,90 @@
    "originalMd5": "9e12fc9bb2a2164e098ac6323244d2ec",
    "path": "assets/r308/bgm/beethoven-malinconia.ogg",
    "origin": "R308"
+  },
+  "pathetique-1": {
+   "title": "Symphony No. 6 in B minor 'Pathétique', Op. 74 - I. Adagio - Allegro non troppo",
+   "composer": "Pyotr Ilyich Tchaikovsky",
+   "performer": "Czech National Symphony Orchestra, Musopen",
+   "license": "Public domain",
+   "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "source": "https://archive.org/details/MusopenCollectionAsFlac",
+   "sourceFile": "https://archive.org/download/MusopenCollectionAsFlac/Tchaikovsky_SymphonyPathetique/PyotrIlyichTchaikovsky-SymphonyNo.6InBMinorOp.74pathtique-01-AdagioAllegroNonTroppo.flac",
+   "licenseEvidence": "archive.org item metadata licenseurl: http://creativecommons.org/publicdomain/mark/1.0/ ; description: \"This is the Musopen Kickstarter Music (encoded as FLAC) ... Musopen is a non-profit dedicated to providing copyright free music content\" ; file metadata creator: 'Czech National Symphony Orchestra' ; md5 12adb9d25cdfefa435c7a1a100dab6a9 matched",
+   "file": "pathetique-1.ogg",
+   "bytes": 6549510,
+   "sha256": "c148d8b781319524a6ff9f84d6a6b2284f79510296f8183cc0f193c7f9fcf265",
+   "durationSec": 1051.2,
+   "gain": 0.6,
+   "changes": "음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환(악장 전체, 자르지 않음)",
+   "originalSha256": "d00a50d86ad87e572ba586ad3f99f17de3b93860e93d031b153eff4a4494ca7f",
+   "originalBytes": 147106209,
+   "originalMd5": "12adb9d25cdfefa435c7a1a100dab6a9",
+   "path": "assets/r308/bgm/pathetique-1.ogg",
+   "origin": "R340"
+  },
+  "pathetique-2": {
+   "title": "Symphony No. 6 in B minor 'Pathétique', Op. 74 - II. Allegro con grazia",
+   "composer": "Pyotr Ilyich Tchaikovsky",
+   "performer": "Czech National Symphony Orchestra, Musopen",
+   "license": "Public domain",
+   "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "source": "https://archive.org/details/MusopenCollectionAsFlac",
+   "sourceFile": "https://archive.org/download/MusopenCollectionAsFlac/Tchaikovsky_SymphonyPathetique/PyotrIlyichTchaikovsky-SymphonyNo.6InBMinorOp.74pathtique-02-AllegroConGracia.flac",
+   "licenseEvidence": "archive.org item metadata licenseurl: http://creativecommons.org/publicdomain/mark/1.0/ ; description: \"This is the Musopen Kickstarter Music (encoded as FLAC) ... Musopen is a non-profit dedicated to providing copyright free music content\" ; file metadata creator: 'Czech National Symphony Orchestra' ; md5 a5979eb809f4838ea75653da1b958f3f matched",
+   "file": "pathetique-2.ogg",
+   "bytes": 3094891,
+   "sha256": "160956e46d7df0b717e13f389ca7e04db05c8138ee0f7b051c017b520a13e008",
+   "durationSec": 496.1,
+   "gain": 0.6,
+   "changes": "음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환(악장 전체, 자르지 않음)",
+   "originalSha256": "c666606075d788e1e887d638324dac623d639077fd6b33c3b73e50fc63cedfc4",
+   "originalBytes": 72084637,
+   "originalMd5": "a5979eb809f4838ea75653da1b958f3f",
+   "path": "assets/r308/bgm/pathetique-2.ogg",
+   "origin": "R340"
+  },
+  "pathetique-3": {
+   "title": "Symphony No. 6 in B minor 'Pathétique', Op. 74 - III. Allegro molto vivace",
+   "composer": "Pyotr Ilyich Tchaikovsky",
+   "performer": "Czech National Symphony Orchestra, Musopen",
+   "license": "Public domain",
+   "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "source": "https://archive.org/details/MusopenCollectionAsFlac",
+   "sourceFile": "https://archive.org/download/MusopenCollectionAsFlac/Tchaikovsky_SymphonyPathetique/PyotrIlyichTchaikovsky-SymphonyNo.6InBMinorOp.74pathtique-03-AllegroMoltoVivace.flac",
+   "licenseEvidence": "archive.org item metadata licenseurl: http://creativecommons.org/publicdomain/mark/1.0/ ; description: \"This is the Musopen Kickstarter Music (encoded as FLAC) ... Musopen is a non-profit dedicated to providing copyright free music content\" ; file metadata creator: 'Czech National Symphony Orchestra' ; md5 9d291ecf0f30bd3c6e48e7dfb7c098e7 matched",
+   "file": "pathetique-3.ogg",
+   "bytes": 3766130,
+   "sha256": "a29c34f11193aead0f6279ed295b1ef66949786b9ea95e9330d9b11498bcd53e",
+   "durationSec": 593.1,
+   "gain": 0.6,
+   "changes": "음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환(악장 전체, 자르지 않음)",
+   "originalSha256": "20c62b1d6a98c8821887532b53ba42dcddc0d2fe2b131c350acef6dd7f083b8d",
+   "originalBytes": 90689821,
+   "originalMd5": "9d291ecf0f30bd3c6e48e7dfb7c098e7",
+   "path": "assets/r308/bgm/pathetique-3.ogg",
+   "origin": "R340"
+  },
+  "pathetique-4": {
+   "title": "Symphony No. 6 in B minor 'Pathétique', Op. 74 - IV. Finale: Adagio lamentoso",
+   "composer": "Pyotr Ilyich Tchaikovsky",
+   "performer": "Czech National Symphony Orchestra, Musopen",
+   "license": "Public domain",
+   "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "source": "https://archive.org/details/MusopenCollectionAsFlac",
+   "sourceFile": "https://archive.org/download/MusopenCollectionAsFlac/Tchaikovsky_SymphonyPathetique/PyotrIlyichTchaikovsky-SymphonyNo.6InBMinorOp.74pathtique-04-FinaleAdagioLamentoso.flac",
+   "licenseEvidence": "archive.org item metadata licenseurl: http://creativecommons.org/publicdomain/mark/1.0/ ; description: \"This is the Musopen Kickstarter Music (encoded as FLAC) ... Musopen is a non-profit dedicated to providing copyright free music content\" ; file metadata creator: 'Czech National Symphony Orchestra' ; md5 aba5d8cf31bec1bf1130a15e559bab8e matched",
+   "file": "pathetique-4.ogg",
+   "bytes": 3826356,
+   "sha256": "3949e767826f31950f2783094ad3b5a3532e737daa96c2a6bb4b8d48d04e5147",
+   "durationSec": 619.0,
+   "gain": 0.6,
+   "changes": "음량 맞춤(-18 LUFS), ogg vorbis 64kbps 변환(악장 전체, 자르지 않음)",
+   "originalSha256": "fb9df5ea8d598138bf5568a9ff632717aa7048705783a7851f18ea449c40915e",
+   "originalBytes": 84418166,
+   "originalMd5": "aba5d8cf31bec1bf1130a15e559bab8e",
+   "path": "assets/r308/bgm/pathetique-4.ogg",
+   "origin": "R340"
   }
  },
  "episodes": [
@@ -674,12 +758,12 @@
     "cult03",
     "cult04"
    ],
-   "main": "nocturne-c-minor",
+   "main": "pathetique-1",
    "tension": {
-    "cult03": "chopin-nocturne-27-1"
+    "cult03": "pathetique-2"
    },
    "climax": {
-    "cult04": "toccata"
+    "cult04": "pathetique-3"
    }
   },
   {
@@ -689,7 +773,7 @@
    "maps": [
     "village"
    ],
-   "main": "air"
+   "main": "pathetique-4"
   }
  ],
  "maps": {
@@ -981,37 +1065,37 @@
   "cult01": {
    "episode": "m11",
    "role": "main",
-   "track": "nocturne-c-minor"
+   "track": "pathetique-1"
   },
   "cult02": {
    "episode": "m11",
    "role": "main",
-   "track": "nocturne-c-minor"
+   "track": "pathetique-1"
   },
   "cult05": {
    "episode": "m11",
    "role": "main",
-   "track": "nocturne-c-minor"
+   "track": "pathetique-1"
   },
   "cult06": {
    "episode": "m11",
    "role": "main",
-   "track": "nocturne-c-minor"
+   "track": "pathetique-1"
   },
   "cult03": {
    "episode": "m11",
    "role": "tension",
-   "track": "chopin-nocturne-27-1"
+   "track": "pathetique-2"
   },
   "cult04": {
    "episode": "m11",
    "role": "climax",
-   "track": "toccata"
+   "track": "pathetique-3"
   },
   "village": {
    "episode": "m12",
    "role": "main",
-   "track": "air"
+   "track": "pathetique-4"
   }
  },
  "samong": {
