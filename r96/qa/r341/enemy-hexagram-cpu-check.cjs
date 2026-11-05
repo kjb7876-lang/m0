@@ -28,6 +28,7 @@ t(ctx.room.enemies[0].name==='역십자가 시체경호체','e.name(그림 찾�
 ctx.drawHazard({asset:'assets/x/cross-seal.png',x:1,y:1,radius:2,age:.2,warning:1,life:3});
 t(baseHaz===0&&drawn.filter(n=>n==='rune').length===2,'cross-seal 위험지대 → 핏빛 육망성(원래 그림 안 그림)');
 ctx.drawHazard({asset:'assets/x/fire.png',x:1,y:1,radius:2,age:.2,warning:1,life:3});t(baseHaz===1,'다른 위험지대는 원래대로');
+{const before=baseHaz;ctx.window.__STORYWORLD_FX_SPRITES_R106__.draw=()=>false;ctx.drawHazard({asset:'assets/x/cross-seal.png',x:1,y:1,radius:2,age:.2,warning:1,life:3});t(baseHaz===before+1,'육망성 그림을 못 그리면(false) 원래 위험지대 그림으로 대신 그림');ctx.window.__STORYWORLD_FX_SPRITES_R106__.draw=(n,p,...r)=>drawn.push(n);}
 t(!drawn.includes('cross')&&!drawn.includes('runecross'),'적 그림에 십자 스프라이트 안 씀');
 for(const f of['samong-play-r162.js','samong-r161.js'])t(!/runecross/.test(fs.readFileSync(path.join(R,'client-source',f),'utf8')),`${f}: 적 예고에 runecross 없음`);
 for(const d of['client-source','runtime-text'])t(fs.readFileSync(path.join(R,d,'enemy-hexagram-r341.js'),'utf8')===src,`${d} 사본 일치`);

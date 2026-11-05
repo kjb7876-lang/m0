@@ -33,7 +33,8 @@ if(typeof ctx==='object'&&ctx&&Object.prototype.hasOwnProperty.call(ctx,'fillTex
 const BLOOD={a:[100,27,37],b:[209,40,53]},INK={a:[11,13,14],b:[100,27,37]};
 if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){try{if(on&&h&&typeof h.asset==='string'&&/cross-seal/.test(h.asset)&&typeof project==='function'){const S=window.__STORYWORLD_FX_SPRITES_R106__;
    if(S&&S.on&&S.on()){const q=project(h.x,h.y),U=Math.abs(project(h.x+1,h.y).x-q.x)*1.25+1,w=(h.radius||1)*U*2,warn=h.age<h.warning,u=warn?Math.min(1,h.age/Math.max(.01,h.warning)):1,al=warn?.45+.55*u:Math.max(0,1-(h.age-h.warning)/Math.max(.2,h.life-h.warning));
-    S.draw('rune',INK,q.x,q.y,w*1.03,w*1.03,{squash:.5,angle:(h.age||0)*.6,alpha:.7*al,blend:'source-over'});S.draw('rune',BLOOD,q.x,q.y,w,w,{squash:.5,angle:(h.age||0)*.6,alpha:al});stats.hazards++;return;}}}catch(e){fail(e);}return base.apply(this,[h,...a]);};}
+    const d1=S.draw('rune',INK,q.x,q.y,w*1.03,w*1.03,{squash:.5,angle:(h.age||0)*.6,alpha:.7*al,blend:'source-over'}),d2=S.draw('rune',BLOOD,q.x,q.y,w,w,{squash:.5,angle:(h.age||0)*.6,alpha:al});
+    /* 그림이 아직 안 읽혔거나 물들인 판을 못 만들면(false) 원래 위험지대 그림을 그대로 그린다(보이지 않는 피해 방지 — Codex 리뷰) */if(d1!==false||d2!==false){stats.hazards++;return;}stats.fallback=(stats.fallback||0)+1;}}}catch(e){fail(e);}return base.apply(this,[h,...a]);};}
 window.__STORYWORLD_ENEMY_HEXAGRAM_R341__=Object.freeze({revision:REV,swap,MAP,
  canvasText,inspect:()=>({revision:REV,on,stats:{...stats},lastError}),
  set:v=>{on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}});
