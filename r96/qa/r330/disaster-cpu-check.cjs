@@ -6,6 +6,8 @@ assert.strictEqual(src,fs.readFileSync(path.join(root,'runtime-text/disaster-r33
 const idx=fs.readFileSync(path.join(root,'runtime-text/index.html'),'utf8');assert(idx.split('"./disaster-r330.js"').length===2);ok('script tag loaded once');
 assert(!/ctx\.filter\s*=\s*['"][^'"]*(blur|drop-shadow)/.test(src));ok('no blur/drop-shadow on game ctx');
 for(const k of['volcano','tornado','blizzard','poison','bomb','flood','wisp','nuke'])assert(new RegExp('\\b'+k+'\\(e,t,D\\)').test(src),k);ok('eight disaster kinds implemented');
+// 결정적 실행: 첫 시전 쿨타임 등 무작위를 고정 시드로(Codex 리뷰 — 실행마다 결과가 달라지던 것)
+{let seed=12345;Math.random=()=>(seed=(seed*16807)%2147483647)/2147483647;}
 // 실행: 가짜 엔진
 const hazards=[],effects=[],toasts=[];let time=0;
 const player={x:5,y:5,hp:100,invincible:0};const boss={id:'b1',name:'지옥의 문지기',boss:true,hp:100,maxHp:100,x:8,y:5,damage:20,spawnState:'active'};
@@ -21,7 +23,7 @@ assert.strictEqual(D.kindOf({name:'얼음 여왕',boss:true}),'blizzard');assert
 // 잡몹은 재해를 쓰지 않고, 보스는 쿨타임 뒤 쓴다
 for(let t=0;t<=8;t+=.1){g.setT(t);g.tick();}
 assert(D.inspect().stats.casts>=1,'boss casts');assert(!hazards.some(h=>h.owner==='m1'));ok('only boss-tier casts (normal mob never)');
-assert(hazards.length>0&&hazards.every(h=>h.r330&&h.warning>0));ok('every disaster hazard has a warning window before damage');
+{const dmg=hazards.filter(h=>!h.r330Zone);assert(dmg.length>0&&dmg.every(h=>h.r330&&h.warning>0&&h.damage>0)&&hazards.filter(h=>h.r330Zone).every(h=>h.damage===0));ok('every damaging disaster hazard has a warning window (zero-damage zone markers excluded)');}
 // 시전 직후 1초(육망성) 동안은 위험지대가 없다
 D.set(false);g.setT(99);g.tick();hazards.length=0;g.setT(100);D.cast(boss,'bomb');g.setT(100.5);g.tick();assert.strictEqual(hazards.length,0);g.setT(101.2);g.tick();assert(hazards.length>0);ok('sigil first (1 s), then the threat is spawned');
 hazards.length=0;D.cast(boss,'nuke');g.setT(103);g.tick();const nk=hazards.find(h=>h.type==='r330-nuke'),rad=hazards.find(h=>h.type==='r330-radiation');assert(nk&&rad&&nk.warning>=2.5&&rad.life-rad.warning>=6);ok('nuke: >=2.5 s warning, radiation zone lingers >=6 s');
