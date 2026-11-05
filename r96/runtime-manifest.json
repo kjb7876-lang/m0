@@ -14688,6 +14688,21 @@
       "sha256": "306281a2e7462de2224d9f00124a880abe0e03bcaffde7fb0b03464d8e7f3416"
     },
     {
+      "path": "assets/r349/hwando-a-r49.webp",
+      "bytes": 29682,
+      "sha256": "e8a87105b31f67742049c486ecbe35a6e01d3f3bd878121e9faad25a170ba472"
+    },
+    {
+      "path": "assets/r349/hwando-arc-r49.webp",
+      "bytes": 19902,
+      "sha256": "20f7f6b365acc8ed6db4833f73e39121ae418eecd890169bcfb39eb78ceb08db"
+    },
+    {
+      "path": "assets/r349/hwando-arc.webp",
+      "bytes": 19856,
+      "sha256": "52bacd27068531c34f196fca7c08135f33435ecfcb385e3555f58309b16d3a0b"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23528,19 +23543,24 @@
       "sha256": "e117ce21aa3e30f3130af212ee82f6d103bf66392d4c337b78b3c8a0add053f6"
     },
     {
+      "path": "hwando-arc-r349.js",
+      "bytes": 6691,
+      "sha256": "bb98bbf1c83b58a0825142142903a8f74c69119bf4d2b4b689eaf15a17b11059"
+    },
+    {
       "path": "hwando-r242.js",
       "bytes": 12495,
       "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 10384,
-      "sha256": "be95e4592eceddeed11e1a5d924670f8ca99c5c3ebfe31c1ceaf98623d18684b"
+      "bytes": 11297,
+      "sha256": "f0d06e9d83b80d3c6037b4542ba11b8302fae83034bbcdf11d9f24eb08123855"
     },
     {
       "path": "hwando-r277.js",
-      "bytes": 2487,
-      "sha256": "fdfb11ae2c05059995f0fa4717c10f19f899bf52bfc5151f461202e317ef3ec8"
+      "bytes": 2982,
+      "sha256": "95a44ace0bf1df72373af4b9a0b9ba152bf29b3ce83e05762cbdea5616cc3d08"
     },
     {
       "path": "hwando-r283.js",
@@ -23549,8 +23569,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569190,
-      "sha256": "2c909ddbaac793262ff647fc6df499f4fb7d0583084f4444781862e8f47e50af"
+      "bytes": 6569280,
+      "sha256": "9fb3e47c34141a7c49ed42558a06063f577d5f76919c2c58111dca239d97258b"
     },
     {
       "path": "intro-r140.js",
@@ -23669,8 +23689,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 16623,
-      "sha256": "5296b97a911190eee55e421bb5a52e5fee52e68642ddb6ee85ce11ef737bc353"
+      "bytes": 16901,
+      "sha256": "d57867e2e78ccb4a08ba2a5ca64c4890eab8f733a642fdda5fed63bf563320fe"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -23794,8 +23814,8 @@
     },
     {
       "path": "play-r169.js",
-      "bytes": 33824,
-      "sha256": "0e00619e9235f759c0a08c57c4e67b79510b3e7dbdeb72d8d410481924de10aa"
+      "bytes": 34013,
+      "sha256": "a9eaeaa2d7c506cca545b680b6b348c7cafc03f38a73cc862dbccb9b0718d6f2"
     },
     {
       "path": "polish-r100-data.js",
@@ -23809,8 +23829,8 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 67829,
-      "sha256": "781123b586502358db2cb6c3484232aa064d5be7777c5f8c85813d949bcc99c2"
+      "bytes": 68342,
+      "sha256": "84100d3f0a93c695a225afa40dc7c7a2a584086ab5addadcae40b24adecd3a3f"
     },
     {
       "path": "portal-interaction-r83.js",
@@ -24133,6 +24153,11 @@
       "sha256": "7490514bf013d838359c43eafc27b6545b29d5d676b0b194af30a231f8269a7c"
     },
     {
+      "path": "wave-orphans-r352.js",
+      "bytes": 3627,
+      "sha256": "b24e630495e02cdd05ffceeb07d075f143afd512926e5a442b170747b80466a7"
+    },
+    {
       "path": "weapons-r114-data.js",
       "bytes": 2282,
       "sha256": "fe62ed14f9106add75ec981d946c90249748f9e217e2d5c99443df4d2cb813cd"
@@ -24208,9 +24233,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4841,
-  "totalBytes": 931430656,
-  "webHTMLSha256": "2c909ddbaac793262ff647fc6df499f4fb7d0583084f4444781862e8f47e50af",
+  "fileCount": 4846,
+  "totalBytes": 931512892,
+  "webHTMLSha256": "9fb3e47c34141a7c49ed42558a06063f577d5f76919c2c58111dca239d97258b",
   "largest": [
     {
       "path": "index.html",
