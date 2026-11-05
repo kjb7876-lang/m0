@@ -31,6 +31,38 @@ const TITLES={
  'Coriolan Overture in C minor, Op. 62':'코리올란 서곡 Op.62',
  'Prelude in A minor, Op. 28 No. 2':'전주곡 Op.28-2'
 };
+// R331(사용자 2026-11-05 "맵에서 곡 설명 간략하게"): 곡이 바뀌면 제목 아래에 한 줄 설명을 7초 띄운다(제목 칸에 마우스를 올려도 보인다).
+const DESC={
+ 'Etude in E-flat minor, Op. 10 No. 6':'쇼팽 연습곡 중 가장 어둡고 느린 곡. 안쪽 성부가 흐느끼듯 이어진다.',
+ 'Nocturne in C-sharp minor, Op. 27 No. 1':'불안한 왼손 위로 어둠이 짙어졌다가 끝에 장조로 풀리는 녹턴.',
+ 'Nocturne in F minor, Op. 55 No. 1':'단순한 선율이 되풀이되며 쓸쓸함을 쌓아 가는 만년의 녹턴.',
+ 'Prelude in C-sharp minor, Op. 45':'즉흥처럼 떠도는 화성이 꿈결 같은, 쇼팽의 가장 긴 전주곡.',
+ 'Cello Sonata in G minor, Op. 65 - III. Largo':'쇼팽이 생전에 마지막으로 낸 소나타의 짧고 고요한 느린 악장.',
+ 'Etude in C-sharp minor, Op. 25 No. 7':'왼손이 첼로처럼 노래해 \'첼로 연습곡\'이라 불린다.',
+ 'Funeral March in C minor, Op. posth. 72 No. 2':'쇼팽이 10대에 쓰고 세상을 떠난 뒤에야 출판된 장송행진곡.',
+ 'Nocturne in G minor, Op. 15 No. 3':'끝에서 종소리 같은 코랄로 바뀌는, 기도문 같은 녹턴.',
+ 'String Quartet No. 15 in D minor, K. 421 - I. Allegro moderato':'하이든에게 바친 여섯 사중주 가운데 유일한 단조 곡.',
+ 'String Quartet No. 6, Op. 18 No. 6 - IV. La Malinconia':'베토벤이 \'우울\'이라 이름 붙인 느린 서주가 춤곡과 엇갈린다.',
+ 'Toccata and Fugue in D minor, BWV 565':'오르간 대표곡. 첫 음형은 공포 영화로 널리 알려졌다.',
+ 'In the Hall of the Mountain King (Peer Gynt Suite No. 1, Op. 46 IV)':'트롤 왕의 궁전 장면. 점점 빨라지고 커지며 쫓아온다.',
+ 'Danse macabre, Op. 40':'한밤중 해골들의 춤. 조율을 비튼 독주 바이올린이 죽음의 신이다.',
+ 'Danse macabre, Op. 40 (historic 1925 recording)':'한밤중 해골들의 춤. 1925년의 오래된 녹음.',
+ "The Four Seasons, Winter (L'inverno) RV 297 - I. Allegro non molto":'얼어붙은 겨울의 떨림과 이 부딪는 소리를 그린 협주곡.',
+ "Air (Orchestral Suite No. 3 in D, BWV 1068) - 'Air on the G string'":'관현악 모음곡의 아리아. 훗날 G현 하나로 편곡되어 이 이름이 붙었다.',
+ 'Piano Sonata No. 2 in B-flat minor, Op. 35 - III. Marche funebre (Lento)':'장례식 음악의 대명사가 된 쇼팽의 장송행진곡.',
+ "Piano Sonata No. 14 in C-sharp minor 'Moonlight', Op. 27 No. 2 - I. Adagio sostenuto":'\'월광\'은 후대 평론가가 붙인 이름. 느린 셋잇단음 위의 독백.',
+ 'Symphony No. 40 in G minor, K. 550 - I. Molto allegro':'모차르트의 단조 교향곡. 쫓기는 듯한 첫 주제로 시작한다.',
+ 'Piano Sonata No. 2 in B-flat minor, Op. 35 - IV. Finale (Presto)':'1분 남짓, 두 손이 같은 음으로 유령처럼 내달리는 피날레.',
+ "Etude in C minor, Op. 10 No. 12 'Revolutionary'":'바르샤바 봉기가 꺾였다는 소식 무렵 쓰였다고 전하는 격정의 연습곡.',
+ 'Nocturne in C minor, Op. 48 No. 1':'장엄한 코랄이 폭풍처럼 격해지는, 가장 극적인 녹턴.',
+ 'Coriolan Overture in C minor, Op. 62':'로마 장군 코리올라누스의 비극을 그린 베토벤의 서곡.',
+ 'Prelude in A minor, Op. 28 No. 2':'낮은 불협화음이 기어가는, 쇼팽 전주곡 중 가장 기괴한 곡.'
+};
+let lastTitle='',lastKey='',pendingKey='',shownKey='',note=null,noteText='',noteAt=0;const NOTE_SEC=7;
+function showNote(text){try{if(!text)return;if(!note||!note.isConnected){note=document.createElement('div');note.id='r331BgmNote';
+  note.style.cssText='position:fixed;left:50%;top:64px;transform:translateX(-50%);max-width:min(92vw,34rem);padding:5px 12px;font:12px/1.5 \'Malgun Gothic\',serif;color:#3d2a12;background:linear-gradient(100deg,rgba(227,213,182,.94),rgba(203,184,143,.94));border:1px solid #6b5124;border-radius:2px;box-shadow:0 2px 10px rgba(0,0,0,.45);pointer-events:none;z-index:40;opacity:0;transition:opacity .4s ease;text-align:center';
+  document.body.appendChild(note);}
+ note.textContent=text;noteText=text;noteAt=performance.now();note.style.opacity='1';stats.notes=(stats.notes||0)+1;}catch(e){fail(e);}}
 let mapCatalog=null;
 fetch('assets/r308/bgm/index.json').then(r=>r.ok?r.json():null).then(j=>{mapCatalog=j?.tracks||null;}).catch(()=>{});
 let catalog=null,label=null,pending='',shown='',changedAt=0,lastError=null;
@@ -47,12 +79,13 @@ function currentText(){
   if(!map.prefs?.on||legacy?.prefs?.on===false)return '';
   // cur points at the incoming deck even while it buffers. Show the louder audible deck.
   const d=(map.decks||[]).filter(d=>audible(d)&&!map.failed?.includes(d.id)).sort((a,b)=>b.volume-a.volume)[0];
-  t=d&&mapCatalog?.[d.id];
+  t=d&&mapCatalog?.[d.id];lastKey=String(d?.id||'');
  }else{
   const a=legacy?.active;if(!legacy?.prefs?.on||legacy.blocked||!audible(a)||legacy.failed?.includes(a.id))return '';
-  t=catalog?.[a.id];
+  t=catalog?.[a.id];lastKey=String(a?.id||'');
  }
  if(!t?.composer||!t?.title)return '';
+ lastTitle=t.title;lastKey+='|'+t.title;/* 같은 한국어 제목이라도 녹음(트랙 id)이 다르면 설명을 새로 띄운다(danse-macabre 1925 / 현대 녹음) */
  // Localize the credit metadata, never infer a title from a filename or selected/pending track.
  const c=COMPOSERS[t.composer]||(/[가-힣]/.test(t.composer)?t.composer:null),n=TITLES[t.title]||(/[가-힣]/.test(t.title)?t.title:null);
  return c&&n?'♪ '+c+' · '+n:'';
@@ -75,11 +108,13 @@ function mount(){
 }
 function update(){try{
  if(!mount())return;
- const next=currentText(),now=performance.now();
- if(!next){pending=shown='';label.textContent='';label.title='';label.hidden=true;label.style.opacity='0';return;}
- if(next!==pending){pending=next;changedAt=now;label.style.opacity='0';}
+ const next=currentText(),key=next?lastKey:'',now=performance.now();
+ // 설명 7초 만료는 곡이 안 들리는 경우(음악 끔·볼륨 0)에도 먼저 처리한다(Codex 리뷰)
+ if(note&&note.style.opacity==='1'&&now-noteAt>NOTE_SEC*1000)note.style.opacity='0';
+ if(!next){pending=shown='';pendingKey=shownKey='';label.textContent='';label.title='';label.hidden=true;label.style.opacity='0';if(note)note.style.opacity='0';return;}
+ if(next!==pending||key!==pendingKey){pending=next;pendingKey=key;changedAt=now;label.style.opacity='0';}
  // Two 0.2s halves: old text fades out before the new text fades in.
- if(now-changedAt>=200){if(shown!==pending){shown=pending;label.textContent=shown;label.title=shown;}label.hidden=false;label.style.opacity='1';}
+ if(now-changedAt>=200){if(shown!==pending||shownKey!==pendingKey){shown=pending;shownKey=pendingKey;label.textContent=shown;const d=DESC[lastTitle]||'';label.title=d?shown+' — '+d:shown;if(d)showNote(shown+' · '+d);}label.hidden=false;label.style.opacity='1';}
  }catch(e){fail(e);}}
 const SP=()=>window.__STORYWORLD_FX_SPRITES_R106__;
 const low=()=>!!(typeof settings!=='undefined'&&settings.lowFx)||!!window.__STORYWORLD_MOBILE_PERF_R298__?.inspect?.().mobile;
@@ -122,7 +157,8 @@ function installDraw(){if(drawInstalled||!window.__STORYWORLD_SKILL_FX_R292__||t
 };}
 installDraw();
 if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r=base.apply(this,a);update();return r;};}
-if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){const r=base.apply(this,a);update();return r;};}
+// R308 은 지도 BGM 을 쓰는 동안 옛 음악 사슬을 settings.music=false 로 잠깐 불러 조용히 돌린다(quiet). 그 안에서 update 하면 매 틱 제목이 지워지므로 건너뛴다(Codex 리뷰).
+if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){const r=base.apply(this,a);if(typeof settings==='undefined'||settings.music)update();return r;};}
 document.addEventListener('visibilitychange',update);
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{installDraw();if(typeof player!=='undefined'&&player?.hero==='hwando')ready();}catch(e){fail(e);}return r;};}
 window.__STORYWORLD_HUD_BGM_HWANDO_R313__=Object.freeze({revision:REV,update,currentText,inspect:()=>({revision:REV,text:shown,pending,stats:{...stats},lastError,presentationOnly:true})});

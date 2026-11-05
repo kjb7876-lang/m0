@@ -65,6 +65,8 @@ jobs:
         run: node r96/qa/r328/blood-sigil-cpu-check.cjs
       - name: R329 prop cast shadows from the viewer-side light CPU check
         run: node r96/qa/r329/prop-shadow-cpu-check.cjs
+      - name: R331 map BGM one-line description CPU check
+        run: node r96/qa/r331/bgm-note-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
