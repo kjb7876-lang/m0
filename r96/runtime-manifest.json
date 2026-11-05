@@ -14688,6 +14688,11 @@
       "sha256": "306281a2e7462de2224d9f00124a880abe0e03bcaffde7fb0b03464d8e7f3416"
     },
     {
+      "path": "assets/r349/hwando-arc.webp",
+      "bytes": 19856,
+      "sha256": "52bacd27068531c34f196fca7c08135f33435ecfcb385e3555f58309b16d3a0b"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23523,19 +23528,24 @@
       "sha256": "e117ce21aa3e30f3130af212ee82f6d103bf66392d4c337b78b3c8a0add053f6"
     },
     {
+      "path": "hwando-arc-r349.js",
+      "bytes": 4410,
+      "sha256": "426f3ac26266d8b2fc1bc5402b89e82ec958d5c485859ea6d44941a647091519"
+    },
+    {
       "path": "hwando-r242.js",
       "bytes": 12495,
       "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
     },
     {
       "path": "hwando-r271.js",
-      "bytes": 11060,
-      "sha256": "4424c18d1dcd28e22db77648dec9e66052896f4043a20eeffe2f6a12c8b60f6d"
+      "bytes": 11212,
+      "sha256": "a5f3eba68fb9340d9d216a8dc0f05d84164f7643f9597f277c582776231ddfd0"
     },
     {
       "path": "hwando-r277.js",
-      "bytes": 2487,
-      "sha256": "fdfb11ae2c05059995f0fa4717c10f19f899bf52bfc5151f461202e317ef3ec8"
+      "bytes": 2982,
+      "sha256": "95a44ace0bf1df72373af4b9a0b9ba152bf29b3ce83e05762cbdea5616cc3d08"
     },
     {
       "path": "hwando-r283.js",
@@ -23544,8 +23554,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569148,
-      "sha256": "d734d5103a228cdebb481cea4674705d0dfce47436e5cd4873cf6957e75e781a"
+      "bytes": 6569192,
+      "sha256": "e55195c9a6a794d9d5abea2325b160032883008d806eff6adea45c97f296fb87"
     },
     {
       "path": "intro-r140.js",
@@ -24203,9 +24213,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4840,
-  "totalBytes": 931395132,
-  "webHTMLSha256": "d734d5103a228cdebb481cea4674705d0dfce47436e5cd4873cf6957e75e781a",
+  "fileCount": 4842,
+  "totalBytes": 931420089,
+  "webHTMLSha256": "e55195c9a6a794d9d5abea2325b160032883008d806eff6adea45c97f296fb87",
   "largest": [
     {
       "path": "index.html",
