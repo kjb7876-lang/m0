@@ -23278,6 +23278,11 @@
       "sha256": "9ac381a436051e81adf2e1a7e972ceeaf261141496966a571df646f6073e9d11"
     },
     {
+      "path": "disaster-r330.js",
+      "bytes": 36436,
+      "sha256": "0d38a51d1b5592c8aba00ff8c799c8963c5357974e6b8b820b9a18efc8440e39"
+    },
+    {
       "path": "dist/phase1.js",
       "bytes": 660281,
       "sha256": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
@@ -23554,8 +23559,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569238,
-      "sha256": "2de401342861612af2d2cd33895529c1a50394a982006d4f05509184c34851b5"
+      "bytes": 6569280,
+      "sha256": "9fb3e47c34141a7c49ed42558a06063f577d5f76919c2c58111dca239d97258b"
     },
     {
       "path": "intro-r140.js",
@@ -24218,9 +24223,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4843,
-  "totalBytes": 931425751,
-  "webHTMLSha256": "2de401342861612af2d2cd33895529c1a50394a982006d4f05509184c34851b5",
+  "fileCount": 4844,
+  "totalBytes": 931462229,
+  "webHTMLSha256": "9fb3e47c34141a7c49ed42558a06063f577d5f76919c2c58111dca239d97258b",
   "largest": [
     {
       "path": "index.html",
