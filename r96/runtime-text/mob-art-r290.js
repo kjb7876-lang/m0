@@ -37,6 +37,8 @@ const ART=Object.freeze({
  m088:Object.freeze({file:'m088.webp',body:191,name:'찢어진 사진의 망령'}),
  m090:Object.freeze({file:'m090.webp',body:94,name:'종이 왕'}),
  m095:Object.freeze({file:'m095.webp',body:198,name:'일곱 나팔의 빈 소매 잔영'}),
+ // R363(사용자 2026-11-06 '레거시도써봐', Dots legacy-r92 M127 다시 그림 공격 4 + 옛 r92 걷기 8 — 조건부·최종 아님, 시트는 scripts/r363-legacy-mob-sheets.py):
+ m052:Object.freeze({file:'m052.webp',body:179,name:'공실 표기 잔재'}),
 });
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__,orig={},applied=[];let lastError=null;
