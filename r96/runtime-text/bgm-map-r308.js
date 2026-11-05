@@ -9,9 +9,10 @@
 //  · 음량은 settings.bgm, 켜고 끄기는 settings.music 과 R195 '클래식 BGM' 스위치를 따른다. 모바일은 첫 터치·키 입력 뒤 재생.
 //  · R195·R265 는 고치지 않는다: musicTick 을 한 겹 더 감싸, 이 파일이 곡을 틀 때는 아래 사슬(R195·원래 엔진)을 음악 끈 상태로 돌려 조용히 둔다.
 //    목록을 못 읽었거나 꺼져 있으면 아래 사슬이 예전처럼 돈다.
+//  · R353: 맵 곡을 정할 때 window.__STORYWORLD_BGM_PICK_R353__.choose(sel) 를 한 번 거친다(설정의 고정 곡·다음 곡·자동 배정 손질). key() 가 바뀌면 같은 맵에서도 다시 고른다.
 (()=>{'use strict';
 if(window.__STORYWORLD_BGM_MAP_R308__)return;
-const REV='R308-bgm-map-1',KEY='storyworld.r308.bgm',INDEX='assets/r308/bgm/index.json',XF=3,MAPF=2.4,RESUME_MS=600000;
+const REV='R308-bgm-map-2',KEY='storyworld.r308.bgm',INDEX='assets/r308/bgm/index.json',XF=3,MAPF=2.4,RESUME_MS=600000;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={ticks:0,mapSwitches:0,continued:0,loops:0,restarts:0,resumes:0,blocked:0,errors:0,delegated:0,failed:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
@@ -58,7 +59,8 @@ function enterMap(sel){/* 맵에 들어올 때 한 번만 부른다 */
  const to=crossTo(sel.track,at,MAPF);stats.mapSwitches++;note('switch',{zone:sel.zone,track:sel.track,from:cur?.track||null,at:+at.toFixed?.(2)||0});
  cur={deck:to,track:sel.track,zone:sel.zone,episode:sel.episode,role:sel.role};announce(sel.track);}
 function announce(id){let np=true;try{np=JSON.parse(localStorage.getItem('storyworld.r195.bgm')||'{}').nowPlaying!==false;}catch(_){}
- const t=idx.tracks[id];if(np&&t)try{if(typeof toast==='function')toast('♪ '+t.title+' — '+t.composer,2.6);}catch(_){}}
+ const t=idx.tracks[id];let ko='';try{ko=window.__STORYWORLD_BGM_PICK_R353__?.label?.(id)||'';}catch(_){}/* R353: 한국어 제목이 있으면 한국어로 */
+ if(np&&t)try{if(typeof toast==='function')toast('♪ '+(ko||t.title+' — '+t.composer),2.6);}catch(_){}}
 function unblock(){if(!blocked)return;blocked=false;for(const d of decks)if(d.w>0||fade&&d===fade.to)play(d);}
 for(const ev of['pointerdown','keydown','touchstart'])window.addEventListener(ev,unblock,{capture:true,passive:true});
 function pauseAll(){for(const d of decks)if(!d.el.paused)d.el.pause();}
@@ -73,8 +75,11 @@ function bossMul(){try{if(!room?.engaged)return 1;let f=null;for(const e of room
 function tick(){const now=performance.now(),dt=Math.min(.25,Math.max(0,(now-clock)/1000));clock=now;stats.ticks++;
  if(!want()){pauseAll();return;}
  const z=G('zone','');if(!z)return;
- if(!visit||visit.zone!==z){const sel=resolve(z,idx,{chapters:window.__STORYWORLD_SAMONG_ZONES_R115__?.chapters,samong:G('samong',false)});
-  if(!sel||!idx.tracks[sel.track]||failed.has(sel.track))return false;visit={zone:z,sel};enterMap(sel);}
+ /* R353 훅: 설정의 '배경음악 고르기'(bgm-pick-r353)가 자동 배정 손질·고정 곡·다음 곡을 정한다. 없거나 곡이 없으면 원래 배정 그대로. */
+ const pk=window.__STORYWORLD_BGM_PICK_R353__,pkey=pk?.key?.()||'';
+ if(!visit||visit.zone!==z||visit.pkey!==pkey){let sel=resolve(z,idx,{chapters:window.__STORYWORLD_SAMONG_ZONES_R115__?.chapters,samong:G('samong',false)});
+  if(sel&&pk?.choose){try{const o=pk.choose(sel,idx,cur?.track||null);if(o&&idx.tracks[o.track]&&!failed.has(o.track))sel=o;}catch(e){fail(e);}}
+  if(!sel||!idx.tracks[sel.track]||failed.has(sel.track))return false;visit={zone:z,sel,pkey};enterMap(sel);}
  if(fade){/* Keep the outgoing deck audible while the incoming media buffers. */
   if(fade.t0===null&&fade.to.el.readyState>=3&&!fade.to.el.paused)fade.t0=now;
   const u=fade.t0===null?0:Math.min(1,(now-fade.t0)/fade.dur);fade.to.w=u;fade.from.w=1-u;if(u>=1){remember(fade.from);fade.from.el.pause();fade.from.w=0;fade=null;}}

@@ -22659,8 +22659,13 @@
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 13105,
-      "sha256": "364bf68a316595ff8298ccdb6931c696aa8b30ed419a6537b9678f6a6d6225de"
+      "bytes": 13884,
+      "sha256": "b4354d8ff984b4635e6102616ae53b34bac6b0ca61835727ca81fb3f97581c32"
+    },
+    {
+      "path": "bgm-pick-r353.js",
+      "bytes": 13156,
+      "sha256": "48c20f4e4fb7247cf54df7b62c822c67b39a751f465588754a7318684c87bbf2"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -23544,8 +23549,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569148,
-      "sha256": "d734d5103a228cdebb481cea4674705d0dfce47436e5cd4873cf6957e75e781a"
+      "bytes": 6569190,
+      "sha256": "b3b05979ab912b70fbcbc97aa84a2b13f5ea8eb94c2921a692ec500b30874afe"
     },
     {
       "path": "intro-r140.js",
@@ -24203,9 +24208,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4840,
-  "totalBytes": 931394178,
-  "webHTMLSha256": "d734d5103a228cdebb481cea4674705d0dfce47436e5cd4873cf6957e75e781a",
+  "fileCount": 4841,
+  "totalBytes": 931408155,
+  "webHTMLSha256": "b3b05979ab912b70fbcbc97aa84a2b13f5ea8eb94c2921a692ec500b30874afe",
   "largest": [
     {
       "path": "index.html",
