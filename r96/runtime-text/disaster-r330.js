@@ -94,8 +94,8 @@ const GO={
    for(let i=0;i<7;i++){const s=1.2+i*1.15,x=e.x+ux*s,y=e.y+uy*s,d=t+i*.22;const f=push({k:'wave',x,y,ux,uy,t0:d,warn:.55,R:1.35,pal:P.water,seed:rnd()*6});
     later(d,()=>{f.h=hz(e,x,y,1.35,.55,.95,D*.42,{kind:'flood',push:{x:ux,y:uy}});});}
    push({k:'puddle',x:TGT.x,y:TGT.y,t0:t+1.4,life:4,R:2.4,pal:P.water});zone(null,TGT.x,TGT.y,2.4,t+1.4,4,D,'wet');},
- wisp(e,t,D){const n=7,tg=TGT;/* 이 시전의 목표를 붙잡아 둔다(다른 보스 시전이 TGT 를 바꿔도) — Codex 리뷰 */for(let i=0;i<n;i++){const d=t+.5+i*.32;push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});
-   later(d,()=>{const x=tg.x,y=tg.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
+ wisp(e,t,D){const n=7,tg=TGT;/* 이 시전의 목표를 붙잡아 둔다(다른 보스 시전이 TGT 를 바꿔도) — Codex 리뷰 */for(let i=0;i<n;i++){const d=t+.5+i*.32;const wf=push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});/* 사몽 감속이 launch 를 밀어도 찾을 수 있게 그림을 직접 붙잡는다 — Codex 리뷰 */
+   later(d,()=>{const x=tg.x,y=tg.y;const f=fx.includes(wf)?wf:null;if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
  nuke(e,t,D){const x=TGT.x,y=TGT.y,w=2.6;const f=push({k:'nuke',x,y,t0:t,warn:w,R:4,pal:P.blood,seed:rnd()*6});
    later(t,()=>{f.h=hz(e,x,y,4,w,w+.35,D*1.6,{kind:'nuke'});rf.h=hz(e,x,y,3.4,w+.4,w+7.4,D*.12,{kind:'radiation'});});
    const rf=push({k:'rad',x,y,t0:t+w+.3,life:7,R:3.4,pal:P.rad,seed:rnd()*6});zone(null,x,y,3.4,t+w+.3,7,D,'rad');}
