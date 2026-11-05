@@ -112,7 +112,9 @@ function purge(all){const t=T();if(all){queue.length=0;fx.length=0;zones.length=
  for(let i=zones.length-1;i>=0;i--){const z=zones[i];if(z.src&&z.src.room!==room||stale(z.src)&&z.start>t){zones.splice(i,1);try{if(z.h&&typeof hazards!=='undefined'){const k=hazards.indexOf(z.h);if(k>=0)hazards.splice(k,1);}}catch(_){}}}}
 /* 협동: 호스트가 쓰러져도 살아 있는 동료가 있으면 계속 돈다(R62 는 살아남은 동료로 세계를 진행 — Codex 리뷰) */
 function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&heroes().some(a=>a&&a.hp>0)&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
+const guardWas=new WeakMap();
 function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);return;}const t=T();purge(false);
+ /* 공명방어가 새로 켜진 영웅마다 재해 상태이상 정화(협동 원격 영웅은 R62 가 붙잡아 둔 guardStart 를 직접 불러 감싸기를 지나치므로 상태 변화로 본다 — Codex 리뷰) */try{const pr=window.__STORYWORLD_COMBAT_R137__?.prefs?.();if(!pr||pr.guardCleanse!==false)for(const a of heroes()){const g=!!a.guard;if(g&&!guardWas.get(a))clearStatus(a);guardWas.set(a,g);}}catch(err){fail(err);}
  if(guest()){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(t>(f.launch??f.t0)+(f.life??((f.warn||0)+1.2))+.2)fx.splice(i,1);}if(!fx.length)disarm();return;}/* 손님: 시전·판정 없음 */
  tickStatus();
  for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];try{q.fn();}catch(err){fail(err);}}
@@ -122,7 +124,7 @@ function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);retu
   if(t>=e.r330Next&&!(e.attack&&e.attack.committed)){e.r330Next=t+(isBoss(e)?13:18)+rnd()*2;cast(e);}}
  // 회오리: 영웅을 쫓아가며 빨아들인다 / 홍수: 밀어낸다
  for(const f of fx){if(f.k==='tornado'&&t>=f.t0&&t-f.t0<f.life){const e=f.owner,tg=aimFor(f),dx=tg.x-f.x,dy=tg.y-f.y,L=Math.hypot(dx,dy)||1,sp=1.9*dt;
-   let nx=f.x+dx/L*Math.min(sp,L),ny=f.y+dy/L*Math.min(sp,L);try{if(typeof blocked==='function'&&blocked(nx,ny,.3,room)){nx=f.x;ny=f.y;}}catch(_){}f.x=nx;f.y=ny;if(f.h){f.h.x=nx;f.h.y=ny;}
+   let nx=f.x+dx/L*Math.min(sp,L),ny=f.y+dy/L*Math.min(sp,L);try{if(typeof blocked==='function'&&blocked(nx,ny,.3,room)){nx=f.x;ny=f.y;}}catch(_){}f.x=nx;f.y=ny;if(f.h){f.h.x=nx;f.h.y=ny;/* R62 협동 판정이 캐시한 발자국(footprint154)도 새 자리로 — Codex 리뷰 */delete f.h.footprint154;}
    if(typeof moveActor==='function')for(const a of heroes()){if(!(a&&a.hp>0)||a.invincible>0)continue;const ax=a.x-f.x,ay=a.y-f.y,la=Math.hypot(ax,ay);if(la<2.4&&la>.25)try{moveActor(a,-ax/la*dt*1.1,-ay/la*dt*1.1);}catch(_){}}}}
  if(typeof hazards!=='undefined'&&Array.isArray(hazards)&&typeof moveActor==='function')for(const h of hazards){if(!(h.r330&&h.push&&h.age>=h.warning&&h.age<h.life))continue;for(const a of heroes())if(a&&a.hp>0&&Math.hypot(a.x-h.x,a.y-h.y)<h.radius&&!(a.invincible>0))try{moveActor(a,h.push.x*dt*2.2,h.push.y*dt*2.2);}catch(_){}}
  for(let i=fx.length-1;i>=0;i--){const f=fx[i],end=(f.launch??f.t0)+(f.life??((f.warn||0)+1.2));if(t>end+.2||f.k==='sigil'&&!(f.e.hp>0))fx.splice(i,1);}

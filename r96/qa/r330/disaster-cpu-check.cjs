@@ -64,4 +64,6 @@ assert(!/e\.samongR103\)\)/.test(src.slice(src.indexOf('const major='),src.index
  G3.setRoom(room3);for(let t=0;t<4;t+=.1){G3.setT(t);G3.tick();}assert(hz3.length>0,'no disasters while host dead but peer alive');ok('co-op: disasters keep running (and aim at the living peer) while the host is down');}
 assert(/for\(const a of heroes\(\)\)if\(a&&a\.hp>0&&Math\.hypot\(a\.x-h\.x,a\.y-h\.y\)<h\.radius/.test(src)&&/for\(const a of heroes\(\)\)\{if\(!\(a&&a\.hp>0\)\|\|a\.invincible>0\)continue;const ax=a\.x-f\.x/.test(src));ok('co-op: flood push and tornado pull move every living hero inside, not just the host');
 assert(/drawHazard=function\(h,\.\.\.a\)\{if\(h&&h\.r330&&SPR\(\)\)\{/.test(src));ok('sprites disabled -> R330 hazards fall back to the original hazard renderer (never invisible)');
+assert(/const g=!!a\.guard;if\(g&&!guardWas\.get\(a\)\)clearStatus\(a\);guardWas\.set\(a,g\);/.test(src));ok('guard cleanse runs per hero on the guard edge (covers co-op remote guards that bypass the guardStart wrapper)');
+assert(/f\.h\.x=nx;f\.h\.y=ny;[^\n]*delete f\.h\.footprint154;/.test(src));ok('moving tornado drops its cached R62 collision footprint');
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake engine; headless capture separately; no GPU or device'}));
