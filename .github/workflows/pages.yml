@@ -53,6 +53,8 @@ jobs:
           PY
       - name: R320 native save transition CPU regression
         run: node r96/qa/r320/save-transaction-cpu-check.cjs
+      - name: R320 desktop auto-skill restore and legacy preference regression
+        run: node r96/qa/r320/autoskill-restore-cpu-check.cjs
       - name: R317 palace/slum and betrayal CPU regression
         run: node r96/qa/r317/r317-cpu-check.cjs
       - name: R303 props fit (theme, wall facing, floor clearance)
