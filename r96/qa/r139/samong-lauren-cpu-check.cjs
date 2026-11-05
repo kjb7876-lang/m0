@@ -20,7 +20,7 @@ const n=hits.length;sb.time=1.5;sb.tick(1/60);ok('next pulse waits 1.4 s',hits.l
 ok('storm line hidden',sb.drawEffect({type:'samongStormR75'})===undefined&&sb.drawEffect({type:'x'})==='drawn');
 ok('storm hit blocked',sb.hitEnemy(boss,5,{kind:'hero-samong-storm-r75'})===false);
 const eden=C('fx-eden-r108.js');
-ok('meteor uses violet tint and runecross marker',/clip\('fire\.fly'[^;]*tint:VIOLET/.test(eden)&&/clip\('fire\.boom'[^;]*tint:VIOLET/.test(eden)&&/S\('runecross',F,q\.x,q\.y,h\*2\.6\*k/.test(eden)&&!/S\('rune',F,q\.x,q\.y,h\*2\.6\*k/.test(eden));
+ok('meteor uses violet tint and a cross marker (R337: heroes use crosses only, no magic circle)',/clip\('fire\.fly'[^;]*tint:VIOLET/.test(eden)&&/clip\('fire\.boom'[^;]*tint:VIOLET/.test(eden)&&/S\('cross',F,q\.x,q\.y,h\*1\.5\*k/.test(eden)&&!/S\('rune(cross)?',F,q\.x,q\.y/.test(eden));
 ok('runecross texture registered',/"runecross":\[512,512/.test(C('fx-sprites-r106.js'))&&fs.existsSync(path.join(R,'runtime-text/assets/r106/fx/runecross.webp')));
 const pol=C('polish-r101.js');
 ok('guide: altar retarget, exit after clear, ward door, portal auto-entry',/guideAltar/.test(pol)&&/guideExitAfter/.test(pol)&&/guideWardDoor/.test(pol)&&/function objectiveBlocked/.test(pol));

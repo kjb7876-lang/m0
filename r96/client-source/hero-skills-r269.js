@@ -49,7 +49,7 @@ const SLOT=Object.freeze({hwando:{w:'hammer',r:'nova'},seoha:{w:'aegis',r:'nova'
  hunter:{w:'chain',r:'nova'},slayer:{w:'nova',r:'hammer'},gunner:{q:'multishot',r:'nova'}});
 const slotKind=(h,slot)=>on?SLOT[h]?.[slot]||null:null,slotsFor=h=>on?SLOT[h]||null:null;
 // ---- ③ 공명방어 둘레 문양(영웅마다) -----------------------------------------------------------------
-const RIM={hwando:['blade',4,.46],seoha:['clock',1,0],neon:['circuit',1,0],michaela:['cross',4,.3],lauren:['rune',3,.22],hunter:['petal',6,.12],slayer:['crack',1,0],gunner:['pixel',6,.12]};
+const RIM={hwando:['blade',4,.46],seoha:['clock',1,0],neon:['circuit',1,0],michaela:['cross',4,.3],lauren:['cross',3,.22]/* R337: 육망성 금지 */,hunter:['petal',6,.12],slayer:['crack',1,0],gunner:['pixel',6,.12]};
 const SENT={type:'r269-guard',x:0,y:0,age:0,life:Infinity};
 function drawGuard(){const p=player,S=SP(),F=R102()?.PALETTE?.[p.hero],R=RIM[p.hero];if(!S||!F||!R||typeof project!=='function')return;
  const q=project(p.x,p.y),h=typeof actorHeight==='function'?actorHeight():60,t=T(),[name,n,sz]=R,pb=S.pal?S.pal(F.b):F;stats.guardDraws++;

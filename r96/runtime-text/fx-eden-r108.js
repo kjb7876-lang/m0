@@ -150,7 +150,7 @@ function drawOwn(e,h){
   const nm=e.mode==='all'?'smoke.all':'smoke.mid',sz=h*(e.mode==='all'?2.6:2.3);
   if(!clip(nm,e.t,q.x,y,sz,{alpha:al*fade,tint})&&tint)clip(nm,e.t,q.x,y,sz,{alpha:al*fade*.8});return;}
  if(e.kind==='egoRing'){const q=P(e.x,e.y),F=e.F,u=e.t/e.life,tint=F?{a:F.a,b:F.b}:null,sz=h*(4.2+1.6*smooth(u)),al=.75*(1-smooth((u-.55)/.45));// R119: 각성 고리·성광이 영웅과 주변을 하얗게 덮었다 → 작고 옅게
-  if(!clip('nova.all',e.t,q.x,q.y+h*.02,sz,{alpha:al,tint,squash:1,noVeil:true})&&tint)clip('nova.all',e.t,q.x,q.y+h*.02,sz,{alpha:al*.8,noVeil:true});
+  {/* R343: 각성도 원형 고리 대신 바닥 십자가 */const f0=SP(),FF=F||{a:[255,240,210],b:[255,255,255]};if(f0){f0.draw('cross',FF,q.x,q.y+h*.02,sz*.6,sz*.6,{squash:.5,angle:0,alpha:al,blend:'screen',overHero:false});f0.draw('cross',pb(FF),q.x,q.y+h*.02,sz*.38,sz*.38,{squash:.5,angle:0,alpha:.8*al,blend:'screen',overHero:false});}void tint;}
   const v=clamp(e.t/.5,0,1);/* R269: 무색 성광 폭발은 성직자 미카엘라만 */if(player?.hero==='michaela'||!window.__STORYWORLD_HERO_SKILLS_R269__?.on?.())clip('holy.burst',e.t*.9,q.x,q.y,h*(1.7+.7*v),{alpha:.42*(1-smooth((u-.4)/.5))});
   if(!reduced()&&u<.35){const f=SP();if(f){f.draw('flare',pb(F||{a:[255,255,255],b:[255,255,255]}),q.x,q.y-h*.55,h*(2.2+2.4*u),h*(2.2+2.4*u),{alpha:(1-u/.35)*.8,angle:u*3,overHero:false});}}return;}
 }
@@ -209,7 +209,7 @@ const FIRE=Object.freeze({a:Object.freeze([255,112,28]),b:Object.freeze([255,224
 // R139: 라우렌 메테오는 보라 계열(영웅색 바이올렛), 바닥 표식은 육망성 대신 십자가 마법진(runecross)
 const VIOLET=Object.freeze({a:Object.freeze([150,70,255]),b:Object.freeze([232,214,255])});
 PRE.meteor=(e,u,h)=>{if(!ready(NEED.meteor))return false;const F=heroOf(e),q=P(e.tx,e.ty),fall=e.fall,T=e.t,k=tierK(e),fr=Math.floor(T*20);
- if(T<fall+.1)S('runecross',F,q.x,q.y,h*2.6*k,h*2.6*k,{squash:.5,angle:0,alpha:.85*smooth(T/.15)});
+ if(T<fall+.1)S('cross',F,q.x,q.y,h*1.5*k,h*1.5*k,{squash:.5,angle:0,alpha:.85*smooth(T/.15)});/* R337: 마법진 대신 십자가 */
  if(T<fall){const v=T/fall,s={x:q.x-h*5.4,y:q.y-h*8.6},e2=v*v,m={x:lerp(s.x,q.x,e2),y:lerp(s.y,q.y-h*.35,e2)},th=Math.atan2(q.y-h*.35-s.y,q.x-s.x),sz=h*(2.7+2.3*v)*k;
   const sh=P(e.tx,e.ty);S('glow',{a:[22,6,34],b:[48,16,70]},sh.x,sh.y,h*(.6+1.4*v),h*(.3+.6*v),{blend:'source-over',alpha:.25+.3*v});
   clip('fire.fly',T*1.0,m.x,m.y,sz,{angle:th,alpha:1,noVeil:true,tint:VIOLET});S('glow',F,m.x,m.y,h*1.7,h*1.7,{alpha:.55*v+.3});return true;}
@@ -241,7 +241,7 @@ PRE.fissure=(e,u,h)=>{if(!ready(NEED.fissure))return false;const F=heroOf(e),T=e
 // gunner: nova ring from the caster (tinted cobalt/silver) + gold sparks on enemies as the ring reaches them
 PRE.nova=(e,u,h)=>{if(!ready(NEED.nova))return false;const F=heroOf(e),T=e.t,c=P(e.x,e.y),k=tierK(e),R=6.2;
  const sz=h*7.2*k*(1+.12*smooth(T/.7)),al=1-smooth((T-.55)/.35),tint={a:F.a,b:F.b};
- if(!clipU('nova.all',T/.8,c.x,c.y+h*.02,sz,{alpha:al,tint,noVeil:true,pivot:[.5,.5]}))clipU('nova.all',T/.8,c.x,c.y+h*.02,sz,{alpha:al*.8,noVeil:true});
+ /* R343: 영웅 노바는 원형 고리 시트 대신 바닥 십자가(아군=십자가) */const gx=sz*(.55+.25*smooth(T/.7));S('cross',F,c.x,c.y+h*.02,gx,gx,{squash:.5,angle:0,alpha:al,blend:'screen'});S('cross',pb(F),c.x,c.y+h*.02,gx*.62,gx*.62,{squash:.5,angle:0,alpha:.8*al,blend:'screen'});void tint;
  if(!e.hits){e.hits=[];for(const m of enemies()){const d=Math.hypot(m.x-e.x,m.y-e.y);if(d<R)e.hits.push({x:m.x,y:m.y,t:.04+.4*(d/R)});}e.hits.sort((a,b)=>a.t-b.t);e.hits.length=Math.min(e.hits.length,lowFx()?4:9);}
  if(has('hit')){const cn=clipLen('hit.gold');for(const s of e.hits){const v=T-s.t;if(v<0||v>cn+.02)continue;const q=P(s.x,s.y,h*.45);clip('hit.gold',v,q.x,q.y,h*1.15,{alpha:.9,angle:s.x*5});}}else ensure('hit');
  if(!reduced()&&T<.3){const f=1-T/.3;S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-.5*T/.3),h*2.4*(1-.5*T/.3),{alpha:f});}

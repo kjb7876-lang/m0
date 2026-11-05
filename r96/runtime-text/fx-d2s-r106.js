@@ -139,7 +139,7 @@ const DRAW={
    S('cross',F,q.x,q.y-h*.9,h*.8,h*1.2,{alpha:(1-k)*.95});S('ring',pb(F),q.x,q.y,h*(.6+2*k),h*(.3+k),{alpha:1-k});});},
  // 메테오: 표적 마법진 → 하늘에서 떨어지는 불덩이 → 폭발 → 타오르는 바닥
  meteor(e,u,h){const F=e.F,q=P(e.tx,e.ty),fall=e.fall,v=e.t/fall,fr=Math.floor(time*12);
-  if(e.t<fall+.1)S('runecross',F,q.x,q.y,h*2.6,h*2.6,{squash:.5,angle:0,alpha:.85*smooth(e.t/.15)});
+  if(e.t<fall+.1)S('cross',F,q.x,q.y,h*1.5,h*1.5,{squash:.5,angle:0,alpha:.85*smooth(e.t/.15)});/* R337: 영웅은 마법진 없이 십자가만 */
   if(e.t<fall){const s={x:q.x+h*4.5,y:q.y-h*8},m={x:lerp(s.x,q.x,v*v),y:lerp(s.y,q.y,v*v)};A('slashline',F,s.x+(m.x-s.x)*.55,s.y+(m.y-s.y)*.55,m.x,m.y,h*.9,{alpha:.9});
    S('flame',F,m.x,m.y,h*1.3,h*2.2,{frame:fr,angle:Math.atan2(m.y-s.y,m.x-s.x)-Math.PI/2+Math.PI,alpha:.9,pivot:[.5,.25]});S('glow',F,m.x,m.y,h*1.8,h*1.8,{alpha:.9});S('orb',pb(F),m.x,m.y,h*.9,h*.9,{alpha:1});return;}
   const w=e.t-fall,k=clamp(w/.35,0,1),burn=1-smooth((w-.9)/(e.life-fall-.9));
@@ -157,8 +157,9 @@ const DRAW={
    if(v>.2)S('smoke',{a:[46,10,16],b:[90,36,40]},q.x,q.y-h*(.6+v),h*1.6,h*1.1,{blend:'source-over',alpha:.4*a});}},
  // 노바: 시전자에서 고리가 퍼지고 사방으로 차지드 볼트가 튄다.
  nova(e,u,h){const F=e.F,c=P(e.x,e.y),v=smooth(clamp(e.t/.45,0,1)),a=1-v,R=h*(.6+5.4*v);
-  S('ring',F,c.x,c.y,R*2,R,{alpha:a});S('ring',pb(F),c.x,c.y,R*1.7,R*.85,{alpha:.7*a});
-  for(let i=0;i<24;i++){const ang=i*TAU/24,qq={x:c.x+Math.cos(ang)*R*.82,y:c.y+Math.sin(ang)*R*.41};S('spark',F,qq.x,qq.y,h*.7,h*.16,{angle:Math.atan2(Math.sin(ang)*.5,Math.cos(ang)),alpha:.8*a});}
+  /* R343(상징 규칙 "영웅=십자가, 원형 고리·마법진=적"): 노바 고리 대신 바닥에 눕는 십자가가 퍼지고, 불꽃은 네 팔을 따라 뻗는다 */
+  S('cross',F,c.x,c.y,R*1.9,R*1.9,{squash:.5,angle:0,alpha:a,blend:'screen'});S('cross',pb(F),c.x,c.y,R*1.25,R*1.25,{squash:.5,angle:0,alpha:.8*a,blend:'screen'});
+  for(let i=0;i<24;i++){const arm=i&3,k=(i>>2)/5,ang=arm*TAU/4,d=R*(.18+.7*k),qq={x:c.x+Math.cos(ang)*d,y:c.y+Math.sin(ang)*d*.5};S('spark',F,qq.x,qq.y,h*.7,h*.16,{angle:Math.atan2(Math.sin(ang)*.5,Math.cos(ang)),alpha:.8*a*(1-.35*k)});}
   for(let i=0;i<e.bolts;i++){const ang=i*TAU/e.bolts+rnd(e.seed,i)*.4,d=e.t*(5+rnd(e.seed,i+5)*2),j=Math.sin(time*36+i*2)*.3,q=P(e.x+Math.cos(ang)*d-Math.sin(ang)*j,e.y+Math.sin(ang)*d+Math.cos(ang)*j,h*.3),b=1-e.t/e.life;
    S('pixel',pb(F),q.x,q.y,h*.28,h*.28,{alpha:b});S('flare',F,q.x,q.y,h*.55,h*.55,{angle:time*14+i,alpha:.8*b});}
   S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-v*.5),h*2.4*(1-v*.5),{alpha:a});}

@@ -57,8 +57,30 @@ jobs:
         run: node r96/qa/r324/boss-meteor-painted-cpu-check.cjs
       - name: R325 pixel-mode readable dark mob sheets CPU check
         run: node r96/qa/r325/pixel-readable-cpu-check.cjs
+      - name: R333 rally trap at every gather-room entrance CPU check
+        run: node r96/qa/r333/rally-entrance-cpu-check.cjs
+      - name: R343 hero nova ground cross (no ring) CPU check
+        run: node r96/qa/r343/nova-cross-cpu-check.cjs
+      - name: R328 blood hexagram sigil before ranged and boss casts CPU check
+        run: node r96/qa/r328/blood-sigil-cpu-check.cjs
+      - name: R329 prop cast shadows from the viewer-side light CPU check
+        run: node r96/qa/r329/prop-shadow-cpu-check.cjs
       - name: R331 map BGM one-line description CPU check
         run: node r96/qa/r331/bgm-note-cpu-check.cjs
+      - name: R332 mob frame foot baseline (no vertical jitter) CPU check
+        run: node r96/qa/r332/mob-foot-cpu-check.cjs
+      - name: R334 boss HP bar in the top header CPU check
+        run: node r96/qa/r334/bossbar-header-cpu-check.cjs
+      - name: R336 hero facing 240 degrees left/right CPU check
+        run: node r96/qa/r336/facing-cpu-check.cjs
+      - name: R337 no hexagram on hero skills CPU check
+        run: node r96/qa/r337/hero-no-hexagram-cpu-check.cjs
+      - name: R338 samong episode gate in DREAM shelters CPU check
+        run: node r96/qa/r338/samong-gate-cpu-check.cjs
+      - name: R339 menu simplification CPU check
+        run: node r96/qa/r339/menu-cpu-check.cjs
+      - name: R341 enemy cross to hexagram CPU check
+        run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression

@@ -8,13 +8,17 @@ for(const f of ['light-r182.js','samong-r103.js','story-collect-r177.js','play-r
 // ---- 시야 ----
 const store={};const sb={window:{},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},settings:{flashlight58:true},document:{getElementById:()=>null,querySelector:()=>null},addEventListener(){},requestAnimationFrame(){},Math,JSON,Number,Object,Array,String,Set,Map};vm.createContext(sb);vm.runInContext(C('light-r182.js'),sb);
 const L=sb.window.__STORYWORLD_LIGHT_R182__;
-ok('default (R254 auto) is full outside mazes (bright, everything visible); the manual modes are still selectable',L.mode()==='full'&&L.choice()==='auto'&&JSON.stringify(L.MODES)==='["auto","full","torch","flashlight"]');
-L.apply();ok('full mode turns the R24 sight limit off',sb.settings.flashlight58===false);
+ok('default (R335) is glow: bright around the hero, darker with distance; auto/full/torch/flashlight still selectable',L.mode()==='glow'&&L.choice()==='glow'&&JSON.stringify(L.MODES)==='["glow","auto","full","torch","flashlight"]');
+L.apply();ok('glow default keeps everything visible (R24 sight limit off)',sb.settings.flashlight58===false);
+L.set({mode:'torch'});L.apply();ok('torch still turns the R24 sight on',sb.settings.flashlight58===true);
+L.set({mode:'full'});L.apply();ok('full mode turns the R24 sight limit off',sb.settings.flashlight58===false);
 L.set({mode:'torch'});ok('torch turns the round R24 sight on and is remembered',sb.settings.flashlight58===true&&/torch/.test(Object.values(store).join()));
-L.toggle();ok('L key cycles full → torch → flashlight → full',L.mode()==='flashlight');L.toggle();ok('…back to full',L.mode()==='full'&&sb.settings.flashlight58===false);
+L.toggle();ok('L key cycles full → torch → flashlight → full',L.mode()==='flashlight');L.toggle();ok('…back to the start of the cycle (R335 glow default: everything visible)',L.mode()==='glow'&&sb.settings.flashlight58===false);
 sb.room={samongR103:{zone:'sz115-S05-4'}};sb.window.__STORYWORLD_SAMONG_R103__={};L.set({mode:'full'});L.set({mode:'torch'});ok('R185: switching full → torch inside samong turns the R24 sight on at once (Codex review)',sb.settings.flashlight58===true);L.set({mode:'full'});delete sb.room;
 const sm=C('samong-r103.js');
-ok('samong maze: full mode never forces the flashlight; torch draws a round light; flashlight keeps the cone',/forceFlash\(on\)\{if\(!on\)\{restoreFlash\(\);return;\}if\(window\.__STORYWORLD_LIGHT_R182__\?\.mode\?\.\(\)==='full'\)return;/.test(sm)&&/half=torch\?Math\.PI:1\.05/.test(sm)&&/mode\?\.\(\)!=='full';/.test(sm));
+ok('samong maze: full and glow never force the flashlight (R335); torch draws a round light; flashlight keeps the cone',/forceFlash\(on\)\{if\(!on\)\{restoreFlash\(\);return;\}\{const lm=window\.__STORYWORLD_LIGHT_R182__\?\.mode\?\.\(\);if\(lm==='full'\|\|lm==='glow'\)return;\}/.test(sm)&&/half=torch\?Math\.PI:1\.05/.test(sm)&&/!\['full','glow'\]\.includes\(window\.__STORYWORLD_LIGHT_R182__\?\.mode\?\.\(\)\)/.test(sm));
+{const lr=C('light-r182.js');ok('R335: the periodic reconcile treats glow like full (mobile default flashlight58=true is turned off)',/w=m!=='full'&&m!=='glow';[^]*?\(settings\.flashlight58!==false\)!==w\)apply\(\)/.test(lr));
+ ok('R335: the glow erase rectangle covers the whole viewport in the squashed space (no unlit band at the top)',/g\.fillRect\(0,cy-cy\/\.62,b\.width,b\.height\/\.62\+2\)/.test(lr));}
 ok('settings window gets a 시야 select (full/torch/flashlight)',/id='lightModeR182'/.test(C('light-r182.js'))||/lightModeR182/.test(C('light-r182.js')));
 // ---- 쪽지 ----
 const sc=C('story-collect-r177.js');

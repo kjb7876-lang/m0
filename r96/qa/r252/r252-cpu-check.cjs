@@ -7,12 +7,14 @@ const docStub=(panel)=>({getElementById:id=>id==='panel'?panel:null,querySelecto
 // ---- R254 ----
 function light(roomObj,stored,era){const sb={console,Math,JSON,Object,Array,Number,String,RegExp,localStorage:store(stored),window:{__STORYWORLD_ERA_R191__:{eraOf:()=>era||null},__STORYWORLD_SAMONG_ZONES_R115__:{zone:id=>({'sz-maze':{kind:'maze',style:'clinical'},'sz-cave':{kind:'maze',style:'ruin'},'sz-fight':{kind:'combat',style:'clinical',dark:true}})[id]||null}},
   document:docStub(null),addEventListener(){},requestAnimationFrame(){},settings:{flashlight58:false},room:roomObj,started:true,player:{x:1,y:1}};vm.createContext(sb);vm.runInContext(C('light-r182.js'),sb);return sb.window.__STORYWORLD_LIGHT_R182__;}
-{const L=light({id:'dist01',exploration:{}},null);ok('R254 story map (not a maze): full vision by default',L.mode()==='full'&&L.choice()==='auto');}
-{const L=light({id:'x',samongR103:{zone:'sz-fight',stage:'survival'}},null);ok('R254 samong dark combat zone (not a maze): full vision',L.mode()==='full');}
-{const L=light({id:'x',samongR103:{zone:'sz-maze',stage:'maze'}},null);ok('R254 modern maze (school, clinical) → flashlight',L.mode()==='flashlight');}
-{const L=light({id:'x',samongR103:{zone:'sz-cave',stage:'maze'}},null);ok('R254 old-era maze → torch',L.mode()==='torch');}
-{const L=light({id:'x',samongR103:{zone:'sz-cave',stage:'maze'}},null,'tech');ok('R254 machine-era maze → flashlight',L.mode()==='flashlight');}
-{const L=light({id:'dist01',exploration:{}},{'storyworld.r182.light':JSON.stringify({mode:'torch'})});ok('R254 an old saved choice moves to auto once (full outside mazes)',L.mode()==='full'&&L.choice()==='auto');}
+{const L=light({id:'dist01',exploration:{}},null);L.set({mode:'auto'});ok('R254 auto (R335: no longer the default, still selectable): story map (not a maze) → full vision',L.mode()==='full'&&L.choice()==='auto');}
+{const L=light({id:'x',samongR103:{zone:'sz-fight',stage:'survival'}},null);L.set({mode:'auto'});ok('R254 auto: samong dark combat zone (not a maze): full vision',L.mode()==='full');}
+{const L=light({id:'x',samongR103:{zone:'sz-maze',stage:'maze'}},null);L.set({mode:'auto'});ok('R254 auto: modern maze (school, clinical) → flashlight',L.mode()==='flashlight');}
+{const L=light({id:'x',samongR103:{zone:'sz-cave',stage:'maze'}},null);L.set({mode:'auto'});ok('R254 auto: old-era maze → torch',L.mode()==='torch');}
+{const L=light({id:'x',samongR103:{zone:'sz-cave',stage:'maze'}},null,'tech');L.set({mode:'auto'});ok('R254 auto: machine-era maze → flashlight',L.mode()==='flashlight');}
+{const L=light({id:'dist01',exploration:{}},{'storyworld.r182.light':JSON.stringify({mode:'full'})});ok('R335 a pre-R254 saved choice moves to the new default (glow) once',L.mode()==='glow'&&L.choice()==='glow');}
+{const L=light({id:'dist01',exploration:{}},{'storyworld.r182.light':JSON.stringify({mode:'auto',v:254})});ok('R335 the old default (auto, v254) moves to glow once',L.choice()==='glow');}
+{const L=light({id:'dist01',exploration:{}},{'storyworld.r182.light':JSON.stringify({mode:'full',v:254})});ok('R335 an explicit v254 choice (full) is kept',L.choice()==='full'&&L.mode()==='full');}
 {const L=light({id:'dist01',exploration:{}},{'storyworld.r182.light':JSON.stringify({mode:'torch',v:254})});ok('R254 a manual choice made after R254 is respected',L.mode()==='torch');}
 // ---- R253 ----
 function collect(stored){const sb={console,Math,JSON,Object,Array,Number,String,Map,Set,localStorage:store(stored),window:{},document:docStub(null),setInterval(){},performance:{now:()=>0},addEventListener(){}};vm.createContext(sb);vm.runInContext(C('story-collect-r177.js'),sb);return sb.window.__STORYWORLD_STORY_COLLECT_R177__;}

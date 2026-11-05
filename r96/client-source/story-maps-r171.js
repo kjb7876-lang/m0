@@ -212,6 +212,13 @@
    nodes.push({id:nodes.length,name:'길목',x:q.x,y:q.y,width:3,depth:3,radius:1.5,shape:'square',storyMapR171:'waypoint',box:[q.x-3,q.y-3,q.x+3,q.y+3]});}
   const entryPoint={x:ENTRY.x+ENTRY.w/2+.5,y:ENTRY.y+ENTRY.h-2.5},entry={id:'r171-entry',x:entryPoint.x,y:entryPoint.y,node:3,dx:-1,dy:-1};
   const gather=centre(GATHER),boss={x:16,y:13},portalNext={x:5,y:3.5};
+  /* R333(사용자 2026-11-05 "보스 구역 진입 전 몹들 모이는 덫 감지를 각 입구 쪽에도 설치해 트랩이 잘 발동되도록"): R258 로 집결실이 24×12 로 넓어져
+   가운데 5.5칸 감지만으로는 가장자리 입구로 들어올 때 늦게 발동했다. 집결실 테두리 밖으로 이어진 바닥 칸(=입구)마다 감지점을 두고,
+   집결실 사각형 안에 발을 들여도 발동하게 gatherBounds 를 함께 넘긴다. 보스 쪽 연결 통로(BOSSLINK)는 보스 구역 문 쪽이라 감지에서 뺀다. */
+  const gatherBounds=[GATHER.x,GATHER.y,GATHER.x+GATHER.w,GATHER.y+GATHER.h],rallyTriggers=(()=>{const fs=new Set(floorCells.map(([x,y])=>x+':'+y)),out=[],seen=new Set();
+   const inG=(x,y)=>x>=GATHER.x&&x<GATHER.x+GATHER.w&&y>=GATHER.y&&y<GATHER.y+GATHER.h,inLink=(x,y)=>x>=BOSSLINK.x&&x<BOSSLINK.x+BOSSLINK.w&&y>=BOSSLINK.y&&y<BOSSLINK.y+BOSSLINK.h;
+   for(const[x,y]of floorCells){if(!inG(x,y))continue;for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy;if(inG(nx,ny)||!fs.has(nx+':'+ny)||inLink(nx,ny))continue;
+     const k=Math.round(nx/3)+':'+Math.round(ny/3);if(seen.has(k))continue;seen.add(k);out.push({x:nx+.5,y:ny+.5,r:2.2});}}return out;})();
   const along=key=>{const ids=p.branch[key].main.length>=3?p.branch[key].main:p.branch[key].rooms;return ids.map(i=>nodes[i]).filter(Boolean);};
   // 두 갈래 길의 적 자리: 입구 쪽에서 집결 쪽까지 고르게(최대 8곳).
   const spread=(list,n)=>{const out=[];for(let i=0;i<n&&list.length;i++){const q=list[Math.min(list.length-1,Math.round(i*(list.length-1)/Math.max(1,n-1)))];if(!out.includes(q))out.push(q);}return out.map(q=>({x:q.x,y:q.y}));};
@@ -237,7 +244,7 @@
    renderEnvelope:{u0:-H-4,u1:W+4,v0:-4,v1:W+H+4},originalEncounterBounds:[7,7,25,25],bossRoomNodeId:0,bossDoorId:'door-0',midbossRoomNodeId:2,combatRoomNodeIds:combat,visitRoute:routeS,
    worldR74:{...(base?.worldR74||{}),doors,rooms,corridors:edges.map(([from,to,width])=>({from,to,width,kind:from===0||to===0?'boss-approach':'r171-'+p.template})),wallCount:walls.length,floorCount:floorCells.length,nativeCorePreserved:false},
    worldR78:{...(base?.worldR78||{}),version:2,zoneId:id,maze:'r171-'+p.template,bossRoomNodeId:0,bossDoorId:'door-0',midbossRoomNodeId:2,combatRoomNodeIds:combat,canonicalRoomPurposes:[...purposes],routeNodeIds:routeS.slice(0,-1),routeBranches:[routeS.slice(0,-1),routeE.slice(0,-1)]},
-   worldWardR81:{...(base?.worldWardR81||{}),revision:'story-r171',source:'r171-'+p.template,bossBounds:[CORE.x,CORE.y,CORE.x+CORE.w,CORE.y+CORE.h],bossAnchor:boss,gatherAnchor:gather,arrivalAnchor:gather,portalNext,portalPrevious:{x:entry.x,y:entry.y},
+   worldWardR81:{...(base?.worldWardR81||{}),revision:'story-r171',source:'r171-'+p.template,bossBounds:[CORE.x,CORE.y,CORE.x+CORE.w,CORE.y+CORE.h],bossAnchor:boss,gatherAnchor:gather,gatherBounds,rallyTriggers,arrivalAnchor:gather,portalNext,portalPrevious:{x:entry.x,y:entry.y},
     fieldAnchors,physicalDoorIds:doors.map(d=>d.id),routeSpawns,rallySpots,bossPoints,routeSplit:{x:ENTRY.x,y:ENTRY.y}},
    spawnExclude:[[CLOSET.x-1,CLOSET_LINK.y,CLOSET.x+CLOSET.w+1,CLOSET.y+CLOSET.h+1]],
    storyMapR171:{revision:REV,template:p.template,core:p.core,source:p.source,topology:p.topology,mode,cells:floorCells.length,walls:walls.length,rooms:p.rooms.filter(R=>!R.aux).length,closet:closetId,waypoints:nodes.length-p.rooms.filter(R=>!R.aux).length}};

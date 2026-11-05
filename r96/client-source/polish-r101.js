@@ -180,10 +180,10 @@ function wings(x,fy,h,F,k,seed,p){if(p&&wingsView(p,'back',x,fy,h,F,k,seed))retu
  s.draw('wing',s.pal(F.b),x+h*.08,sy,W,W,{angle:-.12-flap,alpha:.25+.25*clamp(k,0,1)});s.draw('wing',s.pal(F.b),x-h*.08,sy,W,W,{angle:.12+flap,alpha:.25+.25*clamp(k,0,1),flip:true});
  if(k>.3)for(let i=0;i<3;i++){const ph=(time*.35+i/3+seed)%1,side=i%2?1:-1;s.draw('feather',F,x+side*h*(.35+.5*ph),sy+h*(.2+.9*ph),h*.07,h*.21,{alpha:.7*Math.sin(Math.PI*ph),angle:Math.sin(time*2+i)*.7});}}
 function halo(x,fy,h,F,k){const s=SPR(),y=fy-h*1.08+Math.sin(time*2)*1.5*Z(),rx=h*(.19+.03*k);if(s&&s.draw('halo',F,x,y,rx*2.35,rx*2.35*96/256,{alpha:.95}))return;halo0(x,fy,h,F,k);}
-function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const s=SPR();if(!s||!s.ready('orb',F)||F.form==='runes'&&!s.ready('rune',F)||F.form==='shards'&&!s.ready('shard',F))return orbs0(p,x,fy,h,F,k,seed,layer,cut);
+function orbs(p,x,fy,h,F,k,seed,layer,cut=0){const s=SPR();if(!s||!s.ready('orb',F)||F.form==='runes'&&!s.ready('cross',F)||F.form==='shards'&&!s.ready('shard',F))return orbs0(p,x,fy,h,F,k,seed,layer,cut);
  const n=Math.max(0,(F.form==='orbs'?4:F.form==='runes'?3:F.form==='shards'?5:p.ego>0?3:0)-cut);if(!n)return;const rx=h*(.4+.08*k),ry=h*.13,cy=fy-h*.52,spin=time*(1.4+.8*k)+seed;
  for(let i=0;i<n;i++){const a=spin+i*TAU/n,depth=Math.sin(a);if((layer==='front')!==(depth>0))continue;const ox=x+Math.cos(a)*rx,oy=cy+depth*ry+Math.sin(time*3+i)*h*.03,sc=.8+.25*depth,P=i%2?s.pal(F.b):F;
-  if(F.form==='runes'){s.draw('rune',P,ox,oy,h*.2*sc,h*.2*sc,{angle:time*1.7+i,alpha:.95});s.draw('glow',F,ox,oy,h*.22*sc,h*.22*sc,{alpha:.5});}
+  if(F.form==='runes'){/* R337: 육망성 대신 십자가 */s.draw('cross',P,ox,oy,h*.2*sc,h*.2*sc,{angle:time*1.7+i,alpha:.95});s.draw('glow',F,ox,oy,h*.22*sc,h*.22*sc,{alpha:.5});}
   else if(F.form==='shards'){const blink=.55+.45*Math.sin(time*6+i*2);s.draw('shard',P,ox,oy,h*.075*sc,h*.15*sc,{angle:Math.sin(time*.9+i*1.3)*.4,alpha:.95*blink,pivot:[.5,.5]});s.draw('glow',F,ox,oy,h*.2*sc,h*.2*sc,{alpha:.45*blink});}
   else{for(let j=1;j<=3;j++){const b=a-j*.2;s.draw('glow',F,x+Math.cos(b)*rx,cy+Math.sin(b)*ry,(10-2*j)*Z()*sc*2,(10-2*j)*Z()*sc*2,{alpha:.5/j});}s.draw('orb',P,ox,oy,22*Z()*sc,22*Z()*sc,{alpha:1});}}}
 function blades(x,fy,h,F,k,seed,layer,n){const s=SPR();if(!s||!s.ready('blade',F))return blades0(x,fy,h,F,k,seed,layer,n);const rx=h*(.42+.06*k),ry=h*.14,cy=fy-h*.5,spin=time*(1.1+.6*k)+seed;
@@ -193,7 +193,7 @@ function blades(x,fy,h,F,k,seed,layer,n){const s=SPR();if(!s||!s.ready('blade',F
 function arcs(x,fy,h,F,k,seed){const s=SPR();if(!s||!s.ready('bolt',F))return arcs0(x,fy,h,F,k,seed);const n=lowFx()?2:3,frame=Math.floor(time*18),cy=fy-h*.5;
  for(let i=0;i<n;i++){if(rnd(seed+frame,i*3)>.55+.45*k)continue;const a0=rnd(seed+frame,i*7)*TAU,a1=a0+1.2+rnd(seed+frame,i*7+1)*2.2,r=h*(.32+.2*rnd(seed+frame,i*7+2));
   s.along('bolt',F,x+Math.cos(a0)*r,cy+Math.sin(a0)*r*.45,x+Math.cos(a1)*r,cy+Math.sin(a1)*r*.45,h*.16,{frame:frame+i,alpha:.95});}}
-function runeRing(q,h,F,k){if(k<.5)return;const s=SPR(),a=(k-.5)*2,r=h*.42;if(s&&s.draw('runecross',F,q.x,q.y,2*r/.95,2*r/.95,{squash:.5,angle:0,alpha:.7*a}))return;runeRing0(q,h,F,k);}
+function runeRing(q,h,F,k){if(k<.5)return;const s=SPR(),a=(k-.5)*2,r=h*.42;if(s&&s.draw('cross',F,q.x,q.y,1.4*r,1.4*r,{squash:.5,angle:0,alpha:.7*a}))return;/* R337: 마법진 대신 십자가 */}
 function pillar(x,fy,h,F,t){const s=SPR(),k=1-t;if(s&&s.draw('pillar',F,x,fy,h*(.75+.3*t),h*(1.9+.7*t),{alpha:.8*k}))return;pillar0(x,fy,h,F,t);}
 
 // Growth gating: tier 0 a faint ground glow, 1 adds the body field, 2 shows the hero's
