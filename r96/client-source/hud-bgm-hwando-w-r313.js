@@ -4,7 +4,7 @@
 if(window.__STORYWORLD_HUD_BGM_HWANDO_R313__)return;
 const REV='R313-hud-bgm-hwando-1',DIR='assets/audio/bgm/classical/';
 const PAL=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([255,198,72])});
-const COMPOSERS={'Johann Sebastian Bach':'바흐','Edvard Grieg':'그리그','Camille Saint-Saëns':'생상스','Antonio Vivaldi':'비발디','Frederic Chopin':'쇼팽','Ludwig van Beethoven':'베토벤','Wolfgang Amadeus Mozart':'모차르트'};
+const COMPOSERS={'Johann Sebastian Bach':'바흐','Edvard Grieg':'그리그','Camille Saint-Saëns':'생상스','Antonio Vivaldi':'비발디','Frederic Chopin':'쇼팽','Ludwig van Beethoven':'베토벤','Wolfgang Amadeus Mozart':'모차르트','Pyotr Ilyich Tchaikovsky':'차이코프스키'};
 const TITLES={
  'Etude in E-flat minor, Op. 10 No. 6':'연습곡 Op.10-6',
  'Nocturne in C-sharp minor, Op. 27 No. 1':'녹턴 Op.27-1',
@@ -29,7 +29,11 @@ const TITLES={
  "Etude in C minor, Op. 10 No. 12 'Revolutionary'":'혁명 연습곡 Op.10-12',
  'Nocturne in C minor, Op. 48 No. 1':'녹턴 Op.48-1',
  'Coriolan Overture in C minor, Op. 62':'코리올란 서곡 Op.62',
- 'Prelude in A minor, Op. 28 No. 2':'전주곡 Op.28-2'
+ 'Prelude in A minor, Op. 28 No. 2':'전주곡 Op.28-2',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - I. Adagio - Allegro non troppo":'비창 교향곡 · 1악장',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - II. Allegro con grazia":'비창 교향곡 · 2악장',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - III. Allegro molto vivace":'비창 교향곡 · 3악장',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - IV. Finale: Adagio lamentoso":'비창 교향곡 · 4악장'
 };
 // R331(사용자 2026-11-05 "맵에서 곡 설명 간략하게"): 곡이 바뀌면 제목 아래에 한 줄 설명을 7초 띄운다(제목 칸에 마우스를 올려도 보인다).
 const DESC={
@@ -56,7 +60,11 @@ const DESC={
  "Etude in C minor, Op. 10 No. 12 'Revolutionary'":'바르샤바 봉기가 꺾였다는 소식 무렵 쓰였다고 전하는 격정의 연습곡.',
  'Nocturne in C minor, Op. 48 No. 1':'장엄한 코랄이 폭풍처럼 격해지는, 가장 극적인 녹턴.',
  'Coriolan Overture in C minor, Op. 62':'로마 장군 코리올라누스의 비극을 그린 베토벤의 서곡.',
- 'Prelude in A minor, Op. 28 No. 2':'낮은 불협화음이 기어가는, 쇼팽 전주곡 중 가장 기괴한 곡.'
+ 'Prelude in A minor, Op. 28 No. 2':'낮은 불협화음이 기어가는, 쇼팽 전주곡 중 가장 기괴한 곡.',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - I. Adagio - Allegro non troppo":'차이코프스키의 마지막 교향곡. 낮은 바순의 신음에서 폭풍 같은 절규로 치닫는다.',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - II. Allegro con grazia":'5/4박자로 절뚝이는 왈츠. 우아하지만 한 박이 모자란 듯 불안하다.',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - III. Allegro molto vivace":'점점 격해지는 행진곡. 승리처럼 들리지만 끝은 비극으로 이어진다.',
+ "Symphony No. 6 in B minor 'Pathétique', Op. 74 - IV. Finale: Adagio lamentoso":'느리게 끝나는 보기 드문 피날레. 탄식처럼 사그라들며 침묵으로 끝난다.'
 };
 let lastTitle='',lastKey='',pendingKey='',shownKey='',note=null,noteText='',noteAt=0;const NOTE_SEC=7;
 function showNote(text){try{if(!text)return;if(!note||!note.isConnected){note=document.createElement('div');note.id='r331BgmNote';

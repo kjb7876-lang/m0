@@ -80,7 +80,7 @@ async function mapEngine(){
  for(const d of decks)d.muted=false;
  const snapshot=c.__STORYWORLD_BGM_MAP_R308__.inspect();
  c.__STORYWORLD_BGM_MAP_R308__={inspect:()=>snapshot};
- check('all 24 R308 credit titles localized',()=>{for(const id of Object.keys(mapIndex.tracks)){snapshot.decks=[{id,readyState:4,paused:false,muted:false,ended:false,volume:.5}];assert.match(h.hud.currentText(),/^♪ [가-힣]/);}});
+ check('all R308 credit titles localized (R340: 28 with Tchaikovsky)',()=>{for(const id of Object.keys(mapIndex.tracks)){snapshot.decks=[{id,readyState:4,paused:false,muted:false,ended:false,volume:.5}];assert.match(h.hud.currentText(),/^♪ [가-힣]/);}});
 }
 async function browser(){
  const {chromium}=require('playwright');

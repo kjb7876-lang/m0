@@ -14509,13 +14509,33 @@
     },
     {
       "path": "assets/r308/bgm/index.json",
-      "bytes": 42805,
-      "sha256": "4e9abe9d6f1f353c64ca410afdda8be5c04af15ad6a15247afd0fc534420fdcc"
+      "bytes": 48690,
+      "sha256": "be91d4e8a9e1bb15418651773bcdcebccd6781f5bccb687fc781343f68179c43"
     },
     {
       "path": "assets/r308/bgm/mozart-k421.ogg",
       "bytes": 2822895,
       "sha256": "5d9579cd09306ad106aa9044785b50c0bc0c554d43793bc4519737b4538a7ca7"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-1.ogg",
+      "bytes": 6549510,
+      "sha256": "c148d8b781319524a6ff9f84d6a6b2284f79510296f8183cc0f193c7f9fcf265"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-2.ogg",
+      "bytes": 3094891,
+      "sha256": "160956e46d7df0b717e13f389ca7e04db05c8138ee0f7b051c017b520a13e008"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-3.ogg",
+      "bytes": 3766130,
+      "sha256": "a29c34f11193aead0f6279ed295b1ef66949786b9ea95e9330d9b11498bcd53e"
+    },
+    {
+      "path": "assets/r308/bgm/pathetique-4.ogg",
+      "bytes": 3826356,
+      "sha256": "3949e767826f31950f2783094ad3b5a3532e737daa96c2a6bb4b8d48d04e5147"
     },
     {
       "path": "assets/r309/intro/index.json",
@@ -23494,8 +23514,8 @@
     },
     {
       "path": "hud-bgm-hwando-w-r313.js",
-      "bytes": 14743,
-      "sha256": "c67109f618f98e8050166e4156ef4d8463d281537d17a403b920ffec4fb7c7ea"
+      "bytes": 15958,
+      "sha256": "8a74c3d8d75438113490c7911eb6794d62a4b296eed6a386a14ebb88f8850a1a"
     },
     {
       "path": "hud-bossbar-r334.js",
@@ -24188,8 +24208,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4837,
-  "totalBytes": 914185154,
+  "fileCount": 4841,
+  "totalBytes": 931429141,
   "webHTMLSha256": "2c909ddbaac793262ff647fc6df499f4fb7d0583084f4444781862e8f47e50af",
   "largest": [
     {

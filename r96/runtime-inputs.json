@@ -4047,6 +4047,10 @@
     "samong-gate-r338.js",
     "hud-menu-r339.js",
     "enemy-hexagram-r341.js",
+    "assets/r308/bgm/pathetique-1.ogg",
+    "assets/r308/bgm/pathetique-2.ogg",
+    "assets/r308/bgm/pathetique-3.ogg",
+    "assets/r308/bgm/pathetique-4.ogg",
     "disaster-r330.js"
   ],
   "mediaPaths": [
@@ -5122,5 +5126,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "101b16ca8adf26d4c74067d584bec2354f593a5593b14e41e73b9e9f3d5986dc"
+  "runtimeManifestSHA256": "b67764efba7fb3d974ec0e3cb4f902a35813c7fdf2064a43fff677d233fbcb0f"
 }
