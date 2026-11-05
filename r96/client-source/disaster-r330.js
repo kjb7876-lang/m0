@@ -68,11 +68,12 @@ const ST={burn:{name:'화상',dur:3,tickEvery:.5,dmg:.06,pal:P.ember},poison:{na
  chill:{name:'빙결',dur:2.5,slow:.62,pal:P.frost},wet:{name:'젖음',dur:3,slow:.8,pal:P.water}};
 const zones=[],statusOf=new WeakMap();
 function stOf(a){let s=statusOf.get(a);if(!s){s={};statusOf.set(a,s);}return s;}
-function zone(fxKind,x,y,R,start,life,D,st){zones.push({x,y,R,start,end:start+life,D,st,src:CUR});if(zones.length>30)zones.shift();if(fxKind)push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
+function zone(fxKind,x,y,R,start,life,D,st){const zr={x,y,R,start,end:start+life,D,st,src:CUR};zones.push(zr);
+ /* 협동 손님도 남는 불길·독안개를 보도록, 피해 0 짜리 엔진 위험지대로 모양·수명을 함께 실어 보낸다(스냅숏으로 복제됨 — Codex 리뷰) *//* (영역이 실제로 시작될 때 tickStatus 가 만든다) */if(zones.length>30)zones.shift();if(fxKind)push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
 function giveStatus(a,st,D,owner){const s=ST[st];if(!s)return;const status=stOf(a),t=T(),cur=status[st];if(!cur){status[st]={until:t+s.dur,D,next:t+(s.tickEvery||0),owner};stats.status=(stats.status||0)+1;
    try{/* 엔진 fx(전역 함수)는 이 파일 안의 fx 배열에 가려지므로 window 로 부른다 */if(typeof window.fx==='function')window.fx('text',a.x,a.y,{text:s.name,color:'#e8b0a0',life:.9});}catch(_){}}else{cur.until=Math.max(cur.until,t+s.dur);cur.D=Math.max(cur.D,D);if(owner)cur.owner=owner;}}
 function hurtAs(a,dmg,src){const c=COOP();if(c?.mode?.()==='host'&&typeof c.withPlayer==='function')return c.withPlayer(a,()=>hurt(dmg,src));return hurt(dmg,src);}
-function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
+function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;if(!z.h){try{z.h=hz(z.src?.e||{id:null},z.x,z.y,z.R,0,Math.max(.1,z.end-t),0,{kind:'zone-'+z.st,r330Zone:true,st:z.st})||1;}catch(err){fail(err);z.h=1;}}for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
  for(let i=zones.length-1;i>=0;i--)if(t>zones[i].end)zones.splice(i,1);
  for(const a of hs){const status=stOf(a);for(const k of Object.keys(status)){const s=status[k],d=ST[k];if(t>s.until||!(a.hp>0)){delete status[k];continue;}
   if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true,owner:s.owner||undefined});/* 시전한 적을 붙여 난이도 배율(enemySource)이 적용되게 — Codex 리뷰 */}catch(err){fail(err);}}}}}
@@ -108,7 +109,7 @@ const stale=src=>!!src&&(src.room!==room||!(src.e&&src.e.hp>0));
 function purge(all){const t=T();if(all){queue.length=0;fx.length=0;zones.length=0;disarm();return;}
  for(let i=queue.length-1;i>=0;i--)if(stale(queue[i].src)){queue.splice(i,1);stats.cancelled=(stats.cancelled||0)+1;}
  for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(f.src&&f.src.room!==room||stale(f.src)&&(f.launch??f.t0)>t)fx.splice(i,1);}
- for(let i=zones.length-1;i>=0;i--){const z=zones[i];if(z.src&&z.src.room!==room||stale(z.src)&&z.start>t)zones.splice(i,1);}}
+ for(let i=zones.length-1;i>=0;i--){const z=zones[i];if(z.src&&z.src.room!==room||stale(z.src)&&z.start>t){zones.splice(i,1);try{if(z.h&&typeof hazards!=='undefined'){const k=hazards.indexOf(z.h);if(k>=0)hazards.splice(k,1);}}catch(_){}}}}
 /* 협동: 호스트가 쓰러져도 살아 있는 동료가 있으면 계속 돈다(R62 는 살아남은 동료로 세계를 진행 — Codex 리뷰) */
 function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&heroes().some(a=>a&&a.hp>0)&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
 function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);return;}const t=T();purge(false);
@@ -190,14 +191,15 @@ function drawAll(){const S0=SPR();if(!S0||typeof project!=='function')return;/* 
   else if(k==='chill'){S.draw('glow',P.frost,q.x,q.y-h*.5,h*.8,h*1.1,{alpha:.4*a});S.draw('shard',P.frost,q.x+h*.18,q.y-h*.35,h*.12,h*.3,{alpha:.8*a});}
   else if(k==='wet')S.draw('orb',P.waterL,q.x+Math.sin(t*3)*h*.15,q.y-h*(.9-((t*1.5)%1)*.8),h*.06,h*.09,{alpha:.8*a});}}}}
 // 이 재해 그림(fx)과 이어지지 않은 위험지대(협동 손님이 스냅숏으로 받은 것 등): 예고는 바닥 핏빛 육망성, 터지는 동안은 종류별 빛.
-const BARE={magma:P.ember,ice:P.frost,poison:P.rot,bomb:P.ember,flood:P.waterL,wisp:P.wisp,nuke:P.ember,radiation:P.rad,tornado:P.ashL};
+const ZPAL={burn:P.ember,chill:P.frost,wet:P.waterL,poison:P.rot,rad:P.rad};const BARE={magma:P.ember,ice:P.frost,poison:P.rot,bomb:P.ember,flood:P.waterL,wisp:P.wisp,nuke:P.ember,radiation:P.rad,tornado:P.ashL};
 function drawBare(h){const S0=SPR();if(!S0||typeof project!=='function')return;const q=project(h.x,h.y),w=(h.radius||1)*px(h.x,h.y),kind=String(h.kind||h.type||'').replace(/^r330-/,''),pal=BARE[kind]||P.blood;stats.bare=(stats.bare||0)+1;
+ if(h.r330Zone){if(h.age<h.warning)return;const zp=ZPAL[h.st]||P.blood,v=Math.max(0,Math.min(1,(h.age-h.warning)/Math.max(.2,h.life-h.warning))),fl=.85+.15*Math.sin((h.age||0)*7);S0.draw('glow',zp,q.x,q.y,w*2.3,w*1.15,{alpha:.5*(1-v*.7)*fl,overHero:false});S0.draw('smoke',zp,q.x,q.y-w*.2,w*1.6,w*1.1,{alpha:.35*(1-v),overHero:false});return;}
  if(h.age<h.warning){const u=Math.max(0,Math.min(1,h.age/Math.max(.01,h.warning)));ground({draw:(n,F,x,y,ww,hh,o={})=>S0.draw(n,F,x,y,ww,hh,{overHero:true,...o})},P.blood,q,w,.45+.55*u,(h.age||0)*.6);}
  else{const v=Math.max(0,Math.min(1,(h.age-h.warning)/Math.max(.2,h.life-h.warning)));S0.draw('glow',pal,q.x,q.y,w*2.2,w*1.1,{alpha:.55*(1-v),overHero:true});S0.draw('ring',pal,q.x,q.y,w*2,w,{alpha:.6*(1-v),overHero:true});}}
 function install(){
  if(typeof moveActor==='function'){const base=moveActor;moveActor=function(a,dx,dy,...r){if(on&&a){const m=slowMul(a===player?actorNow():a);if(m<1){dx*=m;dy*=m;}}return base.apply(this,[a,dx,dy,...r]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r330-fx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330&&SPR()){/* 칠한 스프라이트를 끈 설정(r106.fxsprites)이면 원래 위험지대 그림으로 — 보이지 않는 피해 방지(Codex 리뷰) */if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
+ if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330&&SPR()){if(h.r330Zone&&!guest())return;/* 호스트는 자기 fx 로 이미 그린다 *//* 칠한 스프라이트를 끈 설정(r106.fxsprites)이면 원래 위험지대 그림으로 — 보이지 않는 피해 방지(Codex 리뷰) */if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){purge(true);const r=await base.apply(this,a);try{purge(true);}catch(e){fail(e);}return r;};}
  if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=last==null?0:Math.max(0,Math.min(.1,t-last));last=t;tickAll(dt);}catch(e){fail(e);}return r;};}
  return true;}
