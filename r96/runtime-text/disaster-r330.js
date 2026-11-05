@@ -114,6 +114,7 @@ function purge(all){const t=T();if(all){queue.length=0;fx.length=0;zones.length=
 function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&heroes().some(a=>a&&a.hp>0)&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
 const guardWas=new WeakMap();
 function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);return;}const t=T();purge(false);
+ /* 엔진 effects 개수 제한으로 그리기 표지(SENT)가 밀려나도, 재해 그림이 남아 있으면 매 틱 다시 건다 — Codex 리뷰 */if(fx.length)arm();
  /* 공명방어가 새로 켜진 영웅마다 재해 상태이상 정화(협동 원격 영웅은 R62 가 붙잡아 둔 guardStart 를 직접 불러 감싸기를 지나치므로 상태 변화로 본다 — Codex 리뷰) */try{const pr=window.__STORYWORLD_COMBAT_R137__?.prefs?.();if(!pr||pr.guardCleanse!==false)for(const a of heroes()){const g=!!a.guard;if(g&&!guardWas.get(a))clearStatus(a);guardWas.set(a,g);}}catch(err){fail(err);}
  if(guest()){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(t>(f.launch??f.t0)+(f.life??((f.warn||0)+1.2))+.2)fx.splice(i,1);}if(!fx.length)disarm();return;}/* 손님: 시전·판정 없음 */
  tickStatus();

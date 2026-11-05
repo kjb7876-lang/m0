@@ -66,4 +66,5 @@ assert(/for\(const a of heroes\(\)\)if\(a&&a\.hp>0&&Math\.hypot\(a\.x-h\.x,a\.y-
 assert(/drawHazard=function\(h,\.\.\.a\)\{if\(h&&h\.r330&&SPR\(\)\)\{/.test(src));ok('sprites disabled -> R330 hazards fall back to the original hazard renderer (never invisible)');
 assert(/const g=!!a\.guard;if\(g&&!guardWas\.get\(a\)\)clearStatus\(a\);guardWas\.set\(a,g\);/.test(src));ok('guard cleanse runs per hero on the guard edge (covers co-op remote guards that bypass the guardStart wrapper)');
 assert(/f\.h\.x=nx;f\.h\.y=ny;[^\n]*delete f\.h\.footprint154;/.test(src));ok('moving tornado drops its cached R62 collision footprint');
+assert(/purge\(false\);\n[^\n]*if\(fx\.length\)arm\(\);/.test(src));ok('render sentinel is re-armed every tick while disaster visuals remain (engine effect cap cannot hide them)');
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake engine; headless capture separately; no GPU or device'}));
