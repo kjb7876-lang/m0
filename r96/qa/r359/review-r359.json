@@ -1,0 +1,449 @@
+{
+ "revision": "R359",
+ "label": "임시(헤드리스) — 그래픽·실기기 검증 아님",
+ "method": "헤드리스 Chromium, 거미동굴(dist01) 같은 카메라, R290 표 끔(전)/켬(후), PC 1280×720 + 모바일 390×844(DPR3)",
+ "shots": [
+  "mobile-g1-after.jpg",
+  "mobile-g1-before.jpg",
+  "mobile-g2-after.jpg",
+  "mobile-g2-before.jpg",
+  "mobile-g3-after.jpg",
+  "mobile-g3-before.jpg",
+  "mobile-g4-after.jpg",
+  "mobile-g4-before.jpg",
+  "mobile-g5-after.jpg",
+  "mobile-g5-before.jpg",
+  "pc-compare-2x.jpg",
+  "pc-g1-after.jpg",
+  "pc-g1-before.jpg",
+  "pc-g2-after.jpg",
+  "pc-g2-before.jpg",
+  "pc-g3-after.jpg",
+  "pc-g3-before.jpg",
+  "pc-g4-after.jpg",
+  "pc-g4-before.jpg",
+  "pc-g5-after.jpg",
+  "pc-g5-before.jpg",
+  "sheet-compare-1.jpg",
+  "sheet-compare-2.jpg",
+  "sheet-compare-3.jpg"
+ ],
+ "scores": [
+  {
+   "field": "미술감독",
+   "score": 8.2,
+   "fix": "망령 m051·m087·m095 는 어두운 맵에서 몸이 묻힘 — 다음 Dots 회차에서 외곽 명도 보강 권장"
+  },
+  {
+   "field": "연출감독",
+   "score": 7.6,
+   "fix": "새 설정 없이 임시 그림 정체성(이름·색) 유지. 망령 공격이 손뻗기라 강타감 약함(인계 지적과 같음)"
+  },
+  {
+   "field": "카메라·구도",
+   "score": 7.9,
+   "fix": "결정·종이·동전은 임시 그림보다 화면에서 커짐(R248 크기 규칙 그대로) — 영웅 가림 늘 수 있음"
+  },
+  {
+   "field": "공간·환경",
+   "score": 7.9,
+   "fix": "부유형을 그림자 바로 위에 접지(shiftY). 촬영 배치상 벽 위 겹침은 배치 탓"
+  },
+  {
+   "field": "조명·색채",
+   "score": 7.8,
+   "fix": "저채도 바탕·단일 강조색(코어·눈) 규칙과 맞음. 어두운 망령 대비 낮음"
+  },
+  {
+   "field": "애니메이션·VFX",
+   "score": 7.7,
+   "fix": "칠한 프레임. 공격 11→12 회수 간격 큼, 부유 상하는 R332 발 맞춤이 최대 24px 평탄화"
+  },
+  {
+   "field": "UX·레벨",
+   "score": 7.9,
+   "fix": "실루엣은 읽힘. m073 강재헌은 영웅보다 작고 어두움"
+  },
+  {
+   "field": "캐릭터(추가)",
+   "score": 8.0,
+   "fix": "발 기준점 296~300, 좌우 방향 오른쪽 통일"
+  }
+ ],
+ "colorSignal": "적 몹은 탁한 저채도 + 작은 고채도 코어·눈만 — 영웅 금·청록 이펙트와 명도·채도 둘 다 구별",
+ "valueComposition": "화면 대부분 어두운 동굴, 몹은 중간 명도. 밝은 종이(m053·m090)·상아 망령(m082)만 밝음",
+ "principles": [
+  "채도 비대칭(배경 저채도, 코어·눈만 고채도)",
+  "실루엣 먼저 읽힘",
+  "젖음·부패 질감(소화액·망토)"
+ ],
+ "assets": [
+  {
+   "id": "m025",
+   "name": "끓어오르는 검은 소화액",
+   "driveBundle": "SW-m025-light-static-candidate-v2-20261105.zip",
+   "zipSha256": "b81d6f7ccdd39ef8b9a1527a7777432ba0844bf6abf060ddcc5ae59b3709fa52",
+   "zipBytes": 1533241,
+   "out": "assets/r290/mobs/m025.webp",
+   "outSha256": "4386bd95998a586bddba0f38239e7b67982ee4963fc8c89c5fc392a2d6d4f641",
+   "outBytes": 262574,
+   "shiftY": 0,
+   "body": 141,
+   "dotsMean": 7.9,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m026",
+   "name": "모든 면이 뒷면인 동전",
+   "driveBundle": "SW-m026-diameter-static-candidate-v2-20261105.zip",
+   "zipSha256": "3370c11ce5fd875d71d2cd77d3f945f12a46fd6901efd8ff519884f1cd0266fc",
+   "zipBytes": 891242,
+   "out": "assets/r290/mobs/m026.webp",
+   "outSha256": "047a2519905865fcd9e09ec14ec6770657d45f333233e13c6cfb66fd43dc4a96",
+   "outBytes": 149832,
+   "shiftY": 80,
+   "body": 113,
+   "dotsMean": 7.7857,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m051",
+   "name": "새빛호텔 화재 기록의 잔향",
+   "driveBundle": "SW-m051-existing-static-candidate-7.8571-20261105.zip",
+   "zipSha256": "ab971d2d3638fa4608dd2927688afe7650dbc5bc0573e31269d2d4d30a1a4119",
+   "zipBytes": 1498067,
+   "out": "assets/r290/mobs/m051.webp",
+   "outSha256": "b4b1be24c071de0cb3dcdd6efedad685c8253a47613fcb92bc5f5fcfac9581f2",
+   "outBytes": 241792,
+   "shiftY": 0,
+   "body": 211,
+   "dotsMean": 7.8571,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m053",
+   "name": "제출되지 못한 문장",
+   "driveBundle": "SW-m053-existing-static-candidate-8.0286-20261105.zip",
+   "zipSha256": "d1f304f5ada44a865db2dd6cd27e1f04be21bce8ee01d44ba9aab4572fe98405",
+   "zipBytes": 1066940,
+   "out": "assets/r290/mobs/m053.webp",
+   "outSha256": "818befcebff8f0230dbcf676d1c9bb7c686cb831d513856f24fb52506e159dde",
+   "outBytes": 181868,
+   "shiftY": 87,
+   "body": 104,
+   "dotsMean": 8.0286,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m055",
+   "name": "반복된 추락의 인과 잔향",
+   "driveBundle": "SW-m055-existing-static-candidate-7.8571-20261105.zip",
+   "zipSha256": "0fff1b2eebc04852578bf9417d287af03b267cf64bdfd36bc745a02d48856f11",
+   "zipBytes": 1189650,
+   "out": "assets/r290/mobs/m055.webp",
+   "outSha256": "0bbd10d496b788c892acc5557043d8d4ea6df67f40579ec4f31b46d0d14da8bd",
+   "outBytes": 193874,
+   "shiftY": 10,
+   "body": 190,
+   "dotsMean": 7.8571,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m057",
+   "name": "본능 추출 결정",
+   "driveBundle": "SW-m057-existing-static-candidate-8.0143-20261105.zip",
+   "zipSha256": "3be169667635f7f38e94ddefaad512c19fc346e0ca19049602b22cd4cca8066a",
+   "zipBytes": 1358412,
+   "out": "assets/r290/mobs/m057.webp",
+   "outSha256": "1909376437ff1dbed677a7efd9faf0bab165e87f706e2889ec8d4dcb2f341650",
+   "outBytes": 237140,
+   "shiftY": 70,
+   "body": 159,
+   "dotsMean": 8.0143,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m058",
+   "name": "죄책감 압축결정",
+   "driveBundle": "SW-m058-existing-static-candidate-8.0571-20261105.zip",
+   "zipSha256": "cab91d07de104be5982c342de7f902f9f21851a83a75d37b370e150701a946a6",
+   "zipBytes": 975672,
+   "out": "assets/r290/mobs/m058.webp",
+   "outSha256": "423204cae8fda513a1a80bb32795b989d09ebe5ca569907d38de22b06d530c65",
+   "outBytes": 163508,
+   "shiftY": 78,
+   "body": 131,
+   "dotsMean": 8.0571,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m059",
+   "name": "SUPER EGO 절개결정",
+   "driveBundle": "SW-m059-existing-static-candidate-8.0286-20261105.zip",
+   "zipSha256": "bf2362177d2c22e76cba081b7c3a4132c013158c91536f6b9cd38d62d7dfff50",
+   "zipBytes": 1023899,
+   "out": "assets/r290/mobs/m059.webp",
+   "outSha256": "f7a48c77b9a1ac122de8dca526fe4ab8be823862ed30d7fb97a614d6cf90ad0c",
+   "outBytes": 173204,
+   "shiftY": 81,
+   "body": 129,
+   "dotsMean": 8.0286,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m061",
+   "name": "아마겟돈 계산결정",
+   "driveBundle": "SW-m061-existing-static-candidate-8.0429-20261105.zip",
+   "zipSha256": "3dddcf62356bf33a4badfa8d2d0daef109bbe7251e554749da000ff20132409d",
+   "zipBytes": 1147070,
+   "out": "assets/r290/mobs/m061.webp",
+   "outSha256": "ca8b6df89fa2630f8360a540809d462fd23b434d2273896a87bcc7303179159c",
+   "outBytes": 195038,
+   "shiftY": 66,
+   "body": 142,
+   "dotsMean": 8.0429,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m064",
+   "name": "코어 아래의 검은 뿌리",
+   "driveBundle": "SW-m064-existing-static-candidate-7.9571-20261105.zip",
+   "zipSha256": "0f905d9e56952ec42d9328d579eb8aeaee3868b0a7bb27347cd1b5d0e4957dd4",
+   "zipBytes": 1617754,
+   "out": "assets/r290/mobs/m064.webp",
+   "outSha256": "b180fd6bd249095f122956d3ef59be904698b7a7bd796e81e2aeb6afdcac4b8c",
+   "outBytes": 287380,
+   "shiftY": 0,
+   "body": 201,
+   "dotsMean": 7.9571,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m066",
+   "name": "부정의 잔영",
+   "driveBundle": "SW-m066-existing-static-candidate-7.7857-20261105.zip",
+   "zipSha256": "4a371c28840693a7e0867718dbf9c9d63580e14d78d2cff1cb056d9b0776567a",
+   "zipBytes": 1203891,
+   "out": "assets/r290/mobs/m066.webp",
+   "outSha256": "0481b169ba74ebdf4f2d17ede8b1c5022ed258e591be1d770be39b65c06a6ed9",
+   "outBytes": 201006,
+   "shiftY": 9,
+   "body": 197,
+   "dotsMean": 7.7857,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m073",
+   "name": "강재헌",
+   "driveBundle": "SW-m073-existing-static-candidate-7.9286-20261105.zip",
+   "zipSha256": "5ef76bfeb4975a022903136bf601cadd8ddd7397364010fc52997450f1f908a8",
+   "zipBytes": 1764953,
+   "out": "assets/r290/mobs/m073.webp",
+   "outSha256": "ac63260fac0e0630f2c5098368b593fc8f484eee55b810d69b1d8c709c62a75a",
+   "outBytes": 297298,
+   "shiftY": 0,
+   "body": 257,
+   "dotsMean": 7.9286,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m074",
+   "name": "호외 신문의 밀고자 잔영",
+   "driveBundle": "SW-m074-existing-static-candidate-8.0000-20261105.zip",
+   "zipSha256": "2270e0b6745d681c73ada169c91a2aea2a1df8a3c48a74e8f0ec63e4bd34c712",
+   "zipBytes": 1633651,
+   "out": "assets/r290/mobs/m074.webp",
+   "outSha256": "d6d28ddca9bf30b3e64665959a74db3517bb43c9e89692a0bea318ea53ef05aa",
+   "outBytes": 271226,
+   "shiftY": 0,
+   "body": 219,
+   "dotsMean": 8.0,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m076",
+   "name": "교주의 인장",
+   "driveBundle": "SW-m076-existing-static-candidate-8.0286-20261105.zip",
+   "zipSha256": "7a1e1aec56c6a04b4175a418607d3553dc07759e58eab4a5671490d7be532b16",
+   "zipBytes": 1037486,
+   "out": "assets/r290/mobs/m076.webp",
+   "outSha256": "ef4f599e837acef3a4c9d21ab10f7b9a73fb56c817514186005d4dabb699dc3c",
+   "outBytes": 174020,
+   "shiftY": 85,
+   "body": 122,
+   "dotsMean": 8.0286,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m082",
+   "name": "백은 없는 그림자",
+   "driveBundle": "SW-m082-existing-static-candidate-8.0286-20261105.zip",
+   "zipSha256": "b8f44afc8d043bddbbe4f28ff5bcb45e8d1eb0c95337d375ecc9f6127c53e918",
+   "zipBytes": 1502462,
+   "out": "assets/r290/mobs/m082.webp",
+   "outSha256": "520cf98f64e6086b32283d7b723aa238c2267898f884e0f8ba4c9a6733f6fc5f",
+   "outBytes": 237880,
+   "shiftY": 11,
+   "body": 206,
+   "dotsMean": 8.0286,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m085",
+   "name": "정해진 시각에 도착하지 못한 발자국",
+   "driveBundle": "SW-m085-existing-static-candidate-7.7714-20261105.zip",
+   "zipSha256": "77526209d7e5fcece5d52dc376be5f755cea7cb91152cbbe73755ab10191f792",
+   "zipBytes": 1758338,
+   "out": "assets/r290/mobs/m085.webp",
+   "outSha256": "e3eb3786c516d67a9157f716722a625ace918e5ca9791cf6a17c0d3aaea86ef4",
+   "outBytes": 292640,
+   "shiftY": 0,
+   "body": 239,
+   "dotsMean": 7.7714,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m087",
+   "name": "관람석의 시선",
+   "driveBundle": "SW-m087-existing-static-candidate-7.7714-20261105.zip",
+   "zipSha256": "c7389efaa828fd124f161e876fc64831b540b49152ad8050b4d771dbd5a3cade",
+   "zipBytes": 1317119,
+   "out": "assets/r290/mobs/m087.webp",
+   "outSha256": "5c3ca3b97861511582fc2a711530b0aa01410afb1c10178621f1eb827b67be76",
+   "outBytes": 221848,
+   "shiftY": 30,
+   "body": 207,
+   "dotsMean": 7.7714,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m088",
+   "name": "찢어진 사진의 망령",
+   "driveBundle": "SW-m088-existing-static-candidate-7.9000-20261105.zip",
+   "zipSha256": "e4500befbac70c7c16c3fa822066e215120db43b8922543f0c066f80eb568a4b",
+   "zipBytes": 1227049,
+   "out": "assets/r290/mobs/m088.webp",
+   "outSha256": "f14e9530ccd75ab389ccc76d7919201f36f5eec3ceef1755a48a83046ec026ab",
+   "outBytes": 202080,
+   "shiftY": 48,
+   "body": 191,
+   "dotsMean": 7.9,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m090",
+   "name": "종이 왕",
+   "driveBundle": "SW-m090-existing-static-candidate-7.9571-20261105.zip",
+   "zipSha256": "72e7d483c04a52a84c3ca29f043ba5e6cc122737ee4a32c2a1c9805b6d419352",
+   "zipBytes": 784156,
+   "out": "assets/r290/mobs/m090.webp",
+   "outSha256": "4e8c34165ec7b71a81592850f4fce957964978ee1041e26dc78b7dd4552f91c0",
+   "outBytes": 134644,
+   "shiftY": 87,
+   "body": 94,
+   "dotsMean": 7.9571,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  },
+  {
+   "id": "m095",
+   "name": "일곱 나팔의 빈 소매 잔영",
+   "driveBundle": "SW-m095-existing-static-candidate-7.8857-20261105.zip",
+   "zipSha256": "a94c1d96c96da989e0d48435cde4e78e6260621ce3d06e400e02124913335c02",
+   "zipBytes": 1220880,
+   "out": "assets/r290/mobs/m095.webp",
+   "outSha256": "b6bc3b088c467facaceb00052795d3545f43366f7592e970bf42019fe61696a2",
+   "outBytes": 205234,
+   "shiftY": 39,
+   "body": 198,
+   "dotsMean": 7.8857,
+   "use": "R248 임시 픽셀 시트 대체(걷기·부유8+공격4)",
+   "applied": true,
+   "final": false
+  }
+ ],
+ "skipped": [
+  {
+   "id": "m021",
+   "reason": "zip 이름이 independent-static-review(검수 묶음) — 보류 규칙"
+  },
+  {
+   "id": "m029",
+   "reason": "zip 이름이 existing-static-review(검수 묶음) — 보류 규칙, 공격 칸 4~6% 확대 의도 미확정"
+  },
+  {
+   "id": "m030",
+   "reason": "인계에 \"자동 ID 매핑 금지\", 이름(불길 속의 곰)과 체형(개·늑대형) 불일치 — 사용자 판단 필요, 앞발 교대 미해결"
+  },
+  {
+   "id": "m045",
+   "reason": "comparison(준비동작 비교) 후보, \"원본 대체 승인 아님\""
+  },
+  {
+   "id": "m060",
+   "reason": "comparison(오른쪽 공격11 비교) 후보"
+  },
+  {
+   "id": "m062",
+   "reason": "Claude 인계·후보 zip 없음(review 보고만, 384×480 칸 다른 규격)"
+  },
+  {
+   "id": "m071",
+   "reason": "comparison(같은 팔 준비9 비교) 후보, 원본 평균 7.66"
+  },
+  {
+   "id": "m075",
+   "reason": "인계 txt 만 있고 후보 zip 없음(INCOMPLETE)"
+  },
+  {
+   "id": "m084",
+   "reason": "comparison(회수 위치 비교) 후보, \"조건부 재생 비교용으로만 인계\""
+  }
+ ],
+ "unverified": [
+  "실제 연속 재생 속도·타격 시점(인계 그대로 미검증)",
+  "GPU·실기기 모바일",
+  "자연 플레이 중 사몽 전용 줄(m066·m082·m088) 실제 등장",
+  "어두운 맵 가독성(m051·m073·m087·m095)",
+  "전체 스위트 run-full-suite"
+ ],
+ "average7": 7.8571,
+ "pass": true
+}
