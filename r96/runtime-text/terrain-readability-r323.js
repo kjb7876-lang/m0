@@ -18,7 +18,9 @@ function roleMaterials(r){
  add(r.bridgeMaterial,'path');add(r.wallMaterial,'wall');add(r.hospitalWallMaterial,'wall');
  add(r.wallCapMaterial61,'cap');add(r.hospitalRoofMaterialR2,'cap');add(r.regionalTrimMaterial55,'wall');
  // Some wall occlusion materials are clones; grade the actual displayed rows.
- for(const e of r.wallRows?.values?.()||[]){const m=e.mesh?.material;if(m)add(m,'wall');}
+ // Native wall meshes use [wall,wall,cap,cap,wall,wall,(trim)]; occlusion clones keep that order,
+ // so slots 2 and 3 stay caps instead of being graded as walls.
+ for(const e of r.wallRows?.values?.()||[]){const m=e.mesh?.material;if(Array.isArray(m))m.forEach((x,i)=>{if(x)add(x,i===2||i===3?'cap':'wall');});else if(m)add(m,'wall');}
  // R204 replaces native terrain (whose layer mask is then zero), so changing
  // only stoneMaterial/floorRows would leave caves and outdoor ground unchanged.
  const organic={'r204-ground':'floor','r204-cliff-faces':'wall','r204-stalagmites':'wall','r204-plateau':'cap','r218-skeleton':'wall'};
