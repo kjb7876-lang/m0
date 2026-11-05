@@ -24224,8 +24224,8 @@
     },
     {
       "path": "world-doors-r83.js",
-      "bytes": 9568,
-      "sha256": "78a9e95589459af4867264a26cd1c0f6f02d572cdd5f10c8f454cadef0f29f30"
+      "bytes": 13713,
+      "sha256": "908ad9b40af76a68438a2888c39824c99f211f08ae2d376cfbe77aab11973012"
     },
     {
       "path": "world-environment-r81.js",
@@ -24269,7 +24269,7 @@
     }
   ],
   "fileCount": 4853,
-  "totalBytes": 931979535,
+  "totalBytes": 931983680,
   "webHTMLSha256": "8d7d6dbd540f26724f7f002dcdaea92dbd7c8c472ae14f6b6ed82ddcdc4ae92d",
   "largest": [
     {
