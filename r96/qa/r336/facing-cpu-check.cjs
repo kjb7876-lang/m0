@@ -12,4 +12,8 @@ assert(side>=238&&side<=242,'side '+side);ok('left/right covers ~240° of screen
 const old=new Function(base+';return facing;')();let oldSide=0;for(let d=0;d<360;d++){const a=d*Math.PI/180,sx=Math.cos(a),sy=Math.sin(a);const r=old((sx+2*sy)/2,(2*sy-sx)/2);if(r==='left'||r==='right')oldSide++;}
 assert(oldSide<180);ok('engine default was only '+oldSide+'° left/right');
 assert.strictEqual(f(1,-1),'right');assert.strictEqual(f(-1,1),'left');assert.strictEqual(f(1,1),'front');assert.strictEqual(f(-1,-1),'back');ok('pure screen directions unchanged');
+// R118 전투 방향 API(4방향 칼잡이)도 같은 기준을 쓴다(Codex 리뷰: 65° 화면각 → front)
+{const W={};new Function('window','localStorage',base+';\n'+src)(W,{getItem:()=>null,setItem(){}});const P=W.__STORYWORLD_HERO_FACING_R336__.pick;const a=65*Math.PI/180,sx=Math.cos(a),sy=Math.sin(a);
+ assert.strictEqual(P((sx+2*sy)/2,(2*sy-sx)/2),'front');const r118=fs.readFileSync(path.join(root,'client-source/combat-r118.js'),'utf8');assert(/__STORYWORLD_HERO_FACING_R336__\?\.pick\?\.\(foe\.x-player\.x,foe\.y-player\.y\);if\(f4\)return f4;\}return FOUR\[sec\];/.test(r118));
+ ok('R118 combat direction for four-direction heroes uses the R336 split (65° screen angle → front)');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static + pure CPU over 360 screen angles'}));
