@@ -77,4 +77,6 @@ assert(/purge\(false\);\n[^\n]*if\(fx\.length\)arm\(\);/.test(src));ok('render s
  const a=run(false),b2=run(true);assert(a!=null&&b2!=null,'spawn '+a+' '+b2);assert(b2-10>(a-10)*1.8,'slowed spawn '+a+' vs '+b2);ok('Samong slowdown hook delays queued disasters at half speed ('+(a-10).toFixed(2)+'s -> '+(b2-10).toFixed(2)+'s)');}
 assert(/function clockHook\(e,move\)\{[^\n]*move\(e,\['r330Next'\]\);/.test(src)&&/move\(f,\['t0','launch'\]\)/.test(src)&&/move\(z,\['start','end'\]\)/.test(src));ok('fx visuals and lingering zone windows shift with the same Samong delta');
 assert(/const wf=push\(\{k:'wisp'/.test(src)&&/const f=fx\.includes\(wf\)\?wf:null;if\(f\)\{f\.tx=x;f\.ty=y;\}/.test(src)&&!/q\.launch===d/.test(src));ok('wisp callback holds its own visual (Samong-shifted launch time still links the flight target)');
+assert(/const was=CUR;CUR=q\.src\|\|null;try\{q\.fn\(\);\}catch\(err\)\{fail\(err\);\}finally\{CUR=was;\}/.test(src));ok('queued callbacks run with their caster as CUR, so visuals they push keep src (Samong shift reaches impact marks)');
+assert(/coopEventR62:'r330:'\+k\+':'\+\(\+\+tickSerial\)/.test(src));ok('each status tick carries a distinct R62 co-op damage token');
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake engine; headless capture separately; no GPU or device'}));

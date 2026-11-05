@@ -66,7 +66,7 @@ const SIGIL=1.0;
 //  화상·중독·피폭은 시간당 피해, 빙결·젖음은 이동 감속. 공명 방어(guard)·무적은 R51 규칙대로 피해를 막는다(hurt 를 거침).
 const ST={burn:{name:'화상',dur:3,tickEvery:.5,dmg:.06,pal:P.ember},poison:{name:'중독',dur:4,tickEvery:.6,dmg:.05,pal:P.rotL||P.rot},rad:{name:'방사능 피폭',dur:5,tickEvery:.7,dmg:.045,pal:P.rad},
  chill:{name:'빙결',dur:2.5,slow:.62,pal:P.frost},wet:{name:'젖음',dur:3,slow:.8,pal:P.water}};
-const zones=[],statusOf=new WeakMap(),zoneFx=new WeakMap();
+const zones=[],statusOf=new WeakMap(),zoneFx=new WeakMap();let tickSerial=0;
 function stOf(a){let s=statusOf.get(a);if(!s){s={};statusOf.set(a,s);}return s;}
 function zone(fxKind,x,y,R,start,life,D,st){const zr={x,y,R,start,end:start+life,D,st,src:CUR};zones.push(zr);if(!fxKind){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(Math.abs(f.x-x)<.01&&Math.abs(f.y-y)<.01){zr.f=f;break;}}}
  /* 협동 손님도 남는 불길·독안개를 보도록, 피해 0 짜리 엔진 위험지대로 모양·수명을 함께 실어 보낸다(스냅숏으로 복제됨 — Codex 리뷰) *//* (영역이 실제로 시작될 때 tickStatus 가 만든다) */if(zones.length>30)zones.shift();if(fxKind)zr.f=push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
@@ -76,7 +76,7 @@ function hurtAs(a,dmg,src){const c=COOP();if(c?.mode?.()==='host'&&typeof c.with
 function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;if(!z.h){try{z.h=hz(z.src?.e||{id:null},z.x,z.y,z.R,0,Math.max(.1,z.end-t),0,{kind:'zone-'+z.st,r330Zone:true,st:z.st})||1;if(z.h!==1&&z.f)zoneFx.set(z.h,z.f);}catch(err){fail(err);z.h=1;}}for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
  for(let i=zones.length-1;i>=0;i--)if(t>zones[i].end)zones.splice(i,1);
  for(const a of hs){const status=stOf(a);for(const k of Object.keys(status)){const s=status[k],d=ST[k];if(t>s.until||!(a.hp>0)){delete status[k];continue;}
-  if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true,owner:s.owner||undefined});/* 시전한 적을 붙여 난이도 배율(enemySource)이 적용되게 — Codex 리뷰 */}catch(err){fail(err);}}}}}
+  if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true,owner:s.owner||undefined,coopEventR62:'r330:'+k+':'+(++tickSerial)});/* 협동 R62 중복 방지 토큰을 틱마다 따로 — 같은 프레임 화상·중독·방사능이 하나로 묶이지 않게(Codex 리뷰) *//* 시전한 적을 붙여 난이도 배율(enemySource)이 적용되게 — Codex 리뷰 */}catch(err){fail(err);}}}}}
 function slowMul(a){const status=statusOf.get(a);if(!status)return 1;let m=1;for(const k of Object.keys(status))if(ST[k].slow)m=Math.min(m,ST[k].slow);return m;}
 const GO={
  volcano(e,t,D){for(let i=0;i<6;i++){const p=i===0?{x:TGT.x,y:TGT.y}:near(TGT.x,TGT.y,3.2),d=t+i*.38,w=.95;
@@ -118,7 +118,7 @@ function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);retu
  /* 공명방어가 새로 켜진 영웅마다 재해 상태이상 정화(협동 원격 영웅은 R62 가 붙잡아 둔 guardStart 를 직접 불러 감싸기를 지나치므로 상태 변화로 본다 — Codex 리뷰) */try{const pr=window.__STORYWORLD_COMBAT_R137__?.prefs?.();if(!pr||pr.guardCleanse!==false)for(const a of heroes()){const g=!!a.guard;if(g&&!guardWas.get(a))clearStatus(a);guardWas.set(a,g);}}catch(err){fail(err);}
  if(guest()){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(t>(f.launch??f.t0)+(f.life??((f.warn||0)+1.2))+.2)fx.splice(i,1);}if(!fx.length)disarm();return;}/* 손님: 시전·판정 없음 */
  tickStatus();
- for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];try{q.fn();}catch(err){fail(err);}}
+ for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];/* 대기 콜백이 만드는 그림(예고 표식 등)도 시전자 출처를 물려받아 사몽 감속을 같이 받게(Codex 리뷰) */const was=CUR;CUR=q.src||null;try{q.fn();}catch(err){fail(err);}finally{CUR=was;}}
  if(on)for(const e of room.enemies){if(!major(e)||!(e.hp>0)||e.r251Circle||e.spawnState&&e.spawnState!=='active')continue;
   const tg=aimFor(e),d=Math.hypot(tg.x-e.x,tg.y-e.y);if(d>12){if(e.r330Next)e.r330Next=Math.max(e.r330Next,t+2);continue;}
   if(!e.r330Next){e.r330Next=t+5+rnd()*2;continue;}
