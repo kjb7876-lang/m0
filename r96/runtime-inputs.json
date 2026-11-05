@@ -4060,7 +4060,8 @@
     "slayer-r351.js",
     "assets/r351/slayer/attack-w.webp",
     "assets/r351/slayer/walk-w.webp",
-    "assets/r351/slayer/index.json"
+    "assets/r351/slayer/index.json",
+    "bgm-pick-r353.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5135,5 +5136,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4239ef0c40c73ac27195d4b4ba3390a530bd219cbd91396df48d8779ee893101"
+  "runtimeManifestSHA256": "98f382ec81cd76deb94f2b9b6fa5653939da47f07a72a29f87772e167ebebdf6"
 }
