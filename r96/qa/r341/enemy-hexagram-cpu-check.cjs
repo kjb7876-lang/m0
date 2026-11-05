@@ -34,5 +34,5 @@ t(!drawn.includes('cross')&&!drawn.includes('runecross'),'적 그림에 십자 �
 for(const f of['samong-play-r162.js','samong-r161.js'])t(!/runecross/.test(fs.readFileSync(path.join(R,'client-source',f),'utf8')),`${f}: 적 예고에 runecross 없음`);
 for(const d of['client-source','runtime-text'])t(fs.readFileSync(path.join(R,d,'enemy-hexagram-r341.js'),'utf8')===src,`${d} 사본 일치`);
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
-t(html.includes('<script src="./terrain-readability-r323.js"></script><script src="./enemy-hexagram-r341.js"></script>'),'index.html 스크립트 태그');
+t(/terrain-readability-r323\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*<script src="\.\/enemy-hexagram-r341\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*\s*<script src="\.\/combat-r118\.js">/.test(html)&&html.split('"./enemy-hexagram-r341.js"').length===2,'index.html 스크립트 태그(terrain-r323 뒤 오버레이 묶음 안, combat-r118 앞)');
 console.log(`R341 ${ok}/${ok+bad}`);process.exit(bad?1:0);

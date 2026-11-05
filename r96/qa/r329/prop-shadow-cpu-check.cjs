@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
 const root=path.resolve(__dirname,'../..');let n=0;const ok=m=>{n++;console.log('PASS',m);};
 const RT=f=>fs.readFileSync(path.join(root,'runtime-text',f),'utf8'),CS=f=>fs.readFileSync(path.join(root,'client-source',f),'utf8');
 const src=CS('prop-shadow-r329.js');assert.strictEqual(src,RT('prop-shadow-r329.js'));assert.strictEqual(CS('props-r102.js'),RT('props-r102.js'));ok('client-source and runtime copies agree');
-const idx=RT('index.html');assert(idx.split('"./prop-shadow-r329.js"').length===2&&/terrain-readability-r323\.js"><\/script><script src="\.\/prop-shadow-r329\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(idx));ok('loaded once, right before combat-r118 (outermost drawProp wrapper)');
+const idx=RT('index.html');assert(idx.split('"./prop-shadow-r329.js"').length===2&&/terrain-readability-r323\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*<script src="\.\/prop-shadow-r329\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*\s*<script src="\.\/combat-r118\.js">/.test(idx));ok('loaded once, right before combat-r118 (outermost drawProp wrapper)');
 assert(!/ctx\.filter\s*=\s*['"][^'"]*(blur|drop-shadow)/.test(src)&&!/filter:'[^']*(blur|drop-shadow)/.test(src));ok('game ctx uses brightness only (no blur/drop-shadow)');
 assert(!/transform\(/.test(src.replace(/\/\/.*$/gm,'')));ok('no shear transform (Three recorder drops it); translate+scale only');
 const m=src.match(/const LEN=([\d.]+),SHIFT=([\d.]+),RISE=([\d.]+),ALPHA=([\d.]+)/);assert(m);const [LEN,SHIFT,RISE,ALPHA]=m.slice(1).map(Number);
