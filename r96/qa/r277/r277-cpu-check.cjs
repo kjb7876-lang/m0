@@ -10,8 +10,9 @@ ok('off switch storyworld.r277.hwando',/storyworld\.r277\.hwando/.test(src));
 const store={};const win={localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}}};win.window=win;vm.runInNewContext(src,win);
 const P=win.__STORYWORLD_HWANDO_R277__;
 ok('idle = walk clip, last frame (frame -1 → n-1), every direction',['n','s','e','w'].every(d=>{const r=P.idle(d);return r.anim==='walk'&&r.dir===d&&r.frame===-1;}));
-const out=[P.attackDir('e',10),P.attackDir('n',-30),P.attackDir('n',40),P.attackDir('w',-5),P.attackDir('n',0),P.attackDir('s',0)];
-ok('attack dirs only e/w/s; up → horizontal component, else last horizontal',out.join()==='e,w,e,w,w,s',out);
+// R349(사용자 2026-11-05 "이동및 공격모션을 위,좌,우로만"): 공격은 e/w/n, 아래 → 가로 성분, 없으면 마지막 가로 방향
+const out=[P.attackDir('e',10),P.attackDir('s',-30),P.attackDir('s',40),P.attackDir('w',-5),P.attackDir('s',0),P.attackDir('n',0)];
+ok('attack dirs only e/w/n; down → horizontal component, else last horizontal',out.join()==='e,w,e,w,w,n',out);
 ok('R271 consults R277: idle draws a walk frame (n-1, or the R283 side stance) (no idle clip), attack via aimDir, no idle preload',/P\.idle\(dd?\);return draw\(rec,st,best,'walk',dd?,(I\?Math\.min\(I\.frame,w\.n-1\):)?w\.n-1\)/.test(r271)&&/const d=aimDir\(\),a=atkOf\(d\)/.test(r271)&&/P277\(\)\?\['walk'\]:\['walk','idle'\]/.test(r271)&&/P\.attackDir\(d,v\?v\[0\]:0\)/.test(r271));
 ok('R242 still yields to R271 (no old idle/ready drawn)',(C('hwando-r242.js').match(/__STORYWORLD_HWANDO_R271__\?\.active\?\.\(\)/g)||[]).length===2);
 ok('judgement untouched',!/hitEnemy|basicAttack=|attackCD=/.test(src+r271));

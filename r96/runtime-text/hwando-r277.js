@@ -9,15 +9,18 @@
 // 끄기(R271 그대로): localStorage['storyworld.r277.hwando']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_R277__)return;
-const REV='R277-hwando-1',KEY='storyworld.r277.hwando';
+const REV='R277-hwando-2',KEY='storyworld.r277.hwando';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={idleHold:0,upAttack:0,attack:0};let lastH='e';
 // 대기: 걷기 클립 마지막 칸
 function idle(dir){stats.idleHold++;return {anim:'walk',dir,frame:-1};}
-// 공격 방향: e/w/s 만. n → 가로 성분(dx 화면 px) 부호, 작으면 마지막 가로 방향
-function attackDir(dir,dx){stats.attack++;if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='s')return 's';
- stats.upAttack++;const d=Math.abs(+dx||0)>2?(dx>0?'e':'w'):lastH;lastH=d;return d;}
+// R349(사용자 2026-11-05 "환도영웅 이동및 공격모션을 위,좌,우로만"): 이동·공격·피격 모두 위(n)·좌(w)·우(e) 세 방향.
+//  아래(s) → 가로 성분(dx 화면 px) 부호, 작으면 마지막 가로 방향(좌·우). 위 공격은 R242 공격 N 원화(R283 색 맞춤)를 그대로 쓴다.
+const side=(dx,th)=>{const d=Math.abs(+dx||0)>th?(dx>0?'e':'w'):lastH;lastH=d;return d;};
+function attackDir(dir,dx){stats.attack++;if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n'){stats.upAttack++;return 'n';}stats.downAttack=(stats.downAttack||0)+1;return side(dx,2);}
+function walkDir(dir,vx){if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n')return 'n';stats.downWalk=(stats.downWalk||0)+1;return side(vx,.6);}
+const down=()=>lastH;
 function face(dir){if(dir==='e'||dir==='w')lastH=dir;}
-window.__STORYWORLD_HWANDO_R277__=Object.freeze({revision:REV,on:()=>on,idle,attackDir,face,inspect:()=>({revision:REV,on,lastH,stats:{...stats}}),
+window.__STORYWORLD_HWANDO_R277__=Object.freeze({revision:REV,on:()=>on,idle,attackDir,walkDir,down,face,inspect:()=>({revision:REV,on,lastH,stats:{...stats}}),
  set:v=>{on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();
