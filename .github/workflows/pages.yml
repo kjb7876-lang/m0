@@ -55,6 +55,8 @@ jobs:
         run: node r96/qa/r323/terrain-readability-cpu-check.cjs
       - name: R324 boss meteor painted sprites CPU check
         run: node r96/qa/r324/boss-meteor-painted-cpu-check.cjs
+      - name: R325 pixel-mode readable dark mob sheets CPU check
+        run: node r96/qa/r325/pixel-readable-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
