@@ -14718,6 +14718,16 @@
       "sha256": "fe7b8a9924a80db4c1a1472e4ce5bcebdbbbdb449cae40c86673972753e7df88"
     },
     {
+      "path": "assets/r356/index.json",
+      "bytes": 5941,
+      "sha256": "449234d4be861ed5259424baa95c4a1a01117733abaa4cdddae6a03223f83a22"
+    },
+    {
+      "path": "assets/r356/seoha-time-control.webp",
+      "bytes": 439852,
+      "sha256": "a78180a52f8aabd44c709305fa374a5265cbfce4c526d51ba9bebde13593c902"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23584,8 +23594,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569320,
-      "sha256": "3826013a49a6b9fce4c74dba904d743744711ca4082f7624664db379577b1275"
+      "bytes": 6569366,
+      "sha256": "8718f4156704612fdb57f8bb6051ba4c8e9e8f91a7ec0f2ba8f69c765ed94cf9"
     },
     {
       "path": "intro-r140.js",
@@ -23601,6 +23611,11 @@
       "path": "intro-video-r309.js",
       "bytes": 10037,
       "sha256": "b680051c82599e48408803767d70b9e2afffa9b2666e22fbb0f3e633af00c463"
+    },
+    {
+      "path": "kairo-homage-r356.js",
+      "bytes": 12070,
+      "sha256": "598736453a633f12ca37c1ea54d347fbe6e9ed2356b53fb9c8c5d0529435d800"
     },
     {
       "path": "keys-r291.js",
@@ -24253,9 +24268,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4850,
-  "totalBytes": 931930272,
-  "webHTMLSha256": "3826013a49a6b9fce4c74dba904d743744711ca4082f7624664db379577b1275",
+  "fileCount": 4853,
+  "totalBytes": 932388181,
+  "webHTMLSha256": "8718f4156704612fdb57f8bb6051ba4c8e9e8f91a7ec0f2ba8f69c765ed94cf9",
   "largest": [
     {
       "path": "index.html",

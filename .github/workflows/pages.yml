@@ -85,6 +85,8 @@ jobs:
         run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
       - name: R351 slayer new walk/attack motion CPU check
         run: node r96/qa/r351/slayer-cpu-check.cjs
+      - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
+        run: node r96/qa/r356/kairo-homage-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression

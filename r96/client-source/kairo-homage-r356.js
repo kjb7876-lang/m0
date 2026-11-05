@@ -1,0 +1,96 @@
+/* R356 카이로 오마주 — 사용자 2026-11-05 "https://kjb7872.itch.io/kairodf 카이로노미콘 예전 개발버전, 서사 말고 효과음·배경음·스킬구조 오마주 느낌으로 참고만, 명맥만"
+ * + 방향 수정 "카이로 오마주는 윤서하 쪽에 특수 패시브를 만들어 그쪽으로 스킬 구조 오마주 — 시간 제어 능력으로".
+ * 예전 시제품(카이로노미콘: 시간해방전, 사용자 본인 작품)에서 서사는 가져오지 않고 구조·소리 결만 옮긴다. 시제품의 소리 파일은 싣지 않고 Web Audio 로 새로 합성한다.
+ *  1) 윤서하 특수 패시브 '시간 제어'(시제품 E '카이로스 순간' = 보스 예고를 아슬아슬하게 피하면 시간이 늦춰지고 모든 스킬 대기시간이 조금 돈다):
+ *     적 예고(위험지대) 안에 있다가 발동 직전 0.7초 안에 빠져나가면 발동, 재사용 7초.
+ *     · 반경 4칸 안 적 투사체를 0.7초 멈춤(사라지는 시각도 0.7초 미룸) · 반경 4칸 안 적의 다음 공격을 0.7초 늦춤 · 블링크·특수기 대기 0.7초 감소.
+ *     · 연출: 프레임 띠 10장(scripts/r356-seoha-time-sheet.py 결정적 생성) — 초침이 시계 방향으로 도는 십자가, 되감기 잔상, 퍼지다 멈추는 서리. 윤서하 2색(아이스 블루+실버)만,
+ *       마법진·육망성·원형 고리는 쓰지 않는다(SKILL.md 11절). 멈춘 적 투사체에는 같은 띠의 서리 프레임을 작게 얹는다.
+ *  2) 스토리 카이로 구역(STORY kair01~kair10)에서만: 구역에 들어설 때 낮은 쇠종 한 번 + 초침 네 번(시제품 배경음 'The Last Movement of Iron' 의 E단조·느린 박을 닮게),
+ *     가까운 적 예고가 쌓이는 동안 금속 초침 소리가 점점 빨라진다(시제품 time-acceleration-clock 결). 클래식 배경음(R195·R308·R353 표)은 건드리지 않는다.
+ * 게임이 연 audioContext·masterGain 을 빌려 쓰고, 효과음 끔·음량 0·탭 숨김이면 소리를 내지 않는다. 협동 손님(guest)은 판정을 바꾸지 않는다.
+ * 끄기: localStorage['storyworld.r356.kairo']='0'. Canonical source; copied to runtime-text by scripts/sync-r99.py. */
+(()=>{'use strict';
+if(window.__STORYWORLD_KAIRO_HOMAGE_R356__)return;
+const REV='R356-kairo-homage-1',KEY='storyworld.r356.kairo';
+let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
+const T=Object.freeze({window:.7,cooldown:7,freeze:.7,delay:.7,refund:.7,radius:4,tickRange:6,stingGap:45});
+const stats={triggers:0,frozen:0,delayed:0,refunds:0,escapes:0,sounds:{},stings:0,ticks:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+const log=[];const note=(kind,extra)=>{log.push({kind,at:typeof time==='number'?+time.toFixed(2):0,...(extra||{})});if(log.length>48)log.shift();};
+const now=()=>typeof time==='number'?time:0;
+const R=()=>typeof room==='object'&&room?room:null;
+const P=()=>typeof player==='object'&&player?player:null;
+const solo=()=>{try{const m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();return !m||m==='off'||m==='host';}catch(_){return true;}};
+const kairo=()=>{const r=R();return !!(r&&r.layer==='STORY'&&/^kair\d\d$/.test(String(r.id||''))&&!r.samongR103&&!r.samongR115);};
+const seoha=()=>{const p=P();return !!(p&&p.hero==='seoha'&&p.hp>0);};
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+
+// ---------- 소리(합성, 시제품 파일 미사용) ----------
+function A(){try{return typeof audioContext!=='undefined'&&audioContext&&audioContext.state==='running'?audioContext:null;}catch(_){return null;}}
+function audible(){if(!on)return false;try{if(typeof settings!=='undefined'&&(settings.sound===false||!(+settings.volume>0)))return false;if(document.hidden)return false;}catch(_){}return true;}
+function out(C){try{return typeof masterGain!=='undefined'&&masterGain&&masterGain.context===C?masterGain:C.destination;}catch(_){return C.destination;}}
+function vol(){try{return Math.max(0,Math.min(1,typeof settings!=='undefined'?+settings.volume||0:.7));}catch(_){return .7;}}
+let noise=null;function noiseBuf(C){if(noise&&noise.sampleRate===C.sampleRate)return noise;const n=C.sampleRate*.5|0,b=C.createBuffer(1,n,C.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return noise=b;}
+function env(C,dest,t,a,d,peak){const g=C.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak),t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d);g.connect(dest);return g;}
+function tone(C,dest,t,fq,d,peak,type='sine'){const o=C.createOscillator();o.type=type;o.frequency.setValueAtTime(fq,t);o.connect(env(C,dest,t,.004,d,peak));o.start(t);o.stop(t+d+.06);}
+function click(C,dest,t,fq,d,peak){const s=C.createBufferSource(),f=C.createBiquadFilter();s.buffer=noiseBuf(C);f.type='bandpass';f.frequency.value=fq;f.Q.value=6;s.connect(f);f.connect(env(C,dest,t,.002,d,peak));s.start(t);s.stop(t+d+.05);}
+const SND={
+ // 초침: 1.5kHz 금속 딸깍(시제품 시계 소리 결)
+ tick(C,d,t,k=1){click(C,d,t,1500,.03,.05*k);tone(C,d,t,1508,.035,.012*k,'triangle');},
+ // 시간 제어: 맑은 종 두 겹(E6·B6)과 거꾸로 감기는 초침 둘
+ chime(C,d,t){for(const[fq,p,dd]of[[1318.5,.035,.9],[1975.5,.018,.7],[3290,.006,.35]])tone(C,d,t,fq,dd,p);SND.tick(C,d,t+.08,.7);SND.tick(C,d,t+.2,.5);},
+ // 구역 입장: 낮은 쇠종(E2·B2·E3, 비조화 배음) + 1초 간격 초침 넷
+ toll(C,d,t){for(const[fq,p,dd]of[[82.4,.06,3.2],[123.5,.03,2.6],[164.8,.025,2.2],[226.6,.012,1.4]])tone(C,d,t,fq,dd,p);click(C,d,t,420,.12,.03);for(let i=1;i<=4;i++)SND.tick(C,d,t+.6+i*1.0,.8-i*.12);}};
+function play(kind,...a){stats.sounds[kind]=(stats.sounds[kind]||0)+1;const C=audible()?A():null;note('sound',{kind,played:!!C});if(!C)return false;
+ try{const g=C.createGain();g.gain.value=vol();g.connect(out(C));SND[kind](C,g,C.currentTime+.01,...a);setTimeout(()=>{try{g.disconnect();}catch(_){}},5000);return true;}catch(e){fail(e);return false;}}
+
+// ---------- 위험지대 판정(엔진과 같은 모양) ----------
+function inside(h,x,y){try{
+ if(h.type==='beam'||h.type==='field'){if(typeof genericFootprint154==='function'&&typeof footprintContains154==='function')return !!footprintContains154(genericFootprint154(h),x,y,h.type==='beam'?.25:0);
+  if(h.type==='beam'){const ex=h.x+Math.cos(h.angle||0)*(h.reach||0),ey=h.y+Math.sin(h.angle||0)*(h.reach||0),dx=ex-h.x,dy=ey-h.y,L=dx*dx+dy*dy||1,u=Math.max(0,Math.min(1,((x-h.x)*dx+(y-h.y)*dy)/L));return Math.hypot(x-h.x-u*dx,y-h.y-u*dy)<(h.width||.38)+.25;}}
+ return Math.hypot(x-h.x,y-h.y)<(h.radius||0);}catch(e){fail(e);return false;}}
+const hostile=h=>h&&!h.friendly&&h.damage>0&&Number.isFinite(h.warning)&&Number.isFinite(h.age);
+
+// ---------- 윤서하 '시간 제어' ----------
+let readyAt=0;const frozen=new Map();// projectile -> {vx,vy,until}
+function trigger(reason='escape'){const p=P();if(!on||!p||!seoha())return false;if(now()<readyAt)return false;readyAt=now()+T.cooldown;stats.triggers++;
+ if(solo()){
+  for(const b of(typeof projectiles!=='undefined'&&Array.isArray(projectiles)?projectiles:[])){if(!b||b.dead||b.friendly||frozen.has(b)||!Number.isFinite(b.vx))continue;if(dist(b,p)>T.radius)continue;
+   frozen.set(b,{vx:b.vx,vy:b.vy,until:now()+T.freeze});b.vx=0;b.vy=0;if(Number.isFinite(b.life))b.life+=T.freeze;stats.frozen++;}
+  const r=R();for(const e of(r?.enemies||[])){if(!e||e.hp<=0||dist(e,p)>T.radius||!Number.isFinite(e.cd))continue;e.cd+=T.delay;stats.delayed++;}
+  for(const k of['blinkCD','specialCD'])if(Number.isFinite(p[k])&&p[k]>0){p[k]=Math.max(0,p[k]-T.refund);stats.refunds++;}}
+ try{if(typeof floatText==='function')floatText('시간 제어',p.x,p.y,'#bfe6ff');}catch(e){fail(e);}
+ try{if(typeof effects!=='undefined'&&Array.isArray(effects))effects.push({type:'r356-time',r356:true,x:p.x,y:p.y,age:0,life:T.freeze});}catch(e){fail(e);}
+ play('chime');note('time-control',{reason,frozen:frozen.size});return true;}
+function thaw(){const t=now();for(const[b,s]of frozen){if(b.dead||t>=s.until||t<s.until-T.freeze-1){if(!b.dead){b.vx=s.vx;b.vy=s.vy;}frozen.delete(b);}else{b.vx=0;b.vy=0;}}}
+
+// ---------- 매 틱: 위험지대 감시 ----------
+const lastIn=new WeakMap();let tickAt=0,nextTick=0,lastZone=null,stingAt=-1e9,stingTimer=null;
+function before(){const p=P(),list=[];if(!p||typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now();
+ for(const h of hazards){if(!hostile(h)||h.age>=h.warning)continue;list.push(h);if(inside(h,p.x,p.y))lastIn.set(h,t);}return list;}
+function after(warn){const p=P();if(!p)return;const t=now();
+ if(seoha())for(const h of warn){if(h.age<h.warning)continue;const was=lastIn.get(h);if(was===undefined||t-was>T.window)continue;if(inside(h,p.x,p.y))continue;stats.escapes++;trigger('escape');break;}
+ // 카이로 구역: 가까운 예고가 무르익을수록 초침이 빨라진다
+ if(kairo()&&on){let best=null,bd=1e9;for(const h of warn){if(h.age>=h.warning)continue;const d=dist(h,p);if(d<T.tickRange&&d<bd){bd=d;best=h;}}
+  if(best){const u=Math.max(0,Math.min(1,best.age/Math.max(.05,best.warning))),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
+function zoneWatch(){const r=R(),id=r?String(r.id||'')+':'+r.layer:null;if(id===lastZone)return;lastZone=id;if(!kairo())return;
+ const wall=performance.now()/1000;if(wall-stingAt<T.stingGap)return;stingAt=wall;clearTimeout(stingTimer);stingTimer=setTimeout(()=>{if(kairo()){stats.stings++;play('toll');}},800);}
+if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(on){thaw();warn=before();zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
+
+// ---------- 연출: 프레임 띠(scripts/r356-seoha-time-sheet.py, 384×384 10장) — 초침이 도는 십자가·되감기 잔상·멈추는 서리 ----------
+const SHEET={path:'assets/r356/seoha-time-control.webp',cell:384,frames:10,img:null,ok:false,err:false};
+function sheet(){if(SHEET.img||typeof Image!=='function')return SHEET;try{const im=new Image();im.decoding='async';im.onload=()=>{SHEET.ok=true;};im.onerror=()=>{SHEET.err=true;};
+ im.src=typeof urlFor==='function'?urlFor(SHEET.path):'./'+SHEET.path;SHEET.img=im;}catch(e){fail(e);}return SHEET;}
+function drawTime(e){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const p=P();const x=p?p.x:e.x,y=p?p.y:e.y,q=project(x,y),k=Math.max(0,Math.min(.999,e.age/e.life)),h=typeof actorHeight==='function'?actorHeight():60;
+ const sh=sheet();if(!sh.ok)return;const reduced=typeof settings!=='undefined'&&settings.reducedMotion;const f=reduced?4:Math.min(sh.frames-1,Math.floor(k*sh.frames)),size=h*1.8;
+ ctx.save();try{ctx.globalCompositeOperation='screen';/* 영웅 몸을 가리지 않게 머리 위(발에서 1.3×키)에 둔다 */ctx.globalAlpha=.9;ctx.drawImage(sh.img,f*sh.cell,0,sh.cell,sh.cell,q.x-size/2,q.y-h*1.3-size/2,size,size);
+  // 멈춘 적 투사체: 같은 띠의 서리 프레임(5)을 작게
+  for(const[b]of frozen){if(b.dead)continue;const bq=project(b.x,b.y),s2=h*.8;ctx.globalAlpha=.55;ctx.drawImage(sh.img,5*sh.cell,0,sh.cell,sh.cell,bq.x-s2/2,bq.y-h*.3-s2/2,s2,s2);}}
+ catch(err){fail(err);}finally{ctx.restore();}}
+sheet();
+if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.r356){try{if(on)drawTime(e);}catch(err){fail(err);}return;}return base.call(this,e,...a);};}
+
+function set(v){on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on){for(const[b,s]of frozen)if(!b.dead){b.vx=s.vx;b.vy=s.vy;}frozen.clear();}return on;}
+window.__STORYWORLD_KAIRO_HOMAGE_R356__=Object.freeze({revision:REV,tuning:T,on:()=>on,set,trigger,play,isKairo:kairo,isSeoha:seoha,
+ inspect:()=>({revision:REV,on,kairo:kairo(),seoha:seoha(),readyIn:Math.max(0,+(readyAt-now()).toFixed(2)),frozen:frozen.size,audio:!!A(),stats:JSON.parse(JSON.stringify(stats)),log:log.slice(),lastError})});
+})();
