@@ -7,7 +7,7 @@ const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
 // ---- 정적 ----
 for(const f of [F,'fx-d2s-r106.js','hero-fx-r102.js','hud-bgm-hwando-w-r313.js'])ok(fs.readFileSync(path.join(R,'client-source',f),'utf8')===fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),f+' runtime-text 사본 일치');
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
-ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-hexagram-r341\.js"><\/script><script src="\.\/hwando-w-cross-r348\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(enemy-hexagram-r341 뒤, combat-r118 앞)');
+ok(html.split('"./'+F+'"').length===2&&/<script src="\.\/enemy-hexagram-r341\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*<script src="\.\/hwando-w-cross-r348\.js"><\/script>(?:<script src="\.\/[a-z0-9-]+\.js"><\/script>)*\s*<script src="\.\/combat-r118\.js">/.test(html),'index.html 스크립트 태그 한 번(enemy-hexagram-r341 뒤, combat-r118 앞)');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"),'verify-r96-public.py 기대 목록');
 ok(/node r96\/qa\/r348\/hwando-w-cross-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8'));ok(JSON.stringify(man).includes(F),'runtime-manifest 에 들어 있음');

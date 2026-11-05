@@ -162,7 +162,7 @@ function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const s=SPR(),w=h*(1.05+.4*
 // R107: wings follow the hero's facing. Facing the camera (s) → front view behind the body; facing away (n) →
 // back view drawn over the body; east/west → side view (art faces west, mirrored for east). Folded while idle.
 const WING_FOUR={front:'s',back:'n',left:'w',right:'e'};
-function wingSector(p){let d=null;try{d=window.__STORYWORLD_PHASE1_ART__?.hero?.()?.direction;}catch(_){}if(WING_FOUR[d])d=WING_FOUR[d];if(!d||d.length>2)d=p.currentVisualSector||WING_FOUR[p.direction]||'s';return d;}
+function wingSector(p){let d=null;try{/* R354(사용자 2026-11-05 "환도영웅 날개달리는거 좌우방향맞게"): 환도는 R271 이 몸 그림 방향을 정하므로 그 방향(n·e·w)을 따른다 — 엔진 방향은 정면(s)에 머물렀다 */const H=window.__STORYWORLD_HWANDO_R271__;if(p&&p.hero==='hwando'&&H?.active?.()){let hd=H.state?.()?.dir;if(hd==='s'){const D=window.__STORYWORLD_HWANDO_R277__;if(D?.on?.()&&D.down)hd=D.down();}/* R349: 환도는 아래 그림이 없다 */if(hd==='n'||hd==='e'||hd==='w'||hd==='s')d=hd;}if(!d)d=window.__STORYWORLD_PHASE1_ART__?.hero?.()?.direction;}catch(_){}if(WING_FOUR[d])d=WING_FOUR[d];if(!d||d.length>2)d=p.currentVisualSector||WING_FOUR[p.direction]||'s';return d;}
 const wingHold=new WeakMap();
 function wingView(p){const d=wingSector(p),seraph=skillPose(p)?.kind==='r'/* R326: R 세라핌은 옆을 봐도 양 날개를 몸 뒤로 활짝(옆모습 한쪽 날개를 2.2배로 키우면 한쪽만 거대하게 보였다) */,v=seraph?'front':d[0]==='n'?'back':d==='e'||d==='w'?'side':'front',st=wingHold.get(p);if(seraph){const ns={v,flip:false,at:time};wingHold.set(p,ns);return ns;}
  if(st&&st.v!==v&&time-st.at<.12)return st;const ns=st&&st.v===v?{...st,flip:d==='e'}:{v,flip:d==='e',at:time};wingHold.set(p,ns);return ns;}
