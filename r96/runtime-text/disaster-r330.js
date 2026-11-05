@@ -66,14 +66,14 @@ const SIGIL=1.0;
 //  화상·중독·피폭은 시간당 피해, 빙결·젖음은 이동 감속. 공명 방어(guard)·무적은 R51 규칙대로 피해를 막는다(hurt 를 거침).
 const ST={burn:{name:'화상',dur:3,tickEvery:.5,dmg:.06,pal:P.ember},poison:{name:'중독',dur:4,tickEvery:.6,dmg:.05,pal:P.rotL||P.rot},rad:{name:'방사능 피폭',dur:5,tickEvery:.7,dmg:.045,pal:P.rad},
  chill:{name:'빙결',dur:2.5,slow:.62,pal:P.frost},wet:{name:'젖음',dur:3,slow:.8,pal:P.water}};
-const zones=[],statusOf=new WeakMap();
+const zones=[],statusOf=new WeakMap(),zoneFx=new WeakMap();
 function stOf(a){let s=statusOf.get(a);if(!s){s={};statusOf.set(a,s);}return s;}
-function zone(fxKind,x,y,R,start,life,D,st){const zr={x,y,R,start,end:start+life,D,st,src:CUR};zones.push(zr);
- /* 협동 손님도 남는 불길·독안개를 보도록, 피해 0 짜리 엔진 위험지대로 모양·수명을 함께 실어 보낸다(스냅숏으로 복제됨 — Codex 리뷰) *//* (영역이 실제로 시작될 때 tickStatus 가 만든다) */if(zones.length>30)zones.shift();if(fxKind)push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
+function zone(fxKind,x,y,R,start,life,D,st){const zr={x,y,R,start,end:start+life,D,st,src:CUR};zones.push(zr);if(!fxKind){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(Math.abs(f.x-x)<.01&&Math.abs(f.y-y)<.01){zr.f=f;break;}}}
+ /* 협동 손님도 남는 불길·독안개를 보도록, 피해 0 짜리 엔진 위험지대로 모양·수명을 함께 실어 보낸다(스냅숏으로 복제됨 — Codex 리뷰) *//* (영역이 실제로 시작될 때 tickStatus 가 만든다) */if(zones.length>30)zones.shift();if(fxKind)zr.f=push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
 function giveStatus(a,st,D,owner){const s=ST[st];if(!s)return;const status=stOf(a),t=T(),cur=status[st];if(!cur){status[st]={until:t+s.dur,D,next:t+(s.tickEvery||0),owner};stats.status=(stats.status||0)+1;
    try{/* 엔진 fx(전역 함수)는 이 파일 안의 fx 배열에 가려지므로 window 로 부른다 */if(typeof window.fx==='function')window.fx('text',a.x,a.y,{text:s.name,color:'#e8b0a0',life:.9});}catch(_){}}else{cur.until=Math.max(cur.until,t+s.dur);cur.D=Math.max(cur.D,D);if(owner)cur.owner=owner;}}
 function hurtAs(a,dmg,src){const c=COOP();if(c?.mode?.()==='host'&&typeof c.withPlayer==='function')return c.withPlayer(a,()=>hurt(dmg,src));return hurt(dmg,src);}
-function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;if(!z.h){try{z.h=hz(z.src?.e||{id:null},z.x,z.y,z.R,0,Math.max(.1,z.end-t),0,{kind:'zone-'+z.st,r330Zone:true,st:z.st})||1;}catch(err){fail(err);z.h=1;}}for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
+function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start||t>z.end)continue;if(!z.h){try{z.h=hz(z.src?.e||{id:null},z.x,z.y,z.R,0,Math.max(.1,z.end-t),0,{kind:'zone-'+z.st,r330Zone:true,st:z.st})||1;if(z.h!==1&&z.f)zoneFx.set(z.h,z.f);}catch(err){fail(err);z.h=1;}}for(const a of hs)if(a.hp>0&&Math.hypot(a.x-z.x,a.y-z.y)<z.R)giveStatus(a,z.st,z.D,z.src?.e);}
  for(let i=zones.length-1;i>=0;i--)if(t>zones[i].end)zones.splice(i,1);
  for(const a of hs){const status=stOf(a);for(const k of Object.keys(status)){const s=status[k],d=ST[k];if(t>s.until||!(a.hp>0)){delete status[k];continue;}
   if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true,owner:s.owner||undefined});/* 시전한 적을 붙여 난이도 배율(enemySource)이 적용되게 — Codex 리뷰 */}catch(err){fail(err);}}}}}
@@ -199,7 +199,7 @@ function drawBare(h){const S0=SPR();if(!S0||typeof project!=='function')return;c
 function install(){
  if(typeof moveActor==='function'){const base=moveActor;moveActor=function(a,dx,dy,...r){if(on&&a){const m=slowMul(a===player?actorNow():a);if(m<1){dx*=m;dy*=m;}}return base.apply(this,[a,dx,dy,...r]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r330-fx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330&&SPR()){if(h.r330Zone&&!guest())return;/* 호스트는 자기 fx 로 이미 그린다 *//* 칠한 스프라이트를 끈 설정(r106.fxsprites)이면 원래 위험지대 그림으로 — 보이지 않는 피해 방지(Codex 리뷰) */if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
+ if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330&&SPR()){if(h.r330Zone&&!guest()){const zf=zoneFx.get(h);if(zf&&fx.includes(zf))return;/* 호스트는 자기 fx 로 이미 그린다 — 그 그림이 개수 제한으로 밀려났으면 아래 drawBare 로 대신(Codex 리뷰) */try{drawBare(h);}catch(err){fail(err);}return;}/* 칠한 스프라이트를 끈 설정(r106.fxsprites)이면 원래 위험지대 그림으로 — 보이지 않는 피해 방지(Codex 리뷰) */if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){purge(true);const r=await base.apply(this,a);try{purge(true);}catch(e){fail(e);}return r;};}
  if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=last==null?0:Math.max(0,Math.min(.1,t-last));last=t;tickAll(dt);}catch(e){fail(e);}return r;};}
  return true;}
