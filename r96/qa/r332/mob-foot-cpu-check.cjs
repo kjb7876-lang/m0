@@ -6,7 +6,9 @@ assert.strictEqual(src,fs.readFileSync(path.join(root,'runtime-text/mob-foot-r33
 const idx=fs.readFileSync(path.join(root,'runtime-text/index.html'),'utf8');assert(idx.split('"./mob-foot-r332.js"').length===2);ok('script tag loaded once');
 assert(/if\(typeof drawEnemy==='function'\)\{const baseE=drawEnemy;drawEnemy=function/.test(src)&&/depth>0&&a\.length>=8/.test(src));ok('only adjusts source-rect sprite draws made inside drawEnemy');
 assert(/SKIP=\/atlas\|\\\/fx\\\/\|pixelfx/.test(src)&&/sh>=48&&sw>=16/.test(src));ok('effect atlases and small images are left alone');
-assert(/s>0&&s<=MAXFIX/.test(src)&&/MAXFIX=24/.test(src));ok('shift is downward only and capped (24 px of the sheet)');
+assert(/return s>0\?Math\.min\(s,MAXFIX\):0/.test(src)&&/MAXFIX=24/.test(src));ok('shift is downward only and clamped to 24 px (oversized feet still move by the cap, not skipped)');
+assert(/r\.regular=W>0&&H>0&&W%sw===0&&H%sh===0/.test(src)&&/!r\.regular\|\|sx%sw\|\|sy%sh/.test(src)&&/poses\|boss-actions/.test(src));ok('only regular grid sheets are normalized; irregular pose atlases keep their own pivots');
+assert(/bodyDrawn:\(e,img,q,T\)=>H\.bodyDrawn\(e,img,adjQ\(img,q\),T\)/.test(src)&&/__STORYWORLD_HIT_CENTER_R259__\?\.bodyDrawn\?\.\(curE,im,a\.slice\(0,8\)/.test(src));ok('R259 hit-centre recording receives the corrected destination (painted + R306 pixel paths)');
 assert(!/ctx\.filter/.test(src)&&!/toDataURL|putImageData/.test(src));ok('no filters, source assets never modified');
 // 순수 계산: 가짜 이미지 데이터로 footOf/rowInfo/shiftFor 를 돌린다(실측한 root-bound-ghoul 발 175·178·180·178·177·179)
 // 두 줄에 걸친 걷기(R248·R306: 0~3 윗줄, 4~7 아랫줄) — 기준선은 시트 전체에서 하나(Codex 리뷰: 줄마다 따로면 줄이 바뀔 때 튄다)
