@@ -79,4 +79,11 @@ assert(/function clockHook\(e,move\)\{[^\n]*move\(e,\['r330Next'\]\);/.test(src)
 assert(/const wf=push\(\{k:'wisp'/.test(src)&&/const f=fx\.includes\(wf\)\?wf:null;if\(f\)\{f\.tx=x;f\.ty=y;\}/.test(src)&&!/q\.launch===d/.test(src));ok('wisp callback holds its own visual (Samong-shifted launch time still links the flight target)');
 assert(/const was=CUR;CUR=q\.src\|\|null;try\{q\.fn\(\);\}catch\(err\)\{fail\(err\);\}finally\{CUR=was;\}/.test(src));ok('queued callbacks run with their caster as CUR, so visuals they push keep src (Samong shift reaches impact marks)');
 assert(/coopEventR62:'r330:'\+k\+':'\+\(\+\+tickSerial\)/.test(src));ok('each status tick carries a distinct R62 co-op damage token');
+{const hz5=[];const p5={x:5,y:5,hp:1000};const bb={id:'z',name:'폭탄',boss:true,hp:100,x:8,y:5,damage:20,spawnState:'active',r330Next:1e9};const room5={id:'r',enemies:[bb]};
+ const env5={window:{},localStorage:{getItem:()=>null,setItem(){}},hazards:hz5,effects:[],player:p5,started:true,ctx:{scope:(o,f)=>f()},project:(x,y)=>({x,y}),actorHeight:()=>60,toast(){},hurt(){},blocked:()=>false,uid:0};
+ const G5=new Function(...Object.keys(env5),'let time=0,room=null,tick=function(){},drawEffect=function(){},drawHazard=function(){},enterRegion=async function(){},moveActor=function(a,dx,dy){a.x+=dx;a.y+=dy;};'+src+';return {W:window,setT:v=>{time=v;},setRoom:r=>{room=r;},tick:()=>tick()};')(...Object.values(env5));
+ G5.setRoom(room5);const A5=G5.W.__STORYWORLD_DISASTER_R330__;A5.set(true);G5.setT(1);G5.tick();A5.cast(bb,'volcano');let t=1;for(;t<5;t+=.05){G5.setT(t);G5.tick();}
+ const marks=()=>hz5.filter(h=>h.r330Zone);assert(marks().length>0,'zone markers');assert(marks().every(h=>h.owner==null),'markers ownerless');
+ for(let i=hz5.length-1;i>=0;i--)if(hz5[i].r330Zone)hz5.splice(i,1);/* 엔진이 치움 */G5.setT(t+.05);G5.tick();
+ assert(marks().length>0,'markers recreated');ok('zone markers are ownerless (survive caster cleanup) and are recreated if the engine removes them');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static + CPU fake engine; headless capture separately; no GPU or device'}));
