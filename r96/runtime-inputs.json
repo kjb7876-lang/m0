@@ -4064,9 +4064,8 @@
     "bgm-pick-r353.js",
     "hwando-w-cross-r348.js",
     "hero-visibility-r350.js",
-    "kairo-homage-r356.js",
-    "assets/r356/seoha-time-control.webp",
-    "assets/r356/index.json"
+    "samong-wide-r355.js",
+    "kairo-homage-r356.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5141,5 +5140,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "68fb94ee7a2787de966215554d9fa89e59a54c049ddc22ab5ca302bb91f1c2a5"
+  "runtimeManifestSHA256": "464d47300acbb63babd9879f06354a24050c00c936820cc1d64bde0aa22d4c0b"
 }

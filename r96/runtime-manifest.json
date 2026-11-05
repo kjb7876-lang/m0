@@ -14718,16 +14718,6 @@
       "sha256": "fe7b8a9924a80db4c1a1472e4ce5bcebdbbbdb449cae40c86673972753e7df88"
     },
     {
-      "path": "assets/r356/index.json",
-      "bytes": 5941,
-      "sha256": "449234d4be861ed5259424baa95c4a1a01117733abaa4cdddae6a03223f83a22"
-    },
-    {
-      "path": "assets/r356/seoha-time-control.webp",
-      "bytes": 439852,
-      "sha256": "a78180a52f8aabd44c709305fa374a5265cbfce4c526d51ba9bebde13593c902"
-    },
-    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23609,8 +23599,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569505,
-      "sha256": "fbdb5c5a50b27370218e41cb6ee72c149de6bc9e7975573dcad226f7797feb5c"
+      "bytes": 6569550,
+      "sha256": "5f4100fa63395df3bb9459664f50310a25ca1c0c4cabbf85e2fd8609af7376c6"
     },
     {
       "path": "intro-r140.js",
@@ -23993,6 +23983,11 @@
       "sha256": "e0a0f613dee5a9c869361b1feabb8df5ab7658af9c1c42b7304b5a5a5e20fb21"
     },
     {
+      "path": "samong-wide-r355.js",
+      "bytes": 15333,
+      "sha256": "1396f1022bb6d16319ecbf558b84210b2224b05a271b5b63e6e751ae982cd615"
+    },
+    {
       "path": "samong-zones-r115-data.js",
       "bytes": 80084,
       "sha256": "61dbbc685d68c3ffe22ff4e0853c7d5de075da866b43fae8b097aa7697df5feb"
@@ -24283,9 +24278,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4856,
-  "totalBytes": 932453356,
-  "webHTMLSha256": "fbdb5c5a50b27370218e41cb6ee72c149de6bc9e7975573dcad226f7797feb5c",
+  "fileCount": 4855,
+  "totalBytes": 932022941,
+  "webHTMLSha256": "5f4100fa63395df3bb9459664f50310a25ca1c0c4cabbf85e2fd8609af7376c6",
   "largest": [
     {
       "path": "index.html",
