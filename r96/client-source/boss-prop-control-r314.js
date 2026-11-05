@@ -32,7 +32,10 @@ function fit(e,start){const rows=ctx.commands.slice(start).filter(c=>c.kind==='i
  const f=bodyFrac(best),body=h*f,rage=e.r205Enraged?2:1,want=AH()*.98*2*rage;
  // Existing larger drawings are retained unless the viewport cap is reached.
  const cap=(typeof H==='number'?H:800)*.7,k=Math.min(Math.max(1,want/body),cap/h),p=project(e.x,e.y);
- for(const c of rows)c.points=c.points.map(([x,y])=>[p.x+(x-p.x)*k,p.y+(y-p.y)*k]);
+ const sc=([x,y])=>[p.x+(x-p.x)*k,p.y+(y-p.y)*k];
+ for(const c of rows){c.points=c.points.map(sc);
+  // Authored body clips (clipPolygonPx) are screen-space paths recorded with this draw; scale copies so the enlarged art is not cut.
+  if(Array.isArray(c.clips)&&c.clips.length)c.clips=c.clips.map(cl=>({...cl,paths:(cl.paths||[]).map(q=>({...q,points:(q.points||[]).map(sc)}))}));}
  // R259 measured the body inside drawEnemy before this resize; keep its hit centre on the drawn boss.
  try{window.__STORYWORLD_HIT_CENTER_R259__?.rescale?.(e,p.x,p.y,k);}catch(_){}
  // Native drawEnemy's unmodified height is actorHeight × spriteRect.height × defScale.

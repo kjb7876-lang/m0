@@ -56,6 +56,6 @@ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,.
 function aim(x,y,lift=0){const q=typeof project==='function'?project(x,y):{x:0,y:0};try{const e=on&&enemyAt(x,y),v=e&&anyCentre(e);if(v){stats.aimed++;return {x:v.cx,y:v.cy+lift};}}catch(err){fail(err);}return q;}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 // R314: an overlay that scales an already-recorded body draw keeps the cached centre in step.
-function rescale(e,px,py,k){const v=VC.get(e);if(!v||!(k>0))return;const X=x=>px+(x-px)*k,Y=y=>py+(y-py)*k;VC.set(e,{...v,cx:X(v.cx),cy:Y(v.cy),top:Y(v.top),bottom:Y(v.bottom),h:v.h*k,w:v.w*k});}
+function rescale(e,px,py,k){const v=VC.get(e);if(!v||!(k>0)||v.scaled)return;const X=x=>px+(x-px)*k,Y=y=>py+(y-py)*k;VC.set(e,{...v,cx:X(v.cx),cy:Y(v.cy),top:Y(v.top),bottom:Y(v.bottom),h:v.h*k,w:v.w*k,scaled:true});}
 window.__STORYWORLD_HIT_CENTER_R259__=Object.freeze({revision:REV,set,centreOf,aim,enemyAt,rescale,bodyDrawn:(e,img,q,T)=>{if(on&&T)bodyRecorder?.(e,img,q,T);},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();
