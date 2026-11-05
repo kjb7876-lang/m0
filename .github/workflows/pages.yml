@@ -81,6 +81,8 @@ jobs:
         run: node r96/qa/r339/menu-cpu-check.cjs
       - name: R341 enemy cross to hexagram CPU check
         run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
+      - name: R348 hwando W cross slash and seven clones CPU check
+        run: node r96/qa/r348/hwando-w-cross-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
