@@ -71,6 +71,13 @@ def validate(root):
                 errors.append('weighted score mismatch ' + item['id'])
             if not item.get('files') or any(not (root / f).is_file() for f in item.get('files', [])):
                 errors.append('missing review image ' + item['id'])
+            hashes = item.get('fileSha256') or {}
+            if set(hashes) != set(item.get('files', [])):
+                errors.append('review not bound to image hashes ' + item['id'])
+            for f, sha in hashes.items():
+                p = root / f
+                if p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest() != sha:
+                    errors.append('reviewed image bytes changed ' + item['id'] + '/' + f)
             if item['status'] == '검증됨':
                 errors.append('headless-only evidence cannot establish final verification ' + item['id'])
             scored += 1

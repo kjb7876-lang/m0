@@ -15,6 +15,8 @@ if(process.env.ART_AUDIT_RESUME==='1'&&fs.existsSync(path.join(output,'capture-m
  const redo=new Set(process.env.ART_AUDIT_RECAPTURE?.split(',')||[]);
  report.captures=prior.captures.filter(r=>!redo.has(r.id.replace(/^(pc|mobile)-/,'')));report.resumedFrom=prior.startedAt;
  report.priorFailures=prior.failures;report.priorFatal=prior.fatal;
+ /* page errors from the earlier run are not tied to a scene, so they stay in errors (validation-blocking) until a fresh, non-resumed run */
+ report.errors=(prior.errors||[]).map(e=>({...e,carriedFrom:prior.startedAt}));
 }
 const captured=(device,name)=>report.captures.some(r=>r.id===device+'-'+name);
 const sceneFilter=process.env.ART_AUDIT_SCENES?.split(',');

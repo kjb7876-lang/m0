@@ -3,6 +3,7 @@
 import contextlib
 import importlib.util
 import io
+import hashlib
 import json
 import tempfile
 import unittest
@@ -33,7 +34,9 @@ class EvidenceTests(unittest.TestCase):
                              'state': {'renderer': 'three', 'viewport': {'width': 8, 'height': 8, 'dpr': dpr}}})
         self.write('capture-manifest.json', {'baseSHA': 'fixture', 'captures': captures, 'finishedAt': 'fixture'})
         self.write('audit-plan.json', {'scenes': ['hub']})
+        sha = lambda n: hashlib.sha256((self.root / n).read_bytes()).hexdigest()
         self.review = {'items': [{'id': 'fixture-only', 'files': ['pc-hub.jpg', 'mobile-hub.jpg'],
+                                 'fileSha256': {n: sha(n) for n in ['pc-hub.jpg', 'mobile-hub.jpg']},
                                  'scores': dict(style=9, form=9, readability=9, applicability=9, reproducibility=9),
                                  'weighted': 9, 'status': '임시'}]}
         self.write('independent-review.json', self.review)
@@ -85,6 +88,17 @@ class EvidenceTests(unittest.TestCase):
         index['captures'][0]['sha256'] = index['captures'][1]['sha256']
         self.write('evidence-index.json', index)
         self.assertTrue(any('does not match manifest' in e for e in self.check_result()['errors']))
+
+    def test_review_scores_are_bound_to_reviewed_bytes(self):
+        Image.new('RGB', (8, 8), '#102030').save(self.root / 'pc-hub.jpg')
+        with contextlib.redirect_stdout(io.StringIO()):
+            prepare(self.root)
+        self.assertTrue(any('reviewed image bytes changed' in e for e in self.check_result()['errors']))
+
+    def test_review_without_hashes_is_rejected(self):
+        del self.review['items'][0]['fileSha256']
+        self.write('independent-review.json', self.review)
+        self.assertTrue(any('not bound to image hashes' in e for e in self.check_result()['errors']))
 
     def test_wrong_screenshot_dimensions_are_rejected(self):
         Image.new('RGB', (10, 10)).save(self.root / 'mobile-hub.jpg')
