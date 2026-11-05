@@ -7,7 +7,7 @@
 //  · 끄기: localStorage['storyworld.r338.gate']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_GATE_R338__)return;
-const REV='R338-samong-gate-2',KEY='storyworld.r338.gate',REACH=2.6;
+const REV='R338-samong-gate-3',KEY='storyworld.r338.gate',REACH=2.6;
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={placed:0,enters:0,locked:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const SM=()=>window.__STORYWORLD_SAMONG_R103__;
@@ -32,7 +32,11 @@ function tickGate(){try{wrapWorld();const g=current();const has=typeof effects!=
  if(g&&!has){SENT.x=g.x;SENT.y=g.y;SENT.age=0;effects.push(SENT);}else if(!g&&has)effects.splice(effects.indexOf(SENT),1);}catch(e){fail(e);}}
 const PAL={a:[150,120,60],b:[255,236,190]},VIO={a:[60,40,90],b:[200,180,255]};
 function draw(){const g=current();if(!g||typeof project!=='function')return;const S=window.__STORYWORLD_FX_SPRITES_R106__;const q=project(g.x,g.y),z=typeof zoom==='number'?zoom:1,h=typeof actorHeight==='function'?actorHeight():60,t=T();stats.draws++;
- if(S&&S.on&&S.on()){S.draw('glow',VIO,q.x,q.y,h*2.2,h*1.1,{alpha:.45});S.draw('cross',PAL,q.x,q.y,h*2,h*2,{squash:.5,angle:t*.35,alpha:.9});S.draw('ring',VIO,q.x,q.y,h*2.4,h*1.2,{alpha:.4+.15*Math.sin(t*2)});S.draw('pillar',VIO,q.x,q.y,h*.9,h*2.6,{alpha:.45});}
+ if(S&&S.on&&S.on()){/* R338c: 헤드리스 캡처에서 입구가 거의 안 보였다(영웅 근처 흐리게 + 낮은 alpha) → overHero, 바닥 십자가(어두운 테두리 위 금빛)와 서 있는 빛 십자가로 또렷하게. 아군 상징은 십자가만(원형 마법진 고리 없음, SKILL.md 11절) */
+  const o={overHero:true},pulse=.85+.15*Math.sin(t*2.2),INK={a:[10,8,6],b:[60,48,24]},SILVER={a:[170,180,190],b:[252,250,240]};
+  S.draw('glow',PAL,q.x,q.y,h*2.6,h*1.3,{...o,alpha:.55*pulse});
+  S.draw('cross',INK,q.x,q.y,h*2.25,h*2.25,{...o,squash:.5,alpha:.7,blend:'source-over'});S.draw('cross',PAL,q.x,q.y,h*2.1,h*2.1,{...o,squash:.5,alpha:.95});
+  S.draw('pillar',SILVER,q.x,q.y,h*.8,h*2.8,{...o,alpha:.5*pulse});S.draw('cross',SILVER,q.x,q.y-h*1.25,h*.9,h*1.2,{...o,alpha:.9*pulse});S.draw('glow',SILVER,q.x,q.y-h*1.25,h*1.2,h*1.2,{...o,alpha:.45*pulse});}
  const near=Math.hypot(player.x-g.x,player.y-g.y)<REACH,key=typeof KR291!=='undefined'&&KR291?KR291.i:'C';
  ctx.save();try{ctx.font=Math.round(12*Math.max(.8,Math.min(1.3,z)))+'px sans-serif';ctx.textAlign='center';ctx.fillStyle=near?'rgba(255,236,190,.98)':'rgba(220,206,240,.85)';
   const label=(near?key+' · ':'')+'사몽 에피소드 입구',col=ctx.fillStyle;/* 기록기는 strokeText 가 없어 어두운 글자를 비켜 겹쳐 외곽처럼 */ctx.fillStyle='rgba(8,6,12,.85)';for(const[dx,dy]of[[-1,0],[1,0],[0,-1],[0,1]])ctx.fillText(label,q.x+dx,q.y-h*1.7+dy);ctx.fillStyle=col;ctx.fillText(label,q.x,q.y-h*1.7);}finally{ctx.restore();}}
