@@ -85,6 +85,8 @@ jobs:
         run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
       - name: R348 hwando W cross slash and seven clones CPU check
         run: node r96/qa/r348/hwando-w-cross-cpu-check.cjs
+      - name: R353 BGM pick in settings CPU check
+        run: node r96/qa/r353/bgm-pick-cpu-check.cjs
       - name: R351 slayer new walk/attack motion CPU check
         run: node r96/qa/r351/slayer-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check

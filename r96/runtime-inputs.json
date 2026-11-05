@@ -4061,6 +4061,7 @@
     "assets/r351/slayer/attack-w.webp",
     "assets/r351/slayer/walk-w.webp",
     "assets/r351/slayer/index.json",
+    "bgm-pick-r353.js",
     "hwando-w-cross-r348.js"
   ],
   "mediaPaths": [
@@ -5136,5 +5137,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9065ccd5470b1a3c90eb8fdefed548dd2350f129b43af211c9654e12103eb235"
+  "runtimeManifestSHA256": "183e526de3afc2e770173662130590eaf61b153d0aea30b66ac3e0f9a5535d5e"
 }
