@@ -11,6 +11,7 @@
  * 게임이 연 audioContext·masterGain 을 빌려 쓰고, 효과음 끔·음량 0·탭 숨김이면 소리를 내지 않는다. 협동 손님(guest)은 판정을 바꾸지 않는다.
  * 끄기: localStorage['storyworld.r356.kairo']='0'. Canonical source; copied to runtime-text by scripts/sync-r99.py. */
 (()=>{'use strict';
+const r62Major=e=>!!e&&!e.r61Summoned&&!!(e.boss||e.midboss||e.persona||e.cosmic||e.trial);
 if(window.__STORYWORLD_KAIRO_HOMAGE_R356__)return;
 const REV='R356-kairo-homage-1',KEY='storyworld.r356.kairo';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
@@ -90,7 +91,7 @@ const isSeoha=p=>!!(p&&p.hero==='seoha'&&p.hp>0);
 const busy=e=>!!(e.attack||e.rangedWindup>0||e.r61Action);
 function settle(e){const d=e.r356Delay;if(!(d>0))return;delete e.r356Delay;if(e.hp<=0)return;const t=now();
  e.cd=Math.max(0,+e.cd||0,+e.rest||0)+d;
- try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;if(f?.ownerState&&f.major?.(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
+ try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;/* R62 은 major 를 내보내지 않는다 — index.html R62 의 major(e) 와 같은 조건을 그대로 쓴다 */if(f?.ownerState&&r62Major(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
 function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha(p))return false;if(readyIn(p)>0)return false;readyAt.set(p,now()+T.cooldown);stats.triggers++;
  if(solo()){
   for(const b of(typeof projectiles!=='undefined'&&Array.isArray(projectiles)?projectiles:[])){if(!b||b.dead||b.friendly||frozen.has(b)||!Number.isFinite(b.vx))continue;if(dist(b,p)>T.radius)continue;
