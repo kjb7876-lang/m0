@@ -6,7 +6,7 @@
 //  · 끄기: localStorage['storyworld.r339.menu']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_HUD_MENU_R339__)return;
-const REV='R339-menu-1',KEY='storyworld.r339.menu';
+const REV='R339-menu-2',KEY='storyworld.r339.menu';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={menus:0,proxied:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const HIDE=['story-code-button','goldHudOpen','goldHudCast','goldHudSecond','goldHudThird','r263HeroBtn','journalBtn','mapBtn','saveBtn'];
@@ -19,8 +19,9 @@ const GROUPS=[
  ['설정',[['menuSettings'],['menuHelp'],['menuDiag'],['proxy:story-code-button','777']]],
  ['처음으로',[['menuTitle'],['campaignTitle54'],['campaignNewMenu54']]]];
 const RARE=['packImages','packAudio'];
+const CLOSE_FIRST=new Set(['goldHudCast']);
 const CSS=`
-header .topnav #${HIDE.join(',header .topnav #')},header .r93-dock{display:none!important}
+header .topnav #${HIDE.join(',header .topnav #')},header #goldHudR72,header #story-code-button{display:none!important}
 #panel .r339Menu{display:flex;flex-direction:column;gap:12px;margin-top:6px}
 #panel .r339Group h4{margin:0 0 6px;font:600 11px/1.4 'Malgun Gothic',serif;letter-spacing:.14em;color:#c8a86a;text-transform:none}
 #panel .r339Grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
@@ -32,7 +33,7 @@ header .topnav #${HIDE.join(',header .topnav #')},header .r93-dock{display:none!
 function style(){if(document.getElementById('r339Style'))return;const s=document.createElement('style');s.id='r339Style';s.textContent=CSS;document.head.appendChild(s);}
 function proxy(id,label){const src=document.getElementById(id);if(!src)return null;const b=document.createElement('button');b.type='button';b.dataset.r339Proxy=id;b.textContent=label||src.textContent.trim();
  if(id==='story-code-button')b.textContent='777 · '+src.textContent.trim().replace(/^777\s*/,'');
- b.onclick=()=>{stats.proxied++;try{src.click();}catch(e){fail(e);}};return b;}
+ b.onclick=()=>{stats.proxied++;try{/* 전투 동작(황금실 연속)은 메뉴가 열려 있으면(modal) 거절되므로 먼저 닫는다 — Codex 리뷰 */if(CLOSE_FIRST.has(id)){if(typeof closePanel==='function')closePanel();else document.getElementById('menuClose')?.click();}src.click();}catch(e){fail(e);}};return b;}
 function build(){try{if(!on)return;const panel=document.getElementById('panel');const actions=panel?.querySelector('.actions');if(!actions||!panel.querySelector('#menuClose'))return;stats.menus++;
  let box=panel.querySelector('.r339Menu');if(!box){box=document.createElement('div');box.className='r339Menu';actions.parentNode.insertBefore(box,actions);}
  // 개발용 문구 숨김
