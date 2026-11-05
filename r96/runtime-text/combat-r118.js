@@ -177,6 +177,8 @@
   q.appendChild(box);box.querySelectorAll('[data-r118]').forEach(el=>el.onchange=()=>{set({[el.dataset.r118]:el.checked});if(el.dataset.r118==='combatRun'&&el.checked)try{guide=true;auto=true;}catch(_){}});}
  if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{addSettings();}catch(err){fail(err);}return r;};}
 
- window.__STORYWORLD_COMBAT_R118__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,hpCurve,splashShape:k=>playing()?splashShape(k):null,clean:()=>[...CLEAN],
+ /* R356(윤서하 시간 제어): 보스 감독 일정을 밖에서 미룰 수 있게 — 다음 시전 시각(next)을 max(next,지금)+d 로 */
+function directorDelay(e,d){if(!e||!(d>0))return false;const t=now();let s=boss.get(e);if(!s||s.room!==room){s={room,next:t+2.2,step:0};boss.set(e,s);}s.next=Math.max(finite(s.next),t)+d;return true;}
+window.__STORYWORLD_COMBAT_R118__=Object.freeze({revision:REV,directorDelay,prefs:()=>({...prefs}),set,hpCurve,splashShape:k=>playing()?splashShape(k):null,clean:()=>[...CLEAN],
   inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats,casts:{...stats.casts}},face:{sector:face.sector,fighting:face.fighting,foe:face.foe?.id||null},browser:false,GPU:false})});
 })();
