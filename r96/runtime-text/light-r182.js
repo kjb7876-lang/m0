@@ -5,7 +5,7 @@
 //  환경 설정 창의 '시야' 고르기, L 키(전체 → 횃불 → 손전등 → 전체)로 바꾼다. 저장된 R58 시야 값(flashlight58)은 이 모드에 맞춰 둔다.
 (()=>{'use strict';
 if(window.__STORYWORLD_LIGHT_R182__)return;
-const REV='R335-light-6',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
+const REV='R335-light-7',KEY='storyworld.r182.light',MODES=['glow','auto','full','torch','flashlight'],NAME={glow:'은은한 원형(주변 밝고 멀수록 어둡게)',auto:'자동(미로만 횃불·손전등)',full:'전체(환하게)',torch:'횃불(원형)',flashlight:'손전등(부채꼴)'};
 /* R254(사용자 2026-11-03 "미로맵만 횃불or손전등시야(시대상에맞게)이고 나머지상황은 모두전체보이는시야"): 기본은 '자동' — 미로 구역에서만 시대에 맞춰
    (현대·기계 = 손전등, 그 밖 = 횃불) 빛을 쓰고, 나머지는 모두 전체 시야. 예전에 저장된 값은 한 번 '자동'으로 옮긴다(v:254). 직접 고르면 그대로 따른다. */
 /* R335(사용자 2026-11-05 "플레이어 주변 밝고 멀수록 어두운 거 좋은 것 같아 이걸 기본으로"): 기본을 새 '은은한 원형(glow)'으로.
@@ -55,7 +55,7 @@ const GLOW_IN=4.5,GLOW_OUT=13,GLOW_EDGE=.6;
 function glow(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'?TILE:34)*(typeof zoom==='number'?zoom:1),rx=GLOW_OUT*U*Math.SQRT2,cy=o.y-12*(typeof zoom==='number'?zoom:1);
  g.fillStyle='rgba(2,2,7,'+GLOW_EDGE+')';g.fillRect(0,0,b.width,b.height);g.globalCompositeOperation='destination-out';
  const gr=g.createRadialGradient(o.x,cy,0,o.x,cy,rx),k=GLOW_IN/GLOW_OUT;gr.addColorStop(0,'rgba(0,0,0,1)');gr.addColorStop(k,'rgba(0,0,0,1)');gr.addColorStop(k+(1-k)*.45,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');
- g.fillStyle=gr;g.save();g.translate(o.x,cy);g.scale(1,.62);g.translate(-o.x,-cy);g.fillRect(0,0,b.width,b.height/.62+cy);g.restore();
+ g.fillStyle=gr;g.save();g.translate(o.x,cy);g.scale(1,.62);g.translate(-o.x,-cy);/* 눌린 좌표계에서 화면 전체(0~H)를 덮도록 역변환한 사각형 — 위쪽 띠가 비지 않게(Codex 리뷰) */g.fillRect(0,cy-cy/.62,b.width,b.height/.62+2);g.restore();
  g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,cy,0,o.x,cy,GLOW_IN*U*1.3);w.addColorStop(0,'rgba(255,222,170,.06)');w.addColorStop(1,'rgba(255,222,170,0)');g.fillStyle=w;g.fillRect(0,0,b.width,b.height);stats.glowFrames=(stats.glowFrames||0)+1;}
 /* R208 횃불: 사용자 2026-11-01 "횃불시야(스포트라이트)모드하면 플레이어 주변부만 원형으로 확실하게 잘보이게".
    R24 둘레 시야는 반지름이 화면만 해서(8~18칸) 원이 안 보였고, R100 이 시야 밖을 32~58% 밝기로만 낮춰 흐릿했다.
@@ -73,6 +73,6 @@ function torch(g,b){const o=project(player.x,player.y),U=(typeof TILE==='number'
  const hy=o.y-22*(typeof zoom==='number'?zoom:1),hn=g.createRadialGradient(o.x,hy,2,o.x,hy,1.6*U);hn.addColorStop(0,'rgba(0,0,0,1)');hn.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=hn;g.beginPath();g.arc(o.x,hy,1.6*U,0,Math.PI*2);g.fill();
  g.globalCompositeOperation='source-over';const w=g.createRadialGradient(o.x,o.y,0,o.x,o.y,rx);w.addColorStop(0,'rgba(255,190,110,.10)');w.addColorStop(1,'rgba(255,150,70,0)');
  g.save();g.translate(o.x,o.y);g.scale(1,.5);g.translate(-o.x,-o.y);g.fillStyle=w;g.beginPath();g.arc(o.x,o.y,rx,0,Math.PI*2);g.fill();g.restore();stats.torchFrames=(stats.torchFrames||0)+1;}
-let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;const m=mode();if(m==='full'&&typeof settings!=='undefined'&&settings?.flashlight58!==false)apply();else if(m!=='full'&&typeof settings!=='undefined'&&settings?.flashlight58===false)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
+let applyAt=0;(function loop(t){try{if(!(t-applyAt<500)){applyAt=t||0;const m=mode(),w=m!=='full'&&m!=='glow';/* R335: glow 도 full 처럼 R24 시야를 끈다(모바일 기본 flashlight58=true 포함 — Codex 리뷰) */if(typeof settings!=='undefined'&&settings&&(settings.flashlight58!==false)!==w)apply();}frame();}catch(e){fail(e);}requestAnimationFrame(loop);})(0);
 window.__STORYWORLD_LIGHT_R182__=Object.freeze({revision:REV,MODES,mode,choice:()=>prefs.mode,inMaze,mazeLight,set,toggle,apply,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();

@@ -400,7 +400,7 @@
  // direction, so mobile needs no held button and no second hand.
  let overlay=null,lastDir={x:1,y:1},hudAt=0;
  // The maze beam is its own overlay; the player's R24 sight setting is left as it is.
- function forceFlash(on){if(!on){restoreFlash();return;}if(window.__STORYWORLD_LIGHT_R182__?.mode?.()==='full')return;/* R182: 시야 '전체'(기본)에서는 미로도 손전등을 켜지 않는다 */
+ function forceFlash(on){if(!on){restoreFlash();return;}{const lm=window.__STORYWORLD_LIGHT_R182__?.mode?.();if(lm==='full'||lm==='glow')return;}/* R182: 시야 '전체'에서는 미로도 손전등을 켜지 않는다. R335: '은은한 원형'은 light-r182 가 그대로 그린다 */
   // R107: the maze uses the story-mode flashlight (R24 polygon sight, walls block light) so the floor, walls and doors read like story mode with the flashlight on.
   if(S.flashSaved===null)S.flashSaved=settings.flashlight58!==false;if(settings.flashlight58!==true){settings.flashlight58=true;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.add('flashlight-black-r58');}
  function restoreFlash(){if(S.flashSaved===null)return;const v=S.flashSaved;S.flashSaved=null;if(settings.flashlight58!==v){settings.flashlight58=v;window.__STORYWORLD_SIGHT24__?.refresh?.();}document.getElementById('stage')?.classList.toggle('flashlight-black-r58',v!==false);}
@@ -408,7 +408,7 @@
  beamC.style.display='block';if(beamC.width!==c.width||beamC.height!==c.height){beamC.width=c.width;beamC.height=c.height;}return beamC;}
 function ensureOverlay(){if(overlay?.isConnected)return overlay;const stage=document.getElementById('stage');if(!stage)return null;overlay=document.createElement('canvas');overlay.id='r103Flashlight';overlay.setAttribute('aria-hidden','true');overlay.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';stage.appendChild(overlay);return overlay;}
  function rayLen(ox,oy,a,max){const dx=Math.cos(a),dy=Math.sin(a);for(let t=.2;t<max;t+=.18)if(blocked(ox+dx*t,oy+dy*t,.02,room))return t;return max;}
- function drawFlash(){const want=here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark)&&!modal&&window.__STORYWORLD_LIGHT_R182__?.mode?.()!=='full';const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
+ function drawFlash(){const want=here()&&(room.samongR103.stage==='maze'||!!zoneOf(room.samongR103.zone)?.dark)&&!modal&&!['full','glow'].includes(window.__STORYWORLD_LIGHT_R182__?.mode?.());const c=want?ensureOverlay():overlay;if(!c)return;if(!want){if(c.width){c.width=0;c.height=0;}c.style.display='none';if(beamC){beamC.style.display='none';if(beamC.width){beamC.width=0;beamC.height=0;}}return;}c.style.display='block';
   const b=c.parentElement.getBoundingClientRect(),dp=Math.min(2,devicePixelRatio||1);if(c.width!==Math.round(b.width*dp)||c.height!==Math.round(b.height*dp)){c.width=Math.round(b.width*dp);c.height=Math.round(b.height*dp);}
   const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,b.width,b.height);
   const mv={x:(player.moveVX150||0),y:(player.moveVY150||0)};if(Math.hypot(mv.x,mv.y)>.05)lastDir=norm(mv.x,mv.y);else if(player.direction){const w={front:[1,1],back:[-1,-1],left:[-1,1],right:[1,-1]}[player.direction];if(w&&Math.hypot(player.moveVX150||0,player.moveVY150||0)<=.05&&!lastDir)lastDir=norm(w[0],w[1]);}
