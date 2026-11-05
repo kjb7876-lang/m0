@@ -157,8 +157,9 @@ const DRAW={
    if(v>.2)S('smoke',{a:[46,10,16],b:[90,36,40]},q.x,q.y-h*(.6+v),h*1.6,h*1.1,{blend:'source-over',alpha:.4*a});}},
  // 노바: 시전자에서 고리가 퍼지고 사방으로 차지드 볼트가 튄다.
  nova(e,u,h){const F=e.F,c=P(e.x,e.y),v=smooth(clamp(e.t/.45,0,1)),a=1-v,R=h*(.6+5.4*v);
-  S('ring',F,c.x,c.y,R*2,R,{alpha:a});S('ring',pb(F),c.x,c.y,R*1.7,R*.85,{alpha:.7*a});
-  for(let i=0;i<24;i++){const ang=i*TAU/24,qq={x:c.x+Math.cos(ang)*R*.82,y:c.y+Math.sin(ang)*R*.41};S('spark',F,qq.x,qq.y,h*.7,h*.16,{angle:Math.atan2(Math.sin(ang)*.5,Math.cos(ang)),alpha:.8*a});}
+  /* R343(상징 규칙 "영웅=십자가, 원형 고리·마법진=적"): 노바 고리 대신 바닥에 눕는 십자가가 퍼지고, 불꽃은 네 팔을 따라 뻗는다 */
+  S('cross',F,c.x,c.y,R*1.9,R*1.9,{squash:.5,angle:0,alpha:a,blend:'screen'});S('cross',pb(F),c.x,c.y,R*1.25,R*1.25,{squash:.5,angle:0,alpha:.8*a,blend:'screen'});
+  for(let i=0;i<24;i++){const arm=i&3,k=(i>>2)/5,ang=arm*TAU/4,d=R*(.18+.7*k),qq={x:c.x+Math.cos(ang)*d,y:c.y+Math.sin(ang)*d*.5};S('spark',F,qq.x,qq.y,h*.7,h*.16,{angle:Math.atan2(Math.sin(ang)*.5,Math.cos(ang)),alpha:.8*a*(1-.35*k)});}
   for(let i=0;i<e.bolts;i++){const ang=i*TAU/e.bolts+rnd(e.seed,i)*.4,d=e.t*(5+rnd(e.seed,i+5)*2),j=Math.sin(time*36+i*2)*.3,q=P(e.x+Math.cos(ang)*d-Math.sin(ang)*j,e.y+Math.sin(ang)*d+Math.cos(ang)*j,h*.3),b=1-e.t/e.life;
    S('pixel',pb(F),q.x,q.y,h*.28,h*.28,{alpha:b});S('flare',F,q.x,q.y,h*.55,h*.55,{angle:time*14+i,alpha:.8*b});}
   S('flare',pb(F),c.x,c.y-h*.5,h*2.4*(1-v*.5),h*2.4*(1-v*.5),{alpha:a});}
