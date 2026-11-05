@@ -14518,6 +14518,21 @@
       "sha256": "5d9579cd09306ad106aa9044785b50c0bc0c554d43793bc4519737b4538a7ca7"
     },
     {
+      "path": "assets/r309/intro/index.json",
+      "bytes": 1277,
+      "sha256": "e0d470c096809aafb0d9a125466ffc99a2cd4b184ffa420a0340a42bf9e6d8e0"
+    },
+    {
+      "path": "assets/r309/intro/opening-7s.mp4",
+      "bytes": 1812837,
+      "sha256": "f3a3d93d2a4cedd2bd3070d9b5bba8cbfc604faf9aaf79c508c49c7068d25258"
+    },
+    {
+      "path": "assets/r309/intro/poster.jpg",
+      "bytes": 79731,
+      "sha256": "5a32d6bde68477f7e2f89e3b6dfdab6d497b34c6c8eb4ecb08516c9d7c95e3b5"
+    },
+    {
       "path": "assets/r317/index.json",
       "bytes": 5602,
       "sha256": "2e04b95b21a68404af294a75c3b2cf8cb4acc69d273992d24404cbfefda13193"
@@ -23359,13 +23374,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 6568698,
-      "sha256": "700442166c072169d6c8e4d3bacef62a08ed8bcef47c01b95fd8741d6738155d"
+      "bytes": 6568788,
+      "sha256": "7a51a08f6068db090dd24f66c6b1afa222f31adf4850bb7d11f7a4831b821bae"
     },
     {
       "path": "intro-r140.js",
       "bytes": 3772,
       "sha256": "13099847e64cbc1b1af0cbe0c5a2fe37949340abdf01827bc45c183c2591fbbb"
+    },
+    {
+      "path": "intro-tree-r309.js",
+      "bytes": 23600,
+      "sha256": "1e9385f68cc2cb3e8447f57b8a0fc9ee7a14ef719c56a11a1e0bb1ec5c5198fa"
+    },
+    {
+      "path": "intro-video-r309.js",
+      "bytes": 8344,
+      "sha256": "1ad3f61c65c25c05be6e373a9c86b4dc37defbc31c72de854d01b1a308b06641"
     },
     {
       "path": "keys-r291.js",
@@ -23719,8 +23744,8 @@
     },
     {
       "path": "save-transition-r320.js",
-      "bytes": 1244,
-      "sha256": "ad0cd2d99caf6f3fa510bbabb86063415f7b347cd66557f7c5f7e89e77a157c7"
+      "bytes": 1892,
+      "sha256": "346ed95aa3e1ccf440326292f9cdd707c9c91bd288499392db2ff68a7e904ac7"
     },
     {
       "path": "scene-props-r117.js",
@@ -23988,9 +24013,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4797,
-  "totalBytes": 907385855,
-  "webHTMLSha256": "700442166c072169d6c8e4d3bacef62a08ed8bcef47c01b95fd8741d6738155d",
+  "fileCount": 4802,
+  "totalBytes": 909312382,
+  "webHTMLSha256": "7a51a08f6068db090dd24f66c6b1afa222f31adf4850bb7d11f7a4831b821bae",
   "largest": [
     {
       "path": "index.html",

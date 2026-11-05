@@ -55,6 +55,8 @@ jobs:
         run: node r96/qa/r323/terrain-readability-cpu-check.cjs
       - name: R320 native save transition CPU regression
         run: node r96/qa/r320/save-transaction-cpu-check.cjs
+      - name: R320 desktop auto-skill restore and legacy preference regression
+        run: node r96/qa/r320/autoskill-restore-cpu-check.cjs
       - name: R317 palace/slum and betrayal CPU regression
         run: node r96/qa/r317/r317-cpu-check.cjs
       - name: R303 props fit (theme, wall facing, floor clearance)
@@ -353,6 +355,8 @@ jobs:
         run: node r96/qa/r292/r292-cpu-check.cjs
       - name: R302 hero two-colour palette (neon mint, spear-tip strip replaced) CPU check
         run: node r96/qa/r302/r302-cpu-check.cjs
+      - name: R309 new-game opening video (cut to 7 s, title 합일(合一)) with procedural fallback CPU check
+        run: node r96/qa/r309/r309-cpu-check.cjs
       - name: R304 Lauren basic attack VFX CPU check
         run: node r96/qa/r304/r304-cpu-check.cjs
       - name: R313 BGM label and Hwando split CPU
