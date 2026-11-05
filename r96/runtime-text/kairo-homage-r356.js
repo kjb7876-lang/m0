@@ -82,11 +82,13 @@ function thaw(){const t=now();for(const[b,s]of frozen){if(b.dead||t>=s.until||t<
 // ---------- 매 틱: 위험지대 감시 ----------
 // 엔진 저작 캐스트(row150)는 예고가 releaseAt 에 끝나도 피해는 impactAt(비행 0.9~1.8초 뒤)에 들어간다 → 판정 시각을 impactAt 으로 본다.
 const pending=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?t<r.impactAt:h.age<h.warning;};
+// 엔진 tick() 은 time 을 먼저 올리고 tickHazards 를 부르므로 감싼 안에서 time 은 그대로다. before() 는 이번 틱 구간의 시작(time-dt) 기준으로 보아
+// impactAt 을 넘는 틱에도 그 캐스트를 계속 붙잡고, after() 가 지금 time 으로 착탄을 확인한다. 일반 예고는 base 가 h.age 를 올리므로 그대로 둔다.
 const ripe=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?Math.max(0,Math.min(1,(t-(r.warningAt??t-h.age))/Math.max(.05,r.impactAt-(r.warningAt??t-h.age)))):Math.max(0,Math.min(1,h.age/Math.max(.05,h.warning)));};
 const lastIn=new WeakMap();// hazard -> Map(participant -> 마지막으로 안에 있던 time)
 let tickAt=0,nextTick=0,lastZone=null,stingAt=-1e9,stingTimer=null;
-function before(){const list=[];if(typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now(),ps=people();
- for(const h of hazards){if(!hostile(h)||!pending(h,t))continue;list.push(h);for(const p of ps){if(!isSeoha(p)||!inside(h,p.x,p.y))continue;let m=lastIn.get(h);if(!m)lastIn.set(h,m=new Map());m.set(p,t);}}return list;}
+function before(dt){const list=[];if(typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now(),t0=t-(Number.isFinite(dt)&&dt>0?dt:0),ps=people();
+ for(const h of hazards){if(!hostile(h)||!pending(h,t0))continue;list.push(h);for(const p of ps){if(!isSeoha(p)||!inside(h,p.x,p.y))continue;let m=lastIn.get(h);if(!m)lastIn.set(h,m=new Map());m.set(p,t);}}return list;}
 function after(warn){const t=now();
  for(const p of people()){if(!isSeoha(p))continue;for(const h of warn){if(pending(h,t))continue;const was=lastIn.get(h)?.get(p);if(was===undefined||t-was>T.window)continue;if(inside(h,p.x,p.y))continue;stats.escapes++;trigger('escape',p);break;}}
  // 카이로 구역: 가까운 예고가 무르익을수록 초침이 빨라진다
@@ -94,7 +96,7 @@ function after(warn){const t=now();
   if(best){const u=ripe(best,t),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
 function zoneWatch(){const r=R(),id=r?String(r.id||'')+':'+r.layer:null;if(id===lastZone)return;lastZone=id;if(!kairo())return;
  const wall=performance.now()/1000;if(wall-stingAt<T.stingGap)return;stingAt=wall;clearTimeout(stingTimer);stingTimer=setTimeout(()=>{if(kairo()){stats.stings++;play('toll');}},800);}
-if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(live.size&&!audible())hush();if(on){thaw();warn=before();zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
+if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(live.size&&!audible())hush();if(on){thaw();warn=before(a[0]);zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
 
 // ---------- 연출: 프레임 띠(scripts/r356-seoha-time-sheet.py, 384×384 10장) — 초침이 도는 십자가·되감기 잔상·멈추는 서리 ----------
 const SHEET={path:'assets/r356/seoha-time-control.webp',cell:384,frames:10,img:null,ok:false,err:false};
