@@ -14,7 +14,7 @@
 //  · 끄기: localStorage['storyworld.r330.disaster']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_DISASTER_R330__)return;
-const REV='R330-disaster-3',KEY='storyworld.r330.disaster';
+const REV='R330-disaster-4',KEY='storyworld.r330.disaster';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={casts:0,byKind:{},hazards:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,TAU=Math.PI*2;
@@ -37,7 +37,8 @@ const BYNAME=[[/화염|불꽃|불의|용암|지옥|발록|화로|재의|잿|태�
  [/독|역병|병동|약|부패|시체|환자|중독|수술|의사|간호/,'poison'],[/폭탄|화약|기계|군|무기|공장|전기|코어|관리자/,'bomb'],[/물|바다|익사|비의|홍수|늪|파도|해/,'flood'],
  [/기억|꿈|인형|귀신|유령|무당|그림자|거울|아이|어머니|사몽/,'wisp']];
 const BYFAM={clinical:'poison',garden:'poison',swamp:'flood',coast:'flood',cave:'volcano',stone:'volcano',ash:'volcano',forge:'volcano',snow:'blizzard',domestic:'wisp',memory:'wisp',neural:'bomb',regional:'tornado'};
-const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongMidR162||e.samongR103));
+/* samongR103 은 사몽 몹 전체에 붙는 표식이라 쓰지 않는다(보스급만 — Codex 리뷰). 사몽 보스는 boss, 중간보스는 samongMidR162 */
+const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.samongMidR162));
 const isBoss=e=>!!(e&&(e.boss||e.persona||e.cosmic));
 function fam(){try{const L=room?.exploration;return L?.surface?.art?.r81Environment||L?.worldWardR81?.environment?.family||window.__STORYWORLD_ENVIRONMENT_R81__?.specs?.[room?.id]?.family||'regional';}catch(_){return'regional';}}
 function kindOf(e){if(e.r330Kind)return e.r330Kind;let k=null;const n=String(e.name||'');
@@ -54,7 +55,8 @@ function hz(e,x,y,radius,warning,life,damage,extra){try{if(typeof hazards==='und
 const fx=[];const SENT={type:'r330-fx',x:0,y:0,age:0,life:Infinity};
 function arm(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENT)){SENT.age=0;effects.push(SENT);}}catch(_){}}
 function disarm(){try{if(typeof effects!=='undefined'){const i=effects.indexOf(SENT);if(i>=0)effects.splice(i,1);}}catch(_){}}
-let CUR=null;/* 시전 중인 보스·방: 이 시전이 만든 예고·대기열·남는 재해에 붙여, 보스가 죽거나 방을 옮기면 아직 안 온 것을 버린다(Codex 리뷰) */
+let CUR=null,TGT=null;/* TGT: 이 시전이 노리는 영웅(보스와 가장 가까운 살아 있는 영웅) */
+const aimFor=e=>{let best=null,bd=1e9;for(const a of heroes()){if(!(a&&a.hp>0))continue;const d=Math.hypot(a.x-e.x,a.y-e.y);if(d<bd){bd=d;best=a;}}return best||player;};/* 시전 중인 보스·방: 이 시전이 만든 예고·대기열·남는 재해에 붙여, 보스가 죽거나 방을 옮기면 아직 안 온 것을 버린다(Codex 리뷰) */
 function push(f){if(CUR&&!f.src)f.src=CUR;if(fx.length>40)fx.shift();fx.push(f);arm();return f;}
 function near(x,y,r){const a=rnd()*TAU,d=Math.sqrt(rnd())*r;let px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;try{if(typeof blocked==='function'&&blocked(px,py,.3,room)){px=x;py=y;}}catch(_){}return{x:px,y:py};}
 // ---- 재해별 시전(육망성 1초 뒤 phase 'go') --------------------------------------------------------------------
@@ -76,30 +78,30 @@ function tickStatus(){const t=T(),hs=heroes();for(const z of zones){if(t<z.start
   if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurtAs(a,s.D*d.dmg,{type:'r330-status',status:k,r330:true});}catch(err){fail(err);}}}}}
 function slowMul(a){const status=statusOf.get(a);if(!status)return 1;let m=1;for(const k of Object.keys(status))if(ST[k].slow)m=Math.min(m,ST[k].slow);return m;}
 const GO={
- volcano(e,t,D){for(let i=0;i<6;i++){const p=i===0?{x:player.x,y:player.y}:near(player.x,player.y,3.2),d=t+i*.38,w=.95;
+ volcano(e,t,D){for(let i=0;i<6;i++){const p=i===0?{x:TGT.x,y:TGT.y}:near(TGT.x,TGT.y,3.2),d=t+i*.38,w=.95;
    const f=push({k:'meteor',x:p.x,y:p.y,t0:d,warn:w,R:.95,pal:P.ember,seed:rnd()*6});
    later(d,()=>{f.h=hz(e,p.x,p.y,.95,w,w+.3,D*.55,{kind:'magma'});});zone('blaze',p.x,p.y,.9,d+w,4.2,D,'burn');}},
  tornado(e,t,D){const f=push({k:'tornado',x:e.x,y:e.y,t0:t,warn:.6,life:5,R:1.15,pal:P.ash,seed:rnd()*6,owner:e});
    later(t,()=>{f.h=hz(e,f.x,f.y,1.15,.6,5,D*.22,{kind:'tornado'});});},
- blizzard(e,t,D){const cx=player.x,cy=player.y;push({k:'snowcloud',x:cx,y:cy,t0:t,life:3.6,R:3,pal:P.frost});
+ blizzard(e,t,D){const cx=TGT.x,cy=TGT.y;push({k:'snowcloud',x:cx,y:cy,t0:t,life:3.6,R:3,pal:P.frost});
    for(let i=0;i<11;i++){const p=near(cx,cy,3),d=t+.25+i*.28;const f=push({k:'icicle',x:p.x,y:p.y,t0:d,warn:.75,R:.7,pal:P.frost,seed:rnd()*6});later(d,()=>{f.h=hz(e,p.x,p.y,.7,.75,1.05,D*.35,{kind:'ice'});});if(i%3===0)zone('frost',p.x,p.y,.9,d+.75,3.5,D,'chill');}},
- poison(e,t,D){const x=player.x,y=player.y;const f=push({k:'fog',x,y,t0:t,warn:.8,life:6.5,R:2.3,pal:P.rot,seed:rnd()*6});later(t,()=>{f.h=hz(e,x,y,2.3,.8,6.5,D*.16,{kind:'poison'});});zone(null,x,y,2.3,t+.8,5.7,D,'poison');
+ poison(e,t,D){const x=TGT.x,y=TGT.y;const f=push({k:'fog',x,y,t0:t,warn:.8,life:6.5,R:2.3,pal:P.rot,seed:rnd()*6});later(t,()=>{f.h=hz(e,x,y,2.3,.8,6.5,D*.16,{kind:'poison'});});zone(null,x,y,2.3,t+.8,5.7,D,'poison');
    for(let i=0;i<3;i++){const p=near(e.x,e.y,1.4);push({k:'canister',x:p.x,y:p.y,tx:x,ty:y,t0:t,life:.8,pal:P.mustard});}},
- bomb(e,t,D){for(let i=0;i<3;i++){const p=i===0?{x:player.x,y:player.y}:near(player.x,player.y,2.6),d=t+i*.3,fuse=1.35;
+ bomb(e,t,D){for(let i=0;i<3;i++){const p=i===0?{x:TGT.x,y:TGT.y}:near(TGT.x,TGT.y,2.6),d=t+i*.3,fuse=1.35;
    const f=push({k:'bomb',x:p.x,y:p.y,sx:e.x,sy:e.y,t0:d,warn:fuse,R:1.45,pal:P.blood,seed:rnd()*6});later(d,()=>{f.h=hz(e,p.x,p.y,1.45,fuse,fuse+.3,D*.8,{kind:'bomb'});});zone('blaze',p.x,p.y,1,d+fuse,3,D,'burn');}},
- flood(e,t,D){const dx=player.x-e.x,dy=player.y-e.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
+ flood(e,t,D){const dx=TGT.x-e.x,dy=TGT.y-e.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
    for(let i=0;i<7;i++){const s=1.2+i*1.15,x=e.x+ux*s,y=e.y+uy*s,d=t+i*.22;const f=push({k:'wave',x,y,ux,uy,t0:d,warn:.55,R:1.35,pal:P.water,seed:rnd()*6});
     later(d,()=>{f.h=hz(e,x,y,1.35,.55,.95,D*.42,{kind:'flood',push:{x:ux,y:uy}});});}
-   push({k:'puddle',x:player.x,y:player.y,t0:t+1.4,life:4,R:2.4,pal:P.water});zone(null,player.x,player.y,2.4,t+1.4,4,D,'wet');},
+   push({k:'puddle',x:TGT.x,y:TGT.y,t0:t+1.4,life:4,R:2.4,pal:P.water});zone(null,TGT.x,TGT.y,2.4,t+1.4,4,D,'wet');},
  wisp(e,t,D){const n=7;for(let i=0;i<n;i++){const d=t+.5+i*.32;push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});
-   later(d,()=>{const x=player.x,y=player.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
- nuke(e,t,D){const x=player.x,y=player.y,w=2.6;const f=push({k:'nuke',x,y,t0:t,warn:w,R:4,pal:P.blood,seed:rnd()*6});
+   later(d,()=>{const x=TGT.x,y=TGT.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}const h2=hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood,h:h2});});}},
+ nuke(e,t,D){const x=TGT.x,y=TGT.y,w=2.6;const f=push({k:'nuke',x,y,t0:t,warn:w,R:4,pal:P.blood,seed:rnd()*6});
    later(t,()=>{f.h=hz(e,x,y,4,w,w+.35,D*1.6,{kind:'nuke'});rf.h=hz(e,x,y,3.4,w+.4,w+7.4,D*.12,{kind:'radiation'});});
    const rf=push({k:'rad',x,y,t0:t+w+.3,life:7,R:3.4,pal:P.rad,seed:rnd()*6});zone(null,x,y,3.4,t+w+.3,7,D,'rad');}
 };
 const queue=[];function later(at,fn){queue.push({at,fn,src:CUR});}
 function cast(e){const k=kindOf(e),t=T(),D=dmgBase(e);stats.casts++;stats.byKind[k]=(stats.byKind[k]||0)+1;
- CUR={e,room};try{push({k:'sigil',e,t0:t,life:SIGIL+.35,kind:k,sc:isBoss(e)?1.3:1});
+ CUR={e,room};TGT=aimFor(e);try{push({k:'sigil',e,t0:t,life:SIGIL+.35,kind:k,sc:isBoss(e)?1.3:1});
  try{GO[k](e,t+SIGIL,D);}catch(err){fail(err);}}finally{CUR=null;}
  try{if(typeof toast==='function'&&(stats.byKind[k]<=2))toast('재해 · '+NAME[k]+' — '+(e.name||'보스'),2.2);}catch(_){}}
 const stale=src=>!!src&&(src.room!==room||!(src.e&&src.e.hp>0));
@@ -107,20 +109,21 @@ function purge(all){const t=T();if(all){queue.length=0;fx.length=0;zones.length=
  for(let i=queue.length-1;i>=0;i--)if(stale(queue[i].src)){queue.splice(i,1);stats.cancelled=(stats.cancelled||0)+1;}
  for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(f.src&&f.src.room!==room||stale(f.src)&&(f.launch??f.t0)>t)fx.splice(i,1);}
  for(let i=zones.length-1;i>=0;i--){const z=zones[i];if(z.src&&z.src.room!==room||stale(z.src)&&z.start>t)zones.splice(i,1);}}
-function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&player.hp>0&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
+/* 협동: 호스트가 쓰러져도 살아 있는 동료가 있으면 계속 돈다(R62 는 살아남은 동료로 세계를 진행 — Codex 리뷰) */
+function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&heroes().some(a=>a&&a.hp>0)&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
 function tickAll(dt){if(!live()){for(const a of heroes())statusOf.delete(a);return;}const t=T();purge(false);
  if(guest()){for(let i=fx.length-1;i>=0;i--){const f=fx[i];if(t>(f.launch??f.t0)+(f.life??((f.warn||0)+1.2))+.2)fx.splice(i,1);}if(!fx.length)disarm();return;}/* 손님: 시전·판정 없음 */
  tickStatus();
  for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];try{q.fn();}catch(err){fail(err);}}
  if(on)for(const e of room.enemies){if(!major(e)||!(e.hp>0)||e.r251Circle||e.spawnState&&e.spawnState!=='active')continue;
-  const d=Math.hypot(player.x-e.x,player.y-e.y);if(d>12){if(e.r330Next)e.r330Next=Math.max(e.r330Next,t+2);continue;}
+  const tg=aimFor(e),d=Math.hypot(tg.x-e.x,tg.y-e.y);if(d>12){if(e.r330Next)e.r330Next=Math.max(e.r330Next,t+2);continue;}
   if(!e.r330Next){e.r330Next=t+5+rnd()*2;continue;}
   if(t>=e.r330Next&&!(e.attack&&e.attack.committed)){e.r330Next=t+(isBoss(e)?13:18)+rnd()*2;cast(e);}}
  // 회오리: 영웅을 쫓아가며 빨아들인다 / 홍수: 밀어낸다
- for(const f of fx){if(f.k==='tornado'&&t>=f.t0&&t-f.t0<f.life){const e=f.owner,dx=player.x-f.x,dy=player.y-f.y,L=Math.hypot(dx,dy)||1,sp=1.9*dt;
+ for(const f of fx){if(f.k==='tornado'&&t>=f.t0&&t-f.t0<f.life){const e=f.owner,tg=aimFor(f),dx=tg.x-f.x,dy=tg.y-f.y,L=Math.hypot(dx,dy)||1,sp=1.9*dt;
    let nx=f.x+dx/L*Math.min(sp,L),ny=f.y+dy/L*Math.min(sp,L);try{if(typeof blocked==='function'&&blocked(nx,ny,.3,room)){nx=f.x;ny=f.y;}}catch(_){}f.x=nx;f.y=ny;if(f.h){f.h.x=nx;f.h.y=ny;}
-   if(L<2.4&&L>.25&&typeof moveActor==='function'&&!(player.invincible>0))try{moveActor(player,-dx/L*dt*1.1,-dy/L*dt*1.1);}catch(_){}}}
- if(typeof hazards!=='undefined'&&Array.isArray(hazards)&&typeof moveActor==='function')for(const h of hazards){if(h.r330&&h.push&&h.age>=h.warning&&h.age<h.life&&Math.hypot(player.x-h.x,player.y-h.y)<h.radius&&!(player.invincible>0))try{moveActor(player,h.push.x*dt*2.2,h.push.y*dt*2.2);}catch(_){}}
+   if(L<2.4&&L>.25&&typeof moveActor==='function'&&!(tg.invincible>0))try{moveActor(tg,-dx/L*dt*1.1,-dy/L*dt*1.1);}catch(_){}}}
+ if(typeof hazards!=='undefined'&&Array.isArray(hazards)&&typeof moveActor==='function')for(const h of hazards){if(!(h.r330&&h.push&&h.age>=h.warning&&h.age<h.life))continue;for(const a of heroes())if(a&&a.hp>0&&Math.hypot(a.x-h.x,a.y-h.y)<h.radius&&!(a.invincible>0))try{moveActor(a,h.push.x*dt*2.2,h.push.y*dt*2.2);}catch(_){}}
  for(let i=fx.length-1;i>=0;i--){const f=fx[i],end=(f.launch??f.t0)+(f.life??((f.warn||0)+1.2));if(t>end+.2||f.k==='sigil'&&!(f.e.hp>0))fx.splice(i,1);}
  if(!fx.length)disarm();}
 // ---- 그림 ------------------------------------------------------------------------------------------------
