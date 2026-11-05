@@ -164,7 +164,7 @@ function flames(x,fy,h,F,mode,k,seed){if(k<=0)return;const s=SPR(),w=h*(1.05+.4*
 const WING_FOUR={front:'s',back:'n',left:'w',right:'e'};
 function wingSector(p){let d=null;try{d=window.__STORYWORLD_PHASE1_ART__?.hero?.()?.direction;}catch(_){}if(WING_FOUR[d])d=WING_FOUR[d];if(!d||d.length>2)d=p.currentVisualSector||WING_FOUR[p.direction]||'s';return d;}
 const wingHold=new WeakMap();
-function wingView(p){const d=wingSector(p),v=d[0]==='n'?'back':d==='e'||d==='w'?'side':'front',st=wingHold.get(p);
+function wingView(p){const d=wingSector(p),seraph=skillPose(p)?.kind==='r'/* R326: R 세라핌은 옆을 봐도 양 날개를 몸 뒤로 활짝(옆모습 한쪽 날개를 2.2배로 키우면 한쪽만 거대하게 보였다) */,v=seraph?'front':d[0]==='n'?'back':d==='e'||d==='w'?'side':'front',st=wingHold.get(p);if(seraph){const ns={v,flip:false,at:time};wingHold.set(p,ns);return ns;}
  if(st&&st.v!==v&&time-st.at<.12)return st;const ns=st&&st.v===v?{...st,flip:d==='e'}:{v,flip:d==='e',at:time};wingHold.set(p,ns);return ns;}
 function wingsView(p,layer,x,fy,h,F,k,seed){const s=SPR(),wv=wingView(p);if(!s)return false;if((wv.v==='back')!==(layer==='front'))return true;
  const pose=skillPose(p);/* R269: 미카엘라 스킬마다 날개 자세(펼침·크기·퍼덕임·기울기) */
