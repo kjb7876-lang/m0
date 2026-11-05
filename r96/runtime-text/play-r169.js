@@ -105,13 +105,15 @@ let warmed='';
 //  원거리 몹 시전(rangedWindup)·보스/중간보스 공격 준비 동안 머리 위 허공에 핏빛 육망성이 그려졌다가(선 긋듯 커짐) 시전과 함께 사라진다. 판정·타이밍은 그대로.
 const BLOOD_SIGIL=Object.freeze({a:Object.freeze([170,12,26]),b:Object.freeze([235,26,34])}),BLOOD_INK=Object.freeze({a:Object.freeze([36,0,6]),b:Object.freeze([120,6,18])});
 const sigilSeen=new WeakMap(),sigils=[];
+/* 협동: 그 적이 노리는 영웅(R62 targetPlayerR62) 자리에 바닥 육망성을 — 호스트 자리가 아니라 — Codex 리뷰 */
+function aimOf(e){try{const C=window.__STORYWORLD_COOP_SIM_R62__,m=C?.mode?.();if((m==='host'||m==='guest')&&e.targetPlayerR62){const a=(C.players?.()||[]).find(p=>p&&p.coopIdR62===e.targetPlayerR62);if(a)return a;}}catch(_){}return player;}
 function sigilTick(t){for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>14)continue;
   const ranged=Number(e.rangedWindup)>0,boss=major(e)&&e.attack&&Number.isFinite(e.attack.angle),key=ranged?'r':boss?'a'+e.attack.id:'';
   if(!key){sigilSeen.delete(e);continue;}if(sigilSeen.get(e)===key)continue;sigilSeen.set(e,key);if(sigils.length>=10)continue;
   const w=ranged?Number(e.rangedWindup):Number(e.attack.castWindup150??e.attack.shape154?.windup)||.45;
-  sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),seed:Math.random()*6,ranged,gx:player.x,gy:player.y,pal:palOf(e,famOf()).main});/* R328b: 원거리 시전은 노리는 자리(그 순간 영웅 위치) 바닥에도 육망성 */stats.sigils=(stats.sigils||0)+1;}
- for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t<g.t0||t-g.t0>g.draw+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);/* R328c: 새 게임에서 time 이 0 으로 돌아가면 지난 판 육망성은 버린다 */}}
-function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.draw,out=v>1?Math.max(0,1-(t-g.t0-g.draw)/.35):1;if(out<=0)continue;
+  const aim=aimOf(e);sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),life:Math.max(.3,Math.min(6,w)),seed:Math.random()*6,ranged,gx:aim.x,gy:aim.y,pal:palOf(e,famOf()).main});/* R328d: 그리는 동작은 1.2초 안에 끝나도, 실제 시전(windup) 동안은 남겨 둔다 — Codex 리뷰 *//* R328b: 원거리 시전은 노리는 자리(그 순간 영웅 위치) 바닥에도 육망성 */stats.sigils=(stats.sigils||0)+1;}
+ for(let i=sigils.length-1;i>=0;i--){const g=sigils[i];if(t<g.t0||t-g.t0>Math.max(g.draw,g.life||0)+.35||!(g.e.hp>0)&&t-g.t0>.1)sigils.splice(i,1);/* R328c: 새 게임에서 time 이 0 으로 돌아가면 지난 판 육망성은 버린다 */}}
+function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.draw,end=Math.max(g.draw,g.life||0),out=t-g.t0>end?Math.max(0,1-(t-g.t0-end)/.35):1;if(out<=0)continue;
   if(g.ranged&&Number.isFinite(g.gx)){/* R328b(사용자 2026-11-05 "적 모든 원거리 스킬 전조에는 바닥에 육망성, 색은 색 규칙대로"): 바닥 전조 — 검붉은 잉크 + 핏빛 육망성(위협 신호),
      안쪽 고리만 그 몹의 고유색(SKILL.md 10절: 적 = 호러 배색 + 고유·이름색). 바닥이라 납작하게(squash .5), 시전 순간까지 그려지며 커진다. */
    const q=project(g.gx,g.gy),k=Math.min(1,v),R=h0*(.55+.35*(1-(1-k)**2)),al=out*Math.min(1,v*2.2);
@@ -122,7 +124,7 @@ function drawSigils(S0,t,h0){for(const g of sigils){const e=g.e,v=(t-g.t0)/g.dra
   scope({id:'r328:sigil:'+g.t0,kind:'effect',x:e.x,y:e.y},()=>{S0.draw('glow',BLOOD_SIGIL,q.x,y,R*1.5,R*1.5,{alpha:.35*out*grow,overHero:true});
    const ang=g.seed+t*1.4,al=out*Math.min(1,v*2.5);S0.draw('rune',BLOOD_INK,q.x,y,R*2.05,R*2.05,{angle:ang,alpha:.85*al,blend:'source-over',overHero:true});/* 검붉은 잉크 바탕(어두운 바닥에서도 윤곽) */
    S0.draw('rune',BLOOD_SIGIL,q.x,y,R*2,R*2,{angle:ang,alpha:al,overHero:true});
-   if(v>.6&&v<1.15)S0.draw('flare',BLOOD_SIGIL,q.x,y,R*.9,R*.9,{alpha:.6*out*Math.min(1,(v-.6)*4),overHero:true});});stats.sigilDrawn=(stats.sigilDrawn||0)+1;}}
+   {const ve=(t-g.t0)/end;/* 시전 섬광은 실제 시전 끝에 맞춘다 */if(ve>.6&&ve<1.15)S0.draw('flare',BLOOD_SIGIL,q.x,y,R*.9,R*.9,{alpha:.6*out*Math.min(1,(ve-.6)*4),overHero:true});}});stats.sigilDrawn=(stats.sigilDrawn||0)+1;}}
 function mobTick(){if(!prefs.mobFx||!live()||!Array.isArray(room.enemies))return;const t=T(),fam=famOf();sigilTick(t);if(warmed!==room.id){warmed=room.id;try{window.__STORYWORLD_PIXELFX_R163__?.warm?.(['mob-'+(PXFAM[fam]||fam)]);}catch(_){}}// R175: 첫 타격부터 보이게 미리 받기
  for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>13)continue;const a=e.attack;let s=seen.get(e);const sc=SC(e),cap=sc>1?18:14;
   if(a&&Number.isFinite(a.angle)){if(!s||s.id!==a.id){s={id:a.id,hit:false};seen.set(e,s);const w=Number(a.castWindup150??a.shape154?.windup)||.35;if(mfx.length<cap){mfx.push({kind:'charge',e,fam,sc,pal:palOf(e,fam),t0:t,life:Math.min(1.2,Math.max(.2,w))});stats.mobCharge++;if(sc>1)stats.bossCharge=(stats.bossCharge||0)+1;}}
