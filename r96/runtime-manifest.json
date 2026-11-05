@@ -23503,6 +23503,11 @@
       "sha256": "5877f449000caf401518ee78c7e7060908b6766015635f1519c1385499ad7187"
     },
     {
+      "path": "hero-visibility-r350.js",
+      "bytes": 19088,
+      "sha256": "cc2a43662ae52b990b26a0502deb165720cd2f924690a55355291805a51b3e4f"
+    },
+    {
       "path": "heroes-r108.js",
       "bytes": 4386,
       "sha256": "6b0c95f7c5fbb17d1dad6e046437fbdf52a3c951c5d851bf76e52aa51a96933f"
@@ -23594,8 +23599,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569455,
-      "sha256": "7db602dbd1b0147f1b3b19e62f2be96d0d9ed0575b2728d5158259dc8ea3ec3c"
+      "bytes": 6569504,
+      "sha256": "bf0618f5b06dafc3e7c4462e4f2bd2c7dd3728cb22e325ce18cb7d357aab8a18"
     },
     {
       "path": "intro-r140.js",
@@ -24268,9 +24273,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4853,
-  "totalBytes": 931982092,
-  "webHTMLSha256": "7db602dbd1b0147f1b3b19e62f2be96d0d9ed0575b2728d5158259dc8ea3ec3c",
+  "fileCount": 4854,
+  "totalBytes": 932001229,
+  "webHTMLSha256": "bf0618f5b06dafc3e7c4462e4f2bd2c7dd3728cb22e325ce18cb7d357aab8a18",
   "largest": [
     {
       "path": "index.html",

@@ -4063,6 +4063,7 @@
     "assets/r351/slayer/index.json",
     "bgm-pick-r353.js",
     "hwando-w-cross-r348.js",
+    "hero-visibility-r350.js",
     "samong-wide-r355.js"
   ],
   "mediaPaths": [
@@ -5138,5 +5139,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "f57b6703eb719d6cf2a88da7683bfc3c43638d8a9ca1f4a897ed6d83526e5dbd"
+  "runtimeManifestSHA256": "f76dcf1e713feee05d72374e3b812e51d51fda42d5b5e5189238ffa6e0c20449"
 }
