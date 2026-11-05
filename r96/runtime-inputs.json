@@ -4063,7 +4063,27 @@
     "assets/r351/slayer/index.json",
     "bgm-pick-r353.js",
     "hwando-w-cross-r348.js",
-    "hero-visibility-r350.js"
+    "hero-visibility-r350.js",
+    "assets/r290/mobs/m025.webp",
+    "assets/r290/mobs/m026.webp",
+    "assets/r290/mobs/m051.webp",
+    "assets/r290/mobs/m053.webp",
+    "assets/r290/mobs/m055.webp",
+    "assets/r290/mobs/m057.webp",
+    "assets/r290/mobs/m058.webp",
+    "assets/r290/mobs/m059.webp",
+    "assets/r290/mobs/m061.webp",
+    "assets/r290/mobs/m064.webp",
+    "assets/r290/mobs/m066.webp",
+    "assets/r290/mobs/m073.webp",
+    "assets/r290/mobs/m074.webp",
+    "assets/r290/mobs/m076.webp",
+    "assets/r290/mobs/m082.webp",
+    "assets/r290/mobs/m085.webp",
+    "assets/r290/mobs/m087.webp",
+    "assets/r290/mobs/m088.webp",
+    "assets/r290/mobs/m090.webp",
+    "assets/r290/mobs/m095.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5138,5 +5158,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "48975b12dbb45beb62deb200a9b1fac6bd1a964463b27f2cfefe9bffc9ddd6e8"
+  "runtimeManifestSHA256": "3131aabeb0ace9fd13a5d2e328bf38ac585c9a8f94bc64047d74095591a96b2d"
 }

@@ -13394,8 +13394,8 @@
     },
     {
       "path": "assets/r290/mobs/index.json",
-      "bytes": 22170,
-      "sha256": "f56eb5d5ede36507286a62557f5538222095025ae0872c9cfd40fd9429152168"
+      "bytes": 127094,
+      "sha256": "b7551bbc91231a196920fc9c75b7dcfa34a5f6b9d6c317c8f69ff0f6342f3b6a"
     },
     {
       "path": "assets/r290/mobs/m001.webp",
@@ -13421,6 +13421,106 @@
       "path": "assets/r290/mobs/m014.webp",
       "bytes": 348590,
       "sha256": "274c9f58a91c95c90810a66a3d5414d74994900916a2eb54449ba57929efc42e"
+    },
+    {
+      "path": "assets/r290/mobs/m025.webp",
+      "bytes": 262574,
+      "sha256": "4386bd95998a586bddba0f38239e7b67982ee4963fc8c89c5fc392a2d6d4f641"
+    },
+    {
+      "path": "assets/r290/mobs/m026.webp",
+      "bytes": 149832,
+      "sha256": "047a2519905865fcd9e09ec14ec6770657d45f333233e13c6cfb66fd43dc4a96"
+    },
+    {
+      "path": "assets/r290/mobs/m051.webp",
+      "bytes": 241792,
+      "sha256": "b4b1be24c071de0cb3dcdd6efedad685c8253a47613fcb92bc5f5fcfac9581f2"
+    },
+    {
+      "path": "assets/r290/mobs/m053.webp",
+      "bytes": 181868,
+      "sha256": "818befcebff8f0230dbcf676d1c9bb7c686cb831d513856f24fb52506e159dde"
+    },
+    {
+      "path": "assets/r290/mobs/m055.webp",
+      "bytes": 193874,
+      "sha256": "0bbd10d496b788c892acc5557043d8d4ea6df67f40579ec4f31b46d0d14da8bd"
+    },
+    {
+      "path": "assets/r290/mobs/m057.webp",
+      "bytes": 237140,
+      "sha256": "1909376437ff1dbed677a7efd9faf0bab165e87f706e2889ec8d4dcb2f341650"
+    },
+    {
+      "path": "assets/r290/mobs/m058.webp",
+      "bytes": 163508,
+      "sha256": "423204cae8fda513a1a80bb32795b989d09ebe5ca569907d38de22b06d530c65"
+    },
+    {
+      "path": "assets/r290/mobs/m059.webp",
+      "bytes": 173204,
+      "sha256": "f7a48c77b9a1ac122de8dca526fe4ab8be823862ed30d7fb97a614d6cf90ad0c"
+    },
+    {
+      "path": "assets/r290/mobs/m061.webp",
+      "bytes": 195038,
+      "sha256": "ca8b6df89fa2630f8360a540809d462fd23b434d2273896a87bcc7303179159c"
+    },
+    {
+      "path": "assets/r290/mobs/m064.webp",
+      "bytes": 287380,
+      "sha256": "b180fd6bd249095f122956d3ef59be904698b7a7bd796e81e2aeb6afdcac4b8c"
+    },
+    {
+      "path": "assets/r290/mobs/m066.webp",
+      "bytes": 201006,
+      "sha256": "0481b169ba74ebdf4f2d17ede8b1c5022ed258e591be1d770be39b65c06a6ed9"
+    },
+    {
+      "path": "assets/r290/mobs/m073.webp",
+      "bytes": 297298,
+      "sha256": "ac63260fac0e0630f2c5098368b593fc8f484eee55b810d69b1d8c709c62a75a"
+    },
+    {
+      "path": "assets/r290/mobs/m074.webp",
+      "bytes": 271226,
+      "sha256": "d6d28ddca9bf30b3e64665959a74db3517bb43c9e89692a0bea318ea53ef05aa"
+    },
+    {
+      "path": "assets/r290/mobs/m076.webp",
+      "bytes": 174020,
+      "sha256": "ef4f599e837acef3a4c9d21ab10f7b9a73fb56c817514186005d4dabb699dc3c"
+    },
+    {
+      "path": "assets/r290/mobs/m082.webp",
+      "bytes": 237880,
+      "sha256": "520cf98f64e6086b32283d7b723aa238c2267898f884e0f8ba4c9a6733f6fc5f"
+    },
+    {
+      "path": "assets/r290/mobs/m085.webp",
+      "bytes": 292640,
+      "sha256": "e3eb3786c516d67a9157f716722a625ace918e5ca9791cf6a17c0d3aaea86ef4"
+    },
+    {
+      "path": "assets/r290/mobs/m087.webp",
+      "bytes": 221848,
+      "sha256": "5c3ca3b97861511582fc2a711530b0aa01410afb1c10178621f1eb827b67be76"
+    },
+    {
+      "path": "assets/r290/mobs/m088.webp",
+      "bytes": 202080,
+      "sha256": "f14e9530ccd75ab389ccc76d7919201f36f5eec3ceef1755a48a83046ec026ab"
+    },
+    {
+      "path": "assets/r290/mobs/m090.webp",
+      "bytes": 134644,
+      "sha256": "4e8c34165ec7b71a81592850f4fce957964978ee1041e26dc78b7dd4552f91c0"
+    },
+    {
+      "path": "assets/r290/mobs/m095.webp",
+      "bytes": 205234,
+      "sha256": "b6bc3b088c467facaceb00052795d3545f43366f7592e970bf42019fe61696a2"
     },
     {
       "path": "assets/r292/fx/gunner/blink.webp",
@@ -23654,8 +23754,8 @@
     },
     {
       "path": "mob-art-r290.js",
-      "bytes": 2853,
-      "sha256": "19bd9f724ed098f2abcdf47b07bc930a78d4f29b816ded484db256473522bcb2"
+      "bytes": 5072,
+      "sha256": "7061b0a6089426598944b0ed31e9e94ef638069afc91764b0381578aba195cba"
     },
     {
       "path": "mob-art-variants-r306-data.js",
@@ -24268,8 +24368,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4853,
-  "totalBytes": 931986381,
+  "fileCount": 4873,
+  "totalBytes": 936417610,
   "webHTMLSha256": "8d7d6dbd540f26724f7f002dcdaea92dbd7c8c472ae14f6b6ed82ddcdc4ae92d",
   "largest": [
     {

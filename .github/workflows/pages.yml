@@ -351,6 +351,8 @@ jobs:
         run: node r96/qa/r248/r248-cpu-check.cjs
       - name: R290 hand-painted mob sheets m001/m003/m004 over R248 temp art CPU check
         run: node r96/qa/r290/r290-cpu-check.cjs
+      - name: R359 Dots mob candidates (20) on the R290 table CPU check
+        run: node r96/qa/r359/r359-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
         run: node r96/qa/r255/r255-cpu-check.cjs
       - name: R256 widen passages on all organic maps CPU check
