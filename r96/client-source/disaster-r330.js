@@ -197,7 +197,7 @@ function drawBare(h){const S0=SPR();if(!S0||typeof project!=='function')return;c
 function install(){
  if(typeof moveActor==='function'){const base=moveActor;moveActor=function(a,dx,dy,...r){if(on&&a){const m=slowMul(a===player?actorNow():a);if(m<1){dx*=m;dy*=m;}}return base.apply(this,[a,dx,dy,...r]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r330-fx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
- if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330){if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
+ if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330&&SPR()){/* 칠한 스프라이트를 끈 설정(r106.fxsprites)이면 원래 위험지대 그림으로 — 보이지 않는 피해 방지(Codex 리뷰) */if(fx.some(f=>f.h===h))return;try{drawBare(h);}catch(err){fail(err);}return;}return base.apply(this,[h,...a]);};}
  if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(...a){purge(true);const r=await base.apply(this,a);try{purge(true);}catch(e){fail(e);}return r;};}
  if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=last==null?0:Math.max(0,Math.min(.1,t-last));last=t;tickAll(dt);}catch(e){fail(e);}return r;};}
  return true;}
