@@ -4063,6 +4063,7 @@
     "assets/r351/slayer/index.json",
     "bgm-pick-r353.js",
     "hwando-w-cross-r348.js",
+    "hero-visibility-r350.js",
     "kairo-homage-r356.js",
     "assets/r356/seoha-time-control.webp",
     "assets/r356/index.json"
@@ -5140,5 +5141,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "7d2d500595200450c31c0586087e6f42b5f01a73dda780a0f0964745003bf546"
+  "runtimeManifestSHA256": "985e1000af4aa8d6c9dc8efa7d2e6415f08a3f74c541cb1cf78dc13e1635c89c"
 }

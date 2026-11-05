@@ -2,7 +2,7 @@
 //  R106 'rune' 스프라이트 = 원 + 육망성. 영웅 쪽 파일에서는 'rune' 을 그리거나 고르지 않는다('runecross' 십자 마법진, 'cross' 십자만).
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const root=path.resolve(__dirname,'../..');let n=0;const ok=m=>{n++;console.log('PASS',m);};
-const HERO=['play-r111.js','polish-r101.js','hero-skills-r269.js','skills-r209.js','hero-fx-r102.js','fx-eden-r108.js','fx-d2s-r106.js','skill-fx-r292.js','hero-palette-r302.js','michaela-r247.js','hwando-r242.js','hwando-r271.js','hwando-r277.js','hwando-r283.js','hero-threads-r174.js','threads-r243.js','skills-r181.js','fx-boost-r225.js','hwando-w-cross-r348.js'];
+const HERO=['play-r111.js','polish-r101.js','hero-skills-r269.js','skills-r209.js','hero-fx-r102.js','fx-eden-r108.js','fx-d2s-r106.js','skill-fx-r292.js','hero-palette-r302.js','michaela-r247.js','hwando-r242.js','hwando-r271.js','hwando-r277.js','hwando-r283.js','hero-threads-r174.js','threads-r243.js','skills-r181.js','fx-boost-r225.js','hwando-w-cross-r348.js','hero-visibility-r350.js'];
 for(const f of HERO){const p=path.join(root,'client-source',f);if(!fs.existsSync(p))continue;const s=fs.readFileSync(p,'utf8').replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/.*$/gm,'');
  assert(!/draw\(\s*'rune'/.test(s),f+": draws 'rune' (hexagram)");assert(!/\[\s*'rune'\s*,/.test(s),f+": picks 'rune' sprite");assert(!/mark:\s*'rune'/.test(s),f+": mark 'rune'");
  assert(!/ready\('rune'/.test(s),f+": waits for 'rune'");assert(!/'runecross'/.test(s),f+": uses a magic circle (runecross)");
