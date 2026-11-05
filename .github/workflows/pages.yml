@@ -67,6 +67,8 @@ jobs:
         run: node r96/qa/r329/prop-shadow-cpu-check.cjs
       - name: R331 map BGM one-line description CPU check
         run: node r96/qa/r331/bgm-note-cpu-check.cjs
+      - name: R332 mob frame foot baseline (no vertical jitter) CPU check
+        run: node r96/qa/r332/mob-foot-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
