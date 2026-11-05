@@ -23359,8 +23359,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 24855,
-      "sha256": "87bb0d8d65ad019cf99ef9fd568c3c4dc23aba640f05d95e9bed20a22948ff36"
+      "bytes": 24951,
+      "sha256": "4fefdc188dfaf79e8229e1ac2465f76354c8a7bfd6344b2103d2c75d2d008b1c"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -23759,18 +23759,13 @@
     },
     {
       "path": "polish-r101.js",
-      "bytes": 67505,
-      "sha256": "f38b79e9a23881d24b7fc3c065df88869d7d985d94a8f42f0049c5e3c15f86e8"
+      "bytes": 67778,
+      "sha256": "3cdb3942c40d5db8daeec7bd427b59e596f88915406cf9560c3f742d2da38ae6"
     },
     {
       "path": "portal-interaction-r83.js",
       "bytes": 3309,
       "sha256": "17d11b2b6c6a8aaa3bb2c07a1e7b0e9bdafeed50878c0f8e83d8abdfb6754816"
-    },
-    {
-      "path": "prop-shadow-r329.js",
-      "bytes": 5788,
-      "sha256": "ae15c1e3dde914b5910b6d794edf8a7a19d0eec0186228d34b678b162acb296c"
     },
     {
       "path": "props-fit-r303.js",
@@ -24153,8 +24148,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4830,
-  "totalBytes": 914100287,
+  "fileCount": 4829,
+  "totalBytes": 914094868,
   "webHTMLSha256": "eab107d3dc6307dac0acbacc39a5d1ef42496d5026e2204edb5226f3cb330f04",
   "largest": [
     {

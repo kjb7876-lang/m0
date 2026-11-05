@@ -4039,8 +4039,7 @@
     "assets/r325/pixel-readable/pe99278e2986f.webp",
     "assets/r325/pixel-readable/pf0ad5f9f7a51.webp",
     "assets/r309/intro/opening-hapil.mp4",
-    "assets/r309/intro/poster-hapil.jpg",
-    "prop-shadow-r329.js"
+    "assets/r309/intro/poster-hapil.jpg"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5115,5 +5114,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "fdae936d51e4cc20520babea328a8e6efbc795d81163f5ed02eb211cd42fbbcb"
+  "runtimeManifestSHA256": "4afd68866ebcbc53709a9a710b867be608cbf52159829a3f0f6800b3165a075e"
 }
