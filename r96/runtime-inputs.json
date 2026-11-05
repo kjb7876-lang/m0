@@ -4063,7 +4063,8 @@
     "assets/r351/slayer/index.json",
     "bgm-pick-r353.js",
     "hwando-w-cross-r348.js",
-    "hero-visibility-r350.js"
+    "hero-visibility-r350.js",
+    "samong-wide-r355.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5138,5 +5139,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "48975b12dbb45beb62deb200a9b1fac6bd1a964463b27f2cfefe9bffc9ddd6e8"
+  "runtimeManifestSHA256": "050c338c84c58a0c35533736f91a59f016cbd09609e986e919bf2ea443737b1a"
 }
