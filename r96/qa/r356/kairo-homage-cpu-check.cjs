@@ -101,6 +101,11 @@ assert(/const area=!source\?\.r62FieldContact&&\(scopeKind==='hazards'[^\n]*aliv
  escape(G);/* 발동(5번째 틱) 때는 아직 공격 중(.6/.7) → 미뤄 둠 */assert.strictEqual(G.api.inspect().stats.triggers,1);assert.strictEqual(e.r356Delay,.7);assert.strictEqual(calls.length,0);
  G.tick(.1);/* 이 틱에 공격이 끝난다(.7). tick() 이 돌아오면(=R118 directorTick 이 도는 자리) 늦춤이 이미 걸려 있어야 한다 */
  assert.strictEqual(e.attack,null);assert.strictEqual(e.r356Delay,undefined,'settled within the completion tick, before a post-tick director could admit a cast');assert(calls.length===1&&calls[0][1]===.7);ok('attack finishing on the escape window: delay settles right after the native enemy tick (before the post-tick R118 director)');}
+// Codex 4483493398: 배포 빌드(build-r96.py)는 runtime-manifest·inputs 에 있는 파일만 옮긴다 — 스크립트와 애니메이션 시트가 둘 다 등록돼 있어야 한다
+{const R96=path.join(__dirname,'..','..'),man=JSON.parse(fs.readFileSync(path.join(R96,'runtime-manifest.json'),'utf8')),inp=JSON.parse(fs.readFileSync(path.join(R96,'runtime-inputs.json'),'utf8'));const crypto=require('crypto');
+ const need=['kairo-homage-r356.js','assets/r356/seoha-time-control.webp','assets/r356/index.json'];
+ const listed=p=>{const row=man.files.find(r=>r.path===p);const sha=crypto.createHash('sha256').update(fs.readFileSync(path.join(R96,'runtime-text',p))).digest('hex');return !!row&&row.sha256===sha&&[...(inp.textPaths||[]),...(inp.mediaPaths||[]),...(inp.basePaths||[])].some(x=>(typeof x==='string'?x:x?.path)===p);};
+ assert(need.every(listed),need.filter(p=>!listed(p)).join(','));ok('runtime manifest + inputs list the overlay, its animation sheet and index.json with matching sha256 (deployed artifact gets them)');}
 // 5) 엔진 저작 캐스트: warning 은 releaseAt 에서 끝나도 impactAt 기준으로 0.7초 창을 본다
 {const G=world();const h={x:10,y:10,radius:1.2,age:0,warning:.3,life:2.5,damage:20,row150:{warningAt:1,releaseAt:1.3,impactAt:2.5}};G.hazards.push(h);
  for(let i=0;i<10;i++)G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);G.player.x=12;G.tick(.1);G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);
