@@ -23483,6 +23483,11 @@
       "sha256": "bf8c7a5f19ff88211ffa98fbbf7b28a2a35559b9ccfa69f3ba56ac10322ce427"
     },
     {
+      "path": "hud-bossbar-r334.js",
+      "bytes": 4000,
+      "sha256": "8886dd7af12392a532d3721d7f012e5ee1b24b90a2635650bfdb9e25ea2f9d6e"
+    },
+    {
       "path": "hwando-r242.js",
       "bytes": 12495,
       "sha256": "d590b8a16d4b6651e91ffb7eebe35aeacc8e77a6f33503f9cf04aced0a828d27"
@@ -24148,8 +24153,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4829,
-  "totalBytes": 914094719,
+  "fileCount": 4830,
+  "totalBytes": 914098719,
   "webHTMLSha256": "0e888e53fe1c70439fa7598a01062f08d9c2afd148b4c020749ec4cd6162583e",
   "largest": [
     {
