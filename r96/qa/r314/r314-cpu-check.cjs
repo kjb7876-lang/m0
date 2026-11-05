@@ -6,7 +6,7 @@ const file='client-source/boss-prop-control-r314.js';
 assert.ok(fs.existsSync(path.join(R,file)),'CX-0014 missing: no boss prop control overlay');
 const src=read(file);let checks=0;
 function check(n,f){f();checks++;console.log('PASS '+n);}
-function fixture({mobile=false}={}){
+function fixture({mobile=false,props=6}={}){
  const phase=read('runtime-text/dist/phase1.js');
  const start=phase.indexOf('function affineMultiply'),end=phase.indexOf('\nclass ',phase.indexOf('class DrawCommands')+10);
  // Use the real recorder class; its affine helpers are injected below.
@@ -35,7 +35,7 @@ function fixture({mobile=false}={}){
  vm.runInContext(read('client-source/boss-meteor-r241.js'),c);
  c.preR314Enemy=c.drawEnemy;vm.runInContext(src,c);
  c.boss={id:'boss',boss:true,name:'fixture',x:8,y:10,hp:100,maxHp:100,damage:30,defScale:1,radius:.4,combatProfile:{bodyBlock:{r:.4},hurtbox:{r:.4}},spawnState:'active'};c.room.enemies.push(c.boss);
- for(let i=0;i<6;i++)c.room.props.push({id:'prop'+i,x:9+i*.5,y:11,path:'furniture.webp',height:40,solid:i===0});
+ for(let i=0;i<props;i++)c.room.props.push({id:'prop'+i,x:9+i*.5,y:11,path:'furniture.webp',height:40,solid:i===0});
  c.frame=()=>{c.ctx.reset();for(const p of c.room.props)c.drawProp(p);c.drawEnemy(c.boss);for(const e of c.effects)c.drawEffect(e);};
  c.advance=dt=>{c.time+=dt;c.tick(dt);};
  c.cast=()=>{c.__STORYWORLD_BOSS_FIELDS_R62__.prepare(c.boss);return c.hazards.filter(h=>h.r314Prop);};
@@ -54,6 +54,7 @@ check('native hazard tick gives no warning/outside damage, one impact hit, guard
 });
 check('original prop/layout/collision unchanged, ghost lasts only through the cast; source picture copies bounded',()=>{const c=fixture();c.frame();const before=JSON.stringify(c.room.props)+JSON.stringify(c.room.exploration);c.cast();c.frame();assert.ok(c.ctx.commands.some(x=>x.owner.kind==='prop'&&x.style.globalAlpha<.5));assert.equal(JSON.stringify(c.room.props)+JSON.stringify(c.room.exploration),before);c.advance(5);c.frame();assert.ok(c.ctx.commands.filter(x=>x.owner.kind==='prop').every(x=>x.style.globalAlpha===1));assert.equal(c.api.inspect().active,0);});
 check('mobile takes exactly half, global cap six, death and room changes cancel',()=>{const m=fixture({mobile:true});m.frame();assert.equal(m.cast().length,3);assert.equal(m.hazards.length,3,'discarded native meteors cannot draw or hit');m.advance(.01);assert.equal(m.api.inspect().active,1);assert.ok(m.hazards.every(h=>h.r314Prop?.mode==='rain'),'normal casts never become an A+B mixture');const c=fixture();c.frame();c.cast();const other={...c.boss,id:'other'};c.room.enemies.push(other);c.__STORYWORLD_BOSS_FIELDS_R62__.prepare(other);assert.ok(c.hazards.filter(x=>x.r314Prop).length<=6);c.boss.hp=0;c.advance(.01);assert.equal(c.hazards.filter(x=>x.r314Prop).length,0);});
+check('mobile with a single visible prop still converts one meteor instead of dropping the whole attack',()=>{const m=fixture({mobile:true,props:1});m.frame();assert.equal(m.cast().length,1);assert.equal(m.hazards.length,1);});
 check('one installation per lifetime, including >60 retries/frames and duplicate script evaluation',()=>{const c=fixture();const fns=[c.tick,c.drawProp,c.drawEnemy,c.drawEffect,c.drawHazard,c.tickHazards];for(let i=0;i<5000;i++)c.api.install();vm.runInContext(src,c);assert.deepEqual([c.tick,c.drawProp,c.drawEnemy,c.drawEffect,c.drawHazard,c.tickHazards],fns);assert.equal(c.api.inspect().stats.installs,1);});
 check('existing guide threat scan accepts circular prop hazards without retargeting or field art',()=>{assert.ok(/h\.type!=='field'&&!h\.r314Prop/.test(read('client-source/play-r115.js')));});
 check('guide and semi-auto choose a safe route for a prop circle; manual steering keeps control',()=>{for(const mode of ['auto','guide','manual']){const c=fixture();c.frame();const [h]=c.cast();c.hazards=[h];vm.runInContext(read('client-source/play-r115.js'),c);c.__STORYWORLD_PLAY_R115__.set({centre:false,aim:false,spacing:false,sink:false,frontLight:false,samongCluster:false,skillBook:false,walls:false});c[mode==='guide'?'guide':'auto']=true;if(mode==='manual')c.keys.add('ArrowRight');c.advance(.05);assert.equal(c.__STORYWORLD_PLAY_R115__.inspect().failures,0,c.__STORYWORLD_PLAY_R115__.inspect().lastError);if(mode==='manual')assert.equal(c.route.length,0);else{assert.ok(c.route.length>0);assert.ok(Math.hypot(c.route[0].x-h.x,c.route[0].y-h.y)>h.radius+.25);}}});

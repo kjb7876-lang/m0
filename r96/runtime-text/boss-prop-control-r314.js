@@ -33,6 +33,8 @@ function fit(e,start){const rows=ctx.commands.slice(start).filter(c=>c.kind==='i
  // Existing larger drawings are retained unless the viewport cap is reached.
  const cap=(typeof H==='number'?H:800)*.7,k=Math.min(Math.max(1,want/body),cap/h),p=project(e.x,e.y);
  for(const c of rows)c.points=c.points.map(([x,y])=>[p.x+(x-p.x)*k,p.y+(y-p.y)*k]);
+ // R259 measured the body inside drawEnemy before this resize; keep its hit centre on the drawn boss.
+ try{window.__STORYWORLD_HIT_CENTER_R259__?.rescale?.(e,p.x,p.y,k);}catch(_){}
  // Native drawEnemy's unmodified height is actorHeight × spriteRect.height × defScale.
  // Include R205's minimum-fit and rage multiplication once, so radius/body stay proportional.
  const raw=AH()*(Number(e.combatProfile?.spriteRect?.height)||1)*(Number(e.defScale)||1),ck=h*k/Math.max(.01,raw);
@@ -53,7 +55,7 @@ function adopt(){if(!solo()||typeof hazards==='undefined'||!Array.isArray(hazard
   const src=sources(),available=Math.max(0,CAP-[...active].reduce((n,c)=>n+c.hs.length,0));
   // Rooms without a visible prop picture keep their existing R241 meteor pattern.
   if(!src.length)continue;
-  const n=Math.min(available,mobile()?Math.floor(Math.min(CAP,src.length,hs.length)/2):Math.min(CAP,src.length,hs.length));
+  const n=Math.min(available,mobile()?Math.max(1,Math.floor(Math.min(CAP,src.length,hs.length)/2)):Math.min(CAP,src.length,hs.length));
   if(!n){for(const h of hs)discard.add(h);continue;}
   const step=turns.get(e)||0,mode=step%2?'eruption':'rain';turns.set(e,step+1);
   const c={id:++stats.casts,e,room,mode,sources:src.slice(0,n),hs:[],pal:palette(e),low:mobile()};active.add(c);stats[mode]++;

@@ -55,5 +55,7 @@ if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,.
 // 기술 끝점: 발밑(tx,ty)을 겨눈 점 → 그 적 그림 가운데. lift 는 그 효과가 원래 쓰던 높이(px, 발 위).
 function aim(x,y,lift=0){const q=typeof project==='function'?project(x,y):{x:0,y:0};try{const e=on&&enemyAt(x,y),v=e&&anyCentre(e);if(v){stats.aimed++;return {x:v.cx,y:v.cy+lift};}}catch(err){fail(err);}return q;}
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_HIT_CENTER_R259__=Object.freeze({revision:REV,set,centreOf,aim,enemyAt,bodyDrawn:(e,img,q,T)=>{if(on&&T)bodyRecorder?.(e,img,q,T);},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
+// R314: an overlay that scales an already-recorded body draw keeps the cached centre in step.
+function rescale(e,px,py,k){const v=VC.get(e);if(!v||!(k>0))return;const X=x=>px+(x-px)*k,Y=y=>py+(y-py)*k;VC.set(e,{...v,cx:X(v.cx),cy:Y(v.cy),top:Y(v.top),bottom:Y(v.bottom),h:v.h*k,w:v.w*k});}
+window.__STORYWORLD_HIT_CENTER_R259__=Object.freeze({revision:REV,set,centreOf,aim,enemyAt,rescale,bodyDrawn:(e,img,q,T)=>{if(on&&T)bodyRecorder?.(e,img,q,T);},inspect:()=>({revision:REV,on,stats:{...stats},lastError})});
 })();
