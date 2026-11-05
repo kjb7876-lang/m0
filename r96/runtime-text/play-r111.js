@@ -176,8 +176,8 @@ function guardTick(dt){const on=!!(prefs.guard&&player.guard&&player.hp>0);if(on
  if(on&&Number.isFinite(dt)&&dt>0&&typeof maxHP==='function'){const m=maxHP(),add=Math.min(m-player.hp,m*GUARD_HEAL*dt);if(add>0){player.hp+=add;guardState.healed+=add;}}}
 function guardBack(p,S){const {x,y,h}=heroFoot(p),age=time-guardState.at,open=clamp(age/.35,0,1),pulse=1+.05*Math.sin(time*5);
  S.draw('glow',HOLY,x,y,h*3*open,h*1.3*open,{alpha:.5,squash:.5});
- S.draw('rune',HOLY,x,y,h*2.1*open*pulse,h*2.1*open*pulse,{squash:.5,angle:time*.7,alpha:.85});
- S.draw('rune',S.pal(HOLY.b),x,y,h*1.35*open,h*1.35*open,{squash:.5,angle:-time*1.1,alpha:.6});
+ /* R337: 영웅 쪽은 육망성 금지 → 십자가 마법진 */S.draw('runecross',HOLY,x,y,h*2.1*open*pulse,h*2.1*open*pulse,{squash:.5,angle:time*.7,alpha:.85});
+ S.draw('runecross',S.pal(HOLY.b),x,y,h*1.35*open,h*1.35*open,{squash:.5,angle:-time*1.1,alpha:.6});
  S.draw('ring',HOLY,x,y,h*2.5*open,h*1.25*open,{alpha:.35+.2*Math.sin(time*3)});
  S.draw('pillar',HOLY,x,y+h*.05,h*(.9+.08*Math.sin(time*4)),h*(2.6+.4*(1-open)),{alpha:.55*open});}
 function guardFront(p,S){const {x,y,h}=heroFoot(p),age=time-guardState.at,open=clamp(age/.35,0,1),lo=lowFx();
