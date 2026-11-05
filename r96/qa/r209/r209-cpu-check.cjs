@@ -28,7 +28,7 @@ vm.runInContext("window.__STORYWORLD_MICHAELA_R247__={on:()=>true};tick(1/60);up
  const sv1=vm.runInContext('serializeSave()',sb).storyWER.remaining;ok('R291: save drops the R247-owned far cooldowns',!('michaela:e' in sv1)&&!('michaela:w' in sv1)&&sv1['michaela:r']===5,sv1);}
 vm.runInContext("window.__STORYWORLD_MICHAELA_R247__={on:()=>false};player.storyWER.ready={};",sb);
 draws.length=0;vm.runInContext("drawEffect({type:'storySourceSkill',storyWER:true,sourceHero:'michaela',stage:'release',x:3,y:3,age:.2,life:.4,size:8,castId:'wer:1'})",sb);
-ok('release draws themed layers (glow, ground ring, stigmata runecross, crosses) then the original art',draws.some(d=>d[0]==='ring')&&draws.some(d=>d[0]==='runecross')&&draws.filter(d=>d[0]==='cross').length===7&&sb.calls.at(-1)==='draw:storySourceSkill',draws.map(d=>d[0]));
+ok('release draws themed layers (glow, ground ring, stigmata cross — R337 no magic circle, crosses) then the original art',draws.some(d=>d[0]==='ring')&&!draws.some(d=>d[0]==='runecross'||d[0]==='rune')&&draws.filter(d=>d[0]==='cross').length===8&&sb.calls.at(-1)==='draw:storySourceSkill',draws.map(d=>d[0]));
 draws.length=0;vm.runInContext("drawEffect({type:'storySourceSkill',storyWER:true,sourceHero:'neon',stage:'hit',x:3,y:3,age:.05,life:.22,size:1.1,castId:'wer:2'})",sb);
 ok('hit draws a small themed spark (neon bolt)',draws.some(d=>d[0]==='bolt'));
 draws.length=0;vm.runInContext("drawEffect({type:'burst',x:1,y:1,age:0,life:.4})",sb);ok('other effects untouched',draws.length===0);

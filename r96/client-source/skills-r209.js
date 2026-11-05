@@ -45,8 +45,8 @@ const THEME={
  hwando:{a:[176,198,224],b:[236,242,255],mark:'slashwide',bits:'slashline',spin:1},
  seoha:{a:[150,184,214],b:[226,238,250],mark:'clock',bits:'shard',spin:-.5},
  neon:{a:[40,170,176],b:[170,250,240],mark:'circuit',bits:'bolt',spin:.8},
- michaela:{a:[150,22,34],b:[236,190,120],mark:'runecross',bits:'cross',spin:.3},
- lauren:{a:[92,40,150],b:[210,170,250],mark:'rune',bits:'cross',spin:-.7},
+ michaela:{a:[150,22,34],b:[236,190,120],mark:'cross'/* R337 */,bits:'cross',spin:.3},
+ lauren:{a:[92,40,150],b:[210,170,250],mark:'cross'/* R337: 마법진 금지, 십자가만 */,bits:'cross',spin:-.7},
  hunter:{a:[160,20,40],b:[250,150,150],mark:'ring',bits:'petal',spin:1.4},
  slayer:{a:[110,10,14],b:[210,80,60],mark:'crack',bits:'slash',spin:0},
  gunner:{a:[170,110,40],b:[250,214,150],mark:'ring',bits:'shard',spin:.6}};

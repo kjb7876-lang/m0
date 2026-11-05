@@ -126,7 +126,8 @@
    if(face.hero!==p.hero||face.room!==room){face.hero=p.hero;face.room=room;face.foe=null;face.sector=null;face.pend=null;face.fighting=false;}
    const foe=pickFoe();if(!foe||!inFight(foe)){face.sector=null;return base();}
    const sec=stableSector(foe);stats.faced++;
-   if(['attack','skill','ultimate'].includes(state)&&!SWORDS.has(p.hero))return sec;return FOUR[sec];
+   if(['attack','skill','ultimate'].includes(state)&&!SWORDS.has(p.hero))return sec;
+   /* R336: 4방향(좌우 240°·위아래 120°) 기준이 켜져 있으면 그것으로 고른다 */{const f4=window.__STORYWORLD_HERO_FACING_R336__?.pick?.(foe.x-player.x,foe.y-player.y);if(f4)return f4;}return FOUR[sec];
   }catch(err){fail(err);return base();}}});}
 
  // ---- ④ 렉: 프레임당 틱 상한, 보스 순환·전투 진행 틱 ---------------------------------------------

@@ -209,7 +209,7 @@ const FIRE=Object.freeze({a:Object.freeze([255,112,28]),b:Object.freeze([255,224
 // R139: 라우렌 메테오는 보라 계열(영웅색 바이올렛), 바닥 표식은 육망성 대신 십자가 마법진(runecross)
 const VIOLET=Object.freeze({a:Object.freeze([150,70,255]),b:Object.freeze([232,214,255])});
 PRE.meteor=(e,u,h)=>{if(!ready(NEED.meteor))return false;const F=heroOf(e),q=P(e.tx,e.ty),fall=e.fall,T=e.t,k=tierK(e),fr=Math.floor(T*20);
- if(T<fall+.1)S('runecross',F,q.x,q.y,h*2.6*k,h*2.6*k,{squash:.5,angle:0,alpha:.85*smooth(T/.15)});
+ if(T<fall+.1)S('cross',F,q.x,q.y,h*1.5*k,h*1.5*k,{squash:.5,angle:0,alpha:.85*smooth(T/.15)});/* R337: 마법진 대신 십자가 */
  if(T<fall){const v=T/fall,s={x:q.x-h*5.4,y:q.y-h*8.6},e2=v*v,m={x:lerp(s.x,q.x,e2),y:lerp(s.y,q.y-h*.35,e2)},th=Math.atan2(q.y-h*.35-s.y,q.x-s.x),sz=h*(2.7+2.3*v)*k;
   const sh=P(e.tx,e.ty);S('glow',{a:[22,6,34],b:[48,16,70]},sh.x,sh.y,h*(.6+1.4*v),h*(.3+.6*v),{blend:'source-over',alpha:.25+.3*v});
   clip('fire.fly',T*1.0,m.x,m.y,sz,{angle:th,alpha:1,noVeil:true,tint:VIOLET});S('glow',F,m.x,m.y,h*1.7,h*1.7,{alpha:.55*v+.3});return true;}
