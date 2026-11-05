@@ -58,7 +58,7 @@ const DESC={
  'Coriolan Overture in C minor, Op. 62':'로마 장군 코리올라누스의 비극을 그린 베토벤의 서곡.',
  'Prelude in A minor, Op. 28 No. 2':'낮은 불협화음이 기어가는, 쇼팽 전주곡 중 가장 기괴한 곡.'
 };
-let lastTitle='',note=null,noteText='',noteAt=0;const NOTE_SEC=7;
+let lastTitle='',lastKey='',pendingKey='',shownKey='',note=null,noteText='',noteAt=0;const NOTE_SEC=7;
 function showNote(text){try{if(!text)return;if(!note||!note.isConnected){note=document.createElement('div');note.id='r331BgmNote';
   note.style.cssText='position:fixed;left:50%;top:64px;transform:translateX(-50%);max-width:min(92vw,34rem);padding:5px 12px;font:12px/1.5 \'Malgun Gothic\',serif;color:#3d2a12;background:linear-gradient(100deg,rgba(227,213,182,.94),rgba(203,184,143,.94));border:1px solid #6b5124;border-radius:2px;box-shadow:0 2px 10px rgba(0,0,0,.45);pointer-events:none;z-index:40;opacity:0;transition:opacity .4s ease;text-align:center';
   document.body.appendChild(note);}
@@ -79,13 +79,13 @@ function currentText(){
   if(!map.prefs?.on||legacy?.prefs?.on===false)return '';
   // cur points at the incoming deck even while it buffers. Show the louder audible deck.
   const d=(map.decks||[]).filter(d=>audible(d)&&!map.failed?.includes(d.id)).sort((a,b)=>b.volume-a.volume)[0];
-  t=d&&mapCatalog?.[d.id];
+  t=d&&mapCatalog?.[d.id];lastKey=String(d?.id||'');
  }else{
   const a=legacy?.active;if(!legacy?.prefs?.on||legacy.blocked||!audible(a)||legacy.failed?.includes(a.id))return '';
-  t=catalog?.[a.id];
+  t=catalog?.[a.id];lastKey=String(a?.id||'');
  }
  if(!t?.composer||!t?.title)return '';
- lastTitle=t.title;
+ lastTitle=t.title;lastKey+='|'+t.title;/* 같은 한국어 제목이라도 녹음(트랙 id)이 다르면 설명을 새로 띄운다(danse-macabre 1925 / 현대 녹음) */
  // Localize the credit metadata, never infer a title from a filename or selected/pending track.
  const c=COMPOSERS[t.composer]||(/[가-힣]/.test(t.composer)?t.composer:null),n=TITLES[t.title]||(/[가-힣]/.test(t.title)?t.title:null);
  return c&&n?'♪ '+c+' · '+n:'';
@@ -108,12 +108,13 @@ function mount(){
 }
 function update(){try{
  if(!mount())return;
- const next=currentText(),now=performance.now();
- if(!next){pending=shown='';label.textContent='';label.title='';label.hidden=true;label.style.opacity='0';return;}
- if(next!==pending){pending=next;changedAt=now;label.style.opacity='0';}
- // Two 0.2s halves: old text fades out before the new text fades in.
- if(now-changedAt>=200){if(shown!==pending){shown=pending;label.textContent=shown;const d=DESC[lastTitle]||'';label.title=d?shown+' — '+d:shown;if(d)showNote(shown+' · '+d);}label.hidden=false;label.style.opacity='1';}
+ const next=currentText(),key=next?lastKey:'',now=performance.now();
+ // 설명 7초 만료는 곡이 안 들리는 경우(음악 끔·볼륨 0)에도 먼저 처리한다(Codex 리뷰)
  if(note&&note.style.opacity==='1'&&now-noteAt>NOTE_SEC*1000)note.style.opacity='0';
+ if(!next){pending=shown='';pendingKey=shownKey='';label.textContent='';label.title='';label.hidden=true;label.style.opacity='0';if(note)note.style.opacity='0';return;}
+ if(next!==pending||key!==pendingKey){pending=next;pendingKey=key;changedAt=now;label.style.opacity='0';}
+ // Two 0.2s halves: old text fades out before the new text fades in.
+ if(now-changedAt>=200){if(shown!==pending||shownKey!==pendingKey){shown=pending;shownKey=pendingKey;label.textContent=shown;const d=DESC[lastTitle]||'';label.title=d?shown+' — '+d:shown;if(d)showNote(shown+' · '+d);}label.hidden=false;label.style.opacity='1';}
  }catch(e){fail(e);}}
 const SP=()=>window.__STORYWORLD_FX_SPRITES_R106__;
 const low=()=>!!(typeof settings!=='undefined'&&settings.lowFx)||!!window.__STORYWORLD_MOBILE_PERF_R298__?.inspect?.().mobile;
@@ -156,7 +157,8 @@ function installDraw(){if(drawInstalled||!window.__STORYWORLD_SKILL_FX_R292__||t
 };}
 installDraw();
 if(typeof updateHUD==='function'){const base=updateHUD;updateHUD=function(...a){const r=base.apply(this,a);update();return r;};}
-if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){const r=base.apply(this,a);update();return r;};}
+// R308 은 지도 BGM 을 쓰는 동안 옛 음악 사슬을 settings.music=false 로 잠깐 불러 조용히 돌린다(quiet). 그 안에서 update 하면 매 틱 제목이 지워지므로 건너뛴다(Codex 리뷰).
+if(typeof musicTick==='function'){const base=musicTick;musicTick=function(...a){const r=base.apply(this,a);if(typeof settings==='undefined'||settings.music)update();return r;};}
 document.addEventListener('visibilitychange',update);
 if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{installDraw();if(typeof player!=='undefined'&&player?.hero==='hwando')ready();}catch(e){fail(e);}return r;};}
 window.__STORYWORLD_HUD_BGM_HWANDO_R313__=Object.freeze({revision:REV,update,currentText,inspect:()=>({revision:REV,text:shown,pending,stats:{...stats},lastError,presentationOnly:true})});
