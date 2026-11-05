@@ -109,7 +109,7 @@ const sigilSeen=new WeakMap(),sigils=[];
 function aimOf(e){try{const C=window.__STORYWORLD_COOP_SIM_R62__,m=C?.mode?.();if((m==='host'||m==='guest')&&e.targetPlayerR62){const a=(C.players?.()||[]).find(p=>p&&p.coopIdR62===e.targetPlayerR62);if(a)return a;}}catch(_){}return player;}
 function sigilTick(t){for(const e of room.enemies){if(!e||e.hp<=0||major(e)&&!prefs.bossFx||Math.hypot(e.x-player.x,e.y-player.y)>14)continue;
   /* R328e: R61/R62 모션이 쥔 시전(던지기·공성·소환 등 — e.attack 없이 e.r61Action 에만 있음)도 토큰으로 한 번씩 — Codex 리뷰 */const ma=e.r61Action,motion=!!(ma&&!ma.released&&Number.isFinite(ma.releaseAt)&&ma.releaseAt>t);
-  const ranged=Number(e.rangedWindup)>0,boss=major(e)&&e.attack&&Number.isFinite(e.attack.angle),key=ranged?'r':boss?'a'+e.attack.id:motion?'m'+ma.token:'';
+  const ranged=Number(e.rangedWindup)>0,boss=major(e)&&e.attack&&Number.isFinite(e.attack.angle)&&!e.attack.footprint154/* R354(사용자 2026-11-05 "적이 근접기본공격할때는 육망성 사용안하도록"): 엔진 근접 기본공격(meleeFootprint154)은 육망성 없이 */,key=ranged?'r':boss?'a'+e.attack.id:motion?'m'+ma.token:'';
   if(!key){sigilSeen.delete(e);continue;}if(sigilSeen.get(e)===key)continue;sigilSeen.set(e,key);if(sigils.length>=10)continue;
   const w=ranged?Number(e.rangedWindup):boss?Number(e.attack.castWindup150??e.attack.shape154?.windup)||.45:Math.max(.3,ma.releaseAt-t);
   const aim=!ranged&&!boss&&ma.target&&Number.isFinite(ma.target.x)?ma.target:aimOf(e);sigils.push({e,sc:SC(e),t0:t,draw:Math.min(1.2,Math.max(.3,w)),life:Math.max(.3,Math.min(6,w)),seed:Math.random()*6,ranged:ranged||(!boss&&motion),gx:aim.x,gy:aim.y,pal:palOf(e,famOf()).main});/* R328d: 그리는 동작은 1.2초 안에 끝나도, 실제 시전(windup) 동안은 남겨 둔다 — Codex 리뷰 *//* R328b: 원거리 시전은 노리는 자리(그 순간 영웅 위치) 바닥에도 육망성 */stats.sigils=(stats.sigils||0)+1;}
