@@ -98,24 +98,26 @@ function flight(m,k,lo){const P=m.P,to=project(m.cx,m.cy),base=Math.max(26,Math.
  if(m.mode==='roll'){const fr=project(m.from.x,m.from.y),u=k*k*(3-2*k),hop=Math.sin(k*Math.PI)*22*zoom;x=fr.x+(to.x-fr.x)*u;y=fr.y+(to.y-fr.y)*u-18*zoom-hop;sz=base*(.7+.3*k);ctx.fillStyle='rgba(0,0,0,.28)';ellipse(x,y+18*zoom+hop,sz*.6,sz*.24);ctx.fill();}
  else{const u=k*k,sx=to.x+m.dir*(W*.28+m.ext*TILE*zoom),sy=to.y-H*.62;x=sx+(to.x-sx)*u;y=sy+(to.y-sy)*u;sz=base*(.35+.65*u);ctx.fillStyle='rgba(0,0,0,'+(.12+.2*u).toFixed(2)+')';ellipse(to.x,to.y,sz*(.4+.6*u),sz*(.4+.6*u)*.4);ctx.fill();}
  const ang=Math.atan2(to.y-y,to.x-x);
- if(P.style==='thread'){drawImg(DIR+'fx-thread.webp',x,y,sz*2.6,{alpha:.55+.45*k,angle:time*2.2+m.seed});ctx.globalCompositeOperation='lighter';ctx.strokeStyle=rgba(P.b,.5);ctx.lineWidth=Math.max(1,1.2*zoom);for(let s=0;s<6;s++){const a=s*Math.PI/3+time*2.2+m.seed;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a)*sz*2.4,y+Math.sin(a)*sz*2.4);ctx.stroke();}ctx.globalCompositeOperation='source-over';return;}
+ if(P.style==='thread'){drawImg(DIR+'fx-thread.webp',x,y,sz*2.6,{alpha:.55+.45*k,angle:time*2.2+m.seed});ctx.globalCompositeOperation='source-over';return;}/* R324: 실 6가닥 직선 제거(그림 fx-thread 만) */
  ctx.globalCompositeOperation='lighter';
  const n=lo?3:7;for(let s=1;s<=n;s++){const f=s/n,tx=x-Math.cos(ang)*sz*1.4*f*(1+s*.25),ty=y-Math.sin(ang)*sz*1.4*f*(1+s*.25),r=Math.max(2,sz*(.9-.7*f));glow(tx,ty,r,r,[[0,P.b,.5*(1-f)],[.5,P.a,.35*(1-f)],[1,P.a,0]],3);}
  glow(x,y,sz,sz,[[0,[255,255,255],.95],[.3,P.b,.95],[.7,P.a,.75],[1,P.a,0]],5);
- if(P.style==='meteor'){ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(28,18,24,.92)';ctx.beginPath();ctx.arc(x,y,sz*.5,0,Math.PI*2);ctx.fill();ctx.strokeStyle=rgba(P.b,.8);ctx.lineWidth=Math.max(1,2*zoom);ctx.beginPath();ctx.arc(x,y,sz*.5,ang+2.2,ang+4.2);ctx.stroke();ctx.globalCompositeOperation='lighter';}
- else if(P.style==='comet'){ctx.strokeStyle=rgba(P.b,.8);ctx.lineWidth=Math.max(1,1.5*zoom);for(let s=0;s<5;s++){const a=ang+Math.PI+(s-2)*.22;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a)*sz*(2.2+s*.3),y+Math.sin(a)*sz*(2.2+s*.3));ctx.stroke();}}
+ /* R324: 사용자 2026-11-05 '보스 운석스킬 단순도형으로 나타나는 이펙트 개선' — 검은 원판·테두리 호(meteor)·직선 다섯 줄(comet)·작은 점 원을 R106 칠한 스프라이트(연기·불꽃·빛)로 */
+ const SP=window.__STORYWORLD_FX_SPRITES_R106__,FP={a:P.a,b:P.b},DK={a:P.a.map(v=>v*.35|0),b:P.a.map(v=>v*.6|0)};
+ if(SP&&(P.style==='meteor'||P.style==='comet')){try{for(let s=1;s<=(lo?2:4);s++)SP.draw('smoke',DK,x-Math.cos(ang)*sz*.7*s,y-Math.sin(ang)*sz*.7*s,sz*(1+.35*s),sz*(1+.35*s),{alpha:.55-.1*s,blend:'source-over',angle:m.seed+s});
+  SP.draw('flame',FP,x,y,sz*(P.style==='comet'?.8:1.1),sz*(P.style==='comet'?2.6:2.1),{frame:Math.floor(time*12)+m.seed,angle:ang+Math.PI/2,alpha:.95,pivot:[.5,.2]});ctx.globalCompositeOperation='lighter';}catch(_){}}
  try{texture(VFX.bolt,x,y,sz*2.2,sz*1.9,{alpha:.8,angle:ang});}catch(e){}
- if(!lo)for(let s=0;s<6;s++){const a=(hash(m.seed+':'+s)%628)/100+time*3,d=sz*(1.2+((hash(s+':'+m.seed)%50)/100));ctx.fillStyle=rgba(P.b,.6);ctx.beginPath();ctx.arc(x+Math.cos(a)*d-Math.cos(ang)*sz*s*.3,y+Math.sin(a)*d*.6-Math.sin(ang)*sz*s*.3,Math.max(1,sz*.08),0,Math.PI*2);ctx.fill();}
+ if(!lo&&SP)for(let s=0;s<6;s++){const a=(hash(m.seed+':'+s)%628)/100+time*3,d=sz*(1.2+((hash(s+':'+m.seed)%50)/100));try{SP.draw('spark',FP,x+Math.cos(a)*d-Math.cos(ang)*sz*s*.3,y+Math.sin(a)*d*.6-Math.sin(ang)*sz*s*.3,sz*.5,sz*.12,{alpha:.7,angle:ang});}catch(_){}}
  ctx.globalCompositeOperation='source-over';}
 function burst(m,kb,lo){const P=m.P,q=project(m.cx,m.cy),Rx=m.ext*TILE*zoom*1.15,Ry=Rx*.58,e=1-Math.pow(1-kb,3);
  ctx.save();ctx.translate(q.x,q.y);ctx.globalCompositeOperation='lighter';
  glow(0,0,Math.max(2,Rx*e),Math.max(1,Ry*e),[[0,P.b,.55*(1-kb)],[.5,P.a,.35*(1-kb)],[1,P.a,0]]);
- for(const[d,wd]of[[0,9],[.18,5]]){const kk=Math.max(0,Math.min(1,(kb-d)/(1-d)));if(kk<=0)continue;const ee=1-Math.pow(1-kk,3);ctx.lineWidth=Math.max(1,wd*zoom*(1-kk));ctx.strokeStyle=rgba(P.b,.9*(1-kk));ellipse(0,0,Rx*ee,Ry*ee);ctx.stroke();}
+ /* R324: 퍼지는 타원 고리 두 겹 → 칠한 빛·연기 */const SP=window.__STORYWORLD_FX_SPRITES_R106__,FP={a:P.a,b:P.b},DK={a:P.a.map(v=>v*.35|0),b:P.a.map(v=>v*.6|0)};if(SP){try{SP.draw('flare',FP,0,0,Rx*2*e,Ry*2*e,{alpha:.75*(1-kb)});}catch(_){}}
  if(P.style==='thread'){ctx.strokeStyle=rgba(P.a,.9*(1-kb));ctx.lineWidth=Math.max(1,1.6*zoom);for(let s=0;s<12;s++){const a=s*Math.PI/6+m.seed*.3,l=Rx*e*(.6+(hash(s+':'+m.seed)%40)/100);ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(Math.cos(a+.4)*l*.5,Math.sin(a+.4)*l*.5*.58,Math.cos(a)*l,Math.sin(a)*l*.58);ctx.stroke();}
   ctx.globalCompositeOperation='source-over';for(let s=0;s<3;s++){const a=s*2.1+m.seed;drawImg(DIR+'fx-ink-hook.webp',Math.cos(a)*Rx*.45*e,Math.sin(a)*Ry*.45*e,Rx*.9*(.6+.4*e),{alpha:.85*(1-kb),angle:a});}ctx.restore();return;}
- if(!lo){const n=22;for(let s=0;s<n;s++){const a=s*Math.PI*2/n+(hash(s+':'+m.seed)%30)/100,sp=.6+(hash(m.seed+':'+s)%60)/100,d=Rx*e*sp,yy=Math.sin(a)*d*.58-Math.sin(kb*Math.PI)*Rx*.35*sp;ctx.fillStyle=rgba(s%3?P.b:P.a,.9*(1-kb));ctx.beginPath();ctx.arc(Math.cos(a)*d,yy,Math.max(1,(3.5-2.5*kb)*zoom),0,Math.PI*2);ctx.fill();}}
+ if(!lo&&SP){const n=12;for(let s=0;s<n;s++){const a=s*Math.PI*2/n+(hash(s+':'+m.seed)%30)/100,sp=.6+(hash(m.seed+':'+s)%60)/100,d=Rx*e*sp,yy=Math.sin(a)*d*.58-Math.sin(kb*Math.PI)*Rx*.35*sp;try{SP.draw('spark',FP,Math.cos(a)*d,yy,Math.max(6,Rx*.22),Math.max(2,Rx*.05),{alpha:.85*(1-kb),angle:Math.atan2(yy,Math.cos(a)*d)});}catch(_){}}}
  ctx.globalCompositeOperation='source-over';
- if(P.style==='meteor'){ctx.strokeStyle='rgba(30,22,28,'+(.5*(1-kb)).toFixed(2)+')';ctx.lineWidth=Math.max(1,12*zoom*(1-kb));ellipse(0,0,Rx*e*.85,Ry*e*.85);ctx.stroke();}
+ if(SP&&(P.style==='meteor'||P.style==='comet')){try{SP.draw('smoke',DK,0,0,Rx*1.9*e,Ry*1.9*e,{alpha:.55*(1-kb),blend:'source-over',angle:m.seed});SP.draw('crack',DK,0,0,Rx*1.4,Ry*1.4,{alpha:.8*(1-kb),blend:'source-over',angle:m.seed});}catch(_){}}
  if(!lo&&kb<.6)drawCell(P.elem,'impact',0,Ry*.3,Rx*(1.2+.8*e),{alpha:(1-kb/.6)*.9,delta:hue(P.a)-FAMILY[P.elem]});
  ctx.restore();}
 function drawMeteors(){if(!meteors.length)return;const lo=low();
