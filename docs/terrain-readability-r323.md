@@ -51,3 +51,34 @@ dream, palace and city-alley scenes on desktop and mobile, including lowFx and
 grayscale comparisons. CPU fixtures do not establish visual acceptance or a
 physical-device frame budget. The renderer's existing low-resolution baked
 terrain and input-canvas DPR remain limits on fine-detail sharpness.
+
+## Wide desktop follow-up
+
+The current-main R323 grade remains enabled during follow-up comparisons. Only
+the additional desktop correction is toggled with `setDesktopContrast(false)`
+and `setDesktopContrast(true)`; disabling the whole overlay would compare the
+wrong baseline. This diagnostic switch is in memory and does not alter saves.
+
+Fine-pointer views at least 960 CSS pixels wide receive a terrain-role
+uniform adjustment in `STORY:dist01` and `STORY:dist00`, and in
+`STORY:ep1a10` with lowFx enabled. The renderer's current world key and viewport
+select the profile. Mobile detection follows the existing R63 helper with a
+coarse-pointer fallback; unavailable or throwing detection leaves the base
+grade unchanged. Other regions, dream layers, normal-quality city, mobile
+views keep their existing values. Cave and garden profiles pair a restrained
+floor/path lift with structural darkening to retain the pale hero silhouette;
+wall/cap gains keep their original ratio and cloned-material role mapping.
+The city lowFx profile changes only floor/path values. The rosehouse exclusion
+also applies to these profiles.
+
+The original mask/viewport ROI and L* 6 target are retained. Latest-main
+`2b9dc2364b916e9ff1679621a7536961e6f99e38` reproduced cave/garden shortfalls; city
+lowFx measured 6.0007 and 5.9600 in a planned repeat, so its borderline result
+is not treated as a robust pass. These are scene-median diagnostics including
+possible UI/prop occlusion, not independent art scores. Validation distinguishes
+targeted PC improvement from unchanged mobile and checkerboard controls.
+
+Profile changes update the existing uniform values without adding GLSL
+instructions, recompiling a shader, or allocating another rendering pass.
+Callback markers and cloned cap classifications from the earlier R323 fixes
+remain in place. Physical GPU frame budgets remain a separate validation.

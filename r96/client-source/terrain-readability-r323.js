@@ -4,8 +4,8 @@
 // their existing modules. This adds no mesh, texture, pass or per-pixel sample.
 (()=>{'use strict';
 if(window.__STORYWORLD_TERRAIN_READABILITY_R323__)return;
-const REV='R323-terrain-readability-1',KEY='storyworld.r323.terrainReadability';
-let on=true,lastError=null,preservedTheme=null;try{on=JSON.parse(localStorage.getItem(KEY)||'null')?.on!==false;}catch(_){}
+const REV='R323-terrain-readability-2',KEY='storyworld.r323.terrainReadability';
+let on=true,lastError=null,preservedTheme=null,desktopContrast=true,desktopProfile='base';try{on=JSON.parse(localStorage.getItem(KEY)||'null')?.on!==false;}catch(_){}
 // Output-space grade: floor detail remains continuous; walls are cooler and
 // darker, their existing top/trim materials keep the upper value step.
 const ROLES=Object.freeze({floor:[1.34,1.31,1.27],wall:[.86,.89,.94],cap:[1.02,1.02,1.03],path:[1.34,1.31,1.27]});
@@ -29,7 +29,21 @@ function roleMaterials(r){
  add(r.wallCapMaterial61,'cap');
  return roles;
 }
-function installMaterial(m,role,enabled=on){
+// Wide fine-pointer views expose more dim terrain than the mobile camera.
+// Balance floor and structural values in the measured STORY scenes while
+// retaining the cap/face grade ratio and a restrained floor lift near actors.
+const DESKTOP=Object.freeze({base:{name:'base',floor:1,structure:1},cave:{name:'wide-cave',floor:1.35,structure:.5},garden:{name:'wide-garden',floor:1.35,structure:.85},cityLow:{name:'wide-city-low',floor:1.15,structure:1}});
+function desktopTerrainProfile(r){
+ if(!desktopContrast||!(r.lastViewportWidth>=960))return DESKTOP.base;
+ let mobile=true;
+ try{const m=window.__STORYWORLD_MOBILE_R63__;mobile=typeof m?.isMobile==='function'?!!m.isMobile():!(typeof matchMedia==='function'&&!matchMedia('(pointer:coarse)').matches);}catch(_){return DESKTOP.base;}
+ if(mobile)return DESKTOP.base;
+ if(r.lastZone==='STORY:dist01')return DESKTOP.cave;
+ if(r.lastZone==='STORY:dist00')return DESKTOP.garden;
+ if(r.lastZone==='STORY:ep1a10'&&typeof settings!=='undefined'&&settings?.lowFx)return DESKTOP.cityLow;
+ return DESKTOP.base;
+}
+function installMaterial(m,role,enabled=on,profile=DESKTOP.base){
  if(!m||!ROLES[role]||m.isShaderMaterial||m.isRawShaderMaterial)return;
  let state=states.get(m);
  if(!state&&!enabled)return;
@@ -57,14 +71,15 @@ function installMaterial(m,role,enabled=on){
   m.needsUpdate=true;
  }
  if(state.enabled!==enabled){state.enabled=enabled;m.needsUpdate=true;}
- state.role=role;const v=ROLES[role];
- state.gain.value[0]=enabled?v[0]:1;state.gain.value[1]=enabled?v[1]:1;state.gain.value[2]=enabled?v[2]:1;
+ state.role=role;const v=ROLES[role],k=role==='floor'||role==='path'?profile.floor:profile.structure;
+ state.gain.value[0]=enabled?v[0]*k:1;state.gain.value[1]=enabled?v[1]*k:1;state.gain.value[2]=enabled?v[2]*k:1;
 }
 function sync(r){try{stats.frames++;
  // The rose-house checkerboard already has strong inverse value separation.
  // Preserve its black tiles and pale walls instead of lifting a healthy theme.
  const preserve=r.r118TileLook==='rosehouse'||r.terrainArt?.r118Tiles?.file==='rosehouse';preservedTheme=preserve?'rosehouse':null;
- for(const[m,role]of roleMaterials(r))installMaterial(m,role,on&&!preserve);
+ const profile=desktopTerrainProfile(r);desktopProfile=on&&!preserve?profile.name:'base';
+ for(const[m,role]of roleMaterials(r))installMaterial(m,role,on&&!preserve,profile);
  }catch(e){fail(e);}}
 function attach(){
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,gl=r?.renderer;
@@ -77,6 +92,6 @@ function attach(){
 }
 if(typeof setInterval==='function')setInterval(attach,500);attach();
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
-window.__STORYWORLD_TERRAIN_READABILITY_R323__=Object.freeze({revision:REV,roles:ROLES,set,attach,
- inspect:()=>({revision:REV,on,preservedTheme,stats:{...stats},lastError,extraDraws:0,extraTextures:0,DPRChanged:false,geometryChanged:false,collisionChanged:false,assetsChanged:false,GPUVerified:false})});
+window.__STORYWORLD_TERRAIN_READABILITY_R323__=Object.freeze({revision:REV,roles:ROLES,set,attach,setDesktopContrast:v=>(desktopContrast=v!==false),
+ inspect:()=>({revision:REV,on,preservedTheme,desktopContrast,desktopProfile,stats:{...stats},lastError,extraDraws:0,extraTextures:0,DPRChanged:false,geometryChanged:false,collisionChanged:false,assetsChanged:false,GPUVerified:false})});
 })();
