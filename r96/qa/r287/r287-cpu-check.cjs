@@ -142,4 +142,4 @@ const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.
 console.log(`R287 ${pass}/${checks.length}`);if(pass!==checks.length)process.exit(1);
 })();
 
-require("node:assert").ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./maps-palace-slum-r317.js"></script><script src="./boss-prop-control-r314.js"></script><script src="./bgm-map-r308.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");
+require("node:assert").ok(fs.readFileSync(path.join(__dirname,"../../runtime-text/index.html"),"utf8").includes('<script src="./hud-bgm-hwando-w-r313.js"></script><script src="./maps-palace-slum-r317.js"></script><script src="./save-transition-r320.js"></script><script src="./boss-prop-control-r314.js"></script><script src="./bgm-map-r308.js"></script><script src="./mobile-perf-r298.js"></script>'),"R313 registered before R298; late hook waits for R292");

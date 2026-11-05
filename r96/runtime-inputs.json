@@ -4006,6 +4006,7 @@
     "assets/r306/pixel/pfe37f18eb7ed.webp",
     "maps-palace-slum-r317.js",
     "assets/r317/index.json",
+    "save-transition-r320.js",
     "boss-prop-control-r314.js"
   ],
   "mediaPaths": [
@@ -5081,5 +5082,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0b28d8eada6a0438a19fdb0d9b8cf08bf5df6fe59faaaea99beaf31bc0076abf"
+  "runtimeManifestSHA256": "314d826b59fd8114ad3102df111e20026c8f28ebc7b410fdf36e3e16e3901154"
 }
