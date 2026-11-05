@@ -41,3 +41,9 @@ for k in range(9):
 out=Image.fromarray(o.clip(0,255).astype('uint8'),'RGBA')
 dst=root/'r96/runtime-text/assets/r349/hwando-arc.webp';out.save(dst,'WEBP',lossless=True)
 print(dst,out.size,'core',core.round(),'edge',edge.round())
+# R349c: hando-final-r49 렌더러는 그림을 (방향 − 180°)로 돌려 그린다(baked=π). 그 렌더러에 줄 파생본 두 장:
+#  · hwando-arc-r49.webp  = 위 대칭 호를 180° 돌린 '(' — R49 가 돌리면 적 쪽으로 볼록한 ')'
+#  · hwando-a-r49.webp    = 원래 베기를 시계 방향 66° 돌린 것 — R49 가 돌리면 볼록한 쪽(그림 안 114°)이 적을 향함
+arc=Image.open(dst).convert('RGBA');arc.rotate(180,resample=Image.BICUBIC).save(root/'r96/runtime-text/assets/r349/hwando-arc-r49.webp','WEBP',lossless=True)
+src.rotate(-66,resample=Image.BICUBIC).save(root/'r96/runtime-text/assets/r349/hwando-a-r49.webp','WEBP',lossless=True)
+print('r49 variants written')

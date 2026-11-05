@@ -19,4 +19,19 @@ assert(fs.existsSync(path.join(root,'runtime-text/assets/r349/hwando-arc.webp'))
  ok("slash: snapped to 8 directions; alternates the symmetric arc and the original slash turned so its bulge faces the enemy");
  calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:Math.PI});calls.length=0;g.de({type:'e568HeroImpact',asset:A,x:-3,y:0,angle:0});assert(calls[0].p==='assets/r349/hwando-arc.webp'&&close(calls[0].a,Math.PI),JSON.stringify(calls[0]));ok('impact at an enemy on the left turns to face away from the hero (same rule)');
  env.player.hero='lauren';calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:0});assert.strictEqual(calls[0].p,A);assert.strictEqual(calls.length,1);ok('other heroes untouched');}
+// R349c(Codex 리뷰): 평소 환도 공격을 그리는 hando-final-r49 와 같은 방식의 렌더러로 — readyImage(ART+'a.webp') 를 (방향−π)로 돌리고, 베기는 visualWorldAngle35,
+// 적중은 r49Heading 으로 방향을 잡는다. 그림 안 '볼록한 쪽' 각도 + 그리는 회전 = 화면에서 볼록한 쪽이므로 그것이 적 쪽 8방향과 같아야 한다.
+{const D=Math.PI/180,IMG={'assets/vfx/heroes/hwando-a.webp':114*D,'assets/r349/hwando-arc-r49.webp':180*D,'assets/r349/hwando-a-r49.webp':180*D};const seen=[];
+ const env={window:{},localStorage:{getItem:()=>null,setItem(){}},player:{hero:'hwando',x:0,y:0},project:(x,y)=>({x:(x-y)*32,y:(x+y)*16})};
+ const R49=`let drawEffect=function(e){const heading=e.type==='slash'?(Number.isFinite(e.visualWorldAngle35)?e.visualWorldAngle35:e.angle):(Number.isFinite(e.r49Heading)?e.r49Heading:e.r40WorldHeading);
+  const zero=project(0,0),v=project(Math.cos(heading),Math.sin(heading)),angle=Math.atan2(v.y-zero.y,v.x-zero.x),row=readyImage('assets/vfx/heroes/hwando-a.webp');seen.push({img:row.image.path,bulge:row.image.bulge+angle-Math.PI});},
+  readyImage=function(p){return {image:{path:p,bulge:IMG[p]}};},texture=function(){};`;
+ const g=new Function('seen','IMG',...Object.keys(env),R49+RT('hwando-arc-r349.js')+';return {de:e=>drawEffect(e)};')(seen,IMG,...Object.values(env));
+ const A='assets/vfx/heroes/hwando-a.webp',close=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)))<1e-6,scr=(wx,wy)=>{const q=env.project(wx,wy),z=env.project(0,0);return Math.atan2(q.y-z.y,q.x-z.x);};
+ const cases=[[1,-1,0],[-1,1,Math.PI],[-1,-1,-Math.PI/2],[1,1,Math.PI/2],[1,0,null]];let k=0;const imgs=new Set();
+ for(const [wx,wy,want] of cases){const wa=Math.atan2(wy,wx),s0=scr(wx,wy),w8=Math.round(s0/(Math.PI/4))*(Math.PI/4);seen.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:wa,visualWorldAngle35:wa});
+  assert(seen.length===1&&close(seen[0].bulge,want==null?w8:want),'r49 slash '+wx+','+wy+' '+JSON.stringify(seen[0])+' want '+(want??w8));imgs.add(seen[0].img);
+  seen.length=0;g.de({type:'e568HeroImpact',asset:A,x:wx*3,y:wy*3,angle:0,r49Heading:wa,r40WorldHeading:wa});assert(seen.length===1&&close(seen[0].bulge,want==null?w8:want),'r49 impact '+JSON.stringify(seen[0]));imgs.add(seen[0].img);k++;}
+ assert(imgs.has('assets/r349/hwando-arc-r49.webp')&&imgs.has('assets/r349/hwando-a-r49.webp')&&!imgs.has(A));
+ ok('hando-final-r49 path: both alternating variants (pre-rotated arc / original) bulge toward the enemy on 8 snapped directions; the original unrotated sprite is never drawn');}
 console.log(JSON.stringify({ok:true,checks:n,method:'CPU fake globals; headless capture separately; no GPU or device'}));
