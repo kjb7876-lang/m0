@@ -1,0 +1,35 @@
+cold process restores active final boss and HP PASS {
+  zone: 'ep1a08',
+  phase: 'boss',
+  rows: [
+    { id: 'ep1a08:mb-ep1a08', hp: 55885.56, maxHp: 55885.56 },
+    { id: 'ep1a08:maze-chief-r1', hp: 55885.56, maxHp: 55885.56 }
+  ]
+}
+missing Three renderer refuses interaction PASS 
+scalpel native wound budget and four ticks PASS {
+  frame: 'scalpel',
+  initial: 20,
+  queued: [ { kind: 'bleed', remaining: 80, left: 4 } ],
+  hp: 677,
+  ticks: 4,
+  tickDamage: 80,
+  remaining: 0
+}
+syringe native wound budget and four ticks PASS {
+  frame: 'syringe',
+  initial: 20,
+  queued: [ { kind: 'poison', remaining: 80, left: 4 } ],
+  hp: 677,
+  ticks: 4,
+  tickDamage: 80,
+  remaining: 0
+}
+contradictory saved open doors reconcile to phase PASS {
+  phase: 'route',
+  doors: [ { id: 'door-0', open: false }, { id: 'door-2', open: false } ],
+  actor: true,
+  projectile: true
+}
+native pathfinder reaches merge and rejects locked boss PASS { entryToMerge: 8, entryToLockedBoss: 0 }
+native error ledger remains clear PASS []

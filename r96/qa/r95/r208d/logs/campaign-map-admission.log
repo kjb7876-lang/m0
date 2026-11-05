@@ -1,0 +1,78 @@
+PASS Native runtime boots
+PASS Opening is the canonical safe refuge
+PASS 777 activates from the untouched opening checkpoint
+MAP hub r82-refuge-cloister null null
+MAP dist00 r171-story-narrative-map 6 0
+MAP dist01 r171-story-narrative-map 9 0
+MAP dist02 r171-story-narrative-map 9 0
+MAP dist03 r171-story-narrative-map 6 0
+MAP dist04 r171-story-narrative-map 9 0
+MAP dist05 r171-story-narrative-map 6 0
+MAP dist06 r171-story-narrative-map 3 0
+MAP ep1a08 hospital-ward-b3 null null
+MAP ep1a09 r171-story-narrative-map 3 0
+MAP ep1a09b r171-story-narrative-map 8 0
+MAP ep1a10 r171-story-narrative-map 6 0
+MAP ep1a11 r171-story-narrative-map 3 0
+MAP dreamRest interior-consultation null null
+MAP ep1b01 r171-story-narrative-map 3 0
+MAP ep1b02 r171-story-narrative-map 6 0
+MAP ep1b03 r171-story-narrative-map 10 0
+MAP ep1b04 r171-story-narrative-map 8 0
+MAP ep1b05 r171-story-narrative-map 6 0
+MAP ep1b06 r171-story-narrative-map 3 0
+MAP ep1b06b r171-story-narrative-map 9 0
+MAP ep1b07 r171-story-narrative-map 9 0
+MAP ep1b08 r171-story-narrative-map 7 0
+MAP ep1b09 r171-story-narrative-map 3 0
+MAP restEp1b interior-observation null null
+MAP u201 r171-story-narrative-map 6 0
+MAP u202 r171-story-narrative-map 9 0
+MAP u204 r171-story-narrative-map 6 0
+MAP u205 r171-story-narrative-map 6 0
+MAP u206 r171-story-narrative-map 3 0
+MAP u203 r171-story-narrative-map 3 0
+MAP restU2 courtyard null null
+MAP last304 r171-story-narrative-map 8 0
+MAP last305 r171-story-narrative-map 8 0
+MAP last301 r81-story-ward-maze null null
+MAP last302 r171-story-narrative-map 6 0
+MAP last303 r171-story-narrative-map 8 0
+MAP restLast3 courtyard null null
+MAP kair01 r171-story-narrative-map 3 0
+MAP kair04 r171-story-narrative-map 6 0
+MAP kair05 r171-story-narrative-map 8 0
+MAP kair06 r171-story-narrative-map 9 0
+MAP kair07 r171-story-narrative-map 9 0
+MAP kair08 r171-story-narrative-map 9 0
+MAP kair09 r171-story-narrative-map 6 0
+MAP kair10 r171-story-narrative-map 3 0
+MAP kair02 r81-story-ward-maze null null
+MAP kair03 r81-story-ward-maze null null
+MAP restKairo courtyard null null
+MAP hando01 r81-story-ward-maze null null
+MAP hando02 r81-story-ward-maze null null
+MAP hando03 r81-story-ward-maze null null
+MAP restHando courtyard null null
+MAP murder01 r171-story-narrative-map 6 0
+MAP murder02 r171-story-narrative-map 9 0
+MAP murder04 r171-story-narrative-map 6 0
+MAP murder03 r171-story-narrative-map 3 0
+MAP cult01 r171-story-narrative-map 7 0
+MAP cult02 r171-story-narrative-map 7 0
+MAP cult05 r171-story-narrative-map 6 0
+MAP cult06 r171-story-narrative-map 10 0
+MAP cult03 r171-story-narrative-map 3 0
+MAP cult04 r81-story-ward-maze null null
+MAP village courtyard null null
+PASS All 64 native 777 destinations enter the requested region without loading or modal residue
+PASS Every campaign entry places the player on collision-safe floor
+PASS Every campaign capture has one finite hero and finite actor coordinates
+PASS Every living enemy clears the static geometry in all 56 combat maps
+PASS Each controlled ward reaches its gathering room while its boss room stays locked before elimination
+PASS Samong regions retain distinct native finale and ward controllers
+PASS Every region has only valid reciprocal campaign destinations
+PASS After native door unlock, every walkable cell of the hospital, world-ward and refuge layouts is connected through body-clear edges
+PASS Leaving the 64-region 777 audit restores the exact normal opening progress
+PASS No native error is recorded across the whole campaign admission audit
+FINAL 13 0

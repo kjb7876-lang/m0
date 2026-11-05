@@ -1,0 +1,25 @@
+PASS Native story runtime boots
+CHECKPOINT hando01
+CHECKPOINT hando02
+CHECKPOINT hando03
+PASS All three castle maps retain two distinct native gate bindings and safe assault anchors
+PASS Both native two-round defense controllers are active and own initial enemy hiding
+PASS Both hando02 and hando03 owners bind to actual separate doors
+CHECKPOINT hando02
+PASS Both owners are reachable and native NPC interaction opens each real door without completing the map
+PASS Native save/restore retains the two owner permissions and door states
+FAIL Native castle completion exposes the next portal and preserves a guide goal
+{"goal":{"kind":"objective","id":"castle-start","point":{"x":15,"y":13,"path":"assets/props/v290/shattered_memory_core.webp"}},"safe":false}
+FAIL Native hando02 defense runs both assault rounds and joins the garrison before story completion
+{"completed":false,"state":{"phase":"idle","round":0,"remaining":0,"pressure":0,"selected":[],"used":[],"joined":false,"retries":0,"guards":[]},"events":[],"people":[{"id":"r75:fort:hando02:0","frame":"villager-elder","guard":false,"x":45,"y":111},{"id":"r75:fort:hando02:1","frame":"villager-woman","guard":false,"x":46.3,"y":111},{"id":"r75:fort:hando02:2","frame":"villager-hood","guard":false,"x":47.6,"y":111},{"id":"r75:fort:hando02:3","frame":"time-guardian","guard":false,"x":45,"y":111.4}]}
+CHECKPOINT last301
+PASS The authored last301 duel remains boss-only
+PASS The last301 native fall preserves the living boss and reads post-story before completion
+CHECKPOINT last303
+CHECKPOINT kair02
+CHECKPOINT kair03
+CHECKPOINT cult01
+CHECKPOINT cult04
+PASS Residents, guardian and post-castle companions remain protected wall-safe NPCs
+PASS kair02 keeps its native command-barrier identity
+{"passed":10,"failed":2}

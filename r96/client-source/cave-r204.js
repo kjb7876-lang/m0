@@ -774,7 +774,9 @@ function glGuard(r){const gl=r?.renderer;if(!gl||gl.__r260)return;const base=gl.
   if(mine||first){const n0=stats.hidden;hideNative(r);if(stats.hidden>n0)stats.lateHidden=(stats.lateHidden||0)+(stats.hidden-n0);}}}catch(e){fail(e);}return base.apply(this,a);};gl.__r260=true;}
 const wrapFn=fn=>{if(fn.__r204)return fn;const w=function(frame){before(this,frame);try{glGuard(this);}catch(e){fail(e);}return fn.apply(this,arguments);};w.__r204=true;return w;};
 C.render=wrapFn(C.render);
-function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r204)r.render=wrapFn(r.render);}catch(e){fail(e);}}
+// Other overlays replace the outer function; its marker does not identify this renderer's installed hooks.
+const wrappedRenderers=new WeakSet();
+function wrapInst(){try{const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render')&&!wrappedRenderers.has(r)){wrappedRenderers.add(r);r.render=wrapFn(r.render);}}catch(e){fail(e);}}
 setInterval(wrapInst,500);wrapInst();
 function set(p){if(typeof p?.on==='boolean')prefs.on=p.on;if(typeof p?.widen==='boolean')prefs.widen=p.widen;if(typeof p?.skeleton==='boolean')prefs.skeleton=p.skeleton;if(typeof p?.inflate==='boolean')prefs.inflate=p.inflate;if(typeof p?.unify==='boolean')prefs.unify=p.unify;if(typeof p?.rooms==='boolean')prefs.rooms=p.rooms;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_CAVE_R204__=Object.freeze({revision:REV,set,skeletonPoints,inflate,interiorProps,furnish,zones:Object.keys(ZONES),field,topHeight:(F,z,x,y)=>topHeight(F,ZONES[z],x,y),at,

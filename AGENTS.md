@@ -7,3 +7,4 @@
 - PR 본문에: 작업 ID·revision, 기준 커밋, 실행한 테스트 명령과 결과, 미검증 항목. 실행하지 않은 검사를 통과라고 쓰지 않는다.
 - 빠른 검사: `python3 -I scripts/collab/test_validate.py`, `python3 -I scripts/collab/validate.py all`, 변경한 오버레이의 `node r96/qa/rNNN/*.cjs`.
 - 유료 API·결제·키 발급·비밀정보 커밋 금지.
+- 참고 스킬: `.claude/skills/` 의 SKILL.md 는 Codex 도 읽고 따른다. 특히 UI 흐름 버그는 `ecc-click-path-audit`, 브라우저 테스트는 `ecc-e2e-testing`, 배포 뒤 점검은 `ecc-browser-qa`, 그림·이펙트는 `storyworld-art-style`, 렉은 `threejs-debug-profiler`. 출처·고른 이유: `.claude/skills/README-SOURCES.md`.

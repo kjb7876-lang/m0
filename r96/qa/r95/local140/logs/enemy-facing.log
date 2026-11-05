@@ -1,0 +1,6 @@
+PASS All populated regions and native kinds receive eight committed facing probes
+PASS Actual final native draw selects a body frame for every probe
+PASS Every selected actual body source rectangle fits original image dimensions
+PASS Authored left/right sprites face their committed screen-projected attack ray
+PASS Committed attack clocks keep their original angle
+PASS No native error is recorded during facing probes

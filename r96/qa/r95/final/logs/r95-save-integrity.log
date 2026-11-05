@@ -1,0 +1,18 @@
+PASS Native runtime boots
+PASS Rejected title-screen import preserves absent difficulty storage
+PASS Malformed hero is rejected
+PASS Rejected import preserves in-memory difficulty choices
+PASS Rejected import preserves stored difficulty choices
+PASS Malformed readScenes object is rejected
+PASS Malformed readScenes object reports a collection error before native restore
+PASS Malformed readScenes object preserves the active journey
+PASS Malformed room enemies object is rejected
+PASS Malformed room enemies object reports a collection error before native restore
+PASS Malformed room enemies object preserves the active journey
+PASS Malformed checkpoint items string is rejected
+PASS Malformed checkpoint items string reports a collection error before native restore
+PASS Malformed checkpoint items string preserves the active journey
+PASS Valid import still restores its difficulty choices
+PASS Earlier saves may omit optional collections
+PASS Normal save namespace remains unchanged
+PASS Native error ledger stays empty

@@ -27,8 +27,10 @@ function before(r,frame){try{if(!prefs.ground||!Array.isArray(frame?.commands))r
  const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!(c?.kind==='image'&&c.owner?.kind==='ground'&&c.owner?.id==='ground'));stats.groundDropped+=n0-frame.commands.length;}catch(e){fail(e);}}
 const wrapFn=fn=>{if(fn.__r272)return fn;const w=function(frame){before(this,frame);return fn.apply(this,arguments);};w.__r272=true;return w;};
 // perf-r97 이 인스턴스에 render 를 복사해 두므로 프로토타입과 인스턴스를 함께 감싼다.
-function wrapAll(){try{const C=window.__STORYWORLD_PHASE1__?.controller,r=C?.state?.three;if(!r)return;const proto=Object.getPrototypeOf(r);if(proto&&typeof proto.render==='function'&&!proto.render.__r272)proto.render=wrapFn(proto.render);
- if(Object.prototype.hasOwnProperty.call(r,'render')&&!r.render.__r272)r.render=wrapFn(r.render);}catch(e){fail(e);}}
+const wrappedTargets=new WeakSet();
+function wrapOnce(target){if(!target||wrappedTargets.has(target)||typeof target.render!=='function')return;wrappedTargets.add(target);target.render=wrapFn(target.render);}
+function wrapAll(){try{const C=window.__STORYWORLD_PHASE1__?.controller,r=C?.state?.three;if(!r)return;wrapOnce(Object.getPrototypeOf(r));
+ if(Object.prototype.hasOwnProperty.call(r,'render'))wrapOnce(r);}catch(e){fail(e);}}
 setInterval(wrapAll,500);wrapAll();
 function set(p){for(const k of ['paths','ground'])if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_PERF_R272__=Object.freeze({revision:REV,pathKey,set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});

@@ -1,0 +1,437 @@
+{
+  "method": "Actual native actor dimensions, assisted candidate positions, CPU projection only",
+  "rows": [
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:mb-ep1a08",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:mb-ep1a08",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:mb-ep1a08",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:mb-ep1a08",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:maze-chief-r1",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:maze-chief-r1",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:maze-chief-r1",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "ep1a08",
+      "actor": "ep1a08:maze-chief-r1",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    },
+    {
+      "id": "dist01",
+      "actor": "dist01:mb-dist01",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "dist01",
+      "actor": "dist01:mb-dist01",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "dist01",
+      "actor": "dist01:mb-dist01",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "dist01",
+      "actor": "dist01:mb-dist01",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    },
+    {
+      "id": "dist02",
+      "actor": "dist02:mb-dist02",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "dist02",
+      "actor": "dist02:mb-dist02",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "dist02",
+      "actor": "dist02:mb-dist02",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "dist02",
+      "actor": "dist02:mb-dist02",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-mid",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-mid",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-mid",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-mid",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-boss",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 12,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 105.99776000000006,
+      "foot": 249.92000000000007,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-boss",
+      "baseHeight": 128.502,
+      "x": 18,
+      "y": 10,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.28,
+        "v": 0
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-boss",
+      "baseHeight": 128.502,
+      "x": 24,
+      "y": 9,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 125.03776000000002,
+      "foot": 268.96000000000004,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0.12
+      }
+    },
+    {
+      "id": "cult04",
+      "actor": "cult04:c104-boss",
+      "baseHeight": 128.502,
+      "x": 20,
+      "y": 8,
+      "hero": {
+        "x": 20,
+        "y": 14
+      },
+      "head": 116.23776000000001,
+      "foot": 260.16,
+      "admitted": true,
+      "offset": {
+        "u": -0.14,
+        "v": 0
+      }
+    }
+  ]
+}

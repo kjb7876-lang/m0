@@ -1,0 +1,21 @@
+PASS Exactly one automatic proximity loop is removed and the patch is idempotent
+PASS Native refuge starts with a reachable next portal
+PASS Standing on the refuge portal for 60 seconds never travels or opens difficulty
+PASS A real E key event crosses forward through native difficulty and story admission
+PASS Standing on the previous portal never bounces back to the refuge
+PASS Held E repeat events do not activate another portal after arrival
+PASS Releasing and pressing E crosses back through the original previous route
+PASS Guide still plans an automatic walking path toward the next portal
+PASS Guide executes automatic walking along its collision-safe path
+PASS Guide stops at the portal, stays enabled, and requires E without arming travel
+PASS E crosses the portal while preserving the enabled guide state
+CHECKPOINT dist01
+CHECKPOINT dist02
+CHECKPOINT ep1a08
+PASS Cave, swamp and completed hospital portals stay idle until E then cross safely
+PASS E at a locked hospital boss door preserves the field-clear requirement
+PASS After native field elimination E opens the canonical boss-door story, not a portal
+PASS Finishing the original story opens the native boss door and preserves the boss encounter gate
+PASS Portal navigation adds no serialized progression fields or modifies older test saves
+PASS Native error ledger remains clear
+{"passed":17,"failed":0,"integrationFixture":false}

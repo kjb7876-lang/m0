@@ -1,0 +1,209 @@
+{
+  "checks": [
+    {
+      "name": "poison atlas decodes to exact source RGBA dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "poison painted frames are distinct and have transparent outer cell edges",
+      "passed": true,
+      "detail": {
+        "frames": 16,
+        "maximumBorderAlpha": 0
+      }
+    },
+    {
+      "name": "Poison has15 nonempty frames and a fully transparent termination",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scalpel atlas decodes to exact source RGBA dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scalpel painted frames are distinct and have transparent outer cell edges",
+      "passed": true,
+      "detail": {
+        "frames": 16,
+        "maximumBorderAlpha": 0
+      }
+    },
+    {
+      "name": "bind atlas decodes to exact source RGBA dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "bind painted frames are distinct and have transparent outer cell edges",
+      "passed": true,
+      "detail": {
+        "frames": 24,
+        "maximumBorderAlpha": 0
+      }
+    },
+    {
+      "name": "Three original atlas sources are unchanged",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": true,
+  "atlases": [
+    {
+      "kind": "poison",
+      "size": [
+        1024,
+        1024
+      ],
+      "frames": 16,
+      "RGBABytes": 4194304,
+      "frameHashes": [
+        "dfd75a81dcb2a7724cb82b390dd6037f7d7e2af97f18a7554c2eb9d5722bfc32",
+        "36f1ae14e314b8e1e1bcf86b2db92197d5ed39d176ba6c5723e42d469df41cb2",
+        "375e8deec19e3a3dab88201b499772c6e04c37822f30d02a90bbe5bb9085b5ae",
+        "3989988cd359f098be02d57688de63a0d1e1aabb8282ee7c14f19302bd343481",
+        "bb43fec3b07e6fe64628e96e6765b4a5fb5a85f98f4a35f3d5eefc472d03f57d",
+        "694ccddc4c11cef7f041394662f4774241fa49e1b4619f371670a2053bb45591",
+        "1afd508ac734b78adff08aecf704de4602855f1d6ba652a94da943ab8ebdadb4",
+        "fdce8a4ff5e69840fa6088ff00182b8e7f503b4fbe8d26c73e639858651f384b",
+        "c68dc640581b8bcc02fb8ae52f2fd37213d951f5e6aeedcf9ec15611b4719b6c",
+        "7072638853e2fabccae09b911ce16abdf4bb0be9f8b92840e1334eaef1950137",
+        "f45c65aee697e0ff69b501490e96f9a70d31c0dbd0f8f3f6b4a8149c2d6fe58e",
+        "439db7c8fa322d13229598888ef55fb24857bcc2e08fc270eb9cac1c12bb2d9e",
+        "2fc98d5e3753ca08f8490807cbbc1cf80097d2e57a1f750ae1915136ae793314",
+        "ca23e158365a79a55d00b191bb43166e39d0f06c314ed81f50ad30779e671519",
+        "c79e14d8f3adf3540878ec718380b045aa151ddbae2833b328bff3a02c41686e",
+        "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+      ],
+      "nonempty": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "kind": "scalpel",
+      "size": [
+        1280,
+        1280
+      ],
+      "frames": 16,
+      "RGBABytes": 6553600,
+      "frameHashes": [
+        "250bfe4cd69d92f8709305b0cdb10f5b6f90e40f059e7421154ba169169cf74a",
+        "3d23a318a64ebf95c236049097a4cbe7938a3a282ea02dadf272a4e6d36f4400",
+        "ad549f2ef479f0c52ca723eb6ebde978bbc934f4d740d8e860e03b230580886c",
+        "90e8f15a77428bb93c3a9cf185c1064045c189ffcd9a41cc9622a55fecd6213c",
+        "2f52adfbc4388aa7a7826b578b4e48c34993d112542bb1625aaa7d9ad515c163",
+        "2efaa476f5b715bd39eb3f5df9aef255837bd94f4f292eb1fef199578d83ad43",
+        "f460f05259f4c28d2480bdc481ab9010203e4eae87d8a2c98fc6e2e5092545a7",
+        "e249510ebfb5514e68e5edb005996c3e8d299e16a032e663442a92c7a6b83491",
+        "08e6222d77b76c927c2877cc8aa91d315e9dac4772c075f60047bf87249d3f10",
+        "926e00ccf1befa5538c4f59b2cbf75a4da6d5085f7cd027044445f4bd6036cc0",
+        "d25c49c72e93aa6effd442868b74b738623525ccb71756969970a9ff05519f22",
+        "7edf68c7b5ffa1fa15d9ee7dbb30142fdea4cf52d2265aebc78178b019bb6ed1",
+        "7176c1080fce526b2c6bb3c6b8f32357f675c0b210d02eee1719956cd0f7945c",
+        "cfdbc9c504bb0314fd4ca1da60bd3badd0d30659856bb069a5c0061a045a3b98",
+        "f5fc71b2a9549403cd7ede5879a3b3b619ed926c25b46f81877dd62204fe6f3f",
+        "e34f951b50cf84ab0fff0c41a23cee1e6ce5461e571139d687c65314e68d20ff"
+      ],
+      "nonempty": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "kind": "bind",
+      "size": [
+        2048,
+        3072
+      ],
+      "frames": 24,
+      "RGBABytes": 25165824,
+      "frameHashes": [
+        "d5a1dff7286d8096f89fb09707718e511702e0afb41ae14dd5597c73df8bdcf2",
+        "e1bcd0492f1147d91be245def86399ba165bc368fe5614e54c1d09ab78bc658b",
+        "6cb9a45eb761381fbb8d3d5ca005b5abbcbb7b63609e89ecfdb6718aeb854f53",
+        "14bedb020b51ab4d0c66dea4d1751b1b4de505220a66f0597580f5b11539f458",
+        "42d889300cd26c1c6a0683674597e8125be2267267f54a635bd579cc913a1c32",
+        "70f1ceb4043f9b19abce0372eede08b4dda1eac2d0045a82ce3da7dde1bb4e23",
+        "704988335f2b56bcb3c7fe92543e80db12a160e28280a83d2fc2928d04002068",
+        "7d41d233a8218508d81252f1e6609351db9c45af31a7eef46f3a51cf5c873d0d",
+        "05a4f3025536e57534003a5f35006eb36472a818361647ecd720a008b099fa98",
+        "25030b77d20c6c9a4b4deeb31c6dfb41cfe52b0289c9650b43f0f0422236ce3c",
+        "687a3efd2e0dd48a4f09f0bc5a803bc0624105eb6383d4f11411cfbb5063ec5a",
+        "a568ed10eeef7e9caddfac8b21800c167a7b1488da2ab89e568ae6b4df6a0c38",
+        "9429f02c07f31767b9cdb817e9deaa0a3a2725299b44fe029de84be1becc4770",
+        "3efc2d241d14737bc49557410390fea8d19a67033a3d401a638f73ae35a0825e",
+        "4f9054ab95dba3356f69ad5f06ddfd31b8f5c4838479a1e16e26c3159284b3b5",
+        "e0b6a6138fb8be6e6bc40e22803fb97969a7095e9d85047b9f378b0a9e8d3989",
+        "8284cb997233a8a83d5c7c054579e31c51677c32696e9dcf1eec5a6bfe491ff8",
+        "f41e613dbc7e88110014c02d6b5b74ca802d24e1b5c0948815fb6eb5d8b32559",
+        "c51e91faef58f28bdd8118b30027fe655813a9d6d4f3c512c468eb1a939d4240",
+        "ed2002de359698b62b569b4df189f4786193748be000fc11faf431d9e2a94ebd",
+        "9cb78db3f51f51fe762565ccb5ce94b296641af09e527a3fcebf64c74a31fbb0",
+        "1932929ed213a9bd2cf124bd6574ef259d0dcfbd7ad49f8a28034610b478b9d9",
+        "bd747af7b46fd56e3ba2ce451952f34034fecad32af6606a72f15ecfa68869d8",
+        "4d8e33984addb8371973a64526b2b4059e37ed89198fbe218c890e394f7b7657"
+      ],
+      "nonempty": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false
+}

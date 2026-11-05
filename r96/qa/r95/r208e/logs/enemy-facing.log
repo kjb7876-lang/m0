@@ -1,0 +1,5 @@
+PASS All populated regions and native kinds receive eight committed facing probes
+FAIL Actual final native draw selects a body frame for every probe
+Error: Actual final native draw selects a body frame for every probe
+    at check (/home/user/m0/r96/qa/r86/enemy-facing-check.cjs:4:142)
+    at /home/user/m0/r96/qa/r86/enemy-facing-check.cjs:25:2

@@ -1,0 +1,131 @@
+native boot PASS {
+  booted: true,
+  bootError: null,
+  errors: [],
+  warnings: [ '저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다.' ],
+  player: true
+}
+native hospital entry PASS 
+24 route enemies + 4 field champions + 2 boss-room majors PASS 30
+one champion per ordinary kind with 2x size and 6x HP/attack PASS [
+  {
+    id: 'ep1a08:maze-elite-r2:a08-o1',
+    native: 'a08-o1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageScaled: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-s1',
+    native: 'a08-s1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageScaled: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-c1',
+    native: 'a08-c1',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageScaled: true,
+    wallSafe: true
+  },
+  {
+    id: 'ep1a08:maze-elite-r2:a08-o2',
+    native: 'a08-o2',
+    hpRatio: 6,
+    sizeRatio: 2,
+    damageScaled: true,
+    wallSafe: true
+  }
+]
+original majors stay hidden inside boss room PASS 
+both authored paths walkable with player radius PASS {
+  '1': { waypoints: 29, blocked: [], count: 0 },
+  '2': { waypoints: 23, blocked: [], count: 0 }
+}
+closed door and maze baffle stop projectile sweep PASS { door: true, baffle: true }
+champions keep 2x size and 6x HP/attack after restore PASS 
+route restore phase PASS 
+route restore HP PASS 
+restore preserves route placements PASS 
+route1 selected PASS 
+route1 opposite survivors rally PASS {
+  version: 2,
+  phase: 'rally',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: false,
+  exitStoryDone: false
+}
+rally restore phase PASS 
+rally restore HP PASS 
+rally wipe opens story opportunity PASS {
+  version: 2,
+  phase: 'door',
+  route: 1,
+  rallied: [
+    'ep1a08:a08-s1',
+    'ep1a08:a08-o2',
+    'ep1a08:a08-s1-w1-r2',
+    'ep1a08:a08-s1-w2-2',
+    'ep1a08:a08-o2-w2-4',
+    'ep1a08:a08-s1-w2-r2',
+    'ep1a08:maze-patrol-r1:1',
+    'ep1a08:maze-patrol-r1:3',
+    'ep1a08:maze-patrol-r1:5',
+    'ep1a08:maze-patrol-r1:7',
+    'ep1a08:maze-patrol-r1:9',
+    'ep1a08:maze-patrol-r1:11',
+    'ep1a08:maze-elite-r2:a08-s1',
+    'ep1a08:maze-elite-r2:a08-o2'
+  ],
+  doorStoryDone: false,
+  exitStoryDone: false
+}
+boss door interaction shows canonical story FAIL {
+  phase: {
+    version: 2,
+    phase: 'doorStory',
+    route: 1,
+    rallied: [
+      'ep1a08:a08-s1',
+      'ep1a08:a08-o2',
+      'ep1a08:a08-s1-w1-r2',
+      'ep1a08:a08-s1-w2-2',
+      'ep1a08:a08-o2-w2-4',
+      'ep1a08:a08-s1-w2-r2',
+      'ep1a08:maze-patrol-r1:1',
+      'ep1a08:maze-patrol-r1:3',
+      'ep1a08:maze-patrol-r1:5',
+      'ep1a08:maze-patrol-r1:7',
+      'ep1a08:maze-patrol-r1:9',
+      'ep1a08:maze-patrol-r1:11',
+      'ep1a08:maze-elite-r2:a08-s1',
+      'ep1a08:maze-elite-r2:a08-o2'
+    ],
+    doorStoryDone: false,
+    exitStoryDone: false
+  },
+  scenePart: undefined
+}
+Error: boss door interaction shows canonical story
+    at check (/home/user/m0/r96/qa/maze-integration.cjs:4:160)
+    at /home/user/m0/r96/qa/maze-integration.cjs:16:72

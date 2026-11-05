@@ -1,0 +1,78 @@
+{
+  "schema": "r86-refined-static-integration/v1",
+  "checks": [
+    {
+      "name": "Current supplied inventory contains318 PNGs with exactly4 replacements and314 retained",
+      "passed": true
+    },
+    {
+      "name": "Each retained source has the exact previous hash and each replacement is a real change",
+      "passed": true
+    },
+    {
+      "name": "Four supplied changed PNGs match current authoritative hashes",
+      "passed": true
+    },
+    {
+      "name": "All254 old story-source hashes and64 old effect PNGs remain preserved",
+      "passed": true
+    },
+    {
+      "name": "Deferred dynamic source is preserved byte-exact without being initialized",
+      "passed": true
+    },
+    {
+      "name": "No supplied dynamic runtime, adapter or preview loop is loaded",
+      "passed": true
+    },
+    {
+      "name": "Every active static raster hash matches the64 supplied current PNGs",
+      "passed": true
+    },
+    {
+      "name": "Refined pure sampler adds no network storage timers or dynamic execution",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All3 new hospital runtime images decode and preserve native height settings",
+      "passed": true
+    },
+    {
+      "name": "Refined sand preserves prior visible footprint without cropping or growing accents",
+      "passed": true
+    },
+    {
+      "name": "All11 hospital native prop IDs positions source paths and collision data remain exact",
+      "passed": true
+    },
+    {
+      "name": "Actual native drawProp emits all3 refined art bodies and changes no simulation data",
+      "passed": true,
+      "detail": {
+        "commands": 3
+      }
+    },
+    {
+      "name": "Refined native hospital bodies convert to finite real Three geometry",
+      "passed": true,
+      "detail": {
+        "rows": 3
+      }
+    },
+    {
+      "name": "Hospital start remains Settings-only and the V11 save namespace is isolated",
+      "passed": true
+    },
+    {
+      "name": "No native runtime errors were recorded in refined hospital replay",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "method": "Exact supplied source hashes, decoded source/derivative alpha geometry, supplied semantic tests, actual shipped native hospital draw commands and real pinned Three CPU geometry. Scripted positions and renderer readiness are used.",
+  "passed": true
+}

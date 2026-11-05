@@ -1,0 +1,265 @@
+{
+  "schema": "r90-native-three-slots/v1",
+  "method": "Actual shipped native new-game, confirmation callback, save and load APIs in Node VM. No browser, GPU or natural play.",
+  "assistance": [
+    "Native UI callbacks invoked programmatically",
+    "Existing harness image/audio/renderer readiness stubs",
+    "Authored narrative dismissed via advanceScene",
+    "Distinct HP values assigned solely to synthetic test slots; no real user storage"
+  ],
+  "checks": [
+    {
+      "name": "Native boot succeeds",
+      "passed": true,
+      "detail": {
+        "booted": true,
+        "bootError": null,
+        "errors": [],
+        "warnings": [
+          "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+        ],
+        "player": true
+      }
+    },
+    {
+      "name": "R90 overlay is the applied canonical source",
+      "passed": true
+    },
+    {
+      "name": "Slot 1 native confirmed new game enters refuge",
+      "passed": true,
+      "detail": {
+        "active": 1,
+        "pending": null,
+        "busy": false,
+        "operation": null,
+        "transitionDepth": 0,
+        "message": "슬롯 1 새 여정 시작",
+        "legacyPreserved": true,
+        "audit": [
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Slot 1 saves through native API",
+      "passed": true
+    },
+    {
+      "name": "Slot 2 native confirmed new game enters refuge",
+      "passed": true,
+      "detail": {
+        "active": 2,
+        "pending": null,
+        "busy": false,
+        "operation": null,
+        "transitionDepth": 0,
+        "message": "슬롯 2 새 여정 시작",
+        "legacyPreserved": true,
+        "audit": [
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": null,
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": "new",
+            "slot": 2,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 2,
+            "operation": "new",
+            "slot": 2,
+            "zone": "hub",
+            "layer": "STORY"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Slot 2 saves through native API",
+      "passed": true
+    },
+    {
+      "name": "Slot 3 native confirmed new game enters refuge",
+      "passed": true,
+      "detail": {
+        "active": 3,
+        "pending": null,
+        "busy": false,
+        "operation": null,
+        "transitionDepth": 0,
+        "message": "슬롯 3 새 여정 시작",
+        "legacyPreserved": true,
+        "audit": [
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 1,
+            "operation": "new",
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": null,
+            "slot": 1,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 1,
+            "operation": "new",
+            "slot": 2,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 2,
+            "operation": "new",
+            "slot": 2,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 2,
+            "operation": null,
+            "slot": 2,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "saved",
+            "active": 2,
+            "operation": "new",
+            "slot": 3,
+            "zone": "hub",
+            "layer": "STORY"
+          },
+          {
+            "kind": "new",
+            "active": 3,
+            "operation": "new",
+            "slot": 3,
+            "zone": "hub",
+            "layer": "STORY"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Slot 3 saves through native API",
+      "passed": true
+    },
+    {
+      "name": "All seven R90 preferences leave all three native slot bytes unchanged",
+      "passed": true
+    },
+    {
+      "name": "Presentation preference storage is outside slots with preserved namespace",
+      "passed": true,
+      "detail": {
+        "prefix": "storyworld.hospital-three-pc.maze.v11:",
+        "key": "storyworld.hospital-three-pc.maze.v11:r90.presentation"
+      }
+    },
+    {
+      "name": "Slot 1 restores its own HP and active pointer",
+      "passed": true,
+      "detail": {
+        "expected": 760,
+        "actual": 760
+      }
+    },
+    {
+      "name": "Slot 2 restores its own HP and active pointer",
+      "passed": true,
+      "detail": {
+        "expected": 743,
+        "actual": 743
+      }
+    },
+    {
+      "name": "Slot 3 restores its own HP and active pointer",
+      "passed": true,
+      "detail": {
+        "expected": 726,
+        "actual": 726
+      }
+    },
+    {
+      "name": "Native serialized save contains no R90 fields",
+      "passed": true
+    },
+    {
+      "name": "Older unrelated namespace remains byte-identical",
+      "passed": true
+    },
+    {
+      "name": "Native game error ledger stays empty",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "browserVerified": false,
+  "headlessVerified": false,
+  "GPUVerified": false,
+  "naturalPlayVerified": false,
+  "sourceSHA256": {
+    "index.html": "91501950ba122bb4932826a15f840429bd8e4df4403f5b9e26046e0c157ee573",
+    "visual-r90.js": "a07bc0b65e7e51f2bd7a4819b6ebffd54d533ca0d0ef09d71bbec7e97148f781",
+    "visual-r90-world.js": "29416022f2848f820619dcb9de8eda647ee9603af8f0935a12baa88b5ee122da"
+  },
+  "passed": true
+}

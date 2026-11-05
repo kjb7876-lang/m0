@@ -1,0 +1,15 @@
+Delivered runtime loads the 64-component module and 16 scene mappings PASS
+All 64 runtime PNGs match supplied SHA256 and original dimensions PASS
+Current selection retains48 prior upgrades,15 originals and1 supplied refinement PASS
+Every mapped scene loads exactly its four components and produces real new image commands PASS
+Native hazard/shot wrappers replay warning, flight and recovery decorations through Three PASS
+Worst-case owned decoded-image estimate stays bounded to one scene PASS
+Impact art is admitted only after real native player HP loss PASS
+Explicit native skill invulnerability creates no new hit claim PASS
+Hospital entry releases new decorations and leaves native medical effects authoritative PASS
+The supplied PNG cache never populates or clears the global native image cache PASS
+The first cult leader KO starts native story without a premature stitch FAIL
+Error: The first cult leader KO starts native story without a premature stitch
+    at check (/home/user/m0/r96/qa/r83/vfx-runtime-check.cjs:4:139)
+    at /home/user/m0/r96/qa/r83/vfx-runtime-check.cjs:43:2
+10/12

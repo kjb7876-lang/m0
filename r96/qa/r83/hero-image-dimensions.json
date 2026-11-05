@@ -1,0 +1,650 @@
+{
+  "assets/heroes/normalized/actions-consistent/hunter-guard-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/hunter-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/michaela-dash-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/hunter/n.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-move-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_front_b.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/hunter-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-move-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/lauren-move-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/se.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/seoha-guard-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/seoha-skill-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/neon-dash-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/neon-skill-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_left_a.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/se.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-move-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_right_b.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/guard_right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-hurt-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/e.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-hurt-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/lauren-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/se.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/w.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/michaela-guard-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/e.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/w.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/e.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/hunter-guard-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/e.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-move-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/ne.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/seoha-skill-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-move-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/lauren-move-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/seoha/n.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/michaela-guard-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/michaela-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-move-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/michaela-dash-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/guard_left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/dash_right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/michaela-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/lauren-dash-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/ne.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/michaela-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/gunner/s.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/neon-guard-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/e.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/lauren-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/nw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero-authored-v314rc5/hwando-action-atlas.png": [
+    1774,
+    887
+  ],
+  "assets/heroes/normalized/actions-directional/michaela-attack-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_back_a.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/lauren-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero-authored-v314rc5/slayer-action-atlas.png": [
+    1774,
+    887
+  ],
+  "assets/heroes/normalized/actions-directional/hunter-dash-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/hunter-dash-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/seoha-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/hunter/s.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/ne.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/ne.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/lauren-move-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-hurt-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/player_idle.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/seoha-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/lauren-dash-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/lauren/s.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-hurt-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-move-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-move-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/neon-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/hunter-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/hunter-dash-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/neon/n.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/seoha-dash-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-move-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-move-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-hurt-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction338/lauren/s.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-hurt-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-hurt-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/michaela-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/lauren-move-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/ne.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/lauren-guard-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/lauren/n.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/lauren-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/neon-skill-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/seoha-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/michaela-attack-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/neon-dash-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero-authored-v314rc5/slayer-walk-atlas.png": [
+    1774,
+    887
+  ],
+  "assets/heroes/normalized/actions-directional/michaela-guard-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/lauren-skill-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/seoha-guard-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_left_b.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/sw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/player_roll.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-hurt-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_right_a.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/neon/s.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/nw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-hurt-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/w.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/hunter-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-move-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/neon-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/michaela-guard-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/sw.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/sw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_back_b.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/sw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/lauren-guard-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/neon-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/seoha/s.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/w.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/run_front_a.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/e.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/gunner-hurt-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/nw.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/gunner/n.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/se.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/seoha-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction338/lauren/n.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/hunter-dash-back.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/hunter/sw.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/michaela/s.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/nw.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/nw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-move-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/michaela/ne.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/neon-guard-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-move-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/hunter-hurt-right.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/nw.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/sw.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/gunner/dash_left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/neon-hurt-front.webp": [
+    512,
+    512
+  ],
+  "assets/hero-authored-v314rc5/hwando-walk-atlas.png": [
+    1774,
+    887
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-move-back.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-directional/lauren-skill-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/seoha-dash-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-move-front.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-move-right.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/seoha-hurt-left.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/hunter-guard-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/lauren/w.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/neon/se.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/directions/neon-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction337/michaela/n.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/gunner/se.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-v3126/michaela-hurt-left.webp": [
+    512,
+    512
+  ],
+  "assets/hero_direction334/seoha/w.webp": [
+    512,
+    512
+  ],
+  "assets/heroes/normalized/actions-consistent/hunter-guard-front.webp": [
+    512,
+    512
+  ]
+}
