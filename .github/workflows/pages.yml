@@ -51,6 +51,8 @@ jobs:
           r=json.load(open('r96/qa/r96/status-native-results.json'))
           assert len(r['checks'])==24 and all(v['passed'] for v in r['checks'])
           PY
+      - name: R323 terrain value separation and renderer budget preservation
+        run: node r96/qa/r323/terrain-readability-cpu-check.cjs
       - name: R320 native save transition CPU regression
         run: node r96/qa/r320/save-transaction-cpu-check.cjs
       - name: R320 desktop auto-skill restore and legacy preference regression
