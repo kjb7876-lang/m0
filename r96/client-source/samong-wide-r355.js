@@ -92,14 +92,17 @@ function toR259(e,c,im,q){try{const H=window.__STORYWORLD_HIT_CENTER_R259__;if(!
  const q8=q.length===8?q:q.length===4&&W&&Hh?[0,0,W,Hh,...q]:null;if(q8)H.bodyDrawn(e,im,q8,c.getTransform());}catch(err){fail(err);}}
 const scopeOwner=e=>({id:'r355:mob:'+(e.id??e.name??'?'),kind:'enemy',x:e.x,y:e.y,alive:e.hp>0,bodyPath:null});
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){const path=artOf(e);if(!path||typeof ctx==='undefined'||typeof ctx?.drawImage!=='function')return base.apply(this,[e,...a]);
- const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage,paths=bodyPaths(e);let drew=false,done=false,mine=false;ready(path);
+ const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage,paths=bodyPaths(e);let drew=false,done=false,mine=false,any=0;ready(path);
  const outerT=typeof c.getTransform==='function'?c.getTransform():null,outerA=c.globalAlpha,outerOp=c.globalCompositeOperation,outerF=c.filter;
  const paintInside=self=>{done=true;mine=true;const save=typeof self.save==='function';try{if(save)self.save();try{if(outerT&&typeof self.setTransform==='function')self.setTransform(outerT);if(outerA!=null)self.globalAlpha=outerA;if(outerOp!=null)self.globalCompositeOperation=outerOp;if(outerF!=null)self.filter=outerF;drawOwn(e,path);stats.inside++;}finally{if(save)self.restore();}}catch(err){fail(err);}finally{mine=false;}};
- c.drawImage=function(im,...q){const p=srcPath(im);if(p){if(PIXEL_R306.test(p)){drew=true;stats.pixel++;}
+ c.drawImage=function(im,...q){any++;const p=srcPath(im);if(p){if(PIXEL_R306.test(p)){drew=true;stats.pixel++;}
    else if(p===path||p.endsWith(path)){if(done&&!mine){stats.hidden++;return;}drew=true;if(mine)toR259(e,this,im,q);}
    else{const lp=e.rc146BodyFrame?.path;if(!KEEP.test(p)&&(paths.has(p)||(lp&&p.endsWith(String(lp).replace(/^\.\//,'')))||STORY_BODY.test(p))){stats.hidden++;if(!drew&&!done)paintInside(this);return;}}}
   return prev.call(this,im,...q);};
- let r;try{r=base.apply(this,[e,...a]);}finally{if(own)c.drawImage=prev;else delete c.drawImage;}
+ /* 시야 거름(index.html sight drawEnemy: visibleEnemy 거짓이면 아무것도 안 그리고 돌아감)·그 밖에 엔진이 이 몹을 그리지 않은 프레임에는 뒤 그리기도 하지 않는다 */
+ const ownFill=Object.prototype.hasOwnProperty.call(c,'fill'),prevFill=c.fill;if(typeof prevFill==='function')c.fill=function(...q){any++;return prevFill.apply(this,q);};
+ let r;try{r=base.apply(this,[e,...a]);}finally{if(own)c.drawImage=prev;else delete c.drawImage;if(typeof prevFill==='function'){if(ownFill)c.fill=prevFill;else delete c.fill;}}
+ if(!any){stats.culled=(stats.culled||0)+1;return r;}
  if(!drew&&!done)try{const f=()=>drawOwn(e,path);if(typeof c.scope==='function')c.scope(scopeOwner(e),f);else f();stats.after++;}catch(err){fail(err);}return r;};}
 
 function zoneReport(){const rows=[];if(!Z?.chapters)return rows;for(const[k,list]of Object.entries(Z.chapters))for(const z of list||[])if(z.r355)rows.push({chapter:k,id:z.id,title:z.title,kind:z.kind,scale:z.r355.scale,before:z.r355.before,after:z.r355.after});return rows;}
