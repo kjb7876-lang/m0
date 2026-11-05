@@ -152,5 +152,9 @@ const near7=g=>assert(Math.abs(g-.7)<=.05+1e-9,'gap '+g);
  const s=st.get(got.e);assert(s&&Math.abs(s.next-(got.G.time-.05+.7))<.06);ok('R62 siege boss schedule (ownerState.next, not gated by cd) is pushed 0.7s too');}
 {/* R61 던지기: FIELDS_R61.state(e).next 로 시작(nativeBusy 는 cd 를 보지 않음) — 실제 API 처럼 state 만 둔다 */const st=new Map(),api={state:e=>{if(!st.has(e))st.set(e,{next:0,step:0});return st.get(e);}};const got=startsWith('seoha',{cd:5},{winApi:{__STORYWORLD_FIELDS_R61__:api},steps:1});
  const s=st.get(got.e);assert(s&&Math.abs(s.next-(got.G.time-.05+.7))<.06);ok('R61 throw schedule (FIELDS_R61.state(e).next, not gated by cd) is pushed 0.7s too');}
+{/* R118 보스 감독: combat-r118 의 directorDelay 로 일정을 민다 — 실제 combat-r118.js 를 읽어 그 함수가 내보내지는지도 본다 */const calls=[],api={directorDelay:(e,d)=>{calls.push([e,d]);return true;}};const got=startsWith('seoha',{cd:5,boss:true},{winApi:{__STORYWORLD_COMBAT_R118__:api},steps:1});
+ assert(calls.length===1&&calls[0][0]===got.e&&Math.abs(calls[0][1]-.7)<1e-9);
+ const c118=fs.readFileSync(path.join(__dirname,'..','..','client-source','combat-r118.js'),'utf8');assert(/function directorDelay\(e,d\)\{[^\n]*s\.next=Math\.max\(finite\(s\.next\),t\)\+d/.test(c118)&&/__STORYWORLD_COMBAT_R118__=Object\.freeze\(\{revision:REV,directorDelay,/.test(c118));
+ ok('R118 boss director schedule (private boss.next) is pushed 0.7s via exported directorDelay');}
 const bgm=['bgm-map-r308.js'].map(f=>RT(f));assert(!bgm.some(s=>/kairo-homage|R356/.test(s)));assert(!/audioCatalog|musicElement|__STORYWORLD_BGM__/.test(code));ok('classical BGM tables and decks untouched');
 console.log(JSON.stringify({ok:true,checks:n,method:'CPU fake globals; headless separately; sound quality unverified'}));

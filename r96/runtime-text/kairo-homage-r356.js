@@ -93,6 +93,8 @@ function settle(e){const d=e.r356Delay;if(!(d>0))return;delete e.r356Delay;if(e.
  e.cd=Math.max(0,+e.cd||0,+e.rest||0)+d;
  try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;/* R62 은 major 를 내보내지 않는다 — index.html R62 의 major(e) 와 같은 조건을 그대로 쓴다 */if(f?.ownerState&&r62Major(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}
  /* R61 던지기(echo·prop·field)는 cd 가 아니라 FIELDS_R61.state(e).next 로 시작한다(index.html R61 tickEnemies) — 그 일정도 민다 */
+ /* R118 보스 감독(combat-r118 directorTick)은 자기 일정(boss.next)으로 B/F.prepare 를 바로 부른다 — 내보인 directorDelay 로 그 일정도 민다 */
+ try{window.__STORYWORLD_COMBAT_R118__?.directorDelay?.(e,d);}catch(err){fail(err);}
  try{const g=window.__STORYWORLD_FIELDS_R61__;if(g?.state){const s=g.state(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
 function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha(p))return false;if(readyIn(p)>0)return false;readyAt.set(p,now()+T.cooldown);stats.triggers++;
  if(solo()){
