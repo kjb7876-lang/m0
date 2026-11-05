@@ -23,10 +23,11 @@ function world(opt={}){const store={};if(opt.off)store['storyworld.r356.kairo']=
   function stopEffects(){stopCalls++;}
   ${opt.engine||''}
   function floatText(t,x,y,c){floatsOut.push(t);}
-  function tickHazards(dt){time+=dt;for(const h of hazards)h.age+=dt;}
+  // 엔진 tick() 과 같은 순서: time 을 먼저 올리고 그다음 tickHazards(dt) 가 h.age 만 올린다
+  function tickHazards(dt){for(const h of hazards)h.age+=dt;}
   function drawEffect(e){return 'base';}
   ${src};
-  return {get time(){return time},set time(v){time=v},get player(){return player},set player(v){player=v},settings,stop:()=>stopEffects(),get stopCalls(){return stopCalls},room,get hazards(){return hazards},set hazards(v){hazards=v},projectiles,effects,tick:dt=>tickHazards(dt),draw:e=>drawEffect(e),api:window.__STORYWORLD_KAIRO_HOMAGE_R356__};`)(
+  return {get time(){return time},set time(v){time=v},get player(){return player},set player(v){player=v},settings,stop:()=>stopEffects(),get stopCalls(){return stopCalls},room,get hazards(){return hazards},set hazards(v){hazards=v},projectiles,effects,tick:dt=>{time+=dt;return tickHazards(dt);},draw:e=>drawEffect(e),api:window.__STORYWORLD_KAIRO_HOMAGE_R356__};`)(
   W,{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},{now:()=>Date.now()},opt.timeout||((f)=>{f();return 1;}),()=>{},{hidden:false},floats,opt.audio||null);
  G.floats=floats;return G;}
 const escape=G=>{G.hazards.push({id:1,x:10,y:10,radius:1.2,age:0,warning:.5,life:1.6,damage:20,lastHit:-99});G.tick(.1);G.tick(.1);G.player.x=12;G.tick(.1);G.tick(.1);G.tick(.2);};
