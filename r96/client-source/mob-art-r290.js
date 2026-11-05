@@ -6,6 +6,7 @@
 //  · 앞으로 dots 결과가 오면 아래 ART 에 줄만 더한다(시트는 scripts/r290-mob-sheets.py 로 만든다).
 //  · R359: 같은 방식으로 20종을 더했다(m025·m026·m051·m053·m055·m057~m059·m061·m064·m066·m073·m074·m076·m082·m085·m087·m088·m090·m095).
 //    발 없는 부유형은 후보가 칸 가운데에 그려져 있어 scripts/r359-mob-sheets.py 가 12칸을 같은 값만큼 아래로 옮겨 걷기 발끝을 y≈296(그림자 바로 위)에 둔다(index.json shiftY).
+//  · R362: m030(이름 '개와 늑대의 시간', scripts/r362-m030-sheet.py). 이 파일보다 먼저 도는 mob-rename-r362.js 가 R248 시트 줄 이름을 바꿔 둬야 이름 맞추기가 된다.
 //  · 끄기: localStorage['storyworld.r290.mobArt']='{"on":false}' 뒤 새로고침(원래 임시 시트로 돌아감).
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_ART_R290__)return;
@@ -37,6 +38,8 @@ const ART=Object.freeze({
  m088:Object.freeze({file:'m088.webp',body:191,name:'찢어진 사진의 망령'}),
  m090:Object.freeze({file:'m090.webp',body:94,name:'종이 왕'}),
  m095:Object.freeze({file:'m095.webp',body:198,name:'일곱 나팔의 빈 소매 잔영'}),
+ // R362(사용자 2026-11-06 "쓰고 이름을바꿔 개와늑대의시간으로"): m030 Dots 후보, 게임 안 이름은 mob-rename-r362.js 가 '불길 속의 곰' → '개와 늑대의 시간'으로 바꾼다(R248 시트 줄 이름도 그 파일이 먼저 바꿈).
+ m030:Object.freeze({file:'m030.webp',body:151,name:'개와 늑대의 시간'}),
 });
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__,orig={},applied=[];let lastError=null;
