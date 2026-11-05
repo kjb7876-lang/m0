@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const site=path.resolve(__dirname,'../../hospital-three-pc/site'),html=fs.readFileSync(path.join(site,'index.html'),'utf8');
 const native=html.match(/<script id="save-slots-r73">([\s\S]*?)<\/script>/)[1];
-const guarded=html.includes('<script src="./save-transition-r320.js"></script>');
+const guarded=html.includes('<script src="./save-transition-r320.js"></script><script src="./boss-prop-control-r314.js"></script>');
 const out={method:'CPU isolated shipped R73 slot transactions, controlled asynchronous restore backend and simulation/render spies. Synthetic saves/DOM only; no browser/natural-play claim.',checks:[]};
 function check(name,passed,detail){out.checks.push({name,passed:!!passed,detail});console.log(passed?'PASS':'FAIL',name);}
 async function scenario(reject){
