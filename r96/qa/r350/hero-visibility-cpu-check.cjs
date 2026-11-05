@@ -49,6 +49,10 @@ function frameOf(...cs){cs.forEach((c,i)=>c.order=i);return{commands:cs};}
  t(enemy2.style.globalAlpha===1&&ghosts.length===1&&ghosts[0].owner.kind==='effect'&&ghosts[0].spatialRole===null&&ghosts[0].order>8&&ghosts[0].style.globalAlpha>0&&ghosts[0].style.globalAlpha<=.6&&ghosts[0].image===hero.image&&ghosts[0].key!==hero.key,'남은 가림(적·R106)이 크면 영웅 몸을 이펙트 패스 맨 뒤에 반투명(≤60%)으로 한 번 더(새 key, 같은 그림·좌표)');
  const ins=A.inspect();t(ins.recent.length===1&&ins.recent[0].before>ins.recent[0].after&&ins.recent[0].veiled===1,'측정값(옅게 전/후 가림 양) 기록');
  t(ins.contributors.some(([k])=>k.startsWith('r292'))&&ins.contributors.some(([k])=>k==='r106:glow'),'가리는 그림 출처별 합 기록');}
+{const {g,C}=load();g.VFX={burst:'assets/vfx/generated/v300/burst-impact.webp'};// 정보 그림(상태이상·맞은 직후 피격 섬광)은 옅게 안 함
+ const hero=heroBody(),st=img({id:'final42-r88:native-status:poison',kind:'effect'},rect(150,20,250,120)),hit=img({id:'scene',kind:'scene'},rect(150,20,250,120),{sourcePath:'http://x/assets/vfx/generated/v300/burst-impact.webp'});
+ const sig=img({id:'r101:1',kind:'effect'},rect(150,20,250,120),{sourcePath:'http://x/assets/r100/sig-hit-red.webp'});g.player.hurtAnim=.3;C.prototype.render.call({},frameOf(hero,st,hit,sig));t(st.style.globalAlpha===1&&hit.style.globalAlpha===1&&sig.style.globalAlpha===1,'상태이상 표시·맞은 직후 피격 섬광(VFX.burst·R101 sig-hit)은 그대로');
+ const hero2=heroBody(),hit2=img({id:'scene',kind:'scene'},rect(150,20,250,120),{sourcePath:'http://x/assets/vfx/generated/v300/burst-impact.webp'});g.player.hurtAnim=0;C.prototype.render.call({},frameOf(hero2,hit2));t(hit2.style.globalAlpha<.5,'맞은 때가 아니면(스킬 타격 섬광) 옅게');}
 {const {C}=load();// 화면 대부분을 덮는 아주 큰 그림은 최대 55%만
  const hero=heroBody(),huge=img({id:'r111:ego-front',kind:'effect'},rect(-400,-400,800,600));const f=frameOf(hero,huge);C.prototype.render.call({},f);
  t(huge.style.globalAlpha>=.449&&huge.style.globalAlpha<.6,'아주 큰 그림은 최대 55%까지만 옅게: '+huge.style.globalAlpha.toFixed(3));

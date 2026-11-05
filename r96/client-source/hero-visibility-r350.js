@@ -28,6 +28,10 @@ const VEIL_KINDS=new Set(['effect','scene']);
 const GHOST_FROM=2;
 const ENEMY_WORD=/(^|[:_-])(enemy|mob|mobs|boss|hazard|hex|sigil)([:_-]|$)/i;
 function enemySide(o){if(!o)return false;const id=String(o.id||'');return o.pxfSide==='enemy'||o.storyVfx===true||o.enemy===true||o.r98===true||ENEMY_ID.test(id)||ENEMY_WORD.test(id);}
+// 정보 그림은 옅게 하지 않는다: 영웅 상태이상 표시(final42-r88 native-status: 중독·출혈 입자)와, 맞은 직후(hurtAnim) 피격 표지(엔진 VFX.burst·R101 sig-hit).
+const INFO_ID=/^final42-r88:native-status/,HURT_PATH=/\/r100\/sig-hit-/;/* R101 drawHeroHurt 의 피격 표지(sig-hit-*) — 헤드리스 실측으로 옅게 되던 것 */
+function infoCommand(c){if(INFO_ID.test(String(c.owner?.id||'')))return true;
+ try{if(player?.hurtAnim>0){const sp=String(c.sourcePath||'');if(HURT_PATH.test(sp)||(typeof VFX!=='undefined'&&VFX?.burst&&sp.includes(VFX.burst)))return true;}}catch(_){}return false;}
 function bbox(c){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;const add=p=>{if(p[0]<x0)x0=p[0];if(p[0]>x1)x1=p[0];if(p[1]<y0)y0=p[1];if(p[1]>y1)y1=p[1];};
  if(c.kind==='image'&&Array.isArray(c.points))for(const p of c.points)add(p);else if(Array.isArray(c.paths))for(const path of c.paths)for(const p of path.points||[])add(p);
  return x1>x0&&y1>y0?{x0,y0,x1,y1}:null;}
@@ -46,7 +50,7 @@ function heroCommands(commands){const all=[];for(const c of commands)if(c&&c.kin
 function heroBox(cmds){let b=null;for(const c of cmds){const q=bbox(c);if(!q)continue;b=b?{x0:Math.min(b.x0,q.x0),y0:Math.min(b.y0,q.y0),x1:Math.max(b.x1,q.x1),y1:Math.max(b.y1,q.y1)}:q;}
  if(!b)return null;const w=b.x1-b.x0,h=b.y1-b.y0;b={x0:b.x0+w*.15,x1:b.x1-w*.15,y0:b.y0+h*.08,y1:b.y1};b.area=(b.x1-b.x0)*(b.y1-b.y0);return b.area>4?b:null;}
 // 측정용(헤드리스·inspect): 최근 프레임의 가림 양(옅게 전/후)과 가리는 그림 출처별 합
-const recent=[],contrib=new Map();
+const recent=[],contrib=new Map(),lastVeiled=[];
 function prefixOf(c){const id=String(c.owner?.id||c.owner?.kind||'?'),src=String(c.sourcePath||'');if(src.startsWith('r106fx:'))return 'r106:'+src.split(':')[1];return id.split(':').slice(0,2).join(':').replace(/[0-9.]+$/,'#').slice(0,48);}
 function process(commands){
  if(!Array.isArray(commands)||!commands.length)return;stats.frames++;
@@ -60,8 +64,8 @@ function process(commands){
   for(const c of commands){if(!c||c.spatialRole==='body'||c.kind==='text'||c.owner?.r350||c.owner?.groundAligned===true)continue;const kind=c.owner?.kind;
    if(!VEIL_KINDS.has(kind)&&kind!=='projectile'&&kind!=='hazard')continue;if(kind==='scene'&&c.order<heroes[0].order)continue;
    const q=bbox(c);if(!q)continue;const ov=overlap(q,box);if(!(ov>0))continue;const f=ov/box.area,a0=clamp(c.style?.globalAlpha??1),w=blendWeight(c);before+=a0*f*w;
-   let a=a0;if(prefs.veil&&VEIL_KINDS.has(kind)&&f>.04&&!enemySide(c.owner)&&!String(c.sourcePath||'').startsWith('r106fx:')){
-    const big=(q.x1-q.x0)*(q.y1-q.y0)/box.area>14,cap=big?.55:.85;a=a0*(1-Math.min(cap,f*(w<1?.95:1.1)));c.style={...c.style,globalAlpha:a};veiled++;}
+   let a=a0;if(prefs.veil&&VEIL_KINDS.has(kind)&&f>.04&&!enemySide(c.owner)&&!String(c.sourcePath||'').startsWith('r106fx:')&&!infoCommand(c)){
+    const big=(q.x1-q.x0)*(q.y1-q.y0)/box.area>14,cap=big?.55:.85;a=a0*(1-Math.min(cap,f*(w<1?.95:1.1)));c.style={...c.style,globalAlpha:a};veiled++;lastVeiled.push([String(c.owner?.id||'').slice(0,48),String(c.sourcePath||'').slice(-48),+f.toFixed(2),+a.toFixed(2)]);if(lastVeiled.length>16)lastVeiled.shift();}
    after+=a*f*w;const k=prefixOf(c);contrib.set(k,(contrib.get(k)||0)+a0*f*w);}
   stats.veiled+=veiled;
   // 영웅 다시 보이기: 남은 가림이 크면 몸 명령을 이펙트 패스 맨 뒤에 반투명으로 한 번 더
@@ -102,7 +106,7 @@ function spawn(damage,src){if(!prefs.blood||typeof player==='undefined'||!player
  add({sheet:'burst',t0:now,k:k*.8,z:.5,rot:Math.random()*Math.PI*2,fps:32,alpha:.95});
  if(big){add({sheet:'splash',t0:now+.16,k:k*.7,z:.42,rot:Math.PI/2-Math.PI/4+(Math.random()-.5)*.5,fps:22,alpha:.85});add({sheet:'stain',t0:now+.05,k:k*.75,z:0,rot:0,fps:20,alpha:.7,squash:.5});}
  stats.bloodSpawned++;arm();return 1;}
-function drawAll(){if(typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const t=T(),h=H();
+function drawAll(){if(!prefs.blood||typeof ctx==='undefined'||!ctx||typeof project!=='function')return;const t=T(),h=H();
  for(let i=list.length-1;i>=0;i--){const e=list[i],S=SHEET[e.sheet],f=Math.floor((t-e.t0)*e.fps);if(f<0)continue;if(f>=S.frames){list.splice(i,1);continue;}
   const im=image(S.file);if(!im)continue;const q=project(e.x,e.y),s=h*e.k/FW,sx=(f%COLS)*FW,sy=Math.floor(f/COLS)*FW,u=f/S.frames,
    fade=u>.65?1-(u-.65)/.35:1,bright=(1.85-1.0*u).toFixed(2);/* 선혈(밝은 빨강) → 핏빛 암적(어둡게) */
@@ -125,6 +129,6 @@ try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async
 
 function set(p){for(const k of ['veil','ghost','blood','order'])if(typeof p?.[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
 window.__STORYWORLD_HERO_VISIBILITY_R350__=Object.freeze({revision:REV,set,spawn,process,
- inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},active:list.length,recent:recent.slice(-120),contributors:[...contrib.entries()].sort((a,b)=>b[1]-a[1]).slice(0,16).map(([k,v])=>[k,+v.toFixed(2)]),lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false}),
- resetStats:()=>{recent.length=0;contrib.clear();for(const k in stats)stats[k]=0;}});
+ inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},active:list.length,recent:recent.slice(-120),lastVeiled:lastVeiled.slice(),contributors:[...contrib.entries()].sort((a,b)=>b[1]-a[1]).slice(0,16).map(([k,v])=>[k,+v.toFixed(2)]),lastError,presentationOnly:true,gameplayChanged:false,savesTouched:false}),
+ resetStats:()=>{recent.length=0;lastVeiled.length=0;contrib.clear();for(const k in stats)stats[k]=0;}});
 })();

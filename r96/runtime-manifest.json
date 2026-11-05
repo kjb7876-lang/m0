@@ -23464,8 +23464,8 @@
     },
     {
       "path": "hero-visibility-r350.js",
-      "bytes": 17180,
-      "sha256": "3d214c861cafa6eb1906d4aa3cb571c4b30feea187813e92fb6efd797fe12cf0"
+      "bytes": 18072,
+      "sha256": "629ffe77192d5f8e157bb17b47bff76417bb8f6cb513a4e9d515bd6cecefaf56"
     },
     {
       "path": "heroes-r108.js",
@@ -24209,7 +24209,7 @@
     }
   ],
   "fileCount": 4841,
-  "totalBytes": 931411407,
+  "totalBytes": 931412299,
   "webHTMLSha256": "f66d043a9a981b6a3f86c42e5ec693f5b9e16a1e82ece555dd2cd58894d8d1c0",
   "largest": [
     {
