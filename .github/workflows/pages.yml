@@ -59,6 +59,8 @@ jobs:
         run: node r96/qa/r325/pixel-readable-cpu-check.cjs
       - name: R341 enemy cross to hexagram CPU check
         run: node r96/qa/r341/enemy-hexagram-cpu-check.cjs
+      - name: R326 Michaela R seraph wings and halo CPU check
+        run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
         run: node r96/qa/r320/save-transaction-cpu-check.cjs
       - name: R320 desktop auto-skill restore and legacy preference regression

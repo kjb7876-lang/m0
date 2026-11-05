@@ -133,7 +133,7 @@ const DRAW={
    for(let i=0;i<e.n;i++){const ang=rnd(e.seed,i)*TAU,d=.2+1.8*smooth(k)*(.5+rnd(e.seed,i+3)),fq=P(e.tx+Math.cos(ang)*d,e.ty+Math.sin(ang)*d,h*(.2+1.1*k));S('feather',i%2?pb(F):F,fq.x,fq.y,h*.32,h*.32,{angle:ang+k*4,alpha:(1-k)*.95});}}},
  // R160 세라핌 강림(C): 시전자 뒤로 커다란 날개가 펼쳐지고, 머리 위 후광에서 가까운 적마다 빛줄기가 내리꽂혀 십자가 새겨진다.
  seraph(e,u,h){const F=e.F,c=P(e.x,e.y,h*.75),g=P(e.x,e.y),open=smooth(clamp(e.t/.35,0,1)),a=1-smooth((u-.65)/.35),w=h*(1.6+2.2*open),top={x:g.x,y:g.y-h*2.2};
-  S('wingback',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('wingback-f',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('pillar',pb(F),g.x,g.y,h*1.1,h*3.6,{alpha:.55*a});S('halo',F,top.x,top.y+h*.3,h*1.4,h*.5,{alpha:a});
+  S('wingback',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('wingback-f',F,c.x,c.y,w,w,{alpha:.85*a,blend:'lighter'});S('pillar',pb(F),g.x,g.y,h*1.1,h*3.6,{alpha:.55*a});/* R326: 후광을 머리 바로 위로(전엔 머리 위 약 한 키 높이에 떠 있었다) */S('halo',F,g.x,g.y-h*1.12,h*1.1,h*.38,{alpha:a});
   (e.hit.length?e.hit:[{x:e.tx,y:e.ty}]).forEach((t,i)=>{const v=e.t-.3-i*.07;if(v<0||v>.7)return;const q=P(t.x,t.y),k=v/.7,fr=Math.floor(time*24)+i;
    if(v<.3){A('bolt',F,top.x,top.y,q.x,q.y-h*.3,h*.7,{frame:fr,alpha:1-v/.3});A('line',pb(F),top.x,top.y,q.x,q.y-h*.3,h*.12,{alpha:1-v/.3});}
    S('cross',F,q.x,q.y-h*.9,h*.8,h*1.2,{alpha:(1-k)*.95});S('ring',pb(F),q.x,q.y,h*(.6+2*k),h*(.3+k),{alpha:1-k});});},
