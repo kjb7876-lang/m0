@@ -101,8 +101,11 @@
   return interactBase.apply(this,a);
  };
  const resumeBase=resumeScene3;resumeScene3=function(...a){if(controlled(room)&&state()?.phase==='doorStory')return showDoorStory();if(controlled(room)&&state()?.phase==='exitStory')return showExitStory();return resumeBase.apply(this,a);};
+ // R333: 집결 덫 감지 — 가운데 5.5칸(기존) + 집결실 안에 발을 들임(gatherBounds, 0.5칸 여유) + 입구마다 감지점(rallyTriggers, 반지름 2.2칸).
+ function rallyTripped(g){if(distance(player,g.gatherAnchor)<=5.5)return true;const b=g.gatherBounds;if(Array.isArray(b)&&player.x>=b[0]-.5&&player.x<=b[2]+.5&&player.y>=b[1]-.5&&player.y<=b[3]+.5){metrics.rallyByBounds=(metrics.rallyByBounds||0)+1;return true;}
+  for(const t of g.rallyTriggers||[])if(Math.hypot(player.x-t.x,player.y-t.y)<=(t.r||2.2)){metrics.rallyByEntrance=(metrics.rallyByEntrance||0)+1;return true;}return false;}
  const tickBase=tick;tick=function(dt,...a){const before=time,result=tickBase.call(this,dt,...a);if(time<=before||modal||loading||player?.hp<=0||!controlled(room))return result;placeRoom(room);const s=state(),g=room.exploration.worldWardR81;if(!s)return result;
-  if(s.phase==='route'){const sp=g.routeSplit||{x:43,y:104};if(s.route===null&&player.y<sp.y)s.route=player.x<sp.x?1:2;if(distance(player,g.gatherAnchor)<=5.5){s.route??=player.x<sp.x?1:2;rally();}}
+  if(s.phase==='route'){const sp=g.routeSplit||{x:43,y:104};if(s.route===null&&player.y<sp.y)s.route=player.x<sp.x?1:2;if(rallyTripped(g)){s.route??=player.x<sp.x?1:2;rally();}}
   else if(s.phase==='rally'){room.engaged=true;settle();}
   else if(s.phase==='boss'){const b=g.bossBounds;if(player.x>b[0]+.5&&player.x<b[2]-.5&&player.y>b[1]+.5&&player.y<b[3]-.5)beginBoss();settle();}
   return result;

@@ -79,8 +79,8 @@ function drawClones(e,t,h){const S=SPR(),b=e.boss,w=e.warn,path=b?bossPath(b):nu
   if(S){S.draw('glow',BLOOD,q.x-size*.06,q.y-size*.82,size*.12,size*.07,{alpha:.95*a});S.draw('glow',BLOOD,q.x+size*.06,q.y-size*.82,size*.12,size*.07,{alpha:.95*a});}
   if(t>=w&&S){const q0=P(p.sx,p.sy,h*.45),q1=P(x,y,h*.45);S.along('slashline',BLOOD,q0.x,q0.y,q1.x,q1.y,h*.5,{alpha:.8*a});}});}
 function drawMeteors(e,t,h){const S=SPR();if(!S)return;e.pts.forEach((p,k)=>{const q=P(p.x,p.y),w=p.warn,fr=Math.floor(T()*12)+k;
- if(e.pfx){if(t<w)S.draw('runecross',BLOOD,q.x,q.y,h*2.4,h*2.4,{squash:.5,angle:t,alpha:.55*smooth(t/.3)});return;}
- if(t<w){const v=smooth(t/w)**2,sx=q.x+h*4.5,sy=q.y-h*9,mx=sx+(q.x-sx)*v,my=sy+(q.y-sy)*v;S.draw('runecross',BLOOD,q.x,q.y,h*2.4,h*2.4,{squash:.5,angle:t,alpha:.55*smooth(t/.3)});
+ if(e.pfx){if(t<w)S.draw('rune',BLOOD,q.x,q.y,h*2.4,h*2.4,{squash:.5,angle:t,alpha:.55*smooth(t/.3)})/* R341: 적은 십자 대신 육망성 */;return;}
+ if(t<w){const v=smooth(t/w)**2,sx=q.x+h*4.5,sy=q.y-h*9,mx=sx+(q.x-sx)*v,my=sy+(q.y-sy)*v;S.draw('rune',BLOOD,q.x,q.y,h*2.4,h*2.4,{squash:.5,angle:t,alpha:.55*smooth(t/.3)})/* R341: 적은 십자 대신 육망성 */;
   if(v>.05){S.along('slashline',EMBER,sx+(mx-sx)*.6,sy+(my-sy)*.6,mx,my,h*.8,{alpha:.85});S.draw('flame',EMBER,mx,my,h*1.2,h*2,{frame:fr,angle:Math.atan2(my-sy,mx-sx)+Math.PI/2,alpha:.9,pivot:[.5,.25]});S.draw('orb',BLOOD,mx,my,h*.8,h*.8,{alpha:1});}}
  else{const v=clamp((t-w)/.75,0,1);S.draw('flare',EMBER,q.x,q.y-h*.3,h*4*(.4+v),h*4*(.4+v),{angle:v,alpha:1-v});S.draw('ring',BLOOD,q.x,q.y,h*(1.4+4*v),h*(.7+2*v),{alpha:1-v});S.draw('crack',BLOOD,q.x,q.y,h*3,h*3,{squash:.5,angle:e.seed+k,alpha:.9*(1-v)});
   S.draw('smoke',{a:[40,12,14],b:[90,40,40]},q.x,q.y-h*.6*v,h*2.6*(.5+v),h*1.8*(.5+v),{blend:'source-over',alpha:.5*(1-v)});}});}

@@ -4040,6 +4040,13 @@
     "assets/r325/pixel-readable/pf0ad5f9f7a51.webp",
     "assets/r309/intro/opening-hapil.mp4",
     "assets/r309/intro/poster-hapil.jpg",
+    "prop-shadow-r329.js",
+    "mob-foot-r332.js",
+    "hud-bossbar-r334.js",
+    "hero-facing-r336.js",
+    "samong-gate-r338.js",
+    "hud-menu-r339.js",
+    "enemy-hexagram-r341.js",
     "disaster-r330.js"
   ],
   "mediaPaths": [
@@ -5115,5 +5122,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0c1de8831ae5e80f3319ae7cd861b114a69bbf06216305967eb9b2fceba9b314"
+  "runtimeManifestSHA256": "13432824c039e10054a7beb571a8660c84615d22b996a8311ebfe19c8e2f87aa"
 }
