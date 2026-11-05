@@ -96,6 +96,11 @@ assert(/const area=!source\?\.r62FieldContact&&\(scopeKind==='hazards'[^\n]*aliv
   G.hazards.push({x:10,y:10,radius:1.2,age:0,warning:.5,life:1.6,damage:20});G.tick(.1);G.tick(.1);guest.x=gx;G.tick(.1);G.tick(.1);G.tick(.2);return G.api.inspect().stats.triggers;};
  assert.strictEqual(mk(11.3),0);ok('co-op host: Seoha just past the unpadded edge but inside the engine co-op footprint (y-.15, +.25) is still hit — no escape');
  assert.strictEqual(mk(12),1);ok('co-op host: Seoha beyond the padded co-op footprint escapes');}
+// Codex 4483393252: 공격이 끝나는 틱에 미뤄 둔 늦춤을 바탕 tickEnemies 직후 바로 건다 — combat-r118 directorTick 은 그 틱의 tick() 뒤에 돈다
+{const calls=[];const G=world({win:{__STORYWORLD_COMBAT_R118__:{directorDelay:(e,d)=>{calls.push([e,d,G.time]);return true;}}}});const e={x:11,y:10,hp:50,cd:0,sim:true,boss:true,attack:{elapsed:0,total:.7}};G.room.enemies.push(e);
+ escape(G);/* 발동(5번째 틱) 때는 아직 공격 중(.6/.7) → 미뤄 둠 */assert.strictEqual(G.api.inspect().stats.triggers,1);assert.strictEqual(e.r356Delay,.7);assert.strictEqual(calls.length,0);
+ G.tick(.1);/* 이 틱에 공격이 끝난다(.7). tick() 이 돌아오면(=R118 directorTick 이 도는 자리) 늦춤이 이미 걸려 있어야 한다 */
+ assert.strictEqual(e.attack,null);assert.strictEqual(e.r356Delay,undefined,'settled within the completion tick, before a post-tick director could admit a cast');assert(calls.length===1&&calls[0][1]===.7);ok('attack finishing on the escape window: delay settles right after the native enemy tick (before the post-tick R118 director)');}
 // 5) 엔진 저작 캐스트: warning 은 releaseAt 에서 끝나도 impactAt 기준으로 0.7초 창을 본다
 {const G=world();const h={x:10,y:10,radius:1.2,age:0,warning:.3,life:2.5,damage:20,row150:{warningAt:1,releaseAt:1.3,impactAt:2.5}};G.hazards.push(h);
  for(let i=0;i<10;i++)G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);G.player.x=12;G.tick(.1);G.tick(.1);assert.strictEqual(G.api.inspect().stats.triggers,0);

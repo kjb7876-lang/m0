@@ -135,7 +135,9 @@ function after(warn){const t=now();
   if(best){const u=ripe(best,t),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
 function zoneWatch(){const r=R(),id=r?String(r.id||'')+':'+r.layer:null;if(id===lastZone)return;lastZone=id;if(!kairo())return;
  const wall=performance.now()/1000;if(wall-stingAt<T.stingGap)return;stingAt=wall;clearTimeout(stingTimer);stingTimer=setTimeout(()=>{if(kairo()){stats.stings++;play('toll');}},800);}
-if(typeof tickEnemies==='function'){const base=tickEnemies;tickEnemies=function(...a){try{if(on){const r=R();for(const e of(r?.enemies||[]))if(e&&e.r356Delay>0&&!busy(e))settle(e);}}catch(e){fail(e);}return base.apply(this,a);};}
+// 동작이 이번 틱에 끝난 적은 바탕 tickEnemies 직후에도 건다 — combat-r118 은 tick 바로 뒤 directorTick() 으로 같은 틱에 다음 시전을 시작할 수 있다(Codex 4483393252).
+function settleIdle(){try{if(on){const r=R();for(const e of(r?.enemies||[]))if(e&&e.r356Delay>0&&!busy(e))settle(e);}}catch(e){fail(e);}}
+if(typeof tickEnemies==='function'){const base=tickEnemies;tickEnemies=function(...a){settleIdle();try{return base.apply(this,a);}finally{settleIdle();}};}
 if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(live.size&&!audible())hush();if(on){thaw();warn=before(a[0]);zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
 
 // ---------- 연출: 프레임 띠(scripts/r356-seoha-time-sheet.py, 384×384 10장) — 초침이 도는 십자가·되감기 잔상·멈추는 서리 ----------
