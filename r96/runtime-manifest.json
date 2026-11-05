@@ -23489,8 +23489,8 @@
     },
     {
       "path": "hero-select-r263.js",
-      "bytes": 11527,
-      "sha256": "ac42ae971fa865046998377e1beeebaed6d37453150fa836c684e7f1d8827da3"
+      "bytes": 14228,
+      "sha256": "936ae3da9316707c082d729d41d1715c399cefc62c0ea2c43710280b6ecded80"
     },
     {
       "path": "hero-skills-r269.js",
@@ -24269,7 +24269,7 @@
     }
   ],
   "fileCount": 4853,
-  "totalBytes": 931983680,
+  "totalBytes": 931986381,
   "webHTMLSha256": "8d7d6dbd540f26724f7f002dcdaea92dbd7c8c472ae14f6b6ed82ddcdc4ae92d",
   "largest": [
     {
