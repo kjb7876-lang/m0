@@ -48,14 +48,32 @@ function play(kind,...a){stats.sounds[kind]=(stats.sounds[kind]||0)+1;const C=au
  const v={g:null,src:[]};bucket=v.src;try{const g=v.g=C.createGain();g.gain.value=vol();g.connect(out(C));live.add(v);SND[kind](C,g,C.currentTime+.01,...a);setTimeout(()=>{live.delete(v);try{g.disconnect();}catch(_){}},5000);return true;}catch(e){fail(e);return false;}finally{bucket=null;}}
 if(typeof stopEffects==='function'){const base=stopEffects;stopEffects=function(...a){try{hush();}catch(e){fail(e);}return base.apply(this,a);};}
 
-// ---------- 위험지대 판정(엔진과 같은 모양) ----------
-function inside(h,x,y){try{
- if(h.type==='beam'||h.type==='field'){if(typeof genericFootprint154==='function'&&typeof footprintContains154==='function')return !!footprintContains154(genericFootprint154(h),x,y,h.type==='beam'?.25:0);
-  if(h.type==='beam'){const ex=h.x+Math.cos(h.angle||0)*(h.reach||0),ey=h.y+Math.sin(h.angle||0)*(h.reach||0),dx=ex-h.x,dy=ey-h.y,L=dx*dx+dy*dy||1,u=Math.max(0,Math.min(1,((x-h.x)*dx+(y-h.y)*dy)/L));return Math.hypot(x-h.x-u*dx,y-h.y-u*dy)<(h.width||.38)+.25;}}
- // 보스 저작 패턴(선·부채꼴·십자·도넛·안전지대): 엔진 storyPatternTouches5 와 같은 잠긴 발자국으로 본다
- if(h.type==='story-pattern'&&typeof lockPatternFootprint154==='function'&&typeof footprintContains154==='function')return !!footprintContains154(lockPatternFootprint154(h),x,y);
- return Math.hypot(x-h.x,y-h.y)<(h.radius||0);}catch(e){fail(e);return false;}}
-const hostile=h=>h&&!h.friendly&&h.damage>0&&Number.isFinite(h.warning)&&Number.isFinite(h.age);
+// ---------- 위험지대 판정: 종류마다 엔진이 실제로 피해를 줄 때 쓰는 판정·착탄 시각을 그대로 쓴다 ----------
+// (index.html) 바탕 tickHazards(323): beam=capsule+.25, field=원+0, 그 밖(R241 운석·R251 손·R330 재해…)=distance<radius, 착탄 age>=warning
+//  story-pattern(3060~3070): row150.impactAt 에 storyPatternTouches5 = footprintContains154(lockPatternFootprint154(h),x,y); row150 이 없거나 취소면 때리지 않는다
+//  medical20(6638~6677): 반경 없이 footprint154 만, pulse() = clearLine(origin,target)·clearLine(target,발)·footprintContains154(g,x,y-.15,.25), 착탄 medical20.impactAt(도구는 발사 시각)
+//  R61 던진 장판(10597·10647): damage 0·예산 remaining, footprintContains154(genericFootprint154(h),x,y-.15,.12)&&clearLine, 착탄 r61Field.impactAt
+//  R62 공성 장판(10792·10801): damage 0, 엔진이 내보인 __STORYWORLD_BOSS_FIELDS_R62__.touches(h,p)(칸·안전지대·벽), 착탄 r62Field.impactAt
+//  피해 없는 표식(R74 잔류·R330 상태 지대·페르소나 예고 등 damage 0)은 보지 않는다.
+const fin=v=>Number.isFinite(v);
+function landingAt(h){const r=h.row150;if(r&&fin(r.impactAt))return r.impactAt;const m=h.medical20||h.r61Field||h.r62Field;return m&&fin(m.impactAt)?m.impactAt:null;}
+function hostile(h){if(!h||h.friendly||!fin(h.warning)||!fin(h.age)||h.age>=h.life)return false;
+ if(h.medical20)return !h.medical20.cancelled&&h.medical20.budget>0;
+ if(h.r61Field)return !h.r61Field.action?.cancelled&&h.r61Field.remaining>0;
+ if(h.r62Field)return !h.r62Field.remote;
+ if(h.storyPattern5&&(!h.row150||h.row150.stage==='cancel'))return false;
+ return h.damage>0;}
+// 착탄 순간에 실제로 터졌는가(발사되지 않고 취소된 캐스트는 탈출로 치지 않는다)
+function fired(h){if(h.medical20)return h.medical20.released&&!h.medical20.cancelled;if(h.r61Field)return h.r61Field.released!==false&&!h.r61Field.action?.cancelled;if(h.r62Field)return h.r62Field.released!==false&&!(h.life<=0);if(h.row150)return h.row150.stage!=='cancel';return true;}
+function inside(h,p){try{const x=p.x,y=p.y;
+ if(h.medical20){const m=h.medical20,q={x,y:y-.15},line=typeof clearLine==='function'?clearLine:()=>true;
+  if(m.kind==='tools'){if(!line(m.origin,q))return false;}else if(!line(m.origin,m.target)||!line(m.target,q))return false;
+  return !!footprintContains154(h.footprint154,q.x,q.y,.25);}
+ if(h.r62Field){const api=window.__STORYWORLD_BOSS_FIELDS_R62__;return typeof api?.touches==='function'?!!api.touches(h,p):Math.hypot(x-h.x,y-.15-h.y)<=(h.radius||0)+.12;}
+ if(h.r61Field)return !!footprintContains154(genericFootprint154(h),x,y-.15,.12)&&(typeof clearLine!=='function'||!!clearLine({x:h.x,y:h.y},p));
+ if(h.storyPattern5)return !!footprintContains154(lockPatternFootprint154(h),x,y);
+ if(h.type==='beam'||h.type==='field')return !!footprintContains154(genericFootprint154(h),x,y,h.type==='beam'?.25:0);
+ return Math.hypot(x-h.x,y-h.y)<h.radius;}catch(e){fail(e);return false;}}
 
 // ---------- 윤서하 '시간 제어' ----------
 // 재사용 기한은 플레이어 객체별로 둔다(newGame·restoreSave 는 새 player 를 만든다). 시간이 거꾸로 가면(새 게임 time=0·이른 세이브) 남은 대기가 7초를 넘으므로 무효로 본다.
@@ -66,11 +84,18 @@ const coop=()=>{try{return window.__STORYWORLD_COOP_SIM_R62__||null;}catch(_){re
 function people(){const c=coop();try{if(c?.mode?.()==='host'){const l=c.livingPlayers?.();if(Array.isArray(l)&&l.length)return l.filter(Boolean);}}catch(_){}const p=P();return p?[p]:[];}
 function mine(p){const c=coop();try{if(c?.mode?.()==='host'){const l=c.localPlayer?.();return !l||l===p;}}catch(_){}return true;}
 const isSeoha=p=>!!(p&&p.hero==='seoha'&&p.hp>0);
+// 적 '다음 공격' 0.7초 늦춤: 엔진은 근접 공격(e.attack)·원거리 예비동작(e.rangedWindup)·R61/R62 동작(e.r61Action)이 끝날 때 cd 를 새로 덮어쓴다(index.html 1125·1126·R52·R61).
+// 그래서 공격 중이면 미뤄 두었다가(e.r356Delay) 동작이 끝난 뒤 첫 tickEnemies 앞에서 건다. 기다리던 적(cd<0)·쉬는 적(rest)도 실제 다음 공격 시각에서 0.7초 늦춘다.
+// R62 공성 보스는 cd 가 아니라 자기 일정(ownerState.next)으로 시작하므로 그것도 민다.
+const busy=e=>!!(e.attack||e.rangedWindup>0||e.r61Action);
+function settle(e){const d=e.r356Delay;if(!(d>0))return;delete e.r356Delay;if(e.hp<=0)return;const t=now();
+ e.cd=Math.max(0,+e.cd||0,+e.rest||0)+d;
+ try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;if(f?.ownerState&&f.major?.(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
 function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha(p))return false;if(readyIn(p)>0)return false;readyAt.set(p,now()+T.cooldown);stats.triggers++;
  if(solo()){
   for(const b of(typeof projectiles!=='undefined'&&Array.isArray(projectiles)?projectiles:[])){if(!b||b.dead||b.friendly||frozen.has(b)||!Number.isFinite(b.vx))continue;if(dist(b,p)>T.radius)continue;
    frozen.set(b,{vx:b.vx,vy:b.vy,until:now()+T.freeze});b.vx=0;b.vy=0;if(Number.isFinite(b.life))b.life+=T.freeze;stats.frozen++;}
-  const r=R();for(const e of(r?.enemies||[])){if(!e||e.hp<=0||dist(e,p)>T.radius||!Number.isFinite(e.cd))continue;e.cd+=T.delay;stats.delayed++;}
+  const r=R();for(const e of(r?.enemies||[])){if(!e||e.hp<=0||dist(e,p)>T.radius||!Number.isFinite(e.cd))continue;e.r356Delay=T.delay;stats.delayed++;if(!busy(e))settle(e);}
   for(const k of['blinkCD','specialCD'])if(Number.isFinite(p[k])&&p[k]>0){p[k]=Math.max(0,p[k]-T.refund);stats.refunds++;}}
  note('time-control',{reason,frozen:frozen.size,hero:p.coopIdR62||'local'});
  // 글자·연출은 그 참가자 자리에(손님은 자기 판정이 없어 호스트 스냅숏으로 받는다), 종소리는 이 화면의 주인공일 때만
@@ -81,21 +106,24 @@ function thaw(){const t=now();for(const[b,s]of frozen){if(b.dead||t>=s.until||t<
 
 // ---------- 매 틱: 위험지대 감시 ----------
 // 엔진 저작 캐스트(row150)는 예고가 releaseAt 에 끝나도 피해는 impactAt(비행 0.9~1.8초 뒤)에 들어간다 → 판정 시각을 impactAt 으로 본다.
-const pending=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?t<r.impactAt:h.age<h.warning;};
+// 착탄 시각: 엔진 저작 캐스트(row150)·medical20·R61/R62 장판은 예고가 끝나도(warning) 피해는 각자의 impactAt 에 들어간다 → 그 시각을 본다.
 // 엔진 tick() 은 time 을 먼저 올리고 tickHazards 를 부르므로 감싼 안에서 time 은 그대로다. before() 는 이번 틱 구간의 시작(time-dt) 기준으로 보아
-// impactAt 을 넘는 틱에도 그 캐스트를 계속 붙잡고, after() 가 지금 time 으로 착탄을 확인한다. 일반 예고는 base 가 h.age 를 올리므로 그대로 둔다.
-const ripe=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?Math.max(0,Math.min(1,(t-(r.warningAt??t-h.age))/Math.max(.05,r.impactAt-(r.warningAt??t-h.age)))):Math.max(0,Math.min(1,h.age/Math.max(.05,h.warning)));};
+// impactAt 을 넘는 틱에도 그 위험지대를 계속 붙잡고, after() 가 지금 time 으로 착탄을 확인한다. 일반 예고는 base 가 h.age 를 올리므로 그대로 둔다.
+const pending=(h,t)=>{const L=landingAt(h);return L!==null?t<L:h.age<h.warning;};
+const startedAt=h=>h.row150?.warningAt??h.medical20?.start??h.r61Field?.action?.start??h.r62Field?.start;
+const ripe=(h,t)=>{const L=landingAt(h);if(L===null)return Math.max(0,Math.min(1,h.age/Math.max(.05,h.warning)));const s=startedAt(h)??t-h.age;return Math.max(0,Math.min(1,(t-s)/Math.max(.05,L-s)));};
 const lastIn=new WeakMap();// hazard -> Map(participant -> 마지막으로 안에 있던 time)
 let tickAt=0,nextTick=0,lastZone=null,stingAt=-1e9,stingTimer=null;
 function before(dt){const list=[];if(typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now(),t0=t-(Number.isFinite(dt)&&dt>0?dt:0),ps=people();
- for(const h of hazards){if(!hostile(h)||!pending(h,t0))continue;list.push(h);for(const p of ps){if(!isSeoha(p)||!inside(h,p.x,p.y))continue;let m=lastIn.get(h);if(!m)lastIn.set(h,m=new Map());m.set(p,t);}}return list;}
+ for(const h of hazards){if(!hostile(h)||!pending(h,t0))continue;list.push(h);for(const p of ps){if(!isSeoha(p)||!inside(h,p))continue;let m=lastIn.get(h);if(!m)lastIn.set(h,m=new Map());m.set(p,t);}}return list;}
 function after(warn){const t=now();
- for(const p of people()){if(!isSeoha(p))continue;for(const h of warn){if(pending(h,t))continue;const was=lastIn.get(h)?.get(p);if(was===undefined||t-was>T.window)continue;if(inside(h,p.x,p.y))continue;stats.escapes++;trigger('escape',p);break;}}
+ for(const p of people()){if(!isSeoha(p))continue;for(const h of warn){if(pending(h,t)||!fired(h))continue;const was=lastIn.get(h)?.get(p);if(was===undefined||t-was>T.window)continue;if(inside(h,p))continue;stats.escapes++;trigger('escape',p);break;}}
  // 카이로 구역: 가까운 예고가 무르익을수록 초침이 빨라진다
  const p=P();if(p&&kairo()&&on){let best=null,bd=1e9;for(const h of warn){if(!pending(h,t))continue;const d=dist(h,p);if(d<T.tickRange&&d<bd){bd=d;best=h;}}
   if(best){const u=ripe(best,t),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
 function zoneWatch(){const r=R(),id=r?String(r.id||'')+':'+r.layer:null;if(id===lastZone)return;lastZone=id;if(!kairo())return;
  const wall=performance.now()/1000;if(wall-stingAt<T.stingGap)return;stingAt=wall;clearTimeout(stingTimer);stingTimer=setTimeout(()=>{if(kairo()){stats.stings++;play('toll');}},800);}
+if(typeof tickEnemies==='function'){const base=tickEnemies;tickEnemies=function(...a){try{if(on){const r=R();for(const e of(r?.enemies||[]))if(e&&e.r356Delay>0&&!busy(e))settle(e);}}catch(e){fail(e);}return base.apply(this,a);};}
 if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(live.size&&!audible())hush();if(on){thaw();warn=before(a[0]);zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
 
 // ---------- 연출: 프레임 띠(scripts/r356-seoha-time-sheet.py, 384×384 10장) — 초침이 도는 십자가·되감기 잔상·멈추는 서리 ----------
