@@ -4039,7 +4039,8 @@
     "assets/r325/pixel-readable/pe99278e2986f.webp",
     "assets/r325/pixel-readable/pf0ad5f9f7a51.webp",
     "assets/r309/intro/opening-hapil.mp4",
-    "assets/r309/intro/poster-hapil.jpg"
+    "assets/r309/intro/poster-hapil.jpg",
+    "samong-gate-r338.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5114,5 +5115,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "3805df777ed6237b9567d51f739020dfba41a941e350baa08f1f01a8231f34e3"
+  "runtimeManifestSHA256": "916981cd59b3797521fc5715fd9fb7b2fc3c0b3f1655292c7f02d0c7e1ee91fc"
 }
