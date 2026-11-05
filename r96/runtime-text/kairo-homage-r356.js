@@ -32,8 +32,11 @@ function out(C){try{return typeof masterGain!=='undefined'&&masterGain&&masterGa
 function vol(){try{return Math.max(0,Math.min(1,typeof settings!=='undefined'?+settings.volume||0:.7));}catch(_){return .7;}}
 let noise=null;function noiseBuf(C){if(noise&&noise.sampleRate===C.sampleRate)return noise;const n=C.sampleRate*.5|0,b=C.createBuffer(1,n,C.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return noise=b;}
 function env(C,dest,t,a,d,peak){const g=C.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak),t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d);g.connect(dest);return g;}
-function tone(C,dest,t,fq,d,peak,type='sine'){const o=C.createOscillator();o.type=type;o.frequency.setValueAtTime(fq,t);o.connect(env(C,dest,t,.004,d,peak));o.start(t);o.stop(t+d+.06);}
-function click(C,dest,t,fq,d,peak){const s=C.createBufferSource(),f=C.createBiquadFilter();s.buffer=noiseBuf(C);f.type='bandpass';f.frequency.value=fq;f.Q.value=6;s.connect(f);f.connect(env(C,dest,t,.002,d,peak));s.start(t);s.stop(t+d+.05);}
+// 합성 소리 수명: 엔진 stopEffects(탭 숨김·효과음 끔·볼륨 0)에 같이 끊긴다. sfxLive 에 넣으면 엔진 동시 재생 상한을 잡아먹으므로 따로 들고 있다가 stopEffects 를 감싸 끊는다.
+const live=new Set();let bucket=null;
+function hush(){for(const v of live){for(const s of v.src){try{s.stop();}catch(_){}}try{v.g.disconnect();}catch(_){}}const n=live.size;live.clear();clearTimeout(stingTimer);stingTimer=null;return n;}
+function tone(C,dest,t,fq,d,peak,type='sine'){const o=C.createOscillator();bucket?.push(o);o.type=type;o.frequency.setValueAtTime(fq,t);o.connect(env(C,dest,t,.004,d,peak));o.start(t);o.stop(t+d+.06);}
+function click(C,dest,t,fq,d,peak){const s=C.createBufferSource(),f=C.createBiquadFilter();bucket?.push(s);s.buffer=noiseBuf(C);f.type='bandpass';f.frequency.value=fq;f.Q.value=6;s.connect(f);f.connect(env(C,dest,t,.002,d,peak));s.start(t);s.stop(t+d+.05);}
 const SND={
  // 초침: 1.5kHz 금속 딸깍(시제품 시계 소리 결)
  tick(C,d,t,k=1){click(C,d,t,1500,.03,.05*k);tone(C,d,t,1508,.035,.012*k,'triangle');},
@@ -42,40 +45,55 @@ const SND={
  // 구역 입장: 낮은 쇠종(E2·B2·E3, 비조화 배음) + 1초 간격 초침 넷
  toll(C,d,t){for(const[fq,p,dd]of[[82.4,.06,3.2],[123.5,.03,2.6],[164.8,.025,2.2],[226.6,.012,1.4]])tone(C,d,t,fq,dd,p);click(C,d,t,420,.12,.03);for(let i=1;i<=4;i++)SND.tick(C,d,t+.6+i*1.0,.8-i*.12);}};
 function play(kind,...a){stats.sounds[kind]=(stats.sounds[kind]||0)+1;const C=audible()?A():null;note('sound',{kind,played:!!C});if(!C)return false;
- try{const g=C.createGain();g.gain.value=vol();g.connect(out(C));SND[kind](C,g,C.currentTime+.01,...a);setTimeout(()=>{try{g.disconnect();}catch(_){}},5000);return true;}catch(e){fail(e);return false;}}
+ const v={g:null,src:[]};bucket=v.src;try{const g=v.g=C.createGain();g.gain.value=vol();g.connect(out(C));live.add(v);SND[kind](C,g,C.currentTime+.01,...a);setTimeout(()=>{live.delete(v);try{g.disconnect();}catch(_){}},5000);return true;}catch(e){fail(e);return false;}finally{bucket=null;}}
+if(typeof stopEffects==='function'){const base=stopEffects;stopEffects=function(...a){try{hush();}catch(e){fail(e);}return base.apply(this,a);};}
 
 // ---------- 위험지대 판정(엔진과 같은 모양) ----------
 function inside(h,x,y){try{
  if(h.type==='beam'||h.type==='field'){if(typeof genericFootprint154==='function'&&typeof footprintContains154==='function')return !!footprintContains154(genericFootprint154(h),x,y,h.type==='beam'?.25:0);
   if(h.type==='beam'){const ex=h.x+Math.cos(h.angle||0)*(h.reach||0),ey=h.y+Math.sin(h.angle||0)*(h.reach||0),dx=ex-h.x,dy=ey-h.y,L=dx*dx+dy*dy||1,u=Math.max(0,Math.min(1,((x-h.x)*dx+(y-h.y)*dy)/L));return Math.hypot(x-h.x-u*dx,y-h.y-u*dy)<(h.width||.38)+.25;}}
+ // 보스 저작 패턴(선·부채꼴·십자·도넛·안전지대): 엔진 storyPatternTouches5 와 같은 잠긴 발자국으로 본다
+ if(h.type==='story-pattern'&&typeof lockPatternFootprint154==='function'&&typeof footprintContains154==='function')return !!footprintContains154(lockPatternFootprint154(h),x,y);
  return Math.hypot(x-h.x,y-h.y)<(h.radius||0);}catch(e){fail(e);return false;}}
 const hostile=h=>h&&!h.friendly&&h.damage>0&&Number.isFinite(h.warning)&&Number.isFinite(h.age);
 
 // ---------- 윤서하 '시간 제어' ----------
-let readyAt=0;const frozen=new Map();// projectile -> {vx,vy,until}
-function trigger(reason='escape'){const p=P();if(!on||!p||!seoha())return false;if(now()<readyAt)return false;readyAt=now()+T.cooldown;stats.triggers++;
+// 재사용 기한은 플레이어 객체별로 둔다(newGame·restoreSave 는 새 player 를 만든다). 시간이 거꾸로 가면(새 게임 time=0·이른 세이브) 남은 대기가 7초를 넘으므로 무효로 본다.
+const readyAt=new WeakMap(),frozen=new Map();// projectile -> {vx,vy,until}
+function readyIn(p){const r=p?readyAt.get(p):undefined,t=now();if(r===undefined||r-t>T.cooldown){if(p)readyAt.delete(p);return 0;}return Math.max(0,r-t);}
+// 협동 호스트: 살아 있는 참가자 각각을 따로 본다(손님 윤서하도 받는다). 손님 화면은 판정을 바꾸지 않는다.
+const coop=()=>{try{return window.__STORYWORLD_COOP_SIM_R62__||null;}catch(_){return null;}};
+function people(){const c=coop();try{if(c?.mode?.()==='host'){const l=c.livingPlayers?.();if(Array.isArray(l)&&l.length)return l.filter(Boolean);}}catch(_){}const p=P();return p?[p]:[];}
+function mine(p){const c=coop();try{if(c?.mode?.()==='host'){const l=c.localPlayer?.();return !l||l===p;}}catch(_){}return true;}
+const isSeoha=p=>!!(p&&p.hero==='seoha'&&p.hp>0);
+function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha(p))return false;if(readyIn(p)>0)return false;readyAt.set(p,now()+T.cooldown);stats.triggers++;
  if(solo()){
   for(const b of(typeof projectiles!=='undefined'&&Array.isArray(projectiles)?projectiles:[])){if(!b||b.dead||b.friendly||frozen.has(b)||!Number.isFinite(b.vx))continue;if(dist(b,p)>T.radius)continue;
    frozen.set(b,{vx:b.vx,vy:b.vy,until:now()+T.freeze});b.vx=0;b.vy=0;if(Number.isFinite(b.life))b.life+=T.freeze;stats.frozen++;}
   const r=R();for(const e of(r?.enemies||[])){if(!e||e.hp<=0||dist(e,p)>T.radius||!Number.isFinite(e.cd))continue;e.cd+=T.delay;stats.delayed++;}
   for(const k of['blinkCD','specialCD'])if(Number.isFinite(p[k])&&p[k]>0){p[k]=Math.max(0,p[k]-T.refund);stats.refunds++;}}
+ note('time-control',{reason,frozen:frozen.size,hero:p.coopIdR62||'local'});if(!mine(p))return true;
  try{if(typeof floatText==='function')floatText('시간 제어',p.x,p.y,'#bfe6ff');}catch(e){fail(e);}
  try{if(typeof effects!=='undefined'&&Array.isArray(effects))effects.push({type:'r356-time',r356:true,x:p.x,y:p.y,age:0,life:T.freeze});}catch(e){fail(e);}
- play('chime');note('time-control',{reason,frozen:frozen.size});return true;}
+ play('chime');return true;}
 function thaw(){const t=now();for(const[b,s]of frozen){if(b.dead||t>=s.until||t<s.until-T.freeze-1){if(!b.dead){b.vx=s.vx;b.vy=s.vy;}frozen.delete(b);}else{b.vx=0;b.vy=0;}}}
 
 // ---------- 매 틱: 위험지대 감시 ----------
-const lastIn=new WeakMap();let tickAt=0,nextTick=0,lastZone=null,stingAt=-1e9,stingTimer=null;
-function before(){const p=P(),list=[];if(!p||typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now();
- for(const h of hazards){if(!hostile(h)||h.age>=h.warning)continue;list.push(h);if(inside(h,p.x,p.y))lastIn.set(h,t);}return list;}
-function after(warn){const p=P();if(!p)return;const t=now();
- if(seoha())for(const h of warn){if(h.age<h.warning)continue;const was=lastIn.get(h);if(was===undefined||t-was>T.window)continue;if(inside(h,p.x,p.y))continue;stats.escapes++;trigger('escape');break;}
+// 엔진 저작 캐스트(row150)는 예고가 releaseAt 에 끝나도 피해는 impactAt(비행 0.9~1.8초 뒤)에 들어간다 → 판정 시각을 impactAt 으로 본다.
+const pending=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?t<r.impactAt:h.age<h.warning;};
+const ripe=(h,t)=>{const r=h.row150;return r&&Number.isFinite(r.impactAt)?Math.max(0,Math.min(1,(t-(r.warningAt??t-h.age))/Math.max(.05,r.impactAt-(r.warningAt??t-h.age)))):Math.max(0,Math.min(1,h.age/Math.max(.05,h.warning)));};
+const lastIn=new WeakMap();// hazard -> Map(participant -> 마지막으로 안에 있던 time)
+let tickAt=0,nextTick=0,lastZone=null,stingAt=-1e9,stingTimer=null;
+function before(){const list=[];if(typeof hazards==='undefined'||!Array.isArray(hazards))return list;const t=now(),ps=people();
+ for(const h of hazards){if(!hostile(h)||!pending(h,t))continue;list.push(h);for(const p of ps){if(!isSeoha(p)||!inside(h,p.x,p.y))continue;let m=lastIn.get(h);if(!m)lastIn.set(h,m=new Map());m.set(p,t);}}return list;}
+function after(warn){const t=now();
+ for(const p of people()){if(!isSeoha(p))continue;for(const h of warn){if(pending(h,t))continue;const was=lastIn.get(h)?.get(p);if(was===undefined||t-was>T.window)continue;if(inside(h,p.x,p.y))continue;stats.escapes++;trigger('escape',p);break;}}
  // 카이로 구역: 가까운 예고가 무르익을수록 초침이 빨라진다
- if(kairo()&&on){let best=null,bd=1e9;for(const h of warn){if(h.age>=h.warning)continue;const d=dist(h,p);if(d<T.tickRange&&d<bd){bd=d;best=h;}}
-  if(best){const u=Math.max(0,Math.min(1,best.age/Math.max(.05,best.warning))),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
+ const p=P();if(p&&kairo()&&on){let best=null,bd=1e9;for(const h of warn){if(!pending(h,t))continue;const d=dist(h,p);if(d<T.tickRange&&d<bd){bd=d;best=h;}}
+  if(best){const u=ripe(best,t),gap=.34-.22*u;if(t>=nextTick&&t-tickAt>=.1){tickAt=t;nextTick=t+gap;stats.ticks++;play('tick',.55+.45*u);}}}}
 function zoneWatch(){const r=R(),id=r?String(r.id||'')+':'+r.layer:null;if(id===lastZone)return;lastZone=id;if(!kairo())return;
  const wall=performance.now()/1000;if(wall-stingAt<T.stingGap)return;stingAt=wall;clearTimeout(stingTimer);stingTimer=setTimeout(()=>{if(kairo()){stats.stings++;play('toll');}},800);}
-if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(on){thaw();warn=before();zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
+if(typeof tickHazards==='function'){const base=tickHazards;tickHazards=function(...a){let warn=[];try{if(live.size&&!audible())hush();if(on){thaw();warn=before();zoneWatch();}}catch(e){fail(e);}const res=base.apply(this,a);try{if(on)after(warn);}catch(e){fail(e);}return res;};}
 
 // ---------- 연출: 프레임 띠(scripts/r356-seoha-time-sheet.py, 384×384 10장) — 초침이 도는 십자가·되감기 잔상·멈추는 서리 ----------
 const SHEET={path:'assets/r356/seoha-time-control.webp',cell:384,frames:10,img:null,ok:false,err:false};
@@ -91,6 +109,6 @@ sheet();
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.r356){try{if(on)drawTime(e);}catch(err){fail(err);}return;}return base.call(this,e,...a);};}
 
 function set(v){on=!!v;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}if(!on){for(const[b,s]of frozen)if(!b.dead){b.vx=s.vx;b.vy=s.vy;}frozen.clear();}return on;}
-window.__STORYWORLD_KAIRO_HOMAGE_R356__=Object.freeze({revision:REV,tuning:T,on:()=>on,set,trigger,play,isKairo:kairo,isSeoha:seoha,
- inspect:()=>({revision:REV,on,kairo:kairo(),seoha:seoha(),readyIn:Math.max(0,+(readyAt-now()).toFixed(2)),frozen:frozen.size,audio:!!A(),stats:JSON.parse(JSON.stringify(stats)),log:log.slice(),lastError})});
+window.__STORYWORLD_KAIRO_HOMAGE_R356__=Object.freeze({revision:REV,tuning:T,on:()=>on,set,trigger,play,hush,isKairo:kairo,isSeoha:seoha,
+ inspect:()=>({revision:REV,on,liveSounds:live.size,kairo:kairo(),seoha:seoha(),readyIn:+readyIn(P()).toFixed(2),frozen:frozen.size,audio:!!A(),stats:JSON.parse(JSON.stringify(stats)),log:log.slice(),lastError})});
 })();
