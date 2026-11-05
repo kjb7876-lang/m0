@@ -150,5 +150,7 @@ const near7=g=>assert(Math.abs(g-.7)<=.05+1e-9,'gap '+g);
 {const base=startsWith('hwando',{cd:.1,rest:.9}),got=startsWith('seoha',{cd:.1,rest:.9});/* 엔진은 rest 가 0 이 된 틱을 건너뛰고 다음 틱에 공격하므로 한 틱 더 흔들린다 */assert(Math.abs(gap(got,base,0)-.7)<=.1+1e-9,'gap '+gap(got,base,0));ok('resting enemy (e.rest longer than cd): next attack 0.7s later');}
 {const st=new Map(),api={ownerState:e=>{if(!st.has(e))st.set(e,{next:0});return st.get(e);}};const got=startsWith('seoha',{cd:5,boss:true},{winApi:{__STORYWORLD_BOSS_FIELDS_R62__:api},steps:1});
  const s=st.get(got.e);assert(s&&Math.abs(s.next-(got.G.time-.05+.7))<.06);ok('R62 siege boss schedule (ownerState.next, not gated by cd) is pushed 0.7s too');}
+{/* R61 던지기: FIELDS_R61.state(e).next 로 시작(nativeBusy 는 cd 를 보지 않음) — 실제 API 처럼 state 만 둔다 */const st=new Map(),api={state:e=>{if(!st.has(e))st.set(e,{next:0,step:0});return st.get(e);}};const got=startsWith('seoha',{cd:5},{winApi:{__STORYWORLD_FIELDS_R61__:api},steps:1});
+ const s=st.get(got.e);assert(s&&Math.abs(s.next-(got.G.time-.05+.7))<.06);ok('R61 throw schedule (FIELDS_R61.state(e).next, not gated by cd) is pushed 0.7s too');}
 const bgm=['bgm-map-r308.js'].map(f=>RT(f));assert(!bgm.some(s=>/kairo-homage|R356/.test(s)));assert(!/audioCatalog|musicElement|__STORYWORLD_BGM__/.test(code));ok('classical BGM tables and decks untouched');
 console.log(JSON.stringify({ok:true,checks:n,method:'CPU fake globals; headless separately; sound quality unverified'}));

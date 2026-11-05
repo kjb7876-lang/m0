@@ -87,11 +87,13 @@ function mine(p){const c=coop();try{if(c?.mode?.()==='host'){const l=c.localPlay
 const isSeoha=p=>!!(p&&p.hero==='seoha'&&p.hp>0);
 // 적 '다음 공격' 0.7초 늦춤: 엔진은 근접 공격(e.attack)·원거리 예비동작(e.rangedWindup)·R61/R62 동작(e.r61Action)이 끝날 때 cd 를 새로 덮어쓴다(index.html 1125·1126·R52·R61).
 // 그래서 공격 중이면 미뤄 두었다가(e.r356Delay) 동작이 끝난 뒤 첫 tickEnemies 앞에서 건다. 기다리던 적(cd<0)·쉬는 적(rest)도 실제 다음 공격 시각에서 0.7초 늦춘다.
-// R62 공성 보스는 cd 가 아니라 자기 일정(ownerState.next)으로 시작하므로 그것도 민다.
+// R62 공성 보스는 cd 가 아니라 자기 일정(ownerState.next), R61 던지기는 FIELDS_R61.state(e).next 로 시작하므로 둘 다 민다.
 const busy=e=>!!(e.attack||e.rangedWindup>0||e.r61Action);
 function settle(e){const d=e.r356Delay;if(!(d>0))return;delete e.r356Delay;if(e.hp<=0)return;const t=now();
  e.cd=Math.max(0,+e.cd||0,+e.rest||0)+d;
- try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;/* R62 은 major 를 내보내지 않는다 — index.html R62 의 major(e) 와 같은 조건을 그대로 쓴다 */if(f?.ownerState&&r62Major(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
+ try{const f=window.__STORYWORLD_BOSS_FIELDS_R62__;/* R62 은 major 를 내보내지 않는다 — index.html R62 의 major(e) 와 같은 조건을 그대로 쓴다 */if(f?.ownerState&&r62Major(e)){const s=f.ownerState(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}
+ /* R61 던지기(echo·prop·field)는 cd 가 아니라 FIELDS_R61.state(e).next 로 시작한다(index.html R61 tickEnemies) — 그 일정도 민다 */
+ try{const g=window.__STORYWORLD_FIELDS_R61__;if(g?.state){const s=g.state(e);if(s&&fin(s.next))s.next=Math.max(s.next,t)+d;}}catch(err){fail(err);}}
 function trigger(reason='escape',who=null){const p=who||P();if(!on||!p||!isSeoha(p))return false;if(readyIn(p)>0)return false;readyAt.set(p,now()+T.cooldown);stats.triggers++;
  if(solo()){
   for(const b of(typeof projectiles!=='undefined'&&Array.isArray(projectiles)?projectiles:[])){if(!b||b.dead||b.friendly||frozen.has(b)||!Number.isFinite(b.vx))continue;if(dist(b,p)>T.radius)continue;
