@@ -22699,8 +22699,13 @@
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 13105,
-      "sha256": "364bf68a316595ff8298ccdb6931c696aa8b30ed419a6537b9678f6a6d6225de"
+      "bytes": 13884,
+      "sha256": "b4354d8ff984b4635e6102616ae53b34bac6b0ca61835727ca81fb3f97581c32"
+    },
+    {
+      "path": "bgm-pick-r353.js",
+      "bytes": 13503,
+      "sha256": "ac9d4830ab58b165f1031e0086f02ed731416ec9fb78d40a4a0b47d4c8353c68"
     },
     {
       "path": "boss-meteor-r241.js",
@@ -23429,8 +23434,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 25292,
-      "sha256": "44ab54494a2e4ee3c953335c66328cefbe44071706c89f9012bbbdbfc11fd2bd"
+      "bytes": 25448,
+      "sha256": "3cefe6bb54f3a1534421759d1137686aa4c8dbd1c3a02e3687ba1ce38cec9eaf"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -23479,8 +23484,8 @@
     },
     {
       "path": "hero-fx-r102.js",
-      "bytes": 52455,
-      "sha256": "6cae2b91d67ec519d8b873824ed36483dccc98da5ef2c6930b91c01bf242b93c"
+      "bytes": 52598,
+      "sha256": "4bd61e7c1c504d5c75548481ef3661eef5fd1ffda170aa0f5fac8b4979f49e87"
     },
     {
       "path": "hero-palette-r302.js",
@@ -23554,8 +23559,8 @@
     },
     {
       "path": "hud-bgm-hwando-w-r313.js",
-      "bytes": 15958,
-      "sha256": "8a74c3d8d75438113490c7911eb6794d62a4b296eed6a386a14ebb88f8850a1a"
+      "bytes": 16339,
+      "sha256": "12e55354282c392d1c02a8475b904050480e3b840af3b61ed1b358ec36fa9bdb"
     },
     {
       "path": "hud-bossbar-r334.js",
@@ -23593,9 +23598,14 @@
       "sha256": "4f150581bd72ab676f7490e07328b0155e10ee434001bff1e7c4091e5ce1de29"
     },
     {
+      "path": "hwando-w-cross-r348.js",
+      "bytes": 15074,
+      "sha256": "07a2941ad800025f17035c3f62b9060e95fa1feae535a0dd61d0e74f5d4decba"
+    },
+    {
       "path": "index.html",
-      "bytes": 6569366,
-      "sha256": "8718f4156704612fdb57f8bb6051ba4c8e9e8f91a7ec0f2ba8f69c765ed94cf9"
+      "bytes": 6569456,
+      "sha256": "7cc8e609b718a9e25f333ef5a4a981453890c952fc42378ea2ac912ee02c8c28"
     },
     {
       "path": "intro-r140.js",
@@ -23614,8 +23624,8 @@
     },
     {
       "path": "kairo-homage-r356.js",
-      "bytes": 12070,
-      "sha256": "598736453a633f12ca37c1ea54d347fbe6e9ed2356b53fb9c8c5d0529435d800"
+      "bytes": 14903,
+      "sha256": "b7b5ae6d370b416c90349e9b4c2939e38a8062efca51fee8a85f0cedb9967212"
     },
     {
       "path": "keys-r291.js",
@@ -24268,9 +24278,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4853,
-  "totalBytes": 932388181,
-  "webHTMLSha256": "8718f4156704612fdb57f8bb6051ba4c8e9e8f91a7ec0f2ba8f69c765ed94cf9",
+  "fileCount": 4855,
+  "totalBytes": 932421140,
+  "webHTMLSha256": "7cc8e609b718a9e25f333ef5a4a981453890c952fc42378ea2ac912ee02c8c28",
   "largest": [
     {
       "path": "index.html",
