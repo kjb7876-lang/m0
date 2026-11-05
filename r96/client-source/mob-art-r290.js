@@ -38,6 +38,8 @@ const ART=Object.freeze({
  m088:Object.freeze({file:'m088.webp',body:191,name:'찢어진 사진의 망령'}),
  m090:Object.freeze({file:'m090.webp',body:94,name:'종이 왕'}),
  m095:Object.freeze({file:'m095.webp',body:198,name:'일곱 나팔의 빈 소매 잔영'}),
+ // R363(사용자 2026-11-06 '레거시도써봐', Dots legacy-r92 M127 다시 그림 공격 4 + 옛 r92 걷기 8 — 조건부·최종 아님, 시트는 scripts/r363-legacy-mob-sheets.py):
+ m052:Object.freeze({file:'m052.webp',body:179,name:'공실 표기 잔재'}),
  // R362(사용자 2026-11-06 "쓰고 이름을바꿔 개와늑대의시간으로"): m030 Dots 후보, 게임 안 이름은 mob-rename-r362.js 가 '불길 속의 곰' → '개와 늑대의 시간'으로 바꾼다(R248 시트 줄 이름도 그 파일이 먼저 바꿈).
  m030:Object.freeze({file:'m030.webp',body:151,name:'개와 늑대의 시간'}),
 });

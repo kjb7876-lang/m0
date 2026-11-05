@@ -1,0 +1,327 @@
+{
+ "revision": "R363",
+ "user": "레거시도써봐 (2026-11-06)",
+ "rule": "confirmed 이고 12칸(같은 결 걷기 8 + 공격 4)을 만들 수 있는 줄만 적용. 근거: r92/r116/r198 index 의 nativeId·use 표기, 헤드리스 census(지금 그려지는 그림), 원본 그림과 다시 그림의 같은 몸(눈으로 대조).",
+ "drive": "결과 폴더 SW-legacy-* 묶음 + HANDOFF 메모 16개(파일 id 는 공개 저장소라 적지 않음). archival-backup·RESTORE-INDEX 는 건너뜀.",
+ "downloaded": [
+  "M102",
+  "M108",
+  "M109",
+  "M114",
+  "M126",
+  "M127",
+  "M128",
+  "M129",
+  "M132"
+ ],
+ "notDownloaded": {
+  "M106": "10.5MB MCP 응답 한도",
+  "M110": "8.2MB MCP 응답 한도",
+  "M119": "9.1MB MCP 응답 한도",
+  "M124": "6.4MB MCP 연결 끊김",
+  "M130": "8.0MB MCP 응답 한도",
+  "M134": "10.3MB MCP 응답 한도",
+  "M117": "zip 없음(인계 메모만)"
+ },
+ "rows": [
+  {
+   "legacy": "M102",
+   "pastId": "kair-guardian-39",
+   "gameMob": "시간수문장 (kair-guardian-39 만; kair10)",
+   "status": "confirmed",
+   "applied": true,
+   "evidence": [
+    "r92 index 그룹 M102 = [kair-guardian-39]",
+    "인계: 구형 M102 금흑 용광로 골렘 = 지금 그림 generated-v3125/kair-guardians/guardian_39.webp(금테 철갑·화로 배)와 같은 몸",
+    "R306 actor STORY|kair-guardian-39|시간수문장",
+    "헤드리스 census: kair10 의 시간수문장 39 → guardian_39"
+   ],
+   "r92Group": {
+    "ids": [
+     "kair-guardian-39"
+    ],
+    "tracks": {
+     "attack": 4
+    }
+   },
+   "decision": "걷기4+공격4 새 회화풍(같은 묶음) → 12칸. 같은 이름 시간수문장 37~48 은 서로 다른 원본이라 nativeId+이름 열쇠로만 붙임(뿌리 추적자·사몽 줄 제외)."
+  },
+  {
+   "legacy": "M106",
+   "pastId": "kair-elite-58",
+   "gameMob": "상위수문장 58 (kair10)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M106 = [kair-elite-58]",
+    "census: 상위수문장 58 → r92/mobs/M106-move.png"
+   ],
+   "r92Group": {
+    "ids": [
+     "kair-elite-58"
+    ],
+    "tracks": {
+     "move": 4,
+     "attack": 4
+    }
+   },
+   "decision": "zip 10.5MB — 드라이브 내려받기 실패(MCP 응답 크기 한도), 받지 못함. 인계도 alpha-pending."
+  },
+  {
+   "legacy": "M108",
+   "pastId": "kair-guardian-44",
+   "gameMob": "시간수문장 44 (kair02)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M108 = [kair-guardian-44]",
+    "지금 그림 guardian_44.webp(검금 판금·메이스)"
+   ],
+   "r92Group": {
+    "ids": [
+     "kair-guardian-44"
+    ],
+    "tracks": {
+     "attack": 4
+    }
+   },
+   "decision": "공격 4장만. 원본 걷기도 정지 그림 한 장(guardian_44)뿐 — 같은 결 걷기 없음 → 건너뜀(인계: 보행 보류)."
+  },
+  {
+   "legacy": "M109",
+   "pastId": "kair-guardian-45",
+   "gameMob": "시간수문장 45 (kair02)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M109 = [kair-guardian-45]",
+    "지금 그림 guardian_45.webp(가시 사슬추)"
+   ],
+   "r92Group": {
+    "ids": [
+     "kair-guardian-45"
+    ],
+    "tracks": {
+     "attack": 4
+    }
+   },
+   "decision": "공격 4장만, 같은 결 걷기 없음 → 건너뜀."
+  },
+  {
+   "legacy": "M110",
+   "pastId": "kair-guardian-46",
+   "gameMob": "시간수문장 46 (kair02)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "인계의 과거 id kair-guardian-46(r92 index 에는 없음)",
+    "지금 그림 guardian_46.webp"
+   ],
+   "r92Group": null,
+   "decision": "zip 8.2MB 내려받기 실패(MCP 한도). 공격만."
+  },
+  {
+   "legacy": "M114",
+   "pastId": "kair-elite-60",
+   "gameMob": "상위수문장 60 (kair02)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M114 = [kair-elite-60]",
+    "census: 상위수문장 60 → r92/mobs/M114-move.png"
+   ],
+   "r92Group": {
+    "ids": [
+     "kair-elite-60"
+    ],
+    "tracks": {
+     "move": 4
+    }
+   },
+   "decision": "부유 4장만, 공격 없음(인계: 공격 회수 미완 보류) → 12칸 못 만듦."
+  },
+  {
+   "legacy": "M117",
+   "pastId": "h101-t1",
+   "gameMob": "악몽 정찰체 (hando01)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M117 = [h101-t1]",
+    "지금 그림 timeless_silver_scout.webp(로브·시계 장치)"
+   ],
+   "r92Group": {
+    "ids": [
+     "h101-t1"
+    ],
+    "tracks": {
+     "attack": 4
+    }
+   },
+   "decision": "인계 메모만 있고 zip 이 결과 폴더에 없음 → 받지 못함."
+  },
+  {
+   "legacy": "M119",
+   "pastId": "h102-t1",
+   "gameMob": "무명 검흔 (hando02)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "census: 무명 검흔 → r109/mobs/M119-idle.png",
+    "인계: 정면·두 향로"
+   ],
+   "r92Group": null,
+   "decision": "zip 9.1MB 내려받기 실패. 공격만."
+  },
+  {
+   "legacy": "M124",
+   "pastId": "h103-t1",
+   "gameMob": "백은 없는 그림자 (hando03, 본편)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "인계 과거 id h103-t1",
+    "지금 그림 silverless_shadow.webp(랜턴·향로)"
+   ],
+   "r92Group": null,
+   "decision": "zip 6.4MB 내려받기 실패(MCP 연결 끊김). 부유 4장만, 공격 보류."
+  },
+  {
+   "legacy": "M126",
+   "pastId": "murder04-e2",
+   "gameMob": "미확정(murder04-e2 를 쓰는 이름 9개: 빗속 횡단보도·끊어진 통화·제출되지 못한 문장 …)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "인계 과거 id murder04-e2",
+    "원본 rooftop_echo.png 계열(검은 머리·청록 그물)"
+   ],
+   "r92Group": null,
+   "decision": "한 이름으로 확정 못 함 + 공격만, 같은 결 걷기 없음."
+  },
+  {
+   "legacy": "M127",
+   "pastId": "murder04-e1",
+   "gameMob": "공실 표기 잔재 (murder04) — R248 임시 시트 m052",
+   "status": "confirmed",
+   "applied": true,
+   "evidence": [
+    "r92 index 그룹 M127 = [murder04-e1]",
+    "r116 index use: \"공실 표기 잔재 · 맞음·회복 4키\"(M127)",
+    "원본 murder/silent_alarm.png(붉은 원형 코어·기계 갈고리손·등틀) = 인계 설명",
+    "지금은 R248 임시 시트 m052(이름 낱말로 그린 회색 두건 망령)",
+    "지금 게임 R306 표에서 silent_alarm 을 쓰는 이름은 murder04-e1 의 공실 표기 잔재·유리 망령뿐(둘 다 R248 시트), 그리고 자기 보스 그림(r104 murder04-mid-p4)을 쓰는 중간보스 진술 봉쇄 인과핵(예비 경로)"
+   ],
+   "r92Group": {
+    "ids": [
+     "murder04-e1"
+    ],
+    "tracks": {
+     "move": 8,
+     "attack": 4
+    }
+   },
+   "decision": "새 공격 4 + 옛 r92 걷기 8(M127-move, 같은 원본 계열·STATIC_RIG)을 몸 키 맞춰 12칸. R290 ART 표 줄(정확한 이름)."
+  },
+  {
+   "legacy": "M128",
+   "pastId": "c101-e1",
+   "gameMob": "흑장미 눈가린 신도 (cult01)",
+   "status": "confirmed",
+   "applied": true,
+   "evidence": [
+    "r92 index 그룹 M128 = [c101-e1]",
+    "r116/r198 index use: \"흑장미 눈가린 신도 · 맞음·회복 / 대기\"",
+    "원본 blindfold_modern_cultist_bloodied.webp(눈가리개·누더기 코트) = 인계 설명"
+   ],
+   "r92Group": {
+    "ids": [
+     "c101-e1"
+    ],
+    "tracks": {
+     "move": 8,
+     "attack": 4
+    }
+   },
+   "decision": "새 공격 4 + 지금 게임이 쓰는 옛 r92 걷기 8(M128-move, 원본도 회화풍 — 인계). 나란히 비교에서 색·옷·머리 일치. nativeId+이름 열쇠."
+  },
+  {
+   "legacy": "M129",
+   "pastId": "c101-e2",
+   "gameMob": "흑장미 귀막은 신도 (cult01)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M129 = [c101-e2]",
+    "r116 use: \"흑장미 귀막은 신도\"",
+    "원본 earcovered(헤드폰)"
+   ],
+   "r92Group": {
+    "ids": [
+     "c101-e2"
+    ],
+    "tracks": {
+     "move": 8
+    }
+   },
+   "decision": "공격만. 옛 걷기(회색 코트·손을 귀에)와 새 공격(갈색·붉은 누더기 코트, 넓은 자세)이 색·실루엣이 달라 섞으면 다른 몹처럼 보임 → 그림체 불일치로 건너뜀."
+  },
+  {
+   "legacy": "M130",
+   "pastId": "c101-e3",
+   "gameMob": "세뇌 신호 점액체 (cult01)",
+   "status": "confirmed",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M130 = [c101-e3, c105-e1]",
+    "r116 use: \"세뇌 신호 점액체\"",
+    "원본 green_enemy_slime.webp"
+   ],
+   "r92Group": {
+    "ids": [
+     "c101-e3",
+     "c105-e1"
+    ],
+    "tracks": {
+     "move": 4,
+     "attack": 4
+    }
+   },
+   "decision": "zip 8.0MB 내려받기 실패(MCP 한도) — 걷기4+공격4 완비라 다음 라운드 1순위."
+  },
+  {
+   "legacy": "M132",
+   "pastId": "c102-e1",
+   "gameMob": "신경 케이블 포식체 (cult02)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "r92 index 그룹 M132 = [c102-e1, c106-e2]",
+    "원본 black_robed_nightmare_demon.webp(해골·붉은 로브·지팡이)"
+   ],
+   "r92Group": {
+    "ids": [
+     "c102-e1",
+     "c106-e2"
+    ],
+    "tracks": {
+     "attack": 4
+    }
+   },
+   "decision": "c102-e1/c106-e2 두 이름(신경 케이블 포식체·기계재판 연결자) 중 하나로 확정 못 함 + 공격만, 원본 걷기는 정지 한 장."
+  },
+  {
+   "legacy": "M134",
+   "pastId": "c105-e2",
+   "gameMob": "생체기계 악몽 (cult05)",
+   "status": "plausible",
+   "applied": false,
+   "evidence": [
+    "인계 과거 id c105-e2",
+    "원본 black_rose_demon_soldier.webp"
+   ],
+   "r92Group": null,
+   "decision": "zip 10.3MB 내려받기 실패. 공격만."
+  }
+ ]
+}

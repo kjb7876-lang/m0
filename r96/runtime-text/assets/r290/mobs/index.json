@@ -6111,6 +6111,236 @@
      "bytes": 45027
     }
    ]
+  },
+  "m052": {
+   "name": "공실 표기 잔재",
+   "legacy": "M127",
+   "file": "m052.webp",
+   "sha256": "17954c90582b98c0042328399b6b464c76e4d027064519dceb1a8a42f162b6c0",
+   "bytes": 250082,
+   "size": [
+    1024,
+    960
+   ],
+   "body": 179,
+   "foot": [
+    295,
+    297
+   ],
+   "temporary": false,
+   "conditional": true,
+   "revision": "R363",
+   "drive": {
+    "bundle": "SW-legacy-M127-attack-painted-v2-7.9714-pivot-pending-20261105.zip",
+    "sha256": "ccb88432dd5eb23698d6f6393bb13851a740bfbdfb614ad8cfa73cbe9b1ce779",
+    "bytes": 4206753,
+    "folder": "결과 폴더(소유자 본인)"
+   },
+   "dots": {
+    "mean": 7.9714,
+    "scores": {
+     "art": 8.4,
+     "staging": 8,
+     "environment": 7.8,
+     "lighting": 8.2,
+     "motion": 7.6,
+     "UX": 8.1,
+     "camera": 7.7
+    },
+    "scope": "ATTACK4 ONLY, movement held",
+    "actualPlayback": false,
+    "gameTested": false
+   },
+   "sourceFrames": [
+    {
+     "file": "frame_01.png",
+     "sha256": "58e8159bfc285f42560f14b9e91ebf47084b0292dc88c98ab575d623958abade",
+     "bytes": 84917
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "a99584f8b6ef75dc639173ae6d2b5b345cca968e33519141eafd973c6a76f1f4",
+     "bytes": 126745
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "ca424f4b152b7f3b6bed743d6ddd75ec8f750bfe253fa13ecf16ebaa91f27cd9",
+     "bytes": 97450
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "0346f7f2bb53a034b9394a61e13ac28cd0345bd4f60718c7e5978461a977f972",
+     "bytes": 105244
+    }
+   ],
+   "walkSource": {
+    "kind": "r92-legacy-walk",
+    "path": "assets/r92/mobs/M127-move.png",
+    "sha256": "e0c7f99da999c455470826ce4accf10df59212609793023630661e8be3799d27",
+    "bytes": 83270,
+    "frames": 8,
+    "finalStatus": "STATIC_RIG_CANDIDATE",
+    "note": "게임이 지금 이 몹에 쓰는 옛 r92 걷기 8칸(같은 원본 계열). Dots 묶음에는 걷기가 없음(이동 보류)."
+   },
+   "approval": "Dots legacy-r92 다시 그림 후보(조건부·최종 아님, 인계 메모의 '자동 게임 적용 금지'는 자동 적용 금지) → 사용자 2026-11-06 '레거시도써봐' 수동 적용, PR 승인 대기",
+   "lossless": true,
+   "resampled": true,
+   "frames": [
+    {
+     "cell": 0,
+     "top": 118,
+     "foot": 297,
+     "body": 180,
+     "bbox": [
+      62,
+      118,
+      193,
+      298
+     ]
+    },
+    {
+     "cell": 1,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      298
+     ]
+    },
+    {
+     "cell": 2,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      298
+     ]
+    },
+    {
+     "cell": 3,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      298
+     ]
+    },
+    {
+     "cell": 4,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      298
+     ]
+    },
+    {
+     "cell": 5,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      297
+     ]
+    },
+    {
+     "cell": 6,
+     "top": 118,
+     "foot": 295,
+     "body": 178,
+     "bbox": [
+      62,
+      118,
+      193,
+      296
+     ]
+    },
+    {
+     "cell": 7,
+     "top": 118,
+     "foot": 296,
+     "body": 179,
+     "bbox": [
+      62,
+      118,
+      193,
+      297
+     ]
+    },
+    {
+     "cell": 8,
+     "top": 143,
+     "foot": 296,
+     "body": 154,
+     "bbox": [
+      90,
+      143,
+      212,
+      297
+     ]
+    },
+    {
+     "cell": 9,
+     "top": 120,
+     "foot": 296,
+     "body": 177,
+     "bbox": [
+      23,
+      120,
+      254,
+      297
+     ]
+    },
+    {
+     "cell": 10,
+     "top": 127,
+     "foot": 296,
+     "body": 170,
+     "bbox": [
+      47,
+      127,
+      203,
+      297
+     ]
+    },
+    {
+     "cell": 11,
+     "top": 116,
+     "foot": 296,
+     "body": 181,
+     "bbox": [
+      58,
+      116,
+      197,
+      297
+     ]
+    }
+   ],
+   "key": "공실 표기 잔재",
+   "kind": "wraith",
+   "replaces": {
+    "file": "assets/r248/mobs/m052.webp",
+    "sha256": "3a04f99d02c30a220547e014f50282bdfd4261fb6e4ee7ff1f3fc6f946b288c4",
+    "body": 234,
+    "temporary": true,
+    "kept": true
+   },
+   "reason": "R248 임시 픽셀 시트(이름 낱말로 그린 대체 그림)를 그 몹의 원래 그림(옛 r92 M127, murder04-e1 원본) 계열 Dots 다시 그림 공격 4 + 옛 걷기 8 로 바꿈."
   }
  },
  "r359": {
@@ -6129,5 +6359,14 @@
    "overlay": "mob-rename-r362.js"
   },
   "idLink": "reference-r248.webp sha256 == R248 m030 sheet sha256"
+ },
+ "r363": {
+  "generator": "scripts/r363-legacy-mob-sheets.py (Dots legacy-r92 repaint attack/walk + r92 legacy walk -> lossless WebP 4x3 sheet, resampled)",
+  "source": "Google Drive 결과 폴더(소유자 본인) SW-legacy-*.zip, 읽기 전용 재사용",
+  "approval": "Dots legacy-r92 다시 그림 후보(조건부·최종 아님, 인계 메모의 '자동 게임 적용 금지'는 자동 적용 금지) → 사용자 2026-11-06 '레거시도써봐' 수동 적용, PR 승인 대기",
+  "footTarget": 296,
+  "mobs": [
+   "m052"
+  ]
  }
 }

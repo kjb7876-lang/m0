@@ -13394,8 +13394,8 @@
     },
     {
       "path": "assets/r290/mobs/index.json",
-      "bytes": 133294,
-      "sha256": "cf88e4408256a1117bb5ed6db92a91c7d981fb78598f2f9397c082e24bb5ce18"
+      "bytes": 138269,
+      "sha256": "eb70224915b3166229d2d2dc5a01916ce5c2722d2c1af3f4cb3bfb9cab60db07"
     },
     {
       "path": "assets/r290/mobs/m001.webp",
@@ -13441,6 +13441,11 @@
       "path": "assets/r290/mobs/m051.webp",
       "bytes": 241792,
       "sha256": "b4b1be24c071de0cb3dcdd6efedad685c8253a47613fcb92bc5f5fcfac9581f2"
+    },
+    {
+      "path": "assets/r290/mobs/m052.webp",
+      "bytes": 250082,
+      "sha256": "17954c90582b98c0042328399b6b464c76e4d027064519dceb1a8a42f162b6c0"
     },
     {
       "path": "assets/r290/mobs/m053.webp",
@@ -14831,6 +14836,21 @@
       "path": "assets/r356/seoha-time-control.webp",
       "bytes": 439852,
       "sha256": "a78180a52f8aabd44c709305fa374a5265cbfce4c526d51ba9bebde13593c902"
+    },
+    {
+      "path": "assets/r363/mobs/L102.webp",
+      "bytes": 447492,
+      "sha256": "fbf3bbffda1a230ad935e04bc627b85fa48eddd0d74836ac8e70f0faf093f91d"
+    },
+    {
+      "path": "assets/r363/mobs/L128.webp",
+      "bytes": 469286,
+      "sha256": "abcca348e944d484496b592c5a7eaa40548eb19b85dcb17264e5b1354b024e74"
+    },
+    {
+      "path": "assets/r363/mobs/index.json",
+      "bytes": 9447,
+      "sha256": "e71e1fbef314efbe7f9f63ef9b6ad90f16e42f5ca56de61464ec2b8a5262098f"
     },
     {
       "path": "assets/r74/effects.png",
@@ -23714,8 +23734,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569632,
-      "sha256": "099a7af76bbf2098b0d2b3a94912e5c803f6ee0889b0aa94fcb9355312dffeeb"
+      "bytes": 6569676,
+      "sha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4"
     },
     {
       "path": "intro-r140.js",
@@ -23774,13 +23794,13 @@
     },
     {
       "path": "mob-art-r290.js",
-      "bytes": 5625,
-      "sha256": "129128ab99404405a07330790e83c06332b296c049f01e45190c5f1357795474"
+      "bytes": 5894,
+      "sha256": "02fc09b4708a2c8841fe9947ea0572317a72f707d5386b12fe429048051f6729"
     },
     {
       "path": "mob-art-variants-r306-data.js",
-      "bytes": 971805,
-      "sha256": "c0355a0e3bfb9c120524660663c46a8ed8ad084284c944d4847755970a01f0df"
+      "bytes": 977001,
+      "sha256": "b13fb95c2c53a99ca962cec970f3d69849092f136cc384f92fda06e78e03efbd"
     },
     {
       "path": "mob-art-variants-r306.js",
@@ -23816,6 +23836,11 @@
       "path": "mob-ground-r206.js",
       "bytes": 2219,
       "sha256": "632e8529cd6360d6f74af2a876a0cd568e5ff7cd3081310be1dc474a351b4d3a"
+    },
+    {
+      "path": "mob-legacy-r363.js",
+      "bytes": 3746,
+      "sha256": "ca592010f1a3ceadd6b4e7842b25fa774cc484bb2830fae452fdda97e04310ec"
     },
     {
       "path": "mob-motion-r286.js",
@@ -24403,9 +24428,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4880,
-  "totalBytes": 937345113,
-  "webHTMLSha256": "099a7af76bbf2098b0d2b3a94912e5c803f6ee0889b0aa94fcb9355312dffeeb",
+  "fileCount": 4885,
+  "totalBytes": 938535650,
+  "webHTMLSha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4",
   "largest": [
     {
       "path": "index.html",
