@@ -13,8 +13,10 @@ assert(fs.existsSync(path.join(root,'runtime-text/assets/r349/hwando-arc.webp'))
 {const calls=[];const env={window:{},localStorage:{getItem:()=>null,setItem(){}},player:{hero:'hwando',x:0,y:0},project:(x,y)=>({x:x*32,y:y*32})};
  const g=new Function('calls',...Object.keys(env),'let drawEffect=function(e){const q=project(e.x,e.y);let a=0;if(e.type==="slash"){const d=project(e.x+Math.cos(e.angle),e.y+Math.sin(e.angle));a=Math.atan2(d.y-q.y,d.x-q.x);}texture(e.asset,0,0,100,65,{angle:a});},texture=function(p,x,y,w,h,o){calls.push({p,w,h,a:o.angle});};'+RT('hwando-arc-r349.js')+';return {de:e=>drawEffect(e)};')(calls,...Object.values(env));
  const A='assets/vfx/heroes/hwando-a.webp',close=(a,b)=>Math.abs(Math.atan2(Math.sin(a-b),Math.cos(a-b)))<1e-6;
- for(const [ang,want] of [[0,0],[Math.PI,Math.PI],[-Math.PI/2,-Math.PI/2],[Math.PI/2,Math.PI/2]]){calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:ang});assert(calls[0].p==='assets/r349/hwando-arc.webp'&&close(calls[0].a,want),'slash '+ang+' '+JSON.stringify(calls[0]));}
- ok("slash: right ')', left '(', up/down rotated — symmetric arc asset");
- calls.length=0;g.de({type:'e568HeroImpact',asset:A,x:-3,y:0,angle:0});assert(calls[0].p==='assets/r349/hwando-arc.webp'&&close(calls[0].a,Math.PI));ok('impact at an enemy on the left turns to face away from the hero (same rule)');
+ const OB=114*Math.PI/180;let k=0;
+ for(const [ang,want] of [[0,0],[Math.PI,Math.PI],[-Math.PI/2,-Math.PI/2],[Math.PI/2,Math.PI/2],[.5,Math.PI/4],[2.9,Math.PI]]){calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:ang});const arc=(k++%2)===0;
+  assert(calls[0].p===(arc?'assets/r349/hwando-arc.webp':A)&&close(calls[0].a,arc?want:want-OB),'slash '+ang+' '+JSON.stringify(calls[0]));}
+ ok("slash: snapped to 8 directions; alternates the symmetric arc and the original slash turned so its bulge faces the enemy");
+ calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:Math.PI});calls.length=0;g.de({type:'e568HeroImpact',asset:A,x:-3,y:0,angle:0});assert(calls[0].p==='assets/r349/hwando-arc.webp'&&close(calls[0].a,Math.PI),JSON.stringify(calls[0]));ok('impact at an enemy on the left turns to face away from the hero (same rule)');
  env.player.hero='lauren';calls.length=0;g.de({type:'slash',asset:A,x:0,y:0,angle:0});assert.strictEqual(calls[0].p,A);assert.strictEqual(calls.length,1);ok('other heroes untouched');}
 console.log(JSON.stringify({ok:true,checks:n,method:'CPU fake globals; headless capture separately; no GPU or device'}));

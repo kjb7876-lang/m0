@@ -7,7 +7,7 @@
 //  판정·피해·위치·수명은 그대로(그림과 각도만). 환도·EGO 아닐 때만. 끄기: localStorage['storyworld.r349.hwandoArc']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_ARC_R349__)return;
-const REV='R349-hwando-arc-1',KEY='storyworld.r349.hwandoArc',ARC='assets/r349/hwando-arc.webp',SRC=/(^|\/)assets\/vfx\/heroes\/hwando-a\.webp$/;
+const REV='R349-hwando-arc-2',KEY='storyworld.r349.hwandoArc',ARC='assets/r349/hwando-arc.webp',SRC=/(^|\/)assets\/vfx\/heroes\/hwando-a\.webp$/;
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={swaps:0,slash:0,impact:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let cur=null;
@@ -21,13 +21,21 @@ function mine(e){return on&&e&&typeof player==='object'&&player?.hero==='hwando'
 const ready=()=>{try{return typeof readyImage!=='function'||!!readyImage(ARC);}catch(_){return false;}};
 function load(){try{if(typeof ensureImages==='function')Promise.resolve(ensureImages([ARC])).catch(()=>{});else if(typeof addImage==='function')addImage(ARC);}catch(_){}}
 /* 효과 그리기는 여러 겹(R102 돌리기·R302 물들이기·엔진 다시 쓰기)을 지나 그림 경로를 직접 읽으므로, 그리는 동안만 효과의 asset·각도를 바꿔 끼운다 */
+/* R349b(사용자 "환도는 8방향을 () 이런식으로 이펙트가 나가는거야 합치면 완전한 구(원형)" + "지금 기본공격 이펙트도 좋아서 방향성만 맞추면 교차해서"):
+   화면 방향을 8방향(45°)으로 맞추고, 베기마다 새 대칭 호와 원래 베기 그림을 번갈아 쓴다. 원래 그림은 볼록한 쪽(그림 안 114°)이 적을 향하게 돌린다. */
+const STEP=Math.PI/4,ORIG_BULGE=114*Math.PI/180,variantOf=new WeakMap();let flip=false,lastVariant='arc',lastAt=-9;
+const snap8=a=>Math.round(a/STEP)*STEP;
+function worldFromScreen(e,ang){const q=project(e.x,e.y),d=project(e.x+1,e.y),d2=project(e.x,e.y+1),ax=d.x-q.x,ay=d.y-q.y,bx=d2.x-q.x,by=d2.y-q.y,cx=Math.cos(ang),cy=Math.sin(ang),det=ax*by-bx*ay;
+ if(Math.abs(det)<1e-9)return null;const u=(cx*by-bx*cy)/det,v=(ax*cy-cx*ay)/det;return Math.atan2(v,u);}
+function variant(e){let v=variantOf.get(e);if(v)return v;const t=typeof time==='number'?time:0;
+ if(e.type==='slash'){flip=!flip;v=flip?'arc':'orig';lastVariant=v;lastAt=t;}else v=t-lastAt<.5?lastVariant:'arc';variantOf.set(e,v);return v;}
+/* 효과 그리기는 여러 겹(R102 돌리기·R302 물들이기·엔진 다시 쓰기)을 지나 그림 경로를 직접 읽으므로, 그리는 동안만 효과의 asset·각도를 바꿔 끼운다 */
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(!mine(e))return base.apply(this,[e,...a]);
- let ang=null;try{ang=screenAngle(e);}catch(err){fail(err);}if(ang==null||!ready()){load();return base.apply(this,[e,...a]);}
- const keep={asset:e.asset,angle:e.angle,impactAngleVfx:e.impactAngleVfx};stats.swaps++;stats[e.type==='slash'?'slash':'impact']++;
- e.asset=ARC;if(e.type!=='slash'){e.impactAngleVfx=ang;const q=project(e.x,e.y),d=project(e.x+1,e.y),d2=project(e.x,e.y+1);/* 화면 각 → 월드 각(등각 투영 역변환) */
-  const ax=d.x-q.x,ay=d.y-q.y,bx=d2.x-q.x,by=d2.y-q.y,cx=Math.cos(ang),cy=Math.sin(ang),det=ax*by-bx*ay;if(Math.abs(det)>1e-9){const u=(cx*by-bx*cy)/det,v=(ax*cy-cx*ay)/det;e.angle=Math.atan2(v,u);}}
- const prev=cur;cur={a:ang,type:e.type};try{return base.apply(this,[e,...a]);}finally{cur=prev;e.asset=keep.asset;e.angle=keep.angle;e.impactAngleVfx=keep.impactAngleVfx;}};}
-if(typeof texture==='function'){const base=texture;texture=function(path,x,y,w,h,opt={},...r){if(cur&&String(path||'')===ARC&&cur.type!=='slash'){try{return base.call(this,path,x,y,w,h,{...(opt||{}),angle:cur.a},...r);}catch(err){fail(err);}}
+ let ang=null;try{ang=screenAngle(e);}catch(err){fail(err);}const v=ang==null?null:variant(e);if(ang==null||v==='arc'&&!ready()){load();return base.apply(this,[e,...a]);}
+ const dir=snap8(ang),rot=v==='arc'?dir:dir-ORIG_BULGE,keep={asset:e.asset,angle:e.angle,impactAngleVfx:e.impactAngleVfx};stats.swaps++;stats[e.type==='slash'?'slash':'impact']++;stats[v]=(stats[v]||0)+1;
+ if(v==='arc')e.asset=ARC;const w=worldFromScreen(e,rot);if(w!=null)e.angle=w;if(e.type!=='slash')e.impactAngleVfx=rot;
+ const prev=cur;cur={a:rot,type:e.type};try{return base.apply(this,[e,...a]);}finally{cur=prev;e.asset=keep.asset;e.angle=keep.angle;e.impactAngleVfx=keep.impactAngleVfx;}};}
+if(typeof texture==='function'){const base=texture;texture=function(path,x,y,w,h,opt={},...r){const P=String(path||'');if(cur&&cur.type!=='slash'&&(P===ARC||SRC.test(P))){try{return base.call(this,path,x,y,w,h,{...(opt||{}),angle:cur.a},...r);}catch(err){fail(err);}}
  return base.apply(this,[path,x,y,w,h,opt,...r]);};}
 load();
 window.__STORYWORLD_HWANDO_ARC_R349__=Object.freeze({revision:REV,asset:ARC,on:()=>on,inspect:()=>({revision:REV,on,stats:{...stats},lastError}),

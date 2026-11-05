@@ -377,6 +377,8 @@ jobs:
         run: node r96/qa/r345/hwando-preload-cpu-check.cjs
       - name: R349 Hwando three-direction motion and symmetric slash arc CPU check
         run: node r96/qa/r349/hwando-arc-cpu-check.cjs
+      - name: R352 orphaned field-wave enemies wake near the hero CPU check
+        run: node r96/qa/r352/wave-orphans-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
         run: node r96/qa/r280/r280-cpu-check.cjs
       - name: R286 mobile +77% all stats, attack-only/move-only mob motion fill CPU check
