@@ -77,6 +77,8 @@ jobs:
         run: node r96/qa/r337/hero-no-hexagram-cpu-check.cjs
       - name: R338 samong episode gate in DREAM shelters CPU check
         run: node r96/qa/r338/samong-gate-cpu-check.cjs
+      - name: R339 menu simplification CPU check
+        run: node r96/qa/r339/menu-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
         run: node r96/qa/r326/michaela-r-wings-cpu-check.cjs
       - name: R320 native save transition CPU regression
