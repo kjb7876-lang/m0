@@ -37,28 +37,34 @@ function frameOf(...cs){cs.forEach((c,i)=>c.order=i);return{commands:cs};}
   proj=img({id:'p1',kind:'projectile'},rect(170,30,230,110)),
   tiny=img({id:'r292:spark',kind:'effect'},rect(218,95,224,104)),
   text={kind:'text',owner:{id:'t',kind:'effect'},point:[200,60],style:{globalAlpha:1}};
- const f=frameOf(hero,skill,enemy,r106,ground,proj,tiny,text);const r=C.prototype.render.call({},f);
+ const enemy2=img({id:'r163:mob-garden:1',kind:'effect'},rect(170,30,230,110));const f=frameOf(hero,skill,enemy,r106,ground,proj,tiny,text,enemy2);const r=C.prototype.render.call({},f);
  t(r==='rendered'&&frames[0]===f,'원래 render 를 같은 frame 으로 부르고 결과를 돌려줌');
  t(skill.style.globalAlpha<.5&&skill.style.globalAlpha>=.149,'영웅 몸을 다 덮는 영웅 쪽 스킬 그림 옅게(최대 85%): '+skill.style.globalAlpha.toFixed(3));
  t(enemy.style.globalAlpha===1,'적 공격 그림(pxf-enemy-*)은 옅게 안 함(위협 신호)');
  t(r106.style.globalAlpha===1,'R106 스프라이트는 R106 heroVeil·overHero 가 맡으므로 그대로');
  t(ground.style.globalAlpha===1&&proj.style.globalAlpha===1,'바닥에 붙은 그림·탄환은 그대로');
  t(tiny.style.globalAlpha===1,'몸 상자의 4% 미만만 덮는 작은 불꽃은 그대로');
- t(hero.style.globalAlpha===1&&hero.spatialRole==='body','영웅 몸 명령 자체는 그대로');
+ t(hero.style.globalAlpha===1&&hero.spatialRole===null&&hero.r350Lifted===true&&hero.order===0,'영웅 몸 명령: 알파 그대로, 2번 패스(body) → 3번 패스 기록 순서(order 그대로)로');
  const ghosts=f.commands.filter(c=>c.owner?.r350&&String(c.owner.id).startsWith('r350:ghost:'));
- t(ghosts.length===1&&ghosts[0].owner.kind==='effect'&&ghosts[0].spatialRole===null&&ghosts[0].order>7&&ghosts[0].style.globalAlpha>0&&ghosts[0].style.globalAlpha<=.6&&ghosts[0].image===hero.image&&ghosts[0].key!==hero.key,'남은 가림(적·R106)이 크면 영웅 몸을 이펙트 패스 맨 뒤에 반투명(≤60%)으로 한 번 더(새 key, 같은 그림·좌표)');
+ t(enemy2.style.globalAlpha===1&&ghosts.length===1&&ghosts[0].owner.kind==='effect'&&ghosts[0].spatialRole===null&&ghosts[0].order>8&&ghosts[0].style.globalAlpha>0&&ghosts[0].style.globalAlpha<=.6&&ghosts[0].image===hero.image&&ghosts[0].key!==hero.key,'남은 가림(적·R106)이 크면 영웅 몸을 이펙트 패스 맨 뒤에 반투명(≤60%)으로 한 번 더(새 key, 같은 그림·좌표)');
  const ins=A.inspect();t(ins.recent.length===1&&ins.recent[0].before>ins.recent[0].after&&ins.recent[0].veiled===1,'측정값(옅게 전/후 가림 양) 기록');
  t(ins.contributors.some(([k])=>k.startsWith('r292'))&&ins.contributors.some(([k])=>k==='r106:glow'),'가리는 그림 출처별 합 기록');}
 {const {C}=load();// 화면 대부분을 덮는 아주 큰 그림은 최대 55%만
  const hero=heroBody(),huge=img({id:'r111:ego-front',kind:'effect'},rect(-400,-400,800,600));const f=frameOf(hero,huge);C.prototype.render.call({},f);
  t(huge.style.globalAlpha>=.449&&huge.style.globalAlpha<.6,'아주 큰 그림은 최대 55%까지만 옅게: '+huge.style.globalAlpha.toFixed(3));
- {const gh=f.commands.filter(c=>c.owner?.r350);t(gh.length===1&&gh[0].style.globalAlpha<.2,'옅게 한 뒤 남은 가림만큼만 유령(작으면 옅게): '+gh[0]?.style.globalAlpha.toFixed(3));}
- {const hero=heroBody(),half=img({id:'r292:y',kind:'effect'},rect(150,20,200,60),{style:{globalAlpha:.5,globalCompositeOperation:'lighter',filter:'none'}});const f2=frameOf(hero,half);C.prototype.render.call({},f2);t(!f2.commands.some(c=>c.owner?.r350),'남은 가림이 작으면(≤0.3) 유령을 넣지 않음');}}
+ t(!f.commands.some(c=>c.owner?.r350),'옅게 한 뒤 남은 가림이 평소 수준(≤2)이면 유령을 넣지 않음');
+ {const hero=heroBody(),half=img({id:'r292:y',kind:'effect'},rect(150,20,200,60),{style:{globalAlpha:.5,globalCompositeOperation:'lighter',filter:'none'}});const f2=frameOf(hero,half);C.prototype.render.call({},f2);t(!f2.commands.some(c=>c.owner?.r350),'남은 가림이 작으면 유령을 넣지 않음');}
+ {const {C:C2}=load({order:false});const hero=heroBody(),f3=frameOf(hero);C2.prototype.render.call({},f3);t(hero.spatialRole==='body','order:false 면 몸 명령을 2번 패스 그대로 둠');}}
 {const {C}=load();// 영웅 몸이 없으면(죽음·숨김) 아무것도 안 함
  const skill=img({id:'r292:x',kind:'effect'},rect(150,20,250,120));const f=frameOf(skill);C.prototype.render.call({},f);t(skill.style.globalAlpha===1&&f.commands.length===1,'영웅 몸 명령이 없으면 그대로');}
-{const {C}=load({veil:false,ghost:false,blood:false});const hero=heroBody(),skill=img({id:'r292:x',kind:'effect'},rect(150,20,250,120)),r106=img({id:'s',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:glow:x'});
- const f=frameOf(hero,skill,r106);C.prototype.render.call({},f);t(skill.style.globalAlpha===1&&f.commands.length===3,'끄기(localStorage) → 옅게·유령 없음');}
+{const {C}=load({veil:false,ghost:false,blood:false,order:false});const hero=heroBody(),skill=img({id:'r292:x',kind:'effect'},rect(150,20,250,120)),r106=img({id:'s',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:glow:x'});
+ const f=frameOf(hero,skill,r106);C.prototype.render.call({},f);t(skill.style.globalAlpha===1&&f.commands.length===3&&hero.spatialRole==='body','끄기(localStorage) → 옅게·유령 없음');}
 
+{const {C}=load();// R271·R283 덧씌운 영웅 그림(body 아님, 경로에 영웅 id)도 영웅 몸으로 본다; 영웅 범위의 다른 큰 그림(무기 궤적 등)은 몸 상자에서 뺀다
+ const walk=img({id:'hero:2',kind:'hero',x:5,y:5},rect(180,40,220,100),{spatialRole:null,sourcePath:'assets/r283/hwando/r271/walk-w.webp'}),trail=img({id:'hero:2',kind:'hero',x:5,y:5},rect(0,0,600,400),{spatialRole:null,sourcePath:'assets/x/trail.webp'}),
+  skill=img({id:'r292:hw-q:1',kind:'effect'},rect(150,20,250,120));const f=frameOf(walk,trail,skill);C.prototype.render.call({},f);
+ t(skill.style.globalAlpha<.5,'body 가 아닌 덧씌운 영웅 그림(R283 걷기)도 몸 상자로 써서 옅게: '+skill.style.globalAlpha.toFixed(3));
+ t(walk.style.globalAlpha===1&&trail.style.globalAlpha===1,'영웅 범위 그림은 옅게 안 함');}
 // 피 튐
 {const {g,A,C,draws,scopes}=load();
  const r=g.hurt(20,{x:6,y:5,name:'t'});t(r==='hit'&&g.hurtCalls.length===1&&g.hurtCalls[0][0]===20,'hurt: 원래 함수에 같은 인자, 같은 결과(피해·무적은 엔진 그대로)');
@@ -73,7 +79,7 @@ function frameOf(...cs){cs.forEach((c,i)=>c.order=i);return{commands:cs};}
  const sp=A.inspect();t(sp.lastError===null,'오류 없음');
  // 피 튐 명령은 이펙트 패스 맨 뒤(유령보다 뒤)
  const hero=heroBody(),cover=img({id:'s',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:glow:x'}),blood=img({id:'r350:blood:1:splash:0',kind:'effect',r350:true,r350blood:true},rect(190,40,210,60));
- const f=frameOf(hero,blood,cover);C.prototype.render.call({},f);const gh=f.commands.find(c=>String(c.owner.id).startsWith('r350:ghost:'));
+ const cover2=img({id:'s2',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:spike:x'}),cover3=img({id:'s3',kind:'effect'},rect(150,20,250,120),{sourcePath:'r106fx:flame:x'});const f=frameOf(hero,blood,cover,cover2,cover3);C.prototype.render.call({},f);const gh=f.commands.find(c=>String(c.owner.id).startsWith('r350:ghost:'));
  t(blood.style.globalAlpha===1&&gh&&blood.order>gh.order&&blood.order>cover.order,'피 튐은 옅게 안 하고 유령·다른 이펙트보다 뒤(위)에 칠함');
  // 무적(피해 없음) → 피 없음
  g.player.invincible=1;g.time=11;const before=A.inspect().stats.bloodSpawned;g.hurt(20,{x:6,y:5});g.tick(.016);t(A.inspect().stats.bloodSpawned===before,'무적·막기로 체력이 안 깎이면 피 없음');
