@@ -17,9 +17,9 @@
 //     · 끄기: localStorage['storyworld.r355.samongWide']='{"art":false}'.
 (()=>{'use strict';
 if(window.__STORYWORLD_SAMONG_WIDE_R355__)return;
-const REV='R355-samong-wide-1',KEY='storyworld.r355.samongWide';
+const REV='R355-samong-wide-2',KEY='storyworld.r355.samongWide';
 let prefs={on:true,art:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={zones:0,rooms:0,paths:0,links:0,snapped:0,unsnapped:0,artDraws:0,hidden:0,waits:0,errors:0};let lastError=null;
+const stats={zones:0,rooms:0,paths:0,links:0,snapped:0,unsnapped:0,artDraws:0,hidden:0,waits:0,inside:0,after:0,pixel:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const Z=window.__STORYWORLD_SAMONG_ZONES_R115__;
 const S_BASE=1.5,S_SCALED=1.25,PATH_K=2;
@@ -82,11 +82,25 @@ const asked=new Map();function ready(p){try{const row=typeof readyImage==='funct
 function drawOwn(e,path){if(!ready(path)){stats.waits++;return;}const dead=e.spawnState==='dead'||e.hp<=0,age=(typeof time==='number'?time:0)-(Number.isFinite(e.deadAt)?e.deadAt:(typeof time==='number'?time:0));if(dead&&age>.7)return;
  const q=project(e.x,e.y),cp=e.combatProfile,h=actorHeight()*(cp?.spriteRect?.height||1)*(e.defScale||1),lift=Math.max(0,Math.min(h*.65,Number(e.visualLiftPx)||0));
  sprite(path,q.x,q.y-lift,h,{alpha:dead?Math.max(0,1-age/.7):1,flip:e.direction==='left',filter:e.flash>0?'brightness(1.7)':'saturate(.8)'});stats.artDraws++;}
+// R355-2(Codex 검토 3건): 대신 그리는 원화는 ① 엔진 enemy 기록 범위(ctx.scope) 안에서 — 밖이면 owner 'scene' 으로 남아 phase1 visibleOwner 가림 판정을 건너뛰어 벽 너머로 보인다,
+//  ② R259 몸 그림 측정(drawEnemy 안쪽 훅)이 끝나기 전에 — 기증 몹의 첫 몸 그림을 숨기는 그 자리에서 바깥 변환·투명도로 되돌려 그린다(그래서 centreOf 가 원화 사각형을 잰다),
+//  ③ R306 픽셀 모드(assets/r306/pixel/…)가 이미 몸을 바꿔 그렸으면 그것을 '몸 그림 끝' 으로 친다(두 번째 몸 금지).
+//  기증 몸 그림이 한 장도 없었으면(드묾) base 뒤에 그리되 R248 처럼 enemy scope(몹 id·월드 좌표)로 감싼다.
+const PIXEL_R306=/(^|\/)assets\/r306\/pixel\//;
+// R259 은 이 훅보다 바깥(먼저 불림)이라 숨긴 기증 몸도 후보로 잰다 → 원화를 그릴 때 bodyDrawn 으로 '실제 몸' 이라고 알려 후보를 갈아 끼운다(R306 과 같은 길).
+function toR259(e,c,im,q){try{const H=window.__STORYWORLD_HIT_CENTER_R259__;if(!H?.bodyDrawn||typeof c.getTransform!=='function')return;const W=im?.naturalWidth||im?.width,Hh=im?.naturalHeight||im?.height;
+ const q8=q.length===8?q:q.length===4&&W&&Hh?[0,0,W,Hh,...q]:null;if(q8)H.bodyDrawn(e,im,q8,c.getTransform());}catch(err){fail(err);}}
+const scopeOwner=e=>({id:'r355:mob:'+(e.id??e.name??'?'),kind:'enemy',x:e.x,y:e.y,alive:e.hp>0,bodyPath:null});
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){const path=artOf(e);if(!path||typeof ctx==='undefined'||typeof ctx?.drawImage!=='function')return base.apply(this,[e,...a]);
- const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage,paths=bodyPaths(e);let drew=false;ready(path);
- c.drawImage=function(im,...q){const p=srcPath(im);if(p){if(p===path||p.endsWith(path)){drew=true;}else{const lp=e.rc146BodyFrame?.path;if(!KEEP.test(p)&&(paths.has(p)||(lp&&p.endsWith(String(lp).replace(/^\.\//,'')))||STORY_BODY.test(p))){stats.hidden++;return;}}}return prev.call(this,im,...q);};
+ const c=ctx,own=Object.prototype.hasOwnProperty.call(c,'drawImage'),prev=c.drawImage,paths=bodyPaths(e);let drew=false,done=false,mine=false;ready(path);
+ const outerT=typeof c.getTransform==='function'?c.getTransform():null,outerA=c.globalAlpha,outerOp=c.globalCompositeOperation,outerF=c.filter;
+ const paintInside=self=>{done=true;mine=true;const save=typeof self.save==='function';try{if(save)self.save();try{if(outerT&&typeof self.setTransform==='function')self.setTransform(outerT);if(outerA!=null)self.globalAlpha=outerA;if(outerOp!=null)self.globalCompositeOperation=outerOp;if(outerF!=null)self.filter=outerF;drawOwn(e,path);stats.inside++;}finally{if(save)self.restore();}}catch(err){fail(err);}finally{mine=false;}};
+ c.drawImage=function(im,...q){const p=srcPath(im);if(p){if(PIXEL_R306.test(p)){drew=true;stats.pixel++;}
+   else if(p===path||p.endsWith(path)){if(done&&!mine){stats.hidden++;return;}drew=true;if(mine)toR259(e,this,im,q);}
+   else{const lp=e.rc146BodyFrame?.path;if(!KEEP.test(p)&&(paths.has(p)||(lp&&p.endsWith(String(lp).replace(/^\.\//,'')))||STORY_BODY.test(p))){stats.hidden++;if(!drew&&!done)paintInside(this);return;}}}
+  return prev.call(this,im,...q);};
  let r;try{r=base.apply(this,[e,...a]);}finally{if(own)c.drawImage=prev;else delete c.drawImage;}
- if(!drew)try{drawOwn(e,path);}catch(err){fail(err);}return r;};}
+ if(!drew&&!done)try{const f=()=>drawOwn(e,path);if(typeof c.scope==='function')c.scope(scopeOwner(e),f);else f();stats.after++;}catch(err){fail(err);}return r;};}
 
 function zoneReport(){const rows=[];if(!Z?.chapters)return rows;for(const[k,list]of Object.entries(Z.chapters))for(const z of list||[])if(z.r355)rows.push({chapter:k,id:z.id,title:z.title,kind:z.kind,scale:z.r355.scale,before:z.r355.before,after:z.r355.after});return rows;}
 function set(v){prefs={...prefs,...(typeof v==='object'?v:{on:v!==false})};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}

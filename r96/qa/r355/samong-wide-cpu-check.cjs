@@ -70,6 +70,37 @@ check('school plaza 666 zone exists in S-02 and its mobs are the 얼굴 없는 �
  drawn.length=0;D({samongR103:true,boss:true,name:'순찰자',hp:9,x:1,y:1});check('bosses untouched',drawn.length===1&&drawn[0].endsWith(story));
  drawn.length=0;D({samongR103:true,name:'칠판을 벗어난 글씨',hp:9,x:1,y:1});check('other names untouched',drawn.length===1&&drawn[0].endsWith(story));
  drawn.length=0;D({name:'얼굴 없는 학생',hp:9,x:1,y:1});check('non-Samong actors untouched',drawn.length===1&&drawn[0].endsWith(story));}
+// ---- Codex 검토 3건(R355-2): 기록 범위(scope)·R259 가운데 측정·R306 픽셀 모드 — 실제 hit-center-r259·mob-art-variants-r306 를 가짜 엔진 위에 얹어 본다 ----
+{const stu='assets/r105/drive/mob-student.webp',story='assets/episode1a/generated-v392/corridor_scream_echo.webp',pix='assets/r306/pixel/a08-s1.png';
+ const img=p=>({src:'http://x/m0/'+p,naturalWidth:100,naturalHeight:200,width:100,height:200});
+ function rig(pixel){const log=[];let owner={id:'scene',kind:'scene'};const st=[];
+  const ctx={a:1,b:0,c:0,d:1,e:0,f:0,globalAlpha:1,globalCompositeOperation:'source-over',filter:'none',imageSmoothingEnabled:true,
+   getTransform(){return{a:this.a,b:this.b,c:this.c,d:this.d,e:this.e,f:this.f};},setTransform(t,...r){const m=typeof t==='object'?t:{a:t,b:r[0],c:r[1],d:r[2],e:r[3],f:r[4]};Object.assign(this,{a:m.a,b:m.b,c:m.c,d:m.d,e:m.e,f:m.f});},
+   translate(x,y){this.e+=this.a*x;this.f+=this.d*y;},scale(x,y){this.a*=x;this.d*=y;},save(){st.push({...this.getTransform(),globalAlpha:this.globalAlpha,filter:this.filter,globalCompositeOperation:this.globalCompositeOperation});},
+   restore(){const s=st.pop();if(s){this.setTransform(s);this.globalAlpha=s.globalAlpha;this.filter=s.filter;this.globalCompositeOperation=s.globalCompositeOperation;}},
+   scope(o,f){const p=owner;owner=o;try{return f();}finally{owner=p;}},
+   drawImage(im,...q){log.push({src:String(im.src).replace('http://x/m0/',''),owner,T:this.getTransform(),alpha:this.globalAlpha,q});}};
+  const S=sandbox();Object.assign(S,{ctx,time:1,layer:'STORY',readyImage:p=>({image:img(p)}),ensureImages:()=>Promise.resolve(),project:(x,y)=>({x:x*10,y:y*10}),actorHeight:()=>60,
+   sprite:(p,x,y,h,o={})=>{ctx.save();ctx.globalAlpha*=o.alpha??1;ctx.translate(x,y);ctx.drawImage(img(p),-h/4,-h,h/2,h);ctx.restore();return true;},
+   restoreSave:async()=>true,
+   __STORYWORLD_DRIVE_ART_R105__:{artFor:()=>stu},__STORYWORLD_STORY_COMBAT_R54__:{frameSet:()=>({idle:{path:story}})},
+   __STORYWORLD_MOB_ART_VARIANTS_R306_DATA__:{actors:{'STORY|a08-s1|얼굴 없는 학생':'r1'},rows:{r1:{paths:[story],frames:[],pixel:{path:pix,cell:[64,80],cols:4,body:60,pivot:[32,76]}}}}});
+  // 엔진: index.html scoped(drawEnemy,'enemy') 처럼 enemy 범위 안에서, 몸 자리로 옮기고(translate) 투명도를 바꾼 뒤 기증 몹 몸 그림(8인자)
+  S.drawEnemy=function(e){return ctx.scope({id:'enemy:'+e.id,kind:'enemy',x:e.x,y:e.y},()=>{if(e.noBody)return;ctx.save();ctx.translate(500,500);ctx.globalAlpha*=.4;ctx.drawImage(img(story),0,0,100,200,-20,-80,40,80);ctx.restore();});};
+  load(S,['hit-center-r259.js','mob-art-variants-r306.js']);if(pixel)S.restoreSave({mobArt:'pixel'});load(S,['samong-wide-r355.js']);return{S,log,ctx};}
+ const E=o=>({id:7,samongR103:true,name:'얼굴 없는 학생',nativeId:'a08-s1',hp:9,x:3,y:4,...o});
+ {const{S,log}=rig(false),e=E();S.drawEnemy(e);const st=log.filter(l=>l.src===stu);
+  check('[P2-1] replacement student drawn inside the engine enemy recorder scope (not scene)',st.length===1&&st[0].owner.kind==='enemy'&&st[0].owner.id==='enemy:7'&&!log.some(l=>l.src===story),JSON.stringify(log.map(l=>[l.src,l.owner.kind])));
+  check('[P2-1] inside draw uses the outer transform/alpha, not the donor translate/alpha',st[0]&&Math.abs(st[0].T.e-30)<1e-9&&Math.abs(st[0].T.f-40)<1e-9&&st[0].alpha===1,st[0]&&JSON.stringify([st[0].T,st[0].alpha]));
+  const v=S.__STORYWORLD_HIT_CENTER_R259__.centreOf(e);
+  check('[P2-2] R259 centreOf measures the replacement (centre over project(e), not the hidden donor at +500)',v&&Math.abs(v.cx-30)<1&&Math.abs(v.cy-10)<1&&Math.abs(v.h-60)<1,JSON.stringify(v));}
+ {const{S,log}=rig(false),e=E({noBody:true});S.drawEnemy(e);const st=log.filter(l=>l.src===stu);
+  check('[P2-1] fallback (no donor body at all) still wrapped in an enemy scope with actor id and world position',st.length===1&&st[0].owner.kind==='enemy'&&st[0].owner.id==='r355:mob:7'&&st[0].owner.x===3&&st[0].owner.y===4,JSON.stringify(st.map(l=>l.owner)));}
+ {const{S,log}=rig(true),e=E();S.drawEnemy(e);const W2=S.__STORYWORLD_SAMONG_WIDE_R355__.inspect();
+  check('[P2-3] pixel mode: R306 pixel body counts as the body draw — no second painted student',log.filter(l=>l.src===pix).length===1&&!log.some(l=>l.src===stu||l.src===story)&&W2.stats.pixel===1&&W2.stats.errors===0,JSON.stringify(log.map(l=>l.src))+' '+JSON.stringify(W2.stats));
+  S.drawEnemy(E({name:'중간보스 · 얼굴 없는 학생',id:8}));check('[P2-3] pixel mode also covers the midboss name (R306 normalize)',log.filter(l=>l.src===pix).length===2&&!log.some(l=>l.src===stu));}
+ {const{S,log}=rig(true);S.drawEnemy(E({nativeId:'other'}));
+  check('[P2-3] pixel mode without an R306 row: painted student still replaces the donor once',log.filter(l=>l.src===stu).length===1&&!log.some(l=>l.src===story||l.src===pix),JSON.stringify(log.map(l=>l.src)));}}
 if(process.argv.includes('--table')){console.log('| 장 | 구역 | 종류 | S | 가장 좁은 길 폭 전→후 | 방 넓이 합 전→후(배) | 바닥 칸 전→후 |\n|---|---|---|---|---|---|---|');
  for(const r of rows)console.log(`| ${r.k} | ${r.id} ${r.title} | ${r.kind} | ${r.S} | ${r.pb===Infinity?'-':r.pb} → ${r.pa===Infinity?'-':r.pa} | ${r.ra} → ${r.rb} (${r.ra?(r.rb/r.ra).toFixed(2):'-'}) | ${r.cb} → ${r.ca} |`);}
 const failed=results.filter(r=>!r.ok);console.log(`R355 samong-wide: ${results.length-failed.length}/${results.length} PASS`);if(failed.length)process.exit(1);
