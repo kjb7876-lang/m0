@@ -19,7 +19,16 @@ def validate(root):
         errors.append('duplicate capture IDs')
     expected = {f'{d}-{s}' for d in ['pc', 'mobile'] for s in plan['scenes']}
     errors.extend('missing scene ' + s for s in sorted(expected - captures.keys()))
+    indexed = [r['id'] for r in index['captures']]
+    if len(set(indexed)) != len(indexed):
+        errors.append('duplicate index capture IDs')
+    errors.extend('capture not indexed ' + i for i in sorted(captures.keys() - set(indexed)))
+    errors.extend('index row without capture ' + i for i in sorted(set(indexed) - captures.keys()))
     for r in index['captures']:
+        if r['id'] not in captures:
+            continue
+        if Path(r['color']).name != Path(captures[r['id']]['file']).name:
+            errors.append('index color file does not match manifest ' + r['id'])
         for field, sha in [('color', 'sha256'), ('gray', 'graySHA256')]:
             p = root / r[field]
             if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != r[sha]:
@@ -96,7 +105,7 @@ def validate(root):
     elif plan.get('regions'):
         errors.append('regional review missing')
     result = {'ok': not errors, 'captured': len(captures), 'expected': len(expected),
-              'coverageComplete': not (expected - captures.keys()),
+              'coverageComplete': not (expected - captures.keys()) and set(indexed) == set(captures),
               'scoredItems': scored, 'regionalRows': regional_count,
               'regionalScored': regional_scored, 'regionalUnverified': regional_count - regional_scored,
               'visualAcceptance': 'UNVERIFIED: fixtures/headless evidence, with subject-specific limits in independent review',

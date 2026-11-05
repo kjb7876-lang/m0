@@ -70,6 +70,22 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(any('weighted score mismatch' in e for e in errors))
         self.assertTrue(any('final verification' in e for e in errors))
 
+    def test_empty_or_stale_index_cannot_report_complete_evidence(self):
+        index = json.loads((self.root / 'evidence-index.json').read_text())
+        index['captures'] = []
+        self.write('evidence-index.json', index)
+        result = self.check_result()
+        self.assertFalse(result['ok'])
+        self.assertFalse(result['coverageComplete'])
+        self.assertEqual(sum(e.startswith('capture not indexed') for e in result['errors']), 2)
+
+    def test_index_file_must_match_manifest_file(self):
+        index = json.loads((self.root / 'evidence-index.json').read_text())
+        index['captures'][0]['color'] = index['captures'][1]['color']
+        index['captures'][0]['sha256'] = index['captures'][1]['sha256']
+        self.write('evidence-index.json', index)
+        self.assertTrue(any('does not match manifest' in e for e in self.check_result()['errors']))
+
     def test_wrong_screenshot_dimensions_are_rejected(self):
         Image.new('RGB', (10, 10)).save(self.root / 'mobile-hub.jpg')
         with self.assertRaisesRegex(ValueError, 'mobile-hub.jpg'):
