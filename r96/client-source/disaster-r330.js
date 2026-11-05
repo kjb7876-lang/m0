@@ -14,7 +14,7 @@
 //  · 끄기: localStorage['storyworld.r330.disaster']='0'.
 (()=>{'use strict';
 if(window.__STORYWORLD_DISASTER_R330__)return;
-const REV='R330-disaster-1',KEY='storyworld.r330.disaster';
+const REV='R330-disaster-2',KEY='storyworld.r330.disaster';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={casts:0,byKind:{},hazards:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0,TAU=Math.PI*2;
@@ -53,27 +53,41 @@ function push(f){if(fx.length>40)fx.shift();fx.push(f);arm();return f;}
 function near(x,y,r){const a=rnd()*TAU,d=Math.sqrt(rnd())*r;let px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;try{if(typeof blocked==='function'&&blocked(px,py,.3,room)){px=x;py=y;}}catch(_){}return{x:px,y:py};}
 // ---- 재해별 시전(육망성 1초 뒤 phase 'go') --------------------------------------------------------------------
 const SIGIL=1.0;
+// ---- 지역에 남는 재해(불길·서리·독안개·물웅덩이·방사능)와 상태이상 ---------------------------------------------------
+//  사용자 2026-11-05 "불길 등 상호작용이 지역에 몇 초간 지속되도록, 거기 맞는 상태이상도". 영웅이 그 자리에 들어가면 상태이상이 붙고(나와도 남은 시간 동안 지속),
+//  화상·중독·피폭은 시간당 피해, 빙결·젖음은 이동 감속. 공명 방어(guard)·무적은 R51 규칙대로 피해를 막는다(hurt 를 거침).
+const ST={burn:{name:'화상',dur:3,tickEvery:.5,dmg:.06,pal:P.ember},poison:{name:'중독',dur:4,tickEvery:.6,dmg:.05,pal:P.rotL||P.rot},rad:{name:'방사능 피폭',dur:5,tickEvery:.7,dmg:.045,pal:P.rad},
+ chill:{name:'빙결',dur:2.5,slow:.62,pal:P.frost},wet:{name:'젖음',dur:3,slow:.8,pal:P.water}};
+const zones=[],status={};
+function zone(fxKind,x,y,R,start,life,D,st){zones.push({x,y,R,start,end:start+life,D,st});if(zones.length>30)zones.shift();if(fxKind)push({k:fxKind,x,y,t0:start,life,R,seed:rnd()*6});}
+function giveStatus(st,D,src){const s=ST[st];if(!s)return;const t=T(),cur=status[st];if(!cur){status[st]={until:t+s.dur,D,next:t+(s.tickEvery||0)};stats.status=(stats.status||0)+1;
+   try{/* 엔진 fx(전역 함수)는 이 파일 안의 fx 배열에 가려지므로 window 로 부른다 */if(typeof window.fx==='function')window.fx('text',player.x,player.y,{text:s.name,color:'#e8b0a0',life:.9});}catch(_){}}else{cur.until=Math.max(cur.until,t+s.dur);cur.D=Math.max(cur.D,D);}}
+function tickStatus(){const t=T();for(const z of zones){if(t<z.start||t>z.end)continue;if(Math.hypot(player.x-z.x,player.y-z.y)<z.R)giveStatus(z.st,z.D);}
+ for(let i=zones.length-1;i>=0;i--)if(t>zones[i].end)zones.splice(i,1);
+ for(const k of Object.keys(status)){const s=status[k],d=ST[k];if(t>s.until){delete status[k];continue;}
+  if(d.dmg&&t>=s.next){s.next=t+d.tickEvery;try{if(typeof hurt==='function')hurt(s.D*d.dmg,{type:'r330-status',status:k,r330:true});}catch(err){fail(err);}}}}
+function slowMul(){let m=1;for(const k of Object.keys(status))if(ST[k].slow)m=Math.min(m,ST[k].slow);return m;}
 const GO={
  volcano(e,t,D){for(let i=0;i<6;i++){const p=i===0?{x:player.x,y:player.y}:near(player.x,player.y,3.2),d=t+i*.38,w=.95;
    push({k:'meteor',x:p.x,y:p.y,t0:d,warn:w,R:.95,pal:P.ember,seed:rnd()*6});
-   later(d,()=>{hz(e,p.x,p.y,.95,w,w+.3,D*.55,{kind:'magma'});hz(e,p.x,p.y,.8,w+.3,w+1.8,D*.12,{kind:'lava'});});}},
+   later(d,()=>hz(e,p.x,p.y,.95,w,w+.3,D*.55,{kind:'magma'}));zone('blaze',p.x,p.y,.9,d+w,4.2,D,'burn');}},
  tornado(e,t,D){const f=push({k:'tornado',x:e.x,y:e.y,t0:t,warn:.6,life:5,R:1.15,pal:P.ash,seed:rnd()*6,owner:e});
    later(t,()=>{f.h=hz(e,f.x,f.y,1.15,.6,5,D*.22,{kind:'tornado'});});},
  blizzard(e,t,D){const cx=player.x,cy=player.y;push({k:'snowcloud',x:cx,y:cy,t0:t,life:3.6,R:3,pal:P.frost});
-   for(let i=0;i<11;i++){const p=near(cx,cy,3),d=t+.25+i*.28;push({k:'icicle',x:p.x,y:p.y,t0:d,warn:.75,R:.7,pal:P.frost,seed:rnd()*6});later(d,()=>hz(e,p.x,p.y,.7,.75,1.05,D*.35,{kind:'ice'}));}},
- poison(e,t,D){const x=player.x,y=player.y;push({k:'fog',x,y,t0:t,warn:.8,life:6.5,R:2.3,pal:P.rot,seed:rnd()*6});later(t,()=>hz(e,x,y,2.3,.8,6.5,D*.16,{kind:'poison'}));
+   for(let i=0;i<11;i++){const p=near(cx,cy,3),d=t+.25+i*.28;push({k:'icicle',x:p.x,y:p.y,t0:d,warn:.75,R:.7,pal:P.frost,seed:rnd()*6});later(d,()=>hz(e,p.x,p.y,.7,.75,1.05,D*.35,{kind:'ice'}));if(i%3===0)zone('frost',p.x,p.y,.9,d+.75,3.5,D,'chill');}},
+ poison(e,t,D){const x=player.x,y=player.y;push({k:'fog',x,y,t0:t,warn:.8,life:6.5,R:2.3,pal:P.rot,seed:rnd()*6});later(t,()=>hz(e,x,y,2.3,.8,6.5,D*.16,{kind:'poison'}));zone(null,x,y,2.3,t+.8,5.7,D,'poison');
    for(let i=0;i<3;i++){const p=near(e.x,e.y,1.4);push({k:'canister',x:p.x,y:p.y,tx:x,ty:y,t0:t,life:.8,pal:P.mustard});}},
  bomb(e,t,D){for(let i=0;i<3;i++){const p=i===0?{x:player.x,y:player.y}:near(player.x,player.y,2.6),d=t+i*.3,fuse=1.35;
-   push({k:'bomb',x:p.x,y:p.y,sx:e.x,sy:e.y,t0:d,warn:fuse,R:1.45,pal:P.blood,seed:rnd()*6});later(d,()=>hz(e,p.x,p.y,1.45,fuse,fuse+.3,D*.8,{kind:'bomb'}));}},
+   push({k:'bomb',x:p.x,y:p.y,sx:e.x,sy:e.y,t0:d,warn:fuse,R:1.45,pal:P.blood,seed:rnd()*6});later(d,()=>hz(e,p.x,p.y,1.45,fuse,fuse+.3,D*.8,{kind:'bomb'}));zone('blaze',p.x,p.y,1,d+fuse,3,D,'burn');}},
  flood(e,t,D){const dx=player.x-e.x,dy=player.y-e.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
    for(let i=0;i<7;i++){const s=1.2+i*1.15,x=e.x+ux*s,y=e.y+uy*s,d=t+i*.22;push({k:'wave',x,y,ux,uy,t0:d,warn:.55,R:1.35,pal:P.water,seed:rnd()*6});
     later(d,()=>hz(e,x,y,1.35,.55,.95,D*.42,{kind:'flood',push:{x:ux,y:uy}}));}
-   push({k:'puddle',x:player.x,y:player.y,t0:t+1.4,life:3,R:2.4,pal:P.water});},
+   push({k:'puddle',x:player.x,y:player.y,t0:t+1.4,life:4,R:2.4,pal:P.water});zone(null,player.x,player.y,2.4,t+1.4,4,D,'wet');},
  wisp(e,t,D){const n=7;for(let i=0;i<n;i++){const d=t+.5+i*.32;push({k:'wisp',e,i,n,t0:t,launch:d,life:d-t+1.4,pal:P.wisp,seed:rnd()*6});
    later(d,()=>{const x=player.x,y=player.y;const f=fx.find(q=>q.k==='wisp'&&q.e===e&&q.i===i&&q.launch===d);if(f){f.tx=x;f.ty=y;}hz(e,x,y,.85,.7,1,D*.3,{kind:'wisp'});push({k:'mark',x,y,t0:T(),warn:.7,R:.85,pal:P.blood});});}},
  nuke(e,t,D){const x=player.x,y=player.y,w=2.6;push({k:'nuke',x,y,t0:t,warn:w,R:4,pal:P.blood,seed:rnd()*6});
    later(t,()=>{hz(e,x,y,4,w,w+.35,D*1.6,{kind:'nuke'});hz(e,x,y,3.4,w+.4,w+7.4,D*.12,{kind:'radiation'});});
-   push({k:'rad',x,y,t0:t+w+.3,life:7,R:3.4,pal:P.rad,seed:rnd()*6});}
+   push({k:'rad',x,y,t0:t+w+.3,life:7,R:3.4,pal:P.rad,seed:rnd()*6});zone(null,x,y,3.4,t+w+.3,7,D,'rad');}
 };
 const queue=[];function later(at,fn){queue.push({at,fn});}
 function cast(e){const k=kindOf(e),t=T(),D=dmgBase(e);stats.casts++;stats.byKind[k]=(stats.byKind[k]||0)+1;
@@ -81,7 +95,7 @@ function cast(e){const k=kindOf(e),t=T(),D=dmgBase(e);stats.casts++;stats.byKind
  try{GO[k](e,t+SIGIL,D);}catch(err){fail(err);}
  try{if(typeof toast==='function'&&(stats.byKind[k]<=2))toast('재해 · '+NAME[k]+' — '+(e.name||'보스'),2.2);}catch(_){}}
 function live(){return typeof started!=='undefined'&&started&&typeof player==='object'&&player&&player.hp>0&&typeof room==='object'&&room&&Array.isArray(room.enemies);}
-function tickAll(dt){if(!live())return;const t=T();
+function tickAll(dt){if(!live()){for(const k of Object.keys(status))delete status[k];return;}const t=T();tickStatus();
  for(let i=queue.length-1;i>=0;i--)if(t>=queue[i].at){const q=queue.splice(i,1)[0];try{q.fn();}catch(err){fail(err);}}
  if(on)for(const e of room.enemies){if(!major(e)||!(e.hp>0)||e.r251Circle||e.spawnState&&e.spawnState!=='active')continue;
   const d=Math.hypot(player.x-e.x,player.y-e.y);if(d>12){if(e.r330Next)e.r330Next=Math.max(e.r330Next,t+2);continue;}
@@ -130,6 +144,12 @@ function drawAll(){const S0=SPR();if(!S0||typeof project!=='function')return;/* 
   case'wave':{const w=f.R*px(f.x,f.y);if(el<f.warn){ground(S,P.blood,q,w*.7,.35+.65*el/f.warn,f.seed);}else{const v=el-f.warn;if(v<.8){const u=v/.8;S.draw('pillar',P.waterL,q.x,q.y,w*2.2,h*(1.4-.9*u),{alpha:.7*(1-u),overHero:true});S.draw('ring',C([120,170,165],[230,240,235]),q.x,q.y-h*(1-.6*u),w*2,w*.5,{alpha:.8*(1-u),overHero:true});
     S.draw('smoke',P.waterL,q.x,q.y-h*.35,w*2.2,h*(1.3-.8*u),{alpha:.85*(1-u),blend:'source-over',overHero:true});S.draw('glow',P.waterL,q.x,q.y-h*.3,w*2,h,{alpha:.45*(1-u),overHero:true});S.draw('ring',P.water,q.x,q.y,w*2.2*(.6+.6*u),w*1.1*(.6+.6*u),{alpha:.7*(1-u)});
     S.draw('spark',C([60,80,80],[214,220,215]),q.x,q.y-h*(.9-.5*u),w*1.4,h*.12,{alpha:.7*(1-u),overHero:true});}}break;}
+  case'blaze':{if(el>f.life)break;const w=f.R*px(f.x,f.y),a=Math.min(1,el/.25,(f.life-el)/.6);/* 남아 타는 불길(키 큰 불꽃 여러 갈래) */
+   S.draw('glow',P.ember,q.x,q.y-h*.2,w*2.4,w*1.3,{alpha:.55*a});S.draw('crack',P.ink,q.x,q.y,w*2,w,{squash:.5,alpha:.7*a,blend:'source-over',angle:f.seed});
+   for(let i=0;i<5;i++){const a2=f.seed+i*1.26,r=w*.55*((i*37)%5)/5,fl=.75+.35*Math.sin(t*9+i*2.1);S.draw('flame',P.ember,q.x+Math.cos(a2)*r,q.y+Math.sin(a2)*r*.5,w*.75,h*(.85+.5*((i*13)%3)/3)*fl,{alpha:.9*a});}
+   S.draw('spark',P.ember,q.x,q.y-h*(.6+((el*1.4)%1)*.8),h*.2,h*.06,{angle:-Math.PI/2,alpha:.8*a});break;}
+  case'frost':{if(el>f.life)break;const w=f.R*px(f.x,f.y),a=Math.min(1,el/.25,(f.life-el)/.6);S.draw('glow',P.frost,q.x,q.y,w*2.2,w*1.1,{alpha:.45*a});
+   for(let i=0;i<5;i++){const a2=f.seed+i*1.26,r=w*.6*((i*29)%5)/5;S.draw('shard',P.frost,q.x+Math.cos(a2)*r,q.y+Math.sin(a2)*r*.5-h*.12,h*.12,h*.3,{angle:a2*.3,alpha:.85*a});}break;}
   case'puddle':{if(el>f.life)break;const w=f.R*px(f.x,f.y),a=Math.min(1,el/.3,(f.life-el)/.8);S.draw('ring',P.waterL,q.x,q.y,w*2,w,{alpha:.55*a});S.draw('glow',P.waterL,q.x,q.y,w*2,w,{alpha:.3*a});break;}
   case'wisp':{const e=f.e,g=project(e.x,e.y),sl=t-f.launch;let x,y;if(sl<0||f.tx==null){const a2=t*2.4+f.i*TAU/f.n,R=h*1.1;x=g.x+Math.cos(a2)*R;y=g.y-h*1.4+Math.sin(a2)*R*.45;}
     else{const v=Math.min(1,sl/.7),b=project(f.tx,f.ty),s0x=g.x+Math.cos(f.i*TAU/f.n)*h*1.1,s0y=g.y-h*1.4;x=s0x+(b.x-s0x)*v;y=s0y+(b.y-h*.3-s0y)*v-Math.sin(v*Math.PI)*h*.8;if(sl>.9)break;}
@@ -142,8 +162,16 @@ function drawAll(){const S0=SPR();if(!S0||typeof project!=='function')return;/* 
      S.draw('ring',P.ember,q.x,q.y,w*2.6*u,w*1.3*u,{alpha:.8*o});S.draw('crack',P.ink,q.x,q.y,w*2,w,{squash:.5,alpha:.9*o,blend:'source-over'});}}break;}
   case'rad':{if(el>f.life)break;const w=f.R*px(f.x,f.y),a=Math.min(1,el/.6,(f.life-el)/1);S.draw('glow',P.rad,q.x,q.y,w*2,w,{alpha:.5*a});S.draw('ring',P.sick,q.x,q.y,w*2,w,{angle:t*.4,alpha:.55*a});
    for(let i=0;i<8;i++){const a2=f.seed+i*.8,r=w*(.2+.7*((i*53)%8)/8),yy=q.y+Math.sin(a2)*r*.5-((el*h*.6+i*h*.2)%(h*1.2));S.draw('spark',P.rad,q.x+Math.cos(a2)*r,yy,h*.12,h*.05,{angle:-Math.PI/2,alpha:.75*a});}break;}
-  }});}}
+  }});}
+ // 영웅에게 붙은 상태이상 모습
+ const ks=Object.keys(status);if(ks.length){const q=project(player.x,player.y);for(const k of ks){const u=Math.max(0,status[k].until-t);const a=Math.min(1,u/.4);
+  if(k==='burn')for(let i=0;i<3;i++)S.draw('flame',P.ember,q.x+(i-1)*h*.18,q.y-h*(.25+.12*i),h*.22,h*(.35+.1*Math.sin(t*12+i)),{alpha:.85*a});
+  else if(k==='poison')for(let i=0;i<3;i++)S.draw('orb',P.mustard,q.x+(i-1)*h*.2,q.y-h*(.4+((t*.8+i*.33)%1)*.9),h*.08,h*.08,{alpha:.85*a});
+  else if(k==='rad')for(let i=0;i<4;i++)S.draw('spark',P.rad,q.x+(i-1.5)*h*.16,q.y-h*(.3+((t*1.1+i*.25)%1)*1),h*.12,h*.04,{angle:-Math.PI/2,alpha:.85*a});
+  else if(k==='chill'){S.draw('glow',P.frost,q.x,q.y-h*.5,h*.8,h*1.1,{alpha:.4*a});S.draw('shard',P.frost,q.x+h*.18,q.y-h*.35,h*.12,h*.3,{alpha:.8*a});}
+  else if(k==='wet')S.draw('orb',P.waterL,q.x+Math.sin(t*3)*h*.15,q.y-h*(.9-((t*1.5)%1)*.8),h*.06,h*.09,{alpha:.8*a});}}}
 function install(){
+ if(typeof moveActor==='function'){const base=moveActor;moveActor=function(a,dx,dy,...r){if(a===player&&on){const m=slowMul();if(m<1){dx*=m;dy*=m;}}return base.apply(this,[a,dx,dy,...r]);};}
  if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(e,...a){if(e&&e.type==='r330-fx'){try{drawAll();}catch(err){fail(err);}return;}return base.apply(this,[e,...a]);};}
  if(typeof drawHazard==='function'){const base=drawHazard;drawHazard=function(h,...a){if(h&&h.r330)return;return base.apply(this,[h,...a]);};}
  if(typeof tick==='function'){const base=tick;let last=null;tick=function(...a){const r=base.apply(this,a);try{const t=T(),dt=last==null?0:Math.max(0,Math.min(.1,t-last));last=t;tickAll(dt);}catch(e){fail(e);}return r;};}
@@ -152,5 +180,7 @@ const installed=(()=>{try{return install();}catch(e){fail(e);return false;}})();
 function set(v){on=v!==false;try{localStorage.setItem(KEY,on?'1':'0');}catch(_){}return on;}
 window.__STORYWORLD_DISASTER_R330__=Object.freeze({revision:REV,installed,KINDS:KINDS.slice(),NAME:{...NAME},set,kindOf:e=>kindOf(e),
  cast:(e,k)=>{if(k&&GO[k])e.r330Kind=k;cast(e);},
- inspect:()=>({revision:REV,on,installed,stats:{...stats,byKind:{...stats.byKind}},fx:fx.length,queued:queue.length,lastError})});
+ status:()=>Object.fromEntries(Object.entries(status).map(([k,v])=>[k,{name:ST[k].name,left:+Math.max(0,v.until-T()).toFixed(2)}])),
+ lights:()=>{const t=T();return fx.filter(f=>f.k==='blaze'&&t>=f.t0&&t-f.t0<f.life||f.k==='meteor'&&t-f.t0>f.warn&&t-f.t0<f.warn+1.5||f.k==='bomb'&&t-f.t0>f.warn&&t-f.t0<f.warn+.8).map(f=>({x:f.x,y:f.y,r:3,fire:true}));},
+ inspect:()=>({revision:REV,on,installed,stats:{...stats,byKind:{...stats.byKind}},fx:fx.length,queued:queue.length,zones:zones.length,status:Object.keys(status),lastError})});
 })();
