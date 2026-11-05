@@ -8,3 +8,4 @@
 - 빠른 검사: `python3 -I scripts/collab/test_validate.py`, `python3 -I scripts/collab/validate.py all`, 변경한 오버레이의 `node r96/qa/rNNN/*.cjs`.
 - 유료 API·결제·키 발급·비밀정보 커밋 금지.
 - 참고 스킬: `.claude/skills/` 의 SKILL.md 는 Codex 도 읽고 따른다. 특히 UI 흐름 버그는 `ecc-click-path-audit`, 브라우저 테스트는 `ecc-e2e-testing`, 배포 뒤 점검은 `ecc-browser-qa`, 그림·이펙트는 `storyworld-art-style`, 렉은 `threejs-debug-profiler`. 출처·고른 이유: `.claude/skills/README-SOURCES.md`.
+- 시각 요소를 바꾸는 작업은 모두 `storyworld-art-style` 8절의 7분야 전문가 심사(미술·연출·카메라구도·공간인테리어·조명색채·애니메이션VFX·UX레벨)를 거친다. 10점 만점에 평균 7.77 초과면 통과한다. 심사표와 전후 스크린샷을 남긴다(사용자 2026-11-05).

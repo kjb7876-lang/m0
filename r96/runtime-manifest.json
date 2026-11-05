@@ -14519,18 +14519,18 @@
     },
     {
       "path": "assets/r309/intro/index.json",
-      "bytes": 1277,
-      "sha256": "e0d470c096809aafb0d9a125466ffc99a2cd4b184ffa420a0340a42bf9e6d8e0"
+      "bytes": 1664,
+      "sha256": "0ae312cfabbc94c9d5c9fdb378e2a48d10f8ff82ba22e0314beac9f8f502144b"
     },
     {
-      "path": "assets/r309/intro/opening-7s.mp4",
-      "bytes": 1812837,
-      "sha256": "f3a3d93d2a4cedd2bd3070d9b5bba8cbfc604faf9aaf79c508c49c7068d25258"
+      "path": "assets/r309/intro/opening-hapil.mp4",
+      "bytes": 5325543,
+      "sha256": "6854857dc1efa6ed0c9ab6de83a20dadf6a2f84b7d34a584bef6d17decbfd522"
     },
     {
-      "path": "assets/r309/intro/poster.jpg",
-      "bytes": 79731,
-      "sha256": "5a32d6bde68477f7e2f89e3b6dfdab6d497b34c6c8eb4ecb08516c9d7c95e3b5"
+      "path": "assets/r309/intro/poster-hapil.jpg",
+      "bytes": 55280,
+      "sha256": "2d19610d1d722ce14a8d51f1fc3ca8618c8d2d6e1bdabb1b50cbd1d725083f5e"
     },
     {
       "path": "assets/r317/index.json",
@@ -23519,8 +23519,8 @@
     },
     {
       "path": "intro-video-r309.js",
-      "bytes": 9638,
-      "sha256": "0c5f9ddb7057359abb37878029006671cea85d6ee053ad451b4747545f9edacb"
+      "bytes": 10037,
+      "sha256": "b680051c82599e48408803767d70b9e2afffa9b2666e22fbb0f3e633af00c463"
     },
     {
       "path": "keys-r291.js",
@@ -24149,7 +24149,7 @@
     }
   ],
   "fileCount": 4829,
-  "totalBytes": 910605633,
+  "totalBytes": 914094674,
   "webHTMLSha256": "4d5f8556c3aa76781876c23307d31f15159d1f31c0de478438925cb6d608ac95",
   "largest": [
     {
