@@ -176,7 +176,7 @@ const list=[],MAX=24;let serial=0;
 function add(e){if(list.length>=MAX)list.shift();e.id='r102:'+(++serial);e.at=time;list.push(e);return e;}
 const age=e=>time-e.at;
 const SENTINEL={type:'r102-air',x:0,y:0,age:0,life:Infinity,r102Sentinel:true};
-function cast(slot,angle,origin,target){if(!prefs.flourish||!live()||!origin)return;const p=player,hero=p.hero,F=PALETTE[hero];if(!F)return;const t=tier(p),a=Number.isFinite(angle)?angle:0;
+function cast(slot,angle,origin,target){if(!prefs.flourish||!live()||!origin)return;const p=player,hero=p.hero,F=PALETTE[hero];if(!F)return;if(window.__STORYWORLD_HWANDO_W_CROSS_R348__?.owns?.(hero,slot))return;/* R348: 환도 W 의 초승달(blade 스타일) 대신 십자 베기 */const t=tier(p),a=Number.isFinite(angle)?angle:0;
  let tx=target?.x,ty=target?.y;if(!Number.isFinite(tx)||!Number.isFinite(ty)){tx=origin.x+Math.cos(a)*3.2;ty=origin.y+Math.sin(a)*3.2;}
  const d=Math.hypot(tx-origin.x,ty-origin.y);if(d>9){tx=origin.x+(tx-origin.x)*9/d;ty=origin.y+(ty-origin.y)*9/d;}
  let extra=null;if(F.style==='bolt'&&t>=4&&typeof liveEnemies==='function'){extra=liveEnemies().filter(v=>Math.hypot(v.x-tx,v.y-ty)>.4&&Math.hypot(v.x-tx,v.y-ty)<5).sort((u,v)=>Math.hypot(u.x-tx,u.y-ty)-Math.hypot(v.x-tx,v.y-ty)).slice(0,4).map(v=>({x:v.x,y:v.y}));}

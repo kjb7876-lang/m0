@@ -148,6 +148,8 @@ function patchContext(c){if(!c||patched.has(c)||typeof c.drawImage!=='function')
    const age=ages[ordinal++]?.age??a[0]/384*.06;
    // Source frames 0..7 (including the complete initial ring) are byte-for-byte original calls.
    if(a[0]>=8*384&&a[0]<10*384){
+    // R348: 꼬리의 세 칼날(초승달)을 빼고, 다 그려진 원(7칸)이 옅어지며 사라진다
+    if(window.__STORYWORLD_HWANDO_W_CROSS_R348__?.owns?.('hwando','w')){stats.r348=(stats.r348||0)+1;const al=this.globalAlpha;this.globalAlpha=al*(a[0]>=9*384?.22:.55);try{return base.call(this,im,7*384,a[1],a[2],a[3],a[4],a[5],a[6],a[7]);}finally{this.globalAlpha=al;}}
     if(ready()){reentrant=true;try{drawSplit(age,a);stats.replaced++;return;}catch(e){fail(e);}finally{reentrant=false;}}
     stats.fallback++;
    }
