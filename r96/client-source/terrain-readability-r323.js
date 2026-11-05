@@ -5,7 +5,7 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_TERRAIN_READABILITY_R323__)return;
 const REV='R323-terrain-readability-1',KEY='storyworld.r323.terrainReadability';
-let on=true,lastError=null;try{on=JSON.parse(localStorage.getItem(KEY)||'null')?.on!==false;}catch(_){}
+let on=true,lastError=null,preservedTheme=null;try{on=JSON.parse(localStorage.getItem(KEY)||'null')?.on!==false;}catch(_){}
 // Output-space grade: floor detail remains continuous; walls are cooler and
 // darker, their existing top/trim materials keep the upper value step.
 const ROLES=Object.freeze({floor:[1.34,1.31,1.27],wall:[.86,.89,.94],cap:[1.02,1.02,1.03],path:[1.34,1.31,1.27]});
@@ -27,13 +27,13 @@ function roleMaterials(r){
  add(r.wallCapMaterial61,'cap');
  return roles;
 }
-function installMaterial(m,role){
+function installMaterial(m,role,enabled=on){
  if(!m||!ROLES[role]||m.isShaderMaterial||m.isRawShaderMaterial)return;
  let state=states.get(m);
- if(!state&&!on)return;
+ if(!state&&!enabled)return;
  if(!state){
   const previous=m.onBeforeCompile,previousKey=m.customProgramCacheKey;
-  state={gain:{value:[1,1,1]},role,enabled:on};states.set(m,state);stats.materials++;
+  state={gain:{value:[1,1,1]},role,enabled};states.set(m,state);stats.materials++;
   m.onBeforeCompile=function(shader,...a){
    previous?.call(this,shader,...a);
    if(!state.enabled)return;
@@ -51,11 +51,16 @@ function installMaterial(m,role){
   m.customProgramCacheKey=function(){return(previousKey?.call(this)||'')+(state.enabled?'|terrain-readability-r323':'');};
   m.needsUpdate=true;
  }
- if(state.enabled!==on){state.enabled=on;m.needsUpdate=true;}
+ if(state.enabled!==enabled){state.enabled=enabled;m.needsUpdate=true;}
  state.role=role;const v=ROLES[role];
- state.gain.value[0]=on?v[0]:1;state.gain.value[1]=on?v[1]:1;state.gain.value[2]=on?v[2]:1;
+ state.gain.value[0]=enabled?v[0]:1;state.gain.value[1]=enabled?v[1]:1;state.gain.value[2]=enabled?v[2]:1;
 }
-function sync(r){try{stats.frames++;for(const[m,role]of roleMaterials(r))installMaterial(m,role);}catch(e){fail(e);}}
+function sync(r){try{stats.frames++;
+ // The rose-house checkerboard already has strong inverse value separation.
+ // Preserve its black tiles and pale walls instead of lifting a healthy theme.
+ const preserve=r.r118TileLook==='rosehouse'||r.terrainArt?.r118Tiles?.file==='rosehouse';preservedTheme=preserve?'rosehouse':null;
+ for(const[m,role]of roleMaterials(r))installMaterial(m,role,on&&!preserve);
+ }catch(e){fail(e);}}
 function attach(){
  const r=window.__STORYWORLD_PHASE1__?.controller?.state?.three,gl=r?.renderer;
  if(!r||typeof gl?.render!=='function'||wrapped.has(gl))return false;
@@ -68,5 +73,5 @@ function attach(){
 if(typeof setInterval==='function')setInterval(attach,500);attach();
 function set(v){on=v!==false;try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}
 window.__STORYWORLD_TERRAIN_READABILITY_R323__=Object.freeze({revision:REV,roles:ROLES,set,attach,
- inspect:()=>({revision:REV,on,stats:{...stats},lastError,extraDraws:0,extraTextures:0,DPRChanged:false,geometryChanged:false,collisionChanged:false,assetsChanged:false,GPUVerified:false})});
+ inspect:()=>({revision:REV,on,preservedTheme,stats:{...stats},lastError,extraDraws:0,extraTextures:0,DPRChanged:false,geometryChanged:false,collisionChanged:false,assetsChanged:false,GPUVerified:false})});
 })();

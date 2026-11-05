@@ -17,6 +17,9 @@ grading only `stoneMaterial` would leave the visible terrain unchanged. Decals,
 actors, props, effects and UI are excluded. Bridge aprons retain their existing
 geometry; this overlay does not define new walkable paths.
 
+The rose-house checkerboard already separates dark floor tiles from pale walls.
+That existing inverse contrast is preserved without applying the shared grade.
+
 The grade composes the existing sight, cutaway and dream shader callbacks. A
 single vector multiplication preserves exact black outside the sight mask, and
 leaves alpha unchanged. It adds no mesh, texture, texture sample, render pass or
