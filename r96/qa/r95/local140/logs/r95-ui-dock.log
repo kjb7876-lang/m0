@@ -1,9 +1,0 @@
-PASS Desktop docks existing controls into the native header/footer
-PASS Dock OFF restores all four native parents
-PASS Dock OFF restores native sibling order and event identity
-PASS Repeated docking does not duplicate nodes or lose event listeners
-PASS Fullscreen mobile restores controls outside hidden header/footer
-PASS Mobile effective docking does not overwrite user preference
-PASS Returning to desktop reapplies user-selected docking
-PASS User-disabled docking stays disabled across mobile transitions
-PASS Dock lifecycle leaves the overlay error ledger clear

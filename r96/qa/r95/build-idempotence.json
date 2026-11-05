@@ -1,9 +1,0 @@
-{
-  "schema": "storyworld.r95-build-idempotence/v1",
-  "method": "Observed official apply90,91,92,92-mobs,92-boss,93 sequence twice after code freeze; native HTML unchanged, canonical/runtime changed overlays identical, second manifest byte-identical. Recorded from the actual integration command output.",
-  "nativeHTMLUnchanged": true,
-  "manifestStableOnSecondApply": true,
-  "canonicalRuntimeMatch": true,
-  "htmlSHA256": "079b708febed91a6d1aa92db0033e5104d408a2b2ce24023d393d40da2b01541",
-  "manifestSHA256": "e3a9035cf0ac09fa28f1f8a679c6f0d43863742ad578f509e6c7f351d6d4594b"
-}

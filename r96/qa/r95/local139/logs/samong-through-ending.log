@@ -1,9 +1,0 @@
-PASS 777 is enabled through native activation from a fresh ordinary game
-PASS Native 777 enters Samong threshold with its uncleared ward gates
-PASS 777 keeps the Samong boss door locked until ordinary enemies and champions are eliminated
-PASS Samong survivors assemble through the native rally transition
-FAIL E opens the original Samong pre-boss narrative after field clearance
-Error: E opens the original Samong pre-boss narrative after field clearance
-    at check (/home/user/m0/r96/qa/r86/progression-777-finale.cjs:4:278)
-    at /home/user/m0/r96/qa/r86/progression-777-finale.cjs:17:139
-FINAL 4 1

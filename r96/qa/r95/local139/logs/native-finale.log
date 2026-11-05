@@ -1,7 +1,0 @@
-PASS Native runtime boots for the finale regression
-PASS cult04 keeps the native multi-stage progression owner
-FAIL First boss defeat opens firstPost and awakenPre without completing the finale
-FAIL Reading both native scenes enters the Cosmic guardian phase
-FAIL All six canonical Cosmic guardians advance one native stage each on safe floor
-FAIL Final boss and preserved-core epilogue precede native finale completion
-{"passed":2,"failed":4}

@@ -1,9 +1,0 @@
-PASS Hospital reference is the current 87 × 113, 8022-cell B2 wide-room maze
-PASS All 55 combat maps use the actual current hospital floor plan and envelope
-PASS All maps retain every shared boundary/baffle and use rectilinear walls
-PASS Visible tile rectangles exactly match collision floor cells with no holes, overlap or old core floor
-PASS No combat map draws the old full-envelope backdrop or fog apron
-PASS World maps do not enter hospital-specific simulation branches
-PASS All 55 authored maze entrances are wall-safe for the native player body
-PASS Spider cave and swamp reject every sampled non-floor cell
-PASS Safe maps and co-op keep their prior layout dispatch

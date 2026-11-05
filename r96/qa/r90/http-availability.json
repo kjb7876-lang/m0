@@ -1,9 +1,0 @@
-{
-  "method": "native loopback server plus Node HTTP GET (not browser)",
-  "port": 49329,
-  "attempted": true,
-  "status": 200,
-  "bytes": 6559225,
-  "serverLog": "StoryWorld Hospital PC Three candidate - NOT visually verified\nOpen: http://127.0.0.1:49329/\nKeep this window open. Ctrl+C stops the server.\n",
-  "phase": "Original five-part full runtime before R90 apply; final applied runtime HTTP is separately covered by CPU package group."
-}

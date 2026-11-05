@@ -1,3 +1,0 @@
-{"schema":"storyworld.r95.syntax-audit/v1","generatedAt":"2026-10-30T10:58:55.519Z","method":"VM parser only, including ES modules and HTML inline scripts; local HTML script target existence.","counts":{"scriptUnits":219,"modules":2,"html":2},"checks":[{"name":"Every delivered JS and inline script parses","passed":true,"detail":[]},{"name":"Every local HTML script target exists","passed":true,"detail":[]}],"browserVerified":false,"GPUVerified":false,"passed":true}
-(node:7980) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
-(Use `node --trace-warnings ...` to show where the warning was created)
