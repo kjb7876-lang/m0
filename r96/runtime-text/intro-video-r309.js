@@ -1,3 +1,4 @@
+// R327 교체(사용자 2026-11-05 "기존 오프닝영상 삭제하고 오프닝 이 둘 중 하나로 개선해서 대체 아니면 둘 다 적절한 때에"): 고서 책장 영상(앞) → 실사 타락 영상(뒤)을 0.5초 페이드로 이은 19.5초 opening-hapil.mp4, 제목은 마지막 번개 치는 나무 장면(17.6초~) 위. 아래 R309 설명의 7초 영상은 삭제됐다.
 // R309 — 새 게임 오프닝 영상(사용자 2026-11-04 직접 만든 opening.mp4, "이거 오프닝으로 7초까지만 적용해줘 그이후는 잘라버려서 안나오게하고 그리고 게임제목은 합일(合一) 이거야").
 //  · 영상 파일 자체를 7초 직전 장면 전환(6.958초)에서 잘랐다(assets/r309/intro/opening-7s.mp4, 1.8MB). 원본의 타락 천사 클로즈업·옛 제목 화면·게임 화면은 파일에 없다.
 //  · 마지막 장면(5.5초~, 검은 날개가 나무를 에워싸는 궁전) 위에 제목 '합일(合一)'을 띄운다. 영상이 끝나면 마지막 프레임에 멈춘 채 제목을 1초 더 보여 주고 어둡게 닫는다(7초 뒤 영상 내용은 없음).
@@ -9,7 +10,7 @@
 //  · 자동 검사(navigator.webdriver)에서는 띄우지 않는다(?intro309=1 또는 play({force:true}) 로 강제). 설정 '오프닝 영상(새 게임)' / storyworld.r309.opening {on:false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_INTRO_VIDEO_R309__)return;
-const REV='R309-intro-video-1',KEY='storyworld.r309.opening',SRC='assets/r309/intro/opening-7s.mp4',POSTER='assets/r309/intro/poster.jpg',TITLE='합일(合一)',CUT=6.958,TITLE_AT=5.5,HOLD_MS=1000,STALL_MS=6000;
+const REV='R309-intro-video-1',KEY='storyworld.r309.opening',SRC='assets/r309/intro/opening-hapil.mp4',POSTER='assets/r309/intro/poster-hapil.jpg',TITLE='합일(合一)',CUT=19.5,TITLE_AT=17.6,HOLD_MS=1000,STALL_MS=6000;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,fallback:0};let lastError=null,open=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};

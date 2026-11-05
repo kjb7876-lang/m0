@@ -3833,8 +3833,6 @@
     "assets/r308/bgm/index.json",
     "assets/r308/bgm/mozart-k421.ogg",
     "intro-video-r309.js",
-    "assets/r309/intro/opening-7s.mp4",
-    "assets/r309/intro/poster.jpg",
     "assets/r309/intro/index.json",
     "assets/r299/arch.webp",
     "assets/r299/bed.webp",
@@ -4039,7 +4037,9 @@
     "assets/r325/pixel-readable/pdbf321a1a081.webp",
     "assets/r325/pixel-readable/pe7abcfa8661e.webp",
     "assets/r325/pixel-readable/pe99278e2986f.webp",
-    "assets/r325/pixel-readable/pf0ad5f9f7a51.webp"
+    "assets/r325/pixel-readable/pf0ad5f9f7a51.webp",
+    "assets/r309/intro/opening-hapil.mp4",
+    "assets/r309/intro/poster-hapil.jpg"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5114,5 +5114,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "bc381c4cb1577274b5c9af216f93418c517f63a157f8e69501ffd74044a3a5ad"
+  "runtimeManifestSHA256": "3805df777ed6237b9567d51f739020dfba41a941e350baa08f1f01a8231f34e3"
 }

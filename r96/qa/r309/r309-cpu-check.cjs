@@ -1,4 +1,4 @@
-// R309 CPU check: new-game opening = user's own video cut to 0–6.958 s with title '합일(合一)'; procedural tree/angels animation kept only as the fallback when the video cannot play.
+// R309 CPU check (R327: opening replaced by the user's two 2026-11-05 videos joined, 19.5 s): new-game opening with title '합일(合一)'; procedural tree/angels animation kept only as the fallback when the video cannot play.
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),ROOT=path.join(R,'..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
@@ -14,19 +14,19 @@ ok('video runtime copy matches client-source',fs.readFileSync(path.join(R,'runti
 ok('index.html loads tree (fallback) then video, once each',html.split('./intro-video-r309.js').length===2&&html.indexOf('./intro-tree-r309.js')<html.indexOf('./intro-video-r309.js'));
 ok('public verify list includes video overlay and assets/r309',(()=>{const v=fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8');return v.includes("'intro-video-r309.js'")&&v.includes("'assets/r309/'");})());
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
-ok('runtime inputs list video, poster and index',['intro-video-r309.js','assets/r309/intro/opening-7s.mp4','assets/r309/intro/poster.jpg','assets/r309/intro/index.json'].every(p=>inputs.textPaths.includes(p)));
+ok('runtime inputs list video, poster and index',['intro-video-r309.js','assets/r309/intro/opening-hapil.mp4','assets/r309/intro/poster-hapil.jpg','assets/r309/intro/index.json'].every(p=>inputs.textPaths.includes(p)));
 const crypto=require('crypto'),A=path.join(R,'runtime-text','assets','r309','intro');const idx=JSON.parse(fs.readFileSync(path.join(A,'index.json'),'utf8'));
 ok('asset index hashes and sizes match files',idx.files.every(f=>{const b=fs.readFileSync(path.join(A,f.path));return b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256;}));
-const mp4=fs.readFileSync(path.join(A,'opening-7s.mp4'));
-// mvhd duration (timescale/duration) — cut must be under 7 s; faststart = moov before mdat
+const mp4=fs.readFileSync(path.join(A,'opening-hapil.mp4'));
+// mvhd duration (timescale/duration) — joined opening ~19.55 s; faststart = moov before mdat
 const mv=mp4.indexOf('mvhd');const ver=mp4[mv+4];const ts=ver?mp4.readUInt32BE(mv+24):mp4.readUInt32BE(mv+16);const du=ver?Number(mp4.readBigUInt64BE(mv+28)):mp4.readUInt32BE(mv+20);const sec=du/ts;
-ok('video file is cut to the first 7 seconds (6.9–7.0 s)',sec>6.9&&sec<=7.0,sec.toFixed(3)+'s');
-ok('video is small and streamable (faststart, < 2.5 MB)',mp4.length<2.5e6&&mp4.indexOf('moov')<mp4.indexOf('mdat'),mp4.length+' bytes');
-ok('original 10 s upload is not shipped',!fs.readdirSync(A).some(f=>/opening\.mp4$/.test(f))&&idx.source.duration>10);
+ok('joined opening is 19.5–19.6 s (two 10 s clips, 0.5 s crossfade)',sec>19.5&&sec<19.6,sec.toFixed(3)+'s');
+ok('video is small and streamable (faststart, < 6 MB)',mp4.length<6e6&&mp4.indexOf('moov')<mp4.indexOf('mdat'),mp4.length+' bytes');
+ok('original uploads and the deleted 7 s opening are not shipped',!fs.readdirSync(A).some(f=>/gemini|opening\.mp4$|opening-7s/.test(f))&&idx.sources.length===2&&idx.sources.every(s=>s.duration>10));
 ok('video plays after newGame resolves, never on load/save',/newGame=async function\(\.\.\.a\)\{const r=await base\.apply\(this,a\);try\{if\(r!==false\)play\(\);/.test(vsrc)&&!/loadGame\s*=/.test(vsrc));
 ok('tree animation no longer wraps newGame or settings (fallback only)',!/newGame\s*=/.test(src)&&!/showSettings\s*=/.test(src));
 ok("title is '합일(合一)' in both, old title gone",/TITLE='합일\(合一\)'/.test(vsrc)&&src.includes('>합일(合一)<')&&!/합일몽세/.test(vsrc+src.replace(/^\/\/.*$/mg,'')));
-ok('video stops at the cut even if the file runs long, title from 5.5 s, 1 s still hold then close',/CUT=6\.958/.test(vsrc)&&/if\(t>=CUT\)\{atEnd\(o\);return;\}/.test(vsrc)&&/video\.pause\(\)/.test(vsrc)&&/HOLD_MS=1000/.test(vsrc)&&/TITLE_AT=5\.5/.test(vsrc));
+ok('video stops at the cut even if the file runs long, title from 17.6 s, 1 s still hold then close',/CUT=19\.5/.test(vsrc)&&/if\(t>=CUT\)\{atEnd\(o\);return;\}/.test(vsrc)&&/video\.pause\(\)/.test(vsrc)&&/HOLD_MS=1000/.test(vsrc)&&/TITLE_AT=17\.6/.test(vsrc));
 ok('skippable: button, pointer, Esc/Enter/Space; game keys blocked',/class="skip"/.test(vsrc)&&/pointerdown/.test(vsrc)&&/'Escape'/.test(vsrc)&&/'Enter'/.test(vsrc)&&/e\.code==='Space'/.test(vsrc)&&/stopImmediatePropagation/.test(vsrc));
 ok('automation gate with explicit override, setting toggle',/navigator\.webdriver&&!forced\(\)/.test(vsrc)&&/storyworld\.r309\.opening/.test(vsrc)&&/r309On/.test(vsrc));
 ok('autoplay-blocked → muted retry; error → tree fallback; stall → close',/video\.muted=true;stats\.muted\+\+/.test(vsrc)&&/if\(reason==='error'\)fallback\(\)/.test(vsrc)&&/close\(o,'stall'\)/.test(vsrc)&&/__STORYWORLD_INTRO_TREE_R309__/.test(vsrc));
