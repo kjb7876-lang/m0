@@ -91,6 +91,8 @@ jobs:
         run: node r96/qa/r353/bgm-pick-cpu-check.cjs
       - name: R351 slayer new walk/attack motion CPU check
         run: node r96/qa/r351/slayer-cpu-check.cjs
+      - name: R355 samong wide corridors and faceless student art CPU check
+        run: node r96/qa/r355/samong-wide-cpu-check.cjs
       - name: R350 hero visibility under skill effects and hero blood cue CPU check
         run: node r96/qa/r350/hero-visibility-cpu-check.cjs
       - name: R326 Michaela R seraph wings and halo CPU check
