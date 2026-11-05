@@ -37,7 +37,7 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    const nd=dirFromVec(v[0],v[1]);if(nd!==S.walkDir){S.pend=(S.pendDir===nd?(S.pend||0)+1:1);S.pendDir=nd;if(S.pend>=2){S.walkDir=nd;S.pend=0;}}else S.pend=0;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,opt={}){const R=res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im)return false;
+function draw(rec,st,best,anim,dir,frame,opt={}){const R=res(anim,dir);if(!R)return false;const A=R.A,p=(window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,A.file))||R.base+A.file,im=image(p);/* R283 색 맞춘 파생본 */if(!im){/* R345: 공격·피격 그림이 아직 안 받아졌으면 엔진 옛 그림 대신 이미 받은 같은 방향 걷기 선 자세로(옛 그림이 한 순간 튀지 않게) */if(!opt.fb&&anim!=='walk'){stats.standIn=(stats.standIn||0)+1;const w=res('walk',dir)?.A;if(w&&draw(rec,st,best,'walk',dir,Math.min(3,w.n-1),{fb:true}))return true;}return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
  const body=R.body||A.body||180,w=want(),k=w/body,ky=opt.breath?k*(1+.008*Math.sin(T()*2.2)):k;
  const q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),w*.65),fx=q.x,fy=q.y-lift,f=R.mir?-1:1,[ax,ay]=A.anchor;
@@ -51,7 +51,8 @@ function contactStart(ms){let c=ms.findIndex((m,i)=>i>1&&m<=40);if(c<0)c=Math.fl
 const BODY_ART=/hero_direction|hero-authored|assets\/heroes\/|r91\/walk\/|r93\/idle\/|r119\/heroes\/|r121\/(?:heroes|walk)\/|r128\/gunner\/|r130\/[a-z]+\/|r143\/attack\/|r242\/hwando\/|r271\/hwando\/|awakening|^blob:/;
 function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c.kind!=='image'||c.owner?.kind!=='hero'||!c.points||!BODY_ART.test(String(c.sourcePath||c.image?.src||'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
 let preloaded=null;
-function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file);}}
+function preload(){if(!IDX||preloaded===room)return;preloaded=room;for(const a of (P277()?['walk']:['walk','idle']))for(const d of ['n','s','e','w']){const A=IDX.anims[a]?.[d];if(A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(BASE,A.file))||BASE+A.file);}
+ /* R345: 공격·피격(새 팩 → R242 대체 포함)도 미리 받는다 — 처음 휘두르거나 맞는 순간 옛 그림이 튀던 원인 */for(const a of ['attack','hit'])for(const d of ['n','s','e','w']){const R=res(a,d);if(R?.A?.file)image((window.__STORYWORLD_HWANDO_R283__?.path?.(R.base,R.A.file))||R.base+R.A.file);}}
 const atkOf=d=>res('attack',d)?.A;
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T(),ms=1000;
  track();preload();

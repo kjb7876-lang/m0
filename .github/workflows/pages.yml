@@ -373,6 +373,8 @@ jobs:
         run: node r96/qa/r275/r275-cpu-check.cjs
       - name: R283 Hwando idle side stance and unified colour CPU check
         run: node r96/qa/r283/r283-cpu-check.cjs
+      - name: R345 Hwando preload / no legacy sprite flash CPU check
+        run: node r96/qa/r345/hwando-preload-cpu-check.cjs
       - name: R280 stranded required enemy rescue and 777 forward range CPU check
         run: node r96/qa/r280/r280-cpu-check.cjs
       - name: R286 mobile +77% all stats, attack-only/move-only mob motion fill CPU check
