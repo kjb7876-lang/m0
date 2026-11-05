@@ -4051,6 +4051,12 @@
     "assets/r308/bgm/pathetique-2.ogg",
     "assets/r308/bgm/pathetique-3.ogg",
     "assets/r308/bgm/pathetique-4.ogg",
+    "disaster-r330.js",
+    "hwando-arc-r349.js",
+    "wave-orphans-r352.js",
+    "assets/r349/hwando-arc.webp",
+    "assets/r349/hwando-arc-r49.webp",
+    "assets/r349/hwando-a-r49.webp",
     "bgm-pick-r353.js"
   ],
   "mediaPaths": [
@@ -5126,5 +5132,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "916d71c1b22a5a677e89c2a613fdbb5634f1f215542ec8067ca2fa4bc2a31338"
+  "runtimeManifestSHA256": "705d20efea2d206db120ff0646d33f78635e83393cdb5efd09741261ed4022f3"
 }
