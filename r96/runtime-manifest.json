@@ -14958,6 +14958,36 @@
       "sha256": "b4e1b18f70c5c9d6369d86b6de75730fa8da8dbca963d342dbd32174944a57d2"
     },
     {
+      "path": "assets/r375/mobs/index.json",
+      "bytes": 4768,
+      "sha256": "8cfda0473d136e61c58130385fcbd85bf9a3bf13bb72db68add254f976f08d79"
+    },
+    {
+      "path": "assets/r375/mobs/kair-44.webp",
+      "bytes": 476208,
+      "sha256": "2ac6b507756c37d0af0f5a090932bba9874eb6b21e6d1fee4460d77f554cc40b"
+    },
+    {
+      "path": "assets/r375/mobs/kair-45.webp",
+      "bytes": 536374,
+      "sha256": "fbc868675ab8b85e3f2a2d1e45750150f82ee388d3679788173097d6e4e68f72"
+    },
+    {
+      "path": "assets/r375/mobs/kair-48.webp",
+      "bytes": 630340,
+      "sha256": "f8906f0b236271cd8a28d8f23a6d4904cd7f8783f03a5724b0db063e4a4012be"
+    },
+    {
+      "path": "assets/r375/mobs/kair03-residue.webp",
+      "bytes": 485136,
+      "sha256": "23999e205a83f322d70c189e61cfbf1bb502b7f222088ef37a94d54869cace28"
+    },
+    {
+      "path": "assets/r375/mobs/plague-hound.webp",
+      "bytes": 99564,
+      "sha256": "56901159a8653f81a9c4c7dfa5d7323802aa4d65db56505c10a14c7b2ffb218f"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23854,8 +23884,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570091,
-      "sha256": "74adc94633fb4e209a964ef04deec48360ca51780542d45a1d814fd2ff0a2e46"
+      "bytes": 6570133,
+      "sha256": "620b05444613c2186c7e88ee68cc826fafaeaa3129db2d5b8822bd87847280e9"
     },
     {
       "path": "intro-r140.js",
@@ -23938,6 +23968,11 @@
       "sha256": "25d1532190949e20d6e03e844158a302e62ad521156f392104d0471b9b2d0eff"
     },
     {
+      "path": "mob-dots-r375.js",
+      "bytes": 7247,
+      "sha256": "1c273e30a206b314b8ca148caffb7641cef5d5c18e133427b370489bc10353e8"
+    },
+    {
       "path": "mob-fix-r275.js",
       "bytes": 6002,
       "sha256": "60d89420b125e418312415d33292d1a46251aab6807a6fa81419f0c077e53a98"
@@ -23974,8 +24009,8 @@
     },
     {
       "path": "mob-preload-r260.js",
-      "bytes": 5171,
-      "sha256": "8f0bca035ddadaa0fed70d206f9b0fef205066ce9201d376c7642111a041c11c"
+      "bytes": 5221,
+      "sha256": "58fd2ea51af7c8d5c20dd84cf8154f0539ed2ff8944f9e420a518af48db65492"
     },
     {
       "path": "mob-rename-r362.js",
@@ -23999,8 +24034,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 17077,
-      "sha256": "b239d56f26fcb7a9c90b22f7cfb748ba174f2a7cc9eb4f503258fd16774aeb00"
+      "bytes": 17129,
+      "sha256": "e22ddca78a8bd7959d103d02bfbf61934a5d54a5aa6a320c1380fc895281db05"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -24578,9 +24613,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4915,
-  "totalBytes": 950963187,
-  "webHTMLSha256": "74adc94633fb4e209a964ef04deec48360ca51780542d45a1d814fd2ff0a2e46",
+  "fileCount": 4922,
+  "totalBytes": 953202968,
+  "webHTMLSha256": "620b05444613c2186c7e88ee68cc826fafaeaa3129db2d5b8822bd87847280e9",
   "largest": [
     {
       "path": "index.html",
