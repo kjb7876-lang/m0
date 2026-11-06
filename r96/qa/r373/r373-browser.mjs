@@ -27,5 +27,14 @@ for(const z of ['dist00','dist03','ep1a10']){const t=Date.now();await p.evaluate
   const cl=clones.map(c=>{const m=plain.find(e=>e.nativeId===c.nativeId);return m?[c.maxHp/m.maxHp,c.damage/m.damage]:null;}).filter(Boolean);return{ratio,cl};});
  check(z+': 난이도 다시 적용 뒤에도 우두머리 체력·공격 ×1.6',b2.ratio.length>0&&b2.ratio.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02),b2.ratio);
  check(z+': 복제 몹 체력·공격 = 같은 종류 원래 몹',b2.cl.every(([h,d])=>Math.abs(h-1)<.02&&Math.abs(d-1)<.02),b2.cl);
+ if(z==='dist03'){
+  // Codex P2: 저장 불러오기 — R373 저장은 ×1.6 그대로(두 번 곱하지 않음), R373 이전 저장(표식 없음·우두머리 원래 수치)은 ×1.6 으로 옮김
+  const sv=await p.evaluate(async()=>{const ratio=()=>{const rows=room.enemies.filter(e=>e.squadR373&&e.hp>0),plain=rows.filter(e=>!e.squadLeaderR373&&!e.r373Clone);return rows.filter(e=>e.squadLeaderR373).map(l=>{const m=plain.find(e=>e.nativeId===l.nativeId);return m?[+(l.maxHp/m.maxHp).toFixed(3),+(l.damage/m.damage).toFixed(3)]:null;}).filter(Boolean);};
+   const d=JSON.parse(JSON.stringify(serializeSave()));await restoreSave(JSON.parse(JSON.stringify(d)));await new Promise(r=>setTimeout(r,500));const a=ratio();
+   const old=JSON.parse(JSON.stringify(d));delete old.squadsR373;const L=new Set(room.enemies.filter(e=>e.squadLeaderR373).map(e=>e.id));
+   for(const rr of Object.values(old.rooms||{}))for(const row of rr.enemies||[])if(L.has(row.id)&&row.r61Scale){for(const k of ['maxHp','hp','damage','baseDamage'])if(Number.isFinite(row.r61Scale[k]))row.r61Scale[k]/=1.6;}
+   await restoreSave(old);await new Promise(r=>setTimeout(r,500));return{marker:!!d.squadsR373,a,b:ratio(),migrated:window.__STORYWORLD_MOB_SQUADS_R373__.inspect().stats.migrated};});
+  check('저장 표식 있는 불러오기: 우두머리 ×1.6 그대로(두 번 곱하지 않음)',sv.marker&&sv.a.length>0&&sv.a.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02),sv);
+  check('R373 이전 저장 불러오기: 우두머리를 ×1.6 으로 옮김',sv.b.length>0&&sv.b.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02)&&sv.migrated>0,sv);}
  await p.screenshot({path:`${OUT}/${z}.jpg`,quality:70});}
 check('페이지 오류 없음',!errs.length,errs);await b.close();fs.writeFileSync(`${OUT}/r373-browser.json`,JSON.stringify({fails,n,headless:true,gpu:false}));console.log(fails?`FAIL ${fails}`:`ALL ${n} PASS`);process.exit(fails?1:0);

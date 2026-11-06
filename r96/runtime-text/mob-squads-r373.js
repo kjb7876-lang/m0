@@ -73,6 +73,19 @@ function gather(r){r.r373MovePending=false;const used=[];
 if(typeof tick==='function'){const base=tick;tick=function(...a){try{const r=typeof room!=='undefined'?room:null;if(r&&r.r373MovePending&&prefs.on&&!(typeof loading!=='undefined'&&loading))gather(r);}catch(e){fail(e);}return base.apply(this,a);};}
 if(typeof makeRoom==='function'){const base=makeRoom;makeRoom=function(...a){return organize(base.apply(this,a));};}
 // 그리기: 분대장은 1.15배, 그림 표가 찾을 수 있게 원래 이름으로 잠깐 바꿔 그린 뒤 머리 위 이름표.
+// R373 이전(또는 분대 끈 채) 저장을 불러오면 복원 래퍼(R61 r61Scale·R63 난이도 기준)가 우두머리 수치를 원래 값으로 되돌린다
+//  → 저장에 표식을 남기고, 표식 없는 저장을 불러온 뒤 한 번만 남은 체력 비율을 지켜 ×1.6 으로 옮긴다(Codex P2).
+function migrate(raw){if(!prefs.on||raw?.squadsR373?.version>=1)return;let n=0;
+ const rooms=typeof world!=='undefined'&&world?Object.values(world):[];
+ for(const r of rooms)for(const e of r?.enemies||[]){if(!e?.squadLeaderR373)continue;const frac=Number.isFinite(e.hp)&&e.maxHp>0?Math.max(0,Math.min(1,e.hp/e.maxHp)):1;
+  const B=e.r373Base||{},same=k=>Number.isFinite(e[k])&&B[k]>0&&Math.abs(e[k]/B[k]-1)<.01;let hit=false;
+  // 이미 ×1.6 인 값(복원이 건드리지 않은 칸)은 그대로 — 두 번 곱하지 않게 원래 값과 같은 칸만 옮긴다.
+  if(same('maxHp')){e.maxHp*=MUL;if(Number.isFinite(e.difficultyBaseHpR63)&&e.difficultyBaseHpR63>0)e.difficultyBaseHpR63*=MUL;e.hp=e.maxHp*frac;hit=true;}
+  if(same('damage')){e.damage*=MUL;hit=true;}if(hit){cur=r;rescale(e);n++;}}
+ stats.migrated=(stats.migrated||0)+n;}
+if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a);try{if(d&&typeof d==='object'&&prefs.on)d.squadsR373={version:1};}catch(e){fail(e);}return d;};}
+if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=function(raw,...a){const out=base.call(this,raw,...a);const go=v=>{if(v!==false)try{migrate(raw);}catch(e){fail(e);}return v;};
+ return out&&typeof out.then==='function'?out.then(go):go(out);};}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!e||!e.squadLeaderR373||!prefs.on)return base.apply(this,arguments);
  const name=e.name,ds=e.defScale;e.name=e.r373Name||name;if(Number.isFinite(ds))e.defScale=ds*SIZE;let out;
  try{out=base.apply(this,arguments);}finally{e.name=name;if(Number.isFinite(ds))e.defScale=ds;}
