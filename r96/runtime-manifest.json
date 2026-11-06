@@ -14883,6 +14883,21 @@
       "sha256": "750298e47da0414c3e6f87706399c0b8f12b0682a70108f949266095462cfa9f"
     },
     {
+      "path": "assets/r369/index.json",
+      "bytes": 1229,
+      "sha256": "8c54bbdae365938ebcd38b4f1b449a36c4eed800032c89d13ee4b4c4c6f76c10"
+    },
+    {
+      "path": "assets/r369/poison-city-poster.jpg",
+      "bytes": 97161,
+      "sha256": "fdad4fb6c17d04ae235a822ce1df2cb7fbed72f0c12a76502a7a060f572a84a3"
+    },
+    {
+      "path": "assets/r369/poison-city.mp4",
+      "bytes": 2776916,
+      "sha256": "57e8035a0d67f77c443f354a0343bc5d70d12a91f30929eaf6188bf86bc7420b"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22859,8 +22874,8 @@
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 13944,
-      "sha256": "a37ab1a4eb19610a421d0b2038e6f44035fdb5b9c2736d830c4e0d0580750fd5"
+      "bytes": 14070,
+      "sha256": "9125b1e0e3c1805ee9258fce0222364f65cee839b54e8015cf0cda12b24c6c73"
     },
     {
       "path": "bgm-pick-r353.js",
@@ -23774,8 +23789,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569860,
-      "sha256": "a2616f4b265e0a596737a89c0f88e5d43ec82706fc6bca3e620cbcb0d46fb222"
+      "bytes": 6569911,
+      "sha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c"
     },
     {
       "path": "intro-r140.js",
@@ -24046,6 +24061,11 @@
       "path": "play-r169.js",
       "bytes": 34013,
       "sha256": "a9eaeaa2d7c506cca545b680b6b348c7cafc03f38a73cc862dbccb9b0718d6f2"
+    },
+    {
+      "path": "poison-city-video-r369.js",
+      "bytes": 10129,
+      "sha256": "c0ac35982bf5a8d2506386dd08f5eb3ab958b3162f76fac6445a996fc1c8bad7"
     },
     {
       "path": "polish-r100-data.js",
@@ -24478,9 +24498,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4895,
-  "totalBytes": 941813171,
-  "webHTMLSha256": "a2616f4b265e0a596737a89c0f88e5d43ec82706fc6bca3e620cbcb0d46fb222",
+  "fileCount": 4899,
+  "totalBytes": 944698783,
+  "webHTMLSha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c",
   "largest": [
     {
       "path": "index.html",

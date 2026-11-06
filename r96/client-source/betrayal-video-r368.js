@@ -51,7 +51,7 @@ function css(){if(document.getElementById('r368Css'))return;const s=document.cre
  s.textContent='#r368v{position:fixed;inset:0;z-index:2147482000;background:#050304;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}'
  +'#r368v video{width:100%;max-height:100%;aspect-ratio:1280/548;object-fit:contain;background:#000}'
  +'#r368v .chap{position:absolute;left:max(16px,3vw);top:max(14px,3vh);color:#c9b49a;font:600 13px/1.4 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.18em;opacity:.82;text-shadow:0 1px 4px #000;pointer-events:none}'
- +'#r368v .cap{position:absolute;left:50%;top:min(calc(50% + min(50vh,21.40625vw) + 6px),calc(100% - 112px));transform:translateX(-50%);max-width:min(88vw,760px);padding:8px 18px;text-align:center;color:#f1e3cc;'
+ +'#r368v .cap{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;box-sizing:border-box;top:min(calc(50% + min(50vh,21.40625vw) + 6px),calc(100% - 112px));max-width:min(88vw,760px);padding:8px 18px;text-align:center;color:#f1e3cc;'
  +'font:500 clamp(16px,2.3vw,24px)/1.5 "Gowun Batang","Noto Serif KR",serif;letter-spacing:.04em;text-shadow:0 0 10px #000,0 2px 6px #000;background:linear-gradient(90deg,transparent,rgba(8,4,6,.62) 18%,rgba(8,4,6,.62) 82%,transparent);'
  +'border-top:1px solid rgba(160,40,48,.45);border-bottom:1px solid rgba(160,40,48,.45);opacity:0;transition:opacity .4s;pointer-events:none;word-break:keep-all}#r368v .cap.on{opacity:1}'
  +'#r368v .skip{position:absolute;right:max(16px,3vw);bottom:max(16px,3vh);padding:8px 16px;font:14px "Malgun Gothic",sans-serif;color:#efe6da;background:rgba(20,12,12,.66);border:1px solid #7b5a55;border-radius:6px;cursor:pointer}'
