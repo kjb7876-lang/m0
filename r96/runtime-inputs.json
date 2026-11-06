@@ -4097,6 +4097,7 @@
     "assets/r363/mobs/index.json",
     "mob-legacy-r363.js",
     "guide-fragment-r365.js",
+    "perf-r367.js",
     "slayer-r-tornado-r366.js",
     "assets/r366/index.json",
     "assets/r366/tornado-back.webp",
@@ -5175,5 +5176,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "70e2e95c75b74d2eeb3345fd9bf2937f3cb7f7994c6703fda2543494c1b963bd"
+  "runtimeManifestSHA256": "b7266ca775fc30a3a774cb6b142d4a451a54ddf3a1399068b790b505580bbd57"
 }
