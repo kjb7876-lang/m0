@@ -24019,8 +24019,8 @@
     },
     {
       "path": "perf-r367.js",
-      "bytes": 3345,
-      "sha256": "1dfc4d6e5531831ed9fcc33a4e72cb098f974241417cb39b6b56306ddea97403"
+      "bytes": 4835,
+      "sha256": "bed0d44e146047189b4131be2f874465095195e3057edfe7a40d0d4afb2caaa2"
     },
     {
       "path": "perf-r97.js",
@@ -24214,8 +24214,8 @@
     },
     {
       "path": "save-transition-r320.js",
-      "bytes": 1892,
-      "sha256": "346ed95aa3e1ccf440326292f9cdd707c9c91bd288499392db2ff68a7e904ac7"
+      "bytes": 2919,
+      "sha256": "28ad71d190491d6348f2410752dee8b43c42a6ebf60b5eae36c6df4045c75656"
     },
     {
       "path": "scene-props-r117.js",
@@ -24499,7 +24499,7 @@
     }
   ],
   "fileCount": 4899,
-  "totalBytes": 944702033,
+  "totalBytes": 944704550,
   "webHTMLSha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c",
   "largest": [
     {
