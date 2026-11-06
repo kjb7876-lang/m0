@@ -88,7 +88,9 @@ function migrate(raw){if(!prefs.on||raw?.squadsR373?.version>=1)return;let n=0;
   // 이미 ×1.6 인 값(복원이 건드리지 않은 칸)은 그대로 — 두 번 곱하지 않게 원래 값과 같은 칸만 옮긴다.
   if(same('maxHp')){e.maxHp*=MUL;if(Number.isFinite(e.difficultyBaseHpR63)&&e.difficultyBaseHpR63>0)e.difficultyBaseHpR63*=MUL;e.hp=e.maxHp*frac;hit=true;}
   if(same('damage')){e.damage*=MUL;hit=true;}if(hit){cur=r;rescale(e);n++;}}
- stats.migrated=(stats.migrated||0)+n;}
+ stats.migrated=(stats.migrated||0)+n;
+ // 복원 사슬이 이미 표식 달린 자동 저장을 했을 수 있으니 옮긴 수치를 다시 저장(Codex P2).
+ if(n&&typeof saveGame==='function')try{saveGame(false);}catch(e){fail(e);}}
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a);try{if(d&&typeof d==='object'&&prefs.on)d.squadsR373={version:1};}catch(e){fail(e);}return d;};}
 if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=function(raw,...a){const out=base.call(this,raw,...a);const go=v=>{if(v!==false)try{migrate(raw);}catch(e){fail(e);}return v;};
  return out&&typeof out.then==='function'?out.then(go):go(out);};}

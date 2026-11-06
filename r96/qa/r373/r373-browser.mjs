@@ -33,8 +33,8 @@ for(const z of ['dist00','dist03','ep1a10']){const t=Date.now();await p.evaluate
    const d=JSON.parse(JSON.stringify(serializeSave()));await restoreSave(JSON.parse(JSON.stringify(d)));await new Promise(r=>setTimeout(r,500));const a=ratio();
    const old=JSON.parse(JSON.stringify(d));delete old.squadsR373;const L=new Set(room.enemies.filter(e=>e.squadLeaderR373).map(e=>e.id));
    for(const rr of Object.values(old.rooms||{}))for(const row of rr.enemies||[])if(L.has(row.id)&&row.r61Scale){for(const k of ['maxHp','hp','damage','baseDamage'])if(Number.isFinite(row.r61Scale[k]))row.r61Scale[k]/=1.6;}
-   await restoreSave(old);await new Promise(r=>setTimeout(r,500));return{marker:!!d.squadsR373,a,b:ratio(),migrated:window.__STORYWORLD_MOB_SQUADS_R373__.inspect().stats.migrated};});
+   await restoreSave(old);await new Promise(r=>setTimeout(r,500));const b=ratio();const reload=JSON.parse(JSON.stringify(serializeSave()));await restoreSave(reload);await new Promise(r=>setTimeout(r,500));return{marker:!!d.squadsR373,a,b,c:ratio(),migrated:window.__STORYWORLD_MOB_SQUADS_R373__.inspect().stats.migrated};});
   check('저장 표식 있는 불러오기: 우두머리 ×1.6 그대로(두 번 곱하지 않음)',sv.marker&&sv.a.length>0&&sv.a.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02),sv);
-  check('R373 이전 저장 불러오기: 우두머리를 ×1.6 으로 옮김',sv.b.length>0&&sv.b.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02)&&sv.migrated>0,sv);}
+  check('R373 이전 저장 불러오기: 우두머리를 ×1.6 으로 옮김',sv.b.length>0&&[sv.b,sv.c].every(x=>x.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02))&&sv.migrated>0,sv);}
  await p.screenshot({path:`${OUT}/${z}.jpg`,quality:70});}
 check('페이지 오류 없음',!errs.length,errs);await b.close();fs.writeFileSync(`${OUT}/r373-browser.json`,JSON.stringify({fails,n,headless:true,gpu:false}));console.log(fails?`FAIL ${fails}`:`ALL ${n} PASS`);process.exit(fails?1:0);
