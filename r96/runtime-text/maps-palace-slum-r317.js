@@ -79,6 +79,7 @@ function finish(skipped=false){const a=active;if(!a)return;active=null;cancelAni
 function next(){if(!active)return;const t=performance.now();active.start=t-(active.scene+1)*SCENE_MS;update(t);}
 function bgmGain(){return active?.3:1;}
 function update(now){const a=active;if(!a)return;if((typeof room!=='undefined'&&room!==a.room)||!solo()){finish(true);return;}
+ if(a.held!=null)return; // R368: 영상이 덮는 동안 멈춤
  const elapsed=Math.max(0,now-a.start);if(elapsed>=TOTAL_MS){finish();return;}
  const k=Math.floor(elapsed/SCENE_MS),u=elapsed/SCENE_MS-k;a.scene=k;a.root.dataset.scene=String(k);
  a.caption.textContent=k<2?'':CAPTIONS[k<4?0:k===4?1:2];
@@ -112,5 +113,6 @@ if(typeof killEnemy==='function'){const b=killEnemy;killEnemy=function(e,...a){c
  if(trigger&&e.hp<=0&&e.deadRecorded&&r===(typeof room!=='undefined'?room:null))try{play(r);}catch(err){fail(err);finish(true);}return out;};}
 if(typeof tick==='function'){const b=tick;tick=function(...a){if(active){try{update(performance.now());}catch(e){fail(e);finish(true);}if(active)return;}return b.apply(this,a);};}
 window.__STORYWORLD_MAPS_PALACE_SLUM_R317__=Object.freeze({revision:REV,KEY,PATHS,CAPTIONS,WALL_TEXT,themeLayout,plan,apply,bgmGain,next,skip:()=>finish(true),update,
+ hold(on){const a=active;if(!a)return false;const t=performance.now();if(on){if(a.held==null)a.held=t;}else if(a.held!=null){a.start+=t-a.held;a.held=null;}return true;},
  inspect:()=>({revision:REV,temporary:true,seen,active:!!active,scene:active?.scene??null,stats:{...stats},lastError,GPUVerified:false,naturalBalrogPlacement:false})});
 })();

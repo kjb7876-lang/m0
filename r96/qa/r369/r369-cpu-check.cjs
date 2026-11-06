@@ -1,0 +1,33 @@
+// R369 환자와 중독의 도시(ep1a10) 서사 영상 — CPU 정적 검사.  node r96/qa/r369/r369-cpu-check.cjs  (브라우저: r369-browser.mjs)
+const fs=require('fs'),path=require('path'),assert=require('assert'),crypto=require('crypto');
+const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let n=0;const ok=(c,m)=>{assert(c,m);n++;console.log('PASS',m);};
+const F='poison-city-video-r369.js',src=fs.readFileSync(path.join(R,'client-source',F),'utf8');
+const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/(^|[^:'"])\/\/.*$/gm,'$1');
+for(const f of [F,'bgm-map-r308.js'])ok(fs.readFileSync(path.join(R,'client-source',f),'utf8')===fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),f+' runtime-text 사본 일치');
+const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),tag='"./'+F+'"';
+ok(html.split(tag).length===2&&html.indexOf('"./betrayal-video-r368.js"')<html.indexOf(tag)&&html.indexOf(tag)<html.indexOf('"./combat-r118.js"'),'index.html 태그 한 번(R368 뒤, combat-r118 앞)');
+const ver=fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8');
+ok(ver.includes("'"+F+"'")&&/startswith\('assets\/r369\/'\)/.test(ver)&&!/\.js''/.test(ver),'verify-r96-public.py 기대 목록·자산(쉼표 빠짐 없음)');
+ok(/node r96\/qa\/r369\/r369-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
+const man=JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')));
+const IDX=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r369/index.json'),'utf8'));
+ok([F,'assets/r369/index.json','assets/r369/poison-city.mp4','assets/r369/poison-city-poster.jpg','betrayal-video-r368.js','assets/r368/betrayal.mp4'].every(p=>man.includes(p)),'runtime-manifest 에 R369 오버레이·영상·포스터·index(R368 도 그대로)');
+for(const f of IDX.files){const b=fs.readFileSync(path.join(R,'runtime-text',f.path));ok(b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256,f.path+' 크기·sha256 일치');ok(f.applied===true&&f.use&&f.process,'자산표 처리·용도·적용 표기');}
+const mp4=fs.readFileSync(path.join(R,'runtime-text/assets/r369/poison-city.mp4'));
+ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=3000000&&mp4.indexOf('moov')<mp4.indexOf('mdat'),'mp4·3MB 이하·faststart('+mp4.length+')');
+ok(/delogo/.test(IDX.files[0].process)&&/환각성 약물 검출/.test(IDX.files[0].process),'가짜 HUD 글자 제거 처리 기록');
+ok(!fs.existsSync(path.join(R,'runtime-text/assets/r369',IDX.source.name)),'사용자 원본 영상은 저장소에 넣지 않음');
+const code=strip(src);
+ok(/SRC='assets\/r369\/poison-city\.mp4'/.test(code)&&/ZONE='ep1a10'/.test(code),'영상 경로·환자와 중독의 도시 지역');
+const canon=fs.readFileSync(path.join(R,'client-source','story-canon-r106-data.js'),'utf8');
+const cues=[...code.matchAll(/\[([\d.]+),([\d.]+),'([^']+)'\]/g)].map(m=>[+m[1],+m[2],m[3]]);
+ok(cues.length===3&&cues.every((c,i)=>c[0]<c[1]&&(i===0||cues[i-1][1]<=c[0]))&&cues[2][1]>=IDX.source.seconds,'자막 3줄 시간표 순서·끝까지');
+ok(cues.every(c=>canon.includes(c[2].replace(/…$/,''))),'자막은 정본 ep1a10 문장 그대로(…로 줄인 것 포함)');
+ok(!/환각|검출|위험:/.test(cues.map(c=>c[2]).join('')),'자막에 "환각성 약물 검출" 문구 없음');
+ok(/storyScene/.test(code)&&/DELAY_MS/.test(code)&&/prefs\.seen/.test(code),'입장 서사창이 닫힌 뒤, 처음 한 번만');
+ok(/r368v/.test(code)&&/r317Cinema/.test(code),'다른 장면(R317·R368)이 열려 있으면 기다림');
+ok(/STALL_MS/.test(code)&&/muted/.test(code)&&/Escape/.test(code),'멈춤 닫기·음소거 재시도·키 건너뛰기');
+ok(/__STORYWORLD_POISON_CITY_VIDEO_R369__\?\.bgmGain\?\.\(\)\?\?1/.test(fs.readFileSync(path.join(R,'client-source','bgm-map-r308.js'),'utf8')),'영상 중 BGM 0(bgm-map-r308 배수)');
+ok(!/\.hp\s*-=|damage\s*\(|attackPower|cooldown|ctx\.filter/.test(code)&&!/fetch\(/.test(code),'전투·그림·네트워크 손대지 않음');
+ok(/const audioLevel=/.test(code)&&/v\.muted=!!opt\.muted\|\|lv<=0/.test(code),'Codex P2: 게임 소리 설정(소리·음악·내레이션·음량)을 영상에 적용');
+console.log(JSON.stringify({ok:true,checks:n,method:'static'}));
