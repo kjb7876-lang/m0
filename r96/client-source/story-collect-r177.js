@@ -79,7 +79,7 @@ function paginate(text,limit){const paras=String(text||'').split(/\n{2,}/).map(t
  for(let p of paras){while(p.length>limit*1.25){let cut=p.lastIndexOf('다. ',limit);if(cut<limit*.4)cut=p.lastIndexOf('. ',limit);if(cut<limit*.4)cut=p.lastIndexOf(' ',limit);if(cut<1)cut=limit;else cut+=2;push();out.push([p.slice(0,cut).trim()]);p=p.slice(cut).trim();}
   if(n&&n+p.length>limit)push();cur.push(p);n+=p.length;}
  push();return out.length?out:[['']];}
-function show(doc,opt={}){if(!doc)return;if(!prefs.autoShow&&!opt.force){try{if(typeof toast==='function')toast((FORMS[doc.form]||'쪽지')+'을(를) 쪽지 모음에 넣었습니다 · 메뉴 → 쪽지 모음',2.2);}catch(_){}return;}Q.push(doc);next();}
+function show(doc,opt={}){if(!doc)return;try{if(!opt.force&&window.__STORYWORLD_GUIDE_FRAGMENT_R365__?.hold?.(doc))return;}catch(e){fail(e);}/* R365: 길잡이 중 창 끔 */if(!prefs.autoShow&&!opt.force){try{if(typeof toast==='function')toast((FORMS[doc.form]||'쪽지')+'을(를) 쪽지 모음에 넣었습니다 · 메뉴 → 쪽지 모음',2.2);}catch(_){}return;}Q.push(doc);next();}
 function close(){showing=null;if(el)el.hidden=true;next();}
 function turn(d){if(!showing)return;if(!prefs.pages)return close();const np=page+d;if(np>=pages.length)return close();if(np<0)return;page=np;paint();}
 function paint(){const d=showing;const head='<span class="h">'+esc(FORMS[d.form]||'쪽지')+' · '+esc(d.title)+(d.narr?' · '+esc(d.narr):'')+'</span>';
