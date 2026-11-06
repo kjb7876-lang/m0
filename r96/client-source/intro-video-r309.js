@@ -1,3 +1,4 @@
+// R376(사용자 2026-11-06 "맨처음영상에 합일 나오는 글자 지워주고"): 오프닝 영상 위에 띄우던 제목 글자 '합일(合一)'을 없앴다(SHOW_TITLE=false). 영상 파일·길이·건너뛰기는 그대로, 게임 제목 상수 TITLE 은 API 용으로 남긴다.
 // R372(사용자 2026-11-06 "책나오는 영상은 그대로 맨처음 나오게 하고 그다음에 나오는 실사풍 도망쳐영상은 뿌리나무보스 문이랑 상호작용할때"): 오프닝은 책 부분만(assets/r372/opening-book.mp4, 9.45초),
 //  제목은 웃는 악마 나무 펼침면(6.6초~) 위. 실사 부분은 root-gate-video-r372.js 가 dist00 보스 문에서 튼다. 아래 R327 의 19.5초 연결본은 남겨 두되 쓰지 않는다.
 // R327 교체(사용자 2026-11-05 "기존 오프닝영상 삭제하고 오프닝 이 둘 중 하나로 개선해서 대체 아니면 둘 다 적절한 때에"): 고서 책장 영상(앞) → 실사 타락 영상(뒤)을 0.5초 페이드로 이은 19.5초 opening-hapil.mp4, 제목은 마지막 번개 치는 나무 장면(17.6초~) 위. 아래 R309 설명의 7초 영상은 삭제됐다.
@@ -12,7 +13,7 @@
 //  · 자동 검사(navigator.webdriver)에서는 띄우지 않는다(?intro309=1 또는 play({force:true}) 로 강제). 설정 '오프닝 영상(새 게임)' / storyworld.r309.opening {on:false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_INTRO_VIDEO_R309__)return;
-const REV='R309-intro-video-1',KEY='storyworld.r309.opening',SRC='assets/r372/opening-book.mp4',POSTER='assets/r309/intro/poster-hapil.jpg',TITLE='합일(合一)',CUT=9.4,TITLE_AT=6.6,HOLD_MS=1000,STALL_MS=6000;
+const REV='R309-intro-video-2',SHOW_TITLE=false,KEY='storyworld.r309.opening',SRC='assets/r372/opening-book.mp4',POSTER='assets/r309/intro/poster-hapil.jpg',TITLE='합일(合一)',CUT=9.4,TITLE_AT=6.6,HOLD_MS=1000,STALL_MS=6000;
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,fallback:0};let lastError=null,open=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -48,7 +49,7 @@ function play(opt={}){if(open)return false;if(typeof document==='undefined')retu
  css();const root=document.createElement('div');root.id='r309v';root.setAttribute('role','dialog');root.setAttribute('aria-label','오프닝 영상');
  const video=document.createElement('video');video.src=url(SRC);video.poster=url(POSTER);video.playsInline=true;video.setAttribute('playsinline','');video.preload='auto';video.autoplay=true;
  if(opt.muted)video.muted=true;
- root.innerHTML='<div class="ttl">'+TITLE+'</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';root.insertBefore(video,root.firstChild);
+ root.innerHTML='<div class="ttl">'+(SHOW_TITLE?TITLE:'')+'</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';root.insertBefore(video,root.firstChild);
  document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
  const ttl=root.querySelector('.ttl'),fade=root.querySelector('.fade'),skip=root.querySelector('.skip');
  open={root,video,fade,ttl,audio:duck(),stall:0,hold:0,events:[],closed:false,ending:false,started:false,lastTime:0};const o=open;stats.plays++;
@@ -68,5 +69,5 @@ if(typeof newGame==='function'){const base=newGame;newGame=async function(...a){
 if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=function(...a){const d=base.apply(this,a),audio=open?.audio;if(audio?.owner&&audio.owner===settings&&settings.bgm===0&&d?.settings)d.settings={...d.settings,bgm:audio.was};return d;};}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r309On')){const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.id='r309On';c.checked=prefs.on!==false;c.onchange=()=>{prefs.on=c.checked;save();};l.appendChild(c);l.appendChild(document.createTextNode(' 오프닝 영상(새 게임)'));grid.appendChild(l);}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 function set(p){if(typeof p?.on==='boolean'){prefs.on=p.on;save();}return{on:prefs.on};}
-window.__STORYWORLD_INTRO_VIDEO_R309__=Object.freeze({revision:REV,src:SRC,title:TITLE,cut:CUT,play,skip:()=>{if(open&&!open.closed){close(open,'skip');return true;}return false;},set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},open:!!open,time:open?open.video.currentTime:null,muted:open?open.video.muted:null,lastError})});
+window.__STORYWORLD_INTRO_VIDEO_R309__=Object.freeze({revision:REV,src:SRC,title:TITLE,showTitle:SHOW_TITLE,cut:CUT,play,skip:()=>{if(open&&!open.closed){close(open,'skip');return true;}return false;},set,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},open:!!open,time:open?open.video.currentTime:null,muted:open?open.video.muted:null,lastError})});
 })();

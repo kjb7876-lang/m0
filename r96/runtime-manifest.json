@@ -23449,8 +23449,8 @@
     },
     {
       "path": "cinema-mode-r370.js",
-      "bytes": 20841,
-      "sha256": "80ff6c9ee6988ae00be4707f49360455611aab5840f197db58ab2698651584d6"
+      "bytes": 24012,
+      "sha256": "bf690133116ef2a22367ade26c6cf22b3dd3f8150e7cabe39d1470f4ee2d7e1b"
     },
     {
       "path": "cinema-r114.js",
@@ -23818,6 +23818,11 @@
       "sha256": "8886dd7af12392a532d3721d7f012e5ee1b24b90a2635650bfdb9e25ea2f9d6e"
     },
     {
+      "path": "hud-cinema-r376.js",
+      "bytes": 10800,
+      "sha256": "dbf0ce83f6f366ae83fa516242df9b338449c368f5f23212a9a7626bef9753f6"
+    },
+    {
       "path": "hud-menu-r339.js",
       "bytes": 7538,
       "sha256": "e117ce21aa3e30f3130af212ee82f6d103bf66392d4c337b78b3c8a0add053f6"
@@ -23854,8 +23859,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570091,
-      "sha256": "74adc94633fb4e209a964ef04deec48360ca51780542d45a1d814fd2ff0a2e46"
+      "bytes": 6570178,
+      "sha256": "84183c86add82255d911b5479472571fbbc9d0d7368adcd37276f0613401de70"
     },
     {
       "path": "intro-r140.js",
@@ -23864,13 +23869,13 @@
     },
     {
       "path": "intro-tree-r309.js",
-      "bytes": 23795,
-      "sha256": "65533b9cb5875d1ed588c87fccca781be15afd6790babcf29cf56b384b885ffa"
+      "bytes": 23947,
+      "sha256": "8a51f913ca0a005ab95d10026c71f8eb89351c4bd9911a3bbe189699c6a255a4"
     },
     {
       "path": "intro-video-r309.js",
-      "bytes": 10857,
-      "sha256": "d1667c86931993b2b6cce42955c8317c109a466e06c9e259edc724e6b640182b"
+      "bytes": 11203,
+      "sha256": "baf0ffabdb7cbbe99fcfdee2119c494224a2b9bd5a370572eb1318b3ec956daa"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -24196,6 +24201,11 @@
       "path": "reach-r225.js",
       "bytes": 7865,
       "sha256": "dbaa9a987f2cb916e0310aedc3770f2030ed9f3d58d6397ca999e012dae98e9b"
+    },
+    {
+      "path": "real-mode-r376.js",
+      "bytes": 10008,
+      "sha256": "9d610dabd860ebc64538418a13ff932ac6f8c708d632f8f4d76d119d9f730094"
     },
     {
       "path": "render-compat-r83.js",
@@ -24578,9 +24588,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4915,
-  "totalBytes": 950963187,
-  "webHTMLSha256": "74adc94633fb4e209a964ef04deec48360ca51780542d45a1d814fd2ff0a2e46",
+  "fileCount": 4917,
+  "totalBytes": 950987751,
+  "webHTMLSha256": "84183c86add82255d911b5479472571fbbc9d0d7368adcd37276f0613401de70",
   "largest": [
     {
       "path": "index.html",
