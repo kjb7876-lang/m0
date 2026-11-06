@@ -9,7 +9,7 @@ const idx=JSON.parse(RT('assets/r374/mobs/index.json'));ok(idx.mobs.length===7,'
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(m.actor.layer==='STORY'&&/^u20[35]-/.test(m.actor.nativeId),m.id+' STORY u203/u205 한정');
  ok(m.move.length>=4&&m.attack.length===4&&m.finalArt===false,m.id+' 칸·임시 표기');}
-ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').includes('__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)?null:sheetOf(e)'),'R248 이 R374 액터를 덮어 그리지 않음');
+ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').includes('s=sheetOf(e);if(s&&window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e))s=null;'),'R248 이 R374 액터를 덮어 그리지 않음');
 // 런타임 흉내
 const frames=[];const S0={frameFor:(e,f)=>({path:'base',e})};
 const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',player:{x:0,y:0},
