@@ -43,7 +43,7 @@ const SENTINEL={type:'r106-d2s',x:0,y:0,age:0,life:Infinity,r106Sentinel:true};
 function add(e){if(list.length>=MAX)list.shift();e.id='r106d2s:'+(++serial);e.t=0;list.push(e);stats.spawned++;return e;}
 
 // ---- launching -----------------------------------------------------------------------------------
-function launch(hero,slot,angle,target){if(!on()||!live())return;if(window.__STORYWORLD_HWANDO_W_CROSS_R348__?.owns?.(hero,slot))return;/* R348: 환도 W 의 회전 초승달 칼날(hammer) 대신 십자 베기·분신 */const F=R102()?.PALETTE?.[hero];const kind=SLOT_KIND[hero]?.[slot]||ARCH[hero];if(!F||!kind)return;
+function launch(hero,slot,angle,target){if(!on()||!live())return;if(window.__STORYWORLD_HWANDO_W_CROSS_R348__?.owns?.(hero,slot))return;/* R348: 환도 W 의 회전 초승달 칼날(hammer) 대신 십자 베기·분신 */if(window.__STORYWORLD_SLAYER_R_TORNADO_R366__?.owns?.(hero,slot))return;/* R366: 슬레이어 R 의 '.)' 칼날·빛점(hammer) 대신 피의 회오리 */const F=R102()?.PALETTE?.[hero];const kind=SLOT_KIND[hero]?.[slot]||ARCH[hero];if(!F||!kind)return;
  const t=clamp(R102()?.tier?.(player)??0,0,7),lo=lowFx(),k=lo?.5:1,p={x:player.x,y:player.y},a=Number.isFinite(angle)?angle:0,seed=Math.random()*100;
  let tx=target?.x,ty=target?.y;if(!Number.isFinite(tx)||!Number.isFinite(ty)){tx=p.x+Math.cos(a)*4;ty=p.y+Math.sin(a)*4;}
  const base={kind,hero,F,tier:t,slot,x:p.x,y:p.y,tx,ty,a:Math.atan2(ty-p.y,tx-p.x),seed,k};

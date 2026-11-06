@@ -14853,6 +14853,21 @@
       "sha256": "e71e1fbef314efbe7f9f63ef9b6ad90f16e42f5ca56de61464ec2b8a5262098f"
     },
     {
+      "path": "assets/r366/index.json",
+      "bytes": 801,
+      "sha256": "f50c04c59cf45d2ead4f7c9581b97894d5a2a30a7a2185ce195a3f312aecc143"
+    },
+    {
+      "path": "assets/r366/tornado-back.webp",
+      "bytes": 212562,
+      "sha256": "a7665591bc5f7a4fb0601232f642da6504f7e80e5e2b628ea75046621fed632c"
+    },
+    {
+      "path": "assets/r366/tornado-front.webp",
+      "bytes": 188134,
+      "sha256": "d5f6b8e30b788f9e3a2e434e7fcc72c1150b873d00e3a36c7a1442c3aea9eee7"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23559,8 +23574,8 @@
     },
     {
       "path": "fx-d2s-r106.js",
-      "bytes": 25448,
-      "sha256": "3cefe6bb54f3a1534421759d1137686aa4c8dbd1c3a02e3687ba1ce38cec9eaf"
+      "bytes": 25603,
+      "sha256": "60793c564d54b8767981ac83cc21e24eda01948cb4cbc3f87745a016184573ac"
     },
     {
       "path": "fx-eden-data-r108.js",
@@ -23739,8 +23754,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569762,
-      "sha256": "d22321731c3e0df007ccce97cded8b5e09527ea2071891db0ad464c2baa695ed"
+      "bytes": 6569812,
+      "sha256": "2da1fe716c34aced09bbf5dca9792bcad9aaf60581182a002beb2dad9ffebff0"
     },
     {
       "path": "intro-r140.js",
@@ -24184,8 +24199,13 @@
     },
     {
       "path": "skills-r209.js",
-      "bytes": 8961,
-      "sha256": "00406024db5545f1c3642128b3d9330a1d97772519536ebc02d6348004670da5"
+      "bytes": 9142,
+      "sha256": "44ac4b3795df70658779a0ac54aedeb5ae92d4e8175ed6d3ab3d7f3a5d9ce4ac"
+    },
+    {
+      "path": "slayer-r-tornado-r366.js",
+      "bytes": 7863,
+      "sha256": "92d04996b394a5b58fde9a37c97dc9e9427ead892c7b0fb2db92b7946e50df2c"
     },
     {
       "path": "slayer-r351.js",
@@ -24438,9 +24458,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4887,
-  "totalBytes": 938545705,
-  "webHTMLSha256": "d22321731c3e0df007ccce97cded8b5e09527ea2071891db0ad464c2baa695ed",
+  "fileCount": 4891,
+  "totalBytes": 938955451,
+  "webHTMLSha256": "2da1fe716c34aced09bbf5dca9792bcad9aaf60581182a002beb2dad9ffebff0",
   "largest": [
     {
       "path": "index.html",
