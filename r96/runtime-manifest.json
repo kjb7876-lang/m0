@@ -23588,6 +23588,11 @@
       "sha256": "9f702f785df0f6bcb120c2a02bf64f39f3b7e00bd3727e10d3fa785c4d13c646"
     },
     {
+      "path": "guide-fragment-r365.js",
+      "bytes": 3243,
+      "sha256": "18c1a8daf29a7c67562726d814f4f6451d01ed442e0577ab19ceb743964684c7"
+    },
+    {
       "path": "guide-loot-r261.js",
       "bytes": 6220,
       "sha256": "2cc9f2bcd89da90ea22b7e8d4be5401328e325a8927a9eb51933597ec67c77ca"
@@ -23734,8 +23739,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569676,
-      "sha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4"
+      "bytes": 6569724,
+      "sha256": "5d9704a6056c0911b4df769cabfaa47ab6b56978d195fb2a68ce82d0a6c78a4a"
     },
     {
       "path": "intro-r140.js",
@@ -24204,8 +24209,8 @@
     },
     {
       "path": "story-collect-r177.js",
-      "bytes": 21536,
-      "sha256": "5f35282f43c495de008ac14ef1f1dc619abf604a5218fb3bf66f2397bc49bbd8"
+      "bytes": 21669,
+      "sha256": "d22480e3507d3d26a88ac998b489bfa3703e944ab6676f6bdc7b4f9a1a468c5e"
     },
     {
       "path": "story-fragments-r255.js",
@@ -24428,9 +24433,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4885,
-  "totalBytes": 938535650,
-  "webHTMLSha256": "20922858cef71465a042173fb42bd8fcb90f061453481fb0668095ea1e6f81e4",
+  "fileCount": 4886,
+  "totalBytes": 938539074,
+  "webHTMLSha256": "5d9704a6056c0911b4df769cabfaa47ab6b56978d195fb2a68ce82d0a6c78a4a",
   "largest": [
     {
       "path": "index.html",
