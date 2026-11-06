@@ -4126,6 +4126,13 @@
     "assets/r374/mobs/u205-e2-new.webp",
     "assets/r374/mobs/u205-e3-new.webp",
     "assets/r374/mobs/u205-mid-new.webp",
+    "mob-dots-r375.js",
+    "assets/r375/mobs/index.json",
+    "assets/r375/mobs/kair-44.webp",
+    "assets/r375/mobs/kair-45.webp",
+    "assets/r375/mobs/kair-48.webp",
+    "assets/r375/mobs/kair03-residue.webp",
+    "assets/r375/mobs/plague-hound.webp",
     "real-mode-r376.js",
     "hud-cinema-r376.js"
   ],
@@ -5202,5 +5209,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "0fe37a095695b9d0451c29b724a556563edc934848f5e887b4272c78970c9cf5"
+  "runtimeManifestSHA256": "e49a0a9a2dacb33a2ab3dc036f134d9e0d20136cc71b4922b695a7d653b9a726"
 }

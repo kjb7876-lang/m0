@@ -6,7 +6,7 @@ const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detai
 const SRC=C('real-mode-r376.js'),CIN=C('cinema-mode-r370.js'),html=RT('index.html');
 // ── 빌드 연결 ──
 ok('runtime copies match client-source',RT('real-mode-r376.js')===SRC&&RT('cinema-mode-r370.js')===CIN&&RT('intro-video-r309.js')===C('intro-video-r309.js')&&RT('intro-tree-r309.js')===C('intro-tree-r309.js'));
-ok('index.html loads real-mode-r376 once, right after mob-dots-r374 (after cinema-mode-r370 and guide-difficulty-r189)',html.split('"./real-mode-r376.js"').length===2&&/mob-dots-r374\.js"><\/script><script src="\.\/real-mode-r376\.js"><\/script>/.test(html)&&html.indexOf('real-mode-r376.js')>html.indexOf('cinema-mode-r370.js')&&html.indexOf('real-mode-r376.js')>html.indexOf('guide-difficulty-r189.js'));
+ok('index.html loads real-mode-r376 once, right after the last Dots mob overlay (r374/r375) (after cinema-mode-r370 and guide-difficulty-r189)',html.split('"./real-mode-r376.js"').length===2&&/mob-dots-r37[45]\.js"><\/script><script src="\.\/real-mode-r376\.js"><\/script>/.test(html)&&html.indexOf('real-mode-r376.js')>html.indexOf('cinema-mode-r370.js')&&html.indexOf('real-mode-r376.js')>html.indexOf('guide-difficulty-r189.js'));
 ok('public verify list (with comma), runtime inputs, Pages CPU step',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'real-mode-r376.js',")&&JSON.parse(RT('../runtime-inputs.json')).textPaths.includes('real-mode-r376.js')&&/node r96\/qa\/r376\/r376-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 ok('no eval / new Function / ctx.filter blur',!/\beval\s*\(|new Function/.test(SRC)&&!/filter\s*=\s*['"][^'"]*(drop-shadow|blur)/.test(SRC));
 // ── 오프닝 제목 글자 ──
