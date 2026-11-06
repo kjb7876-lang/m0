@@ -14898,6 +14898,26 @@
       "sha256": "57e8035a0d67f77c443f354a0343bc5d70d12a91f30929eaf6188bf86bc7420b"
     },
     {
+      "path": "assets/r372/index.json",
+      "bytes": 1745,
+      "sha256": "0b70b96e61e051dd598a0618330ad5660c97c3f35d161138c744fa7ea564049a"
+    },
+    {
+      "path": "assets/r372/opening-book.mp4",
+      "bytes": 1957517,
+      "sha256": "db0aa84a3ae6b537151d5d8107a46b96da9e76a6113498b50edc8cc0e977a552"
+    },
+    {
+      "path": "assets/r372/root-gate-poster.jpg",
+      "bytes": 93767,
+      "sha256": "6f4052820b34faa8af915f8ce6a520679dd62d526f3d428da53c26f064564075"
+    },
+    {
+      "path": "assets/r372/root-gate.mp4",
+      "bytes": 2855170,
+      "sha256": "60241585b1c8e09d91b15d01f559e372eba40c1b08bc948675032051d137ffd4"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22874,8 +22894,8 @@
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 14070,
-      "sha256": "9125b1e0e3c1805ee9258fce0222364f65cee839b54e8015cf0cda12b24c6c73"
+      "bytes": 14068,
+      "sha256": "ae5e7bfb78c3bd36765ff66575b4e8b97e6938d7ab53e2fbe5fcb446dbe8b01f"
     },
     {
       "path": "bgm-pick-r353.js",
@@ -23789,8 +23809,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569911,
-      "sha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c"
+      "bytes": 6569960,
+      "sha256": "6d56821b21959fa5e4d39c069bb144fcedc8154cd9b5456d22193a08dc5a47f7"
     },
     {
       "path": "intro-r140.js",
@@ -23804,8 +23824,8 @@
     },
     {
       "path": "intro-video-r309.js",
-      "bytes": 10401,
-      "sha256": "a0489f77165c68af00a96d77a0e63de901cda9b99bb8b6fe65acbeb1b248d620"
+      "bytes": 10857,
+      "sha256": "d1667c86931993b2b6cce42955c8317c109a466e06c9e259edc724e6b640182b"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -24136,6 +24156,11 @@
       "path": "roof-height-r267.js",
       "bytes": 2703,
       "sha256": "f4a6dadda1b309c164774f19127f70d150bb364377598d4fdee8a678021123cc"
+    },
+    {
+      "path": "root-gate-video-r372.js",
+      "bytes": 12664,
+      "sha256": "73de6689ac3c9662f84e43b9a36e760b520af560ac2f2edcf4f623cfdf943e05"
     },
     {
       "path": "samong-doll-r193.js",
@@ -24498,9 +24523,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4899,
-  "totalBytes": 944704550,
-  "webHTMLSha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c",
+  "fileCount": 4904,
+  "totalBytes": 949625916,
+  "webHTMLSha256": "6d56821b21959fa5e4d39c069bb144fcedc8154cd9b5456d22193a08dc5a47f7",
   "largest": [
     {
       "path": "index.html",

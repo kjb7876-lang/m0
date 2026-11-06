@@ -1,0 +1,39 @@
+{
+ "revision": "R372",
+ "note": "사용자 2026-11-06 지시: 책 영상은 오프닝으로 그대로, 실사풍 영상은 뿌리나무 보스(dist00 뿌리의 문지기) 문 상호작용 때 보스 입장 영상으로. 원래 두 업로드 원본은 저장소에 없어 R327 연결본에서 잘라 냈다(연결본은 지우지 않음).",
+ "source": {
+  "path": "assets/r309/intro/opening-hapil.mp4",
+  "sha256": "6854857dc1efa6ed0c9ab6de83a20dadf6a2f84b7d34a584bef6d17decbfd522",
+  "bytes": 5325543,
+  "originals": [
+   "gemini_generated_video_34607f50.mp4 (책, sha256 32c4f7b3…)",
+   "gemini_generated_video_c41bce7d.mp4 (실사, sha256 5b4dd8fd…)"
+  ]
+ },
+ "files": [
+  {
+   "path": "assets/r372/opening-book.mp4",
+   "bytes": 1957517,
+   "sha256": "db0aa84a3ae6b537151d5d8107a46b96da9e76a6113498b50edc8cc0e977a552",
+   "process": "연결본 0~9.45초(0.5초 크로스페이드 앞에서 자름), 끝 0.8초 소리 페이드, libx264 crf23 high@4.0, aac 96k, faststart",
+   "use": "새 게임 오프닝(intro-video-r309.js), 제목 6.6초~",
+   "applied": true
+  },
+  {
+   "path": "assets/r372/root-gate.mp4",
+   "bytes": 2855170,
+   "sha256": "60241585b1c8e09d91b15d01f559e372eba40c1b08bc948675032051d137ffd4",
+   "process": "연결본 10.04초~끝(크로스페이드 뒤 실사만), 0.35초 페이드 인, libx264 crf26, aac 96k, faststart",
+   "use": "dist00 보스 문 상호작용 때 보스 입장 영상(root-gate-video-r372.js)",
+   "applied": true
+  },
+  {
+   "path": "assets/r372/root-gate-poster.jpg",
+   "bytes": 93767,
+   "sha256": "6f4052820b34faa8af915f8ce6a520679dd62d526f3d428da53c26f064564075",
+   "process": "root-gate.mp4 0.6초 프레임",
+   "use": "영상 첫 프레임 전 포스터",
+   "applied": true
+  }
+ ]
+}
