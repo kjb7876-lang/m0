@@ -27,4 +27,8 @@ S0.frameFor=(e,f)=>({path:'assets/generated-v31224/actors-normalized/543a490d2cf
 S0.frameFor=(e,f)=>({path:'assets/generated-v31224/actors-normalized/12ca1a97fb0a_controller_rain.webp'});ok(S.frameFor(boss,null)?.r374Mob===undefined,'보스 비 상태 → 원래 그림');
 S0.frameFor=(e,f)=>({path:'assets/generated-v31224/actors-normalized/c4c64ee058cc_controller_attack.webp'});ok(S.frameFor({...boss,attack:{elapsed:.1}},null)?.r374Mob==='u203-boss-mech','보스 일반공격 → 새 그림');
 ok(S.frameFor({...boss,hitTimer:.2},null)?.r374Mob===undefined,'보스 경직 → 원래 그림');
+S0.frameFor=(e,f)=>({path:'base'});const at=mk('u205-e2','관리자 추적견',{x:5,y:0,attack:{elapsed:.1,angle:0}});ctx.player={x:0,y:0};
+ok(D.faceLeft(at)===false&&S.frameFor(at,null).flip===false,'공격 중: 정해진 공격 방향(오른쪽)을 본다 — 영웅이 왼쪽이어도');
+ok(D.faceLeft({...at,attack:null})===true,'공격 아닐 때: 영웅 쪽(왼쪽)');
+ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').includes('__STORYWORLD_MOB_DOTS_R374__?.assign?.(e);if(d?.path){out.push(d.path);return out;}'),'R260 미리 읽기가 R374 시트를 기다림');
 console.log(`R374 CPU ${n-bad}/${n}`);if(bad)process.exit(1);
