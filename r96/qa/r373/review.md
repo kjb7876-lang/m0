@@ -14,7 +14,7 @@
 
 평균 7.80 (> 7.77, 임시 — 헤드리스 화면만 봄. GPU·실기기·자연 플레이 밸런스는 미검증)
 
-검사: r373 CPU 22, 브라우저 19(dist00·dist03·ep1a10, 모든 분대 6마리), 순서 검사 r176·r266·r287·r292·r302.
+검사: r373 CPU 24, 브라우저 25(dist00·dist03·ep1a10, 모든 분대 6마리, 난이도 재적용 뒤 ×1.6·복제 수치 동일), 순서 검사 r176·r266·r287·r292·r302.
 
 비교 화면(screens/): dist03-pc-before/after.jpg(1280×720), dist03-mobile-before/after.jpg(390×844). before = `storyworld.r373.squads {"on":false}`.
 

@@ -32,13 +32,16 @@ function spot(r,c,i,used,rad){for(let ring=0;ring<10;ring++){const R=ring===0?.9
 function keepKey(e,kind){try{if(e.r248Key)return;const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D?.byName)return;
  const dream=!!(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM'));const k=dream&&D.byName['사몽:'+kind]?'사몽:'+kind:(D.byName[kind]?kind:null);if(k)e.r248Key=k;}catch(err){fail(err);}}
 function lead(e,kind){if(e.squadLeaderR373)return;keepKey(e,kind);e.squadLeaderR373=true;e.r373Name=e.name;e.name=kind+SUFFIX;e.r373Base={hp:e.hp,maxHp:e.maxHp,damage:e.damage};
- for(const k of ['hp','maxHp','damage'])if(Number.isFinite(e[k])&&e[k]>0)e[k]*=MUL;stats.leaders++;}
+ for(const k of ['hp','maxHp','damage','difficultyBaseHpR63'])if(Number.isFinite(e[k])&&e[k]>0)e[k]*=MUL;
+ // R63 난이도 기준 체력도 같이 올리고(다시 적용해도 ×1.6 유지), R61 정규화에 지금 수치를 기준으로 등록(R81 챔피언과 같은 방식, Codex P2).
+ rescale(e);stats.leaders++;}
+const rescale=e=>{try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,cur,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}};let cur=null;
 function clone(src,j){const c={...src};c.id=String(src.id)+':r373c'+j;c.r373Clone=true;c.name=src.name;c.hp=c.maxHp;c.nav=[];c.attack=null;c.aim=null;c.state='idle';c.stuck=0;c.deadRecorded=false;c.deadAt=null;
  c.flash=0;c.tell=0;c.rangedWindup=0;c.storyPreparedCast150=null;c.personaPreparedCast150=null;c.personaPendingShots150={};
- for(const k of Object.keys(c))if(/^rc1\d\d|^r208|^r363Seen|Cache/.test(k))delete c[k];return c;}
+ for(const k of Object.keys(c))if(/^rc1\d\d|^r208|^r363Seen|Cache/.test(k))delete c[k];rescale(c);return c;}
 // 1단계(makeRoom, 싸다): 종류별 분대·분대장·수치·이름만 정한다. 엔진이 모든 지역을 미리 만드는 자기 검사·저장 복원에서도 같은 결과가 나오게 결정적으로.
 // EGO 재방문 빌드(R81 __STORYWORLD_R81_EGO_BUILD__)는 V4 원래 배치를 그대로 쓰는 범위라 분대를 만들지 않는다(legacy-scope 계약).
-function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo()||window.__STORYWORLD_R81_EGO_BUILD__)return r;r.squadsR373=true;
+function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo()||window.__STORYWORLD_R81_EGO_BUILD__)return r;r.squadsR373=true;cur=r;
  try{const by=new Map();for(const e of r.enemies)if(field(e)){const k=species(e.name);if(!k)continue;if(!by.has(k))by.set(k,[]);by.get(k).push(e);}
   let any=false;const taken=[];
   for(const [kind,rows0] of [...by.entries()].sort((a,b)=>a[0]<b[0]?-1:1)){const rows=rows0.slice().sort((a,b)=>String(a.id)<String(b.id)?-1:1);if(rows.length<MIN)continue;
