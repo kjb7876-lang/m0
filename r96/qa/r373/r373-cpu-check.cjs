@@ -10,7 +10,7 @@ ok(/node r96\/qa\/r373\/r373-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT
 const vp=fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8');ok(vp.includes("'mob-squads-r373.js',")&&!/\.js''/.test(vp),'공개 확인 목록(쉼표)');
 ok(JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')).textPaths.includes('mob-squads-r373.js'),'런타임 입력 목록');
 function fake(rows,opt={}){const ctx={console,Math,JSON,Number,String,Map,Set,Array,Object,window:{},localStorage:{getItem:()=>opt.prefs||null,setItem(){}},
- blocked:(x,y)=>opt.wall?x>opt.wall:false,makeRoom:()=>({id:'z',enemies:rows.map(r=>({...r}))}),drawEnemy(e){ctx.drawn.push({name:e.name,ds:e.defScale});},drawn:[],tick(){},room:null,loading:false};
+ blocked:(x,y)=>opt.wall?x>opt.wall:false,makeRoom:()=>({id:'z',layer:opt.roomLayer||'STORY',enemies:rows.map(r=>({...r}))}),layer:opt.layer||'STORY',__STORYWORLD_MOB_UNIQUE_R248_DATA__:opt.r248,drawEnemy(e){ctx.drawn.push({name:e.name,ds:e.defScale});},drawn:[],tick(){},room:null,loading:false};
  ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return ctx;}
 const mob=(i,name,x,y,extra={})=>({id:'m'+String(i).padStart(2,'0'),name,x,y,hp:100,maxHp:100,damage:10,spawnState:'active',defScale:1,explorationGroup:'z:g',radius:.3,nativeId:'n:'+name.replace(/ \d+$/,''),...extra});
 const rows=[];for(let i=0;i<9;i++)rows.push(mob(i,'뿌리 추적자 '+(i%3+1),5+i*4,5+(i%2)*20));for(let i=0;i<4;i++)rows.push(mob(20+i,'잿빛 사도',40+i*3,40));
@@ -33,6 +33,7 @@ rows.push(mob(30,'외톨이 몹',10,40),mob(31,'외톨이 몹',12,40));rows.push
  const again=c.makeRoom('z');c.room=again;c.tick();ok(JSON.stringify(again.enemies.map(e=>[e.id,e.x,e.y,e.name]))===JSON.stringify(r.enemies.map(e=>[e.id,e.x,e.y,e.name])),'같은 입력이면 같은 분대·자리(불러오기 일관)');
  const third=c.makeRoom('z');const m=third.enemies.find(e=>e.squadR373&&!e.squadLeaderR373);m.x+=3;const mx=m.x;c.room=third;c.tick();ok(m.x===mx,'저장에서 다른 자리로 불러온 몹은 옮기지 않음');}
 {const c=fake(rows,{wall:30}),r=c.makeRoom('z');ok(r.enemies.filter(e=>e.squadR373&&e.x<=30).every(e=>e.x<=30),'막힌 칸으로는 옮기지 않음');}
+{const c=fake(rows,{layer:'STORY',roomLayer:'DREAM',r248:{byName:{'잿빛 사도':1,'사몽:잿빛 사도':1}}}),r=c.makeRoom('z');const l=r.enemies.find(e=>e.squadLeaderR373&&e.name.startsWith('잿빛 사도'));ok(l&&l.r248Key==='사몽:잿빛 사도','DREAM 방은 지금 층이 STORY 여도 사몽 그림 열쇠',l&&l.r248Key);}
 {const c=fake(rows,{prefs:'{"on":false}'}),r=c.makeRoom('z');ok(!r.enemies.some(e=>e.squadR373),'끄기 설정');}
 {const c=fake(rows);c.__STORYWORLD_R81_EGO_BUILD__=true;const r=c.makeRoom('z');ok(!r.enemies.some(e=>e.squadR373||e.r373Clone),'EGO 재방문 빌드는 V4 배치 그대로(legacy-scope)');}
 {const c=fake(rows),r=c.makeRoom('z');const L=r.enemies.filter(e=>e.squadLeaderR373);ok(L.every(e=>e.r373Base&&Math.abs(e.maxHp-e.r373Base.maxHp*1.6)<1e-9&&Math.abs(e.damage-e.r373Base.damage*1.6)<1e-9),'우두머리 원래 수치(r373Base) 기록 — 고정 계약 검사가 ×1.6 을 정확히 확인');}

@@ -30,7 +30,8 @@ function spot(r,c,i,used,rad){for(let ring=0;ring<10;ring++){const R=ring===0?.9
  if(free(r,x,y,rad)&&used.every(q=>Math.hypot(q.x-x,q.y-y)>.82))return{x,y};}}return null;}
 // R248 그림 표는 이름(끝 번호 뗀 것)으로 찾는다 — 그리기 밖(tickFx 접촉 효과 등)에서도 찾게 원래 종류 열쇠(r248Key)를 고정해 둔다(Codex P2).
 function keepKey(e,kind){try{if(e.r248Key)return;const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D?.byName)return;
- const dream=!!(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM'));const k=dream&&D.byName['사몽:'+kind]?'사몽:'+kind:(D.byName[kind]?kind:null);if(k)e.r248Key=k;}catch(err){fail(err);}}
+ // 방의 층(r.layer)을 본다 — 저장 불러오기는 STORY·DREAM 방을 지금 층과 상관없이 만든다(Codex P2).
+ const L0=cur?.layer||(typeof layer!=='undefined'?layer:null),dream=!!(e.samongR103||L0==='DREAM');const k=dream&&D.byName['사몽:'+kind]?'사몽:'+kind:(D.byName[kind]?kind:null);if(k)e.r248Key=k;}catch(err){fail(err);}}
 function lead(e,kind){if(e.squadLeaderR373)return;keepKey(e,kind);e.squadLeaderR373=true;e.r373Name=e.name;e.name=kind+SUFFIX;e.r373Base={hp:e.hp,maxHp:e.maxHp,damage:e.damage};
  for(const k of ['hp','maxHp','damage','difficultyBaseHpR63'])if(Number.isFinite(e[k])&&e[k]>0)e[k]*=MUL;
  // R63 난이도 기준 체력도 같이 올리고(다시 적용해도 ×1.6 유지), R61 정규화에 지금 수치를 기준으로 등록(R81 챔피언과 같은 방식, Codex P2).
