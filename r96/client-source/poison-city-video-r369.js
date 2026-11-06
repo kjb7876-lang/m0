@@ -27,6 +27,9 @@ const eligible=r=>!!(r&&r.id===ZONE&&r.layer==='STORY'&&!r.samongR103&&!r.samong
 const busy=()=>{try{return (typeof storyScene!=='undefined'&&!!storyScene)||(typeof loading!=='undefined'&&!!loading)||(typeof started!=='undefined'&&!started)
  ||!!document.getElementById('r317Cinema')||!!document.getElementById('r368v')||!!window.__STORYWORLD_BETRAYAL_VIDEO_R368__?.inspect?.().open;}catch(_){return false;}};
 
+// 게임 소리 설정을 따른다(소리·음악·내레이션이 모두 꺼졌거나 음량 0이면 음소거, 아니면 켜진 것 중 가장 큰 음량).
+const audioLevel=()=>{try{const s=typeof settings!=='undefined'?settings:null;if(!s)return 1;const c=x=>Math.max(0,Math.min(1,Number(x)||0));
+ return Math.max(s.sound?c(s.volume):0,s.music?c(s.bgm??s.volume):0,s.narration?c(s.voice??s.volume):0);}catch(_){return 1;}};
 function preload(){if(pre||!prefs.on||typeof document==='undefined')return pre;try{const v=document.createElement('video');v.preload='auto';v.playsInline=true;v.setAttribute('playsinline','');v.src=url(SRC);v.load?.();pre=v;stats.preloads++;}catch(e){fail(e);}return pre;}
 if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=async function(id,...a){const out=await base.call(this,id,...a);
  try{const r=here();if(prefs.on&&!prefs.seen&&eligible(r)){preload();pending={room:r,at:now(),story:false};}else pending=null;}catch(e){fail(e);}return out;};}
@@ -58,7 +61,7 @@ function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!opt.force&&(!prefs.on||!eligible(r)))return false;pending=null;
  css();const v=pre||preload()||document.createElement('video');pre=null;if(!v.src)v.src=url(SRC);
- v.poster=url(POSTER);v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';if(opt.muted)v.muted=true;try{v.currentTime=Number(opt.at)||0;}catch(_){}
+ v.poster=url(POSTER);v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';{const lv=audioLevel();v.volume=Math.max(0,Math.min(1,lv));v.muted=!!opt.muted||lv<=0;}try{v.currentTime=Number(opt.at)||0;}catch(_){}
  const root=document.createElement('div');root.id='r369v';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','환자와 중독의 도시 기억');root.tabIndex=-1;
  const title=(typeof regionById!=='undefined'&&regionById?.[ZONE]?.title)||'환자와 중독의 도시';
  root.innerHTML='<div class="chap"></div><div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';

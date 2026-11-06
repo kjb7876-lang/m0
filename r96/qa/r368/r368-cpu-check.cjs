@@ -38,4 +38,6 @@ ok(!/fetch\(\s*['"]https?:/.test(code),'외부 주소 요청 없음');
 const r309=strip(fs.readFileSync(path.join(R,'client-source','intro-video-r309.js'),'utf8'));
 ok(/__STORYWORLD_CINEMA_GUARDS__\.push\(key\)|__STORYWORLD_CINEMA_GUARDS__\|\|\[\]\)\.push\(key\)/.test(code)&&/function key\(e\)\{if\(!open\)\{guard\(e\);return;\}/.test(r309)&&html.indexOf('"./intro-video-r309.js"')<html.indexOf('"./michaela-r247.js"'),'Codex P2: 키 막기를 먼저 실린 R309 capture 처리기에 맡김(michaela-r247 보다 앞)');
 ok(/style\.visibility='hidden'/.test(code)&&/restoredR317\+\+/.test(code)&&/on\('playing',\(\)=>\{cue\(o\);if\(!prefs\.seen\)/.test(code),'Codex P2: R317 은 숨겨 두고 영상 실패 시 다시 보임, seen 은 실제 재생 뒤');
+ok(/const audioLevel=/.test(code)&&/v\.muted=!!opt\.muted\|\|lv<=0/.test(code),'Codex P2: 게임 소리 설정(소리·음악·내레이션·음량)을 영상에 적용');
+ok(/hold\?\.\(true\)/.test(code)&&/hold\?\.\(false\)/.test(code)&&/if\(a\.held!=null\)return;/.test(fs.readFileSync(path.join(R,'client-source','maps-palace-slum-r317.js'),'utf8')),'Codex P2: 숨긴 R317 시간 멈춤(hold)·실패 시 재개');
 console.log(JSON.stringify({ok:true,checks:n,method:'static'}));

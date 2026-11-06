@@ -29,4 +29,5 @@ ok(/r368v/.test(code)&&/r317Cinema/.test(code),'다른 장면(R317·R368)이 열
 ok(/STALL_MS/.test(code)&&/muted/.test(code)&&/Escape/.test(code),'멈춤 닫기·음소거 재시도·키 건너뛰기');
 ok(/__STORYWORLD_POISON_CITY_VIDEO_R369__\?\.bgmGain\?\.\(\)\?\?1/.test(fs.readFileSync(path.join(R,'client-source','bgm-map-r308.js'),'utf8')),'영상 중 BGM 0(bgm-map-r308 배수)');
 ok(!/\.hp\s*-=|damage\s*\(|attackPower|cooldown|ctx\.filter/.test(code)&&!/fetch\(/.test(code),'전투·그림·네트워크 손대지 않음');
+ok(/const audioLevel=/.test(code)&&/v\.muted=!!opt\.muted\|\|lv<=0/.test(code),'Codex P2: 게임 소리 설정(소리·음악·내레이션·음량)을 영상에 적용');
 console.log(JSON.stringify({ok:true,checks:n,method:'static'}));

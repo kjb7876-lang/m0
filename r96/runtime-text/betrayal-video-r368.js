@@ -46,6 +46,9 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  c.save();try{const prev=c.filter;c.filter=(prev&&prev!=='none'?prev+' ':'')+TINT;stats.tinted++;return base.call(this,e,...a);}finally{c.restore();}};}
 
 // ── 영상 ──
+// 게임 소리 설정을 따른다(소리·음악·내레이션이 모두 꺼졌거나 음량 0이면 음소거, 아니면 켜진 것 중 가장 큰 음량).
+const audioLevel=()=>{try{const s=typeof settings!=='undefined'?settings:null;if(!s)return 1;const c=x=>Math.max(0,Math.min(1,Number(x)||0));
+ return Math.max(s.sound?c(s.volume):0,s.music?c(s.bgm??s.volume):0,s.narration?c(s.voice??s.volume):0);}catch(_){return 1;}};
 function preload(){if(pre||!prefs.on||typeof document==='undefined')return pre;try{const v=document.createElement('video');v.preload='auto';v.playsInline=true;v.setAttribute('playsinline','');v.src=url(SRC);v.load?.();pre=v;stats.preloads++;}catch(e){fail(e);}return pre;}
 function css(){if(document.getElementById('r368Css'))return;const s=document.createElement('style');s.id='r368Css';
  s.textContent='#r368v{position:fixed;inset:0;z-index:2147482000;background:#050304;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}'
@@ -63,7 +66,7 @@ function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stal
  if((reason==='skip'||reason==='ended')&&!prefs.seen){prefs.seen=true;save();}
  const failed=reason==='error'||reason==='stall';
  // 영상이 실패하면 숨겨 둔 R317 장면을 다시 보여 준다(서사 유지). 끝까지 갔거나 건너뛰면 R317 을 닫는다.
- if(o.r317){try{if(failed&&o.r317.isConnected){o.r317.style.visibility='';stats.restoredR317++;}else R317()?.skip?.();}catch(e){fail(e);}}
+ if(o.r317){try{if(failed&&o.r317.isConnected){R317()?.hold?.(false);o.r317.style.visibility='';stats.restoredR317++;}else R317()?.skip?.();}catch(e){fail(e);}}
  if(failed&&!o.r317&&o.lastTime<1){prefs.seen=false;save();}
  o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();o.focus?.focus?.({preventScroll:true});}catch(_){}},reason==='error'?0:460);}
@@ -77,7 +80,7 @@ function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!opt.force&&(!prefs.on||!eligible(r)))return false;
  css();const v=pre||preload()||document.createElement('video');pre=null;if(!v.src)v.src=url(SRC);
- v.poster=url(POSTER);v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';if(opt.muted)v.muted=true;try{v.currentTime=Number(opt.at)||0;}catch(_){}
+ v.poster=url(POSTER);v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';{const lv=audioLevel();v.volume=Math.max(0,Math.min(1,lv));v.muted=!!opt.muted||lv<=0;}try{v.currentTime=Number(opt.at)||0;}catch(_){}
  const root=document.createElement('div');root.id='r368v';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','결전의 날 기억');root.tabIndex=-1;
  const title=(typeof regionById!=='undefined'&&regionById?.[ZONE]?.title)||'결전의 날';
  root.innerHTML='<div class="chap"></div><div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
@@ -96,7 +99,7 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
 function takeOver(r){if(!prefs.on||prefs.seen||!eligible(r))return false;const old=typeof document!=='undefined'&&document.getElementById('r317Cinema'),v=pre;
  if(old){if(!v||v.error||v.readyState<2){stats.keptR317++;return false;}
   // R317 은 닫지 않고 숨겨 둔다(영상 실패 시 다시 보임, 성공하면 close 에서 닫음).
-  if(!play(r,{r317:old}))return false;old.style.visibility='hidden';stats.replacedR317++;return true;}
+  if(!play(r,{r317:old}))return false;old.style.visibility='hidden';try{R317()?.hold?.(true);}catch(e){fail(e);}stats.replacedR317++;return true;}
  return play(r);}
 if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){const r=here(),want=isBalrog(e)&&!e.deadRecorded&&eligible(r)&&typeof started!=='undefined'&&started&&!(typeof loading!=='undefined'&&loading);
  const out=base.call(this,e,...a);if(want&&e.hp<=0&&e.deadRecorded&&r===here())try{takeOver(r);}catch(err){fail(err);}return out;};}

@@ -76,14 +76,20 @@ for(const [label,viewport] of [['pc',{width:1280,height:720}],['mobile',{width:3
  check('r317 seen: 페이지 오류 없음',errors.length===0,errors);await b.close();}
 fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({fails,results},null,1));
 console.log(JSON.stringify({ok:fails===0,fails,checks:results.length,method:'headless Chromium (임시) — GPU·실기기·소리 품질 미검증'}));
-// Codex P2: R317 을 숨기고 튼 영상이 실패하면 R317 장면을 다시 보여 준다
+// Codex P2: R317 을 숨기고 튼 영상이 실패(늦은 멈춤 포함)하면 R317 장면을 다시 보여 준다. 숨긴 동안 R317 시간은 멈춘다.
 {const {b,p,errors}=await boot({width:1280,height:720});
  await near(p);await p.waitForFunction(()=>{const a=window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect();return a.preloaded&&a.preloaded.ready>=2;},null,{timeout:30000}).catch(()=>{});
+ await p.evaluate(()=>{settings.sound=false;settings.music=false;settings.narration=false;});
  await kill(p);await p.waitForTimeout(300);
- const h=await p.evaluate(()=>({open:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect().open,r317:document.getElementById('r317Cinema')?.style.visibility??null}));
- await p.evaluate(()=>document.querySelector('#r368v video').dispatchEvent(new Event('error')));await p.waitForTimeout(700);
- const f=await p.evaluate(()=>({a:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect(),r317:!!document.getElementById('r317Cinema'),vis:document.getElementById('r317Cinema')?.style.visibility}));
- check('fail: 영상 오류면 숨겨 둔 R317 장면이 다시 보임',h.open&&h.r317==='hidden'&&!f.a.open&&f.r317&&f.vis===''&&f.a.stats.restoredR317===1,{h,f:{r317:f.r317,vis:f.vis,stats:f.a.stats}});
+ const mu=await p.evaluate(()=>{const v=document.querySelector('#r368v video');return {muted:v?.muted,volume:v?.volume};});
+ check('audio: 게임 소리를 모두 끄면 영상도 음소거(Codex P2)',mu.muted===true,mu);
+ const h=await p.evaluate(()=>({open:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect().open,r317:document.getElementById('r317Cinema')?.style.visibility??null,s:window.__STORYWORLD_MAPS_PALACE_SLUM_R317__.inspect().scene}));
+ await p.waitForFunction(()=>window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect().time>=8.6,null,{timeout:20000}).catch(()=>{});
+ await p.evaluate(()=>document.querySelector('#r368v video').pause()); // 9초 근처에서 멈춤 → 6초 뒤 stall 로 닫힘(R317 원래 15초가 지난 시점)
+ await p.waitForFunction(()=>!window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect().open,null,{timeout:15000}).catch(()=>{});await p.waitForTimeout(600);
+ const f=await p.evaluate(()=>({a:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect(),r317:!!document.getElementById('r317Cinema'),vis:document.getElementById('r317Cinema')?.style.visibility,s:window.__STORYWORLD_MAPS_PALACE_SLUM_R317__.inspect()}));
+ check('fail: 늦게 멈춰도 숨겨 둔 R317 장면이 처음 장면 그대로 다시 보임',h.open&&h.r317==='hidden'&&!f.a.open&&f.a.stats.stalled===1&&f.r317&&f.vis===''&&f.s.active&&f.s.scene===h.s&&f.a.stats.restoredR317===1,{h,f:{r317:f.r317,vis:f.vis,scene:f.s.scene,active:f.s.active,stats:f.a.stats}});
+ await p.waitForTimeout(2700);const g=await p.evaluate(()=>window.__STORYWORLD_MAPS_PALACE_SLUM_R317__.inspect());check('fail: 되살린 R317 은 다시 흘러감',g.active&&g.scene>h.s,{scene:g.scene});
  check('fail: 페이지 오류 없음',errors.length===0,errors);await b.close();}
 fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({fails,results},null,1));
 console.log(JSON.stringify({ok:fails===0,fails,checks:results.length}));
