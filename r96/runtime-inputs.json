@@ -4110,6 +4110,11 @@
     "assets/r369/poison-city.mp4",
     "assets/r369/poison-city-poster.jpg",
     "assets/r369/index.json",
+    "root-gate-video-r372.js",
+    "assets/r372/opening-book.mp4",
+    "assets/r372/root-gate.mp4",
+    "assets/r372/root-gate-poster.jpg",
+    "assets/r372/index.json",
     "cinema-mode-r370.js"
   ],
   "mediaPaths": [
@@ -5185,5 +5190,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a9c2706520dec9bb7e230fc2702a431acd64c87b1fc3e4ab8fda7eca21b31805"
+  "runtimeManifestSHA256": "7df80fc971a0077c9a1a6408e79f66119ca2fac3e7bd0552656ad0272de5e659"
 }

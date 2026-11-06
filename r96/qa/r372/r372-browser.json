@@ -1,0 +1,311 @@
+{
+ "fails": 0,
+ "results": [
+  {
+   "name": "pc: 오프닝은 책 영상만(9.4초 컷)",
+   "ok": true,
+   "info": {
+    "src": "assets/r372/opening-book.mp4",
+    "cut": 9.4
+   }
+  },
+  {
+   "name": "pc: dist00 보스 문 단계·문 앞",
+   "ok": true,
+   "info": {
+    "phase": "door",
+    "door": "door-0",
+    "d": {
+     "x": 20,
+     "y": 20
+    },
+    "spot": {
+     "x": 21.039230484541328,
+     "y": 20.6
+    },
+    "boss": [
+     "뿌리의 문지기"
+    ]
+   }
+  },
+  {
+   "name": "pc: 문 앞에서 영상 차례로 판정",
+   "ok": true,
+   "info": true
+  },
+  {
+   "name": "pc: 문 상호작용 → 영상 시작, 문 처리는 아직(door 단계 그대로)",
+   "ok": true,
+   "info": {
+    "s": {
+     "plays": 1,
+     "skips": 0,
+     "ended": 0,
+     "errors": 0,
+     "muted": 0,
+     "stalled": 0,
+     "triggers": 1,
+     "continued": 0,
+     "preloads": 1
+    },
+    "ph1": "door"
+   }
+  },
+  {
+   "name": "pc: 보스 입장 연출(검은 띠·끝 무렵 보스 이름 카드)",
+   "ok": true,
+   "info": [
+    {
+     "t": 1.95062,
+     "bgm": 0,
+     "name": "BOSS뿌리의 문지기",
+     "nameOn": false,
+     "bar": 86.390625,
+     "nr": {
+      "x": 473.390625,
+      "y": 526.421875,
+      "width": 333.203125,
+      "height": 86.390625,
+      "top": 526.421875,
+      "right": 806.59375,
+      "bottom": 612.8125,
+      "left": 473.390625
+     },
+     "chap": "악마화 나무의 정원 · 문 너머"
+    },
+    {
+     "t": 8.630877,
+     "bgm": 0,
+     "name": "BOSS뿌리의 문지기",
+     "nameOn": true,
+     "bar": 86.390625,
+     "nr": {
+      "x": 473.390625,
+      "y": 518.421875,
+      "width": 333.203125,
+      "height": 86.390625,
+      "top": 518.421875,
+      "right": 806.59375,
+      "bottom": 604.8125,
+      "left": 473.390625
+     },
+     "chap": "악마화 나무의 정원 · 문 너머"
+    }
+   ]
+  },
+  {
+   "name": "pc: 이름 카드가 화면 안",
+   "ok": true,
+   "info": {
+    "x": 473.390625,
+    "y": 518.421875,
+    "width": 333.203125,
+    "height": 86.390625,
+    "top": 518.421875,
+    "right": 806.59375,
+    "bottom": 604.8125,
+    "left": 473.390625
+   }
+  },
+  {
+   "name": "pc: 재생 중 BGM 0",
+   "ok": true
+  },
+  {
+   "name": "pc: 재생 중 게임 키 막힘",
+   "ok": true,
+   "info": {
+    "got": 0,
+    "prevented": true
+   }
+  },
+  {
+   "name": "pc: 건너뛰면 원래 문 처리 이어짐(보스 앞 서사/문 열림)",
+   "ok": true,
+   "info": {
+    "ph": "doorStory",
+    "story": true,
+    "s": {
+     "plays": 1,
+     "skips": 0,
+     "ended": 1,
+     "errors": 0,
+     "muted": 0,
+     "stalled": 0,
+     "triggers": 1,
+     "continued": 1,
+     "preloads": 1
+    }
+   }
+  },
+  {
+   "name": "pc: 서사 뒤 보스 단계",
+   "ok": true,
+   "info": "boss"
+  },
+  {
+   "name": "pc: 한 번만",
+   "ok": true,
+   "info": 1
+  },
+  {
+   "name": "pc: 페이지 오류 없음",
+   "ok": true,
+   "info": []
+  },
+  {
+   "name": "mobile: 오프닝은 책 영상만(9.4초 컷)",
+   "ok": true,
+   "info": {
+    "src": "assets/r372/opening-book.mp4",
+    "cut": 9.4
+   }
+  },
+  {
+   "name": "mobile: dist00 보스 문 단계·문 앞",
+   "ok": true,
+   "info": {
+    "phase": "door",
+    "door": "door-0",
+    "d": {
+     "x": 20,
+     "y": 20
+    },
+    "spot": {
+     "x": 21.039230484541328,
+     "y": 20.6
+    },
+    "boss": [
+     "뿌리의 문지기"
+    ]
+   }
+  },
+  {
+   "name": "mobile: 문 앞에서 영상 차례로 판정",
+   "ok": true,
+   "info": true
+  },
+  {
+   "name": "mobile: 문 상호작용 → 영상 시작, 문 처리는 아직(door 단계 그대로)",
+   "ok": true,
+   "info": {
+    "s": {
+     "plays": 1,
+     "skips": 0,
+     "ended": 0,
+     "errors": 0,
+     "muted": 0,
+     "stalled": 0,
+     "triggers": 1,
+     "continued": 0,
+     "preloads": 1
+    },
+    "ph1": "door"
+   }
+  },
+  {
+   "name": "mobile: 보스 입장 연출(검은 띠·끝 무렵 보스 이름 카드)",
+   "ok": true,
+   "info": [
+    {
+     "t": 1.670517,
+     "bgm": 0,
+     "name": "BOSS뿌리의 문지기",
+     "nameOn": false,
+     "bar": 338.625,
+     "nr": {
+      "x": 93.46875,
+      "y": 553.6875,
+      "width": 203.0625,
+      "height": 58.1875,
+      "top": 553.6875,
+      "right": 296.53125,
+      "bottom": 611.875,
+      "left": 93.46875
+     },
+     "chap": "악마화 나무의 정원 · 문 너머"
+    },
+    {
+     "t": 7.382758,
+     "bgm": 0,
+     "name": "BOSS뿌리의 문지기",
+     "nameOn": true,
+     "bar": 338.625,
+     "nr": {
+      "x": 93.46875,
+      "y": 545.6875,
+      "width": 203.0625,
+      "height": 58.1875,
+      "top": 545.6875,
+      "right": 296.53125,
+      "bottom": 603.875,
+      "left": 93.46875
+     },
+     "chap": "악마화 나무의 정원 · 문 너머"
+    }
+   ]
+  },
+  {
+   "name": "mobile: 이름 카드가 화면 안",
+   "ok": true,
+   "info": {
+    "x": 93.46875,
+    "y": 545.6875,
+    "width": 203.0625,
+    "height": 58.1875,
+    "top": 545.6875,
+    "right": 296.53125,
+    "bottom": 603.875,
+    "left": 93.46875
+   }
+  },
+  {
+   "name": "mobile: 재생 중 BGM 0",
+   "ok": true
+  },
+  {
+   "name": "mobile: 재생 중 게임 키 막힘",
+   "ok": true,
+   "info": {
+    "got": 0,
+    "prevented": true
+   }
+  },
+  {
+   "name": "mobile: 건너뛰면 원래 문 처리 이어짐(보스 앞 서사/문 열림)",
+   "ok": true,
+   "info": {
+    "ph": "doorStory",
+    "story": true,
+    "s": {
+     "plays": 1,
+     "skips": 1,
+     "ended": 0,
+     "errors": 0,
+     "muted": 0,
+     "stalled": 0,
+     "triggers": 1,
+     "continued": 1,
+     "preloads": 1
+    }
+   }
+  },
+  {
+   "name": "mobile: 서사 뒤 보스 단계",
+   "ok": true,
+   "info": "boss"
+  },
+  {
+   "name": "mobile: 한 번만",
+   "ok": true,
+   "info": 1
+  },
+  {
+   "name": "mobile: 페이지 오류 없음",
+   "ok": true,
+   "info": []
+  }
+ ],
+ "headless": true,
+ "gpu": false
+}

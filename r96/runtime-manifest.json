@@ -14898,6 +14898,26 @@
       "sha256": "57e8035a0d67f77c443f354a0343bc5d70d12a91f30929eaf6188bf86bc7420b"
     },
     {
+      "path": "assets/r372/index.json",
+      "bytes": 1745,
+      "sha256": "0b70b96e61e051dd598a0618330ad5660c97c3f35d161138c744fa7ea564049a"
+    },
+    {
+      "path": "assets/r372/opening-book.mp4",
+      "bytes": 1957517,
+      "sha256": "db0aa84a3ae6b537151d5d8107a46b96da9e76a6113498b50edc8cc0e977a552"
+    },
+    {
+      "path": "assets/r372/root-gate-poster.jpg",
+      "bytes": 93767,
+      "sha256": "6f4052820b34faa8af915f8ce6a520679dd62d526f3d428da53c26f064564075"
+    },
+    {
+      "path": "assets/r372/root-gate.mp4",
+      "bytes": 2855170,
+      "sha256": "60241585b1c8e09d91b15d01f559e372eba40c1b08bc948675032051d137ffd4"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22874,8 +22894,8 @@
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 14070,
-      "sha256": "9125b1e0e3c1805ee9258fce0222364f65cee839b54e8015cf0cda12b24c6c73"
+      "bytes": 14068,
+      "sha256": "ae5e7bfb78c3bd36765ff66575b4e8b97e6938d7ab53e2fbe5fcb446dbe8b01f"
     },
     {
       "path": "bgm-pick-r353.js",
@@ -23794,8 +23814,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569956,
-      "sha256": "9a9af781d9bde239e3acc03ba0a9afc637abcbc21c58af33b28da2ce5430abba"
+      "bytes": 6570005,
+      "sha256": "6be5b1c8d2cdc983b1aded72b7c7c11d001333893e5ba7a8669c4dc2ca674021"
     },
     {
       "path": "intro-r140.js",
@@ -23809,8 +23829,8 @@
     },
     {
       "path": "intro-video-r309.js",
-      "bytes": 10401,
-      "sha256": "a0489f77165c68af00a96d77a0e63de901cda9b99bb8b6fe65acbeb1b248d620"
+      "bytes": 10857,
+      "sha256": "d1667c86931993b2b6cce42955c8317c109a466e06c9e259edc724e6b640182b"
     },
     {
       "path": "kairo-homage-r356.js",
@@ -24024,8 +24044,8 @@
     },
     {
       "path": "perf-r367.js",
-      "bytes": 3345,
-      "sha256": "1dfc4d6e5531831ed9fcc33a4e72cb098f974241417cb39b6b56306ddea97403"
+      "bytes": 7264,
+      "sha256": "7770d6c1e840a8a083f8e08857858736d7c1984b34312a1aed13a06f72d76981"
     },
     {
       "path": "perf-r97.js",
@@ -24143,6 +24163,11 @@
       "sha256": "f4a6dadda1b309c164774f19127f70d150bb364377598d4fdee8a678021123cc"
     },
     {
+      "path": "root-gate-video-r372.js",
+      "bytes": 12664,
+      "sha256": "73de6689ac3c9662f84e43b9a36e760b520af560ac2f2edcf4f623cfdf943e05"
+    },
+    {
       "path": "samong-doll-r193.js",
       "bytes": 4649,
       "sha256": "622d66089382ed5bf70afffae2f755e3a285e6662c9678bae2eb28c8df77f912"
@@ -24219,8 +24244,8 @@
     },
     {
       "path": "save-transition-r320.js",
-      "bytes": 1892,
-      "sha256": "346ed95aa3e1ccf440326292f9cdd707c9c91bd288499392db2ff68a7e904ac7"
+      "bytes": 2919,
+      "sha256": "28ad71d190491d6348f2410752dee8b43c42a6ebf60b5eae36c6df4045c75656"
     },
     {
       "path": "scene-props-r117.js",
@@ -24503,9 +24528,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4900,
-  "totalBytes": 944722919,
-  "webHTMLSha256": "9a9af781d9bde239e3acc03ba0a9afc637abcbc21c58af33b28da2ce5430abba",
+  "fileCount": 4905,
+  "totalBytes": 949649231,
+  "webHTMLSha256": "6be5b1c8d2cdc983b1aded72b7c7c11d001333893e5ba7a8669c4dc2ca674021",
   "largest": [
     {
       "path": "index.html",

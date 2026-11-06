@@ -373,6 +373,10 @@ jobs:
         run: node r96/qa/r369/r369-cpu-check.cjs
       - name: R370 cinema mode (guide autoplay + abridged canon subtitles/voice, zone-timed) CPU check
         run: node r96/qa/r370/r370-cpu-check.cjs
+      - name: R371 Samong restore hidden story unblock CPU check
+        run: node r96/qa/r371/r371-cpu-check.cjs
+      - name: R372 root gate boss entrance video CPU check
+        run: node r96/qa/r372/r372-cpu-check.cjs
       - name: R362 m030 Dots sheet + rename to '개와 늑대의 시간' CPU check
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check

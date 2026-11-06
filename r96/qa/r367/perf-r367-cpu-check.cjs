@@ -25,6 +25,7 @@ function blockedFn(R){const raw=(x,y,v)=>{if(x-v<0||y-v<0||x+v>R.layout.bounds[2
  const f=(x,y,v)=>{R.calls++;return raw(x,y,v);};f.raw=raw;return f;}// R.calls = 탐색이 직접 묻는 막힘 질의 수
 function clearFn(b0){const bl=b0.raw;return (a,b,v)=>{const k=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/.18));for(let i=1;i<=k;i++)if(bl(a.x+(b.x-a.x)*i/k,a.y+(b.y-a.y)*i/k,v))return false;return true;};}
 const rooms=[makeRoom(24,20),makeRoom(40,30),makeRoom(18,32)];
+API.set({unstick:false}); // R371 의 벽 옆 시작점 풀기는 일부러 결과를 바꾸므로, 기억(memo) 동일성은 끈 채로 본다(r371 검사가 따로 봄)
 let baseCalls=0,memoCalls=0,queries=0,found=0,changes=0;
 for(let q=0;q<900;q++){const R=rooms[q%3];// 방 바꾸기(3개 번갈아)
  if(rnd()<.3){const d=R.doors[Math.floor(rnd()*R.doors.length)];d.open=!d.open;changes++;}// 문 상태 바꾸기
@@ -35,6 +36,7 @@ for(let q=0;q<900;q++){const R=rooms[q%3];// 방 바꾸기(3개 번갈아)
  R.calls=0;const b=win.StoryPhase1.explorationPath(R.layout,from,to,rad,bl,cl);memoCalls+=R.calls;
  assert.deepStrictEqual(b,a,'query '+q);queries++;if(a.length)found++;}
 assert(found>100&&changes>200,`found ${found} changes ${changes}`);ok(`wrapped == engine over ${queries} random queries (${found} found paths, ${changes} door/prop changes, 3 rooms, 4 radii)`);
+API.set({unstick:true});
 assert(memoCalls<baseCalls*.5,`calls ${memoCalls} vs ${baseCalls}`);ok(`blocked calls reduced ${baseCalls} -> ${memoCalls} (${(100-memoCalls/baseCalls*100).toFixed(0)}% fewer)`);
 // 기억은 탐색 사이에 이어지지 않는다: 같은 질의, 문만 바꾸면 결과가 엔진과 같이 바뀐다.
 {const R=makeRoom(12,3);R.solid.clear();R.solid.add("6,0");R.solid.add("6,2");R.props.length=0;R.doors=[{x:6.5,y:1.5,open:true}];R.layout.bounds=[0,0,12,3];const bl=blockedFn(R),cl=clearFn(bl),f={x:1.5,y:1.5},t={x:10.5,y:1.5};
