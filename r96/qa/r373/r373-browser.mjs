@@ -1,4 +1,4 @@
-// R373 headless — 지역에 들어서면 같은 종류 몹이 분대(최대 7)로 모이고 분대마다 '<종류> 우두머리' 한 마리(체력 ×1.6). 입장 시간이 늘지 않는지도 본다.
+// R373 headless — 지역에 들어서면 같은 종류 몹이 분대(최대 6)로 모이고 분대마다 '<종류> 우두머리' 한 마리(체력 ×1.6). 입장 시간이 늘지 않는지도 본다.
 //   STORYWORLD_URL=http://127.0.0.1:4436/m0/ OUT=out/r373 node r96/qa/r373/r373-browser.mjs
 // Headless Chromium: 판정·배치·이름표만 본다. GPU·실기기·자연 플레이 미검증(임시).
 import {createRequire} from 'node:module';import fs from 'node:fs';const req=createRequire(import.meta.url);let chromium;
@@ -14,6 +14,7 @@ for(const z of ['dist00','dist03','ep1a10']){const t=Date.now();await p.evaluate
  const a=await p.evaluate(()=>{const A=window.__STORYWORLD_MOB_SQUADS_R373__.inspect();const plain=room.enemies.filter(e=>e.squadR373&&!e.squadLeaderR373);return {A,plainHp:plain[0]?.maxHp};});
  const sq={};for(const r of a.A.room)(sq[r.squad]=sq[r.squad]||[]).push(r);const S=Object.values(sq);
  const leaders=S.map(v=>v.filter(r=>r.leader));const spread=S.map(v=>{const L=v.find(r=>r.leader);return Math.max(...v.map(r=>Math.hypot(r.x-L.x,r.y-L.y)));});
+ check(z+': 분대마다 정확히 6마리',S.every(v=>v.length===6),S.map(v=>v.length));
  check(z+': 분대 3개 이상·분대마다 우두머리 1마리',S.length>=3&&leaders.every(l=>l.length===1),S.map(v=>v.length));
  check(z+': 이름 = 종류 + 우두머리',leaders.flat().every(l=>/ 우두머리$/.test(l.name)&&!/\d 우두머리$/.test(l.name)),leaders.flat().map(l=>l.name));
  check(z+': 우두머리 최대 체력 ≈ 분대원 ×1.6',leaders.flat().every(l=>Math.abs(l.maxHp/a.plainHp-1.6)<.02),{lead:leaders.flat()[0]?.maxHp,plain:a.plainHp});
