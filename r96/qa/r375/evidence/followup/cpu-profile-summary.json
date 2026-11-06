@@ -1,0 +1,95 @@
+{
+  "mode": "Initial helper, before bucket-query optimization; sampled CPU diagnosis, not final candidate validation",
+  "topFrames": [
+    {
+      "samples": 1333,
+      "function": "nearby",
+      "file": "world-scale-r375.js",
+      "line": 116
+    },
+    {
+      "samples": 1132,
+      "function": "nearby",
+      "file": "world-scale-r375.js",
+      "line": 116
+    },
+    {
+      "samples": 1086,
+      "function": "boundaryContact",
+      "file": "world-scale-r375.js",
+      "line": 136
+    },
+    {
+      "samples": 857,
+      "function": "explorationPath",
+      "file": "phase1.js",
+      "line": 1095
+    },
+    {
+      "samples": 662,
+      "function": "nearby",
+      "file": "world-scale-r375.js",
+      "line": 116
+    },
+    {
+      "samples": 503,
+      "function": "blocked",
+      "file": "world-scale-r375.js",
+      "line": 125
+    },
+    {
+      "samples": 401,
+      "function": "distance",
+      "file": "world-scale-r375.js",
+      "line": 124
+    },
+    {
+      "samples": 391,
+      "function": "distance",
+      "file": "world-scale-r375.js",
+      "line": 124
+    },
+    {
+      "samples": 338,
+      "function": "blocked",
+      "file": "world-scale-r375.js",
+      "line": 125
+    },
+    {
+      "samples": 284,
+      "function": "(garbage collector)",
+      "file": "",
+      "line": 0
+    },
+    {
+      "samples": 198,
+      "function": "pop",
+      "file": "phase1.js",
+      "line": 1104
+    },
+    {
+      "samples": 165,
+      "function": "hospitalCoreLayoutB2",
+      "file": "phase1.js",
+      "line": 542
+    },
+    {
+      "samples": 131,
+      "function": "scaleLayout",
+      "file": "world-scale-r375.js",
+      "line": 46
+    },
+    {
+      "samples": 122,
+      "function": "clear",
+      "file": "world-scale-r375.js",
+      "line": 151
+    },
+    {
+      "samples": 118,
+      "function": "center",
+      "file": "phase1.js",
+      "line": 1099
+    }
+  ]
+}

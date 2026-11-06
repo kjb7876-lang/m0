@@ -1,0 +1,56 @@
+PASS M002 strip exists with recorded sha256
+PASS M002 strip is 4 cells of the recorded size
+PASS M002 keeps Drive provenance (zip id, zip/png sha)
+PASS M002 pivot inside its cell
+PASS M003 strip exists with recorded sha256
+PASS M003 strip is 4 cells of the recorded size
+PASS M003 keeps Drive provenance (zip id, zip/png sha)
+PASS M003 pivot inside its cell
+PASS M007 strip exists with recorded sha256
+PASS M007 strip is 4 cells of the recorded size
+PASS M007 keeps Drive provenance (zip id, zip/png sha)
+PASS M007 pivot inside its cell
+PASS M008 strip exists with recorded sha256
+PASS M008 strip is 4 cells of the recorded size
+PASS M008 keeps Drive provenance (zip id, zip/png sha)
+PASS M008 pivot inside its cell
+PASS M019 strip exists with recorded sha256
+PASS M019 strip is 4 cells of the recorded size
+PASS M019 keeps Drive provenance (zip id, zip/png sha)
+PASS M019 pivot inside its cell
+PASS M137 strip exists with recorded sha256
+PASS M137 strip is 4 cells of the recorded size
+PASS M137 keeps Drive provenance (zip id, zip/png sha)
+PASS M137 pivot inside its cell
+PASS M119 strip exists with recorded sha256
+PASS M119 strip is 4 cells of the recorded size
+PASS M119 keeps Drive provenance (zip id, zip/png sha)
+PASS M119 pivot inside its cell
+PASS PAPER strip exists with recorded sha256
+PASS PAPER strip is 4 cells of the recorded size
+PASS PAPER keeps Drive provenance (zip id, zip/png sha)
+PASS PAPER pivot inside its cell
+PASS five Drive groups processed
+PASS overlay installs
+PASS indexes load (R92 + R109)
+PASS needed strips are requested
+PASS walking mage cycles four different R109 move cells
+PASS profile is restored after the draw
+PASS standing walker keeps its idle picture
+PASS attack walks through the R92 attack strip
+PASS dream layer uses R92 move strip
+PASS standing gargoyle keeps beating its wings (frame swap)
+PASS flyer hover amplitude ≤ 1.5% of body height
+PASS hover lift is restored after the draw
+PASS no scale or rotate on mobs (walk, attack, hit, idle)
+PASS hit nudge is a rigid shift of at most 4px
+PASS attack without attack frames is a short rigid step
+PASS bosses keep the earlier pose chain
+PASS hospital keeps its authored poses
+PASS R74 world monsters keep their atlas
+PASS no failures
+PASS script tag after play-r106 and before audio-r98
+PASS S-01 uses the faceless specter instead of the false-heaven angel knight
+PASS survival and maze alternate both mob rows
+
+54/54 passed

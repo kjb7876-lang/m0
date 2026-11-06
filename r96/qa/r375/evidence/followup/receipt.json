@@ -1,0 +1,22 @@
+{
+  "baseCommit": "54bbdf1c3e2b94d95063d36e783cfa96c45ab381",
+  "previousCandidateCommit": "7d945a3ded0b9f472deb7ee66e57d7220ecffce4",
+  "runtimeInstalled": false,
+  "merged": false,
+  "deployed": false,
+  "sourceSha256": {
+    "r96/client-source/world-scale-r375.js": "8641e553076740a5646d6807931016e58c0d48a7ebbeb40e7cf887b2469488cd",
+    "r96/client-source/enemy-facing-r375.js": "278ba1fa6791a2b500ea698e71c204374760fe6b32db2948b19d0307726a754e",
+    "r96/client-source/mobs-r109.js": "dc33de3a9d4668ebfdba5e1d7098d271755a051a3a4c0ed950ba622fef741592",
+    "r96/client-source/mob-unique-r248.js": "45e3ed501df3aed0a0937070580829743f2ce161a7fab1f37fb4517ade6ee033",
+    "r96/qa/r375/hospital-save-cpu-check.cjs": "0f4e70b436badfa12d6ec696f6041b2acb82805d07541f528c1cff58c2e9d734",
+    "r96/qa/r375/hospital-profile.cjs": "9836401f19b6eded1d04da25362eda73e94c17190e758afeee9a76e5a41a061d",
+    "r96/qa/r375/world-scale-cpu-check.cjs": "1e6dee48597b6bae45c0ef434e11c43c502f1a55330929d9ec8be84b537df836",
+    "r96/qa/r375/sync-plan-check.py": "98462f73481e6f020295677123a71aba17348f842566e0df13a4821bd20805b3",
+    "r96/qa/r375/vertical-door-review.cjs": "55ceab3354a3b9a84ff6195b441b8db90e894686c91e2ae07e0dabdec1c7df0d"
+  },
+  "priorVisualEvidence": "PC/mobile direction fixture at previousCandidateCommit only; no new map visual acceptance",
+  "nativeSaveRestore": "Not integrated; helper/plan tests only",
+  "fullBuild": "Previously failed mobs-r109.js source/runtime mismatch; locked sync unchanged, not rerun locally",
+  "profile": "Long path latency remains an integration risk"
+}

@@ -1,0 +1,43 @@
+PASS modules load
+PASS 16 episodes, last is final
+PASS goal is 666
+PASS narrative sections present
+PASS record is the final clinical note followed by the epilogue
+PASS episode text keys exist · P
+PASS episode text keys exist · S-01
+PASS episode text keys exist · S-02
+PASS episode text keys exist · S-03
+PASS episode text keys exist · S-04
+PASS episode text keys exist · S-05
+PASS episode text keys exist · S-06
+PASS episode text keys exist · S-07
+PASS episode text keys exist · RA
+PASS episode text keys exist · RB
+PASS episode text keys exist · RC
+PASS episode text keys exist · RD
+PASS episode text keys exist · RE
+PASS episode text keys exist · RF
+PASS episode text keys exist · RG
+PASS episode text keys exist · M
+PASS mazes: start→exit, save and chests reachable (90 mazes)
+PASS maze has junctions (branches, ways back)
+PASS maze layout contract
+PASS survival arena reachable from entry · ep1
+PASS survival arena reachable from entry · ep8
+PASS survival arena reachable from entry · ep15
+PASS ascent: entry→dais path · ep0
+PASS ascent climbs upward (dais above entry on screen) · ep0
+PASS ascent dais inside the native 30-grid · ep0
+PASS ascent: entry→dais path · ep4
+PASS ascent climbs upward (dais above entry on screen) · ep4
+PASS ascent dais inside the native 30-grid · ep4
+PASS ascent: entry→dais path · ep15
+PASS ascent climbs upward (dais above entry on screen) · ep15
+PASS ascent dais inside the native 30-grid · ep15
+PASS skill level cost is k²
+PASS proc chance rises with level and is 0 at level 0
+PASS 777 distinct prescriptions
+PASS 7 lines × 111 variants
+PASS out-of-range prescription is null
+PASS Michaela every 777 points
+{"checks":42,"failed":0}

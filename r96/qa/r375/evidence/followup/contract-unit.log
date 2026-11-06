@@ -1,0 +1,14 @@
+.../workspace/m0-r375/scripts/collab/test_validate.py:163: ResourceWarning: unclosed file <_io.BufferedReader name='/workspace/m0-r375/r96/runtime-text/assets/r290/mobs/m001.webp'>
+  raw = open(src, 'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/m0-r375/scripts/collab/test_validate.py:166: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp_9jh20q2/r.json' mode='w' encoding='UTF-8'>
+  json.dump({'content': base64.b64encode(raw).decode(), 'mimeType': 'image/webp', 'title': 'm001.webp'}, open(j, 'w'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......./workspace/m0-r375/scripts/collab/test_validate.py:133: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/tmp58_02fmz/a.png'>
+  open(p, 'wb').write(png)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............
+----------------------------------------------------------------------
+Ran 25 tests in 0.030s
+
+OK

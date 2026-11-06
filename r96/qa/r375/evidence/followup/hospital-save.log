@@ -1,0 +1,41 @@
+PASS regression: enlarged hospital entry works beyond original closure bounds
+PASS unscaled API agrees with native collision at 40,110 deterministic points
+PASS hospital door configuration 0 preserves leaf and shoulder collision
+PASS hospital door configuration 0 actual engine path respects boss door
+PASS hospital door configuration 1 preserves leaf and shoulder collision
+PASS hospital door configuration 1 actual engine path respects boss door
+PASS hospital door configuration 2 preserves leaf and shoulder collision
+PASS hospital door configuration 2 actual engine path respects boss door
+PASS hospital door configuration 3 preserves leaf and shoulder collision
+PASS hospital door configuration 3 actual engine path respects boss door
+PASS hospital door configuration 4 preserves leaf and shoulder collision
+PASS hospital door configuration 4 actual engine path respects boss door
+PASS hospital door configuration 5 preserves leaf and shoulder collision
+PASS hospital door configuration 5 actual engine path respects boss door
+PASS hospital door configuration 6 preserves leaf and shoulder collision
+PASS hospital door configuration 6 actual engine path respects boss door
+PASS hospital door configuration 7 preserves leaf and shoulder collision
+PASS hospital door configuration 7 actual engine path respects boss door
+PASS scaled outer wall uses its own doubled thickness
+PASS open hospital doors preserve native effective aperture at 5 actor radii
+PASS closed hospital leaf joins both native-thickness collars without a gap
+PASS fast swept movement cannot tunnel through a thin closed door
+PASS per-layout collision caches cannot retain closed doors after opening
+PASS invalid coordinates/radius refuse point and swept movement
+PASS zero-length analytic wall has finite capsule collision
+PASS half-open domain, wall-end tangency and stationary contacts stay consistent
+PASS encode preserves original save schema/identity and all supported coordinate collections
+PASS restore planner yields expanded positions after canonical validator limits
+PASS two serialize/plan cycles have no 2x/4x drift or gameplay metadata changes
+PASS zero and negative points scale about origin, not map minimum
+PASS nonfinite and malformed coordinate pairs stay invalid for native validation
+PASS legacy optional fields, inactive checkpoint and unselected room are preserved
+PASS EGO route snapshot and suffix summons require exact visit ownership
+PASS ambiguous EGO point-drop base key requires explicit collection selection
+PASS restore plan is detached and overflow cannot become a valid position
+PASS malformed checkpoint ownership stays detached from the input snapshot
+PASS missing, numeric, or malformed EGO visit identities are rejected
+PASS shared input objects cannot rescale unselected rooms or unknown fields
+PASS sparse unknown arrays retain length and cyclic snapshots are rejected
+PASS restored old doorway-side point is flagged by runtime collision, not clamped across door
+{"mode":"independent hospital collision and canonical-save/restore-plan helpers; no native runtime restore installation","passed":40,"total":40,"details":{"doorStates":[{"mask":0,"opened":[],"waypoints":0,"ms":1306.36},{"mask":1,"opened":["door-0"],"waypoints":10,"ms":405.25},{"mask":2,"opened":["door-1"],"waypoints":0,"ms":1434.21},{"mask":3,"opened":["door-0","door-1"],"waypoints":9,"ms":371.3},{"mask":4,"opened":["door-2"],"waypoints":0,"ms":1265.81},{"mask":5,"opened":["door-0","door-2"],"waypoints":10,"ms":399.64},{"mask":6,"opened":["door-1","door-2"],"waypoints":0,"ms":1314.95},{"mask":7,"opened":["door-0","door-1","door-2"],"waypoints":9,"ms":359.92}],"nativePointComparisons":40110,"apertureComparisons":6615}}

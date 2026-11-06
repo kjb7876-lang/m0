@@ -1,0 +1,115 @@
+{
+  "mode": "independent synthetic vertical-door point/sweep parity; no game runtime installation",
+  "sourcePath": "/workspace/m0-r375/r96/client-source/world-scale-r375.js",
+  "sourceSha256": "8641e553076740a5646d6807931016e58c0d48a7ebbeb40e7cf887b2469488cd",
+  "revision": "R375-geometry-2",
+  "passed": true,
+  "comparisons": 4410,
+  "meaning": "4410 cases; each compares both blocked and clear against the original doorway",
+  "radii": [
+    0,
+    0.1,
+    0.29,
+    0.5,
+    0.9
+  ],
+  "offsetSteps": [
+    -220,
+    220
+  ],
+  "offsetIncrement": 0.02,
+  "offsetBias": 0.003,
+  "configurations": [
+    {
+      "open": true,
+      "jambs": [
+        {
+          "width": 3,
+          "depth": 0.24,
+          "angle": 1.5707963267948966,
+          "endpoints": [
+            [
+              20,
+              14
+            ],
+            [
+              20,
+              17
+            ]
+          ]
+        },
+        {
+          "width": 3,
+          "depth": 0.24,
+          "angle": 1.5707963267948966,
+          "endpoints": [
+            [
+              20,
+              23
+            ],
+            [
+              20,
+              26
+            ]
+          ]
+        }
+      ],
+      "leaves": []
+    },
+    {
+      "open": false,
+      "jambs": [
+        {
+          "width": 3,
+          "depth": 0.24,
+          "angle": 1.5707963267948966,
+          "endpoints": [
+            [
+              20,
+              14
+            ],
+            [
+              20,
+              17
+            ]
+          ]
+        },
+        {
+          "width": 3,
+          "depth": 0.24,
+          "angle": 1.5707963267948966,
+          "endpoints": [
+            [
+              20,
+              23
+            ],
+            [
+              20,
+              26
+            ]
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "endpoints": [
+            [
+              20,
+              17
+            ],
+            [
+              20,
+              23
+            ]
+          ],
+          "bounds": [
+            19.88,
+            16.88,
+            20.12,
+            23.12
+          ]
+        }
+      ]
+    }
+  ]
+}
