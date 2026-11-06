@@ -384,6 +384,9 @@ jobs:
         run: node r96/qa/r374/r374-cpu-check.cjs
       - name: R375 Dots kair guardians and plague hound CPU check
         run: node r96/qa/r375/r375-cpu-check.cjs
+
+      - name: R376 real difficulty + opening title removed CPU check
+        run: node r96/qa/r376/r376-cpu-check.cjs
       - name: R362 m030 Dots sheet + rename to '개와 늑대의 시간' CPU check
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check

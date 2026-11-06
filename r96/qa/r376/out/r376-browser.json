@@ -1,0 +1,241 @@
+{
+ "fails": 0,
+ "results": [
+  {
+   "name": "pc: 초상화 = R108 영웅 선택 그림, 틀 씌움",
+   "ok": true,
+   "info": "./assets/r108/heroes/hwando.webp"
+  },
+  {
+   "name": "pc: 영화 모드 길잡이가 다음 지역을 실화로 엶(R63 하드 + 실화 표시)",
+   "ok": true,
+   "info": {
+    "revision": "R376-real-1",
+    "prefs": {
+     "on": true
+    },
+    "cinema": true,
+    "active": true,
+    "room": "STORY:dist00",
+    "tier": "hard",
+    "maps": [
+     "STORY:dist00"
+    ],
+    "wrapped": true,
+    "stats": {
+     "picked": 1,
+     "boosted": 34,
+     "softened": 0,
+     "cleared": 1,
+     "restored": 0,
+     "errors": 0
+    },
+    "lastError": null
+   }
+  },
+  {
+   "name": "pc: 적 체력 = 하드의 2배(배율 0.8 / 1.328, 꽉 찬 체력)",
+   "ok": true,
+   "info": [
+    {
+     "f": 0.8,
+     "boss": true,
+     "hp": 85211.12,
+     "mx": 85211.12
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    }
+   ]
+  },
+  {
+   "name": "pc: 적 공격 피해가 들어오고 실화 감쇠가 걸림(정확한 절반은 CPU 검사)",
+   "ok": true,
+   "info": {
+    "real": 41.088813559322034,
+    "stats": 1
+   }
+  },
+  {
+   "name": "pc: 영화 모드 = 전투 화면 + 자막만(위·아래 줄·나침반·길잡이 화살표·글씨 숨김)",
+   "ok": true,
+   "info": [
+    "stage",
+    "cutin",
+    "cinemaR114",
+    "vignetteR100",
+    "darkR123",
+    "passiveEnvironmentR62",
+    "hurtFlashR101",
+    "r370Subs",
+    "r376CineHint"
+   ]
+  },
+  {
+   "name": "pc: 게임 화면이 창 전체",
+   "ok": true,
+   "info": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 720,
+    "top": 0,
+    "right": 1280,
+    "bottom": 720,
+    "left": 0
+   }
+  },
+  {
+   "name": "pc: Esc → 영화 모드 꺼짐 + 설정 창(영화 모드·실화 줄 있음) + UI·길잡이 화살표 복귀",
+   "ok": true,
+   "info": {
+    "on": false,
+    "modal": true,
+    "settings": true,
+    "real": true,
+    "cine": true,
+    "hidden": false,
+    "nav": true
+   }
+  },
+  {
+   "name": "pc: 페이지 오류 없음",
+   "ok": true,
+   "info": []
+  },
+  {
+   "name": "mobile: 초상화 = R108 영웅 선택 그림, 틀 씌움",
+   "ok": true,
+   "info": "./assets/r108/heroes/hwando.webp"
+  },
+  {
+   "name": "mobile: 영화 모드 길잡이가 다음 지역을 실화로 엶(R63 하드 + 실화 표시)",
+   "ok": true,
+   "info": {
+    "revision": "R376-real-1",
+    "prefs": {
+     "on": true
+    },
+    "cinema": true,
+    "active": true,
+    "room": "STORY:dist00",
+    "tier": "hard",
+    "maps": [
+     "STORY:dist00"
+    ],
+    "wrapped": true,
+    "stats": {
+     "picked": 1,
+     "boosted": 34,
+     "softened": 0,
+     "cleared": 1,
+     "restored": 0,
+     "errors": 0
+    },
+    "lastError": null
+   }
+  },
+  {
+   "name": "mobile: 적 체력 = 하드의 2배(배율 0.8 / 1.328, 꽉 찬 체력)",
+   "ok": true,
+   "info": [
+    {
+     "f": 0.8,
+     "boss": true,
+     "hp": 85765.56,
+     "mx": 85765.56
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    },
+    {
+     "f": 1.328,
+     "boss": false,
+     "hp": 2280,
+     "mx": 2280
+    }
+   ]
+  },
+  {
+   "name": "mobile: 적 공격 피해가 들어오고 실화 감쇠가 걸림(정확한 절반은 CPU 검사)",
+   "ok": true,
+   "info": {
+    "real": 23.214018960068984,
+    "stats": 1
+   }
+  },
+  {
+   "name": "mobile: 영화 모드 = 전투 화면 + 자막만(위·아래 줄·나침반·길잡이 화살표·글씨 숨김)",
+   "ok": true,
+   "info": [
+    "stage",
+    "cutin",
+    "cinemaR114",
+    "vignetteR100",
+    "darkR123",
+    "passiveEnvironmentR62",
+    "hurtFlashR101",
+    "r370Subs",
+    "r376CineHint"
+   ]
+  },
+  {
+   "name": "mobile: 게임 화면이 창 전체",
+   "ok": true,
+   "info": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 844,
+    "top": 0,
+    "right": 390,
+    "bottom": 844,
+    "left": 0
+   }
+  },
+  {
+   "name": "mobile: 화면 누르기 → 영화 모드 꺼짐 + 설정 창(영화 모드·실화 줄 있음) + UI·길잡이 화살표 복귀",
+   "ok": true,
+   "info": {
+    "on": false,
+    "modal": true,
+    "settings": true,
+    "real": true,
+    "cine": true,
+    "hidden": false,
+    "nav": true
+   }
+  },
+  {
+   "name": "mobile: 페이지 오류 없음",
+   "ok": true,
+   "info": []
+  }
+ ],
+ "headless": true,
+ "gpu": false
+}

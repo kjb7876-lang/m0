@@ -9,14 +9,18 @@
 //    길잡이가 출구에서 최대 40초 머문다. 마지막 장(최종장·엔딩)은 시간 제한 없이 끝까지 읽는다.
 //  · 지역마다 실제로 머문 시간을 이 기기에 배워 다음 관람의 맞추기에 쓴다(localStorage storyworld.r370.zoneTimes).
 //  · 음성이 없는 브라우저는 자막만 글 길이에 맞춰 흐른다. 진행 규칙·전투·저장·읽음 기록은 엔진 그대로(advanceScene 을 거듭 불러 넘김).
+//  · R376 말 속도: 맞추기 범위를 0.84~1.12배로 낮추고(전보다 천천히), 시간 제한 없는 마지막 장은 0.9배. 문장 결(tone)로 높낮이·빠르기·쉼을 바꿔 회상 내레이션처럼.
+//  · R376 실화 난이도: 실화 지역은 전투가 길어지므로 지역 시간 예측을 실화 배율(timeMul, 1.8배)로 늘리고, 머문 시간은 'real:' 열쇠로 따로 배운다.
+//    덜어 낸 문장은 버리지 않고 예비로 두었다가, 대기열이 비었는데 그 지역에 살아 있는 적이 남아 있으면 (남은 예상 시간, 적어도 45초 분량만큼) 원래 순서대로 다시 채워
+//    전투 중에도 자막·음성이 끊기지 않게 한다(지역을 옮기면 예비는 비운다).
 //  · 설정 '영화 모드' 줄(목소리 고르기·시험 듣기). localStorage storyworld.r370.cinema {on, voice, subs, rate}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_MODE_R370__)return;
-const REV='R370-cinema-1',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
+const REV='R370-cinema-2',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
 const DEF={on:false,voice:'',subs:true,rate:1};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.voice==='string')prefs.voice=s.voice;if(typeof s.subs==='boolean')prefs.subs=s.subs;if(Number.isFinite(+s.rate))prefs.rate=Math.max(.8,Math.min(1.3,+s.rate));}}catch(_){}
 let learned={};try{const t=JSON.parse(localStorage.getItem(TKEY)||'{}');if(t&&typeof t==='object')for(const[k,v]of Object.entries(t))if(Number.isFinite(+v)&&+v>5&&+v<7200)learned[k]=+v;}catch(_){}
-const stats={batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,errors:0};let lastError=null;
+const stats={batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,refilled:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const now=()=>performance.now()/1000;
@@ -25,7 +29,7 @@ const ENV={room:()=>room,regionById:()=>regionById,loading:()=>loading,started:(
 const G=(n,d)=>{try{const v=ENV[n]();return v===undefined?d:v;}catch(_){return d;}};
 function guideOn(){try{guide=true;auto=true;guideTimer=0;}catch(e){fail(e);}}
 const journal=s=>/^journal:/.test(String(s?.key||''));
-const RATE_MIN=.95,RATE_MAX=1.3,CPS0=6.8,MIN_H=50,LINGER_MAX=40;
+const REFILL_MIN=45,RATE_MIN=.84,RATE_MAX=1.12,NO_DEADLINE=.9,CPS0=6.8,MIN_H=50,LINGER_MAX=40;
 const DEFAULT_SEC={rest:45,combat:120,samong:180};// 첫 관람 기본값(헤드리스 길잡이 dist00 ≈ 게임 60초). 실제 머문 시간을 배우면 그 값을 쓴다
 // ── 순수 함수(QA 가 CPU 에서 부른다) ──
 // 문장 나누기: 문단(빈 줄) → 문장 끝(. ? ! … 。 뒤, 닫는 따옴표 포함)에서 자른다.
@@ -41,24 +45,32 @@ function select(items,cap){const keep=new Set();let used=0;for(const it of items
  for(const it of rest){if(used+it.len<=cap){keep.add(it);used+=it.len;}}
  return {kept:items.filter(it=>keep.has(it)),used};}
 // 말 속도: 남은 글자를 남은 시간 안에 읽게. 시간 제한이 없으면 1.
-function rateFor(chars,secs,cps,user=1){if(!(secs>0)||!Number.isFinite(secs))return clamp(user,.8,RATE_MAX);return clamp(chars/(cps*Math.max(5,secs)),RATE_MIN,RATE_MAX)*clamp(user,.8,1.3);}
+function rateFor(chars,secs,cps,user=1){if(!(secs>0)||!Number.isFinite(secs))return clamp(user*NO_DEADLINE,.75,RATE_MAX);return clamp(chars/(cps*Math.max(5,secs)),RATE_MIN,RATE_MAX)*clamp(user,.8,1.3);}
 // 문장 사이 쉼: 앞서 있으면(속도 하한에서도 시간이 남으면) 길게, 밀려 있으면 짧게.
-function gapFor(chars,secs,cps,sceneEnd){const base=sceneEnd?.9:.35;if(!(secs>0)||!Number.isFinite(secs))return base;const need=chars/(cps*RATE_MIN);
+function gapFor(chars,secs,cps,sceneEnd){const base=sceneEnd?GAP_END:GAP;if(!(secs>0)||!Number.isFinite(secs))return base;const need=chars/(cps*RATE_MIN);
  if(need<secs*.7)return Math.min(base+1.3,base+(secs-need)/Math.max(1,chars/40)*.2);if(need>secs)return base*.4;return base;}
+// 회상 내레이션 결(R376, 사용자 "대사 속도 조금 천천히 실제 회상나래이션처럼 생동감있게"): 서술은 낮고 느긋하게, 따옴표 대사는 조금 높고 빠르게,
+//  말줄임(…)·장면 끝 문장은 더 느리게, 물음·느낌표는 살짝 올린다. 말줄임 뒤에는 쉼을 더 둔다.
+const GAP=.55,GAP_END=1.35;
+function tone(text,sceneEnd){const t=String(text||'');let rate=1,pitch=.94;const quote=/^["“「『]/.test(t)||/["”」』]$/.test(t);
+ if(quote){rate*=1.05;pitch=1.04;}if(/…\s*["”」』]?$|\.\.\.\s*$/.test(t)){rate*=.9;pitch-=.03;}else if(/[?？!！]\s*["”」』]?$/.test(t))pitch+=.03;
+ if(sceneEnd)rate*=.92;return {rate,pitch:clamp(pitch,.85,1.1),pause:/…\s*["”」』]?$/.test(t)?.35:0};}
 // 자막 조각: 두 줄(약 84자)을 넘으면 쉼표·띄어쓰기에서 나눈다.
 function chunks(t,max=84){const out=[];let s=String(t);while(s.length>max){let cut=s.lastIndexOf(', ',max);if(cut<max*.45)cut=s.lastIndexOf(' ',max);if(cut<max*.45)cut=max;out.push(s.slice(0,cut+1).trim());s=s.slice(cut+1).trim();}if(s)out.push(s);return out;}
 function isFinal(scenes){return scenes.some(s=>/finale|ending|epilog|엔딩/i.test(String(s?.key||''))||/엔딩|최종장/.test(String(s?.title||s?.chapter||'')));}
 // ── 지역 시간 ──
-const zoneKey=()=>{try{const r=G('room',null);if(!r)return'';return r.samongR115?.zone?('samong:'+r.samongR115.zone):(r.id||'');}catch(_){return'';}};
-function estimate(k){if(learned[k])return learned[k];try{const r=G('room',null),def=G('regionById',{})?.[r?.id];if(/^samong:/.test(k))return DEFAULT_SEC.samong;if(def?.safe)return DEFAULT_SEC.rest;}catch(_){}return DEFAULT_SEC.combat;}
+const realMul=()=>{try{const m=Number(window.__STORYWORLD_REAL_MODE_R376__?.timeMul?.());return Number.isFinite(m)&&m>=1?Math.min(3,m):1;}catch(_){return 1;}};
+const zoneKey=()=>{try{const r=G('room',null);if(!r)return'';const k=r.samongR115?.zone?('samong:'+r.samongR115.zone):(r.id||'');return k&&realMul()>1?'real:'+k:k;}catch(_){return'';}};
+function estimate(k){if(learned[k])return learned[k];const real=/^real:/.test(k),b=String(k).replace(/^real:/,''),m=real?realMul():1;
+ try{if(real&&learned[b])return learned[b]*m;const r=G('room',null),def=G('regionById',{})?.[r?.id];if(/^samong:/.test(b))return DEFAULT_SEC.samong*m;if(def?.safe)return DEFAULT_SEC.rest;}catch(_){}return DEFAULT_SEC.combat*m;}
 let zone={key:'',t0:now(),active:0,last:now()};
 function tickZone(){const k=zoneKey(),t=now(),dt=Math.min(1,t-zone.last);zone.last=t;
  const paused=document.hidden||G('loading',false)||!G('started',false);if(!paused)zone.active+=dt;
  if(k&&k!==zone.key){if(zone.key&&prefs.on&&zone.active>8){const o=learned[zone.key];learned[zone.key]=o?o*.5+zone.active*.5:zone.active;try{localStorage.setItem(TKEY,JSON.stringify(learned));}catch(_){}}
-  zone={key:k,t0:t,active:0,last:t};}}
+  zone={key:k,t0:t,active:0,last:t};reserve.length=0;}}
 const remainingInZone=()=>Math.max(0,estimate(zone.key)-zone.active);
 // ── 대기열·음성 ──
-const Q=[];let cur=null,deadline=null,cps=CPS0,order=0,timer=null,gen=0;
+const Q=[],reserve=[];let cur=null,deadline=null,cps=CPS0,order=0,timer=null,gen=0;
 const pendingChars=()=>Q.reduce((s,q)=>s+q.len,0)+(cur?cur.len*.5:0);
 const backlogSecs=()=>pendingChars()/(cps*RATE_MAX);
 function voices(){try{return (speechSynthesis.getVoices()||[]).filter(v=>/^ko/i.test(v.lang));}catch(_){return[];}}
@@ -73,13 +85,21 @@ function enqueue(scenes){const final=isFinal(scenes);stats.batches++;
  const all=Q.concat(fresh);const horizon=final?Infinity:Math.max(MIN_H,remainingInZone());
  const cap=final?Infinity:horizon*cps*clamp(prefs.rate,.8,1.3)*1.12;
  const {kept}=select(all,cap);stats.dropped+=all.length-kept.length;stats.kept+=fresh.filter(f=>kept.includes(f)).length;
+ const keptSet=new Set(kept);for(const it of all)if(!keptSet.has(it)&&!it.final)reserve.push(it);reserve.sort((a,b)=>a.order-b.order);if(reserve.length>400)reserve.splice(0,reserve.length-400);
  Q.length=0;Q.push(...kept);deadline=final?null:now()+horizon;
  if(!cur&&!timer)next();}
 function show(q,part){const el=box();if(!el)return;if(!prefs.subs||!q){el.classList.remove('on');return;}
  el.querySelector('.n').textContent=q.narr||'';el.querySelector('.t').textContent=part;el.classList.add('on');}
+// 예비 다시 채우기: 대기열이 비었고 지금 지역에 살아 있는 적이 있을 때. 예상 시간이 지났어도 싸움이 이어지면 45초 분량씩 더 읽는다.
+function fighting(){try{const r=G('room',null);return !!(r&&(r.enemies||[]).some(e=>e&&e.hp>0&&!e.deadRecorded&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)));}catch(_){return false;}}
+function refill(){if(Q.length||!reserve.length||!fighting())return 0;const left=Math.max(REFILL_MIN,remainingInZone());
+ const cap=left*cps*clamp(prefs.rate,.8,1.3)*.9;const pick=select(reserve.slice(),cap).kept;if(!pick.length)return 0;
+ const ps=new Set(pick);for(let i=reserve.length-1;i>=0;i--)if(ps.has(reserve[i]))reserve.splice(i,1);
+ Q.push(...pick);deadline=now()+left;stats.refilled+=pick.length;return pick.length;}
 function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
+ if(!Q.length)refill();
  cur=Q.shift()||null;if(!cur){show(null);return;}
- const my=++gen,left=pendingChars()+cur.len,secs=deadline?deadline-now():NaN,rate=rateFor(left,secs,cps,prefs.rate);
+ const my=++gen,left=pendingChars()+cur.len,secs=deadline?deadline-now():NaN,tn=tone(cur.text,cur.sceneEnd),rate=clamp(rateFor(left,secs,cps,prefs.rate)*tn.rate,.7,1.25);
  const parts=chunks(cur.text),t0=now();let pi=0;show(cur,parts[0]);
  const est=cur.len/(cps*rate);
  // 자막 조각은 글자 비율로 넘긴다(음성 경계 이벤트가 오면 그쪽을 따른다).
@@ -88,9 +108,9 @@ function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
  const done=(spoke)=>{if(my!==gen)return;gen++;clearTimeout(partTimer);const d=now()-t0;
   if(spoke&&d>.6&&cur){const m=cur.len/(d*rate);if(m>2&&m<20)cps=cps*.85+m*.15;}
   const q=cur;cur=null;const left2=pendingChars(),secs2=deadline?deadline-now():NaN;
-  const gap=gapFor(left2,secs2,cps,q?.sceneEnd);if(q?.sceneEnd)show(null);timer=setTimeout(next,gap*1000);};
+  const gap=gapFor(left2,secs2,cps,q?.sceneEnd)+tn.pause;if(q?.sceneEnd)show(null);timer=setTimeout(next,gap*1000);};
  const v=pickVoice();
- if(v&&window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(cur.text);u.lang=v.lang||'ko-KR';u.voice=v;u.rate=rate;u.volume=vol();
+ if(v&&window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(cur.text);u.lang=v.lang||'ko-KR';u.voice=v;u.rate=rate;u.pitch=tn.pitch;u.volume=vol();
    u.onend=()=>{stats.spoken++;done(true);};u.onerror=()=>done(false);
    u.onboundary=ev=>{try{if(my!==gen)return;const ci=ev.charIndex||0;let k=0;while(k<parts.length-1&&ci>=bounds[k])k++;if(k>pi){pi=k;clearTimeout(partTimer);show(cur,parts[pi]);schedule();}}catch(_){}};
    speaking=true;speechSynthesis.speak(u);
@@ -98,7 +118,7 @@ function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
    setTimeout(()=>{if(my===gen){try{speechSynthesis.cancel();}catch(_){}done(false);}},(est*2+3)*1000);}catch(e){fail(e);stats.silent++;setTimeout(()=>done(false),est*1000);}}
  else{stats.silent++;setTimeout(()=>done(false),est*1000);}}
 let speaking=false;
-function stopAll(){gen++;Q.length=0;cur=null;deadline=null;clearTimeout(timer);timer=null;try{speechSynthesis.cancel();}catch(_){}show(null);}
+function stopAll(){gen++;Q.length=0;reserve.length=0;cur=null;deadline=null;clearTimeout(timer);timer=null;try{speechSynthesis.cancel();}catch(_){}show(null);}
 // ── 자막 상자 ──
 let boxEl=null;
 function box(){if(boxEl&&boxEl.isConnected)return boxEl;try{if(!document.getElementById('r370Style')){const st=document.createElement('style');st.id='r370Style';
@@ -136,7 +156,7 @@ try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=funct
   return base.apply(this,arguments);};}}catch(e){fail(e);}
 // 길잡이 이어 켜기: 엔진이 사망·귀환에서 길잡이를 끄면, 손을 대지 않은 채 6초가 지나면 다시 켠다.
 let lastInput=0;for(const ev of['keydown','pointerdown','touchstart'])addEventListener(ev,e=>{if(e.target?.closest?.('#modal,#r370Subs'))return;lastInput=now();},{passive:true,capture:true});
-setInterval(()=>{try{tickZone();if(boxEl)boxEl.classList.toggle('away',!!G('modal',false));if(!prefs.on)return;if(G('started',false)&&!G('loading',false)&&!G('modal',false)&&!G('guide',true)&&now()-lastInput>6){guideOn();stats.guideResumed++;}}catch(e){fail(e);}},1000);
+setInterval(()=>{try{tickZone();if(boxEl)boxEl.classList.toggle('away',!!G('modal',false));if(!prefs.on)return;if(!cur&&!timer&&!Q.length&&refill())next();if(G('started',false)&&!G('loading',false)&&!G('modal',false)&&!G('guide',true)&&now()-lastInput>6){guideOn();stats.guideResumed++;}}catch(e){fail(e);}},1000);
 // ── 켜고 끄기·설정 ──
 function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 function set(p={}){const was=prefs.on;if(typeof p.on==='boolean')prefs.on=p.on;if(typeof p.voice==='string')prefs.voice=p.voice;if(typeof p.subs==='boolean')prefs.subs=p.subs;if(Number.isFinite(+p.rate))prefs.rate=clamp(+p.rate,.8,1.3);save();
@@ -162,7 +182,7 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
   const host=after?.parentNode||quick||grid;if(after&&after.nextSibling){host.insertBefore(l,after.nextSibling);host.insertBefore(row,l.nextSibling);}else{host.appendChild(l);host.appendChild(row);}}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 addEventListener('visibilitychange',()=>{try{if(!window.speechSynthesis)return;if(document.hidden)speechSynthesis.pause();else speechSynthesis.resume();}catch(_){}});
 window.__STORYWORLD_CINEMA_MODE_R370__=Object.freeze({revision:REV,set,preview,stop:stopAll,prefs:()=>({...prefs}),
- pure:Object.freeze({sentences,score,select,rateFor,gapFor,chunks,isFinal,DEFAULT_SEC,RATE_MIN,RATE_MAX,CPS0,MIN_H}),
- inspect:()=>({revision:REV,prefs:{...prefs},zone:{key:zone.key,active:+zone.active.toFixed(1),estimate:estimate(zone.key)},queue:Q.length,queuedChars:Math.round(pendingChars()),backlogSecs:+backlogSecs().toFixed(1),
+ pure:Object.freeze({sentences,score,select,rateFor,gapFor,tone,chunks,isFinal,DEFAULT_SEC,RATE_MIN,RATE_MAX,CPS0,MIN_H,GAP,GAP_END}),
+ inspect:()=>({revision:REV,prefs:{...prefs},zone:{key:zone.key,active:+zone.active.toFixed(1),estimate:estimate(zone.key)},queue:Q.length,reserve:reserve.length,realMul:realMul(),queuedChars:Math.round(pendingChars()),backlogSecs:+backlogSecs().toFixed(1),
   current:cur?.text||null,deadlineIn:deadline?+(deadline-now()).toFixed(1):null,cps:+cps.toFixed(2),voices:voices().map(v=>v.name),learned:{...learned},stats:{...stats},lastError})});
 })();
