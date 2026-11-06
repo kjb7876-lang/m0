@@ -19,7 +19,7 @@ const REV='R368-betrayal-video-1',KEY='storyworld.r368.betrayal',SRC='assets/r36
 const CUES=Object.freeze([[3.4,6.3,0],[6.3,8.2,1],[8.2,11,2]]);
 const FALLBACK_CAPTIONS=Object.freeze(['초천사가 웃으며 권능을 펼쳤다.','그런데 사라진 것은 악마들이 아니었다.','수호자 가운데 남아 있는 것은 나 하나뿐이었다.']);
 let prefs={on:true,tint:true,seen:false};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,keptR317:0,replacedR317:0,injected:0,tinted:0,preloads:0};let lastError=null,open=null,pre=null;
+const stats={plays:0,skips:0,ended:0,errors:0,muted:0,stalled:0,keptR317:0,replacedR317:0,restoredR317:0,injected:0,tinted:0,preloads:0};let lastError=null,open=null,pre=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}};
 const url=p=>{try{return typeof urlFor==='function'?urlFor(p):p;}catch(_){return p;}};
@@ -60,9 +60,16 @@ const current=o=>open===o&&!o.closed;
 function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stall);clearTimeout(o.hold);
  for(const [type,fn]of o.events)o.video.removeEventListener(type,fn);o.events.length=0;try{o.video.pause();}catch(_){}
  if(reason==='skip')stats.skips++;else if(reason==='ended')stats.ended++;else if(reason==='stall')stats.stalled++;
+ if((reason==='skip'||reason==='ended')&&!prefs.seen){prefs.seen=true;save();}
+ const failed=reason==='error'||reason==='stall';
+ // 영상이 실패하면 숨겨 둔 R317 장면을 다시 보여 준다(서사 유지). 끝까지 갔거나 건너뛰면 R317 을 닫는다.
+ if(o.r317){try{if(failed&&o.r317.isConnected){o.r317.style.visibility='';stats.restoredR317++;}else R317()?.skip?.();}catch(e){fail(e);}}
+ if(failed&&!o.r317&&o.lastTime<1){prefs.seen=false;save();}
  o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();o.focus?.focus?.({preventScroll:true});}catch(_){}},reason==='error'?0:460);}
-function key(e){if(!open)return;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&!e.repeat&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');}
+function key(e){if(!open)return false;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&!e.repeat&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');return true;}
+// 스킬 키(michaela-r247 등 capture)보다 먼저 막도록 먼저 실린 R309 의 capture 처리기에 맡긴다(Codex P2). R309 가 없을 때를 위해 자기 처리기도 둔다.
+try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]).push(key);}catch(_){}
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',key,true);}
 function cue(o){const t=Number(o.video.currentTime)||0,c=CUES.find(([a,b])=>t>=a&&t<b),text=c?captions()[c[2]]:'';
  if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
@@ -75,19 +82,21 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
  const title=(typeof regionById!=='undefined'&&regionById?.[ZONE]?.title)||'결전의 날';
  root.innerHTML='<div class="chap"></div><div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  root.querySelector('.chap').textContent=title+' · 기억';root.insertBefore(v,root.firstChild);document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
- const o=open={root,video:v,cap:root.querySelector('.cap'),fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:-1,text:'',focus:document.activeElement,room:r};
- const skip=root.querySelector('.skip');stats.plays++;prefs.seen=true;save();
+ const o=open={root,video:v,cap:root.querySelector('.cap'),fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:-1,text:'',focus:document.activeElement,room:r,r317:opt.r317||null};
+ const skip=root.querySelector('.skip');stats.plays++;
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);v.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
  root.addEventListener('pointerdown',e=>{if(e.target===skip)return;e.preventDefault();close(o,'skip');});skip.addEventListener('click',e=>{e.stopPropagation();close(o,'skip');});
- watch(o);on('timeupdate',()=>{cue(o);const t=Number(v.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);}});on('playing',()=>cue(o));
+ watch(o);on('timeupdate',()=>{cue(o);const t=Number(v.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);}});on('playing',()=>{cue(o);if(!prefs.seen){prefs.seen=true;save();}});
  on('ended',()=>atEnd(o));on('error',()=>{fail('video error '+(v.error?.code||''));close(o,'error');});
  if(opt.paused){cue(o);return true;}
  const p=v.play?.();if(p&&typeof p.catch==='function')p.catch(()=>{if(!current(o))return;v.muted=true;stats.muted++;v.play().catch(e=>{if(!current(o))return;fail(e);close(o,'error');});});
  return true;}
 // 발록이 결전의 날에서 쓰러지는 순간(R317 과 같은 조건). R317 장면이 열렸으면 영상이 준비됐을 때만 바꾼다.
 function takeOver(r){if(!prefs.on||prefs.seen||!eligible(r))return false;const old=typeof document!=='undefined'&&document.getElementById('r317Cinema'),v=pre;
- if(old){if(!v||v.error||v.readyState<2){stats.keptR317++;return false;}try{R317()?.skip?.();}catch(e){fail(e);}stats.replacedR317++;}
+ if(old){if(!v||v.error||v.readyState<2){stats.keptR317++;return false;}
+  // R317 은 닫지 않고 숨겨 둔다(영상 실패 시 다시 보임, 성공하면 close 에서 닫음).
+  if(!play(r,{r317:old}))return false;old.style.visibility='hidden';stats.replacedR317++;return true;}
  return play(r);}
 if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){const r=here(),want=isBalrog(e)&&!e.deadRecorded&&eligible(r)&&typeof started!=='undefined'&&started&&!(typeof loading!=='undefined'&&loading);
  const out=base.call(this,e,...a);if(want&&e.hp<=0&&e.deadRecorded&&r===here())try{takeOver(r);}catch(err){fail(err);}return out;};}

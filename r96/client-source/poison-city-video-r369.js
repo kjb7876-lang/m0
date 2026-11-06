@@ -44,9 +44,13 @@ const current=o=>open===o&&!o.closed;
 function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stall);clearTimeout(o.hold);
  for(const [type,fn]of o.events)o.video.removeEventListener(type,fn);o.events.length=0;try{o.video.pause();}catch(_){}
  if(reason==='skip')stats.skips++;else if(reason==='ended')stats.ended++;else if(reason==='stall')stats.stalled++;
+ if((reason==='skip'||reason==='ended')&&!prefs.seen){prefs.seen=true;save();}
+ if((reason==='error'||reason==='stall')&&o.lastTime<1){prefs.seen=false;save();} // 거의 못 봤으면 다음 입장 때 다시
  o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;
   try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();o.focus?.focus?.({preventScroll:true});}catch(_){}},reason==='error'?0:460);}
-function key(e){if(!open)return;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&!e.repeat&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');}
+function key(e){if(!open)return false;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&!e.repeat&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');return true;}
+// 스킬 키(michaela-r247 등 capture)보다 먼저 막도록 먼저 실린 R309 의 capture 처리기에 맡긴다(Codex P2). R309 가 없을 때를 위해 자기 처리기도 둔다.
+try{(window.__STORYWORLD_CINEMA_GUARDS__=window.__STORYWORLD_CINEMA_GUARDS__||[]).push(key);}catch(_){}
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',key,true);}
 function cue(o){const t=Number(o.video.currentTime)||0,c=CUES.find(([a,b])=>t>=a&&t<b),text=c?c[2]:'';
  if(text!==o.text){o.text=text;if(text)o.cap.textContent=text;o.cap.classList.toggle('on',!!text);}}
@@ -60,11 +64,11 @@ function play(r,opt={}){if(open||typeof document==='undefined')return false;if(!
  root.innerHTML='<div class="chap"></div><div class="cap" aria-live="polite"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  root.querySelector('.chap').textContent=title+' · 기억';root.insertBefore(v,root.firstChild);document.body.appendChild(root);requestAnimationFrame(()=>{root.style.opacity='1';});
  const o=open={root,video:v,cap:root.querySelector('.cap'),fade:root.querySelector('.fade'),stall:0,hold:0,events:[],closed:false,ending:false,lastTime:-1,text:'',focus:document.activeElement,room:r};
- const skip=root.querySelector('.skip');stats.plays++;prefs.seen=true;save();
+ const skip=root.querySelector('.skip');stats.plays++;
  const on=(type,fn)=>{const own=e=>{if(current(o))fn(e);};o.events.push([type,own]);v.addEventListener(type,own);};
  try{if(typeof keys!=='undefined'&&keys?.clear)keys.clear();}catch(_){}
  root.addEventListener('pointerdown',e=>{if(e.target===skip)return;e.preventDefault();close(o,'skip');});skip.addEventListener('click',e=>{e.stopPropagation();close(o,'skip');});
- watch(o);on('timeupdate',()=>{cue(o);const t=Number(v.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);}});on('playing',()=>cue(o));
+ watch(o);on('timeupdate',()=>{cue(o);const t=Number(v.currentTime)||0;if(t>o.lastTime+.01){o.lastTime=t;watch(o);}});on('playing',()=>{cue(o);if(!prefs.seen){prefs.seen=true;save();}});
  on('ended',()=>atEnd(o));on('error',()=>{fail('video error '+(v.error?.code||''));close(o,'error');});
  if(opt.paused){cue(o);return true;}
  const p=v.play?.();if(p&&typeof p.catch==='function')p.catch(()=>{if(!current(o))return;v.muted=true;stats.muted++;v.play().catch(e=>{if(!current(o))return;fail(e);close(o,'error');});});

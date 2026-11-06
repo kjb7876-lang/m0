@@ -31,6 +31,8 @@ async function run(tag,viewport){const {b,p,errors}=await boot(viewport);
   return {cap:a.caption,time:a.time,chap:document.querySelector('#r369v .chap')?.textContent,bgm:window.__STORYWORLD_POISON_CITY_VIDEO_R369__.bgmGain(),inv:player.invincible,vw:v?.videoWidth,cr:document.querySelector('#r369v .cap')?.getBoundingClientRect().toJSON(),vr:v?.getBoundingClientRect().toJSON()};});
   caps.push(r);await p.screenshot({path:`${OUT}/${tag}-video-${t}.jpg`,quality:72});}
  const C=await p.evaluate(()=>window.__STORYWORLD_POISON_CITY_VIDEO_R369__.CUES.map(c=>c[2]));
+ const kb=await p.evaluate(()=>{let got=0;const probe=()=>got++;addEventListener('keydown',probe,true);const ev=new KeyboardEvent('keydown',{key:'x',bubbles:true,cancelable:true});document.body.dispatchEvent(ev);removeEventListener('keydown',probe,true);return {got,prevented:ev.defaultPrevented};});
+ check(tag+': 재생 중 스킬 키 막힘(Codex P2)',kb.got===0&&kb.prevented,kb);
  check(tag+': 자막 3줄이 장면 시점에 정본 문장',caps.every((c,i)=>c.cap===C[i]),caps.map(c=>[c.time?.toFixed(2),c.cap]));
  check(tag+': 장 제목 · 기억',/중독의 도시 · 기억/.test(caps[0].chap||''),caps[0].chap);
  check(tag+': 재생 중 BGM 0·게임 멈춤',caps.every(c=>c.bgm===0)&&caps[0].inv===caps[2].inv,caps.map(c=>c.inv));

@@ -43,8 +43,11 @@ for(const [label,viewport] of [['pc',{width:1280,height:720}],['mobile',{width:3
  await p.waitForFunction(()=>{const a=window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect();return a.preloaded&&a.preloaded.ready>=2;},null,{timeout:30000}).catch(()=>{});
  check(label+': 발록 처치',await kill(p));
  await p.waitForTimeout(300);
- const a1=await p.evaluate(()=>({a:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect(),r317:!!document.getElementById('r317Cinema'),r317s:window.__STORYWORLD_MAPS_PALACE_SLUM_R317__?.inspect?.()?.stats}));
- check(label+': 처치 순간 영상이 열리고 R317 장면은 닫힘',a1.a.open&&!a1.r317&&a1.a.stats.plays===1,a1);
+ const a1=await p.evaluate(()=>({a:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect(),r317:document.getElementById('r317Cinema')?.style.visibility??null,r317s:window.__STORYWORLD_MAPS_PALACE_SLUM_R317__?.inspect?.()?.stats}));
+ check(label+': 처치 순간 영상이 열리고 R317 장면은 숨김(실패 대비로 남겨 둠)',a1.a.open&&(a1.r317===null||a1.r317==='hidden')&&a1.a.stats.plays===1,a1);
+ // Codex P2: 늦게 실린 영상도 스킬 키(capture)보다 먼저 막는다 — R309 의 먼저 실린 처리기가 대신 막음
+ const kb=await p.evaluate(()=>{let got=0;const probe=()=>got++;addEventListener('keydown',probe,true);const ev=new KeyboardEvent('keydown',{key:'x',bubbles:true,cancelable:true});document.body.dispatchEvent(ev);removeEventListener('keydown',probe,true);return {got,prevented:ev.defaultPrevented,guards:(window.__STORYWORLD_CINEMA_GUARDS__||[]).length};});
+ check(label+': 재생 중 스킬 키(X) 막힘(먼저 실린 R309 처리기)',kb.got===0&&kb.prevented&&kb.guards>=2,kb);
  const C=await p.evaluate(()=>window.__STORYWORLD_MAPS_PALACE_SLUM_R317__.CAPTIONS);
  const frozen=await p.evaluate(async()=>{const x=player.x;const e=room.enemies.find(o=>o.hp>0);const ex=e?.x;await new Promise(r=>setTimeout(r,600));return {same:player.x===x&&(!e||e.x===ex)};});
  check(label+': 재생 중 게임 멈춤',frozen.same,frozen);
@@ -73,4 +76,15 @@ for(const [label,viewport] of [['pc',{width:1280,height:720}],['mobile',{width:3
  check('r317 seen: 페이지 오류 없음',errors.length===0,errors);await b.close();}
 fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({fails,results},null,1));
 console.log(JSON.stringify({ok:fails===0,fails,checks:results.length,method:'headless Chromium (임시) — GPU·실기기·소리 품질 미검증'}));
+// Codex P2: R317 을 숨기고 튼 영상이 실패하면 R317 장면을 다시 보여 준다
+{const {b,p,errors}=await boot({width:1280,height:720});
+ await near(p);await p.waitForFunction(()=>{const a=window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect();return a.preloaded&&a.preloaded.ready>=2;},null,{timeout:30000}).catch(()=>{});
+ await kill(p);await p.waitForTimeout(300);
+ const h=await p.evaluate(()=>({open:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect().open,r317:document.getElementById('r317Cinema')?.style.visibility??null}));
+ await p.evaluate(()=>document.querySelector('#r368v video').dispatchEvent(new Event('error')));await p.waitForTimeout(700);
+ const f=await p.evaluate(()=>({a:window.__STORYWORLD_BETRAYAL_VIDEO_R368__.inspect(),r317:!!document.getElementById('r317Cinema'),vis:document.getElementById('r317Cinema')?.style.visibility}));
+ check('fail: 영상 오류면 숨겨 둔 R317 장면이 다시 보임',h.open&&h.r317==='hidden'&&!f.a.open&&f.r317&&f.vis===''&&f.a.stats.restoredR317===1,{h,f:{r317:f.r317,vis:f.vis,stats:f.a.stats}});
+ check('fail: 페이지 오류 없음',errors.length===0,errors);await b.close();}
+fs.writeFileSync(`${OUT}/results.json`,JSON.stringify({fails,results},null,1));
+console.log(JSON.stringify({ok:fails===0,fails,checks:results.length}));
 process.exit(fails?1:0);

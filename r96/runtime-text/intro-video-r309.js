@@ -34,8 +34,10 @@ function close(o,reason){if(!current(o))return;o.closed=true;clearTimeout(o.stal
  const quick=reason==='error';o.fade.classList.add('on');setTimeout(()=>{try{o.video.removeAttribute('src');o.video.load();}catch(_){}o.root.remove();if(open===o)open=null;if(reason==='error')fallback();},quick?0:460);}
 // Register before the later capture-phase skill handlers, not when playback starts.
 // Keep blocking through the closing fade; outside the intro the key order is unchanged.
-function key(e){if(!open)return;e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');}
-function keyUp(e){if(open)e.stopImmediatePropagation();}
+// 다른 영상 장면(R368·R369 등)은 늦게 실려 capture 순서가 스킬 키(michaela-r247 등)보다 뒤다 → 여기(먼저 실림)에서 대신 막아 준다.
+const guard=e=>{const gs=window.__STORYWORLD_CINEMA_GUARDS__;if(!Array.isArray(gs))return false;for(const g of gs){try{if(g(e))return true;}catch(_){}}return false;};
+function key(e){if(!open){guard(e);return;}e.preventDefault();e.stopImmediatePropagation();if(e.type==='keydown'&&(e.key==='Escape'||e.key==='Enter'||e.key===' '||e.code==='Space'))close(open,'skip');}
+function keyUp(e){if(open)e.stopImmediatePropagation();else guard(e);}
 if(typeof addEventListener==='function'){addEventListener('keydown',key,true);addEventListener('keyup',keyUp,true);}
 function atEnd(o){if(!current(o)||o.ending)return;o.ending=true;clearTimeout(o.stall);try{o.video.pause();}catch(_){}o.ttl.classList.add('on');o.hold=setTimeout(()=>close(o,'ended'),HOLD_MS);}
 function watch(o){clearTimeout(o.stall);o.stall=setTimeout(()=>{if(!current(o)||o.ending)return;const t=Number(o.video.currentTime)||0;if(t>=CUT){atEnd(o);return;}if(t>o.lastTime+.01){o.lastTime=t;watch(o);return;}close(o,'stall');},STALL_MS);}
