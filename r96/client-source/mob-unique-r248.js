@@ -53,6 +53,8 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
  const hd=typeof player==='object'&&player?Math.hypot(player.x-e.x,player.y-e.y):1e9,sdH=hd<1e9?(player.x-player.y)-(e.x-e.y):0;
  if(Math.hypot(dx,dy)>.002){m.moving=T()+.25;const sx=dx-dy;if(hd<8){if(Math.abs(sdH)>.05)m.face=sdH<0?-1:1;}else if(Math.abs(sx)>.001)m.face=sx<0?-1:1;}else if(hd<1e9){if(Math.abs(sdH)>.05&&(T()>m.moving||hd<8))m.face=sdH<0?-1:1;}
  m.x=e.x;m.y=e.y;let fr=attackFrame(e);if(fr>=0&&Number.isFinite(e.attack?.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)m.face=sd<0?-1:1;}
+ // R375: this direct body path bypasses R51.flip; share its committed ranged/melee facing.
+ m.face=window.__STORYWORLD_ENEMY_FACING_R375__?.uniqueFace?.(e,m.face,s)??m.face;
  if(fr<0)fr=T()<m.moving?Math.floor(T()*FPS+m.seed)%8:Math.floor(T()*2+m.seed)%2;
  const sx0=(fr%4)*CW,sy0=Math.floor(fr/4)*CH;
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':'saturate(.78) brightness(.86) contrast(1.08)';/* 칠한 배경과 덜 튀게 */

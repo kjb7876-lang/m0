@@ -1,0 +1,1108 @@
+[
+  {
+    "id": "dist06-boss",
+    "name": "발록 (Balrog)",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/dist06-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "mb-dist02",
+    "name": "늪의 뿔악마 군주 (Horn)",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "Native sheet visually inspected: front/oblique poses, no back view",
+    "r104Strike": "assets/r104/bosses/mb-dist02-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist02.png",
+      "assetFrame": {
+        "sourceRect": [
+          1374,
+          0,
+          798,
+          724
+        ],
+        "pivot": [
+          356,
+          640
+        ],
+        "visibleHeight": 515
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "a11-boss",
+    "name": "루시퍼 (Lucifer, pre-reveal ivory/gold form)",
+    "r104Phases": [
+      0
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/a11-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "mb-ep1a11",
+    "name": "초천사의 웃는 가면 (Mask)",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "Native sheet visually inspected: front/oblique poses, no back view",
+    "r104Strike": "assets/r104/bosses/mb-ep1a11-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1a11-atlas-v2.png",
+      "assetFrame": {
+        "sourceRect": [
+          1015,
+          0,
+          521,
+          1024
+        ],
+        "pivot": [
+          265,
+          875
+        ],
+        "visibleHeight": 663
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-dist01",
+    "name": "보라검천사 (Violet)",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-dist01-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist01.png",
+      "assetFrame": {
+        "sourceRect": [
+          1298,
+          0,
+          874,
+          724
+        ],
+        "pivot": [
+          402,
+          680
+        ],
+        "visibleHeight": 649
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "dist00-boss",
+    "name": "뿌리의 문지기",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "oct11-seven",
+    "nativeBakedFacing": [
+      "right"
+    ],
+    "note": "Visually inspected native right-side strike; left via mirror; no back view",
+    "r104Strike": "assets/r104/bosses/dist00-boss-p2.webp",
+    "nativeStrike": {
+      "path": "assets/boss-actions-20261011/dist00-boss-poses.png",
+      "assetFrame": {
+        "sourceRect": [
+          75,
+          540,
+          785,
+          440
+        ],
+        "pivot": [
+          355,
+          410
+        ],
+        "visibleHeight": 470,
+        "bakedFacing": "right"
+      },
+      "nativeKind150": "oct11-seven",
+      "nativePose150": "strike",
+      "floatingAnchor11": false
+    }
+  },
+  {
+    "id": "mb-dist03",
+    "name": "핏빛 수호로 추격자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-dist03-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist03.png",
+      "assetFrame": {
+        "sourceRect": [
+          1369,
+          0,
+          803,
+          724
+        ],
+        "pivot": [
+          281,
+          652
+        ],
+        "visibleHeight": 564
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-dist04",
+    "name": "첫 동료의 악마잔영",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-dist04-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist04.png",
+      "assetFrame": {
+        "sourceRect": [
+          1311,
+          0,
+          861,
+          724
+        ],
+        "pivot": [
+          438,
+          716
+        ],
+        "visibleHeight": 696
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-dist05",
+    "name": "숨이 끊긴 전령의 그림자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-dist05-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist05.png",
+      "assetFrame": {
+        "sourceRect": [
+          1362,
+          0,
+          810,
+          724
+        ],
+        "pivot": [
+          398,
+          668
+        ],
+        "visibleHeight": 550
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-dist06",
+    "name": "소환진 검은기둥",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC135",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-dist06-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc135/midboss-motions/sheets/mb-dist06.png",
+      "assetFrame": {
+        "sourceRect": [
+          1422,
+          0,
+          750,
+          724
+        ],
+        "pivot": [
+          368,
+          686
+        ],
+        "visibleHeight": 638
+      },
+      "nativeKind150": "RC135",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1a07",
+    "name": "무의 기억포식자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "oct11-seven",
+    "nativeBakedFacing": [
+      "right"
+    ],
+    "note": "Visually inspected native right-side strike; left via mirror; no back view",
+    "r104Strike": "assets/r104/bosses/mb-ep1a07-p2.webp",
+    "nativeStrike": {
+      "path": "assets/boss-actions-20261011/mb-ep1a07-poses.png",
+      "assetFrame": {
+        "sourceRect": [
+          75,
+          540,
+          730,
+          450
+        ],
+        "pivot": [
+          425,
+          410
+        ],
+        "visibleHeight": 470,
+        "bakedFacing": "right"
+      },
+      "nativeKind150": "oct11-seven",
+      "nativePose150": "strike",
+      "floatingAnchor11": true
+    }
+  },
+  {
+    "id": "mb-ep1a08",
+    "name": "백의 안정화 감독",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "Hospital R53 front/back + mirror supported, preserve effective R53 frame; R104 fallback remains limited",
+    "r104Strike": "assets/r104/bosses/mb-ep1a08-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1a08-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          967,
+          0,
+          569,
+          1024
+        ],
+        "pivot": [
+          283,
+          933
+        ],
+        "visibleHeight": 816
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1a10",
+    "name": "오만의 폐허핵",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1a10-p2.webp",
+    "nativeStrike": {
+      "path": "assets/generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          1330,
+          0,
+          825,
+          724
+        ],
+        "pivot": [
+          550,
+          660
+        ],
+        "visibleHeight": 542
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "b02-boss",
+    "name": "나태에 잠식된 남자",
+    "r104Phases": [
+      0,
+      1
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b02-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "b06b-boss",
+    "name": "소년이 된 총지배인 · 맘몬",
+    "r104Phases": [
+      0
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b06b-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "b07-boss",
+    "name": "불을 지른 청소부 · 사탄",
+    "r104Phases": [
+      0
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b07-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "b08-boss",
+    "name": "백색 정장의 호텔 그룹 회장",
+    "r104Phases": [
+      0,
+      1
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b08-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "mb-ep1b01",
+    "name": "교만의 잔향 · 제72문",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b01-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b01-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          908,
+          0,
+          628,
+          1024
+        ],
+        "pivot": [
+          212,
+          845
+        ],
+        "visibleHeight": 645
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b02",
+    "name": "나태의 껍데기 파수",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b02-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b02-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          965,
+          0,
+          571,
+          1024
+        ],
+        "pivot": [
+          245,
+          782
+        ],
+        "visibleHeight": 518
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b04",
+    "name": "폐기주방 감독",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b04-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b04-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          1010,
+          0,
+          526,
+          1024
+        ],
+        "pivot": [
+          250,
+          840
+        ],
+        "visibleHeight": 515
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b05",
+    "name": "심장빛 무대감독",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b05-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b05-atlas.png",
+      "assetFrame": {
+        "sourceRect": [
+          965,
+          0,
+          571,
+          1024
+        ],
+        "pivot": [
+          225,
+          820
+        ],
+        "visibleHeight": 610
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b06",
+    "name": "금고 장부감시자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b06-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b06-atlas-v2.png",
+      "assetFrame": {
+        "sourceRect": [
+          1028,
+          0,
+          508,
+          1024
+        ],
+        "pivot": [
+          242,
+          800
+        ],
+        "visibleHeight": 564
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b06b",
+    "name": "겨울숲 가시파수",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b06b-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b06b-atlas-v2.png",
+      "assetFrame": {
+        "sourceRect": [
+          1002,
+          0,
+          534,
+          1024
+        ],
+        "pivot": [
+          188,
+          755
+        ],
+        "visibleHeight": 482
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b07",
+    "name": "호텔 화염기사",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b07-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b07.png",
+      "assetFrame": {
+        "sourceRect": [
+          1378,
+          0,
+          794,
+          724
+        ],
+        "pivot": [
+          470,
+          647
+        ],
+        "visibleHeight": 583
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "b04-boss",
+    "name": "최고급 호텔의 총주방장 · 탐식의 귀 베엘제붑",
+    "r104Phases": [
+      2
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b04-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "b06-boss",
+    "name": "회장에게 고용된 총지배인 · 맘몬",
+    "r104Phases": [
+      0,
+      1
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b06-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "b09-boss",
+    "name": "사이보그 회장 · 생체 부트로더",
+    "r104Phases": [
+      1,
+      2
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/b09-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "l301-boss",
+    "name": "타락천사 기사",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/l301-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "mb-ep1b03",
+    "name": "금이 간 비교잔영",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b03-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b03-atlas-v2.png",
+      "assetFrame": {
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          1024
+        ],
+        "pivot": [
+          246,
+          855
+        ],
+        "visibleHeight": 682
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b08",
+    "name": "역십자가 시체경호체",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b08-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b08.png",
+      "assetFrame": {
+        "sourceRect": [
+          1384,
+          0,
+          788,
+          724
+        ],
+        "pivot": [
+          392,
+          672
+        ],
+        "visibleHeight": 586
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-ep1b09",
+    "name": "생체부트로더 연산핵",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-ep1b09-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-ep1b09.png",
+      "assetFrame": {
+        "sourceRect": [
+          1417,
+          0,
+          755,
+          724
+        ],
+        "pivot": [
+          350.5,
+          587
+        ],
+        "visibleHeight": 464
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-last302-v31231",
+    "name": "검은 안개 심장 · 불면의 기억",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-last302-v31231-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-last302-v31231.png",
+      "assetFrame": {
+        "sourceRect": [
+          1356,
+          0,
+          816,
+          724
+        ],
+        "pivot": [
+          433.5,
+          675
+        ],
+        "visibleHeight": 588
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "u201-mid",
+    "name": "제4단계 전쟁관리자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/u201-mid-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/u201-mid.png",
+      "assetFrame": {
+        "sourceRect": [
+          1294,
+          0,
+          878,
+          724
+        ],
+        "pivot": [
+          437,
+          676
+        ],
+        "visibleHeight": 574
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "u202-mid",
+    "name": "제8단계 자비 교정관",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/u202-mid-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/u202-mid.png",
+      "assetFrame": {
+        "sourceRect": [
+          1315,
+          0,
+          857,
+          724
+        ],
+        "pivot": [
+          430.5,
+          649
+        ],
+        "visibleHeight": 503
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "u204-mid",
+    "name": "제12단계 기억 검열기",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/u204-mid-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/u202-mid.png",
+      "assetFrame": {
+        "sourceRect": [
+          1315,
+          0,
+          857,
+          724
+        ],
+        "pivot": [
+          430.5,
+          649
+        ],
+        "visibleHeight": 503
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "u205-mid",
+    "name": "제14단계 역전 관리자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/u205-mid-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/u201-mid.png",
+      "assetFrame": {
+        "sourceRect": [
+          1294,
+          0,
+          878,
+          724
+        ],
+        "pivot": [
+          437,
+          676
+        ],
+        "visibleHeight": 574
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-hando01",
+    "name": "의존 신호 포식자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-hando01-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-hando01.png",
+      "assetFrame": {
+        "sourceRect": [
+          1409,
+          0,
+          763,
+          724
+        ],
+        "pivot": [
+          403,
+          647
+        ],
+        "visibleHeight": 469
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-hando02",
+    "name": "코어 운반 집행자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-hando02-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-hando02.png",
+      "assetFrame": {
+        "sourceRect": [
+          1390,
+          0,
+          782,
+          724
+        ],
+        "pivot": [
+          418.5,
+          662
+        ],
+        "visibleHeight": 513
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "h103-boss",
+    "name": "EGO 강탈 악몽왕",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/h103-boss-p2.webp",
+    "nativeStrike": null
+  },
+  {
+    "id": "mb-hando03",
+    "name": "환수검 모조체",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-hando03-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-hando03.png",
+      "assetFrame": {
+        "sourceRect": [
+          1343,
+          0,
+          829,
+          724
+        ],
+        "pivot": [
+          424,
+          625
+        ],
+        "visibleHeight": 523
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-murder01",
+    "name": "파란불 역주행 목격자",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-murder01-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-murder01.png",
+      "assetFrame": {
+        "sourceRect": [
+          1312,
+          0,
+          860,
+          724
+        ],
+        "pivot": [
+          446,
+          666
+        ],
+        "visibleHeight": 562
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-murder02",
+    "name": "공실장부 당직감사",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-murder02-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-murder02.png",
+      "assetFrame": {
+        "sourceRect": [
+          1341,
+          0,
+          831,
+          724
+        ],
+        "pivot": [
+          442.5,
+          669
+        ],
+        "visibleHeight": 596
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "murder04-mid",
+    "name": "진술 봉쇄 인과핵",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/murder04-mid-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/murder04-mid.png",
+      "assetFrame": {
+        "sourceRect": [
+          1239,
+          0,
+          933,
+          724
+        ],
+        "pivot": [
+          465,
+          600
+        ],
+        "visibleHeight": 463
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "mb-murder03",
+    "name": "옥상 인과보관인",
+    "r104Phases": "all/no phase filter",
+    "nativeKind": "RC140",
+    "nativeBakedFacing": [
+      "unspecified"
+    ],
+    "note": "No verified back/up source in R104; native direction not certified",
+    "r104Strike": "assets/r104/bosses/mb-murder03-p2.webp",
+    "nativeStrike": {
+      "path": "assets/rc140/story-cycle-motions/mb-murder03.png",
+      "assetFrame": {
+        "sourceRect": [
+          1351,
+          0,
+          821,
+          724
+        ],
+        "pivot": [
+          415,
+          669
+        ],
+        "visibleHeight": 627
+      },
+      "nativeKind150": "RC140",
+      "nativePose150": "strike"
+    }
+  },
+  {
+    "id": "c104-boss",
+    "name": "교만의 사이보그 교주 (Drive v17 downward)",
+    "r104Phases": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "nativeKind": null,
+    "nativeBakedFacing": [],
+    "note": "R104 strike visually inspected: front/down; phases 0-3 overridden",
+    "r104Strike": "assets/r104/bosses/c104-boss-p2.webp",
+    "nativeStrike": null
+  }
+]
