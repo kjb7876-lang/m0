@@ -50,4 +50,10 @@ const flush=()=>new Promise(r=>setImmediate(r));
 {const E=engine('hwando');await flush();castR(E);E.adv(.1);const c=E.frame();ok(E.draws.length===0&&c[0].r366Spin==null,'지금 영웅이 슬레이어가 아니면 그리지 않음');}
 {const E=engine();await flush();E.api.set(false);castR(E);E.adv(.1);E.frame();ok(E.draws.length===0&&!E.api.owns('slayer','r'),'끄면 예전 그대로(owns false → hammer·r209 층 복귀)');}
 {const E=engine();await flush();castR(E);E.adv(.1);E.g.room={id:'r2'};E.ctx.room=E.g.room;E.frame();ok(E.draws.length===0,'방이 바뀌면 취소');}
+{const E=engine();await flush();E.ctx.fx('storySourceSkill',5,5,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'release',r139SamongUlt:true});E.ctx.fx('storySourceSkill',5,5,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'release'});E.adv(.1);E.frame();
+ ok(E.draws.length===0&&E.api.inspect().stats.casts===0,'Codex P2: 사몽 각성(r139SamongUlt)·castId 없는 이벤트로는 시작하지 않음');
+ castR(E);E.adv(.5);E.frame();const t0=E.api.inspect().stats.casts;E.ctx.fx('storySourceSkill',5,5,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'release',r139SamongUlt:true});ok(E.api.inspect().stats.casts===t0&&E.api.inspect().cast.t0<E.g.time-.4,'Codex P2: 시전 중 사몽 적중이 회오리를 다시 시작하지 않음');}
+{const E=engine();await flush();const D=[];E.g.ctx.drawImage=(im,sx,sy,sw,sh,dx,dy,dw)=>D.push(dx+dw/2);E.ctx.fx('storySourceSkill',8,5,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'warning',castId:'o1'});
+ E.g.player.x=3;E.adv(.3);const c=E.frame();const ox=E.g.project(8,5).x;
+ ok(D.length===2&&D.every(x=>Math.abs(x-ox)<1e-6),'Codex P2: 회오리는 시전 원점(피해 위치)에 고정 — 영웅이 움직여도 그대로');ok(c[0].r366Spin!=null,'영웅 회전은 영웅에 그대로');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static+fake-engine'}));})().catch(e=>{console.error(e);process.exit(1);});

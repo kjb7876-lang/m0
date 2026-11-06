@@ -29,14 +29,14 @@ function warm(){if(IDX&&isHero())for(const k of ['back','front'])image(BASE+IDX.
 const owns=(h,slot)=>on&&h===HERO&&slot===SLOT;
 let cast=null;const seen=new Set();
 function start(castId,x,y){if(castId!=null){if(seen.has(castId))return;seen.add(castId);if(seen.size>32)seen.delete(seen.values().next().value);}
- let r=null;try{r=room;}catch(_){}cast={t0:T(),castId,x,y,room:r};stats.casts++;loadIndex();warm();}
+ let r=null;try{r=room;}catch(_){}cast={t0:T(),castId,x:Number.isFinite(x)?x:player.x,y:Number.isFinite(y)?y:player.y,room:r};stats.casts++;loadIndex();warm();}
 function active(){if(!cast||!on)return null;const age=T()-cast.t0;let r=null;try{r=room;}catch(_){}
  if(age<0||age>=DUR||!isHero()||!(player.hp>0)||r!==cast.room){if(r!==cast.room)stats.cancelled++;cast=null;return null;}return age;}
 const lowFx=()=>{try{return !!(settings?.lowFx||window.__STORYWORLD_PERF_R97__?.low?.());}catch(_){return false;}};
 // ---- 회오리 한 장 ----
 function layer(kind,age){if(!IDX||typeof ctx==='undefined'||!ctx||typeof project!=='function')return false;const L=IDX.layers[kind],im=L&&image(BASE+L.file);if(!im)return false;
  const n=IDX.frames,[cw,ch]=IDX.cell,[ox,oy]=IDX.origin,fr=Math.floor(age/(IDX.loop_s||.5)*n)%n,h=typeof actorHeight==='function'?actorHeight():60;
- const grow=Math.min(1,age/GROW),fade=Math.min(1,(DUR-age)/FADE),s=h*HEIGHT/(IDX.height_px||250)*(.55+.45*grow),q=project(player.x,player.y);
+ const grow=Math.min(1,age/GROW),fade=Math.min(1,(DUR-age)/FADE),s=h*HEIGHT/(IDX.height_px||250)*(.55+.45*grow),q=project(cast.x,cast.y);/* Codex P2: 피해가 나는 시전 원점(c.origin)에 고정 — 영웅 회전만 영웅을 따름 */
  const run=()=>{ctx.save();try{ctx.globalCompositeOperation='source-over';ctx.globalAlpha*=Math.max(0,Math.min(1,grow*1.4))*Math.max(0,fade);
   ctx.drawImage(im,fr*cw,0,cw,ch,q.x-ox*s,q.y-oy*s,cw*s,ch*s);}finally{ctx.restore();}};
  run();stats[kind]++;stats.drawn++;stats.lastFrame=fr;return true;}
@@ -52,7 +52,7 @@ function spin(rec,st,age){const c=body(rec,st);if(!c)return false;const q=projec
  c.points=c.points.map(([x,y])=>[q.x+(x-q.x)*k,y]);c.r366Spin=+k.toFixed(3);stats.spun++;return true;}
 // ---- 시전 감지 ----
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){const r=base.apply(this,arguments);
- try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero===HERO&&o.sourceSlot===SLOT&&isHero()&&o.stage!=='hit')start(o.castId??null,x,y);}catch(e){fail(e);}return r;};}
+ try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero===HERO&&o.sourceSlot===SLOT&&isHero()&&o.stage!=='hit'&&o.castId!=null&&!o.r139SamongUlt&&Number.isFinite(x)&&Number.isFinite(y))start(o.castId,x,y);/* Codex P2: 사몽 각성 적중(r139, castId 없음)은 받지 않음 */}catch(e){fail(e);}return r;};}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){let age=null;try{age=active();}catch(e){fail(e);}
  if(age==null)return base.apply(this,a);
  const rec=typeof ctx==='object'?ctx:null,lo=lowFx();
