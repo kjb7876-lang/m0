@@ -1,3 +1,4 @@
+// R376: 대체 애니메이션에서도 제목 글자 '합일(合一)'을 없앴다(사용자 2026-11-06 "맨처음영상에 합일 나오는 글자 지워주고").
 // R309 — 새 게임 오프닝: 궁전 한가운데서 악마화 나무가 자라나 천사들을 타락시키는 10초 3D 애니메이션(사용자 2026-11-04 "코드로 맨처음에 악마화나무가 궁전중심에서 자라나서 천사들을 타락시키는 3d애니메이션 10초정도").
 //  · 영상 파일·외부 그림 없이 Three.js 기본 도형과 코드로만 만든다(절차적 나무·뿌리·천사). 임시 3D 연출이며 최종 아트가 아니다.
 //  · 흐름(10초): 0–1.5 황금빛 궁전과 후광 천사들 → 1.2–6 중심 제단에서 나무가 솟고 가지·뿌리가 퍼짐 → 3–8.5 뿌리가 닿는 차례로 천사 타락
@@ -186,7 +187,7 @@ async function play(opt={}){if(active)return false;if(!opt.force&&(!prefs.on||(n
  let T;try{T=await three();}catch(e){fail(e);return false;}
  const low=opt.low!=null?!!opt.low:isMobile();
  css();const root=document.createElement('div');root.id='r309';root.setAttribute('role','dialog');root.setAttribute('aria-label','오프닝 3D 애니메이션');
- root.innerHTML='<div class="vig"></div><div class="ttl">합일(合一)</div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
+ root.innerHTML='<div class="vig"></div><div class="ttl"></div><button type="button" class="skip">건너뛰기 ▸</button><div class="fade"></div>';
  document.body.appendChild(root);
  const W=()=>Math.max(1,innerWidth),H=()=>Math.max(1,innerHeight);let renderer;
  try{renderer=new T.WebGLRenderer({antialias:!low,powerPreference:low?'low-power':'default'});}catch(e){fail(e);root.remove();return false;}

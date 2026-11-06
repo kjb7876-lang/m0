@@ -4133,6 +4133,8 @@
     "assets/r375/mobs/kair-48.webp",
     "assets/r375/mobs/kair03-residue.webp",
     "assets/r375/mobs/plague-hound.webp",
+    "real-mode-r376.js",
+    "hud-cinema-r376.js",
     "music-box-r378.js",
     "assets/r378/orgel-0.webp",
     "assets/r378/orgel-1.webp",
@@ -5224,5 +5226,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "63c3ceab1dbd7685782a9e99a48893289b62b2baae4414dc65f816c5c64900bd"
+  "runtimeManifestSHA256": "91ab299f66398a6ed79558ad0dc54d15831059163faccf781a6240a340a5a3b9"
 }
