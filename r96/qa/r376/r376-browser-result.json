@@ -1,0 +1,292 @@
+[
+ {
+  "zone": "dist01",
+  "wide": null,
+  "mobile": false,
+  "enterMs": 13529,
+  "fps": 2.8,
+  "worst": 401,
+  "cells": 2433,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/dist01-pc-before.jpg"
+ },
+ {
+  "zone": "ep1a10",
+  "wide": null,
+  "mobile": false,
+  "enterMs": 11753,
+  "fps": 4.8,
+  "worst": 255,
+  "cells": 3800,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 53,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/ep1a10-pc-before.jpg"
+ },
+ {
+  "zone": "u201",
+  "wide": null,
+  "mobile": false,
+  "enterMs": 9124,
+  "fps": 3.1,
+  "worst": 377,
+  "cells": 3794,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/u201-pc-before.jpg"
+ },
+ {
+  "wide": false,
+  "mobile": false,
+  "errors": []
+ },
+ {
+  "zone": "dist01",
+  "wide": null,
+  "mobile": true,
+  "enterMs": 5877,
+  "fps": 7.6,
+  "worst": 165,
+  "cells": 2433,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/dist01-mobile-before.jpg"
+ },
+ {
+  "zone": "ep1a10",
+  "wide": null,
+  "mobile": true,
+  "enterMs": 7155,
+  "fps": 9.6,
+  "worst": 138,
+  "cells": 3800,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 53,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/ep1a10-mobile-before.jpg"
+ },
+ {
+  "zone": "u201",
+  "wide": null,
+  "mobile": true,
+  "enterMs": 5636,
+  "fps": 8.5,
+  "worst": 169,
+  "cells": 3794,
+  "bounds": [
+   0,
+   0,
+   68,
+   70
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/u201-mobile-before.jpg"
+ },
+ {
+  "wide": false,
+  "mobile": true,
+  "errors": []
+ },
+ {
+  "zone": "dist01",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": false,
+  "enterMs": 12434,
+  "fps": 2.9,
+  "worst": 442,
+  "cells": 4080,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/dist01-pc-after.jpg"
+ },
+ {
+  "zone": "ep1a10",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": false,
+  "enterMs": 11428,
+  "fps": 5.3,
+  "worst": 214,
+  "cells": 8679,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 53,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/ep1a10-pc-after.jpg"
+ },
+ {
+  "zone": "u201",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": false,
+  "enterMs": 9783,
+  "fps": 3.6,
+  "worst": 338,
+  "cells": 8709,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/u201-pc-after.jpg"
+ },
+ {
+  "wide": true,
+  "mobile": false,
+  "errors": []
+ },
+ {
+  "zone": "dist01",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": true,
+  "enterMs": 8752,
+  "fps": 8.1,
+  "worst": 268,
+  "cells": 4080,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/dist01-mobile-after.jpg"
+ },
+ {
+  "zone": "ep1a10",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": true,
+  "enterMs": 7438,
+  "fps": 11,
+  "worst": 130,
+  "cells": 8679,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 53,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/ep1a10-mobile-after.jpg"
+ },
+ {
+  "zone": "u201",
+  "wide": {
+   "rooms": 1.5,
+   "links": 2,
+   "frame": [
+    100,
+    104
+   ]
+  },
+  "mobile": true,
+  "enterMs": 5272,
+  "fps": 12,
+  "worst": 112,
+  "cells": 8709,
+  "bounds": [
+   0,
+   0,
+   100,
+   104
+  ],
+  "type": "r171-story-narrative-map",
+  "enemies": 45,
+  "stuck": false,
+  "shot": "/tmp/claude-0/-home-user-m0/3d09e839-e61e-5f3a-a71b-24edbb8b3b8f/scratchpad/r376/u201-mobile-after.jpg"
+ },
+ {
+  "wide": true,
+  "mobile": true,
+  "errors": []
+ }
+]

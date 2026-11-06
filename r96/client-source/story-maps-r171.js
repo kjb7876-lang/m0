@@ -76,16 +76,23 @@
  // R179: 보스 구역 문·다음 구역 문을 병동 미로와 같은 자리(보스 구역 문 20,20 폭 6 · 다음 구역 문 5,6 폭 8)에 둔다. 진행 코드·저장·안내·
  //  이어받은 검사들이 그 문 앞(20,22 · 5,8)과 보스 전투실 안(20,12)을 기준으로 쓴다. 보스 전투실은 6..26 × 6..20, 문에서 중앙 전투실까지는 폭 6 통로,
  //  다음 구역 문 앞에는 작은 앞뜰(1..9 × 6..11)을 둔다.
- const W=68,H=70,CORE={x:6,y:6,w:20,h:14},ALCOVE={x:1,y:1,w:8,h:5},GATHER={x:4,y:27,w:24,h:12},ENTRY={x:50,y:48,w:14,h:12};
+ /* R376(사용자 2026-11-06 "맵구역및 통로확대작업" → "길·방 폭 2배(R355 방식)"): 두 갈래 길의 통로 폭 2배, 방·마당·홀 1.5배.
+    보스 전투실(6..26)·다음 구역 앞뜰·집결실·보스 연결 통로·door-0/door-2 는 원래 자리 그대로(진행·저장·보스 탄막 3..27 이 그 좌표를 쓴다).
+    늘어난 방을 담으려고 지도 틀을 68×70 → 100×104 로 넓히고 두 갈래 길의 띠·입구·앞방(door-1)만 새 틀로 옮긴다.
+    끄기: localStorage storyworld.r376.storyWide = {"on":false} → R171 원래 크기. */
+ const WIDE=(()=>{try{return JSON.parse(localStorage.getItem('storyworld.r376.storyWide')||'{}')?.on!==false;}catch(e){return true;}})();
+ const RS=WIDE?1.5:1,LW=w=>WIDE?Math.min(12,w*2):w,SZ=v=>WIDE?Math.round(v*RS):v,ODD=v=>{const n=SZ(v);return WIDE&&n%2===0?n+1:n;};
+ const W=WIDE?100:68,H=WIDE?104:70,CORE={x:6,y:6,w:20,h:14},ALCOVE={x:1,y:1,w:8,h:5},GATHER={x:4,y:27,w:24,h:12},ENTRY=WIDE?{x:78,y:46,w:19,h:17}:{x:50,y:48,w:14,h:12};
  // R258: 중앙 전투실(집결)을 16×8 → 24×12(약 2.2배)로 — 두 갈래 길에서 살아남은 몹 33~40마리가 모두 들어와도 겹치지 않고 다 보이게(사용자 "초반부 보스진입전 맵몰리는구간 확장해서 모든몹이 확실하게 등장할 공간").
  //  왼쪽·위로 넓혀 보스 연결 통로(17..23×20..30)와 이어지고, 아래 띠(y≥42)·오른쪽 띠(x≥30)와는 떨어져 있다.
  const VEST={x:1,y:6,w:8,h:5},BOSSLINK={x:17,y:20,w:6,h:10};
- const BAND={S:{x0:2,y0:42,x1:49,y1:68,path:[[47,57],[12,57],[12,47]]},E:{x0:30,y0:2,x1:66,y1:40,path:[[57,38],[57,8],[36,8],[36,32]]}};
+ const BAND=WIDE?{S:{x0:2,y0:42,x1:75,y1:102,path:[[72,72],[14,72],[14,47]]},E:{x0:30,y0:2,x1:98,y1:40,path:[[86,36],[86,9],[38,9],[38,32]]}}
+  :{S:{x0:2,y0:42,x1:49,y1:68,path:[[47,57],[12,57],[12,47]]},E:{x0:30,y0:2,x1:66,y1:40,path:[[57,38],[57,8],[36,8],[36,32]]}};
  const DOOR0={x:20,y:20,width:6,depth:.24,axis:'y'},DOOR2={x:5,y:6,width:8,depth:.24,axis:'y'};
  // R179: 원래 병동 지도는 문이 셋(door-0 보스 구역 문 · door-1 여닫는 일반 문 · door-2 다음 구역 문)이었고, 문 그리기·저장·진행 코드가
  //  그 세 번호를 기대한다(문 목록의 세 번째가 door-2). 입구 아래에 작은 앞방(막다른 곁방)을 하나 두고 그 통로에 door-1 을 단다 —
  //  닫혀 있어도 다른 길을 끊지 않고, 적이 이 방에 놓이지 않게 spawnExclude 로 알린다.
- const CLOSET={x:50,y:62,w:8,h:5},CLOSET_LINK={x:51,y:60,w:5,h:2},DOOR1={x:53.5,y:61,width:5,depth:.24,axis:'y'};
+ const CLOSET=WIDE?{x:82,y:65,w:8,h:5}:{x:50,y:62,w:8,h:5},CLOSET_LINK=WIDE?{x:83,y:63,w:5,h:2}:{x:51,y:60,w:5,h:2},DOOR1=WIDE?{x:85.5,y:64,width:5,depth:.24,axis:'y'}:{x:53.5,y:61,width:5,depth:.24,axis:'y'};
  const inClosetZone=(x,y)=>x>=CLOSET.x-1&&x<CLOSET.x+CLOSET.w+1&&y>=CLOSET_LINK.y&&y<CLOSET.y+CLOSET.h+1;
 
  // ---- 바닥 깎기 (사몽 carve 와 같은 방식: 방 사각/원 + 방 중심끼리 ㄱ자 통로) ----------------------------
@@ -111,16 +118,16 @@
 
  // 한 띠를 채운다. 돌려주는 값: rooms(전역 번호는 호출자가 붙인다), links(띠 안 번호), first/last(입구·집결 쪽 방), main(본길 방들).
  const T={
-  ward(b,r,P){return chain(b,r,P,{d:8,amp:0,station:()=>[5,5,'corridor'],link:3,side:()=>[ri(r,8,10),ri(r,6,8),'room'],sideLink:3,sideGap:2});},
-  street(b,r,P){return chain(b,r,P,{d:9,amp:1,station:()=>[7,7,'street'],link:6,side:k=>k%2?[ri(r,7,8),ri(r,6,7),'yard']:null,sideLink:3,sideGap:4});},
-  grove(b,r,P){return chain(b,r,P,{d:10,amp:4,station:()=>{const s=2*ri(r,4,5)+1;return[s,s,'yard','disc'];},link:4,side:k=>k%2?null:(()=>{const s=2*ri(r,3,4)+1;return[s,s,'yard','disc'];})(),sideLink:3,sideGap:2});},
-  bridge(b,r,P){return chain(b,r,P,{d:10,amp:6,station:k=>[7,7,'yard',k%2?'disc':null],link:3,side:k=>k%3===1?[6,6,'yard','disc']:null,sideLink:3,sideGap:3});},
-  switchback(b,r,P){return chain(b,r,P,{d:8,amp:7,station:(k,s)=>Math.abs(s.dx)>Math.abs(s.dy)?[6,12,'room']:[12,6,'room'],link:3,side:()=>null});},
-  nave(b,r,P){return chain(b,r,P,{d:9,amp:0,station:()=>[9,9,'hall'],link:7,pillars:true,side:k=>k%2?[6,6,'room']:null,sideLink:3,sideGap:2});},
+  ward(b,r,P){return chain(b,r,P,{d:SZ(8),amp:0,station:()=>[SZ(5),SZ(5),'corridor'],link:LW(3),side:()=>[SZ(ri(r,8,10)),SZ(ri(r,6,8)),'room'],sideLink:LW(3),sideGap:2});},
+  street(b,r,P){return chain(b,r,P,{d:SZ(9),amp:SZ(1),station:()=>[SZ(7),SZ(7),'street'],link:LW(6),side:k=>k%2?[SZ(ri(r,7,8)),SZ(ri(r,6,7)),'yard']:null,sideLink:LW(3),sideGap:4});},
+  grove(b,r,P){return chain(b,r,P,{d:SZ(10),amp:SZ(4),station:()=>{const s=ODD(2*ri(r,4,5)+1);return[s,s,'yard','disc'];},link:LW(4),side:k=>k%2?null:(()=>{const s=ODD(2*ri(r,3,4)+1);return[s,s,'yard','disc'];})(),sideLink:LW(3),sideGap:2});},
+  bridge(b,r,P){return chain(b,r,P,{d:SZ(10),amp:SZ(6),station:k=>[SZ(7),SZ(7),'yard',k%2?'disc':null],link:LW(3),side:k=>k%3===1?[SZ(6),SZ(6),'yard','disc']:null,sideLink:LW(3),sideGap:3});},
+  switchback(b,r,P){return chain(b,r,P,{d:SZ(8),amp:SZ(7),station:(k,s)=>Math.abs(s.dx)>Math.abs(s.dy)?[SZ(6),SZ(12),'room']:[SZ(12),SZ(6),'room'],link:LW(3),side:()=>null});},
+  nave(b,r,P){return chain(b,r,P,{d:SZ(9),amp:0,station:()=>[SZ(9),SZ(9),'hall'],link:LW(7),pillars:true,side:k=>k%2?[SZ(6),SZ(6),'room']:null,sideLink:LW(3),sideGap:2});},
   lanes(b,r,P){return lanes(b,r,P);},
   radial(b,r,P){return radial(b,r,P);},
-  grid(b,r,P){return grid(b,r,P,{pitch:6,cw:3});},
-  'grid-wide'(b,r,P){return grid(b,r,P,{pitch:8,cw:5});}
+  grid(b,r,P){return grid(b,r,P,WIDE?{pitch:11,cw:6}:{pitch:6,cw:3});},
+  'grid-wide'(b,r,P){return grid(b,r,P,WIDE?{pitch:15,cw:10}:{pitch:8,cw:5});}
  };
  function name(P,k){const list=P.purposes?.length?P.purposes:['전투 구역'];return list[k%list.length];}
  function chain(b,r,P,o){const st=stations(b,o.d,o.amp,r),rooms=[],links=[],cuts=[],main=[];
@@ -132,27 +139,28 @@
     if(!inside(R,b)||rooms.some(Q=>overlaps(Q,R)))continue;rooms.push(R);links.push([main[k],rooms.length-1,o.sideLink||3,Math.abs(s.dx)>Math.abs(s.dy)?'vh':'hv']);break;}});
   if(o.pillars)for(let k=1;k<main.length;k++){const A=rooms[main[k-1]],B=rooms[main[k]],ax=A.x+A.w/2,ay=A.y+A.h/2,bx=B.x+B.w/2,by=B.y+B.h/2;
    // 긴 회랑의 두 줄 기둥(통로 가운데는 비운다). 진행 방향에 따라 좌우로.
-   if(Math.abs(bx-ax)>Math.abs(by-ay)){const x=Math.round((ax+bx)/2)-1;for(const dy of[-3,2])cuts.push({x,y:Math.floor(ay)+dy,w:2,h:1});}
-   else{const y=Math.round((ay+by)/2)-1;for(const dx of[-3,2])cuts.push({x:Math.floor(ax)+dx,y,w:1,h:2});}}
+   const PO=WIDE?[-6,5]:[-3,2];/* R376: 넓어진 회랑에서도 기둥 두 줄이 가운데 길을 비우게 */
+   if(Math.abs(bx-ax)>Math.abs(by-ay)){const x=Math.round((ax+bx)/2)-1;for(const dy of PO)cuts.push({x,y:Math.floor(ay)+dy,w:2,h:1});}
+   else{const y=Math.round((ay+by)/2)-1;for(const dx of PO)cuts.push({x:Math.floor(ax)+dx,y,w:1,h:2});}}
   return{rooms,links,cuts,first:main[0],last:main[main.length-1],main};}
  function lanes(b,r,P){// 나란한 두 길: 본길(5) 하나와 곁길(3) 하나를 띠의 길을 따라 놓고 시작·가운데·끝에서 잇는다.
-  const st=stations(b,9,0,r),rooms=[],links=[],main=[],alt=[];
-  st.forEach((s,k)=>{const R=box(s.x,s.y,5,5,{kind:'corridor',name:name(P,k)});R.x=clamp(R.x,b.x0,b.x1-5);R.y=clamp(R.y,b.y0,b.y1-5);rooms.push(R);main.push(rooms.length-1);if(k)links.push([main[k-1],main[k],5,k%2?'hv':'vh']);});
-  st.forEach((s,k)=>{const off=8+(k%2),R=box(s.x-s.dy*off,s.y+s.dx*off,4,4,{kind:'corridor',name:'복도',side:true});R.x=clamp(R.x,b.x0,b.x1-4);R.y=clamp(R.y,b.y0,b.y1-4);
+  const st=stations(b,SZ(9),0,r),rooms=[],links=[],main=[],alt=[],m5=SZ(5),a4=SZ(4);
+  st.forEach((s,k)=>{const R=box(s.x,s.y,m5,m5,{kind:'corridor',name:name(P,k)});R.x=clamp(R.x,b.x0,b.x1-m5);R.y=clamp(R.y,b.y0,b.y1-m5);rooms.push(R);main.push(rooms.length-1);if(k)links.push([main[k-1],main[k],LW(5),k%2?'hv':'vh']);});
+  st.forEach((s,k)=>{const off=SZ(8)+(k%2)+(WIDE?2:0),R=box(s.x-s.dy*off,s.y+s.dx*off,a4,a4,{kind:'corridor',name:'복도',side:true});R.x=clamp(R.x,b.x0,b.x1-a4);R.y=clamp(R.y,b.y0,b.y1-a4);
    if(rooms.some((Q,i)=>!alt.includes(i)&&overlaps(Q,R,0))){alt.push(-1);return;}rooms.push(R);alt.push(rooms.length-1);});
-  let prev=-1;alt.forEach((a,k)=>{if(a<0){prev=-1;return;}if(prev>=0)links.push([prev,a,3,k%2?'vh':'hv']);else links.push([main[k],a,3,'hv']);prev=a;});
-  const mid=Math.floor(alt.length/2);for(const k of[mid,alt.length-1])if(alt[k]>=0)links.push([main[k],alt[k],3,'vh']);
+  let prev=-1;alt.forEach((a,k)=>{if(a<0){prev=-1;return;}if(prev>=0)links.push([prev,a,LW(3),k%2?'vh':'hv']);else links.push([main[k],a,LW(3),'hv']);prev=a;});
+  const mid=Math.floor(alt.length/2);for(const k of[mid,alt.length-1])if(alt[k]>=0)links.push([main[k],alt[k],LW(3),'vh']);
   // 끝에 작은 방 하나(무대 뒤·묘지 끝 같은 자리 — 일반 이름만).
   return{rooms,links,cuts:[],first:main[0],last:main[main.length-1],main};}
  function radial(b,r,P){// 띠 가운데 둥근 홀 + 바퀴살 방. 들어오는 길·나가는 길은 바퀴살 방을 지난다.
-  const cx=Math.round((b.x0+b.x1)/2),cy=Math.round((b.y0+b.y1)/2),R0=Math.min(8,Math.floor((Math.min(b.x1-b.x0,b.y1-b.y0)-14)/2)),hub=box(cx,cy,2*R0+1,2*R0+1,{kind:'hall',shape:'disc',name:name(P,0)}),rooms=[hub],links=[],main=[0];
+  const cx=Math.round((b.x0+b.x1)/2),cy=Math.round((b.y0+b.y1)/2),R0=Math.min(WIDE?11:8,Math.floor((Math.min(b.x1-b.x0,b.y1-b.y0)-(WIDE?18:14))/2)),hub=box(cx,cy,2*R0+1,2*R0+1,{kind:'hall',shape:'disc',name:name(P,0)}),rooms=[hub],links=[],main=[0];
   const P0=b.path[0],P1=b.path[b.path.length-1],ang0=Math.atan2(P0[1]-cy,P0[0]-cx),n=ri(r,4,6);let first=-1,last=-1,bestF=1e9,bestL=1e9;
-  for(let i=0;i<n;i++){const a=ang0+i*2*Math.PI/n,d=R0+7,w=ri(r,6,8),h=ri(r,6,7),R=box(cx+Math.cos(a)*d,cy+Math.sin(a)*d,w,h,{kind:'room',name:name(P,i+1)});R.x=clamp(R.x,b.x0,b.x1-w);R.y=clamp(R.y,b.y0,b.y1-h);
-   if(rooms.some(Q=>Q!==hub&&overlaps(Q,R,1)))continue;rooms.push(R);const k=rooms.length-1;links.push([0,k,3,Math.abs(Math.cos(a))>Math.abs(Math.sin(a))?'hv':'vh']);main.push(k);
+  for(let i=0;i<n;i++){const a=ang0+i*2*Math.PI/n,d=R0+(WIDE?10:7),w=SZ(ri(r,6,8)),h=SZ(ri(r,6,7)),R=box(cx+Math.cos(a)*d,cy+Math.sin(a)*d,w,h,{kind:'room',name:name(P,i+1)});R.x=clamp(R.x,b.x0,b.x1-w);R.y=clamp(R.y,b.y0,b.y1-h);
+   if(rooms.some(Q=>Q!==hub&&overlaps(Q,R,1)))continue;rooms.push(R);const k=rooms.length-1;links.push([0,k,LW(3),Math.abs(Math.cos(a))>Math.abs(Math.sin(a))?'hv':'vh']);main.push(k);
    const c=[R.x+R.w/2,R.y+R.h/2],f=Math.hypot(c[0]-P0[0],c[1]-P0[1]),l=Math.hypot(c[0]-P1[0],c[1]-P1[1]);if(f<bestF){bestF=f;first=k;}if(l<bestL&&k!==first){bestL=l;last=k;}}
   if(last<0||last===first)last=0;
   // 바깥 고리: 바퀴살 방끼리 하나 걸러 이어 원형 순환(고리·동심원) 느낌을 낸다.
-  const spokes=main.slice(1);for(let i=0;i<spokes.length;i+=2){const a=spokes[i],c=spokes[(i+1)%spokes.length];if(a!==c)links.push([a,c,3,'hv']);}
+  const spokes=main.slice(1);for(let i=0;i<spokes.length;i+=2){const a=spokes[i],c=spokes[(i+1)%spokes.length];if(a!==c)links.push([a,c,LW(3),'hv']);}
   return{rooms,links,cuts:[],first:first<0?0:first,last,main};}
  function grid(b,r,P,o){// 미로/구획 거리: 띠를 격자로 나눠 DFS 로 잇고 조금 되돌이 길을 둔다(사몽 grid 틀과 같은 방식).
   const S=o.pitch,cw=o.cw,C=Math.floor((b.x1-b.x0-cw)/S)+1,Rn=Math.floor((b.y1-b.y0-cw)/S)+1,rooms=[],links=[],id=(i,j)=>j*C+i,adj=new Map();
@@ -162,9 +170,9 @@
   const first=near(b.path[0]),last=near(b.path[b.path.length-1]),seen=new Set([first]),stack=[first];
   while(stack.length){const at=stack[stack.length-1],i=at%C,j=Math.floor(at/C),nb=[[i+1,j],[i-1,j],[i,j+1],[i,j-1]].filter(([a,c])=>a>=0&&c>=0&&a<C&&c<Rn&&!seen.has(id(a,c)));
    if(!nb.length){stack.pop();continue;}const[a,c]=nb[Math.floor(r()*nb.length)];seen.add(id(a,c));link(at,id(a,c));stack.push(id(a,c));}
-  for(let j=0;j<Rn;j++)for(let i=0;i<C;i++){const a=id(i,j);for(const c of[i+1<C?id(i+1,j):-1,j+1<Rn?id(i,j+1):-1])if(c>=0&&!(adj.get(a)||[]).includes(c)&&r()<(cw>3?.35:.15))link(a,c);}
+  for(let j=0;j<Rn;j++)for(let i=0;i<C;i++){const a=id(i,j);for(const c of[i+1<C?id(i+1,j):-1,j+1<Rn?id(i,j+1):-1])if(c>=0&&!(adj.get(a)||[]).includes(c)&&r()<(cw>(WIDE?6:3)?.35:.15))link(a,c);}
   // 넓은 구획(도시·행군 격자)은 몇 칸을 광장으로 넓힌다.
-  if(cw>3)for(let k=0;k<rooms.length;k+=ri(r,5,7)){const R=rooms[k];if(k===first||k===last)continue;rooms[k]={...R,x:R.x-1,y:R.y-1,w:R.w+2,h:R.h+2,kind:'yard',name:'작은 마당'};}
+  if(cw>(WIDE?6:3))for(let k=0;k<rooms.length;k+=ri(r,5,7)){const R=rooms[k],g=WIDE?2:1;if(k===first||k===last)continue;rooms[k]={...R,x:R.x-g,y:R.y-g,w:R.w+2*g,h:R.h+2*g,kind:'yard',name:'작은 마당'};}
   return{rooms,links,cuts:[],first,last,main:[first,last]};}
 
  // ---- 지역 하나의 배치 ---------------------------------------------------------------------------
@@ -179,7 +187,7 @@
   const branch={};
   for(const key of['S','E']){const band=BAND[key],part=T[P.template](band,r,P),base=rooms.length;
    part.rooms.forEach(R=>rooms.push({...R,band:key}));for(const[a,b,w,via]of part.links)links.push([a+base,b+base,w,via]);cuts.push(...part.cuts);
-   links.push([3,part.first+base,key==='S'?5:5,key==='S'?'hv':'vh']);links.push([part.last+base,2,key==='S'?5:5,key==='S'?'vh':'vh']);
+   links.push([3,part.first+base,LW(5),key==='S'?'hv':'vh']);links.push([part.last+base,2,LW(5),key==='S'?'vh':'vh']);
    branch[key]={first:part.first+base,last:part.last+base,main:part.main.map(k=>k+base),rooms:part.rooms.map((_,k)=>k+base)};}
   /* 번호가 붙는 방(노드)은 앞방까지. aux 는 바닥만 깎는 통로·앞뜰(노드 번호 뒤쪽이라 앞 번호를 흔들지 않는다). */
   rooms.push({...CLOSET,kind:'room',name:'앞방',closet:true},{...CLOSET_LINK,kind:'corridor',aux:true},{...VEST,kind:'room',aux:true},{...BOSSLINK,kind:'corridor',aux:true});
@@ -247,7 +255,7 @@
    worldWardR81:{...(base?.worldWardR81||{}),revision:'story-r171',source:'r171-'+p.template,bossBounds:[CORE.x,CORE.y,CORE.x+CORE.w,CORE.y+CORE.h],bossAnchor:boss,gatherAnchor:gather,gatherBounds,rallyTriggers,arrivalAnchor:gather,portalNext,portalPrevious:{x:entry.x,y:entry.y},
     fieldAnchors,physicalDoorIds:doors.map(d=>d.id),routeSpawns,rallySpots,bossPoints,routeSplit:{x:ENTRY.x,y:ENTRY.y}},
    spawnExclude:[[CLOSET.x-1,CLOSET_LINK.y,CLOSET.x+CLOSET.w+1,CLOSET.y+CLOSET.h+1]],
-   storyMapR171:{revision:REV,template:p.template,core:p.core,source:p.source,topology:p.topology,mode,cells:floorCells.length,walls:walls.length,rooms:p.rooms.filter(R=>!R.aux).length,closet:closetId,waypoints:nodes.length-p.rooms.filter(R=>!R.aux).length}};
+   storyMapR171:{revision:REV,wideR376:WIDE?{rooms:RS,links:2,frame:[W,H]}:null,template:p.template,core:p.core,source:p.source,topology:p.topology,mode,cells:floorCells.length,walls:walls.length,rooms:p.rooms.filter(R=>!R.aux).length,closet:closetId,waypoints:nodes.length-p.rooms.filter(R=>!R.aux).length}};
   for(const key of['hospitalCoreB2','hospitalDoorsB3','hospitalAnalytic12','hospitalBoundary12','hospitalVisualWalls12','hospitalPreviousWalls12','hospitalWalkPolygons12','hospitalWalkArea12','hospitalLayoutRevision','hospitalPrototypeB1','doorUV','gate','walkableCellCount'])delete L[key];
   return L;}
 
@@ -287,5 +295,5 @@
  if(typeof document!=='undefined'&&document.addEventListener)document.addEventListener('DOMContentLoaded',()=>{try{installExploration();if(prefs.on)wrapLate();}catch(e){fail(e);}});
  function setPref(v){try{localStorage.setItem(PREF,JSON.stringify({on:v?.on!==false}));}catch(e){}return{on:v?.on!==false,reload:true};}
  function inspect(){const L=typeof room!=='undefined'?room?.exploration:null;return{revision:REV,prefs:{...prefs},failures,lastError,stats:{...stats},cached:[...cache.keys()],current:L?.storyMapR171||null,browser:false,GPU:false};}
- window.__STORYWORLD_STORY_MAPS_R171__=Object.freeze({revision:REV,TOPO,choice,plan,build,geometry,bfs,eligible,layoutFor,inspect,setPref,prefs:()=>({...prefs}),W,H});
+ window.__STORYWORLD_STORY_MAPS_R171__=Object.freeze({revision:REV,TOPO,choice,plan,build,geometry,bfs,eligible,layoutFor,inspect,setPref,prefs:()=>({...prefs}),W,H,wideR376:WIDE});
 })();

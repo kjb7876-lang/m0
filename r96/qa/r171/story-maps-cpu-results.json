@@ -52,9 +52,9 @@
    "detail": "[\"grove\",\"bridge\",\"street\",\"switchback\",\"lanes\",\"radial\",\"grid-wide\",\"ward\",\"grid\",\"nave\"]"
   },
   {
-   "name": "floor cells within 1,500–4,000 and bounds 68×70",
+   "name": "floor cells within 3000–9500 and bounds [0,0,100,104]",
    "ok": true,
-   "detail": "[\"dist00:2313\",\"dist01:2187\",\"dist02:2187\",\"dist03:1975\",\"dist04:2181\",\"dist05:2014\",\"dist06:2196\",\"ep1a09:3359\",\"ep1a09b:3646\",\"ep1a10:3554\",\"ep1a11:3228\",\"ep1b01:2255\",\"ep1b02:3226\",\"ep1b03:3519\",\"ep1b04:3489\",\"ep1b05:3282\",\"ep1b06:3404\",\"ep1b06b:2208\",\"ep1b07:3510\",\"ep1b08:2127\",\"ep1b09:3356\",\"u201:3533\",\"u202:3439\",\"u204:3198\",\"u205:3260\",\"u206:3343\",\"u203:3339\",\"last304:2265\",\"last305:2324\",\"last302:1999\",\"last303:2256\",\"kair01:2054\",\"kair04:2006\",\"kair05:2236\",\"kair06:1863\",\"kair07:2159\",\"kair08:1850\",\"kair09:1961\",\"kair10:1943\",\"murder01:3356\",\"murder02:3499\",\"murder04:3264\",\"murder03:3"
+   "detail": "[\"dist00:5413\",\"dist01:4080\",\"dist02:4075\",\"dist03:4474\",\"dist04:4494\",\"dist05:3977\",\"dist06:4433\",\"ep1a09:7025\",\"ep1a09b:7887\",\"ep1a10:8679\",\"ep1a11:7218\",\"ep1b01:4647\",\"ep1b02:7257\",\"ep1b03:8497\",\"ep1b04:8509\",\"ep1b05:6659\",\"ep1b06:7185\",\"ep1b06b:4501\",\"ep1b07:6287\",\"ep1b08:4540\",\"ep1b09:7192\",\"u201:8709\",\"u202:8509\",\"u204:7564\",\"u205:7166\",\"u206:7647\",\"u203:7324\",\"last304:5322\",\"last305:5162\",\"last302:4503\",\"last303:5086\",\"kair01:4041\",\"kair04:4525\",\"kair05:5409\",\"kair06:3927\",\"kair07:4424\",\"kair08:3918\",\"kair09:3981\",\"kair10:3926\",\"murder01:7038\",\"murder02:6206\",\"murder04:6871\",\"murder03:7"
   },
   {
    "name": "layout is deterministic per region",
@@ -99,12 +99,12 @@
   {
    "name": "777 entry: R171 map, safe hero, gathering room reachable, boss room locked",
    "ok": true,
-   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":39,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":41,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":40,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
+   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":45,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":53,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":46,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
   },
   {
    "name": "777 entry: no living enemy (champions included) embedded in walls or parked in the side room",
    "ok": true,
-   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":39,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":41,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":40,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
+   "detail": "[{\"id\":\"dist01\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":45,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"dist02\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":53,\"champions\":4,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"},{\"id\":\"cult03\",\"type\":\"r171-story-narrative-map\",\"hero\":true,\"alive\":46,\"champions\":3,\"unsafe\":[],\"inCloset\":[],\"gather\":true,\"boss\":true,\"phase\":\"route\"}]"
   },
   {
    "name": "native error ledger stays clear",
