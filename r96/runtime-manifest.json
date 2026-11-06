@@ -23388,6 +23388,11 @@
       "sha256": "43df6d36ed2cbdec126da6fc280d31fb1d7ef69ed1036c633613648fca576a92"
     },
     {
+      "path": "cinema-mode-r370.js",
+      "bytes": 20841,
+      "sha256": "80ff6c9ee6988ae00be4707f49360455611aab5840f197db58ab2698651584d6"
+    },
+    {
       "path": "cinema-r114.js",
       "bytes": 21472,
       "sha256": "bce051ffa93b213817e50bacc4f5d4b0556c814357205616809583cfeb84d327"
@@ -23789,8 +23794,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569911,
-      "sha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c"
+      "bytes": 6569956,
+      "sha256": "9a9af781d9bde239e3acc03ba0a9afc637abcbc21c58af33b28da2ce5430abba"
     },
     {
       "path": "intro-r140.js",
@@ -24498,9 +24503,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4899,
-  "totalBytes": 944702033,
-  "webHTMLSha256": "bf50fe10824b0da041176fd54fd75b51ceb9ad929b5ed7467a0d5aaab0daee8c",
+  "fileCount": 4900,
+  "totalBytes": 944722919,
+  "webHTMLSha256": "9a9af781d9bde239e3acc03ba0a9afc637abcbc21c58af33b28da2ce5430abba",
   "largest": [
     {
       "path": "index.html",
