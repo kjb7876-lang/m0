@@ -57,6 +57,7 @@ function layer(e){const S=SP(),t=THEME[e.sourceHero],P=palOf(e.sourceHero);if(!S
  const q=project(e.x,e.y),u=Math.min(1,Math.max(0,e.age/(e.life||.4))),z=typeof zoom==='number'?zoom:1,T=(typeof TILE==='number'?TILE:34)*z;
  if(e.stage==='hit'){const k=1-u,s=T*(.9+.5*u);S.draw('glow',P,q.x,q.y-T*.6,s*1.3,s,{alpha:.35*k});S.draw(t.bits,P,q.x,q.y-T*.6,s,s,{alpha:.7*k,angle:hashN(e.castId)%628/100});stats.hits++;return;}
  if(e.stage!=='release')return;
+ if(window.__STORYWORLD_SLAYER_R_TORNADO_R366__?.owns?.(e.sourceHero,e.sourceSlot))return;// R366: 슬레이어 R 은 둘레 칼자국(slash)·바닥 문양 대신 피의 회오리
  const R=Math.min(8,Math.max(1.2,Number(e.size)||2.5)),rx=R*T*Math.SQRT2,k=Math.sin(Math.PI*Math.min(.999,u)),ang=(typeof time==='number'?time:0)*t.spin+(hashN(e.castId)%628)/100;
  S.draw('glow',P,q.x,q.y,rx*2.1,rx*1.05,{alpha:.22*k});// 바닥 번짐
  S.draw('ring',P,q.x,q.y,rx*2*(.7+.3*u),rx*(.7+.3*u),{alpha:.55*k,angle:ang});// 스킬 반지름 바닥 원(2:1)

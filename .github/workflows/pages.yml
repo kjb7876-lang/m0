@@ -361,6 +361,8 @@ jobs:
         run: node r96/qa/r359/r359-cpu-check.cjs
       - name: R363 legacy-r92 mob repaints (confirmed rows) on R290/R248 sheets CPU check
         run: node r96/qa/r363/r363-cpu-check.cjs
+      - name: R366 slayer R blood tornado (no '.)' blades) CPU check
+        run: node r96/qa/r366/r366-cpu-check.cjs
       - name: R362 m030 Dots sheet + rename to '개와 늑대의 시간' CPU check
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
