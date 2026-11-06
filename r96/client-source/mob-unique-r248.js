@@ -58,7 +58,7 @@ function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Numb
  ctx.save();try{ctx.globalAlpha*=dead?Math.max(0,1-age/.8):1;ctx.filter=e.flash>0?'brightness(1.8) saturate(.5)':'saturate(.78) brightness(.86) contrast(1.08)';/* 칠한 배경과 덜 튀게 */
   ctx.translate(q.x,q.y-lift);ctx.scale(m.face*k,k);ctx.drawImage(im,sx0,sy0,CW,CH,-PX,-PY,CW,CH);}finally{ctx.restore();}stats.draws++;}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let s=null,im=null;
- try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle&&e.visible!==false&&e.disabled!==true&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)){/* R346: 엔진 drawEnemy 처럼 아직 등장하지 않은 몹(2차 웨이브 등)은 그리지 않는다 — 깨어나기 전부터 서서 좌우만 뒤집히던 것 */s=sheetOf(e);if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
+ try{if(prefs.on&&solo()&&e&&!e.r170Tower&&!e.r251Circle&&e.visible!==false&&e.disabled!==true&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)){/* R346: 엔진 drawEnemy 처럼 아직 등장하지 않은 몹(2차 웨이브 등)은 그리지 않는다 — 깨어나기 전부터 서서 좌우만 뒤집히던 것 */s=window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)?null:sheetOf(e);/* R374: Dots 승인 그림을 받은 액터는 엔진 frameFor 사슬로 그린다 */if(s){im=image(s.path);if(!im)stats.waits++;}}}catch(err){fail(err);im=null;}
  if(!im)return base.apply(this,[e,...a]);
  const r=withoutBody(e,()=>base.apply(this,[e,...a]));
  try{const f=()=>drawOwn(e,s,im);if(typeof ctx.scope==='function')ctx.scope({id:'r248:mob:'+e.id,kind:'enemy',x:e.x,y:e.y},f);else f();}catch(err){fail(err);}return r;};}
