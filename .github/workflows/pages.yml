@@ -41,7 +41,7 @@ jobs:
           import json
           r=json.load(open('r96/qa/r95/ci-current/suite.json'))
           assert r['passed'] and r['fullSuite'] and r['groups']==58 and r['passedGroups']==58
-          assert r['passedChecks']==r['totalChecks']==741 and r['sourceUnchangedDuringRun']
+          assert r['passedChecks']==r['totalChecks']==742 and r['sourceUnchangedDuringRun']
           PY
       - name: Exercise all 24 native status lifecycle and layering checks
         run: |

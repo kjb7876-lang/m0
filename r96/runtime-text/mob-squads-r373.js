@@ -31,13 +31,14 @@ function spot(r,c,i,used,rad){for(let ring=0;ring<10;ring++){const R=ring===0?.9
 // R248 그림 표는 이름(끝 번호 뗀 것)으로 찾는다 — 그리기 밖(tickFx 접촉 효과 등)에서도 찾게 원래 종류 열쇠(r248Key)를 고정해 둔다(Codex P2).
 function keepKey(e,kind){try{if(e.r248Key)return;const D=window.__STORYWORLD_MOB_UNIQUE_R248_DATA__;if(!D?.byName)return;
  const dream=!!(e.samongR103||(typeof layer!=='undefined'&&layer==='DREAM'));const k=dream&&D.byName['사몽:'+kind]?'사몽:'+kind:(D.byName[kind]?kind:null);if(k)e.r248Key=k;}catch(err){fail(err);}}
-function lead(e,kind){if(e.squadLeaderR373)return;keepKey(e,kind);e.squadLeaderR373=true;e.r373Name=e.name;e.name=kind+SUFFIX;
+function lead(e,kind){if(e.squadLeaderR373)return;keepKey(e,kind);e.squadLeaderR373=true;e.r373Name=e.name;e.name=kind+SUFFIX;e.r373Base={hp:e.hp,maxHp:e.maxHp,damage:e.damage};
  for(const k of ['hp','maxHp','damage'])if(Number.isFinite(e[k])&&e[k]>0)e[k]*=MUL;stats.leaders++;}
 function clone(src,j){const c={...src};c.id=String(src.id)+':r373c'+j;c.r373Clone=true;c.name=src.name;c.hp=c.maxHp;c.nav=[];c.attack=null;c.aim=null;c.state='idle';c.stuck=0;c.deadRecorded=false;c.deadAt=null;
  c.flash=0;c.tell=0;c.rangedWindup=0;c.storyPreparedCast150=null;c.personaPreparedCast150=null;c.personaPendingShots150={};
  for(const k of Object.keys(c))if(/^rc1\d\d|^r208|^r363Seen|Cache/.test(k))delete c[k];return c;}
 // 1단계(makeRoom, 싸다): 종류별 분대·분대장·수치·이름만 정한다. 엔진이 모든 지역을 미리 만드는 자기 검사·저장 복원에서도 같은 결과가 나오게 결정적으로.
-function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo())return r;r.squadsR373=true;
+// EGO 재방문 빌드(R81 __STORYWORLD_R81_EGO_BUILD__)는 V4 원래 배치를 그대로 쓰는 범위라 분대를 만들지 않는다(legacy-scope 계약).
+function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo()||window.__STORYWORLD_R81_EGO_BUILD__)return r;r.squadsR373=true;
  try{const by=new Map();for(const e of r.enemies)if(field(e)){const k=species(e.name);if(!k)continue;if(!by.has(k))by.set(k,[]);by.get(k).push(e);}
   let any=false;const taken=[];
   for(const [kind,rows0] of [...by.entries()].sort((a,b)=>a[0]<b[0]?-1:1)){const rows=rows0.slice().sort((a,b)=>String(a.id)<String(b.id)?-1:1);if(rows.length<MIN)continue;
@@ -54,7 +55,8 @@ function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||
     lead(sq[0],kind);});}
   if(any){stats.rooms++;r.r373MovePending=true;
    // R86 챔피언 공격력·R78 챔피언 체력은 nativeId 별 '처음 나오는 일반 몹'을 기준으로 삼는다 → 우두머리를 목록 뒤로 보내 기준이 분대원(원래 수치)이 되게(Codex P2).
-   const L=r.enemies.filter(e=>e.squadLeaderR373);if(L.length){const rest=r.enemies.filter(e=>!e.squadLeaderR373);r.enemies.length=0;r.enemies.push(...rest,...L);}}}catch(e){fail(e);}
+   //   R86 은 기준 몹을 배열·길이로 캐시하므로 같은 배열을 제자리에서 바꾸면 옛 기준(우두머리)이 남는다 → 새 배열로 바꿔 끼운다.
+   const L=r.enemies.filter(e=>e.squadLeaderR373);if(L.length)r.enemies=[...r.enemies.filter(e=>!e.squadLeaderR373),...L];}}catch(e){fail(e);}
  return r;}
 // 2단계(그 지역이 실제 지금 방이 된 첫 틱, 한 지역만): 분대원을 간이 구역 둘레 빈 바닥으로 모은다.
 //  저장에서 불러와 이미 다른 자리에 있는 몹(만들 때 자리와 다름)은 옮기지 않는다 → 불러오기·재입장에서 다시 흩거나 순간이동시키지 않음.

@@ -32,4 +32,6 @@ rows.push(mob(30,'외톨이 몹',10,40),mob(31,'외톨이 몹',12,40));rows.push
  const third=c.makeRoom('z');const m=third.enemies.find(e=>e.squadR373&&!e.squadLeaderR373);m.x+=3;const mx=m.x;c.room=third;c.tick();ok(m.x===mx,'저장에서 다른 자리로 불러온 몹은 옮기지 않음');}
 {const c=fake(rows,{wall:30}),r=c.makeRoom('z');ok(r.enemies.filter(e=>e.squadR373&&e.x<=30).every(e=>e.x<=30),'막힌 칸으로는 옮기지 않음');}
 {const c=fake(rows,{prefs:'{"on":false}'}),r=c.makeRoom('z');ok(!r.enemies.some(e=>e.squadR373),'끄기 설정');}
+{const c=fake(rows);c.__STORYWORLD_R81_EGO_BUILD__=true;const r=c.makeRoom('z');ok(!r.enemies.some(e=>e.squadR373||e.r373Clone),'EGO 재방문 빌드는 V4 배치 그대로(legacy-scope)');}
+{const c=fake(rows),r=c.makeRoom('z');const L=r.enemies.filter(e=>e.squadLeaderR373);ok(L.every(e=>e.r373Base&&Math.abs(e.maxHp-e.r373Base.maxHp*1.6)<1e-9&&Math.abs(e.damage-e.r373Base.damage*1.6)<1e-9),'우두머리 원래 수치(r373Base) 기록 — 고정 계약 검사가 ×1.6 을 정확히 확인');}
 console.log(JSON.stringify({ok:!bad,checks:n,method:'static+fake-engine'}));process.exit(bad?1:0);
