@@ -38,5 +38,9 @@ ctx.layer='DREAM';const h=idx.mobs.find(m=>m.id==='plague-hound');
 ok(S.frameFor({id:'h',name:'변이된 사냥개 괴수',r200Shade:'plague-hound',hp:5,x:0,y:0},null)?.r375Mob==='plague-hound','사몽 사냥개');
 ok(S.frameFor({id:'h2',name:'다른 몹',r200Shade:'other',hp:5,x:0,y:0},null)?.path==='base','사몽 다른 종 그대로');
 ctx.player={x:-3,y:0};const hf=D.frameOf({id:'h3',hp:5,x:3,y:0},h);ok(hf.flip===(h.facing!=='left'),'사냥개 영웅 왼쪽 → 왼쪽 보기');
+// 죽음: spawnBurnDeath3 가 찍는 e.profile.frames.death 가 R375 마지막 사망 장으로 바뀌고, 끝나면 원래 profile 로 돌아온다.
+{ctx.layer='STORY';ctx.room={id:'kair02'};let got=null;ctx.spawnBurnDeath3=function(e){got=e.profile?.frames?.death;return true;};D.installDeath();
+ const prof={id:'kair-guardian-45',frames:{death:{path:'old'}}};const dz={id:'d1',profile:prof,name:'시간수문장',hp:0,x:3,y:0};ctx.spawnBurnDeath3(dz);
+ const m45=idx.mobs.find(m=>m.id==='kair-45');ok(got?.r375Mob==='kair-45'&&got.assetFrame.sourceRect[0]===m45.states.death.at(-1)*320,'죽음 불꽃에 쓰러진 마지막 장을 넘김');ok(dz.profile===prof,'profile 원래대로');}
 D.set({on:false});ok(S.frameFor({id:'h4',r200Shade:'plague-hound',hp:5,x:0,y:0},null)?.path==='base','끄기');
 console.log(`R375 CPU ${n-bad}/${n}`);if(bad)process.exit(1);

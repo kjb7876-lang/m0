@@ -1,6 +1,6 @@
 // R375 — Dots 2026-11-06 몹 그림 적용(사용자 2026-11-06 "구글드라이브 오늘자자산확인해서 몹들 제대로 배치적용해줘 검토 개선한다음").
 //  · kair02 시간수문장 44·45·48, kair03 시간핵 명령잔류: 4방향(오른쪽·왼쪽·앞·뒤)을 따로 그린 그림. 좌우 뒤집기 대신 영웅(공격 중엔 공격 방향) 쪽 방향 줄을 고른다.
-//    대기1·이동4·공격3·피격2·사망2(한 번 재생 뒤 마지막 장 유지).
+//    대기1·이동4·공격3·피격2·사망(엔진이 죽는 순간 액터를 빼고 불꽃 속에 한 장을 녹이므로, 그 한 장을 쓰러진 마지막 사망 그림으로 넘김).
 //  · 사몽 S-06 변이된 사냥개 괴수(R200 plague-hound): 디스토피아 v1 8칸(이동 4 순환, 공격 4)으로 바꾼다. 다른 S-06 종·본편 u201-e2 는 그대로.
 //  · 이름·판정·체력·공격·보상·저장은 그대로. 그림만 엔진 frameFor 사슬에 내준다. storyworld.r375.dots {on:false} 로 끈다.
 (()=>{'use strict';
@@ -47,8 +47,15 @@ function install(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S||typeof 
  window.__STORYWORLD_STORY_COMBAT_R54__=Object.freeze({...S,__r375:true,frameFor(e,f){try{const m=prefs.on?assign(e):null;if(m){
    if(typeof readyImage!=='function'||!(readyImage(m.path)?.image?.naturalWidth>0)){if(typeof ensureImages==='function')Promise.resolve(ensureImages([m.path])).catch(()=>{});stats.waiting++;return S.frameFor(e,f);}
    stats.frames++;return frameOf(e,m);}}catch(err){fail(err);}return S.frameFor(e,f);}});stats.reinstalls++;return true;}
-let tries=0;(function arm(){try{install();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
+// 죽음: 엔진 killEnemy 는 액터를 바로 빼고 spawnBurnDeath3 가 e.profile.frames.death 를 한 번 찍어 불꽃 속에 녹인다(frameFor 를 다시 부르지 않음).
+// 그래서 그 순간에만 R375 사망 첫 장 → 녹는 동안 마지막 장이 되도록 death 프레임을 이 몹 것으로 바꿔 넘긴다.
+function deathFrame(e,m,last){return frameOf({...e,hp:0,deadAt:last?-1:T(),r375DeadAt:undefined},m);}
+function installDeath(){if(typeof spawnBurnDeath3!=='function'||spawnBurnDeath3.__r375)return typeof spawnBurnDeath3==='function';const base=spawnBurnDeath3;
+ const w=function(e){let m=null,saved;try{m=prefs.on&&e?assign(e):null;if(m&&typeof readyImage==='function'&&readyImage(m.path)?.image?.naturalWidth>0){saved=e.profile;const p=e.profile||{};
+   e.profile={...p,frames:{...(p.frames||{}),death:deathFrame(e,m,true)}};stats.deaths=(stats.deaths||0)+1;}else m=null;}catch(err){fail(err);m=null;}
+  try{return base.apply(this,arguments);}finally{if(m)e.profile=saved;}};w.__r375=true;try{spawnBurnDeath3=w;}catch(_){}try{window.spawnBurnDeath3=w;}catch(_){}return true;}
+let tries=0;(function arm(){try{install();installDeath();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_MOB_DOTS_R375__=Object.freeze({revision:REV,set,assign,match,dirOf,cellFor,frameOf,
+window.__STORYWORLD_MOB_DOTS_R375__=Object.freeze({revision:REV,set,assign,match,dirOf,cellFor,frameOf,installDeath,
  inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,mobs:idx?.mobs?.map(m=>m.id)||[],stats:{...stats},lastError})});
 })();
