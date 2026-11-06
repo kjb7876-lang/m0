@@ -37,12 +37,16 @@ function lead(e,kind){if(e.squadLeaderR373)return;keepKey(e,kind);e.squadLeaderR
  rescale(e);stats.leaders++;}
 const rescale=e=>{try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,cur,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}};let cur=null;
 function clone(src,j){const c={...src};c.id=String(src.id)+':r373c'+j;c.r373Clone=true;c.name=src.name;c.hp=c.maxHp;c.nav=[];c.attack=null;c.aim=null;c.state='idle';c.stuck=0;c.deadRecorded=false;c.deadAt=null;
- c.flash=0;c.tell=0;c.rangedWindup=0;c.storyPreparedCast150=null;c.personaPreparedCast150=null;c.personaPendingShots150={};
+ // combatProfile 은 R58 이 틱마다 attackShape 를 바꿔 쓰는 가변 객체 → 복제마다 따로(Codex P2).
+ try{if(src.combatProfile)c.combatProfile=typeof structuredClone==='function'?structuredClone(src.combatProfile):JSON.parse(JSON.stringify(src.combatProfile));}catch(_){c.combatProfile={...src.combatProfile,attackShape:src.combatProfile.attackShape&&{...src.combatProfile.attackShape}};}
+ c.flash=0;c.tell=0;c.rangedWindup=0;c.storyPreparedCast150=null;c.personaPreparedCast150=null;c.personaPendingShots150=[];
  for(const k of Object.keys(c))if(/^rc1\d\d|^r208|^r363Seen|Cache/.test(k))delete c[k];rescale(c);return c;}
 // 1단계(makeRoom, 싸다): 종류별 분대·분대장·수치·이름만 정한다. 엔진이 모든 지역을 미리 만드는 자기 검사·저장 복원에서도 같은 결과가 나오게 결정적으로.
 // EGO 재방문 빌드(R81 __STORYWORLD_R81_EGO_BUILD__)는 V4 원래 배치를 그대로 쓰는 범위라 분대를 만들지 않는다(legacy-scope 계약).
-function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo()||window.__STORYWORLD_R81_EGO_BUILD__)return r;r.squadsR373=true;cur=r;
- try{const by=new Map();for(const e of r.enemies)if(field(e)){const k=species(e.name);if(!k)continue;if(!by.has(k))by.set(k,[]);by.get(k).push(e);}
+// 병원 미로(ep1a08)는 경로 24·챔피언 4·보스실 2 로 짜인 전용 진행(hospital-maze-progression)이라 손대지 않는다.
+function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||!solo()||window.__STORYWORLD_R81_EGO_BUILD__||r.id==='ep1a08')return r;r.squadsR373=true;cur=r;
+ try{const donors=new Set(),seen=new Set();for(const e of r.enemies){if(e.wardChampionR81||e.mazeEliteR2||e.boss||e.midboss||e.r61Summoned||e.r61Clone||!e.nativeId||seen.has(e.nativeId))continue;seen.add(e.nativeId);donors.add(e);}
+  const by=new Map();for(const e of r.enemies)if(field(e)){const k=species(e.name);if(!k)continue;if(!by.has(k))by.set(k,[]);by.get(k).push(e);}
   let any=false;const taken=[];
   for(const [kind,rows0] of [...by.entries()].sort((a,b)=>a[0]<b[0]?-1:1)){const rows=rows0.slice().sort((a,b)=>String(a.id)<String(b.id)?-1:1);if(rows.length<MIN)continue;
    // 사용자 2026-11-06 "분대는 최대 6마리, 주로 6마리씩, 적 숫자 6에 맞춰": 종류별 수를 6의 배수로 올려 모든 분대가 6마리가 되게 — 모자란 만큼 같은 종류 몹을 복제(결정적 id).
@@ -53,13 +57,14 @@ function organize(r){if(!prefs.on||!r||!Array.isArray(r.enemies)||r.squadsR373||
     const order=cs.map((c,i)=>[Math.hypot(e.x-c.x,e.y-c.y),i]).sort((a,b)=>a[0]-b[0]);const pick=order.find(([,i])=>squads[i].length<SQUAD)||order[0];squads[pick[1]].push(e);}
    squads.forEach((sq,si)=>{if(sq.length<MIN)return;const c=cs[si],gid=r.id+':r373:'+kind+':'+si;any=true;stats.squads++;taken.push(c);
     sq.sort((a,b)=>Math.hypot(a.x-c.x,a.y-c.y)-Math.hypot(b.x-c.x,b.y-c.y));
+    // 우두머리는 nativeId 별 '첫 일반 몹'(R86 챔피언 공격·R78 챔피언 체력의 기준, 얼굴 방향 검사 대상)이 아닌 분대원 중 가장 가운데 — 목록 순서는 건드리지 않는다(Codex P2).
+    {const k=sq.findIndex(e=>!donors.has(e));if(k>0)sq.unshift(sq.splice(k,1)[0]);}
     sq.forEach((e,i)=>{e.squadR373=gid;e.r373Slot=i;e.r373Anchor={x:c.x,y:c.y};e.r373From={x:e.x,y:e.y};
      if(c.group)e.explorationGroup=c.group+':r373:'+si;if(c.route!=null)e.wardRouteR81=c.route;e.explorationLeash=Math.max(8,Math.min(Number(e.explorationLeash)||12,14));});
     lead(sq[0],kind);});}
   if(any){stats.rooms++;r.r373MovePending=true;
-   // R86 챔피언 공격력·R78 챔피언 체력은 nativeId 별 '처음 나오는 일반 몹'을 기준으로 삼는다 → 우두머리를 목록 뒤로 보내 기준이 분대원(원래 수치)이 되게(Codex P2).
-   //   R86 은 기준 몹을 배열·길이로 캐시하므로 같은 배열을 제자리에서 바꾸면 옛 기준(우두머리)이 남는다 → 새 배열로 바꿔 끼운다.
-   const L=r.enemies.filter(e=>e.squadLeaderR373);if(L.length)r.enemies=[...r.enemies.filter(e=>!e.squadLeaderR373),...L];}}catch(e){fail(e);}
+   // 복제는 맨 끝(push) — 원래 몹·챔피언의 순서·색인(저장 색인 40 넘는 챔피언 복원 등)은 그대로.
+  }}catch(e){fail(e);}
  return r;}
 // 2단계(그 지역이 실제 지금 방이 된 첫 틱, 한 지역만): 분대원을 간이 구역 둘레 빈 바닥으로 모은다.
 //  저장에서 불러와 이미 다른 자리에 있는 몹(만들 때 자리와 다름)은 옮기지 않는다 → 불러오기·재입장에서 다시 흩거나 순간이동시키지 않음.
@@ -87,8 +92,9 @@ if(typeof serializeSave==='function'){const base=serializeSave;serializeSave=fun
 if(typeof restoreSave==='function'){const base=restoreSave;restoreSave=function(raw,...a){const out=base.call(this,raw,...a);const go=v=>{if(v!==false)try{migrate(raw);}catch(e){fail(e);}return v;};
  return out&&typeof out.then==='function'?out.then(go):go(out);};}
 if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){if(!e||!e.squadLeaderR373||!prefs.on)return base.apply(this,arguments);
- const name=e.name,ds=e.defScale;e.name=e.r373Name||name;if(Number.isFinite(ds))e.defScale=ds*SIZE;let out;
- try{out=base.apply(this,arguments);}finally{e.name=name;if(Number.isFinite(ds))e.defScale=ds;}
+ const name=e.name,ds=e.defScale;e.name=e.r373Name||name;if(Number.isFinite(ds))e.defScale=ds*SIZE;e.capScaleR373=SIZE;let out;
+ // R248 은 일반 몹 그림 높이를 상한(키×1.3)으로 자르므로 상한도 같이 1.15배(capScaleR373) — 안 그러면 분대원과 같은 크기(Codex P2).
+ try{out=base.apply(this,arguments);}finally{e.name=name;if(Number.isFinite(ds))e.defScale=ds;delete e.capScaleR373;}
  try{plate(e);}catch(err){fail(err);}return out;};}
 function plate(e){if(e.hp<=0||e.deadRecorded||e.visible===false||e.disabled===true||typeof project!=='function'||typeof ctx!=='object'||!ctx||['hidden','inactive','disabled','despawned'].includes(e.spawnState))return;
  // 손전등 시야(R24) 밖이거나 벽 뒤면 그림처럼 이름표도 숨긴다(Codex P2).

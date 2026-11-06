@@ -12,7 +12,7 @@ ok(JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')).textPa
 function fake(rows,opt={}){const ctx={console,Math,JSON,Number,String,Map,Set,Array,Object,window:{},localStorage:{getItem:()=>opt.prefs||null,setItem(){}},
  blocked:(x,y)=>opt.wall?x>opt.wall:false,makeRoom:()=>({id:'z',enemies:rows.map(r=>({...r}))}),drawEnemy(e){ctx.drawn.push({name:e.name,ds:e.defScale});},drawn:[],tick(){},room:null,loading:false};
  ctx.window=ctx;vm.createContext(ctx);vm.runInContext(src,ctx);return ctx;}
-const mob=(i,name,x,y,extra={})=>({id:'m'+String(i).padStart(2,'0'),name,x,y,hp:100,maxHp:100,damage:10,spawnState:'active',defScale:1,explorationGroup:'z:g',radius:.3,...extra});
+const mob=(i,name,x,y,extra={})=>({id:'m'+String(i).padStart(2,'0'),name,x,y,hp:100,maxHp:100,damage:10,spawnState:'active',defScale:1,explorationGroup:'z:g',radius:.3,nativeId:'n:'+name.replace(/ \d+$/,''),...extra});
 const rows=[];for(let i=0;i<9;i++)rows.push(mob(i,'뿌리 추적자 '+(i%3+1),5+i*4,5+(i%2)*20));for(let i=0;i<4;i++)rows.push(mob(20+i,'잿빛 사도',40+i*3,40));
 rows.push(mob(30,'외톨이 몹',10,40),mob(31,'외톨이 몹',12,40));rows.push(mob(40,'뿌리 추적자 1',60,60,{boss:true}),mob(41,'뿌리 추적자 2',61,61,{spawnState:'hidden'}),mob(42,'뿌리 추적자 3',62,62,{wardChampionR81:true}));
 {const c=fake(rows),r=c.makeRoom('z'),A=c.__STORYWORLD_MOB_SQUADS_R373__;const before=JSON.stringify(r.enemies.map(e=>[e.x,e.y]));c.room=r;c.tick();ok(JSON.stringify(r.enemies.map(e=>[e.x,e.y]))!==before&&!r.r373MovePending,'지금 방이 된 첫 틱에 한 번 모음(만들 때는 자리 그대로 — 미리 만드는 지역은 싸게)');const sq=new Map();for(const e of r.enemies)if(e.squadR373){if(!sq.has(e.squadR373))sq.set(e.squadR373,[]);sq.get(e.squadR373).push(e);}
@@ -24,7 +24,9 @@ rows.push(mob(30,'외톨이 몹',10,40),mob(31,'외톨이 몹',12,40));rows.push
  ok([...sq.values()].every(v=>{const c0=v.find(e=>e.squadLeaderR373);return v.every(e=>Math.hypot(e.x-c0.x,e.y-c0.y)<=4.2&&e.homeX===e.x&&e.homeY===e.y);}),'분대원은 분대장 둘레(4.2칸 안)에 모이고 집 자리도 그곳');
  ok([...sq.values()].every(v=>new Set(v.map(e=>e.explorationGroup)).size===1),'분대마다 무리 이름 하나');
  const untouched=r.enemies.filter(e=>['m40','m41','m42'].includes(e.id));ok(untouched.every(e=>!e.squadR373&&!e.squadLeaderR373&&e.hp===100),'보스·숨은 몹·챔피언은 그대로');
- ok(r.enemies.slice(-4).every(e=>e.squadLeaderR373),'우두머리는 목록 끝(챔피언 기준 몹이 분대원이 되게)');
+ {const orig=r.enemies.filter(e=>!e.r373Clone).map(e=>e.id),first=new Map();for(const e of r.enemies)if(!e.boss&&!e.wardChampionR81&&e.nativeId&&!first.has(e.nativeId))first.set(e.nativeId,e);
+  ok(JSON.stringify(orig)===JSON.stringify(rows.map(e=>e.id))&&r.enemies.slice(orig.length).every(e=>e.r373Clone),'원래 몹 순서 그대로, 복제는 맨 끝');
+  ok(r.enemies.filter(e=>e.squadLeaderR373).every(l=>first.get(l.nativeId)!==l)&&first.size>0,'우두머리는 nativeId 첫 몹(챔피언 기준)이 아님');}
  const nonLead=r.enemies.filter(e=>e.squadR373&&!e.squadLeaderR373);ok(nonLead.every(e=>e.hp===100&&e.damage===10),'분대원 수치는 그대로');
  ok(r.enemies.filter(e=>e.squadLeaderR373&&e.r248Key===undefined).length===4,'(R248 표 없음) 열쇠는 표에 있을 때만 고정');
  const l0=L[0];c.drawEnemy(l0);const d=c.drawn.at(-1);ok(/^뿌리 추적자 \d$|^잿빛 사도$/.test(d.name)&&Math.abs(d.ds-1.15)<1e-9&&l0.name.endsWith('우두머리')&&l0.defScale===1,'그릴 때만 원래 이름·1.15배, 그린 뒤 되돌림',d);

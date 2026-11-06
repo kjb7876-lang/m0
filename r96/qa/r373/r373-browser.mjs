@@ -22,7 +22,7 @@ for(const z of ['dist00','dist03','ep1a10']){const t=Date.now();await p.evaluate
  check(z+': 입장 25초 안(분대 정리가 무거운 미리 만들기에서 돌지 않음)',ms<25000,ms);
  // Codex P2: 난이도 다시 적용(R63)·R61 정규화 틱 뒤에도 우두머리 ×1.6, 복제는 원본 종류와 같은 수치
  const b2=await p.evaluate(async()=>{window.__STORYWORLD_CAMPAIGN_R63R1__?.reapplyRoom?.();await new Promise(r=>setTimeout(r,700));const rows=room.enemies.filter(e=>e.squadR373&&e.hp>0);
-  const lead=rows.filter(e=>e.squadLeaderR373),plain=rows.filter(e=>!e.squadLeaderR373&&!e.r373Clone),clones=rows.filter(e=>e.r373Clone);
+  const lead=rows.filter(e=>e.squadLeaderR373),plain=rows.filter(e=>!e.squadLeaderR373&&!e.r373Clone),clones=rows.filter(e=>e.r373Clone&&!e.squadLeaderR373);
   const ratio=lead.map(l=>{const m=plain.find(e=>e.nativeId===l.nativeId);return m?[l.maxHp/m.maxHp,l.damage/m.damage]:null;}).filter(Boolean);
   const cl=clones.map(c=>{const m=plain.find(e=>e.nativeId===c.nativeId);return m?[c.maxHp/m.maxHp,c.damage/m.damage]:null;}).filter(Boolean);return{ratio,cl};});
  check(z+': 난이도 다시 적용 뒤에도 우두머리 체력·공격 ×1.6',b2.ratio.length>0&&b2.ratio.every(([h,d])=>Math.abs(h-1.6)<.02&&Math.abs(d-1.6)<.02),b2.ratio);
