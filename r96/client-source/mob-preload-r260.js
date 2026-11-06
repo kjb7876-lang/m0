@@ -14,6 +14,7 @@ let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on
 const stats={batches:0,paths:0,held:0,released:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const seen=new WeakSet(),asked=new Set();
 function wanted(e){const out=[];try{const m=window.__STORYWORLD_STORY_MOBS_R208__?.assign?.(e);if(m?.path)out.push(m.path);}catch(err){fail(err);}
+ try{const d=window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e);if(d?.path){out.push(d.path);return out;}}catch(err){fail(err);}/* R374: Dots 승인 그림을 받은 액터는 그 시트만 기다린다(R248 시트는 안 씀) */
  try{const s=window.__STORYWORLD_MOB_UNIQUE_R248__?.sheetFor?.(e);if(s?.path)out.push(s.path);}catch(err){fail(err);}return out;}
 const ready=p=>{try{return !!(typeof readyImage==='function'&&readyImage(p)?.image?.naturalWidth>0);}catch(_){return false;}};
 function scan(){if(!on||typeof room!=='object'||!room||typeof ensureImages!=='function')return;const list=[];

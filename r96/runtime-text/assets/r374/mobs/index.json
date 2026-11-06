@@ -1,0 +1,388 @@
+{
+ "schema": "storyworld.r374.dotsmobs/v1",
+ "revision": "R374",
+ "note": "Dots 승인 몹 그림 파생본(축소·한 줄 묶기만, 색·형태 그대로). 원본은 Drive 에 보존. 엔진 연결 외 모션 자연스러움·GPU·실기기는 미검증.",
+ "mobs": [
+  {
+   "id": "u203-e2-mech",
+   "path": "assets/r374/mobs/u203-e2-mech.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    128,
+    235
+   ],
+   "visibleHeight": 198,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u203-e2",
+    "name": "이동문 공허잔영"
+   },
+   "note": "u203-02 기계화 이동문 공허잔영 v1 (승인). e2 액터만, m041 공유 매핑은 그대로.",
+   "source": {
+    "name": "기계화 이동문 공허잔영",
+    "version": "v1",
+    "files": [
+     "frame_01.png",
+     "frame_02.png",
+     "frame_03.png",
+     "frame_04.png",
+     "frame_05.png",
+     "frame_06.png",
+     "frame_07.png",
+     "frame_08.png"
+    ],
+    "pixelSha256": [
+     "81a5437b4b18df453f29ac3cfc9be13627677214fb2885d51546b08e8bafc81c",
+     "b552276df66ba0310cb269f22f02707d357f519bcb5d78b74a96d27d427cde82",
+     "d8ba07fbc5ad9179db4fd610382a03d8958f957a5467e8d46a7ecc5a3a58701b",
+     "e5b82cebaae83c0b6cb56220f79a77c622387394066e036367c4d073c923cea3",
+     "8129b3ef512d58df3036af375dc242ed34caa2cd268c334d934f2c3f2325ad5b",
+     "30876ce6e6b87df26122943557d2ad062bcdebf55a0a93b8d40375369205bcd8",
+     "807f540986a311556fa74e50809ef211bc12f8fef577bc51816a448ee80222be",
+     "182767f2ce9fd38cf2220828911746962e99c8002d5cfa77e555bc71cb790158"
+    ],
+    "scale": 0.5
+   },
+   "bytes": 145010,
+   "sha256": "4dca942cf46ba966f8186d1ca29e0fcf82ee805e0b3cab881d7059300b2e94aa",
+   "finalArt": false
+  },
+  {
+   "id": "u203-e3-mech",
+   "path": "assets/r374/mobs/u203-e3-mech.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    128,
+    235
+   ],
+   "visibleHeight": 203,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u203-e3",
+    "name": "최종문 공명기사"
+   },
+   "note": "u203-03 기계화 최종문 공명기사 v1 (승인). 보행 HOLD: 4자세 보행, 자연 보행 미검증.",
+   "source": {
+    "name": "기계화 최종문 공명기사",
+    "version": "v1",
+    "files": [
+     "frame_01.png",
+     "frame_02.png",
+     "frame_03.png",
+     "frame_04.png",
+     "frame_05.png",
+     "frame_06.png",
+     "frame_07.png",
+     "frame_08.png"
+    ],
+    "pixelSha256": [
+     "a7487b9b026f371d5beb9aaf2d7ab0324976e00a43bdc3fa5ac9c306384a1174",
+     "b91e54c70fdd197f6a920847eaf1da708f4fa9284a06d60a6091a6800bbf7cbf",
+     "496f01c816701e197c1386d74e776ea2ed209fdb7d72b3dc2f2fe0c19a382010",
+     "c0bce8584877872092ba1f24f656ea6f42058618fa22fe37921bb0b1977a1550",
+     "7b37dd358a3cb48e46ae919a69aeaf243b7dbc3c54ab0aac65dddc031a5f3d64",
+     "7e00c9b2b6cf852e2197427ac4496ab14a3f14b13a77511424faea7ff0252f0b",
+     "c6a08a396e8ff61dad5c3405449bd2f2e579b23f05e9f0d650329cbf5c108ec2",
+     "985e60e0f299245304131b3dbe03f9283739951213074b3e35a48829d6f5378a"
+    ],
+    "scale": 0.5
+   },
+   "bytes": 107660,
+   "sha256": "782e2c61318af31eb23e4324ba2a07c28ba6f8028f3305dd1057a69adf59446b",
+   "finalArt": false
+  },
+  {
+   "id": "u203-boss-mech",
+   "path": "assets/r374/mobs/u203-boss-mech.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "pivot": [
+    128,
+    235
+   ],
+   "visibleHeight": 196,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u203-boss",
+    "name": "컨트롤러 · 기억의 문",
+    "bossStates": true
+   },
+   "note": "u203-05 컨트롤러 부분기계화 v1 (승인). idle/이동/일반공격만, 특수상태 원본 유지.",
+   "source": {
+    "name": "컨트롤러 · 기억의 문",
+    "version": "v1",
+    "files": [
+     "frame_01.png",
+     "frame_02.png",
+     "frame_03.png",
+     "frame_04.png",
+     "frame_05.png",
+     "frame_06.png",
+     "frame_07.png",
+     "frame_08.png"
+    ],
+    "pixelSha256": [
+     "7ca0377d2e70f5425079bd2211f44062d35b91ea9fc69a3632b5be752d1d1db1",
+     "7c65955c9c4ab15c44deab66115bea7bacf50243d98d24c6f962b0ac8176a800",
+     "9a2afe98508ee81750f904e59fbcff4ce81f2dedb1d4b82b6be3c627fa8710e1",
+     "a9d8c2e95c6e9566fb25d9c4cba4d34c952ff665d4cca8a2f9da648114929562",
+     "69401abeb64e5a0827ebaf6f39e66c826d06408283d6f86b4313189d69ca5638",
+     "0a618618bfa8a52bbeb6792691c6e0fa7b21da62c41c4d95b8e7d8c71344f593",
+     "6a2d004579247361501046b22494a40ffa3a0e33dc045970647ef7604b9987bc",
+     "3fb6f566b288c9876424b7ab8a52ae47054ee5494613602dc4618fd6d4d699ac"
+    ],
+    "scale": 0.5
+   },
+   "bytes": 198208,
+   "sha256": "8a0cff1e2155ec0f0f0feddf30bc0bc5a4656e118637961a214f9ce938d232b0",
+   "finalArt": false
+  },
+  {
+   "id": "u205-e1-new",
+   "path": "assets/r374/mobs/u205-e1-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "pivot": [
+    128,
+    302
+   ],
+   "visibleHeight": 203,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u205-e1",
+    "name": "학대기록 공허체"
+   },
+   "note": "u205-01 new-four-v1 (승인).",
+   "source": {
+    "name": "학대기록 공허체",
+    "version": "new-four-v1",
+    "files": [
+     "sheet.png"
+    ],
+    "sha256": [
+     "67c25c00066af3144216049dcc1fed0d1ec8685a6205a11f48a39469b4a8cee4"
+    ],
+    "scale": 1
+   },
+   "bytes": 215740,
+   "sha256": "ce80bde1cec438f0df297ead6e2fccefefea6e24869d92b2b649441773dba2ea",
+   "finalArt": false
+  },
+  {
+   "id": "u205-e2-new",
+   "path": "assets/r374/mobs/u205-e2-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "pivot": [
+    128,
+    300
+   ],
+   "visibleHeight": 127,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u205-e2",
+    "name": "관리자 추적견"
+   },
+   "note": "u205-02 new-four-v1 (승인).",
+   "source": {
+    "name": "관리자 추적견",
+    "version": "new-four-v1",
+    "files": [
+     "sheet.png"
+    ],
+    "sha256": [
+     "59044dddb011ba7dc8fd1dcccc913d58e57d6677da50307630d47862be53d3cc"
+    ],
+    "scale": 1
+   },
+   "bytes": 190342,
+   "sha256": "0011f0ba6f1aa358ed37340b33e1e2b40f1d740a691460ebf055620aa7b8158c",
+   "finalArt": false
+  },
+  {
+   "id": "u205-e3-new",
+   "path": "assets/r374/mobs/u205-e3-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "pivot": [
+    128,
+    302
+   ],
+   "visibleHeight": 208,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u205-e3",
+    "name": "역전기록 수집가"
+   },
+   "note": "u205-03 new-four-v1 (승인).",
+   "source": {
+    "name": "역전기록 수집가",
+    "version": "new-four-v1",
+    "files": [
+     "sheet.png"
+    ],
+    "sha256": [
+     "148a31e33279e133b52ae048565dbd109ad65394a85060a72851e9a9f04b133d"
+    ],
+    "scale": 1
+   },
+   "bytes": 191908,
+   "sha256": "2ac8a510e7113d7fc983e196106050e14f24d727e54c0699b56760053ed395f0",
+   "finalArt": false
+  },
+  {
+   "id": "u205-mid-new",
+   "path": "assets/r374/mobs/u205-mid-new.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "pivot": [
+    128,
+    302
+   ],
+   "visibleHeight": 199,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "nativeId": "u205-mid",
+    "name": "제14단계 역전 관리자"
+   },
+   "note": "u205-04 new-four-v1 (승인). 중간보스 역할·단계 그대로.",
+   "source": {
+    "name": "제14단계 역전 관리자",
+    "version": "new-four-v1",
+    "files": [
+     "sheet.png"
+    ],
+    "sha256": [
+     "bd117f25f699c886cac5f4de303e6c24ae450a5019298675d1c4f6a09d9f6c28"
+    ],
+    "scale": 1
+   },
+   "bytes": 235332,
+   "sha256": "b4e1b18f70c5c9d6369d86b6de75730fa8da8dbca963d342dbd32174944a57d2",
+   "finalArt": false
+  }
+ ]
+}
