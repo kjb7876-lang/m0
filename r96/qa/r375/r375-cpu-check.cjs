@@ -1,0 +1,42 @@
+'use strict';const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
+const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}};
+const RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');const src=fs.readFileSync(path.join(R,'client-source','mob-dots-r375.js'),'utf8');
+for(const f of ['mob-dots-r375.js','mob-unique-r248.js','mob-preload-r260.js'])ok(RT(f)===fs.readFileSync(path.join(R,'client-source',f),'utf8'),f+' runtime-text 사본 = client-source');
+const html=RT('index.html');ok(/<script src="\.\/mob-dots-r374\.js"><\/script><script src="\.\/mob-dots-r375\.js"><\/script>/.test(html)&&html.split('mob-dots-r375.js').length===2,'스크립트 태그 한 번, R374 뒤');
+ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'mob-dots-r375.js',"),'공개 확인 목록');
+const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('mob-dots-r375.js'),'런타임 입력 목록');
+const idx=JSON.parse(RT('assets/r375/mobs/index.json'));ok(idx.mobs.length===5,'5종');
+for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
+ ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(inputs.textPaths.includes(m.path)||JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');}
+ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').includes('s=sheetOf(e);if(s&&(window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)||window.__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)))s=null;'),'R248 이 R374·R375 액터를 덮어 그리지 않음');
+ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').includes('__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)'),'R260 미리 읽기가 R375 시트를 기다림');
+const S0={frameFor:(e,f)=>({path:'base'})};
+const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',room:{id:'kair02'},player:{x:0,y:0},
+ readyImage:()=>({image:{naturalWidth:10}}),setTimeout:()=>0};ctx.window.window=ctx.window;vm.createContext(ctx);
+vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);
+ctx.window.__idx(idx);const D=ctx.window.__STORYWORLD_MOB_DOTS_R375__,S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
+const mk=(pid,name,o={})=>({id:name+Math.random(),profile:{id:pid},name,hp:10,x:3,y:0,...o});
+ok(S.frameFor(mk('kair-guardian-44','시간수문장 2'),null)?.r375Mob==='kair-44','kair 44');
+ok(S.frameFor(mk('kair-guardian-45','시간수문장'),null)?.r375Mob==='kair-45','kair 45');
+ok(S.frameFor(mk('kair-guardian-48','시간수문장 증원'),null)?.r375Mob==='kair-48','kair 48');
+ok(S.frameFor(mk('kair-guardian-44','태엽 수집자'),null)?.path==='base','다른 이름은 그대로');
+ok(S.frameFor(mk('x','시간핵의 명령 잔류'),null)?.path==='base','kair03 밖 잔류는 그대로');
+ctx.room={id:'kair03'};ok(S.frameFor(mk('x','시간핵의 명령 잔류'),null)?.r375Mob==='kair03-residue','kair03 잔류');
+ok(S.frameFor(mk('kair-guardian-44','시간수문장',{boss:true}),null)?.path==='base','보스 제외');
+// 방향: 영웅 위치(등각 sx=dx-dy, sy=dx+dy)
+const e=mk('kair-guardian-44','시간수문장');ctx.player={x:0,y:3};e.x=3;e.y=0;ok(D.dirOf(e)==='west','영웅이 화면 왼쪽 → west');
+ctx.player={x:6,y:-3};ok(D.dirOf(e)==='east','영웅이 화면 오른쪽 → east');
+ctx.player={x:6,y:3};ok(D.dirOf(e)==='south','영웅이 화면 아래 → south(앞)');
+ctx.player={x:0,y:-3};ok(D.dirOf(e)==='north','영웅이 화면 위 → north(뒤)');
+ok(D.dirOf({...e,attack:{elapsed:.1,angle:0}})==='east','공격 중엔 공격 각(오른쪽)');
+const m44=idx.mobs.find(m=>m.id==='kair-44');ctx.player={x:6,y:3};
+ok(D.frameOf(e,m44).assetFrame.sourceRect[1]===m44.rows.south*320,'앞 줄 선택');
+ok(D.cellFor({...e,hp:0,deadAt:1},m44)===m44.states.death[0]&&D.cellFor({...e,hp:0,deadAt:0},m44)===m44.states.death.at(-1),'사망 두 장 뒤 유지');
+ok(m44.states.hit.includes(D.cellFor({...e,hitTimer:.2},m44)),'피격');
+ok(m44.states.attack.includes(D.cellFor({...e,attack:{elapsed:.3,angle:0}},m44)),'공격');
+ctx.layer='DREAM';const h=idx.mobs.find(m=>m.id==='plague-hound');
+ok(S.frameFor({id:'h',name:'변이된 사냥개 괴수',r200Shade:'plague-hound',hp:5,x:0,y:0},null)?.r375Mob==='plague-hound','사몽 사냥개');
+ok(S.frameFor({id:'h2',name:'다른 몹',r200Shade:'other',hp:5,x:0,y:0},null)?.path==='base','사몽 다른 종 그대로');
+ctx.player={x:-3,y:0};const hf=D.frameOf({id:'h3',hp:5,x:3,y:0},h);ok(hf.flip===(h.facing!=='left'),'사냥개 영웅 왼쪽 → 왼쪽 보기');
+D.set({on:false});ok(S.frameFor({id:'h4',r200Shade:'plague-hound',hp:5,x:0,y:0},null)?.path==='base','끄기');
+console.log(`R375 CPU ${n-bad}/${n}`);if(bad)process.exit(1);
