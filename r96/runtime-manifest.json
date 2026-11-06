@@ -23589,8 +23589,8 @@
     },
     {
       "path": "guide-fragment-r365.js",
-      "bytes": 3243,
-      "sha256": "18c1a8daf29a7c67562726d814f4f6451d01ed442e0577ab19ceb743964684c7"
+      "bytes": 6491,
+      "sha256": "eea7ee91aef01b1197527e708ebb8394c7f9adb54d248f7579c1ea6b44053431"
     },
     {
       "path": "guide-loot-r261.js",
@@ -24434,7 +24434,7 @@
     }
   ],
   "fileCount": 4886,
-  "totalBytes": 938539074,
+  "totalBytes": 938542322,
   "webHTMLSha256": "5d9704a6056c0911b4df769cabfaa47ab6b56978d195fb2a68ce82d0a6c78a4a",
   "largest": [
     {
