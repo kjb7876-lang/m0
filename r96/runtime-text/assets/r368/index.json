@@ -1,0 +1,37 @@
+{
+ "revision": "R368",
+ "source": {
+  "name": "gemini_generated_video_ec6954db.mp4",
+  "from": "사용자 업로드(프로젝트 스레드, 2026-11-06)",
+  "bytes": 8490755,
+  "sha256": "bc84d3136564c6575c7a06522131466fdbbbf5d7746db9c7531dd242d97415c3",
+  "size": [
+   1280,
+   720
+  ],
+  "seconds": 10.03
+ },
+ "files": [
+  {
+   "path": "assets/r368/betrayal.mp4",
+   "bytes": 2779195,
+   "sha256": "8eee42e9a4eacdb5968fab16badeadcc6706e1a059af5417bc6dd2c5330c5c6c",
+   "size": [
+    1280,
+    548
+   ],
+   "process": "ffmpeg crop=1280:548:0:12 (아래쪽 가짜 게임 UI·깨진 자막·워터마크 제거), libx264 crf24, aac 128k, faststart",
+   "use": "결전의 날 초천사 배신 장면",
+   "applied": true
+  },
+  {
+   "path": "assets/r368/betrayal-poster.jpg",
+   "bytes": 64552,
+   "sha256": "8023a1c69c6abe20c3f2f1ecd7623c2f40ed362fd756b5b02216994f4bccd343",
+   "process": "betrayal.mp4 0.3초 프레임",
+   "use": "영상 포스터",
+   "applied": true
+  }
+ ],
+ "notes": "원본 영상 파일은 저장소에 넣지 않았다(사용자 업로드 원본 보존). 자막은 영상 속 글자가 아니라 R317 정본 문장을 HTML로 띄운다."
+}

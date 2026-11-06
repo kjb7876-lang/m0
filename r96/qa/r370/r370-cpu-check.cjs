@@ -4,8 +4,8 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');const R=path.join(__dirname,'..','..');
 const F='cinema-mode-r370.js',SRC=fs.readFileSync(path.join(R,'client-source',F),'utf8'),html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
-ok('index.html loads cinema-mode-r370 once, right after slayer-r-tornado-r366 and before combat-r118',
- html.split('"./cinema-mode-r370.js"').length===2&&/slayer-r-tornado-r366\.js"><\/script><script src="\.\/cinema-mode-r370\.js"><\/script>/.test(html)&&html.indexOf('cinema-mode-r370.js')<html.indexOf('"./combat-r118.js"'));
+ok('index.html loads cinema-mode-r370 once, after the last overlay (poison-city-video-r369) and before combat-r118',
+ html.split('"./cinema-mode-r370.js"').length===2&&/poison-city-video-r369\.js"><\/script><script src="\.\/cinema-mode-r370\.js"><\/script>/.test(html)&&html.indexOf('cinema-mode-r370.js')<html.indexOf('"./combat-r118.js"'));
 ok('no eval / no new Function in the overlay',!/\beval\s*\(|new Function/.test(SRC));
 ok('no ctx.filter drop-shadow/blur (Three.js legacy trap)',!/filter\s*=\s*['"][^'"]*(drop-shadow|blur)/.test(SRC));
 function el(tag){return {tag,id:'',style:{},children:[],attrs:{},checked:false,parentNode:null,textContent:'',innerHTML:'',isConnected:true,

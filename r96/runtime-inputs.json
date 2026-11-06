@@ -4102,6 +4102,14 @@
     "assets/r366/index.json",
     "assets/r366/tornado-back.webp",
     "assets/r366/tornado-front.webp",
+    "betrayal-video-r368.js",
+    "assets/r368/betrayal.mp4",
+    "assets/r368/betrayal-poster.jpg",
+    "assets/r368/index.json",
+    "poison-city-video-r369.js",
+    "assets/r369/poison-city.mp4",
+    "assets/r369/poison-city-poster.jpg",
+    "assets/r369/index.json",
     "cinema-mode-r370.js"
   ],
   "mediaPaths": [
@@ -5177,5 +5185,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "873a863f84310c6dfadc3773db13246bd5cf8616c963ce04f4090c83529ca40e"
+  "runtimeManifestSHA256": "a9c2706520dec9bb7e230fc2702a431acd64c87b1fc3e4ab8fda7eca21b31805"
 }
