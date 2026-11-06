@@ -34,6 +34,21 @@ function wrapPath(base){const w=function(layout,from,to,radius,isBlocked,isClear
  if(prefs.unstick&&Array.isArray(out)&&!out.length&&typeof isBlocked==='function'&&from&&to){const u=unstick(base,this,layout,from,to,radius,blockedFn,isClear);if(u)return u;}
  return out;};w.__r367=true;return w;}
 try{const A=window.StoryPhase1;if(A&&typeof A.explorationPath==='function'&&!A.explorationPath.__r367)window.StoryPhase1=Object.freeze({...A,explorationPath:wrapPath(A.explorationPath)});}catch(e){fail(e);}
+// R371 Codex P2: 엔진 findPath/pathTo3(index.html 확장 지역)는 R367 보다 먼저 잡아 둔 StoryPhase1 을 써서 위 감싸기를 안 탄다 →
+//  전역 findPath·pathTo3 결과가 [] 일 때도 같은 규칙(시작점만 .29 로 막히고 .27 로는 섬)으로 가까운 칸 중심에서 다시 찾는다.
+// 다시 찾을 때는 perf-r272/r360 의 '도착점 기준 빈 길 기억'을 거치지 않게(방금 실패한 같은 도착점이라 바로 [] 가 나온다) 확장 지역이면 엔진 길찾기를 직접 부른다.
+function direct(r,from,to,radius){try{const A=window.StoryPhase1;if(!r?.exploration?.expanded||typeof A?.explorationPath!=='function')return null;
+ return A.explorationPath(r.exploration,from,to,radius,(x,y,v)=>blocked(x,y,v,r),(a,b,v)=>clearPath3(a,b,v,r));}catch(e){fail(e);return null;}}
+function unstickGlobal(base,self,from,to,radius,r){if(!prefs.unstick||!(radius>STAND)||!from||!to||!r||typeof blocked!=='function'||typeof clearPath3!=='function')return null;
+ try{if(!blocked(from.x,from.y,radius,r)||blocked(from.x,from.y,STAND,r)||blocked(to.x,to.y,radius,r))return null;
+  const cx=Math.floor(from.x),cy=Math.floor(from.y),cand=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const c={x:cx+dx+.5,y:cy+dy+.5};cand.push([Math.hypot(c.x-from.x,c.y-from.y),c]);}
+  cand.sort((a,b)=>a[0]-b[0]);
+  for(const [,c] of cand){if(blocked(c.x,c.y,radius,r)||!clearPath3(from,c,STAND,r))continue;const rest=direct(r,c,to,radius)||base.call(self,c,to,radius,r);if(Array.isArray(rest)&&rest.length){stats.unstuckGlobal=(stats.unstuckGlobal||0)+1;return [{x:c.x,y:c.y},...rest];}}
+ }catch(e){fail(e);}return null;}
+try{if(typeof findPath==='function'&&!findPath.__r367){const base=findPath;const w=function(from,to,r=(typeof room!=='undefined'?room:null),radius=.29){const out=base.call(this,from,to,r,radius);
+  if(Array.isArray(out)&&!out.length){const u=unstickGlobal((c,t,v,rr)=>base.call(this,c,t,rr,v),this,from,to,radius,r);if(u)return u;}return out;};w.__r367=true;findPath=w;}}catch(e){fail(e);}
+try{if(typeof pathTo3==='function'&&!pathTo3.__r367){const base=pathTo3;const w=function(from,to,radius,r=(typeof room!=='undefined'?room:null)){const out=base.call(this,from,to,radius,r);
+  if(Array.isArray(out)&&!out.length){const u=unstickGlobal((c,t,v,rr)=>base.call(this,c,t,v,rr),this,from,to,radius,r);if(u)return u;}return out;};w.__r367=true;pathTo3=w;}}catch(e){fail(e);}
 window.__STORYWORLD_PERF_R367__=Object.freeze({revision:REV,cellKey,memoBlocked,wrapPath,unstick,STAND,
  set(p){Object.assign(prefs,p||{});try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};},
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browserVerified:false,GPUVerified:false})});

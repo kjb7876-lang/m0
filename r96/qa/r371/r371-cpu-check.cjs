@@ -42,4 +42,7 @@ function engine(){let clock=0,ticks=0;const g={window:{},document:{readyState:'c
  ok(P(L,from,{x:5.5,y:4.5},.29,bl,cl).length===0,'목표가 막혔으면 그대로 거부');
  ok(JSON.stringify(P(L,{x:2.5,y:2.5},to,.29,bl,cl))===JSON.stringify(EP(L,{x:2.5,y:2.5},to,.29,bl,cl)),'보통 시작점은 엔진 결과와 같음');
  A.set({unstick:false});ok(P(L,from,to,.29,bl,cl).length===0,'끄기(storyworld.r367.perf unstick:false) → 원래대로');A.set({unstick:true});}
+{const ps=fs.readFileSync(path.join(R,'client-source','perf-r367.js'),'utf8');
+ ok(/findPath=w;/.test(ps)&&/pathTo3=w;/.test(ps)&&/unstickGlobal\(/.test(ps),'Codex P2: 엔진이 먼저 잡아 둔 StoryPhase1 대신 전역 findPath·pathTo3 에도 벽 옆 시작점 풀기');
+ ok(/const rest=direct\(r,c,to,radius\)\|\|base\.call/.test(ps),'다시 찾기는 도착점 기준 빈 길 기억(perf-r272/r360)을 거치지 않고 엔진 길찾기 직접(브라우저 검사 r371-browser 가 findPath 로 확인)');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static+fake-engine'}));
