@@ -14868,6 +14868,21 @@
       "sha256": "d5f6b8e30b788f9e3a2e434e7fcc72c1150b873d00e3a36c7a1442c3aea9eee7"
     },
     {
+      "path": "assets/r368/betrayal-poster.jpg",
+      "bytes": 64552,
+      "sha256": "8023a1c69c6abe20c3f2f1ecd7623c2f40ed362fd756b5b02216994f4bccd343"
+    },
+    {
+      "path": "assets/r368/betrayal.mp4",
+      "bytes": 2779195,
+      "sha256": "8eee42e9a4eacdb5968fab16badeadcc6706e1a059af5417bc6dd2c5330c5c6c"
+    },
+    {
+      "path": "assets/r368/index.json",
+      "bytes": 1163,
+      "sha256": "750298e47da0414c3e6f87706399c0b8f12b0682a70108f949266095462cfa9f"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -22833,14 +22848,19 @@
       "sha256": "5eb46b1d466fd2b4c3b5ee6dbf12e2148292a82ed842626d7ae2f2eb806a3058"
     },
     {
+      "path": "betrayal-video-r368.js",
+      "bytes": 12702,
+      "sha256": "7b21e74896a75a6e996dddf70d93d1533e1f488ab34db4e2ac3837484facbff3"
+    },
+    {
       "path": "bgm-classical-r195.js",
       "bytes": 12098,
       "sha256": "7d1c0b7de817c9bc8c50fef4d3811a41e0d608aec04c4fe0d6f2a62801fde475"
     },
     {
       "path": "bgm-map-r308.js",
-      "bytes": 13884,
-      "sha256": "b4354d8ff984b4635e6102616ae53b34bac6b0ca61835727ca81fb3f97581c32"
+      "bytes": 13944,
+      "sha256": "a37ab1a4eb19610a421d0b2038e6f44035fdb5b9c2736d830c4e0d0580750fd5"
     },
     {
       "path": "bgm-pick-r353.js",
@@ -23754,8 +23774,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6569812,
-      "sha256": "2da1fe716c34aced09bbf5dca9792bcad9aaf60581182a002beb2dad9ffebff0"
+      "bytes": 6569860,
+      "sha256": "a2616f4b265e0a596737a89c0f88e5d43ec82706fc6bca3e620cbcb0d46fb222"
     },
     {
       "path": "intro-r140.js",
@@ -24458,9 +24478,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4891,
-  "totalBytes": 938955451,
-  "webHTMLSha256": "2da1fe716c34aced09bbf5dca9792bcad9aaf60581182a002beb2dad9ffebff0",
+  "fileCount": 4895,
+  "totalBytes": 941813171,
+  "webHTMLSha256": "a2616f4b265e0a596737a89c0f88e5d43ec82706fc6bca3e620cbcb0d46fb222",
   "largest": [
     {
       "path": "index.html",

@@ -1,0 +1,38 @@
+// R368 초천사 배신 장면 영상 대체 + 결전의 날(ep1a09b) 발록 보스(색 조금 바꿈) — CPU 정적 검사.
+//  node r96/qa/r368/r368-cpu-check.cjs   (브라우저 검사는 r368-browser.mjs)
+const fs=require('fs'),path=require('path'),assert=require('assert'),crypto=require('crypto');
+const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let n=0;const ok=(c,m)=>{assert(c,m);n++;console.log('PASS',m);};
+const F='betrayal-video-r368.js',src=fs.readFileSync(path.join(R,'client-source',F),'utf8');
+const strip=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/(^|[^:'"])\/\/.*$/gm,'$1');
+for(const f of [F,'bgm-map-r308.js'])ok(fs.readFileSync(path.join(R,'client-source',f),'utf8')===fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),f+' runtime-text 사본 일치');
+const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8'),tag='"./'+F+'"';
+ok(html.split(tag).length===2&&html.indexOf('"./maps-palace-slum-r317.js"')<html.indexOf(tag)&&html.indexOf('"./slayer-r-tornado-r366.js"')<html.indexOf(tag)&&html.indexOf(tag)<html.indexOf('"./combat-r118.js"'),'index.html 태그 한 번(R317·R366 뒤, combat-r118 앞)');
+const ver=fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8');
+ok(ver.includes("'"+F+"'")&&/startswith\('assets\/r368\/'\)/.test(ver),'verify-r96-public.py 기대 목록·자산');
+ok(!/''/.test((ver.match(/'[a-z0-9-]+-r\d+[a-z0-9-]*\.js'\s*'/g)||[]).join('')) && !/\.js''/.test(ver),'verify 목록 쉼표 빠짐 없음');
+ok(/node r96\/qa\/r368\/r368-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
+const man=JSON.stringify(JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')));
+const IDX=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r368/index.json'),'utf8'));
+ok([F,'assets/r368/index.json','assets/r368/betrayal.mp4','assets/r368/betrayal-poster.jpg'].every(p=>man.includes(p)),'runtime-manifest 에 오버레이·영상·포스터·index');
+for(const f of IDX.files){const b=fs.readFileSync(path.join(R,'runtime-text',f.path));ok(b.length===f.bytes&&crypto.createHash('sha256').update(b).digest('hex')===f.sha256,f.path+' 크기·sha256 일치');ok(f.applied===true&&f.use,'자산표 용도·적용 표기');}
+const mp4=fs.readFileSync(path.join(R,'runtime-text/assets/r368/betrayal.mp4'));
+ok(mp4.slice(4,8).toString()==='ftyp'&&mp4.length<=3000000,'영상 mp4(ftyp)·3MB 이하('+mp4.length+')');
+ok(mp4.indexOf('moov')<mp4.indexOf('mdat'),'faststart(moov 가 mdat 앞)');
+ok(!fs.existsSync(path.join(R,'runtime-text/assets/r368',IDX.source.name)),'사용자 원본 영상은 저장소에 넣지 않음');
+const code=strip(src);
+ok(/SRC='assets\/r368\/betrayal\.mp4'/.test(code)&&/ZONE='ep1a09b'/.test(code),'영상 경로·결전의 날 지역');
+ok(/TINT='hue-rotate\(-?\d+deg\)( saturate\([\d.]+\))?( brightness\([\d.]+\))?'/.test(code)&&!/drop-shadow|blur\(/.test(code),'색 바꿈은 Three.js 기록기가 받는 filter 만(hue-rotate·saturate·brightness)');
+ok(/c\.save\(\);try\{[^}]*c\.filter=[^}]*TINT/.test(code)&&/finally\{c\.restore\(\);\}/.test(code),'filter 는 save/restore 로 감쌈');
+const cues=JSON.parse(code.match(/CUES=Object\.freeze\((\[[^)]*\])\)/)[1]);
+ok(cues.length===3&&cues.every((c,i)=>c[2]===i&&c[0]<c[1]&&(i===0||cues[i-1][1]===c[0]))&&cues[2][1]>=IDX.source.seconds,'자막 3줄 시간표 순서·끝까지');
+const r317=fs.readFileSync(path.join(R,'client-source','maps-palace-slum-r317.js'),'utf8');
+const capOf=t=>(t.match(/(?:^|[^_])CAPTIONS=Object\.freeze\((\[[^\]]*\])\)/)||[])[1];
+ok(capOf(r317)&&capOf(r317).replace(/'/g,'"')===(code.match(/FALLBACK_CAPTIONS=Object\.freeze\((\[[^\]]*\])\)/)||[])[1]?.replace(/'/g,'"')&&/R317\(\)\?\.CAPTIONS/.test(code),'자막은 R317 정본 CAPTIONS 를 그대로 씀(대체 문장도 같은 정본)');
+ok(/z\.bosses\.length\)return false/.test(code)&&/R\.dist06\?\.bosses/.test(code)&&/\{\.\.\.src,r368:true\}/.test(code),'발록은 dist06 정의 복사, ep1a09b 보스 목록이 비었을 때만 넣음');
+ok(/killEnemy/.test(code)&&/drawEnemy/.test(code)&&/enterRegion/.test(code)&&/tick/.test(code),'killEnemy·drawEnemy·enterRegion·tick 감싸기');
+ok(/r317Cinema/.test(code)&&/readyState/.test(code),'R317 장면은 영상 준비됐을 때만 닫고 바꿈(아니면 R317 유지)');
+ok(/STALL_MS/.test(code)&&/muted/.test(code),'멈춤 6초 닫기·자동재생 막히면 음소거 재시도');
+ok(/bgmGain/.test(code)&&/__STORYWORLD_BETRAYAL_VIDEO_R368__\?\.bgmGain\?\.\(\)\?\?1/.test(fs.readFileSync(path.join(R,'client-source','bgm-map-r308.js'),'utf8')),'영상 중 BGM 0(bgm-map-r308 배수)');
+ok(!/\.hp\s*-=|damage\s*\(|attackPower|cooldown/.test(code),'전투 판정·피해 손대지 않음');
+ok(!/fetch\(\s*['"]https?:/.test(code),'외부 주소 요청 없음');
+console.log(JSON.stringify({ok:true,checks:n,method:'static'}));
