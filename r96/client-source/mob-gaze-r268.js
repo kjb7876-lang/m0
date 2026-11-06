@@ -30,7 +30,7 @@ function spots(cx,cy,d,first){const k=d/Math.SQRT2;return [first,-first].map(s=>
 function relocate(e){const dist=Math.hypot(e.x-player.x,e.y-player.y),B=big(e);
  const range=Number(e.combatProfile?.attackShape?.range)||Number(e.range)||1.4,ranged=range>2.6||/ranged|caster|archer|shoot/i.test(String(e.combatProfile?.kind||e.kind||''));
  const d=Math.max(B?2:.9,Math.min(ranged?5:Math.max(1,range*.85),dist)),{sx}=scr(e.x,e.y,player.x,player.y),first=sx>0?-1:1,maxMove=B?6:3.6;
- if(!fixed(e))for(const s of spots(player.x,player.y,d,first)){if(Math.hypot(s.x-e.x,s.y-e.y)>maxMove||!free(s.x,s.y,player))continue;
+ if(!fixed(e))for(const s of spots(player.x,player.y,d,first)){if(Math.hypot(s.x-e.x,s.y-e.y)>maxMove||!free(s.x,s.y,player)||(window.__STORYWORLD_MOB_SHADOW_R374__?.canRelocate(e,s)===false))continue;
   const from=[+e.x.toFixed(2),+e.y.toFixed(2)];e.nav=[];e.moving=false;
   if(B){e.r268Dash={fx:e.x,fy:e.y,tx:s.x,ty:s.y,t0:T()};stats.dashes++;puff(e.x,e.y,{k:.7});}
   else{puff(e.x,e.y);e.x=s.x;e.y=s.y;puff(s.x,s.y,{delay:.06});face(e);stats.blinks++;}
@@ -42,7 +42,8 @@ function relocate(e){const dist=Math.hypot(e.x-player.x,e.y-player.y),B=big(e);
    window.__r268SummonAt=T();face(e);stats.summons++;stats.last={id:e.nativeId||e.id,kind:'summon',from,to:[+s.x.toFixed(2),+s.y.toFixed(2)]};return true;}}
  stats.blocked++;return false;}
 function dashStep(e){const D=e.r268Dash;if(!D)return;const u=Math.min(1,(T()-D.t0)/DASH),k=1-(1-u)*(1-u);const px=e.x,py=e.y;
- e.x=D.fx+(D.tx-D.fx)*k;e.y=D.fy+(D.ty-D.fy)*k;if(Math.hypot(e.x-px,e.y-py)>.35)smoke(px,py);
+ const next={x:D.fx+(D.tx-D.fx)*k,y:D.fy+(D.ty-D.fy)*k};if(window.__STORYWORLD_MOB_SHADOW_R374__?.canRelocate(e,next)===false){e.r268Dash=null;stats.blocked++;return;}
+ e.x=next.x;e.y=next.y;if(Math.hypot(e.x-px,e.y-py)>.35)smoke(px,py);
  if(u>=1||T()<D.t0){e.x=D.tx;e.y=D.ty;e.r268Dash=null;face(e);puff(e.x,e.y,{k:.6});}}
 let budget=[],lastT=0;
 function paused(){return !G('started')||G('loading')||G('modal')||G('storyScene')||typeof player!=='object'||!player||typeof room!=='object'||!room;}

@@ -1,0 +1,2 @@
+PASS pc: exact source hashes, browser checks and preparation-only burst cells
+PASS mobile: exact source hashes, browser checks and preparation-only burst cells

@@ -1,0 +1,3537 @@
+{
+  "sourceHashes": {
+    "mob-shadow-r374.js": "5beca858d9d4f5dc7416a6982642bdd76c683dcd94bee166a44d07bad99a0858",
+    "mob-flank-r230.js": "58da77a20cc4475be929205c26933968b955d1537a70a0dd2ca92f58a13d13d9",
+    "mob-gaze-r268.js": "389b2dc9c6264e3e0df1ebda44b20631f2956ef3a73e4196544bcc506f0466da",
+    "mob-motion-r286.js": "083574788a92555ca4a274d2001ed3899c56c0b589dcda17608a9dd39180d351"
+  },
+  "mode": "generated room classification; not full campaign traversal",
+  "counts": {
+    "preserved": 3605,
+    "attack-only": 404,
+    "static": 22,
+    "idle-only": 14
+  },
+  "rows": [
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "STORY",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "STORY",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "STORY",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "STORY",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "STORY",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "STORY",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "STORY",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "STORY",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "STORY",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "STORY",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "STORY",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "STORY",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "STORY",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "STORY",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "STORY",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "STORY",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "STORY",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "STORY",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "STORY",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "STORY",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "STORY",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "STORY",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "STORY",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "STORY",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "STORY",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "STORY",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "STORY",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "STORY",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "STORY",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "STORY",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-g1",
+      "name": "늪에서 되살아난 전우",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "dist02",
+      "layer": "DREAM",
+      "nativeId": "dist02-h1",
+      "name": "늪의 염소머리 악마 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "DREAM",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "DREAM",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "DREAM",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "DREAM",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1a11",
+      "layer": "DREAM",
+      "nativeId": "a11-d1",
+      "name": "초자아 잠식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b01",
+      "layer": "DREAM",
+      "nativeId": "b01-r1",
+      "name": "일흔두 번째 인장 잔류체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b04",
+      "layer": "DREAM",
+      "nativeId": "b04-b1",
+      "name": "살아 있는 거대한 위장",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b05",
+      "layer": "DREAM",
+      "nativeId": "b05-a1",
+      "name": "붉은 하이힐 칼날",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b06",
+      "layer": "DREAM",
+      "nativeId": "b06-f1",
+      "name": "칼날이 된 지폐 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b08",
+      "layer": "DREAM",
+      "nativeId": "b08-h1",
+      "name": "창처럼 날아오는 역십자가",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "DREAM",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "DREAM",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "DREAM",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "DREAM",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "ep1b09",
+      "layer": "DREAM",
+      "nativeId": "b09-c1",
+      "name": "설원 아래의 기계 다리",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "DREAM",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "DREAM",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "DREAM",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "DREAM",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u201",
+      "layer": "DREAM",
+      "nativeId": "u201-e3",
+      "name": "참호 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e3",
+      "name": "감옥 공명기사",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "u202",
+      "layer": "DREAM",
+      "nativeId": "u202-e1",
+      "name": "가짜 자비 수집가 증원",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-03",
+      "name": "시간수문장 03",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-04",
+      "name": "시간수문장 04",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair04",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-01",
+      "name": "시간수문장 01",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-08",
+      "name": "시간수문장 08",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-09",
+      "name": "시간수문장 09",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-10",
+      "name": "시간수문장 10",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair05",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-07",
+      "name": "시간수문장 07",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-15",
+      "name": "시간수문장 15",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair06",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-16",
+      "name": "시간수문장 16",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair07",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-20",
+      "name": "시간수문장 20",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-26",
+      "name": "시간수문장 26",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair08",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-25",
+      "name": "시간수문장 25",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair10",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-40",
+      "name": "시간수문장 40",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-44",
+      "name": "시간수문장 44",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-45",
+      "name": "시간수문장 45",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair02",
+      "layer": "DREAM",
+      "nativeId": "kair-guardian-43",
+      "name": "시간수문장 43",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-3",
+      "name": "시간핵의 명령 파동 5",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-1",
+      "name": "시간핵의 명령 파동 1",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "kair03",
+      "layer": "DREAM",
+      "nativeId": "kair-academy-wave-2",
+      "name": "시간핵의 명령 파동 3",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando01",
+      "layer": "DREAM",
+      "nativeId": "h101-t1",
+      "name": "악몽 정찰체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-t1",
+      "name": "무명 검흔",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s2",
+      "name": "코어 운반 집행자",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-t1",
+      "name": "무명 검흔",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s2",
+      "name": "코어 운반 집행자",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-t1",
+      "name": "무명 검흔",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s2",
+      "name": "코어 운반 집행자",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-t1",
+      "name": "무명 검흔",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s2",
+      "name": "코어 운반 집행자",
+      "kind": "static",
+      "speed": 1.04
+    },
+    {
+      "zone": "hando02",
+      "layer": "DREAM",
+      "nativeId": "h102-s1",
+      "name": "붕괴선 파수병 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "DREAM",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "DREAM",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "DREAM",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "DREAM",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "murder04",
+      "layer": "DREAM",
+      "nativeId": "murder04-e3",
+      "name": "은폐기록 연결체",
+      "kind": "idle-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체",
+      "kind": "attack-only",
+      "speed": 1.04
+    },
+    {
+      "zone": "cult02",
+      "layer": "DREAM",
+      "nativeId": "c102-e1",
+      "name": "신경 케이블 포식체 증원",
+      "kind": "attack-only",
+      "speed": 1.04
+    }
+  ]
+}

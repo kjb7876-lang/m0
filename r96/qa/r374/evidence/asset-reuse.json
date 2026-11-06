@@ -1,0 +1,47 @@
+[
+  {
+    "path": "assets/r92/mobs/M005-attack.png",
+    "sha256": "d096f6f1271fd59639d45971cc6912c29036a2ce36a4285e40385210e8e97fe9",
+    "bytes": 134802,
+    "width": 508,
+    "height": 163,
+    "origin": "unchanged repository asset",
+    "applied": "runtime reuse; no asset mutation"
+  },
+  {
+    "path": "assets/u2/generated-v350/u2_reactor_collector.webp",
+    "sha256": "5831f44240ce8eb82b03362c6a6e882009162ee4ffceb110d3e73a81793c9955",
+    "bytes": 87018,
+    "width": 512,
+    "height": 512,
+    "origin": "unchanged repository asset",
+    "applied": "runtime reuse; no asset mutation"
+  },
+  {
+    "path": "assets/episode1b/generated-v394/blue_executor.webp",
+    "sha256": "fabe659bd94f888cbd9fb9a2bc3d2e99ebcfcd3072e384d5d9af5911177491e3",
+    "bytes": 110514,
+    "width": 418,
+    "height": 418,
+    "origin": "unchanged repository asset",
+    "applied": "runtime reuse; no asset mutation"
+  },
+  {
+    "path": "assets/hando-v3123/nameless_sword_trace.webp",
+    "sha256": "40060c953d4a514ecf66ba5535a0e636895495c893988eedf327ef3361b8c773",
+    "bytes": 134784,
+    "width": 418,
+    "height": 418,
+    "origin": "unchanged repository asset",
+    "applied": "runtime reuse; no asset mutation"
+  },
+  {
+    "path": "assets/hando-v3123/order_seal_officer.webp",
+    "sha256": "48b00e028da3adb59768e85fa9efc22525cb76708b6792d02142f591001c478c",
+    "bytes": 138134,
+    "width": 418,
+    "height": 418,
+    "origin": "unchanged repository asset",
+    "applied": "runtime reuse; no asset mutation"
+  }
+]
