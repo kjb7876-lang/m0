@@ -1,10 +1,10 @@
-// R370 PLAY-08 P1: 사몽 777 불러온 뒤 숨은 서사창(storyScene 남음·창 닫힘)이 메뉴·Esc 를 막던 것 — CPU 검사(정적 + 가짜 엔진).
-//  node r96/qa/r370/r370-cpu-check.cjs
+// R371 PLAY-08 P1: 사몽 777 불러온 뒤 숨은 서사창(storyScene 남음·창 닫힘)이 메뉴·Esc 를 막던 것 — CPU 검사(정적 + 가짜 엔진).
+//  node r96/qa/r371/r371-cpu-check.cjs
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
 const R=path.resolve(__dirname,'../..'),ROOT=path.resolve(R,'..');let n=0;const ok=(c,m)=>{assert(c,m);n++;console.log('PASS',m);};
 const F='save-transition-r320.js',src=fs.readFileSync(path.join(R,'client-source',F),'utf8');
 ok(src===fs.readFileSync(path.join(R,'runtime-text',F),'utf8'),'runtime-text 사본 일치');
-ok(/node r96\/qa\/r370\/r370-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
+ok(/node r96\/qa\/r371\/r371-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 const html=fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8');
 ok(/if\(storyScene\)\{if\(ev\.key==='Enter'&&!ev\.repeat\)\{ev\.preventDefault\(\);advanceScene\(\)\}return\}/.test(html)&&/function showMenu\(\)\{if\(storyScene\)return;/.test(html),'원인 확인: storyScene 이 남으면 Esc·메뉴는 막히고 Enter 만 advanceScene');
 ok(/function closePanel\(force=false\)\{if\(!force&&\(loading\|\|storyScene\|\|!started\)\)return;modal=false;/.test(html),'원인 확인: closePanel(true) 는 storyScene 을 남긴 채 창만 닫을 수 있음');

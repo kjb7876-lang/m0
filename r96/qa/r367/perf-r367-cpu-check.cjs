@@ -25,7 +25,7 @@ function blockedFn(R){const raw=(x,y,v)=>{if(x-v<0||y-v<0||x+v>R.layout.bounds[2
  const f=(x,y,v)=>{R.calls++;return raw(x,y,v);};f.raw=raw;return f;}// R.calls = 탐색이 직접 묻는 막힘 질의 수
 function clearFn(b0){const bl=b0.raw;return (a,b,v)=>{const k=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/.18));for(let i=1;i<=k;i++)if(bl(a.x+(b.x-a.x)*i/k,a.y+(b.y-a.y)*i/k,v))return false;return true;};}
 const rooms=[makeRoom(24,20),makeRoom(40,30),makeRoom(18,32)];
-API.set({unstick:false}); // R370 의 벽 옆 시작점 풀기는 일부러 결과를 바꾸므로, 기억(memo) 동일성은 끈 채로 본다(r370 검사가 따로 봄)
+API.set({unstick:false}); // R371 의 벽 옆 시작점 풀기는 일부러 결과를 바꾸므로, 기억(memo) 동일성은 끈 채로 본다(r371 검사가 따로 봄)
 let baseCalls=0,memoCalls=0,queries=0,found=0,changes=0;
 for(let q=0;q<900;q++){const R=rooms[q%3];// 방 바꾸기(3개 번갈아)
  if(rnd()<.3){const d=R.doors[Math.floor(rnd()*R.doors.length)];d.open=!d.open;changes++;}// 문 상태 바꾸기

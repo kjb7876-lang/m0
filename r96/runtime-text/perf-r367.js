@@ -18,7 +18,7 @@ function cellKey(x,y){const ix=x-.5,iy=y-.5;if(!(ix>=0&&iy>=0&&ix<SPAN&&iy<SPAN)
 function memoBlocked(isBlocked,radius,counter){const m=new Map();return function(x,y,v){
  if(arguments.length===3&&v===radius){const k=cellKey(x,y);if(k!==null){if(counter)counter.asked++;let r=m.get(k);if(r===undefined&&!m.has(k)){r=isBlocked(x,y,v);m.set(k,r);if(counter)counter.computed++;}return r;}}
  return isBlocked.apply(this,arguments);};}
-// R370(PLAY-08 P2, Dots 2026-11-06): 걷기(moveActor)는 반지름 .27 로 벽에 붙을 수 있는데 길찾기는 .29 로 시작점부터 막혀
+// R371(PLAY-08 P2, Dots 2026-11-06): 걷기(moveActor)는 반지름 .27 로 벽에 붙을 수 있는데 길찾기는 .29 로 시작점부터 막혀
 //  벽 옆(여유 .27~.29)에 선 채 클릭하면 길이 [] 로 거부됐다. 시작점만 .29 로 막히고 .27 로는 서 있을 수 있으면,
 //  가까운 칸 중심(지금 칸·이웃 8칸) 중 .29 로 서 있을 수 있고 .27 로 곧게 갈 수 있는 곳에서 다시 찾아 그 점을 앞에 붙인다. 목표·다른 판정은 그대로.
 const STAND=.27;

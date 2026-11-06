@@ -371,8 +371,8 @@ jobs:
         run: node r96/qa/r368/r368-cpu-check.cjs
       - name: R369 poison city narrative video (ep1a10) CPU check
         run: node r96/qa/r369/r369-cpu-check.cjs
-      - name: R370 Samong restore hidden story unblock CPU check
-        run: node r96/qa/r370/r370-cpu-check.cjs
+      - name: R371 Samong restore hidden story unblock CPU check
+        run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R362 m030 Dots sheet + rename to '개와 늑대의 시간' CPU check
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check
