@@ -47,7 +47,7 @@ function shapeOf(e){const sh=e.attack?.shape154||e.combatProfile?.attackShape||{
 function attackFrame(e){const A=e.attack;if(!A||!Number.isFinite(A.elapsed))return -1;const S=shapeOf(e),t=A.elapsed;if(t<S.w)return t<S.w*.5?8:8;if(t<S.w+S.a)return 9;if(t<S.w+S.a+S.r*.5)return 10;return 11;}
 const KSCALE={coin:.55,lipstick:.6,candy:.6,bottle:.6,mask:.7,blade:.75,heel:.65,cross:.85,paper:.75,slime:.75,crystal:1,fog:.9,serpent:.7,spider:.85,quad:.8,drone:.8};
 function drawOwn(e,s,im){const dead=e.hp<=0||e.spawnState==='dead',age=T()-(Number.isFinite(e.deadAt)?e.deadAt:T());if(dead&&age>.8)return;
- const q=project(e.x,e.y),cp=e.combatProfile,AH=(typeof actorHeight==='function'?actorHeight():60),size0=AH*(cp?.spriteRect?.height||1)*(e.defScale||1)*(KSCALE[s.kind]||1),size=Math.min(size0,AH*(e.boss?2.4:major(e)?1.7:1.3)),k=size/Math.max(40,s.body||200),lift=Math.max(0,Math.min(size*.65,Number(e.visualLiftPx)||0));
+ const q=project(e.x,e.y),cp=e.combatProfile,AH=(typeof actorHeight==='function'?actorHeight():60),size0=AH*(cp?.spriteRect?.height||1)*(e.defScale||1)*(KSCALE[s.kind]||1),size=Math.min(size0,AH*(e.boss?2.4:major(e)?1.7:1.3)*(Number(e.capScaleR373)||1)),k=size/Math.max(40,s.body||200),lift=Math.max(0,Math.min(size*.65,Number(e.visualLiftPx)||0));
  const m=e.r248||(e.r248={x:e.x,y:e.y,moving:0,face:1,seed:Math.random()*8});const dx=e.x-m.x,dy=e.y-m.y;
  /* R259: 영웅 8칸 안이면 걷거나 옆으로 돌 때도 영웅 쪽을 본다(멀리서는 가는 쪽) — 사용자 "적들공격및 이동등 방향이미지도 영웅을목표로했을때 자연스러운 방향" */
  const hd=typeof player==='object'&&player?Math.hypot(player.x-e.x,player.y-e.y):1e9,sdH=hd<1e9?(player.x-player.y)-(e.x-e.y):0;

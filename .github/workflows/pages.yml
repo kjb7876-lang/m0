@@ -41,7 +41,7 @@ jobs:
           import json
           r=json.load(open('r96/qa/r95/ci-current/suite.json'))
           assert r['passed'] and r['fullSuite'] and r['groups']==58 and r['passedGroups']==58
-          assert r['passedChecks']==r['totalChecks']==741 and r['sourceUnchangedDuringRun']
+          assert r['passedChecks']==r['totalChecks']==742 and r['sourceUnchangedDuringRun']
           PY
       - name: Exercise all 24 native status lifecycle and layering checks
         run: |
@@ -377,6 +377,8 @@ jobs:
         run: node r96/qa/r371/r371-cpu-check.cjs
       - name: R372 root gate boss entrance video CPU check
         run: node r96/qa/r372/r372-cpu-check.cjs
+      - name: R373 mob squads and leaders CPU check
+        run: node r96/qa/r373/r373-cpu-check.cjs
       - name: R362 m030 Dots sheet + rename to '개와 늑대의 시간' CPU check
         run: node r96/qa/r362/r362-cpu-check.cjs
       - name: R255 all narrative as notes/fragments; boss entry cinematic CPU check

@@ -97,11 +97,11 @@
     },
     {
       "path": "r96/ci-packs/inputs-019.bin",
-      "bytes": 774508,
-      "sha256": "5dadeee49fce6e04da8a673d4e8d8acb2fa6f0a50e73526f53b7fe181bad0d3b"
+      "bytes": 783199,
+      "sha256": "ec70a21bc39f66e9a43373885d66d5cd5781a51dbe28630ae9720052dae25773"
     }
   ],
-  "archiveSHA256": "ee5cf50da69c3acfdcd79e2d5aa13c5135328028be8198c8f4227324c59564c8",
+  "archiveSHA256": "61922826783caacda806cf452e8fc77b747217ae44ef99fdd857324257b2bd75",
   "files": [
     {
       "path": "handoff/baseline-inputs/hospital-refinement-v4/harness.cjs",
@@ -5407,8 +5407,8 @@
     },
     {
       "path": "qa/r81/legacy-save-contracts.cjs",
-      "bytes": 6441,
-      "sha256": "41d66a898648e7835340f3ad61956887eff6127ad68ffc7c1121a4ba1e4e1bba"
+      "bytes": 6660,
+      "sha256": "8ec3187304d3846b05494263142310d029733d7bb6eaae27cd2a875e4511e3d9"
     },
     {
       "path": "qa/r81/legacy-scope-check.cjs",
@@ -5532,8 +5532,8 @@
     },
     {
       "path": "qa/r81/runtime-contracts.cjs",
-      "bytes": 13227,
-      "sha256": "12730bbb0fd8f10cd0d3a9993edaf321ea1f7f6038ab1b6fbd93f12e46003102"
+      "bytes": 14602,
+      "sha256": "203f3173bbd84bb8523a4a501534dad6b03268e3466bbb69966e3bad18969f11"
     },
     {
       "path": "qa/r81/runtime-results.json",
