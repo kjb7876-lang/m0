@@ -9,7 +9,7 @@ const idx=JSON.parse(RT('assets/r374/mobs/index.json'));ok(idx.mobs.length===7,'
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(m.actor.layer==='STORY'&&/^u20[35]-/.test(m.actor.nativeId),m.id+' STORY u203/u205 한정');
  ok(m.move.length>=4&&m.attack.length===4&&m.finalArt===false,m.id+' 칸·임시 표기');}
-ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').includes('s=sheetOf(e);if(s&&window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e))s=null;'),'R248 이 R374 액터를 덮어 그리지 않음');
+ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').match(/s=sheetOf\(e\);if\(s&&\(?window\.__STORYWORLD_MOB_DOTS_R374__\?\.assign\?\.\(e\)[^;]*\)s=null;/),'R248 이 R374 액터를 덮어 그리지 않음');
 // 런타임 흉내
 const frames=[];const S0={frameFor:(e,f)=>({path:'base',e})};
 const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',player:{x:0,y:0},
@@ -30,5 +30,5 @@ ok(S.frameFor({...boss,hitTimer:.2},null)?.r374Mob===undefined,'보스 경직 �
 S0.frameFor=(e,f)=>({path:'base'});const at=mk('u205-e2','관리자 추적견',{x:5,y:0,attack:{elapsed:.1,angle:0}});ctx.player={x:0,y:0};
 ok(D.faceLeft(at)===false&&S.frameFor(at,null).flip===false,'공격 중: 정해진 공격 방향(오른쪽)을 본다 — 영웅이 왼쪽이어도');
 ok(D.faceLeft({...at,attack:null})===true,'공격 아닐 때: 영웅 쪽(왼쪽)');
-ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').includes('__STORYWORLD_MOB_DOTS_R374__?.assign?.(e);if(d?.path){out.push(d.path);return out;}'),'R260 미리 읽기가 R374 시트를 기다림');
+ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').match(/__STORYWORLD_MOB_DOTS_R374__\?\.assign\?\.\(e\)[^;]*;if\(d\?\.path\)\{out\.push\(d\.path\);return out;\}/),'R260 미리 읽기가 R374 시트를 기다림');
 console.log(`R374 CPU ${n-bad}/${n}`);if(bad)process.exit(1);

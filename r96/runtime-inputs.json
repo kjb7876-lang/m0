@@ -4125,7 +4125,14 @@
     "assets/r374/mobs/u205-e1-new.webp",
     "assets/r374/mobs/u205-e2-new.webp",
     "assets/r374/mobs/u205-e3-new.webp",
-    "assets/r374/mobs/u205-mid-new.webp"
+    "assets/r374/mobs/u205-mid-new.webp",
+    "mob-dots-r375.js",
+    "assets/r375/mobs/index.json",
+    "assets/r375/mobs/kair-44.webp",
+    "assets/r375/mobs/kair-45.webp",
+    "assets/r375/mobs/kair-48.webp",
+    "assets/r375/mobs/kair03-residue.webp",
+    "assets/r375/mobs/plague-hound.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5200,5 +5207,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "d580bc2e3973b6047c7cf749479738675c529dfed704762be4bd4f99e7ba8e49"
+  "runtimeManifestSHA256": "c335a2fca1d9369ef214b2e21e09c84ba629cd2ed65db5cbaf93995646335770"
 }
