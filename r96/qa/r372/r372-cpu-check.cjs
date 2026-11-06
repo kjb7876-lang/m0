@@ -6,7 +6,7 @@ const ok=(c,name,info)=>{n++;if(!c)bad++;console.log((c?'PASS ':'FAIL ')+name+(i
 const RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const src=fs.readFileSync(path.join(R,'client-source','root-gate-video-r372.js'),'utf8'),r309=fs.readFileSync(path.join(R,'client-source','intro-video-r309.js'),'utf8');
 ok(RT('root-gate-video-r372.js')===src,'runtime-text 사본이 client-source 와 같음(sync)');
-ok(/<script src="\.\/poison-city-video-r369\.js"><\/script><script src="\.\/root-gate-video-r372\.js"><\/script>/.test(RT('index.html'))&&RT('index.html').split('root-gate-video-r372.js').length===2,'스크립트 태그 한 번, R369 뒤');
+ok(/<script src="\.\/cinema-mode-r370\.js"><\/script><script src="\.\/root-gate-video-r372\.js"><\/script>/.test(RT('index.html'))&&RT('index.html').split('root-gate-video-r372.js').length===2,'스크립트 태그 한 번, R370 영화 모드 뒤');
 ok(/node r96\/qa\/r372\/r372-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'pages.yml 검사 단계');
 const vp=fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8');ok(vp.includes("'root-gate-video-r372.js'")&&vp.includes("startswith('assets/r372/')")&&!/'[^',]+\.js''/.test(vp),'공개 확인 목록(쉼표 포함)·assets/r372');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));
