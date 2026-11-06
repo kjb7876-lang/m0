@@ -4096,6 +4096,7 @@
     "assets/r363/mobs/L128.webp",
     "assets/r363/mobs/index.json",
     "mob-legacy-r363.js",
+    "guide-fragment-r365.js",
     "perf-r367.js"
   ],
   "mediaPaths": [
@@ -5171,5 +5172,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6e91fe3124d9dd63c002ba15ea303816fde2adddc9153e9e9842c6b24a8c483d"
+  "runtimeManifestSHA256": "77a964fd503320f0953bafdecfabbb40829c86ca15bd2bc07175cb61c36bca40"
 }
