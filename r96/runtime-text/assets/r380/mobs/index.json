@@ -1,8 +1,479 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R402",
+ "revision": "R403",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "dys-siege-gunner-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-siege-gunner-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 4,
+   "pivot": [
+    129.75,
+    300.5
+   ],
+   "visibleHeight": 251.2,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     8,
+     9
+    ],
+    "rename": "중장 광선포병"
+   },
+   "bytes": 224894,
+   "sha256": "9790780db70b6ac6a3e1edd50fb4d5a562c2cbda3a4c197263d39cf99cb392c0",
+   "source": [
+    {
+     "file": "fire-00.png",
+     "sha256": "7a856f615c5b124676ceccdc854a247f978648b5d04d6a88673e1eb596bdd8a9"
+    },
+    {
+     "file": "fire-01.png",
+     "sha256": "c477c8d885722e9c036d660d452edeca36da6d2adfecbf325159021bd1d593de"
+    },
+    {
+     "file": "fire-02.png",
+     "sha256": "6d2aeec119a153f5e109ec97f0dcbd5b015321aaf0cefee99bd78a1bef32ce55"
+    },
+    {
+     "file": "fire-03.png",
+     "sha256": "af466108b870fc09d078279d7395486d1aad53b888428ea4c82763060f8b0c63"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-prism-stalker-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-prism-stalker-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 4,
+   "pivot": [
+    128.0,
+    300.0
+   ],
+   "visibleHeight": 300.0,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     7,
+     9
+    ],
+    "rename": "프리즘 저격병"
+   },
+   "bytes": 133396,
+   "sha256": "89f45b0f8d2955f4f92124eeef5b6d73adb3cc5f1acf2cf9e662848918217898",
+   "source": [
+    {
+     "file": "fire-00.png",
+     "sha256": "f5474d238a39c07e74688afe5e01babf569e5496f3f043dd13b000bb39c62b73"
+    },
+    {
+     "file": "fire-01.png",
+     "sha256": "d326e97fdd75e3fb03ced354495e09648eb243b5f6e83f743ca8ef9b5c78c171"
+    },
+    {
+     "file": "fire-02.png",
+     "sha256": "f1df62c532221c5ea1bf851a7b1f6a8cc6ba6e3c4e980cc980dccb1ee964ee66"
+    },
+    {
+     "file": "fire-03.png",
+     "sha256": "16022c846c109fdab9f14d09d33dcd931704652249c07c3105251e64ebfb1985"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-pulse-raider-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-pulse-raider-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 4,
+   "pivot": [
+    148.75,
+    300.0
+   ],
+   "visibleHeight": 265.0,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     6,
+     9
+    ],
+    "rename": "펄스 척후병"
+   },
+   "bytes": 168986,
+   "sha256": "1db0236874736742c8d01119771623f749950b6bc925213ada449bb0233350b7",
+   "source": [
+    {
+     "file": "fire-00.png",
+     "sha256": "3e128763d41d96ad645d204bf5bab2d5a4aec60229d4c3792a4435bc852d3864"
+    },
+    {
+     "file": "fire-01.png",
+     "sha256": "b93a86de36414c6c138fbe1708f5a677a7c962a05d8e1723a18c14ffa46df4a5"
+    },
+    {
+     "file": "fire-02.png",
+     "sha256": "c135f45eb3420b21651dee3057056688ec76ead88668910f6491f01b18201ead"
+    },
+    {
+     "file": "fire-03.png",
+     "sha256": "5b2984d8e85f8b0e3ef9b5a958a797436a790617ca1ee5f567cfa37b7f2f5096"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-engineer-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-engineer-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    161.0,
+    301
+   ],
+   "visibleHeight": 223.8,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     5,
+     9
+    ],
+    "rename": "배양 공병"
+   },
+   "bytes": 453702,
+   "sha256": "b1de594f83e86dd2af3a604426144ed0f081f3ca132f46e59819b22db97c7bb1",
+   "source": [
+    {
+     "file": "engineer-move8/00.png",
+     "sha256": "87523503a6d4c0e20a1fc354505202e29602a214aae073f0f815df8201d52b2f"
+    },
+    {
+     "file": "engineer-move8/01.png",
+     "sha256": "f1c2643a1e0d42626e270dbd5ad28473d5a2816238a8cc8645a1af4f2212aa2f"
+    },
+    {
+     "file": "engineer-move8/02.png",
+     "sha256": "8f1c310f89f588315e727237f605151f1f293f875b012786efbbc40c3a41601e"
+    },
+    {
+     "file": "engineer-move8/03.png",
+     "sha256": "5ae135d913658a45c1880af942d3507ecfb0bec305a7520b8a7cd7e11ebc8930"
+    },
+    {
+     "file": "engineer-move8/04.png",
+     "sha256": "ded78423b47b5f2d9806bba95a3cf8717f66509660a1ae1ddefddc7f4a16fa32"
+    },
+    {
+     "file": "engineer-move8/05.png",
+     "sha256": "180acbc5220d2214145cddb44efded0d5d45ebe87f12e67abeec77ae38578914"
+    },
+    {
+     "file": "engineer-move8/06.png",
+     "sha256": "cdf4d5a7849060d8281ab1f6dc25989c48bde1de60b52ab4bbd259bbbe3ade47"
+    },
+    {
+     "file": "engineer-move8/07.png",
+     "sha256": "70150bbd70f79cb45f69e5fa12098d7ce2ce65ee99a90eb811c4557c8bf26bd7"
+    },
+    {
+     "file": "engineer-attack4/00.png",
+     "sha256": "17a55983d1a17ff148b77230883cb83a9bbd43119fe9c02f197bcd28f989839d"
+    },
+    {
+     "file": "engineer-attack4/01.png",
+     "sha256": "632fe25f8949e5167bb4daf918ae63dcb60ac6cb1617396e7d6918fd7a0773d5"
+    },
+    {
+     "file": "engineer-attack4/02.png",
+     "sha256": "75f8549fcefcb9328fe8a7357ee7bcf0dc5e58cc8cf3c2e0a6e8ed155ea5919d"
+    },
+    {
+     "file": "engineer-attack4/03.png",
+     "sha256": "01a839ce8e4dfc991e8bbecf932edee8cc29d411032109b6238de8d8f13fb74b"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-disc-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-disc-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    130.0,
+    287
+   ],
+   "visibleHeight": 249.1,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     4,
+     9
+    ],
+    "rename": "원반 포획체"
+   },
+   "bytes": 397272,
+   "sha256": "f2c72cf7168779be42ee7fb3d54047f16f2c2cfa8a81a4797a5462304b39ac66",
+   "source": [
+    {
+     "file": "disc-move8/00.png",
+     "sha256": "4008e1bf22b2156f7e2021a99fa673d07b339fe586255fbd1c15e7cd3fb28ced"
+    },
+    {
+     "file": "disc-move8/01.png",
+     "sha256": "8d6eeab61592fc216649f4a92ee109ed280c540624bcca2ec5f0009a40ec41bd"
+    },
+    {
+     "file": "disc-move8/02.png",
+     "sha256": "494d2fa7b9bc501e138820df6a5624e6569c6470c885e7f27e8fdcfe1b1aea71"
+    },
+    {
+     "file": "disc-move8/03.png",
+     "sha256": "7cbcdfd7931c8a924baca190faefc88e6496244f17e1ae3247e313a80241ffc3"
+    },
+    {
+     "file": "disc-move8/04.png",
+     "sha256": "84f31a4248da4a5cb63b1c942485d42e748755f8fbf3bae2161d10e5032c8c10"
+    },
+    {
+     "file": "disc-move8/05.png",
+     "sha256": "684dac6b2ae7a23c5963224b7e48787f6a8d081175be7e92eb24471016e8f9f2"
+    },
+    {
+     "file": "disc-move8/06.png",
+     "sha256": "969142f39e2d84f72e2a7326fbe71ae098c1649fd56660c38f6e0deda21eaae9"
+    },
+    {
+     "file": "disc-move8/07.png",
+     "sha256": "514dfd66689616ad4570c7b10468faa71d096229609ea9bc63c4e409ae4dd482"
+    },
+    {
+     "file": "disc-attack4/00.png",
+     "sha256": "695bdae5c381ad9c0451803b7ddd24855135c609caa1803ab5a072cb46c3c75f"
+    },
+    {
+     "file": "disc-attack4/01.png",
+     "sha256": "82797aade99d522d082ebd8a3a0bd30afc285629abf430c02af197c1a44af02e"
+    },
+    {
+     "file": "disc-attack4/02.png",
+     "sha256": "c07a20a6bc3ef79fbfe6a05bc3fc79db9a3424698b800d1f113f42b49f722d79"
+    },
+    {
+     "file": "disc-attack4/03.png",
+     "sha256": "250221e263aae991c32a48d517582e7f852bfc7d72e1da2e646ea1f7b50b494e"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-bulwark-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-bulwark-v2.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    129.0,
+    301
+   ],
+   "visibleHeight": 201.7,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     3,
+     9
+    ],
+    "rename": "방벽 돌진체"
+   },
+   "bytes": 426618,
+   "sha256": "0d2bc3826160ba906b4f48483c51e0e5e96bda4d4e1e2830fd5a772319c541c9",
+   "source": [
+    {
+     "file": "bulwark-move8/00.png",
+     "sha256": "c4bb9110685760c2cebf87a9e8878a5ef6aacd144512b164869e57723d8fe063"
+    },
+    {
+     "file": "bulwark-move8/01.png",
+     "sha256": "af3714a90d303378ec2ba96c92846da6fec918812a8fbfabb8ab876e92187f5d"
+    },
+    {
+     "file": "bulwark-move8/02.png",
+     "sha256": "8fcd05e77e7d5f57856ae3925a831c28dc17d2db485122ec99bcc4318bc05f21"
+    },
+    {
+     "file": "bulwark-move8/03.png",
+     "sha256": "fdb10daa5ac94968e9540638c2be7a06767c9f9d4ce3b30b4f3d34a99253fd7f"
+    },
+    {
+     "file": "bulwark-move8/04.png",
+     "sha256": "9a4468ccd814b12fca01a21750cf0fa643cabe4e386614ad3f8ace61fc9ba20b"
+    },
+    {
+     "file": "bulwark-move8/05.png",
+     "sha256": "f5d058f82c299a352969209ea622276f522f52e2f95829ab5372b173e71c9e83"
+    },
+    {
+     "file": "bulwark-move8/06.png",
+     "sha256": "c1e7bbf2f8740b95bac1ff57214e7cb9a3e1e99d537cd7c01fa69823fa9f5c78"
+    },
+    {
+     "file": "bulwark-move8/07.png",
+     "sha256": "4a0523d2808306e3f1371e69d95561f63da9ad93f416e648770f728562a59293"
+    },
+    {
+     "file": "bulwark-attack4/00.png",
+     "sha256": "0fb4578564a305c3dc7227c45f0d94ee1529fb5721b3e03b3a574907729d271c"
+    },
+    {
+     "file": "bulwark-attack4/01.png",
+     "sha256": "498a73ce3cb20781af2c5f9c53e3e7f11183565eae93710fe82590d81633c36f"
+    },
+    {
+     "file": "bulwark-attack4/02.png",
+     "sha256": "4126387c47cd9656a1722119257e4c5d5605d70e7208ce13dfdffb7545c95cb4"
+    },
+    {
+     "file": "bulwark-attack4/03.png",
+     "sha256": "0dace3e30ec9373e4e281f6de586040734410f9ed28fe12bfec6951615df1fef"
+    }
+   ],
+   "finalArt": false
+  },
   {
    "id": "samong-s02-student-v1",
    "kind": "strip",

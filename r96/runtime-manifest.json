@@ -15153,14 +15153,39 @@
       "sha256": "827beb50adec77fbdaf0dbeeae8c76e23f668a2a0bef6c71ee020584952d3ef1"
     },
     {
+      "path": "assets/r380/mobs/dys-bulwark-v2.webp",
+      "bytes": 426618,
+      "sha256": "0d2bc3826160ba906b4f48483c51e0e5e96bda4d4e1e2830fd5a772319c541c9"
+    },
+    {
       "path": "assets/r380/mobs/dys-cleaver-v4.webp",
       "bytes": 369370,
       "sha256": "83f1aa2f62c951a53fcf04df187527421653e805af465398865d1cba63a95f4f"
     },
     {
+      "path": "assets/r380/mobs/dys-disc-v2.webp",
+      "bytes": 397272,
+      "sha256": "f2c72cf7168779be42ee7fb3d54047f16f2c2cfa8a81a4797a5462304b39ac66"
+    },
+    {
+      "path": "assets/r380/mobs/dys-engineer-v2.webp",
+      "bytes": 453702,
+      "sha256": "b1de594f83e86dd2af3a604426144ed0f081f3ca132f46e59819b22db97c7bb1"
+    },
+    {
       "path": "assets/r380/mobs/dys-membrane-v1.webp",
       "bytes": 343940,
       "sha256": "0de402a7573778fd8981c3f51ec3b778cb3fb2074aa4f11986a8fc93a3dd8166"
+    },
+    {
+      "path": "assets/r380/mobs/dys-prism-stalker-v2.webp",
+      "bytes": 133396,
+      "sha256": "89f45b0f8d2955f4f92124eeef5b6d73adb3cc5f1acf2cf9e662848918217898"
+    },
+    {
+      "path": "assets/r380/mobs/dys-pulse-raider-v2.webp",
+      "bytes": 168986,
+      "sha256": "1db0236874736742c8d01119771623f749950b6bc925213ada449bb0233350b7"
     },
     {
       "path": "assets/r380/mobs/dys-sacshell-v1.webp",
@@ -15171,6 +15196,11 @@
       "path": "assets/r380/mobs/dys-scythe-v1.webp",
       "bytes": 394886,
       "sha256": "1fe24eaf24b068323e2db068e13efb50c99ad48d91464a15ec5ae412e9926ea2"
+    },
+    {
+      "path": "assets/r380/mobs/dys-siege-gunner-v2.webp",
+      "bytes": 224894,
+      "sha256": "9790780db70b6ac6a3e1edd50fb4d5a562c2cbda3a4c197263d39cf99cb392c0"
     },
     {
       "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
@@ -15194,8 +15224,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 161331,
-      "sha256": "60408a423e019bcfbe535dc6eee5e82db8e02f2c5780e335fba566f4069a46fa"
+      "bytes": 172785,
+      "sha256": "eddf003d5a7b35b99102309ae7b2929fea81d97a04c82462e055f262a98bc1d9"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -33393,8 +33423,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6678,
-  "totalBytes": 1044165740,
+  "fileCount": 6684,
+  "totalBytes": 1045982062,
   "webHTMLSha256": "4b136f7048adddb934e849523b30c2ab9ebb88354c7dade8349108dfbf6fdc62",
   "largest": [
     {

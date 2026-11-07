@@ -297,7 +297,19 @@ if len(sys.argv) > 24:
     mobs.insert(0, mobs.pop())
     add2('samong-rf-storyteller-v1', N2 / 'x45/storyteller-book/frames', MA4, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
          {'layer': 'DREAM', 'name': '^스토리텔러$', 'boss': True, 'samong': '(^|-)RF(-|$)'}, 1.0)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R402',
+# ── R403: 디스토피아(S-06) 특수병종 v2 3종(이동8·공격4)·레이저총 3종(사격4, 보행은 HOLD 라 조준 자세로 이동) — 외계 침공군 9칸 중 6칸 ──
+if len(sys.argv) > 25:
+    R3a = pathlib.Path(sys.argv[25]); SPC = next(R3a.glob('x43/*/frames')); S06 = '(^|[^0-9])S-?06([^0-9]|$)'
+    NM = '외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병'
+    for k, nm, sl, ft in (('bulwark', '방벽 돌진체', 3, .6), ('disc', '원반 포획체', 4, .55), ('engineer', '배양 공병', 5, .8)):
+        add2(f'dys-{k}-v2', SPC, [f'{k}-move8/0{j}.png' for j in range(8)] + [f'{k}-attack4/0{j}.png' for j in range(4)], 6, 1, list(range(8)), [8, 9, 10, 11], [0],
+             {'layer': 'DREAM', 'name': f'^({NM})( \\d+)?$', 'samong': S06, 'slot': [sl, 9], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+    for k, nm, sl, ft in (('pulse-raider', '펄스 척후병', 6, .9), ('prism-stalker', '프리즘 저격병', 7, .9), ('siege-gunner', '중장 광선포병', 8, .8)):
+        add2(f'dys-{k}-v2', R3a / 'x44' / k / '512x640/right', [f'fire-0{j}.png' for j in range(4)], 4, .5, [0], [0, 1, 2, 3], [0],
+             {'layer': 'DREAM', 'name': f'^({NM})( \\d+)?$', 'samong': S06, 'slot': [sl, 9], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R403',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

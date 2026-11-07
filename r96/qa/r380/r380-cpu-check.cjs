@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===93,'93장(R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===99,'99장(R403 디스토피아 특수3·레이저3 + R402 학생·스토리텔러 2 + R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -60,12 +60,12 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
   ok(seen.size===8&&[...seen].every(m=>m.startsWith('persona-clone-')),'R389 S-07 그림자 16마리 → 분신 8종 고르게('+seen.size+')');ok(other===0,'R389 분신 이름 바뀌고 R248 열쇠는 원래 이름');
   const w={id:'sm103:S-05:a:3',name:'여섯 물건의 그림자',samongR103:'sz115-S05-2',hp:5,x:2,y:1};ok(!S.frameFor(w,null)?.r380Mob&&w.name==='여섯 물건의 그림자','R389 다른 장 같은 이름은 그대로');
   for(const z of ['sz162-S-07-B','sz162-S-07-D','sz173-S-07-G']){const g={id:'sm103:k:t:5',name:'여섯 물건의 그림자',samongR103:z,hp:5,x:2,y:1};ok(S.frameFor(g,null)?.r380Mob==='persona-clone-'+['hwando','michaela','seoha','lauren','neon','hunter','gunner','slayer'][5],'R389 '+z+' 도 분신');}
-  {const seen=new Set(),nm=new Set();for(let i=0;i<9;i++){const c={id:'sm103:S-06:a:'+i,name:'외계 침공군',samongR103:'sz115-S06-'+(i%4+1),hp:5,x:2,y:1};seen.add(S.frameFor(c,null)?.r380Mob);nm.add(c.name);}
+  {const seen=new Set(),nm=new Set();for(const i of [0,1,2,9,10,11,18,19,20]){const c={id:'sm103:S-06:a:'+i,name:'외계 침공군',samongR103:'sz115-S06-'+(i%4+1),hp:5,x:2,y:1};seen.add(S.frameFor(c,null)?.r380Mob);nm.add(c.name);}
    ok(seen.size===3&&[...seen].every(m=>/^dys-(scythe|sacshell|membrane)-v1$/.test(m))&&nm.has('낫팔 잠복체')&&nm.has('막익 급습체'),'R390 S-06 외계 침공군 → 일반몹 3종');
    const el=[0,1].map(i=>{const c={id:'sm103:S-06:e:'+i,name:'외계 침공군 · 짙은 형상',samongR103:'sz115-S06-1',hp:5,x:2,y:1};return [S.frameFor(c,null)?.r380Mob,c.name];});
    ok(el[0][0]==='dys-cleaver-v4'&&el[1][0]==='dys-behemoth-v1'&&el[0][1]==='전선 절단자 · 짙은 형상','R390 짙은 형상 정예 → 절단자·연산거수 번갈아');
    {let loaded=false;ctx.window.__STORYWORLD_SAMONG_SHADES_R200__={inspect:()=>({prefs:{on:true},loaded}),assign:e=>{e.r200Checked=true;if(/:7$/.test(e.id)){e.r200Shade='hound';e.name='변이된 사냥개 괴수';}}};
-    const h={id:'sm103:S-06:a:7',name:'외계 침공군',samongR103:'sz115-S06-1',hp:5,x:2,y:1},k={id:'sm103:S-06:a:8',name:'외계 침공군',samongR103:'sz115-S06-1',hp:5,x:2,y:1};
+    const h={id:'sm103:S-06:a:7',name:'외계 침공군',samongR103:'sz115-S06-1',hp:5,x:2,y:1},k={id:'sm103:S-06:a:11',name:'외계 침공군',samongR103:'sz115-S06-1',hp:5,x:2,y:1};
     ok(!S.frameFor(h,null)?.r380Mob&&h.name==='외계 침공군'&&!h.r380Checked,'R390 R200 목록을 아직 못 읽었으면 기다림(이름 안 바꿈)');loaded=true;
     ok(!S.frameFor(h,null)?.r380Mob&&h.name==='변이된 사냥개 괴수','R390 R200 이 그림자로 바꾼 몹은 건드리지 않음(경합 없음)');ok(S.frameFor(k,null)?.r380Mob==='dys-membrane-v1'&&k.name==='막익 급습체','R390 R200 이 남긴 외계 침공군만 새 3종');delete ctx.window.__STORYWORLD_SAMONG_SHADES_R200__;}
    {const t=(n,z,b)=>{const c={id:'sm103:x:a:1',name:n,samongR103:z,hp:5,x:2,y:1,boss:!!b};return S.frameFor(c,null)?.r380Mob||null;};
@@ -105,6 +105,10 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
     {const v=(nm,z,b)=>{const c={id:'sm103:Y:a:3',name:nm,samongR103:z,hp:5,x:2,y:1,r200Checked:true};if(b)c.boss=true;return (S.frameFor(c,null)||{}).r380Mob||null;};
      const pt=idx.mobs.find(m=>m.id==='samong-patroller-boss-v1'),rv=idx.mobs.find(m=>m.id==='s06-rival-v1');
      ok(v('얼굴 없는 학생','sz115-S02-2')==='samong-s02-student-v1'&&v('얼굴 없는 학생 2','sz162-S-02-B')==='samong-s02-student-v1'&&v('얼굴 없는 학생 · 짙은 형상','sz162-S-02-B')==='samong-s02-student-v1'&&v('얼굴 없는 학생','sz115-S03-2')===null&&v('스토리텔러','sz115-RF-5',true)==='samong-rf-storyteller-v1'&&v('스토리텔러','sz115-RG-5',true)===null&&pt.cols===8&&pt.move.join()==='0,1,2,3'&&pt.attack.join()==='4,5,6,7'&&rv.move.join()==='0,1,2,3','R402 S-02 학생 이동4+공격4, RF 스토리텔러, 순찰자 v4 걷기 4칸(정적 1칸 대신)');}
+    {const v=(i)=>{const c={id:'sm103:Z:a:'+i,name:'외계 침공군',samongR103:'sz115-S06-2',hp:5,x:2,y:1,r200Checked:true};const f=S.frameFor(c,null)||{};return [f.r380Mob||null,c.name];};
+     const r=[0,1,2,3,4,5,6,7,8].map(v),o=v(9);
+     ok(r[0][1]==='낫팔 잠복체'&&r[1][1]==='포낭 곡사체'&&r[2][1]==='막익 급습체'&&r[3][0]==='dys-bulwark-v2'&&r[3][1]==='방벽 돌진체'&&r[4][0]==='dys-disc-v2'&&r[5][0]==='dys-engineer-v2'&&r[6][0]==='dys-pulse-raider-v2'&&r[6][1]==='펄스 척후병'&&r[7][0]==='dys-prism-stalker-v2'&&r[8][0]==='dys-siege-gunner-v2'&&o[1]==='낫팔 잠복체','R403 S-06 외계 침공군 9칸: R390 3종 각 1/9 + 특수3·레이저3 각 1/9');
+     const lz=idx.mobs.find(m=>m.id==='dys-pulse-raider-v2');ok(lz.move.join()==='0'&&lz.attack.join()==='0,1,2,3','R403 레이저총: 보행 HOLD → 조준 자세 1칸 이동, 사격 4칸');}
     ok(t('상대 초인','sz115-S07-1',true)===null&&t('순찰자','',true)===null,'R392 다른 장·본편은 그대로');
     ok(t('포구 검은 안개','')===null&&t('봉합부인','',true)===null,'R391 사몽 밖(본편) 같은 이름은 그대로');}
    ok(fs.readFileSync(path.join(R,'client-source','art-drive-r105.js'),'utf8').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)?null:artFor(e)'),'R391 R105 정적 그림이 승인 시트 위에 겹치지 않음');
