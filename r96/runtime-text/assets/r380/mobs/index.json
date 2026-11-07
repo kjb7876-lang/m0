@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R386",
+ "revision": "R387",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -2516,6 +2516,79 @@
     {
      "file": "burden-swipe-04.png",
      "sha256": "0531a585447e93a4e5bc6c2a8f68fedf9bc143e951d08a393fcf007803fe755f"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "syringe-phantom-boss-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/syringe-phantom-boss-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    128.0,
+    234.5
+   ],
+   "visibleHeight": 268.1,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a09",
+    "name": "^중독을 부르는 주사기 환영체"
+   },
+   "bytes": 312690,
+   "sha256": "5917ae90cd4f00b72a80c53f7ff8303fd5b0a1b9c00965fe37ebd64a1ccb35e3",
+   "source": [
+    {
+     "file": "spectral-drift-01.png",
+     "sha256": "986a0172889bceda48c895999e3be5e69f35c544b3e0a4e6bbbb4347d08f4728"
+    },
+    {
+     "file": "spectral-drift-02.png",
+     "sha256": "ae74e9324e1c8a7c65a777cf39675991cdd6864075f1403a85628985a345752f"
+    },
+    {
+     "file": "spectral-drift-03.png",
+     "sha256": "cae27c7a5eedfb3682fce325f497f65a5ae267fa787ee6852f56d6f1a7bc6caa"
+    },
+    {
+     "file": "spectral-drift-04.png",
+     "sha256": "83d82027dbd31c3bef35b0690ade21a3d5eec57e36a8bb9675374f079e1a2386"
+    },
+    {
+     "file": "syringe-thrust-01.png",
+     "sha256": "26c520cad66eb2649bab7b2d4cc0b869e25ccfa41b603f98d838e53ea58b2dfc"
+    },
+    {
+     "file": "syringe-thrust-02.png",
+     "sha256": "39e274465c58fe5e458e942cc27f8dcf3535594b8c6b5cdfe67bf82eea0a937e"
+    },
+    {
+     "file": "syringe-thrust-03.png",
+     "sha256": "35a5260cef3a4659e690b1b6dd2a57aa1b28516da8c375a3e8e181109429c03d"
+    },
+    {
+     "file": "syringe-thrust-04.png",
+     "sha256": "30356b97e9728e6cffb639731f642ff5050f3ef55290034c5eb624e6c7e8f7ea"
     }
    ],
    "finalArt": false

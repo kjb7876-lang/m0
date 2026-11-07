@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R383-approved-2',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R387-approved-3',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -43,6 +43,22 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
 //  · "분노의 사냥개 … 분노 맵 적용"(검수 목록 19) = "7대죄 분노의귀청수부나오는곳"(ep1b07): 그 지역 R74 순찰 6마리를 분노의 사냥개로(수치 그대로).
 //  · 3×10 정규 무리(r75Pack)는 손대지 않는다. dist00 에 더한 몹은 id ':r383-root:N'·r383Added 로 남긴다(계약 검사가 이것만 빼고 본다).
 const ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
+// R387: 주사실(ep1a09)에는 지역 우두머리(mb-<지역> 중간보스)가 없다 → 사용자 지시(2026-11-07 "병원맵 주사실쪽에 보스가 나오지 않을걸 거기에 넣어줘")로
+//  '중독을 부르는 주사기 환영체'를 한 마리 더한다. 수치·전투 성격은 바로 다음 지역 우두머리(ep1a10 mb-ep1a10, 중간보스)를 복제해 쓰고,
+//  제단 가까이 빈 바닥 칸에 처음부터 보이게(spawnState active — 원래 우두머리는 hidden 으로 단계 뒤에 나옴) 둔다. 그림은 R380 index 의 syringe-phantom-boss-v1(이름으로 고름). 이 개체는 r383Added 로 표시해 R81 계약(3×10)에서 뺀다.
+const SYR_ZONE='ep1a09',SYR_FROM='ep1a10',SYR_NAME='중독을 부르는 주사기 환영체';let syrTpl=null;
+function syringeTemplate(l){if(syrTpl)return syrTpl;try{const base=makeRoom.__r380base||makeRoom,src=base(SYR_FROM,l||'STORY');const d=src?.enemies?.find(e=>e&&e.midboss&&!e.boss&&e.nativeId==='mb-'+SYR_FROM);
+  if(d){const c=JSON.parse(JSON.stringify(d));for(const k of ['squadLeaderR373','r373Name','r373Base','squadR373','r373Slot','r373Anchor','r373From','r373MovePending','r373Clone','capScaleR373','r248Key','r380From','r381From','r385Look','r385From'])delete c[k];syrTpl=c;}}catch(err){fail(err);}return syrTpl;}
+function addSyringe(r,l){if(r.enemies.some(e=>e?.r387Syringe)||r.enemies.some(e=>e&&(e.boss||e.midboss)))return;const tpl=syringeTemplate(l),L=r.exploration;if(!tpl||!L)return;
+ const ent=L.entry||{x:0,y:0},rad=tpl.combatProfile?.bodyBlock?.r||.6;
+ const free=(x,y)=>{try{if(typeof blocked==='function'&&blocked(x,y,rad+.2,r))return false;}catch(_){}return r.enemies.every(a=>Math.hypot(a.x-x,a.y-y)>rad+(a.combatProfile?.bodyBlock?.r||.3)+1);};
+ // 목표 제단(r.objective)을 지키도록 제단에서 4칸쯤 떨어진 빈 칸, 제단이 없으면 입구에서 가장 먼 칸.
+ const ob=r.objective&&Number.isFinite(r.objective.x)?r.objective:null,score=c=>ob?Math.abs(Math.hypot(c.x-ob.x,c.y-ob.y)-4):-Math.hypot(c.x-ent.x,c.y-ent.y);
+ const cells=(L.floorCells||[]).map(([x,y])=>({x:x+.5,y:y+.5})).filter(c=>Math.hypot(c.x-ent.x,c.y-ent.y)>12).sort((a,b)=>score(a)-score(b)||a.x-b.x||a.y-b.y);
+ const c=cells.find(c=>free(c.x,c.y));if(!c)return;const e=JSON.parse(JSON.stringify(tpl));
+ Object.assign(e,{id:SYR_ZONE+':r387-syringe-boss',name:SYR_NAME,x:c.x,y:c.y,homeX:c.x,homeY:c.y,hp:tpl.maxHp,deadRecorded:false,deadAt:undefined,nav:[],navAt:0,stuck:0,attack:null,rangedWindup:0,aim:null,cd:1.5,rest:0,state:'idle',moving:false,
+  spawnState:'active',explorationGroup:SYR_ZONE+':r387-boss',explorationLeash:14,r383Added:true,r387Syringe:true,r387From:tpl.name});delete e.r75Pack;delete e.r74Monster;
+ try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,r,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}r.enemies.push(e);stats.added++;}
 // dist00 몹은 R74 지도 그림(좌우 안 뒤집음, R86) 대신 엔진 frameFor 사슬로 이 오버레이 시트(root-stalker-r74-plain)를 쓴다 → r74Monster 를 지운다.
 const isPatrol=e=>/:r74-patrol:/.test(String(e?.id||''));
 function rootTemplate(l){if(rootTpl)return rootTpl;try{const base=makeRoom.__r380base||makeRoom,src=base('dist02',l||'STORY');const ok=e=>isPatrol(e)&&(e.r74Monster==='root'||e.r383Atlas==='root'),d=src?.enemies?.find(e=>ok(e)&&!e.squadLeaderR373)||src?.enemies?.find(ok);
@@ -58,6 +74,7 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
  if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=WRATH;e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
  // 늪 다크그린 뿌리 추적자(R382)도 R74 지도 그림이 이 시트를 가렸다 → 같은 방식으로 frameFor 사슬에 넘긴다.
  if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;}
+ if(id===SYR_ZONE&&l!=='DREAM')addSyringe(r,l);
  if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;
   const ent=L.entry||{x:0,y:0},boss=r.enemies.find(e=>e.boss),rad=tpl.combatProfile?.bodyBlock?.r||.4;
   const free=(x,y)=>{try{if(typeof blocked==='function'&&blocked(x,y,rad+.12,r))return false;}catch(_){}return r.enemies.every(a=>Math.hypot(a.x-x,a.y-y)>rad+(a.combatProfile?.bodyBlock?.r||.3)+.6);};

@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 15035,
-      "sha256": "b3b764df03edb17ca34dee29138e3bfdcb252519166af15cbbcb9e468ab431f7"
+      "bytes": 17961,
+      "sha256": "6e21ed127105faf19cd6aeaf26870e2d3cd202136e14f097075a50e13304e392"
     },
     {
       "path": "art-drive-r105.js",
@@ -15114,8 +15114,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 57012,
-      "sha256": "cb8dfc4e9de2c7bf014450578b29afbcafecb936531de03894038e2e040719bd"
+      "bytes": 58721,
+      "sha256": "64ce1e194ee65997bba14c1de3750f797ba4dae9b6259f1b0cd28af7a370bd46"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15186,6 +15186,11 @@
       "path": "assets/r380/mobs/swamp-spirit-v1.webp",
       "bytes": 308842,
       "sha256": "4481c508994a713faf4c3321105c7b2ed1811ecec8c80f85248d614be6df8d61"
+    },
+    {
+      "path": "assets/r380/mobs/syringe-phantom-boss-v1.webp",
+      "bytes": 312690,
+      "sha256": "5917ae90cd4f00b72a80c53f7ff8303fd5b0a1b9c00965fe37ebd64a1ccb35e3"
     },
     {
       "path": "assets/r380/mobs/treatment-refusal-mask-v1.webp",
@@ -33048,8 +33053,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6609,
-  "totalBytes": 1031824087,
+  "fileCount": 6610,
+  "totalBytes": 1032141412,
   "webHTMLSha256": "c7d7a759a20804ffa62ddeb31048ef67c970271b7d986dfb6a19fdd5a0d7ea7c",
   "largest": [
     {
