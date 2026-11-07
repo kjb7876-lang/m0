@@ -215,7 +215,15 @@ if len(sys.argv) > 16:
         add2(f'reverse-m093-v1-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
         if side == 'left': mobs[-1]['facing'] = 'left'
     mobs[-2]['twin'] = mobs[-1]['id']
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R394',
+# ── R395: 사몽역행 신규 일반몹 검토 후보 RF 비극 계량체·RG 인과 고리충(오른쪽 원화 4+4, 왼쪽은 원본도 좌우 반전이라 엔진 뒤집기). 떨어진 잔조각만 지움 ──
+if len(sys.argv) > 17:
+    C = pathlib.Path(sys.argv[17]) / 'clean'; MR = [f'move_right_{j}.png' for j in range(1, 5)] + [f'attack_right_{j}.png' for j in range(1, 5)]
+    for id_, k, sl, src, nm, ft in (('reverse-rf-merit-scale-v1', 'rf', [1, 2], '종이 형상', '비극 계량체', 1.25), ('reverse-rg-gear-mite-v1', 'rg', [0, 2], '막힌 이름들', '인과 고리충', .85)):
+        ch = k[1].upper()
+        add2(id_, C / k, MR, 8, .32, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': f'^({src}|{nm})( \\d+)?$', 'samong': f'(^|-)R{ch}(-|$)', 'slot': sl, 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R395',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

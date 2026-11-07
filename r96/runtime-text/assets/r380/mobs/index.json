@@ -1,8 +1,164 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R394",
+ "revision": "R395",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "reverse-rg-gear-mite-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rg-gear-mite-v1.webp",
+   "cell": [
+    164,
+    164
+   ],
+   "cols": 8,
+   "pivot": [
+    84.0,
+    128.96
+   ],
+   "visibleHeight": 128.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(막힌 이름들|인과 고리충)( \\d+)?$",
+    "samong": "(^|-)RG(-|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "인과 고리충"
+   },
+   "bytes": 148190,
+   "sha256": "e7e15eb3376a560579fda93d9c13f270d58b22031a6d22ecf550be22071280c8",
+   "source": [
+    {
+     "file": "move_right_1.png",
+     "sha256": "6a7c086487b3d8a43cb5a13f720dec3c5fca8cf7b3ec8077962b06d796b84dbf"
+    },
+    {
+     "file": "move_right_2.png",
+     "sha256": "f3454fb4720b07e9f400768ed221b8d47199c387c37212fa1b83c1067fc28adb"
+    },
+    {
+     "file": "move_right_3.png",
+     "sha256": "f0d96ca3dc5cd0b1033ce543d424cc0c237007de7ce23cfebd64277fcf57c33d"
+    },
+    {
+     "file": "move_right_4.png",
+     "sha256": "280d21f325b09298626c666819a4dcbceb4adabe0ab372be25a1e320ccc223f4"
+    },
+    {
+     "file": "attack_right_1.png",
+     "sha256": "3ce58010d36c6653003bef561a9bfd73125ee021e6da1e66c40c198eb750eecc"
+    },
+    {
+     "file": "attack_right_2.png",
+     "sha256": "075fceaceab89c5736147900e9c3dda9f56b93d2e9f330fba98ac1044ecd0f8e"
+    },
+    {
+     "file": "attack_right_3.png",
+     "sha256": "e837c44a640fa1250363158cb6ad0306de5f41c860ebab54cfc23f93bb243f7d"
+    },
+    {
+     "file": "attack_right_4.png",
+     "sha256": "7d5d5dd6d9577859fd723cc45f0efb75c5e1d5e857cd362fb35687b27fee454e"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-rf-merit-scale-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rf-merit-scale-v1.webp",
+   "cell": [
+    164,
+    164
+   ],
+   "cols": 8,
+   "pivot": [
+    81.44,
+    139.2
+   ],
+   "visibleHeight": 93.7,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(종이 형상|비극 계량체)( \\d+)?$",
+    "samong": "(^|-)RF(-|$)",
+    "slot": [
+     1,
+     2
+    ],
+    "rename": "비극 계량체"
+   },
+   "bytes": 152916,
+   "sha256": "311cd482c322fb487d181acbee1cfa08a0579f631272dc3507303cae56fb6878",
+   "source": [
+    {
+     "file": "move_right_1.png",
+     "sha256": "d93c993468b61c62b3634e8e2540366c72f8814878a1a2e4784a8faefcfbdc2d"
+    },
+    {
+     "file": "move_right_2.png",
+     "sha256": "5e0a7dcec3c860992600536b553a0299cf238efcf9f42c44137c1ab7329c95ac"
+    },
+    {
+     "file": "move_right_3.png",
+     "sha256": "f2361217180c6e748b4e69dea150279782d87f5d9a3b84588e10280fe8e50a13"
+    },
+    {
+     "file": "move_right_4.png",
+     "sha256": "e3240cae72a41d38d19d9bcd633f78326a9bc8ce856a661f1fac28ea02080ec9"
+    },
+    {
+     "file": "attack_right_1.png",
+     "sha256": "9b58b81b5519693cd767348e9701ae42edc13c0ee069a86a48aaf9c5f50c914e"
+    },
+    {
+     "file": "attack_right_2.png",
+     "sha256": "94c4f3313455b11f4a05b85abbed04b77907ef1298a8f39a592ad73a32a1a2d3"
+    },
+    {
+     "file": "attack_right_3.png",
+     "sha256": "72a100612547a386d9398f8e413f2df20899c0df5f92d4e244b3c4fb1d25779e"
+    },
+    {
+     "file": "attack_right_4.png",
+     "sha256": "49a6f28605b91f1d5b968813f3021a7077d1fdd3b73bc5523308cd406df45c8f"
+    }
+   ],
+   "finalArt": false
+  },
   {
    "id": "ash-moth-v2",
    "kind": "strip",
