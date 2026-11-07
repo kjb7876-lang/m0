@@ -29,11 +29,12 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
  // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
  if(id==='dist01'){const sub=['재 나방','보랏빛 알집지기','거미줄에 묶인 수호병'];let k=0;
   for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
-   const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
+   const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'').replace(/ (증원|추격대|우두머리|후속 증원)$/,'');e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
  else if(id==='u202'&&!r.enemies.some(e=>e?.r380Mech)){const src=r.enemies.filter(e=>e&&!e.boss&&!e.midboss&&!e.wardChampionR81&&e.nativeId==='u202-e1'&&/^가짜 자비 수집가( \d+)?$/.test(e.name||'')&&e.spawnState==='active');
-  src.slice(0,4).forEach((e,i)=>{e.r380From=e.name;e.name=MECH+' '+(i+1);e.r380Mech=true;stats.added++;});}
+  src.slice(0,4).forEach((e,i)=>{e.r380From=e.name;if(!e.r248Key)e.r248Key='가짜 자비 수집가';e.name=MECH+' '+(i+1);e.r380Mech=true;stats.added++;});}
+ // 개명해도 R248 공격 효과·상태이상 조회 키(r248Key)는 옛 이름으로 둔다(Codex P1, 전투 밸런스 보존).
  // R381: 검수 목록 v18 05·06·17 개명(같은 몹 그대로, 이름만) — "갈망의 도시짐승삭제하고 약을 갈망하는 자로", "그자리에 … 암시장의 수상한 자로", "명명 늪에서 되살아난 혼령체".
- for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;e.name=n.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
+ for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;if(!e.r248Key)e.r248Key=from;e.name=n.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
  return r;}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
@@ -48,7 +49,7 @@ function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.a
  if(e.rangedWindup>0)return m.attack[0];
  if(!(e.hp>0)||e.hitTimer>0)return m.move[0];
  if(e.moving)return m.move[Math.floor(T()*8+hash(e.id)*8)%m.move.length];
- return m.idle?.length&&m.idle[0]!==m.move[0]?m.idle[0]:m.move[Math.floor(T()*1.6+hash(e.id)*2)%2];}
+ return m.idle?.length&&m.idle[0]!==m.move[0]?m.idle[0]:m.move[Math.floor(T()*1.6+hash(e.id)*2)%Math.min(2,m.move.length)];}
 function faceLeft(e){if(attacking(e)&&Number.isFinite(e.attack.angle)){const sd=Math.cos(e.attack.angle)-Math.sin(e.attack.angle);if(Math.abs(sd)>.05)return sd<0;}
  try{return !!(player&&(player.x-player.y)<(e.x-e.y));}catch(_){return false;}}
 function frameOf(e,m){const [cw,ch]=m.cell,[px,py]=m.pivot,vh=m.visibleHeight||150,k=cellFor(e,m),cols=m.cols||k+1,sx=(k%cols)*cw,sy=Math.floor(k/cols)*ch;

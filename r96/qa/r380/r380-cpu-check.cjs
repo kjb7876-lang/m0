@@ -22,7 +22,7 @@ const d1=ctx.makeRoom('dist01','STORY');const names=d1.enemies.map(e=>e.name);
 ok(!names.includes('망각의 거미 1')&&!names.includes('망각의 거미 증원 2')&&names.includes('재 나방 1')&&names.includes('보랏빛 알집지기 1'),'dist01 일반 망각의 거미를 승인 종으로 개명');ok(d1.enemies.length===7,'dist01 몹 수 그대로(R81 3×10 계약)');ok(names.includes('중간보스 · 망각의 거미')&&names.includes('망각의 거미 수호자'),'중간보스·R81 수호자는 남김(세이브 복원 보호, Codex P1)');
 ok(ctx.makeRoom('dist01','DREAM').enemies.length===7,'DREAM 층은 그대로');
 const u=ctx.makeRoom('u202','STORY');const mech=u.enemies.filter(e=>e.r380Mech);ok(mech.length===4&&mech.every((e,i)=>e.name==='기계화 망각거미 '+(i+1)),'u202 에 기계화 망각거미 4마리');
-ok(u.enemies.length===7&&mech.every(e=>!/r380/.test(e.id))&&mech[0].r380From==='가짜 자비 수집가 1','u202 몹 수·id 그대로, 이름만 바꿈(R81 계약)');
+ok(mech[0].r248Key==='가짜 자비 수집가','개명해도 R248 조회 키 유지(Codex P1)');ok(u.enemies.length===7&&mech.every(e=>!/r380/.test(e.id))&&mech[0].r380From==='가짜 자비 수집가 1','u202 몹 수·id 그대로, 이름만 바꿈(R81 계약)');
 ok(new Set(u.enemies.map(e=>e.id)).size===u.enemies.length,'고유 id');
 const u2=ctx.makeRoom('u202','STORY');ok(JSON.stringify(u2.enemies.filter(e=>e.r380Mech).map(e=>e.id))===JSON.stringify(mech.map(e=>e.id)),'다시 만들어도 같은 결과');
 const f=(o)=>S.frameFor({id:Math.random()+'',hp:10,x:3,y:0,...o},null);
@@ -36,5 +36,6 @@ const m=idx.mobs.find(x=>x.id==='mech-oblivion-spider');const fr=A.frameOf({id:'
 ctx.player={x:-3,y:0};ok(A.frameOf({id:'b',hp:10,x:3,y:0},m).flip===true,'영웅 왼쪽 → 왼쪽 보기');
 let got=null;ctx.spawnBurnDeath3=function(e){got=e.profile?.frames?.death;};A.installDeath();const prof={frames:{death:{path:'old'}}};const dz={id:'d',name:'재 나방',profile:prof,hp:0,x:1,y:1};ctx.spawnBurnDeath3(dz);
 ok(got?.r380Mob==='ash-moth-v2'&&dz.profile===prof,'죽음 불꽃에 새 그림, profile 복원');
+ok(idx.mobs.every(m=>Array.from({length:40},(_,i)=>A.cellFor({id:'probe'+i,hp:1,moving:i%2===1},m)).every(k=>Number.isInteger(k)&&k>=0)),'모든 시트 대기·이동 칸이 정수(한 장 이동 시트 포함, Codex P2)');
 A.set({on:false});ok(f({name:'재 나방'})?.path==='base','끄기');
 console.log(`R380 CPU ${n-bad}/${n}`);if(bad)process.exit(1);
