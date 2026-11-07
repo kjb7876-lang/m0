@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 9872,
-      "sha256": "e2302a26835332e7eb8d32b380d3838f337036c1824376abc9f51b1222cfb02a"
+      "bytes": 15035,
+      "sha256": "b3b764df03edb17ca34dee29138e3bfdcb252519166af15cbbcb9e468ab431f7"
     },
     {
       "path": "art-drive-r105.js",
@@ -15104,8 +15104,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 48826,
-      "sha256": "6ce099a4f74e8cbc9e847ec18614964050bec261218fa9d1ba72485d4eefb685"
+      "bytes": 51518,
+      "sha256": "ed0f084e531c4c51eb34db86ff421d29c4998314e231039da3527337841ac390"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15136,6 +15136,11 @@
       "path": "assets/r380/mobs/reborn-shieldmate-v4.webp",
       "bytes": 264582,
       "sha256": "f4c82ab42427e254cb6b350e769b126912105e0eec391459e34277c2d4048522"
+    },
+    {
+      "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
+      "bytes": 81584,
+      "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
     },
     {
       "path": "assets/r380/mobs/small-walking-robot-v1.webp",
@@ -15216,6 +15221,11 @@
       "path": "assets/r380/mobs/web-bound-guardian-v4.webp",
       "bytes": 218496,
       "sha256": "b383b1a5fc5b92f263ecba6cee8d0ef8e6cae9dbeee52b7b948f0d6734daed56"
+    },
+    {
+      "path": "assets/r380/mobs/wrath-hound-v1.webp",
+      "bytes": 341104,
+      "sha256": "8647aef6a9fb66f8d494cfeaad810a1edb3b8e898905f0dc96a5f240d0b54ed9"
     },
     {
       "path": "assets/r381/voice/00091c5c62b39736.mp3",
@@ -33013,8 +33023,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6602,
-  "totalBytes": 1030556486,
+  "fileCount": 6604,
+  "totalBytes": 1030987029,
   "webHTMLSha256": "7595bda208bdd8c9ab206da4092c9dfb3fb4b00146f38c18dfd8b5096c82855e",
   "largest": [
     {
