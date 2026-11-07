@@ -5,19 +5,39 @@ import hashlib
 import json
 import struct
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 
+WATCH = """
+const [id,slot]=arguments,subject=room.enemies.find(e=>e.id===id);
+if(!subject)return false;
+// Keep only a read reference so an actual deadRecorded/HP change survives removal from room.enemies.
+window[slot]={owner:room,subject};return true;
+"""
 SNAPSHOT = """
-const targetId=arguments[0], phase=window.__STORYWORLD_PHASE1__;
+const [targetId,slot]=arguments, phase=window.__STORYWORLD_PHASE1__;
 const engine=phase?.controller?.state?.three, diag=window.__STORYWORLD_ENEMY_STATUS24__?.snapshot?.();
 const actors=typeof room==='object'&&room?room.enemies||[]:[];
 const visible=(diag?.enemies||[]).filter(e=>e.active&&e.hp>0&&e.renderEligible&&e.sightVisible&&
   e.image?.ready&&(e.footOnScreen||e.bodyIntersects));
-const byId=new Map(actors.map(e=>[e.id,e])), target=byId.get(targetId);
+const byId=new Map(actors.map(e=>[e.id,e]));
+const watched=window[slot],target=watched?.owner===room?watched.subject:null;
+const sameActor=!!target&&byId.get(targetId)===target, targetDiag=visible.find(e=>e.id===targetId);
+const view=document.getElementById('phase1-webgl');
+function exposed(x,y,z){
+ if(!view||!engine?.T||!engine.camera)return false;
+ const p=new engine.T.Vector3(x,y,z).project(engine.camera),r=view.getBoundingClientRect();
+ const sx=r.left+(p.x+1)*r.width/2,sy=r.top+(1-p.y)*r.height/2;
+ if(p.z<-1||p.z>1||sx<r.left||sx>=r.right||sy<r.top||sy>=r.bottom)return false;
+ const node=document.elementFromPoint(sx,sy);
+ return !!node&&(node===view||node===document.getElementById('game'));
+}
 function actor(e){return e?{id:e.id,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp,attackAnim:e.attackAnim||0,
-  attackCooldown:e.attackCD??null,casting:!!(e.cast||e.casting||e.attack),spawnState:e.spawnState??null}:null;}
+  attackCooldown:e.attackCD??null,deadRecorded:e.deadRecorded===true,
+  casting:!!(e.cast||e.casting||e.attack),spawnState:e.spawnState??null}:null;}
 const activeHazards=(typeof hazards==='undefined'?[]:hazards).filter(h=>h&&(!Number.isFinite(h.life)||h.age<h.life));
 const world={zone:typeof room==='object'?room?.id:null,layer:typeof layer==='undefined'?null:layer,
   stage:typeof room==='object'?room?.encounterStage??null:null};
@@ -27,7 +47,10 @@ return {...world,gameTime:typeof time==='number'?time:null,rendererSerial:engine
   hero:typeof player==='object'?actor(player):null,living:actors.filter(e=>e.hp>0).length,
   activeLiving:diag?.enemies?.filter(e=>e.active&&e.hp>0).length??null,
   visibleLiving:visible.length,visibleActors:visible.slice(0,24).map(e=>actor(byId.get(e.id))).filter(Boolean),
-  target:actor(target),targetReportedVisible:visible.some(e=>e.id===targetId),
+  target:actor(target),targetInRoom:sameActor,targetReportedVisible:sameActor&&!!targetDiag&&
+    (exposed(target.x,0,target.y)||exposed(target.x,.75,target.y)),
+  targetLineClear:sameActor&&targetDiag?.combatLineClear===true,
+  targetDistance:target&&player?Math.hypot(player.x-target.x,player.y-target.y):null,
   hazardCount:activeHazards.length,hazards:activeHazards.slice(0,16).map(h=>({id:h.id??null,
     kind:h.type??h.kind??null,x:h.x??null,y:h.y??null,age:h.age??null,life:h.life??null,
     warning:h.warning??null,radius:h.radius??null})),effects:typeof effects==='undefined'?null:effects.length,
@@ -60,28 +83,35 @@ def _utc():
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
 
 
-def _key(s, event):
-    return s.call("/actions", {"actions": [{"type": "key", "id": "keyboard",
-                                           "actions": [{"type": event, "value": "a"}]}]})
+def _actions(s, actions):
+    return s.call("/actions", {"actions": [{"type": "key", "id": "keyboard", "actions": actions}]})
 
 
-def capture_combat_sequence(s, out, view, target):
-    """Call once for the after/combat marker while its camera and actors are free."""
-    if view not in ("pc", "mobile") or target.get("marker") != "combat":
-        raise ValueError("Expected candidate PC or mobile combat marker")
-    prefix = f"after-{view}-combat-sequence"
+def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=None, before_input=None):
+    """Sample the variant's one primary key press. Callbacks never receive control with a key held."""
+    if view not in ("pc", "mobile") or variant not in ("before", "after") or target.get("marker") != "combat":
+        raise ValueError("Expected native before/after PC or mobile combat marker")
+    attack_key=target.get("attackKey","a")
+    if attack_key not in ("a","1"):
+        raise ValueError("Expected physical A or 1")
+    max_range=float(target.get("comparisonRange",2.6))
+    if not 0 < max_range <= 3.5:
+        raise ValueError("Invalid melee sampling distance")
+    prefix = f"{variant}-{view}-combat-sequence"
     folder = Path(out) / prefix
     folder.mkdir(parents=True, exist_ok=True)
-    report = {"status": "INCOMPLETE", "view": view, "targetEnemyId": target.get("enemyId"),
+    report = {"status": "INCOMPLETE", "view": view, "variant": variant, "targetEnemyId": target.get("enemyId"),
               "fixturePosition": target.get("fixturePosition"), "fixture": "Existing 777 combat marker",
+              "attackKey":attack_key,"maxTargetDistance":max_range,"sampleBudgetSeconds":60,
               "input": [], "inputReleased": False, "frames": [], "issues": [],
               "qualification": "Sequential native-resolution Chrome surface JPEGs, not a video or FPS measurement. "
-                               "Read-only telemetry brackets each capture; pixels may belong to either serial. "
+                               "Read-only telemetry brackets each capture; the sampled pixels may be from any serial in that interval. "
                                "VFX appearance and timing require visual review."}
     start = time.monotonic()
     hashes = {}
     serials = []
     key_may_be_down = False
+    observer_slot="__mammonQaCombatSubject"+uuid.uuid4().hex
     manifest = folder / "sequence.json"
 
     def checkpoint():
@@ -90,38 +120,54 @@ def capture_combat_sequence(s, out, view, target):
                              encoding="utf-8")
         temporary.replace(manifest)
 
-    def key(event):
-        row = {"event": event, "utc": _utc(), "acknowledged": False}
-        report["input"].append(row)
-        _key(s, event)
-        row["acknowledged"] = True
-        row["elapsedMs"] = round((time.monotonic() - start) * 1000, 1)
-
     def snapshot():
-        return s.js(SNAPSHOT, target.get("enemyId"))
+        return s.js(SNAPSHOT, target.get("enemyId"), observer_slot)
+
+    def validate_pre_input(state):
+        actor=state.get("target") or {}
+        if not (state["targetInRoom"] and state["targetReportedVisible"] and state["targetLineClear"] and
+                actor.get("id")==target.get("enemyId") and (actor.get("hp") or 0)>0 and not actor.get("deadRecorded") and
+                state["targetDistance"] is not None and state["targetDistance"]<=max_range):
+            raise RuntimeError("Same living target was not on screen, in range and in a clear attack line immediately before input")
+
+    def terminal_target(state):
+        actor = state.get("target") or {}
+        return (report["inputReleased"] and actor.get("id") == target.get("enemyId")
+                and (actor.get("deadRecorded") is True or actor.get("hp", 1) <= 0))
 
     try:
+        if not s.js(WATCH,target.get("enemyId"),observer_slot):
+            raise RuntimeError("Requested native target ID absent at sequence start")
         for i in range(8):
-            if time.monotonic() - start > 25:
-                raise TimeoutError("25-second sampling budget exhausted")
+            if time.monotonic() - start > 60:
+                raise TimeoutError("60-second sampling budget exhausted")
             if i == 2:
+                if before_input and before_input() is False:
+                    raise RuntimeError("Caller could not release the aligned start")
+                pre=report["preInput"]=snapshot()
+                validate_pre_input(pre)
+                if (pre["zone"],pre["layer"],pre["renderer"],pre["stage"])!=("ep1b06","STORY","three",report["initialStage"]) or pre["modal"] or pre["loading"] or pre["story"]:
+                    raise RuntimeError("Combat scene changed before input")
+                pulse={"event":"keyDown,pause,keyUp","key":attack_key,"requestedPauseMs":80,"acknowledged":False,
+                       "requestUtc":_utc(),"requestMs":round((time.monotonic()-start)*1000,1)}
+                report["input"].append(pulse)
                 key_may_be_down = True
-                key("keyDown")
-            elif i == 4:
-                key("keyUp")
+                _actions(s,[{"type":"keyDown","value":attack_key},{"type":"pause","duration":80},
+                            {"type":"keyUp","value":attack_key}])
                 key_may_be_down = False
                 report["inputReleased"] = True
+                pulse.update(acknowledged=True,responseUtc=_utc(),responseMs=round((time.monotonic()-start)*1000,1))
             before = snapshot()
             if (before["zone"], before["layer"], before["renderer"]) != ("ep1b06", "STORY", "three"):
                 raise RuntimeError("Active STORY ep1b06 Three scene unavailable")
             if before["loading"] or before["modal"] or before["story"] or not before["hero"]:
                 raise RuntimeError("Combat view interrupted")
-            row = {"index": i, "inputPhase": "before" if i < 2 else "held" if i < 4 else "released",
+            row = {"index": i, "inputPhase": "before" if i < 2 else "released",
                    "before": before, "captureStartUtc": _utc(),
                    "captureStartMs": round((time.monotonic() - start) * 1000, 1)}
             if not report["frames"]:
                 report["initialStage"] = before["stage"]
-            if before["stage"] != report["initialStage"]:
+            if before["stage"] != report["initialStage"] and not terminal_target(before):
                 raise RuntimeError("Encounter stage changed during sampling")
             response = s.cdp("Page.captureScreenshot", {"format": "jpeg", "quality": 70, "fromSurface": True,
                                                        "captureBeyondViewport": False})
@@ -141,7 +187,10 @@ def capture_combat_sequence(s, out, view, target):
             row["serialChangedDuringCapture"] = before["rendererSerial"] != after["rendererSerial"]
             serials.extend(n for n in (before["rendererSerial"], after["rendererSerial"]) if isinstance(n, int))
             checkpoint()
-            if (after["zone"], after["layer"], after["stage"]) != (before["zone"], before["layer"], before["stage"]):
+            if on_frame:
+                on_frame(i)
+            if ((after["zone"], after["layer"]) != (before["zone"], before["layer"])
+                    or (after["stage"] != before["stage"] and not terminal_target(after))):
                 raise RuntimeError("Scene or encounter stage changed across the capture")
             if i != 7:
                 time.sleep(.08)
@@ -150,10 +199,23 @@ def capture_combat_sequence(s, out, view, target):
     finally:
         if key_may_be_down:
             try:
-                key("keyUp")
+                _actions(s,[{"type":"keyUp","value":attack_key}])
                 report["inputReleased"] = True
+                report["input"].append({"event":"recoveryKeyUp","key":attack_key,"acknowledged":True,"utc":_utc()})
             except Exception as exc:
-                report["issues"].append(f"Key release failed: {exc}")
+                # A partially delivered action request may have left the source locked.
+                # W3C release actions clears input state in this disposable session.
+                try:
+                    with urlopen(Request(s.session + "/actions", method="DELETE"), timeout=6):
+                        pass
+                    report["inputReleased"] = True
+                    report["input"].append({"event":"releaseActions","acknowledged":True,"utc":_utc()})
+                except Exception as cleanup:
+                    report["issues"].append(f"Key release failed: {exc}; release actions failed: {cleanup}")
+        try:
+            s.js("return delete window[arguments[0]];",observer_slot)
+        except Exception as exc:
+            report["issues"].append(f"Could not discard QA observer: {exc}")
 
     advances = sum(b > a for a, b in zip(serials, serials[1:]))
     if len(report["frames"]) != 8 or len(hashes) < 2 or advances == 0:
@@ -163,18 +225,30 @@ def capture_combat_sequence(s, out, view, target):
         report["issues"].append("Selected living enemy not reported on screen during the sequence")
     post = [row[k] for row in report["frames"] if row["inputPhase"] != "before"
             for k in ("before", "after") if row.get(k)]
-    health = [state["target"]["hp"] for state in states if state.get("target")]
+    pre=report.get("preInput") or {}
+    accepted=report["inputReleased"] and bool(report["input"]) and report["input"][0].get("acknowledged") is True
+    pre_hp=(pre.get("target") or {}).get("hp")
+    targets=[s["target"] for s in post if s.get("target") and s["target"]["id"]==target.get("enemyId")]
+    death=accepted and pre_hp is not None and pre_hp>0 and any(a.get("deadRecorded") or a.get("hp",1)<=0 for a in targets)
+    damage=accepted and pre_hp is not None and any(a.get("hp",pre_hp)<pre_hp for a in targets)
+    post_seen=any(s["targetReportedVisible"] for s in post)
     report["witness"] = {
         "nativeHeroAttackAnimationSeenAfterInput": any(state["hero"]["attackAnim"] > 0 for state in post if state.get("hero")),
-        "targetHpDecreaseObserved": any(b < a for a, b in zip(health, health[1:])),
+        "targetHpDecreaseObserved": damage,"confirmedTargetDeathAfterInput":death,
+        "targetSeenAfterInput":post_seen,"sameTargetStartQualified":accepted,
         "hazardSeenAfterInput": any(state["hazardCount"] for state in post),
         "observedStages": list(dict.fromkeys(state["stage"] for state in states)),
     }
+    if not accepted or not(post_seen or death):
+        report["issues"].append("Same target needs a qualified input start and post-input visibility or a recorded death")
+    if not (damage or death or report["witness"]["nativeHeroAttackAnimationSeenAfterInput"]):
+        report["issues"].append("No native attack animation, target damage or recorded death after the input")
     report["uniqueFrames"] = len(hashes)
     report["rendererAdvances"] = advances
+    report["elapsedMs"] = round((time.monotonic()-start)*1000,1)
     report["vfxReviewed"] = False
     report["status"] = "CAPTURED" if not report["issues"] and report["inputReleased"] else "INCOMPLETE"
     checkpoint()
     return {key: report[key] for key in ("status", "uniqueFrames", "rendererAdvances", "inputReleased",
-                                        "initialStage", "witness", "qualification", "issues") if key in report} | {
+                                        "initialStage","attackKey","preInput","witness","qualification","issues") if key in report} | {
         "manifest": f"{prefix}/sequence.json", "files": [row["file"] for row in report["frames"]]}

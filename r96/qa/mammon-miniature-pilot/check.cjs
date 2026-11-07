@@ -68,6 +68,38 @@ async function check(name,fn){const detail=await fn();rows.push({name,detail:det
   for(let i=0;i<jambs.length;i++){const o=jambs[i],w=r.wallRows.get(o.userData.support).mesh.userData.originalWall;const anchor=new T.Vector3(...o.userData.nativeAnchor);assert.ok(Math.abs(anchor.x-w.x)<=w.width/2+.16);assert.ok(Math.abs(anchor.z-w.y)<=w.depth/2+.16);const n=new T.Vector3(0,0,1).applyQuaternion(r.camera.quaternion),pos=o.geometry.attributes.position,axis=w.width<=w.depth?'x':'z',sign=Math.sign(n[axis]),center=axis==='x'?w.x:w.y,half=(axis==='x'?w.width:w.depth)/2;assert.ok(new T.Vector3().subVectors(o.position,anchor).cross(n).length()<1e-6,'projected jamb anchor shifted');for(let j=0;j<pos.count;j++){const at=new T.Vector3().fromBufferAttribute(pos,j).applyMatrix4(o.matrixWorld);assert.ok((at[axis]-center)*sign>=half+.002,'jamb vertex behind support');}o.geometry.computeBoundingBox();const b=o.geometry.boundingBox;assert.ok(i%2?b.min.x>=-1e-7:b.max.x<=1e-7,'inner edge intrudes into the aperture');assert.ok(o.quaternion.angleTo(r.camera.quaternion)<1e-7);}
   const owner=r.wallRows.get(jambs[0].userData.support).mesh;owner.layers.mask=0;r.render(f);assert.equal(jambs[0].visible,false);owner.layers.set(2);r.render(f);assert.equal(jambs[0].visible,true);r.render({...f,hazards:[{kind:'beam'}]});assert.ok(mounted.every(o=>!o.visible));api.set(false);ctx.room=rm;return {jambs:jambs.length,posts:mounted.length-jambs.length,roleWalls:finishes.roleWalls,finishBatches:batches.length,method:'physical wall rows with real Three classes, no pixels'};
  });
+ await check('V15 PC/mobile security and vault repro: rear cabinet remains while front silhouettes and warnings clear',()=>{
+  const actual=JSON.parse(h.run(`(()=>{let a=77;Math.random=()=>((a=Math.imul(a,1664525)+1013904223>>>0)/4294967296);
+   const r=makeRoom('ep1b06','STORY');__STORYWORLD_WORLD_COMBAT_R78__.placeRoom(r);__STORYWORLD_CAVE_R204__.furnish(r,{seed:0x5e1b06,kind:'forge'},r.id);
+   const raw=__STORYWORLD_PHASE1_ART__.hero(),presented=window.StoryHeroPresentationR83?.present(raw.frame);
+   return JSON.stringify({rm:{exploration:r.exploration,props:r.props,objective:r.objective,altar:r.altar},pose:(presented?.frame||raw.frame).assetFrame});
+  })()`));
+  const savedBlocked=ctx.StoryPhase1.explorationBlocked;
+  const result=[];ctx.StoryPhase1.explorationBlocked=h.run('StoryPhase1.explorationBlocked');ctx.room=actual.rm;api.set(true);
+  try{
+   for(const [screenWidth,screenHeight] of [[1920,864],[390,806]])for(const [role,roomId,x,y,ox,oy] of [['security',7,29.5,90.5,26.9,88.05],['vault',6,49.5,97.5,46.4,95.05]]){
+    const projection=new (h.run('StoryPhase1.Projection'))();projection.configure({width:screenWidth,height:screenHeight,camX:x,camY:y,tile:34,zoom:.8});projection.configureCamera(r.camera);
+    const hero={hero:true,alive:true,x,y,height:66,frame:{assetFrame:actual.pose}},f={...frame,exploration:actual.rm.exploration,projection,entities:[hero]};
+    r.render(f);
+    const item=group().children.find(o=>o.userData.assetId==='O02'&&Math.hypot(o.position.x-ox,o.position.z-oy)<1e-4);
+    assert.ok(item,role+' cabinet absent at V15 anchor');assert.ok(item.visible);
+    const detail=()=>api.inspect().last.furniture.find(b=>b.roomId===roomId);
+    assert.equal(detail().whyHidden,null);assert.equal(detail().visible,true);assert.ok(api.inspect().last.furnitureByRole[role].visible>=1);
+    const poseTop=actual.pose.pivot[1]/actual.pose.visibleHeight*66/(34*Math.SQRT2)+.12;
+    const oldBottom=-((ox-x)+(oy-y))*Math.SQRT1_2*.5+(411.5-489)/512*1.95;
+    assert.ok(oldBottom<poseTop,'fixture must reproduce the previous crop overlap');
+    const view=new T.Frustum().setFromProjectionMatrix(new T.Matrix4().multiplyMatrices(r.camera.projectionMatrix,r.camera.matrixWorldInverse));item.updateMatrixWorld(true);
+    assert.ok(view.intersectsObject(item),'same camera must frame cabinet');
+    result.push({viewport:[screenWidth,screenHeight],role,anchor:[ox,oy],oldBottom,poseTop,enabled:item.visible});
+    r.render({...f,entities:[{...hero,x:ox-1.32,y:oy-1.32}]});assert.equal(detail().whyHidden,'actor');assert.ok(!item.visible);assert.ok(api.inspect().last.furnitureByRole[role].actor>=1);
+    r.render({...f,hazards:[{x:ox,y:oy,radius:2,alpha:1}]});assert.equal(detail().whyHidden,'warning');assert.ok(!item.visible);
+    actual.rm.props.push({id:'qa-moving-native-prop',x:ox,y:oy,visible:true});
+    r.render(f);assert.equal(detail().whyHidden,'native-prop');assert.ok(!item.visible);actual.rm.props.pop();
+    r.render(f);assert.equal(detail().visible,true);
+   }
+  }finally{api.set(false);ctx.room=rm;ctx.StoryPhase1.explorationBlocked=savedBlocked;}
+  return {screens:result,method:'Actual seed 77 R224 props, canonical idle hero pose and native Projection; Three CPU, no pixel claim'};
+ });
  await check('failed image leaves native materials alone and does not report assembled art',()=>{failImage='W06';class FailRenderer extends Renderer{render(){return this.renderer.render();}}const rf=new FailRenderer();const fresh={window:null,Image,room:rm,StoryPhase1:{ThreeRenderer:FailRenderer,explorationBlocked:()=>false}};fresh.window=fresh;vm.createContext(fresh);vm.runInContext(source,fresh);rf.render(frame);const v=fresh.__STORYWORLD_MAMMON_MINIATURE_PILOT__.inspect();assert.equal(v.last.loaded,false);assert.deepEqual([...v.last.assembledAssets],[]);assert.deepEqual([...v.last.failedAssets],['metal']);assert.equal(rf.wallMaterial.color.getHex(),0xabcdef);fresh.__STORYWORLD_MAMMON_MINIATURE_PILOT__.set(false);failImage=null;});
  await check('F01 and native tile seams share one texture; failed canvas restores the native floor',()=>{
   const nativeMap=r.stoneMaterial.map,cell={width:512,height:512},draws=[];

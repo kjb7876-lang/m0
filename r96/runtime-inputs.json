@@ -4165,7 +4165,23 @@
     "assets/r380/mobs/reborn-shieldmate-v4.webp",
     "assets/r380/mobs/swamp-goat-darkgreen-v1.webp",
     "assets/r380/mobs/swamp-mage-darkgreen-v1.webp",
-    "assets/r380/mobs/swamp-spirit-v1.webp"
+    "assets/r380/mobs/swamp-spirit-v1.webp",
+    "assets/r380/mobs/discarded-delicacy-v1.webp",
+    "assets/r380/mobs/false-heaven-guard-v1.webp",
+    "assets/r380/mobs/jealousy-wraith-v1.webp",
+    "assets/r380/mobs/living-trash-v1.webp",
+    "assets/r380/mobs/mirror-lament-v1.webp",
+    "assets/r380/mobs/small-walking-robot-v1.webp",
+    "assets/r380/mobs/snow-lurker-walker-v1.webp",
+    "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
+    "assets/r380/mobs/treatment-refusal-mask-v1.webp",
+    "assets/r380/mobs/u204-mech-01-v1.webp",
+    "assets/r380/mobs/u204-mech-02-v1.webp",
+    "assets/r380/mobs/u204-mech-03-v1.webp",
+    "assets/r380/mobs/u204-mech-04-v1.webp",
+    "assets/r380/mobs/u206-mech-01-v1.webp",
+    "assets/r380/mobs/u206-mech-02-v1.webp",
+    "assets/r380/mobs/war-machine-hound-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5240,5 +5256,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "76bb77e4f50dbf84645776d90e179f4673d8dd6220beaad11b8d4c7b4b2a4d10"
+  "runtimeManifestSHA256": "896251f8dd08fb30f8e6d811c8b1fa6c3f2ab9bafa4b7dc9794abd30b1c33af4"
 }

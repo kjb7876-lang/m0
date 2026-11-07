@@ -136,11 +136,21 @@ def main():
             forward=next((p for p in a["portals"] if p["role"]=="next" and p["open"] and p["destination"]==expected),None)
             check(forward,"native onward portal not available")
             pt=forward["point"];warp(session,"open onward portal",[pt["x"],pt["y"]])
-            for _ in range(4):
-                logkey(session,key)
-                try:
-                    wait(session,lambda m:m["zone"]==expected and not m["loading"],limit=4);break
-                except RuntimeError:pass
+            last_interaction=0
+            deadline=time.monotonic()+42
+            while time.monotonic()<deadline:
+                m=session.js(OBS)
+                if m["zone"]==expected and not m["loading"]:break
+                dialog=session.js("return !!document.querySelector('#r71DifficultyConfirm')?.getClientRects().length")
+                if dialog:
+                    session.click("[data-r71-tier='normal']")
+                    session.click("#r71DifficultyConfirm")
+                    result["inputs"].append({"action":"choose normal and confirm next-region difficulty dialog","wall":round(time.monotonic()-started,2)})
+                elif m["zone"]=="ep1b06" and not (m["loading"] or m["modal"] or m["story"]) and time.monotonic()-last_interaction>2:
+                    logkey(session,key);last_interaction=time.monotonic()
+                elif m["story"] and not m["loading"]:
+                    logkey(session,"\ue007")
+                time.sleep(.3)
             end=note(session,"onward-region",True)
             check(end["zone"]==expected and not end["loading"],"next region not entered")
             result["status"]="PASSED_FIXTURE_ONLY"

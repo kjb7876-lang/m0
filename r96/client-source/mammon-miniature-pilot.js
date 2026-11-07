@@ -1,12 +1,12 @@
 /* Mammon miniature pilot: ep1b06 STORY only. Unregistered V3 surface/furniture candidate; public registration requires acceptance.
- * Expanded native baseline 533fbec; native geometry, R228 room tint and simulation retained.
+ * Expanded native baseline 084dc76; native geometry, R228 room tint and simulation retained.
  * Existing physical wall footprints own every architectural finish below.
  * No floor, collision, door, enemy, combat, story or save object is written.
  */
 (()=>{'use strict';
  const W=window,NAME='__STORYWORLD_MAMMON_MINIATURE_PILOT__',ZONE='ep1b06';if(W[NAME])return;
  const A=W.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!C)return;
- const REV='mammon-miniature-v15-expanded-v3-room-finishes';
+ const REV='mammon-miniature-v16-expanded-v3-furniture-depth';
  const ASSET_ROOT='assets/mammon-v3/';
  const assets=Object.freeze({postHigh:ASSET_ROOT+'P01-steel-post-tall-v2.webp',postLow:ASSET_ROOT+'P02-steel-post-low-v1.webp',jamb:ASSET_ROOT+'D01-open-portal-frame-v2.webp',floor:ASSET_ROOT+'F01-floor-single-slab-top-v1.webp',metal:ASSET_ROOT+'W06-wall-steel-front-flat-v1.webp',vault:ASSET_ROOT+'O02-deposit-cabinet-down-right-v3.webp',ledger:ASSET_ROOT+'O01-records-desk-up-right-v4.webp'});
  // Pixel contacts are from the reviewed derivative contract, not canvas bottom.
@@ -301,6 +301,8 @@
    const bounds=groundRect(p.x,p.y,(alpha[0]-pivot[0])*w,(alpha[2]-pivot[0])*w,(pivot[1]-alpha[3])*h,(pivot[1]-alpha[1])*h);
    s.billboards.push({mesh:o,shadow,bounds,footRadius:p.kind==='lock'?1.3:1.15,...p});
   }
+  s.furnitureDetails=s.billboards.map(b=>b.status={roomId:b.roomId,role:b.role,asset:b.mesh.userData.assetId,visible:false,whyHidden:null});
+  s.furnitureByRole=Object.fromEntries([...new Set(s.billboards.map(b=>b.role))].map(role=>[role,{visible:0,actor:0,warning:0,'unknown-warning':0,'native-prop':0}]));
   mounts(r,s,im);architecture(r,s);
  }
  // Screen axes in orthographic world units. Translation and zoom cancel for
@@ -312,9 +314,26 @@
  // This records a draw submission after Three frustum/visibility culling.
  // Pixel visibility (depth, fog or alpha) still requires the real screenshot.
  function observeDecoration(s,o,record){o.onBeforeRender=()=>s.submitted.push(record);}
- function covered(c,b){
-  return !!c&&(c.unknownWarning||c.rows.some(a=>a.left<b.right&&b.left<a.right&&a.bottom<b.top&&b.bottom<a.top));
+ function overlaps(a,b){return a.left<b.right&&b.left<a.right&&a.bottom<b.top&&b.bottom<a.top;}
+ function covered(c,b){return !!c&&(c.unknownWarning||c.rows.some(a=>overlaps(a,b)));}
+ function furnitureOcclusion(c,b,toCamera){
+  if(c.unknownWarning)return 'unknown-warning';
+  let actorOverlap=false;
+  for(const row of c.rows){
+   if(!overlaps(row,b.bounds))continue;
+   if(row.kind==='warning')return 'warning';
+   // Only furniture: it is a camera-facing plane drawn before bodies, with
+   // depth testing on and no depth writes. Its entire painted silhouette has
+   // one view depth. An actor's padded crop can overlap it from well in front.
+   // At contact, or with an uncertain depth, protect the actor as before.
+   const dx=row.x-b.x,dz=row.y-b.y;
+   const normal=toCamera&&b.mesh.material.depthTest&&!b.mesh.material.depthWrite&&b.mesh.renderOrder<0?toCamera:null;
+   const gap=normal?dx*normal.x+dz*normal.z-b.mesh.position.y*normal.y:0;
+   if(!(gap>.45)||dx*dx+dz*dz<(b.footRadius+.45)**2)actorOverlap=true;
+  }
+  return actorOverlap?'actor':null;
  }
+
  function clearance(f){
   const entities=f.entities||[],hero=entities.find(e=>e.hero)||f.player||(typeof player==='object'?player:null);
   const tile=f.projection?.tile||34,rows=[];let unknownWarning=false,warningCount=0;
@@ -323,10 +342,10 @@
    if(rect?.length===4&&rect.every(Number.isFinite)&&pivot?.length===2&&pivot.every(Number.isFinite)&&art.visibleHeight>0){
     const scale=h/art.visibleHeight,flip=p.frame.flip||p.frame.nativeHero5?.flip;
     const left=(flip?pivot[0]-rect[2]:-pivot[0])*scale,right=(flip?pivot[0]:rect[2]-pivot[0])*scale;
-    rows.push(groundRect(p.x,p.y,left-.12,right+.12,(pivot[1]-rect[3])*scale-.12,pivot[1]*scale+.12));
+    rows.push({...groundRect(p.x,p.y,left-.12,right+.12,(pivot[1]-rect[3])*scale-.12,pivot[1]*scale+.12),kind:'actor',x:p.x,y:p.y});
    }else{
     const half=h*(p.hero ? .38 : .66)+.16;
-    rows.push(groundRect(p.x,p.y,-half,half,-.17,h+.2));
+    rows.push({...groundRect(p.x,p.y,-half,half,-.17,h+.2),kind:'actor',x:p.x,y:p.y});
    }
   }
   actor(hero);for(const p of entities)if(!p.hero)actor(p);
@@ -335,7 +354,7 @@
    // has no safe local extent. Only that case uses the conservative fallback.
    if(!finite(p)||/laser|beam|line/i.test(p.kind||'')){unknownWarning=true;continue;}
    const radius=Math.max(.7,p.radius||((p.height||50)/(2*tile)))+.45;
-   rows.push(groundRect(p.x,p.y,-radius,radius,-radius*.5,radius*.5));
+   rows.push({...groundRect(p.x,p.y,-radius,radius,-radius*.5,radius*.5),kind:'warning'});
   }
   return{rows,unknownWarning,warningCount};
  }
@@ -359,16 +378,21 @@
  }
  function ensure(r,f){if(!eligible(f)||r.disposed){if(overlap())stats.overlapSkips++;dispose(r);return;}if(!r.spatialBuilt||!r.spatialRoot||!r.T)return;let s=states.get(r);
   if(s&&(s.gen!==r.sceneGeneration||s.layout!==f.exploration||s.sight!==r.sightState24||s.propSignature!==propSignature(roomFor(f)))){dispose(r);s=null;}
-  if(!s){const T=r.T,group=new T.Group();group.name='mammon-miniature-pilot';s={gen:r.sceneGeneration,layout:f.exploration,sight:r.sightState24,group,resources:new Set(),originals:new Map(),applied:new Map(),maps:new Map(),assembled:new Set(),mounts:[],propSignature:propSignature(roomFor(f)),plan:plan(ZONE,f.exploration,roomFor(f)),billboards:[],submitted:[],loaded:false,paintStatus:{O01:'pending',O02:'pending'},focusUniform:{value:0},focusTime:null};states.set(r,s);live.add(r);r.spatialRoot.add(group);stats.builds++;}
+  if(!s){const T=r.T,group=new T.Group();group.name='mammon-miniature-pilot';s={gen:r.sceneGeneration,layout:f.exploration,sight:r.sightState24,group,resources:new Set(),originals:new Map(),applied:new Map(),maps:new Map(),assembled:new Set(),mounts:[],propSignature:propSignature(roomFor(f)),plan:plan(ZONE,f.exploration,roomFor(f)),billboards:[],submitted:[],toCamera:new T.Vector3(),loaded:false,paintStatus:{O01:'pending',O02:'pending'},focusUniform:{value:0},focusTime:null};states.set(r,s);live.add(r);r.spatialRoot.add(group);stats.builds++;}
   if(!s.attempted)build(r,s);if(!s.loaded){last={zone:ZONE,loaded:false,assembledAssets:[],failedAssets:s.failedAssets||[],pending:!s.attempted};return;}
   for(const[name,k]of[['stoneMaterial','floor'],['wallMaterial','wall'],['wallCapMaterial61','cap'],['regionalTrimMaterial55','trim']]){const m=r[name];if(!m?.color)continue;if(!s.originals.has(m)||m.color.getHex()!==palette[k])s.originals.set(m,m.color.clone());m.color.setHex(palette[k]);s.applied.set(m,palette[k]);}
   if(!s.scene)syncArchitecture(r,s);const c=clearance(f);s.cover=c;const combatTarget=combatFocus(s,f);s.submitted.length=0;
+  const toCamera=r.camera?.isOrthographicCamera?s.toCamera.set(0,0,1).applyQuaternion(r.camera.quaternion):null;
+  for(const row of Object.values(s.furnitureByRole))row.visible=row.actor=row.warning=row['unknown-warning']=row['native-prop']=0;
   for(const b of s.billboards){
    if(r.camera?.quaternion)b.mesh.quaternion.copy(r.camera.quaternion);
    const blockedByProp=(roomFor(f)?.props||[]).some(p=>finite(p)&&p.visible!==false&&!p.destroyed&&Math.hypot(p.x-b.x,p.y-b.y)<b.footRadius+1);
-   b.mesh.visible=!covered(c,b.bounds)&&!blockedByProp;b.mesh.material.opacity=.9;b.shadow.visible=b.mesh.visible;
+   const whyHidden=blockedByProp?'native-prop':furnitureOcclusion(c,b,toCamera);
+   b.mesh.visible=whyHidden===null;b.mesh.material.opacity=.9;b.shadow.visible=b.mesh.visible;
+   b.status.visible=b.mesh.visible;b.status.whyHidden=whyHidden;s.furnitureByRole[b.role][whyHidden||'visible']++;
+
   }
-  stats.passes++;last={zone:ZONE,loaded:s.loaded,floorQuads:s.plan.floors.length,props:s.plan.props.length,meshes:s.group.children.length,architecture:s.wallEvidence,textureCount:s.textureCache?.size||0,combatTarget,decorFocus:s.focusUniform.value,paintStatus:s.paintStatus,protectedRects:c.rows.length,unknownWarning:c.unknownWarning,warningCount:c.warningCount,r228ExtraFloorLayers:0,assembledAssets:[...s.assembled],submittedDecor:s.submitted,failedAssets:s.failedAssets||[],mounts:s.mounts.length,pendingAssets:['W01','W02','W03','W04','W05'],collisionChanged:false};
+  stats.passes++;last={zone:ZONE,loaded:s.loaded,floorQuads:s.plan.floors.length,props:s.plan.props.length,meshes:s.group.children.length,architecture:s.wallEvidence,textureCount:s.textureCache?.size||0,furniture:s.furnitureDetails,furnitureByRole:s.furnitureByRole,combatTarget,decorFocus:s.focusUniform.value,paintStatus:s.paintStatus,protectedRects:c.rows.length,unknownWarning:c.unknownWarning,warningCount:c.warningCount,r228ExtraFloorLayers:0,assembledAssets:[...s.assembled],submittedDecor:s.submitted,failedAssets:s.failedAssets||[],mounts:s.mounts.length,pendingAssets:['W01','W02','W03','W04','W05'],collisionChanged:false};
  }
  const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,600);};
  function guard(r){const gl=r.renderer;if(!gl||wrapped.has(gl)||typeof gl.render!=='function')return;wrapped.add(gl);const old=gl.render;gl.render=function(...args){try{if(r.__mammonMiniatureFrame&&(!args[1]?.layers||(args[1].layers.mask&4)))ensure(r,r.__mammonMiniatureFrame);}catch(e){fail(e);}return old.apply(this,args);};}
