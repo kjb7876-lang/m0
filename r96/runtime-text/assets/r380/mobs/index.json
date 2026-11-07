@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R393",
+ "revision": "R394",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -5160,6 +5160,153 @@
     {
      "file": "m089_attack_left_04.png",
      "sha256": "c67011bfb629c57518a92a1acdb811ac0a10ba46c8a9be7c3e80cb5cf95a3ef6"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-m093-v1-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m093-v1-right.webp",
+   "cell": [
+    282,
+    282
+   ],
+   "cols": 8,
+   "pivot": [
+    143.2,
+    266.8
+   ],
+   "visibleHeight": 299.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^백색 사수$",
+    "boss": true,
+    "samong": "(^|-)RE-?3([^0-9]|$)"
+   },
+   "bytes": 336240,
+   "sha256": "f8ded3d9e633281c2b234e37b18d4d8f5d554de583582c2f1ee3b455706ff079",
+   "source": [
+    {
+     "file": "move_right/move_right_01.png",
+     "sha256": "45e4bb25f305d5e29d40998afd0d407fada76ccd5f61087ce5029a31c009d687"
+    },
+    {
+     "file": "move_right/move_right_02.png",
+     "sha256": "b67233a165a81e47c91cf34ca462ac6bfab4681c2148f17d8102585a7397c529"
+    },
+    {
+     "file": "move_right/move_right_03.png",
+     "sha256": "d6b4ade77b8c105aa5409776bc0331570c660d3ccb4fbd912ff1844dfdbfb246"
+    },
+    {
+     "file": "move_right/move_right_04.png",
+     "sha256": "2c14494c8295b99205169a8c39093e36f1544d0953d9176ee023bfd63d959c86"
+    },
+    {
+     "file": "attack_right/attack_right_01.png",
+     "sha256": "ad9bc5595dcf9c52ead3a62e3842d915a19ac57cc5c13cf981d2fbf627798f26"
+    },
+    {
+     "file": "attack_right/attack_right_02.png",
+     "sha256": "a7a2671def3d6bf70badf7e368034e141d8b22dcfff768e25d805c0259322543"
+    },
+    {
+     "file": "attack_right/attack_right_03.png",
+     "sha256": "38af05d2de4ccc991b9c1d5653200bc1ed3f65593cddff5fa87dbb30e498490b"
+    },
+    {
+     "file": "attack_right/attack_right_04.png",
+     "sha256": "1e743819308af9ba68033ba45807a315d6181f1e66b41ac8e32631aa74e79849"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-m093-v1-left"
+  },
+  {
+   "id": "reverse-m093-v1-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m093-v1-left.webp",
+   "cell": [
+    282,
+    282
+   ],
+   "cols": 8,
+   "pivot": [
+    133.4,
+    264.4
+   ],
+   "visibleHeight": 311.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 315988,
+   "sha256": "0b67d88cb9fc0e64e8c78570103a4601ec4efdca0668d69e5fb1487e10029e16",
+   "source": [
+    {
+     "file": "move_left/move_left_01.png",
+     "sha256": "93124a63c26ead5e4b08c05e5726814c901fcfeb4f6e765bf13cabbac89dd662"
+    },
+    {
+     "file": "move_left/move_left_02.png",
+     "sha256": "f4652c9c43f659b1896fe7d3f39a2d2c9fcdfd0636de212b8de3c4cc4ba9e314"
+    },
+    {
+     "file": "move_left/move_left_03.png",
+     "sha256": "bdb50a0bb1baa34e5ca28bd3b41bebc9181e8b518eab15bfbc97f96e1f4d23bb"
+    },
+    {
+     "file": "move_left/move_left_04.png",
+     "sha256": "3985fee4002b7a843f22adcd2a7d9f10bddccb42ead399d30b89f3358dde2c14"
+    },
+    {
+     "file": "attack_left/attack_left_01.png",
+     "sha256": "e4ab17cb5df39642d676c454df65309a4d5742c9fc41682a5ca8448a4efa5f76"
+    },
+    {
+     "file": "attack_left/attack_left_02.png",
+     "sha256": "985c41ab04c05eb920ef020c0b1d58498e987d899b013f60889b26de61225faf"
+    },
+    {
+     "file": "attack_left/attack_left_03.png",
+     "sha256": "da67ed78f2220a42d59ba76b796b756e3fed22c6158053a3f3436f74c2273288"
+    },
+    {
+     "file": "attack_left/attack_left_04.png",
+     "sha256": "cbc712336ebdb89df529493983daae58ecbf4deb4d95be5d0889bc311afa8702"
     }
    ],
    "finalArt": false

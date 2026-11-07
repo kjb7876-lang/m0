@@ -207,7 +207,15 @@ if len(sys.argv) > 15:
             add2(f'reverse-{mid}-v4-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
             if side == 'left': mobs[-1]['facing'] = 'left'
         mobs[-2]['twin'] = mobs[-1]['id']
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R393',
+if len(sys.argv) > 16:
+    d = pathlib.Path(sys.argv[16]) / 'x27/RE-3_m093/frames'
+    for side in ('right', 'left'):
+        names = [f'move_{side}/move_{side}_0{j}.png' for j in range(1, 5)] + [f'attack_{side}/attack_{side}_0{j}.png' for j in range(1, 5)]
+        act = {'layer': 'DREAM', 'name': '^백색 사수$', 'boss': True, 'samong': '(^|-)RE-?3([^0-9]|$)'} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+        add2(f'reverse-m093-v1-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
+        if side == 'left': mobs[-1]['facing'] = 'left'
+    mobs[-2]['twin'] = mobs[-1]['id']
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R394',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

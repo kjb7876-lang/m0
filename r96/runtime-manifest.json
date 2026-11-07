@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 116877,
-      "sha256": "2c9b7f6d3162a680643759789b83bdfd0028ada215b439650280d573bf8a4f34"
+      "bytes": 120395,
+      "sha256": "3274eb742d21eb4440be79f3cbfecbc6a6c50193ba39b2df11846c30ab9f9b82"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15281,6 +15281,16 @@
       "path": "assets/r380/mobs/reverse-m089-v4-right.webp",
       "bytes": 354766,
       "sha256": "fa60d4ac91479234fa3f2ac6a6e331493ecff07a26d733c3376678b070b26992"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m093-v1-left.webp",
+      "bytes": 315988,
+      "sha256": "0b67d88cb9fc0e64e8c78570103a4601ec4efdca0668d69e5fb1487e10029e16"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m093-v1-right.webp",
+      "bytes": 336240,
+      "sha256": "f8ded3d9e633281c2b234e37b18d4d8f5d554de583582c2f1ee3b455706ff079"
     },
     {
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
@@ -33258,8 +33268,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6651,
-  "totalBytes": 1040708260,
+  "fileCount": 6653,
+  "totalBytes": 1041364006,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
