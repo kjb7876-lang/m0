@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-ELEMENT = "element-6066-11e4-a52e-4f54-735466cecf4f"
+ELEMENT = "element-6066-11e4-a52e-4f735466cecf"
 VIEWS = {"pc": (1920, 1080, 1), "mobile": (390, 844, 3)}
 MARKERS = ("entry", "branch", "records", "gather", "boss-door", "exit", "combat")
 SKIP = "for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);return !storyScene;"
@@ -125,7 +125,10 @@ class Session:
     def click(self,selector):
         self.until("document.querySelector("+json.dumps(selector)+")?.getClientRects().length")
         e=self.call("/element",{"using":"css selector","value":selector})
-        self.call("/element/"+e[ELEMENT]+"/click",{})
+        element_id=e.get(ELEMENT) if isinstance(e,dict) else None
+        if not isinstance(element_id,str) or not element_id:
+            raise RuntimeError(f"W3C element reference missing for {selector}. Received properties: {list(e) if isinstance(e,dict) else type(e).__name__}")
+        self.call("/element/"+element_id+"/click",{})
     def await_js(self,expr):
         # W3C callback is always called, including promise rejection.
         r=self.call("/execute/async",{"script":"const cb=arguments[arguments.length-1];Promise.resolve().then(async()=>{"+expr+"}).then(v=>cb({ok:true}),e=>cb({ok:false,error:String(e)}));","args":[]})
@@ -205,7 +208,15 @@ def capture(driver,chrome,url,variant,view,out,seed):
             finally:
                 try:row["console"]=s.call("/log",{"type":"browser"})
                 except Exception as e:row["issues"].append("Console unavailable: "+str(e))
-                if any(e.get("level")=="SEVERE" for e in row.get("console",[])):row["issues"].append("Severe browser console entries require triage")
+                bad=[]
+                favicon_url="http://"+urlsplit(url).netloc+"/favicon.ico"
+                for e in row.get("console",[]):
+                    if e.get("level")!="SEVERE":continue
+                    msg=e.get("message","")
+                    if e.get("source")=="network" and msg.split(" ",1)[0]==favicon_url and "404" in msg:
+                        continue
+                    bad.append(e)
+                if bad:row["issues"].append("Severe browser console entries require triage")
     except Exception as exc:
         row["issues"].append(str(exc));row["status"]="BLOCKED" if not row["markers"] else "INCOMPLETE"
     else:row["status"]="INCOMPLETE" if row["issues"] else "CAPTURED"

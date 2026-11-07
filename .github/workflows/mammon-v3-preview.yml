@@ -28,6 +28,13 @@ jobs:
           python3 scripts/build-r96.py
           node r96/qa/mammon-miniature-pilot/check.cjs
           node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-preview"
+      - name: Provide Korean UI glyphs on the disposable runner
+        run: |
+          if [ -z "$(fc-list :lang=ko family)" ]; then
+            sudo apt-get update -q
+            sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fi
+          test -n "$(fc-list :lang=ko family)"
       - name: Capture PC and mobile CSS viewport with the preinstalled sandboxed Chrome
         run: |
           python3 -m http.server 4300 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/mammon-baseline-http.log" 2>&1 &
