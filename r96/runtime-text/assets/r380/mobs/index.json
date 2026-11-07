@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R381",
+ "revision": "R382",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -942,6 +942,1214 @@
     {
      "file": "scalpel-thrust-04.png",
      "sha256": "806b63702d2ecb9dcaec1b917cbd75601a97c794b7e50f6eb7c389e3be6f9022"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "false-heaven-guard-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 6,
+   "pivot": [
+    140.5,
+    226.5
+   ],
+   "visibleHeight": 167.5,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a11",
+    "name": "거짓천국 근위천사"
+   },
+   "bytes": 453210,
+   "sha256": "3559064612af298e5cb3f4e9a8941aa05cb5ad36e82a8466b532a572ae8a6681",
+   "source": [
+    {
+     "file": "move-00.png",
+     "sha256": "3118c8a86a64b1a4ebe3dbe21f2991fe5857b50a9ee172d126b82f857081f9f4"
+    },
+    {
+     "file": "move-01.png",
+     "sha256": "87cc53d992ce6fd01798a94e941b5ba60a2dd96134886a33920a0abd3ff42003"
+    },
+    {
+     "file": "move-02.png",
+     "sha256": "23e8c7ca72b381c5617f134a8b8d6f5e01e56f632aa0abb549a18ba217d062a6"
+    },
+    {
+     "file": "move-03.png",
+     "sha256": "a42c213f80d1cc412d14be88ade7f299e4233892f282a6243260075fa0fb2485"
+    },
+    {
+     "file": "move-04.png",
+     "sha256": "e24f1472a22e6c85487b7357acdc5aed7223ff32c9d395f72be4c024fef8bf11"
+    },
+    {
+     "file": "move-05.png",
+     "sha256": "1c2939a90720e1219163ccb3fa0bed5780d3e622fffbc36b272ba1a3c0b4f5ed"
+    },
+    {
+     "file": "move-06.png",
+     "sha256": "0be2063fa24c953576698fbef5447ca6dcc2c6ecb7bf0a26f5f1ed8a10c21ab2"
+    },
+    {
+     "file": "move-07.png",
+     "sha256": "0cb440ba7005d94a80b43f0d9534c47f93808c3a9955bf7d687d25d464f9a393"
+    },
+    {
+     "file": "attack-00.png",
+     "sha256": "e437781044f7136b3e967c44e149120fe86405053944bf0b96d112b87ace4e0c"
+    },
+    {
+     "file": "attack-01.png",
+     "sha256": "d0c21eccf24ddb68a76dc0e07acc26165263c0c8eb21da75cf7f66303a40ffac"
+    },
+    {
+     "file": "attack-02.png",
+     "sha256": "fb8575a7dc173c32c41fde91383e49cfba7c6da887f9e760da0fd0e2640e5753"
+    },
+    {
+     "file": "attack-03.png",
+     "sha256": "0e84296f659fd2bf23a06e7b4f3a72bd1408e13149ccd611214d172cc448d80b"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "treatment-refusal-mask-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/treatment-refusal-mask-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    130.25,
+    205.5
+   ],
+   "visibleHeight": 178.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a11",
+    "name": "치료거부의 가면"
+   },
+   "bytes": 245748,
+   "sha256": "a2dc05124261a1e1d8b84f7654bbf027ab0ca9d4fc41f6307db40f1a058d2400",
+   "source": [
+    {
+     "file": "spectral-hover-01.png",
+     "sha256": "228b46023103d59ee85cabbbce268177af2b22523eea2e56ff40c529b1d19f3b"
+    },
+    {
+     "file": "spectral-hover-02.png",
+     "sha256": "744476d2aab7f671d2ece1baa89cded958293cd0207b07d5e7c25984c615ba40"
+    },
+    {
+     "file": "spectral-hover-03.png",
+     "sha256": "f25c7640f8732d06c645cd1cbc278089094ac2c2b431319ae9470c1893af799c"
+    },
+    {
+     "file": "spectral-hover-04.png",
+     "sha256": "257e65a0d5cd83e811d557d2c60907764acff4ff7204bf1184d450ded069d11f"
+    },
+    {
+     "file": "curse-lunge-01.png",
+     "sha256": "aa87ba1ac8534243c2aab0ec482148ad3f459d1cc29dc2b14a7d3d4018d6e195"
+    },
+    {
+     "file": "curse-lunge-02.png",
+     "sha256": "1b5b66e5baf616c1a49b70f8380df70dad581e4a62543f1bbf8a4ca7b0646f45"
+    },
+    {
+     "file": "curse-lunge-03.png",
+     "sha256": "9b94067564d69ab1e213b528fae52d1d2dccbfc5b985fb1616d7d55839517d43"
+    },
+    {
+     "file": "curse-lunge-04.png",
+     "sha256": "22b73e51283f0cc5f91c2f64ec5a2d1e73b76d6d5715ee6005eb21c55560c7a4"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "living-trash-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/living-trash-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    127.5,
+    234.0
+   ],
+   "visibleHeight": 202.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b02",
+    "name": "살아 움직이는 쓰레기들"
+   },
+   "bytes": 321658,
+   "sha256": "2baf948e07c94b19b1ded63226e44cf2e3de82afd1f8618aa3fb762869511933",
+   "source": [
+    {
+     "file": "shuffle-01.png",
+     "sha256": "2d92984e0e3e6855222fd9479d49b8b1ed83ca3347c69bf21b868aa1590e7043"
+    },
+    {
+     "file": "shuffle-02.png",
+     "sha256": "729afadff63b6186a25a27f8f4257e7961733a7805c77dd979e0768ce6f64b7d"
+    },
+    {
+     "file": "shuffle-03.png",
+     "sha256": "543ba9670adeadef00001fdf1e4c534193c235dcb768effdb4dd6c1aa7cedf73"
+    },
+    {
+     "file": "shuffle-04.png",
+     "sha256": "980da3a7cd1ca46c9ae13856d0d429bcff0b950834db1519e8295d96a75cf614"
+    },
+    {
+     "file": "refuse-strike-01.png",
+     "sha256": "c33492a349a27ff571e90de4ef64f51ac0f14024efba3b714f4ec8c6470b6e95"
+    },
+    {
+     "file": "refuse-strike-02.png",
+     "sha256": "6c623cb416ee0d2c9f96cdd8eeb3ffbad2eb94e5a4c16f542989402b699e39d1"
+    },
+    {
+     "file": "refuse-strike-03.png",
+     "sha256": "9d359c82f10533b1064cc4cfe88f0e2be7b7405c5ea7acf608e684a8c3b466e6"
+    },
+    {
+     "file": "refuse-strike-04.png",
+     "sha256": "a665a5b7c62a081fc0df6c809ff42e9b0c215d3ebc239a70bbfc5066c9e0ced2"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "jealousy-wraith-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    131.75,
+    227.5
+   ],
+   "visibleHeight": 162.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b03",
+    "name": "질투로 얼룩진 망령"
+   },
+   "bytes": 256062,
+   "sha256": "8f7f4068e586f4d768352728ab96cb02bf7445aa5ad8cb3ed01dc00b05a4fd9c",
+   "source": [
+    {
+     "file": "spectral-glide-01.png",
+     "sha256": "c7fda0b3995570521fa0a02dfd6b488504ad2d8bb0124c63891ff7238e232fe7"
+    },
+    {
+     "file": "spectral-glide-02.png",
+     "sha256": "ea5f979d334527ec0acfed8d1cc407ad93397ed610021ac99ac6c88a4f40e505"
+    },
+    {
+     "file": "spectral-glide-03.png",
+     "sha256": "aee0acc27a504ffcda51a57712809e7016318ba4a29a2995c5e02897399e0506"
+    },
+    {
+     "file": "spectral-glide-04.png",
+     "sha256": "b208d410032727b4863cbb73d8db9d60ce450442f1c1921e1bf07206b8bcf5ff"
+    },
+    {
+     "file": "curse-claw-01.png",
+     "sha256": "38743d9315813589203d04ac443e97feac626caaaeda3f97721cd73cfd52800e"
+    },
+    {
+     "file": "curse-claw-02.png",
+     "sha256": "831e718dc26b7d51c46e7057f85f5223727a673887f20aff0dbd21e16f115f61"
+    },
+    {
+     "file": "curse-claw-03.png",
+     "sha256": "1ab3459918e80f8ae564b84321aef7bcd9fad156aacd864db285f387c48037ba"
+    },
+    {
+     "file": "curse-claw-04.png",
+     "sha256": "989677daafabccfbeb8e934c1f2a3cf1846f8018ac81bccf0751a8d8dc333b0b"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "mirror-lament-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/mirror-lament-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    131.5,
+    226.0
+   ],
+   "visibleHeight": 172.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b03",
+    "name": "추녀의 한탄"
+   },
+   "bytes": 279536,
+   "sha256": "2b1487ddbb8d194f74d5f5cef2b9eb4f67c9f729284294403d8e487b0a7c0ef4",
+   "source": [
+    {
+     "file": "spectral-glide-01.png",
+     "sha256": "940684b0da3367f4d02ccb5a97d60e2d15ec436e069a187b547da93aad631a86"
+    },
+    {
+     "file": "spectral-glide-02.png",
+     "sha256": "150a0fd46ee43d8ba62ea9b7fd1a1be8f1b610174c948b6fc518eb6ad644fdc3"
+    },
+    {
+     "file": "spectral-glide-03.png",
+     "sha256": "7bc0ef318f29015e2b9667b053b1161d493ab4fcf3a3b8a48bb9bf3c7956ba64"
+    },
+    {
+     "file": "spectral-glide-04.png",
+     "sha256": "52b4703188a65fa8ef11ce58de586e4f3667d542eac3f6cb64ef355f61a11b4e"
+    },
+    {
+     "file": "mirror-lament-01.png",
+     "sha256": "f2bcfedb1b4f12471529db25fa45382f2eebade7890e634176dc132e99c69c4d"
+    },
+    {
+     "file": "mirror-lament-02.png",
+     "sha256": "af3d3a5ba0434e44ab02d07f8cde6f89a6d439830b51e8723946d7f16b2a142d"
+    },
+    {
+     "file": "mirror-lament-03.png",
+     "sha256": "9dce66266f23f7eb57ef2a877a884dc923c6480ba1e611137dcc0fb75b096a2e"
+    },
+    {
+     "file": "mirror-lament-04.png",
+     "sha256": "1f996ba69975cf5b98c5e7bae6b15d4e77be8e35c1ccfd155ef3ae99c676b553"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "discarded-delicacy-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/discarded-delicacy-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    129.5,
+    233.0
+   ],
+   "visibleHeight": 216.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b04",
+    "name": "버려진 최고급 식재료"
+   },
+   "bytes": 348842,
+   "sha256": "cba11b7b3d7da49a87dc9aca6c576a5130d1abc4e7dbc2b18b8caf46d8588be1",
+   "source": [
+    {
+     "file": "crawl-01.png",
+     "sha256": "a431c22e945ff8b548cf34def6b4d09c190d2cd35810c7856b27044709a16820"
+    },
+    {
+     "file": "crawl-02.png",
+     "sha256": "1a48ed26ca94081abb83e3567b30a745ea733401d9646f3a208b7e294b67ddce"
+    },
+    {
+     "file": "crawl-03.png",
+     "sha256": "f5814b3a28e90ac60e559d3bf0694c680cd5ec14b536987b239997660970f048"
+    },
+    {
+     "file": "crawl-04.png",
+     "sha256": "344b7a78dcdae6a18e4e30b4cdaeb41b9a48f12f4e2cefc5f132110541833b67"
+    },
+    {
+     "file": "bite-01.png",
+     "sha256": "7c1aa461a53b60f560efabb4b7dce97731bd00212c81e1a1faf15d5aafded72f"
+    },
+    {
+     "file": "bite-02.png",
+     "sha256": "72c97db5652be192cf217b64d971beb847a45289566d3da3d4160f60af77f930"
+    },
+    {
+     "file": "bite-03.png",
+     "sha256": "7db6f0ff08d3cf758b33f1b7d9d8428e32230695b192855e909d218bf3a23f91"
+    },
+    {
+     "file": "bite-04.png",
+     "sha256": "f9a331cfa902498fd80c21647bb42676e2cb763cd37444b822c299b0f9cb0b43"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "small-walking-robot-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/small-walking-robot-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    154.0,
+    304
+   ],
+   "visibleHeight": 260.0,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b09",
+    "name": "걸어다니는 소형 로봇"
+   },
+   "bytes": 251704,
+   "sha256": "28ffdbb884e6d7f6e2d5fd12b67723d5d907adf8390d11b2abc2aa68537e606d",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "7c1dfacfc394f9a9b53e12e73396b485d267bb2cdec1efaca6c449072a06f7ec"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "84d9edd269ada8f52340574eeaa5d3ccf401b0159a623eda7707a9c7dd6d1800"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "b92ef049a4386d3633ce3beb53ffbbb68ef827b0dd9acb41e8980f63835e9ad0"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "28342b1cbf31c96cd19ca435d0df08b2ba9998cfd8a449a876b032bcd0e2be41"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "7e34291fe54f0bcce46effeb4b706f21c810a4729796f0380161eb58304eeefe"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "91a4415108b99ea2bcda7db75b4b8307da4c455ebc14532e5dc9b21ddfa05a50"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "e8551c83b5b280845837d88856a8c647d95651743d5c9d58575b5497edba0773"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "5121e0960b91ca895cac9cfe918f127e29a2cbc5a9da4c90ec45e0a1d438ed8c"
+    },
+    {
+     "file": "frame_09.png",
+     "sha256": "ea4018d7f8026c9c40c365c9cde4a05be00809d2b18324324ce294ff6da95aef"
+    },
+    {
+     "file": "frame_10.png",
+     "sha256": "07cdd30aac2d007030e72307dae8be5772b31ba9fe61e209461a58f8babbf00f"
+    },
+    {
+     "file": "frame_11.png",
+     "sha256": "81e6a5cb4517864cc725e444f69475b029f0ed5d3593d2ae37b90582a5e4ff25"
+    },
+    {
+     "file": "frame_12.png",
+     "sha256": "3308a5c441630365e24217e6612ebc4d6c01e8277983010cf4979a90c89e7f47"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "snow-lurker-walker-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/snow-lurker-walker-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    133.6,
+    208.0
+   ],
+   "visibleHeight": 165.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b09",
+    "name": "설원 잠복 보행기"
+   },
+   "bytes": 305638,
+   "sha256": "f089e446c3ba4d37d5e1211365586764615f6f2455b9b9c45399013895c249f0",
+   "source": [
+    {
+     "file": "move-01.png",
+     "sha256": "b55439fcbd2c0b99a50ec7d461728ddca992f06f198737659c75de42d690c789"
+    },
+    {
+     "file": "move-02.png",
+     "sha256": "656b2307be17ae235592e34cd9a6a60c7994d020ec44d6784ffb98f9fee78701"
+    },
+    {
+     "file": "move-03.png",
+     "sha256": "0e77da1c1d2cbaf3ec962c04a2823479a59e92e33aa655a90a39e370b3ca0029"
+    },
+    {
+     "file": "move-04.png",
+     "sha256": "08b23e8c5539b83fdfd9e626bd833266f9c88a6ea6afa1750cfa7da06772c747"
+    },
+    {
+     "file": "attack-01.png",
+     "sha256": "19a05e5c732c0883151384f8aa30b2910d0b9d106e0f4c82ae0fc0b2606ed45d"
+    },
+    {
+     "file": "attack-02.png",
+     "sha256": "44a91c3edfcec4acfa5b1910611ff7701a41df25378d13805926aeb899bb74d8"
+    },
+    {
+     "file": "attack-03.png",
+     "sha256": "1d55754c582a2ab533da660c525dac47813400caa4c1e7bae8a1e398c3d79697"
+    },
+    {
+     "file": "attack-04.png",
+     "sha256": "374799531a166c9a2480484ebe3c84a449a8eb4ba59df23bb484bfe8e1a72102"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "war-machine-hound-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/war-machine-hound-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    129.5,
+    301
+   ],
+   "visibleHeight": 206.7,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u201",
+    "name": "전쟁기계사냥개"
+   },
+   "bytes": 296132,
+   "sha256": "51a8c9eaf98d7c2b9186b87cbdca23b11eef811703b2dcbaa6d8466f41051222",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "9f06f497f3ef2ea71e9d6c45d394b899bf906b2cc5828c761370f0164cd51c9d"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "1bc4b61036f66d5172b0d8a51e2e1b005006398a1c06151e24c9673d47e97889"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "59a80d229958b6cce4209dacb35cb5c196e37e4c2030fa518923b3142f937893"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "a25eb691b9430361ebd8f014c9ed187364e566adfe82e41851eed2ad4faa1566"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "f9fbd154e2068592d2a1597597f1123d5dae45487d1f1d10af7d857435da2835"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "7a31fc83ff6773e4b45a412d8205073d3b9560a325b5e648967fa526fe2249b5"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "84eb386f0307fafc0634d23a2c155665e9ea70b89ad952e6dcc746135c18b5a2"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "24bcb6e517b5ef4919f155061eba96a6efab4174ec3e3f825efcaa63a7049f6e"
+    },
+    {
+     "file": "frame_09.png",
+     "sha256": "c8b414c098d88659d304bce06acfd9e22a44113bf8b285f68c954b33790bfa86"
+    },
+    {
+     "file": "frame_10.png",
+     "sha256": "d91a6d5c72249abbb1a82ef90433504cdfe1fbbca716f7ac5d149b1cc5a7ee1a"
+    },
+    {
+     "file": "frame_11.png",
+     "sha256": "888ce6c1d64109696f985e714e48ed993e6a3d1762dc79e51ce683bc7dd271e8"
+    },
+    {
+     "file": "frame_12.png",
+     "sha256": "e9707af4a96b4e8533decdabbb5ac6ac0a6d4857d3760318cf97d448117a0f78"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u204-mech-01-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u204-mech-01-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    133.75,
+    220.0
+   ],
+   "visibleHeight": 169.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u204",
+    "name": "기계화 첫 기억 청람잔영"
+   },
+   "bytes": 273052,
+   "sha256": "ebf8ea3b7ed5f350d4cfbeb0595c645d36c26bdd272f0bc68e0cfb4b07387bf6",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "5f8be8be3b261f37c344f81a4b457d62c66db9878b6dc7e9be1046bbc39ae522"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "38411f840e80708e91afbfae74974de1bb15b2629e2e7afc0d79acf6ceb67d4d"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "25f04d839cc2023d935a0f92f02d4b92701966d013c43d407511489083dd1005"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "1fe6de05fd9b512edda986385be49e6f0ad331635cde0127bafeec8a2a40b250"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "da667b37fc305d2e93825de0fe6707d87023c3719103907756f6b32f8e4ae40e"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "4570a1f118354c6e16d40b8d5a6a54faa4f87179416e55d69b5decbc18dd3b6c"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "6890f674f95edb4e344b3fda2ba73a6eb1ab7f214689a87ba7cf8138dc9202eb"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "cec5b5734609f8024dc8c842a027593e2e22c378816de3d442635f28f08ea4e3"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u204-mech-02-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u204-mech-02-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    132.25,
+    213.0
+   ],
+   "visibleHeight": 149.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u204",
+    "name": "기계화 기억 공백 망령"
+   },
+   "bytes": 198912,
+   "sha256": "75acba2cf97b51599d735f7d5c4c399a10ffa9e7d3da6729bf70c953e3b1d5be",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "f21c95a4b5e99a5c8903427235a5c0e0d1cdc6e08d0057f9b234a7244f929bce"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "6cc88ff63d4ae0c5dca0979c15b8216af8fd51f2e1969b380be3c947cc4b1eca"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "86d3e53c8d8b6285c030e22766da257c24b6de51fe23c643f6b6bf50ae9a89c7"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "84e8b533dac170666cfd78e48211a999cbee764b7be83bc94721e2cffcc75ac1"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "fe613193a46412bf5753e19da8a74355e6d3f6cfec56ee54068e7a862780b14d"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "03af271eecb459e33963187ecb4ac8f652fe8b3aaabca02774c14d46ff97971d"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "06374b880940e4d54dda0c1055ff23ee90f6502c810f9f5a9fcfb13a06e23333"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "75e791733e8cc6bc55e484af59715665eea94ed8ed215401bcc5ef3b941a7cff"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u204-mech-03-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u204-mech-03-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    131.0,
+    203.5
+   ],
+   "visibleHeight": 188.6,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u204",
+    "name": "기계화 문턱 관측거미"
+   },
+   "bytes": 269224,
+   "sha256": "af3fc11e05267a1937a4bc2d12532fcfae3c4c3f0eaf936ffb4f703805b9a01c",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "37d39117bfef23e95d53581a27fcf3edef409e4a57e8d418a53832fddcecddba"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "384f4a73a91462ba147f7fc390dab715c945060584ef06afe955b19fac54bdcd"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "38cadaad1a66901f6281a9c722dcd893f2525263fe4902b4b689a3ab910eb4bd"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "f1292aac693859a5c67f5b3e791d5970e99424e4baf5a14340b0a20e509746bd"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "2f01d81802e3b92d07a4bd66f266eeaa6bc12b41eb3e13e094a358cf3f37189d"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "bd3c69669c97f3dd5a2222fec61ed07846d58e95b9cb133d8c77cc14e58241c0"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "53bff3321d76bcb92d16d8f9bc44f7a19e2713c1054c1a855e1e890f20565b95"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "f1ded9540d865d5a4d6c83eafc64a63219366e0ddb8c96f52982ffc7a53879ff"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u204-mech-04-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u204-mech-04-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    139.75,
+    224.5
+   ],
+   "visibleHeight": 155.8,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u204",
+    "name": "기계화 제12단계 기억 검열기"
+   },
+   "bytes": 313072,
+   "sha256": "becd0e9ce710c15c79e4d6098fa76fcaafaeeb14b7388975ce7f45e7ca5f6b5b",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "63674a743593403169426b839692a4ff9a2bef2e0b7cde7f1f3bd1a7e8b54147"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "ae4b7e228b238e502a0ac77ffae08b3ce67ca5903bbdff0322e479e722e903d5"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "3fbcd225e0da32f32c4d830d670c61efd07977883134dc6c8581e7c73e593bd7"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "2bfeca9380e1e35136303892ef37b7b4f249547d29ea6993842c5c9d5f6f9fb6"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "f267fede9d5d4a5f52103850ebfd4702ab09584c7ea32b6287e1135850fb1590"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "dbf0b375a3e7c50cf932cc6d1c5a00f99f3be4e9870967f1abc41ab1fdba73a0"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "aa4b14503a774485a671b7f355507834f61dd7482f1a9b4ffbbd0b6dc4ac9916"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "7e239cbe2d53e7649cd92149690f0bf3c4b94ac3952a8fbc326eb355b361e0bc"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u206-mech-01-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u206-mech-01-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 8,
+   "pivot": [
+    126.0,
+    291
+   ],
+   "visibleHeight": 207.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u206",
+    "name": "기계화 기억이주 연결자"
+   },
+   "bytes": 285956,
+   "sha256": "cfa1551a8e4a1a913b0c2270cdb99a49e61fc3a6fa769f6b906aca46d3e4b8cd",
+   "source": [
+    {
+     "file": "u206-01-move-01.png",
+     "sha256": "ecafe44645487a8b9d5adac5b4370f7b17b32871a90d908fe8f57404f28464eb"
+    },
+    {
+     "file": "u206-01-move-02.png",
+     "sha256": "fe3b5bc52623db2d6b831064e7bf8898a6ef3e505de7c57e9ae178db409778d3"
+    },
+    {
+     "file": "u206-01-move-03.png",
+     "sha256": "60f32058eaae4e91f3ea8a6d44e3343f70914f4d31d7a583424a3fc32937125a"
+    },
+    {
+     "file": "u206-01-move-04.png",
+     "sha256": "c983bc7b7a181144826e177d7a0fa0160175e84551c07b7431cf40f6c3f50c82"
+    },
+    {
+     "file": "u206-01-attack-01.png",
+     "sha256": "72ac06892ee3c985cb7081b98954628478bb4b47e5b3b98d7210dc5534eb9e3f"
+    },
+    {
+     "file": "u206-01-attack-02.png",
+     "sha256": "313810395b2ab5eb720d7b32a6dec44d4f7d62332231c21026a0a95b13cfd49f"
+    },
+    {
+     "file": "u206-01-attack-03.png",
+     "sha256": "8515220b25d18290cd06d3a1f33dc13e9292c2b311863cd657994be837a4de0a"
+    },
+    {
+     "file": "u206-01-attack-04.png",
+     "sha256": "1916a69cfd42de6332020a0ab7ef4c42ffb725cedb019a11b9ceb69857472d48"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "u206-mech-02-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/u206-mech-02-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 8,
+   "pivot": [
+    158.5,
+    292
+   ],
+   "visibleHeight": 206.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "u206",
+    "name": "기계화 공명술사"
+   },
+   "bytes": 224150,
+   "sha256": "ad88300a712abb5cd6b7e91af1894629cf77f3d3b5a3e895537f5a3c537ac4de",
+   "source": [
+    {
+     "file": "u206-02-move-01.png",
+     "sha256": "018d2742affc16125db3bcaf4416f4e75a56e8afea5bb63a2a25214b218b2aef"
+    },
+    {
+     "file": "u206-02-move-02.png",
+     "sha256": "54439f9d4f9ccce7a8f57ab14382b568e93f8c82c5f7b7df48e5b7db5e5a36ca"
+    },
+    {
+     "file": "u206-02-move-03.png",
+     "sha256": "249f753e45ceb016dfbb86d087f10c5ce9e12ff477ac56f1419edc09a9a4a4e7"
+    },
+    {
+     "file": "u206-02-move-04.png",
+     "sha256": "162dbf68ffdd18e79c982360c4ca558dde4ccba12c2d4155106fdb754e46ee7c"
+    },
+    {
+     "file": "u206-02-attack-01.png",
+     "sha256": "66adb6f178dc29993755492cdd01aa4d5bf02db47ed22ee67fbf9e1495120cc0"
+    },
+    {
+     "file": "u206-02-attack-02.png",
+     "sha256": "80fcea7d005fb480be94ded716aa3d7ac8dcfd8579d68b7bb582476f62c3d57d"
+    },
+    {
+     "file": "u206-02-attack-03.png",
+     "sha256": "c299ba5c9b967a92153b997d2387f8f4b9821baefefeec217da083a7c40aaf88"
+    },
+    {
+     "file": "u206-02-attack-04.png",
+     "sha256": "93e826c246231f7fb2646195607e93276885bf501994f0fd3807f2b31f3f14b5"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "swamp-root-stalker-darkgreen-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
+   "cell": [
+    448,
+    384
+   ],
+   "cols": 4,
+   "pivot": [
+    244.25,
+    325.5
+   ],
+   "visibleHeight": 268.5,
+   "move": [
+    0
+   ],
+   "attack": [
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist02",
+    "name": "^뿌리 추적자"
+   },
+   "bytes": 234984,
+   "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb",
+   "source": [
+    {
+     "file": "01-idle.png",
+     "sha256": "8af51abebc3678c6b18e72e60534475e243856f29ecc32ca2ab3a75e65f928b0"
+    },
+    {
+     "file": "02-windup.png",
+     "sha256": "b2ebdbca309570ca2bda22916d38edf101c43056717fc1a07eea937ee0936f7b"
+    },
+    {
+     "file": "03-contact.png",
+     "sha256": "b658db171eec80221f9f33e970d4ce7548057c82cd8a224bcc0f075f8fa14be5"
+    },
+    {
+     "file": "04-recover.png",
+     "sha256": "5c9898cf425fba57d3458582ed6ae3b3c9415b928dd6e2ec482b296c8cd59a2c"
     }
    ],
    "finalArt": false
