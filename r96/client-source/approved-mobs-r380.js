@@ -90,8 +90,10 @@ function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return t
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
- return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;return new RegExp(a.name).test(n);})||null;}
-function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
+ return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;return new RegExp(a.name).test(n);})||null;}
+// R389: actor.hero = 지금 영웅일 때만(사몽 S-07 '페르소나' 보스가 내 영웅의 얼굴을 쓴다). 영웅이 바뀌면 다시 고른다.
+const heroOf=()=>{try{return typeof player==='object'&&player?String(player.hero||''):'';}catch(_){return '';}};
+function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode()+'|'+heroOf();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
  e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m)stats.assigned++;return m;}
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
 function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.attack.length)];
