@@ -1,0 +1,49 @@
+name: Mammon isolated V3 preview
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'r96/client-source/mammon-miniature-pilot.js'
+      - 'r96/qa/mammon-miniature-pilot/**'
+      - 'r96/runtime-text/assets/mammon-v3/**'
+      - '.github/workflows/mammon-v3-preview.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mammon-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  isolated-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Build pinned baseline and check Mammon CPU fixtures
+        env:
+          MAMMON_QA_JSON: ${{ runner.temp }}/mammon-qa.json
+        run: |
+          python3 scripts/build-r96.py
+          node r96/qa/mammon-miniature-pilot/check.cjs
+          node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-preview"
+      - name: Capture PC and mobile CSS viewport with the preinstalled sandboxed Chrome
+        run: |
+          python3 -m http.server 4300 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/mammon-baseline-http.log" 2>&1 &
+          base_pid=$!
+          python3 -m http.server 4301 --bind 127.0.0.1 --directory "$RUNNER_TEMP/mammon-preview" > "$RUNNER_TEMP/mammon-candidate-http.log" 2>&1 &
+          candidate_pid=$!
+          trap 'kill "$base_pid" "$candidate_pid" 2>/dev/null || true' EXIT
+          python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1:4300/ --after http://127.0.0.1:4301/ --out "$RUNNER_TEMP/mammon-shots"
+      - name: Keep evidence even when graphics are unavailable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mammon-preview-${{ github.event.pull_request.head.sha }}
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/mammon-shots/
+            ${{ runner.temp }}/mammon-qa.json
+            ${{ runner.temp }}/mammon-preview/mammon-pilot-local-preview.json
+            r96/build-result.json
