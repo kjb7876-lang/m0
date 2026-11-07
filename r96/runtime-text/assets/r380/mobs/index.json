@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R403",
+ "revision": "R404",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -7582,6 +7582,444 @@
     {
      "file": "attack_04.png",
      "sha256": "7529b674faf1d7f4c0acc9bd077b8f686915f98400533d2abb964bf11e7ea81e"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m106-elite-guardian-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m106-elite-guardian-v2.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    93.25,
+    192.0
+   ],
+   "visibleHeight": 129.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "kair10",
+    "name": "^상위수문장 58"
+   },
+   "bytes": 231080,
+   "sha256": "588a4d1818f0130deb006acbd6521dcdc118fde961c0ecc408afdf9be090be52",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "49ef127c91bcb5ea1b9b442b05f80608b8d6ecf93ccd22e58afa41e703e780fb"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "61166817b118fbb0786eba7eb352b93d80bcfdf5554a5a94ce1298c625ee11ae"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "49fcea0d0080d1b4adc5485e9d523da90340b058c32c6689bd6773286cd004c5"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "1a9e65e7ec7b5bbd87f44c999eed94494c63b2ac6f82e926a5d5262b36ea798d"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "2b662822dffc2136b2fcf4a1b2cd5349e2ea92baa56713d1fa70921c0bca920a"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "fdc72758d2833ef6d38f2e500038aa4251ab31b4d6ed2fa111ca937e572f33a9"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "71b5033d91badc7095595b89ed7c2031b9cb9ed4ee283cb0236b89e2c68fff06"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "d3e1340411d19e765001868287b8f55ab0438bd0593611943ddf3e96213759e9"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m110-time-guardian-v3",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m110-time-guardian-v3.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 4,
+   "pivot": [
+    102.25,
+    199.0
+   ],
+   "visibleHeight": 151.0,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "kair02",
+    "name": "^시간수문장 46"
+   },
+   "bytes": 120976,
+   "sha256": "1b6fb3fc8cdf3e3b12390dbb65745990bd96835c0b931ac7901bccd718b93544",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "8015fd15cbc009e9ed17ac0af3a5eba9da42225601c6366f3d221dce1d58af9d"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "ef60aee9a08a7c956bedfe46cd2328aaf42784a9e89cec193c8f1d3f26b94f6d"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "f0ada828d53092d2d41f4c2ae88a81193a19482e70aaa8da05f369a6fd2d25fb"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "3c209549de3dffd39853d588a719f904dffd0ac9bc5544dba468957f3d223ab8"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m119-nameless-scar-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 4,
+   "pivot": [
+    98.25,
+    219.0
+   ],
+   "visibleHeight": 160.0,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando02",
+    "name": "^무명 검흔"
+   },
+   "bytes": 111378,
+   "sha256": "d48044981925f00dbbc0be135f8432de45ac315270d50f7974e5641748557bf6",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "4330649b5d611782c72b49139c15013ab560ffbe28100fd6e88d989b98341522"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "f61fedceaa9e678fa58eb74f8eb0525cf964a9b44eca1f4a62f31e85cba8877f"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "824a8742c05c509ea82b2ae5a7a631dde7ca165ccbce375d260ed58545fcae0b"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "af0407970cf3e84c778203f6cb96ceda32e7ce84c83fc222792278a5d634d021"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m124-silverless-shadow-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m124-silverless-shadow-v4.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 4,
+   "pivot": [
+    94.0,
+    227.0
+   ],
+   "visibleHeight": 270.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "hando03",
+    "name": "^백은 없는 그림자"
+   },
+   "bytes": 110770,
+   "sha256": "6cedf4358413e643d924bf580ac145e88bcaeec1a53990ae5d2d8f6052e83efa",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "23a7f1eeac1287d7853a8ab90964392df7968e0c9cfc00bf81bbafcb7658b162"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "5ba2f4ce675127831afad6c979260531cb5755850bb28008d0ea3165335e53e2"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "a00029ad9c9e93b9c631c2f0b5def044d3c288e0e4e0b87f6f77af2f8ee2b489"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "d10e11931aad558935ddb208dd4d6ccfd7d83f95b3fdfd4b7dc032b87c418558"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m130-slime-cult01-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m130-slime-cult01-v2.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    95.5,
+    239.5
+   ],
+   "visibleHeight": 420.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult01",
+    "name": "^세뇌 신호 점액체"
+   },
+   "bytes": 208072,
+   "sha256": "4ea349abb8c5b999596a0baf90132b98006b47b79a865c0d59a1f802f609467e",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "cd597a59214e8787e56a63481cc470056709f173fd8d7ab7360cc081e335b275"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "c80717a628e10e9ab94727b9dbe69341dcb2e1956909888b4521b71fbff9bba0"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "4a4c63251610bbe4d33fc0195e021630e58227826a85fffad7320f277b017bf3"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "a9e1dac9a1b8d437227bb6e273a870e8b5db29f4643e9a47365022b88c98e725"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "9967ff6558c2e25fa1ab3e29a193ba290098bd9920c06d4a194fe21fcca4791f"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "8abf79687063c31d5f8d4989ff333ca5c612ffdfe52b7c47d4467aa40d05a772"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "f184705fa10bf7e13b6905813190976d45dd1ccbf25daa626bb9f2c81d41c1cb"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "57ccc090fc531e4d3169daf2272d8add9cf58c70fc6b9de61cfefc5a6213638c"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m130-slime-cult05-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m130-slime-cult05-v2.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    95.5,
+    239.5
+   ],
+   "visibleHeight": 420.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult05",
+    "name": "^ID 배양 점액체"
+   },
+   "bytes": 208072,
+   "sha256": "4ea349abb8c5b999596a0baf90132b98006b47b79a865c0d59a1f802f609467e",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "cd597a59214e8787e56a63481cc470056709f173fd8d7ab7360cc081e335b275"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "c80717a628e10e9ab94727b9dbe69341dcb2e1956909888b4521b71fbff9bba0"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "4a4c63251610bbe4d33fc0195e021630e58227826a85fffad7320f277b017bf3"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "a9e1dac9a1b8d437227bb6e273a870e8b5db29f4643e9a47365022b88c98e725"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "9967ff6558c2e25fa1ab3e29a193ba290098bd9920c06d4a194fe21fcca4791f"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "8abf79687063c31d5f8d4989ff333ca5c612ffdfe52b7c47d4467aa40d05a772"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "f184705fa10bf7e13b6905813190976d45dd1ccbf25daa626bb9f2c81d41c1cb"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "57ccc090fc531e4d3169daf2272d8add9cf58c70fc6b9de61cfefc5a6213638c"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "legacy-m134-nightmare-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/legacy-m134-nightmare-v4.webp",
+   "cell": [
+    192,
+    256
+   ],
+   "cols": 4,
+   "pivot": [
+    92.0,
+    214.5
+   ],
+   "visibleHeight": 180.5,
+   "move": [
+    0
+   ],
+   "attack": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "cult05",
+    "name": "^생체기계 악몽"
+   },
+   "bytes": 159632,
+   "sha256": "939b7fd8b4d9bef516fa98c731eb9d9c00d7aa8e4818c6aa50b4315023eb4a8d",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "8a3e3f01bc9849725c71ba8baffa50be0e6e19c12d7069cbea842d126e6717db"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "83c863e4b108a90dbac63275e13549d9e6578a07ddc5137d0a65e47e89cd6b47"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "cde0df5cec1e0c75afa0c55db0e4a3b193d7a16237f4c1d90060f5488d4daa44"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "a739ffb35331afb82b7b68330b26f50977323893306b78187997c0ccf079d535"
     }
    ],
    "finalArt": false

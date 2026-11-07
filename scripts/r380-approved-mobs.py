@@ -309,7 +309,20 @@ if len(sys.argv) > 25:
         add2(f'dys-{k}-v2', R3a / 'x44' / k / '512x640/right', [f'fire-0{j}.png' for j in range(4)], 4, .5, [0], [0, 1, 2, 3], [0],
              {'layer': 'DREAM', 'name': f'^({NM})( \\d+)?$', 'samong': S06, 'slot': [sl, 9], 'rename': nm}, ft)
         mobs.insert(0, mobs.pop())
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R403',
+# ── R404: CX-0051 레거시 6종(구형 105~137 팩, 현 게임 group 표기로 대조) 회화풍 후보. 이동이 HOLD 인 종(M110·M119·M134)은 공격 첫 자세로 이동 ──
+if len(sys.argv) > 26:
+    LG = pathlib.Path(sys.argv[26]); F = lambda n: [f'frame_0{j}.png' for j in range(1, n + 1)]
+    A = lambda z, n: {'layer': 'STORY', 'zone': z, 'name': n}
+    for id_, m, z, nm, n, mv, at, ft in (
+            ('legacy-m106-elite-guardian-v2', 'M106', 'kair10', '^상위수문장 58', 8, [0, 1, 2, 3], [4, 5, 6, 7], 1.0),
+            ('legacy-m110-time-guardian-v3', 'M110', 'kair02', '^시간수문장 46', 4, [0], [0, 1, 2, 3], 1.0),
+            ('legacy-m119-nameless-scar-v4', 'M119', 'hando02', '^무명 검흔', 4, [0], [0, 1, 2, 3], 1.2),
+            ('legacy-m124-silverless-shadow-v4', 'M124', 'hando03', '^백은 없는 그림자', 4, [0, 1, 2, 3], [0, 1, 2, 3], .65),
+            ('legacy-m130-slime-cult01-v2', 'M130', 'cult01', '^세뇌 신호 점액체', 8, [0, 1, 2, 3], [4, 5, 6, 7], .35),
+            ('legacy-m130-slime-cult05-v2', 'M130', 'cult05', '^ID 배양 점액체', 8, [0, 1, 2, 3], [4, 5, 6, 7], .35),
+            ('legacy-m134-nightmare-v4', 'M134', 'cult05', '^생체기계 악몽', 4, [0], [0, 1, 2, 3], 1.0)):
+        add2(id_, LG / m, F(n), n if n == 4 else 8, .5, mv, at, [0], A(z, nm), ft)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R404',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
