@@ -74,7 +74,7 @@ function summonTick(r,voice,hp){const api=S61();if(!api?.state)return;const T=G(
   else if(rate>0&&hp/rate<voice&&s.nextAt>T+SUMMON_SOON){s.nextAt=T+SUMMON_SOON;stats.summonSooner++;}}}
 // ── ③ 리젠 ──
 let spawnSeg='',spawned=0,lastSpawn=-1e9,serial=0;
-function templates(r){const es=(r.enemies||[]).filter(e=>plain(e)&&!e.wardChampionR81&&e.profile&&Number(e.maxHp)>0);const orig=es.filter(e=>!e.r384Respawn);return orig.length?orig:es;}
+function templates(r){const es=(r.enemies||[]).filter(e=>plain(e)&&!e.wardChampionR81&&e.profile&&Number(e.maxHp)>0);const orig=es.filter(e=>!e.r384Respawn),plainOrig=orig.filter(e=>!e.squadLeaderR373);return plainOrig.length?plainOrig:orig.length?orig:es;}// R373 분대장(체력×1.6·이름) 말고 일반 몹을 본뜬다
 function spot(r,i){const p=G(()=>player,null);if(!p)return null;const a0=Math.random()*Math.PI*2;let tries=0;
  for(const rad of RING)for(let k=0;k<12;k++){const a=a0+(k+i*.37)*Math.PI/6,q={x:p.x+Math.cos(a)*rad,y:p.y+Math.sin(a)*rad};
   try{if(blocked(q.x,q.y,.4,r))continue;if(++tries>10)return null;if(typeof findPath==='function'&&!(findPath(p,q,r)?.length>0))continue;

@@ -29,7 +29,7 @@
   {
    "name": "module installed",
    "ok": true,
-   "detail": "{\"revision\":\"R171-story-maps-1\",\"prefs\":{\"on\":true},\"failures\":0,\"lastError\":null,\"stats\":{\"built\":97,\"used\":55,\"fallback\":0,\"rooms\":111},\"cached\":[\"murder01\",\"murder02\",\"murder04\",\"murder03\",\"cult01\",\"cult02\",\"cult05\",\"cult06\",\"cult03\",\"dist00\",\"dist01\",\"kair01\"],\"current\":null,\"browser\":false,\"GPU\":false}"
+   "detail": "{\"revision\":\"R171-story-maps-1\",\"prefs\":{\"on\":true},\"failures\":0,\"lastError\":null,\"stats\":{\"built\":97,\"used\":55,\"fallback\":0,\"rooms\":112},\"cached\":[\"murder01\",\"murder02\",\"murder04\",\"murder03\",\"cult01\",\"cult02\",\"cult05\",\"cult06\",\"cult03\",\"dist00\",\"dist01\",\"kair01\"],\"current\":null,\"browser\":false,\"GPU\":false}"
   },
   {
    "name": "every eligible story region uses an R171 map (48)",

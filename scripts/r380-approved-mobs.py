@@ -103,7 +103,16 @@ if len(sys.argv) > 3:
         add2(f'u206-mech-0{k}-v1', g(f'x-SW-u206-0{k}*') / f'u206-0{k}/frames', M4(f'u206-0{k}-move', f'u206-0{k}-attack'), 8, 1, [0, 1, 2, 3], [4, 5, 6, 7], [0], A('u206', n), 1.0)
     d = g('x-SWAMP-ROOT*') / 'frames'
     add2('swamp-root-stalker-darkgreen-v2', d, ['01-idle.png', '02-windup.png', '03-contact.png', '04-recover.png'], 4, .5, [0], [1, 2, 3], [0], A('dist02', '^뿌리 추적자'), 1.0)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R382',
+# R383: 검수 목록 v18 19 분노의 사냥개 — "분노 맵 적용"(사용자 2026-11-07 "7대죄 분노의귀청수부나오는곳" = ep1b07). 그 지역 R74 순찰 몹 6마리를 이 이름·그림으로 바꾼다.
+if len(sys.argv) > 2:
+    add2('wrath-hound-v1', next(S2.glob('x-wrath-hound*')), [f'walk-0{i}.png' for i in range(1, 5)] + [f'attack-0{i}.png' for i in range(1, 5)], 8, .5,
+         [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1b07', 'name': '^분노의 사냥개'}, .8)
+# R383: dist00(악마화 나무의 정원)으로 옮긴 그냥 뿌리 추적자 — 원래 R74 몹 그림(assets/r74/monsters.png root 4칸)을 같은 크기 칸으로만 다시 묶는다(새 그림 아님).
+#  R74 그림 그리기는 좌우 뒤집기를 안 해서(R86 방향 검사) 이 시트로 좌우를 맞춘다. 칸 잘라 둔 폴더를 넷째 인자로 받는다.
+if len(sys.argv) > 4:
+    add2('root-stalker-r74-plain', pathlib.Path(sys.argv[4]), ['01-idle.png', '02-windup.png', '03-contact.png', '04-recover.png'], 4, .5, [0], [1, 2, 3], [0],
+         {'layer': 'STORY', 'zone': 'dist00', 'name': '^뿌리 추적자'}, 1.22)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R383',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
