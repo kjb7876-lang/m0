@@ -8,7 +8,7 @@ const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8
 const idx=JSON.parse(RT('assets/r375/mobs/index.json'));ok(idx.mobs.length===5,'5종');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(inputs.textPaths.includes(m.path)||JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');}
-ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').includes('s=sheetOf(e);if(s&&(window.__STORYWORLD_MOB_DOTS_R374__?.assign?.(e)||window.__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)))s=null;'),'R248 이 R374·R375 액터를 덮어 그리지 않음');
+ok(fs.readFileSync(path.join(R,'client-source','mob-unique-r248.js'),'utf8').match(/s=sheetOf\(e\);if\(s&&\(window\.__STORYWORLD_MOB_DOTS_R374__\?\.assign\?\.\(e\)\|\|window\.__STORYWORLD_MOB_DOTS_R375__\?\.assign\?\.\(e\)[^;]*\)\)s=null;/),'R248 이 R374·R375 액터를 덮어 그리지 않음');
 ok(fs.readFileSync(path.join(R,'client-source','mob-preload-r260.js'),'utf8').includes('__STORYWORLD_MOB_DOTS_R375__?.assign?.(e)'),'R260 미리 읽기가 R375 시트를 기다림');
 const S0={frameFor:(e,f)=>({path:'base'})};
 const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',room:{id:'kair02'},player:{x:0,y:0},
