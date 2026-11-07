@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 134250,
-      "sha256": "0197e7d7255ca0d1e9531cdf2073c86c8a0a40b56a3fe9105f8b1d7579d3670f"
+      "bytes": 141099,
+      "sha256": "f00f6b06fe66ab59c7e146bd9e7bf569d0e9ced12cbef49adf3d61531818e68a"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15273,6 +15273,16 @@
       "sha256": "5a92676ad27b89bd4668b460e528a875e2ff2225542be12689d3f4849789a947"
     },
     {
+      "path": "assets/r380/mobs/r200-stitched-golem-v2.webp",
+      "bytes": 157866,
+      "sha256": "f39bfa0e3311f1d41a08e378da4c82cdc525334ec58829a997abc80285c366b9"
+    },
+    {
+      "path": "assets/r380/mobs/r200-sun-patrol-v2.webp",
+      "bytes": 110022,
+      "sha256": "913813a815d2f2f1b61f30a9f8c82747326346277dae894a1d4a5c691ac4a319"
+    },
+    {
       "path": "assets/r380/mobs/reborn-shieldmate-v4.webp",
       "bytes": 264582,
       "sha256": "f4c82ab42427e254cb6b350e769b126912105e0eec391459e34277c2d4048522"
@@ -15306,6 +15316,16 @@
       "path": "assets/r380/mobs/reverse-m093-v1-right.webp",
       "bytes": 336240,
       "sha256": "f8ded3d9e633281c2b234e37b18d4d8f5d554de583582c2f1ee3b455706ff079"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rc-stamp-v1-left.webp",
+      "bytes": 103900,
+      "sha256": "70fa32c9628a9bee803ba094aab3ce9129a22afc21ad295f6bbfd07adcff3fa9"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rc-stamp-v1-right.webp",
+      "bytes": 108354,
+      "sha256": "932096b8a3a069669e7fbb27c334b225bde42bdd3d2491ac4486c5e791a4a08a"
     },
     {
       "path": "assets/r380/mobs/reverse-rf-merit-scale-v1.webp",
@@ -33308,8 +33328,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6661,
-  "totalBytes": 1042242108,
+  "fileCount": 6665,
+  "totalBytes": 1042729099,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {

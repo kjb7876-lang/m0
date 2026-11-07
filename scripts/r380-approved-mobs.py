@@ -241,7 +241,22 @@ if len(sys.argv) > 19:
         d = R7 / x / 'r200-s04-recovered-20261107' / k / 'frames'
         add2(f'r200-{k}-v2', d, [f'move-right-0{j}.png' for j in range(1, 5)] + [f'attack-right-0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
              {'layer': 'DREAM', 'name': '.', 'shade': k, 'samong': '.'}, .85)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R397',
+# ── R398: R200 그림자 복원·개선 2종(S-02 검은 태양의 학교 순찰자, S-01 기운 누더기 골렘 v2) + RC 재주문 도장체(좌우 따로 그림, 관람석의 시선 절반) ──
+if len(sys.argv) > 20:
+    R8 = pathlib.Path(sys.argv[20])
+    SP = R8 / 'x10/r200-sun-patrol-recovered-20261107/frames'
+    add2('r200-sun-patrol-v2', SP, [f'sun-patrol_move_right_0{j}.png' for j in range(1, 5)] + [f'sun-patrol_attack_right_0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '.', 'shade': 'sun-patrol', 'samong': '.'}, .85)
+    GO = R8 / 'x19/stitched-golem-motion-v2'
+    add2('r200-stitched-golem-v2', GO, [f'walk-right-{j}.png' for j in range(1, 5)] + [f'attack-right-{j}.png' for j in range(1, 5)], 8, .36, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '.', 'shade': 'stitched-golem', 'samong': '.'}, .85)
+    ST = R8 / 'x21/rc-reorder-stamp-20261107/frames'
+    for side in ('right', 'left'):
+        act = {'layer': 'DREAM', 'name': '^(관람석의 시선|재주문 도장체)( \\d+)?$', 'samong': '(^|-)RC(-|$)', 'slot': [1, 2], 'rename': '재주문 도장체'} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+        add2(f'reverse-rc-stamp-v1-{side}', ST, [f'walk_{side}_0{j}.png' for j in range(1, 5)] + [f'attack_{side}_0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .85)
+        if side == 'left': mobs[-1]['facing'] = 'left'
+    mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R398',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

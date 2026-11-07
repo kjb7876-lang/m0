@@ -1,8 +1,87 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R397",
+ "revision": "R398",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "reverse-rc-stamp-v1-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rc-stamp-v1-right.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    75.6,
+    136.5
+   ],
+   "visibleHeight": 150.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(관람석의 시선|재주문 도장체)( \\d+)?$",
+    "samong": "(^|-)RC(-|$)",
+    "slot": [
+     1,
+     2
+    ],
+    "rename": "재주문 도장체"
+   },
+   "bytes": 108354,
+   "sha256": "932096b8a3a069669e7fbb27c334b225bde42bdd3d2491ac4486c5e791a4a08a",
+   "source": [
+    {
+     "file": "walk_right_01.png",
+     "sha256": "1de8f28535ab51e874f6e62cb8d598e1152a4ab24d9c33dbd7d4efdb1c14ff2a"
+    },
+    {
+     "file": "walk_right_02.png",
+     "sha256": "5ceb5d4fed032477af1be419a64a6760126020b08ada078948601dc0a7d1d364"
+    },
+    {
+     "file": "walk_right_03.png",
+     "sha256": "fc803a201256531f0fd727f508889d1c8fadf38b30e329c11b716647334516ac"
+    },
+    {
+     "file": "walk_right_04.png",
+     "sha256": "bc4635dd207678f1ef9fdbf8bfd9d3b81c4536c77104fca939453ccf5937e67f"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "bdbed88e3f1292ce353213b5253fc2e745cf928b440eb36cbd1d4036f17867bf"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "0ded2d17662cac4a11caeb9dcfe83ad585319af702038423032f933567015fa8"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "f4aa61afb43afa5f9fed2017515acd50792dd357b8139c5b3998c221ce1be175"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "48b88050c423284590901ea9420a9181b4afb9f628bca3a2450b40f0f350595a"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-rc-stamp-v1-left"
+  },
   {
    "id": "samong-s05-wraith-officer-v2",
    "kind": "strip",
@@ -5917,6 +5996,226 @@
     {
      "file": "attack-right-04.png",
      "sha256": "6cb3e3c638df26bc07e052e5d7bb310daf498ca4e027a579aa967c71e8a58461"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "r200-sun-patrol-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/r200-sun-patrol-v2.webp",
+   "cell": [
+    192,
+    173
+   ],
+   "cols": 8,
+   "pivot": [
+    110.1,
+    157.5
+   ],
+   "visibleHeight": 135.9,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": ".",
+    "shade": "sun-patrol",
+    "samong": "."
+   },
+   "bytes": 110022,
+   "sha256": "913813a815d2f2f1b61f30a9f8c82747326346277dae894a1d4a5c691ac4a319",
+   "source": [
+    {
+     "file": "sun-patrol_move_right_01.png",
+     "sha256": "47fb82001c1b5bd91d801173323150633d93a7cff75c27b5b1eedc70c17b092f"
+    },
+    {
+     "file": "sun-patrol_move_right_02.png",
+     "sha256": "1a90a136f28845515e734a69a8f1d44203d1d55aebe4ce5724a5e31efe18c070"
+    },
+    {
+     "file": "sun-patrol_move_right_03.png",
+     "sha256": "f4de2c6e2e158dfb50b926a0aba15f7a455783c38e2ff2adfc00b7b592294a82"
+    },
+    {
+     "file": "sun-patrol_move_right_04.png",
+     "sha256": "483d6f1d9ebd7367b8b8f5b927c8290c89e0f64edbdcd60b1017c4faf6162d73"
+    },
+    {
+     "file": "sun-patrol_attack_right_01.png",
+     "sha256": "3cea264bede1fb607f1846005087b238fb884f3cbcd66555d2c8926032f6afc3"
+    },
+    {
+     "file": "sun-patrol_attack_right_02.png",
+     "sha256": "d9beb3d33669e4ae604a1bb8de9c645ab577264449a8becd4aec0ff7ea7254ce"
+    },
+    {
+     "file": "sun-patrol_attack_right_03.png",
+     "sha256": "15323d67ec04a85a35b679bfd0dc31b0a3857f3f6f22103b8f9d77257ea90bf3"
+    },
+    {
+     "file": "sun-patrol_attack_right_04.png",
+     "sha256": "9b98e86a3a9771bd00acf822216fc79d0c91749a6d576cba33459d82e8dca5f2"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "r200-stitched-golem-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/r200-stitched-golem-v2.webp",
+   "cell": [
+    184,
+    184
+   ],
+   "cols": 8,
+   "pivot": [
+    92.16,
+    167.76
+   ],
+   "visibleHeight": 154.6,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": ".",
+    "shade": "stitched-golem",
+    "samong": "."
+   },
+   "bytes": 157866,
+   "sha256": "f39bfa0e3311f1d41a08e378da4c82cdc525334ec58829a997abc80285c366b9",
+   "source": [
+    {
+     "file": "walk-right-1.png",
+     "sha256": "2cae83d9bc2f80a99f74fcc01aee7907fbf07f56c09ab5caf0da203ef1258834"
+    },
+    {
+     "file": "walk-right-2.png",
+     "sha256": "5b4c962437593a172e5b603f9b7a3783ad2af4137c2113dcf2a53700a900fb26"
+    },
+    {
+     "file": "walk-right-3.png",
+     "sha256": "8a936b15f1811a8db737731df5c6372929c92299973d1c0f858d83d9d84e934d"
+    },
+    {
+     "file": "walk-right-4.png",
+     "sha256": "48094dee0bfba19860fd2de5836a90750037c41d42ef33a15f5255b4d14932aa"
+    },
+    {
+     "file": "attack-right-1.png",
+     "sha256": "3a92db179b803a790d0c615d0073a03e29c4e50d7b3cb06fdffb6b5e9b1d96ea"
+    },
+    {
+     "file": "attack-right-2.png",
+     "sha256": "fead096cf0b802ff8099a3e4f63d78a717e69267f5302ed9693725862baa4bb2"
+    },
+    {
+     "file": "attack-right-3.png",
+     "sha256": "fe8e631b4db14a0698b3e6367764f097a17c6bf5720541147e6de026a3fde207"
+    },
+    {
+     "file": "attack-right-4.png",
+     "sha256": "6392f678453c7803fedbbf78e509f1f4d9473a53256341a3743b09337409be69"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-rc-stamp-v1-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rc-stamp-v1-left.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    78.15,
+    135.3
+   ],
+   "visibleHeight": 150.7,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 103900,
+   "sha256": "70fa32c9628a9bee803ba094aab3ce9129a22afc21ad295f6bbfd07adcff3fa9",
+   "source": [
+    {
+     "file": "walk_left_01.png",
+     "sha256": "1f4bb48a93c7484aacf1179aa186c4372d8543c51665a4cf9659391a6a6011a4"
+    },
+    {
+     "file": "walk_left_02.png",
+     "sha256": "868d02ce44e1ae83b6fe6427ce6e837ffe676203ea39f0722bd4361211009dd3"
+    },
+    {
+     "file": "walk_left_03.png",
+     "sha256": "272d7d53cf2133e6e4eacfc0dd3f7fbdc552f4510d9ac9c22238d76230b20386"
+    },
+    {
+     "file": "walk_left_04.png",
+     "sha256": "884e24af875c449464bf288e9a30bab1ea9ae954269ae2f45f04ef4be523b303"
+    },
+    {
+     "file": "attack_left_01.png",
+     "sha256": "7c26d790374fe8ebb0ee42714eb58957ae1e380185dc20e250c4ae9ca813bede"
+    },
+    {
+     "file": "attack_left_02.png",
+     "sha256": "2fb6188b1d16e317e7561344985f22956f4f3bcbd60afb6d4594c26161bdd161"
+    },
+    {
+     "file": "attack_left_03.png",
+     "sha256": "456caecea17d9af96bdcdac6f8a6532db56e077aff749ef492e5e6cd83f3c520"
+    },
+    {
+     "file": "attack_left_04.png",
+     "sha256": "a6d8a8364bc958b0d2266f6f425a953ae513bd639494dad8043d6c4ebc4cc576"
     }
    ],
    "finalArt": false
