@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===42,'42장(R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 8)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===50,'50장(R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -56,8 +56,13 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
 {ctx.layer='DREAM';ctx.room={id:'cult03'};const H=['hwando','michaela','seoha','lauren','neon','hunter','gunner','slayer'];
  ok(H.every(h=>{ctx.player={x:0,y:0,hero:h};return f({name:'페르소나',boss:true})?.r380Mob==='persona-'+h+'-w';}),'R389 사몽 페르소나 보스 = 지금 영웅의 페르소나 W 시트(8영웅)');
  ctx.player={x:0,y:0,hero:'hwando'};const e={id:'pz',name:'페르소나',boss:true,hp:10,x:3,y:0};ok(S.frameFor(e,null)?.r380Mob==='persona-hwando-w','R389 같은 몹 환도');ctx.player.hero='neon';ok(S.frameFor(e,null)?.r380Mob==='persona-neon-w','R389 영웅이 바뀌면 다시 고름');
+ {ctx.player.hero='hwando';const seen=new Set();let other=0;for(let i=0;i<16;i++){const c={id:'sm103:S-07:a:'+i,name:'여섯 물건의 그림자',samongR103:'sz115-S07-'+(i%3+1),hp:5,x:2,y:1};const m=S.frameFor(c,null)?.r380Mob;if(m)seen.add(m);if(c.name!=='페르소나 분신'||c.r248Key!=='여섯 물건의 그림자')other++;}
+  ok(seen.size===8&&[...seen].every(m=>m.startsWith('persona-clone-')),'R389 S-07 그림자 16마리 → 분신 8종 고르게('+seen.size+')');ok(other===0,'R389 분신 이름 바뀌고 R248 열쇠는 원래 이름');
+  const w={id:'sm103:S-05:a:3',name:'여섯 물건의 그림자',samongR103:'sz115-S05-2',hp:5,x:2,y:1};ok(!S.frameFor(w,null)?.r380Mob&&w.name==='여섯 물건의 그림자','R389 다른 장 같은 이름은 그대로');
+  for(const z of ['sz162-S-07-B','sz162-S-07-D','sz173-S-07-G']){const g={id:'sm103:k:t:5',name:'여섯 물건의 그림자',samongR103:z,hp:5,x:2,y:1};ok(S.frameFor(g,null)?.r380Mob==='persona-clone-'+['hwando','michaela','seoha','lauren','neon','hunter','gunner','slayer'][5],'R389 '+z+' 도 분신');}
+  const st={id:'x1',name:'여섯 물건의 그림자',hp:5,x:2,y:1};ok(!S.frameFor(st,null)?.r380Mob,'R389 사몽 표식 없는 몹은 그대로');}
  ok(f({name:'페르소나의 그림자',boss:true})?.path==='base'&&f({name:'백은 없는 그림자'})?.path==='base','R389 다른 이름·졸개는 그대로');
- ok(idx.mobs.filter(m=>m.id.startsWith('persona-')).every(m=>m.facing==='left'&&m.actor.layer==='DREAM'&&m.actor.boss===true&&m.move.join()==='0,1,2,3'&&m.attack.join()==='4,5,6,7'),'R389 페르소나 시트: 왼쪽 보기, 보행4·공격4');
+ ok(idx.mobs.filter(m=>/-w$/.test(m.id)&&m.id.startsWith('persona-')).length===8&&idx.mobs.filter(m=>m.id.startsWith('persona-')&&!m.id.startsWith('persona-clone-')).every(m=>m.facing==='left'&&m.actor.layer==='DREAM'&&m.actor.boss===true&&m.move.join()==='0,1,2,3'&&m.attack.join()==='4,5,6,7'),'R389 페르소나 시트: 왼쪽 보기, 보행4·공격4');
  ctx.layer='STORY';ctx.room={id:'cult03'};ok(f({name:'페르소나',boss:true})?.path==='base','R389 STORY 층은 그대로');ctx.room={id:'dist01'};ctx.player={x:0,y:0};}
 ctx.room={id:'ep1b08'};ok(f({name:'중간보스 · 육망성의 흑마술 실험체'})?.r380Mob==='hexagram-experiment-m031-v1'&&f({name:'흑마법사의 저주창 1'})?.path==='base','R386 ep1b08 흑마술 실험체 m031 v1(다른 몹 그대로)');
 ctx.room={id:'ep1a09'};ok(f({name:'유리 망령'})?.r380Mob==='glass-wraith-v1'&&f({name:'유리 망령 우두머리'})?.r380Mob==='glass-wraith-v1','R386 ep1a09 유리 망령 v1');

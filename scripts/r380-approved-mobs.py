@@ -142,6 +142,11 @@ if len(sys.argv) > 8:
     for h in ('hwando', 'michaela', 'seoha', 'lauren', 'neon', 'hunter', 'gunner'):
         add3('persona-' + h + '-w', P7 / h, [f'walk-w-0{i}.png' for i in range(1, 5)] + [f'attack-w-0{i}.png' for i in range(1, 5)], 8, .5, PA(h), .55)
     add3('persona-slayer-w', SL, [f'walk-0{i}.png' for i in range(1, 5)] + [f'attack-0{i}.png' for i in range(1, 5)], 8, .5, PA('slayer'), .55)
+    # 사용자 정정(11-07): 보스 8명(지금 영웅 얼굴) + 페르소나 분신 8종 일반몹. S-07 의 '여섯 물건의 그림자'를 8영웅 얼굴로 고르게 나눈다(같은 시트 재사용, 능력치·수 그대로).
+    HEROES8 = ('hwando', 'michaela', 'seoha', 'lauren', 'neon', 'hunter', 'gunner', 'slayer')
+    for i, h in enumerate(HEROES8):
+        b = next(m for m in mobs if m['id'] == 'persona-' + h + '-w')
+        mobs.append({**b, 'id': 'persona-clone-' + h, 'actor': {'layer': 'DREAM', 'name': '^(여섯 물건의 그림자|페르소나 분신)', 'samong': '(^|[^0-9])S-?07([^0-9]|$)', 'slot': [i, 8], 'rename': '페르소나 분신'}})
 idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R389',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}

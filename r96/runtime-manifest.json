@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 18283,
-      "sha256": "9bbdbb1c1793b2880f521fdee7b1cf99ae7575878578814c14a4cbbd7d18dfa1"
+      "bytes": 18937,
+      "sha256": "23a9dff17cff4524ef66aec2a6db14f343192d3a4b38c69193e980b0cea78da0"
     },
     {
       "path": "art-drive-r105.js",
@@ -15164,8 +15164,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 71728,
-      "sha256": "8e91ab3b438544825aa318a46fd23d7058a7f2be2e7c615e7e973eac1ad2a5d9"
+      "bytes": 85656,
+      "sha256": "cf44d40c35c85f72a8bfdf36c2bda8d11d84705085f2abc8b1f423d44f734dd3"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -33174,7 +33174,7 @@
     }
   ],
   "fileCount": 6634,
-  "totalBytes": 1035508681,
+  "totalBytes": 1035523263,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
