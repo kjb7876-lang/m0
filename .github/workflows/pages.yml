@@ -93,6 +93,10 @@ jobs:
         run: node r96/qa/r353/bgm-pick-cpu-check.cjs
       - name: R351 slayer new walk/attack motion CPU check
         run: node r96/qa/r351/slayer-cpu-check.cjs
+      - name: R377 slayer south walk4/attack6 CPU check
+        run: node r96/qa/r377/slayer-south-cpu-check.cjs
+      - name: R389 slayer east (mirrored persona W) and toned south CPU check
+        run: node r96/qa/r389/slayer-e-cpu-check.cjs
       - name: R356 Kairo homage (Seoha time-control passive, Kairo SFX) CPU check
         run: node r96/qa/r356/kairo-homage-cpu-check.cjs
       - name: R360 hospital ep1a08 unreachable-altar path miss memo CPU check

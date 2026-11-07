@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R387-approved-3',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R389-approved-4',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -90,9 +90,14 @@ function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return t
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
- return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;return new RegExp(a.name).test(n);})||null;}
-function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
- e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m)stats.assigned++;return m;}
+ return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;if(a.samong&&!new RegExp(a.samong).test(String(e.samongR103||'')))return false;if(a.slot&&slotOf(e,a.slot[1])!==a.slot[0])return false;return new RegExp(a.name).test(n);})||null;}
+// R389: 같은 장의 일반몹을 여러 얼굴로 고르게 나눈다(id 끝 일련번호, 없으면 해시). 능력치·수는 그대로.
+function slotOf(e,n){const m=/(\d+)$/.exec(String(e.id||''));return m?(+m[1])%n:Math.floor(hash(e.id||e.name)*n)%n;}
+function renameOf(e,m){const r=m?.actor?.rename;if(!r||e.r389Renamed)return;e.r389From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'');e.name=r;if(typeof e.r373Name==='string')e.r373Name=r;e.r389Renamed=true;stats.renamed++;}
+// R389: actor.hero = 지금 영웅일 때만(사몽 S-07 '페르소나' 보스가 내 영웅의 얼굴을 쓴다). 영웅이 바뀌면 다시 고른다.
+const heroOf=()=>{try{return typeof player==='object'&&player?String(player.hero||''):'';}catch(_){return '';}};
+function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode()+'|'+heroOf();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
+ e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m){stats.assigned++;renameOf(e,m);}return m;}
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
 function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.attack.length)];
  if(e.rangedWindup>0)return m.attack[0];
