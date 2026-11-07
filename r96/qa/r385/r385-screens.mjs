@@ -14,6 +14,6 @@ for(const [vp,opt] of [['pc',{viewport:{width:1280,height:720}}],['mobile',{...d
   for(const [side,ox,oy] of sides){const info=await p.evaluate(([src,ox,oy,pid])=>{const re=new RegExp(src);const e=room.enemies.find(x=>re.test(x.name)&&x.hp>0&&(!pid||new RegExp(pid).test(x.profile?.id||x.nativeId||'')));if(!e)return null;
     for(const o of room.enemies)if(o!==e)o.frozenR380=true;player.x=e.x+ox;player.y=e.y+oy;e.attack=null;const D=window.__STORYWORLD_APPROVED_MOBS_R380__;
     return {name:e.name,sprite:e.rc146BodySprite||null,look:e.r385Look||null,stats:window.__STORYWORLD_MOB_MOVES_R385__?.inspect?.()?.stats,err:window.__STORYWORLD_MOB_MOVES_R385__?.inspect?.()?.lastError,r248:e.r248Key};},[re.source,ox,oy,pid]);
-   await p.waitForTimeout(900);log.push({vp,st,z,side,info});await p.screenshot({path:`${OUT}/${z}-${re.source.replace(/[^가-힣a-z]/g,'')}-${vp}-${st}.jpg`,quality:72});}}
+   await p.waitForTimeout(900);const cache=await p.evaluate(src=>{const re=new RegExp(src);const e=room.enemies.find(x=>re.test(x.name)&&x.hp>0);return e&&{r374Mob:e.r374Mob||null,r375Mob:e.r375Mob||null,r380Mob:e.r380Mob||null,r208Mob:e.r208Mob||null,vis:e.visible!==false,x:e.x,y:e.y,px:player.x,py:player.y};},re.source);log.push({vp,st,z,side,info,cache});await p.screenshot({path:`${OUT}/${z}-${re.source.replace(/[^가-힣a-z]/g,'')}-${vp}-${st}.jpg`,quality:72});}}
  await ctx.close();}
 await b.close();console.log(JSON.stringify(log,null,0));

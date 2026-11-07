@@ -18,10 +18,10 @@ const DATA={
  cult01:()=>[mk('cult01','흑장미 눈가린 신도 1','c101-e1'),...[0,1,2].map(i=>pat('cult01',i,'태엽 수집자','c101-e1'))],
  cult03:()=>[0,1,2,3,4,5].map(i=>pat('cult03',i,'태엽 수집자','c103-e1')),hando02:()=>[pat('hando02',0,'뿌리 추적자','h102-s1','root')],
  ep1a09:()=>[0,1,2,3].map(i=>pat('ep1a09',i,'유리 망령','a09-o1','glass')),kair07:()=>[pat('kair07',0,'태엽 수집자 우두머리','kair-guardian-19')]};
-const drawn=[];const ctx={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,regionById:{},register(){},
- makeRoom:(id,l)=>({id,enemies:(DATA[id]||(()=>[]))()}),drawEnemy:e=>drawn.push({name:e.name,nativeId:e.nativeId,path:e.path,frame:e.profile?.frames?.move?.path})};
+const drawn=[],burned=[];const fakeAssign=e=>{if(e.r374Mob)return e.r374Mob;if(e.r374Checked==='STORY')return null;e.r374Checked='STORY';if(e.nativeId==='b08-c1')e.r374Mob='sheet-b08';return e.r374Mob||null;};const ctx={spawnBurnDeath3:e=>burned.push({nativeId:e.nativeId,path:e.path}),window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,regionById:{},register(){},
+ makeRoom:(id,l)=>({id,enemies:(DATA[id]||(()=>[]))()}),drawEnemy:e=>drawn.push({sheet:fakeAssign(e),name:e.name,nativeId:e.nativeId,path:e.path,frame:e.profile?.frames?.move?.path})};
 for(const z of Object.keys(DATA))ctx.regionById[z]={paths:[]};ctx.window.window=ctx.window;vm.createContext(ctx);vm.runInContext('var window=this.window;'+src,ctx);
-const A=ctx.window.__STORYWORLD_MOB_MOVES_R385__;ok(!!A&&A.revision==='R385-moves-3','설치');
+const A=ctx.window.__STORYWORLD_MOB_MOVES_R385__;ok(!!A&&A.revision==='R385-moves-4','설치');
 const room=id=>ctx.makeRoom(id,'STORY');
 const d4=room('dist04');ok(d4.enemies[0].name==='되살아난 수호기사 1'&&d4.enemies[1].name==='중간보스 · 되살아난 수호기사'&&d4.enemies[2].name==='이름 잃은 전우 1'&&d4.enemies[3].name==='보스','dist04 보라검 부활자 → 되살아난 수호기사(이름 잃은 전우·보스 그대로)');
 ok(d4.enemies[0].nativeId==='dist04-c2'&&d4.enemies[0].path==='p/dist04-c2'&&d4.enemies[0].r248Key==='전극을 두른 좀비 수호기사'&&d4.enemies[0].r385Key0===undefined,'방 자료 nativeId·그림 경로 그대로, R248 그림·효과 키는 옮겨 온 몹 것');
@@ -39,5 +39,10 @@ const k7=room('kair07');ok(k7.enemies[0].name==='기계화 감옥 공명기사 �
 ok(room('dist04').enemies[0].name==='되살아난 수호기사 1','다시 만들어도 같은 결과');
 ok(ctx.makeRoom('dist04','DREAM').enemies[0].name==='보라검 부활자 1','DREAM 층은 그대로');
 ok(room('u202').enemies.map(e=>e.name).join()==='복종 봉인구 1,감옥 공명기사 1,제8단계 자비 교정관','원본 u202 는 그대로(빈 자리 새 몹은 별도 제작 대상)');
+{const e=room('dist04').enemies[0];fakeAssign(e);ok(e.r374Checked==='STORY'&&!e.r374Mob,'원래 정체로 캐시된 R374 실패(프리로드 검사 흉내)');
+ drawn.length=0;ctx.drawEnemy(e);ok(drawn[0].sheet==='sheet-b08'&&e.r374Mob==='sheet-b08','빌린 정체로 그릴 때 옛 캐시를 지우고 옮겨 온 몹 승인 시트를 다시 찾음');
+ drawn.length=0;ctx.drawEnemy(e);ok(drawn[0].sheet==='sheet-b08','두 번째 그리기도 같은 시트(캐시 유지)');
+ burned.length=0;ctx.spawnBurnDeath3(e);ok(burned[0].nativeId==='b08-c1'&&burned[0].path==='p/b08-c1'&&e.nativeId==='dist04-c2','죽음 불꽃도 옮겨 온 몹 그림, 끝나면 되돌림');
+ burned.length=0;ctx.spawnBurnDeath3(room('dist04').enemies[2]);ok(burned[0].nativeId==='dist04-s1','다른 몹 죽음 불꽃은 그대로');}
 A.set({on:false});ok(room('dist04').enemies[0].name==='보라검 부활자 1','끄기');
 console.log(`R385 CPU ${n-bad}/${n}`);if(bad)process.exit(1);

@@ -13,7 +13,7 @@
 //  원래 몹(nativeId·path·profile)의 그림을 빌려 온다(R81 원본 보존 계약·3×10 무리 유지). storyworld.r385.moves {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_MOVES_R385__)return;
-const REV='R385-moves-3',KEY='storyworld.r385.moves';
+const REV='R385-moves-4',KEY='storyworld.r385.moves';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={rooms:0,renamed:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const isPatrol=e=>/:r74-patrol:/.test(String(e?.id||''));
@@ -30,7 +30,7 @@ const KINDS=[
  ['hando01',isPatrol,['u203','u203-e1'],'이동문 청람잔영'],['hando02',isPatrol,['u203','u203-e2'],'이동문 공허잔영'],['hando03',isPatrol,['u203','u203-e3'],'최종문 공명기사'],
  ['ep1a09',(e,i)=>isPatrol(e)&&i%2===0,['ep1a10','a10-o1'],'오만의 흰 가면']];
 const RENAME=[['ep1b08','창처럼 날아오는 역십자가','흑마법사의 저주창'],['ep1b08','역십자가 시체경호체','흑마법사의 시체경호체']];
-const SWAP=['nativeId','path','profile'];const donors=new Map();let makeBase=null,roomOn=false,drawOn=false,building=0;const preloaded=new Set();
+const SWAP=['nativeId','path','profile'];const donors=new Map();let makeBase=null,roomOn=false,drawOn=false,deathOn=false,building=0;const preloaded=new Set();
 function donor(zone,nid){const k=zone+'|'+nid;if(!donors.has(k)){let d=null;building++;try{const src=(makeBase||makeRoom)(zone,'STORY');const e=src?.enemies?.find(e=>e&&e.nativeId===nid&&!isPatrol(e)&&!e.wardChampionR81);
   if(e)d={nativeId:e.nativeId,path:e.path,profile:e.profile?JSON.parse(JSON.stringify(e.profile)):e.profile,key:e.r248Key||plainName(e.r381From||e.r380From||e.name)};}catch(err){fail(err);}finally{building--;}donors.set(k,d);}return donors.get(k);}
 function preload(id){if(preloaded.has(id))return;preloaded.add(id);try{const def=typeof regionById==='object'?regionById[id]:null;if(!def)return;const paths=new Set(def.paths||[]);
@@ -50,11 +50,20 @@ function apply(r,id,l){if(building||!prefs.on||!r||!Array.isArray(r.enemies)||l=
 function view(e){if(!prefs.on||!e?.r385Look)return null;const d=donor(e.r385Look[0],e.r385Look[1]);return d&&{nativeId:d.nativeId,path:d.path,profile:d.profile};}
 function installRoom(){if(roomOn)return true;if(typeof makeRoom!=='function')return false;if(makeRoom.__r385)return roomOn=true;roomOn=true;const base=makeRoom;makeBase=base;
  const w=function(id,l,...a){if(!building&&KINDS.some(k=>k[0]===id))preload(id);const r=base.call(this,id,l,...a);try{return apply(r,id,l);}catch(err){fail(err);return r;}};w.__r385=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
+// 승인 그림 덧씌우기(R208·R374·R375·R380)는 assign 결과를 적 객체에 캐시한다. 프리로드 검사(R260)처럼 그림을 빌리기 전에
+// 원래 정체로 캐시된 값이 남으면 빌려 온 정체로 그려도 옛 결과가 나오므로, 빌린 정체로 만든 캐시가 아니면 지우고 다시 묻게 한다.
+const CACHE=['r208Checked','r208Mob','r374Checked','r374Mob','r375Checked','r375Mob','r380Checked','r380Mob'];
+const snap=e=>CACHE.map(k=>e[k]===undefined?'':String(e[k])).join('|');
+function borrow(e,fn,self,args){let v=null;try{v=view(e);}catch(x){fail(x);}if(!v)return fn.apply(self,args);const keep={};for(const k of SWAP)keep[k]=e[k];Object.assign(e,v);
+ if(e.r385Cache!==snap(e))for(const k of CACHE)delete e[k];
+ try{return fn.apply(self,args);}finally{try{e.r385Cache=snap(e);}catch(_){}for(const k of SWAP)e[k]=keep[k];}}
 function installDraw(){if(drawOn)return true;if(typeof drawEnemy!=='function')return false;if(drawEnemy.__r385)return drawOn=true;drawOn=true;const base=drawEnemy;
- const w=function(e,...a){let v=null;try{v=view(e);}catch(x){fail(x);}if(!v)return base.call(this,e,...a);const keep={};for(const k of SWAP)keep[k]=e[k];Object.assign(e,v);stats.draws++;
-  try{return base.call(this,e,...a);}finally{for(const k of SWAP)e[k]=keep[k];}};w.__r385=true;try{drawEnemy=w;}catch(_){}try{window.drawEnemy=w;}catch(_){}return true;}
-try{installRoom();installDraw();}catch(e){fail(e);}
-let tries=0;(function arm(){try{installRoom();installDraw();}catch(e){fail(e);}if(!(roomOn&&drawOn)&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
+ const w=function(e,...a){if(e?.r385Look&&prefs.on)stats.draws++;return borrow(e,base,this,[e,...a]);};w.__r385=true;try{drawEnemy=w;}catch(_){}try{window.drawEnemy=w;}catch(_){}return true;}
+// 죽음 불꽃(spawnBurnDeath3)은 drawEnemy 를 거치지 않고 e.profile.frames.death·e.path 를 바로 읽는다 → 같은 빌리기를 씌운다.
+function installDeath(){if(deathOn)return true;if(typeof spawnBurnDeath3!=='function')return false;if(spawnBurnDeath3.__r385)return deathOn=true;deathOn=true;const base=spawnBurnDeath3;
+ const w=function(e,...a){return borrow(e,base,this,[e,...a]);};w.__r385=true;try{spawnBurnDeath3=w;}catch(_){}try{window.spawnBurnDeath3=w;}catch(_){}return true;}
+try{installRoom();installDraw();installDeath();}catch(e){fail(e);}
+let tries=0;(function arm(){try{installRoom();installDraw();installDeath();}catch(e){fail(e);}if(!(roomOn&&drawOn&&deathOn)&&++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_MOB_MOVES_R385__=Object.freeze({revision:REV,KINDS,RENAME,apply,view,donor,set,installRoom,installDraw,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
+window.__STORYWORLD_MOB_MOVES_R385__=Object.freeze({revision:REV,KINDS,RENAME,apply,view,donor,set,installRoom,installDraw,installDeath,inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError})});
 })();
