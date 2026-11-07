@@ -4158,7 +4158,14 @@
     "assets/r380/mobs/mech-oblivion-spider.webp",
     "assets/r380/mobs/purple-eggkeeper-v1.webp",
     "assets/r380/mobs/web-bound-guardian-v4-pixel.webp",
-    "assets/r380/mobs/web-bound-guardian-v4.webp"
+    "assets/r380/mobs/web-bound-guardian-v4.webp",
+    "assets/r380/mobs/blackmarket-suspect-v1.webp",
+    "assets/r380/mobs/drug-craver-v1.webp",
+    "assets/r380/mobs/hospital-surgeon-v1.webp",
+    "assets/r380/mobs/reborn-shieldmate-v4.webp",
+    "assets/r380/mobs/swamp-goat-darkgreen-v1.webp",
+    "assets/r380/mobs/swamp-mage-darkgreen-v1.webp",
+    "assets/r380/mobs/swamp-spirit-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -5233,5 +5240,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "b26306fa1493f5ced2c4a1cb88fd61f87a6a789fa1e510bcc7c8203a2db84a58"
+  "runtimeManifestSHA256": "76bb77e4f50dbf84645776d90e179f4673d8dd6220beaad11b8d4c7b4b2a4d10"
 }

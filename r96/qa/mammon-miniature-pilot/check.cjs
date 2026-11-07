@@ -9,6 +9,7 @@ async function check(name,fn){const detail=await fn();rows.push({name,detail:det
  await check('all derivative bytes, RIFF/WEBP and manifest hashes',()=>{for(const a of index.assets){const b=fs.readFileSync(path.join(assetDir,a.file));assert.equal(b.length,a.bytes);assert.equal(sha(b),a.sha256);assert.equal(b.toString('ascii',8,12),'WEBP');assert.ok(Math.max(...a.size)<=768);}const active=index.assets.filter(a=>a.status==='isolated-preview-only');return{prepared:index.assets.length,active:active.map(a=>a.id),activeEncodedBytes:active.reduce((v,a)=>v+a.bytes,0),activeRGBA8Base:active.reduce((v,a)=>v+a.size[0]*a.size[1]*4,0)};});
  const h=require('./native-harness.cjs').createHarness();await h.boot();await h.start();h.run(source);
  await check('native makeRoom/placeRoom on seeds 27,77,777; door approaches, role placement, immutable data',()=>JSON.parse(h.run(`(()=>{const rows=[];for(const seed of [27,77,777]){let x=seed;Math.random=()=>((x=Math.imul(x,1664525)+1013904223>>>0)/4294967296);const r=makeRoom('ep1b06','STORY');__STORYWORLD_WORLD_COMBAT_R78__.placeRoom(r);const before=JSON.stringify(r),L=r.exploration,p=__STORYWORLD_MAMMON_MINIATURE_PILOT__.plan('ep1b06',L,r);if(!p.props.length||p.props.length>12||p.floors.length)throw Error('invalid count');const roles=new Set(p.props.map(p=>p.role));if(!roles.has('records')||!roles.has('security')||!roles.has('vault'))throw Error('unrepresented role '+[...roles]);for(const o of p.props){if(!L.floorCells.some(c=>c[0]===Math.floor(o.x)&&c[1]===Math.floor(o.y)))throw Error('non-floor');if(L.worldR74.doors.some(d=>Math.hypot(o.x-d.x,o.y-d.y)<Math.max(d.width||0,d.depth||0)/2+4.1))throw Error('door overlap');if(!L.nodes.find(n=>n.id===o.roomId&&n.storyMapR171!=='waypoint'))throw Error('waypoint');}if(!L.surface?.art?.r55PhysicalUV)throw Error('non-physical UV');if(before!==JSON.stringify(r))throw Error('simulation mutated');rows.push({seed,rooms:p.sourceRooms,props:p.props.map(o=>[o.roomId,o.role,o.kind]),floor:L.floorCells.length,walls:L.walls.length,doors:L.worldR74.doors.length,physicalUV:!!L.surface?.art?.r55PhysicalUV});}return JSON.stringify(rows);})()`)));
+ await check('native R224 furnishing leaves a readable records desk near the first named room',()=>JSON.parse(h.run(`(()=>{let a=77;Math.random=()=>((a=Math.imul(a,1664525)+1013904223>>>0)/4294967296);const r=makeRoom('ep1b06','STORY');__STORYWORLD_WORLD_COMBAT_R78__.placeRoom(r);__STORYWORLD_CAVE_R204__.furnish(r,{seed:0x5e1b06,kind:'forge'},'ep1b06');const r224=r.props.filter(p=>p.r224Furniture);if(!r224.length)throw Error('missing R224 furnishings');const plan=__STORYWORLD_MAMMON_MINIATURE_PILOT__.plan('ep1b06',r.exploration,r),center=r.exploration.nodes.find(n=>n.name==='기록실'),desk=plan.props.find(p=>p.roomId===center.id&&p.kind==='ledger');if(!desk)throw Error('first records desk absent');const screenOffset=(desk.x-desk.y)-(center.x-center.y);if(Math.abs(screenOffset)>5)throw Error('desk too far across portrait frame '+screenOffset);return JSON.stringify({r224:r224.length,room:center.id,desk:[desk.x,desk.y],screenOffset,method:'native seeded R224; not a screenshot'});})()`)));
  const T=await import(pathToFileURL(path.join(site,'vendor/three/build/three.module.js')));
  const L={r224Rooms:[{id:5,x0:1,y0:1,x1:16,y1:13},{id:6,x0:18,y0:1,x1:32,y1:13}],nodes:[{id:5,name:'기록실'},{id:6,name:'금고 구획'}],floorCells:[],walls:[],worldR74:{doors:[]}};
  for(let y=1;y<14;y++)for(let x=1;x<33;x++)L.floorCells.push([x,y]);
@@ -22,7 +23,16 @@ async function check(name,fn){const detail=await fn();rows.push({name,detail:det
  await check('two V3 furniture roles; camera quaternion, source pivot, contact shadow; no double tilt',()=>{assert.deepEqual(props().map(o=>o.userData.assetId).sort(),['O01','O02']);for(const o of props()){assert.ok(o.quaternion.angleTo(r.camera.quaternion)<1e-7);const a=index.assets.find(a=>a.id===o.userData.assetId),g=o.geometry;g.computeBoundingBox();const bb=g.boundingBox,px=a.pivot[0]/a.size[0],py=a.pivot[1]/a.size[1];assert.ok(Math.abs(bb.min.x+(bb.max.x-bb.min.x)*px)<1e-6);assert.ok(Math.abs(bb.max.y-(bb.max.y-bb.min.y)*py)<1e-6);}assert.equal(group().children.filter(o=>o.name.includes('contact-')).length,2);});
  await check('async native R224 furnishing cannot double-place; simulation prop preserved',()=>{const p=props()[0].position.clone();const addition={id:'r224:furn:ep1b06:1',r224Furniture:true,x:p.x,y:p.z,visible:true};rm.props.push(addition);r.render(frame);assert.deepEqual(rm.props,[addition]);assert.ok(props().every(o=>Math.hypot(o.position.x-p.x,o.position.z-p.z)>=3.4));});
  await check('native fade clones/late parking hide all finishes; no stale V3 texture in clone',()=>{const clone=r.wallMaterial.clone();native.material=clone;native.userData.occlusion54={alpha:.4,materials:[clone]};r.render(frame);assert.deepEqual(captures.at(-1).instanceCounts,[0,0,0]);assert.equal(clone.map,originals.wallMaterial);native.userData.occlusion54.alpha=1;parked=true;r.render(frame);assert.deepEqual(captures.at(-1).instanceCounts,[0,0,0]);parked=false;native.layers.set(2);r.render(frame);assert.deepEqual(captures.at(-1).instanceCounts,[1,1,2]);});
- await check('any attack warning, large actor, or crowd clears furniture and its shadow',()=>{for(const overrides of [{hazards:[{kind:'laser',alpha:1}]},{entities:Array.from({length:9},(_,i)=>({x:i,y:3,alive:true}))}]){r.render({...frame,...overrides});assert.ok([...props(),...group().children.filter(o=>o.name.includes('contact-'))].every(o=>!o.visible));}r.render(frame);const o=props()[0];r.render({...frame,player:{x:o.position.x,y:o.position.z}});assert.ok(!o.visible);r.render(frame);assert.ok(props().every(o=>o.visible));});
+ await check('crowds and area warnings protect intersecting silhouettes; remote decor stays visible',()=>{
+  const [near,far]=props(),shadow=o=>group().children.find(m=>m.name==='mammon-pilot-contact-'+(o.userData.assetId==='O01'?'ledger':'lock')&&m.position.x===o.position.x&&m.position.z===o.position.z);
+  const at={x:near.position.x,y:near.position.z};
+  const actors=Array.from({length:8},(_,i)=>({x:80+i,y:90,alive:true}));
+  for(const overrides of [{entities:[...actors,{...at,alive:true,height:120}]},{hazards:[{...at,radius:2.4,alpha:.8}]},{player:at}]){
+   r.render({...frame,...overrides});assert.ok(!near.visible&&!shadow(near).visible);assert.ok(far.visible&&shadow(far).visible);
+  }
+  r.render({...frame,hazards:[{kind:'beam',alpha:1}]});assert.ok(props().every(o=>!o.visible&&!shadow(o).visible));
+  r.render(frame);assert.ok(props().every(o=>o.visible&&shadow(o).visible));
+ });
  await check('no second application / other mode; releasing restores materials and removes only owned meshes',()=>{for(const id of ['ep1b02','ep1b03','ep1b04','ep1b05','ep1b07','ep1b08'])assert.ok(!api.eligible({...frame,zone:id}));ctx.__STORYWORLD_SEVEN_SINS_ART__={inspect:()=>({on:true})};r.render(frame);assert.ok(!group());assert.equal(r.spatialResources.size,0);assert.equal(native.parent,r.spatialRoot);delete ctx.__STORYWORLD_SEVEN_SINS_ART__;assert.ok(!api.eligible({...frame,layer:'DREAM'}));r.render(frame);api.set(false);assert.equal(r.spatialResources.size,0);assert.equal(r.stoneMaterial.map,originals.stoneMaterial);assert.equal(r.wallMaterial.map,originals.wallMaterial);assert.ok(nativeCalls>0);assert.equal(api.inspect().stats.errors,0);});
  await check('expanded native wall supports: both jambs of all doors, posts and same-frame hide',()=>{
   const packed=JSON.parse(h.run(`(()=>{let a=77;Math.random=()=>((a=Math.imul(a,1664525)+1013904223>>>0)/4294967296);const room=makeRoom('ep1b06','STORY');__STORYWORLD_WORLD_COMBAT_R78__.placeRoom(room);return JSON.stringify({exploration:room.exploration,props:room.props,objective:room.objective,altar:room.altar});})()`));
@@ -34,5 +44,36 @@ async function check(name,fn){const detail=await fn();rows.push({name,detail:det
   const owner=r.wallRows.get(jambs[0].userData.support).mesh;owner.layers.mask=0;r.render(f);assert.equal(jambs[0].visible,false);owner.layers.set(2);r.render(f);assert.equal(jambs[0].visible,true);r.render({...f,hazards:[{kind:'beam'}]});assert.ok(mounted.every(o=>!o.visible));api.set(false);ctx.room=rm;return {jambs:jambs.length,posts:mounted.length-jambs.length,method:'physical wall rows with real Three classes, no pixels'};
  });
  await check('failed image leaves native materials alone and does not report assembled art',()=>{failImage='W06';class FailRenderer extends Renderer{render(){return this.renderer.render();}}const rf=new FailRenderer();const fresh={window:null,Image,room:rm,StoryPhase1:{ThreeRenderer:FailRenderer,explorationBlocked:()=>false}};fresh.window=fresh;vm.createContext(fresh);vm.runInContext(source,fresh);rf.render(frame);const v=fresh.__STORYWORLD_MAMMON_MINIATURE_PILOT__.inspect();assert.equal(v.last.loaded,false);assert.deepEqual([...v.last.assembledAssets],[]);assert.deepEqual([...v.last.failedAssets],['metal']);assert.equal(rf.wallMaterial.color.getHex(),0xabcdef);fresh.__STORYWORLD_MAMMON_MINIATURE_PILOT__.set(false);failImage=null;});
+ await check('F01 and native tile seams share one texture; failed canvas restores the native floor',()=>{
+  const nativeMap=r.stoneMaterial.map,cell={width:512,height:512},draws=[];
+  nativeMap.image=cell;nativeMap.userData.r55IsolatedCell={noAtlasBleed:true};
+  let canvases=0,mode='ready';
+  ctx.document={createElement(tag){
+   assert.equal(tag,'canvas');canvases++;
+   return {getContext(){if(mode==='no-context')return null;return {globalAlpha:1,drawImage(source){
+    if(mode==='throw'&&source===cell)throw Error('CPU fixture: source image not drawable');
+    draws.push({source,opacity:this.globalAlpha});
+   }};}};
+  }};
+  api.set(true);
+  try{
+   r.render(frame);const finish=captures.at(-1).floor;
+   assert.notEqual(finish,nativeMap);assert.equal(finish.image.width,768);assert.equal(finish.image.height,768);
+   assert.equal(draws.length,2);assert.equal(draws[0].source.naturalWidth,768);
+   assert.equal(draws[0].opacity,1);assert.equal(draws[1].source,cell);assert.equal(draws[1].opacity,.57);
+   assert.equal(r.stoneMaterial.map,nativeMap);assert.equal(nativeMap.image,cell);
+   r.render(frame);assert.equal(canvases,1);assert.equal(captures.at(-1).floor,finish);
+   for(const failure of ['throw','no-context']){
+    mode=failure;nativeMap.needsUpdate=true;const prior=canvases;
+    r.render(frame);assert.equal(captures.at(-1).floor,nativeMap);assert.equal(r.stoneMaterial.map,nativeMap);
+    r.render(frame);assert.equal(canvases,prior+1,'failed source must not retry every frame');
+    assert.ok(!api.inspect().last.assembledAssets.includes('F01'));
+   }
+   mode='ready';nativeMap.needsUpdate=true;r.render(frame);
+   assert.equal(captures.at(-1).floor,finish,'source recovery reuses the owned GPU texture');
+   assert.equal(r.stoneMaterial.map,nativeMap);assert.equal(nativeMap.image,cell);
+   return {f01Weight:.43,nativeWeight:.57,drawFailureFallback:true,noContextFallback:true};
+  }finally{api.set(false);delete ctx.document;delete nativeMap.userData.r55IsolatedCell;nativeMap.image=null;}
+ });
  const out={ok:true,method:'CPU: native VM with seeded state + Three classes and simulated renderer, not screenshot/input/GPU',sourceSHA256:sha(source),checks:rows};console.log(JSON.stringify(out));if(process.env.MAMMON_QA_JSON)fs.writeFileSync(process.env.MAMMON_QA_JSON,JSON.stringify(out,null,2)+'\n');
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});
