@@ -6,12 +6,19 @@
 (()=>{'use strict';
  const W=window,NAME='__STORYWORLD_MAMMON_MINIATURE_PILOT__',ZONE='ep1b06';if(W[NAME])return;
  const A=W.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!C)return;
- const REV='mammon-miniature-v14-expanded-v3-review2';
+ const REV='mammon-miniature-v15-expanded-v3-room-finishes';
  const ASSET_ROOT='assets/mammon-v3/';
  const assets=Object.freeze({postHigh:ASSET_ROOT+'P01-steel-post-tall-v2.webp',postLow:ASSET_ROOT+'P02-steel-post-low-v1.webp',jamb:ASSET_ROOT+'D01-open-portal-frame-v2.webp',floor:ASSET_ROOT+'F01-floor-single-slab-top-v1.webp',metal:ASSET_ROOT+'W06-wall-steel-front-flat-v1.webp',vault:ASSET_ROOT+'O02-deposit-cabinet-down-right-v3.webp',ledger:ASSET_ROOT+'O01-records-desk-up-right-v4.webp'});
  // Pixel contacts are from the reviewed derivative contract, not canvas bottom.
  const pivots=Object.freeze({lock:[362/768,411.5/512],ledger:[377.939120631/768,325.122886133/384]});
  const palette=Object.freeze({floor:0xb4bdc0,wall:0x9caeb9,cap:0xbac5c6,trim:0x9b825b});
+ // Cap, foot rail and jamb fasteners use the same three instanced draws.
+ const finishProfiles=Object.freeze({
+  ordinary:{colors:[0xb0b8b6,0x4c5355,0x8c8064],cap:.10,joint:.14},
+  records:{colors:[0xd2ad8f,0x554d4b,0xba9180],cap:.08,joint:.10},
+  vault:{colors:[0xd0b77f,0x555046,0xc1a064],cap:.14,joint:.18},
+  security:{colors:[0x90adbb,0x40525b,0x99adba],cap:.115,joint:.20}
+ });
  const states=new WeakMap(),live=new Set(),images=new Map(),wrapped=new WeakSet();
  const stats={builds:0,disposed:0,passes:0,errors:0,imageErrors:0,overlapSkips:0};let on=true,last=null,lastError=null;
  const finite=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y),key=(x,y)=>x+':'+y;
@@ -73,8 +80,31 @@
  // All finishes lie ON original physical AABBs, never across a door gap.
  // Coplanar polygon offset reveals the finish without expanding the footprint.
  // They follow native chunk visibility and disappear with any native wall fade.
- function architecture(r,s){const T=r.T,max=512,types=[['cap',0xb0b8b6],['base',0x4c5355],['joint',0x8c8064]];
-  s.arch=types.map(([name,color])=>{const g=own(r,s,new T.BoxGeometry(1,1,1)),m=material(r,s,new T.MeshBasicMaterial({map:s.surfaceTextures.metal||r.wallMaterial?.map||null,color,toneMapped:false,vertexColors:true,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));
+ function supportRoles(L){
+  const roles=new Map(),rooms=boxes(L).map(q=>{
+   const node=(L.nodes||[]).find(n=>n.id===q.id),name=node?.name||'';
+   return{...q,role:/기록실/.test(name)?'records':/금고 구획/.test(name)?'vault':/보안/.test(name)?'security':null};
+  }).filter(q=>q.role);
+  for(const w of L.walls||[]){
+   if(w.decorative||w.angle)continue;
+   const alongX=w.width>=w.depth,mid=alongX?w.x:w.y,depth=alongX?w.y:w.x,length=alongX?w.width:w.depth;
+   let best=null,bestCost=Infinity;
+   for(const q of rooms){
+    const near=alongX?q.y0:q.x0,far=alongX?q.y1:q.x1,left=alongX?q.x0:q.y0,right=alongX?q.x1:q.y1;
+    const distance=Math.min(Math.abs(depth-near),Math.abs(depth-far));
+    const overlap=Math.max(0,Math.min(mid+length/2,right)-Math.max(mid-length/2,left));
+    if(distance>1.1||overlap<length*.65||mid<left||mid>right)continue;
+    const cost=distance+(1-overlap/length)*2;
+    if(cost<bestCost){best=q.role;bestCost=cost;}
+   }
+   if(best)roles.set(w.id,best);
+  }
+  return roles;
+ }
+ function architecture(r,s){const T=r.T,max=512,types=['cap','base','joint'];
+  s.wallRoles=supportRoles(s.layout);
+  s.finishColors=Object.fromEntries(Object.entries(finishProfiles).map(([role,p])=>[role,p.colors.map(c=>new T.Color(c))]));
+  s.arch=types.map(name=>{const g=own(r,s,new T.BoxGeometry(1,1,1)),m=material(r,s,new T.MeshBasicMaterial({map:s.surfaceTextures.metal||r.wallMaterial?.map||null,color:0xffffff,toneMapped:false,vertexColors:true,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));
    const cols=[];for(let i=0;i<g.attributes.position.count;i++){const n=g.attributes.normal,shade=n.getY(i)>.5?1:n.getX(i)>.5?.7:n.getZ(i)>.5?.82:.58;cols.push(shade,shade,shade);}g.setAttribute('color',new T.Float32BufferAttribute(cols,3));
    const previous=m.onBeforeCompile;m.onBeforeCompile=function(sh,renderer){previous.call(this,sh,renderer);sh.vertexShader=sh.vertexShader.replace('vec4 sightWorld24 = modelMatrix * vec4(transformed, 1.0);','vec4 sightLocalPilot = vec4(transformed, 1.0);\n#ifdef USE_INSTANCING\nsightLocalPilot = instanceMatrix * sightLocalPilot;\n#endif\nvec4 sightWorld24 = modelMatrix * sightLocalPilot;');};const cache=m.customProgramCacheKey.bind(m);m.customProgramCacheKey=()=>cache()+'|mammon-instance-sight-v1';
    const o=own(r,s,new T.InstancedMesh(g,m,max));o.name='mammon-pilot-wall-'+name;o.layers.set(2);o.frustumCulled=false;o.userData.mammonMiniaturePilot=true;o.userData.presentationOnly=true;s.group.add(o);return o;});s.matrix=new T.Matrix4();s.quat=new T.Quaternion();s.vector=new T.Vector3();s.scale=new T.Vector3();s.up=new T.Vector3(0,1,0);
@@ -90,16 +120,30 @@
    r.scene.onBeforeRender=s.sceneHook;r.scene.onAfterRender=s.afterHook;
   }
  }
- function syncArchitecture(r,s){if(!s.arch)return;const counts=[0,0,0],dirty=[false,false,false];let visibleCount=0;
-  const put=(k,w,x,y,z,sx,sy,sz)=>{const o=s.arch[k],i=counts[k];if(i>=512)return;s.quat.setFromAxisAngle(s.up,w.angle||0);s.matrix.compose(s.vector.set(x,y,z),s.quat,s.scale.set(sx,sy,sz));const data=o.instanceMatrix.array,mat=s.matrix.elements;for(let j=0;j<16;j++)if(data[i*16+j]!==Math.fround(mat[j])){o.setMatrixAt(i,s.matrix);dirty[k]=true;break;}counts[k]++;};
+ function syncArchitecture(r,s){if(!s.arch)return;const counts=[0,0,0],dirty=[false,false,false],paintDirty=[false,false,false],byRole={ordinary:0,records:0,vault:0,security:0};let visibleCount=0;
+  const put=(k,w,x,y,z,sx,sy,sz)=>{const o=s.arch[k],i=counts[k];if(i>=512)return;
+   const role=s.wallRoles.get(w.id)||'ordinary',tint=s.finishColors[role][k],colors=o.instanceColor?.array;
+   if(!colors||colors[i*3]!==Math.fround(tint.r)||colors[i*3+1]!==Math.fround(tint.g)||colors[i*3+2]!==Math.fround(tint.b)){
+    o.setColorAt(i,tint);paintDirty[k]=true;
+   }
+   s.quat.setFromAxisAngle(s.up,w.angle||0);s.matrix.compose(s.vector.set(x,y,z),s.quat,s.scale.set(sx,sy,sz));const data=o.instanceMatrix.array,mat=s.matrix.elements;for(let j=0;j<16;j++)if(data[i*16+j]!==Math.fround(mat[j])){o.setMatrixAt(i,s.matrix);dirty[k]=true;break;}counts[k]++;};
   for(const e of r.wallRows?.values?.()||[]){const m=e.mesh,w=m?.userData?.originalWall;let visible=!!m?.visible;for(let p=m?.parent;p&&visible;p=p.parent)if(p.visible===false)visible=false;if(!w||w.decorative||!visible||m.layers?.mask===0||!m.parent||!finite(w)||![w.width,w.depth,w.height].every(v=>Number.isFinite(v)&&v>0))continue;
    const alpha=m.userData.occlusion54?.alpha??1;if(alpha<.995)continue;
    const h=w.height,width=Math.max(.02,w.width),depth=Math.max(.02,w.depth);
-   put(0,w,w.x,h-.05,w.y,width,.10,depth);put(1,w,w.x,.09,w.y,width,.16,depth);
-   const alongX=w.width>=w.depth,long=alongX?width:depth,short=alongX?depth:width,j=Math.min(.14,long*.2),a=w.angle||0;
-   if(long>.5)for(const sign of[-1,1]){const d=sign*(long-j)/2,dx=alongX?d:0,dz=alongX?0:d;put(2,w,w.x+dx*Math.cos(a)+dz*Math.sin(a),h/2,w.y-dx*Math.sin(a)+dz*Math.cos(a),alongX?j:short,Math.max(.05,h-.14),alongX?short:j);}
+   const role=s.wallRoles.get(w.id)||'ordinary',profile=finishProfiles[role];
+   byRole[role]++;put(0,w,w.x,h-profile.cap/2,w.y,width,profile.cap,depth);put(1,w,w.x,.09,w.y,width,.16,depth);
+   const alongX=w.width>=w.depth,long=alongX?width:depth,short=alongX?depth:width,j=Math.min(profile.joint,long*.2),angle=w.angle||0;
+   const fastener=(d,band)=>{const dx=alongX?d:0,dz=alongX?0:d;put(2,w,w.x+dx*Math.cos(angle)+dz*Math.sin(angle),h/2,w.y-dx*Math.sin(angle)+dz*Math.cos(angle),alongX?band:short,Math.max(.05,h-.14),alongX?short:band);};
+   if(long>.5)for(const sign of [-1,1])fastener(sign*(long-j)/2,j);
+   // The cash cabinets have paired brass edge bands; the security walls have a
+   // central steel strap. Every band remains inside its own physical wall.
+   if(role==='vault'&&long>=2)for(const sign of [-1,1])fastener(sign*(long/2-.33),.065);
+   if(role==='security'&&long>=3.8)fastener(0,.135);
    visibleCount++;
-  }s.arch.forEach((o,i)=>{o.count=counts[i];if(dirty[i])o.instanceMatrix.needsUpdate=true;});s.wallEvidence={visiblePhysicalWalls:visibleCount,instances:counts,source:'current native wallRows.originalWall; original visibility + fade respected',footprintExpansion:0};
+  }
+  s.arch.forEach((o,i)=>{o.count=counts[i];if(dirty[i])o.instanceMatrix.needsUpdate=true;if(paintDirty[i])o.instanceColor.needsUpdate=true;});
+  s.wallEvidence={visiblePhysicalWalls:visibleCount,roleWalls:byRole,instances:counts,source:'current native wallRows.originalWall; original visibility + fade respected',footprintExpansion:0};
+
  }
  function restoreMaps(s){for(const [m,v] of s.maps)if(m.map===v.applied){m.map=v.original;if(!!v.original!==!!v.applied)m.needsUpdate=true;}s.maps.clear();}
  function applyMap(s,m,t){if(!m||!t)return;let entry=s.maps.get(m);if(!entry){entry={original:m.map,applied:t};s.maps.set(m,entry);}else if(m.map!==entry.applied)entry.original=m.map;
@@ -187,20 +231,71 @@
    }}o.position.set(p.x,.022,p.y).addScaledVector(n,shift);o.updateMatrixWorld(true);s.assembled.add(p.id);
   }
  }}
+ // Only the painted book stacks (O01) and existing warm lock hardware (O02)
+ // receive the local diffuse adjustment. It cannot add light to transparent
+ // texels. If a future Three shader drops the map chunk, keep its native color.
+ function paintedDetail(s,m,id){
+  const previous=m.onBeforeCompile,priorKey=m.customProgramCacheKey.bind(m);
+  const bookMask=`
+    vec2 px=vec2(vMapUv.x,1.0-vMapUv.y);
+    vec4 leftBook=vec4(smoothstep(.180,.197,px.x),1.0-smoothstep(.353,.375,px.x),smoothstep(.217,.241,px.y),1.0-smoothstep(.545,.570,px.y));
+    vec4 rightBook=vec4(smoothstep(.548,.568,px.x),1.0-smoothstep(.695,.719,px.x),smoothstep(.079,.104,px.y),1.0-smoothstep(.324,.355,px.y));
+    float zone=max(leftBook.x*leftBook.y*leftBook.z*leftBook.w,rightBook.x*rightBook.y*rightBook.z*rightBook.w);
+    float grain=smoothstep(.018,.105,dot(diffuseColor.rgb,vec3(.25,.57,.18)));
+    diffuseColor.rgb*=mix(vec3(1.0),mix(vec3(.94,.93,.91),vec3(1.75,1.59,1.38),grain),zone*calm);
+  `;
+  const lockMask=`
+    float warm=(diffuseColor.r-diffuseColor.b)/max(.008,diffuseColor.r+diffuseColor.g+diffuseColor.b);
+    float brass=smoothstep(.18,.39,warm)*smoothstep(.008,.055,diffuseColor.r);
+    diffuseColor.rgb*=mix(vec3(1.0),vec3(1.63,1.34,.93),brass*calm);
+  `;
+  m.onBeforeCompile=function(shader,renderer){
+   previous.call(this,shader,renderer);
+   const token='#include <map_fragment>';
+   if(!shader.fragmentShader.includes(token)){s.paintStatus[id]='native-fallback';return;}
+   shader.uniforms.mammonDecorFocus=s.focusUniform;
+   const treatment=id==='O01'?bookMask:lockMask;
+   shader.fragmentShader='uniform float mammonDecorFocus;\n'+shader.fragmentShader.replace(token,
+    token+'\n#ifdef USE_MAP\nfloat calm=1.0-mammonDecorFocus;\n'+treatment+
+    '\nfloat quiet=dot(diffuseColor.rgb,vec3(.25,.57,.18)); diffuseColor.rgb=mix(diffuseColor.rgb,vec3(quiet)*.76,mammonDecorFocus*.45);\n#endif');
+   s.paintStatus[id]='shader-hook-installed';
+  };
+  m.customProgramCacheKey=()=>priorKey()+'|mammon-painted-detail-v1:'+id;
+ }
+ // Pillow-mapped foot contacts from the supplied V3 manifest. Project that
+ // screen line back onto the ground so desk feet and cabinet rail cast in the
+ // direction drawn by their original artists. Keep one receiver per object.
+ function contactShadow(r,s,p,w,h){
+  const desk=p.kind==='ledger';
+  const u=desk?(553.2717-202.6065)/768:(591-133)/768;
+  const v=desk?(271.0079-379.2379)/384:(487-336)/512;
+  const dx=w*u*Math.SQRT1_2+h*v*Math.SQRT2,dz=-w*u*Math.SQRT1_2+h*v*Math.SQRT2;
+  const shadow=mesh(r,s,new r.T.PlaneGeometry(Math.hypot(dx,dz)*1.34,h*(desk ? .48 : .38)),
+   new r.T.MeshBasicMaterial({color:0x181717,transparent:true,opacity:desk ? .29 : .27,depthWrite:false,toneMapped:false}),'contact-'+p.kind);
+  shadow.rotation.order='YXZ';shadow.rotation.y=-Math.atan2(dz,dx);shadow.rotation.x=-Math.PI/2;
+  shadow.position.set(p.x,.019,p.y);shadow.renderOrder=-19;
+  const prev=shadow.material.onBeforeCompile,key=shadow.material.customProgramCacheKey.bind(shadow.material);
+  const opacity=desk?
+   'vec2 q=mammonShadowUV-0.5; float pad=length(vec2((abs(q.x)-.33)*2.1,q.y)); float shade=max(.28*(1.0-smoothstep(.17,.52,length(q))),1.0-smoothstep(.08,.43,pad));':
+   'vec2 q=abs(mammonShadowUV-0.5); float shade=(1.0-smoothstep(.26,.5,q.x))*(1.0-smoothstep(.05,.47,q.y));';
+  shadow.material.onBeforeCompile=function(sh,renderer){prev.call(this,sh,renderer);
+   sh.vertexShader='varying vec2 mammonShadowUV;\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nmammonShadowUV=uv;');
+   sh.fragmentShader='varying vec2 mammonShadowUV;\n'+sh.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\n'+opacity+'gl_FragColor.a*=shade;');
+  };
+  shadow.material.customProgramCacheKey=()=>key()+'|mammon-foot-contact-v2:'+p.kind;
+  return shadow;
+ }
  function build(r,s){const im=Object.fromEntries(Object.entries(assets).map(([k,p])=>[k,image(p)]));if(!Object.values(im).every(q=>q.ready||q.failed))return;
   const T=r.T;s.attempted=true;s.failedAssets=Object.keys(im).filter(k=>im[k].failed);if(s.failedAssets.length)return;s.loaded=true;s.surfaceTextures={};
   for(const k of ['floor','metal'])if(im[k].ready){const t=texture(r,s,im[k].image);t.wrapS=t.wrapT=T.RepeatWrapping;s.surfaceTextures[k]=t;}
   for(const p of s.plan.props){const src=im[p.kind==='lock'?'vault':'ledger'];if(!src.ready)continue;
    const h=p.height,w=h*src.image.naturalWidth/src.image.naturalHeight,pivot=pivots[p.kind],g=new T.PlaneGeometry(w,h);
    g.translate((.5-pivot[0])*w,(pivot[1]-.5)*h,0);
-   const o=mesh(r,s,g,new T.MeshBasicMaterial({map:texture(r,s,src.image),color:0xc3bbb0,transparent:true,alphaTest:.04,depthWrite:false,toneMapped:false,side:T.DoubleSide}),'empty-'+p.kind);
+   const o=mesh(r,s,g,new T.MeshBasicMaterial({map:texture(r,s,src.image),color:p.kind==='lock'?0xcad1d1:0xdad1c3,transparent:true,alphaTest:.04,depthWrite:false,toneMapped:false,side:T.DoubleSide}),'empty-'+p.kind);
    o.position.set(p.x,.025,p.y);o.renderOrder=-15;o.userData.assetId=p.kind==='lock'?'O02':'O01';o.userData.pivot=pivot.slice();s.assembled.add(o.userData.assetId);
    // Camera-plane billboard only: never tilt a pre-rendered isometric sprite
    // toward a world wall a second time. Pixel calibration is still unverified.
-   const shadow=mesh(r,s,new T.PlaneGeometry(w*.7,h*.32),new T.MeshBasicMaterial({color:0x101317,transparent:true,opacity:.18,depthWrite:false,toneMapped:false}),'contact-'+p.kind);
-   shadow.rotation.x=-Math.PI/2;shadow.position.set(p.x,.019,p.y);shadow.renderOrder=-19;
-   const compile=shadow.material.onBeforeCompile;shadow.material.onBeforeCompile=function(sh,renderer){compile.call(this,sh,renderer);sh.vertexShader='varying vec2 mammonShadowUV;\n'+sh.vertexShader;sh.vertexShader=sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nmammonShadowUV=uv;');sh.fragmentShader='varying vec2 mammonShadowUV;\n'+sh.fragmentShader;sh.fragmentShader=sh.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a*=1.0-smoothstep(.12,.5,length(mammonShadowUV-.5));');};
-   const program=shadow.material.customProgramCacheKey.bind(shadow.material);shadow.material.customProgramCacheKey=()=>program()+'|mammon-contact-v1';
+   paintedDetail(s,o.material,o.userData.assetId);const shadow=contactShadow(r,s,p,w,h);
    observeDecoration(s,o,{asset:o.userData.assetId,x:p.x,y:p.y,roomId:p.roomId,role:p.role});
    const alpha=p.kind==='lock'?[130/768,27/512,636/768,489/512]:[88/768,6/384,685/768,381/384];
    const bounds=groundRect(p.x,p.y,(alpha[0]-pivot[0])*w,(alpha[2]-pivot[0])*w,(pivot[1]-alpha[3])*h,(pivot[1]-alpha[1])*h);
@@ -244,18 +339,36 @@
   }
   return{rows,unknownWarning,warningCount};
  }
+ function combatFocus(s,f){
+  const hero=(f.entities||[]).find(p=>p.hero)||f.player;
+  const closeEnemy=finite(hero)&&(f.entities||[]).some(p=>p.enemy&&p.alive!==false&&p.alpha!==0&&finite(p)&&Math.hypot(p.x-hero.x,p.y-hero.y)<6.5);
+  const localHazard=finite(hero)&&(f.hazards||[]).some(p=>p&&p.alpha!==0&&(!finite(p)||Math.hypot(p.x-hero.x,p.y-hero.y)<3.5+(p.radius||((p.height||50)/(2*(f.projection?.tile||34))))));
+  const target=closeEnemy||localHazard?1:0,now=Number.isFinite(f.time)?f.time:(s.focusTime??0)+1/60;
+  const elapsed=Math.min(.25,Math.max(0,now-(s.focusTime??now)));s.focusTime=now;
+  const uniform=s.focusUniform;uniform.value+=(target-uniform.value)*(1-Math.exp(-elapsed*(target?8:3)));
+  // Dim only V3 finish batches and posts. Actor, coin, warning and underlying
+  // native wall materials keep their original colors and visibility rules.
+  const scale=1-uniform.value*.27;
+  for(const mesh of s.arch||[])mesh.material.color.setRGB(scale,scale,scale);
+  for(const mount of s.mounts){
+   const m=mount.o.material;
+   if(!mount.baseColor)mount.baseColor=m.color.clone();
+   m.color.copy(mount.baseColor).multiplyScalar(scale);
+  }
+  return target;
+ }
  function ensure(r,f){if(!eligible(f)||r.disposed){if(overlap())stats.overlapSkips++;dispose(r);return;}if(!r.spatialBuilt||!r.spatialRoot||!r.T)return;let s=states.get(r);
   if(s&&(s.gen!==r.sceneGeneration||s.layout!==f.exploration||s.sight!==r.sightState24||s.propSignature!==propSignature(roomFor(f)))){dispose(r);s=null;}
-  if(!s){const T=r.T,group=new T.Group();group.name='mammon-miniature-pilot';s={gen:r.sceneGeneration,layout:f.exploration,sight:r.sightState24,group,resources:new Set(),originals:new Map(),applied:new Map(),maps:new Map(),assembled:new Set(),mounts:[],propSignature:propSignature(roomFor(f)),plan:plan(ZONE,f.exploration,roomFor(f)),billboards:[],submitted:[],loaded:false};states.set(r,s);live.add(r);r.spatialRoot.add(group);stats.builds++;}
+  if(!s){const T=r.T,group=new T.Group();group.name='mammon-miniature-pilot';s={gen:r.sceneGeneration,layout:f.exploration,sight:r.sightState24,group,resources:new Set(),originals:new Map(),applied:new Map(),maps:new Map(),assembled:new Set(),mounts:[],propSignature:propSignature(roomFor(f)),plan:plan(ZONE,f.exploration,roomFor(f)),billboards:[],submitted:[],loaded:false,paintStatus:{O01:'pending',O02:'pending'},focusUniform:{value:0},focusTime:null};states.set(r,s);live.add(r);r.spatialRoot.add(group);stats.builds++;}
   if(!s.attempted)build(r,s);if(!s.loaded){last={zone:ZONE,loaded:false,assembledAssets:[],failedAssets:s.failedAssets||[],pending:!s.attempted};return;}
   for(const[name,k]of[['stoneMaterial','floor'],['wallMaterial','wall'],['wallCapMaterial61','cap'],['regionalTrimMaterial55','trim']]){const m=r[name];if(!m?.color)continue;if(!s.originals.has(m)||m.color.getHex()!==palette[k])s.originals.set(m,m.color.clone());m.color.setHex(palette[k]);s.applied.set(m,palette[k]);}
-  if(!s.scene)syncArchitecture(r,s);const c=clearance(f);s.cover=c;s.submitted.length=0;
+  if(!s.scene)syncArchitecture(r,s);const c=clearance(f);s.cover=c;const combatTarget=combatFocus(s,f);s.submitted.length=0;
   for(const b of s.billboards){
    if(r.camera?.quaternion)b.mesh.quaternion.copy(r.camera.quaternion);
    const blockedByProp=(roomFor(f)?.props||[]).some(p=>finite(p)&&p.visible!==false&&!p.destroyed&&Math.hypot(p.x-b.x,p.y-b.y)<b.footRadius+1);
    b.mesh.visible=!covered(c,b.bounds)&&!blockedByProp;b.mesh.material.opacity=.9;b.shadow.visible=b.mesh.visible;
   }
-  stats.passes++;last={zone:ZONE,loaded:s.loaded,floorQuads:s.plan.floors.length,props:s.plan.props.length,meshes:s.group.children.length,architecture:s.wallEvidence,textureCount:s.textureCache?.size||0,protectedRects:c.rows.length,unknownWarning:c.unknownWarning,warningCount:c.warningCount,r228ExtraFloorLayers:0,assembledAssets:[...s.assembled],submittedDecor:s.submitted,failedAssets:s.failedAssets||[],mounts:s.mounts.length,pendingAssets:['W01','W02','W03','W04','W05'],collisionChanged:false};
+  stats.passes++;last={zone:ZONE,loaded:s.loaded,floorQuads:s.plan.floors.length,props:s.plan.props.length,meshes:s.group.children.length,architecture:s.wallEvidence,textureCount:s.textureCache?.size||0,combatTarget,decorFocus:s.focusUniform.value,paintStatus:s.paintStatus,protectedRects:c.rows.length,unknownWarning:c.unknownWarning,warningCount:c.warningCount,r228ExtraFloorLayers:0,assembledAssets:[...s.assembled],submittedDecor:s.submitted,failedAssets:s.failedAssets||[],mounts:s.mounts.length,pendingAssets:['W01','W02','W03','W04','W05'],collisionChanged:false};
  }
  const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,600);};
  function guard(r){const gl=r.renderer;if(!gl||wrapped.has(gl)||typeof gl.render!=='function')return;wrapped.add(gl);const old=gl.render;gl.render=function(...args){try{if(r.__mammonMiniatureFrame&&(!args[1]?.layers||(args[1].layers.mask&4)))ensure(r,r.__mammonMiniatureFrame);}catch(e){fail(e);}return old.apply(this,args);};}
