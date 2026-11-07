@@ -14,14 +14,15 @@ const S0={frameFor:(e,f)=>({path:'base'})};
 const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',room:{id:'dist01'},player:{x:0,y:0},
  readyImage:()=>({image:{naturalWidth:10}}),setTimeout:()=>0};ctx.window.window=ctx.window;
 ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nativeId:nid,spawnState:'active',x:1,y:1,homeX:1,homeY:1,hp:10,...o});
- if(id==='dist01')return{enemies:[mk('망각의 거미 1','dist01-sp1'),mk('망각의 거미 증원 2','dist01-sp1'),mk('중간보스 · 망각의 거미','dist01-sp1',{midboss:true}),mk('재 나방 1','dist01-sp1'),mk('보랏빛 알집지기 1','dist01-sp2'),mk('보스','dist01-boss',{boss:true})]};
- if(id==='u202')return{enemies:[1,2,3,4,5].map(i=>mk('가짜 자비 수집가 '+i,'u202-e1')).concat([mk('가짜 자비 수집가 우두머리','u202-e1'),mk('복종 봉인구 1','u202-e2')])};return{enemies:[]};};
+ if(id==='dist01')return{enemies:[mk('망각의 거미 1','dist01-sp1'),mk('망각의 거미 증원 2','dist01-sp1'),mk('중간보스 · 망각의 거미','dist01-sp1',{midboss:true}),mk('재 나방 1','dist01-sp1'),mk('보랏빛 알집지기 1','dist01-sp2'),mk('망각의 거미 수호자','dist01-sp1',{wardChampionR81:true}),mk('보스','dist01-boss',{boss:true})]};
+ if(id==='u202')return{enemies:[1,2,3,4,5].map(i=>mk('가짜 자비 수집가 '+i,'u202-e1',{combatProfile:{attackShape:{r:1}}})).concat([mk('가짜 자비 수집가 우두머리','u202-e1'),mk('복종 봉인구 1','u202-e2')])};return{enemies:[]};};
 vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
 const A=ctx.window.__STORYWORLD_APPROVED_MOBS_R380__,S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
 const d1=ctx.makeRoom('dist01','STORY');const names=d1.enemies.map(e=>e.name);
-ok(!names.some(x=>/망각의 거미/.test(x)),'dist01 에서 망각의 거미(증원·중간보스 포함) 뺌');ok(names.includes('재 나방 1')&&names.includes('보랏빛 알집지기 1')&&names.includes('보스'),'다른 dist01 몹·보스는 그대로');
-ok(ctx.makeRoom('dist01','DREAM').enemies.length===6,'DREAM 층은 그대로');
+ok(names.filter(x=>/망각의 거미/.test(x)).length===2&&!names.includes('망각의 거미 1')&&!names.includes('망각의 거미 증원 2'),'dist01 일반 망각의 거미 뺌');ok(names.includes('중간보스 · 망각의 거미')&&names.includes('망각의 거미 수호자'),'중간보스·R81 수호자는 남김(세이브 복원 보호, Codex P1)');ok(names.includes('재 나방 1')&&names.includes('보랏빛 알집지기 1')&&names.includes('보스'),'다른 dist01 몹·보스는 그대로');
+ok(ctx.makeRoom('dist01','DREAM').enemies.length===7,'DREAM 층은 그대로');
 const u=ctx.makeRoom('u202','STORY');const mech=u.enemies.filter(e=>e.r380Mech);ok(mech.length===4&&mech.every((e,i)=>e.name==='기계화 망각거미 '+(i+1)),'u202 에 기계화 망각거미 4마리');
+{const d=u.enemies.find(e=>e.name==='가짜 자비 수집가 1');ok(mech[0].combatProfile&&mech[0].combatProfile!==d.combatProfile&&mech[0].combatProfile.attackShape!==d.combatProfile.attackShape,'combatProfile 따로 복제(Codex P2)');}
 ok(mech.every(e=>/:r380mech$/.test(e.id))&&new Set(u.enemies.map(e=>e.id)).size===u.enemies.length,'고유·결정적 id');
 const u2=ctx.makeRoom('u202','STORY');ok(JSON.stringify(u2.enemies.filter(e=>e.r380Mech).map(e=>e.id))===JSON.stringify(mech.map(e=>e.id)),'다시 만들어도 같은 결과');
 const f=(o)=>S.frameFor({id:Math.random()+'',hp:10,x:3,y:0,...o},null);

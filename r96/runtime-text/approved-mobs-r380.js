@@ -20,10 +20,12 @@ const attacking=e=>!!(e?.attack&&Number.isFinite(e.attack.elapsed));
 const SPIDER=/망각의 거미/,MECH='기계화 망각거미';
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
- if(id==='dist01'){const n=r.enemies.length;r.enemies=r.enemies.filter(e=>!(e&&!e.boss&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')));stats.removed+=n-r.enemies.length;}
+ if(id==='dist01'){const n=r.enemies.length;r.enemies=r.enemies.filter(e=>!(e&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')));stats.removed+=n-r.enemies.length;}
  else if(id==='u202'&&!r.enemies.some(e=>e?.r380Mech)){const src=r.enemies.filter(e=>e&&!e.boss&&!e.midboss&&e.nativeId==='u202-e1'&&/^가짜 자비 수집가( \d+)?$/.test(e.name||'')&&e.spawnState==='active');
   const take=src.slice(0,4);take.forEach((e,i)=>{const c={...e,id:e.id+':r380mech',name:MECH+' '+(i+1),r380Mech:true,squadR373:undefined,r373Slot:undefined,r373Anchor:undefined,r373From:undefined,
-   x:e.x+.9,y:e.y-.6,homeX:e.homeX+.9,homeY:e.homeY-.6,attack:null,nav:null,aim:null,profile:e.profile?{...e.profile}:e.profile};r.enemies.push(c);stats.added++;});}
+   x:e.x+.9,y:e.y-.6,homeX:e.homeX+.9,homeY:e.homeY-.6,attack:null,nav:null,aim:null,profile:e.profile?{...e.profile}:e.profile};
+   // R58 이 틱마다 attackShape 를 바꿔 쓰므로 combatProfile 은 따로 복제(Codex P2).
+   try{if(e.combatProfile)c.combatProfile=structuredClone(e.combatProfile);}catch(_){c.combatProfile={...e.combatProfile,attackShape:e.combatProfile.attackShape&&{...e.combatProfile.attackShape}};}r.enemies.push(c);stats.added++;});}
  return r;}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
