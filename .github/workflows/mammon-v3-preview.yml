@@ -1,113 +1,61 @@
-name: Mammon isolated V3 preview
+name: Mammon V16 real combat capture supplement
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'r96/client-source/mammon-miniature-pilot.js'
-      - 'r96/qa/mammon-miniature-pilot/**'
-      - 'r96/runtime-text/assets/mammon-v3/**'
-      - '.github/workflows/mammon-v3-preview.yml'
+  push:
+    branches: [codex/mammon-v16-combat-evidence]
 permissions:
   contents: read
-concurrency:
-  group: mammon-preview-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
 jobs:
-  isolated-preview:
-    name: isolated-preview (${{ matrix.view }})
+  combat:
+    name: real input (${{ matrix.view }}, ${{ matrix.version }})
     strategy:
       fail-fast: false
       matrix:
         view: [pc, mobile]
+        version: [before, after]
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - name: Retrieve the small observation driver
+        uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          path: probe
+          sparse-checkout: r96/qa/mammon-miniature-pilot
           persist-credentials: false
-      - name: Build pinned baseline and check Mammon CPU fixtures
-        env:
-          MAMMON_QA_JSON: ${{ runner.temp }}/mammon-qa.json
+      - name: Check out the exact V16 game tree
+        uses: actions/checkout@v6
+        with:
+          ref: dc3e094284cc4ac3cfac78d182d461b0aa7fd614
+          path: game
+          persist-credentials: false
+      - name: Build immutable R382 and its isolated V16 candidate
+        working-directory: game
         run: |
+          test "$(git rev-parse HEAD)" = dc3e094284cc4ac3cfac78d182d461b0aa7fd614
           python3 scripts/build-r96.py
-          node r96/qa/mammon-miniature-pilot/check.cjs
-          node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-preview"
-      - name: Provide Korean UI glyphs on the disposable runner
+          node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-v16"
+          test "$(sha256sum "$RUNNER_TEMP/mammon-v16/mammon-miniature-pilot.js" | cut -d' ' -f1)" = 765240d42b21c27a6925a68ce899b3b3d761e8ca1d7b48c7ecfe4756799e0d60
+      - name: Korean glyphs
         run: |
           if [ -z "$(fc-list :lang=ko family)" ]; then
             sudo apt-get update -q
             sudo apt-get install -y --no-install-recommends fonts-noto-cjk
           fi
-          test -n "$(fc-list :lang=ko family)"
-      - name: Capture PC and mobile CSS viewport with the preinstalled sandboxed Chrome
+      - name: Observe a real guided encounter after 777 entry
+        env:
+          QA_VIEW: ${{ matrix.view }}
+          QA_VERSION: ${{ matrix.version }}
         run: |
-          python3 -m http.server 4300 --bind 127.0.0.1 --directory r96/hospital-three-pc/site > "$RUNNER_TEMP/mammon-baseline-http.log" 2>&1 &
-          base_pid=$!
-          python3 -m http.server 4301 --bind 127.0.0.1 --directory "$RUNNER_TEMP/mammon-preview" > "$RUNNER_TEMP/mammon-candidate-http.log" 2>&1 &
-          candidate_pid=$!
-          trap 'kill "$base_pid" "$candidate_pid" 2>/dev/null || true' EXIT
-          python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1:4300/ --after http://127.0.0.1:4301/ --view "${{ matrix.view }}" --out "$RUNNER_TEMP/mammon-shots"
-      - name: Keep evidence even when graphics are unavailable
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: mammon-preview-${{ matrix.view }}-${{ github.event.pull_request.head.sha }}
-          retention-days: 7
-          path: |
-            ${{ runner.temp }}/mammon-shots/
-            ${{ runner.temp }}/mammon-qa.json
-            ${{ runner.temp }}/mammon-preview/mammon-pilot-local-preview.json
-            r96/build-result.json
-
-  input-route:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 22
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Build an isolated real-input test
-        run: |
-          python3 scripts/build-r96.py
-          node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-route-site"
-      - name: Follow the native route through real UI and game input
-        run: |
-          python3 -m http.server 4301 --bind 127.0.0.1 --directory "$RUNNER_TEMP/mammon-route-site" > "$RUNNER_TEMP/mammon-http.log" 2>&1 &
+          site="$GITHUB_WORKSPACE/game/r96/hospital-three-pc/site"
+          if [ "$QA_VERSION" = after ]; then site="$RUNNER_TEMP/mammon-v16"; fi
+          python3 -m http.server 4312 --bind 127.0.0.1 --directory "$site" > "$RUNNER_TEMP/mammon-http.log" 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
-          python3 r96/qa/mammon-miniature-pilot/route-probe.py --url http://127.0.0.1:4301/ --out "$RUNNER_TEMP/mammon-input-route" --max-seconds 600
-      - name: Preserve reached phases, failures and actual input
+          cd game
+          cp ../probe/r96/qa/mammon-miniature-pilot/live-combat-probe.py "$RUNNER_TEMP/probe.py"
+          python3 "$RUNNER_TEMP/probe.py" --url http://127.0.0.1:4312/ --view "$QA_VIEW" --variant "$QA_VERSION" --out "$RUNNER_TEMP/live-combat" --max-seconds 180
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: mammon-input-route-${{ github.event.pull_request.head.sha }}
           retention-days: 7
-          path: ${{ runner.temp }}/mammon-input-route/
-
-  targeted-door-and-exit:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 16
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Build isolated native progression fixture
-        run: |
-          python3 scripts/build-r96.py
-          node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out "$RUNNER_TEMP/mammon-boss-site"
-      - name: Test native keys, story, gate and onward portal with explicitly weakened fixture enemies
-        run: |
-          python3 -m http.server 4302 --bind 127.0.0.1 --directory "$RUNNER_TEMP/mammon-boss-site" > "$RUNNER_TEMP/mammon-boss-http.log" 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
-          python3 r96/qa/mammon-miniature-pilot/boss-smoke.py --url http://127.0.0.1:4302/ --out "$RUNNER_TEMP/mammon-boss-fixture"
-      - name: Preserve fixture writes and observed native transitions
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: mammon-boss-fixture-${{ github.event.pull_request.head.sha }}
-          retention-days: 7
-          path: ${{ runner.temp }}/mammon-boss-fixture/
+          name: live-combat-${{ matrix.version }}-${{ matrix.view }}-dc3e094
+          path: ${{ runner.temp }}/live-combat/
