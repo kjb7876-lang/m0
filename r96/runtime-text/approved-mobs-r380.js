@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R380-approved-1',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R383-approved-2',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -35,9 +35,34 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
  // 개명해도 R248 공격 효과·상태이상 조회 키(r248Key)는 옛 이름으로 둔다(Codex P1, 전투 밸런스 보존).
  // R381: 검수 목록 v18 05·06·17 개명(같은 몹 그대로, 이름만) — "갈망의 도시짐승삭제하고 약을 갈망하는 자로", "그자리에 … 암시장의 수상한 자로", "명명 늪에서 되살아난 혼령체".
  for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;if(!e.r248Key)e.r248Key=from;e.name=n.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
+ balance(r,id,l);
  return r;}
+// ── R383 밸런스(사용자 2026-11-07 "30마리밸런스바꿔도됨") ──
+//  · "그냥뿌추적자 뿌리첫맵 / 다크그린뿌리추적자 늪"(검수 목록 18, 결정 카드: 악마화 나무의 정원 dist00): R74 순찰 '뿌리 추적자'(root)를
+//    늪(dist02, 다크그린 그림)과 dist00 밖에서는 원래 그 지역 몹으로 되돌린다(수·수치·id 그대로). dist00(보스만 있던 첫 뿌리 맵)에는 늪 순찰과 같은 수치의 뿌리 추적자 6마리를 새로 둔다.
+//  · "분노의 사냥개 … 분노 맵 적용"(검수 목록 19) = "7대죄 분노의귀청수부나오는곳"(ep1b07): 그 지역 R74 순찰 6마리를 분노의 사냥개로(수치 그대로).
+//  · 3×10 정규 무리(r75Pack)는 손대지 않는다. dist00 에 더한 몹은 id ':r383-root:N'·r383Added 로 남긴다(계약 검사가 이것만 빼고 본다).
+const ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
+// dist00 몹은 R74 지도 그림(좌우 안 뒤집음, R86) 대신 엔진 frameFor 사슬로 이 오버레이 시트(root-stalker-r74-plain)를 쓴다 → r74Monster 를 지운다.
+const isPatrol=e=>/:r74-patrol:/.test(String(e?.id||''));
+function rootTemplate(l){if(rootTpl)return rootTpl;try{const base=makeRoom.__r380base||makeRoom,src=base('dist02',l||'STORY');const d=src?.enemies?.find(e=>isPatrol(e)&&(e.r74Monster==='root'||e.r383Atlas==='root'));if(d)rootTpl=JSON.parse(JSON.stringify(d));}catch(err){fail(err);}return rootTpl;}
+function balance(r,id,l){if(!Array.isArray(r.enemies))return;
+ // 뿌리 맵·늪 밖의 뿌리 추적자 순찰은 지우지 않고(3×10 무리·저장 id 보존) 원래 복제해 온 그 지역 몹(같은 nativeId)의 이름·그림으로 되돌린다.
+ if(id!==ROOT_HOME&&id!==ROOT_ADD)for(const e of r.enemies){if(!isPatrol(e)||e.r74Monster!=='root')continue;const d=r.enemies.find(a=>a&&!isPatrol(a)&&!a.boss&&a.nativeId===e.nativeId);if(!d)continue;
+  e.r383From=e.name;if(!e.r248Key)e.r248Key=String(d.r248Key||d.name).replace(/ \d+$/,'');e.name=String(d.name).replace(/ \d+$/,'')+(/우두머리$/.test(e.name)?' 우두머리':'');e.r383RootFrom='root';delete e.r74Monster;stats.removed++;}
+ if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
+ // 늪 다크그린 뿌리 추적자(R382)도 R74 지도 그림이 이 시트를 가렸다 → 같은 방식으로 frameFor 사슬에 넘긴다.
+ if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;}
+ if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;
+  const ent=L.entry||{x:0,y:0},boss=r.enemies.find(e=>e.boss),rad=tpl.combatProfile?.bodyBlock?.r||.4;
+  const free=(x,y)=>{try{if(typeof blocked==='function'&&blocked(x,y,rad+.12,r))return false;}catch(_){}return r.enemies.every(a=>Math.hypot(a.x-x,a.y-y)>rad+(a.combatProfile?.bodyBlock?.r||.3)+.6);};
+  const cells=(L.floorCells||[]).map(([x,y])=>({x:x+.5,y:y+.5})).filter(c=>Math.hypot(c.x-ent.x,c.y-ent.y)>9&&(!boss||Math.hypot(c.x-boss.x,c.y-boss.y)>7));
+  cells.sort((a,b)=>hash(a.x+':'+a.y)-hash(b.x+':'+b.y));let n=0;
+  for(const c of cells){if(n>=6)break;if(!free(c.x,c.y))continue;const e=JSON.parse(JSON.stringify(tpl));
+   Object.assign(e,{id:'dist00:r383-root:'+n,name:'뿌리 추적자',x:c.x,y:c.y,homeX:c.x,homeY:c.y,hp:tpl.maxHp,maxHp:tpl.maxHp,deadRecorded:false,deadAt:undefined,nav:[],navAt:0,stuck:0,attack:null,rangedWindup:0,aim:null,cd:1.2,rest:0,state:'idle',moving:false,
+    explorationGroup:'dist00:r383-pack:'+Math.floor(n/2),explorationLeash:32,r383Added:true,r75Pack:undefined});delete e.r75Pack;delete e.r74Monster;r.enemies.push(e);n++;stats.added++;}}}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
- const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
+ const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
