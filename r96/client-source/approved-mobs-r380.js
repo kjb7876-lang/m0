@@ -65,7 +65,9 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
   cells.sort((a,b)=>hash(a.x+':'+a.y)-hash(b.x+':'+b.y));let n=0;
   for(const c of cells){if(n>=6)break;if(!free(c.x,c.y))continue;const e=JSON.parse(JSON.stringify(tpl));
    Object.assign(e,{id:'dist00:r383-root:'+n,name:'뿌리 추적자',x:c.x,y:c.y,homeX:c.x,homeY:c.y,hp:tpl.maxHp,maxHp:tpl.maxHp,deadRecorded:false,deadAt:undefined,nav:[],navAt:0,stuck:0,attack:null,rangedWindup:0,aim:null,cd:1.2,rest:0,state:'idle',moving:false,
-    explorationGroup:'dist00:r383-pack:'+Math.floor(n/2),explorationLeash:32,r383Added:true,r75Pack:undefined});delete e.r75Pack;delete e.r74Monster;r.enemies.push(e);n++;stats.added++;}}}
+    explorationGroup:'dist00:r383-pack:'+Math.floor(n/2),explorationLeash:32,r383Added:true,r75Pack:undefined});delete e.r75Pack;delete e.r74Monster;
+   // R74 순찰 만들 때처럼 R61 정규화에 원래 수치 보존으로 등록(JSON 복제는 WeakMap 등록을 안 옮김, Codex P2).
+   try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,r,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}r.enemies.push(e);n++;stats.added++;}}}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 그림 ──

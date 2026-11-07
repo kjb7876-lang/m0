@@ -13,6 +13,7 @@ ok(CS('mob-preload-r260.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign
 const S0={frameFor:(e,f)=>({path:'base'})};
 const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>0},time:1,layer:'STORY',room:{id:'dist01'},player:{x:0,y:0},
  readyImage:()=>({image:{naturalWidth:10}}),setTimeout:()=>0};ctx.window.window=ctx.window;
+const r61=[];ctx.window.__STORYWORLD_SCALE_MELEE_R61__={normalize:(e,r,o)=>r61.push([e.id,o])};
 ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nativeId:nid,spawnState:'active',x:1,y:1,homeX:1,homeY:1,hp:10,...o});
  if(id==='dist01')return{enemies:[mk('망각의 거미 1','dist01-sp1'),mk('망각의 거미 증원 2','dist01-sp1'),mk('중간보스 · 망각의 거미','dist01-sp1',{midboss:true}),mk('재 나방 1','dist01-sp1'),mk('보랏빛 알집지기 1','dist01-sp2'),mk('망각의 거미 수호자','dist01-sp1',{wardChampionR81:true}),mk('보스','dist01-boss',{boss:true})]};
  const pat=(i,mon,name,nid,o={})=>mk('p'+i,nid,{id:id+':r74-patrol:'+i,name,r74Monster:mon,maxHp:50,r75Pack:0,combatProfile:{bodyBlock:{r:.4}},...o});
@@ -38,6 +39,7 @@ ok(b07.enemies[1].name==='분노의 사냥개'&&b07.enemies[2].name==='분노의
 const roots=d00.enemies.filter(e=>e.r383Added);ok(roots.length===6&&roots.every((e,i)=>e.id==='dist00:r383-root:'+i&&e.name==='뿌리 추적자'&&e.maxHp===50&&e.r75Pack===undefined&&e.r74Monster===undefined)&&d00.enemies[0].boss,'dist00: 늪 순찰 수치로 뿌리 추적자 6마리 추가, 정규 무리 밖');
 ok(roots.every(e=>!e.squadLeaderR373&&!e.squadR373&&e.r373Slot===undefined&&e.damage===10&&e.maxHp===50),'분대 우두머리·분대 자리를 물려받지 않음(Codex P2)');
 ok(b07.enemies[2].r373Name==='분노의 사냥개'&&d03.enemies[2].r373Name==='쓰러진 수호병','R373 그릴 때 이름(r373Name)도 같이 바꿈(Codex P2)');
+ok(roots.every(e=>r61.some(([id,o])=>id===e.id&&o.preserveHealth&&o.preserveDamage)),'추가한 뿌리 추적자를 R61 정규화에 수치 보존으로 등록(Codex P2)');
 ok(roots.every(e=>Math.hypot(e.x-1.5,e.y-1.5)>9&&Math.hypot(e.x-3,e.y-3)>7),'입구·보스와 떨어진 자리');
 ok(JSON.stringify(ctx.makeRoom('dist00','STORY').enemies.map(e=>[e.x,e.y]))===JSON.stringify(d00.enemies.map(e=>[e.x,e.y])),'dist00 다시 만들어도 같은 자리');
 ok(ctx.makeRoom('dist03','DREAM').enemies.some(e=>e.name==='뿌리 추적자'),'DREAM 층은 그대로');
