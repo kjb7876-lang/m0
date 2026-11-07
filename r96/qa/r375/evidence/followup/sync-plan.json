@@ -1,0 +1,91 @@
+{
+  "mode": "read-only sync plan; sync/build not executed",
+  "lockedFiles": {
+    "r96/runtime-inputs.json": [
+      228,
+      217,
+      205,
+      108
+    ],
+    "r96/runtime-manifest.json": [
+      228,
+      217,
+      205,
+      108
+    ],
+    "r96/runtime-text/index.html": [
+      217,
+      205,
+      108
+    ],
+    "scripts/verify-r96-public.py": [
+      217,
+      205,
+      108
+    ],
+    ".github/workflows/pages.yml": [
+      217,
+      205,
+      187,
+      108,
+      26,
+      25,
+      24
+    ]
+  },
+  "sources": [
+    {
+      "name": "mobs-r109.js",
+      "sourceSha256": "dc33de3a9d4668ebfdba5e1d7098d271755a051a3a4c0ed950ba622fef741592",
+      "runtimeSha256": "a84f94e7659c9741152f64df46a41beed1dc683e5bf3b918ac1588d20be42e4f",
+      "manifestSha256": "a84f94e7659c9741152f64df46a41beed1dc683e5bf3b918ac1588d20be42e4f",
+      "registered": true,
+      "copyRequired": true
+    },
+    {
+      "name": "mob-unique-r248.js",
+      "sourceSha256": "45e3ed501df3aed0a0937070580829743f2ce161a7fab1f37fb4517ade6ee033",
+      "runtimeSha256": "511d6a26fc65edbd756b9dafb90ff8f5c6f8705b15759cf5f5dd8f3f3292d015",
+      "manifestSha256": "511d6a26fc65edbd756b9dafb90ff8f5c6f8705b15759cf5f5dd8f3f3292d015",
+      "registered": true,
+      "copyRequired": true
+    },
+    {
+      "name": "enemy-facing-r375.js",
+      "sourceSha256": "278ba1fa6791a2b500ea698e71c204374760fe6b32db2948b19d0307726a754e",
+      "runtimeSha256": null,
+      "manifestSha256": null,
+      "registered": false,
+      "copyRequired": true
+    },
+    {
+      "name": "world-scale-r375.js",
+      "sourceSha256": "8641e553076740a5646d6807931016e58c0d48a7ebbeb40e7cf887b2469488cd",
+      "runtimeSha256": null,
+      "manifestSha256": null,
+      "registered": false,
+      "copyRequired": true
+    }
+  ],
+  "manifestDigestValid": true,
+  "cause": "build-r96.py:43 compares manifest-built runtime with client-source; R109 and R248 differ",
+  "requiredSyncWrites": [
+    "runtime copies for all changed client-source/*.js",
+    "r96/runtime-manifest.json",
+    "r96/runtime-inputs.json"
+  ],
+  "registrationWrites": [
+    "r96/runtime-text/index.html",
+    "scripts/verify-r96-public.py",
+    ".github/workflows/pages.yml"
+  ],
+  "resolution": "integration owner must coordinate open PR ownership, then wire generation/collision/save boundaries and run sync; copying runtime alone invalidates manifest hashes",
+  "unchangedLockedFiles": true,
+  "lockedFileSha256": {
+    "r96/runtime-inputs.json": "b9fd1c45cb17f74a1ee2dc2cca96029f7861af54323cfcfcf68aa8f18266ff08",
+    "r96/runtime-manifest.json": "e6db128c3f2481e4a90f6c83208ba7fcfee5cbb55386b4cc512d420a06eb2e2d",
+    "r96/runtime-text/index.html": "8abc9e415e682ba90ecd707d63915b87c355ff7268e06605cdad221ef7a8a53a",
+    "scripts/verify-r96-public.py": "f12a69cf4f81a87c0f6dea15ee917533efffba71caa1df0fc6bbde0d97220423",
+    ".github/workflows/pages.yml": "7edf733491ae9dea8d2788726cb75bcdf074eebe7833db65ecedd0261c9991ce"
+  }
+}

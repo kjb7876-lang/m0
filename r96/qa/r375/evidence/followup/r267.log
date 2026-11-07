@@ -1,0 +1,22 @@
+PASS runtime copies match
+PASS both overlays are loaded by index.html
+PASS R219 indoor walls 2.85: roof caps and perimeter fascia are stretched so their top meets the wall top
+PASS the most common wall height wins (one tall pillar and decorative backdrop rocks are ignored)
+PASS the real hospital roof (not an R80 world roof) keeps its authored height
+PASS maps whose walls already are 2.705 stay unchanged
+PASS switch off restores the original height
+PASS no move before the hero has stayed above/below for 0.6 s
+PASS ordinary mob blinks to a spot level with the hero on screen (hero to its left/right)
+PASS after the blink the mob faces the hero sideways
+PASS the same mob waits its 3 s cooldown
+PASS bosses dash (not teleport): an in-between position is seen, then they end level with the hero
+PASS a boss that cannot move summons the hero beside it at the same screen height
+PASS hero summon has an 8 s cooldown
+PASS ordinary towers never drag the hero
+PASS no repositioning during an attack wind-up/strike
+PASS blocked side spots: the ordinary mob stays put
+PASS a mob already to the hero's left/right is left alone
+PASS paused while a panel is open
+PASS syntax roof
+PASS syntax gaze
+R267 21/21

@@ -1,0 +1,28 @@
+PASS data: every reassigned name has its own sheet (no two names share a sheet file)
+PASS every sheet exists with matching sha256 in the index (temporary pixel art, our own code)
+PASS known reuse cases are covered (ep1a08 orderlies, corrupted guardian names, samong puppets, story names in samong)
+PASS the first owner keeps the original art (백의 구속자, 늪에서 되살아난 전우, 얼굴 없는 남자의 박수 in story)
+PASS baseName strips 중간보스 · / 증원 / 추격대 / 후속 증원 / · 짙은 형상 / trailing number
+PASS a reassigned mob is drawn from its own sheet; the engine draw still runs (frame pick, shadow, hp bar) and only its body image is not painted
+PASS the owner of the original art is untouched (its body image is painted)
+PASS samong: a story mob name left by the donor is renamed to the samong mob name of that chapter; art = that name's own sheet (or a samong sheet), never the story art
+PASS samong bosses (canon names) keep their name but still get the samong sheet
+PASS new mob attack effect fires at the hero on contact (spider → web), once per attack
+PASS status effect: short slow through the engine slot (heroSlowUntil150 ≤ 1.1 s) with a Korean label
+PASS status effects are throttled to once per 4 s even when many mobs hit
+PASS several attack families are used (bite/claw/slash/pierce/web/acid/shock/chill/drop/thorns/thread…)
+/workspace/m0-r375/r96/qa/r248/r248-cpu-check.cjs:36
+const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail).slice(0,400)));
+                                                                                                                                                    ^
+
+TypeError: Cannot read properties of undefined (reading 'slice')
+    at Object.<anonymous> (/workspace/m0-r375/r96/qa/r248/r248-cpu-check.cjs:36:149)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1

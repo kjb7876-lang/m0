@@ -1,0 +1,27 @@
+PASS modules load
+PASS blueprint for every episode and stage
+PASS episode 0 has only the boss stage
+PASS 777 section table covers every text section (45)
+PASS section targets are valid episode/stage pairs
+PASS only paragraph-less sections fall back to the episode start
+PASS every record key exists and yields paragraphs
+PASS every record substring is found in its section
+PASS all layouts come from R105 blueprints and keep the R103 contracts (151 layouts)
+PASS outdoor stages carry a scene, lowered walls and a known family (39 stages)
+PASS markers and props stand on reachable floor with known art (130 markers, 1202 props)
+PASS marker read plays its paragraphs verbatim
+PASS marker read adds no explanation
+PASS 777 panel lists 16 episodes, 3 stages and every section
+PASS 777 object gained samong jumps
+PASS static prop art files exist
+PASS static plan: 7 pillars for dist03, weeds and hands for dist02
+PASS R103 still exposes go/test/inspect
+PASS drive art + boss fx modules load
+PASS drive art files exist (50)
+PASS drive art plan keys valid
+PASS boss palette covers all 16 samong bosses
+PASS palette entries well formed
+PASS place() dresses S-01 ascent (teapot + gardener)
+PASS S-07 table set + keyed mask, S-05 keyed window placed
+PASS place() fills every planned stage
+{"checks":26,"failed":0}

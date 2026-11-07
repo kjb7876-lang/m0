@@ -1,0 +1,5087 @@
+{
+  "mode": "pure geometry, real R115/R355 generators and phase1 collision; no campaign/save integration",
+  "passed": 657,
+  "total": 657,
+  "zones": 163,
+  "chapters": 16,
+  "totalMs": 823.61,
+  "maxCells": 15568,
+  "maxMs": 32.143,
+  "results": [
+    {
+      "name": "sz115-S02-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-02-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-02-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-02-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-02-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-02-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-8 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-8 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-8 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S02-8 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-P-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-P-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-P-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-P-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-P-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-P-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-P-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-P-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-P-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-01-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-01-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-01-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-01-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-01-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S01-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-03-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-03-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-03-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-03-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-03-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S03-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-8 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-8 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-8 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-8 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-9 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-9 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-9 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-9 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-10 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-10 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-10 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-10 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-11 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-11 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-11 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-11 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-12 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-12 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-12 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-12 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-13 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-13 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-13 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-13 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-04-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-04-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-04-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-04-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-04-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-14 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-14 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-14 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S04-14 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-05-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-05-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-05-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-05-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-05-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S05-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-8 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-8 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-8 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-8 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-9 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-9 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-9 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-9 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-10 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-10 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-10 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-10 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-11 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-11 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-11 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-11 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-12 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-12 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-12 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-12 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-13 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-13 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-13 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-13 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-14 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-14 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-14 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-14 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-15 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-15 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-15 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-15 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-16 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-16 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-16 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-16 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-17 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-17 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-17 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-17 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-18 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-18 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-18 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-18 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-19 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-19 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-19 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-19 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-20 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-20 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-20 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-20 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-21 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-21 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-21 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-21 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-22 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-22 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-22 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-22 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-06-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-06-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-06-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-06-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-06-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-23 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-23 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-23 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S06-23 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-S-07-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-07-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-07-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-07-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-S-07-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-S07-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RA-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RA-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RA-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RA-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RA-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RA-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RB-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RB-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RB-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RB-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RB-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RB-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RC-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RC-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RC-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RC-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RC-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RC-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RD-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RD-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RD-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RD-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RD-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RD-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RE-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RE-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RE-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RE-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RE-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RE-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RF-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RF-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RF-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RF-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RF-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RF-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-RG-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-RG-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-RG-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-RG-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-RG-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-5 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-5 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-5 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-5 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-6 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-6 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-6 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-6 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-7 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-7 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-7 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-7 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-8 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-8 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-8 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-8 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-9 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-9 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-9 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-9 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-10 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-10 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-10 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-10 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-11 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-11 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-11 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-RG-11 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-B exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-B floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-B scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-B door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-D exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-D floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-D scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz162-M-D door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz173-M-G exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz173-M-G floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz173-M-G scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz173-M-G door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-1 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-1 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-1 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-1 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-2 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-2 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-2 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-2 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-3 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-3 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-3 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-3 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-4 exactly 2x bounds / 4x unique floor cells / unchanged source",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-4 floor connectivity and all transformed objectives",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-4 scaled clue/grid/nav definitions match geometry",
+      "ok": true
+    },
+    {
+      "name": "sz115-M-4 door extensions cover only added aperture, centre remains passable",
+      "ok": true
+    },
+    {
+      "name": "all 16 chapters / 163 zones included",
+      "ok": true
+    },
+    {
+      "name": "polygon floors, branch points, refuge portal and edge widths share coordinates",
+      "ok": true
+    },
+    {
+      "name": "unknown doorway width fails explicitly instead of silently doubling doors",
+      "ok": true
+    },
+    {
+      "name": "vertical analytic hospital leaf and jambs use segment geometry",
+      "ok": true
+    },
+    {
+      "name": "horizontal and vertical closed doors cannot be bypassed through enlarged aperture",
+      "ok": true
+    }
+  ],
+  "rows": [
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-1",
+      "beforeCells": 1192,
+      "afterCells": 4768,
+      "bounds": [
+        0,
+        0,
+        154,
+        110
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 6.652
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-2",
+      "beforeCells": 2478,
+      "afterCells": 9912,
+      "bounds": [
+        0,
+        0,
+        160,
+        132
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 6.255
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-3",
+      "beforeCells": 1457,
+      "afterCells": 5828,
+      "bounds": [
+        0,
+        0,
+        122,
+        116
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.607
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-4",
+      "beforeCells": 1550,
+      "afterCells": 6200,
+      "bounds": [
+        0,
+        0,
+        132,
+        104
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 1.648
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-5",
+      "beforeCells": 1917,
+      "afterCells": 7668,
+      "bounds": [
+        0,
+        0,
+        146,
+        128
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 3.538
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-6",
+      "beforeCells": 1155,
+      "afterCells": 4620,
+      "bounds": [
+        0,
+        0,
+        150,
+        78
+      ],
+      "doors": 1,
+      "jambs": 2,
+      "ms": 3.428
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-7",
+      "beforeCells": 1519,
+      "afterCells": 6076,
+      "bounds": [
+        0,
+        0,
+        164,
+        120
+      ],
+      "doors": 1,
+      "jambs": 2,
+      "ms": 1.949
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz162-S-02-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 16.283
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz162-S-02-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.883
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz173-S-02-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.513
+    },
+    {
+      "chapter": "S-02",
+      "id": "sz115-S02-8",
+      "beforeCells": 1540,
+      "afterCells": 6160,
+      "bounds": [
+        0,
+        0,
+        156,
+        136
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 1.787
+    },
+    {
+      "chapter": "P",
+      "id": "sz115-P-1",
+      "beforeCells": 892,
+      "afterCells": 3568,
+      "bounds": [
+        0,
+        0,
+        130,
+        66
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.151
+    },
+    {
+      "chapter": "P",
+      "id": "sz115-P-2",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.081
+    },
+    {
+      "chapter": "P",
+      "id": "sz115-P-3",
+      "beforeCells": 2173,
+      "afterCells": 8692,
+      "bounds": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.575
+    },
+    {
+      "chapter": "P",
+      "id": "sz115-P-4",
+      "beforeCells": 1080,
+      "afterCells": 4320,
+      "bounds": [
+        0,
+        0,
+        148,
+        120
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 1.602
+    },
+    {
+      "chapter": "P",
+      "id": "sz162-P-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.894
+    },
+    {
+      "chapter": "P",
+      "id": "sz173-P-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 8.348
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz115-S01-1",
+      "beforeCells": 1983,
+      "afterCells": 7932,
+      "bounds": [
+        0,
+        0,
+        118,
+        166
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.304
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz115-S01-2",
+      "beforeCells": 3023,
+      "afterCells": 12092,
+      "bounds": [
+        0,
+        0,
+        142,
+        200
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.463
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz115-S01-3",
+      "beforeCells": 793,
+      "afterCells": 3172,
+      "bounds": [
+        0,
+        0,
+        112,
+        70
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.617
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz115-S01-4",
+      "beforeCells": 2113,
+      "afterCells": 8452,
+      "bounds": [
+        0,
+        0,
+        146,
+        110
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.581
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz162-S-01-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 4.779
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz162-S-01-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.639
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz173-S-01-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.693
+    },
+    {
+      "chapter": "S-01",
+      "id": "sz115-S01-5",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 1.756
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-1",
+      "beforeCells": 901,
+      "afterCells": 3604,
+      "bounds": [
+        0,
+        0,
+        112,
+        78
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 0.996
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-2",
+      "beforeCells": 3129,
+      "afterCells": 12516,
+      "bounds": [
+        0,
+        0,
+        158,
+        158
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.863
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-3",
+      "beforeCells": 2156,
+      "afterCells": 8624,
+      "bounds": [
+        0,
+        0,
+        136,
+        136
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 6.748
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-4",
+      "beforeCells": 916,
+      "afterCells": 3664,
+      "bounds": [
+        0,
+        0,
+        118,
+        76
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 6.512
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-5",
+      "beforeCells": 2322,
+      "afterCells": 9288,
+      "bounds": [
+        0,
+        0,
+        196,
+        118
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.743
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-6",
+      "beforeCells": 3892,
+      "afterCells": 15568,
+      "bounds": [
+        0,
+        0,
+        164,
+        164
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 32.143
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz162-S-03-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 10.309
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz162-S-03-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.782
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz173-S-03-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.044
+    },
+    {
+      "chapter": "S-03",
+      "id": "sz115-S03-7",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.726
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-1",
+      "beforeCells": 1768,
+      "afterCells": 7072,
+      "bounds": [
+        0,
+        0,
+        112,
+        160
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.762
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-2",
+      "beforeCells": 982,
+      "afterCells": 3928,
+      "bounds": [
+        0,
+        0,
+        118,
+        78
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.267
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-3",
+      "beforeCells": 1925,
+      "afterCells": 7700,
+      "bounds": [
+        0,
+        0,
+        212,
+        118
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 5.234
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-4",
+      "beforeCells": 976,
+      "afterCells": 3904,
+      "bounds": [
+        0,
+        0,
+        142,
+        92
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 2.429
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-5",
+      "beforeCells": 2507,
+      "afterCells": 10028,
+      "bounds": [
+        0,
+        0,
+        128,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.075
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-6",
+      "beforeCells": 1206,
+      "afterCells": 4824,
+      "bounds": [
+        0,
+        0,
+        174,
+        86
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 4.092
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-7",
+      "beforeCells": 1338,
+      "afterCells": 5352,
+      "bounds": [
+        0,
+        0,
+        172,
+        108
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 2.646
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-8",
+      "beforeCells": 3373,
+      "afterCells": 13492,
+      "bounds": [
+        0,
+        0,
+        164,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 9.979
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-9",
+      "beforeCells": 702,
+      "afterCells": 2808,
+      "bounds": [
+        0,
+        0,
+        108,
+        88
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.075
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-10",
+      "beforeCells": 1595,
+      "afterCells": 6380,
+      "bounds": [
+        0,
+        0,
+        178,
+        150
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 2.203
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-11",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.832
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-12",
+      "beforeCells": 2533,
+      "afterCells": 10132,
+      "bounds": [
+        0,
+        0,
+        146,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.334
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-13",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 11.983
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz162-S-04-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 6.054
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz162-S-04-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.039
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz173-S-04-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.144
+    },
+    {
+      "chapter": "S-04",
+      "id": "sz115-S04-14",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 3.007
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-1",
+      "beforeCells": 982,
+      "afterCells": 3928,
+      "bounds": [
+        0,
+        0,
+        118,
+        78
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 5.847
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-2",
+      "beforeCells": 2112,
+      "afterCells": 8448,
+      "bounds": [
+        0,
+        0,
+        190,
+        140
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.834
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-3",
+      "beforeCells": 950,
+      "afterCells": 3800,
+      "bounds": [
+        0,
+        0,
+        142,
+        90
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 1.321
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-4",
+      "beforeCells": 2520,
+      "afterCells": 10080,
+      "bounds": [
+        0,
+        0,
+        128,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.225
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-5",
+      "beforeCells": 1997,
+      "afterCells": 7988,
+      "bounds": [
+        0,
+        0,
+        212,
+        116
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 2.441
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz162-S-05-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.549
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz162-S-05-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.782
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz173-S-05-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.967
+    },
+    {
+      "chapter": "S-05",
+      "id": "sz115-S05-6",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.285
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-1",
+      "beforeCells": 2308,
+      "afterCells": 9232,
+      "bounds": [
+        0,
+        0,
+        190,
+        160
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.015
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-2",
+      "beforeCells": 1026,
+      "afterCells": 4104,
+      "bounds": [
+        0,
+        0,
+        142,
+        96
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 1.698
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-3",
+      "beforeCells": 3129,
+      "afterCells": 12516,
+      "bounds": [
+        0,
+        0,
+        158,
+        158
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 26.117
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-4",
+      "beforeCells": 2966,
+      "afterCells": 11864,
+      "bounds": [
+        0,
+        0,
+        146,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 17.367
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-5",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 3.144
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-6",
+      "beforeCells": 874,
+      "afterCells": 3496,
+      "bounds": [
+        0,
+        0,
+        112,
+        76
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.674
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-7",
+      "beforeCells": 1064,
+      "afterCells": 4256,
+      "bounds": [
+        0,
+        0,
+        142,
+        96
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 5.872
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-8",
+      "beforeCells": 2244,
+      "afterCells": 8976,
+      "bounds": [
+        0,
+        0,
+        190,
+        118
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 9.066
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-9",
+      "beforeCells": 1544,
+      "afterCells": 6176,
+      "bounds": [
+        0,
+        0,
+        202,
+        172
+      ],
+      "doors": 6,
+      "jambs": 12,
+      "ms": 3.304
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-10",
+      "beforeCells": 1983,
+      "afterCells": 7932,
+      "bounds": [
+        0,
+        0,
+        118,
+        166
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 8.321
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-11",
+      "beforeCells": 882,
+      "afterCells": 3528,
+      "bounds": [
+        0,
+        0,
+        114,
+        76
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.204
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-12",
+      "beforeCells": 3560,
+      "afterCells": 14240,
+      "bounds": [
+        0,
+        0,
+        168,
+        168
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 19.74
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-13",
+      "beforeCells": 955,
+      "afterCells": 3820,
+      "bounds": [
+        0,
+        0,
+        142,
+        98
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 1.743
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-14",
+      "beforeCells": 1278,
+      "afterCells": 5112,
+      "bounds": [
+        0,
+        0,
+        174,
+        98
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 6.612
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-15",
+      "beforeCells": 2906,
+      "afterCells": 11624,
+      "bounds": [
+        0,
+        0,
+        164,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.092
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-16",
+      "beforeCells": 1253,
+      "afterCells": 5012,
+      "bounds": [
+        0,
+        0,
+        174,
+        90
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 1.626
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-17",
+      "beforeCells": 836,
+      "afterCells": 3344,
+      "bounds": [
+        0,
+        0,
+        120,
+        66
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.798
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-18",
+      "beforeCells": 2677,
+      "afterCells": 10708,
+      "bounds": [
+        0,
+        0,
+        134,
+        194
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 6.39
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-19",
+      "beforeCells": 2028,
+      "afterCells": 8112,
+      "bounds": [
+        0,
+        0,
+        212,
+        118
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 5.497
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-20",
+      "beforeCells": 2906,
+      "afterCells": 11624,
+      "bounds": [
+        0,
+        0,
+        164,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.345
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-21",
+      "beforeCells": 892,
+      "afterCells": 3568,
+      "bounds": [
+        0,
+        0,
+        118,
+        72
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.371
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-22",
+      "beforeCells": 704,
+      "afterCells": 2816,
+      "bounds": [
+        0,
+        0,
+        108,
+        98
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.521
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz162-S-06-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.415
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz162-S-06-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.947
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz173-S-06-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.54
+    },
+    {
+      "chapter": "S-06",
+      "id": "sz115-S06-23",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 14.315
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz115-S07-1",
+      "beforeCells": 836,
+      "afterCells": 3344,
+      "bounds": [
+        0,
+        0,
+        120,
+        66
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.353
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz115-S07-2",
+      "beforeCells": 2186,
+      "afterCells": 8744,
+      "bounds": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.418
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz162-S-07-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.392
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz162-S-07-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.246
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz173-S-07-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.647
+    },
+    {
+      "chapter": "S-07",
+      "id": "sz115-S07-3",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 1.758
+    },
+    {
+      "chapter": "RA",
+      "id": "sz115-RA-1",
+      "beforeCells": 1688,
+      "afterCells": 6752,
+      "bounds": [
+        0,
+        0,
+        144,
+        120
+      ],
+      "doors": 5,
+      "jambs": 6,
+      "ms": 1.75
+    },
+    {
+      "chapter": "RA",
+      "id": "sz115-RA-2",
+      "beforeCells": 2940,
+      "afterCells": 11760,
+      "bounds": [
+        0,
+        0,
+        146,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.311
+    },
+    {
+      "chapter": "RA",
+      "id": "sz115-RA-3",
+      "beforeCells": 1246,
+      "afterCells": 4984,
+      "bounds": [
+        0,
+        0,
+        174,
+        98
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 2.156
+    },
+    {
+      "chapter": "RA",
+      "id": "sz115-RA-4",
+      "beforeCells": 2343,
+      "afterCells": 9372,
+      "bounds": [
+        0,
+        0,
+        126,
+        184
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.947
+    },
+    {
+      "chapter": "RA",
+      "id": "sz115-RA-5",
+      "beforeCells": 1034,
+      "afterCells": 4136,
+      "bounds": [
+        0,
+        0,
+        142,
+        92
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 4.644
+    },
+    {
+      "chapter": "RA",
+      "id": "sz162-RA-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 9.568
+    },
+    {
+      "chapter": "RA",
+      "id": "sz162-RA-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.79
+    },
+    {
+      "chapter": "RA",
+      "id": "sz173-RA-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.826
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-1",
+      "beforeCells": 820,
+      "afterCells": 3280,
+      "bounds": [
+        0,
+        0,
+        112,
+        72
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.776
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-2",
+      "beforeCells": 3129,
+      "afterCells": 12516,
+      "bounds": [
+        0,
+        0,
+        158,
+        158
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 14.631
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-3",
+      "beforeCells": 936,
+      "afterCells": 3744,
+      "bounds": [
+        0,
+        0,
+        142,
+        90
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 5.385
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-4",
+      "beforeCells": 1360,
+      "afterCells": 5440,
+      "bounds": [
+        0,
+        0,
+        142,
+        82
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.642
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-5",
+      "beforeCells": 954,
+      "afterCells": 3816,
+      "bounds": [
+        0,
+        0,
+        142,
+        92
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 1.859
+    },
+    {
+      "chapter": "RB",
+      "id": "sz162-RB-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 4.043
+    },
+    {
+      "chapter": "RB",
+      "id": "sz162-RB-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.91
+    },
+    {
+      "chapter": "RB",
+      "id": "sz173-RB-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.7
+    },
+    {
+      "chapter": "RB",
+      "id": "sz115-RB-6",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.362
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-1",
+      "beforeCells": 1755,
+      "afterCells": 7020,
+      "bounds": [
+        0,
+        0,
+        186,
+        148
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 1.974
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-2",
+      "beforeCells": 1275,
+      "afterCells": 5100,
+      "bounds": [
+        0,
+        0,
+        156,
+        92
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 5.358
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-3",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 4.236
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-4",
+      "beforeCells": 1136,
+      "afterCells": 4544,
+      "bounds": [
+        0,
+        0,
+        154,
+        120
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 2.486
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-5",
+      "beforeCells": 1216,
+      "afterCells": 4864,
+      "bounds": [
+        0,
+        0,
+        136,
+        82
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.908
+    },
+    {
+      "chapter": "RC",
+      "id": "sz162-RC-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 11.314
+    },
+    {
+      "chapter": "RC",
+      "id": "sz162-RC-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.204
+    },
+    {
+      "chapter": "RC",
+      "id": "sz173-RC-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.686
+    },
+    {
+      "chapter": "RC",
+      "id": "sz115-RC-6",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.841
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-1",
+      "beforeCells": 1092,
+      "afterCells": 4368,
+      "bounds": [
+        0,
+        0,
+        166,
+        142
+      ],
+      "doors": 6,
+      "jambs": 12,
+      "ms": 3.411
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-2",
+      "beforeCells": 2546,
+      "afterCells": 10184,
+      "bounds": [
+        0,
+        0,
+        146,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.374
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-3",
+      "beforeCells": 2672,
+      "afterCells": 10688,
+      "bounds": [
+        0,
+        0,
+        190,
+        168
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.142
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-4",
+      "beforeCells": 802,
+      "afterCells": 3208,
+      "bounds": [
+        0,
+        0,
+        118,
+        66
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.687
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-5",
+      "beforeCells": 1813,
+      "afterCells": 7252,
+      "bounds": [
+        0,
+        0,
+        212,
+        106
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 3.812
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-6",
+      "beforeCells": 2124,
+      "afterCells": 8496,
+      "bounds": [
+        0,
+        0,
+        190,
+        144
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.023
+    },
+    {
+      "chapter": "RD",
+      "id": "sz115-RD-7",
+      "beforeCells": 800,
+      "afterCells": 3200,
+      "bounds": [
+        0,
+        0,
+        120,
+        66
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.973
+    },
+    {
+      "chapter": "RD",
+      "id": "sz162-RD-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 6.586
+    },
+    {
+      "chapter": "RD",
+      "id": "sz162-RD-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 9.384
+    },
+    {
+      "chapter": "RD",
+      "id": "sz173-RD-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 9.29
+    },
+    {
+      "chapter": "RE",
+      "id": "sz115-RE-1",
+      "beforeCells": 2582,
+      "afterCells": 10328,
+      "bounds": [
+        0,
+        0,
+        166,
+        144
+      ],
+      "doors": 5,
+      "jambs": 6,
+      "ms": 4.944
+    },
+    {
+      "chapter": "RE",
+      "id": "sz115-RE-2",
+      "beforeCells": 2424,
+      "afterCells": 9696,
+      "bounds": [
+        0,
+        0,
+        160,
+        144
+      ],
+      "doors": 5,
+      "jambs": 6,
+      "ms": 3.169
+    },
+    {
+      "chapter": "RE",
+      "id": "sz162-RE-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 3.064
+    },
+    {
+      "chapter": "RE",
+      "id": "sz162-RE-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 6.273
+    },
+    {
+      "chapter": "RE",
+      "id": "sz173-RE-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.836
+    },
+    {
+      "chapter": "RE",
+      "id": "sz115-RE-3",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.31
+    },
+    {
+      "chapter": "RE",
+      "id": "sz115-RE-4",
+      "beforeCells": 690,
+      "afterCells": 2760,
+      "bounds": [
+        0,
+        0,
+        108,
+        94
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.792
+    },
+    {
+      "chapter": "RF",
+      "id": "sz162-RF-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 7.589
+    },
+    {
+      "chapter": "RF",
+      "id": "sz162-RF-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 11.463
+    },
+    {
+      "chapter": "RF",
+      "id": "sz173-RF-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 14.075
+    },
+    {
+      "chapter": "RF",
+      "id": "sz115-RF-1",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 3.798
+    },
+    {
+      "chapter": "RF",
+      "id": "sz115-RF-2",
+      "beforeCells": 1871,
+      "afterCells": 7484,
+      "bounds": [
+        0,
+        0,
+        212,
+        112
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 2.42
+    },
+    {
+      "chapter": "RF",
+      "id": "sz115-RF-3",
+      "beforeCells": 1000,
+      "afterCells": 4000,
+      "bounds": [
+        0,
+        0,
+        130,
+        70
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.081
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-1",
+      "beforeCells": 3560,
+      "afterCells": 14240,
+      "bounds": [
+        0,
+        0,
+        168,
+        168
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 9.094
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-2",
+      "beforeCells": 3386,
+      "afterCells": 13544,
+      "bounds": [
+        0,
+        0,
+        164,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 6.194
+    },
+    {
+      "chapter": "RG",
+      "id": "sz162-RG-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 6.921
+    },
+    {
+      "chapter": "RG",
+      "id": "sz162-RG-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 8.774
+    },
+    {
+      "chapter": "RG",
+      "id": "sz173-RG-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.798
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-3",
+      "beforeCells": 1291,
+      "afterCells": 5164,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 2.444
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-4",
+      "beforeCells": 1293,
+      "afterCells": 5172,
+      "bounds": [
+        0,
+        0,
+        174,
+        96
+      ],
+      "doors": 4,
+      "jambs": 8,
+      "ms": 3.899
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-5",
+      "beforeCells": 1063,
+      "afterCells": 4252,
+      "bounds": [
+        0,
+        0,
+        124,
+        78
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 1.449
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-6",
+      "beforeCells": 648,
+      "afterCells": 2592,
+      "bounds": [
+        0,
+        0,
+        106,
+        84
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 0.849
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-7",
+      "beforeCells": 2880,
+      "afterCells": 11520,
+      "bounds": [
+        0,
+        0,
+        164,
+        128
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 8.26
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-8",
+      "beforeCells": 1299,
+      "afterCells": 5196,
+      "bounds": [
+        0,
+        0,
+        156,
+        126
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 2.662
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-9",
+      "beforeCells": 3853,
+      "afterCells": 15412,
+      "bounds": [
+        0,
+        0,
+        164,
+        164
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 7.277
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-10",
+      "beforeCells": 1768,
+      "afterCells": 7072,
+      "bounds": [
+        0,
+        0,
+        112,
+        160
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 3.249
+    },
+    {
+      "chapter": "RG",
+      "id": "sz115-RG-11",
+      "beforeCells": 793,
+      "afterCells": 3172,
+      "bounds": [
+        0,
+        0,
+        112,
+        70
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.245
+    },
+    {
+      "chapter": "M",
+      "id": "sz162-M-B",
+      "beforeCells": 2781,
+      "afterCells": 11124,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 5.607
+    },
+    {
+      "chapter": "M",
+      "id": "sz162-M-D",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.255
+    },
+    {
+      "chapter": "M",
+      "id": "sz173-M-G",
+      "beforeCells": 2170,
+      "afterCells": 8680,
+      "bounds": [
+        0,
+        0,
+        152,
+        152
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 4.341
+    },
+    {
+      "chapter": "M",
+      "id": "sz115-M-1",
+      "beforeCells": 1435,
+      "afterCells": 5740,
+      "bounds": [
+        0,
+        0,
+        144,
+        136
+      ],
+      "doors": 5,
+      "jambs": 10,
+      "ms": 3.149
+    },
+    {
+      "chapter": "M",
+      "id": "sz115-M-2",
+      "beforeCells": 3399,
+      "afterCells": 13596,
+      "bounds": [
+        0,
+        0,
+        164,
+        146
+      ],
+      "doors": 0,
+      "jambs": 0,
+      "ms": 8.756
+    },
+    {
+      "chapter": "M",
+      "id": "sz115-M-3",
+      "beforeCells": 931,
+      "afterCells": 3724,
+      "bounds": [
+        0,
+        0,
+        124,
+        70
+      ],
+      "doors": 2,
+      "jambs": 4,
+      "ms": 2.814
+    },
+    {
+      "chapter": "M",
+      "id": "sz115-M-4",
+      "beforeCells": 1019,
+      "afterCells": 4076,
+      "bounds": [
+        0,
+        0,
+        142,
+        92
+      ],
+      "doors": 3,
+      "jambs": 6,
+      "ms": 3.92
+    }
+  ]
+}
