@@ -106,7 +106,7 @@ function mk({cinema=true,coop='off'}={}){const toasts=[],hurts=[],store={};
   const run=s=>{const end=clock+s;for(;;){timers.sort((a,b)=>a.at-b.at);const t=timers.find(t=>!t.dead&&t.at<=end);if(!t)break;clock=Math.max(clock,t.at);t.dead=true;t.f();}clock=end;};
   const tickIv=s=>{for(let i=0;i<s;i++){run(1);sb.__iv&&sb.__iv();}};
   tickIv(1);const i0=api.inspect();
-  ok('R370 rev 2: real zone keyed real:dist01 with combat estimate ×1.8 (216 s)',/^R370-cinema-[234]$/.test(i0.revision)&&i0.zone.key==='real:dist01'&&Math.abs(i0.zone.estimate-216)<1e-6,i0.zone);
+  ok('R370 rev 2: real zone keyed real:dist01 with combat estimate ×1.8 (216 s)',/^R370-cinema-[2345]$/.test(i0.revision)&&i0.zone.key==='real:dist01'&&Math.abs(i0.zone.estimate-216)<1e-6,i0.zone);
   const text=Array.from({length:400},(_,i)=>'전투 중에 이어질 원문 '+i+'번째 문장이 길게 이어졌다.').join(' ');
   vm.runInContext(`playScenes([{key:'dist01:pre',id:'dist01',title:'t',text:${JSON.stringify(text)}}],null)`,sb);
   const i1=api.inspect();ok('long scene: some sentences kept, the rest held in reserve (not thrown away)',i1.queue>0&&i1.reserve>0&&i1.stats.dropped===i1.reserve,{q:i1.queue,r:i1.reserve});
