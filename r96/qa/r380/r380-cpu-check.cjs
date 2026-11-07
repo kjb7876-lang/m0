@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===33,'33장(R380 5 + R381 7 + R382 16 + R383 2 + R386 3)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===34,'34장(R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -21,6 +21,8 @@ ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nati
  if(id==='dist03')return{enemies:[mk('쓰러진 수호병 3','dist03-s1',{r75Pack:0}),pat(0,'root','뿌리 추적자','dist03-s1'),pat(1,'root','뿌리 추적자 우두머리','dist03-s1',{squadLeaderR373:true,r373Name:'뿌리 추적자'})]};
  if(id==='ep1b07')return{enemies:[mk('불 속의 그림자 1','b07-f1'),pat(0,'glass','유리 망령','b07-f1'),pat(1,'glass','유리 망령 우두머리','b07-f1',{squadLeaderR373:true,r373Name:'유리 망령'})]};
  if(id==='dist00')return{exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('뿌리의 문지기','dist00-boss',{boss:true,x:3,y:3})]};
+ if(id==='ep1a10')return{enemies:[mk('오만의 폐허핵','mb-ep1a10',{midboss:true,spawnState:'hidden',maxHp:36355,hp:36355,damage:40,r248Key:'오만의 폐허핵',combatProfile:{bodyBlock:{r:.6}}}),mk('약 1','a10-h1')]};
+ if(id==='ep1a09')return{objective:{x:15,y:13},exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('주사실 감시환각 1','a09-o1',{x:19.5,y:19.5})]};
  if(id==='u202')return{enemies:[1,2,3,4,5].map(i=>mk('가짜 자비 수집가 '+i,'u202-e1',{combatProfile:{attackShape:{r:1}}})).concat([mk('가짜 자비 수집가 우두머리','u202-e1'),mk('복종 봉인구 1','u202-e2')])};return{enemies:[]};};
 vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
 const A=ctx.window.__STORYWORLD_APPROVED_MOBS_R380__,S=ctx.window.__STORYWORLD_STORY_COMBAT_R54__;
@@ -46,6 +48,11 @@ ok(ctx.makeRoom('dist03','DREAM').enemies.some(e=>e.name==='뿌리 추적자'),'
 ctx.room={id:'dist00'};ok(S.frameFor({id:'r0',name:'뿌리 추적자',hp:10,x:3,y:0},null)?.r380Mob==='root-stalker-r74-plain','dist00 뿌리 추적자 → R74 그림 재묶음 시트');
 ctx.room={id:'ep1b07'};ok(S.frameFor({id:'w0',name:'분노의 사냥개 우두머리',hp:10,x:3,y:0},null)?.r380Mob==='wrath-hound-v1','ep1b07 분노의 사냥개 시트');ctx.room={id:'dist01'};
 const f=(o)=>S.frameFor({id:Math.random()+'',hp:10,x:3,y:0,...o},null);
+{const a9=ctx.makeRoom('ep1a09','STORY'),sy=a9.enemies.filter(e=>e.r387Syringe);ok(sy.length===1&&sy[0].id==='ep1a09:r387-syringe-boss'&&sy[0].name==='중독을 부르는 주사기 환영체'&&sy[0].midboss===true&&!sy[0].boss&&sy[0].maxHp===36355&&sy[0].hp===36355&&sy[0].r383Added===true&&sy[0].r248Key===undefined,'R387 주사실에 주사기 환영체 중간보스 1(ep1a10 우두머리 수치, 계약 제외 표시)');
+ ok(Math.abs(Math.hypot(sy[0].x-15,sy[0].y-13)-4)<.8&&Math.hypot(sy[0].x-19.5,sy[0].y-19.5)>1.5&&sy[0].spawnState==='active','제단 4칸 둘레의 빈 칸, 처음부터 보임(다른 몹과 겹치지 않음)');
+ ok(r61.some(([id,o])=>id==='ep1a09:r387-syringe-boss'&&o.preserveHealth),'R61 등록');
+ ok(ctx.makeRoom('ep1a09','STORY').enemies.filter(e=>e.r387Syringe).length===1&&ctx.makeRoom('ep1a09','DREAM').enemies.every(e=>!e.r387Syringe)&&ctx.makeRoom('ep1a10','STORY').enemies.filter(e=>e.midboss).length===1,'다시 만들어도 1마리, DREAM·다른 지역 그대로');}
+ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midboss:true})?.r380Mob==='syringe-phantom-boss-v1','R387 주사기 환영체 시트');ctx.room={id:'dist01'};
 ctx.room={id:'ep1b08'};ok(f({name:'중간보스 · 육망성의 흑마술 실험체'})?.r380Mob==='hexagram-experiment-m031-v1'&&f({name:'흑마법사의 저주창 1'})?.path==='base','R386 ep1b08 흑마술 실험체 m031 v1(다른 몹 그대로)');
 ctx.room={id:'ep1a09'};ok(f({name:'유리 망령'})?.r380Mob==='glass-wraith-v1'&&f({name:'유리 망령 우두머리'})?.r380Mob==='glass-wraith-v1','R386 ep1a09 유리 망령 v1');
 ctx.room={id:'ep1b02'};ok(f({name:'유리 망령'})?.path==='base','R386 다른 맵 유리 망령은 그대로');
