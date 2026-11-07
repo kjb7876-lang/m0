@@ -1,0 +1,44 @@
+{
+  "scope": "only paired R208 ember-hound facing scene, original map size; headless provisional",
+  "reviewers": [
+    {
+      "field": "미술",
+      "score": 8.1
+    },
+    {
+      "field": "연출",
+      "score": 7.8
+    },
+    {
+      "field": "카메라·구도",
+      "score": 7.5
+    },
+    {
+      "field": "공간·환경",
+      "score": 8.0
+    },
+    {
+      "field": "조명·색채",
+      "score": 8.2
+    },
+    {
+      "field": "애니메이션·VFX",
+      "score": 7.95
+    },
+    {
+      "field": "UX·레벨",
+      "score": 8.0
+    }
+  ],
+  "mean": 7.935714285714285,
+  "UXlevelAggregation": "UX 8.1 and level/spatial 7.9 averaged to 8.0",
+  "threshold": ">7.77",
+  "overallTaskPass": false,
+  "limits": [
+    "No expanded-map gameplay screenshots",
+    "No natural continuous combat verification",
+    "No all-boss direction certification",
+    "Mobile foreground occludes left silhouette",
+    "No physical GPU/mobile device verification"
+  ]
+}

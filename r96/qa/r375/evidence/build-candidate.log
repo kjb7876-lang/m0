@@ -1,0 +1,9 @@
+{"status": "R62_RUNTIME_RECONSTRUCTION_PASSED", "runtimeFiles": 1906, "siteFiles": 1908, "runtimeBytes": 464859943, "webHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc", "archiveCount": 87, "archivesInPublishedSite": false, "sourceHTMLSha256": "24ecfda258afcf5a03d698f3589577e2142ee060216fa25559329430bdf32bdc", "output": "/tmp/r96-build-et9qy_bj/base/docs"}
+Traceback (most recent call last):
+  File "/workspace/m0-r375/scripts/build-r96.py", line 46, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/m0-r375/scripts/build-r96.py", line 43, in main
+    if (TARGET/p.name).exists():assert p.read_bytes()==(TARGET/p.name).read_bytes(),p.name
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: mobs-r109.js

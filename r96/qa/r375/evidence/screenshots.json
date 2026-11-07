@@ -1,0 +1,38 @@
+[
+  {
+    "file": "pc-before.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 1772962,
+    "sha256": "1edc3e55ab952f17c9951efcf7b819851df039dc8edbe877ef1889aef1e6c646",
+    "originalPNGsha256": "3f74d293763f4db6f1d7fefc992f14003f205b245e910881a54f521d072d83d2",
+    "conversion": "lossless WebP; RGBA pixels verified identical; no resize or correction"
+  },
+  {
+    "file": "pc-after.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 1772954,
+    "sha256": "41d3fd0ca76fcedd86e86452755ae090bf728f92e1fa5a51554e9a69767f2113",
+    "originalPNGsha256": "02cce61d78346c75d84716bae6f1bfcd50ac81678e6269d2833c528f16da586d",
+    "conversion": "lossless WebP; RGBA pixels verified identical; no resize or correction"
+  },
+  {
+    "file": "mobile-before.webp",
+    "width": 1170,
+    "height": 2532,
+    "bytes": 2268372,
+    "sha256": "ac5598e28b3b1d6bbc4784dde7585c98a3a7e4a8eec5bd63e70f178c104258ee",
+    "originalPNGsha256": "9d1a189cfff2f3635698d3b5599b0f72b3efd1f4fe54c357a2d7a81ee534e0ff",
+    "conversion": "lossless WebP; RGBA pixels verified identical; no resize or correction"
+  },
+  {
+    "file": "mobile-after.webp",
+    "width": 1170,
+    "height": 2532,
+    "bytes": 2262936,
+    "sha256": "c67bd96573639ebdd57db5f3566f81f67eaaba212f00e313b34ff79743856266",
+    "originalPNGsha256": "40d243d4c53b56ebfa31b6db8834381e1b239b627e2bbf9d78208b73feafc429",
+    "conversion": "lossless WebP; RGBA pixels verified identical; no resize or correction"
+  }
+]

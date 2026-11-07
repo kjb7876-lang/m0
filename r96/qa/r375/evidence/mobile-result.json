@@ -1,0 +1,2265 @@
+{
+  "mode": "headless controlled placed-actor scene; geometry transformed offline only",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "hashes": {
+    "enemy-facing-r375.js": "278ba1fa6791a2b500ea698e71c204374760fe6b32db2948b19d0307726a754e",
+    "mob-unique-r248.js": "45e3ed501df3aed0a0937070580829743f2ce161a7fab1f37fb4517ade6ee033",
+    "mobs-r109.js": "dc33de3a9d4668ebfdba5e1d7098d271755a051a3a4c0ed950ba622fef741592",
+    "world-scale-r375.js": "616371dfe2aef12c23a4f16e8380798256605cc1c6f0038810babf1dd7935ad4"
+  },
+  "fixture": {
+    "id": "dist03-g1",
+    "name": "피냄새 추적자 추격대",
+    "art": "assets/r275/mobs/ember-hound.webp",
+    "authored": "right",
+    "r248": null,
+    "frame": {
+      "path": "assets/r275/mobs/ember-hound.webp",
+      "assetFrame": {
+        "sourceRect": [
+          1240,
+          0,
+          155,
+          237
+        ],
+        "pivot": [
+          77.5,
+          223.33
+        ],
+        "visibleHeight": 150
+      },
+      "sourceAlphaCore": [
+        1240,
+        0,
+        155,
+        237
+      ],
+      "metricThreshold": 16,
+      "sourcePixelsEdited": false,
+      "normalizedFullRectangleExtents": [
+        -0.5166666666666667,
+        -1.4888666666666668,
+        0.5166666666666667,
+        0.09113333333333325
+      ],
+      "r208Mob": "ember-hound",
+      "flip": false
+    },
+    "enemy": {
+      "x": 53.8788636976219,
+      "y": 49.49036219166643
+    },
+    "player": {
+      "x": 55.578863697621905,
+      "y": 49.49036219166643
+    }
+  },
+  "shots": [
+    {
+      "flip": false,
+      "angle": 3.141592653589793,
+      "origin": {
+        "x": 53.8788636976219,
+        "y": 49.49036219166643
+      },
+      "position": [
+        53.8788636976219,
+        49.49036219166643,
+        55.578863697621905,
+        49.49036219166643
+      ],
+      "path": "assets/r275/mobs/ember-hound.webp",
+      "rect": [
+        1240,
+        0,
+        155,
+        237
+      ],
+      "saveKeys": [
+        "auto",
+        "bossHpExtraOct11",
+        "campaignDifficultyR63",
+        "campaignHpR63",
+        "campaignPointDropsR64",
+        "castleDefenseR75",
+        "cheat777",
+        "combatHealthR26",
+        "combatRhythmR26",
+        "dancePolicyR75",
+        "dataRevision",
+        "distributionCommit",
+        "ego151",
+        "ending",
+        "enemyDensityScaleR40",
+        "enemyHpScaleE159",
+        "enemyHpScaleR40",
+        "exploration",
+        "explorationHomes",
+        "goldenR72",
+        "growthR103",
+        "guide",
+        "healthR71",
+        "hero",
+        "hospitalBossHpScaleR43",
+        "hospitalBossR53",
+        "hospitalHpScaleR52",
+        "hospitalLayoutR53",
+        "hospitalMaze5",
+        "hospitalMazeR1",
+        "hospitalMedicalR49Scale",
+        "hospitalNavigationR52",
+        "hospitalPressureR54",
+        "hospitalSpawnsR50",
+        "imageEquivalenceSha256",
+        "lastHub",
+        "layer",
+        "mazeR73",
+        "narrativeObjectivesR75",
+        "narrativeR75",
+        "player",
+        "progress",
+        "progressionR62",
+        "readScenes",
+        "rooms",
+        "routeEntriesR72",
+        "samongMapsR105",
+        "samongR103",
+        "scaleMeleeR61",
+        "schemaVersion",
+        "scope",
+        "settings",
+        "silverDefaultR243",
+        "silverR74",
+        "skillFormsSix",
+        "source",
+        "squadsR373",
+        "storyCampaignR54",
+        "storyWER",
+        "summonsR61",
+        "time",
+        "unlockedRegions",
+        "version",
+        "visited",
+        "worldMazeR81",
+        "worldR74",
+        "worldR75",
+        "zone",
+        "zoom"
+      ],
+      "inspect": {
+        "revision": "R375-facing-1",
+        "enabled": false,
+        "stats": {
+          "resolved": 12,
+          "held": 0,
+          "flips": 4,
+          "unique": 8
+        },
+        "installed": true
+      }
+    },
+    {
+      "flip": true,
+      "angle": 3.141592653589793,
+      "origin": {
+        "x": 53.8788636976219,
+        "y": 49.49036219166643
+      },
+      "position": [
+        53.8788636976219,
+        49.49036219166643,
+        55.578863697621905,
+        49.49036219166643
+      ],
+      "path": "assets/r275/mobs/ember-hound.webp",
+      "rect": [
+        1240,
+        0,
+        155,
+        237
+      ],
+      "saveKeys": [
+        "auto",
+        "bossHpExtraOct11",
+        "campaignDifficultyR63",
+        "campaignHpR63",
+        "campaignPointDropsR64",
+        "castleDefenseR75",
+        "cheat777",
+        "combatHealthR26",
+        "combatRhythmR26",
+        "dancePolicyR75",
+        "dataRevision",
+        "distributionCommit",
+        "ego151",
+        "ending",
+        "enemyDensityScaleR40",
+        "enemyHpScaleE159",
+        "enemyHpScaleR40",
+        "exploration",
+        "explorationHomes",
+        "goldenR72",
+        "growthR103",
+        "guide",
+        "healthR71",
+        "hero",
+        "hospitalBossHpScaleR43",
+        "hospitalBossR53",
+        "hospitalHpScaleR52",
+        "hospitalLayoutR53",
+        "hospitalMaze5",
+        "hospitalMazeR1",
+        "hospitalMedicalR49Scale",
+        "hospitalNavigationR52",
+        "hospitalPressureR54",
+        "hospitalSpawnsR50",
+        "imageEquivalenceSha256",
+        "lastHub",
+        "layer",
+        "mazeR73",
+        "narrativeObjectivesR75",
+        "narrativeR75",
+        "player",
+        "progress",
+        "progressionR62",
+        "readScenes",
+        "rooms",
+        "routeEntriesR72",
+        "samongMapsR105",
+        "samongR103",
+        "scaleMeleeR61",
+        "schemaVersion",
+        "scope",
+        "settings",
+        "silverDefaultR243",
+        "silverR74",
+        "skillFormsSix",
+        "source",
+        "squadsR373",
+        "storyCampaignR54",
+        "storyWER",
+        "summonsR61",
+        "time",
+        "unlockedRegions",
+        "version",
+        "visited",
+        "worldMazeR81",
+        "worldR74",
+        "worldR75",
+        "zone",
+        "zoom"
+      ],
+      "inspect": {
+        "revision": "R375-facing-1",
+        "enabled": true,
+        "stats": {
+          "resolved": 14,
+          "held": 0,
+          "flips": 6,
+          "unique": 8
+        },
+        "installed": true
+      }
+    }
+  ],
+  "geometry": {
+    "rows": [
+      {
+        "id": "hub",
+        "layer": "STORY",
+        "before": 864,
+        "after": 3456,
+        "bounds": [
+          0,
+          0,
+          72,
+          68
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist00",
+        "layer": "STORY",
+        "before": 2602,
+        "after": 10408,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist01",
+        "layer": "STORY",
+        "before": 2433,
+        "after": 9732,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist02",
+        "layer": "STORY",
+        "before": 2443,
+        "after": 9772,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist03",
+        "layer": "STORY",
+        "before": 2135,
+        "after": 8540,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist04",
+        "layer": "STORY",
+        "before": 2312,
+        "after": 9248,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist05",
+        "layer": "STORY",
+        "before": 2175,
+        "after": 8700,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist06",
+        "layer": "STORY",
+        "before": 2427,
+        "after": 9708,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a08",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a09",
+        "layer": "STORY",
+        "before": 3599,
+        "after": 14396,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a09b",
+        "layer": "STORY",
+        "before": 3316,
+        "after": 13264,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a10",
+        "layer": "STORY",
+        "before": 3800,
+        "after": 15200,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a11",
+        "layer": "STORY",
+        "before": 3548,
+        "after": 14192,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "dreamRest",
+        "layer": "STORY",
+        "before": 1530,
+        "after": 6120,
+        "bounds": [
+          2,
+          2,
+          178,
+          98
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b01",
+        "layer": "STORY",
+        "before": 2475,
+        "after": 9900,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b02",
+        "layer": "STORY",
+        "before": 3401,
+        "after": 13604,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b03",
+        "layer": "STORY",
+        "before": 3669,
+        "after": 14676,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b04",
+        "layer": "STORY",
+        "before": 3663,
+        "after": 14652,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b05",
+        "layer": "STORY",
+        "before": 3618,
+        "after": 14472,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b06",
+        "layer": "STORY",
+        "before": 3558,
+        "after": 14232,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b06b",
+        "layer": "STORY",
+        "before": 2361,
+        "after": 9444,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b07",
+        "layer": "STORY",
+        "before": 3284,
+        "after": 13136,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b08",
+        "layer": "STORY",
+        "before": 2311,
+        "after": 9244,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b09",
+        "layer": "STORY",
+        "before": 3646,
+        "after": 14584,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "restEp1b",
+        "layer": "STORY",
+        "before": 1578,
+        "after": 6312,
+        "bounds": [
+          2,
+          2,
+          178,
+          98
+        ],
+        "ok": true
+      },
+      {
+        "id": "u201",
+        "layer": "STORY",
+        "before": 3794,
+        "after": 15176,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "u202",
+        "layer": "STORY",
+        "before": 3651,
+        "after": 14604,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "u204",
+        "layer": "STORY",
+        "before": 3394,
+        "after": 13576,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "u205",
+        "layer": "STORY",
+        "before": 3439,
+        "after": 13756,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "u206",
+        "layer": "STORY",
+        "before": 3588,
+        "after": 14352,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "u203",
+        "layer": "STORY",
+        "before": 3652,
+        "after": 14608,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "restU2",
+        "layer": "STORY",
+        "before": 1790,
+        "after": 7160,
+        "bounds": [
+          2,
+          2,
+          178,
+          118
+        ],
+        "ok": true
+      },
+      {
+        "id": "last304",
+        "layer": "STORY",
+        "before": 2544,
+        "after": 10176,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "last305",
+        "layer": "STORY",
+        "before": 2618,
+        "after": 10472,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "last301",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "last302",
+        "layer": "STORY",
+        "before": 2144,
+        "after": 8576,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "last303",
+        "layer": "STORY",
+        "before": 2551,
+        "after": 10204,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "restLast3",
+        "layer": "STORY",
+        "before": 1698,
+        "after": 6792,
+        "bounds": [
+          2,
+          2,
+          158,
+          118
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair01",
+        "layer": "STORY",
+        "before": 2272,
+        "after": 9088,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair04",
+        "layer": "STORY",
+        "before": 2151,
+        "after": 8604,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair05",
+        "layer": "STORY",
+        "before": 2530,
+        "after": 10120,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair06",
+        "layer": "STORY",
+        "before": 1974,
+        "after": 7896,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair07",
+        "layer": "STORY",
+        "before": 2267,
+        "after": 9068,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair08",
+        "layer": "STORY",
+        "before": 1961,
+        "after": 7844,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair09",
+        "layer": "STORY",
+        "before": 2069,
+        "after": 8276,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair10",
+        "layer": "STORY",
+        "before": 2060,
+        "after": 8240,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair02",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair03",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "restKairo",
+        "layer": "STORY",
+        "before": 1710,
+        "after": 6840,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando01",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando02",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando03",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "restHando",
+        "layer": "STORY",
+        "before": 1707,
+        "after": 6828,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder01",
+        "layer": "STORY",
+        "before": 3640,
+        "after": 14560,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder02",
+        "layer": "STORY",
+        "before": 3265,
+        "after": 13060,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder04",
+        "layer": "STORY",
+        "before": 3424,
+        "after": 13696,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder03",
+        "layer": "STORY",
+        "before": 3629,
+        "after": 14516,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult01",
+        "layer": "STORY",
+        "before": 3070,
+        "after": 12280,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult02",
+        "layer": "STORY",
+        "before": 3070,
+        "after": 12280,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult05",
+        "layer": "STORY",
+        "before": 3660,
+        "after": 14640,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult06",
+        "layer": "STORY",
+        "before": 3657,
+        "after": 14628,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult03",
+        "layer": "STORY",
+        "before": 3602,
+        "after": 14408,
+        "bounds": [
+          0,
+          0,
+          136,
+          140
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult04",
+        "layer": "STORY",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "village",
+        "layer": "STORY",
+        "before": 1789,
+        "after": 7156,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "hub",
+        "layer": "DREAM",
+        "before": 1744,
+        "after": 6976,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist00",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist04",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist05",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dist06",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a08",
+        "layer": "DREAM",
+        "before": 8022,
+        "after": 32088,
+        "bounds": [
+          0,
+          0,
+          174,
+          226
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a09",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a09b",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a10",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1a11",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "dreamRest",
+        "layer": "DREAM",
+        "before": 1530,
+        "after": 6120,
+        "bounds": [
+          2,
+          2,
+          178,
+          98
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b04",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b05",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b06",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b06b",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b07",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b08",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "ep1b09",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "restEp1b",
+        "layer": "DREAM",
+        "before": 1578,
+        "after": 6312,
+        "bounds": [
+          2,
+          2,
+          178,
+          98
+        ],
+        "ok": true
+      },
+      {
+        "id": "u201",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "u202",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "u204",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "u205",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "u206",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "u203",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "restU2",
+        "layer": "DREAM",
+        "before": 1790,
+        "after": 7160,
+        "bounds": [
+          2,
+          2,
+          178,
+          118
+        ],
+        "ok": true
+      },
+      {
+        "id": "last304",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "last305",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "last301",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "last302",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "last303",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "restLast3",
+        "layer": "DREAM",
+        "before": 1698,
+        "after": 6792,
+        "bounds": [
+          2,
+          2,
+          158,
+          118
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair04",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair05",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair06",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair07",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair08",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair09",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair10",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "kair03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "restKairo",
+        "layer": "DREAM",
+        "before": 1710,
+        "after": 6840,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "hando03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "restHando",
+        "layer": "DREAM",
+        "before": 1707,
+        "after": 6828,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder04",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "murder03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult01",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult02",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult05",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult06",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult03",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "cult04",
+        "layer": "DREAM",
+        "before": 3684,
+        "after": 14736,
+        "bounds": [
+          -56,
+          -56,
+          162,
+          162
+        ],
+        "ok": true
+      },
+      {
+        "id": "village",
+        "layer": "DREAM",
+        "before": 1789,
+        "after": 7156,
+        "bounds": [
+          2,
+          2,
+          158,
+          138
+        ],
+        "ok": true
+      }
+    ],
+    "inspect": {
+      "revision": "R375-geometry-1",
+      "autoInstalled": false,
+      "requires": [
+        "generation-boundaries",
+        "hospital-collision",
+        "canonical-save-roundtrip",
+        "dynamic-placement"
+      ]
+    }
+  },
+  "results": [
+    {
+      "name": "fixture uses actual R208 sheet with no R248 replacement",
+      "ok": true,
+      "info": {
+        "id": "dist03-g1",
+        "name": "피냄새 추적자 추격대",
+        "art": "assets/r275/mobs/ember-hound.webp",
+        "authored": "right",
+        "r248": null,
+        "frame": {
+          "path": "assets/r275/mobs/ember-hound.webp",
+          "assetFrame": {
+            "sourceRect": [
+              1240,
+              0,
+              155,
+              237
+            ],
+            "pivot": [
+              77.5,
+              223.33
+            ],
+            "visibleHeight": 150
+          },
+          "sourceAlphaCore": [
+            1240,
+            0,
+            155,
+            237
+          ],
+          "metricThreshold": 16,
+          "sourcePixelsEdited": false,
+          "normalizedFullRectangleExtents": [
+            -0.5166666666666667,
+            -1.4888666666666668,
+            0.5166666666666667,
+            0.09113333333333325
+          ],
+          "r208Mob": "ember-hound",
+          "flip": false
+        },
+        "enemy": {
+          "x": 53.8788636976219,
+          "y": 49.49036219166643
+        },
+        "player": {
+          "x": 55.578863697621905,
+          "y": 49.49036219166643
+        }
+      }
+    },
+    {
+      "name": "actual body flips to committed attack direction after player crosses",
+      "ok": true,
+      "info": [
+        {
+          "flip": false,
+          "angle": 3.141592653589793,
+          "origin": {
+            "x": 53.8788636976219,
+            "y": 49.49036219166643
+          },
+          "position": [
+            53.8788636976219,
+            49.49036219166643,
+            55.578863697621905,
+            49.49036219166643
+          ],
+          "path": "assets/r275/mobs/ember-hound.webp",
+          "rect": [
+            1240,
+            0,
+            155,
+            237
+          ],
+          "saveKeys": [
+            "auto",
+            "bossHpExtraOct11",
+            "campaignDifficultyR63",
+            "campaignHpR63",
+            "campaignPointDropsR64",
+            "castleDefenseR75",
+            "cheat777",
+            "combatHealthR26",
+            "combatRhythmR26",
+            "dancePolicyR75",
+            "dataRevision",
+            "distributionCommit",
+            "ego151",
+            "ending",
+            "enemyDensityScaleR40",
+            "enemyHpScaleE159",
+            "enemyHpScaleR40",
+            "exploration",
+            "explorationHomes",
+            "goldenR72",
+            "growthR103",
+            "guide",
+            "healthR71",
+            "hero",
+            "hospitalBossHpScaleR43",
+            "hospitalBossR53",
+            "hospitalHpScaleR52",
+            "hospitalLayoutR53",
+            "hospitalMaze5",
+            "hospitalMazeR1",
+            "hospitalMedicalR49Scale",
+            "hospitalNavigationR52",
+            "hospitalPressureR54",
+            "hospitalSpawnsR50",
+            "imageEquivalenceSha256",
+            "lastHub",
+            "layer",
+            "mazeR73",
+            "narrativeObjectivesR75",
+            "narrativeR75",
+            "player",
+            "progress",
+            "progressionR62",
+            "readScenes",
+            "rooms",
+            "routeEntriesR72",
+            "samongMapsR105",
+            "samongR103",
+            "scaleMeleeR61",
+            "schemaVersion",
+            "scope",
+            "settings",
+            "silverDefaultR243",
+            "silverR74",
+            "skillFormsSix",
+            "source",
+            "squadsR373",
+            "storyCampaignR54",
+            "storyWER",
+            "summonsR61",
+            "time",
+            "unlockedRegions",
+            "version",
+            "visited",
+            "worldMazeR81",
+            "worldR74",
+            "worldR75",
+            "zone",
+            "zoom"
+          ],
+          "inspect": {
+            "revision": "R375-facing-1",
+            "enabled": false,
+            "stats": {
+              "resolved": 12,
+              "held": 0,
+              "flips": 4,
+              "unique": 8
+            },
+            "installed": true
+          }
+        },
+        {
+          "flip": true,
+          "angle": 3.141592653589793,
+          "origin": {
+            "x": 53.8788636976219,
+            "y": 49.49036219166643
+          },
+          "position": [
+            53.8788636976219,
+            49.49036219166643,
+            55.578863697621905,
+            49.49036219166643
+          ],
+          "path": "assets/r275/mobs/ember-hound.webp",
+          "rect": [
+            1240,
+            0,
+            155,
+            237
+          ],
+          "saveKeys": [
+            "auto",
+            "bossHpExtraOct11",
+            "campaignDifficultyR63",
+            "campaignHpR63",
+            "campaignPointDropsR64",
+            "castleDefenseR75",
+            "cheat777",
+            "combatHealthR26",
+            "combatRhythmR26",
+            "dancePolicyR75",
+            "dataRevision",
+            "distributionCommit",
+            "ego151",
+            "ending",
+            "enemyDensityScaleR40",
+            "enemyHpScaleE159",
+            "enemyHpScaleR40",
+            "exploration",
+            "explorationHomes",
+            "goldenR72",
+            "growthR103",
+            "guide",
+            "healthR71",
+            "hero",
+            "hospitalBossHpScaleR43",
+            "hospitalBossR53",
+            "hospitalHpScaleR52",
+            "hospitalLayoutR53",
+            "hospitalMaze5",
+            "hospitalMazeR1",
+            "hospitalMedicalR49Scale",
+            "hospitalNavigationR52",
+            "hospitalPressureR54",
+            "hospitalSpawnsR50",
+            "imageEquivalenceSha256",
+            "lastHub",
+            "layer",
+            "mazeR73",
+            "narrativeObjectivesR75",
+            "narrativeR75",
+            "player",
+            "progress",
+            "progressionR62",
+            "readScenes",
+            "rooms",
+            "routeEntriesR72",
+            "samongMapsR105",
+            "samongR103",
+            "scaleMeleeR61",
+            "schemaVersion",
+            "scope",
+            "settings",
+            "silverDefaultR243",
+            "silverR74",
+            "skillFormsSix",
+            "source",
+            "squadsR373",
+            "storyCampaignR54",
+            "storyWER",
+            "summonsR61",
+            "time",
+            "unlockedRegions",
+            "version",
+            "visited",
+            "worldMazeR81",
+            "worldR74",
+            "worldR75",
+            "zone",
+            "zoom"
+          ],
+          "inspect": {
+            "revision": "R375-facing-1",
+            "enabled": true,
+            "stats": {
+              "resolved": 14,
+              "held": 0,
+              "flips": 6,
+              "unique": 8
+            },
+            "installed": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "position, origin, frame crop, attack angle and save schema unchanged",
+      "ok": true
+    },
+    {
+      "name": "all 64 native region IDs in STORY and DREAM transform without source mutation",
+      "ok": true,
+      "info": {
+        "rows": 128,
+        "failures": [],
+        "autoInstalled": false
+      }
+    },
+    {
+      "name": "geometry remains inactive until runtime integration is complete",
+      "ok": true
+    },
+    {
+      "name": "actual save restore matches disabled control; no R375 save fields",
+      "ok": true,
+      "info": {
+        "expected": {
+          "zone": "dist03",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 55.578863697621905,
+          "y": 49.49036219166643
+        },
+        "candidate": {
+          "zone": "dist03",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 57.5,
+          "y": 57.5
+        },
+        "control": {
+          "zone": "dist03",
+          "layer": "STORY",
+          "hero": "hwando",
+          "hp": 777,
+          "x": 57.5,
+          "y": 57.5
+        },
+        "noNewFields": true
+      }
+    },
+    {
+      "name": "no page errors",
+      "ok": true,
+      "info": []
+    }
+  ],
+  "errors": []
+}

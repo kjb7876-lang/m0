@@ -1,0 +1,18 @@
+[
+  {
+    "path": "assets/r275/mobs/root-bound-ghoul.webp",
+    "origin": "existing repository runtime asset",
+    "bytes": 135922,
+    "sha256": "a777f9c22367e761af2ccbdc07ded9f117097465dfa46277c6738026d7dcbd70",
+    "usage": "actual browser frame, no pixel edits",
+    "newCost": false
+  },
+  {
+    "path": "assets/r275/mobs/ember-hound.webp",
+    "origin": "existing repository runtime asset",
+    "bytes": 310820,
+    "sha256": "2c670e93b3d1af9fa680e0b22565e2402ef912e1e3c5851c25ce3c476da2d632",
+    "usage": "actual browser frame, no pixel edits",
+    "newCost": false
+  }
+]

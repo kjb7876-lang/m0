@@ -1,0 +1,17 @@
+PASS committed melee beats player crossing in all eight sectors
+PASS R200 right-authored shade honours melee/recovery angle
+PASS left-authored R223 frame mirrors exactly once
+PASS R54 ranged contact/recovery keeps its angle after windup ends
+PASS native rangedAim fallback only while windup is active
+PASS vertical deadband retains last displayed side
+PASS first observation in deadband retains initial fallback
+PASS temporary drawing attack cannot override committed R54 ranged clock
+PASS audited R109 left-authored strip follows committed ray
+PASS idle long-distance R248 actor faces player, not prior movement
+PASS R53, R54, Balrog and Persona effective frames delegated unchanged
+PASS death and stationary bodies keep original facing
+PASS installer preserves R208 markers and is idempotent
+PASS resolver does not mutate attacks, patterns, enemy or saved fields
+PASS disabled overlay exactly delegates previous flip
+PASS actual R248 direct draw uses locked ranged side and restores context
+{"passed":16,"total":16}

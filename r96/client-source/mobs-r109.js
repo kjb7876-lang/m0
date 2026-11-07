@@ -204,6 +204,7 @@ function installOneFamily(){const S=window.__STORYWORLD_STORY_COMBAT_R54__;if(!S
  }catch(err){fail(err);}return S.frameFor(e,f);}});return true;}
 {let tries=0;(function arm(){try{installOneFamily();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();}
 window.__STORYWORLD_MOBS_R109__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,storageKey:KEY,
+ authoredFacing:f=>{const side=STRIP_FACE[stripKey(f)];return side==='L'?'right':side==='R'?'left':null;},
  trackFor:e=>{const r=rowOf(e)||artRowOf(e);return r?{group:r.gid,src:r.src,kind:r.kind,idle:r.idle?{path:r.idle.path,frames:cell(r.idle)}:null,move:r.move?{path:r.move.path,frames:cell(r.move)}:null,attack:r.attack?{path:r.attack.path,frames:cell(r.attack)}:null,hit:r.hit?{path:r.hit.path,frames:cell(r.hit)}:null}:null;},
  artPatch:(e,path)=>{try{return artPatch(e,path);}catch(err){fail(err);return null;}},
  seeAlpha:e=>{try{return seeAlpha(e);}catch(err){fail(err);return 1;}},

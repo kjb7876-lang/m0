@@ -1,0 +1,82 @@
+[
+  {
+    "name": "facing",
+    "command": "node r96/qa/r375/enemy-facing-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "geometry",
+    "command": "node r96/qa/r375/world-scale-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r109",
+    "command": "node r96/qa/r109/mobs-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r355",
+    "command": "node r96/qa/r355/samong-wide-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r267",
+    "command": "node r96/qa/r267/r267-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r103",
+    "command": "node r96/qa/r103/samong-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r104",
+    "command": "node r96/qa/r104/bosses-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "r105",
+    "command": "node r96/qa/r105/samong-maps-cpu-check.cjs",
+    "exitCode": 0
+  },
+  {
+    "name": "contract-unit",
+    "command": "python3 -I scripts/collab/test_validate.py",
+    "exitCode": 0
+  },
+  {
+    "name": "contract-all",
+    "command": "python3 -I scripts/collab/validate.py all",
+    "exitCode": 0
+  },
+  {
+    "name": "contract-task",
+    "command": "python3 -I scripts/collab/validate.py task r96/qa/r375/evidence/task-contract.json",
+    "exitCode": 0
+  },
+  {
+    "name": "hospital-save",
+    "command": "OUT=... node r96/qa/r375/hospital-save-cpu-check.cjs",
+    "exitCode": 0,
+    "passed": 40,
+    "total": 40
+  },
+  {
+    "name": "hospital-profile",
+    "command": "OUT=... node r96/qa/r375/hospital-profile.cjs",
+    "exitCode": 0,
+    "note": "Identical route/callback counts; latency not accepted"
+  },
+  {
+    "name": "sync-plan",
+    "command": "python3 -I r96/qa/r375/sync-plan-check.py",
+    "exitCode": 0,
+    "note": "Read-only blocked diagnosis; does not run sync or build"
+  },
+  {
+    "name": "vertical-door-review",
+    "command": "node r96/qa/r375/vertical-door-review.cjs r96/client-source/world-scale-r375.js r96/qa/r375/evidence/followup/vertical-door-review-result.json",
+    "exitCode": 0,
+    "comparisons": 4410
+  }
+]

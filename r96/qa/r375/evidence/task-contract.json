@@ -1,0 +1,47 @@
+{
+  "task-contract": "v1",
+  "task_id": "SW-0005",
+  "project": "storyworld-m0",
+  "repository": "kjb7876-lang/m0",
+  "issue_number": 270,
+  "revision": 3,
+  "goal": "스토리·사몽 모든 맵의 가로·세로와 통로·구역을 2배 확장하되 문 규격 유지, 몹·보스의 표시 방향과 공격 조준 일치",
+  "acceptance_criteria": [
+    "전체 STORY/DREAM 지도(병원·거점·사몽 포함) 확대, 문 통과/잠금/문틀 일치",
+    "그림의 방향과 플레이어를 향한 공격 준비/고정된 공격 예고 일치",
+    "진행·출입구·길찾기·좌표 저장 호환 및 회귀 검증",
+    "실제 전후 화면과 7분야 시각 검수, 미검증 구분"
+  ],
+  "non_goals": [
+    "병합·공개 배포",
+    "유료 API·새 비용",
+    "기존 자산·서사·맵 순서 변경",
+    "다른 열린 PR이 수정 중인 공통 파일 변경"
+  ],
+  "allowed_paths": [
+    "r96/client-source/world-scale-r375.js",
+    "r96/client-source/enemy-facing-r375.js",
+    "r96/qa/r375/",
+    "docs/qa/world-scale-facing-r375.md",
+    "r96/client-source/mob-unique-r248.js",
+    "r96/client-source/mobs-r109.js"
+  ],
+  "base_commit": "54bbdf1c3e2b94d95063d36e783cfa96c45ab381",
+  "input_manifest_hash": null,
+  "executor": "codex-cloud",
+  "reviewer": "claude",
+  "dependencies": [
+    "공통 런타임 등록 파일은 열린 PR #217/#205 등과 겹쳐 통합 담당자 조정 필요",
+    "전체 지도 활성화에는 병원 closure 충돌·저장 복원·공통 runtime hook 통합 필요. 독립 확대 커널은 검증 전 기본 게임에 자동 연결하지 않음."
+  ],
+  "status": "QUEUED",
+  "dispatch_id": "SW-0005-r3-direct",
+  "provider_task_id": null,
+  "attempt_count": 1,
+  "artifact_manifest": null,
+  "evidence": [],
+  "blocked_reason": null,
+  "approval_scope": "구현·검증·draft PR만. 병합·공개 배포 승인 없음.",
+  "completion": "pr-opened",
+  "codex_route": "via-dots"
+}
