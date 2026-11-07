@@ -15224,13 +15224,48 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 172785,
-      "sha256": "eddf003d5a7b35b99102309ae7b2929fea81d97a04c82462e055f262a98bc1d9"
+      "bytes": 182124,
+      "sha256": "3f99de69ed50e695d7315a507840a5c852f4af470e334c39aedf6e0d87adb7a2"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
       "bytes": 256062,
       "sha256": "8f7f4068e586f4d768352728ab96cb02bf7445aa5ad8cb3ed01dc00b05a4fd9c"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m106-elite-guardian-v2.webp",
+      "bytes": 231080,
+      "sha256": "588a4d1818f0130deb006acbd6521dcdc118fde961c0ecc408afdf9be090be52"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m110-time-guardian-v3.webp",
+      "bytes": 120976,
+      "sha256": "1b6fb3fc8cdf3e3b12390dbb65745990bd96835c0b931ac7901bccd718b93544"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m119-nameless-scar-v4.webp",
+      "bytes": 111378,
+      "sha256": "d48044981925f00dbbc0be135f8432de45ac315270d50f7974e5641748557bf6"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m124-silverless-shadow-v4.webp",
+      "bytes": 110770,
+      "sha256": "6cedf4358413e643d924bf580ac145e88bcaeec1a53990ae5d2d8f6052e83efa"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m130-slime-cult01-v2.webp",
+      "bytes": 208072,
+      "sha256": "4ea349abb8c5b999596a0baf90132b98006b47b79a865c0d59a1f802f609467e"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m130-slime-cult05-v2.webp",
+      "bytes": 208072,
+      "sha256": "4ea349abb8c5b999596a0baf90132b98006b47b79a865c0d59a1f802f609467e"
+    },
+    {
+      "path": "assets/r380/mobs/legacy-m134-nightmare-v4.webp",
+      "bytes": 159632,
+      "sha256": "939b7fd8b4d9bef516fa98c731eb9d9c00d7aa8e4818c6aa50b4315023eb4a8d"
     },
     {
       "path": "assets/r380/mobs/living-trash-v1.webp",
@@ -33423,8 +33458,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6684,
-  "totalBytes": 1045982062,
+  "fileCount": 6691,
+  "totalBytes": 1047141381,
   "webHTMLSha256": "4b136f7048adddb934e849523b30c2ab9ebb88354c7dade8349108dfbf6fdc62",
   "largest": [
     {
