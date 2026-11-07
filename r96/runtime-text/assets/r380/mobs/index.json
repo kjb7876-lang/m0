@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R383",
+ "revision": "R386",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -2276,6 +2276,246 @@
     {
      "file": "04-recover.png",
      "sha256": "dacf9c60d7b1b527cd3cd039ea16ca31fde0f2d16018918e5983a6182d792ecc"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "hexagram-experiment-m031-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hexagram-experiment-m031-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    127.5,
+    301
+   ],
+   "visibleHeight": 210.0,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b08",
+    "name": "육망성의 흑마술 실험체"
+   },
+   "bytes": 167138,
+   "sha256": "8731cc8c49480b5d9d245eaf08ed19e7528252a57d3d764569355747c9fad1a0",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "827f9e69ba60a290e235f4adebb9428acc0d417b2ec5488db3cb6c418dc98456"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "d4262a2f9ef7d5a22950412bd7d72b04c35f58fdbd3c1c7266ffca4c7d1d3975"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "5f1031d69502c756d42a41772a042f22118dc1020906a0e742bb7eb99084bcfe"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "847c64a2d82e87c475950556466927f89e9a88cbdb7fa2e6e9ccc29256d31fe9"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "3e405f3d23c88636687f3dce1ac7860572ee5ad46d5ae16a3277b9383fdc05e3"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "cdfe1c42ddfdb24ecf9c352543ce9d25c95cb0b67e59f66902021d8af87347bb"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "00f3c6c1126e023004eca572cc7fafdd6bc879e84db0363119092e140008e044"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "7004e5eed9a1c4b585507b350911d9ee29376176ee4accef6df963c43af64626"
+    },
+    {
+     "file": "frame_09.png",
+     "sha256": "11dbf3c04d0b961ec69b47eb79dee380f93457d325277bbd4eee37fd44070ec6"
+    },
+    {
+     "file": "frame_10.png",
+     "sha256": "a3b1e9e7ba51f774b1afe38d53e7912c4ac149fba824cf90115bf85532db6a82"
+    },
+    {
+     "file": "frame_11.png",
+     "sha256": "d0982b8fcee582076fa8b65a5776f34d41daa3aca80be78564bbcb54ce5cf01a"
+    },
+    {
+     "file": "frame_12.png",
+     "sha256": "ebfc31a9fc0aa03b73970a1559b83a6fa4f5333899c0869d8d817772b85dd96b"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "glass-wraith-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/glass-wraith-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    139.0,
+    223.0
+   ],
+   "visibleHeight": 206.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a09",
+    "name": "^유리 망령"
+   },
+   "bytes": 209400,
+   "sha256": "4c9c1c3258942a96eee633e6f75ccce6fcda41a552f186cddd5ce92d0ebd62db",
+   "source": [
+    {
+     "file": "hover-move-01.png",
+     "sha256": "7b71ede09829661c4ec9351446d078ee2d62670edafd4d0c1d148e444c910506"
+    },
+    {
+     "file": "hover-move-02.png",
+     "sha256": "aed4451c12d4b3124519179428b5cac6066ff50c7f5eacc5e07d17a3df5f693f"
+    },
+    {
+     "file": "hover-move-03.png",
+     "sha256": "d0e96ae7eacacd6396e531e9635ab856dc5c8383155af0f1d116d64605775593"
+    },
+    {
+     "file": "hover-move-04.png",
+     "sha256": "dfe02ff7604db0fb02b0ff606747d114071c2ba3ddbfb8dc3afeaa99d7028c55"
+    },
+    {
+     "file": "glass-reach-01.png",
+     "sha256": "ab87f2a5e200cb448cd89cf86d9d639a171192d4ea099f766a7cc5a52d861dbf"
+    },
+    {
+     "file": "glass-reach-02.png",
+     "sha256": "c77324f0366f58764614c59a75f71b56afd7501abe2cf94d1a0bb91bc539e014"
+    },
+    {
+     "file": "glass-reach-03.png",
+     "sha256": "4214fcf45f7e7cc27d8ff4dc5953a533b1757e0e723af631eec056b8d1880587"
+    },
+    {
+     "file": "glass-reach-04.png",
+     "sha256": "088e2f20eab492611a229af1e0c5b451bd7687181ef92e5902631a3869fc1817"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "sloth-burden-man-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    125.5,
+    240.0
+   ],
+   "visibleHeight": 241.8,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b02",
+    "name": "^나태에 잠식된 남자",
+    "boss": true
+   },
+   "bytes": 426902,
+   "sha256": "0d6b5c275a15c01308a3ad803a74690333c9259e57bc7290522fecf81baab2aa",
+   "source": [
+    {
+     "file": "heavy-shuffle-01.png",
+     "sha256": "9cacd403f9f092084bcddfe2bb106c890b48ac6b0dfcabe64e9f97ee16cefba2"
+    },
+    {
+     "file": "heavy-shuffle-02.png",
+     "sha256": "f28f20edc35b0a75c3b30e51878a0de785f5650cd410b1783977716bf337c479"
+    },
+    {
+     "file": "heavy-shuffle-03.png",
+     "sha256": "86e013bb8c4a2de0e62f292063ac89572decf8c6e1de16297a52aff9a15d4226"
+    },
+    {
+     "file": "heavy-shuffle-04.png",
+     "sha256": "ba6fed2fe5ca2a1ac57cd54acb683529bccff5aba59889fa041d3c844bcfb73d"
+    },
+    {
+     "file": "burden-swipe-01.png",
+     "sha256": "8d5967373e49f5b08bfb9c5f7c2756bbd754991a11bb32cc4d7ba998e0984024"
+    },
+    {
+     "file": "burden-swipe-02.png",
+     "sha256": "b964fc0b2748595205163fc1f8c58fb2ecd850a122548d3e6e75e80cea9795a3"
+    },
+    {
+     "file": "burden-swipe-03.png",
+     "sha256": "44aa2574d29681e81579b82c98395ceef26296cf9909dd0dd8018c641c608c8d"
+    },
+    {
+     "file": "burden-swipe-04.png",
+     "sha256": "0531a585447e93a4e5bc6c2a8f68fedf9bc143e951d08a393fcf007803fe755f"
     }
    ],
    "finalArt": false
