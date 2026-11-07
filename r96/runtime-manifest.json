@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 8588,
-      "sha256": "5215e7266c8bb204ef46f13b7055ec0f196776243c332e45690bfa552a7dd2f9"
+      "bytes": 9515,
+      "sha256": "6e0d31749ad2cc7a947d2735db9525f227bf5f5e054ee163891bda27e7fae604"
     },
     {
       "path": "art-drive-r105.js",
@@ -15083,9 +15083,19 @@
       "sha256": "acb25b215d0e0e5e79c0151a54c45dbbe2be8c2931323150a9bd6bf3dff21c40"
     },
     {
+      "path": "assets/r380/mobs/discarded-delicacy-v1.webp",
+      "bytes": 348842,
+      "sha256": "cba11b7b3d7da49a87dc9aca6c576a5130d1abc4e7dbc2b18b8caf46d8588be1"
+    },
+    {
       "path": "assets/r380/mobs/drug-craver-v1.webp",
       "bytes": 231596,
       "sha256": "e80b6ed6e1e327f34cea81a19ee35c5621fee9c0158d9e658b89ac614a98fceb"
+    },
+    {
+      "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
+      "bytes": 453210,
+      "sha256": "3559064612af298e5cb3f4e9a8941aa05cb5ad36e82a8466b532a572ae8a6681"
     },
     {
       "path": "assets/r380/mobs/hospital-surgeon-v1.webp",
@@ -15094,13 +15104,28 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 21600,
-      "sha256": "5e08d31d2f91657ec34f875a8b56fd2d58510f9f59132a71d660173f7c3c8c89"
+      "bytes": 48826,
+      "sha256": "6ce099a4f74e8cbc9e847ec18614964050bec261218fa9d1ba72485d4eefb685"
+    },
+    {
+      "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
+      "bytes": 256062,
+      "sha256": "8f7f4068e586f4d768352728ab96cb02bf7445aa5ad8cb3ed01dc00b05a4fd9c"
+    },
+    {
+      "path": "assets/r380/mobs/living-trash-v1.webp",
+      "bytes": 321658,
+      "sha256": "2baf948e07c94b19b1ded63226e44cf2e3de82afd1f8618aa3fb762869511933"
     },
     {
       "path": "assets/r380/mobs/mech-oblivion-spider.webp",
       "bytes": 387750,
       "sha256": "89a38b2852721a4f387a42644cad24ba623515f53ced1593339bb61d786392da"
+    },
+    {
+      "path": "assets/r380/mobs/mirror-lament-v1.webp",
+      "bytes": 279536,
+      "sha256": "2b1487ddbb8d194f74d5f5cef2b9eb4f67c9f729284294403d8e487b0a7c0ef4"
     },
     {
       "path": "assets/r380/mobs/purple-eggkeeper-v1.webp",
@@ -15113,6 +15138,16 @@
       "sha256": "f4c82ab42427e254cb6b350e769b126912105e0eec391459e34277c2d4048522"
     },
     {
+      "path": "assets/r380/mobs/small-walking-robot-v1.webp",
+      "bytes": 251704,
+      "sha256": "28ffdbb884e6d7f6e2d5fd12b67723d5d907adf8390d11b2abc2aa68537e606d"
+    },
+    {
+      "path": "assets/r380/mobs/snow-lurker-walker-v1.webp",
+      "bytes": 305638,
+      "sha256": "f089e446c3ba4d37d5e1211365586764615f6f2455b9b9c45399013895c249f0"
+    },
+    {
       "path": "assets/r380/mobs/swamp-goat-darkgreen-v1.webp",
       "bytes": 364046,
       "sha256": "4662512a101c3463bb57a20d550122f315bc6c7b9011947555bd3335ff14a089"
@@ -15123,9 +15158,54 @@
       "sha256": "0ca9695e6f692637da0e0908929d96722d66b417ba15e5bacf96c8fcd31ade3c"
     },
     {
+      "path": "assets/r380/mobs/swamp-root-stalker-darkgreen-v2.webp",
+      "bytes": 234984,
+      "sha256": "f57947df4adf530b8a2383bca01f8526fe1df55593dabf528eb8e5841fafc6cb"
+    },
+    {
       "path": "assets/r380/mobs/swamp-spirit-v1.webp",
       "bytes": 308842,
       "sha256": "4481c508994a713faf4c3321105c7b2ed1811ecec8c80f85248d614be6df8d61"
+    },
+    {
+      "path": "assets/r380/mobs/treatment-refusal-mask-v1.webp",
+      "bytes": 245748,
+      "sha256": "a2dc05124261a1e1d8b84f7654bbf027ab0ca9d4fc41f6307db40f1a058d2400"
+    },
+    {
+      "path": "assets/r380/mobs/u204-mech-01-v1.webp",
+      "bytes": 273052,
+      "sha256": "ebf8ea3b7ed5f350d4cfbeb0595c645d36c26bdd272f0bc68e0cfb4b07387bf6"
+    },
+    {
+      "path": "assets/r380/mobs/u204-mech-02-v1.webp",
+      "bytes": 198912,
+      "sha256": "75acba2cf97b51599d735f7d5c4c399a10ffa9e7d3da6729bf70c953e3b1d5be"
+    },
+    {
+      "path": "assets/r380/mobs/u204-mech-03-v1.webp",
+      "bytes": 269224,
+      "sha256": "af3fc11e05267a1937a4bc2d12532fcfae3c4c3f0eaf936ffb4f703805b9a01c"
+    },
+    {
+      "path": "assets/r380/mobs/u204-mech-04-v1.webp",
+      "bytes": 313072,
+      "sha256": "becd0e9ce710c15c79e4d6098fa76fcaafaeeb14b7388975ce7f45e7ca5f6b5b"
+    },
+    {
+      "path": "assets/r380/mobs/u206-mech-01-v1.webp",
+      "bytes": 285956,
+      "sha256": "cfa1551a8e4a1a913b0c2270cdb99a49e61fc3a6fa769f6b906aca46d3e4b8cd"
+    },
+    {
+      "path": "assets/r380/mobs/u206-mech-02-v1.webp",
+      "bytes": 224150,
+      "sha256": "ad88300a712abb5cd6b7e91af1894629cf77f3d3b5a3e895537f5a3c537ac4de"
+    },
+    {
+      "path": "assets/r380/mobs/war-machine-hound-v1.webp",
+      "bytes": 296132,
+      "sha256": "51a8c9eaf98d7c2b9186b87cbdca23b11eef811703b2dcbaa6d8466f41051222"
     },
     {
       "path": "assets/r380/mobs/web-bound-guardian-v4-pixel.webp",
@@ -24778,8 +24858,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4955,
-  "totalBytes": 957214322,
+  "fileCount": 4971,
+  "totalBytes": 961800355,
   "webHTMLSha256": "e5f8bf45d25a5c0ed65bd7f12bdff2da9c9c9e586e43d67f9e8c8fba39eb3b40",
   "largest": [
     {
