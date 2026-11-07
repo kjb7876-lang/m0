@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===30,'30장(R380 5 + R381 7 + R382 16 + R383 2)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===33,'33장(R380 5 + R381 7 + R382 16 + R383 2 + R386 3)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -46,6 +46,10 @@ ok(ctx.makeRoom('dist03','DREAM').enemies.some(e=>e.name==='뿌리 추적자'),'
 ctx.room={id:'dist00'};ok(S.frameFor({id:'r0',name:'뿌리 추적자',hp:10,x:3,y:0},null)?.r380Mob==='root-stalker-r74-plain','dist00 뿌리 추적자 → R74 그림 재묶음 시트');
 ctx.room={id:'ep1b07'};ok(S.frameFor({id:'w0',name:'분노의 사냥개 우두머리',hp:10,x:3,y:0},null)?.r380Mob==='wrath-hound-v1','ep1b07 분노의 사냥개 시트');ctx.room={id:'dist01'};
 const f=(o)=>S.frameFor({id:Math.random()+'',hp:10,x:3,y:0,...o},null);
+ctx.room={id:'ep1b08'};ok(f({name:'중간보스 · 육망성의 흑마술 실험체'})?.r380Mob==='hexagram-experiment-m031-v1'&&f({name:'흑마법사의 저주창 1'})?.path==='base','R386 ep1b08 흑마술 실험체 m031 v1(다른 몹 그대로)');
+ctx.room={id:'ep1a09'};ok(f({name:'유리 망령'})?.r380Mob==='glass-wraith-v1'&&f({name:'유리 망령 우두머리'})?.r380Mob==='glass-wraith-v1','R386 ep1a09 유리 망령 v1');
+ctx.room={id:'ep1b02'};ok(f({name:'유리 망령'})?.path==='base','R386 다른 맵 유리 망령은 그대로');
+ok(f({name:'나태에 잠식된 남자',boss:true})?.r380Mob==='sloth-burden-man-v1'&&f({name:'나태의 껍데기 파수',midboss:true})?.path==='base','R386 ep1b02 보스 나태 통합 남자 v1(중간보스 그대로)');ctx.room={id:'dist01'};
 ok(f({name:'재 나방 2'})?.r380Mob==='ash-moth-v2','재 나방 v2');ok(f({name:'보랏빛 알집지기 증원 1'})?.r380Mob==='purple-eggkeeper-v1','알집지기');
 ok(f({name:'거미줄에 묶인 수호병 우두머리'})?.r380Mob==='web-bound-guardian-v4','수호병 일반판');
 ctx.window.__STORYWORLD_MOB_ART_VARIANTS_R306__={inspect:()=>({mode:'pixel'})};ok(f({name:'거미줄에 묶인 수호병'})?.r380Mob==='web-bound-guardian-v4-pixel','픽셀 모드 → 수호병 픽셀판');delete ctx.window.__STORYWORLD_MOB_ART_VARIANTS_R306__;

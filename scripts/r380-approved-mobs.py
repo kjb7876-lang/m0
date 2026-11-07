@@ -112,7 +112,19 @@ if len(sys.argv) > 2:
 if len(sys.argv) > 4:
     add2('root-stalker-r74-plain', pathlib.Path(sys.argv[4]), ['01-idle.png', '02-windup.png', '03-contact.png', '04-recover.png'], 4, .5, [0], [1, 2, 3], [0],
          {'layer': 'STORY', 'zone': 'dist00', 'name': '^뿌리 추적자'}, 1.22)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R383',
+# R386: 사용자 채택 3종(2026-11-06 직접 검수 "둘다 좋네 적용"·"응 둘다 좋다 적용"·"미적용 흑마술실험체는 03에 적용"). 다섯째 인자 = R386 stage 폴더.
+#  m031 제시본 candidate-v1(걷기8·공격4) → ep1b08 육망성의 흑마술 실험체, 유리 망령 v1 → ep1a09 순찰 유리 망령만(R385 가 r74Monster 를 지움),
+#  나태 통합 남자 v1 → ep1b02 보스 나태에 잠식된 남자(별도 등짐 몹은 R385 가 살아 움직이는 쓰레기들로 돌림).
+if len(sys.argv) > 5:
+    S5 = pathlib.Path(sys.argv[5]); g5 = lambda pat: next(S5.glob(pat))
+    F12 = [f'frame_{i:02d}.png' for i in range(1, 13)]
+    add2('hexagram-experiment-m031-v1', g5('x-STORYWORLD-m031*') / 'candidate-v1', F12, 6, 1, list(range(8)), [8, 9, 10, 11], [0],
+         {'layer': 'STORY', 'zone': 'ep1b08', 'name': '육망성의 흑마술 실험체'}, 1.0)
+    add2('glass-wraith-v1', g5('x-SW-glass-wraith*') / 'frames', [f'hover-move-0{i}.png' for i in range(1, 5)] + [f'glass-reach-0{i}.png' for i in range(1, 5)], 8, .5,
+         [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1a09', 'name': '^유리 망령'}, 1.0)
+    add2('sloth-burden-man-v1', g5('x-SW-sloth-burden*') / 'frames', [f'heavy-shuffle-0{i}.png' for i in range(1, 5)] + [f'burden-swipe-0{i}.png' for i in range(1, 5)], 8, .5,
+         [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1b02', 'name': '^나태에 잠식된 남자', 'boss': True}, .85)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R386',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
