@@ -41,7 +41,9 @@ check('loaded right after dist/phase1.js (optionally after the R221 WebGL notice
  check('native-owner regions and the hospital keep their own layout',rows.filter(r=>NATIVE.includes(r.id)||r.id==='ep1a08').every(r=>r.type!=='r171-story-narrative-map'));
  check('template follows the region source topology',maps.every(r=>r.template===r.expected),maps.filter(r=>r.template!==r.expected).map(r=>r.id+':'+r.topology+'→'+r.template));
  check('several templates are in use (not one shared maze)',new Set(maps.map(r=>r.template)).size>=8,[...new Set(maps.map(r=>r.template))]);
- check('floor cells within 1,500–4,000 and bounds 68×70',maps.every(r=>r.cells>=1500&&r.cells<=4000&&JSON.stringify(r.bounds)==='[0,0,68,70]'),maps.map(r=>r.id+':'+r.cells));
+ // R379: 길·방 폭 2배(기본 켬)면 틀 100×104·바닥 3,000~9,500칸, 끄면 R171 원래 68×70·1,500~4,000칸.
+ const wideR379=run('__STORYWORLD_STORY_MAPS_R171__.wideR379')===true,[cMin,cMax,bb]=wideR379?[3000,9500,'[0,0,100,104]']:[1500,4000,'[0,0,68,70]'];
+ check('floor cells within '+cMin+'–'+cMax+' and bounds '+bb,maps.every(r=>r.cells>=cMin&&r.cells<=cMax&&JSON.stringify(r.bounds)===bb),maps.map(r=>r.id+':'+r.cells));
  check('layout is deterministic per region',maps.every(r=>r.again),maps.filter(r=>!r.again).map(r=>r.id));
  const doorOK=r=>r.bossDoorId==='door-0'&&r.doors.map(d=>d.id).join()==='door-0,door-1,door-2'&&r.doors[0].x===20&&r.doors[0].y===20&&r.doors[0].width===6&&r.doors[2].x===5&&r.doors[2].y===6&&r.doors[2].width===8;
  check('three doors with the ward ids and positions (boss 20,20 · exit 5,6)',maps.every(doorOK),maps.filter(r=>!doorOK(r)).map(r=>r.id));
