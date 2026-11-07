@@ -34,7 +34,7 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
   src.slice(0,4).forEach((e,i)=>{e.r380From=e.name;if(!e.r248Key)e.r248Key='가짜 자비 수집가';e.name=MECH+' '+(i+1);e.r380Mech=true;stats.added++;});}
  // 개명해도 R248 공격 효과·상태이상 조회 키(r248Key)는 옛 이름으로 둔다(Codex P1, 전투 밸런스 보존).
  // R381: 검수 목록 v18 05·06·17 개명(같은 몹 그대로, 이름만) — "갈망의 도시짐승삭제하고 약을 갈망하는 자로", "그자리에 … 암시장의 수상한 자로", "명명 늪에서 되살아난 혼령체".
- for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;if(!e.r248Key)e.r248Key=from;e.name=n.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
+ for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;if(!e.r248Key)e.r248Key=from;e.name=n.replace(from,to);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
  balance(r,id,l);
  return r;}
 // ── R383 밸런스(사용자 2026-11-07 "30마리밸런스바꿔도됨") ──
@@ -45,12 +45,17 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
 const ROOT_HOME='dist02',ROOT_ADD='dist00',WRATH_ZONE='ep1b07',WRATH='분노의 사냥개';let rootTpl=null;
 // dist00 몹은 R74 지도 그림(좌우 안 뒤집음, R86) 대신 엔진 frameFor 사슬로 이 오버레이 시트(root-stalker-r74-plain)를 쓴다 → r74Monster 를 지운다.
 const isPatrol=e=>/:r74-patrol:/.test(String(e?.id||''));
-function rootTemplate(l){if(rootTpl)return rootTpl;try{const base=makeRoom.__r380base||makeRoom,src=base('dist02',l||'STORY');const d=src?.enemies?.find(e=>isPatrol(e)&&(e.r74Monster==='root'||e.r383Atlas==='root'));if(d)rootTpl=JSON.parse(JSON.stringify(d));}catch(err){fail(err);}return rootTpl;}
+function rootTemplate(l){if(rootTpl)return rootTpl;try{const base=makeRoom.__r380base||makeRoom,src=base('dist02',l||'STORY');const ok=e=>isPatrol(e)&&(e.r74Monster==='root'||e.r383Atlas==='root'),d=src?.enemies?.find(e=>ok(e)&&!e.squadLeaderR373)||src?.enemies?.find(ok);
+  if(d){const c=JSON.parse(JSON.stringify(d));
+   // R373 분대 우두머리·분대 자리를 물려받지 않게(Codex P2): 우두머리면 ×1.6 전 수치로 되돌리고 R373 표시를 모두 지운다.
+   if(c.squadLeaderR373&&c.r373Base)for(const k of ['hp','maxHp','damage'])if(Number.isFinite(c.r373Base[k]))c[k]=c.r373Base[k];
+   if(c.squadLeaderR373&&Number.isFinite(c.difficultyBaseHpR63))c.difficultyBaseHpR63/=1.6;
+   for(const k of ['squadLeaderR373','r373Name','r373Base','squadR373','r373Slot','r373Anchor','r373From','r373MovePending','r373Clone','capScaleR373'])delete c[k];rootTpl=c;}}catch(err){fail(err);}return rootTpl;}
 function balance(r,id,l){if(!Array.isArray(r.enemies))return;
  // 뿌리 맵·늪 밖의 뿌리 추적자 순찰은 지우지 않고(3×10 무리·저장 id 보존) 원래 복제해 온 그 지역 몹(같은 nativeId)의 이름·그림으로 되돌린다.
  if(id!==ROOT_HOME&&id!==ROOT_ADD)for(const e of r.enemies){if(!isPatrol(e)||e.r74Monster!=='root')continue;const d=r.enemies.find(a=>a&&!isPatrol(a)&&!a.boss&&a.nativeId===e.nativeId);if(!d)continue;
-  e.r383From=e.name;if(!e.r248Key)e.r248Key=String(d.r248Key||d.name).replace(/ \d+$/,'');e.name=String(d.name).replace(/ \d+$/,'')+(/우두머리$/.test(e.name)?' 우두머리':'');e.r383RootFrom='root';delete e.r74Monster;stats.removed++;}
- if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
+  e.r383From=e.name;if(!e.r248Key)e.r248Key=String(d.r248Key||d.name).replace(/ \d+$/,'');const dn=String(d.r373Name||d.name).replace(/ \d+$/,'').replace(/ 우두머리$/,'');e.name=dn+(/우두머리$/.test(e.name)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=dn;e.r383RootFrom='root';delete e.r74Monster;stats.removed++;}
+ if(id===WRATH_ZONE)for(const e of r.enemies)if(isPatrol(e)&&!e.r383Wrath){e.r383From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ 우두머리$/,'');e.name=WRATH+(/우두머리$/.test(e.r383From)?' 우두머리':'');if(typeof e.r373Name==='string')e.r373Name=WRATH;e.r383Wrath=true;e.r383Atlas=e.r74Monster;delete e.r74Monster;stats.renamed++;}
  // 늪 다크그린 뿌리 추적자(R382)도 R74 지도 그림이 이 시트를 가렸다 → 같은 방식으로 frameFor 사슬에 넘긴다.
  if(id===ROOT_HOME)for(const e of r.enemies)if(isPatrol(e)&&e.r74Monster==='root'){e.r383Atlas='root';delete e.r74Monster;}
  if(id===ROOT_ADD&&!r.enemies.some(e=>e?.r383Added)){const tpl=rootTemplate(l),L=r.exploration;if(!tpl||!L)return;

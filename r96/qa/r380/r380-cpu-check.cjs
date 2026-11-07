@@ -16,9 +16,9 @@ const ctx={window:{__STORYWORLD_STORY_COMBAT_R54__:S0},localStorage:{getItem:()=
 ctx.makeRoom=function(id,l){const mk=(name,nid,o={})=>({id:id+':'+name,name,nativeId:nid,spawnState:'active',x:1,y:1,homeX:1,homeY:1,hp:10,...o});
  if(id==='dist01')return{enemies:[mk('망각의 거미 1','dist01-sp1'),mk('망각의 거미 증원 2','dist01-sp1'),mk('중간보스 · 망각의 거미','dist01-sp1',{midboss:true}),mk('재 나방 1','dist01-sp1'),mk('보랏빛 알집지기 1','dist01-sp2'),mk('망각의 거미 수호자','dist01-sp1',{wardChampionR81:true}),mk('보스','dist01-boss',{boss:true})]};
  const pat=(i,mon,name,nid,o={})=>mk('p'+i,nid,{id:id+':r74-patrol:'+i,name,r74Monster:mon,maxHp:50,r75Pack:0,combatProfile:{bodyBlock:{r:.4}},...o});
- if(id==='dist02')return{enemies:[mk('수렁 주문사 1','dist02-h1',{r75Pack:0}),pat(0,'root','뿌리 추적자','dist02-h1'),pat(1,'root','뿌리 추적자 우두머리','dist02-h1')]};
- if(id==='dist03')return{enemies:[mk('쓰러진 수호병 3','dist03-s1',{r75Pack:0}),pat(0,'root','뿌리 추적자','dist03-s1'),pat(1,'root','뿌리 추적자 우두머리','dist03-s1')]};
- if(id==='ep1b07')return{enemies:[mk('불 속의 그림자 1','b07-f1'),pat(0,'glass','유리 망령','b07-f1'),pat(1,'glass','유리 망령 우두머리','b07-f1')]};
+ if(id==='dist02')return{enemies:[mk('수렁 주문사 1','dist02-h1',{r75Pack:0}),pat(0,'root','뿌리 추적자 우두머리','dist02-h1',{maxHp:80,hp:80,damage:16,squadLeaderR373:true,r373Name:'뿌리 추적자',r373Base:{hp:50,maxHp:50,damage:10},squadR373:'dist02:s0',r373Slot:0,r373Anchor:{x:1,y:1}}),pat(1,'root','뿌리 추적자','dist02-h1',{damage:10,squadR373:'dist02:s0',r373Slot:1})]};
+ if(id==='dist03')return{enemies:[mk('쓰러진 수호병 3','dist03-s1',{r75Pack:0}),pat(0,'root','뿌리 추적자','dist03-s1'),pat(1,'root','뿌리 추적자 우두머리','dist03-s1',{squadLeaderR373:true,r373Name:'뿌리 추적자'})]};
+ if(id==='ep1b07')return{enemies:[mk('불 속의 그림자 1','b07-f1'),pat(0,'glass','유리 망령','b07-f1'),pat(1,'glass','유리 망령 우두머리','b07-f1',{squadLeaderR373:true,r373Name:'유리 망령'})]};
  if(id==='dist00')return{exploration:{entry:{x:1.5,y:1.5},floorCells:Array.from({length:400},(_,k)=>[k%20,Math.floor(k/20)])},enemies:[mk('뿌리의 문지기','dist00-boss',{boss:true,x:3,y:3})]};
  if(id==='u202')return{enemies:[1,2,3,4,5].map(i=>mk('가짜 자비 수집가 '+i,'u202-e1',{combatProfile:{attackShape:{r:1}}})).concat([mk('가짜 자비 수집가 우두머리','u202-e1'),mk('복종 봉인구 1','u202-e2')])};return{enemies:[]};};
 vm.createContext(ctx);vm.runInContext('var window=this.window;'+src.replace("if(typeof fetch==='function')","window.__idx=(j)=>{idx=j};if(false)"),ctx);ctx.window.__idx(idx);
@@ -36,6 +36,8 @@ ok(d02.enemies.filter(e=>/^뿌리 추적자/.test(e.name)).length===2&&d02.enemi
 ok(d03.enemies.length===3&&!d03.enemies.some(e=>/뿌리 추적자/.test(e.name))&&d03.enemies[1].name==='쓰러진 수호병'&&d03.enemies[2].name==='쓰러진 수호병 우두머리'&&d03.enemies[1].maxHp===50&&d03.enemies[1].id==='dist03:r74-patrol:0'&&d03.enemies[1].r248Key==='쓰러진 수호병','다른 맵: 뿌리 추적자 순찰 → 그 지역 몹 이름(수·id·수치 그대로)');
 ok(b07.enemies[1].name==='분노의 사냥개'&&b07.enemies[2].name==='분노의 사냥개 우두머리'&&b07.enemies[0].name==='불 속의 그림자 1'&&b07.enemies[1].r248Key==='유리 망령'&&b07.enemies[1].r74Monster===undefined,'ep1b07: 순찰 → 분노의 사냥개(공격 효과 키 보존)');
 const roots=d00.enemies.filter(e=>e.r383Added);ok(roots.length===6&&roots.every((e,i)=>e.id==='dist00:r383-root:'+i&&e.name==='뿌리 추적자'&&e.maxHp===50&&e.r75Pack===undefined&&e.r74Monster===undefined)&&d00.enemies[0].boss,'dist00: 늪 순찰 수치로 뿌리 추적자 6마리 추가, 정규 무리 밖');
+ok(roots.every(e=>!e.squadLeaderR373&&!e.squadR373&&e.r373Slot===undefined&&e.damage===10&&e.maxHp===50),'분대 우두머리·분대 자리를 물려받지 않음(Codex P2)');
+ok(b07.enemies[2].r373Name==='분노의 사냥개'&&d03.enemies[2].r373Name==='쓰러진 수호병','R373 그릴 때 이름(r373Name)도 같이 바꿈(Codex P2)');
 ok(roots.every(e=>Math.hypot(e.x-1.5,e.y-1.5)>9&&Math.hypot(e.x-3,e.y-3)>7),'입구·보스와 떨어진 자리');
 ok(JSON.stringify(ctx.makeRoom('dist00','STORY').enemies.map(e=>[e.x,e.y]))===JSON.stringify(d00.enemies.map(e=>[e.x,e.y])),'dist00 다시 만들어도 같은 자리');
 ok(ctx.makeRoom('dist03','DREAM').enemies.some(e=>e.name==='뿌리 추적자'),'DREAM 층은 그대로');
