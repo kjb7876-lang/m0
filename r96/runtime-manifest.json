@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 143714,
-      "sha256": "ebc3b4cf3b38b4b22d133501181bacc6f41b8c4fe81b1acf44af3c2ab49fbab8"
+      "bytes": 157646,
+      "sha256": "3bba754e636a50112f471f322c0fc2bdfff224f00e96bba67056d4a3fdcf99e1"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15318,6 +15318,26 @@
       "sha256": "f8ded3d9e633281c2b234e37b18d4d8f5d554de583582c2f1ee3b455706ff079"
     },
     {
+      "path": "assets/r380/mobs/reverse-ra-new-v1.webp",
+      "bytes": 98012,
+      "sha256": "acc1a922b3ec4d5b9ada0b9f9341f2a873b9f89c15756768e7a9712d9f3c5742"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rb-new-v1.webp",
+      "bytes": 105746,
+      "sha256": "e6f80b20f282de09b80c14504eef502f491804000b3258c18abb16c288393f31"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rc-new-v1-left.webp",
+      "bytes": 148296,
+      "sha256": "17fc66c16336a8aca37e9ca4dd0bf10aa1814399de15f4a41804bf73f4797738"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rc-new-v1-right.webp",
+      "bytes": 144866,
+      "sha256": "4f32c6beaf0fcc911254422b2045a48f7e99cd5dd25326f5bce08d9090d02d25"
+    },
+    {
       "path": "assets/r380/mobs/reverse-rc-stamp-v1-left.webp",
       "bytes": 52406,
       "sha256": "b2eaeccdb45d7185da33a54796bdbc05b23f02ebd778f3c2d5f75d90423fe422"
@@ -15326,6 +15346,26 @@
       "path": "assets/r380/mobs/reverse-rc-stamp-v1-right.webp",
       "bytes": 54026,
       "sha256": "3f14a5f27063554e13e0bf35deadbfc03b3b044f95bbfba0663d7875c52dd825"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rd-new-v1-left.webp",
+      "bytes": 122312,
+      "sha256": "adb6c08cc445021a51a1077b43087d556a7305b668efdc6fcb83a0f7991fced3"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-rd-new-v1-right.webp",
+      "bytes": 118760,
+      "sha256": "4bf80f40a952790691cd177e63eb2f68ba3f77fbcadf9a5c11aff5669a926444"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-re-new-v1-left.webp",
+      "bytes": 110490,
+      "sha256": "1316f213b72476a5992c12869b33c29e0e9ae2528d08b004999bc7a46e27a0a0"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-re-new-v1-right.webp",
+      "bytes": 110204,
+      "sha256": "fc45f7fbbad19a54302efe632c75d3329219f7d216d080c10ee9848956b7a462"
     },
     {
       "path": "assets/r380/mobs/reverse-rf-merit-scale-v1.webp",
@@ -33338,8 +33378,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6667,
-  "totalBytes": 1042742466,
+  "fileCount": 6675,
+  "totalBytes": 1043715084,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {

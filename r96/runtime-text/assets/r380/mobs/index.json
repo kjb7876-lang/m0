@@ -1,8 +1,401 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R400",
+ "revision": "R401",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "reverse-re-new-v1-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-re-new-v1-right.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    82.5,
+    137.1
+   ],
+   "visibleHeight": 126.7,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(다음 자리를 노리는 사격|허위 승전 훈장막)( \\d+)?$",
+    "samong": "(^|-)RE(-|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "허위 승전 훈장막"
+   },
+   "bytes": 110204,
+   "sha256": "fc45f7fbbad19a54302efe632c75d3329219f7d216d080c10ee9848956b7a462",
+   "source": [
+    {
+     "file": "move_right_01.png",
+     "sha256": "e275d40f9ce2cca2f9f105a2202e1d457501afe39622755a5535d0a5043e9c07"
+    },
+    {
+     "file": "move_right_02.png",
+     "sha256": "15a5b18a272e75de8a77e0ca337b59318465e513ca80d49d590b31fd96b6e79b"
+    },
+    {
+     "file": "move_right_03.png",
+     "sha256": "8a1d3978ee81d470d76341cc16b7bc7d56ad445915cf88290afb4801423f0851"
+    },
+    {
+     "file": "move_right_04.png",
+     "sha256": "07babd303529565a9afc511706fadeff7ea65dfff2df19900065c9189e342650"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "6887f245e5e23803fe1f967f224bde93a5a4e6a459b86a886dfeaafd550a38cf"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "f3cb87e5f9892844642ce969339636242b4a1eb7d16914940b96919b8f4f1796"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "6bb4f5aac3fb1cb40b605a636bf6090443fe46c497b66509893f088f46ff3a41"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "d97a20c024c55d0bfd2c4d68fec95ce1ed053ef0610dd34e5fa6825c8736f049"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-re-new-v1-left"
+  },
+  {
+   "id": "reverse-rd-new-v1-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rd-new-v1-right.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    78.9,
+    118.5
+   ],
+   "visibleHeight": 146.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(서로의 결말을 먹는 도시|결말 접합체)( \\d+)?$",
+    "samong": "(^|-)RD(-|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "결말 접합체"
+   },
+   "bytes": 118760,
+   "sha256": "4bf80f40a952790691cd177e63eb2f68ba3f77fbcadf9a5c11aff5669a926444",
+   "source": [
+    {
+     "file": "move_right_01.png",
+     "sha256": "f0912be62a1b381c1d3c7c69712b54fb1cc6b83581e98693666e2aaeb01f362c"
+    },
+    {
+     "file": "move_right_02.png",
+     "sha256": "2bd5f8246eeae56bcd09f6965408a5e7335bb39fcd9a15e74cda987ad3fd4695"
+    },
+    {
+     "file": "move_right_03.png",
+     "sha256": "976b2ca780f899416380657e2e7993d617642e57253de73014a3bca4f0ab5599"
+    },
+    {
+     "file": "move_right_04.png",
+     "sha256": "cee3b4a42f71eaaeca4bf13c0007b2b1f6c9793c1344d0ccbece9cd0aff923e6"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "9ebd97835d3a8161922039fe3b5dd7db1e28410e47f568d1cc43e796e48c94f8"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "b4697e2bbc5796ce25d1e50d6d995869f314738ad51c3e258e10657ae692169e"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "5c5200a7ba30e97bebc3b156731a83dcfac45b090386a5d57ed6c57c5b43d8b8"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "7e092d34cf9ede10fcaead23cc8e90e405129646921e6c16adb4d1876c66e21e"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-rd-new-v1-left"
+  },
+  {
+   "id": "reverse-rc-new-v1-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rc-new-v1-right.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    86.25,
+    136.8
+   ],
+   "visibleHeight": 114.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(관람석의 시선|재주문 도장체|금박 유리관 수확기)( \\d+)?$",
+    "samong": "(^|-)RC(-|$)",
+    "slot": [
+     0,
+     3
+    ],
+    "rename": "금박 유리관 수확기"
+   },
+   "bytes": 144866,
+   "sha256": "4f32c6beaf0fcc911254422b2045a48f7e99cd5dd25326f5bce08d9090d02d25",
+   "source": [
+    {
+     "file": "move_right_01.png",
+     "sha256": "425df13682cb40aac198cf07284d91c01f8cd5a909350886d2de429e7e590bee"
+    },
+    {
+     "file": "move_right_02.png",
+     "sha256": "3b2b63b541b3f6dc86db4263387348c0ff58a86834686f6b7f6f65cc6725f834"
+    },
+    {
+     "file": "move_right_03.png",
+     "sha256": "4db09e6bc4dc921e11504651ef5e83755bd474efbb0ab02fc038803f16641dbb"
+    },
+    {
+     "file": "move_right_04.png",
+     "sha256": "81ef82b054f2be4d866a889e7b77a99380ccc1378c7f3797034ec57d778bd923"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "e023cfcfeb8520ca7c252cfabb5aa299690ab9cfe5f9a9ba0140f705dad05584"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "dffca1d131acfb6a871a9295f00f0cb63ce4520bc02453370da2e354f5836f96"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "8bd284752503ba97c221eabd71c19b37d5b9b954c0d702ebbc1443613d1627ca"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "042b38e4f1d7676a411eea6d6b619f419cbd894f667893759b2a3ec5a96a7ef0"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-rc-new-v1-left"
+  },
+  {
+   "id": "reverse-rb-new-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rb-new-v1.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    79.35,
+    126.3
+   ],
+   "visibleHeight": 124.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(정해진 시각에 도착하지 못한 발자국|세 번째 잔의 강요체)( \\d+)?$",
+    "samong": "(^|-)RB(-|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "세 번째 잔의 강요체"
+   },
+   "bytes": 105746,
+   "sha256": "e6f80b20f282de09b80c14504eef502f491804000b3258c18abb16c288393f31",
+   "source": [
+    {
+     "file": "move_right_01.png",
+     "sha256": "de6372b3b7c8044eda4463d151aaf7702bdb82d5030c4d1efbc00a5e67b161e1"
+    },
+    {
+     "file": "move_right_02.png",
+     "sha256": "0516c7723534e9e7a8a25a0f98934d26e3deec27008113a3fb2778d61cd8ee86"
+    },
+    {
+     "file": "move_right_03.png",
+     "sha256": "30db37e9a578bff2cbf0d3c33f84dcf961d6e6f96c41207228752c68279fa429"
+    },
+    {
+     "file": "move_right_04.png",
+     "sha256": "8444b72c630ddaa1b9c4e4f03fb8653393bc7b394e299e8d7c4c30c203a8d42a"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "632c574ac3809d9efd747c567a970afddcee20a5c09aaa4bac541a7eddd126cd"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "cb043217983285f2523794ddc828ae615db4d15a4b54e5f492d27e37bda87a8b"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "9a551566d2dd02e0bc34f740260da9269a4727e139184a5be75ab06d54637a1b"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "59f65540d720098dcbaa54bdc9151d548e6f4d87f3f7b4574cce268fc8a5c82c"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-ra-new-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-ra-new-v1.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    80.85,
+    123.0
+   ],
+   "visibleHeight": 105.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(붉은 교정 표시|녹슨 개찰구 수집체)( \\d+)?$",
+    "samong": "(^|-)RA(-|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "녹슨 개찰구 수집체"
+   },
+   "bytes": 98012,
+   "sha256": "acc1a922b3ec4d5b9ada0b9f9341f2a873b9f89c15756768e7a9712d9f3c5742",
+   "source": [
+    {
+     "file": "move_right_01.png",
+     "sha256": "e9fe8fdce18f4a194fe9033ed04e92cc80e41e8bd8eea5fd6512aae099fa0801"
+    },
+    {
+     "file": "move_right_02.png",
+     "sha256": "a282bb64a2e2dd56a03fdb8df2134392b7748cccb30e0626c0619fcd2af28690"
+    },
+    {
+     "file": "move_right_03.png",
+     "sha256": "acd7b460eb63ac67b97fae898466698e4d2fbfaf725fab63d1503b8bcfed22df"
+    },
+    {
+     "file": "move_right_04.png",
+     "sha256": "9b86dbb11b09c63b4af4486213bdaa59636cb9145ea434bd75c1202e93a99680"
+    },
+    {
+     "file": "attack_right_01.png",
+     "sha256": "5069ad326aa6eec73b58c4f2cf216da9a3f454528e058d5f9f12f3f568e1a1ab"
+    },
+    {
+     "file": "attack_right_02.png",
+     "sha256": "f627b30542bff261d04dd7eb9f737d4b8d2e695ece34df3faf7f2425bc229886"
+    },
+    {
+     "file": "attack_right_03.png",
+     "sha256": "47de588ac03e595709d0b6d33e69b04cf07cf3a8cd5c425846aa302afad700d7"
+    },
+    {
+     "file": "attack_right_04.png",
+     "sha256": "3807c8478d07d4389716937cdfe1f49caf4044808031c9d522f0a8163acf3b75"
+    }
+   ],
+   "finalArt": false
+  },
   {
    "id": "samong-p-footstep-remnant-v1",
    "kind": "strip",
@@ -6340,6 +6733,222 @@
     {
      "file": "attack_left_04.png",
      "sha256": "a6d8a8364bc958b0d2266f6f425a953ae513bd639494dad8043d6c4ebc4cc576"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-rc-new-v1-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rc-new-v1-left.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    64.95,
+    140.1
+   ],
+   "visibleHeight": 116.1,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 148296,
+   "sha256": "17fc66c16336a8aca37e9ca4dd0bf10aa1814399de15f4a41804bf73f4797738",
+   "source": [
+    {
+     "file": "move_left_01.png",
+     "sha256": "1cf6e175051393875bd560771dfff30b0d92ca6148e8a503a6a7bf79af2df5ab"
+    },
+    {
+     "file": "move_left_02.png",
+     "sha256": "8b111635e2ad4819d50587e73ce574680b62e149af5b167425f1f3b7d015060a"
+    },
+    {
+     "file": "move_left_03.png",
+     "sha256": "c949932e257390bf31cbfe070322827fe395399c7169e3c9af5d0f5e920160fb"
+    },
+    {
+     "file": "move_left_04.png",
+     "sha256": "080698069a98969f57e3e2b274e68f4939fb250e5d45e6ef1ea27ef165908edc"
+    },
+    {
+     "file": "attack_left_01.png",
+     "sha256": "38a87811d0cae9026731c956ea55bf6d68a39e74a1a4f9cc646eb584c63ca682"
+    },
+    {
+     "file": "attack_left_02.png",
+     "sha256": "ad2af5ab0a26249fc1eedc6ae5f4eb9ffc0cd590215b89f999cd521c5c006c24"
+    },
+    {
+     "file": "attack_left_03.png",
+     "sha256": "c118be2d73427cb1194822aae55d2bdf4ac1271a524fb88e56c102bbf46c2542"
+    },
+    {
+     "file": "attack_left_04.png",
+     "sha256": "6c0dbf90f9204f96f76b81324cc5807484238972386f01024cc9d72a1697b6a1"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-rd-new-v1-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-rd-new-v1-left.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    75.6,
+    123.0
+   ],
+   "visibleHeight": 142.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 122312,
+   "sha256": "adb6c08cc445021a51a1077b43087d556a7305b668efdc6fcb83a0f7991fced3",
+   "source": [
+    {
+     "file": "move_left_01.png",
+     "sha256": "507f30f0dcee0ac0dd9d158edf16ceebb9e61c326ad75ae2ba28a52af3319bf1"
+    },
+    {
+     "file": "move_left_02.png",
+     "sha256": "9de1bff60789f37465294c5d2a30ad32d1925d498684fa35999ab710e50a9849"
+    },
+    {
+     "file": "move_left_03.png",
+     "sha256": "d6407d4b0623599f6ca1487afb455588093ed5c778e7ed62a6ec3ff3127c05ae"
+    },
+    {
+     "file": "move_left_04.png",
+     "sha256": "cfdd57887e279c9c508d7e8ca0cfd3344670141a19d95db6ccb6337db7db96ca"
+    },
+    {
+     "file": "attack_left_01.png",
+     "sha256": "b8a2c5c17b69b711c7be7b26b1e4e55dd937470b2b42756dbea9d75a9f058630"
+    },
+    {
+     "file": "attack_left_02.png",
+     "sha256": "5ddeeb7d91413ea03d158e86456ec3834cd7c8663b603700ce8e5dfac60bfc5e"
+    },
+    {
+     "file": "attack_left_03.png",
+     "sha256": "d04e9d378ce750942bd0ecc32ac10cc85d421d510169c587f8a368ac39f02efc"
+    },
+    {
+     "file": "attack_left_04.png",
+     "sha256": "e217e75fb0f2d62da229d7f76b73010c76d30d266f8b199f28d75031c9420489"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-re-new-v1-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-re-new-v1-left.webp",
+   "cell": [
+    154,
+    154
+   ],
+   "cols": 8,
+   "pivot": [
+    62.25,
+    141.9
+   ],
+   "visibleHeight": 127.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 110490,
+   "sha256": "1316f213b72476a5992c12869b33c29e0e9ae2528d08b004999bc7a46e27a0a0",
+   "source": [
+    {
+     "file": "move_left_01.png",
+     "sha256": "67f17e6e1b44cd0524d228dcc0241d021d7c64162524fcedc29206979d3b873c"
+    },
+    {
+     "file": "move_left_02.png",
+     "sha256": "06099d9f5675b6cc2d7295cbe7a44ea020953dbd572c3a217f1b7577ab3b235c"
+    },
+    {
+     "file": "move_left_03.png",
+     "sha256": "39d0c83c11904a738d5b00afe332975f0cd6db157d732668de021184b782c27f"
+    },
+    {
+     "file": "move_left_04.png",
+     "sha256": "abe0b2226533c096dd90fcb84acc93fc3ee348273ee51eb44a6768969b4d096c"
+    },
+    {
+     "file": "attack_left_01.png",
+     "sha256": "a9d69a075ad758d674a579509bc243507ab296a79576f9a84d0fa6fa4a499a1f"
+    },
+    {
+     "file": "attack_left_02.png",
+     "sha256": "3aecc988e30f090966d849f43ab58e9ea74a178f6faf9273d6124b1f8e4dbdd1"
+    },
+    {
+     "file": "attack_left_03.png",
+     "sha256": "db7afbf0c0dd1a3e4207a0da3a895fe3712752af3c1fdf1d5a116a2dd329064b"
+    },
+    {
+     "file": "attack_left_04.png",
+     "sha256": "f0bb5aed86465bf41ad03b1b4672251101740e3b1f6dda64254af6297c67026d"
     }
    ],
    "finalArt": false

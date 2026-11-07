@@ -267,7 +267,24 @@ if len(sys.argv) > 22:
         add2(f'samong-p-{k}-v1', R0 / d / 'frames', [f'move_right_0{j}.png' for j in range(1, 5)] + [f'attack_right_0{j}.png' for j in range(1, 5)], 8, sc, [0, 1, 2, 3], [4, 5, 6, 7], [0],
              {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|검은 뿌리 포획체|발소리 추적 잔영)( \\d+)?$', 'samong': '(^|-)P(-|$)', 'slot': [i, 3], 'rename': nm}, ft)
         mobs.insert(0, mobs.pop())
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R400',
+# ── R401: 사몽역행 RA~RE 신규 검토 후보 5종(좌우 이동4·공격4). RA·RB 왼쪽은 반전 파생이라 엔진 뒤집기, RC·RD·RE 는 왼쪽을 따로 그려 twin. 옅은 알파 잡음(<16)·떨어진 조각 지움 ──
+if len(sys.argv) > 23:
+    C1 = pathlib.Path(sys.argv[23]) / 'clean'
+    SIDE = lambda sd: [f'move_{sd}_0{j}.png' for j in range(1, 5)] + [f'attack_{sd}_0{j}.png' for j in range(1, 5)]
+    for k, src, nm, sl, ft, twin in (('ra', '붉은 교정 표시', '녹슨 개찰구 수집체', [0, 2], 1.0, False),
+                                     ('rb', '정해진 시각에 도착하지 못한 발자국', '세 번째 잔의 강요체', [0, 2], .9, False),
+                                     ('rc', '관람석의 시선|재주문 도장체', '금박 유리관 수확기', [0, 3], 1.0, True),
+                                     ('rd', '서로의 결말을 먹는 도시', '결말 접합체', [0, 2], .6, True),
+                                     ('re', '다음 자리를 노리는 사격', '허위 승전 훈장막', [0, 2], .9, True)):
+        act = {'layer': 'DREAM', 'name': f'^({src}|{nm})( \\d+)?$', 'samong': f'(^|-)R{k[1].upper()}(-|$)', 'slot': sl, 'rename': nm}
+        if not twin:
+            add2(f'reverse-{k}-new-v1', C1 / k, SIDE('right'), 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, ft)
+            mobs.insert(0, mobs.pop()); continue
+        for side in ('right', 'left'):
+            add2(f'reverse-{k}-new-v1-{side}', C1 / k, SIDE(side), 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act if side == 'right' else {'layer': 'NONE', 'name': '^$'}, ft)
+            if side == 'left': mobs[-1]['facing'] = 'left'
+        mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R401',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

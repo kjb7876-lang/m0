@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===83,'83장(R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===91,'91장(R401 역행 신규 5종 8장 + R400 문턱 2 + R398 태양 순찰·골렘 v2·도장체 좌우 + R397 R200 S-04 복원 3 + R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -93,12 +93,15 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
      ok(d[0]===null&&f[0]===null,'R397 다른 그림자·그림자 아닌 몹은 그대로');}
     {const v=(sh,nm,z,i,x)=>{const c={id:'sm103:W:a:'+(i||1),name:nm,samongR103:z,hp:5,x:x||2,y:1,r200Checked:true};if(sh)c.r200Shade=sh;const f=S.frameFor(c,null)||{};return [f.r380Mob||null,c.name,f.r380Sheet,f.flip];};
      ok(v('sun-patrol','검은 태양의 학교 순찰자','sz115-S02-3')[0]==='r200-sun-patrol-v2'&&v('stitched-golem','기운 누더기 골렘','sz115-S01-2')[0]==='r200-stitched-golem-v2'&&v('mannequin','식탁의 마네킹 잔영','sz115-S01-2')[0]===null,'R398 R200 태양 순찰자·누더기 골렘 → 새 시트, 마네킹 그대로');
-     const a=v(null,'관람석의 시선','sz115-RC-2',3,2),b=v(null,'관람석의 시선','sz115-RC-2',4),c=v(null,'관람석의 시선','sz115-RD-2',3);
+     const a=v(null,'관람석의 시선','sz115-RC-2',5,2),b=v(null,'관람석의 시선','sz115-RC-2',4),c=v(null,'관람석의 시선','sz115-RD-2',3);
      ok(a[0]==='reverse-rc-stamp-v1-right'&&a[1]==='재주문 도장체'&&a[2]==='reverse-rc-stamp-v1-left'&&a[3]===false&&b[0]===null&&c[0]===null,'R398 RC 관람석의 시선 절반 → 재주문 도장체(좌우 시트), 다른 장 그대로');}
     {const st=idx.mobs.filter(m=>/^reverse-rc-stamp-v1-/.test(m.id));ok(st.length===2&&st.every(m=>m.cols===4&&JSON.stringify(m.move)===JSON.stringify(m.attack)),'R399 도장 v4: 이동에도 같은 방향 공격 4장(그림만, 공격 판정은 엔진 그대로)');}
     {const u=(z,i)=>{const c={id:'sm103:P:a:'+i,name:'뿌리에서 쏟아진 잔영',samongR103:z,hp:5,x:2,y:1};return [S.frameFor(c,null)?.r380Mob||null,c.name];};
      const a=u('sz115-P-1',0),b=u('sz115-P-2',1),c=u('sz162-P-D',2),d=u('sz115-S01-2',0);
      ok(a[0]==='samong-p-root-grasper-v1'&&a[1]==='검은 뿌리 포획체'&&b[0]==='samong-p-footstep-remnant-v1'&&b[1]==='발소리 추적 잔영'&&c[0]===null&&c[1]==='뿌리에서 쏟아진 잔영'&&d[0]===null,'R400 문턱 뿌리 잔영 셋 중 둘 → 검은 뿌리 포획체·발소리 추적 잔영, S-01 은 그대로(정원사 몫)');}
+    {const v=(nm,z,i,x)=>{const c={id:'sm103:X:a:'+i,name:nm,samongR103:z,hp:5,x:x||2,y:1,r200Checked:true};const f=S.frameFor(c,null)||{};return [f.r380Mob||null,c.name,f.r380Sheet,f.flip];};
+     const ra=v('붉은 교정 표시','sz115-RA-2',0),ra1=v('붉은 교정 표시','sz115-RA-2',1),rb=v('정해진 시각에 도착하지 못한 발자국','sz162-RB-B',2),rc=v('관람석의 시선','sz115-RC-2',0,2),rc1=v('관람석의 시선','sz115-RC-2',1),rd=v('서로의 결말을 먹는 도시','sz115-RD-1',4,2),re=v('다음 자리를 노리는 사격','sz115-RE-2',0,2),rx=v('붉은 교정 표시','sz115-RB-2',0);
+     ok(ra[0]==='reverse-ra-new-v1'&&ra[1]==='녹슨 개찰구 수집체'&&ra1[0]===null&&rb[0]==='reverse-rb-new-v1'&&rb[1]==='세 번째 잔의 강요체'&&rc[0]==='reverse-rc-new-v1-right'&&rc[1]==='금박 유리관 수확기'&&rc[2]==='reverse-rc-new-v1-left'&&rc1[0]==='reverse-rc-stamp-v1-right'&&rd[0]==='reverse-rd-new-v1-right'&&rd[1]==='결말 접합체'&&rd[2]==='reverse-rd-new-v1-left'&&re[0]==='reverse-re-new-v1-right'&&re[1]==='허위 승전 훈장막'&&re[2]==='reverse-re-new-v1-left'&&rx[0]===null,'R401 역행 RA~RE 신규 5종: 장 기본몹 절반(RC 는 셋 중 하나, 도장체 몫 유지), RC·RD·RE 왼쪽 시트, 다른 장 이름은 그대로');}
     ok(t('상대 초인','sz115-S07-1',true)===null&&t('순찰자','',true)===null,'R392 다른 장·본편은 그대로');
     ok(t('포구 검은 안개','')===null&&t('봉합부인','',true)===null,'R391 사몽 밖(본편) 같은 이름은 그대로');}
    ok(fs.readFileSync(path.join(R,'client-source','art-drive-r105.js'),'utf8').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)?null:artFor(e)'),'R391 R105 정적 그림이 승인 시트 위에 겹치지 않음');
