@@ -5829,6 +5829,22 @@
     "assets/mammon-v3/D01-open-portal-frame-v2.webp",
     "assets/mammon-v3/O01-records-desk-up-right-v4.webp",
     "assets/mammon-v3/O02-deposit-cabinet-down-right-v3.webp",
+    "assets/r389/slayer/index.json",
+    "assets/r389/slayer/walk-s.webp",
+    "assets/r389/slayer/attack-s.webp",
+    "assets/r389/slayer/walk-e.webp",
+    "assets/r389/slayer/attack-e.webp",
+    "assets/r377/slayer-south/index.json",
+    "assets/r377/slayer-south/slayer-walk-s-persona.webp",
+    "assets/r377/slayer-south/slayer-attack-s-persona.webp",
+    "assets/r380/mobs/persona-hwando-w.webp",
+    "assets/r380/mobs/persona-michaela-w.webp",
+    "assets/r380/mobs/persona-seoha-w.webp",
+    "assets/r380/mobs/persona-lauren-w.webp",
+    "assets/r380/mobs/persona-neon-w.webp",
+    "assets/r380/mobs/persona-hunter-w.webp",
+    "assets/r380/mobs/persona-gunner-w.webp",
+    "assets/r380/mobs/persona-slayer-w.webp",
     "aggro-chase-r390.js"
   ],
   "mediaPaths": [
@@ -6904,5 +6920,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "1adbc0797433140838f80220b97d311f0313dc01c1084a7d174789e4f4951f04"
+  "runtimeManifestSHA256": "1c22f2cf751763d91b895a0c6576fe8d2a195815a49ff373935b3c3b4491f245"
 }
