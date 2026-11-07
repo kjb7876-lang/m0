@@ -47,9 +47,9 @@ const items=Array.from({length:10},(_,i)=>({len:100,score:i%3,must:i===0,order:i
 const sel=P.select(items,450);
 ok('select: keeps must, fills by score up to cap, keeps original order',sel.kept[0].order===0&&sel.used<=450&&sel.kept.length===4&&sel.kept.every((k,i,a)=>!i||a[i-1].order<k.order),sel.kept.map(k=>k.order));
 ok('select: musts kept even over cap',P.select([{len:500,must:true,score:0,order:0},{len:10,must:false,score:9,order:1}],100).kept.length===1);
-ok('rateFor: clamps to [RATE_MIN,RATE_MAX] (R376 slower: 0.84–1.12) and is 0.9×user without a deadline',P.RATE_MIN===.84&&P.RATE_MAX===1.12&&P.rateFor(10,100,6.8)===P.RATE_MIN&&Math.abs(P.rateFor(10000,10,6.8)-P.RATE_MAX)<1e-9&&Math.abs(P.rateFor(10,NaN,6.8,1.1)-.99)<1e-9);
-ok('tone: dialogue higher/faster, narration lower, ellipsis slower with a longer pause, scene end slower',(()=>{const d=P.tone('"가자."',false),n=P.tone('나는 걸었다.',false),e=P.tone('그날의 기억이…',false),z=P.tone('끝이었다.',true);return d.pitch>n.pitch&&d.rate>n.rate&&e.rate<n.rate&&e.pause>0&&z.rate<n.rate;})());
-ok('gapFor: longer pause when ahead, shorter when behind',P.gapFor(50,200,6.8,false)>P.gapFor(5000,200,6.8,false)&&P.gapFor(5000,200,6.8,false)<P.GAP);
+ok('R384 steadyRate: one speed for every sentence (user×0.95, clamped .8–1.2), no deadline speed-up',P.STEADY===.95&&Math.abs(P.steadyRate(1)-.95)<1e-9&&Math.abs(P.steadyRate(1.1)-1.045)<1e-9&&P.steadyRate(9)<=1.2&&P.steadyRate(.1)>=.8&&P.rateFor===undefined&&P.RATE_MIN===undefined);
+ok('tone (R384): no per-sentence rate; dialogue higher pitch, ellipsis and scene end pause longer',(()=>{const d=P.tone('"가자."',false),n=P.tone('나는 걸었다.',false),e=P.tone('그날의 기억이…',false),z=P.tone('끝이었다.',true);return d.rate===undefined&&d.pitch>n.pitch&&e.pause>n.pause&&z.pause>n.pause&&n.pause===P.GAP;})());
+ok('R384: gapFor removed (pause no longer depends on the deadline)',P.gapFor===undefined);
 const ch=P.chunks('가'.repeat(60)+', '+'나'.repeat(60));
 ok('chunks: long sentence splits into ≤84-char parts at a comma',ch.length===2&&ch.every(c=>c.length<=84),ch.map(c=>c.length));
 ok('isFinal: finale/ending scenes recognised',P.isFinal([{key:'finale.core-preserved'}])&&!P.isFinal([{key:'dist01:pre'}]));
@@ -63,7 +63,7 @@ ok('isFinal: finale/ending scenes recognised',P.isFinal([{key:'finale.core-prese
  ok('full scene text recorded in the note book (R169)',T.kept.length===1&&T.kept[0].key==='story:dist01:pre'&&T.kept[0].text===text);
  const i0=T.api.inspect();
  ok('abridged: fewer sentences queued than in the source when the zone budget is short',i0.stats.sentences===160&&i0.stats.kept<160&&i0.stats.kept>0,i0.stats);
- ok('speech started with a Korean voice and a rate inside [0.7,1.25] (R376 tone)',T.spoken.length===1&&T.spoken[0].voice?.lang==='ko-KR'&&T.spoken[0].rate>=.7&&T.spoken[0].rate<=1.25,T.spoken[0]?.rate);
+ ok('speech started with a Korean voice at the steady rate (R384)',T.spoken.length===1&&T.spoken[0].voice?.lang==='ko-KR'&&Math.abs(T.spoken[0].rate-P.steadyRate(1))<.06,T.spoken[0]?.rate);
  const c0=T.cancels.length;T.ev('stopVoice()');
  ok('engine stopVoice() does not cancel cinema speech',T.cancels.length===c0);
  T.run(900);
