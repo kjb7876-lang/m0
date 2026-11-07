@@ -13,14 +13,15 @@
 //  · R376 실화 난이도: 실화 지역은 전투가 길어지므로 지역 시간 예측을 실화 배율(timeMul, 1.8배)로 늘리고, 머문 시간은 'real:' 열쇠로 따로 배운다.
 //    덜어 낸 문장은 버리지 않고 예비로 두었다가, 대기열이 비었는데 그 지역에 살아 있는 적이 남아 있으면 (남은 예상 시간, 적어도 45초 분량만큼) 원래 순서대로 다시 채워
 //    전투 중에도 자막·음성이 끊기지 않게 한다(지역을 옮기면 예비는 비운다).
+//  · R381 녹음 음성: 문장마다 녹음(voice-r381, Qwen3-TTS Sohee)이 있으면 그걸 틀고(말 속도는 재생 속도 0.85~1.2배로), 없거나 못 받으면 브라우저 음성.
 //  · 설정 '영화 모드' 줄(목소리 고르기·시험 듣기). localStorage storyworld.r370.cinema {on, voice, subs, rate}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_MODE_R370__)return;
-const REV='R370-cinema-2',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
+const REV='R370-cinema-3',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
 const DEF={on:false,voice:'',subs:true,rate:1};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.voice==='string')prefs.voice=s.voice;if(typeof s.subs==='boolean')prefs.subs=s.subs;if(Number.isFinite(+s.rate))prefs.rate=Math.max(.8,Math.min(1.3,+s.rate));}}catch(_){}
 let learned={};try{const t=JSON.parse(localStorage.getItem(TKEY)||'{}');if(t&&typeof t==='object')for(const[k,v]of Object.entries(t))if(Number.isFinite(+v)&&+v>5&&+v<7200)learned[k]=+v;}catch(_){}
-const stats={batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,refilled:0,errors:0};let lastError=null;
+const stats={recorded:0,recordFail:0,batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,refilled:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const now=()=>performance.now()/1000;
@@ -109,16 +110,21 @@ function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
   if(spoke&&d>.6&&cur){const m=cur.len/(d*rate);if(m>2&&m<20)cps=cps*.85+m*.15;}
   const q=cur;cur=null;const left2=pendingChars(),secs2=deadline?deadline-now():NaN;
   const gap=gapFor(left2,secs2,cps,q?.sceneEnd)+tn.pause;if(q?.sceneEnd)show(null);timer=setTimeout(next,gap*1000);};
- const v=pickVoice();
+ const synth=()=>{const v=pickVoice();
  if(v&&window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(cur.text);u.lang=v.lang||'ko-KR';u.voice=v;u.rate=rate;u.pitch=tn.pitch;u.volume=vol();
    u.onend=()=>{stats.spoken++;done(true);};u.onerror=()=>done(false);
    u.onboundary=ev=>{try{if(my!==gen)return;const ci=ev.charIndex||0;let k=0;while(k<parts.length-1&&ci>=bounds[k])k++;if(k>pi){pi=k;clearTimeout(partTimer);show(cur,parts[pi]);schedule();}}catch(_){}};
    speaking=true;speechSynthesis.speak(u);
    // 지킴이: 끝 알림이 오지 않으면(크롬 긴 문장 멈춤 등) 예상 시간의 두 배 + 3초 뒤 넘긴다.
    setTimeout(()=>{if(my===gen){try{speechSynthesis.cancel();}catch(_){}done(false);}},(est*2+3)*1000);}catch(e){fail(e);stats.silent++;setTimeout(()=>done(false),est*1000);}}
- else{stats.silent++;setTimeout(()=>done(false),est*1000);}}
+ else{stats.silent++;setTimeout(()=>{if(my===gen)done(false);},est*1000);}};
+ // R381: 녹음이 있으면 먼저 튼다. 못 받거나 오류면 같은 문장을 브라우저 음성으로(자막·시간 맞추기는 그대로).
+ const R=window.__STORYWORLD_VOICE_R381__;let rec=null;
+ if(prefs.voice!=='none'&&R){try{if(R.has(cur.text)){rec=R.play(cur.text,{rate,volume:vol(),onend:()=>{stats.spoken++;stats.recorded++;done(true);},onerror:()=>{if(my===gen&&rec){rec=null;stats.recordFail++;synth();}}});
+   if(rec){if(Q[0])R.preload(Q[0].text);setTimeout(()=>{if(my===gen&&rec){rec.stop();rec=null;done(false);}},(est*2+3)*1000);}}}catch(e){fail(e);rec=null;}}
+ if(!rec)synth();}
 let speaking=false;
-function stopAll(){gen++;Q.length=0;reserve.length=0;cur=null;deadline=null;clearTimeout(timer);timer=null;try{speechSynthesis.cancel();}catch(_){}show(null);}
+function stopAll(){gen++;Q.length=0;reserve.length=0;cur=null;deadline=null;clearTimeout(timer);timer=null;try{speechSynthesis.cancel();}catch(_){}try{window.__STORYWORLD_VOICE_R381__?.stop?.();}catch(_){}show(null);}
 // ── 자막 상자 ──
 let boxEl=null;
 function box(){if(boxEl&&boxEl.isConnected)return boxEl;try{if(!document.getElementById('r370Style')){const st=document.createElement('style');st.id='r370Style';
@@ -162,7 +168,10 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}}
 function set(p={}){const was=prefs.on;if(typeof p.on==='boolean')prefs.on=p.on;if(typeof p.voice==='string')prefs.voice=p.voice;if(typeof p.subs==='boolean')prefs.subs=p.subs;if(Number.isFinite(+p.rate))prefs.rate=clamp(+p.rate,.8,1.3);save();
  if(prefs.on&&!was){try{if(G('started',false))guideOn();}catch(e){fail(e);}box();}
  if(!prefs.on&&was)stopAll();return {...prefs};}
-function preview(){const v=pickVoice();try{speechSynthesis.cancel();}catch(_){}const t='나는 언제나 깊은 꿈을 꾼다.';show({narr:'시험 듣기'},t);setTimeout(()=>{if(!cur)show(null);},2600);
+function preview(){const R=window.__STORYWORLD_VOICE_R381__;
+ if(prefs.voice!=='none'&&R&&R.sample){try{speechSynthesis.cancel();}catch(_){}show({narr:'시험 듣기 · 녹음 음성'},R.sample);const off=()=>{if(!cur)show(null);};
+  if(R.play(R.sample,{rate:prefs.rate,volume:vol(),onend:off,onerror:off}))return '녹음 음성(Sohee)';}
+ const v=pickVoice();try{speechSynthesis.cancel();}catch(_){}const t='나는 언제나 깊은 꿈을 꾼다.';show({narr:'시험 듣기'},t);setTimeout(()=>{if(!cur)show(null);},2600);
  if(v){try{const u=new SpeechSynthesisUtterance(t);u.voice=v;u.lang=v.lang;u.rate=prefs.rate;u.volume=vol();speechSynthesis.speak(u);}catch(e){fail(e);}}return v?.name||null;}
 try{if(typeof showSettings==='function'){const base=showSettings;showSettings=function(...a){const r=base.apply(this,a);try{const grid=document.querySelector('#panel .settings');if(grid&&!document.getElementById('r370Cinema')){
   const l=document.createElement('label');l.id='r370CinemaRow';const c=document.createElement('input');c.type='checkbox';c.id='r370Cinema';c.checked=prefs.on;
@@ -170,7 +179,7 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
   c.onchange=()=>set({on:c.checked});l.appendChild(c);l.appendChild(document.createTextNode(' 영화 모드(자동 플레이 + 서사 자막·음성)'));
   const row=document.createElement('div');row.id='r370VoiceRow';row.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap';
   const sel=document.createElement('select');sel.id='r370Voice';const fill=()=>{const vs=voices();sel.innerHTML='';const add=(v,t)=>{const o=document.createElement('option');o.value=v;o.textContent=t;sel.appendChild(o);};
-   add('','자동(한국어 음성)');for(const v of vs)add(v.name,v.name);add('none','목소리 없이 자막만');sel.value=prefs.voice;if(sel.value!==prefs.voice)sel.value='';};fill();
+   add('','자동(녹음 음성 → 한국어 음성)');for(const v of vs)add(v.name,v.name);add('none','목소리 없이 자막만');sel.value=prefs.voice;if(sel.value!==prefs.voice)sel.value='';};fill();
   try{speechSynthesis.addEventListener?.('voiceschanged',fill,{once:true});}catch(_){}
   sel.onchange=()=>set({voice:sel.value});const b=document.createElement('button');b.type='button';b.id='r370Preview';b.textContent='시험 듣기';
   b.onclick=()=>{const n=preview();if(!n&&typeof toast==='function')toast('이 브라우저에 한국어 음성이 없습니다 · 자막만 나옵니다',2.4);};
