@@ -184,7 +184,19 @@ if len(sys.argv) > 13:
         cv.paste(c, (254 - c.width // 2, 680 - c.height), c); mvf.append(cv)
     add('samong-paper-figure-v1', 'strip', mvf + atk, 8, .3, (254 * 1.0, 680), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'right',
         {'layer': 'DREAM', 'name': '^종이 형상( \\d+)?$', 'samong': SAM}, [{'file': 'r109/PAPER-move.png', 'sha256': sha(RT / 'assets/r109/mobs/PAPER-move.png')}] + fr(PA, an), 1 / .85)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R391',
+# ── R392: 사몽 S-06 상대 초인(보스)·적 지휘 개체(구역 우두머리) 고해상도 후보, 열쇠 순찰자(S-02·RA 보스) 공격4 ──
+if len(sys.argv) > 14:
+    R2 = pathlib.Path(sys.argv[14]); S06 = '(^|[^0-9])S-?06([^0-9]|$)'; MA = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+    add2('s06-rival-v1', R2 / 'x23/s06-rival-candidate/frames', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^상대 초인', 'boss': True, 'samong': S06}, 1.0)
+    add2('s06-commander-v1', R2 / 'x23/s06-commander-candidate/frames', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^적 지휘 (개체|기체)', 'boss': True, 'samong': S06}, .9)
+    # 열쇠 순찰자: 걷기 그림은 아직 보류(분할 대기) → R105 정적 한 장을 이동 칸으로, 새 공격 4칸.
+    KD = R2 / 'key/frames'; an = [f'attack_0{j}.png' for j in range(1, 5)]; atk = L(KD, an); W, Hh = atk[0].size; ah = bbox_h(atk)
+    st = Image.open(RT / 'assets/r105/drive/boss-patroller.webp').convert('RGBA'); st = st.crop(st.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox())
+    k = ah / st.height; st = st.resize((round(st.width * k), round(st.height * k)), Image.LANCZOS); fx, fy = footpivot(atk)
+    cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0)); cv.paste(st, (round(fx - st.width / 2), round(fy - st.height)), st)
+    add('samong-patroller-boss-v1', 'strip', [cv] + atk, 5, .5, (fx, fy), [0], [1, 2, 3, 4], [0], 'right',
+        {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, [{'file': 'r105/boss-patroller.webp', 'sha256': sha(RT / 'assets/r105/drive/boss-patroller.webp')}] + fr(KD, an), 1.0)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R392',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

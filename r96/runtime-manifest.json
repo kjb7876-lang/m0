@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 105531,
-      "sha256": "dcffdd48a0f99444909b836c3c6154d1ceb52d1299d92f726c3c7bf6cec41961"
+      "bytes": 110054,
+      "sha256": "bfb84c82f2f3d2082377a782703177922b7d9dbbd1e1212129300eedebbc2f46"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15268,6 +15268,16 @@
       "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
     },
     {
+      "path": "assets/r380/mobs/s06-commander-v1.webp",
+      "bytes": 286240,
+      "sha256": "17251eb04817ad0fe7bc0e46386e95d9aa0bbf1a424ff1ad18acd28978d82a1b"
+    },
+    {
+      "path": "assets/r380/mobs/s06-rival-v1.webp",
+      "bytes": 199702,
+      "sha256": "ab8b86c00014f04db8462b859b2ccf4594379ad9878da1c1ed4108a6870ed2ff"
+    },
+    {
       "path": "assets/r380/mobs/samong-hostess-boss-v1.webp",
       "bytes": 347420,
       "sha256": "e52c57cdde7a3542b239ea5144a74ac345924d6c8b33e0daedb6d4423dc1c457"
@@ -15291,6 +15301,11 @@
       "path": "assets/r380/mobs/samong-paper-figure-v1.webp",
       "bytes": 219794,
       "sha256": "7433a8f82164b47f53bb036a013eac373dc6963e6ffeb87926ba633f99cbb71d"
+    },
+    {
+      "path": "assets/r380/mobs/samong-patroller-boss-v1.webp",
+      "bytes": 98874,
+      "sha256": "47784de4d1c04c546ec77792ffea3f7b452e09fc3630c654593be344350eee6a"
     },
     {
       "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
@@ -33223,8 +33238,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6644,
-  "totalBytes": 1038962677,
+  "fileCount": 6647,
+  "totalBytes": 1039552016,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
