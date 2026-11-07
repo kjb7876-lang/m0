@@ -1,4 +1,4 @@
-/* Mammon miniature pilot: ep1b06 STORY only. Unregistered V3 surface/furniture candidate; public registration requires acceptance.
+/* Mammon miniature pilot: ep1b06 STORY only. V3 surface/furniture; registered only by the production entry point.
  * Expanded native baseline 084dc76; native geometry, R228 room tint and simulation retained.
  * Existing physical wall footprints own every architectural finish below.
  * No floor, collision, door, enemy, combat, story or save object is written.
@@ -7,6 +7,7 @@
  const W=window,NAME='__STORYWORLD_MAMMON_MINIATURE_PILOT__',ZONE='ep1b06';if(W[NAME])return;
  const A=W.StoryPhase1,C=A?.ThreeRenderer?.prototype;if(!C)return;
  const REV='mammon-miniature-v16-expanded-v3-furniture-depth';
+ const registered=W.document?.currentScript?.hasAttribute?.('data-mammon-release')===true;
  const ASSET_ROOT='assets/mammon-v3/';
  const assets=Object.freeze({postHigh:ASSET_ROOT+'P01-steel-post-tall-v2.webp',postLow:ASSET_ROOT+'P02-steel-post-low-v1.webp',jamb:ASSET_ROOT+'D01-open-portal-frame-v2.webp',floor:ASSET_ROOT+'F01-floor-single-slab-top-v1.webp',metal:ASSET_ROOT+'W06-wall-steel-front-flat-v1.webp',vault:ASSET_ROOT+'O02-deposit-cabinet-down-right-v3.webp',ledger:ASSET_ROOT+'O01-records-desk-up-right-v4.webp'});
  // Pixel contacts are from the reviewed derivative contract, not canvas bottom.
@@ -399,5 +400,5 @@
  function wrap(fn){if(typeof fn!=='function'||fn.__mammonMiniature)return fn;const out=function(f,...a){this.__mammonMiniatureFrame=f;guard(this);return fn.call(this,f,...a);};out.__mammonMiniature=true;return out;}
  C.render=wrap(C.render);const clear=C.clearScene;if(clear)C.clearScene=function(...a){dispose(this);this.__mammonMiniatureFrame=null;return clear.apply(this,a);};
  const attachCurrent=()=>{const r=W.__STORYWORLD_PHASE1__?.controller?.state?.three;if(r&&Object.prototype.hasOwnProperty.call(r,'render'))r.render=wrap(r.render);return!!r;};
- W[NAME]=Object.freeze({revision:REV,zone:ZONE,assets,palette,eligible,plan,attachCurrent,set(v){on=v!==false;if(!on)for(const r of[...live])dispose(r);return on;},inspect:()=>({revision:REV,on,last,stats:{...stats},lastError,registered:false,layoutChanged:false,collisionChanged:false,gameplayChanged:false,hardwareGPUVerified:false})});attachCurrent();
+ W[NAME]=Object.freeze({revision:REV,zone:ZONE,assets,palette,eligible,plan,attachCurrent,set(v){on=v!==false;if(!on)for(const r of[...live])dispose(r);return on;},inspect:()=>({revision:REV,on,last,stats:{...stats},lastError,registered,layoutChanged:false,collisionChanged:false,gameplayChanged:false,hardwareGPUVerified:false})});attachCurrent();
 })();

@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R382",
+ "revision": "R386",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -2150,6 +2150,372 @@
     {
      "file": "04-recover.png",
      "sha256": "5c9898cf425fba57d3458582ed6ae3b3c9415b928dd6e2ec482b296c8cd59a2c"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "wrath-hound-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/wrath-hound-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    123.75,
+    198.0
+   ],
+   "visibleHeight": 165.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b07",
+    "name": "^분노의 사냥개"
+   },
+   "bytes": 341104,
+   "sha256": "8647aef6a9fb66f8d494cfeaad810a1edb3b8e898905f0dc96a5f240d0b54ed9",
+   "source": [
+    {
+     "file": "walk-01.png",
+     "sha256": "b31ac0a145ee23c6fbc5ccd08831cf622a5f049e74ff30445c2511577033bbe0"
+    },
+    {
+     "file": "walk-02.png",
+     "sha256": "2e786cbbd3da8cc0784f91e83d781115f014584c28421c698ab83a43096fcda8"
+    },
+    {
+     "file": "walk-03.png",
+     "sha256": "6842469c1a01e9a374c9ac96bcd43b347fe27583c9ed4a9fbf7dd3846f451924"
+    },
+    {
+     "file": "walk-04.png",
+     "sha256": "38c90717b8f56a39df3058a1b6eeaeb4f931fa43de673235d806146809923669"
+    },
+    {
+     "file": "attack-01.png",
+     "sha256": "687e394977618fbb492a66250c7a73b1c2f22e7ce591eaf97666afb7605ef7a0"
+    },
+    {
+     "file": "attack-02.png",
+     "sha256": "25225aa36fb494d5dc67e0e5d1aeace8ca9d0a5126112c4abd81ba73578614d0"
+    },
+    {
+     "file": "attack-03.png",
+     "sha256": "55eeab711cf69a29571dbbeb1353bae33ac97ff65961bf57eb9eea32e9a49b2e"
+    },
+    {
+     "file": "attack-04.png",
+     "sha256": "f338d250fb5a03145cb1f0b81ef7051ccd1862ca190e5f3e371cd7b29d26afb8"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "root-stalker-r74-plain",
+   "kind": "strip",
+   "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
+   "cell": [
+    288,
+    176
+   ],
+   "cols": 4,
+   "pivot": [
+    168.25,
+    170.5
+   ],
+   "visibleHeight": 122.1,
+   "move": [
+    0
+   ],
+   "attack": [
+    1,
+    2,
+    3
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist00",
+    "name": "^뿌리 추적자"
+   },
+   "bytes": 81584,
+   "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b",
+   "source": [
+    {
+     "file": "01-idle.png",
+     "sha256": "ec4924f4abbe9137d06e11b0721055d0502c9f83bf9341083c94116710948c0b"
+    },
+    {
+     "file": "02-windup.png",
+     "sha256": "ca6b0f1c1cb08678d0b40eb710abb458cbdd18a54cfa855d81c699b7c0429a91"
+    },
+    {
+     "file": "03-contact.png",
+     "sha256": "cadf8e267b11fd96af4d4729291e594ea593625052d10ad4b5932a4d45c4482b"
+    },
+    {
+     "file": "04-recover.png",
+     "sha256": "dacf9c60d7b1b527cd3cd039ea16ca31fde0f2d16018918e5983a6182d792ecc"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "hexagram-experiment-m031-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hexagram-experiment-m031-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 6,
+   "pivot": [
+    127.5,
+    301
+   ],
+   "visibleHeight": 210.0,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "attack": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b08",
+    "name": "육망성의 흑마술 실험체"
+   },
+   "bytes": 167138,
+   "sha256": "8731cc8c49480b5d9d245eaf08ed19e7528252a57d3d764569355747c9fad1a0",
+   "source": [
+    {
+     "file": "frame_01.png",
+     "sha256": "827f9e69ba60a290e235f4adebb9428acc0d417b2ec5488db3cb6c418dc98456"
+    },
+    {
+     "file": "frame_02.png",
+     "sha256": "d4262a2f9ef7d5a22950412bd7d72b04c35f58fdbd3c1c7266ffca4c7d1d3975"
+    },
+    {
+     "file": "frame_03.png",
+     "sha256": "5f1031d69502c756d42a41772a042f22118dc1020906a0e742bb7eb99084bcfe"
+    },
+    {
+     "file": "frame_04.png",
+     "sha256": "847c64a2d82e87c475950556466927f89e9a88cbdb7fa2e6e9ccc29256d31fe9"
+    },
+    {
+     "file": "frame_05.png",
+     "sha256": "3e405f3d23c88636687f3dce1ac7860572ee5ad46d5ae16a3277b9383fdc05e3"
+    },
+    {
+     "file": "frame_06.png",
+     "sha256": "cdfe1c42ddfdb24ecf9c352543ce9d25c95cb0b67e59f66902021d8af87347bb"
+    },
+    {
+     "file": "frame_07.png",
+     "sha256": "00f3c6c1126e023004eca572cc7fafdd6bc879e84db0363119092e140008e044"
+    },
+    {
+     "file": "frame_08.png",
+     "sha256": "7004e5eed9a1c4b585507b350911d9ee29376176ee4accef6df963c43af64626"
+    },
+    {
+     "file": "frame_09.png",
+     "sha256": "11dbf3c04d0b961ec69b47eb79dee380f93457d325277bbd4eee37fd44070ec6"
+    },
+    {
+     "file": "frame_10.png",
+     "sha256": "a3b1e9e7ba51f774b1afe38d53e7912c4ac149fba824cf90115bf85532db6a82"
+    },
+    {
+     "file": "frame_11.png",
+     "sha256": "d0982b8fcee582076fa8b65a5776f34d41daa3aca80be78564bbcb54ce5cf01a"
+    },
+    {
+     "file": "frame_12.png",
+     "sha256": "ebfc31a9fc0aa03b73970a1559b83a6fa4f5333899c0869d8d817772b85dd96b"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "glass-wraith-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/glass-wraith-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    139.0,
+    223.0
+   ],
+   "visibleHeight": 206.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a09",
+    "name": "^유리 망령"
+   },
+   "bytes": 209400,
+   "sha256": "4c9c1c3258942a96eee633e6f75ccce6fcda41a552f186cddd5ce92d0ebd62db",
+   "source": [
+    {
+     "file": "hover-move-01.png",
+     "sha256": "7b71ede09829661c4ec9351446d078ee2d62670edafd4d0c1d148e444c910506"
+    },
+    {
+     "file": "hover-move-02.png",
+     "sha256": "aed4451c12d4b3124519179428b5cac6066ff50c7f5eacc5e07d17a3df5f693f"
+    },
+    {
+     "file": "hover-move-03.png",
+     "sha256": "d0e96ae7eacacd6396e531e9635ab856dc5c8383155af0f1d116d64605775593"
+    },
+    {
+     "file": "hover-move-04.png",
+     "sha256": "dfe02ff7604db0fb02b0ff606747d114071c2ba3ddbfb8dc3afeaa99d7028c55"
+    },
+    {
+     "file": "glass-reach-01.png",
+     "sha256": "ab87f2a5e200cb448cd89cf86d9d639a171192d4ea099f766a7cc5a52d861dbf"
+    },
+    {
+     "file": "glass-reach-02.png",
+     "sha256": "c77324f0366f58764614c59a75f71b56afd7501abe2cf94d1a0bb91bc539e014"
+    },
+    {
+     "file": "glass-reach-03.png",
+     "sha256": "4214fcf45f7e7cc27d8ff4dc5953a533b1757e0e723af631eec056b8d1880587"
+    },
+    {
+     "file": "glass-reach-04.png",
+     "sha256": "088e2f20eab492611a229af1e0c5b451bd7687181ef92e5902631a3869fc1817"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "sloth-burden-man-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    125.5,
+    240.0
+   ],
+   "visibleHeight": 241.8,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1b02",
+    "name": "^나태에 잠식된 남자",
+    "boss": true
+   },
+   "bytes": 426902,
+   "sha256": "0d6b5c275a15c01308a3ad803a74690333c9259e57bc7290522fecf81baab2aa",
+   "source": [
+    {
+     "file": "heavy-shuffle-01.png",
+     "sha256": "9cacd403f9f092084bcddfe2bb106c890b48ac6b0dfcabe64e9f97ee16cefba2"
+    },
+    {
+     "file": "heavy-shuffle-02.png",
+     "sha256": "f28f20edc35b0a75c3b30e51878a0de785f5650cd410b1783977716bf337c479"
+    },
+    {
+     "file": "heavy-shuffle-03.png",
+     "sha256": "86e013bb8c4a2de0e62f292063ac89572decf8c6e1de16297a52aff9a15d4226"
+    },
+    {
+     "file": "heavy-shuffle-04.png",
+     "sha256": "ba6fed2fe5ca2a1ac57cd54acb683529bccff5aba59889fa041d3c844bcfb73d"
+    },
+    {
+     "file": "burden-swipe-01.png",
+     "sha256": "8d5967373e49f5b08bfb9c5f7c2756bbd754991a11bb32cc4d7ba998e0984024"
+    },
+    {
+     "file": "burden-swipe-02.png",
+     "sha256": "b964fc0b2748595205163fc1f8c58fb2ecd850a122548d3e6e75e80cea9795a3"
+    },
+    {
+     "file": "burden-swipe-03.png",
+     "sha256": "44aa2574d29681e81579b82c98395ceef26296cf9909dd0dd8018c641c608c8d"
+    },
+    {
+     "file": "burden-swipe-04.png",
+     "sha256": "0531a585447e93a4e5bc6c2a8f68fedf9bc143e951d08a393fcf007803fe755f"
     }
    ],
    "finalArt": false

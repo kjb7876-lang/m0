@@ -1,5 +1,5 @@
 {
-  "schema": "mammon-v3-runtime-candidate/v1",
+  "schema": "mammon-v3-runtime/v1",
   "base_sha": "7b6577d0bc9d88c1a8ef56fb70a2abd077df5071",
   "origin": "User-provided V3 original artwork; originals retained, only 768px derivatives copied",
   "original_archive_sha256": "c428423f8b9f8356776d61961f20559d32eaf2d75a3388d2a0884669fbf24e5f",
@@ -22,7 +22,7 @@
       "pivot": null,
       "source_sha256": "367296ff3a6edc251980c052611b316b4dce27a8d7c10e5c35728d8fee776835",
       "contact_uncertainty_px": null,
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "W01",
@@ -148,7 +148,7 @@
       "pivot": null,
       "source_sha256": "4479882cec8d03f5b2c663d983010fe72c31fad8f69f2baf5268026647120c7b",
       "contact_uncertainty_px": null,
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "P01",
@@ -170,7 +170,7 @@
         4.0,
         4.0
       ],
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "P02",
@@ -192,7 +192,7 @@
         4.899521531100478,
         4.899521531100478
       ],
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "D01",
@@ -214,7 +214,7 @@
         4.899521531100478,
         4.899521531100478
       ],
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "O01",
@@ -236,7 +236,7 @@
         3.4633596392333708,
         3.4633596392333708
       ],
-      "status": "isolated-preview-only"
+      "status": "registered"
     },
     {
       "id": "O02",
@@ -258,7 +258,7 @@
         4.0,
         4.0
       ],
-      "status": "isolated-preview-only"
+      "status": "registered"
     }
   ],
   "totals": {
@@ -266,5 +266,6 @@
     "base_level_rgba_bytes": 21092352,
     "full_mip_chain_rgba_bytes_estimate": 28122480,
     "additional_mips_rgba_bytes_estimate": 7030128
-  }
+  },
+  "approved_art_sha": "dc3e094284cc4ac3cfac78d182d461b0aa7fd614"
 }

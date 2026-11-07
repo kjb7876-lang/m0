@@ -19,7 +19,8 @@ if(r?.id==='ep1b06'){
   sourceTo:dir?r.exploration?.sourceExits?.[dir]?.to??null:null,open:status?.open===true};
 }
 const nearest=p?foes.slice().sort((a,b)=>distance(p,a)-distance(p,b))[0]:null;
-return {hero:p?.hero,slots,nextPortal,
+const art=window.__STORYWORLD_MAMMON_MINIATURE_PILOT__?.inspect();
+return {hero:p?.hero,slots,nextPortal,mammonRegistered:art?.registered===true,artRevision:art?.revision||null,
  viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):null},
  nearest:nearest?{id:nearest.id,x:nearest.x,y:nearest.y,hp:nearest.hp,maxHp:nearest.maxHp,distance:distance(p,nearest)}:null,
  started:typeof started!=='undefined'&&started,loading:typeof loading!=='undefined'&&loading,
@@ -129,6 +130,7 @@ def main():
                         break
                     else:time.sleep(.3);continue
                     if m["active"]!="three":raise RuntimeError("Mammon Three renderer not active")
+                    if not m["mammonRegistered"]:raise RuntimeError("Mammon production script is not registered")
                     if phase!=last:
                         result["phaseTransitions"].append({"wallSeconds":round(now,2),"gameTime":m["gameTime"],"from":last,"to":phase})
                         last=phase;phase_photo(s,phase)

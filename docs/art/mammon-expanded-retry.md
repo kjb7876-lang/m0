@@ -1,8 +1,8 @@
-# 맘몬 금고: 확대 후 격리 후보 (SW-0008)
+# 맘몬 금고 V16 (SW-0008)
 
-첫 테스트 기준 `7b6577d0bc9d88c1a8ef56fb70a2abd077df5071` (#280), 중간 테스트 기준 `533fbec9c0b07281fcd0a7acc4ad7fd8f6e9ca76` (R381), 최신 테스트 기준 `084dc76b9f3f8525b865307b8874ec58a75c6cfe` (R382). #277 확대 병합 `a2fc5bc5dedc39ee8f7052cc9bb61cac7c4434e2`. 이 PR은 **공개 게임에 등록하지 않는 검토용 후보**다. 원본 게임·미술·세이브는 수정하지 않는다.
+V16을 승인한 미술 검토 기준은 R382 `084dc76`이고, 제품 등록의 기준은 R386 `9ca6e4f`다. 확대 지도는 PR #277에서 도입됐다. 게임에서는 `777 → STORY → 맘몬 금고`로 이 구역에 들어갈 수 있다.
 
-## 정본과 후보
+## 격리 후보의 정본과 자산
 
 - 첫 기준 manifest `b26306fa1493f5ced2c4a1cb88fd61f87a6a789fa1e510bcc7c8203a2db84a58`로 4,948파일/955,238,766바이트 재구성. #277 직후와 동일한 seed 77에서 바닥 7,185·벽 192·논리 방 17·연결 22·길목 31·r224Rooms 48·문 3. 확대 전 3,558/168과 다르다. 입구 (88,60.5), 보스문 (20,20) 폭6, 앞방 문 (85.5,64) 폭5, 다음 구역 문 (5,6) 폭8. 다음 구역 문 위치는 클리어 출구 성공 증거가 아니다. R381 정본 재빌드: manifest `76bb77e4f50dbf84645776d90e179f4673d8dd6220beaad11b8d4c7b4b2a4d10`, 4,955파일/957,214,322바이트.
 - V12 보존본 SHA256 `0572822ba4eb01bed69cec79e3ef6f5c9be3bcf733ca31256f0a6db2656471bf`. 준비 후보 두 ZIP의 CRC와 SHA256 재확인. 별도 V3 원본 PART-01은 정확 이름 검색에 0건이며 단독 저장은 미확인이다. 정식 Drive 전체 원본 ZIP을 이번 실행에서 재수신했다: 24,051,083 B, SHA256 `c428423f8b9f8356776d61961f20559d32eaf2d75a3388d2a0884669fbf24e5f`, 23개 엔트리 CRC 통과, 내부 manifest 22개 SHA 통과, 파생 12종의 원본 참조 해시 일치.
@@ -10,17 +10,21 @@
 - O01/O02는 기록실·전실의 장부 책상, 금고 구획·보안 회랑의 금고장으로 구분한다. 피벗은 원본 발 접점에서 파생했고 카메라를 향한 평면에 한 번만 투영한다. R224 가구의 늦은 생성, 입구·문·통행 가능한 방 경계·전투 구역을 피한다. 위협 예고 때 추가 가구·장식 기둥/문설주를 숨기며 게임 상태는 쓰지 않는다. 서사·보상·보스 조건·세이브·기존 문 UI는 후보 파일에서 건드리지 않는다.
 - 준비 12종 모두 원본 SHA/파생 SHA 및 최대변 768 px. 격리 빌드가 실제로 요청하는 7종은 인코딩 2,179,372 B, RGBA8 기본 레벨 13,762,560 B, 전체 mip 이론 합계 18,350,032 B. 실제 GPU 메모리·FPS 측정값은 없다. 이 범위의 전용 경로 외에 공통 index, release manifest, Pages 등록 파일은 수정하지 않았다.
 
-## 재현
+## 등록판 재현
+
+PR의 기준판과 등록판을 각각 독립된 디렉터리에서 빌드한다. 아래 명령은 등록판 저장소에서 실행한다.
 
 ```sh
 python3 scripts/build-r96.py
 node r96/qa/mammon-miniature-pilot/check.cjs
-node r96/qa/mammon-miniature-pilot/prepare-preview.cjs --site r96/hospital-three-pc/site --out /tmp/mammon-v3-preview
-python3 -m http.server 4300 --bind 127.0.0.1 --directory r96/hospital-three-pc/site
-# 별도 터미널
-python3 -m http.server 4301 --bind 127.0.0.1 --directory /tmp/mammon-v3-preview
-# 별도 터미널: 보안을 해제하지 않은 비-root Chrome/ChromeDriver 필요
-python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1:4300/ --after http://127.0.0.1:4301/ --out /tmp/mammon-v3-captures
+baseline="$(mktemp -d)/base"
+git worktree add --detach "$baseline" 9ca6e4f10a2cc5265b245c922c1f692af67679e5
+python3 "$baseline/scripts/build-r96.py"
+python3 -m http.server 4300 --bind 127.0.0.1 --directory "$baseline/r96/hospital-three-pc/site" &
+python3 -m http.server 4301 --bind 127.0.0.1 --directory r96/hospital-three-pc/site &
+# 일반 사용자 계정에서 시스템 Chrome과 ChromeDriver로 실행
+python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1:4300/ --after http://127.0.0.1:4301/ --view pc --out /tmp/mammon-v16-pc
+python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1:4300/ --after http://127.0.0.1:4301/ --view mobile --out /tmp/mammon-v16-mobile
 ```
 
 - CPU 검사는 seed 27/77/777 VM의 `makeRoom`/`placeRoom`, 실제 Three 클래스와 모의 렌더 호출이다. 자연 진행, 브라우저, GPU 성공으로 집계하지 않는다.
@@ -55,3 +59,11 @@ python3 r96/qa/mammon-miniature-pilot/browser-check.py --before http://127.0.0.1
 독립 점수: 8.1 / 7.6 / 7.6 / 7.8 / 7.8 / 7.2 / 7.4, 평균 **107/14 = 7.642857…** (미달). 금고·보안실 네 컷 모두 O02 이미지가 로드되고 시야에 투영됐지만 그리기 전에 숨겨졌다. 기록실은 읽혔다. 전투 종료 위치는 두 화면쌍의 PC 0.392/모바일 9.5704칸 차이. PC 공격 표적 HP 감소/부분 연속 JPEG 5장, 모바일 지정 표적은 8장 미확인. 이 상태로 공개하지 않았다.
 
 R382 정본 재빌드 4,971파일/961,800,712 B, manifest `896251f8dd08fb30f8e6d811c8b1fa6c3f2ab9bafa4b7dc9794abd30b1c33af4`. seed77 기준 바닥·벽·방·길목·문·출구 정본 9필드 및 적 ID/이름/체력/최대체력이 직전 R381과 동일했다. R379 8/8, R171 22/22 통과.
+
+## V16 공개 등록
+
+7분야 독립 주관평가(미술·연출·카메라·공간·조명·애니메이션/VFX·UX)는 8.2 / 7.7 / 7.6 / 8.1 / 7.8 / 7.2 / 7.5이다. 평균 541/70 = 7.728571…이다. 사용자가 이 평가와 알려진 한계를 확인하고 V16의 공개 배포를 승인했다. 점수는 그대로 유지한다.
+
+공식 경로는 #282의 녹음 음성과 #290의 몬스터 자산을 포함한 R386 `9ca6e4f10a2cc5265b245c922c1f692af67679e5`에서 빌드한다. 게임 진입 문서에 맘몬 스크립트를 한 번 등록하고 `sync-r99.py`로 그 스크립트와 실제 사용 이미지 F01/W06/P01/P02/D01/O01/O02를 등록한다. 이전 격리 미술 `dc3e094284cc4ac3cfac78d182d461b0aa7fd614`와의 실행 코드 차이는 등록 여부를 보여주는 진단이다. 벽·문·가구의 그림이나 게임 규칙은 동일하다. 공개 검사는 해당 스크립트와 이미지의 SHA256을 매니페스트와 대조한다.
+
+[격리판 결과](https://github.com/kjb7876-lang/m0/actions/runs/42331452634)에서 실제 777 입장 뒤 상태 주입 없이 389.47초에 보스·출구를 거쳐 `ep1b06b` 도착을 확인했다. 당시 두 촬영 job은 실패했다. [별도 실전 관찰](https://github.com/kjb7876-lang/m0/actions/runs/42332603720)은 PC 후보에서 영웅의 실제 입력과 적 사망을 확인했다. 공격 직후 원본 PC 촬영은 시간 제한에 걸렸고, 모바일 두 판에서는 사거리 안의 표적을 확보하지 못했다. 실제 GPU·휴대전화·일반 캠페인 시작부터의 검증은 별개다.

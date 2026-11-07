@@ -37,7 +37,7 @@ function exposed(x,y,z){
 }
 function actor(e){return e?{id:e.id,x:e.x,y:e.y,hp:e.hp,maxHp:e.maxHp,attackAnim:e.attackAnim||0,
   attackCooldown:e.attackCD??null,deadRecorded:e.deadRecorded===true,
-  casting:!!(e.cast||e.casting||e.attack),spawnState:e.spawnState??null}:null;}
+  combo:e.combo??null,casting:!!(e.cast||e.casting||e.attack),spawnState:e.spawnState??null}:null;}
 const activeHazards=(typeof hazards==='undefined'?[]:hazards).filter(h=>h&&(!Number.isFinite(h.life)||h.age<h.life));
 const world={zone:typeof room==='object'?room?.id:null,layer:typeof layer==='undefined'?null:layer,
   stage:typeof room==='object'?room?.encounterStage??null:null};
@@ -87,11 +87,12 @@ def _actions(s, actions):
     return s.call("/actions", {"actions": [{"type": "key", "id": "keyboard", "actions": actions}]})
 
 
-def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=None, before_input=None):
-    """Sample the variant's one primary key press. Callbacks never receive control with a key held."""
+def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=None, before_input=None, after_input=None):
+    """Sample one native basic attack, with released input before any post-input capture."""
     if view not in ("pc", "mobile") or variant not in ("before", "after") or target.get("marker") != "combat":
         raise ValueError("Expected native before/after PC or mobile combat marker")
     attack_key=target.get("attackKey","a")
+    touch=target.get("attackControl")=="touch"
     if attack_key not in ("a","1"):
         raise ValueError("Expected physical A or 1")
     max_range=float(target.get("comparisonRange",2.6))
@@ -102,7 +103,8 @@ def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=N
     folder.mkdir(parents=True, exist_ok=True)
     report = {"status": "INCOMPLETE", "view": view, "variant": variant, "targetEnemyId": target.get("enemyId"),
               "fixturePosition": target.get("fixturePosition"), "fixture": "Existing 777 combat marker",
-              "attackKey":attack_key,"maxTargetDistance":max_range,"sampleBudgetSeconds":60,
+              "attackKey":None if touch else attack_key,"attackControl":"mobile native basic attack button" if touch else "keyboard",
+              "maxTargetDistance":max_range,"sampleBudgetSeconds":120,
               "input": [], "inputReleased": False, "frames": [], "issues": [],
               "qualification": "Sequential native-resolution Chrome surface JPEGs, not a video or FPS measurement. "
                                "Read-only telemetry brackets each capture; the sampled pixels may be from any serial in that interval. "
@@ -139,24 +141,30 @@ def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=N
         if not s.js(WATCH,target.get("enemyId"),observer_slot):
             raise RuntimeError("Requested native target ID absent at sequence start")
         for i in range(8):
-            if time.monotonic() - start > 60:
-                raise TimeoutError("60-second sampling budget exhausted")
+            if time.monotonic() - start > 120:
+                raise TimeoutError("120-second sampling budget exhausted")
             if i == 2:
                 if before_input and before_input() is False:
-                    raise RuntimeError("Caller could not release the aligned start")
+                    raise RuntimeError("Native comparison target not eligible immediately before trusted input")
                 pre=report["preInput"]=snapshot()
                 validate_pre_input(pre)
                 if (pre["zone"],pre["layer"],pre["renderer"],pre["stage"])!=("ep1b06","STORY","three",report["initialStage"]) or pre["modal"] or pre["loading"] or pre["story"]:
                     raise RuntimeError("Combat scene changed before input")
-                pulse={"event":"keyDown,pause,keyUp","key":attack_key,"requestedPauseMs":80,"acknowledged":False,
+                pulse={"event":"pointerDown,pause,pointerUp" if touch else "keyDown,pause,keyUp",
+                       "key":None if touch else attack_key,"requestedPauseMs":80,"acknowledged":False,
                        "requestUtc":_utc(),"requestMs":round((time.monotonic()-start)*1000,1)}
                 report["input"].append(pulse)
                 key_may_be_down = True
-                _actions(s,[{"type":"keyDown","value":attack_key},{"type":"pause","duration":80},
-                            {"type":"keyUp","value":attack_key}])
+                if touch:
+                    pulse["point"]=s.touch_basic_attack()
+                else:
+                    _actions(s,[{"type":"keyDown","value":attack_key},{"type":"pause","duration":80},
+                                {"type":"keyUp","value":attack_key}])
                 key_may_be_down = False
                 report["inputReleased"] = True
                 pulse.update(acknowledged=True,responseUtc=_utc(),responseMs=round((time.monotonic()-start)*1000,1))
+            if i == 2 and after_input:
+                after_input()
             before = snapshot()
             if (before["zone"], before["layer"], before["renderer"]) != ("ep1b06", "STORY", "three"):
                 raise RuntimeError("Active STORY ep1b06 Three scene unavailable")
@@ -199,9 +207,14 @@ def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=N
     finally:
         if key_may_be_down:
             try:
-                _actions(s,[{"type":"keyUp","value":attack_key}])
+                if touch:
+                    with urlopen(Request(s.session+"/actions",method="DELETE"),timeout=6):
+                        pass
+                else:
+                    _actions(s,[{"type":"keyUp","value":attack_key}])
                 report["inputReleased"] = True
-                report["input"].append({"event":"recoveryKeyUp","key":attack_key,"acknowledged":True,"utc":_utc()})
+                report["input"].append({"event":"releaseActions" if touch else "recoveryKeyUp",
+                                        "key":None if touch else attack_key,"acknowledged":True,"utc":_utc()})
             except Exception as exc:
                 # A partially delivered action request may have left the source locked.
                 # W3C release actions clears input state in this disposable session.
@@ -250,5 +263,5 @@ def capture_combat_sequence(s, out, view, target, *, variant="after", on_frame=N
     report["status"] = "CAPTURED" if not report["issues"] and report["inputReleased"] else "INCOMPLETE"
     checkpoint()
     return {key: report[key] for key in ("status", "uniqueFrames", "rendererAdvances", "inputReleased",
-                                        "initialStage","attackKey","preInput","witness","qualification","issues") if key in report} | {
+                                        "initialStage","attackKey","attackControl","preInput","witness","qualification","issues") if key in report} | {
         "manifest": f"{prefix}/sequence.json", "files": [row["file"] for row in report["frames"]]}

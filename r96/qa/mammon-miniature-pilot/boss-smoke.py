@@ -86,6 +86,9 @@ def main():
             session.await_js("const p=__STORYWORLD_PROGRESSION_R71__;if(p.difficultyState().open){p.selectDifficulty('normal');await p.confirmDifficulty();}")
             session.until("!loading&&room?.id==='ep1b06'");session.js(web.SKIP)
             result["injections"].append({"kind":"777 travel, difficulty and arrival story skip"})
+            art=session.js("return window.__STORYWORLD_MAMMON_MINIATURE_PILOT__?.inspect() || null")
+            check(art and art["registered"], "Mammon production script is not registered")
+            result["registeredRevision"]=art["revision"]
             a=note(session,"arrival")
             check(a["zone"]=="ep1b06" and a["active"]=="three" and a["phase"]=="route","unexpected arrival")
             expected=a["next"];result["expectedDestination"]=expected

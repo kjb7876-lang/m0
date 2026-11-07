@@ -15,8 +15,8 @@ VIEWS = {"pc": (1920, 1080, 1), "mobile": (390, 844, 3)}
 REQUIRED = ("entry", "branch", "records", "gather", "boss-door", "exit", "combat")
 SUPPLEMENTAL = ("security", "vault")
 MARKERS = REQUIRED + SUPPLEMENTAL
-# Sample native combat while the field is still in its route phase, before a gather fixture starts a rally.
-CAPTURE_ORDER = ('entry','branch','records','combat','gather','boss-door','exit') + SUPPLEMENTAL
+# Capture combat early, before any static room fixture advances the encounter.
+CAPTURE_ORDER = ('combat','entry','branch','records','gather','boss-door','exit') + SUPPLEMENTAL
 SKIP = "for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);return !storyScene;"
 STATE = """
 const phase=window.__STORYWORLD_PHASE1__, status=phase?.inspect(), engine=phase?.controller?.state?.three;
@@ -134,13 +134,17 @@ if(label==='combat'){
     bodyIntersects:e.bodyIntersects,artReady:e.image.ready,combatLineClear:e.combatLineClear,
     cast:typeof casting==='string'?casting:casting?.kind||null,attackAnim:raw?.attackAnim||0});
  }
+ const encounter=window.__mammonQaEncounter;
+ const watched=encounter?.owner===room&&encounter?.enemy?.id===target.enemyId?encounter:null;
+ const subject=watched?.enemy;
  nativeCombat={engaged:!!room.engaged,stage:room.encounterStage,
-  heroAttackAnimation:player.attackAnim,heroAttackCD:player.attackCD,
+  heroAttackAnimation:player.attackAnim,heroAttackCD:player.attackCD,heroCombo:player.combo,
   hazards:typeof hazards==='undefined'?0:hazards.length,
   missiles:typeof shots==='undefined'?0:shots.length,
-  targeted:room.enemies.find(e=>e.id===target.enemyId)?.hp??null,
-  targetPresent:room.enemies.some(e=>e.id===target.enemyId),
-  targetDeadRecorded:room.enemies.some(e=>e.id===target.enemyId&&(e.deadRecorded||e.spawnState==='dead'))};
+  targeted:subject?.hp??null,targetPresent:!!subject&&room.enemies.includes(subject),
+  sameObjectTracked:!!subject,targetDeadRecorded:subject?.deadRecorded===true,
+  trustedAttackInputObserved:watched?.input?.trusted===true,inputStart:watched?.input??null,
+  identityReplaced:!!subject&&room.enemies.some(e=>e.id===target.enemyId&&e!==subject)};
 }
 return {serial:eng.serial,gameTime:time,player:{x:player.x,y:player.y,hp:player.hp},
  fixtureDisplacement:Math.hypot(player.x-target.fixturePosition.x,player.y-target.fixturePosition.y),
@@ -237,6 +241,29 @@ class Session:
     def key(self,value,milliseconds):
         self.call("/actions",{"actions":[{"type":"key","id":"keyboard","actions":[
             {"type":"keyDown","value":value},{"type":"pause","duration":milliseconds},{"type":"keyUp","value":value}]}]})
+    def reveal_mobile_setting(self,selector):
+        for details in ("#detailSettingsR114","details.r114-group","#moreSettingsR142"):
+            group=details+":has("+selector+"):not([open]) > summary"
+            if self.js("return !!document.querySelector(arguments[0])",group):
+                self.click(group)
+    def touch_basic_attack(self):
+        self.click("#mobileSettingsR63")
+        selector="#mobileActionsR63 button:first-of-type"
+        self.reveal_mobile_setting(selector)
+        point=self.js("""
+        const button=document.querySelector(arguments[0]);
+        if(!button||button.textContent.trim()!=='기본 공격')return null;
+        button.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});
+        const r=button.getBoundingClientRect(),x=Math.round(r.x+r.width/2),y=Math.round(r.y+r.height/2);
+        return r.width>0&&r.height>0&&button.contains(document.elementFromPoint(x,y))?{x,y}:null;
+        """,selector)
+        if not point:
+            raise RuntimeError("Mobile native basic attack control could not be exposed at a touchable point")
+        self.call("/actions",{"actions":[{"type":"pointer","id":"basic-attack-finger",
+            "parameters":{"pointerType":"touch"},"actions":[
+                {"type":"pointerMove","origin":"viewport","duration":0,**point},
+                {"type":"pointerDown","button":0},{"type":"pause","duration":80},{"type":"pointerUp","button":0}]}]})
+        return point
     def screenshot(self,path):
         raw=base64.b64decode(api(self.session+"/screenshot"),validate=True)
         if raw[:8]!=b"\x89PNG\r\n\x1a\n":raise RuntimeError("WebDriver screenshot not a PNG")
@@ -259,44 +286,70 @@ def frame_sample(s):
     requestAnimationFrame(sample);""","args":[]})
     return r
 
+DOOR_SAMPLE = """
+const d=room?.exploration?.worldR74?.doors?.find(d=>d.id==='door-0');
+if(!d)return null;
+return {player:{x:player.x,y:player.y,hp:player.hp},gameTime:time,phase:window.__STORYWORLD_WORLD_COMBAT_R78__?.state(room)?.phase,
+        open:__STORYWORLD_WORLD_R74__.isOpen(room,d),blocked:blocked(player.x,player.y,undefined,room),
+        forwardBlocked:blocked(player.x,player.y-.17,undefined,room),guide,auto,
+        margin34:blocked(player.x,player.y,.34,room),inRoute:route.length,command:!!command};
+"""
+
 def check_closed_boss_door(s):
-    # Position injection only. The collision/door states and actual movement are native.
+    # First inspect the real near face, so the fixture never starts in or beyond it.
     placement=s.js("""
-    const door=room.exploration.worldR74.doors.find(d=>d.id==='door-0');
-    if(!door||__STORYWORLD_WORLD_R74__.isOpen(room,door)||loading||modal||storyScene||player.hp<=0)return null;
-    for(const dy of [.90,1.1,1.3]){
-      const x=door.x+.7,y=door.y+dy;
-      if(blocked(x,y,undefined,room)||!blocked(door.x,door.y,undefined,room))continue;
-      player.x=x;player.y=y;route=[];command=null;
-      return {x,y,doorX:door.x,doorY:door.y,halfWidth:door.width/2,halfDepth:door.depth/2};
+    const d=room?.exploration?.worldR74?.doors?.find(d=>d.id==='door-0');
+    if(!d||d.width<=d.depth||__STORYWORLD_WORLD_R74__.isOpen(room,d)||guide||auto||
+       loading||modal||storyScene||player.hp<=0)return null;
+    const contact=d.depth/2+.27;
+    for(const lateral of [.4,.25,0]){
+      const x=d.x+d.width*lateral,y=d.y+contact+.31;
+      if(blocked(x,y,undefined,room)||!blocked(x,d.y,undefined,room))continue;
+      clearControls();route=[];command=null;target=null;player.x=x;player.y=y;
+      return {x,y,doorX:d.x,doorY:d.y,halfWidth:d.width/2,halfDepth:d.depth/2};
     }return null;""")
-    if not placement:return {"result":"UNTESTED","detail":"native boss door is open or no walkable approach"}
-    # Under slow software rendering the first pulse may move only one native step.
-    # Reach the face first, then collect a separate press while already at the face.
-    samples=[]
+    if not placement:
+        return {"result":"UNTESTED","detail":"No neutral, walkable near side of the closed native door"}
     contact=placement["halfDepth"]+.27
-    for attempt in range(5):
-        s.key("\ue013",500 if attempt else 650)
-        row=s.js("""
-        const d=room.exploration.worldR74.doors.find(d=>d.id==='door-0');
-        return {player:{x:player.x,y:player.y,hp:player.hp},gameTime:time,
-          open:__STORYWORLD_WORLD_R74__.isOpen(room,d),blocked:blocked(player.x,player.y,undefined,room),
-          margin34:blocked(player.x,player.y,.34,room),forwardBlocked:blocked(player.x,player.y-.17,undefined,room)};
-        """)
+    # moveActor divides a displacement into steps of at most .17 cells.
+    def at_face(row):
         x,y=row["player"]["x"],row["player"]["y"]
-        row["atClosedFace"]=(contact-1e-5<=y-placement["doorY"]<=contact+.17 and
-                             abs(x-placement["doorX"])<placement["halfWidth"]-.27 and
-                             not row["open"] and not row["blocked"] and row["forwardBlocked"])
-        samples.append(row)
-        if row["open"] or row["blocked"] or abs(x-placement["doorX"])>=placement["halfWidth"]-.27:break
-        if len(samples)<2 or not (samples[-2]["atClosedFace"] and row["atClosedFace"]):continue
-        last=samples[-2];dx=abs(x-last["player"]["x"]);dy=abs(y-last["player"]["y"])
-        if dx>.02 and dy<.015 and row["gameTime"]>last["gameTime"]:
-            return {"result":"STOP_AT_CLOSED_FACE_OBSERVED","fixtureStart":placement,
-                    "nativeContactDistance":contact,"samples":samples,"repeatedPressMovedAlongFace":dx,
-                    "repeatedPressNormalDelta":dy,"qualification":"Player fixture start; native keyboard default .27 collision and repeated actual input"}
-    return {"result":"INCONCLUSIVE","fixtureStart":placement,"nativeContactDistance":contact,"samples":samples,
-            "qualification":"No two consecutive actual inputs verified the stop at the closed face"}
+        return (not row["open"] and not row["blocked"] and row["forwardBlocked"]
+                and contact-1e-6<=y-placement["doorY"]<=contact+.17
+                and abs(x-placement["doorX"])<placement["halfWidth"]-.27)
+    samples=[]
+    result={"result":"INCONCLUSIVE","fixtureStart":placement,"nativeContactDistance":contact,
+            "samples":samples,"qualification":"Player-only approach fixture; two separate native W3C ArrowUp presses, with real sliding along the closed face."}
+    for attempt in range(7):
+        before=s.js(DOOR_SAMPLE)
+        if before is None or before["open"] or before["guide"] or before["auto"]:
+            result["detail"]="Door or native controls changed before input";break
+        # Use short pulses on mobile to keep the actor away from the end of the door.
+        duration=180 if s.js("return innerWidth<600") else 550
+        s.key("\ue013",duration)
+        after=s.js(DOOR_SAMPLE)
+        if after is None:
+            result["detail"]="Door vanished during input";break
+        after["atClosedFace"]=at_face(after)
+        dx=abs(after["player"]["x"]-before["player"]["x"])
+        dy=after["player"]["y"]-before["player"]["y"]
+        after.update(nativeKey="ArrowUp",durationMs=duration,before=before,slide=dx,normalDelta=dy)
+        samples.append(after)
+        if after["open"] or after["guide"] or after["auto"] or after["player"]["hp"]<=0:
+            result["detail"]="Interrupted input or invalid player/door state";break
+        if after["player"]["y"]<placement["doorY"]+contact-1e-6 and abs(after["player"]["x"]-placement["doorX"])<placement["halfWidth"]-.27:
+            result.update(result="CROSSED_CLOSED_FACE",detail="Player crossed the solid near face while the door was closed")
+            break
+        if after["blocked"]:
+            result.update(result="INSIDE_BLOCKED_TILE",detail="Player ended the input at a blocked position")
+            break
+        if abs(after["player"]["x"]-placement["doorX"])>=placement["halfWidth"]-.27:
+            result["detail"]="Input moved outside the span of the door";break
+        if (attempt and samples[-2]["atClosedFace"] and at_face(before) and after["atClosedFace"]
+                and dx>.02 and abs(dy)<.015 and after["gameTime"]>before["gameTime"]):
+            result.update(result="STOP_AT_CLOSED_FACE_OBSERVED",repeatedPressMovedAlongFace=dx,
+                          repeatedPressNormalDelta=abs(dy));break
+    return result
 
 READ_SAVE="""
 const key=__STORYWORLD_CHEAT777__.inspect().saveSlot;
@@ -315,22 +368,45 @@ def open_menu(s):
     return "Escape real keyboard input with mobile touch emulation"
 
 def save_and_reopen_tab(s,url,view):
-    result={"status":"UNTESTED","scope":"777 test save only, fresh tab in same ephemeral Chrome process",
+    result={"status":"UNTESTED","scope":"777 test save; new tab in the same disposable Chrome profile",
             "pagehideMayAutosave":True}
-    # Only a new temporary profile is supplied to this runner. Original saves stay outside it.
     try:
-        if not s.js(MARKER,"entry",None):raise RuntimeError("Could not position at native entry")
+        # Pick a walkable, non-entry, non-portal point; default spawn must not pass this check.
+        anchor=s.js("""
+        const L=room.exploration,entry=L.entry,doors=L.worldR74.doors;
+        if(guide||auto||loading||storyScene||player.hp<=0)return null;
+        const cells=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5}))
+          .filter(p=>{const d=Math.hypot(p.x-entry.x,p.y-entry.y);
+            return d>=3&&d<=7&&!blocked(p.x,p.y,.45,room)&&
+              doors.every(t=>Math.hypot(t.x-p.x,t.y-p.y)>3.4);});
+        cells.sort((a,b)=>Math.hypot(a.x-entry.x,a.y-entry.y)-Math.hypot(b.x-entry.x,b.y-entry.y)||a.x-b.x||a.y-b.y);
+        if(!cells.length)return null;const p=cells[0];clearControls();route=[];command=null;target=null;
+        player.x=p.x;player.y=p.y;return {x:p.x,y:p.y,nativeEntry:{x:entry.x,y:entry.y}};""")
+        if not anchor:raise RuntimeError("No safe non-entry save fixture position")
+        result["fixtureAnchor"]=anchor
         if view=="mobile" and s.js("return !!document.querySelector('#mobileSettingsR63')?.getClientRects().length"):
-            s.click("#mobileSettingsR63");s.click("#mobileSaveR142")
-            result["saveUI"]=["mobile settings gear","mobileSaveR142"]
+            s.click("#mobileSettingsR63")
+            save_button="#mobileSaveR142";result["saveUI"]=["mobile settings gear","mobileSaveR142"]
         else:
-            open_menu(s);s.click("#menuSave")
-            result["saveUI"]=["menu","menuSave"]
-        saved=s.js(READ_SAVE);current=s.js(STATE)
-        result["atMenuSave"]=saved
-        if not saved or not saved["cheat"] or saved["zone"]!="ep1b06" or saved["layer"]!="STORY":raise RuntimeError("Menu save did not yield the Mammon 777 slot")
-        if math.hypot(current["player"]["x"]-saved["x"], current["player"]["y"]-saved["y"])>.1:
-            raise RuntimeError("777 slot did not contain the position at the menu save")
+            open_menu(s)
+            save_button="#menuSave";result["saveUI"]=["menu","menuSave"]
+        s.js("""
+        const button=document.querySelector(arguments[0]);
+        button.addEventListener('click',()=>{
+          window.__mammonQaAtSaveClick={x:player.x,y:player.y,zone,layer,time};
+        },{capture:true,once:true});""",save_button)
+        s.click(save_button)
+        click=s.js("return window.__mammonQaAtSaveClick")
+        saved=s.js(READ_SAVE)
+        result.update(atMenuSave=saved,atSaveClick=click)
+        if not click or not saved or not saved["cheat"] or saved["zone"]!="ep1b06" or saved["layer"]!="STORY":
+            raise RuntimeError("Menu save did not yield an observable Mammon 777 slot")
+        # The saved coordinates are JSON numbers in map units, not CSS pixels.
+        epsilon=1e-6
+        if (math.hypot(click["x"]-saved["x"],click["y"]-saved["y"])>epsilon
+                or math.hypot(click["x"]-anchor["x"],click["y"]-anchor["y"])>.1
+                or abs(saved["time"]-click["time"])>epsilon):
+            raise RuntimeError("777 slot/clock does not match the actual save click at the non-entry fixture")
         old=api(s.session+"/window");new=s.call("/window/new",{"type":"tab"})["handle"]
         s.call("/window",{"handle":old});api(s.session+"/window","DELETE")
         s.call("/window",{"handle":new})
@@ -339,17 +415,41 @@ def save_and_reopen_tab(s,url,view):
         if view=="mobile":s.cdp("Emulation.setTouchEmulationEnabled",{"enabled":True})
         s.call("/url",{"url":url});s.until("typeof booted!=='undefined'&&booted&&!loading",180)
         persisted=s.js(READ_SAVE);result["afterTabReopen"]=persisted
-        if not persisted or not persisted["cheat"] or persisted["zone"]!="ep1b06":
-            raise RuntimeError("No persisted Mammon test slot after reopening")
+        if (not persisted or not persisted["cheat"] or
+                any(saved[k]!=persisted[k] for k in ("key","hero","version","zone","layer","x","y"))):
+            raise RuntimeError("777 saved anchor/identity did not survive closing its original tab")
         s.click("#campaignContinue54");s.until("started&&!loading",90);s.js(SKIP)
         result["resumeMenuInput"]=open_menu(s)
-        s.click("[data-r339-proxy='story-code-button']");s.click("#codeResumeR75")
-        s.until("started&&!loading&&room?.id==='ep1b06'&&__STORYWORLD_CHEAT777__.active()",90)
-        restored=s.js(STATE);result["restored"]=restored
-        delta=math.hypot(restored["player"]["x"]-persisted["x"],restored["player"]["y"]-persisted["y"])
+        s.click("[data-r339-proxy='story-code-button']")
+        s.until("document.getElementById('codeResumeR75')?.getClientRects().length")
+        # The native handler awaits restoreSave. Observe its promise instead of treating
+        # the intermediate 'entered region' frame as completion. Keep its return value.
+        s.js("""
+        const b=document.getElementById('codeResumeR75'),resume=b.onclick;
+        if(typeof resume!=='function')throw Error('Native test-slot resume handler absent');
+        const observed=window.__mammonQaResume={done:false};
+        b.onclick=function(...args){
+          const promise=Reflect.apply(resume,this,args);
+          Promise.resolve(promise).then(ok=>{
+            Object.assign(observed,{done:true,ok:ok===true,zone:room?.id,layer,
+              x:player?.x,y:player?.y,blocked:blocked(player.x,player.y,undefined,room)});
+          },err=>Object.assign(observed,{done:true,ok:false,error:String(err)}));
+          return promise;
+        };""")
+        s.click("#codeResumeR75")
+        s.until("window.__mammonQaResume?.done",120)
+        completed=s.js("return window.__mammonQaResume")
+        result["nativeResumeCompleted"]=completed
+        if not completed["ok"] or completed["zone"]!="ep1b06" or completed["layer"]!=persisted["layer"] or completed["blocked"]:
+            raise RuntimeError("Native 777 restore completed in the wrong state")
+        delta=math.hypot(completed["x"]-persisted["x"],completed["y"]-persisted["y"])
         result["positionDelta"]=delta
-        if delta>1 or restored["blocked"] or restored["layer"]!=persisted["layer"] or restored["active"]!="three":
-            raise RuntimeError("Restored scene/position mismatch")
+        if delta>epsilon:raise RuntimeError("Native 777 restore did not reproduce the persisted non-entry coordinates")
+        s.until("started&&!loading&&room?.id==='ep1b06'&&__STORYWORLD_CHEAT777__.active()&&__STORYWORLD_PHASE1__?.inspect()?.active==='three'",90)
+        s.await_js("await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));")
+        restored=s.js(STATE);result["restored"]=restored
+        if restored["blocked"] or restored["layer"]!=persisted["layer"] or restored["active"]!="three":
+            raise RuntimeError("Restored rendering/position mismatch")
         result["status"]="RESTORED_777_TEST_SLOT"
     except Exception as exc:
         result.update(status="INCOMPLETE",detail=str(exc))
@@ -389,128 +489,197 @@ def settle_view(s,marker,target):
     return evidence,history
 
 
-# Ordered by gameplay eligibility, not max HP. This is a player-position fixture only.
-COMBAT_APPROACH="""
-const ref=arguments[0],tried=arguments[1],L=room.exploration,hero=HEROES[player.hero];
-const range=Math.min(hero.range,2.6),excluded=new Set(tried);
-const diag=window.__STORYWORLD_ENEMY_STATUS24__.snapshot().enemies;
-const dom=document.getElementById('phase1-webgl').getBoundingClientRect();
-function centered(x,y){const point=project(x,y),px=dom.left+point.x,py=dom.top+point.y;
- return px>dom.left+.11*dom.width&&px<dom.right-.11*dom.width&&py>dom.top+.12*dom.height&&py<dom.bottom-.18*dom.height&&document.elementFromPoint(px,py)===canvas;}
-const rows=diag.map(d=>({d,e:room.enemies.find(e=>e.id===d.id)}))
- .filter(({d,e})=>e&&d.active&&d.renderEligible&&d.hp>0&&!e.deadRecorded&&(ref||!excluded.has(e.id))&&(!ref||e.id===ref.enemyId))
- .map(({d,e})=>({d,e,readyHere:d.image.ready&&d.sightVisible&&d.combatLineClear&&
-       d.distance<=range&&(d.bodyIntersects||d.footOnScreen)&&centered(e.x,e.y),
-       ordinary:!(e.wardChampionR81||e.boss||e.midboss||e.r61Summoned||e.r61Clone)}))
- .sort((a,b)=>Number(b.readyHere)-Number(a.readyHere)||Number(b.ordinary)-Number(a.ordinary)||
-       a.d.distance-b.d.distance||String(a.e.id).localeCompare(String(b.e.id)));
-for(const {e,d,readyHere} of rows){
- let spot;
- if(ref){spot=ref.fixturePosition;if(!spot||blocked(spot.x,spot.y,undefined,room))return null;}
- else if(readyHere){spot={x:player.x,y:player.y};}
- else{
-  // Choose a walkable point within actual hero reach with an unobstructed attack line.
-  const near=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5})).filter(p=>{
-   const gap=Math.hypot(p.x-e.x,p.y-e.y);
-   return gap>=.75&&gap<=range*.94&&!blocked(p.x,p.y,undefined,room)&&clearLine(p,e);});
-  near.sort((a,b)=>Math.hypot(a.x-e.x-1,a.y-e.y-.65)-Math.hypot(b.x-e.x-1,b.y-e.y-.65));
-  if(!near.length)continue;spot=near[0];
+# This fixture places the native hero and a living native field enemy, without spawning actors,
+# writing HP, selecting a target, opening a door or advancing the combat phase.
+COMBAT_APPROACH = """
+const [reference,attempted,inputKind='keyboard']=arguments;
+if (window.__mammonQaEncounter || guide || auto || room.id!=='ep1b06') return null;
+const range=Math.min(HEROES[player.hero].range,2.6);
+const active=room.enemies.filter(e=>visible3(e)&&renderable3(e)&&e.hp>0&&!e.disabled&&
+ e.visible!==false&&!e.deadRecorded&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!e.r61Summoned&&!e.r61Clone);
+const preferred=room.id+':r75-pack:14';
+const choices=active.filter(e=>(!reference||e.id===reference.enemyId)&&!attempted.includes(e.id))
+ .sort((a,b)=>Number(b.id===preferred)-Number(a.id===preferred)||String(a.id).localeCompare(String(b.id)));
+for(const enemy of choices){
+ let enemySpot=reference?.combatFixture?.enemyStart,heroSpot=reference?.fixturePosition;
+ if(!heroSpot){
+  const home={x:enemy.homeX??enemy.x,y:enemy.homeY??enemy.y};
+  const spaces=room.exploration.floorCells.map(([x,y])=>({x:x+.5,y:y+.5}))
+   .filter(p=>Math.hypot(p.x-home.x,p.y-home.y)<5&&!blocked(p.x,p.y,.4,room))
+   .sort((a,b)=>Math.hypot(a.x-home.x,a.y-home.y)-Math.hypot(b.x-home.x,b.y-home.y)||a.x-b.x||a.y-b.y);
+  for(const p of spaces){
+   const q=spaces.find(q=>Math.hypot(q.x-p.x,q.y-p.y)===1&&clearLine(p,q)&&
+    !active.some(e=>e!==enemy&&Math.hypot(e.x-q.x,e.y-q.y)<1.2));
+   if(q){enemySpot=p;heroSpot=q;break;}
+  }
  }
- player.x=spot.x;player.y=spot.y;route=[];command=null;
- return {marker:'combat',nativeLabel:'live combat approach',enemyId:e.id,approachId:e.id,
-         nativeId:e.nativeId||null,focus:{x:e.x,y:e.y},fixturePosition:spot,comparisonRange:range,attackKey:'1'};
+ if(!heroSpot||!enemySpot||blocked(heroSpot.x,heroSpot.y,undefined,room)||
+    blocked(enemySpot.x,enemySpot.y,.4,room)||!clearLine(heroSpot,enemySpot)||
+    Math.hypot(heroSpot.x-enemySpot.x,heroSpot.y-enemySpot.y)>range)continue;
+ const fixture={heroStart:heroSpot,enemyStart:enemySpot,originalEnemy:{x:enemy.x,y:enemy.y,hp:enemy.hp},
+   positionOnly:true,holdEnds:'first verified attack input, before the native attack handler'};
+ const test={owner:room,enemy,request:0,active:true,input:null,started:performance.now()};
+ function place(){
+  if(!test.active||test.owner!==room||!room.enemies.includes(enemy)||enemy.hp<=0||performance.now()-test.started>90000)return;
+  player.x=heroSpot.x;player.y=heroSpot.y;enemy.x=enemySpot.x;enemy.y=enemySpot.y;
+  route=[];command=null;
+ }
+ function frame(){place();if(test.active&&performance.now()-test.started<90000)test.request=requestAnimationFrame(frame);}
+ function isAttackButton(e){return e.target?.closest?.('#mobileActionsR63 button')?.textContent.trim()==='기본 공격';}
+ function onTouch(e){if(inputKind==='touch'&&e.isTrusted&&e.pointerType==='touch'&&isAttackButton(e))test.touched=e.target.closest('button');}
+ test.stop=()=>{test.active=false;cancelAnimationFrame(test.request);window.removeEventListener('keydown',onKey,true);
+  window.removeEventListener('pointerdown',onTouch,true);window.removeEventListener('click',onClick,true);};
+ function onKey(ev){
+  if(inputKind==='keyboard'&&ev.key==='1'&&ev.isTrusted&&!ev.repeat)admit('keydown-1');
+ }
+ function onClick(ev){
+  if(inputKind==='touch'&&ev.isTrusted&&isAttackButton(ev)&&test.touched===ev.target.closest('button'))admit('touch-native-basic');
+ }
+ function admit(control){
+  place();test.stop();
+  test.input={control,trusted:true,gameTime:time,hero:{x:player.x,y:player.y,combo:player.combo,cd:player.attackCD,animation:player.attackAnim},
+   enemy:{id:enemy.id,x:enemy.x,y:enemy.y,hp:enemy.hp},originalInRoom:room.enemies.includes(enemy),
+   clearInRange:clearLine(player,enemy)&&Math.hypot(player.x-enemy.x,player.y-enemy.y)<=range};
+ }
+ window.__mammonQaEncounter=test;
+ window.addEventListener('keydown',onKey,true);window.addEventListener('pointerdown',onTouch,true);
+ window.addEventListener('click',onClick,true);frame();
+ return {marker:'combat',nativeLabel:'native field enemy with matched position fixture',enemyId:enemy.id,
+   approachId:enemy.id,nativeId:enemy.nativeId||null,focus:enemySpot,fixturePosition:heroSpot,
+   combatFixture:fixture,comparisonRange:range,attackKey:'1',attackControl:inputKind};
 }
 return null;
 """
 
 def qualifying_foes(evidence,limit):
-    return sorted((f for f in evidence["foes"] if f["central"] and f["combatLineClear"] and f["distance"]<=limit),
-                  key=lambda f:(not f["ordinary"],f["distance"],str(f["id"])))
+    return [f for f in evidence["foes"] if f["central"] and f["combatLineClear"] and f["distance"]<=limit]
+
 
 def target_hit(before,end,target_id):
-    """An absent actor alone is neither a hit nor a kill."""
-    pre=before["nativeCombat"];post=end["nativeCombat"]
-    actor_pre=any(f["id"]==target_id for f in before["foes"])
-    actor_post=any(f["id"]==target_id for f in end["foes"])
-    old,new=pre["targeted"],post["targeted"]
-    changed=old is not None and new is not None and new<old
-    death=bool(old and old>0 and post["targetPresent"] and (post["targetDeadRecorded"] or new is not None and new<=0))
-    attack=post["heroAttackCD"]>pre["heroAttackCD"]+.01 or post["heroAttackAnimation"]>0
-    return {"nativeActorInBeforeFrame":actor_pre,"nativeActorInAfterFrame":actor_post,
-            "targetHpBefore":old,"targetHpAfter":new,"targetHpChanged":changed,
-            "targetDeathConfirmed":death,"nativeInputAnimation":attack,
-            "nativeActionObserved":bool(actor_pre and (actor_post and (changed or attack) or death and changed))}
+    pre,post=before["nativeCombat"],end["nativeCombat"]
+    seen_pre=any(f["id"]==target_id for f in before["foes"])
+    seen_post=any(f["id"]==target_id for f in end["foes"])
+    key=post.get("inputStart") or {}
+    same=bool(pre.get("sameObjectTracked") and post.get("sameObjectTracked") and not post.get("identityReplaced"))
+    sent=bool(post.get("trustedAttackInputObserved") and key.get("clearInRange") and key.get("originalInRoom") and
+              key.get("enemy",{}).get("id")==target_id)
+    old=(key.get("enemy") or {}).get("hp") if sent else pre.get("targeted")
+    new=post.get("targeted")
+    damaged=bool(same and old is not None and new is not None and old>new)
+    death=bool(damaged and old>0 and (post.get("targetDeadRecorded") or new<=0))
+    hero=key.get("hero") or {}
+    acted=bool(sent and (post["heroCombo"]>hero["combo"] or
+        post["heroAttackAnimation"]>hero["animation"]+.001 or post["heroAttackCD"]>hero["cd"]+.01))
+    return {"nativeActorInBeforeFrame":seen_pre,"nativeActorInAfterFrame":seen_post,"sameObjectTracked":same,
+            "trustedAttackInputObserved":sent,"control":key.get("control"),"targetHpBefore":old,"targetHpAfter":new,"targetHpChanged":damaged,
+            "targetDeathConfirmed":death,"nativeInputAnimation":acted,
+            "nativeActionObserved":bool(seen_pre and sent and acted and damaged and (seen_post or death)),
+            "primaryCaptureMeaning":"Native PNG captured after trusted input. Telemetry records the original actor's response across the capture interval; it cannot date an exact impact pixel."}
 
-def release_capture_hold(s):
-    s.js("""const a=window.__mammonQaAnchor;if(a){cancelAnimationFrame(a.request);delete window.__mammonQaAnchor;}""")
 
 def capture_combat_marker(s,row,out,view,variant,reference):
     from combat_sequence import capture_combat_sequence
-    label=row["label"];ref=(reference or {}).get("combat");attempts=[];tried=[]
+    label=row["label"]
+    ref=(reference or {}).get("combat")
+    attempts=[]
+    tried=[]
     row["combatAcquisition"]={"attempts":attempts,"expectedNativeId":ref and ref["enemyId"]}
-    limit=3
-    for attempt in range(limit):
-        target=s.js(COMBAT_APPROACH,ref,tried)
+    reference_attempt=ref
+    for _ in range(5):
+        target=s.js(COMBAT_APPROACH,reference_attempt,tried,"touch" if view=="mobile" else "keyboard")
+        if not target and reference_attempt:
+            row["combatAcquisition"]["pairedTargetUnavailable"]=True
+            reference_attempt=None
+            target=s.js(COMBAT_APPROACH,None,tried,"touch" if view=="mobile" else "keyboard")
         if not target:break
-        tried.append(target["approachId"])
-        with held_vantage(s,"combat-start",target):
+        tried.append(target["enemyId"])
+        try:
             evidence,settling=settle_view(s,"combat",target)
-            viable=qualifying_foes(evidence,target["comparisonRange"])
-            attempts.append({"approach":target["approachId"],"eligible":[f["id"] for f in viable],
-                             "position":target["fixturePosition"],"settling":settling})
-            chosen=next((f for f in viable if not ref or f["id"]==ref["enemyId"]),None)
-            if not chosen:continue
-            target.update(enemyId=chosen["id"],nativeId=chosen["nativeId"],focus={"x":chosen["x"],"y":chosen["y"]})
-            before=s.js(EVIDENCE,"combat",target)
-            startfile=out/(label+"-combat-aligned-start.png");startsize=s.screenshot(startfile)
-            start_end=s.js(EVIDENCE,"combat",target)
-            if not any(f["id"]==target["enemyId"] for f in qualifying_foes(start_end,target["comparisonRange"])):continue
-            target["matchingCombatStart"]={"pos":[before["player"]["x"],before["player"]["y"]],
-                "end":[start_end["player"]["x"],start_end["player"]["y"]],"file":startfile.name,"size":startsize,"enemyId":target["enemyId"]}
-            primary={};path=out/(label+"-combat.png");gate={"attempted":False}
-            def before_input():
-                # The first two burst samples share the reference position. Actual attack
-                # and every subsequent frame run without a QA player-position hold.
-                release_capture_hold(s)
-                gate["attempted"]=True;gate["before"]=s.js(EVIDENCE,"combat",target)
-                return any(f["id"]==target["enemyId"] for f in qualifying_foes(gate["before"],target["comparisonRange"]))
-            def on_frame(i):
-                if i<2 or primary or "before" not in gate:return
-                state=s.js(EVIDENCE,"combat",target);witness=target_hit(gate["before"],state,target["enemyId"])
-                if not witness["nativeActionObserved"]:return
-                main_state=s.js(STATE);size=s.screenshot(path)
-                end=s.js(EVIDENCE,"combat",target);final=target_hit(gate["before"],end,target["enemyId"])
-                if final["nativeActionObserved"]:
-                    primary.update(file=path.name,size=size,state=main_state,end=end,witness=final,frameIndex=i)
-            seq=capture_combat_sequence(s,out,view,target,variant=variant,on_frame=on_frame,before_input=before_input)
+            until=time.monotonic()+12
+            while not any(f["id"]==target["enemyId"] for f in qualifying_foes(evidence,target["comparisonRange"])) and time.monotonic()<until:
+                if evidence["nativeCombat"]["targeted"] is None or evidence["nativeCombat"]["targeted"]<=0:break
+                time.sleep(.1);evidence=s.js(EVIDENCE,"combat",target)
+            available=[f["id"] for f in qualifying_foes(evidence,target["comparisonRange"])]
+            attempts.append({"approach":target["enemyId"],"eligible":available,"position":target["fixturePosition"],"settling":settling})
+            if target["enemyId"] not in available:continue
+            startpath=out/(label+"-combat-aligned-start.png")
+            startsize=s.screenshot(startpath)
+            start=s.js(EVIDENCE,"combat",target)
+            if not any(f["id"]==target["enemyId"] for f in qualifying_foes(start,target["comparisonRange"])):continue
+            target["matchingCombatStart"]={"pos":[evidence["player"]["x"],evidence["player"]["y"]],
+                "end":[start["player"]["x"],start["player"]["y"]],"file":startpath.name,"size":startsize,"enemyId":target["enemyId"]}
+            candidate=out/(label+"-combat.png");entry={}
+            def mark_input():
+                entry["before"]=s.js(EVIDENCE,"combat",target)
+                return (entry["before"]["nativeCombat"]["heroAttackCD"]<=0 and
+                        any(f["id"]==target["enemyId"] for f in qualifying_foes(entry["before"],target["comparisonRange"])))
+
+            def first_frame():
+                # A slow renderer may not have ticked when WebDriver acknowledges keyUp.
+                # Observe ordinary ticks, keeping the original actor even if the game removes it.
+                deadline=time.monotonic()+15
+                proof=s.js(EVIDENCE,"combat",target)
+                while not target_hit(entry["before"],proof,target["enemyId"])["nativeActionObserved"]:
+                    subject=proof["nativeCombat"]
+                    if (time.monotonic()>=deadline or subject["identityReplaced"] or
+                            proof["gameTime"]-entry["before"]["gameTime"]>1.5):
+                        break
+                    time.sleep(.05)
+                    proof=s.js(EVIDENCE,"combat",target)
+                entry["captureStart"]=proof
+                entry["size"]=s.screenshot(candidate)
+                entry["after"]=s.js(EVIDENCE,"combat",target)
+                entry["state"]=s.js(STATE)
+
+            seq=capture_combat_sequence(s,out,view,target,variant=variant,before_input=mark_input,after_input=first_frame)
             row["combatSequence" if variant=="after" else "baselineCombatSequence"]=seq
-            if not primary:
-                # Preserve a diagnostic from this actual attempt; do not score it as a hit.
-                state=s.js(STATE);size=s.screenshot(path);end=s.js(EVIDENCE,"combat",target)
-                primary.update(file=path.name,size=size,state=state,end=end,
-                    witness=target_hit(gate.get("before",start_end),end,target["enemyId"]),frameIndex=None)
-                row["issues"].append("No primary PNG with a verified native attack on the selected actor")
-            row["markers"].append({"coverage":"required","target":target,"state":primary["state"],
-                "before":gate.get("before",start_end),"after":primary["end"],"file":primary["file"],"size":primary["size"],
-                "combatWitness":primary["witness"],"burstFrameIndex":primary["frameIndex"],"settling":settling,
-                "fixturePositionHeld":False,"combatOnlyAlignedStartPinned":True,"pngSha256":hashlib.sha256(path.read_bytes()).hexdigest(),
-                "combatBeforeInput":{"file":startfile.name,"size":startsize,"evidence":start_end,
-                "qualification":"Only starting player placement assisted; enemies and damage are native"}})
-            snap=primary["state"];w,h,dpr=VIEWS[view]
-            if primary["size"]!=[w*dpr,h*dpr] or snap["viewport"]!=[w,h] or snap["dpr"]!=dpr:
+            if "size" not in entry:
+                entry["size"]=s.screenshot(candidate);entry["after"]=s.js(EVIDENCE,"combat",target)
+                entry["state"]=s.js(STATE)
+            before=entry.get("before",start)
+            after=entry["after"]
+            witness=target_hit(before,entry.get("captureStart",after),target["enemyId"])
+            if not witness["nativeActionObserved"]:row["issues"].append("No verified native damage and hero attack response in the first post-input capture")
+            row["markers"].append({"coverage":"required","target":target,"state":entry["state"],"before":before,"after":after,
+                "file":candidate.name,"size":entry["size"],"combatWitness":witness,"captureStart":entry.get("captureStart"),"settling":settling,
+                "fixturePositionHeld":False,"combatStartFixturePinned":True,"pngSha256":hashlib.sha256(candidate.read_bytes()).hexdigest(),
+                "combatBeforeInput":{"file":startpath.name,"size":startsize,"evidence":start,
+                "qualification":"Both actor positions are matched until the trusted native attack control; no damage, HP, door or progression state injected."}})
+            snap=entry["state"];w,h,dpr=VIEWS[view]
+            if entry["size"]!=[w*dpr,h*dpr] or snap["viewport"]!=[w,h] or snap["dpr"]!=dpr:
                 row["issues"].append("Combat viewport/DPR differs")
             if snap["active"]!="three" or snap["failed"] or snap["glLost"] is not False or snap["modal"] or snap["loading"] or snap["story"]:
                 row["issues"].append("Combat frame not an active Three scene")
             if seq.get("status")!="CAPTURED":row["issues"].append("Native combat sampling incomplete; see sequence evidence")
             return
-    row["issues"].append("No same native target visible, unobstructed and within attack range for combat input")
+        finally:
+            s.js("const q=window.__mammonQaEncounter;if(q){q.stop();delete window.__mammonQaEncounter;}")
+    row["issues"].append("No same living native target visible, unobstructed and within attack range")
     row["combatDiagnosticOnly"]={"file":label+"-combat-target-unavailable.png"}
     s.screenshot(out/row["combatDiagnosticOnly"]["file"])
 
 
+def disable_mobile_automatic_attacks(s):
+    """Disable mobile automatic basic attacks and skills through the user's settings controls."""
+    s.click("#mobileSettingsR63")
+    try:
+        for selector in ("#mobileBasicR63","#mobileSkillsR63"):
+            s.until("document.querySelector("+json.dumps(selector)+")!==null",8)
+            if not s.js("return document.querySelector(arguments[0]).checked",selector):
+                continue
+            s.reveal_mobile_setting(selector)
+            s.click(selector)
+            if s.js("return document.querySelector(arguments[0]).checked",selector):
+                raise RuntimeError("Mobile automatic attack setting did not turn off: "+selector)
+    finally:
+        s.click("#settingsClose")
+    if s.js("return !!auto || !!settings.autoSkill"):
+        raise RuntimeError("Mobile automatic attack/skills remain enabled")
+
+
 def capture(driver,chrome,url,variant,view,out,seed,reference=None):
     w,h,dpr=VIEWS[view]; label=f"{variant}-{view}"
-    row={"label":label,"url":url,"cssViewport":[w,h],"deviceScaleFactor":dpr,"physicalScreenshotSize":[w*dpr,h*dpr],"seed":seed,"touchEmulation":view=="mobile","movementInput":"WebDriver keyboard arrows (also on emulated mobile)","fixture":["new temporary profile","seeded Math.random before 777 (active through capture)","777 activate/go","story skip","marker position injection; static markers and a separate initial combat reference pin the player only, actual combat shots remain unpinned","guide and auto disabled using UI for capture"],"naturalProgression":False,
+    row={"label":label,"url":url,"cssViewport":[w,h],"deviceScaleFactor":dpr,"physicalScreenshotSize":[w*dpr,h*dpr],"seed":seed,"touchEmulation":view=="mobile","movementInput":"WebDriver keyboard arrows (also on emulated mobile)","fixture":["new temporary profile","seeded Math.random before 777 (active through capture)","777 activate/go","story skip","static markers inject player positions; matched combat fixture holds the player and the existing native field enemy at declared walkable positions until the trusted native attack, with native HP/damage and no post-input hold","guide and auto disabled using UI for capture"],"naturalProgression":False,
          "physicalMobile":False,"realGpuValidation":False,"markers":[],"notes":[],"issues":[]}
     try:
         with Session(driver,chrome,out/(label+"-driver.log")) as s:
@@ -552,7 +721,11 @@ def capture(driver,chrome,url,variant,view,out,seed,reference=None):
                 if s.js("return !!guide"):
                     open_menu(s);s.click("#menuGuide")
                 if s.js("return !!auto"):s.key(" ",70)
+                if view=="mobile":
+                    disable_mobile_automatic_attacks(s)
+                    row["fixture"].append("Disabled mobile automatic skills and attacks with native settings UI inside the disposable save profile.")
                 if s.js("return !!guide||!!auto"):raise RuntimeError("Native guide/auto could not be disabled for matched fixture captures")
+                row["collision"]=check_closed_boss_door(s)
                 for marker in CAPTURE_ORDER:
                     if marker=="combat":
                         capture_combat_marker(s,row,out,view,variant,(reference or {}))
@@ -599,7 +772,6 @@ def capture(driver,chrome,url,variant,view,out,seed,reference=None):
                         if snap["player"]["hp"]<=0 or snap["modal"] or snap["story"] or snap["loading"]:row["issues"].append("Not an active gameplay view: "+marker)
                 row["frameIntervalSample"]=frame_sample(s)
                 if row["frameIntervalSample"]["renderedGameFrameAdvance"]<2:row["issues"].append("No sustained Three game-frame advance during sample")
-                row["collision"]=check_closed_boss_door(s)
                 row["testSave"]=save_and_reopen_tab(s,url,view)
                 if row["collision"].get("result")!="STOP_AT_CLOSED_FACE_OBSERVED":row["issues"].append("Boss door input evidence incomplete")
                 if row["testSave"]["status"]!="RESTORED_777_TEST_SLOT":row["issues"].append("777 save/reopen evidence incomplete")
@@ -669,17 +841,30 @@ def main():
             sa,sb=combat_start(a),combat_start(b)
             id_matches=bool(sa and sb and sa["enemyId"]==sb["enemyId"])
             starts_match=bool(id_matches and math.dist(sa["pos"],sb["pos"])<.1 and math.dist(sa["end"],sb["end"])<.1)
-            input_hero=lambda r,key:((r.get(key) or {}).get("preInput") or {}).get("hero") or {}
-            ah=input_hero(a,"baselineCombatSequence");bh=input_hero(b,"combatSequence")
-            input_positions=[[h["x"],h["y"]] if "x" in h and "y" in h else None for h in (ah,bh)]
-            comparable_input=bool(all(input_positions) and math.dist(*input_positions)<.1)
+            def trusted_positions(row,actor):
+                combat=next((m for m in row["markers"] if m["target"]["marker"]=="combat"),None)
+                if not combat:return None
+                event=combat["after"]["nativeCombat"].get("inputStart") or {}
+                subject=event.get(actor)
+                return [subject["x"],subject["y"]] if event.get("trusted") and subject else None
+            input_positions=[trusted_positions(row,"hero") for row in (a,b)]
+            enemy_positions=[trusted_positions(row,"enemy") for row in (a,b)]
+            comparable_input=all(all(pair) and math.dist(*pair)<.1 for pair in (input_positions,enemy_positions))
 
             comparisons.append({"view":view,"alignedCombatStart":{"before":sa,"after":sb,"sameTargetId":id_matches,"matches":starts_match,
-                                "positionsAtBurstInput":input_positions,"inputPositionMatches":comparable_input},"layoutMatches":matches,"fixturePositionMatches":sameMarkers,
+                                "positionsAtBurstInput":input_positions,"enemyPositionsAtBurstInput":enemy_positions,"inputPositionMatches":comparable_input},"layoutMatches":matches,"fixturePositionMatches":sameMarkers,
                                 "actualFinalPositions":{"before":finalA,"after":finalB},"actualPositionMatches":finalMatches,
                                 "requiredMarkers":list(REQUIRED),"supplementalMarkers":list(SUPPLEMENTAL),
-                                "note":"Only matched layout/positions are usable for direct comparison; live combat may differ."})
-    status="CAPTURED" if all(r["status"]=="CAPTURED" for r in rows) and all(c["layoutMatches"] and c["alignedCombatStart"]["matches"] and c["alignedCombatStart"]["inputPositionMatches"] and all(c["fixturePositionMatches"].values()) and all(c["actualPositionMatches"].values()) for c in comparisons) else "INCOMPLETE"
+                                "note":"Static views require matching rendered positions. Combat requires matching hero and enemy positions at the trusted attack input, then records both freely simulated outcomes."})
+    # Each live combat result already requires its own actual input, target and damage.
+    # Pairing eligibility only qualifies before/after composition claims.
+    for comparison in comparisons:
+        paired=comparison["alignedCombatStart"]
+        comparison["pairedCombatStatus"]="ALIGNED" if paired["matches"] and paired["inputPositionMatches"] else "NOT_ALIGNED"
+    static_markers=[m for m in MARKERS if m!="combat"]
+    all_static_match=all(c["layoutMatches"] and all(c["fixturePositionMatches"][m] and
+                         c["actualPositionMatches"][m] for m in static_markers) for c in comparisons)
+    status="CAPTURED" if all(r["status"]=="CAPTURED" for r in rows) and all_static_match else "INCOMPLETE"
     (o.out/"summary.json").write_text(json.dumps({"status":status,"comparisons":comparisons,"rows":[{k:r[k] for k in ("label","status","issues")} for r in rows],"qualityScore":None,"naturalProgression":False},indent=2)+"\n")
     return 0 if status=="CAPTURED" else 1
 
