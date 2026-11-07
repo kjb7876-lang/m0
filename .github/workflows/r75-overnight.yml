@@ -1,0 +1,125 @@
+name: StoryWorld R75 overnight regression and same-runner A/B
+on:
+  push:
+    branches: [feat/r75-overnight-qa]
+permissions:
+  contents: read
+concurrency:
+  group: r75-overnight-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  overnight:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          show-progress: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build exact public baseline and candidate with their existing gates
+        id: build_sites
+        run: |
+          git worktree add --detach /tmp/m0-r75-baseline 11975b5ded156750f8f63bdd7df33faaffd634d6
+          test "$(git -C /tmp/m0-r75-baseline rev-parse HEAD)" = 11975b5ded156750f8f63bdd7df33faaffd634d6
+          (cd /tmp/m0-r75-baseline && bash scripts/build-r75-site.sh)
+          bash scripts/build-r75-site.sh
+      - name: Install the pinned sandboxed browser
+        id: browser_install
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run the full R75 browser regression against baseline and candidate
+        id: full_browser_regression
+        run: |
+          set +e
+          python3 -m http.server 4391 --directory /tmp/m0-r75-baseline/_pages/docs --bind 127.0.0.1 > /tmp/r75-base-http.log 2>&1 &
+          BASE_PID=$!
+          python3 -m http.server 4392 --directory /tmp/m0-r75-baseline/_r74-reference/docs --bind 127.0.0.1 > /tmp/r75-base-ref-http.log 2>&1 &
+          BASE_REF_PID=$!
+          trap 'kill "$BASE_PID" "$BASE_REF_PID" 2>/dev/null || true' EXIT
+          (cd /tmp/m0-r75-baseline && node "$GITHUB_WORKSPACE/scripts/r75.browser.mjs")
+          BASE_STATUS=$?
+          mkdir -p out/r75/overnight/baseline
+          if [ -f /tmp/m0-r75-baseline/out/r75/browser.json ]; then cp /tmp/m0-r75-baseline/out/r75/browser.json out/r75/overnight/baseline/full-browser.json; fi
+          if compgen -G '/tmp/m0-r75-baseline/out/r75/*.png' > /dev/null; then cp /tmp/m0-r75-baseline/out/r75/*.png out/r75/overnight/baseline/; fi
+          kill "$BASE_PID" "$BASE_REF_PID" 2>/dev/null || true
+          python3 -m http.server 4391 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-candidate-http.log 2>&1 &
+          CANDIDATE_PID=$!
+          python3 -m http.server 4392 --directory _r74-reference/docs --bind 127.0.0.1 > /tmp/r75-candidate-ref-http.log 2>&1 &
+          CANDIDATE_REF_PID=$!
+          trap 'kill "$CANDIDATE_PID" "$CANDIDATE_REF_PID" 2>/dev/null || true' EXIT
+          node scripts/r75.browser.mjs
+          CANDIDATE_STATUS=$?
+          if [ "$BASE_STATUS" -ne 0 ] || [ "$CANDIDATE_STATUS" -ne 0 ]; then exit 1; fi
+        if: always() && steps.build_sites.outcome == 'success' && steps.browser_install.outcome == 'success'
+      - name: Compare seeded save round trips and longer rendering/combat samples
+        id: overnight_matrix
+        if: always() && steps.build_sites.outcome == 'success' && steps.browser_install.outcome == 'success'
+        run: |
+          set +e
+          python3 -m http.server 4391 --directory /tmp/m0-r75-baseline/_pages/docs --bind 127.0.0.1 > /tmp/r75-base-matrix-http.log 2>&1 &
+          BASE_PID=$!
+          python3 -m http.server 4392 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-candidate-matrix-http.log 2>&1 &
+          CANDIDATE_PID=$!
+          trap 'kill "$BASE_PID" "$CANDIDATE_PID" 2>/dev/null || true' EXIT
+          matrix_status=0
+          run_one() {
+            checkout="$1"
+            url="$2"
+            label="$3"
+            seed="$4"
+            rep="$5"
+            bench="$6"
+            (
+              cd "$checkout"
+              mkdir -p "out/r75/overnight/$label"
+              if [ "$bench" = "1" ]; then
+                env R75_OVERNIGHT_SEED="$seed" R75_OVERNIGHT_REP="$rep" R75_OVERNIGHT_LABEL="$label" R75_OVERNIGHT_URL="$url" R75_OVERNIGHT_BENCH=1 R75_OVERNIGHT_SAMPLE_MS=90000 node "$GITHUB_WORKSPACE/scripts/r75-overnight.browser.mjs"
+              else
+                env R75_OVERNIGHT_SEED="$seed" R75_OVERNIGHT_REP="$rep" R75_OVERNIGHT_LABEL="$label" R75_OVERNIGHT_URL="$url" node "$GITHUB_WORKSPACE/scripts/r75-overnight.browser.mjs"
+              fi
+            )
+            row_status=$?
+            echo "R75 row $label seed=$seed rep=$rep exit=$row_status"
+            if [ "$row_status" -ne 0 ]; then matrix_status=1; fi
+            return 0
+          }
+          run_pair() {
+            seed="$1"; rep="$2"; bench="$3"
+            run_one /tmp/m0-r75-baseline http://127.0.0.1:4391 baseline "$seed" "$rep" "$bench"
+            run_one "$GITHUB_WORKSPACE" http://127.0.0.1:4392 candidate "$seed" "$rep" "$bench"
+          }
+          for rep in 1 2 3; do run_pair 11 "$rep" 1; done
+          run_pair 29 1 ''
+          run_pair 47 1 ''
+          mkdir -p out/r75/overnight
+          if [ -d /tmp/m0-r75-baseline/out/r75/overnight/baseline ]; then cp -a /tmp/m0-r75-baseline/out/r75/overnight/baseline/. out/r75/overnight/baseline/; fi
+          python3 scripts/r75-overnight-compare.py
+          compare_status=$?
+          if [ "$compare_status" -ne 0 ]; then matrix_status=1; fi
+          exit "$matrix_status"
+      - name: Profile function-level game costs and measure profiler overhead
+        id: function_profile
+        if: always() && steps.build_sites.outcome == 'success' && steps.browser_install.outcome == 'success' && steps.full_browser_regression.outcome == 'success' && steps.overnight_matrix.outcome == 'success'
+        run: |
+          node --check scripts/r75-function-profile.browser.mjs
+          node --test scripts/r75-function-profile.cpu.test.mjs
+          python3 -m http.server 4393 --directory _pages/docs --bind 127.0.0.1 > /tmp/r75-function-profile-http.log 2>&1 &
+          PROFILE_PID=$!
+          trap 'kill "$PROFILE_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4393/ > /dev/null; then break; fi
+            sleep 0.5
+          done
+          curl --fail --silent http://127.0.0.1:4393/ > /dev/null
+          R75_FUNCTION_PROFILE_URL=http://127.0.0.1:4393/ node scripts/r75-function-profile.browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r75-overnight-${{ github.sha }}
+          path: out/r75/
+          retention-days: 14
