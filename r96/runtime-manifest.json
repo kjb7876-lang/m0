@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 18937,
-      "sha256": "23a9dff17cff4524ef66aec2a6db14f343192d3a4b38c69193e980b0cea78da0"
+      "bytes": 19496,
+      "sha256": "0c9e016ae475c5a23edc82babdf24a4fa6400e35613144053ab1aeaebd53ef5b"
     },
     {
       "path": "art-drive-r105.js",
@@ -15143,6 +15143,31 @@
       "sha256": "e80b6ed6e1e327f34cea81a19ee35c5621fee9c0158d9e658b89ac614a98fceb"
     },
     {
+      "path": "assets/r380/mobs/dys-behemoth-v1.webp",
+      "bytes": 355676,
+      "sha256": "827beb50adec77fbdaf0dbeeae8c76e23f668a2a0bef6c71ee020584952d3ef1"
+    },
+    {
+      "path": "assets/r380/mobs/dys-cleaver-v4.webp",
+      "bytes": 369370,
+      "sha256": "83f1aa2f62c951a53fcf04df187527421653e805af465398865d1cba63a95f4f"
+    },
+    {
+      "path": "assets/r380/mobs/dys-membrane-v1.webp",
+      "bytes": 343940,
+      "sha256": "0de402a7573778fd8981c3f51ec3b778cb3fb2074aa4f11986a8fc93a3dd8166"
+    },
+    {
+      "path": "assets/r380/mobs/dys-sacshell-v1.webp",
+      "bytes": 501672,
+      "sha256": "aab76faf0160f73ea43d06dd5602ca6d394b217f6427eff72a68454d1a7b5d4b"
+    },
+    {
+      "path": "assets/r380/mobs/dys-scythe-v1.webp",
+      "bytes": 394886,
+      "sha256": "1fe24eaf24b068323e2db068e13efb50c99ad48d91464a15ec5ae412e9926ea2"
+    },
+    {
       "path": "assets/r380/mobs/false-heaven-guard-v1.webp",
       "bytes": 453210,
       "sha256": "3559064612af298e5cb3f4e9a8941aa05cb5ad36e82a8466b532a572ae8a6681"
@@ -15164,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 85656,
-      "sha256": "cf44d40c35c85f72a8bfdf36c2bda8d11d84705085f2abc8b1f423d44f734dd3"
+      "bytes": 96306,
+      "sha256": "2ab107627f304cd1ef9fb9ba19f66ce9f6a948e459d65550efad38d8ea5fa491"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -33173,8 +33198,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6634,
-  "totalBytes": 1035523263,
+  "fileCount": 6639,
+  "totalBytes": 1037500016,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {

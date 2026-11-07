@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R389",
+ "revision": "R390",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -3805,6 +3805,456 @@
     {
      "file": "attack-04.png",
      "sha256": "f7cdbf5397ae3f4bbf118aac05af904cc92e0ce59c30f84a895ae4c6bd5699b1"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-scythe-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-scythe-v1.webp",
+   "cell": [
+    240,
+    224
+   ],
+   "cols": 12,
+   "pivot": [
+    118.6,
+    196.4
+   ],
+   "visibleHeight": 211.3,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     0,
+     3
+    ],
+    "rename": "낫팔 잠복체"
+   },
+   "bytes": 394886,
+   "sha256": "1fe24eaf24b068323e2db068e13efb50c99ad48d91464a15ec5ae412e9926ea2",
+   "source": [
+    {
+     "file": "scythe-walk/01.png",
+     "sha256": "7f8770d93693b94cb43c8eb9846e688d7454ad020420e5f686eb357859906592"
+    },
+    {
+     "file": "scythe-walk/02.png",
+     "sha256": "c31624a76238ec015067026a779b4fd1af7fee5d716f66f04b84d4258956e279"
+    },
+    {
+     "file": "scythe-walk/03.png",
+     "sha256": "ece2cb73ad410bd215588b2a559397e34507bbdb0beb55ee9e47663489037e5e"
+    },
+    {
+     "file": "scythe-walk/04.png",
+     "sha256": "26a9d20928f2256f4d74ef4b14a9f049808f53b1a78d13e6e846400e272a0afe"
+    },
+    {
+     "file": "scythe-walk/05.png",
+     "sha256": "15f940a74d82b2744c8d602f13fa0776201063ae96287a0b100ed4d98397463d"
+    },
+    {
+     "file": "scythe-walk/06.png",
+     "sha256": "e53c482241c6c37f22001bc97ed2b12c45b4bbd092af92b028232003aee78d8b"
+    },
+    {
+     "file": "scythe-attack/01.png",
+     "sha256": "76b09a037efaeb7cee1be8c0dd69bde2f32f95b278cd225b1bc27dfce2a1fe73"
+    },
+    {
+     "file": "scythe-attack/02.png",
+     "sha256": "d75dd7685512f798645f3667499ced3dcd3a9f841e3fc99e3619dad9e6513ac8"
+    },
+    {
+     "file": "scythe-attack/03.png",
+     "sha256": "00b6981595d0aa5747ced03eda06e349f4c24703e51f67cb9a698a2d49d30b3e"
+    },
+    {
+     "file": "scythe-attack/04.png",
+     "sha256": "84b06f7ed93e4fab2b26c2590041b400b415a2360874ab75b75749184c456546"
+    },
+    {
+     "file": "scythe-attack/05.png",
+     "sha256": "b3ae2d4ac0475ce61f79eb79f5339180d0457d8efe8de1f04ae777504f024cd2"
+    },
+    {
+     "file": "scythe-attack/06.png",
+     "sha256": "0537eb176710aa72a06492bdf149a26fe86a16889c40ef3897b5c48f559ecec6"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-sacshell-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-sacshell-v1.webp",
+   "cell": [
+    240,
+    224
+   ],
+   "cols": 12,
+   "pivot": [
+    119.4,
+    196.4
+   ],
+   "visibleHeight": 200.5,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     1,
+     3
+    ],
+    "rename": "포낭 곡사체"
+   },
+   "bytes": 501672,
+   "sha256": "aab76faf0160f73ea43d06dd5602ca6d394b217f6427eff72a68454d1a7b5d4b",
+   "source": [
+    {
+     "file": "sacshell-walk/01.png",
+     "sha256": "1110025b47615e13b4a5481ddb5b4911eed10093933a14664bbbbb311ef77c2a"
+    },
+    {
+     "file": "sacshell-walk/02.png",
+     "sha256": "27e5f64ccf2b439a3b3ece2b57a8ad2bfb7cc149b30916cfc8de43db43712774"
+    },
+    {
+     "file": "sacshell-walk/03.png",
+     "sha256": "e766ff0ede51ee0f7588c15c2a539f05934df27bfed711f445b5dcc70ab89109"
+    },
+    {
+     "file": "sacshell-walk/04.png",
+     "sha256": "ca70ed378b98639d1eab1762a8c50d9c6d4b23194b5e95692378954e18341abd"
+    },
+    {
+     "file": "sacshell-walk/05.png",
+     "sha256": "d181f54f602d8497c6bdd0da7476e36466231cad4177c5d7171b37e2be9596c1"
+    },
+    {
+     "file": "sacshell-walk/06.png",
+     "sha256": "39bd856c9efd64ea14935e3ed79689facefdd886fda3f08bfca49c7ba563c2e3"
+    },
+    {
+     "file": "sacshell-attack/01.png",
+     "sha256": "17450b30b140b560720c7b3a301f96db21c0af6e92aabc28fb0aaccb6d647c6a"
+    },
+    {
+     "file": "sacshell-attack/02.png",
+     "sha256": "f128dca234003b43b0997b7490fbd51c57a46d141d814695b75a18dc95e9d9f7"
+    },
+    {
+     "file": "sacshell-attack/03.png",
+     "sha256": "4f07307c8ca5db90f9478133a5beaf493b2fb72a7d13f5db49476b9c9fa6a3e0"
+    },
+    {
+     "file": "sacshell-attack/04.png",
+     "sha256": "6896ab396174324b4884238fe654c1cb2105b3f4db5823ab9a4082f19801a0a3"
+    },
+    {
+     "file": "sacshell-attack/05.png",
+     "sha256": "79bd48f2681fd2611c7236e4b3c3746acb7eacfa8fd834ad5b4213293caadd41"
+    },
+    {
+     "file": "sacshell-attack/06.png",
+     "sha256": "97abffb4ec8fc3884be80658e9136d5077fbe003b8ac878a8059d69f22408cbc"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-membrane-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-membrane-v1.webp",
+   "cell": [
+    240,
+    224
+   ],
+   "cols": 12,
+   "pivot": [
+    120.4,
+    200.4
+   ],
+   "visibleHeight": 208.9,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     2,
+     3
+    ],
+    "rename": "막익 급습체"
+   },
+   "bytes": 343940,
+   "sha256": "0de402a7573778fd8981c3f51ec3b778cb3fb2074aa4f11986a8fc93a3dd8166",
+   "source": [
+    {
+     "file": "membrane-fly/01.png",
+     "sha256": "23f7400d126e324a91d2db6268076e533bca27204706ec6a55955613c59b0e86"
+    },
+    {
+     "file": "membrane-fly/02.png",
+     "sha256": "601c8b337e398b5ae24fbc0eeaa29cee95de75a48e104e37578b62451297e547"
+    },
+    {
+     "file": "membrane-fly/03.png",
+     "sha256": "3298db0a9af9324f0a02226bae9235b43ba8f090e7d59b2b579b752ebfb33b9d"
+    },
+    {
+     "file": "membrane-fly/04.png",
+     "sha256": "e7c72ceab0977575c7980a0f643ab4869eb4b2a3bcffebfe5c0d08c8598e8943"
+    },
+    {
+     "file": "membrane-fly/05.png",
+     "sha256": "650a628af927616680892286083560be17ec866d4b6786c59a6b085f6f1caefd"
+    },
+    {
+     "file": "membrane-fly/06.png",
+     "sha256": "51b952bf2d03b1fc9a418108d1beb6b56bc1cea1d3b2764883f76fe7ad5d25fe"
+    },
+    {
+     "file": "membrane-attack/01.png",
+     "sha256": "0ebd04520aafb0fe834028e5304e7f74b7018cc3f7ae5cc4a5f9050afabf9303"
+    },
+    {
+     "file": "membrane-attack/02.png",
+     "sha256": "ad220d0c70259d236c0f5411fd61af0cd864b26531ebb6b55cc8a91962f264c0"
+    },
+    {
+     "file": "membrane-attack/03.png",
+     "sha256": "e72c4c484a2156ca221577103ad16ef3cc28b4c01de4530d1b80e0fef40dcebe"
+    },
+    {
+     "file": "membrane-attack/04.png",
+     "sha256": "a23c735b6ddb436474af9e1a0c59fc7d21cf4896307894e17e8baf5a59719b1a"
+    },
+    {
+     "file": "membrane-attack/05.png",
+     "sha256": "66fdb6b60c766c9f7de54ed5b5a760a94688c99c0a4eae7064e5aec4f2f49b84"
+    },
+    {
+     "file": "membrane-attack/06.png",
+     "sha256": "ea6ada6a4e728fc0038984a4d68c7995556ee3ab2662da6775811eeeccb76e8d"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-cleaver-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-cleaver-v4.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    128.25,
+    240.5
+   ],
+   "visibleHeight": 199.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|전선 절단자|심해 연산거수) · 짙은 형상",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     0,
+     2
+    ],
+    "rename": "전선 절단자 · 짙은 형상"
+   },
+   "bytes": 369370,
+   "sha256": "83f1aa2f62c951a53fcf04df187527421653e805af465398865d1cba63a95f4f",
+   "source": [
+    {
+     "file": "move_01.png",
+     "sha256": "cd82a2f7acbc650ad796cd8342620a5f3f10debb17500a4d631e3bf79f79a8bb"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "ca4487c170084cbfbb6028a9f5619d9c35f5df7c0196bfc90309cdf8096716b1"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "3a4ffa0c6e68a36f3ae2378d5172e517e6a0d0ab6c256670b3a82d7059ef5d19"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "ac3182eb9920d5a3296ba29c6040c18dce5bb2563f71a17d314063711de9c9ca"
+    },
+    {
+     "file": "attack_01.png",
+     "sha256": "a3b2255dc6d595737134c4a9ebe082f2fb64c78ed28e8fd7793625c5ab16d6b6"
+    },
+    {
+     "file": "attack_02.png",
+     "sha256": "eee3e2549dbdcc4a146363e4bbd7e4a532b33bc6eae573f1864ca5f491cd97d2"
+    },
+    {
+     "file": "attack_03.png",
+     "sha256": "fe4275d80b649e4798253c539588beda3a8f3969d1e5c9f692a2cba0d7b07859"
+    },
+    {
+     "file": "attack_04.png",
+     "sha256": "54411a9aa4822fe4aa6cac296660e81eb8ed657566c8384bb9654c0cfbcf3a71"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "dys-behemoth-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/dys-behemoth-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    129.5,
+    240.5
+   ],
+   "visibleHeight": 212.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(외계 침공군|전선 절단자|심해 연산거수) · 짙은 형상",
+    "samong": "(^|[^0-9])S-?06([^0-9]|$)",
+    "slot": [
+     1,
+     2
+    ],
+    "rename": "심해 연산거수 · 짙은 형상"
+   },
+   "bytes": 355676,
+   "sha256": "827beb50adec77fbdaf0dbeeae8c76e23f668a2a0bef6c71ee020584952d3ef1",
+   "source": [
+    {
+     "file": "move_01.png",
+     "sha256": "4f5f5d6a0974838c191c5c7abad6961513521a721655d0e1b641b7e7a9c5dd7c"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "404a439c2a7e9d15ce3d95ab05e7b4512bea1abc240c2100e347c30562cce5b0"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "acf82efa074eaf7708dd5df5530a028691f9ebec9dcf2bc9217598cef411ed7a"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "e756df471628bf31cac5b35840fc96b39a8314f2c56808b3e73924c91a934acf"
+    },
+    {
+     "file": "attack_01.png",
+     "sha256": "8bf766219a64dff9402c8c08cc807bd4d35094e703bbaa9ebf57b1739f2b19f6"
+    },
+    {
+     "file": "attack_02.png",
+     "sha256": "e19a47bd8db5d6fc82734ed3e7b4da3c7aa213c231b3f82140d63a18e915df95"
+    },
+    {
+     "file": "attack_03.png",
+     "sha256": "8f175072323b960c18f8e95c092b29f18ab741810e1e670f403da1c83728435b"
+    },
+    {
+     "file": "attack_04.png",
+     "sha256": "8a23c77ab0da3b2f230df3b4191e26bf0e56812c54f3b3a07208d953d7060204"
     }
    ],
    "finalArt": false

@@ -147,7 +147,23 @@ if len(sys.argv) > 8:
     for i, h in enumerate(HEROES8):
         b = next(m for m in mobs if m['id'] == 'persona-' + h + '-w')
         mobs.append({**b, 'id': 'persona-clone-' + h, 'actor': {'layer': 'DREAM', 'name': '^(여섯 물건의 그림자|페르소나 분신)', 'samong': '(^|[^0-9])S-?07([^0-9]|$)', 'slot': [i, 8], 'rename': '페르소나 분신'}})
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R389',
+# ── R390: 디스토피아(사몽 S-06) 승인분. 사용자 11-07 "비승인도 개선해서 적용 버그없이" ──
+#  · 일반 '외계 침공군' → 일반몹 3종(낫팔 잠복체·포낭 곡사체·막익 급습체, 이동6·공격6)을 id 끝 번호로 고르게. 수·능력치·AI 그대로.
+#  · 정예 '외계 침공군 · 짙은 형상' → 보스형 2종(전선 절단자 짧은 보폭 v4, 심해 연산거수 v1, 이동4·공격4)을 번갈아. 새 스폰 없음.
+if len(sys.argv) > 11:
+    G3 = pathlib.Path(sys.argv[9]) / 'frames'; CUT = pathlib.Path(sys.argv[10]) / 'frames'; DEEP = pathlib.Path(sys.argv[11]) / 'behemoth/frames'
+    S06 = '(^|[^0-9])S-?06([^0-9]|$)'
+    GEN = [('scythe', 'walk', '낫팔 잠복체'), ('sacshell', 'walk', '포낭 곡사체'), ('membrane', 'fly', '막익 급습체')]
+    for i, (k, mv, nm) in enumerate(GEN):
+        names = [f'{k}-{mv}/0{j}.png' for j in range(1, 7)] + [f'{k}-attack/0{j}.png' for j in range(1, 7)]
+        add2('dys-' + k + '-v1', G3, names, 12, .4, list(range(6)), list(range(6, 12)), [0],
+             {'layer': 'DREAM', 'name': '^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체)( \\d+)?$', 'samong': S06, 'slot': [i, 3], 'rename': nm}, .85)
+    BOSS = [('cleaver-v4', CUT, '전선 절단자'), ('behemoth-v1', DEEP, '심해 연산거수')]
+    for i, (k, d, nm) in enumerate(BOSS):
+        names = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+        add2('dys-' + k, d, names, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^(외계 침공군|전선 절단자|심해 연산거수) · 짙은 형상', 'samong': S06, 'slot': [i, 2], 'rename': nm + ' · 짙은 형상'}, 1.0)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R390',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

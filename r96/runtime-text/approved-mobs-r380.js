@@ -90,14 +90,16 @@ function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return t
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
- return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;if(a.samong&&!new RegExp(a.samong).test(String(e.samongR103||'')))return false;if(a.slot&&slotOf(e,a.slot[1])!==a.slot[0])return false;return new RegExp(a.name).test(n);})||null;}
+ return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;if(a.samong&&(!new RegExp(a.samong).test(String(e.samongR103||''))||e.r200Shade))return false;if(a.slot&&slotOf(e,a.slot[1])!==a.slot[0])return false;return new RegExp(a.name).test(n);})||null;}
 // R389: 같은 장의 일반몹을 여러 얼굴로 고르게 나눈다(id 끝 일련번호, 없으면 해시). 능력치·수는 그대로.
+// R390: 사몽 몹은 R200 그림자 배정(이름까지 바꿈)이 먼저 끝난 뒤에 고른다 — 둘이 같은 몹을 서로 다른 이름으로 바꾸던 경합을 막음. R200 이 아직 목록을 못 읽었으면 다음 화면에 다시 본다.
+function shadeFirst(e){try{const R=window.__STORYWORLD_SAMONG_SHADES_R200__;if(!R)return true;const i=R.inspect();if(!i.prefs?.on)return true;if(!i.loaded)return false;R.assign(e);return true;}catch(err){fail(err);return true;}}
 function slotOf(e,n){const m=/(\d+)$/.exec(String(e.id||''));return m?(+m[1])%n:Math.floor(hash(e.id||e.name)*n)%n;}
 function renameOf(e,m){const r=m?.actor?.rename;if(!r||e.r389Renamed)return;e.r389From=e.name;if(!e.r248Key)e.r248Key=String(e.name).replace(/ \d+$/,'');e.name=r;if(typeof e.r373Name==='string')e.r373Name=r;e.r389Renamed=true;stats.renamed++;}
 // R389: actor.hero = 지금 영웅일 때만(사몽 S-07 '페르소나' 보스가 내 영웅의 얼굴을 쓴다). 영웅이 바뀌면 다시 고른다.
 const heroOf=()=>{try{return typeof player==='object'&&player?String(player.hero||''):'';}catch(_){return '';}};
 function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode()+'|'+heroOf();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
- e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m){stats.assigned++;renameOf(e,m);}return m;}
+ if(e.samongR103&&!e.r200Checked&&!shadeFirst(e))return null;e.r380Checked=k;const m=match(e);e.r380Mob=m?.id||null;if(m){stats.assigned++;renameOf(e,m);}return m;}
 function progress(e){const sh=e.attack.shape154||e.combatProfile?.attackShape||{},tot=Math.max(.2,(e.attack.castWindup150??sh.windup??.45)+(sh.active??.15)+(sh.recovery??.35));return Math.min(.999,Math.max(0,e.attack.elapsed/tot));}
 function cellFor(e,m){if(attacking(e))return m.attack[Math.floor(progress(e)*m.attack.length)];
  if(e.rangedWindup>0)return m.attack[0];
