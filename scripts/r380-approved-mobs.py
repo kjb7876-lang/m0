@@ -55,7 +55,31 @@ for tag, g in (('', '일반'), ('-pixel', '픽셀')):
 d = next(ST.glob('x-기계화*')) / 'frames'; n = [f'{i:02d}.png' for i in range(12)]
 add('mech-oblivion-spider', 'strip', L(d, n), 6, .75, (181, 278), [0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11], 'right',
     {'layer': 'STORY', 'name': '^기계화 망각거미'}, fr(d, n), spider_ref * 1.6)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R380',
+# ── R381: 검수 목록 v18 05·06·17·20·21·22·23 (두 번째 인자 = R381 stage 폴더) ──
+def footpivot(frames):
+    bs = [f.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox() for f in frames]
+    return ((min(b[0] for b in bs) + max(b[2] for b in bs)) / 2, max(b[3] for b in bs))
+def add2(id_, d, names, cols, scale, move, attack, idle, actor, fit):
+    fs = L(d, names); body = bbox_h(fs) * scale
+    add(id_, 'strip', fs, cols, scale, footpivot(fs), move, attack, idle, 'right', actor, fr(d, names), 1 / fit)
+if len(sys.argv) > 2:
+    S2 = pathlib.Path(sys.argv[2]); M4 = lambda a, b: [f'{a}-0{i}.png' for i in range(1, 5)] + [f'{b}-0{i}.png' for i in range(1, 5)]
+    add2('drug-craver-v1', next(S2.glob('x-SW-a10*')) / 'frames', M4('a10-h1-move', 'a10-h1-attack'), 8, 1, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'ep1a10', 'name': '약을 갈망하는 자'}, 1.0)
+    add2('blackmarket-suspect-v1', next(S2.glob('x-SW-암시장*')) / 'frames', M4('move', 'attack'), 8, 1, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'ep1a10', 'name': '암시장의 수상한 자'}, 1.0)
+    add2('swamp-spirit-v1', next(S2.glob('x-SWAMP*')) / 'frames', M4('hover', 'grasp'), 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'dist02', 'name': '늪에서 되살아난 혼령체'}, 1.0)
+    F8 = [f'frame-0{i}.png' for i in range(8)]
+    add2('swamp-mage-darkgreen-v1', next(S2.glob('x-StoryWorld-swamp-mage*')) / 'mage', F8, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'dist02', 'name': '수렁 주문사'}, 1.0)
+    add2('swamp-goat-darkgreen-v1', next(S2.glob('x-StoryWorld-swamp-goat*')) / 'goat', F8, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'dist02', 'name': '늪의 염소머리 악마'}, 1.15)
+    add2('reborn-shieldmate-v4', next(S2.glob('x-SW-reborn*')) / 'frames', M4('walk-shuffle', 'spear-thrust') + [f'shield-bash-0{i}.png' for i in range(1, 5)], 6, .5,
+         [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'dist04', 'name': '되살아난 방패동료'}, 1.0)
+    add2('hospital-surgeon-v1', next(S2.glob('x-SW-hospital*')) / 'frames', M4('short-walk', 'scalpel-thrust'), 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'STORY', 'zone': 'ep1a08', 'name': '^병원 심부의 집도의', 'boss': True}, 1.15)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R381',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

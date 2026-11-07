@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R380",
+ "revision": "R381",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -414,6 +414,534 @@
     {
      "file": "11.png",
      "sha256": "b8e5e84b0672ca4c8de06f4fffa616be477664662bd15c0ff32e86d1b1840bfd"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "drug-craver-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/drug-craver-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 8,
+   "pivot": [
+    139.0,
+    302
+   ],
+   "visibleHeight": 246.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a10",
+    "name": "약을 갈망하는 자"
+   },
+   "bytes": 231596,
+   "sha256": "e80b6ed6e1e327f34cea81a19ee35c5621fee9c0158d9e658b89ac614a98fceb",
+   "source": [
+    {
+     "file": "a10-h1-move-01.png",
+     "sha256": "605970fb270e7b835e1e02543b430e9c4f1c4b6042b6d81264a88c49502c71ba"
+    },
+    {
+     "file": "a10-h1-move-02.png",
+     "sha256": "9cb07be7bcc21397928cc88719641890d2f6ba0344bfc78acdd27f18bb84d6a1"
+    },
+    {
+     "file": "a10-h1-move-03.png",
+     "sha256": "d2eb488a56a80c752844baa09e897ba12396885e5982653f5cfda00cc22d2789"
+    },
+    {
+     "file": "a10-h1-move-04.png",
+     "sha256": "4a230bebab5df12b83996c59754674e9438cafade152ac9f2e7a79ea0d59f0ac"
+    },
+    {
+     "file": "a10-h1-attack-01.png",
+     "sha256": "019095458bdb890f87bdbc71715904a2cb4318df0e7430b943ea0e0810a04d73"
+    },
+    {
+     "file": "a10-h1-attack-02.png",
+     "sha256": "4912c8791174d4198aaafb2a33c5d790ee170ade588d12fb2999f086ac348cdf"
+    },
+    {
+     "file": "a10-h1-attack-03.png",
+     "sha256": "00379453ec9d79fe97d13909dec282a3400defdac221c0c02601559a68dc39e5"
+    },
+    {
+     "file": "a10-h1-attack-04.png",
+     "sha256": "12cbd9b12002afcc02c778a833051070612d3f79a83eb274a9804e07ebafe949"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "blackmarket-suspect-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/blackmarket-suspect-v1.webp",
+   "cell": [
+    256,
+    320
+   ],
+   "cols": 8,
+   "pivot": [
+    133.5,
+    302
+   ],
+   "visibleHeight": 240.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a10",
+    "name": "암시장의 수상한 자"
+   },
+   "bytes": 245710,
+   "sha256": "acb25b215d0e0e5e79c0151a54c45dbbe2be8c2931323150a9bd6bf3dff21c40",
+   "source": [
+    {
+     "file": "move-01.png",
+     "sha256": "6676fad7225497339610ddaadb4765e9c254f11e0dbb4b1970e1a662e434b955"
+    },
+    {
+     "file": "move-02.png",
+     "sha256": "d806ed623eb36390645286278d58a1a0e8df6eda0f35cbc982c67f104f059c29"
+    },
+    {
+     "file": "move-03.png",
+     "sha256": "83410c1a8164e1d0f2271f4bd51e5ec232c80ca55ca272497133ba0975c6dcd7"
+    },
+    {
+     "file": "move-04.png",
+     "sha256": "a35ac5e1047cd760b41d5a2bf70546bccd3e2d7ab8809d2ffe35062c92d2c997"
+    },
+    {
+     "file": "attack-01.png",
+     "sha256": "2ee6a0a832698e58af6ab1d2dc82b6e72d1dcf6ce0298e95d2314e3a49fc21c0"
+    },
+    {
+     "file": "attack-02.png",
+     "sha256": "9f5752f97ef8ac5529f2ac9592dd7b71a5744f251a2eb3acc17d705dd07d2036"
+    },
+    {
+     "file": "attack-03.png",
+     "sha256": "8cb784936e199c21d342259f19badab62784e2fad7174a0dafd8000bfa7c7e84"
+    },
+    {
+     "file": "attack-04.png",
+     "sha256": "3bfb2e3d0cf8b98c1ff0d88d0f0b67122ae0d16345ca1f32a2d3f1e9a64adb1f"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "swamp-spirit-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/swamp-spirit-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    134.75,
+    223.0
+   ],
+   "visibleHeight": 176.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist02",
+    "name": "늪에서 되살아난 혼령체"
+   },
+   "bytes": 308842,
+   "sha256": "4481c508994a713faf4c3321105c7b2ed1811ecec8c80f85248d614be6df8d61",
+   "source": [
+    {
+     "file": "hover-01.png",
+     "sha256": "6ea87ebaf8d36b47f410d024065273457c99b459decc6d2687b107c43fc6c877"
+    },
+    {
+     "file": "hover-02.png",
+     "sha256": "1a01f73fb1dc43d33859965a0e2c9330ec502a7dc20b3fe61bd7ccf25522316b"
+    },
+    {
+     "file": "hover-03.png",
+     "sha256": "cb54aed873d9c93e59ed0094dac05f875169c9d99bda98805dda74f09c76e3b5"
+    },
+    {
+     "file": "hover-04.png",
+     "sha256": "ec57c6066669e2255dd1462246ee56fa23402a02b811844d9085a5f3c50aeb33"
+    },
+    {
+     "file": "grasp-01.png",
+     "sha256": "566bf08699845fed9428f82091080b9f9bcab9937ea5429a3b0b3c9607063d8a"
+    },
+    {
+     "file": "grasp-02.png",
+     "sha256": "1ff0466552b9c326a10814af055e2554b64b583e5cf2786c2c7b4c0c8b551ec2"
+    },
+    {
+     "file": "grasp-03.png",
+     "sha256": "ae3ffda7fa5a708afcf8570b7a5a24a9a87970bf9cd5f83b899720fd7b232b09"
+    },
+    {
+     "file": "grasp-04.png",
+     "sha256": "9e9e7162a60392695d54bb64f4233f5d2c27bc148704b0bf78a6cca0fca66337"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "swamp-mage-darkgreen-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/swamp-mage-darkgreen-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    135.25,
+    240.0
+   ],
+   "visibleHeight": 209.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist02",
+    "name": "수렁 주문사"
+   },
+   "bytes": 328422,
+   "sha256": "0ca9695e6f692637da0e0908929d96722d66b417ba15e5bacf96c8fcd31ade3c",
+   "source": [
+    {
+     "file": "frame-00.png",
+     "sha256": "3e2c1a480fe6b359ab386ccf44ff7aba625db4d9631ed7a1793f0088b7370637"
+    },
+    {
+     "file": "frame-01.png",
+     "sha256": "723c8ef592a4ecdabe19bd78c095c7f3d8b20d34a69b8154f0b15adeb1a93c34"
+    },
+    {
+     "file": "frame-02.png",
+     "sha256": "0585541cf94e61a56bf8982256315c49ee23ad9f4e28c265a360a247ef5acbba"
+    },
+    {
+     "file": "frame-03.png",
+     "sha256": "701898453a3d4693bf13a8a4192a085989c6d4b8da5c2c46ff338507de4bb102"
+    },
+    {
+     "file": "frame-04.png",
+     "sha256": "be0d093c3c47e666f7bb73b05df4a7189df5d8635a15d30628b3ee29f2e1fc88"
+    },
+    {
+     "file": "frame-05.png",
+     "sha256": "f98ff35583ea4c5590507180a9d9e90429fe4b1b8f2df6b6e074c4a7aef397fb"
+    },
+    {
+     "file": "frame-06.png",
+     "sha256": "8b084c2d6e02f247f1ba5984f73443b243c7d85594161780f38b03f58af7abb4"
+    },
+    {
+     "file": "frame-07.png",
+     "sha256": "1e1c88051d09362efc1a14256cfaaa4f334d79ac053aa2d09d66174b6bf9e9c4"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "swamp-goat-darkgreen-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/swamp-goat-darkgreen-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    129.25,
+    240.0
+   ],
+   "visibleHeight": 177.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist02",
+    "name": "늪의 염소머리 악마"
+   },
+   "bytes": 364046,
+   "sha256": "4662512a101c3463bb57a20d550122f315bc6c7b9011947555bd3335ff14a089",
+   "source": [
+    {
+     "file": "frame-00.png",
+     "sha256": "95a5b5d532f83cb55a0467dc6edd0210932487856f1af91425504d2ae39ea02b"
+    },
+    {
+     "file": "frame-01.png",
+     "sha256": "1d3c5ab711402e580d552af17ab117156bc2246fab1d38330708545a55cdac2a"
+    },
+    {
+     "file": "frame-02.png",
+     "sha256": "1e06cab3fae162dbcf77fc470acc54080d4c6a6972fc997a338de97838c90894"
+    },
+    {
+     "file": "frame-03.png",
+     "sha256": "88b4e33b431433aa1baf9f29fa5ad4d315f058b06391258291d77809419d79b1"
+    },
+    {
+     "file": "frame-04.png",
+     "sha256": "88a7b3dca3d0863b40ccf5b260ce9bcb987c46312a931ce5d2c1fdf29a05f878"
+    },
+    {
+     "file": "frame-05.png",
+     "sha256": "3bf5e28f1e6351c21f7bf89b1a41668b96a760eaa035959117a9d8b9bb9711b7"
+    },
+    {
+     "file": "frame-06.png",
+     "sha256": "4f7a0915c46664b7a8259a1f20dab873244c9019b13f3b35a8f486d3950a8f0f"
+    },
+    {
+     "file": "frame-07.png",
+     "sha256": "fd1c89ab9b00d137c2d6b5a9f19fe526d71689e8ce505cf0d4cee8130d8fcca9"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reborn-shieldmate-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reborn-shieldmate-v4.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 6,
+   "pivot": [
+    143.0,
+    240.0
+   ],
+   "visibleHeight": 168.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist04",
+    "name": "되살아난 방패동료"
+   },
+   "bytes": 264582,
+   "sha256": "f4c82ab42427e254cb6b350e769b126912105e0eec391459e34277c2d4048522",
+   "source": [
+    {
+     "file": "walk-shuffle-01.png",
+     "sha256": "8b3dfc0944bac086890deeb6ab1331bec5a3d1ee03d92ee194480c3fcfe9573d"
+    },
+    {
+     "file": "walk-shuffle-02.png",
+     "sha256": "0cb5940cbf6eb43bbabe98f0c6b567485c475357197fb46fb1b2c6e1210749ba"
+    },
+    {
+     "file": "walk-shuffle-03.png",
+     "sha256": "242669d4c3dfa01dae3a0e3921f1d7429672e043ca21874bca555cf62b0134c4"
+    },
+    {
+     "file": "walk-shuffle-04.png",
+     "sha256": "78a8ec5985a0d1be111776ed74a8851092739bbe94d18ac2fcc8e4cfa3f1d63a"
+    },
+    {
+     "file": "spear-thrust-01.png",
+     "sha256": "e02d0276a33648e659385fb4c2b2517ef1e87d4b02808f3acd4e6a2a25f77b14"
+    },
+    {
+     "file": "spear-thrust-02.png",
+     "sha256": "7c590d8f6b2b96327a0fb316837fd3960fe2c9ad23fb1f143bf6352f1fd8a9c6"
+    },
+    {
+     "file": "spear-thrust-03.png",
+     "sha256": "6ffef55d0c96c6211e1c1b65fcdf3be30da623310f0dc97028d08286d183506d"
+    },
+    {
+     "file": "spear-thrust-04.png",
+     "sha256": "2fabcae15185c92fc7891a20e80ec5308a65932c999e25de196a9329410ee49e"
+    },
+    {
+     "file": "shield-bash-01.png",
+     "sha256": "1f38f54ac9a3bbc1e18b2524c7bd27b5ac8e62cdaf1291a88fa029ca1161bc3e"
+    },
+    {
+     "file": "shield-bash-02.png",
+     "sha256": "a70b039ce534642f781f108e6b32f0373e32cb67d493b9c645067399a9f77129"
+    },
+    {
+     "file": "shield-bash-03.png",
+     "sha256": "5b6c3cddc4e287f6417012e44e92bf0e93aa6faa14ad241c9c95e1ebd00164c0"
+    },
+    {
+     "file": "shield-bash-04.png",
+     "sha256": "0a49c421f174956b95cd28e34756111bdd73f4165715af5695bea0ee560f43f4"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "hospital-surgeon-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/hospital-surgeon-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    131.25,
+    240.0
+   ],
+   "visibleHeight": 187.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "ep1a08",
+    "name": "^병원 심부의 집도의",
+    "boss": true
+   },
+   "bytes": 219560,
+   "sha256": "fcbe37adb927fd0f2793b2febf69afba58abacd1802fb28bb8a75255e700f2b5",
+   "source": [
+    {
+     "file": "short-walk-01.png",
+     "sha256": "06fe1d86df89fbc955afe63cb48ed29f11498528cab77d1ae215f8fcfa3628be"
+    },
+    {
+     "file": "short-walk-02.png",
+     "sha256": "f87643095a32d95fb5a44f061edc879c92efd33150ada3c702bf9730c14983c7"
+    },
+    {
+     "file": "short-walk-03.png",
+     "sha256": "065c56720adcbe7da28f6873102286d966e702a081ba9c36c39cb43b3f14c91c"
+    },
+    {
+     "file": "short-walk-04.png",
+     "sha256": "fb4b92e5ee4190d3670f0162e6dc0177138bf883f33a999b6de08df0353bcda8"
+    },
+    {
+     "file": "scalpel-thrust-01.png",
+     "sha256": "15adf9fc758b029cdc920c8714b169469db76c7fef0e4d45728c5884f45b26a5"
+    },
+    {
+     "file": "scalpel-thrust-02.png",
+     "sha256": "be64aeb284d359841dc2c9dc43e28c1af78be0bb63440dbc332acb6a0f1319b3"
+    },
+    {
+     "file": "scalpel-thrust-03.png",
+     "sha256": "43c325251e7191a17b1cd8ba2d3a8f6ac82ac89971ec53ff3eb058298d0d42b4"
+    },
+    {
+     "file": "scalpel-thrust-04.png",
+     "sha256": "806b63702d2ecb9dcaec1b917cbd75601a97c794b7e50f6eb7c389e3be6f9022"
     }
    ],
    "finalArt": false

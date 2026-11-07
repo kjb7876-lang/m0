@@ -9,7 +9,7 @@
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
 const REV='R380-approved-1',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
-const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
+const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
 const curLayer=()=>{try{return typeof layer==='string'?layer:'STORY';}catch(_){return 'STORY';}};
 const zoneOf=()=>{try{return String(typeof room==='object'&&room?(room.id||''):'');}catch(_){return '';}};
@@ -18,6 +18,7 @@ const T=()=>typeof time==='number'?time:performance.now()/1000;
 const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
 const attacking=e=>!!(e?.attack&&Number.isFinite(e.attack.elapsed));
 const SPIDER=/망각의 거미/,MECH='기계화 망각거미';
+const RENAME=[['ep1a10','갈망의 도시짐승','약을 갈망하는 자'],['ep1a10','오만의 흰 가면','암시장의 수상한 자'],['dist02','늪에서 되살아난 전우','늪에서 되살아난 혼령체']];
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
  // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
@@ -26,11 +27,13 @@ function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREA
    const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
  else if(id==='u202'&&!r.enemies.some(e=>e?.r380Mech)){const src=r.enemies.filter(e=>e&&!e.boss&&!e.midboss&&!e.wardChampionR81&&e.nativeId==='u202-e1'&&/^가짜 자비 수집가( \d+)?$/.test(e.name||'')&&e.spawnState==='active');
   src.slice(0,4).forEach((e,i)=>{e.r380From=e.name;e.name=MECH+' '+(i+1);e.r380Mech=true;stats.added++;});}
+ // R381: 검수 목록 v18 05·06·17 개명(같은 몹 그대로, 이름만) — "갈망의 도시짐승삭제하고 약을 갈망하는 자로", "그자리에 … 암시장의 수상한 자로", "명명 늪에서 되살아난 혼령체".
+ for(const [z,from,to] of RENAME)if(id===z)for(const e of r.enemies){if(!e||e.boss||e.r381Renamed)continue;const n=String(e.name||'');if(n.includes(from)){e.r381From=n;e.name=n.replace(from,to);e.r381Renamed=true;stats.renamed++;}}
  return r;}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 그림 ──
-function match(e){if(!idx||!e||e.hero||e.boss||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
+function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
  return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;return new RegExp(a.name).test(n);})||null;}
 function assign(e){if(!prefs.on||!idx||!e)return null;const k=curLayer()+'|'+zoneOf()+'|'+artMode();if(e.r380Checked===k)return e.r380Mob?idx.mobs.find(m=>m.id===e.r380Mob)||null:null;
