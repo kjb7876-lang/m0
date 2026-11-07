@@ -1,8 +1,81 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R401",
+ "revision": "R402",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "samong-s02-student-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s02-student-v1.webp",
+   "cell": [
+    154,
+    173
+   ],
+   "cols": 8,
+   "pivot": [
+    87.3,
+    162.3
+   ],
+   "visibleHeight": 136.2,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^얼굴 없는 학생( \\d+)?( · 짙은 형상)?$",
+    "samong": "(^|[^0-9])S-?02([^0-9]|$)"
+   },
+   "bytes": 66654,
+   "sha256": "71a1b0b02ce9b925a070cc65a02ba4f74f801963279646edd5e3f4aaec9c0d1e",
+   "source": [
+    {
+     "file": "move_01.png",
+     "sha256": "6fd675dea7da3f84d7e1854449984bf2abb49347857ca69c0cb96b00d32d73a9"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "1ebc1928077a7deeaf22d11893d82aafd7f4edd0e3b36926f1099713cc04cf76"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "d04601c465eb359ab077b485c40e6d950f1a4c0f3ae38d81401a4f25dfc30207"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "b2dfb3b316219f39697f2829393ac8c28c79f2dd890cedbdf3f4541e48075acd"
+    },
+    {
+     "file": "attack_01.png",
+     "sha256": "39d600f1dd2199c77991e7682f53c1ce35cbf14b303af0110d2964c8a1b6ab42"
+    },
+    {
+     "file": "attack_02.png",
+     "sha256": "074edf7140b1c60f8b8ae592f084012f0d275ad1b60d7fa197b5d363d158a7ec"
+    },
+    {
+     "file": "attack_03.png",
+     "sha256": "a5afed20e2f386c4c94747fc31f60ca85b66e4645e206ad8434fbd44f219a095"
+    },
+    {
+     "file": "attack_04.png",
+     "sha256": "ca6d0a67ece77916e08cb34df36a956ce05db74fbe62a10163077f5dbbba74e5"
+    }
+   ],
+   "finalArt": false
+  },
   {
    "id": "reverse-re-new-v1-right",
    "kind": "strip",
@@ -5669,14 +5742,14 @@
    "path": "assets/r380/mobs/s06-rival-v1.webp",
    "cell": [
     256,
-    256
+    288
    ],
    "cols": 8,
    "pivot": [
-    130.0,
-    240.0
+    137.25,
+    270.0
    ],
-   "visibleHeight": 206.5,
+   "visibleHeight": 225.0,
    "move": [
     0,
     1,
@@ -5699,40 +5772,40 @@
     "boss": true,
     "samong": "(^|[^0-9])S-?06([^0-9]|$)"
    },
-   "bytes": 199702,
-   "sha256": "ab8b86c00014f04db8462b859b2ccf4594379ad9878da1c1ed4108a6870ed2ff",
+   "bytes": 198862,
+   "sha256": "e6de217bed44ed883c8d67d251ea1ccb730413a95b358102ba208778084aaa10",
    "source": [
     {
      "file": "move_01.png",
-     "sha256": "beb01712872a9f42fb8a4a9b107456601c9e874ce8de92bf9a19c50441883de4"
+     "sha256": "431404af0920821fbdf10b1c1eaa4b41b5ada4d7aa742e1921cafeeb0e57613f"
     },
     {
      "file": "move_02.png",
-     "sha256": "7d84242b87368296ac60bfe601bcdaa415735a07abc7f5e474f21c14e61b9757"
+     "sha256": "e492978f557eca986fc024780ab05b5b4aa12cd44bd2badd7a14cedad7e7847a"
     },
     {
      "file": "move_03.png",
-     "sha256": "2e4a4f73a629e77ac6020fdb8f4a811831c2d4de5c23c87d54cf78210461a06d"
+     "sha256": "1fb205366c560c6148c49f5cd40c802f908505054084445680db74629c11d43d"
     },
     {
      "file": "move_04.png",
-     "sha256": "9a7ce214dcac3e44e7bae768c03439ae096a555659fa64680dcdcb92a4739210"
+     "sha256": "064f7c77fe2aff7eba6e414dae18d571384bfb37461dfda3bae4555da068d504"
     },
     {
      "file": "attack_01.png",
-     "sha256": "f4dfa019be4a836021149492ffc5ee5290b5aaf5bf049e17aab2525e7c83e4b1"
+     "sha256": "c9e54b9ba0c27adf806480d285eef3e6011a5ab5d38ae745e1e6b53065910315"
     },
     {
      "file": "attack_02.png",
-     "sha256": "7e624a35d976daff2bc7773b453969e95ba0340291e8d06d98a71c82d083803f"
+     "sha256": "2c4274a4c0b49b98248d2a09c6290a7606411ce6e47b82478dd7ca27574fe8d1"
     },
     {
      "file": "attack_03.png",
-     "sha256": "cdc1ec13ce47678658dcf80e53fab3c9fadb868381027694c2dbc2c9f99d758b"
+     "sha256": "ae260ff85188130cef495fedf82c6f165dd30d2429e90ff6fb5b79046f7a5115"
     },
     {
      "file": "attack_04.png",
-     "sha256": "932033dc0536c0eff868d49ee7a1aae4a2578f63a06e7bcc2ef121da402ca4c4"
+     "sha256": "4f3a35c3e965f2c6095aebe147febe342f433d96edb66012d387a0bb21527f7f"
     }
    ],
    "finalArt": false
@@ -5816,23 +5889,26 @@
    "kind": "strip",
    "path": "assets/r380/mobs/samong-patroller-boss-v1.webp",
    "cell": [
-    192,
-    256
+    256,
+    288
    ],
-   "cols": 5,
+   "cols": 8,
    "pivot": [
-    96.0,
-    250.0
+    119.0,
+    270.0
    ],
-   "visibleHeight": 230.0,
+   "visibleHeight": 224.5,
    "move": [
-    0
-   ],
-   "attack": [
+    0,
     1,
     2,
-    3,
-    4
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
    ],
    "idle": [
     0
@@ -5844,28 +5920,40 @@
     "boss": true,
     "samong": "."
    },
-   "bytes": 98874,
-   "sha256": "47784de4d1c04c546ec77792ffea3f7b452e09fc3630c654593be344350eee6a",
+   "bytes": 146324,
+   "sha256": "d27df1a44399ba1d4f7b551ccaf53f716810e872930a3894775138f12c869e5d",
    "source": [
     {
-     "file": "r105/boss-patroller.webp",
-     "sha256": "59fa0a699a456fbb98364b87bbc6e7d07bff3c9412d7cfbe4c759ad938700695"
+     "file": "move_01.png",
+     "sha256": "81762ba069a5e3ab871051c1060405635e1ada66a54335f1b9d479fff4e1e20d"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "ce132e578e5224a29fc1867cde5e87453893fc2d3ded7604d5e52b8351e76b3f"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "7eca3440917b5baf4aae8dc56130f8090d2506a15bc6ae261c4cd1a7811cc60d"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "658860eda7a29fbb919791c7123767e2bfbdd528dd608d25fea497b38932402d"
     },
     {
      "file": "attack_01.png",
-     "sha256": "080896fdb608fbf1fe45702f4ec6d47c2302986ef7782b717dbd48a1263cd6a6"
+     "sha256": "54f0fef995b0b2f9cfc47542c5c9b9fe1910fbd686b1b6d4d8c6afeb586bf16d"
     },
     {
      "file": "attack_02.png",
-     "sha256": "f3c8ecf7fe535f8c49fc50eb566a4d811abff5b81892594ce72fdcef9c95d302"
+     "sha256": "4cbed3c4849a73eee020a6486e03b078e1940ae529a8ef4bf92817cb0d48c81b"
     },
     {
      "file": "attack_03.png",
-     "sha256": "c2a491801185c695e4d271e2ea9353104a673ef4191c817144261582871f8ad8"
+     "sha256": "769eca46976df0bdfcafbe9b495770e6dde5837b9281dfe5cc7ad906b745520c"
     },
     {
      "file": "attack_04.png",
-     "sha256": "414bf3c326a48356deafdeb4239772d0e04ca39a458a2be963b885ca80a00cc3"
+     "sha256": "2120a56aed9d7d4c52394befa12f1cfdea3f0e3f089fb4f543e74046d32ef90c"
     }
    ],
    "finalArt": false
@@ -6949,6 +7037,80 @@
     {
      "file": "attack_left_04.png",
      "sha256": "f0bb5aed86465bf41ad03b1b4672251101740e3b1f6dda64254af6297c67026d"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-rf-storyteller-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-rf-storyteller-v1.webp",
+   "cell": [
+    240,
+    240
+   ],
+   "cols": 8,
+   "pivot": [
+    120.75,
+    214.0
+   ],
+   "visibleHeight": 197.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^스토리텔러$",
+    "boss": true,
+    "samong": "(^|-)RF(-|$)"
+   },
+   "bytes": 326830,
+   "sha256": "9eabf208f06f7edde88843cb91e1d4d4734dfbb329450fcf695d531a3baa9e62",
+   "source": [
+    {
+     "file": "move_01.png",
+     "sha256": "2bbe3199532f79a6a0c4e79d2522e99b3b8fd19f339398186aab3ddd3b084841"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "919157eaae99fc5c6b2ab96858d9101f9cbf7bc7a365789e181b59d42e69a961"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "f47a51551721f0cd764451b56f9ef401116bfd0f5d672ed6c95dbabb6be6efef"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "f02ff870f8ef9b34878627c38df3a04af86f2d500c1aa634e3b5251c8b40a394"
+    },
+    {
+     "file": "attack_01.png",
+     "sha256": "bc0ce0b16cb3f8df910a6a7b60eb04d5855974ae50ff1aa2f605b6f335090425"
+    },
+    {
+     "file": "attack_02.png",
+     "sha256": "431d7c17e3bd4c42a9f79f365698c83ea9ddcfb9f205d17b9d1ddce790dc4a90"
+    },
+    {
+     "file": "attack_03.png",
+     "sha256": "3c26afcef327afc34e331cbe9ee0ec3dffc8a5b1e2d13dd52f527a04cd73fac7"
+    },
+    {
+     "file": "attack_04.png",
+     "sha256": "7529b674faf1d7f4c0acc9bd077b8f686915f98400533d2abb964bf11e7ea81e"
     }
    ],
    "finalArt": false

@@ -15194,8 +15194,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 157646,
-      "sha256": "3bba754e636a50112f471f322c0fc2bdfff224f00e96bba67056d4a3fdcf99e1"
+      "bytes": 161331,
+      "sha256": "60408a423e019bcfbe535dc6eee5e82db8e02f2c5780e335fba566f4069a46fa"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15394,8 +15394,8 @@
     },
     {
       "path": "assets/r380/mobs/s06-rival-v1.webp",
-      "bytes": 199702,
-      "sha256": "ab8b86c00014f04db8462b859b2ccf4594379ad9878da1c1ed4108a6870ed2ff"
+      "bytes": 198862,
+      "sha256": "e6de217bed44ed883c8d67d251ea1ccb730413a95b358102ba208778084aaa10"
     },
     {
       "path": "assets/r380/mobs/samong-hostess-boss-v1.webp",
@@ -15434,13 +15434,23 @@
     },
     {
       "path": "assets/r380/mobs/samong-patroller-boss-v1.webp",
-      "bytes": 98874,
-      "sha256": "47784de4d1c04c546ec77792ffea3f7b452e09fc3630c654593be344350eee6a"
+      "bytes": 146324,
+      "sha256": "d27df1a44399ba1d4f7b551ccaf53f716810e872930a3894775138f12c869e5d"
+    },
+    {
+      "path": "assets/r380/mobs/samong-rf-storyteller-v1.webp",
+      "bytes": 326830,
+      "sha256": "9eabf208f06f7edde88843cb91e1d4d4734dfbb329450fcf695d531a3baa9e62"
     },
     {
       "path": "assets/r380/mobs/samong-s01-gardener-v1.webp",
       "bytes": 87876,
       "sha256": "720509f6007c6df6ebf4e62b887386833ff8255f1e5dbf03ef5cf6afa84b6016"
+    },
+    {
+      "path": "assets/r380/mobs/samong-s02-student-v1.webp",
+      "bytes": 66654,
+      "sha256": "71a1b0b02ce9b925a070cc65a02ba4f74f801963279646edd5e3f4aaec9c0d1e"
     },
     {
       "path": "assets/r380/mobs/samong-s05-wraith-jihyeon-v2.webp",
@@ -33383,8 +33393,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6676,
-  "totalBytes": 1043721961,
+  "fileCount": 6678,
+  "totalBytes": 1044165740,
   "webHTMLSha256": "4b136f7048adddb934e849523b30c2ab9ebb88354c7dade8349108dfbf6fdc62",
   "largest": [
     {

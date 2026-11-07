@@ -187,15 +187,20 @@ if len(sys.argv) > 13:
 # ── R392: 사몽 S-06 상대 초인(보스)·적 지휘 개체(구역 우두머리) 고해상도 후보, 열쇠 순찰자(S-02·RA 보스) 공격4 ──
 if len(sys.argv) > 14:
     R2 = pathlib.Path(sys.argv[14]); S06 = '(^|[^0-9])S-?06([^0-9]|$)'; MA = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
-    add2('s06-rival-v1', R2 / 'x23/s06-rival-candidate/frames', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^상대 초인', 'boss': True, 'samong': S06}, 1.0)
+    RV = pathlib.Path(sys.argv[24]) / 'norm/rival' if len(sys.argv) > 24 else R2 / 'x23/s06-rival-candidate/frames'  # R402: 보행 개선 v2(크기·발 위치를 공격에 맞춤)
+    add2('s06-rival-v1', RV, MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^상대 초인', 'boss': True, 'samong': S06}, 1.0)
     add2('s06-commander-v1', R2 / 'x23/s06-commander-candidate/frames', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^적 지휘 (개체|기체)', 'boss': True, 'samong': S06}, .9)
     # 열쇠 순찰자: 걷기 그림은 아직 보류(분할 대기) → R105 정적 한 장을 이동 칸으로, 새 공격 4칸.
     KD = R2 / 'key/frames'; an = [f'attack_0{j}.png' for j in range(1, 5)]; atk = L(KD, an); W, Hh = atk[0].size; ah = bbox_h(atk)
     st = Image.open(RT / 'assets/r105/drive/boss-patroller.webp').convert('RGBA'); st = st.crop(st.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox())
     k = ah / st.height; st = st.resize((round(st.width * k), round(st.height * k)), Image.LANCZOS); fx, fy = footpivot(atk)
     cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0)); cv.paste(st, (round(fx - st.width / 2), round(fy - st.height)), st)
-    add('samong-patroller-boss-v1', 'strip', [cv] + atk, 5, .5, (fx, fy), [0], [1, 2, 3, 4], [0], 'right',
-        {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, [{'file': 'r105/boss-patroller.webp', 'sha256': sha(RT / 'assets/r105/drive/boss-patroller.webp')}] + fr(KD, an), 1.0)
+    if len(sys.argv) > 24:  # R402: 순찰자 v4 오른쪽 걷기 4 + 기존 공격 4 (같은 크기·발 위치로 맞춤)
+        add2('samong-patroller-boss-v1', pathlib.Path(sys.argv[24]) / 'norm/patroller', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, 1.0)
+    else:
+        add('samong-patroller-boss-v1', 'strip', [cv] + atk, 5, .5, (fx, fy), [0], [1, 2, 3, 4], [0], 'right',
+            {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, [{'file': 'r105/boss-patroller.webp', 'sha256': sha(RT / 'assets/r105/drive/boss-patroller.webp')}] + fr(KD, an), 1.0)
 # ── R393: 사몽역행 RB-6 백색 손님 v4·RC-3 재판관 v4 — 좌우를 따로 그린 시트(뒤집지 않음, twin) ──
 if len(sys.argv) > 15:
     R3 = pathlib.Path(sys.argv[15])
@@ -284,7 +289,15 @@ if len(sys.argv) > 23:
             add2(f'reverse-{k}-new-v1-{side}', C1 / k, SIDE(side), 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act if side == 'right' else {'layer': 'NONE', 'name': '^$'}, ft)
             if side == 'left': mobs[-1]['facing'] = 'left'
         mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R401',
+# ── R402: 사몽 S-02 얼굴 없는 학생(이동4 기존 보정본 + 새 공격4), RF 책갑옷 스토리텔러(이동4·공격4, R105 RF 보스 원화), 순찰자 v4·상대 초인 v2 보행(R392 자리 교체) ──
+if len(sys.argv) > 24:
+    N2 = pathlib.Path(sys.argv[24]); MA4 = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+    add2('samong-s02-student-v1', N2 / 'norm/student', MA4, 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^얼굴 없는 학생( \\d+)?( · 짙은 형상)?$', 'samong': '(^|[^0-9])S-?02([^0-9]|$)'}, 1.0)
+    mobs.insert(0, mobs.pop())
+    add2('samong-rf-storyteller-v1', N2 / 'x45/storyteller-book/frames', MA4, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^스토리텔러$', 'boss': True, 'samong': '(^|-)RF(-|$)'}, 1.0)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R402',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
