@@ -10,7 +10,7 @@ ok('index.html loads cinema-sync-r384 once, after voice-r381 and cinema-mode-r37
 ok('public verify list (with comma), runtime inputs, Pages CPU step (R376 step restored too)',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'cinema-sync-r384.js',")&&JSON.parse(RT('../runtime-inputs.json')).textPaths.includes('cinema-sync-r384.js')&&/node r96\/qa\/r384\/r384-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8'))&&/node r96\/qa\/r376\/r376-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 ok('no eval / new Function',!/\beval\s*\(|new Function/.test(SRC));
 // ── R370 rev 4: 말 빠르기 일정 ──
-ok('R370 rev 4: no per-sentence rate change (rateFor/gapFor gone, one steady rate)',/REV='R370-cinema-4'/.test(CIN)&&!/rateFor\(|gapFor\(|RATE_MIN/.test(CIN)&&/rate=steadyRate\(prefs\.rate\)/.test(CIN));
+ok('R370 rev 4: no per-sentence rate change (rateFor/gapFor gone, one steady rate)',/REV='R370-cinema-[45]'/.test(CIN)&&!/rateFor\(|gapFor\(|RATE_MIN/.test(CIN)&&/rate=steadyRate\(prefs\.rate\)/.test(CIN));
 ok('R370 exposes remainingSecs() as a top-level number function',/remainingSecs:\(\)=>\+remainingSecs\(\)\.toFixed\(1\)/.test(CIN));
 // ── 가짜 엔진 ──
 function mk(o={}){let clock=0;let iv=null;const played=[],hits=[];
@@ -96,7 +96,7 @@ for(const [v,hp,dps,label] of [[30,1000,100,'boss would die in 10 s, voice 30 s'
 (async()=>{
 // ⑤ R388 실화 마무리
 {const F=mk({world:true,real:true,voice:60});F.tick(1);F.ev("room.enemies.push({id:'h',hp:100,maxHp:100,profile:{id:'m'},spawnState:'hidden',x:40,y:40})");
- F.st.voice=0;F.tick(1);const rows=F.ev("room.enemies.filter(e=>!e.boss&&e.hp>0)");
+ F.st.voice=0;F.tick(2.5);const rows=F.ev("room.enemies.filter(e=>!e.boss&&e.hp>0)");
  ok('R388 real: route narration over → every remaining mob (hidden too) gathered 1.8–3.4 tiles around the hero at 1% HP',rows.length>=3&&rows.every(e=>e.hp<=e.maxHp*.01+1e-9&&e.spawnState!=='hidden'&&Math.hypot(e.x,e.y)>=1.8-1e-9&&Math.hypot(e.x,e.y)<=3.4+1e-9),rows.map(e=>[e.id,e.hp,+Math.hypot(e.x,e.y).toFixed(1)]));
  ok('…boss untouched, respawn stopped',F.ev("room.enemies[2].hp")===400&&F.ev("room.enemies.filter(e=>e.r384Respawn).length")===F.api.inspect().spawned);}
 {const F=mk({world:true,real:false,voice:60});F.tick(1);F.st.voice=0;F.tick(1);ok('R388 not 실화 (cinema only): no gather / 1% (old pacing)',F.ev("room.enemies[0].hp")===100&&F.api.inspect().stats.gathered===0);}
@@ -108,10 +108,21 @@ function bossR(o={}){const F=mk({world:true,real:true,voice:0,phase:'boss',...o}
  F.ev('room.enemies[0].r205Enraged={at:0}');F.tick(1);ok('after enrage (R205): 99% damage cancelled',F.api.inspect().bossMode==='hold'&&F.api.factor()===.01);
  F.ev('room.enemies[0].hp=200;__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[0],100);ok('…hit ×0.01',Math.abs(F.ev('__hits[0]')-1)<1e-9);
  F.ev('room.enemies[0].hp=31');F.sb.hitEnemy(F.sb.room.enemies[0],1e6);F.sb.killEnemy(F.sb.room.enemies[0]);ok('…cannot be killed while voice remains (hitEnemy floor + killEnemy refused)',F.ev('room.enemies[0].hp')>=30-1e-9&&!F.ev('room.enemies[0].deadRecorded')&&F.api.inspect().stats.blockedKills===1);
- F.st.voice=0;F.tick(1);ok('voice over → boss and clones set to 1% HP, normal damage',F.api.inspect().bossMode==='end'&&F.ev('room.enemies[0].hp')<=10+1e-9&&F.ev('room.enemies[1].hp')<=.6+1e-9&&F.api.factor()===1);
+ F.st.voice=0;F.tick(2.5);ok('voice over → boss and clones set to 1% HP, normal damage',F.api.inspect().bossMode==='end'&&F.ev('room.enemies[0].hp')<=10+1e-9&&F.ev('room.enemies[1].hp')<=.6+1e-9&&F.api.factor()===1);
  F.ev('__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[0],50);ok('…next hit finishes it',F.ev('room.enemies[0].hp')<=0);}
 {const F=bossR();F.st.voice=0;F.tick(1);ok('boss narration must run 2 s before the end can trigger',F.ev('room.enemies[0].hp')===1000||F.api.inspect().bossMode!=='end'||F.clock()>=2);}
 {const F=bossR({real:false});F.tick(1);ok('not 실화: no boss hold / floor',F.api.inspect().bossMode===null);}
+// ⑥ R390: 중간보스가 보스 단계의 주인인 지역(거미 동굴 보라검천사), 음성 틈 오판 방지
+function midR(o={}){const F=mk({world:true,real:true,voice:0,phase:'boss',...o});F.ev("room.enemies.length=0;room.enemies.push({id:'mb',hp:1000,maxHp:1000,midboss:true,spawnState:'active',profile:{id:'V'}})");F.st.voice=40;F.tick(1);return F;}
+{const F=midR();ok('R390 midboss-led boss stage: boss narration plays when the midboss is up',F.api.inspect().stats.post===1&&F.api.inspect().bossMode==='fast');
+ F.sb.hitEnemy(F.sb.room.enemies[0],5000);ok('…midboss cannot be killed while voice remains (3% floor)',Math.abs(F.ev('room.enemies[0].hp')-30)<1e-6,F.ev('room.enemies[0].hp'));
+ F.tick(1);ok('…midboss at ≤30% counts as enraged → 99% cancelled',F.api.inspect().bossMode==='hold'&&F.api.factor()===.01);
+ F.sb.killEnemy(F.sb.room.enemies[0]);ok('…killEnemy refused while held',!F.ev('room.enemies[0].deadRecorded'));
+ F.st.voice=0;F.tick(1);ok('R390 voice gap under 1.5 s is not "narration over"',F.api.inspect().bossMode==='hold'&&F.ev('room.enemies[0].hp')>=30-1e-6);
+ F.st.voice=8;F.tick(1);F.st.voice=0;F.tick(1);ok('…gap resets when voice comes back',F.api.inspect().bossMode==='hold');
+ F.tick(1.5);ok('…1.5 s of silence → midboss to 1%',F.api.inspect().bossMode==='end'&&F.ev('room.enemies[0].hp')<=10+1e-9);}
+{const F=bossR();ok('R390 sync exposes full() for R370 while 실화 + finale on',F.api.full()===true);F.api.set({finale:false});ok('…off when finale pref off',F.api.full()===false);F.api.set({finale:true});}
+{const F=bossR({real:false});ok('…off outside 실화',F.api.full()===false);}
 // 지역 이동 잠금
 {const F=bossR();F.st.voice=10;const p=F.sb.enterRegion('dist02','dist01',{});F.tick(2);ok('R388 travel lock: voice left → next region waits',F.ev('__went.length')===0&&F.api.inspect().locked&&F.api.inspect().stats.locks===1);
  F.st.voice=0;await new Promise(r=>setTimeout(r,700));ok('…then goes when the narration ends',F.ev('__went[0]')==='dist02'&&!F.api.inspect().locked);}

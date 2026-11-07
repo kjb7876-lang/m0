@@ -22,12 +22,16 @@
 //     · 보스전: 보스 서사를 흘린 경우 — 광폭화(R205, 체력 30% 이하) 전에는 피해 1.6배로 빠르게, 광폭화 뒤 음성이 남아 있으면 피해 99% 상쇄(×0.01)
 //       + 체력 3% 아래로는 안 떨어짐(잡히지 않음), 음성이 끝나면(보스 서사 시작 2초 뒤부터) 보스·중간보스·분신 체력을 최대의 1%로.
 //     · 지역 이동 잠금: 음성이 남아 있으면 다음 지역으로 가는 이동(enterRegion)을 음성이 끝날 때까지 미룬다(불러오기·영웅 쓰러짐은 그대로, 최대 10분).
-//  ⑥ 끄기: localStorage storyworld.r384.sync {"story":false} / {"pace":false} / {"respawn":false} / {"finale":false} / {"lock":false}.
+//  ⑥ R390(사용자 2026-11-07 "뿌리 보스를 처치하고도 서사음성이 남아있던 문제", "거미동굴에서 보라검천사 음성이 모두제거되기전에 빠르게 죽었던 문제"):
+//     · 원인 1: R370 이 서사를 지역 시간에 맞춰 덜어 내고 예비로 두었다가 대기열이 비면 다시 채우는데, 그 빈 순간을 '음성 끝'으로 보고 보스를 1% 로 만들었다.
+//       → 실화에서는 R370 에 '전체 서사'(full)를 알려 덜어 내지 않고, 끝 판정은 음성이 0.5초 아래로 1.5초 넘게 머물 때만.
+//     · 원인 2: 거미 동굴(dist01)·늪(dist02)은 보스 단계의 주인이 중간보스라 보스 서사·상쇄·바닥이 붙지 않았다 → 보스·중간보스 모두(중간보스 광폭화 = 체력 30% 이하).
+//  ⑦ 끄기: localStorage storyworld.r384.sync {"story":false} / {"pace":false} / {"respawn":false} / {"finale":false} / {"lock":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_SYNC_R384__)return;
-const REV='R388-sync-3',KEY='storyworld.r384.sync',MIN_M=.35,MAX_M=2.5,STEP_LO=.75,STEP_HI=1.33,DONE_M=1.6,TICK=500,ADJ=2;
+const REV='R390-sync-4',KEY='storyworld.r384.sync',MIN_M=.35,MAX_M=2.5,STEP_LO=.75,STEP_HI=1.33,DONE_M=1.6,TICK=500,ADJ=2;
 const B_MIN=.12,B_MAX=5,B_ADJ=1,TAIL=2.5,ADD_END=3,ADD_END_AT=6,SUMMON_SOON=8,SUMMON_STOP=10;
-const FIN_HP=.01,HOLD_M=.01,HOLD_FLOOR=.03,FAST_M=1.6,GATHER=[1.8,2.6,3.4],LOCK_MAX=600,DONE_V=.5,POST_GRACE=2;
+const QUIET=1.5,FIN_HP=.01,HOLD_M=.01,HOLD_FLOOR=.03,FAST_M=1.6,GATHER=[1.8,2.6,3.4],LOCK_MAX=600,DONE_V=.5,POST_GRACE=2;
 const KEEP=5,BATCH=3,SPAWN_GAP=1.2,SPAWN_STOP=3,SPAWN_CAP=60,SPAWN_HP=.6,RING=[6,7.5,9];
 let prefs={story:true,pace:true,respawn:true,finale:true,lock:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={pre:0,post:0,adjust:0,hits:0,respawned:0,saves:0,summonSooner:0,summonHeld:0,gathered:0,bossHold:0,bossEnd:0,blockedKills:0,locks:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
@@ -54,7 +58,7 @@ function play(part,r){const def=G(()=>regionById[r.id],null);if(!def)return fals
  try{playScenes(sc,()=>{});stats[part]++;if(part==='pre')r.r388PreVoice=true;else{r.r388PostVoice=true;r.r388PostAt=now();}return true;}catch(e){fail(e);return false;}}
 function storyTick(r,ph){if(!prefs.story||G(()=>storyScene,null)||G(()=>modal,false))return;
  if(isRoute(ph)&&!r.r384Pre)play('pre',r);
- else if(ph==='boss'&&!r.r384Post&&(r.enemies||[]).some(e=>e.boss&&alive(e)))play('post',r);}
+ else if(ph==='boss'&&!r.r384Post&&(r.enemies||[]).some(e=>major(e)&&alive(e)))play('post',r);}// R390: 거미 동굴처럼 보스 단계의 주인이 중간보스(보라검천사)인 지역도
 // ── ②④ 방어 배율 ──
 let m=1,addM=1,seg='',hpPrev=NaN,tPrev=0,rate=0,lastAdj=0,last=null,voiceEndAt=null;
 function reset(){m=1;addM=1;hpPrev=NaN;rate=0;lastAdj=now();voiceEndAt=null;}
@@ -110,18 +114,21 @@ let bossMode=null;
 function near(r,i){const p=G(()=>player,null);if(!p)return null;for(const rad of GATHER)for(let k=0;k<12;k++){const a=(k+i*.61)*Math.PI/6,q={x:p.x+Math.cos(a)*rad,y:p.y+Math.sin(a)*rad};
   try{if(!blocked(q.x,q.y,.35,r))return q;}catch(_){return null;}}return null;}
 function lowHp(e){const mx=Number(e.maxHp);if(!(mx>0))return false;const v=Math.max(.0001,mx*FIN_HP);if(e.hp>v){e.hp=v;return true;}return false;}
-function finaleTick(r,ph){bossMode=null;if(!prefs.finale||!real())return;const voice=voiceLeft();
- if(isRoute(ph)){if(!r.r388PreVoice||voice>DONE_V)return;m=1;let i=0;
+// R390: 음성이 0.5초 아래로 '1.5초 넘게' 머물러야 서사가 끝난 것으로 본다(문장 사이·예비 다시 채우기 틈을 끝으로 오판하지 않게).
+let quietSeg='',quietAt=null;
+function quiet(r,ph,voice){const k=(r.id||'')+':'+ph;if(k!==quietSeg){quietSeg=k;quietAt=null;}if(voice>DONE_V){quietAt=null;return false;}if(quietAt==null)quietAt=now();return now()-quietAt>=QUIET;}
+function finaleTick(r,ph){bossMode=null;if(!prefs.finale||!real())return;const voice=voiceLeft(),done=quiet(r,ph,voice);
+ if(isRoute(ph)){if(!r.r388PreVoice||!done)return;m=1;let i=0;
   for(const e of r.enemies||[]){if(!r78alive(e)||!plain(e)||e.r388Fin)continue;const q=near(r,i++);if(q){e.x=q.x;e.y=q.y;e.homeX=q.x;e.homeY=q.y;e.nav=[];}
    if(e.spawnState==='hidden')e.spawnState='active';lowHp(e);e.r388Fin=true;stats.gathered++;}return;}
  if(ph!=='boss'||!r.r388PostVoice)return;
  const rows=(r.enemies||[]).filter(e=>r78alive(e)&&e.spawnState!=='hidden'&&(major(e)||summoned(e)));
- if(voice<=DONE_V&&now()-(r.r388PostAt||0)>=POST_GRACE){bossMode='end';m=1;addM=1;for(const e of rows)if(!e.r388Fin){lowHp(e);e.r388Fin=true;if(major(e))stats.bossEnd++;}return;}
- if((r.enemies||[]).some(e=>e.boss&&alive(e)&&enraged(e))){bossMode='hold';m=HOLD_M;stats.bossHold++;
-  for(const e of rows)if(e.boss){const fl=e.maxHp*HOLD_FLOOR;if(e.hp<fl)e.hp=fl;}return;}
+ if(done&&now()-(r.r388PostAt||0)>=POST_GRACE){bossMode='end';m=1;addM=1;for(const e of rows)if(!e.r388Fin){lowHp(e);e.r388Fin=true;if(major(e))stats.bossEnd++;}return;}
+ if((r.enemies||[]).some(e=>major(e)&&alive(e)&&enraged(e))){bossMode='hold';m=HOLD_M;stats.bossHold++;
+  for(const e of rows)if(major(e)){const fl=e.maxHp*HOLD_FLOOR;if(e.hp<fl)e.hp=fl;}return;}
  bossMode='fast';m=FAST_M;}
 // 음성이 남은 동안(빠르게·상쇄 둘 다) 보스는 3% 아래로 안 떨어지고 잡히지 않는다 → 끝은 음성이 끝난 뒤 1% 처리로만.
-const holding=e=>(bossMode==='hold'||bossMode==='fast')&&!!e?.boss&&curPh==='boss'&&active()&&real();
+const holding=e=>(bossMode==='hold'||bossMode==='fast')&&major(e)&&curPh==='boss'&&active()&&real();
 function active(){return cinemaOn()&&solo()&&G(()=>started,false)&&!G(()=>loading,false);}
 let curPh=null;
 setInterval(()=>{try{if(!active()){m=1;addM=1;curPh=null;bossMode=null;return;}const r=G(()=>room,null),ph=phaseOf(r);curPh=ph;if(!ph){m=1;addM=1;return;}storyTick(r,ph);paceTick(r,ph);finaleTick(r,ph);respawnTick(r,ph);}catch(e){fail(e);}},TICK);
@@ -145,6 +152,6 @@ try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=funct
       if(go){lockP=null;res(base.apply(self,args));}else setTimeout(w,300);};setTimeout(w,300);});return lockP;}}catch(e){fail(e);}
   return base.apply(this,arguments);};}}catch(e){fail(e);}
 function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.pace){m=1;addM=1;}return{...prefs};}
-window.__STORYWORLD_CINEMA_SYNC_R384__=Object.freeze({revision:REV,MIN_M,MAX_M,DONE_M,B_MIN,B_MAX,TAIL,KEEP,SPAWN_CAP,set,factor:()=>m,addFactor:()=>addM,
+window.__STORYWORLD_CINEMA_SYNC_R384__=Object.freeze({revision:REV,MIN_M,MAX_M,DONE_M,B_MIN,B_MAX,TAIL,KEEP,SPAWN_CAP,set,full:()=>{try{return prefs.finale&&active()&&real();}catch(_){return false;}},factor:()=>m,addFactor:()=>addM,
  inspect:()=>({revision:REV,prefs:{...prefs},active:active(),real:real(),bossMode,locked:!!lockP,phase:curPh,factor:+m.toFixed(3),addFactor:+addM.toFixed(3),rate:+rate.toFixed(2),last,spawned,stats:{...stats},lastError})});
 })();

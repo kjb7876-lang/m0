@@ -53,7 +53,7 @@ vm.runInContext(`var started=true,loading=false,modal=false,guide=true,auto=true
  async function enterRegion(){return true;}function showSettings(){}`,sb);
 vm.runInContext(CS('cinema-mode-r370.js'),sb);const api=sb.__STORYWORLD_CINEMA_MODE_R370__;api.set({on:true});
 const tickIv=s=>{for(let i=0;i<s;i++){run(1);sb.__iv&&sb.__iv();}};
-ok(/^R370-cinema-[34]$/.test(api.inspect().revision),'영화 모드 rev 3 이상');
+ok(/^R370-cinema-[345]$/.test(api.inspect().revision),'영화 모드 rev 3 이상');
 const scene=sentences(C.prologue.pre).slice(0,4);const fresh='정본에 없는 새 문장이다.';
 failSrc=sid(scene[2]);
 vm.runInContext(`playScenes([{key:'prologue.pre',id:'dist00',title:'t',text:${JSON.stringify(scene.slice(0,3).join(' ')+' '+fresh)}}],null)`,sb);

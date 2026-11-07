@@ -14,11 +14,13 @@
 //    덜어 낸 문장은 버리지 않고 예비로 두었다가, 대기열이 비었는데 그 지역에 살아 있는 적이 남아 있으면 (남은 예상 시간, 적어도 45초 분량만큼) 원래 순서대로 다시 채워
 //    전투 중에도 자막·음성이 끊기지 않게 한다(지역을 옮기면 예비는 비운다).
 //  · R381 녹음 음성: 문장마다 녹음(voice-r381, Qwen3-TTS Sohee)이 있으면 그걸 틀고(말 속도는 재생 속도 0.85~1.2배로), 없거나 못 받으면 브라우저 음성.
+//  · R390 실화 '전체 서사'(fullMode, cinema-sync 가 알려 줌): 지역 서사를 요약하지 않고 모두 읽는다(덜어 낸 예비 없이, 싸움이 끝나도 남은 예비를 이어 읽음).
+//    남은 시간(remainingSecs)에 예비도 넣어, 대기열이 잠깐 빈 순간을 '서사 끝'으로 보지 않게 한다(뿌리 보스가 서사 도중 쓰러지던 문제).
 //  · R384 말 빠르기 일정: 문장마다 빠르기를 바꾸지 않고 늘 설정 배율×0.95. 남은 서사 시간(remainingSecs)을 밖에 알려 전투가 그 시간에 맞춘다(cinema-sync-r384).
 //  · 설정 '영화 모드' 줄(목소리 고르기·시험 듣기). localStorage storyworld.r370.cinema {on, voice, subs, rate}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_MODE_R370__)return;
-const REV='R370-cinema-4',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
+const REV='R370-cinema-5',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
 const DEF={on:false,voice:'',subs:true,rate:1};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.voice==='string')prefs.voice=s.voice;if(typeof s.subs==='boolean')prefs.subs=s.subs;if(Number.isFinite(+s.rate))prefs.rate=Math.max(.8,Math.min(1.3,+s.rate));}}catch(_){}
 let learned={};try{const t=JSON.parse(localStorage.getItem(TKEY)||'{}');if(t&&typeof t==='object')for(const[k,v]of Object.entries(t))if(Number.isFinite(+v)&&+v>5&&+v<7200)learned[k]=+v;}catch(_){}
@@ -72,14 +74,15 @@ function tickZone(){const k=zoneKey(),t=now(),dt=Math.min(1,t-zone.last);zone.la
 const remainingInZone=()=>Math.max(0,estimate(zone.key)-zone.active);
 // ── 대기열·음성 ──
 const Q=[],reserve=[];let cur=null,deadline=null,cps=CPS0,order=0,timer=null,gen=0;
-const pendingChars=()=>Q.reduce((s,q)=>s+q.len,0)+(cur?cur.len*.5:0);
+const fullMode=()=>{try{return window.__STORYWORLD_CINEMA_SYNC_R384__?.full?.()===true;}catch(_){return false;}};
+const pendingChars=()=>Q.reduce((s,q)=>s+q.len,0)+(cur?cur.len*.5:0)+(fullMode()?reserve.reduce((s,q)=>s+q.len,0):0);
 const backlogSecs=()=>pendingChars()/(cps*steadyRate(prefs.rate));
 // 남은 서사 시간(초): 남은 글자 ÷ 말 빠르기 + 문장 사이 쉼. R384 전투 맞추기가 읽는다.
-const remainingSecs=()=>backlogSecs()+Q.length*GAP+(Q.length||cur?GAP_END:0);
+const remainingSecs=()=>{const n=Q.length+(fullMode()?reserve.length:0);return backlogSecs()+n*GAP+(n||cur?GAP_END:0);};
 function voices(){try{return (speechSynthesis.getVoices()||[]).filter(v=>/^ko/i.test(v.lang));}catch(_){return[];}}
 function pickVoice(){const vs=voices();if(prefs.voice==='none')return null;return vs.find(v=>v.name===prefs.voice)||vs.find(v=>/natural|online|neural/i.test(v.name))||vs[0]||null;}
 function vol(){try{const s=G('settings',{});return clamp(Number.isFinite(+s.voice)?+s.voice:.8,0,1);}catch(_){return .8;}}
-function enqueue(scenes){const final=isFinal(scenes);stats.batches++;
+function enqueue(scenes){const final=isFinal(scenes)||fullMode();stats.batches++;
  // 옛 문장은 '지난 것'으로 점수를 깎는다(must 는 그대로).
  for(const q of Q)q.score-=.8;
  const fresh=[];for(const s of scenes){stats.scenes++;const ss=sentences(s.text);const narr=String(s.narrator||'').replace(/[〈〉<>]/g,'').trim();
@@ -95,7 +98,9 @@ function show(q,part){const el=box();if(!el)return;if(!prefs.subs||!q){el.classL
  el.querySelector('.n').textContent=q.narr||'';el.querySelector('.t').textContent=part;el.classList.add('on');}
 // 예비 다시 채우기: 대기열이 비었고 지금 지역에 살아 있는 적이 있을 때. 예상 시간이 지났어도 싸움이 이어지면 45초 분량씩 더 읽는다.
 function fighting(){try{const r=G('room',null);return !!(r&&(r.enemies||[]).some(e=>e&&e.hp>0&&!e.deadRecorded&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)));}catch(_){return false;}}
-function refill(){if(Q.length||!reserve.length||!fighting())return 0;const left=Math.max(REFILL_MIN,remainingInZone());
+function refill(){if(Q.length||!reserve.length)return 0;
+ if(fullMode()){const all=reserve.splice(0).sort((a,b)=>a.order-b.order);Q.push(...all);deadline=null;stats.refilled+=all.length;return all.length;}
+ if(!fighting())return 0;const left=Math.max(REFILL_MIN,remainingInZone());
  const cap=left*cps*clamp(prefs.rate,.8,1.3)*.9;const pick=select(reserve.slice(),cap).kept;if(!pick.length)return 0;
  const ps=new Set(pick);for(let i=reserve.length-1;i>=0;i--)if(ps.has(reserve[i]))reserve.splice(i,1);
  Q.push(...pick);deadline=now()+left;stats.refilled+=pick.length;return pick.length;}
