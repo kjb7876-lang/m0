@@ -260,7 +260,14 @@ if len(sys.argv) > 20:
         add2(f'reverse-rc-stamp-v1-{side}', ST, [f'attack_{side}_0{j}.png' for j in range(1, 5)], 4, .3, [0, 1, 2, 3], [0, 1, 2, 3], [3], act, .85)
         if side == 'left': mobs[-1]['facing'] = 'left'
     mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R399',
+# ── R400: 사몽 문턱(P) 신규 일반몹 2종(선택본 = 원본 이동): 검은 뿌리 포획체·발소리 추적 잔영. P '뿌리에서 쏟아진 잔영' 셋 중 둘 ──
+if len(sys.argv) > 22:
+    R0 = pathlib.Path(sys.argv[22])
+    for i, (k, d, nm, sc, ft) in enumerate((('root-grasper', 'x-root/p-root-grasper-20261107', '검은 뿌리 포획체', .3, .5), ('footstep-remnant', 'x-foot/p-footstep-remnant-20261107', '발소리 추적 잔영', .3, .85))):  # 낮고 긴 네발 몸은 높이 기준으로 키우면 너무 커져 fit 을 낮춤
+        add2(f'samong-p-{k}-v1', R0 / d / 'frames', [f'move_right_0{j}.png' for j in range(1, 5)] + [f'attack_right_0{j}.png' for j in range(1, 5)], 8, sc, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|검은 뿌리 포획체|발소리 추적 잔영)( \\d+)?$', 'samong': '(^|-)P(-|$)', 'slot': [i, 3], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R400',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

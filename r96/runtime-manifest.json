@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 140069,
-      "sha256": "380815fc70567501a0e90a0ab2ed88d85ef39fbc2085dda1c38c03d2a6c2f6af"
+      "bytes": 143714,
+      "sha256": "ebc3b4cf3b38b4b22d133501181bacc6f41b8c4fe81b1acf44af3c2ab49fbab8"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15371,6 +15371,16 @@
       "path": "assets/r380/mobs/samong-m097-v3.webp",
       "bytes": 323056,
       "sha256": "4beb29dddc9b1755c007ba49d754a9e7fed01708d473162f510aa5d815ef14fa"
+    },
+    {
+      "path": "assets/r380/mobs/samong-p-footstep-remnant-v1.webp",
+      "bytes": 55436,
+      "sha256": "9d7aae9ea345320f3719153b4329c23dad453eee3b49436b5f3f52823a069b3e"
+    },
+    {
+      "path": "assets/r380/mobs/samong-p-root-grasper-v1.webp",
+      "bytes": 62378,
+      "sha256": "46b987fa3660a4277044d3e52584ab6718d4d56573ac9b9e807e015f07677942"
     },
     {
       "path": "assets/r380/mobs/samong-paper-figure-v1.webp",
@@ -33328,8 +33338,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6665,
-  "totalBytes": 1042621007,
+  "fileCount": 6667,
+  "totalBytes": 1042742466,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
