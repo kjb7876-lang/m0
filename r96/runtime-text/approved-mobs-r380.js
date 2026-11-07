@@ -20,12 +20,12 @@ const attacking=e=>!!(e?.attack&&Number.isFinite(e.attack.elapsed));
 const SPIDER=/망각의 거미/,MECH='기계화 망각거미';
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
- if(id==='dist01'){const n=r.enemies.length;r.enemies=r.enemies.filter(e=>!(e&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')));stats.removed+=n-r.enemies.length;}
- else if(id==='u202'&&!r.enemies.some(e=>e?.r380Mech)){const src=r.enemies.filter(e=>e&&!e.boss&&!e.midboss&&e.nativeId==='u202-e1'&&/^가짜 자비 수집가( \d+)?$/.test(e.name||'')&&e.spawnState==='active');
-  const take=src.slice(0,4);take.forEach((e,i)=>{const c={...e,id:e.id+':r380mech',name:MECH+' '+(i+1),r380Mech:true,squadR373:undefined,r373Slot:undefined,r373Anchor:undefined,r373From:undefined,
-   x:e.x+.9,y:e.y-.6,homeX:e.homeX+.9,homeY:e.homeY-.6,attack:null,nav:null,aim:null,profile:e.profile?{...e.profile}:e.profile};
-   // R58 이 틱마다 attackShape 를 바꿔 쓰므로 combatProfile 은 따로 복제(Codex P2).
-   try{if(e.combatProfile)c.combatProfile=structuredClone(e.combatProfile);}catch(_){c.combatProfile={...e.combatProfile,attackShape:e.combatProfile.attackShape&&{...e.combatProfile.attackShape}};}r.enemies.push(c);stats.added++;});}
+ // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
+ if(id==='dist01'){const sub=['재 나방','보랏빛 알집지기','거미줄에 묶인 수호병'];let k=0;
+  for(const e of r.enemies)if(e&&!e.r380Renamed&&!e.boss&&!e.midboss&&!e.wardChampionR81&&!/중간보스|준보스/.test(e.name||'')&&String(e.nativeId||'').startsWith('dist01-sp1')&&SPIDER.test(e.name||'')){
+   const n=sub[k%3]+' '+(Math.floor(k/3)+1);e.r380From=e.name;e.name=n;e.r380Renamed=true;k++;stats.removed++;}}
+ else if(id==='u202'&&!r.enemies.some(e=>e?.r380Mech)){const src=r.enemies.filter(e=>e&&!e.boss&&!e.midboss&&!e.wardChampionR81&&e.nativeId==='u202-e1'&&/^가짜 자비 수집가( \d+)?$/.test(e.name||'')&&e.spawnState==='active');
+  src.slice(0,4).forEach((e,i)=>{e.r380From=e.name;e.name=MECH+' '+(i+1);e.r380Mech=true;stats.added++;});}
  return r;}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
  const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
