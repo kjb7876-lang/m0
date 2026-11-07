@@ -1,0 +1,1 @@
+{"type":"module","private":true,"name":"storyworld-dots-assets","scripts":{"test":"node --no-warnings test/worker.test.mjs"}}
