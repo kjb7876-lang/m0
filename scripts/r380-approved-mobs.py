@@ -124,7 +124,13 @@ if len(sys.argv) > 5:
          [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1a09', 'name': '^유리 망령'}, 1.0)
     add2('sloth-burden-man-v1', g5('x-SW-sloth-burden*') / 'frames', [f'heavy-shuffle-0{i}.png' for i in range(1, 5)] + [f'burden-swipe-0{i}.png' for i in range(1, 5)], 8, .5,
          [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1b02', 'name': '^나태에 잠식된 남자', 'boss': True}, .85)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R386',
+# R387: 중독을 부르는 주사기 환영체 v1(사용자 채택 "둘다 좋네 적용", 위치 2026-11-07 "병원맵 주사실쪽에 보스가 나오지 않을걸 거기에 넣어줘").
+#  여섯째 인자 = R387 stage 폴더. ep1a09 에 approved-mobs-r380.js 가 더하는 중간보스 한 마리에만 붙는다.
+if len(sys.argv) > 6:
+    S6 = pathlib.Path(sys.argv[6]) / 'frames'
+    add2('syringe-phantom-boss-v1', S6, [f'spectral-drift-0{i}.png' for i in range(1, 5)] + [f'syringe-thrust-0{i}.png' for i in range(1, 5)], 8, .5,
+         [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'STORY', 'zone': 'ep1a09', 'name': '^중독을 부르는 주사기 환영체'}, .8)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R387',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
