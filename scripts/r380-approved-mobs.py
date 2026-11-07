@@ -234,7 +234,14 @@ if len(sys.argv) > 18:
         add2(f'samong-s05-wraith-{k}-v2', W, [f'{k}-move/0{j}.png' for j in range(1, 5)] + [f'{k}-attack/0{j}.png' for j in range(1, 5)], 8, .22, [0, 1, 2, 3], [4, 5, 6, 7], [0],
              {'layer': 'DREAM', 'name': '^찢긴 호외의 잔향( \\d+)?$', 'samong': '(^|[^0-9])S-?05([^0-9]|$)', 'slot': [i, 3]}, .85)
         mobs.insert(0, mobs.pop())
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R396',
+# ── R397: R200 그림자 S-04 복원 후보 3종(불면병동 무안 환자·금박 박제 망자·화형식당 앞치마 식객). 오른쪽 이동4·공격4, 왼쪽은 반전 파생이라 엔진 뒤집기 ──
+if len(sys.argv) > 19:
+    R7 = pathlib.Path(sys.argv[19])
+    for k, x in (('insomnia-patient', 'x11'), ('gilded-hollow', 'x14'), ('diner-ghoul', 'x16')):
+        d = R7 / x / 'r200-s04-recovered-20261107' / k / 'frames'
+        add2(f'r200-{k}-v2', d, [f'move-right-0{j}.png' for j in range(1, 5)] + [f'attack-right-0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '.', 'shade': k, 'samong': '.'}, .85)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R397',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

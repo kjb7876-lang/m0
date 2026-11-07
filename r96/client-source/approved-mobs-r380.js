@@ -7,7 +7,7 @@
 //  · 그림만 엔진 frameFor 사슬에 내준다. 판정·보상·저장은 그대로. storyworld.r380.mobs {on:false} 로 끈다(이동·개명은 새로 만드는 지역부터).
 (()=>{'use strict';
 if(window.__STORYWORLD_APPROVED_MOBS_R380__)return;
-const REV='R393',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
+const REV='R397',KEY='storyworld.r380.mobs',INDEX='assets/r380/mobs/index.json';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={assigned:0,frames:0,waiting:0,removed:0,added:0,renamed:0,reinstalls:0,errors:0,deaths:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 let idx=null;if(typeof fetch==='function')fetch(INDEX).then(r=>r.ok?r.json():null).then(j=>{if(j?.mobs)idx=j;}).catch(fail);
@@ -90,7 +90,8 @@ function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return t
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
- return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;if(a.samong&&(!new RegExp(a.samong).test(String(e.samongR103||''))||e.r200Shade))return false;if(a.slot&&slotOf(e,a.slot[1])!==a.slot[0])return false;return new RegExp(a.name).test(n);})||null;}
+ return idx.mobs.find(m=>{const a=m.actor;if(a.layer!==L)return false;if(a.zone&&zoneOf()!==a.zone)return false;if(a.artMode&&a.artMode!==mode)return false;if(a.hero&&a.hero!==heroOf())return false;if(a.shade&&e.r200Shade!==a.shade)return false;if(a.samong&&(!new RegExp(a.samong).test(String(e.samongR103||''))||(e.r200Shade&&!a.shade)))return false;if(a.slot&&slotOf(e,a.slot[1])!==a.slot[0])return false;return new RegExp(a.name).test(n);})||null;}
+// R397: actor.shade = R200 그림자 id. 그 그림자로 배정된 몹만, R200 옛 시트 대신 복원 시트로 그린다(이름·배정은 R200 그대로).
 // R393: m.twin = 반대 방향을 따로 그린 시트(좌우 뒤집지 않음). 그 방향을 볼 때 쌍둥이 시트를 쓰고, 아직 안 읽혔으면 뒤집어 그린다.
 // R389: 같은 장의 일반몹을 여러 얼굴로 고르게 나눈다(id 끝 일련번호, 없으면 해시). 능력치·수는 그대로.
 // R390: 사몽 몹은 R200 그림자 배정(이름까지 바꿈)이 먼저 끝난 뒤에 고른다 — 둘이 같은 몹을 서로 다른 이름으로 바꾸던 경합을 막음. R200 이 아직 목록을 못 읽었으면 다음 화면에 다시 본다.

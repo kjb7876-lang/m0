@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R396",
+ "revision": "R397",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -5695,6 +5695,228 @@
     {
      "file": "attack_left/attack_left_04.png",
      "sha256": "cbc712336ebdb89df529493983daae58ecbf4deb4d95be5d0889bc311afa8702"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "r200-insomnia-patient-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/r200-insomnia-patient-v2.webp",
+   "cell": [
+    192,
+    144
+   ],
+   "cols": 8,
+   "pivot": [
+    101.7,
+    129.9
+   ],
+   "visibleHeight": 126.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": ".",
+    "shade": "insomnia-patient",
+    "samong": "."
+   },
+   "bytes": 77020,
+   "sha256": "5a92676ad27b89bd4668b460e528a875e2ff2225542be12689d3f4849789a947",
+   "source": [
+    {
+     "file": "move-right-01.png",
+     "sha256": "5fabd6ba9e87b8efbd294bb1d08054e99b4571c2c65ebb3b4e9977860e8b2230"
+    },
+    {
+     "file": "move-right-02.png",
+     "sha256": "5add6152a63f2183bd225ff18025f9724d80bf462e0e474e6247e939950b10b9"
+    },
+    {
+     "file": "move-right-03.png",
+     "sha256": "a9c73f97021532f949d25623615cebfa2b2cefd30d5d927c36de50ef43151f3f"
+    },
+    {
+     "file": "move-right-04.png",
+     "sha256": "db903be9543bde03e4ec297168ae12aa46583d67169e4809bcc3faeb129eee93"
+    },
+    {
+     "file": "attack-right-01.png",
+     "sha256": "9eac07a51b4189b1863cd2526fdef5844a53674b59ff9a0e5ab6b587563b758b"
+    },
+    {
+     "file": "attack-right-02.png",
+     "sha256": "02e691d3fb1b53b2e90050e6a102aec0e9c9e42020d53337d2850c58cd1bb897"
+    },
+    {
+     "file": "attack-right-03.png",
+     "sha256": "5c9355fbf78521f1b261f4445964fa04857e1339801e8f5c5dfd0cdc2bf72a76"
+    },
+    {
+     "file": "attack-right-04.png",
+     "sha256": "2a34bb7bea3c98d0363314f4b8e7631b1efb5a168da2a48be0aa3ee49fbee9e1"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "r200-gilded-hollow-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/r200-gilded-hollow-v2.webp",
+   "cell": [
+    192,
+    144
+   ],
+   "cols": 8,
+   "pivot": [
+    79.35,
+    129.9
+   ],
+   "visibleHeight": 128.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": ".",
+    "shade": "gilded-hollow",
+    "samong": "."
+   },
+   "bytes": 75594,
+   "sha256": "3c93446aa27bf44c1216478cb5ea7de4be5597149cb947c3d1b9bce47c5ed89f",
+   "source": [
+    {
+     "file": "move-right-01.png",
+     "sha256": "32e645d524059fa321de3bb0d5f1b5814792fba503ade0010c0cad9755f79fb8"
+    },
+    {
+     "file": "move-right-02.png",
+     "sha256": "73396ea0b4d6fb937b3475722ab2299a8d12eb99ccfd7cee7a7c09c8900ac7f7"
+    },
+    {
+     "file": "move-right-03.png",
+     "sha256": "e5ed3b95667e1a2198ae261754616541d899861869d80943ee20aa06569fe9a7"
+    },
+    {
+     "file": "move-right-04.png",
+     "sha256": "1ffaf0435eae65c5def0d700a60d40139d8c93bf9ecebff99fbeb62acf4d6ec8"
+    },
+    {
+     "file": "attack-right-01.png",
+     "sha256": "b5eae04bfb489b9bff033cf74f809b9f9791fedb67a48cf8e53571bf022232bf"
+    },
+    {
+     "file": "attack-right-02.png",
+     "sha256": "f5000c6c7ca39c50f715de8676ac52fc697e604f12c7201177d2aa50a1f462fe"
+    },
+    {
+     "file": "attack-right-03.png",
+     "sha256": "dd27d9abe36bc50fe7e0c62b7fa7d88b7a306605162445f6f08374d1355bcb96"
+    },
+    {
+     "file": "attack-right-04.png",
+     "sha256": "9bc6035bc67326d70592c0655a04136bcef2c252e62035c468ef3205273795ee"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "r200-diner-ghoul-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/r200-diner-ghoul-v2.webp",
+   "cell": [
+    192,
+    144
+   ],
+   "cols": 8,
+   "pivot": [
+    74.25,
+    129.9
+   ],
+   "visibleHeight": 125.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": ".",
+    "shade": "diner-ghoul",
+    "samong": "."
+   },
+   "bytes": 69564,
+   "sha256": "0e9c248f210126ce436d318c434a39e5bb1e390754bff8709c143e13c2d61744",
+   "source": [
+    {
+     "file": "move-right-01.png",
+     "sha256": "b14a51b07b1f1c1df5a27008015a39cabff216dee2229d905a98088b96b15da1"
+    },
+    {
+     "file": "move-right-02.png",
+     "sha256": "8b09d3629c3d8d3b3d4a6afeeced33106b3936bc38529683129a1a0480540bab"
+    },
+    {
+     "file": "move-right-03.png",
+     "sha256": "1052c1691704490660fcae2f949047aee42edb4cd9b28cc0249bb5e6435b2b9e"
+    },
+    {
+     "file": "move-right-04.png",
+     "sha256": "b166ba2878d4aa9981afb34882cc2f84c18ecdb4f0d18f83d9578a5647ab546e"
+    },
+    {
+     "file": "attack-right-01.png",
+     "sha256": "55cb3063e695fc08796bfc25ae9fee398dc11a41904978d6419581438e0d8971"
+    },
+    {
+     "file": "attack-right-02.png",
+     "sha256": "eb5378657dea8707f9dc57e82a15fa8bccf63076fddfa4179412612c15a1e923"
+    },
+    {
+     "file": "attack-right-03.png",
+     "sha256": "e236e149cac42ccd6b28540c3e11e69b9ab2336b208ea03953ca6f70a71bea9a"
+    },
+    {
+     "file": "attack-right-04.png",
+     "sha256": "6cb3e3c638df26bc07e052e5d7bb310daf498ca4e027a579aa967c71e8a58461"
     }
    ],
    "finalArt": false

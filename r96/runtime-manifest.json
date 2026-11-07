@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 19917,
-      "sha256": "1bca07d4a77c2851dd3ea5627a514ded550fade2f527fe81a0050d35855d6a59"
+      "bytes": 20138,
+      "sha256": "6d413a5e2b64e453f11bf914a350d229523f213c4f724b8aae07aa3325820385"
     },
     {
       "path": "art-drive-r105.js",
@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 129243,
-      "sha256": "9a908f7ddb748d0e53194301b9cde3652f4ae896d01613aee53844b3b1af2afa"
+      "bytes": 134250,
+      "sha256": "0197e7d7255ca0d1e9531cdf2073c86c8a0a40b56a3fe9105f8b1d7579d3670f"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15256,6 +15256,21 @@
       "path": "assets/r380/mobs/purple-eggkeeper-v1.webp",
       "bytes": 346374,
       "sha256": "10f419139873f1718b804d4b268cf0840ac42e8d32d1abcf278472e4580f8421"
+    },
+    {
+      "path": "assets/r380/mobs/r200-diner-ghoul-v2.webp",
+      "bytes": 69564,
+      "sha256": "0e9c248f210126ce436d318c434a39e5bb1e390754bff8709c143e13c2d61744"
+    },
+    {
+      "path": "assets/r380/mobs/r200-gilded-hollow-v2.webp",
+      "bytes": 75594,
+      "sha256": "3c93446aa27bf44c1216478cb5ea7de4be5597149cb947c3d1b9bce47c5ed89f"
+    },
+    {
+      "path": "assets/r380/mobs/r200-insomnia-patient-v2.webp",
+      "bytes": 77020,
+      "sha256": "5a92676ad27b89bd4668b460e528a875e2ff2225542be12689d3f4849789a947"
     },
     {
       "path": "assets/r380/mobs/reborn-shieldmate-v4.webp",
@@ -33293,8 +33308,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6658,
-  "totalBytes": 1042014702,
+  "fileCount": 6661,
+  "totalBytes": 1042242108,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
