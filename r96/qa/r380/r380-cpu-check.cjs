@@ -95,6 +95,7 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
      ok(v('sun-patrol','검은 태양의 학교 순찰자','sz115-S02-3')[0]==='r200-sun-patrol-v2'&&v('stitched-golem','기운 누더기 골렘','sz115-S01-2')[0]==='r200-stitched-golem-v2'&&v('mannequin','식탁의 마네킹 잔영','sz115-S01-2')[0]===null,'R398 R200 태양 순찰자·누더기 골렘 → 새 시트, 마네킹 그대로');
      const a=v(null,'관람석의 시선','sz115-RC-2',3,2),b=v(null,'관람석의 시선','sz115-RC-2',4),c=v(null,'관람석의 시선','sz115-RD-2',3);
      ok(a[0]==='reverse-rc-stamp-v1-right'&&a[1]==='재주문 도장체'&&a[2]==='reverse-rc-stamp-v1-left'&&a[3]===false&&b[0]===null&&c[0]===null,'R398 RC 관람석의 시선 절반 → 재주문 도장체(좌우 시트), 다른 장 그대로');}
+    {const st=idx.mobs.filter(m=>/^reverse-rc-stamp-v1-/.test(m.id));ok(st.length===2&&st.every(m=>m.cols===4&&JSON.stringify(m.move)===JSON.stringify(m.attack)),'R399 도장 v4: 이동에도 같은 방향 공격 4장(그림만, 공격 판정은 엔진 그대로)');}
     ok(t('상대 초인','sz115-S07-1',true)===null&&t('순찰자','',true)===null,'R392 다른 장·본편은 그대로');
     ok(t('포구 검은 안개','')===null&&t('봉합부인','',true)===null,'R391 사몽 밖(본편) 같은 이름은 그대로');}
    ok(fs.readFileSync(path.join(R,'client-source','art-drive-r105.js'),'utf8').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)?null:artFor(e)'),'R391 R105 정적 그림이 승인 시트 위에 겹치지 않음');

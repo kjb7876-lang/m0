@@ -226,7 +226,10 @@ if len(sys.argv) > 17:
 # ── R396: S-01 봉합 정원사 인형(검수 후보, 일반몹 절반), 경성의 밤(S-05) 망령 2종 이동 v2+공격 v1(이름은 그대로, 셋 중 둘) ──
 if len(sys.argv) > 18:
     R6 = pathlib.Path(sys.argv[18]); G = R6 / 'x07/S01_rose_gardener/frames'
-    add2('samong-s01-gardener-v1', G, [f'move_right/0{j}.png' for j in range(1, 5)] + [f'attack_right/0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+    GN = [f'move_right/0{j}.png' for j in range(1, 5)] + [f'attack_right/0{j}.png' for j in range(1, 5)]
+    if len(sys.argv) > 21:  # R399: 사용자 선택 짧은 보폭 이동(크기·발 위치를 공격 그림에 맞춰 정규화) + 기존 공격
+        G = pathlib.Path(sys.argv[21]) / 'gd-norm'; GN = [f'move_right_0{j}.png' for j in range(1, 5)] + [f'attack_right_0{j}.png' for j in range(1, 5)]
+    add2('samong-s01-gardener-v1', G, GN, 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
          {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|봉합 정원사 인형)( \\d+)?$', 'samong': '(^|[^0-9])S-?01([^0-9]|$)', 'slot': [1, 2], 'rename': '봉합 정원사 인형'}, .85)
     mobs.insert(0, mobs.pop())
     W = R6 / 'x33/frames'
@@ -253,10 +256,11 @@ if len(sys.argv) > 20:
     ST = R8 / 'x21/rc-reorder-stamp-20261107/frames'
     for side in ('right', 'left'):
         act = {'layer': 'DREAM', 'name': '^(관람석의 시선|재주문 도장체)( \\d+)?$', 'samong': '(^|-)RC(-|$)', 'slot': [1, 2], 'rename': '재주문 도장체'} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
-        add2(f'reverse-rc-stamp-v1-{side}', ST, [f'walk_{side}_0{j}.png' for j in range(1, 5)] + [f'attack_{side}_0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .85)
+        # R399: 사용자 최신 선택(도장 v4) — 이동에도 같은 방향 공격 4장을 그대로 쓴다(v4 파일과 바이트 일치 확인). 걷기 4장은 시트에 넣지 않음.
+        add2(f'reverse-rc-stamp-v1-{side}', ST, [f'attack_{side}_0{j}.png' for j in range(1, 5)], 4, .3, [0, 1, 2, 3], [0, 1, 2, 3], [3], act, .85)
         if side == 'left': mobs[-1]['facing'] = 'left'
     mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R398',
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R399',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

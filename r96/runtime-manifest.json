@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 141099,
-      "sha256": "f00f6b06fe66ab59c7e146bd9e7bf569d0e9ced12cbef49adf3d61531818e68a"
+      "bytes": 140069,
+      "sha256": "380815fc70567501a0e90a0ab2ed88d85ef39fbc2085dda1c38c03d2a6c2f6af"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15319,13 +15319,13 @@
     },
     {
       "path": "assets/r380/mobs/reverse-rc-stamp-v1-left.webp",
-      "bytes": 103900,
-      "sha256": "70fa32c9628a9bee803ba094aab3ce9129a22afc21ad295f6bbfd07adcff3fa9"
+      "bytes": 52406,
+      "sha256": "b2eaeccdb45d7185da33a54796bdbc05b23f02ebd778f3c2d5f75d90423fe422"
     },
     {
       "path": "assets/r380/mobs/reverse-rc-stamp-v1-right.webp",
-      "bytes": 108354,
-      "sha256": "932096b8a3a069669e7fbb27c334b225bde42bdd3d2491ac4486c5e791a4a08a"
+      "bytes": 54026,
+      "sha256": "3f14a5f27063554e13e0bf35deadbfc03b3b044f95bbfba0663d7875c52dd825"
     },
     {
       "path": "assets/r380/mobs/reverse-rf-merit-scale-v1.webp",
@@ -15384,8 +15384,8 @@
     },
     {
       "path": "assets/r380/mobs/samong-s01-gardener-v1.webp",
-      "bytes": 89116,
-      "sha256": "3958c5e35bd1763f3fc4c8bf4a921c5dd6594fc7c1f825afbac262214532dac8"
+      "bytes": 87876,
+      "sha256": "720509f6007c6df6ebf4e62b887386833ff8255f1e5dbf03ef5cf6afa84b6016"
     },
     {
       "path": "assets/r380/mobs/samong-s05-wraith-jihyeon-v2.webp",
@@ -33329,7 +33329,7 @@
     }
   ],
   "fileCount": 6665,
-  "totalBytes": 1042729099,
+  "totalBytes": 1042621007,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
