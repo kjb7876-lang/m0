@@ -13,6 +13,11 @@
       "sha256": "e2496f2599d2e606bc6b5be71a9781709daee6b7aa12e008fb2c996f879a1aa9"
     },
     {
+      "path": "approved-mobs-r380.js",
+      "bytes": 7647,
+      "sha256": "f1b058d430794eb1828866532ad8ea12d844bdce2455ef9b114d994f42cf5961"
+    },
+    {
       "path": "art-drive-r105.js",
       "bytes": 14298,
       "sha256": "058db45e120ad15d4b1ad52b6e1a5cb50d66906cae85ccfbd5e945261166305f"
@@ -15068,6 +15073,36 @@
       "sha256": "ae9259f065e2b704a3129910f94537561d307c8a7725fb894b4bc5579a9ded4b"
     },
     {
+      "path": "assets/r380/mobs/ash-moth-v2.webp",
+      "bytes": 143472,
+      "sha256": "c18ae28458f03c9118a0207523a5d0ef1472db8db1516f4592c1dc4cec31f08a"
+    },
+    {
+      "path": "assets/r380/mobs/index.json",
+      "bytes": 9590,
+      "sha256": "b4d499ba7398a3ac6f1b111e23704ef1dc0869393e8759d6acd3b56c9e405b34"
+    },
+    {
+      "path": "assets/r380/mobs/mech-oblivion-spider.webp",
+      "bytes": 387750,
+      "sha256": "89a38b2852721a4f387a42644cad24ba623515f53ced1593339bb61d786392da"
+    },
+    {
+      "path": "assets/r380/mobs/purple-eggkeeper-v1.webp",
+      "bytes": 346374,
+      "sha256": "10f419139873f1718b804d4b268cf0840ac42e8d32d1abcf278472e4580f8421"
+    },
+    {
+      "path": "assets/r380/mobs/web-bound-guardian-v4-pixel.webp",
+      "bytes": 218030,
+      "sha256": "7c4071cbca07dcb48226be1622d4767341ce59df3426bf3401d42cf57fc4d842"
+    },
+    {
+      "path": "assets/r380/mobs/web-bound-guardian-v4.webp",
+      "bytes": 218496,
+      "sha256": "b383b1a5fc5b92f263ecba6cee8d0ef8e6cae9dbeee52b7b948f0d6734daed56"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -23969,8 +24004,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570263,
-      "sha256": "f0af0823c1c0f71753d9643e8d7a4a910a211fdfd708a56798d27794eb15c23c"
+      "bytes": 6570310,
+      "sha256": "e5f8bf45d25a5c0ed65bd7f12bdff2da9c9c9e586e43d67f9e8c8fba39eb3b40"
     },
     {
       "path": "intro-r140.js",
@@ -24094,8 +24129,8 @@
     },
     {
       "path": "mob-preload-r260.js",
-      "bytes": 5221,
-      "sha256": "58fd2ea51af7c8d5c20dd84cf8154f0539ed2ff8944f9e420a518af48db65492"
+      "bytes": 5276,
+      "sha256": "48e2c216258bf2a9bb28f3210f0885abc865a68bb617355a12a10643fd06e1e5"
     },
     {
       "path": "mob-rename-r362.js",
@@ -24119,8 +24154,8 @@
     },
     {
       "path": "mob-unique-r248.js",
-      "bytes": 17129,
-      "sha256": "e22ddca78a8bd7959d103d02bfbf61934a5d54a5aa6a320c1380fc895281db05"
+      "bytes": 17184,
+      "sha256": "2a3b3fe8954f640aef476b6bd79148077ea40aa940abcdff7b603dbba0a9027e"
     },
     {
       "path": "mobile-bonus-r286.js",
@@ -24708,9 +24743,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 4941,
-  "totalBytes": 953907097,
-  "webHTMLSha256": "f0af0823c1c0f71753d9643e8d7a4a910a211fdfd708a56798d27794eb15c23c",
+  "fileCount": 4948,
+  "totalBytes": 955238613,
+  "webHTMLSha256": "e5f8bf45d25a5c0ed65bd7f12bdff2da9c9c9e586e43d67f9e8c8fba39eb3b40",
   "largest": [
     {
       "path": "index.html",

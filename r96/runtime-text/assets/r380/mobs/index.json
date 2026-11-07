@@ -1,0 +1,422 @@
+{
+ "schema": "storyworld.r380.approvedmobs/v1",
+ "revision": "R380",
+ "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
+ "mobs": [
+  {
+   "id": "ash-moth-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/ash-moth-v2.webp",
+   "cell": [
+    192,
+    240
+   ],
+   "cols": 8,
+   "pivot": [
+    96.0,
+    225.0
+   ],
+   "visibleHeight": 198.9,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist01",
+    "name": "^재 나방"
+   },
+   "bytes": 143472,
+   "sha256": "c18ae28458f03c9118a0207523a5d0ef1472db8db1516f4592c1dc4cec31f08a",
+   "source": [
+    {
+     "file": "m002-flight-01.png",
+     "sha256": "7fab84f87781ac309830f5682a55794ad3ef4fc12a18650d94aed6e8726929b9"
+    },
+    {
+     "file": "m002-flight-02.png",
+     "sha256": "daaebe1bccd7ab1d636347ee7b6e17f819b934545ff9bcd14bf4c70661236af6"
+    },
+    {
+     "file": "m002-flight-03.png",
+     "sha256": "9a7ad6a49f2c0a22c3465f4c32e48009a2be6ad37a87118f94fda49ee4bb66fe"
+    },
+    {
+     "file": "m002-flight-04.png",
+     "sha256": "f08b60db187b832adf34a89af6e40b827e242a6f0bd4135c8262d5080821dd3b"
+    },
+    {
+     "file": "m002-attack-01.png",
+     "sha256": "5d51d2e9a3203bd4174904a9b3ff71fb26d96c7e913ad02e375b1556743ad9ca"
+    },
+    {
+     "file": "m002-attack-02.png",
+     "sha256": "d07db98c198151bfaff9215314d97a2e1ed185576d1afdc86c2a9adba53bab3f"
+    },
+    {
+     "file": "m002-attack-03.png",
+     "sha256": "f45d2230714a78bd3d35cde67d2a352698a7b7d39832535ec8c963342310ae60"
+    },
+    {
+     "file": "m002-attack-04.png",
+     "sha256": "67e5c0282f6d8f390b346bfbdc8c1545866966c72a10b222aabae6ff3fcafe56"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "purple-eggkeeper-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/purple-eggkeeper-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    128.0,
+    224.0
+   ],
+   "visibleHeight": 265.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist01",
+    "name": "보랏빛 알집지기"
+   },
+   "bytes": 346374,
+   "sha256": "10f419139873f1718b804d4b268cf0840ac42e8d32d1abcf278472e4580f8421",
+   "source": [
+    {
+     "file": "dist01-sp2-move-01.png",
+     "sha256": "3e3f6a467c4abe2af4d6b220e8467172959b45187372ab61d5a4d2ba65b55960"
+    },
+    {
+     "file": "dist01-sp2-move-02.png",
+     "sha256": "cfbe3f35422ef7448329962914d11153de21c0e80cdd7cc926de300676fabc6a"
+    },
+    {
+     "file": "dist01-sp2-move-03.png",
+     "sha256": "990ab0abd299b7b80bd0e2ac0a4eeefc007e2c7d2ec94741883ed87078723fac"
+    },
+    {
+     "file": "dist01-sp2-move-04.png",
+     "sha256": "a4a271655c210765fca07e0b8da4010e18fe8666b3da69adc834fc129110b75f"
+    },
+    {
+     "file": "dist01-sp2-attack-01.png",
+     "sha256": "5eccb2610cab6d347075e6a3760560f1297dfc0f4cb9084dd13c7493f64d550a"
+    },
+    {
+     "file": "dist01-sp2-attack-02.png",
+     "sha256": "8952c32c6673e99c45869fcc48306feaadebb2cc6d2c8ed1e6509435f6e35432"
+    },
+    {
+     "file": "dist01-sp2-attack-03.png",
+     "sha256": "6c44a8b8c7b37c0b03074a0bb8e13bbd4439b35a36d30a3ef2ba3fceed9c1179"
+    },
+    {
+     "file": "dist01-sp2-attack-04.png",
+     "sha256": "008bf0962700c4735451f09f2a74fc99e3942a61462c7bb3c2fbdbc503d57bc0"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "web-bound-guardian-v4",
+   "kind": "strip",
+   "path": "assets/r380/mobs/web-bound-guardian-v4.webp",
+   "cell": [
+    128,
+    256
+   ],
+   "cols": 11,
+   "pivot": [
+    64.0,
+    200.0
+   ],
+   "visibleHeight": 104.7,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist01",
+    "name": "거미줄에 묶인 수호병",
+    "artMode": "painted"
+   },
+   "bytes": 218496,
+   "sha256": "b383b1a5fc5b92f263ecba6cee8d0ef8e6cae9dbeee52b7b948f0d6734daed56",
+   "source": [
+    {
+     "file": "00.png",
+     "sha256": "4c8ee7278dafe8b8a76af6a142f4deff904992ccb063a226b9ceb199c49da4b7"
+    },
+    {
+     "file": "01.png",
+     "sha256": "b01fe9dd278131da1748198f525fa2882588b0a10c5add97139ad3974b8d6fb3"
+    },
+    {
+     "file": "02.png",
+     "sha256": "3d9792569f4aca42f6f08827a78158a02a8307d700015076fabe170467223748"
+    },
+    {
+     "file": "03.png",
+     "sha256": "1db07179322d6cf61ca029c0218e23309319221707f1a694d2c6821de982e4d7"
+    },
+    {
+     "file": "04.png",
+     "sha256": "7f85fa15ed1d51f55a5f659cc0f711be8a88d919a43482bc6e9a94c53995a5e3"
+    },
+    {
+     "file": "05.png",
+     "sha256": "0a77dc43f40075c99356cef6abfe9e46ad5f59ae8e4465b10d8669b0912861e7"
+    },
+    {
+     "file": "06.png",
+     "sha256": "381f3e19ce92dc0798703d47dc4848a40bbfc27fae9ed1f036419346c59af5bd"
+    },
+    {
+     "file": "07.png",
+     "sha256": "90adc26c57c8708f7e7d75792a3f0b3a163c46454f261c3599c3d4422730a8df"
+    },
+    {
+     "file": "08.png",
+     "sha256": "73075801b540c5d71e3cf680557894cbf38ed4348f998bb238eeec1784959dfc"
+    },
+    {
+     "file": "09.png",
+     "sha256": "17e0cb28c7ee8f0b378908991aa4cc9594612cb2fecd7039430a00a2de69817a"
+    },
+    {
+     "file": "10.png",
+     "sha256": "ec1c66b941049c75596b39260a61cb3bdf4f3851732f35345821adaa317bad16"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "web-bound-guardian-v4-pixel",
+   "kind": "strip",
+   "path": "assets/r380/mobs/web-bound-guardian-v4-pixel.webp",
+   "cell": [
+    128,
+    256
+   ],
+   "cols": 11,
+   "pivot": [
+    64.0,
+    200.0
+   ],
+   "visibleHeight": 108.1,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "zone": "dist01",
+    "name": "거미줄에 묶인 수호병",
+    "artMode": "pixel"
+   },
+   "bytes": 218030,
+   "sha256": "7c4071cbca07dcb48226be1622d4767341ce59df3426bf3401d42cf57fc4d842",
+   "source": [
+    {
+     "file": "00.png",
+     "sha256": "3727aee45866aedf263648207aa5c8cfa595a0225f88cfb8ee9dc59d6418143b"
+    },
+    {
+     "file": "01.png",
+     "sha256": "45fef37e57f4d69b976ac9a28aa0a1c7ea3a9ea0ff25e1135cb4767af5d550b1"
+    },
+    {
+     "file": "02.png",
+     "sha256": "437883697c8672282b4a2a7b7aa358afff4a412648f236696b517b2c261d27ab"
+    },
+    {
+     "file": "03.png",
+     "sha256": "7c54ae7f6ccce41cae390f6df250c7e6dd0103b97a6ab93f7f5b89019942a99b"
+    },
+    {
+     "file": "04.png",
+     "sha256": "fbaee07151e55fd4b74b62d3dbfb42daad83d550741585ef913898239660f7c7"
+    },
+    {
+     "file": "05.png",
+     "sha256": "30883157a46c34833c9174099459d7e36c96689583cc7561befc2e21f686b9f1"
+    },
+    {
+     "file": "06.png",
+     "sha256": "accdb0a9988799a1f7f327a19ac476249ecb17df36a551c72dcea87ea3b604c4"
+    },
+    {
+     "file": "07.png",
+     "sha256": "e084f71d24467c9919760d2a7983dd2beb560ae5fe1195db06db1e78b55a2867"
+    },
+    {
+     "file": "08.png",
+     "sha256": "c73c4ac74f559bfc0ad0820b68cd8084916e50c99adbdd4427435c59236286a7"
+    },
+    {
+     "file": "09.png",
+     "sha256": "68f0eec23c24a78cfc3deec9bd1ffc5adab544d4991abc91af540a27df4d849d"
+    },
+    {
+     "file": "10.png",
+     "sha256": "137213a34b8836f550aae969944301157245d2d2458a77b36daadceaac2564d1"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "mech-oblivion-spider",
+   "kind": "strip",
+   "path": "assets/r380/mobs/mech-oblivion-spider.webp",
+   "cell": [
+    272,
+    272
+   ],
+   "cols": 6,
+   "pivot": [
+    135.75,
+    208.5
+   ],
+   "visibleHeight": 120.2,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "idle": [
+    11
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "STORY",
+    "name": "^기계화 망각거미"
+   },
+   "bytes": 387750,
+   "sha256": "89a38b2852721a4f387a42644cad24ba623515f53ced1593339bb61d786392da",
+   "source": [
+    {
+     "file": "00.png",
+     "sha256": "866d9900597ea7b796655cf5cd4056211ecfc6597d4a73e2b0dc75aca6efc762"
+    },
+    {
+     "file": "01.png",
+     "sha256": "76488d11f2db6dfa4bda31cdd00b16bd98ab21b889d74bf08d4dba3ee7ec6370"
+    },
+    {
+     "file": "02.png",
+     "sha256": "323c70f3cc771af735d887df965618792ecd13016d52c09fd0e035d0c98c34cc"
+    },
+    {
+     "file": "03.png",
+     "sha256": "3ec570a047d356cc1db3364104b7678688f718a05f00bb66c05ffccec693d204"
+    },
+    {
+     "file": "04.png",
+     "sha256": "1b90ccf0a88cdc59de517ffd0e099a32a293d3478551e2e9a602a4d7c26f4c57"
+    },
+    {
+     "file": "05.png",
+     "sha256": "e80a1072cf43c1fe77dd983867835d380c33c2991020e7398b268650ea2571f9"
+    },
+    {
+     "file": "06.png",
+     "sha256": "31878e5a8147bfe357711daac3da7e6372a537b80042547afb26e5d4c061097d"
+    },
+    {
+     "file": "07.png",
+     "sha256": "5afac99963ba534872f80c625aba0cf576b9cc39c68e1a2f78d2745e364ac502"
+    },
+    {
+     "file": "08.png",
+     "sha256": "14365a0e9425c26a7fb52b8662152a3c0542020e14a7a71a57b9b4ff845ca593"
+    },
+    {
+     "file": "09.png",
+     "sha256": "e9c5f08d4cea12dfb5c0669b885e36cfc4111b004525f5a1b48e727a42ee6a33"
+    },
+    {
+     "file": "10.png",
+     "sha256": "ae539ba7271219060631fff56e2bbdcb3fe8f2001641657d04d10edbf4a346f3"
+    },
+    {
+     "file": "11.png",
+     "sha256": "b8e5e84b0672ca4c8de06f4fffa616be477664662bd15c0ff32e86d1b1840bfd"
+    }
+   ],
+   "finalArt": false
+  }
+ ]
+}
