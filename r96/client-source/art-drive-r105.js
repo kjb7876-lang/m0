@@ -85,7 +85,7 @@ function install(){
   const q=project(e.x,e.y),cp=e.combatProfile,h=actorHeight()*(cp?.spriteRect?.height||(e.boss?2.05:1))*(e.defScale||1),lift=Math.max(0,Math.min(h*.65,Number(e.visualLiftPx)||0));
   const alpha=dead?Math.max(0,1-age/.7):(e.boss&&!room.engaged?.76:1),filter=e.flash>0?'brightness(1.7)':(typeof layer!=='undefined'&&layer==='DREAM')?'saturate(.8)':'none';
   sprite(path,q.x,q.y-lift,h,{alpha,flip:e.direction==='left',filter});stats.bossDraws++;}
- if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let path=null;try{path=artFor(e);}catch(err){fail(err);}
+ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){let path=null;try{path=window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)?null:artFor(e);}catch(err){fail(err);}/* R391: 승인 모션 시트(R380)가 있는 몹은 R105 정적 한 장을 겹쳐 그리지 않는다 */
   if(!path)return base.apply(this,[e,...a]);const f=frameFor(path);if(!f){load(path);return base.apply(this,[e,...a]);}
   if(major(e)){cur=e;stats.actorDraws++;let r;try{r=base.apply(this,[e,...a]);}finally{cur=null;}try{drawStatic(e,path);}catch(err){fail(err);}return r;}
   const old=e.path,prof=e.profile,hadR74=Object.prototype.hasOwnProperty.call(e,'r74Monster'),r74=e.r74Monster;let shadow=null;

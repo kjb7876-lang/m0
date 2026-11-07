@@ -147,7 +147,169 @@ if len(sys.argv) > 8:
     for i, h in enumerate(HEROES8):
         b = next(m for m in mobs if m['id'] == 'persona-' + h + '-w')
         mobs.append({**b, 'id': 'persona-clone-' + h, 'actor': {'layer': 'DREAM', 'name': '^(여섯 물건의 그림자|페르소나 분신)', 'samong': '(^|[^0-9])S-?07([^0-9]|$)', 'slot': [i, 8], 'rename': '페르소나 분신'}})
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R389',
+# ── R390: 디스토피아(사몽 S-06) 승인분. 사용자 11-07 "비승인도 개선해서 적용 버그없이" ──
+#  · 일반 '외계 침공군' → 일반몹 3종(낫팔 잠복체·포낭 곡사체·막익 급습체, 이동6·공격6)을 id 끝 번호로 고르게. 수·능력치·AI 그대로.
+#  · 정예 '외계 침공군 · 짙은 형상' → 보스형 2종(전선 절단자 짧은 보폭 v4, 심해 연산거수 v1, 이동4·공격4)을 번갈아. 새 스폰 없음.
+if len(sys.argv) > 11:
+    G3 = pathlib.Path(sys.argv[9]) / 'frames'; CUT = pathlib.Path(sys.argv[10]) / 'frames'; DEEP = pathlib.Path(sys.argv[11]) / 'behemoth/frames'
+    S06 = '(^|[^0-9])S-?06([^0-9]|$)'
+    GEN = [('scythe', 'walk', '낫팔 잠복체'), ('sacshell', 'walk', '포낭 곡사체'), ('membrane', 'fly', '막익 급습체')]
+    for i, (k, mv, nm) in enumerate(GEN):
+        names = [f'{k}-{mv}/0{j}.png' for j in range(1, 7)] + [f'{k}-attack/0{j}.png' for j in range(1, 7)]
+        add2('dys-' + k + '-v1', G3, names, 12, .4, list(range(6)), list(range(6, 12)), [0],
+             {'layer': 'DREAM', 'name': '^(외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체)( \\d+)?$', 'samong': S06, 'slot': [i, 3], 'rename': nm}, .85)
+    BOSS = [('cleaver-v4', CUT, '전선 절단자'), ('behemoth-v1', DEEP, '심해 연산거수')]
+    for i, (k, d, nm) in enumerate(BOSS):
+        names = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+        add2('dys-' + k, d, names, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^(외계 침공군|전선 절단자|심해 연산거수) · 짙은 형상', 'samong': S06, 'slot': [i, 2], 'rename': nm + ' · 짙은 형상'}, 1.0)
+# ── R391: 사몽 승인·후보 모션(같은 사용자 지시). 모두 사몽(DREAM, samongR103 있음)만, 수·능력치 그대로 ──
+#  · 포구 검은 안개 m065·부정의 잔영 m066(이동6·공격6), 66 수문장 m097(이동4·공격6): R200 그림자로 안 바뀐 원래 이름 몹.
+#  · 봉합부인(S-01 보스, R105 정적 한 장) → 이동4·시전4. 종이 형상(RF) → R109 이동4(PAPER-move) + 새 공격4.
+if len(sys.argv) > 13:
+    X35 = pathlib.Path(sys.argv[12]) / 'frames'; X24 = pathlib.Path(sys.argv[13]); SAM = '.'
+    for mid, nm, mv in (('m065', '포구 검은 안개', 6), ('m066', '부정의 잔영', 6), ('m097', '66 수문장', 4)):
+        names = [f'{mid}/move/0{j}.png' for j in range(mv)] + [f'{mid}/attack/0{j}.png' for j in range(6)]
+        add2('samong-' + mid + '-v3', X35, names, len(names), .4, list(range(mv)), list(range(mv, mv + 6)), [0],
+             {'layer': 'DREAM', 'name': '^(사몽:)?' + nm + '( \\d+)?$', 'samong': SAM}, .9 if mid == 'm097' else .85)
+    H = X24 / 'hostess/frames'; names = [f'move_0{j}.png' for j in range(1, 5)] + [f'cast_0{j}.png' for j in range(1, 5)]
+    add2('samong-hostess-boss-v1', H, names, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^봉합부인$', 'boss': True, 'samong': SAM}, 1.0)
+    # 종이 형상: R109 이동 4칸(107x153)을 새 공격 칸(543x724) 몸 높이에 맞춰 같은 크기 캔버스에 놓는다(이동은 원래 그림 그대로, 확대만).
+    PA = X24 / 'paper-figure/frames'; an = ['attack-01-ready.png', 'attack-02-anticipate.png', 'attack-03-strike.png', 'attack-04-recover.png']
+    atk = L(PA, an); W, Hh = atk[0].size; ah = bbox_h(atk); pm = Image.open(RT / 'assets/r109/mobs/PAPER-move.png').convert('RGBA'); cw = pm.width // 4
+    mvf = []
+    for j in range(4):
+        c = pm.crop((j * cw, 0, (j + 1) * cw, pm.height)); b = c.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox(); c = c.crop(b)
+        k = ah / c.height; c = c.resize((round(c.width * k), round(c.height * k)), Image.LANCZOS); cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
+        cv.paste(c, (254 - c.width // 2, 680 - c.height), c); mvf.append(cv)
+    add('samong-paper-figure-v1', 'strip', mvf + atk, 8, .3, (254 * 1.0, 680), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'right',
+        {'layer': 'DREAM', 'name': '^종이 형상( \\d+)?$', 'samong': SAM}, [{'file': 'r109/PAPER-move.png', 'sha256': sha(RT / 'assets/r109/mobs/PAPER-move.png')}] + fr(PA, an), 1 / .85)
+# ── R392: 사몽 S-06 상대 초인(보스)·적 지휘 개체(구역 우두머리) 고해상도 후보, 열쇠 순찰자(S-02·RA 보스) 공격4 ──
+if len(sys.argv) > 14:
+    R2 = pathlib.Path(sys.argv[14]); S06 = '(^|[^0-9])S-?06([^0-9]|$)'; MA = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+    RV = pathlib.Path(sys.argv[24]) / 'norm/rival' if len(sys.argv) > 24 else R2 / 'x23/s06-rival-candidate/frames'  # R402: 보행 개선 v2(크기·발 위치를 공격에 맞춤)
+    add2('s06-rival-v1', RV, MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^상대 초인', 'boss': True, 'samong': S06}, 1.0)
+    add2('s06-commander-v1', R2 / 'x23/s06-commander-candidate/frames', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^적 지휘 (개체|기체)', 'boss': True, 'samong': S06}, .9)
+    # 열쇠 순찰자: 걷기 그림은 아직 보류(분할 대기) → R105 정적 한 장을 이동 칸으로, 새 공격 4칸.
+    KD = R2 / 'key/frames'; an = [f'attack_0{j}.png' for j in range(1, 5)]; atk = L(KD, an); W, Hh = atk[0].size; ah = bbox_h(atk)
+    st = Image.open(RT / 'assets/r105/drive/boss-patroller.webp').convert('RGBA'); st = st.crop(st.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox())
+    k = ah / st.height; st = st.resize((round(st.width * k), round(st.height * k)), Image.LANCZOS); fx, fy = footpivot(atk)
+    cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0)); cv.paste(st, (round(fx - st.width / 2), round(fy - st.height)), st)
+    if len(sys.argv) > 24:  # R402: 순찰자 v4 오른쪽 걷기 4 + 기존 공격 4 (같은 크기·발 위치로 맞춤)
+        add2('samong-patroller-boss-v1', pathlib.Path(sys.argv[24]) / 'norm/patroller', MA, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, 1.0)
+    else:
+        add('samong-patroller-boss-v1', 'strip', [cv] + atk, 5, .5, (fx, fy), [0], [1, 2, 3, 4], [0], 'right',
+            {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, [{'file': 'r105/boss-patroller.webp', 'sha256': sha(RT / 'assets/r105/drive/boss-patroller.webp')}] + fr(KD, an), 1.0)
+# ── R393: 사몽역행 RB-6 백색 손님 v4·RC-3 재판관 v4 — 좌우를 따로 그린 시트(뒤집지 않음, twin) ──
+if len(sys.argv) > 15:
+    R3 = pathlib.Path(sys.argv[15])
+    for mid, sub, nm, rg, mv in (('m086', 'x28/RB-6_m086/frames', '^백색 손님', '(^|-)RB-?6([^0-9]|$)', 'walk'), ('m089', 'x26/RC-3_m089/frames', '^재판관$', '(^|-)RC-?3([^0-9]|$)', 'move')):
+        d = R3 / sub; ids = {}
+        for side in ('right', 'left'):
+            names = [f'{mid}_{mv}_{side}_0{j}.png' for j in range(1, 5)] + [f'{mid}_attack_{side}_0{j}.png' for j in range(1, 5)]
+            act = {'layer': 'DREAM', 'name': nm, 'boss': True, 'samong': rg} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+            add2(f'reverse-{mid}-v4-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
+            if side == 'left': mobs[-1]['facing'] = 'left'
+        mobs[-2]['twin'] = mobs[-1]['id']
+if len(sys.argv) > 16:
+    d = pathlib.Path(sys.argv[16]) / 'x27/RE-3_m093/frames'
+    for side in ('right', 'left'):
+        names = [f'move_{side}/move_{side}_0{j}.png' for j in range(1, 5)] + [f'attack_{side}/attack_{side}_0{j}.png' for j in range(1, 5)]
+        act = {'layer': 'DREAM', 'name': '^백색 사수$', 'boss': True, 'samong': '(^|-)RE-?3([^0-9]|$)'} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+        add2(f'reverse-m093-v1-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
+        if side == 'left': mobs[-1]['facing'] = 'left'
+    mobs[-2]['twin'] = mobs[-1]['id']
+# ── R395: 사몽역행 신규 일반몹 검토 후보 RF 비극 계량체·RG 인과 고리충(오른쪽 원화 4+4, 왼쪽은 원본도 좌우 반전이라 엔진 뒤집기). 떨어진 잔조각만 지움 ──
+if len(sys.argv) > 17:
+    C = pathlib.Path(sys.argv[17]) / 'clean'; MR = [f'move_right_{j}.png' for j in range(1, 5)] + [f'attack_right_{j}.png' for j in range(1, 5)]
+    for id_, k, sl, src, nm, ft in (('reverse-rf-merit-scale-v1', 'rf', [1, 2], '종이 형상', '비극 계량체', 1.25), ('reverse-rg-gear-mite-v1', 'rg', [0, 2], '막힌 이름들', '인과 고리충', .85)):
+        ch = k[1].upper()
+        add2(id_, C / k, MR, 8, .32, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': f'^({src}|{nm})( \\d+)?$', 'samong': f'(^|-)R{ch}(-|$)', 'slot': sl, 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+# ── R396: S-01 봉합 정원사 인형(검수 후보, 일반몹 절반), 경성의 밤(S-05) 망령 2종 이동 v2+공격 v1(이름은 그대로, 셋 중 둘) ──
+if len(sys.argv) > 18:
+    R6 = pathlib.Path(sys.argv[18]); G = R6 / 'x07/S01_rose_gardener/frames'
+    GN = [f'move_right/0{j}.png' for j in range(1, 5)] + [f'attack_right/0{j}.png' for j in range(1, 5)]
+    if len(sys.argv) > 21:  # R399: 사용자 선택 짧은 보폭 이동(크기·발 위치를 공격 그림에 맞춰 정규화) + 기존 공격
+        G = pathlib.Path(sys.argv[21]) / 'gd-norm'; GN = [f'move_right_0{j}.png' for j in range(1, 5)] + [f'attack_right_0{j}.png' for j in range(1, 5)]
+    add2('samong-s01-gardener-v1', G, GN, 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|봉합 정원사 인형)( \\d+)?$', 'samong': '(^|[^0-9])S-?01([^0-9]|$)', 'slot': [1, 2], 'rename': '봉합 정원사 인형'}, .85)
+    mobs.insert(0, mobs.pop())
+    W = R6 / 'x33/frames'
+    for i, k in enumerate(('jihyeon', 'officer')):
+        add2(f'samong-s05-wraith-{k}-v2', W, [f'{k}-move/0{j}.png' for j in range(1, 5)] + [f'{k}-attack/0{j}.png' for j in range(1, 5)], 8, .22, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^찢긴 호외의 잔향( \\d+)?$', 'samong': '(^|[^0-9])S-?05([^0-9]|$)', 'slot': [i, 3]}, .85)
+        mobs.insert(0, mobs.pop())
+# ── R397: R200 그림자 S-04 복원 후보 3종(불면병동 무안 환자·금박 박제 망자·화형식당 앞치마 식객). 오른쪽 이동4·공격4, 왼쪽은 반전 파생이라 엔진 뒤집기 ──
+if len(sys.argv) > 19:
+    R7 = pathlib.Path(sys.argv[19])
+    for k, x in (('insomnia-patient', 'x11'), ('gilded-hollow', 'x14'), ('diner-ghoul', 'x16')):
+        d = R7 / x / 'r200-s04-recovered-20261107' / k / 'frames'
+        add2(f'r200-{k}-v2', d, [f'move-right-0{j}.png' for j in range(1, 5)] + [f'attack-right-0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '.', 'shade': k, 'samong': '.'}, .85)
+# ── R398: R200 그림자 복원·개선 2종(S-02 검은 태양의 학교 순찰자, S-01 기운 누더기 골렘 v2) + RC 재주문 도장체(좌우 따로 그림, 관람석의 시선 절반) ──
+if len(sys.argv) > 20:
+    R8 = pathlib.Path(sys.argv[20])
+    SP = R8 / 'x10/r200-sun-patrol-recovered-20261107/frames'
+    add2('r200-sun-patrol-v2', SP, [f'sun-patrol_move_right_0{j}.png' for j in range(1, 5)] + [f'sun-patrol_attack_right_0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '.', 'shade': 'sun-patrol', 'samong': '.'}, .85)
+    GO = R8 / 'x19/stitched-golem-motion-v2'
+    add2('r200-stitched-golem-v2', GO, [f'walk-right-{j}.png' for j in range(1, 5)] + [f'attack-right-{j}.png' for j in range(1, 5)], 8, .36, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '.', 'shade': 'stitched-golem', 'samong': '.'}, .85)
+    ST = R8 / 'x21/rc-reorder-stamp-20261107/frames'
+    for side in ('right', 'left'):
+        act = {'layer': 'DREAM', 'name': '^(관람석의 시선|재주문 도장체)( \\d+)?$', 'samong': '(^|-)RC(-|$)', 'slot': [1, 2], 'rename': '재주문 도장체'} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+        # R399: 사용자 최신 선택(도장 v4) — 이동에도 같은 방향 공격 4장을 그대로 쓴다(v4 파일과 바이트 일치 확인). 걷기 4장은 시트에 넣지 않음.
+        add2(f'reverse-rc-stamp-v1-{side}', ST, [f'attack_{side}_0{j}.png' for j in range(1, 5)], 4, .3, [0, 1, 2, 3], [0, 1, 2, 3], [3], act, .85)
+        if side == 'left': mobs[-1]['facing'] = 'left'
+    mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
+# ── R400: 사몽 문턱(P) 신규 일반몹 2종(선택본 = 원본 이동): 검은 뿌리 포획체·발소리 추적 잔영. P '뿌리에서 쏟아진 잔영' 셋 중 둘 ──
+if len(sys.argv) > 22:
+    R0 = pathlib.Path(sys.argv[22])
+    for i, (k, d, nm, sc, ft) in enumerate((('root-grasper', 'x-root/p-root-grasper-20261107', '검은 뿌리 포획체', .3, .5), ('footstep-remnant', 'x-foot/p-footstep-remnant-20261107', '발소리 추적 잔영', .3, .85))):  # 낮고 긴 네발 몸은 높이 기준으로 키우면 너무 커져 fit 을 낮춤
+        add2(f'samong-p-{k}-v1', R0 / d / 'frames', [f'move_right_0{j}.png' for j in range(1, 5)] + [f'attack_right_0{j}.png' for j in range(1, 5)], 8, sc, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|검은 뿌리 포획체|발소리 추적 잔영)( \\d+)?$', 'samong': '(^|-)P(-|$)', 'slot': [i, 3], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+# ── R401: 사몽역행 RA~RE 신규 검토 후보 5종(좌우 이동4·공격4). RA·RB 왼쪽은 반전 파생이라 엔진 뒤집기, RC·RD·RE 는 왼쪽을 따로 그려 twin. 옅은 알파 잡음(<16)·떨어진 조각 지움 ──
+if len(sys.argv) > 23:
+    C1 = pathlib.Path(sys.argv[23]) / 'clean'
+    SIDE = lambda sd: [f'move_{sd}_0{j}.png' for j in range(1, 5)] + [f'attack_{sd}_0{j}.png' for j in range(1, 5)]
+    for k, src, nm, sl, ft, twin in (('ra', '붉은 교정 표시', '녹슨 개찰구 수집체', [0, 2], 1.0, False),
+                                     ('rb', '정해진 시각에 도착하지 못한 발자국', '세 번째 잔의 강요체', [0, 2], .9, False),
+                                     ('rc', '관람석의 시선|재주문 도장체', '금박 유리관 수확기', [0, 3], 1.0, True),
+                                     ('rd', '서로의 결말을 먹는 도시', '결말 접합체', [0, 2], .6, True),
+                                     ('re', '다음 자리를 노리는 사격', '허위 승전 훈장막', [0, 2], .9, True)):
+        act = {'layer': 'DREAM', 'name': f'^({src}|{nm})( \\d+)?$', 'samong': f'(^|-)R{k[1].upper()}(-|$)', 'slot': sl, 'rename': nm}
+        if not twin:
+            add2(f'reverse-{k}-new-v1', C1 / k, SIDE('right'), 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, ft)
+            mobs.insert(0, mobs.pop()); continue
+        for side in ('right', 'left'):
+            add2(f'reverse-{k}-new-v1-{side}', C1 / k, SIDE(side), 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0], act if side == 'right' else {'layer': 'NONE', 'name': '^$'}, ft)
+            if side == 'left': mobs[-1]['facing'] = 'left'
+        mobs[-2]['twin'] = mobs[-1]['id']; mobs.insert(0, mobs.pop(-2))
+# ── R402: 사몽 S-02 얼굴 없는 학생(이동4 기존 보정본 + 새 공격4), RF 책갑옷 스토리텔러(이동4·공격4, R105 RF 보스 원화), 순찰자 v4·상대 초인 v2 보행(R392 자리 교체) ──
+if len(sys.argv) > 24:
+    N2 = pathlib.Path(sys.argv[24]); MA4 = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
+    add2('samong-s02-student-v1', N2 / 'norm/student', MA4, 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^얼굴 없는 학생( \\d+)?( · 짙은 형상)?$', 'samong': '(^|[^0-9])S-?02([^0-9]|$)'}, 1.0)
+    mobs.insert(0, mobs.pop())
+    add2('samong-rf-storyteller-v1', N2 / 'x45/storyteller-book/frames', MA4, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^스토리텔러$', 'boss': True, 'samong': '(^|-)RF(-|$)'}, 1.0)
+# ── R403: 디스토피아(S-06) 특수병종 v2 3종(이동8·공격4)·레이저총 3종(사격4, 보행은 HOLD 라 조준 자세로 이동) — 외계 침공군 9칸 중 6칸 ──
+if len(sys.argv) > 25:
+    R3a = pathlib.Path(sys.argv[25]); SPC = next(R3a.glob('x43/*/frames')); S06 = '(^|[^0-9])S-?06([^0-9]|$)'
+    NM = '외계 침공군|낫팔 잠복체|포낭 곡사체|막익 급습체|방벽 돌진체|원반 포획체|배양 공병|펄스 척후병|프리즘 저격병|중장 광선포병'
+    for k, nm, sl, ft in (('bulwark', '방벽 돌진체', 3, .6), ('disc', '원반 포획체', 4, .55), ('engineer', '배양 공병', 5, .8)):
+        add2(f'dys-{k}-v2', SPC, [f'{k}-move8/0{j}.png' for j in range(8)] + [f'{k}-attack4/0{j}.png' for j in range(4)], 6, 1, list(range(8)), [8, 9, 10, 11], [0],
+             {'layer': 'DREAM', 'name': f'^({NM})( \\d+)?$', 'samong': S06, 'slot': [sl, 9], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+    for k, nm, sl, ft in (('pulse-raider', '펄스 척후병', 6, .9), ('prism-stalker', '프리즘 저격병', 7, .9), ('siege-gunner', '중장 광선포병', 8, .8)):
+        add2(f'dys-{k}-v2', R3a / 'x44' / k / '512x640/right', [f'fire-0{j}.png' for j in range(4)], 4, .5, [0], [0, 1, 2, 3], [0],
+             {'layer': 'DREAM', 'name': f'^({NM})( \\d+)?$', 'samong': S06, 'slot': [sl, 9], 'rename': nm}, ft)
+        mobs.insert(0, mobs.pop())
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R403',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
