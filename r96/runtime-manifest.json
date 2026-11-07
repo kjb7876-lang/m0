@@ -14,8 +14,8 @@
     },
     {
       "path": "approved-mobs-r380.js",
-      "bytes": 19496,
-      "sha256": "0c9e016ae475c5a23edc82babdf24a4fa6400e35613144053ab1aeaebd53ef5b"
+      "bytes": 19917,
+      "sha256": "1bca07d4a77c2851dd3ea5627a514ded550fade2f527fe81a0050d35855d6a59"
     },
     {
       "path": "art-drive-r105.js",
@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 110054,
-      "sha256": "bfb84c82f2f3d2082377a782703177922b7d9dbbd1e1212129300eedebbc2f46"
+      "bytes": 116877,
+      "sha256": "2c9b7f6d3162a680643759789b83bdfd0028ada215b439650280d573bf8a4f34"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15261,6 +15261,26 @@
       "path": "assets/r380/mobs/reborn-shieldmate-v4.webp",
       "bytes": 264582,
       "sha256": "f4c82ab42427e254cb6b350e769b126912105e0eec391459e34277c2d4048522"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m086-v4-left.webp",
+      "bytes": 210472,
+      "sha256": "5b3456ba5994f24ee14d54c436e9a162ece42ea312a017fd0835ddcf5b9a37e8"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m086-v4-right.webp",
+      "bytes": 225118,
+      "sha256": "e27bb12d11f64d2415a14c383816da8ac63893c69243a9153936149928977449"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m089-v4-left.webp",
+      "bytes": 358644,
+      "sha256": "f226756d5e100b2b4649e3e9c61b93f0eb94ff2ccd97d29880822cac37cfc1f2"
+    },
+    {
+      "path": "assets/r380/mobs/reverse-m089-v4-right.webp",
+      "bytes": 354766,
+      "sha256": "fa60d4ac91479234fa3f2ac6a6e331493ecff07a26d733c3376678b070b26992"
     },
     {
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
@@ -33238,8 +33258,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6647,
-  "totalBytes": 1039552016,
+  "fileCount": 6651,
+  "totalBytes": 1040708260,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {

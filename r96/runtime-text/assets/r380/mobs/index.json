@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R392",
+ "revision": "R393",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -4866,6 +4866,300 @@
     {
      "file": "attack_04.png",
      "sha256": "414bf3c326a48356deafdeb4239772d0e04ca39a458a2be963b885ca80a00cc3"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-m086-v4-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m086-v4-right.webp",
+   "cell": [
+    288,
+    288
+   ],
+   "cols": 8,
+   "pivot": [
+    143.8,
+    270.4
+   ],
+   "visibleHeight": 301.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^백색 손님",
+    "boss": true,
+    "samong": "(^|-)RB-?6([^0-9]|$)"
+   },
+   "bytes": 225118,
+   "sha256": "e27bb12d11f64d2415a14c383816da8ac63893c69243a9153936149928977449",
+   "source": [
+    {
+     "file": "m086_walk_right_01.png",
+     "sha256": "920c7eb09a80335a7aa28309569b18e060bb62608bfacb9368b80f06488f5732"
+    },
+    {
+     "file": "m086_walk_right_02.png",
+     "sha256": "c2efd258cf82f319676fce0ab04d9034ad5d2ae11a2d42e145a90939f9808555"
+    },
+    {
+     "file": "m086_walk_right_03.png",
+     "sha256": "b068af0ca5e7634d07176f69614e40465dd79578c0213b54b0d9161875265300"
+    },
+    {
+     "file": "m086_walk_right_04.png",
+     "sha256": "fd7f55d43c4b4735dab71f6dc4ed3b05a74e5b28aef799ccca70d9df89b441be"
+    },
+    {
+     "file": "m086_attack_right_01.png",
+     "sha256": "69f2766339e84c0ffb61fd5d1dbd2ee60045e2b97ccfd3a58ebcd459f648e6ea"
+    },
+    {
+     "file": "m086_attack_right_02.png",
+     "sha256": "68891c0ecaaf6dc29d5f849c9cca79f0d3430d8f4e3cee1d202c2b11857299ab"
+    },
+    {
+     "file": "m086_attack_right_03.png",
+     "sha256": "beba74abd1c91037f81520eecb5b74bfcf570d41e9e38e8561f8ec59fd148fc6"
+    },
+    {
+     "file": "m086_attack_right_04.png",
+     "sha256": "a35799e9c93826e963d921c0a7b09b468b533265fda69739717e4a8e2dfe2538"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-m086-v4-left"
+  },
+  {
+   "id": "reverse-m086-v4-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m086-v4-left.webp",
+   "cell": [
+    288,
+    288
+   ],
+   "cols": 8,
+   "pivot": [
+    144.2,
+    270.4
+   ],
+   "visibleHeight": 294.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 210472,
+   "sha256": "5b3456ba5994f24ee14d54c436e9a162ece42ea312a017fd0835ddcf5b9a37e8",
+   "source": [
+    {
+     "file": "m086_walk_left_01.png",
+     "sha256": "e5b68997e9c22bfd3692f1e1a11c9dcafbcca20d42fb18410f6347ff3c59f86d"
+    },
+    {
+     "file": "m086_walk_left_02.png",
+     "sha256": "6450594e2d5ec5f178858f51c98b5f81fb29d12f9af774602031658996b62f5f"
+    },
+    {
+     "file": "m086_walk_left_03.png",
+     "sha256": "27558cfdab36955f842f5c8def84ef2866a25fe0e54977ff0c37180ed64fd7d1"
+    },
+    {
+     "file": "m086_walk_left_04.png",
+     "sha256": "68314d57ccd9bc0f7282902d58f17516bdcd036fb23583074a6a94368724b16e"
+    },
+    {
+     "file": "m086_attack_left_01.png",
+     "sha256": "d28b18d3f9d6bfb0b6bf37306dd6ae7159ff3ef2ed85943fe0612b0da74da454"
+    },
+    {
+     "file": "m086_attack_left_02.png",
+     "sha256": "2f69d42715d20bdf8451301d2c898cecd03a81ea230cfe97876185aab42c7a57"
+    },
+    {
+     "file": "m086_attack_left_03.png",
+     "sha256": "4ca6055292e855aa36fb1f32d34467ce1d9d9f40c402f2534ce129315f3575b2"
+    },
+    {
+     "file": "m086_attack_left_04.png",
+     "sha256": "d9981d0c7d6111d088984826244fa4cae1275355b5af0d6b983b70f1b8dbfc92"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "reverse-m089-v4-right",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m089-v4-right.webp",
+   "cell": [
+    288,
+    288
+   ],
+   "cols": 8,
+   "pivot": [
+    164.4,
+    270.8
+   ],
+   "visibleHeight": 291.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^재판관$",
+    "boss": true,
+    "samong": "(^|-)RC-?3([^0-9]|$)"
+   },
+   "bytes": 354766,
+   "sha256": "fa60d4ac91479234fa3f2ac6a6e331493ecff07a26d733c3376678b070b26992",
+   "source": [
+    {
+     "file": "m089_move_right_01.png",
+     "sha256": "046825c47671dee06981dddb883181c094a3adf90406529f0e47d4a02e14cb61"
+    },
+    {
+     "file": "m089_move_right_02.png",
+     "sha256": "72c4fb88b97378757fbbd3a5a7b85367a1bf4ddf0b2e770d915bdf57bcc0fe2c"
+    },
+    {
+     "file": "m089_move_right_03.png",
+     "sha256": "092f26a1ad6e86dc6f19ac13667722dc37aa6d70eaf761b0ba6f792efea9bff8"
+    },
+    {
+     "file": "m089_move_right_04.png",
+     "sha256": "4e114700960e50577d80eaaa9f84b3e0a1747df7e7e264dee850f345c5a4d775"
+    },
+    {
+     "file": "m089_attack_right_01.png",
+     "sha256": "74b8b9e8cb1a4630ce5a5f5ca20773ef1681fb01ce8ec4f3c1a62fbc41b72b52"
+    },
+    {
+     "file": "m089_attack_right_02.png",
+     "sha256": "cf8d475e876dc4d0dee834c45e60eb85be660af1b5a9926fc857b39d28636ee7"
+    },
+    {
+     "file": "m089_attack_right_03.png",
+     "sha256": "f81a036f9da6630fc106a01a2bdc18cc1486922251bfff310c9801706fc52557"
+    },
+    {
+     "file": "m089_attack_right_04.png",
+     "sha256": "0a830d0620adbe09cedc1a698b353e29c51092a2353faa9f10d39d80cc492ae5"
+    }
+   ],
+   "finalArt": false,
+   "twin": "reverse-m089-v4-left"
+  },
+  {
+   "id": "reverse-m089-v4-left",
+   "kind": "strip",
+   "path": "assets/r380/mobs/reverse-m089-v4-left.webp",
+   "cell": [
+    288,
+    288
+   ],
+   "cols": 8,
+   "pivot": [
+    130.8,
+    270.4
+   ],
+   "visibleHeight": 296.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "NONE",
+    "name": "^$"
+   },
+   "bytes": 358644,
+   "sha256": "f226756d5e100b2b4649e3e9c61b93f0eb94ff2ccd97d29880822cac37cfc1f2",
+   "source": [
+    {
+     "file": "m089_move_left_01.png",
+     "sha256": "f522f42bdb540a156f17f70284328d6e931b49a432cb61c17f55bbb9b53c91f5"
+    },
+    {
+     "file": "m089_move_left_02.png",
+     "sha256": "817099e5f73085b62e2f8b648c5512a36c9ce4f0ba36db9b6a40f14aec4839bc"
+    },
+    {
+     "file": "m089_move_left_03.png",
+     "sha256": "eaa500810d46e0992e46fac88adeb01dbfd1b750f7a96c03aab9b4975b7f5026"
+    },
+    {
+     "file": "m089_move_left_04.png",
+     "sha256": "eefd359de93a244f60ec91dff1f6d977d81263b1799f1627dbabb93d2b8c4d57"
+    },
+    {
+     "file": "m089_attack_left_01.png",
+     "sha256": "dd5a46379d2fd7f986fff3b0ea2185b57ecd649e63f015ad522a4b3d7f459839"
+    },
+    {
+     "file": "m089_attack_left_02.png",
+     "sha256": "602479645180ed4029e1147efe1bae957a34e9c0141b4951efd7ec44848609b4"
+    },
+    {
+     "file": "m089_attack_left_03.png",
+     "sha256": "2215ae2d70923630206465d5fdc5c0dace832bbc170b3c41b0f3bc41787fee01"
+    },
+    {
+     "file": "m089_attack_left_04.png",
+     "sha256": "c67011bfb629c57518a92a1acdb811ac0a10ba46c8a9be7c3e80cb5cf95a3ef6"
     }
    ],
    "finalArt": false

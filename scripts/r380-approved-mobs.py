@@ -196,7 +196,18 @@ if len(sys.argv) > 14:
     cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0)); cv.paste(st, (round(fx - st.width / 2), round(fy - st.height)), st)
     add('samong-patroller-boss-v1', 'strip', [cv] + atk, 5, .5, (fx, fy), [0], [1, 2, 3, 4], [0], 'right',
         {'layer': 'DREAM', 'name': '^순찰자$', 'boss': True, 'samong': '.'}, [{'file': 'r105/boss-patroller.webp', 'sha256': sha(RT / 'assets/r105/drive/boss-patroller.webp')}] + fr(KD, an), 1.0)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R392',
+# ── R393: 사몽역행 RB-6 백색 손님 v4·RC-3 재판관 v4 — 좌우를 따로 그린 시트(뒤집지 않음, twin) ──
+if len(sys.argv) > 15:
+    R3 = pathlib.Path(sys.argv[15])
+    for mid, sub, nm, rg, mv in (('m086', 'x28/RB-6_m086/frames', '^백색 손님', '(^|-)RB-?6([^0-9]|$)', 'walk'), ('m089', 'x26/RC-3_m089/frames', '^재판관$', '(^|-)RC-?3([^0-9]|$)', 'move')):
+        d = R3 / sub; ids = {}
+        for side in ('right', 'left'):
+            names = [f'{mid}_{mv}_{side}_0{j}.png' for j in range(1, 5)] + [f'{mid}_attack_{side}_0{j}.png' for j in range(1, 5)]
+            act = {'layer': 'DREAM', 'name': nm, 'boss': True, 'samong': rg} if side == 'right' else {'layer': 'NONE', 'name': '^$'}
+            add2(f'reverse-{mid}-v4-{side}', d, names, 8, .4, [0, 1, 2, 3], [4, 5, 6, 7], [0], act, .8)
+            if side == 'left': mobs[-1]['facing'] = 'left'
+        mobs[-2]['twin'] = mobs[-1]['id']
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R393',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))
