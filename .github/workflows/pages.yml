@@ -390,6 +390,8 @@ jobs:
         run: node r96/qa/r378/r378-cpu-check.cjs
       - name: R380 user-approved mobs (moth, eggkeeper, guardian, mech spider) CPU check
         run: node r96/qa/r380/r380-cpu-check.cjs
+      - name: R385 mob moves (review list v18 move/rename) CPU check
+        run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
 

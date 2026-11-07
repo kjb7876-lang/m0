@@ -5812,7 +5812,8 @@
     "assets/r381/voice/feb1961c5cf7d1f4.mp3",
     "assets/r381/voice/feda40cdf112058b.mp3",
     "assets/r381/voice/fefcfacb0e135da2.mp3",
-    "assets/r381/voice/fff6366a159bb25b.mp3"
+    "assets/r381/voice/fff6366a159bb25b.mp3",
+    "mob-moves-r385.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -6887,5 +6888,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "9b75ddf69772fcc475d691ad9ac8e7cdc0c46b01590f9a7ba6c524bc991adcba"
+  "runtimeManifestSHA256": "913babf747dab4a03de32118e42fe187301ba87680f380e685c780e9d4d863a8"
 }
