@@ -15,14 +15,22 @@
 //     · 방어율: 보스·중간보스 남은 체력 ÷ (남은 음성 + 2.5초) 에 맞춰 1초마다 피해 배율을 바꾼다(범위 0.12~5). 음성이 끝난 뒤에는 남은 2.5초 안에 끝나도록 더 세게.
 //     · 분신·소환(R61) 체력: 분신·소환 몹도 같은 배율로 맞고, 음성이 6초 아래로 남거나 끝났으면 3배로 맞아 끝 장면을 가리지 않는다.
 //     · 분신 쿨타임(R61 소환 nextAt): 전투가 서사보다 먼저 끝날 것 같으면 다음 소환을 최대 8초 뒤로 당기고, 음성이 10초 아래로 남으면 새 소환을 막는다.
-//  ⑤ 끄기: localStorage storyworld.r384.sync {"story":false} / {"pace":false} / {"respawn":false}.
+//  ⑤ R388(사용자 2026-11-07 첫 뿌리 맵 시험 뒤 "일반전투 서사 내용끝날때도 몹이 존재하면 몹들이 플레이어 주변으로 모두 소환된다음 체력을1프로정도로…
+//     보스광폭화(커지기스킬)전까지는 빠르게 보스체력이 내려가다가 광폭화이후부터는 거의 데미지99프로 상쇄버프가 유지되다가 서사음성이 끝나면 체력을 역시나1프로정도로…
+//     맵당 서사음성이 완전히 다 나오기전에는 다음맵으로 이동 불가하도록 (영화-실화모드에서만)"). 영화 모드 + 실화(R376) 지역에서만:
+//     · 일반 전투 마무리: 이 단계의 보스 전 서사를 흘렸고 음성이 끝났는데 일반 몹(숨은 몹 포함)이 남았으면, 모두 영웅 둘레 1.8~3.4칸으로 불러 모으고 체력을 최대의 1%로.
+//     · 보스전: 보스 서사를 흘린 경우 — 광폭화(R205, 체력 30% 이하) 전에는 피해 1.6배로 빠르게, 광폭화 뒤 음성이 남아 있으면 피해 99% 상쇄(×0.01)
+//       + 체력 3% 아래로는 안 떨어짐(잡히지 않음), 음성이 끝나면(보스 서사 시작 2초 뒤부터) 보스·중간보스·분신 체력을 최대의 1%로.
+//     · 지역 이동 잠금: 음성이 남아 있으면 다음 지역으로 가는 이동(enterRegion)을 음성이 끝날 때까지 미룬다(불러오기·영웅 쓰러짐은 그대로, 최대 10분).
+//  ⑥ 끄기: localStorage storyworld.r384.sync {"story":false} / {"pace":false} / {"respawn":false} / {"finale":false} / {"lock":false}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_SYNC_R384__)return;
-const REV='R384-sync-2',KEY='storyworld.r384.sync',MIN_M=.35,MAX_M=2.5,STEP_LO=.75,STEP_HI=1.33,DONE_M=1.6,TICK=500,ADJ=2;
+const REV='R388-sync-3',KEY='storyworld.r384.sync',MIN_M=.35,MAX_M=2.5,STEP_LO=.75,STEP_HI=1.33,DONE_M=1.6,TICK=500,ADJ=2;
 const B_MIN=.12,B_MAX=5,B_ADJ=1,TAIL=2.5,ADD_END=3,ADD_END_AT=6,SUMMON_SOON=8,SUMMON_STOP=10;
+const FIN_HP=.01,HOLD_M=.01,HOLD_FLOOR=.03,FAST_M=1.6,GATHER=[1.8,2.6,3.4],LOCK_MAX=600,DONE_V=.5,POST_GRACE=2;
 const KEEP=5,BATCH=3,SPAWN_GAP=1.2,SPAWN_STOP=3,SPAWN_CAP=60,SPAWN_HP=.6,RING=[6,7.5,9];
-let prefs={story:true,pace:true,respawn:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={pre:0,post:0,adjust:0,hits:0,respawned:0,saves:0,summonSooner:0,summonHeld:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+let prefs={story:true,pace:true,respawn:true,finale:true,lock:true};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
+const stats={pre:0,post:0,adjust:0,hits:0,respawned:0,saves:0,summonSooner:0,summonHeld:0,gathered:0,bossHold:0,bossEnd:0,blockedKills:0,locks:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const G=(f,d)=>{try{const v=f();return v===undefined?d:v;}catch(_){return d;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const now=()=>performance.now()/1000;
@@ -43,7 +51,7 @@ function targets(r,ph){const es=r?.enemies||[];if(isRoute(ph))return es.filter(e
 // ── ① 서사 시점 ──
 function unread(def,part){try{return nextScenes(def,part).filter(s=>!readScenes.has(s.key));}catch(_){return [];}}
 function play(part,r){const def=G(()=>regionById[r.id],null);if(!def)return false;const sc=unread(def,part);const flag=part==='pre'?'r384Pre':'r384Post';r[flag]=true;if(!sc.length)return false;
- try{playScenes(sc,()=>{});stats[part]++;return true;}catch(e){fail(e);return false;}}
+ try{playScenes(sc,()=>{});stats[part]++;if(part==='pre')r.r388PreVoice=true;else{r.r388PostVoice=true;r.r388PostAt=now();}return true;}catch(e){fail(e);return false;}}
 function storyTick(r,ph){if(!prefs.story||G(()=>storyScene,null)||G(()=>modal,false))return;
  if(isRoute(ph)&&!r.r384Pre)play('pre',r);
  else if(ph==='boss'&&!r.r384Post&&(r.enemies||[]).some(e=>e.boss&&alive(e)))play('post',r);}
@@ -94,19 +102,49 @@ function canRespawn(r,ph){return prefs.respawn&&isRoute(ph)&&voiceLeft()>SPAWN_S
 function respawnTick(r,ph){const key=(r.id||'')+':'+(isRoute(ph)?'route':ph);if(key!==spawnSeg){spawnSeg=key;spawned=0;lastSpawn=-1e9;}
  if(!canRespawn(r,ph))return;const t=now();if(t-lastSpawn<SPAWN_GAP)return;
  const n=(r.enemies||[]).filter(field).length;if(n>=KEEP)return;if(spawn(r,Math.min(BATCH,KEEP-n)))lastSpawn=t;}
+// ── ⑤ R388 실화 마무리 ──
+const real=()=>{try{return window.__STORYWORLD_REAL_MODE_R376__?.active?.()===true;}catch(_){return false;}};
+const r78alive=e=>!!e&&e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead';// R78 field() 는 숨은 몹도 센다
+const enraged=e=>!!e&&(!!e.r205Enraged||Number(e.maxHp)>0&&e.hp/e.maxHp<=G(()=>window.__STORYWORLD_BOSS_R205__.constants.ENRAGE_AT,.3));
+let bossMode=null;
+function near(r,i){const p=G(()=>player,null);if(!p)return null;for(const rad of GATHER)for(let k=0;k<12;k++){const a=(k+i*.61)*Math.PI/6,q={x:p.x+Math.cos(a)*rad,y:p.y+Math.sin(a)*rad};
+  try{if(!blocked(q.x,q.y,.35,r))return q;}catch(_){return null;}}return null;}
+function lowHp(e){const mx=Number(e.maxHp);if(!(mx>0))return false;const v=Math.max(.0001,mx*FIN_HP);if(e.hp>v){e.hp=v;return true;}return false;}
+function finaleTick(r,ph){bossMode=null;if(!prefs.finale||!real())return;const voice=voiceLeft();
+ if(isRoute(ph)){if(!r.r388PreVoice||voice>DONE_V)return;m=1;let i=0;
+  for(const e of r.enemies||[]){if(!r78alive(e)||!plain(e)||e.r388Fin)continue;const q=near(r,i++);if(q){e.x=q.x;e.y=q.y;e.homeX=q.x;e.homeY=q.y;e.nav=[];}
+   if(e.spawnState==='hidden')e.spawnState='active';lowHp(e);e.r388Fin=true;stats.gathered++;}return;}
+ if(ph!=='boss'||!r.r388PostVoice)return;
+ const rows=(r.enemies||[]).filter(e=>r78alive(e)&&e.spawnState!=='hidden'&&(major(e)||summoned(e)));
+ if(voice<=DONE_V&&now()-(r.r388PostAt||0)>=POST_GRACE){bossMode='end';m=1;addM=1;for(const e of rows)if(!e.r388Fin){lowHp(e);e.r388Fin=true;if(major(e))stats.bossEnd++;}return;}
+ if((r.enemies||[]).some(e=>e.boss&&alive(e)&&enraged(e))){bossMode='hold';m=HOLD_M;stats.bossHold++;
+  for(const e of rows)if(e.boss){const fl=e.maxHp*HOLD_FLOOR;if(e.hp<fl)e.hp=fl;}return;}
+ bossMode='fast';m=FAST_M;}
+// 음성이 남은 동안(빠르게·상쇄 둘 다) 보스는 3% 아래로 안 떨어지고 잡히지 않는다 → 끝은 음성이 끝난 뒤 1% 처리로만.
+const holding=e=>(bossMode==='hold'||bossMode==='fast')&&!!e?.boss&&curPh==='boss'&&active()&&real();
 function active(){return cinemaOn()&&solo()&&G(()=>started,false)&&!G(()=>loading,false);}
 let curPh=null;
-setInterval(()=>{try{if(!active()){m=1;addM=1;curPh=null;return;}const r=G(()=>room,null),ph=phaseOf(r);curPh=ph;if(!ph){m=1;addM=1;return;}storyTick(r,ph);paceTick(r,ph);respawnTick(r,ph);}catch(e){fail(e);}},TICK);
+setInterval(()=>{try{if(!active()){m=1;addM=1;curPh=null;bossMode=null;return;}const r=G(()=>room,null),ph=phaseOf(r);curPh=ph;if(!ph){m=1;addM=1;return;}storyTick(r,ph);paceTick(r,ph);finaleTick(r,ph);respawnTick(r,ph);}catch(e){fail(e);}},TICK);
 // 마지막 일반 몹을 잡는 순간: 음성이 남았으면 먼저 2마리를 불러내 R78 이 길 정리 끝으로 넘기지 않게 한다.
-try{if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){try{if(e&&!e.deadRecorded&&field(e)&&active()){const r=G(()=>room,null),ph=phaseOf(r);
+try{if(typeof killEnemy==='function'){const base=killEnemy;killEnemy=function(e,...a){try{if(e&&!e.deadRecorded&&holding(e)){e.hp=Math.max(e.hp,e.maxHp*HOLD_FLOOR);stats.blockedKills++;return false;}}catch(err){fail(err);}
+  try{if(e&&!e.deadRecorded&&field(e)&&active()){const r=G(()=>room,null),ph=phaseOf(r);
    if(r&&(r.enemies||[]).includes(e)&&canRespawn(r,ph)&&!(r.enemies||[]).some(o=>o!==e&&field(o))){respawnTick(r,ph);if(spawn(r,2)){stats.saves++;lastSpawn=now();}}}}catch(err){fail(err);}
   return base.call(this,e,...a);};}}catch(e){fail(e);}
 // 적이 받는 피해에 배율을 건다(영화 모드 + R78 구역 + 지금 단계의 적만).
 function mulFor(r,e){if(!curPh||!(r.enemies||[]).includes(e)||!alive(e))return 1;
  if(isRoute(curPh))return e.boss?1:m;
  if(curPh==='boss'){if(major(e))return m;if(summoned(e))return addM;}return 1;}
-try{if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if((m!==1||addM!==1)&&Number.isFinite(value)&&value>0&&curPh&&active()){const r=G(()=>room,null);const k=r?mulFor(r,e):1;if(k!==1){value=value*k;stats.hits++;}}}catch(err){fail(err);}return base.call(this,e,value,...a);};}}catch(e){fail(e);}
+try{if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,value,...a){try{if((m!==1||addM!==1)&&Number.isFinite(value)&&value>0&&curPh&&active()){const r=G(()=>room,null);const k=r?mulFor(r,e):1;if(k!==1){value=value*k;stats.hits++;}}
+   if(holding(e)&&Number.isFinite(value)&&value>0){value=Math.min(value,Math.max(0,e.hp-e.maxHp*HOLD_FLOOR));if(!(value>0))return false;}}catch(err){fail(err);}return base.call(this,e,value,...a);};}}catch(e){fail(e);}
+// 지역 이동 잠금(실화): 음성이 남아 있으면 음성이 끝날 때까지 이동을 미룬다.
+let lockP=null;
+try{if(typeof enterRegion==='function'){const base=enterRegion;enterRegion=function(id,from,opt,...a){
+  try{if(prefs.lock&&!opt?.restore&&active()&&real()&&G(()=>player?.hp,0)>0&&voiceLeft()>DONE_V&&id!==G(()=>room?.id,null)){if(lockP)return lockP;stats.locks++;const self=this,args=[id,from,opt,...a],t0=now();
+    try{if(typeof toast==='function')toast('서사가 끝나면 다음 지역으로 갑니다',2.2);}catch(_){}
+    lockP=new Promise(res=>{const w=()=>{let go=true;try{go=!prefs.lock||!active()||voiceLeft()<=DONE_V||now()-t0>LOCK_MAX||!(G(()=>player?.hp,0)>0);}catch(_){}
+      if(go){lockP=null;res(base.apply(self,args));}else setTimeout(w,300);};setTimeout(w,300);});return lockP;}}catch(e){fail(e);}
+  return base.apply(this,arguments);};}}catch(e){fail(e);}
 function set(p={}){for(const k of Object.keys(prefs))if(typeof p[k]==='boolean')prefs[k]=p[k];try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}if(!prefs.pace){m=1;addM=1;}return{...prefs};}
 window.__STORYWORLD_CINEMA_SYNC_R384__=Object.freeze({revision:REV,MIN_M,MAX_M,DONE_M,B_MIN,B_MAX,TAIL,KEEP,SPAWN_CAP,set,factor:()=>m,addFactor:()=>addM,
- inspect:()=>({revision:REV,prefs:{...prefs},active:active(),phase:curPh,factor:+m.toFixed(3),addFactor:+addM.toFixed(3),rate:+rate.toFixed(2),last,spawned,stats:{...stats},lastError})});
+ inspect:()=>({revision:REV,prefs:{...prefs},active:active(),real:real(),bossMode,locked:!!lockP,phase:curPh,factor:+m.toFixed(3),addFactor:+addM.toFixed(3),rate:+rate.toFixed(2),last,spawned,stats:{...stats},lastError})});
 })();
