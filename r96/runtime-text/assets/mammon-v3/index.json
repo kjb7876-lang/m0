@@ -1,0 +1,271 @@
+{
+  "schema": "mammon-v3-runtime/v1",
+  "base_sha": "7b6577d0bc9d88c1a8ef56fb70a2abd077df5071",
+  "origin": "User-provided V3 original artwork; originals retained, only 768px derivatives copied",
+  "original_archive_sha256": "c428423f8b9f8356776d61961f20559d32eaf2d75a3388d2a0884669fbf24e5f",
+  "source_derivative_index_sha256": "f44db35ffe24434ae67df7c3adb4f46a6fc15897af4bee4c3df0a18cf4d85330",
+  "max_edge": 768,
+  "camera_calibrated": false,
+  "browser_verified": false,
+  "assets": [
+    {
+      "id": "F01",
+      "role": "Flat floor slab",
+      "rendering": "flat_material_on_native_surface",
+      "file": "F01-floor-single-slab-top-v1.webp",
+      "sha256": "1e66df84f5cb3316828408fee0a403ef8a6915c1205da2a09c22eca430fde288",
+      "bytes": 564850,
+      "size": [
+        768,
+        768
+      ],
+      "pivot": null,
+      "source_sha256": "367296ff3a6edc251980c052611b316b4dce27a8d7c10e5c35728d8fee776835",
+      "contact_uncertainty_px": null,
+      "status": "registered"
+    },
+    {
+      "id": "W01",
+      "role": "Tall wall / rising right",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "W01-wall-full-up-right-v1.webp",
+      "sha256": "d39fdf01e7729e7228af33f892b4a55c6d50b9ad7d2c00bbd2616ea166f33578",
+      "bytes": 181406,
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        394.0,
+        401.0
+      ],
+      "source_sha256": "cea1408e43d7f5112be4f97515d9fdf7cca9dca60090622f0f053b7bd1164e50",
+      "contact_uncertainty_px": [
+        4.0,
+        4.0
+      ],
+      "status": "prepared-not-assembled"
+    },
+    {
+      "id": "W02",
+      "role": "Tall wall / falling right",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "W02-wall-full-down-right-v2.webp",
+      "sha256": "7e61957eee69b51b155f303f9f9b1d0b12b6748b51041a346d094d65b2fd3b59",
+      "bytes": 303322,
+      "size": [
+        768,
+        594
+      ],
+      "pivot": [
+        375.921458626,
+        477.138712602
+      ],
+      "source_sha256": "11ecdca57c4650aac921a0ce21d9f1c1f91bcd6c9c7f11d37bb4614da8087f23",
+      "contact_uncertainty_px": [
+        4.308555399719495,
+        4.308250226654579
+      ],
+      "status": "prepared-not-assembled"
+    },
+    {
+      "id": "W03",
+      "role": "Low wall / falling right",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "W03-wall-low-down-right-v2.webp",
+      "sha256": "9da2367cb3d331adebfe29d00c580e7feb9e7f77ec3987cd8ff9551b409e4584",
+      "bytes": 118286,
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        365.5,
+        372.0
+      ],
+      "source_sha256": "21af55db66ac15d1c343e25bf0bf28dc9ae84f3a1139600c629a6ffede708969",
+      "contact_uncertainty_px": [
+        4.0,
+        4.0
+      ],
+      "status": "prepared-not-assembled"
+    },
+    {
+      "id": "W04",
+      "role": "Low wall / rising right",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "W04-wall-low-up-right-v3.webp",
+      "sha256": "584efba47074ae222c9e0dfe2d8603f2edce474f75b0ec6f81ab074f4e4264a4",
+      "bytes": 122958,
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        392.5,
+        358.75
+      ],
+      "source_sha256": "cd2315057104ddecee9524f855d2ab7e7c097a3a5afc6cd756599fa757127c20",
+      "contact_uncertainty_px": [
+        4.0,
+        4.0
+      ],
+      "status": "prepared-not-assembled"
+    },
+    {
+      "id": "W05",
+      "role": "Low wall / front",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "W05-wall-low-horizontal-front-v1.webp",
+      "sha256": "6809bfa8b43565b02336dc838219b2832ec32e64dbc52f3f8a4a5bd3ef3df657",
+      "bytes": 95094,
+      "size": [
+        768,
+        256
+      ],
+      "pivot": [
+        383.64640884,
+        183.513812155
+      ],
+      "source_sha256": "6c4dab9de98f774b926f84ad2e7b1836b13ebb32e2f91fb051c0029ab0bb39f7",
+      "contact_uncertainty_px": [
+        2.8287292817679557,
+        2.8287292817679557
+      ],
+      "status": "prepared-not-assembled"
+    },
+    {
+      "id": "W06",
+      "role": "Flat steel surface",
+      "rendering": "flat_material_on_native_surface",
+      "file": "W06-wall-steel-front-flat-v1.webp",
+      "sha256": "b4714365cd046a2c289266055ac23ae4aa51e58b319495fc7ea92f71371c078a",
+      "bytes": 602378,
+      "size": [
+        768,
+        768
+      ],
+      "pivot": null,
+      "source_sha256": "4479882cec8d03f5b2c663d983010fe72c31fad8f69f2baf5268026647120c7b",
+      "contact_uncertainty_px": null,
+      "status": "registered"
+    },
+    {
+      "id": "P01",
+      "role": "Tall end / corner post",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "P01-steel-post-tall-v2.webp",
+      "sha256": "56cf58362a626be0162607fe7683e9f1203a3cf60a7752de2b4aa583ecf43fc2",
+      "bytes": 134742,
+      "size": [
+        512,
+        768
+      ],
+      "pivot": [
+        255.5,
+        710.0
+      ],
+      "source_sha256": "a237f63bf711a0231ed30137c35c3f3a4e3fdfb5dd3b4f4ba91457a2605bbe63",
+      "contact_uncertainty_px": [
+        4.0,
+        4.0
+      ],
+      "status": "registered"
+    },
+    {
+      "id": "P02",
+      "role": "Low end / corner post",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "P02-steel-post-low-v1.webp",
+      "sha256": "c6116d17b49f7ffaaec1b429fdcebfb91d2b29eaa8308a38c94ecb3f03ac57c0",
+      "bytes": 231968,
+      "size": [
+        768,
+        768
+      ],
+      "pivot": [
+        384.0,
+        676.746411483
+      ],
+      "source_sha256": "ace7fc7b95448bd47f7b4b7c3d8aec1dd31012d8d5a88262a24bae5d0dbcaada",
+      "contact_uncertainty_px": [
+        4.899521531100478,
+        4.899521531100478
+      ],
+      "status": "registered"
+    },
+    {
+      "id": "D01",
+      "role": "Open brass portal",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "D01-open-portal-frame-v2.webp",
+      "sha256": "25b338a94571ec5df3f978c3f688867e22186c6de07e5f18c7bf178a705579fe",
+      "bytes": 237898,
+      "size": [
+        768,
+        768
+      ],
+      "pivot": [
+        384.0,
+        615.502392344
+      ],
+      "source_sha256": "c2b3985b8f398065e0d7b673651325940d80544fce99542d9bc3f72d02e39b55",
+      "contact_uncertainty_px": [
+        4.899521531100478,
+        4.899521531100478
+      ],
+      "status": "registered"
+    },
+    {
+      "id": "O01",
+      "role": "Records desk",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "O01-records-desk-up-right-v4.webp",
+      "sha256": "2144a92dd190ca9c62db6c2436f656f938a7069f8b35648787e1dd5e53b93d07",
+      "bytes": 192988,
+      "size": [
+        768,
+        384
+      ],
+      "pivot": [
+        377.939120631,
+        325.122886133
+      ],
+      "source_sha256": "7cfe5904c8da560ba7741a7222e898bd46187217f0322bb196689e6cc17b31d2",
+      "contact_uncertainty_px": [
+        3.4633596392333708,
+        3.4633596392333708
+      ],
+      "status": "registered"
+    },
+    {
+      "id": "O02",
+      "role": "Deposit bank / 5 x 5",
+      "rendering": "pre_rendered_directional_sprite; avoid double projection",
+      "file": "O02-deposit-cabinet-down-right-v3.webp",
+      "sha256": "7e64eb984222ae8223982213899a2bf089e7ef6781b6650cba8c8fdb2f5a5ef1",
+      "bytes": 214548,
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        362.0,
+        411.5
+      ],
+      "source_sha256": "da1fbfe2d7c55d43382eaa98abccf74959e2b1d3117342376f1f5210af97aec5",
+      "contact_uncertainty_px": [
+        4.0,
+        4.0
+      ],
+      "status": "registered"
+    }
+  ],
+  "totals": {
+    "encoded_bytes": 3000438,
+    "base_level_rgba_bytes": 21092352,
+    "full_mip_chain_rgba_bytes_estimate": 28122480,
+    "additional_mips_rgba_bytes_estimate": 7030128
+  },
+  "approved_art_sha": "dc3e094284cc4ac3cfac78d182d461b0aa7fd614"
+}

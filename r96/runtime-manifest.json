@@ -4898,6 +4898,41 @@
       "sha256": "7f50b5cfd9c3fb0e5d99e236f2432204994fa77c628564e59a346766771a99bb"
     },
     {
+      "path": "assets/mammon-v3/D01-open-portal-frame-v2.webp",
+      "bytes": 237898,
+      "sha256": "25b338a94571ec5df3f978c3f688867e22186c6de07e5f18c7bf178a705579fe"
+    },
+    {
+      "path": "assets/mammon-v3/F01-floor-single-slab-top-v1.webp",
+      "bytes": 564850,
+      "sha256": "1e66df84f5cb3316828408fee0a403ef8a6915c1205da2a09c22eca430fde288"
+    },
+    {
+      "path": "assets/mammon-v3/O01-records-desk-up-right-v4.webp",
+      "bytes": 192988,
+      "sha256": "2144a92dd190ca9c62db6c2436f656f938a7069f8b35648787e1dd5e53b93d07"
+    },
+    {
+      "path": "assets/mammon-v3/O02-deposit-cabinet-down-right-v3.webp",
+      "bytes": 214548,
+      "sha256": "7e64eb984222ae8223982213899a2bf089e7ef6781b6650cba8c8fdb2f5a5ef1"
+    },
+    {
+      "path": "assets/mammon-v3/P01-steel-post-tall-v2.webp",
+      "bytes": 134742,
+      "sha256": "56cf58362a626be0162607fe7683e9f1203a3cf60a7752de2b4aa583ecf43fc2"
+    },
+    {
+      "path": "assets/mammon-v3/P02-steel-post-low-v1.webp",
+      "bytes": 231968,
+      "sha256": "c6116d17b49f7ffaaec1b429fdcebfb91d2b29eaa8308a38c94ecb3f03ac57c0"
+    },
+    {
+      "path": "assets/mammon-v3/W06-wall-steel-front-flat-v1.webp",
+      "bytes": 602378,
+      "sha256": "b4714365cd046a2c289266055ac23ae4aa51e58b319495fc7ea92f71371c078a"
+    },
+    {
       "path": "assets/maps/dream_rest_room.jpg",
       "bytes": 88975,
       "sha256": "279177ef453e41ba296d87e07758e3dbdda00f3c2a7b5447258a836d5424a0c9"
@@ -32299,8 +32334,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570481,
-      "sha256": "c7d7a759a20804ffa62ddeb31048ef67c970271b7d986dfb6a19fdd5a0d7ea7c"
+      "bytes": 6570553,
+      "sha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad"
     },
     {
       "path": "intro-r140.js",
@@ -32341,6 +32376,11 @@
       "path": "light-r182.js",
       "bytes": 14158,
       "sha256": "b5f04e4b139fa7615edab7fd4a0974501fea2c92bb40c2eb66f81616bf4ff94e"
+    },
+    {
+      "path": "mammon-miniature-pilot.js",
+      "bytes": 35272,
+      "sha256": "170a49025a8e4769c2db64696a5e4c9e66befd23c0f0b9fdcdb285edfbed3629"
     },
     {
       "path": "manual-bonus-r274.js",
@@ -33053,9 +33093,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6610,
-  "totalBytes": 1032141412,
-  "webHTMLSha256": "c7d7a759a20804ffa62ddeb31048ef67c970271b7d986dfb6a19fdd5a0d7ea7c",
+  "fileCount": 6618,
+  "totalBytes": 1034356128,
+  "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {
       "path": "index.html",
