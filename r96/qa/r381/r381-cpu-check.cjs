@@ -18,13 +18,13 @@ let missFile=0,missManifest=0,badHash=0;for(const id of D.ids){const rel='assets
  const b=fs.readFileSync(p);if(row.bytes!==b.length||row.sha256!==crypto.createHash('sha256').update(b).digest('hex'))badHash++;}
 ok(missFile===0&&missManifest===0&&badHash===0,'모든 녹음 파일이 있고 런타임 목록·해시와 맞음',{missFile,missManifest,badHash});
 const extra=fs.readdirSync(path.join(R,'runtime-text','assets','r381','voice')).filter(f=>!D.ids.includes(f.replace(/\.mp3$/,'')));ok(extra.length===0,'목록에 없는 녹음 파일 없음',extra.slice(0,3));
-// 정본 문장 범위: 프롤로그 ~ 제2부 끝(restEp1b) 은 모두 녹음(읽을 글자 없는 조각 제외)
+// 정본 문장 범위: 프롤로그 ~ 모든 지역 ~ 최종장 전부 녹음(읽을 글자 없는 조각 제외)
 const sbC={};sbC.window=sbC;vm.createContext(sbC);vm.runInContext(CS('story-canon-r106-data.js'),sbC);const C=sbC.__STORYWORLD_STORY_CANON_R106__;
 const sentences=t=>{const out=[];String(t||'').split(/\n\s*\n/).forEach(pa=>{const p=pa.replace(/\s+/g,' ').trim();if(!p)return;for(const r of (p.match(/[^.?!…。]+(?:[.?!…。]+["”’」』)]*|$)/g)||[p])){const x=r.trim();if(x)out.push(x);}});return out;};
 const sid=t=>crypto.createHash('sha1').update(t).digest('hex').slice(0,16),ids=new Set(D.ids);
-const keys=Object.keys(C.zones);let tot=0,miss=[];const all=[C.prologue.pre,C.prologue.post];for(const k of keys.slice(0,keys.indexOf('restEp1b')+1))for(const b of C.zones[k].blocks)all.push(b.paras.join('\n\n'));
+const keys=Object.keys(C.zones);let tot=0,miss=[];const all=[C.prologue.pre,C.prologue.post];for(const k of keys)for(const b of C.zones[k].blocks)all.push(b.paras.join('\n\n'));all.push(C.finale.text);
 for(const t of all)for(const s of sentences(t)){if(!/[0-9A-Za-z가-힣]/.test(s))continue;tot++;if(!ids.has(sid(s)))miss.push(s.slice(0,30));}
-ok(tot>=615&&miss.length===0,'프롤로그~제2부 끝 문장 전부 녹음 있음',{tot,miss:miss.slice(0,3)});
+ok(tot>=1629&&miss.length===0,'프롤로그~최종장 문장 전부 녹음 있음',{tot,miss:miss.slice(0,3)});
 // ── 모듈 단독: 동기 SHA-1, has/play/stop ──
 let clock=0;const timers=[];const setT=(f,ms)=>{const t={at:clock+Math.max(0,ms||0)/1000,f,dead:false};timers.push(t);return t;};
 const run=s=>{const end=clock+s;for(;;){timers.sort((a,b)=>a.at-b.at);const t=timers.find(t=>!t.dead&&t.at<=end);if(!t)break;clock=Math.max(clock,t.at);t.dead=true;t.f();}clock=end;};
