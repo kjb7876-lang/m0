@@ -12,7 +12,7 @@ const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(Stri
 await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:180000});await p.waitForTimeout(800);
 await p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
-check('R384 loaded',await p.evaluate(()=>window.__STORYWORLD_CINEMA_SYNC_R384__?.revision==='R384-sync-2'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-4'));
+check('R384 loaded',await p.evaluate(()=>window.__STORYWORLD_CINEMA_SYNC_R384__?.revision==='R388-sync-3'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-4'));
 await p.evaluate(()=>window.__STORYWORLD_CINEMA_MODE_R370__.set({on:true}));
 await p.waitForFunction(()=>room?.id==='dist00'&&!loading,null,{timeout:240000});
 await p.waitForFunction(()=>window.__STORYWORLD_CINEMA_SYNC_R384__.inspect().stats.pre>=1,null,{timeout:20000}).catch(()=>{});
@@ -28,5 +28,11 @@ check('all route mobs killed while voice remains → route does not end, mobs re
 const pos=await p.evaluate(()=>room.enemies.filter(e=>e.r384Respawn).map(e=>({d:e.r384SpawnD,blocked:blocked(e.homeX,e.homeY,.3)})));
 check('respawned mobs stand on open floor 6–9 tiles from the hero',pos.length>0&&pos.every(q=>!q.blocked&&q.d>=6-1e-6&&q.d<=9+1e-6),pos);
 await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/route-respawn.jpg`,quality:72});
-check('no page errors / R384 errors',errors.length===0&&s2.S.stats.errors===0,{errors,last:s2.S.lastError});
+// R388 실화: 음성을 끝내면(정지) 남은 일반 몹이 영웅 둘레로 모이고 체력 1%
+const s3=await p.evaluate(async()=>{const S=window.__STORYWORLD_CINEMA_SYNC_R384__;const real=S.inspect().real;window.__STORYWORLD_CINEMA_MODE_R370__.stop();
+ await new Promise(r=>setTimeout(r,1600));const rows=room.enemies.filter(e=>e.hp>0&&!e.deadRecorded&&e.spawnState!=='dead'&&!e.boss&&!e.midboss&&!e.r61Summoned);
+ return{real,rs:window.__STORYWORLD_CINEMA_MODE_R370__.remainingSecs(),gathered:S.inspect().stats.gathered,rows:rows.map(e=>({low:e.hp<=e.maxHp*.01+1e-6,d:+Math.hypot(e.x-player.x,e.y-player.y).toFixed(1)}))};});
+check('R388 실화: narration over → remaining route mobs gathered around the hero at 1% HP',s3.real&&s3.gathered>0&&s3.rows.every(r=>r.low),s3);
+await p.screenshot({path:`${OUT}/route-finale.jpg`,quality:72});
+check('no page errors / R384 errors',errors.length===0&&s2.S.stats.errors===0&&(await p.evaluate(()=>window.__STORYWORLD_CINEMA_SYNC_R384__.inspect().stats.errors))===0,{errors,last:s2.S.lastError});
 console.log(JSON.stringify({fails}));await b.close();process.exitCode=fails?1:0;

@@ -14,18 +14,20 @@ ok('R370 rev 4: no per-sentence rate change (rateFor/gapFor gone, one steady rat
 ok('R370 exposes remainingSecs() as a top-level number function',/remainingSecs:\(\)=>\+remainingSecs\(\)\.toFixed\(1\)/.test(CIN));
 // ── 가짜 엔진 ──
 function mk(o={}){let clock=0;let iv=null;const played=[],hits=[];
- const st={on:o.cinema!==false,voice:o.voice??60,phase:o.phase??'route',controlled:true};
- const sb={localStorage:{getItem:()=>o.prefs?JSON.stringify(o.prefs):null,setItem(){}},performance:{now:()=>clock*1000},setInterval:f=>{iv=f;},Math,JSON,String,Array,Set,Map,Object,Number};
+ const st={on:o.cinema!==false,voice:o.voice??60,phase:o.phase??'route',controlled:true,real:!!o.real};
+ const sb={setTimeout,localStorage:{getItem:()=>o.prefs?JSON.stringify(o.prefs):null,setItem(){}},performance:{now:()=>clock*1000},setInterval:f=>{iv=f;},Math,JSON,String,Array,Set,Map,Object,Number};
  sb.window=sb;
  sb.__STORYWORLD_CINEMA_MODE_R370__={prefs:()=>({on:st.on}),remainingSecs:()=>st.voice};
  sb.__STORYWORLD_WORLD_COMBAT_R78__={controlled:()=>st.controlled,state:()=>({phase:st.phase})};
  if(o.s61)sb.__STORYWORLD_SUMMONS_R61__=o.s61;
+ sb.__STORYWORLD_REAL_MODE_R376__={active:()=>st.real};
  if(o.coop)sb.__STORYWORLD_COOP_SIM_R62__={mode:()=>o.coop};
  vm.createContext(sb);
  vm.runInContext(`var started=true,loading=false,modal=false,storyScene=null,readScenes=new Set(),
   room={id:'dist01',enemies:[{id:'a',hp:100,maxHp:100,profile:{id:'m'}},{id:'b',hp:100,maxHp:100,profile:{id:'m'}},{id:'boss',hp:400,maxHp:400,boss:true,spawnState:'hidden',profile:{id:'B'}}]},regionById={dist01:{title:'x'}};
-  var time=0,player={x:0,y:0},__world=${!!o.world},__kill=[];function blocked(){if(!__world)throw new Error('no world');return false;}function findPath(a,b){return [b];}
-  function killEnemy(e){__kill.push(room.enemies.filter(x=>x!==e&&x.hp>0&&!x.boss&&!x.deadRecorded&&x.spawnState!=='hidden').length);e.hp=0;e.deadRecorded=true;}
+  var time=0,player={x:0,y:0,hp:100},__went=[];async function enterRegion(id,from,opt){__went.push(id);return true;}
+  var __world=${!!o.world},__kill=[];function blocked(){if(!__world)throw new Error('no world');return false;}function findPath(a,b){return [b];}
+  function killEnemy(e){if(e.deadRecorded)return;__kill.push(room.enemies.filter(x=>x!==e&&x.hp>0&&!x.boss&&!x.deadRecorded&&x.spawnState!=='hidden').length);e.hp=0;e.deadRecorded=true;}
   var __played=[],__hits=[];
   function nextScenes(def,part){return part==='pre'?[{key:'p1',text:'보스 전 1'},{key:'p2',text:'보스 전 2'}]:[{key:'q1',text:'보스 서사'}];}
   function playScenes(sc,done){__played.push(sc.map(s=>s.key));for(const s of sc)readScenes.add(s.key);done&&done();}
@@ -91,6 +93,30 @@ for(const [v,hp,dps,label] of [[30,1000,100,'boss would die in 10 s, voice 30 s'
  F.st.voice=5;F.tick(.5);ok('clone cooldown: under 10 s of voice left → no new summon before the end',s.boss.nextAt>=F.clock()+5+2.5&&F.api.inspect().stats.summonHeld>0,s.boss);}
 {const F=mk({phase:'boss',voice:4});F.ev("room.enemies[2].spawnState='active';room.enemies.push({id:'cl',hp:30,maxHp:30,r61Clone:true,r61Summoned:{kind:'clone'},spawnState:'active'})");F.tick(1);
  F.ev('__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[3],10);ok('clone HP: in the last 6 s of voice clones take ×3 so they do not drag the ending',Math.abs(F.ev('__hits[0]')-30)<1e-9&&F.api.addFactor()>=3,F.ev('__hits[0]'));}
+(async()=>{
+// ⑤ R388 실화 마무리
+{const F=mk({world:true,real:true,voice:60});F.tick(1);F.ev("room.enemies.push({id:'h',hp:100,maxHp:100,profile:{id:'m'},spawnState:'hidden',x:40,y:40})");
+ F.st.voice=0;F.tick(1);const rows=F.ev("room.enemies.filter(e=>!e.boss&&e.hp>0)");
+ ok('R388 real: route narration over → every remaining mob (hidden too) gathered 1.8–3.4 tiles around the hero at 1% HP',rows.length>=3&&rows.every(e=>e.hp<=e.maxHp*.01+1e-9&&e.spawnState!=='hidden'&&Math.hypot(e.x,e.y)>=1.8-1e-9&&Math.hypot(e.x,e.y)<=3.4+1e-9),rows.map(e=>[e.id,e.hp,+Math.hypot(e.x,e.y).toFixed(1)]));
+ ok('…boss untouched, respawn stopped',F.ev("room.enemies[2].hp")===400&&F.ev("room.enemies.filter(e=>e.r384Respawn).length")===F.api.inspect().spawned);}
+{const F=mk({world:true,real:false,voice:60});F.tick(1);F.st.voice=0;F.tick(1);ok('R388 not 실화 (cinema only): no gather / 1% (old pacing)',F.ev("room.enemies[0].hp")===100&&F.api.inspect().stats.gathered===0);}
+{const F=mk({world:true,real:true,voice:0});F.ev('readScenes.add("p1");readScenes.add("p2")');F.tick(2);ok('R388: no pre narration played in this stage → no gather',F.api.inspect().stats.gathered===0);}
+function bossR(o={}){const F=mk({world:true,real:true,voice:0,phase:'boss',...o});F.ev("room.enemies.length=0;room.enemies.push({id:'boss',hp:1000,maxHp:1000,boss:true,spawnState:'active',profile:{id:'B'}},{id:'cl',hp:60,maxHp:60,r61Clone:true,r61Summoned:{kind:'clone'},spawnState:'active'})");F.st.voice=40;F.tick(1);return F;}
+{const F=bossR();ok('R388 boss: boss narration played when the boss is up',F.api.inspect().stats.post===1);
+ F.ev('__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[0],100);ok('before enrage: fast (×1.6)',F.api.inspect().bossMode==='fast'&&Math.abs(F.ev('__hits[0]')-160)<1e-9,F.ev('__hits'));
+ F.sb.hitEnemy(F.sb.room.enemies[0],5000);ok('…but a huge hit cannot kill it while voice remains (floor 3%)',Math.abs(F.ev('room.enemies[0].hp')-30)<1e-6,F.ev('room.enemies[0].hp'));
+ F.ev('room.enemies[0].r205Enraged={at:0}');F.tick(1);ok('after enrage (R205): 99% damage cancelled',F.api.inspect().bossMode==='hold'&&F.api.factor()===.01);
+ F.ev('room.enemies[0].hp=200;__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[0],100);ok('…hit ×0.01',Math.abs(F.ev('__hits[0]')-1)<1e-9);
+ F.ev('room.enemies[0].hp=31');F.sb.hitEnemy(F.sb.room.enemies[0],1e6);F.sb.killEnemy(F.sb.room.enemies[0]);ok('…cannot be killed while voice remains (hitEnemy floor + killEnemy refused)',F.ev('room.enemies[0].hp')>=30-1e-9&&!F.ev('room.enemies[0].deadRecorded')&&F.api.inspect().stats.blockedKills===1);
+ F.st.voice=0;F.tick(1);ok('voice over → boss and clones set to 1% HP, normal damage',F.api.inspect().bossMode==='end'&&F.ev('room.enemies[0].hp')<=10+1e-9&&F.ev('room.enemies[1].hp')<=.6+1e-9&&F.api.factor()===1);
+ F.ev('__hits.length=0');F.sb.hitEnemy(F.sb.room.enemies[0],50);ok('…next hit finishes it',F.ev('room.enemies[0].hp')<=0);}
+{const F=bossR();F.st.voice=0;F.tick(1);ok('boss narration must run 2 s before the end can trigger',F.ev('room.enemies[0].hp')===1000||F.api.inspect().bossMode!=='end'||F.clock()>=2);}
+{const F=bossR({real:false});F.tick(1);ok('not 실화: no boss hold / floor',F.api.inspect().bossMode===null);}
+// 지역 이동 잠금
+{const F=bossR();F.st.voice=10;const p=F.sb.enterRegion('dist02','dist01',{});F.tick(2);ok('R388 travel lock: voice left → next region waits',F.ev('__went.length')===0&&F.api.inspect().locked&&F.api.inspect().stats.locks===1);
+ F.st.voice=0;await new Promise(r=>setTimeout(r,700));ok('…then goes when the narration ends',F.ev('__went[0]')==='dist02'&&!F.api.inspect().locked);}
+{const F=bossR();F.st.voice=10;F.sb.enterRegion('dist02','dist01',{restore:true});await new Promise(r=>setTimeout(r,50));ok('restore/load is never locked',F.ev('__went[0]')==='dist02');}
+{const F=bossR({real:false});F.st.voice=10;F.sb.enterRegion('dist02','dist01',{});await new Promise(r=>setTimeout(r,50));ok('not 실화: not locked',F.ev('__went[0]')==='dist02');}
 // ── R370 실물 + R384: remainingSecs 가 숫자로 넘어온다 ──
 {let clock=0;const timers=[];const setT=(f,ms)=>{const t={at:clock+Math.max(0,ms||0)/1000,f,dead:false};timers.push(t);return t;};let su=null;const rates=[];
  const ss={getVoices:()=>[{name:'ko',lang:'ko-KR'}],speak(u){rates.push(u.rate);su=u;setT(()=>{if(su===u){su=null;u.onend&&u.onend();}},u.text.length/(7*u.rate)*1000);},cancel(){su=null;},pause(){},resume(){},addEventListener(){}};
@@ -114,3 +140,4 @@ for(const [v,hp,dps,label] of [[30,1000,100,'boss would die in 10 s, voice 30 s'
  ok('remainingSecs falls to ~0 when the queue is spoken',A.remainingSecs()<1,A.remainingSecs());}
 let failed=0;for(const c of checks){if(!c.pass)failed++;console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail??'')));}
 console.log(JSON.stringify({total:checks.length,failed}));if(failed)process.exitCode=1;
+})().catch(e=>{console.error(e);process.exitCode=1;});

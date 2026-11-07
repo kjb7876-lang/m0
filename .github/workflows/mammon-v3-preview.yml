@@ -1,4 +1,4 @@
-name: Mammon V16 registration rehearsal (no deployment)
+name: Mammon registered V3 release verification
 on:
   pull_request:
     branches: [main]
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   isolated-preview:
-    name: Mammon registration rehearsal (${{ matrix.view }})
+    name: registered Mammon (${{ matrix.view }})
     strategy:
       fail-fast: false
       matrix:
@@ -32,11 +32,10 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
           path: mammon-audit-base
           persist-credentials: false
-      - name: Build untouched baseline and rehearse candidate registration; check Mammon CPU fixtures
+      - name: Build exact baseline and proposed registered artifact; check Mammon CPU fixtures
         env:
           MAMMON_QA_JSON: ${{ runner.temp }}/mammon-qa.json
         run: |
-          python3 r96/qa/mammon-miniature-pilot/register-release.py
           python3 scripts/build-r96.py
           node r96/qa/mammon-miniature-pilot/check.cjs
           python3 r96/qa/mammon-miniature-pilot/verify_capture.py
@@ -82,9 +81,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Rehearse registration and build for the native input route
+      - name: Build the registered product for the native input route
         run: |
-          python3 r96/qa/mammon-miniature-pilot/register-release.py
           python3 scripts/build-r96.py
       - name: Follow the native route through real UI and game input
         run: |
@@ -108,9 +106,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Rehearse registration and build for the targeted fixture
+      - name: Build the registered product for the targeted fixture
         run: |
-          python3 r96/qa/mammon-miniature-pilot/register-release.py
           python3 scripts/build-r96.py
       - name: Test native keys, story, gate and onward portal with explicitly weakened fixture enemies
         run: |
