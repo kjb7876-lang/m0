@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R390",
+ "revision": "R391",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -4255,6 +4255,410 @@
     {
      "file": "attack_04.png",
      "sha256": "8a23c77ab0da3b2f230df3b4191e26bf0e56812c54f3b3a07208d953d7060204"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-m065-v3",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-m065-v3.webp",
+   "cell": [
+    205,
+    205
+   ],
+   "cols": 12,
+   "pivot": [
+    104.6,
+    186.0
+   ],
+   "visibleHeight": 171.8,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(사몽:)?포구 검은 안개( \\d+)?$",
+    "samong": "."
+   },
+   "bytes": 319828,
+   "sha256": "f6ce3ea186b6076b103c9aa60808aa542a5bb87018985860e8f0fafc7dbfc76c",
+   "source": [
+    {
+     "file": "m065/move/00.png",
+     "sha256": "f96b4942fbb87f091f804165750a3086bad0428877e947c458933aa9d7ebf63d"
+    },
+    {
+     "file": "m065/move/01.png",
+     "sha256": "96f4bdd9e4f13ff23464c8bf1145040de6d1dab44c1bd5bb964602a20ba1af03"
+    },
+    {
+     "file": "m065/move/02.png",
+     "sha256": "c5989a8fa4843595f191622a2aa8d52e9efb18d5b08761c5f0d0399cd01befbe"
+    },
+    {
+     "file": "m065/move/03.png",
+     "sha256": "02fddf20d2c1d20ed8863de7031131b2a32dffac4a42326b41c1686c1d68a2e0"
+    },
+    {
+     "file": "m065/move/04.png",
+     "sha256": "a2b720dca6a6024f2332d1a920d2df7af62525c93522ad3c6670bf106c63b031"
+    },
+    {
+     "file": "m065/move/05.png",
+     "sha256": "3e5f1049e2f28eed98a9d7a77bef800396bc63e366d2effbf3e464f906c22ec6"
+    },
+    {
+     "file": "m065/attack/00.png",
+     "sha256": "fcde4e787be55bfab7666bc9752d608a84a5ea26467175ff3f71fe5bbeff7b9b"
+    },
+    {
+     "file": "m065/attack/01.png",
+     "sha256": "464611227cb131b908f35d9171aad6879139d141722ebd42923be53922f8f516"
+    },
+    {
+     "file": "m065/attack/02.png",
+     "sha256": "061f865b5861486ae1da3647371dd8648ce0d57bd927de60b1172ce3fb3e93e6"
+    },
+    {
+     "file": "m065/attack/03.png",
+     "sha256": "b2f4e7c114c5fcda5301562f00faeb9b87e7222b2788113625dd82268f6a29c8"
+    },
+    {
+     "file": "m065/attack/04.png",
+     "sha256": "b4ef4a9e4b396b9ca5e28120303c6c4aeed3243056cf406e723a8c2ea5883ab7"
+    },
+    {
+     "file": "m065/attack/05.png",
+     "sha256": "81e5e74cc780c79bb78cfcec96585405e222deb7f23fc0afa15b149f283aa9d5"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-m066-v3",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-m066-v3.webp",
+   "cell": [
+    205,
+    205
+   ],
+   "cols": 12,
+   "pivot": [
+    99.6,
+    192.4
+   ],
+   "visibleHeight": 195.8,
+   "move": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "attack": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(사몽:)?부정의 잔영( \\d+)?$",
+    "samong": "."
+   },
+   "bytes": 243174,
+   "sha256": "56e8b04b4a06a737d6a0f708be472d746a34f81f9913dce6b0009af596301751",
+   "source": [
+    {
+     "file": "m066/move/00.png",
+     "sha256": "68802945f78c71713abbcb6511b003ca473d012864e12868e51a6e69a44dbdb4"
+    },
+    {
+     "file": "m066/move/01.png",
+     "sha256": "a768a079895276a82f017cecfa4c1deeff60c7d69d38fd94d628ee50ad9d9c69"
+    },
+    {
+     "file": "m066/move/02.png",
+     "sha256": "b52bb2705a33c03640081bb39cadb56d08d5766de4a91fb076ff1e36b78f6d90"
+    },
+    {
+     "file": "m066/move/03.png",
+     "sha256": "810d8002c478ba20cc4537b48f1ec5b6c53d626a82ba1b6cb912eb223338b520"
+    },
+    {
+     "file": "m066/move/04.png",
+     "sha256": "02c16b30a0d49c05b6fcdcb32ae8f1a225048a9a72e7a50d89259289af908b09"
+    },
+    {
+     "file": "m066/move/05.png",
+     "sha256": "b1045afaa3e4a9a26c18a9664b24d7e04ab3b0bf4843f8572032428fefda9dfe"
+    },
+    {
+     "file": "m066/attack/00.png",
+     "sha256": "4e824b448bd0ae8577b183385fa962bd54e123d43dd1f53c15d799745eb71c48"
+    },
+    {
+     "file": "m066/attack/01.png",
+     "sha256": "1d41d7fd5812499f552434fefb4b8ead1f41a827319dbc4a7eaa178c4035b0fe"
+    },
+    {
+     "file": "m066/attack/02.png",
+     "sha256": "34318394f82dc7ee0354a33354daacdb3cbccfdfb856ebfa7dcccd6243e02b84"
+    },
+    {
+     "file": "m066/attack/03.png",
+     "sha256": "2bf7c16ae7b284bd53dfbf72a45648d3f52659d78a697f1a552eaccd1287eacf"
+    },
+    {
+     "file": "m066/attack/04.png",
+     "sha256": "be96e4f08b124a5affe7c266b7c72223edc40f9792e0ef8a2a24be26d1a8ada0"
+    },
+    {
+     "file": "m066/attack/05.png",
+     "sha256": "001ac769d10aa60569b3aeae4f28f8b06dbcf5f93ffaeae4e36c58c09e0c3e54"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-m097-v3",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-m097-v3.webp",
+   "cell": [
+    205,
+    205
+   ],
+   "cols": 10,
+   "pivot": [
+    83.2,
+    184.8
+   ],
+   "visibleHeight": 177.3,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(사몽:)?66 수문장( \\d+)?$",
+    "samong": "."
+   },
+   "bytes": 323056,
+   "sha256": "4beb29dddc9b1755c007ba49d754a9e7fed01708d473162f510aa5d815ef14fa",
+   "source": [
+    {
+     "file": "m097/move/00.png",
+     "sha256": "e3eb0105d77a98ab320029ea9cd983b0d54e79b8279de474236215baaeb5c50b"
+    },
+    {
+     "file": "m097/move/01.png",
+     "sha256": "ea43bdbcbd6a05ea9a9affe36aba9cba5eb3c2a44fc4dcd92324b3c1965aef7e"
+    },
+    {
+     "file": "m097/move/02.png",
+     "sha256": "5562e9b80020b6ed7717f547408191d2a6932d792ffe2e167a86dfde13096fc4"
+    },
+    {
+     "file": "m097/move/03.png",
+     "sha256": "ee7a78601d3bd6e32ce97d1d34e0530d5915053c926dc51e47dbd4e2b0fd3861"
+    },
+    {
+     "file": "m097/attack/00.png",
+     "sha256": "5a6ab56afee553898c80560128b2eb8340196c19922654de9f25f1ba640b568b"
+    },
+    {
+     "file": "m097/attack/01.png",
+     "sha256": "987124fb8257f5e20713ceae86aca22134e6635ab8a12bdc1af8710bce61f818"
+    },
+    {
+     "file": "m097/attack/02.png",
+     "sha256": "dc722bc3fc6607a2063cf608310f022e005384877e267bce9f11958fe940e458"
+    },
+    {
+     "file": "m097/attack/03.png",
+     "sha256": "c7e636164f21ca85fa126820223938733a1621f815b415ea6cc7cb02a78df3c5"
+    },
+    {
+     "file": "m097/attack/04.png",
+     "sha256": "1c2e2c7aedb6f678f2412e80f4b06e22a37035e9c9ca64d2918ac14b03aa6232"
+    },
+    {
+     "file": "m097/attack/05.png",
+     "sha256": "5ca74535bbb29c733ccc38ea00c9644a7f042ad6fbba9d43125a24ad5415cbb4"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-hostess-boss-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-hostess-boss-v1.webp",
+   "cell": [
+    256,
+    256
+   ],
+   "cols": 8,
+   "pivot": [
+    125.25,
+    231.0
+   ],
+   "visibleHeight": 210.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^봉합부인$",
+    "boss": true,
+    "samong": "."
+   },
+   "bytes": 347420,
+   "sha256": "e52c57cdde7a3542b239ea5144a74ac345924d6c8b33e0daedb6d4423dc1c457",
+   "source": [
+    {
+     "file": "move_01.png",
+     "sha256": "b87d157850ff5dcff11d014d5dff831bfa5884ccae5d18effaf24586d3d9c99f"
+    },
+    {
+     "file": "move_02.png",
+     "sha256": "65a61506074039657e9c6fc886da3d96fc0f291d9ae2e99bb51ce94297bb00c3"
+    },
+    {
+     "file": "move_03.png",
+     "sha256": "fadcaa022ab80ef448d09ca8c894e452136c9c97303049a81b9e64e64982598a"
+    },
+    {
+     "file": "move_04.png",
+     "sha256": "04e85c4a36f71e948a6c817b26b1bca9bf78a8ccf3e8c64d5acd1cd1a3970c42"
+    },
+    {
+     "file": "cast_01.png",
+     "sha256": "4a866193141ffc7b08c2c7551bb0e6abf381acf34d7124c389d156de170ad1a5"
+    },
+    {
+     "file": "cast_02.png",
+     "sha256": "bf781ed6ff8bdf31002dc9ed4c2d5f53ceb0a27348654e0b202fc66d7853600f"
+    },
+    {
+     "file": "cast_03.png",
+     "sha256": "a192ee89e129b61dd38902a1c4f4fafc1d6e04f84131ac5b5a9f67031d502159"
+    },
+    {
+     "file": "cast_04.png",
+     "sha256": "9241dd9488473ef0776ba61a2155fbabf9d2bead106702bebf69fda3d1719d2c"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-paper-figure-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-paper-figure-v1.webp",
+   "cell": [
+    163,
+    217
+   ],
+   "cols": 8,
+   "pivot": [
+    76.2,
+    204.0
+   ],
+   "visibleHeight": 225.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^종이 형상( \\d+)?$",
+    "samong": "."
+   },
+   "bytes": 219794,
+   "sha256": "7433a8f82164b47f53bb036a013eac373dc6963e6ffeb87926ba633f99cbb71d",
+   "source": [
+    {
+     "file": "r109/PAPER-move.png",
+     "sha256": "db45c586393f657323f01f06bf65ed04d447175e14a31a4ab5d8f001f1f4a29c"
+    },
+    {
+     "file": "attack-01-ready.png",
+     "sha256": "8d5acdf050d4bd23d704485364ca4eee53f093167522e723634fe4eb5218dc62"
+    },
+    {
+     "file": "attack-02-anticipate.png",
+     "sha256": "950043e845ddbaa6b73a7c2add0288c2ab70899503c4e3c5240a682a6ab524d5"
+    },
+    {
+     "file": "attack-03-strike.png",
+     "sha256": "331cc50ff9067793dc89c5f3894687830b43065f7e8a9da379387c3b395e794e"
+    },
+    {
+     "file": "attack-04-recover.png",
+     "sha256": "bd07a962bf9f9cff95d8fb04696b0ca47ebf5c60d23c3fa5435c5f230aaf1b92"
     }
    ],
    "finalArt": false

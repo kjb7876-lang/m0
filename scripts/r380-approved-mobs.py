@@ -163,7 +163,28 @@ if len(sys.argv) > 11:
         names = [f'move_0{j}.png' for j in range(1, 5)] + [f'attack_0{j}.png' for j in range(1, 5)]
         add2('dys-' + k, d, names, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0],
              {'layer': 'DREAM', 'name': '^(외계 침공군|전선 절단자|심해 연산거수) · 짙은 형상', 'samong': S06, 'slot': [i, 2], 'rename': nm + ' · 짙은 형상'}, 1.0)
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R390',
+# ── R391: 사몽 승인·후보 모션(같은 사용자 지시). 모두 사몽(DREAM, samongR103 있음)만, 수·능력치 그대로 ──
+#  · 포구 검은 안개 m065·부정의 잔영 m066(이동6·공격6), 66 수문장 m097(이동4·공격6): R200 그림자로 안 바뀐 원래 이름 몹.
+#  · 봉합부인(S-01 보스, R105 정적 한 장) → 이동4·시전4. 종이 형상(RF) → R109 이동4(PAPER-move) + 새 공격4.
+if len(sys.argv) > 13:
+    X35 = pathlib.Path(sys.argv[12]) / 'frames'; X24 = pathlib.Path(sys.argv[13]); SAM = '.'
+    for mid, nm, mv in (('m065', '포구 검은 안개', 6), ('m066', '부정의 잔영', 6), ('m097', '66 수문장', 4)):
+        names = [f'{mid}/move/0{j}.png' for j in range(mv)] + [f'{mid}/attack/0{j}.png' for j in range(6)]
+        add2('samong-' + mid + '-v3', X35, names, len(names), .4, list(range(mv)), list(range(mv, mv + 6)), [0],
+             {'layer': 'DREAM', 'name': '^(사몽:)?' + nm + '( \\d+)?$', 'samong': SAM}, .9 if mid == 'm097' else .85)
+    H = X24 / 'hostess/frames'; names = [f'move_0{j}.png' for j in range(1, 5)] + [f'cast_0{j}.png' for j in range(1, 5)]
+    add2('samong-hostess-boss-v1', H, names, 8, .5, [0, 1, 2, 3], [4, 5, 6, 7], [0], {'layer': 'DREAM', 'name': '^봉합부인$', 'boss': True, 'samong': SAM}, 1.0)
+    # 종이 형상: R109 이동 4칸(107x153)을 새 공격 칸(543x724) 몸 높이에 맞춰 같은 크기 캔버스에 놓는다(이동은 원래 그림 그대로, 확대만).
+    PA = X24 / 'paper-figure/frames'; an = ['attack-01-ready.png', 'attack-02-anticipate.png', 'attack-03-strike.png', 'attack-04-recover.png']
+    atk = L(PA, an); W, Hh = atk[0].size; ah = bbox_h(atk); pm = Image.open(RT / 'assets/r109/mobs/PAPER-move.png').convert('RGBA'); cw = pm.width // 4
+    mvf = []
+    for j in range(4):
+        c = pm.crop((j * cw, 0, (j + 1) * cw, pm.height)); b = c.getchannel('A').point(lambda v: 255 if v > 16 else 0).getbbox(); c = c.crop(b)
+        k = ah / c.height; c = c.resize((round(c.width * k), round(c.height * k)), Image.LANCZOS); cv = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
+        cv.paste(c, (254 - c.width // 2, 680 - c.height), c); mvf.append(cv)
+    add('samong-paper-figure-v1', 'strip', mvf + atk, 8, .3, (254 * 1.0, 680), [0, 1, 2, 3], [4, 5, 6, 7], [0], 'right',
+        {'layer': 'DREAM', 'name': '^종이 형상( \\d+)?$', 'samong': SAM}, [{'file': 'r109/PAPER-move.png', 'sha256': sha(RT / 'assets/r109/mobs/PAPER-move.png')}] + fr(PA, an), 1 / .85)
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R391',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

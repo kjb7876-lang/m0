@@ -19,8 +19,8 @@
     },
     {
       "path": "art-drive-r105.js",
-      "bytes": 14298,
-      "sha256": "058db45e120ad15d4b1ad52b6e1a5cb50d66906cae85ccfbd5e945261166305f"
+      "bytes": 14462,
+      "sha256": "ecde58177e6ebe1f9165247d628cf5ef53a201866242a95d07d1a207edb1802a"
     },
     {
       "path": "assets-clean-r99.js",
@@ -15189,8 +15189,8 @@
     },
     {
       "path": "assets/r380/mobs/index.json",
-      "bytes": 96306,
-      "sha256": "2ab107627f304cd1ef9fb9ba19f66ce9f6a948e459d65550efad38d8ea5fa491"
+      "bytes": 105531,
+      "sha256": "dcffdd48a0f99444909b836c3c6154d1ceb52d1299d92f726c3c7bf6cec41961"
     },
     {
       "path": "assets/r380/mobs/jealousy-wraith-v1.webp",
@@ -15266,6 +15266,31 @@
       "path": "assets/r380/mobs/root-stalker-r74-plain.webp",
       "bytes": 81584,
       "sha256": "72deaa9fd0f53545500a765a37e7c210d5b277c2d85d7a9bbdb46ab61a2fc00b"
+    },
+    {
+      "path": "assets/r380/mobs/samong-hostess-boss-v1.webp",
+      "bytes": 347420,
+      "sha256": "e52c57cdde7a3542b239ea5144a74ac345924d6c8b33e0daedb6d4423dc1c457"
+    },
+    {
+      "path": "assets/r380/mobs/samong-m065-v3.webp",
+      "bytes": 319828,
+      "sha256": "f6ce3ea186b6076b103c9aa60808aa542a5bb87018985860e8f0fafc7dbfc76c"
+    },
+    {
+      "path": "assets/r380/mobs/samong-m066-v3.webp",
+      "bytes": 243174,
+      "sha256": "56e8b04b4a06a737d6a0f708be472d746a34f81f9913dce6b0009af596301751"
+    },
+    {
+      "path": "assets/r380/mobs/samong-m097-v3.webp",
+      "bytes": 323056,
+      "sha256": "4beb29dddc9b1755c007ba49d754a9e7fed01708d473162f510aa5d815ef14fa"
+    },
+    {
+      "path": "assets/r380/mobs/samong-paper-figure-v1.webp",
+      "bytes": 219794,
+      "sha256": "7433a8f82164b47f53bb036a013eac373dc6963e6ffeb87926ba633f99cbb71d"
     },
     {
       "path": "assets/r380/mobs/sloth-burden-man-v1.webp",
@@ -33198,8 +33223,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6639,
-  "totalBytes": 1037500016,
+  "fileCount": 6644,
+  "totalBytes": 1038962677,
   "webHTMLSha256": "bbced9630ab89c6f7bbca4b9a4b67f4ee42e958b1349deeac51c3a3246f75aad",
   "largest": [
     {

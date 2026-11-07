@@ -5849,7 +5849,12 @@
     "assets/r380/mobs/dys-cleaver-v4.webp",
     "assets/r380/mobs/dys-membrane-v1.webp",
     "assets/r380/mobs/dys-sacshell-v1.webp",
-    "assets/r380/mobs/dys-scythe-v1.webp"
+    "assets/r380/mobs/dys-scythe-v1.webp",
+    "assets/r380/mobs/samong-hostess-boss-v1.webp",
+    "assets/r380/mobs/samong-m065-v3.webp",
+    "assets/r380/mobs/samong-m066-v3.webp",
+    "assets/r380/mobs/samong-m097-v3.webp",
+    "assets/r380/mobs/samong-paper-figure-v1.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -6924,5 +6929,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "6376ae06c37fc3aa41ef115856b68dbefb1e7e86e5b16072985cdee0376d59f2"
+  "runtimeManifestSHA256": "c8f6eb544f9529ae14abeece7ea2f0dbb37f4c7396f5bbf7eb5c458f462665e7"
 }
