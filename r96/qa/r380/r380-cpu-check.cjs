@@ -5,7 +5,7 @@ for(const f of ['approved-mobs-r380.js','mob-unique-r248.js','mob-preload-r260.j
 const html=RT('index.html');ok(/<script src="\.\/music-box-r378\.js"><\/script><script src="\.\/approved-mobs-r380\.js"><\/script>/.test(html)&&html.split('approved-mobs-r380.js').length===2,'스크립트 태그 한 번, R378 뒤');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'approved-mobs-r380.js',"),'공개 확인 목록');
 const inputs=JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8'));ok(inputs.textPaths.includes('approved-mobs-r380.js'),'런타임 입력 목록');
-const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===71,'71장(R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
+const idx=JSON.parse(RT('assets/r380/mobs/index.json'));ok(idx.mobs.length===74,'74장(R396 정원사·망령2 + R395 역행 신규 2 + R394 RE-3 백색 사수 좌우 2 + R393 역행 보스 2종 좌우 4 + R392 S-06 보스 2·순찰자 1 + R391 사몽 5 + R380 5 + R381 7 + R382 16 + R383 2 + R386 3 + R387 1 + R389 페르소나 보스 8 + 분신 8 + R390 디스토피아 5)');
 for(const m of idx.mobs){const p=path.join(R,'runtime-text',m.path);ok(fs.existsSync(p),m.id+' 파일');if(!fs.existsSync(p))continue;const b=fs.readFileSync(p);
  ok(crypto.createHash('sha256').update(b).digest('hex')===m.sha256&&b.length===m.bytes,m.id+' 해시·크기');ok(JSON.stringify(inputs).includes(m.path),m.id+' 런타임 입력');ok(m.finalArt===false,m.id+' 임시 표기');}
 ok(CS('mob-unique-r248.js').includes('s=sheetOf(e);if(s&&(')&&CS('mob-unique-r248.js').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)))s=null;'),'R248 이 R380 몹을 덮어 그리지 않음');
@@ -82,6 +82,11 @@ ctx.room={id:'ep1a09'};ok(f({name:'중독을 부르는 주사기 환영체',midb
      const a=u('종이 형상 2','sz115-RF-1',3),b=u('종이 형상','sz115-RF-3',4),c=u('막힌 이름들','sz115-RG-3',4),d=u('막힌 이름들','sz115-RG-3',5),e=u('종이 형상','sz162-RF-B',7),f=u('막힌 이름들','sz115-RA-2',4);
      ok(a[0]==='reverse-rf-merit-scale-v1'&&a[1]==='비극 계량체'&&a[2]==='종이 형상'&&b[0]==='samong-paper-figure-v1'&&b[1]==='종이 형상','R395 RF 종이 형상 절반 → 비극 계량체(R248 열쇠는 원래 이름), 나머지는 종이 형상');
      ok(c[0]==='reverse-rg-gear-mite-v1'&&c[1]==='인과 고리충'&&d[0]===null&&d[1]==='막힌 이름들'&&e[0]==='reverse-rf-merit-scale-v1'&&f[0]===null,'R395 RG 막힌 이름들 절반 → 인과 고리충, 광장(sz162) 포함, 다른 장 그대로');}
+    {const u=(n,z,i)=>{const c={id:'sm103:Q:a:'+i,name:n,samongR103:z,hp:5,x:2,y:1};return [S.frameFor(c,null)?.r380Mob||null,c.name];};
+     const g1=u('뿌리에서 쏟아진 잔영','sz115-S01-2',3),g0=u('뿌리에서 쏟아진 잔영','sz115-S01-2',4),gp=u('뿌리에서 쏟아진 잔영','sz115-P-1',3);
+     ok(g1[0]==='samong-s01-gardener-v1'&&g1[1]==='봉합 정원사 인형'&&g0[0]===null&&g0[1]==='뿌리에서 쏟아진 잔영'&&gp[0]===null,'R396 S-01 뿌리 잔영 절반 → 봉합 정원사 인형, 다른 장 그대로');
+     const w=[0,1,2].map(i=>u('찢긴 호외의 잔향','sz115-S05-2',i)),we=u('찢긴 호외의 잔향 · 짙은 형상','sz162-S-05-B',0);
+     ok(w[0][0]==='samong-s05-wraith-jihyeon-v2'&&w[1][0]==='samong-s05-wraith-officer-v2'&&w[2][0]===null&&w.every(x=>x[1]==='찢긴 호외의 잔향')&&we[0]===null,'R396 S-05 호외 잔향 셋 중 둘 → 경성의 밤 망령 2종(이름 그대로), 짙은 형상 그대로');}
     ok(t('상대 초인','sz115-S07-1',true)===null&&t('순찰자','',true)===null,'R392 다른 장·본편은 그대로');
     ok(t('포구 검은 안개','')===null&&t('봉합부인','',true)===null,'R391 사몽 밖(본편) 같은 이름은 그대로');}
    ok(fs.readFileSync(path.join(R,'client-source','art-drive-r105.js'),'utf8').includes('__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e)?null:artFor(e)'),'R391 R105 정적 그림이 승인 시트 위에 겹치지 않음');

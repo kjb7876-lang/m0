@@ -5865,7 +5865,10 @@
     "assets/r380/mobs/reverse-m093-v1-right.webp",
     "assets/r380/mobs/reverse-m093-v1-left.webp",
     "assets/r380/mobs/reverse-rf-merit-scale-v1.webp",
-    "assets/r380/mobs/reverse-rg-gear-mite-v1.webp"
+    "assets/r380/mobs/reverse-rg-gear-mite-v1.webp",
+    "assets/r380/mobs/samong-s01-gardener-v1.webp",
+    "assets/r380/mobs/samong-s05-wraith-jihyeon-v2.webp",
+    "assets/r380/mobs/samong-s05-wraith-officer-v2.webp"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -6940,5 +6943,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "ac83e2ca46c57d73881de45af4f4b382d269fa35d3d68ad554db8638686ed8e5"
+  "runtimeManifestSHA256": "6cf92e8a1e6f1b8ef16f8980b678bdf00b4b7e5825e425c153b95a66fb15203b"
 }

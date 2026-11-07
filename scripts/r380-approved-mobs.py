@@ -223,7 +223,18 @@ if len(sys.argv) > 17:
         add2(id_, C / k, MR, 8, .32, [0, 1, 2, 3], [4, 5, 6, 7], [0],
              {'layer': 'DREAM', 'name': f'^({src}|{nm})( \\d+)?$', 'samong': f'(^|-)R{ch}(-|$)', 'slot': sl, 'rename': nm}, ft)
         mobs.insert(0, mobs.pop())
-idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R395',
+# ── R396: S-01 봉합 정원사 인형(검수 후보, 일반몹 절반), 경성의 밤(S-05) 망령 2종 이동 v2+공격 v1(이름은 그대로, 셋 중 둘) ──
+if len(sys.argv) > 18:
+    R6 = pathlib.Path(sys.argv[18]); G = R6 / 'x07/S01_rose_gardener/frames'
+    add2('samong-s01-gardener-v1', G, [f'move_right/0{j}.png' for j in range(1, 5)] + [f'attack_right/0{j}.png' for j in range(1, 5)], 8, .3, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+         {'layer': 'DREAM', 'name': '^(뿌리에서 쏟아진 잔영|봉합 정원사 인형)( \\d+)?$', 'samong': '(^|[^0-9])S-?01([^0-9]|$)', 'slot': [1, 2], 'rename': '봉합 정원사 인형'}, .85)
+    mobs.insert(0, mobs.pop())
+    W = R6 / 'x33/frames'
+    for i, k in enumerate(('jihyeon', 'officer')):
+        add2(f'samong-s05-wraith-{k}-v2', W, [f'{k}-move/0{j}.png' for j in range(1, 5)] + [f'{k}-attack/0{j}.png' for j in range(1, 5)], 8, .22, [0, 1, 2, 3], [4, 5, 6, 7], [0],
+             {'layer': 'DREAM', 'name': '^찢긴 호외의 잔향( \\d+)?$', 'samong': '(^|[^0-9])S-?05([^0-9]|$)', 'slot': [i, 3]}, .85)
+        mobs.insert(0, mobs.pop())
+idx = {'schema': 'storyworld.r380.approvedmobs/v1', 'revision': 'R396',
        'note': '사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.',
        'mobs': mobs}
 (OUT / 'index.json').write_text(json.dumps(idx, ensure_ascii=False, indent=1))

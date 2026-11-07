@@ -1,8 +1,240 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R395",
+ "revision": "R396",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
+  {
+   "id": "samong-s05-wraith-officer-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s05-wraith-officer-v2.webp",
+   "cell": [
+    141,
+    183
+   ],
+   "cols": 8,
+   "pivot": [
+    63.47,
+    173.8
+   ],
+   "visibleHeight": 189.2,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^찢긴 호외의 잔향( \\d+)?$",
+    "samong": "(^|[^0-9])S-?05([^0-9]|$)",
+    "slot": [
+     1,
+     3
+    ]
+   },
+   "bytes": 134030,
+   "sha256": "9620ae766082f65578c3e6fd876cf4bd23c7e8883b5d526aebba41bf9225144a",
+   "source": [
+    {
+     "file": "officer-move/01.png",
+     "sha256": "80857fb284ab1f18b5e32d807ce0fb517b2b1b944ad2b8d02f4d70ef113ff211"
+    },
+    {
+     "file": "officer-move/02.png",
+     "sha256": "4ac2b459cc43e48db7cd4cedc39ecc4e17aee81736493477b119acd632e6125b"
+    },
+    {
+     "file": "officer-move/03.png",
+     "sha256": "d59d01a335140a83b3363718977f0c3f606f29975004ad357d36fdc5d38f88fe"
+    },
+    {
+     "file": "officer-move/04.png",
+     "sha256": "747fa3d58253f6dda8e030912082ec49a125c65a331f3d5c807a75da31d3d241"
+    },
+    {
+     "file": "officer-attack/01.png",
+     "sha256": "6543688ea0ccc5e40848b4d6749b6d3624b52224ba46eb06797acaedeb68f7a2"
+    },
+    {
+     "file": "officer-attack/02.png",
+     "sha256": "8268e57f9fcff4288c0e4c6279c3e26e23e64118c2e0c0822c30ecbfa335834f"
+    },
+    {
+     "file": "officer-attack/03.png",
+     "sha256": "2ce4b61b943ff999a9d1af90c476067296982fa1f6d29731a3b611c99de8783c"
+    },
+    {
+     "file": "officer-attack/04.png",
+     "sha256": "b88e55b7b71a9d4c40996c74f2e90b7238e58c61103df6bfa3f27dee10599acb"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-s05-wraith-jihyeon-v2",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s05-wraith-jihyeon-v2.webp",
+   "cell": [
+    141,
+    183
+   ],
+   "cols": 8,
+   "pivot": [
+    71.28,
+    176.66
+   ],
+   "visibleHeight": 195.9,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^찢긴 호외의 잔향( \\d+)?$",
+    "samong": "(^|[^0-9])S-?05([^0-9]|$)",
+    "slot": [
+     0,
+     3
+    ]
+   },
+   "bytes": 117596,
+   "sha256": "76e3ba366b8712758947991789dbfb8f1d995e1ee41e16aa48e9694b0dc64fd5",
+   "source": [
+    {
+     "file": "jihyeon-move/01.png",
+     "sha256": "6837d6e7f9e25de7003ad8ab8e96bb88e6e14e486cdabec17fa6f30caf7ff615"
+    },
+    {
+     "file": "jihyeon-move/02.png",
+     "sha256": "d7fe9fec4aed631733ee6ba3e1eab7b5ef7e6ae63db64f9fdcd9a98af8daa9cb"
+    },
+    {
+     "file": "jihyeon-move/03.png",
+     "sha256": "a5957d504aa9e63a4f7f50a9a2eef7a156576423bfcfa8866b41482a3ec62193"
+    },
+    {
+     "file": "jihyeon-move/04.png",
+     "sha256": "c35bddd8aa38c9ac27a8542078aec2eced5d0d41965054af79e431b2a08bf0ec"
+    },
+    {
+     "file": "jihyeon-attack/01.png",
+     "sha256": "5c4cfe408b0663069d5b5357142ee6a8bd8d721c2191eaa03663f8aacf13b1c3"
+    },
+    {
+     "file": "jihyeon-attack/02.png",
+     "sha256": "80eccf55a01fefe28d21450349733fc7c3dfac6a74f6cd69df398687d3fb6408"
+    },
+    {
+     "file": "jihyeon-attack/03.png",
+     "sha256": "69f25fc13392efb35f369f5bb7a7520b499b9c3c533b30b7df9e88b8037af2ba"
+    },
+    {
+     "file": "jihyeon-attack/04.png",
+     "sha256": "2209b004c5f33d2a6eb71d3306bc22351e1e46dddb3d2bcdb08f731474f60b25"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "samong-s01-gardener-v1",
+   "kind": "strip",
+   "path": "assets/r380/mobs/samong-s01-gardener-v1.webp",
+   "cell": [
+    154,
+    173
+   ],
+   "cols": 8,
+   "pivot": [
+    73.35,
+    160.8
+   ],
+   "visibleHeight": 169.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "right",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^(뿌리에서 쏟아진 잔영|봉합 정원사 인형)( \\d+)?$",
+    "samong": "(^|[^0-9])S-?01([^0-9]|$)",
+    "slot": [
+     1,
+     2
+    ],
+    "rename": "봉합 정원사 인형"
+   },
+   "bytes": 89116,
+   "sha256": "3958c5e35bd1763f3fc4c8bf4a921c5dd6594fc7c1f825afbac262214532dac8",
+   "source": [
+    {
+     "file": "move_right/01.png",
+     "sha256": "e81ac074346e314e654d84824b63b901967303cec88a9288fc528c44bb1228d9"
+    },
+    {
+     "file": "move_right/02.png",
+     "sha256": "1a2cc7b94cd0cb16f5f42e2bb7a154160276198b31c3e1737f0f472d0d805d09"
+    },
+    {
+     "file": "move_right/03.png",
+     "sha256": "aea339ae35d01bdebac0ff3bee93acad3286de955fc6cf7ff2e0d366b3e9cbea"
+    },
+    {
+     "file": "move_right/04.png",
+     "sha256": "0ecd7832e45185c0c49ee0d1c4fc30113b7affa52bb7bc52af5e9a5e17388bb2"
+    },
+    {
+     "file": "attack_right/01.png",
+     "sha256": "147e051fe98a2847d52f36dea01295b7a73fababd22a45a148c63ecebbb4cc7a"
+    },
+    {
+     "file": "attack_right/02.png",
+     "sha256": "f2d69c11e39253b87bc621f16c587d187f7df8eaac7eff5cbbf558da9084ff35"
+    },
+    {
+     "file": "attack_right/03.png",
+     "sha256": "19258a62614257c53cc7a211101722943a3af496a9032b9a067478619792aabd"
+    },
+    {
+     "file": "attack_right/04.png",
+     "sha256": "cd1cd673eb75c253edac7373246d94bbc924d5e87ea2295359482512cf7124bf"
+    }
+   ],
+   "finalArt": false
+  },
   {
    "id": "reverse-rg-gear-mite-v1",
    "kind": "strip",
