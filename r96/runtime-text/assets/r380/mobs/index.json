@@ -1,6 +1,6 @@
 {
  "schema": "storyworld.r380.approvedmobs/v1",
- "revision": "R387",
+ "revision": "R389",
  "note": "사용자 직접 검수 목록 v18 채택본 파생(축소·시트 묶기만). 원본 Drive 보존. 피격·사망 전용 그림 없음, GPU·실기기 미검증.",
  "mobs": [
   {
@@ -2589,6 +2589,598 @@
     {
      "file": "syringe-thrust-04.png",
      "sha256": "30356b97e9728e6cffb639731f642ff5050f3ef55290034c5eb624e6c7e8f7ea"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-hwando-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-hwando-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    83.75,
+    114.5
+   ],
+   "visibleHeight": 176.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "hwando"
+   },
+   "bytes": 63740,
+   "sha256": "412efa12bdd29291ac3ee45924269e39a32496bab96af957bbad0cb972e3b74d",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "c4fa8ee026c82c62d336cbfbf74766cd2adfb43d238a2afa9deb7c4aefb37705"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "5f6642a956370cf3b87b40852979a0ee7fd9dba0847f24e4379f19d1fa375fab"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "f8c462af491d7b6f24b0eefc3b1c92a0d96017d1bb300bc3530732e499d1f097"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "b8730594d9f557998bcffd69dd0266299605b8db345677daf3e7701c277bb175"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "52c1089cead9cea675c2f202ac1941e1ff0f3531771c2f450aa884447afecce0"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "979021c122284c8512bd7dbe7746f3479636fe4357bd823577c6f2fc70267047"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "3fa176a6910af120cdf076474ece34310a2bdfeaebdb3ccea98382f8dff0316c"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "e14886e472338fc3b9c2cacfee8cc76e08b5f1056197c1308b8d90aa32330264"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-michaela-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-michaela-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    84.5,
+    113.5
+   ],
+   "visibleHeight": 180.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "michaela"
+   },
+   "bytes": 65122,
+   "sha256": "158fe54da181afe41b5576b9c7530920e1f85caf05a881dfe86cdeef89227b86",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "b0ac0e9292e3039ed3cf1e837680fe03c962f13da5c71f1aaa22f36b096db019"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "c864982387d400a74a706618ec03ef0e2b4a00fc992d72509804f53cfac1a41d"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "374e62a0aff403d8aeebf8f391e50705198610765e9f839de0bd99a48a467e2b"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "8e86b26330d35112988c7f11c9ecf416e3415872bf6ecdd2be9a113addb7c0f0"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "205e8219e685e9cdee24bac022637b77b220dbab3cd419a4a61b37cc941669f3"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "91a9e4be37df1c7603deaa644f2c66c3475d907c82327f7b9575ea98e6a7f8e7"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "a7a970f4a79eac834bd0ef6a36042c2ed3a3aaef4000baeab9cbaaa03d978647"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "2271560516dcf2a7da6be843020644cd79948a1b1984abeef9ccb24ba9a66d16"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-seoha-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-seoha-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    78.0,
+    113.5
+   ],
+   "visibleHeight": 180.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "seoha"
+   },
+   "bytes": 72132,
+   "sha256": "6c36549474f85e1db9852e46ae0cd67705de30471650e57a229621b924a2da2d",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "b6c660c33f02bad6690243f60bdc052d1ed54300f1aa514669e974fcadc14868"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "bc70113f1345b8ee7fcbd961889f721a51e727a975c67016d24924796f636d8d"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "16ccf3c78d3a30745eb573fa4a425d23b32d5997d47c0e34a8b13ca46b84ac08"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "ce37b38568e2b624f4e4990f9bd3f765f99168027302b8f10e3da531c4f5803e"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "b30d59f5807b2b19865e039160ff41e03434793c3f4b802f9ba0932182481ba7"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "3b8c446d3bb0e3c2b9e0d374329cdae55e59bc13c765cc78ba9e2d7a99e581a1"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "b18d5283f51ac78cf4c317b4b281f6f0bf206a8c67c4e009ffa880c848eab9d4"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "ae7b5a56fdba1ce24a71755f3ed070172b3da96af399fceb411d7054a088f1d9"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-lauren-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-lauren-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    77.0,
+    113.5
+   ],
+   "visibleHeight": 180.0,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "lauren"
+   },
+   "bytes": 68936,
+   "sha256": "bcee02973c9440da4e3bc09bf3dfe8cc2866f3242c28ac1a5c057cc104380f32",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "9fc0da4b7c6e78808928c04e9094d07f6650cd1d155a408e477120d83307daaa"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "6341a67a1dc24e1a824c3c73a2789ac3ca88a20790319d4dfda29d17e7b4818e"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "48877245be4be197546ee15f37cdc6ccee10fff878fec33673446dadb51e6414"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "d1e29d0fa329bddbe84f69e9c8d38c9cd685a4336482462747b8568e60726c7b"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "ce38819be8123205226c5eab49c71e20e52749bf0dad480103fd1fe9a99a9550"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "165f9931caaf724cabd0939e2b73759bf2086805f86377ed458f77a99cd41bad"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "9e3f6463af44bcd38ff484cf09a849265b9cb1807da64d493e1bf3df2a4a9cc1"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "329ae2e4e6db0796c8e4c662a60f212704fa6f86422f04a55da22f0e296f7426"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-neon-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-neon-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    70.5,
+    113.5
+   ],
+   "visibleHeight": 171.8,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "neon"
+   },
+   "bytes": 61556,
+   "sha256": "13ee558ad91dcd09d0d4951155f9485f0af3c6eedc71e60187d1ff1419532eb0",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "a65ae5aa76c535b27114c06c8848844805961a29e88de0621b90be0ff165b32f"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "5accbf636928059074867d8c2a6705cb4739c34392d0e5674ed310ae1cb84c74"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "a3a69ceca114beb5ba0be71f25203e817b86ebc802bd8d63c2099b8b0c15149e"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "b131bba36ba12a3cc2768806653bd883b690a2766014faf55b5ccfed36faee4d"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "c85f7b5959c3d156f02de0ae0beff2ea1dc85940da90dde2008877d86de842f0"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "ad6fe454ea7f8f20decc09cff9cf7e6fd0aace38e59715464cb284d417f0b771"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "b55542449c8253ec15c0e21410735ad31099303a94f8688bcaf00b19418d32d7"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "ba4c869fd09ffa41389d3dafa235f6da8faca4da90b6d7fb7c588a63ed3b9a0a"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-hunter-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-hunter-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    67.75,
+    113.0
+   ],
+   "visibleHeight": 175.5,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "hunter"
+   },
+   "bytes": 66726,
+   "sha256": "11f506e74bb4eb09e1b579f931cc42c9b3420e9b78062883a755492e13b767aa",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "3d916555411dffb00f337ab051f73838cec4d7213ef6a2723c6bd85b1b5a7094"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "df9012a3b4158a7878c2cdaec610e20c807cca68906682b9af30657f7ac70ea7"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "70ef18e9e4605f5641f7fd72f395abddba580cf1065a3f97d5ca9e628639a9e9"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "f327b548c25a33bcf35e138a700049e624f8490f56e6376fb7f50017be1a765b"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "c602b91350fbc930586c9cacb00b00cce87dfe11db561a089b32da0727de5cd0"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "a5e28dffb08a6027ac43520bc02458b6876c292b8e6427f59f0effc11238978b"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "e7652bab3ab7c00bc08c8060a281f7792ae767a89189541dcaa4feb3025a73f3"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "052ee9892db213c7b7b1799fd4c66e3ad4e5d11d637801a4e8ae37679b614294"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-gunner-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-gunner-w.webp",
+   "cell": [
+    160,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    73.0,
+    113.0
+   ],
+   "visibleHeight": 176.4,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "gunner"
+   },
+   "bytes": 63440,
+   "sha256": "2cd78a1e5910825cd9b90d9e11d30351e79b4529c4eacc53967388e982944b1b",
+   "source": [
+    {
+     "file": "walk-w-01.png",
+     "sha256": "41d49e59aab7e152c60a07f7d7da36a2a502363312620728a5f37fe138a0397c"
+    },
+    {
+     "file": "walk-w-02.png",
+     "sha256": "011ee140873f414adf5c69583b6f10f7594da903fbbb4b000eacee58a965a835"
+    },
+    {
+     "file": "walk-w-03.png",
+     "sha256": "e7d19f3886ffbe85284430b85f3b63dc6231fb0b9092ab97fca9767ca24085a2"
+    },
+    {
+     "file": "walk-w-04.png",
+     "sha256": "ad413eea9d4330ed4aa9d19a558c2f6770fc6edfe62fe061f0546276fdc21485"
+    },
+    {
+     "file": "attack-w-01.png",
+     "sha256": "c0b36cb0fd86c8268c1dff0b993e22b7c1c8a93d9af567f2daceeafb98a1fe28"
+    },
+    {
+     "file": "attack-w-02.png",
+     "sha256": "e4a067491a78296c92000e46e8b92805f8c5bbd29e1278b3f20f414a94f9dfa6"
+    },
+    {
+     "file": "attack-w-03.png",
+     "sha256": "8f8583301e0a48338d3ac9c0500298cabf7bc9dc440910690248a59ac86fa5d9"
+    },
+    {
+     "file": "attack-w-04.png",
+     "sha256": "2227e29ecf6671ef23970db461f85cee1b55c7bb8080c7408259fe26c5075705"
+    }
+   ],
+   "finalArt": false
+  },
+  {
+   "id": "persona-slayer-w",
+   "kind": "strip",
+   "path": "assets/r380/mobs/persona-slayer-w.webp",
+   "cell": [
+    192,
+    128
+   ],
+   "cols": 8,
+   "pivot": [
+    86.0,
+    113.0
+   ],
+   "visibleHeight": 169.1,
+   "move": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "attack": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "idle": [
+    0
+   ],
+   "facing": "left",
+   "actor": {
+    "layer": "DREAM",
+    "name": "^페르소나$",
+    "boss": true,
+    "hero": "slayer"
+   },
+   "bytes": 59688,
+   "sha256": "7cc525dcbc45c3238aa393655de36fd1ab4ac08a43428f12f32824036823e7c8",
+   "source": [
+    {
+     "file": "walk-01.png",
+     "sha256": "a72071e4cb0bf03ebfc7008419c69803b6bbed4a02509d401ba3e5af764fdc4e"
+    },
+    {
+     "file": "walk-02.png",
+     "sha256": "60a0ae30ed9accdc34b009acebb54f35dbe7a48889284c77269e652c873a3bf5"
+    },
+    {
+     "file": "walk-03.png",
+     "sha256": "3d1542ef9ab01551530d67703c85dbb4264317b05cab44b344e680594de0c6ad"
+    },
+    {
+     "file": "walk-04.png",
+     "sha256": "ea7ca94843bc5abf89238b13b4959cb84b28be1fe2c68c07dfad626c04a726ae"
+    },
+    {
+     "file": "attack-01.png",
+     "sha256": "80fd685230676bbeb88a0c9ba5cbcc26fbb4c351f0069f18ce7060b3ed3eab53"
+    },
+    {
+     "file": "attack-02.png",
+     "sha256": "4d6b61c80651345d00cc189c262a7c3ab7ad972b7ffb94b6caa4b355cbac100a"
+    },
+    {
+     "file": "attack-03.png",
+     "sha256": "5909bdf23cac792af979815ee85f6cc9be4715e21590bcd18c1b6fc4d12b5751"
+    },
+    {
+     "file": "attack-04.png",
+     "sha256": "f7cdbf5397ae3f4bbf118aac05af904cc92e0ce59c30f84a895ae4c6bd5699b1"
     }
    ],
    "finalArt": false

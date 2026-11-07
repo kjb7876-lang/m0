@@ -16,7 +16,9 @@
 (()=>{'use strict';
 if(window.__STORYWORLD_SLAYER_R351__)return;
 const REV='R351-slayer-1',KEY='storyworld.r351.slayer',BASE='assets/r351/slayer/',HERO='slayer';
-const SOUTH_BASE='assets/r377/slayer-south/';
+// R389: 남향은 R377 원화를 밝기만 맞춘 파생본(assets/r389/slayer, 원본 assets/r377 보존), 동향은 페르소나 W 원화 수평반전본(사용자 지시 '왼쪽은 좌우반전해서 본슬레이어영웅적용')을 쓴다.
+//  동향 그림은 이미 오른쪽을 보므로 런타임에서 또 뒤집지 않는다(baked). 아직 안 받았으면 옛 W 뒤집기로 그린다. 피해·판정·쿨다운은 그대로.
+const SOUTH_BASE='assets/r389/slayer/';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={frames:0,walk:0,idle:0,attack:0,skill:0,hurt:0,upDown:0,standIn:0,skipped:0,waiting:0,errors:0,dupRemoved:0,loads:0,last:null};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 let IDX=null,idxReq=false;
@@ -30,10 +32,12 @@ const isHero=()=>typeof player==='object'&&player?.hero===HERO;
 const asked=new Map();
 function ready(p){try{const row=typeof readyImage==='function'?readyImage(p):null;return row?.image||null;}catch(_){return null;}}
 function image(p){const im=ready(p);if(im)return im;try{const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
-const clip=(a,d='w')=>d==='s'?southIndex?.anims?.[a]?.s||null:IDX?.anims?.[a]?.w||null;
-const baseFor=d=>d==='s'?SOUTH_BASE:BASE;
+const rawClip=(a,d)=>d==='w'?IDX?.anims?.[a]?.w||null:southIndex?.anims?.[a]?.[d]||null;
+const eReady=()=>!!southIndex&&['walk','attack'].every(a=>{const c=rawClip(a,'e');return !!(c&&ready(SOUTH_BASE+c.file));});
+const clip=(a,d='w')=>d==='s'?rawClip(a,'s'):d==='e'&&eReady()?rawClip(a,'e'):rawClip(a,'w');
+const baseFor=(d,A)=>A?(A===rawClip('walk','w')||A===rawClip('attack','w')?BASE:SOUTH_BASE):d==='s'||(d==='e'&&eReady())?SOUTH_BASE:BASE;
 let preloadedRoom=null;
-function preload(force){if(!IDX||!isHero())return;loadSouth();let r=null;try{r=room;}catch(_){}if(!force&&preloadedRoom===r)return;preloadedRoom=r;for(const a of ['walk','attack'])for(const d of ['w','s']){const A=clip(a,d);if(A?.file)image(baseFor(d)+A.file);}}
+function preload(force){if(!IDX||!isHero())return;loadSouth();let r=null;try{r=room;}catch(_){}if(!force&&preloadedRoom===r)return;preloadedRoom=r;for(const a of ['walk','attack'])for(const d of ['w','s','e']){const A=rawClip(a,d);if(A?.file)image(baseFor(d,A)+A.file);}}
 const S={x:null,y:null,movedAt:-9,sx:0,sy:0,dist:0,h:'w',walkDir:'w',swing:null,prevAtk:0};
 // R336과 같은 화면 남향 ±30도. W/E 기억 S.h와 전역 R336 sticky 상태는 변경하지 않는다.
 const screenSouth=(x,y)=>Number.isFinite(x)&&Number.isFinite(y)&&y>1e-6&&Math.abs(x)<=y*Math.tan(Math.PI/6);
@@ -85,13 +89,13 @@ function track(){const t=T();if(S.x!=null){const dx=player.x-S.x,dy=player.y-S.y
    if(Math.abs(v[0])>Math.abs(v[1])*.35&&Math.abs(v[0])>.3)S.h=v[0]>0?'e':'w';else stats.upDown++;S.walkDir=screenSouth(v[0],v[1])?'s':S.h;}}
  S.x=player.x;S.y=player.y;}
 const want=()=>(typeof actorHeight==='function'?actorHeight():66)*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98);
-function draw(rec,st,best,anim,dir,frame,label){let A=clip(anim,dir),p=A&&baseFor(dir)+A.file,im=p&&image(p);
- if(!im&&dir==='s'){dir=S.h;A=clip(anim);p=A&&BASE+A.file;im=p&&image(p);}
+function draw(rec,st,best,anim,dir,frame,label,A0){let A=A0||clip(anim,dir),p=A&&baseFor(dir,A)+A.file,im=p&&image(p);
+ if(!im&&dir!=='w'&&A!==rawClip(anim,'w')){if(dir==='s')dir=S.h;A=rawClip(anim,'w');p=A&&BASE+A.file;im=p&&image(p);}
  if(!im&&anim!=='walk'){const W=clip('walk'),wp=W&&BASE+W.file,wi=wp&&ready(wp);if(wi){A=W;p=wp;im=wi;dir=S.h;frame=W.idle_frame??W.n-1;label='idle';stats.standIn++;}}
  label=label||anim;
  if(!im){stats.skipped++;return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
- const k=want()/(A.body||180),q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want()*.65),fx=q.x,fy=q.y-lift,f=dir==='e'?-1:1,[ax,ay]=A.anchor;
+ const k=want()/(A.body||180),q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want()*.65),fx=q.x,fy=q.y-lift,f=dir==='e'&&!A.baked?-1:1,[ax,ay]=A.anchor;
  const X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*k,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r351:label,r121Walk:label==='walk'});
@@ -107,23 +111,23 @@ function pickBody(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;
 function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  track();preload(false);
  const atk=+player.attackAnim||0,hurt=+player.hurtAnim||0,busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0,A=clip('attack'),Wk=clip('walk');
- if(!southCast&&atk>S.prevAtk+1e-6&&A){const d=aimSide(),off=contactStart(A),rest=A.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.69);S.swing={t0:t,dir:d,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}
+ if(!southCast&&atk>S.prevAtk+1e-6&&A){const d=aimSide(),SA=clip('attack',d)||A,off=contactStart(SA),rest=SA.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.69);S.swing={t0:t,dir:d,A:SA,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}
  S.prevAtk=atk;
  const moving=t-S.movedAt<.15;
- if(busy){stats.skill++;if(player.dashAnim>0){const d=moving?S.h:aimSide();return draw(rec,st,best,'walk',d,3);}const d=aimSide();return draw(rec,st,best,'attack',d,A?.contact??3);}
+ if(busy){stats.skill++;if(player.dashAnim>0){const d=moving?S.h:aimSide();return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=clip('attack',d)||A;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
  if(southCast){const C=clip('attack','s'),pre=C.ms.slice(0,C.contact).reduce((a,b)=>a+b,0),tot=C.ms.reduce((a,b)=>a+b,0),el=southCast.phase==='prepare'?Math.min(pre-1,(t-southCast.t0)*1000):pre+(t-southCast.hitAt)*1000;
   if(el<tot)return draw(rec,st,best,'attack','s',frameAt(C.ms,el,false));southCast=null;}
- if(S.swing){const el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=A.ms.reduce((x,y)=>x+y,0);
-  if(el<tot&&!(moving&&t-S.swing.t0>.35))return draw(rec,st,best,'attack',S.swing.dir,frameAt(A.ms,el,false));S.swing=null;}
- if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.h,W=clip('walk',d)||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)));}
+ if(S.swing){const SA=S.swing.A||A,el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=SA.ms.reduce((x,y)=>x+y,0);
+  if(el<tot&&!(moving&&t-S.swing.t0>.35))return draw(rec,st,best,'attack',S.swing.dir,frameAt(SA.ms,el,false),undefined,SA);S.swing=null;}
+ if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.h,W=clip('walk',d)||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)),undefined,W);}
  if(hurt>0)stats.hurt++;
  const v=enemyVec();if(v)side(v[0],v[1]);
- return draw(rec,st,best,'walk',S.h,Wk?.idle_frame??(Wk?Wk.n-1:0),'idle');}
+ const Wi=clip('walk',S.h)||Wk;return draw(rec,st,best,'walk',S.h,Wi?.idle_frame??(Wi?Wi.n-1:0),'idle',Wi);}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){syncContext();if(southCast&&(!on||!isHero()||!solo()||!(player.hp>0)||otherAction()))cancelSouth('draw-interrupted');const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&isHero()&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();
 window.__STORYWORLD_SLAYER_R351__=Object.freeze({revision:REV,active:()=>on&&!!IDX&&isHero()&&solo(),index:()=>IDX,state:()=>({...S,swing:S.swing&&{...S.swing}}),
- inspect:()=>({revision:REV,on,ready:!!IDX,south:{revision:southIndex?.revision||null,ready:southReady(),phase:southCast?.phase||null,stats:{...southStats}},loaded:{walk:!!(clip('walk')&&ready(BASE+clip('walk').file)),attack:!!(clip('attack')&&ready(BASE+clip('attack').file))},stats:{...stats},lastError}),
+ inspect:()=>({revision:REV,on,ready:!!IDX,south:{revision:southIndex?.revision||null,ready:southReady(),eastReady:eReady(),phase:southCast?.phase||null,stats:{...southStats}},loaded:{walk:!!(clip('walk')&&ready(BASE+clip('walk').file)),attack:!!(clip('attack')&&ready(BASE+clip('attack').file))},stats:{...stats},lastError}),
  preload:()=>{preloadedRoom=null;preload(true);},
  set:v=>{on=v!==false;if(!on)cancelSouth('disabled');try{localStorage.setItem(KEY,JSON.stringify({on}));}catch(_){}return on;}});
 })();

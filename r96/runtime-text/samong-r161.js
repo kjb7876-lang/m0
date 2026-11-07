@@ -34,7 +34,9 @@ const samongRoom=()=>typeof room==='object'&&!!room?.samongR103;
 const major=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
 function hasSamongArt(e){try{return !!window.__STORYWORLD_DRIVE_ART_R105__?.artFor?.(e);}catch(_){return false;}}
 // R177: 사몽 그림이 없는 보스·대면 상대(예: 교주의 인장)도 스토리 모드 그림을 다시 쓰지 않고 꼭두각시 자아로(보스는 더 크고 짙게).
-const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */;
+// R389: R380 승인 시트가 정해진 몹(사몽 S-07 '페르소나' 보스 = 지금 영웅의 페르소나)은 꼭두각시로 덮지 않음.
+function hasApproved(e){try{return !!window.__STORYWORLD_APPROVED_MOBS_R380__?.assign?.(e);}catch(_){return false;}}
+const puppetOf=e=>prefs.puppet&&solo()&&samongRoom()&&!!e?.samongR103&&!e.r170Tower&&!hasSamongArt(e)&&!e.r200Shade&&!hasApproved(e)/* R200: 잔영 그림이 정해진 몹은 꼭두각시로 덮지 않음 */;
 
 // ---- 꼭두각시 자아 -------------------------------------------------------------------------
 let hiding=null;

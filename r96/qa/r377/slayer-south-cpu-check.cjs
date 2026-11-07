@@ -2,7 +2,7 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto'),assert=require('assert/strict');
 const R=path.resolve(__dirname,'../..'),src=fs.readFileSync(path.join(R,'client-source/slayer-r351.js'),'utf8');
-const w=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r351/slayer/index.json'))),dir=path.join(R,'runtime-text/assets/r377/slayer-south'),s=JSON.parse(fs.readFileSync(path.join(dir,'index.json')));
+const w=JSON.parse(fs.readFileSync(path.join(R,'runtime-text/assets/r351/slayer/index.json'))),dir=path.join(R,'runtime-text/assets/r389/slayer'),s=JSON.parse(fs.readFileSync(path.join(dir,'index.json')));
 const html=fs.readFileSync(path.join(R,'runtime-text/index.html'),'utf8'),at=html.indexOf('function basicAttack('),native=html.slice(at,html.indexOf('\nfunction ',at+1));
 let count=0;function check(value,message){assert.ok(value,message);count++;console.log('ok  ',message);}
 async function setup({south=true,loaded=true,hero='slayer'}={}){
@@ -11,7 +11,7 @@ async function setup({south=true,loaded=true,hero='slayer'}={}){
   player:{hero,hp:100,x:5,y:5,combo:0,attackCD:0,attackAnim:0,hurtAnim:0,skillAnim:0,dashAnim:0,ultimateAnim:0,direction:'front',counter:0},
   project:(x,y)=>({x:(x-y)*40,y:(x+y)*20}),actorHeight:()=>66,
   distance:(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),facing:(x,y)=>x-y>1e-6?'right':x-y< -1e-6?'left':x+y>0?'front':'back',rank:()=>0,attackPower:()=>10,sound(){},storyAim22:()=>Math.PI/4,
-  fetch:p=>Promise.resolve({ok:!p.includes('r377')||south,json:()=>Promise.resolve(p.includes('r377')?s:w)}),
+  fetch:p=>Promise.resolve({ok:!p.includes('r389')||south,json:()=>Promise.resolve(p.includes('r389')?s:w)}),
   readyImage:p=>images.has(p)?{image:{src:p,naturalWidth:1152,naturalHeight:256}}:null,
   ensureImages:ps=>{if(loaded)for(const p of ps)images.add(p);return Promise.resolve();}
  };
@@ -31,14 +31,14 @@ async function setup({south=true,loaded=true,hero='slayer'}={}){
  check(!/drive\.google|docs\.google/.test(src+JSON.stringify(s)),'no private Drive URL in code/index');
  for(const a of ['walk','attack']){const A=s.anims[a].s,b=fs.readFileSync(path.join(dir,A.file));check(b.length===A.bytes&&crypto.createHash('sha256').update(b).digest('hex')===A.sha256,a+' approved bytes/hash');check(A.anchor.join()==='96,226'&&A.body===158,a+' stable foot anchor/common body');}
  const W=w.anims.walk.w,S=s.anims.walk.s;check(Math.abs(W.n*W.stride.px_per_frame/W.body-S.n*S.stride.px_per_frame/S.body)<1e-9,'four-frame cycle preserves W screen cycle distance');
- for(const [dx,dy,label,expected,mirror] of [[.1,.1,'south','r377',false],[-.1,-.1,'north','r351',false],[-.1,.1,'west','r351',false],[.1,-.1,'east','r351',true]]){
+ for(const [dx,dy,label,expected,mirror] of [[.1,.1,'south','r389',false],[-.1,-.1,'north','r351',false],[-.1,.1,'west','r351',false],[.1,-.1,'east','r389',false]]){
   const c=await setup();c.player.moveVX150=dx;c.player.moveVY150=dy;c.player.x+=dx;c.player.y+=dy;const f=c.step(.05);check(f.sourcePath.includes(expected)&&((f.points[1][0]<f.points[0][0])===mirror),label+' movement sheet and mirror');
   if(label==='south'){const k=66*.98/158,q=c.project(c.player.x,c.player.y);check(Math.abs(f.points[0][1]+226*k-q.y)<1e-8,'S foot anchored at projected player');const seen=new Set();for(let i=0;i<50;i++){c.player.x+=dx;c.player.y+=dy;const f=c.step(.05);seen.add(f.sourceRect[0]/192);}check(seen.size===4,'south walk uses all four poses');check(c.api.state().h!=='s','south does not overwrite W/E memory');check(c.step(.2).sourcePath.includes('r351'),'idle remains existing W/E');}
  }
  {
   const c=await setup(),e=c.enemy();c.player.counter=1;const saved=JSON.stringify(c.player);c.basicAttack();check(e.hp===1000&&c.player.attackCD===0&&c.player.combo===0,'preparation changes no HP/CD/combo');check(c.nativeAccepted===0&&c.outerAccepted===0&&c.fxs.length===0,'no early native/outer proc or FX');check(JSON.stringify(c.player)===saved,'preparation adds no player/save field');
   check(c.frame().sourceRect[0]===0,'first preparation pose starts at zero');check(c.step(.15).sourceRect[0]===192,'second preparation pose shown');c.step(.169);check(c.hits.length===0,'no hit before 320ms');const f=c.step(.001);
-  check(c.hits.length===1&&Math.abs(c.hits[0].time-.32)<1e-9,'native hit exactly at 320ms simulation tick');check(e.hp===987&&c.player.counter===0,'counter consumed once by native at contact');check(c.nativeAccepted===1&&c.outerAccepted===1,'wrappers before/after overlay approve exactly once');check(c.fxs.find(x=>x.type==='slash').time===c.hits[0].time,'native slash and damage same tick');check(f.sourcePath.includes('r377')&&f.sourceRect[0]===384,'damage coincides with visible slash pose 2');check(c.player.attackCD===.69&&c.player.combo===1,'native CD and combo retained, start at contact');
+  check(c.hits.length===1&&Math.abs(c.hits[0].time-.32)<1e-9,'native hit exactly at 320ms simulation tick');check(e.hp===987&&c.player.counter===0,'counter consumed once by native at contact');check(c.nativeAccepted===1&&c.outerAccepted===1,'wrappers before/after overlay approve exactly once');check(c.fxs.find(x=>x.type==='slash').time===c.hits[0].time,'native slash and damage same tick');check(f.sourcePath.includes('r389')&&f.sourceRect[0]===384,'damage coincides with visible slash pose 2');check(c.player.attackCD===.69&&c.player.combo===1,'native CD and combo retained, start at contact');
   const seen=new Set([0,1,2]);for(const dt of [.081,.111,.131])seen.add(c.step(dt).sourceRect[0]/192);check(seen.size===6,'all six attack poses incl recovery');check(c.api.inspect().south.stats.released===1,'one release recorded');check(c.api.inspect().stats.errors===0,'no release error');
  }
  for(const [dx,dy,name] of [[-.65,.65,'west'],[.65,-.65,'east'],[-.65,-.65,'north']]){const c=await setup(),e=c.enemy(dx,dy);c.basicAttack();check(e.hp<1000&&c.nativeAccepted===1&&c.outerAccepted===1,name+' remains immediate native attack');}
