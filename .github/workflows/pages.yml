@@ -392,6 +392,10 @@ jobs:
         run: node r96/qa/r380/r380-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
+      - name: R376 real difficulty + cinema HUD CPU check
+        run: node r96/qa/r376/r376-cpu-check.cjs
+      - name: R384 cinema narration timing + combat pacing CPU check
+        run: node r96/qa/r384/r384-cpu-check.cjs
 
       - name: R376 real difficulty + opening title removed CPU check
         run: node r96/qa/r379/r379-cpu-check.cjs

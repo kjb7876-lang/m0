@@ -14,10 +14,11 @@
 //    덜어 낸 문장은 버리지 않고 예비로 두었다가, 대기열이 비었는데 그 지역에 살아 있는 적이 남아 있으면 (남은 예상 시간, 적어도 45초 분량만큼) 원래 순서대로 다시 채워
 //    전투 중에도 자막·음성이 끊기지 않게 한다(지역을 옮기면 예비는 비운다).
 //  · R381 녹음 음성: 문장마다 녹음(voice-r381, Qwen3-TTS Sohee)이 있으면 그걸 틀고(말 속도는 재생 속도 0.85~1.2배로), 없거나 못 받으면 브라우저 음성.
+//  · R384 말 빠르기 일정: 문장마다 빠르기를 바꾸지 않고 늘 설정 배율×0.95. 남은 서사 시간(remainingSecs)을 밖에 알려 전투가 그 시간에 맞춘다(cinema-sync-r384).
 //  · 설정 '영화 모드' 줄(목소리 고르기·시험 듣기). localStorage storyworld.r370.cinema {on, voice, subs, rate}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_MODE_R370__)return;
-const REV='R370-cinema-3',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
+const REV='R370-cinema-4',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
 const DEF={on:false,voice:'',subs:true,rate:1};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.voice==='string')prefs.voice=s.voice;if(typeof s.subs==='boolean')prefs.subs=s.subs;if(Number.isFinite(+s.rate))prefs.rate=Math.max(.8,Math.min(1.3,+s.rate));}}catch(_){}
 let learned={};try{const t=JSON.parse(localStorage.getItem(TKEY)||'{}');if(t&&typeof t==='object')for(const[k,v]of Object.entries(t))if(Number.isFinite(+v)&&+v>5&&+v<7200)learned[k]=+v;}catch(_){}
@@ -30,7 +31,7 @@ const ENV={room:()=>room,regionById:()=>regionById,loading:()=>loading,started:(
 const G=(n,d)=>{try{const v=ENV[n]();return v===undefined?d:v;}catch(_){return d;}};
 function guideOn(){try{guide=true;auto=true;guideTimer=0;}catch(e){fail(e);}}
 const journal=s=>/^journal:/.test(String(s?.key||''));
-const REFILL_MIN=45,RATE_MIN=.84,RATE_MAX=1.12,NO_DEADLINE=.9,CPS0=6.8,MIN_H=50,LINGER_MAX=40;
+const REFILL_MIN=45,CPS0=6.8,MIN_H=50,LINGER_MAX=40;
 const DEFAULT_SEC={rest:45,combat:120,samong:180};// 첫 관람 기본값(헤드리스 길잡이 dist00 ≈ 게임 60초). 실제 머문 시간을 배우면 그 값을 쓴다
 // ── 순수 함수(QA 가 CPU 에서 부른다) ──
 // 문장 나누기: 문단(빈 줄) → 문장 끝(. ? ! … 。 뒤, 닫는 따옴표 포함)에서 자른다.
@@ -45,17 +46,16 @@ function select(items,cap){const keep=new Set();let used=0;for(const it of items
  const rest=items.filter(it=>!it.must).sort((a,b)=>b.score-a.score||a.order-b.order);
  for(const it of rest){if(used+it.len<=cap){keep.add(it);used+=it.len;}}
  return {kept:items.filter(it=>keep.has(it)),used};}
-// 말 속도: 남은 글자를 남은 시간 안에 읽게. 시간 제한이 없으면 1.
-function rateFor(chars,secs,cps,user=1){if(!(secs>0)||!Number.isFinite(secs))return clamp(user*NO_DEADLINE,.75,RATE_MAX);return clamp(chars/(cps*Math.max(5,secs)),RATE_MIN,RATE_MAX)*clamp(user,.8,1.3);}
-// 문장 사이 쉼: 앞서 있으면(속도 하한에서도 시간이 남으면) 길게, 밀려 있으면 짧게.
-function gapFor(chars,secs,cps,sceneEnd){const base=sceneEnd?GAP_END:GAP;if(!(secs>0)||!Number.isFinite(secs))return base;const need=chars/(cps*RATE_MIN);
- if(need<secs*.7)return Math.min(base+1.3,base+(secs-need)/Math.max(1,chars/40)*.2);if(need>secs)return base*.4;return base;}
-// 회상 내레이션 결(R376, 사용자 "대사 속도 조금 천천히 실제 회상나래이션처럼 생동감있게"): 서술은 낮고 느긋하게, 따옴표 대사는 조금 높고 빠르게,
-//  말줄임(…)·장면 끝 문장은 더 느리게, 물음·느낌표는 살짝 올린다. 말줄임 뒤에는 쉼을 더 둔다.
+// 말 속도(R384, 사용자 2026-11-07 "음성속도를 조금더 일정하게"): 남은 시간에 맞춰 문장마다 빠르기를 바꾸던 것(R370 rateFor)을 없애고
+//  늘 같은 빠르기(설정 배율 × 0.95)로 읽는다. 시간 맞추기는 이제 전투 쪽(cinema-sync-r384 이 적 방어력을 올리고 내림)이 한다.
+const STEADY=.95;
+const steadyRate=(user=1)=>clamp(clamp(+user||1,.8,1.3)*STEADY,.8,1.2);
+// 회상 내레이션 결(R376): 서술은 낮게, 따옴표 대사는 조금 높게, 물음·느낌표는 살짝 올린다(브라우저 음성의 높낮이). 말줄임 뒤·장면 끝에는 쉼을 더 둔다.
+//  R384: 빠르기는 문장마다 바꾸지 않는다(일정하게) — tone 은 높낮이·쉼만 준다.
 const GAP=.55,GAP_END=1.35;
-function tone(text,sceneEnd){const t=String(text||'');let rate=1,pitch=.94;const quote=/^["“「『]/.test(t)||/["”」』]$/.test(t);
- if(quote){rate*=1.05;pitch=1.04;}if(/…\s*["”」』]?$|\.\.\.\s*$/.test(t)){rate*=.9;pitch-=.03;}else if(/[?？!！]\s*["”」』]?$/.test(t))pitch+=.03;
- if(sceneEnd)rate*=.92;return {rate,pitch:clamp(pitch,.85,1.1),pause:/…\s*["”」』]?$/.test(t)?.35:0};}
+function tone(text,sceneEnd){const t=String(text||'');let pitch=.94;const quote=/^["“「『]/.test(t)||/["”」』]$/.test(t);
+ if(quote)pitch=1.04;if(/…\s*["”」』]?$|\.\.\.\s*$/.test(t))pitch-=.03;else if(/[?？!！]\s*["”」』]?$/.test(t))pitch+=.03;
+ return {pitch:clamp(pitch,.85,1.1),pause:(sceneEnd?GAP_END:GAP)+(/…\s*["”」』]?$/.test(t)?.35:0)};}
 // 자막 조각: 두 줄(약 84자)을 넘으면 쉼표·띄어쓰기에서 나눈다.
 function chunks(t,max=84){const out=[];let s=String(t);while(s.length>max){let cut=s.lastIndexOf(', ',max);if(cut<max*.45)cut=s.lastIndexOf(' ',max);if(cut<max*.45)cut=max;out.push(s.slice(0,cut+1).trim());s=s.slice(cut+1).trim();}if(s)out.push(s);return out;}
 function isFinal(scenes){return scenes.some(s=>/finale|ending|epilog|엔딩/i.test(String(s?.key||''))||/엔딩|최종장/.test(String(s?.title||s?.chapter||'')));}
@@ -73,7 +73,9 @@ const remainingInZone=()=>Math.max(0,estimate(zone.key)-zone.active);
 // ── 대기열·음성 ──
 const Q=[],reserve=[];let cur=null,deadline=null,cps=CPS0,order=0,timer=null,gen=0;
 const pendingChars=()=>Q.reduce((s,q)=>s+q.len,0)+(cur?cur.len*.5:0);
-const backlogSecs=()=>pendingChars()/(cps*RATE_MAX);
+const backlogSecs=()=>pendingChars()/(cps*steadyRate(prefs.rate));
+// 남은 서사 시간(초): 남은 글자 ÷ 말 빠르기 + 문장 사이 쉼. R384 전투 맞추기가 읽는다.
+const remainingSecs=()=>backlogSecs()+Q.length*GAP+(Q.length||cur?GAP_END:0);
 function voices(){try{return (speechSynthesis.getVoices()||[]).filter(v=>/^ko/i.test(v.lang));}catch(_){return[];}}
 function pickVoice(){const vs=voices();if(prefs.voice==='none')return null;return vs.find(v=>v.name===prefs.voice)||vs.find(v=>/natural|online|neural/i.test(v.name))||vs[0]||null;}
 function vol(){try{const s=G('settings',{});return clamp(Number.isFinite(+s.voice)?+s.voice:.8,0,1);}catch(_){return .8;}}
@@ -100,7 +102,7 @@ function refill(){if(Q.length||!reserve.length||!fighting())return 0;const left=
 function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
  if(!Q.length)refill();
  cur=Q.shift()||null;if(!cur){show(null);return;}
- const my=++gen,left=pendingChars()+cur.len,secs=deadline?deadline-now():NaN,tn=tone(cur.text,cur.sceneEnd),rate=clamp(rateFor(left,secs,cps,prefs.rate)*tn.rate,.7,1.25);
+const my=++gen,tn=tone(cur.text,cur.sceneEnd),rate=steadyRate(prefs.rate);
  const parts=chunks(cur.text),t0=now();let pi=0;show(cur,parts[0]);
  const est=cur.len/(cps*rate);
  // 자막 조각은 글자 비율로 넘긴다(음성 경계 이벤트가 오면 그쪽을 따른다).
@@ -108,8 +110,8 @@ function next(){timer=null;if(!prefs.on){cur=null;show(null);return;}
  let partTimer=null;const schedule=()=>{if(pi>=parts.length-1)return;const at=bounds[pi]/cur.len*est;partTimer=setTimeout(()=>{if(my!==gen)return;pi++;show(cur,parts[pi]);schedule();},Math.max(300,(at-(now()-t0))*1000));};schedule();
  const done=(spoke)=>{if(my!==gen)return;gen++;clearTimeout(partTimer);const d=now()-t0;
   if(spoke&&d>.6&&cur){const m=cur.len/(d*rate);if(m>2&&m<20)cps=cps*.85+m*.15;}
-  const q=cur;cur=null;const left2=pendingChars(),secs2=deadline?deadline-now():NaN;
-  const gap=gapFor(left2,secs2,cps,q?.sceneEnd)+tn.pause;if(q?.sceneEnd)show(null);timer=setTimeout(next,gap*1000);};
+  const q=cur;cur=null;
+  const gap=tn.pause;if(q?.sceneEnd)show(null);timer=setTimeout(next,gap*1000);};
  const synth=()=>{const v=pickVoice();
  if(v&&window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(cur.text);u.lang=v.lang||'ko-KR';u.voice=v;u.rate=rate;u.pitch=tn.pitch;u.volume=vol();
    u.onend=()=>{stats.spoken++;done(true);};u.onerror=()=>done(false);
@@ -191,7 +193,8 @@ try{if(typeof showSettings==='function'){const base=showSettings;showSettings=fu
   const host=after?.parentNode||quick||grid;if(after&&after.nextSibling){host.insertBefore(l,after.nextSibling);host.insertBefore(row,l.nextSibling);}else{host.appendChild(l);host.appendChild(row);}}}catch(e){fail(e);}return r;};}}catch(e){fail(e);}
 addEventListener('visibilitychange',()=>{try{if(!window.speechSynthesis)return;if(document.hidden)speechSynthesis.pause();else speechSynthesis.resume();}catch(_){}});
 window.__STORYWORLD_CINEMA_MODE_R370__=Object.freeze({revision:REV,set,preview,stop:stopAll,prefs:()=>({...prefs}),
- pure:Object.freeze({sentences,score,select,rateFor,gapFor,tone,chunks,isFinal,DEFAULT_SEC,RATE_MIN,RATE_MAX,CPS0,MIN_H,GAP,GAP_END}),
+ pure:Object.freeze({sentences,score,select,steadyRate,STEADY,tone,chunks,isFinal,DEFAULT_SEC,CPS0,MIN_H,GAP,GAP_END}),
+ remainingSecs:()=>+remainingSecs().toFixed(1),
  inspect:()=>({revision:REV,prefs:{...prefs},zone:{key:zone.key,active:+zone.active.toFixed(1),estimate:estimate(zone.key)},queue:Q.length,reserve:reserve.length,realMul:realMul(),queuedChars:Math.round(pendingChars()),backlogSecs:+backlogSecs().toFixed(1),
   current:cur?.text||null,deadlineIn:deadline?+(deadline-now()).toFixed(1):null,cps:+cps.toFixed(2),voices:voices().map(v=>v.name),learned:{...learned},stats:{...stats},lastError})});
 })();
