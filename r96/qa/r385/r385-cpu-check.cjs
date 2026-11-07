@@ -2,7 +2,7 @@
 const ROOT=path.resolve(__dirname,'../../..'),R=path.join(ROOT,'r96');let n=0,bad=0;const ok=(c,m)=>{n++;if(!c){bad++;console.log('FAIL',m);}};
 const RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8'),CS=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8');const src=CS('mob-moves-r385.js');
 ok(RT('mob-moves-r385.js')===src,'runtime-text 사본 = client-source');
-const html=RT('index.html');ok(/<script src="\.\/voice-r381\.js"><\/script><script src="\.\/mob-moves-r385\.js"><\/script>/.test(html)&&html.split('mob-moves-r385.js').length===2,'스크립트 태그 한 번, R381 음성 뒤(R380 makeRoom 감싸기 바깥)');
+const html=RT('index.html');ok(/<script src="\.\/voice-r381\.js"><\/script><script src="\.\/cinema-sync-r384\.js"><\/script><script src="\.\/mob-moves-r385\.js"><\/script>/.test(html)&&html.split('mob-moves-r385.js').length===2,'스크립트 태그 한 번, R381 음성·R384 영화 동기 뒤(R380 makeRoom 감싸기 바깥)');
 ok(fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'mob-moves-r385.js',"),'공개 확인 목록');
 ok(JSON.parse(fs.readFileSync(path.join(R,'runtime-inputs.json'),'utf8')).textPaths.includes('mob-moves-r385.js'),'런타임 입력 목록');
 ok(/r385\/r385-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')),'Pages CPU 검사 줄');

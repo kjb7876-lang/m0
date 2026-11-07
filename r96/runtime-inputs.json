@@ -5815,6 +5815,7 @@
     "assets/r381/voice/fff6366a159bb25b.mp3",
     "assets/r380/mobs/root-stalker-r74-plain.webp",
     "assets/r380/mobs/wrath-hound-v1.webp",
+    "cinema-sync-r384.js",
     "mob-moves-r385.js"
   ],
   "mediaPaths": [
@@ -6890,5 +6891,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "a5b9eb3f205c2fcc71efa72b7a7ff1ad442f902e2168175b245a3d18fa1307b3"
+  "runtimeManifestSHA256": "59a33091b0df2ef9e74945b9e9123ea39e0750a686ecd0d6447af5837b6e29cf"
 }
