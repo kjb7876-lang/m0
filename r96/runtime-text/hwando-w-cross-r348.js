@@ -2,7 +2,10 @@
 //  사용자: "환도 w스킬 사용시 원안에 초록색선으로친거처럼 십자가베기 같이일어난다음(원이랑비슷한색상) 원밖 초록십자가 나온지역에
 //   플레이어가 0.7초등장(분신) 그후 십자가베기가 일어나면서 그근방 적에게 스플레시대미지일어나고 빨간작은원친거3개 거기서 나오는.)이런 도형이펙트 없애줘".
 //  ① 큰 원(R292 띠 hwando/w, R302 재채색)은 그대로 둔다 — 기준 '원'.
-//  ② 원 안: 영웅을 지나는 세로·가로 칼 베기 한 쌍(iai-cut + slashline, 원과 같은 은백 + 골드 교차점). 화면 기준 원 반지름에 맞춘다.
+//  ② 원 안: 영웅을 지나는 세로·가로 칼 베기 한 쌍(iai-cut + slashline, 원과 같은 은백 + 골드 교차점)이 정십자가(위 짧고 아래 긴)를 긋는다. 화면 기준 원 반지름에 맞춘다.
+//     R425(사용자 2026-11-08 "환도영웅 분신7개나오고 십자베기하는거 십자를-십자가로"): 예전 '+'(가로 칼이 한가운데·세로와 같은 길이) 대신
+//     가로 칼을 바닥 십자가 그림(fx-sprites 'cross' 256×384, 교차점이 위에서 33.85%)과 같은 비율로 올리고 줄인다 — 원 안·분신 7 모두.
+//     세로 칼은 그대로 ±arm, 교차점은 중심에서 0.323·arm 위, 가로 칼 반폭 0.667·arm. 회전·뒤집기 없음(역십자 금지), 교차점 반짝임도 돌리지 않는다.
 //  ③ 원 밖 7곳(우리 편 숫자 7)에 환도 분신(그 순간 영웅 몸 그림을 은빛 반투명으로)이 0.7초 서 있다가 그 자리에서 십자 베기 →
 //     반경 1.5칸 안의 적에게 스플래시(W 원 피해의 0.45배 = attackPower×1.25×0.45, 분신 하나가 한 적을 한 번). 원 밖의 적 곁을 먼저 고르고,
 //     모자라면 원 둘레 바깥에 고르게(벽·막힌 자리 건너뜀). 피해는 엔진 hitEnemy(난이도·노출·보스 교전 규칙 그대로), 벽 너머는 clearLine 으로 막는다.
@@ -15,7 +18,7 @@
 //  끄기: localStorage['storyworld.r348.hwandoW']='{"on":false}' (예전 연출로)
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_W_CROSS_R348__)return;
-const REV='R348-hwando-w-cross-2',KEY='storyworld.r348.hwandoW';
+const REV='R348-hwando-w-cross-3',KEY='storyworld.r348.hwandoW';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const CFG=Object.freeze({clones:7,ringWorld:3.15,ringCell:115/384*10/* R292 띠 칸 반지름(px)/칸 → 화면 칸 수 */,cloneScreen:1.42,maxWorld:7.5,enemyScreen:2.7,
  crossLife:.5,cloneIn:.2,hold:.7,slashLife:.42,splash:1.5,mult:1.25*.45,offset:.85});
@@ -76,10 +79,13 @@ function strike(c,s){s.hit=true;stats.slashes++;if(!solo()||!valid(c)||typeof hi
   if(ok&&old>e.hp){stats.hits++;stats.damage+=old-e.hp;try{if(typeof floatText==='function')floatText(Math.round(old-e.hp),e.x,e.y);}catch(_){}}}}
 // ---- 그리기 --------------------------------------------------------------------------------------------------
 function cut(S,x0,y0,x1,y1,th,a){S.along('iai-cut',PAL,x0,y0,x1,y1,th,{alpha:a*.9,blend:'screen',overHero:true});S.along('slashline',PAL,x0,y0,x1,y1,th*.42,{alpha:a,blend:'screen',overHero:true});stats.draws+=2;}
-// 세로(위→아래) 먼저, 가로(왼→오른) 0.06초 뒤 — 칼이 지나가며 길어지고(0.12초) 머문 뒤 사라진다
-function crossSlash(S,cx,cy,arm,age,life,th){for(let k=0;k<2;k++){const v=(age-k*.06)/life;if(v<=0||v>=1)continue;const g=smooth(v/.24),a=v<.45?1:1-smooth((v-.45)/.55),L=2*arm*(.08+.92*g);
-  if(k)cut(S,cx-arm,cy,cx-arm+L,cy,th*(1-.35*v),a);else cut(S,cx,cy-arm,cx,cy-arm+L,th*(1-.35*v),a);}
- const v=age/life;if(v>.08&&v<.8){const a=1-smooth((v-.3)/.5);S.draw('flare',GOLD,cx,cy,th*1.9,th*1.9,{alpha:.7*a,angle:v*2,blend:'screen',overHero:true});S.draw('glow',PAL,cx,cy,th*2.6,th*2.6,{alpha:.35*a,blend:'screen'});stats.draws+=2;}}
+// 세로(위→아래) 먼저, 가로(왼→오른) 0.06초 뒤 — 칼이 지나가며 길어지고(0.12초) 머문 뒤 사라진다.
+// 정십자가: 세로 칼 ±arm, 가로 칼은 교차점 by(중심에서 arm×BAR_UP 위)에서 반폭 arm×BAR_HALF — 바닥 십자가 그림과 같은 비율(위 0.677·아래 1.323·양옆 0.667).
+const BAR_UP=1-2*.3385,BAR_HALF=256/384;
+function crossSlash(S,cx,cy,arm,age,life,th){const by=cy-arm*BAR_UP,hw=arm*BAR_HALF;
+ for(let k=0;k<2;k++){const v=(age-k*.06)/life;if(v<=0||v>=1)continue;const g=smooth(v/.24),a=v<.45?1:1-smooth((v-.45)/.55),grow=.08+.92*g;
+  if(k)cut(S,cx-hw,by,cx-hw+2*hw*grow,by,th*(1-.35*v),a);else cut(S,cx,cy-arm,cx,cy-arm+2*arm*grow,th*(1-.35*v),a);}
+ const v=age/life;if(v>.08&&v<.8){const a=1-smooth((v-.3)/.5);S.draw('flare',GOLD,cx,by,th*1.9,th*1.9,{alpha:.7*a,blend:'screen',overHero:true});S.draw('glow',PAL,cx,by,th*2.6,th*2.6,{alpha:.35*a,blend:'screen'});stats.draws+=2;}}
 function drawClone(c,s,age){const S=SP(),b=c.body,q=project(s.x,s.y),h=H(),u=unit();if(!q)return;
  const tIn=age-CFG.cloneIn,tSl=tIn-CFG.hold;if(tIn<0)return;
  const vis=tIn<.12?smooth(tIn/.12):tSl<0?1:1-smooth(tSl/.3);

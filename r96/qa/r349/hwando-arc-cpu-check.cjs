@@ -6,7 +6,7 @@ const idx=RT('index.html');assert(idx.split('"./hwando-arc-r349.js"').length===2
 assert(fs.existsSync(path.join(root,'runtime-text/assets/r349/hwando-arc.webp')));ok('symmetric arc asset present');
 // R277 정책
 {const W={};new Function('window','localStorage',RT('hwando-r277.js'))(W,{getItem:()=>null,setItem(){}});const P=W.__STORYWORLD_HWANDO_R277__;
- assert.strictEqual(P.attackDir('n',0),'n');assert.strictEqual(P.attackDir('e',0),'e');assert.strictEqual(P.attackDir('s',9),'e');assert.strictEqual(P.attackDir('s',-9),'w');assert.strictEqual(P.attackDir('s',0),'w');ok('attack: up stays up, down → left/right by side (else last side)');
+ assert.strictEqual(P.attackDir('n',0),'e');assert.strictEqual(P.attackDir('e',0),'e');assert.strictEqual(P.attackDir('s',9),'e');assert.strictEqual(P.attackDir('s',-9),'w');assert.strictEqual(P.attackDir('s',0),'w');assert.strictEqual(P.attackDir('n',-9),'w');assert.strictEqual(P.attackDir('n',9),'e');ok('attack: R425 up and down → left/right by side (else last side)');
  assert.strictEqual(P.walkDir('n',0),'n');assert.strictEqual(P.walkDir('s',3),'e');assert.strictEqual(P.walkDir('s',0),'e');assert.strictEqual(P.walkDir('w',0),'w');assert.strictEqual(P.walkDir('s',.1),'w');assert.strictEqual(P.down(),'w');ok('walk: no down clip — straight down keeps the last left/right');}
 {const s=RT('hwando-r271.js');assert(/function draw\(rec,st,best,anim,dir,frame,opt=\{\}\)\{if\(dir==='s'\)\{const P=P277\(\);if\(P\?\.down\)dir=P\.down\(\);\}/.test(s)&&/S\.dir=P\?\.walkDir\?P\.walkDir\(S\.walkDir,S\.sx\):S\.walkDir/.test(s));ok('R271 never draws a down (s) clip and asks R277 for the walk direction');}
 // R349 호

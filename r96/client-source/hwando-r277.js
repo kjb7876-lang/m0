@@ -9,7 +9,7 @@
 // 끄기(R271 그대로): localStorage['storyworld.r277.hwando']='{"on":false}'
 (()=>{'use strict';
 if(window.__STORYWORLD_HWANDO_R277__)return;
-const REV='R277-hwando-2',KEY='storyworld.r277.hwando';
+const REV='R277-hwando-3',KEY='storyworld.r277.hwando';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
 const stats={idleHold:0,upAttack:0,attack:0};let lastH='e';
 // 대기: 걷기 클립 마지막 칸
@@ -17,7 +17,9 @@ function idle(dir){stats.idleHold++;return {anim:'walk',dir,frame:-1};}
 // R349(사용자 2026-11-05 "환도영웅 이동및 공격모션을 위,좌,우로만"): 이동·공격·피격 모두 위(n)·좌(w)·우(e) 세 방향.
 //  아래(s) → 가로 성분(dx 화면 px) 부호, 작으면 마지막 가로 방향(좌·우). 위 공격은 R242 공격 N 원화(R283 색 맞춤)를 그대로 쓴다.
 const side=(dx,th)=>{const d=Math.abs(+dx||0)>th?(dx>0?'e':'w'):lastH;lastH=d;return d;};
-function attackDir(dir,dx){stats.attack++;if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n'){stats.upAttack++;return 'n';}stats.downAttack=(stats.downAttack||0)+1;return side(dx,2);}
+// R425(사용자 2026-11-08 "환도영웅 멈춰서 위나 아래 공격할 때 예전 모션 나오는 문제 — 공격 시에는 항상 좌나 우 공격 모션이 나가도록"):
+//  위 공격도 옛 R242 공격 N 원화 대신 아래와 같은 규칙(겨눈 적의 화면 가로 차이 부호, 작으면 마지막 좌·우)으로 좌·우 공격을 쓴다. 이동·피격의 위(n) 그림은 그대로.
+function attackDir(dir,dx){stats.attack++;if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n'){stats.upAttack++;return side(dx,2);}stats.downAttack=(stats.downAttack||0)+1;return side(dx,2);}
 function walkDir(dir,vx){if(dir==='e'||dir==='w'){lastH=dir;return dir;}if(dir==='n')return 'n';stats.downWalk=(stats.downWalk||0)+1;return side(vx,.6);}
 const down=()=>lastH;
 function face(dir){if(dir==='e'||dir==='w')lastH=dir;}

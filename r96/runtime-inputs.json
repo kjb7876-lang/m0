@@ -6034,7 +6034,25 @@
     "assets/r430/index.json",
     "guide-clear-r426.js",
     "doors-fit-r413.js",
-    "props-tidy-r412.js"
+    "props-tidy-r412.js",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+    "assets/r425/gaze.json",
+    "assets/r425/hunter/attack-l.webp",
+    "assets/r425/hunter/attack-r.webp",
+    "assets/r425/hunter/index.json",
+    "assets/r431/black-burst.webp",
+    "assets/r431/black-flare.webp",
+    "assets/r431/black-trail.webp",
+    "assets/r431/black-wreath.webp",
+    "assets/r431/index.json",
+    "boss-arena-r431.js",
+    "combat-flow-r425.js",
+    "slayer-blood-r425.js"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7109,5 +7127,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4a1276ce3c8a89d4cc4753024f641522efd2f3cfd24e19d617ff80cc04c3eca9"
+  "runtimeManifestSHA256": "95f4d52c9a67cd447117c01416acc78adec3c572c4042cd19039af765b69ed2c"
 }

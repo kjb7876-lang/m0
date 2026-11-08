@@ -72,7 +72,7 @@ function heroVeil(x,y,w,h,piv,o){if(!veilOn||!heroBox())return 1;
 // ---- drawing ------------------------------------------------------------------------------
 // Draws sprite `name` with its pivot at (x,y), size w×h px. o: angle (after squash), squash
 // (y scale applied before the rotation, for ground-plane art), flip, alpha, blend, frame, pivot.
-const FILT=[];
+const FILT=[];const UPRIGHT=new Set(['cross','runecross']);
 function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)return false;
  if(!(Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(w)&&Number.isFinite(h))||Math.abs(w)<.5||Math.abs(h)<.5)return true;
  const alpha=o.alpha??1;if(!(alpha>.004))return true;
@@ -82,7 +82,7 @@ function draw(name,F,x,y,w,h,o={}){if(!enabled||typeof ctx==='undefined'||!ctx)r
  const m=META[name];if(!m)return false;const P=pal(F),c=tinted(name,P);if(!c){stats.misses++;return false;}
  const n=m[3],fr=n>1?((Math.floor(o.frame||0)%n)+n)%n:0,rows=ROWS.has(name),fw=rows?c.width:c.width/n,fh=rows?c.height/n:c.height,sx=rows?0:fr*fw,sy=rows?fr*fh:0,piv=o.pivot||m[2];
  const veil=o.overHero?1:heroVeil(x,y,w,h,piv,o);
- ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle)ctx.rotate(o.angle);if(o.flip)ctx.scale(-1,1);
+ ctx.save();try{ctx.translate(x,y);if(o.squash&&o.squash!==1)ctx.scale(1,o.squash);if(o.angle){if(UPRIGHT.has(name)){/* R425: 십자가는 늘 정방향(위 짧고 아래 긴) — 사용자 2026-11-08 "절대로 역이 되면 안 됨". 평면 회전 대신 세로축 회전(가로 폭만 cos) */const k=Math.cos(o.angle);ctx.scale((k<0?-1:1)*Math.max(.18,Math.abs(k)),1);stats.upright=(stats.upright||0)+1;}else ctx.rotate(o.angle);}if(o.flip)ctx.scale(-1,1);
   /* R181: 큰 덧셈(lighter) 조각이 겹치면 흰색으로 타 버려 영웅이 안 보이던 것(환도·서하 고유기술 등) — 영웅 키 1.3배보다 큰 덧셈 조각만 넓이에 반비례해 옅게(최대 ×.35) */
   let tame=1;if(!o.blend||o.blend==='lighter'){const hh=(typeof actorHeight==='function'?actorHeight():60)*1.3,ar=Math.abs(w*h)/(hh*hh);if(ar>1){tame=Math.max(.35,1/ar);stats.tamedBig=(stats.tamedBig||0)+1;}
    /* 좁은 기둥 여러 개가 나란히 겹쳐 하얗게 되는 것(미카엘라 고유기술 빛기둥 등): 한 프레임 덧셈 넓이 합이 영웅 넓이의 3배를 넘으면 넘친 만큼 옅게 */
