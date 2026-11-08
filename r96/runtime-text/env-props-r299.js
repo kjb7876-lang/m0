@@ -20,7 +20,8 @@ const DECAL={'blood-dried':{tiles:1.7,alpha:.52},'blood-dragged':{tiles:2.0,alph
 // 소품·큰 조형물: 키(px, zoom 1 · 영웅 66) · wall=뒷벽에 붙임. 헤드리스 화면 확인(R299)에서 바닥 소품이 어두운 바닥에 묻혀 작은 것은 키를 올렸다.
 // 부적 문짝 조각은 파일 이름을 seal-plank 로 둔다(R189 doors 가 경로의 'door' 낱말을 문으로 보고 벽에 붙이므로).
 const PROP={bed:{h:46},cart:{h:44},mirror:{h:56,wall:1},candles:{h:40},'chained-pillar':{h:62},suitcase:{h:30},diary:{h:22},doll:{h:24},'prayer-stand':{h:34},'seal-plank':{h:30,doorGap:6},
- arch:{h:122,big:1},obelisk:{h:120,big:1},tree:{h:170,big:1},statue:{h:92,big:1}};
+ arch:{h:140,big:1},obelisk:{h:136,big:1},// R414: 건축물(성당 아치·오벨리스크)은 영웅(66px)의 2배 이상 — 사용자 2026-11-08
+ tree:{h:170,big:1},statue:{h:92,big:1}};
 const THEME={
  hospital:{decal:['blood-dried','blood-dragged','papers'],prop:['bed','cart','mirror','doll','suitcase'],big:[]},
  cathedral:{decal:['stone-cracked','papers','blood-dried','soot'],prop:['candles','chained-pillar','diary','prayer-stand','seal-plank'],big:['arch','statue']},
