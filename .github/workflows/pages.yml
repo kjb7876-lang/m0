@@ -414,6 +414,8 @@ jobs:
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
         run: node r96/qa/r409/r409-cpu-check.cjs
+      - name: R420 view options (brightness slider, text size, portal label fade near hero, lazy hero awakening art) CPU check
+        run: node r96/qa/r420/r420-cpu-check.cjs
       - name: R410 remaining R248 pixel mobs -> Drive painted candidates (40) + fall/seven-pillars renames CPU check
         run: node r96/qa/r410/r410-cpu-check.cjs
       - name: R411 Drive core24 skill/hit sheets (boss impacts vs hero hits) CPU check
