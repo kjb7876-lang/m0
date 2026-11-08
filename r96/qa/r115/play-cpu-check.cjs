@@ -33,6 +33,22 @@ check('사몽 lines: 3 in 4 rerouted through dense clusters, weighted, rest rand
 check('skill-upgrade collection: groups, levels, +1 buttons, tier/W/E/R bars, view toggle',/스킬 강화 모음/.test(P)&&/data-r115up/.test(P)&&/data-r115view/.test(P)&&/r115bar/.test(P));
 // ⑨ 벽
 check('non-samong walls: varied heights, walls beside doors stand above the door',/DOOR\+\.45/.test(P)&&/L\.samongR103\|\|L\.samongR115/.test(P));
+// R413: 벽 높이는 3D 벽을 짓기 전에(draw 앞) 정하고, 높이가 바뀐 벽의 묵은 모양은 다시 쓰지 않는다
+{const seen=[];const t={idleGeometry:new Map(),idleGeometryBytes:20,geometryBytes:()=>10,activated:0,activateTerrain(row){this.activated++;}};
+ const geo=h=>{const g={disposed:false,boundingBox:{min:{y:-h/2},max:{y:h/2}},dispose(){this.disposed=true;}};return g;};
+ const L={walls:[{id:'w1',x:1,y:1,width:2,depth:.24,height:1.3},{id:'w2',x:12,y:12,width:2,depth:.24,height:2.7},{id:'w3',x:20,y:20,width:2,depth:.24,height:3.4}],doors:[{x:1,y:1.6}]};
+ const sb={window:{},localStorage:{getItem:()=>null,setItem(){}},document:{getElementById:()=>null,head:{appendChild(){}},createElement:()=>({})},tick(){},drawEnemy(){},
+  draw(){seen.push(L.walls.map(w=>w.height));},started:true,player:{x:0,y:0,hp:1},room:{id:'x',exploration:L,props:[],enemies:[]},
+  DOMPoint:class{constructor(x,y){this.x=x;this.y=y;}},console,Math,JSON,Object,Array,Number,String,Boolean,Set,Map,WeakMap,WeakSet,RegExp,Error};
+ sb.window=sb;sb.window.__STORYWORLD_PHASE1__={controller:{state:{three:t}}};vm.createContext(sb);vm.runInContext(P,sb);const A=sb.__STORYWORLD_PLAY_R115__;
+ sb.draw();const first=seen[0]||[];
+ check('R413: walls are raised before the first 3D draw builds them (not on a later tick)',first.length===3&&first[0]>=2.7+.45&&first[1]>=2.85&&first[2]===L.walls[2].height&&L.walls[0].r115Wall===1.3&&L.walls[1].r115Wall===2.7,JSON.stringify(first));
+ const old=geo(1.3),ok=geo(L.walls[1].height);t.idleGeometry.set('wall:w1',old);t.idleGeometry.set('wall:w2',ok);
+ t.activateTerrain({descriptor:{terrain:L.walls}});
+ check('R413: a cached wall shape built at the old height is dropped so the engine rebuilds it (no floating wall); fitting shapes are kept',
+  !t.idleGeometry.has('wall:w1')&&old.disposed&&t.idleGeometry.get('wall:w2')===ok&&!ok.disposed&&t.activated===1&&t.idleGeometryBytes===10&&A.inspect().stats.staleWallShapes===1,JSON.stringify(A.inspect().stats));
+ sb.draw();check('R413: the activateTerrain guard is installed once per renderer',t.activated===1&&typeof A.wallFit==='function');}
+check('R115 revision bumped for the R413 wall-timing fix',/R115-play-2/.test(P));
 // R102 바닥 연출 병용
 check('first ground-changing skill FX kept alongside D2S (mixed by situation)',/r115Mix/.test(read('hero-fx-r102.js'))&&/n>=3\|\|t>=5/.test(read('hero-fx-r102.js')));
 // 방향
