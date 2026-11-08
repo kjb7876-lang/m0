@@ -6021,6 +6021,12 @@
     "assets/r411/fx/hit-teleport.webp",
     "assets/r411/fx/index.json",
     "access-r420.js",
+    "slayer-blood-r425.js",
+    "combat-flow-r425.js",
+    "assets/r425/hunter/attack-l.webp",
+    "assets/r425/hunter/attack-r.webp",
+    "assets/r425/hunter/index.json",
+    "assets/r425/gaze.json",
     "theme-fx-r430.js",
     "assets/r430/arc.webp",
     "assets/r430/blight.webp",
@@ -6028,17 +6034,23 @@
     "assets/r430/fire-loop.webp",
     "assets/r430/fissure.webp",
     "assets/r430/frost.webp",
+    "assets/r430/index.json",
     "assets/r430/mist-loop.webp",
     "assets/r430/rift.webp",
     "assets/r430/tendril.webp",
-    "assets/r430/index.json",
     "guide-clear-r426.js",
     "doors-fit-r413.js",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+    "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
     "boss-arena-r431.js",
-    "assets/r431/black-trail.webp",
-    "assets/r431/black-wreath.webp",
     "assets/r431/black-burst.webp",
     "assets/r431/black-flare.webp",
+    "assets/r431/black-trail.webp",
+    "assets/r431/black-wreath.webp",
     "assets/r431/index.json"
   ],
   "mediaPaths": [
@@ -7114,5 +7126,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "982f235a30a4caaf24e3bfee17519b49bab2b8b6d71f3b35b94805110dd26a9c"
+  "runtimeManifestSHA256": "60eecef899e89065803dc8fec8bacbd3d10918f1b0a9d880c9707916bf4d3c75"
 }

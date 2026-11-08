@@ -34,7 +34,12 @@ function ready(p){try{const row=typeof readyImage==='function'?readyImage(p):nul
 function image(p){const im=ready(p);if(im)return im;try{const t=Date.now();if(t-(asked.get(p)||0)>1000){asked.set(p,t);stats.loads++;if(typeof ensureImages==='function')Promise.resolve(ensureImages([p])).catch(()=>{});else if(typeof addImage==='function')addImage(p);}}catch(e){fail(e);}stats.waiting++;return null;}
 const rawClip=(a,d)=>d==='w'?IDX?.anims?.[a]?.w||null:southIndex?.anims?.[a]?.[d]||null;
 const eReady=()=>!!southIndex&&['walk','attack'].every(a=>{const c=rawClip(a,'e');return !!(c&&ready(SOUTH_BASE+c.file));});
-const clip=(a,d='w')=>d==='s'?rawClip(a,'s'):d==='e'&&eReady()?rawClip(a,'e'):rawClip(a,'w');
+/* R425(사용자 2026-11-08 "우측 공격 이미지를 반전해서 좌측으로 쓰고 원래 좌측 공격 이미지는 보조 자세로만"): 공격은 좌·우 모두 E 원화(좌측 = 반전).
+   옛 W 공격(v22)은 auxClip 으로 스킬·궁극기 보조 자세에만 쓴다. 걷기는 그대로(좌 = v5 W). */
+const clip=(a,d='w')=>d==='s'?rawClip(a,'s'):(d==='e'||(a==='attack'&&d==='w'&&MIRROR_E))&&eReady()?rawClip(a,'e'):rawClip(a,'w');
+const MIRROR_E=true,auxClip=()=>rawClip('attack','w');
+/* R425: 대기 = 우측(E) 대기 칸, 좌측은 반전. 아래로 걷다 멈추면 남향 걷기 중 두 발이 땅에 붙은 칸(3번째, 실측 발 226px·옆 벌림 가장 좁음) */
+const IDLE_S_FRAME=2;function idleClip(){if(S.walkDir==='s'&&southReady()){const A=rawClip('walk','s');if(A)return [A,'s',IDLE_S_FRAME];}if(eReady()){const A=rawClip('walk','e');if(A)return [A,S.h,A.idle_frame??1];}const A=clip('walk',S.h);return [A,S.h,A?.idle_frame??(A?A.n-1:0)];}
 const baseFor=(d,A)=>A?(A===rawClip('walk','w')||A===rawClip('attack','w')?BASE:SOUTH_BASE):d==='s'||(d==='e'&&eReady())?SOUTH_BASE:BASE;
 let preloadedRoom=null;
 function preload(force){if(!IDX||!isHero())return;loadSouth();let r=null;try{r=room;}catch(_){}if(!force&&preloadedRoom===r)return;preloadedRoom=r;for(const a of ['walk','attack'])for(const d of ['w','s','e']){const A=rawClip(a,d);if(A?.file)image(baseFor(d,A)+A.file);}}
@@ -95,7 +100,7 @@ function draw(rec,st,best,anim,dir,frame,label,A0){let A=A0||clip(anim,dir),p=A&
  label=label||anim;
  if(!im){stats.skipped++;return false;}
  const n=A.n,fr=((frame%n)+n)%n,cw=A.cell[0],ch=A.cell[1],col=fr%A.cols,row=Math.floor(fr/A.cols);
- const k=want()/(A.body||180),q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want()*.65),fx=q.x,fy=q.y-lift,f=dir==='e'&&!A.baked?-1:1,[ax,ay]=A.anchor;
+ const k=want()/(A.body||180),q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want()*.65),fx=q.x,fy=q.y-lift,f=dir==='s'?1:((dir==='e')===!!A.baked?1:-1),/* R425: 원화가 보는 쪽(baked=오른쪽)과 그릴 쪽이 다르면 반전 */[ax,ay]=A.anchor;
  const X=v=>fx+f*(v-ax)*k,Y=v=>fy+(v-ay)*k,before=best.image;
  Object.assign(best,{image:im,sourcePath:p,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],
   points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r351:label,r121Walk:label==='walk'});
@@ -114,7 +119,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  if(!southCast&&atk>S.prevAtk+1e-6&&A){const d=aimSide(),SA=clip('attack',d)||A,off=contactStart(SA),rest=SA.ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.69);S.swing={t0:t,dir:d,A:SA,off,scale:Math.max(.36,Math.min(1,cd*.95*1000/rest))};}
  S.prevAtk=atk;
  const moving=t-S.movedAt<.15;
- if(busy){stats.skill++;if(player.dashAnim>0){const d=moving?S.h:aimSide();return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=clip('attack',d)||A;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
+ if(busy){stats.skill++;if(player.dashAnim>0){const d=moving?S.h:aimSide();return draw(rec,st,best,'walk',d,3);}const d=aimSide(),BA=auxClip()||clip('attack',d)||A;stats.aux=(stats.aux||0)+1;return draw(rec,st,best,'attack',d,BA?.contact??3,undefined,BA);}
  if(southCast){const C=clip('attack','s'),pre=C.ms.slice(0,C.contact).reduce((a,b)=>a+b,0),tot=C.ms.reduce((a,b)=>a+b,0),el=southCast.phase==='prepare'?Math.min(pre-1,(t-southCast.t0)*1000):pre+(t-southCast.hitAt)*1000;
   if(el<tot)return draw(rec,st,best,'attack','s',frameAt(C.ms,el,false));southCast=null;}
  if(S.swing){const SA=S.swing.A||A,el=(t-S.swing.t0)*1000/S.swing.scale+S.swing.off,tot=SA.ms.reduce((x,y)=>x+y,0);
@@ -122,7 +127,7 @@ function choose(rec,st){const best=pickBody(rec,st);if(!best)return;const t=T();
  if(moving){const d=S.walkDir==='s'&&southReady()&&!otherAction()?'s':S.h,W=clip('walk',d)||Wk,k=want()/(W?.body||180),per=(W?.stride?.px_per_frame||18)*k;return draw(rec,st,best,'walk',d,Math.floor(S.dist/Math.max(1,per)),undefined,W);}
  if(hurt>0)stats.hurt++;
  const v=enemyVec();if(v)side(v[0],v[1]);
- const Wi=clip('walk',S.h)||Wk;return draw(rec,st,best,'walk',S.h,Wi?.idle_frame??(Wi?Wi.n-1:0),'idle',Wi);}
+ const [Wi,di,fi]=idleClip();return draw(rec,st,best,'walk',di,fi,'idle',Wi||Wk);}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){syncContext();if(southCast&&(!on||!isHero()||!solo()||!(player.hp>0)||otherAction()))cancelSouth('draw-interrupted');const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&st>=0&&solo()&&isHero()&&player.hp>0){loadIndex();if(IDX)choose(rec,st);}}catch(e){fail(e);}return r;};}
 loadIndex();

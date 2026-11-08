@@ -422,6 +422,8 @@ jobs:
         run: node r96/qa/r410/r410-cpu-check.cjs
       - name: R411 Drive core24 skill/hit sheets (boss impacts vs hero hits) CPU check
         run: node r96/qa/r411/r411-cpu-check.cjs
+      - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
+        run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R431 boss-room center fights + theme boss skill 6s + touch status/DoT + black-flame prop throws CPU check
