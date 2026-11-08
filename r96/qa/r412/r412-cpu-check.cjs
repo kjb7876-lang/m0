@@ -236,6 +236,7 @@ ok('R329 matches the shadow to the R111/R412 draw spot (r111To), not x/y, and ta
 {const cells=[];for(let x=0;x<20;x++)for(let y=0;y<20;y++)cells.push([x,y]);blockedFn=()=>false;wallsFn=()=>[{dx:0,dy:-1,side:'-y',d:1}];
  const el=[0,1,2].map(i=>({id:'r74:o:scenery:'+i,x:2+i*8,y:2,path:'assets/props/v290/broken_street_lamp.webp'})),cand={id:'r80:scene:o:9',x:10,y:12,path:'assets/world-r80/r80-064.webp',r74Prop:'candle'},stone={id:'r80:scene:o:10',x:10.5,y:12.5,path:'assets/world-r80/r80-014.webp'};
  const r={id:'out',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[...el,cand,stone]};X.set({lamps:true});X.apply(r,{samples:()=>null});
+ {const sc={id:'r80:scene:o2:4',x:3,y:3,path:'assets/world-r80/r80-064.webp',r74Prop:'candle',r80Dressing:true},l2=[0,1,2].map(i=>({id:'r74:o2:scenery:'+i,x:4+i*8,y:4,path:'assets/props/v290/broken_street_lamp.webp'}));const r2={id:'out2',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[sc,...l2]};X.apply(r2,{samples:()=>null});ok('canon scene props (R80/R81 scene dressing) are never thinned even if they are lamps',r2.props.includes(sc),{kept:r2.props.map(p=>p.id)});}
  ok('outdoor thinning keeps at least one flame (candle/brazier/torch) even when it stands beside another prop',r.props.includes(cand)&&X.isFlame(cand)&&!X.isFlame(el[0]),{kept:r.props.map(p=>p.id)});}
 // ⑤ 이웃 파일 맞춤: R300 빛은 보이는 발 자리·R412 ver 로 새로 읽고, R113 은 r111To 가 있으면 자기 자리를 쓰지 않고, R92 등불 종류는 자리 씨앗으로
 {const r300=C('light-atmos-r300.js'),r113=C('play-r113.js'),r92b=C('visual-r92.js');

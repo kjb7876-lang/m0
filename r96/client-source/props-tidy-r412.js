@@ -197,7 +197,9 @@ function unwall(r,rep,sampler=samplesOf,budget=14){const L=r.exploration,avoid=a
  return{pending,waiting};}
 
 // ② 등불 솎기
-function lamps(r,rep,indoor){const L=r.exploration,on=r111On(),F=flipCtx(),list=(r.props||[]).filter(p=>shown(p)&&!untouchable(p)&&!OWN_PAINT(p)&&!p.r117Scene&&Number.isFinite(p?.x+p?.y)&&isLamp(p));stats.lampsSeen+=list.length;rep.lamps=list.length;if(list.length<2)return;
+// 정본 장면에 골라 놓은 서사 소품(R80 장면 소품·R81 장면)은 등불이어도 솎지 않는다(R412-10 심사: dist03 의식 고리 곁 붉은 촛대·화로가 빠져 장면 초점광이 사라짐)
+const SCENE=p=>!!(p&&(p.r80Dressing||/^r8[01]:scene:/.test(String(p.id||''))));
+function lamps(r,rep,indoor){const L=r.exploration,on=r111On(),F=flipCtx(),list=(r.props||[]).filter(p=>shown(p)&&!untouchable(p)&&!OWN_PAINT(p)&&!p.r117Scene&&!SCENE(p)&&Number.isFinite(p?.x+p?.y)&&isLamp(p));stats.lampsSeen+=list.length;rep.lamps=list.length;if(list.length<2)return;
  const floor=(L.floorCells||[]).length||400,SP=indoor?6.5:8,cap=Math.max(indoor?1:2,Math.round(floor/(indoor?110:320)));
  const others=(r.props||[]).filter(q=>shown(q)&&!isLamp(q)&&Number.isFinite(q?.x+q?.y)&&!q.terrainWall).map(q=>footOf(q,on,F));
  const W=R406()?.walls;
