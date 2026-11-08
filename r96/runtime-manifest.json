@@ -24033,6 +24033,286 @@
       "sha256": "82e29fa2cbc9f43310c9c19a1b02ee99d002fcfe0cad5aaa9afc2fdd2cfaaaab"
     },
     {
+      "path": "assets/r410/mobs/index.json",
+      "bytes": 115983,
+      "sha256": "1ad011bb53050a2f0ae55020415f8e9f9dfe422b45d49ebb3f1ec8f35d2a5183"
+    },
+    {
+      "path": "assets/r410/mobs/m007.webp",
+      "bytes": 527710,
+      "sha256": "d9226afd10b67c6cc7c0b36d3d82961f54574cd841dfa7a77fdb2774e75ee3a1"
+    },
+    {
+      "path": "assets/r410/mobs/m009.webp",
+      "bytes": 380814,
+      "sha256": "0d98dc23e21459d5aaacb61b9a04b4b7e8b0c006a4b3355f43e6a706d00d76d6"
+    },
+    {
+      "path": "assets/r410/mobs/m011.webp",
+      "bytes": 231686,
+      "sha256": "ae596e8b481c7430cdb47018aa97b0febf54b61e8a3d4f8102139cde3d9b171b"
+    },
+    {
+      "path": "assets/r410/mobs/m013.webp",
+      "bytes": 382876,
+      "sha256": "e52c2d52fb6a5530f9ee3c1552cf2f8470dc939517cc07e64edd52ffbe2eaac5"
+    },
+    {
+      "path": "assets/r410/mobs/m015.webp",
+      "bytes": 249754,
+      "sha256": "b6c4b274ae6f02f87ca18117daa25e3667c3566a23bb1035929394a2a09065d8"
+    },
+    {
+      "path": "assets/r410/mobs/m016.webp",
+      "bytes": 365856,
+      "sha256": "54eb2a2a9ed5e746155b16c3757595a88dbdcc6dc5a844982cc700b96378ca14"
+    },
+    {
+      "path": "assets/r410/mobs/m018.webp",
+      "bytes": 216908,
+      "sha256": "0c7e3bc7c963cc599e8cd91acef153de8fd75313491c4711fd7adb5406e78ebb"
+    },
+    {
+      "path": "assets/r410/mobs/m027.webp",
+      "bytes": 602446,
+      "sha256": "25c080eb6b2cb02ad77fd5f7190b6fbc4332865fe5fa3a32babbeaa403dc9e00"
+    },
+    {
+      "path": "assets/r410/mobs/m028.webp",
+      "bytes": 380016,
+      "sha256": "1ed76be6cc3e0a5505feb74b89bcb2fa036c98c8c7d4a1587a3847b899fa13bf"
+    },
+    {
+      "path": "assets/r410/mobs/m029.webp",
+      "bytes": 151530,
+      "sha256": "e1520c99fc8607be21bff12e2c6fcd3354f38081900f5fe0a8c9a35250974b3d"
+    },
+    {
+      "path": "assets/r410/mobs/m033.webp",
+      "bytes": 287032,
+      "sha256": "516a0919a794a2cd19f840408473906966a78ac438eb091d0fcbc5cf39b25ec6"
+    },
+    {
+      "path": "assets/r410/mobs/m039.webp",
+      "bytes": 262854,
+      "sha256": "d99dbe3a115cf14ce7ff39e500de32d0013774613aa6e527ae59247d37e7824f"
+    },
+    {
+      "path": "assets/r410/mobs/m040.webp",
+      "bytes": 272924,
+      "sha256": "c2da9909dcc4d445acb5ea4bc5645af7ef3d702579971a181ad0e27212893d51"
+    },
+    {
+      "path": "assets/r410/mobs/m043.webp",
+      "bytes": 347912,
+      "sha256": "146467cb34f28a07e37cf8e83d060a4418940a4edda82db49bb0182011c2a96b"
+    },
+    {
+      "path": "assets/r410/mobs/m044.webp",
+      "bytes": 246704,
+      "sha256": "0af1a75181099c9a1ca47669f9a22d344246678d9c843ce06d3abebd71c70989"
+    },
+    {
+      "path": "assets/r410/mobs/m045.webp",
+      "bytes": 355324,
+      "sha256": "068e7a74b86183352558437be88e4d78ca9f6e6ca6eb3dbc9fb7803fcc84f6d4"
+    },
+    {
+      "path": "assets/r410/mobs/m046.webp",
+      "bytes": 348610,
+      "sha256": "36174a344da937fa9186081565c101c01deae0eb032bed96a1d1a52de1c64663"
+    },
+    {
+      "path": "assets/r410/mobs/m047.webp",
+      "bytes": 293962,
+      "sha256": "cdf4ea0290a6d1c3710413eebd8429a3f698d8bdd1e740063d03aa5b8126c861"
+    },
+    {
+      "path": "assets/r410/mobs/m048.webp",
+      "bytes": 627872,
+      "sha256": "20a4649fbccd0f364024d3e02d2dacd1e10977860773e6b2b92b53ff046d4668"
+    },
+    {
+      "path": "assets/r410/mobs/m050.webp",
+      "bytes": 257584,
+      "sha256": "1f443b65d501febf74c063ad1ad02106d28c70651c96d5062b6fe7b13aa3093a"
+    },
+    {
+      "path": "assets/r410/mobs/m054.webp",
+      "bytes": 261236,
+      "sha256": "bdf434744f013f6f9371cd3e91213265943d6ef698d436a18c53e201211fba13"
+    },
+    {
+      "path": "assets/r410/mobs/m056.webp",
+      "bytes": 190802,
+      "sha256": "5cbb117398d3478acd6a3f4b49a44ebbacf2faafba5eeb3dc67c86c81dcf750a"
+    },
+    {
+      "path": "assets/r410/mobs/m060.webp",
+      "bytes": 261658,
+      "sha256": "be3b301f1469767eed4771cb5e56b581c6995b9ec9f1231c046d983b7a149517"
+    },
+    {
+      "path": "assets/r410/mobs/m062.webp",
+      "bytes": 281204,
+      "sha256": "37a83a55fb35e607745e8823dd6e85943ee47dce583ac67916deaff30d9ae4e3"
+    },
+    {
+      "path": "assets/r410/mobs/m063.webp",
+      "bytes": 254322,
+      "sha256": "e0db6f7555539f46d17fad914b241ce796f7d3b3b8d2d98f75f2637d1b56caae"
+    },
+    {
+      "path": "assets/r410/mobs/m069.webp",
+      "bytes": 336450,
+      "sha256": "68b4df119165f8a6038638a6ef11d76ecc31279f5f251fd70d51a72417642d4d"
+    },
+    {
+      "path": "assets/r410/mobs/m070.webp",
+      "bytes": 190882,
+      "sha256": "bae94a4438c3ce8874e2def21ee17064b6b8c27769d325fb12bf780cda7eb556"
+    },
+    {
+      "path": "assets/r410/mobs/m071.webp",
+      "bytes": 163022,
+      "sha256": "fb2e3598c18ec20e5741654e382d258c26bd2ca09b097dad8a546354b4ea8e35"
+    },
+    {
+      "path": "assets/r410/mobs/m072.webp",
+      "bytes": 228436,
+      "sha256": "5b23618da3a4fa8ab497a2ab4fe9abe17ce27a8f9e2abfd41fe85ec4e535df50"
+    },
+    {
+      "path": "assets/r410/mobs/m075.webp",
+      "bytes": 247588,
+      "sha256": "c26d560feef21c612e82143cae030827af91ddf5fe74602c65ddd2776145d13e"
+    },
+    {
+      "path": "assets/r410/mobs/m078.webp",
+      "bytes": 292206,
+      "sha256": "dfc9fc41de34ed8b859e020b9a9df7ac2c8ff9d2340440d5bff878a8424791c4"
+    },
+    {
+      "path": "assets/r410/mobs/m080.webp",
+      "bytes": 172816,
+      "sha256": "17f342b966955ceb22a5d76ed8da063c9eb5bf8920fcdb40a254d831ab944613"
+    },
+    {
+      "path": "assets/r410/mobs/m084.webp",
+      "bytes": 178896,
+      "sha256": "cc3876c119ae8313bd4d77c4216874641885a911fb9cb9542a390397959273d8"
+    },
+    {
+      "path": "assets/r410/mobs/m091.webp",
+      "bytes": 401760,
+      "sha256": "aab11841e4c4258c73f86fd2df73db0f4af65143743d772e0f7d15a83eb15e91"
+    },
+    {
+      "path": "assets/r410/mobs/m092.webp",
+      "bytes": 180056,
+      "sha256": "3b1a202ead3fce3cd3a1c5ee3893d66e9221dfe4bdf8d9aae43894c9f446d8c6"
+    },
+    {
+      "path": "assets/r410/mobs/m094.webp",
+      "bytes": 182050,
+      "sha256": "01d2990a889a9c3afc73a267e3a28748edca06bd6569fe1a9680559c0407f356"
+    },
+    {
+      "path": "assets/r410/mobs/m096.webp",
+      "bytes": 194464,
+      "sha256": "36387740c051892c3e4df9a37ea51dac6339a23f5666cd012197e411f6971305"
+    },
+    {
+      "path": "assets/r410/mobs/m098.webp",
+      "bytes": 204788,
+      "sha256": "7f00d92ac91acaea302fcd5dce0a00af8598651084d6c24430386a733edc46f7"
+    },
+    {
+      "path": "assets/r410/mobs/m099.webp",
+      "bytes": 356846,
+      "sha256": "5b27d164c8715229077281c4b03240f1367810ef9cb8d7ad2cdcbea361f46355"
+    },
+    {
+      "path": "assets/r410/mobs/m100.webp",
+      "bytes": 247870,
+      "sha256": "2227cad94b7fac7a3f940e5c3a5708e2c8e410b07e8fa01aae99cb72bfed39a8"
+    },
+    {
+      "path": "assets/r411/fx/boss-bone-spikes.webp",
+      "bytes": 273176,
+      "sha256": "6f80b5e89faaa8d5acaabc89f8cd49bff7fcea96938f91673e6354b7d2b7fb46"
+    },
+    {
+      "path": "assets/r411/fx/boss-corpse-explosion.webp",
+      "bytes": 399768,
+      "sha256": "f4fa4318d814f63e2435a2469ceb799b7827772254608ef73aaa4ebb0bb4571b"
+    },
+    {
+      "path": "assets/r411/fx/boss-fire-wall.webp",
+      "bytes": 291248,
+      "sha256": "950bddf0b1fe236ce629e7dca877bcaa7bad68e9c92dec779fd679bc64b3f397"
+    },
+    {
+      "path": "assets/r411/fx/boss-gravity-well.webp",
+      "bytes": 253890,
+      "sha256": "6799ff6c61d65c274063a1cbd1a064330d2e2801df59b05a4eb473cde7ac6560"
+    },
+    {
+      "path": "assets/r411/fx/boss-ground-fissure.webp",
+      "bytes": 488526,
+      "sha256": "1ad8261c12dacd9b3920bb8d5f440b52600d7d2388e9eae2f7bcfffd79c9df7b"
+    },
+    {
+      "path": "assets/r411/fx/boss-infection-mark.webp",
+      "bytes": 288280,
+      "sha256": "65b7083cc9aa6c01767da88d030c9b94c822350b51df0fed4a9efa0f13a59d0a"
+    },
+    {
+      "path": "assets/r411/fx/boss-lightning-strike.webp",
+      "bytes": 330682,
+      "sha256": "e8ed76536e604a1e1a7e55adace856c82da15ed3b83ba2c0956a84e7d0388e49"
+    },
+    {
+      "path": "assets/r411/fx/boss-meteor.webp",
+      "bytes": 305554,
+      "sha256": "abb71df094c271b8dc440e923c62835a0a79be1f0861f1db8916d2638d41c543"
+    },
+    {
+      "path": "assets/r411/fx/boss-tentacle-bind.webp",
+      "bytes": 356824,
+      "sha256": "b0bc0a4ad472b4b580c1cdbe1c73cc755981d4a45b998a9179f1fb45c3b5e745"
+    },
+    {
+      "path": "assets/r411/fx/hit-chain-lightning.webp",
+      "bytes": 234370,
+      "sha256": "704c0dd294e1ce5f3ed09c2bd2d068e52fd961be8d51432c7690691ff7607e10"
+    },
+    {
+      "path": "assets/r411/fx/hit-explosion.webp",
+      "bytes": 277230,
+      "sha256": "9b2fc08aac2d7f1704ca2dd3299f41d0185820bfaeb693cd5d2fa9e52152f01f"
+    },
+    {
+      "path": "assets/r411/fx/hit-fire.webp",
+      "bytes": 312698,
+      "sha256": "a8148691c7b3093d8f9f88977988535d43c40cd150c30fc914421dbf03a3653b"
+    },
+    {
+      "path": "assets/r411/fx/hit-ice-spikes.webp",
+      "bytes": 406992,
+      "sha256": "52c8dbdb26eb565fcbc3ba51fc6b3431cdaa8d78db71fc4b58a0c53106bdc6cd"
+    },
+    {
+      "path": "assets/r411/fx/hit-teleport.webp",
+      "bytes": 203076,
+      "sha256": "6386db3e30ef6b0e82542c60d46a16d9956f41d5382b4b0000e51f98ae7c8761"
+    },
+    {
+      "path": "assets/r411/fx/index.json",
+      "bytes": 9494,
+      "sha256": "116fe0d3a42c005bfd5317028c49d6e6577146b25ecac8ed312763b45d250185"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -32979,8 +33259,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570822,
-      "sha256": "09ad215245ff7e6f5774e330e1df14ee0fe94519ffcab87f8b3075725085c925"
+      "bytes": 6570909,
+      "sha256": "2ec9d4a84d5faf08ab7ff942e7214514a67f02b8c0d098cf32a337b6ee66af17"
     },
     {
       "path": "intro-r140.js",
@@ -33053,6 +33333,11 @@
       "sha256": "02fc09b4708a2c8841fe9947ea0572317a72f707d5386b12fe429048051f6729"
     },
     {
+      "path": "mob-art-r410.js",
+      "bytes": 6184,
+      "sha256": "c97fc9ebbb23e98ad7771d6efa582edf02fb3442a01edb97d72eb12a841fae81"
+    },
+    {
       "path": "mob-art-variants-r306-data.js",
       "bytes": 977015,
       "sha256": "c212e820d5a5716068e9cbfa8c986b837f03459d5021a4bcfedb5274acdc3a87"
@@ -33114,8 +33399,8 @@
     },
     {
       "path": "mob-moves-r385.js",
-      "bytes": 10165,
-      "sha256": "e000bbdb5acbd4172239f8e427a81c7c067d1f322e9d97259877feedb4332ee9"
+      "bytes": 10935,
+      "sha256": "40a84eec655c73128d58002a0b0c4e0523da3a5393783c93928db8fd2ca79355"
     },
     {
       "path": "mob-preload-r260.js",
@@ -33483,6 +33768,11 @@
       "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
     },
     {
+      "path": "skill-sheets-r411.js",
+      "bytes": 9938,
+      "sha256": "c2123e77a9a78ee83e37d2828a9b30582d97eefd4859427c94c2202d8e48e88a"
+    },
+    {
       "path": "skills-r181.js",
       "bytes": 7921,
       "sha256": "47219fdaaeab606f603b60e7269d6860962cba1e2061939ebf7464eea25a6d98"
@@ -33758,9 +34048,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6751,
-  "totalBytes": 1066745216,
-  "webHTMLSha256": "09ad215245ff7e6f5774e330e1df14ee0fe94519ffcab87f8b3075725085c925",
+  "fileCount": 6809,
+  "totalBytes": 1082927712,
+  "webHTMLSha256": "2ec9d4a84d5faf08ab7ff942e7214514a67f02b8c0d098cf32a337b6ee66af17",
   "largest": [
     {
       "path": "index.html",

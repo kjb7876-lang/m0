@@ -414,6 +414,10 @@ jobs:
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
         run: node r96/qa/r409/r409-cpu-check.cjs
+      - name: R410 remaining R248 pixel mobs -> Drive painted candidates (40) + fall/seven-pillars renames CPU check
+        run: node r96/qa/r410/r410-cpu-check.cjs
+      - name: R411 Drive core24 skill/hit sheets (boss impacts vs hero hits) CPU check
+        run: node r96/qa/r411/r411-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
