@@ -26,25 +26,6 @@
    "bytes": 21724,
    "sha256": "0aa019e17d0ba20125e8a861b97cc7da51cee285351870bbed8da6302a716545"
   },
-  "red-garden-bridge": {
-   "zone": "sz115-RD-1",
-   "height": 136,
-   "path": "assets/r414/buildings/red-garden-bridge.webp",
-   "png": "R07-red-garden-arched-bridge.png",
-   "dotsId": "R07-red-garden-arched-bridge",
-   "dotsStatus": "REVIEW_BRIDGE_STATIC_CANDIDATE_RUNTIME_UNVERIFIED",
-   "canonLines": [
-    2670
-   ],
-   "manifestChecked": true,
-   "pngSHA256": "bcfb3f5ea13f791516d4f66d8a32d70f332f4dc19bd742d35738be7af34969bd",
-   "size": [
-    600,
-    385
-   ],
-   "bytes": 34748,
-   "sha256": "81484b2013a7f1d71324450b41a3a513231379c93050c6067f47225cdf649f46"
-  },
   "corner-tavern": {
    "zone": "sz115-S05-2",
    "height": 175,
@@ -521,6 +502,13 @@
     760
    ]
   },
+  "R07-red-garden-arched-bridge": {
+   "reason": "건널 물·틈 없이 공허 위에 홀로 선 다리(7분야 심사 R414-3) — 물가 지역이 생기면 다시 검토",
+   "dotsStatus": "REVIEW_BRIDGE_STATIC_CANDIDATE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2670
+   ]
+  },
   "R00-damaged-platform-pa-speaker": {
    "reason": "R406 벽 자리가 목표 표식(기억 표식)·길잡이 화살표 시작점과 겹침(7분야 심사 R414-2)",
    "dotsStatus": "REVIEW_STATIC_PROP_RUNTIME_UNVERIFIED",
@@ -535,6 +523,14 @@
     1103,
     1105,
     1205
+   ]
+  },
+  "S05-residence-heavy-entry-door": {
+   "reason": "R406 벽 자리가 목표 표식(C 기억 표식) 바로 뒤라 둘째 출입문처럼 보임(7분야 심사 R414-3)",
+   "dotsStatus": "REVIEW_STATIC_CLOSED_DOOR_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1258,
+    1262
    ]
   },
   "R11-gallery-cathedral-building": {

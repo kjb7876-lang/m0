@@ -41,7 +41,6 @@ BUILDINGS = {
   'S06-polar-access-attack-damaged': ('polar-access-ruin', 'sz115-S06-18', 145),
   'R02-gray-school-building-shell': ('gray-school', 'sz115-RA-4', 190),
   'R02-hospital-admissions-wing': ('hospital-admissions', 'sz115-RA-4', 200),
-  'R07-red-garden-arched-bridge': ('red-garden-bridge', 'sz115-RD-1', 136),
   'R07-low-roof-waterside-house': ('waterside-house', 'sz115-RD-1', 165),
   'KAIR-workshop-attack-damaged': ('black-workshop-ruin', 'sz115-RD-6', 175),
   'R11-gallery-cathedral-damaged': ('gallery-cathedral-ruin', 'sz115-RD-6', 250),
@@ -55,10 +54,11 @@ BUILDINGS = {
 PROPS = {
   'R07-fallen-ceiling-rafters': ('fallen-rafters', 'sz115-RD-1', 'inner', None, 52),
   'S05-residence-streetlamp-unlit': ('residence-lamppost', 'sz115-S05-4', 'inner', None, 140),
-  'S05-residence-heavy-entry-door': ('residence-entry', 'sz115-S05-4', 'wall', 'y', 100),
   'S05-packed-departure-bag': ('departure-bag', 'sz115-S05-4', 'inner', None, 24),
 }
 HELD = {
+  'S05-residence-heavy-entry-door': 'R406 벽 자리가 목표 표식(C 기억 표식) 바로 뒤라 둘째 출입문처럼 보임(7분야 심사 R414-3)',
+  'R07-red-garden-arched-bridge': '건널 물·틈 없이 공허 위에 홀로 선 다리(7분야 심사 R414-3) — 물가 지역이 생기면 다시 검토',
   'S04-steel-elevator-entrance': 'S04 출구 표식 곁에 문이 둘로 보이고 벽 없이 바닥에 홀로 섬(7분야 심사 R414-2)',
   'R00-damaged-platform-pa-speaker': 'R406 벽 자리가 목표 표식(기억 표식)·길잡이 화살표 시작점과 겹침(7분야 심사 R414-2)',
   'teacup-room-floral-porcelain-wall': 'R406 벽 자리가 목표 표식(기억의 전투) 바로 뒤라 영웅·표식 글자를 가림(7분야 심사 R414-2)',

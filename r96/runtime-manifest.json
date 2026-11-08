@@ -24364,8 +24364,8 @@
     },
     {
       "path": "assets/r414/buildings/index.json",
-      "bytes": 18472,
-      "sha256": "64f9246fff5780f1123cf30a24ee5b27d451a8ec155bbb8b316daf1d7977b203"
+      "bytes": 18465,
+      "sha256": "0e7da7b7482772ba4ae89354d700a483ba5a5f4da4f7a0b361cd5e908343e212"
     },
     {
       "path": "assets/r414/buildings/inner-keep-ruin.webp",
@@ -24396,11 +24396,6 @@
       "path": "assets/r414/buildings/polar-access.webp",
       "bytes": 28896,
       "sha256": "7b7bdbdf6155141ac6249205e56b94d0f9f12d45b98acba95f68ecb47e20a87d"
-    },
-    {
-      "path": "assets/r414/buildings/red-garden-bridge.webp",
-      "bytes": 34748,
-      "sha256": "81484b2013a7f1d71324450b41a3a513231379c93050c6067f47225cdf649f46"
     },
     {
       "path": "assets/r414/buildings/research-block.webp",
@@ -24454,13 +24449,8 @@
     },
     {
       "path": "assets/r414/props/index.json",
-      "bytes": 2646,
-      "sha256": "55fcf318399f817c402ecfc87afdbcaba902c9d13b39b687859a5b1d0c7ff0af"
-    },
-    {
-      "path": "assets/r414/props/residence-entry.webp",
-      "bytes": 33416,
-      "sha256": "c769a6f2bd5c55d86904690f5ab559c012bfe4b1bf89f3736caacdc594730b01"
+      "bytes": 2018,
+      "sha256": "5a76e7503dace647032d1b7db8837b86cd408d5b1a42a9e521942bd1eec7fe2a"
     },
     {
       "path": "assets/r414/props/residence-lamppost.webp",
@@ -34273,8 +34263,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6854,
-  "totalBytes": 1085579384,
+  "fileCount": 6852,
+  "totalBytes": 1085510585,
   "webHTMLSha256": "cc7d7f4cf458298db520be365f32fb3bf850e2272c8026a6a15328da80c17e82",
   "largest": [
     {

@@ -47,29 +47,6 @@
    "bytes": 8172,
    "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
   },
-  "residence-entry": {
-   "zone": "sz115-S05-4",
-   "mode": "wall",
-   "axis": "y",
-   "height": 100,
-   "path": "assets/r414/props/residence-entry.webp",
-   "png": "S05-residence-heavy-entry-door.png",
-   "dotsId": "S05-residence-heavy-entry-door",
-   "dotsStatus": "REVIEW_STATIC_CLOSED_DOOR_RUNTIME_UNVERIFIED",
-   "canonLines": [
-    1258,
-    1262
-   ],
-   "manifestChecked": true,
-   "pngSHA256": "237708de6e0dd67f82d0f64db0059ab26a4ff222f6975f45fdf2e67b6a46ca69",
-   "part": null,
-   "size": [
-    278,
-    384
-   ],
-   "bytes": 33416,
-   "sha256": "c769a6f2bd5c55d86904690f5ab559c012bfe4b1bf89f3736caacdc594730b01"
-  },
   "departure-bag": {
    "zone": "sz115-S05-4",
    "mode": "inner",

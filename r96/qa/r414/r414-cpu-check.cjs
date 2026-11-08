@@ -18,7 +18,7 @@ const IDX=JSON.parse(RT('assets/r414/buildings/index.json')),PIDX=JSON.parse(RT(
 global.window={};require(path.join(R,'client-source','samong-zones-r115-data.js'));const SZ=window.__STORYWORLD_SAMONG_ZONES_R115_DATA__;
 const zones=new Map();for(const zs of Object.values(SZ.chapters))for(const z of zs)zones.set(z.id,z);
 const B=Object.entries(IDX.buildings);
-ok('24 buildings, every one at least 2x the hero (66 px -> >= 132 px)',B.length===24&&B.every(([,v])=>v.height>=132)&&IDX.hero?.drawnHeightPx===66,B.filter(([,v])=>!(v.height>=132)).map(([k])=>k));
+ok('23 buildings, every one at least 2x the hero (66 px -> >= 132 px)',B.length===23&&B.every(([,v])=>v.height>=132)&&IDX.hero?.drawnHeightPx===66,B.filter(([,v])=>!(v.height>=132)).map(([k])=>k));
 ok('every building zone is an outdoor samong zone (z.outdoor)',B.every(([,v])=>zones.get(v.zone)?.outdoor),B.filter(([,v])=>!zones.get(v.zone)?.outdoor).map(([k,v])=>k+':'+v.zone));
 ok('at most two buildings per zone',[...B.reduce((m,[,v])=>m.set(v.zone,(m.get(v.zone)||0)+1),new Map()).values()].every(n=>n<=2));
 function webpSize(buf){// VP8X / VP8L / VP8
@@ -27,12 +27,12 @@ const files=[...B.map(([,v])=>v),...Object.values(PIDX.props)];
 const bad=files.filter(v=>{const p=path.join(R,'runtime-text',v.path);if(!fs.existsSync(p))return true;const b=fs.readFileSync(p);const s=webpSize(b);return crypto.createHash('sha256').update(b).digest('hex')!==v.sha256||b.length!==v.bytes||!s||s[0]!==v.size[0]||s[1]!==v.size[1]||Math.max(...s)>(v.path.includes('/buildings/')?600:384);});
 ok('every derived file exists, matches its sha256/bytes/size and stays within 600 px (buildings) / 384 px (props)',!bad.length,bad.map(v=>v.path));
 ok('provenance: Dots id, PNG sha256 checked against MANIFEST, status and canon lines kept',files.every(v=>v.dotsId&&/^[0-9a-f]{64}$/.test(v.pngSHA256)&&v.manifestChecked===true&&v.dotsStatus&&Array.isArray(v.canonLines)));
-ok('held candidates carry a reason (17)',Object.keys(IDX.held).length===17&&Object.values(IDX.held).every(h=>h.reason&&h.reason.length>6));
+ok('held candidates carry a reason (19)',Object.keys(IDX.held).length===19&&Object.values(IDX.held).every(h=>h.reason&&h.reason.length>6));
 const raw=RT('assets/r414/buildings/index.json')+RT('assets/r414/props/index.json');
 const ids=(raw.replace(/[0-9a-f]{64}/g,'').match(/[A-Za-z0-9_-]{24,}/g)||[]).filter(t=>/[0-9]/.test(t)&&/[a-z]/.test(t)&&/[A-Z]/.test(t)&&!/^[A-Za-z0-9]+(-[a-z0-9]+)+$/.test(t));
 ok('no Drive file ids or URLs in the public index (Dots slugs like R02-gray-school-building-shell are fine)',!/drive\.google|docs\.google/.test(raw)&&!ids.length,ids);
 const P=Object.entries(PIDX.props);
-ok('4 props in the R406 row format (zone/mode/axis/height/path)',P.length===4&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
+ok('3 props in the R406 row format (zone/mode/axis/height/path)',P.length===3&&P.every(([,v])=>zones.has(v.zone)&&['wall','inner'].includes(v.mode)&&v.height>0&&/^assets\/r414\/props\/[a-z0-9-]+\.webp$/.test(v.path)));
 ok('prop file names avoid the door/gate/wall words other overlays snap to walls',[...P,...B].every(([,v])=>!/(^|[\W_])(gate|door|wall)s?([\W_]|$)/i.test(v.path.split('/').pop().replace('.webp',''))));
 ok('R406 also reads the R414 prop index',/IDXS=\[IDX,'\.\/assets\/r408\/props\/index\.json','\.\/assets\/r414\/props\/index\.json'\]/.test(C('props-place-r406.js')));
 const r299=C('env-props-r299.js');const big=k=>+(r299.match(new RegExp('\\b'+k+':\\{h:(\\d+)'))||[])[1];

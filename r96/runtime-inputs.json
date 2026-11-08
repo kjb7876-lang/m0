@@ -6051,7 +6051,6 @@
     "assets/r414/buildings/palace-colonnade.webp",
     "assets/r414/buildings/polar-access-ruin.webp",
     "assets/r414/buildings/polar-access.webp",
-    "assets/r414/buildings/red-garden-bridge.webp",
     "assets/r414/buildings/research-block.webp",
     "assets/r414/buildings/saebit-hotel.webp",
     "assets/r414/buildings/shelter-headhouse.webp",
@@ -6063,7 +6062,6 @@
     "assets/r414/props/departure-bag.webp",
     "assets/r414/props/fallen-rafters.webp",
     "assets/r414/props/index.json",
-    "assets/r414/props/residence-entry.webp",
     "assets/r414/props/residence-lamppost.webp"
   ],
   "mediaPaths": [
@@ -7139,5 +7137,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "4fd6d8362599f90615d1a00fb2d1f2c512273e8f2f8a0bf59352552e5bc45e5c"
+  "runtimeManifestSHA256": "30fb9f9d1748e784410198789c375c7d6cd41a5e6a3c3fb819c06cefb8484f40"
 }
