@@ -21,6 +21,9 @@ ok('focus HUD on by default',/DEF=Object\.freeze\(\{[^}]*focus:true/.test(src));
 ok('combat fade keeps the boss bar and menu',src.includes('header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'));
 ok('focus HUD extends the game view under the footer',src.includes("body.r420-focus #stage{bottom:0!important}"));
 ok('focus HUD does not change brightness or colour of the game view',!/r420-focus[^']*#stage\{[^}]*filter/.test(src)&&!/r420-focus[^']*(canvas|#game)\{/.test(src));
+ok('R421: memory paper (R177 #r177Doc) fades only in combat focus and returns on hover',src.includes('body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'));
+ok('R421: touch hint text C를 눌러 → 버튼을 눌러 (updateHUD wrap, coarse only)',src.includes("n.split(k+'를 눌러').join('버튼을 눌러')")&&/function fixHint\(\)\{if\(!coarse\(\)/.test(src));
+ok('R421: 3D scene caption wraps by word with a soft backing, scene brightness untouched',src.includes('html body #r183 .cap{word-break:keep-all;text-wrap:balance')&&!/#r183[^{]*\{[^}]*filter/.test(src));
 ok('focus HUD can be turned off in settings',src.includes('id="r420Focus"'));
 // 샌드박스 실행
 function run(store){const listeners=[];const stage={style:{filter:''}};const els={};
@@ -52,6 +55,10 @@ function run(store){const listeners=[];const stage={style:{filter:''}};const els
  api.set({bright:100});ok('back to 100% clears the filter',stage.style.filter==='');}
 {const {sb,stage}=run({'storyworld.r420.access':JSON.stringify({bright:120,text:'large'})});
  ok('saved prefs restored on load',sb.__STORYWORLD_ACCESS_R420__.prefs().bright===120&&sb.__STORYWORLD_ACCESS_R420__.prefs().text==='large'&&stage.style.filter==='brightness(1.20)');}
+{const {sb}=run({});const tt=sb.__STORYWORLD_ACCESS_R420__.touchText;
+ ok('touchText maps the portal hint',tt('포탈 · C를 눌러 이동 · 거미동굴')==='포탈 · 버튼을 눌러 이동 · 거미동굴');
+ ok('touchText maps leading key labels and altar hints',tt('C · 경계 제단 / 세계 전환')==='버튼 · 경계 제단 / 세계 전환'&&tt('제단에서 C · 다음 단계')==='제단에서 버튼 · 다음 단계');
+ ok('touchText leaves other text alone',tt('적 처치 0/3 · Combat')==='적 처치 0/3 · Combat');}
 {const {sb}=run({'storyworld.r420.access':'{bad json'});ok('broken saved prefs fall back to defaults',sb.__STORYWORLD_ACCESS_R420__.prefs().bright===100);}
 
 const failed=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail||'')));
