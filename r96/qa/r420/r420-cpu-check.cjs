@@ -21,6 +21,7 @@ ok('focus HUD on by default',/DEF=Object\.freeze\(\{[^}]*focus:true/.test(src));
 ok('combat fade keeps the boss bar and menu',src.includes('header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'));
 ok('focus HUD extends the game view under the footer',src.includes("body.r420-focus #stage{bottom:0!important}"));
 ok('focus HUD does not change brightness or colour of the game view',!/r420-focus[^']*#stage\{[^}]*filter/.test(src)&&!/r420-focus[^']*(canvas|#game)\{/.test(src));
+ok('R421: memory paper (R177 #r177Doc) fades only in combat focus and returns on hover',src.includes('body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'));
 ok('focus HUD can be turned off in settings',src.includes('id="r420Focus"'));
 // 샌드박스 실행
 function run(store){const listeners=[];const stage={style:{filter:''}};const els={};

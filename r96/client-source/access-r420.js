@@ -14,7 +14,7 @@
 // 그림 자산·충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 를 쓰지 않는다(CSS filter 는 #stage 요소에만).
 (()=>{'use strict';
 if(window.__STORYWORLD_ACCESS_R420__)return;
-const REV='R420-access-1',KEY='storyworld.r420.access';
+const REV='R420-access-2',KEY='storyworld.r420.access';
 const DEF=Object.freeze({bright:100,text:'base',focus:true});
 const TEXT_SCALE=Object.freeze({base:null,large:{k:1.25,min:12},xl:{k:1.45,min:13}});
 const TEXT_KO=Object.freeze({base:'기본',large:'크게',xl:'아주 크게'});
@@ -77,6 +77,7 @@ const FOCUS_CSS='@media '+FOCUS_MQ+'{'
  +'body.r420-focus.r420-combat header:not(:hover)>*:not(#bossbar):not(nav){opacity:.32}'
  +'body.r420-focus.r420-combat #xpText,body.r420-focus.r420-combat #buildText,body.r420-focus.r420-combat #awakeText,body.r420-focus.r420-combat #noticeShelfR63R2{opacity:.35}'
  +'body.r420-focus.r420-combat footer:not(:hover) .hotbar kbd,body.r420-focus.r420-combat footer:not(:hover) .hotbar .label{opacity:.55}'
+ +'body.r420-focus #r177Doc{transition:opacity .45s ease}body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'/* R421: 싸우는 동안 오른쪽 쪽지·기억 조각 종이(R177)가 화면 1/4 을 가리지 않게 옅게 — 마우스를 올리면 다시 또렷 */
  +'}';
 
 // ④ CSS + 설정 창 ----------------------------------------------------------------------------
