@@ -6,7 +6,7 @@ const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
 const F='props-tidy-r412.js',src=C(F);
 for(const f of[F,'prop-shadow-r329.js','visual-r92.js'])ok(f+' runtime copy matches',fs.readFileSync(path.join(RT,f),'utf8')===C(f));
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
-ok('loaded once, right after skill-sheets-r411.js, after props-place-r406.js and before combat-r118.js',html.split('"./'+F+'"').length===2&&/<script src="\.\/skill-sheets-r411\.js"><\/script><script src="\.\/props-tidy-r412\.js"><\/script>/.test(html)&&html.indexOf('props-place-r406.js')<html.indexOf(F)&&html.indexOf(F)<html.indexOf('combat-r118.js'));
+ok('loaded once, right after theme-fx-r430.js (after skill-sheets-r411.js), after props-place-r406.js and before combat-r118.js',html.split('"./'+F+'"').length===2&&/<script src="\.\/skill-sheets-r411\.js"><\/script><script src="\.\/theme-fx-r430\.js"><\/script><script src="\.\/props-tidy-r412\.js"><\/script>/.test(html)&&html.indexOf('props-place-r406.js')<html.indexOf(F)&&html.indexOf(F)<html.indexOf('combat-r118.js'));
 ok('listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"));
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r412/r412-cpu-check.cjs'));
 const code=src.replace(/\/\/.*$/gm,'');

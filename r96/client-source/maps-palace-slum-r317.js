@@ -89,7 +89,8 @@ function update(now){const a=active;if(!a)return;if((typeof room!=='undefined'&&
  a.hero.style.opacity=k===2?'.2':'1';for(const [i,g]of a.guardians.entries()){g.style.opacity=k<4?'.5':k===4?String(Math.max(0,1-u*1.4-i*.08)):'0';g.style.transform='translate(-50%,-100%) translateY('+(-u*(k===4?60:3))+'px)';}
  a.veil.style.opacity=k===4?String(Math.sin(u*Math.PI)*.7):'0';
  a.root.style.backgroundColor=k===3?'#1e1a1b':'#0e0a0d';}
-function play(r){if(active||seen||!eligible(r)||r.id!=='ep1a09b'||typeof document==='undefined')return false;
+const cineOn=()=>{try{return window.__STORYWORLD_CINEMA_MODE_R370__?.prefs?.().on===true;}catch(_){return false;}};
+function play(r){if(active||(seen&&!cineOn())||!eligible(r)||r.id!=='ep1a09b'||typeof document==='undefined')return false;
  const root=node('div',document.body,'position:fixed;inset:0;z-index:10010;overflow:hidden;background:#0e0a0d;color:#eadcc8;touch-action:none;');root.id='r317Cinema';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','결전의 날 기억');root.tabIndex=-1;
  const base='position:absolute;object-fit:contain;pointer-events:none;';
  const tree=imageNode(root,PATHS.tree,base+'left:50%;top:40%;height:62%;transform:translate(-50%,-50%);opacity:.6');
@@ -111,6 +112,8 @@ function play(r){if(active||seen||!eligible(r)||r.id!=='ep1a09b'||typeof documen
 const balrog=e=>!!(e?.boss&&!e.midboss&&/발록|balrog/i.test(String(e.name||'')+' '+String(e.nativeId||'')+' '+String(e.kind||'')));
 if(typeof killEnemy==='function'){const b=killEnemy;killEnemy=function(e,...a){const r=typeof room!=='undefined'?room:null,trigger=eligible(r)&&r.id==='ep1a09b'&&balrog(e)&&!e.deadRecorded&&typeof started!=='undefined'&&started&&!(typeof loading!=='undefined'&&loading);const out=b.call(this,e,...a);
  if(trigger&&e.hp<=0&&e.deadRecorded&&r===(typeof room!=='undefined'?room:null))try{play(r);}catch(err){fail(err);finish(true);}return out;};}
+// R426: '본 적 있음'을 기기 전체가 아니라 한 판(새 게임)마다로 — 새 게임을 시작하면 다시 나온다(영화 모드에서는 늘 나온다).
+if(typeof newGame==='function'){const b=newGame;newGame=function(...a){seen=false;try{localStorage.removeItem(KEY);}catch(_){}return b.apply(this,a);};}
 if(typeof tick==='function'){const b=tick;tick=function(...a){if(active){try{update(performance.now());}catch(e){fail(e);finish(true);}if(active)return;}return b.apply(this,a);};}
 window.__STORYWORLD_MAPS_PALACE_SLUM_R317__=Object.freeze({revision:REV,KEY,PATHS,CAPTIONS,WALL_TEXT,themeLayout,plan,apply,bgmGain,next,skip:()=>finish(true),update,
  hold(on){const a=active;if(!a)return false;const t=performance.now();if(on){if(a.held==null)a.held=t;}else if(a.held!=null){a.start+=t-a.held;a.held=null;}return true;},

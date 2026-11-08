@@ -24318,6 +24318,56 @@
       "sha256": "116fe0d3a42c005bfd5317028c49d6e6577146b25ecac8ed312763b45d250185"
     },
     {
+      "path": "assets/r430/arc.webp",
+      "bytes": 195458,
+      "sha256": "1ec9b9bf6f09d6eb9538409acca66bc30407398b191c77a9d8097869cdd7c2c2"
+    },
+    {
+      "path": "assets/r430/blight.webp",
+      "bytes": 167904,
+      "sha256": "12bec7b6d7b5661bee114ef458a3ff5ad995d89e89dee72f51a43c86dbb9fbea"
+    },
+    {
+      "path": "assets/r430/brand.webp",
+      "bytes": 191872,
+      "sha256": "21f4a5d387fb080423696085dfab1f2c056a610c398ee7506bebc9a1ffb07c01"
+    },
+    {
+      "path": "assets/r430/fire-loop.webp",
+      "bytes": 104558,
+      "sha256": "6791dcd3d31e165b36073e2847cc1ab19410e3616394e5a6d9ac936e9b89c9ec"
+    },
+    {
+      "path": "assets/r430/fissure.webp",
+      "bytes": 293000,
+      "sha256": "a26e91732145d00895061c88cc761fd4b0e57b270d0d35388830875a7e020047"
+    },
+    {
+      "path": "assets/r430/frost.webp",
+      "bytes": 184710,
+      "sha256": "d0d955e2ec20e6beb8b556e0c9eeffd4e42f0c40c8338521429eab05ef9dda05"
+    },
+    {
+      "path": "assets/r430/index.json",
+      "bytes": 5773,
+      "sha256": "b853e7707d1678f5004979ce83352b5dc61119cc09d3a4584f2aad3ca004265c"
+    },
+    {
+      "path": "assets/r430/mist-loop.webp",
+      "bytes": 147408,
+      "sha256": "0e82aeeb136c4412bf5e445a94bfbe13607b895940f0ad9224f6820567622e02"
+    },
+    {
+      "path": "assets/r430/rift.webp",
+      "bytes": 155320,
+      "sha256": "7154afd3ce54554d3c92522102e6ee080bf8af456b2832a549c894b463d1f34a"
+    },
+    {
+      "path": "assets/r430/tendril.webp",
+      "bytes": 215658,
+      "sha256": "533a9d1ab4857179f54ade4c194f62058f342eb5703c710fae70c63611588640"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -32319,8 +32369,8 @@
     },
     {
       "path": "betrayal-video-r368.js",
-      "bytes": 14278,
-      "sha256": "332dd754c56e50221af515ff1d67b4ac5f7d0bcaf389d61acd1ff6148a912524"
+      "bytes": 14711,
+      "sha256": "7c93a3ec51cb2b80492560842cf87847b38ef3bc11bc6b801e9cbc70139319bc"
     },
     {
       "path": "bgm-classical-r195.js",
@@ -32844,8 +32894,8 @@
     },
     {
       "path": "cinema-mode-r370.js",
-      "bytes": 25941,
-      "sha256": "2afab56b9a70a4d131d7c1d3eb42ca6c9703d2a401558800344e607de89024d8"
+      "bytes": 26718,
+      "sha256": "5ff801d37b25028a99cc5823940155954975bb73579ae66137294be8732a71fa"
     },
     {
       "path": "cinema-r114.js",
@@ -33103,6 +33153,11 @@
       "sha256": "ed4c72fb93cd0f8c5988c07ea92dd2cedffcea5a768547b9234e8acf4aae0e71"
     },
     {
+      "path": "guide-clear-r426.js",
+      "bytes": 6838,
+      "sha256": "c8b451857aee830961f18db259a0bffa01eec7e0e185f348a035cc12a51e9e13"
+    },
+    {
       "path": "guide-difficulty-r189.js",
       "bytes": 3746,
       "sha256": "9f702f785df0f6bcb120c2a02bf64f39f3b7e00bd3727e10d3fa785c4d13c646"
@@ -33264,8 +33319,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570965,
-      "sha256": "96fb7b112ca43bf0001aca1f4c8fccc61b5e0c70049d4b459d7793a0468f07bd"
+      "bytes": 6571052,
+      "sha256": "35d56daeb8baded8004ebfa134e182ed161a83b955cb39776589c993192053b2"
     },
     {
       "path": "intro-r140.js",
@@ -33324,8 +33379,8 @@
     },
     {
       "path": "maps-palace-slum-r317.js",
-      "bytes": 15459,
-      "sha256": "8ad18011835604260de118e386936c9d5d258670b5ca05f9b0371316dab9f060"
+      "bytes": 15913,
+      "sha256": "01e01f4db15a9a925b7d2eb2843c9664432f04b29bacce72a8f7921a58cc9418"
     },
     {
       "path": "michaela-r247.js",
@@ -33863,6 +33918,11 @@
       "sha256": "e64e34f0a20b9095ee7afeaef6dd7b6840be148d88bca4f81bcf3536de2aaa82"
     },
     {
+      "path": "theme-fx-r430.js",
+      "bytes": 13876,
+      "sha256": "fbf5d035c87021ef1c6c612cc3511c05b545187f29120016e89a23fb6a56d8e5"
+    },
+    {
       "path": "threads-r243.js",
       "bytes": 7587,
       "sha256": "9f472ece711b316ff74f8ddd19c1be1c9b75259d7419fb39fb78581f6604310c"
@@ -34058,9 +34118,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6811,
-  "totalBytes": 1082988003,
-  "webHTMLSha256": "96fb7b112ca43bf0001aca1f4c8fccc61b5e0c70049d4b459d7793a0468f07bd",
+  "fileCount": 6823,
+  "totalBytes": 1084672129,
+  "webHTMLSha256": "35d56daeb8baded8004ebfa134e182ed161a83b955cb39776589c993192053b2",
   "largest": [
     {
       "path": "index.html",

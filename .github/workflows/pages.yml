@@ -410,6 +410,8 @@ jobs:
         run: node r96/qa/r385/r385-cpu-check.cjs
       - name: R390 cinema full narration + midboss hold + enemies keep chasing CPU check
         run: node r96/qa/r390/r390-cpu-check.cjs
+      - name: R426 guide clears visible enemies before moving + 결전의 날 narration dedupe + betrayal cinematic per run CPU check
+        run: node r96/qa/r426/r426-cpu-check.cjs
       - name: R406 prop placement (seats inward, wall art flush, indoor bulbs) + Drive StoryProps in boss zones CPU check
         run: node r96/qa/r406/r406-cpu-check.cjs
       - name: R409 combat readability (enemy/hero outlines, cast sigil behind caster, big hero FX veiled over enemies) CPU check
@@ -422,6 +424,8 @@ jobs:
         run: node r96/qa/r411/r411-cpu-check.cjs
       - name: R412 props tidy (out of walls, fewer lamps, wall facing) CPU check
         run: node r96/qa/r412/r412-cpu-check.cjs
+      - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
+        run: node r96/qa/r430/r430-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check
