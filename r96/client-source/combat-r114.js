@@ -284,5 +284,5 @@ function install(){
 }
 try{install();}catch(e){fail(e);}
 window.__STORYWORLD_COMBAT_R114__=Object.freeze({revision:REV,set,prefs:()=>({...prefs}),palette,glow,bucket,
- echo:e=>{const g=echo.get(e);return g?{...g}:null;},stats:()=>({...stats,tracked:tracked.size,hidden:hidden.length,tintCache:tints.size,fitByArt:{...fitByArt},failures,lastError}),weapons:()=>Object.keys(WEAP),restoreProps,samong:()=>({level:samongLevel(),extraPerWave:extraPerWave(),extra:extraRays.length})});
+ echo:e=>{const g=echo.get(e);return g?{...g}:null;},stats:()=>({...stats,tracked:tracked.size,hidden:hidden.length,tintCache:tints.size,fitByArt:{...fitByArt},failures,lastError}),weapons:()=>Object.keys(WEAP),throwInfo:t=>{const i=throwInfo.get(t);return i?{kind:i.kind,height:i.height,body:i.body,path:i.path}:null;},/* R431 검은 불꽃이 준비 동작의 조형물 크기를 읽는다 */restoreProps,samong:()=>({level:samongLevel(),extraPerWave:extraPerWave(),extra:extraRays.length})});
 })();
