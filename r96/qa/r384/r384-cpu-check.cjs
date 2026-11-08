@@ -10,7 +10,7 @@ ok('index.html loads cinema-sync-r384 once, after voice-r381 and cinema-mode-r37
 ok('public verify list (with comma), runtime inputs, Pages CPU step (R376 step restored too)',fs.readFileSync(path.join(ROOT,'scripts','verify-r96-public.py'),'utf8').includes("'cinema-sync-r384.js',")&&JSON.parse(RT('../runtime-inputs.json')).textPaths.includes('cinema-sync-r384.js')&&/node r96\/qa\/r384\/r384-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8'))&&/node r96\/qa\/r376\/r376-cpu-check\.cjs/.test(fs.readFileSync(path.join(ROOT,'.github','workflows','pages.yml'),'utf8')));
 ok('no eval / new Function',!/\beval\s*\(|new Function/.test(SRC));
 // ── R370 rev 4: 말 빠르기 일정 ──
-ok('R370 rev 4: no per-sentence rate change (rateFor/gapFor gone, one steady rate)',/REV='R370-cinema-[45]'/.test(CIN)&&!/rateFor\(|gapFor\(|RATE_MIN/.test(CIN)&&/rate=steadyRate\(prefs\.rate\)/.test(CIN));
+ok('R370 rev 4: no per-sentence rate change (rateFor/gapFor gone, one steady rate)',/REV='R370-cinema-[456]'/.test(CIN)&&!/rateFor\(|gapFor\(|RATE_MIN/.test(CIN)&&/rate=steadyRate\(prefs\.rate\)/.test(CIN));
 ok('R370 exposes remainingSecs() as a top-level number function',/remainingSecs:\(\)=>\+remainingSecs\(\)\.toFixed\(1\)/.test(CIN));
 // ── 가짜 엔진 ──
 function mk(o={}){let clock=0;let iv=null;const played=[],hits=[];

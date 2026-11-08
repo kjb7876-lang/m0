@@ -20,11 +20,11 @@
 //  · 설정 '영화 모드' 줄(목소리 고르기·시험 듣기). localStorage storyworld.r370.cinema {on, voice, subs, rate}.
 (()=>{'use strict';
 if(window.__STORYWORLD_CINEMA_MODE_R370__)return;
-const REV='R370-cinema-5',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
+const REV='R370-cinema-6',KEY='storyworld.r370.cinema',TKEY='storyworld.r370.zoneTimes';
 const DEF={on:false,voice:'',subs:true,rate:1};
 let prefs={...DEF};try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object'){if(typeof s.on==='boolean')prefs.on=s.on;if(typeof s.voice==='string')prefs.voice=s.voice;if(typeof s.subs==='boolean')prefs.subs=s.subs;if(Number.isFinite(+s.rate))prefs.rate=Math.max(.8,Math.min(1.3,+s.rate));}}catch(_){}
 let learned={};try{const t=JSON.parse(localStorage.getItem(TKEY)||'{}');if(t&&typeof t==='object')for(const[k,v]of Object.entries(t))if(Number.isFinite(+v)&&+v>5&&+v<7200)learned[k]=+v;}catch(_){}
-const stats={recorded:0,recordFail:0,batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,refilled:0,errors:0};let lastError=null;
+const stats={dupes:0,recorded:0,recordFail:0,batches:0,scenes:0,sentences:0,kept:0,dropped:0,spoken:0,silent:0,lingers:0,guideResumed:0,fragments:0,refilled:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const now=()=>performance.now()/1000;
@@ -70,9 +70,13 @@ let zone={key:'',t0:now(),active:0,last:now()};
 function tickZone(){const k=zoneKey(),t=now(),dt=Math.min(1,t-zone.last);zone.last=t;
  const paused=document.hidden||G('loading',false)||!G('started',false);if(!paused)zone.active+=dt;
  if(k&&k!==zone.key){if(zone.key&&prefs.on&&zone.active>8){const o=learned[zone.key];learned[zone.key]=o?o*.5+zone.active*.5:zone.active;try{localStorage.setItem(TKEY,JSON.stringify(learned));}catch(_){}}
-  zone={key:k,t0:t,active:0,last:t};reserve.length=0;}}
+  zone={key:k,t0:t,active:0,last:t};reserve.length=0;heard.clear();}}
 const remainingInZone=()=>Math.max(0,estimate(zone.key)-zone.active);
 // ── 대기열·음성 ──
+// R426: 한 지역에 머무는 동안 이미 대기열에 넣었거나 읽은 문장은 다시 넣지 않는다(결전의 날에서 같은 서사가 두 번 들리던 문제 —
+//  원인: cinema-sync(R384)가 보스전 중에 보스 서사('post')를 미리 흘리는데, 엔진은 보스가 죽어 지역을 마칠 때 같은 'post' 장면을
+//  다시 playScenes 한다 → 보스가 죽으면 같은 음성이 두 번. 장면 열쇠(key)와 문장 글자 둘 다로 막는다). 지역을 옮기면 비운다.
+const heard=new Set(),norm=t=>String(t||'').replace(/\s+/g,' ').trim();
 const Q=[],reserve=[];let cur=null,deadline=null,cps=CPS0,order=0,timer=null,gen=0;
 const fullMode=()=>{try{return window.__STORYWORLD_CINEMA_SYNC_R384__?.full?.()===true;}catch(_){return false;}};
 const pendingChars=()=>Q.reduce((s,q)=>s+q.len,0)+(cur?cur.len*.5:0)+(fullMode()?reserve.reduce((s,q)=>s+q.len,0):0);
@@ -85,8 +89,8 @@ function vol(){try{const s=G('settings',{});return clamp(Number.isFinite(+s.voic
 function enqueue(scenes){const final=isFinal(scenes)||fullMode();stats.batches++;
  // 옛 문장은 '지난 것'으로 점수를 깎는다(must 는 그대로).
  for(const q of Q)q.score-=.8;
- const fresh=[];for(const s of scenes){stats.scenes++;const ss=sentences(s.text);const narr=String(s.narrator||'').replace(/[〈〉<>]/g,'').trim();
-  ss.forEach((x,i)=>{fresh.push({text:x.text,len:x.text.length,narr,title:s.title||'',must:i===0||(final),score:score(x,i,ss.length),order:order++,sceneEnd:i===ss.length-1,final});});}
+ const fresh=[];for(const s of scenes){stats.scenes++;if(s&&s.key){const k='key:'+s.key;if(heard.has(k)){stats.dupes++;continue;}heard.add(k);}const ss=sentences(s.text);const narr=String(s.narrator||'').replace(/[〈〉<>]/g,'').trim();
+  ss.forEach((x,i)=>{const h=norm(x.text);if(!h||heard.has(h)){stats.dupes++;return;}heard.add(h);fresh.push({text:x.text,len:x.text.length,narr,title:s.title||'',must:i===0||(final),score:score(x,i,ss.length),order:order++,sceneEnd:i===ss.length-1,final});});}
  stats.sentences+=fresh.length;
  const all=Q.concat(fresh);const horizon=final?Infinity:Math.max(MIN_H,remainingInZone());
  const cap=final?Infinity:horizon*cps*clamp(prefs.rate,.8,1.3)*1.12;
