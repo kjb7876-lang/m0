@@ -24,6 +24,11 @@ const RENAME=[['ep1a10','갈망의 도시짐승','약을 갈망하는 자'],['ep
  ['ep1b09','인간의 뇌를 닮은 투명 연산 장치','걸어다니는 소형 로봇'],['ep1b09','설원 아래의 기계 다리','설원 잠복 보행기'],['u201','폭격기억 사이보그 사냥개','전쟁기계사냥개'],
  ['u204','첫 기억 청람잔영','기계화 첫 기억 청람잔영'],['u204','기억 공백 망령','기계화 기억 공백 망령'],['u204','문턱 관측거미','기계화 문턱 관측거미'],['u204','제12단계 기억 검열기','기계화 제12단계 기억 검열기'],
  ['u206','기억이주 연결자','기계화 기억이주 연결자'],['u206','중앙이주 공명기사','기계화 공명술사']];
+// R407: 정본에 없는 보스 이름 '사탄' → 정본 '분노의 귀'(사용자 2026-11-08 승인). index.html 원본 명단은 보존 검사 대상이라 그대로 두고,
+//  지역을 만들 때 이름만 바꾼다(층·설정과 무관). R104·R114·R248·R306 표는 새 이름으로 맞춰 두었다.
+const BOSS_RENAME=[['b07-boss','불을 지른 청소부 · 사탄','불을 지른 청소부 · 분노의 귀']];let bossRenamed=0;
+function bossNames(r){if(!r||!Array.isArray(r.enemies))return;for(const e of r.enemies){if(!e||typeof e.name!=='string')continue;
+ for(const [id,from,to] of BOSS_RENAME)if((e.nativeId===id||e.id===id)&&e.name.includes(from)){e.r407From=e.name;e.name=e.name.replace(from,to);if(typeof e.r373Name==='string')e.r373Name=e.r373Name.replace(from,to);bossRenamed++;}}}
 // ── 이동·개명: 지역을 만들 때 한 번(결정적) ──
 function relocate(r,id,l){if(!prefs.on||!r||!Array.isArray(r.enemies)||l==='DREAM')return r;
  // 정본 계약(R81: 지역마다 3×10 무리, 적 id·능력치 불변)을 지키려고 몹을 빼거나 더하지 않고 이름·그림만 바꾼다.
@@ -86,7 +91,7 @@ function balance(r,id,l){if(!Array.isArray(r.enemies))return;
    // R74 순찰 만들 때처럼 R61 정규화에 원래 수치 보존으로 등록(JSON 복제는 WeakMap 등록을 안 옮김, Codex P2).
    try{window.__STORYWORLD_SCALE_MELEE_R61__?.normalize?.(e,r,{preserveHealth:true,preserveDamage:true});}catch(err){fail(err);}r.enemies.push(e);n++;stats.added++;}}}
 function installRoom(){if(typeof makeRoom!=='function'||makeRoom.__r380)return typeof makeRoom==='function';const base=makeRoom;
- const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
+ const w=function(id,l,...a){const r=base.call(this,id,l,...a);try{bossNames(r);}catch(err){fail(err);}try{return relocate(r,id,l);}catch(err){fail(err);return r;}};w.__r380base=base;w.__r380=true;try{makeRoom=w;}catch(_){}try{window.makeRoom=w;}catch(_){}return true;}
 // ── 그림 ──
 function match(e){if(!idx||!e||e.hero||(e.boss&&!idx.mobs.some(m=>m.actor.boss&&new RegExp(m.actor.name).test(String(e.name||''))))||e.r170Tower||e.r251Circle)return null;try{if(typeof player!=='undefined'&&e===player)return null;}catch(_){}
  const L=curLayer(),n=String(e.name||''),mode=artMode();
@@ -127,6 +132,6 @@ function installDeath(){if(typeof spawnBurnDeath3!=='function'||spawnBurnDeath3.
 try{installRoom();}catch(e){fail(e);}
 let tries=0;(function arm(){try{installRoom();install();installDeath();}catch(e){fail(e);}if(++tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 function set(p){prefs={...prefs,...p};try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return{...prefs};}
-window.__STORYWORLD_APPROVED_MOBS_R380__=Object.freeze({revision:REV,set,assign,match,cellFor,frameOf,relocate,installDeath,installRoom,faceLeft,
+window.__STORYWORLD_APPROVED_MOBS_R380__=Object.freeze({revision:REV,set,assign,match,cellFor,frameOf,relocate,installDeath,installRoom,faceLeft,bossNames,bossRenamed:()=>bossRenamed,
  inspect:()=>({revision:REV,prefs:{...prefs},loaded:!!idx,mode:artMode(),mobs:idx?.mobs?.map(m=>m.id)||[],stats:{...stats},lastError})});
 })();
