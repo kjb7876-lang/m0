@@ -11,14 +11,14 @@
 //  ② 타격감: 영웅 공격이 실제로 피해를 준 순간 그 몹이 0.12초 가로로 눌렸다 펴지고(최대 7%) 영웅 반대쪽으로 2px 밀린다(그림만).
 //  ③ 라우렌 창끝 보라 기운·네온 창끝 청록 기운(09:53 "네온 창끝도 청록색 기운 … 능력 막대기 느낌 강하게", 1.3배): 몸 그림 칸의 가장 위 불투명 점(창끝, 칸마다 한 번 재어 기억)에 보라 빛·불꽃 혀·솟는 불티를 그린다.
 //  맘몬 방(mammon*)·탑/인형(R193)·죽어 가는 몹은 크기를 새로 정하지 않는다. 판정·체력·피해·세이브는 바꾸지 않는다(그림만).
-//  ④ 거미류 X자(대각선) 이동·공격, ⑤ 이동 중 공격 때 발 딛기, ⑥ 헌터 공격 7프레임 좌·우 — 아래 설명.
+//  ④ 시선 3부류(X자·+자·둘 다) 이동·공격(거미류는 X자), ⑤ 이동 중 공격 때 발 딛기, ⑥ 헌터 공격 7프레임 좌·우 — 아래 설명.
 //  ⑦ 체력바·이름표(광폭화 보스는 머리 위로)·적 공격 예고 표시(기본 꺼짐, 설정 창 체크) — 아래 설명.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}', 예고 표시 켜기 '{"tele":true}'
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
-const REV='R425-flow-2',KEY='storyworld.r425.flow';
+const REV='R425-flow-4',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={size:true,punch:true,laurenTip:true,spiderX:true,plant:true,hunter:true,bossBar:true,tele:false};
+let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -91,6 +91,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  if(doSize){const pk=punchK(s),kx=pk>0?s.kx*pk/.07:0;sx=s.s*(1+pk);sy=s.s*(1-pk*.6);rec.save();try{rec.translate(fx+kx,fy);rec.scale(sx,sy);rec.translate(-fx,-fy);r=base.apply(this,[e,...a]);}finally{rec.restore();}}
  else{stats.skipped++;r=base.apply(this,[e,...a]);}
  if(cmds.length===st0)return r;
+ try{if(e.hp>0){const bb=bodyCmd(cmds,st0);if(bb)s.art=artKey(bb);}}catch(err){fail(err);}
  try{if(doSize&&e.hp>0){const b=bodyCmd(cmds,st0);if(b){const fr=sheetFrac(b.image,b.sourceRect);if(fr){const box=Math.abs(b.points[3][1]-b.points[0][1]),nat=box*fr/Math.max(.01,sy),H=AH(),[lo,hi]=band(e);
    let want=Math.min(hi*H,Math.max(lo*H,nat));let ns=Math.min(SMAX,Math.max(SMIN,want/Math.max(1,nat)));
    if(Math.abs(ns-s.s)>.01){k=ns/s.s;rescale(cmds,st0,fx,fy,k);stats.refixed++;s.s=ns;}
@@ -117,25 +118,92 @@ function laurenTip(rec,st,TP){const LP=TP.F,KK=TP.k;const S=window.__STORYWORLD_
  try{if(typeof rec.scope==='function')rec.scope({id:'r425:spear-tip',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{rec.save();try{run();}finally{rec.restore();}});else run();stats.tips++;}catch(e){fail(e);}}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{const TP=TIPS[player?.hero];if(prefs.laurenTip&&TP&&st>=0&&player.hp>0&&player.visible!==false)laurenTip(rec,st,TP);}catch(e){fail(e);}return r;};}
-// ---- 거미류 X자 이동(사용자 09:54 "거미류들은 거미 시선과 다리 움직임 따라 대각선으로 이동하는 방식 x자로 이동") ----
-//  거미 그림은 옆모습 한 장을 좌우로 뒤집어 쓰고 몸·시선·다리가 화면 대각선(앞쪽 45°)을 향한다. 걷는 한 틱의 이동(0.3칸 미만, 돌진·블링크 제외)을
-//  화면 대각선 네 방향 중 하나로 돌려 같은 거리만큼 옮긴다. 가로 부호는 원래 이동대로(그림 좌우와 맞음), 세로 부호는 이동의 세로 성분이 분명할 때 따르고
-//  거의 가로로만 걸을 땐 0.55초마다 위·아래를 바꿔 X자로 지그재그. 벽·소품은 엔진 moveActor 로 똑같이 막힌다. 판정·속도·경로 목표는 그대로.
-const SPIDER=/거미|spider|arachn/i;const isSpider=e=>!!e&&e.hp>0&&!major(e)&&(SPIDER.test(String(e.name||''))||SPIDER.test(String(e.nativeId||''))||SPIDER.test(String(e.path||'')));
-const SPD=new WeakMap();
+// ---- ④ 시선 3부류 이동·공격(사용자 10:06 "이미지의 시선 방향에 따라 x자 이동 및 공격 / +자 이동 공격 / x+ 둘 다 이동 공격 3부류로 나와서
+//  모든 움직이는 자산들의 이동 및 공격 방향성에 맞게"; 09:54·09:55 거미 X자 이동·공격) ----
+//  몹 몸 그림(시트·아틀라스 칸)을 사람 눈으로 보고 나눈 표 assets/r425/gaze.json(헤드리스로 지역마다 실제로 그려지는 몸 그림을 모은 대조표를 보고 분류):
+//   x    = 몸·머리가 비스듬히(3/4) 보는 그림(거미·네발짐승·비스듬히 선 인형) → 바닥 칸 모서리 4방향 = 화면 2:1 대각선(약 27°, 아이소 바닥 줄눈 방향) X자
+//   plus = 옆모습(시선 가로)이나 정면·뒷모습(시선 세로) 그림 → 화면 가로·세로 4방향 +자
+//   both = 구체·점액·떠 있는 영체처럼 시선이 뚜렷하지 않거나 두 쪽 다 자연스러운 그림 → 8방향
+//  표에 없는 그림은 같은 몹의 다른 동작 시트(-move·-idle·-attack 등) 부류 → 그 몹이 앞서 알아본 부류 → both 순. 거미류(이름·원본 id)는 표와 상관없이 x.
+//  방향은 칸(세계) 각도로 계산한다: x = 0·90·180·270°, plus = 45·135·225·315°(칸 대각선이 화면 가로·세로). 두 부류 모두 칸 기준 90° 간격이라
+//   아이소 화면 어느 쪽으로 가도 같은 비율로 지그재그한다(화면 45°로 잡아 보니 가로로 갈 때만 목표 쪽 진행이 45%로 떨어졌다).
+//  걷기 한 틱(초당 6칸 이하, 돌진·블링크·밀려남·환영 이동 제외)을 허용 방향 중 하나로 바꿔 옮긴다.
+//  목표 방향이 허용 방향과 16°(8방향은 8°) 안이면 그 방향, 두 허용 방향 사이면 한 방향을 0.35초 이상 걷고 목표 선을 넘으면 다른 방향으로 — X·+ 모양 지그재그.
+//   평균 진행 방향은 엔진 경로 그대로. 지그재그는 목표 쪽 진행이 줄어드니(4방향 최대 29%) 두 다리를 같은 비율로 늘려 도착 시간을 엔진과 맞춘다(최대 ×1.35).
+//  벽에 막히면(30% 미만 이동) 다른 쪽 → 그래도 막히면 엔진 이동 그대로.
+//  공격 자리: 영웅 3.2칸 안으로 다가오는 중이면 영웅에서 뻗은 가장 가까운 허용 방향 줄 위, 지금 거리(공격 거리 0.8배·0.55~1.4칸보다 가까우면 그 거리) 점으로 향해
+//   먼저 줄에 올라선 뒤 줄을 따라 다가온다 → 마지막 접근·공격 방향이 허용 방향(줄은 한 번 고르면 반 칸 넘게 돌아가야 바꿈).
+//   CPU 시뮬레이션(출발 1.6~3.1칸·36방위·정지 0.85/1.15칸, 부류마다 216경우): 마지막 방위 오차 중앙 1.5~1.8°·최대 10°, 도착 늦어짐 중앙 0.15~0.27초·최대 0.55초.
+//  공격 시작 자리: x 부류가 X자 줄에서 22.5° 넘게 벗어난 자리에서 근접 공격을 시작하면(R53 canPrepare) R230 의 가로 옆자리 블링크 대신
+//   가장 가까운 X자 자리(R230 과 같은 거리·어둠 수축·2.4초 간격)로 옮긴다. 막히면 R230 원래대로. +·둘 다 부류는 R230 그대로(가로 옆자리도 허용 방향).
+//  멈춰 서서 칠 때 미끄러지지 않게 걷는 중 자리 맞춤은 걷는 동안만(거미만 09:55 요청대로 멈춘 자리에서 X자 자리로 천천히 기어감).
+//  영웅은 키·클릭 입력대로 움직이므로 바꾸지 않는다. 판정·체력·피해·경로 목표는 그대로(그 틱의 걸음 방향과 지그재그 보정 길이만).
+const SPIDER=/거미|spider|arachn/i;const isSpider=e=>!!e&&!major(e)&&(SPIDER.test(String(e.name||''))||SPIDER.test(String(e.nativeId||''))||SPIDER.test(String(e.path||'')));
+const famOf=k=>/#/.test(k)?null:String(k).replace(/\.(webp|png|jpe?g)$/i,'').replace(/[-_](idle|move|walk|run|attack|atk|hit|hurt|death|die|cast|poses?|motion)(?:[-_]?\d+)?$/i,'');
+let GZ=null,FAM=null,gzReq=false;function gzLoad(){if(GZ||gzReq||typeof fetch!=='function')return;gzReq=true;fetch('assets/r425/gaze.json').then(r=>r.ok?r.json():null).then(j=>{if(!j?.classes){gzReq=false;return;}
+ const F={};for(const [k,v] of Object.entries(j.classes)){const f=famOf(k);if(f&&(!F[f]||/[-_]move/i.test(k)))F[f]=v;}FAM=F;GZ=j;}).catch(e=>{gzReq=false;fail(e);});}
+function artKey(c){let s=srcOf(c).replace(/^[a-z]+:\/\/[^/]+/i,'').replace(/[?#].*$/,'');const i=s.indexOf('assets/');s=i>=0?s.slice(i+7):s.replace(/^\.?\//,'');if(/monsters|atlas/i.test(s)&&Array.isArray(c.sourceRect))s+='#'+c.sourceRect.map(v=>Math.round(v)).join(',');return s;}
+const CLS=new Set(['x','plus','both']);
+function gazeOf(e){if(isSpider(e))return 'x';const s=ST.get(e),a=s?.art;if(!a||!GZ)return s?.gz||'both';
+ let v=GZ.classes[a];if(!CLS.has(v)){const f=famOf(a);v=f&&FAM?.[f];}if(CLS.has(v)){if(s)s.gz=v;return v;}return s?.gz||'both';}/* 지금 그리는 그림 → 같은 몹 다른 동작 시트(-move/-idle/-attack) → 이 몹이 마지막으로 알아본 부류 → both */
+const ALLOW=Object.freeze({x:[0,90,180,270],plus:[45,135,225,315],both:[0,45,90,135,180,225,270,315]}),DEG=Math.PI/180,DWELL=.35,SLOT_IN=0,COMP=1.35;
+const angD=(a,b)=>{const d=Math.abs((((a-b)%360)+360)%360);return d>180?360-d:d;};
+const wAng=(dx,dy)=>(((Math.atan2(dy,dx)/DEG)%360)+360)%360;/* 칸 각도 */
+const wDir=a=>[Math.cos(a*DEG),Math.sin(a*DEG)];
+const scrAng=(dx,dy)=>{const sx=dx-dy,sy=(dx+dy)*.5;return (((Math.atan2(sy,sx)/DEG)%360)+360)%360;};/* 화면 각도(보고용) */
+const latOf=(a,dx,dy)=>Math.cos(a*DEG)*dy-Math.sin(a*DEG)*dx;/* 목표 선 옆 거리(+면 반시계 쪽) */
+const GS=new WeakMap();
+function bracket(cls,ang){const A=ALLOW[cls];let a1=A[0],d1=999,a2=A[1],d2=999;for(const a of A){const d=angD(ang,a);if(d<d1){a2=a1;d2=d1;a1=a;d1=d;}else if(d<d2){a2=a;d2=d;}}return [a1,d1,a2];}
+function pick(g,cls,ang,t){const [a1,d1,a2]=bracket(cls,ang),step=360/ALLOW[cls].length;
+ if(g.want==null||angD(ang,g.want)>50)g.lat=0;g.want=ang;
+ if(d1<=step*.18){if(g.cur!==a1){g.cur=a1;g.since=t;}g.lat=0;return a1;}
+ if(g.cur===a1||g.cur===a2){const sc=Math.sin((g.cur-ang)*DEG);if(t-g.since<DWELL||!((g.lat||0)*sc>0))return g.cur;}
+ const s1=Math.sin((a1-ang)*DEG);const c=Math.abs(g.lat||0)<1e-6?a1:((g.lat>0)===(s1<0)?a1:a2);if(c!==g.cur){g.cur=c;g.since=t;}return c;}
+function radius(e){return e.combatProfile?.bodyBlock?.r||(Number.isFinite(e.radius)?e.radius:.27);}
+function steer(e,x0,y0,dt,t){const dx=e.x-x0,dy=e.y-y0,d=Math.hypot(dx,dy);if(!(d>1e-4)||d>.25||d/Math.max(.004,+dt||1/60)>6)return false;
+ let g=GS.get(e);if(!g)GS.set(e,g={cur:null,since:-9,lat:0,want:null,slotB:null,slotC:null});const cls=gazeOf(e),eng=wAng(dx,dy),step=360/ALLOW[cls].length;let ang=eng;
+ const p=typeof player==='object'?player:null;
+ if(p&&prefs.gazeSlot){const ox=x0-p.x,oy=y0-p.y,od=Math.hypot(ox,oy);if(od<3.2&&od>.35&&(dx*-ox+dy*-oy)>0){/* 다가오는 중 */
+   const rng=Math.max(.55,Math.min(1.4,(+e.combatProfile?.attackShape?.range||+e.combatProfile?.range||+e.attackRange||1)*.8)),mb=wAng(ox,oy);
+   let ba=g.slotB;if(ba==null||g.slotC!==cls||angD(mb,ba)>step*.62){[ba]=bracket(cls,mb);g.slotB=ba;g.slotC=cls;}
+   const [wx,wy]=wDir(ba),sd=Math.max(rng,od-SLOT_IN),gx=p.x+wx*sd-x0,gy=p.y+wy*sd-y0;
+   if(Math.hypot(gx,gy)>.08){ang=wAng(gx,gy);stats.gazeSlots=(stats.gazeSlots||0)+1;}}else g.slotB=null;}
+ const c=pick(g,cls,ang,t);if(angD(c,eng)<2){g.lat+=latOf(ang,dx,dy);stats.gazeKept=(stats.gazeKept||0)+1;return true;}
+ const [a1,d1,a2]=bracket(cls,ang),d2=angD(ang,a2),L=d*(d1<=step*.18?1:Math.min(COMP,(Math.sin(d1*DEG)+Math.sin(d2*DEG))/Math.max(.2,Math.sin((d1+d2)*DEG))));
+ const r=radius(e),ex=e.x,ey=e.y,go=a=>{const [wx,wy]=wDir(a);e.x=x0;e.y=y0;moveActor(e,wx*L,wy*L,r);return Math.hypot(e.x-x0,e.y-y0);};
+ let moved=go(c);if(moved<L*.3){const alt=c===a1?a2:a1;moved=go(alt);if(moved<L*.3){e.x=ex;e.y=ey;g.cur=null;stats.gazeBlocked=(stats.gazeBlocked||0)+1;return false;}g.cur=alt;g.since=t;}
+ g.lat+=latOf(ang,e.x-x0,e.y-y0);stats.gazeSteps=(stats.gazeSteps||0)+1;stats['gaze_'+cls]=(stats['gaze_'+cls]||0)+1;return true;}
+function spiderSlot(e,dt){/* 09:55 "거미 공격도 x자로": 영웅 곁에 멈춰 칠 때 영웅 기준 X자 자리로 천천히 기어가 X자 방향에서 문다 */
+ const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2)return;
+ const [ba]=bracket('x',wAng(ox,oy)),[wx,wy]=wDir(ba),gx=p.x+wx*od-e.x,gy=p.y+wy*od-e.y,g=Math.hypot(gx,gy);
+ if(g>.04){const k=Math.min(1,1.6*Math.max(0,+dt||0)/g);moveActor(e,gx*k,gy*k,radius(e));stats.spiderAtk=(stats.spiderAtk||0)+1;}}
+// 공격 시작 자리(x 부류): R230 이 위·아래에서 치려는 몹을 가로 옆자리로 옮기던 것을 X자 자리로 — 같은 거리·같은 어둠 수축·같은 2.4초 간격
+const X_TOL=22.5;
+function wantX(e){const p=typeof player==='object'?player:null;if(!p||!prefs.gaze||!prefs.gazeSlot||!solo()||!e||!(e.hp>0)||gazeOf(e)!=='x')return false;
+ if(e.boss||e.midboss||e.persona||e.stationary||e.r170Tower||e.turret||e.spawnState==='hidden'||major(e)||excluded(e))return false;
+ if(e.r230At!=null&&T()-e.r230At<2.4)return false;const ox=e.x-p.x,oy=e.y-p.y;return Math.hypot(ox,oy)<=3.2&&bracket('x',wAng(ox,oy))[1]>X_TOL;}
+function freeAt(x,y){try{if(typeof blocked==='function'&&blocked(x,y,.3,room))return false;if(typeof clearLine==='function'&&!clearLine({x,y},player))return false;return true;}catch(_){return false;}}
+function puffAt(x,y,delay){try{const P=window.__STORYWORLD_PIXELFX_R163__;if(P?.has?.('pvfx-void-implosion'))P.play('pvfx-void-implosion',x,y,{k:.55,delay:delay||0,tint:{a:[40,10,30],b:[150,90,170]}});}catch(_){}}
+function flankX(e){const p=player,[a1,,a2]=bracket('x',wAng(e.x-p.x,e.y-p.y)),range=Number(e.combatProfile?.attackShape?.range)||1.4,r=Math.max(.8,range*.75);
+ for(const b of [a1,a2]){const [wx,wy]=wDir(b),tx=p.x+wx*r,ty=p.y+wy*r;if(Math.hypot(tx-e.x,ty-e.y)>3.2||!freeAt(tx,ty))continue;
+  puffAt(e.x,e.y,0);e.x=tx;e.y=ty;e.nav=[];e.moving=false;puffAt(tx,ty,.06);if(typeof facing==='function')e.direction=facing(p.x-e.x,p.y-e.y);
+  e.r230At=T();const g=GS.get(e);if(g){g.cur=null;g.lat=0;g.slotB=b;g.slotC='x';}stats.flankX=(stats.flankX||0)+1;return true;}
+ stats.flankXBlocked=(stats.flankXBlocked||0)+1;return false;}
+let r53Tries=0;
+function wrapR53(){const M=window.__STORYWORLD_HOSPITAL_MOTION_R53__;if(!M||typeof M.canPrepare!=='function')return false;if(M.__r425)return true;
+ if(window.__STORYWORLD_MOB_FLANK_R230__&&!M.__r230)return false;/* R230 이 먼저 감싼 뒤 그 바깥에 선다 */
+ window.__STORYWORLD_HOSPITAL_MOTION_R53__=Object.freeze({...M,__r425:true,canPrepare(e,kind,...a){let hold=false,pre;
+  try{hold=kind==='melee'&&!e?.attack&&wantX(e);if(hold){pre=e.r230At;e.r230At=T();}}catch(err){hold=false;fail(err);}/* R230 가로 블링크를 이번만 쉬게 */
+  let ok;try{ok=M.canPrepare.call(this,e,kind,...a);}finally{if(hold)e.r230At=pre;}
+  try{if(hold&&ok!==false&&!e?.attack&&!flankX(e))window.__STORYWORLD_MOB_FLANK_R230__?.flank?.(e);}catch(err){fail(err);}
+  return ok;}});return true;}
+(function arm(){try{if(wrapR53())return;}catch(err){fail(err);}if(++r53Tries<80&&typeof setTimeout==='function')setTimeout(arm,250);})();
 if(typeof tick==='function'&&typeof moveActor==='function'){const base=tick;tick=function(dt,...a){let pre=null;
- try{if(prefs.spiderX&&typeof room==='object'&&room?.enemies){pre=[];for(const e of room.enemies)if(isSpider(e))pre.push([e,e.x,e.y]);}}catch(err){fail(err);}
+ try{if((prefs.gaze||prefs.spiderX)&&typeof room==='object'&&Array.isArray(room?.enemies)&&solo()){gzLoad();pre=[];for(const e of room.enemies)if(e&&e.hp>0&&e.visible!==false&&!['hidden','inactive','disabled','despawned'].includes(e.spawnState)&&!e.frozenR380&&!excluded(e))pre.push([e,e.x,e.y]);}}catch(err){fail(err);}
  const r=base.apply(this,[dt,...a]);
- try{if(pre)for(const [e,x0,y0] of pre){const dx=e.x-x0,dy=e.y-y0,d=Math.hypot(dx,dy);if(!(e.hp>0))continue;
-   if(!(d>1e-4)){/* 공격도 X자(09:55 "거미 공격도 x자로"): 영웅 곁에 멈춰 칠 때는 영웅 기준 화면 대각선 자리로 천천히 미끄러져 대각선에서 문다 */
-    const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2)continue;
-    const sx=ox-oy,sy=(ox+oy)*.5,m=Math.hypot(sx,sy),tx=(Math.sign(sx)||1)*m/Math.SQRT2,ty=(Math.sign(sy)||1)*m/Math.SQRT2,wx=p.x+ty+tx/2,wy=p.y+ty-tx/2,gx=wx-e.x,gy=wy-e.y,g=Math.hypot(gx,gy);
-    if(g>.04){const k=Math.min(1,1.6*Math.max(0,+dt||0)/g);moveActor(e,gx*k,gy*k,e.combatProfile?.bodyBlock?.r||e.radius||.27);stats.spiderAtk=(stats.spiderAtk||0)+1;}continue;}
-   if(d>.3)continue;
-   const sx=dx-dy,sy=(dx+dy)*.5,m=Math.hypot(sx,sy);let st=SPD.get(e);if(!st)SPD.set(e,st={v:1,at:T()});
-   if(Math.abs(sy)>Math.abs(sx)*.35)st.v=Math.sign(sy)||st.v;else if(T()-st.at>.55){st.v=-st.v;st.at=T();}
-   const hx=Math.sign(sx)||1,ux=hx*m/Math.SQRT2,uy=st.v*m/Math.SQRT2,X=uy+ux/2,Y=uy-ux/2;
-   e.x=x0;e.y=y0;moveActor(e,X,Y,e.combatProfile?.bodyBlock?.r||e.radius||.27);stats.spiderSteps=(stats.spiderSteps||0)+1;}}catch(err){fail(err);}
+ try{if(pre){const t=T();for(const [e,x0,y0] of pre){if(!(e.hp>0))continue;const spider=isSpider(e);
+   if(Math.hypot(e.x-x0,e.y-y0)<=1e-4){if(spider&&prefs.spiderX)spiderSlot(e,dt);continue;}
+   if(prefs.gaze||(spider&&prefs.spiderX))steer(e,x0,y0,dt,t);}}}catch(err){fail(err);}
  return r;};}
 // ---- ⑤ 이동 중 공격: 미끄러짐 대신 발을 딛고 친다(사용자 09:57 "이동 중에 공격한다면 이동 모션 나가고 방향 맞게 공격 모션으로 전환했을 때 공격이 그 방향으로
 //  나가도록 — 지금은 공격 모션으로 이동하는 게 있어서 그냥 미끄러져서 이동하는 느낌, 특히 영웅들"). 실측: 환도(R271)·슬레이어(R351)는 이동 중에도
@@ -173,6 +241,6 @@ function injectTele(n){try{const panel=document.getElementById('panel');if(!pane
  host.appendChild(lab);lab.querySelector('input').onchange=ev=>teleSet(!!ev.target.checked);stats.teleUi=(stats.teleUi||0)+1;return true;}catch(e){fail(e);return true;}}
 if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
 function set(k,v){prefs[k]=v!==false;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
-window.__STORYWORLD_COMBAT_FLOW_R425__=Object.freeze({revision:REV,BANDS,set,teleSet,scaleOf:e=>ST.get(e)?.s??1,naturalOf:e=>ST.get(e)?.nat??null,
+window.__STORYWORLD_COMBAT_FLOW_R425__=Object.freeze({revision:REV,BANDS,set,teleSet,gazeOf,artOf:e=>ST.get(e)?.art??null,gazeTable:()=>GZ,ALLOW,screenAngle:scrAng,scaleOf:e=>ST.get(e)?.s??1,naturalOf:e=>ST.get(e)?.nat??null,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
 })();

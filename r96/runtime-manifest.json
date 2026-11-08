@@ -24318,6 +24318,11 @@
       "sha256": "116fe0d3a42c005bfd5317028c49d6e6577146b25ecac8ed312763b45d250185"
     },
     {
+      "path": "assets/r425/gaze.json",
+      "bytes": 13965,
+      "sha256": "4b3d029872a6fa988fb6e8c7db16a35f12227098204eabc0d4019ec940bf18f8"
+    },
+    {
       "path": "assets/r425/hunter/attack-l.webp",
       "bytes": 97052,
       "sha256": "ba1d86acca4b87b39b263ec031a51278382ee39c066f5bf0a51538ba30a0bd9f"
@@ -32874,8 +32879,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 27516,
-      "sha256": "8561969d8f9033648841493ebaf224af59a547a97b7eed77dc3e2964e721edcb"
+      "bytes": 37203,
+      "sha256": "4e3a5d05e077313ce3f9042b22187b0ddebee9558d2173f1e19253dbba6aaf77"
     },
     {
       "path": "combat-r114.js",
@@ -34078,8 +34083,8 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6815,
-  "totalBytes": 1083184224,
+  "fileCount": 6816,
+  "totalBytes": 1083207876,
   "webHTMLSha256": "ed5cb6164d104e8c036e2027cf010a0d3ec0a820eb86572bb33f704716238fb2",
   "largest": [
     {

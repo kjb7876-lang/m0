@@ -6025,7 +6025,8 @@
     "combat-flow-r425.js",
     "assets/r425/hunter/attack-l.webp",
     "assets/r425/hunter/attack-r.webp",
-    "assets/r425/hunter/index.json"
+    "assets/r425/hunter/index.json",
+    "assets/r425/gaze.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7100,5 +7101,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "705ad848f42d6e71743757f240d23a4f74df250b9bed95c294fe249f993749de"
+  "runtimeManifestSHA256": "69866a0976c803b18fca2079d066bda56edab00985449b49dfd04307ed34048c"
 }

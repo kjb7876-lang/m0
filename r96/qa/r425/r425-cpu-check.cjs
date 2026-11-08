@@ -41,26 +41,26 @@ const IMG={naturalWidth:200,naturalHeight:300};
 // 칸 48×48 훑기: 10~40 줄이 불투명 → 시트 대표 키 31/48, 머리 윗선 10/48
 const fakeCanvas=()=>({width:48,height:48,getContext:()=>({clearRect(){},drawImage(){},getImageData(){const d=new Uint8ClampedArray(48*48*4);for(let y=10;y<=40;y++)for(let x=0;x<48;x++)d[(y*48+x)*4+3]=255;return{data:d};}})});
 const FR=31/48,TOP=10/48;
-function makeEnv(store={}){const env={console,Math,JSON,Number,String,Array,Object,Set,Map,WeakMap,WeakSet,Promise,Error,Uint8ClampedArray,isFinite,
+function makeEnv(store={},table=null,pre=null){const env={fetch:table?(()=>Promise.resolve({ok:true,json:()=>({classes:table})})):undefined,console,Math,JSON,Number,String,Array,Object,Set,Map,WeakMap,WeakSet,Promise,Error,Uint8ClampedArray,isFinite,
  localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},document:{createElement:()=>fakeCanvas(),getElementById:()=>null},requestAnimationFrame:()=>0,
  time:1,ctx:new Rec(),room:{id:'test-room',enemies:[]},player:{x:0,y:0,hero:'lauren',hp:10,attackAnim:0},VFX:{mark:'assets/vfx/generated/v300/target-mark.webp'},settings:{}};
  env.window=env;env.actorHeight=()=>54;env.project=(x,y)=>({x:640+x*32,y:360+y*16});env.moveActor=(a,dx,dy)=>{a.x+=dx;a.y+=dy;};
  env.baseCalls={effects:0};
  env.drawEnemy=function(e){const R=env.ctx,q=env.project(e.x,e.y),H=54*(e.k||1.4),bh=H/FR,bw=bh*2/3;
-  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourceRect:[0,0,200,300],sourcePath:'assets/mobs/test-mob.webp',points:[R.pt(q.x-bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y+bh*.05),R.pt(q.x-bw/2,q.y+bh*.05)]});
+  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourceRect:[0,0,200,300],sourcePath:e.art||'assets/mobs/test-mob.webp',points:[R.pt(q.x-bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y+bh*.05),R.pt(q.x-bw/2,q.y+bh*.05)]});
    const W=55,y=q.y+6;for(const col of ['#302926','#795a50'])R.commands.push({kind:'fill',owner:{...R.owner},style:{fillStyle:col},paths:[{points:[R.pt(q.x-W/2,y),R.pt(q.x+W/2,y),R.pt(q.x+W/2,y+2),R.pt(q.x-W/2,y+2)]}]});
    R.commands.push({kind:'text',owner:{...R.owner},text:e.name,point:R.pt(q.x,q.y-H-8),matrix:R.m.slice(),style:{}});
    if(e.tell)R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourcePath:'assets/vfx/generated/v300/target-mark.webp',points:[R.pt(q.x-9,q.y-40),R.pt(q.x+9,q.y-40),R.pt(q.x+9,q.y-22),R.pt(q.x-9,q.y-22)]});});
   if(e.tele){const to=env.project(env.player.x,env.player.y);R.commands.push({kind:'stroke',owner:{...R.owner},style:{strokeStyle:'rgba(12,10,12,.92)'},paths:[{points:[R.pt(q.x,q.y),R.pt(to.x,to.y)]}]});
    R.commands.push({kind:'fill',owner:{...R.owner},style:{fillStyle:'rgba(14,13,15,.92)'},paths:[{points:[R.pt(q.x-30,q.y-H-20),R.pt(q.x+30,q.y-H-20),R.pt(q.x+30,q.y-H-3),R.pt(q.x-30,q.y-H-3)]}]});
    R.commands.push({kind:'text',owner:{...R.owner},text:'원거리 조준',point:R.pt(q.x,q.y-H-11),matrix:R.m.slice(),style:{}});}};
- env.hitEnemy=(e,a)=>{e.hp-=a;};env.tick=()=>{};env.drawHero=()=>{};env.drawEffect=()=>{env.baseCalls.effects++;};
- vm.createContext(env);vm.runInContext(C('combat-flow-r425.js'),env);return env;}
+ env.hitEnemy=(e,a)=>{e.hp-=a;};env.tick=()=>{if(typeof env.__engine==='function')env.__engine();};env.drawHero=()=>{};env.drawEffect=()=>{env.baseCalls.effects++;};
+ if(pre)pre(env);vm.createContext(env);vm.runInContext(C('combat-flow-r425.js'),env);return env;}
 const frame=(env,e)=>{env.ctx.commands.length=0;env.time+=.1;env.drawEnemy(e);return env.ctx.commands;};
 const bbox=c=>{const P=c.points||c.paths[0].points;const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];};
 const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
 {const env=makeEnv(),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
- ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-2');
+ ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-4');
  // 큰 일반 몹(원래 키 영웅 2.5배) → 일반 띠 상한 1.55 로
  const e={id:'m1',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};let cs;for(let i=0;i<4;i++)cs=frame(env,e);
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
@@ -82,7 +82,54 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  ok('enraged boss keeps the R205 2× size (boss band × 2, not shrunk back)',opaque>=1.9*2*54-2&&opaque<=2.3*2*54+2,opaque/54);
  ok('enraged boss: HP bar moves above the head (8 px over the sheet head line), not in the middle of the body',bars.length===2&&bars.every(x=>x[3]<=head-7&&x[3]>=head-12),{head,bars});
  ok('enraged boss: name label sits right above the bar',txt&&near(txt.point[1],bars[0][1]-5,1),{name:txt?.point,bar:bars[0]});}
+// ---- ④ 시선 3부류: 엔진 걸음 흉내(벽 없음)로 걸음 방향을 본다 ----
+async function gazeChecks(){
+ // 가짜 R53(R230 이 이미 감싼 꼴): 근접 준비 때 R230 처럼 2.4초 간격 안이면 건너뛰고, 아니면 가로 옆자리 블링크를 셈
+ const r230={flanks:0,skipped:0};
+ const env=makeEnv({},{'mobs/x-mob.webp':'x','mobs/p-mob.webp':'plus','mobs/M030-move.png':'plus','mobs/M031-idle.png':'x'},en=>{en.__STORYWORLD_MOB_FLANK_R230__={flank:()=>{r230.flanks++;return true;}};
+  en.__STORYWORLD_HOSPITAL_MOTION_R53__=Object.freeze({__r230:true,canPrepare(e,kind){if(kind==='melee'&&!e.attack){if(e.r230At!=null&&en.time-e.r230At<2.4)r230.skipped++;else r230.flanks++;}return true;}});
+  en.blocked=()=>false;en.clearLine=()=>true;en.facing=()=>'right';}),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
+ const mk=(id,art,name)=>({id,name:name||'시험 몹',art,x:0,y:0,hp:10,maxHp:10,k:1.4,spawnState:'active'});
+ const ex=mk('gx','assets/mobs/x-mob.webp'),ep=mk('gp','assets/mobs/p-mob.webp'),eb=mk('gb','assets/mobs/b-mob.webp'),sp=mk('gs','assets/mobs/b-mob.webp','동굴 거미');
+ env.room.enemies=[ex,ep,eb,sp];env.player.x=-60;env.player.y=60;
+ for(const e of env.room.enemies)frame(env,e);env.tick(1/60);for(let i=0;i<3;i++)await new Promise(r=>setImmediate(r));
+ ok('gaze table loads; class from the drawn body art (x / plus / unknown → both, spiders → x)',F.gazeOf(ex)==='x'&&F.gazeOf(ep)==='plus'&&F.gazeOf(eb)==='both'&&F.gazeOf(sp)==='x',[F.gazeOf(ex),F.gazeOf(ep),F.gazeOf(eb),F.gazeOf(sp),F.artOf(ex)]);
+ const ef1=mk('gfa','assets/mobs/M030-attack.png'),ef2=mk('gfb','assets/mobs/M031-move.png');frame(env,ef1);frame(env,ef2);const st0=F.gazeOf(ex);ex.art='assets/mobs/unknown-pose.webp';frame(env,ex);
+ ok('unknown pose sheet → same mob family class (M030-attack → plus from -move, M031-move → x from -idle); unknown art keeps the class last seen',F.gazeOf(ef1)==='plus'&&F.gazeOf(ef2)==='x'&&st0==='x'&&F.gazeOf(ex)==='x',[F.gazeOf(ef1),F.gazeOf(ef2),F.gazeOf(ex)]);ex.art='assets/mobs/x-mob.webp';frame(env,ex);
+ ok('allowed directions in tile angles: x = tile edges (screen 2:1 diagonals ≈27°), plus = screen horizontal/vertical',F.ALLOW.x.map(a=>Math.round(F.screenAngle(Math.cos(a*Math.PI/180),Math.sin(a*Math.PI/180)))).join()==='27,153,207,333'&&F.ALLOW.plus.map(a=>Math.round(F.screenAngle(Math.cos(a*Math.PI/180),Math.sin(a*Math.PI/180)))).join()==='90,180,270,0');
+ const sAng=(dx,dy)=>{const sx=dx-dy,sy=(dx+dy)*.5;return ((Math.atan2(sy,sx)*180/Math.PI)%360+360)%360;};
+ const wAng=(dx,dy)=>((Math.atan2(dy,dx)*180/Math.PI)%360+360)%360;
+ const wdir=a=>{const vx=Math.cos(a*Math.PI/180),vy=Math.sin(a*Math.PI/180),X=vy+vx/2,Y=vy-vx/2,m=Math.hypot(X,Y);return [X/m,Y/m];};
+ function walk(e,deg,secs,v=2){const [ux,uy]=wdir(deg),seen=new Set();let len=0,top=0;const x0=e.x,y0=e.y;env.room.enemies=[e];
+  env.__engine=()=>{e.x+=ux*v/60;e.y+=uy*v/60;};for(let i=0;i<secs*60;i++){const px=e.x,py=e.y;env.time+=1/60;env.tick(1/60);const st=Math.hypot(e.x-px,e.y-py);seen.add(Math.round(sAng(e.x-px,e.y-py))%360);len+=st;top=Math.max(top,st*60/v);}
+  env.__engine=null;const prog=((e.x-x0)*ux+(e.y-y0)*uy)/(v*secs);return {seen:[...seen].sort((a,b)=>a-b),len:+len.toFixed(3),top:+top.toFixed(3),prog:+prog.toFixed(3),net:+sAng(e.x-x0,e.y-y0).toFixed(1)};}
+ const dA=(a,b)=>{const d=Math.abs(((a-b)%360+360)%360);return d>180?360-d:d;};
+ let w=walk(ex,0,3);ok('x-class walking screen-right zig-zags on the two tile-edge diagonals (X), same arrival (progress ≥ 0.9), leg speed ≤ 1.35×, average heading kept',w.seen.join()==='27,333'&&w.prog>=.9&&w.top<=1.351&&dA(w.net,0)<10,w);
+ w=walk(ex,90,2);ok('x-class walking screen-down zig-zags on the lower X legs',w.seen.join()==='27,153'&&w.prog>=.9&&dA(w.net,90)<10,w);
+ w=walk(ep,45,3);ok('plus-class walking diagonally goes in horizontal/vertical legs (+), arrival kept, average heading kept',w.seen.join()==='0,90'&&w.prog>=.9&&dA(w.net,45)<10,w);
+ w=walk(eb,20,3);ok('both-class: 8 directions — screen 20° walks as 0°/27° legs, average ≈ 20°',w.seen.join()==='0,27'&&w.prog>=.95&&dA(w.net,20)<8,w);
+ w=walk(eb,97,1);ok('both-class within ~8° (tile angle) of an allowed direction snaps to it (no zig-zag, no speed change)',w.seen.join()==='90'&&Math.abs(w.len-2)<.02,w);
+ w=walk(eb,93,1);ok('engine step already within 2° (tile angle) of an allowed direction is kept as is',w.seen.join()==='93'&&Math.abs(w.len-2)<.02,w);
+ w=walk(sp,180,2);ok('spiders walk the X legs',w.seen.join()==='153,207',w);
+ // 공격 자리: 화면 오른쪽(0°) 2.6칸에서 영웅에게 다가오는 x 몹 → X자 줄(칸 0°/270°) 위에서 멈춘다
+ const ea=mk('ga','assets/mobs/x-mob.webp');frame(env,ea);env.player.x=0;env.player.y=0;const [rx,ry]=wdir(0);ea.x=rx*2.6;ea.y=ry*2.6;env.room.enemies=[ea];
+ env.__engine=()=>{const dx=-ea.x,dy=-ea.y,d=Math.hypot(dx,dy);if(d>.85){ea.x+=dx/d*2/60;ea.y+=dy/d*2/60;}};let reach=null;for(let i=0;i<240;i++){env.time+=1/60;env.tick(1/60);if(reach==null&&Math.hypot(ea.x,ea.y)<=.86)reach=i/60;}env.__engine=null;
+ const wb=wAng(ea.x,ea.y);ok('attack slot: an x-class mob approaching from the screen side ends on an X line from the hero (attack goes along X) within 2.6 s',(dA(wb,0)<12||dA(wb,270)<12)&&Math.hypot(ea.x,ea.y)<1.3&&reach!=null&&reach<2.6,{wb,screen:sAng(ea.x,ea.y),dist:Math.hypot(ea.x,ea.y),reach});
+ // 공격 시작 자리: 영웅 바로 아래(화면 90° = 칸 45°)에서 근접 준비 → R230 가로 블링크 대신 X자 자리로, R230 은 건너뜀
+ const M=env.__STORYWORLD_HOSPITAL_MOTION_R53__;const ef=mk('gf','assets/mobs/x-mob.webp');frame(env,ef);ef.x=Math.SQRT1_2;ef.y=Math.SQRT1_2;env.time+=5;
+ const f0=r230.flanks;M.canPrepare(ef,'melee');const fb=wAng(ef.x,ef.y);
+ ok('x-class melee start off the X lines → moved to the nearest X spot (R230 range), R230 sideways blink not used',M.__r425===true&&(dA(fb,0)<1||dA(fb,90)<1)&&Math.abs(Math.hypot(ef.x,ef.y)-1.05)<.01&&r230.flanks===f0&&F.inspect().stats.flankX===1,{fb,d:Math.hypot(ef.x,ef.y),r230,stats:F.inspect().stats.flankX});
+ const pf=mk('gpf','assets/mobs/p-mob.webp');frame(env,pf);pf.x=Math.SQRT1_2;pf.y=Math.SQRT1_2;const f1=r230.flanks;M.canPrepare(pf,'melee');
+ ok('plus-class melee start → R230 unchanged (sideways is a + direction)',r230.flanks===f1+1&&pf.x===Math.SQRT1_2,r230);
+ const eg=mk('gg','assets/mobs/x-mob.webp');frame(env,eg);eg.x=1;eg.y=0;const x1=eg.x;M.canPrepare(eg,'melee');
+ ok('x-class already on an X line → no move',eg.x===x1&&eg.y===0);
+ // 벽: moveActor 가 막으면 엔진 걸음 그대로
+ const eW=mk('gw','assets/mobs/x-mob.webp');frame(env,eW);env.player.x=-60;env.player.y=60;env.room.enemies=[eW];const mv=env.moveActor;env.moveActor=()=>{};
+ const [ux,uy]=wdir(0);env.__engine=()=>{eW.x+=ux*2/60;eW.y+=uy*2/60;};const x0=eW.x;for(let i=0;i<30;i++){env.time+=1/60;env.tick(1/60);}env.__engine=null;env.moveActor=mv;
+ ok('blocked X leg (moveActor cannot move) → keeps the engine step, never stuck',Math.abs(eW.x-x0-ux*1)<1e-6,eW.x-x0);
+ ok('gaze stats counted, no errors',F.inspect().stats.gazeSteps>0&&F.inspect().stats.errors===0,F.inspect().stats);}
+(async()=>{await gazeChecks();
 ok('gameplay untouched: no damage/cooldown/save writes in combat-flow (only visuals, positions of walking mobs and the hero plant)',!/attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(C('combat-flow-r425.js')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(JSON.stringify({ok:pass===checks.length,checks:checks.length,pass,method:'CPU fake globals and a fake command recorder; headless screenshots separately; no GPU or device'}));
-if(pass!==checks.length)process.exit(1);
+if(pass!==checks.length)process.exit(1);})().catch(e=>{console.error(e);process.exit(1);});
