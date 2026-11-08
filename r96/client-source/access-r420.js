@@ -14,7 +14,7 @@
 // 그림 자산·충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 를 쓰지 않는다(CSS filter 는 #stage 요소에만).
 (()=>{'use strict';
 if(window.__STORYWORLD_ACCESS_R420__)return;
-const REV='R420-access-5',KEY='storyworld.r420.access';
+const REV='R420-access-7',KEY='storyworld.r420.access';
 const DEF=Object.freeze({bright:100,text:'base',focus:true});
 const TEXT_SCALE=Object.freeze({base:null,large:{k:1.25,min:12},xl:{k:1.45,min:13}});
 const TEXT_KO=Object.freeze({base:'기본',large:'크게',xl:'아주 크게'});
@@ -87,6 +87,8 @@ const FOCUS_CSS='@media '+FOCUS_MQ+'{'
 // ④ CSS + 설정 창 ----------------------------------------------------------------------------
 function css(){if(document.getElementById('accessR420Css'))return;const s=document.createElement('style');s.id='accessR420Css';
  s.textContent='@media (pointer:coarse){#navCompassR100 .guideR101{white-space:nowrap;max-width:none}}'
+  +'@media (min-width:1100px){html body #r177Doc{top:118px;right:118px;max-height:min(52vh,calc(100vh - 236px))}html body #r177Doc.r182pages{max-height:calc(100vh - 236px)}html body #r177Doc.r182pages .pg{max-height:calc(100vh - 302px)}}'/* R432: PC 에서 오른쪽 쪽지·기억 조각 종이(R177, 오른쪽 14px·위 110px)가 나침반·길잡이 글(오른쪽 끝에서 14~106px)과 작은 지도 칸을 덮던 것 → 나침반 왼쪽으로 비킴(곡 소개 쪽지 아래 118px부터). 아래 HUD(높이 114) 위에서 끝나게 쪽 나눔 종이(R182) 높이도 맞춤 — 정본·사몽 서사 1,309쪽 높이 최대 386px, 1280×720 에서 쪽 칸 418px 라 다 들어감. 나침반 아래로 내리는 안은 같은 화면에서 쪽 칸이 300px 라 10% 쪽이 잘려 버림 */
+  +'@media (max-width:780px){html body #r331BgmNote{top:calc(132px + env(safe-area-inset-top,0px))!important;max-width:min(60vw,250px)!important;font-size:11px!important;line-height:1.45!important;padding:4px 10px!important}}'/* R432: 폰에서 곡 소개 쪽지(R313)가 7초 동안 위 '황금실' 단추를 덮던 것 → 단추 줄 아래로 */
   +'html body #r183 .cap{word-break:keep-all;text-wrap:balance;padding:8px 26px 10px;background:radial-gradient(closest-side,#000000b0,#00000070 60%,#0000);border-radius:40px}'/* R421: 3D 체험 자막 — 낱말 단위로 고르게 줄바꿈('다.' 한 글자 줄 없애기)·글 뒤에 옅은 어둠(장면 밝기는 그대로) */
  +'#accessR420 .r420-row{display:flex;align-items:center;gap:.5em;flex-wrap:wrap;margin:.25em 0}'
  +'#accessR420 input[type=range]{accent-color:#b08a4e;width:180px}#accessR420 .r420-val{min-width:3.2em;color:#e6d3a8}'
