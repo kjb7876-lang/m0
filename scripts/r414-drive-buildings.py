@@ -99,6 +99,23 @@ def clean(im, long_side):
     return img.resize((max(1, round(img.width * s)), max(1, round(img.height * s))), Image.LANCZOS)
 
 
+# R414-2 (7-discipline review 6.81: buildings were the brightest shapes on screen and floated on the void):
+# grade every building toward the samong palette and sink its base into the dark. Value is compressed so the
+# lightest wall top lands near bone #A59487 * .55, saturation is cut to 45 %, the colour is pulled toward
+# blood-black #321B27, the lower part darkens progressively and the bottom 16 % fades out (no hard cut on the void).
+VOID = np.array([0x32, 0x1B, 0x27], np.float32)
+def grade(img):
+    a = np.asarray(img.convert('RGBA')).astype(np.float32); rgb, al = a[..., :3], a[..., 3]
+    lum = rgb @ np.array([.299, .587, .114], np.float32)
+    rgb = lum[..., None] + (rgb - lum[..., None]) * .45            # desaturate
+    rgb = rgb * .52                                                 # value compression (L* ~60-75 -> ~35-45)
+    rgb = rgb * .72 + VOID * .28                                    # atmospheric pull toward blood-black
+    h = rgb.shape[0]; t = (np.arange(h, dtype=np.float32) / max(1, h - 1))[:, None]
+    rgb = rgb * (1.0 - .35 * np.clip((t - .45) / .55, 0, 1))[..., None]   # lower half darker (top keeps a rim of light)
+    al = al * np.clip((1.0 - t) / .16, 0, 1)                        # bottom 16 % fades into the void
+    return Image.fromarray(np.dstack([rgb, al]).clip(0, 255).astype(np.uint8), 'RGBA')
+
+
 def lines(man):
     v = man.get('source_lines', man.get('source_line'))
     return [v] if isinstance(v, int) else list(v or [])
@@ -116,26 +133,27 @@ def candidates():
         yield folder, man, pngs[0]
 
 
-def derive(folder, man, png, out, name, long_side):
+def derive(folder, man, png, out, name, long_side, graded=False):
     data = png.read_bytes(); sha = hashlib.sha256(data).hexdigest()
     assert man.get('sha256') == sha, ('manifest sha mismatch', folder.name, sha)
     img = clean(Image.open(png), long_side)
+    if graded: img = grade(img)
     p = out / (name + '.webp'); img.save(p, 'WEBP', quality=90, alpha_quality=100, method=6)
     return img, p, sha
 
 
 bout = rt / 'assets/r414/buildings'; pout = rt / 'assets/r414/props'
 bout.mkdir(parents=True, exist_ok=True); pout.mkdir(parents=True, exist_ok=True)
-bidx = {'revision': 'R414', 'method': f'alpha {LO}..{HI} -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 600, WebP q90',
+bidx = {'revision': 'R414', 'method': f'alpha {LO}..{HI} -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 600, samong grade (sat .45, value .52, 28% toward #321B27, lower half darker, bottom 16% alpha fade), WebP q90',
         'hero': {'drawnHeightPx': 66, 'minBuildingPx': 132}, 'buildings': {}, 'held': {}}
-pidx = {'revision': 'R414', 'method': bidx['method'].replace('600', '384'), 'props': {}}
+pidx = {'revision': 'R414', 'method': f'alpha {LO}..{HI} -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 384, WebP q90', 'props': {}}
 seen = set()
 for folder, man, png in candidates():
     aid = man.get('id'); seen.add(aid)
     common = {'png': png.name, 'dotsId': aid, 'dotsStatus': man.get('status'), 'canonLines': lines(man), 'manifestChecked': True}
     if aid in BUILDINGS:
         name, zone, h = BUILDINGS[aid]; assert h >= 132, (name, h)
-        img, p, sha = derive(folder, man, png, bout, name, 600)
+        img, p, sha = derive(folder, man, png, bout, name, 600, graded=True)
         bidx['buildings'][name] = {'zone': zone, 'height': h, 'path': 'assets/r414/buildings/' + p.name, **common, 'pngSHA256': sha,
                                    'size': list(img.size), 'bytes': p.stat().st_size, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
         print('building', name, zone, h, img.size, p.stat().st_size)
