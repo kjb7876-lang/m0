@@ -10,7 +10,7 @@
  const DEFAULTS=Object.freeze({floorDecals:true,lightProps:true});
  const LABELS={floorDecals:'바닥 데칼',lightProps:'광원 소품'};
  // Counts follow floor area (about 5 decals and 1-2 lamps per screen at default zoom).
- const INDEX='./assets/r92/index.json',DECAL_CELLS=80,DECAL_GAP=3.2,LIGHT_CELLS=320,LIGHT_GAP=7,LIGHT_CELLS_R412=640,R412_SINGLE=true;// R412: 320칸마다 1개(최대 26)·문/목표 양옆 짝 → 640칸마다 1개(최대 12)·한쪽만
+ const INDEX='./assets/r92/index.json',DECAL_CELLS=80,DECAL_GAP=3.2,LIGHT_CELLS=320,LIGHT_GAP=7,LIGHT_CELLS_R412=640,LIGHT_CELLS_R412_OUT=400,R412_SINGLE=true;// R412: 320칸마다 1개(최대 26)·문/목표 양옆 짝 → 640칸마다 1개(최대 12)·한쪽만
  const quota=(cells,per,lo,hi)=>Math.max(lo,Math.min(hi,Math.round(cells/per)));
  let prefs={...DEFAULTS},index=null,state='idle',lastError=null,plan=null,planKey=null,preloadAt=0;
  const stats={plans:0,decalDraws:0,propDraws:0,dimmedFrames:0,preloads:0,errors:0};
@@ -49,7 +49,7 @@
   const F=new Set(L.floorCells.map(([x,y])=>x+','+y)),onFloor=(x,y)=>F.has(Math.floor(x)+','+Math.floor(y));
   const openAhead=p=>{for(const s of[.5,1,1.5,2,2.5])for(const o of[-.5,0,.5])if(!onFloor(p.x+s+o,p.y+s-o))return false;return true;};
   const cells=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5,seed:hash('r92:'+zone+':'+x+':'+y)})).sort((a,b)=>a.seed-b.seed||a.y-b.y||a.x-b.x);
-  const decals=[],lights=[],DECALS=quota(cells.length,DECAL_CELLS,8,110),LIGHTS=quota(cells.length,LIGHT_CELLS_R412,2,12);
+  const decals=[],lights=[],DECALS=quota(cells.length,DECAL_CELLS,8,110),LIGHTS=quota(cells.length,L0?.worldR74?.mode==='outdoor'?LIGHT_CELLS_R412_OUT:LIGHT_CELLS_R412,3,12)/* R412-10c 심사: 작은 지역은 main 처럼 3개까지(dist03 의식 종 곁 촛대가 빠지던 것), 큰 방만 줄인다 */;
   // R155: 바닥 칸마다 모든 벽과 거리를 재던 것(칸 수 x 벽 수)을, 벽마다 '2칸 안' 범위의 격자 칸에만 넣어 두고 그 칸의 벽만 잰다.
   //  2칸 안 벽은 빠짐없이 찾고 같은 순서(벽 번호 순, 같으면 먼저 것)로 고르므로 2칸 안 결과는 그대로이고, 그보다 먼 결과는
   //  아래 쓰임(1.8·1.25·0.45 문턱)에서 똑같이 '멀다'로 판정된다. window.__STORYWORLD_R155_NOGRID__ 이면 옛 방식.
@@ -78,12 +78,12 @@
    // Anchor pairs may use any wall (entries sit on the lower map edge); the
    // corridor rhythm keeps to back walls only.
    // R412: 다른 조형물(가구·조각) 1.5칸 안에는 세우지 않고, 등불끼리는 문 옆 짝이라도 LIGHT_GAP 만큼 띄운다
-   const foot=q=>{try{return window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q)||q;}catch(_){return q;}},others=(r.props||[]).filter(q=>q&&q.visible!==false&&!q.r303Hide&&!q.terrainWall&&finite(q)).map(foot),roomy=p=>!others.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<1.5);/* 보이는 자리(R111 그리기 자리) 기준 */
+   const foot=q=>{try{return window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q)||q;}catch(_){return q;}},others=(r.props||[]).filter(q=>q&&q.visible!==false&&!q.r303Hide&&!q.terrainWall&&finite(q)&&!(q.r80Dressing||/^r8[01]:scene:/.test(String(q.id||'')))).map(foot)/* 정본 장면 소품 곁에는 등불이 서도 된다(장면 초점광, R412-10c 심사) */,roomy=p=>!others.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<1.5);/* 보이는 자리(R111 그리기 자리) 기준 */
    const all=cells.map(spot).filter(s=>s&&roomy(s)),spots=all.filter(s=>s.back),free=p=>!lights.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<LIGHT_GAP);
-   const put=(s,kind)=>{const it=set[(s.seed>>>0)%set.length];/* R412 심사: 종류는 자리(칸 씨앗)로 정한다 — 개수를 줄여도 남은 자리의 등불 종류가 바뀌지 않게(촛대가 붉은 화로로 바뀌던 것) */lights.push({x:s.x,y:s.y,item:it.id,color:it.color,flip:s.flip,role:kind});};
-   const FOCAL=/objective|boss|altar|marker/i,anchors=[...[r.objective&&{kind:'objective',x:r.objective.x,y:r.objective.y},r.altar&&{kind:'altar',x:r.altar.x,y:r.altar.y}].filter(q=>q&&finite(q)),...g.points.filter(q=>/portal|entry|exit|gate|objective|boss|altar|marker/i.test(String(q.kind||q.id||''))),...g.doors.filter(finite)].map((q,i)=>[q,i]).sort((a,b)=>(FOCAL.test(String(b[0].kind||b[0].id||''))-FOCAL.test(String(a[0].kind||a[0].id||'')))||a[1]-b[1]).map(e=>e[0]);/* R412-10 심사: 등불 수를 줄여도 목표·제단·보스 곁 초점 등불이 먼저 선다(dist03 의식 종 곁 촛대가 문 등불에 밀려 빠지던 것) */
-   for(const a of anchors){if(lights.length>=LIGHTS)break;const ring=all.filter(s=>{const d=Math.hypot(s.x-a.x,s.y-a.y);return d>=2&&d<=6.5&&free(s);}).sort((s,t)=>Math.abs(Math.hypot(s.x-a.x,s.y-a.y)-4.6)-Math.abs(Math.hypot(t.x-a.x,t.y-a.y)-4.6));
-    const first=ring[0];if(!first)continue;put(first,'anchor');
+   const put=(s,kind)=>{const it=kind==='scene'?[...set].sort((p,q)=>(q.h/q.w||0)-(p.h/p.w||0))[0]:set[(s.seed>>>0)%set.length];/* 장면 곁은 키 큰 촛대 쪽 *//* R412 심사: 종류는 자리(칸 씨앗)로 정한다 — 개수를 줄여도 남은 자리의 등불 종류가 바뀌지 않게(촛대가 붉은 화로로 바뀌던 것) */lights.push({x:s.x,y:s.y,item:it.id,color:it.color,flip:s.flip,role:kind});};
+   const FOCAL=/objective|boss|altar|marker/i,anchors=[...[r.objective&&{kind:'objective',x:r.objective.x,y:r.objective.y},r.altar&&{kind:'altar',x:r.altar.x,y:r.altar.y}].filter(q=>q&&finite(q)),...g.points.filter(q=>/portal|entry|exit|gate|objective|boss|altar|marker/i.test(String(q.kind||q.id||''))),...g.doors.filter(finite),...(r.props||[]).filter(q=>q&&q.visible!==false&&finite(q)&&(q.r80Dressing||/^r8[01]:scene:/.test(String(q.id||'')))).map(q=>({kind:'scene',x:q.x,y:q.y}))].map((q,i)=>[q,i])/* R412-10c: 정본 장면 소품(종·고리 등)도 등불 하나를 곁에 둔다 */.sort((a,b)=>(FOCAL.test(String(b[0].kind||b[0].id||''))-FOCAL.test(String(a[0].kind||a[0].id||'')))||a[1]-b[1]).map(e=>e[0]);/* R412-10 심사: 등불 수를 줄여도 목표·제단·보스 곁 초점 등불이 먼저 선다(dist03 의식 종 곁 촛대가 문 등불에 밀려 빠지던 것) */
+   for(const a of anchors){if(lights.length>=LIGHTS)break;const sc=a.kind==='scene',T=sc?2.2:4.6,ring=all.filter(s=>{const d=Math.hypot(s.x-a.x,s.y-a.y);return d>=(sc?1.5:2)&&d<=(sc?3.5:6.5)&&free(s);}).sort((s,t)=>Math.abs(Math.hypot(s.x-a.x,s.y-a.y)-T)-Math.abs(Math.hypot(t.x-a.x,t.y-a.y)-T));
+    const first=ring[0];if(!first)continue;put(first,sc?'scene':'anchor');
     const v1=Math.atan2(first.y-a.y,first.x-a.x),second=ring.find(s=>s!==first&&free(s)&&Math.abs(((Math.atan2(s.y-a.y,s.x-a.x)-v1+3*Math.PI)%(2*Math.PI))-Math.PI)<Math.PI*.45);
     if(second&&lights.length<LIGHTS&&(!R412_SINGLE||FOCAL.test(String(a.kind||a.id||''))))put(second,'anchor');}/* 문·입구는 한쪽만, 목표·제단·보스는 장면 초점이라 양옆 짝을 남긴다(R412-10 심사) */
    for(const s of [...spots].sort((s,t)=>s.y-t.y||s.x-t.x)){if(lights.length>=LIGHTS)break;if(lights.some(q=>Math.hypot(s.x-q.x,s.y-q.y)<LIGHT_GAP+1))continue;put(s,'rhythm');}}
