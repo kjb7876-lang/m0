@@ -33023,6 +33023,11 @@
       "sha256": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
     },
     {
+      "path": "doors-fit-r413.js",
+      "bytes": 6201,
+      "sha256": "960cc0fbf9837cde728277d27407af471331754e8099847e9b338bedcd7edefc"
+    },
+    {
       "path": "doors-r189.js",
       "bytes": 5113,
       "sha256": "31d98d078fe04545665fd1b88ce048b6a970dc69c8fe3897a55c228e7626c0af"
@@ -33319,8 +33324,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571008,
-      "sha256": "cfaeac28c289adf54fec0c793ae01a9f31bf1e7b3a4465181211cd749c9e5ba3"
+      "bytes": 6571051,
+      "sha256": "70616e4c1695d9898d3220ae37689c65d2695a69aca53d6f79ec7b21c6057de2"
     },
     {
       "path": "intro-r140.js",
@@ -33714,8 +33719,8 @@
     },
     {
       "path": "roof-height-r267.js",
-      "bytes": 2703,
-      "sha256": "f4a6dadda1b309c164774f19127f70d150bb364377598d4fdee8a678021123cc"
+      "bytes": 4060,
+      "sha256": "be5c29df184884fe4c88f288619a4667401103fab8484b4ac1adeee956c5a4d5"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -34113,9 +34118,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6822,
-  "totalBytes": 1084626076,
-  "webHTMLSha256": "cfaeac28c289adf54fec0c793ae01a9f31bf1e7b3a4465181211cd749c9e5ba3",
+  "fileCount": 6823,
+  "totalBytes": 1084633677,
+  "webHTMLSha256": "70616e4c1695d9898d3220ae37689c65d2695a69aca53d6f79ec7b21c6057de2",
   "largest": [
     {
       "path": "index.html",
