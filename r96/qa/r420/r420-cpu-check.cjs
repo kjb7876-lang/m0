@@ -24,6 +24,9 @@ ok('focus HUD does not change brightness or colour of the game view',!/r420-focu
 ok('R421: memory paper (R177 #r177Doc) fades only in combat focus and returns on hover',src.includes('body.r420-focus.r420-combat #r177Doc:not(:hover){opacity:.4}'));
 ok('R421: touch hint text C를 눌러 → 버튼을 눌러 (updateHUD wrap, coarse only)',src.includes("n.split(k+'를 눌러').join('버튼을 눌러')")&&/function fixHint\(\)\{if\(!coarse\(\)/.test(src));
 ok('R421: 3D scene caption wraps by word with a soft backing, scene brightness untouched',src.includes('html body #r183 .cap{word-break:keep-all;text-wrap:balance')&&!/#r183[^{]*\{[^}]*filter/.test(src));
+ok('R432: phone music note (R313 #r331BgmNote) sits below the top button row',src.includes('@media (max-width:780px){html body #r331BgmNote{top:calc(132px + env(safe-area-inset-top,0px))!important'));
+ok('R432: PC memory paper (R177 #r177Doc) steps left of the compass and minimap (right 118px, top 118px)',src.includes('@media (min-width:1100px){html body #r177Doc{top:118px;right:118px;max-height:min(52vh,calc(100vh - 236px))}'));
+ok('R432: paged paper (R182) ends above the bottom HUD (beats #r177Doc.r182pages specificity)',src.includes('html body #r177Doc.r182pages{max-height:calc(100vh - 236px)}html body #r177Doc.r182pages .pg{max-height:calc(100vh - 302px)}'));
 ok('focus HUD can be turned off in settings',src.includes('id="r420Focus"'));
 // 샌드박스 실행
 function run(store){const listeners=[];const stage={style:{filter:''}};const els={};
