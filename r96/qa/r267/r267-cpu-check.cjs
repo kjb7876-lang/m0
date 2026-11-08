@@ -6,19 +6,26 @@ const F=C('roof-height-r267.js'),G=C('mob-gaze-r268.js');
 ok('runtime copies match',RT('roof-height-r267.js')===F&&RT('mob-gaze-r268.js')===G);
 const idx=RT('index.html');ok('both overlays are loaded by index.html',idx.includes('<script src="./roof-height-r267.js"></script>')&&idx.includes('<script src="./mob-gaze-r268.js"></script>'));
 const base=()=>{const c={localStorage:{getItem:()=>null,setItem(){}},console,Math,JSON,Array,Map,WeakMap,WeakSet,Set,Object,Number,String,setTimeout:()=>0,performance:{now:()=>0}};c.window=c;return c;};
-// R267: 벽 2.85 지역 → 덮개·테두리 scale.y = 2.85/2.705, 병원(벽 2.705)과 R80 덮개가 아닌 것은 1
+// R267: 벽 2.85 지역 → 덮개·테두리 scale.y = (2.85-0.01)/2.705(R413: 벽 윗면과 같은 깊이로 겹쳐 깜빡이지 않게 0.01 아래), 병원(벽 2.705)과 R80 덮개가 아닌 것은 1
 {const ctx=base();const mk=()=>({scale:{y:1},userData:{r80WorldRoof:true}});
  class TR{ensureHospitalRoofsR2(frame){this.calls=(this.calls||0)+1;}}ctx.StoryPhase1={ThreeRenderer:TR};
  vm.createContext(ctx);vm.runInContext(F,ctx);const r=new TR();r.hospitalRoofMeshR2=mk();r.perimeterMeshR83={scale:{y:1}};
  const walls=[...Array(20)].map(()=>({height:2.85,annex:true})).concat([{height:3.31},{height:2.45,decorative:true},{height:2.45,decorative:true},{height:2.45,decorative:true}]);
- r.ensureHospitalRoofsR2({zone:'ep1b02',exploration:{walls}});const s=2.85/2.705;
- ok('R219 indoor walls 2.85: roof caps and perimeter fascia are stretched so their top meets the wall top',r.calls===1&&Math.abs(r.hospitalRoofMeshR2.scale.y-s)<1e-6&&Math.abs(r.perimeterMeshR83.scale.y-s)<1e-6,{a:r.hospitalRoofMeshR2.scale.y,b:r.perimeterMeshR83.scale.y});
+ r.ensureHospitalRoofsR2({zone:'ep1b02',exploration:{walls}});const s=2.84/2.705;
+ ok('R219 indoor walls 2.85: roof caps and perimeter fascia are stretched so their top meets the wall top (0.01 under it, never the same depth)',r.calls===1&&Math.abs(r.hospitalRoofMeshR2.scale.y-s)<1e-6&&Math.abs(r.perimeterMeshR83.scale.y-s)<1e-6,{a:r.hospitalRoofMeshR2.scale.y,b:r.perimeterMeshR83.scale.y});
  ok('the most common wall height wins (one tall pillar and decorative backdrop rocks are ignored)',ctx.__STORYWORLD_ROOF_HEIGHT_R267__.wallTop({walls})===2.85);
+ {const top=r.hospitalRoofMeshR2.scale.y*2.705;ok('R413: cap top sits just under the wall top (no coplanar z-fighting stripe), by less than 0.02',top<2.85-1e-4&&top>2.85-.02,{top});}
  const h=new TR();h.hospitalRoofMeshR2={scale:{y:1},userData:{}};h.perimeterMeshR83={scale:{y:1}};h.ensureHospitalRoofsR2({zone:'ep1a08',exploration:{walls}});
  ok('the real hospital roof (not an R80 world roof) keeps its authored height',h.hospitalRoofMeshR2.scale.y===1&&h.perimeterMeshR83.scale.y===1);
  const w=new TR();w.hospitalRoofMeshR2=mk();w.perimeterMeshR83={scale:{y:1}};w.ensureHospitalRoofsR2({zone:'x',exploration:{walls:[...Array(9)].map(()=>({height:2.705}))}});
  ok('maps whose walls already are 2.705 stay unchanged',w.hospitalRoofMeshR2.scale.y===1);
  ctx.__STORYWORLD_ROOF_HEIGHT_R267__.set(false);r.ensureHospitalRoofsR2({zone:'ep1b02',exploration:{walls}});ok('switch off restores the original height',r.hospitalRoofMeshR2.scale.y===1);}
+// R413: R115 가 들어온 뒤 첫 틱에 같은 벽 객체 높이를 그 자리에서 올린다(1.3 → 2.85) → 0.5초 안에 덮개를 다시 맞춘다
+{const ctx=base();let T=0;ctx.performance={now:()=>T};const mk=()=>({scale:{y:1},userData:{r80WorldRoof:true}});
+ class TR{ensureHospitalRoofsR2(){}}ctx.StoryPhase1={ThreeRenderer:TR};vm.createContext(ctx);vm.runInContext(F,ctx);const r=new TR();r.hospitalRoofMeshR2=mk();r.perimeterMeshR83={scale:{y:1}};
+ const walls=[...Array(30)].map(()=>({height:1.3})),frame={zone:'ep1b03',exploration:{walls}};r.ensureHospitalRoofsR2(frame);const low=r.hospitalRoofMeshR2.scale.y===1;
+ for(const w of walls)w.height=2.85;T=200;r.ensureHospitalRoofsR2(frame);const held=r.hospitalRoofMeshR2.scale.y===1;T=700;r.ensureHospitalRoofsR2(frame);const s=2.84/2.705;
+ ok('walls raised in place after entry (R115 1.3 → 2.85) refit the roof caps and fascia within 0.5 s (no per-layout stale height)',low&&held&&Math.abs(r.hospitalRoofMeshR2.scale.y-s)<1e-6&&Math.abs(r.perimeterMeshR83.scale.y-s)<1e-6&&ctx.__STORYWORLD_ROOF_HEIGHT_R267__.inspect().stats.refits===1&&/R267-roof-3/.test(F),{y:r.hospitalRoofMeshR2.scale.y});}
 // R268: 가짜 세계에서 몹을 영웅 바로 위(화면)로 두고 시간을 흘린다
 function world(enemy,opts={}){const ctx=base();let t=0;ctx.time=0;ctx.started=true;ctx.loading=false;ctx.modal=null;ctx.storyScene=null;
  ctx.player={x:10,y:10,hp:100};ctx.room={enemies:[enemy]};ctx.blocked=opts.blocked||(()=>false);ctx.clearLine=()=>true;
