@@ -24318,6 +24318,171 @@
       "sha256": "116fe0d3a42c005bfd5317028c49d6e6577146b25ecac8ed312763b45d250185"
     },
     {
+      "path": "assets/r414/buildings/black-workshop-ruin.webp",
+      "bytes": 86174,
+      "sha256": "c0b6296b87a810afcbd2719afe469dbe9a643f569b5f9d7c47b2c6d51455790e"
+    },
+    {
+      "path": "assets/r414/buildings/broadcast-station.webp",
+      "bytes": 68894,
+      "sha256": "d9cc4c544e1dc0eceecaa1c64cffd8ca8e81c727347c96eaea849877728f963a"
+    },
+    {
+      "path": "assets/r414/buildings/corner-tavern.webp",
+      "bytes": 97364,
+      "sha256": "158b3e420ad1a4ca8a573297f338b733ed1f716ba509bd1a764f7bffebdec4e2"
+    },
+    {
+      "path": "assets/r414/buildings/dressmaker-shop.webp",
+      "bytes": 75060,
+      "sha256": "cfef6622aac4fdfcb8b629919d7fe7df422b0bb161c8f80a91ff5453869229bb"
+    },
+    {
+      "path": "assets/r414/buildings/emotion-tower.webp",
+      "bytes": 24074,
+      "sha256": "38c0de222545ee2e07cf37a83d91950e0e653309dea978e1ee17b338953d8c8a"
+    },
+    {
+      "path": "assets/r414/buildings/gallery-cathedral-ruin.webp",
+      "bytes": 106262,
+      "sha256": "73afa8d01c7d6cef986027c822a8acb3144e6cc424a336107ae172a07d54af76"
+    },
+    {
+      "path": "assets/r414/buildings/gray-school.webp",
+      "bytes": 50606,
+      "sha256": "f65dc5f4ad385720416bf8bc9678c0ca6b1ecdc7f42a9c3df3dac3aee413d39b"
+    },
+    {
+      "path": "assets/r414/buildings/hospital-admissions.webp",
+      "bytes": 63688,
+      "sha256": "569f680df7b0866c73d882a650f6ac167b3cc2d3e15126c58f5839d699c713cc"
+    },
+    {
+      "path": "assets/r414/buildings/hotel-kitchen-annex.webp",
+      "bytes": 79796,
+      "sha256": "e537bf7b2170e684a7318c9e8f352b0580db95463a4d478015ee308477d77ff7"
+    },
+    {
+      "path": "assets/r414/buildings/index.json",
+      "bytes": 17559,
+      "sha256": "1f4f56f86dbdeb676535d28111284660f4f534fd6e39bfda13e083d4c92bc635"
+    },
+    {
+      "path": "assets/r414/buildings/inner-keep-ruin.webp",
+      "bytes": 124234,
+      "sha256": "332749a3bd4e50ff380363d3775709a79fff5a77a937ba704f9772f46b71550e"
+    },
+    {
+      "path": "assets/r414/buildings/officer-residence-ruin.webp",
+      "bytes": 85466,
+      "sha256": "d31d7fa1680e09300562161875a550c5fce87594f6bf0ba384629f7b46d366fa"
+    },
+    {
+      "path": "assets/r414/buildings/officer-residence.webp",
+      "bytes": 76366,
+      "sha256": "629a5e649690b353898fce81b194c0126578be3b7e0b88dd857f1981afb614d6"
+    },
+    {
+      "path": "assets/r414/buildings/palace-colonnade.webp",
+      "bytes": 58480,
+      "sha256": "7345f7a1469ad6ab84613b5631eea87ec5394a675e5b377dfd230f574baaee2f"
+    },
+    {
+      "path": "assets/r414/buildings/polar-access-ruin.webp",
+      "bytes": 70144,
+      "sha256": "ef1a0b91fb5ce9c90a6cfa0589e1f4104364aba141d3a1d7821ab3f8c163626d"
+    },
+    {
+      "path": "assets/r414/buildings/polar-access.webp",
+      "bytes": 64592,
+      "sha256": "0725226d5d78d32660add91face276673ea1979b9cd216d103c1e66c11f66c20"
+    },
+    {
+      "path": "assets/r414/buildings/red-garden-bridge.webp",
+      "bytes": 65510,
+      "sha256": "0a02008d26b5d25bdc5a0583eccedd4d3d9869777840c9e4854da00d9d606995"
+    },
+    {
+      "path": "assets/r414/buildings/research-block.webp",
+      "bytes": 81306,
+      "sha256": "0d0b7f857b22c9d17ea245daea0a8f1fd9ab423c75584e6e27d0cb38560c47f7"
+    },
+    {
+      "path": "assets/r414/buildings/saebit-hotel.webp",
+      "bytes": 73434,
+      "sha256": "acfe2f559c9bf84119bd3fee1b0c982b863940b7dd7cba3a04ab4a4bbfb679fa"
+    },
+    {
+      "path": "assets/r414/buildings/shelter-headhouse.webp",
+      "bytes": 59336,
+      "sha256": "e5ad0716e791a4e52ae4a8b93237a366fea864eec4314248f4328edbec132707"
+    },
+    {
+      "path": "assets/r414/buildings/teacup-rose-house.webp",
+      "bytes": 86052,
+      "sha256": "6508018abf5e760ead48abc06b62917c821a14d0f591aa1602d75f279f975ad1"
+    },
+    {
+      "path": "assets/r414/buildings/training-gym-ruin.webp",
+      "bytes": 58346,
+      "sha256": "6e923e0194b704d84dfac4b3af22e0541b4e490f8cccdd8def42aded2d90c911"
+    },
+    {
+      "path": "assets/r414/buildings/training-gym.webp",
+      "bytes": 49260,
+      "sha256": "a190e6c4e24944c9542a0374caac5417e7f010181a01101f192ef3f11588ce3f"
+    },
+    {
+      "path": "assets/r414/buildings/twin-gatehouse-ruin.webp",
+      "bytes": 113028,
+      "sha256": "a095b2a0a7dea9b8399126a80088b30cefa6aad43c6bca6117d45ac8c2ea9211"
+    },
+    {
+      "path": "assets/r414/buildings/waterside-house.webp",
+      "bytes": 62438,
+      "sha256": "a9a7e46f0c5d6b22d96a598a95d14ca44399080aea6a7b6dc80b7b29fc36ada6"
+    },
+    {
+      "path": "assets/r414/props/departure-bag.webp",
+      "bytes": 33532,
+      "sha256": "77677cbe80ac03a3e6c8d414aaecb0665da60f0afc9c8eea1ad8b5d3ef004906"
+    },
+    {
+      "path": "assets/r414/props/fallen-rafters.webp",
+      "bytes": 26952,
+      "sha256": "508dcb3ec132f1edfeef89a04cdad33a1c53f873feaeca1ce379eac613fc2012"
+    },
+    {
+      "path": "assets/r414/props/floral-porcelain-panel.webp",
+      "bytes": 23178,
+      "sha256": "51909e699d74010cdb73acc9259784fb3b8112ac68f4dc3cf3ff8419b89aa6c0"
+    },
+    {
+      "path": "assets/r414/props/index.json",
+      "bytes": 4525,
+      "sha256": "f51fb73090594d4e465748bc570ee9e00a92c70fbc3835078c42a3acb0c099ba"
+    },
+    {
+      "path": "assets/r414/props/platform-speaker.webp",
+      "bytes": 42862,
+      "sha256": "e8960396c7e55e0d8c0506e472b2f276757c06abfa787fd783d1869a18b9ed60"
+    },
+    {
+      "path": "assets/r414/props/residence-entry.webp",
+      "bytes": 33416,
+      "sha256": "c769a6f2bd5c55d86904690f5ab559c012bfe4b1bf89f3736caacdc594730b01"
+    },
+    {
+      "path": "assets/r414/props/residence-lamppost.webp",
+      "bytes": 8172,
+      "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
+    },
+    {
+      "path": "assets/r414/props/steel-elevator.webp",
+      "bytes": 18904,
+      "sha256": "658ea319d211e3d7b7c7b7acbdbe2917d53f1d8730a0020ebe5f83a8728eaa07"
+    },
+    {
       "path": "assets/r430/arc.webp",
       "bytes": 195458,
       "sha256": "1ec9b9bf6f09d6eb9538409acca66bc30407398b191c77a9d8097869cdd7c2c2"
@@ -33033,6 +33198,11 @@
       "sha256": "31d98d078fe04545665fd1b88ce048b6a970dc69c8fe3897a55c228e7626c0af"
     },
     {
+      "path": "drive-buildings-r414.js",
+      "bytes": 8317,
+      "sha256": "0e7fd6e4bfb9ed010ace3d967913b99183a886b01427e4e031328ba3c566966d"
+    },
+    {
       "path": "drive-props-r138.js",
       "bytes": 9088,
       "sha256": "4480b335bf6bae1f44a953666972ad858fb8d42dadf517e92b2974de2b5160f2"
@@ -33084,8 +33254,8 @@
     },
     {
       "path": "env-props-r299.js",
-      "bytes": 12820,
-      "sha256": "7dcc57554ccefb72de3edbf178d24ec53e9bf44c6f0332b8d0fdb01b6506f591"
+      "bytes": 12928,
+      "sha256": "0bdf729e4cb743cb43a699032196a134273abf0aae9667ed4f266980ee9ce619"
     },
     {
       "path": "era-r191.js",
@@ -33324,8 +33494,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571051,
-      "sha256": "70616e4c1695d9898d3220ae37689c65d2695a69aca53d6f79ec7b21c6057de2"
+      "bytes": 6571100,
+      "sha256": "cc7d7f4cf458298db520be365f32fb3bf850e2272c8026a6a15328da80c17e82"
     },
     {
       "path": "intro-r140.js",
@@ -33674,8 +33844,8 @@
     },
     {
       "path": "props-place-r406.js",
-      "bytes": 16181,
-      "sha256": "5b4fa2e630bce1a2af73ed0f3062615340b6fa3b6d5f0fb3c3a011561ecab650"
+      "bytes": 16373,
+      "sha256": "191baf49443bab677b5ad60533d4ad4b0899342a2cb2c236f6c501488358ea9a"
     },
     {
       "path": "props-r102.js",
@@ -34118,9 +34288,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6823,
-  "totalBytes": 1084636077,
-  "webHTMLSha256": "70616e4c1695d9898d3220ae37689c65d2695a69aca53d6f79ec7b21c6057de2",
+  "fileCount": 6857,
+  "totalBytes": 1086633753,
+  "webHTMLSha256": "cc7d7f4cf458298db520be365f32fb3bf850e2272c8026a6a15328da80c17e82",
   "largest": [
     {
       "path": "index.html",

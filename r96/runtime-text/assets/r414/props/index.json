@@ -1,0 +1,166 @@
+{
+ "revision": "R414",
+ "method": "alpha 72..230 -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 384, WebP q90",
+ "props": {
+  "floral-porcelain-panel": {
+   "zone": "sz115-S01-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 96,
+   "path": "assets/r414/props/floral-porcelain-panel.webp",
+   "png": "teacup-room-floral-porcelain-wall.png",
+   "dotsId": "teacup-room-floral-porcelain-wall",
+   "dotsStatus": "REVIEW_CANDIDATE_PROJECTION_MATCH_UNVERIFIED",
+   "canonLines": [
+    873
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "43250b635892d1e9f83317c5afb78f8818b5866dd05685fd8f316d1b2b46cf87",
+   "part": null,
+   "size": [
+    384,
+    204
+   ],
+   "bytes": 23178,
+   "sha256": "51909e699d74010cdb73acc9259784fb3b8112ac68f4dc3cf3ff8419b89aa6c0"
+  },
+  "platform-speaker": {
+   "zone": "sz115-RA-1",
+   "mode": "wall",
+   "axis": "y",
+   "height": 46,
+   "path": "assets/r414/props/platform-speaker.webp",
+   "png": "R00-damaged-platform-pa-speaker.png",
+   "dotsId": "R00-damaged-platform-pa-speaker",
+   "dotsStatus": "REVIEW_STATIC_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2236
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "7cb4b539217d32e0ae6786f006625fa1feb15aaf7d59794d1006c6b717c41c5b",
+   "part": null,
+   "size": [
+    384,
+    292
+   ],
+   "bytes": 42862,
+   "sha256": "e8960396c7e55e0d8c0506e472b2f276757c06abfa787fd783d1869a18b9ed60"
+  },
+  "steel-elevator": {
+   "zone": "sz115-S04-2",
+   "mode": "wall",
+   "axis": "y",
+   "height": 100,
+   "path": "assets/r414/props/steel-elevator.webp",
+   "png": "S04-steel-elevator-entrance.png",
+   "dotsId": "S04-steel-elevator-entrance",
+   "dotsStatus": "REVIEW_CLOSED_DOOR_STATIC_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1103,
+    1105,
+    1205
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "970f79ddde61718c6a5e7d1515c5f5e598210344deda1fa332fce1b75089473e",
+   "part": null,
+   "size": [
+    268,
+    384
+   ],
+   "bytes": 18904,
+   "sha256": "658ea319d211e3d7b7c7b7acbdbe2917d53f1d8730a0020ebe5f83a8728eaa07"
+  },
+  "fallen-rafters": {
+   "zone": "sz115-RD-1",
+   "mode": "inner",
+   "axis": null,
+   "height": 52,
+   "path": "assets/r414/props/fallen-rafters.webp",
+   "png": "R07-fallen-ceiling-rafters.png",
+   "dotsId": "R07-fallen-ceiling-rafters",
+   "dotsStatus": "REVIEW_FALLEN_STRUCTURE_STATIC_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2674
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "904a5384c5b75bee9f259f380cee00c2ff151334aacfc025e61b280bf38517e3",
+   "part": null,
+   "size": [
+    384,
+    256
+   ],
+   "bytes": 26952,
+   "sha256": "508dcb3ec132f1edfeef89a04cdad33a1c53f873feaeca1ce379eac613fc2012"
+  },
+  "residence-lamppost": {
+   "zone": "sz115-S05-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 140,
+   "path": "assets/r414/props/residence-lamppost.webp",
+   "png": "S05-residence-streetlamp-unlit.png",
+   "dotsId": "S05-residence-streetlamp-unlit",
+   "dotsStatus": "REVIEW_UNLIT_BASE_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1262,
+    1264
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "336d34bfc584ae7156617abef136d7ca0b08171fa95120600f02bad935ff3471",
+   "part": null,
+   "size": [
+    119,
+    384
+   ],
+   "bytes": 8172,
+   "sha256": "617e5a6bb05ea19bcd733016673aafffdda032f6b01d55c4cb07d2fcdd090908"
+  },
+  "residence-entry": {
+   "zone": "sz115-S05-4",
+   "mode": "wall",
+   "axis": "y",
+   "height": 100,
+   "path": "assets/r414/props/residence-entry.webp",
+   "png": "S05-residence-heavy-entry-door.png",
+   "dotsId": "S05-residence-heavy-entry-door",
+   "dotsStatus": "REVIEW_STATIC_CLOSED_DOOR_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1258,
+    1262
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "237708de6e0dd67f82d0f64db0059ab26a4ff222f6975f45fdf2e67b6a46ca69",
+   "part": null,
+   "size": [
+    278,
+    384
+   ],
+   "bytes": 33416,
+   "sha256": "c769a6f2bd5c55d86904690f5ab559c012bfe4b1bf89f3736caacdc594730b01"
+  },
+  "departure-bag": {
+   "zone": "sz115-S05-4",
+   "mode": "inner",
+   "axis": null,
+   "height": 24,
+   "path": "assets/r414/props/departure-bag.webp",
+   "png": "S05-packed-departure-bag.png",
+   "dotsId": "S05-packed-departure-bag",
+   "dotsStatus": "REVIEW_STATIC_PROP_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1260,
+    1262,
+    1268
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "0cec4e82d52243cd9ea9a7955f84fbd0661e3f95fb890ecd7fad1f181ff9753b",
+   "part": null,
+   "size": [
+    384,
+    302
+   ],
+   "bytes": 33532,
+   "sha256": "77677cbe80ac03a3e6c8d414aaecb0665da60f0afc9c8eea1ad8b5d3ef004906"
+  }
+ }
+}

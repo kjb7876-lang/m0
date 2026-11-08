@@ -1,0 +1,620 @@
+{
+ "revision": "R414",
+ "method": "alpha 72..230 -> 0..255, 1px erode, edge RGB from opaque neighbours, crop+4, long side <= 600, WebP q90",
+ "hero": {
+  "drawnHeightPx": 66,
+  "minBuildingPx": 132
+ },
+ "buildings": {
+  "gray-school": {
+   "zone": "sz115-RA-4",
+   "height": 190,
+   "path": "assets/r414/buildings/gray-school.webp",
+   "png": "R02-gray-school-building-shell.png",
+   "dotsId": "R02-gray-school-building-shell",
+   "dotsStatus": "REVIEW_BUILDING_SHELL_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2358,
+    2364
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "53899ded7a7207f16eeb7af9daba9d765b9e689b02f987230c5e6e9992e217fe",
+   "size": [
+    600,
+    351
+   ],
+   "bytes": 50606,
+   "sha256": "f65dc5f4ad385720416bf8bc9678c0ca6b1ecdc7f42a9c3df3dac3aee413d39b"
+  },
+  "red-garden-bridge": {
+   "zone": "sz115-RD-1",
+   "height": 136,
+   "path": "assets/r414/buildings/red-garden-bridge.webp",
+   "png": "R07-red-garden-arched-bridge.png",
+   "dotsId": "R07-red-garden-arched-bridge",
+   "dotsStatus": "REVIEW_BRIDGE_STATIC_CANDIDATE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2670
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "bcfb3f5ea13f791516d4f66d8a32d70f332f4dc19bd742d35738be7af34969bd",
+   "size": [
+    600,
+    385
+   ],
+   "bytes": 65510,
+   "sha256": "0a02008d26b5d25bdc5a0583eccedd4d3d9869777840c9e4854da00d9d606995"
+  },
+  "corner-tavern": {
+   "zone": "sz115-S05-2",
+   "height": 175,
+   "path": "assets/r414/buildings/corner-tavern.webp",
+   "png": "S05-snowy-corner-tavern-building.png",
+   "dotsId": "S05-snowy-corner-tavern-building",
+   "dotsStatus": "HOLD_PADDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1209,
+    1214,
+    1256
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "477d24f7378b28be95eeccfe343c237526845ed5d7069be1a4b959c6a7763ddf",
+   "size": [
+    600,
+    539
+   ],
+   "bytes": 97364,
+   "sha256": "158b3e420ad1a4ca8a573297f338b733ed1f716ba509bd1a764f7bffebdec4e2"
+  },
+  "teacup-rose-house": {
+   "zone": "sz115-S01-2",
+   "height": 170,
+   "path": "assets/r414/buildings/teacup-rose-house.webp",
+   "png": "S01-teacup-rose-house-building.png",
+   "dotsId": "S01-teacup-rose-house-building",
+   "dotsStatus": "HOLD_PADDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    870,
+    873
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "aa8eff7f4298d1112f8a29c01c84824b999e11ab89a0f4a1ef3c2bb6fae82f31",
+   "size": [
+    600,
+    511
+   ],
+   "bytes": 86052,
+   "sha256": "6508018abf5e760ead48abc06b62917c821a14d0f591aa1602d75f279f975ad1"
+  },
+  "training-gym": {
+   "zone": "sz115-S03-5",
+   "height": 140,
+   "path": "assets/r414/buildings/training-gym.webp",
+   "png": "S03-training-gym-building.png",
+   "dotsId": "S03-training-gym-building",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    964,
+    968,
+    970,
+    1002
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "1d3abd220e1481eb0f410c7812280970d133bda3c853d649d0772990d994a7a6",
+   "size": [
+    600,
+    328
+   ],
+   "bytes": 49260,
+   "sha256": "a190e6c4e24944c9542a0374caac5417e7f010181a01101f192ef3f11588ce3f"
+  },
+  "research-block": {
+   "zone": "sz115-S04-1",
+   "height": 210,
+   "path": "assets/r414/buildings/research-block.webp",
+   "png": "S04-shuttered-research-building.png",
+   "dotsId": "S04-shuttered-research-building",
+   "dotsStatus": "HOLD_PADDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1193
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "dbbb4ca8e0b4454607c35a36c6eb3d44020b474e5f763b63e9b7aa954eedeaff",
+   "size": [
+    600,
+    578
+   ],
+   "bytes": 81306,
+   "sha256": "0d0b7f857b22c9d17ea245daea0a8f1fd9ab423c75584e6e27d0cb38560c47f7"
+  },
+  "saebit-hotel": {
+   "zone": "sz115-RG-8",
+   "height": 260,
+   "path": "assets/r414/buildings/saebit-hotel.webp",
+   "png": "M02-abandoned-saebit-hotel.png",
+   "dotsId": "M02-abandoned-saebit-hotel",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    669,
+    676,
+    680
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "457f7838186f3289d7feac4d9b594cf9cd90a398b870c465077ecd31c7ae2152",
+   "size": [
+    396,
+    600
+   ],
+   "bytes": 73434,
+   "sha256": "acfe2f559c9bf84119bd3fee1b0c982b863940b7dd7cba3a04ab4a4bbfb679fa"
+  },
+  "emotion-tower": {
+   "zone": "sz115-S04-1",
+   "height": 300,
+   "path": "assets/r414/buildings/emotion-tower.webp",
+   "png": "S04-windowless-emotion-tower.png",
+   "dotsId": "S04-windowless-emotion-tower",
+   "dotsStatus": "HOLD_PADDING_FLOORCOUNT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1091,
+    1093
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "aaa0c5625acd40be691205fd65677770a77d70c603e131570184a8dc7e92da71",
+   "size": [
+    133,
+    600
+   ],
+   "bytes": 24074,
+   "sha256": "38c0de222545ee2e07cf37a83d91950e0e653309dea978e1ee17b338953d8c8a"
+  },
+  "dressmaker-shop": {
+   "zone": "sz115-S05-2",
+   "height": 170,
+   "path": "assets/r414/buildings/dressmaker-shop.webp",
+   "png": "S05-dressmaker-shop-building.png",
+   "dotsId": "S05-dressmaker-shop-building",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1214
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "df715db8442e01d9a8cd3e84c97d677cef6e3be1ff1de70cc40bd744f62193a9",
+   "size": [
+    520,
+    600
+   ],
+   "bytes": 75060,
+   "sha256": "cfef6622aac4fdfcb8b629919d7fe7df422b0bb161c8f80a91ff5453869229bb"
+  },
+  "polar-access": {
+   "zone": "sz115-S06-17",
+   "height": 145,
+   "path": "assets/r414/buildings/polar-access.webp",
+   "png": "S06-polar-shelter-access-block.png",
+   "dotsId": "S06-polar-shelter-access-block",
+   "dotsStatus": "REVIEW_ACCESS_STRUCTURE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1924,
+    1928
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "6998bbcbb7f7b3fc69fb7bc016c4f01d438512ddd3acfeef42b0a20719bd1e89",
+   "size": [
+    600,
+    443
+   ],
+   "bytes": 64592,
+   "sha256": "0725226d5d78d32660add91face276673ea1979b9cd216d103c1e66c11f66c20"
+  },
+  "officer-residence": {
+   "zone": "sz115-S05-4",
+   "height": 180,
+   "path": "assets/r414/buildings/officer-residence.webp",
+   "png": "S05-officer-residence-building.png",
+   "dotsId": "S05-officer-residence-building",
+   "dotsStatus": "REVIEW_BUILDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1256,
+    1258,
+    1262
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "fead55d3d19c0fb6458eb7c1c9c98e002f6a9a5a0eac96bd1b2326499b69f8b2",
+   "size": [
+    600,
+    343
+   ],
+   "bytes": 76366,
+   "sha256": "629a5e649690b353898fce81b194c0126578be3b7e0b88dd857f1981afb614d6"
+  },
+  "waterside-house": {
+   "zone": "sz115-RD-1",
+   "height": 165,
+   "path": "assets/r414/buildings/waterside-house.webp",
+   "png": "R07-low-roof-waterside-house.png",
+   "dotsId": "R07-low-roof-waterside-house",
+   "dotsStatus": "HOLD_PADDING_TARGET",
+   "canonLines": [
+    2665,
+    2672,
+    2674
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "276e53160eb000e768410603d46f663e0429eb91faa0840dbb1bac9ffd39a36d",
+   "size": [
+    600,
+    356
+   ],
+   "bytes": 62438,
+   "sha256": "a9a7e46f0c5d6b22d96a598a95d14ca44399080aea6a7b6dc80b7b29fc36ada6"
+  },
+  "broadcast-station": {
+   "zone": "sz115-S06-10",
+   "height": 190,
+   "path": "assets/r414/buildings/broadcast-station.webp",
+   "png": "S06-civilian-broadcast-station.png",
+   "dotsId": "S06-civilian-broadcast-station",
+   "dotsStatus": "HOLD_TOP_PADDING",
+   "canonLines": [
+    1814
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "402184dda81aac8c77ac2c7559baed23a14337e2926b3186c418fe1c2a9e59d1",
+   "size": [
+    600,
+    484
+   ],
+   "bytes": 68894,
+   "sha256": "d9cc4c544e1dc0eceecaa1c64cffd8ca8e81c727347c96eaea849877728f963a"
+  },
+  "palace-colonnade": {
+   "zone": "sz115-RG-10",
+   "height": 140,
+   "path": "assets/r414/buildings/palace-colonnade.webp",
+   "png": "R17-palace-garden-colonnade.png",
+   "dotsId": "R17-palace-garden-colonnade",
+   "dotsStatus": "REVIEW_ARCHITECTURE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    28,
+    3212,
+    3214
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "59ff1e89c1ab7187aa5eba98b7614fdb09f989f6242afe35bc8b7576bd67fc0f",
+   "size": [
+    600,
+    309
+   ],
+   "bytes": 58480,
+   "sha256": "7345f7a1469ad6ab84613b5631eea87ec5394a675e5b377dfd230f574baaee2f"
+  },
+  "shelter-headhouse": {
+   "zone": "sz115-S06-3",
+   "height": 140,
+   "path": "assets/r414/buildings/shelter-headhouse.webp",
+   "png": "S06-civilian-shelter-headhouse.png",
+   "dotsId": "S06-civilian-shelter-headhouse",
+   "dotsStatus": "HOLD_DESCENT_LAYOUT_MISMATCH",
+   "canonLines": [
+    1372,
+    1528,
+    1834
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "0341b98023338d9ad5a800cc495fe9ca530210a620c43618b75c90f53671f9ef",
+   "size": [
+    600,
+    417
+   ],
+   "bytes": 59336,
+   "sha256": "e5ad0716e791a4e52ae4a8b93237a366fea864eec4314248f4328edbec132707"
+  },
+  "hospital-admissions": {
+   "zone": "sz115-RA-4",
+   "height": 200,
+   "path": "assets/r414/buildings/hospital-admissions.webp",
+   "png": "R02-hospital-admissions-wing.png",
+   "dotsId": "R02-hospital-admissions-wing",
+   "dotsStatus": "HOLD_BOTTOM_PADDING",
+   "canonLines": [
+    2358,
+    2366,
+    2368
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "ee91f98da7d60b637c9a9cdb40ab62a482e1cfe90d5355d133195680774aa81e",
+   "size": [
+    600,
+    503
+   ],
+   "bytes": 63688,
+   "sha256": "569f680df7b0866c73d882a650f6ac167b3cc2d3e15126c58f5839d699c713cc"
+  },
+  "hotel-kitchen-annex": {
+   "zone": "sz115-RG-8",
+   "height": 140,
+   "path": "assets/r414/buildings/hotel-kitchen-annex.webp",
+   "png": "R04-hotel-kitchen-service-annex.png",
+   "dotsId": "R04-hotel-kitchen-service-annex",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2484,
+    2496
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "c43192ff4e316e30d82e0aaab27e837deb3bec4a76a81a69d6dd1f8d3110c41f",
+   "size": [
+    600,
+    425
+   ],
+   "bytes": 79796,
+   "sha256": "e537bf7b2170e684a7318c9e8f352b0580db95463a4d478015ee308477d77ff7"
+  },
+  "twin-gatehouse-ruin": {
+   "zone": "sz115-RG-1",
+   "height": 220,
+   "path": "assets/r414/buildings/twin-gatehouse-ruin.webp",
+   "png": "TWIN-mixed-gatehouse-attack-damaged.png",
+   "dotsId": "TWIN-mixed-gatehouse-attack-damaged",
+   "dotsStatus": "REVIEW_DAMAGE_VARIANT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    615,
+    619,
+    621,
+    625,
+    627
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "e2f8ac49e97bcfd55e2f39d4d22139748391b6afa4522367883ad3db73c208bc",
+   "size": [
+    600,
+    505
+   ],
+   "bytes": 113028,
+   "sha256": "a095b2a0a7dea9b8399126a80088b30cefa6aad43c6bca6117d45ac8c2ea9211"
+  },
+  "officer-residence-ruin": {
+   "zone": "sz115-S05-6",
+   "height": 180,
+   "path": "assets/r414/buildings/officer-residence-ruin.webp",
+   "png": "S05-residence-attack-damaged.png",
+   "dotsId": "S05-residence-attack-damaged",
+   "dotsStatus": "REVIEW_FICTIONAL_DAMAGE_VARIANT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1256,
+    1258,
+    1262
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "a3fb7ad0913b9ab83ee88e9f1dcc642a71f614149e793cef409e11113d6546b5",
+   "size": [
+    600,
+    341
+   ],
+   "bytes": 85466,
+   "sha256": "d31d7fa1680e09300562161875a550c5fce87594f6bf0ba384629f7b46d366fa"
+  },
+  "inner-keep-ruin": {
+   "zone": "sz115-RG-1",
+   "height": 230,
+   "path": "assets/r414/buildings/inner-keep-ruin.webp",
+   "png": "R03-inner-keep-attack-damaged.png",
+   "dotsId": "R03-inner-keep-attack-damaged",
+   "dotsStatus": "REVIEW_FICTIONAL_DAMAGE_VARIANT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2413,
+    2445,
+    3148
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "a54f6d177c1b891324fbe48072f7cbc749f7f1c5dba36cc7da718a951040dc17",
+   "size": [
+    600,
+    557
+   ],
+   "bytes": 124234,
+   "sha256": "332749a3bd4e50ff380363d3775709a79fff5a77a937ba704f9772f46b71550e"
+  },
+  "training-gym-ruin": {
+   "zone": "sz115-S03-6",
+   "height": 140,
+   "path": "assets/r414/buildings/training-gym-ruin.webp",
+   "png": "S03-gym-impact-damaged.png",
+   "dotsId": "S03-gym-impact-damaged",
+   "dotsStatus": "REVIEW_DAMAGE_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    964,
+    968,
+    970,
+    1002
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "044ffbef62b3ee199a9f27f2bb83e56ab4ebf239788429fba1007d513df581c0",
+   "size": [
+    600,
+    328
+   ],
+   "bytes": 58346,
+   "sha256": "6e923e0194b704d84dfac4b3af22e0541b4e490f8cccdd8def42aded2d90c911"
+  },
+  "black-workshop-ruin": {
+   "zone": "sz115-RD-6",
+   "height": 175,
+   "path": "assets/r414/buildings/black-workshop-ruin.webp",
+   "png": "KAIR-workshop-attack-damaged.png",
+   "dotsId": "KAIR-workshop-attack-damaged",
+   "dotsStatus": "REVIEW_FICTIONAL_DAMAGE_VARIANT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    526,
+    528,
+    2794
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "8fe29fe56f7266f40310840deec2d31d7934ad0f01a1751f4e9f878b146e7049",
+   "size": [
+    600,
+    458
+   ],
+   "bytes": 86174,
+   "sha256": "c0b6296b87a810afcbd2719afe469dbe9a643f569b5f9d7c47b2c6d51455790e"
+  },
+  "polar-access-ruin": {
+   "zone": "sz115-S06-18",
+   "height": 145,
+   "path": "assets/r414/buildings/polar-access-ruin.webp",
+   "png": "S06-polar-access-attack-damaged.png",
+   "dotsId": "S06-polar-access-attack-damaged",
+   "dotsStatus": "REVIEW_DAMAGE_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1924,
+    1928
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "0bb55e05cf703b92d22bd98a9f39fa767695febd842ee4823f9e98ab37f5ec6f",
+   "size": [
+    600,
+    444
+   ],
+   "bytes": 70144,
+   "sha256": "ef1a0b91fb5ce9c90a6cfa0589e1f4104364aba141d3a1d7821ab3f8c163626d"
+  },
+  "gallery-cathedral-ruin": {
+   "zone": "sz115-RD-6",
+   "height": 250,
+   "path": "assets/r414/buildings/gallery-cathedral-ruin.webp",
+   "png": "R11-gallery-cathedral-damaged.png",
+   "dotsId": "R11-gallery-cathedral-damaged",
+   "dotsStatus": "REVIEW_DAMAGE_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2808,
+    3115
+   ],
+   "manifestChecked": true,
+   "pngSHA256": "49729fc4f44c1f1a06861556ba97f99caf95f60ef81fb00df2c8a9ef578ed978",
+   "size": [
+    572,
+    600
+   ],
+   "bytes": 106262,
+   "sha256": "73afa8d01c7d6cef986027c822a8acb3144e6cc424a336107ae172a07d54af76"
+  }
+ },
+ "held": {
+  "S05-residence-entrance-eave-candidate": {
+   "reason": "처마 부품(단독 건물·소품 아님)",
+   "dotsStatus": "REVIEW_CANDIDATE_LAYOUT_TARGET_DEVIATION_RUNTIME_UNVERIFIED",
+   "canonLines": []
+  },
+  "twin-castle-mixed-masonry-wall": {
+   "reason": "이음벽 부품(단독 건물·소품 아님)",
+   "dotsStatus": "REVIEW_WALL_SEAM_CANDIDATE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    615,
+    760
+   ]
+  },
+  "R11-gallery-cathedral-building": {
+   "reason": "원문 장면(RD-7 성당 제단)이 실내형 — 같은 장소의 피해 변형을 야외 RD-6 에 배치",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2808
+   ]
+  },
+  "KAIR-black-workshop-building": {
+   "reason": "원문 장면(kair07 검은 공방)이 실내 — 같은 장소의 피해 변형을 야외 RD-6(포격 거리)에 배치",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    526,
+    528,
+    2794
+   ]
+  },
+  "EP-recovery-pavilion-building": {
+   "reason": "원문 장면(종장 병실 M-4)이 실내형",
+   "dotsStatus": "HOLD_PADDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    3368,
+    3372,
+    3422
+   ]
+  },
+  "R14-voluntary-atelier-building": {
+   "reason": "원문 장면(RG-4 도겸의 작업실)이 실내형",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    3091,
+    3107,
+    3109,
+    3115
+   ]
+  },
+  "R03-inner-citadel-keep": {
+   "reason": "원문 장면(RB-2·RG-6)이 실내형 — 같은 장소의 피해 변형을 야외 RG-1 전장에 배치",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    2413,
+    2445,
+    3148
+   ]
+  },
+  "M04-cheongrok-villa": {
+   "reason": "원문 장면(murder04 청록빌라)이 실내 이야기 지도",
+   "dotsStatus": "HOLD_PADDING_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    686,
+    695,
+    719
+   ]
+  },
+  "R01-orphanage-courtyard-building": {
+   "reason": "원문 장면(RA-3)이 실내형, RA-4 에는 원문 건물 둘(학교·원무동)이 이미 있음",
+   "dotsStatus": "REVIEW_CONCEPT_PROJECTION_UNVERIFIED",
+   "canonLines": [
+    2303
+   ]
+  },
+  "S06-undersea-laboratory-module": {
+   "reason": "바다 밑 시설 — 맞는 야외 꿈 지역이 없음",
+   "dotsStatus": "REVIEW_CONCEPT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1900,
+    2028
+   ]
+  },
+  "R15-corridor-archive-wing": {
+   "reason": "원문 장면(RG-7 카이로 회랑)이 실내형",
+   "dotsStatus": "REVIEW_EXTERIOR_INTERPRETATION_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    3154,
+    3156
+   ]
+  },
+  "R00-station-concourse-shell": {
+   "reason": "속이 보이는 단면 구조(Dots HOLD_PROJECTION_MISMATCH)라 바깥 배치에 안 맞음",
+   "dotsStatus": "HOLD_PROJECTION_MISMATCH",
+   "canonLines": [
+    2248,
+    2250,
+    2252
+   ]
+  },
+  "TWIN-mixed-masonry-gatehouse": {
+   "reason": "원문 장면(hando01·02)이 벽으로 둘린 이야기 지도라 뒤쪽 빈 땅이 없음 — 피해 변형을 야외 RG-1 전장에 배치",
+   "dotsStatus": "REVIEW_GATEHOUSE_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    615,
+    627,
+    760
+   ]
+  },
+  "S06-undersea-lab-attack-damaged": {
+   "reason": "바다 밑 시설 — 맞는 야외 꿈 지역이 없음",
+   "dotsStatus": "REVIEW_FICTIONAL_DAMAGE_VARIANT_RUNTIME_UNVERIFIED",
+   "canonLines": [
+    1900,
+    2028
+   ]
+  }
+ }
+}
