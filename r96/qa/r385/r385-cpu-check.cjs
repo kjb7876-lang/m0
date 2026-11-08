@@ -22,7 +22,7 @@ const DATA={
 const drawn=[],burned=[];const fakeAssign=e=>{if(e.r374Mob)return e.r374Mob;if(e.r374Checked==='STORY')return null;e.r374Checked='STORY';if(e.nativeId==='b08-c1')e.r374Mob='sheet-b08';return e.r374Mob||null;};const ctx={spawnBurnDeath3:e=>burned.push({nativeId:e.nativeId,path:e.path}),window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,regionById:{},register(){},
  makeRoom:(id,l)=>({id,enemies:(DATA[id]||(()=>[]))()}),drawEnemy:e=>drawn.push({sheet:fakeAssign(e),name:e.name,nativeId:e.nativeId,path:e.path,frame:e.profile?.frames?.move?.path})};
 for(const z of Object.keys(DATA))ctx.regionById[z]={paths:[]};ctx.window.window=ctx.window;vm.createContext(ctx);vm.runInContext('var window=this.window;'+src,ctx);
-const A=ctx.window.__STORYWORLD_MOB_MOVES_R385__;ok(!!A&&A.revision==='R385-moves-5','설치');
+const A=ctx.window.__STORYWORLD_MOB_MOVES_R385__;ok(!!A&&A.revision==='R385-moves-6','설치');
 const room=id=>ctx.makeRoom(id,'STORY');
 const d4=room('dist04');ok(d4.enemies[0].name==='되살아난 수호기사 1'&&d4.enemies[1].name==='중간보스 · 되살아난 수호기사'&&d4.enemies[2].name==='이름 잃은 전우 1'&&d4.enemies[3].name==='보스','dist04 보라검 부활자 → 되살아난 수호기사(이름 잃은 전우·보스 그대로)');
 ok(d4.enemies[0].nativeId==='dist04-c2'&&d4.enemies[0].path==='p/dist04-c2'&&d4.enemies[0].r248Key==='전극을 두른 좀비 수호기사'&&d4.enemies[0].r385Key0===undefined,'방 자료 nativeId·그림 경로 그대로, R248 그림·효과 키는 옮겨 온 몹 것');

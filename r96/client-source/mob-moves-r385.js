@@ -13,7 +13,7 @@
 //  원래 몹(nativeId·path·profile)의 그림을 빌려 온다(R81 원본 보존 계약·3×10 무리 유지). storyworld.r385.moves {on:false} 로 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_MOB_MOVES_R385__)return;
-const REV='R385-moves-5',KEY='storyworld.r385.moves';
+const REV='R385-moves-6',KEY='storyworld.r385.moves';
 let prefs={on:true};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={rooms:0,renamed:0,draws:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 const isPatrol=e=>/:r74-patrol:/.test(String(e?.id||''));
@@ -30,7 +30,12 @@ const KINDS=[
  ['hando01',isPatrol,['u203','u203-e1'],'이동문 청람잔영'],['hando02',isPatrol,['u203','u203-e2'],'이동문 공허잔영'],['hando03',isPatrol,['u203','u203-e3'],'최종문 공명기사'],
  ['ep1a09',(e,i)=>isPatrol(e)&&i%2===0,['ep1a10','a10-o1'],'오만의 흰 가면'],
  // R386: 나태 보스가 등짐을 몸에 합친 통합 그림(사용자 채택)을 받으므로 별도 '등에 붙은 쓰레기더미'는 같은 맵의 살아 움직이는 쓰레기들로(수·수치·id 그대로)
- ['ep1b02',e=>e.nativeId==='b02-b1'&&!isPatrol(e),['ep1b02','b02-o1'],'살아 움직이는 쓰레기들']];
+ ['ep1b02',e=>e.nativeId==='b02-b1'&&!isPatrol(e),['ep1b02','b02-o1'],'살아 움직이는 쓰레기들'],
+ // R410(드라이브 11/6 인계 FALL-MAP·GREEN-SWAMP-PILLAR-ESCORT, 사용자 원문 "검은기둥 화염술사는 검은기둥 주문사 로 대체 이름도 주문사로",
+ //  "마지막길의호위병은 완전 삭제"): 추락 dist06-m1(증원·추격대 포함)은 일곱 기둥 dist05-m1 검은기둥 주문사 그림·이름으로,
+ //  일곱 기둥 dist05-s1 호위병 자리는 같은 지역 검은기둥 가고일 수호자(dist05-c1)로 → 호위병은 출현하지 않고 30마리·웨이브·문 판정은 그대로.
+ ['dist06',e=>/^dist06-m1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-m1'],'검은기둥 주문사'],
+ ['dist05',e=>/^dist05-s1(\b|-)/.test(String(e.nativeId||'')),['dist05','dist05-c1'],'검은기둥 가고일 수호자']];
 // R386: 주사실 순찰에 남은 유리 망령은 사용자 채택 유리 망령 v1 시트(R380 index)로 그린다 → R74 지도 그림 표시(r74Monster)를 지워야 frameFor 사슬을 탄다.
 const ATLAS_OFF=[['ep1a09','glass']];
 const RENAME=[['ep1b08','창처럼 날아오는 역십자가','흑마법사의 저주창'],['ep1b08','역십자가 시체경호체','흑마법사의 시체경호체']];
