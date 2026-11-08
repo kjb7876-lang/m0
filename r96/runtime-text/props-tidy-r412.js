@@ -25,7 +25,7 @@
 //   그 뒤에도 벽 개수·높이 합(서명)이 바뀌면 그 방 조형물을 다시 잰다. 서사 소품: R117 장면 등불은 솎지 않고, R406 보스 소품은 숨기지 않는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_TIDY_R412__)return;
-const REV='R412-props-tidy-10d',KEY='storyworld.r412.props';
+const REV='R412-props-tidy-10e',KEY='storyworld.r412.props';
 const prefs={on:true,unwall:true,lamps:true,face:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={rooms:0,measured:0,embedded:0,unwalled:0,stuck:0,hidden:0,unseen:0,lampsSeen:0,lampsRemoved:0,faced:0,remeasured:0,refooted:0,wallWaits:0,errors:0};let lastError=null;

@@ -248,6 +248,6 @@ ok('R329 matches the shadow to the R111/R412 draw spot (r111To), not x/y, and ta
  ok('wall grid and floor sets use numeric keys (no per-point string keys)',/GK=\(x,y\)=>\(x\+32768\)\*65536\+\(y\+32768\)/.test(src)&&!/gx\+','\+gy/.test(src)&&/F\.has\(GK\(Math\.floor\(x\),Math\.floor\(y\)\)\)/.test(src));}
 ok('R412-10d: wall furniture (cabinet/shelf/wardrobe) pulled more than 0.6 tile off its wall is hidden like R303 instead of standing alone mid-floor',/WALL_FURN=\/cabinet\|shelf/.test(src)&&/WALL_FURN_MAX=\.6/.test(src)&&/best&&best\.s>WALL_FURN_MAX&&WALL_FURN\.test/.test(src));
 ok('R412-10d: lamp thinning keeps at least two lamps indoors and outdoors',/cap=Math\.max\(2,Math\.round\(floor\/\(indoor\?110:320\)\)\)/.test(src));
-ok('R412-10d: a scene-prop lamp stands 2.4-4.2 tiles away (aim 3.2) so it does not merge with the scene prop',/T=sc\?3\.2:4\.6/.test(C('visual-r92.js'))&&/d>=\(sc\?2\.4:2\)&&d<=\(sc\?4\.2:6\.5\)/.test(C('visual-r92.js')));
+ok('R412-10e: a scene-prop lamp stands beside the prop on screen (horizontal offset about 2.2 tiles, never behind it up-screen) so it does not merge with the scene prop',/hx=s=>Math\.abs\(\(s\.x-a\.x\)-\(s\.y-a\.y\)\)/.test(C('visual-r92.js'))&&/hx\(s\)>=1\.6&&dz\(s\)>=-\.5/.test(C('visual-r92.js')));
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('R412 CPU '+checks.length+'/'+checks.length);
