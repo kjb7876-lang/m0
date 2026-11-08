@@ -21,10 +21,10 @@
 //   그 뒤에도 벽 개수·높이 합(서명)이 바뀌면 그 방 조형물을 다시 잰다. 서사 소품: R117 장면 등불은 솎지 않고, R406 보스 소품은 숨기지 않는다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_TIDY_R412__)return;
-const REV='R412-props-tidy-7',KEY='storyworld.r412.props';
+const REV='R412-props-tidy-8',KEY='storyworld.r412.props';
 const prefs={on:true,unwall:true,lamps:true,face:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
-const stats={rooms:0,measured:0,embedded:0,unwalled:0,stuck:0,hidden:0,unseen:0,lampsSeen:0,lampsRemoved:0,faced:0,remeasured:0,wallWaits:0,errors:0};let lastError=null;
+const stats={rooms:0,measured:0,embedded:0,unwalled:0,stuck:0,hidden:0,unseen:0,lampsSeen:0,lampsRemoved:0,faced:0,remeasured:0,refooted:0,wallWaits:0,errors:0};let lastError=null;
 const fail=e=>{stats.errors++;lastError=String(e?.stack||e).slice(0,300);};
 const now=()=>typeof performance!=='undefined'&&performance.now?performance.now():Date.now();
 const h32=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;};
@@ -160,7 +160,7 @@ function unwall(r,rep,sampler=samplesOf,budget=14){const L=r.exploration,avoid=a
   const counted=()=>{if(again)stats.remeasured++;else stats.measured++;};
   if(S.length<6){p.r412Wall=1;counted();continue;}
   const V=footOf(p,on,F),fx=V.x,fy=V.y,ind=indoorFor(rep,p);// 보이는 발 자리
-  const lim=Math.floor(LIMIT*S.length),n0=embedded(L,fx,fy,S,Infinity,ind);if(n0<=lim){p.r412Wall=1;counted();continue;}
+  const lim=Math.floor(LIMIT*S.length),n0=embedded(L,fx,fy,S,Infinity,ind);if(n0<=lim){p.r412Wall=1;p.r412Foot=[fx,fy];counted();continue;}
   feet=feet||feetOf(r,on,F);const d0=pathD(r,fx,fy),near0=nearAny(avoid,fx,fy),onFloor=!blocked(L,fx,fy,.02);
   // 벽에 든 점들의 무게중심 반대쪽부터 본다
   let cx=0,cy=0;for(const[a,b,z]of S)if(solidAt(L,fx+a,fy+b,z,ind)){cx+=a;cy+=b;}const cl=Math.hypot(cx,cy)||1;
@@ -172,8 +172,8 @@ function unwall(r,rep,sampler=samplesOf,budget=14){const L=r.exploration,avoid=a
     const n=embedded(L,x,y,S,lim,ind);if(n<=lim&&(!best||n<best.n))best={x,y,n,s};}}
   if(cut){p.r412Tries=tries+1;if(!again)delete p.r412Sig;pending++;break;}
   p.r412Wall=1;counted();if(!p.r412Emb){p.r412Emb=1;stats.embedded++;rep.embedded++;}// 벽에 든 조형물은 한 번만 센다(벽이 바뀌어 다시 잰 것 포함)
-  if(best){const was0={x:fx,y:fy,embedded:+(n0/S.length).toFixed(3)};try{was0.via=setFoot(p,best.x,best.y,on,F);const first=!p.r412Moved;p.r412Moved=first?was0:{...p.r412Moved,via:was0.via,again:(p.r412Moved.again||0)+1};feet.set(p,{x:best.x,y:best.y});if(first){stats.unwalled++;rep.unwalled++;}}catch(e){fail(e);}}
-  else{stats.stuck++;const sid=String(p.id||artOf(p)).slice(-48);if(!rep.stuck.includes(sid))rep.stuck.push(sid);
+  if(best){const was0={x:fx,y:fy,embedded:+(n0/S.length).toFixed(3)};try{was0.via=setFoot(p,best.x,best.y,on,F);const v=footOf(p,on,F);p.r412Foot=[v.x,v.y];const first=!p.r412Moved;p.r412Moved=first?was0:{...p.r412Moved,via:was0.via,again:(p.r412Moved.again||0)+1};feet.set(p,{x:best.x,y:best.y});if(first){stats.unwalled++;rep.unwalled++;}}catch(e){fail(e);}}
+  else{stats.stuck++;p.r412Foot=[fx,fy];const sid=String(p.id||artOf(p)).slice(-48);if(!rep.stuck.includes(sid))rep.stuck.push(sid);
    // 1.8칸 안에 벽 밖 자리가 없고 그림의 15% 넘게 벽 속이면 그 장식은 숨긴다(R303 이 벽 자리를 못 찾은 장식을 숨기는 것과 같은 표시)
    if(n0/S.length>HIDE_OVER&&!p.r406Boss){p.r303Hide='r412-wall';feet.delete(p);stats.hidden++;rep.hidden=(rep.hidden||0)+1;}}}
  return{pending,waiting};}
@@ -207,11 +207,20 @@ function ready(r){try{const a=R303(),b=R406();const ra=!a||a.inspect?.().on===fa
 
 function indoorOf(r){try{return !!R406()?.indoorOf?.(r);}catch(_){return false;}}
 const done=new WeakMap(),reports=new WeakMap();
+// 잰 뒤에 보이는 발 자리가 바뀐 조형물은 그 자리에서 다시 잰다(R412-8). R111 벽 간격(spaceProps)은 방마다 첫 게임 틱에 한 번 r111To 를
+//  정하는데, 사몽 구역은 R115 벽 손질을 기다릴 일이 없어 R412 가 그보다 먼저 재고 옮겼다 → R111 이 r111To 를 덮어쓰고, 거울(R303 뒤집기)
+//  때문에 그 자리가 벽 속(사몽 장롱 214점 중 214점)으로 그려졌다(전 지역 측정 rev 7). R303 이 늦게 뒤집는 것도 같은 길로 잡힌다.
+//  같은 방문에 한 조형물은 세 번까지만 다시 잰다(서로 덮어쓰는 고리 막기).
+function refoot(r,rep){if(!prefs.unwall)return 0;const on=r111On(),F=flipCtx();let n=0;
+ for(const p of r.props){const f=p&&p.r412Foot;if(!f||!p.r412Wall||p.r303Hide)continue;const v=footOf(p,on,F);if(Math.abs(v.x-f[0])<.01&&Math.abs(v.y-f[1])<.01)continue;
+  if(p.r412RefootVisit!==visit){p.r412RefootVisit=visit;p.r412Refoot=0;}if(p.r412Refoot>=3)continue;p.r412Refoot++;delete p.r412Wall;delete p.r412Tries;delete p.r412Foot;n++;}
+ if(n){stats.refooted+=n;rep.refooted=(rep.refooted||0)+n;}return n;}
 function apply(r,opt={}){if(!prefs.on||!r?.exploration||!Array.isArray(r.props))return null;fresh();const L=r.exploration;
  if(!opt.force&&typeof room!=='undefined'&&r===room){if(!ready(r))return null;if(!wallsDressed(L)&&now()-visitAt<WALL_WAIT_MS){stats.wallWaits++;return null;}}
  const first=done.get(r)!==r.exploration,sig=wallSig(L);let rep=reports.get(r);
  if(first){rep={room:r.id,zone:r.exploration.samongR115?.zone||null,indoor:indoorOf(r),embedded:0,unwalled:0,stuck:[],hidden:0,lamps:0,lampsRemoved:0,lampsKept:0,faced:0,n:-1,pending:0,waiting:0,lampsDone:false,wallSig:sig,remeasured:0};stats.rooms++;}
- if(!first&&rep&&rep.n===r.props.length&&!rep.pending&&!rep.waiting&&rep.wallSig===sig)return rep;
+ const refooted=!first&&rep?refoot(r,rep):0;
+ if(!first&&rep&&!refooted&&rep.n===r.props.length&&!rep.pending&&!rep.waiting&&rep.wallSig===sig)return rep;
  // 벽이 바뀌었다(같은 배치에서 벽 높이·개수가 달라짐) → 벽 격자를 버리고, 그 전 벽으로 잰 조형물을 다시 잰다(숨긴 것은 그대로)
  if(rep&&rep.wallSig!==sig){wallGrid.delete(L);floorSets.delete(L);for(const p of r.props)if(p&&p.r412Wall&&p.r412Sig!=null&&p.r412Sig!==sig&&!p.r303Hide){delete p.r412Wall;delete p.r412Tries;}rep.wallSig=sig;rep.remeasured++;}
  try{if(prefs.face)face(r,rep);if(prefs.lamps&&!rep.lampsDone){lamps(r,rep,rep.indoor);rep.lampsDone=true;}

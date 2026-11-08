@@ -142,6 +142,18 @@ ok('a prop R266 already pre-drew this frame is drawn once more when measuring (o
  W.height=2.85;const b=X.apply(r,{samples:()=>S});
  ok('when wall heights are raised in place after measuring (R115 1.3 → 2.85), the room is measured again and the prop pulled out, counted once',low&&n1===0&&X.embedded(L,2.8,6,S,Infinity,false)>Math.floor(.03*S.length)&&!!t.r412Moved&&t.x>2.8&&X.embedded(L,t.x,t.y,S,Infinity,false)<=Math.floor(.03*S.length)&&b.remeasured===1&&b.embedded===1&&b.unwalled===1&&X.wallSig(L)==='1:285',{low,n1,x:t.x,b});
  const c=X.apply(r,{samples:()=>S});ok('...and an unchanged room is not measured again',c===b&&c.remeasured===1,{c});}
+{// R412-8: 잰 뒤에 보이는 발 자리가 바뀌면(사몽 구역: R111 벽 간격이 R412 보다 늦게 r111To 를 덮어씀 + R303 거울) 그 조형물만 다시 잰다
+ blockedFn=(x,y,r)=>x-(r||0)<2;wallsFn=()=>[];const S=[];for(let h=0;h<=2;h+=.25)S.push([-.354*h,-.354*h,.866*h]);sb.window.__STORYWORLD_PLAY_R111__={prefs:()=>({props:true})};
+ const m={id:'r115:sz-x:s:cabinet:0',x:3.5,y:24,path:'assets/r99/outdoor/tree-dead-08.webp',r303Flip:true},r={id:'t10',indoor:true,exploration:{floorCells:[],worldR74:{doors:[]}},props:[m]};
+ const a=X.apply(r,{samples:()=>S}),fine=!m.r412Moved&&!!m.r412Wall&&a.embedded===0&&!m.r111To;const st0=X.inspect().stats.refooted;
+ // R111 spaceProps 처럼 거울을 모르고 r111To 를 덮어씀: (+.35,-1.1) → 거울로 (-1.1,+.35) 에 그려져 벽(x<2) 속
+ Object.defineProperty(m,'r111To',{value:{x:3.85,y:22.9},configurable:true});const v0=X.footOf(m),inWall=X.embedded(r.exploration,v0.x,v0.y,S)/S.length;
+ const b=X.apply(r,{samples:()=>S}),v1=X.footOf(m);
+ ok('a prop whose visible foot is changed after measuring (R111 spacing overwrites r111To later; R303 mirror) is measured again where it is now drawn and pulled out of the wall',fine&&Math.abs(v0.x-2.4)<1e-9&&inWall>.3&&!!m.r412Moved&&v1.x>2.3&&X.embedded(r.exploration,v1.x,v1.y,S)/S.length<=.03&&b.refooted===1&&X.inspect().stats.refooted===st0+1&&b.embedded===1&&b.unwalled===1,{v0,v1,inWall,b});
+ const c=X.apply(r,{samples:()=>S});ok('...and once its foot is where R412 put it, it is not measured again',c===b&&c.refooted===1&&Math.abs(m.r412Foot[0]-v1.x)<1e-9,{c});
+ // 서로 덮어쓰는 고리: 매번 다른 자리로 덮어써도 같은 방문에 세 번까지만 다시 잰다
+ let last=null;for(let i=0;i<6;i++){Object.defineProperty(m,'r111To',{value:{x:3.9+i*.01,y:22.9},configurable:true});last=X.apply(r,{samples:()=>S});}
+ ok('a draw spot rewritten over and over is re-measured at most three times per visit',m.r412Refoot===3&&last===b&&last.refooted===3,{n:m.r412Refoot,rep:last});}
 {// R115 가 이 방 벽을 아직 손보지 않았으면(첫 게임 틱 전) 재지 않고 기다린다 — 손보면 바로, 안 손봐도 12초 뒤엔 잰다
  let T=1000,stepFn=null;const sb3={window:{StoryPhase1:{explorationBlocked:()=>false},__STORYWORLD_PLAY_R115__:{prefs:()=>({walls:true})}},localStorage:{getItem:()=>null,setItem(){}},performance:{now:()=>T},
   setTimeout:f=>{stepFn=f;return 0;},loading:false,Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp};
