@@ -10,7 +10,7 @@
  const DEFAULTS=Object.freeze({floorDecals:true,lightProps:true});
  const LABELS={floorDecals:'바닥 데칼',lightProps:'광원 소품'};
  // Counts follow floor area (about 5 decals and 1-2 lamps per screen at default zoom).
- const INDEX='./assets/r92/index.json',DECAL_CELLS=80,DECAL_GAP=3.2,LIGHT_CELLS=320,LIGHT_GAP=7;
+ const INDEX='./assets/r92/index.json',DECAL_CELLS=80,DECAL_GAP=3.2,LIGHT_CELLS=320,LIGHT_GAP=7,LIGHT_CELLS_R412=640,R412_SINGLE=true;// R412: 320칸마다 1개(최대 26)·문/목표 양옆 짝 → 640칸마다 1개(최대 12)·한쪽만
  const quota=(cells,per,lo,hi)=>Math.max(lo,Math.min(hi,Math.round(cells/per)));
  let prefs={...DEFAULTS},index=null,state='idle',lastError=null,plan=null,planKey=null,preloadAt=0;
  const stats={plans:0,decalDraws:0,propDraws:0,dimmedFrames:0,preloads:0,errors:0};
@@ -36,7 +36,10 @@
  function clear(p,radius,g,r){if(g.points.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<Math.min(q.radius,GUARD_MAX)+radius))return false;
   for(const d of g.doors){if(!finite(d))continue;const dx=Math.max(0,Math.abs(p.x-d.x)-(d.width||0)/2),dy=Math.max(0,Math.abs(p.y-d.y)-(d.depth||0)/2);if(Math.hypot(dx,dy)<2.6+radius)return false;}
   return typeof A.explorationBlocked!=='function'||!A.explorationBlocked(r.exploration,p.x,p.y,radius);}
- function build(r){const L=r?.exploration;if(!L?.floorCells?.length||!L.walls?.length||!index)return{decals:[],lights:[]};
+ // R412(사용자 2026-11-08 "전등 등이 너무 남발되어 부산스럽지 않도록"): 가구 충돌 상자(보스방 책상·서랍장 등, 높이 .01)는 벽이 아니다 —
+ //  그 둘레를 벽으로 읽어 방 한가운데 가구 앞에 등불이 줄지어 섰다. 등불·얼룩 자리를 고를 때만 빼고(충돌은 그대로), 등불은 수를 줄이고 서로 7칸 띄운다.
+ const FURNITURE_WALL=w=>!!w&&(w.sinFurniture||w.sinArtFurniture||w.mammonFurniture||w.r412Furniture||(Number.isFinite(w.height)&&w.height<.2));
+ function build(r){const L0=r?.exploration,L=L0&&{...L0,walls:(L0.walls||[]).filter(w=>!FURNITURE_WALL(w))};if(!L?.floorCells?.length||!L.walls?.length||!index)return{decals:[],lights:[]};
   const reg=region(r),g=guards(r),floors=index.items.filter(i=>i.kind==='floor'&&i.region===reg);let lamps=index.items.filter(i=>i.kind==='light'&&i.region===reg);
   // R102: the lamp kinds follow the region's story (Eastern lamps only in Eastern scenes).
   try{const pick=window.__STORYWORLD_PROPS_R102__?.lamps?.(zone,reg,index.items,lamps,family(r));if(Array.isArray(pick)&&pick.length)lamps=pick;}catch(e){fail(e);}
@@ -46,7 +49,7 @@
   const F=new Set(L.floorCells.map(([x,y])=>x+','+y)),onFloor=(x,y)=>F.has(Math.floor(x)+','+Math.floor(y));
   const openAhead=p=>{for(const s of[.5,1,1.5,2,2.5])for(const o of[-.5,0,.5])if(!onFloor(p.x+s+o,p.y+s-o))return false;return true;};
   const cells=L.floorCells.map(([x,y])=>({x:x+.5,y:y+.5,seed:hash('r92:'+zone+':'+x+':'+y)})).sort((a,b)=>a.seed-b.seed||a.y-b.y||a.x-b.x);
-  const decals=[],lights=[],DECALS=quota(cells.length,DECAL_CELLS,8,110),LIGHTS=quota(cells.length,LIGHT_CELLS,3,26);
+  const decals=[],lights=[],DECALS=quota(cells.length,DECAL_CELLS,8,110),LIGHTS=quota(cells.length,LIGHT_CELLS_R412,2,12);
   // R155: 바닥 칸마다 모든 벽과 거리를 재던 것(칸 수 x 벽 수)을, 벽마다 '2칸 안' 범위의 격자 칸에만 넣어 두고 그 칸의 벽만 잰다.
   //  2칸 안 벽은 빠짐없이 찾고 같은 순서(벽 번호 순, 같으면 먼저 것)로 고르므로 2칸 안 결과는 그대로이고, 그보다 먼 결과는
   //  아래 쓰임(1.8·1.25·0.45 문턱)에서 똑같이 '멀다'로 판정된다. window.__STORYWORLD_R155_NOGRID__ 이면 옛 방식.
@@ -74,13 +77,15 @@
     return{...p,seed:c.seed,back:(n.x-p.x)+(n.y-p.y)<=-.05,flip:((n.x-p.x)-(n.y-p.y))>0};};
    // Anchor pairs may use any wall (entries sit on the lower map edge); the
    // corridor rhythm keeps to back walls only.
-   const all=cells.map(spot).filter(Boolean),spots=all.filter(s=>s.back),free=p=>!lights.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<3);
+   // R412: 다른 조형물(가구·조각) 1.5칸 안에는 세우지 않고, 등불끼리는 문 옆 짝이라도 LIGHT_GAP 만큼 띄운다
+   const foot=q=>{try{return window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q)||q;}catch(_){return q;}},others=(r.props||[]).filter(q=>q&&q.visible!==false&&!q.r303Hide&&!q.terrainWall&&finite(q)).map(foot),roomy=p=>!others.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<1.5);/* 보이는 자리(R111 그리기 자리) 기준 */
+   const all=cells.map(spot).filter(s=>s&&roomy(s)),spots=all.filter(s=>s.back),free=p=>!lights.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<LIGHT_GAP);
    const put=(s,kind)=>{const it=set[lights.length%set.length];lights.push({x:s.x,y:s.y,item:it.id,color:it.color,flip:s.flip,role:kind});};
    const anchors=[...g.points.filter(q=>/portal|entry|exit|gate|objective|boss|altar|marker/i.test(String(q.kind||q.id||''))),...g.doors.filter(finite)];
    for(const a of anchors){if(lights.length>=LIGHTS)break;const ring=all.filter(s=>{const d=Math.hypot(s.x-a.x,s.y-a.y);return d>=2&&d<=6.5&&free(s);}).sort((s,t)=>Math.abs(Math.hypot(s.x-a.x,s.y-a.y)-4.6)-Math.abs(Math.hypot(t.x-a.x,t.y-a.y)-4.6));
     const first=ring[0];if(!first)continue;put(first,'anchor');
     const v1=Math.atan2(first.y-a.y,first.x-a.x),second=ring.find(s=>s!==first&&free(s)&&Math.abs(((Math.atan2(s.y-a.y,s.x-a.x)-v1+3*Math.PI)%(2*Math.PI))-Math.PI)<Math.PI*.45);
-    if(second&&lights.length<LIGHTS)put(second,'anchor');}
+    if(second&&lights.length<LIGHTS&&!R412_SINGLE)put(second,'anchor');}
    for(const s of [...spots].sort((s,t)=>s.y-t.y||s.x-t.x)){if(lights.length>=LIGHTS)break;if(lights.some(q=>Math.hypot(s.x-q.x,s.y-q.y)<LIGHT_GAP+1))continue;put(s,'rhythm');}}
   stats.plans++;return{decals,lights};}
  // Closest point of a wall (segment with depth, or box) to p.

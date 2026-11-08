@@ -14,7 +14,7 @@
 (()=>{'use strict';
 const A=window.StoryPhase1,C=A?.ThreeRenderer?.prototype;
 if(!A||!C||window.__STORYWORLD_CAVE_R204__)return;
-const REV='R262-cave-1',KEY='storyworld.r204.cave';
+const REV='R412-cave-2',KEY='storyworld.r204.cave';
 let prefs={on:true,widen:true,widenAll:true,skeleton:false,inflate:true,unify:true,rooms:true,roomFloors:true};/* R220: 사용자 "벽에 기둥이 오히려 품질을 저하" → 기둥 골격(R218)은 기본 끔 */try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(typeof s?.on==='boolean')prefs.on=s.on;if(typeof s?.widen==='boolean')prefs.widen=s.widen;if(typeof s?.skeleton==='boolean')prefs.skeleton=s.skeleton;if(typeof s?.inflate==='boolean')prefs.inflate=s.inflate;if(typeof s?.unify==='boolean')prefs.unify=s.unify;if(typeof s?.roomFloors==='boolean')prefs.roomFloors=s.roomFloors;}catch(_){}
 const orgPath=n=>n.includes('/')?n:'assets/r207/organic/'+n+'.png';/* R281: 이름 대신 경로를 준 데칼(assets/r281/…)도 받는다 */
 const stats={blocks:0,builds:0,buildMs:0,hidden:0,segments:0,pillars:0,decals:0,frames:0,errors:0};let lastError=null;
@@ -583,9 +583,11 @@ function decalMesh(T,F,cfg){// 바닥 데칼: 보행 영역(f>0.15) — 균열·
 function blobTex(T,r){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d'),gr=g.createRadialGradient(64,64,4,64,64,62);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.55,'rgba(255,255,255,.55)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);
  const t=new T.CanvasTexture(c);t.colorSpace=T.NoColorSpace;r.spatialResources.add(t);return t;}
 // 바닥에 놓인 조형물(문·상자·빛 소품 포함, 공중 장식 제외) 아래 타원. 반지름은 소품 반지름의 1.25배(최소 0.45칸), 화면 세로로 눌린 모양은 바닥 평면이라 저절로 생긴다.
-function propShadowMesh(T,F,rm){const props=(rm?.props||[]).filter(q=>Number.isFinite(q.x)&&Number.isFinite(q.y)&&!q.flying&&!q.r204NoShadow&&at(F,F.f,q.x,q.y)>-.2);if(!props.length)return null;
- const pos=[],uv=[],idx=[];let n=0;for(const q of props){const rad=Math.max(.45,(Number(q.radius)||.4)*1.25),y=.011;
-  pos.push(q.x-rad,y,q.y-rad, q.x+rad,y,q.y-rad, q.x+rad,y,q.y+rad, q.x-rad,y,q.y+rad);uv.push(0,0,1,0,1,1,0,1);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
+// R412: 그늘은 보이는 발 자리(R111·R412 그리기 자리 r111To, 거울 반영)에 깔고, 숨긴 장식(r303Hide)·빼낸 등불에는 깔지 않는다
+const footR412=q=>{try{const f=window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q);return f&&Number.isFinite(f.x+f.y)?f:q;}catch(_){return q;}};
+function propShadowMesh(T,F,rm){const props=(rm?.props||[]).filter(q=>Number.isFinite(q.x)&&Number.isFinite(q.y)&&!q.flying&&!q.r204NoShadow&&!q.r303Hide).map(q=>({q,f:footR412(q)})).filter(({f})=>at(F,F.f,f.x,f.y)>-.2);if(!props.length)return null;
+ const pos=[],uv=[],idx=[];let n=0;for(const{q,f}of props){const rad=Math.max(.45,(Number(q.radius)||.4)*1.25),y=.011;
+  pos.push(f.x-rad,y,f.y-rad, f.x+rad,y,f.y-rad, f.x+rad,y,f.y+rad, f.x-rad,y,f.y+rad);uv.push(0,0,1,0,1,1,0,1);idx.push(n,n+2,n+1,n,n+3,n+2);n+=4;}
  stats.propShadows=props.length;const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeBoundingSphere();return g;}
 // 둔덕 위 나무: 뒤쪽(높은) 둔덕에만 — 카메라 쪽 낮은 둔덕엔 세우지 않아 영웅을 가리지 않는다. 원화 12장 중 고정 시드로 고르고 좌우 반전·크기만 바꾼다.
 function treeSprites(T,r,F,cfg,ims){const rnd=rng(cfg.seed^0x7ee5),g=new T.Group(),mats=[];let n=0;const want=Math.round((F.W*F.H)/120);
@@ -684,7 +686,7 @@ function build(r,frame){const t0=performance.now(),T=r.T,cfg=ZONES[frame.zone],e
   if(cfg.trees){const tg=treeSprites(T,r,F,cfg,ims);if(tg){tg.name='r204-trees';group.add(tg);}}
   if(cfg.tufts){const tg=tuftSprites(T,r,F,cfg,ims,roomOf(frame));if(tg){tg.name='r212-tufts';group.add(tg);}}
   if(cfg.patches||cfg.uprights){const og=organicDecor(T,r,F,cfg,ims,roomOf(frame));if(og){og.name='r207-organic';group.add(og);}}
-  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
+  r.spatialRoot.add(group);r.__r204={gen,pending:false,zone:frame.zone,group,F,sightState:r.sightState24,shadowKey:shadowKey(roomOf(frame))};stats.builds++;stats.buildMs=Math.round(performance.now()-t0);
  }).catch(e=>{fail(e);if(r.__r204?.gen===gen)r.__r204.failed=true;});}
 // R220 실내 일관성(사용자 2026-11-02 "보고바탕진행" — R220 측정: 실내 맵 바깥이 물·절벽 같은 야외 그림, 길거리 소품, 방마다 다른 밝기):
 //  ① 실내 지역에서는 야외용 바깥 덮개(r100-hedge-top: 이끼·절벽 그림)와 맵 밖 바닥판(r98-annex-ground-open: 물·절벽 그림)을 숨긴다 —
@@ -731,6 +733,10 @@ function heroUniform(r,frame){const U=r.__r204U;if(!U)return;const h=frame.entit
 //  → 시야가 켜져 있으면 12장면마다 각 그림의 바닥 점이 보이는지(SIGHT24.pointVisible) 물어 안 보이면 레이어를 끈다(엔진이 visible 을 되살리므로 layers.mask 로).
 let sightTick=0;function spriteSight(st){try{const S=window.__STORYWORLD_SIGHT24__,on=!!S?.enabled;if(!st?.group)return;if(on&&(++sightTick%12))return;
  for(const g of st.group.children){if(g.name!=='r212-tufts'&&g.name!=='r204-trees')continue;for(const sp of g.children){const want=!on||S.pointVisible(sp.position.x,sp.position.z)?4:0;if(sp.layers.mask!==want)sp.layers.mask=want;}}}catch(e){fail(e);}}
+// R412: 방에 들어온 뒤 R412 가 조형물을 벽에서 빼거나(보이는 발 자리) 등불을 솎거나 장식을 숨기면 발밑 그늘도 다시 깐다(그늘 판만 새로 — 지형은 그대로)
+function shadowKey(rm){let k=String(rm?.props?.length||0);try{const s=window.__STORYWORLD_PROPS_TIDY_R412__?.inspect?.().stats;if(s)k+=':'+s.unwalled+':'+s.hidden+':'+s.lampsRemoved;}catch(_){}return k;}
+function shadowSync(r,st,frame){try{const rm=roomOf(frame);if(!rm||!st?.group)return;const k=shadowKey(rm);if(st.shadowKey===k)return;st.shadowKey=k;
+ const mesh=st.group.children.find(o=>o.name==='r204-prop-shadows');if(!mesh)return;const g=propShadowMesh(r.T,st.F,rm);if(!g){mesh.visible=false;return;}r.spatialResources.add(g);mesh.geometry=g;mesh.visible=true;stats.shadowSyncs=(stats.shadowSyncs||0)+1;}catch(e){fail(e);}}
 function before(r,frame){try{
  const st=r.__r204;if(!eligible(r,frame)){if(st?.group)st.group.visible=false;if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그룹이 없어도(빌드 실패·대기 중 지역 이탈) 가린 원래 지형을 되돌린다 — Codex #132 */
  // 새 지형이 준비되기 전에는 원래(사각) 지형·2D 바닥 그림을 보이지 않는다 — 맵에 들어설 때 옛 지형이 잠깐 보였다 통째로 바뀌는 '팝'·끊김 방지(사용자 "맵 변경 시 이상한 곳 보여주고 화면이 흔들림")
@@ -740,7 +746,7 @@ function before(r,frame){try{
  if(st.failed){if(r.__r204Hidden)restoreNative(r);return;}/* R211: 그림을 못 읽어 빌드가 실패하면 원래 지형으로 */if(st.pending){veil();return;}st.group.visible=true;
  if(r.sightState24&&st.sightState!==r.sightState24){for(const o of st.group.children)A.attachSight24?.(o.material,r.sightState24);st.sightState=r.sightState24;}
  if(deco){heroUniform(r,frame);if(!(++dimTick%30)){dimRoofs(r);interiorShell(r);}stats.frames++;return;}
- hideNative(r);heroUniform(r,frame);spriteSight(st);stats.frames++;
+ hideNative(r);heroUniform(r,frame);spriteSight(st);shadowSync(r,st,frame);stats.frames++;
  // 사각 방에 맞춰 그린 옛 바닥 무늬(R90·R92 floor 명령)는 새 바닥과 어긋나므로 이 지역에서만 뺀다
  if(Array.isArray(frame.commands)){const n0=frame.commands.length;frame.commands=frame.commands.filter(c=>!FLOOR_CMD.test(String(c?.owner?.id||'')));stats.floorCmdsDropped=n0-frame.commands.length;}}catch(e){fail(e);}}
 // R228 방마다 다른 바닥(사용자 영상·디아블로·이터널리턴: 방이 바뀌면 바닥 결이 바뀐다). R224 방(r224Rooms) 사각형마다 그 지역 계열(진료·집·도시·대장간·기계·교단) 안에서
