@@ -1,0 +1,2135 @@
+[
+ {
+  "id": "hub",
+  "loadS": 1.4,
+  "a": {
+   "room": "hub",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 22.3,
+   "hy": 20.5,
+   "hp": 777,
+   "room": "hub"
+  },
+  "moved": 7.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist00",
+  "loadS": 9.3,
+  "a": {
+   "room": "dist00",
+   "layer": "STORY",
+   "enemies": 40,
+   "alive": 40,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 40,
+   "hx": 82.2,
+   "hy": 59.9,
+   "hp": 777,
+   "room": "dist00"
+  },
+  "moved": 5.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist01",
+  "loadS": 9.2,
+  "a": {
+   "room": "dist01",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 39,
+   "hx": 82.9,
+   "hy": 57.8,
+   "hp": 777,
+   "room": "dist01"
+  },
+  "moved": 5.8,
+  "killed": 6,
+  "errs": []
+ },
+ {
+  "id": "dist02",
+  "loadS": 9.1,
+  "a": {
+   "room": "dist02",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 84.9,
+   "hy": 60,
+   "hp": 777,
+   "room": "dist02"
+  },
+  "moved": 3.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist03",
+  "loadS": 8.8,
+  "a": {
+   "room": "dist03",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 84.5,
+   "hy": 60,
+   "hp": 777,
+   "room": "dist03"
+  },
+  "moved": 3.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist04",
+  "loadS": 7.6,
+  "a": {
+   "room": "dist04",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 88,
+   "hy": 57.5,
+   "hp": 777,
+   "room": "dist04"
+  },
+  "moved": 3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist05",
+  "loadS": 8,
+  "a": {
+   "room": "dist05",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 84.9,
+   "hy": 60.2,
+   "hp": 777,
+   "room": "dist05"
+  },
+  "moved": 3.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dist06",
+  "loadS": 9.3,
+  "a": {
+   "room": "dist06",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 87.4,
+   "hy": 56.7,
+   "hp": 777,
+   "room": "dist06"
+  },
+  "moved": 3.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1a08",
+  "loadS": 13.4,
+  "a": {
+   "room": "ep1a08",
+   "layer": "STORY",
+   "enemies": 30,
+   "alive": 30,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 80.6,
+   "hy": 108.4
+  },
+  "b": {
+   "alive": 30,
+   "hx": 74.7,
+   "hy": 108.2,
+   "hp": 777,
+   "room": "ep1a08"
+  },
+  "moved": 5.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1a09",
+  "loadS": 9.6,
+  "a": {
+   "room": "ep1a09",
+   "layer": "STORY",
+   "enemies": 37,
+   "alive": 37,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 37,
+   "hx": 83.8,
+   "hy": 59.8,
+   "hp": 777,
+   "room": "ep1a09"
+  },
+  "moved": 4.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1a09b",
+  "loadS": 9,
+  "a": {
+   "room": "ep1a09b",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 83.3,
+   "hy": 60.1,
+   "hp": 777,
+   "room": "ep1a09b"
+  },
+  "moved": 4.7,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1a10",
+  "loadS": 10.2,
+  "a": {
+   "room": "ep1a10",
+   "layer": "STORY",
+   "enemies": 53,
+   "alive": 53,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 53,
+   "hx": 88,
+   "hy": 60.5,
+   "hp": 777,
+   "room": "ep1a10"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1a11",
+  "loadS": 9.2,
+  "a": {
+   "room": "ep1a11",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 82.8,
+   "hy": 60,
+   "hp": 777,
+   "room": "ep1a11"
+  },
+  "moved": 5.2,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "dreamRest",
+  "loadS": 5.3,
+  "a": {
+   "room": "dreamRest",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 17.1,
+   "hy": 8.9,
+   "hp": 777,
+   "room": "dreamRest"
+  },
+  "moved": 10.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b01",
+  "loadS": 6.7,
+  "a": {
+   "room": "ep1b01",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 82.8,
+   "hy": 59.6,
+   "hp": 777,
+   "room": "ep1b01"
+  },
+  "moved": 5.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b02",
+  "loadS": 8.9,
+  "a": {
+   "room": "ep1b02",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 82.7,
+   "hy": 61.3,
+   "hp": 777,
+   "room": "ep1b02"
+  },
+  "moved": 5.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b03",
+  "loadS": 8.4,
+  "a": {
+   "room": "ep1b03",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 83.2,
+   "hy": 57.8,
+   "hp": 777,
+   "room": "ep1b03"
+  },
+  "moved": 5.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b04",
+  "loadS": 8.8,
+  "a": {
+   "room": "ep1b04",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 84.3,
+   "hy": 58.4,
+   "hp": 777,
+   "room": "ep1b04"
+  },
+  "moved": 4.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b05",
+  "loadS": 8.5,
+  "a": {
+   "room": "ep1b05",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 82.7,
+   "hy": 60,
+   "hp": 777,
+   "room": "ep1b05"
+  },
+  "moved": 5.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b06b",
+  "loadS": 9.6,
+  "a": {
+   "room": "ep1b06b",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 88.1,
+   "hy": 56.1,
+   "hp": 777,
+   "room": "ep1b06b"
+  },
+  "moved": 4.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b07",
+  "loadS": 8.8,
+  "a": {
+   "room": "ep1b07",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 87.9,
+   "hy": 54.7,
+   "hp": 777,
+   "room": "ep1b07"
+  },
+  "moved": 5.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b08",
+  "loadS": 8.7,
+  "a": {
+   "room": "ep1b08",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 84.8,
+   "hy": 60.2,
+   "hp": 777,
+   "room": "ep1b08"
+  },
+  "moved": 3.2,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "ep1b09",
+  "loadS": 9.3,
+  "a": {
+   "room": "ep1b09",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 84.7,
+   "hy": 60,
+   "hp": 777,
+   "room": "ep1b09"
+  },
+  "moved": 3.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "restEp1b",
+  "loadS": 5.2,
+  "a": {
+   "room": "restEp1b",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 10.4,
+   "hy": 11.7,
+   "hp": 777,
+   "room": "restEp1b"
+  },
+  "moved": 8.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "u201",
+  "loadS": 8.9,
+  "a": {
+   "room": "u201",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 83.9,
+   "hy": 58.9,
+   "hp": 777,
+   "room": "u201"
+  },
+  "moved": 4.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "u202",
+  "loadS": 7.9,
+  "a": {
+   "room": "u202",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 82.9,
+   "hy": 57.7,
+   "hp": 777,
+   "room": "u202"
+  },
+  "moved": 5.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "u204",
+  "loadS": 6.3,
+  "a": {
+   "room": "u204",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 81.5,
+   "hy": 61.6,
+   "hp": 777,
+   "room": "u204"
+  },
+  "moved": 6.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "u205",
+  "loadS": 6.5,
+  "a": {
+   "room": "u205",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 84.1,
+   "hy": 61.1,
+   "hp": 777,
+   "room": "u205"
+  },
+  "moved": 3.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "u206",
+  "loadS": 6.6,
+  "a": {
+   "room": "u206",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 40,
+   "hx": 78.3,
+   "hy": 52.2,
+   "hp": 777,
+   "room": "u206"
+  },
+  "moved": 12.8,
+  "killed": 5,
+  "errs": []
+ },
+ {
+  "id": "u203",
+  "loadS": 9.1,
+  "a": {
+   "room": "u203",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 86.7,
+   "hy": 55.8,
+   "hp": 777,
+   "room": "u203"
+  },
+  "moved": 4.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "restU2",
+  "loadS": 5.4,
+  "a": {
+   "room": "restU2",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 16,
+   "hy": 11.1,
+   "hp": 777,
+   "room": "restU2"
+  },
+  "moved": 8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "last304",
+  "loadS": 7.2,
+  "a": {
+   "room": "last304",
+   "layer": "STORY",
+   "enemies": 44,
+   "alive": 44,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 44,
+   "hx": 83.4,
+   "hy": 60,
+   "hp": 777,
+   "room": "last304"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "last305",
+  "loadS": 8.1,
+  "a": {
+   "room": "last305",
+   "layer": "STORY",
+   "enemies": 42,
+   "alive": 42,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 42,
+   "hx": 83.9,
+   "hy": 60,
+   "hp": 777,
+   "room": "last305"
+  },
+  "moved": 4.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "last301",
+  "loadS": 9.5,
+  "a": {
+   "room": "last301",
+   "layer": "STORY",
+   "enemies": 1,
+   "alive": 1,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 1,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "last301"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "last302",
+  "loadS": 7.5,
+  "a": {
+   "room": "last302",
+   "layer": "STORY",
+   "enemies": 42,
+   "alive": 42,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 42,
+   "hx": 84.5,
+   "hy": 60,
+   "hp": 777,
+   "room": "last302"
+  },
+  "moved": 3.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "last303",
+  "loadS": 7.8,
+  "a": {
+   "room": "last303",
+   "layer": "STORY",
+   "enemies": 33,
+   "alive": 33,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 33,
+   "hx": 84.4,
+   "hy": 60,
+   "hp": 777,
+   "room": "last303"
+  },
+  "moved": 3.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "restLast3",
+  "loadS": 6.3,
+  "a": {
+   "room": "restLast3",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 11.2,
+   "hy": 12.8,
+   "hp": 777,
+   "room": "restLast3"
+  },
+  "moved": 7.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair01",
+  "loadS": 8.2,
+  "a": {
+   "room": "kair01",
+   "layer": "STORY",
+   "enemies": 37,
+   "alive": 37,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 31,
+   "hx": 93.6,
+   "hy": 49.5,
+   "hp": 777,
+   "room": "kair01"
+  },
+  "moved": 12.3,
+  "killed": 6,
+  "errs": []
+ },
+ {
+  "id": "kair04",
+  "loadS": 8.3,
+  "a": {
+   "room": "kair04",
+   "layer": "STORY",
+   "enemies": 39,
+   "alive": 39,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 39,
+   "hx": 85.1,
+   "hy": 60.1,
+   "hp": 777,
+   "room": "kair04"
+  },
+  "moved": 2.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair05",
+  "loadS": 9,
+  "a": {
+   "room": "kair05",
+   "layer": "STORY",
+   "enemies": 38,
+   "alive": 38,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 38,
+   "hx": 85.6,
+   "hy": 60.2,
+   "hp": 777,
+   "room": "kair05"
+  },
+  "moved": 2.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair06",
+  "loadS": 7.9,
+  "a": {
+   "room": "kair06",
+   "layer": "STORY",
+   "enemies": 38,
+   "alive": 38,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 38,
+   "hx": 81.2,
+   "hy": 59.9,
+   "hp": 777,
+   "room": "kair06"
+  },
+  "moved": 6.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair07",
+  "loadS": 8.1,
+  "a": {
+   "room": "kair07",
+   "layer": "STORY",
+   "enemies": 39,
+   "alive": 39,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 39,
+   "hx": 87.9,
+   "hy": 56.3,
+   "hp": 777,
+   "room": "kair07"
+  },
+  "moved": 4.2,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair08",
+  "loadS": 7.2,
+  "a": {
+   "room": "kair08",
+   "layer": "STORY",
+   "enemies": 38,
+   "alive": 38,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 38,
+   "hx": 83.1,
+   "hy": 60,
+   "hp": 777,
+   "room": "kair08"
+  },
+  "moved": 4.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair09",
+  "loadS": 6.9,
+  "a": {
+   "room": "kair09",
+   "layer": "STORY",
+   "enemies": 39,
+   "alive": 39,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 33,
+   "hx": 82.2,
+   "hy": 49.3,
+   "hp": 777,
+   "room": "kair09"
+  },
+  "moved": 12.6,
+  "killed": 6,
+  "errs": []
+ },
+ {
+  "id": "kair10",
+  "loadS": 9.3,
+  "a": {
+   "room": "kair10",
+   "layer": "STORY",
+   "enemies": 38,
+   "alive": 38,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 38,
+   "hx": 86.8,
+   "hy": 54.5,
+   "hp": 777,
+   "room": "kair10"
+  },
+  "moved": 6.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair02",
+  "loadS": 9.6,
+  "a": {
+   "room": "kair02",
+   "layer": "STORY",
+   "enemies": 35,
+   "alive": 35,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 35,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "kair02"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "kair03",
+  "loadS": 6.9,
+  "a": {
+   "room": "kair03",
+   "layer": "STORY",
+   "enemies": 34,
+   "alive": 34,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 34,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "kair03"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "restKairo",
+  "loadS": 4.1,
+  "a": {
+   "room": "restKairo",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 15,
+   "hy": 19,
+   "hp": 777,
+   "room": "restKairo"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "hando01",
+  "loadS": 10,
+  "a": {
+   "room": "hando01",
+   "layer": "STORY",
+   "enemies": 36,
+   "alive": 36,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.4
+  },
+  "b": {
+   "alive": 36,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "hando01"
+  },
+  "moved": 4.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "hando02",
+  "loadS": 7.5,
+  "a": {
+   "room": "hando02",
+   "layer": "STORY",
+   "enemies": 37,
+   "alive": 37,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 37,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "hando02"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "hando03",
+  "loadS": 7.9,
+  "a": {
+   "room": "hando03",
+   "layer": "STORY",
+   "enemies": 43,
+   "alive": 43,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 43,
+   "hx": 18.6,
+   "hy": 19.4,
+   "hp": 777,
+   "room": "hando03"
+  },
+  "moved": 4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "restHando",
+  "loadS": 6.7,
+  "a": {
+   "room": "restHando",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 11.3,
+   "hy": 13.4,
+   "hp": 777,
+   "room": "restHando"
+  },
+  "moved": 6.7,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "murder01",
+  "loadS": 7.2,
+  "a": {
+   "room": "murder01",
+   "layer": "STORY",
+   "enemies": 34,
+   "alive": 34,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 34,
+   "hx": 83.8,
+   "hy": 60.8,
+   "hp": 777,
+   "room": "murder01"
+  },
+  "moved": 4.2,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "murder02",
+  "loadS": 7.4,
+  "a": {
+   "room": "murder02",
+   "layer": "STORY",
+   "enemies": 35,
+   "alive": 35,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 35,
+   "hx": 87.9,
+   "hy": 55.2,
+   "hp": 777,
+   "room": "murder02"
+  },
+  "moved": 5.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "murder04",
+  "loadS": 6.6,
+  "a": {
+   "room": "murder04",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 85,
+   "hy": 60.2,
+   "hp": 777,
+   "room": "murder04"
+  },
+  "moved": 3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "murder03",
+  "loadS": 9.6,
+  "a": {
+   "room": "murder03",
+   "layer": "STORY",
+   "enemies": 36,
+   "alive": 36,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 36,
+   "hx": 87,
+   "hy": 56.5,
+   "hp": 777,
+   "room": "murder03"
+  },
+  "moved": 4.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult01",
+  "loadS": 10.2,
+  "a": {
+   "room": "cult01",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 83.5,
+   "hy": 60.1,
+   "hp": 777,
+   "room": "cult01"
+  },
+  "moved": 4.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult02",
+  "loadS": 6.8,
+  "a": {
+   "room": "cult02",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 82.7,
+   "hy": 60.1,
+   "hp": 777,
+   "room": "cult02"
+  },
+  "moved": 5.3,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult05",
+  "loadS": 7.3,
+  "a": {
+   "room": "cult05",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 82.1,
+   "hy": 59.1,
+   "hp": 777,
+   "room": "cult05"
+  },
+  "moved": 6.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult06",
+  "loadS": 8,
+  "a": {
+   "room": "cult06",
+   "layer": "STORY",
+   "enemies": 45,
+   "alive": 45,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 45,
+   "hx": 83.6,
+   "hy": 59.7,
+   "hp": 777,
+   "room": "cult06"
+  },
+  "moved": 4.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult03",
+  "loadS": 9.1,
+  "a": {
+   "room": "cult03",
+   "layer": "STORY",
+   "enemies": 46,
+   "alive": 46,
+   "boss": 2,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 0,
+   "hx": 88,
+   "hy": 60.5
+  },
+  "b": {
+   "alive": 46,
+   "hx": 86.8,
+   "hy": 56.1,
+   "hp": 777,
+   "room": "cult03"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "cult04",
+  "loadS": 17.9,
+  "a": {
+   "room": "cult04",
+   "layer": "STORY",
+   "enemies": 41,
+   "alive": 41,
+   "boss": 1,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 15,
+   "hy": 17.6
+  },
+  "b": {
+   "alive": 41,
+   "hx": 15,
+   "hy": 13,
+   "hp": 777,
+   "room": "cult04"
+  },
+  "moved": 4.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "village",
+  "loadS": 5,
+  "a": {
+   "room": "village",
+   "layer": "STORY",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 15,
+   "hy": 19
+  },
+  "b": {
+   "alive": 0,
+   "hx": 15,
+   "hy": 19,
+   "hp": 777,
+   "room": "village"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong0",
+  "loadS": 6,
+  "a": {
+   "room": "dist05",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 3,
+   "hx": 49.5,
+   "hy": 21.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 48.6,
+   "hy": 20.6,
+   "hp": 777,
+   "room": "dist05"
+  },
+  "moved": 1.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong1",
+  "loadS": 2.3,
+  "a": {
+   "room": "ep1b05",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 26.8,
+   "hy": 71.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 26.8,
+   "hy": 71.8,
+   "hp": 777,
+   "room": "ep1b05"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong2",
+  "loadS": 2.9,
+  "a": {
+   "room": "ep1a09",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 4,
+   "hx": 15.8,
+   "hy": 41.3
+  },
+  "b": {
+   "alive": 0,
+   "hx": 15.2,
+   "hy": 37.2,
+   "hp": 777,
+   "room": "ep1a09"
+  },
+  "moved": 4.1,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong3",
+  "loadS": 4,
+  "a": {
+   "room": "dist04",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 40.5,
+   "hy": 27.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 39.7,
+   "hy": 24.3,
+   "hp": 777,
+   "room": "dist04"
+  },
+  "moved": 3.6,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong4",
+  "loadS": 2.6,
+  "a": {
+   "room": "ep1b08",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 24.8,
+   "hy": 68.3
+  },
+  "b": {
+   "alive": 0,
+   "hx": 24.8,
+   "hy": 68.3,
+   "hp": 777,
+   "room": "ep1b08"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong5",
+  "loadS": 3.8,
+  "a": {
+   "room": "last302",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 43.5,
+   "hy": 27.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 43.4,
+   "hy": 24.9,
+   "hp": 777,
+   "room": "last302"
+  },
+  "moved": 2.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong6",
+  "loadS": 5.2,
+  "a": {
+   "room": "u201",
+   "layer": "DREAM",
+   "enemies": 4,
+   "alive": 4,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 6.3,
+   "hy": 35.9
+  },
+  "b": {
+   "alive": 4,
+   "hx": 6.3,
+   "hy": 35.9,
+   "hp": 777,
+   "room": "u201"
+  },
+  "moved": 0,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong7",
+  "loadS": 5.9,
+  "a": {
+   "room": "cult03",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 45,
+   "hy": 21.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 44,
+   "hy": 18.5,
+   "hp": 777,
+   "room": "cult03"
+  },
+  "moved": 3.4,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong8",
+  "loadS": 4,
+  "a": {
+   "room": "ep1a10",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 3,
+   "hx": 18.8,
+   "hy": 48.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 25.9,
+   "hy": 45.6,
+   "hp": 777,
+   "room": "ep1a10"
+  },
+  "moved": 7.8,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong9",
+  "loadS": 4.9,
+  "a": {
+   "room": "ep1b06",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 1,
+   "hx": 40.5,
+   "hy": 24.8
+  },
+  "b": {
+   "alive": 0,
+   "hx": 39.3,
+   "hy": 21.5,
+   "hp": 777,
+   "room": "ep1b06"
+  },
+  "moved": 3.5,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong10",
+  "loadS": 3.8,
+  "a": {
+   "room": "ep1b03",
+   "layer": "DREAM",
+   "enemies": 4,
+   "alive": 4,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 3,
+   "hx": 5.3,
+   "hy": 61.6
+  },
+  "b": {
+   "alive": 10,
+   "hx": 13.6,
+   "hy": 61,
+   "hp": 777,
+   "room": "ep1b03"
+  },
+  "moved": 8.3,
+  "killed": -6,
+  "errs": []
+ },
+ {
+  "id": "samong11",
+  "loadS": 6.1,
+  "a": {
+   "room": "cult02",
+   "layer": "DREAM",
+   "enemies": 0,
+   "alive": 0,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 4,
+   "hx": 8.3,
+   "hy": 59.3
+  },
+  "b": {
+   "alive": 0,
+   "hx": 15.9,
+   "hy": 57.1,
+   "hp": 777,
+   "room": "cult02"
+  },
+  "moved": 7.9,
+  "killed": 0,
+  "errs": []
+ },
+ {
+  "id": "samong12",
+  "loadS": 4.4,
+  "a": {
+   "room": "u202",
+   "layer": "DREAM",
+   "enemies": 4,
+   "alive": 4,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 3,
+   "hx": 22.2,
+   "hy": 59.9
+  },
+  "b": {
+   "alive": 14,
+   "hx": 21.1,
+   "hy": 51.4,
+   "hp": 777,
+   "room": "u202"
+  },
+  "moved": 8.6,
+  "killed": -10,
+  "errs": []
+ },
+ {
+  "id": "samong13",
+  "loadS": 7.9,
+  "a": {
+   "room": "cult05",
+   "layer": "DREAM",
+   "enemies": 6,
+   "alive": 6,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 62.1,
+   "hy": 62.1
+  },
+  "b": {
+   "alive": 30,
+   "hx": 59.6,
+   "hy": 56.5,
+   "hp": 777,
+   "room": "cult05"
+  },
+  "moved": 6.1,
+  "killed": -24,
+  "errs": []
+ },
+ {
+  "id": "samong14",
+  "loadS": 4.7,
+  "a": {
+   "room": "cult06",
+   "layer": "DREAM",
+   "enemies": 4,
+   "alive": 4,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 69.8,
+   "hy": 69.8
+  },
+  "b": {
+   "alive": 16,
+   "hx": 65.5,
+   "hy": 73.2,
+   "hp": 777,
+   "room": "cult06"
+  },
+  "moved": 5.5,
+  "killed": -12,
+  "errs": []
+ },
+ {
+  "id": "samong15",
+  "loadS": 4.7,
+  "a": {
+   "room": "kair05",
+   "layer": "DREAM",
+   "enemies": 8,
+   "alive": 8,
+   "boss": 0,
+   "bad": 0,
+   "stuckEnemies": 0,
+   "heroBlocked": false,
+   "pathToObj": 2,
+   "hx": 62.1,
+   "hy": 62.1
+  },
+  "b": {
+   "alive": 21,
+   "hx": 57.3,
+   "hy": 59.4,
+   "hp": 777,
+   "room": "kair05"
+  },
+  "moved": 5.5,
+  "killed": -13,
+  "errs": []
+ }
+]
