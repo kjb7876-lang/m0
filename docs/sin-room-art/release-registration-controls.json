@@ -1,0 +1,72 @@
+{
+  "htmlSHA256": "552c3fd4236b7269564e3e6552f9cb9e701ba5122f2ee98975bc56e8eb7ac74f",
+  "positiveChecks": 5,
+  "negativeChecks": 30,
+  "results": [
+    {
+      "file": "r96/qa/r378/r378-cpu-check.cjs",
+      "sourceSHA256": "5a16289eba8fb6c4b4124ccbaee761dc1c7e9caa68ae0463b7d388cb62b05b6c",
+      "positive": true,
+      "rejected": [
+        "missing <script src=\"./mammon-bossroom.js\"></script>",
+        "missing <script src=\"./seven-sins-bossrooms.js\"></script>",
+        "missing <script src=\"./sin-room-art.js\"></script>",
+        "reversed dedicated tag order",
+        "duplicate dedicated tags",
+        "unregistered tag within dedicated chain"
+      ]
+    },
+    {
+      "file": "r96/qa/r266/r266-cpu-check.cjs",
+      "sourceSHA256": "3114011adeb1cb872f6b2a1919a34e23b26a1566eb7b9de47b65611b325f3385",
+      "positive": true,
+      "rejected": [
+        "missing <script src=\"./mammon-bossroom.js\"></script>",
+        "missing <script src=\"./seven-sins-bossrooms.js\"></script>",
+        "missing <script src=\"./sin-room-art.js\"></script>",
+        "reversed dedicated tag order",
+        "duplicate dedicated tags",
+        "unregistered tag within dedicated chain"
+      ]
+    },
+    {
+      "file": "r96/qa/r287/r287-cpu-check.cjs",
+      "sourceSHA256": "e8d2b1e56b2f1359ec6f41b9169e0b8a2df5d386e59ee6e736df1ffe47fe3889",
+      "positive": true,
+      "rejected": [
+        "missing <script src=\"./mammon-bossroom.js\"></script>",
+        "missing <script src=\"./seven-sins-bossrooms.js\"></script>",
+        "missing <script src=\"./sin-room-art.js\"></script>",
+        "reversed dedicated tag order",
+        "duplicate dedicated tags",
+        "unregistered tag within dedicated chain"
+      ]
+    },
+    {
+      "file": "r96/qa/r292/r292-cpu-check.cjs",
+      "sourceSHA256": "4ff549853844bbebe50aac59710da0e8fe634bc5da3c24d85e96bae5942b08f1",
+      "positive": true,
+      "rejected": [
+        "missing <script src=\"./mammon-bossroom.js\"></script>",
+        "missing <script src=\"./seven-sins-bossrooms.js\"></script>",
+        "missing <script src=\"./sin-room-art.js\"></script>",
+        "reversed dedicated tag order",
+        "duplicate dedicated tags",
+        "unregistered tag within dedicated chain"
+      ]
+    },
+    {
+      "file": "r96/qa/r302/r302-cpu-check.cjs",
+      "sourceSHA256": "4c313c0449f571d208ac430478d99a75dd716a5f28c9a9fa9959e2e0ca119d03",
+      "positive": true,
+      "rejected": [
+        "missing <script src=\"./mammon-bossroom.js\"></script>",
+        "missing <script src=\"./seven-sins-bossrooms.js\"></script>",
+        "missing <script src=\"./sin-room-art.js\"></script>",
+        "reversed dedicated tag order",
+        "duplicate dedicated tags",
+        "unregistered tag within dedicated chain"
+      ]
+    }
+  ]
+}

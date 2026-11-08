@@ -3,7 +3,7 @@
   "project": "storyworld-m0",
   "repository": "kjb7876-lang/m0",
   "issue_number": 297,
-  "revision": 1,
+  "revision": 2,
   "goal": "사용자가 지정한 주거집·호텔 주방·고급 바·사장실과 금고·화재 식당의 전용 조형물24개를 실제 보스방에 통합하고 최신main 보존·검증 후 Pages 배포한다.",
   "acceptance_criteria": [
     "맘몬 금고 조형물을 다른 테마에 재사용하지 않고 6개 전용 PNG/24개 조형물을 실제 보스방에 적용한다.",
@@ -44,7 +44,12 @@
     "docs/mammon/",
     "docs/seven-sins/",
     "docs/sin-room-art/",
-    "ops/tasks/SW-0009.json"
+    "ops/tasks/SW-0009.json",
+    "r96/qa/r266/r266-cpu-check.cjs",
+    "r96/qa/r287/r287-cpu-check.cjs",
+    "r96/qa/r292/r292-cpu-check.cjs",
+    "r96/qa/r302/r302-cpu-check.cjs",
+    "r96/qa/r378/r378-cpu-check.cjs"
   ],
   "base_commit": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f",
   "input_manifest_hash": "78ab31f9eb61309bd30e03e3e28e1e658ed9dbb29d2101e40d3e0825b29247a9",
@@ -52,16 +57,17 @@
   "reviewer": "claude",
   "dependencies": [],
   "status": "QUEUED",
-  "dispatch_id": "SW-0009-r1-sin-room-release",
+  "dispatch_id": "SW-0009-r2-registration-checks",
   "provider_task_id": null,
-  "attempt_count": 1,
+  "attempt_count": 3,
   "artifact_manifest": "r96/runtime-text/assets/sin-rooms/index.json",
   "evidence": [
     "로컬 후보4cf72ca24c9d8016ab5b19bc31e444f9c053b85e; 실제 화면 7분야 임시 평균8.18/10.",
     "GitHub 연결의 현 저장소 read/write 권한, main5b1b04c, 열린PR12건의 변경 파일을 확인.",
-    "공유 등록은 최신main 위에서 최소 추가와manifest재생성. 다른 열린PR의 기능은 가져오거나 바꾸지 않는다."
+    "공유 등록은 최신main 위에서 최소 추가와manifest재생성. 다른 열린PR의 기능은 가져오거나 바꾸지 않는다.",
+    "기존 명시적 스크립트 등록 검사5개에 신규3태그의 필수 순서를 추가한다. 행동 검사는 보존하며 누락·재정렬 음성 대조군을 확인한다."
   ],
   "blocked_reason": "",
   "approval_scope": "사용자가 '배포까지해줘'라고 명시. 최신main 보존·CI·독립 화면 확인·정상PR을 통한main병합과Pages공개까지 승인.",
-  "completion": "deployed"
+  "completion": "report"
 }
