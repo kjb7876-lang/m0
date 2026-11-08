@@ -12,7 +12,7 @@ const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(Stri
 await p.goto(URL);await p.locator('#campaignNew54').click({timeout:120000});await p.locator('#slotConfirmR73').click();
 await p.waitForFunction(()=>started&&!loading,null,{timeout:180000});await p.waitForTimeout(800);
 await p.evaluate(()=>{for(let i=0;i<120&&storyScene;i++)advanceScene();if(modal)closePanel(true);});
-check('R384 loaded',await p.evaluate(()=>window.__STORYWORLD_CINEMA_SYNC_R384__?.revision==='R390-sync-4'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-5'));
+check('R384 loaded',await p.evaluate(()=>window.__STORYWORLD_CINEMA_SYNC_R384__?.revision==='R390-sync-4'&&window.__STORYWORLD_CINEMA_MODE_R370__.inspect().revision==='R370-cinema-6'));
 await p.evaluate(()=>window.__STORYWORLD_CINEMA_MODE_R370__.set({on:true}));
 await p.waitForFunction(()=>room?.id==='dist00'&&!loading,null,{timeout:240000});
 await p.waitForFunction(()=>window.__STORYWORLD_CINEMA_SYNC_R384__.inspect().stats.pre>=1,null,{timeout:20000}).catch(()=>{});

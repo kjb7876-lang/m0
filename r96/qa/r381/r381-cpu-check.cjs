@@ -53,8 +53,8 @@ vm.runInContext(`var started=true,loading=false,modal=false,guide=true,auto=true
  async function enterRegion(){return true;}function showSettings(){}`,sb);
 vm.runInContext(CS('cinema-mode-r370.js'),sb);const api=sb.__STORYWORLD_CINEMA_MODE_R370__;api.set({on:true});
 const tickIv=s=>{for(let i=0;i<s;i++){run(1);sb.__iv&&sb.__iv();}};
-ok(/^R370-cinema-[345]$/.test(api.inspect().revision),'영화 모드 rev 3 이상');
-const scene=sentences(C.prologue.pre).slice(0,4);const fresh='정본에 없는 새 문장이다.';
+ok(/^R370-cinema-[3456]$/.test(api.inspect().revision),'영화 모드 rev 3 이상');
+const scene=sentences(C.prologue.pre).slice(0,5);const fresh='정본에 없는 새 문장이다.';
 failSrc=sid(scene[2]);
 vm.runInContext(`playScenes([{key:'prologue.pre',id:'dist00',title:'t',text:${JSON.stringify(scene.slice(0,3).join(' ')+' '+fresh)}}],null)`,sb);
 tickIv(120);const st=api.inspect().stats;
@@ -68,8 +68,8 @@ ok(st.recorded>=1&&audios.filter(a=>a.duration===3).every(a=>Math.abs(a.volume-.
 failSrc=null;stallSrc=sid(scene[3]);const before=spoken.length;
 vm.runInContext(`playScenes([{key:'prologue.pre2',id:'dist00',title:'t',text:${JSON.stringify(scene[3])}}],null)`,sb);tickIv(30);
 ok(spoken.slice(before).includes(scene[3]),'녹음 받기가 멈추면 8초 뒤 브라우저 음성으로',spoken.slice(before));
-// 끄기 → 재생 중 녹음 멈춤
-stallSrc=null;vm.runInContext(`playScenes([{key:'prologue.pre3',id:'dist00',title:'t',text:${JSON.stringify(scene[0])}}],null)`,sb);run(.5);
+// 끄기 → 재생 중 녹음 멈춤(R425: 한 지역에서 이미 읽은 문장은 다시 넣지 않으므로 아직 안 읽은 다섯째 문장으로)
+stallSrc=null;vm.runInContext(`playScenes([{key:'prologue.pre3',id:'dist00',title:'t',text:${JSON.stringify(scene[4])}}],null)`,sb);run(.5);
 const live=audios.filter(a=>!a.paused&&a.src);api.set({on:false});ok(live.length===1&&live[0].src===''&&live[0].paused,'영화 모드 끄면 녹음도 멈춤',live.map(a=>a.src));
 // 목소리 없이 자막만 → 녹음도 틀지 않음
 api.set({on:true,voice:'none'});const na=audios.length,ns=spoken.length;vm.runInContext(`playScenes([{key:'prologue.pre4',id:'dist00',title:'t',text:${JSON.stringify(scene[1])}}],null)`,sb);tickIv(20);
