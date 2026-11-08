@@ -14,7 +14,7 @@
 // 그림 자산·충돌·피해·저장·서사·맵 순서는 그대로. 게임 ctx.filter 를 쓰지 않는다(CSS filter 는 #stage 요소에만).
 (()=>{'use strict';
 if(window.__STORYWORLD_ACCESS_R420__)return;
-const REV='R420-access-2',KEY='storyworld.r420.access';
+const REV='R420-access-5',KEY='storyworld.r420.access';
 const DEF=Object.freeze({bright:100,text:'base',focus:true});
 const TEXT_SCALE=Object.freeze({base:null,large:{k:1.25,min:12},xl:{k:1.45,min:13}});
 const TEXT_KO=Object.freeze({base:'기본',large:'크게',xl:'아주 크게'});
@@ -54,6 +54,10 @@ function wrapExits(){if(typeof drawExits!=='function'||drawExits.__r420)return;c
     if(text!==s)return ft.call(this,text,x,y,...r);}}catch(e){fail(e);}return ft.call(this,t,x,y,...r);};
   try{return base.apply(this,a);}finally{if(own)c.fillText=ft;else delete c.fillText;}};
  wrapped.__r420=true;drawExits=wrapped;}
+// R421: 터치 기기 아래 안내 줄(#hint)·작은 지도 글(#miniLabel)의 'C를 눌러 이동'·'C · …' → '버튼을 눌러 이동'·'버튼 · …' (키보드 없는 폰에서 C 는 없는 키)
+function touchText(t){const k=(typeof KR291==='object'&&KR291&&KR291.i)||'C';let n=String(t);n=n.split(k+'를 눌러').join('버튼을 눌러');if(n.startsWith(k+' · '))n='버튼 · '+n.slice(k.length+3);n=n.split('에서 '+k+' · ').join('에서 버튼 · ');return n;}
+function fixHint(){if(!coarse()||typeof document==='undefined')return;for(const id of ['hint','miniLabel']){const el=document.getElementById(id);if(!el)continue;const t=el.textContent||'',n=touchText(t);if(n!==t){el.textContent=n;stats.hintsFixed=(stats.hintsFixed||0)+1;}}}
+function wrapHud(){if(typeof updateHUD!=='function'||updateHUD.__r420)return;const base=updateHUD;const w=function(...a){const r=base.apply(this,a);try{fixHint();}catch(e){fail(e);}return r;};w.__r420=true;updateHUD=w;}
 
 // ⑤ 전투 집중 HUD --------------------------------------------------------------------------
 const FOCUS_MQ='(min-width:781px) and (pointer:fine)';
@@ -83,6 +87,7 @@ const FOCUS_CSS='@media '+FOCUS_MQ+'{'
 // ④ CSS + 설정 창 ----------------------------------------------------------------------------
 function css(){if(document.getElementById('accessR420Css'))return;const s=document.createElement('style');s.id='accessR420Css';
  s.textContent='@media (pointer:coarse){#navCompassR100 .guideR101{white-space:nowrap;max-width:none}}'
+  +'html body #r183 .cap{word-break:keep-all;text-wrap:balance;padding:8px 26px 10px;background:radial-gradient(closest-side,#000000b0,#00000070 60%,#0000);border-radius:40px}'/* R421: 3D 체험 자막 — 낱말 단위로 고르게 줄바꿈('다.' 한 글자 줄 없애기)·글 뒤에 옅은 어둠(장면 밝기는 그대로) */
  +'#accessR420 .r420-row{display:flex;align-items:center;gap:.5em;flex-wrap:wrap;margin:.25em 0}'
  +'#accessR420 input[type=range]{accent-color:#b08a4e;width:180px}#accessR420 .r420-val{min-width:3.2em;color:#e6d3a8}'
  +'#accessR420 .r420-hint{font-size:12px;color:#a99d86;margin:.1em 0 .4em}'+FOCUS_CSS;
@@ -104,7 +109,7 @@ function inject(){try{const panel=document.getElementById('panel');if(!panel||pa
 if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){const res=opBase.call(this,html,...a);
  try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const tryIt=()=>{if(!inject()&&++n<20)requestAnimationFrame(tryIt);};tryIt();}}catch(e){fail(e);}return res;};}
 
-css();applyBright();wrapExits();applyFocus();setInterval(applyFocus,250);
-setInterval(()=>{wrapExits();if(prefs.text!=='base')applyText();},1000);
-window.__STORYWORLD_ACCESS_R420__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set(p){if(p&&typeof p==='object'){if(Number.isFinite(+p.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+p.bright)));if(TEXT_SCALE.hasOwnProperty(p.text))prefs.text=p.text;if(typeof p.focus==='boolean')prefs.focus=p.focus;save();applyBright();applyText();applyFocus();}return{...prefs};},stats:()=>({...stats,scaled:scaled.size})});
+css();applyBright();wrapExits();wrapHud();fixHint();applyFocus();setInterval(applyFocus,250);
+setInterval(()=>{wrapExits();wrapHud();if(prefs.text!=='base')applyText();},1000);
+window.__STORYWORLD_ACCESS_R420__=Object.freeze({revision:REV,touchText,prefs:()=>({...prefs}),set(p){if(p&&typeof p==='object'){if(Number.isFinite(+p.bright))prefs.bright=Math.max(70,Math.min(160,Math.round(+p.bright)));if(TEXT_SCALE.hasOwnProperty(p.text))prefs.text=p.text;if(typeof p.focus==='boolean')prefs.focus=p.focus;save();applyBright();applyText();applyFocus();}return{...prefs};},stats:()=>({...stats,scaled:scaled.size})});
 })();
