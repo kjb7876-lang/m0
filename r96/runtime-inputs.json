@@ -6020,7 +6020,18 @@
     "assets/r411/fx/hit-ice-spikes.webp",
     "assets/r411/fx/hit-teleport.webp",
     "assets/r411/fx/index.json",
-    "access-r420.js"
+    "access-r420.js",
+    "theme-fx-r430.js",
+    "assets/r430/arc.webp",
+    "assets/r430/blight.webp",
+    "assets/r430/brand.webp",
+    "assets/r430/fire-loop.webp",
+    "assets/r430/fissure.webp",
+    "assets/r430/frost.webp",
+    "assets/r430/mist-loop.webp",
+    "assets/r430/rift.webp",
+    "assets/r430/tendril.webp",
+    "assets/r430/index.json"
   ],
   "mediaPaths": [
     "assets/final42-r88/effects/081/atlas.png",
@@ -7095,5 +7106,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "e082d2e5b57369bf69ebf78f8ebbaae22fdb78647ca3c344c65ea3638efb6901"
+  "runtimeManifestSHA256": "3712499f717bc4b5f997fd3bdbe6f2d952c30c370f26920e2768122990d2ce14"
 }

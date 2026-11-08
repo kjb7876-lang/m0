@@ -1,0 +1,243 @@
+{
+ "revision": "R430",
+ "generator": "scripts/r430-theme-fx.py",
+ "cell": 192,
+ "source": "Google Drive core24 이펙트 시트(2026-11-08 생성, QA_HOLD, 읽기 전용 재사용)",
+ "approval": "사용자 2026-11-08 \"구글드라이브 이펙트자산 어제오늘생성한거 확인후 개선후 적절하게 배치\" + \"테마가 확실한 맵 곳곳에 프레임애니메이션(최상그래픽에서만)\"",
+ "fx": {
+  "fire-loop": {
+   "file": "fire-loop.webp",
+   "use": "방화 맵 불길(지속 루프)",
+   "effect": "fire_wall",
+   "nameKo": "화염벽",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 10,
+   "cols": 6,
+   "rows": 2,
+   "loop": true,
+   "sourceFrames": [
+    5,
+    19
+   ],
+   "crossfade": 4,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    131.2
+   ],
+   "placement": "ground",
+   "sheetSha256": "722b0bed7ca83db1dcb3a53d5b1530e6f0bec601ab5a769e557001859816f75c",
+   "outSha256": "6791dcd3d31e165b36073e2847cc1ab19410e3616394e5a6d9ac936e9b89c9ec",
+   "bytes": 104558
+  },
+  "mist-loop": {
+   "file": "mist-loop.webp",
+   "use": "중독 도시·늪 독안개(지속 루프)",
+   "effect": "poison_mist",
+   "nameKo": "독안개",
+   "version": "v002",
+   "status": "QA_HOLD",
+   "frames": 20,
+   "cols": 6,
+   "rows": 4,
+   "loop": true,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 4,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    120.0
+   ],
+   "placement": "ground",
+   "sheetSha256": "a628998fae861bdf4ae98ff25e56dbbff126d78f98b01cbb2e662a6374410943",
+   "outSha256": "0e82aeeb136c4412bf5e445a94bfbe13607b895940f0ad9224f6820567622e02",
+   "bytes": 147408
+  },
+  "fissure": {
+   "file": "fissure.webp",
+   "use": "무너진 성·추락 지면 균열(가끔)",
+   "effect": "ground_fissure",
+   "nameKo": "지면 균열",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    120.0
+   ],
+   "placement": "ground",
+   "sheetSha256": "0abbca41ff3b328d9bcdc3212f5c8447341bf4558f01a171a76e332da2454135",
+   "outSha256": "a26e91732145d00895061c88cc761fd4b0e57b270d0d35388830875a7e020047",
+   "bytes": 293000
+  },
+  "arc": {
+   "file": "arc.webp",
+   "use": "기계 맵 전기 방전(가끔)",
+   "effect": "lightning_strike",
+   "nameKo": "낙뢰",
+   "version": "v002",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    156.0
+   ],
+   "placement": "ground_hit_anchor",
+   "sheetSha256": "21b0e4fe843aef15195dad9ec0903f1be9bc593eeba98cd49586537b6a161373",
+   "outSha256": "1ec9b9bf6f09d6eb9538409acca66bc30407398b191c77a9d8097869cdd7c2c2",
+   "bytes": 195458
+  },
+  "rift": {
+   "file": "rift.webp",
+   "use": "카이로노미콘 시간 균열(가끔)",
+   "effect": "gravity_well",
+   "nameKo": "중력 우물",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    112.5
+   ],
+   "placement": "ground",
+   "sheetSha256": "9260413d9016a2dae9bfd1bb6dc3fe4a7e97960f1159e7cdb82a857506109604",
+   "outSha256": "7154afd3ce54554d3c92522102e6ee080bf8af456b2832a549c894b463d1f34a",
+   "bytes": 155320
+  },
+  "blight": {
+   "file": "blight.webp",
+   "use": "피로 물든 병원 감염 번짐(가끔)",
+   "effect": "infection_mark",
+   "nameKo": "감염 표식",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    96.0
+   ],
+   "placement": "body",
+   "sheetSha256": "71e75bee0c235492225bbc52daed3c71973f0092b93e37d16e8eabce86e53693",
+   "outSha256": "12bec7b6d7b5661bee114ef458a3ff5ad995d89e89dee72f51a43c86dbb9fbea",
+   "bytes": 167904
+  },
+  "tendril": {
+   "file": "tendril.webp",
+   "use": "늪 물가 촉수(드물게)",
+   "effect": "tentacle_bind",
+   "nameKo": "촉수 속박",
+   "version": "v002",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    156.0
+   ],
+   "placement": "ground",
+   "sheetSha256": "2b6e93be5ccf7ba23760e31ba608ab2d9e5a26f1b3009e8093ddc156f2dd3fa7",
+   "outSha256": "533a9d1ab4857179f54ade4c194f62058f342eb5703c710fae70c63611588640",
+   "bytes": 215658
+  },
+  "frost": {
+   "file": "frost.webp",
+   "use": "눈보라 냉기 돌풍(가끔)",
+   "effect": "cold_wave",
+   "nameKo": "냉기파",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    131.2
+   ],
+   "placement": "ground",
+   "sheetSha256": "4fe9298986d204b7284d7a4834e48e480e017a720068471c6cbe364a6cad5779",
+   "outSha256": "d0d955e2ec20e6beb8b556e0c9eeffd4e42f0c40c8338521429eab05ef9dda05",
+   "bytes": 184710
+  },
+  "brand": {
+   "file": "brand.webp",
+   "use": "사이비 성당 저주 낙인(가끔)",
+   "effect": "curse_brand",
+   "nameKo": "저주 낙인",
+   "version": "v001",
+   "status": "QA_HOLD",
+   "frames": 24,
+   "cols": 6,
+   "rows": 4,
+   "loop": false,
+   "sourceFrames": [
+    0,
+    24
+   ],
+   "crossfade": 0,
+   "fps": 12.5,
+   "pivot": [
+    96.0,
+    96.0
+   ],
+   "placement": "body_or_head",
+   "sheetSha256": "46650f14c00ae8c72eed6fca6f361fdb9b76da347a4f6d37ffa8884d3d7d070a",
+   "outSha256": "21f4a5d387fb080423696085dfab1f2c056a610c398ee7506bebc9a1ffb07c01",
+   "bytes": 191872
+  }
+ }
+}
