@@ -16,7 +16,8 @@
 //  끄기: localStorage['storyworld.r406.props']='{"on":false}' (부분: place/bulbs/boss 각각 false)
 (()=>{'use strict';
 if(window.__STORYWORLD_PROPS_PLACE_R406__)return;
-const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json';
+const REV='R406-props-place-1',KEY='storyworld.r406.props',IDX='./assets/r406/props/index.json',IDXS=[IDX,'./assets/r408/props/index.json'];// R408: 붉은 하이힐(ep1b05) 라운지 소품 — STORY 지역도 zone=지역 id 로 받는다
+
 const prefs={on:true,place:true,bulbs:true,boss:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
 const stats={rooms:0,seatsMoved:0,seatsKept:0,wallSnapped:0,wallFlipped:0,wallKept:0,bulbs:0,furnaces:0,r92Swaps:0,bossProps:0,bossSkipped:0,errors:0};let lastError=null;
@@ -85,13 +86,13 @@ function bulbs(r,rep){for(const p of r.props){if(!p||p.r406Lit||p.samongR103||p.
 
 // ④ 보스 구역 서사 소품
 let PROPS=null,idxState='idle';
-async function loadIndex(){if(idxState!=='idle')return;idxState='loading';try{const res=await fetch(IDX,{cache:'force-cache'});if(!res.ok)throw new Error('index '+res.status);PROPS=(await res.json()).props||{};idxState='ready';}catch(e){idxState='failed';fail(e);}}
+async function loadIndex(){if(idxState!=='idle')return;idxState='loading';try{const all={};for(const u of IDXS){const res=await fetch(u,{cache:'force-cache'});if(!res.ok)throw new Error('index '+res.status+' '+u);Object.assign(all,(await res.json()).props||{});}PROPS=all;idxState='ready';}catch(e){idxState='failed';fail(e);}}
 function bossCells(r,anchor){const L=r.exploration,F=new Set((L.floorCells||[]).map(c=>c[0]+','+c[1])),has=(x,y)=>F.has(x+','+y),open=[],wall=[];
  for(const[x,y]of L.floorCells||[]){const cx=x+.5,cy=y+.5,d=Math.hypot(cx-anchor.x,cy-anchor.y);if(d<2.4||d>18)continue;let n=0;for(let j=-2;j<=2;j++)for(let i=-2;i<=2;i++)if(has(x+i,y+j))n++;
   if(n>=24&&!blocked(L,cx,cy,.9)&&d<=8)open.push({x:cx,y:cy,d});
   else if(n>=15)for(const[dx,dy,side]of[[-1,0,'-x'],[0,-1,'-y']])if(!has(x+dx,y+dy)&&has(x-dx,y-dy)&&has(x-2*dx,y-2*dy)&&has(x+dy,y+dx)&&has(x-dy,y-dx)){const px=cx-dx*.15,py=cy-dy*.15;if(!blocked(L,px,py,.3))wall.push({x:px,y:py,d,side});}}
  return{open,wall};}
-function boss(r,rep){if(!PROPS)return;const L=r.exploration,z=L?.samongR115?.zone;if(!z)return;const rows=Object.entries(PROPS).filter(([,v])=>v?.zone===z);if(!rows.length)return;
+function boss(r,rep){if(!PROPS)return;const L=r.exploration,z=L?.samongR115?.zone||(L&&!L.samongR103&&r.layer==='STORY'?r.id:null);if(!z)return;const rows=Object.entries(PROPS).filter(([,v])=>v?.zone===z);if(!rows.length)return;
  const anchor=L.samongR103?.dais||r.objective||L.samongR103?.centre;if(!anchor||!Number.isFinite(anchor.x+anchor.y))return;
  const avoid=[...avoidPoints(r).filter(([x,y])=>!(Math.abs(x-anchor.x)<.01&&Math.abs(y-anchor.y)<.01)),[anchor.x,anchor.y,2.6],...(L.entry?[[L.entry.x,L.entry.y,3.5]]:[])],{open,wall}=bossCells(r,anchor),used=[];
  const rand=(()=>{let s=h32('r406:'+z)||1;return()=>((s=Math.imul(s^s>>>15,2246822507)+0x6d2b79f5>>>0)%10000)/10000;})();

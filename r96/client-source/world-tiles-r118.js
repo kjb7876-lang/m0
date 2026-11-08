@@ -43,7 +43,15 @@
   kair09:{file:'gravepath',floor:0xe8e4e0,wall:0xe0e0e0},       // 망각의 묘지: 흙길·돌 경계벽
   ep1b05:{file:'theatre',floor:0xffffff,wall:0xeeeaea},         // 붉은 하이힐: 붉은 무대 마루·커튼 벽
   murder02:{file:'hotel',floor:0xe8e6e4,wall:0xe2e0dc},         // 장민재와 새빛호텔: 복도 석재 타일·얼룩진 벽
-  murder03:{file:'rooftop',floor:0xe0e4e2,wall:0xe0e0e0}        // 옥상의 순환: 방수 도장 바닥·콘크리트 난간벽
+  murder03:{file:'rooftop',floor:0xe0e4e2,wall:0xe0e0e0},       // 옥상의 순환: 방수 도장 바닥·콘크리트 난간벽
+  // R407: 드라이브 SW-TILE B15·B16·B17·B19(2026-11-08, scripts/r407-tiles.py) — 지역 서사 장소와 테마가 맞는 일곱 곳.
+  ep1b02:{file:'slothhouse',floor:0xe8e4e0,wall:0xe4e2de},      // 나태의 집: 마루·바랜 벽지
+  kair02:{file:'arbelia',floor:0xe4e4e8,wall:0xe2e2e6},         // 아르벨리아, 유예의 수문장: 봉인 회랑 석회암 바닥·판넬 벽
+  u206:{file:'corevault',floor:0xffffff,wall:0xeef0f4},         // 중앙 코어 이주실: 리벳 강판 바닥·강철 벽
+  last302:{file:'sleepport',floor:0xeceae4,wall:0xe6e4e0},      // 잠들지 못하는 마을: 포구 젖은 모래·기와 돌담
+  last301:{file:'blackkeep',floor:0xe8eaec,wall:0xe4e6e8},      // 타락천사 기사: 검은 바다 성채 슬레이트 바닥·벽
+  murder04:{file:'villastair',floor:0xeceae6,wall:0xe8e6e2},    // 고서진과 청록빌라: 계단참 테라조 바닥·청록 도장 벽
+  cult04:{file:'cultaltar',floor:0xffffff,wall:0xf4f0f0}        // 교주의 사몽: 최종 제단 흑석·진홍 회로
  };
  // S-02 밤의 출석부 school: wood floor only (the catalog wall is a non-tileable plaster-over-panel design).
  for(let i=1;i<=8;i++)REGIONS['sz115-S02-'+i]={file:'school',floor:0xece4dc};
