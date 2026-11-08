@@ -1,0 +1,933 @@
+{
+  "baseCommit": "c8861dbf4455c9cba6e5366b2dd03620e0e4d8ec",
+  "branch": "claude/seven-sins-bossrooms",
+  "build": {
+    "files": 6612,
+    "bytes": 1032166958,
+    "runtimeManifestSHA256": "64ecc62f1f22c2c08220f1797287dbdf035e8d17d3ae9057ecd131ee0ff00319",
+    "sourceCommit": "c8861dbf4455c9cba6e5366b2dd03620e0e4d8ec"
+  },
+  "buildSourceCommitNote": "Pre-change HEAD; final runtime manifest covers the uncommitted candidate at build time.",
+  "checks": {
+    "sourceScopeCollisionDoors": "PASS six rooms",
+    "rendererLifecycleAndLegacy": "PASS",
+    "caveFieldFurnitureExclusion": "PASS byte-for-byte field equivalence; ordinary wall control retained",
+    "nativeGameAndSave": "PASS all7; owned wall heights remain .01",
+    "mammonRegression": "PASS",
+    "loadOrder": "22 passed",
+    "caveRegression": "25 passed",
+    "rockRegression": "11 passed",
+    "interiorRegression": "13 passed",
+    "collaborationUnitTests": "25 passed with pre-existing resource warnings",
+    "collaborationConfig": "PASS",
+    "builtBytes": "6612 files match manifest",
+    "browser": "14 before and21 final after captures; no game/page/resource/overlay errors",
+    "diffCheck": "PASS"
+  },
+  "captures": [
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b02-mobile-detail.png",
+      "sha256": "d918700dbf17232a90588e8e7b4563a37f70f733faa0f63c3e19db427c91dc9a",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b02-mobile-detail.json",
+      "stateSHA256": "f5c849936135ec0b53d1592ab40813924870ea9c04e93d2b945f4c6dae7e6045",
+      "zone": "ep1b02",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 29
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b02-mobile.png",
+      "sha256": "a0b8b8fc78f2aa0a513431759aad0881c55d5344703924637679e3cf2b64c32a",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b02-mobile.json",
+      "stateSHA256": "851ca89ba1e6b2f1c591afe9eb6a1ffbd3147ba3f1fd58bd5b1a64a968559b80",
+      "zone": "ep1b02",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 34
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b02-pc.png",
+      "sha256": "9f385aaf28ac22cf2bd7975a650ceebf98b7acf0d57c64b6f0cc58e81c80c169",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b02-pc.json",
+      "stateSHA256": "c8570d722df9dd03169be62cec8551c876119be380efd380e7a4c2e9f42ae672",
+      "zone": "ep1b02",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 69
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b03-mobile-detail.png",
+      "sha256": "157405a29f8abc41a8e1738230092544043e45cfa0ea673cd59307d72f90d641",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b03-mobile-detail.json",
+      "stateSHA256": "23d78fea0a6e01bb4d2ec915d47cefe94b46fbe8366d2306b8ff3f7f2a84485e",
+      "zone": "ep1b03",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 37
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b03-mobile.png",
+      "sha256": "c2110b7739d57f01d364dc9744bb15f17d098dddbc2cd4a68af4cfbb149067ad",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b03-mobile.json",
+      "stateSHA256": "4eadce5b3eb2caa84093dc49f13eabd5119e2aadfa0270a0ae588f7bac11ddc7",
+      "zone": "ep1b03",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 44
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b03-pc.png",
+      "sha256": "3eb45ac3ced418d107d56a7138cc294c0802d50afc62374de6fff09c056c651b",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b03-pc.json",
+      "stateSHA256": "eff8262e37554f92292e9250b02afb8822aa27e806701e4ca944da7f485d60b2",
+      "zone": "ep1b03",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 99
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b04-mobile-detail.png",
+      "sha256": "650a3e53b59ada1bbe50d829777cfb9d23654f1bfe9f90ad7bd8500d42240a4f",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b04-mobile-detail.json",
+      "stateSHA256": "a4dd14bf49c2e19fedea3afd84f193f197a7790de6c994a78504082b83d7b372",
+      "zone": "ep1b04",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 32
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b04-mobile.png",
+      "sha256": "669dae45cff27ee3ba7c5e672c363d178f2669bc683ac11a435257d57b9815f2",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b04-mobile.json",
+      "stateSHA256": "98f08a2916cdc473c09dd0b37c7545070aeb8d7a6f26f20a089d0a50913c234a",
+      "zone": "ep1b04",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 41
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b04-pc.png",
+      "sha256": "0fb38959bf61752402da4d2d759ba46ffa8f51e56f79e536b37327b375887248",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b04-pc.json",
+      "stateSHA256": "ed561d40557464c1ad5cf8d6099912aab162a800dacda029484a343a40ec0af5",
+      "zone": "ep1b04",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 86
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b05-mobile-detail.png",
+      "sha256": "9036703fdb3a918410f5725e8f95dae425df11961b28f6060be268d23a493a04",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b05-mobile-detail.json",
+      "stateSHA256": "784855ed25c4c3efb54d5e1bdcfb75dfd7b03aae25722ed9d5c3a4d40709c4f7",
+      "zone": "ep1b05",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 37
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b05-mobile.png",
+      "sha256": "5dd663deab5473b659dcbcb7a2b014ac9f0d177069efa92cce2a807de925986c",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b05-mobile.json",
+      "stateSHA256": "12a698adb0ecc76335eb195e471b1a559e30b2310a027056821d7fdec9adbf22",
+      "zone": "ep1b05",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 50
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b05-pc.png",
+      "sha256": "f88ed825f8fe64c9052497174ba25fc0deca69766268a5302cab1af6cc7a99c9",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b05-pc.json",
+      "stateSHA256": "d489b8422af42e918864466436a07cb9417b4cd2908f8ae21b10f4b9cf8e7646",
+      "zone": "ep1b05",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 90
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b06-mobile-detail.png",
+      "sha256": "2ab45f0c315f3104677d9c8a76c8b06d81fa13a952950a516782650469d2362e",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b06-mobile-detail.json",
+      "stateSHA256": "0e4b0e6b91690e0d40ea0ce0dbfd8d722b17fa6f198ea1876a180cfb5bcf6af0",
+      "zone": "ep1b06",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 34
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b06-mobile.png",
+      "sha256": "21db70de6101fc73cdc8087f2fcec3d028d514816b79c9a1d845e1169405e69b",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b06-mobile.json",
+      "stateSHA256": "4d0533685de84b1ba4a2fcbf340583b286763d0811501225028db36667c6792a",
+      "zone": "ep1b06",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 44
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b06-pc.png",
+      "sha256": "e8d7fc511c4afd45185fafef9895b8557ca26ebd452c44a9a0375da6b3581413",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b06-pc.json",
+      "stateSHA256": "afee16a39221904913075c0aeacf736532c58ad5770e13d404caccfbf05a944a",
+      "zone": "ep1b06",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 73
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b07-mobile-detail.png",
+      "sha256": "89f2b57edb62db4af29596c943d0a70812bbccd0377c55090cde840dea224d81",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b07-mobile-detail.json",
+      "stateSHA256": "2a0722de856fee2216281d0fdf4b1ed941d6dbdf562c3f0e371bc8fbf822a48c",
+      "zone": "ep1b07",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 30
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b07-mobile.png",
+      "sha256": "d984196f532eed6670e84daced3f570bb54492ecb6c7268f7d8f86df79ab24fe",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b07-mobile.json",
+      "stateSHA256": "00e768f6990b878819eb118ebd20a81170ad40e5685bc3867355734baacc58cd",
+      "zone": "ep1b07",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 30
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b07-pc.png",
+      "sha256": "9e4119f1026e5347b5eb5f74f90ae711181bfa014f78a4490f5ad5aa7c816608",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b07-pc.json",
+      "stateSHA256": "ed6b1e811da9d27bd77b4cfc848feacaae5f23c16a7ac9bb14cfd0f2560fa4fe",
+      "zone": "ep1b07",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 68
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b08-mobile-detail.png",
+      "sha256": "4183147f6aa9188ef61652591499286e8382041a24261fefb7e325bee0d77e30",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b08-mobile-detail.json",
+      "stateSHA256": "12371054d9d52b3b0188ef7c2be9f1045fb837bf333b67d764356112751df25f",
+      "zone": "ep1b08",
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 24
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b08-mobile.png",
+      "sha256": "2de95e93ed6d37207d1b696ed5ff50bef8b03f8f4db952f2bea5a99cbd3fabc1",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b08-mobile.json",
+      "stateSHA256": "763646d843580ea341d4870107a715fcd6dc3d23a8d389fade4c9c3fdfad63f6",
+      "zone": "ep1b08",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 34
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/after-ep1b08-pc.png",
+      "sha256": "de02b50bc98ef024d44ecd384c1af36094486e77ba1df9f4fc76cac0c7a317e0",
+      "statePath": "/workspace/seven-sins-evidence/after-ep1b08-pc.json",
+      "stateSHA256": "e502b98a0c85ab36eb0e2957716b10095d30df7bdd64e437e302ef69f15e1b3a",
+      "zone": "ep1b08",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 74
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b02-mobile.png",
+      "sha256": "37f64acf3ede09c0dccc88eebce0734fa90e38f1b4909017f99b4277f36e8a70",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b02-mobile.json",
+      "stateSHA256": "ab04ccf5deb7770ed59fa1db88b02b190ee85c8b4a53106f7796f9cd552e1696",
+      "zone": "ep1b02",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 33
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b02-pc.png",
+      "sha256": "2b92d4555de6079853367340c539813b525e581d4fa2c5a1cd54f5e071c16cc2",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b02-pc.json",
+      "stateSHA256": "ab988c27c52beb82a47124e5079bec473b16c7c268f54759b205a9dda89992e8",
+      "zone": "ep1b02",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 65
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b03-mobile.png",
+      "sha256": "a352d766da0228a14f1a1754da44fda0dba073b1d442a7d1253d1fa735448408",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b03-mobile.json",
+      "stateSHA256": "fbe63e5b3aae6975b91d05bc6f6c4ed362ff9920449ca9924d8ac0dbf86553c4",
+      "zone": "ep1b03",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 35
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b03-pc.png",
+      "sha256": "8857b85043bdf146b2ab8add12f82a4eeff169009c81ba2e453d7bfa2f5854e3",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b03-pc.json",
+      "stateSHA256": "beaadbd030df3d983b28c508b6f3cb773d7a6d798b71c5299f716f1f93b59ab4",
+      "zone": "ep1b03",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 91
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b04-mobile.png",
+      "sha256": "6e67cb34aa3f92c0f29914385fd4838bee64bb9432a6927f3bc7689b5c6d4e08",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b04-mobile.json",
+      "stateSHA256": "1d43ba927f0a0f9099eb097e71a53b4f36577097609c86be5a8f5db4a3b6b424",
+      "zone": "ep1b04",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 33
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b04-pc.png",
+      "sha256": "b13525bc0f5e4af0f590fb48ae02799a6d32bad8b4a4355a56928ab9a1bc61e3",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b04-pc.json",
+      "stateSHA256": "7a3cb456c2c0a2ff9ca802a6b3506d74fe6975ff7084a460b41ac1b7f801df4c",
+      "zone": "ep1b04",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 82
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b05-mobile.png",
+      "sha256": "273003f9319763fdc2d7b0dc4befbbd968bdd231fc3c56e842c7eb1f465d69c0",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b05-mobile.json",
+      "stateSHA256": "c4198e35df7b4ddb74f2c2e88183f4b0ed5f2086da98baf17cbe999ff76b167f",
+      "zone": "ep1b05",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 38
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b05-pc.png",
+      "sha256": "d3a75c9ff0efd81dfb060c2b5920109f955f915a05fb0902232a04c6ea77039b",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b05-pc.json",
+      "stateSHA256": "e6294d78a9a4457b6effa8b9bf5995c5c77fbb883618156840e7cf398e6393bb",
+      "zone": "ep1b05",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 78
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b06-mobile.png",
+      "sha256": "d21739d07340d5869e4773b5ff02e142ea0da2f612c47b644fc70fd507baecb7",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b06-mobile.json",
+      "stateSHA256": "99ba2b17a10a7016867f42a074b9753e01af6713a5ebb6a70051903fafd172b4",
+      "zone": "ep1b06",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 44
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b06-pc.png",
+      "sha256": "152270a9ac99c5d1a11a512183a32984150a9d84540de99b42e67cd80a825776",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b06-pc.json",
+      "stateSHA256": "aefc1cae50887314f7cfe7f973f34f64fccd3b994fde883e25e55747b1bb15f3",
+      "zone": "ep1b06",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 73
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b07-mobile.png",
+      "sha256": "14c815106fd49c6d03a0210bc5d70149b4f2e417cdabd739d38b53ff0dcd6c54",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b07-mobile.json",
+      "stateSHA256": "b0d9770cfa290e7b1d15a6c2fe4c7dfa164b41d5e96e0d69ca76efe45526e307",
+      "zone": "ep1b07",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 26
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b07-pc.png",
+      "sha256": "ed7fca26ff5179c284021e68830fcacc0d8529a2ca30a1db425a7bc7e20cb1ca",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b07-pc.json",
+      "stateSHA256": "15aabe5faca37eba2223ff3023a064bfb4f84aef26fe206f638f360534c16147",
+      "zone": "ep1b07",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 64
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b08-mobile.png",
+      "sha256": "2fbef8f02c04905cfcdf9ce7c52c33b3e07fb57e497f66d01d28b50baa4d65f0",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b08-mobile.json",
+      "stateSHA256": "839084f2b664af5964e52b894aaab59faae948e22ea0a480db84e525859970f1",
+      "zone": "ep1b08",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "DPR": 3,
+      "errors": [],
+      "three": true,
+      "drawCalls": 30
+    },
+    {
+      "path": "/workspace/seven-sins-evidence/before-ep1b08-pc.png",
+      "sha256": "4fe6f6b74b0c655d9170dd36c4e521b5a4351f9a03922cc658d14cb0a60c6e06",
+      "statePath": "/workspace/seven-sins-evidence/before-ep1b08-pc.json",
+      "stateSHA256": "54fd4b1ef7f3980439277f6ce9a4385301c7875ab92cf7d6f67b114b0b4a0bb7",
+      "zone": "ep1b08",
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "DPR": 1,
+      "errors": [],
+      "three": true,
+      "drawCalls": 70
+    }
+  ],
+  "logs": [
+    "/workspace/seven-sins-after.log",
+    "/workspace/seven-sins-before.log",
+    "/workspace/seven-sins-build.log",
+    "/workspace/seven-sins-byte-check.log",
+    "/workspace/seven-sins-cave.log",
+    "/workspace/seven-sins-cpu.log",
+    "/workspace/seven-sins-detail.log",
+    "/workspace/seven-sins-interior.log",
+    "/workspace/seven-sins-load-order.log",
+    "/workspace/seven-sins-mammon.log",
+    "/workspace/seven-sins-rock.log",
+    "/workspace/seven-sins-runtime.log"
+  ],
+  "rejectedCandidate": "/workspace/seven-sins-first-candidate",
+  "nativeDetails": "native-results.json",
+  "limitations": [
+    "Headless assisted normal STORY entry and paused camera; not natural combat",
+    "Physical GPU/mobile device and full suite not run",
+    "Legacy has silhouette fallback, not full themed detail",
+    "Some smooth mesh surfaces differ from painted assets",
+    "Retained sloth candle furniture partially occludes fridge in perspective",
+    "Latest remote main/Claude PRs/official issue contract not verified after prior403; no retry or bypass",
+    "No push, PR, merge, CI or Pages deployment"
+  ],
+  "reviews": {
+    "art": {
+      "score": 7.5,
+      "report": "art-review.md",
+      "reportSHA256": "8152a233e3a5eba1a1702ea264a08073215495ffa9ae56bea94adc90d185b9bf"
+    },
+    "staging": {
+      "score": 8.0,
+      "report": "staging-review.md",
+      "reportSHA256": "5cbcb2477d3e416e7147a8e14a3cef5491c0023b2a8dea222eee5f34a77a8deb"
+    },
+    "camera": {
+      "score": 8.0,
+      "report": "camera-review.md",
+      "reportSHA256": "f8a0f72121b8c98668e18eb64807cc0cd6a1dc3384f160cfa531654d1a9f8ece"
+    },
+    "interior": {
+      "score": 8.0,
+      "report": "interior-review.md",
+      "reportSHA256": "44ea2d21708f65dc7f2bb1071b31c363e87514bd254313cba02d43db493a16b3"
+    },
+    "light": {
+      "score": 7.76,
+      "report": "light-review.md",
+      "reportSHA256": "c29ef63ecfbcd610a0fe9bf52c92275c5709e0d2a4f41ef7326ead9c33de5cb4"
+    },
+    "vfx": {
+      "score": 8.0,
+      "report": "vfx-review.md",
+      "reportSHA256": "e46c23b5ea948e6724b15eaafe7bd3f928fd3d58b544ff748ad1bf72243b446a"
+    },
+    "ux": {
+      "score": 7.9,
+      "report": "ux-review.md",
+      "reportSHA256": "47c87b43fbcfa3423aa1b8a0f546cd52c2b6538c5a08e6bb2299282755f90d35"
+    }
+  },
+  "sevenFieldMean": 7.88,
+  "reviewScope": "Provisional headless still-frame review; mean exceeds 7.77. Not final GPU/device or natural-play approval."
+}

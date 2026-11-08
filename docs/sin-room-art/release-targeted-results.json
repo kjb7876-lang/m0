@@ -1,0 +1,48 @@
+{
+  "sequenceExitCode": 0,
+  "logs": [
+    {
+      "log": "sin-art-cpu.log",
+      "sha256": "9432795dd59ce3fae93e8bb3c00e1f3990b0215ff2564a0327945ffbe551e591",
+      "bytes": 1224,
+      "failureMarker": false
+    },
+    {
+      "log": "sin-art-runtime.log",
+      "sha256": "a9774935ca246ddd7bf84b542d061d645dc74580770992e26671281ba6508374",
+      "bytes": 623,
+      "failureMarker": false
+    },
+    {
+      "log": "seven-cpu.log",
+      "sha256": "045913b80d9ac635c03dd2d4cad3e3342f931f9254cbbc22de71a9aeba2bda96",
+      "bytes": 525,
+      "failureMarker": false
+    },
+    {
+      "log": "seven-runtime.log",
+      "sha256": "b20d8f1c3d32fa5203f8927b5f92530afc70a30b881c0edb1da0d6a4a82809ce",
+      "bytes": 864,
+      "failureMarker": false
+    },
+    {
+      "log": "mammon-runtime.log",
+      "sha256": "6b734c7e1524f2124481090b093b5ce3c8c6055a695878ff5fec0f3019743d44",
+      "bytes": 286,
+      "failureMarker": false
+    },
+    {
+      "log": "r176.log",
+      "sha256": "fb417ccd59d3002b3e2e154d9575d3a072e1361b645e584305728bca6df2e54f",
+      "bytes": 2126,
+      "failureMarker": false
+    },
+    {
+      "log": "mammon-pilot.log",
+      "sha256": "ea0b64909f445bfa41589c80d1503d0110d85aa73f5541cf1afe7edeb7e07cc3",
+      "bytes": 5623,
+      "failureMarker": false
+    }
+  ],
+  "note": "Sequential shell launch preserved individual assertion outputs; all logs explicitly inspected for errors and passing outputs. Fullsuite separate."
+}

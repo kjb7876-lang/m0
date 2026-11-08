@@ -1,0 +1,410 @@
+[
+  {
+    "id": "ep1b02",
+    "key": "sofa",
+    "theme": "sloth",
+    "edge": 33.75,
+    "pixel": [
+      52,
+      340
+    ],
+    "plane": {
+      "ax": 12,
+      "ay": 6.827426470588236,
+      "bx": 14,
+      "by": 6.827426470588236
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b02",
+    "key": "fridge",
+    "theme": "sloth",
+    "edge": -19,
+    "pixel": [
+      13,
+      495
+    ],
+    "plane": {
+      "ax": 22.4,
+      "ay": 7.313350360253791,
+      "bx": 24.4,
+      "by": 7.313350360253791
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b02",
+    "key": "tv",
+    "theme": "sloth",
+    "edge": 8,
+    "pixel": [
+      33,
+      392
+    ],
+    "plane": {
+      "ax": 17.65,
+      "ay": 6.954448529411764,
+      "bx": 19.65,
+      "by": 6.954448529411764
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b02",
+    "key": "bed",
+    "theme": "sloth",
+    "edge": 37.75,
+    "pixel": [
+      12,
+      359
+    ],
+    "plane": {
+      "ax": 6.877841512295526,
+      "ay": 14.2,
+      "bx": 6.877841512295526,
+      "by": 16.2
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b03",
+    "key": "settee",
+    "theme": "envy",
+    "edge": -34.5,
+    "pixel": [
+      26,
+      354
+    ],
+    "plane": {
+      "ax": 11.9,
+      "ay": 7.54436388508892,
+      "bx": 13.9,
+      "by": 7.54436388508892
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b03",
+    "key": "mirror",
+    "theme": "envy",
+    "edge": -34.25,
+    "pixel": [
+      8,
+      437
+    ],
+    "plane": {
+      "ax": 22.6,
+      "ay": 7.183629536921152,
+      "bx": 24.6,
+      "by": 7.183629536921152
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b03",
+    "key": "console",
+    "theme": "envy",
+    "edge": -60.75,
+    "pixel": [
+      25,
+      427
+    ],
+    "plane": {
+      "ax": 17.5,
+      "ay": 7.558975083483175,
+      "bx": 19.5,
+      "by": 7.558975083483175
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b03",
+    "key": "cabinet",
+    "theme": "envy",
+    "edge": -50.5,
+    "pixel": [
+      11,
+      481
+    ],
+    "plane": {
+      "ax": 7.492024909367325,
+      "ay": 13.2,
+      "bx": 7.492024909367325,
+      "by": 15.2
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b04",
+    "key": "prep",
+    "theme": "glutton",
+    "edge": 11.5,
+    "pixel": [
+      19,
+      303
+    ],
+    "plane": {
+      "ax": 11.9,
+      "ay": 7.025212038303694,
+      "bx": 13.9,
+      "by": 7.025212038303694
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b04",
+    "key": "range",
+    "theme": "glutton",
+    "edge": -8,
+    "pixel": [
+      21,
+      391
+    ],
+    "plane": {
+      "ax": 17.7,
+      "ay": 7.186051209627901,
+      "bx": 19.7,
+      "by": 7.186051209627901
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904643108
+  },
+  {
+    "id": "ep1b04",
+    "key": "fridge",
+    "theme": "glutton",
+    "edge": -20.75,
+    "pixel": [
+      10,
+      429
+    ],
+    "plane": {
+      "ax": 22.7,
+      "ay": 7.194925555284354,
+      "bx": 24.7,
+      "by": 7.194925555284354
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b04",
+    "key": "trolley",
+    "theme": "glutton",
+    "edge": -30.5,
+    "pixel": [
+      17,
+      384
+    ],
+    "plane": {
+      "ax": 7.329766416633767,
+      "ay": 14.4,
+      "bx": 7.329766416633767,
+      "by": 16.4
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b05",
+    "key": "bar",
+    "theme": "lust",
+    "edge": 27,
+    "pixel": [
+      26,
+      404
+    ],
+    "plane": {
+      "ax": 12.1,
+      "ay": 6.919808362369339,
+      "bx": 14.1,
+      "by": 6.919808362369339
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b05",
+    "key": "backbar",
+    "theme": "lust",
+    "edge": -11.25,
+    "pixel": [
+      32,
+      527
+    ],
+    "plane": {
+      "ax": 21,
+      "ay": 7.099379194630872,
+      "bx": 23,
+      "by": 7.099379194630872
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b05",
+    "key": "booth",
+    "theme": "lust",
+    "edge": -77.25,
+    "pixel": [
+      79,
+      517
+    ],
+    "plane": {
+      "ax": 7.846678424137183,
+      "ay": 12.8,
+      "bx": 7.846678424137183,
+      "by": 14.8
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046403775
+  },
+  {
+    "id": "ep1b05",
+    "key": "trolley",
+    "theme": "lust",
+    "edge": -75,
+    "pixel": [
+      59,
+      542
+    ],
+    "plane": {
+      "ax": 7.559988625284367,
+      "ay": 17,
+      "bx": 7.559988625284367,
+      "by": 19
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b06",
+    "key": "desk",
+    "theme": "mammon",
+    "edge": -15.25,
+    "pixel": [
+      713,
+      422
+    ],
+    "plane": {
+      "ax": 13,
+      "ay": 7.479591503267973,
+      "bx": 15,
+      "by": 7.479591503267973
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b06",
+    "key": "chair",
+    "theme": "mammon",
+    "edge": -43.25,
+    "pixel": [
+      85,
+      576
+    ],
+    "plane": {
+      "ax": 17,
+      "ay": 7.692096609477124,
+      "bx": 19,
+      "by": 7.692096609477124
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b06",
+    "key": "drawers",
+    "theme": "mammon",
+    "edge": -45.75,
+    "pixel": [
+      4,
+      389
+    ],
+    "plane": {
+      "ax": 7.228034362259755,
+      "ay": 14,
+      "bx": 7.228034362259755,
+      "by": 16
+    },
+    "minimumOpaqueWorldHeight": 0.0040824829046349174
+  },
+  {
+    "id": "ep1b06",
+    "key": "trolley",
+    "theme": "mammon",
+    "edge": -39,
+    "pixel": [
+      133,
+      531
+    ],
+    "plane": {
+      "ax": 23.5,
+      "ay": 7.220612560813799,
+      "bx": 25.5,
+      "by": 7.220612560813799
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904632187
+  },
+  {
+    "id": "ep1b07",
+    "key": "table",
+    "theme": "wrath",
+    "edge": 48,
+    "pixel": [
+      207,
+      456
+    ],
+    "plane": {
+      "ax": 12.1,
+      "ay": 6.870217391304347,
+      "bx": 14.1,
+      "by": 6.870217391304347
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b07",
+    "key": "buffet",
+    "theme": "wrath",
+    "edge": 56,
+    "pixel": [
+      31,
+      325
+    ],
+    "plane": {
+      "ax": 20.6,
+      "ay": 6.575244238046095,
+      "bx": 22.6,
+      "by": 6.575244238046095
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b07",
+    "key": "chairs",
+    "theme": "wrath",
+    "edge": -54.75,
+    "pixel": [
+      122,
+      524
+    ],
+    "plane": {
+      "ax": 7.540070332480819,
+      "ay": 12,
+      "bx": 7.540070332480819,
+      "by": 14
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  },
+  {
+    "id": "ep1b07",
+    "key": "booth",
+    "theme": "wrath",
+    "edge": -35.75,
+    "pixel": [
+      123,
+      496
+    ],
+    "plane": {
+      "ax": 7.530591985428051,
+      "ay": 16.2,
+      "bx": 7.530591985428051,
+      "by": 18.2
+    },
+    "minimumOpaqueWorldHeight": 0.004082482904637648
+  }
+]

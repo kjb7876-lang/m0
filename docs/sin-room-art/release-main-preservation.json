@@ -1,0 +1,27 @@
+{
+  "base": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f",
+  "runtimeMainRows": 6691,
+  "runtimeIntegrationRows": 6701,
+  "missingMainRows": [],
+  "changedMainRows": [
+    "cave-r204.js",
+    "index.html"
+  ],
+  "addedRows": [
+    "assets/sin-rooms/envy-home.png",
+    "assets/sin-rooms/glutton-kitchen.png",
+    "assets/sin-rooms/index.json",
+    "assets/sin-rooms/lust-bar.png",
+    "assets/sin-rooms/mammon-office.png",
+    "assets/sin-rooms/sloth-home.png",
+    "assets/sin-rooms/wrath-restaurant.png",
+    "mammon-bossroom.js",
+    "seven-sins-bossrooms.js",
+    "sin-room-art.js"
+  ],
+  "preexistingSourcesChecked": 233,
+  "preexistingSourcesChanged": [
+    "r96/client-source/cave-r204.js"
+  ],
+  "scope": "Preservation check; intentional cave-r204 sinFurniture exclusion and HTML script additions are the only changes to preexisting runtime rows; latest main V16, R389/R390/R404 source and asset rows remain exact."
+}

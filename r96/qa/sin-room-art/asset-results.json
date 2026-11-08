@@ -1,0 +1,92 @@
+[
+  {
+    "theme": "sloth",
+    "path": "assets/sin-rooms/sloth-home.png",
+    "sha256": "b812bb488698152ed6482aca40bf8d8af5813abeb6c646777f40e64878b2cda0",
+    "size": [
+      1312,
+      1199
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
+  },
+  {
+    "theme": "envy",
+    "path": "assets/sin-rooms/envy-home.png",
+    "sha256": "cdf8e6f68869de641ba7df9238e46fbbe8cd072dcd760b638b5746f69e193011",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
+  },
+  {
+    "theme": "glutton",
+    "path": "assets/sin-rooms/glutton-kitchen.png",
+    "sha256": "b75bac00de20dabd0e5b57835392eda05fe03e41f11a42d58b1204420de62a8d",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 1
+  },
+  {
+    "theme": "lust",
+    "path": "assets/sin-rooms/lust-bar.png",
+    "sha256": "d9c54651760de1872959e9d9eaee1ec6f6958eca87e301b5035c7570d08db98d",
+    "size": [
+      1312,
+      1199
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
+  },
+  {
+    "theme": "mammon",
+    "path": "assets/sin-rooms/mammon-office.png",
+    "sha256": "e750d4c70e8f60dc8c6d63e1c298007001a77fb64e9576d4e846d2276cf462c0",
+    "size": [
+      1312,
+      1199
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
+  },
+  {
+    "theme": "wrath",
+    "path": "assets/sin-rooms/wrath-restaurant.png",
+    "sha256": "057eb9ce63835ceae1e8b8ad807b0bbe929cac56b588caa7eef6615efcf5a286",
+    "size": [
+      1312,
+      1199
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "corner": 0
+  }
+]

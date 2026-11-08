@@ -1,0 +1,896 @@
+{
+  "build": {
+    "files": 6701,
+    "bytes": 1058039904,
+    "runtimeManifestSHA256": "3bc723bdbadc3113a3d58f3a512878532baf560cf4bc6693d15f2b838a3f9849",
+    "sourceCommit": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f"
+  },
+  "boot": {
+    "booted": true,
+    "bootError": null,
+    "errors": [],
+    "warnings": [
+      "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+    ],
+    "player": true
+  },
+  "results": [
+    {
+      "id": "ep1b02",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "sofa",
+            "blocked": true
+          },
+          {
+            "id": "fridge",
+            "blocked": true
+          },
+          {
+            "id": "tv",
+            "blocked": true
+          },
+          {
+            "id": "bed",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin-art:ep1b02:sofa",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b02:fridge",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b02:tv",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b02:bed",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b02",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b02:b02-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.52344717689131,
+          "y": 60.84159349284258
+        }
+      },
+      "after": {
+        "zone": "ep1b02",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b02:ward-champion-r81:b02-m1",
+              "hp": 4242.96,
+              "maxHp": 4242.96,
+              "x": 4.141007704883208,
+              "y": 3.1283449930044753,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b02:ward-champion-r81:b02-b1",
+              "hp": 4242.96,
+              "maxHp": 4242.96,
+              "x": 47.257700594253855,
+              "y": 4.24196209494545,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b02:ward-champion-r81:b02-o1",
+              "hp": 4242.96,
+              "maxHp": 4242.96,
+              "x": 40.5,
+              "y": 48.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b02:b02-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.52344717689131,
+          "y": 60.84159349284258
+        }
+      }
+    },
+    {
+      "id": "ep1b03",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "settee",
+            "blocked": true
+          },
+          {
+            "id": "mirror",
+            "blocked": true
+          },
+          {
+            "id": "console",
+            "blocked": true
+          },
+          {
+            "id": "cabinet",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin-art:ep1b03:settee",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:mirror",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:console",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b03:cabinet",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b03",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b03:b03-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.81700574496271,
+          "y": 59.281584601839654
+        }
+      },
+      "after": {
+        "zone": "ep1b03",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b03:ward-champion-r81:b03-g1",
+              "hp": 4359.99,
+              "maxHp": 4359.99,
+              "x": 3.141007704883217,
+              "y": 8.128344993004468,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b03:ward-champion-r81:b03-c1",
+              "hp": 4359.99,
+              "maxHp": 4359.99,
+              "x": 23.5,
+              "y": 85.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b03:ward-champion-r81:b03-g2",
+              "hp": 4359.99,
+              "maxHp": 4359.99,
+              "x": 58.57739884587404,
+              "y": 87.19570785438815,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b03:b03-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.81700574496271,
+          "y": 59.281584601839654
+        }
+      }
+    },
+    {
+      "id": "ep1b04",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "prep",
+            "blocked": true
+          },
+          {
+            "id": "range",
+            "blocked": true
+          },
+          {
+            "id": "fridge",
+            "blocked": true
+          },
+          {
+            "id": "trolley",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin-art:ep1b04:prep",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b04:range",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b04:fridge",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b04:trolley",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b04",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b04:b04-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.81700574496271,
+          "y": 59.281584601839654
+        }
+      },
+      "after": {
+        "zone": "ep1b04",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b04:ward-champion-r81:b04-g1",
+              "hp": 4482,
+              "maxHp": 4482,
+              "x": 3.141007704883217,
+              "y": 4.128344993004468,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b04:ward-champion-r81:b04-b1",
+              "hp": 4482,
+              "maxHp": 4482,
+              "x": 23.5,
+              "y": 85.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b04:ward-champion-r81:b04-s1",
+              "hp": 4482,
+              "maxHp": 4482,
+              "x": 59.57739884587404,
+              "y": 81.19570785438815,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b04:b04-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.81700574496271,
+          "y": 59.281584601839654
+        }
+      }
+    },
+    {
+      "id": "ep1b05",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "bar",
+            "blocked": true
+          },
+          {
+            "id": "backbar",
+            "blocked": true
+          },
+          {
+            "id": "booth",
+            "blocked": true
+          },
+          {
+            "id": "trolley",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin-art:ep1b05:bar",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b05:backbar",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b05:booth",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b05:trolley",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b05",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b05:b05-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.51169980213704,
+          "y": 60.25841745651816
+        }
+      },
+      "after": {
+        "zone": "ep1b05",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b05:ward-champion-r81:b05-p1",
+              "hp": 4604.009999999999,
+              "maxHp": 4604.009999999999,
+              "x": 3.141007704883208,
+              "y": 4.128344993004475,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b05:ward-champion-r81:b05-a1",
+              "hp": 4604.009999999999,
+              "maxHp": 4604.009999999999,
+              "x": 48.257700594253855,
+              "y": 5.24196209494545,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b05:ward-champion-r81:b05-p2",
+              "hp": 4604.009999999999,
+              "maxHp": 4604.009999999999,
+              "x": 90.72865923947676,
+              "y": 2.2900215509162294,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b05:b05-boss",
+            "hp": 17705.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.51169980213704,
+          "y": 60.25841745651816
+        }
+      }
+    },
+    {
+      "id": "ep1b06",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "desk",
+            "blocked": true
+          },
+          {
+            "id": "drawers",
+            "blocked": true
+          },
+          {
+            "id": "safe",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "mammon:desk",
+          "height": 0.01
+        },
+        {
+          "id": "mammon:drawers",
+          "height": 0.01
+        },
+        {
+          "id": "mammon:safe",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b06:chair",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b06:trolley",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b06",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b06:b06-boss",
+            "hp": 19365.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.5334063180891,
+          "y": 60.09267260298719
+        }
+      },
+      "after": {
+        "zone": "ep1b06",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b06:ward-champion-r81:b06-f1",
+              "hp": 4726.0199999999995,
+              "maxHp": 4726.0199999999995,
+              "x": 3.141007704883215,
+              "y": 5.128344993004475,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b06:ward-champion-r81:b06-c1",
+              "hp": 4726.0199999999995,
+              "maxHp": 4726.0199999999995,
+              "x": 48.257700594253855,
+              "y": 6.24196209494545,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b06:ward-champion-r81:b06-f2",
+              "hp": 4726.0199999999995,
+              "maxHp": 4726.0199999999995,
+              "x": 22.5,
+              "y": 76.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b06:b06-boss",
+            "hp": 19365.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 85.5334063180891,
+          "y": 60.09267260298719
+        }
+      }
+    },
+    {
+      "id": "ep1b07",
+      "collisions": {
+        "overlay": "sin-room-art-v1",
+        "furniture": [
+          {
+            "id": "table",
+            "blocked": true
+          },
+          {
+            "id": "buffet",
+            "blocked": true
+          },
+          {
+            "id": "chairs",
+            "blocked": true
+          },
+          {
+            "id": "booth",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin-art:ep1b07:table",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b07:buffet",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b07:chairs",
+          "height": 0.01
+        },
+        {
+          "id": "sin-art:ep1b07:booth",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b07",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b07:b07-boss",
+            "hp": 19365.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 87.96094226749864,
+          "y": 58.000305119913264
+        }
+      },
+      "after": {
+        "zone": "ep1b07",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b07:ward-champion-r81:b07-f1",
+              "hp": 4980,
+              "maxHp": 4980,
+              "x": 5.141007704883208,
+              "y": 5.128344993004475,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b07:ward-champion-r81:b07-s1",
+              "hp": 4980,
+              "maxHp": 4980,
+              "x": 78.5,
+              "y": 32.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b07:ward-champion-r81:b07-f2",
+              "hp": 4980,
+              "maxHp": 4980,
+              "x": 61.5,
+              "y": 73.5,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b07:b07-boss",
+            "hp": 19365.559999999998
+          }
+        ],
+        "overlay": "sin-room-art-v1",
+        "position": {
+          "x": 87.96094226749864,
+          "y": 58.000305119913264
+        }
+      }
+    },
+    {
+      "id": "ep1b08",
+      "collisions": {
+        "overlay": "seven-sins-bossrooms-v2-pride",
+        "furniture": [
+          {
+            "id": "signal-consoles",
+            "blocked": true
+          },
+          {
+            "id": "electrode-couch",
+            "blocked": true
+          },
+          {
+            "id": "recording-cabinet",
+            "blocked": true
+          }
+        ],
+        "centre": false,
+        "spots": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "wallHeights": [
+        {
+          "id": "sin:ep1b08:signal-consoles",
+          "height": 0.01
+        },
+        {
+          "id": "sin:ep1b08:electrode-couch",
+          "height": 0.01
+        },
+        {
+          "id": "sin:ep1b08:recording-cabinet",
+          "height": 0.01
+        }
+      ],
+      "before": {
+        "zone": "ep1b08",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b08:b08-boss",
+            "hp": 21025.559999999998
+          }
+        ],
+        "overlay": "seven-sins-bossrooms-v2-pride",
+        "position": {
+          "x": 85.51126131851512,
+          "y": 60.262977268430014
+        }
+      },
+      "after": {
+        "zone": "ep1b08",
+        "phase": {
+          "version": 1,
+          "phase": "route",
+          "route": null,
+          "rallied": [],
+          "doorStoryDone": false,
+          "exitStoryDone": false,
+          "champions": [
+            {
+              "id": "ep1b08:ward-champion-r81:b08-c1",
+              "hp": 5106.99,
+              "maxHp": 5106.99,
+              "x": 4.141007704883208,
+              "y": 4.128344993004475,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b08:ward-champion-r81:b08-h1",
+              "hp": 5106.99,
+              "maxHp": 5106.99,
+              "x": 49.257700594253855,
+              "y": 5.24196209494545,
+              "deadRecorded": false,
+              "spawnState": "active"
+            },
+            {
+              "id": "ep1b08:ward-champion-r81:b08-v1",
+              "hp": 5106.99,
+              "maxHp": 5106.99,
+              "x": 32.728659239476755,
+              "y": 88.29002155091624,
+              "deadRecorded": false,
+              "spawnState": "active"
+            }
+          ]
+        },
+        "opened": [],
+        "bosses": [
+          {
+            "id": "ep1b08:b08-boss",
+            "hp": 21025.559999999998
+          }
+        ],
+        "overlay": "seven-sins-bossrooms-v2-pride",
+        "position": {
+          "x": 85.51126131851512,
+          "y": 60.262977268430014
+        }
+      }
+    }
+  ],
+  "inspect": {
+    "revision": "seven-sins-bossrooms-v2-pride",
+    "stats": {
+      "layouts": 4,
+      "scenes": 0,
+      "errors": 0
+    },
+    "lastError": null
+  },
+  "scope": "CPU VM; assisted 777 normal entry and native restore for seven rooms; not natural boss completion or GPU/device validation"
+}

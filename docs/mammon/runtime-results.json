@@ -1,0 +1,109 @@
+{
+  "boot": {
+    "booted": true,
+    "bootError": null,
+    "errors": [],
+    "warnings": [
+      "저장소 내레이션은 부분 제공입니다. 누락 또는 원문 불일치 장면은 텍스트로 진행합니다."
+    ],
+    "player": true
+  },
+  "collisions": {
+    "overlay": "mammon-bossroom-v1",
+    "desk": true,
+    "drawers": true,
+    "centre": false,
+    "spots": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "before": {
+    "zone": "ep1b06",
+    "phase": {
+      "version": 1,
+      "phase": "route",
+      "route": null,
+      "rallied": [],
+      "doorStoryDone": false,
+      "exitStoryDone": false
+    },
+    "opened": [],
+    "bosses": [
+      {
+        "id": "ep1b06:b06-boss",
+        "hp": 19365.559999999998
+      }
+    ],
+    "overlay": "mammon-bossroom-v1",
+    "position": {
+      "x": 85.5334063180891,
+      "y": 60.09267260298719
+    }
+  },
+  "after": {
+    "zone": "ep1b06",
+    "phase": {
+      "version": 1,
+      "phase": "route",
+      "route": null,
+      "rallied": [],
+      "doorStoryDone": false,
+      "exitStoryDone": false,
+      "champions": [
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f1",
+          "hp": 4726.0199999999995,
+          "maxHp": 4726.0199999999995,
+          "x": 3.141007704883215,
+          "y": 5.128344993004475,
+          "deadRecorded": false,
+          "spawnState": "active"
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-c1",
+          "hp": 4726.0199999999995,
+          "maxHp": 4726.0199999999995,
+          "x": 48.257700594253855,
+          "y": 6.24196209494545,
+          "deadRecorded": false,
+          "spawnState": "active"
+        },
+        {
+          "id": "ep1b06:ward-champion-r81:b06-f2",
+          "hp": 4726.0199999999995,
+          "maxHp": 4726.0199999999995,
+          "x": 22.5,
+          "y": 76.5,
+          "deadRecorded": false,
+          "spawnState": "active"
+        }
+      ]
+    },
+    "opened": [],
+    "bosses": [
+      {
+        "id": "ep1b06:b06-boss",
+        "hp": 19365.559999999998
+      }
+    ],
+    "overlay": "mammon-bossroom-v1",
+    "position": {
+      "x": 85.5334063180891,
+      "y": 60.09267260298719
+    }
+  },
+  "inspect": {
+    "revision": "mammon-bossroom-v1",
+    "stats": {
+      "layouts": 3,
+      "scenes": 0,
+      "errors": 0
+    },
+    "lastError": null
+  },
+  "scope": "CPU VM; assisted 777 entry and native restore; not natural boss completion"
+}

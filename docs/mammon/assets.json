@@ -1,0 +1,19 @@
+{
+  "origin": "existing repository R118 painted tile atlases",
+  "assets": [
+    {
+      "path": "r96/runtime-text/assets/r118/tiles/school.webp",
+      "bytes": 271798,
+      "sha256": "4e4548da43da1aebb11574040fdf5778993970c15249e93cb27373d9f7680777",
+      "usage": "Left painted-wood half sampled at runtime for desk and drawers",
+      "original_modified": false
+    },
+    {
+      "path": "r96/runtime-text/assets/r118/tiles/vault.webp",
+      "bytes": 337842,
+      "sha256": "6d45b06070faa3939f5759275ace1cc1632a79498fc06fe1edca3b3444bf1df4",
+      "usage": "Right iron-wall half sampled at runtime for inner cladding",
+      "original_modified": false
+    }
+  ]
+}

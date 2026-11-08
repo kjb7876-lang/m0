@@ -1,0 +1,400 @@
+{
+  "build": {
+    "files": 6701,
+    "bytes": 1058039904,
+    "runtimeManifestSHA256": "3bc723bdbadc3113a3d58f3a512878532baf560cf4bc6693d15f2b838a3f9849",
+    "sourceCommit": "5b1b04cd3bffc39a47cfca3aed051bbc2a05f73f"
+  },
+  "sources": {
+    "r96/client-source/mammon-bossroom.js": "c670125fb5a59964c0d987445743eb7ec3815e872aced96f34c7221b5b312a01",
+    "r96/client-source/seven-sins-bossrooms.js": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5",
+    "r96/client-source/sin-room-art.js": "70d190184818ff8118c8c5232038ea8a7c23a249c706971c09a3f65044305a67",
+    "r96/client-source/cave-r204.js": "1088b260f90b0530056120471a637fca59184fd687f40558f400787f93f0b90a",
+    "r96/runtime-text/index.html": "a76bb7d237ff249026d9323740ee94ad61b4fd60c7b7706b92af1463899691d3",
+    "r96/runtime-manifest.json": "3bc723bdbadc3113a3d58f3a512878532baf560cf4bc6693d15f2b838a3f9849",
+    "r96/runtime-inputs.json": "c8b7b00573f0a081ad741654c3c86bd8a32cd2a00667c8ddb12f4612f926959b"
+  },
+  "scope": "actual full compiled build in headless Chromium; paused 777-assisted normal STORY fixtures; physical device/natural fight unverified",
+  "files": [
+    {
+      "image": "after-ep1b02-mobile.png",
+      "imageSHA256": "e4d44396a61795b894cd19e806c876f6e1ce40e403c45fbda0689cb97b0fc3e9",
+      "state": "after-ep1b02-mobile.json",
+      "stateSHA256": "6605edb4174f69c346122c2af2d3583431db209c6a3cbdd1fcba028a71453474",
+      "zone": "ep1b02",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 2,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b02-pc.png",
+      "imageSHA256": "4a2598ddd7f498e6a5c8e1070d454af8b8594aaa5ed67f4355068f05ed5895b2",
+      "state": "after-ep1b02-pc.json",
+      "stateSHA256": "3340533d8c3a0b7e90b7471f02d6c5b87236d407716d8f755a7bd3ec8800b3ce",
+      "zone": "ep1b02",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b03-mobile.png",
+      "imageSHA256": "14e8ede9447eae108fb2bb8f7090afb8c6af5a1fbd4f60335df36bd207b3321e",
+      "state": "after-ep1b03-mobile.json",
+      "stateSHA256": "235fa302c366eeb2075be982eb74118b773c41a6fe97c79f56fc559f434c9081",
+      "zone": "ep1b03",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 2,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b03-pc.png",
+      "imageSHA256": "2f3d75c864475ca15b866f1bd9fcb688a22a7d7c3fb71b4f0ddd95e574be1cdb",
+      "state": "after-ep1b03-pc.json",
+      "stateSHA256": "7a5fcfbb91784dc2039115ae5a81a5e86d3774bc578c60a082b6aaa0a5f56f0e",
+      "zone": "ep1b03",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b04-mobile.png",
+      "imageSHA256": "f0fb55c13e7879a0dae9da73baa5a6f23abbedf83c9811e58997ebf1ac012bb9",
+      "state": "after-ep1b04-mobile.json",
+      "stateSHA256": "255751e84c45f9b5b1a71a78ff0096721ed1520d95a4aa231317d0197d331912",
+      "zone": "ep1b04",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 2,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b04-pc.png",
+      "imageSHA256": "c9db1119eaa2ccafd599a43ad1f3900539daed588b87f3b8dfffd9afb5f6e15b",
+      "state": "after-ep1b04-pc.json",
+      "stateSHA256": "8aa4f912bc95643cca069986d33645292eea5e7933fd58938d9c06743a667eda",
+      "zone": "ep1b04",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b05-mobile.png",
+      "imageSHA256": "162a876504081513d9dac082f5ca18f87ea61f678259a27f932cf13180ea96e6",
+      "state": "after-ep1b05-mobile.json",
+      "stateSHA256": "2ab437c61e6fd6d2ce09f198e0457cc229ce9466a8789fcef334a9836724d4ba",
+      "zone": "ep1b05",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 1,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b05-pc.png",
+      "imageSHA256": "f100875f7f17da37d0e4eae4caebf789970490a17b1c3736b9a6d11adf56f792",
+      "state": "after-ep1b05-pc.json",
+      "stateSHA256": "f265a49cd73a3ad89124036e9b840e46264f714feab46e7b65f4d9cb0c54a014",
+      "zone": "ep1b05",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": null
+    },
+    {
+      "image": "after-ep1b06-mobile-detail.png",
+      "imageSHA256": "d01cf82e75553e748b4260105e6afd6285b44b87175c3e4cc7ba88e49bce56a8",
+      "state": "after-ep1b06-mobile-detail.json",
+      "stateSHA256": "3e228794b8697a1219f4369fdd5d60058bb95e97dd65c3f67e2793624005cac1",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 21,
+        "y": 10,
+        "zoom": 0.8,
+        "player": {
+          "x": 21,
+          "y": 10
+        }
+      },
+      "nativeVisibleArtCommands": 3,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b06-mobile.png",
+      "imageSHA256": "925292f259f933a79640359506854d2aea8f21f4d3a8fb11ce364542abe6c9b2",
+      "state": "after-ep1b06-mobile.json",
+      "stateSHA256": "31476891e1561818e73480862dbda59664a58797c0d10ad2ab2f1fd6b056e61e",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 2,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b06-pc.png",
+      "imageSHA256": "69581def8ddfb06abc709af52fa35407b136ec23a04fbfb4f6b42a473735341b",
+      "state": "after-ep1b06-pc.json",
+      "stateSHA256": "8090d6eff72db7c22264204676c29e920882b8a0adb7c763bf6635cb109f05d1",
+      "zone": "ep1b06",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b07-mobile.png",
+      "imageSHA256": "00257eaa0d1f8b5290779697754585e0c7f88dc5d998f4a0e734be5353bbbb1c",
+      "state": "after-ep1b07-mobile.json",
+      "stateSHA256": "c581a3af9088c369faf1ebc67e289c03a14f77f2eacdab8be1f16f4078752bf8",
+      "zone": "ep1b07",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 2,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b07-pc.png",
+      "imageSHA256": "547c1733c5eee7bf4aff58f63d6026c0eeebb0cc7a86f2731adb5f24bf46b22c",
+      "state": "after-ep1b07-pc.json",
+      "stateSHA256": "a3035c63b31011a23e6fe840524d2b4fb8d0e04c955ac8eaf859403c42a3a00d",
+      "zone": "ep1b07",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 4,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b08-mobile.png",
+      "imageSHA256": "ddbdcbfbd2c9c9fb0909cde8bb76454f87265472d637c18b5670657e141d8a2f",
+      "state": "after-ep1b08-mobile.json",
+      "stateSHA256": "0fa14b0375553701779c9d536a2d30aae5d16cfaf821e1ed85dba97792822495",
+      "zone": "ep1b08",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 3,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 0,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    },
+    {
+      "image": "after-ep1b08-pc.png",
+      "imageSHA256": "8c320cc206e4a66fc3c7e89d5bc53a8684b4a4cdda8a3aec52690c438c7c081b",
+      "state": "after-ep1b08-pc.json",
+      "stateSHA256": "8d54f4e3e2b7e99e86da164c5c64169fc88269bb332a753e08f2c5dd49bf4445",
+      "zone": "ep1b08",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "deviceScaleFactor": 1,
+      "camera": {
+        "x": 16,
+        "y": 11,
+        "zoom": 0.8133333333333332,
+        "player": {
+          "x": 16,
+          "y": 11
+        }
+      },
+      "nativeVisibleArtCommands": 0,
+      "mammonFinish": {
+        "inherited": true,
+        "ownArchitecture": 0,
+        "safe": 1,
+        "cash": 5
+      }
+    }
+  ]
+}

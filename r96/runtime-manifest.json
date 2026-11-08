@@ -27578,6 +27578,41 @@
       "sha256": "0fb7f612698fa87e0687ce3f4191083ecf30f6bc182f87479612a82e6c223754"
     },
     {
+      "path": "assets/sin-rooms/envy-home.png",
+      "bytes": 1324355,
+      "sha256": "cdf8e6f68869de641ba7df9238e46fbbe8cd072dcd760b638b5746f69e193011"
+    },
+    {
+      "path": "assets/sin-rooms/glutton-kitchen.png",
+      "bytes": 1509149,
+      "sha256": "b75bac00de20dabd0e5b57835392eda05fe03e41f11a42d58b1204420de62a8d"
+    },
+    {
+      "path": "assets/sin-rooms/index.json",
+      "bytes": 9015,
+      "sha256": "027e3526499f0d9c0c68c9b49d37111c3a00d86ed83fe1af7b5951aac70ea6b5"
+    },
+    {
+      "path": "assets/sin-rooms/lust-bar.png",
+      "bytes": 2066656,
+      "sha256": "d9c54651760de1872959e9d9eaee1ec6f6958eca87e301b5035c7570d08db98d"
+    },
+    {
+      "path": "assets/sin-rooms/mammon-office.png",
+      "bytes": 1964765,
+      "sha256": "e750d4c70e8f60dc8c6d63e1c298007001a77fb64e9576d4e846d2276cf462c0"
+    },
+    {
+      "path": "assets/sin-rooms/sloth-home.png",
+      "bytes": 1820594,
+      "sha256": "b812bb488698152ed6482aca40bf8d8af5813abeb6c646777f40e64878b2cda0"
+    },
+    {
+      "path": "assets/sin-rooms/wrath-restaurant.png",
+      "bytes": 2161724,
+      "sha256": "057eb9ce63835ceae1e8b8ad807b0bbe929cac56b588caa7eef6615efcf5a286"
+    },
+    {
       "path": "assets/story-narration/v1/audio/cult01-post-6f2a4f328e8f16b28a463b87.mp3",
       "bytes": 294188,
       "sha256": "6f2a4f328e8f16b28a463b8761cbcb8b9a9e5826f6069b87575d311f958a7656"
@@ -31799,8 +31834,8 @@
     },
     {
       "path": "cave-r204.js",
-      "bytes": 114463,
-      "sha256": "2e8f30fece39686b2a1d7a55137b10b991a1b73204d10f247c2a51a7d275b699"
+      "bytes": 114565,
+      "sha256": "1088b260f90b0530056120471a637fca59184fd687f40558f400787f93f0b90a"
     },
     {
       "path": "chunks/ep1a08-0-0.json",
@@ -32699,8 +32734,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570598,
-      "sha256": "4b136f7048adddb934e849523b30c2ab9ebb88354c7dade8349108dfbf6fdc62"
+      "bytes": 6570732,
+      "sha256": "a76bb7d237ff249026d9323740ee94ad61b4fd60c7b7706b92af1463899691d3"
     },
     {
       "path": "intro-r140.js",
@@ -32741,6 +32776,11 @@
       "path": "light-r182.js",
       "bytes": 14158,
       "sha256": "b5f04e4b139fa7615edab7fd4a0974501fea2c92bb40c2eb66f81616bf4ff94e"
+    },
+    {
+      "path": "mammon-bossroom.js",
+      "bytes": 11418,
+      "sha256": "c670125fb5a59964c0d987445743eb7ec3815e872aced96f34c7221b5b312a01"
     },
     {
       "path": "mammon-miniature-pilot.js",
@@ -33178,6 +33218,16 @@
       "sha256": "6436054059e14e2008a98d6950172a515e18a2e985027b069c8f65aa5d25291c"
     },
     {
+      "path": "seven-sins-bossrooms.js",
+      "bytes": 14689,
+      "sha256": "f6f539296fd11946a0688a5d82be7bf68b32f5c8d560aff5369e92f7dd439fc5"
+    },
+    {
+      "path": "sin-room-art.js",
+      "bytes": 15922,
+      "sha256": "70d190184818ff8118c8c5232038ea8a7c23a249c706971c09a3f65044305a67"
+    },
+    {
       "path": "skill-fx-r292.js",
       "bytes": 12208,
       "sha256": "bfc841cf6fbf3f3ae99c8f0b71e60c8b194c1c6efedecb7cde3c65ad1b657ddd"
@@ -33458,9 +33508,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6691,
-  "totalBytes": 1047141381,
-  "webHTMLSha256": "4b136f7048adddb934e849523b30c2ab9ebb88354c7dade8349108dfbf6fdc62",
+  "fileCount": 6701,
+  "totalBytes": 1058039904,
+  "webHTMLSha256": "a76bb7d237ff249026d9323740ee94ad61b4fd60c7b7706b92af1463899691d3",
   "largest": [
     {
       "path": "index.html",

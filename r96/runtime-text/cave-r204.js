@@ -156,7 +156,8 @@ function field(ex,cfg,protect){
  const inside=new Uint8Array(N);
  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++)inside[j*GW+i]=walk[Math.floor(j/R)*CW+Math.floor(i/R)];
  // 바닥 칸 사이에 선 벽판(미로 칸막이 등)도 바위로 본다 — 원래 벽 그림을 숨기므로 보이지 않는 벽이 생기지 않게. 문 벽은 제외.
- for(const w of ex.walls||[]){if(/door/i.test(String(w.id||'')))continue;
+ // Authored sin furniture owns its silhouette; its AABB remains in native collision.
+ for(const w of ex.walls||[]){if(w.sinFurniture||/door/i.test(String(w.id||'')))continue;
   // 선분이 아닌 상자 벽(기둥·덩어리): AABB 안을 바위로
   if((!w.endpoints||w.endpoints.length!==2)&&Number.isFinite(w.x)&&Number.isFinite(w.y)&&w.width>0&&w.depth>0&&!w.decorative){const hx=w.width/2+.05,hy=w.depth/2+.05;
    for(let j=Math.max(0,Math.floor((w.y-hy+M)*R));j<=Math.min(GH-1,Math.ceil((w.y+hy+M)*R));j++)for(let i=Math.max(0,Math.floor((w.x-hx+M)*R));i<=Math.min(GW-1,Math.ceil((w.x+hx+M)*R));i++){const px=(i+.5)/R-M,py=(j+.5)/R-M;if(Math.abs(px-w.x)<=hx&&Math.abs(py-w.y)<=hy)inside[j*GW+i]=0;}continue;}

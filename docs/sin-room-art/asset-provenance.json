@@ -1,0 +1,12 @@
+{
+  "revision": "sin-room-art-v1",
+  "sourceFiles": {
+    "sloth": "exec-91f3c20a-1813-4031-9ed8-bfba1d3348f3.png",
+    "envy": "exec-7ca03128-60ee-4111-8034-27ff1216669c.png",
+    "glutton": "exec-d215ddfe-f165-4f6e-b07e-22181c57c834.png",
+    "lust": "exec-99c095e2-2653-487c-8893-e59938d78d2b.png",
+    "mammon": "exec-4418af81-78c2-4e83-847f-e5fc21c09f90.png",
+    "wrath": "exec-95c30946-ff68-404e-bb85-9f857e5785af.png"
+  },
+  "note": "Sources retained under generated_images; shipped atlases are byte-identical. Source rectangles are runtime metadata, not edited pixels."
+}

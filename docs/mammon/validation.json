@@ -1,0 +1,44 @@
+{
+  "base_commit": "b2c7b14253cdc6055368a4db7e3554e87ede929e",
+  "build": {
+    "files": 6611,
+    "bytes": 1032150319,
+    "runtimeManifestSHA256": "4667b7735e240f3d56d1b033b0f3dcdef6a4bcd73aaa5eef944a4d299b164842",
+    "sourceCommit": "b2c7b14253cdc6055368a4db7e3554e87ede929e"
+  },
+  "checks": {
+    "mammon_cpu": "PASS",
+    "mammon_native_runtime": "PASS",
+    "story_maps_r171": "22 passed",
+    "load_order_r176": "22 passed",
+    "bosses_r104": "10 passed",
+    "collab_unit": "25 passed",
+    "collab_local_contract": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "browser": "PC and mobile emulation, headless Chromium software rendering, no page errors",
+  "unverified": [
+    "full regression suite",
+    "natural boss completion",
+    "all native door interaction animations",
+    "cold page-reload save-slot UI",
+    "physical mobile",
+    "physical GPU",
+    "latest remote main conflicts",
+    "remote CI"
+  ],
+  "visual_review": {
+    "scores": [
+      7.6,
+      8,
+      8,
+      8,
+      7.8,
+      8,
+      8
+    ],
+    "mean": 7.914285714285714,
+    "status": "provisional; final atlas determinism/lifecycle fixes followed review"
+  },
+  "remote_changes": false
+}
