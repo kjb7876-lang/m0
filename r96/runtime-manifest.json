@@ -23988,6 +23988,51 @@
       "sha256": "453b76d8931c2761a35fb1b0c2fa0d28cef62a91d0f73a4f2143387220f05e7e"
     },
     {
+      "path": "assets/r408/props/cocktail-table.webp",
+      "bytes": 25604,
+      "sha256": "760626a7f6f29bf9348ef26292f3dee0292257fa6bf59fa03729036ee455aa3d"
+    },
+    {
+      "path": "assets/r408/props/index.json",
+      "bytes": 4561,
+      "sha256": "0a9a0aef95605d6834bac13464c8da8fa2fa9520ab12988bb64408bc8c45dd84"
+    },
+    {
+      "path": "assets/r408/props/lounge-seats.webp",
+      "bytes": 30618,
+      "sha256": "2c750090b5a967080aaa2867082b8a7de526bd9e988f5b7de3c9d844b126b3f6"
+    },
+    {
+      "path": "assets/r408/props/mask-panel.webp",
+      "bytes": 23976,
+      "sha256": "de82d6efb806aaebf92ae91941e1d30b3816c3a3e2ac51b8c45349d3c7c471f6"
+    },
+    {
+      "path": "assets/r408/props/red-curtain.webp",
+      "bytes": 25554,
+      "sha256": "28c3673edba530a907012a40003dba5bf7283299c8c22188a3a35841dcda63bd"
+    },
+    {
+      "path": "assets/r408/props/red-heels.webp",
+      "bytes": 45620,
+      "sha256": "dbfc19396285b7a32c52bb08e31ba1e5f718ac3b47ba2fa0b8c07c3c755c9650"
+    },
+    {
+      "path": "assets/r408/props/stage-long.webp",
+      "bytes": 15254,
+      "sha256": "fb27d5fb11a86d83bcb3ee81336d9acb41d2fc77c66d6b84a86c0f691d87dc0a"
+    },
+    {
+      "path": "assets/r408/props/stage-spot.webp",
+      "bytes": 16680,
+      "sha256": "5dff0b5be66b8087b0432ce34e2ac35a8188554c2a501f4007e5b01b6bddf294"
+    },
+    {
+      "path": "assets/r408/props/veiled-mirror.webp",
+      "bytes": 23794,
+      "sha256": "82e29fa2cbc9f43310c9c19a1b02ee99d002fcfe0cad5aaa9afc2fdd2cfaaaab"
+    },
+    {
       "path": "assets/r74/effects.png",
       "bytes": 2167359,
       "sha256": "f6f5a6f8b7a548e09ad2f5147ea78c9311154cb77ea0b325bdb5d81526fc0cb4"
@@ -32558,6 +32603,11 @@
       "sha256": "6c8e2acb8adc46e0c16639b8728c6a0d394ad1dc122eaa587c55228fe2272e41"
     },
     {
+      "path": "combat-read-r409.js",
+      "bytes": 12738,
+      "sha256": "c516f74ff56beeee9aa8f58499a926808e428fd93be3fd61454a2634eccbf501"
+    },
+    {
       "path": "crates-r108.js",
       "bytes": 6666,
       "sha256": "4eda8a17dbb82a2677206aff65ba2925d24fcdb4815ff2f3b4297613353edb28"
@@ -32929,8 +32979,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6570777,
-      "sha256": "7759752253c49449bb7d3cf5bcf4f4af3d89612b8158603d8fa49d73b705636c"
+      "bytes": 6570822,
+      "sha256": "09ad215245ff7e6f5774e330e1df14ee0fe94519ffcab87f8b3075725085c925"
     },
     {
       "path": "intro-r140.js",
@@ -33274,8 +33324,8 @@
     },
     {
       "path": "props-place-r406.js",
-      "bytes": 15926,
-      "sha256": "493dd08a48be41a9c475ee010d1c17579fa8109ba145c928ac47239c03fdddea"
+      "bytes": 16181,
+      "sha256": "5b4fa2e630bce1a2af73ed0f3062615340b6fa3b6d5f0fb3c3a011561ecab650"
     },
     {
       "path": "props-r102.js",
@@ -33708,9 +33758,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6741,
-  "totalBytes": 1066519534,
-  "webHTMLSha256": "7759752253c49449bb7d3cf5bcf4f4af3d89612b8158603d8fa49d73b705636c",
+  "fileCount": 6751,
+  "totalBytes": 1066744233,
+  "webHTMLSha256": "09ad215245ff7e6f5774e330e1df14ee0fe94519ffcab87f8b3075725085c925",
   "largest": [
     {
       "path": "index.html",

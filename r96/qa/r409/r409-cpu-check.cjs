@@ -1,0 +1,44 @@
+// R409 CPU check: 전투 가독성 — 몹·영웅 테두리, 몹 시전 육망성 뒤로, 몹 위 큰 영웅 쪽 이펙트 옅게. 그림만 바꾸고 판정·저장은 안 건드린다.
+const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
+const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=path.join(R,'runtime-text');
+const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
+const F='combat-read-r409.js',src=C(F);ok(F+' runtime copy matches',fs.readFileSync(path.join(RT,F),'utf8')===src);
+const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
+ok('loads after hero-visibility-r350 and right before combat-r118.js',/<script src="\.\/combat-read-r409\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html)&&html.indexOf('hero-visibility-r350.js')<html.indexOf(F)&&html.split(F).length===2);
+ok('listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8').includes("'"+F+"'"));
+ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r409/r409-cpu-check.cjs'));
+const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),M=new Map(man.files.map(f=>[f.path,f.sha256]));
+ok('runtime-manifest hash matches',M.get(F)===crypto.createHash('sha256').update(fs.readFileSync(path.join(RT,F))).digest('hex'));
+// 게임 함수·판정을 바꾸지 않는다(감싸는 것은 렌더러 render 뿐)
+ok('no gameplay hooks (tick/hurt/damage/enterRegion/save)',!/\b(tick|hurt|damageEnemy|enterRegion|saveGame|localSave)\s*=/.test(src));
+ok('no forbidden CSS filters in game ctx',!/drop-shadow|blur\(/.test(src));
+// 동작: 가짜 렌더러에 명령을 넣어 본다(캔버스 없는 Node — 테두리는 끄고 예고 순서·옅게만 검사, 테두리는 bake 경로 존재만)
+let stored=null;const proto={render(frame){stored=frame;}};
+const win={StoryPhase1:{ThreeRenderer:{prototype:proto}},__STORYWORLD_PHASE1__:{controller:{state:{}}}};
+const store={'storyworld.r409.combatRead':JSON.stringify({outline:false})};
+const sb={window:win,localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}},setInterval:()=>0,console,room:{enemies:[{x:3,y:3,hp:10},{x:9,y:9,hp:10}]},performance:{now:()=>0}};
+vm.runInNewContext(src,sb);const api=win.__STORYWORLD_COMBAT_READ_R409__;ok('api exposed',api&&api.revision.startsWith('R409'));
+const quad=(x,y,w,h)=>[[x,y],[x+w,y],[x+w,y+h],[x,y+h]];
+const body={kind:'image',owner:{kind:'enemy',id:'r1:mob:u1:a',x:3,y:3},points:quad(100,100,40,80),sourceRect:[0,0,128,256],imageSize:[128,256],order:10,style:{globalAlpha:1}};
+const body2={kind:'image',owner:{kind:'enemy',id:'r1:mob:u2:a',x:9,y:9},points:quad(400,100,40,80),sourceRect:[0,0,128,256],imageSize:[128,256],order:11,style:{globalAlpha:1}};
+const sig={kind:'image',owner:{kind:'effect',id:'r328:sigil:1.5',x:3,y:3},points:quad(80,90,90,90),sourceRect:[0,0,64,64],imageSize:[64,64],order:30,style:{globalAlpha:.4}};
+const big={kind:'image',owner:{kind:'effect',id:'r101:40'},sourcePath:'r106fx:ring:1',points:quad(60,60,140,160),sourceRect:[0,0,64,64],imageSize:[64,64],order:31,style:{globalAlpha:1}};
+const hit={kind:'image',owner:{kind:'effect',id:'r101:41'},sourcePath:'assets/r100/sig-hit-pale.webp',points:quad(60,60,140,160),sourceRect:[0,0,64,64],imageSize:[64,64],order:32,style:{globalAlpha:1}};
+const tele={kind:'image',owner:{kind:'effect',id:'final42-r88:251:2'},sourcePath:'251/atlas.png',points:quad(60,60,140,160),sourceRect:[0,0,64,64],imageSize:[64,64],order:33,style:{globalAlpha:1}};
+const small={kind:'image',owner:{kind:'effect',id:'r101:42'},sourcePath:'x.webp',points:quad(110,120,20,20),sourceRect:[0,0,64,64],imageSize:[64,64],order:34,style:{globalAlpha:1}};
+const dark={kind:'fill',owner:{kind:'scene',id:'dark'},paths:[{points:quad(0,0,800,600)}],order:35,style:{globalAlpha:.5}};
+const cmds=[body,body2,sig,big,hit,tele,small,dark];
+proto.render({commands:cmds});
+ok('wrapped render still calls the original',stored&&stored.commands===cmds);
+ok('enemy cast sigil drawn behind its caster',sig.order<body.order&&sig.order>body.order-1,sig.order);
+ok('large hero-side ring over enemy is veiled (≤42%)',big.style.globalAlpha<1&&big.style.globalAlpha>=.58,big.style.globalAlpha);
+ok('hit/slash impact not veiled',hit.style.globalAlpha===1);
+ok('enemy telegraph (final42 251) not veiled',tele.style.globalAlpha===1);
+ok('small effect not veiled',small.style.globalAlpha===1);
+ok('screen fills (darkness/lighting) not touched',dark.style.globalAlpha===.5);
+ok('outline off leaves images as-is',body.points[0][0]===100&&!body.r409Outlined);
+ok('bake/outline path present (canvas only in browser)',/function bake\(/.test(src)&&/__storyworldStaticSource/.test(src)&&/CACHE_MAX=\d+/.test(src));
+ok('set() persists prefs',api.set({enemyVeil:false}).enemyVeil===false&&JSON.parse(store['storyworld.r409.combatRead']).enemyVeil===false);
+const s=api.inspect();ok('inspect is presentation only',s.presentationOnly===true&&s.gameplayChanged===false&&s.savesTouched===false&&s.stats.errors===0,s.lastError);
+const fails=checks.filter(c=>!c.pass);for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
+console.log(JSON.stringify({passed:checks.length-fails.length,total:checks.length}));process.exit(fails.length?1:0);
