@@ -420,6 +420,8 @@ jobs:
         run: node r96/qa/r410/r410-cpu-check.cjs
       - name: R411 Drive core24 skill/hit sheets (boss impacts vs hero hits) CPU check
         run: node r96/qa/r411/r411-cpu-check.cjs
+      - name: R425 combat flow (mob size bands, hit punch, spear tips, spider X moves, upright crosses, gunner 120deg, slayer poses + blood cross R / tornado Q) CPU check
+        run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check

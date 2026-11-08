@@ -1,0 +1,178 @@
+// R425 전투 연출 — 사용자 2026-11-08 "영웅들 및 보스 그리고 모든 몹 모션 자연스럽고 크기 거의 일정하게, 이펙트 타격도 알맞게 잘 들어가게 전투연출 개선",
+//  "라우렌 창끝에 보라색 기운 같은 거 넣어서 창이 아니라 능력 막대기 느낌도 겸하게".
+//  실측(헤드리스 23개 지역, 몹 731개체, 화면 불투명 키 ÷ 영웅 기준 키 actorHeight):
+//   일반 몹 p10 1.26 · 중앙 1.39 · p90 1.65(최소 0.25 점액체 ~ 최대 3.17 '중간보스 · 복도 비명잔영'), 우두머리 중앙 1.53(0.6~2.09),
+//   중간보스 1.59~2.06, 보스 1.68~2.32. 같은 몹 그림인데 개체마다 1.35~1.75 로 다르게 뽑히는 경우도 있었다(침식 근위 1·3·5).
+//  ① 크기 고르게: 몹마다 '지금 그리는 시트의 대표 키'(시트 모든 칸 불투명 높이의 중앙값 × 그린 칸 높이)를 재서 등급별 띠 안으로 맞춘다.
+//     일반 1.22~1.55 · 우두머리 1.45~1.75 · 중간보스·관문 챔피언 1.60~1.80 · 보스 1.90~2.30(영웅 키 배수). 띠 안이면 그대로.
+//     한 칸이 아니라 시트 대표값으로 맞추므로 팔을 들거나 웅크리는 동작 폭은 그대로 남고, 대기↔공격 시트가 바뀔 때 몸이 튀는 것만 줄어든다.
+//     배율은 ×0.55~×2.2 로 묶고, 발(지면 점)을 기준으로 그 몹의 그림 전체(몸·테두리·그림자·체력 막대)를 ctx 변환으로 키운다 —
+//     hit-center-r259 가 getTransform 으로 재므로 적중 이펙트도 바뀐 몸 가운데에 맞는다. 시트가 바뀐 첫 프레임만 명령을 다시 고친다.
+//  ② 타격감: 영웅 공격이 실제로 피해를 준 순간 그 몹이 0.12초 가로로 눌렸다 펴지고(최대 7%) 영웅 반대쪽으로 2px 밀린다(그림만).
+//  ③ 라우렌 창끝 보라 기운·네온 창끝 청록 기운(09:53 "네온 창끝도 청록색 기운 … 능력 막대기 느낌 강하게", 1.3배): 몸 그림 칸의 가장 위 불투명 점(창끝, 칸마다 한 번 재어 기억)에 보라 빛·불꽃 혀·솟는 불티를 그린다.
+//  맘몬 방(mammon*)·탑/인형(R193)·죽어 가는 몹은 크기를 새로 정하지 않는다. 판정·체력·피해·세이브는 바꾸지 않는다(그림만).
+//  ④ 거미류 X자(대각선) 이동·공격, ⑤ 이동 중 공격 때 발 딛기, ⑥ 헌터 공격 7프레임 좌·우 — 아래 설명.
+//  ⑦ 체력바·이름표(광폭화 보스는 머리 위로)·적 공격 예고 표시(기본 꺼짐, 설정 창 체크) — 아래 설명.
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}', 예고 표시 켜기 '{"tele":true}'
+(()=>{'use strict';
+if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
+const REV='R425-flow-2',KEY='storyworld.r425.flow';
+const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
+let prefs={size:true,punch:true,laurenTip:true,spiderX:true,plant:true,hunter:true,bossBar:true,tele:false};
+const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
+const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+const T=()=>typeof time==='number'?time:0;
+const AH=()=>typeof actorHeight==='function'?actorHeight():54;
+const FXSRC=/fx|effect|vfx|blood|pixel|glow|shadow|ring|halo|aura|mark|sigil|hexagram|telegraph|r411|r163|r292/i;
+const srcOf=c=>String(c?.sourcePath||c?.image?.__path||c?.image?.src||'');
+// ---- 시트 대표 키: 같은 칸 크기로 자른 모든 칸의 불투명 높이(α>40) 중앙값 / 칸 높이, 머리 윗선(불투명 첫 줄)의 20% 분위 / 칸 높이 ----
+const SHEET=new WeakMap();let scanCv=null,budget=4,budgetT=-1;
+function sheetInfo(im,sr){if(!im)return null;let m=SHEET.get(im);if(!m){m=new Map();SHEET.set(im,m);}const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;if(!W||!H)return null;
+ const cw=sr?Math.round(sr[2]):W,ch=sr?Math.round(sr[3]):H,key=cw+'x'+ch;if(m.has(key))return m.get(key);if(budget<=0)return null;budget--;
+ let v=null;try{const cols=Math.max(1,Math.floor(W/cw)),rows=Math.max(1,Math.floor(H/ch)),N=48;scanCv??=document.createElement('canvas');scanCv.width=N;scanCv.height=N;const g=scanCv.getContext('2d',{willReadFrequently:true});const hs=[],tops=[];
+  for(let r=0;r<rows&&hs.length<48;r++)for(let c=0;c<cols&&hs.length<48;c++){g.clearRect(0,0,N,N);g.drawImage(im,c*cw,r*ch,cw,ch,0,0,N,N);const d=g.getImageData(0,0,N,N).data;let top=-1,bot=-1;
+   for(let y=0;y<N;y++){let n=0;for(let x=0;x<N;x++)if(d[(y*N+x)*4+3]>40)n++;if(n>=1){if(top<0)top=y;bot=y;}}if(top>=0){hs.push((bot+1-top)/N);tops.push(top/N);}}
+  hs.sort((a,b)=>a-b);tops.sort((a,b)=>a-b);if(hs.length)v={h:hs[hs.length>>1],top:tops[Math.floor((tops.length-1)*.2)]};stats.sheets++;}catch(e){fail(e);}
+ m.set(key,v);return v;}
+const sheetFrac=(im,sr)=>sheetInfo(im,sr)?.h??null;
+// ---- 등급 ----
+const major=e=>!!(e?.boss||e?.persona||e?.cosmic||e?.trial);
+// 광폭화(R205: 보스 체력 30% 이하 → 그림 2배): ①의 띠에 그 배율을 곱해 광폭화 2배를 되돌리지 않는다(10:23 확인 — 고르기 전에는 2배가 ×1.18 로 줄었다).
+const R205=()=>window.__STORYWORLD_BOSS_R205__;let enrOnAt=-1,enrOn=true;
+function enr(e){if(!e?.r205Enraged||!(e.hp>0))return false;const t=T();if(t!==enrOnAt){enrOnAt=t;try{enrOn=R205()?.inspect?.()?.prefs?.enrage!==false;}catch(_){enrOn=true;}}return enrOn;}
+function band(e){const K=enr(e)?(+R205()?.constants?.ENRAGE_SIZE||2):1,b=major(e)?BANDS.boss:(e.midboss||e.wardChampionR81===true||/^중간보스\s*·/.test(String(e.name||'')))?BANDS.mid:/우두머리/.test(String(e.name||''))?BANDS.leader:BANDS.normal;return K===1?b:[b[0]*K,b[1]*K];}
+function excluded(e){try{const id=String(room?.id||'');if(/mammon/i.test(id)||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.dollR193||e.towerR193||e.r193Doll||e.r193Tower||e.prop||e.object);}
+const ST=new WeakMap();// e -> {s, nat, hitAt, kx, barOff, barAt}
+function stOf(e){let s=ST.get(e);if(!s)ST.set(e,s={s:1,nat:0,hitAt:-9,kx:0});return s;}
+function bodyCmd(cmds,st){let best=null,bh=0;for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!c.points)continue;if(FXSRC.test(srcOf(c)))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
+function mapCmd(c,f){if(Array.isArray(c.points))c.points=c.points.map(p=>Array.isArray(p)?f(p):p);if(Array.isArray(c.paths))for(const pa of c.paths)if(Array.isArray(pa?.points))pa.points=pa.points.map(p=>Array.isArray(p)?f(p):p);}
+function rescale(cmds,st,fx,fy,k){for(let i=st;i<cmds.length;i++){const c=cmds[i];if(!c||c.owner?.kind!=='enemy')continue;mapCmd(c,p=>[fx+(p[0]-fx)*k,fy+(p[1]-fy)*k]);}}
+function punchK(s){const a=T()-s.hitAt;if(!prefs.punch||a<0||a>.12)return 0;return Math.sin(Math.PI*a/.12)*.07;}
+// ---- ⑦ 체력바·이름표·예고 표시(같은 drawEnemy 안에서 그려진 것) ----
+//  · ①은 몸만 키우고 줄인다: 체력바(R51 원래 막대 → R90 2px)는 배율을 되돌려 늘 같은 폭·같은 자리(발 아래), 글자(이름표)는 자리는 몸을 따라가되 글자 크기는 그대로.
+//  · 광폭화한 보스(사용자 10:23 "보스 광폭화 시 크기 커지면서 체력바가 가운데 나오는 문제 개선"): 실측 — 2배 몸(발록·붉은 하이힐의 서윤·타락천사 기사)의 발치 막대가
+//    다리·옷자락 사이(몸 아래쪽 가운데)에 겹쳐 보였다. → 체력바를 그 시트의 머리 윗선(모든 칸 불투명 첫 줄의 20% 분위) 8px 위로 올리고 이름표를 바로 그 위에 둔다.
+//    광폭화 순간 발치에서 0.1초 남짓 미끄러져 올라간다. 화면 맨 위(56px)보다 위로는 안 올린다.
+//  · 예고 표시(사용자 10:16 "적이 영웅을 공격하기 전, 돌진하기 전 나오는 직사각형 예고 표시, 검은색 선 등 예고 표시도 끌 수 있도록 — 기본 상태는 끄게"):
+//    원래 R40/R41 읽기 쉬운 공격 신호(머리 위 '근접 공격 준비'·'원거리 조준' 상자와 테두리, 검은 조준선·점선, 표적 고리·눈금, 몸의 검은 방향 화살표)와
+//    엔진 e.tell 표적 표식(target-mark), R116 돌진 표적 인장을 기본으로 지운다. 켜면 ①의 배율을 되돌려 조준선·표적 고리가 실제 표적을 가리키게 둔다.
+//    장판(위험 지대) 예고·적 스킬 원화 연출(R98·FINAL42)은 그대로(R98 범위 선은 원래 기본 꺼짐 — 아래 설정이 함께 켜고 끈다). 판정·피해·시점은 그대로.
+const TELE_WORLD=new Set(['rgba(12,10,12,.92)','rgba(16,12,14,.92)','#e2b17d']),TELE_BODY=new Set(['rgba(12,10,12,.95)','#e2c18b','#bd8065','#b89a71']),TELE_TEXT=new Set(['원거리 조준','근접 공격 준비']);
+function teleKind(c){if(!c||c.owner?.kind==='enemy')return null;const y=c.style||{};
+ if(c.kind==='stroke'){const k=y.strokeStyle;if(TELE_WORLD.has(k))return 'world';if(k==='#d79b70')return c.paths?.length===1&&c.paths[0]?.points?.length===2?'world':'body';return TELE_BODY.has(k)?'body':null;}
+ if(c.kind==='fill'&&y.fillStyle==='rgba(14,13,15,.92)')return 'body';if(c.kind==='text'&&TELE_TEXT.has(c.text))return 'body';return null;}
+function bboxOf(c){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,n=0;const add=p=>{if(Array.isArray(p)){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);n++;}};
+ if(Array.isArray(c.points))c.points.forEach(add);if(Array.isArray(c.paths))for(const pa of c.paths)if(Array.isArray(pa?.points))pa.points.forEach(add);return n?[x0,y0,x1,y1]:null;}
+function isBar(c,e,fx,fy,SX,SY){if(c.kind!=='fill'||c.owner?.kind!=='enemy'||!Array.isArray(c.paths)||c.paths.length!==1||typeof c.style?.fillStyle!=='string')return false;const P=c.paths[0]?.points;if(!Array.isArray(P)||P.length<4||P.length>5)return false;
+ const b=bboxOf(c);if(!b)return false;const S=Math.max(1,SY),X=Math.max(1,SX),lift=Math.max(0,+e.visualLiftPx||0);return b[3]-b[1]<=6.5*S&&b[0]>=fx-75*X&&b[2]<=fx+75*X&&b[1]>=fy-(lift+12)*S&&b[1]<=fy+26*S;}
+function unFont(c,X,Y){if(Array.isArray(c.matrix)&&(Math.abs(X-1)>.001||Math.abs(Y-1)>.001)){const m=c.matrix.slice();m[0]/=X;m[1]/=X;m[2]/=Y;m[3]/=Y;c.matrix=m;}}
+function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
+ const scaledE=Math.abs(SXe-1)>.001||Math.abs(SYe-1)>.001,scaledS=Math.abs(SXs-1)>.001||Math.abs(SYs-1)>.001;if(!scaledE&&!scaledS&&!teleOff&&!headBar)return;
+ const bars=[];let w=st;
+ for(let i=st;i<C.length;i++){const c=C[i];let keep=true;const tk=teleKind(c);
+  if(tk){if(teleOff){keep=false;stats.teleHidden=(stats.teleHidden||0)+1;}else if(scaledS){if(c.kind==='text')unFont(c,SXs,SYs);else if(tk==='world')mapCmd(c,p=>[fx+(p[0]-fx)/SXs,fy+(p[1]-fy)/SYs]);else{const b=bboxOf(c);if(b){const cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2;mapCmd(c,p=>[cx+(p[0]-cx)/SXs,cy+(p[1]-cy)/SYs]);}}}}
+  else if(teleOff&&c?.kind==='image'&&/target-mark/.test(srcOf(c))){keep=false;stats.teleHidden=(stats.teleHidden||0)+1;}
+  else if(c?.kind==='text')unFont(c,SXs,SYs);
+  else if(c&&isBar(c,e,fx,fy,SXe,SYe))bars.push(c);
+  if(keep)C[w++]=c;}
+ C.length=w;
+ if(scaledE)for(const c of bars)mapCmd(c,p=>[fx+(p[0]-fx)/SXe,fy+(p[1]-fy)/SYe]);
+ if(headBar&&bars.length){const b=bodyCmd(C,st);if(!b)return;const inf=sheetInfo(b.image,b.sourceRect),P=b.points,top=Math.min(P[0][1],P[1][1]),bot=Math.max(P[2][1],P[3][1]),head=top+(bot-top)*(inf?.top??.06);
+  let y0=1e9,y1=-1e9;for(const c of bars){const bb=bboxOf(c);if(bb){y0=Math.min(y0,bb[1]);y1=Math.max(y1,bb[3]);}}if(!(y1>=y0))return;
+  const want=Math.max(56,head-8-(y1-y0)),now=T();if(s.barOff==null||now-(s.barAt??-9)>1)s.barOff=y0-fy;s.barOff+=(want-fy-s.barOff)*Math.min(1,Math.max(0,now-(s.barAt??now))*9||.25);s.barAt=now;
+  const dy=fy+s.barOff-y0;for(const c of bars)mapCmd(c,p=>[p[0],p[1]+dy]);const ny=fy+s.barOff-5;
+  for(let i=st;i<C.length;i++){const c=C[i];if(c?.kind==='text'&&c.text===e.name&&Array.isArray(c.point))c.point=[c.point[0],ny];}stats.headBars=(stats.headBars||0)+1;}}
+if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a){
+ const rec=typeof ctx==='object'?ctx:null,cmds=Array.isArray(rec?.commands)?rec.commands:null;
+ if(!e||!cmds||typeof project!=='function'){stats.skipped++;return base.apply(this,[e,...a]);}
+ const ex=excluded(e),doSize=prefs.size&&!ex&&typeof rec.save==='function',teleOff=!prefs.tele,headBar=prefs.bossBar&&!ex&&enr(e);
+ const t=T();if(t!==budgetT){budgetT=t;budget=4;}
+ const s=stOf(e),q=project(e.x,e.y),fx=q.x,fy=q.y,st0=cmds.length;let r,sx=1,sy=1,k=1;
+ if(doSize){const pk=punchK(s),kx=pk>0?s.kx*pk/.07:0;sx=s.s*(1+pk);sy=s.s*(1-pk*.6);rec.save();try{rec.translate(fx+kx,fy);rec.scale(sx,sy);rec.translate(-fx,-fy);r=base.apply(this,[e,...a]);}finally{rec.restore();}}
+ else{stats.skipped++;r=base.apply(this,[e,...a]);}
+ if(cmds.length===st0)return r;
+ try{if(doSize&&e.hp>0){const b=bodyCmd(cmds,st0);if(b){const fr=sheetFrac(b.image,b.sourceRect);if(fr){const box=Math.abs(b.points[3][1]-b.points[0][1]),nat=box*fr/Math.max(.01,sy),H=AH(),[lo,hi]=band(e);
+   let want=Math.min(hi*H,Math.max(lo*H,nat));let ns=Math.min(SMAX,Math.max(SMIN,want/Math.max(1,nat)));
+   if(Math.abs(ns-s.s)>.01){k=ns/s.s;rescale(cmds,st0,fx,fy,k);stats.refixed++;s.s=ns;}
+   s.nat=nat;if(Math.abs(s.s-1)>.01)stats.scaled++;else stats.kept++;}}}}catch(err){fail(err);}
+ try{post(e,cmds,st0,fx,fy,sx*k,sy*k,sx,sy,teleOff,headBar,s);}catch(err){fail(err);}
+ return r;};}
+// R116 돌진 표적 인장(fx 'sigil' + VFX.mark) — 예고 표시를 끄면 그리지 않는다
+if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
+// ---- 타격감: 영웅 쪽 공격이 실제로 피해를 준 순간 ----
+if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){const old=e?.hp;const r=base.apply(this,[e,amount,source,...a]);
+ try{if(prefs.punch&&e&&old>e.hp&&!(source&&source.friendly===false)&&typeof project==='function'&&typeof player==='object'&&player){const s=stOf(e);if(T()-s.hitAt>.09){s.hitAt=T();const a=project(player.x,player.y),b=project(e.x,e.y);s.kx=Math.sign(b.x-a.x||1)*2;stats.punches++;}}}catch(err){fail(err);}return r;};}
+// ---- 라우렌 창끝 보라 기운 ----
+const TIP=new WeakMap();
+function tipOf(im,sr){if(!im||!sr)return null;let m=TIP.get(im);if(!m){m=new Map();TIP.set(im,m);}const k=sr.map(Math.round).join(',');if(m.has(k))return m.get(k);if(budget<=0)return null;budget--;
+ let v=null;try{const N=96,cw=sr[2],ch=sr[3],sc=N/Math.max(cw,ch),w=Math.max(1,Math.round(cw*sc)),h=Math.max(1,Math.round(ch*sc));scanCv??=document.createElement('canvas');scanCv.width=w;scanCv.height=h;const g=scanCv.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,w,h);g.drawImage(im,sr[0],sr[1],cw,ch,0,0,w,h);const d=g.getImageData(0,0,w,h).data;
+  outer:for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>60){v=[(x+.5)/w,(y+.5)/h];break outer;}}catch(e){fail(e);}m.set(k,v);return v;}
+const TIPS={lauren:{F:{a:[120,50,200],b:[214,170,255]},k:1},neon:{F:{a:[20,170,170],b:[150,255,240]},k:1.3}};// 네온은 '강하게'(사용자) — 1.3배
+function laurenTip(rec,st,TP){const LP=TP.F,KK=TP.k;const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S?.draw)return;let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;if(FXSRC.test(srcOf(c)))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
+ if(!best)return;const im=best.image,sr=best.sourceRect||[0,0,im?.naturalWidth||im?.width||1,im?.naturalHeight||im?.height||1],tp=tipOf(im,sr);if(!tp)return;
+ const P=best.points,x=P[0][0]+(P[1][0]-P[0][0])*tp[0]+(P[3][0]-P[0][0])*tp[1],y=P[0][1]+(P[1][1]-P[0][1])*tp[0]+(P[3][1]-P[0][1])*tp[1],h=AH()*KK,t=T(),pul=.85+.15*Math.sin(t*6.3),lo=!!(typeof settings==='object'&&settings?.lowFx);
+ const run=()=>{S.draw('glow',LP,x,y,h*.42*pul,h*.42*pul,{alpha:.55,overHero:true});S.draw('glow',S.pal?S.pal(LP.b):LP,x,y,h*.16,h*.16,{alpha:.75,overHero:true});
+  S.draw('flame',LP,x,y+h*.05,h*.2,h*.34*pul,{frame:Math.floor(t*14),alpha:.5,overHero:true});
+  if(!lo)for(let i=0;i<4;i++){const ph=(t*.9+i*.25)%1;S.draw('spark',LP,x+Math.sin(i*2.1+t*3)*h*.05,y-h*.25*ph,h*.14,h*.035,{angle:-Math.PI/2,alpha:Math.sin(Math.PI*ph)*.8,overHero:true});}};
+ try{if(typeof rec.scope==='function')rec.scope({id:'r425:spear-tip',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{rec.save();try{run();}finally{rec.restore();}});else run();stats.tips++;}catch(e){fail(e);}}
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
+ try{const TP=TIPS[player?.hero];if(prefs.laurenTip&&TP&&st>=0&&player.hp>0&&player.visible!==false)laurenTip(rec,st,TP);}catch(e){fail(e);}return r;};}
+// ---- 거미류 X자 이동(사용자 09:54 "거미류들은 거미 시선과 다리 움직임 따라 대각선으로 이동하는 방식 x자로 이동") ----
+//  거미 그림은 옆모습 한 장을 좌우로 뒤집어 쓰고 몸·시선·다리가 화면 대각선(앞쪽 45°)을 향한다. 걷는 한 틱의 이동(0.3칸 미만, 돌진·블링크 제외)을
+//  화면 대각선 네 방향 중 하나로 돌려 같은 거리만큼 옮긴다. 가로 부호는 원래 이동대로(그림 좌우와 맞음), 세로 부호는 이동의 세로 성분이 분명할 때 따르고
+//  거의 가로로만 걸을 땐 0.55초마다 위·아래를 바꿔 X자로 지그재그. 벽·소품은 엔진 moveActor 로 똑같이 막힌다. 판정·속도·경로 목표는 그대로.
+const SPIDER=/거미|spider|arachn/i;const isSpider=e=>!!e&&e.hp>0&&!major(e)&&(SPIDER.test(String(e.name||''))||SPIDER.test(String(e.nativeId||''))||SPIDER.test(String(e.path||'')));
+const SPD=new WeakMap();
+if(typeof tick==='function'&&typeof moveActor==='function'){const base=tick;tick=function(dt,...a){let pre=null;
+ try{if(prefs.spiderX&&typeof room==='object'&&room?.enemies){pre=[];for(const e of room.enemies)if(isSpider(e))pre.push([e,e.x,e.y]);}}catch(err){fail(err);}
+ const r=base.apply(this,[dt,...a]);
+ try{if(pre)for(const [e,x0,y0] of pre){const dx=e.x-x0,dy=e.y-y0,d=Math.hypot(dx,dy);if(!(e.hp>0))continue;
+   if(!(d>1e-4)){/* 공격도 X자(09:55 "거미 공격도 x자로"): 영웅 곁에 멈춰 칠 때는 영웅 기준 화면 대각선 자리로 천천히 미끄러져 대각선에서 문다 */
+    const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2)continue;
+    const sx=ox-oy,sy=(ox+oy)*.5,m=Math.hypot(sx,sy),tx=(Math.sign(sx)||1)*m/Math.SQRT2,ty=(Math.sign(sy)||1)*m/Math.SQRT2,wx=p.x+ty+tx/2,wy=p.y+ty-tx/2,gx=wx-e.x,gy=wy-e.y,g=Math.hypot(gx,gy);
+    if(g>.04){const k=Math.min(1,1.6*Math.max(0,+dt||0)/g);moveActor(e,gx*k,gy*k,e.combatProfile?.bodyBlock?.r||e.radius||.27);stats.spiderAtk=(stats.spiderAtk||0)+1;}continue;}
+   if(d>.3)continue;
+   const sx=dx-dy,sy=(dx+dy)*.5,m=Math.hypot(sx,sy);let st=SPD.get(e);if(!st)SPD.set(e,st={v:1,at:T()});
+   if(Math.abs(sy)>Math.abs(sx)*.35)st.v=Math.sign(sy)||st.v;else if(T()-st.at>.55){st.v=-st.v;st.at=T();}
+   const hx=Math.sign(sx)||1,ux=hx*m/Math.SQRT2,uy=st.v*m/Math.SQRT2,X=uy+ux/2,Y=uy-ux/2;
+   e.x=x0;e.y=y0;moveActor(e,X,Y,e.combatProfile?.bodyBlock?.r||e.radius||.27);stats.spiderSteps=(stats.spiderSteps||0)+1;}}catch(err){fail(err);}
+ return r;};}
+// ---- ⑤ 이동 중 공격: 미끄러짐 대신 발을 딛고 친다(사용자 09:57 "이동 중에 공격한다면 이동 모션 나가고 방향 맞게 공격 모션으로 전환했을 때 공격이 그 방향으로
+//  나가도록 — 지금은 공격 모션으로 이동하는 게 있어서 그냥 미끄러져서 이동하는 느낌, 특히 영웅들"). 실측: 환도(R271)·슬레이어(R351)는 이동 중에도
+//  휘두르기 0.35초를 공격 칸으로 그려 그동안 몸이 미끄러졌다. → 영웅 기본 공격이 새로 나간 순간부터 근접 0.24초·원거리 0.16초 동안
+//  걷기 이동(한 틱 0.3칸 미만, 돌진·블링크 제외)을 멈춰 그 자리에서 공격 칸이 나오게 한다. 공격 방향은 엔진이 겨눈 적 방향 그대로, 그 뒤 다시 걷기 모션.
+const RANGED=new Set(['seoha','michaela','hunter','gunner','lauren','neon']);let plantUntil=-9,prevAtk=0;
+if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const p=typeof player==='object'?player:null,x0=p?.x,y0=p?.y,a0=+p?.attackAnim||0;const r=base.apply(this,[dt,...a]);
+ try{if(prefs.plant&&p&&p.hp>0){const a1=+p.attackAnim||0;if(a1>a0+1e-6&&a1>prevAtk+1e-6){plantUntil=T()+(p.hero==='hunter'?.26:RANGED.has(p.hero)?.16:.24);stats.plants=(stats.plants||0)+1;}prevAtk=a1;
+   const d=Math.hypot(p.x-x0,p.y-y0);if(T()<plantUntil&&d>1e-5&&d<.3&&!(p.dashAnim>0)&&!(p.blinkAnim>0)){p.x=x0;p.y=y0;stats.planted=(stats.planted||0)+1;}}}catch(err){fail(err);}return r;};}
+// ---- ⑥ 헌터 공격 7프레임 좌·우(사용자 09:58 드라이브 hunter_attack7_lr_v001 — "헌터는 항상 공격 시 방향에 맞게 이거 사용") ----
+//  assets/r425/hunter/attack-{l,r}.webp(scripts/r425-hunter-attack.py, 우 = 좌 정확 반전 원화). 적이 화면 왼쪽이면 l, 오른쪽이면 r(가로 차이가 작으면 마지막 쪽).
+//  화살은 엔진이 누르는 순간 쏘므로 R351 과 같이 '놓기'(5번째 칸) 90ms 전부터 재생하고 다음 발사 전에 끝나도록 빠르게 돌린다. 키 = 서 있기 키(칸 몸 201px 기준), 발 = 시트 발 기준점.
+let HUNT=null,huntReq=false;const huntSwing={t0:-9,side:'r',prev:0,scale:1};
+function huntIndex(){if(HUNT||huntReq||typeof fetch!=='function')return;huntReq=true;fetch('assets/r425/hunter/index.json').then(r=>r.ok?r.json():null).then(j=>{if(j?.anims)HUNT=j;else huntReq=false;}).catch(e=>{huntReq=false;fail(e);});}
+function huntImg(f){try{const row=typeof readyImage==='function'?readyImage('assets/r425/hunter/'+f):null;if(row?.image)return row.image;if(typeof ensureImages==='function')Promise.resolve(ensureImages(['assets/r425/hunter/'+f])).catch(()=>{});}catch(_){}return null;}
+function huntSide(){try{const q=project(player.x,player.y);let best=null,bd=9;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false)continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
+ if(best){const b=project(best.x,best.y);if(Math.abs(b.x-q.x)>2)return b.x<q.x?'l':'r';}}catch(_){}const d=player?.direction;return d==='left'?'l':d==='right'?'r':huntSwing.side;}
+function hunter(rec,st){huntIndex();if(!HUNT)return;const a=+player.attackAnim||0,t=T(),busy=player.skillAnim>0||player.dashAnim>0||player.ultimateAnim>0||player.guard||player.hurtAnim>0;
+ if(a>huntSwing.prev+1e-6){huntSwing.t0=t;huntSwing.side=huntSide();const ms=HUNT.ms,pre=ms.slice(0,HUNT.release).reduce((x,y)=>x+y,0),off=Math.max(0,pre-90),rest=ms.reduce((x,y)=>x+y,0)-off,cd=Math.max(.2,+player.attackCD||.39);huntSwing.off=off;huntSwing.scale=Math.max(.3,Math.min(1,cd*.95*1000/rest));}
+ huntSwing.prev=a;const mv=Math.hypot(player.x-(huntSwing.px??player.x),player.y-(huntSwing.py??player.y));huntSwing.px=player.x;huntSwing.py=player.y;if(mv>1e-3){huntSwing.movedAt=t;}if(busy||t-(huntSwing.movedAt??-9)<.08)return;/* 걷는 중엔 걷기 그림(미끄러짐 방지) */const ms=HUNT.ms,tot=ms.reduce((x,y)=>x+y,0),el=(t-huntSwing.t0)*1000/huntSwing.scale+(huntSwing.off||0);if(!(el<tot))return;
+ let fr=0,acc=el;for(let i=0;i<ms.length;i++){if(acc<ms[i]){fr=i;break;}acc-=ms[i];fr=i;}
+ const A=HUNT.anims[huntSwing.side],im=A&&huntImg(A.file);if(!im)return;let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;if(FXSRC.test(srcOf(c)))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}if(!best)return;
+ const want=AH()*((window.__STORYWORLD_VISUAL_R119__?.inspect?.()?.stats?.standRatio)||.98),k=want/(A.body||201),q=project(player.x,player.y),lift=Math.min(Math.max(+player.visualLiftPx||0,0),want*.65),fx=q.x,fy=q.y-lift,[ax,ay]=A.anchor,[cw,ch]=HUNT.cell,col=fr%HUNT.cols,row=Math.floor(fr/HUNT.cols);
+ const X=v=>fx+(v-ax)*k,Y=v=>fy+(v-ay)*k,before=best.image;
+ Object.assign(best,{image:im,sourcePath:'assets/r425/hunter/'+A.file,immutableTint:null,sourceRect:[col*cw,row*ch,cw,ch],imageSize:[im.naturalWidth||im.width,im.naturalHeight||im.height],points:[[X(0),Y(0)],[X(cw),Y(0)],[X(cw),Y(ch)],[X(0),Y(ch)]],r425Hunter:fr});
+ for(let i=rec.commands.length-1;i>=st;i--){const c=rec.commands[i];if(c!==best&&c.kind==='image'&&c.owner?.kind==='hero'&&c.image===before)rec.commands.splice(i,1);}
+ stats.hunterFrames=(stats.hunterFrames||0)+1;}
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
+ try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else huntSwing.prev=+player?.attackAnim||0;}catch(e){fail(e);}return r;};}
+// ---- 설정 창(빠른 설정 '설정' 패널, R420 보기 편의 묶음 끝): 적 공격·돌진 예고 표시 — 기본 꺼짐. R98 '적 공격 범위 미리보기(선)'도 같이 켜고 끈다 ----
+function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}return prefs.tele;}
+function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
+ const host=panel.querySelector('#accessR420')||(n>=3?panel.querySelector('#quickSettingsR114'):null);if(!host)return false;
+ const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리, 기본 꺼짐)';
+ host.appendChild(lab);lab.querySelector('input').onchange=ev=>teleSet(!!ev.target.checked);stats.teleUi=(stats.teleUi||0)+1;return true;}catch(e){fail(e);return true;}}
+if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
+function set(k,v){prefs[k]=v!==false;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
+window.__STORYWORLD_COMBAT_FLOW_R425__=Object.freeze({revision:REV,BANDS,set,teleSet,scaleOf:e=>ST.get(e)?.s??1,naturalOf:e=>ST.get(e)?.nat??null,
+ inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
+})();
