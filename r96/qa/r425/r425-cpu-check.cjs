@@ -7,7 +7,7 @@ const FILES=['slayer-blood-r425.js','combat-flow-r425.js','fx-sprites-r106.js','
 ok('runtime copies match client-source',FILES.every(f=>fs.readFileSync(path.join(RT,f),'utf8')===C(f)),FILES.filter(f=>fs.readFileSync(path.join(RT,f),'utf8')!==C(f)));
 const html=fs.readFileSync(path.join(RT,'index.html'),'utf8');
 ok('script tags once, right after combat-read-r409 and before combat-r118',/<script src="\.\/combat-read-r409\.js"><\/script><script src="\.\/slayer-blood-r425\.js"><\/script><script src="\.\/combat-flow-r425\.js"><\/script>\s*<script src="\.\/combat-r118\.js">/.test(html)&&html.split('"./combat-flow-r425.js"').length===2&&html.split('"./slayer-blood-r425.js"').length===2);
-const ver=fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8');ok('listed in verify-r96-public.py',ver.includes("'slayer-blood-r425.js'")&&ver.includes("'combat-flow-r425.js'"));
+const ver=fs.readFileSync(path.join(R,'..','scripts','verify-r96-public.py'),'utf8');{let comp=true;try{require('child_process').execFileSync('python3',['-m','py_compile',path.join(R,'..','scripts','verify-r96-public.py')],{stdio:'pipe'});}catch(_){comp=false;}ok('listed inside the expected list of verify-r96-public.py, and it compiles',comp&&/'slayer-blood-r425\.js',/.test(ver)&&/'combat-flow-r425\.js',/.test(ver));}
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r425/r425-cpu-check.cjs'));
 const man=JSON.parse(fs.readFileSync(path.join(R,'runtime-manifest.json'),'utf8')),M=new Map(man.files.map(f=>[f.path,f.sha256]));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(RT,p))).digest('hex');
 const ASSETS=['assets/r425/hunter/attack-l.webp','assets/r425/hunter/attack-r.webp','assets/r425/hunter/index.json'];
@@ -60,7 +60,7 @@ const frame=(env,e)=>{env.ctx.commands.length=0;env.time+=.1;env.drawEnemy(e);re
 const bbox=c=>{const P=c.points||c.paths[0].points;const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];};
 const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
 {const env=makeEnv(),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
- ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-7');
+ ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-8');
  // 큰 일반 몹(원래 키 영웅 2.5배) → 일반 띠 상한 1.55 로
  const e={id:'m1',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};let cs;for(let i=0;i<4;i++)cs=frame(env,e);
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
@@ -72,8 +72,8 @@ const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
  ok('telegraphs OFF by default: aim lane, label box, label text and tell mark removed; body and bar stay',!cs.some(c=>c.kind==='stroke'||c.style?.fillStyle==='rgba(14,13,15,.92)'||c.text==='원거리 조준'||/target-mark/.test(c.sourcePath||''))&&cs.some(c=>c.kind==='image')&&cs.filter(c=>c.kind==='fill').length===2);
  F.teleSet(true);cs=frame(env,t);const lane=cs.find(c=>c.kind==='stroke'),to=env.project(0,0);
  ok('telegraphs ON: shown, and the aim lane still ends on the real target (rescale undone)',lane&&near(lane.paths[0].points[1][0],to.x)&&near(lane.paths[0].points[1][1],to.y)&&cs.some(c=>c.text==='원거리 조준'),lane?.paths?.[0]?.points);
- F.teleSet(false);let eff=env.baseCalls.effects;env.drawEffect({type:'sigil',asset:env.VFX.mark});const skipped=env.baseCalls.effects===eff;env.drawEffect({type:'sigil',asset:'assets/other.webp'});
- ok('R116 charge target sigil (VFX.mark) hidden when OFF; other sigils still drawn',skipped&&env.baseCalls.effects===eff+1);}
+ F.teleSet(false);let eff=env.baseCalls.effects;env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1.15});const skipped=env.baseCalls.effects===eff;env.drawEffect({type:'sigil',asset:'assets/other.webp'});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:.62});env.drawEffect({type:'sigil',asset:env.VFX.mark,size:1});
+ ok('R116 charge target sigil (VFX.mark, size 1.15) hidden when OFF; other sigils and the click-move/select markers (size .62/1) still drawn',skipped&&env.baseCalls.effects===eff+3);}
 {const env=makeEnv();env.__STORYWORLD_BOSS_R205__={inspect:()=>({prefs:{enrage:true}}),constants:{ENRAGE_SIZE:2}};
  const b={id:'b1',name:'시험 보스',boss:true,x:0,y:0,hp:100,maxHp:100,k:2.1};let cs;for(let i=0;i<4;i++)cs=frame(env,b);const q=env.project(0,0);
  const bar0=cs.filter(c=>c.kind==='fill').map(bbox);ok('boss before enrage: bar under the feet',bar0.length===2&&bar0.every(bb=>near(bb[1],q.y+6)),bar0);
@@ -231,7 +231,28 @@ function cleanChecks(){const fs=require('fs'),path=require('path'),crypto=requir
  const spec=JSON.parse(fs.readFileSync(path.join(R,'r425-mob-clean.json'),'utf8')),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
  const rows=spec.images.map(r=>{const out=path.join(R,'runtime-text',r.output||'-');const ok=fs.existsSync(out)&&sha(fs.readFileSync(out))===r.outputSha256;return{p:r.path,ok,listed:list.includes(r.path)};});
  ok('background cleanup: every cleaned copy exists with its recorded hash, is redirected by combat-flow, originals untouched, no Mammon art',rows.length>0&&rows.every(r=>r.ok&&r.listed)&&list.length===rows.length&&spec.originalsModified===false&&!list.some(x=>/mammon/i.test(x)),rows.filter(r=>!r.ok||!r.listed));}
-(async()=>{await gazeChecks();slayerQChecks();atkFaceChecks();cleanChecks();
+function reviewChecks(){/* R425 리뷰 회귀: 연쇄 폭발이 R118 퍼짐으로 무리 전체에 번지지 않음 · Q 재사용 대기 R26/R62 · 표식·탑·네온 */
+ const foes=[0,1,2,3,4,5].map(i=>({id:'r'+i,name:'몹',x:.5+i*.25,y:0,hp:1e6,maxHp:1e6,spawnState:'active',radius:.3}));let chains=0;
+ const env={console,Math,JSON,Number,String,Array,Object,Set,Map,WeakMap,Promise,Error,isFinite,localStorage:{getItem:()=>null,setItem(){}},time:5,ctx:new Rec(),room:{id:'rv',enemies:foes},
+  player:{x:0,y:0,hero:'slayer',hp:100,specialCD:0,direction:'e',storyWER:{ready:{'slayer:r':25}}},effects:[],settings:{},shake:0,started:true,modal:null,loading:false,COMBAT_RHYTHM_R26:1.18};
+ env.window=env;env.actorHeight=()=>54;env.project=(x,y)=>({x:640+x*32,y:360+y*16});env.attackPower=()=>50;env.rank=()=>0;env.nearestEnemy=()=>foes[0];env.facing=()=>'e';env.sound=()=>{};env.blocked=()=>false;
+ env.readyImage=()=>null;env.ensureImages=()=>{};env.delay=(t,f)=>f();env.liveEnemies=()=>foes.filter(e=>e.hp>0);env.fx=()=>null;env.special=()=>{};env.tick=()=>{};env.drawEffect=()=>{};env.drawHero=()=>{};
+ env.__STORYWORLD_PROGRESSION_R62__={factors:()=>({cooldown:.5})};
+ env.hitEnemy=(e,a,s)=>{e.hp-=a;return true;};
+ vm.createContext(env);vm.runInContext(C('slayer-blood-r425.js'),env);
+ /* R118 모양 바깥 퍼짐: 맞은 적 주변 1.5칸에 r118Splash 피해, 소스가 r118Splash 면 퍼지지 않음 */
+ const inner=env.hitEnemy;env.hitEnemy=function(e,a,s){const r=inner(e,a,s);if(!(s&&s.r118Splash))for(const o of foes)if(o!==e&&Math.hypot(o.x-e.x,o.y-e.y)<1.5)inner(o,a*.3,{r118Splash:true,friendly:true,kind:'hero-splash-r118'});return r;};
+ const S=env.__STORYWORLD_SLAYER_BLOOD_R425__;const st0=S?.inspect?.().stats?.chains||0;
+ env.fx('storySourceSkill',0,0,{storyWER:true,sourceHero:'slayer',sourceSlot:'r',stage:'warning',castId:77});
+ const rcd=env.player.storyWER.ready['slayer:r'];
+ env.time+=1.0;env.hitEnemy(foes[0],40,{friendly:true,kind:'hero-basic'});
+ chains=(S?.inspect?.().stats?.chains||0)-st0;
+ ok('review: one hero hit during the aura sets off at most 2 chain bursts even with an R118-style splash (no pack-wide cascade)',chains>=1&&chains<=2,{chains});
+ ok('review: R warning cue still gets the R62 cooldown shortening',Math.abs(rcd-(5+20*.5))<1e-6,{rcd});
+ env.player.specialCD=0;env.time+=20;env.special();ok('review: Q cooldown = 10 × R26 1.18 × R62 factor',Math.abs(env.player.specialCD-10*1.18*.5)<1e-6,{cd:env.player.specialCD});
+ const cf=C('combat-flow-r425.js');
+ ok('review: selected-target marker and small move/select sigils are kept with telegraphs off; R170/R75 towers are not resized; Neon tip aura removed',/target-mark\/\.test\(srcOf\(c\)\)&&!\(typeof target!=='undefined'&&e\?\.id===target\)/.test(cf)&&/\(\+fe\.size\|\|1\)>1\.02/.test(cf)&&/e\.r170Tower\|\|e\.r75Tower/.test(cf)&&!/neon:\{F:/.test(cf));}
+(async()=>{await gazeChecks();slayerQChecks();atkFaceChecks();cleanChecks();reviewChecks();
 ok('gameplay untouched except ⑧ (user-asked laser cross, through the engine hitEnemy): no damage/cooldown/save writes in combat-flow',!/attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(C('combat-flow-r425.js')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(JSON.stringify({ok:pass===checks.length,checks:checks.length,pass,method:'CPU fake globals and a fake command recorder; headless screenshots separately; no GPU or device'}));

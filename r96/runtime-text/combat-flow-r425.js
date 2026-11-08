@@ -21,7 +21,7 @@
 //  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
-const REV='R425-flow-7',KEY='storyworld.r425.flow';
+const REV='R425-flow-8',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
 let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
@@ -46,7 +46,7 @@ const major=e=>!!(e?.boss||e?.persona||e?.cosmic||e?.trial);
 const R205=()=>window.__STORYWORLD_BOSS_R205__;let enrOnAt=-1,enrOn=true;
 function enr(e){if(!e?.r205Enraged||!(e.hp>0))return false;const t=T();if(t!==enrOnAt){enrOnAt=t;try{enrOn=R205()?.inspect?.()?.prefs?.enrage!==false;}catch(_){enrOn=true;}}return enrOn;}
 function band(e){const K=enr(e)?(+R205()?.constants?.ENRAGE_SIZE||2):1,b=major(e)?BANDS.boss:(e.midboss||e.wardChampionR81===true||/^중간보스\s*·/.test(String(e.name||'')))?BANDS.mid:/우두머리/.test(String(e.name||''))?BANDS.leader:BANDS.normal;return K===1?b:[b[0]*K,b[1]*K];}
-function excluded(e){try{const id=String(room?.id||'');if(/mammon/i.test(id)||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.dollR193||e.towerR193||e.r193Doll||e.r193Tower||e.prop||e.object);}
+function excluded(e){try{const id=String(room?.id||'');if(/mammon/i.test(id)||e.mammon||e.mammonR||/mammon/i.test(String(e.nativeId||'')))return true;}catch(_){}return !!(e.samongDollR193||e.dollR193||e.towerR193||e.r193Doll||e.r193Tower||e.r170Tower||e.r75Tower||e.r251Circle||e.prop||e.object);}
 const ST=new WeakMap();// e -> {s, nat, hitAt, kx, barOff, barAt}
 function stOf(e){let s=ST.get(e);if(!s)ST.set(e,s={s:1,nat:0,hitAt:-9,kx:0});return s;}
 function bodyCmd(cmds,st){let best=null,bh=0;for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!c.points)continue;if(FXSRC.test(srcOf(c)))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
@@ -76,7 +76,7 @@ function post(e,C,st,fx,fy,SXe,SYe,SXs,SYs,teleOff,headBar,s){
  const bars=[];let w=st;
  for(let i=st;i<C.length;i++){const c=C[i];let keep=true;const tk=teleKind(c);
   if(tk){if(teleOff){keep=false;stats.teleHidden=(stats.teleHidden||0)+1;}else if(scaledS){if(c.kind==='text')unFont(c,SXs,SYs);else if(tk==='world')mapCmd(c,p=>[fx+(p[0]-fx)/SXs,fy+(p[1]-fy)/SYs]);else{const b=bboxOf(c);if(b){const cx=(b[0]+b[2])/2,cy=(b[1]+b[3])/2;mapCmd(c,p=>[cx+(p[0]-cx)/SXs,cy+(p[1]-cy)/SYs]);}}}}
-  else if(teleOff&&c?.kind==='image'&&/target-mark/.test(srcOf(c))){keep=false;stats.teleHidden=(stats.teleHidden||0)+1;}
+  else if(teleOff&&c?.kind==='image'&&/target-mark/.test(srcOf(c))&&!(typeof target!=='undefined'&&e?.id===target)){keep=false;stats.teleHidden=(stats.teleHidden||0)+1;}
   else if(c?.kind==='text')unFont(c,SXs,SYs);
   else if(c&&isBar(c,e,fx,fy,SXe,SYe))bars.push(c);
   if(keep)C[w++]=c;}
@@ -106,16 +106,16 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
  try{if(XD.has(e)){const b=bodyCmd(cmds,st0);if(b)s.box=boxOf(b);}}catch(err){fail(err);}
  return r;};}
 // R116 돌진 표적 인장(fx 'sigil' + VFX.mark) — 예고 표시를 끄면 그리지 않는다
-if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
+if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark&&(+fe.size||1)>1.02){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
 // ---- 타격감: 영웅 쪽 공격이 실제로 피해를 준 순간 ----
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){const old=e?.hp;const r=base.apply(this,[e,amount,source,...a]);
  try{if(prefs.punch&&e&&old>e.hp&&!(source&&source.friendly===false)&&typeof project==='function'&&typeof player==='object'&&player){const s=stOf(e);if(T()-s.hitAt>.09){s.hitAt=T();const a=project(player.x,player.y),b=project(e.x,e.y);s.kx=Math.sign(b.x-a.x||1)*2;stats.punches++;}}}catch(err){fail(err);}return r;};}
 // ---- 라우렌 창끝 보라 기운 ----
 const TIP=new WeakMap();
-function tipOf(im,sr){if(!im||!sr)return null;let m=TIP.get(im);if(!m){m=new Map();TIP.set(im,m);}const k=sr.map(Math.round).join(',');if(m.has(k))return m.get(k);if(budget<=0)return null;budget--;
+function tipOf(im,sr){if(!im||!sr)return null;{const t=T();if(t!==budgetT){budgetT=t;budget=4;}}let m=TIP.get(im);if(!m){m=new Map();TIP.set(im,m);}const k=sr.map(Math.round).join(',');if(m.has(k))return m.get(k);if(budget<=0)return null;budget--;
  let v=null;try{const N=96,cw=sr[2],ch=sr[3],sc=N/Math.max(cw,ch),w=Math.max(1,Math.round(cw*sc)),h=Math.max(1,Math.round(ch*sc));scanCv??=document.createElement('canvas');scanCv.width=w;scanCv.height=h;const g=scanCv.getContext('2d',{willReadFrequently:true});g.clearRect(0,0,w,h);g.drawImage(im,sr[0],sr[1],cw,ch,0,0,w,h);const d=g.getImageData(0,0,w,h).data;
   outer:for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>60){v=[(x+.5)/w,(y+.5)/h];break outer;}}catch(e){fail(e);}m.set(k,v);return v;}
-const TIPS={lauren:{F:{a:[120,50,200],b:[214,170,255]},k:1},neon:{F:{a:[20,170,170],b:[150,255,240]},k:1.3}};// 네온은 '강하게'(사용자) — 1.3배
+const TIPS={lauren:{F:{a:[120,50,200],b:[214,170,255]},k:1}};// 네온 창끝 기운은 창이 낮게 들린 칸에서 머리에 붙어 뺐다(R425 리뷰) — 칸마다 창끝 좌표가 생기면 다시 넣는다
 function laurenTip(rec,st,TP){const LP=TP.F,KK=TP.k;const S=window.__STORYWORLD_FX_SPRITES_R106__;if(!S?.draw)return;let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;if(FXSRC.test(srcOf(c)))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(!best)return;const im=best.image,sr=best.sourceRect||[0,0,im?.naturalWidth||im?.width||1,im?.naturalHeight||im?.height||1],tp=tipOf(im,sr);if(!tp)return;
  const P=best.points,x=P[0][0]+(P[1][0]-P[0][0])*tp[0]+(P[3][0]-P[0][0])*tp[1],y=P[0][1]+(P[1][1]-P[0][1])*tp[0]+(P[3][1]-P[0][1])*tp[1],h=AH()*KK,t=T(),pul=.85+.15*Math.sin(t*6.3),lo=!!(typeof settings==='object'&&settings?.lowFx);
@@ -147,8 +147,8 @@ if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){con
 //  영웅은 키·클릭 입력대로 움직이므로 바꾸지 않는다. 판정·체력·피해·경로 목표는 그대로(그 틱의 걸음 방향과 지그재그 보정 길이만).
 const SPIDER=/거미|spider|arachn/i;const isSpider=e=>!!e&&!major(e)&&(SPIDER.test(String(e.name||''))||SPIDER.test(String(e.nativeId||''))||SPIDER.test(String(e.path||'')));
 const famOf=k=>/#/.test(k)?null:String(k).replace(/\.(webp|png|jpe?g)$/i,'').replace(/[-_](idle|move|walk|run|attack|atk|hit|hurt|death|die|cast|poses?|motion)(?:[-_]?\d+)?$/i,'');
-let GZ=null,FAM=null,gzReq=false;function gzLoad(){if(GZ||gzReq||typeof fetch!=='function')return;gzReq=true;fetch('assets/r425/gaze.json').then(r=>r.ok?r.json():null).then(j=>{if(!j?.classes){gzReq=false;return;}
- const F={};for(const [k,v] of Object.entries(j.classes)){const f=famOf(k);if(f&&(!F[f]||/[-_]move/i.test(k)))F[f]=v;}FAM=F;GZ=j;}).catch(e=>{gzReq=false;fail(e);});}
+let GZ=null,FAM=null,gzReq=false,gzNext=0,gzTries=0;const backoff=()=>{gzNext=T()+Math.min(30,2**gzTries++);};function gzLoad(){if(GZ||gzReq||typeof fetch!=='function'||T()<gzNext||gzTries>6)return;gzReq=true;fetch('assets/r425/gaze.json').then(r=>r.ok?r.json():null).then(j=>{if(!j?.classes){gzReq=false;backoff();return;}
+ const F={};for(const [k,v] of Object.entries(j.classes)){const f=famOf(k);if(f&&(!F[f]||/[-_]move/i.test(k)))F[f]=v;}FAM=F;GZ=j;}).catch(e=>{gzReq=false;backoff();fail(e);});}
 function artKey(c){let s=srcOf(c).replace(/^[a-z]+:\/\/[^/]+/i,'').replace(/[?#].*$/,'');const i=s.indexOf('assets/');s=i>=0?s.slice(i+7):s.replace(/^\.?\//,'');s=s.replace(/^r425\/clean\/assets\//,'');if(/monsters|atlas/i.test(s)&&Array.isArray(c.sourceRect))s+='#'+c.sourceRect.map(v=>Math.round(v)).join(',');return s;}
 const CLS=new Set(['x','plus','both']);
 function gazeOf(e){if(isSpider(e))return 'x';const s=ST.get(e),a=s?.art;if(!a||!GZ)return s?.gz||'both';
@@ -173,15 +173,15 @@ function steer(e,x0,y0,dt,t){const dx=e.x-x0,dy=e.y-y0,d=Math.hypot(dx,dy);if(!(
  if(p&&prefs.gazeSlot){const ox=x0-p.x,oy=y0-p.y,od=Math.hypot(ox,oy);if(od<3.2&&od>.35&&(dx*-ox+dy*-oy)>0){/* 다가오는 중 */
    const rng=Math.max(.55,Math.min(1.4,(+e.combatProfile?.attackShape?.range||+e.combatProfile?.range||+e.attackRange||1)*.8)),mb=wAng(ox,oy);
    let ba=g.slotB;if(ba==null||g.slotC!==cls||angD(mb,ba)>step*.62){[ba]=bracket(cls,mb);g.slotB=ba;g.slotC=cls;}
-   const [wx,wy]=wDir(ba),sd=Math.max(rng,od-SLOT_IN),gx=p.x+wx*sd-x0,gy=p.y+wy*sd-y0;
-   if(Math.hypot(gx,gy)>.08){ang=wAng(gx,gy);stats.gazeSlots=(stats.gazeSlots||0)+1;}}else g.slotB=null;}
+   const [wx,wy]=wDir(ba),sd=Math.max(Math.min(rng,.55),od-SLOT_IN),gx=p.x+wx*sd-x0,gy=p.y+wy*sd-y0;
+   const cl=typeof clearLine==='function'?clearLine:null,sx=x0+gx,sy=y0+gy;if(Math.hypot(gx,gy)>.08&&(!cl||(cl({x:x0,y:y0},p)&&cl({x:x0,y:y0},{x:sx,y:sy})))){ang=wAng(gx,gy);stats.gazeSlots=(stats.gazeSlots||0)+1;}}else g.slotB=null;}
  const c=pick(g,cls,ang,t);if(angD(c,eng)<2){g.lat+=latOf(ang,dx,dy);stats.gazeKept=(stats.gazeKept||0)+1;return true;}
  const [a1,d1,a2]=bracket(cls,ang),d2=angD(ang,a2),L=d*(d1<=step*.18?1:Math.min(COMP,(Math.sin(d1*DEG)+Math.sin(d2*DEG))/Math.max(.2,Math.sin((d1+d2)*DEG))));
  const r=radius(e),ex=e.x,ey=e.y,go=a=>{const [wx,wy]=wDir(a);e.x=x0;e.y=y0;moveActor(e,wx*L,wy*L,r);return Math.hypot(e.x-x0,e.y-y0);};
  let moved=go(c);if(moved<L*.3){const alt=c===a1?a2:a1;moved=go(alt);if(moved<L*.3){e.x=ex;e.y=ey;g.cur=null;stats.gazeBlocked=(stats.gazeBlocked||0)+1;return false;}g.cur=alt;g.since=t;}
  g.lat+=latOf(ang,e.x-x0,e.y-y0);stats.gazeSteps=(stats.gazeSteps||0)+1;stats['gaze_'+cls]=(stats['gaze_'+cls]||0)+1;return true;}
 function spiderSlot(e,dt){/* 09:55 "거미 공격도 x자로": 영웅 곁에 멈춰 칠 때 영웅 기준 X자 자리로 천천히 기어가 X자 방향에서 문다 */
- const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2)return;
+ const p=typeof player==='object'?player:null,ox=p&&e.x-p.x,oy=p&&e.y-p.y,od=p?Math.hypot(ox,oy):9;if(!p||od>2.6||od<.2||!(p.hp>0)||(typeof modal!=='undefined'&&modal)||(typeof loading!=='undefined'&&loading)||e.attack||e.rangedWindup>0||e.rest>0||(e.spawnState&&e.spawnState!=='active'))return;
  const [ba]=bracket('x',wAng(ox,oy)),[wx,wy]=wDir(ba),gx=p.x+wx*od-e.x,gy=p.y+wy*od-e.y,g=Math.hypot(gx,gy);
  if(g>.04){const k=Math.min(1,1.6*Math.max(0,+dt||0)/g);moveActor(e,gx*k,gy*k,radius(e));stats.spiderAtk=(stats.spiderAtk||0)+1;}}
 // 공격 시작 자리(x 부류): R230 이 위·아래에서 치려는 몹을 가로 옆자리로 옮기던 것을 X자 자리로 — 같은 거리·같은 어둠 수축·같은 2.4초 간격
@@ -218,13 +218,13 @@ if(typeof tick==='function'&&typeof moveActor==='function'){const base=tick;tick
 //  걷기 이동(한 틱 0.3칸 미만, 돌진·블링크 제외)을 멈춰 그 자리에서 공격 칸이 나오게 한다. 공격 방향은 엔진이 겨눈 적 방향 그대로, 그 뒤 다시 걷기 모션.
 const RANGED=new Set(['seoha','michaela','hunter','gunner','lauren','neon']);let plantUntil=-9,prevAtk=0;
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const p=typeof player==='object'?player:null,x0=p?.x,y0=p?.y,a0=+p?.attackAnim||0;const r=base.apply(this,[dt,...a]);
- try{if(prefs.plant&&p&&p.hp>0){const a1=+p.attackAnim||0;if(a1>a0+1e-6&&a1>prevAtk+1e-6){plantUntil=T()+(p.hero==='hunter'?.26:RANGED.has(p.hero)?.16:.24);stats.plants=(stats.plants||0)+1;}prevAtk=a1;
+ try{if(plantUntil-T()>.3)plantUntil=-9;if(prefs.plant&&p&&p.hp>0){const a1=+p.attackAnim||0;if(a1>a0+1e-6&&a1>prevAtk+1e-6){plantUntil=T()+(p.hero==='hunter'?.12:RANGED.has(p.hero)?.08:.1);stats.plants=(stats.plants||0)+1;}prevAtk=a1;
    const d=Math.hypot(p.x-x0,p.y-y0);if(T()<plantUntil&&d>1e-5&&d<.3&&!(p.dashAnim>0)&&!(p.blinkAnim>0)){p.x=x0;p.y=y0;stats.planted=(stats.planted||0)+1;}}}catch(err){fail(err);}return r;};}
 // ---- ⑥ 헌터 공격 7프레임 좌·우(사용자 09:58 드라이브 hunter_attack7_lr_v001 — "헌터는 항상 공격 시 방향에 맞게 이거 사용") ----
 //  assets/r425/hunter/attack-{l,r}.webp(scripts/r425-hunter-attack.py, 우 = 좌 정확 반전 원화). 적이 화면 왼쪽이면 l, 오른쪽이면 r(가로 차이가 작으면 마지막 쪽).
 //  화살은 엔진이 누르는 순간 쏘므로 R351 과 같이 '놓기'(5번째 칸) 90ms 전부터 재생하고 다음 발사 전에 끝나도록 빠르게 돌린다. 키 = 서 있기 키(칸 몸 201px 기준), 발 = 시트 발 기준점.
 let HUNT=null,huntReq=false;const huntSwing={t0:-9,side:'r',prev:0,scale:1};
-function huntIndex(){if(HUNT||huntReq||typeof fetch!=='function')return;huntReq=true;fetch('assets/r425/hunter/index.json').then(r=>r.ok?r.json():null).then(j=>{if(j?.anims)HUNT=j;else huntReq=false;}).catch(e=>{huntReq=false;fail(e);});}
+let huNext=0,huTries=0;function huntIndex(){if(HUNT||huntReq||typeof fetch!=='function'||T()<huNext||huTries>6)return;huntReq=true;fetch('assets/r425/hunter/index.json').then(r=>r.ok?r.json():null).then(j=>{if(j?.anims)HUNT=j;else{huntReq=false;huNext=T()+Math.min(30,2**huTries++);}}).catch(e=>{huntReq=false;huNext=T()+Math.min(30,2**huTries++);fail(e);});}
 function huntImg(f){try{const row=typeof readyImage==='function'?readyImage('assets/r425/hunter/'+f):null;if(row?.image)return row.image;if(typeof ensureImages==='function')Promise.resolve(ensureImages(['assets/r425/hunter/'+f])).catch(()=>{});}catch(_){}return null;}
 function huntSide(){try{const q=project(player.x,player.y);let best=null,bd=9;for(const e of room?.enemies||[]){if(!(e?.hp>0)||e.visible===false)continue;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d<bd){bd=d;best=e;}}
  if(best){const b=project(best.x,best.y);if(Math.abs(b.x-q.x)>2)return b.x<q.x?'l':'r';}}catch(_){}const d=player?.direction;return d==='left'?'l':d==='right'?'r':huntSwing.side;}
@@ -357,7 +357,7 @@ function faceFix(e,cmds,st,fx){try{unback(e,cmds,st);}catch(err){fail(err);}
 const CLEAN425=new Set(["assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp", "assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp", "assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp", "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp", "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp", "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp"]);
 if(typeof urlFor==='function'){const ub=urlFor;urlFor=function(path,...a){try{const p=typeof cleanPath==='function'?cleanPath(path):path;if(prefs.clean!==false&&CLEAN425.has(p)){stats.cleanRedirects=(stats.cleanRedirects||0)+1;return ub.call(this,'assets/r425/clean/'+p,...a);}}catch(err){fail(err);}return ub.call(this,path,...a);};}
 // ---- 설정 창(빠른 설정 '설정' 패널, R420 보기 편의 묶음 끝): 적 공격·돌진 예고 표시 — 기본 꺼짐. R98 '적 공격 범위 미리보기(선)'도 같이 켜고 끈다 ----
-function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}return prefs.tele;}
+function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}try{window.__STORYWORLD_COMBAT_R170__?.set?.({quietTells:!v});}catch(_){}return prefs.tele;}
 function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
  const host=panel.querySelector('#accessR420')||(n>=3?panel.querySelector('#quickSettingsR114'):null);if(!host)return false;
  const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리, 기본 꺼짐)';

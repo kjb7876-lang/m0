@@ -34,11 +34,14 @@ const TAU=Math.PI*2;
 const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
 let warmed=false;function warm(){const S=SP();if(!S?.warm)return;warmed=true;try{S.warm(BLOOD,['spark','slashwide','glow','slashline','cross','flare','flame','spike']);S.warm(DEEP,['petal','slashwide','glow','smoke','orb','cross']);}catch(e){fail(e);}}
 const live=()=>{try{return typeof liveEnemies==='function'?liveEnemies():(room?.enemies||[]).filter(e=>e.hp>0);}catch(_){return [];}};
+const coolK=()=>{let f=1;try{f*=+window.__STORYWORLD_PROGRESSION_R62__?.factors?.()?.cooldown||1;}catch(_){}try{const U=window.__STORYWORLD_UPGRADES_R169__,pr=U?.inspect?.()?.prefs;if(pr&&pr.square&&pr.boost!==false&&solo())f*=+U.ratios?.()?.cool||1;}catch(_){}return f>0&&f<=1.5?f:1;};
+const seeLine=(a,b)=>{try{return typeof clearLine!=='function'||clearLine(a,b);}catch(_){return true;}};
+const ego=()=>{try{return !!window.__STORYWORLD_EGO151__?.inspect?.()?.state?.active;}catch(_){return false;}};
 const dmgOK=e=>{try{return typeof damageable3==='function'?damageable3(e):e.hp>0;}catch(_){return e?.hp>0;}};
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const blood=(name,x,y,o)=>{try{return window.__STORYWORLD_BLOOD_R190__?.play?.(name,x,y,o);}catch(_){return null;}};
 let fxSelf=false;
-function deal(e,amount,tag){if(!e||!dmgOK(e)||!(amount>0))return false;const src={kind:'r425',friendly:true,owner:'hero',r425:tag,sourceHero:HERO};try{return hitEnemy(e,amount,src);}catch(err){fail(err);return false;}}
+function deal(e,amount,tag){if(!e||!dmgOK(e)||!(amount>0))return false;const src={kind:'r425',friendly:true,owner:'hero',r425:tag,sourceHero:HERO,r118Splash:true};try{return hitEnemy(e,amount,src);}catch(err){fail(err);return false;}}
 function shakeIt(v){try{if(typeof shake==='number'&&!(typeof settings==='object'&&settings?.reducedMotion))shake=Math.max(shake,v);}catch(_){}}
 // ---------------------------------------------------------------- R
 let R=null;// {t0,x,y,power,crosses:[{x,y,k}],burst:false,auraEnd}
@@ -51,26 +54,26 @@ function startR(x,y,castId){const p=player;R={t0:T(),x,y,castId,room:typeof room
 function rTick(){if(!R)return;const t=T(),age=t-R.t0;let rm=null;try{rm=room;}catch(_){}
  if(rm!==R.room||!isHero()){R=null;return;}
  if(!R.burst&&age>=.55){R.burst=true;const hit=new Set();
-  for(const c of R.crosses){blood(c.big?'blood-death':'blood-burst',c.x,c.y,{k:c.k*1.15,z:0});for(const e of live())if(!hit.has(e)&&dist(e,c)<=c.r+(e.radius||.3)){hit.add(e);deal(e,R.power*c.m,'r-burst');}stats.bursts++;}
+  for(const c of R.crosses){blood(c.big?'blood-death':'blood-burst',c.x,c.y,{k:c.k*1.15,z:0});for(const e of live())if(!hit.has(e)&&dist(e,c)<=c.r+(e.radius||.3)&&seeLine(c,e)){hit.add(e);deal(e,R.power*c.m,'r-burst');}stats.bursts++;}
   shakeIt(7);}
  if(t>=R.auraStart&&t<R.auraEnd&&solo())chase();
  if(t>=R.auraEnd&&age>1)R=null;}
 const auraOn=()=>!!(R&&T()>=R.auraStart&&T()<R.auraEnd&&isHero());
-function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=typeof joystickVector==='object'?joystickVector:{x:0,y:0};return !!((k&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(x=>k.has(x)))||Math.hypot(j.x||0,j.y||0)>.15||(typeof route!=='undefined'&&Array.isArray(route)&&route.length&&typeof command!=='undefined'&&command));}catch(_){return false;}}
+function manualInput(){try{const k=typeof keys==='object'&&keys?keys:null,j=typeof joystickVector==='object'?joystickVector:{x:0,y:0};return !!((k&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].some(x=>k.has(x)))||Math.hypot(j.x||0,j.y||0)>.15||(typeof route!=='undefined'&&Array.isArray(route)&&route.length>0)||(typeof command!=='undefined'&&!!command));}catch(_){return false;}}
 let lastChase=0;
 function chase(){const p=player,t=T();const dt=Math.min(.05,Math.max(0,t-lastChase));lastChase=t;if(manualInput()||(typeof modal!=='undefined'&&modal))return;
- let best=null,bd=9;for(const e of live()){const d=dist(e,p);if(d<bd&&dmgOK(e)){bd=d;best=e;}}if(!best)return;
+ let best=null,bd=9;for(const e of live()){const d=dist(e,p);if(d<bd&&dmgOK(e)&&seeLine(p,e)){bd=d;best=e;}}if(!best)return;
  const h=typeof HEROES==='object'?HEROES[p.hero]:null,range=(h?.range||3.3)*.8;
  try{if(typeof target!=='undefined')target=best.id;}catch(_){}
  if(bd>range&&dt>0&&typeof moveActor==='function'){const v={x:(best.x-p.x)/bd,y:(best.y-p.y)/bd},sp=4.4*dt;moveActor(p,v.x*sp,v.y*sp);p.moveVX150=v.x;p.moveVY150=v.y;try{if(typeof facing==='function')p.direction=facing(v.x,v.y);}catch(_){}stats.chaseSteps++;}
  else if(!(p.attackCD>0)&&typeof basicAttack==='function'){try{basicAttack(true);stats.autoSwings++;}catch(e){fail(e);}}}
-function chainBurst(e,depth){const k=e.boss||e.midboss?1.6:1.3;blood('blood-burst',e.x,e.y,{k,z:0});const hit=[];for(const v of live())if(dist(v,e)<=1.5+(v.radius||.3)){hit.push(v);deal(v,R.power*(depth?.3:.45),'r-chain');}stats.chains++;
- if(depth<1){const next=live().filter(v=>v!==e&&dmgOK(v)&&dist(v,e)<=2.6).sort((a,b)=>dist(a,e)-dist(b,e))[0];if(next&&typeof delay==='function')delay(.12,()=>{if(auraOn()&&dmgOK(next))chainBurst(next,depth+1);},'hero');}}
+function chainBurst(e,depth){const k=e.boss||e.midboss?1.6:1.3;blood('blood-burst',e.x,e.y,{k,z:0});const hit=[];for(const v of live())if(dist(v,e)<=1.5+(v.radius||.3)&&seeLine(e,v)){hit.push(v);deal(v,R.power*(depth?.3:.45),'r-chain');}stats.chains++;
+ if(depth<1){const next=live().filter(v=>v!==e&&dmgOK(v)&&dist(v,e)<=2.6&&seeLine(e,v)).sort((a,b)=>dist(a,e)-dist(b,e))[0];if(next&&typeof delay==='function')delay(.12,()=>{if(auraOn()&&dmgOK(next))chainBurst(next,depth+1);},'hero');}}
 // ---------------------------------------------------------------- Q
 let Q=null;// {t0,x,y,angle,power,launched,hit:Set,fx}
 const bleeds=new Map();// e -> {next,left,amt}
 function qReady(){return on&&isHero()&&solo()&&typeof started!=='undefined'&&started&&!(typeof modal!=='undefined'&&modal)&&!(typeof loading!=='undefined'&&loading)&&!(player.specialCD>0);}
-function castQ(){const p=player,rk=typeof rank==='function'?rank('special'):0;p.specialCD=10*(1-.05*rk);p.skillAnim=.6;
+function castQ(){const p=player,rk=typeof rank==='function'?rank('special'):0;p.specialCD=10*(1-.05*rk)*(typeof COMBAT_RHYTHM_R26==='number'?COMBAT_RHYTHM_R26:1);p.specialCD=Math.max(.22,p.specialCD*coolK());p.skillAnim=.6;
  const power=(typeof attackPower==='function'?attackPower():48)*(2.4+.36*rk),e=typeof nearestEnemy==='function'?nearestEnemy(12):null,a=e?Math.atan2(e.y-p.y,e.x-p.x):(typeof storyAim22==='function'?storyAim22():0);
  try{if(typeof facing==='function')p.direction=facing(Math.cos(a),Math.sin(a));}catch(_){}try{if(typeof sound==='function')sound('special');}catch(_){}
  Q={t0:T(),x:p.x,y:p.y,angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
@@ -80,9 +83,9 @@ function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=r
  if(Q.launched){const u=Math.min(1,(t-Q.ft)/.95),nx=Q.x+Math.cos(Q.angle)*8.5*u,ny=Q.y+Math.sin(Q.angle)*8.5*u;
   if(typeof blocked==='function'&&blocked(nx,ny,.2)&&u>.05){Q.stopU??=u;}
   const uu=Q.stopU??u,cx=Q.x+Math.cos(Q.angle)*8.5*uu,cy=Q.y+Math.sin(Q.angle)*8.5*uu;if(Q.fx){Q.fx.x=cx;Q.fx.y=cy;}
-  for(const e of live())if(!Q.hit.has(e)&&dist(e,{x:cx,y:cy})<=1.0+(e.radius||.3)){Q.hit.add(e);if(deal(e,Q.power*.9,'q-tornado')){stats.qHits++;bleeds.set(e,{next:t+.8,left:5,amt:Q.power*.07});blood('blood-splash',e.x,e.y,{k:.9,z:AH()*.5});}}
+  for(const e of live())if(!Q.hit.has(e)&&dist(e,{x:cx,y:cy})<=1.0+(e.radius||.3)){Q.hit.add(e);if(deal(e,Q.power*.9,'q-tornado')){stats.qHits++;bleeds.set(e,{next:t+.8,left:5,amt:Q.power*.07,room:Q.room});blood('blood-splash',e.x,e.y,{k:.9,z:AH()*.5});}}
   if(u>=1||Q.stopU!=null&&t-Q.ft>.95)Q=null;}}
-function bleedTick(){if(!bleeds.size)return;const t=T();for(const [e,b] of bleeds){if(!(e.hp>0)){bleeds.delete(e);continue;}if(t>=b.next){b.next=t+.8;b.left--;deal(e,b.amt,'q-bleed');blood('blood-splash',e.x,e.y,{k:.55,z:AH()*.35});stats.bleedTicks++;if(b.left<=0)bleeds.delete(e);}}}
+function bleedTick(){if(!bleeds.size)return;const t=T();let rmB=null;try{rmB=room;}catch(_){}for(const [e,b] of bleeds){if(!(e.hp>0)||(b.room&&b.room!==rmB)){bleeds.delete(e);continue;}if(t>=b.next){b.next=t+.8;b.left--;deal(e,b.amt,'q-bleed');blood('blood-splash',e.x,e.y,{k:.55,z:AH()*.35});stats.bleedTicks++;if(b.left<=0)bleeds.delete(e);}}}
 // ---------------------------------------------------------------- 그림
 function drawCrosses(){const S=SP();if(!R||!S?.draw||typeof project!=='function')return;const age=T()-R.t0;if(age>1.0)return;const H=AH();
  const grow=Math.min(1,age/.35),fade=age<.55?1:Math.max(0,1-(age-.55)/.45);
@@ -150,15 +153,15 @@ function flip(rec,st){const age=T()-Q.t0;if(age>.32)return;if(Math.floor(age/.05
  if(best){best.points=best.points.map(([x,y])=>[2*q.x-x,y]);stats.flips++;}}
 // ---------------------------------------------------------------- 연결
 if(typeof fx==='function'){const base=fx;fx=function(type,x,y,opt){
- try{const o=opt||{};if(on&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero===HERO&&o.sourceSlot==='r'&&!o.r139SamongUlt&&isHero()){
-   if(o.castId!=null&&(!R||R.castId!==o.castId)&&o.stage!=='hit')startR(player.x,player.y,o.castId);return null;/* 옛 R 그림(73a 원천·R366 회오리·R209 칼자국)은 띄우지 않는다 */}}catch(e){fail(e);}
+ try{const o=opt||{};if(on&&solo()&&!ego()&&type==='storySourceSkill'&&o.storyWER&&o.sourceHero===HERO&&o.sourceSlot==='r'&&!o.r139SamongUlt&&isHero()){
+   if(o.castId!=null&&(!R||R.castId!==o.castId)&&o.stage!=='hit'){startR(player.x,player.y,o.castId);/* 'warning' 신호를 삼키므로 R62·R169 재사용 대기 단축을 여기서 같은 식으로 */try{const k=HERO+':r',rd=player.storyWER?.ready,at=Number(rd?.[k]),now=typeof time==='number'?time:T(),f=coolK();if(rd&&Number.isFinite(at)&&at>now&&f!==1)rd[k]=now+Math.max(.35,(at-now)*f);}catch(e){fail(e);}}return null;/* 옛 R 그림(73a 원천·R366 회오리·R209 칼자국)은 띄우지 않는다 */}}catch(e){fail(e);}
  return base.apply(this,arguments);};}
 if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){
- if(on&&source&&source.storyWER&&source.sourceHero===HERO&&source.sourceSlot==='r'&&!source.r425&&typeof player==='object'&&player?.hero===HERO){stats.rBlocked++;return false;}/* 옛 R 7회 둘레 베기 피해 → 십자가 폭발로 대신 */
+ if(on&&solo()&&!ego()&&source&&source.storyWER&&source.sourceHero===HERO&&source.sourceSlot==='r'&&!source.r425&&typeof player==='object'&&player?.hero===HERO){stats.rBlocked++;return false;}/* 옛 R 7회 둘레 베기 피해 → 십자가 폭발로 대신 */
  const old=e?.hp;const r=base.apply(this,[e,amount,source,...a]);
- try{if(auraOn()&&e&&old>e.hp&&!(source&&source.r425)&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
+ try{if(auraOn()&&e&&old>e.hp&&!(source&&(source.r425||source.r118Splash||source.kind==='narrative-companion-r75'||source.kind==='awakening-shock'||/samong|사몽/i.test(String(source.kind||''))))&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
  return r;};}
-if(typeof special==='function'){const base=special;special=function(...a){if(on&&typeof player==='object'&&player?.hero===HERO&&solo()){if(qReady())castQ();return;}return base.apply(this,a);};}
+if(typeof special==='function'){const base=special;special=function(...a){if(on&&!ego()&&typeof player==='object'&&player?.hero===HERO&&solo()){if(qReady())castQ();return;}return base.apply(this,a);};}
 if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();rTick();qTick(dt);bleedTick();}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){if(f&&f.type==='r425-tornado'){try{scope({id:'r425:tornado',kind:'effect',x:f.x,y:f.y,groundAligned:false},()=>drawTornado(f));}catch(e){fail(e);}return;}return base.apply(this,[f,...a]);};}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.launched||T()-Q.ft<.16);
