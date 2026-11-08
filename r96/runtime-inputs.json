@@ -6033,6 +6033,7 @@
     "assets/r430/tendril.webp",
     "assets/r430/index.json",
     "guide-clear-r426.js",
+    "doors-fit-r413.js",
     "props-tidy-r412.js"
   ],
   "mediaPaths": [
@@ -7108,5 +7109,5 @@
     }
   ],
   "archiveSHA256": "0f396c304d27d42d394058f92efc348ed4d8f0c51179ed3a032ae60773fd28a9",
-  "runtimeManifestSHA256": "68e9f18c3f5b826ec5827b0d6280ecff8f3f4ff56ece29d7b99e4cc4c14e4833"
+  "runtimeManifestSHA256": "3b528a038be92b66379c5838049f1034c83791a942e612bf16f6a17b73610fa3"
 }
