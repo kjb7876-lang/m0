@@ -44,7 +44,7 @@ function layer(kind,age){if(!IDX||typeof ctx==='undefined'||!ctx||typeof project
 const BODY=/r351\/slayer\/|hero_direction|hero-authored|assets\/heroes\/|r121\/|r119\/heroes\/|r143\//;
 function body(rec,st){let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;
   const s=String(c.sourcePath||c.image?.src||'');if(!(c.r351||BODY.test(s))||/r366|fx|effect/.test(s))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}return best;}
-function spin(rec,st,age){const c=body(rec,st);if(!c)return false;const q=project(player.x,player.y),ang=age*SPIN*TAU,cs=Math.cos(ang),k=(cs<0?-1:1)*Math.max(.16,Math.abs(cs));
+function spin(rec,st,age){const c=body(rec,st);if(!c)return false;const q=project(player.x,player.y),ang=age*SPIN*TAU,cs=Math.cos(ang),k=(cs<0?-1:1);/* R425: 종이처럼 가로 폭을 줄이지 않고 좌·우 반전으로만 돈다(사용자 2026-11-08) */
  // R351 공격 그림이면 반 바퀴마다 공격 칸 1→4(0부터 0~3)을 돈다(칼을 휘두르며 회전)
  const A=window.__STORYWORLD_SLAYER_R351__?.index?.()?.anims?.attack?.w;
  if(A&&String(c.sourcePath||'').includes(A.file)&&Array.isArray(c.sourceRect)){const cw=A.cell[0],chh=A.cell[1],fr=Math.min(A.n-1,Math.floor(((ang/Math.PI)%1)*4)),col=fr%A.cols,row=Math.floor(fr/A.cols);

@@ -1,4 +1,4 @@
-// R277 CPU check: 환도 대기 = 걷기 마지막 칸 고정, 이동 4방향, 공격 좌·우·아래(위 → 좌·우).
+// R277 CPU check: 환도 대기 = 걷기 마지막 칸 고정, 이동 4방향, 공격 좌·우만(R425: 위·아래 → 좌·우).
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const R=path.join(__dirname,'..','..'),C=f=>fs.readFileSync(path.join(R,'client-source',f),'utf8'),RT=f=>fs.readFileSync(path.join(R,'runtime-text',f),'utf8');
 const checks=[];const ok=(n,p,d)=>checks.push({name:n,pass:!!p,detail:d});
@@ -10,9 +10,9 @@ ok('off switch storyworld.r277.hwando',/storyworld\.r277\.hwando/.test(src));
 const store={};const win={localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>{store[k]=v;}}};win.window=win;vm.runInNewContext(src,win);
 const P=win.__STORYWORLD_HWANDO_R277__;
 ok('idle = walk clip, last frame (frame -1 → n-1), every direction',['n','s','e','w'].every(d=>{const r=P.idle(d);return r.anim==='walk'&&r.dir===d&&r.frame===-1;}));
-// R349(사용자 2026-11-05 "이동및 공격모션을 위,좌,우로만"): 공격은 e/w/n, 아래 → 가로 성분, 없으면 마지막 가로 방향
-const out=[P.attackDir('e',10),P.attackDir('s',-30),P.attackDir('s',40),P.attackDir('w',-5),P.attackDir('s',0),P.attackDir('n',0)];
-ok('attack dirs only e/w/n; down → horizontal component, else last horizontal',out.join()==='e,w,e,w,w,n',out);
+// R425(사용자 2026-11-08 "공격 시에는 항상 좌나 우 공격 모션"): 공격은 e/w 만 — 위·아래 → 가로 성분, 없으면 마지막 가로 방향
+const out=[P.attackDir('e',10),P.attackDir('s',-30),P.attackDir('s',40),P.attackDir('w',-5),P.attackDir('s',0),P.attackDir('n',0),P.attackDir('n',30),P.attackDir('n',-30)];
+ok('attack dirs only e/w; up/down → horizontal component, else last horizontal',out.join()==='e,w,e,w,w,w,e,w',out);
 ok('R271 consults R277: idle draws a walk frame (n-1, or the R283 side stance) (no idle clip), attack via aimDir, no idle preload',/P\.idle\(dd?\);return draw\(rec,st,best,'walk',dd?,(I\?Math\.min\(I\.frame,w\.n-1\):)?w\.n-1\)/.test(r271)&&/const d=aimDir\(\),a=atkOf\(d\)/.test(r271)&&/P277\(\)\?\['walk'\]:\['walk','idle'\]/.test(r271)&&/P\.attackDir\(d,v\?v\[0\]:0\)/.test(r271));
 ok('R242 still yields to R271 (no old idle/ready drawn)',(C('hwando-r242.js').match(/__STORYWORLD_HWANDO_R271__\?\.active\?\.\(\)/g)||[]).length===2);
 ok('judgement untouched',!/hitEnemy|basicAttack=|attackCD=/.test(src+r271));
