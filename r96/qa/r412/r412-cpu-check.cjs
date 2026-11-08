@@ -11,7 +11,7 @@ ok('listed in verify-r96-public.py',fs.readFileSync(path.join(R,'..','scripts','
 ok('pages.yml runs this check',fs.readFileSync(path.join(R,'..','.github','workflows','pages.yml'),'utf8').includes('r96/qa/r412/r412-cpu-check.cjs'));
 const code=src.replace(/\/\/.*$/gm,'');
 ok('game ctx: no blur/drop-shadow filter, no shear transform',!/filter\s*=\s*['"][^'"]*(blur|drop-shadow)/.test(code)&&!/\.transform\(/.test(code));
-ok('does not wrap or replace engine draw functions (measures through drawProp, never reassigns it)',!/(^|[^.\w])(drawProp|sprite|drawAssetFrame3|drawImage|readyImage)\s*=(?!=)/.test(code.replace(/g\.drawImage=function/,'')));
+ok('wraps only drawProp (hold/fade, R412-9) and makeRoom (early pass) once each; never replaces sprite/drawAssetFrame3/drawImage/readyImage',!/(^|[^.\w])(sprite|drawAssetFrame3|drawImage|readyImage)\s*=(?!=)/.test(code.replace(/g\.drawImage=function/,''))&&(code.match(/(^|[^.\w])drawProp\s*=(?!=)/g)||[]).length===1&&/drawProp=function\(p,\.\.\.a\)\{if\(!p\|\|measuring\|\|/.test(code)&&(code.match(/(^|[^.\w])makeRoom\s*=(?!=)/g)||[]).length===1);
 ok('3D plane model matches phase1 worldPoint (camera-facing, leaning back 30 degrees)',/BACK=\.5\*Math\.SQRT1_2,RISE=Math\.sqrt\(3\)\/2/.test(src)&&/s\*SQ-BACK\*h,-s\*SQ-BACK\*h,RISE\*h/.test(src));
 // ---- 샌드박스 ----
 const store={};let blockedFn=()=>false,wallsFn=()=>[];
@@ -45,7 +45,15 @@ ok('untouchable: solid, interactive, samong function objects, clues, named narra
   chair={id:'r80:scene:z:4',x:1,y:13,path:'assets/world-r80/r80-145.webp',r80Dressing:true};
  const r={id:'t3',exploration:{floorCells:[],worldR74:{doors:[]}},props:[a,b,c,d,chair]};wallsFn=(x,y)=>x<2?[{dx:-1,dy:0,side:'-x',d:.7}]:[{dx:0,dy:-1,side:'-y',d:.7}];X.apply(r,{samples:()=>null});
  const net=p=>!!p.r303Flip!==X.r140Flips(p);
- ok('wall furniture ends up facing away from its back wall (-x wall mirrored, -y wall not), cancelling R140 variety flips',net(a)===true&&net(b)===false&&net(c)===true&&net(d)===false&&!c.r303Flip&&d.r303Flip===true,{a:net(a),b:net(b),c:net(c),d:net(d)});
+ ok('wall furniture ends up facing away from its back wall (-x wall mirrored, -y wall not), cancelling R140 variety flips',net(a)===true&&net(b)===false&&net(c)===true&&!c.r303Flip,{a:net(a),b:net(b),c:net(c)});
+ // R412 심사: 소파 r80-024 는 정면이 +x(긴 변이 오른쪽 위로) — -y 벽에서 뒤집고(R140 뒤집기와 상쇄해 결과가 뒤집힘) -x 벽에서는 그대로
+ ok('sofa r80-024 (painted facing +x) is mirrored on -y walls and kept on -x walls',net(d)===true&&!d.r303Flip,{d:net(d)});
+ {const e={id:'r224:furn:z:5',x:1,y:17,path:'assets/world-r80/r80-024.webp',r224Furniture:true,r303Flip:true},r2={id:'t3b',exploration:{floorCells:[],worldR74:{doors:[]}},props:[e]};X.apply(r2,{samples:()=>null});
+  ok('sofa on a -x wall keeps its painted facing (no mirror)',net(e)===false&&!e.r303Flip,{e:net(e)});}
+ {sb.window.__STORYWORLD_ASSETS_R80_DATA__={assets:{'r80-024':{scale:1.08,width:512,height:339,frame:{pivot:[136.117,330.511]}}}};const f={id:'r224:furn:z:7',x:9,y:1,path:'assets/world-r80/r80-024.webp',r80Art:'r80-024',r224Furniture:true},r3={id:'t3c',exploration:{floorCells:[],worldR74:{doors:[]}},props:[f]};X.apply(r3,{samples:()=>null});
+  const k=(.5-136.117/512)*1.08*(512/339)*66*2/68;delete sb.window.__STORYWORLD_ASSETS_R80_DATA__;
+  ok('mirroring an off-centre-pivot R80 sprite shifts its foot along screen-x so the body stays in place (sofa no longer swings behind the TV stand)',f.r303Flip===true&&Math.abs(f.x-(9+k))<.01&&Math.abs(f.y-(1-k))<.01&&Math.abs(f.r412Pivot-k)<.01,{x:f.x,y:f.y,k});}
+ ok('NATIVE_X lists only the +x-painted R80 pieces (sofa 024, fallen column 021)',X.NATIVE_X.test('assets/world-r80/r80-024.webp')&&X.NATIVE_X.test('assets/world-r80/r80-021.webp')&&!X.NATIVE_X.test('assets/world-r80/r80-148.webp')&&!X.NATIVE_X.test('assets/world-r80/r80-027.webp'));
  ok('free-standing chairs/tables/beds keep their variety flip',!chair.r303Flip);
  delete sb.window.__STORYWORLD_PROPS_VARIETY_R140__;}
 // R111(벽 간격)이 켜져 있으면 소품은 숨은 r111To 자리에 그려진다 → 그 자리를 기준으로 재고, 옮길 때도 r111To 만 바꾼다(x·y 배치 자료 그대로)
@@ -190,7 +198,47 @@ ok('R92 lamps keep 7 tiles apart even beside doors and stay 1.5 tiles off other 
 // 동굴(R204) 발밑 그늘: 보이는 발 자리를 따라가고 숨긴 장식엔 깔지 않으며, R412 가 옮기거나 숨기거나 등불을 빼면 다시 깐다
 const cave=C('cave-r204.js');ok('cave floor shadows follow the visible foot (R111/R412 draw spot), skip hidden props, and are re-laid after R412 moves, hides or removes props',/const footR412=q=>/.test(cave)&&/!q\.r303Hide\)\.map\(q=>\(\{q,f:footR412\(q\)\}\)\)/.test(cave)&&/function shadowSync\(r,st,frame\)/.test(cave)&&/spriteSight\(st\);shadowSync\(r,st,frame\);/.test(cave)&&/shadowKey:shadowKey\(roomOf\(frame\)\)/.test(cave)&&fs.readFileSync(path.join(RT,'cave-r204.js'),'utf8')===cave);
 // R329: 그림자는 늘 뒤쪽
-const r329=C('prop-shadow-r329.js');ok('R329 shadows never fall in front (lights behind a prop fall back to the viewer-side light)',/L=L0&&L0\.y<=0\?L0:null/.test(r329)&&!/L\.y>\.2\?-\.6:1/.test(r329)&&/R329-prop-shadow-8/.test(r329));
+const r329=C('prop-shadow-r329.js');ok('R329 shadows never fall in front (only lights clearly in front blend in; side shift ≤.3h; always up; lighter alpha)',/const w=L0&&!back\?Math\.max\(0,Math\.min\(1,\(-L0\.y-\.15\)\/\.35\)\):0/.test(r329)&&/oy=Math\.min\(oy,-h\*\.05\)/.test(r329)&&/ALPHA=\.25/.test(r329)&&!/L\.y>\.2\?-\.6:1/.test(r329)&&/R329-prop-shadow-9/.test(r329));
 ok('R329 matches the shadow to the R111/R412 draw spot (r111To), not x/y, and takes light/sight from the visible foot',/s=T\.spotOf\(p\)\|\|p;f=T\.footOf\(p\)\|\|p;mir=!!T\.mirrored\(p\);/.test(r329)&&/q=project\(s\.x,s\.y\)/.test(r329)&&/wx:f\.x,wy:f\.y,self:p,flip:mir/.test(r329));
+// ---- R412-9(7분야 심사 반영) ------------------------------------------------------------------------------
+// ① 입장 직후: 아직 안 잰 조형물은 감추고(HOLD_MS), 잰 뒤에는 FADE_MS 동안 나타난다. 잴 때(bodyOf)는 감추지 않는다.
+{let T=1000;const calls=[];const ctx={globalAlpha:1,_s:[],save(){this._s.push(this.globalAlpha);},restore(){this.globalAlpha=this._s.pop();}};
+ const sb2={window:{StoryPhase1:{explorationBlocked:()=>false},__STORYWORLD_PROPS_PLACE_R406__:{walls:()=>[],indoorOf:()=>false}},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,performance:{now:()=>T},
+  Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp,ctx,loading:false,room:{id:'h',exploration:{floorCells:[[0,0]],worldR74:{doors:[]}},props:[]},
+  drawProp:function(p){calls.push([p.id,ctx.globalAlpha]);},makeRoom:function(){return sb2.__made;}};
+ vm.createContext(sb2);vm.runInContext(src,sb2);const Y=sb2.window.__STORYWORLD_PROPS_TIDY_R412__;
+ const p={id:'r74:z:scenery:1',x:3,y:3,path:'assets/x/statue.webp'};sb2.room.props.push(p);
+ vm.runInContext('drawProp(room.props[0])',sb2);ok('unmeasured props near the room start are held back (not drawn) instead of popping later',calls.length===0&&p.r412Held>0,{calls});
+ p.r412Wall=1;T+=10;vm.runInContext('drawProp(room.props[0])',sb2);const a1=calls[0]&&calls[0][1];
+ T+=Y.FADE_MS+5;vm.runInContext('drawProp(room.props[0])',sb2);const a2=calls[1]&&calls[1][1];
+ ok('once measured they fade in over FADE_MS (alpha ramps from near 0 to 1), then draw normally',a1<.2&&a2===1&&!p.r412FadeT,{a1,a2});
+ const q={id:'r74:z:scenery:2',x:5,y:5,path:'assets/x/statue.webp',r412Wall:1};sb2.room.props.push(q);vm.runInContext('drawProp(room.props[1])',sb2);const n0=calls.length;
+ q.r303Flip=true;q.r412FadeT=T;T+=50;vm.runInContext('drawProp(room.props[1])',sb2);ok('a change to an already-drawn prop (move/flip) fades the new look in instead of snapping',calls.length===n0+1&&calls[n0][1]>0&&calls[n0][1]<1,{a:calls[n0]});
+ T+=Y.HOLD_MS+10;const z={id:'r74:z:scenery:3',x:7,y:7,path:'assets/x/statue.webp'};sb2.room.props.push(z);vm.runInContext('drawProp(room.props[2])',sb2);ok('after HOLD_MS unmeasured props draw normally (never hidden for long)',calls[calls.length-1][0]==='r74:z:scenery:3'&&calls[calls.length-1][1]===1);
+ const w={id:'r74:z:wall-banner:4',x:2,y:2,path:'assets/x/banner.webp'};T=sb2.performance.now();sb2.room={...sb2.room,props:[w]};vm.runInContext('drawProp(room.props[0])',sb2);ok('wall dressing (WALLISH) and untouchable props are never held',calls[calls.length-1][0]==='r74:z:wall-banner:4');
+ ok('bodyOf measuring passes through the hold (measuring counter around its drawProp calls)',/ctx=g;measuring\+\+;/.test(src)&&/try\{drawProp\(p\);if\(!rec\.length\)drawProp\(p\);\}finally\{measuring--;\}/.test(src));
+ // ② 방을 만들 때(첫 그리기 전) 방향·등불을 정한다
+ const cells=[];for(let x=0;x<20;x++)for(let y=0;y<20;y++)cells.push([x,y]);const lampsP=[];for(let i=0;i<5;i++)lampsP.push({id:'lamp'+i,x:3+i*2,y:10,path:'assets/r406/lights/lantern-bulb-post.png'});
+ const sofa={id:'r224:furn:m:0',x:1,y:6,path:'assets/world-r80/r80-148.webp',r224Furniture:true};sb2.window.__STORYWORLD_PROPS_PLACE_R406__={walls:(L,x,y)=>x<2?[{dx:-1,dy:0,side:'-x',d:.7}]:[{dx:0,dy:-1,side:'-y',d:3}],indoorOf:()=>true};
+ sb2.__made={id:'made',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[...lampsP,sofa]};const made=vm.runInContext('makeRoom()',sb2);
+ ok('makeRoom hook: lamps are thinned and wall furniture faced before the first frame (no late pop)',Array.isArray(made.r412Lamps)&&made.r412Lamps.length>=1&&sofa.r303Flip===true&&Y.inspect().stats.early>=1,{lamps:made.r412Lamps&&made.r412Lamps.length,flip:sofa.r303Flip});}
+// ③ 옮길 자리 앞 이웃이 그림의 1/4 넘게 덮으면 버린다
+{const sb3={window:{},localStorage:{getItem:()=>null,setItem(){}},setTimeout:()=>0,Math,JSON,String,Object,Number,Array,Set,Map,WeakMap,Error,RegExp,zoom:1,project:(x,y)=>({x:(x-y)*34,y:(x+y)*17})};
+ vm.createContext(sb3);vm.runInContext(src,sb3);const Z=sb3.window.__STORYWORLD_PROPS_TIDY_R412__;
+ const p={id:'sofa',x:5,y:5,height:60,r412Rect:[-40,40,-50,0,1]},front={id:'tv',x:6,y:6,height:90},back={id:'shelf',x:4,y:4,height:90};
+ ok('covered(): a taller neighbour standing in front over the moved sprite rejects the spot; one behind does not',Z.covered(p,5,5,new Map([[front,{x:6,y:6}]]))===true&&Z.covered(p,5,5,new Map([[back,{x:4,y:4}]]))===false);
+ ok('unwall rejects covered spots and searches coarser after two cut attempts',/if\(n<=lim&&\(!best\|\|n<best\.n\)&&!covered\(p,x,y,feet\)\)best=/.test(src)&&/ds=tries>=2\?\.3:\.1,D3=tries>=2\?dirs\.slice\(0,3\):dirs/.test(src));}
+// ④ 야외 불빛 지역은 불꽃 하나는 남긴다(촛대·화로가 다 빠지던 dist03)
+{const cells=[];for(let x=0;x<20;x++)for(let y=0;y<20;y++)cells.push([x,y]);blockedFn=()=>false;wallsFn=()=>[{dx:0,dy:-1,side:'-y',d:1}];
+ const el=[0,1,2].map(i=>({id:'r74:o:scenery:'+i,x:2+i*8,y:2,path:'assets/props/v290/broken_street_lamp.webp'})),cand={id:'r80:scene:o:9',x:10,y:12,path:'assets/world-r80/r80-064.webp',r74Prop:'candle'},stone={id:'r80:scene:o:10',x:10.5,y:12.5,path:'assets/world-r80/r80-014.webp'};
+ const r={id:'out',exploration:{floorCells:cells,worldR74:{doors:[]}},props:[...el,cand,stone]};X.set({lamps:true});X.apply(r,{samples:()=>null});
+ ok('outdoor thinning keeps at least one flame (candle/brazier/torch) even when it stands beside another prop',r.props.includes(cand)&&X.isFlame(cand)&&!X.isFlame(el[0]),{kept:r.props.map(p=>p.id)});}
+// ⑤ 이웃 파일 맞춤: R300 빛은 보이는 발 자리·R412 ver 로 새로 읽고, R113 은 r111To 가 있으면 자기 자리를 쓰지 않고, R92 등불 종류는 자리 씨앗으로
+{const r300=C('light-atmos-r300.js'),r113=C('play-r113.js'),r92b=C('visual-r92.js');
+ ok('R300 light list follows R412 moves (footOf) and is re-read whenever R412 moves props or removes lamps (ver)',/T=window\.__STORYWORLD_PROPS_TIDY_R412__,v=T\?\.ver\?\.\(\)\|\|0;/.test(r300)&&/c&&c\.n===n&&c\.v===v/.test(r300)&&/f=T\?\.footOf\?\.\(p\)\|\|p/.test(r300)&&/c=\{n,v,list\}/.test(r300)&&fs.readFileSync(path.join(RT,'light-atmos-r300.js'),'utf8')===r300);
+ ok('R113 ground pass never moves a prop that has an R111/R412 draw spot (r111To), even if it cached a spot earlier',/\{const p0=propById\(id\);if\(p0&&p0\.r111To\)return null;\}/.test(r113)&&fs.readFileSync(path.join(RT,'play-r113.js'),'utf8')===r113);
+ ok('R92 lamp kind is fixed by its floor-cell seed, so thinning never changes the kind of a remaining lamp',/const it=set\[\(s\.seed>>>0\)%set\.length\]/.test(r92b));
+ ok('R412 idle slices yield when less than 2 ms remain (unless the idle callback timed out)',/!d\.didTimeout&&d\.timeRemaining\(\)<2\)\{IDLE\(step,\{timeout:100\}\);return;\}/.test(src));
+ ok('wall grid and floor sets use numeric keys (no per-point string keys)',/GK=\(x,y\)=>\(x\+32768\)\*65536\+\(y\+32768\)/.test(src)&&!/gx\+','\+gy/.test(src)&&/F\.has\(GK\(Math\.floor\(x\),Math\.floor\(y\)\)\)/.test(src));}
 let fail=0;for(const c of checks){console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));if(!c.pass)fail++;}
 if(fail){console.log(fail+' failed');process.exit(1);}console.log('R412 CPU '+checks.length+'/'+checks.length);

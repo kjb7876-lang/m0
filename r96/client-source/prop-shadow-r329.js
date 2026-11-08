@@ -9,11 +9,13 @@
 //  · storyworld.r329.propShadow = '0' 이면 끈다.
 (()=>{'use strict';
 if(window.__STORYWORLD_PROP_SHADOW_R329__)return;
-const REV='R329-prop-shadow-8',KEY='storyworld.r329.propShadow';
+const REV='R329-prop-shadow-9',KEY='storyworld.r329.propShadow';
 let on=true;try{on=localStorage.getItem(KEY)!=='0';}catch(_){}
 const stats={props:0,cast:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,160);};
 // 그림자: 키의 LEN 배로 눕히고, 키의 SHIFT 만큼 오른쪽·RISE 만큼 위(물체 뒤)로. 진하기 ALPHA(두 장 겹침 기준).
-const LEN=.9,SHIFT=.3,RISE=.12,ALPHA=.42,SOFT=2;
+const LEN=.9,SHIFT=.12,RISE=.1,ALPHA=.25,SOFT=2,MAX_SIDE=.3;
+// R412 심사(7분야, 2026-11-08): 두 장 겹친 검정(.42 → 합 .66, 빛 곁 .83)이 바닥(L*31) 위에서 L*9~13 구멍처럼 읽혔다 → 한 장 .25(합 ≈.44, 바닥보다 L* 10~14 낮게),
+//  빛 곁에서 더 진하게 하던 것(1+.4k)은 뺐다. 발밑에서 통째로 .3h 옆으로 밀어 조형물과 그림자 사이에 밝은 틈이 보이던 것 → .12h.
 // 낱말 경계로만 맞춘다('outdoor' 안의 door 처럼 경로 일부에 걸려 R99 나무가 모두 빠지던 것 — Codex 리뷰).
 const WALLISH=/(?:^|[^a-z])(?:walls?|doors?|gates?|banners?|torch(?:es)?|reliefs?|frames?|windows?|paintings?|portals?|signs?|sconces?|curtains?|posters?|clocks?|mirrors?|vents?|rugs?|carpets?|decals?|stains?|puddles?|blood(?=-)|cracks?)(?=[^a-z]|$)/i;
 const recent=[];let cur=null,depth=0;
@@ -24,11 +26,20 @@ const LIGHT_R=4.5;
 function lightDir(c){try{const W=window.__STORYWORLD_LIGHT_ATMOS_R300__,list=(W?.lightsOf?.(room)||[]).concat(window.__STORYWORLD_DISASTER_R330__?.lights?.()||[]);let best=null,bd=LIGHT_R;
   for(const l of list){if(c.self&&l.x===c.self.x&&l.y===c.self.y)continue;const d=Math.hypot(l.x-c.wx,l.y-c.wy);if(d<bd&&d>.15){bd=d;best=l;}}
   if(!best)return null;const a=project(best.x,best.y),b=project(c.wx,c.wy),dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1;stats.lit=(stats.lit||0)+1;return{x:dx/L,y:dy/L,k:1-bd/LIGHT_R};}catch(e){fail(e);return null;}}
+// 뒷벽(-x·-y) 1.2칸 안에 등을 댄 조형물인가 — R406 walls(네 방향 벽까지 거리)로 방·발 자리마다 한 번만 잰다
+const backMemo=new WeakMap();
+function wallBacked(p,x,y){try{const L=typeof room!=='undefined'&&room?room.exploration:null,W=window.__STORYWORLD_PROPS_PLACE_R406__?.walls;if(!L||typeof W!=='function'||!Number.isFinite(x+y))return false;
+ const m=backMemo.get(p);if(m&&m.L===L&&Math.abs(m.x-x)<.05&&Math.abs(m.y-y)<.05)return m.v;const v=W(L,x,y).some(q=>(q.dx<0||q.dy<0)&&q.d<=1.2);backMemo.set(p,{L,x,y,v});return v;}catch(e){fail(e);return false;}}
 function castVia(fn,self,args,xi,yi,hi,oi,footY,c){const x=+args[xi],h=+args[hi];if(!Number.isFinite(x+footY)||!(h>6))return;
- /* 손전등 시야(R24)에서 안 보이는 조형물은 그림자도 그리지 않는다(벽 뒤 조형물의 검은 그림자만 남던 것 — Codex 리뷰) */try{const SG=window.__STORYWORLD_SIGHT24__;if(c&&SG?.enabled&&typeof SG.pointVisible==='function'&&Number.isFinite(c.wx)&&!SG.pointVisible(c.wx,c.wy)){stats.hidden=(stats.hidden||0)+1;return;}}catch(e){fail(e);}const L0=c&&Number.isFinite(c.wx)?lightDir(c):null,L=L0&&L0.y<=0?L0:null;/* R412(사용자 2026-11-08 "그림자는 조형물 앞이 아닌 뒤쪽에"): 빛이 조형물보다 화면 위(뒤)에 있으면 그림자가 앞(아래)으로 눕던 것을 막는다 → 그때는 보는 사람 쪽 빛(뒤·오른쪽 위)으로 */
- const opt=args[oi]&&typeof args[oi]==='object'?args[oi]:{},a=ALPHA*(L?1+.4*L.k:1)*Math.max(.25,Math.min(1,Number(opt.alpha??1)));
+ /* 손전등 시야(R24)에서 안 보이는 조형물은 그림자도 그리지 않는다(벽 뒤 조형물의 검은 그림자만 남던 것 — Codex 리뷰) */try{const SG=window.__STORYWORLD_SIGHT24__;if(c&&SG?.enabled&&typeof SG.pointVisible==='function'&&Number.isFinite(c.wx)&&!SG.pointVisible(c.wx,c.wy)){stats.hidden=(stats.hidden||0)+1;return;}}catch(e){fail(e);}const L0=c&&Number.isFinite(c.wx)?lightDir(c):null,back=!!(c&&c.self&&wallBacked(c.self,c.wx,c.wy));/* R412(사용자 2026-11-08 "그림자는 조형물 앞이 아닌 뒤쪽에"): 빛이 조형물보다 화면 위(뒤)에 있으면 그림자가 앞(아래)으로 눕던 것을 막는다 → 그때는 보는 사람 쪽 빛(뒤·오른쪽 위)으로 */
+ const opt=args[oi]&&typeof args[oi]==='object'?args[oi]:{},a=ALPHA*Math.max(.25,Math.min(1,Number(opt.alpha??1)));
  const fx=c&&c.flip?-1:1;/* R303 이 서쪽 벽 조형물을 ctx.scale(-1,1) 로 뒤집어 그리므로 그 안에서는 가로 밀기를 뒤집어야 화면 기준 방향이 맞다(Codex 리뷰) */
- const paint=()=>{ for(const dx of[-SOFT,SOFT]){ctx.save();try{if(L){const len=h*(.25+.3*L.k),sy=LEN*(.85+.3*L.k);/* R412: 앞으로 뒤집어 눕히던 갈래는 뺐다 — 여기 오는 빛은 늘 조형물 앞(화면 아래)에 있어 그림자는 뒤(위)로만 눕는다 */ctx.translate(x+dx+fx*L.x*len,footY+L.y*len*.6);ctx.scale(1,sy);ctx.translate(-x,-footY);}else{ctx.translate(x+dx+fx*h*SHIFT,footY-h*RISE);ctx.scale(1,LEN);ctx.translate(-x,-footY);}
+ /* R412 심사: 빛이 조형물 옆(같은 화면 줄)에 있으면 그림자가 옆으로 서서 검은 쌍둥이처럼 보였고(L0.y≤0 이면 다 받던 것), 움직이는 R330 불빛이 그 줄을 지나면 툭 바뀌었다.
+    → 빛 갈래는 빛이 뚜렷이 앞(화면 아래)에 있을 때만 서서히 섞고(L0.y −.15 → −.5), 옆 밀기는 키의 .3 까지, 늘 조금은 위(뒤)로. 뒷벽 1.2칸 안 조형물은 기본 그림자(벽 밑으로 숨음). */
+ const w=L0&&!back?Math.max(0,Math.min(1,(-L0.y-.15)/.35)):0;let ox=fx*h*SHIFT,oy=-h*RISE,sy=LEN;
+ if(w>0){const len=h*(.25+.3*L0.k);ox=ox*(1-w)+fx*L0.x*len*w;oy=oy*(1-w)+L0.y*len*.6*w;sy=LEN*(1-w)+LEN*(.85+.3*L0.k)*w;}
+ ox=Math.max(-h*MAX_SIDE,Math.min(h*MAX_SIDE,ox));oy=Math.min(oy,-h*.05);
+ const paint=()=>{ for(const dx of[-SOFT,SOFT]){ctx.save();try{ctx.translate(x+dx+ox,footY+oy);ctx.scale(1,sy);ctx.translate(-x,-footY);
    const b=args.slice();b[oi]={...opt,alpha:a,filter:'brightness(0)',blend:undefined};fn.apply(self,b);}finally{ctx.restore();}}
 };
  /* 3D 기록기: 그림자 복사본은 조형물 몸(bodyPath)으로 잡히지 않도록 바닥에 눕힌 별도 범위로 기록한다(서서 떠 보이지 않게 — Codex 리뷰) */

@@ -80,7 +80,7 @@
    // R412: 다른 조형물(가구·조각) 1.5칸 안에는 세우지 않고, 등불끼리는 문 옆 짝이라도 LIGHT_GAP 만큼 띄운다
    const foot=q=>{try{return window.__STORYWORLD_PROPS_TIDY_R412__?.footOf?.(q)||q;}catch(_){return q;}},others=(r.props||[]).filter(q=>q&&q.visible!==false&&!q.r303Hide&&!q.terrainWall&&finite(q)).map(foot),roomy=p=>!others.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<1.5);/* 보이는 자리(R111 그리기 자리) 기준 */
    const all=cells.map(spot).filter(s=>s&&roomy(s)),spots=all.filter(s=>s.back),free=p=>!lights.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<LIGHT_GAP);
-   const put=(s,kind)=>{const it=set[lights.length%set.length];lights.push({x:s.x,y:s.y,item:it.id,color:it.color,flip:s.flip,role:kind});};
+   const put=(s,kind)=>{const it=set[(s.seed>>>0)%set.length];/* R412 심사: 종류는 자리(칸 씨앗)로 정한다 — 개수를 줄여도 남은 자리의 등불 종류가 바뀌지 않게(촛대가 붉은 화로로 바뀌던 것) */lights.push({x:s.x,y:s.y,item:it.id,color:it.color,flip:s.flip,role:kind});};
    const anchors=[...g.points.filter(q=>/portal|entry|exit|gate|objective|boss|altar|marker/i.test(String(q.kind||q.id||''))),...g.doors.filter(finite)];
    for(const a of anchors){if(lights.length>=LIGHTS)break;const ring=all.filter(s=>{const d=Math.hypot(s.x-a.x,s.y-a.y);return d>=2&&d<=6.5&&free(s);}).sort((s,t)=>Math.abs(Math.hypot(s.x-a.x,s.y-a.y)-4.6)-Math.abs(Math.hypot(t.x-a.x,t.y-a.y)-4.6));
     const first=ring[0];if(!first)continue;put(first,'anchor');
