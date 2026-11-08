@@ -47,7 +47,7 @@ function makeEnv(store={},table=null,pre=null){const env={fetch:table?(()=>Promi
  env.window=env;env.actorHeight=()=>54;env.project=(x,y)=>({x:640+x*32,y:360+y*16});env.moveActor=(a,dx,dy)=>{a.x+=dx;a.y+=dy;};
  env.baseCalls={effects:0};
  env.drawEnemy=function(e){const R=env.ctx,q=env.project(e.x,e.y),H=54*(e.k||1.4),bh=H/FR,bw=bh*2/3;
-  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourceRect:[0,0,200,300],sourcePath:e.art||'assets/mobs/test-mob.webp',points:[R.pt(q.x-bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y-bh*.95),R.pt(q.x+bw/2,q.y+bh*.05),R.pt(q.x-bw/2,q.y+bh*.05)]});
+  R.scope({id:'enemy:'+e.id,kind:'enemy'},()=>{const xl=e.mir?q.x+bw/2:q.x-bw/2,xr=e.mir?q.x-bw/2:q.x+bw/2;R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourceRect:[0,0,200,300],sourcePath:e.art||'assets/mobs/test-mob.webp',points:[R.pt(xl,q.y-bh*.95),R.pt(xr,q.y-bh*.95),R.pt(xr,q.y+bh*.05),R.pt(xl,q.y+bh*.05)]});
    const W=55,y=q.y+6;for(const col of ['#302926','#795a50'])R.commands.push({kind:'fill',owner:{...R.owner},style:{fillStyle:col},paths:[{points:[R.pt(q.x-W/2,y),R.pt(q.x+W/2,y),R.pt(q.x+W/2,y+2),R.pt(q.x-W/2,y+2)]}]});
    R.commands.push({kind:'text',owner:{...R.owner},text:e.name,point:R.pt(q.x,q.y-H-8),matrix:R.m.slice(),style:{}});
    if(e.tell)R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourcePath:'assets/vfx/generated/v300/target-mark.webp',points:[R.pt(q.x-9,q.y-40),R.pt(q.x+9,q.y-40),R.pt(q.x+9,q.y-22),R.pt(q.x-9,q.y-22)]});});
@@ -60,7 +60,7 @@ const frame=(env,e)=>{env.ctx.commands.length=0;env.time+=.1;env.drawEnemy(e);re
 const bbox=c=>{const P=c.points||c.paths[0].points;const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];};
 const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
 {const env=makeEnv(),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
- ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-5');
+ ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-7');
  // 큰 일반 몹(원래 키 영웅 2.5배) → 일반 띠 상한 1.55 로
  const e={id:'m1',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};let cs;for(let i=0;i<4;i++)cs=frame(env,e);
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
@@ -165,7 +165,73 @@ async function gazeChecks(){
  ok('tight cluster: overlapping crosses merge into one cross (no double crossbar), the other mob gets a glow',env.xs.filter(s=>s.nm==='cross').length===2&&env.xs.filter(s=>s.nm==='glow').length===2&&F.inspect().stats.xMerged>=1,env.xs.map(s=>s.nm));
  env.time+=.1;env.tick();ok('tight cluster: both mobs still vanish',m1.hp<=0&&m2.hp<=0);
  ok('samong cross: no errors',F.inspect().stats.errors===0,F.inspect().lastError);}
-(async()=>{await gazeChecks();
+// ---- 슬레이어 Q 핏빛 휠윈드(사용자 12:53, 분위기 참고만): 그림만 바뀌고 피해·시간·재사용 대기는 그대로 ----
+function slayerQChecks(){
+ class Rec2 extends Rec{constructor(){super();this.globalAlpha=1;this.globalCompositeOperation='source-over';this.st2=[];}
+  save(){super.save();this.st2.push([this.globalAlpha,this.globalCompositeOperation]);}restore(){super.restore();const s=this.st2.pop();if(s)[this.globalAlpha,this.globalCompositeOperation]=s;}
+  drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh){this.commands.push({kind:'image',owner:{...this.owner},image:im,op:this.globalCompositeOperation,alpha:this.globalAlpha,src:[sx,sy,sw,sh],points:[this.pt(dx,dy),this.pt(dx+dw,dy),this.pt(dx+dw,dy+dh),this.pt(dx,dy+dh)]});}}
+ const hits=[],foe={id:'f1',name:'몹',x:4,y:0,hp:5000,maxHp:5000,spawnState:'active',radius:.3};
+ const env={console,Math,JSON,Number,String,Array,Object,Set,Map,WeakMap,Promise,Error,isFinite,localStorage:{getItem:()=>null,setItem(){}},
+  time:5,ctx:new Rec2(),room:{id:'q-room',enemies:[foe]},player:{x:0,y:0,hero:'slayer',hp:100,specialCD:0,direction:'e'},effects:[],settings:{},shake:0,started:true,modal:null,loading:false};
+ env.window=env;env.actorHeight=()=>54;env.project=(x,y)=>({x:640+x*32,y:360+y*16});
+ env.attackPower=()=>50;env.rank=()=>0;env.nearestEnemy=()=>foe;env.facing=()=>'e';env.sound=()=>{};env.blocked=()=>false;env.readyImage=()=>({image:IMG});env.ensureImages=()=>{};
+ env.hitEnemy=(e,a,s)=>{hits.push([e.id,+a.toFixed(3),s?.r425]);e.hp-=a;return true;};env.special=()=>{env.nativeSpecial=(env.nativeSpecial||0)+1;};env.fx=()=>null;
+ env.tick=dt=>{env.time+=dt;for(const f of env.effects)f.age=(f.age||0)+dt;env.effects=env.effects.filter(f=>f.age<f.life);};env.drawEffect=()=>{};
+ env.drawHero=()=>{const R=env.ctx,q=env.project(env.player.x,env.player.y);R.scope({id:'hero',kind:'hero'},()=>R.commands.push({kind:'image',owner:{...R.owner},image:IMG,sourcePath:'assets/heroes/slayer/attack-e.webp',points:[R.pt(q.x-10,q.y-54),R.pt(q.x+30,q.y-54),R.pt(q.x+30,q.y),R.pt(q.x-10,q.y)]}));};
+ const draws=[];env.__STORYWORLD_FX_SPRITES_R106__={pal:F=>F,warm:()=>{env.warmCalls=(env.warmCalls||0)+1;},
+  draw:(nm,F,x,y,w,h,o={})=>{const c={kind:'sprite',owner:{...env.ctx.owner},nm,F,x,y,w,h,o};draws.push(c);env.ctx.commands.push(c);return true;},
+  along:(nm,F,x0,y0,x1,y1,th,o={})=>{const c={kind:'sprite',owner:{...env.ctx.owner},nm,F,x:x0,y:y0,w:th,h:th,o};draws.push(c);env.ctx.commands.push(c);return true;}};
+ env.__STORYWORLD_SLAYER_R_TORNADO_R366__={index:()=>({layers:{back:{file:'tornado-back.webp'},front:{file:'tornado-front.webp'}},frames:12,cell:[256,320],origin:[128,286],height_px:250,loop_s:.5})};
+ vm.createContext(env);vm.runInContext(C('slayer-blood-r425.js'),env);const SB=env.__STORYWORLD_SLAYER_BLOOD_R425__,DT=1/60,step=()=>env.tick(DT);
+ env.special();const s0=SB.state();
+ ok('slayer Q: cast through special() (native special not called), cooldown 10 s at rank 0, windup first, sprites warmed',!env.nativeSpecial&&env.player.specialCD===10&&s0.Q&&!s0.Q.launched&&env.warmCalls>=2,{s0,warm:env.warmCalls});
+ // 시전 0.32초: 몸은 0.05초마다 좌·우 반전(가로 폭·세로 그대로), 베기 고리 뒤쪽 반은 몸 앞에, 앞쪽 반은 몸 뒤에 그려진다
+ const mir=[],order=[],shape=[],backY=[],frontY=[],spinNames=new Set();
+ for(let i=0;i<18;i++){step();env.ctx.commands.length=0;env.drawHero();const cmds=env.ctx.commands,hi=cmds.findIndex(c=>c.owner?.kind==='hero'),hc=cmds[hi],xs=hc.points.map(p=>p[0]),ys=hc.points.map(p=>p[1]);
+  mir.push(Math.min(...xs)<620?1:0);shape.push(Math.round(Math.max(...xs)-Math.min(...xs))===40&&Math.min(...ys)===306&&Math.max(...ys)===360);
+  const bi=cmds.flatMap((c,j)=>c.owner?.id==='r425:spin-back'?[j]:[]),fi=cmds.flatMap((c,j)=>c.owner?.id==='r425:spin-front'?[j]:[]);order.push(bi.length>0&&fi.length>0&&Math.max(...bi)<hi&&Math.min(...fi)>hi);
+  for(const c of cmds)if(c.kind==='sprite'){spinNames.add(c.nm);if(c.nm==='spark')(c.owner.id==='r425:spin-back'?backY:frontY).push(c.y);}}
+ const flipsN=mir.slice(1).filter((v,i)=>v!==mir[i]).length,avg=a=>a.reduce((s,v)=>s+v,0)/Math.max(1,a.length);
+ ok('slayer Q windup: body mirrored left/right every 0.05 s (≥5 turns in 0.3 s), never squeezed — width 40 px and height kept',flipsN>=5&&mir.includes(1)&&mir.includes(0)&&shape.every(Boolean),{mir:mir.join(''),flipsN});
+ ok('slayer Q windup: blood slash ring — back half drawn before the body, front half after; back half sits higher on screen',order.every(Boolean)&&backY.length>0&&frontY.length>0&&avg(backY)<avg(frontY),{order,back:avg(backY),front:avg(frontY)});
+ ok('slayer Q windup: no cross sprite (crosses stay with R, upright); streaks = dark blood body (petal) + bright edge (spark)',!spinNames.has('cross')&&spinNames.has('spark')&&spinNames.has('petal'),[...spinNames]);
+ // 날아가는 회오리
+ let launchAt=null,maxDraw=0;const ops=new Set(),names=new Set(),sizes=[];
+ const fly=n=>{for(let i=0;i<n;i++){step();const s=SB.state();if(s.Q?.launched&&launchAt==null)launchAt=+(env.time-5).toFixed(3);const f=env.effects.find(f=>f.type==='r425-tornado');
+  if(f){env.ctx.commands.length=0;draws.length=0;env.drawEffect(f);const im=env.ctx.commands.filter(c=>c.kind==='image');ops.add(im.map(c=>c.op).join());if(im[0])sizes.push(Math.round(im[0].points[2][1]-im[0].points[0][1]));maxDraw=Math.max(maxDraw,draws.length);for(const d of draws)names.add(d.nm);}}};
+ fly(90);
+ ok('slayer Q launch timing kept: whirlwind leaves at 0.32–0.35 s',launchAt>=.32&&launchAt<.35,launchAt);
+ ok('slayer Q whirlwind: R366 painted layers back+front, each with a half-beat-offset additive pass (wet sheen), ≈2× hero height at full size',[...ops].some(o=>o==='source-over,lighter,source-over,lighter')&&Math.max(...sizes)>=Math.round(320*54*2.05/250)-1,{ops:[...ops],max:Math.max(...sizes)});
+ ok('slayer Q whirlwind: spiral slash streaks, blood mist, flung droplets, ground pool/ring, trail — no cross',['spark','petal','smoke','orb','slashwide','glow','slashline'].every(n=>names.has(n))&&!names.has('cross')&&maxDraw>=40,{names:[...names],maxDraw});
+ fly(300);
+ ok('slayer Q damage unchanged: one pierce hit ×0.9 of attack×2.4 (=108), then 5 bleed ticks ×0.07 (=8.4)',JSON.stringify(hits)===JSON.stringify([['f1',108,'q-tornado'],...Array(5).fill(['f1',8.4,'q-bleed'])]),hits);
+ // 저사양: 같은 회오리를 더 적은 그림으로
+ env.settings.lowFx=true;env.player.specialCD=0;const full=maxDraw;maxDraw=0;names.clear();env.special();fly(60);
+ ok('slayer Q lowFx: fewer draws (≤65% of full) with the same parts',maxDraw>0&&maxDraw<=full*.65&&names.has('spark')&&names.has('orb'),{full,low:maxDraw});
+ ok('slayer Q: no errors',SB.inspect().stats.errors===0&&SB.inspect().revision==='R425-slayer-blood-2',SB.inspect());}
+// ---- ⑩ 적 공격 그림 방향(사용자 13:12·13:20 전수조사): 표에 오른 그림만, 공격 중일 때만, 대상 쪽을 보게 좌우만 ----
+function atkFaceChecks(){const src=C('combat-flow-r425.js'),m=/const ATK_FACE=Object\.freeze\((\{[^)]*\})\);/.exec(src);let tbl={};try{tbl=JSON.parse((m?.[1]||'{}').replace(/'/g,'"'));}catch(_){tbl=null;}
+ const keys=Object.keys(tbl||{});
+ ok('attack-facing table parsed: census entries are L/R only, no Mammon art',tbl&&keys.length>0&&keys.every(k=>/^[LR]$/.test(tbl[k]))&&!keys.some(k=>/mammon/i.test(k)),keys.length);
+ const k=keys.find(x=>!/#/.test(x));if(!k){ok('attack-facing: a path-level entry to test with',false);return;}const nat=tbl[k];
+ const env=makeEnv(),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
+ const mk=(id,art,ang,mir)=>({id,name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:1.4,art:'assets/'+art,mir,attack:ang==null?null:{elapsed:.2,angle:ang}});
+ const body=cs=>cs.filter(c=>c.kind==='image').sort((a,b)=>(bbox(b)[3]-bbox(b)[1])-(bbox(a)[3]-bbox(a)[1]))[0];
+ const leftOf=(cs,n)=>{const b=body(cs);return (n==='L')!==(b.points[1][0]<b.points[0][0]);};
+ const res=[];for(const [ang,wantLeft] of [[0,false],[Math.PI,true]])for(const mir of [false,true]){const e=mk('af'+ang+mir,k,ang,mir);let cs;for(let i=0;i<2;i++)cs=frame(env,e);const bb=bbox(body(cs)),q=env.project(e.x,e.y);
+  res.push({ang,mir,ok:leftOf(cs,nat)===wantLeft,foot:near((bb[0]+bb[2])/2,q.x,1.5)});}
+ ok('attack facing: listed art ('+nat+'-native) faces the attack side in all 4 cases (target left/right × drawn plain/mirrored), feet stay put',res.every(r=>r.ok&&r.foot),res);
+ // 공격 중이 아니면 / 표에 없는 그림이면 / 끄면 그대로
+ const idle=mk('af-idle',k,null,false);let cs;for(let i=0;i<2;i++)cs=frame(env,idle);const p0=body(cs).points[1][0]>body(cs).points[0][0];
+ const other=mk('af-other','mobs/not-listed-attack.webp',0,true);for(let i=0;i<2;i++)cs=frame(env,other);const p1=body(cs).points[1][0]<body(cs).points[0][0];
+ F.set('atkFace',false);const off=mk('af-off',k,nat==='L'?0:Math.PI,false);for(let i=0;i<2;i++)cs=frame(env,off);const p2=body(cs).points[1][0]>body(cs).points[0][0];F.set('atkFace',true);
+ ok('attack facing leaves alone: not attacking, art not in the table, switched off',p0&&p1&&p2,{p0,p1,p2});
+ ok('attack facing: no errors, fixes counted',F.inspect().stats.errors===0&&F.inspect().stats.faceFixed>=2,F.inspect().stats);}
+function cleanChecks(){const fs=require('fs'),path=require('path'),crypto=require('crypto'),R=path.join(__dirname,'..','..');const src=C('combat-flow-r425.js'),m=/const CLEAN425=new Set\((\[[^\]]*\])\)/.exec(src);let list=[];try{list=JSON.parse(m[1]);}catch(_){}
+ const spec=JSON.parse(fs.readFileSync(path.join(R,'r425-mob-clean.json'),'utf8')),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+ const rows=spec.images.map(r=>{const out=path.join(R,'runtime-text',r.output||'-');const ok=fs.existsSync(out)&&sha(fs.readFileSync(out))===r.outputSha256;return{p:r.path,ok,listed:list.includes(r.path)};});
+ ok('background cleanup: every cleaned copy exists with its recorded hash, is redirected by combat-flow, originals untouched, no Mammon art',rows.length>0&&rows.every(r=>r.ok&&r.listed)&&list.length===rows.length&&spec.originalsModified===false&&!list.some(x=>/mammon/i.test(x)),rows.filter(r=>!r.ok||!r.listed));}
+(async()=>{await gazeChecks();slayerQChecks();atkFaceChecks();cleanChecks();
 ok('gameplay untouched except ⑧ (user-asked laser cross, through the engine hitEnemy): no damage/cooldown/save writes in combat-flow',!/attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(C('combat-flow-r425.js')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(JSON.stringify({ok:pass===checks.length,checks:checks.length,pass,method:'CPU fake globals and a fake command recorder; headless screenshots separately; no GPU or device'}));

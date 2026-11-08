@@ -14,11 +14,16 @@
 //   R366 피의 회오리 그림이 겨눈 쪽으로 0.95초 동안 8.5칸 날아간다(관통, 적마다 한 번 ×0.9) + 출혈 4초(0.8초마다 ×0.07, 5회, 피 방울).
 //  그림: 십자가 = fx-sprites-r106 'cross'(Dots 협업 프레임 시트가 아닌 물들인 단일 그림 — 시트가 오기 전 임시), 폭발 = R190 피 터짐 시트(CC0 프레임),
 //   회오리 = R366 시트. 판정은 엔진 hitEnemy 로만 준다. 끄기: localStorage['storyworld.r425.slayer']='{"on":false}' (옛 R·Q 로 돌아감)
+//  12:53 "슬레이어 토네이도 디아블로 핏빛 휠윈드 느낌" → 분위기만 참고한다(다른 게임의 그림·코드·소리는 쓰지 않는다). Q 를 도는 피 소용돌이로:
+//   시전 0.32초: 영웅이 0.05초마다 좌·우 반전으로 빠르게 돌고, 허리·가슴 높이 피 베기 고리 2겹이 돈다(뒤쪽 반은 몸 뒤, 앞쪽 반은 몸 앞) + 발밑 피 웅덩이.
+//   날아가는 회오리: R366 붓 그림을 키 2.05배로 키우고 반 박자 어긋난 그림 한 겹을 덧셈으로 겹쳐(젖은 광택·밀도) 진하게, 높이 5단 나선으로 도는
+//   피 베기 자국(어두운 몸 + 밝은 날), 피 안개, 원심력으로 튀어 나가 떨어져 번지는 피 방울, 발밑 피 웅덩이·바닥 베기 고리, 지나간 자리 핏자국.
+//   피해·시간·경로·재사용 대기는 그대로(그림만). 코드로 조립한 임시 그림이다 — Dots 프레임 시트가 오면 바꾼다. 저사양(lowFx)은 고리·방울·자국 수를 줄인다.
 (()=>{'use strict';
 if(window.__STORYWORLD_SLAYER_BLOOD_R425__)return;
-const REV='R425-slayer-blood-1',KEY='storyworld.r425.slayer',HERO='slayer';
+const REV='R425-slayer-blood-2',KEY='storyworld.r425.slayer',HERO='slayer';
 let on=true;try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.on===false)on=false;}catch(_){}
-const stats={rCasts:0,rBlocked:0,bursts:0,chains:0,auraFrames:0,chaseSteps:0,autoSwings:0,qCasts:0,qHits:0,bleedTicks:0,flips:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
+const stats={rCasts:0,rBlocked:0,bursts:0,chains:0,auraFrames:0,chaseSteps:0,autoSwings:0,qCasts:0,qHits:0,bleedTicks:0,flips:0,spinFrames:0,vortexFrames:0,sheetPasses:0,drops:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
 const AH=()=>typeof actorHeight==='function'?actorHeight():54;
 const isHero=()=>typeof player==='object'&&player?.hero===HERO&&player.hp>0;
@@ -26,6 +31,8 @@ const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}c
 const SP=()=>window.__STORYWORLD_FX_SPRITES_R106__;
 const BLOOD={a:[120,6,14],b:[236,60,48]},DEEP={a:[70,0,8],b:[200,20,30]};
 const TAU=Math.PI*2;
+const lowFx=()=>!!(typeof settings!=='undefined'&&settings?.lowFx);
+let warmed=false;function warm(){const S=SP();if(!S?.warm)return;warmed=true;try{S.warm(BLOOD,['spark','slashwide','glow','slashline','cross','flare','flame','spike']);S.warm(DEEP,['petal','slashwide','glow','smoke','orb','cross']);}catch(e){fail(e);}}
 const live=()=>{try{return typeof liveEnemies==='function'?liveEnemies():(room?.enemies||[]).filter(e=>e.hp>0);}catch(_){return [];}};
 const dmgOK=e=>{try{return typeof damageable3==='function'?damageable3(e):e.hp>0;}catch(_){return e?.hp>0;}};
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
@@ -66,9 +73,9 @@ function qReady(){return on&&isHero()&&solo()&&typeof started!=='undefined'&&sta
 function castQ(){const p=player,rk=typeof rank==='function'?rank('special'):0;p.specialCD=10*(1-.05*rk);p.skillAnim=.6;
  const power=(typeof attackPower==='function'?attackPower():48)*(2.4+.36*rk),e=typeof nearestEnemy==='function'?nearestEnemy(12):null,a=e?Math.atan2(e.y-p.y,e.x-p.x):(typeof storyAim22==='function'?storyAim22():0);
  try{if(typeof facing==='function')p.direction=facing(Math.cos(a),Math.sin(a));}catch(_){}try{if(typeof sound==='function')sound('special');}catch(_){}
- Q={t0:T(),x:p.x,y:p.y,angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;return true;}
+ Q={t0:T(),x:p.x,y:p.y,angle:a,power,launched:false,hit:new Set(),room:typeof room==='object'?room:null,fx:null};stats.qCasts++;if(!warmed)warm();return true;}
 function qTick(dtGuess){if(!Q)return;const t=T(),age=t-Q.t0;let rm=null;try{rm=room;}catch(_){}if(rm!==Q.room||!(player?.hp>0)){Q=null;return;}
- if(!Q.launched&&age>=.32){Q.launched=true;Q.x=player.x;Q.y=player.y;Q.ft=t;
+ if(!Q.launched&&age>=.32){Q.launched=true;Q.x=player.x;Q.y=player.y;Q.ft=t;shakeIt(3.5);
   const f={type:'r425-tornado',x:Q.x,y:Q.y,age:0,life:1.05,q:Q};try{if(Array.isArray(effects))effects.push(f);}catch(_){}Q.fx=f;}
  if(Q.launched){const u=Math.min(1,(t-Q.ft)/.95),nx=Q.x+Math.cos(Q.angle)*8.5*u,ny=Q.y+Math.sin(Q.angle)*8.5*u;
   if(typeof blocked==='function'&&blocked(nx,ny,.2)&&u>.05){Q.stopU??=u;}
@@ -93,14 +100,52 @@ function auraFront(){const S=SP();if(!S?.draw)return;const q=project(player.x,pl
  for(let i=0;i<10;i++){const a=i*TAU/10+t*.8,dep=Math.sin(a);if(dep<=0)continue;S.draw('spike',BLOOD,x+Math.cos(a)*h*.36,y+dep*h*.1,h*.14,h*(.75+.4*((i*53)%10)/10)*(.7+.3*Math.sin(t*(11+i))),{angle:Math.cos(a)*.38,alpha:.42,overHero:true});}
  for(let i=0;i<8;i++){const ph=(t*(.9+.07*i)+i*.13)%1;S.draw('spark',BLOOD,x+(((i*29)%10)/10-.5)*h*.9,y-h*(.1+1.6*ph),h*.3,h*.07,{angle:-Math.PI/2,alpha:Math.sin(Math.PI*ph)*.9,overHero:true});}}
 const scope=(o,fn)=>{if(typeof ctx!=='undefined'&&typeof ctx?.scope==='function')return ctx.scope(o,fn);return fn();};
-// 회오리(R366 시트 재사용) — 겨눈 쪽으로 나가는 검기
-function drawTornado(f){const R366=window.__STORYWORLD_SLAYER_R_TORNADO_R366__,IDX=R366?.index?.();if(!IDX||typeof project!=='function')return;const q=project(f.x,f.y),H=AH(),age=f.age||0;
- for(const kind of ['back','front']){const L=IDX.layers[kind];const row=typeof readyImage==='function'?readyImage('assets/r366/'+L.file):null;if(!row?.image){try{if(typeof ensureImages==='function')ensureImages(['assets/r366/'+L.file]);}catch(_){}continue;}
-  const n=IDX.frames,[cw,ch]=IDX.cell,[ox,oy]=IDX.origin,fr=Math.floor(age/(IDX.loop_s||.5)*n*1.6)%n,s=H*1.7/(IDX.height_px||250)*Math.min(1,.5+age*4),al=Math.min(1,(f.life-age)*4);
-  ctx.save();try{ctx.globalAlpha*=al;ctx.drawImage(row.image,fr*cw,0,cw,ch,q.x-ox*s,q.y-oy*s,cw*s,ch*s);}finally{ctx.restore();}}
- const S=SP();if(S?.draw&&f.q){const back=project(f.x-Math.cos(f.q.angle)*1.2,f.y-Math.sin(f.q.angle)*1.2);S.along?.('slashline',BLOOD,back.x,back.y-H*.3,q.x,q.y-H*.3,H*.5,{alpha:.55});}}
-// 몸 회전: 0.32초 동안 0.08초마다 좌·우 반전(가로 폭은 그대로)
-function flip(rec,st){const age=T()-Q.t0;if(age>.32)return;if(Math.floor(age/.08)%2===0)return;const q=project(player.x,player.y);
+// 도는 고리: 화면 타원(가로 R, 세로 R·sq) 위 n개 베기 자국을 진행 방향(위상이 늘어나는 쪽)으로 눕힌다.
+//  자국 하나 = 어두운 피 몸통('petal' 물방울을 길게 — 둥근 머리가 앞, 뾰족한 꼬리가 뒤, 덮어 그리기) + 밝은 날('spark' 머리+꼬리, 덧셈).
+//  빛이 아니라 피로 보이게 몸통이 굵고 어둡다. side -1 = 뒤쪽 반(화면 위, 몸 뒤)만, 1 = 앞쪽 반만. 뒤쪽은 옅게.
+function ring(S,cx,cy,R,sq,ph,n,len,th,side,o){let d=0;for(let j=0;j<n;j++){const a=ph+j*TAU/n,sn=Math.sin(a),cs=Math.cos(a);if(side&&(sn<0?-1:1)!==side)continue;
+  const ang=Math.atan2(cs*sq,-sn),x=cx+cs*R,y=cy+sn*R*sq,near=.5+.5*(sn+1)/2,al=(o.alpha??1)*near;
+  S.draw('petal',DEEP,x-Math.cos(ang)*len*.45,y-Math.sin(ang)*len*.45,len*.95,th*1.3,{angle:ang+Math.PI,alpha:.72*al,blend:'source-over',overHero:o.overHero});
+  S.draw('spark',BLOOD,x,y,len,th*1.6,{angle:ang,alpha:al,overHero:o.overHero});d+=2;}return d;}
+// 시전 0.32초(+ 날린 뒤 0.16초 잦아듦): 영웅 둘레 피 베기 고리 — side -1 은 몸 그리기 전, 1 은 몸 그린 뒤
+function spinHero(side){const S=SP();if(!S?.draw||!Q||typeof project!=='function')return;const t=T(),age=t-Q.t0,post=Q.launched?t-Q.ft:0;if(post>.16)return;
+ const q=project(player.x,player.y),H=AH(),y=q.y-Math.min(Math.max(+player.visualLiftPx||0,0),H*.65),k=Math.min(1,age/.12),fade=Q.launched?Math.max(0,1-post/.16):1,ph=t*24;
+ if(side<0){S.draw('glow',DEEP,q.x,y,H*2*k,H*2*k,{squash:.42,alpha:.5*fade,blend:'source-over'});
+  S.draw('slashwide',BLOOD,q.x,y,H*1.55*k,H*1.55*k*288/512,{squash:.42,angle:ph*1.15,alpha:.55*fade});}
+ for(const [hh,rr,n] of lowFx()?[[.45,.62,3]]:[[.3,.7,4],[.62,.56,3]])ring(S,q.x,y-H*hh,H*rr*(.7+.3*k),.42,ph+hh*3,n,H*rr,H*.13,side,{alpha:.95*fade,overHero:side>0});
+ if(side>0)stats.spinFrames++;}
+// 튀어 나가는 피 방울: 회오리 둘레에서 접선·바깥으로 날다가 떨어져 바닥에 번진다(뿌린 때·방향은 번호로 정해져 프레임마다 같다)
+function drops(S,f,q,H,age,al,lo){const Q0=f.q,dx=Math.cos(Q0.angle),dy=Math.sin(Q0.angle),N=lo?6:14,u=Math.hypot(f.x-Q0.x,f.y-Q0.y),VT=2.6,VR=1.4,END=.5;
+ for(let i=0;i<N;i++){const b=i/N*.9,a=age-b;if(a<0||a>END)continue;
+  const d=age>0?u*Math.min(1,b/age):0,th=i*2.399+b*21,ct=Math.cos(th),st=Math.sin(th),r0=.45+.25*((i*37)%10)/10,
+   vx=-st*VT+ct*VR,vy=ct*VT+st*VR,bx=Q0.x+dx*d+ct*r0,by=Q0.y+dy*d+st*r0,h0=.35+1.1*((i*53)%10)/10,land=(1.6+Math.sqrt(2.56+36*h0))/18,
+   Z=s=>H*(h0+1.6*s-9*s*s),P=s=>project(bx+vx*s,by+vy*s),fe=al*Math.min(1,(END-a)/.1);
+  if(a<land){const v=P(a),w=P(a-.04),z=Z(a),sx=v.x-w.x,sy=(v.y-z)-(w.y-Z(a-.04));
+   S.draw('spark',BLOOD,v.x,v.y-z,Math.max(H*.12,Math.hypot(sx,sy)*2.2),H*.07,{angle:Math.atan2(sy,sx),alpha:.85*fe});
+   S.draw('orb',DEEP,v.x,v.y-z,H*.09,H*.09,{alpha:.9*fe,blend:'source-over'});}
+  else{const v=P(land);S.draw('orb',DEEP,v.x,v.y,H*.24,H*.24,{squash:.45,alpha:.6*fe*Math.max(0,1-(a-land)/.25),blend:'source-over'});}
+  stats.drops++;}}
+// 회오리 — 겨눈 쪽으로 나가는 검기. 바닥(핏자국·꼬리·웅덩이) → 뒤쪽 나선 → R366(뒤) → 피 안개 → R366(앞) → 앞쪽 나선 → 피 방울
+function drawTornado(f){if(typeof project!=='function')return;const R366=window.__STORYWORLD_SLAYER_R_TORNADO_R366__,IDX=R366?.index?.(),S=SP(),q=project(f.x,f.y),H=AH(),age=f.age||0,t=T(),lo=lowFx(),Q0=f.q;
+ const grow=Math.min(1,.5+age*4),al=Math.max(0,Math.min(1,(f.life-age)*4)),ph=t*21;stats.vortexFrames++;
+ if(S?.draw){if(Q0){const dx=Math.cos(Q0.angle),dy=Math.sin(Q0.angle),u=Math.hypot(f.x-Q0.x,f.y-Q0.y),n=lo?3:6;
+   for(let i=1;i<=n;i++){const d=u-i*.75;if(d<.2)break;const v=project(Q0.x+dx*d,Q0.y+dy*d),sz=H*(1.05-.06*i);S.draw('smoke',DEEP,v.x,v.y,sz,sz,{squash:.36,angle:i*1.7,alpha:.42*(1-i/(n+1))*al,blend:'source-over'});}
+   const back=project(f.x-dx*1.6,f.y-dy*1.6);S.along?.('slashline',BLOOD,back.x,back.y-H*.35,q.x,q.y-H*.35,H*.55,{alpha:.5*al});}
+  S.draw('glow',DEEP,q.x,q.y,H*2.3*grow,H*2.3*grow,{squash:.42,alpha:.55*al,blend:'source-over'});
+  S.draw('slashwide',DEEP,q.x,q.y,H*1.6*grow,H*1.6*grow*288/512,{squash:.42,angle:ph*1.1+Math.PI,alpha:.5*al,blend:'source-over'});
+  S.draw('slashwide',BLOOD,q.x,q.y,H*1.9*grow,H*1.9*grow*288/512,{squash:.42,angle:ph*1.1,alpha:.55*al});}
+ const LV=lo?[[.25,.45,3],[1.05,.75,3]]:[[.15,.4,3],[.5,.55,3],[.9,.7,3],[1.3,.85,3],[1.7,.98,2]];
+ const spin=side=>{if(S?.draw)for(const [hh,rr,n] of LV)ring(S,q.x,q.y-H*hh*grow,H*rr*grow,.4,ph+hh*2.2,n,H*rr*grow*1.1,H*.14*grow,side,{alpha:.9*al});};
+ const sheet=kind=>{if(!IDX)return;const L=IDX.layers[kind];const row=typeof readyImage==='function'?readyImage('assets/r366/'+L.file):null;if(!row?.image){try{if(typeof ensureImages==='function')ensureImages(['assets/r366/'+L.file]);}catch(_){}return;}
+  const n=IDX.frames,[cw,ch]=IDX.cell,[ox,oy]=IDX.origin,fr=Math.floor(age/(IDX.loop_s||.5)*n*1.6)%n,f2=(fr+(n>>1))%n,s=H*2.05/(IDX.height_px||250)*grow;
+  ctx.save();try{ctx.globalAlpha*=al;ctx.drawImage(row.image,fr*cw,0,cw,ch,q.x-ox*s,q.y-oy*s,cw*s,ch*s);
+   /* 반 박자 어긋난 그림 한 겹을 덧셈으로: 붓 자국 밀도 + 젖은 광택 */ctx.globalAlpha*=.38;ctx.globalCompositeOperation='lighter';ctx.drawImage(row.image,f2*cw,0,cw,ch,q.x-ox*s*1.06,q.y-oy*s*1.02,cw*s*1.06,ch*s*1.02);}finally{ctx.restore();}stats.sheetPasses+=2;};
+ spin(-1);sheet('back');
+ if(S?.draw){S.draw('smoke',DEEP,q.x,q.y-H*.75*grow,H*1.5*grow,H*1.9*grow,{angle:-ph*.35,alpha:.32*al,blend:'source-over'});S.draw('glow',BLOOD,q.x,q.y-H*.7*grow,H*1.2*grow,H*1.9*grow,{alpha:.3*al});}
+ sheet('front');spin(1);
+ if(S?.draw&&Q0)drops(S,f,q,H,age,al,lo);}
+// 몸 회전: 0.32초 동안 0.05초마다 좌·우 반전(가로 폭은 그대로 — 종이처럼 접지 않는다)
+function flip(rec,st){const age=T()-Q.t0;if(age>.32)return;if(Math.floor(age/.05)%2===0)return;const q=project(player.x,player.y);
  let best=null,bh=0;for(let i=st;i<rec.commands.length;i++){const c=rec.commands[i];if(c?.kind!=='image'||c.owner?.kind!=='hero'||!c.points)continue;const s=String(c.sourcePath||c.image?.src||'');if(/fx|effect|r366|r425/.test(s))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;best=c;}}
  if(best){best.points=best.points.map(([x,y])=>[2*q.x-x,y]);stats.flips++;}}
 // ---------------------------------------------------------------- 연결
@@ -114,12 +159,14 @@ if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,
  try{if(auraOn()&&e&&old>e.hp&&!(source&&source.r425)&&!(source&&source.friendly===false)){const t=T(),last=chainSeen.get(e)||-9;if(t-last>.25){chainSeen.set(e,t);if(chainSeen.size>64)chainSeen.delete(chainSeen.keys().next().value);chainBurst(e,0);}}}catch(err){fail(err);}
  return r;};}
 if(typeof special==='function'){const base=special;special=function(...a){if(on&&typeof player==='object'&&player?.hero===HERO&&solo()){if(qReady())castQ();return;}return base.apply(this,a);};}
-if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){rTick();qTick(dt);bleedTick();}}catch(e){fail(e);}return r;};}
+if(typeof tick==='function'){const base=tick;tick=function(dt,...a){const r=base.apply(this,[dt,...a]);try{if(on){if(!warmed&&isHero())warm();rTick();qTick(dt);bleedTick();}}catch(e){fail(e);}return r;};}
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(f,...a){if(f&&f.type==='r425-tornado'){try{scope({id:'r425:tornado',kind:'effect',x:f.x,y:f.y,groundAligned:false},()=>drawTornado(f));}catch(e){fail(e);}return;}return base.apply(this,[f,...a]);};}
-if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn();
+if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const aura=on&&auraOn(),spin=on&&!!Q&&isHero()&&(!Q.launched||T()-Q.ft<.16);
  if(aura)try{scope({id:'r425:aura-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{auraBack();}finally{ctx.restore();}});stats.auraFrames++;}catch(e){fail(e);}
+ if(spin)try{scope({id:'r425:spin-back',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{spinHero(-1);}finally{ctx.restore();}});}catch(e){fail(e);}
  const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(on&&Q&&!Q.launched&&st>=0&&isHero())flip(rec,st);}catch(e){fail(e);}
+ if(spin)try{scope({id:'r425:spin-front',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{spinHero(1);}finally{ctx.restore();}});}catch(e){fail(e);}
  if(aura)try{scope({id:'r425:aura-front',kind:'effect',x:player.x,y:player.y,groundAligned:false},()=>{ctx.save();try{auraFront();}finally{ctx.restore();}});}catch(e){fail(e);}
  if(on&&R)try{scope({id:'r425:crosses',kind:'effect',x:R.x,y:R.y,groundAligned:false},()=>{ctx.save();try{drawCrosses();}finally{ctx.restore();}});}catch(e){fail(e);}
  return r;};}

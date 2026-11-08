@@ -1,0 +1,73 @@
+{
+ "schema": "r425-mob-clean-v1",
+ "why": "사용자 2026-11-08: 전수조사하는 김에 배경처리 등 디테일 퀄리티업. 전수조사에서 눈으로 고른 그림만, 원본은 그대로.",
+ "originalsModified": false,
+ "images": [
+  {
+   "path": "assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+   "ops": [
+    "cloud"
+   ],
+   "use": "타락천사 기사(last301 보스) 대기",
+   "sourceSha256": "6e90a1e9aa520570b002b10650741813a6d2c20520c3317dc4437eb32ccd4de7",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+   "outputSha256": "4e6d91537e70408c6049f7c7dc7b53d1f4a1fab8a6022119d7727d8939ac22d8",
+   "outputBytes": 67914
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+   "ops": [
+    "cloud"
+   ],
+   "use": "타락천사 기사 이동",
+   "sourceSha256": "01d39a69e2f50fc74091d42fb52effc2de9cbff7b5c067e60e66a64f51fd9a8f",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+   "outputSha256": "77556d668b33f7256664f92b13e86af38eec0ca96ca2c0319a32622981c923f0",
+   "outputBytes": 98980
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+   "ops": [
+    "cloud"
+   ],
+   "use": "타락천사 기사 방어·원거리",
+   "sourceSha256": "99b4fd76ae881d97288011f3dc2b690b3a69e28ad9365e7a631f2cb7f5f85213",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+   "outputSha256": "6649ab39bbde807140fed3ddc4ad95d942aafd9e81fe2aa4735f5ea6d82b763f",
+   "outputBytes": 71622
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "ops": [
+    "speck"
+   ],
+   "use": "불명귀 대기(오른쪽 아래 떨어진 점)",
+   "sourceSha256": "ff0d79b66e10e980c649becad30601da69268ce75b3db2d51c791869a1b39cac",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+   "outputSha256": "4251823ba4eda933ca81b873e0827c2fb7a7db3cb025ad096aa3625d6ab67d3d",
+   "outputBytes": 44870
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+   "ops": [
+    "speck"
+   ],
+   "use": "발록 대기(발밑 떨어진 불씨 조각)",
+   "sourceSha256": "628208634275a062df9a5e903ced53acb081f9be10d13d6df307620c4cf5a7b6",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+   "outputSha256": "c8a7d6eee26de71e490f18128ac3db35f1a3851e534ed71e1198cb1276fee400",
+   "outputBytes": 72100
+  },
+  {
+   "path": "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+   "ops": [
+    "speck"
+   ],
+   "use": "질투(인간) 공격(왼쪽 떨어진 자국)",
+   "sourceSha256": "a2aa8ed8a05a4eedd88cfa7259d2c64c4d15a05bd29867a87f59ef0293e3c875",
+   "output": "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+   "outputSha256": "083f149314d7f8ed68dded439d3b87557bd5432ba37b51b17076deb180102cdc",
+   "outputBytes": 71122
+  }
+ ]
+}

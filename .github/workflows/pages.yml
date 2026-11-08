@@ -426,6 +426,8 @@ jobs:
         run: node r96/qa/r425/r425-cpu-check.cjs
       - name: R430 theme-map living FX (top graphics only, Drive core24 loops/bursts) CPU check
         run: node r96/qa/r430/r430-cpu-check.cjs
+      - name: R413 door lintels up to the jamb wall top + R267 roof refit CPU check
+        run: node r96/qa/r413/r413-cpu-check.cjs
       - name: R381 recorded narration voice (Qwen3-TTS Sohee) for cinema mode CPU check
         run: node r96/qa/r381/r381-cpu-check.cjs
       - name: R376 real difficulty + cinema HUD CPU check

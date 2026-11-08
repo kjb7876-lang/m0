@@ -24318,6 +24318,36 @@
       "sha256": "116fe0d3a42c005bfd5317028c49d6e6577146b25ecac8ed312763b45d250185"
     },
     {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp",
+      "bytes": 98980,
+      "sha256": "77556d668b33f7256664f92b13e86af38eec0ca96ca2c0319a32622981c923f0"
+    },
+    {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp",
+      "bytes": 67914,
+      "sha256": "4e6d91537e70408c6049f7c7dc7b53d1f4a1fab8a6022119d7727d8939ac22d8"
+    },
+    {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp",
+      "bytes": 44870,
+      "sha256": "4251823ba4eda933ca81b873e0827c2fb7a7db3cb025ad096aa3625d6ab67d3d"
+    },
+    {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp",
+      "bytes": 72100,
+      "sha256": "c8a7d6eee26de71e490f18128ac3db35f1a3851e534ed71e1198cb1276fee400"
+    },
+    {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp",
+      "bytes": 71622,
+      "sha256": "6649ab39bbde807140fed3ddc4ad95d942aafd9e81fe2aa4735f5ea6d82b763f"
+    },
+    {
+      "path": "assets/r425/clean/assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp",
+      "bytes": 71122,
+      "sha256": "083f149314d7f8ed68dded439d3b87557bd5432ba37b51b17076deb180102cdc"
+    },
+    {
       "path": "assets/r425/gaze.json",
       "bytes": 13965,
       "sha256": "4b3d029872a6fa988fb6e8c7db16a35f12227098204eabc0d4019ec940bf18f8"
@@ -32929,8 +32959,8 @@
     },
     {
       "path": "combat-flow-r425.js",
-      "bytes": 48073,
-      "sha256": "b451493e0c2d773027bde9ba248a935288659f4eec98c2b39f2b8439229964aa"
+      "bytes": 58179,
+      "sha256": "6dbe5c6ac18addb5c2a68d1148e5b386f3e9815972e077cdcaf95501e80c49c7"
     },
     {
       "path": "combat-r114.js",
@@ -33046,6 +33076,11 @@
       "path": "dist/phase1.js",
       "bytes": 660281,
       "sha256": "64495ba0969c0c85b548f75539f904197f90643ea82a07f29287de1bf7f4d105"
+    },
+    {
+      "path": "doors-fit-r413.js",
+      "bytes": 6199,
+      "sha256": "37814a0f2b2ed31c2b4f1fea2794c7c46b384a1dab72c7a99cdb135f60e91553"
     },
     {
       "path": "doors-r189.js",
@@ -33344,8 +33379,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6571099,
-      "sha256": "90c6ea66823141fb1d9868fa689632b71c2171c8cb701d51feeeb2ed3f63bf94"
+      "bytes": 6571142,
+      "sha256": "a568a203aa390666feb5124f0212c877282849332d65536c2d1dc001e17228cb"
     },
     {
       "path": "intro-r140.js",
@@ -33649,8 +33684,8 @@
     },
     {
       "path": "play-r115.js",
-      "bytes": 27069,
-      "sha256": "2be4c9b6ea1056c2b95bf8f2628b8b6ab84cfbd4aa800d6f596cf6c5c36bcb34"
+      "bytes": 29471,
+      "sha256": "42854be1ddffbc98f43f45baa1e47582b786c7ac86012b47e0bca5785272e0b1"
     },
     {
       "path": "play-r169.js",
@@ -33739,8 +33774,8 @@
     },
     {
       "path": "roof-height-r267.js",
-      "bytes": 2703,
-      "sha256": "f4a6dadda1b309c164774f19127f70d150bb364377598d4fdee8a678021123cc"
+      "bytes": 4060,
+      "sha256": "be5c29df184884fe4c88f288619a4667401103fab8484b4ac1adeee956c5a4d5"
     },
     {
       "path": "root-gate-video-r372.js",
@@ -33869,8 +33904,8 @@
     },
     {
       "path": "slayer-blood-r425.js",
-      "bytes": 16888,
-      "sha256": "6ed172f7f66bf6f0f9411c05b3aede6e609f157eb31b144d92990fb4166d0430"
+      "bytes": 23446,
+      "sha256": "0ca10b0de4396ec721af870f51892ef11f9a7b67a3522f40f620136f339f9d4e"
     },
     {
       "path": "slayer-r-tornado-r366.js",
@@ -34143,9 +34178,9 @@
       "sha256": "7e0e1806acbfee7f91aebcd0af6b5110625f84b6519e8ef58e471ad5f75d36e4"
     }
   ],
-  "fileCount": 6828,
-  "totalBytes": 1084903770,
-  "webHTMLSha256": "90c6ea66823141fb1d9868fa689632b71c2171c8cb701d51feeeb2ed3f63bf94",
+  "fileCount": 6835,
+  "totalBytes": 1085357043,
+  "webHTMLSha256": "a568a203aa390666feb5124f0212c877282849332d65536c2d1dc001e17228cb",
   "largest": [
     {
       "path": "index.html",

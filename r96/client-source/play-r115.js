@@ -14,7 +14,7 @@
  * 피해량·체력·쿨타임·저장 형식은 바꾸지 않는다. 설정 키 r115.play로 항목별로 끌 수 있다. */
 (()=>{'use strict';
 if(window.__STORYWORLD_PLAY_R115__||typeof tick!=='function'||typeof drawEnemy!=='function')return;
-const REV='R115-play-1';
+const REV='R115-play-2';
 const KEY=(window.__STORYWORLD_TEST_STORAGE_B1__?.prefix||'storyworld.hospital-three-pc.maze.v11:')+'r115.play';
 const prefs={centre:true,aim:true,assist:true,spacing:true,sink:true,frontLight:true,samongCluster:true,skillBook:true,walls:true};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');for(const k of Object.keys(prefs))if(typeof s?.[k]==='boolean')prefs[k]=s[k];}catch(_){}
@@ -155,12 +155,24 @@ function installBook(){if(typeof showUpgrades!=='function')return;const base=sho
  try{const panel=document.getElementById('panel');if(panel&&typeof MutationObserver==='function')new MutationObserver(()=>{try{if(!panel.querySelector('#r115Book')&&panel.querySelector('.cards button.card.upgrade'))buildBook();}catch(e){fail(e);}}).observe(panel,{childList:true});}catch(e){fail(e);}}
 
 // ---- ⑨ 사몽 밖 지역 벽 높이 -------------------------------------------------------------------------
-const DOOR=2.7,dressed=new WeakSet();
+// R413(사용자 2026-11-08 "벽문 벽지붕등 높이랑위치도 잘맞춰줘"): 높이는 3D 벽을 짓기 전에 정한다.
+//  전에는 첫 게임 tick 에서야 올려서, 들어올 때 지은 벽은 옛 높이(1.2–1.5·2.7)로 남고, 멀어졌다 돌아와 다시 지은 벽은
+//  옛 모양을 새 높이의 가운데에 걸어 바닥에서 0.1–0.8 떠 있었다(main 에서 ep1b06·kair02·murder01 재현). 문틀 위 벽·지붕 덮개도 어긋났다.
+//  ① draw 앞에서 먼저 올린다. ② 높이가 바뀐 벽의 묵은 모양(엔진 idleGeometry 'wall:id')은 다시 쓰지 않고 새로 짓게 한다.
+const DOOR=2.7,dressed=new WeakSet();stats.staleWallShapes=0;
 function wallsTick(){if(!prefs.walls)return;const L=room?.exploration;if(!L||dressed.has(L)||!Array.isArray(L.walls)||L.samongR103||L.samongR115)return;dressed.add(L);
  const exits=[...(Array.isArray(L.doors)?L.doors:[]),...(L.worldR74?.doors||[]),...Object.values(L.exits||{}),L.entry,L.entrance].filter(p=>p&&Number.isFinite(p.x+p.y));const base=finite(L.walls.find(w=>Number.isFinite(w.height))?.height,DOOR);
  for(const w of L.walls){if(!Number.isFinite(w.height)||w.r115Wall)continue;const h0=w.height,near=exits.some(p=>Math.hypot(p.x-w.x,p.y-w.y)<2.6),v=((hash(w.id||w.x+':'+w.y)%9)-4)*.045;
   let h=h0*(1+v);if(near)h=Math.max(h,DOOR+.45+(hash(w.id)%3)*.08);else if(h0<=DOOR+.01)h=Math.max(h,DOOR+.15);w.height=+h.toFixed(2);w.r115Wall=h0;}
  stats.wallRooms++;}
+const guarded=new WeakSet();
+function guardWallShapes(){const t=window.__STORYWORLD_PHASE1__?.controller?.state?.three;if(!t||guarded.has(t)||typeof t.activateTerrain!=='function'||!(t.idleGeometry instanceof Map))return;guarded.add(t);
+ const base=t.activateTerrain;t.activateTerrain=function(row){try{for(const w of row?.descriptor?.terrain||[]){if(!w||!Number.isFinite(w.height))continue;const key='wall:'+w.id,g=this.idleGeometry.get(key);if(!g)continue;if(!g.boundingBox)g.computeBoundingBox?.();const bb=g.boundingBox;if(!bb||Math.abs((bb.max.y-bb.min.y)-w.height)<=.01)continue;
+   this.idleGeometry.delete(key);if(typeof this.geometryBytes==='function'&&Number.isFinite(this.idleGeometryBytes))this.idleGeometryBytes-=this.geometryBytes(g);g.dispose?.();stats.staleWallShapes++;}}catch(e){fail(e);}return base.call(this,row);};}
+// 지금 그려진 벽이 자료 높이와 맞는지 센다(검사용).
+function wallFit(){const t=window.__STORYWORLD_PHASE1__?.controller?.state?.three,L=room?.exploration,out={active:0,fit:0,low:0,floating:0};if(!t?.wallRows||!L)return out;const byId=new Map((L.walls||[]).map(w=>[w?.id,w]));
+ for(const [id,e] of t.wallRows){const w=byId.get(id),m=e?.mesh;if(!w||!m?.geometry||!Number.isFinite(w.height))continue;const g=m.geometry;if(!g.boundingBox)g.computeBoundingBox?.();const bb=g.boundingBox;if(!bb)continue;out.active++;const sy=Number.isFinite(m.scale?.y)?m.scale.y:1,bot=m.position.y+bb.min.y*sy,top=m.position.y+bb.max.y*sy;
+  if(bot>.03)out.floating++;else if(Math.abs(top-w.height)<=.02)out.fit++;else out.low++;}return out;}
 
 // ---- ⑩ 길잡이 도착 ------------------------------------------------------------------------------
 // 길잡이가 단서·진술·문 앞까지 데려다 놓고 멈추던 것: 도착하면 E를 대신 누른다(직접 조작 중이면 안 누름).
@@ -174,8 +186,9 @@ function reachTick(){if(!prefs.assist||typeof guide==='undefined'||!guide||!solo
 function install(){installCentre();installLight();installBook();
  const tb=tick;tick=function(dt,...a){scanBudget=6;const r=tb.call(this,dt,...a);if(!live()||!Number.isFinite(dt)||dt<=0)return r;
   try{if(solo()&&!busy()){aimTick();spacingTick(dt);samongTick();}wallsTick();assistTick();reachTick();}catch(e){fail(e);}return r;};
- if(typeof guideStep==='function'){const gs=guideStep;guideStep=function(...a){if(prefs.assist&&now()<assist.until)return;return gs.apply(this,a);};}}
+ if(typeof guideStep==='function'){const gs=guideStep;guideStep=function(...a){if(prefs.assist&&now()<assist.until)return;return gs.apply(this,a);};}
+ if(typeof draw==='function'){const db=draw;draw=function(...a){try{if(live()){wallsTick();guardWallShapes();}}catch(e){fail(e);}return db.apply(this,a);};}}
 try{install();}catch(e){fail(e);}
-window.__STORYWORLD_PLAY_R115__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,centreOf,place,sinkOf,clusters:()=>live()?clusters():[],buildBook,
+window.__STORYWORLD_PLAY_R115__=Object.freeze({revision:REV,prefs:()=>({...prefs}),set,centreOf,place,sinkOf,clusters:()=>live()?clusters():[],buildBook,wallFit,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},failures,lastError})});
 })();

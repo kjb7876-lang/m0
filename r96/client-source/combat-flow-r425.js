@@ -17,12 +17,13 @@
 //     보스라 소멸되지 않더라도 십자가 이펙트가 생기고 데미지가 들어가도록") — 이 항목만 피해를 바꾼다(사용자 요청). 아래 설명.
 //  ⑨ 이름(사용자 11:50 "실검무 츠바메가에시 네이밍을 바람베기로 수정"): 패시브 threadTsubameR64 '실검무 · 츠바메가에시' → '실검무 · 바람베기',
 //     패시브 창 안내 문장의 '츠바메가에시'도 '바람베기'로(엔진 원문은 그대로 두고 덧씌움). 저장·효과는 id 로 묶여 있어 그대로.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"samongCross":false}', 예고 표시 켜기 '{"tele":true}'
+//  ⑩ 적 공격 그림 방향(사용자 13:12·13:20): 전수조사로 영웅 반대쪽을 보고 그려진 공격 그림만 골라, 공격 중일 때 대상 쪽을 보게 좌우만 바로잡는다. 아래 설명.
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"samongCross":false}' / '{"atkFace":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
-const REV='R425-flow-5',KEY='storyworld.r425.flow';
+const REV='R425-flow-7',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true};
+let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true,atkFace:true,clean:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -100,6 +101,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
    let want=Math.min(hi*H,Math.max(lo*H,nat));let ns=Math.min(SMAX,Math.max(SMIN,want/Math.max(1,nat)));
    if(Math.abs(ns-s.s)>.01){k=ns/s.s;rescale(cmds,st0,fx,fy,k);stats.refixed++;s.s=ns;}
    s.nat=nat;if(Math.abs(s.s-1)>.01)stats.scaled++;else stats.kept++;}}}}catch(err){fail(err);}
+ try{if(prefs.atkFace&&e.hp>0)faceFix(e,cmds,st0,fx);}catch(err){fail(err);}
  try{post(e,cmds,st0,fx,fy,sx*k,sy*k,sx,sy,teleOff,headBar,s);}catch(err){fail(err);}
  try{if(XD.has(e)){const b=bodyCmd(cmds,st0);if(b)s.box=boxOf(b);}}catch(err){fail(err);}
  return r;};}
@@ -147,7 +149,7 @@ const SPIDER=/거미|spider|arachn/i;const isSpider=e=>!!e&&!major(e)&&(SPIDER.t
 const famOf=k=>/#/.test(k)?null:String(k).replace(/\.(webp|png|jpe?g)$/i,'').replace(/[-_](idle|move|walk|run|attack|atk|hit|hurt|death|die|cast|poses?|motion)(?:[-_]?\d+)?$/i,'');
 let GZ=null,FAM=null,gzReq=false;function gzLoad(){if(GZ||gzReq||typeof fetch!=='function')return;gzReq=true;fetch('assets/r425/gaze.json').then(r=>r.ok?r.json():null).then(j=>{if(!j?.classes){gzReq=false;return;}
  const F={};for(const [k,v] of Object.entries(j.classes)){const f=famOf(k);if(f&&(!F[f]||/[-_]move/i.test(k)))F[f]=v;}FAM=F;GZ=j;}).catch(e=>{gzReq=false;fail(e);});}
-function artKey(c){let s=srcOf(c).replace(/^[a-z]+:\/\/[^/]+/i,'').replace(/[?#].*$/,'');const i=s.indexOf('assets/');s=i>=0?s.slice(i+7):s.replace(/^\.?\//,'');if(/monsters|atlas/i.test(s)&&Array.isArray(c.sourceRect))s+='#'+c.sourceRect.map(v=>Math.round(v)).join(',');return s;}
+function artKey(c){let s=srcOf(c).replace(/^[a-z]+:\/\/[^/]+/i,'').replace(/[?#].*$/,'');const i=s.indexOf('assets/');s=i>=0?s.slice(i+7):s.replace(/^\.?\//,'');s=s.replace(/^r425\/clean\/assets\//,'');if(/monsters|atlas/i.test(s)&&Array.isArray(c.sourceRect))s+='#'+c.sourceRect.map(v=>Math.round(v)).join(',');return s;}
 const CLS=new Set(['x','plus','both']);
 function gazeOf(e){if(isSpider(e))return 'x';const s=ST.get(e),a=s?.art;if(!a||!GZ)return s?.gz||'both';
  let v=GZ.classes[a];if(!CLS.has(v)){const f=famOf(a);v=f&&FAM?.[f];}if(CLS.has(v)){if(s)s.gz=v;return v;}return s?.gz||'both';}/* 지금 그리는 그림 → 같은 몹 다른 동작 시트(-move/-idle/-attack) → 이 몹이 마지막으로 알아본 부류 → both */
@@ -306,6 +308,54 @@ try{FXS()?.warm?.(heroPal(player?.hero),['cross','glow']);}catch(_){}
 function renameDefs(){try{const D=window.__STORYWORLD_PROGRESSION_R62__?.defs;if(!Array.isArray(D))return false;const d=D.find(x=>x?.id==='threadTsubameR64');
  if(d&&typeof d.name==='string'&&d.name.indexOf('츠바메가에시')>=0){d.name=d.name.replace(/츠바메가에시/g,'바람베기');stats.renamed=(stats.renamed||0)+1;}return !!d;}catch(e){fail(e);return false;}}
 renameDefs();
+// ---- ⑩ 적 공격 그림 방향(사용자 13:12 "병원 몹들 의사 빼고 왜 다 뒤를 보고 공격함 — 모든 적들 공격 이미지 방향 제대로 나오게",
+//  13:20 "비정상적인 것만 검토 후 수정하면 됨, 근데 검토를 전수조사 수준으로") ----
+//  전수조사: 모든 지역의 모든 적(보스·중간보스 포함)을 영웅 화면 왼쪽/오른쪽에 두고 대기·근접 준비·타격·회복·원거리 조준 때 실제 그려진 몸 그림을
+//   모아(헤드리스) 한 장씩 눈으로 판정했다. 영웅 반대쪽을 보고 그려진 공격 그림만 아래 표에 원본이 보는 쪽(L = 원본이 왼쪽, R = 오른쪽)을 적는다.
+//   정면·좌우 대칭 그림, 이미 맞게 그려진 그림은 적지 않는다(그대로).
+//  공격 중(근접 e.attack · 원거리 조준 · 준비된 시전)에 표의 그림이 그려지면: 원하는 쪽 = 공격 각도의 화면 좌우(없으면 영웅 쪽),
+//   그려진 쪽 = 원본 쪽 ⊕ 좌우 뒤집힘. 둘이 다를 때만 그 몸 그림(같은 그림·같은 칸을 쓴 겹 포함)을 발 세로선 기준으로 좌우 반전한다.
+//  판정·피해·위치·시간은 그대로(그림만). 끄기: '{"atkFace":false}'.
+//  병원(ep1a08) R53 동작 아틀라스(백의 구속자·복도 비명잔영·백의 안정화 감독)의 뒷모습 줄: R53 은 공격 방향이 화면에서 조금만 위(-0.04)여도
+//   뒷모습 칸을 골라, 같은 높이에 선 영웅을 칠 때도 등을 돌리고 공격했다. 공격 방향(없으면 영웅 쪽)이 화면에서 뚜렷이 위(30° 넘게)일 때만
+//   뒷모습을 두고, 그 밖엔 같은 동작의 앞모습 칸으로 바꿔 그린다(발 기준점·배율·좌우·기울기 그대로, 아틀라스 칸 정보 R51·R52·R53 그대로 씀).
+//  표 열쇠는 정리본 주소(r99·r118·r425 clean)와 색 입힘 경로 차이를 없앤 원래 경로(faceKey). 이 아틀라스들은 공격·투척 때만 그려지므로 공격 중 확인 없이 고친다.
+const ATK_FACE=Object.freeze({'generated-story10-cycle-20261005/ep1a10/mb-ep1a10-pride-ruin-core-atlas.png':'L','generated-v31224/actors-normalized/115b7fcea51e_bulmyeongwi_attack.webp':'L','r104/bosses/b07-boss-p1.webp':'L','r104/bosses/mb-dist05-p2.webp':'L','r104/bosses/u201-mid-p1.webp':'L','r375/mobs/kair-44.webp':'L','r375/mobs/kair-45.webp':'L','r380/mobs/legacy-m134-nightmare-v4.webp':'L','r410/mobs/m027.webp':'L','r92/mobs/M007-attack.png':'L','r92/mobs/M051-attack.png':'L','r92/mobs/M055-attack.png':'L','r92/mobs/M057-attack.png':'L','r92/mobs/M058-attack.png':'L','r92/mobs/M060-attack.png':'L','r92/mobs/M063-attack.png':'L','r92/mobs/M064-attack.png':'L','r92/mobs/M068-attack.png':'L','r92/mobs/M095-attack.png':'L','r92/mobs/M099-attack.png':'L','visual-test/hospital-orderly-motion-r51-v2.png':'R','r74/monsters.png':'R','r92/mobs/M017-attack.png':'R','r92/mobs/M020-attack.png':'R','r92/mobs/M032-attack.png':'R','r92/mobs/M033-attack.png':'R','r92/mobs/M037-attack.png':'R','r92/mobs/M047-attack.png':'R','r92/mobs/M052-attack.png':'R','r92/mobs/M066-attack.png':'R','r92/mobs/M086-attack.png':'R','r92/mobs/M087-attack.png':'R','r92/mobs/M089-attack.png':'R','r92/mobs/M090-attack.png':'R','r92/mobs/M107-attack.png':'R','r92/mobs/M113-attack.png':'R','r92/mobs/M117-attack.png':'R','r92/mobs/M121-attack.png':'R','r92/mobs/M122-attack.png':'R','r92/mobs/M130-attack.png':'R','r92/mobs/M132-attack.png':'R'});
+const BACK53=Object.freeze({'visual-test/hospital-orderly-motion-r51-v2.png':{meta:'__STORYWORLD_ORDERLY_ATLAS_R51__',map:{4:0,5:1,6:2,7:3}},
+ 'visual-test/hospital-boss-motion-r53.png':{meta:'__STORYWORLD_BOSS_ATLAS_R53__',map:{4:0,5:1,6:2,7:3,12:8,13:9,14:10,15:11}},
+ 'visual-test/hospital-ranged-back-r53.png':{meta:'__STORYWORLD_RANGED_BACK_ATLAS_R53__',to:'assets/visual-test/hospital-ranged-motion-r52.png',toMeta:'__STORYWORLD_RANGED_ATLAS_R52__',map:'same'}});
+const ATK_ONLY=new Set(['visual-test/hospital-orderly-motion-r51-v2.png','visual-test/hospital-boss-motion-r53.png','visual-test/hospital-ranged-back-r53.png','visual-test/hospital-ranged-motion-r52.png']);
+function faceKey(c){let s=artKey(c);for(let t=s;;s=t){t=s.replace(/^r(?:99|118|425)\/clean\/assets\//,'');if(t===s)break;}return s;}
+function faceOf(c){const k=faceKey(c);return ATK_FACE[k]||ATK_FACE[k.replace(/#.*$/,'')]||null;}
+function atkBusy(e){return !!((e.attack&&Number.isFinite(e.attack.elapsed))||e.rangedWindup>0||e.storyPreparedCast150||e.personaPreparedCast150);}
+function atkVec(e){const a=e.attack;let g=null;if(a&&Number.isFinite(a.angle))g=a.angle;else if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))g=e.rangedAim;
+ const p0=project(e.x,e.y);let p1;if(g!=null)p1=project(e.x+Math.cos(g),e.y+Math.sin(g));else{const p=typeof player==='object'?player:null;if(!p)return null;p1=project(p.x,p.y);}
+ const vx=p1.x-p0.x,vy=p1.y-p0.y,n=Math.hypot(vx,vy);return n>1e-6?{x:vx/n,y:vy/n}:null;}
+function atkLeft(e){const a=e.attack;let sd=null;if(a&&Number.isFinite(a.angle))sd=Math.cos(a.angle)-Math.sin(a.angle);else if(e.rangedWindup>0&&Number.isFinite(e.rangedAim))sd=Math.cos(e.rangedAim)-Math.sin(e.rangedAim);
+ if(sd==null||Math.abs(sd)<.05){const p=typeof player==='object'?player:null;if(!p)return null;sd=(p.x-p.y)-(e.x-e.y);if(Math.abs(sd)<.02)return null;}return sd<0;}
+function sameArt(c,b){return c?.kind==='image'&&c.owner?.kind==='enemy'&&Array.isArray(c.points)&&(c===b||(c.image&&c.image===b.image&&String(c.sourceRect||'')===String(b.sourceRect||'')));}
+function swapCell(c,A,B,img){const P=c.points,W=A.sourceRect[2],H=A.sourceRect[3],ex=[(P[1][0]-P[0][0])/W,(P[1][1]-P[0][1])/W],ey=[(P[3][0]-P[0][0])/H,(P[3][1]-P[0][1])/H];
+ const F=[P[0][0]+A.pivot[0]*ex[0]+A.pivot[1]*ey[0],P[0][1]+A.pivot[0]*ex[1]+A.pivot[1]*ey[1]],at=(u,v)=>[F[0]+(u-B.pivot[0])*ex[0]+(v-B.pivot[1])*ey[0],F[1]+(u-B.pivot[0])*ex[1]+(v-B.pivot[1])*ey[1]];
+ const W2=B.sourceRect[2],H2=B.sourceRect[3];c.points=[at(0,0),at(W2,0),at(W2,H2),at(0,H2)];c.sourceRect=B.sourceRect.slice();
+ if(img){c.image=img;c.sourcePath=String(img.src||'');c.imageSize=[img.naturalWidth||img.width,img.naturalHeight||img.height];}}
+function unback(e,cmds,st){let b=null,bh=0,R=null;for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!Array.isArray(c.points)||!Array.isArray(c.sourceRect))continue;const r=BACK53[faceKey(c).replace(/#.*$/,'')];if(!r)continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;b=c;R=r;}}
+ if(!b)return;const M=window[R.meta];if(!Array.isArray(M?.cells))return;const sr=b.sourceRect.map(v=>Math.round(v)).join(','),i=M.cells.findIndex(c=>c.sourceRect.join(',')===sr);if(i<0)return;
+ const j=R.map==='same'?i:R.map[i];if(j==null)return;const v=atkVec(e);if(!v||v.y<-.5)return;// 영웅·공격이 뚜렷이 위쪽이면 뒷모습 그대로
+ const TM=R.toMeta?window[R.toMeta]:M,A=M.cells[i],B=TM?.cells?.[j];if(!A||!B)return;let img=null;
+ if(R.to){if(b.immutableTint||b.mutable)return;img=typeof readyImage==='function'?readyImage(R.to)?.image:null;if(!img||(TM.size&&(img.naturalWidth!==TM.size[0]||img.naturalHeight!==TM.size[1])))return;}
+ const hit=[];for(let q=st;q<cmds.length;q++)if(sameArt(cmds[q],b))hit.push(cmds[q]);for(const c of hit)swapCell(c,A,B,img);stats.unback=(stats.unback||0)+1;}
+function faceFix(e,cmds,st,fx){try{unback(e,cmds,st);}catch(err){fail(err);}
+ const busy=atkBusy(e);let b=null,bh=0,f=null;// 표에 있는 그림 가운데 가장 큰 것 = 몸(경로에 ring·mark 같은 낱말이 든 몸 그림도 놓치지 않게 일반 효과 거르기를 쓰지 않는다)
+ for(let i=st;i<cmds.length;i++){const c=cmds[i];if(c?.kind!=='image'||c.owner?.kind!=='enemy'||!Array.isArray(c.points))continue;const g=faceOf(c);if(!g)continue;if(!busy&&!ATK_ONLY.has(faceKey(c).replace(/#.*$/,'')))continue;const hh=Math.abs(c.points[3][1]-c.points[0][1]);if(hh>bh){bh=hh;b=c;f=g;}}
+ if(!b)return;const want=atkLeft(e);if(want==null)return;
+ const mir=b.points[1][0]<b.points[0][0],left=(f==='L')!==mir;if(left===want){stats.faceOk=(stats.faceOk||0)+1;return;}
+ const hit=[];for(let i=st;i<cmds.length;i++)if(sameArt(cmds[i],b))hit.push(cmds[i]);for(const c of hit)mapCmd(c,p=>[2*fx-p[0],p[1]]);
+ stats.faceFixed=(stats.faceFixed||0)+1;}
+// ---- ⑪ 배경처리 정리본(사용자 14:01 "전수조사하는 김에 배경처리 등 디테일 퀄리티업도 함께") ----
+//  전수조사 대조표에서 눈으로 고른 몹 그림만: 타락천사 기사(대기·이동·방어)에 남은 베이지 구름 배경을 지우고, 몸에서 떨어진 점·조각을 지운 사본
+//  assets/r425/clean/<원래 경로>(scripts/r425-mob-clean.py, 목록·해시 r96/r425-mob-clean.json). 원본은 그대로, 이미지 주소만 돌린다(R99·R118 과 같은 방식, 캐시 키는 원래 경로).
+const CLEAN425=new Set(["assets/generated-v31224/actors-normalized/363f780dbb5a_Monster_FallenAngelKnight_Base.webp", "assets/generated-v31224/actors-normalized/353a813314bc_Monster_FallenAngelKnight_MoveSide.webp", "assets/generated-v31224/actors-normalized/9756e6d5958a_Monster_FallenAngelKnight_Guard.webp", "assets/generated-v31224/actors-normalized/692e4ae01c29_bulmyeongwi_idle.webp", "assets/generated-v31224/actors-normalized/80f5ab6bab50_balrog-idle.webp", "assets/generated-v31224/actors-normalized/9f845f4d58bf_envy-human-attack.webp"]);
+if(typeof urlFor==='function'){const ub=urlFor;urlFor=function(path,...a){try{const p=typeof cleanPath==='function'?cleanPath(path):path;if(prefs.clean!==false&&CLEAN425.has(p)){stats.cleanRedirects=(stats.cleanRedirects||0)+1;return ub.call(this,'assets/r425/clean/'+p,...a);}}catch(err){fail(err);}return ub.call(this,path,...a);};}
 // ---- 설정 창(빠른 설정 '설정' 패널, R420 보기 편의 묶음 끝): 적 공격·돌진 예고 표시 — 기본 꺼짐. R98 '적 공격 범위 미리보기(선)'도 같이 켜고 끈다 ----
 function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}return prefs.tele;}
 function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
