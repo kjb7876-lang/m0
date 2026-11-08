@@ -60,7 +60,7 @@ const frame=(env,e)=>{env.ctx.commands.length=0;env.time+=.1;env.drawEnemy(e);re
 const bbox=c=>{const P=c.points||c.paths[0].points;const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];};
 const near=(a,b,t=.6)=>Math.abs(a-b)<=t;
 {const env=makeEnv(),F=env.__STORYWORLD_COMBAT_FLOW_R425__;
- ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-4');
+ ok('combat-flow loads; telegraphs default OFF, boss bar on, settings API exposed',F&&F.inspect().prefs.tele===false&&F.inspect().prefs.bossBar===true&&typeof F.teleSet==='function'&&F.revision==='R425-flow-5');
  // 큰 일반 몹(원래 키 영웅 2.5배) → 일반 띠 상한 1.55 로
  const e={id:'m1',name:'시험 몹',x:0,y:-1,hp:10,maxHp:10,k:2.5};let cs;for(let i=0;i<4;i++)cs=frame(env,e);
  const body=cs.find(c=>c.kind==='image'),opaque=(bbox(body)[3]-bbox(body)[1])*FR,bars=cs.filter(c=>c.kind==='fill'),q=env.project(e.x,e.y),txt=cs.find(c=>c.kind==='text');
@@ -128,8 +128,45 @@ async function gazeChecks(){
  const [ux,uy]=wdir(0);env.__engine=()=>{eW.x+=ux*2/60;eW.y+=uy*2/60;};const x0=eW.x;for(let i=0;i<30;i++){env.time+=1/60;env.tick(1/60);}env.__engine=null;env.moveActor=mv;
  ok('blocked X leg (moveActor cannot move) → keeps the engine step, never stuck',Math.abs(eW.x-x0-ux*1)<1e-6,eW.x-x0);
  ok('gaze stats counted, no errors',F.inspect().stats.gazeSteps>0&&F.inspect().stats.errors===0,F.inspect().stats);}
+// ⑨ 이름: 실검무 · 츠바메가에시 → 실검무 · 바람베기(사용자 11:50)
+{const env=makeEnv({},null,env=>{env.__STORYWORLD_PROGRESSION_R62__={defs:[{id:'threadClawR64',name:'실검무 · 발톱 세선'},{id:'threadTsubameR64',name:'실검무 · 츠바메가에시',text:'비용 1점'}]};env.openPanel=html=>{env.lastPanel=html;};});
+ const D=env.__STORYWORLD_PROGRESSION_R62__.defs;ok('rename: threadTsubameR64 card name is now 실검무 · 바람베기 (siblings untouched)',D[1].name==='실검무 · 바람베기'&&D[0].name==='실검무 · 발톱 세선',D.map(d=>d.name));
+ env.openPanel('<p class="small muted">반복 강화에 단계 제한은 없습니다. 실검무 모티프는 전투 연출이며, 추가 프랙털·츠바메가에시·일도양단 효과는 각 패시브 설명과 같습니다.</p>');
+ ok('rename: passive panel note says 바람베기 and no 츠바메가에시 is left',/프랙털·바람베기·일도양단/.test(env.lastPanel)&&!/츠바메가에시/.test(env.lastPanel),env.lastPanel);
+ ok('rename: engine source keeps the original text (overlay only)',/name:'실검무 · 츠바메가에시'/.test(fs.readFileSync(path.join(R,'runtime-text','index.html'),'utf8')));}
+// ⑧ 사몽 레이저 십자가(사용자 11:49)
+{const hits=[];const env=makeEnv({},null,env=>{env.effects=[];env.xs=[];env.attackPower=()=>100;env.floatText=()=>{};env.room.engaged=true;
+  env.hitEnemy=(e,v,src)=>{hits.push({id:e.id,v,kind:src?.kind});const a=Math.min(e.hp,v);e.hp-=a;return true;};
+  env.__STORYWORLD_HERO_FX_R102__={PALETTE:{lauren:{a:[150,90,220],b:[220,190,255]}}};
+  env.__STORYWORLD_FX_SPRITES_R106__={on:()=>true,warm(){},pal:c=>({a:c,b:c}),draw:(nm,F,x,y,w,h,o)=>{env.xs.push({nm,F,x,y,w,h,o:o||{}});return true;},along(){return true;}};});
+ const F=env.__STORYWORLD_COMBAT_FLOW_R425__,X=F.samongCross,sent=()=>env.effects.find(e=>e.r425Sentinel);
+ const mob={id:'mob',name:'몹',x:2,y:1,hp:50,maxHp:50,spawnState:'active'},boss={id:'boss',name:'보스',x:5,y:2,hp:5000,maxHp:5000,boss:true,spawnState:'active'};env.room.enemies.push(mob,boss);
+ const r1=env.hitEnemy(mob,5.5,{kind:'hero-samong-storm-r75',hero:'lauren'}),r2=env.hitEnemy(boss,5.5,{kind:'hero-samong-storm-r114',hero:'lauren'});
+ ok('laser touch (R75 line / R114 extra line) is taken over: no instant hit, a cross is planted on the mob and on the boss',r1===true&&r2===true&&hits.length===0&&mob.hp===50&&boss.hp===5000&&X.live().length===2&&!!sent(),X.live());
+ const r3=env.hitEnemy(mob,9999,{kind:'hero-samong-ultimate-r139'});ok('R139 pulse yields to a standing cross on a normal mob (the cross removes it)',r3===false&&mob.hp===50);
+ env.time+=.1;env.tick();env.xs.length=0;env.drawEffect(sent());const cr=env.xs.filter(s=>s.nm==='cross');
+ ok('cross drawn upright in the hero colour: no angle, no flip, positive size, Latin cross proportions (256×384)',cr.length===4&&cr.every(s=>!s.o.angle&&!s.o.flip&&s.w>0&&s.h>0&&Math.abs(s.w/s.h-256/384)<1e-6)&&cr.filter(s=>s.F.a[0]===150).length===2,cr.map(s=>[s.w,s.h,s.F.a]));
+ ok('cross centred on the body: crossing point above the body centre (short top, long bottom)',cr.every(s=>{const e=[mob,boss].find(e=>Math.abs(env.project(e.x,e.y).x-s.x)<1e-6),q=e&&env.project(e.x,e.y);return !!q&&s.y<q.y;})&&new Set(cr.map(s=>s.x)).size===2,cr.map(s=>[s.x,s.y]));
+ ok('base draw untouched for other effects',(()=>{const n=env.baseCalls.effects;env.drawEffect({type:'burst'});return env.baseCalls.effects===n+1;})());
+ env.time+=.1;env.tick();
+ ok('after the flash (0.18 s) the normal mob vanishes (lethal hit through the engine hitEnemy)',mob.hp<=0&&hits.find(h=>h.id==='mob')?.kind==='hero-samong-cross-r425'&&hits.find(h=>h.id==='mob').v>=50+50,hits);
+ ok('boss is not removed: it takes attack × 0.55 through the engine hitEnemy',boss.hp===5000-55&&hits.filter(h=>h.id==='boss').length===1,boss.hp);
+ env.xs.length=0;env.drawEffect(sent());ok('flash: crossing-point glint, not rotated',env.xs.some(s=>s.nm==='flare'&&!s.o.angle));
+ env.hitEnemy(boss,5.5,{kind:'hero-samong-storm-r75',hero:'lauren'});ok('boss: one laser cross per 0.6 s',X.live().filter(c=>c.enemy==='boss').length===1&&boss.hp===5000-55);
+ env.time+=.6;env.tick();env.hitEnemy(boss,5.5,{kind:'hero-samong-storm-r75',hero:'lauren'});env.time+=.2;env.tick();ok('boss: a later laser plants a new cross and deals the damage again',boss.hp===5000-110,boss.hp);
+ const r4=env.hitEnemy(boss,10,{kind:'basic'});ok('other hits pass straight through',r4===true&&boss.hp===5000-120);
+ env.time+=1;env.tick();ok('crosses cleared after their life, sentinel removed',X.live().length===0&&!sent());
+ const late={id:'b2',name:'보스2',x:0,y:4,hp:900,maxHp:900,boss:true,spawnState:'active'};env.room.enemies.push(late);env.room.engaged=false;env.hitEnemy(late,5.5,{kind:'hero-samong-storm-r75',hero:'lauren'});env.time+=.3;env.tick();
+ ok('boss not engaged yet: no cross, no damage (engine boss rule)',late.hp===900&&X.live().length===0);
+ F.set('samongCross',false);const n0=hits.length;env.hitEnemy(boss,5.5,{kind:'hero-samong-storm-r75',hero:'lauren'});ok('samongCross off: laser calls go to the old path',hits.length===n0+1&&hits[n0].kind==='hero-samong-storm-r75');
+ // 뭉친 몹: 거의 같은 자리 둘 → 십자가 하나 + 번짐 하나(가로대 둘처럼 보이지 않게)
+ F.set('samongCross',true);env.room.engaged=true;const m1={id:'c1',name:'몹',x:8,y:8,hp:20,maxHp:20,spawnState:'active'},m2={id:'c2',name:'몹',x:8.02,y:7.7,hp:20,maxHp:20,spawnState:'active'};env.room.enemies.push(m1,m2);
+ env.hitEnemy(m1,1,{kind:'hero-samong-storm-r75',hero:'lauren'});env.hitEnemy(m2,1,{kind:'hero-samong-storm-r75',hero:'lauren'});env.time+=.1;env.tick();env.xs.length=0;env.drawEffect(sent());
+ ok('tight cluster: overlapping crosses merge into one cross (no double crossbar), the other mob gets a glow',env.xs.filter(s=>s.nm==='cross').length===2&&env.xs.filter(s=>s.nm==='glow').length===2&&F.inspect().stats.xMerged>=1,env.xs.map(s=>s.nm));
+ env.time+=.1;env.tick();ok('tight cluster: both mobs still vanish',m1.hp<=0&&m2.hp<=0);
+ ok('samong cross: no errors',F.inspect().stats.errors===0,F.inspect().lastError);}
 (async()=>{await gazeChecks();
-ok('gameplay untouched: no damage/cooldown/save writes in combat-flow (only visuals, positions of walking mobs and the hero plant)',!/attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(C('combat-flow-r425.js')));
+ok('gameplay untouched except ⑧ (user-asked laser cross, through the engine hitEnemy): no damage/cooldown/save writes in combat-flow',!/attackCD\s*=|\.damage\s*=|saveGame|localStorage\.setItem\((?!KEY)/.test(C('combat-flow-r425.js')));
 const pass=checks.filter(c=>c.pass).length;for(const c of checks)console.log((c.pass?'PASS ':'FAIL ')+c.name+(c.pass?'':' '+JSON.stringify(c.detail)));
 console.log(JSON.stringify({ok:pass===checks.length,checks:checks.length,pass,method:'CPU fake globals and a fake command recorder; headless screenshots separately; no GPU or device'}));
 if(pass!==checks.length)process.exit(1);})().catch(e=>{console.error(e);process.exit(1);});

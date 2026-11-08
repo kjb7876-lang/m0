@@ -13,12 +13,16 @@
 //  맘몬 방(mammon*)·탑/인형(R193)·죽어 가는 몹은 크기를 새로 정하지 않는다. 판정·체력·피해·세이브는 바꾸지 않는다(그림만).
 //  ④ 시선 3부류(X자·+자·둘 다) 이동·공격(거미류는 X자), ⑤ 이동 중 공격 때 발 딛기, ⑥ 헌터 공격 7프레임 좌·우 — 아래 설명.
 //  ⑦ 체력바·이름표(광폭화 보스는 머리 위로)·적 공격 예고 표시(기본 꺼짐, 설정 창 체크) — 아래 설명.
-//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}', 예고 표시 켜기 '{"tele":true}'
+//  ⑧ 사몽 레이저 십자가(사용자 11:49 "사몽 레이저에 닿아 소멸하는 적에게는 레이저 적중 시 플레이어 색에 맞는 십자가 이펙트가 적에게 생기고 소멸되게,
+//     보스라 소멸되지 않더라도 십자가 이펙트가 생기고 데미지가 들어가도록") — 이 항목만 피해를 바꾼다(사용자 요청). 아래 설명.
+//  ⑨ 이름(사용자 11:50 "실검무 츠바메가에시 네이밍을 바람베기로 수정"): 패시브 threadTsubameR64 '실검무 · 츠바메가에시' → '실검무 · 바람베기',
+//     패시브 창 안내 문장의 '츠바메가에시'도 '바람베기'로(엔진 원문은 그대로 두고 덧씌움). 저장·효과는 id 로 묶여 있어 그대로.
+//  끄기: localStorage['storyworld.r425.flow']='{"size":false}' / '{"punch":false}' / '{"laurenTip":false}' / '{"spiderX":false}' / '{"gaze":false}' / '{"gazeSlot":false}' / '{"plant":false}' / '{"hunter":false}' / '{"bossBar":false}' / '{"samongCross":false}', 예고 표시 켜기 '{"tele":true}'
 (()=>{'use strict';
 if(window.__STORYWORLD_COMBAT_FLOW_R425__)return;
-const REV='R425-flow-4',KEY='storyworld.r425.flow';
+const REV='R425-flow-5',KEY='storyworld.r425.flow';
 const BANDS={normal:[1.22,1.55],leader:[1.45,1.75],mid:[1.60,1.80],boss:[1.90,2.30]},SMIN=.55,SMAX=2.2;
-let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false};
+let prefs={size:true,punch:true,laurenTip:true,spiderX:true,gaze:true,gazeSlot:true,plant:true,hunter:true,bossBar:true,tele:false,samongCross:true};
 const solo=()=>{let m=null;try{m=window.__STORYWORLD_COOP_SIM_R62__?.mode?.();}catch(_){}return !m||m==='off';};try{prefs={...prefs,...JSON.parse(localStorage.getItem(KEY)||'{}')};}catch(_){}
 const stats={scaled:0,kept:0,refixed:0,sheets:0,punches:0,tips:0,skipped:0,errors:0};let lastError=null;const fail=e=>{stats.errors++;lastError=String(e?.message||e).slice(0,200);};
 const T=()=>typeof time==='number'?time:0;
@@ -97,6 +101,7 @@ if(typeof drawEnemy==='function'){const base=drawEnemy;drawEnemy=function(e,...a
    if(Math.abs(ns-s.s)>.01){k=ns/s.s;rescale(cmds,st0,fx,fy,k);stats.refixed++;s.s=ns;}
    s.nat=nat;if(Math.abs(s.s-1)>.01)stats.scaled++;else stats.kept++;}}}}catch(err){fail(err);}
  try{post(e,cmds,st0,fx,fy,sx*k,sy*k,sx,sy,teleOff,headBar,s);}catch(err){fail(err);}
+ try{if(XD.has(e)){const b=bodyCmd(cmds,st0);if(b)s.box=boxOf(b);}}catch(err){fail(err);}
  return r;};}
 // R116 돌진 표적 인장(fx 'sigil' + VFX.mark) — 예고 표시를 끄면 그리지 않는다
 if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){try{if(!prefs.tele&&fe?.type==='sigil'&&typeof VFX!=='undefined'&&VFX?.mark&&fe.asset===VFX.mark){stats.teleHidden=(stats.teleHidden||0)+1;return;}}catch(_){}return base.apply(this,[fe,...a]);};}
@@ -233,14 +238,82 @@ function hunter(rec,st){huntIndex();if(!HUNT)return;const a=+player.attackAnim||
  stats.hunterFrames=(stats.hunterFrames||0)+1;}
 if(typeof drawHero==='function'){const base=drawHero;drawHero=function(...a){const rec=typeof ctx==='object'?ctx:null,st=Array.isArray(rec?.commands)?rec.commands.length:-1;const r=base.apply(this,a);
  try{if(prefs.hunter&&st>=0&&player?.hero==='hunter'&&player.hp>0&&solo())hunter(rec,st);else huntSwing.prev=+player?.attackAnim||0;}catch(e){fail(e);}return r;};}
+// ---- ⑧ 사몽 레이저 십자가 -------------------------------------------------------------------------------------
+//  · 판정은 엔진 그대로: R75 사몽 폭풍 선(0.12초마다 2줄)·R114 추가 선이 몹에 닿는 순간(선 나이 0.18초, R160 이 영웅 색 레이저를 밝히는 순간) hitEnemy 를 부른다.
+//    그 부름(kind hero-samong-storm-r75 / -r114)을 가장 바깥에서 받아 그 몹 몸 가운데에 영웅 색(R102 팔레트 — R160 레이저와 같은 색) 정십자가를 세운다.
+//  · 0.18초 뒤 십자가가 번쩍이는 순간: 일반 몹은 소멸(남은 체력 이상 피해 — R114 '사몽선 즉사'와 같은 규칙), 보스급(보스·중간보스·페르소나·관문 챔피언…)은
+//    공격력 × 0.55 피해(같은 적 0.6초에 한 번). 예전 선 피해(R75 공격력×0.055 — R139 가 막음, R114 즉사·보스 ×0.055)는 이 길 하나로 바뀐다.
+//    R139 궁극기 파동(9칸 즉사·보스 ×2.4)은 그대로 — 다만 십자가가 선 일반 몹은 파동이 먼저 지우지 않고 십자가가 지운다.
+//  · 십자가: fx-sprites 'cross'(위 짧고 아래 긴 정십자가, 교차점 피벗) 바깥 영웅 색 + 안쪽 밝은 심 + 뒤 번짐, 번쩍일 때 교차점 반짝임(돌리지 않음).
+//    0.09초에 1.28배→1배로 박히고, 번쩍인 뒤 0.44초 동안 위로 조금 떠오르며 사라진다. 회전·뒤집기 없음. 혼자 할 때만(협동은 예전 그대로).
+//    뭉친 몹은 십자가가 겹치면 가로대가 둘인 것처럼 보여서, 겹치는 자리에는 앞선 십자가 하나만 세우고 나머지 몹은 같은 색 번짐만 둔다(보스급은 늘 제 십자가).
+//  · 그림은 코드로 조립한 임시본이다 — Dots 프레임 시트(십자가 낙인)가 오면 바꾼다.
+const LASER=new Set(['hero-samong-storm-r75','hero-samong-storm-r114']),SC=Object.freeze({hold:.18,life:.62,cool:.6,bossK:.55,cap:48,capLow:20});
+const bigFoe=e=>!!(e&&(e.boss||e.midboss||e.persona||e.cosmic||e.trial||e.wardChampionR81||e.combatProfile?.major||/중간보스/.test(String(e.name||''))));
+const liveFoe=e=>!!(e&&e.hp>0&&!e.deadRecorded&&e.spawnState==='active'&&e.visible!==false&&room?.enemies?.includes(e));
+const FXS=()=>{const s=window.__STORYWORLD_FX_SPRITES_R106__;return s?.on?.()?s:null;};
+const SILVER=Object.freeze({a:Object.freeze([214,222,234]),b:Object.freeze([244,248,255])});
+const heroPal=h=>window.__STORYWORLD_HERO_FX_R102__?.PALETTE?.[h]||SILVER;
+const lowFxX=()=>!!(typeof settings!=='undefined'&&settings?.lowFx)||!!window.__STORYWORLD_MOBILE_PERF_R298__?.inspect?.().mobile;
+const smoothX=t=>{t=Math.min(1,Math.max(0,t));return t*t*(3-2*t);};
+const crosses=[],XL=new WeakMap(),XD=new WeakMap(),XLAST=new WeakMap();let xSerial=0;// XL: e → 아직 번쩍이지 않은 십자가, XD: e → 그려지는 십자가(그동안 몸 상자를 잰다)
+function boxOf(b){const P=b.points;let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const p of P){if(!Array.isArray(p))continue;x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);}
+ const cellH=y1-y0,info=sheetInfo(b.image,b.sourceRect),top=y0+cellH*(info?.top??.12),h=cellH*(info?.h??.8);return {cx:(x0+x1)/2,cy:top+h/2,h:Math.max(8,h),t:T()};}
+function crossBox(c){const e=c.e,s=ST.get(e),b=s?.box;if(b&&T()-b.t<.25&&b.t>=c.t0-.25&&(e.hp>0||!c.box))c.box={...b};if(c.box)return c.box;
+ const q=typeof project==='function'?project(e.x,e.y):null;if(!q)return null;const h=Math.max(20,(s?.nat||AH()*1.35)*(s?.s||1));return {cx:q.x,cy:q.y-h*.5,h,t:T()};}
+const SENTX={type:'r425-samong-cross',x:0,y:0,age:0,life:Infinity,r425Sentinel:true};
+function armX(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)&&!effects.includes(SENTX)){SENTX.age=0;effects.push(SENTX);}}catch(_){}}
+function disarmX(){try{if(typeof effects!=='undefined'&&Array.isArray(effects)){const i=effects.indexOf(SENTX);if(i>=0)effects.splice(i,1);}}catch(_){}}
+function markCross(e,src){if(!liveFoe(e))return false;if(XL.has(e))return true;const t=T(),last=XLAST.get(e);if(last!=null&&t-last<SC.cool&&t>=last)return true;
+ if(typeof damageable3==='function'&&!damageable3(e))return false;if(e.boss&&!room?.engaged)return false;
+ const hero=String(src?.hero||player?.hero||''),c={id:++xSerial,e,t0:t,hero,F:heroPal(hero),big:bigFoe(e),room,done:false,draw:crosses.length<(lowFxX()?SC.capLow:SC.cap),box:null};
+ crosses.push(c);XL.set(e,c);XD.set(e,c);XLAST.set(e,t);stats.xMarks=(stats.xMarks||0)+1;armX();return true;}
+function strikeCross(c){const e=c.e;if(XL.get(e)===c)XL.delete(e);if(!liveFoe(e)||!solo()||typeof hitEnemy!=='function'){stats.xMissed=(stats.xMissed||0)+1;return;}
+ const old=e.hp,big=bigFoe(e),value=big?(typeof attackPower==='function'?attackPower():1)*SC.bossK:e.hp+Math.max(1,Number(e.maxHp)||0);if(!(value>0))return;let ok=false;
+ try{ok=hitEnemy(e,value,{kind:'hero-samong-cross-r425',friendly:true,owner:'hero',ability:'samong',hero:c.hero,eventId:'r425-cross:'+c.id+':'+e.id,r425Cross:true});}catch(err){fail(err);}
+ if(ok!==false&&old>e.hp){c.dealt=old-e.hp;if(big){stats.xBoss=(stats.xBoss||0)+1;stats.xBossDamage=(stats.xBossDamage||0)+c.dealt;if(!e.boss)try{if(typeof floatText==='function')floatText(Math.round(c.dealt),e.x,e.y);}catch(_){}}else if(!(e.hp>0))stats.xKills=(stats.xKills||0)+1;}}
+function crossTick(){if(!crosses.length)return;const t=T();
+ for(let i=crosses.length-1;i>=0;i--){const c=crosses[i];if(c.room!==room||t-c.t0>SC.life+.05||t<c.t0-1){if(XL.get(c.e)===c)XL.delete(c.e);if(XD.get(c.e)===c)XD.delete(c.e);crosses.splice(i,1);continue;}if(!c.done&&t-c.t0>=SC.hold){c.done=true;strikeCross(c);}}
+ if(crosses.length)armX();else disarmX();}
+// 크기·때: 몸 키만큼(영웅 키 0.9~3.2배), 0.09초에 1.28배→1배로 박힌 뒤 번쩍(0.18초), 0.44초 동안 위로 조금 떠오르며 사라진다.
+function xGeom(c){const b=crossBox(c);if(!b)return null;const a=T()-c.t0,A=SC.life,hold=SC.hold;if(a<0||a>A)return null;
+ const inK=smoothX(a/.09),out=a<hold?1:1-smoothX((a-hold)/(A-hold)),al=inK*out;if(!(al>.01))return null;
+ const H=Math.min(AH()*3.2,Math.max(AH()*.9,b.h)),W=H*256/384,rise=a>hold?H*.1*smoothX((a-hold)/(A-hold)):0;
+ return {c,b,al,H,W,sc:1.28-.28*inK,rise,py:b.cy-H*.1615-rise,fl:a>=hold-.02&&a<hold+.16?1-smoothX(Math.abs(a-hold-.03)/.13):0,lead:true};}
+function drawCrossOne(S,g){const {c,b,al,H,W,sc,rise,py,fl}=g,lo=lowFxX();
+ /* 영웅 주색(F.a — 라우렌 바이올렛·네온 민트·슬레이어 크림슨…)이 주인공: 바깥·번짐은 주색, 심은 주색을 밝힌 색, 번쩍임만 보조색(대개 실버) */
+ const F=c.F,lift=(v,k)=>v.map(x=>Math.round(x+(255-x)*k)),M=S.pal?.(F.a)||F,P=S.pal?.(lift(F.a,.5))||F,Q=S.pal?.(F.b)||F;
+ if(!g.lead){/* 뭉친 몹: 십자가가 겹치면 가로대 둘(이중 십자)처럼 보이므로 앞선 십자가 하나만 세우고 나머지는 같은 색 번짐만 */
+  S.draw('glow',M,b.cx,b.cy-rise,H*.7,H*.7,{alpha:(.28+.45*fl)*al,blend:'screen'});stats.xMerged=(stats.xMerged||0)+1;return;}
+ if(!lo)S.draw('glow',M,b.cx,b.cy-rise,H*.95,H*.95,{alpha:(.32+.4*fl)*al,blend:'screen'});
+ S.draw('cross',M,b.cx,py,W*sc,H*sc,{alpha:.88*al,blend:'screen'});
+ if(!lo)S.draw('cross',P,b.cx,py,W*.6*sc,H*.6*sc,{alpha:(.45+.45*fl)*al,blend:'screen'});
+ if(fl>.01)S.draw('flare',Q,b.cx,py,H*.8*(.6+.4*fl),H*.8*(.6+.4*fl),{alpha:fl*al,blend:'screen',overHero:true});
+ stats.xDraws=(stats.xDraws||0)+1;}
+function drawCrosses(){const S=FXS();if(!S||typeof ctx==='undefined'||!ctx)return;const G=[];
+ for(const c of crosses){if(!c.draw)continue;const g=xGeom(c);if(g)G.push(g);}
+ // 겹침 정리: 보스급 먼저, 먼저 선 것, 큰 것, 앞(화면 아래)의 것이 십자가를 갖는다
+ G.sort((p,q)=>(q.c.big-p.c.big)||(p.c.t0-q.c.t0)||(q.H-p.H)||(q.b.cy-p.b.cy));const kept=[];
+ for(const g of G){g.lead=g.c.big||!kept.some(k=>Math.abs(k.b.cx-g.b.cx)<Math.max(k.W,g.W)*.55&&Math.abs(k.py-g.py)<Math.max(k.H,g.H)*.6);if(g.lead)kept.push(g);}
+ for(const g of G){const e=g.c.e;ctx.save();try{const run=()=>drawCrossOne(S,g);if(typeof ctx.scope==='function')ctx.scope({id:'r425:xcross:'+g.c.id,kind:'effect',x:e.x+.06,y:e.y+.06,r425:true},run);else run();}catch(err){fail(err);}finally{ctx.restore();}}}
+if(typeof hitEnemy==='function'){const base=hitEnemy;hitEnemy=function(e,amount,source,...a){
+ try{const k=source?.kind;if(prefs.samongCross&&solo()&&e){if(LASER.has(k))return markCross(e,source);if(k==='hero-samong-ultimate-r139'&&XL.has(e)&&!bigFoe(e)){stats.xPulseYield=(stats.xPulseYield||0)+1;return false;}}}catch(err){fail(err);}
+ return base.apply(this,[e,amount,source,...a]);};}
+if(typeof tick==='function'){const base=tick;tick=function(...a){const r=base.apply(this,a);try{crossTick();}catch(err){fail(err);}return r;};}
+if(typeof drawEffect==='function'){const base=drawEffect;drawEffect=function(fe,...a){if(fe===SENTX){try{if(prefs.samongCross)drawCrosses();}catch(err){fail(err);}return;}return base.apply(this,[fe,...a]);};}
+try{FXS()?.warm?.(heroPal(player?.hero),['cross','glow']);}catch(_){}
+// ---- ⑨ 이름: 실검무 · 츠바메가에시 → 실검무 · 바람베기 ----
+function renameDefs(){try{const D=window.__STORYWORLD_PROGRESSION_R62__?.defs;if(!Array.isArray(D))return false;const d=D.find(x=>x?.id==='threadTsubameR64');
+ if(d&&typeof d.name==='string'&&d.name.indexOf('츠바메가에시')>=0){d.name=d.name.replace(/츠바메가에시/g,'바람베기');stats.renamed=(stats.renamed||0)+1;}return !!d;}catch(e){fail(e);return false;}}
+renameDefs();
 // ---- 설정 창(빠른 설정 '설정' 패널, R420 보기 편의 묶음 끝): 적 공격·돌진 예고 표시 — 기본 꺼짐. R98 '적 공격 범위 미리보기(선)'도 같이 켜고 끈다 ----
 function teleSet(v){set('tele',!!v);try{window.__STORYWORLD_VFX_R98__?.set?.({telegraph:!!v});}catch(_){}return prefs.tele;}
 function injectTele(n){try{const panel=document.getElementById('panel');if(!panel)return false;if(panel.querySelector('#r425Tele'))return true;
  const host=panel.querySelector('#accessR420')||(n>=3?panel.querySelector('#quickSettingsR114'):null);if(!host)return false;
  const lab=document.createElement('label');lab.className='r420-row';lab.id='r425TeleRow';lab.innerHTML='<input type="checkbox" id="r425Tele"'+(prefs.tele?' checked':'')+'> 적 공격·돌진 예고 표시(머리 위 상자·검은 조준선·표적 고리, 기본 꺼짐)';
  host.appendChild(lab);lab.querySelector('input').onchange=ev=>teleSet(!!ev.target.checked);stats.teleUi=(stats.teleUi||0)+1;return true;}catch(e){fail(e);return true;}}
-if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
+if(typeof openPanel==='function'){const opBase=openPanel;openPanel=function(html,...a){try{if(typeof html==='string'&&html.indexOf('츠바메가에시')>=0){renameDefs();html=html.replace(/츠바메가에시/g,'바람베기');stats.renamedHtml=(stats.renamedHtml||0)+1;}}catch(e){fail(e);}const res=opBase.call(this,html,...a);try{if(typeof html==='string'&&/설정/.test(html)){let n=0;const go=()=>{if(!injectTele(n)&&++n<24)requestAnimationFrame(go);};requestAnimationFrame(go);}}catch(e){fail(e);}return res;};}
 function set(k,v){prefs[k]=v!==false;try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(_){}return prefs[k];}
-window.__STORYWORLD_COMBAT_FLOW_R425__=Object.freeze({revision:REV,BANDS,set,teleSet,gazeOf,artOf:e=>ST.get(e)?.art??null,gazeTable:()=>GZ,ALLOW,screenAngle:scrAng,scaleOf:e=>ST.get(e)?.s??1,naturalOf:e=>ST.get(e)?.nat??null,
+window.__STORYWORLD_COMBAT_FLOW_R425__=Object.freeze({revision:REV,BANDS,set,teleSet,gazeOf,samongCross:Object.freeze({config:SC,live:()=>crosses.map(c=>({id:c.id,enemy:c.e?.id,big:c.big,age:+(T()-c.t0).toFixed(3),done:c.done,dealt:c.dealt||0,box:c.box?{cx:Math.round(c.box.cx),cy:Math.round(c.box.cy),h:Math.round(c.box.h)}:null}))}),artOf:e=>ST.get(e)?.art??null,gazeTable:()=>GZ,ALLOW,screenAngle:scrAng,scaleOf:e=>ST.get(e)?.s??1,naturalOf:e=>ST.get(e)?.nat??null,
  inspect:()=>({revision:REV,prefs:{...prefs},stats:{...stats},lastError,browser:false,GPU:false})});
 })();

@@ -36,10 +36,10 @@ function engine({coop=null,enemies}={}){
   // 영웅 몸 그림 한 장(R271 몸)
   drawHero(){g.ctx.commands.push({kind:'image',owner:{kind:'hero'},r271:'walk',image:{width:192,height:256},sourceRect:[0,0,192,256],sourcePath:'assets/r283/hwando/r271/walk-e.webp',points:[[620,580],[680,580],[680,660],[620,660]]});},enterRegion:async()=>true,
   ctx:{commands:[],save(){},restore(){},translate(){},scale(){},rotate(){},drawImage(){draws.push('body');},globalAlpha:1,globalCompositeOperation:'source-over',filter:'none'}};
- W.__STORYWORLD_FX_SPRITES_R106__={on:()=>true,warm(){},draw:(nm)=>{draws.push(nm);return true;},along:(nm)=>{draws.push(nm);return true;}};
+ const cuts=[],sprites=[];W.__STORYWORLD_FX_SPRITES_R106__={on:()=>true,warm(){},draw:(nm,F,x,y,w,h,o)=>{draws.push(nm);sprites.push({nm,x,y,w,h,o:o||{}});return true;},along:(nm,F,x0,y0,x1,y1,th)=>{draws.push(nm);if(nm==='iai-cut')cuts.push({x0,y0,x1,y1,th});return true;}};
  if(coop)W.__STORYWORLD_COOP_SIM_R62__={mode:()=>coop};
  const ctx=vm.createContext(g);vm.runInContext(src,ctx,{filename:F});
- return {g,ctx,W,hits,draws,floats,room,adv(dt){clock+=dt;ctx.tick(dt);},api:W.__STORYWORLD_HWANDO_W_CROSS_R348__};
+ return {g,ctx,W,hits,draws,floats,room,cuts,sprites,adv(dt){clock+=dt;ctx.tick(dt);},api:W.__STORYWORLD_HWANDO_W_CROSS_R348__};
 }
 const release=(E,id='wer:1')=>E.ctx.fx('storySourceSkill',20,20,{storyWER:true,sourceHero:'hwando',sourceSlot:'w',stage:'release',castId:id,size:3.15});
 const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{id:'far',x:40,y:40}],inside={id:'in',x:21.5,y:20};
@@ -74,4 +74,16 @@ const outside=[{id:'a',x:25,y:20},{id:'b',x:20,y:25.2},{id:'c',x:16.5,y:23.5},{i
 {const E=engine({enemies:[{id:'edge',x:23.6,y:20}]});E.ctx.drawHero();release(E,'wer:edge');const c=E.api.inspect().casts[0],s=c.clones.find(s=>s.foe==='edge');
  const o=E.g.project(20,20),sd=p=>{const q=E.g.project(p.x,p.y);return Math.hypot(q.x-o.x,q.y-o.y);},ringPx=E.api.config.ringCell*32;
  ok(c.clones.every(s=>Math.hypot(s.x-20,s.y-20)>3.15&&(!s.foe||sd(s)>ringPx*1.02)),'원 바로 밖 적: 물러선 뒤에도 분신은 원 밖(판정·화면) — '+(s?s.x+','+s.y:'skip'));}
+// R425(사용자 2026-11-08 "분신7개나오고 십자베기하는거 십자를-십자가로"): '+' 베기 → 정십자가(위 짧고 아래 긴, 바닥 십자가 그림과 같은 비율). 역십자·회전 금지.
+function latin(cuts){const V=cuts.filter(c=>Math.abs(c.x0-c.x1)<1e-6&&c.y1>c.y0),Hs=cuts.filter(c=>Math.abs(c.y0-c.y1)<1e-6&&c.x1>c.x0),out=[];
+ for(const v of V){/* 같은 화면 x 에 분신 둘이 설 수 있어 세로 칼 길이 안에 걸친 가로 칼 가운데 가장 가까운 것과 짝짓는다 */
+  const h=Hs.filter(h=>Math.abs((h.x0+h.x1)/2-v.x0)<1e-6&&h.y0>v.y0&&h.y0<v.y1).sort((a,b)=>Math.abs(a.y0-(v.y0+v.y1)/2)-Math.abs(b.y0-(v.y0+v.y1)/2))[0];if(!h)continue;const by=h.y0,top=by-v.y0,bottom=v.y1-by,hw=(h.x1-h.x0)/2;out.push({cx:v.x0,by,top,bottom,hw,ratio:top/bottom,side:hw/top});}return out;}
+{const E=engine({enemies:[inside,...outside]});E.ctx.drawHero();E.adv(.016);release(E,'wer:latin');const S=E.g.effects.find(e=>e.r348Sentinel);
+ E.adv(.2);E.cuts.length=0;E.sprites.length=0;E.ctx.drawEffect(S);
+ const main=latin(E.cuts);ok(main.length===1&&main[0].top>0&&main[0].ratio>.45&&main[0].ratio<.6,'원 안 베기: 정십자가 — 교차점 위 칼이 아래 칼의 '+(main[0]?main[0].ratio.toFixed(2):'?')+'배(위 짧고 아래 긴)');
+ ok(main.length===1&&Math.abs(main[0].side-1)<.1,'원 안 베기: 가로 칼 반폭이 위 칼과 거의 같음(라틴 십자가 비율 '+(main[0]?main[0].side.toFixed(2):'?')+')');
+ const fl=E.sprites.filter(s=>s.nm==='flare');ok(fl.length===1&&Math.abs(fl[0].y-main[0].by)<1e-6&&!fl[0].o.angle,'교차점 반짝임은 가로 칼 높이(교차점)에, 돌리지 않음');
+ E.adv(.9);E.cuts.length=0;E.sprites.length=0;E.ctx.drawEffect(S);
+ const cl=latin(E.cuts);ok(cl.length===7&&cl.every(c=>c.top>0&&c.ratio>.45&&c.ratio<.6&&Math.abs(c.side-1)<.1),'분신 7 베기 모두 정십자가(위 짧고 아래 긴): '+cl.length+'개 '+cl.map(c=>c.ratio.toFixed(2)).join(','));
+ ok(E.cuts.every(c=>Math.abs(c.x0-c.x1)<1e-6&&c.y1>c.y0||Math.abs(c.y0-c.y1)<1e-6&&c.x1>c.x0),'베기는 세로(위→아래)·가로(왼→오른)뿐 — 기울거나 거꾸로 된 칼 없음');}
 console.log(JSON.stringify({ok:true,checks:n,method:'static+fake-engine'}));
