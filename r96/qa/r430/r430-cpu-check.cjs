@@ -14,7 +14,7 @@ const idx=JSON.parse(fs.readFileSync(path.join(RT,'assets/r430/index.json'),'utf
 let bad=[];for(const [n,m] of Object.entries(idx.fx)){const p='assets/r430/'+m.file;if(!fs.existsSync(path.join(RT,p))||H(p)!==m.outSha256||M.get(p)!==m.outSha256)bad.push(n);}
 ok('9 sheets exist, hash = index = manifest',Object.keys(idx.fx).length===9&&!bad.length,bad.join(','));
 ok('no forbidden CSS filters (drop-shadow/blur)',!/drop-shadow|blur\(/.test(src));
-ok('presentation only: no hazards/hitEnemy/damage/solid/floorCells writes',!/hazards\.push|hitEnemy|damage|\.hp\s*[-+]?=|solid\s*:\s*true|floorCells\s*=|walls\s*=/.test(src));
+ok('no hazards/hitEnemy/hp writes/solid/floorCells writes (R431 touch damage goes through engine hurt only)',!/hazards\.push|hitEnemy|damage|\.hp\s*[-+]?=|solid\s*:\s*true|floorCells\s*=|walls\s*=/.test(src));
 ok('Mammon vault (ep1b06) and samong layer excluded',!/\bep1b06:/.test(src)&&/layer!=='STORY'/.test(src));
 // 가짜 게임
 const effects=[],draws=[];let t=0;
